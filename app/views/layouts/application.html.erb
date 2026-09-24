@@ -21,9 +21,11 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= debugbar_head if defined?(Debugbar) %>
   </head>
 
   <body>
     <%= yield %>
+    <%= debugbar_body if defined?(Debugbar) %>
   </body>
 </html>
