@@ -17,8 +17,9 @@ module Factories
     end
 
     # A completed session carries its score; a gap makes it a remediation session (ADR-0043).
-    def create_session(student: create_student, exercise: create_exercise, status: "started", score_percent: nil, gap: nil,
-                       **attributes)
+    # Not create_session: ActionDispatch::Integration::Runner#create_session would hide it in controller and system tests.
+    def create_exercise_session(student: create_student, exercise: create_exercise, status: "started", score_percent: nil, gap: nil,
+                                **attributes)
       count = exercise.questions.count
       completed = status == "completed"
       score_percent ||= 100 if completed
@@ -29,7 +30,7 @@ module Factories
                                    score_percent:, completed_at: (Time.current if completed), **attributes)
     end
 
-    def create_attempt(session: create_session, question: session.exercise.questions.first, correct: true)
+    def create_attempt(session: create_exercise_session, question: session.exercise.questions.first, correct: true)
       answers = question.answers.to_a
       selected = correct ? answers.select(&:correct) : [ answers.reject(&:correct).first ]
       Orm::QuestionAttempt.create!(exercise_session: session, question:, correct:, selected_answer_ids: selected.map(&:id),
@@ -37,12 +38,12 @@ module Factories
     end
 
     def create_badge(student: create_student, exercise: create_exercise, level: "gold",
-                     session: create_session(student:, exercise:, status: "completed"))
+                     session: create_exercise_session(student:, exercise:, status: "completed"))
       Orm::ExerciseBadge.create!(student:, exercise:, exercise_session: session, level:, awarded_at: Time.current)
     end
 
     def create_gap(student: create_student, essential: create_essential, status: "pending",
-                   source_session: create_session(student:, exercise: create_exercise(essential:), status: "completed",
+                   source_session: create_exercise_session(student:, exercise: create_exercise(essential:), status: "completed",
                                                   score_percent: 40), **attributes)
       Orm::KnowledgeGap.create!(student:, essential:, source_session:, status:,
                                 resolved_at: (Time.current unless status == "pending"), **attributes)

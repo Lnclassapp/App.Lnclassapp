@@ -16,8 +16,8 @@ module Repositories
       end
 
       test "pose puis remplace le badge d'un élève sur un exercice, une seule ligne" do
-        first = create_session(student: @student, exercise: @exercise, status: "completed", score_percent: 60)
-        second = create_session(student: @student, exercise: @exercise, status: "completed", score_percent: 100)
+        first = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 60)
+        second = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 100)
 
         assert_equal badge(:bronze, first), @repository.upsert(badge: badge(:bronze, first))
         @repository.upsert(badge: badge(:diamond, second))

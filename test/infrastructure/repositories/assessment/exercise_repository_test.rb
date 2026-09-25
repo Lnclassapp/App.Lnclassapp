@@ -79,7 +79,7 @@ module Repositories
         record = create_exercise(essential: @essential)
 
         assert_not @repository.has_sessions?(exercise_id: record.id)
-        create_session(exercise: record)
+        create_exercise_session(exercise: record)
         assert @repository.has_sessions?(exercise_id: record.id)
       end
 
