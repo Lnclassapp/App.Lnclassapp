@@ -19,7 +19,7 @@ CI.run do
   step "Tests: Rails (coverage 100 % lines and branches)", "bin/rails test"
 
   # Real browser, never rack_test (configuration.md §4.3). Partial run: no threshold (§4.1).
-  step "Tests: System (headless Chrome)", "env COVERAGE=0 bin/rails test:system"
+  step "Tests: System (headless Chrome)", "bin/check-chrome && env COVERAGE=0 bin/rails test:system"
 
   step "Tests: Seeds", "env RAILS_ENV=test bin/rails db:seed:replant"
 
