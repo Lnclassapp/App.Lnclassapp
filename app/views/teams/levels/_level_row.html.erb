@@ -1,0 +1,38 @@
+<%# 🌐 UI · teams/levels/_level_row — une ligne du tableau des niveaux, identifiée par le slug %>
+<%# Rôle : nom, code figé, position, cycle, séries, usage ; « Modifier » en modale, « Supprimer » confirmé dans la page %>
+<%# ADR  : 0029, 0036 · UDR : 0006, 0032 · Stimulus : modal %>
+<% delete_id = "delete-level-#{level.slug}" %>
+<tr id="<%= level_dom_id(level.slug) %>" class="align-middle">
+  <td class="px-4 py-3 font-medium whitespace-nowrap text-ink"><%= level.name %></td>
+  <td class="px-4 py-3"><code class="font-mono text-xs text-mute"><%= level.slug %></code></td>
+  <td class="px-4 py-3 tabular-nums"><%= level.position %></td>
+  <td class="px-4 py-3 whitespace-nowrap"><%= t("teams.levels.cycles.#{level.cycle}") %></td>
+  <td class="px-4 py-3">
+    <% if level.series_names.any? %>
+      <span class="flex flex-wrap gap-1.5">
+        <% level.series_names.each do |series_name| %>
+          <%= ui_badge series_name, size: :sm %>
+        <% end %>
+      </span>
+    <% else %>
+      <span class="text-mute"><%= t(".no_series") %></span>
+    <% end %>
+  </td>
+  <td class="px-4 py-3 tabular-nums"><%= level.classrooms_count %></td>
+  <td class="px-4 py-3 tabular-nums"><%= level.courses_count %></td>
+  <td class="px-4 py-3">
+    <div class="flex items-center justify-end gap-2">
+      <%= ui_button t(".edit"), href: edit_level_path(level.slug), variant: :secondary, size: :sm, icon: "pencil-square",
+                                "aria-label": t(".edit_label", name: level.name), data: { turbo_frame: "modal" } %>
+      <%= ui_modal title: t(".delete_title", name: level.name), id: delete_id, size: :sm,
+                   trigger: t(".delete"), trigger_variant: :ghost, trigger_icon: "trash" do |modal| %>
+        <% modal.footer do %>
+          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+          <%= ui_button t(".delete_confirm"), type: :submit, form: "#{delete_id}-form", variant: :danger, icon: "trash" %>
+        <% end %>
+        <p class="text-sm text-mute"><%= t(".delete_warning") %></p>
+        <%= form_with url: level_path(level.slug), method: :delete, id: "#{delete_id}-form" do %><% end %>
+      <% end %>
+    </div>
+  </td>
+</tr>
