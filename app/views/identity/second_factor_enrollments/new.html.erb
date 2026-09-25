@@ -1,0 +1,33 @@
+<%# 🌐 UI · identity/second_factor_enrollments/new — activation du second facteur d'un compte team %>
+<%# Rôle : QR code et secret en texte, premier code pour confirmer ; échec re-rendu en 422 avec le même QR code %>
+<%# ADR  : 0031 · UDR : 0005 %>
+<% content_for :title, t(".page_title") %>
+<main id="second-factor-enrollment" class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-md">
+    <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "qr-code", padding: :lg do %>
+      <ol class="space-y-6 text-sm text-ink">
+        <li class="space-y-3">
+          <p class="font-medium"><%= t(".scan") %></p>
+          <% if @enrollment.provisioning_uri.present? %>
+            <div class="mx-auto size-48 rounded-ln border border-line bg-white p-2" role="img" aria-label="<%= t(".qr_label") %>">
+              <%= RQRCode::QRCode.new(@enrollment.provisioning_uri).as_svg(module_size: 4, use_path: true, viewbox: true, standalone: true).html_safe %>
+            </div>
+          <% end %>
+        </li>
+        <li class="space-y-2">
+          <p class="font-medium"><%= t(".manual") %></p>
+          <p class="rounded-ln bg-mist px-4 py-3 text-center font-mono text-sm tracking-wider" id="second-factor-secret"><%= @enrollment.secret.scan(/.{1,4}/).join(" ") %></p>
+        </li>
+        <li>
+          <%= form_with model: @form, scope: :second_factor, url: identity_second_factor_enrollment_path, id: "second-factor-enrollment-form", class: "space-y-5" do |form| %>
+            <%= form.hidden_field :secret, value: @enrollment.secret %>
+            <%= form.hidden_field :secret_uri, value: @enrollment.provisioning_uri %>
+            <%= ui_field form, :code, required: true, value: "", hint: t(".code_hint"), inputmode: "numeric",
+                         autocomplete: "one-time-code", maxlength: 6 %>
+            <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
+          <% end %>
+        </li>
+      </ol>
+    <% end %>
+  </div>
+</main>

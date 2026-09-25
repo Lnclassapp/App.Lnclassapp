@@ -1,0 +1,19 @@
+<%# 🌐 UI · identity/second_factor_enrollments/backup_codes — les 10 codes de secours, montrés une seule fois %>
+<%# Rôle : rendu direct après l'activation (Turbo Stream ou HTML) ; jamais stocké dans le flash ni la session %>
+<%# ADR  : 0031 · UDR : 0005 %>
+<% content_for :title, t(".page_title") %>
+<main id="second-factor-enrollment" class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-md">
+    <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "key", padding: :lg do %>
+      <ul class="grid grid-cols-2 gap-2" aria-label="<%= t(".list_label") %>">
+        <% @backup_codes.each do |code| %>
+          <li class="rounded-ln bg-mist px-3 py-2 text-center font-mono text-base tracking-widest"><%= code %></li>
+        <% end %>
+      </ul>
+      <p class="mt-4 text-sm text-mute"><%= t(".once") %></p>
+      <div class="mt-6">
+        <%= ui_button t(".done"), href: team_home_path, variant: :brand, full: true %>
+      </div>
+    <% end %>
+  </div>
+</main>
