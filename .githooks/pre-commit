@@ -1,0 +1,222 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# 🛡️  BOUCLIER PRE-COMMIT LNCLASS
+# ==============================================================================
+# Applique, sur les fichiers STAGÉS uniquement, les règles de
+# docs/guide/conventions.md §7 (« Ce qui bloque ») :
+#
+#   1. Syntaxe Ruby           (ruby -c)
+#   2. En-tête HITL           (3 lignes, §5, dans les 5 premières lignes)
+#   3. Exclusion de couverture (`# :nocov:` interdit, ADR-0024)
+#   4. Pureté du domaine      (si app/domain/ est touché)
+#   5. Style                  (rubocop sur les fichiers stagés)
+#   6. Tests correspondants   (mapping app/… → test/…, s'ils existent)
+#
+# Les contrôles sont ordonnés du moins cher au plus cher : une faute de syntaxe
+# se voit en 50 ms, sans payer le démarrage de Rails.
+#
+# Échappatoire : SKIP_HOOKS=1 git commit …
+#   À n'utiliser que pour un commit de sauvegarde sur une branche de travail.
+#   La CI, elle, ne connaît pas SKIP_HOOKS et refusera la PR.
+# ==============================================================================
+
+set -uo pipefail
+
+if [ "${SKIP_HOOKS:-0}" = "1" ]; then
+  echo "⏭️  SKIP_HOOKS=1 — contrôles pre-commit ignorés. La CI les appliquera quand même."
+  exit 0
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT" || exit 1
+
+# --- Le hook est-il seulement branché ? ---------------------------------------
+CONFIGURED_PATH="$(git config core.hooksPath || true)"
+if [ "$CONFIGURED_PATH" != ".githooks" ]; then
+  echo "⚠️  git config core.hooksPath vaut « ${CONFIGURED_PATH:-<non défini>} » au lieu de « .githooks »."
+  echo "   Ce hook ne s'exécutera pas pour les autres membres de l'équipe. Corrige-le avec :"
+  echo "      git config core.hooksPath .githooks"
+fi
+
+HAS_ERROR=0
+fail() { HAS_ERROR=1; }
+
+# --- Fichiers stagés -----------------------------------------------------------
+mapfile -t STAGED < <(git diff --cached --name-only --diff-filter=ACM)
+
+if [ ${#STAGED[@]} -eq 0 ]; then
+  exit 0
+fi
+
+# Fichiers stagés qui existent encore sur le disque, filtrés par famille.
+STAGED_RB=()
+STAGED_LINT=()   # ce que rubocop sait lire
+STAGED_APP=()    # fichiers de app/ soumis à l'en-tête HITL
+STAGED_DOMAIN=()
+
+for file in "${STAGED[@]}"; do
+  [ -f "$file" ] || continue
+
+  case "$file" in
+    *.rb|*.rake|Gemfile|Rakefile|*.gemspec) STAGED_LINT+=("$file") ;;
+  esac
+  case "$file" in
+    *.rb) STAGED_RB+=("$file") ;;
+  esac
+  case "$file" in
+    app/domain/*.rb) STAGED_DOMAIN+=("$file") ;;
+  esac
+
+  # En-tête HITL : code applicatif seulement. On exclut les artefacts générés.
+  case "$file" in
+    app/assets/builds/*|app/javascript/controllers/index.js|app/views/pwa/*) ;;
+    app/*.rb|app/*.js|app/*.erb) STAGED_APP+=("$file") ;;
+  esac
+done
+
+echo "🛡️  Pre-commit Lnclass — ${#STAGED[@]} fichier(s) stagé(s)."
+
+# --- 1. Syntaxe Ruby -----------------------------------------------------------
+if [ ${#STAGED_RB[@]} -gt 0 ]; then
+  for file in "${STAGED_RB[@]}"; do
+    if ! ruby -c "$file" > /dev/null 2>&1; then
+      echo ""
+      echo "❌ [Syntaxe Ruby] $file ne compile pas :"
+      ruby -c "$file" 2>&1 | sed 's/^/     /'
+      fail
+    fi
+  done
+fi
+
+# --- 2. En-tête HITL (docs/guide/conventions.md §5) ----------------------------
+# 3 lignes max, dans les 5 PREMIÈRES lignes du fichier — pas n'importe où.
+# Emojis de couche : 🧠 domaine · 🔌 infrastructure · 🌐 delivery · ⚡ front.
+# Les pastilles 🟢🔴🟡🔵 sont l'ancien jeu v1, encore accepté le temps de la migration.
+HITL_PATTERN='(#|//|<%#)[[:space:]]*(🧠|🔌|🌐|⚡|🟢|🔴|🟡|🔵)'
+
+for file in "${STAGED_APP[@]:-}"; do
+  [ -n "$file" ] || continue
+  if ! head -n 5 "$file" | grep -qE "$HITL_PATTERN"; then
+    echo ""
+    echo "❌ [En-tête HITL] $file n'a pas d'en-tête de couche dans ses 5 premières lignes."
+    echo "     Ajoute 3 lignes en tête de fichier, par exemple :"
+    echo ""
+    echo "       # 🧠 DOMAINE · UseCases::Catalog::CreateCourse"
+    echo "       # Rôle : crée un cours et le rattache à sa matière"
+    echo "       # ADR  : 0001, 0014"
+    echo ""
+    echo "     Emoji selon la couche : 🧠 app/domain · 🔌 app/infrastructure"
+    echo "                             🌐 app/controllers + vues · ⚡ app/javascript"
+    echo "     Syntaxe du commentaire : « # » en Ruby, « // » en JS, « <%# … %> » en ERB."
+    echo "     👉 docs/guide/conventions.md §5"
+    fail
+  fi
+done
+
+# --- 3. Exclusion de couverture (ADR-0024) -------------------------------------
+# Un `# :nocov:` retire des lignes du dénominateur : le pourcentage monte sans
+# qu'un seul test soit écrit. C'est la seule façon de faire mentir la couverture
+# sans mentir, donc la seule qu'il faut interdire mécaniquement. Coût : ~10 ms.
+if [ ${#STAGED_RB[@]} -gt 0 ]; then
+  if NOCOV=$(grep -nH ':nocov:' "${STAGED_RB[@]}" 2>/dev/null); then
+    echo ""
+    echo "❌ [Couverture] « # :nocov: » est interdit (ADR-0024) :"
+    echo "$NOCOV" | sed 's/^/     /'
+    echo ""
+    echo "     Exclure une ligne ne la rend pas correcte : ça la rend invisible."
+    echo "     Écris le test, ou ouvre un ADR nommant le fichier et la raison."
+    echo "     👉 docs/decisions/adr/0024-couverture-de-tests-a-100-pourcent.md"
+    fail
+  fi
+fi
+
+# --- 4. Pureté du domaine ------------------------------------------------------
+# Sans Rails, sans base : ~0,3 s.
+if [ ${#STAGED_DOMAIN[@]} -gt 0 ]; then
+  echo "🧠 app/domain/ modifié — contrôle de pureté…"
+  if ! ruby -Itest test/domain/domain_purity_test.rb > /tmp/lnclass_purity.$$ 2>&1; then
+    echo ""
+    sed 's/^/   /' /tmp/lnclass_purity.$$
+    fail
+  fi
+  rm -f /tmp/lnclass_purity.$$
+fi
+
+# --- 5. Style (rubocop) --------------------------------------------------------
+if [ ${#STAGED_LINT[@]} -gt 0 ]; then
+  echo "💅 Style sur ${#STAGED_LINT[@]} fichier(s)…"
+  if ! bin/rubocop --force-exclusion --format quiet "${STAGED_LINT[@]}"; then
+    echo ""
+    echo "❌ [Style] Rubocop refuse des fichiers stagés."
+    echo "     Corrige automatiquement ce qui peut l'être :"
+    echo "        bin/rubocop -a ${STAGED_LINT[*]}"
+    echo "     puis « git add » les fichiers corrigés."
+    fail
+  fi
+fi
+
+# --- 6. Tests correspondants ---------------------------------------------------
+# Mapping app/<chemin>.rb → test/<chemin>_test.rb, avec repli sur le nom de base
+# (test/controllers/foo_controller_test.rb pour app/controllers/ns/foo_controller.rb).
+# On ne lance JAMAIS toute la suite : seulement les tests qui existent.
+TESTS_TO_RUN=()
+
+add_test_if_exists() {
+  local candidate="$1"
+  [ -f "$candidate" ] || return 0
+
+  # Les parcours système sont en CI, pas ici (conventions.md §7). Ils démarrent
+  # un vrai navigateur : plusieurs dizaines de secondes, et un échec sur un
+  # poste sans Chrome ne dit rien sur le code — seulement sur le poste.
+  case "$candidate" in
+    test/system/*) return 0 ;;
+  esac
+  for existing in "${TESTS_TO_RUN[@]:-}"; do
+    [ "$existing" = "$candidate" ] && return 0
+  done
+  TESTS_TO_RUN+=("$candidate")
+}
+
+for file in "${STAGED[@]}"; do
+  case "$file" in
+    test/*_test.rb)
+      [ -f "$file" ] && add_test_if_exists "$file"
+      continue
+      ;;
+    app/*.rb) ;;
+    *) continue ;;
+  esac
+
+  relative="${file#app/}"
+  relative="${relative%.rb}"
+
+  # a) miroir exact du chemin
+  add_test_if_exists "test/${relative}_test.rb"
+
+  # b) repli à plat : même premier segment, nom de base seul
+  top="${relative%%/*}"
+  base="$(basename "$relative")"
+  add_test_if_exists "test/${top}/${base}_test.rb"
+done
+
+if [ ${#TESTS_TO_RUN[@]} -gt 0 ]; then
+  echo "🧪 ${#TESTS_TO_RUN[@]} test(s) correspondant(s)…"
+  if ! COVERAGE=0 bin/rails test "${TESTS_TO_RUN[@]}"; then
+    echo ""
+    echo "❌ [Tests] Les tests correspondant à tes fichiers échouent."
+    echo "     Reproduis-les avec :  bin/rails test ${TESTS_TO_RUN[*]}"
+    fail
+  fi
+fi
+
+# --- Verdict -------------------------------------------------------------------
+if [ $HAS_ERROR -ne 0 ]; then
+  echo ""
+  echo "🚫 COMMIT REFUSÉ."
+  echo "   Les règles appliquées ici sont celles de docs/guide/conventions.md §7."
+  echo "   Urgence absolue et assumée :  SKIP_HOOKS=1 git commit …  (la CI, elle, ne pardonnera pas)"
+  exit 1
+fi
+
+echo "✅ Pre-commit Lnclass : tout est vert."
+exit 0
