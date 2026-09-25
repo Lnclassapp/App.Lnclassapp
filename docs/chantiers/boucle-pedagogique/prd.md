@@ -551,9 +551,25 @@ Scénario: [CA-04] Non-régression : brouillon par URL directe
   Alors il reçoit 404
 
 Scénario: [CA-05] Créer un cours
-  Quand l'équipe clique « Nouveau cours » et soumet, dans la modale, Nom, sous-titre, niveau, série, matière et contenu
+  Quand l'équipe clique « Nouveau cours » et soumet, dans la modale, Nom, sous-titre, niveau, série, matière et contenu saisi dans l'éditeur riche
   Alors le cours existe en brouillon, son auteur est l'utilisateur connecté et son nom est enregistré sans changement de casse
   Et le catalogue le montre, sans rechargement de page, avec le libellé « Brouillon — visible uniquement par l'équipe »
+
+Scénario: [CA-05][CA-12] Éditeur riche du contenu (Action Text et Trix)
+  Quand l'équipe ouvre le formulaire d'un cours ou d'une fiche essentielle
+  Alors le contenu se saisit dans l'éditeur riche, qui fonctionne sous la CSP stricte
+  Quand elle met un passage en gras, ajoute une liste à puces et enregistre
+  Alors la page du cours ou de la fiche affiche le gras et la liste
+  Et à la réouverture du formulaire, l'éditeur contient le contenu enregistré
+  Quand elle glisse un fichier dans l'éditeur
+  Alors il est refusé : pas de pièce jointe en V1
+  Et une page sans formulaire de contenu (catalogue, fiche, session d'un élève) ne télécharge ni Trix ni Action Text
+  Et le point d'entrée JavaScript commun reste sous 60 Ko gzip
+
+Scénario: [CA-04] Le contenu est assaini au rendu
+  Étant donné un cours dont le contenu en base contient une balise <script> et un attribut onclick
+  Quand un élève ouvre le cours
+  Alors le HTML servi ne contient ni la balise ni l'attribut
 
 Scénario: [CA-06] Modifier et publier un cours
   Quand l'équipe modifie le nom puis clique « Publier »
@@ -574,6 +590,14 @@ Scénario: [CA-08][TR-28] Importer des cours complets
   Alors tout est créé en brouillon, quelle que soit la clé status du fichier, et l'auteur est l'utilisateur connecté
   Et un cours déjà présent (même nom normalisé, niveau, matière et série) est ignoré et compté comme doublon
   Et la matière « Physique Chimie » est reconnue par son slug « physique-chimie »
+  Et le contenu HTML des cours et des fiches essentielles est écrit dans leur rich text, celui que l'éditeur ouvre
+
+Scénario: [CA-08][CA-15] Le HTML importé est assaini
+  Étant donné un fichier dont un cours et une fiche essentielle ont un content contenant <script>, un attribut onclick et un lien javascript:
+  Quand l'équipe l'importe
+  Alors le cours et la fiche sont importés
+  Et leur contenu en base ne contient ni la balise, ni l'attribut, ni le lien
+  Et le gras, les listes et les formules $…$ du fichier sont conservés
 
 Scénario: [CA-08] Import partiel : un fichier mixte donne un rapport exact
   Étant donné un fichier de 10 cours dont le 2e contient une question à choix unique avec 2 propositions correctes au chemin courses[1].essentials[0].exercises[2].questions[3], le 5e une matière inconnue, et le 8e un cours déjà en base
@@ -846,9 +870,9 @@ Le détail exécutable est dans [`plan.md`](plan.md), sous-lots 0a, 0b, 0d et 0e
 | Couche | Éléments prévus |
 |---|---|
 | Domaine | `Shared::Result` ; entités et objets-valeurs de 5 contextes (identity, school, classroom, catalog, assessment), dont `DefaultClassroomPlan`, `ImportKind`, `ImportItem`, `ContentNode`, `NaturalKey` ; 27 ports, plus `TransactionPort` ; 23 policies `call(actor:, **faits)` ; DTO `…Input` par formulaire ; use cases par lot ; moteur d'import (`StartImport`, `RunImport`) et 4 adaptateurs derrière un contrat commun |
-| Infrastructure | 31 migrations ; modèles `Orm::` ; un repository par port (TOTP, fichier, schéma et file d'attente compris, sans dossier `adapters/`) ; écritures en masse par `insert_all`, par lots de 100 éléments racines ; queries de lecture par écran ; seeds d'amorçage (production) et de développement (local seulement) |
+| Infrastructure | 32 migrations, dont la table d'Action Text (`action_text_rich_texts`) ; modèles `Orm::`, dont `has_rich_text :content` sur les cours et les fiches essentielles ; un repository par port (TOTP, fichier, schéma et file d'attente compris, sans dossier `adapters/`) ; écritures en masse par `insert_all`, par lots de 100 éléments racines ; queries de lecture par écran ; seeds d'amorçage (production) et de développement (local seulement) |
 | Delivery | 7 fichiers de routes dessinés en entier au socle, dont `teams.rb` ; socle d'authentification ; `Teams::BaseController` ; job de base `Shared::ImportJob` et un job par type ; un contrôleur par écran |
-| UI | Shell par rôle et composants du Lot 0c ; vues ERB par lot, CRUD en modales avec réponses `*.turbo_stream.erb` ; rafraîchissement par morphing ; écran de suivi des imports ; contrôleurs Stimulus chargés par motif |
+| UI | Shell par rôle et composants du Lot 0c ; vues ERB par lot, CRUD en modales avec réponses `*.turbo_stream.erb` ; rafraîchissement par morphing ; écran de suivi des imports ; contrôleurs Stimulus chargés par motif ; éditeur riche Trix chargé à la demande sur les formulaires de cours et de fiches |
 
 ## 6. Décisions rattachées
 
@@ -874,7 +898,7 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 - ADR-0047 — Stockage des fichiers (S3 Railway)
 - ADR-0048 — Assignations `active/archived`, nouvelle ligne à la réassignation (F-26)
 - ADR-0050 — Authentification, contact, session et verrouillage (F-28)
-- ADR-0051 — Navigateurs et budget des assets
+- ADR-0051 — Navigateurs et budget des assets — **amendé** le 2026-09-25 : l'édition riche revient en V1, Trix chargé à la demande sur les pages d'édition
 - ADR-0052 — Chaîne de livraison et worker toujours actif
 - ADR-0054 — Moteur d'évaluation et clôture automatique (F-34)
 - UDR-0005 — Design system (F-09)
