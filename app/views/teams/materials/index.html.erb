@@ -1,0 +1,31 @@
+<%# 🌐 UI · teams/materials/index — matières du référentiel %>
+<%# Rôle : tableau par nom, badge de la catégorie sur chaque ligne ; création, modification et suppression sans rechargement %>
+<%# ADR  : 0034 · UDR : 0006, 0034 %>
+<% content_for :title, t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
+  <%= ui_button t(".new"), href: new_material_path, icon: "plus", data: { turbo_frame: "modal" } %>
+<% end %>
+
+<%# relative : les libellés sr-only de la dernière colonne restent pris dans le défilement du tableau, pas dans celui de la page. %>
+<div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
+  <table class="w-full min-w-2xl text-left text-sm">
+    <caption class="sr-only"><%= t(".caption") %></caption>
+    <thead class="border-b border-line text-xs text-mute">
+      <tr>
+        <% %i[material shortname category courses teachers].each do |column| %>
+          <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+        <% end %>
+        <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+      </tr>
+    </thead>
+    <tbody id="materials" class="divide-y divide-line">
+      <%= render partial: "material_row", collection: @materials, as: :material %>
+    </tbody>
+  </table>
+  <%# Vidé à la première création, rempli de nouveau quand la dernière matière est supprimée (destroy.turbo_stream). %>
+  <div id="materials_empty">
+    <% if @materials.empty? %>
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
+    <% end %>
+  </div>
+</div>

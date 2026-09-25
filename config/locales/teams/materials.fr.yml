@@ -1,0 +1,68 @@
+# Matières du référentiel (plan boucle-pedagogique, Lot R3) — ADR-0034, UDR-0007, UDR-0034
+fr:
+  activemodel:
+    attributes:
+      dtos/catalog/material_input:
+        name: "Nom"
+        shortname: "Abrégé"
+        category: "Catégorie"
+    errors:
+      models:
+        dtos/catalog/material_input:
+          attributes:
+            name:
+              blank: "Saisissez le nom de la matière."
+              too_long: "Le nom compte %{count} caractères au plus."
+              taken: "Une matière porte déjà ce nom."
+            shortname:
+              blank: "Saisissez l'abrégé de la matière."
+              too_long: "L'abrégé compte %{count} caractères au plus."
+              taken: "Une matière porte déjà cet abrégé."
+            category:
+              inclusion: "Choisissez une catégorie : elle donne sa couleur et son icône à la matière."
+  teams:
+    materials:
+      index:
+        page_title: "Matières"
+        title: "Matières"
+        subtitle: "Les matières enseignées. Leur catégorie leur donne une couleur et une icône partout dans l'application."
+        new: "Nouvelle matière"
+        caption: "Matières du référentiel"
+        empty_title: "Aucune matière pour l'instant"
+        empty_description: "Créez la première matière et choisissez sa catégorie."
+        columns:
+          material: "Matière"
+          shortname: "Abrégé"
+          category: "Catégorie"
+          courses: "Cours"
+          teachers: "Enseignants"
+          actions: "Actions"
+      material_row:
+        edit: "Modifier"
+        edit_label: "Modifier la matière %{name}"
+        delete: "Supprimer"
+        delete_title: "Supprimer « %{name} » ?"
+        delete_warning: "La matière disparaît du référentiel. Une matière encore utilisée par un cours ou un enseignant ne peut pas être supprimée."
+        confirm: "Supprimer la matière"
+        cancel: "Annuler"
+      form:
+        name_placeholder: "Ex. : Mathématiques, SVT, Français"
+        name_hint: "%{count} caractères au plus."
+        shortname_placeholder: "Ex. : Maths, SVT, Fr"
+        shortname_hint: "%{count} caractères au plus, pour les petits écrans."
+        category_hint: "La catégorie donne sa couleur et son icône à la matière."
+      new:
+        title: "Nouvelle matière"
+        submit: "Créer la matière"
+        cancel: "Annuler"
+      edit:
+        title: "Modifier la matière"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      create:
+        done: "Matière « %{name} » créée."
+      update:
+        done: "Matière « %{name} » enregistrée."
+      destroy:
+        done: "Matière supprimée."
+        referenced: "Cette matière est utilisée par un cours ou un enseignant : elle ne peut pas être supprimée."

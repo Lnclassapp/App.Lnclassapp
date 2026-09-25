@@ -1,0 +1,26 @@
+<%# 🌐 UI · teams/materials/_material_row — une matière du tableau %>
+<%# Rôle : badge teinté par la catégorie (jamais par le nom), usages, « Modifier » en modale, suppression confirmée dans la page %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0034 %>
+<tr id="material_<%= material.slug %>" class="align-middle">
+  <td class="px-4 py-3"><%= ui_subject_badge material.name, category: material.category %></td>
+  <td class="px-4 py-3 whitespace-nowrap"><%= material.shortname %></td>
+  <td class="px-4 py-3 whitespace-nowrap text-mute"><%= t("materials.categories.#{material.category}") %></td>
+  <td class="px-4 py-3 tabular-nums"><%= material.courses_count %></td>
+  <td class="px-4 py-3 tabular-nums"><%= material.teachers_count %></td>
+  <td class="px-4 py-3">
+    <div class="flex items-center justify-end gap-2">
+      <%= ui_button t(".edit"), href: edit_material_path(material.slug), variant: :secondary, size: :sm, icon: "pencil-square",
+                    data: { turbo_frame: "modal" }, "aria-label": t(".edit_label", name: material.name) %>
+      <%= ui_modal title: t(".delete_title", name: material.name), id: "delete-material-#{material.slug}", size: :sm,
+                   trigger: t(".delete"), trigger_variant: :ghost, trigger_icon: "trash" do |modal| %>
+        <% modal.footer do %>
+          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+          <%= ui_button t(".confirm"), type: :submit, variant: :danger, form: "delete-material-form-#{material.slug}" %>
+        <% end %>
+        <%= form_with url: material_path(material.slug), method: :delete, id: "delete-material-form-#{material.slug}" do %>
+          <p class="text-sm text-mute"><%= t(".delete_warning") %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </td>
+</tr>

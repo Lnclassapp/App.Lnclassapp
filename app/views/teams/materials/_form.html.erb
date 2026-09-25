@@ -1,0 +1,32 @@
+<%# 🌐 UI · teams/materials/_form — nom, abrégé et catégorie d'une matière, dans la modale de new et d'edit %>
+<%# Rôle : catégorie en radios, chacune affichée comme le badge qu'elle donne ; aucune n'est choisie d'avance %>
+<%# ADR  : 0034 · UDR : 0005, 0034 %>
+<% category_error = @form.errors[:category].first %>
+<%= form_with model: @form, scope: :material, url:, method:, id: "material-form", class: "space-y-5" do |form| %>
+  <%= ui_field form, :name, required: true, maxlength: Entities::Catalog::Material::NAME_MAX, autofocus: true,
+               placeholder: t(".name_placeholder"), hint: t(".name_hint", count: Entities::Catalog::Material::NAME_MAX) %>
+  <%= ui_field form, :shortname, required: true, maxlength: Entities::Catalog::Material::SHORTNAME_MAX,
+               placeholder: t(".shortname_placeholder"), hint: t(".shortname_hint", count: Entities::Catalog::Material::SHORTNAME_MAX) %>
+  <%# Pas d'attribut required : une matière sans catégorie revient du serveur en 422, avec son message. %>
+  <fieldset class="space-y-1.5">
+    <legend class="text-sm font-medium text-ink">
+      <%= Dtos::Catalog::MaterialInput.human_attribute_name(:category) %><span class="text-error" aria-hidden="true"> *</span>
+    </legend>
+    <p id="material_category_hint" class="text-sm text-mute"><%= t(".category_hint") %></p>
+    <div class="grid gap-2 pt-1 sm:grid-cols-3">
+      <% Entities::Catalog::Material::CATEGORIES.each do |category| %>
+        <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-3 transition hover:bg-mist has-checked:border-brand has-checked:ring-4 has-checked:ring-brand/20">
+          <%= form.radio_button :category, category, class: "size-5 shrink-0 cursor-pointer accent-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+                                "aria-invalid": ("true" if category_error),
+                                "aria-describedby": [ "material_category_hint", ("material_category_error" if category_error) ].compact.join(" ") %>
+          <%= ui_subject_badge t("materials.categories.#{category}"), category: %>
+        </label>
+      <% end %>
+    </div>
+    <% if category_error %>
+      <p id="material_category_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= category_error %>
+      </p>
+    <% end %>
+  </fieldset>
+<% end %>
