@@ -1,0 +1,46 @@
+# Fiches essentielles, formulaire de l'équipe (plan boucle-pedagogique, Lot B4) — ADR-0035, UDR-0007, UDR-0016
+fr:
+  activemodel:
+    attributes:
+      dtos/catalog/essential_input:
+        name: "Nom"
+        subtitle: "Sous-titre"
+        content: "Contenu"
+    errors:
+      models:
+        dtos/catalog/essential_input:
+          attributes:
+            name:
+              taken: "est déjà pris par une autre fiche essentielle de ce cours"
+            content:
+              attachment: "n'accepte que du texte : les pièces jointes et les images ne sont pas acceptées"
+  teams:
+    essentials:
+      form:
+        name_placeholder: "Ex. : Brassage génétique par la méiose"
+        name_hint: "150 caractères au plus, unique dans le cours. La casse saisie est gardée."
+        subtitle_placeholder: "Ex. : Les deux divisions et leurs conséquences"
+        content_hint: "Titres, gras, italique, listes, citations et formules entre $…$. Pas de pièce jointe ni d'image."
+      new:
+        title: "Nouvelle fiche essentielle"
+        course: "Cours : %{name}"
+        draft_notice: "La fiche essentielle naît en brouillon, visible uniquement par l'équipe, jusqu'à sa publication."
+        submit: "Créer la fiche essentielle"
+        cancel: "Annuler"
+      edit:
+        title: "Modifier la fiche essentielle"
+        status: "Statut :"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      create:
+        created: "Fiche essentielle « %{name} » créée (brouillon)."
+      update:
+        updated: "Fiche essentielle « %{name} » modifiée."
+      transition:
+        published: "Fiche essentielle « %{name} » publiée."
+        archived: "Fiche essentielle « %{name} » archivée."
+        refused_title:
+          publish: "Publication impossible"
+          archive: "Archivage impossible"
+        parent_not_published: "Le cours de cette fiche essentielle n'est pas publié : publiez d'abord le cours."
+        transition_not_allowed: "Ce changement de statut n'est pas permis pour cette fiche essentielle."
