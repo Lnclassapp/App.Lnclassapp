@@ -196,3 +196,11 @@ Variables Railway (par environnement, `Staging` et `main`) :
 | `BUCKET_NAME`, `BUCKET_ENDPOINT`, `BUCKET_ACCESS_KEY_ID`, `BUCKET_SECRET_ACCESS_KEY`, `BUCKET_REGION` (+ `BUCKET_FORCE_PATH_STYLE` si besoin) | **obligatoires** (ADR-0047) : créer un bucket Railway par environnement **avant** le premier déploiement, puis référencer `${{Bucket.BUCKET}}`, `${{Bucket.ENDPOINT}}`, `${{Bucket.ACCESS_KEY_ID}}`, `${{Bucket.SECRET_ACCESS_KEY}}`, `${{Bucket.REGION}}` |
 
 `SOLID_QUEUE_IN_PUMA` ne sert plus (worker toujours dans Puma)  : retiré de [configuration.md §2](../../guide/configuration.md), où les variables d'hôte et de stockage sont ajoutées.
+
+## 2026-09-25 — Fusion du Lot 0c et `bin/ci` complet au vert
+
+- `feature/design-baseline` fusionnée ici (`4dbe892`). Conflits : `test/application_system_test_case.rb` et `homepage_controller_test.rb`, pour lesquels la version de l'amorçage est gardée ; `config/initializers/locale.rb` est retiré, parce que `config/application.rb` pose déjà la locale.
+- Les deux tests qui attendaient le design sont commités (`25480b8`) : aucune ressource tierce, et le bandeau pour navigateur ancien.
+- `bin/ci` passe en entier (5 min 16 s), tests système compris : 16 tests sous Chrome for Testing 154, lancés avec `CHROME_BIN` et `CHROMEDRIVER_PATH`. Budget : JS 36,9 Ko gzip sur 60, CSS 7,4 Ko sur 30.
+- **Garde-fous 4 et 7 prouvés.** Le 5 attend le porteur (commandes `gh` du §5), le 1 est consigné comme écart (socle documentaire ajouté en `624ee23`).
+- Poste local : Chromium en snap ne démarre pas sous « no new privileges ». On utilise à la place Chrome for Testing, installé dans `~/.cache/chrome-for-testing/`.
