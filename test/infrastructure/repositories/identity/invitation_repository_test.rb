@@ -14,6 +14,13 @@ module Repositories
                            token_digest: SecureRandom.hex(32), expires_at: @expires_at)
       end
 
+      test "every method follows the signature of the port" do
+        Ports::Identity::InvitationRepositoryPort.instance_methods(false).each do |name|
+          assert_equal Ports::Identity::InvitationRepositoryPort.instance_method(name).parameters,
+                       InvitationRepository.instance_method(name).parameters, name
+        end
+      end
+
       test "create stores a pending invitation" do
         result = invite
 
@@ -21,6 +28,18 @@ module Repositories
         assert_equal [ "team", "0701020304", "content", @admin.id, @expires_at ],
                      [ result.value.kind, result.value.contact, result.value.team_role, result.value.invited_by_id, result.value.expires_at ]
         assert_equal :pending, result.value.status(now: Time.current)
+      end
+
+      test "create stores a school staff invitation with its school and position" do
+        school = create_school
+
+        result = @repository.create(kind: "school_staff", contact: "0701020305", team_role: nil, invited_by_id: @admin.id,
+                                    token_digest: SecureRandom.hex(32), expires_at: @expires_at,
+                                    school_id: school.id, position: "censor")
+
+        assert result.success?
+        assert_equal [ "school_staff", school.id, "censor", nil ],
+                     [ result.value.kind, result.value.school_id, result.value.position, result.value.team_role ]
       end
 
       test "a second pending invitation for the same contact is a conflict" do
