@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-25) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/refonte-application`](../../chantiers/refonte-application/) (Lot 0c, décision F-09) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (CSP stricte, aucune ressource tierce) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget de poids) |

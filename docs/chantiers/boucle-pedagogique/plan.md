@@ -69,17 +69,18 @@ V0 + Lot 0c (design) ── déjà dans Develop (32fb626)
 
 ### Pourquoi le socle est plus gros que « des routes vides »
 
-Six familles de fichiers seraient partagées par plusieurs lots verticaux. Le socle les écrit une fois pour toutes, et les lots n'y touchent plus.
+Sept familles de fichiers seraient partagées par plusieurs lots verticaux. Le socle les écrit une fois pour toutes, et les lots n'y touchent plus.
 
 1. **Les routes.**
    - Plusieurs lots écrivent dans un même contexte : 7 dans `classroom`, 16 dans l'espace équipe. Un fichier de routes vide par contexte les mettrait en collision.
    - 0a dessine **toutes** les routes V1. Une route qui pointe vers un contrôleur pas encore écrit ne casse rien tant qu'on ne l'appelle pas.
    - La navigation du Lot 0c exige des noms de route **gelés** : `student_home_path`, `student_classroom_path`, `teacher_home_path`, `teacher_classrooms_path`, `team_home_path`, `courses_path`, `session_path`. 0a les crée tous. Il crée aussi `schools_path`, dont le contrôleur est livré par S2 : **l'entrée « Établissements » de l'équipe devient donc active en V1** (amendement de l'UDR-0006). `team_dashboard_path` (V4) et `profile_path` (V2) restent inactives.
-2. **Les repositories.** Un même port sert plusieurs lots. Par exemple, `AssignmentRepositoryPort` sert A2, C2, D5 et D6, et `ClassroomRepositoryPort#insert_generated` sert S2, S3 et les seeds. Chaque repository est donc écrit au socle, avec son test. Les lots n'écrivent que leurs **use cases**, leurs **queries** (une par écran), leurs contrôleurs et leurs vues.
+2. **Les repositories.** Un même port sert plusieurs lots. Par exemple, `AssignmentRepositoryPort` sert A2, C2, D5 et D6, et `ClassroomRepositoryPort#insert_generated` sert S3 et les seeds. Chaque repository est donc écrit au socle, avec son test. Les lots n'écrivent que leurs **use cases**, leurs **queries** (une par écran), leurs contrôleurs et leurs vues.
 3. **Les fabriques de test.** Deux lots d'un même contexte se disputeraient `test/support/factories/<ctx>.rb`. 0a les écrit **complètes**, pour toutes les tables. Un lot qui a besoin d'un assemblage particulier l'écrit dans son propre fichier de test.
 4. **Le moteur d'import en masse.** Quatre types d'import partagent le téléversement, le rapport, le job, la validation complète avant écriture, l'écriture par lots avec rejeu élément par élément et l'écran de suivi (ADR-0039). 0e écrit ce moteur. Chaque lot d'import (S3, I1, I2, I3) n'apporte que son **adaptateur** : son use case importeur, son job, son schéma JSON, son aide à l'écran et son test de performance.
-5. **La génération des classes** (`Entities::Classroom::DefaultClassroomPlan`, ADR-0030). Elle sert à la création unitaire (S2), à l'import (S3) et aux seeds : elle est dans 0b.
+5. **La génération des classes** (`Entities::Classroom::DefaultClassroomPlan`, ADR-0030 et son amendement du 2026-09-25). Il n'y a **pas de formulaire de création d'établissement** (décision du porteur du 2026-09-25) : les établissements arrivent **uniquement par l'import JSON** (S3), et c'est là que leurs classes sont générées. En développement et en test, les seeds et les fabriques créent des établissements par les mêmes repositories et la même génération. **Jamais de classes pré-créées.** Totaux attendus : lycée public 77, lycée privé ou mixte 38, collège public 28. Elle est dans 0b.
 6. **Les briques Hotwire communes** : le frame `modal` et `#toasts` (Lot 0c, déjà là), le rafraîchissement par morphing (0e), le panneau de statut d'un contenu (0e), et les assertions de test système `assert_no_page_reload` et `open_in_modal` (0d).
+7. **L'éditeur de texte riche** (décision du porteur du 2026-09-25, amendement de l'ADR-0051). Action Text et Trix servent aux formulaires de cours (B2) et de fiches essentielles (B4), et les imports I1 et I2 écrivent dans le même rich text. Le socle livre donc le framework, la table, `has_rich_text` (0a), l'assainissement du HTML importé (0e, e1) et le contrôleur `rich-text-editor`, qui charge Trix à la demande (0e, e3).
 
 Les contrôleurs Stimulus sont chargés **par motif de fichier** (`esbuild-rails`, 0e). Il n'y a donc plus de manifeste à éditer. Un lot qui dépose `app/javascript/controllers/<ctx>/<nom>_controller.js` est enregistré sous l'identifiant `<ctx>--<nom>`.
 
@@ -89,7 +90,7 @@ Les contrôleurs Stimulus sont chargés **par motif de fichier** (`esbuild-rails
 
 | Sous-lot | Contenu | Dépend de | En parallèle avec | Worktree · branche |
 |---|---|---|---|---|
-| **0a** | Dépendances, 31 migrations, schéma, modèles `Orm::`, routes V1 complètes, fabriques, configuration de test | V0 et 0c (dans `Develop`) | 0b | `lnclass-lot-0a` · `feature/boucle-pedagogique-lot-0a` |
+| **0a** | Dépendances, 32 migrations (Action Text compris), schéma, modèles `Orm::`, routes V1 complètes, fabriques, configuration de test | V0 et 0c (dans `Develop`) | 0b | `lnclass-lot-0a` · `feature/boucle-pedagogique-lot-0a` |
 | **0b** | Domaine pur : `Shared::Result`, entités, objets-valeurs, **tous les ports**, policies, DTO du socle | V0 | 0a | `lnclass-lot-0b` · `feature/boucle-pedagogique-lot-0b` |
 | **0d** | Transaction, 9 repositories `identity`, use cases d'authentification et de second facteur, contrôleurs et écrans de connexion, `Teams::BaseController`, shell branché, helpers de test | départ : 0a mergé ; merge : 0a **et** 0b | 0e | `lnclass-lot-0d` · `feature/boucle-pedagogique-lot-0d` |
 | **0e** | 18 autres repositories, moteur d'import, front partagé, puis (e4) écran des imports, seeds et gardes d'architecture | départ : 0a mergé ; merge : 0a **et** 0b ; **e4 attend le merge de 0d** | 0d (étapes e1 à e3) | `lnclass-lot-0e` · `feature/boucle-pedagogique-lot-0e` |
@@ -134,7 +135,7 @@ Les routes et les fabriques sont dans 0a, et non dans un sous-lot plus tardif : 
 - **Dépend de**    : V0 et Lot 0c, déjà dans `Develop` (32fb626). Aucune dépendance à 0b.
 - **Test associé** : colonne « Test » des tableaux 0a.1 à 0a.5.
 - **Done quand**   :
-  - `bin/rails db:drop db:prepare` passe sur une base vide, et `bin/rails db:migrate:redo STEP=31` aussi ;
+  - `bin/rails db:drop db:prepare` passe sur une base vide, et `bin/rails db:migrate:redo STEP=32` aussi ;
   - le test de contraintes du schéma (0a.2) et le test des routes (0a.4) sont verts ;
   - chaque fabrique crée sa ligne, et `create_team_member(second_factor: true)` écrit un secret chiffré (`encrypts`) ;
   - `grep -rn friendly_id app config Gemfile db` ne renvoie rien ;
@@ -147,14 +148,15 @@ Les routes et les fabriques sont dans 0a, et non dans un sous-lot plus tardif : 
 |---|---|---|
 | `Gemfile` · `Gemfile.lock` (modifiés) | Décommenter `bcrypt ~> 3.1.7`. Ajouter `rotp ~> 6.3` et `rqrcode ~> 2.2` (ADR-0031), `json_schemer ~> 2.3` (ADR-0039). **Retirer `friendly_id`** : slugs et `public_id` passent par nos concerns (ADR-0029). `mission_control-jobs`, `aws-sdk-s3` et `rails-i18n` sont déjà là (V0). | `bin/bundler-audit` vert |
 | `config/initializers/friendly_id.rb` (supprimé) | — | `grep` du Done quand |
-| `package.json` · `yarn.lock` (modifiés) | Ajouter `katex` et `esbuild-rails` (dev). Le script `build` devient `node esbuild.config.mjs`. | `yarn build` vert |
-| `esbuild.config.mjs` | Reprend **toutes** les options du script V0 (`bundle`, `minify`, `splitting`, `format: "esm"`, `chunkNames`, cibles chrome111, safari16.4, firefox128, `sourcemap`, `outdir: app/assets/builds`, `publicPath: /assets`), plus le plugin `rails()` d'`esbuild-rails` (imports par motif). Second point d'entrée : `katex/dist/katex.min.css` → `app/assets/builds/katex.css`, polices en loader `file`. KaTeX ne figure **jamais** dans le point d'entrée commun (ADR-0051). | étape « Assets: Budget » de `bin/ci` : 60 Ko gzip de JS, 30 Ko de CSS |
+| `package.json` · `yarn.lock` (modifiés) | Ajouter `katex`, **`trix` et `@rails/actiontext`** (éditeur riche, retour du porteur du 2026-09-25), et `esbuild-rails` (dev). Le script `build` devient `node esbuild.config.mjs`. | `yarn build` vert |
+| `esbuild.config.mjs` | Reprend **toutes** les options du script V0 (`bundle`, `minify`, `splitting`, `format: "esm"`, `chunkNames`, cibles chrome111, safari16.4, firefox128, `sourcemap`, `outdir: app/assets/builds`, `publicPath: /assets`), plus le plugin `rails()` d'`esbuild-rails` (imports par motif). Second point d'entrée : `katex/dist/katex.min.css` → `app/assets/builds/katex.css`, polices en loader `file`. Troisième : `trix/dist/trix.css` → `app/assets/builds/trix.css`. Ni KaTeX, ni Trix, ni `@rails/actiontext` ne figurent **jamais** dans le point d'entrée commun (ADR-0051 et son amendement du 2026-09-25) : ils forment des morceaux (`chunks`) chargés par import dynamique. | étape « Assets: Budget » de `bin/ci` : 60 Ko gzip de JS, 30 Ko de CSS |
+| `config/application.rb` (modifié) | Ajouter `require "action_text/engine"` : V0 avait retiré Action Text du chargement de `rails/all`. Le commentaire d'en-tête dit désormais que Trix est chargé à la demande, hors du point d'entrée commun. | couvert par le test de schéma de 0a.2 (table présente) |
 | `config/environments/test.rb` (modifié) | `cache_store = :memory_store` (nécessaire à `rate_limit`, ADR-0050). Clés Active Record Encryption **de test** posées en clair (`active_record.encryption.primary_key`, `deterministic_key`, `key_derivation_salt`) : la CI n'a pas de clé maître. | couvert par la fabrique `create_team_member` |
 | `config/credentials.yml.enc` (modifié, **par l'orchestrateur**) | `bin/rails db:encryption:init`, puis les trois clés sous `active_record_encryption`, pour le développement et la production. Le porteur n'a rien à fournir. | — |
 
 ### 0a.2 Migrations
 
-Horodatage `20260925100001` → `20260925100031`, dans cet ordre : une table n'est créée qu'après celles que ses clés étrangères visent. **Règles communes** (ADR-0027, ADR-0029, ADR-0036) :
+Horodatage `20260925100001` → `20260925100032`, dans cet ordre : une table n'est créée qu'après celles que ses clés étrangères visent. **Règles communes** (ADR-0027, ADR-0029, ADR-0036) :
 
 - clés primaires `bigint` ; `timestamps null: false` sauf mention contraire ;
 - toute FK a sa contrainte en base, en `on_delete: :restrict`. `:cascade` n'est permis que pour la liste fermée de l'ADR-0036 : `sessions`, `login_attempts`, `totp_credentials`, `backup_codes` et `pin_recovery_codes` vers `users` ;
@@ -239,12 +241,12 @@ Horodatage `20260925100001` → `20260925100031`, dans cet ordre : une table n'e
 - `teacher_id` FK `users` non null ; `classroom_id` FK non null ; `created_at` non null. Unique `(teacher_id, classroom_id)`, index `classroom_id`.
 
 **`db/migrate/20260925100020_create_courses.rb`** — `courses` (ADR-0035)
-- `slug` ; `name` string(200) non null ; `subtitle` string(150) ; `content` **text** (HTML, nettoyé à l'affichage : Action Text a été retiré en V0) ; `level_id` et `material_id` FK non null ; `series_id` FK nullable ; `author_id` FK `users` non null.
+- `slug` ; `name` string(200) non null ; `subtitle` string(150) ; **pas de colonne `content`** : le contenu est un rich text Action Text (`has_rich_text :content`, table `action_text_rich_texts`, migration 32) ; `level_id` et `material_id` FK non null ; `series_id` FK nullable ; `author_id` FK `users` non null.
 - `status` string non null défaut `'draft'` `CHECK IN ('draft','published','archived')` ; `published_at` et `archived_at` nullables ; index `status`.
 - Unique `(level_id, material_id, series_id, name) NULLS NOT DISTINCT`.
 
 **`db/migrate/20260925100021_create_essentials.rb`** — `essentials`
-- `course_id` FK non null ; `slug` ; `name` string(150) non null ; `subtitle` string(150) ; `content` text ; `position` integer non null ; `author_id` FK `users` non null ; `status`, `published_at`, `archived_at` comme `courses`.
+- `course_id` FK non null ; `slug` ; `name` string(150) non null ; `subtitle` string(150) ; **pas de colonne `content`** (rich text, comme `courses`) ; `position` integer non null ; `author_id` FK `users` non null ; `status`, `published_at`, `archived_at` comme `courses`.
 - Unique `(course_id, name)` et `(course_id, position)`.
 
 **`db/migrate/20260925100022_create_exercises.rb`** — `exercises` (ADR-0054)
@@ -294,16 +296,18 @@ Horodatage `20260925100001` → `20260925100031`, dans cet ordre : une table n'e
 
 **`db/migrate/20260925100031_drop_friendly_id_slugs.rb`** — supprime la table `friendly_id_slugs` créée en V0 ; `down` la recrée à l'identique.
 
+**`db/migrate/20260925100032_create_action_text_tables.rb`** — `action_text_rich_texts` (retour du porteur du 2026-09-25, amendement de l'ADR-0051), recréée à l'identique de la migration d'Action Text 8.1 que V0 avait supprimée (`20260925000004_drop_action_text_tables`) : `name` string non null, `body` text, `record_type` string non null, `record_id` bigint non null, timestamps ; unique `(record_type, record_id, name)`. Pas de clé étrangère : l'association est polymorphe, et un cours ou une fiche n'est jamais supprimé, seulement archivé (ADR-0036). Seuls `Orm::Course` et `Orm::Essential` y écrivent, sous le nom `content`.
+
 | Fichier | Contenu | Test |
 |---|---|---|
-| `db/schema.rb` (modifié) | Régénéré après les 31 migrations | `test/db/schema_constraints_test.rb` (ci-dessous) |
+| `db/schema.rb` (modifié) | Régénéré après les 32 migrations | `test/db/schema_constraints_test.rb` (ci-dessous) |
 
 Ce test couvre :
 - la longueur de `join_code`, égale à `Entities::Classroom::JoinCode::LENGTH` ;
 - chaque index unique et chaque index partiel ci-dessus, et chaque `CHECK` d'énumération (une valeur hors liste lève `ActiveRecord::StatementInvalid`) ;
 - l'absence de `on_delete: :cascade` hors de la liste de l'ADR-0036 ;
 - l'absence de colonne `updated_at` sur `question_attempts`, et de colonne `code` sur `levels` et `series` ;
-- l'absence de table `friendly_id_slugs` et de tables Action Text.
+- l'absence de table `friendly_id_slugs`, la présence de `action_text_rich_texts` et l'absence de colonne `content` sur `courses` et `essentials`.
 
 ### 0a.3 Modèles `Orm::`
 
@@ -339,8 +343,8 @@ Tous les modèles sont dans `app/infrastructure/orm/`. Chacun :
 | `app/infrastructure/orm/classroom_student.rb` | `belongs_to :classroom`, `belongs_to :student, class_name: "Orm::User"` |
 | `app/infrastructure/orm/teacher_classroom.rb` | `belongs_to :teacher, class_name: "Orm::User"`, `belongs_to :classroom` |
 | `app/infrastructure/orm/classroom_assignment.rb` | `HasPublicId`, `belongs_to :classroom`, `belongs_to :assigned_by, class_name: "Orm::User"`. `assignable_type` et `assignable_id` sont de simples colonnes. |
-| `app/infrastructure/orm/course.rb` | `HasFrozenSlug`, `has_many :essentials`. `content` est une colonne texte. |
-| `app/infrastructure/orm/essential.rb` | `HasFrozenSlug` (sur le nom du cours puis celui de la fiche), `has_many :exercises` |
+| `app/infrastructure/orm/course.rb` | `HasFrozenSlug`, `has_many :essentials`, **`has_rich_text :content`** (Action Text). |
+| `app/infrastructure/orm/essential.rb` | `HasFrozenSlug` (sur le nom du cours puis celui de la fiche), `has_many :exercises`, **`has_rich_text :content`** |
 | `app/infrastructure/orm/exercise.rb` | `HasPublicId`, `has_many :questions, -> { order(:position) }` |
 | `app/infrastructure/orm/question.rb` | `has_many :answers, -> { order(:position) }` |
 | `app/infrastructure/orm/answer.rb` | `belongs_to :question` |
@@ -421,7 +425,7 @@ get  "sessions/:public_id/result", to: "assessment/session_results#show", as: :e
 get "teams", to: "teams/homes#show", as: :team_home                                                     # B6 (gelé)
 scope "teams", module: "teams" do                          # noms sans préfixe, attendus par la navigation 0c
   resources :drenas,    param: :public_id, except: :show                                                # S1
-  resources :schools,   param: :public_id do                                                            # S2 → schools_path, ACTIF
+  resources :schools,   param: :public_id, except: %i[new create] do                                    # S2 → schools_path, ACTIF ; création par import (S3) seulement
     member { patch :deactivate }
     resources :classrooms, only: %i[new create], controller: "school_classrooms"                        # D8
   end
@@ -803,7 +807,7 @@ Forme unique : `Policies::<Ctx>::<Nom>Policy.new.call(actor:, **faits) → Share
 | `app/domain/policies/assessment/start_session_policy.rb` | Student ; exercice publié et parents publiés. **Aucune exigence d'assignation** (ADR-0028). | `test/domain/policies/assessment/start_session_policy_test.rb` |
 | `app/domain/policies/assessment/submit_attempt_policy.rb` | Student propriétaire de la session ; session `started` (ADR-0054). | `test/domain/policies/assessment/submit_attempt_policy_test.rb` |
 | `app/domain/policies/assessment/read_session_policy.rb` | Élève propriétaire ; teacher dont une classe **active** contient l'élève (fait `teaches_student`) ; team. | `test/domain/policies/assessment/read_session_policy_test.rb` |
-| `app/domain/policies/assessment/reveal_answers_policy.rb` | **Student** : seulement pour une question déjà tentée dans la session (fait `attempted_question_ids`). **Team** : tout. **L'enseignant ne voit pas les bonnes réponses** (ADR-0028). | `test/domain/policies/assessment/reveal_answers_policy_test.rb` |
+| `app/domain/policies/assessment/reveal_answers_policy.rb` | **Student** : seulement pour une question déjà tentée dans la session (fait `attempted_question_ids`) ; jamais une question qu'il n'a pas encore tentée. **Teacher** : tout exercice qu'il peut lire (décision du porteur du 2026-09-25, amendement de l'ADR-0028). **Team** : tout. | `test/domain/policies/assessment/reveal_answers_policy_test.rb` : l'enseignant est autorisé ; l'élève est refusé sur une question non tentée, autorisé sur une question tentée ; le visiteur est refusé |
 
 ### 0b.5 DTO du socle
 
@@ -920,7 +924,7 @@ Une seule méthode publique `call(...) → Shared::Result`. Ports, policies et h
 
 ### e1 — Les 18 autres repositories
 
-Même règle que 0d.1 : chaque repository implémente le port de 0b.3 et a son test de contrat sur PostgreSQL.
+Même règle que 0d.1 : chaque repository implémente le port de 0b.3 et a son test de contrat sur PostgreSQL. `RichTextSanitizer` n'est pas un port : c'est un outil d'infrastructure partagé par trois repositories du catalogue.
 
 | Repository | Test |
 |---|---|
@@ -931,9 +935,10 @@ Même règle que 0d.1 : chaque repository implémente le port de 0b.3 et a son t
 | `app/infrastructure/repositories/classroom/teaching_repository.rb` | `test/infrastructure/repositories/classroom/teaching_repository_test.rb` |
 | `app/infrastructure/repositories/classroom/assignment_repository.rb` | `test/infrastructure/repositories/classroom/assignment_repository_test.rb` — **100 % lignes et branches, trois types de ressource** |
 | `app/infrastructure/repositories/catalog/taxonomy_repository.rb` | `test/infrastructure/repositories/catalog/taxonomy_repository_test.rb` |
-| `app/infrastructure/repositories/catalog/course_repository.rb` | `test/infrastructure/repositories/catalog/course_repository_test.rb` |
-| `app/infrastructure/repositories/catalog/essential_repository.rb` | `test/infrastructure/repositories/catalog/essential_repository_test.rb` |
-| `app/infrastructure/repositories/catalog/content_tree_writer.rb` | `test/infrastructure/repositories/catalog/content_tree_writer_test.rb` : un arbre de 2 cours complet, parents d'abord, tout en `draft` |
+| `app/infrastructure/repositories/catalog/course_repository.rb` | `test/infrastructure/repositories/catalog/course_repository_test.rb` : le contenu est lu et écrit en HTML brut dans le rich text (`record.content.body.to_html`, `record.content = html`), assaini à l'écriture ; l'entité ne connaît pas Action Text |
+| `app/infrastructure/repositories/catalog/essential_repository.rb` | `test/infrastructure/repositories/catalog/essential_repository_test.rb` : même traitement du contenu que `CourseRepository` |
+| `app/infrastructure/repositories/catalog/content_tree_writer.rb` | `test/infrastructure/repositories/catalog/content_tree_writer_test.rb` : un arbre de 2 cours complet, parents d'abord, tout en `draft` ; le `content` des cours et des fiches est **assaini** puis écrit en masse (`insert_all`) dans `action_text_rich_texts` (`record_type` `Orm::Course` ou `Orm::Essential`, `name` `content`) ; un `<script>` du fichier n'arrive pas en base |
+| `app/infrastructure/repositories/catalog/rich_text_sanitizer.rb` | `test/infrastructure/repositories/catalog/rich_text_sanitizer_test.rb` : `Repositories::Catalog::RichTextSanitizer.call(html)` applique la liste blanche d'Action Text (balises et attributs que Trix produit et que le rendu garde). Retirés : `<script>`, `<style>`, `<iframe>`, attributs `on*`, liens `javascript:`. Gardés : gras, italique, titres, listes, citations, `pre`, liens `https:`, et le texte des formules `$…$`. Utilisé par les deux repositories ci-dessus et par `ContentTreeWriter` : tout HTML écrit dans un rich text passe par lui, importé ou saisi. |
 | `app/infrastructure/repositories/catalog/import_report_repository.rb` | `test/infrastructure/repositories/catalog/import_report_repository_test.rb` : second rapport en cours du même type → `:conflict` ; `fail_stale` ; `finish` tronque à 1 000 erreurs |
 | `app/infrastructure/repositories/catalog/import_file_store.rb` | `test/infrastructure/repositories/catalog/import_file_store_test.rb` : aucun fichier écrit sous `tmp/` |
 | `app/infrastructure/repositories/catalog/import_schema_validator.rb` | `test/infrastructure/repositories/catalog/import_schema_validator_test.rb` : `json_schemer`, erreurs converties en `ImportError` avec leur chemin JSON (`/schools/12/type` → `schools[12].type`) ; racine injectable (`root:`), `config/schemas` par défaut |
@@ -992,6 +997,9 @@ write(items:, author_id:, at:)       → { imported: Integer, details: Hash }   
 |---|---|---|---|
 | `app/javascript/controllers/index.js` (modifié) | Remplace le manifeste généré : `import controllers from "./**/*_controller.js"`, puis `controllers.forEach(c => application.register(c.name, c.module.default))`. Un fichier en sous-dossier a pour identifiant `<dossier>--<nom>`. Les quatre contrôleurs du Lot 0c gardent leur identifiant. | tous | `test/system/design_system_test.rb` (V0) reste vert |
 | `app/javascript/controllers/math_controller.js` | À la connexion : `await import("katex/contrib/auto-render")` (**import dynamique**, ADR-0051), ajoute une fois au `<head>` le `<link>` de `katex.css` (même origine, compatible CSP), puis rend `$…$` et `$$…$$`. Sert à B1, B3, C1, C2 et C3. | B1, B3, C1 à C3 | `test/system/shared/math_rendering_test.rb` : une formule est rendue ; le point d'entrée commun ne contient pas KaTeX |
+| `app/javascript/controllers/rich_text_editor_controller.js` | Identifiant `rich-text-editor`, posé sur le champ de contenu des formulaires de B2 et B4. À la connexion : `await Promise.all([import("trix"), import("@rails/actiontext")])` (**import dynamique**, amendement du 2026-09-25 de l'ADR-0051), puis ajoute une fois au `<head>` le `<link>` de `trix.css` (même origine, compatible CSP). Trix lit le nonce de la balise `csp-nonce` posée par `csp_meta_tag` (ADR-0049). **Pièces jointes refusées en V1** (décision du porteur) : `trix-file-accept` annulé, bouton de fichier masqué, aucun `direct_upload` (voir « Décisions que ce plan suppose »). | B2, B4 | couvert par les tests système de B2 et B4, et par la garde d'import dynamique ci-dessous |
+| `test/architecture/lazy_libraries_test.rb` | Aucun fichier de `app/javascript/` n'importe `trix`, `@rails/actiontext`, `katex` ni `canvas-confetti` **statiquement** (`import … from`, `import "…"`) : seuls les `import("…")` dynamiques sont permis (ADR-0051). | tous | — |
+| `app/views/layouts/action_text/contents/_content.html.erb` | Gabarit de rendu d'un rich text : `<div class="rich-text">` avec les classes typographiques de l'UDR-0005 (titres, listes, citations, `pre`), sans valeur arbitraire. Le contenu est assaini au rendu par Action Text. | B1, B3 | couvert par les tests de B1 et B3 |
 | `app/views/layouts/application.html.erb` (modifié) | Une ligne dans le `<head>` : `turbo_refreshes_with method: :morph, scroll: :preserve`. Un `turbo_stream.refresh` de succès re-demande la page courante et la fusionne, sans recharger la fenêtre. | tous les CRUD | couvert par les tests système des lots |
 | `app/helpers/catalog/content_status_helper.rb` | `content_status_badge(status)` : « Brouillon — visible uniquement par l'équipe », « Publié », « Archivé ». **`content_status_panel(record:)`** : `<div id="content_status_<type>_<clé>">` avec le badge et, pour l'équipe, les transitions permises par `ContentStatus::TRANSITIONS` en boutons `button_to` (PATCH `publish` ou `archive`). Rendu par les pages de B1, B3 et C1 ; remplacé par les streams de B2, B4 et B5. | B1 à B5, C1 | `test/helpers/catalog/content_status_helper_test.rb` |
 | `app/helpers/assessment/badges_helper.rb` | `badge_label(level)` → « Bronze », « Argent », « Or », « Diamant » ou « Non acquis » par `t()` (UDR-0007). `badge_tone(level)`. `mastery_label(score)` → « Acquis », « Fragile », « En difficulté » via `Grading.mastery_for`. `grade_label(score)` → « 14/20 ». | A2, B3, C1, C3 | `test/helpers/assessment/badges_helper_test.rb` : 4 paliers (50, 70, 80, 100), aucun libellé « Platine », « Médaille » ni « Trophée » |
@@ -1144,7 +1152,7 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/student_home_query.rb`
-    - `Row(school_name, level_name, classroom_name, classmates_count, assigned_exercises:, recent_sessions:, pending_gaps:)`.
+    - `Row(school_name, level_name, classroom_name, join_code_display, classmates_count, assigned_exercises:, recent_sessions:, pending_gaps:)`. `join_code_display` : le code de la classe principale, en majuscules (CL-04).
     - `assigned_exercises` : exercices assignés **actifs**, directement ou par leur fiche ou leur cours, à la classe principale, **publiés** ainsi que leurs parents. Pour chacun : `public_id, title, material_name, material_category, badge_level, best_score_percent, completed_count, started_session_public_id`.
     - `recent_sessions` : les 10 dernières sessions `completed`, avec score et note sur 20.
     - `pending_gaps` : lacunes `pending` (ADR-0043), avec le nom de la fiche essentielle.
@@ -1153,7 +1161,7 @@ Chaque lot vertical :
   - `app/views/classroom/student_homes/show.html.erb`
     - Sections dans l'ordre de `NavigationHelper::HOME_SECTIONS[:student]`.
   - `app/views/classroom/student_homes/_classroom_card.html.erb`
-    - Classe, établissement, niveau, nombre de camarades. **Pas de code d'adhésion.**
+    - Classe, établissement, niveau, nombre de camarades, et **le code de la classe** en majuscules, comme dans l'ancienne application (décision du porteur du 2026-09-25). Jamais la liste nominative.
   - `app/views/classroom/student_homes/_assigned_exercise.html.erb`
     - `ui_subject_badge`, badge par `badge_label` (Bronze, Argent, Or, Diamant), meilleur score et maîtrise, nombre de sessions, bouton « Commencer » ou « Reprendre ».
   - `app/views/classroom/student_homes/_recent_activity.html.erb`
@@ -1165,7 +1173,7 @@ Chaque lot vertical :
   - `test/infrastructure/queries/classroom/student_home_query_test.rb`
     - Assignation retirée, exercice archivé ou brouillon : absent. Assignation par cours : présent. Meilleur score. Classe principale seulement.
   - `test/controllers/classroom/student_homes_controller_test.rb`
-    - 200 ; sans classe : une redirection ; enseignant 403 ; le HTML ne contient pas le code de la classe.
+    - 200 ; sans classe : une redirection ; enseignant 403 ; le HTML contient le code de la classe en majuscules, et le nom d'aucun camarade.
   - `test/system/classroom/student_home_test.rb`
     - Un élève connecté voit son exercice assigné et son badge ; « Commencer » mène à la session. En 390 px, la barre du bas est visible.
 - **Done quand**   : un élève connecté voit ses exercices assignés et leur progression. Les critères CL-23, TR-04 et AS-36 sont verts.
@@ -1175,7 +1183,7 @@ Chaque lot vertical :
   - `⟨ancienne⟩ views/students/feed/content/_feed_header.html.erb`, `_classroom.html.erb`, `_exercises.html.erb`, `_activities.html.erb`, `_empty_state.html.erb`
   - `⟨ancienne⟩ views/components/_exercise_card.html.erb` et `_exercise_badge.html.erb`
 - **Fiches d'inventaire** : TR-04, CL-23, AS-36, TR-02 (élève sans classe).
-- **Non-régression** : pas de boucle de redirection pour l'élève sans classe ; aucun exercice non publié listé ; le code de la classe n'est jamais montré à l'élève.
+- **Non-régression** : pas de boucle de redirection pour l'élève sans classe ; aucun exercice non publié listé ; aucun nom de camarade montré à l'élève.
 - **UDR**          : UDR-0010 — Accueil élève
 
 ---
@@ -1185,9 +1193,9 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/student_classroom_query.rb`
-    - `Row(classroom_name, level_name, series_name, school_name, school_year, courses:)`. `courses` : cours assignés actifs et publiés, avec `slug, name, subtitle, material_name, material_category, essentials_count`. **Ni code, ni liste nominative.**
+    - `Row(classroom_name, level_name, series_name, school_name, school_year, courses:)`. `courses` : cours assignés actifs et publiés, avec `slug, name, subtitle, material_name, material_category, essentials_count`. **Pas de liste nominative.** Le code vient de l'en-tête (`ClassroomHeaderQuery`).
   - `app/controllers/classroom/student_classrooms_controller.rb`
-    - `allow_roles :student`. L'en-tête vient de `ClassroomHeaderQuery`, sous `ReadClassroomPolicy` ; la vue n'en rend ni `join_code_display` ni `student_ids`.
+    - `allow_roles :student`. L'en-tête vient de `ClassroomHeaderQuery`, sous `ReadClassroomPolicy` ; la vue en rend `join_code_display` (le code de la classe, en majuscules), jamais `student_ids`.
   - `app/views/classroom/student_classrooms/show.html.erb`
   - `app/views/classroom/student_classrooms/_assigned_course.html.erb`
   - `config/locales/classroom/student_classrooms.fr.yml`
@@ -1195,10 +1203,10 @@ Chaque lot vertical :
 - **Test associé** :
   - `test/infrastructure/queries/classroom/student_classroom_query_test.rb`
   - `test/controllers/classroom/student_classrooms_controller_test.rb`
-    - Le HTML ne contient ni le code de la classe ni le nom d'un autre élève.
+    - Le HTML contient le code de la classe en majuscules, et le nom d'aucun autre élève.
   - `test/system/classroom/student_classroom_test.rb`
     - L'élève voit ses cours assignés, ouvre l'un d'eux.
-- **Done quand**   : les critères CL-22 et CL-10 (volet élève) sont verts ; **l'élève ne voit pas le code de sa classe**.
+- **Done quand**   : les critères CL-22 et CL-10 (volet élève) sont verts ; **l'élève voit le code de sa classe**, pas la liste nominative.
 - **Hotwire**      : lecture seule, pas de stream ; test système du rendu.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/students/classroom/show.html.erb`, `⟨ancienne⟩ views/students/feed/content/_courses.html.erb`
 - **Fiches d'inventaire** : CL-22, CL-10 (volet élève).
@@ -1241,13 +1249,13 @@ Chaque lot vertical :
   - `app/infrastructure/queries/catalog/course_catalog_query.rb`
     - `#call(actor:, level: nil, material: nil)` → `[Row(slug, name, subtitle, level_name, series_name, material_name, material_category, status)]`. Publiés seulement, sauf pour l'équipe. Tri par matière, niveau, nom.
   - `app/infrastructure/queries/catalog/course_detail_query.rb`
-    - `#call(slug:)` → `Row(course, essentials:)` avec l'état publié du cours ; le contrôleur applique `ReadPublishedPolicy` (refus → 404). Fiches essentielles publiées, ou toutes pour l'équipe, avec `slug, name, subtitle, exercises_count`.
+    - `#call(slug:)` → `Row(course, essentials:)` avec l'état publié du cours et son rich text (`with_rich_text_content`) ; le contrôleur applique `ReadPublishedPolicy` (refus → 404). Fiches essentielles publiées, ou toutes pour l'équipe, avec `slug, name, subtitle, exercises_count`.
   - `app/controllers/catalog/courses_controller.rb`
     - `index`, `show`, pour tous les rôles connectés. `index` rend le frame `courses` seul quand la requête vient de ce frame.
   - `app/views/catalog/courses/index.html.erb`
     - Filtres niveau et matière (formulaire GET visant `turbo_frame_tag "courses"`, `data-turbo-action="advance"`), grille de cartes dans le frame. Pour l'équipe : « Nouveau cours » (`new_teams_course_path`, `data-turbo-frame="modal"`) et « Importer des cours » (`new_teams_import_path(kind: "course_tree")`, même frame).
   - `app/views/catalog/courses/show.html.erb`
-    - Fil d'Ariane, badges niveau, série et matière, `content_status_panel(record:)` pour l'équipe, contenu (`sanitize`) dans `data-controller="math"`, section « Fiches essentielles ».
+    - Fil d'Ariane, badges niveau, série et matière, `content_status_panel(record:)` pour l'équipe, contenu rendu par Action Text (assaini par sa liste blanche, gabarit `rich-text` du socle) dans `data-controller="math"`, section « Fiches essentielles ».
   - `app/views/catalog/courses/_course_card.html.erb`
   - `app/views/catalog/courses/_essential_row.html.erb`
   - `app/views/catalog/courses/_role_actions.html.erb`
@@ -1279,7 +1287,7 @@ Chaque lot vertical :
 - **Couche**       : domaine (DTO, use cases) + delivery + ui
 - **Fichiers**     :
   - `app/domain/dtos/catalog/course_input.rb`
-    - `name, subtitle, level_slug, series_slug, material_slug, content` (HTML simple).
+    - `name, subtitle, level_slug, series_slug, material_slug, content` (HTML produit par l'éditeur riche ; le domaine le garde en chaîne, sans connaître Action Text).
   - `app/domain/use_cases/catalog/create_course.rb`
     - DTO ; faits : niveau, matière, série, `lookup.pair?` (série non permise : `:invalid`) ; `ManageContentPolicy` ; `courses.create` en `draft`, `author_id = actor.user_id`. Nom pris : `:conflict`.
   - `app/domain/use_cases/catalog/update_course.rb`
@@ -1293,7 +1301,7 @@ Chaque lot vertical :
   - `app/views/teams/courses/edit.html.erb`
     - `turbo_frame_tag "modal"` → `ui_modal(size: :lg, open: true)` → `_form`.
   - `app/views/teams/courses/_form.html.erb`
-    - `form_with id: "course-form"`. Nom, sous-titre, niveau, série (options filtrées par niveau côté serveur), matière, contenu en `text_area` (HTML simple, nettoyé à l'affichage ; l'éditeur riche est reporté). Le statut ne se change pas dans le formulaire.
+    - `form_with id: "course-form"`. Nom, sous-titre, niveau, série (options filtrées par niveau côté serveur), matière, contenu dans l'**éditeur riche** : `f.rich_textarea :content` dans un conteneur `data-controller="rich-text-editor"` (Trix chargé à la demande, 0e). Pièces jointes refusées en V1. Le statut ne se change pas dans le formulaire.
   - `app/views/teams/courses/create.turbo_stream.erb`
     - Toast « Cours créé (brouillon) », modale refermée, `turbo_stream.refresh(request_id: nil)` : le catalogue de B1 se met à jour par morphing.
   - `app/views/teams/courses/update.turbo_stream.erb`
@@ -1315,7 +1323,8 @@ Chaque lot vertical :
     - Créer, lire, modifier, publier, archiver, republier par le même agrégat (chantier `catalog-lecture-ecriture-incompatibles`).
   - `test/system/teams/course_management_test.rb`
     - Depuis une page du socle, `open_in_modal(new_teams_course_path)` : nom vide → erreurs dans la modale, puis création → toast ; même chose pour l'édition ; le tout dans `assert_no_page_reload`.
-- **Done quand**   : les critères CA-05, CA-06 et CA-07 sont verts ; création, modification, publication et archivage se font **sans rechargement de page**.
+    - Éditeur riche : Trix se charge dans la modale, **sous la CSP stricte** (aucune erreur de CSP dans la console) ; un passage mis en gras et une liste à puces sont enregistrés et rendus tels quels sur la page du cours ; le contenu déjà saisi est rechargé dans l'éditeur à l'édition ; un fichier glissé dans l'éditeur est refusé.
+- **Done quand**   : les critères CA-05, CA-06 et CA-07 sont verts ; le contenu se saisit dans l'**éditeur riche** ; création, modification, publication et archivage se font **sans rechargement de page**.
 - **Hotwire**      : modales `new` et `edit` ; 422 dans la modale ; `create`, `update`, `transition` en `*.turbo_stream.erb` ; repli HTML.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/courses/new.html.erb`, `edit.html.erb` et `_form.html.erb`
 - **Fiches d'inventaire** : CA-05, CA-06, CA-07. Contradiction C-19 (feuille de route §4).
@@ -1333,7 +1342,7 @@ Chaque lot vertical :
   - `app/controllers/catalog/essentials_controller.rb`
     - `show`, sous `ReadPublishedPolicy` (fiche et cours ; refus → 404).
   - `app/views/catalog/essentials/show.html.erb`
-    - Contenu avec KaTeX, `content_status_panel` pour l'équipe, liste des exercices. Menu d'équipe en modales : « Modifier » (`edit_teams_essential_path`), « Nouvel exercice » (`new_teams_essential_exercise_path`), « Importer des exercices » (`new_teams_import_path(kind: "exercises", essential: slug)`).
+    - Contenu rendu par Action Text, avec KaTeX, `content_status_panel` pour l'équipe, liste des exercices. Menu d'équipe en modales : « Modifier » (`edit_teams_essential_path`), « Nouvel exercice » (`new_teams_essential_exercise_path`), « Importer des exercices » (`new_teams_import_path(kind: "exercises", essential: slug)`).
   - `app/views/catalog/essentials/_exercise_progress.html.erb`
     - Tout exercice publié se démarre (ADR-0028). Un exercice assigné à la classe de l'élève porte l'étiquette « Assigné par ton enseignant ».
   - `config/locales/catalog/essentials.fr.yml`
@@ -1360,7 +1369,7 @@ Chaque lot vertical :
 - **Couche**       : domaine (DTO, use cases) + delivery + ui
 - **Fichiers**     :
   - `app/domain/dtos/catalog/essential_input.rb`
-    - `course_slug, name, subtitle, content`.
+    - `course_slug, name, subtitle, content` (HTML produit par l'éditeur riche).
   - `app/domain/use_cases/catalog/create_essential.rb`
     - DTO ; cours existant ; `ManageContentPolicy` ; nom unique dans le cours ; `draft` ; position = `next_position`.
   - `app/domain/use_cases/catalog/update_essential.rb`
@@ -1372,7 +1381,7 @@ Chaque lot vertical :
   - `app/views/teams/essentials/new.html.erb`
   - `app/views/teams/essentials/edit.html.erb`
   - `app/views/teams/essentials/_form.html.erb`
-    - `form_with id: "essential-form"`, contenu en `text_area`.
+    - `form_with id: "essential-form"`, contenu dans l'**éditeur riche** (`f.rich_textarea :content` sous `data-controller="rich-text-editor"`, comme B2).
   - `app/views/teams/essentials/create.turbo_stream.erb`
     - Toast « Fiche essentielle créée (brouillon) », modale refermée, refresh (page du cours, B1).
   - `app/views/teams/essentials/update.turbo_stream.erb`
@@ -1388,8 +1397,8 @@ Chaque lot vertical :
   - `test/controllers/teams/essentials_controller_test.rb`
     - Enseignant ou élève : 403 (l'ancienne application ouvrait la création à tout compte connecté). Réponses en Turbo Stream, 422, repli HTML.
   - `test/system/teams/essential_management_test.rb`
-    - `open_in_modal(new_teams_course_essential_path(course))` : erreur, puis création, puis édition, dans `assert_no_page_reload`.
-- **Done quand**   : les critères CA-12, CA-13 et CA-14 sont verts ; tout se fait **sans rechargement de page**.
+    - `open_in_modal(new_teams_course_essential_path(course))` : erreur, puis création, puis édition, dans `assert_no_page_reload`. Le contenu est saisi dans Trix (gras, liste) sous la CSP stricte et rendu tel quel sur la page de la fiche.
+- **Done quand**   : les critères CA-12, CA-13 et CA-14 sont verts ; le contenu se saisit dans l'**éditeur riche** ; tout se fait **sans rechargement de page**.
 - **Hotwire**      : comme B2 (modales, 422, trois streams, repli HTML).
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/essentials/new.html.erb`, `edit.html.erb` et `_form.html.erb`
 - **Fiches d'inventaire** : CA-12, CA-13, CA-14.
@@ -1593,11 +1602,11 @@ Chaque lot vertical :
   - `app/infrastructure/queries/assessment/exercise_progress_query.rb`
     - Pour un élève : `badge_level`, `best_score_percent`, `mastery`, `completed_count`, `started_session_public_id`.
   - `app/controllers/assessment/exercises_controller.rb`
-    - `show`. `ReadPublishedPolicy` (refus → 404), puis `RevealAnswersPolicy` pour l'aperçu : **vrai pour l'équipe seulement** ; l'élève voit les corrections dans sa session, pas ici. `StartSessionPolicy` décide du bouton.
+    - `show`. `ReadPublishedPolicy` (refus → 404), puis `RevealAnswersPolicy` pour l'aperçu : **vrai pour l'équipe et l'enseignant** ; faux pour l'élève, qui voit les corrections dans sa session, pas ici. `StartSessionPolicy` décide du bouton.
   - `app/views/assessment/exercises/show.html.erb`
     - Titre, description, nombre de questions, matière. Élève : progression, « Commencer » (POST `exercise_sessions_path`) ou « Reprendre » et « Recommencer » (`restart: true`). Équipe : `content_status_panel` et « Modifier » (modale de B5).
   - `app/views/assessment/exercises/_questions_preview.html.erb`
-    - Questions dans `data-controller="math"`. La marque « Proposition correcte » n'est rendue que si `reveal`. **Aucun `cache`** dans ce partial ni dans la vue.
+    - Questions dans `data-controller="math"`. La marque « Proposition correcte » n'est rendue que si `reveal`. **Aucun `cache`** dans ce partial ni dans la vue : c'est ce qui empêche le HTML d'un enseignant ou de l'équipe d'être resservi à un élève.
   - `app/views/assessment/exercises/_student_progress.html.erb`
   - `config/locales/assessment/exercises.fr.yml`
 - **Dépend de**    : socle
@@ -1606,7 +1615,7 @@ Chaque lot vertical :
   - `test/infrastructure/queries/assessment/exercise_progress_query_test.rb`
   - `test/controllers/assessment/exercises_controller_test.rb`
   - `test/integration/assessment/answer_leak_test.rb`
-    - TR-cadre-3. Sous `with_fragment_caching`, l'équipe affiche l'exercice, puis l'enseignant, puis l'élève. Le HTML de l'enseignant et de l'élève ne contient ni la marque de proposition correcte ni l'identifiant d'une proposition correcte.
+    - TR-cadre-3. Sous `with_fragment_caching`, l'équipe affiche l'exercice, puis l'enseignant, puis l'élève. Le HTML de l'équipe et de l'enseignant contient la marque « Proposition correcte » ; celui de l'élève ne contient ni la marque ni l'identifiant d'une proposition correcte.
   - `test/system/assessment/exercise_page_test.rb`
     - L'élève voit sa progression et clique « Commencer » : il arrive sur la première question.
 - **Done quand**   : les critères AS-02 et AS-39 sont verts.
@@ -1615,7 +1624,7 @@ Chaque lot vertical :
   - `⟨ancienne⟩ views/assessment/exercises/show.html.erb`, `_questions_list.html.erb` et `_exercise.html.erb`
   - `⟨ancienne⟩ views/components/_question_card.html.erb`
 - **Fiches d'inventaire** : AS-02, AS-39. Sécurité n° 29.
-- **Non-régression** : aucune proposition correcte servie par un cache partagé entre les rôles.
+- **Non-régression** : aucune proposition correcte servie à un élève, ni directement ni par un cache partagé entre les rôles.
 - **UDR**          : UDR-0021 — Page exercice
 
 ---
@@ -1681,7 +1690,7 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui (Stimulus)
 - **Fichiers**     :
   - `app/infrastructure/queries/assessment/session_result_query.rb`
-    - `Row(exercise, essential, score_percent, grade_on_20, correct_count, question_count, mastery, badge_level, earned_now, review:)`. `review` : pour chaque question, les propositions choisies et correctes, et l'explication. Le contrôleur applique `ReadSessionPolicy`, puis `RevealAnswersPolicy` : **l'enseignant voit le score et la note, pas les propositions correctes** (ADR-0028).
+    - `Row(exercise, essential, score_percent, grade_on_20, correct_count, question_count, mastery, badge_level, earned_now, review:)`. `review` : pour chaque question, les propositions choisies et correctes, et l'explication. Le contrôleur applique `ReadSessionPolicy`, puis `RevealAnswersPolicy` : **l'enseignant voit le score, la note et la revue complète, propositions correctes comprises** (décision du porteur du 2026-09-25, amendement de l'ADR-0028). La session étant close, l'élève propriétaire voit lui aussi sa revue : toutes ses questions sont tentées.
   - `app/controllers/assessment/session_results_controller.rb`
     - `show`, pour student, teacher et team. Session absente : 404 ; refus : 403 ; session non terminée : retour à la session.
   - `app/views/assessment/session_results/show.html.erb`
@@ -1697,7 +1706,7 @@ Chaque lot vertical :
 - **Test associé** :
   - `test/infrastructure/queries/assessment/session_result_query_test.rb`
   - `test/controllers/assessment/session_results_controller_test.rb`
-    - Autre élève : 403. Enseignant d'une classe active de l'élève : 200, sans proposition correcte dans le HTML. Équipe : 200.
+    - Autre élève : 403. Enseignant d'une classe active de l'élève : 200, avec les propositions correctes marquées dans la revue. Équipe : 200.
   - `test/system/assessment/session_result_test.rb`
     - 10/10 : « Diamant » et « Nouveau badge ! » ; 9/10 : « Or » ; « Recommencer » ouvre une nouvelle session.
 - **Done quand**   : les critères AS-11 (affichage), AS-12 et AS-13 sont verts.
@@ -1838,7 +1847,7 @@ Chaque lot vertical :
   - `app/infrastructure/queries/classroom/classroom_overview_query.rb`
     - Cours assignés actifs et publiés, avec `classroom_course_path` ; puis, **seulement si `show_roster`**, les élèves (`public_id, display_name, contact, last_score_percent`).
   - `app/controllers/classroom/classrooms_controller.rb`
-    - `allow_roles :teacher, :team`. En-tête par `ClassroomHeaderQuery` ; `ReadClassroomPolicy`. Un élève reçoit 403 : il n'a pas accès à cette page, ni au code.
+    - `allow_roles :teacher, :team`. En-tête par `ClassroomHeaderQuery` ; `ReadClassroomPolicy`. Un élève reçoit 403 : il n'a pas accès à cette page ni à la liste nominative (il voit le code de sa classe sur ses propres pages, A2 et A3).
   - `app/views/classroom/classrooms/show.html.erb`
   - `app/views/classroom/classrooms/_header.html.erb`
     - Nom, année scolaire, code en majuscules et bouton « Copier » ; effectif / plafond.
@@ -2201,14 +2210,14 @@ Chaque lot vertical :
 
 ---
 
-## Lot S2 — Établissements : création avec classes, liste nationale, fiche
+## Lot S2 — Établissements : liste nationale, fiche, modification
+
+> **Pas de formulaire de création** (décision du porteur du 2026-09-25) : un établissement n'arrive que par l'import JSON (S3), qui génère ses classes. Ce lot ne livre ni `new`, ni `create`, ni `School::CreateSchool`.
 
 - **Couche**       : domaine (DTO, use cases) + infrastructure (queries) + delivery + ui
 - **Fichiers**     :
   - `app/domain/dtos/school/school_input.rb`
-    - `drena_public_id, name` (150), `sigle` (20), `school_type` ∈ `SCHOOL_TYPES` (Public, Privé, Mixte), `status` ∈ `STATUSES` (défaut `active`), `cycle` ∈ `CYCLES` (proposé par `School.cycle_for(name:)`, modifiable par l'équipe).
-  - `app/domain/use_cases/school/create_school.rb`
-    - `ManageSchoolPolicy` ; DRENA ; dans **une transaction** : `schools.create` (nom pris dans la DRENA : `:conflict`), puis `DefaultClassroomPlan.rows_for(school:, lookup: taxonomy.lookup)`, puis codes tirés par `JoinCode.generate_unique` contre `taken_join_codes`, puis `classrooms.insert_generated` pour `SchoolYear.current`, `max_students` 80 (ADR-0030). Audit `school.changed`. Renvoie l'école, le nombre de classes créées et les niveaux ou séries sautés. **Aucun élève de démonstration.**
+    - Entrée de la modification : `drena_public_id, name` (150), `sigle` (20), `school_type` ∈ `SCHOOL_TYPES` (Public, Privé, Mixte), `status` ∈ `STATUSES`, `cycle` ∈ `CYCLES` (posé à l'import, modifiable par l'équipe).
   - `app/domain/use_cases/school/update_school.rb`
     - Nom, sigle, DRENA, type, statut, cycle. Ne régénère **jamais** les classes.
   - `app/domain/use_cases/school/deactivate_school.rb`
@@ -2220,9 +2229,9 @@ Chaque lot vertical :
   - `app/infrastructure/queries/school/school_detail_query.rb`
     - Fiche (SC-05) : l'école, ses classes de l'année courante groupées par niveau (nom, code affiché, effectif, enseignants), ses enseignants.
   - `app/controllers/teams/schools_controller.rb`
-    - `index` (frame `schools` seul quand la requête vient du frame), `show`, `new`, `create`, `edit`, `update`, `deactivate`, `destroy`.
+    - `index` (frame `schools` seul quand la requête vient du frame), `show`, `edit`, `update`, `deactivate`, `destroy`. Ni `new` ni `create` : la route ne les dessine pas.
   - `app/views/teams/schools/index.html.erb`
-    - Filtres visant `turbo_frame_tag "schools"` (`data-turbo-action="advance"`), `ui_pagination`. Boutons « Nouvel établissement » et « Importer des établissements » (`new_teams_import_path(kind: "schools")`), en `data-turbo-frame="modal"`.
+    - Filtres visant `turbo_frame_tag "schools"` (`data-turbo-action="advance"`), `ui_pagination`. Action principale de l'écran : le bouton « Importer des établissements » (`new_teams_import_path(kind: "schools")`, en `data-turbo-frame="modal"`). Aucun bouton de création unitaire. Liste vide : un état vide invite à importer le premier fichier.
   - `app/views/teams/schools/_filters.html.erb`
   - `app/views/teams/schools/_school_row.html.erb`
   - `app/views/teams/schools/show.html.erb`
@@ -2230,11 +2239,8 @@ Chaque lot vertical :
   - `app/views/teams/schools/_header.html.erb`
   - `app/views/teams/schools/_classroom_group.html.erb`
   - `app/views/teams/schools/_form.html.erb`
-    - `form_with id: "school-form"`. Le cycle est pré-rempli selon le nom ; une aide explique qu'une école « collège » ne reçoit que le premier cycle.
-  - `app/views/teams/schools/new.html.erb`
+    - `form_with id: "school-form"`, pour la modification seulement. Une aide rappelle que changer le type ou le cycle ne crée ni ne supprime aucune classe.
   - `app/views/teams/schools/edit.html.erb`
-  - `app/views/teams/schools/create.turbo_stream.erb`
-    - Toast « Établissement créé : 77 classes générées » (nombre réel, et niveaux sautés s'il y en a), modale refermée, `prepend` de la ligne dans la liste.
   - `app/views/teams/schools/update.turbo_stream.erb`
     - Toast, `replace` de la ligne et de l'en-tête (chacun ignoré s'il n'est pas sur la page).
   - `app/views/teams/schools/deactivate.turbo_stream.erb`
@@ -2244,8 +2250,6 @@ Chaque lot vertical :
 - **Dépend de**    : socle
 - **Test associé** :
   - `test/domain/dtos/school/school_input_test.rb`
-  - `test/domain/use_cases/school/create_school_test.rb`
-    - Avec le référentiel de développement : lycée public **77** classes, lycée privé **38**, lycée mixte 38 (barème privé), « Collège moderne » public **28** et aucune de second cycle ; noms espacés (« 6ème 1 », « Tle D 3 ») ; une `1ere` sans série liée est sautée et comptée ; codes d'adhésion tous distincts ; échec d'insertion des classes → **aucune école créée**.
   - `test/domain/use_cases/school/update_school_test.rb`
     - Changer le cycle ne crée ni ne supprime de classe.
   - `test/domain/use_cases/school/deactivate_school_test.rb`
@@ -2253,19 +2257,19 @@ Chaque lot vertical :
   - `test/infrastructure/queries/school/schools_query_test.rb`
   - `test/infrastructure/queries/school/school_detail_query_test.rb`
   - `test/controllers/teams/schools_controller_test.rb`
-    - Non-équipe : 403 ; Turbo Stream ; 422 ; repli HTML.
+    - Non-équipe : 403 ; Turbo Stream ; 422 ; repli HTML ; `GET /teams/schools/new` et `POST /teams/schools` ne créent rien (aucune route).
   - `test/system/teams/schools_test.rb`
-    - Filtrer la liste ; créer un lycée public (toast « 77 classes ») ; le modifier ; le désactiver ; échouer à supprimer un établissement référencé : tout **sans rechargement de page**.
-- **Done quand**   : les critères SC-03, SC-04, SC-05, SC-06, SC-07 et SC-09 sont verts ; l'entrée « Établissements » de la navigation équipe mène à la liste ; tout se fait **sans rechargement de page**.
-- **Hotwire**      : liste filtrée et paginée dans un frame ; modales ; 422 ; streams `create`, `update`, `deactivate`, `destroy` ; repli HTML.
+    - L'action principale de la liste ouvre la modale d'import ; aucun bouton de création ; filtrer la liste ; modifier un établissement ; le désactiver ; échouer à supprimer un établissement référencé : tout **sans rechargement de page**.
+- **Done quand**   : les critères SC-04, SC-05, SC-06 et SC-07 sont verts, ainsi que le scénario « Pas de formulaire de création » de SC-03 ; l'entrée « Établissements » de la navigation équipe mène à la liste, dont l'action principale est l'import ; tout se fait **sans rechargement de page**.
+- **Hotwire**      : liste filtrée et paginée dans un frame ; modales ; 422 ; streams `update`, `deactivate`, `destroy` ; repli HTML.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/index.html.erb`, `show.html.erb`, `_form.html.erb` ; `⟨ancienne⟩ domain/…/generate_default_classrooms.rb` (table des classes, reprise par l'ADR-0030) ; capture `teams/team-school-id-school.png`
-- **Fiches d'inventaire** : SC-03 à SC-07, SC-09. CL-01 (génération).
-- **Non-régression** : aucun élève de démonstration créé ; aucune école sans ses classes ; supprimer une école utilisée est refusé.
+- **Fiches d'inventaire** : SC-03 (pas de création à l'écran), SC-04 à SC-07.
+- **Non-régression** : aucun écran ni aucune route ne crée un établissement ; modifier une école ne crée ni ne supprime de classe ; supprimer une école utilisée est refusé.
 - **UDR**          : UDR-0036 — Établissements
 
 ---
 
-## Lot S3 — Import des établissements, avec génération des classes
+## Lot S3 — Import des établissements, avec génération des classes (seule voie de création)
 
 - **Couche**       : domaine (adaptateur d'import) + delivery (job) + ui (aide) + schéma + performance
 - **Fichiers**     :
@@ -2284,18 +2288,18 @@ Chaque lot vertical :
 - **Dépend de**    : socle
 - **Test associé** :
   - `test/domain/use_cases/school/import_schools_test.rb`
-    - `assert_importer_contract` ; alias ; « Collège » (accents et casse ignorés) → `first` ; mixte → barème privé ; DRENA par élément ; doublon en base et doublon dans le fichier ignorés et comptés ; **fichier mixte → rapport exact** (8 écoles valides, 2 invalides à `schools[3].type` et `schools[6].name`, 1 doublon : `imported_count` 8, `error_count` 2, `skipped_count` 1, `total_count` 11, aucune ligne ni classe pour les invalides) ; enveloppe `lnclass.courses` → `rejected`, zéro écriture ; lot en échec (code d'adhésion pris entre la validation et l'écriture) rejoué élément par élément.
+    - `assert_importer_contract` ; alias ; « Collège » (accents et casse ignorés) → `first` ; mixte → barème privé ; avec le référentiel de développement : lycée public **77** classes, lycée privé **38**, lycée mixte 38, collège public **28** et aucune de second cycle ; noms espacés (« 6ème 1 », « Tle D 3 ») ; une `1ere` sans série liée est sautée et comptée dans `details` ; échec d'insertion des classes d'une école → cette école en erreur, sans aucune ligne ; DRENA par élément ; doublon en base et doublon dans le fichier ignorés et comptés ; **fichier mixte → rapport exact** (8 écoles valides, 2 invalides à `schools[3].type` et `schools[6].name`, 1 doublon : `imported_count` 8, `error_count` 2, `skipped_count` 1, `total_count` 11, aucune ligne ni classe pour les invalides) ; enveloppe `lnclass.courses` → `rejected`, zéro écriture ; lot en échec (code d'adhésion pris entre la validation et l'écriture) rejoué élément par élément.
   - `test/jobs/school/import_schools_job_test.rb`
     - Le job écrit l'extrait réel `schools_legacy_sample.json` du socle : écoles et classes créées, rapport `completed`.
   - `test/system/school/import_schools_test.rb`
     - `open_in_modal(new_teams_import_path(kind: "schools"))` : l'aide du type est affichée ; un fichier mixte donne, **sans rechargement de page**, le rapport exact avec les chemins d'erreur.
   - `test/performance/school/import_schools_performance_test.rb`
     - **500 écoles** (44 % de collèges, public, privé et mixte) → environ **35 000 classes**, `RunImport` complet en **moins de 120 s** ; mémoire du processus consignée. Ignoré sans `PERF=1`.
-- **Done quand**   : le critère SC-08 est vert ; un fichier de l'ancienne application, **une fois enveloppé**, s'importe classes comprises ; un fichier mixte donne un rapport exact ; le suivi se fait **sans rechargement de page** ; le test de performance passe en local.
+- **Done quand**   : les critères SC-03 (création par import), SC-08 et SC-09 sont verts ; un fichier de l'ancienne application, **une fois enveloppé**, s'importe classes comprises ; un fichier mixte donne un rapport exact ; le suivi se fait **sans rechargement de page** ; le test de performance passe en local.
 - **Hotwire**      : aucun contrôleur propre ; la modale, les streams et le suivi sont ceux du socle (0e) ; ce lot fournit le partial du type.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/_import_form.html.erb` ; `⟨ancienne⟩ domain/…/school_import_strategy.rb` pour les clés acceptées ; exemples `.Business/content_pedagogics/DRENAS/`.
-- **Fiches d'inventaire** : SC-08, SC-09, TR-28.
-- **Non-régression** : aucun élève de démonstration ; codes d'adhésion uniques ; une école invalide ne bloque pas les valides ; aucune école existante mise à jour.
+- **Fiches d'inventaire** : SC-03, SC-08, SC-09, TR-28. CL-01 (génération).
+- **Non-régression** : aucun élève de démonstration ; codes d'adhésion uniques ; une école invalide ne bloque pas les valides ; aucune école existante mise à jour ; les classes naissent avec leur école importée, jamais avant (lycée public 77, privé ou mixte 38, collège public 28).
 - **UDR**          : UDR-0037 — Import des établissements
 
 ---
@@ -2308,7 +2312,7 @@ Chaque lot vertical :
     - `Catalog::ImportCourseTree`, `KIND = "course_tree"`, policy `ManageContentPolicy`. Pas de cible.
     - `prepare` : `taxonomy.lookup`, `courses.existing_keys`, `taken_slugs` des cours et des fiches.
     - `validate_root` : un cours et toute sa descendance. `level_name`, `series_name` et `material_name` résolus par `TaxonomyLookup` (`unknown_level`…), couple niveau–série permis (`series_not_allowed`) ; cours, fiches et exercices par `ContentNode` ; clé `(NaturalKey(nom), level_id, material_id, series_id)`. Le plan : slugs par `Slug.unique`, `public_id` des exercices, positions, tout en `draft` (la clé `status` est ignorée).
-    - `write` : `ContentTreeWriter#write(courses:, author_id:, at:)`.
+    - `write` : `ContentTreeWriter#write(courses:, author_id:, at:)`. Le `content` HTML des cours et des fiches est **assaini** puis écrit dans leur rich text (0e).
   - `app/jobs/catalog/import_course_tree_job.rb`
   - `config/schemas/lnclass.course-tree.v1.json`
   - `app/views/teams/imports/kinds/_course_tree.html.erb`
@@ -2319,6 +2323,7 @@ Chaque lot vertical :
     - `assert_importer_contract` ; « Physique Chimie » résolue ; erreur localisée (`courses[3].essentials[1].exercises[0].questions[2].answers`) ; doublons ; tout en `draft` ; **fichier mixte → rapport exact** (valides écrits avec toute leur descendance, invalides sans aucune ligne, doublons comptés) ; rejet en bloc sur une version 2 ; lot en échec rejoué élément par élément.
   - `test/jobs/catalog/import_course_tree_job_test.rb`
     - Avec l'extrait réel `course_tree_tle_d_sample.json` du socle.
+    - **HTML importé assaini** : un cours et une fiche dont le `content` contient `<script>`, un attribut `onclick` et un lien `javascript:` sont importés ; en base, leur rich text ne contient plus rien de cela, et garde le gras, les listes et les formules `$…$`.
   - `test/system/catalog/import_course_tree_test.rb`
     - `open_in_modal(new_teams_import_path(kind: "course_tree"))` : fichier mixte, rapport exact **sans rechargement de page**.
   - `test/performance/catalog/import_course_tree_performance_test.rb`
@@ -2338,7 +2343,7 @@ Chaque lot vertical :
 - **Fichiers**     :
   - `app/domain/use_cases/catalog/import_essentials.rb`
     - `Catalog::ImportEssentials`, `KIND = "essentials"`, policy `ManageContentPolicy`. Cible `course` (slug) obligatoire : `CourseRepository#find_by_slug`, sinon rejet en bloc. Élément racine : une fiche et ses exercices. Clé `(course_id, NaturalKey(nom))`. Positions à la suite de `next_position`. Tout en `draft`.
-    - `write` : `ContentTreeWriter#write(essentials:, …)`.
+    - `write` : `ContentTreeWriter#write(essentials:, …)`. Le `content` HTML de chaque fiche est **assaini** puis écrit dans son rich text (0e).
   - `app/jobs/catalog/import_essentials_job.rb`
   - `config/schemas/lnclass.essentials.v1.json`
   - `app/views/teams/imports/kinds/_essentials.html.erb`
@@ -2348,6 +2353,7 @@ Chaque lot vertical :
   - `test/domain/use_cases/catalog/import_essentials_test.rb`
     - Contrat ; cours inconnu → `rejected` ; **fichier mixte → rapport exact** ; doublon ; lot rejoué.
   - `test/jobs/catalog/import_essentials_job_test.rb`
+    - **HTML importé assaini** : une fiche dont le `content` contient `<script>` et un attribut `onerror` est importée ; son rich text en base n'en garde rien.
   - `test/system/catalog/import_essentials_test.rb`
     - Fichier mixte, rapport exact **sans rechargement de page**.
   - `test/performance/catalog/import_essentials_performance_test.rb`
@@ -2396,8 +2402,8 @@ Chaque lot vertical :
   - `test/system/boucle_pedagogique_test.rb`
     - Base vierge **sans seed de contenu** (seul `identity.rb`). L'équipe accepte l'invitation d'amorçage, enrôle son TOTP, crée par les vrais boutons le référentiel (niveau « Tle », série « D », liés ; matière SVT, catégorie science), une DRENA et un lycée public : **6 classes « Tle D 1 » à « Tle D 6 »** générées, les autres niveaux du barème étant absents et comptés comme sautés. Elle crée un cours, une fiche essentielle et un exercice de 2 questions, et les publie.
     - L'enseignant s'inscrit, déclare une classe générée, ouvre la classe, le cours et la fiche, assigne l'exercice ; il génère un code de récupération pour un élève.
-    - L'élève ouvre `/c/<code>`, s'inscrit, voit l'exercice sur son accueil (sans le code de sa classe), répond aux 2 questions ; la session se clôt seule ; il voit « Félicitations ! », 20/20 et le badge « Diamant ».
-    - L'enseignant ouvre le résultat de l'élève : score et note, sans propositions correctes.
+    - L'élève ouvre `/c/<code>`, s'inscrit, voit l'exercice sur son accueil (avec le code de sa classe, en majuscules), répond aux 2 questions ; la session se clôt seule ; il voit « Félicitations ! », 20/20 et le badge « Diamant ».
+    - L'enseignant ouvre le résultat de l'élève : score, note et revue, propositions correctes comprises.
     - Chaque écriture (création, publication, assignation, réponse) est enveloppée dans `assert_no_page_reload`. Partie élève rejouée en viewport mobile.
   - `test/system/imports_end_to_end_test.rb`
     - L'équipe importe un fichier d'écoles au format de l'ancienne application **enveloppé**, puis un `course_tree` ; elle suit le rapport jusqu'à « Terminé » sans recharger ; les classes et le contenu en brouillon apparaissent dans leurs écrans ; un fichier **mixte** affiche ses compteurs exacts et ses chemins d'erreur, et seuls ses éléments valides sont en base ; un fichier à l'enveloppe invalide finit « Rejeté » sans rien écrire.
@@ -2436,13 +2442,14 @@ Chaque lot vertical :
 | Migrations, schéma, modèles `Orm::`, fabriques, `test_helper` | tous | **0a** |
 | `Gemfile`, `package.json`, `esbuild.config.mjs`, `config/environments/test.rb` | tous | **0a** ; `config/credentials.yml.enc` par l'orchestrateur |
 | Ports, entités, policies, DTO du socle, `Shared::Result`, `TransactionPort` | tous | **0b**, gelés au merge |
-| `DefaultClassroomPlan`, `TaxonomyLookup`, `Slug`, `NaturalKey`, `ContentNode`, `ImportKind` | S2, S3, I1 à I3, seeds | **0b** |
+| `DefaultClassroomPlan`, `TaxonomyLookup`, `Slug`, `NaturalKey`, `ContentNode`, `ImportKind` | S3, I1 à I3, seeds | **0b** |
 | `ApplicationController`, `AuthenticatedController`, `Teams::BaseController`, concerns, helpers de test système | tous | **0d** |
 | Repositories `identity` et transaction | B7, B8, D1, A1, tous les use cases | **0d** |
-| Les 18 autres repositories | par exemple `AssignmentRepository` : A2, A3, B3, C2, D4 à D7 ; `ClassroomRepository#insert_generated` : S2, S3, seeds | **0e** |
+| Les 18 autres repositories | par exemple `AssignmentRepository` : A2, A3, B3, C2, D4 à D7 ; `ClassroomRepository#insert_generated` : S3, seeds | **0e** |
 | Moteur d'import (`StartImport`, `RunImport`, contrat `Importer`, `Shared::ImportJob`, `Teams::ImportsController`, écran de suivi, `config.x.import_jobs`) | S3, I1, I2, I3 | **0e** ; chaque lot n'ajoute que son adaptateur, son job, son schéma et son partial `kinds/_<kind>` |
 | `ContentTreeWriter` | I1, I2, I3 | **0e** |
-| Chargement Stimulus par motif, `math_controller`, morphing dans le layout | A1 à D8, R, S | **0e** : aucun manifeste à éditer |
+| Chargement Stimulus par motif, `math_controller`, `rich_text_editor_controller`, gabarit de rendu Action Text, morphing dans le layout | A1 à D8, R, S | **0e** : aucun manifeste à éditer |
+| Action Text : framework, table, `has_rich_text` ; `RichTextSanitizer` | B1 à B4, I1, I2 | **0a** ; assainissement **0e** |
 | `ReferentialOptionsQuery`, `SchoolOptionsQuery`, `ClassroomHeaderQuery` | B2, D1, D4 à D8, S2, S3, A3 | **0e** |
 | `badges_helper`, `content_status_helper` (`content_status_panel`) | A2, B1 à B5, C1, C3 | **0e** |
 | Locales communes (`shared/common.fr.yml`) | tous | **0d** |
@@ -2513,17 +2520,17 @@ Source : [feuille de route §6](../refonte-application/feuille-de-route.md#6-tra
 | CO-09 | Toasts | 0c (composant), tous les streams |
 | SC-01 | Gérer les DRENA | S1 |
 | SC-02 | *(écartée par le porteur)* Importer des DRENA : elles se créent à l'écran | — |
-| SC-03 | Créer un établissement | S2 |
+| SC-03 | Créer un établissement | S3 (import JSON, seule voie) ; S2 (aucun formulaire de création) |
 | SC-04 | Liste nationale des établissements | S2 |
 | SC-05 | Consulter un établissement | S2 |
 | SC-06 | Modifier un établissement | S2 |
 | SC-07 | Supprimer un établissement (ou le désactiver) | S2 |
 | SC-08 | Importer des établissements | S3 (adaptateur), 0e (moteur) |
-| SC-09 | Générer les classes par défaut | 0b (`DefaultClassroomPlan`), 0e (`insert_generated`), S2 (création unitaire), S3 (import) |
+| SC-09 | Générer les classes par défaut | 0b (`DefaultClassroomPlan`), 0e (`insert_generated`), S3 (import) |
 | SC-26 | API des établissements d'une DRENA | D1 |
 | SC-27 | Rattachement à l'école à l'inscription | D1 |
-| CL-01 | Créer une classe | D8 (unitaire), S2 et S3 (génération) |
-| CL-04 | Générer et afficher le code | 0b (`JoinCode`), D8 et S2 (génération), D4 (affichage) |
+| CL-01 | Créer une classe | D8 (unitaire), S3 (génération) |
+| CL-04 | Générer et afficher le code | 0b (`JoinCode`), D8 et S3 (génération), D4 (affichage) |
 | CL-06 | Rejoindre par `/c/<code>` | A1 |
 | CL-07 | S'inscrire avec un code | A1 |
 | CL-08 | Vérification du code (la liste des classes est écartée) | A1 |
@@ -2607,7 +2614,9 @@ Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne su
 | `Ports::Shared::TransactionPort#attempt` : un bloc dont l'écriture est refusée par la base renvoie `failure(:conflict)` au lieu de lever. C'est ce qui permet au moteur de rejouer un lot élément par élément sans nommer une exception d'infrastructure dans le domaine. | Précision | ADR-0026 |
 | Le moteur d'import est câblé par `Shared::ImportJob` et `config.x.import_jobs` (nom du job par type, résolu à l'appel) : un lot d'import n'édite aucun fichier du socle. | Précision | ADR-0039 |
 | **Un test de performance par type** (`test/performance/<ctx>/import_<kind>_performance_test.rb`), au lieu du fichier unique `test/performance/imports_test.rb` de l'ADR-0039 : chaque lot possède le sien, sans collision. Hors CI, joués avec `PERF=1` avant la recette. | Écart assumé | ADR-0039 |
-| `courses.content` et `essentials.content` en **`text`** (HTML simple nettoyé à l'affichage, saisi dans un `text_area`) : Action Text a été retiré en V0 ; l'éditeur riche est reporté. | Précision | ADR-0035 |
+| **Éditeur riche en V1** (retour du porteur du 2026-09-25) : le contenu des cours et des fiches essentielles est un rich text Action Text (`has_rich_text :content`), saisi dans Trix. Trix et `@rails/actiontext` sont chargés **uniquement sur les pages d'édition**, par import dynamique (`rich-text-editor`), hors du point d'entrée commun de 60 Ko. Les imports I1 et I2 écrivent du HTML **assaini** dans le même rich text. | **Amendement** | ADR-0051 (« Amendement du 2026-09-25 ») |
+| **Pièces jointes de l'éditeur refusées en V1, décision du porteur du 2026-09-25** : éditeur de texte uniquement. Le contrôleur `rich-text-editor` annule `trix-file-accept` et aucun `direct_upload` n'est branché (ADR-0047, ADR-0049). | Précision | ADR-0051 |
+| **Pas de formulaire de création d'établissement ; classes générées à l'import seulement** (retour du porteur du 2026-09-25) : un établissement n'arrive que par l'import JSON (S3), qui génère ses classes ; `School::CreateSchool` n'existe pas en V1. Jamais de classes pré-créées ni semées en production. Totaux : lycée public 77, lycée privé ou mixte 38, collège public 28. | **Amendement** | ADR-0030 |
 | `users.gender` conservé, non nul (`male`, `female`) : l'ancienne application le demandait et le PRD cadre le garde. Confirmé par le porteur le 2026-09-25. | Précision | ADR-0037 |
 | `friendly_id` **retiré** : slugs figés par `Orm::HasFrozenSlug`, `public_id` par `Orm::HasPublicId` ; la table `friendly_id_slugs` de V0 est supprimée. | Précision | ADR-0029 |
 | La CSS de KaTeX est un **fichier séparé** (`katex.css`), chargé par `math_controller` seulement sur les pages qui ont des formules : le budget CSS commun (30 Ko) reste tenu. | Précision | ADR-0051 |
@@ -2669,5 +2678,5 @@ Porte **de vague**, issue de la [feuille de route §5 V1](../refonte-application
 3. Il importe lui-même un fichier réel de l'ancienne application (enveloppé) et un fichier de 500 écoles, et **chronomètre** : moins de 2 min, sinon la porte ne passe pas. Il fait de même avec 200 cours complets.
 4. Il importe un fichier **mixte** qu'il a lui-même préparé (valides, invalides, doublons) : le rapport doit être exact au compteur près, chaque erreur à son chemin JSON, et seuls les éléments valides doivent être en base. Un fichier à la version 2 doit être rejeté en bloc.
 5. Il rejoue au moins ces chemins d'erreur : 6e échec de connexion ; réponse vide ; double soumission ; enseignant hors de sa classe ; brouillon ouvert par son URL ; PIN oublié ; classe pleine ; second import du même type pendant qu'un premier tourne.
-6. Il vérifie le HTML servi à l'élève et à l'enseignant avec les outils du navigateur : aucune proposition correcte hors de la correction de l'élève, et aucun code de classe dans les pages de l'élève.
+6. Il vérifie le HTML servi à l'élève et à l'enseignant avec les outils du navigateur : aucune proposition correcte servie à l'élève hors de sa correction, les propositions correctes bien visibles pour l'enseignant, et le code de la classe affiché à l'élève sans liste nominative.
 7. Il consigne dans `journal.md` ce qu'il a fait, observé et mesuré.
