@@ -1,12 +1,12 @@
 <%# 🌐 UI · components/_modal — <dialog> native, déclencheur facultatif, appelée par ui_modal %>
 <%# Rôle : piège du focus, Échap et fond cliquable fournis par le navigateur ; feuille basse sur mobile %>
-<%# UDR  : 0005 · Stimulus : modal %>
+<%# UDR  : 0005, 0006 · Stimulus : modal · se charge aussi dans le frame « modal » du layout %>
 <div data-controller="modal" data-modal-open-value="<%= open %>" data-action="turbo:before-cache@document->modal#close">
   <% if trigger %>
     <%= ui_button trigger, variant: trigger_variant, icon: trigger_icon,
           data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": id %>
   <% end %>
-  <dialog id="<%= id %>" aria-labelledby="<%= id %>-title" data-modal-target="dialog" data-action="click->modal#backdrop"
+  <dialog id="<%= id %>" aria-labelledby="<%= id %>-title" data-modal-target="dialog" data-action="click->modal#backdrop close->modal#closed turbo:submit-end->modal#submitEnd"
           class="m-auto w-full max-w-none rounded-sheet bg-white p-0 text-ink shadow-pop backdrop:bg-ink/50 open:animate-slide-up max-sm:mb-0 max-sm:rounded-b-none <%= size_class %>">
     <div class="flex items-start justify-between gap-4 px-6 pt-6">
       <h2 id="<%= id %>-title" class="font-display text-xl font-extrabold"><%= title %></h2>

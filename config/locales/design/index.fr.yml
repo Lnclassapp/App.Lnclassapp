@@ -1,6 +1,19 @@
 # Guide de style /design (dev et test uniquement) — UDR-0005, UDR-0006
 fr:
   design:
+    create:
+      created: "« %{name} » a été créé."
+    modal:
+      title: "Nouvel élève"
+      name: "Nom complet"
+      email: "Adresse e-mail"
+      email_hint: "Facultative."
+      cancel: "Annuler"
+      submit: "Créer"
+    frame:
+      title: "Aucun devoir en attente"
+      description: "Ce contenu est arrivé dans un frame paresseux, après son état de chargement."
+      reload: "Recharger le frame"
     toast:
       message: "Notification envoyée par Turbo Stream à %{time}."
     shell:
@@ -34,6 +47,7 @@ fr:
         dropdown: "Menu déroulant"
         tabs: "Onglets"
         notifications: "Toasts"
+        hotwire: "CRUD Hotwire"
         states: "États vide, erreur, chargement"
         pagination: "Pagination"
         shell: "Shell par rôle"
@@ -129,6 +143,11 @@ fr:
           email: "L'adresse e-mail n'est pas valide"
           level: "Choisissez un niveau"
           terms: "Vous devez accepter les conditions"
+      hotwire:
+        intro: "Tous les CRUD passent par Hotwire : le formulaire s'ouvre en modale dans le frame « modal » du layout, un échec le re-rend en 422 avec ses erreurs, un succès répond en Turbo Stream (toast, liste mise à jour) et la modale se ferme."
+        modal: "Modale chargée dans un frame, erreurs en 422"
+        open: "Nouvel élève"
+        frame: "Frame paresseux : chargement, puis contenu"
       modal:
         title: "Assigner l'exercice"
         body: "La modale est une <dialog> native : le focus y reste piégé, Échap la ferme, un clic sur le fond aussi."
