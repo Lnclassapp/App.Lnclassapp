@@ -16,8 +16,6 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -33,11 +31,17 @@ gem "solid_cable"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
+# Dashboard for Solid Queue jobs, mounted under /teams/jobs (ADR-0052)
+gem "mission_control-jobs"
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
+
+# S3-compatible storage for Active Storage (Railway bucket, ADR-0047 to come)
+gem "aws-sdk-s3", require: false
+
+# French locale data for Rails (default locale is :fr)
+gem "rails-i18n", "~> 8.1"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
@@ -71,6 +75,9 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  # Coverage: 100 % lines and branches, blocking (ADR-0024)
+  gem "simplecov", require: false
 end
 
 ############### URL and SLUGS ###########

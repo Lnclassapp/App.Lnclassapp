@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+# This Dockerfile is designed for production, not development. Railway builds it (railway.json, ADR-0052), or build'n'run by hand:
 # docker build -t app_lnclassapp .
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name app_lnclassapp app_lnclassapp
 
@@ -86,6 +86,7 @@ COPY --chown=rails:rails --from=build /rails /rails
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start server via Thruster by default, this can be overwritten at runtime
+# ADR-0052 : Thruster listens on the port Railway provides; Puma listens on TARGET_PORT (3000), passed by Thruster as PORT.
+# The database is prepared by railway.json (preDeployCommand), not by the entrypoint.
 EXPOSE 80
-CMD ["./bin/thrust", "./bin/rails", "server"]
+CMD ["sh", "-c", "HTTP_PORT=${PORT:-80} exec ./bin/thrust ./bin/rails server"]
