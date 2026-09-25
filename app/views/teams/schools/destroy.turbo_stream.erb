@@ -1,5 +1,5 @@
 <%# 🌐 UI · teams/schools/destroy — suppression d'un établissement, ou son refus (422) %>
-<%# Rôle : succès : toast, ligne retirée ; refus : toast d'erreur « Désactivez plutôt cet établissement », ligne re-rendue %>
+<%# Rôle : succès : toast, ligne retirée, puis la liste re-demandée et fusionnée (compteur, état vide, page) ; refus : toast d'erreur, ligne re-rendue %>
 <%# ADR  : 0036 · UDR : 0006, 0036 %>
 <% if @kept_school %>
   <%= turbo_stream_toast t(".referenced"), type: :error %>
@@ -7,4 +7,5 @@
 <% else %>
   <%= turbo_stream_toast t(".done"), type: :success %>
   <%= turbo_stream.remove "school_#{params[:public_id]}" %>
+  <%= turbo_stream.refresh(request_id: nil) %>
 <% end %>

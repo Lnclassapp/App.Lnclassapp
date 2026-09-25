@@ -196,7 +196,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "select[name='school[drena_public_id]'] option:not([value=''])", 2
     assert_select "select[name='school[drena_public_id]'] option[selected][value='#{@drena.public_id}']"
     assert_select "input[name='school[name]'][value='Lycée Moderne'][maxlength='150']"
-    assert_select "input[name='school[sigle]'][value=LM][maxlength='15']"
+    assert_select "input[name='school[sigle]'][value=LM][maxlength='#{Entities::School::School::SIGLE_MAX}']"
     assert_select "select[name='school[school_type]'] option:not([value=''])", 3
     assert_select "select[name='school[school_type]'] option[selected][value=mixed]", text: I18n.t("school_types.mixed")
     assert_select "select[name='school[cycle]'] option[selected][value=first]"
@@ -318,6 +318,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{I18n.t('teams.schools.destroy.done')}/
     assert_select "turbo-stream[action=remove][target=school_#{school.public_id}]"
+    assert_select "turbo-stream[action=refresh]:not([request-id])"
     assert_not Orm::School.exists?(school.id)
     assert_not Orm::Classroom.exists?
   end
@@ -332,6 +333,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: /#{I18n.t('teams.schools.destroy.referenced')}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr#school_#{school.public_id}"
+    assert_select "turbo-stream[action=refresh]", 0
     assert Orm::School.exists?(school.id)
     assert_equal 1, Orm::Classroom.count
   end

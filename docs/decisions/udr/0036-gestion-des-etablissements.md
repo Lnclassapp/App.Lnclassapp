@@ -41,7 +41,7 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
   - `_header.html.erb` → `div#school_header` : retour « Établissements », `ui_card` avec monogramme (sigle, sinon trois premières lettres du nom), `h1`, puis une `dl` sigle · DRENA (`map-pin`) · type · cycle · statut ; actions « Ajouter une classe » (`plus`, modale de création de classe, seulement si l'établissement n'est pas inactif), « Modifier » (`secondary`), « Désactiver » (`ghost`, confirmation `deactivate-school-header`, seulement s'il n'est pas inactif).
   - `section#school_classrooms` : « Classes (n) », année scolaire, un groupe par niveau (ordre des niveaux), une carte `li#classroom_<public_id>` par classe : nom, code d'adhésion (police à chasse fixe), effectif, enseignants.
   - `section#school_teachers` : une carte par enseignant (avatar, nom, `ui_subject_badge` de sa matière), l'établissement principal d'abord.
-- Modale `school-modal` (`size: :lg`), formulaire `school-form` (`_form.html.erb`) : nom (150 au plus), sigle (facultatif, 15 au plus) et DRENA, puis type, cycle, statut ; aide `info` : changer le type ou le cycle ne crée ni ne supprime aucune classe.
+- Modale `school-modal` (`size: :lg`), formulaire `school-form` (`_form.html.erb`) : nom (150 au plus), sigle (facultatif, `SIGLE_MAX` : 20 au plus) et DRENA, puis type, cycle, statut ; aide `info` : changer le type ou le cycle ne crée ni ne supprime aucune classe.
 
 **Tokens**
 
@@ -55,7 +55,7 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - `edit` : `turbo_frame_tag "modal"` → `ui_modal(open: true)` ; hors frame, la même modale s'ouvre sur le shell.
 - `update` : échec de saisie, DRENA disparue ou nom déjà pris dans la DRENA → `render :edit`, 422, erreurs sous chaque champ ; succès → toast, `replace "school_<public_id>"` et `replace "school_header"` (chacun ignoré s'il n'est pas sur la page) ; la modale se ferme par `modal#submitEnd`.
 - `deactivate` (`PATCH`) : toast, `replace` de la ligne et de l'en-tête ; l'en-tête perd « Ajouter une classe » et « Désactiver ». Un établissement déjà inactif répond par le même succès.
-- `destroy` : succès → toast, `remove "school_<public_id>"` ; refus (`:conflict`) → 422, toast d'erreur « … Désactivez plutôt cet établissement. », `replace` de la ligne, ce qui referme la confirmation.
+- `destroy` : succès → toast, `remove "school_<public_id>"`, puis `turbo_stream.refresh(request_id: nil)` : la liste filtrée est re-demandée et fusionnée par morphing, le compteur et l'état vide suivent (le toast survit au morph) ; refus (`:conflict`) → 422, toast d'erreur « … Désactivez plutôt cet établissement. », `replace` de la ligne, ce qui referme la confirmation.
 - Repli HTML : chaque écriture redirige vers `schools_path` avec `notice` ou `alert`.
 - `GET /teams/schools/new` répond 404 (aucun établissement n'a ce `public_id`) ; `POST /teams/schools` n'a pas de route.
 
@@ -81,4 +81,3 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - Modifier un établissement ne crée ni ne supprime jamais de classe ; le seul geste qui en ajoute une est « Ajouter une classe ».
 - Aucune suppression en cascade : un établissement utilisé se désactive. Ses classes, élèves et enseignants restent.
 - Toute autre liste d'administration longue (plusieurs centaines de lignes, plusieurs filtres) reprend ce patron : formulaire `GET` hors du frame, frame `advance`, compteur `aria-live`, actions de ligne en icônes à libellé caché.
-- La suppression ne met à jour ni le compteur ni l'état vide : ils se recalculent au prochain filtre ou au rechargement.

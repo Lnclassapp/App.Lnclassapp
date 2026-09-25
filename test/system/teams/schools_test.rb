@@ -150,6 +150,25 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     assert Orm::School.exists?(used.id)
   end
 
+  test "SC-07: deleting the last school of a filter updates the count and shows the empty state, filters kept" do
+    create_school(drena: @bouake, name: "Lycée Municipal")
+    last = create_school(drena: @abidjan, name: "Lycée Moderne")
+    visit schools_path(drena: @abidjan.public_id)
+    assert_selector "#schools_total", text: I18n.t("teams.schools.index.total", count: 1)
+
+    assert_no_page_reload do
+      within("#school_#{last.public_id}") { click_on I18n.t("#{row_scope}.delete") }
+      within("#school_#{last.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
+
+      assert_toast I18n.t("teams.schools.destroy.done")
+      assert_selector "#schools_empty", text: I18n.t("teams.schools.index.no_match_title")
+      assert_selector "#schools_total", text: I18n.t("teams.schools.index.total", count: 0)
+      assert_no_selector "#schools_list"
+      assert_field "filter_drena", with: @abidjan.public_id
+    end
+    assert_current_path schools_path(drena: @abidjan.public_id)
+  end
+
   test "on a phone, neither the list nor a school's page scrolls sideways" do
     school = create_school(drena: @abidjan, name: "Lycée Classique d'Abidjan", sigle: "LCA")
     create_classroom(school:, name: "6ème 1")

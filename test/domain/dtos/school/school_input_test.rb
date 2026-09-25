@@ -37,7 +37,7 @@ module Dtos
         assert input(cycle: nil).tap(&:validate).errors.of_kind?(:cycle, :inclusion)
       end
 
-      test "la DRENA et le nom sont obligatoires ; le nom compte 150 caractères au plus, le sigle 15" do
+      test "la DRENA et le nom sont obligatoires ; le nom compte NAME_MAX caractères au plus, le sigle SIGLE_MAX" do
         assert input(name: "a" * School::NAME_MAX, sigle: "b" * School::SIGLE_MAX).valid?
         assert input(name: "a" * (School::NAME_MAX + 1)).tap(&:validate).errors.of_kind?(:name, :too_long)
         assert input(sigle: "b" * (School::SIGLE_MAX + 1)).tap(&:validate).errors.of_kind?(:sigle, :too_long)

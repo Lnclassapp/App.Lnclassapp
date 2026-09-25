@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Dtos::School::SchoolInput
-# Rôle : modification d'un établissement : DRENA, nom (150), sigle (15), type, statut et cycle ; jamais de création
+# Rôle : modification d'un établissement : DRENA, nom (150), sigle (20), type, statut et cycle ; jamais de création
 # ADR  : 0030, 0036 · UDR : 0036
 module Dtos
   module School
