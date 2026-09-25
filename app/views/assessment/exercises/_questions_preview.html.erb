@@ -1,0 +1,57 @@
+<%# 🌐 UI · assessment/exercises/_questions_preview — aperçu des questions d'un exercice (AS-39) %>
+<%# Rôle : énoncés et propositions ; marque « Proposition correcte », explication et identifiants seulement si reveal %>
+<%# ADR  : 0028, 0054 · UDR : 0007, 0021 · aucun `cache` ici : sa clé ignorerait le rôle (sécurité n° 29) · Stimulus : math %>
+<section id="exercise_questions" aria-labelledby="exercise_questions_title">
+  <div class="mb-4">
+    <h2 id="exercise_questions_title" class="font-display text-xl font-extrabold"><%= t(".title") %></h2>
+    <p class="mt-1 text-sm text-mute"><%= reveal ? t(".reveal_hint") : t(".student_hint") %></p>
+  </div>
+  <% if questions.empty? %>
+    <div id="exercise_questions_empty">
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "question-mark-circle" %>
+    </div>
+  <% else %>
+    <ol class="space-y-4" data-controller="math">
+      <% questions.each do |question| %>
+        <li class="question rounded-card border border-line bg-white p-4 shadow-card sm:p-5">
+          <div class="flex gap-3">
+            <span class="grid size-8 shrink-0 place-items-center rounded-ln bg-brand-soft text-sm font-bold text-brand-strong tabular-nums"
+                  aria-hidden="true"><%= question.position %></span>
+            <div class="min-w-0 flex-1">
+              <p class="sr-only"><%= t(".question", position: question.position) %></p>
+              <p class="font-medium whitespace-pre-line text-ink"><%= question.content %></p>
+              <p class="mt-2"><%= ui_badge t(".question_types.#{question.question_type}"), size: :sm %></p>
+              <ul class="mt-4 space-y-2" aria-label="<%= t(".answers") %>">
+                <% question.answers.each_with_index do |answer, index| %>
+                  <% if reveal && answer.correct %>
+                    <li id="answer_<%= answer.id %>" class="answer flex items-start gap-3 rounded-ln bg-success-soft px-3 py-2" data-correct>
+                      <%= ui_icon "check-circle", variant: :mini, class: "mt-0.5 text-success" %>
+                      <span class="min-w-0 flex-1 font-medium text-ink"><%= answer.content %></span>
+                      <%= ui_badge t(".correct"), tone: :success, size: :sm %>
+                    </li>
+                  <% elsif reveal %>
+                    <li id="answer_<%= answer.id %>" class="answer flex items-start gap-3 rounded-ln bg-mist px-3 py-2">
+                      <span class="grid size-6 shrink-0 place-items-center rounded-full bg-white text-xs font-bold text-mute" aria-hidden="true"><%= ("A".ord + index).chr %></span>
+                      <span class="min-w-0 flex-1 text-mute"><%= answer.content %></span>
+                    </li>
+                  <% else %>
+                    <li class="answer flex items-start gap-3 rounded-ln bg-mist px-3 py-2">
+                      <span class="grid size-6 shrink-0 place-items-center rounded-full bg-white text-xs font-bold text-mute" aria-hidden="true"><%= ("A".ord + index).chr %></span>
+                      <span class="min-w-0 flex-1 text-ink"><%= answer.content %></span>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+              <% if reveal && question.explanation.present? %>
+                <div class="mt-4 flex gap-2 rounded-ln bg-info-soft px-3 py-2 text-sm text-ink">
+                  <%= ui_icon "light-bulb", variant: :mini, class: "mt-0.5 text-info" %>
+                  <p class="min-w-0 flex-1 whitespace-pre-line"><strong class="font-semibold"><%= t(".explanation") %></strong> <%= question.explanation %></p>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+</section>

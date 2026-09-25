@@ -1,0 +1,88 @@
+<%# 🌐 UI · identity/invitations/show — la personne invitée crée son compte team (reprise de l'ancienne inscription équipe) %>
+<%# Rôle : Nom, Prénom(s), genre, PIN et confirmation ; échec re-rendu en 422 par Turbo ; lien périmé ou déjà servi : message seul %>
+<%# ADR  : 0031, 0037, 0038, 0050 · UDR : 0005, 0019 %>
+<% content_for :title, t(".page_title") %>
+<main class="grid min-h-dvh bg-paper md:grid-cols-2">
+  <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
+    <div class="max-w-sm text-center">
+      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-6 size-16 rounded-card object-cover shadow-card" %>
+      <h1 class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></h1>
+      <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+  </section>
+
+  <section class="flex flex-col items-center justify-center px-gutter py-10">
+    <div class="mb-8 text-center md:hidden">
+      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-3 size-14 rounded-card object-cover shadow-card" %>
+      <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+
+    <div class="w-full max-w-md">
+      <% if @expired %>
+        <div id="invitation-expired" role="alert">
+          <%= ui_empty_state title: t(".expired_title"), description: t(".expired_description"), icon: "clock" do %>
+            <%= ui_button t(".sign_in"), href: new_session_path, variant: :secondary %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= ui_card padding: :lg do %>
+          <div class="mb-8 text-center">
+            <h2 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h2>
+            <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
+          </div>
+
+          <%= form_with model: @form, scope: :invitation, url: accept_invitation_path(params[:token]), method: :post,
+                        id: "invitation-acceptance-form", class: "space-y-6" do |form| %>
+            <% if @form.errors[:base].any? %>
+              <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+                <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+                <p><%= @form.errors[:base].to_sentence %></p>
+              </div>
+            <% end %>
+
+            <fieldset class="space-y-4">
+              <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".identity") %></legend>
+              <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
+              <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
+              <% gender_error = @form.errors[:gender].first %>
+              <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("invitation_gender_error" if gender_error)) %>>
+                <legend class="mb-1.5 block text-sm font-medium text-ink">
+                  <%= Dtos::Identity::InvitationAcceptanceInput.human_attribute_name(:gender) %><span class="text-error" aria-hidden="true"> *</span>
+                </legend>
+                <div class="grid grid-cols-2 gap-3">
+                  <% Entities::Identity::User::GENDERS.each do |gender| %>
+                    <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-4 transition has-checked:border-brand has-checked:bg-brand-soft">
+                      <%= form.radio_button :gender, gender, required: true, class: "size-5 shrink-0 accent-brand",
+                                            "aria-invalid": ("true" if gender_error) %>
+                      <span class="text-sm font-medium text-ink"><%= t("genders.#{gender}") %></span>
+                    </label>
+                  <% end %>
+                </div>
+                <% if gender_error %>
+                  <p id="invitation_gender_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+                    <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= gender_error %>
+                  </p>
+                <% end %>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="space-y-4">
+              <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
+              <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
+                           hint: t(".pin_hint") %>
+              <%= ui_field form, :pin_confirmation, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+                           autocomplete: "new-password" %>
+            </fieldset>
+
+            <p class="flex items-start gap-2 rounded-ln bg-info-soft px-4 py-3 text-sm text-ink">
+              <%= ui_icon "shield-check", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-info" %>
+              <%= t(".second_factor") %>
+            </p>
+
+            <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+</main>

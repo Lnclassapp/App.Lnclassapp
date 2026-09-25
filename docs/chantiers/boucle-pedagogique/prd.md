@@ -750,9 +750,9 @@ Scénario: [AS-09] Widgets
 
 Scénario: [AS-10] Correction immédiate
   Quand l'élève valide une réponse
-  Alors il voit, sans rechargement de page, « Bonne réponse » ou « Mauvaise réponse », les propositions correctes de cette question et l'explication
+  Alors il voit, sans rechargement de page, « Bonne réponse » ou « Mauvaise réponse », les propositions qu'il a choisies et l'explication, jamais les propositions correctes (décision du porteur du 2026-09-25)
   Et la correction exige l'égalité exacte des ensembles d'identifiants, sans crédit partiel
-  Et les propositions correctes d'une question non encore tentée ne figurent jamais dans le HTML
+  Et les propositions correctes ne figurent jamais dans le HTML servi à l'élève, avant comme après sa tentative
 
 Scénario: [AS-11][AS-12] Clôture automatique, résultat et badge
   Étant donné 2 questions dont 1 déjà répondue correctement

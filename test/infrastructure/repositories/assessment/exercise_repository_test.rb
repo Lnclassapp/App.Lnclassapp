@@ -48,6 +48,15 @@ module Repositories
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
       end
 
+      test "relit un exercice par id avec ses questions et la publication de ses parents, nil sinon" do
+        record = create_exercise(essential: create_essential(status: "draft"))
+        found = @repository.find(id: record.id)
+
+        assert_equal [ record.public_id, record.questions.count ], [ found.public_id, found.questions.size ]
+        assert_not found.parents_published
+        assert_nil @repository.find(id: 0)
+      end
+
       test "met à jour l'exercice seul, ou remplace aussi ses questions" do
         created = @repository.create(exercise: exercise)
         created.title = "Quiz révisé"
