@@ -27,6 +27,7 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 **Un écran « Niveaux », un tableau trié par position, des modales pour écrire.**
 
 - Le tableau montre, pour chaque niveau : son nom, son **code** (le slug), sa position, son cycle, ses séries liées et ce qui l'utilise (nombre de classes et de cours). L'équipe voit avant d'agir qu'un niveau est utilisé.
+- Une aide au-dessus du tableau dit pour quels niveaux les classes sont générées (6ème, 5ème, 4ème, 3ème, 2nde, 1ère, Tle). Un niveau dont le code n'est pas une clé du plan porte le badge « Hors génération des classes » ; le formulaire rappelle les noms reconnus sous le champ Nom. Un niveau mal nommé se voit à la création, pas à la génération.
 - La création et la modification se font dans la modale du layout (UDR-0006). La position suivante est proposée. En modification, le code est affiché en lecture seule avec la mention qu'il ne change jamais : renommer « 6ème » en « Sixième » garde `6eme`.
 - La suppression se confirme **dans la page** : une `<dialog>` propre à la ligne, ouverte sans requête. On n'utilise pas `confirm()` du navigateur, qui est illisible sur mobile et n'explique rien. Un niveau lié à une série, ou utilisé par une classe ou un cours, **n'est jamais supprimé**. Le refus nomme ce qui le retient (« 1 série, 2 classes et 1 cours »), et la ligne reste en place.
 
@@ -35,9 +36,9 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 **Structure**
 
 - Route : `GET /teams/levels` (`levels_path`), `param: :slug` ; réservée à l'équipe (`Teams::BaseController`).
-- `app/views/teams/levels/index.html.erb` : `ui_page_header` (titre, sous-titre, action « Nouveau niveau » en `ui_button` avec `data-turbo-frame="modal"`), puis un conteneur `relative overflow-x-auto` qui porte la `<table>`. Le corps du tableau est `tbody#levels`. Sans niveau, `div#levels_empty` rend `ui_empty_state`.
-- `_level_row.html.erb` : `tr#level_<slug>`. Colonnes : Nom · Code (`<code>`) · Position · Cycle · Séries (`ui_badge` taille `sm`, ou « Aucune ») · Classes · Cours · actions. Les actions sont « Modifier » (`ui_button` `secondary` `sm`, lien vers la modale) et « Supprimer » (`ui_modal` avec `trigger:`, `id: "delete-level-<slug>"`). Le pied de cette modale porte « Annuler » et « Supprimer le niveau » (`danger`), qui vise `form#delete-level-<slug>-form` (DELETE).
-- `new.html.erb` et `edit.html.erb` : `turbo_frame_tag "modal"` → `ui_modal(id: "level-modal", open: true)` → `_form` (`form#level-form`) ; le bouton d'envoi, dans `modal.footer`, vise `form: "level-form"`. `edit` affiche `#level-code`.
+- `app/views/teams/levels/index.html.erb` : `ui_page_header` (titre, sous-titre, action « Nouveau niveau » en `ui_button` avec `data-turbo-frame="modal"`), l'aide `p#levels-generation-help` (codes lus dans `LevelsQuery::GENERATED_SLUGS`, union des clés du plan public et privé), puis un conteneur `relative overflow-x-auto` qui porte la `<table>`. Le corps du tableau est `tbody#levels`. Sans niveau, `div#levels_empty` rend `ui_empty_state`.
+- `_level_row.html.erb` : `tr#level_<slug>`. Colonnes : Nom (suivi, hors génération, d'un `ui_badge` `warning` `sm` dans `[data-generation=outside]`, avec `title` et texte `sr-only`) · Code (`<code>`) · Position · Cycle · Séries (`ui_badge` taille `sm`, ou « Aucune ») · Classes · Cours · actions. Les actions sont « Modifier » (`ui_button` `secondary` `sm`, lien vers la modale) et « Supprimer » (`ui_modal` avec `trigger:`, `id: "delete-level-<slug>"`). Le pied de cette modale porte « Annuler » et « Supprimer le niveau » (`danger`), qui vise `form#delete-level-<slug>-form` (DELETE).
+- `new.html.erb` et `edit.html.erb` : `turbo_frame_tag "modal"` → `ui_modal(id: "level-modal", open: true)` → `_form` (`form#level-form`) ; le bouton d'envoi, dans `modal.footer`, vise `form: "level-form"`. `edit` affiche `#level-code`, avec le même badge si le code est hors génération.
 - `_form.html.erb` : `ui_field` Nom (`maxlength` 20), Position (`number`, 0 à 999), Cycle (`select` : Premier cycle, Second cycle). Une erreur `base` s'affiche en tête dans un `role="alert"`.
 
 **Tokens**
