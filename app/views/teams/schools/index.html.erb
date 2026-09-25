@@ -1,0 +1,46 @@
+<%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
+<%# Rôle : action principale « Importer des établissements » ; filtres et pages dans le frame « schools », seul renvoyé à ses requêtes %>
+<%# ADR  : 0030, 0036 · UDR : 0006, 0036 · aucun bouton de création : un établissement n'entre que par l'import %>
+<% content_for :title, t(".page_title") %>
+<% unless list_frame_request? %>
+  <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
+    <%= ui_button t(".import"), href: new_teams_import_path(kind: "schools"), icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+  <% end %>
+  <%= render "filters", filters: @filters %>
+<% end %>
+
+<%= turbo_frame_tag "schools", data: { turbo_action: "advance" } do %>
+  <p id="schools_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
+  <% if @page.rows.any? %>
+    <%# relative : les libellés sr-only de la dernière colonne restent pris dans le défilement du tableau, pas dans celui de la page. %>
+    <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
+      <table class="w-full min-w-4xl text-left text-sm">
+        <caption class="sr-only"><%= t(".caption") %></caption>
+        <thead class="border-b border-line text-xs text-mute">
+          <tr>
+            <% %i[school drena type cycle status classrooms teachers].each do |column| %>
+              <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+            <% end %>
+            <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+          </tr>
+        </thead>
+        <tbody id="schools_list" class="divide-y divide-line">
+          <%= render partial: "school_row", collection: @page.rows, as: :school %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div id="schools_empty">
+      <% if @filters.values.any?(&:present?) %>
+        <%= ui_empty_state title: t(".no_match_title"), description: t(".no_match_description"), icon: "magnifying-glass" do %>
+          <%= ui_button t(".clear_filters"), href: schools_path, variant: :secondary, icon: "x-mark", data: { turbo_frame: "_top" } %>
+        <% end %>
+      <% else %>
+        <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "building-library" do %>
+          <%= ui_button t(".import"), href: new_teams_import_path(kind: "schools"), icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="mt-5"><%= ui_pagination page: @page.page, pages: @page.pages %></div>
+<% end %>

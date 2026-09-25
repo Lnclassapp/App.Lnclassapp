@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/schools/deactivate — succès de la désactivation %>
+<%# Rôle : toast, ligne et en-tête remplacés avec le statut « Inactive » (chacun ignoré s'il n'est pas sur la page) ; rien n'est supprimé %>
+<%# ADR  : 0036 · UDR : 0006, 0036 %>
+<%= turbo_stream_toast t(".done", name: @school.name), type: :success %>
+<%= turbo_stream.replace "school_#{@school.public_id}", partial: "school_row", locals: { school: @school } %>
+<%= turbo_stream.replace "school_header", partial: "header", locals: { school: @school } %>
