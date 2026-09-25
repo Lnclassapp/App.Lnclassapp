@@ -54,7 +54,7 @@ Turbo ne sait pas ajouter un champ au formulaire sans aller-retour avec le serve
 
 - Création réussie : `create.turbo_stream.erb` → toast « Exercice « … » créé (brouillon). », puis `turbo_stream.refresh(request_id: nil)`, car la page hôte appartient à un autre lot. La modale se ferme sur `turbo:submit-end` réussi.
 - Modification réussie : `update.turbo_stream.erb`, sur le même modèle.
-- Le morphing de la page hôte vide `#toasts`. Le contrôleur pose donc aussi le message en `flash[:notice]`, et la page re-demandée rend le même toast.
+- Le toast survit au morphing de la page hôte : chaque toast porte un id unique et `data-turbo-permanent` (socle). Aucun flash n'est posé en plus, il ferait un doublon.
 - Saisie invalide : la modale est re-rendue en **422**. Chaque erreur s'affiche sous son champ (titre, énoncé, texte d'une proposition). Une erreur de structure s'affiche en tête de sa question. Les valeurs saisies sont conservées, y compris les questions ajoutées par clonage.
 - Questions verrouillées : si une question est envoyée ou si le type change, la réponse est un 422 avec l'erreur `base` « questions verrouillées », et rien n'est écrit.
 - Publier : il faut au moins une question bien construite, et la fiche comme son cours doivent être publiés. Sinon, la réponse est un 422 avec un toast d'erreur qui nomme la raison. Publier comme archiver remplace le panneau de statut `content_status_exercise_<public_id>`.
