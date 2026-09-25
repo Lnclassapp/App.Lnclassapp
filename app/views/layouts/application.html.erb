@@ -12,6 +12,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%# Un turbo_stream.refresh re-demande la page courante et la fusionne, sans recharger la fenêtre %>
+    <% turbo_refreshes_with method: :morph, scroll: :preserve %>
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
