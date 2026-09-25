@@ -1,0 +1,18 @@
+<%# 🌐 UI · catalog/courses/_essential_row — une fiche essentielle dans la page de son cours (CA-10) %>
+<%# Rôle : lien vers la fiche, sous-titre, nombre d'exercices ; statut de la fiche pour l'équipe %>
+<%# ADR  : 0035 · UDR : 0007, 0013 %>
+<li id="essential_<%= essential.slug %>" class="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+  <div class="min-w-0">
+    <%= link_to essential.name, course_essential_path(course_slug, essential.slug),
+                class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% if essential.subtitle.present? %>
+      <p class="mt-0.5 truncate text-sm text-mute"><%= essential.subtitle %></p>
+    <% end %>
+  </div>
+  <div class="flex shrink-0 flex-wrap items-center gap-2">
+    <%= ui_badge t(".exercises", count: essential.exercises_count), icon: "pencil-square" %>
+    <% if show_status %>
+      <%= content_status_badge(essential.status) %>
+    <% end %>
+  </div>
+</li>
