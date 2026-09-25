@@ -17,8 +17,11 @@ module Orm
 
     private
 
+    # Un nom sans lettre latine (« π », « ??? ») donne un slug vide : le nom du modèle le remplace (course, course-2…).
     def frozen_slug_for(source)
-      base = source.to_s.parameterize
+      return if source.blank?
+
+      base = source.to_s.parameterize.presence || self.class.model_name.element
       candidate = base
       suffix = 1
       candidate = "#{base}-#{suffix += 1}" while self.class.exists?(slug: candidate)
