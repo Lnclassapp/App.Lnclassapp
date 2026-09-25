@@ -1,0 +1,62 @@
+# Import des cours complets (plan boucle-pedagogique, Lot I1) — ADR-0035, ADR-0039, UDR-0038, UDR-0007
+fr:
+  teams:
+    imports:
+      kinds:
+        course_tree:
+          title: "Format du fichier"
+          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.course-tree</code>, version 1. Chaque élément de <code class=\"font-mono text-xs text-ink\">courses</code> est un cours avec toute sa descendance : fiches essentielles, exercices, questions et propositions. Un cours entre entier, ou pas du tout."
+          nodes:
+            course: "Cours"
+            essential: "Fiche essentielle"
+            exercise: "Exercice"
+            question: "Question"
+            answer: "Proposition"
+          paths:
+            course: "courses[]"
+            essential: "essentials[]"
+            exercise: "exercises[]"
+            question: "questions[]"
+            answer: "answers[]"
+          keys:
+            course:
+              name: "Nom du cours. Obligatoire, 200 caractères au plus."
+              subtitle: "Sous-titre. Facultatif, 150 caractères au plus."
+              content: "Contenu HTML. Facultatif ; le HTML est assaini."
+              level_name: "Niveau, par son nom ou son slug. Obligatoire."
+              series_name: "Série, par son nom. Facultative ; donnée, elle doit être proposée pour ce niveau."
+              material_name: "Matière, par son nom, son slug ou son abrégé. Obligatoire."
+              essentials: "Ses fiches essentielles, dans l'ordre."
+            essential:
+              name: "Nom de la fiche essentielle. Obligatoire, 150 caractères au plus, unique dans son cours."
+              subtitle: "Sous-titre. Facultatif, 150 caractères au plus."
+              content: "Contenu HTML. Facultatif ; le HTML est assaini."
+              exercises: "Ses exercices, dans l'ordre."
+            exercise:
+              title: "Titre de l'exercice. Obligatoire, 150 caractères au plus."
+              description: "Consigne. Facultative."
+              exercise_type: "fixation ou evaluation. Obligatoire."
+              questions: "Ses questions, dans l'ordre. Au moins une."
+            question:
+              content: "Énoncé. Obligatoire."
+              question_type: "true_false, single_choice, multiple_correct_2 ou multiple_correct_3. Vrai/Faux : 2 propositions dont 1 correcte ; sinon 1, 2 ou 3 correctes, et au moins une incorrecte en plus."
+              explanation: "Explication de la correction. Facultative."
+              answers: "Ses propositions, dans l'ordre."
+            answer:
+              content: "Texte de la proposition. Obligatoire, 500 caractères au plus."
+              correct: "true si la proposition est correcte ; false par défaut."
+          example: "Exemple minimal"
+          drafts: "Tout arrive en brouillon, quelle que soit la clé status du fichier : relisez, puis publiez. Un cours déjà présent (même nom, niveau, matière et série, sans tenir compte des accents, de la casse ni des espaces) est ignoré et compté ; il n'est jamais modifié."
+          referential: "Noms acceptés du référentiel"
+          referential_hint: "Les noms sont comparés sans accents ni casse : « Physique Chimie » désigne Physique-Chimie. Un nom inconnu met le cours en erreur ; rien n'est créé dans le référentiel."
+          levels: "Niveaux et leurs séries"
+          no_series: "sans série"
+          materials: "Matières et leur abrégé"
+          no_referential: "Le référentiel est vide : créez les niveaux, les séries et les matières avant d'importer des cours."
+          no_referential_link: "Ouvrir le référentiel"
+      status:
+        details:
+          essentials_created: "Fiches essentielles créées"
+          exercises_created: "Exercices créés"
+          questions_created: "Questions créées"
+          answers_created: "Propositions créées"
