@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_25_100030) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_25_100031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -256,12 +256,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100030) do
   end
 
   create_table "import_reports", force: :cascade do |t|
-    t.bigint "byte_size", null: false
     t.string "checksum_sha256", limit: 64, null: false
     t.datetime "created_at", null: false
     t.jsonb "details", default: {}, null: false
     t.integer "error_count", default: 0, null: false
-    t.string "filename", limit: 255, null: false
     t.datetime "finished_at"
     t.integer "format_version"
     t.jsonb "import_errors", default: [], null: false
@@ -270,7 +268,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100030) do
     t.string "kind", null: false
     t.integer "processed_count", default: 0, null: false
     t.string "public_id", limit: 14, null: false
-    t.jsonb "scope", default: {}, null: false
     t.integer "skipped_count", default: 0, null: false
     t.datetime "started_at"
     t.string "status", default: "queued", null: false
@@ -281,6 +278,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100030) do
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY ((ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying])::text[]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
     t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying]::text[])", name: "import_reports_kind_values"
+    t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying, 'completed'::character varying, 'rejected'::character varying, 'failed'::character varying]::text[])", name: "import_reports_status_values"
   end
 
@@ -419,7 +417,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100030) do
     t.string "name", limit: 150, null: false
     t.string "public_id", limit: 14, null: false
     t.string "school_type", null: false
-    t.string "sigle", limit: 15
+    t.string "sigle", limit: 20
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
     t.index ["drena_id", "name"], name: "index_schools_on_drena_id_and_name", unique: true

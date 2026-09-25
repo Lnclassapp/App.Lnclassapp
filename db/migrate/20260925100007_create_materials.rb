@@ -10,7 +10,5 @@ class CreateMaterials < ActiveRecord::Migration[8.1]
     end
 
     add_check_constraint :materials, "category IN ('literature','science','other')", name: "materials_category_values"
-
-    add_foreign_key :teacher_profiles, :materials, on_delete: :restrict
   end
 end

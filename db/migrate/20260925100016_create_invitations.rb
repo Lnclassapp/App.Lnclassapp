@@ -1,12 +1,11 @@
-# ADR-0038, ADR-0044 : team and school staff invitations. The foreign key to
-# schools is added once that table exists (create_schools).
+# ADR-0038, ADR-0044 : team and school staff invitations.
 class CreateInvitations < ActiveRecord::Migration[8.1]
   def change
     create_table :invitations do |t|
       t.string :kind, null: false
       t.string :contact, limit: 10, null: false
       t.string :team_role
-      t.bigint :school_id, index: true
+      t.references :school, foreign_key: { on_delete: :restrict }
       t.string :position
       t.references :invited_by, foreign_key: { to_table: :users, on_delete: :restrict }
       t.string :token_digest, limit: 64, null: false, index: { unique: true }

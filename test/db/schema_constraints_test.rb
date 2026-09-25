@@ -152,11 +152,20 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_not_includes columns, "created_at"
   end
 
+  test "levels and series have no code column: the frozen slug is the code" do
+    %w[levels series].each { |table| assert_not_includes connection.columns(table).map(&:name), "code", table }
+  end
+
+  test "neither friendly_id nor Action Text leaves a table behind" do
+    assert_empty connection.tables.grep(/\A(friendly_id_slugs|action_text_)/)
+  end
+
   test "the database refuses what the application must never write" do
     violations = {
       "a team account without sub-role" => "INSERT INTO users (public_id, last_name, first_name, gender, role, pin_digest, created_at, updated_at) VALUES ('abcdefghijklmn', 'K', 'A', 'male', 'team', 'x', now(), now())",
       "a contact that is not ivorian" => "INSERT INTO users (public_id, last_name, first_name, contact, gender, role, pin_digest, created_at, updated_at) VALUES ('abcdefghijklmn', 'K', 'A', '0912345678', 'male', 'student', 'x', now(), now())",
-      "a school year that skips a year" => "INSERT INTO classrooms (public_id, school_id, level_id, name, school_year, created_at, updated_at) VALUES ('abcdefghijklmn', 1, 1, '6ème 1', '2026-2028', now(), now())"
+      "a school year that skips a year" => "INSERT INTO classrooms (public_id, school_id, level_id, name, school_year, created_at, updated_at) VALUES ('abcdefghijklmn', 1, 1, '6ème 1', '2026-2028', now(), now())",
+      "a completed import whose counts do not add up" => "INSERT INTO import_reports (public_id, kind, status, checksum_sha256, total_count, imported_count, imported_by_id, created_at, updated_at) VALUES ('abcdefghijklmn', 'schools', 'completed', 'x', 3, 2, 1, now(), now())"
     }
 
     violations.each do |label, sql|

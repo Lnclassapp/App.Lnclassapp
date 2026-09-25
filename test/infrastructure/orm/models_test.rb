@@ -128,7 +128,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
   end
 
   test "an import report keeps its source file on Active Storage" do
-    report = Orm::ImportReport.create!(kind: "schools", filename: "ecoles.json", checksum_sha256: "e" * 64, byte_size: 2,
+    report = Orm::ImportReport.create!(kind: "schools", checksum_sha256: "e" * 64,
                                        imported_by: graph[:team])
     report.source.attach(io: StringIO.new("{}"), filename: "ecoles.json", content_type: "application/json")
 

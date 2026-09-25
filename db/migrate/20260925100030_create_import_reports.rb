@@ -6,10 +6,7 @@ class CreateImportReports < ActiveRecord::Migration[8.1]
       t.string :public_id, limit: 14, null: false, index: { unique: true }
       t.string :kind, null: false
       t.integer :format_version
-      t.string :filename, limit: 255, null: false
       t.string :checksum_sha256, limit: 64, null: false
-      t.bigint :byte_size, null: false
-      t.jsonb :scope, null: false, default: {}
       t.string :status, null: false, default: "queued"
       t.integer :total_count, null: false, default: 0
       t.integer :processed_count, null: false, default: 0
@@ -31,5 +28,7 @@ class CreateImportReports < ActiveRecord::Migration[8.1]
                          name: "import_reports_kind_values"
     add_check_constraint :import_reports, "status IN ('queued','validating','importing','completed','rejected','failed')",
                          name: "import_reports_status_values"
+    add_check_constraint :import_reports, "status <> 'completed' OR total_count = imported_count + skipped_count + error_count",
+                         name: "import_reports_completed_counts_add_up"
   end
 end
