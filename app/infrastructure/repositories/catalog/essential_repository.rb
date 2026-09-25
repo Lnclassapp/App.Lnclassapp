@@ -52,7 +52,7 @@ module Repositories
       private
 
       def editable_attributes(essential)
-        { name: essential.name, subtitle: essential.subtitle, content: essential.content }
+        { name: essential.name, subtitle: essential.subtitle, content: RichTextSanitizer.call(essential.content) }
       end
 
       # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
@@ -63,7 +63,7 @@ module Repositories
         ::Shared::Result.failure(:conflict, errors: { name: [ :taken ] })
       end
 
-      # Le HTML brut du contenu riche : il est assaini au rendu par Action Text.
+      # Le HTML du contenu riche, assaini à l'écriture (RichTextSanitizer) puis de nouveau au rendu par Action Text.
       def map_to_entity(record)
         Entities::Catalog::Essential.new(
           id: record.id, slug: record.slug, course_id: record.course_id, name: record.name, subtitle: record.subtitle,
