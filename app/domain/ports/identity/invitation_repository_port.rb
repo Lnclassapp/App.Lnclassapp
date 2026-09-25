@@ -4,8 +4,9 @@
 module Ports
   module Identity
     module InvitationRepositoryPort
+      # team : team_role requis ; school_staff : school_id et position requis (ADR-0044).
       # → Result(Entities::Identity::Invitation) | failure(:conflict, errors: { contact: [:already_invited] })
-      def create(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:)
+      def create(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:, school_id: nil, position: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 

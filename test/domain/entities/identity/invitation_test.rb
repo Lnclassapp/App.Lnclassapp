@@ -25,6 +25,21 @@ module Entities
         assert_raises(ArgumentError) { invitation(kind: "parent") }
         assert_nil invitation.school_id
       end
+
+      test "une invitation de direction porte une école et une fonction" do
+        staff = invitation(kind: "school_staff", team_role: nil, school_id: 7, position: "censor")
+
+        assert_equal [ 7, "censor" ], [ staff.school_id, staff.position ]
+        assert_equal %w[principal censor educator secretary], Invitation::POSITIONS
+      end
+
+      test "refuse une invitation incohérente avec son type" do
+        assert_raises(ArgumentError) { invitation(team_role: nil) }
+        assert_raises(ArgumentError) { invitation(team_role: "boss") }
+        assert_raises(ArgumentError) { invitation(position: "janitor") }
+        assert_raises(ArgumentError) { invitation(kind: "school_staff", team_role: nil, school_id: 7) }
+        assert_raises(ArgumentError) { invitation(kind: "school_staff", team_role: nil, position: "educator") }
+      end
     end
   end
 end
