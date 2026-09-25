@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Import factice des tests du moteur (FakeImportJob)",
+  "type": "object",
+  "required": ["format", "version", "schools"],
+  "properties": {
+    "format": { "type": "string" },
+    "version": { "type": "integer" },
+    "drena": { "type": "string" },
+    "schools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "maxLength": 150 }
+        }
+      }
+    }
+  }
+}
