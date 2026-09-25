@@ -38,13 +38,13 @@ class Identity::SignInTest < ApplicationSystemTestCase
   test "a student with a classroom lands on the student home" do
     sign_in_as create_student(classroom: create_classroom)
 
-    assert_current_path student_home_path
+    assert_arrived_on student_home_path
   end
 
   test "a teacher lands on the teacher home" do
     sign_in_as create_teacher
 
-    assert_current_path teacher_home_path
+    assert_arrived_on teacher_home_path
   end
 
   test "a team member goes through the second factor, then reaches the team home" do
@@ -54,6 +54,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
     fill_in "session[pin]", with: "2468"
     click_on I18n.t("identity.sessions.new.submit")
 
+    assert_selector "#second-factor-form", wait: SIGN_IN_WAIT
     assert_current_path new_identity_second_factor_path
     assert_no_page_reload do
       fill_in "second_factor[code]", with: "000000"
@@ -65,7 +66,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
     fill_in "second_factor[code]", with: ROTP::TOTP.new(member.totp_secret).now
     click_on I18n.t("identity.second_factors.new.submit")
 
-    assert_current_path team_home_path
+    assert_arrived_on team_home_path
   end
 
   test "the same journey on a 390 px screen" do
@@ -85,13 +86,21 @@ class Identity::SignInTest < ApplicationSystemTestCase
 
       sign_in_as student
 
-      assert_current_path pending_account_path
+      assert_arrived_on pending_account_path
       assert_toast "Connexion réussie"
 
       sign_out
       sign_in_as member
 
-      assert_current_path team_home_path
+      assert_arrived_on team_home_path
     end
+  end
+
+  private
+
+  # Every home renders the shell: its main region is there before the URL is checked.
+  def assert_arrived_on(path)
+    assert_selector "main#main", wait: SIGN_IN_WAIT
+    assert_current_path path
   end
 end
