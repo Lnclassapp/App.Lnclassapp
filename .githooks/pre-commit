@@ -53,6 +53,7 @@ STAGED_RB=()
 STAGED_LINT=()   # ce que rubocop sait lire
 STAGED_APP=()    # fichiers de app/ soumis à l'en-tête HITL
 STAGED_DOMAIN=()
+STAGED_COVERED=() # périmètre de SimpleCov (ADR-0024) : app/ et lib/
 
 for file in "${STAGED[@]}"; do
   [ -f "$file" ] || continue
@@ -65,6 +66,9 @@ for file in "${STAGED[@]}"; do
   esac
   case "$file" in
     app/domain/*.rb) STAGED_DOMAIN+=("$file") ;;
+  esac
+  case "$file" in
+    app/*.rb|lib/*.rb) STAGED_COVERED+=("$file") ;;
   esac
 
   # En-tête HITL : code applicatif seulement. On exclut les artefacts générés.
@@ -117,8 +121,9 @@ done
 # Un `# :nocov:` retire des lignes du dénominateur : le pourcentage monte sans
 # qu'un seul test soit écrit. C'est la seule façon de faire mentir la couverture
 # sans mentir, donc la seule qu'il faut interdire mécaniquement. Coût : ~10 ms.
-if [ ${#STAGED_RB[@]} -gt 0 ]; then
-  if NOCOV=$(grep -nH ':nocov:' "${STAGED_RB[@]}" 2>/dev/null); then
+# Périmètre : app/ et lib/, celui de la mesure. Un test peut citer la balise.
+if [ ${#STAGED_COVERED[@]} -gt 0 ]; then
+  if NOCOV=$(grep -nH ':nocov:' "${STAGED_COVERED[@]}" 2>/dev/null); then
     echo ""
     echo "❌ [Couverture] « # :nocov: » est interdit (ADR-0024) :"
     echo "$NOCOV" | sed 's/^/     /'

@@ -1,23 +1,20 @@
 # Design
 
-> 🚧 **En construction.** Ce pilier fera l'objet d'une session dédiée. Ce fichier n'est qu'un point d'entrée honnête vers ce qui existe aujourd'hui.
+Le design system de Lnclass est fixé par [UDR-0005](../decisions/udr/0005-design-system-fondateur.md) (tokens, composants, règles vérifiées) et [UDR-0006](../decisions/udr/0006-shell-applicatif-par-role.md) (shell par rôle, navigation, accueil, toasts, états).
 
-## Ce qui existe
+## Où regarder
 
-| Source | Contenu | Limite |
-|---|---|---|
-| [`../../.interface-design/system.md`](../../.interface-design/system.md) | Orientation visuelle « Étude Premium » : couleurs, typographie, profondeurs et hover, iconographie, règle d'épuration. Rattaché à UDR-0001. | 27 lignes — pas de tokens d'espacement, pas de grille, pas de breakpoints, pas d'états focus/disabled/error, pas d'accessibilité |
-| `app/assets/stylesheets/application.tailwind.css` | Les **vrais** design tokens, en Tailwind v4 CSS-first (bloc `@theme`) : palette, rayons, polices, animations | C'est la source de vérité technique, mais elle n'est documentée nulle part |
-| `app/views/components/` | 23 partials ERB : `_button`, `_card`, `_badge`, `_modal`, `_dropdown`, `_toast`, `_empty_state`, `_page_header`… | Pas de catalogue, pas de démo, pas de documentation d'usage |
-| [`../decisions/udr/`](../decisions/udr/) | Les décisions d'interface déjà prises | Couverture partielle |
+| Source | Contenu |
+|---|---|
+| `/design` (dev et test, jamais en production) | Guide vivant : chaque token, chaque composant dans chacune de ses variantes et de ses états, et le shell de chaque rôle (`/design/shell/:role`). Ce qui n'y figure pas n'existe pas. |
+| `app/assets/stylesheets/application.tailwind.css` | Le bloc `@theme` : **seule** source des couleurs, polices, rayons, ombres, espacements nommés et animations. |
+| `app/helpers/components_helper.rb` | L'API des composants (`ui_button`, `ui_card`, `ui_field`, `ui_modal`…). Une vue appelle le composant et n'en recopie jamais le balisage. |
+| `app/views/components/` | Le balisage des composants. |
+| `app/helpers/navigation_helper.rb` · `app/views/layouts/shell.html.erb` | Le shell : destinations par rôle, en-tête, barre latérale, barre basse. |
+| `test/design/design_tokens_test.rb` | Le garde-fou : refuse `[…]`, `#hex`, `style=`, `dark:`, les couleurs, rayons et ombres par défaut de Tailwind, et les espacements hors échelle. |
 
-## Ce qui manque
+## Ajouter ou modifier
 
-- **Un design system complet** : espacements, grille, breakpoints, états (focus, disabled, error, loading), règles d'accessibilité.
-- **Un catalogue de composants** visualisable — aujourd'hui il faut lire le code ERB pour savoir ce qui existe, ce qui pousse à recréer des composants en double.
-- **Des mocks haute fidélité** servant de prototype avant implémentation.
-- La résolution du doublon `app/views/shared/_empty_state` vs `app/views/components/_empty_state`.
-
-## En attendant
-
-Toute vue nouvelle ou modifiée passe par une [UDR](../decisions/udr/TEMPLATE.md), et réutilise les partials de `app/views/components/` plutôt que d'en créer de nouveaux. En cas de doute sur un token, la source de vérité est le bloc `@theme` de `application.tailwind.css`, pas une valeur en dur.
+1. Un nouveau token passe par le `@theme` **et** par une UDR.
+2. Un nouveau composant a sa méthode dans `ComponentsHelper`, son exemple sur `/design` et son test système.
+3. [`.interface-design/system.md`](../../.interface-design/system.md) (palette `slate/blue`) est historique : l'UDR-0005 le remplace.

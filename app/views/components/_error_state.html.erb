@@ -1,0 +1,11 @@
+<%# 🌐 UI · components/_error_state — état d'erreur avec reprise, appelé par ui_error_state %>
+<%# Rôle : annonce l'échec (role="alert") et propose de réessayer %>
+<%# UDR  : 0005, 0006 %>
+<div role="alert" class="flex flex-col items-center rounded-card border border-error/30 bg-error-soft px-6 py-10 text-center">
+  <span class="grid size-14 place-items-center rounded-full bg-white text-error"><%= ui_icon "exclamation-triangle", size: :lg %></span>
+  <p class="mt-4 font-display text-lg font-extrabold"><%= title || t(".title") %></p>
+  <p class="mt-1 max-w-sm text-sm text-mute"><%= message || t(".message") %></p>
+  <% if retry_href %>
+    <div class="mt-5"><%= ui_button retry_label || t(".retry"), href: retry_href, variant: :secondary, icon: "arrow-path" %></div>
+  <% end %>
+</div>

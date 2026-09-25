@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé — *voir l'avertissement ci-dessous* |
 | **Date** | — |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0027](./0027-contextes-bornes-et-arborescence.md) |
 
 ---
+
+> ⚠️ **Décision remplacée — l'organisation scolaire vit dans le contexte `school`.**
+> L'[ADR-0027](./0027-contextes-bornes-et-arborescence.md) remplace cet ADR en entier le 2026-09-25 : six contextes bornés, la DRENA, l'école et la classe ne sont plus dans `identity`, et toute personne est référencée par `users.id`.
 
 > ℹ️ **Renuméroté de ADR-0015 en ADR-0023** lors de la normalisation du corpus : le numéro 0015 était porté simultanément par ce document et par l'[ADR-0015 — Stratégie de tests métier](./0015-strategie-de-tests-metier-isolement-des-policies.md). Les en-têtes HITL du code (`app/domain/entities/identity/`, `app/domain/ports/identity/`, `app/infrastructure/repositories/identity/`, tests associés) référencent encore « ADR-0015 (Organisation Scolaire) » et devront être mis à jour vers ADR-0023.
 

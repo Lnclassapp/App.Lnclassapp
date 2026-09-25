@@ -7,8 +7,12 @@
 | **Chantier** | — |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Complété par** | [ADR-0028](./0028-policies-de-domaine-par-use-case.md) : test de refus obligatoire pour chaque policy |
 
 ---
+
+> ⚠️ **Décision complétée — test de refus obligatoire.**
+> L'[ADR-0028](./0028-policies-de-domaine-par-use-case.md) complète cet ADR le 2026-09-25 : chaque policy a un test de refus, et un test par use case vérifie qu'un refus n'écrit rien. Le reste de l'ADR demeure en vigueur.
 
 ## 1. Contexte et problématique
 Dans le cadre de l'architecture hexagonale adoptée, les `Use Cases` orchestrent le flux métier principal, mais délèguent fréquemment des décisions d'autorisation très spécifiques et complexes à des objets de domaine dédiés (ex: `Policies::ClassroomAccessPolicy`). 

@@ -7,8 +7,12 @@
 | **Chantier** | — |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0040](./0040-classe-principale-unique-de-l-eleve.md) : §2 et §4 (une classe principale active par élève) |
 
 ---
+
+> ⚠️ **Décision amendée — une classe principale unique par élève.**
+> Le §2 et le §4 sont amendés par l'[ADR-0040](./0040-classe-principale-unique-de-l-eleve.md) le 2026-09-25 : un index partiel garantit une seule classe principale active par élève, et une seule classe active jusqu'à la V3. La table de jointure `classroom_students` reste en vigueur.
 
 ## 1. Contexte et problématique
 Dans la première conception (et dans d'anciens documents de planification comme `master_plan/mobile.md`), le modèle `Student` était modélisé de manière rigide par des relations `belongs_to` directes sur la table `students` (`classroom_id`, `school_id`, `level_id`, `series_id`).

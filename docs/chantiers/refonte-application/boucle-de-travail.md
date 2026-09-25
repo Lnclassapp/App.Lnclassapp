@@ -129,6 +129,7 @@ une route, une clé de locale ou une migration, tu T'ARRÊTES et tu le signales 
 - Test rouge d'abord, puis domaine → infrastructure → delivery → UI.
 - Chaque use case appelle sa policy en premier et renvoie un Result (ADR-0026) ; test de refus obligatoire.
 - 100 % lignes et branches sur tes fichiers ; `# :nocov:` interdit.
+- CRUD en Hotwire (ADR-0009) dès que l'écran s'y prête : création et édition en ligne dans un `turbo_frame_tag`, réponses `turbo_stream` pour create/update/destroy (liste mise à jour, toast, formulaire réinitialisé), modales chargées dans un frame, erreurs de validation re-rendues en `422` dans le frame. Chaque action garde sa réponse HTML de repli. Stimulus seulement pour le comportement que Turbo ne couvre pas. Un test système prouve le parcours sans rechargement de page.
 - Commits Conventional Commits en anglais, pre-commit actif, jamais SKIP_HOOKS, jamais de push.
 
 ## Done quand

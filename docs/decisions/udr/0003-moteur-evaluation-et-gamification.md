@@ -1,14 +1,19 @@
 # UDR-0003 : Moteur d'Évaluation & Gamification (Assessment UI)
 
+> ⚠️ **Remplacée partiellement par [UDR-0005](./0005-design-system-fondateur.md)** (2026-09-25) : la section « Tokens » ne s'applique plus. Utilisez les tokens `@theme` et la table de correspondance de l'UDR-0005 §3. Les autres sections restent valables.
+
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | — |
 | **Chantier** | — |
 | **ADR lié** | [ADR-0008 — Moteur d'évaluation et gamification](../adr/0008-moteur-evaluation-et-gamification.md) |
-| **Remplacé par** | — |
+| **Remplacé par** | [UDR-0005](./0005-design-system-fondateur.md) *(section « Tokens »)*, [UDR-0007](./0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) *(vocabulaire)*, [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) *(badges)* |
 
 ---
+
+> ⚠️ **Vocabulaire remplacé — plus de « Quiz », quatre badges.**
+> Le 2026-09-25, « Quiz interactif » est remplacé par « Exercice » ([UDR-0007](./0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md)). Les badges sont Bronze (≥ 50 %), Argent (≥ 70 %), Or (≥ 80 %) et Diamant (100 %, sans faute) : le « Diamant » cité ici est défini par l'[ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md). Le reste de cette UDR reste en vigueur.
 
 ## 1. Contexte
 

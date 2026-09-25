@@ -7,8 +7,12 @@
 | **Chantier** | — |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0036](./0036-suppression-archivage-et-anonymisation.md) : `on_delete: :nullify` devient `:restrict` ; la règle anti-cascade couvre toute la production élève |
 
 ---
+
+> ⚠️ **Décision amendée — `restrict` remplace `nullify`.**
+> L'[ADR-0036](./0036-suppression-archivage-et-anonymisation.md) complète et amende cet ADR le 2026-09-25 : les clés étrangères sont en `restrict` par défaut, `nullify` sur les auteurs devient `restrict` (aucun compte n'est plus supprimé, il est anonymisé). L'interdiction de `dependent: :destroy` reste en vigueur.
 
 ## 1. Contexte et problématique
 Lors des phases initiales de développement d'un LMS, il est courant d'associer un objet métier (une école, une matière, un niveau ou un chapitre) à l'administrateur ou au créateur de contenu qui en a effectué la saisie (`team_id` ou `creator_id`), afin de maintenir une traçabilité d'audit.

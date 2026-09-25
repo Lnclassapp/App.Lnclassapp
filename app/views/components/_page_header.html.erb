@@ -1,0 +1,14 @@
+<%# 🌐 UI · components/_page_header — titre de page, sous-titre, actions, appelé par ui_page_header %>
+<%# Rôle : un seul <h1> par page, actions alignées à droite sur bureau %>
+<%# UDR  : 0006 %>
+<div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+  <div class="min-w-0">
+    <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= title %></h1>
+    <% if subtitle %>
+      <p class="mt-1 text-mute"><%= subtitle %></p>
+    <% end %>
+  </div>
+  <% if actions %>
+    <div class="flex flex-wrap gap-3"><%= actions %></div>
+  <% end %>
+</div>

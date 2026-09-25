@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *en production* |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-07-15 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0048](./0048-statuts-d-assignation-active-et-archived.md) *(§5 : statuts et types assignables)* |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — les statuts d'assignation suivent l'ADR-0048.**
+> Le §5 est remplacé par l'[ADR-0048](./0048-statuts-d-assignation-active-et-archived.md) le 2026-09-25 : statuts `active` et `archived`, types `Course`, `Essential` et `Exercise`, `assigned_by_id` vers `users`. La hiérarchie pédagogique et la table unique polymorphe restent en vigueur.
 
 ## 1. Contexte et problématique
 Une plateforme éducative (LMS) s'articule autour d'une nomenclature stricte de contenus. Dans le système scolaire ivoirien, le contenu est hiérarchisé depuis la discipline globale jusqu'à l'évaluation individuelle.
