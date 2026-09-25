@@ -4,7 +4,8 @@
 module Ports
   module School
     module SchoolRepositoryPort
-      Inserted = Data.define(:id, :drena_id, :name, :school_type, :cycle)
+      # Ligne insérée en masse : de quoi générer ses classes (DefaultClassroomPlan).
+      Inserted = Data.define(:id, :public_id, :drena_id, :name, :school_type, :cycle)
 
       # → Entities::School::School | nil
       def find_by_public_id(public_id:)
@@ -21,23 +22,19 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end
 
-      # status = inactive. → true
-      def deactivate(id:)
-        raise NotImplementedError, "#{self.class} doit implémenter #deactivate"
-      end
-
       # Supprime aussi ses classes si aucune n'a d'élève, d'enseignant ni d'assignation.
       # → Result | failure(:conflict, errors: { base: [:referenced] })
       def delete_if_unreferenced(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #delete_if_unreferenced"
       end
 
-      # → Set[[drena_id, School.name_key(name)]]
+      # Clés de doublon de l'import. → Set[[drena_id, Entities::Shared::NaturalKey.normalize(name)]]
       def existing_keys(drena_ids:)
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
-      # rows : [{ drena_id:, name:, sigle:, school_type:, cycle:, status: }] ; insert_all par 1 000, RETURNING.
+      # rows : [{ public_id:, drena_id:, name:, sigle:, school_type:, cycle:, status: }], public_id tiré par le
+      # domaine ; insert_all avec RETURNING, created_at et updated_at posés par le repository.
       # → [Inserted]
       def insert_many(rows:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #insert_many"

@@ -14,13 +14,18 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
-      # → Result(Drena) | failure(:conflict, errors: { name: [:taken] })
-      def create(name:)
+      # Cible d'un import d'écoles. → Entities::School::Drena | nil
+      def find_by_slug(slug:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_slug"
+      end
+
+      # Slug dérivé du nom à la création. → Result(Drena) | failure(:conflict, errors: { name: [:taken] })
+      def create(drena:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
       # Le slug reste figé. → Result(Drena) | failure(:conflict, errors: { name: [:taken] })
-      def update(id:, name:)
+      def update(drena:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end
 

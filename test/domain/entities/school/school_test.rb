@@ -48,10 +48,6 @@ module Entities
         [ "Lycée Classique", "Collegeville Academy", nil ].each { |name| assert_equal "both", School.cycle_for(name:) }
         assert build(cycle: "first").first_cycle_only?
       end
-
-      test "la clé de doublon ignore espaces, casse et accents" do
-        assert_equal "college notre dame", School.name_key("  Collège  NOTRE Dame ")
-      end
     end
   end
 end

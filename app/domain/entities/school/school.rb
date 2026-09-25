@@ -26,9 +26,6 @@ module Entities
       # « first » si le nom contient le mot collège, accents et casse ignorés (« Collége », « COLLEGE »).
       def self.cycle_for(name:) = name.to_s.parameterize.split("-").include?(COLLEGE_WORD) ? "first" : "both"
 
-      # Clé de doublon d'un import : squish, minuscules, sans accents (ADR-0039).
-      def self.name_key(name) = ActiveSupport::Inflector.transliterate(name.to_s.squish).downcase
-
       def name=(value)
         @name = value&.squish
       end
