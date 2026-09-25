@@ -32,7 +32,8 @@ module AppLnclassapp
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    # Côte d'Ivoire: UTC+0 all year, no daylight saving time.
+    config.time_zone = "Africa/Abidjan"
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Interface in French, code in English. One locale file per context and screen:
