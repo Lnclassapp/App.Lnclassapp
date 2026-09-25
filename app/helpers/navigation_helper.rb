@@ -19,7 +19,8 @@ module NavigationHelper
     teacher: [ [ :home, :teacher_home_path, "home" ], [ :classrooms, :teacher_classrooms_path, "user-group" ],
                [ :courses, :courses_path, "book-open" ] ],
     team: [ [ :home, :team_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
-            [ :schools, :schools_path, "building-library" ], [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
+            [ :schools, :schools_path, "building-library" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
+            [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
     school_admin: [ [ :home, :school_admin_home_path, "home" ], [ :classrooms, :school_admin_classrooms_path, "squares-2x2" ],
                     [ :teachers, :school_admin_teachers_path, "user-group" ], [ :students, :school_admin_students_path, "users" ] ]
   }.freeze

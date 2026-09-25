@@ -1,0 +1,11 @@
+<%# 🌐 UI · teams/levels/destroy — suppression d'un niveau, ou son refus (422) %>
+<%# Rôle : succès : toast et ligne retirée ; niveau utilisé : toast d'erreur avec la raison, ligne rendue de nouveau %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0032 %>
+<% if @level %>
+  <%# Refus : la ligne rendue de nouveau referme sa confirmation, le toast reste jusqu'à sa fermeture. %>
+  <%= turbo_stream_toast t(".referenced", name: @level.name, usage: @usage), type: :error, title: t(".referenced_title") %>
+  <%= turbo_stream.replace level_dom_id(@level.slug), partial: "level_row", locals: { level: @level } %>
+<% else %>
+  <%= turbo_stream_toast t(".deleted"), type: :success %>
+  <%= turbo_stream.remove level_dom_id(params[:slug]) %>
+<% end %>

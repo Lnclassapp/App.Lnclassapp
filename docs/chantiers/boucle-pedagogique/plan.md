@@ -2136,7 +2136,7 @@ Chaque lot vertical :
     - Tableau `#materials` ; chaque ligne rend `ui_subject_badge(name, category:)` : l'équipe voit la couleur et l'icône de la catégorie.
   - `app/views/teams/materials/_material_row.html.erb`
   - `app/views/teams/materials/_form.html.erb`
-    - Catégorie en radios « Lettres », « Sciences », « Autre », avec l'aperçu du badge.
+    - Catégorie en radios « Lettres », « Sciences », « Autres », avec l'aperçu du badge.
   - `app/views/teams/materials/new.html.erb`
   - `app/views/teams/materials/edit.html.erb`
   - `app/views/teams/materials/create.turbo_stream.erb`

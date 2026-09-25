@@ -30,6 +30,7 @@ module Repositories
           assignable_type: assignment.assignable.type, assignable_id: assignment.assignable.id, status: "active",
           assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at
         )
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ClassroomAssignment.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record, assignment.assignable))
       rescue ActiveRecord::RecordNotUnique

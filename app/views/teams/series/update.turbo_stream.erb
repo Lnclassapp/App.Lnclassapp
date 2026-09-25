@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/series/update — succès du renommage %>
+<%# Rôle : toast, ligne et matrice (en-tête de colonne) remplacées ; la modale se ferme sur l'envoi réussi %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0033 %>
+<%= turbo_stream_toast t(".updated", name: @row.name), type: :success %>
+<%= turbo_stream.replace "series_#{@row.slug}", partial: "series_row", locals: { row: @row } %>
+<%= turbo_stream.replace "level_series_matrix", partial: "matrix", locals: { matrix: @matrix } %>

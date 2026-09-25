@@ -1,0 +1,10 @@
+<%# 🌐 UI · teams/levels/create — succès de la création d'un niveau %>
+<%# Rôle : toast, état vide retiré, tableau rendu de nouveau dans l'ordre des positions ; la modale se ferme seule %>
+<%# ADR  : 0034 · UDR : 0006, 0032 · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
+<%= turbo_stream_toast t(".created", name: @level.name), type: :success %>
+<%= turbo_stream.remove "levels_empty" %>
+<%= turbo_stream.replace "levels" do %>
+  <tbody id="levels" class="divide-y divide-line">
+    <%= render partial: "level_row", collection: @levels, as: :level %>
+  </tbody>
+<% end %>

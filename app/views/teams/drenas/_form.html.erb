@@ -1,0 +1,13 @@
+<%# 🌐 UI · teams/drenas/_form — nom d'une DRENA, dans la modale de création ou d'édition %>
+<%# Rôle : un seul champ ; l'aide rappelle que le slug, cible des imports, est figé à la création %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0035 %>
+<%= form_with model: form, scope: :drena, url:, method:, id: "drena-form", class: "space-y-5" do |f| %>
+  <% if form.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= form.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%= ui_field f, :name, required: true, maxlength: Entities::School::Drena::NAME_MAX, autofocus: true, autocomplete: "off",
+                         placeholder: t(".name_placeholder"), hint: hint %>
+<% end %>

@@ -1,0 +1,19 @@
+<%# 🌐 UI · teams/imports/_import_errors — erreurs localisées d'un import %>
+<%# Rôle : une ligne par erreur, chemin JSON et motif traduit ; au-delà de 1 000, le reste est annoncé %>
+<%# ADR  : 0039 · UDR : 0006 %>
+<div>
+  <h3 class="mb-2 text-sm font-medium"><%= t(".title") %></h3>
+  <ul id="import_errors" class="divide-y divide-line rounded-ln border border-line">
+    <% import.import_errors.each do |error| %>
+      <li class="flex flex-col gap-1 px-4 py-2 sm:flex-row sm:items-baseline sm:gap-4">
+        <code class="shrink-0 font-mono text-xs text-ink"><%= error.path %></code>
+        <span class="text-sm text-mute"><%= t("teams.imports.error_codes.#{error.code}", **error.params.to_h.symbolize_keys) %></span>
+      </li>
+    <% end %>
+  </ul>
+  <% if import.import_errors.size >= Entities::Catalog::ImportKind::MAX_ERRORS %>
+    <p class="mt-2 text-sm text-mute">
+      <%= t(".more", count: [ import.error_count - import.import_errors.size, 0 ].max) %>
+    </p>
+  <% end %>
+</div>

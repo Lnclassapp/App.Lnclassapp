@@ -72,6 +72,7 @@ module Repositories
       end
 
       def link(level_id:, series_id:, at:)
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::LevelSeries.transaction(requires_new: true) { Orm::LevelSeries.create!(level_id:, series_id:, created_at: at) }
         ::Shared::Result.success
       rescue ActiveRecord::RecordNotUnique
@@ -97,6 +98,7 @@ module Repositories
       # Le savepoint garde intacte la transaction du use case ; le champ fautif vient du nom de l'index refusé.
       def persist(record, attributes, mapper)
         record.assign_attributes(attributes)
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         record.class.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(send(mapper, record))
       rescue ActiveRecord::RecordNotUnique => error

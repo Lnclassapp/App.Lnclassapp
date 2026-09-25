@@ -1,0 +1,15 @@
+<%# 🌐 UI · teams/imports/_import_row — une ligne du tableau des imports %>
+<%# Rôle : date, type, fichier, statut, compteurs, auteur ; ajoutée en tête par le Turbo Stream de create %>
+<%# ADR  : 0039 · UDR : 0006 %>
+<tr id="import_<%= import.public_id %>" class="align-middle">
+  <td class="px-4 py-3 whitespace-nowrap text-mute"><%= l(import.created_at, format: :short) %></td>
+  <td class="px-4 py-3 whitespace-nowrap"><%= t("import_kinds.#{import.kind}") %></td>
+  <td class="max-w-56 truncate px-4 py-3">
+    <%= link_to import.filename, teams_import_path(import.public_id), class: "font-medium text-ink underline-offset-4 hover:underline", data: { turbo_frame: "_top" } %>
+  </td>
+  <td class="px-4 py-3"><%= ui_badge t("teams.imports.statuses.#{import.status}"), tone: import_status_tone(import.status), dot: true %></td>
+  <td class="px-4 py-3 tabular-nums"><%= import.imported_count %></td>
+  <td class="px-4 py-3 tabular-nums"><%= import.skipped_count %></td>
+  <td class="px-4 py-3 tabular-nums"><%= import.error_count %></td>
+  <td class="px-4 py-3 whitespace-nowrap"><%= import.imported_by_name %></td>
+</tr>

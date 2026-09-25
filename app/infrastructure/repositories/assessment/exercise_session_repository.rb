@@ -29,6 +29,7 @@ module Repositories
           question_count: session.question_count, kind: session.kind, knowledge_gap_id: session.knowledge_gap_id,
           classroom_assignment_id: session.classroom_assignment_id, started_at: session.started_at
         )
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ExerciseSession.transaction(requires_new: true) { record.save! }
         map_to_entity(record)
       rescue ActiveRecord::RecordNotUnique
@@ -41,6 +42,7 @@ module Repositories
       end
 
       def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:)
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::QuestionAttempt.transaction(requires_new: true) do
           Orm::QuestionAttempt.create!(exercise_session_id: session_id, question_id:, selected_answer_ids:, correct:,
                                        answered_at: at)

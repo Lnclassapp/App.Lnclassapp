@@ -48,3 +48,37 @@ class FakeImporter
     { imported: names.size, details: { "classrooms" => names.size * 2 } }
   end
 end
+
+# Job d'import factice : `FakeImporter` sur le moteur réel (rapport, fichier, transaction, audit), avec le schéma
+# de test test/fixtures/files/import_schemas/fake.v1.json. `importer_options` programme l'adaptateur ;
+# `with_fake_import_job` fait mettre ce job en file pour le type « schools ».
+class FakeImportJob < Shared::ImportJob
+  SCHEMAS = Rails.root.join("test/fixtures/files/import_schemas")
+
+  # Le schéma de test s'appelle « fake » : le format du type (« lnclass.schools ») n'a pas encore le sien.
+  FakeSchema = Data.define(:validator) do
+    def validate(format:, version:, document:) = validator.validate(format: "fake", version:, document:)
+  end
+
+  class_attribute :importer_options, default: {}
+
+  def adapter = @adapter ||= FakeImporter.new(**importer_options)
+
+  private
+
+  def schema_validator = FakeSchema.new(validator: Repositories::Catalog::ImportSchemaValidator.new(root: SCHEMAS))
+end
+
+module FakeImportJobHelper
+  ActiveSupport::TestCase.include(self)
+
+  def with_fake_import_job(**importer_options)
+    jobs = Rails.configuration.x.import_jobs
+    Rails.configuration.x.import_jobs = jobs.merge("schools" => "FakeImportJob").freeze
+    FakeImportJob.importer_options = importer_options
+    yield
+  ensure
+    Rails.configuration.x.import_jobs = jobs
+    FakeImportJob.importer_options = {}
+  end
+end

@@ -550,7 +550,7 @@ Scénario: [CA-20][CA-22][CA-26] Gérer les matières et leur catégorie
   Alors la matière s'affiche partout avec la couleur et l'icône de la catégorie sciences
   Quand elle renomme la matière
   Alors sa couleur et son icône ne changent pas
-  Quand elle change sa catégorie en « Autre »
+  Quand elle change sa catégorie en « Autres »
   Alors sa couleur et son icône changent partout
 
 Scénario: [CA-25] Le référentiel depuis l'accueil équipe

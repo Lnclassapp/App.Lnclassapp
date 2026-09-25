@@ -1,0 +1,14 @@
+<%# 🌐 UI · teams/imports/create — succès du téléversement %>
+<%# Rôle : toast, modale remplacée par le suivi du rapport, ligne ajoutée en tête du tableau %>
+<%# ADR  : 0039 · UDR : 0006 %>
+<%= turbo_stream_toast t(".started"), type: :success %>
+<%= turbo_stream.update "modal" do %>
+  <%= ui_modal title: t(".tracking_title", kind: t("import_kinds.#{@import.kind}")), id: "import-tracking-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".close"), variant: :secondary, data: { action: "modal#close" } %>
+    <% end %>
+    <%= render "status", import: @import %>
+  <% end %>
+<% end %>
+<%= turbo_stream.remove "imports_empty" %>
+<%= turbo_stream.prepend "imports", partial: "import_row", locals: { import: @import } %>

@@ -14,6 +14,7 @@ module Repositories
       end
 
       def add_primary(classroom_id:, student_id:, at:)
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ClassroomStudent.transaction(requires_new: true) do
           Orm::ClassroomStudent.create!(classroom_id:, student_id:, primary: true, joined_at: at)
         end

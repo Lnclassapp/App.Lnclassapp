@@ -48,6 +48,14 @@ class NavigationHelperTest < ActionView::TestCase
     assert_select "a:not([aria-disabled]) span.text-brand-strong svg"
   end
 
+  test "the team reaches the imports screen, marked active on its page" do
+    request.path = teams_imports_path
+    imports = navigation_for(:team).find { it.key == :imports }
+    self.rendered = self.class.content_class.new(nav_link(imports, style: :sidebar))
+
+    assert_select "a[href='#{teams_imports_path}'][aria-current=page]", text: /Imports/
+  end
+
   test "nav_link renders an idle, inactive bottom link when the route is missing" do
     self.rendered = self.class.content_class.new(nav_link(navigation_for(:team).last, style: :bottom))
 
