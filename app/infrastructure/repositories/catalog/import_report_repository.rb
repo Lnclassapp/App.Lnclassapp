@@ -11,6 +11,7 @@ module Repositories
       def create(kind:, checksum_sha256:, imported_by_id:, at:)
         record = Orm::ImportReport.new(kind:, checksum_sha256:, imported_by_id:, status: "queued", created_at: at,
                                        updated_at: at)
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ImportReport.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record))
       rescue ActiveRecord::RecordNotUnique
