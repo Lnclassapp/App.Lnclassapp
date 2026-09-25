@@ -2,63 +2,78 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot). Règles de collision : [`boucle-de-travail.md`](../refonte-application/boucle-de-travail.md) §6.
-> Specs : [`prd.md`](prd.md). Cadrage : [`memo.md`](memo.md).
+> Specs : [`prd.md`](prd.md). Cadrage : [`memo.md`](memo.md). Décisions : ADR-0026 à ADR-0054 et UDR-0007, **acceptés le 2026-09-25**, avec les corrections du porteur reportées dans [`journal.md`](journal.md).
 
 **Conventions de lecture de ce plan**
 
-- **Un chemin du nouveau dépôt n'apparaît qu'une fois** avant la section « Vérification de collision ». C'est ce qui rend la commande de vérification probante. Les autres mentions d'un fichier passent par le nom de sa classe (`Result`, `Ports::Classroom::AssignmentRepositoryPort`…).
-- Les écrans de l'**ancienne application** (lecture seule, `/home/kamkara/LnclassHQ/Lnclassapp/LnclassHQ/Lnclassapp`) sont notés `⟨ancienne⟩ views/…` ou `⟨ancienne⟩ javascript/…`. Ces chemins sont relatifs à son répertoire `app/`. On les **lit** pour reproduire les parcours et la mise en page. On ne recopie jamais leur code.
+- **Un chemin du nouveau dépôt n'apparaît qu'une fois** avant la section « Vérification de collision ». C'est ce qui rend la commande de vérification probante. Les autres mentions d'un fichier passent par le nom de sa classe (`Shared::Result`, `Ports::Classroom::AssignmentRepositoryPort`…).
+- Les écrans et le code de l'**ancienne application** (lecture seule, `/home/kamkara/LnclassHQ/Lnclassapp/LnclassHQ/Lnclassapp`) sont notés `⟨ancienne⟩ views/…`, `⟨ancienne⟩ javascript/…` ou `⟨ancienne⟩ domain/…`. Ces chemins sont relatifs à son répertoire `app/`. On les **lit** pour reproduire les parcours, la mise en page et les règles. On ne recopie jamais leur code.
 - Les fiches d'inventaire sont dans [`refonte-application/inventaire/`](../refonte-application/inventaire/). On les cherche par leur ID (`grep -n "CL-09" inventaire/*.md`).
 - Le design est **mixte** :
   - **les écrans et les parcours** viennent de l'ancienne application ;
   - **les tokens** viennent de la nouvelle landing (UDR-0005) ;
   - **les composants** `ui_*` et **le shell** `layout "shell"` viennent du Lot 0c (UDR-0006).
 - Aucun lot n'écrit de classe CSS arbitraire (`[…]`) ni de couleur `#hex` dans une vue.
-- Chaque lot écrit **l'UDR de ses écrans** sous le numéro réservé ci-dessous, dans `docs/decisions/udr/`. L'**orchestrateur** l'indexe dans le README des UDR au merge : c'est le seul à écrire dans ce fichier.
+- Le vocabulaire d'interface suit l'**UDR-0007** : « Fiche essentielle », « Exercice », « Session », « Tentative », « Proposition », badges Bronze, Argent, Or et Diamant.
+- Chaque lot écrit **l'UDR de ses écrans** sous le numéro réservé, dans `docs/decisions/udr/`. L'**orchestrateur** l'indexe dans le README des UDR au merge : c'est le seul à écrire dans ce fichier.
 
 ## Graphe
 
 ```
                  Lot 0c (design, livré par un autre agent : composants + shell)
                    │
-Lot 0 — SOCLE (orchestrateur, séquentiel : 0.1 → 0.10)
-  │   schéma complet · Orm · domaine (Result, entités, ports, policies, DTO)
-  │   repositories · seeds · routes V1 complètes · auth 0b · shell branché
+Lot 0 — SOCLE (orchestrateur, séquentiel : 0.1 → 0.11)
+  │   schéma complet · Orm · domaine (Shared::Result, entités, ports, policies)
+  │   repositories · moteur d'import en masse · routes V1 complètes
+  │   authentification + TOTP · Teams::BaseController · shell branché
   │
-  ├─ Vague 1 : 21 lots en parallèle ─────────────────────────────────────────┐
-  │                                                                          │
-  │  A — Élève         B — Contenu & équipe          C — Évaluation          │
-  │  ├─► A1 inscription├─► B1 catalogue + cours      ├─► C1 détail exercice  │
-  │  ├─► A2 accueil    ├─► B2 gestion cours          ├─► C2 jouer session    │
-  │  ├─► A3 ma classe  ├─► B3 fiche + progression    └─► C3 résultat + badge │
-  │  └─► A4 landing    ├─► B4 gestion fiches                                 │
-  │                    ├─► B5 gestion exercices      D — Enseignant & classe │
-  │                    ├─► B6 accueil équipe         ├─► D1 inscription ens. │
-  │                    ├─► B7 invitation équipe      ├─► D2 déclarer classes │
-  │                    └─► B8 débloquer un compte    ├─► D3 accueil ens.     │
-  │                                                  ├─► D4 page classe      │
-  │                                                  ├─► D5 assignation ─────┼─┐
-  │                                                  └─► D8 créer une classe │ │
-  ├──────────────────────────────────────────────────────────────────────────┘ │
-  │                                                                            │
-  ├─ Vague 2 : D6 fiche dans la classe  ◄── D5                                 │
-  │            D7 assigner depuis le cours ◄── D5 ─────────────────────────────┘
+  ├─ Vague 2 : 30 lots en parallèle ─────────────────────────────────────────────────┐
+  │                                                                                  │
+  │  R — Référentiel (équipe)   S — DRENA, établissements    I — Import de contenu   │
+  │  ├─► R1 niveaux             ├─► S1 DRENA + import        ├─► I1 cours (arbre)    │
+  │  ├─► R2 séries + niveau–série ├─► S2 établissements      ├─► I2 fiches ess.      │
+  │  └─► R3 matières            │       + génération classes └─► I3 exercices        │
+  │                             └─► S3 import établissements                         │
+  │                                                                                  │
+  │  A — Élève         B — Contenu & équipe          C — Évaluation                  │
+  │  ├─► A1 adhésion   ├─► B1 catalogue + cours      ├─► C1 détail exercice          │
+  │  ├─► A2 accueil    ├─► B2 gestion cours          ├─► C2 session + clôture        │
+  │  ├─► A3 ma classe  ├─► B3 fiche ess. + progression└─► C3 résultat + badge        │
+  │  └─► A4 landing    ├─► B4 gestion fiches ess.                                    │
+  │                    ├─► B5 gestion exercices      D — Enseignant & classe         │
+  │                    ├─► B6 accueil équipe         ├─► D1 inscription ens.         │
+  │                    ├─► B7 invitation équipe      ├─► D2 déclarer ses classes     │
+  │                    └─► B8 débloquer un compte    ├─► D3 accueil ens.             │
+  │                                                  ├─► D4 page classe              │
+  │                                                  ├─► D5 assignation ─────────────┼─┐
+  │                                                  └─► D8 créer une classe         │ │
+  ├──────────────────────────────────────────────────────────────────────────────────┘ │
+  │                                                                                    │
+  ├─ Vague 3 : D6 fiche ess. dans la classe  ◄── D5                                    │
+  │            D7 assigner depuis le cours   ◄── D5 ───────────────────────────────────┘
   │
-  └─ Vague 3 : Lot E — preuve bout en bout (Chrome headless) ◄── tous les lots
+  └─ Vague 4 : Lot E — preuve bout en bout (Chrome headless) ◄── tous les lots
 ```
 
-**25 lots** : Lot 0, puis 23 lots verticaux, puis le Lot E. Les lots verticaux ne dépendent que du Lot 0, sauf D6 et D7 qui dépendent de D5 : ils réutilisent son partial de bascule d'assignation.
+**34 lots** : le Lot 0, 32 lots verticaux, puis le Lot E. Les lots verticaux ne dépendent que du Lot 0, sauf D6 et D7, qui dépendent de D5 : ils réutilisent son partial de bascule d'assignation.
+
+**Pourquoi B (publication) ne dépend pas de R (référentiel).**
+- B a besoin de niveaux, de séries et de matières **en base**, pas des écrans qui les créent. Ses tests les créent avec les fabriques du Lot 0. En développement, le seed du référentiel (0.9) les fournit (ADR-0034).
+- Les écrans R ne sont nécessaires qu'au parcours réel, donc au Lot E, qui dépend de tout.
+- B et R partent donc ensemble en vague 2. Le même raisonnement vaut pour S (établissements) face à D (enseignant), et pour I (import) face à B.
 
 ### Pourquoi le Lot 0 est plus gros que « des routes vides »
 
-Trois familles de fichiers seraient partagées par plusieurs lots verticaux. Le Lot 0 les écrit une fois pour toutes, et les lots n'y touchent plus.
+Cinq familles de fichiers seraient partagées par plusieurs lots verticaux. Le Lot 0 les écrit une fois pour toutes, et les lots n'y touchent plus.
 
 1. **Les routes.**
-   - Plusieurs lots écrivent dans un même contexte : 4 dans `catalog`, 8 dans `classroom`. Un fichier de routes vide par contexte les mettrait donc en collision.
+   - Plusieurs lots écrivent dans un même contexte : 7 dans `classroom`, 13 dans l'espace équipe. Un fichier de routes vide par contexte les mettrait en collision.
    - Le Lot 0 dessine **toutes** les routes V1. Une route qui pointe vers un contrôleur pas encore écrit ne casse rien tant qu'on ne l'appelle pas.
-   - Le shell du Lot 0c exige déjà les noms de route `student_home_path`, `teacher_home_path`, etc. Sans eux, ses entrées de navigation restent inactives.
-2. **Les repositories.** Un même port sert plusieurs lots. Par exemple, `AssignmentRepositoryPort` sert A2, C2, D5 et D6. Chaque repository est donc écrit au Lot 0, avec son test de contrat. Les lots n'écrivent que leurs **use cases**, leurs **queries** (lecture, une par écran), leurs contrôleurs et leurs vues.
+   - Le shell du Lot 0c exige des noms de route **gelés** : `student_home_path`, `student_classroom_path`, `teacher_home_path`, `teacher_classrooms_path`, `team_home_path`, `courses_path`, `session_path`. Le Lot 0 les crée tous. Il crée aussi `schools_path`, dont le contrôleur est livré par S2 : **l'entrée « Établissements » de l'équipe devient donc active en V1**. `team_dashboard_path` (V4) et `profile_path` (V2) restent inactives.
+2. **Les repositories.** Un même port sert plusieurs lots. Par exemple, `AssignmentRepositoryPort` sert A2, C2, D5 et D6, et `ClassroomRepositoryPort#insert_generated` sert S2 et S3. Chaque repository est donc écrit au Lot 0, avec son test de contrat. Les lots n'écrivent que leurs **use cases**, leurs **queries** (une par écran), leurs contrôleurs et leurs vues.
 3. **Les fabriques de test.** Deux lots d'un même contexte se disputeraient `test/support/factories/<ctx>.rb`. Le Lot 0 les écrit **complètes**, pour toutes les tables. Un lot qui a besoin d'un assemblage particulier l'écrit dans son propre fichier de test.
+4. **Le moteur d'import en masse.** Cinq types d'import partagent le téléversement, le job Solid Queue, la validation complète avant écriture, la transaction, le rapport persisté et l'écran de suivi. Le Lot 0 écrit ce moteur. Chaque lot I ou S n'apporte que son **importeur** : un use case qui valide et prépare l'écriture, son schéma JSON, son aide à l'écran et son test de performance.
+5. **La génération des classes** (`Entities::Classroom::DefaultClassroomPlan`). Elle sert à la création unitaire (S2) comme à l'import (S3) : elle est au Lot 0.
 
 Les contrôleurs Stimulus sont chargés **par motif de fichier** (`esbuild-rails`). Il n'y a donc pas de manifeste `index.js` à éditer. Un lot qui dépose `app/javascript/controllers/<ctx>/<nom>_controller.js` est enregistré sous l'identifiant `<ctx>--<nom>`.
 
@@ -66,785 +81,838 @@ Les contrôleurs Stimulus sont chargés **par motif de fichier** (`esbuild-rails
 
 ## Lot 0 — Socle
 
-- **Couche**       : infrastructure + domaine (contrats) + delivery (authentification, shell) + seeds
-- **Fichiers**     : tous les chemins des tableaux 0.1 à 0.10 ci-dessous, colonne « Fichier ». La liste est exhaustive.
-- **Dépend de**    : V0 mergée (garde-fous, CI, `/up`) et Lot 0c mergé (composants `ui_*`, `layout "shell"`, `NavigationHelper`, `ComponentsHelper`, toasts).
-- **Test associé** : colonne « Test » des tableaux 0.1 à 0.10. Il y a en plus les tests d'architecture de 0.10.
+- **Couche**       : infrastructure + domaine (contrats) + delivery (authentification, shell, espace équipe, moteur d'import) + seeds
+- **Fichiers**     : tous les chemins des tableaux 0.1 à 0.11 ci-dessous, colonne « Fichier ». La liste est exhaustive.
+- **Dépend de**    : V0 mergée (garde-fous, CI, `/up`) et Lot 0c mergé (composants `ui_*` dont `ui_subject_badge(label, category:)`, `layout "shell"`, `NavigationHelper`, `ComponentsHelper`, toasts).
+- **Test associé** : colonne « Test » des tableaux 0.1 à 0.11, plus les garde-fous d'architecture de 0.11.
 - **Done quand**   :
-  - `bin/rails db:prepare db:seed` passe deux fois de suite sans erreur ;
-  - un élève, un enseignant et un membre de l'équipe seedés en développement se connectent, un membre de l'équipe passant son TOTP, et chacun arrive sur son accueil. Chaque accueil peut encore répondre 404 tant que son lot n'est pas mergé ;
+  - `bin/rails db:prepare db:seed` passe deux fois de suite sans erreur, en développement ; en production, le seed ne crée que l'invitation d'amorçage ;
+  - un élève, un enseignant et un membre de l'équipe seedés en développement se connectent (le membre de l'équipe passe son TOTP) et chacun arrive sur son accueil. Chaque accueil peut encore répondre 404 tant que son lot n'est pas mergé ;
+  - un import factice (importeur de test) passe de `pending` à `succeeded` par le job, et un import invalide finit `failed` sans aucune écriture ;
+  - `/teams/jobs` (Mission Control) est refusé sans second facteur vérifié ;
   - `bin/ci` est vert ;
   - les ports sont **gelés** : toute modification ultérieure d'un port passe par l'orchestrateur, jamais par un lot vertical.
-- **Exécution**    : l'orchestrateur code, un commit par sous-étape (`feat(<ctx>): …`), dans l'ordre 0.1 → 0.10. Il le fait sur `feature/boucle-pedagogique`, avant de créer la moindre branche de lot.
-- **UDR**          : UDR-0008 couvre les écrans connexion, second facteur, récupération du PIN et écrans de sortie.
+- **Exécution**    : l'orchestrateur code, un commit par sous-étape (`feat(<ctx>): …`), dans l'ordre 0.1 → 0.11, sur `feature/boucle-pedagogique`, avant de créer la moindre branche de lot.
+- **UDR**          : UDR-0008 couvre les écrans connexion, second facteur, réinitialisation du PIN, écrans de sortie et suivi des imports.
 
 ### 0.1 Dépendances et configuration
 
 | Fichier | Contenu | Test |
 |---|---|---|
-| `Gemfile` · `Gemfile.lock` | Décommenter `bcrypt ~> 3.1.7`. Ajouter `rotp ~> 6.3` (TOTP) et `rqrcode ~> 2.2` (QR d'enrôlement, rendu SVG). Aucune autre gemme. | `bin/bundler-audit` vert |
-| `package.json` · `yarn.lock` | Ajouter `katex` (dépendance, dans le bundle, pas de CDN : TR-41) et `esbuild-rails` (dev). Le script `build` devient `node esbuild.config.mjs`. | `yarn build` vert |
-| `esbuild.config.mjs` | Point d'entrée `app/javascript/application.js`, plugin `rails()` de `esbuild-rails` pour les imports par motif, sortie `app/assets/builds`, `--minify` en production | — |
-| `app/javascript/controllers/index.js` | Remplace le manifeste généré : `import controllers from "./**/*_controller.js"`, puis `controllers.forEach(c => application.register(c.name, c.module.default))`. Identifiant d'un fichier en sous-dossier : `<dossier>--<nom>`. | `test/javascript_bundle_test.rb` : le bundle compilé contient l'identifiant `math` et aucune URL `cdn.` |
+| `Gemfile` · `Gemfile.lock` | Décommenter `bcrypt ~> 3.1.7`. Ajouter `rotp ~> 6.3` et `rqrcode ~> 2.2` (ADR-0031), `json_schemer ~> 2.3` (ADR-0039), `aws-sdk-s3` (ADR-0047), `mission_control-jobs` (ADR-0052). `friendly_id` n'est **pas** utilisé (voir « Décisions que ce plan suppose »). | `bin/bundler-audit` vert |
+| `package.json` · `yarn.lock` | Ajouter `katex` (dans le bundle, pas de CDN : TR-41) et `esbuild-rails` (dev). Le script `build` devient `node esbuild.config.mjs`. | `yarn build` vert |
+| `esbuild.config.mjs` | Point d'entrée `app/javascript/application.js`, plugin `rails()` d'`esbuild-rails` pour les imports par motif, sortie `app/assets/builds`, `--minify` en production | — |
+| `app/javascript/controllers/index.js` | Remplace le manifeste généré : `import controllers from "./**/*_controller.js"`, puis `controllers.forEach(c => application.register(c.name, c.module.default))`. Un fichier en sous-dossier a pour identifiant `<dossier>--<nom>`. | `test/javascript_bundle_test.rb` : le bundle compilé contient l'identifiant `math`, aucune URL `cdn.`, et sa taille gzip reste dans le budget de l'ADR-0051 |
 | `app/javascript/controllers/math_controller.js` | Rendu KaTeX (`renderMathInElement` de `katex/contrib/auto-render`) des délimiteurs `$…$` et `$$…$$` dans l'élément porteur de `data-controller="math"`. Sert à B1, B3, C1, C2 et C3. | couvert par les tests système des lots |
 | `app/assets/stylesheets/application.tailwind.css` | **Une ligne** ajoutée au fichier du Lot 0c : `@import "katex/dist/katex.min.css";`. Rien d'autre n'y est modifié. | — |
-| `config/application.rb` | `config.i18n.default_locale = :fr`, `available_locales = [:fr]`, `load_path += Dir[Rails.root.join("config/locales/**/*.yml")]`, `time_zone = "Africa/Abidjan"`. | — |
-| `config/environments/test.rb` | `config.cache_store = :memory_store` (nécessaire à `rate_limit`), `config.i18n.raise_on_missing_translations = true`, `config.action_controller.perform_caching = false`. Le helper de 0.9 l'active par test. | — |
-| `config/environments/development.rb` | `config.i18n.raise_on_missing_translations = true` | — |
-| `config/initializers/filter_parameter_logging.rb` | Ajouter `:pin, :new_pin, :code, :otp, :backup_code, :token, :join_code`. | `test/initializers/filter_parameter_logging_test.rb` |
-| `config/credentials.yml.enc` | Ajouter les clés `active_record_encryption` (`bin/rails db:encryption:init`), nécessaires à `encrypts :otp_secret`. La clé maître de production est fournie par le porteur. | — |
+| `config/application.rb` | `i18n.default_locale = :fr`, `available_locales = [:fr]`, `load_path += Dir[Rails.root.join("config/locales/**/*.yml")]`, `time_zone = "Africa/Abidjan"`, `active_storage.resolve_model_to_route = :rails_storage_proxy` (ADR-0047). | — |
+| `config/environments/test.rb` | `cache_store = :memory_store` (nécessaire à `rate_limit`), `i18n.raise_on_missing_translations = true`, `action_controller.perform_caching = false`, adaptateur de job `:test` (ADR-0052). | — |
+| `config/environments/development.rb` | `i18n.raise_on_missing_translations = true`, adaptateur de job `:solid_queue` (ADR-0052). | — |
+| `config/environments/production.rb` | `active_storage.service = :railway` (ADR-0047). Solid Queue selon l'ADR-0052 (tables dans la base principale). `assume_ssl` et `force_ssl`, `/up` exclu de la redirection. | — |
+| `config/puma.rb` | `plugin :solid_queue` **inconditionnel** (ADR-0052) : le worker tourne en développement comme en production. | — |
+| `config/storage.yml` | Service `railway` (S3, variables `ENDPOINT`, `BUCKET`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `REGION` lues dans l'environnement, jamais dans le dépôt). `local` et `test` inchangés. | — |
+| `config/initializers/mission_control.rb` | `MissionControl::Jobs.base_controller_class = "Teams::BaseController"`, `http_basic_auth_enabled = false` : l'espace des jobs hérite de la garde de l'équipe (ADR-0031, ADR-0052). | couvert par le test de `Teams::BaseController` (0.10) |
+| `config/initializers/filter_parameter_logging.rb` | Ajouter `:pin, :pin_confirmation, :new_pin, :code, :otp, :backup_code, :token, :join_code`. | `test/initializers/filter_parameter_logging_test.rb` |
+| `config/credentials.yml.enc` | Ajouter les clés `active_record_encryption` (`bin/rails db:encryption:init`), nécessaires à `encrypts :secret` (ADR-0031). La clé maître de production est fournie par le porteur. | — |
+| `config/ci.rb` | Ajouter l'étape « Performance des imports » : `PERF=1 bin/rails test test/performance`. Les tests de performance des lots S1, S3 et I1 à I3 sont ignorés sans `PERF`, pour garder `bin/rails test` rapide. | — |
 
 ### 0.2 Migrations
 
-Horodatage `20260925100001` → `20260925100029`, dans cet ordre. **Règles communes** :
+Horodatage `20260925100001` → `20260925100030`, dans cet ordre. **Règles communes** (ADR-0027, ADR-0029, ADR-0036) :
 
-- clés `bigint` ;
-- `timestamps null: false` sauf mention contraire ;
-- toutes les FK en `on_delete: :restrict`. **Aucune cascade** (ADR-0036). Seule exception : `user_sessions`, en `cascade` ;
+- clés primaires `bigint` ; `timestamps null: false` sauf mention contraire ;
+- toute FK a sa contrainte en base, en `on_delete: :restrict`. `:cascade` n'est permis que pour la liste fermée de l'ADR-0036 : `sessions`, `login_attempts`, `totp_credentials`, `backup_codes` et `pin_recovery_codes` vers `users` ;
 - énumérations en `string` avec contrainte `CHECK`, jamais en `integer` ;
-- `public_id` : `string(16) null: false`, index unique. La valeur est un `SecureRandom.base58(16)` généré par le modèle `Orm::`, sans préfixe (ADR-0029) ;
-- slug : `string null: false`, index unique global, généré par `friendly_id` (`use: :slugged`) à la création, puis **jamais régénéré**.
+- `public_id` : `string(14) null: false`, index unique, `SecureRandom.base58(14)` généré par `Orm::HasPublicId` ;
+- slug : `string null: false`, index unique global, dérivé du nom par `parameterize`, suffixé `-2`, `-3`… en cas de collision, **figé à la création** (`Orm::HasFrozenSlug`) ;
+- toute personne est référencée par `users.id`, jamais par un profil.
 
-**`db/migrate/20260925100001_create_users.rb`** — `users`
+**`db/migrate/20260925100001_create_users.rb`** — `users` (ADR-0037, ADR-0038, ADR-0050)
+- `public_id` ; `last_name` string(50) non null ; `first_name` string(80) non null.
+- `contact` string(10), **nullable** (anonymisation), index unique partiel `WHERE contact IS NOT NULL`, `CHECK (contact ~ '^0[157][0-9]{8}$')`.
+- `gender` string, non null, `CHECK IN ('male','female')`.
+- `role` string, non null, `CHECK IN ('student','teacher','school_admin','team')`, index.
+- `team_role` string, nullable, `CHECK IN ('admin','content','field')`, et `CHECK ((role = 'team') = (team_role IS NOT NULL))`.
+- `pin_digest` string, non null (`has_secure_password :pin`).
+- `anonymized_at` datetime, nullable.
 
-| Colonne | Type | Null | Défaut | Note |
-|---|---|---|---|---|
-| `public_id` | string(16) | non | — | unique |
-| `last_name` | string(60) | non | — | « Nom », ADR-0037 |
-| `first_names` | string(90) | non | — | « Prénom(s) » |
-| `contact` | string(10) | non | — | unique ; `CHECK (contact ~ '^(01\|05\|07)[0-9]{8}$')` |
-| `gender` | string | non | — | `CHECK (gender IN ('male','female'))` |
-| `role` | string | non | — | `CHECK (role IN ('student','teacher','team'))` ; index |
-| `password_digest` | string | non | — | bcrypt du PIN |
+**`db/migrate/20260925100002_create_teacher_profiles.rb`** — `teacher_profiles` (ADR-0027, ADR-0030)
+- `user_id` FK non null, **unique** ; `material_id` FK non null ; `onboarding_completed_at` datetime, nullable.
 
-**`db/migrate/20260925100002_create_drenas.rb`** — `drenas`
-- `name` string(50), non null, unique.
-- Aucun `team_id`, aucun slug.
+**`db/migrate/20260925100003_create_sessions.rb`** — `sessions` (ADR-0050)
+- `user_id` FK non null, `on_delete: :cascade`, index ; `token_digest` string(64) non null, unique ; `ip_address` string(45) ; `user_agent` string(255) ; `created_at` et `last_seen_at` non null ; `second_factor_verified_at` nullable. Pas d'`updated_at`.
 
-**`db/migrate/20260925100003_create_schools.rb`** — `schools`
-- `drena_id` : FK, non null, index.
-- `public_id` : unique.
-- `name` string(150), non null.
-- `short_name` string(10), nullable.
-- `sector` string, non null, `CHECK IN ('public','private','mixed')`.
-- `status` string, non null, défaut `'active'`, `CHECK IN ('draft','active','inactive')`.
+**`db/migrate/20260925100004_create_login_attempts.rb`** — `login_attempts` (ADR-0050)
+- `contact` string(20) non null (normalisé si possible, brut sinon) ; `user_id` FK nullable, `cascade` ; `ip_address` string(45) ; `succeeded` boolean non null ; `kind` string non null `CHECK IN ('pin','second_factor')` ; `created_at` non null. Index `(contact, created_at)`.
+
+**`db/migrate/20260925100005_create_audit_events.rb`** — `audit_events` (ADR-0050)
+- `actor_id` FK `users` nullable ; `action` string(60) non null ; `subject_type` string(40) et `subject_id` bigint nullables ; `metadata` jsonb non null défaut `{}` ; `ip_address` string(45) ; `created_at` non null. Index `(subject_type, subject_id)` et `(actor_id, created_at)`.
+
+**`db/migrate/20260925100006_create_totp_credentials.rb`** — `totp_credentials` (ADR-0031)
+- `user_id` FK non null, unique, `cascade` ; `secret` text non null (chiffré par `encrypts`) ; `confirmed_at` nullable ; `last_used_step` bigint nullable.
+
+**`db/migrate/20260925100007_create_backup_codes.rb`** — `backup_codes` (ADR-0031)
+- `user_id` FK non null, `cascade` ; `code_digest` string(64) non null (HMAC-SHA256) ; `used_at` nullable ; `created_at` non null. Index `(user_id) WHERE used_at IS NULL`.
+
+**`db/migrate/20260925100008_create_pin_recovery_codes.rb`** — `pin_recovery_codes` (ADR-0032)
+- `user_id` FK non null, `cascade` ; `issued_by_id` FK `users` non null ; `code_digest` string(64) non null ; `expires_at` non null ; `failed_attempts` integer non null défaut 0 ; `used_at` et `revoked_at` nullables ; `created_at` non null. Index unique partiel `(user_id) WHERE used_at IS NULL AND revoked_at IS NULL`.
+
+**`db/migrate/20260925100009_create_invitations.rb`** — `invitations` (ADR-0038, partagée avec l'ADR-0044)
+- `kind` string non null `CHECK IN ('team','school_staff')` ; `contact` string(10) non null ; `team_role` string nullable ; `school_id` FK nullable ; `position` string nullable ; `invited_by_id` FK `users` nullable (invitation d'amorçage) ; `token_digest` string(64) non null, unique ; `expires_at` non null ; `accepted_at`, `accepted_user_id` (FK `users`), `revoked_at` nullables.
+- `CHECK (kind <> 'team' OR team_role IS NOT NULL)`. Index unique partiel `(kind, contact) WHERE accepted_at IS NULL AND revoked_at IS NULL`.
+
+**`db/migrate/20260925100010_create_drenas.rb`** — `drenas`
+- `public_id` ; `name` string(80) non null, unique.
+
+**`db/migrate/20260925100011_create_schools.rb`** — `schools`
+- `public_id` ; `drena_id` FK non null, index ; `name` string(150) non null ; `short_name` string(15) nullable.
+- `sector` string non null `CHECK IN ('public','private')` : pilote le nombre de classes générées.
+- `cycle` string non null défaut `'both'`, `CHECK IN ('first','both')` : `'first'` pour un collège sans second cycle.
+- `status` string non null défaut `'active'`, `CHECK IN ('active','inactive')` (ADR-0036).
 - Unique `(drena_id, name)`.
 
-**`db/migrate/20260925100004_create_levels.rb`** — `levels`
-- `name` string(20), non null, unique.
-- `position` integer, non null, unique.
-- `cycle` string, non null, `CHECK IN ('first','second')`.
+**`db/migrate/20260925100012_create_teacher_schools.rb`** — `teacher_schools` (ADR-0030, tel quel)
+- `teacher_id` FK **`users`** non null ; `school_id` FK non null ; `primary` boolean non null défaut `false` ; `created_at` non null.
+- Unique `(teacher_id, school_id)` ; unique partiel `(teacher_id) WHERE "primary"`, nommé `index_teacher_schools_one_primary`.
 
-**`db/migrate/20260925100005_create_series.rb`** — `series`
-- `name` string(5), non null, unique.
+**`db/migrate/20260925100013_create_levels.rb`** — `levels` (ADR-0034)
+- `name` string(20) non null, unique ; `slug` ; `code` string(10) non null, unique, `CHECK (code ~ '^[a-z0-9]{1,10}$')`, **figé** ; `position` integer non null, unique ; `cycle` string non null `CHECK IN ('first','second')`.
 
-**`db/migrate/20260925100006_create_level_series.rb`** — `level_series`
-- `level_id` et `series_id` : FK, non null.
-- Unique `(level_id, series_id)`, index `series_id`.
+**`db/migrate/20260925100014_create_series.rb`** — `series`
+- `name` string(10) non null, unique ; `slug` ; `code` string(10) non null, unique, même `CHECK`, figé.
 
-**`db/migrate/20260925100007_create_materials.rb`** — `materials`
-- `name` string(40), non null, unique.
-- `short_name` string(10), non null, unique.
-- `category` string, non null, `CHECK IN ('literature','science','other')`.
-- `icon` string(40), non null, défaut `'book-open'` : nom d'heroicon, CA-26.
+**`db/migrate/20260925100015_create_level_series.rb`** — `level_series`
+- `level_id` et `series_id` FK non null ; unique `(level_id, series_id)`, index `series_id` ; `created_at` non null.
 
-**`db/migrate/20260925100008_create_students.rb`** — `students`
-- `user_id` : FK, non null, **unique** (sécurité n° 15).
+**`db/migrate/20260925100016_create_materials.rb`** — `materials` (ADR-0034, CA-26)
+- `name` string(40) non null, unique ; `shortname` string(10) non null, unique ; `slug` ; `category` string non null `CHECK IN ('literature','science','other')`. Pas de colonne d'icône : la catégorie porte l'icône et la couleur (`ui_subject_badge`).
 
-**`db/migrate/20260925100009_create_teachers.rb`** — `teachers`
-- `user_id` : FK, non null, unique.
-- `material_id` : FK, non null, index.
-- `onboarded_at` datetime, nullable : état persisté de l'onboarding, qui remplace TR-08.
+**`db/migrate/20260925100017_create_classrooms.rb`** — `classrooms` (ADR-0041)
+- `public_id` ; `school_id` et `level_id` FK non null ; `series_id` FK nullable ; `name` string(15) non null.
+- `school_year` string(9) non null, `CHECK (school_year ~ '^[0-9]{4}-[0-9]{4}$' AND right(school_year, 4)::int = left(school_year, 4)::int + 1)`.
+- `status` string non null défaut `'active'` `CHECK IN ('active','archived')` ; `archived_at` nullable ; `CHECK ((status = 'archived') = (archived_at IS NOT NULL))`.
+- `join_code` string(5) **nullable**, `CHECK (join_code ~ '^[a-hj-np-z]{3}[2-9]{2}$')`, unique partiel `WHERE join_code IS NOT NULL` ; `join_code_rotated_at` nullable. La longueur de la colonne égale celle du code généré : ce test de schéma ferme le chantier `classroom-code-adhesion-trop-long`.
+- `max_students` integer non null défaut 80, `CHECK (max_students BETWEEN 1 AND 150)`.
+- Unique `(school_id, school_year, name)`.
 
-**`db/migrate/20260925100010_create_teams.rb`** — `teams`
-- `user_id` : FK, non null, unique.
-- `otp_secret` string, nullable, chiffré par `encrypts` côté Orm. Les clés Active Record Encryption vont dans les credentials, voir 0.1 Risques.
-- `otp_enabled_at` datetime, nullable.
-- `otp_last_used_step` bigint, nullable : anti-rejeu.
+**`db/migrate/20260925100018_create_classroom_students.rb`** — `classroom_students` (ADR-0040, tel quel)
+- `classroom_id` FK non null ; `student_id` FK `users` non null ; `primary` boolean non null défaut `false` ; `joined_at` non null ; `left_at` nullable.
+- Unique `(classroom_id, student_id)` ; unique partiel `(student_id) WHERE "primary" AND left_at IS NULL`, nommé `index_classroom_students_one_active_primary`.
 
-**`db/migrate/20260925100011_create_teacher_schools.rb`** — `teacher_schools`
-- `teacher_id` et `school_id` : FK, non null.
-- `primary` boolean, non null, défaut `false`.
-- Unique `(teacher_id, school_id)`.
-- **Unique partiel** `(teacher_id) WHERE primary` (ADR-0030).
-- Index `school_id`.
+**`db/migrate/20260925100019_create_teacher_classrooms.rb`** — `teacher_classrooms` (ADR-0030)
+- `teacher_id` FK `users` non null ; `classroom_id` FK non null ; `created_at` non null. Unique `(teacher_id, classroom_id)`, index `classroom_id`.
 
-**`db/migrate/20260925100012_create_classrooms.rb`** — `classrooms`
-- `school_id` et `level_id` : FK, non null.
-- `series_id` : FK, nullable.
-- `public_id` : unique.
-- `name` string(15), non null. Unique `(school_id, name)`.
-- `join_code` string(5), non null, unique, `CHECK (join_code ~ '^[a-hj-np-z]{3}[2-9]{2}$')`. La longueur de la colonne égale celle du code généré, et le CHECK impose les minuscules. Ce test de schéma ferme le chantier `classroom-code-adhesion-trop-long`.
+**`db/migrate/20260925100020_create_courses.rb`** — `courses` (ADR-0035)
+- `slug` ; `name` string(200) non null ; `subtitle` string(150) ; `level_id` et `material_id` FK non null ; `series_id` FK nullable ; `author_id` FK `users` non null.
+- `status` string non null défaut `'draft'` `CHECK IN ('draft','published','archived')` ; `published_at` et `archived_at` nullables ; index `status`.
+- Unique `(level_id, material_id, series_id, name) NULLS NOT DISTINCT` : la clé de doublon de l'ADR-0039.
+- Contenu : rich text Action Text `content` (tables présentes depuis V0).
 
-**`db/migrate/20260925100013_create_classroom_students.rb`** — `classroom_students`
-- `classroom_id` et `student_id` : FK, non null.
-- `primary` boolean, non null, défaut `false`.
-- `joined_at` datetime, non null.
-- Unique `(student_id, classroom_id)`.
-- **Unique partiel** `(student_id) WHERE primary`.
-- Index `classroom_id`.
+**`db/migrate/20260925100021_create_essentials.rb`** — `essentials`
+- `course_id` FK non null ; `slug` ; `name` string(150) non null ; `subtitle` string(150) ; `position` integer non null ; `author_id` FK `users` non null ; `status`, `published_at`, `archived_at` comme `courses`.
+- Unique `(course_id, name)` et `(course_id, position)`. Rich text `content`.
 
-**`db/migrate/20260925100014_create_teacher_classrooms.rb`** — `teacher_classrooms`
-- `teacher_id` et `classroom_id` : FK, non null.
-- Unique `(teacher_id, classroom_id)`, index `classroom_id`.
+**`db/migrate/20260925100022_create_exercises.rb`** — `exercises` (ADR-0054)
+- `public_id` ; `essential_id` FK non null ; `title` string(200) non null ; `description` text ; `exercise_type` string non null défaut `'fixation'` `CHECK IN ('fixation','evaluation')` ; `position` integer non null ; `author_id` FK `users` non null ; `status`, `published_at`, `archived_at`.
+- Unique `(essential_id, position)`, index `(essential_id, status)`.
 
-**`db/migrate/20260925100015_create_courses.rb`** — `courses`
-- `level_id` et `material_id` : FK, non null.
-- `series_id` : FK, nullable.
-- `author_id` : FK vers `users`, non null.
-- `name` string(200), non null. Unique `(material_id, level_id, name)`.
-- `slug` : unique.
-- `subtitle` string(150), nullable.
-- `status` string, non null, défaut `'draft'`, `CHECK IN ('draft','published','archived')`.
-- `published_at` et `archived_at` datetime, nullables.
-- `CHECK (status <> 'published' OR published_at IS NOT NULL)`.
-- Index `(status, level_id)`.
-- Le contenu est un rich text Action Text `content`, dont la table existe déjà.
+**`db/migrate/20260925100023_create_questions.rb`** — `questions`
+- `exercise_id` FK non null ; `position` integer non null ; `content` text non null ; `explanation` text ; `question_type` string non null `CHECK IN ('true_false','single_choice','multiple_correct_2','multiple_correct_3')`. Unique `(exercise_id, position)`.
 
-**`db/migrate/20260925100016_create_essentials.rb`** — `essentials`
-- `course_id` : FK, non null.
-- `author_id` : FK vers `users`, non null.
-- `name` string(150), non null.
-- `slug` : unique global.
-- `subtitle` string(150).
-- `position` integer, non null.
-- `status`, `published_at`, `archived_at` : comme `courses`.
-- Unique `(course_id, name)` et `(course_id, position)`.
-- Rich text `content`.
+**`db/migrate/20260925100024_create_answers.rb`** — `answers` (les « propositions » de l'UDR-0007)
+- `question_id` FK non null ; `position` integer non null ; `content` string(500) non null ; `correct` boolean non null. Unique `(question_id, position)`.
 
-**`db/migrate/20260925100017_create_exercises.rb`** — `exercises`
-- `essential_id` : FK, **non null** (ADR-0054).
-- `author_id` : FK vers `users`, non null.
-- `title` string(200), non null.
-- `description` text.
-- `slug` : unique global.
-- `kind` string, non null, défaut `'fixation'`, `CHECK IN ('fixation','evaluation')`.
-- `position` integer, non null.
-- `status`, `published_at`, `archived_at` : comme `courses`.
-- Unique `(essential_id, position)`.
+**`db/migrate/20260925100025_create_classroom_assignments.rb`** — `classroom_assignments` (ADR-0048, tel quel)
+- `public_id` ; `classroom_id` FK non null ; `assignable_type` string non null `CHECK IN ('Course','Essential','Exercise')` ; `assignable_id` bigint non null ; `assigned_by_id` FK `users` non null ; `status` `CHECK IN ('active','archived')` défaut `'active'` ; `assigned_at` non null ; `archived_at` et `archived_by_id` (FK `users`) nullables.
+- `CHECK ((status = 'archived') = (archived_at IS NOT NULL))` ; unique partiel `(classroom_id, assignable_type, assignable_id) WHERE status = 'active'`, nommé `index_classroom_assignments_one_active` ; index `(assignable_type, assignable_id)`.
 
-**`db/migrate/20260925100018_create_questions.rb`** — `questions`
-- `exercise_id` : FK, non null.
-- `position` integer, non null.
-- `content` text, non null.
-- `explanation` text.
-- `question_type` string, non null, `CHECK IN ('true_false','single_choice','multiple_correct_2','multiple_correct_3')`.
-- Unique `(exercise_id, position)`.
+**`db/migrate/20260925100026_create_exercise_sessions.rb`** — `exercise_sessions` (ADR-0033, ADR-0043, ADR-0048, ADR-0054)
+- `public_id` ; `student_id` FK `users` non null ; `exercise_id` FK non null.
+- `status` string non null défaut `'started'` `CHECK IN ('started','completed','abandoned')`.
+- `question_count` integer non null `CHECK > 0`, figé au démarrage ; `answered_count` et `correct_count` integer non null défaut 0.
+- `progress_percent` integer non null défaut 0 `CHECK BETWEEN 0 AND 100` ; `score_percent` integer nullable `CHECK BETWEEN 0 AND 100`, posé **uniquement** à la clôture ; `CHECK (status <> 'completed' OR score_percent IS NOT NULL)`.
+- `kind` string non null défaut `'standard'` `CHECK IN ('standard','remediation')` ; `knowledge_gap_id` bigint nullable (FK ajoutée en 29) ; `CHECK ((kind = 'remediation') = (knowledge_gap_id IS NOT NULL))`.
+- `classroom_assignment_id` FK nullable ; `started_at` non null ; `completed_at` nullable.
+- Unique partiel `(student_id, exercise_id) WHERE status = 'started'` ; index `(student_id, completed_at)`.
 
-**`db/migrate/20260925100019_create_answers.rb`** — `answers`
-- `question_id` : FK, non null.
-- `position` integer, non null.
-- `content` string(500), non null.
-- `correct` boolean, non null, défaut `false`.
-- Unique `(question_id, position)`.
+**`db/migrate/20260925100027_create_question_attempts.rb`** — `question_attempts` (ADR-0054)
+- `exercise_session_id` et `question_id` FK non null ; `selected_answer_ids` bigint[] non null `CHECK (cardinality(selected_answer_ids) > 0)` ; `correct` boolean non null ; `answered_at` non null. **Aucun timestamp** : la ligne est immuable.
+- **Unique `(exercise_session_id, question_id)`** (sécurité n° 30).
 
-**`db/migrate/20260925100020_create_exercise_sessions.rb`** — `exercise_sessions`
-- `public_id` : unique.
-- `student_id` et `exercise_id` : FK, non null.
-- `status` string, non null, défaut `'in_progress'`, `CHECK IN ('in_progress','completed','abandoned')`.
-- `questions_total` integer, non null, `CHECK > 0` : figé au démarrage.
-- `answered_count` integer, non null, défaut 0 : **avancement** (F-11).
-- `correct_count` integer, non null, défaut 0.
-- `score_percent` integer, nullable : **score**, renseigné à la clôture.
-- `started_at` datetime, non null.
-- `completed_at` datetime, nullable.
-- `CHECK (status <> 'completed' OR (completed_at IS NOT NULL AND score_percent IS NOT NULL))`.
-- **Unique partiel** `(student_id, exercise_id) WHERE status = 'in_progress'`.
-- Index `(student_id, completed_at)` et `exercise_id`.
+**`db/migrate/20260925100028_create_exercise_badges.rb`** — `exercise_badges` (ADR-0033)
+- `student_id` FK `users` ; `exercise_id` FK ; `exercise_session_id` FK ; `level` `CHECK IN ('bronze','silver','gold','diamond')` ; `awarded_at` ; tous non null. Unique `(student_id, exercise_id)`.
 
-**`db/migrate/20260925100021_create_question_attempts.rb`** — `question_attempts`
-- `exercise_session_id` et `question_id` : FK, non null.
-- `selected_answer_ids` bigint[], non null, `CHECK (cardinality(selected_answer_ids) > 0)`.
-- `correct` boolean, non null.
-- `created_at` datetime, non null. **Pas de `updated_at`** : la ligne est immuable.
-- **Unique `(exercise_session_id, question_id)`** (sécurité n° 30, ADR-0054).
+**`db/migrate/20260925100029_create_knowledge_gaps.rb`** — `knowledge_gaps` (ADR-0043)
+- `public_id` ; `student_id` FK `users` non null ; `essential_id` FK non null ; `source_session_id` FK `exercise_sessions` non null ; `status` `CHECK IN ('pending','remediated','self_corrected')` défaut `'pending'` ; `failed_sessions_count` integer non null défaut 1 ; `resolved_at` et `resolved_by_session_id` (FK `exercise_sessions`) nullables.
+- Unique partiel `(student_id, essential_id) WHERE status = 'pending'`.
+- Puis `add_foreign_key :exercise_sessions, :knowledge_gaps`.
 
-**`db/migrate/20260925100022_create_exercise_badges.rb`** — `exercise_badges`
-- `student_id` et `exercise_id` : FK, non null.
-- `exercise_session_id` : FK, non null : la session qui l'a fait gagner.
-- `level` string, non null, `CHECK IN ('bronze','silver','gold')`.
-- `score_percent` integer, non null.
-- `earned_at` datetime, non null.
-- Unique `(student_id, exercise_id)`.
-
-**`db/migrate/20260925100023_create_classroom_assignments.rb`** — `classroom_assignments`
-- `classroom_id` : FK, non null.
-- `assignable_type` string, non null, `CHECK IN ('course','essential','exercise')`. C'est un vocabulaire de domaine, **jamais** un nom de classe `Orm::`.
-- `assignable_id` bigint, non null.
-- `status` string, non null, défaut `'active'`, `CHECK IN ('active','archived')`.
-- `assigned_by_id` : FK vers **`users`**, non null.
-- `assigned_at` datetime, non null.
-- `archived_at` datetime, nullable.
-- Unique `(classroom_id, assignable_type, assignable_id)`.
-- Index `(assignable_type, assignable_id, status)`.
-
-**`db/migrate/20260925100024_create_user_sessions.rb`** — `user_sessions`
-- `user_id` : FK, non null, `on_delete: :cascade`.
-- `token_digest` string(64), non null, unique : SHA-256 du jeton du cookie.
-- `ip_address` inet.
-- `user_agent` string(255).
-- `second_factor_verified_at` datetime, nullable.
-- `last_active_at` datetime, non null.
-- `expires_at` datetime, non null.
-- `created_at` datetime, non null.
-- Index `user_id`.
-
-**`db/migrate/20260925100025_create_login_failures.rb`** — `login_failures`
-- `contact` string(10), non null. C'est le numéro **normalisé**, même inconnu.
-- `ip_address` inet.
-- `created_at` datetime, non null.
-- Index `(contact, created_at)`.
-
-**`db/migrate/20260925100026_create_audit_events.rb`** — `audit_events`
-- `actor_id` : FK vers `users`, **nullable** (tentative anonyme).
-- `action` string(60), non null.
-- `subject_type` string(40), nullable.
-- `subject_id` bigint, nullable.
-- `metadata` jsonb, non null, défaut `{}`.
-- `ip_address` inet.
-- `created_at` datetime, non null.
-- Index `(action, created_at)`, `(actor_id, created_at)`, `(subject_type, subject_id)`.
-
-**`db/migrate/20260925100027_create_pin_recovery_codes.rb`** — `pin_recovery_codes`
-- `user_id` : FK, non null.
-- `issued_by_id` : FK vers `users`, non null.
-- `code_digest` string, non null : bcrypt.
-- `failed_attempts` integer, non null, défaut 0.
-- `expires_at` datetime, non null.
-- `used_at` et `revoked_at` datetime, nullables.
-- `created_at` datetime, non null.
-- Index `(user_id) WHERE used_at IS NULL AND revoked_at IS NULL`.
-
-**`db/migrate/20260925100028_create_team_backup_codes.rb`** — `team_backup_codes`
-- `team_id` : FK, non null.
-- `code_digest` string, non null : bcrypt.
-- `used_at` datetime, nullable.
-- `created_at` datetime, non null.
-- Index `team_id`.
-
-**`db/migrate/20260925100029_create_team_invitations.rb`** — `team_invitations`
-- `invited_by_id` : FK vers `users`, non null.
-- `contact` string(10), non null.
-- `last_name` string(60) et `first_names` string(90), non null.
-- `token_digest` string(64), non null, unique.
-- `expires_at` datetime, non null.
-- `accepted_at` et `revoked_at` datetime, nullables.
-- `accepted_user_id` : FK vers `users`, nullable.
-- Unique partiel `(contact) WHERE accepted_at IS NULL AND revoked_at IS NULL`.
+**`db/migrate/20260925100030_create_import_reports.rb`** — `import_reports` (ADR-0039, élargi par le porteur)
+- `public_id` ; `kind` string non null `CHECK IN ('drenas','schools','course_tree','essential_tree','exercise_tree')` ; `format_version` integer non null ; `filename` string(255) non null ; `checksum_sha256` string(64) non null ; `byte_size` bigint non null.
+- `scope` jsonb non null défaut `{}` : parent imposé par l'écran d'origine (`{ "drena_public_id": … }`, `{ "course_slug": … }`, `{ "essential_slug": … }`).
+- `status` string non null défaut `'pending'` `CHECK IN ('pending','running','succeeded','failed')`.
+- `progress` jsonb non null défaut `{}` : `{ phase: "validating" | "writing", processed:, total: }`.
+- `counts` jsonb non null défaut `{}` : `created`, `skipped_existing`, `skipped_duplicate`, et par type (`classrooms_created`…).
+- `import_errors` jsonb non null défaut `[]` : `[{ path: "schools[12].sector", code:, message: }]`, 500 au plus, avec `counts.errors_total`. La colonne ne s'appelle pas `errors`, que l'ORM réserve.
+- `imported_by_id` FK `users` non null ; `started_at` et `finished_at` nullables.
+- Unique partiel `(kind, checksum_sha256) WHERE status = 'succeeded'` : réimporter un fichier déjà réussi donne `:conflict`. Index `(kind, created_at)`.
+- Le fichier est une pièce jointe Active Storage `file` (ADR-0047 : bucket, envoi par le serveur, jamais sur le disque du conteneur : TR-28).
 
 | Fichier | Contenu | Test |
 |---|---|---|
-| `db/schema.rb` | Régénéré après les 29 migrations | `test/db/schema_constraints_test.rb` |
+| `db/schema.rb` | Régénéré après les 30 migrations | `test/db/schema_constraints_test.rb` |
 
 Ce test couvre :
 - la longueur de `join_code`, égale à `Entities::Classroom::JoinCode::LENGTH` ;
-- chaque index unique et chaque index partiel ci-dessus ;
-- l'absence de `on_delete: :cascade` hors de `user_sessions` ;
+- chaque index unique et chaque index partiel ci-dessus, et chaque `CHECK` d'énumération ;
+- l'absence de `on_delete: :cascade` hors de la liste de l'ADR-0036 ;
 - l'absence de colonne `updated_at` sur `question_attempts`.
 
 ### 0.3 Modèles `Orm::`
 
 Tous les modèles sont dans `app/infrastructure/orm/`. Chacun :
 - hérite d'`ApplicationRecord` et déclare `self.table_name` ;
-- déclare ses associations avec `class_name: "Orm::…"` et `inverse_of` ;
+- déclare ses associations avec `class_name: "Orm::…"` et `inverse_of`, et **jamais** `dependent: :destroy` ni `:delete_all` vers la production des élèves (`dependent: :restrict_with_error`, ADR-0036) ;
 - porte les validations de **cohérence de schéma**, jamais de règle métier ;
-- ne contient **aucun callback métier**. Exception : la génération de `public_id` et du slug.
+- ne contient **aucun callback métier**. Exceptions : `public_id` et slug.
 
-**Tests.** Les modèles n'ont pas de test propre. Ils sont couverts par les tests de repository (0.5). Seul `Orm::User` a un test : `has_secure_password`, et le PIN absent de `inspect`.
+**Tests.** Les modèles n'ont pas de test propre : les tests de repository (0.5) les couvrent. Seuls les deux concerns et `Orm::User` ont un test.
 
 | Fichier | Particularités |
 |---|---|
-| `app/infrastructure/orm/user.rb` | `has_secure_password`, `has_one :student/:teacher/:team`, `before_validation :assign_public_id, on: :create`, `filter_attributes` pour `password_digest` |
-| `app/infrastructure/orm/student.rb` | `belongs_to :user`, `has_many :classroom_students` |
-| `app/infrastructure/orm/teacher.rb` | `belongs_to :user, :material`, `has_many :teacher_schools, :teacher_classrooms` |
-| `app/infrastructure/orm/team.rb` | `belongs_to :user`, `encrypts :otp_secret`, `has_many :team_backup_codes` |
-| `app/infrastructure/orm/team_backup_code.rb` | `belongs_to :team` |
-| `app/infrastructure/orm/team_invitation.rb` | `belongs_to :invited_by, class_name: "Orm::User"` |
-| `app/infrastructure/orm/user_session.rb` | `belongs_to :user` |
-| `app/infrastructure/orm/login_failure.rb` | — |
-| `app/infrastructure/orm/audit_event.rb` | `belongs_to :actor, optional: true`, `readonly?` vrai après création |
+| `app/infrastructure/orm/has_public_id.rb` | Concern de l'ADR-0029, tel quel : `before_validation(on: :create)`, `validates length: { is: 14 }`, `to_param` |
+| `app/infrastructure/orm/has_frozen_slug.rb` | `has_frozen_slug from: :name`. À la création seulement : `parameterize`, puis `-2`, `-3`… tant que le slug existe. `to_param` renvoie le slug. Aucune régénération à la mise à jour. |
+| `app/infrastructure/orm/user.rb` | `HasPublicId`, `has_secure_password :pin`, `has_one :teacher_profile, :totp_credential`, `filter_attributes` sur `pin_digest` |
+| `app/infrastructure/orm/teacher_profile.rb` | `belongs_to :user, :material` |
+| `app/infrastructure/orm/session.rb` | `belongs_to :user` |
+| `app/infrastructure/orm/login_attempt.rb` | `belongs_to :user, optional: true` |
+| `app/infrastructure/orm/audit_event.rb` | `belongs_to :actor, optional: true` ; `readonly?` vrai après création |
+| `app/infrastructure/orm/totp_credential.rb` | `belongs_to :user`, `encrypts :secret` |
+| `app/infrastructure/orm/backup_code.rb` | `belongs_to :user` |
 | `app/infrastructure/orm/pin_recovery_code.rb` | `belongs_to :user`, `belongs_to :issued_by` |
-| `app/infrastructure/orm/drena.rb` | `has_many :schools` |
-| `app/infrastructure/orm/school.rb` | `belongs_to :drena`, `has_many :classrooms`, `public_id` |
-| `app/infrastructure/orm/teacher_school.rb` | `belongs_to :teacher, :school` |
-| `app/infrastructure/orm/level.rb` | `has_many :level_series` |
-| `app/infrastructure/orm/series.rb` | classe `Orm::Series` (singulier = pluriel, sans inflexion à ajouter) |
+| `app/infrastructure/orm/invitation.rb` | `belongs_to :invited_by, optional: true`, `belongs_to :school, optional: true` |
+| `app/infrastructure/orm/drena.rb` | `HasPublicId`, `has_many :schools` |
+| `app/infrastructure/orm/school.rb` | `HasPublicId`, `belongs_to :drena`, `has_many :classrooms` |
+| `app/infrastructure/orm/teacher_school.rb` | `belongs_to :teacher, class_name: "Orm::User"`, `belongs_to :school` |
+| `app/infrastructure/orm/level.rb` | `HasFrozenSlug`, `has_many :level_series` |
+| `app/infrastructure/orm/series.rb` | classe `Orm::Series`, `HasFrozenSlug` |
 | `app/infrastructure/orm/level_series.rb` | classe `Orm::LevelSeries`, `self.table_name = "level_series"` |
-| `app/infrastructure/orm/material.rb` | — |
-| `app/infrastructure/orm/classroom.rb` | `belongs_to :school, :level`, `belongs_to :series, optional: true`, `public_id`. **Aucune** association polymorphe vers les ressources assignées : c'est la cause du chantier `classroom-assignment-belongs-to-casses`. |
-| `app/infrastructure/orm/classroom_student.rb` | `belongs_to :classroom, :student` |
-| `app/infrastructure/orm/teacher_classroom.rb` | `belongs_to :teacher, :classroom` |
-| `app/infrastructure/orm/classroom_assignment.rb` | `belongs_to :classroom`, `belongs_to :assigned_by, class_name: "Orm::User"` ; `assignable_type` / `assignable_id` sont de simples colonnes |
-| `app/infrastructure/orm/course.rb` | `extend FriendlyId`, `friendly_id :name, use: :slugged`, `should_generate_new_friendly_id?` vrai seulement à la création ; `has_rich_text :content` ; `has_many :essentials` |
-| `app/infrastructure/orm/essential.rb` | idem, slug construit sur le nom du cours puis celui de la fiche ; `has_rich_text :content` ; `has_many :exercises` |
-| `app/infrastructure/orm/exercise.rb` | slug ; `has_many :questions, -> { order(:position) }` |
+| `app/infrastructure/orm/material.rb` | `HasFrozenSlug` |
+| `app/infrastructure/orm/classroom.rb` | `HasPublicId`, `belongs_to :school, :level`, `belongs_to :series, optional: true`. **Aucune** association polymorphe vers les ressources assignées : c'est la cause du chantier `classroom-assignment-belongs-to-casses`. |
+| `app/infrastructure/orm/classroom_student.rb` | `belongs_to :classroom`, `belongs_to :student, class_name: "Orm::User"` |
+| `app/infrastructure/orm/teacher_classroom.rb` | `belongs_to :teacher, class_name: "Orm::User"`, `belongs_to :classroom` |
+| `app/infrastructure/orm/classroom_assignment.rb` | `HasPublicId`, `belongs_to :classroom`, `belongs_to :assigned_by, class_name: "Orm::User"`. `assignable_type` et `assignable_id` sont de simples colonnes. |
+| `app/infrastructure/orm/course.rb` | `HasFrozenSlug`, `has_rich_text :content`, `has_many :essentials` |
+| `app/infrastructure/orm/essential.rb` | `HasFrozenSlug` (sur le nom du cours puis celui de la fiche), `has_rich_text :content`, `has_many :exercises` |
+| `app/infrastructure/orm/exercise.rb` | `HasPublicId`, `has_many :questions, -> { order(:position) }` |
 | `app/infrastructure/orm/question.rb` | `has_many :answers, -> { order(:position) }` |
 | `app/infrastructure/orm/answer.rb` | `belongs_to :question` |
-| `app/infrastructure/orm/exercise_session.rb` | `public_id` ; `has_many :question_attempts` |
+| `app/infrastructure/orm/exercise_session.rb` | `HasPublicId`, `has_many :question_attempts` |
 | `app/infrastructure/orm/question_attempt.rb` | `readonly?` vrai si `persisted?` |
-| `app/infrastructure/orm/exercise_badge.rb` | `belongs_to :student, :exercise, :exercise_session` |
+| `app/infrastructure/orm/exercise_badge.rb` | `belongs_to :exercise_session` |
+| `app/infrastructure/orm/knowledge_gap.rb` | `HasPublicId` |
+| `app/infrastructure/orm/import_report.rb` | `HasPublicId`, `has_one_attached :file` |
 
 | Fichier | Test |
 |---|---|
-| (voir `Orm::User` ci-dessus) | `test/infrastructure/orm/user_test.rb` |
+| (concerns et `Orm::User` ci-dessus) | `test/infrastructure/orm/has_public_id_test.rb` · `test/infrastructure/orm/has_frozen_slug_test.rb` (renommer ne change pas le slug ; collision → `-2`) · `test/infrastructure/orm/user_test.rb` (PIN absent d'`inspect`) |
 
-### 0.4 Domaine — `Result`, entités, objets-valeurs
+### 0.4 Domaine — `Shared::Result`, entités, objets-valeurs
 
-**`Result`** (ADR-0026)
+**Socle partagé** (ADR-0026, ADR-0027)
 
 | Fichier | Contenu | Test |
 |---|---|---|
-| `app/domain/result.rb` | `Result = Data.define(:value, :error, :details)`. Constructeurs `Result.success(value = nil)` et `Result.failure(error, details = {})`. Méthodes `success?` et `failure?`. `error` appartient à `ERRORS = %i[forbidden not_found invalid conflict locked expired].freeze` : un symbole hors liste lève `ArgumentError`. `details` contient les erreurs de champ (`{ field: [messages] }`) ou le contexte d'affichage. Le résultat est immuable. | `test/domain/result_test.rb` |
+| `app/domain/shared/result.rb` | `Shared::Result = Data.define(:value, :code, :errors)`, tel que dans l'ADR-0026 : `success(value = nil)`, `failure(code, errors: {})`, `success?`, `failure?`, `ERROR_CODES = %i[forbidden not_found invalid conflict locked expired]`. Un code hors liste lève `ArgumentError`. | `test/domain/shared/result_test.rb` |
+| `app/domain/ports/shared/transaction_port.rb` | `Ports::Shared::TransactionPort#call { … }` → la valeur du bloc | couvert par le repository |
+| `app/infrastructure/repositories/shared/transaction.rb` | `Repositories::Shared::Transaction` : `ActiveRecord::Base.transaction { yield }` | `test/infrastructure/repositories/shared/transaction_test.rb` (rollback sur exception) |
 
-**Règles communes aux entités.**
-- Ruby pur : `Data.define` pour les objets-valeurs, `ActiveModel::Model` + `ActiveModel::Validations` toléré pour les entités validées (ADR-0026, F-03).
-- Aucune référence à `Orm::`, `ActiveRecord`, `Repositories::` ni à Rails hors `ActiveModel` et `ActiveSupport`.
-- Les constantes métier sont **nommées** dans l'entité qui les porte.
+**Règles communes aux entités** (ADR-0026) : un objet Ruby ou un `Data`. `ActiveModel::Model`, `Validations` et `Attributes` sont tolérés, rien d'autre. Aucune mention d'`ActiveRecord`, `Orm::`, `Repositories::`, `Queries::`, `ActiveStorage` ni `ActionController`. Les constantes métier sont **nommées** dans l'entité qui les porte.
 
 | Fichier | Classe | Attributs et règles | Test |
 |---|---|---|---|
-| `app/domain/entities/identity/actor.rb` | `Entities::Identity::Actor` (Data) | `user_id, public_id, role, display_name, student_id, teacher_id, team_id, second_factor_verified`. Prédicats `student?`, `teacher?`, `team?`. Un `Actor` team non vérifié n'est **jamais** construit hors du socle d'authentification. | `test/domain/entities/identity/actor_test.rb` |
-| `app/domain/entities/identity/user.rb` | `Entities::Identity::User` | `id, public_id, last_name, first_names, contact, gender, role`. `full_name` vaut `"#{first_names} #{last_name}"`, sans aucune transformation de casse (ADR-0037). `ROLES = %w[student teacher team]`, `GENDERS = %w[male female]`. | `test/domain/entities/identity/user_test.rb` |
-| `app/domain/entities/identity/contact.rb` | `Entities::Identity::Contact` (Data `value`) | `Contact.normalize(raw)` : garde les chiffres ; si la longueur dépasse 10, retire le préfixe `00225`, puis `225`. `valid?` si `FORMAT = /\A(01\|05\|07)\d{8}\z/`. Message : clé `errors.contact.format` (ID-28). | `test/domain/entities/identity/contact_test.rb` |
-| `app/domain/entities/identity/person_name.rb` | `Entities::Identity::PersonName` | `normalize(raw)` : `strip` et espaces multiples réduits à un seul. **Rien d'autre**. `MAX_LAST = 60`, `MAX_FIRST = 90`. | `test/domain/entities/identity/person_name_test.rb` |
-| `app/domain/entities/identity/pin.rb` | `Entities::Identity::Pin` | `FORMAT = /\A\d{4}\z/`. `valid_for?(pin, contact:)` est faux si le format est mauvais ou si `pin == contact[-4..]`. Le PIN n'est jamais stocké dans une entité : `inspect` le masque. | `test/domain/entities/identity/pin_test.rb` |
-| `app/domain/entities/identity/home_destination.rb` | `Entities::Identity::HomeDestination` | `for(role:, second_factor_verified:, primary_classroom:, primary_school:, onboarded:)` renvoie un symbole. **Student** : `:student_home` s'il a une classe principale, sinon `:student_pending`. **Teacher** : `:teacher_pending` sans école principale, sinon `:teacher_selection` s'il n'est pas configuré, sinon `:teacher_home`. **Team** : `:second_factor` s'il n'est pas vérifié, sinon `:team_home`. Aucune destination ne renvoie vers une page qui la redirige elle-même. | `test/domain/entities/identity/home_destination_test.rb` |
-| `app/domain/entities/identity/user_session.rb` | `Entities::Identity::UserSession` | `ABSOLUTE_TTL = { student: 30.days, teacher: 30.days, team: 12.hours }`, `IDLE_TTL = { student: 7.days, teacher: 7.days, team: 1.hour }`. `expired?(now:)`. `TOUCH_EVERY = 5.minutes` : `last_active_at` n'est écrit qu'au-delà de ce délai. **Valeurs proposées, à fixer par l'ADR-0050.** | `test/domain/entities/identity/user_session_test.rb` |
-| `app/domain/entities/identity/second_factor.rb` | `Entities::Identity::SecondFactor` | `BACKUP_CODES_COUNT = 10`, `BACKUP_CODE_LENGTH = 10` (alphabet base32 sans 0/1/O/I), `generate_backup_codes`, `DRIFT_BEHIND = 1` pas de 30 s | `test/domain/entities/identity/second_factor_test.rb` |
-| `app/domain/entities/identity/pin_recovery_code.rb` | `Entities::Identity::PinRecoveryCode` | `TTL = 15.minutes`, `LENGTH = 6` chiffres, `MAX_FAILED_ATTEMPTS = 5`, `generate`, `usable?(now:)` (non expiré, non utilisé, non révoqué, moins de 5 échecs) | `test/domain/entities/identity/pin_recovery_code_test.rb` |
-| `app/domain/entities/identity/team_invitation.rb` | `Entities::Identity::TeamInvitation` | `TTL = 72.hours`, `generate_token` (`SecureRandom.urlsafe_base64(32)`), `digest(token)` (SHA-256 hexadécimal), `acceptable?(now:)` | `test/domain/entities/identity/team_invitation_test.rb` |
-| `app/domain/entities/school/drena.rb` | `Entities::School::Drena` (Data) | `id, name` | couvert par le repository |
-| `app/domain/entities/school/school.rb` | `Entities::School::School` (Data) | `id, public_id, drena_id, name, short_name, sector, status` | couvert par le repository |
-| `app/domain/entities/classroom/join_code.rb` | `Entities::Classroom::JoinCode` | `LETTERS = ("a".."z").to_a - %w[i o]`, `DIGITS = ("2".."9").to_a`, `LENGTH = 5`. `generate` : 3 lettres puis 2 chiffres. `normalize(raw)` : `raw.to_s.gsub(/\s/, "").downcase`. `valid?` s'il correspond au format. `display(code)` : `code.upcase` (CL-04). | `test/domain/entities/classroom/join_code_test.rb` |
-| `app/domain/entities/classroom/classroom.rb` | `Entities::Classroom::Classroom` | `id, public_id, school_id, level_id, series_id, name, join_code`. Validations : `name` présent, au plus 15 caractères, normalisé comme un nom de personne. | `test/domain/entities/classroom/classroom_test.rb` |
-| `app/domain/entities/classroom/membership.rb` | `Entities::Classroom::Membership` (Data) | `student_id, classroom_id, primary, joined_at` | couvert par le repository |
-| `app/domain/entities/classroom/assignable.rb` | `Entities::Classroom::Assignable` (Data `type, id, name`) | `TYPES = %w[course essential exercise]`. Un type hors liste lève `ArgumentError`. | `test/domain/entities/classroom/assignable_test.rb` |
-| `app/domain/entities/classroom/assignment.rb` | `Entities::Classroom::Assignment` | `classroom_id, assignable, status, assigned_by_id, assigned_at, archived_at`. `STATUSES = %w[active archived]`. `active?`. `reactivate(by:, at:)` et `archive(at:)` renvoient une nouvelle instance (ADR-0048). | `test/domain/entities/classroom/assignment_test.rb` |
-| `app/domain/entities/catalog/content_status.rb` | `Entities::Catalog::ContentStatus` | `VALUES = %w[draft published archived]`. `TRANSITIONS = { "draft" => %w[draft published archived], "published" => %w[published archived], "archived" => %w[archived] }`. `transition(from:, to:)` renvoie un `Result`, en `:invalid` si la transition est interdite. | `test/domain/entities/catalog/content_status_test.rb` |
-| `app/domain/entities/catalog/level.rb` | `Entities::Catalog::Level` (Data) | `id, name, position, cycle` | couvert par le repository |
-| `app/domain/entities/catalog/series.rb` | `Entities::Catalog::Series` (Data) | `id, name` | couvert par le repository |
-| `app/domain/entities/catalog/material.rb` | `Entities::Catalog::Material` (Data) | `id, name, short_name, category, icon`. `CATEGORIES = %w[literature science other]`. | couvert par le repository |
-| `app/domain/entities/catalog/course.rb` | `Entities::Catalog::Course` | `id, slug, name, subtitle, level_id, series_id, material_id, author_id, status, published_at, archived_at, content_html`. Validations : `name` présent (200 au plus), `level_id` et `material_id` présents. `publish(at:)` et `archive(at:)` passent par `ContentStatus`. `readable_by_non_team?` vaut `status == "published"`. **Une seule entité** pour la lecture et l'écriture (chantier `catalog-lecture-ecriture-incompatibles`). | `test/domain/entities/catalog/course_test.rb` |
-| `app/domain/entities/catalog/essential.rb` | `Entities::Catalog::Essential` | `id, slug, course_id, name, subtitle, position, author_id, status, published_at, archived_at, content_html`. Mêmes règles de statut que `Course`. | `test/domain/entities/catalog/essential_test.rb` |
+| `app/domain/entities/identity/actor.rb` | `Entities::Identity::Actor` (Data) | `user_id, role, team_role, school_id` (ADR-0028). `role` ∈ `:student, :teacher, :school_admin, :team`. Un visiteur est `actor: nil`. Un compte `team` sans second facteur vérifié n'obtient **jamais** d'`Actor`. | `test/domain/entities/identity/actor_test.rb` |
+| `app/domain/entities/identity/user.rb` | `Entities::Identity::User` | `id, public_id, last_name, first_name, contact, gender, role, team_role, anonymized_at`. Validation du nom selon l'ADR-0037 (`NAME_FORMAT`, 50 et 80, `squish` seulement). `display_name` = `"#{first_name} #{last_name}"`, sans changement de casse. `ROLES`, `GENDERS = %w[male female]`. | `test/domain/entities/identity/user_test.rb` |
+| `app/domain/entities/identity/contact.rb` | `Entities::Identity::Contact` | `FORMAT = /\A0[157]\d{8}\z/`, `normalize(raw)` tel que dans l'ADR-0050 (retire `00225` sur 15 chiffres, `225` sur 13), renvoie `nil` si invalide. | `test/domain/entities/identity/contact_test.rb` |
+| `app/domain/entities/identity/pin.rb` | `Entities::Identity::Pin` | `FORMAT = /\A\d{4}\z/`. Le PIN n'est jamais dérivé du contact et n'est jamais stocké dans une entité. | `test/domain/entities/identity/pin_test.rb` |
+| `app/domain/entities/identity/session_lifetime.rb` | `Entities::Identity::SessionLifetime` | `IDLE_TTL = 30.days` ; `ABSOLUTE_TTL = { team: 12.hours, school_admin: 12.hours }` ; `TOUCH_EVERY = 5.minutes`. `expired?(role:, created_at:, last_seen_at:, now:)`. | `test/domain/entities/identity/session_lifetime_test.rb` |
+| `app/domain/entities/identity/lockout.rb` | `Entities::Identity::Lockout` | Paliers d'échecs **consécutifs** depuis le dernier succès : `{ 5 => 15.minutes, 10 => 1.hour, 20 => :until_recovery }`. `retry_after(failures:, last_failed_at:, now:)` renvoie `nil` ou une durée (ou `:until_recovery`). | `test/domain/entities/identity/lockout_test.rb` (4, 5, 9, 10, 19, 20 échecs) |
+| `app/domain/entities/identity/audit_action.rb` | `Entities::Identity::AuditAction` | Liste fermée `ALL` : `login.locked`, `totp.enrolled`, `totp.reset`, `backup_code.used`, `pin.recovery_code_issued`, `pin.reset`, `invitation.sent`, `invitation.accepted`, `content.published`, `content.archived`, `taxonomy.changed`, `school.changed`, `import.run`. | `test/domain/entities/identity/audit_action_test.rb` |
+| `app/domain/entities/identity/secret_digest.rb` | `Entities::Identity::SecretDigest` | `hmac(value, key:)` (HMAC-SHA256 hexadécimal, `OpenSSL` de la bibliothèque standard) et `secure_compare`. La clé est injectée par le contrôleur (`key_generator.generate_key("lnclass-secrets")`). | `test/domain/entities/identity/secret_digest_test.rb` |
+| `app/domain/entities/identity/backup_codes.rb` | `Entities::Identity::BackupCodes` | `COUNT = 10`, `LENGTH = 10`, `generate` (base58). | `test/domain/entities/identity/backup_codes_test.rb` |
+| `app/domain/entities/identity/pin_recovery_code.rb` | `Entities::Identity::PinRecoveryCode` | `TTL = 15.minutes`, `LENGTH = 8` chiffres, `MAX_FAILED_ATTEMPTS = 5`, `generate`, `status(now:)` → `:usable`, `:expired` ou `:revoked`. | `test/domain/entities/identity/pin_recovery_code_test.rb` |
+| `app/domain/entities/identity/invitation.rb` | `Entities::Identity::Invitation` | `TTL = 72.hours`, `TOKEN_LENGTH = 32` (base58), `status(now:)` → `:pending`, `:expired`, `:accepted` ou `:revoked`. | `test/domain/entities/identity/invitation_test.rb` |
+| `app/domain/entities/identity/teacher_profile.rb` | `Entities::Identity::TeacherProfile` (Data) | `user_id, material_id, onboarding_completed_at`, `onboarded?` | couvert par le repository |
+| `app/domain/entities/identity/home_destination.rb` | `Entities::Identity::HomeDestination` | `for(actor:, primary_membership:, onboarded:)` → symbole. **Student** : `:student_home` s'il a une classe principale active, sinon `:pending_account`. **Teacher** : `:pending_account` sans école principale, `:teacher_classrooms` si l'onboarding n'est pas fini, sinon `:teacher_home`. **Team** : `:team_home`. **School_admin** : `:pending_account` (V2). Aucune destination ne renvoie vers une page qui la redirige elle-même. | `test/domain/entities/identity/home_destination_test.rb` |
+| `app/domain/entities/school/drena.rb` | `Entities::School::Drena` | `id, public_id, name` ; `name` présent, 80 au plus, `squish`. `key` = `name.parameterize`. | `test/domain/entities/school/drena_test.rb` |
+| `app/domain/entities/school/school.rb` | `Entities::School::School` | `id, public_id, drena_id, name, short_name, sector, cycle, status`. `SECTORS = %w[public private]`, `CYCLES = %w[first both]`, `STATUSES = %w[active inactive]`. `self.cycle_for(name:)` : `'first'` si le nom commence par « Collège » (insensible à la casse, avec ou sans accent), sinon `'both'`, repris de `⟨ancienne⟩ domain/use_cases/catalog/generate_default_classrooms.rb`. Nom enregistré tel que saisi, après `squish` (ADR-0037). | `test/domain/entities/school/school_test.rb` |
+| `app/domain/entities/classroom/school_year.rb` | `Entities::Classroom::SchoolYear` | `START_MONTH = 9`, `current(date)`, tel que dans l'ADR-0041. | `test/domain/entities/classroom/school_year_test.rb` |
+| `app/domain/entities/classroom/join_code.rb` | `Entities::Classroom::JoinCode` | `LETTERS = ("a".."z").to_a - %w[i o]`, `DIGITS = ("2".."9").to_a`, `LENGTH = 5`. `generate(random:)` : 3 lettres puis 2 chiffres. `generate_unique(count:, taken:, random:)` tire `count` codes distincts, hors de l'ensemble `taken`. `normalize(raw)` retire les espaces et passe en minuscules. `display(code)` passe en majuscules (CL-04). | `test/domain/entities/classroom/join_code_test.rb` |
+| `app/domain/entities/classroom/classroom.rb` | `Entities::Classroom::Classroom` | `id, public_id, school_id, level_id, series_id, name, school_year, status, join_code, max_students, teacher_ids, active_students_count`. `active?`. `name` présent, 15 au plus. | `test/domain/entities/classroom/classroom_test.rb` |
+| `app/domain/entities/classroom/default_classroom_plan.rb` | `Entities::Classroom::DefaultClassroomPlan` | Reprend `CLASSROOM_CONFIGS` de l'ancien `GenerateDefaultClassrooms`, **par code** de niveau et de série. **Public** : `6e` 4, `5e` 4, `4e` 10, `3e` 10 ; `2nde` et `1ere` 6 par série reliée ; `tle` : `c` 2, `d` 6, `a1` 3, `a2` 2. **Privé** : `6e` 2, `5e` 2, `4e` 4, `3e` 4 ; `2nde` et `1ere` 3 par série reliée ; `tle` : `c` 1, `d` 3, `a1` 2, `a2` 2. `rows_for(school:, lookup:)` renvoie `[{ name:, level_id:, series_id: }]`. Une école `cycle: 'first'` n'a que les niveaux de cycle `first`. Un code absent du référentiel est **ignoré** et signalé dans `skipped_codes`. Nom : `"#{niveau} #{n}"`, ou `"#{niveau} #{série}#{séparateur}#{n}"` avec une espace si la série finit par un chiffre (« 1ère A1 2 », « Tle D3 »). **Aucun élève de démonstration.** | `test/domain/entities/classroom/default_classroom_plan_test.rb` : lycée public = 71 classes avec le référentiel de développement ; collège public = 28 ; lycée privé ; code inconnu ignoré |
+| `app/domain/entities/classroom/membership.rb` | `Entities::Classroom::Membership` (Data) | `classroom_id, student_id, primary, joined_at, left_at`, `active?` | couvert par le repository |
+| `app/domain/entities/classroom/assignable.rb` | `Entities::Classroom::Assignable` (Data `type, id, key, name`) | `TYPES = %w[Course Essential Exercise]` (ADR-0048). Un type hors liste lève `ArgumentError`. | `test/domain/entities/classroom/assignable_test.rb` |
+| `app/domain/entities/classroom/assignment.rb` | `Entities::Classroom::Assignment` (Data) | `id, public_id, classroom_id, assignable, status, assigned_by_id, assigned_at, archived_at`. `active?`. Une réassignation crée une **nouvelle** ligne (ADR-0048). | `test/domain/entities/classroom/assignment_test.rb` |
+| `app/domain/entities/catalog/content_status.rb` | `Entities::Catalog::ContentStatus` | `VALUES = %w[draft published archived]`. `TRANSITIONS = { "draft" => %w[published], "published" => %w[archived], "archived" => %w[published] }`. Retour à `draft` interdit (ADR-0035). `transition(from:, to:, parent_published:)` → `Shared::Result`, `:conflict` sinon. | `test/domain/entities/catalog/content_status_test.rb` |
+| `app/domain/entities/catalog/level.rb` | `Entities::Catalog::Level` | `id, slug, name, code, position, cycle`. `CYCLES = %w[first second]`. `code` : `/\A[a-z0-9]{1,10}\z/`, **non modifiable** après création. | `test/domain/entities/catalog/level_test.rb` |
+| `app/domain/entities/catalog/series.rb` | `Entities::Catalog::Series` | `id, slug, name, code`, même règle de code. | `test/domain/entities/catalog/series_test.rb` |
+| `app/domain/entities/catalog/material.rb` | `Entities::Catalog::Material` | `id, slug, name, shortname, category`. `CATEGORIES = %w[literature science other]`, **obligatoire** (CA-26). `shortname` : 10 au plus. | `test/domain/entities/catalog/material_test.rb` |
+| `app/domain/entities/catalog/taxonomy_lookup.rb` | `Entities::Catalog::TaxonomyLookup` (Data) | Index en mémoire construit par `TaxonomyRepositoryPort#lookup` : niveaux par `slug` et par `code`, séries idem, matières par `slug` et par `shortname` paramétrisé, ensemble des couples niveau–série. `resolve_level(name)`, `resolve_series(name)`, `resolve_material(name)` comparent `name.parameterize` (ADR-0039). `pair?(level_id, series_id)`. | `test/domain/entities/catalog/taxonomy_lookup_test.rb` (« Physique Chimie » → `physique-chimie`) |
+| `app/domain/entities/catalog/course.rb` | `Entities::Catalog::Course` | `id, slug, name, subtitle, level_id, series_id, material_id, author_id, status, published_at, archived_at, content_html`. `name` présent (200 au plus), `squish` sans changement de casse. `readable_chain_published?`. **Une seule entité** pour la lecture et l'écriture (chantier `catalog-lecture-ecriture-incompatibles`). | `test/domain/entities/catalog/course_test.rb` |
+| `app/domain/entities/catalog/essential.rb` | `Entities::Catalog::Essential` | `id, slug, course_id, name, subtitle, position, author_id, status, published_at, archived_at, content_html, course_status`. `readable_chain_published?` exige aussi le cours publié. | `test/domain/entities/catalog/essential_test.rb` |
+| `app/domain/entities/catalog/import_kind.rb` | `Entities::Catalog::ImportKind` | Registre **fermé** des cinq types, avec pour chacun `format`, `version`, `max_bytes`, `max_items`, `scope_keys` et la policy. `drenas` : `lnclass.drenas` v1, 1 Mo, 500. `schools` : `lnclass.schools` v1, 10 Mo, 2 000 écoles (≈ 140 000 classes). `course_tree` : `lnclass.course-tree` v1, 30 Mo, 500 cours. `essential_tree` : `lnclass.essential-tree` v1, 15 Mo, 1 000 fiches, scope `course_slug`. `exercise_tree` : `lnclass.exercise-tree` v1, 15 Mo, 2 000 exercices, scope `essential_slug`. Limite commune : 300 000 nœuds par fichier. | `test/domain/entities/catalog/import_kind_test.rb` |
+| `app/domain/entities/catalog/import_error.rb` | `Entities::Catalog::ImportError` (Data `path, code, message_key, params`) | `path` en notation JSON (`courses[3].essentials[0].exercises[1]`). `CODES` fermés : `json_invalid`, `format_mismatch`, `schema`, `too_large`, `too_many_items`, `unknown_level`, `unknown_series`, `unknown_material`, `series_not_allowed`, `unknown_drena`, `unknown_parent`, `question_structure`, `blank`, `too_long`, `duplicate_in_file`. | `test/domain/entities/catalog/import_error_test.rb` |
+| `app/domain/entities/catalog/import_report.rb` | `Entities::Catalog::ImportReport` (Data) | `id, public_id, kind, format_version, filename, status, scope, progress, counts, import_errors, imported_by_id, started_at, finished_at` | couvert par le repository |
+| `app/domain/entities/catalog/content_tree.rb` | `Entities::Catalog::ContentTree` | Plan d'écriture **déjà validé** que remplissent les importeurs I1 à I3 : cours, fiches, exercices, questions et propositions, rattachés soit à un nœud du plan, soit à un parent existant par `id`. Chaque nœud porte son `slug` ou `public_id` précalculé. `node_count`. | `test/domain/entities/catalog/content_tree_test.rb` |
+| `app/domain/entities/catalog/slug.rb` | `Entities::Catalog::Slug` | `unique(base_name, taken:)` : `parameterize`, puis `-2`, `-3`… hors de `taken`, qu'il complète. Même règle que `Orm::HasFrozenSlug`, pour les écritures en masse. | `test/domain/entities/catalog/slug_test.rb` |
+| `app/domain/entities/catalog/essential_node.rb` | `Entities::Catalog::EssentialNode` | `validate(hash, path:)` → `[ImportError]` : `name` présent (150 au plus), `subtitle`, `content`, `exercises[]` validés par `ExerciseNode`. Partagé par I1 et I2. | `test/domain/entities/catalog/essential_node_test.rb` |
+| `app/domain/entities/assessment/exercise_node.rb` | `Entities::Assessment::ExerciseNode` | `validate(hash, path:)` → `[ImportError]` : `title` présent, `exercise_type` ∈ `fixation`, `evaluation`, au moins une question ; pour chaque question, les règles de cohérence de l'ADR-0039 (`true_false` : 2 propositions dont 1 correcte ; `single_choice` : 1 correcte ; `multiple_correct_2` : 2 ; `multiple_correct_3` : 3). Partagé par I1, I2 et I3. | `test/domain/entities/assessment/exercise_node_test.rb` |
+| `app/domain/entities/assessment/grading.rb` | `Entities::Assessment::Grading` | Tel que dans l'ADR-0033 : `PASS_THRESHOLD = 50`, `MASTERY_THRESHOLD = 70`, `GOLD_THRESHOLD = 80`, `PERFECT_THRESHOLD = 100`, `BADGE_THRESHOLDS`, `BADGE_ORDER = %i[bronze silver gold diamond]`, `badge_for(score)`, `upgrade?(current, candidate)`. Plus `score_percent(correct:, total:)` en **division entière**, `grade_on_20(score)` = `(score / 5.0).round`, `mastery_for(score)` → `:acquired` (≥ 70), `:fragile` (50 à 69), `:struggling` (< 50). | `test/domain/entities/assessment/grading_test.rb` : bornes 49, 50, 69, 70, 79, 80, 99, 100 ; 9/10 donne 90 et Or, jamais Diamant |
+| `app/domain/entities/assessment/gap_decision.rb` | `Entities::Assessment::GapDecision` | Tel que dans l'ADR-0043 : `:open`, `:increment`, `:remediated`, `:self_corrected` ou `:none`. | `test/domain/entities/assessment/gap_decision_test.rb` |
 | `app/domain/entities/assessment/answer.rb` | `Entities::Assessment::Answer` (Data) | `id, position, content, correct` | couvert par `question_test` |
-| `app/domain/entities/assessment/question.rb` | `Entities::Assessment::Question` | `id, position, content, explanation, question_type, answers`. `TYPES` et `STRUCTURE = { "true_false" => { total: 2..2, correct: 1 }, "single_choice" => { total: 2.., correct: 1 }, "multiple_correct_2" => { total: 3.., correct: 2 }, "multiple_correct_3" => { total: 4.., correct: 3 } }`. La validation les applique (repris de l'ancienne entité, AS-03). `multiple?` vaut vrai pour les types `multiple_*`. `correct_answer_ids` renvoie un `Set`. `correct?(selected_ids)` compare **l'égalité exacte des ensembles d'identifiants** (ADR-0054). | `test/domain/entities/assessment/question_test.rb` |
-| `app/domain/entities/assessment/exercise.rb` | `Entities::Assessment::Exercise` | `id, slug, essential_id, title, description, kind, position, author_id, status, published_at, archived_at, questions`. Validations : `title` présent. Publier exige au moins une question valide. `questions_locked?(has_sessions:)` vaut `has_sessions` : les questions sont figées dès la première session. | `test/domain/entities/assessment/exercise_test.rb` |
-| `app/domain/entities/assessment/exercise_session.rb` | `Entities::Assessment::ExerciseSession` | `id, public_id, student_id, exercise_id, status, questions_total, answered_count, correct_count, score_percent, started_at, completed_at`. `STATUSES = %w[in_progress completed abandoned]`. `progress_percent` vaut `answered_count * 100 / questions_total`. `complete(correct_count:, at:)` : `:invalid` si `answered_count < questions_total` ; `score_percent = (correct_count * 100.0 / questions_total).round`. | `test/domain/entities/assessment/exercise_session_test.rb` |
-| `app/domain/entities/assessment/question_attempt.rb` | `Entities::Assessment::QuestionAttempt` (Data) | `session_id, question_id, selected_answer_ids, correct, created_at` | couvert par le repository |
-| `app/domain/entities/assessment/badge_scale.rb` | `Entities::Assessment::BadgeScale` | `GOLD = 100`, `SILVER = 80`, `BRONZE = 50`, `PASS = 50`, `MASTERY = 70`. `level_for(score)` renvoie `"gold"`, `"silver"`, `"bronze"` ou `nil`. `RANK = { "bronze" => 1, "silver" => 2, "gold" => 3 }`. `better?(new_level, current_level)` exige un rang **strictement** supérieur. `passed?(score)`. **Valeurs reprises du code de l'ancienne application, à confirmer par l'ADR-0033.** | `test/domain/entities/assessment/badge_scale_test.rb` |
-| `app/domain/entities/assessment/badge.rb` | `Entities::Assessment::Badge` (Data) | `student_id, exercise_id, session_id, level, score_percent, earned_at` | couvert par le repository |
+| `app/domain/entities/assessment/question.rb` | `Entities::Assessment::Question` | `id, position, content, explanation, question_type, answers`. `EXPECTED = { true_false: 1, single_choice: 1, multiple_correct_2: 2, multiple_correct_3: 3 }`. `well_formed?(selected_ids)` et `correct?(selected_ids)` tels que dans l'ADR-0054. `structure_errors` applique les règles de l'ADR-0039. `without_correction` renvoie une copie sans le champ `correct`. | `test/domain/entities/assessment/question_test.rb` |
+| `app/domain/entities/assessment/exercise.rb` | `Entities::Assessment::Exercise` | `id, public_id, essential_id, title, description, exercise_type, position, author_id, status, published_at, archived_at, questions, parents_published`. `publishable?` : au moins une question, toutes bien formées (ADR-0035). `questions_locked?(has_attempts:)`. | `test/domain/entities/assessment/exercise_test.rb` |
+| `app/domain/entities/assessment/exercise_session.rb` | `Entities::Assessment::ExerciseSession` | `id, public_id, student_id, exercise_id, status, question_count, answered_count, correct_count, progress_percent, score_percent, kind, knowledge_gap_id, classroom_assignment_id, started_at, completed_at`. `STATUSES = %w[started completed abandoned]`. `complete?` quand `answered_count == question_count`. | `test/domain/entities/assessment/exercise_session_test.rb` |
+| `app/domain/entities/assessment/question_attempt.rb` | `Entities::Assessment::QuestionAttempt` (Data) | `session_id, question_id, selected_answer_ids, correct, answered_at` | couvert par le repository |
+| `app/domain/entities/assessment/badge.rb` | `Entities::Assessment::Badge` (Data) | `student_id, exercise_id, session_id, level, awarded_at` | couvert par le repository |
+| `app/domain/entities/assessment/knowledge_gap.rb` | `Entities::Assessment::KnowledgeGap` (Data) | `id, student_id, essential_id, status, failed_sessions_count` | couvert par le repository |
 
-### 0.5 Domaine — ports, et leurs adaptateurs d'infrastructure
+### 0.5 Ports et repositories
 
-**Forme d'un port.** Un port est un `module` dont chaque méthode lève `NotImplementedError, "#{self.class} must implement #<nom>"`. Le repository fait `include` du port et convertit chaque ligne `Orm::` en entité, par une méthode privée `map_to_entity`. **Aucun objet `Orm::` ne sort d'un repository.**
+**Forme d'un port.** Un port est un `module` dont chaque méthode lève `NotImplementedError`. Le repository fait `include` du port et convertit chaque ligne `Orm::` en entité, par une méthode privée `map_to_entity`. **Aucun objet `Orm::` ne sort d'un repository.**
 
-**Les dates.** Les méthodes qui dépendent du temps reçoivent `now:` ou `at:` en paramètre. Les use cases reçoivent une horloge `clock:` injectée, qui vaut `Time` par défaut.
+**Pas de dossier `adapters/`** (ADR-0027). Ce qui parle à une gemme ou à un service vit dans un repository de son contexte :
+- la TOTP (`rotp`) est dans `SecondFactorRepository` ;
+- le fichier d'import (Active Storage) est dans `ImportFileStore` ;
+- la validation par schéma (`json_schemer`) est dans `ImportSchemaValidator` ;
+- la mise en file du job est dans `ImportQueue`.
 
-| Port — Fichier | Repository / adaptateur — Fichier | Test (contrat + base) |
+**Les dates.** Les méthodes qui dépendent du temps reçoivent `at:` ou `now:`. Les use cases reçoivent une horloge `clock:` injectée, qui vaut `Time` par défaut.
+
+**Les transactions.** Un repository n'ouvre **jamais** de transaction lui-même : c'est le use case qui les ouvre, par `Ports::Shared::TransactionPort` (ADR-0026). Les méthodes marquées « verrou » font un `SELECT … FOR UPDATE` et ne doivent être appelées que dans un bloc de transaction.
+
+**Écritures en masse.** Les méthodes `insert_many`, `insert_generated` et `ContentTreeWriter#write` utilisent `insert_all` par tranches de **1 000 lignes**, avec `returning: %w[id …]`. Elles posent elles-mêmes `created_at`, `updated_at`, `public_id` (`SecureRandom.base58(14)`) et les slugs précalculés, puisque `insert_all` saute les callbacks de `Orm::HasPublicId` et `Orm::HasFrozenSlug`.
+
+| Port — Fichier | Repository — Fichier | Test (contrat et base) |
 |---|---|---|
 | `app/domain/ports/identity/user_repository_port.rb` | `app/infrastructure/repositories/identity/user_repository.rb` | `test/infrastructure/repositories/identity/user_repository_test.rb` |
 | `app/domain/ports/identity/registration_repository_port.rb` | `app/infrastructure/repositories/identity/registration_repository.rb` | `test/infrastructure/repositories/identity/registration_repository_test.rb` |
-| `app/domain/ports/identity/teacher_repository_port.rb` | `app/infrastructure/repositories/identity/teacher_repository.rb` | `test/infrastructure/repositories/identity/teacher_repository_test.rb` |
-| `app/domain/ports/identity/user_session_repository_port.rb` | `app/infrastructure/repositories/identity/user_session_repository.rb` | `test/infrastructure/repositories/identity/user_session_repository_test.rb` |
-| `app/domain/ports/identity/login_failure_repository_port.rb` | `app/infrastructure/repositories/identity/login_failure_repository.rb` | `test/infrastructure/repositories/identity/login_failure_repository_test.rb` |
+| `app/domain/ports/identity/teacher_profile_repository_port.rb` | `app/infrastructure/repositories/identity/teacher_profile_repository.rb` | `test/infrastructure/repositories/identity/teacher_profile_repository_test.rb` |
+| `app/domain/ports/identity/session_repository_port.rb` | `app/infrastructure/repositories/identity/session_repository.rb` | `test/infrastructure/repositories/identity/session_repository_test.rb` |
+| `app/domain/ports/identity/login_attempt_repository_port.rb` | `app/infrastructure/repositories/identity/login_attempt_repository.rb` | `test/infrastructure/repositories/identity/login_attempt_repository_test.rb` |
 | `app/domain/ports/identity/audit_log_port.rb` | `app/infrastructure/repositories/identity/audit_log_repository.rb` | `test/infrastructure/repositories/identity/audit_log_repository_test.rb` |
 | `app/domain/ports/identity/second_factor_repository_port.rb` | `app/infrastructure/repositories/identity/second_factor_repository.rb` | `test/infrastructure/repositories/identity/second_factor_repository_test.rb` |
 | `app/domain/ports/identity/pin_recovery_repository_port.rb` | `app/infrastructure/repositories/identity/pin_recovery_repository.rb` | `test/infrastructure/repositories/identity/pin_recovery_repository_test.rb` |
-| `app/domain/ports/identity/team_invitation_repository_port.rb` | `app/infrastructure/repositories/identity/team_invitation_repository.rb` | `test/infrastructure/repositories/identity/team_invitation_repository_test.rb` |
-| `app/domain/ports/identity/totp_port.rb` | `app/infrastructure/adapters/identity/rotp_totp.rb` | `test/infrastructure/adapters/identity/rotp_totp_test.rb` |
-| `app/domain/ports/identity/secret_hasher_port.rb` | `app/infrastructure/adapters/identity/bcrypt_secret_hasher.rb` | `test/infrastructure/adapters/identity/bcrypt_secret_hasher_test.rb` |
+| `app/domain/ports/identity/invitation_repository_port.rb` | `app/infrastructure/repositories/identity/invitation_repository.rb` | `test/infrastructure/repositories/identity/invitation_repository_test.rb` |
 | `app/domain/ports/school/drena_repository_port.rb` | `app/infrastructure/repositories/school/drena_repository.rb` | `test/infrastructure/repositories/school/drena_repository_test.rb` |
 | `app/domain/ports/school/school_repository_port.rb` | `app/infrastructure/repositories/school/school_repository.rb` | `test/infrastructure/repositories/school/school_repository_test.rb` |
 | `app/domain/ports/classroom/classroom_repository_port.rb` | `app/infrastructure/repositories/classroom/classroom_repository.rb` | `test/infrastructure/repositories/classroom/classroom_repository_test.rb` |
 | `app/domain/ports/classroom/membership_repository_port.rb` | `app/infrastructure/repositories/classroom/membership_repository.rb` | `test/infrastructure/repositories/classroom/membership_repository_test.rb` |
 | `app/domain/ports/classroom/teaching_repository_port.rb` | `app/infrastructure/repositories/classroom/teaching_repository.rb` | `test/infrastructure/repositories/classroom/teaching_repository_test.rb` |
 | `app/domain/ports/classroom/assignment_repository_port.rb` | `app/infrastructure/repositories/classroom/assignment_repository.rb` | `test/infrastructure/repositories/classroom/assignment_repository_test.rb` — **100 % lignes et branches, trois types de ressource** |
-| `app/domain/ports/catalog/referential_repository_port.rb` | `app/infrastructure/repositories/catalog/referential_repository.rb` | `test/infrastructure/repositories/catalog/referential_repository_test.rb` |
+| `app/domain/ports/catalog/taxonomy_repository_port.rb` | `app/infrastructure/repositories/catalog/taxonomy_repository.rb` | `test/infrastructure/repositories/catalog/taxonomy_repository_test.rb` |
 | `app/domain/ports/catalog/course_repository_port.rb` | `app/infrastructure/repositories/catalog/course_repository.rb` | `test/infrastructure/repositories/catalog/course_repository_test.rb` |
 | `app/domain/ports/catalog/essential_repository_port.rb` | `app/infrastructure/repositories/catalog/essential_repository.rb` | `test/infrastructure/repositories/catalog/essential_repository_test.rb` |
+| `app/domain/ports/catalog/content_tree_writer_port.rb` | `app/infrastructure/repositories/catalog/content_tree_writer.rb` | `test/infrastructure/repositories/catalog/content_tree_writer_test.rb` |
+| `app/domain/ports/catalog/import_report_repository_port.rb` | `app/infrastructure/repositories/catalog/import_report_repository.rb` | `test/infrastructure/repositories/catalog/import_report_repository_test.rb` |
+| `app/domain/ports/catalog/import_file_store_port.rb` | `app/infrastructure/repositories/catalog/import_file_store.rb` | `test/infrastructure/repositories/catalog/import_file_store_test.rb` |
+| `app/domain/ports/catalog/import_schema_port.rb` | `app/infrastructure/repositories/catalog/import_schema_validator.rb` | `test/infrastructure/repositories/catalog/import_schema_validator_test.rb` |
+| `app/domain/ports/catalog/import_queue_port.rb` | `app/infrastructure/repositories/catalog/import_queue.rb` | `test/infrastructure/repositories/catalog/import_queue_test.rb` |
 | `app/domain/ports/assessment/exercise_repository_port.rb` | `app/infrastructure/repositories/assessment/exercise_repository.rb` | `test/infrastructure/repositories/assessment/exercise_repository_test.rb` |
 | `app/domain/ports/assessment/exercise_session_repository_port.rb` | `app/infrastructure/repositories/assessment/exercise_session_repository.rb` | `test/infrastructure/repositories/assessment/exercise_session_repository_test.rb` |
 | `app/domain/ports/assessment/badge_repository_port.rb` | `app/infrastructure/repositories/assessment/badge_repository.rb` | `test/infrastructure/repositories/assessment/badge_repository_test.rb` |
+| `app/domain/ports/assessment/knowledge_gap_repository_port.rb` | `app/infrastructure/repositories/assessment/knowledge_gap_repository.rb` | `test/infrastructure/repositories/assessment/knowledge_gap_repository_test.rb` |
 
-**Signatures gelées.** Toutes les méthodes prennent des arguments nommés. `→` indique le type de retour, et `nil` signifie « absent ».
+**Signatures gelées.** Toutes les méthodes prennent des arguments nommés. `→` indique le type de retour ; `nil` signifie « absent » ; `Result` désigne `Shared::Result`.
 
 ```ruby
 Ports::Identity::UserRepositoryPort
-  find(id:)                              → Entities::Identity::User | nil
-  find_by_public_id(public_id:)          → User | nil
-  find_by_contact(contact:)              → User | nil
-  contact_taken?(contact:)               → Boolean
+  find(id:) · find_by_public_id(public_id:) · find_by_contact(contact:) → Entities::Identity::User | nil
   authenticate(contact:, pin:)           → User | nil        # bcrypt, temps constant même si le numéro est inconnu
   update_pin(user_id:, pin:)             → true
-  actor_for(user_id:, second_factor_verified:) → Entities::Identity::Actor
+  actor_for(user_id:)                    → Entities::Identity::Actor   # school_id = école principale de l'enseignant, sinon nil
 
-Ports::Identity::RegistrationRepositoryPort    # chaque méthode est UNE transaction ; RecordNotUnique → :conflict
-  register_student(user:, pin:, classroom_id:, joined_at:)   → Result(User) | Result.failure(:conflict, field: :contact)
-  register_teacher(user:, pin:, school_id:, material_id:)    → Result(User) | failure(:conflict)
-  register_team_member(user:, pin:, invitation_id:, at:)     → Result(User) | failure(:conflict)   # marque aussi l'invitation acceptée
+Ports::Identity::RegistrationRepositoryPort   # appelé dans la transaction du use case ; RecordNotUnique → :conflict
+  create_student(user:, pin:)            → Result(User) | failure(:conflict, errors: { contact: [:taken] })
+  create_teacher(user:, pin:, material_id:) → Result(User) | failure(:conflict, …)   # crée aussi teacher_profiles
+  create_from_invitation(user:, pin:, invitation_id:, at:) → Result(User) | failure(:conflict, …)
 
-Ports::Identity::TeacherRepositoryPort
-  find_by_user_id(user_id:)              → { teacher_id:, primary_school_id:, material_id:, onboarded: } | nil
-  mark_onboarded(teacher_id:, at:)       → true
+Ports::Identity::TeacherProfileRepositoryPort
+  find_by_user_id(user_id:)              → Entities::Identity::TeacherProfile | nil
+  complete_onboarding(user_id:, at:)     → true               # idempotent
 
-Ports::Identity::UserSessionRepositoryPort
-  create(user_id:, token_digest:, ip:, user_agent:, expires_at:, at:) → Entities::Identity::UserSession
-  find_by_token_digest(token_digest:)    → UserSession | nil
-  touch(id:, at:)                        → true
-  mark_second_factor_verified(id:, at:)  → true
-  destroy(id:)                           → true
+Ports::Identity::SessionRepositoryPort
+  create(user_id:, token_digest:, ip:, user_agent:, at:) → Integer (id)
+  find_by_token_digest(token_digest:)    → Data(id, user_id, role, created_at, last_seen_at, second_factor_verified_at) | nil
+  touch(id:, at:) · mark_second_factor_verified(id:, at:) · destroy(id:) → true
   destroy_all_for(user_id:)              → Integer
 
-Ports::Identity::LoginFailureRepositoryPort
-  record(contact:, ip:, at:)             → true
-  count_since(contact:, since:)          → Integer
+Ports::Identity::LoginAttemptRepositoryPort
+  record(contact:, user_id:, ip:, succeeded:, kind:, at:) → true
+  consecutive_failures(contact:, kind:)  → Data(count, last_failed_at)   # depuis le dernier succès
+  clear_failures(contact:)               → Integer            # après un PIN réinitialisé (ADR-0032)
 
 Ports::Identity::AuditLogPort
   record(action:, actor_id:, subject_type: nil, subject_id: nil, metadata: {}, ip: nil, at:) → true
+                                          # action ∈ Entities::Identity::AuditAction::ALL, sinon ArgumentError
 
 Ports::Identity::SecondFactorRepositoryPort
-  state_for(team_id:)                    → { secret:, enabled:, last_used_step: }
-  store_pending_secret(team_id:, secret:) → true
-  enable(team_id:, backup_code_digests:, at:) → true      # remplace les codes de secours existants
-  record_used_step(team_id:, step:)      → Boolean        # faux si step <= last_used_step (rejeu)
-  backup_code_digests(team_id:)          → [{ id:, digest: }]   # non utilisés seulement
-  consume_backup_code(id:, at:)          → Boolean
+  state_for(user_id:)                    → Data(confirmed, backup_codes_left) | nil
+  begin_enrollment(user_id:, label:)     → Data(secret, provisioning_uri)   # remplace un secret non confirmé
+  verify_code(user_id:, code:, now:)     → Integer (pas accepté) | nil      # ±1 pas ; refuse step ≤ last_used_step, puis l'enregistre
+  confirm(user_id:, backup_code_digests:, at:) → true         # remplace les codes de secours existants
+  consume_backup_code(user_id:, code_digest:, at:) → Boolean
+  reset(user_id:)                        → true               # supprime le secret et les codes (ADR-0031)
 
 Ports::Identity::PinRecoveryRepositoryPort
   issue(user_id:, issued_by_id:, code_digest:, expires_at:, at:) → true   # révoque le code actif précédent
-  active_for(user_id:)                   → Entities::Identity::PinRecoveryCode (avec digest) | nil
-  record_failure(id:)                    → Integer        # nouveau compteur
+  active_for(user_id:)                   → Data(id, code_digest, expires_at, failed_attempts) | nil
+  record_failure(id:, at:)               → Integer            # nouveau compteur ; révoque à MAX_FAILED_ATTEMPTS
   consume(id:, at:)                      → true
 
-Ports::Identity::TeamInvitationRepositoryPort
-  create(invited_by_id:, contact:, last_name:, first_names:, token_digest:, expires_at:) → Entities::Identity::TeamInvitation
-  pending_for_contact?(contact:, now:)   → Boolean
-  find_by_token_digest(token_digest:)    → TeamInvitation | nil
-
-Ports::Identity::TotpPort
-  generate_secret                        → String
-  provisioning_uri(secret:, label:)      → String
-  verify(secret:, code:, now:)           → Integer | nil  # le pas temporel accepté, avec DRIFT_BEHIND
-
-Ports::Identity::SecretHasherPort
-  digest(secret:)                        → String
-  match?(secret:, digest:)               → Boolean
+Ports::Identity::InvitationRepositoryPort
+  create(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:) → Result(Entities::Identity::Invitation) | failure(:conflict)
+  find_by_token_digest(token_digest:)    → Invitation | nil
+  mark_accepted(id:, user_id:, at:)      → true
 
 Ports::School::DrenaRepositoryPort
-  all_ordered                            → [Entities::School::Drena]
+  all                                    → [Entities::School::Drena]   # triées par nom
+  find_by_public_id(public_id:)          → Drena | nil
+  create(name:) · update(id:, name:)     → Result(Drena) | failure(:conflict, errors: { name: [:taken] })
+  delete(id:)                            → Result | failure(:conflict, errors: { base: [:has_schools] })
+  ids_by_key                             → { "abidjan-1" => 12, … }   # clé = name.parameterize
+  insert_many(names:, at:)               → Integer            # ON CONFLICT (name) DO NOTHING
+
 Ports::School::SchoolRepositoryPort
-  find(id:)                              → Entities::School::School | nil
-  in_drena(drena_id:)                    → [School]        # triés par nom
-  belongs_to_drena?(school_id:, drena_id:) → Boolean
+  find_by_public_id(public_id:)          → Entities::School::School | nil
+  create(school:) · update(school:)      → Result(School) | failure(:conflict, errors: { name: [:taken] })
+  deactivate(id:)                        → true
+  delete_if_unreferenced(id:)            → Result | failure(:conflict, errors: { base: [:referenced] })
+                                          # supprime aussi ses classes si aucune n'a d'élève, d'enseignant ni d'assignation
+  existing_keys(drena_ids:)              → Set[[drena_id, name_key]]
+  insert_many(rows:, at:)                → [Data(id, drena_id, name, sector, cycle)]   # insert_all par 1 000, RETURNING
+  attach_teacher(teacher_id:, school_id:, primary:, at:) → Result | failure(:conflict)  # ADR-0030
+  primary_school_id_for(teacher_id:)     → Integer | nil
 
 Ports::Classroom::ClassroomRepositoryPort
-  find_by_public_id(public_id:)          → Entities::Classroom::Classroom | nil
-  find_by_join_code(join_code:)          → Classroom | nil   # code déjà normalisé
-  create(classroom:)                     → Result(Classroom) | failure(:conflict, field: :name | :join_code)
-  name_taken?(school_id:, name:)         → Boolean
-  ids_in_school(school_id:, public_ids:) → [Integer]          # filtre les public_ids hors école
+  find_by_public_id(public_id:)          → Entities::Classroom::Classroom | nil   # avec teacher_ids et active_students_count
+  lock_by_join_code(join_code:)          → Classroom | nil   # verrou ; code déjà normalisé
+  create(classroom:)                     → Result(Classroom) | failure(:conflict, errors: { name: [:taken] })
+                                          # tire le code d'adhésion et retente une fois sur collision
+  insert_generated(rows:, school_year:, random:, at:) → Integer
+                                          # codes tirés par JoinCode.generate_unique contre les codes pris ;
+                                          # insert_all par 1 000 ; sur collision d'index, la tranche est retirée et retentée une fois
+  school_year_names(school_id:, school_year:) → Set[String]
 
 Ports::Classroom::MembershipRepositoryPort
-  primary_for(student_id:)               → Entities::Classroom::Membership | nil
-  member?(student_id:, classroom_id:)    → Boolean
+  primary_for(student_id:)               → Entities::Classroom::Membership | nil   # active, avec le statut de la classe
+  add_primary(classroom_id:, student_id:, at:) → Result | failure(:conflict)
+  leave_primary(student_id:, at:)        → true               # pose left_at (JoinAsStudent, ADR-0040)
 
 Ports::Classroom::TeachingRepositoryPort
-  teaches?(teacher_id:, classroom_id:)   → Boolean
-  teaches_student?(teacher_id:, student_id:) → Boolean
-  replace_in_school(teacher_id:, school_id:, classroom_ids:) → true   # ne touche que les classes de school_id
+  declare(teacher_id:, classroom_id:, at:) → :created | :already
+  withdraw(teacher_id:, classroom_id:)   → true
+  classroom_ids_for(teacher_id:)         → [Integer]
 
 Ports::Classroom::AssignmentRepositoryPort
-  find(classroom_id:, assignable:)       → Entities::Classroom::Assignment | nil
-  save(assignment:)                      → Assignment      # upsert sur (classroom, type, id) : réactive au lieu de lever
-  resolve_assignable(type:, slug:)       → Entities::Classroom::Assignable | nil   # contenu publié seulement
-  assigned_to_student?(student_id:, assignable:) → Boolean   # actif, via une adhésion de l'élève
-  assigned_to_teacher?(teacher_id:, assignable:) → Boolean   # actif, dans une classe qu'il enseigne
+  active_for(classroom_id:, assignable:) → Entities::Classroom::Assignment | nil
+  find_by_public_id(public_id:)          → Assignment | nil
+  create(assignment:)                    → Result(Assignment) | failure(:conflict)   # index partiel actif (ADR-0048)
+  archive(id:, archived_by_id:, at:)     → true
+  resolve_assignable(type:, key:)        → Data(assignable, status, parents_published) | nil
+                                          # key = slug (Course, Essential) ou public_id (Exercise)
 
-Ports::Catalog::ReferentialRepositoryPort
-  level_exists?(id:) · material_exists?(id:) · series_exists?(id:) → Boolean
-  series_allowed?(level_id:, series_id:) → Boolean        # series_id nil ⇒ vrai
+Ports::Catalog::TaxonomyRepositoryPort
+  levels · series · materials            → [Entities::Catalog::Level] · [Series] · [Material]   # triés
+  find_level(slug:) · find_series(slug:) · find_material(slug:) → entité | nil
+  create_level(level:) · update_level(level:) → Result(Level) | failure(:conflict, errors: { <champ>: [:taken] })
+  create_series(series:) · update_series(series:) · create_material(material:) · update_material(material:) → idem
+  delete_level(id:) · delete_series(id:) · delete_material(id:) → Result | failure(:conflict, errors: { base: [:referenced] })
+  link(level_id:, series_id:, at:)       → Result | failure(:conflict)
+  unlink(level_id:, series_id:)          → Result | failure(:conflict, errors: { base: [:referenced] })  # classes ou cours existants
+  lookup                                 → Entities::Catalog::TaxonomyLookup
 
 Ports::Catalog::CourseRepositoryPort
   find_by_slug(slug:)                    → Entities::Catalog::Course | nil   # tous statuts
-  create(course:)                        → Course           # avec content_html → rich text
-  update(course:)                        → Course
-  name_taken?(name:, level_id:, material_id:, except_id: nil) → Boolean
+  create(course:) · update(course:)      → Result(Course) | failure(:conflict, errors: { name: [:taken] })
+  transition(id:, to:, at:)              → true               # pose published_at ou archived_at
+  existing_keys                          → Set[[level_id, material_id, series_id, name]]
 
 Ports::Catalog::EssentialRepositoryPort
   find_by_slug(slug:)                    → Entities::Catalog::Essential | nil
-  create(essential:)                     → Essential        # position = max + 1 dans le cours
-  update(essential:)                     → Essential
-  name_taken?(course_id:, name:, except_id: nil) → Boolean
+  create(essential:) · update(essential:) → Result(Essential) | failure(:conflict, …)   # position = max + 1
+  transition(id:, to:, at:)              → true
+  names_in(course_id:)                   → Set[String]
+  next_position(course_id:)              → Integer
+
+Ports::Catalog::ContentTreeWriterPort
+  write(tree:, author_id:, at:)          → { courses_created:, essentials_created:, exercises_created:, questions_created:, answers_created: }
+                                          # Entities::Catalog::ContentTree ; tout en draft ; rich text inclus
+
+Ports::Catalog::ImportReportRepositoryPort
+  create(report:)                        → Result(Entities::Catalog::ImportReport) | failure(:conflict, errors: { file: [:already_imported] })
+  find(id:) · find_by_public_id(public_id:) → ImportReport | nil
+  claim(id:, at:)                        → Boolean            # UPDATE … WHERE status = 'pending'
+  progress(id:, phase:, processed:, total:) → true            # au plus une écriture toutes les 500 unités
+  succeed(id:, counts:, at:)             → true
+  fail(id:, errors:, counts:, at:)       → true               # 500 erreurs au plus, errors_total dans counts
+
+Ports::Catalog::ImportFileStorePort
+  attach(report_id:, io:, filename:)     → true               # Active Storage, service railway (ADR-0047)
+  read(report_id:)                       → String
+
+Ports::Catalog::ImportSchemaPort
+  validate(kind:, version:, document:)   → [Entities::Catalog::ImportError]   # config/schemas/<kind>.v<version>.json
+
+Ports::Catalog::ImportQueuePort
+  enqueue(report_id:)                    → true               # Catalog::RunImportJob.perform_later
 
 Ports::Assessment::ExerciseRepositoryPort
-  find_by_slug(slug:)                    → Entities::Assessment::Exercise (questions + réponses) | nil
-  create(exercise:)                      → Exercise         # exercice + questions + réponses, UNE transaction
-  update(exercise:, replace_questions:)  → Exercise         # replace_questions: supprime puis recrée, UNE transaction
+  find_by_public_id(public_id:)          → Entities::Assessment::Exercise | nil   # questions, propositions, parents_published
+  create(exercise:)                      → Exercise           # exercice, questions et propositions
+  update(exercise:, replace_questions:)  → Exercise
+  transition(id:, to:, at:)              → true
   has_sessions?(exercise_id:)            → Boolean
+  titles_in(essential_id:)               → Set[String]
 
 Ports::Assessment::ExerciseSessionRepositoryPort
-  find_by_public_id(public_id:)          → Entities::Assessment::ExerciseSession | nil
-  in_progress_for(student_id:, exercise_id:) → ExerciseSession | nil
-  start(student_id:, exercise_id:, questions_total:, at:) → ExerciseSession   # abandonne l'éventuelle session en cours, même transaction
+  find_by_public_id(public_id:, lock: false) → Entities::Assessment::ExerciseSession | nil   # lock: true = verrou
+  started_for(student_id:, exercise_id:) → ExerciseSession | nil
+  start(session:)                        → ExerciseSession    # RecordNotUnique (session started) → renvoie la session existante
+  abandon(id:, at:)                      → true
   record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:) → :recorded | :duplicate
-                                          # insert + incrément answered_count/correct_count en une transaction ; RecordNotUnique → :duplicate
+                                          # insère la tentative et met à jour answered_count, correct_count, progress_percent
   attempts(session_id:)                  → [Entities::Assessment::QuestionAttempt]
-  complete(session_id:, score_percent:, at:) → true         # UPDATE … WHERE status = 'in_progress'
+  complete(id:, score_percent:, at:)     → true               # UPDATE … WHERE status = 'started'
 
 Ports::Assessment::BadgeRepositoryPort
   find(student_id:, exercise_id:)        → Entities::Assessment::Badge | nil
-  save(badge:)                           → Badge            # upsert sur (student, exercise)
+  upsert(badge:)                         → Badge              # sur (student_id, exercise_id)
+
+Ports::Assessment::KnowledgeGapRepositoryPort
+  pending_for(student_id:, essential_id:) → Entities::Assessment::KnowledgeGap | nil
+  find(id:)                              → KnowledgeGap | nil
+  open(student_id:, essential_id:, source_session_id:, at:) → KnowledgeGap
+  increment(id:)                         → true
+  resolve(id:, status:, session_id:, at:) → true
 ```
 
-### 0.6 Domaine — policies, DTO et use cases du socle
+### 0.6 Policies, DTO et use cases du socle
 
-**Policies** (ADR-0028). Chaque policy a une seule méthode publique, `allowed?(actor:, **contexte) → Boolean`. Ses ports éventuels sont injectés au constructeur. Un `actor` à `nil` (visiteur) renvoie `false`, sauf pour `JoinPolicy`.
+**Policies** (ADR-0028). Forme unique : `Policies::<Ctx>::<Nom>Policy.new.call(actor:, **faits) → Shared::Result`.
+- Le succès est `Result.success`. Le refus est `Result.failure(:forbidden)`, avec la raison dans `errors[:base]` quand l'interface doit l'afficher.
+- **Aucune lecture en base** : les faits sont chargés par le use case avant l'appel (`classroom.teacher_ids`, `exercise.parents_published`…). Une policy n'a donc pas de constructeur à dépendances.
+- Un visiteur est `actor: nil`. Toutes les policies le refusent, sauf `JoinPolicy` et `RegisterTeacherPolicy`.
+- Ordre dans un use case : DTO (`:invalid`), faits (`:not_found`), policy (`:forbidden`), écriture.
 
-| Fichier | Classe | Règle | Test |
-|---|---|---|---|
-| `app/domain/policies/identity/invite_team_policy.rb` | `Policies::Identity::InviteTeamPolicy` | `actor.team?` | `test/domain/policies/identity/invite_team_policy_test.rb` |
-| `app/domain/policies/identity/assist_pin_recovery_policy.rb` | `Policies::Identity::AssistPinRecoveryPolicy.new(teaching:)` | `allowed?(actor:, target:)`. **Team** : `target.id != actor.user_id`. **Teacher** : la cible est un élève et `teaching.teaches_student?(teacher_id: actor.teacher_id, student_id:)`. Sinon, faux. | `test/domain/policies/identity/assist_pin_recovery_policy_test.rb` |
-| `app/domain/policies/catalog/read_published_policy.rb` | `Policies::Catalog::ReadPublishedPolicy` | `allowed?(actor:, content:)`. Faux pour un visiteur. Vrai si `actor.team?` ou `content.status == "published"`. | `test/domain/policies/catalog/read_published_policy_test.rb` |
-| `app/domain/policies/catalog/manage_content_policy.rb` | `Policies::Catalog::ManageContentPolicy` | `actor.team?` | `test/domain/policies/catalog/manage_content_policy_test.rb` |
-| `app/domain/policies/assessment/reveal_answers_policy.rb` | `Policies::Assessment::RevealAnswersPolicy.new(assignments:)` | `allowed?(actor:, exercise:)`. `actor.team?`, ou bien `actor.teacher?` et `assignments.assigned_to_teacher?(… assignable: exercise)` | `test/domain/policies/assessment/reveal_answers_policy_test.rb` |
-| `app/domain/policies/assessment/start_session_policy.rb` | `Policies::Assessment::StartSessionPolicy.new(assignments:)` | `actor.student?`, et `exercise.status == "published"`, et `assignments.assigned_to_student?(…)`. Assignation **directe** de l'exercice uniquement. | `test/domain/policies/assessment/start_session_policy_test.rb` |
-| `app/domain/policies/assessment/play_session_policy.rb` | `Policies::Assessment::PlaySessionPolicy` | `actor.student?`, et `session.student_id == actor.student_id`, et `session.status == "in_progress"` | `test/domain/policies/assessment/play_session_policy_test.rb` |
-| `app/domain/policies/assessment/read_session_policy.rb` | `Policies::Assessment::ReadSessionPolicy.new(teaching:)` | `team?`, ou l'élève propriétaire, ou `teacher?` avec `teaching.teaches_student?` | `test/domain/policies/assessment/read_session_policy_test.rb` |
-| `app/domain/policies/classroom/join_policy.rb` | `Policies::Classroom::JoinPolicy` | `allowed?(actor:, classroom:)` vaut `actor.nil? && !classroom.nil?`. En V1, un compte connecté ne rejoint pas une classe. | `test/domain/policies/classroom/join_policy_test.rb` |
-| `app/domain/policies/classroom/access_policy.rb` | `Policies::Classroom::AccessPolicy.new(memberships:, teaching:)` | `team?`, ou un élève membre, ou un enseignant qui y enseigne | `test/domain/policies/classroom/access_policy_test.rb` |
-| `app/domain/policies/classroom/read_roster_policy.rb` | `Policies::Classroom::ReadRosterPolicy.new(teaching:)` | `team?`, ou un enseignant qui y enseigne. L'élève n'y a jamais droit. | `test/domain/policies/classroom/read_roster_policy_test.rb` |
-| `app/domain/policies/classroom/teach_policy.rb` | `Policies::Classroom::TeachPolicy` | `allowed?(actor:, primary_school_id:)` vaut `actor.teacher? && !primary_school_id.nil?` | `test/domain/policies/classroom/teach_policy_test.rb` |
-| `app/domain/policies/classroom/assign_policy.rb` | `Policies::Classroom::AssignPolicy.new(teaching:)` | `team?`, ou un enseignant qui enseigne la classe | `test/domain/policies/classroom/assign_policy_test.rb` |
-| `app/domain/policies/school/manage_school_policy.rb` | `Policies::School::ManageSchoolPolicy` | `actor.team?` en V1. `school_admin` s'ajoutera en V2. | `test/domain/policies/school/manage_school_policy_test.rb` |
+| Fichier | Règle | Test |
+|---|---|---|
+| `app/domain/policies/identity/register_teacher_policy.rb` | `actor` nul : seul un visiteur s'inscrit. | `test/domain/policies/identity/register_teacher_policy_test.rb` |
+| `app/domain/policies/identity/invite_team_policy.rb` | `actor.role == :team && actor.team_role == "admin"` | `test/domain/policies/identity/invite_team_policy_test.rb` |
+| `app/domain/policies/identity/issue_pin_recovery_code_policy.rb` | Faits : `target:` (User), `teaches_target:` (Boolean). **Teacher** : la cible est un élève et `teaches_target` (élève d'une classe active qu'il enseigne). **Team** : cible student, teacher, school_admin ou team, jamais lui-même. Sinon refus (ADR-0032). | `test/domain/policies/identity/issue_pin_recovery_code_policy_test.rb` |
+| `app/domain/policies/identity/reset_second_factor_policy.rb` | Team, cible team, jamais lui-même (ADR-0031). | `test/domain/policies/identity/reset_second_factor_policy_test.rb` |
+| `app/domain/policies/identity/read_user_policy.rb` | Team. Sert à la recherche de compte de B8. | `test/domain/policies/identity/read_user_policy_test.rb` |
+| `app/domain/policies/school/manage_schools_policy.rb` | Team. Couvre DRENA, établissements, génération de classes et imports `drenas` et `schools`. `school_admin` s'ajoutera en V2. | `test/domain/policies/school/manage_schools_policy_test.rb` |
+| `app/domain/policies/classroom/join_policy.rb` | Tel que dans l'ADR-0028 : `actor` nul ou student. Faits : `classroom:`, `code:`. Classe active, sinon `classroom_archived` ; `code == classroom.join_code`, sinon `join_code_revoked` ; `active_students_count < max_students`, sinon `classroom_full`. | `test/domain/policies/classroom/join_policy_test.rb` : visiteur, élève, enseignant refusé, trois raisons |
+| `app/domain/policies/classroom/declare_teaching_policy.rb` | Teacher ; `classroom.school_id == actor.school_id` ; classe active (ADR-0030). | `test/domain/policies/classroom/declare_teaching_policy_test.rb` |
+| `app/domain/policies/classroom/teach_policy.rb` | Teacher dont l'`user_id` figure dans `classroom.teacher_ids`, ou team. | `test/domain/policies/classroom/teach_policy_test.rb` |
+| `app/domain/policies/classroom/assign_policy.rb` | Comme `TeachPolicy`, et classe active (ADR-0048). | `test/domain/policies/classroom/assign_policy_test.rb` |
+| `app/domain/policies/classroom/manage_classroom_policy.rb` | Team (ADR-0030). | `test/domain/policies/classroom/manage_classroom_policy_test.rb` |
+| `app/domain/policies/classroom/read_classroom_policy.rb` | Team ; teacher dans `teacher_ids` ; student dont la classe principale active est celle-ci. Le fait `show_roster` est vrai pour team et teacher seulement. | `test/domain/policies/classroom/read_classroom_policy_test.rb` |
+| `app/domain/policies/catalog/read_published_policy.rb` | Team : tout. Autre rôle connecté : contenu publié **et** parents publiés. Un refus devient `:not_found` dans le use case (ADR-0035). | `test/domain/policies/catalog/read_published_policy_test.rb` |
+| `app/domain/policies/catalog/manage_content_policy.rb` | Team. Couvre cours, fiches, exercices, publication, archivage et imports de contenu. | `test/domain/policies/catalog/manage_content_policy_test.rb` |
+| `app/domain/policies/catalog/manage_taxonomy_policy.rb` | Team (ADR-0034, choix du porteur). | `test/domain/policies/catalog/manage_taxonomy_policy_test.rb` |
+| `app/domain/policies/catalog/read_import_report_policy.rb` | Team. | `test/domain/policies/catalog/read_import_report_policy_test.rb` |
+| `app/domain/policies/assessment/start_session_policy.rb` | Student ; exercice publié et parents publiés. **Aucune exigence d'assignation** (ADR-0028). | `test/domain/policies/assessment/start_session_policy_test.rb` |
+| `app/domain/policies/assessment/submit_attempt_policy.rb` | Student propriétaire de la session ; session `started`. | `test/domain/policies/assessment/submit_attempt_policy_test.rb` |
+| `app/domain/policies/assessment/read_session_policy.rb` | Élève propriétaire ; teacher dont une classe **active** contient l'élève (fait `teaches_student`) ; team. | `test/domain/policies/assessment/read_session_policy_test.rb` |
+| `app/domain/policies/assessment/reveal_answers_policy.rb` | **Student** : seulement pour une question déjà tentée dans la session (fait `attempted_question_ids`). **Team** : tout. **L'enseignant ne voit pas les bonnes réponses** (ADR-0028). | `test/domain/policies/assessment/reveal_answers_policy_test.rb` |
 
-**DTO.** Ils vivent dans `app/domain/dtos/<ctx>/`, sous le namespace `Dtos::<Ctx>::…Dto`. Chaque DTO inclut `ActiveModel::Model`, `ActiveModel::Attributes` et `ActiveModel::Validations`. Il valide la **forme** : présence, format, longueur. Les règles métier restent dans l'entité ou le use case. Les messages passent par la locale.
+Les policies `UpdateSelfPolicy` et `DeleteUserPolicy` de l'ADR-0028 n'ont aucun appelant en V1 : elles arrivent avec le profil (V2).
+
+**DTO du socle.** `Dtos::<Ctx>::<Nom>Input` dans `app/domain/dtos/<ctx>/` (ADR-0026). Ils incluent `ActiveModel::Model`, `Attributes` et `Validations`, et valident la **forme** seulement. Les DTO propres à un écran appartiennent à son lot.
 
 | Fichier | Attributs · validations | Test |
 |---|---|---|
-| `app/domain/dtos/identity/credentials_dto.rb` | `contact, pin, ip, user_agent`. `contact` et `pin` présents. `contact` est normalisé par `Contact` à l'affectation. | `test/domain/dtos/identity/credentials_dto_test.rb` |
-| `app/domain/dtos/identity/student_registration_dto.rb` | `last_name, first_names, gender, contact, pin, join_code`. Tous présents. `gender` dans `GENDERS`. `contact` au format `Contact`. `pin` au format `Pin`. **Aucun attribut `role`.** | `test/domain/dtos/identity/student_registration_dto_test.rb` |
-| `app/domain/dtos/identity/teacher_registration_dto.rb` | `last_name, first_names, gender, contact, pin, drena_id, school_id, material_id`. Tous présents. | `test/domain/dtos/identity/teacher_registration_dto_test.rb` |
-| `app/domain/dtos/identity/second_factor_code_dto.rb` | `code`. Présent. Soit 6 chiffres (TOTP), soit 10 caractères (code de secours). | `test/domain/dtos/identity/second_factor_code_dto_test.rb` |
-| `app/domain/dtos/identity/pin_recovery_dto.rb` | `contact, code, new_pin, ip`. `code` fait 6 chiffres. `new_pin` au format `Pin`. | `test/domain/dtos/identity/pin_recovery_dto_test.rb` |
-| `app/domain/dtos/identity/team_invitation_dto.rb` | `contact, last_name, first_names` | `test/domain/dtos/identity/team_invitation_dto_test.rb` |
-| `app/domain/dtos/identity/team_invitation_acceptance_dto.rb` | `token, gender, pin` | `test/domain/dtos/identity/team_invitation_acceptance_dto_test.rb` |
-| `app/domain/dtos/classroom/classroom_dto.rb` | `school_id, level_id, series_id, name`. `name` fait au plus 15 caractères. | `test/domain/dtos/classroom/classroom_dto_test.rb` |
-| `app/domain/dtos/classroom/teaching_selection_dto.rb` | `classroom_public_ids` (Array). `validates :classroom_public_ids, length: { minimum: 1 }`, avec le message « Veuillez sélectionner au moins une classe. » | `test/domain/dtos/classroom/teaching_selection_dto_test.rb` |
-| `app/domain/dtos/classroom/assignment_dto.rb` | `classroom_public_id, assignable_type, assignable_slug`. Le type appartient à `Assignable::TYPES`. | `test/domain/dtos/classroom/assignment_dto_test.rb` |
-| `app/domain/dtos/catalog/course_dto.rb` | `name, subtitle, level_id, series_id, material_id, content_html, status` | `test/domain/dtos/catalog/course_dto_test.rb` |
-| `app/domain/dtos/catalog/essential_dto.rb` | `course_slug, name, subtitle, content_html, status` | `test/domain/dtos/catalog/essential_dto_test.rb` |
-| `app/domain/dtos/assessment/answer_dto.rb` | `content, correct` | couvert par `exercise_dto_test` |
-| `app/domain/dtos/assessment/question_dto.rb` | `content, explanation, question_type, answers` (Array d'`AnswerDto`) | couvert par `exercise_dto_test` |
-| `app/domain/dtos/assessment/exercise_dto.rb` | `essential_slug, title, description, kind, status, questions` (Array de `QuestionDto`). `ExerciseDto.from_params(hash)` construit l'arbre à partir de `questions_attributes`. | `test/domain/dtos/assessment/exercise_dto_test.rb` |
-| `app/domain/dtos/assessment/attempt_dto.rb` | `session_public_id, question_id, answer_ids` (Array d'Integer, `compact`). Vide : erreur « Veuillez sélectionner au moins une réponse. » | `test/domain/dtos/assessment/attempt_dto_test.rb` |
+| `app/domain/dtos/identity/person_name_input.rb` | Tel que dans l'ADR-0037 : `last_name` (50), `first_name` (80), `squish`, `NAME_FORMAT`. Inclus par les DTO d'inscription des lots. | `test/domain/dtos/identity/person_name_input_test.rb` |
+| `app/domain/dtos/identity/credentials_input.rb` | `contact, pin, ip, user_agent`. Présence ; `contact` normalisé par `Entities::Identity::Contact` à l'affectation. | `test/domain/dtos/identity/credentials_input_test.rb` |
+| `app/domain/dtos/identity/second_factor_code_input.rb` | `code` : 6 chiffres (TOTP) ou 10 caractères base58 (code de secours). | `test/domain/dtos/identity/second_factor_code_input_test.rb` |
+| `app/domain/dtos/identity/pin_reset_input.rb` | `contact, code, pin, pin_confirmation, ip`. `code` : 8 chiffres ; `pin` au format ; confirmation égale. | `test/domain/dtos/identity/pin_reset_input_test.rb` |
+| `app/domain/dtos/catalog/import_upload_input.rb` | `kind, scope, filename, io`. `kind` ∈ `ImportKind`. `scope` ne contient que les clés `scope_keys` du type. `byte_size` et `checksum_sha256` calculés depuis `io` (`Digest::SHA256`, bibliothèque standard). | `test/domain/dtos/catalog/import_upload_input_test.rb` |
 
-**Use cases du socle** (`app/domain/use_cases/identity/`). Chaque use case a une seule méthode publique `call(...) → Result`. Ses ports, policies et son horloge `clock:` sont injectés au constructeur, et le domaine n'instancie **jamais** un repository. C'est le contrôleur qui les câble.
+**Use cases du socle** (`app/domain/use_cases/identity/`). Une seule méthode publique `call(...) → Shared::Result`. Ports, policies et horloge sont injectés au constructeur : le domaine n'instancie **jamais** un repository, c'est le contrôleur ou le job qui câble.
 
 | Fichier | Comportement | Test |
 |---|---|---|
-| `app/domain/use_cases/identity/authenticate.rb` | `call(dto:)`. (1) Si le DTO est invalide : `:invalid`. (2) Si `login_failures.count_since(contact:, since: now - 1.minute) >= 5` : écrit `audit.record(action: "login_locked")` et renvoie `:locked`. Le PIN n'est **pas** vérifié. (3) `users.authenticate`. En cas d'échec : `login_failures.record`, `audit.record("login_failed")`, puis `:invalid`, avec un message unique. (4) En cas de succès : génère le jeton, crée la `UserSession` avec `expires_at` selon le rôle, puis renvoie `Result.success({ user:, token: })`. | `test/domain/use_cases/identity/authenticate_test.rb` |
-| `app/domain/use_cases/identity/resolve_session.rb` | `call(token:)`. Cherche par digest. Absente ou expirée (`UserSession#expired?`) : `:expired`. Si l'expiration est dépassée, la ligne est détruite. Sinon, `touch` au-delà de `TOUCH_EVERY`, puis `Result.success(actor)`. | `test/domain/use_cases/identity/resolve_session_test.rb` |
-| `app/domain/use_cases/identity/resolve_home.rb` | `call(actor:)` renvoie le symbole de `HomeDestination`. Les données viennent de `TeacherRepositoryPort` et de `MembershipRepositoryPort`. | `test/domain/use_cases/identity/resolve_home_test.rb` |
+| `app/domain/use_cases/identity/authenticate.rb` | Exempté de policy (ADR-0028). (1) DTO invalide : `:invalid`. (2) `Lockout.retry_after(consecutive_failures)` non nul : `:locked`, avec `retry_after`, et le PIN n'est **pas** vérifié. (3) `users.authenticate` ; échec : `login_attempts.record(succeeded: false)`, audit `login.locked` si un palier vient d'être franchi, puis `:invalid` avec un message unique. (4) Succès : `record(succeeded: true)`, jeton de 32 octets, `sessions.create` avec son digest, puis `success({ user:, token: })`. | `test/domain/use_cases/identity/authenticate_test.rb` : paliers 5, 10 et 20 ; numéro inconnu ; message identique |
+| `app/domain/use_cases/identity/resolve_session.rb` | `call(token:)`. Absente ou `SessionLifetime.expired?` : la ligne est détruite, `:expired`. Sinon `touch` au-delà de `TOUCH_EVERY`, puis `success(Data(actor, session_id, second_factor_verified))`. | `test/domain/use_cases/identity/resolve_session_test.rb` |
+| `app/domain/use_cases/identity/resolve_home.rb` | `call(actor:)` → le symbole de `HomeDestination`. Faits : `MembershipRepositoryPort#primary_for`, `SchoolRepositoryPort#primary_school_id_for`, `TeacherProfileRepositoryPort`. | `test/domain/use_cases/identity/resolve_home_test.rb` |
 | `app/domain/use_cases/identity/sign_out.rb` | `call(token:)`. Détruit la session. Idempotent. | `test/domain/use_cases/identity/sign_out_test.rb` |
-| `app/domain/use_cases/identity/start_second_factor_enrollment.rb` | `call(actor:)`. Réservé à la team non enrôlée. Génère et stocke un secret en attente, puis renvoie `provisioning_uri`. | `test/domain/use_cases/identity/start_second_factor_enrollment_test.rb` |
-| `app/domain/use_cases/identity/confirm_second_factor_enrollment.rb` | `call(actor:, session_id:, dto:)`. Vérifie le code TOTP. En cas de succès : `enable` avec 10 codes de secours hachés, marque la session comme vérifiée, écrit l'audit `second_factor_enrolled`, puis renvoie les codes en clair **une seule fois**. | `test/domain/use_cases/identity/confirm_second_factor_enrollment_test.rb` |
-| `app/domain/use_cases/identity/verify_second_factor.rb` | `call(actor:, session_id:, dto:)`. Accepte un code TOTP (avec `record_used_step`, qui refuse le rejeu) ou un code de secours consommé. En cas d'échec : audit `second_factor_failed` et `:invalid`. En cas de succès : `mark_second_factor_verified`. | `test/domain/use_cases/identity/verify_second_factor_test.rb` |
-| `app/domain/use_cases/identity/issue_pin_recovery_code.rb` | `call(actor:, target_public_id:)`. Applique `AssistPinRecoveryPolicy`, génère le code et le stocke haché avec `TTL`. Écrit l'audit `pin_recovery_issued`, avec l'émetteur et la cible. Renvoie le code en clair et son expiration. Utilisé par les lots B8 et D4, avec le contrôleur de B8. | `test/domain/use_cases/identity/issue_pin_recovery_code_test.rb` |
-| `app/domain/use_cases/identity/redeem_pin_recovery_code.rb` | `call(dto:)`. Utilisateur introuvable ou code inutilisable : `:invalid` (« Code invalide ou expiré. »). Code faux : `record_failure`, et `:invalid`. Code juste : `update_pin`, `consume`, `destroy_all_for(user_id)`, audit `pin_recovery_redeemed`. | `test/domain/use_cases/identity/redeem_pin_recovery_code_test.rb` |
+| `app/domain/use_cases/identity/begin_second_factor_enrollment.rb` | `call(user_id:)`. Réservé à un compte team **non confirmé** ; sinon `:conflict`. Renvoie secret et `provisioning_uri`. | `test/domain/use_cases/identity/begin_second_factor_enrollment_test.rb` |
+| `app/domain/use_cases/identity/confirm_second_factor_enrollment.rb` | `call(user_id:, session_id:, dto:)`. `verify_code` ; échec : `:invalid`. Succès : `BackupCodes.generate`, `confirm` avec leurs HMAC, `mark_second_factor_verified`, audit `totp.enrolled`, puis renvoie les 10 codes en clair **une seule fois**. | `test/domain/use_cases/identity/confirm_second_factor_enrollment_test.rb` |
+| `app/domain/use_cases/identity/verify_second_factor.rb` | `call(user_id:, session_id:, dto:, ip:)`. Code TOTP par `verify_code` (rejeu refusé), ou code de secours par `consume_backup_code` avec audit `backup_code.used`. Échec : `login_attempts.record(kind: "second_factor")`, `:invalid`. Succès : `mark_second_factor_verified`. | `test/domain/use_cases/identity/verify_second_factor_test.rb` |
+| `app/domain/use_cases/identity/reset_pin_with_code.rb` | Exempté de policy (ADR-0028, anonyme). Utilisateur introuvable, code absent, révoqué ou faux : `:invalid` avec **un message identique** ; faux : `record_failure`. Expiré : `:expired`. Juste : `update_pin`, `consume`, `destroy_all_for`, `clear_failures`, audit `pin.reset`. Le tout dans une transaction. | `test/domain/use_cases/identity/reset_pin_with_code_test.rb` : 5 échecs révoquent le code |
 
-**Use case partagé du contexte classroom.** Il est remonté au Lot 0 parce que D4, D5, D6 et D7 l'appellent tous.
+### 0.7 Moteur d'import en masse (TR-28, ADR-0039 élargi)
 
-| Fichier | Comportement | Test |
+**La chaîne.** Téléversement (contrôleur) → `StartImport` (rapport `pending`, fichier stocké, job en file) → `Catalog::RunImportJob` (worker Solid Queue) → `RunImport` → écran de suivi, qui interroge le rapport toutes les 2 s jusqu'à `succeeded` ou `failed`.
+
+**Validation complète avant toute écriture.** `RunImport` enchaîne :
+1. `claim` : `pending` → `running`. Un second job sur le même rapport ne fait rien.
+2. Lecture du fichier, puis `JSON.parse`. Échec : erreur `json_invalid` au chemin `$`.
+3. `importer.normalize(document)` : adapte les formats hérités (S1 et S3), sinon identité.
+4. Enveloppe `format` et `version` attendus par `ImportKind`, sinon `format_mismatch`. Puis `ImportSchemaPort#validate`.
+5. Limites de `ImportKind` : `max_items` et nœuds, sinon `too_many_items`.
+6. `importer.validate(document:, scope:, progress:)` : résolution des références (niveau, série, matière, DRENA, parent), règles de cohérence, doublons. Il renvoie `Result.success(plan)` ou `Result.failure(:invalid, errors: { items: [ImportError] })`. La progression est publiée par `progress.call(processed:, total:)`, **hors transaction**, phase `validating`.
+7. S'il y a au moins une erreur, le rapport passe `failed` avec toutes les erreurs localisées par chemin JSON (500 au plus), et **rien n'est écrit**.
+8. Sinon, phase `writing`, puis `transaction.call { importer.write(plan:, author_id:, at:) }` → compteurs. Une exception annule tout : tout ou rien. Le rapport passe `succeeded` avec les compteurs, ou `failed` avec l'erreur `write_failed`.
+9. Audit `import.run`, avec le type, le rapport et les compteurs.
+
+**Contrat d'un importeur.** Module `UseCases::Catalog::Importer`, que chaque importeur inclut : `normalize(document)`, `validate(document:, scope:, progress:)` et `write(plan:, author_id:, at:)`. Les doublons ne sont jamais des erreurs : un élément déjà présent en base est compté dans `skipped_existing`, un élément répété dans le fichier dans `skipped_duplicate`.
+
+**Câblage gelé.** Le job résout l'importeur **au moment de l'appel**, par un `case` sur le type. Une constante d'un lot pas encore mergé ne casse donc ni le chargement ni l'`eager_load` :
+
+| `kind` | Importeur (lot) | Construction dans le job |
 |---|---|---|
-| `app/domain/use_cases/classroom/read_classroom.rb` | `call(actor:, classroom_public_id:)`. `classrooms.find_by_public_id` : absente → `:not_found`. `AccessPolicy` : refus → `:forbidden`. Renvoie `Result.success({ classroom:, show_roster: ReadRosterPolicy.allowed?(…), can_assign: AssignPolicy.allowed?(…) })`. | `test/domain/use_cases/classroom/read_classroom_test.rb` |
-
-**Actions d'audit de la V1**, sous la forme de constantes dans `Ports::Identity::AuditLogPort::ACTIONS` :
-`login_failed`, `login_locked`, `second_factor_failed`, `second_factor_enrolled`, `pin_recovery_issued`, `pin_recovery_redeemed`, `team_invitation_created`, `team_invitation_accepted`, `content_archived`, `classroom_created`.
-
-### 0.7 Queries partagées, helpers partagés
-
-Une query renvoie des `Data` typés, jamais une relation (ADR-0026). Chaque query propre à un écran appartient au lot de cet écran. Seules les deux queries et les deux helpers ci-dessous servent à plusieurs lots.
+| `drenas` | `UseCases::School::ImportDrenas` (S1) | `new(drenas: Repositories::School::DrenaRepository.new)` |
+| `schools` | `UseCases::School::ImportSchools` (S3) | `new(drenas:, schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new, taxonomy: Repositories::Catalog::TaxonomyRepository.new)` |
+| `course_tree` | `UseCases::Catalog::ImportCourseTree` (I1) | `new(taxonomy:, courses: Repositories::Catalog::CourseRepository.new, writer: Repositories::Catalog::ContentTreeWriter.new)` |
+| `essential_tree` | `UseCases::Catalog::ImportEssentialTree` (I2) | `new(courses:, essentials: Repositories::Catalog::EssentialRepository.new, writer:)` |
+| `exercise_tree` | `UseCases::Assessment::ImportExerciseTree` (I3) | `new(essentials:, exercises: Repositories::Assessment::ExerciseRepository.new, writer:)` |
 
 | Fichier | Contenu | Test |
 |---|---|---|
-| `app/infrastructure/queries/catalog/referential_options_query.rb` | `Queries::Catalog::ReferentialOptionsQuery#call` renvoie `Options = Data.define(:levels, :series_by_level, :materials)`, triés par position ou par nom. Sert à B2, D1 et D8. | `test/infrastructure/queries/catalog/referential_options_query_test.rb` |
-| `app/infrastructure/queries/school/school_options_query.rb` | `Queries::School::SchoolOptionsQuery`. `drenas` renvoie `[Data(id, name)]`. `schools_grouped` renvoie `{ drena_name => [Data(id, name)] }`. Sert à D1 et D8. | `test/infrastructure/queries/school/school_options_query_test.rb` |
-| `app/helpers/catalog/materials_helper.rb` | `material_tone(category)` : `literature` → `:info`, `science` → `:success`, `other` → `:neutral`, par les tons du Lot 0c. `material_badge(material)` rend `ui_badge(material.name, tone: material_tone(material.category), icon: material.icon)`. **Aucune déduction à partir du nom** (CA-26). | `test/helpers/catalog/materials_helper_test.rb` : renommer une matière ne change pas son ton |
-| `app/helpers/assessment/badges_helper.rb` | `badge_label(level)` renvoie « Or », « Argent », « Bronze » ou « Non acquis » par `t()`. `badge_tone(level)` : gold → `:warning`, silver → `:neutral`, bronze → `:info`, `nil` → `:neutral`. | `test/helpers/assessment/badges_helper_test.rb` |
+| `app/domain/use_cases/catalog/importer.rb` | Module de contrat ; chaque méthode lève `NotImplementedError`, sauf `normalize` (identité). | couvert par l'assertion de contrat d'importeur (0.11) |
+| `app/domain/use_cases/catalog/start_import.rb` | `call(actor:, dto:)`. DTO ; policy du type (`ImportKind#policy` : `ManageSchoolsPolicy` ou `ManageContentPolicy`) ; `byte_size > max_bytes` : `:invalid` avec `too_large` ; `reports.create` (même checksum déjà réussi : `:conflict`) ; `files.attach` ; `queue.enqueue`. Renvoie le rapport. | `test/domain/use_cases/catalog/start_import_test.rb` |
+| `app/domain/use_cases/catalog/run_import.rb` | `call(report_id:, importer:)`, étapes 1 à 9 ci-dessus. Il **réapplique la policy** du type à `users.actor_for(imported_by_id)` : un rôle retiré entre le téléversement et l'exécution fait échouer l'import. | `test/domain/use_cases/catalog/run_import_test.rb` : avec l'importeur factice de 0.11, JSON invalide, format faux, limites, erreur de validation (aucune écriture), exception à l'écriture (rollback), second `claim` sans effet |
+| `app/jobs/catalog/run_import_job.rb` | `Catalog::RunImportJob < ApplicationJob`, `queue_as :imports`, `limits_concurrency to: 1, key: ->(id) { "import" }` : un seul import à la fois. `discard_on ActiveJob::DeserializationError`. Câble le tableau ci-dessus. | `test/jobs/catalog/run_import_job_test.rb` |
+| `app/controllers/teams/imports_controller.rb` | `Teams::ImportsController < Teams::BaseController`. `index` (rapports récents, filtrables par type), `new` (`?kind=` et `?scope[...]=`), `create` (`StartImport`, puis redirection vers `show`), `show` (répond en HTML et dans le cadre Turbo `import_status`). | `test/controllers/teams/imports_controller_test.rb` : non-team 403 ; fichier trop gros 422 ; même fichier déjà réussi 422 avec message |
+| `app/views/teams/imports/index.html.erb` | Tableau : date, type, fichier, statut (`ui_badge`), compteurs, auteur. | — |
+| `app/views/teams/imports/new.html.erb` | Champ fichier (`accept=".json"`), rappel des limites du type, puis `render "teams/imports/kinds/#{kind}"` : **aide et champs de portée fournis par le lot du type**. Si le partial n'existe pas encore, un `ui_empty_state` « Type d'import bientôt disponible ». | — |
+| `app/views/teams/imports/show.html.erb` | En-tête du rapport, puis `turbo_frame_tag "import_status"` qui rend le partial suivant. | — |
+| `app/views/teams/imports/_status.html.erb` | Phase et barre de progression (`processed / total`) tant que `running` ; compteurs quand `succeeded` ; liste des erreurs quand `failed`. Porte `data-controller="teams--import-status"` avec l'URL du cadre et le statut. | — |
+| `app/views/teams/imports/_import_errors.html.erb` | Une ligne par erreur : chemin JSON en `code`, message traduit. « Et N autres erreurs » au-delà de 500. | — |
+| `app/javascript/controllers/teams/import_status_controller.js` | Recharge le cadre (`frame.reload()`) toutes les 2 s tant que le statut est `pending` ou `running` ; s'arrête sinon, et à la déconnexion du contrôleur. | couvert par le test système du tableau suivant |
+| `app/infrastructure/queries/catalog/import_reports_query.rb` | `Queries::Catalog::ImportReportsQuery#call(kind: nil, limit: 50)` → `[Row(public_id, kind, filename, status, counts, imported_by_name, created_at, finished_at)]` | `test/infrastructure/queries/catalog/import_reports_query_test.rb` |
+| `app/infrastructure/queries/catalog/import_report_query.rb` | `#call(public_id:)` → `Row(…, progress, import_errors, scope)` ou `nil` | `test/infrastructure/queries/catalog/import_report_query_test.rb` |
+| `config/locales/teams/imports.fr.yml` | Écrans, statuts (« En attente », « En cours », « Terminé », « Échoué »), phases (« Vérification du fichier », « Enregistrement »), un message par code d'`ImportError`. | — |
 
-### 0.8 Seeds — référentiel ivoirien et DRENA (ADR-0034)
+| Test transverse | Ce qu'il vérifie |
+|---|---|
+| `test/system/teams/import_flow_test.rb` | Avec l'importeur factice : un membre de l'équipe téléverse un fichier, voit « En cours » puis « Terminé » sans recharger la page ; un fichier invalide affiche ses erreurs avec leur chemin. |
 
-Tous les seeds sont idempotents (`find_or_create_by!` sur la clé naturelle) et se jouent dans tous les environnements, sauf `demo.rb`.
+### 0.8 Queries et helpers partagés
+
+Une query renvoie des `Row` (`Data`), jamais une relation (ADR-0026). Chaque query propre à un écran appartient au lot de cet écran. Seules les queries et helpers ci-dessous servent à plusieurs lots.
+
+| Fichier | Contenu | Lots | Test |
+|---|---|---|---|
+| `app/infrastructure/queries/catalog/referential_options_query.rb` | `Queries::Catalog::ReferentialOptionsQuery#call` → `Row(levels, series_by_level, materials)`, triés par position ou par nom ; chaque matière porte sa `category`. | B2, D1, D8, S2 | `test/infrastructure/queries/catalog/referential_options_query_test.rb` |
+| `app/infrastructure/queries/school/school_options_query.rb` | `drenas` → `[Row(public_id, name)]` ; `schools_grouped(status: "active")` → `{ drena_name => [Row(public_id, name)] }`. | D1, D8, S2, S3 | `test/infrastructure/queries/school/school_options_query_test.rb` |
+| `app/infrastructure/queries/classroom/classroom_header_query.rb` | `#call(public_id:)` → `Row(public_id, name, level_name, series_name, school_name, school_year, status, join_code_display, max_students, active_students_count, teacher_ids, student_ids)` ou `nil`. Les faits de `ReadClassroomPolicy` et d'`AssignPolicy` en sont tirés. | D4, D5, D6, A3 | `test/infrastructure/queries/classroom/classroom_header_query_test.rb` |
+| `app/infrastructure/queries/identity/shell_user_query.rb` | `#call(user_id:)` → `Row(display_name, role, team_role)`, lu une fois par requête pour le shell. | 0, tous | `test/infrastructure/queries/identity/shell_user_query_test.rb` |
+| `app/helpers/assessment/badges_helper.rb` | `badge_label(level)` → « Bronze », « Argent », « Or », « Diamant » ou « Non acquis » par `t()` (UDR-0007). `badge_tone(level)` → tons du Lot 0c. `mastery_label(score)` → « Acquis », « Fragile », « En difficulté » via `Grading.mastery_for`. `grade_label(score)` → « 14/20 ». | A2, B3, C1, C3 | `test/helpers/assessment/badges_helper_test.rb` : 4 paliers, aucun libellé « Platine », « Médaille » ni « Trophée » |
+| `app/helpers/catalog/content_status_helper.rb` | `content_status_badge(status)` : « Brouillon — visible uniquement par l'équipe », « Publié », « Archivé ». `content_status_actions(status)` : transitions permises par `ContentStatus::TRANSITIONS`. | B1 à B5 | `test/helpers/catalog/content_status_helper_test.rb` |
+
+**Badge de matière.** Aucun helper au Lot 0 : les lots appellent directement `ui_subject_badge(material.name, category: material.category)` du Lot 0c. La couleur et l'icône viennent de la catégorie, jamais du nom (CA-26). Une catégorie hors liste rend le ton neutre.
+
+### 0.9 Seeds (ADR-0034, amendé)
+
+Tous les seeds sont idempotents (`find_or_create_by!` sur la clé naturelle). **En production, seul `identity.rb` est joué** : DRENA, établissements, référentiel et contenu y sont créés par l'équipe, à l'écran ou par import.
 
 | Fichier | Contenu | Test |
 |---|---|---|
-| `db/seeds.rb` | Charge, dans l'ordre : `school.rb`, `catalog.rb`, `identity.rb`, puis `demo.rb` si `Rails.env.development?` | `test/db/seeds_test.rb` : deux passages, mêmes comptes |
-| `db/seeds/school.rb` | 41 DRENA et leurs établissements, lus dans les deux fichiers de données des lignes suivantes. | (même test) |
-| `db/seeds/data/drenas.yml` | Les 41 noms de `⟨ancienne⟩ ../.Business/content_pedagogics/Drenas.md` §2 : Abidjan 1 à 4, Aboisso, Adzopé, Agboville, Dabou, Grand-Bassam, Tiassalé, Bouaké 1, Bouaké 2, Daoukro, Dimbokro, Yamoussoukro, Bongouanou, Man, Danané, Duékoué, Guiglo, San-Pédro, Sassandra, Soubré, Daloa, Gagnoa, Divo, Issia, Sinfra, Korhogo, Boundiali, Ferkessédougou, Odienné, Minignan, Séguéla, Mankono, Touba, Abengourou, Bondoukou, Bouna, Katiola, Bouaflé. **À valider par le porteur.** | — |
-| `db/seeds/data/schools.yml` | Converti des 41 fichiers `⟨ancienne⟩ ../.Business/content_pedagogics/DRENAS/schools_*.json`. `schoolsigle` devient `short_name`. `schooltype` devient `sector` (`public` → `public`, `privée` → `private`, `mixte` → `mixed`). `schoolstatus` devient `status`. | — |
-| `db/seeds/catalog.rb` | **Niveaux** : 6ème (1, first), 5ème (2), 4ème (3), 3ème (4), 2nde (5, second), 1ère (6), Tle (7). **Séries** : A1, A2, C, D. **level_series** : 1ère et Tle × {A1, A2, C, D}, 2nde × {C}. **Matières** : lues dans le fichier de données de la ligne suivante. | (même test) |
-| `db/seeds/data/materials.yml` | `name, short_name, category, icon`. Français (FR, literature, `language`), Anglais (ANG, literature, `language`), Espagnol (ESP, literature, `language`), Allemand (ALL, literature, `language`), Philosophie (PHILO, literature, `light-bulb`), Histoire-Géographie (HG, literature, `globe-europe-africa`), Mathématiques (MATHS, science, `calculator`), Physique-Chimie (PC, science, `beaker`), SVT (SVT, science, `bug-ant`), EDHC (EDHC, other, `scale`), EPS (EPS, other, `trophy`). **À valider par le porteur.** | — |
-| `db/seeds/identity.rb` | Un compte `team` si aucun n'existe. Les valeurs viennent de `ENV.fetch("LNCLASS_TEAM_CONTACT")`, `LNCLASS_TEAM_LAST_NAME`, `LNCLASS_TEAM_FIRST_NAMES` et `LNCLASS_TEAM_PIN`. En production, une variable absente lève une erreur explicite. En développement, les valeurs par défaut sont `0700000000` et `1357`. Aucun PIN n'est écrit dans le dépôt pour la production (ADR-0038). | (même test) |
-| `db/seeds/demo.rb` | Développement seulement. Crée un enseignant `0500000001`, configuré, en SVT, dans le premier établissement d'Abidjan 1, avec la classe « Tle D 1 ». Crée l'élève `0100000001`, membre principal. Crée un cours publié, une fiche, et un exercice de 2 questions assigné. Les PIN valent `2468`. | — |
+| `db/seeds.rb` | Charge `identity.rb` dans tous les environnements ; puis `catalog.rb`, `school.rb` et `development.rb` si `Rails.env.local?`. | `test/db/seeds_test.rb` : deux passages, mêmes comptes ; en `production` simulé, aucune DRENA, aucun niveau |
+| `db/seeds/identity.rb` | Invitation d'amorçage (ADR-0034, ADR-0038) : si aucun compte `team` n'existe et que `ENV["TEAM_BOOTSTRAP_CONTACT"]` est posé, crée une invitation `kind: "team"`, `team_role: "admin"`, `invited_by_id: nil`, et affiche l'URL `/invitations/<jeton>` **une fois** sur la sortie standard. Aucun PIN dans le dépôt. | (même test) |
+| `db/seeds/catalog.rb` | Garde `raise unless Rails.env.local?`. **Niveaux** (nom, code, position, cycle) : 6ème `6e`, 5ème `5e`, 4ème `4e`, 3ème `3e` (first) ; 2nde `2nde`, 1ère `1ere`, Tle `tle` (second). **Séries** : A1 `a1`, A2 `a2`, C `c`, D `d`. **Niveau–série** : 2nde × C ; 1ère et Tle × A1, A2, C, D. **Matières** (nom, abrégé, catégorie) : Français FR, Anglais ANG, Espagnol ESP, Allemand ALL, Philosophie PHILO, Histoire-Géographie HG (literature) ; Mathématiques MATHS, Physique-Chimie PC, SVT (science) ; EDHC, EPS (other). | (même test) |
+| `db/seeds/school.rb` | Garde `Rails.env.local?`. Deux DRENA (Abidjan 1, Bouaké 1) et quatre établissements (lycée public, lycée privé, collège public, collège privé), créés par `SchoolRepository#insert_many` puis `ClassroomRepository#insert_generated` avec `DefaultClassroomPlan` : les classes sont celles qu'obtiendra la production. | (même test) |
+| `db/seeds/development.rb` | Garde `Rails.env.development?`. Un compte team (`0700000000`, TOTP de développement affiché), un enseignant SVT `0500000001` onboardé qui enseigne « Tle D 1 », un élève `0100000001` membre principal, un cours publié avec une fiche et un exercice de 2 questions. PIN `2468`. | — |
 
-### 0.9 Routes V1 complètes, socle d'authentification, shell branché
+### 0.10 Routes V1, authentification, shell branché
 
-**Routes.** Chaque fichier de contexte est dessiné en entier ici, et aucun lot ne les modifie. Dans chaque contexte, les routes `new` sont déclarées **avant** les routes `:slug`.
+**Routes.** Chaque fichier est dessiné en entier ici ; aucun lot ne les modifie. Dans chaque ressource, `new` précède `:slug`. Aucun `:id` numérique (ADR-0029).
 
 | Fichier | Contenu |
 |---|---|
-| `config/routes.rb` | `root "homepage#index"`, `get "up" => "rails/health#show"`, puis `draw :identity`, `draw :school`, `draw :classroom`, `draw :catalog`, `draw :assessment`, `draw :communication` |
-| `config/routes/identity.rb` | voir le bloc ci-dessous |
-| `config/routes/school.rb` | voir le bloc ci-dessous |
-| `config/routes/classroom.rb` | voir le bloc ci-dessous |
-| `config/routes/catalog.rb` | voir le bloc ci-dessous |
-| `config/routes/assessment.rb` | voir le bloc ci-dessous |
+| `config/routes.rb` | `root "homepage#index"`, `get "up" => "rails/health#show"`, puis `draw :identity`, `:school`, `:classroom`, `:catalog`, `:assessment`, `:communication`, `:teams` |
+| `config/routes/identity.rb` · `config/routes/school.rb` · `config/routes/classroom.rb` · `config/routes/catalog.rb` · `config/routes/assessment.rb` · `config/routes/teams.rb` | voir le bloc ci-dessous |
 | `config/routes/communication.rb` | vide, avec le commentaire `# V6` |
 
 ```ruby
 # identity
-get  "login",  to: "identity/sessions#new", as: :new_session
-resource :session, only: %i[create destroy], controller: "identity/sessions"          # session_path (DELETE = déconnexion, attendu par le shell 0c)
-resource :second_factor, only: %i[new create], path: "second-factor", controller: "identity/second_factors"
-resource :second_factor_enrollment, only: %i[new create], path: "second-factor/enrollment", controller: "identity/second_factor_enrollments"
-resource :pin_recovery, only: %i[new create], path: "pin-recovery", controller: "identity/pin_recoveries"
+get  "login", to: "identity/sessions#new", as: :new_session
+resource :session, only: %i[create destroy], controller: "identity/sessions"          # session_path (gelé : DELETE = « Se déconnecter »)
+namespace :identity do
+  resource :second_factor, only: %i[new create], path: "second-factor"               # new_identity_second_factor_path (ADR-0031)
+  resource :second_factor_enrollment, only: %i[new create], path: "second-factor/enrollment"
+  resource :pin_reset, only: %i[new create], path: "pin-reset"                        # new_identity_pin_reset_path (ADR-0032)
+end
 get  "account/pending", to: "identity/pending_accounts#show", as: :pending_account
-get  "student-signup", to: "identity/student_registrations#new",  as: :new_student_registration      # A1
-post "student-signup", to: "identity/student_registrations#create", as: :student_registrations      # A1
-get  "c/:join_code",   to: "identity/student_registrations#new",  as: :join_classroom               # A1
-get  "teacher-signup", to: "identity/teacher_registrations#new",  as: :new_teacher_registration      # D1
-post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher_registrations      # D1
-get  "team/invitations/new", to: "identity/team_invitations#new", as: :new_team_invitation          # B7
-post "team/invitations",     to: "identity/team_invitations#create", as: :team_invitations          # B7
-get  "team/invitations/:token/accept", to: "identity/team_invitation_acceptances#new",  as: :accept_team_invitation   # B7
-post "team/invitations/:token/accept", to: "identity/team_invitation_acceptances#create"                              # B7
-get  "team/accounts", to: "identity/account_lookups#show", as: :team_account_lookup                # B8
-post "accounts/:user_public_id/pin-recovery-codes", to: "identity/pin_recovery_codes#create", as: :account_pin_recovery_codes   # B8 (appelé aussi par D4)
+get  "teacher-signup",  to: "identity/teacher_registrations#new",    as: :new_teacher_registration   # D1
+post "teacher-signup",  to: "identity/teacher_registrations#create", as: :teacher_registrations       # D1
+get  "invitations/:token", to: "identity/invitations#show",   as: :invitation                        # B7 (ADR-0038)
+post "invitations/:token", to: "identity/invitations#accept", as: :accept_invitation                 # B7
+post "accounts/:user_public_id/pin-recovery-codes", to: "identity/pin_recovery_codes#create",
+     as: :account_pin_recovery_codes                                                                  # B8 (appelé aussi depuis D4)
 
 # school
-get "api/v1/schools", to: "school/api/schools#index", as: :api_v1_schools, defaults: { format: :json }   # D1
+get "api/v1/drenas/:drena_public_id/schools", to: "school/api/schools#index",
+    as: :api_v1_drena_schools, defaults: { format: :json }                                            # D1
 
 # classroom
-get  "api/v1/classrooms/lookup", to: "classroom/api/join_code_lookups#show", as: :api_v1_classroom_lookup, defaults: { format: :json }  # A1
-get  "students",            to: "classroom/student_homes#show",      as: :student_home        # A2
-get  "students/classroom",  to: "classroom/student_classrooms#show", as: :student_classroom   # A3
-get  "teachers",            to: "classroom/teacher_homes#show",      as: :teacher_home        # D3
-get  "teachers/classrooms", to: "classroom/teaching_selections#edit", as: :teacher_classrooms # D2
-put  "teachers/classrooms", to: "classroom/teaching_selections#update"                        # D2
-get  "classrooms/new",      to: "classroom/classroom_creations#new", as: :new_classroom       # D8
-post "classrooms",          to: "classroom/classroom_creations#create", as: :classrooms       # D8
-get  "classrooms/:public_id", to: "classroom/classrooms#show", as: :classroom                 # D4
-get  "classrooms/:classroom_public_id/courses/:course_slug", to: "classroom/classroom_courses#show", as: :classroom_course   # D5
-get  "classrooms/:classroom_public_id/courses/:course_slug/essentials/:essential_slug", to: "classroom/classroom_essentials#show", as: :classroom_essential  # D6
-post   "classrooms/:classroom_public_id/assignments", to: "classroom/assignments#create", as: :classroom_assignments      # D5
-delete "classrooms/:classroom_public_id/assignments", to: "classroom/assignments#destroy"                                # D5
-get  "courses/:course_slug/assignments", to: "classroom/course_assignments#index", as: :course_assignments               # D7
+get  "join",    to: "classroom/join_codes#new",    as: :new_join_code                                 # A1
+post "join",    to: "classroom/join_codes#create", as: :join_codes                                    # A1 (redirige vers /c/:code)
+get  "c/:code", to: "classroom/joins#new",    as: :join_classroom                                     # A1 (ADR-0040)
+post "c/:code", to: "classroom/joins#create"                                                          # A1
+get  "students",           to: "classroom/student_homes#show",      as: :student_home                 # A2 (gelé)
+get  "students/classroom", to: "classroom/student_classrooms#show", as: :student_classroom            # A3 (gelé)
+get  "teachers",           to: "classroom/teacher_homes#show",      as: :teacher_home                 # D3 (gelé)
+get  "teachers/classrooms", to: "classroom/teaching_selections#index", as: :teacher_classrooms        # D2 (gelé)
+post   "teachers/classrooms/:classroom_public_id/teaching", to: "classroom/teachings#create", as: :classroom_teaching   # D2
+delete "teachers/classrooms/:classroom_public_id/teaching", to: "classroom/teachings#destroy"                          # D2
+post "teachers/onboarding", to: "classroom/teacher_onboardings#create", as: :teacher_onboarding       # D2
+get  "classrooms/:public_id", to: "classroom/classrooms#show", as: :classroom                         # D4
+get  "classrooms/:classroom_public_id/courses/:course_slug", to: "classroom/classroom_courses#show", as: :classroom_course    # D5
+get  "classrooms/:classroom_public_id/courses/:course_slug/essentials/:essential_slug",
+     to: "classroom/classroom_essentials#show", as: :classroom_essential                              # D6
+post  "classrooms/:classroom_public_id/assignments", to: "classroom/assignments#create", as: :classroom_assignments    # D5
+patch "assignments/:public_id/archive", to: "classroom/assignments#archive", as: :archive_assignment                  # D5
+get  "courses/:course_slug/assignments", to: "classroom/course_assignments#index", as: :course_assignments             # D7
 
 # catalog
-get   "teams", to: "catalog/team_homes#show", as: :team_home                                   # B6
-get   "courses/new",            to: "catalog/course_editions#new",  as: :new_course            # B2
-post  "courses",                to: "catalog/course_editions#create"                           # B2
-get   "courses/:slug/edit",     to: "catalog/course_editions#edit", as: :edit_course           # B2
-patch "courses/:slug",          to: "catalog/course_editions#update"                           # B2
-patch "courses/:slug/archive",  to: "catalog/course_editions#archive", as: :archive_course     # B2
-get   "courses/:course_slug/essentials/new", to: "catalog/essential_editions#new", as: :new_course_essential          # B4
-post  "courses/:course_slug/essentials",     to: "catalog/essential_editions#create", as: :course_essentials          # B4
-get   "courses/:course_slug/essentials/:slug/edit", to: "catalog/essential_editions#edit", as: :edit_course_essential # B4
-patch "courses/:course_slug/essentials/:slug",      to: "catalog/essential_editions#update"                           # B4
-patch "courses/:course_slug/essentials/:slug/archive", to: "catalog/essential_editions#archive", as: :archive_course_essential  # B4
-get   "courses",       to: "catalog/courses#index", as: :courses                               # B1
-get   "courses/:slug", to: "catalog/courses#show",  as: :course                                # B1
-get   "courses/:course_slug/essentials/:slug", to: "catalog/essentials#show", as: :course_essential   # B3
+get "courses",       to: "catalog/courses#index", as: :courses                                         # B1 (gelé)
+get "courses/:slug", to: "catalog/courses#show",  as: :course                                          # B1
+get "courses/:course_slug/essentials/:slug", to: "catalog/essentials#show", as: :course_essential      # B3
 
 # assessment
-get   "courses/:course_slug/essentials/:essential_slug/exercises/new", to: "assessment/exercise_editions#new", as: :new_essential_exercise   # B5
-post  "courses/:course_slug/essentials/:essential_slug/exercises",     to: "assessment/exercise_editions#create", as: :essential_exercises  # B5
-get   "exercises/:slug/edit",    to: "assessment/exercise_editions#edit", as: :edit_exercise   # B5
-patch "exercises/:slug",         to: "assessment/exercise_editions#update"                     # B5
-patch "exercises/:slug/archive", to: "assessment/exercise_editions#archive", as: :archive_exercise   # B5
-get   "exercises/:slug", to: "assessment/exercises#show", as: :exercise                        # C1
-post  "exercises/:exercise_slug/sessions", to: "assessment/exercise_sessions#create", as: :exercise_sessions   # C2
-get   "sessions/:public_id", to: "assessment/exercise_sessions#show", as: :exercise_session                   # C2
-post  "sessions/:public_id/attempts", to: "assessment/question_attempts#create", as: :exercise_session_attempts  # C2
-post  "sessions/:public_id/completion", to: "assessment/session_completions#create", as: :exercise_session_completion  # C3
-get   "sessions/:public_id/result", to: "assessment/session_results#show", as: :exercise_session_result         # C3
+get  "exercises/:public_id", to: "assessment/exercises#show", as: :exercise                            # C1
+post "exercises/:exercise_public_id/sessions", to: "assessment/exercise_sessions#create", as: :exercise_sessions   # C2
+get  "sessions/:public_id", to: "assessment/exercise_sessions#show", as: :exercise_session                        # C2
+post "sessions/:public_id/attempts", to: "assessment/question_attempts#create", as: :exercise_session_attempts   # C2
+get  "sessions/:public_id/result", to: "assessment/session_results#show", as: :exercise_session_result           # C3
+# Pas de route de clôture : la dernière réponse clôt la session (ADR-0054).
+
+# teams — tout contrôleur hérite de Teams::BaseController (second facteur exigé)
+get "teams", to: "teams/homes#show", as: :team_home                                                     # B6 (gelé)
+scope "teams", module: "teams" do                          # noms sans préfixe, attendus par la navigation 0c
+  resources :drenas,    param: :public_id, except: :show                                                # S1
+  resources :schools,   param: :public_id do                                                            # S2 → schools_path, ACTIF
+    member { patch :deactivate }
+    resources :classrooms, only: %i[new create], controller: "school_classrooms"                        # D8
+  end
+  resources :levels,    param: :slug, except: :show                                                     # R1
+  resources :series,    param: :slug, except: :show                                                     # R2 → series_index_path
+  resources :level_series, only: %i[create destroy], path: "levels/:level_slug/series",
+            param: :series_slug                                                                          # R2
+  resources :materials, param: :slug, except: :show                                                     # R3
+end
+namespace :teams do
+  resources :courses, only: %i[new create edit update], param: :slug do                                 # B2
+    member { patch :publish; patch :archive }
+    resources :essentials, only: %i[new create], param: :slug                                           # B4
+  end
+  resources :essentials, only: %i[edit update], param: :slug do                                         # B4
+    member { patch :publish; patch :archive }
+    resources :exercises, only: %i[new create]                                                          # B5
+  end
+  resources :exercises, only: %i[edit update], param: :public_id do                                     # B5
+    member { patch :publish; patch :archive }
+  end
+  resources :imports, only: %i[index new create show], param: :public_id                                # 0.7
+  resources :invitations, only: %i[new create]                                                          # B7
+  resource  :account_lookup, only: :show, path: "accounts"                                              # B8
+  post "members/:user_public_id/second-factor-reset", to: "second_factor_resets#create",
+       as: :member_second_factor_reset                                                                   # B8
+end
+mount MissionControl::Jobs::Engine, at: "/teams/jobs"                                                  # ADR-0052
 ```
 
-Le test `test/routing/v1_routes_test.rb` vérifie deux choses :
-- chaque nom de route attendu par `NavigationHelper::DESTINATIONS` existe pour les rôles student, teacher et team, sauf `schools_path`, `team_dashboard_path` et `profile_path` (inactifs en V1) ;
-- `/courses/new` n'est pas capté par `courses#show`.
+`team_dashboard_path` (V4) et `profile_path` (V2) ne sont **pas** créés : la navigation du Lot 0c les rend inactifs. `schools_path` est créé : l'entrée « Établissements » de l'équipe est **active** dès la V1.
+
+| Fichier | Test |
+|---|---|
+| (routes) | `test/routing/v1_routes_test.rb` : chaque nom de `NavigationHelper::DESTINATIONS` existe pour student, teacher et team, sauf `team_dashboard_path` et `profile_path` ; les sept noms gelés et `schools_path` existent ; `/teams/courses/new` n'est pas capté par un `:slug` ; aucune route ne contient `:id`. |
 
 **Socle delivery.**
 
 | Fichier | Contenu | Test |
 |---|---|---|
-| `app/controllers/application_controller.rb` | `include Authentication`, `include ResultRendering`. Le `allow_browser` de V0 est conservé. | — |
-| `app/controllers/concerns/authentication.rb` | **Cookie** `cookies.signed[:session_token]` : `httponly`, `same_site: :lax`, `secure` hors développement et test. **`start_session(user, token)`** : `reset_session`, puis dépose le cookie. **`require_authentication`** (`before_action` par défaut) : `UseCases::Identity::ResolveSession`. Expirée ou absente : redirection vers `new_session_path`. **Si `actor.team?` et que le second facteur n'est pas vérifié** : redirection vers `new_second_factor_path`, ou `new_second_factor_enrollment_path` si la team n'est pas enrôlée, sauf pour ces contrôleurs eux-mêmes et `sessions#destroy`. **Macros** `allow_unauthenticated_access(only:)` et `allow_roles(*roles)` : un rôle hors liste reçoit 403. `current_actor` est exposé en `helper_method`. Ce concern est le **seul** endroit qui teste le rôle (ID-16). **`redirect_to_home`** : `ResolveHome`, puis symbole → route (`student_home`, `pending_account`, `teacher_classrooms`, `teacher_home`, `new_second_factor`, `team_home`). | `test/controllers/concerns/authentication_test.rb` : expiration absolue et d'inactivité, cookie falsifié, team non vérifiée bloquée sur `/teams` (TR-cadre-5), 403 pour un rôle hors liste |
-| `app/controllers/concerns/result_rendering.rb` | `render_failure(result, form: nil)`. `:forbidden` → 403 avec `errors/forbidden` en HTML, `{ error: }` en JSON, toast en Turbo Stream. `:not_found` → 404 avec `errors/not_found`. `:invalid` et `:conflict` → nouveau rendu de `form` en 422. `:locked` → 429. `:expired` → redirection vers la connexion. | `test/controllers/concerns/result_rendering_test.rb` |
-| `app/controllers/authenticated_controller.rb` | `AuthenticatedController < ApplicationController`, avec `layout "shell"` et `helper_method :shell_user`. `shell_user` construit `NavigationHelper::ShellUser.new(name: current_actor.display_name, role: current_actor.role)`. Tous les contrôleurs connectés des lots en héritent. | couvert par les tests des lots |
+| `app/controllers/application_controller.rb` | `include Authentication`, `include RendersResult`. Le `allow_browser` de V0 est conservé (ADR-0051). | — |
+| `app/controllers/concerns/authentication.rb` | **Cookie** `cookies.signed[:session_token]` : `httponly`, `same_site: :lax`, `secure` hors local (ADR-0050). **`start_session(user, token)`** : `reset_session`, puis dépose le cookie. **`require_authentication`** (par défaut) : `ResolveSession` ; absente ou expirée → `new_session_path`. **Compte team sans second facteur vérifié** : aucun `current_actor` n'est construit ; redirection vers `new_identity_second_factor_path`, ou vers l'enrôlement si le compte n'est pas confirmé, partout sauf ces deux écrans et `session#destroy`. **Macros** `allow_unauthenticated_access(only:)` et `allow_roles(*roles)` (un rôle hors liste reçoit 403). `current_actor` en `helper_method`. **`redirect_to_home`** : `ResolveHome`, puis symbole → route. | `test/controllers/concerns/authentication_test.rb` : expiration absolue et d'inactivité, cookie falsifié, team non vérifiée bloquée partout (TR-cadre-5), 403 hors rôle |
+| `app/controllers/concerns/renders_result.rb` | Tel que dans l'ADR-0026 : `render_result(result, success:, form: nil)`. `:forbidden` → 403 (`errors/forbidden`, JSON `{ error: }`, toast en Turbo Stream) ; `:not_found` → 404 ; `:invalid` et `:conflict` → `form` en 422 ; `:locked` → 429 ; `:expired` → connexion. | `test/controllers/concerns/renders_result_test.rb` |
+| `app/controllers/authenticated_controller.rb` | `layout "shell"`, `helper_method :shell_user` (`NavigationHelper::ShellUser` construit depuis `ShellUserQuery`). Les contrôleurs connectés hors équipe en héritent. | couvert par les tests des lots |
+| `app/controllers/teams/base_controller.rb` | `Teams::BaseController < AuthenticatedController`, `allow_roles :team`. Sert aussi de `base_controller_class` à Mission Control. | `test/controllers/teams/base_controller_test.rb` : enseignant 403 ; team non vérifiée redirigée ; `/teams/jobs` refusé sans second facteur |
 | `app/controllers/homepage_controller.rb` | `allow_unauthenticated_access`. Un visiteur connecté est envoyé vers `redirect_to_home` (TR-02). Le contenu de la landing appartient à A4. | `test/controllers/homepage_redirection_test.rb` |
-| `app/controllers/identity/sessions_controller.rb` | `new`, `create`, `destroy`. `rate_limit to: 10, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { render_failure(Result.failure(:locked)) }`. `create` : `Authenticate`, puis `start_session`, toast « Connexion réussie ! », puis `redirect_to_home`. En cas d'échec, le formulaire est réaffiché en 422 avec le message unique et le PIN vide. `destroy` : `SignOut`, `reset_session`, suppression du cookie, puis redirection vers `/` avec « Déconnexion réussie ! ». | `test/controllers/identity/sessions_controller_test.rb` : TR-cadre-2, rotation de l'identifiant de session, 429 par adresse, normalisation `225` |
-| `app/controllers/identity/second_factors_controller.rb` | `new`, `create`. `rate_limit to: 5, within: 1.minute, by: -> { session_token_digest }`. | `test/controllers/identity/second_factors_controller_test.rb` |
-| `app/controllers/identity/second_factor_enrollments_controller.rb` | `new` : QR code en SVG via `RQRCode`, puis le secret en texte pour la saisie manuelle. `create` : confirmation, puis rendu direct de `backup_codes`, **sans redirection** : les codes ne passent ni par le flash ni par la session. | `test/controllers/identity/second_factor_enrollments_controller_test.rb` |
-| `app/controllers/identity/pin_recoveries_controller.rb` | `allow_unauthenticated_access`. `rate_limit to: 5, within: 1.minute, by: ip`. `create` : `RedeemPinRecoveryCode`. En cas de succès, redirection vers la connexion avec « Votre nouveau PIN est enregistré. Connectez-vous. » | `test/controllers/identity/pin_recoveries_controller_test.rb` |
-| `app/controllers/identity/pending_accounts_controller.rb` | `show` : écran de sortie, élève sans classe ou enseignant sans école. **Ne redirige jamais**, même si le compte est complet : un simple lien « Aller à mon accueil » y figure. | `test/controllers/identity/pending_accounts_controller_test.rb` : aucune boucle (ID-13) |
-| `app/views/identity/sessions/new.html.erb` | Deux colonnes, reprises de `⟨ancienne⟩ views/identity/sessions/new.html.erb`. Contact en `telephone_field`, `maxlength` 14 pour accepter l'indicatif, placeholder « 07 00 00 00 00 ». PIN en `password_field`, `inputmode="numeric"`, `autocomplete="current-password"`. Lien « PIN oublié ? » vers `new_pin_recovery_path`. | (tests contrôleur) |
-| `app/views/identity/second_factors/new.html.erb` | Champ code, lien « Utiliser un code de secours » (le même champ accepte les deux formats) | — |
+| `app/controllers/identity/sessions_controller.rb` | `rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }` (ADR-0050). `create` : `Authenticate`, `start_session`, toast « Connexion réussie », `redirect_to_home`. Échec : formulaire en 422, message unique, PIN vidé ; `:locked` : message avec l'heure de déblocage. `destroy` : `SignOut`, cookie supprimé, `/` avec « Vous êtes déconnecté ». | `test/controllers/identity/sessions_controller_test.rb` : TR-cadre-2, rotation de l'identifiant de session, 429, préfixes `00225` et `225` |
+| `app/controllers/identity/second_factors_controller.rb` | `new`, `create` ; `rate_limit to: 5, within: 1.minute`. Succès : `team_home_path`. | `test/controllers/identity/second_factors_controller_test.rb` : code rejoué refusé, code de secours accepté une fois |
+| `app/controllers/identity/second_factor_enrollments_controller.rb` | `new` : QR en SVG (`RQRCode`) et secret en texte. `create` : rendu direct de `backup_codes`, **sans redirection** : les codes ne passent ni par le flash ni par la session. | `test/controllers/identity/second_factor_enrollments_controller_test.rb` |
+| `app/controllers/identity/pin_resets_controller.rb` | `allow_unauthenticated_access`, `rate_limit to: 5, within: 1.minute`. `create` : `ResetPinWithCode` ; succès → connexion avec « Votre nouveau PIN est enregistré. Connectez-vous. » | `test/controllers/identity/pin_resets_controller_test.rb` |
+| `app/controllers/identity/pending_accounts_controller.rb` | Écran de sortie : élève sans classe active (lien « Rejoindre une classe » vers `new_join_code_path`), enseignant sans école. **Ne redirige jamais**. | `test/controllers/identity/pending_accounts_controller_test.rb` : aucune boucle (ID-13) |
+| `app/views/identity/sessions/new.html.erb` | Deux colonnes, reprises de `⟨ancienne⟩ views/identity/sessions/new.html.erb`. Contact en `telephone_field` (`maxlength` 15, placeholder « 07 00 00 00 00 »), PIN en `password_field` `inputmode="numeric"`. Lien « PIN oublié ? ». Titre « Connexion ». | (tests contrôleur) |
+| `app/views/identity/second_factors/new.html.erb` | Champ code, aide « ou un code de secours » | — |
 | `app/views/identity/second_factor_enrollments/new.html.erb` | QR, secret, champ code | — |
-| `app/views/identity/second_factor_enrollments/backup_codes.html.erb` | 10 codes, avertissement « affichés une seule fois », bouton « J'ai noté mes codes » vers `team_home_path` | — |
-| `app/views/identity/pin_recoveries/new.html.erb` | Numéro, code à 6 chiffres, nouveau PIN, confirmation | — |
-| `app/views/identity/pending_accounts/show.html.erb` | `ui_empty_state` selon le cas, bouton Déconnexion | — |
-| `app/views/errors/forbidden.html.erb` | « Accès interdit. », lien vers l'accueil | — |
-| `app/views/errors/not_found.html.erb` | « Page introuvable. » | — |
-| `config/locales/fr.yml` | Clés **communes** : `errors.contact.format`, `errors.pin.*`, `errors.codes.{forbidden,not_found,invalid,conflict,locked,expired}`, `activemodel.attributes.dtos/*` (libellés de champ : Nom, Prénom(s), Genre, Numéro de contact, PIN…), `content_status.{draft,published,archived}` (« Brouillon — visible uniquement par l'équipe », « Publié », « Archivé »), `badges.{gold,silver,bronze,none}`, `materials.categories.*`, `genders.*` | `test/i18n/locale_files_test.rb` : tout fichier de `config/locales/` est sous `fr:`, aucune clé en double entre fichiers, et les termes « Habilité », « Habiletés » et « Notions clés » sont absents (F-32) |
-| `config/locales/identity/sessions.fr.yml` | Écran de connexion, toasts de connexion et de déconnexion | — |
-| `config/locales/identity/second_factors.fr.yml` | Second facteur et enrôlement | — |
-| `config/locales/identity/pin_recoveries.fr.yml` | Récupération du PIN | — |
-| `config/locales/identity/pending_accounts.fr.yml` | Écrans de sortie | — |
-| `config/locales/errors/pages.fr.yml` | Pages 403 et 404 | — |
+| `app/views/identity/second_factor_enrollments/backup_codes.html.erb` | 10 codes, « affichés une seule fois », bouton « J'ai noté mes codes » | — |
+| `app/views/identity/pin_resets/new.html.erb` | Numéro, code à 8 chiffres, nouveau PIN, confirmation | — |
+| `app/views/identity/pending_accounts/show.html.erb` | `ui_empty_state` selon le cas, bouton « Se déconnecter » | — |
+| `app/views/errors/forbidden.html.erb` · `app/views/errors/not_found.html.erb` | « Accès interdit. » · « Page introuvable. », lien vers l'accueil | — |
+| `config/locales/fr.yml` | Clés **communes** : `errors.codes.*`, `activemodel.attributes.dtos/*` (Nom, Prénom(s), Genre, Numéro de contact, PIN…), `content_status.*`, `badges.{bronze,silver,gold,diamond,none}`, `mastery.{acquired,fragile,struggling}`, `materials.categories.*`, `genders.*`, `import_kinds.*`. | `test/i18n/locale_files_test.rb` : tout fichier sous `fr:`, aucune clé en double, et aucun terme interdit par l'UDR-0007 (« Habileté », « Notion clé », « Leçon », « Quiz », « Essai », « Platine », « Médaille », « Trophée ») |
+| `config/locales/identity/sessions.fr.yml` · `config/locales/identity/second_factors.fr.yml` · `config/locales/identity/pin_resets.fr.yml` · `config/locales/identity/pending_accounts.fr.yml` · `config/locales/errors/pages.fr.yml` | Textes des écrans ci-dessus | — |
 
-**Terme de la fiche (F-32).** Le plan retient **« Fiche »** au singulier et **« Fiches »** au pluriel, conformément au glossaire (« Fiche essentielle »), sous réserve de l'UDR-0007. Si l'UDR-0007 tranche autrement, seules les valeurs de locale changent, jamais les clés.
+### 0.11 Support de test et garde-fous d'architecture
 
-### 0.10 Support de test et garde-fous d'architecture
-
-| Fichier | Contenu | Test |
-|---|---|---|
-| `test/test_helper.rb` | Charge `test/support/**/*.rb`, `parallelize(workers: :number_of_processors)`, inclut les fabriques et `AuthenticationHelper` dans `ActiveSupport::TestCase` et `ActionDispatch::IntegrationTest`. `setup { Rails.cache.clear }`. | — |
-| `test/application_system_test_case.rb` | `driven_by :selenium, using: :headless_chrome, screen_size: [1280, 900]`, variante mobile `[390, 844]` par `with_mobile_viewport`, inclut `SystemAuthenticationHelper` | — |
-| `test/support/factories/identity.rb` | `create_user(role:, contact: sequence, pin: "2468", last_name:, first_names:, gender:)`, `create_student(classroom: nil, primary: true)`, `create_teacher(school:, material:, onboarded: true, classrooms: [])`, `create_team_member(otp_enabled: true)` (renvoie aussi le secret), `create_team_invitation(...)`, `create_pin_recovery_code(user:, issued_by:, code: "123456")` | — |
-| `test/support/factories/school.rb` | `create_drena(name:)`, `create_school(drena:, name:)` | — |
-| `test/support/factories/classroom.rb` | `create_classroom(school:, level:, series: nil, name:, join_code: nil)`, `create_assignment(classroom:, assignable:, status: "active", by:)` | — |
-| `test/support/factories/catalog.rb` | `create_level`, `create_series`, `create_material(category:, icon:)`, `create_course(status: "published", …)`, `create_essential(course:, status: "published")` | — |
-| `test/support/factories/assessment.rb` | `create_exercise(essential:, status: "published", questions: 2)` (1 Vrai/Faux et 1 choix unique par défaut), `create_session(student:, exercise:, status:)`, `create_attempt(session:, question:, correct:)`, `create_badge(...)` | — |
-| `test/support/authentication_helper.rb` | `sign_in_as(user, pin: "2468")` en test d'intégration. Pour une team, il saisit le TOTP courant à partir du secret de la fabrique. `sign_out`. | — |
-| `test/support/system_authentication_helper.rb` | Même chose, en remplissant les formulaires réels | — |
-| `test/support/caching_helper.rb` | `with_fragment_caching { … }` : active `perform_caching` et un `memory_store` neuf, puis restaure | — |
+| Fichier | Contenu |
+|---|---|
+| `test/test_helper.rb` | Charge `test/support/**/*.rb`, `parallelize(workers: :number_of_processors)`, inclut fabriques et `AuthenticationHelper`, `setup { Rails.cache.clear }`. |
+| `test/application_system_test_case.rb` | `driven_by :selenium, using: :headless_chrome, screen_size: [1280, 900]` ; `with_mobile_viewport` (`[390, 844]`) ; inclut `SystemAuthenticationHelper`. |
+| `test/support/factories/identity.rb` | `create_user(role:, contact: séquence, pin: "2468", …)`, `create_student(classroom: nil)`, `create_teacher(school:, material:, onboarded: true, classrooms: [])`, `create_team_member(team_role: "admin", second_factor: true)` (renvoie aussi le secret), `create_invitation(…)`, `create_pin_recovery_code(user:, issued_by:, code: "12345678")` |
+| `test/support/factories/school.rb` | `create_drena(name:)`, `create_school(drena:, name:, sector: "public", cycle: "both")` |
+| `test/support/factories/classroom.rb` | `create_classroom(school:, level:, series: nil, name:, join_code: :auto, status: "active", max_students: 80)`, `create_assignment(classroom:, assignable:, by:)` |
+| `test/support/factories/catalog.rb` | `create_level(code:)`, `create_series(code:)`, `link_level_series`, `create_material(category:)`, `create_course(status: "published")`, `create_essential(course:, status: "published")`, `seed_referential` (le référentiel du seed local de 0.9) |
+| `test/support/factories/assessment.rb` | `create_exercise(essential:, status: "published", questions: 2)`, `create_session(student:, exercise:, status:)`, `create_attempt(session:, question:, correct:)`, `create_badge(…)`, `create_gap(…)` |
+| `test/support/authentication_helper.rb` | `sign_in_as(user, pin: "2468")` ; pour un compte team, saisit le TOTP courant depuis le secret de la fabrique. `sign_out`. |
+| `test/support/system_authentication_helper.rb` | Même chose, par les formulaires réels. |
+| `test/support/caching_helper.rb` | `with_fragment_caching { … }` |
+| `test/support/import_documents.rb` | Générateurs de documents d'import valides et volumineux pour les tests des lots S1, S3 et I1 à I3 : `drenas_document(count:)`, `schools_document(count:, drena:, collège_ratio: 0.44)`, `course_tree_document(courses:, essentials_per_course: 6, exercises_per_essential: 3, questions_per_exercise: 5)`, et leurs variantes invalides (`with_error_at: "courses[3].level"`). |
+| `test/support/importer_contract.rb` | `assert_importer_contract(importer)` : inclut `UseCases::Catalog::Importer`, répond à `normalize`, `validate` et `write` avec les paramètres gelés, et `validate` n'écrit rien en base (compte des tables avant et après). |
+| `test/support/fake_importer.rb` | Importeur factice pour les tests du moteur : valide un document `{ items: [...] }`, écrit dans une table temporaire, peut lever à l'écriture. Les tests remplacent `Catalog::RunImportJob#importer_for` pour l'utiliser. |
 
 **Garde-fous d'architecture.**
 
 | Test | Ce qu'il vérifie |
 |---|---|
-| `test/architecture/domain_purity_test.rb` | Aucun fichier de `app/domain/` ne contient `ActiveRecord`, `ApplicationRecord`, `Orm::` ni `Repositories::` (chantier `dette-contrats-ports-et-injection`). |
-| `test/architecture/port_contracts_test.rb` | Pour chaque module de `app/domain/ports/**` : chaque méthode lève `NotImplementedError` quand elle est appelée sur un objet vide qui inclut le port. Il existe exactement un implémenteur dans `app/infrastructure/`. Cet implémenteur définit chaque méthode avec les **mêmes paramètres** (`Method#parameters`). |
-| `test/architecture/no_arbitrary_css_test.rb` | Aucune vue de `app/views/` ne contient une classe `[…]` ni une couleur `#hex` (UDR-0005). |
+| `test/architecture/domain_purity_test.rb` | Aucun fichier de `app/domain/` ne mentionne `ActiveRecord`, `ApplicationRecord`, `Orm::`, `Repositories::`, `Queries::`, `ActiveStorage`, `ActionController` ni `ActionDispatch` (ADR-0026). |
+| `test/architecture/port_contracts_test.rb` | Chaque module de `app/domain/ports/**` lève `NotImplementedError` sur un objet vide qui l'inclut ; il a exactement un implémenteur dans `app/infrastructure/`, qui définit chaque méthode avec les **mêmes paramètres**. |
+| `test/architecture/use_case_policies_test.rb` | Chaque use case de `app/domain/use_cases/**` référence au moins une constante `Policies::`. Exemptés : `Authenticate`, `ResetPinWithCode` et `AcceptInvitation` (ADR-0028) ; les mécanismes de session du socle (`ResolveSession`, `ResolveHome`, `SignOut`, `BeginSecondFactorEnrollment`, `ConfirmSecondFactorEnrollment`, `VerifySecondFactor`), dont l'acteur est la session elle-même ; les importeurs (qui incluent `UseCases::Catalog::Importer`), protégés par `RunImport`. |
+| `test/architecture/layout_test.rb` | Aucun fichier à la racine de `entities/`, `use_cases/`, `ports/`, `dtos/`, `policies/`, `repositories/`, `queries/` ; aucun dossier `app/presentation/`, `app/services/`, `app/infrastructure/adapters/` ; `app/models/` ne contient que `application_record.rb` (ADR-0027). |
+| `test/architecture/no_arbitrary_css_test.rb` | Aucune vue ne contient une classe `[…]` ni une couleur `#hex` (UDR-0005). |
 | `test/architecture/no_third_party_cdn_test.rb` | Aucune vue ni aucun layout ne référence `cdn.`, `unpkg`, `jsdelivr` ni `googleapis` (TR-41, ADR-0049). |
 
 ---
+
 ## Lots verticaux — règles communes
 
 Chaque lot vertical :
 
-- part de `feature/boucle-pedagogique`, **après** le merge du Lot 0. Sa branche s'appelle `feature/boucle-pedagogique-lot-<id>`, et il travaille dans son propre worktree, avec sa propre base ;
+- part de `feature/boucle-pedagogique`, **après** le merge du Lot 0. Sa branche s'appelle `feature/boucle-pedagogique-lot-<id>` ; il travaille dans son propre worktree, avec sa propre base ;
 - reçoit le **brief standard** de [`boucle-de-travail.md`](../refonte-application/boucle-de-travail.md) §5 : fichiers autorisés, tests rouges d'abord, sortie `bin/ci` ;
-- **ne modifie aucun fichier du Lot 0**. Cela vaut pour les ports, les entités, les policies, les DTO, les repositories, les routes, les fabriques, `fr.yml`, le layout et les composants. Un besoin de changement de contrat **arrête le lot** : l'agent le signale à l'orchestrateur, qui décide ;
-- câble ses dépendances dans le contrôleur (`UseCases::X.new(port: Repositories::…new, policy: Policies::…new(…))`). Le domaine ne voit jamais un repository ;
-- construit ses écrans avec les composants `ui_*` du Lot 0c (`ui_page_header`, `ui_card`, `ui_button`, `ui_field`, `ui_badge`, `ui_empty_state`, `ui_toast`/`turbo_stream_toast`…). Il reproduit **la structure et le parcours** des écrans de l'ancienne application cités, pas leur CSS ;
-- écrit ses textes dans **sa** locale `config/locales/<ctx>/<écran>.fr.yml`, accessibles par `t(".clé")` ;
+- **ne modifie aucun fichier du Lot 0** : ports, entités, policies, DTO du socle, repositories, routes, fabriques, `fr.yml`, layout, composants, moteur d'import. Un besoin de changement de contrat **arrête le lot** : l'agent le signale à l'orchestrateur, qui décide ;
+- câble ses dépendances dans le contrôleur ou le job (`UseCases::X.new(repo: Repositories::…new, policy: Policies::…new, transaction: Repositories::Shared::Transaction.new)`) ;
+- lit par une **query** (`Queries::<Ctx>::<Nom>Query` → `Row`), écrit par un **use case** (ADR-0026) ;
+- construit ses écrans avec les composants `ui_*` du Lot 0c ; le badge de matière est **toujours** `ui_subject_badge(name, category:)` ;
+- reproduit **la structure et le parcours** des écrans de l'ancienne application cités, pas leur CSS ;
+- écrit ses textes dans **sa** locale `config/locales/<ctx>/<écran>.fr.yml`, avec le vocabulaire de l'UDR-0007 ;
 - met l'en-tête HITL de 3 lignes sur chaque fichier créé dans `app/` ;
-- écrit son UDR sous le numéro réservé. Le lot ne touche pas au README des UDR ;
+- écrit son UDR sous le numéro réservé, sans toucher au README des UDR ;
 - vise 100 % de couverture, lignes et branches, sur ses fichiers, sans `:nocov:`.
 
-**Où lire l'inventaire.** Les fiches d'inventaire sont rangées par contexte :
+**Règles supplémentaires des lots d'import (S1, S3, I1, I2, I3).**
+- L'importeur inclut `UseCases::Catalog::Importer` et passe `assert_importer_contract`.
+- Son schéma JSON est dans `config/schemas/`, validé par `json_schemer` via `ImportSchemaPort`.
+- Son partial `app/views/teams/imports/kinds/_<kind>.html.erb` explique le format, donne un exemple minimal, et porte les champs de portée.
+- Son **test de performance**, dans `test/performance/`, est ignoré sans `PERF=1` et mesure l'aller complet `RunImport` (validation et écriture) sur PostgreSQL. Il échoue au-delà du budget.
+- Un fichier invalide ne laisse **aucune ligne** en base ; chaque erreur porte son chemin JSON.
+
+**Où lire l'inventaire.**
 
 | Contexte | Fichiers |
 |---|---|
@@ -857,54 +925,56 @@ Chaque lot vertical :
 
 ---
 
-## Lot A1 — Inscription élève par code de classe
+## Lot A1 — Rejoindre une classe par son code
 
-- **Couche**       : domaine (use case) + infrastructure (query) + delivery + ui
+- **Couche**       : domaine (DTO, use cases) + infrastructure (query) + delivery + ui
 - **Fichiers**     :
-  - `app/domain/use_cases/identity/register_student.rb`
-    - `JoinPolicy` et le DTO sont appliqués d'abord.
-    - Le code est normalisé par `JoinCode.normalize`, puis la classe est cherchée. Si elle est absente : `:invalid` sur `join_code`.
-    - Le PIN passe `Pin.valid_for?`, et le numéro passe `users.contact_taken?`.
-    - L'inscription se fait par `registrations.register_student`, en une transaction. L'adhésion est `primary` avec `joined_at`.
-    - Le rôle est **imposé** à `student`.
-  - `app/infrastructure/queries/classroom/join_code_preview_query.rb`
-    - Renvoie `Data(classroom_name, school_name)` ou `nil`. Rien d'autre : ni identifiant, ni niveau, ni enseignant.
-  - `app/controllers/identity/student_registrations_controller.rb`
-    - `allow_unauthenticated_access`. `rate_limit to: 5, within: 1.minute, only: :create`.
-    - `new` répond sur `/student-signup` et sur `/c/:join_code`. Code inconnu : redirection vers `new_student_registration_path` avec « Code de classe invalide. ».
-    - `create` : `start_session`, puis `student_home_path` avec « Bienvenue sur Lnclass ! ».
-    - Un visiteur déjà connecté est envoyé vers `redirect_to_home`.
-  - `app/controllers/classroom/api/join_code_lookups_controller.rb`
-    - `allow_unauthenticated_access`. `rate_limit to: 10, within: 1.minute, by: ip`.
-    - 400 si le code est vide, 404 s'il est inconnu, sinon 200 avec `{ classroom_name, school_name }`.
-  - `app/views/identity/student_registrations/new.html.erb`
-  - `app/views/identity/student_registrations/_form.html.erb`
-    - Champs Nom, Prénom(s), genre en radios, numéro, PIN (`password`, 4 chiffres, `inputmode numeric`) et code de classe.
-  - `app/views/identity/student_registrations/_classroom_preview.html.erb`
+  - `app/domain/dtos/classroom/join_with_code_input.rb`
+    - Inclut `Dtos::Identity::PersonNameInput`. `gender`, `contact` (normalisé), `pin`, `pin_confirmation`. **Aucun attribut `role`.**
+  - `app/domain/use_cases/classroom/join_with_code.rb`
+    - Visiteur (ADR-0040). DTO ; puis, dans une transaction : `classrooms.lock_by_join_code` (absente : `:not_found`), `JoinPolicy` (raison affichée), `registrations.create_student` (numéro pris : `:conflict` sur `contact`), `memberships.add_primary`.
+    - Le rôle est **imposé** à `student`. Le verrou garantit le plafond `max_students` sous concurrence (ADR-0041).
+  - `app/domain/use_cases/classroom/join_as_student.rb`
+    - Élève connecté. Classe principale active : `:conflict` (« Tu es déjà inscrit dans une classe »). Classe principale archivée : `leave_primary`, puis `add_primary` sur la nouvelle, sous `JoinPolicy`.
+  - `app/infrastructure/queries/classroom/join_preview_query.rb`
+    - `#call(code:)` → `Row(classroom_name, school_name, level_name)` ou `nil`. Ni identifiant, ni effectif, ni enseignant.
+  - `app/controllers/classroom/join_codes_controller.rb`
+    - `allow_unauthenticated_access`. `new` : champ « Code de classe ». `create` : `JoinCode.normalize`, puis redirection vers `join_classroom_path(code)`.
+  - `app/controllers/classroom/joins_controller.rb`
+    - `allow_unauthenticated_access`. `rate_limit to: 10, within: 1.minute` (ADR-0041).
+    - `new` : aperçu de la classe ; code inconnu : 404 avec « Code de classe invalide. » et lien vers `new_join_code_path`. Visiteur : formulaire d'inscription. Élève connecté : bouton « Rejoindre cette classe ».
+    - `create` : `JoinWithCode` (visiteur) ou `JoinAsStudent` (élève), puis `start_session` le cas échéant, puis `student_home_path` avec « Bienvenue dans ta classe ! ».
+    - Un enseignant ou un membre de l'équipe connecté reçoit 403.
+  - `app/views/classroom/join_codes/new.html.erb`
+  - `app/views/classroom/joins/new.html.erb`
+  - `app/views/classroom/joins/_classroom_preview.html.erb`
     - Bandeau « Classe — Établissement ».
-  - `app/javascript/controllers/identity/join_code_preview_controller.js`
-    - Appelle l'API après 5 caractères saisis et affiche le bandeau ou « Code de classe invalide ».
-  - `config/locales/identity/student_registrations.fr.yml`
+  - `app/views/classroom/joins/_signup_form.html.erb`
+    - Nom, Prénom(s), genre en radios, numéro, PIN (`password`, 4 chiffres, `inputmode numeric`) et confirmation.
+  - `config/locales/classroom/joins.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
-  - `test/domain/use_cases/identity/register_student_test.rb`
-  - `test/infrastructure/queries/classroom/join_code_preview_query_test.rb`
-  - `test/controllers/identity/student_registrations_controller_test.rb`
-    - TR-cadre-1 (paramètre `role=team` ignoré), PIN vide, PIN = 4 derniers chiffres, numéro pris → 422, `/c/<inconnu>`, atomicité.
-  - `test/controllers/classroom/api/join_code_lookups_controller_test.rb`
-    - Clés JSON exactes, 400, 404, 429.
-- **Done quand**   : un visiteur ouvre `/c/KFM37`, s'inscrit et arrive connecté sur `/students` avec le toast. Les critères ID-01, ID-02, ID-07, CL-06, CL-07 et CL-08 sont verts.
+  - `test/domain/dtos/classroom/join_with_code_input_test.rb`
+  - `test/domain/use_cases/classroom/join_with_code_test.rb`
+    - Classe archivée, code révoqué, classe pleine, numéro pris, atomicité (aucun compte sans adhésion).
+  - `test/domain/use_cases/classroom/join_as_student_test.rb`
+  - `test/infrastructure/queries/classroom/join_preview_query_test.rb`
+  - `test/controllers/classroom/joins_controller_test.rb`
+    - TR-cadre-1 (paramètre `role=team` ignoré), PIN vide, confirmation différente, `/c/<inconnu>` 404, 429, enseignant 403.
+  - `test/controllers/classroom/join_codes_controller_test.rb`
+  - `test/integration/classroom/join_capacity_test.rb`
+    - Deux inscriptions concurrentes sur la dernière place : une seule réussit.
+- **Done quand**   : un visiteur ouvre `/c/kfm37`, s'inscrit et arrive connecté sur `/students`. Les critères ID-01, ID-02, CL-06, CL-07, CL-08 et les trois refus de `JoinPolicy` sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/students/registrations/new.html.erb`
-  - `⟨ancienne⟩ javascript/controllers/classrooms_controller.js`, pour le comportement du lookup
+  - `⟨ancienne⟩ javascript/controllers/classrooms_controller.js` (comportement de l'aperçu)
   - captures `docs/design/captures/original/student-signup--desktop.png` et `student-signup--mobile.png`
 - **Fiches d'inventaire** : ID-01, ID-02, ID-07, ID-08 (partie écartée), CL-06, CL-07, CL-08. Sécurité n° 5.
 - **Non-régression** :
   - la cascade école + niveau → classe n'existe pas ;
-  - le PIN n'est jamais dérivé du numéro ;
   - la création n'est jamais partielle ;
-  - l'API ne renvoie jamais plus que le nom de la classe et celui de l'établissement, et elle est limitée en débit.
-- **UDR**          : UDR-0009 — Inscription élève
+  - l'aperçu ne révèle rien d'autre que le nom de la classe, du niveau et de l'établissement, et il est limité en débit.
+- **UDR**          : UDR-0009 — Rejoindre une classe
 
 ---
 
@@ -913,34 +983,34 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/student_home_query.rb`
-    - Renvoie `Data(school_name, level_name, classroom_name, classmates_count, exercises:, recent_sessions:)`.
-    - `exercises` contient les exercices **assignés actifs** à la classe principale **et publiés**, avec pour chacun `slug, title, material, badge_level, best_score_percent` (maximum de `score_percent` sur les sessions `completed`), `completed_count` et `in_progress_public_id`.
-    - `recent_sessions` contient les 10 dernières sessions `completed`.
+    - `Row(school_name, level_name, classroom_name, classmates_count, assigned_exercises:, recent_sessions:, pending_gaps:)`.
+    - `assigned_exercises` : exercices assignés **actifs**, directement ou par leur fiche ou leur cours, à la classe principale, **publiés** ainsi que leurs parents. Pour chacun : `public_id, title, material_name, material_category, badge_level, best_score_percent, completed_count, started_session_public_id`.
+    - `recent_sessions` : les 10 dernières sessions `completed`, avec score et note sur 20.
+    - `pending_gaps` : lacunes `pending` (ADR-0043), avec le nom de la fiche.
   - `app/controllers/classroom/student_homes_controller.rb`
-    - Hérite d'`AuthenticatedController`, avec `allow_roles :student`. Sans classe principale : redirection vers `pending_account_path`, un seul saut.
+    - `allow_roles :student`. Sans classe principale active : un seul saut vers `pending_account_path`.
   - `app/views/classroom/student_homes/show.html.erb`
-    - Sections dans l'ordre de `NavigationHelper::HOME_SECTIONS[:student]` : à faire, classe, cours.
+    - Sections dans l'ordre de `NavigationHelper::HOME_SECTIONS[:student]`.
   - `app/views/classroom/student_homes/_classroom_card.html.erb`
   - `app/views/classroom/student_homes/_assigned_exercise.html.erb`
-    - Matière par `material_badge`, badge par `badge_label`, meilleur score, nombre de tentatives, bouton « Commencer » ou « Reprendre ».
+    - `ui_subject_badge`, badge par `badge_label`, meilleur score et maîtrise, nombre de sessions, bouton « Commencer » ou « Reprendre ».
   - `app/views/classroom/student_homes/_recent_activity.html.erb`
+  - `app/views/classroom/student_homes/_pending_gaps.html.erb`
+    - « Fiches essentielles à revoir », lien vers la fiche.
   - `config/locales/classroom/student_homes.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
   - `test/infrastructure/queries/classroom/student_home_query_test.rb`
-    - Exercice retiré de la classe, archivé ou brouillon : absent. Meilleur score. Compteurs. Classe principale seulement.
+    - Assignation retirée, exercice archivé ou brouillon : absent. Assignation par cours : présent. Meilleur score. Classe principale seulement.
   - `test/controllers/classroom/student_homes_controller_test.rb`
-    - 200. Sans classe : une redirection vers l'écran de sortie. Un enseignant reçoit 403.
+    - 200 ; sans classe : une redirection ; enseignant 403.
 - **Done quand**   : un élève connecté voit ses exercices assignés et leur progression. Les critères CL-23, TR-04 et AS-36 sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/students/feed/index.html.erb`
   - `⟨ancienne⟩ views/students/feed/content/_feed_header.html.erb`, `_classroom.html.erb`, `_exercises.html.erb`, `_activities.html.erb`, `_empty_state.html.erb`
   - `⟨ancienne⟩ views/components/_exercise_card.html.erb` et `_exercise_badge.html.erb`
 - **Fiches d'inventaire** : TR-04, CL-23, AS-36, TR-02 (élève sans classe).
-- **Non-régression** :
-  - pas d'accueil sans test système : le test est au Lot E ;
-  - pas de boucle de redirection pour l'élève sans classe ;
-  - pas d'exercice non publié listé.
+- **Non-régression** : pas de boucle de redirection pour l'élève sans classe ; aucun exercice non publié listé.
 - **UDR**          : UDR-0010 — Accueil élève
 
 ---
@@ -950,11 +1020,9 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/student_classroom_query.rb`
-    - Renvoie `Data(classroom_name, level_name, series_name, school_name, courses:)`.
-    - `courses` contient les cours assignés **actifs et publiés**, avec `slug, name, subtitle, material, essentials_count` (fiches publiées).
-    - **Ni code, ni liste nominative.**
+    - `Row(classroom_name, level_name, series_name, school_name, school_year, courses:)`. `courses` : cours assignés actifs et publiés, avec `slug, name, subtitle, material_name, material_category, essentials_count`. **Ni code, ni liste nominative.**
   - `app/controllers/classroom/student_classrooms_controller.rb`
-    - `allow_roles :student`.
+    - `allow_roles :student`. L'en-tête vient de `ClassroomHeaderQuery`, sous `ReadClassroomPolicy`.
   - `app/views/classroom/student_classrooms/show.html.erb`
   - `app/views/classroom/student_classrooms/_assigned_course.html.erb`
   - `config/locales/classroom/student_classrooms.fr.yml`
@@ -963,7 +1031,7 @@ Chaque lot vertical :
   - `test/infrastructure/queries/classroom/student_classroom_query_test.rb`
   - `test/controllers/classroom/student_classrooms_controller_test.rb`
     - Le HTML ne contient ni le code ni le nom d'un autre élève.
-- **Done quand**   : les critères CL-22 et CL-10 (accès élève) sont verts.
+- **Done quand**   : les critères CL-22 et CL-10 (volet élève) sont verts.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/students/classroom/show.html.erb`, `⟨ancienne⟩ views/students/feed/content/_courses.html.erb`
 - **Fiches d'inventaire** : CL-22, CL-10 (volet élève).
 - **Non-régression** : aucun cours retiré ou archivé affiché.
@@ -976,555 +1044,522 @@ Chaque lot vertical :
 - **Couche**       : ui
 - **Fichiers**     :
   - `app/views/homepage/index.html.erb`
-    - Fichier existant du V0, modifié. Deux entrées, « Je suis élève » et « Je suis enseignant », qui ouvrent chacune un `ui_modal`.
+    - Fichier V0 modifié. Deux entrées, « Je suis élève » et « Je suis enseignant », qui ouvrent chacune un `ui_modal`.
   - `app/views/homepage/_role_modal.html.erb`
-    - Liens « Se connecter » vers `new_session_path`, et « Créer un compte » vers `new_student_registration_path` ou `new_teacher_registration_path`.
+    - Élève : « Se connecter » (`new_session_path`) et « Rejoindre ma classe » (`new_join_code_path`). Enseignant : « Se connecter » et « Créer un compte » (`new_teacher_registration_path`).
   - `config/locales/homepage/index.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
   - `test/controllers/homepage_controller_test.rb`
-    - Fichier existant, étendu. Les deux entrées et leurs liens sont présents. Chaque `href` de la page est reconnu par le routeur (`Rails.application.routes.recognize_path`).
+    - Fichier V0 étendu. Chaque `href` est reconnu par le routeur (`Rails.application.routes.recognize_path`).
 - **Done quand**   : le critère TR-01 est vert, et aucun lien de la landing ne pointe vers une chaîne littérale.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/homepage/index.html.erb`
   - `⟨ancienne⟩ javascript/controllers/homepage_student_modal_controller.js` et `homepage_teacher_modal_controller.js`
-  - captures `original/accueil--desktop.png`, `accueil--mobile.png`, `accueil-modale-eleve--desktop.png`, `accueil-modale-eleve--mobile.png`, `accueil-modale-enseignant--desktop.png` et `accueil-modale-enseignant--mobile.png`
-  - Les tokens restent ceux de la landing V0.
+  - captures `original/accueil--desktop.png`, `accueil--mobile.png`, `accueil-modale-eleve--*.png`, `accueil-modale-enseignant--*.png`
 - **Fiches d'inventaire** : TR-01, TR-03 (le lien « Espace Etabl. » n'est **pas** repris : V2).
-- **Non-régression** : aucun lien relatif vers une route inexistante (TR-03).
+- **Non-régression** : aucun lien vers une route inexistante (TR-03).
 - **UDR**          : UDR-0012 — Landing, modales de rôle
 
 ---
 
 ## Lot B1 — Catalogue et lecture d'un cours
 
-- **Couche**       : domaine (use case) + infrastructure (queries) + delivery + ui
+- **Couche**       : infrastructure (queries) + delivery + ui
 - **Fichiers**     :
-  - `app/domain/use_cases/catalog/read_course.rb`
-    - `courses.find_by_slug`, puis `ReadPublishedPolicy`.
-    - Un refus pour un non-équipe devient **`:not_found`** : un brouillon n'existe pas pour lui.
   - `app/infrastructure/queries/catalog/course_catalog_query.rb`
-    - Renvoie `[Data(slug, name, subtitle, level_name, series_name, material, status)]`.
-    - Publiés seulement, sauf pour l'équipe. Tri par matière, niveau, nom.
+    - `#call(actor:, level: nil, material: nil)` → `[Row(slug, name, subtitle, level_name, series_name, material_name, material_category, status)]`. Publiés seulement, sauf pour l'équipe. Tri par matière, niveau, nom.
   - `app/infrastructure/queries/catalog/course_detail_query.rb`
-    - Pour un cours : les fiches (publiées, ou toutes pour l'équipe) avec `slug, name, subtitle, exercises_count`, puis le fil d'Ariane.
+    - `#call(slug:)` → `Row(course, essentials:)` avec l'état publié du cours ; le contrôleur applique `ReadPublishedPolicy` (refus → 404). Fiches publiées, ou toutes pour l'équipe, avec `slug, name, subtitle, exercises_count`.
   - `app/controllers/catalog/courses_controller.rb`
     - `index`, `show`, pour tous les rôles connectés.
   - `app/views/catalog/courses/index.html.erb`
-    - Grille de cartes. Bouton « Nouveau cours » pour l'équipe seulement, vers `new_course_path`.
+    - Grille de cartes, filtres niveau et matière. Pour l'équipe : « Nouveau cours » (`new_teams_course_path`) et « Importer des cours » (`new_teams_import_path(kind: "course_tree")`).
   - `app/views/catalog/courses/show.html.erb`
-    - Fil d'Ariane, badges niveau, série et matière, contenu riche dans `data-controller="math"`, section « Fiches ».
+    - Fil d'Ariane, badges niveau, série et matière, statut pour l'équipe, contenu riche dans `data-controller="math"`, section « Fiches essentielles ».
   - `app/views/catalog/courses/_course_card.html.erb`
   - `app/views/catalog/courses/_essential_row.html.erb`
   - `app/views/catalog/courses/_role_actions.html.erb`
-    - Pour l'équipe : un `ui_dropdown` « Modifier » vers `edit_course_path`, « Archiver » vers `archive_course_path` (PATCH) et « Nouvelle fiche » vers `new_course_essential_path`.
-    - Pour l'enseignant : « Assigner à mes classes » vers `course_assignments_path` (CA-27, point d'entrée).
+    - Équipe : `ui_dropdown` « Modifier », « Publier » ou « Archiver » (selon `content_status_actions`), « Nouvelle fiche essentielle » et « Importer des fiches essentielles » (`new_teams_import_path(kind: "essential_tree", scope: { course_slug: })`).
+    - Enseignant : « Assigner à mes classes » (`course_assignments_path`, CA-27).
   - `config/locales/catalog/courses.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
-  - `test/domain/use_cases/catalog/read_course_test.rb`
   - `test/infrastructure/queries/catalog/course_catalog_query_test.rb`
   - `test/infrastructure/queries/catalog/course_detail_query_test.rb`
   - `test/controllers/catalog/courses_controller_test.rb`
-    - Un brouillon ouvert par un élève ou un enseignant renvoie 404. Le bouton « Nouveau cours » n'apparaît que pour l'équipe. Le lien « Assigner à mes classes » n'apparaît que pour l'enseignant.
+    - Brouillon ouvert par un élève ou un enseignant : 404. Actions d'équipe et d'import visibles pour l'équipe seulement. « Assigner à mes classes » pour l'enseignant seulement.
 - **Done quand**   : les critères CA-01, CA-04, CA-10, CA-26 et TR-41 sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/catalog/courses/index.html.erb`, `show.html.erb` et `_course.html.erb`
   - `⟨ancienne⟩ views/components/courses/_course_card.html.erb`
-  - `⟨ancienne⟩ javascript/controllers/math_controller.js`
   - captures `teams/Lnclass - Les cours (23.09.2026 16_14).png` et `teams/Lnclass - Génétique Et évolution (23.09.2026 16_14).png`
-- **Fiches d'inventaire** : CA-01, CA-04, CA-10, CA-26, CA-27 (point d'entrée), TR-41.
-- **Non-régression** :
-  - un brouillon n'est jamais lisible par URL directe ;
-  - la couleur d'une matière vient de sa catégorie, jamais de son nom ;
-  - aucun KaTeX servi par un CDN.
+- **Fiches d'inventaire** : CA-01, CA-04, CA-10, CA-26, CA-27 (point d'entrée), CA-08 et CA-15 (points d'entrée des imports), TR-41.
+- **Non-régression** : un brouillon n'est jamais lisible par URL directe ; la couleur d'une matière vient de sa catégorie ; aucun KaTeX servi par un CDN.
 - **UDR**          : UDR-0013 — Catalogue et page cours
 
 ---
 
 ## Lot B2 — Gestion des cours (équipe)
 
-- **Couche**       : domaine (use cases) + delivery + ui
+- **Couche**       : domaine (DTO, use cases) + delivery + ui
 - **Fichiers**     :
+  - `app/domain/dtos/catalog/course_input.rb`
+    - `name, subtitle, level_slug, series_slug, material_slug, content_html`.
   - `app/domain/use_cases/catalog/create_course.rb`
-    - Enchaîne `ManageContentPolicy`, le DTO, `ReferentialRepositoryPort` (niveau, matière, `series_allowed?`), puis `name_taken?`.
-    - Le statut initial est celui choisi. `published_at` est posé si l'on publie. `author_id` vaut `actor.user_id`.
+    - DTO ; faits : niveau, matière, série, `lookup.pair?` (série non permise : `:invalid`) ; `ManageContentPolicy` ; `courses.create` en `draft`, `author_id = actor.user_id`. Nom pris : `:conflict`.
   - `app/domain/use_cases/catalog/update_course.rb`
-    - La transition de statut passe par `ContentStatus`.
+  - `app/domain/use_cases/catalog/publish_course.rb`
+    - `ContentStatus.transition` (ADR-0035) ; audit `content.published`.
   - `app/domain/use_cases/catalog/archive_course.rb`
-    - `archive(at:)` et audit `content_archived`. Aucune écriture sur les fiches ni sur les assignations.
-  - `app/controllers/catalog/course_editions_controller.rb`
-    - `allow_roles :team`. `new`, `create`, `edit`, `update`, `archive`.
-  - `app/views/catalog/course_editions/new.html.erb`
-  - `app/views/catalog/course_editions/edit.html.erb`
-  - `app/views/catalog/course_editions/_form.html.erb`
-    - Nom, sous-titre, niveau, série (filtrée par niveau côté serveur, avec `ReferentialOptionsQuery`), matière, statut avec libellés, et contenu `rich_text_area`.
-    - Le statut n'offre que les transitions permises.
-  - `config/locales/catalog/course_editions.fr.yml`
+    - Audit `content.archived`. Aucune écriture sur les fiches ni sur les assignations.
+  - `app/controllers/teams/courses_controller.rb`
+    - `new`, `create`, `edit`, `update`, `publish`, `archive`. Succès : `course_path`.
+  - `app/views/teams/courses/new.html.erb`
+  - `app/views/teams/courses/edit.html.erb`
+  - `app/views/teams/courses/_form.html.erb`
+    - Nom, sous-titre, niveau, série (options filtrées par niveau côté serveur), matière, contenu `rich_text_area`. Le statut ne se change pas dans le formulaire : boutons « Publier » et « Archiver ».
+  - `config/locales/teams/courses.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/dtos/catalog/course_input_test.rb`
   - `test/domain/use_cases/catalog/create_course_test.rb`
   - `test/domain/use_cases/catalog/update_course_test.rb`
+  - `test/domain/use_cases/catalog/publish_course_test.rb`
+    - Archivé → publié permis ; retour à draft refusé.
   - `test/domain/use_cases/catalog/archive_course_test.rb`
-  - `test/controllers/catalog/course_editions_controller_test.rb`
-    - Un élève ou un enseignant reçoit 403.
+  - `test/controllers/teams/courses_controller_test.rb`
+    - Élève ou enseignant : 403.
   - `test/integration/catalog/course_lifecycle_test.rb`
-    - Créer, lire, modifier, publier, puis archiver, par le même agrégat (chantier `catalog-lecture-ecriture-incompatibles`). Le cours archivé garde ses fiches et ses assignations.
-- **Done quand**   : les critères CA-05, CA-06 et CA-07 sont verts, et l'équipe crée un cours depuis le catalogue.
+    - Créer, lire, modifier, publier, archiver, republier par le même agrégat (chantier `catalog-lecture-ecriture-incompatibles`).
+- **Done quand**   : les critères CA-05, CA-06 et CA-07 sont verts.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/courses/new.html.erb`, `edit.html.erb` et `_form.html.erb`
 - **Fiches d'inventaire** : CA-05, CA-06, CA-07. Contradiction C-19 (feuille de route §4).
-- **Non-régression** :
-  - l'écran de création a un point d'entrée ;
-  - le nom n'est pas passé en `titleize` ;
-  - il n'y a pas deux familles d'entités ;
-  - l'archivage ne détruit rien en cascade ;
-  - le libellé « Brouillon » dit la vérité : visible par l'équipe.
+- **Non-régression** : le nom n'est pas passé en `titleize` ; il n'y a pas deux familles d'entités ; l'archivage ne détruit rien.
 - **UDR**          : UDR-0014 — Formulaire cours
 
 ---
 
-## Lot B3 — Fiche : lecture et progression de l'élève
+## Lot B3 — Fiche essentielle : lecture et progression
 
-- **Couche**       : domaine (use case) + infrastructure (query) + delivery + ui
+- **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
-  - `app/domain/use_cases/catalog/read_essential.rb`
-    - `ReadPublishedPolicy` s'applique sur la fiche **et** sur son cours. Un refus renvoie `:not_found`.
   - `app/infrastructure/queries/catalog/essential_detail_query.rb`
-    - Renvoie les exercices publiés, ou tous pour l'équipe. Pour un élève, chaque exercice porte `assigned_to_my_classroom`, `badge_level`, `best_score_percent` et `in_progress_public_id`.
+    - `#call(course_slug:, slug:, student_id: nil)` → la fiche, son cours et leurs statuts, puis les exercices (publiés, ou tous pour l'équipe). Pour un élève, chaque exercice porte `assigned_to_my_classroom`, `badge_level`, `best_score_percent` et `started_session_public_id`, puis la lacune `pending` éventuelle de la fiche.
   - `app/controllers/catalog/essentials_controller.rb`
-    - `show`.
+    - `show`, sous `ReadPublishedPolicy` (fiche et cours ; refus → 404).
   - `app/views/catalog/essentials/show.html.erb`
-    - Contenu riche avec KaTeX. Liste des exercices. Menu d'équipe « Modifier », « Archiver » et « Nouvel exercice » vers `new_essential_exercise_path`.
+    - Contenu riche avec KaTeX, liste des exercices. Menu d'équipe : « Modifier », « Publier » ou « Archiver », « Nouvel exercice », « Importer des exercices » (`new_teams_import_path(kind: "exercise_tree", scope: { essential_slug: })`).
   - `app/views/catalog/essentials/_exercise_progress.html.erb`
-    - Un exercice non assigné à la classe de l'élève s'affiche grisé, avec « Pas encore assigné par ton enseignant », sans bouton.
+    - Tout exercice publié se démarre (ADR-0028). Un exercice assigné à la classe de l'élève porte l'étiquette « Assigné par ton enseignant ».
   - `config/locales/catalog/essentials.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
-  - `test/domain/use_cases/catalog/read_essential_test.rb`
   - `test/infrastructure/queries/catalog/essential_detail_query_test.rb`
   - `test/controllers/catalog/essentials_controller_test.rb`
 - **Done quand**   : les critères CA-11 et AS-37 sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/catalog/essentials/show.html.erb` et `_essential.html.erb`
   - captures `teams/Lnclass - Habilité _ Brassage Génétique Par La Méiose (23.09.2026 16_15).png` et `teams/Lnclass - Anomalies De La Méiose (23.09.2026 16_15).png`
-  - Le mot « Habilité » des captures n'est **pas** repris (F-32).
+  - Le mot « Habilité » des captures n'est **pas** repris (UDR-0007).
 - **Fiches d'inventaire** : CA-10, CA-11, AS-37.
 - **Non-régression** : aucun exercice non publié listé à un élève.
-- **UDR**          : UDR-0015 — Page fiche
+- **UDR**          : UDR-0015 — Page fiche essentielle
 
 ---
 
-## Lot B4 — Gestion des fiches (équipe)
+## Lot B4 — Gestion des fiches essentielles (équipe)
 
-- **Couche**       : domaine (use cases) + delivery + ui
+- **Couche**       : domaine (DTO, use cases) + delivery + ui
 - **Fichiers**     :
+  - `app/domain/dtos/catalog/essential_input.rb`
   - `app/domain/use_cases/catalog/create_essential.rb`
-    - Enchaîne `ManageContentPolicy`, le cours existant, puis `name_taken?` dans le cours.
+    - DTO ; cours existant ; `ManageContentPolicy` ; nom unique dans le cours ; `draft`.
   - `app/domain/use_cases/catalog/update_essential.rb`
+  - `app/domain/use_cases/catalog/publish_essential.rb`
+    - Cours non publié : `:conflict` (ADR-0035).
   - `app/domain/use_cases/catalog/archive_essential.rb`
-  - `app/controllers/catalog/essential_editions_controller.rb`
-    - `allow_roles :team`.
-  - `app/views/catalog/essential_editions/new.html.erb`
-  - `app/views/catalog/essential_editions/edit.html.erb`
-  - `app/views/catalog/essential_editions/_form.html.erb`
-  - `config/locales/catalog/essential_editions.fr.yml`
+  - `app/controllers/teams/essentials_controller.rb`
+    - `new`, `create` (sous le cours), `edit`, `update`, `publish`, `archive`.
+  - `app/views/teams/essentials/new.html.erb`
+  - `app/views/teams/essentials/edit.html.erb`
+  - `app/views/teams/essentials/_form.html.erb`
+  - `config/locales/teams/essentials.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/dtos/catalog/essential_input_test.rb`
   - `test/domain/use_cases/catalog/create_essential_test.rb`
   - `test/domain/use_cases/catalog/update_essential_test.rb`
+  - `test/domain/use_cases/catalog/publish_essential_test.rb`
   - `test/domain/use_cases/catalog/archive_essential_test.rb`
-  - `test/controllers/catalog/essential_editions_controller_test.rb`
-    - Un enseignant ou un élève reçoit 403 : l'ancienne application ouvrait la création à tout compte connecté.
+  - `test/controllers/teams/essentials_controller_test.rb`
+    - Enseignant ou élève : 403 (l'ancienne application ouvrait la création à tout compte connecté).
 - **Done quand**   : les critères CA-12, CA-13 et CA-14 sont verts.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/essentials/new.html.erb`, `edit.html.erb` et `_form.html.erb`
 - **Fiches d'inventaire** : CA-12, CA-13, CA-14.
-- **Non-régression** : la création n'est pas ouverte à tout compte connecté, et l'archivage ne détruit rien en cascade.
-- **UDR**          : UDR-0016 — Formulaire fiche
+- **Non-régression** : création fermée aux non-équipe ; archivage sans cascade.
+- **UDR**          : UDR-0016 — Formulaire fiche essentielle
 
 ---
 
 ## Lot B5 — Gestion des exercices (équipe)
 
-- **Couche**       : domaine (use cases) + delivery + ui (Stimulus)
+- **Couche**       : domaine (DTO, use cases) + delivery + ui (Stimulus)
 - **Fichiers**     :
+  - `app/domain/dtos/assessment/answer_input.rb`
+  - `app/domain/dtos/assessment/question_input.rb`
+  - `app/domain/dtos/assessment/exercise_input.rb`
+    - `title, description, exercise_type, questions` ; `ExerciseInput.from_params(hash)` construit l'arbre depuis `questions_attributes`.
   - `app/domain/use_cases/assessment/create_exercise.rb`
-    - Enchaîne `ManageContentPolicy`, `ExerciseDto`, puis la construction de l'entité `Exercise` avec ses `Question` et `Answer`.
-    - Les règles `Question::STRUCTURE` s'appliquent. La publication exige au moins une question.
-    - `exercises.create` : une seule transaction.
+    - `ManageContentPolicy`, DTO, entité `Exercise` avec ses `Question` et `Answer` ; `Question#structure_errors` ; `draft`.
   - `app/domain/use_cases/assessment/update_exercise.rb`
-    - Si `has_sessions?`, toute modification de question renvoie `:invalid`, avec le détail `questions_locked`.
+    - Si `has_sessions?`, toute modification de question renvoie `:invalid` avec `questions_locked` (ADR-0036, ADR-0054).
+  - `app/domain/use_cases/assessment/publish_exercise.rb`
+    - `Exercise#publishable?` et fiche publiée, sinon `:conflict`.
   - `app/domain/use_cases/assessment/archive_exercise.rb`
-    - Audit `content_archived`.
-  - `app/controllers/assessment/exercise_editions_controller.rb`
-    - `allow_roles :team`. Il transforme `questions_attributes` avec `ExerciseDto.from_params`.
-  - `app/views/assessment/exercise_editions/new.html.erb`
-  - `app/views/assessment/exercise_editions/edit.html.erb`
-  - `app/views/assessment/exercise_editions/_form.html.erb`
-    - Titre, description, type (fixation ou évaluation), statut, puis les questions.
-    - Si les questions sont verrouillées, un bandeau l'explique et les champs sont en lecture seule.
-  - `app/views/assessment/exercise_editions/_question_fields.html.erb`
-    - Contenu, explication, type, réponses.
-  - `app/views/assessment/exercise_editions/_answer_fields.html.erb`
-    - Contenu et case « Bonne réponse ».
-  - `app/javascript/controllers/assessment/nested_form_controller.js`
-    - « + Ajouter une question », « + Ajouter une réponse », « Retirer ».
-    - Il clone des `<template>` rendus par le serveur et remplace l'index `NEW_RECORD` par un horodatage.
-  - `config/locales/assessment/exercise_editions.fr.yml`
+  - `app/controllers/teams/exercises_controller.rb`
+    - `new`, `create` (sous la fiche), `edit`, `update`, `publish`, `archive`.
+  - `app/views/teams/exercises/new.html.erb`
+  - `app/views/teams/exercises/edit.html.erb`
+  - `app/views/teams/exercises/_form.html.erb`
+    - Titre, description, type (fixation ou évaluation), questions. Questions verrouillées : bandeau et champs en lecture seule.
+  - `app/views/teams/exercises/_question_fields.html.erb`
+    - Énoncé, explication, type, propositions.
+  - `app/views/teams/exercises/_answer_fields.html.erb`
+    - Texte de la proposition et case « Proposition correcte ».
+  - `app/javascript/controllers/teams/nested_form_controller.js`
+    - « + Ajouter une question », « + Ajouter une proposition », « Retirer », par clonage de `<template>` rendus par le serveur.
+  - `config/locales/teams/exercises.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/dtos/assessment/exercise_input_test.rb`
   - `test/domain/use_cases/assessment/create_exercise_test.rb`
-    - Les quatre types de question, en cas valide et invalide. Transaction. Titre sans `titleize`.
+    - Quatre types de question, valides et invalides ; titre sans `titleize`.
   - `test/domain/use_cases/assessment/update_exercise_test.rb`
+  - `test/domain/use_cases/assessment/publish_exercise_test.rb`
   - `test/domain/use_cases/assessment/archive_exercise_test.rb`
-  - `test/controllers/assessment/exercise_editions_controller_test.rb`
-    - TR-cadre-6 : l'archivage conserve sessions, tentatives et badges. Un non-équipe reçoit 403.
-  - `test/system/assessment/exercise_form_test.rb`
-    - Ajouter 2 questions et 5 réponses sans rechargement, enregistrer, et relire l'exercice avec ses questions.
-- **Done quand**   : l'équipe crée un exercice de 2 questions qui est relu identique. Les critères AS-03, AS-04 et AS-05 sont verts.
+  - `test/controllers/teams/exercises_controller_test.rb`
+    - TR-cadre-6 : l'archivage conserve sessions, tentatives et badges. Non-équipe : 403.
+  - `test/system/teams/exercise_form_test.rb`
+    - Ajouter 2 questions et 5 propositions sans rechargement, enregistrer, relire.
+- **Done quand**   : les critères AS-03, AS-04 et AS-05 sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/assessment/exercises/new.html.erb`, `edit.html.erb`, `_form.html.erb`, `_question_fields.html.erb` et `_answer_fields.html.erb`
   - Le contrôleur Stimulus `nested-form` **n'existait pas** : il est à construire.
 - **Fiches d'inventaire** : AS-03, AS-04, AS-05. Complément assessment §3 (C-08 à C-11).
-- **Non-régression** :
-  - « + Ajouter une question » n'est pas inerte ;
-  - les questions sont bien persistées ;
-  - le titre n'est pas passé en `titleize` ;
-  - l'archivage ne détruit ni les sessions, ni les tentatives, ni les badges.
+- **Non-régression** : « + Ajouter une question » n'est pas inerte ; les questions sont persistées ; l'archivage ne détruit rien.
 - **UDR**          : UDR-0017 — Formulaire exercice
 
 ---
 
-## Lot B6 — Accueil équipe (minimal)
+## Lot B6 — Accueil équipe et section Référentiel
 
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/catalog/team_home_query.rb`
-    - Renvoie `Data(drenas_count, schools_count, levels: [Data(name, series_names)], recent_courses: [5], recent_exercises: [5])`.
-    - Les listes récentes sont triées par `updated_at`, tous statuts confondus.
-  - `app/controllers/catalog/team_homes_controller.rb`
-    - `allow_roles :team`.
-  - `app/views/catalog/team_homes/show.html.erb`
-    - Sections dans l'ordre de `HOME_SECTIONS[:team]` : régions, niveaux, activité.
-  - `app/views/catalog/team_homes/_shortcuts.html.erb`
-    - « Nouveau cours » vers `new_course_path`, « Nouvelle classe » vers `new_classroom_path`, « Inviter un membre » vers `new_team_invitation_path` et « Débloquer un compte » vers `team_account_lookup_path`.
-  - `app/views/catalog/team_homes/_recent_content.html.erb`
-  - `config/locales/catalog/team_homes.fr.yml`
+    - `Row(drenas_count, schools_count, classrooms_count, levels:, materials_count, recent_courses:, recent_exercises:, recent_imports:)`. Listes récentes triées par `updated_at`, tous statuts.
+  - `app/controllers/teams/homes_controller.rb`
+    - `show`.
+  - `app/views/teams/homes/show.html.erb`
+    - Sections dans l'ordre de `HOME_SECTIONS[:team]`.
+  - `app/views/teams/homes/_shortcuts.html.erb`
+    - « Nouveau cours », « Établissements » (`schools_path`), « Importer » (`teams_imports_path`), « Inviter un membre » (`new_teams_invitation_path`), « Débloquer un compte » (`teams_account_lookup_path`).
+  - `app/views/teams/homes/_referential.html.erb`
+    - Section « Référentiel » (CA-25) : DRENA, niveaux, séries, matières, avec leurs compteurs et un lien vers chaque écran de gestion (`drenas_path`, `levels_path`, `series_index_path`, `materials_path`).
+  - `app/views/teams/homes/_recent_content.html.erb`
+  - `config/locales/teams/homes.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
   - `test/infrastructure/queries/catalog/team_home_query_test.rb`
-  - `test/controllers/catalog/team_homes_controller_test.rb`
-- **Done quand**   : le critère TR-09 est vert.
+  - `test/controllers/teams/homes_controller_test.rb`
+- **Done quand**   : les critères TR-09 et CA-25 sont verts.
 - **Écrans de l'ancienne application** :
-  - `⟨ancienne⟩ views/teams/feed/index.html.erb`
-  - `⟨ancienne⟩ views/teams/feed/content/_feed_header.html.erb`, `_drenas.html.erb`, `_levels.html.erb` et `_activities.html.erb`
-  - captures `teams/Team-feed.png` et `teams/Team - DRENA.png`
-  - `teams/Lnclass - Tableau de Bord Team.png` est en V4 et sert seulement de référence visuelle.
-- **Fiches d'inventaire** : TR-09. TR-10 est hors périmètre (V4).
-- **Non-régression** : l'écran lit la vraie table des cours, pas une constante `Orm` disparue. Le test système est au Lot E.
+  - `⟨ancienne⟩ views/teams/feed/index.html.erb` et `content/_feed_header.html.erb`, `_drenas.html.erb`, `_levels.html.erb`, `_activities.html.erb`
+  - `⟨ancienne⟩ views/teams/dashboard/setup.html.erb` pour la section Référentiel
+  - captures `teams/Team-feed.png`, `teams/Team - DRENA.png`, `teams/Lnclass - Configuration Plateforme.png`
+- **Fiches d'inventaire** : TR-09, CA-25. TR-10 hors périmètre (V4).
+- **Non-régression** : l'écran lit les vraies tables, pas une constante `Orm` disparue.
 - **UDR**          : UDR-0018 — Accueil équipe
 
 ---
 
 ## Lot B7 — Invitation d'un membre de l'équipe (F-16)
 
-- **Couche**       : domaine (use cases) + delivery + ui
+- **Couche**       : domaine (DTO, use cases) + delivery + ui
 - **Fichiers**     :
+  - `app/domain/dtos/identity/team_invitation_input.rb`
+    - `contact, team_role`.
+  - `app/domain/dtos/identity/invitation_acceptance_input.rb`
+    - Inclut `PersonNameInput`. `gender, pin, pin_confirmation` (ADR-0038 : nom, prénom(s) et PIN).
   - `app/domain/use_cases/identity/invite_team_member.rb`
-    - `InviteTeamPolicy`. Le numéro est normalisé, puis refusé s'il appartient déjà à un compte ou s'il a une invitation en cours (`:conflict`).
-    - Génère le jeton, stocke son digest avec `TeamInvitation::TTL`, écrit l'audit `team_invitation_created`.
-    - Renvoie l'URL d'acceptation en clair, une seule fois.
-  - `app/domain/use_cases/identity/accept_team_invitation.rb`
-    - Cherche par le digest du jeton et vérifie `acceptable?`. Sinon, renvoie `:expired`.
-    - Contrôle le PIN, puis appelle `registrations.register_team_member`, qui crée l'utilisateur team et marque l'invitation acceptée.
-    - Écrit l'audit `team_invitation_accepted`.
-    - Le compte créé n'a **pas** de second facteur : il l'enrôle à sa première connexion.
-  - `app/controllers/identity/team_invitations_controller.rb`
-    - `allow_roles :team`. `create` rend directement la vue `created`, avec le lien : pas de redirection, pas de flash.
-  - `app/controllers/identity/team_invitation_acceptances_controller.rb`
-    - `allow_unauthenticated_access`, `rate_limit to: 5, within: 1.minute`.
-  - `app/views/identity/team_invitations/new.html.erb`
-  - `app/views/identity/team_invitations/created.html.erb`
-    - Le lien s'affiche une fois, avec un bouton « Copier ».
-  - `app/views/identity/team_invitation_acceptances/new.html.erb`
-    - Nom et Prénom(s) pré-remplis en lecture seule, genre, PIN et confirmation.
-  - `config/locales/identity/team_invitations.fr.yml`
-  - `config/locales/identity/team_invitation_acceptances.fr.yml`
+    - `InviteTeamPolicy`. Numéro déjà lié à un compte : `:conflict`. Invitation en cours : `:conflict` (index partiel). Jeton de 32 caractères base58, digest HMAC, `expires_at` à +72 h, audit `invitation.sent`. Renvoie l'URL en clair une seule fois.
+  - `app/domain/use_cases/identity/accept_invitation.rb`
+    - Exempté de policy (ADR-0028). Jeton inconnu : `:not_found` ; expiré, accepté ou révoqué : `:expired`. Dans une transaction : `create_from_invitation`, puis `mark_accepted`, audit `invitation.accepted`. Le compte n'a pas de second facteur : il l'enrôle à sa première connexion.
+  - `app/controllers/teams/invitations_controller.rb`
+    - `new`, `create` : rend directement `created`, avec le lien, sans redirection ni flash.
+  - `app/controllers/identity/invitations_controller.rb`
+    - `allow_unauthenticated_access`, `rate_limit to: 5, within: 1.minute`. `show` et `accept`.
+  - `app/views/teams/invitations/new.html.erb`
+  - `app/views/teams/invitations/created.html.erb`
+    - Lien affiché une fois, bouton « Copier ».
+  - `app/views/identity/invitations/show.html.erb`
+    - Nom, Prénom(s), genre, PIN et confirmation.
+  - `config/locales/teams/invitations.fr.yml`
+  - `config/locales/identity/invitations.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
   - `test/domain/use_cases/identity/invite_team_member_test.rb`
-  - `test/domain/use_cases/identity/accept_team_invitation_test.rb`
-  - `test/controllers/identity/team_invitations_controller_test.rb`
-  - `test/controllers/identity/team_invitation_acceptances_controller_test.rb`
-    - Lien expiré, lien déjà utilisé, et `/team-signup` qui renvoie 404.
-- **Done quand**   : le critère F-16 est vert, et un compte invité enrôle son TOTP puis arrive sur `/teams`.
-- **Écrans de l'ancienne application** :
-  - `⟨ancienne⟩ views/teams/registrations/new.html.erb` sert de référence visuelle pour la page d'acceptation seulement : la route publique n'est pas reprise.
-  - captures `original/team-signup--desktop.png`, `original/team-signup--mobile.png` et `teams/screencapture-localhost-3000-team-signup-2026-09-23-16_30_25.png`
+  - `test/domain/use_cases/identity/accept_invitation_test.rb`
+  - `test/controllers/teams/invitations_controller_test.rb`
+    - `team_role` content ou field : 403.
+  - `test/controllers/identity/invitations_controller_test.rb`
+    - Lien expiré, lien déjà utilisé, `/team-signup` 404.
+- **Done quand**   : le critère F-16 est vert ; l'invitation d'amorçage du seed s'accepte par le même écran ; le compte invité enrôle son TOTP puis arrive sur `/teams`.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teams/registrations/new.html.erb`, en référence visuelle seulement ; captures `original/team-signup--desktop.png` et `original/team-signup--mobile.png`.
 - **Fiches d'inventaire** : ID-04 (écartée, remplacée), F-16.
 - **Non-régression** : aucune route publique ne crée un compte team.
 - **UDR**          : UDR-0019 — Invitation équipe
 
 ---
 
-## Lot B8 — Débloquer un compte (récupération assistée, côté émission)
+## Lot B8 — Débloquer un compte (code de récupération, second facteur)
 
-- **Couche**       : infrastructure (query) + delivery + ui
+- **Couche**       : domaine (use cases) + infrastructure (query) + delivery + ui
 - **Fichiers**     :
+  - `app/domain/use_cases/identity/issue_pin_recovery_code.rb`
+    - `call(actor:, target_public_id:)`. Faits : la cible, `teaches_target` (classes actives enseignées) ; `IssuePinRecoveryCodePolicy` ; code de 8 chiffres, digest HMAC, +15 min ; audit `pin.recovery_code_issued` avec émetteur et cible. Renvoie le code en clair et son expiration.
+  - `app/domain/use_cases/identity/reset_second_factor.rb`
+    - `ResetSecondFactorPolicy` ; `second_factors.reset` ; `sessions.destroy_all_for` ; audit `totp.reset`.
   - `app/infrastructure/queries/identity/account_lookup_query.rb`
-    - Recherche par numéro **exact** après normalisation. Renvoie `Data(public_id, full_name, role, classroom_name)` ou `nil`.
-    - Pas de recherche partielle : ce n'est pas un annuaire, qui reste en V2.
-  - `app/controllers/identity/account_lookups_controller.rb`
-    - `allow_roles :team`. `show` avec `?contact=`.
+    - Recherche par numéro **exact** après normalisation → `Row(public_id, display_name, role, team_role, classroom_name, second_factor_confirmed)` ou `nil`. Pas d'annuaire (V2).
+  - `app/controllers/teams/account_lookups_controller.rb`
+    - `show` avec `?contact=`, sous `ReadUserPolicy`.
   - `app/controllers/identity/pin_recovery_codes_controller.rb`
-    - `allow_roles :team, :teacher`. `rate_limit to: 10, within: 1.minute, by: current_actor.user_id`.
-    - `create` appelle `UseCases::Identity::IssuePinRecoveryCode`, puis rend `show` directement, avec le code et son heure d'expiration. Pas de redirection, pas de flash.
-    - En cas de refus : 403.
-  - `app/views/identity/account_lookups/show.html.erb`
+    - `allow_roles :team, :teacher`. `rate_limit to: 10, within: 1.minute`. `create` rend `show` directement : code et « valable jusqu'à HH:MM ». Refus : 403.
+  - `app/controllers/teams/second_factor_resets_controller.rb`
+    - `create`. Succès : retour à la recherche avec « Second facteur réinitialisé ».
+  - `app/views/teams/account_lookups/show.html.erb`
   - `app/views/identity/pin_recovery_codes/show.html.erb`
-    - Code en grands chiffres, avec « valable jusqu'à HH:MM » et la consigne à transmettre oralement.
-  - `config/locales/identity/account_lookups.fr.yml`
+    - Code en grands chiffres, consigne à transmettre oralement.
+  - `config/locales/teams/account_lookups.fr.yml`
   - `config/locales/identity/pin_recovery_codes.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/use_cases/identity/issue_pin_recovery_code_test.rb`
+  - `test/domain/use_cases/identity/reset_second_factor_test.rb`
   - `test/infrastructure/queries/identity/account_lookup_query_test.rb`
-  - `test/controllers/identity/account_lookups_controller_test.rb`
+  - `test/controllers/teams/account_lookups_controller_test.rb`
   - `test/controllers/identity/pin_recovery_codes_controller_test.rb`
-    - Un enseignant sur un élève de sa classe obtient 200. Sur un élève d'une autre classe : 403. Un élève : 403. Une team sur son propre compte : 403. Le code n'apparaît ni dans le flash ni dans le journal (`filter_parameters`).
-- **Done quand**   : le critère ID-15 (émission) est vert.
-- **Écrans de l'ancienne application** : aucun, la fonction était absente. On suit UDR-0005 et UDR-0006.
-- **Fiches d'inventaire** : ID-15. ADR-0032.
-- **Non-régression** : un PIN perdu ne signifie plus un compte perdu.
+    - Enseignant sur un élève de sa classe : 200 ; d'une autre classe : 403 ; élève : 403 ; team sur son propre compte : 403. Le code n'apparaît ni dans le flash ni dans le journal.
+  - `test/controllers/teams/second_factor_resets_controller_test.rb`
+    - Sur soi-même : 403.
+- **Done quand**   : le critère ID-15 (émission) et la réinitialisation du second facteur sont verts.
+- **Écrans de l'ancienne application** : aucun, la fonction était absente. UDR-0005 et UDR-0006.
+- **Fiches d'inventaire** : ID-15, F-07. ADR-0031 et ADR-0032.
+- **Non-régression** : un PIN perdu ou un téléphone perdu ne signifie plus un compte perdu.
 - **UDR**          : UDR-0020 — Débloquer un compte
 
 ---
 
 ## Lot C1 — Détail d'un exercice
 
-- **Couche**       : domaine (use case) + infrastructure (query) + delivery + ui
+- **Couche**       : infrastructure (queries) + delivery + ui
 - **Fichiers**     :
-  - `app/domain/use_cases/assessment/read_exercise.rb`
-    - `ReadPublishedPolicy`, dont le refus renvoie `:not_found`.
-    - Puis `RevealAnswersPolicy`, qui produit `reveal_answers: true/false`.
-    - Renvoie l'exercice. **Si `reveal_answers` est faux, l'entité est reconstruite sans le champ `correct` de ses réponses** : la vue ne peut rien fuiter, même par erreur.
+  - `app/infrastructure/queries/assessment/exercise_detail_query.rb`
+    - `#call(public_id:, reveal:)` → `Row(exercise, essential, course, questions:)`. **Si `reveal` est faux, la query ne sélectionne même pas la colonne `answers.correct`** : la vue ne peut rien fuiter, même par erreur.
   - `app/infrastructure/queries/assessment/exercise_progress_query.rb`
-    - Pour un élève : `badge_level`, `best_score_percent`, `completed_count`, `in_progress_public_id`, `startable`. `startable` est calculé par `StartSessionPolicy` et passé par le contrôleur.
+    - Pour un élève : `badge_level`, `best_score_percent`, `mastery`, `completed_count`, `started_session_public_id`.
   - `app/controllers/assessment/exercises_controller.rb`
-    - `show`.
+    - `show`. `ReadPublishedPolicy` (refus → 404), puis `RevealAnswersPolicy` pour l'aperçu : **vrai pour l'équipe seulement** ; l'élève voit les corrections dans sa session, pas ici. `StartSessionPolicy` décide du bouton.
   - `app/views/assessment/exercises/show.html.erb`
-    - Titre, description, nombre de questions, matière.
-    - Pour l'élève : progression, puis « Commencer » (POST `exercise_sessions_path`) ou « Reprendre » (`exercise_session_path`) avec « Recommencer ».
-    - Pour l'équipe : « Modifier » et « Archiver ».
+    - Titre, description, nombre de questions, matière. Élève : progression, « Commencer » (POST `exercise_sessions_path`) ou « Reprendre » et « Recommencer » (`restart: true`). Équipe : « Modifier », « Publier » ou « Archiver ».
   - `app/views/assessment/exercises/_questions_preview.html.erb`
-    - Questions dans `data-controller="math"`. La marque de bonne réponse n'est rendue que si `reveal_answers` est vrai.
-    - **Aucun `cache`** dans ce partial ni dans la vue.
+    - Questions dans `data-controller="math"`. La marque « Proposition correcte » n'est rendue que si `reveal`. **Aucun `cache`** dans ce partial ni dans la vue.
   - `app/views/assessment/exercises/_student_progress.html.erb`
   - `config/locales/assessment/exercises.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
-  - `test/domain/use_cases/assessment/read_exercise_test.rb`
+  - `test/infrastructure/queries/assessment/exercise_detail_query_test.rb`
   - `test/infrastructure/queries/assessment/exercise_progress_query_test.rb`
   - `test/controllers/assessment/exercises_controller_test.rb`
   - `test/integration/assessment/answer_leak_test.rb`
-    - TR-cadre-3. Sous `with_fragment_caching`, l'enseignant de la classe affiche l'exercice, puis l'élève l'affiche. Le HTML de l'élève ne contient ni la marque de bonne réponse ni l'identifiant d'une réponse correcte.
+    - TR-cadre-3. Sous `with_fragment_caching`, l'équipe affiche l'exercice, puis l'enseignant, puis l'élève. Le HTML de l'enseignant et de l'élève ne contient ni la marque de proposition correcte ni l'identifiant d'une proposition correcte.
 - **Done quand**   : les critères AS-02 et AS-39 sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/assessment/exercises/show.html.erb`, `_questions_list.html.erb` et `_exercise.html.erb`
   - `⟨ancienne⟩ views/components/_question_card.html.erb`
 - **Fiches d'inventaire** : AS-02, AS-39. Sécurité n° 29.
-- **Non-régression** : aucune bonne réponse n'est servie par un cache partagé entre les rôles.
+- **Non-régression** : aucune proposition correcte servie par un cache partagé entre les rôles.
 - **UDR**          : UDR-0021 — Page exercice
 
 ---
 
-## Lot C2 — Jouer une session (démarrer, reprendre, répondre, correction immédiate)
+## Lot C2 — Jouer une session (démarrer, reprendre, répondre, clôturer)
 
-- **Couche**       : domaine (use cases) + infrastructure (query) + delivery + ui
+- **Couche**       : domaine (DTO, use cases) + infrastructure (query) + delivery + ui
 - **Fichiers**     :
+  - `app/domain/dtos/assessment/attempt_input.rb`
+    - `session_public_id, question_id, answer_ids` (entiers, `compact`). Vide : « Sélectionne au moins une proposition. »
   - `app/domain/use_cases/assessment/start_exercise_session.rb`
-    - `StartSessionPolicy`. L'exercice doit avoir au moins une question.
-    - `sessions.start` abandonne l'éventuelle session en cours, dans la même transaction, puis fixe `questions_total`.
+    - Tel que dans l'ADR-0054. `StartSessionPolicy`. Session `started` existante : reprise, sauf `restart: true` qui l'abandonne. Sinon `start` avec `question_count` figé, `kind` et `knowledge_gap_id` (remédiation si une lacune `pending` existe sur la fiche, ADR-0043), et `classroom_assignment_id` s'il existe une assignation active.
   - `app/domain/use_cases/assessment/submit_question_attempt.rb`
-    - Enchaîne `PlaySessionPolicy`, `AttemptDto`, puis vérifie que la question appartient à l'exercice et que les réponses appartiennent à la question. Sinon : `:invalid`.
-    - `Question#correct?`, puis `sessions.record_attempt`.
-    - Si le résultat est `:duplicate`, le use case renvoie `Result.failure(:conflict)` et rien n'est écrit.
+    - Tel que dans l'ADR-0054. Transaction ; session **verrouillée** ; `SubmitAttemptPolicy` ; question de l'exercice et propositions de la question, sinon `:invalid` ; `Question#well_formed?` puis `correct?` (égalité exacte des ensembles) ; `record_attempt` (`:duplicate` → `:conflict`, rien d'écrit). **À la dernière réponse**, appelle `CloseExerciseSession` injecté, dans la même transaction.
+  - `app/domain/use_cases/assessment/close_exercise_session.rb`
+    - `correct_count` recalculé depuis les tentatives ; `Grading.score_percent` ; `complete` ; badge par `Grading.badge_for` et `upgrade?` (ADR-0033, 4 paliers) ; lacune par `GapDecision` (ADR-0043) : `open`, `increment` ou `resolve`. Renvoie `Row(score_percent, badge_level, earned_now)`.
   - `app/infrastructure/queries/assessment/session_play_query.rb`
-    - Renvoie `Data(session_public_id, exercise_title, answered_count, questions_total, next_question:, last_feedback:)`.
-    - `next_question` est la première question sans tentative, par position. Ses réponses sont **sans** `correct` et mélangées par `Random.new(session_id ^ question_id)`, un ordre stable pour la session.
-    - `last_feedback` contient la question qui vient d'être répondue, avec `correct`, ses bonnes réponses et son explication. Le propriétaire a le droit de les voir après avoir répondu.
+    - `Row(session_public_id, exercise_title, answered_count, question_count, progress_percent, next_question:, last_feedback:)`. `next_question` : première question sans tentative ; propositions **sans** `correct`, mélangées de façon stable (`Random.new(session_id ^ question_id)`). `last_feedback` : la question qui vient d'être tentée, avec ses propositions correctes et son explication (`RevealAnswersPolicy` : question tentée).
   - `app/controllers/assessment/exercise_sessions_controller.rb`
-    - `allow_roles :student`. `create` redirige vers `show`. `show` : si toutes les questions sont répondues, il affiche le bouton « Voir mon résultat », qui poste vers `exercise_session_completion_path`.
+    - `allow_roles :student`. `create` → `show`. `show` d'une session `completed` → `exercise_session_result_path`.
   - `app/controllers/assessment/question_attempts_controller.rb`
-    - `allow_roles :student`. `create` :
-      - succès → Turbo Stream qui remplace le cadre de la question par la correction, puis par la suite ;
-      - `:invalid` → 422 dans le cadre, avec le message ;
-      - `:conflict` → redirection vers la session avec « Question déjà répondue. ».
+    - `create` : succès → Turbo Stream qui remplace la question par la correction ; si la session est close, la correction propose « Voir mon résultat ». `:invalid` → 422 dans le cadre. `:conflict` → retour à la session avec « Question déjà répondue ».
   - `app/views/assessment/exercise_sessions/show.html.erb`
     - Barre de progression, puis `turbo_frame_tag "question"`.
   - `app/views/assessment/exercise_sessions/_question_card.html.erb`
-    - Radios `answer_ids[]` limitées à une valeur pour les types `true_false` et `single_choice`. Cases à cocher avec « Plusieurs choix possibles » pour `multiple_*`. KaTeX.
+    - Radios pour `true_false` et `single_choice` ; cases à cocher avec « Plusieurs propositions correctes » pour `multiple_*`. KaTeX.
   - `app/views/assessment/exercise_sessions/_feedback_card.html.erb`
-    - « Bonne réponse » ou « Mauvaise réponse », les bonnes réponses, l'explication, puis « Question suivante » ou « Voir mon résultat ».
+    - « Bonne réponse » ou « Mauvaise réponse », les propositions correctes, l'explication, puis « Question suivante » ou « Voir mon résultat ».
   - `app/views/assessment/exercise_sessions/_progress_bar.html.erb`
   - `app/views/assessment/question_attempts/create.turbo_stream.erb`
   - `config/locales/assessment/exercise_sessions.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/dtos/assessment/attempt_input_test.rb`
   - `test/domain/use_cases/assessment/start_exercise_session_test.rb`
+    - Exercice non assigné : démarrable. Reprise. `restart`. Remédiation.
   - `test/domain/use_cases/assessment/submit_question_attempt_test.rb`
-    - Égalité exacte des ensembles, sans crédit partiel. Réponse d'une autre question. Doublon.
+    - Sans crédit partiel ; proposition d'une autre question ; doublon ; clôture automatique à la dernière réponse.
+  - `test/domain/use_cases/assessment/close_exercise_session_test.rb`
+    - Bornes 49, 50, 69, 70, 79, 80, 99, 100 ; remplacement strictement supérieur ; lacune ouverte, incrémentée, résolue.
   - `test/infrastructure/queries/assessment/session_play_query_test.rb`
-    - Ordre stable. Aucun `correct` dans `next_question`.
+    - Ordre stable ; aucun `correct` dans `next_question`.
   - `test/controllers/assessment/exercise_sessions_controller_test.rb`
-    - Exercice non assigné : 403. Brouillon : 404. Reprise. « Recommencer » abandonne la session précédente.
+    - Brouillon : 404. Enseignant : 403.
   - `test/controllers/assessment/question_attempts_controller_test.rb`
-    - Réponse vide en Turbo : 422 avec le message, pas de 500. Session d'un autre élève : 403.
+    - Réponse vide en Turbo : 422, jamais 500. Session d'un autre élève : 403.
   - `test/integration/assessment/double_submission_test.rb`
-    - Deux soumissions de la même question laissent une seule tentative, et `answered_count` vaut 1 (sécurité n° 30).
-- **Done quand**   : les critères AS-07, AS-08, AS-09 et AS-10 sont verts.
-- **Écrans de l'ancienne application** :
-  - `⟨ancienne⟩ views/assessment/exercise_sessions/show.html.erb`, `_question_card.html.erb`, `_feedback_card.html.erb` et `update.turbo_stream.erb`
-- **Fiches d'inventaire** : AS-07, AS-08, AS-09, AS-10. Complément assessment §3 et §4 (E-01 à E-25). Sécurité n° 30.
-- **Non-régression** :
-  - on ne peut pas soumettre à nouveau une question après avoir vu le corrigé ;
-  - un doublon n'est jamais compté ;
-  - une réponse vide ne produit jamais de 500.
+    - Deux soumissions concurrentes de la même question : une tentative, `answered_count` = 1 (sécurité n° 30).
+- **Done quand**   : les critères AS-07, AS-08, AS-09, AS-10 et AS-11 (clôture et badge) sont verts.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/assessment/exercise_sessions/show.html.erb`, `_question_card.html.erb`, `_feedback_card.html.erb` et `update.turbo_stream.erb`
+- **Fiches d'inventaire** : AS-07 à AS-11. Complément assessment §3 et §4 (E-01 à E-25). Sécurité n° 30.
+- **Non-régression** : pas de nouvelle soumission après le corrigé ; aucun doublon compté ; aucune session terminée sans score.
 - **UDR**          : UDR-0022 — Session d'exercice
 
 ---
 
-## Lot C3 — Clôture, résultat et badge
+## Lot C3 — Résultat et badge
 
-- **Couche**       : domaine (use case) + infrastructure (query) + delivery + ui (Stimulus)
+- **Couche**       : infrastructure (query) + delivery + ui (Stimulus)
 - **Fichiers**     :
-  - `app/domain/use_cases/assessment/complete_exercise_session.rb`
-    - Commence par `PlaySessionPolicy`. Une session déjà terminée renvoie `Result.success`, de façon idempotente, et le contrôleur affiche le résultat.
-    - Les étapes suivantes :
-      1. Si toutes les questions n'ont pas de réponse, `ExerciseSession#complete` renvoie `:invalid`.
-      2. `correct_count` est recalculé à partir des tentatives : c'est la source de vérité.
-      3. `BadgeScale.level_for(score)`. Si `better?` que le badge existant, `badges.save`.
-      4. `sessions.complete`.
-    - Les étapes 3 et 4 se font dans une seule transaction, par le repository de session.
   - `app/infrastructure/queries/assessment/session_result_query.rb`
-    - Renvoie `Data(exercise, score_percent, correct_count, questions_total, badge_level, earned_now, passed, perfect, review:)`.
-    - `review` contient, pour chaque question, la réponse choisie, les bonnes réponses et l'explication.
-  - `app/controllers/assessment/session_completions_controller.rb`
-    - `allow_roles :student`. `create` : succès → `exercise_session_result_path`. `:invalid` → retour à la session, sur la question manquante.
+    - `Row(exercise, essential, score_percent, grade_on_20, correct_count, question_count, mastery, badge_level, earned_now, review:)`. `review` : pour chaque question, les propositions choisies et correctes, et l'explication. Le contrôleur applique `ReadSessionPolicy`, puis `RevealAnswersPolicy` : **l'enseignant voit le score et la note, pas les propositions correctes** (ADR-0028).
   - `app/controllers/assessment/session_results_controller.rb`
-    - `show`. Il appelle `ReadSessionResult` (fichier suivant), puis la query. Un refus donne 403 avec « Accès interdit. ».
-  - `app/domain/use_cases/assessment/read_session_result.rb`
-    - `sessions.find_by_public_id` : absente → `:not_found`. Puis `ReadSessionPolicy` : refus → `:forbidden`. La session doit être `completed`, sinon `:invalid`, et le contrôleur renvoie vers la session.
+    - `show`, pour student, teacher et team. Session absente : 404 ; refus : 403 ; session non terminée : retour à la session.
   - `app/views/assessment/session_results/show.html.erb`
-    - Au-dessus du seuil : « Félicitations ! » avec `data-controller="assessment--confetti"` pendant 3 s. En dessous : « Courage ! ».
-    - Affiche la note n/total, le pourcentage, puis le badge ou « Non acquis ».
-    - « Recommencer » si le score est inférieur à 100, en POST vers `exercise_sessions_path`.
-    - Retour vers la fiche.
+    - Au-dessus de 50 % : « Félicitations ! » avec `data-controller="assessment--confetti"` pendant 3 s ; en dessous : « Courage ! ». Note sur 20, pourcentage, maîtrise, badge ou « Non acquis ». « Recommencer » si le score est inférieur à 100. Retour à la fiche essentielle.
   - `app/views/assessment/session_results/_question_review.html.erb`
   - `app/views/assessment/session_results/_badge.html.erb`
+    - Bronze, Argent, Or ou Diamant (UDR-0007), avec « Nouveau badge ! » si `earned_now`.
   - `app/javascript/controllers/assessment/confetti_controller.js`
-    - Animation en CSS et en JS local, sans bibliothèque externe. Elle est désactivée si `prefers-reduced-motion`.
+    - CSS et JS locaux, sans bibliothèque, désactivé si `prefers-reduced-motion`.
   - `config/locales/assessment/session_results.fr.yml`
-    - Reprend les messages d'encouragement du fichier `gamification.fr.yml` des locales de l'ancienne application.
+    - Reprend les messages d'encouragement de la locale de gamification de l'ancienne application.
 - **Dépend de**    : Lot 0
 - **Test associé** :
-  - `test/domain/use_cases/assessment/complete_exercise_session_test.rb`
-    - Barème aux bornes 49, 50, 79, 80, 99, 100. Remplacement strictement supérieur seulement. Clôture prématurée.
-  - `test/domain/use_cases/assessment/read_session_result_test.rb`
   - `test/infrastructure/queries/assessment/session_result_query_test.rb`
-  - `test/controllers/assessment/session_completions_controller_test.rb`
   - `test/controllers/assessment/session_results_controller_test.rb`
-    - Autre élève : 403 avec « Accès interdit. ». Enseignant de la classe : 200. Équipe : 200.
-- **Done quand**   : les critères AS-11, AS-12 et AS-13 sont verts.
+    - Autre élève : 403. Enseignant d'une classe active de l'élève : 200, sans proposition correcte dans le HTML. Équipe : 200.
+- **Done quand**   : les critères AS-11 (affichage), AS-12 et AS-13 sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/assessment/exercise_sessions/result.html.erb` et `finish.turbo_stream.erb`
   - `⟨ancienne⟩ views/components/_exercise_badge.html.erb`
   - `⟨ancienne⟩ javascript/controllers/confetti_controller.js`
 - **Fiches d'inventaire** : AS-11, AS-12, AS-13. ADR-0033 et ADR-0054.
-- **Non-régression** :
-  - le badge gagné est bien affiché ;
-  - le résultat n'est pas réduit au seul pourcentage : il montre aussi la note et le badge ;
-  - « Diamant » n'existe pas.
+- **Non-régression** : le badge gagné est affiché ; le résultat montre la note et le badge, pas seulement le pourcentage ; 9/10 donne Or, jamais Diamant.
 - **UDR**          : UDR-0023 — Résultat de session
 
 ---
 
-## Lot D1 — Inscription enseignant et établissements d'une DRENA
+## Lot D1 — Inscription enseignant
 
-- **Couche**       : domaine (use case) + infrastructure (query) + delivery + ui (Stimulus)
+- **Couche**       : domaine (DTO, use case) + infrastructure (query) + delivery + ui (Stimulus)
 - **Fichiers**     :
+  - `app/domain/dtos/identity/teacher_registration_input.rb`
+    - Inclut `PersonNameInput`. `gender, contact, pin, pin_confirmation, drena_public_id, school_public_id, material_slug`.
   - `app/domain/use_cases/identity/register_teacher.rb`
-    - Enchaîne le DTO, `schools.belongs_to_drena?`, `ReferentialRepositoryPort.material_exists?`, `Pin.valid_for?` et `contact_taken?`.
-    - Puis `registrations.register_teacher`, en une transaction. `teacher_schools.primary` vaut vrai et `onboarded_at` reste `nil`.
-    - Le rôle est imposé à `teacher`.
+    - `RegisterTeacherPolicy` ; faits : école active de la DRENA, matière ; transaction : `create_teacher` (profil avec matière, `onboarding_completed_at` nul), `schools.attach_teacher(primary: true)` (ADR-0030). Rôle imposé à `teacher`.
   - `app/infrastructure/queries/school/schools_by_drena_query.rb`
-    - Renvoie `[Data(id, name)]` trié par nom, statut `active` seulement.
+    - `[Row(public_id, name)]` trié par nom, statut `active` seulement.
   - `app/controllers/identity/teacher_registrations_controller.rb`
-    - `allow_unauthenticated_access`. `rate_limit to: 5, within: 1.minute, only: :create`.
-    - `create` : `start_session`, puis `teacher_classrooms_path` avec « Bienvenue ! Sélectionnez vos classes pour commencer. ».
+    - `allow_unauthenticated_access`, `rate_limit to: 5, within: 1.minute, only: :create`. Succès : `start_session`, puis `teacher_classrooms_path` avec « Bienvenue ! Sélectionnez vos classes pour commencer. ».
   - `app/controllers/school/api/schools_controller.rb`
-    - `allow_unauthenticated_access`. `rate_limit to: 30, within: 1.minute, by: ip`. `drena_id` absent : 400.
+    - `allow_unauthenticated_access`, `rate_limit to: 30, within: 1.minute`. DRENA inconnue : 404.
   - `app/views/identity/teacher_registrations/new.html.erb`
   - `app/views/identity/teacher_registrations/_form.html.erb`
-    - Nom, Prénom(s), genre, numéro, PIN, DRENA (filtre non persisté), établissement (liste rechargée) et matière.
-    - Sans JS, un bouton « Afficher les établissements » soumet le formulaire en GET avec `drena_id` : c'est une amélioration progressive.
+    - Nom, Prénom(s), genre, numéro, PIN et confirmation, DRENA (filtre non persisté), établissement (liste rechargée), matière. Sans JS, « Afficher les établissements » soumet en GET avec la DRENA.
   - `app/javascript/controllers/school/schools_by_drena_controller.js`
   - `config/locales/identity/teacher_registrations.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/dtos/identity/teacher_registration_input_test.rb`
   - `test/domain/use_cases/identity/register_teacher_test.rb`
-    - École hors de la DRENA, rôle forcé, atomicité.
+    - École hors de la DRENA ou inactive ; rôle forcé ; atomicité.
   - `test/infrastructure/queries/school/schools_by_drena_query_test.rb`
   - `test/controllers/identity/teacher_registrations_controller_test.rb`
     - TR-cadre-1, variante `role=team`.
   - `test/controllers/school/api/schools_controller_test.rb`
-    - 400, tri, 429.
-- **Done quand**   : les critères ID-03, ID-08 (DRENA vers établissements), SC-26 et SC-27 sont verts.
+- **Done quand**   : les critères ID-03, ID-08, SC-26 et SC-27 sont verts.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/teachers/registrations/new.html.erb`
   - `⟨ancienne⟩ javascript/controllers/schools_controller.js`
-  - captures `original/teacher-signup--desktop.png`, `original/teacher-signup--mobile.png`, `Teachers/screencapture-localhost-3000-teacher-signup-2026-09-23-16_36_39.png` et `Teachers/screencapture-localhost-3000-teacher-signup-2026-09-23-16_37_18.png`
+  - captures `original/teacher-signup--desktop.png`, `original/teacher-signup--mobile.png`
 - **Fiches d'inventaire** : ID-03, ID-08, SC-26, SC-27, TR-17 (formulaire « Prepa BAC » écarté).
-- **Non-régression** : l'endpoint public est limité en débit.
+- **Non-régression** : l'endpoint public est limité en débit et ne liste que les écoles actives.
 - **UDR**          : UDR-0024 — Inscription enseignant
 
 ---
 
 ## Lot D2 — Déclarer ses classes (onboarding persisté)
 
-- **Couche**       : domaine (use case) + infrastructure (query) + delivery + ui (Stimulus)
+- **Couche**       : domaine (use cases) + infrastructure (query) + delivery + ui (Stimulus)
 - **Fichiers**     :
   - `app/domain/use_cases/classroom/declare_teaching.rb`
-    - Enchaîne `TeachPolicy` et `TeachingSelectionDto`.
-    - `classrooms.ids_in_school(school_id: primary, public_ids:)` filtre les classes hors école. Si la liste filtrée est vide : `:invalid`.
-    - Puis `teaching.replace_in_school`, et `teachers.mark_onboarded` si ce n'est pas déjà fait.
+    - `DeclareTeachingPolicy` (même école, classe active) ; `teaching.declare`. Idempotent.
+  - `app/domain/use_cases/classroom/withdraw_teaching.rb`
+    - Même policy ; `teaching.withdraw`. N'efface ni assignation ni session.
+  - `app/domain/use_cases/identity/complete_teacher_onboarding.rb`
+    - Teacher ; au moins une classe déclarée, sinon `:invalid` (« Sélectionnez au moins une classe. ») ; `complete_onboarding`.
   - `app/infrastructure/queries/classroom/teaching_selection_query.rb`
-    - Renvoie les classes de l'école principale, groupées par niveau et triées par position, puis par nom. Chacune porte `checked`.
+    - Classes actives de l'école principale et de l'année en cours, groupées par niveau, triées par position puis nom ; chacune porte `declared`.
   - `app/controllers/classroom/teaching_selections_controller.rb`
-    - `allow_roles :teacher`. `edit` et `update`. Sans école principale : redirection vers `pending_account_path`.
-    - Le bouton dit « Terminer la configuration » si le compte n'est pas configuré, sinon « Enregistrer ».
-  - `app/views/classroom/teaching_selections/edit.html.erb`
-    - « Quelles classes enseignez-vous ? », avec un compteur.
+    - `allow_roles :teacher`. `index`. Sans école principale : `pending_account_path`.
+  - `app/controllers/classroom/teachings_controller.rb`
+    - `create` et `destroy`, en Turbo Stream : la ligne et le compteur sont remplacés.
+  - `app/controllers/classroom/teacher_onboardings_controller.rb`
+    - `create` → `teacher_home_path`.
+  - `app/views/classroom/teaching_selections/index.html.erb`
+    - « Quelles classes enseignez-vous ? », compteur, bouton « Terminer la configuration » tant que l'onboarding n'est pas fini.
   - `app/views/classroom/teaching_selections/_level_group.html.erb`
-    - « Tout cocher » par niveau.
-  - `app/javascript/controllers/classroom/teaching_selection_controller.js`
+  - `app/views/classroom/teachings/_toggle.html.erb`
+  - `app/views/classroom/teachings/update.turbo_stream.erb`
+  - `app/javascript/controllers/classroom/teaching_counter_controller.js`
   - `config/locales/classroom/teaching_selections.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
   - `test/domain/use_cases/classroom/declare_teaching_test.rb`
-    - Sélection vide. Classe d'une autre école ignorée. Remplacement limité à l'école principale.
+    - Classe d'une autre école : 403 ; classe archivée : 403.
+  - `test/domain/use_cases/classroom/withdraw_teaching_test.rb`
+  - `test/domain/use_cases/identity/complete_teacher_onboarding_test.rb`
   - `test/infrastructure/queries/classroom/teaching_selection_query_test.rb`
+  - `test/controllers/classroom/teachings_controller_test.rb`
   - `test/controllers/classroom/teaching_selections_controller_test.rb`
   - `test/system/classroom/teaching_selection_test.rb`
-    - « Tout cocher » et le compteur.
-- **Done quand**   : les critères CL-09 et TR-08 (remplacé) sont verts, et un enseignant configuré n'est plus renvoyé sur cette page à sa connexion.
+- **Done quand**   : les critères CL-09 et TR-08 (remplacé) sont verts ; un enseignant onboardé n'est plus renvoyé sur cette page.
 - **Écrans de l'ancienne application** :
   - `⟨ancienne⟩ views/teachers/classrooms/index.html.erb` et `_classroom_group.html.erb`
   - `⟨ancienne⟩ javascript/controllers/classroom_selection_controller.js` et `checkable_controller.js`
-  - `⟨ancienne⟩ views/teachers/dashboard/setup.html.erb` sert de contre-exemple : c'est TR-08, écarté.
+  - `⟨ancienne⟩ views/teachers/dashboard/setup.html.erb` sert de contre-exemple (TR-08, écarté).
 - **Fiches d'inventaire** : CL-09, TR-08, TR-02 (enseignant sans école).
-- **Non-régression** :
-  - le remplacement n'efface pas les classes des autres écoles ;
-  - l'onboarding n'est pas déduit de `classrooms.empty?` ;
-  - il n'y a pas de boucle de redirection.
+- **Non-régression** : l'onboarding n'est pas déduit de `classrooms.empty?` ; pas de boucle de redirection.
 - **UDR**          : UDR-0025 — Déclaration des classes
 
 ---
@@ -1534,141 +1569,118 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/teacher_home_query.rb`
-    - Renvoie `Data(school_name, material_name, classrooms: [Data(public_id, name, level_name, students_count, assigned_exercises_count)])`.
+    - `Row(school_name, material_name, material_category, classrooms: [Row(public_id, name, level_name, active_students_count, active_assignments_count, average_score_percent)])`.
   - `app/controllers/classroom/teacher_homes_controller.rb`
-    - `allow_roles :teacher`. Si le compte n'est pas configuré : `redirect_to_home`, qui mène à la sélection.
+    - `allow_roles :teacher`. Onboarding non fini : `redirect_to_home`.
   - `app/views/classroom/teacher_homes/show.html.erb`
-    - Sections de `HOME_SECTIONS[:teacher]`. La section « activité » affiche un `ui_empty_state` « Bientôt » : c'est V3, sans lien mort.
+    - Sections de `HOME_SECTIONS[:teacher]` ; « activité » en `ui_empty_state` « Bientôt » (V3), sans lien mort.
   - `app/views/classroom/teacher_homes/_classroom_card.html.erb`
-    - Lien vers `classroom_path`.
   - `config/locales/classroom/teacher_homes.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
   - `test/infrastructure/queries/classroom/teacher_home_query_test.rb`
   - `test/controllers/classroom/teacher_homes_controller_test.rb`
 - **Done quand**   : le critère TR-05 est vert.
-- **Écrans de l'ancienne application** :
-  - `⟨ancienne⟩ views/teachers/feed/index.html.erb`
-  - `⟨ancienne⟩ views/teachers/feed/content/_feed_header.html.erb`, `_classrooms.html.erb` et `_levels.html.erb`
-  - `_examen_dashboard.html.erb` est écarté (TR-06).
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teachers/feed/index.html.erb` et `content/_feed_header.html.erb`, `_classrooms.html.erb`, `_levels.html.erb` ; `_examen_dashboard.html.erb` écarté (TR-06).
 - **Fiches d'inventaire** : TR-05, TR-06 (écarté), TR-07 (écarté).
-- **Non-régression** : aucun montant « Prepa » affiché ; l'accueil est couvert par un test système au Lot E.
+- **Non-régression** : aucun montant « Prepa » affiché.
 - **UDR**          : UDR-0026 — Accueil enseignant
 
 ---
 
 ## Lot D4 — Page d'une classe (enseignant, équipe)
 
-- **Couche**       : domaine (use case) + infrastructure (query) + delivery + ui (Stimulus)
+- **Couche**       : infrastructure (query) + delivery + ui (Stimulus)
 - **Fichiers**     :
-  - Le use case `UseCases::Classroom::ReadClassroom` est au **Lot 0** (0.6), car D4, D5, D6 et D7 l'utilisent tous.
   - `app/infrastructure/queries/classroom/classroom_overview_query.rb`
-    - Renvoie l'en-tête : nom, niveau, série, établissement, `JoinCode.display`, effectif.
-    - Puis les cours assignés actifs et publiés, avec leur lien `classroom_course_path`.
-    - Puis la liste des élèves (`public_id, full_name, contact`), **seulement si `show_roster`** : la query n'est pas appelée sinon.
+    - Cours assignés actifs et publiés, avec `classroom_course_path` ; puis, **seulement si `show_roster`**, les élèves (`public_id, display_name, contact, last_score_percent`).
   - `app/controllers/classroom/classrooms_controller.rb`
-    - `allow_roles :teacher, :team`. Un élève est envoyé vers `student_classroom_path`.
+    - `allow_roles :teacher, :team`. En-tête par `ClassroomHeaderQuery` ; `ReadClassroomPolicy` ; élève → `student_classroom_path`.
   - `app/views/classroom/classrooms/show.html.erb`
   - `app/views/classroom/classrooms/_header.html.erb`
-    - Code en majuscules et bouton « Copier ».
+    - Nom, année scolaire, code en majuscules et bouton « Copier » ; effectif / plafond.
   - `app/views/classroom/classrooms/_assigned_courses.html.erb`
   - `app/views/classroom/classrooms/_roster.html.erb`
-    - Une ligne par élève, avec le bouton « Générer un code de récupération », en POST vers `account_pin_recovery_codes_path(user_public_id)` (contrôleur du Lot B8).
+    - Une ligne par élève, bouton « Générer un code de récupération » en POST vers `account_pin_recovery_codes_path` (contrôleur de B8).
   - `app/javascript/controllers/classroom/join_code_copy_controller.js`
   - `config/locales/classroom/classrooms.fr.yml`
-- **Dépend de**    : Lot 0. **Aucune dépendance de code à B8** : le formulaire vise une route du Lot 0. Le parcours complet est prouvé au Lot E.
+- **Dépend de**    : Lot 0. **Aucune dépendance de code à B8** : le formulaire vise une route du Lot 0 ; le parcours complet est prouvé au Lot E.
 - **Test associé** :
   - `test/infrastructure/queries/classroom/classroom_overview_query_test.rb`
   - `test/controllers/classroom/classrooms_controller_test.rb`
-    - La page répond 200 avec un exercice assigné. Code en majuscules.
   - `test/integration/classroom/foreign_teacher_access_test.rb`
-    - TR-cadre-4 : 403, et le corps de la réponse ne contient ni le code ni un nom d'élève.
-- **Done quand**   : les critères CL-10 et CL-04 (affichage) sont verts, avec TR-cadre-4.
+    - TR-cadre-4 : 403, sans code ni nom d'élève dans le corps.
+- **Done quand**   : les critères CL-10 et CL-04 (affichage) sont verts.
 - **Écrans de l'ancienne application** :
-  - `⟨ancienne⟩ views/teachers/classrooms/show.html.erb`, `_student_row.html.erb` et `_course_assigned.html.erb`
+  - `⟨ancienne⟩ views/teachers/classrooms/show.html.erb`, `_student_row.html.erb`, `_course_assigned.html.erb`
   - `⟨ancienne⟩ views/classroom/classrooms/show.html.erb` et `_student.html.erb`
   - `⟨ancienne⟩ javascript/controllers/clipboard_controller.js`
   - capture `teams/Lnclass - Classe _ 6ème 1.png`
 - **Fiches d'inventaire** : CL-10, CL-04, ID-15 (émission par l'enseignant).
-- **Non-régression** :
-  - la fiche de classe ne casse plus dès le premier exercice assigné ;
-  - le code s'affiche toujours en majuscules ;
-  - aucune donnée n'est servie à un enseignant hors de la classe.
+- **Non-régression** : la fiche de classe ne casse plus au premier exercice assigné ; aucune donnée servie à un enseignant hors de la classe.
 - **UDR**          : UDR-0027 — Page classe
 
 ---
 
 ## Lot D5 — Assignation, et cours dans la classe
 
-- **Couche**       : domaine (use cases) + infrastructure (query) + delivery + ui
+- **Couche**       : domaine (DTO, use cases) + infrastructure (query) + delivery + ui
 - **Fichiers**     :
+  - `app/domain/dtos/classroom/assignment_input.rb`
+    - `classroom_public_id, assignable_type, assignable_key`. Type dans `Assignable::TYPES`.
   - `app/domain/use_cases/classroom/assign_resource.rb`
-    - Enchaîne `AssignmentDto`, la classe, `AssignPolicy`, puis `assignments.resolve_assignable`. Contenu absent ou non publié : `:not_found`.
-    - Puis `find`, et soit `Assignment#reactivate`, soit une nouvelle assignation, et enfin `save`.
-    - `assigned_by_id` vaut `actor.user_id` : un utilisateur, jamais un profil.
-    - Déjà actif : succès idempotent, avec le détail `already: true` et le message « Exercice déjà assigné. ».
-  - `app/domain/use_cases/classroom/unassign_resource.rb`
-    - `archive` : la ligne n'est jamais supprimée.
+    - DTO ; classe ; `resolve_assignable` (absent ou non publié : `:not_found`) ; `AssignPolicy` ; déjà actif : **`:conflict`** (« Déjà assigné à cette classe ») ; sinon `create` d'une **nouvelle ligne**, `assigned_by_id = actor.user_id` (ADR-0048).
+  - `app/domain/use_cases/classroom/archive_assignment.rb`
+    - `AssignPolicy` ; `archive` : la ligne n'est jamais supprimée.
   - `app/infrastructure/queries/classroom/classroom_course_query.rb`
-    - Renvoie la classe, le cours, et ses fiches publiées avec `assigned` pour chacune et pour le cours.
+    - La classe, le cours, ses fiches publiées, avec l'assignation active éventuelle du cours et de chaque fiche.
   - `app/controllers/classroom/assignments_controller.rb`
-    - `allow_roles :teacher, :team`.
-    - `create` et `destroy` répondent **toujours en Turbo Stream** : `update.turbo_stream.erb` remplace le bouton et ajoute un toast. Jamais de 204.
-    - En HTML, sans Turbo : redirection vers la page d'origine.
+    - `create` et `archive`, **toujours en Turbo Stream** (jamais 204) ; en HTML, redirection vers l'origine.
   - `app/controllers/classroom/classroom_courses_controller.rb`
-    - `show`. Il appelle `UseCases::Classroom::ReadClassroom` (Lot 0), puis la query.
+    - `show`, sous `ReadClassroomPolicy` avec `ClassroomHeaderQuery`.
   - `app/views/classroom/assignments/_toggle.html.erb`
-    - Bouton « Assigner », ou « Assigné » en vert avec l'action « Retirer ».
-    - `id` vaut `dom_id_for(classroom, assignable)`, soit `"assignment_#{classroom.public_id}_#{type}_#{slug}"`.
-    - Le partial est réutilisé par D6 et D7.
+    - « Assigner », ou « Assigné » avec l'action « Retirer ». `id` = `"assignment_#{classroom_public_id}_#{type}_#{key}"`. **Réutilisé par D6 et D7.**
   - `app/views/classroom/assignments/update.turbo_stream.erb`
   - `app/views/classroom/classroom_courses/show.html.erb`
-    - Fiches du cours, avec une bascule par fiche et une pour le cours.
   - `config/locales/classroom/assignments.fr.yml`
-    - « %{name} ajouté à %{classroom}. », « %{name} retiré de %{classroom}. », « Exercice déjà assigné. » et « Exercice retiré de la classe. ».
   - `config/locales/classroom/classroom_courses.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/dtos/classroom/assignment_input_test.rb`
   - `test/domain/use_cases/classroom/assign_resource_test.rb`
-    - Assigner, réassigner une ressource archivée (réactivation), déjà actif, contenu non publié, classe non enseignée.
-  - `test/domain/use_cases/classroom/unassign_resource_test.rb`
+    - Assigner ; déjà actif → `:conflict` ; réassigner après retrait → nouvelle ligne ; non publié ; classe non enseignée ; classe archivée.
+  - `test/domain/use_cases/classroom/archive_assignment_test.rb`
   - `test/infrastructure/queries/classroom/classroom_course_query_test.rb`
   - `test/controllers/classroom/assignments_controller_test.rb`
-    - Le type de contenu est `text/vnd.turbo-stream.html` et le bouton est remplacé. Autre classe : 403. Les trois types de ressource.
+    - `text/vnd.turbo-stream.html` ; autre classe : 403 ; trois types de ressource.
   - `test/controllers/classroom/classroom_courses_controller_test.rb`
 - **Done quand**   : les critères CL-11, CL-16, CL-17, CL-20, AS-18 et AS-19 sont verts.
-- **Écrans de l'ancienne application** :
-  - `⟨ancienne⟩ views/teachers/classrooms/course.html.erb`
-  - `⟨ancienne⟩ views/classroom/classrooms/_classroom_essential.html.erb` et `_classroom_exercise.html.erb`
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teachers/classrooms/course.html.erb`, `⟨ancienne⟩ views/classroom/classrooms/_classroom_essential.html.erb` et `_classroom_exercise.html.erb`
 - **Fiches d'inventaire** : CL-11, CL-16, CL-17, CL-20, AS-18, AS-19. Chantier `classroom-assignment-belongs-to-casses`.
-- **Non-régression** :
-  - pas de `RecordNotUnique` à la réassignation ;
-  - pas de réponse 204 qui laisse le bouton inchangé ;
-  - `assigned_by_id` n'est jamais un identifiant de profil.
+- **Non-régression** : pas de `RecordNotUnique` à la réassignation ; pas de 204 ; `assigned_by_id` n'est jamais un identifiant de profil.
 - **UDR**          : UDR-0028 — Cours dans la classe et bascule d'assignation
 
 ---
 
-## Lot D6 — Fiche dans la classe
+## Lot D6 — Fiche essentielle dans la classe
 
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/classroom_essential_query.rb`
-    - Renvoie la classe, la fiche, et ses exercices publiés avec `assigned` et `questions_count`.
+    - La classe, la fiche, ses exercices publiés avec l'assignation active et `questions_count`, et le taux de réussite de la classe par exercice.
   - `app/controllers/classroom/classroom_essentials_controller.rb`
-    - `show`, via `ReadClassroom`.
   - `app/views/classroom/classroom_essentials/show.html.erb`
     - Rend la bascule de D5 pour chaque exercice.
   - `config/locales/classroom/classroom_essentials.fr.yml`
-- **Dépend de**    : Lot 0 et **Lot D5** (partial `_toggle` et contrôleur d'assignation)
+- **Dépend de**    : Lot 0 et **Lot D5** (partial de bascule, contrôleur d'assignation)
 - **Test associé** :
   - `test/infrastructure/queries/classroom/classroom_essential_query_test.rb`
   - `test/controllers/classroom/classroom_essentials_controller_test.rb`
 - **Done quand**   : les critères CL-12 et AS-20 sont verts.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teachers/classrooms/essential.html.erb`
 - **Fiches d'inventaire** : CL-12, AS-20.
-- **Non-régression** : aucun exercice non publié n'est proposé à l'assignation.
-- **UDR**          : UDR-0029 — Fiche dans la classe
+- **Non-régression** : aucun exercice non publié proposé à l'assignation.
+- **UDR**          : UDR-0029 — Fiche essentielle dans la classe
 
 ---
 
@@ -1677,54 +1689,357 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/course_assignment_targets_query.rb`
-    - Renvoie les classes enseignées par l'enseignant connecté, avec `assigned` pour ce cours.
+    - Les classes actives enseignées par l'enseignant connecté, avec l'assignation active de ce cours.
   - `app/controllers/classroom/course_assignments_controller.rb`
-    - `allow_roles :teacher`. `index`. Un cours non publié renvoie 404.
+    - `allow_roles :teacher`. `index`. Cours non publié : 404.
   - `app/views/classroom/course_assignments/index.html.erb`
-    - Une ligne par classe, avec la bascule de D5.
   - `config/locales/classroom/course_assignments.fr.yml`
 - **Dépend de**    : Lot 0 et **Lot D5**
 - **Test associé** :
   - `test/infrastructure/queries/classroom/course_assignment_targets_query_test.rb`
   - `test/controllers/classroom/course_assignments_controller_test.rb`
-- **Done quand**   : le critère CA-27 est vert : depuis la page cours (lien du Lot B1), l'enseignant assigne le cours à une classe.
-- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/courses/show.html.erb`, dans la partie qui assignait le cours et dont le bouton était inatteignable.
+- **Done quand**   : le critère CA-27 est vert.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/courses/show.html.erb`, partie d'assignation dont le bouton était inatteignable.
 - **Fiches d'inventaire** : CA-27.
-- **Non-régression** : le bouton n'est plus inatteignable (`@teacher_classrooms` n'était jamais affecté).
+- **Non-régression** : le bouton n'est plus inatteignable.
 - **UDR**          : UDR-0030 — Assigner un cours
 
 ---
 
-## Lot D8 — Créer une classe (équipe)
+## Lot D8 — Créer une classe dans un établissement (équipe)
 
-- **Couche**       : domaine (use case) + delivery + ui
+- **Couche**       : domaine (DTO, use case) + delivery + ui
 - **Fichiers**     :
+  - `app/domain/dtos/classroom/classroom_input.rb`
+    - `school_public_id, level_slug, series_slug, name, max_students`. `name` : 15 au plus.
   - `app/domain/use_cases/classroom/create_classroom.rb`
-    - Enchaîne `ManageSchoolPolicy`, le DTO, l'école existante, le niveau, `series_allowed?` et `name_taken?`.
-    - Puis `JoinCode.generate` et `classrooms.create`. En cas de `:conflict` sur `join_code`, le use case régénère le code, jusqu'à **5 essais**, puis renvoie `:conflict`.
-    - Écrit l'audit `classroom_created`.
-  - `app/controllers/classroom/classroom_creations_controller.rb`
-    - `allow_roles :team`. En cas de succès : `classroom_path` (page du Lot D4), avec le toast « Classe créée. Code : KFM37 ».
-  - `app/views/classroom/classroom_creations/new.html.erb`
-  - `app/views/classroom/classroom_creations/_form.html.erb`
-    - Établissement : `select` groupé par DRENA, grâce à `SchoolOptionsQuery#schools_grouped`, sans JS.
-    - Niveau, série et nom.
-  - `config/locales/classroom/classroom_creations.fr.yml`
+    - `ManageClassroomPolicy` ; école active ; niveau ; `lookup.pair?` ; `school_year = SchoolYear.current` ; `classrooms.create` (code unique tiré par le repository). Nom pris dans l'école et l'année : `:conflict`.
+  - `app/controllers/teams/school_classrooms_controller.rb`
+    - `new`, `create` sous `schools/:school_public_id`. Succès : `classroom_path` avec « Classe créée. Code : KFM37 ».
+  - `app/views/teams/school_classrooms/new.html.erb`
+  - `app/views/teams/school_classrooms/_form.html.erb`
+    - Niveau, série (options filtrées par niveau), nom, plafond (80 par défaut).
+  - `config/locales/teams/school_classrooms.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** :
+  - `test/domain/dtos/classroom/classroom_input_test.rb`
   - `test/domain/use_cases/classroom/create_classroom_test.rb`
-    - Doublon de nom, série incompatible, collision de code avec nouvel essai, non-équipe.
-  - `test/controllers/classroom/classroom_creations_controller_test.rb`
+    - Nom pris, série incompatible, école inactive, non-équipe.
+  - `test/controllers/teams/school_classrooms_controller_test.rb`
 - **Done quand**   : les critères CL-01 et CL-04 (génération) sont verts.
-- **Écrans de l'ancienne application** :
-  - `⟨ancienne⟩ views/classroom/classrooms/new.html.erb` et `_form.html.erb`
-  - captures `teams/team-school-id-school.png` et `teams/Lnclass - Configuration Plateforme.png`, cette dernière en référence visuelle
-- **Fiches d'inventaire** : CL-01, CL-04, SC-03.
-- **Non-régression** :
-  - aucun slug n'est passé à `find_by_id` ;
-  - le code ne dépasse pas la colonne ;
-  - un rôle non autorisé reçoit 403, pas 500.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/classroom/classrooms/new.html.erb` et `_form.html.erb` ; capture `teams/team-school-id-school.png`
+- **Fiches d'inventaire** : CL-01, CL-04.
+- **Non-régression** : le code ne dépasse pas la colonne ; un rôle non autorisé reçoit 403, pas 500.
 - **UDR**          : UDR-0031 — Création de classe
+
+---
+
+## Lot R1 — Niveaux (référentiel, équipe)
+
+- **Couche**       : domaine (DTO, use cases) + infrastructure (query) + delivery + ui
+- **Fichiers**     :
+  - `app/domain/dtos/catalog/level_input.rb`
+    - `name` (20 au plus), `code` (à la création seulement), `position`, `cycle`.
+  - `app/domain/use_cases/catalog/create_level.rb`
+    - `ManageTaxonomyPolicy` ; `Level` valide ; `create_level` (nom, code ou position pris : `:conflict`) ; audit `taxonomy.changed`.
+  - `app/domain/use_cases/catalog/update_level.rb`
+    - Le `code` et le slug restent **figés** : un `code` différent dans le DTO renvoie `:invalid`.
+  - `app/domain/use_cases/catalog/delete_level.rb`
+    - Référencé par une série liée, une classe ou un cours : `:conflict` (ADR-0036).
+  - `app/infrastructure/queries/catalog/levels_query.rb`
+    - `[Row(slug, name, code, position, cycle, series_names, classrooms_count, courses_count)]`, par position.
+  - `app/controllers/teams/levels_controller.rb`
+    - `index`, `new`, `create`, `edit`, `update`, `destroy`.
+  - `app/views/teams/levels/index.html.erb`
+  - `app/views/teams/levels/_form.html.erb`
+  - `app/views/teams/levels/new.html.erb`
+  - `app/views/teams/levels/edit.html.erb`
+  - `config/locales/teams/levels.fr.yml`
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/dtos/catalog/level_input_test.rb`
+  - `test/domain/use_cases/catalog/create_level_test.rb`
+  - `test/domain/use_cases/catalog/update_level_test.rb`
+    - Renommer ne change ni le slug ni le code.
+  - `test/domain/use_cases/catalog/delete_level_test.rb`
+  - `test/infrastructure/queries/catalog/levels_query_test.rb`
+  - `test/controllers/teams/levels_controller_test.rb`
+    - Non-équipe : 403 ; suppression d'un niveau référencé : message « Ce niveau est utilisé ».
+- **Done quand**   : les critères CA-16 et CA-18 sont verts.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teams/dashboard/setup/_levels.html.erb`, `⟨ancienne⟩ views/catalog/levels/index.html.erb`, `new.html.erb`, `edit.html.erb`, `_form.html.erb`
+- **Fiches d'inventaire** : CA-16, CA-18, CA-25. CA-17 (page publique de niveau) hors périmètre.
+- **Non-régression** : aucune suppression en cascade ; le code d'un niveau, dont dépendent la génération des classes et les imports, ne change jamais.
+- **UDR**          : UDR-0032 — Gestion des niveaux
+
+---
+
+## Lot R2 — Séries et association aux niveaux
+
+- **Couche**       : domaine (DTO, use cases) + infrastructure (query) + delivery + ui
+- **Fichiers**     :
+  - `app/domain/dtos/catalog/series_input.rb`
+  - `app/domain/use_cases/catalog/create_series.rb`
+  - `app/domain/use_cases/catalog/update_series.rb`
+    - `code` et slug figés.
+  - `app/domain/use_cases/catalog/delete_series.rb`
+    - Référencée par un niveau, une classe ou un cours : `:conflict`.
+  - `app/domain/use_cases/catalog/link_level_series.rb`
+    - `ManageTaxonomyPolicy` ; `link` ; audit `taxonomy.changed`.
+  - `app/domain/use_cases/catalog/unlink_level_series.rb`
+    - Une classe ou un cours utilise le couple : `:conflict`.
+  - `app/infrastructure/queries/catalog/series_query.rb`
+    - `[Row(slug, name, code, level_names, classrooms_count, courses_count)]`, et la matrice niveau × série pour l'écran d'association.
+  - `app/controllers/teams/series_controller.rb`
+    - `index`, `new`, `create`, `edit`, `update`, `destroy`.
+  - `app/controllers/teams/level_series_controller.rb`
+    - `create` et `destroy`, en Turbo Stream (case de la matrice remplacée).
+  - `app/views/teams/series/index.html.erb`
+    - Liste des séries, puis la matrice niveaux × séries avec une case par couple.
+  - `app/views/teams/series/_form.html.erb`
+  - `app/views/teams/series/new.html.erb`
+  - `app/views/teams/series/edit.html.erb`
+  - `app/views/teams/level_series/_cell.html.erb`
+  - `app/views/teams/level_series/update.turbo_stream.erb`
+  - `config/locales/teams/series.fr.yml`
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/dtos/catalog/series_input_test.rb`
+  - `test/domain/use_cases/catalog/create_series_test.rb`
+  - `test/domain/use_cases/catalog/update_series_test.rb`
+  - `test/domain/use_cases/catalog/delete_series_test.rb`
+  - `test/domain/use_cases/catalog/link_level_series_test.rb`
+  - `test/domain/use_cases/catalog/unlink_level_series_test.rb`
+  - `test/infrastructure/queries/catalog/series_query_test.rb`
+  - `test/controllers/teams/series_controller_test.rb`
+  - `test/controllers/teams/level_series_controller_test.rb`
+- **Done quand**   : les critères CA-19 et CA-24 sont verts.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teams/dashboard/setup/_series.html.erb`, `⟨ancienne⟩ views/catalog/series/index.html.erb`, `_form.html.erb`
+- **Fiches d'inventaire** : CA-19, CA-24, CA-25. CA-23 hors périmètre.
+- **Non-régression** : dissocier un couple utilisé est refusé, jamais silencieux.
+- **UDR**          : UDR-0033 — Gestion des séries
+
+---
+
+## Lot R3 — Matières
+
+- **Couche**       : domaine (DTO, use cases) + infrastructure (query) + delivery + ui
+- **Fichiers**     :
+  - `app/domain/dtos/catalog/material_input.rb`
+    - `name` (40), `shortname` (10), `category` ∈ `Material::CATEGORIES`, **obligatoire**.
+  - `app/domain/use_cases/catalog/create_material.rb`
+  - `app/domain/use_cases/catalog/update_material.rb`
+    - Slug figé ; nom, abrégé et catégorie modifiables.
+  - `app/domain/use_cases/catalog/delete_material.rb`
+    - Référencée par un cours ou un profil enseignant : `:conflict`.
+  - `app/infrastructure/queries/catalog/materials_query.rb`
+    - `[Row(slug, name, shortname, category, courses_count, teachers_count)]`, par nom.
+  - `app/controllers/teams/materials_controller.rb`
+  - `app/views/teams/materials/index.html.erb`
+    - Chaque ligne rend `ui_subject_badge(name, category:)` : l'équipe voit la couleur et l'icône de la catégorie.
+  - `app/views/teams/materials/_form.html.erb`
+    - Catégorie en radios « Lettres », « Sciences », « Autre », avec l'aperçu du badge.
+  - `app/views/teams/materials/new.html.erb`
+  - `app/views/teams/materials/edit.html.erb`
+  - `config/locales/teams/materials.fr.yml`
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/dtos/catalog/material_input_test.rb`
+  - `test/domain/use_cases/catalog/create_material_test.rb`
+  - `test/domain/use_cases/catalog/update_material_test.rb`
+    - Changer la catégorie change le ton ; renommer ne le change pas.
+  - `test/domain/use_cases/catalog/delete_material_test.rb`
+  - `test/infrastructure/queries/catalog/materials_query_test.rb`
+  - `test/controllers/teams/materials_controller_test.rb`
+- **Done quand**   : les critères CA-20, CA-22 et CA-26 (catégorie saisie) sont verts.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teams/dashboard/setup/_materials.html.erb`, `⟨ancienne⟩ views/catalog/materials/index.html.erb`, `_form.html.erb`
+- **Fiches d'inventaire** : CA-20, CA-22, CA-25, CA-26. CA-21 hors périmètre.
+- **Non-régression** : une matière sans catégorie est impossible ; la couleur ne se déduit jamais du nom.
+- **UDR**          : UDR-0034 — Gestion des matières
+
+---
+
+## Lot S1 — DRENA : gestion et import
+
+- **Couche**       : domaine (DTO, use cases, importeur) + infrastructure (query) + delivery + ui + schéma
+- **Fichiers**     :
+  - `app/domain/dtos/school/drena_input.rb`
+  - `app/domain/use_cases/school/create_drena.rb`
+    - `ManageSchoolsPolicy` ; `drenas.create` ; audit `school.changed`.
+  - `app/domain/use_cases/school/update_drena.rb`
+  - `app/domain/use_cases/school/delete_drena.rb`
+    - Avec des établissements : `:conflict` (ADR-0036).
+  - `app/domain/use_cases/school/import_drenas.rb`
+    - Importeur `drenas`. `normalize` : accepte aussi un tableau nu de `{ name }` ou `{ nom }` (format de l'ancienne stratégie d'import). `validate` : nom présent, 80 au plus ; clé `parameterize` déjà en base → `skipped_existing` ; répétée dans le fichier → `skipped_duplicate`. `write` : `drenas.insert_many`.
+  - `config/schemas/drenas.v1.json`
+  - `app/infrastructure/queries/school/drenas_query.rb`
+    - `[Row(public_id, name, schools_count, classrooms_count)]`, par nom.
+  - `app/controllers/teams/drenas_controller.rb`
+    - `index`, `new`, `create`, `edit`, `update`, `destroy`. Bouton « Importer des DRENA » vers `new_teams_import_path(kind: "drenas")`.
+  - `app/views/teams/drenas/index.html.erb`
+  - `app/views/teams/drenas/_form.html.erb`
+  - `app/views/teams/drenas/new.html.erb`
+  - `app/views/teams/drenas/edit.html.erb`
+  - `app/views/teams/imports/kinds/_drenas.html.erb`
+  - `config/locales/teams/drenas.fr.yml`
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/dtos/school/drena_input_test.rb`
+  - `test/domain/use_cases/school/create_drena_test.rb`
+  - `test/domain/use_cases/school/update_drena_test.rb`
+  - `test/domain/use_cases/school/delete_drena_test.rb`
+  - `test/domain/use_cases/school/import_drenas_test.rb`
+    - Contrat d'importeur ; format hérité ; doublons ; erreur localisée (`drenas[4].name`).
+  - `test/infrastructure/queries/school/drenas_query_test.rb`
+  - `test/controllers/teams/drenas_controller_test.rb`
+  - `test/performance/school/import_drenas_performance_test.rb`
+    - 500 DRENA en moins de 5 s.
+- **Done quand**   : les critères SC-01 et SC-02 sont verts ; la production démarre **sans aucune DRENA** et l'équipe les crée ou les importe.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/teams/dashboard/setup/_drenas.html.erb`, `⟨ancienne⟩ views/catalog/drenas/index.html.erb`, `_form.html.erb`, `⟨ancienne⟩ views/components/_import_form.html.erb` ; `⟨ancienne⟩ domain/…/drena_import_strategy.rb` pour les clés acceptées.
+- **Fiches d'inventaire** : SC-01, SC-02, TR-28.
+- **Non-régression** : aucune suppression en cascade ; un import partiel est impossible.
+- **UDR**          : UDR-0035 — Gestion des DRENA
+
+---
+
+## Lot S2 — Établissements : création avec classes, liste nationale, fiche
+
+- **Couche**       : domaine (DTO, use cases) + infrastructure (queries) + delivery + ui
+- **Fichiers**     :
+  - `app/domain/dtos/school/school_input.rb`
+    - `drena_public_id, name` (150), `short_name` (15), `sector` ∈ `SECTORS`, `cycle` ∈ `CYCLES` (proposé par `School.cycle_for(name:)`, modifiable à la création seulement).
+  - `app/domain/use_cases/school/create_school.rb`
+    - `ManageSchoolsPolicy` ; DRENA ; dans **une transaction** : `schools.create` (nom pris dans la DRENA : `:conflict`), puis `DefaultClassroomPlan.rows_for(school:, lookup: taxonomy.lookup)`, puis `classrooms.insert_generated` pour `SchoolYear.current`. Audit `school.changed`. Renvoie l'école et le nombre de classes créées. **Aucun élève de démonstration.**
+  - `app/domain/use_cases/school/update_school.rb`
+    - Nom, abrégé, DRENA, secteur. `cycle` n'est plus modifiable : il ne régénère pas les classes.
+  - `app/domain/use_cases/school/deactivate_school.rb`
+    - `status = inactive` : l'école disparaît de l'inscription enseignant et de la création de classe ; rien n'est supprimé.
+  - `app/domain/use_cases/school/delete_school.rb`
+    - `delete_if_unreferenced` ; référencée (élève, enseignant, assignation) : `:conflict` avec « Désactivez plutôt cet établissement » (ADR-0036).
+  - `app/infrastructure/queries/school/schools_query.rb`
+    - Liste nationale (SC-04) : filtres DRENA, secteur, cycle, statut, recherche sur le nom ; pagination par `page` (50 par page, `LIMIT`/`OFFSET`, compteur total) ; `[Row(public_id, name, short_name, drena_name, sector, cycle, status, classrooms_count, teachers_count)]`.
+  - `app/infrastructure/queries/school/school_detail_query.rb`
+    - Fiche (SC-05) : l'école, ses classes de l'année courante groupées par niveau (nom, code affiché, effectif, enseignants), ses enseignants.
+  - `app/controllers/teams/schools_controller.rb`
+    - `index`, `show`, `new`, `create`, `edit`, `update`, `deactivate`, `destroy`. Boutons « Importer des établissements » (`new_teams_import_path(kind: "schools")`) sur l'index et « Ajouter une classe » (`new_school_classroom_path`, D8) sur la fiche.
+  - `app/views/teams/schools/index.html.erb`
+  - `app/views/teams/schools/_filters.html.erb`
+  - `app/views/teams/schools/_school_row.html.erb`
+  - `app/views/teams/schools/show.html.erb`
+  - `app/views/teams/schools/_classroom_group.html.erb`
+  - `app/views/teams/schools/_form.html.erb`
+  - `app/views/teams/schools/new.html.erb`
+  - `app/views/teams/schools/edit.html.erb`
+  - `config/locales/teams/schools.fr.yml`
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/dtos/school/school_input_test.rb`
+  - `test/domain/use_cases/school/create_school_test.rb`
+    - Lycée public : 71 classes avec le référentiel de développement ; collège : 28 ; lycée privé ; codes d'adhésion tous distincts ; échec de génération → aucune école créée.
+  - `test/domain/use_cases/school/update_school_test.rb`
+  - `test/domain/use_cases/school/deactivate_school_test.rb`
+  - `test/domain/use_cases/school/delete_school_test.rb`
+  - `test/infrastructure/queries/school/schools_query_test.rb`
+  - `test/infrastructure/queries/school/school_detail_query_test.rb`
+  - `test/controllers/teams/schools_controller_test.rb`
+- **Done quand**   : les critères SC-03, SC-04, SC-05, SC-06, SC-07 et SC-09 sont verts ; l'entrée « Établissements » de la navigation équipe mène à la liste.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/index.html.erb`, `show.html.erb`, `_form.html.erb` ; `⟨ancienne⟩ domain/…/generate_default_classrooms.rb` (table des classes) ; capture `teams/team-school-id-school.png`
+- **Fiches d'inventaire** : SC-03 à SC-07, SC-09. CL-01 (génération).
+- **Non-régression** : aucun élève de démonstration créé ; aucune école sans ses classes ; supprimer une école utilisée est refusé.
+- **UDR**          : UDR-0036 — Établissements
+
+---
+
+## Lot S3 — Import des établissements, avec génération des classes
+
+- **Couche**       : domaine (importeur) + ui (aide) + schéma + performance
+- **Fichiers**     :
+  - `app/domain/use_cases/school/import_schools.rb`
+    - Importeur `schools`.
+    - `normalize` : accepte l'enveloppe `lnclass.schools` v1 **et** un tableau nu au format des fichiers `.Business/DRENAS/*.json` de l'ancienne application : `name` ou `nom`, `schoolsigle` ou `sigle` → `short_name`, `schooltype` (`public` → `public`, `privée`/`privé`/`private` → `private`), `schoolstatus` (`active` → `active`, sinon `inactive`).
+    - `validate` : DRENA prise dans la portée (`scope.drena_public_id`) ou dans l'élément (`drena`, résolue par `ids_by_key`), sinon `unknown_drena` ; `cycle` explicite ou déduit par `School.cycle_for` ; nom présent (150) ; `(drena, nom)` déjà en base → `skipped_existing`, répété → `skipped_duplicate`. Construit le plan des classes par `DefaultClassroomPlan` et le compte dans la progression.
+    - `write` : `schools.insert_many`, puis `classrooms.insert_generated` pour toutes les écoles, par tranches de 1 000. Compteurs `schools_created`, `classrooms_created`.
+  - `config/schemas/schools.v1.json`
+  - `app/views/teams/imports/kinds/_schools.html.erb`
+    - Aide, exemple, et sélecteur « DRENA de rattachement » (facultatif si chaque élément porte sa DRENA), alimenté par `SchoolOptionsQuery#drenas`.
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/use_cases/school/import_schools_test.rb`
+    - Contrat d'importeur ; format hérité (un extrait réel de 5 écoles) ; doublons ; DRENA inconnue ; « Collège » → `first` ; aucune ligne écrite si une seule erreur.
+  - `test/performance/school/import_schools_performance_test.rb`
+    - **500 écoles** (dont 44 % de collèges, mélange public et privé) → environ **35 000 classes**, validation et écriture en **moins de 120 s**, mémoire du processus mesurée et consignée.
+- **Done quand**   : le critère SC-08 est vert, et un fichier de l'ancienne application (`schools_*.json`) s'importe tel quel, classes comprises.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/_import_form.html.erb` ; `⟨ancienne⟩ domain/…/school_import_strategy.rb` pour les clés acceptées.
+- **Fiches d'inventaire** : SC-08, SC-09, TR-28.
+- **Non-régression** : import tout ou rien ; aucun élève de démonstration ; codes d'adhésion uniques.
+- **UDR**          : UDR-0037 — Import des établissements
+
+---
+
+## Lot I1 — Import de cours complets (`course_tree`)
+
+- **Couche**       : domaine (importeur) + ui (aide) + schéma + performance
+- **Fichiers**     :
+  - `app/domain/use_cases/catalog/import_course_tree.rb`
+    - Format `lnclass.course-tree` v1 (ADR-0039) : `courses[]` → `essentials[]` → `exercises[]` → `questions[]` → `answers[]`. Pas de clé `status` : **tout arrive en brouillon**.
+    - `validate` : niveau, série et matière résolus par `TaxonomyLookup` (`unknown_level`…), couple niveau–série permis ; fiches par `EssentialNode`, exercices par `ExerciseNode` ; clé `(nom, niveau, matière, série)` déjà en base → `skipped_existing`, répétée → `skipped_duplicate`. Slugs précalculés par `Slug.unique`, `public_id` des exercices tirés. Produit un `ContentTree`.
+    - `write` : `writer.write(tree:, author_id:, at:)`.
+  - `config/schemas/course_tree.v1.json`
+  - `app/views/teams/imports/kinds/_course_tree.html.erb`
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/use_cases/catalog/import_course_tree_test.rb`
+    - Contrat d'importeur ; matière « Physique Chimie » résolue ; erreur localisée (`courses[3].essentials[1].exercises[0].questions[2]`) ; doublons ; tout en brouillon.
+  - `test/performance/catalog/import_course_tree_performance_test.rb`
+    - **200 cours complets** (6 fiches, 3 exercices, 5 questions, 4 propositions) en **moins de 120 s**.
+- **Done quand**   : le critère CA-08 est vert.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/components/_import_form.html.erb` ; `⟨ancienne⟩ domain/…/course_import_strategy.rb`
+- **Fiches d'inventaire** : CA-08, TR-28.
+- **Non-régression** : aucun contenu importé n'est publié d'office ; un nom de matière inconnu est une erreur de ligne, jamais une création silencieuse.
+- **UDR**          : UDR-0038 — Import de cours
+
+---
+
+## Lot I2 — Import de fiches essentielles dans un cours (`essential_tree`)
+
+- **Couche**       : domaine (importeur) + ui (aide) + schéma + performance
+- **Fichiers**     :
+  - `app/domain/use_cases/catalog/import_essential_tree.rb`
+    - Format `lnclass.essential-tree` v1 : `essentials[]` → `exercises[]` → … Portée obligatoire `course_slug` (cours inconnu : `unknown_parent`). Positions à la suite de `next_position`. Nom déjà présent dans le cours → `skipped_existing`. Tout en brouillon.
+  - `config/schemas/essential_tree.v1.json`
+  - `app/views/teams/imports/kinds/_essential_tree.html.erb`
+    - Rappelle le cours cible (portée), non modifiable.
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/use_cases/catalog/import_essential_tree_test.rb`
+  - `test/performance/catalog/import_essential_tree_performance_test.rb`
+    - 1 000 fiches (3 exercices, 5 questions) en moins de 120 s.
+- **Done quand**   : le critère CA-15 est vert : depuis la page d'un cours, l'équipe importe ses fiches essentielles.
+- **Écrans de l'ancienne application** : `⟨ancienne⟩ views/components/_import_form.html.erb`
+- **Fiches d'inventaire** : CA-15, TR-28.
+- **Non-régression** : une fiche importée ne s'insère jamais dans un autre cours que celui de la portée.
+- **UDR**          : UDR-0039 — Import de fiches essentielles
+
+---
+
+## Lot I3 — Import d'exercices dans une fiche essentielle (`exercise_tree`)
+
+- **Couche**       : domaine (importeur) + ui (aide) + schéma + performance
+- **Fichiers**     :
+  - `app/domain/use_cases/assessment/import_exercise_tree.rb`
+    - Format `lnclass.exercise-tree` v1 : `exercises[]` → `questions[]` → `answers[]`. Portée obligatoire `essential_slug`. Titre déjà présent dans la fiche → `skipped_existing`. Règles de cohérence de l'ADR-0039 par `ExerciseNode`. Tout en brouillon.
+  - `config/schemas/exercise_tree.v1.json`
+  - `app/views/teams/imports/kinds/_exercise_tree.html.erb`
+- **Dépend de**    : Lot 0
+- **Test associé** :
+  - `test/domain/use_cases/assessment/import_exercise_tree_test.rb`
+    - Quatre types de question, valides et invalides, avec leur chemin.
+  - `test/performance/assessment/import_exercise_tree_performance_test.rb`
+    - 2 000 exercices de 10 questions en moins de 120 s.
+- **Done quand**   : le critère d'import d'exercices (remplaçant d'AS-06) est vert.
+- **Écrans de l'ancienne application** : aucun (AS-06 était un générateur, écarté).
+- **Fiches d'inventaire** : AS-06 (écartée, remplacée), TR-28.
+- **Non-régression** : aucune question mal formée n'entre en base.
+- **UDR**          : UDR-0040 — Import d'exercices
 
 ---
 
@@ -1733,121 +2048,133 @@ Chaque lot vertical :
 - **Couche**       : tests système (Chrome headless) + recette
 - **Fichiers**     :
   - `test/system/boucle_pedagogique_test.rb`
-    - Le chemin nominal du PRD §3, sur une base vierge avec seed.
-    - L'équipe se connecte avec son TOTP, crée un cours, une fiche et un exercice de 2 questions, les publie, puis crée une classe et relève le code.
-    - L'enseignant s'inscrit, déclare sa classe, ouvre la classe, le cours et la fiche, puis assigne l'exercice.
-    - L'élève ouvre `/c/<code>`, s'inscrit, voit l'exercice sur son accueil, répond aux 2 questions, et voit « Félicitations ! » et le badge « Or ».
-    - L'enseignant ouvre le résultat de l'élève.
-    - Le parcours est rejoué en viewport mobile pour la partie élève.
+    - Base vierge **sans seed de contenu** (seul `identity.rb`). L'équipe accepte l'invitation d'amorçage, enrôle son TOTP, crée le référentiel (niveau Tle `tle`, série D `d`, liés ; matière SVT, catégorie science), une DRENA et un lycée public (6 classes « Tle D » générées, les autres codes du plan étant absents du référentiel), crée un cours, une fiche essentielle et un exercice de 2 questions, et les publie.
+    - L'enseignant s'inscrit, déclare une classe générée, ouvre la classe, le cours et la fiche, assigne l'exercice.
+    - L'élève ouvre `/c/<code>`, s'inscrit, voit l'exercice sur son accueil, répond aux 2 questions ; la session se clôt seule ; il voit « Félicitations ! », 20/20 et le badge « Diamant ».
+    - L'enseignant ouvre le résultat de l'élève : score et note, sans propositions correctes.
+    - Partie élève rejouée en viewport mobile.
+  - `test/system/imports_end_to_end_test.rb`
+    - L'équipe importe un fichier d'écoles au format de l'ancienne application, puis un `course_tree` ; elle suit la progression jusqu'à « Terminé » ; les classes et le contenu en brouillon apparaissent dans leurs écrans ; un fichier erroné affiche ses chemins d'erreur et n'écrit rien.
   - `test/system/role_homes_test.rb`
-    - Pour chaque rôle, une connexion réelle, puis l'accueil qui s'ouvre sans erreur, et chaque destination active de la navigation ouverte (chantier `queries-constantes-orm-disparues`).
+    - Pour chaque rôle : connexion réelle, accueil sans erreur, chaque destination active de la navigation ouverte (chantier `queries-constantes-orm-disparues`).
   - `test/system/error_paths_test.rb`
-    - Joué **par un rôle distinct de l'auteur** : code de classe invalide, réponse vide, enseignant hors de la classe, PIN oublié puis code émis par l'enseignant puis nouveau PIN, team sans second facteur.
-- **Dépend de**    : tous les lots (0, A1 à A4, B1 à B8, C1 à C3, D1 à D8)
-- **Test associé** : les trois fichiers ci-dessus. `bin/ci` complet.
+    - Joué **par un rôle distinct de l'auteur** : code de classe invalide, classe pleine, réponse vide, enseignant hors de sa classe, PIN oublié puis code émis par l'enseignant puis nouveau PIN, team sans second facteur.
+- **Dépend de**    : tous les lots (0, A1 à A4, B1 à B8, C1 à C3, D1 à D8, R1 à R3, S1 à S3, I1 à I3)
+- **Test associé** : les quatre fichiers ci-dessus ; `bin/ci` complet, étape de performance comprise.
 - **Done quand**   :
-  - les trois tests système sont verts en local et en CI ;
-  - la recette est faite sur `Staging` par un rôle distinct (parcours nominal et un chemin d'erreur), et son compte rendu est dans `journal.md` ;
+  - les quatre tests système sont verts en local et en CI ;
+  - la recette est faite sur `Staging` par un rôle distinct (parcours nominal, un chemin d'erreur, un import réel de 500 écoles chronométré), et son compte rendu est dans `journal.md` ;
   - toutes les portes de sortie ci-dessous sont cochées.
-- **Fiches d'inventaire** : TR-04, TR-05, TR-09 (tests système), et les critères de porte V1 du PRD cadre §5.
+- **Fiches d'inventaire** : TR-04, TR-05, TR-09 (tests système), TR-28, et les critères de porte V1 du PRD cadre §5.
 
 ---
+
 ## Vérification de collision
 
-> Deux lots ne listent jamais le même fichier. Pour le vérifier, la commande de [`plan-lots`](../../../.claude/skills/plan-lots/SKILL.md) doit renvoyer **une sortie vide**, sur tout ce qui précède cette section :
+> Deux lots ne listent jamais le même fichier. La commande de [`plan-lots`](../../../.claude/skills/plan-lots/SKILL.md) doit renvoyer **une sortie vide** sur tout ce qui précède cette section :
 >
 > ```bash
 > awk '/^## Vérification de collision/{exit} 1' docs/chantiers/boucle-pedagogique/plan.md \
 >   | grep -oE '(app|test|config|db|lib)/[A-Za-z0-9_/.-]+\.(rb|erb|yml|js)' | sort | uniq -d
 > ```
 >
-> Vérifiée à la rédaction : sortie vide.
+> Vérifiée à la rédaction : sortie vide. (Les schémas `config/schemas/*.json` sont captés sous la forme `….v1.js` : chacun reste unique.)
 
 **Fichiers qui auraient été partagés entre plusieurs lots, et que le Lot 0 a donc repris**
 
 | Fichier ou famille | Lots qui en ont besoin | Propriétaire |
 |---|---|---|
-| `config/routes.rb` et `config/routes/{identity,school,classroom,catalog,assessment,communication}.rb` | tous : 4 lots dans `catalog`, 8 dans `classroom` | **Lot 0**, avec toutes les routes V1 dessinées |
-| `app/controllers/application_controller.rb`, `app/controllers/authenticated_controller.rb`, `app/controllers/concerns/*` | tous | **Lot 0** |
-| `app/javascript/controllers/index.js` (enregistrement Stimulus) | A1, B5, C3, D1, D2, D4 | **Lot 0** (chargement par motif : plus aucun manifeste à éditer) |
-| `app/javascript/controllers/math_controller.js` (KaTeX) | B1, B3, C1, C2, C3 | **Lot 0** |
-| Tous les ports, toutes les entités, toutes les policies, tous les DTO, `Result` | tous | **Lot 0** |
-| Tous les repositories et adaptateurs | par exemple `AssignmentRepository` : A2, A3, B3, C1, C2, D4, D5, D6, D7 | **Lot 0** |
-| `app/domain/use_cases/classroom/read_classroom.rb` | D4, D5, D6, D7 | **Lot 0** |
-| `app/domain/use_cases/identity/issue_pin_recovery_code.rb` | B8, D4 (via le contrôleur de B8) | **Lot 0** |
-| `app/infrastructure/queries/catalog/referential_options_query.rb` | B2, D1, D8 | **Lot 0** |
-| `app/infrastructure/queries/school/school_options_query.rb` | D1, D8 | **Lot 0** |
-| `app/helpers/catalog/materials_helper.rb` (CA-26) | A2, A3, B1, B3, C1, D3 | **Lot 0** |
-| `app/helpers/assessment/badges_helper.rb` | A2, B3, C1, C3 | **Lot 0** |
+| `config/routes.rb` et les 7 fichiers de `config/routes/` | tous : 7 lots dans `classroom`, 16 dans `teams` | **Lot 0**, toutes les routes V1 dessinées |
+| `ApplicationController`, `AuthenticatedController`, `Teams::BaseController`, concerns | tous | **Lot 0** |
+| Enregistrement Stimulus, contrôleur `math` (KaTeX) | A1, B1, B3, B5, C1 à C3, D1, D2, D4 | **Lot 0** (chargement par motif : aucun manifeste à éditer) |
+| Ports, entités, policies, DTO du socle, `Shared::Result`, `TransactionPort` | tous | **Lot 0** |
+| Tous les repositories | par exemple `AssignmentRepository` : A2, A3, B3, C2, D4 à D7 ; `ClassroomRepository#insert_generated` : S2, S3 | **Lot 0** |
+| `DefaultClassroomPlan`, `TaxonomyLookup`, `Slug`, `EssentialNode`, `ExerciseNode`, `ContentTree` | S2 et S3 ; I1 à I3 ; B5 | **Lot 0** |
+| Moteur d'import : `StartImport`, `RunImport`, contrat `Importer`, job, `Teams::ImportsController`, écran de suivi, `import_reports` | S1, S3, I1, I2, I3 | **Lot 0** ; chaque lot n'ajoute que son importeur, son schéma et son partial `kinds/_<kind>` |
+| `ContentTreeWriter` (écriture en masse du contenu) | I1, I2, I3 | **Lot 0** |
+| `ReferentialOptionsQuery`, `SchoolOptionsQuery`, `ClassroomHeaderQuery`, `ShellUserQuery` | voir 0.8 | **Lot 0** |
+| `badges_helper`, `content_status_helper` | A2, B1 à B5, C1, C3 | **Lot 0** |
 | `config/locales/fr.yml` (clés communes) | tous | **Lot 0** |
-| `test/test_helper.rb`, `test/application_system_test_case.rb`, `test/support/**` | tous | **Lot 0** |
-| `test/support/factories/<ctx>.rb` | plusieurs lots par contexte | **Lot 0**, fabriques **complètes**. Un lot écrit ses assemblages particuliers dans son propre test. |
-| `db/migrate/*`, `db/schema.rb`, `db/seeds.rb`, `db/seeds/**` | tous | **Lot 0** |
-| `app/views/classroom/assignments/_toggle.html.erb` | D5, D6, D7 | **D5**. D6 et D7 en dépendent, et passent donc en vague 2. |
-| `app/views/homepage/index.html.erb` et `test/controllers/homepage_controller_test.rb` (fichiers V0) | A4 (contenu), Lot 0 (redirection) | **A4**. La redirection du Lot 0 est testée dans `test/controllers/homepage_redirection_test.rb`. |
-| `app/assets/stylesheets/application.tailwind.css` (Lot 0c) | Lot 0 (import KaTeX) | **Lot 0c**. Le Lot 0 n'y ajoute qu'une ligne, après le merge de 0c. |
+| Support de test : `test_helper`, fabriques complètes, `import_documents`, `importer_contract`, `fake_importer` | tous ; les cinq lots d'import | **Lot 0** |
+| Migrations, `db/schema.rb`, seeds | tous | **Lot 0** |
+| `config/ci.rb` (étape de performance) | S1, S3, I1 à I3 | **Lot 0** |
+| Partial de bascule d'assignation (D5) | D5, D6, D7 | **D5** ; D6 et D7 en dépendent, et passent en vague 3 |
+| `app/views/homepage/index.html.erb` et son test (fichiers V0) | A4 (contenu), Lot 0 (redirection) | **A4** ; la redirection du Lot 0 est testée à part |
+| Feuille de style Tailwind (Lot 0c) | Lot 0 (import KaTeX) | **Lot 0c** ; le Lot 0 n'y ajoute qu'une ligne, après le merge de 0c |
 | `docs/decisions/udr/README.md` | chaque lot, pour son UDR | **Orchestrateur**, au merge de chaque lot |
-| `docs/chantiers/boucle-pedagogique/journal.md` | tous | **Orchestrateur**, qui reporte les dérapages signalés par chaque lot |
+| `docs/chantiers/boucle-pedagogique/journal.md` | tous | **Orchestrateur** |
 
 ## Vagues de dispatch
 
 ```
-Vague 0 : Lot 0c (design)                                  → déjà lancé, autre agent
-Vague 1 : Lot 0                                            → 1 agent (orchestrateur), séquentiel 0.1 → 0.10
-Vague 2 : A1 ‖ A2 ‖ A3 ‖ A4 ‖ B1 ‖ B2 ‖ B3 ‖ B4 ‖ B5 ‖ B6 ‖ B7 ‖ B8
-          ‖ C1 ‖ C2 ‖ C3 ‖ D1 ‖ D2 ‖ D3 ‖ D4 ‖ D5 ‖ D8     → 21 agents, worktrees isolés
-Vague 3 : D6 ‖ D7 (dépendent de D5)                         → 2 agents
-Vague 4 : Lot E (dépend de tous)                            → 1 agent, rôle distinct des auteurs
+Vague 0 : Lot 0c (design)                                   → déjà lancé, autre agent
+Vague 1 : Lot 0                                             → 1 agent (orchestrateur), séquentiel 0.1 → 0.11
+Vague 2 : A1 ‖ A2 ‖ A3 ‖ A4
+          ‖ B1 ‖ B2 ‖ B3 ‖ B4 ‖ B5 ‖ B6 ‖ B7 ‖ B8
+          ‖ C1 ‖ C2 ‖ C3
+          ‖ D1 ‖ D2 ‖ D3 ‖ D4 ‖ D5 ‖ D8
+          ‖ R1 ‖ R2 ‖ R3 ‖ S1 ‖ S2 ‖ S3 ‖ I1 ‖ I2 ‖ I3      → 30 agents, worktrees isolés
+Vague 3 : D6 ‖ D7 (dépendent de D5)                          → 2 agents
+Vague 4 : Lot E (dépend de tous)                             → 1 agent, rôle distinct des auteurs
 ```
 
 Chaque lot parallèle travaille dans son propre worktree, créé depuis la branche de chantier **une fois le Lot 0 mergé** :
 
 ```bash
-git worktree add ../lnclass-boucle-pedagogique-lot-a1 -b feature/boucle-pedagogique-lot-a1 feature/boucle-pedagogique
+git worktree add ../lnclass-boucle-pedagogique-lot-s3 -b feature/boucle-pedagogique-lot-s3 feature/boucle-pedagogique
 ```
 
-**Ordre de merge dans `feature/boucle-pedagogique`.** Les lots se mergent dans l'ordre où ils finissent. Les fichiers sont disjoints, donc il n'y a jamais de conflit textuel. D5 doit être mergé avant que D6 et D7 ne partent. Après chaque merge, l'orchestrateur lance `bin/ci` sur la branche de chantier : un lot qui casse la branche est retiré, pas corrigé sur place.
+**Ordre de merge.** Dans l'ordre où les lots finissent : les fichiers sont disjoints, il n'y a jamais de conflit textuel. D5 est mergé avant le départ de D6 et D7. Après chaque merge, l'orchestrateur lance `bin/ci` sur la branche de chantier : un lot qui la casse est retiré, pas corrigé sur place.
 
 **Si l'orchestrateur doit limiter le parallélisme**, la vague 2 se découpe sans changer le graphe :
-- **d'abord le chemin critique** du parcours bout en bout : B2, B4, B5, D8, D1, D2, D4, D5, A1, A2, C1, C2, C3 ;
-- **ensuite le reste** : A3, A4, B1, B3, B6, B7, B8, D3.
+- **d'abord le chemin critique** du parcours bout en bout : R1, R2, R3, S1, S2, B2, B4, B5, D1, D2, D4, D5, A1, A2, C1, C2, C3, B7 ;
+- **ensuite** les imports : S3, I1, I2, I3 ;
+- **enfin le reste** : A3, A4, B1, B3, B6, B8, D3, D8.
 
 ## Traçabilité — feature V1 → lot
 
-Source : [feuille de route §6](../refonte-application/feuille-de-route.md#6-traçabilité--chaque-feature-de-lexistant-a-une-vague), colonne « Vague » = V1. Les critères correspondants sont dans le [PRD §4](prd.md#4-critères-dacceptation).
+Source : [feuille de route §6](../refonte-application/feuille-de-route.md#6-traçabilité--chaque-feature-de-lexistant-a-une-vague), colonne « Vague » = V1, **élargie par le porteur le 2026-09-25** (DRENA, établissements, référentiel, imports). Critères : [PRD §4](prd.md#4-critères-dacceptation).
 
 | ID | Feature | Lot(s) |
 |---|---|---|
-| ID-01 | S'inscrire comme élève | A1 |
+| ID-01 | S'inscrire comme élève (par le code de classe) | A1 |
 | ID-02 | S'inscrire par `/c/<code>` | A1 |
 | ID-03 | S'inscrire comme enseignant | D1 |
-| ID-04 | *(écartée)* Remplacée par le seed et l'invitation (F-16) | 0 (seed), B7 |
-| ID-07 | Vérifier un code en direct | A1 |
+| ID-04 | *(écartée)* Remplacée par l'invitation (F-16) et l'invitation d'amorçage | 0 (seed), B7 |
+| ID-07 | Vérifier un code | A1 (aperçu de `/c/<code>`) |
 | ID-08 | DRENA → établissements (la cascade vers les classes est écartée) | D1 |
 | ID-12 | Se connecter | 0 |
 | ID-13 | Être dirigé vers son espace | 0 |
 | ID-14 | Se déconnecter | 0 |
-| ID-15 | Récupérer un PIN oublié | 0 (use cases, saisie du code), B8 (émission par l'équipe), D4 (émission par l'enseignant) |
+| ID-15 | Récupérer un PIN oublié | 0 (saisie du code), B8 (émission), D4 (bouton de l'enseignant) |
 | ID-16 | Restreindre chaque espace à son rôle | 0 |
 | ID-28 | Normaliser et valider le numéro | 0 |
 | ID-29 | Identifiant public | 0 |
-| F-07 | TOTP équipe | 0 |
-| CO-09 | Toasts | 0c (composant), 0 (branchement du flash) |
-| SC-01 | DRENA (seed, lecture) | 0 |
-| SC-03 | Établissements (seed) | 0 |
+| F-07 | TOTP équipe | 0 (enrôlement, vérification), B8 (réinitialisation) |
+| F-16 | Invitation de l'équipe | B7 |
+| CO-09 | Toasts | 0c (composant), 0 (flash) |
+| SC-01 | Gérer les DRENA | S1 |
+| SC-02 | Importer des DRENA | S1 (importeur), 0 (moteur) |
+| SC-03 | Créer un établissement | S2 |
+| SC-04 | Liste nationale des établissements | S2 |
+| SC-05 | Consulter un établissement | S2 |
+| SC-06 | Modifier un établissement | S2 |
+| SC-07 | Supprimer un établissement (ou le désactiver) | S2 |
+| SC-08 | Importer des établissements | S3 (importeur), 0 (moteur) |
+| SC-09 | Générer les classes par défaut | 0 (`DefaultClassroomPlan`, `insert_generated`), S2 (création unitaire), S3 (import) |
 | SC-26 | API des établissements d'une DRENA | D1 |
 | SC-27 | Rattachement à l'école à l'inscription | D1 |
-| CL-01 | Créer une classe (équipe) | D8 |
-| CL-04 | Générer et afficher le code | 0 (`JoinCode`), D8 (génération), D4 (affichage) |
+| CL-01 | Créer une classe | D8 (unitaire), S2 et S3 (génération) |
+| CL-04 | Générer et afficher le code | 0 (`JoinCode`), D8 et S2 (génération), D4 (affichage) |
 | CL-06 | Rejoindre par `/c/<code>` | A1 |
 | CL-07 | S'inscrire avec un code | A1 |
-| CL-08 | API de vérification (la liste des classes est écartée) | A1 |
+| CL-08 | Vérification du code (la liste des classes est écartée) | A1 |
 | CL-09 | Déclarer ses classes | D2 |
 | CL-10 | Fiche d'une classe | D4 (enseignant, équipe), A3 (volet élève) |
 | CL-11 | Cours dans la classe | D5 |
-| CL-12 | Fiche dans la classe | D6 |
+| CL-12 | Fiche essentielle dans la classe | D6 |
 | CL-16 | Assigner / retirer un cours | D5 |
-| CL-17 | Assigner / retirer une fiche | D5 |
+| CL-17 | Assigner / retirer une fiche essentielle | D5 |
 | CL-20 | Assigner / retirer un exercice | D5 (bascule), D6 (écran) |
 | CL-22 | Ma classe (élève) | A3 |
 | CL-23 | Accueil élève | A2 |
@@ -1856,85 +2183,91 @@ Source : [feuille de route §6](../refonte-application/feuille-de-route.md#6-tra
 | CA-05 | Créer un cours | B2 |
 | CA-06 | Modifier un cours | B2 |
 | CA-07 | Archiver un cours | B2 |
-| CA-10 | Fiches d'un cours | B1 |
-| CA-11 | Fiche et progression | B3 |
-| CA-12 | Créer une fiche | B4 |
-| CA-13 | Modifier une fiche | B4 |
-| CA-14 | Archiver une fiche | B4 |
-| CA-16 | Niveaux (seed) | 0 |
-| CA-20 | Matières (seed) | 0 |
-| CA-26 | Icône et couleur de la matière | 0 (helper), B1 (écran de référence) |
+| CA-08 | Import de cours en masse | I1 (importeur), B1 (bouton), 0 (moteur) |
+| CA-10 | Fiches essentielles d'un cours | B1 |
+| CA-11 | Fiche essentielle et progression | B3 |
+| CA-12 | Créer une fiche essentielle | B4 |
+| CA-13 | Modifier une fiche essentielle | B4 |
+| CA-14 | Archiver une fiche essentielle | B4 |
+| CA-15 | Importer des fiches essentielles dans un cours | I2 (importeur), B1 (bouton), 0 (moteur) |
+| CA-16 | Lister les niveaux | R1 |
+| CA-18 | Gérer les niveaux | R1 |
+| CA-19 | Associer des séries à un niveau | R2 |
+| CA-20 | Lister les matières | R3 |
+| CA-22 | Gérer les matières | R3 |
+| CA-24 | Gérer les séries | R2 |
+| CA-25 | Référentiel depuis l'accueil équipe (« Setup ») | B6 (section), R1 à R3, S1 (écrans) |
+| CA-26 | Couleur et icône de la matière par catégorie | 0 (colonne et contrainte), 0c (`ui_subject_badge`), R3 (saisie), B1 (écran de référence) |
 | CA-27 | Assigner un cours depuis sa page | B1 (lien), D7 (écran) |
 | AS-02 | Détail d'un exercice | C1 |
 | AS-03 | Créer un exercice | B5 |
 | AS-04 | Modifier un exercice | B5 |
 | AS-05 | Archiver un exercice | B5 |
+| AS-06 | *(écartée)* Remplacée par l'import d'exercices | I3 (importeur), B3 (bouton), 0 (moteur) |
 | AS-07 | Démarrer une session | C2 |
 | AS-08 | Reprendre | C2 |
 | AS-09 | Répondre une fois | C2 |
 | AS-10 | Correction immédiate | C2 |
-| AS-11 | Badge à la clôture | C3 |
+| AS-11 | Clôture automatique et badge | C2 (clôture), C3 (affichage) |
 | AS-12 | Résultat | C3 |
-| AS-13 | Recommencer | C3 (bouton), C2 (création de la nouvelle session) |
+| AS-13 | Recommencer | C3 (bouton), C2 (`restart`) |
 | AS-18 | Assigner un exercice | D5 |
 | AS-19 | Retirer un exercice | D5 |
-| AS-20 | Exercices d'une fiche dans une classe | D6 |
+| AS-20 | Exercices d'une fiche essentielle dans une classe | D6 |
 | AS-36 | Exercices sur l'accueil élève | A2 |
-| AS-37 | Progression sur la fiche | B3 |
-| AS-39 | Aperçu des questions sans fuite | C1 |
+| AS-37 | Progression sur la fiche essentielle | B3 |
+| AS-39 | Aperçu des questions sans fuite | C1, C3 |
 | TR-01 | Landing | A4 |
 | TR-02 | Redirection par rôle | 0 |
-| TR-04 | Accueil élève | A2, E (test système) |
-| TR-05 | Accueil enseignant | D3, E (test système) |
-| TR-08 | *(écartée)* Remplacée par l'onboarding persisté | 0 (`teachers.onboarded_at`, `HomeDestination`), D2 |
-| TR-09 | Accueil équipe | B6, E (test système) |
-| TR-27 | Navigation par rôle | 0c, 0 (routes nommées) |
-| TR-40 | Français par clés | 0 (configuration, test de locale), tous (locale par écran) |
+| TR-04 | Accueil élève | A2, E |
+| TR-05 | Accueil enseignant | D3, E |
+| TR-08 | *(écartée)* Remplacée par l'onboarding persisté | 0 (`onboarding_completed_at`, `HomeDestination`), D2 |
+| TR-09 | Accueil équipe | B6, E |
+| TR-27 | Navigation par rôle | 0c, 0 (routes nommées, `schools_path` actif) |
+| TR-28 | Imports JSON en arrière-plan | 0 (moteur, job, suivi), S1, S3, I1 à I3 (importeurs), E |
+| TR-40 | Français par clés | 0, tous |
 | TR-41 | KaTeX dans le bundle | 0 |
 | chantier `queries-constantes-orm-disparues` | Accueils vivants | E |
-| chantier `catalog-lecture-ecriture-incompatibles` | Un seul agrégat de cours | 0 (entité et repository), B2 (test de cycle de vie) |
-| chantier `classroom-assignment-belongs-to-casses` | Repository d'assignation à 100 % | 0 (repository et test), D5 (usage) |
+| chantier `catalog-lecture-ecriture-incompatibles` | Un seul agrégat de cours | 0, B2 |
+| chantier `classroom-assignment-belongs-to-casses` | Repository d'assignation à 100 % | 0, D5 |
 | chantier `classroom-code-adhesion-trop-long` | Longueur de colonne = longueur du code | 0 |
 | chantier `dette-contrats-ports-et-injection` | Contrats de port, domaine sans repository | 0 |
 | PRD cadre §5, 6 critères | Porte V1 | 0 (n° 2, n° 5), A1 et D1 (n° 1), C1 (n° 3), D4 (n° 4), B5 (n° 6), E (rejeu système) |
 
 ## Décisions que ce plan suppose
 
-Chaque décision ci-dessous doit figurer dans l'ADR ou l'UDR cité **avant le Lot 0**. Si l'ADR tranche autrement, l'orchestrateur ajuste le Lot 0 avant de le coder : aucun lot vertical n'est touché, puisque les valeurs sont des constantes du domaine.
+Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** : le plan les applique tels quels. Les lignes ci-dessous sont soit des **amendements** que l'élargissement de la V1 rend nécessaires, soit des choix que les ADR laissent ouverts. Les amendements doivent être écrits **avant le Lot 0** ; les autres choix sont des constantes du domaine ou du schéma, ajustables par l'orchestrateur sans toucher aux lots verticaux.
 
-| Décision supposée | Où elle doit figurer |
-|---|---|
-| `Result` à trois champs `value / error / details`, avec six codes d'erreur fermés | ADR-0026 |
-| Policies en `Policies::<Ctx>::…Policy#allowed?(actor:, …)`, ports injectés au constructeur. Un brouillon refusé devient `:not_found`, pas `:forbidden`. | ADR-0028 |
-| `public_id` en base58 de 16 caractères. Slugs globaux uniques sur les cours, fiches et exercices, jamais régénérés. | ADR-0029 |
-| `teacher_schools.primary`, avec un index partiel unique. La déclaration des classes ne remplace que celles de l'école principale. | ADR-0030 |
-| TOTP à 30 s, une période de tolérance en arrière, anti-rejeu par `otp_last_used_step`. 10 codes de secours hachés. Secret chiffré par Active Record Encryption. | ADR-0031 |
-| Code de récupération à 6 chiffres, valable 15 min, 5 essais. Émis par l'enseignant de l'élève ou par l'équipe, jamais sur son propre compte. Toutes les sessions sont fermées au changement. | ADR-0032 |
-| Barème : or = 100, argent ≥ 80, bronze ≥ 50. Réussite 50, maîtrise 70. Remplacement **strictement** supérieur, pas d'historique des badges. `answered_count` (avancement) et `score_percent` (score) sont distincts. | ADR-0033 |
-| Seed de 41 DRENA et des établissements, repris des fichiers `.Business` de l'ancien dépôt. Séries A1, A2, C, D. 2nde reliée à C seulement. 11 matières. | ADR-0034 |
-| Transitions draft → published → archived. Pas de retour à draft, pas de désarchivage en V1. | ADR-0035 |
-| FK en `restrict` partout, sauf `user_sessions`. Questions figées dès la première session. | ADR-0036 et ADR-0054 |
-| Deux champs de 60 et 90 caractères, normalisation des espaces seulement | ADR-0037 |
-| Invitation valable 72 h, par lien à jeton affiché une fois. Le numéro n'a ni compte ni invitation en cours. | ADR-0038 |
-| `assignable_type` en vocabulaire de domaine (`course`, `essential`, `exercise`), sans association polymorphe `Orm`. La réassignation réactive la ligne. **L'élève ne démarre qu'un exercice assigné directement.** | ADR-0048 |
-| Session en base avec un jeton haché dans un cookie signé. Durée absolue de 30 j (student, teacher) ou 12 h (team). Inactivité de 7 j ou 1 h. Verrouillage à 5 échecs par numéro et par minute. `rate_limit` à 10 par adresse et par minute. PIN différent des 4 derniers chiffres du numéro. | ADR-0050 (et ADR-0025 pour le PIN) |
-| Statuts de session `in_progress / completed / abandoned`. Une seule session en cours par élève et par exercice (index partiel). Clôture par une action explicite. Ordre des réponses stable par session. | ADR-0054 |
-| Chargement Stimulus par motif (`esbuild-rails`) et KaTeX dans le bundle | ADR-0051 (budget) et UDR-0005 |
-| Couleur de matière par catégorie, icône en colonne `materials.icon` | UDR-0005 (CA-26) |
-| Terme d'interface « Fiche » | UDR-0007 |
-| L'élève ne voit pas le code de sa classe en V1 | UDR-0006 et UDR-0027 |
+| Décision supposée | Nature | Où elle doit figurer |
+|---|---|---|
+| **Aucun seed de DRENA ni d'établissement en production** : l'équipe les crée ou les importe. `school.rb` et `catalog.rb` sont réservés au local. Écoles, référentiel et imports de contenu passent de V2 et V4 à **V1**. | **Amendement** (choix du porteur) | ADR-0034 (seeds, table des vagues) |
+| Imports **en masse** : cinq types (`drenas`, `schools`, `course_tree`, `essential_tree`, `exercise_tree`) ; `insert_all` par tranches de 1 000 dans une transaction unique (au lieu de l'écriture ligne à ligne) ; limites relevées (`schools` 10 Mo et 2 000 écoles, `course_tree` 30 Mo et 500 cours…) ; colonnes `scope` et `progress` ; colonne `import_errors` au lieu de `errors`, réservé par l'ORM ; un import à la fois. | **Amendement** (choix du porteur) | ADR-0039 |
+| `Ports::Shared::TransactionPort` dans `app/domain/ports/shared/`, implémenté par `Repositories::Shared::Transaction` (ADR-0026). L'ADR-0027 le range dans `app/domain/shared/` : le plan suit l'ADR-0026. | Contradiction entre ADR | ADR-0027 (erratum) |
+| Colonne `code` figée sur `levels` et `series` (`6e`, `5e`, `4e`, `3e`, `2nde`, `1ere`, `tle` ; `a1`, `a2`, `c`, `d`) : clé stable de la génération des classes et des imports, indépendante du nom affiché. | Choix ouvert | ADR-0034 |
+| `schools` : `short_name`, `sector` (public/private), `cycle` (first/both), `status` (active/inactive), unique `(drena_id, name)`. Le cycle ne change plus après la création. | Choix ouvert | ADR-0027 (tables du contexte school) |
+| Table des classes générées reprise de l'ancien `GenerateDefaultClassrooms`, indexée par code ; un code absent du référentiel est ignoré. | Choix ouvert | ADR-0041 ou nouvel ADR « génération des classes » |
+| Une école référencée n'est pas supprimée mais **désactivée** ; une école non référencée est supprimée avec ses classes vierges. | Précision | ADR-0036 |
+| `users.gender` conservé, non nul (`male`, `female`) : l'ancienne application le demandait et le PRD cadre le garde. | Choix ouvert | ADR-0037 |
+| `friendly_id` présent dans le Gemfile mais **inutilisé** : slugs figés par `Orm::HasFrozenSlug`, `public_id` par `Orm::HasPublicId`. La gemme sera retirée en V1 si rien d'autre ne l'utilise. | Choix ouvert | ADR-0029 |
+| Un fichier de routes `config/routes/teams.rb` en plus des six contextes, pour l'espace `/teams` (ADR-0026). | Précision | ADR-0027 |
+| Lacunes (`knowledge_gaps`) écrites dès la V1 par `CloseExerciseSession` ; leur affichage enseignant arrive en V3. | Précision | ADR-0043 |
+| Exemptions du test « chaque use case a sa policy » : les trois de l'ADR-0028, plus les mécanismes de session du socle et les importeurs, protégés par `RunImport`. | Précision | ADR-0028 |
+| Pas de progression visible **pendant** la phase d'écriture : elle se fait dans une seule transaction ; l'écran affiche « Enregistrement… » jusqu'au résultat. | Conséquence du tout ou rien | ADR-0039 |
+| Chargement Stimulus par motif (`esbuild-rails`) et KaTeX dans le bundle | Choix ouvert | ADR-0051 (budget) et UDR-0005 |
 
 ## Risques
 
 | Risque | Parade |
 |---|---|
-| Le Lot 0 est gros : environ 340 chemins, tests compris. Tout le parallélisme l'attend. | Il est découpé en 10 sous-étapes, chacune commitée et verte. Les repositories sont mécaniques et spécifiés signature par signature. Le Lot 0c est déjà en cours en parallèle. |
-| Le Lot 0c n'est pas encore mergé, et son `ui_subject_badge(name)` déduit la couleur du **nom** de la matière (défaut CA-26). Signalé à team-lead le 2026-09-25. | Le Lot 0 fournit son propre helper par catégorie. Aucun lot n'appelle `ui_subject_badge`. |
-| Les ADR 0026 à 0054 ne sont pas encore écrits. Une valeur tranchée autrement que dans ce plan changerait le Lot 0. | Les valeurs sont isolées en constantes nommées du domaine. La règle « décisions `Accepté` avant le Lot 0 » est rappelée par `plan-lots`. |
-| Les clés Active Record Encryption, nécessaires à `encrypts :otp_secret`, sont absentes des credentials. | L'orchestrateur les génère (`bin/rails db:encryption:init`) et les ajoute aux credentials au Lot 0.1. Le porteur fournit la clé maître de production. |
-| 21 agents en parallèle provoquent des temps de CI et une file de merge longs. | Le chemin critique passe en premier (voir « Vagues de dispatch »). Chaque merge est suivi de `bin/ci` sur la branche de chantier. |
-| Le rendu KaTeX et l'éditeur Trix alourdissent le bundle (ADR-0051). | Le test de bundle du Lot 0 mesure la taille gzip. KaTeX n'est chargé que par le contrôleur `math`, par import dynamique si le budget l'exige. |
-| Les données des DRENA et des établissements, issues de fichiers métier non validés, pourraient se retrouver en production. | Le seed de production est bloqué tant que le porteur n'a pas validé les deux listes (question ouverte du memo). |
+| Le Lot 0 est très gros (environ 420 chemins, tests compris) et tout le parallélisme l'attend. | 11 sous-étapes, chacune commitée et verte. Repositories et moteur d'import spécifiés signature par signature. Le Lot 0c avance en parallèle. |
+| **Espace des codes d'adhésion** : 24³ × 8² = 884 736 codes. 2 000 écoles × 70 classes = 140 000 codes par an, et les années s'accumulent tant que les classes archivées gardent leur code. | `CloseJoinCode` à l'archivage de l'année (V3, ADR-0041) libère les codes. Le repository tire contre l'ensemble des codes pris et retente. Au-delà de 50 % d'occupation, un test d'alerte échoue : passage à 6 caractères par un nouvel ADR. |
+| **Mémoire** : un JSON de 30 Mo parsé en entier, plus le plan d'écriture, dans le worker Puma. | Limites de taille de `ImportKind` ; `limits_concurrency` (un import à la fois) ; mémoire mesurée par les tests de performance et consignée ; bascule vers un worker séparé (ADR-0052) si elle dépasse la moitié de la mémoire du conteneur. |
+| **Import long** dans une seule transaction (jusqu'à 2 min) : verrous sur les index uniques de `classrooms` et `courses` pendant ce temps. | Un import à la fois ; les écritures unitaires concurrentes attendent au plus la durée de l'import ; budget de 120 s vérifié par les tests de performance et à la recette sur `Staging`. |
+| **Stockage S3 Railway pas encore créé** (ADR-0047) : sans lui, les imports échouent en production. | Le bucket et ses variables sont une action Railway du porteur, requise avant le déploiement de la V1 ; en local et en test, service `local` et `test`. |
+| **Amendements d'ADR 0034 et 0039 non écrits** : sans eux, le plan contredit deux ADR acceptés. | Signalés à team-lead dans le rapport ; à écrire avant le Lot 0. |
+| Le Lot 0c n'est pas encore mergé et doit livrer `ui_subject_badge(label, category:)`. | Le Lot 0 dépend de 0c ; aucun lot ne déduit une couleur du nom. |
+| 30 agents en parallèle : file de merge et temps de CI longs. | Chemin critique d'abord (« Vagues de dispatch ») ; `bin/ci` après chaque merge. |
+| Clés Active Record Encryption absentes des credentials. | Générées au Lot 0.1 ; la clé maître de production est fournie par le porteur. |
 
 ## Portes de sortie
 
@@ -1959,6 +2292,7 @@ Porte **de vague**, issue de la [feuille de route §5 V1](../refonte-application
 - [ ] Les critères du PRD cadre §5 sont verts.
 - [ ] Le parcours bout en bout passe en navigateur réel (Lot E).
 - [ ] La recette sur `Staging` est faite par un rôle distinct.
+- [ ] Les budgets de performance des imports sont tenus en CI et sur `Staging`.
 
 ## Challenger empirique
 
@@ -1968,13 +2302,8 @@ Porte **de vague**, issue de la [feuille de route §5 V1](../refonte-application
 
 **Mandat pour cette feature.**
 
-1. Le challenger rejoue le chemin nominal du [PRD §3](prd.md#3-parcours-utilisateur) dans l'application, en trois navigateurs ou profils distincts : équipe, enseignant, élève. Le parcours élève se fait aussi sur un téléphone Android ou en émulation 390 px.
-2. Il rejoue au moins ces chemins d'erreur :
-   - le 6e échec de connexion ;
-   - une réponse vide ;
-   - une double soumission ;
-   - un enseignant hors de sa classe ;
-   - un brouillon ouvert par son URL ;
-   - un PIN oublié.
-3. Il vérifie le HTML servi à l'élève avec les outils du navigateur : aucune bonne réponse n'y figure.
-4. Il consigne dans `journal.md` ce qu'il a fait et ce qu'il a observé.
+1. Le challenger rejoue le chemin nominal du [PRD §3](prd.md#3-parcours-utilisateur) sur une base de production vierge (seul l'amorçage), en trois profils distincts : équipe, enseignant, élève. Le parcours élève se fait aussi en émulation 390 px.
+2. Il importe lui-même un fichier réel de l'ancienne application (`schools_*.json`) et un fichier de 500 écoles, et **chronomètre** : moins de 2 min, sinon la porte ne passe pas. Il fait de même avec 200 cours complets.
+3. Il rejoue au moins ces chemins d'erreur : 6e échec de connexion ; réponse vide ; double soumission ; enseignant hors de sa classe ; brouillon ouvert par son URL ; PIN oublié ; classe pleine ; fichier d'import avec une erreur au milieu (aucune ligne écrite).
+4. Il vérifie le HTML servi à l'élève et à l'enseignant avec les outils du navigateur : aucune proposition correcte hors de la correction de l'élève.
+5. Il consigne dans `journal.md` ce qu'il a fait, observé et mesuré.

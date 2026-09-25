@@ -35,7 +35,7 @@ Le nouveau dépôt est vide : aucune table, aucun écran connecté.
 
 | Acteur | Moment du parcours |
 |---|---|
-| **Team** (équipe Lnclass) | Publie un cours, ses fiches et leurs exercices. Crée les classes des établissements. Invite un collègue. Débloque un compte dont le PIN est perdu. |
+| **Team** (équipe Lnclass) | Crée le référentiel (niveaux, séries, matières), les DRENA et les établissements, un par un ou par import JSON en masse ; chaque établissement reçoit ses classes par défaut. Publie des cours, leurs fiches essentielles et leurs exercices, saisis ou importés. Invite un collègue. Débloque un compte dont le PIN est perdu. |
 | **Teacher** | S'inscrit, choisit son établissement et déclare les classes où il enseigne. Ouvre une classe, assigne un cours, une fiche ou un exercice. Débloque le PIN d'un de ses élèves. |
 | **Student** | S'inscrit avec le code de sa classe. Voit sur son accueil ce qui lui est assigné. Fait l'exercice, voit la correction immédiate, puis son résultat et son badge. |
 | **Visiteur** | Découvre la page d'accueil. Choisit « élève » ou « enseignant ». Se connecte ou crée son compte. |
@@ -54,14 +54,16 @@ Tant qu'elle n'est pas livrée, aucun élève réel ne peut utiliser la nouvelle
 
 ## Hors périmètre
 
-- **Aucune écriture sur le référentiel.** Niveaux, séries, matières, DRENA et établissements sont seedés et lus seulement. Leurs écrans de gestion sont en V2.
+- **Aucun seed de référentiel, de DRENA ni d'établissement en production** (choix du porteur du 2026-09-25). La production démarre vide : l'équipe crée ou importe tout. Les seeds `catalog.rb`, `school.rb` et `development.rb` sont réservés au local.
+- **Aucune écriture du référentiel hors de l'équipe.** Pas de page publique de niveau, de série ni de matière (CA-17, CA-21, CA-23 : V2 et V4).
 - **Aucune inscription par listes en cascade** école + niveau → classe. Un code de classe valide est obligatoire.
 - **Aucune route publique** qui crée un compte équipe. L'équipe naît par seed, puis par invitation.
 - **Aucun espace direction d'établissement** (`school_admin`). Il est prévu en V2. Ses entrées de navigation restent inactives.
-- **Aucun téléversement de fichier** : pas d'avatar, de couverture ni d'audio. F-25 ne s'applique donc pas.
+- **Aucun téléversement de média** : pas d'avatar, de couverture ni d'audio. Le seul fichier téléversé est le JSON d'import, réservé à l'équipe et stocké sur S3 (ADR-0047).
 - **Pas de modification de profil ni de changement volontaire de PIN** (V2). Seule la récupération assistée existe.
-- **Pas d'import JSON en masse** (V2 et V4), ni d'annonces (V6), ni de tableau de bord équipe à KPI (V4).
-- **Pas de suivi détaillé** des élèves par l'enseignant (V3), ni de lacunes ou de remédiation (V5).
+- **Pas d'import d'élèves ni d'enseignants**, pas d'import partiel : un import est tout ou rien, et ses éléments arrivent en brouillon. Pas d'export.
+- Pas d'annonces (V6), ni de tableau de bord équipe à KPI (V4, TR-10).
+- **Pas de suivi détaillé** des élèves par l'enseignant (V3), ni de remédiation (V5). Les lacunes sont écrites et montrées à l'élève, pas encore à l'enseignant (V3).
 - **Pas de partage WhatsApp** du lien de classe (V3), ni d'examens ou de Prepa BAC.
 - **Pas de mode sombre**, pas de PWA installable (V4), pas de validation collaborative.
 - **Pas d'historique des badges** : un badge par élève et par exercice, remplacé seulement par un niveau strictement supérieur.
@@ -75,16 +77,22 @@ Tant qu'elle n'est pas livrée, aucun élève réel ne peut utiliser la nouvelle
 | Un enseignant peut-il enseigner dans plusieurs établissements ? | Le modèle le permet, un seul est visible en V1 : l'école principale (ADR-0030). | La table de rattachement enseignant–établissement porte un drapeau « principale », unique par enseignant. La déclaration des classes ne remplace que celles de l'école principale. |
 | Que devient un exercice « supprimé » que des élèves ont déjà fait ? | Il est archivé, jamais supprimé (ADR-0036). Ses sessions, tentatives et badges sont conservés. | Aucun bouton « Supprimer » : partout « Archiver ». Aucune suppression en cascade vers l'historique. |
 | Peut-on modifier les questions d'un exercice déjà fait par des élèves ? | Non. Une tentative est immuable (ADR-0054). Changer une question fausserait les scores passés. | Tant qu'aucune session n'existe, les questions se modifient librement. Dès la première session, seuls le titre, la description et le statut restent modifiables. |
-| Quand l'élève voit-il la bonne réponse ? | Seulement après avoir répondu à la question. Hors correction, seuls l'équipe et l'enseignant d'une classe où l'exercice est assigné la voient. | Aucun fragment de cache ne contient les bonnes réponses sans que le rôle entre dans la clé. Un test vérifie le HTML servi à l'élève, cache actif. |
+| Quand l'élève voit-il la bonne réponse ? | Seulement après avoir répondu à la question. Hors correction, seule l'équipe la voit ; l'enseignant ne la voit pas (ADR-0028). | Aucun fragment de cache ne contient les bonnes réponses sans que le rôle entre dans la clé. Un test vérifie le HTML servi à l'élève et à l'enseignant, cache actif. |
 | Que se passe-t-il si un élève oublie son PIN ? | Son enseignant, ou l'équipe, génère un code à usage unique valable 15 minutes (ADR-0032). L'élève le saisit avec son numéro, puis choisit un nouveau PIN. | La récupération fait partie du socle d'authentification. Chaque génération et chaque utilisation sont journalisées. Toutes les sessions ouvertes sont fermées. |
 | Un compte équipe peut-il se connecter avec son seul PIN ? | Non. Le TOTP est obligatoire, avec des codes de secours (ADR-0031). | Tant que le second facteur n'est ni enrôlé ni vérifié, un compte équipe n'accède à aucune page de son espace. |
+| Faut-il que l'exercice soit assigné pour que l'élève le démarre ? | Non. Tout exercice publié est démarrable ; l'assignation oriente l'accueil (ADR-0028). | `StartSessionPolicy` ne regarde que le statut de publication de l'exercice et de ses parents. La session garde l'assignation active si elle existe. |
+| Quels badges, et quand la session se termine-t-elle ? | Quatre paliers : Bronze ≥ 50, Argent ≥ 70, Or ≥ 80, Diamant = 100 (ADR-0033). La dernière réponse clôt la session (ADR-0054). | Pas de bouton « Terminer » ni de clôture prématurée. Le barème est un objet de domaine testé par bornes. |
+| D'où viennent les DRENA, les établissements et les classes en production ? | De l'équipe, par écran ou par import JSON. Créer un établissement génère ses classes par défaut, sans élève de démonstration. | Le référentiel, les établissements et les imports entrent en V1. `DefaultClassroomPlan` reprend la table de l'ancienne application, par code de niveau et de série. |
+| Comment importer 500 établissements ou 200 cours sans bloquer l'application ? | Dans un job Solid Queue, validation complète puis écriture en masse (`insert_all`) dans une seule transaction, un import à la fois, avec un rapport persisté et un écran de suivi. | Moteur commun au Lot 0 ; un adaptateur par type d'import, chacun avec son test de performance (< 2 min). |
+| Qui gère le référentiel ? | L'équipe seule, avec des slugs et des codes figés. | `ManageTaxonomyPolicy` ; suppression refusée si l'élément est référencé ; renommer ne change ni le slug ni le code. |
+| Un visiteur sans compte peut-il passer la `JoinPolicy` ? | Oui : c'est le cas nominal. La policy accepte le visiteur anonyme, et l'élève dont la classe principale est archivée. | L'aperçu `/c/:code` et l'inscription passent par la même policy, avant toute écriture. |
 | Comment l'enseignant sait-il qu'il a fini de s'installer ? | Par un état enregistré, pas par une déduction « il n'a encore aucune classe ». | Un enseignant qui n'a pas terminé sa configuration arrive sur la déclaration de ses classes. Aucun écran ne renvoie vers la page qui l'a redirigé : chaque état incomplet a un écran de sortie. |
 
 ## Cas limites identifiés
 
 - Un code de classe saisi en majuscules, avec des espaces, ou contenant un `i` ou un `o`.
 - Un numéro saisi avec l'indicatif `225` ou `00225`, avec des espaces ou des points.
-- Un PIN égal aux 4 derniers chiffres du numéro : il est refusé.
+- Un PIN et sa confirmation différents.
 - Deux élèves qui s'inscrivent au même moment avec le même numéro : l'un réussit, l'autre reçoit une erreur de formulaire, jamais une page 500.
 - Un enseignant qui soumet une déclaration vide, ou une déclaration qui contient une classe d'une autre école.
 - Assigner une ressource déjà assignée, retirer une ressource non assignée, réassigner une ressource retirée.
@@ -94,10 +102,19 @@ Tant qu'elle n'est pas livrée, aucun élève réel ne peut utiliser la nouvelle
 - Un cours en brouillon ouvert par son URL directe par un élève ou un enseignant.
 - Un élève sans classe principale, ou un enseignant sans école : chacun a un écran de sortie, jamais une boucle de redirection.
 - Une invitation équipe expirée, déjà acceptée, ou adressée à un numéro qui a déjà un compte.
+- Deux inscriptions simultanées sur la dernière place d'une classe pleine.
+- Un fichier d'import valide jusqu'au 499e élément et faux au 500e : rien n'est écrit.
+- Le même fichier d'import téléversé deux fois ; deux imports lancés en même temps.
+- Un fichier d'établissements au format de l'ancienne application (tableau nu, secteur « privée », nom en « Collège… »).
+- Un établissement créé alors qu'un niveau ou une série de la table de génération manque au référentiel.
+- La suppression d'un niveau, d'une série, d'une matière, d'une DRENA ou d'un établissement référencé.
 
 ## Questions encore ouvertes
 
-- La liste des 41 DRENA et celle des établissements, reprises des fichiers métier de l'ancien dépôt, doivent être validées par le porteur avant le seed de production.
-- La classe de 2nde A : les séries seedées sont A1, A2, C et D. Faut-il une série « A » pour la 2nde ?
-- La liste des matières seedées et leur catégorie (littéraire, scientifique, autre) doivent être validées.
-- Les durées de session (absolue et d'inactivité, par rôle) sont proposées par le plan. L'ADR-0050 les fixe.
+- **Séries de la 2nde** : le référentiel de développement ne relie que C à la 2nde. Faut-il une série « A » pour la 2nde ?
+- **Codes des niveaux et des séries** (`6e` … `tle`, `a1` … `d`) : le plan en fait la clé stable de la génération des classes et des imports. À valider.
+- **Genre** : `users.gender` est conservé, obligatoire (`male`, `female`). À confirmer.
+- **Nombre de classes générées** : la table de l'ancienne application (lycée public = 71 classes, collège public = 28) est reprise telle quelle. À valider par le porteur.
+- **Limites d'import** (taille du fichier et nombre d'éléments par type) : proposées par le plan, à confirmer dans l'amendement de l'ADR-0039.
+- **Enseignant et bonnes réponses** : l'ADR-0028 les lui refuse. Le porteur confirme-t-il qu'un enseignant ne voit jamais les propositions correctes, même pour préparer sa classe ?
+- **Amendements d'ADR** à écrire avant le Lot 0 : ADR-0034 (aucun seed de production, écoles et contenu en V1), ADR-0039 (import en masse), erratum de l'ADR-0027 (emplacement de `TransactionPort`).
