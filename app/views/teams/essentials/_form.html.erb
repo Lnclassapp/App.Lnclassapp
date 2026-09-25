@@ -15,7 +15,7 @@
   <% content_error = input.errors[:content].first %>
   <div class="space-y-1.5">
     <%= form.label :content, class: "block text-sm font-medium text-ink" %>
-    <div data-controller="rich-text-editor">
+    <div data-controller="rich-text-editor" data-rich-text-editor-lang-value="<%= t("components.rich_text_editor.lang").to_json %>">
       <%= form.rich_textarea :content,
             "aria-describedby": [ "essential_content_hint", ("essential_content_error" if content_error) ].compact.join(" "),
             "aria-invalid": ("true" if content_error),
