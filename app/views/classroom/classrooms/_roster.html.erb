@@ -1,0 +1,48 @@
+<%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
+<%# Rôle : une ligne par élève présent (nom, numéro, dernier score) ; « Générer un code de récupération » (ID-15), dont le stream vient de B8 %>
+<%# ADR  : 0028, 0032 · UDR : 0007, 0020, 0027 %>
+<section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
+  <h2 id="classroom_roster_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title", count: students.size) %></h2>
+  <% if students.empty? %>
+    <div id="classroom_roster_empty">
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
+    </div>
+  <% else %>
+    <% if classroom.status == "active" %>
+      <p class="mb-3 text-sm text-mute"><%= t(".issue_code_hint") %></p>
+    <% end %>
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+      <% students.each do |student| %>
+        <li id="student_<%= student.public_id %>" class="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center">
+          <div class="flex min-w-0 flex-1 items-center gap-3">
+            <%= ui_avatar student.display_name, size: :sm %>
+            <div class="min-w-0">
+              <p class="truncate text-sm font-medium"><%= student.display_name %></p>
+              <% if student.contact %>
+                <p class="text-xs text-mute tabular-nums">
+                  <span class="sr-only"><%= t(".contact") %></span> <%= student.contact.scan(/\d{2}/).join(" ") %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3 sm:flex-nowrap sm:justify-end sm:gap-4">
+            <p class="text-sm sm:text-right">
+              <span class="block text-xs text-mute"><%= t(".last_score") %></span>
+              <% if student.last_score_percent %>
+                <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
+              <% else %>
+                <span class="text-mute"><%= t(".no_score") %></span>
+              <% end %>
+            </p>
+            <% if classroom.status == "active" %>
+              <%= form_with url: account_pin_recovery_codes_path(student.public_id), method: :post, class: "shrink-0" do %>
+                <%= ui_button t(".issue_code"), type: :submit, variant: :secondary, size: :sm, icon: "key",
+                              "aria-label": t(".issue_code_label", name: student.display_name) %>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

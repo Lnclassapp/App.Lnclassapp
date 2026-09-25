@@ -1,0 +1,64 @@
+<%# 🌐 UI · classroom/classrooms/_header — en-tête de la page d'une classe (CL-10, CL-04) %>
+<%# Rôle : nom, niveau, établissement, année scolaire ; code en majuscules et « Copier » (Stimulus) ; effectif / plafond %>
+<%# ADR  : 0028, 0041 · UDR : 0027 · Stimulus : classroom--join-code-copy %>
+<div id="classroom_header" class="mb-8">
+  <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
+    <%= link_to home_path_for(shell_user.role), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
+      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back") %>
+    <% end %>
+  </nav>
+  <%= ui_card padding: :md do %>
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex min-w-0 items-start gap-4">
+        <span class="grid size-14 shrink-0 place-items-center rounded-card bg-brand-soft text-brand-strong" aria-hidden="true">
+          <%= ui_icon "academic-cap", size: :xl %>
+        </span>
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-3">
+            <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= classroom.name %></h1>
+            <% if classroom.status == "archived" %>
+              <%= ui_badge t(".archived"), tone: :warning, size: :sm, dot: true %>
+            <% end %>
+          </div>
+          <dl class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-mute">
+            <div class="flex gap-1">
+              <dt class="sr-only"><%= t(".level") %></dt>
+              <dd><%= ui_badge [ classroom.level_name, classroom.series_name ].compact.join(" · "), size: :sm %></dd>
+            </div>
+            <div class="flex items-center gap-1">
+              <dt><%= ui_icon "building-library", size: :sm, label: t(".school") %></dt><dd><%= classroom.school_name %></dd>
+            </div>
+            <div class="flex items-center gap-1">
+              <dt><%= ui_icon "calendar", size: :sm, label: t(".school_year") %></dt><dd><%= classroom.school_year %></dd>
+            </div>
+            <div class="flex items-center gap-1">
+              <dt><%= ui_icon "users", size: :sm, label: t(".headcount_label") %></dt>
+              <dd id="classroom_headcount" class="font-medium tabular-nums text-ink">
+                <%= t(".headcount", count: classroom.active_students_count, max: classroom.max_students) %>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <% if classroom.join_code_display %>
+        <div data-controller="classroom--join-code-copy" data-classroom--join-code-copy-code-value="<%= classroom.join_code_display %>"
+             class="rounded-card bg-brand-soft p-4 lg:shrink-0">
+          <p id="classroom_join_code_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".join_code") %></p>
+          <div class="mt-1 flex items-center justify-between gap-4">
+            <span id="classroom_join_code" aria-labelledby="classroom_join_code_label"
+                  class="font-mono text-3xl font-bold tracking-widest text-ink"><%= classroom.join_code_display %></span>
+            <%= ui_button t(".copy"), variant: :secondary, size: :sm, icon: "clipboard-document",
+                          "aria-label": t(".copy_label", code: classroom.join_code_display),
+                          data: { action: "classroom--join-code-copy#copy" } %>
+          </div>
+          <p class="mt-2 max-w-xs text-xs text-mute"><%= t(".join_code_hint") %></p>
+          <template data-classroom--join-code-copy-target="copied"><%= ui_toast t(".copied"), type: :success %></template>
+          <template data-classroom--join-code-copy-target="failed"><%= ui_toast t(".copy_failed"), type: :warning %></template>
+        </div>
+      <% else %>
+        <p class="rounded-card bg-mist p-4 text-sm text-mute lg:shrink-0"><%= t(".no_join_code") %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
