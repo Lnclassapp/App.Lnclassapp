@@ -15,8 +15,13 @@ module Dtos
       validates :last_name, presence: true, length: { maximum: 50 }, format: { with: NAME_FORMAT, allow_blank: true }
       validates :first_name, presence: true, length: { maximum: 80 }, format: { with: NAME_FORMAT, allow_blank: true }
 
-      def last_name = super&.squish
-      def first_name = super&.squish
+      def last_name
+        super&.squish
+      end
+
+      def first_name
+        super&.squish
+      end
     end
   end
 end

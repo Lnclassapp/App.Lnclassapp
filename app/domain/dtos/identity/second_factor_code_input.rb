@@ -15,7 +15,10 @@ module Dtos
       validates :code, presence: true
       validate :code_format, if: -> { code.present? }
 
-      def code = super&.gsub(/\s/, "")
+      def code
+        super&.gsub(/\s/, "")
+      end
+
       def totp? = code.to_s.match?(TOTP_FORMAT)
       def backup_code? = code.to_s.match?(BACKUP_FORMAT)
 

@@ -24,7 +24,9 @@ module Dtos
         super(Entities::Identity::Contact.normalize(raw))
       end
 
-      def code = super&.gsub(/\s/, "")
+      def code
+        super&.gsub(/\s/, "")
+      end
     end
   end
 end
