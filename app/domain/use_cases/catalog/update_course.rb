@@ -22,6 +22,9 @@ module UseCases
         taxonomy = CreateCourse.taxonomy_ids(dto:, lookup: @taxonomy.lookup)
         return taxonomy if taxonomy.failure?
 
+        own = CreateCourse.course_key(current.name, { level_id: current.level_id, material_id: current.material_id, series_id: current.series_id })
+        return CreateCourse.name_taken if CreateCourse.name_taken?(@courses, CreateCourse.course_key(dto.name, taxonomy.value), except: own)
+
         @courses.update(course: Entities::Catalog::Course.new(
           id: current.id, slug: current.slug, status: current.status, author_id: current.author_id,
           published_at: current.published_at, archived_at: current.archived_at,

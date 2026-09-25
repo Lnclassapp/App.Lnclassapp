@@ -11,10 +11,13 @@ module UseCases
 
         attr_reader :created
 
-        def initialize(taken_names = [])
+        def initialize(taken_names = [], keys: Set.new)
           @taken_names = taken_names
+          @keys = keys
           @created = []
         end
+
+        def existing_keys = @keys
 
         def create(course:)
           return Shared::Result.failure(:conflict, errors: { name: [ :taken ] }) if @taken_names.include?(course.name)
@@ -33,7 +36,8 @@ module UseCases
       end
 
       setup do
-        @courses = FakeCourses.new([ "Optique" ])
+        # « Optique » existe déjà en Tle D, physique-chimie.
+        @courses = FakeCourses.new([ "Optique" ], keys: Set[[ "optique", 7, 201, 105 ]])
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
@@ -93,6 +97,14 @@ module UseCases
 
       test "un niveau inconnu : la série n'est pas éprouvée contre un niveau absent" do
         assert_equal({ level_slug: [ :inclusion ] }, create(level_slug: "7eme").errors)
+      end
+
+      test "un nom qui ne diffère que par la casse, les accents ou les espaces est pris, au même niveau, matière et série" do
+        [ " OPTIQUE ", "Óptique", "Op tique" ].each do |name|
+          assert_equal({ name: [ :taken ] }, create(name:).errors, name)
+        end
+        assert_empty @courses.created
+        assert create(name: "optique", series_slug: "").success?, "sans série, ce n'est pas le même cours"
       end
 
       test "un nom déjà pris donne :conflict sur le nom" do

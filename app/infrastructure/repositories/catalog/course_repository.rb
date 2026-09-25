@@ -39,7 +39,7 @@ module Repositories
 
       def existing_keys
         Orm::Course.pluck(:name, :level_id, :material_id, :series_id).to_set do |name, *taxonomy|
-          [ Entities::Shared::NaturalKey.normalize(name), *taxonomy ]
+          [ Entities::Shared::NaturalKey.compact(name), *taxonomy ]
         end
       end
 

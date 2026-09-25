@@ -95,7 +95,7 @@ module Repositories
         series = create_series
         record = create_course(level: @level, material: @material, series:, name: "Génétique  et Évolution")
 
-        assert_includes @repository.existing_keys, [ "genetique et evolution", @level.id, @material.id, series.id ]
+        assert_includes @repository.existing_keys, [ "genetiqueetevolution", @level.id, @material.id, series.id ]
         assert_includes @repository.taken_slugs, record.slug
         assert_instance_of Set, @repository.taken_slugs
       end

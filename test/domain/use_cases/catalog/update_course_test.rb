@@ -18,6 +18,10 @@ module UseCases
 
         def find_by_slug(slug:) = @courses.find { it.slug == slug }
 
+        def existing_keys
+          @courses.to_set { [ Entities::Shared::NaturalKey.compact(it.name), it.level_id, it.material_id, it.series_id ] }
+        end
+
         def update(course:)
           return Shared::Result.failure(:conflict, errors: { name: [ :taken ] }) if @courses.any? { it.name == course.name && it.id != course.id }
 
@@ -35,7 +39,7 @@ module UseCases
       setup do
         @course = Course.new(id: 3, slug: "genetique", name: "Génétique", subtitle: "Ancien", level_id: 7, series_id: 105,
                              material_id: 201, author_id: 9, status: "published", published_at: PUBLISHED_AT, content: "<p>Ancien</p>")
-        @courses = FakeCourses.new([ @course, Course.new(id: 4, slug: "optique", name: "Optique") ])
+        @courses = FakeCourses.new([ @course, Course.new(id: 4, slug: "optique", name: "Optique", level_id: 6, series_id: 104, material_id: 201) ])
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
@@ -84,6 +88,15 @@ module UseCases
 
       test "le nom d'un autre cours donne :conflict" do
         assert_equal({ name: [ :taken ] }, update(name: "Optique").errors)
+      end
+
+      test "un nom qui ne diffère d'un autre cours que par la casse, les accents ou les espaces est pris" do
+        assert_equal({ name: [ :taken ] }, update(name: " ÓP tique").errors)
+        assert_empty @courses.updated
+      end
+
+      test "un cours peut changer la casse, les accents ou les espaces de son propre nom" do
+        assert update(name: "GENETIQUE", level_slug: "tle", series_slug: "d").success?
       end
     end
   end
