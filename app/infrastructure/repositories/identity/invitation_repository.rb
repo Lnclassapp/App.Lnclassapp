@@ -7,9 +7,9 @@ module Repositories
       include Ports::Identity::InvitationRepositoryPort
 
       # Point de sauvegarde : l'index unique refusé n'invalide pas la transaction du use case.
-      def create(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:)
+      def create(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:, school_id: nil, position: nil)
         record = Orm::Invitation.transaction(requires_new: true) do
-          Orm::Invitation.create!(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:)
+          Orm::Invitation.create!(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:, school_id:, position:)
         end
         ::Shared::Result.success(map(record))
       rescue ActiveRecord::RecordNotUnique
@@ -31,7 +31,7 @@ module Repositories
       def map(record)
         Entities::Identity::Invitation.new(
           id: record.id, kind: record.kind, contact: record.contact, team_role: record.team_role, school_id: record.school_id,
-          invited_by_id: record.invited_by_id, expires_at: record.expires_at, accepted_at: record.accepted_at,
+          position: record.position, invited_by_id: record.invited_by_id, expires_at: record.expires_at, accepted_at: record.accepted_at,
           accepted_user_id: record.accepted_user_id, revoked_at: record.revoked_at
         )
       end

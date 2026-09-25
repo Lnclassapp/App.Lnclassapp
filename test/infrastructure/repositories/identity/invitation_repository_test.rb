@@ -23,6 +23,18 @@ module Repositories
         assert_equal :pending, result.value.status(now: Time.current)
       end
 
+      test "create stores a school staff invitation with its school and position" do
+        school = create_school
+
+        result = @repository.create(kind: "school_staff", contact: "0701020305", team_role: nil, invited_by_id: @admin.id,
+                                    token_digest: SecureRandom.hex(32), expires_at: @expires_at,
+                                    school_id: school.id, position: "censor")
+
+        assert result.success?
+        assert_equal [ "school_staff", school.id, "censor", nil ],
+                     [ result.value.kind, result.value.school_id, result.value.position, result.value.team_role ]
+      end
+
       test "a second pending invitation for the same contact is a conflict" do
         invite
 
