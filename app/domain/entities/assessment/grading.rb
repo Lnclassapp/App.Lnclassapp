@@ -23,7 +23,9 @@ module Entities
       end
 
       # Division entière, donc arrondi vers le bas : le Diamant exige toutes les réponses justes.
-      def self.score_percent(correct:, total:) = total.zero? ? 0 : (correct * 100) / total
+      def self.score_percent(correct:, total:)
+        total.zero? ? 0 : (correct * 100) / total
+      end
 
       def self.grade_on_20(score_percent) = (score_percent / 5.0).round
 
