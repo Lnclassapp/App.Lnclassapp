@@ -1,0 +1,59 @@
+# Gestion des cours par l'équipe (plan boucle-pedagogique, Lot B2) — UDR-0014, UDR-0007
+fr:
+  activemodel:
+    attributes:
+      dtos/catalog/course_input:
+        name: "Nom"
+        subtitle: "Sous-titre"
+        level_slug: "Niveau"
+        series_slug: "Série"
+        material_slug: "Matière"
+        content: "Contenu"
+    errors:
+      models:
+        dtos/catalog/course_input:
+          attributes:
+            name:
+              blank: "Indiquez le nom du cours."
+              too_long: "Le nom compte %{count} caractères au plus."
+              taken: "Un cours de ce niveau, de cette série et de cette matière porte déjà ce nom."
+            subtitle:
+              too_long: "Le sous-titre compte %{count} caractères au plus."
+            level_slug:
+              blank: "Choisissez un niveau."
+              inclusion: "Ce niveau n'existe pas."
+            series_slug:
+              inclusion: "Cette série n'existe pas."
+              not_allowed: "Cette série n'est pas ouverte à ce niveau."
+            material_slug:
+              blank: "Choisissez une matière."
+              inclusion: "Cette matière n'existe pas."
+  teams:
+    courses:
+      form:
+        name_placeholder: "Ex. : Génétique et évolution"
+        subtitle_hint: "Facultatif, 150 caractères au plus. Il s'affiche sous le nom, sur la carte du cours."
+        level_prompt: "Choisir un niveau"
+        no_series: "Aucune série"
+        series_hint: "Seules les séries ouvertes à un niveau sont proposées, rangées sous ce niveau."
+        material_prompt: "Choisir une matière"
+        content_placeholder: "Présentez le cours : ce que l'élève va apprendre, les notions à connaître…"
+        content_hint: "Texte seul : gras, italique, titres, listes, citations et liens. Les images et les fichiers ne sont pas acceptés."
+      new:
+        title: "Nouveau cours"
+        draft_notice: "Le cours est créé en brouillon ; il se publie ensuite depuis sa page."
+        submit: "Créer le cours"
+        cancel: "Annuler"
+      edit:
+        title: "Modifier le cours"
+        status_notice: "Le statut se change depuis la page du cours, jamais dans ce formulaire."
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      create:
+        created: "Cours « %{name} » créé (brouillon)."
+      update:
+        updated: "Cours « %{name} » modifié."
+      transition:
+        published: "Cours « %{name} » publié : il est visible des élèves et des enseignants."
+        archived: "Cours « %{name} » archivé : il n'est plus visible des élèves ni des enseignants."
+        refused: "Le cours « %{name} » ne peut pas prendre ce statut : un cours publié ou archivé ne revient jamais au brouillon."

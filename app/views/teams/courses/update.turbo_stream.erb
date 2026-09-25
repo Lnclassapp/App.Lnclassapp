@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/courses/update — succès de la modification d'un cours %>
+<%# Rôle : toast ; la modale se ferme ; la page hôte (page du cours, B1) est re-demandée et fusionnée par morphing %>
+<%# ADR  : 0035 · UDR : 0006, 0014 %>
+<%= turbo_stream_toast t(".updated", name: @course.name), type: :success %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.refresh(request_id: nil) %>
