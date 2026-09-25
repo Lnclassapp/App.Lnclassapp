@@ -16,7 +16,9 @@ module Entities
       Generation = Data.define(:rows, :skipped)
 
       # Un établissement mixed suit le barème private, comme dans l'ancien.
-      def self.for(school_type) = PLAN.fetch(school_type == "public" ? "public" : "private")
+      def self.for(school_type)
+        PLAN.fetch(school_type == "public" ? "public" : "private")
+      end
 
       # school : répond à school_type et cycle (entité ou ligne insérée) ; lookup : Entities::Catalog::TaxonomyLookup
       def self.rows_for(school:, lookup:)

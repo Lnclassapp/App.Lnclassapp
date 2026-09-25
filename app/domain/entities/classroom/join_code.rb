@@ -31,7 +31,9 @@ module Entities
 
       def self.normalize(raw) = raw.to_s.gsub(/\s+/, "").downcase
       def self.valid?(code) = FORMAT.match?(code.to_s)
-      def self.display(code) = code&.upcase
+      def self.display(code)
+        code&.upcase
+      end
     end
   end
 end
