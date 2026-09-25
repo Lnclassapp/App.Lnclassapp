@@ -1,9 +1,10 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# ADR-0034: one seed file per context, each loaded only in its environments. Production runs identity alone
+# (the bootstrap invitation of the first team member); the referential, the DRENA and the schools are created
+# by the team on screen or by import.
+SEEDS = { "identity" => :all, "catalog" => %w[development test], "school" => %w[development test], "development" => %w[development] }.freeze
+
+SEEDS.each do |name, envs|
+  next unless envs == :all || envs.include?(Rails.env)
+
+  load Rails.root.join("db/seeds/#{name}.rb")
+end
