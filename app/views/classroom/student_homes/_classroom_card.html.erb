@@ -1,0 +1,27 @@
+<%# 🌐 UI · classroom/student_homes/_classroom_card — la classe principale de l'élève sur son accueil %>
+<%# Rôle : classe, niveau, établissement, effectif et code de la classe en majuscules ; jamais la liste nominative %>
+<%# ADR  : 0040, 0041 · UDR : 0010 %>
+<%# locals: (home:, icon:) -%>
+<%= ui_card title: t(".title"), icon:, id: "student_home_classroom" do %>
+  <%= link_to student_classroom_path,
+              class: "group flex flex-col gap-4 rounded-ln border border-line bg-brand-soft/40 p-4 transition hover:border-brand sm:flex-row sm:items-center sm:justify-between focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <div class="min-w-0 space-y-1">
+      <p class="truncate font-display text-lg font-extrabold text-ink"><%= home.classroom_name %></p>
+      <p class="text-sm text-mute"><%= t(".context", level: home.level_name, school: home.school_name) %></p>
+      <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-mute">
+        <span class="inline-flex items-center gap-1.5">
+          <%= ui_icon "users", variant: :mini, size: :sm %><%= t(".students", count: home.classmates_count) %>
+        </span>
+        <% if home.join_code_display %>
+          <span class="inline-flex items-center gap-1.5">
+            <%= ui_icon "key", variant: :mini, size: :sm %><%= t(".code") %>
+            <span class="font-mono font-semibold tracking-widest text-ink"><%= home.join_code_display %></span>
+          </span>
+        <% end %>
+      </p>
+    </div>
+    <span class="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-brand-strong">
+      <%= t(".open") %><%= ui_icon "arrow-right", variant: :mini, size: :sm, class: "transition group-hover:translate-x-0.5" %>
+    </span>
+  <% end %>
+<% end %>
