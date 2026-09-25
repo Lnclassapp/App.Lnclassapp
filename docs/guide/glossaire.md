@@ -68,7 +68,7 @@ Hiérarchie : **Material → Course → Essential → Exercise → Question → 
 |---|---|---|
 | **Material** | **Matière scolaire** : Mathématiques, Physique-Chimie, SVT… Attention au faux ami : `Material` ne veut pas dire « support » ni « ressource ». Porte un `shortname` et une `category`. | `Orm::Material`, `Entities::Catalog::Material` |
 | **Course** | **Cours** : unité d'enseignement couvrant un chapitre. Appartient à une matière, un niveau et éventuellement une série. | `Orm::Course`, `Entities::Catalog::Course` |
-| **Essential** | **Fiche essentielle** : le résumé des notions clés d'un cours. Appartient à un `Course`, porte les exercices et les lacunes. C'est l'unité de granularité de la remédiation. Ne jamais écrire `Lesson` ni `Sheet`. | `Orm::Essential`, `Entities::Catalog::Essential` |
+| **Essential** | **Fiche essentielle** : le résumé des notions clés d'un cours. Appartient à un `Course`, porte les exercices et les lacunes. C'est l'unité de granularité de la remédiation. Ne jamais écrire `Lesson` ni `Sheet`. À l'écran : « Fiche essentielle » / « Fiches essentielles », jamais « Habileté » ni « Notions clés » ([UDR-0007](../decisions/udr/0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md), proposée). | `Orm::Essential`, `Entities::Catalog::Essential` |
 | **Exercise** | **Série de questions** rattachée à un `Essential`. Porte `exercise_type`, `published`, `questions_count`, `recurrence_rate` et `source_exam`. | `Orm::Exercise`, `Entities::Assessment::Exercise` |
 | **Question** | Item d'évaluation d'un exercice (QCM, vrai/faux…). | `Orm::Question`, `Entities::Assessment::Question` |
 | **Answer** | Réponse **possible** proposée pour une question, correcte ou non. À ne pas confondre avec `QuestionAttempt`, qui est la réponse **donnée** par un élève. | `Orm::Answer`, `Entities::Assessment::Answer` |
@@ -89,7 +89,7 @@ Le cœur métier de la plateforme — [ADR-0008](../decisions/adr/0008-moteur-ev
 | **ExerciseBadge** | Récompense décernée à la complétion d'un exercice. Trois paliers, définis dans `LEVELS` : `bronze` (≥ 50 %), `silver` (≥ 80 %), `gold` (100 %). La règle vit dans `ExerciseBadge.determine_level`, **pas dans le contrôleur**. Un badge existant n'est remplacé que s'il est amélioré (`upgrade_if_better`). `app/domain/entities/assessment/exercise_badge.rb` |
 | **KnowledgeGap** | **Lacune de connaissance** constatée chez un élève sur un `Essential` donné. États : `pending`, `remediated`, `self_corrected`. Compte les échecs cumulés (`failed_attempts_count`) et pilote la remédiation *Just-In-Time* : la plateforme repropose la notion au bon moment plutôt qu'à la fin. Clé primaire de type `String`. `app/domain/entities/knowledge_gap.rb` |
 
-Termes UI à ne pas mélanger : « session » (une tentative d'exercice) n'est pas la « session » de connexion. En français d'interface, on dit **« tentative »** pour `QuestionAttempt` et **« session d'exercice »** pour `ExerciseSession`.
+Termes UI à ne pas mélanger : « session » (une session d'exercice) n'est pas la « session » de connexion, qu'on n'écrit jamais à l'écran (« Connexion », « Se déconnecter »). En français d'interface, on dit **« tentative »** pour `QuestionAttempt` et **« session »** (ou « session d'exercice ») pour `ExerciseSession` : un compteur de sessions ne s'intitule jamais « Tentatives ». Une réponse **possible** (`Answer`) s'appelle **« proposition »**. Les badges s'affichent « Bronze », « Argent », « Or » — « Diamant » n'existe pas. Référence : [UDR-0007](../decisions/udr/0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (proposée).
 
 ---
 
@@ -171,6 +171,16 @@ Identifiant lisible dérivé d'un nom, pour les URLs. Deux mécanismes coexisten
 | `Grade`, `Class` | `Level` (niveau) et `Classroom` (classe) |
 | `ClassroomCourse`, `ClassroomEssential`, `ClassroomExercise` | `ClassroomAssignment` |
 | `presenter`, `validator` | Ces couches n'existent pas — voir [`architecture.md` §1](architecture.md#1-les-quatre-couches-et-le-sens-des-dépendances) |
+
+**À l'écran** ([UDR-0007](../decisions/udr/0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md), proposée) :
+
+| N'affiche pas | Affiche |
+|---|---|
+| « Habileté », « Habiletés », « Notion(s) clé(s) », « Essentiel » | « Fiche essentielle » |
+| « Quiz », « Test », « Flashcard » | « Exercice » |
+| « Tentatives » pour compter des sessions | « Sessions » |
+| « Diamant » | « Bronze », « Argent », « Or » |
+| « Conforme au programme » | rien : aucun label de conformité ([ADR-0053](../decisions/adr/0053-validation-collaborative-requalifiee.md), proposé) |
 
 ---
 
