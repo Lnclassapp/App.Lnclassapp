@@ -54,6 +54,19 @@ module Repositories
         end
       end
 
+      test "revoke_expired frees the contact of its expired invitation only" do
+        @expires_at = 1.minute.ago.change(usec: 0)
+        expired = invite.value
+        other = invite(contact: "0701020399").value
+
+        assert_equal 1, @repository.revoke_expired(kind: "team", contact: "0701020304", at: Time.current)
+        assert_not_nil Orm::Invitation.find(expired.id).revoked_at
+        assert_nil Orm::Invitation.find(other.id).revoked_at
+        @expires_at = 72.hours.from_now.change(usec: 0)
+        assert invite.success?
+        assert_equal 0, @repository.revoke_expired(kind: "team", contact: "0701020304", at: Time.current)
+      end
+
       test "find_by_token_digest finds the invitation, or nil" do
         invitation = create_invitation(token: "jeton")
 

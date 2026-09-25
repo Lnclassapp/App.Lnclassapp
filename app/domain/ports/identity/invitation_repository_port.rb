@@ -15,6 +15,11 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_token_digest"
       end
 
+      # Révoque les invitations en attente expirées de ce contact, pour qu'il puisse être réinvité. → Integer
+      def revoke_expired(kind:, contact:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #revoke_expired"
+      end
+
       # → true
       def mark_accepted(id:, user_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #mark_accepted"
