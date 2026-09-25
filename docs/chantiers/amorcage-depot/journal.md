@@ -57,6 +57,8 @@ Dernier `bin/ci` local (commit `bf6620d`, les deux tests en attente de design mi
 ❌ Assets: Budget                      ← application.js 92,0 Ko gzip / 60 Ko, en attente de design
 ```
 
+Depuis `8713a6c` (trix et Action Text retirés, arbitrage de l'orchestrateur), `yarn build` échoue sur cette branche (`Could not resolve "trix"`) tant que design n'a pas retiré les deux imports de `application.js`. Simulation locale, imports retirés et non commités : `application.js 36,3 Ko gzip / 60 Ko`, `bin/check-asset-budget` exit 0, `bin/rails test` exit 0, `Line coverage: 19 / 19 (100.00%)`.
+
 **Une couverture sous 100 % est refusée** (branche jetable, un fichier dont une seule branche est testée) :
 
 ```
@@ -125,7 +127,15 @@ Les réglages de production sont prouvés sur un **vrai démarrage en production
 
 `test/system/homepage_test.rb` : titre, `h1`, et Turbo démarré sous la CSP (preuve que le JavaScript de l'application n'est pas bloqué). Pilote `selenium` + `headless_chrome`, jamais `rack_test`.
 
-**Non prouvé** dans le bac à sable de l'agent : pas de réseau (selenium-manager ne peut pas télécharger Chrome), et Chromium en snap refuse de démarrer (`snap-confine has elevated permissions and is not confined`). Conformément à [configuration.md §4.3](../../guide/configuration.md), un test système qui n'a pas tourné dans un navigateur est **non prouvé**, pas prouvé. À lancer depuis la session de l'orchestrateur : `cd ../lnclass-amorcage && COVERAGE=0 bin/rails test:system`, puis en CI GitHub (Chrome préinstallé).
+**Non prouvé** dans le bac à sable de l'agent : pas de réseau (selenium-manager ne peut pas télécharger Chrome), et Chromium en snap refuse de démarrer (`snap-confine has elevated permissions and is not confined`). Conformément à [configuration.md §4.3](../../guide/configuration.md), un test système qui n'a pas tourné dans un navigateur est **non prouvé**, pas prouvé. À lancer quand Chrome sera réparé (`sudo systemctl start snapd.apparmor`, décision du porteur) : `CHROME_BIN=/snap/bin/chromium CHROMEDRIVER_PATH=/snap/bin/chromium.chromedriver bin/ci`, puis en CI GitHub (Chrome préinstallé).
+
+`test/application_system_test_case.rb` lit `CHROME_BIN` et `CHROMEDRIVER_PATH` s'ils sont posés, sinon selenium-manager ; options `--headless=new`, `--no-sandbox`, `--disable-dev-shm-usage`, fenêtre 1400×1400. `bin/check-chrome` passe avant les tests système dans `bin/ci` et échoue avec un message explicite :
+
+```
+❌ Chrome ne démarre pas (chromium) : les tests système ne sont PAS prouvés.
+   Please make sure that the snapd.apparmor service is enabled and started.
+   Chromium en snap exige le service snapd.apparmor : sudo systemctl start snapd.apparmor
+```
 
 ## Décisions prises en cours de route
 
@@ -138,6 +148,7 @@ Les réglages de production sont prouvés sur un **vrai démarrage en production
 | 2026-09-25 | Le contrôle `:nocov:` du pre-commit est limité à `app/` et `lib/` | périmètre de l'ADR-0024 ; il refusait le test de garde qui cherche la balise | non |
 | 2026-09-25 | `.yarnrc.yml` (`nodeLinker: node-modules`) et `packageManager: yarn@4.5.3` versionnés | le poste de dev le tenait d'un `~/.yarnrc.yml` global : la CI et Docker auraient résolu en PnP | non |
 | 2026-09-25 | `Teams::BaseController` refuse tout (redirection vers l'accueil) | ADR-0052 le crée en V0, l'authentification arrive en V1 : fermé par défaut | non |
+| 2026-09-25 | Paquets yarn `trix` et `@rails/actiontext`, framework Action Text et sa table retirés ; les imports JS et `actiontext.css` restent à design | arbitrage de l'orchestrateur : `package.json` appartient à l'amorçage, `app/javascript` à design | non |
 | 2026-09-25 | `ACTIVE_STORAGE_SERVICE` choisit le service de stockage en production (défaut `local`) | prépare ADR-0047 sans le trancher | à confirmer par ADR-0047 |
 
 ## Ce qui a dérapé
@@ -154,10 +165,10 @@ Trois contrôles dépendent de fichiers possédés par `design-baseline` (demand
 | Contrôle | Fichier de design | Correctif attendu |
 |---|---|---|
 | `test/views/no_third_party_resources_test.rb` (ADR-0049) | `app/views/homepage/index.html.erb` charge Google Fonts | polices auto-hébergées |
-| `bin/check-asset-budget` (ADR-0051) | `app/javascript/application.js` importe `trix` et `@rails/actiontext` (92 Ko gzip) | retirer ces imports du point d'entrée (~47 Ko) |
+| `bin/check-asset-budget` (ADR-0051), et avant lui `yarn build` | `app/javascript/application.js` importe `trix` et `@rails/actiontext`, dont les paquets sont retirés | retirer ces imports, `actiontext.css` et `layouts/action_text/` (36,3 Ko mesurés) |
 | `test/integration/supported_browsers_test.rb` (ADR-0051) | `app/views/layouts/application.html.erb` | bandeau `.outdated-browser` + clé `layouts.outdated_browser` |
 
-Les deux tests sont écrits mais **pas commités** tant qu'ils sont rouges (le hook les refuserait, et `SKIP_HOOKS` est exclu). Ils entrent dans le dépôt au merge de `design-baseline`.
+Les deux tests sont écrits mais **pas commités** tant qu'ils sont rouges (le hook les refuserait, et `SKIP_HOOKS` est exclu) ; ils attendent dans le worktree. Ils entrent dans le dépôt après que l'orchestrateur a mergé `design-baseline` dans `feature/amorcage-depot`. Chacun échoue pour la bonne raison : `homepage/index.html.erb` cité comme ressource tierce, `Translation missing: fr.layouts.outdated_browser` pour le bandeau.
 
 ## Pour l'orchestrateur
 
