@@ -1,0 +1,36 @@
+<%# 🌐 UI · identity/teacher_registrations/new — inscription enseignant, en deux colonnes (reprise de l'ancienne application) %>
+<%# Rôle : accueil à gauche sur grand écran, formulaire à droite ; échec re-rendu en 422 par Turbo, sans rechargement %>
+<%# ADR  : 0030, 0050 · UDR : 0005, 0024 %>
+<% content_for :title, t(".page_title") %>
+<main class="grid min-h-dvh bg-paper md:grid-cols-2">
+  <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
+    <div class="max-w-sm text-center">
+      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-6 size-16 rounded-card object-cover shadow-card" %>
+      <h1 class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></h1>
+      <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+  </section>
+
+  <section class="flex flex-col items-center justify-center px-gutter py-10">
+    <div class="mb-8 text-center md:hidden">
+      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-3 size-14 rounded-card object-cover shadow-card" %>
+      <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+
+    <div class="w-full max-w-md">
+      <%= ui_card padding: :lg do %>
+        <div class="mb-7 text-center">
+          <h2 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h2>
+          <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
+        </div>
+
+        <%= render "form" %>
+
+        <p class="mt-6 text-center text-sm text-mute">
+          <%= t(".have_account") %>
+          <%= link_to t(".sign_in"), new_session_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+        </p>
+      <% end %>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,15 @@
+<%# 🌐 UI · school/drena_schools/index — frame « schools » : liste des établissements actifs d'une DRENA %>
+<%# Rôle : servi seul au changement de DRENA, ou rendu dans le formulaire d'inscription ; la DRENA voyage avec la liste %>
+<%# ADR  : 0029, 0030 · UDR : 0024 %>
+<%# locals: (schools:, drena_public_id:, registration: nil) -%>
+<%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50",
+                               data: { "school--drena-schools-target": "frame" } do %>
+  <%= fields :teacher_registration, model: registration do |fields| %>
+    <% if drena_public_id.present? %>
+      <%= fields.hidden_field :drena_public_id, value: drena_public_id, id: nil %>
+    <% end %>
+    <%= ui_field fields, :school_public_id, as: :select, label: t(".label"), required: true,
+                 choices: schools.map { [ it.name, it.public_id ] }, prompt: t(".prompt"), disabled: schools.empty?,
+                 hint: (t(drena_public_id.present? ? ".none" : ".choose_drena_first") if schools.empty?) %>
+  <% end %>
+<% end %>
