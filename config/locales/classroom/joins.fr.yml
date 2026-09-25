@@ -1,0 +1,87 @@
+# Rejoindre une classe par son code : saisie du code, aperçu de /c/<code>, inscription de l'élève (plan boucle-pedagogique, Lot A1) — ADR-0040, ADR-0041, ADR-0050, UDR-0007, UDR-0009
+fr:
+  activemodel:
+    attributes:
+      dtos/classroom/join_with_code_input:
+        last_name: "Nom"
+        first_name: "Prénom(s)"
+        gender: "Genre"
+        contact: "Numéro de téléphone"
+        pin: "PIN"
+        pin_confirmation: "Confirmation du PIN"
+    errors:
+      models:
+        dtos/classroom/join_with_code_input:
+          attributes:
+            base:
+              classroom_archived: "Cette classe est archivée. Demande le code de ta nouvelle classe à ton professeur."
+              classroom_full: "Cette classe est complète. Préviens ton professeur."
+              join_code_revoked: "Ce code de classe n'est plus valable. Demande le nouveau code à ton professeur."
+              already_enrolled: "Tu es déjà inscrit dans une classe."
+              already_member: "Tu es déjà inscrit dans cette classe."
+            last_name:
+              blank: "Saisis ton nom."
+              too_long: "Le nom compte %{count} caractères au plus."
+              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
+            first_name:
+              blank: "Saisis ton ou tes prénoms."
+              too_long: "Les prénoms comptent %{count} caractères au plus."
+              invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
+            gender:
+              inclusion: "Choisis ton genre."
+            contact:
+              blank: "Saisis ton numéro de téléphone."
+              invalid: "Saisis un numéro ivoirien à 10 chiffres, par exemple 07 01 02 03 04."
+              taken: "Ce numéro est déjà utilisé."
+            pin:
+              blank: "Choisis un PIN à 4 chiffres."
+              invalid: "Le PIN compte 4 chiffres."
+            pin_confirmation:
+              confirmation: "Les deux PIN ne sont pas identiques."
+  classroom:
+    join_codes:
+      new:
+        page_title: "Rejoindre une classe · Lnclass"
+        title: "Rejoindre une classe"
+        subtitle: "Saisis le code de ta classe, donné par ton professeur."
+        code_label: "Code de classe"
+        code_placeholder: "KFM37"
+        code_hint: "3 lettres puis 2 chiffres."
+        submit: "Continuer"
+        have_account: "Déjà un compte ?"
+        sign_in: "Se connecter"
+      create:
+        blank: "Saisis le code de ta classe."
+        invalid: "Code de classe invalide. Il compte 3 lettres puis 2 chiffres, par exemple KFM37."
+    joins:
+      new:
+        page_title: "Rejoindre ma classe · Lnclass"
+        welcome: "Bienvenue sur Lnclass"
+        welcome_hint: "Ton espace d'apprentissage pour mieux comprendre tes cours, t'exercer et réussir tes examens."
+        title: "Créer un compte élève"
+        subtitle: "Tu rejoins cette classe dès la création de ton compte."
+        student_title: "Rejoindre cette classe"
+        student_subtitle: "Tu gardes ton compte, tes sessions et tes badges."
+        join_as_student: "Rejoindre cette classe"
+        have_account: "Déjà un compte ?"
+        sign_in: "Se connecter"
+        rate_limited_title: "Trop de tentatives"
+        invalid_code:
+          title: "Code de classe invalide."
+          description: "Vérifie le code auprès de ton professeur, puis saisis-le de nouveau."
+          other_code: "Saisir un autre code"
+      classroom_preview:
+        label: "Ta classe"
+        level: "Niveau : %{level}"
+      signup_form:
+        identity: "Ton identité"
+        last_name_placeholder: "Ex. : Kouassi"
+        first_name_placeholder: "Ex. : Aya Marie"
+        contact: "Ton contact"
+        contact_placeholder: "07 00 00 00 00"
+        contact_hint: "10 chiffres. Il te servira à te connecter."
+        security: "Sécurité"
+        pin_hint: "4 chiffres, que toi seul connais."
+        submit: "Créer mon compte"
+      create:
+        welcome: "Bienvenue dans ta classe !"
