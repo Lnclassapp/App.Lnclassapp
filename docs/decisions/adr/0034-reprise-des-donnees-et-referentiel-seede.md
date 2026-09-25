@@ -115,6 +115,6 @@ raise "db/seeds/catalog.rb est réservé au développement et au test" unless Ra
 ## 9. Arbitrage du porteur (2026-09-25)
 
 - La taxonomie est créée par l'équipe via l'interface et n'est pas seedée en production. Cela remplace la proposition initiale d'un référentiel seedé en production.
-- Les DRENA sont créées par l'équipe, comme la taxonomie : aucun seed en production. `drenas.yml` ne sert qu'au développement et au test.
+- Les DRENA sont créées par l'équipe, comme la taxonomie : aucun seed en production. `drenas.yml` ne sert qu'au développement et au test, et comme fichier d'exemple : la liste de référence que l'équipe saisit à l'écran, dont les slugs sont repris par les fichiers d'exemple d'import d'écoles (ADR-0039).
 - Les établissements s'importent en JSON en masse dès la V1, et leurs classes sont générées dans la même transaction (ADR-0030, ADR-0039).
 - Le niveau s'écrit `2nde`.
