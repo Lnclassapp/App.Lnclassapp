@@ -1,99 +1,105 @@
 # Blueprint: Objet de retour d'un Use Case
 
-> ⚠️ **Divergence doc/code non tranchée — ne pas improviser.**
-> Il n'existe **aucune classe `Shared::Result`** dans ce dépôt, et pas de répertoire `app/domain/shared/`. Les versions antérieures de ce blueprint en décrivaient une : c'était de la fiction.
-> Réalité mesurée : **35 fichiers** de `app/domain/use_cases/` déclarent une méthode `execute*`, **10** déclarent `call`, et `OpenStruct` apparaît **~180 fois dans 44 fichiers** de `app/` (166 au relevé de `conventions.md` §8).
-> Migrer vers un objet Result dédié est une **décision ouverte**, qui doit passer par un ADR (`docs/decisions/adr/`) avant toute implémentation. Voir [`docs/guide/conventions.md`](../guide/conventions.md) §8 « Écarts connus ».
-> En attendant : **suivre le contrat majoritaire ci-dessous**, et s'aligner sur le contexte borné que l'on modifie.
-> **Ce « en attendant » ne vaut que sur ce dépôt.** Sur le projet Rails cible, le contrat de retour est une décision de fondation à trancher par ADR avant le premier Lot 0 (registre du programme [`refonte-application`](../chantiers/refonte-application/feuille-de-route.md#3-registre-des-décisions-de-fondation)).
+Tout use case renvoie un **`Shared::Result`**, et toute query un objet **`Data`**. Le contrat est fixé par l'[ADR-0026](../decisions/adr/0026-contrat-result-entites-et-dto.md), accepté le 2026-09-25.
 
-## Le contrat réel
+> ⚠️ **Ancien dépôt.** `app/domain/shared/` n'y existe pas : ses use cases renvoient encore des `Struct` `Response` ou des `OpenStruct`. Ne migre pas un use case de l'ancien dépôt vers `Shared::Result` au détour d'un lot : c'est un chantier. Ce blueprint s'applique au projet cible et à tout code neuf écrit sur son modèle.
 
-Un Use Case retourne un objet qui répond à **`success?`**, à un **payload nommé** et à **`errors`** (toujours un `Array` de `String`).
+## Le contrat
 
-Deux formes coexistent, toutes deux valides aujourd'hui.
+```ruby
+# app/domain/shared/result.rb
+# 🧠 DOMAINE · Shared::Result
+# Rôle : contrat de retour unique de tout use case
+# ADR  : 0026
+module Shared
+  Result = Data.define(:value, :code, :errors) do
+    def self.success(value = nil) = new(value:, code: nil, errors: {})
 
-### Forme 1 — `Struct` déclaré dans le Use Case (préférée pour du code neuf)
+    def self.failure(code, errors: {})
+      raise ArgumentError, "code d'erreur inconnu : #{code}" unless Result::ERROR_CODES.include?(code)
 
-Le contrat est visible, typé par ses membres, et une faute de frappe lève une erreur.
+      new(value: nil, code:, errors:)
+    end
+
+    def success? = code.nil?
+    def failure? = !success?
+  end
+  Result::ERROR_CODES = %i[forbidden not_found invalid conflict locked expired].freeze
+end
+```
+
+| Code | Quand | HTTP (`RendersResult`) |
+|---|---|---|
+| `:forbidden` | la policy refuse | 403, ou redirection vers la connexion si anonyme |
+| `:not_found` | la ressource n'existe pas pour cet acteur | 404 |
+| `:invalid` | saisie invalide ; `errors` vaut `{ champ: [messages] }` | 422 |
+| `:conflict` | l'état interdit l'action (question déjà répondue, élément encore référencé) ; `errors[:base]` explique | 422 |
+| `:locked` | compte verrouillé ; `errors[:retry_after]` | 429 |
+| `:expired` | jeton ou code périmé | 422 |
+
+La liste est fermée : ajouter un code demande d'amender l'ADR-0026.
+
+## Un use case
 
 ```ruby
 # app/domain/use_cases/catalog/create_course.rb
+# 🧠 DOMAINE · UseCases::Catalog::CreateCourse
+# Rôle : crée un cours en brouillon
+# ADR  : 0026, 0028, 0035
 module UseCases
   module Catalog
     class CreateCourse
-      Response = Struct.new(:success?, :course, :errors, keyword_init: true)
-
-      def initialize(course_repository:)
+      def initialize(course_repository:, policy:)
         @course_repository = course_repository
+        @policy = policy
       end
 
-      def call(attributes: {})
-        course = Entities::Catalog::Course.new(attributes)
+      def call(actor:, input:)
+        return Shared::Result.failure(:invalid, errors: input.errors.to_hash) unless input.valid?
 
-        unless course.valid?
-          return Response.new(success?: false, course: course, errors: course.errors.full_messages)
-        end
+        authorization = @policy.call(actor:)
+        return authorization if authorization.failure?
 
-        if @course_repository.save(course)
-          Response.new(success?: true, course: course, errors: [])
-        else
-          Response.new(success?: false, course: course, errors: course.errors.full_messages)
-        end
+        Shared::Result.success(@course_repository.create(input.to_h.merge(status: "draft", author_id: actor.user_id)))
       end
     end
   end
 end
 ```
 
-### Forme 2 — `OpenStruct` (dominante dans l'existant)
+L'ordre ne varie pas : valider le DTO (`:invalid`), charger les faits (`:not_found`), appeler la policy (`:forbidden`), écrire. Rien n'est écrit avant la dernière étape ([ADR-0028](../decisions/adr/0028-policies-de-domaine-par-use-case.md)).
+
+## Le contrôleur
 
 ```ruby
-# app/domain/use_cases/catalog/manage_resource.rb
-def execute_create(dto:, **extra_attributes)
-  entity = @entity_class.new(dto.to_h.merge(extra_attributes))
-  return OpenStruct.new(success?: false, errors: entity.errors.full_messages) unless entity.valid?
+result = UseCases::Catalog::CreateCourse.new(course_repository:, policy:).call(actor: current_actor, input:)
+return render_result(result) if result.failure?
 
-  if (saved = save_entity(entity))
-    OpenStruct.new(success?: true, resource: saved)
-  else
-    OpenStruct.new(success?: false, errors: entity.errors.full_messages)
-  end
-end
+redirect_to teams_course_path(result.value.slug), notice: t(".created")
 ```
 
-⚠️ Piège de la forme 2 : un `OpenStruct` répond `nil` à **n'importe quel** message. `result.errors` vaut `nil` sur une branche succès, et `result.resorce` (faute de frappe) vaut `nil` silencieusement. Peupler `errors: []` explicitement quand on veut pouvoir itérer sans garde.
+`render_result` vient du concern `RendersResult` (`app/controllers/concerns/renders_result.rb`). Pour `:invalid`, le contrôleur rend de nouveau le formulaire avec `result.errors`.
 
-### Consommation par le contrôleur
+## Une query
 
-Identique dans les deux formes :
-
-```ruby
-result = use_case.execute_create(dto: dto)
-
-if result.success?
-  redirect_to course_path(result.resource.slug), notice: t(".created")
-else
-  Array(result.errors).each { |err| @course.errors.add(:base, err) }
-  render :new, status: :unprocessable_entity
-end
-```
+Une query renvoie un `Data` défini dans la query (constante `Row`), un tableau de `Row` ou `nil`. Jamais une relation, un `Hash` ni un modèle `Orm::`. Les agrégations se font en SQL, jamais par `group_by` en mémoire.
 
 ## Règles
 
-- Un Use Case **retourne toujours** un objet répondant à `success?`. Jamais `nil`, jamais `false`, jamais l'entité nue, jamais une exception pour un échec métier attendu.
-- Le membre d'erreurs s'appelle `errors` et contient des **chaînes** (`entity.errors.full_messages`), pas un `ActiveModel::Errors`.
-- Le payload est nommé par le domaine : `course`, `school`, `resource`, `session`. Pas de `data` générique.
-- `Struct.new(..., keyword_init: true)` est déclaré **dans** la classe du Use Case, sous le nom `Response`. Pas de classe de résultat partagée tant que l'ADR n'a pas tranché.
-- **Ne pas créer `Shared::Result`, `Result`, `Success`, `Failure`** dans le cadre d'un lot ordinaire. Cela change le contrat de 45 use cases et de tous les contrôleurs : c'est un chantier avec ADR, pas un effet de bord.
+- Une seule méthode publique, `call`, à arguments nommés.
+- On renvoie toujours un `Shared::Result` : jamais `nil`, jamais l'entité nue.
+- Un cas métier attendu ne lève pas d'exception. Une exception signale un bug ou une panne d'infrastructure.
+- `value` porte l'entité ou le `Data` utile ; `errors` est un `Hash`, jamais un `ActiveModel::Errors`.
+- Les dépendances sont injectées **sans valeur par défaut**.
+- Un use case qui écrit dans plusieurs tables reçoit `transaction:` (`Ports::Shared::TransactionPort`).
 
 ## Erreurs fréquentes
 
 | ❌ | ✅ |
 |---|---|
-| `Shared::Result.success(course)` | La classe n'existe pas → `NameError`. Utiliser `Response` ou `OpenStruct` |
-| Retourner l'entité directement en cas de succès | Retourner l'objet de retour, toujours |
-| `raise ArgumentError` pour une donnée invalide | `Response.new(success?: false, errors: [...])` |
-| `result.errors.each` sur un `OpenStruct` de succès | `Array(result.errors).each`, ou peupler `errors: []` |
-| Mélanger `call` et `execute_create` dans le même contexte | S'aligner sur le contexte existant |
-| Introduire un objet Result maison « pour faire propre » | Ouvrir un ADR (`conventions.md` §8) |
+| `OpenStruct.new(success?: false, …)` ou un `Struct` `Response` local | `Shared::Result.failure(:invalid, errors: …)` |
+| `Shared::Result.failure(:unauthorized)` | Un code de la liste fermée : `:forbidden` |
+| `raise ActiveRecord::RecordNotFound` dans le domaine | `Shared::Result.failure(:not_found)` ; le domaine ignore ActiveRecord |
+| `errors: ["Session terminée"]` | `errors: { base: [:session_completed] }`, traduit par la vue |
+| Écrire puis appeler la policy | Policy d'abord, écriture ensuite |
+| Une query qui renvoie `Orm::Course.where(…)` | Un tableau de `Row` |

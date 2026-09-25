@@ -2,13 +2,17 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | — |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0026](./0026-contrat-result-entites-et-dto.md) *(§2.A à §2.C)* |
+| **Complété par** | [ADR-0035](./0035-cycle-de-vie-et-propriete-du-contenu.md) : §2.A (cycle de vie `draft` / `published` / `archived`) |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — entités, ports et use cases suivent l'ADR-0026.**
+> Le §2.A à §2.C est remplacé par l'[ADR-0026](./0026-contrat-result-entites-et-dto.md) le 2026-09-25 ; `BrowseCatalog` et `ViewCourse` ne sont pas repris. Le statut du contenu est fixé par l'[ADR-0035](./0035-cycle-de-vie-et-propriete-du-contenu.md). La modélisation du catalogue (niveaux, séries, matières, cours, fiches) reste la référence métier.
 
 > ℹ️ **Renuméroté de ADR-0014 en ADR-0022** lors de la normalisation du corpus : le numéro 0014 était porté simultanément par ce document et par l'[ADR-0014 — Standardisation des namespaces](./0014-standardisation-namespaces-et-validation-frontiere.md). Les en-têtes HITL du code (`app/domain/entities/catalog/`, `app/domain/ports/catalog/`, `app/domain/use_cases/catalog/`, tests associés) référencent encore « ADR-0014 (Architecture Hexagonale Catalogue) » et devront être mis à jour vers ADR-0022.
 

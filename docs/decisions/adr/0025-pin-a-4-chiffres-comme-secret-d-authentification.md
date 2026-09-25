@@ -7,8 +7,12 @@
 | **Chantier** | `docs/chantiers/refonte-application` |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Complété par** | [ADR-0050](./0050-authentification-et-session.md) (comp. 1 à 4), [ADR-0031](./0031-second-facteur-totp-pour-l-equipe.md) et [ADR-0038](./0038-comptes-de-l-equipe-et-sous-roles.md) (comp. 5), [ADR-0032](./0032-recuperation-assistee-du-pin.md) (comp. 6) |
 
 ---
+
+> ⚠️ **Décision complétée — les six compensations ont leur ADR.**
+> Le 2026-09-25, les compensations 1 à 4 sont précisées par l'[ADR-0050](./0050-authentification-et-session.md), la compensation 5 par l'[ADR-0031](./0031-second-facteur-totp-pour-l-equipe.md) et l'[ADR-0038](./0038-comptes-de-l-equipe-et-sous-roles.md), la compensation 6 par l'[ADR-0032](./0032-recuperation-assistee-du-pin.md). Le PIN à 4 chiffres et ses six conditions restent en vigueur.
 
 ## 1. Contexte et problématique
 

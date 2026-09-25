@@ -165,7 +165,14 @@ Le repository fait **trois** choses : il `include` le port, il parle à l'ORM, e
 
 ### 2.7 Le retour, et où vit vraiment la règle métier
 
-La règle « 100 % → or, ≥ 80 % → argent, ≥ 50 % → bronze » n'est ni dans le contrôleur, ni dans le repository, ni dans l'ORM. Elle est dans l'entité — `app/domain/entities/assessment/exercise_badge.rb` :
+> ⚠️ **Le barème et le moteur ci-dessous sont ceux de l'ancien dépôt.** Depuis le 2026-09-25, le projet cible suit l'[ADR-0033](../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) et l'[ADR-0054](../decisions/adr/0054-moteur-d-evaluation-soumission-et-cloture.md) :
+> - quatre badges, Bronze ≥ 50 %, Argent ≥ 70 %, Or ≥ 80 %, Diamant = 100 % (sans faute), avec des seuils nommés (`PASS_THRESHOLD`, `MASTERY_THRESHOLD`, `GOLD_THRESHOLD`, `PERFECT_THRESHOLD`) dans `Entities::Assessment::Grading` ; « or à 100 % » n'est pas une règle ;
+> - la soumission corrige par identifiants et crée une tentative unique et immuable ; **seul** `Assessment::CloseExerciseSession` pose le score, décide du badge et de la lacune ;
+> - les use cases renvoient un `Shared::Result`, jamais un `OpenStruct` ([ADR-0026](../decisions/adr/0026-contrat-result-entites-et-dto.md)).
+>
+> La leçon de cette section reste valable : la règle vit dans le domaine, pas dans le contrôleur.
+
+Dans l'ancien dépôt, la règle « 100 % → or, ≥ 80 % → argent, ≥ 50 % → bronze » n'est ni dans le contrôleur, ni dans le repository, ni dans l'ORM. Elle est dans l'entité — `app/domain/entities/assessment/exercise_badge.rb` :
 
 ```ruby
 def self.determine_level(percentage)
@@ -287,23 +294,25 @@ Le use case existe parce qu'il y a une règle (« pas de profil élève → redi
 
 ## 5. Les six contextes bornés
 
-Chaque couche est namespacée par contexte. Les six, et rien d'autre :
+Chaque couche est namespacée par contexte. Les six, et rien d'autre. Le découpage fait autorité depuis l'[ADR-0027](../decisions/adr/0027-contextes-bornes-et-arborescence.md) (2026-09-25), qui fixe aussi la table → contexte :
 
-| Contexte | Ce qu'il possède | Points d'entrée réels |
+| Contexte | Ce qu'il possède | Points d'entrée dans l'ancien dépôt |
 |---|---|---|
-| **assessment** | Exercices, questions, sessions, tentatives, badges, lacunes, sujets d'examen | `app/controllers/assessment/`, `app/domain/use_cases/assessment/` (14 use cases) |
-| **catalog** | Cours, fiches essentielles, matières, niveaux, séries, DRENA, import JSON | `app/controllers/catalog/`, `app/domain/use_cases/catalog/` |
-| **classroom** | Classes, assignations polymorphes de ressources, élèves de démo | `app/controllers/classroom/`, `app/domain/use_cases/classroom/` |
-| **communication** | Messages et annonces diffusés par audience | `app/controllers/messages_controller.rb`, `app/domain/use_cases/communication/` |
-| **identity** | Utilisateurs, rôles, inscriptions, sessions, feeds par rôle | `app/controllers/identity/`, `app/domain/use_cases/identity/` |
-| **school** | Établissements, rôles d'établissement, personnel administratif | `app/domain/use_cases/school/`, `app/domain/dtos/school/` |
+| **assessment** | Exercices, questions, propositions, sessions, tentatives, badges, lacunes | `app/controllers/assessment/`, `app/domain/use_cases/assessment/` (14 use cases) |
+| **catalog** | Niveaux, séries, `level_series`, matières, cours, fiches essentielles, rapports d'import | `app/controllers/catalog/`, `app/domain/use_cases/catalog/` |
+| **classroom** | Classes, adhésions, enseignement (`teacher_classrooms`), assignations polymorphes | `app/controllers/classroom/`, `app/domain/use_cases/classroom/` |
+| **communication** | Annonces diffusées par audience, rejets | `app/controllers/messages_controller.rb`, `app/domain/use_cases/communication/` |
+| **identity** | Comptes, profils, authentification, sessions, invitations, journal d'audit | `app/controllers/identity/`, `app/domain/use_cases/identity/` |
+| **school** | **DRENA**, établissements, personnel de direction, rattachement des enseignants (`teacher_schools`) | `app/domain/use_cases/school/`, `app/domain/dtos/school/` |
+
+Dans l'ancien dépôt, la DRENA vivait dans `catalog`, les sujets d'examen dans `assessment` et les élèves de démo dans `classroom` : la DRENA passe dans `school`, les deux autres sont retirés du plan.
 
 Le contexte est aussi le **scope de commit** (`feat(assessment): …`) et l'unité de découpage d'un chantier.
 
 Deux nuances à connaître avant de te fier au namespace :
 
 - **`school` n'a pas de dossier de ports ni de repositories à lui.** Ses ports vivent dans `app/domain/ports/school_*.rb` (racine) et ses repositories dans `app/infrastructure/repositories/school_*.rb`. Ses contrôleurs sont répartis entre `app/controllers/catalog/schools_controller.rb`, `app/controllers/schoolstaff/` et `app/controllers/school_admins/`.
-- **Les 17 Queries ne sont pas namespacées par contexte** : elles sont toutes à plat dans `Queries::`. C'est volontaire — une Query de dashboard traverse souvent plusieurs contextes.
+- **Les 17 Queries de l'ancien dépôt ne sont pas namespacées par contexte** : elles sont toutes à plat dans `Queries::`. Le projet cible les range dans `Queries::<Contexte>::…Query` ; une query peut toujours joindre des tables de plusieurs contextes ([ADR-0027](../decisions/adr/0027-contextes-bornes-et-arborescence.md)).
 
 Un fichier à la racine de `entities/`, `ports/` ou `repositories/` est du **legacy à migrer** (≈13 entités et 5 repositories sont dupliqués racine + contexte, cf. [`conventions.md` §8](conventions.md#8-écarts-connus-entre-la-doc-et-le-code)). Ne prends jamais un fichier racine comme modèle.
 

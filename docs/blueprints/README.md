@@ -12,13 +12,13 @@ Les contrats de nommage, de branches et d'en-tête sont figés dans [`docs/guide
 | DTO | `app/domain/dtos/` | `Dtos::CourseDto` | [dto.md](dto.md) |
 | Port | `app/domain/ports/<contexte>/` | `Ports::Catalog::CourseRepositoryPort` | [port.md](port.md) |
 | Use case | `app/domain/use_cases/<contexte>/` | `UseCases::Catalog::CreateCourse` | [use_case.md](use_case.md) |
-| Policy | `app/domain/policies/` | `Policies::ClassroomAccessPolicy` | [policy.md](policy.md) |
+| Policy | `app/domain/policies/<contexte>/` | `Policies::Classroom::TeachPolicy` | [policy.md](policy.md) |
 | Repository | `app/infrastructure/repositories/<contexte>/` | `Repositories::Identity::SchoolRepository` | [repository.md](repository.md) |
 | Query (lecture) | `app/infrastructure/queries/` | `Queries::ClassroomReportQuery` | [query.md](query.md) |
 | Modèle ActiveRecord | `app/infrastructure/orm/` | `Orm::Course` | [orm_model.md](orm_model.md) |
 | Contrôleur | `app/controllers/<contexte>/` | `Catalog::CoursesController` | [controller.md](controller.md) |
 | Presenter | *(pas encore instancié)* | `…Presenter` | [presenter.md](presenter.md) |
-| Objet de retour | *(pas de classe dédiée)* | `Struct` / `OpenStruct` | [result.md](result.md) |
+| Objet de retour | `app/domain/shared/` | `Shared::Result` | [result.md](result.md) |
 | Tests | `test/<couche>/…` | — | [test.md](test.md) |
 
 ## Les 3 règles transverses

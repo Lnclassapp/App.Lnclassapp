@@ -16,7 +16,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0004](./0004-identite-et-profils.md) | Identité et profils (Identity UI) | Accepté · non applicable (0005) | — | [0021](../adr/0021-gestion-de-l-identite.md) | Garantir zéro régression d'interface pour les 5 rôles pendant le refactoring du module Identity côté backend. |
 | [0005](./0005-design-system-fondateur.md) | Design system fondateur | Proposé | 2026-09-25 | [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) | Trois sources de style contradictoires et aucune valeur interdite : une palette `@theme` seule issue de la landing, des échelles, treize composants, pas de mode sombre, heroicons vendorés, un test qui refuse `[…]` et `#hex`. Remplace les sections « Tokens » des UDR-0001/0002/0003 ; UDR-0004 non applicable. |
 | [0006](./0006-shell-applicatif-par-role.md) | Shell applicatif par rôle | Proposé | 2026-09-25 | [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) | 4 × 4 partials de navigation divergents et des destinations cachées sur mobile : un shell unique paramétré par le rôle, la même liste en bureau et en mobile, un accueil par rôle, des toasts dont le message survit au Turbo Stream, et des CRUD entièrement Hotwire (modale dans un frame, 422, Turbo Stream). |
-| [0007](./0007-vocabulaire-d-interface.md) | Vocabulaire d'interface | Proposé | 2026-09-25 | — | *(rédigée en parallèle, voir le fichier)* |
+| [0007](./0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) | Vocabulaire de la fiche essentielle et de l'évaluation | Accepté | 2026-09-25 | — | remplace le vocabulaire des UDR-0001 et 0003 |
 
 ---
 

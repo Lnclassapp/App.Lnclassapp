@@ -4,13 +4,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *« Validé » dans le document d'origine* |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | — |
 | **Chantier** | — |
 | **ADR lié** | [ADR-0022 — Modélisation hexagonale du catalogue pédagogique](../adr/0022-modelisation-hexagonale-du-catalogue-pedagogique.md) |
-| **Remplacé par** | [UDR-0005](./0005-design-system-fondateur.md), section « Tokens » seulement |
+| **Remplacé par** | [UDR-0005](./0005-design-system-fondateur.md) *(section « Tokens »)*, [UDR-0007](./0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) *(vocabulaire)* |
 
 ---
+
+> ⚠️ **Vocabulaire remplacé — « Fiche essentielle ».**
+> Le terme « essentiels (habiletés) » est remplacé par l'[UDR-0007](./0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) le 2026-09-25 : l'interface écrit « Fiche essentielle », jamais « Habileté ». Le reste de cette UDR reste en vigueur.
 
 ## 1. Contexte
 
