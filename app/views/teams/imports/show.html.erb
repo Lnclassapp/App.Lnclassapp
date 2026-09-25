@@ -1,6 +1,7 @@
 <%# 🌐 UI · teams/imports/show — page de suivi d'un import %>
-<%# Rôle : en-tête du rapport (type, fichier, auteur, date), puis le suivi rechargé tant que l'import tourne %>
+<%# Rôle : en-tête du rapport (type, fichier, auteur, date), puis le suivi rechargé tant que l'import tourne ; « Imports » reste actif %>
 <%# ADR  : 0039 · UDR : 0006 %>
+<% content_for :nav_key, "imports" %>
 <% content_for :title, t(".page_title", kind: t("import_kinds.#{@import.kind}")) %>
 <div class="mb-4">
   <%= ui_button t(".back"), href: teams_imports_path, variant: :ghost, size: :sm, icon: "arrow-left" %>
