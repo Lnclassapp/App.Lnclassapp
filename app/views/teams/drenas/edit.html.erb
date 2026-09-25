@@ -1,0 +1,14 @@
+<%# 🌐 UI · teams/drenas/edit — renommage d'une DRENA, servi dans le frame « modal » (ouverte sur le shell sans frame) %>
+<%# Rôle : nom modifiable, slug rappelé et figé ; échec re-rendu en 422 dans la modale, succès en Turbo Stream %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0035 %>
+<% content_for :title, t(".title") %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "drena-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "drena-form", icon: "check" %>
+    <% end %>
+    <%= render "form", form: @form, url: drena_path(@drena.public_id), method: :patch,
+                       hint: t("teams.drenas.form.name_hint_edit_html", slug: @drena.slug) %>
+  <% end %>
+<% end %>
