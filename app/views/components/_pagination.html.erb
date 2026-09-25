@@ -1,0 +1,10 @@
+<%# 🌐 UI · components/_pagination — précédent / page x sur y / suivant, appelée par ui_pagination %>
+<%# Rôle : navigation de liste simple, liens rel="prev"/"next" %>
+<%# UDR  : 0005 %>
+<nav aria-label="<%= t(".label") %>" class="flex items-center justify-between gap-3">
+  <%= ui_button t(".previous"), href: previous_href, variant: :secondary, icon: "chevron-left",
+        disabled: previous_href.nil?, rel: ("prev" if previous_href) %>
+  <p class="text-sm text-mute" aria-current="page"><%= t(".status", page:, pages:) %></p>
+  <%= ui_button t(".next"), href: next_href, variant: :secondary, icon_end: "chevron-right",
+        disabled: next_href.nil?, rel: ("next" if next_href) %>
+</nav>

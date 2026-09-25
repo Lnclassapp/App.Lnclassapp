@@ -1,0 +1,24 @@
+<%# 🌐 UI · components/_dropdown — menu déroulant accessible, appelé par ui_dropdown %>
+<%# Rôle : bouton aria-haspopup/aria-controls, flèches, Échap, clic extérieur %>
+<%# UDR  : 0005 · Stimulus : dropdown %>
+<div class="relative inline-block" data-controller="dropdown"
+     data-action="keydown->dropdown#keydown click@window->dropdown#outside turbo:before-cache@document->dropdown#close">
+  <% if trigger %>
+    <button type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="<%= id %>" aria-label="<%= label %>"
+            data-dropdown-target="button" data-action="dropdown#toggle"
+            class="flex min-h-tap cursor-pointer items-center gap-2 rounded-full py-1 pr-3 pl-1 transition hover:bg-ink/5 focus-visible:outline-2 focus-visible:outline-brand">
+      <%= trigger %>
+      <%= ui_icon "chevron-down", variant: :mini, size: :sm, class: "text-mute" %>
+    </button>
+  <% else %>
+    <button type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="<%= id %>" aria-label="<%= label %>"
+            data-dropdown-target="button" data-action="dropdown#toggle"
+            class="grid size-tap cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand">
+      <%= ui_icon icon %>
+    </button>
+  <% end %>
+  <div id="<%= id %>" role="menu" aria-label="<%= label %>" data-dropdown-target="menu" hidden
+       class="absolute z-30 mt-2 w-64 rounded-ln border border-line bg-white p-1.5 shadow-pop animate-fade-in <%= align_class %>">
+    <%= items %>
+  </div>
+</div>

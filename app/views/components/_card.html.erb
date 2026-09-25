@@ -1,0 +1,27 @@
+<%# 🌐 UI · components/_card — carte à en-tête, corps et pied, appelée par ui_card %>
+<%# Rôle : conteneur de référence de toutes les listes et sections d'accueil %>
+<%# UDR  : 0005 %>
+<%= content_tag tag_name, attributes do %>
+  <% if title || slots[:actions] %>
+    <div class="mb-4 flex items-start gap-3">
+      <% if icon %>
+        <span class="grid size-10 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong"><%= ui_icon icon %></span>
+      <% end %>
+      <div class="min-w-0 flex-1">
+        <% if title %>
+          <%= content_tag heading, title, class: "font-display text-lg leading-tight font-extrabold" %>
+        <% end %>
+        <% if subtitle %>
+          <p class="mt-0.5 text-sm text-mute"><%= subtitle %></p>
+        <% end %>
+      </div>
+      <% if slots[:actions] %>
+        <div class="flex shrink-0 items-center gap-2"><%= slots[:actions] %></div>
+      <% end %>
+    </div>
+  <% end %>
+  <%= body %>
+  <% if slots[:footer] %>
+    <div class="mt-5 flex flex-wrap items-center justify-end gap-3 border-t border-line pt-4"><%= slots[:footer] %></div>
+  <% end %>
+<% end %>
