@@ -10,11 +10,6 @@
 
 ---
 
-> **Erratum et précisions du 2026-09-25** (chantier `docs/chantiers/boucle-pedagogique`).
-> - La colonne `errors` s'appelle **`import_errors`** : `errors` est réservé par `ActiveModel` sur tout modèle (`record.errors`). Le tableau du §4 (Rapport) est corrigé.
-> - Le test de performance est découpé **par type** : `test/performance/<contexte>/import_<kind>_performance_test.rb`, un par lot d'import, au lieu du fichier unique `test/performance/imports_test.rb`. Mêmes volumes et même seuil ; hors suite par défaut, joué avec `PERF=1` avant la recette.
-> - Les jobs `<Contexte>::Import…Job` héritent d'un job commun, `Shared::ImportJob`. `config.x.import_jobs` associe chaque `kind` à son job, résolu à l'appel : un lot d'import n'édite aucun fichier du moteur.
-
 ## 1. Contexte et problématique
 
 L'ancien importe quatre choses, chacune à sa façon (**C-18**) :
@@ -77,7 +72,7 @@ Les alias de clés de l'ancien sont acceptés en version 1 : ses fichiers s'impo
 | fichier | pièce jointe Active Storage `source`, `checksum_sha256`, `format_version` |
 | compteurs | `total_count`, `imported_count`, `skipped_count`, `error_count`, `processed_count` (progression) |
 | `details` | `jsonb` : classes générées, niveaux et séries sautés (ADR-0030) |
-| `import_errors` | `jsonb` : `[{ path:, code:, message: }]`, 1 000 entrées au plus ; au-delà, seul `error_count` avance |
+| `errors` | `jsonb` : `[{ path:, code:, message: }]`, 1 000 entrées au plus ; au-delà, seul `error_count` avance |
 | `imported_by_id` | FK `users` ; `started_at`, `finished_at` |
 
 `total_count` = importés + ignorés + en erreur. Un seul import `queued`, `validating` ou `importing` à la fois par `kind` (index unique partiel) ; un second donne `:conflict`. Un job interrompu passe `failed` : on le relance, et ce qui était déjà écrit est compté en doublon. L'écran du rapport (`/teams/imports/:public_id`) se recharge toutes les 3 secondes tant que l'import tourne (Turbo Frame, contrôleur Stimulus), sans WebSocket. Journal : `import.run`.
@@ -113,7 +108,7 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
 ## 7. Comment vérifier que la décision est respectée
 
 - Tests de use case, un fichier de fixture par cas : enveloppe invalide → `rejected` et zéro ligne ; une matière inconnue sur un cours parmi dix → neuf importés, une erreur avec son chemin ; un cours existant → ignoré ; un lot en échec en base → rejoué, aucun cours à moitié écrit.
-- Un test de performance par type, `test/performance/<contexte>/import_<kind>_performance_test.rb` (erratum ci-dessus), hors suite par défaut, joué avant la recette de la V1 : 500 écoles (≈ 35 000 classes) ou 200 cours complets (8 fiches, 2 exercices par fiche, 10 questions, 4 propositions) en moins de 2 minutes en local.
+- `test/performance/imports_test.rb`, hors suite par défaut, joué avant la recette de la V1 : 500 écoles (≈ 35 000 classes) ou 200 cours complets (8 fiches, 2 exercices par fiche, 10 questions, 4 propositions) en moins de 2 minutes en local.
 - `grep -rn "find_or_create_by\|tmp/imports" app/` ne renvoie rien.
 
 ## 8. Remplace, complète, amende
@@ -127,3 +122,18 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
 - Doublons ignorés et comptés, jamais mis à jour ; tout contenu importé naît brouillon.
 - Le type d'établissement `mixte` est accepté ; les DRENA ne s'importent pas, elles se créent par le formulaire.
 - Limites acceptées : 5 000 écoles, 500 cours, 2 000 fiches, 10 000 exercices par fichier ; 1 000 erreurs détaillées ; `import_reports` dans `catalog`.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Erratum — `errors` devient `import_errors`.** La colonne du rapport nommée `errors` au §4 s'appelle **`import_errors`** (`jsonb`, défaut `[]`, même contenu) : `ActiveModel` réserve `errors` sur tout modèle.
+- **Quatre types d'import**, et pas de DRENA : `kind` ∈ `schools`, `course_tree`, `essentials`, `exercises`, garanti par la contrainte `import_reports_kind_values`.
+- **Table `import_reports`**, telle que la migration `20260925100030_create_import_reports` l'implémente :
+  - statuts : `queued` (défaut), `validating`, `importing`, `completed`, `rejected`, `failed`, garantis par la contrainte `import_reports_status_values` ;
+  - compteurs : `total_count`, `processed_count` (progression), `imported_count`, `skipped_count`, `error_count`, tous entiers non nuls, défaut 0 ;
+  - fichier : `filename`, `byte_size`, `checksum_sha256`, `format_version` (connu après lecture de l'enveloppe), et la pièce jointe Active Storage `source` ;
+  - `scope` (`jsonb`) : la cible de l'import (`drena`, `course` ou `essential`) ; `details` et `import_errors` en `jsonb`.
+- **Un seul import actif par type** : un index unique partiel sur `kind`, pour les statuts `queued`, `validating` et `importing` (`index_import_reports_one_running_per_kind`). Un second import du même type donne `:conflict`. Aucun index unique sur le checksum : réimporter un fichier est permis, et ses éléments déjà écrits sont comptés en doublons.
+- **Jobs** : les jobs `<Contexte>::Import…Job` héritent de `Shared::ImportJob`. `config.x.import_jobs` associe chaque `kind` à son job, résolu à l'appel.
+- **Test de performance par type** : `test/performance/<contexte>/import_<kind>_performance_test.rb`, un par lot d'import, au lieu du fichier unique `test/performance/imports_test.rb` du §7. Volumes et seuil inchangés. Ces tests sont hors suite par défaut et se jouent avec `PERF=1`.

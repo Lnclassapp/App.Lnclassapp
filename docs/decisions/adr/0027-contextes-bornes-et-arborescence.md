@@ -10,8 +10,6 @@
 
 ---
 
-> **Erratum du 2026-09-25** (chantier `docs/chantiers/boucle-pedagogique`). L'arborescence plaçait `TransactionPort` dans `app/domain/shared/`, sous `Shared::`. L'ADR-0026 le nomme `Ports::Shared::TransactionPort` : c'est un port, il vit avec les autres ports, dans `app/domain/ports/shared/`. Seul `Shared::Result` reste dans `app/domain/shared/`. La ligne de l'arborescence est corrigée.
-
 ## 1. Contexte et problématique
 
 Trois sources placent les mêmes concepts à trois endroits : l'ADR-0023 met DRENA, école et classe dans `Identity`, les conventions dans `school` et `classroom`, l'architecture §5 la DRENA dans `catalog` (**C-03**).
@@ -49,8 +47,7 @@ L'ADR-0014 §2.2 prévoit `app/presentation/` et `adapters/`, qui n'existent pas
 
 | Emplacement | Namespace |
 |---|---|
-| `app/domain/shared/` | `Shared::Result` |
-| `app/domain/ports/shared/` | `Ports::Shared::TransactionPort` (ADR-0026) |
+| `app/domain/shared/` | `Shared::` (`Result`, `TransactionPort`) |
 | `app/domain/{entities,use_cases,ports,dtos,policies}/<contexte>/` | `Entities::<Contexte>::…`, etc. |
 | `app/infrastructure/orm/` | `Orm::<Modèle>`, à plat, un modèle par table |
 | `app/infrastructure/repositories/<contexte>/` | `Repositories::<Contexte>::…` |
@@ -117,3 +114,10 @@ Fichier : `app/domain/ports/assessment/knowledge_gap_repository_port.rb` (C-49 :
 
 - `teacher_schools` est rangé dans `school` (rattachement à l'établissement), et non dans `classroom`.
 - `audit_events` est rangé dans `identity` : le journal est centré sur l'acteur.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Erratum — emplacement de `TransactionPort`.** L'arborescence du §4 le range dans `app/domain/shared/`, sous `Shared::`. Il vit dans **`app/domain/ports/shared/transaction_port.rb`**, sous le nom **`Ports::Shared::TransactionPort`**, comme le nomme l'ADR-0026 : c'est un port, rangé avec les autres ports. Son adaptateur est `Repositories::Shared::Transaction`.
+- `app/domain/shared/` ne contient que `Shared::Result`.

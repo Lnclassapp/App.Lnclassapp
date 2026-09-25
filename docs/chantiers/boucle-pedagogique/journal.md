@@ -45,7 +45,9 @@
 - **UDR-0006** : l'entrée « Établissements » (`schools_path`) de la navigation équipe est active dès la V1.
 - **ADR-0028** : policies ajoutées (`DeclareTeachingPolicy`, `IssuePinRecoveryCodePolicy`, `ResetSecondFactorPolicy`, `RegisterTeacherPolicy`, `ReadClassroomPolicy`, `SubmitAttemptPolicy`, `Identity::SessionPolicy`, `Identity::SecondFactorPolicy`) ; les exemptions restent les trois de l'ADR.
 - **ADR-0039** (erratum et précisions) : la colonne `errors` s'appelle `import_errors`, `errors` étant réservé par `ActiveModel` ; un test de performance par type ; jobs dérivés de `Shared::ImportJob`, associés par `config.x.import_jobs`.
-- **ADR-0034** : rien à amender. Il exclut déjà tout seed de DRENA, d'établissement et de référentiel en production, et fait des slugs figés de `levels` et `series` les codes de la génération des classes.
+- **ADR-0034** : aucun seed de DRENA, d'établissement ni de référentiel en production ; le slug figé tient lieu de code pour les niveaux et les séries.
+- Chaque amendement est une section « Amendement du 2026-09-25 » en bas du fichier, sans réécriture du texte accepté.
+- L'amendement de l'ADR-0039 décrit `import_reports` telle que 0a l'implémente : colonnes `scope`, `filename` et `byte_size` en plus, sans la contrainte sur `total_count` du plan (0a.2).
 
 ## Dette laissée derrière
 

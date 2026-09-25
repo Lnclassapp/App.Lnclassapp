@@ -46,7 +46,7 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 | `school_admin` | Accueil `school_admin_home_path` · Classes `school_admin_classrooms_path` · Enseignants `school_admin_teachers_path` · Élèves `school_admin_students_path` |
 | compte | Mon profil `profile_path` · Se déconnecter `session_path` (`DELETE`) |
 
-- Une route pas encore dessinée rend l'entrée **inactive** : `<a>` sans `href`, avec `aria-disabled="true"` et `opacity-50`. Elle n'est pas focusable et ne mène nulle part. Dans le menu du compte, l'entrée devient un `span` `aria-disabled`. En V1, `team_dashboard_path` et `profile_path` restent inactives. `schools_path` est **active** dès la V1 (amendement du 2026-09-25, chantier `docs/chantiers/boucle-pedagogique`) : les établissements entrent dans le périmètre de la V1 (ADR-0030, ADR-0034), et le lot S2 livre leur liste.
+- Une route pas encore dessinée rend l'entrée **inactive** : `<a>` sans `href`, avec `aria-disabled="true"` et `opacity-50`. Elle n'est pas focusable et ne mène nulle part. Dans le menu du compte, l'entrée devient un `span` `aria-disabled`. En V1, `schools_path`, `team_dashboard_path` et `profile_path` restent inactives.
 - Entrée active : l'URL courante (`current_page?`) ou la clé déclarée par la vue (`content_for :nav_key, "courses"`, utile sur une page imbriquée). L'entrée active porte `aria-current="page"` et une icône pleine ; les autres ont une icône au trait.
 
 **Sections d'accueil** (`HOME_SECTIONS`) : élève « À faire », « Ma classe », « Cours » ; enseignant « Mes classes », « Activités », « Cours » ; équipe « Régions éducatives », « Structure scolaire », « Activités » ; direction « Tableau de bord », « Classes », « Activités ».
@@ -82,3 +82,10 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - Ajouter une destination revient à modifier `DESTINATIONS` et la locale `shared.navigation`, **jamais** un partial. Au-delà de 5 destinations pour un rôle, il faut une nouvelle UDR : la barre basse n'en tient pas plus.
 - L'accueil d'un rôle n'est « livré » que lorsque ses sections affichent des données réelles et que son test système passe.
 - Interdit désormais : un partial de navigation par rôle, un tiroir de navigation mobile, un toast dont le texte est produit côté client, `data-turbo-permanent` sur `#toasts`, un CRUD qui recharge la page ou redirige depuis la modale.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **`schools_path` devient actif en V1.** Les établissements entrent dans le périmètre de la V1 (ADR-0030, ADR-0034) : le lot S2 de la boucle pédagogique livre leur liste. L'entrée « Établissements » de la navigation `team` est donc active.
+- En V1, seules `team_dashboard_path` et `profile_path` restent inactives.

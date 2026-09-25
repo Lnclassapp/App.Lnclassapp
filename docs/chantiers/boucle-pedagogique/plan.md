@@ -2595,7 +2595,7 @@ Source : [feuille de route §6](../refonte-application/feuille-de-route.md#6-tra
 
 ## Décisions que ce plan suppose
 
-Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne sur eux. Les **amendements** et **errata** qu'il exige sont **écrits dans la branche de ce plan** (`docs/boucle-pedagogique`) : UDR-0006, ADR-0028, ADR-0039 et ADR-0027. Restent des **précisions** que les ADR laissent ouvertes, ajustables par l'orchestrateur sans toucher aux lots verticaux.
+Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne sur eux. Les **amendements** et **errata** qu'il exige sont **écrits dans la branche de ce plan** (`docs/boucle-pedagogique`), en section « Amendement du 2026-09-25 » à la fin de chaque fichier : UDR-0006, ADR-0027, ADR-0028, ADR-0034 et ADR-0039. Restent des **précisions** que les ADR laissent ouvertes, ajustables par l'orchestrateur sans toucher aux lots verticaux.
 
 | Décision supposée | Nature | Où elle doit figurer |
 |---|---|---|
