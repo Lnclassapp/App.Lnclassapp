@@ -6,10 +6,11 @@ module Entities
     module HomeDestination
       ALL = %i[student_home teacher_home teacher_classrooms team_home pending_account].freeze
 
-      def self.for(actor:, primary_membership:, onboarded:)
+      # primary_school_id : école principale de l'enseignant (teacher_schools), nil sinon
+      def self.for(actor:, primary_membership:, primary_school_id:, onboarded:)
         case actor.role
         when :student then student(primary_membership)
-        when :teacher then teacher(actor, onboarded)
+        when :teacher then teacher(primary_school_id, onboarded)
         when :team then :team_home
         else :pending_account # school_admin : V2
         end
@@ -19,8 +20,8 @@ module Entities
         membership&.active? && membership.classroom_active? ? :student_home : :pending_account
       end
 
-      def self.teacher(actor, onboarded)
-        return :pending_account if actor.school_id.nil?
+      def self.teacher(primary_school_id, onboarded)
+        return :pending_account if primary_school_id.nil?
 
         onboarded ? :teacher_home : :teacher_classrooms
       end

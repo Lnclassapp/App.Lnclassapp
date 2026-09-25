@@ -4,14 +4,12 @@
 module Ports
   module Identity
     module SessionRepositoryPort
-      Session = Data.define(:id, :user_id, :role, :created_at, :last_seen_at, :second_factor_verified_at)
-
       # → Integer (id)
       def create(user_id:, token_digest:, ip:, user_agent:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
-      # → Session | nil ; role en chaîne (users.role)
+      # → Entities::Identity::SessionState | nil ; role en chaîne (users.role)
       def find_by_token_digest(token_digest:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_token_digest"
       end
