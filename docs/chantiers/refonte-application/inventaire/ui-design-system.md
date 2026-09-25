@@ -1606,7 +1606,8 @@ l'ERB.
 7. **Le mode sombre.**
    Entièrement câblé — script anti-FOUC, contrôleur `theme`, 4 boutons de bascule, persistance
    `localStorage`, icônes soleil/lune — et **0 variante `dark:`**, aucune palette sombre dans le
-   `@theme`. Soit on l'implémente, soit on retire les 4 boutons.
+   `@theme`. Soit on l'implémente, soit on retire les 4 boutons. **Tranché le 2026-09-25** :
+   retiré en V1 (F-09, UDR-0005 acceptée).
 
 8. **L'internationalisation.**
    0 usage de `t(".key")` contre ~500 chaînes en dur dans les vues, alors que c'est une règle d'or

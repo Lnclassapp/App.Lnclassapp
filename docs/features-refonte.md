@@ -11,7 +11,7 @@
 
 ## Où reprendre
 
-1. **Trancher les décisions de fondation** : 3 bloquent la V0 (F-27, F-29, F-30) et 21 bloquent la V1. Registre au [§3 de la feuille de route](chantiers/refonte-application/feuille-de-route.md#3-registre-des-décisions-de-fondation).
+1. **Trancher les décisions de fondation** : 3 bloquent la V0 (F-27, F-29, F-30) et 21 bloquent la V1. Registre au [§3 de la feuille de route](chantiers/refonte-application/feuille-de-route.md#3-registre-des-décisions-de-fondation). *Au 2026-09-25, toutes sont tranchées : F-09 (thème sombre écarté en V1, [UDR-0005](decisions/udr/0005-design-system-fondateur.md)) et F-31 (shell unique par rôle, [UDR-0006](decisions/udr/0006-shell-applicatif-par-role.md)) ont été approuvées les dernières par le porteur.*
 2. **Refixer la date de la V1** et la consigner dans le [journal](chantiers/refonte-application/journal.md).
 3. **Corriger [`feature_listing.md`](feature_listing.md)** : `classroom_courses`, `classroom_essentials` et `classroom_exercises` n'existent plus ; elles sont fusionnées dans `classroom_assignments` (contradiction C-35).
 4. **Ouvrir le chantier `amorcage-depot`** (V0), puis la V1 selon [`plan.md`](chantiers/refonte-application/plan.md).
@@ -73,7 +73,7 @@
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
-| ☐ | CO-09 | Toasts de confirmation et d'erreur | ⚠️ | V1 (Lot 0c, F-31) | Un toast d'erreur Turbo qui perd son message |
+| ☐ | CO-09 | Toasts de confirmation et d'erreur | ⚠️ | V1 (Lot 0c, F-31 approuvée) | Un toast d'erreur Turbo qui perd son message |
 
 ### Établissements — `SC`
 
@@ -149,10 +149,10 @@
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
 | ☐ | TR-02 | Redirection selon le rôle | ⚠️ | V1 (0b) (= ID-13) | La boucle infinie de l'enseignant sans école |
-| ☐ | TR-04 | Fil d'accueil élève | ❌ | V1 (Lot A / D, F-31) · annonces en V6 | Un écran d'accueil sans test système (il levait une exception sans alerte) |
+| ☐ | TR-04 | Fil d'accueil élève | ❌ | V1 (Lot A / D, F-31 approuvée) · annonces en V6 | Un écran d'accueil sans test système (il levait une exception sans alerte) |
 | ☐ | TR-05 | Fil d'accueil enseignant | ❌ | V1 (Lot D) · activité des élèves en V3 | Idem |
 | ☐ | TR-09 | Fil d'accueil équipe | ✅ | V1 (Lot B, minimal) · V4 (`pilotage-equipe`) | — |
-| ☐ | TR-27 | Navigation par rôle | ⚠️ | V1 (Lot 0c, F-31) | 4 × 4 partials divergents |
+| ☐ | TR-27 | Navigation par rôle | ⚠️ | V1 (Lot 0c, F-31 approuvée) | 4 × 4 partials divergents |
 | ☐ | TR-41 | Formules mathématiques (KaTeX) | ✅ | V1 (Lot B / C, F-29) | KaTeX chargé depuis un CDN tiers |
 
 
@@ -445,6 +445,6 @@
 |---|---|---|---|---|---|
 | ☐ | TR-07 | `/teachers/dashboard` | 💀 | **écartée** : page d'échafaudage vide ; le tableau de bord de classe est livré en V3 | — |
 | ☐ | TR-08 | `/teachers/setup` | 💀 | **écartée** : remplacée par un onboarding à état persisté (V1, Lot D) | — |
-| ☐ | TR-23 | Thème clair / sombre | 💀 | **écartée** en V1 (F-09) | Une bascule sans palette sombre |
+| ☐ | TR-23 | Thème clair / sombre | 💀 | **écartée** en V1 (F-09, approuvée le 2026-09-25) | Une bascule sans palette sombre |
 | ☐ | TR-38 | E-mails (Action Mailbox) | 💀 | **écartée** : aucune feature ne l'utilise ; les 14 routes sont retirées | — |
 | ☐ | TR-42 | `Current.user` dans les couches basses | 💀 | **écartée** comme feature : l'acteur est passé en paramètre au use case et à sa policy (F-04) | — |

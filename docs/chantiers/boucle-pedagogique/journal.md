@@ -23,13 +23,30 @@
 | 2026-09-25 | Lot 0 découpé en quatre sous-lots à fichiers disjoints : 0a (schéma, ORM, routes, fabriques) ∥ 0b (domaine pur), puis 0d (authentification, shell) ∥ 0e (repositories, moteur d'import, front partagé ; e4 après 0d) | Le socle d'un seul tenant bloquait tout le parallélisme | Non (organisation du chantier) |
 | 2026-09-25 | Tout CRUD passe par Hotwire (modale en frame, 422 dans le frame, `turbo_stream`, repli HTML, Stimulus en dernier recours) ; chaque lot à écran d'écriture livre ses `*.turbo_stream.erb`, un critère « sans rechargement de page » et un test système | Règle du porteur | UDR-0006 |
 | 2026-09-25 | Clés Active Record Encryption posées dans les credentials par l'orchestrateur ; clés de test fixes dans `config/environments/test.rb` ; `cache_store :memory_store` en test pour `rate_limit` | La CI n'a pas de clé maître ; `rate_limit` exige un cache réel | Non |
-| 2026-09-25 | `courses.content` et `essentials.content` en `text` ; éditeur riche reporté | Action Text retiré en V0 | Non |
-| 2026-09-25 | L'élève ne voit pas le code de sa classe | Choix du porteur | Non |
-| 2026-09-25 | **L'enseignant ne voit jamais les bonnes réponses en V1**, même pour préparer sa classe. **À rouvrir** si les enseignants le demandent : ce serait un amendement de `Assessment::RevealAnswersPolicy` et de la clé de cache par rôle | Choix du porteur | ADR-0028 |
+| 2026-09-25 | ~~`courses.content` et `essentials.content` en `text` ; éditeur riche reporté~~ → **remplacée** : éditeur riche en V1 (Action Text + Trix, `has_rich_text :content`), voir « Retour du porteur » ci-dessous | Action Text retiré en V0 ; le porteur le réintroduit en V1 | Amendement de l'ADR-0051 |
+| 2026-09-25 | ~~L'élève ne voit pas le code de sa classe~~ → **remplacée** : l'élève voit le code de sa classe principale, jamais la liste nominative | Retour du porteur | Amendement de l'ADR-0028 |
+| 2026-09-25 | ~~L'enseignant ne voit jamais les bonnes réponses en V1~~ → **tranchée : visible pour l'enseignant** (et pour l'équipe). L'élève ne les voit jamais pendant sa session | Retour du porteur | Amendements des ADR-0028 et ADR-0054 |
 | 2026-09-25 | Classes générées : table de l'ancien code (ADR-0030), le mixte suit le privé. 77 pour un lycée public avec le référentiel de l'ADR-0034 (2nde en A et C) ; les 71 de l'ancienne application venaient d'une 2nde liée à C seule | Réponse du porteur ; le total dépend de `level_series` | ADR-0030 |
 | 2026-09-25 | `users.gender` obligatoire (`male`, `female`) ; limites d'import de l'ADR-0039 acceptées | Réponses du porteur | ADR-0037, ADR-0039 |
 | 2026-09-25 | Vague 3 découpée en quatre sous-vagues de 8 lots au plus (3a à 3d), chemin critique d'abord | Demande de team-lead : limiter les agents et la file de merge | Non (organisation du chantier) |
 | 2026-09-25 | `friendly_id` retiré (0a) : slugs figés par `Orm::HasFrozenSlug`, table `friendly_id_slugs` supprimée | Gem inutilisée, slugs figés à la création | Précision de l'ADR-0029 |
+
+## Retour du porteur du 2026-09-25
+
+Décisions consignées dans la branche `docs/retour-porteur-v1`.
+
+1. **Protection des branches GitHub abandonnée.** Le dépôt est privé, en offre gratuite : l'API de protection répond HTTP 403. Le hook pre-commit local et la discipline des PR protègent à la place. Seul le porteur fait le passage `Develop` → `main`. Consigné dans le journal d'`amorcage-depot` (garde-fou 5, écart assumé), la boucle de travail et la feuille de route.
+2. **Éditeur riche en V1.** Action Text + Trix pour le contenu des cours et des fiches essentielles (`has_rich_text :content` ; plus de colonne `content` en `text`). Trix et `@rails/actiontext` sont chargés par import dynamique (contrôleur Stimulus `rich_text_editor`), seulement sur les pages d'édition, hors du bundle commun de 60 Ko ; `trix.css` est une feuille à part. Les lots B2 et B4 utilisent l'éditeur ; les imports I1 et I2 écrivent du HTML assaini, et un test le vérifie. **Impact sur le lot 0a en cours** : `require "action_text/engine"`, migration `20260925100032_create_action_text_tables.rb` (32 migrations), `has_rich_text` sur `Orm::Course` et `Orm::Essential`, `trix` et `@rails/actiontext` dans `package.json`, point d'entrée `trix.css` dans `esbuild.config.mjs`, test de schéma. Amendement ajouté à l'ADR-0051.
+3. **L'enseignant voit les bonnes réponses**, l'équipe aussi. L'élève ne les voit pas pendant sa session. **Impact sur le lot 0b en cours** : `Assessment::RevealAnswersPolicy`. Lots C1, C3 et E mis à jour. Amendements ajoutés aux ADR-0028 et ADR-0054.
+4. **L'élève voit le code de sa classe** (sa classe principale, en majuscules), jamais la liste nominative. Le critère et le test contraires du lot A3 sont retirés ; A2 et A3 affichent `join_code_display`.
+5. **Génération des classes** : déclenchée à la création de l'établissement, par l'import (S3) et par la création unitaire (S2). Jamais de classes pré-créées. Totaux : lycée public 77, lycée privé ou mixte 38, collège public 28. Amendement ajouté à l'ADR-0030 ; plan (point 5 du socle, non-régression de S2 et S3) et PRD (SC-08, SC-09) mis à jour.
+6. **Points approuvés** : UDR-0005 (design system) et UDR-0006 (shell par rôle, toasts, CRUD Hotwire) passent au statut **Accepté** ; F-09 (thème sombre écarté en V1) et F-31 (shell unique par rôle) sont approuvés (feuille de route, `features-refonte.md`, inventaires) ; la gem `rails-i18n` est ajoutée pour des messages de validation en français (déjà dans le `Gemfile`, prouvée par un test du lot 0a).
+7. **Le genre reste obligatoire** (`male`, `female`), comme l'ADR-0037 le prévoit.
+
+**Questions encore ouvertes pour le porteur**
+
+- Pièces jointes dans Trix : refusées par défaut en V1 (pas d'Active Storage exposé). À confirmer.
+- Portée de la visibilité des réponses : le plan retient « tout exercice que l'enseignant peut lire », là où le PRD cadre parlait d'exercices assignés à sa classe. Écart assumé, à confirmer.
 
 ## Ce qui a dérapé
 
