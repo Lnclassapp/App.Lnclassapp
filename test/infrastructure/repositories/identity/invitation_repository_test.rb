@@ -14,6 +14,13 @@ module Repositories
                            token_digest: SecureRandom.hex(32), expires_at: @expires_at)
       end
 
+      test "every method follows the signature of the port" do
+        Ports::Identity::InvitationRepositoryPort.instance_methods(false).each do |name|
+          assert_equal Ports::Identity::InvitationRepositoryPort.instance_method(name).parameters,
+                       InvitationRepository.instance_method(name).parameters, name
+        end
+      end
+
       test "create stores a pending invitation" do
         result = invite
 
