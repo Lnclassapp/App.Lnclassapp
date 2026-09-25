@@ -179,6 +179,24 @@ class DesignSystemTest < ApplicationSystemTestCase
     end
   end
 
+  # Lot B2: builds/trix.css sits in no layer and is linked inside the edit form, after application.css. It erased the
+  # rich text typography (`.trix-content * { margin: 0 }`) and brought back the file button that V1 refuses.
+  test "the rich text typography and the hidden file button win over trix.css, even when it comes last" do
+    page.evaluate_async_script(<<~JS, ActionController::Base.helpers.stylesheet_path("trix"))
+      const [href, done] = arguments
+      document.body.insertAdjacentHTML("beforeend", `
+        <div class="trix-content"><p id="rich-first">Un</p><ul id="rich-list"><li id="rich-item">Deux</li></ul></div>
+        <trix-toolbar><span class="trix-button-group" data-trix-button-group="file-tools" id="file-tools">Fichier</span></trix-toolbar>`)
+      const link = Object.assign(document.createElement("link"), { rel: "stylesheet", href, onload: () => done() })
+      document.body.append(link)
+    JS
+
+    assert_equal "none", css(find("#file-tools", visible: :all), "display")
+    assert_equal "24px", css(find("#rich-list"), "padding-left")
+    assert_equal "12px", css(find("#rich-list"), "margin-top")
+    assert_equal "0px", css(find("#rich-item"), "margin-left")
+  end
+
   test "a toast survives a redirect through the flash, then leaves by itself" do
     find("button[data-redirect]").click
 
