@@ -68,9 +68,22 @@ module Queries
         feedback = play(feedback_question_id: @questions.first.id).last_feedback
         assert_equal [ @questions.first.id, 1, "<p>Question 1</p>", "La méiose donne quatre cellules.", false ],
                      [ feedback.question_id, feedback.number, feedback.content, feedback.explanation, feedback.correct ]
-        assert_equal attempt.selected_answer_ids, feedback.selected_answer_ids
-        assert_equal play.next_question.answers.size, feedback.answers.size
-        assert feedback.answers.none? { it.respond_to?(:correct) }
+        assert_equal attempt.selected_answer_ids, feedback.selected_answers.map(&:id)
+        assert feedback.selected_answers.none? { it.respond_to?(:correct) }
+      end
+
+      test "le verdict ne contient que les propositions cochées : une proposition juste non choisie n'est jamais lue" do
+        create_attempt(session: @session, question: @questions.first, correct: false)
+        right = @questions.first.answers.find_by!(correct: true)
+
+        statements = []
+        callback = ->(*, payload) { statements << payload[:sql] }
+        row = ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { play(feedback_question_id: @questions.first.id) }
+
+        assert_equal [ "Proposition 2" ], row.last_feedback.selected_answers.map(&:content)
+        assert_not_includes row.last_feedback.selected_answers.map(&:id), right.id
+        answers_sql = statements.grep(/FROM "answers"/)
+        assert answers_sql.none? { it.include?("correct") }, answers_sql.join("\n")
       end
 
       test "pas de verdict pour une question non tentée, d'un autre exercice, ou sans demande" do

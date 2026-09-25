@@ -15,8 +15,8 @@ module Queries
       end
       # Jamais de colonne correct : une proposition montrée à l'élève ne dit pas si elle est juste.
       Answer = Data.define(:id, :content)
-      # correct : verdict de la tentative ; selected_answer_ids : ce que l'élève a coché.
-      Feedback = Data.define(:question_id, :number, :content, :explanation, :correct, :answers, :selected_answer_ids)
+      # correct : verdict de la tentative ; selected_answers : les seules propositions que l'élève a cochées.
+      Feedback = Data.define(:question_id, :number, :content, :explanation, :correct, :selected_answers)
 
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id exercise_sessions.status
                            exercise_sessions.answered_count exercise_sessions.question_count exercise_sessions.progress_percent
@@ -34,7 +34,7 @@ module Queries
                                        .to_h { |question_id, correct, selected| [ question_id, [ correct, selected ] ] }
         Row.new(session_public_id: public_id, student_id:, status:, exercise_public_id:, exercise_title:, answered_count:,
                 question_count:, progress_percent:, next_question: next_question(id, questions, attempts),
-                last_feedback: feedback(id, questions, attempts, feedback_question_id))
+                last_feedback: feedback(questions, attempts, feedback_question_id))
       end
 
       private
@@ -48,14 +48,20 @@ module Queries
         Question.new(id: question_id, number: index + 1, content:, question_type:, answers: answers(session_id, question_id))
       end
 
-      def feedback(session_id, questions, attempts, question_id)
+      def feedback(questions, attempts, question_id)
         index = questions.index { |id, *| id == question_id && attempts.key?(id) }
         return if index.nil?
 
         _id, content, explanation, = questions[index]
         correct, selected_answer_ids = attempts.fetch(question_id)
         Feedback.new(question_id:, number: index + 1, content:, explanation:, correct:,
-                     answers: answers(session_id, question_id), selected_answer_ids:)
+                     selected_answers: selected_answers(question_id, selected_answer_ids))
+      end
+
+      # Filtrées par la base : une proposition juste que l'élève n'a pas cochée n'est jamais lue (UDR-0022).
+      def selected_answers(question_id, ids)
+        Orm::Answer.where(question_id:, id: ids).order(:position, :id).pluck(:id, :content)
+                   .map { |id, content| Answer.new(id:, content:) }
       end
 
       # Mélangées, mais dans le même ordre à chaque affichage de la même session (AS-09).
