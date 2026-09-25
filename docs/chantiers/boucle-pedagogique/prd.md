@@ -54,8 +54,9 @@ Décisions du porteur du 2026-09-25 (voir [`journal.md`](journal.md)) :
 - **l'élève voit le code de sa classe**, en majuscules, sur son accueil et sur « Ma classe », comme dans l'ancienne application ; il ne voit jamais la liste nominative ;
 - **l'enseignant voit les propositions correctes** des exercices, comme l'équipe : dans l'aperçu d'un exercice et dans le résultat d'un élève (amendement de l'ADR-0028). **L'élève ne les voit pas pendant sa session**, sauf la correction de la question à laquelle il vient de répondre (AS-10).
 
-Écarts assumés avec le PRD cadre :
-- l'enseignant voit les propositions correctes de **tout exercice qu'il peut lire**, et pas seulement de ceux assignés à ses classes : il prépare un exercice avant de l'assigner ;
+Décision de l'orchestrateur du 2026-09-25, que le porteur peut rouvrir : l'enseignant voit les propositions correctes de **tout exercice qu'il peut lire**, y compris avant de l'assigner, pour préparer sa classe. Le PRD cadre est aligné sur ce point.
+
+Écart assumé avec le PRD cadre :
 - **tout exercice publié est démarrable** par un élève, assigné ou non ; l'assignation oriente l'accueil de l'élève, elle ne conditionne pas l'accès (ADR-0028).
 
 ## 3. Parcours utilisateur

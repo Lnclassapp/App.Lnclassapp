@@ -45,9 +45,9 @@ Décisions consignées dans la branche `docs/retour-porteur-v1`.
 
 8. **Éditeur de texte uniquement** : aucune pièce jointe dans Trix en V1. Le contrôleur `rich_text_editor` annule `trix-file-accept`, et aucun `direct_upload` n'est branché (ADR-0047, ADR-0049). D'abord arbitré par l'orchestrateur, puis confirmé par le porteur : ce n'est plus un point « à rouvrir ». Précisé dans l'amendement de l'ADR-0051.
 
-**Question encore ouverte pour le porteur**
+9. **Portée des réponses visibles par l'enseignant** : tout exercice qu'il peut lire, y compris avant de l'assigner, pour préparer sa classe. **Décision de l'orchestrateur, que le porteur peut rouvrir.** Le PRD cadre (« classe assignée ») est aligné, avec une entrée datée dans le journal du programme.
 
-- Portée de la visibilité des réponses : le plan retient « tout exercice que l'enseignant peut lire », là où le PRD cadre parlait d'exercices assignés à sa classe. Écart assumé, à confirmer.
+Aucune question ne reste ouverte pour le porteur.
 
 ## Ce qui a dérapé
 

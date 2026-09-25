@@ -148,3 +148,4 @@ Huit policies s'ajoutent au tableau du §4.
 - **L'élève ne voit jamais une proposition correcte avant d'avoir répondu** : ni dans l'aperçu d'un exercice, ni pendant sa session pour une question non tentée. Cette règle de l'ADR-0054 est inchangée.
 - Puisque l'enseignant voit les propositions correctes et l'élève non, aucun fragment de cache contenant une proposition correcte ne doit pouvoir être resservi à un élève. Le test « équipe, puis enseignant, puis élève, cache actif » (TR-cadre-3) le prouve.
 - La ligne « l'enseignant ne voit jamais les bonnes réponses en V1 », que le journal du chantier marquait « à rouvrir », est **tranchée** : l'enseignant les voit.
+- **Portée** : tout exercice que l'enseignant peut lire, y compris avant de l'assigner. C'est une décision de l'orchestrateur, que le porteur peut rouvrir. Le PRD cadre est aligné (« classe assignée » remplacé).

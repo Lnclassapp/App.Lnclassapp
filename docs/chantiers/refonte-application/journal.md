@@ -227,3 +227,13 @@ Les annonces restent en V6. Les 26 features concernées gardent leur ligne dans 
 **Reste ouvert**
 
 - F-09 (UDR-0005) et F-31 (UDR-0006) suivent leur propre acceptation.
+
+## 2026-09-25 — Retour du porteur sur la V1
+
+Consigné en détail dans le [journal de la boucle pédagogique](../boucle-pedagogique/journal.md#retour-du-porteur-du-2026-09-25). Ce qui touche le programme :
+
+- **PRD cadre, §3 (qui peut quoi)** : l'enseignant voit les bonnes réponses de **tout exercice qu'il peut lire**, y compris avant de l'assigner, pour préparer sa classe (au lieu de « classe assignée »). Décision de l'orchestrateur, que le porteur peut rouvrir. L'élève ne voit jamais une bonne réponse avant d'avoir répondu (amendements des ADR-0028 et ADR-0054).
+- **F-09** (UDR-0005, thème sombre écarté en V1) et **F-31** (UDR-0006, shell unique par rôle) sont **acceptées** : le point « Reste ouvert » ci-dessus est fermé.
+- Protection des branches GitHub abandonnée (offre gratuite, HTTP 403) : le hook pre-commit et la discipline des PR la remplacent ; seul le porteur fait `Develop` → `main`.
+- Établissements créés **uniquement par import JSON**, classes générées à ce moment ; éditeur riche (Action Text + Trix) en V1, texte seulement, sans pièce jointe (amendements des ADR-0030 et ADR-0051).
+
