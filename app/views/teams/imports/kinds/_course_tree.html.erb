@@ -1,0 +1,100 @@
+<%# 🌐 UI · teams/imports/kinds/_course_tree — aide de l'import des cours complets, dans la modale de téléversement %>
+<%# Rôle : clés acceptées à chaque étage de l'arbre, exemple minimal, noms de niveaux, séries et matières acceptés %>
+<%# ADR  : 0035, 0039 · UDR : 0038 %>
+<% referential = Queries::Catalog::ReferentialOptionsQuery.new.call %>
+<% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
+<% tree = { "course" => UseCases::Catalog::ImportCourseTree::COURSE_ALIASES.merge(own.("content", "level_name", "series_name", "material_name", "essentials")),
+            "essential" => own.("name", "subtitle", "content", "exercises"),
+            "exercise" => UseCases::Catalog::ImportCourseTree::EXERCISE_ALIASES.merge(own.("description", "exercise_type", "questions")),
+            "question" => own.("content", "question_type", "explanation", "answers"),
+            "answer" => { "content" => %w[content], "correct" => %w[correct is_correct] } } %>
+<section id="import-help-course_tree" aria-labelledby="import-help-course_tree-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
+  <h3 id="import-help-course_tree-title" class="font-medium text-ink"><%= t(".title") %></h3>
+  <p class="text-mute"><%= t(".intro_html") %></p>
+
+  <div id="import-help-keys" class="space-y-2">
+    <% tree.each_with_index do |(node, keys), index| %>
+      <details class="rounded-ln border border-line bg-white" <%= "open" if index.zero? %>>
+        <summary class="flex min-h-tap cursor-pointer items-center gap-2 px-3 font-medium text-ink">
+          <%= t(".nodes.#{node}") %> <code class="font-mono text-xs text-mute"><%= t(".paths.#{node}") %></code>
+        </summary>
+        <dl class="space-y-2 px-3 pb-3">
+          <% keys.each do |key, aliases| %>
+            <div class="space-y-0.5">
+              <dt><%= safe_join(aliases.map { tag.code(it, class: "font-mono text-xs text-ink") }, " · ") %></dt>
+              <dd class="text-mute"><%= t(".keys.#{node}.#{key}") %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </details>
+    <% end %>
+  </div>
+
+  <div class="space-y-1.5">
+    <h4 class="font-medium text-ink"><%= t(".example") %></h4>
+    <pre class="overflow-x-auto rounded-ln border border-line bg-white p-3 font-mono text-xs text-ink"><code>{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    { "name": "Génétique et Évolution",
+      "level_name": "Tle", "series_name": "D",
+      "material_name": "SVT",
+      "essentials": [
+        { "name": "Brassage génétique par la méiose",
+          "exercises": [
+            { "title": "Crossing-over",
+              "exercise_type": "fixation",
+              "questions": [
+                { "content": "Le crossing-over a lieu en prophase I.",
+                  "question_type": "true_false",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ] }
+              ] }
+          ] }
+      ] }
+  ]
+}</code></pre>
+  </div>
+
+  <div class="flex items-start gap-2 text-ink">
+    <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>
+    <p><%= t(".drafts") %></p>
+  </div>
+
+  <% if referential.levels.any? && referential.materials.any? %>
+    <details class="rounded-ln border border-line bg-white">
+      <summary class="flex min-h-tap cursor-pointer items-center px-3 font-medium text-ink"><%= t(".referential") %></summary>
+      <div class="space-y-3 px-3 pb-3">
+        <p class="text-mute"><%= t(".referential_hint") %></p>
+        <div class="space-y-1">
+          <h4 class="font-medium text-ink"><%= t(".levels") %></h4>
+          <ul id="import-help-levels" class="grid gap-1 sm:grid-cols-2">
+            <% referential.levels.each do |level| %>
+              <li>
+                <code class="font-mono text-xs text-ink"><%= level.name %></code>
+                <span class="text-mute">
+                  <%= safe_join(referential.series_by_level.fetch(level.id, []).map(&:name), " · ").presence || t(".no_series") %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="space-y-1">
+          <h4 class="font-medium text-ink"><%= t(".materials") %></h4>
+          <ul id="import-help-materials" class="grid max-h-48 gap-1 overflow-y-auto sm:grid-cols-2">
+            <% referential.materials.each do |material| %>
+              <li><code class="font-mono text-xs text-ink"><%= material.name %></code> <span class="text-mute"><%= material.shortname %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </details>
+  <% else %>
+    <p id="import-help-referential" class="text-mute">
+      <%= t(".no_referential") %>
+      <%= link_to t(".no_referential_link"), levels_path, class: "font-medium text-brand-strong underline", data: { turbo_frame: "_top" } %>
+    </p>
+  <% end %>
+</section>
