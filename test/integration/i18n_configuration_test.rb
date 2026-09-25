@@ -7,6 +7,14 @@ class I18nConfigurationTest < ActiveSupport::TestCase
     assert_equal "janvier", I18n.t("date.month_names")[1]
   end
 
+  test "validation messages are in French (rails-i18n)" do
+    course = Orm::Course.new
+
+    assert_not course.valid?
+    assert_includes course.errors.full_messages_for(:level), "Level doit exister"
+    assert_equal "doit être rempli(e)", course.errors.generate_message(:name, :blank)
+  end
+
   test "a missing translation raises instead of rendering a placeholder" do
     assert_raises(I18n::MissingTranslationData) { I18n.t("amorcage.absent_key") }
   end
