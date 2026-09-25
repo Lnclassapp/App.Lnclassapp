@@ -31,7 +31,7 @@ L'ADR-0004 autorise un enseignant dans plusieurs établissements, alors que le [
 
 > **Nous gardons `teacher_schools` avec un drapeau `primary`, nous limitons l'enseignant à une seule ligne en V1, nous générons les classes par défaut dans la transaction qui crée l'établissement, et nous réservons la gestion des classes à l'équipe en V1 et à la direction à partir de la V2.**
 
-**Établissements** (`schools`, contexte `school`), créés par l'équipe à l'écran ou par import (ADR-0039), policy `School::ManageSchoolPolicy` : `drena_id` (FK, `NOT NULL`), `name`, `sigle`, `status` `CHECK IN ('draft','active','inactive')`, `school_type` `CHECK IN ('public','private')` et **`cycle` `CHECK IN ('first','both')`**. À l'import, `cycle` est déduit du nom : `first` s'il contient « collège » (accents et casse ignorés : « Collége », « COLLEGE »), sinon `both`. L'équipe peut le corriger.
+**Établissements** (`schools`, contexte `school`), créés par l'équipe à l'écran ou par import (ADR-0039), policy `School::ManageSchoolPolicy` : `drena_id` (FK, `NOT NULL`), `name`, `sigle`, `status` `CHECK IN ('draft','active','inactive')`, `school_type` `CHECK IN ('public','private','mixed')` (libellés : Public, Privé, Mixte) et **`cycle` `CHECK IN ('first','both')`**. À l'import, `cycle` est déduit du nom : `first` s'il contient « collège » (accents et casse ignorés : « Collége », « COLLEGE »), sinon `both`. L'équipe peut le corriger.
 
 **Table `teacher_schools`** (contexte `school`) :
 
@@ -66,14 +66,14 @@ Il retire sa déclaration par `Classroom::WithdrawTeaching`, qui supprime la lig
 
 **Génération des classes par défaut**, dans la transaction de `School::CreateSchool` ou dans l'élément racine de l'import :
 
-- plan par `school_type` et par **slug** de niveau (ADR-0029), jamais par libellé ; une école `first` ne reçoit que les niveaux de `cycle = 'first'` (ADR-0034) ;
+- plan par `school_type` et par **slug** de niveau (ADR-0029), jamais par libellé ; un établissement `mixed` suit le barème `private`, comme dans l'ancien où tout type non public prenait la configuration « privée » ; une école `first` ne reçoit que les niveaux de `cycle = 'first'` (ADR-0034) ;
 - « par série » : pour chaque série liée au niveau dans `level_series` ; série nommée : seulement si le couple existe ;
 - un niveau ou une série absent du référentiel est sauté et compté (`details` du rapport, ADR-0039) ;
 - nom `« <niveau> <n> »` ou `« <niveau> <série> <n> »`, toujours avec une espace : « 6ème 1 », « Tle D 3 », « Tle A1 2 » ;
 - année `SchoolYear.current`, `max_students` 80, `join_code` unique en base et dans le lot en cours (ADR-0041) ;
 - aucun élève de démonstration.
 
-| Niveau (slug) | `public` | `private` |
+| Niveau (slug) | `public` | `private` et `mixed` |
 |---|---|---|
 | `6eme`, `5eme` | 4 chacun | 2 chacun |
 | `4eme`, `3eme` | 10 chacun | 4 chacun |
@@ -114,6 +114,8 @@ PLAN = {
   "private" => { "6eme" => 2, "5eme" => 2, "4eme" => 4, "3eme" => 4, "2nde" => { per_series: 3 },
                  "1ere" => { per_series: 3 }, "tle" => { "c" => 1, "d" => 3, "a1" => 2, "a2" => 2 } }
 }.freeze
+
+def self.for(school_type) = PLAN.fetch(school_type == "public" ? "public" : "private")
 ```
 
 `teacher_schools` : index unique `(teacher_id, school_id)` et index unique partiel `(teacher_id) WHERE "primary"`.
@@ -123,7 +125,7 @@ PLAN = {
 - Test de repository : une seconde ligne `primary` lève `ActiveRecord::RecordNotUnique`.
 - Tests de policy : `DeclareTeachingPolicy` refuse une classe d'une autre école et une classe archivée ; `ManageClassroomPolicy` refuse `teacher` en toute vague, et `school_admin` en V1.
 - Test système : un enseignant dont on retire toutes les classes n'est pas renvoyé vers l'onboarding.
-- Tests de use case : un « Collège moderne » public reçoit 28 classes et aucune de second cycle ; un lycée public dont `1ere` n'a pas de série saute ce niveau et le compte ; un échec d'insertion d'une classe annule l'école.
+- Tests de use case : un établissement `mixed` reçoit le plan `private` ; un « Collège moderne » public reçoit 28 classes et aucune de second cycle ; un lycée public dont `1ere` n'a pas de série saute ce niveau et le compte ; un échec d'insertion d'une classe annule l'école.
 
 ## 8. Remplace, complète, amende
 
@@ -134,3 +136,4 @@ PLAN = {
 
 - L'enseignant se déclare lui-même dans les classes de son école en V1 ; la direction gère les classes à partir de la V2.
 - Les classes par niveau sont générées automatiquement à la création ou à l'import d'un établissement, avec le plan de l'ancien, corrigé : cycle en colonne, correspondance par slug, noms toujours espacés, aucun élève de démonstration.
+- Le type `mixed` (Mixte) est conservé et suit le barème du privé.

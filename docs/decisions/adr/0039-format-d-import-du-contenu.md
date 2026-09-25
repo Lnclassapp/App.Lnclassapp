@@ -46,7 +46,7 @@ Option C retenue par le porteur le 2026-09-25.
 
 | Format | Cible | Élément racine | Contenu d'un élément |
 |---|---|---|---|
-| `lnclass.schools` | `drena` (slug) par défaut, ou `drena` sur chaque école | une école **et ses classes générées** (ADR-0030) | `name` \| `nom`, `sigle` \| `schoolsigle`, `status` \| `schoolstatus` \| `statut` (`draft`, `active`, `inactive` ; défaut `active`), `type` \| `schooltype` (`public` ou `privée`), `cycle` facultatif |
+| `lnclass.schools` | `drena` (slug) par défaut, ou `drena` sur chaque école | une école **et ses classes générées** (ADR-0030) | `name` \| `nom`, `sigle` \| `schoolsigle`, `status` \| `schoolstatus` \| `statut` (`draft`, `active`, `inactive` ; défaut `active`), `type` \| `schooltype` (`public`, `privée` ou `mixte` ; alias `private`, `privé`, `mixed`), stocké `public`, `private` ou `mixed`, `cycle` facultatif |
 | `lnclass.course-tree` | — | un cours et toute sa descendance | l'arbre de l'ancien : `name`, `subtitle`, `content`, `level_name`, `material_name`, `series_name`, `essentials[]` → `exercises[]` → `questions[]` → `answers[]` |
 | `lnclass.essentials` | `course` (slug) | une fiche et ses exercices | `name`, `subtitle`, `content`, `exercises[]` |
 | `lnclass.exercises` | `essential` (slug) | un exercice, ses questions et leurs propositions | `title`, `description`, `exercise_type` (`fixation`, `evaluation`), `questions[]` → `answers[]` |
@@ -120,3 +120,5 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
 - Import en masse de tout le pays ou de tout un programme, dès la V1, pour les quatre formats.
 - **Import partiel**, plus de tout ou rien : atomicité par élément racine, quatre compteurs, rejet en bloc réservé à l'enveloppe.
 - Doublons ignorés et comptés, jamais mis à jour ; tout contenu importé naît brouillon.
+- Le type d'établissement `mixte` est accepté ; les DRENA ne s'importent pas, elles se créent par le formulaire.
+- Limites acceptées : 5 000 écoles, 500 cours, 2 000 fiches, 10 000 exercices par fichier ; 1 000 erreurs détaillées ; `import_reports` dans `catalog`.
