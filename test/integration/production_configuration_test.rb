@@ -17,8 +17,6 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
       "custom_host" => call.("https://lnclass.app/up").status,
       "hosts" => app.config.hosts.map(&:to_s),
       "queue_adapter" => app.config.active_job.queue_adapter.to_s,
-      "storage_service" => app.config.active_storage.service.to_s,
-      "storage_services" => ActiveStorage::Blob.services.send(:configurations).keys.map(&:to_s),
       "csp" => call.("https://lnclass.up.railway.app/up").headers["content-security-policy"].to_s,
       "default_locale" => I18n.default_locale.to_s,
       "raise_on_missing_translations" => app.config.i18n.raise_on_missing_translations
@@ -62,20 +60,6 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
 
   test "jobs go to Solid Queue" do
     assert_equal "solid_queue", production["queue_adapter"]
-  end
-
-  test "files stay on :local until ADR-0047, with the S3-compatible service ready" do
-    assert_equal "local", production["storage_service"]
-    assert_includes production["storage_services"], "amazon"
-  end
-
-  test "the S3-compatible service is selected by ACTIVE_STORAGE_SERVICE" do
-    service = EnvironmentProbe.run("production", <<~RUBY, env: { "ACTIVE_STORAGE_SERVICE" => "amazon", "AWS_BUCKET" => "lnclass", "AWS_ENDPOINT_URL" => "https://t3.storageapi.dev", "AWS_ACCESS_KEY_ID" => "id", "AWS_SECRET_ACCESS_KEY" => "secret" })
-      service = ActiveStorage::Blob.service
-      [ service.class.name, service.bucket.name, service.client.client.config.endpoint.to_s ]
-    RUBY
-
-    assert_equal [ "ActiveStorage::Service::S3Service", "lnclass", "https://t3.storageapi.dev" ], service
   end
 
   test "the CSP is enforced in production too" do

@@ -21,10 +21,8 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  # F-25 : the container disk is ephemeral on Railway. The :amazon service (Railway
-  # bucket, S3-compatible) is ready in config/storage.yml; switching is ADR-0047's call.
-  config.active_storage.service = ENV.fetch("ACTIVE_STORAGE_SERVICE", "local").to_sym
+  # ADR-0047 : files live on the Railway bucket of the environment (F-25 : the container disk is ephemeral).
+  config.active_storage.service = :railway
 
   # ADR-0052 : HTTPS is enforced. Railway terminates SSL in front of the app.
   config.assume_ssl = true

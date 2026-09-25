@@ -41,6 +41,10 @@ module AppLnclassapp
     config.i18n.available_locales = %i[fr en]
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
 
+    # ADR-0047 : files are served through the application (proxy mode): URLs stay on
+    # our origin and the CSP never lists the bucket.
+    config.active_storage.resolve_model_to_route = :rails_storage_proxy
+
     # ADR-0052 : Mission Control Jobs is protected by the team area authentication.
     config.mission_control.jobs.base_controller_class = "Teams::BaseController"
     config.mission_control.jobs.http_basic_auth_enabled = false

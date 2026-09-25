@@ -9,7 +9,12 @@ module EnvironmentProbe
     "SECRET_KEY_BASE_DUMMY" => "1",
     "DATABASE_URL" => "postgres://probe:probe@127.0.0.1:1/probe", # never connected
     "BOOTSNAP_CACHE_DIR" => nil,
-    "COVERAGE" => "0"
+    "COVERAGE" => "0",
+    # ADR-0047 : production refuses to boot without its bucket. Fake values, never contacted.
+    "BUCKET_NAME" => "lnclass-probe",
+    "BUCKET_ENDPOINT" => "https://t3.storageapi.dev",
+    "BUCKET_ACCESS_KEY_ID" => "probe",
+    "BUCKET_SECRET_ACCESS_KEY" => "probe"
   }.freeze
 
   def self.run(rails_env, script, env: {})

@@ -6,20 +6,17 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-# F-25 / ADR-0047 (to come) : S3-compatible bucket (Railway bucket). Selected in
-# production with ACTIVE_STORAGE_SERVICE=amazon. The variables reference the
-# bucket's Credentials tab on Railway: BUCKET, ACCESS_KEY_ID, SECRET_ACCESS_KEY,
-# REGION, ENDPOINT.
-amazon:
+# ADR-0047 : one Railway bucket per environment (recette, production), S3-compatible.
+# The web service's BUCKET_* variables reference the bucket's own (${{Bucket.ENDPOINT}}…),
+# never stored in the repository.
+railway:
   service: S3
-  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
-  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
-  region: <%= ENV.fetch("AWS_REGION", "auto") %>
-  bucket: <%= ENV["AWS_BUCKET"] %>
-  <% if ENV["AWS_ENDPOINT_URL"].present? %>
-  endpoint: <%= ENV["AWS_ENDPOINT_URL"] %>
-  <% end %>
-  force_path_style: <%= ENV.fetch("AWS_FORCE_PATH_STYLE", "false") == "true" %>
+  endpoint: <%= ENV["BUCKET_ENDPOINT"] %>
+  bucket: <%= ENV["BUCKET_NAME"] %>
+  access_key_id: <%= ENV["BUCKET_ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["BUCKET_SECRET_ACCESS_KEY"] %>
+  region: <%= ENV.fetch("BUCKET_REGION", "auto") %>
+  force_path_style: <%= ENV["BUCKET_FORCE_PATH_STYLE"] == "true" %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
