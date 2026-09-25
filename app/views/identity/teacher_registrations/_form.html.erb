@@ -5,7 +5,7 @@
 <form id="teacher-signup-drena" action="<%= new_teacher_registration_path %>" method="get"></form>
 
 <%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",
-              class: "space-y-7",
+              class: "space-y-6",
               data: { controller: "school--drena-schools", "school--drena-schools-url-value": drena_schools_path("__drena__") } do |form| %>
   <% if @form.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
