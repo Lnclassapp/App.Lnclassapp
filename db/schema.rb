@@ -277,7 +277,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100030) do
     t.integer "total_count", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["imported_by_id"], name: "index_import_reports_on_imported_by_id"
-    t.index ["kind", "checksum_sha256"], name: "index_import_reports_one_completed_per_file", unique: true, where: "((status)::text = 'completed'::text)"
     t.index ["kind", "created_at"], name: "index_import_reports_on_kind_and_created_at"
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY ((ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying])::text[]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true

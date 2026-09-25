@@ -41,8 +41,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "question_attempts" => [ [ %w[exercise_session_id question_id], nil ] ],
     "exercise_badges" => [ [ %w[student_id exercise_id], nil ] ],
     "knowledge_gaps" => [ [ %w[student_id essential_id], "status='pending'" ] ],
-    "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ],
-                          [ %w[kind checksum_sha256], "status='completed'" ] ]
+    "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ] ]
   }.freeze
 
   # table => { column => allowed values } for every string enumeration.
@@ -105,6 +104,11 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     UNIQUE_INDEXES.each do |table, expected|
       expected.each { |index| assert_includes unique_indexes(table), index, table }
     end
+  end
+
+  test "an import file may be imported again: only one running import per kind is unique" do
+    assert_equal [ [ %w[kind], UNIQUE_INDEXES["import_reports"].first.last ], [ %w[public_id], nil ] ],
+                 unique_indexes("import_reports").sort_by { |columns, _| columns }
   end
 
   test "every enumeration is a string column guarded by a check on its values" do

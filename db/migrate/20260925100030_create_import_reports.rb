@@ -24,8 +24,6 @@ class CreateImportReports < ActiveRecord::Migration[8.1]
       t.timestamps
       t.index :kind, unique: true, where: "status IN ('queued','validating','importing')",
                      name: "index_import_reports_one_running_per_kind"
-      t.index [ :kind, :checksum_sha256 ], unique: true, where: "status = 'completed'",
-                                           name: "index_import_reports_one_completed_per_file"
       t.index [ :kind, :created_at ]
     end
 
