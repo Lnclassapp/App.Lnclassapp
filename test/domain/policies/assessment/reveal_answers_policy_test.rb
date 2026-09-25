@@ -3,29 +3,27 @@ require "test_helper"
 module Policies
   module Assessment
     class RevealAnswersPolicyTest < ActiveSupport::TestCase
-      def call(role, question_id: 4, attempted: [ 4 ])
+      Exercise = Struct.new(:readable_chain_published?)
+
+      def call(role, readable: true)
         actor = role && Entities::Identity::Actor.new(user_id: 1, role:)
-        RevealAnswersPolicy.new.call(actor:, question_id:, attempted_question_ids: attempted)
+        RevealAnswersPolicy.new.call(actor:, exercise: Exercise.new(readable))
       end
 
-      test "l'élève voit la correction d'une question déjà tentée" do
-        assert call(:student).success?
-        assert_equal :forbidden, call(:student, attempted: [ 3 ]).code
+      test "l'enseignant voit la correction de tout exercice lisible, assigné ou non" do
+        assert call(:teacher).success?
       end
 
-      test "l'équipe voit tout, même hors session" do
-        assert RevealAnswersPolicy.new.call(actor: Entities::Identity::Actor.new(user_id: 1, role: :team)).success?
+      test "l'enseignant ne voit pas la correction d'un brouillon, sans en confirmer l'existence" do
+        assert_equal :not_found, call(:teacher, readable: false).code
       end
 
-      test "l'enseignant voit toujours les bonnes réponses, hors session" do
-        assert RevealAnswersPolicy.new.call(actor: Entities::Identity::Actor.new(user_id: 1, role: :teacher)).success?
+      test "l'équipe voit la correction de tout exercice, même en brouillon" do
+        assert call(:team, readable: false).success?
       end
 
-      test "l'élève ne voit pas la correction d'une question non tentée, même hors session" do
-        assert_equal :forbidden, RevealAnswersPolicy.new.call(actor: Entities::Identity::Actor.new(user_id: 1, role: :student)).code
-      end
-
-      test "la direction et le visiteur ne voient jamais les bonnes réponses" do
+      test "l'élève, la direction et le visiteur ne voient jamais les bonnes réponses" do
+        assert_equal :forbidden, call(:student).code
         assert_equal :forbidden, call(:school_admin).code
         assert_equal :forbidden, call(nil).code
       end
