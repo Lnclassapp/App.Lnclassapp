@@ -22,16 +22,18 @@ Rails.application.configure do
   # config.asset_host = "http://assets.example.com"
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # F-25 : the container disk is ephemeral on Railway. The :amazon service (Railway
+  # bucket, S3-compatible) is ready in config/storage.yml; switching is ADR-0047's call.
+  config.active_storage.service = ENV.fetch("ACTIVE_STORAGE_SERVICE", "local").to_sym
 
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  # config.assume_ssl = true
+  # ADR-0052 : HTTPS is enforced. Railway terminates SSL in front of the app.
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
-  # Skip http-to-https redirect for the default health check endpoint.
-  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+  # Skip http-to-https redirect for the health check: Railway probes /up over plain HTTP.
+  config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log to STDOUT with the current request id as a default log tag.
   config.log_tags = [ :request_id ]
@@ -50,8 +52,8 @@ Rails.application.configure do
   config.cache_store = :solid_cache_store
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
+  # ADR-0052 : the worker runs inside Puma (config/puma.rb); tables in the primary database.
   config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -80,11 +82,11 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  # RAILWAY_PUBLIC_DOMAIN is injected by Railway; APP_HOSTS lists custom domains, comma-separated.
+  # Fail closed: with neither variable, only localhost is served, never any host.
+  allowed_hosts = [ ENV["RAILWAY_PUBLIC_DOMAIN"], *ENV.fetch("APP_HOSTS", "").split(",") ].compact_blank.map(&:strip)
+  config.hosts = allowed_hosts.presence || [ "localhost" ]
+
+  # Skip DNS rebinding protection for the health check: Railway probes it from its own host.
+  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end

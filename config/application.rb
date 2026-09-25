@@ -23,5 +23,15 @@ module AppLnclassapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Interface in French, code in English. One locale file per context and screen:
+    # config/locales/<context>/<screen>.fr.yml (boucle-de-travail §6).
+    config.i18n.default_locale = :fr
+    config.i18n.available_locales = %i[fr en]
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
+
+    # ADR-0052 : Mission Control Jobs is protected by the team area authentication.
+    config.mission_control.jobs.base_controller_class = "Teams::BaseController"
+    config.mission_control.jobs.http_basic_auth_enabled = false
   end
 end
