@@ -1,0 +1,46 @@
+<%# 🌐 UI · identity/sessions/new — connexion par numéro et PIN, en deux colonnes (reprise de l'ancienne application) %>
+<%# Rôle : échec re-rendu en 422 par Turbo, sans rechargement ; message unique au-dessus des champs %>
+<%# ADR  : 0050 · UDR : 0005 %>
+<% content_for :title, t(".page_title") %>
+<main class="grid min-h-dvh bg-paper md:grid-cols-2">
+  <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
+    <div class="max-w-sm text-center">
+      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-6 size-16 rounded-card object-cover shadow-card" %>
+      <h1 class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></h1>
+      <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+  </section>
+
+  <section class="flex flex-col items-center justify-center px-gutter py-10">
+    <div class="mb-8 text-center md:hidden">
+      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-3 size-14 rounded-card object-cover shadow-card" %>
+      <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+
+    <div class="w-full max-w-sm">
+      <%= ui_card padding: :lg do %>
+        <div class="mb-6 text-center">
+          <h2 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h2>
+          <p class="mt-1 text-sm text-mute"><%= t(".audience") %></p>
+        </div>
+
+        <%= form_with model: @form, scope: :session, url: session_path, id: "session-form", class: "space-y-5" do |form| %>
+          <% if @form.errors[:base].any? %>
+            <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+              <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+              <p><%= @form.errors[:base].to_sentence %></p>
+            </div>
+          <% end %>
+          <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15,
+                       placeholder: t(".contact_placeholder"), inputmode: "tel", autocomplete: "tel", autofocus: true %>
+          <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+                       autocomplete: "current-password", hint: t(".pin_hint") %>
+          <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
+          <p class="text-center text-sm">
+            <%= link_to t(".forgot_pin"), new_identity_pin_reset_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+</main>

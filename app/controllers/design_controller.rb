@@ -26,6 +26,8 @@ class DesignController < ApplicationController
     end
   end
 
+  # Le guide de style (hors production) reste ouvert : il ne montre aucune donnée.
+  allow_unauthenticated_access
   helper_method :shell_user
 
   def index
