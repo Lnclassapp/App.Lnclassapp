@@ -1,0 +1,17 @@
+<%# 🌐 UI · teams/levels/_form — nom, position et cycle d'un niveau, dans la modale de création ou de modification %>
+<%# Rôle : erreurs du formulaire et du référentiel (nom ou position pris) sous leur champ ; valeurs saisies conservées %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0032 %>
+<%= form_with model: input, scope: :level, url:, method:, id: "level-form", class: "space-y-5" do |form| %>
+  <% if input.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= input.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%= ui_field form, :name, required: true, maxlength: Entities::Catalog::Level::NAME_MAX, autocomplete: "off",
+                            placeholder: t(".name_placeholder"), hint: name_hint %>
+  <%= ui_field form, :position, as: :number, required: true, min: 0, max: Dtos::Catalog::LevelInput::POSITION_MAX,
+                                step: 1, inputmode: "numeric", hint: t(".position_hint") %>
+  <%= ui_field form, :cycle, as: :select, required: true, prompt: t(".cycle_prompt"),
+                             choices: Entities::Catalog::Level::CYCLES.map { [ t("teams.levels.cycles.#{it}"), it ] } %>
+<% end %>
