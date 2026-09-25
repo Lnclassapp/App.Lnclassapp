@@ -7,7 +7,7 @@
 
 ## 1. Contexte
 
-La production démarre **vide** : aucun référentiel ni établissement n'y est seedé (ADR-0034). L'équipe y crée le référentiel (niveaux, séries, matières) et les DRENA à l'écran, puis les établissements, un par un ou par import JSON ; chaque établissement reçoit ses classes par défaut (ADR-0030). Elle publie des cours, leurs fiches essentielles et leurs exercices, saisis à l'écran ou importés. Un enseignant s'inscrit, déclare ses classes et leur assigne du contenu. Un élève rejoint sa classe par code, fait un exercice, voit la correction, son résultat et son badge.
+La production démarre **vide** : aucun référentiel ni établissement n'y est seedé (ADR-0034). L'équipe y crée le référentiel (niveaux, séries, matières) et les DRENA à l'écran, puis importe les établissements en JSON, seule voie de création (aucun formulaire) ; chaque établissement importé reçoit ses classes par défaut (ADR-0030). Elle publie des cours, leurs fiches essentielles et leurs exercices, saisis à l'écran ou importés. Un enseignant s'inscrit, déclare ses classes et leur assigne du contenu. Un élève rejoint sa classe par code, fait un exercice, voit la correction, son résultat et son badge.
 
 La V1 pose aussi le socle des vagues suivantes :
 
@@ -49,6 +49,8 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 | Créer une classe | — | — | — | ✅ | `Classroom::ManageClassroomPolicy` |
 
 Décisions du porteur du 2026-09-25 (voir [`journal.md`](journal.md)) :
+- **pas de formulaire de création d'établissement** : les établissements arrivent uniquement par l'import JSON, qui génère leurs classes ; « Importer des établissements » est l'action principale de l'écran Établissements ;
+- **éditeur de texte uniquement** : aucune pièce jointe dans l'éditeur riche ;
 - **l'élève voit le code de sa classe**, en majuscules, sur son accueil et sur « Ma classe », comme dans l'ancienne application ; il ne voit jamais la liste nominative ;
 - **l'enseignant voit les propositions correctes** des exercices, comme l'équipe : dans l'aperçu d'un exercice et dans le résultat d'un élève (amendement de l'ADR-0028). **L'élève ne les voit pas pendant sa session**, sauf la correction de la question à laquelle il vient de répondre (AS-10).
 
@@ -315,36 +317,43 @@ Scénario: [SC-01] Gérer les DRENA
 
 # SC-02 (import de DRENA) est écartée par le porteur : les 41 DRENA se créent à l'écran.
 
-Scénario: [SC-03][SC-09][CL-01] Créer un établissement génère ses classes
+Scénario: [SC-03] Pas de formulaire de création d'établissement
+  Quand l'équipe ouvre « Établissements » depuis la navigation
+  Alors l'action principale est « Importer des établissements », qui ouvre la modale d'import
+  Et aucun bouton ne crée un établissement à l'écran
+  Et aucune route ne crée un établissement hors de l'import
+
+Scénario: [SC-03][SC-09][CL-01] Importer un établissement génère ses classes
   Étant donné le référentiel du seed de développement (6ème à 3ème en cycle first ; 2nde liée à A et C ; 1ère et Tle liées à A1, A2, C, D)
-  Quand l'équipe crée le lycée public « Lycée Moderne de Cocody », sigle « LMC », dans la DRENA Abidjan 1
+  Quand l'équipe importe le lycée public « Lycée Moderne de Cocody », sigle « LMC », dans la DRENA Abidjan 1
   Alors l'établissement existe avec le type « Public », le statut « active » et le cycle « both »
   Et 77 classes de l'année scolaire en cours existent, dont « 6ème 1 » à « 6ème 4 », « 2nde A 1 » à « 2nde A 6 », « 1ère A1 1 » à « 1ère A1 6 » et « Tle D 1 » à « Tle D 6 »
   Et chaque classe a un code d'adhésion unique et un plafond de 80 élèves
   Et aucun élève n'existe
-  Et un toast annonce « Établissement créé : 77 classes générées », sans rechargement de page
-  Quand l'équipe crée le « Collège moderne de Cocody » (public)
-  Alors son cycle proposé est « first » et seules les classes de 6ème à 3ème sont créées, soit 28
-  Quand elle crée un lycée privé, puis un lycée mixte
+  Et le rapport d'import détaille les 77 classes générées, sans rechargement de page
+  Quand l'équipe importe le « Collège moderne de Cocody » (public)
+  Alors son cycle est « first » et seules les classes de 6ème à 3ème sont créées, soit 28
+  Quand elle importe un lycée privé et un lycée mixte
   Alors chacun reçoit 38 classes (le barème privé s'applique aussi au mixte)
 
 Scénario: [SC-09] Jamais de classes pré-créées
   Étant donné une production vierge
   Alors aucune classe n'existe
-  Et une classe ne naît que par la création d'un établissement (à l'écran ou par import) ou par « Ajouter une classe » de l'équipe
+  Et une classe ne naît que par l'import de son établissement ou par « Ajouter une classe » de l'équipe
   Quand l'équipe modifie le type ou le cycle d'un établissement
   Alors aucune classe n'est créée ni supprimée
 
 Scénario: [SC-09] Niveau sans série liée
   Étant donné une 1ère qui n'est liée à aucune série
-  Quand l'équipe crée un lycée public
+  Quand l'équipe importe un lycée public
   Alors aucune classe de 1ère n'est créée
-  Et le niveau sauté est signalé dans le toast et compté dans le détail
+  Et le niveau sauté est signalé et compté dans le détail du rapport d'import
 
 Scénario: [SC-03] Création atomique
-  Étant donné une génération de classes qui échoue en base
-  Quand l'équipe crée un établissement
-  Alors ni l'établissement ni aucune classe n'existent
+  Étant donné une génération de classes qui échoue en base pour un établissement du fichier
+  Quand l'équipe importe le fichier
+  Alors ni cet établissement ni aucune de ses classes n'existent
+  Et il figure en erreur dans le rapport, les autres établissements étant importés
 
 Scénario: [SC-04] Liste nationale des établissements
   Étant donné 600 établissements dans 3 DRENA

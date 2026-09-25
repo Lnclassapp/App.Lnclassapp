@@ -142,12 +142,11 @@ def self.for(school_type) = PLAN.fetch(school_type == "public" ? "public" : "pri
 
 *Chantier `docs/chantiers/boucle-pedagogique`, précision du porteur du 2026-09-25. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
-**Quand les classes par défaut sont générées.** Uniquement à la **création d'un établissement**, dans la même transaction ou le même élément racine :
+**Pas de formulaire de création d'établissement.** Un établissement n'arrive que par l'**import JSON** (`School::ImportSchools`, lot S3 de la V1). L'écran Établissements n'a pas de bouton « Nouvel établissement » ; son action principale est « Importer des établissements ». `School::CreateSchool`, cité au §4 ci-dessus et dans le tableau de l'ADR-0034, n'existe pas en V1.
 
-- à l'**import des établissements** (`School::ImportSchools`, lot S3 de la V1), pour chaque établissement importé ;
-- à la **création unitaire** à l'écran (`School::CreateSchool`, lot S2), avec la même génération.
+**Quand les classes par défaut sont générées.** Uniquement à l'**import d'un établissement**, dans le même élément racine : si la génération échoue, l'établissement n'est pas créé et figure en erreur dans le rapport.
 
-**Jamais de classes pré-créées.** Aucune classe n'existe avant son établissement. Aucun seed ni aucune tâche ne crée de classes en avance, ni en production ni ailleurs : les seeds de développement créent des établissements, et c'est cette création qui génère leurs classes. Modifier un établissement (type, cycle) ne régénère jamais ses classes. En dehors de la génération, une classe ne naît que par `Classroom::CreateClassroom` (équipe en V1).
+**Jamais de classes pré-créées.** Aucune classe n'existe avant son établissement. Aucun seed ni aucune tâche ne crée de classes en avance, ni en production ni ailleurs : en développement et en test, les seeds et les fabriques créent des établissements par les mêmes repositories et la même génération. Modifier un établissement (type, cycle) ne régénère jamais ses classes. En dehors de la génération, une classe ne naît que par `Classroom::CreateClassroom` (équipe en V1).
 
 **Totaux attendus**, avec le référentiel de l'ADR-0034 (2nde liée à A et C ; 1ère et Tle liées à A1, A2, C et D) :
 

@@ -75,10 +75,10 @@ Sept familles de fichiers seraient partagées par plusieurs lots verticaux. Le s
    - Plusieurs lots écrivent dans un même contexte : 7 dans `classroom`, 16 dans l'espace équipe. Un fichier de routes vide par contexte les mettrait en collision.
    - 0a dessine **toutes** les routes V1. Une route qui pointe vers un contrôleur pas encore écrit ne casse rien tant qu'on ne l'appelle pas.
    - La navigation du Lot 0c exige des noms de route **gelés** : `student_home_path`, `student_classroom_path`, `teacher_home_path`, `teacher_classrooms_path`, `team_home_path`, `courses_path`, `session_path`. 0a les crée tous. Il crée aussi `schools_path`, dont le contrôleur est livré par S2 : **l'entrée « Établissements » de l'équipe devient donc active en V1** (amendement de l'UDR-0006). `team_dashboard_path` (V4) et `profile_path` (V2) restent inactives.
-2. **Les repositories.** Un même port sert plusieurs lots. Par exemple, `AssignmentRepositoryPort` sert A2, C2, D5 et D6, et `ClassroomRepositoryPort#insert_generated` sert S2, S3 et les seeds. Chaque repository est donc écrit au socle, avec son test. Les lots n'écrivent que leurs **use cases**, leurs **queries** (une par écran), leurs contrôleurs et leurs vues.
+2. **Les repositories.** Un même port sert plusieurs lots. Par exemple, `AssignmentRepositoryPort` sert A2, C2, D5 et D6, et `ClassroomRepositoryPort#insert_generated` sert S3 et les seeds. Chaque repository est donc écrit au socle, avec son test. Les lots n'écrivent que leurs **use cases**, leurs **queries** (une par écran), leurs contrôleurs et leurs vues.
 3. **Les fabriques de test.** Deux lots d'un même contexte se disputeraient `test/support/factories/<ctx>.rb`. 0a les écrit **complètes**, pour toutes les tables. Un lot qui a besoin d'un assemblage particulier l'écrit dans son propre fichier de test.
 4. **Le moteur d'import en masse.** Quatre types d'import partagent le téléversement, le rapport, le job, la validation complète avant écriture, l'écriture par lots avec rejeu élément par élément et l'écran de suivi (ADR-0039). 0e écrit ce moteur. Chaque lot d'import (S3, I1, I2, I3) n'apporte que son **adaptateur** : son use case importeur, son job, son schéma JSON, son aide à l'écran et son test de performance.
-5. **La génération des classes** (`Entities::Classroom::DefaultClassroomPlan`, ADR-0030 et son amendement du 2026-09-25). Elle se déclenche **à la création d'un établissement, et seulement là** : à l'import (S3), à la création unitaire (S2), et dans les seeds de développement, qui créent des établissements. **Jamais de classes pré-créées.** Totaux attendus : lycée public 77, lycée privé ou mixte 38, collège public 28. Elle est dans 0b.
+5. **La génération des classes** (`Entities::Classroom::DefaultClassroomPlan`, ADR-0030 et son amendement du 2026-09-25). Il n'y a **pas de formulaire de création d'établissement** (décision du porteur du 2026-09-25) : les établissements arrivent **uniquement par l'import JSON** (S3), et c'est là que leurs classes sont générées. En développement et en test, les seeds et les fabriques créent des établissements par les mêmes repositories et la même génération. **Jamais de classes pré-créées.** Totaux attendus : lycée public 77, lycée privé ou mixte 38, collège public 28. Elle est dans 0b.
 6. **Les briques Hotwire communes** : le frame `modal` et `#toasts` (Lot 0c, déjà là), le rafraîchissement par morphing (0e), le panneau de statut d'un contenu (0e), et les assertions de test système `assert_no_page_reload` et `open_in_modal` (0d).
 7. **L'éditeur de texte riche** (décision du porteur du 2026-09-25, amendement de l'ADR-0051). Action Text et Trix servent aux formulaires de cours (B2) et de fiches essentielles (B4), et les imports I1 et I2 écrivent dans le même rich text. Le socle livre donc le framework, la table, `has_rich_text` (0a), l'assainissement du HTML importé (0e, e1) et le contrôleur `rich-text-editor`, qui charge Trix à la demande (0e, e3).
 
@@ -425,7 +425,7 @@ get  "sessions/:public_id/result", to: "assessment/session_results#show", as: :e
 get "teams", to: "teams/homes#show", as: :team_home                                                     # B6 (gelé)
 scope "teams", module: "teams" do                          # noms sans préfixe, attendus par la navigation 0c
   resources :drenas,    param: :public_id, except: :show                                                # S1
-  resources :schools,   param: :public_id do                                                            # S2 → schools_path, ACTIF
+  resources :schools,   param: :public_id, except: %i[new create] do                                    # S2 → schools_path, ACTIF ; création par import (S3) seulement
     member { patch :deactivate }
     resources :classrooms, only: %i[new create], controller: "school_classrooms"                        # D8
   end
@@ -997,7 +997,7 @@ write(items:, author_id:, at:)       → { imported: Integer, details: Hash }   
 |---|---|---|---|
 | `app/javascript/controllers/index.js` (modifié) | Remplace le manifeste généré : `import controllers from "./**/*_controller.js"`, puis `controllers.forEach(c => application.register(c.name, c.module.default))`. Un fichier en sous-dossier a pour identifiant `<dossier>--<nom>`. Les quatre contrôleurs du Lot 0c gardent leur identifiant. | tous | `test/system/design_system_test.rb` (V0) reste vert |
 | `app/javascript/controllers/math_controller.js` | À la connexion : `await import("katex/contrib/auto-render")` (**import dynamique**, ADR-0051), ajoute une fois au `<head>` le `<link>` de `katex.css` (même origine, compatible CSP), puis rend `$…$` et `$$…$$`. Sert à B1, B3, C1, C2 et C3. | B1, B3, C1 à C3 | `test/system/shared/math_rendering_test.rb` : une formule est rendue ; le point d'entrée commun ne contient pas KaTeX |
-| `app/javascript/controllers/rich_text_editor_controller.js` | Identifiant `rich-text-editor`, posé sur le champ de contenu des formulaires de B2 et B4. À la connexion : `await Promise.all([import("trix"), import("@rails/actiontext")])` (**import dynamique**, amendement du 2026-09-25 de l'ADR-0051), puis ajoute une fois au `<head>` le `<link>` de `trix.css` (même origine, compatible CSP). Trix lit le nonce de la balise `csp-nonce` posée par `csp_meta_tag` (ADR-0049). **Pièces jointes refusées en V1** : `trix-file-accept` annulé, bouton de fichier masqué (voir « Décisions que ce plan suppose »). | B2, B4 | couvert par les tests système de B2 et B4, et par la garde d'import dynamique ci-dessous |
+| `app/javascript/controllers/rich_text_editor_controller.js` | Identifiant `rich-text-editor`, posé sur le champ de contenu des formulaires de B2 et B4. À la connexion : `await Promise.all([import("trix"), import("@rails/actiontext")])` (**import dynamique**, amendement du 2026-09-25 de l'ADR-0051), puis ajoute une fois au `<head>` le `<link>` de `trix.css` (même origine, compatible CSP). Trix lit le nonce de la balise `csp-nonce` posée par `csp_meta_tag` (ADR-0049). **Pièces jointes refusées en V1** (décision du porteur) : `trix-file-accept` annulé, bouton de fichier masqué, aucun `direct_upload` (voir « Décisions que ce plan suppose »). | B2, B4 | couvert par les tests système de B2 et B4, et par la garde d'import dynamique ci-dessous |
 | `test/architecture/lazy_libraries_test.rb` | Aucun fichier de `app/javascript/` n'importe `trix`, `@rails/actiontext`, `katex` ni `canvas-confetti` **statiquement** (`import … from`, `import "…"`) : seuls les `import("…")` dynamiques sont permis (ADR-0051). | tous | — |
 | `app/views/layouts/action_text/contents/_content.html.erb` | Gabarit de rendu d'un rich text : `<div class="rich-text">` avec les classes typographiques de l'UDR-0005 (titres, listes, citations, `pre`), sans valeur arbitraire. Le contenu est assaini au rendu par Action Text. | B1, B3 | couvert par les tests de B1 et B3 |
 | `app/views/layouts/application.html.erb` (modifié) | Une ligne dans le `<head>` : `turbo_refreshes_with method: :morph, scroll: :preserve`. Un `turbo_stream.refresh` de succès re-demande la page courante et la fusionne, sans recharger la fenêtre. | tous les CRUD | couvert par les tests système des lots |
@@ -2210,14 +2210,14 @@ Chaque lot vertical :
 
 ---
 
-## Lot S2 — Établissements : création avec classes, liste nationale, fiche
+## Lot S2 — Établissements : liste nationale, fiche, modification
+
+> **Pas de formulaire de création** (décision du porteur du 2026-09-25) : un établissement n'arrive que par l'import JSON (S3), qui génère ses classes. Ce lot ne livre ni `new`, ni `create`, ni `School::CreateSchool`.
 
 - **Couche**       : domaine (DTO, use cases) + infrastructure (queries) + delivery + ui
 - **Fichiers**     :
   - `app/domain/dtos/school/school_input.rb`
-    - `drena_public_id, name` (150), `sigle` (20), `school_type` ∈ `SCHOOL_TYPES` (Public, Privé, Mixte), `status` ∈ `STATUSES` (défaut `active`), `cycle` ∈ `CYCLES` (proposé par `School.cycle_for(name:)`, modifiable par l'équipe).
-  - `app/domain/use_cases/school/create_school.rb`
-    - `ManageSchoolPolicy` ; DRENA ; dans **une transaction** : `schools.create` (nom pris dans la DRENA : `:conflict`), puis `DefaultClassroomPlan.rows_for(school:, lookup: taxonomy.lookup)`, puis codes tirés par `JoinCode.generate_unique` contre `taken_join_codes`, puis `classrooms.insert_generated` pour `SchoolYear.current`, `max_students` 80 (ADR-0030). Audit `school.changed`. Renvoie l'école, le nombre de classes créées et les niveaux ou séries sautés. **Aucun élève de démonstration.**
+    - Entrée de la modification : `drena_public_id, name` (150), `sigle` (20), `school_type` ∈ `SCHOOL_TYPES` (Public, Privé, Mixte), `status` ∈ `STATUSES`, `cycle` ∈ `CYCLES` (posé à l'import, modifiable par l'équipe).
   - `app/domain/use_cases/school/update_school.rb`
     - Nom, sigle, DRENA, type, statut, cycle. Ne régénère **jamais** les classes.
   - `app/domain/use_cases/school/deactivate_school.rb`
@@ -2229,9 +2229,9 @@ Chaque lot vertical :
   - `app/infrastructure/queries/school/school_detail_query.rb`
     - Fiche (SC-05) : l'école, ses classes de l'année courante groupées par niveau (nom, code affiché, effectif, enseignants), ses enseignants.
   - `app/controllers/teams/schools_controller.rb`
-    - `index` (frame `schools` seul quand la requête vient du frame), `show`, `new`, `create`, `edit`, `update`, `deactivate`, `destroy`.
+    - `index` (frame `schools` seul quand la requête vient du frame), `show`, `edit`, `update`, `deactivate`, `destroy`. Ni `new` ni `create` : la route ne les dessine pas.
   - `app/views/teams/schools/index.html.erb`
-    - Filtres visant `turbo_frame_tag "schools"` (`data-turbo-action="advance"`), `ui_pagination`. Boutons « Nouvel établissement » et « Importer des établissements » (`new_teams_import_path(kind: "schools")`), en `data-turbo-frame="modal"`.
+    - Filtres visant `turbo_frame_tag "schools"` (`data-turbo-action="advance"`), `ui_pagination`. Action principale de l'écran : le bouton « Importer des établissements » (`new_teams_import_path(kind: "schools")`, en `data-turbo-frame="modal"`). Aucun bouton de création unitaire. Liste vide : un état vide invite à importer le premier fichier.
   - `app/views/teams/schools/_filters.html.erb`
   - `app/views/teams/schools/_school_row.html.erb`
   - `app/views/teams/schools/show.html.erb`
@@ -2239,11 +2239,8 @@ Chaque lot vertical :
   - `app/views/teams/schools/_header.html.erb`
   - `app/views/teams/schools/_classroom_group.html.erb`
   - `app/views/teams/schools/_form.html.erb`
-    - `form_with id: "school-form"`. Le cycle est pré-rempli selon le nom ; une aide explique qu'une école « collège » ne reçoit que le premier cycle.
-  - `app/views/teams/schools/new.html.erb`
+    - `form_with id: "school-form"`, pour la modification seulement. Une aide rappelle que changer le type ou le cycle ne crée ni ne supprime aucune classe.
   - `app/views/teams/schools/edit.html.erb`
-  - `app/views/teams/schools/create.turbo_stream.erb`
-    - Toast « Établissement créé : 77 classes générées » (nombre réel, et niveaux sautés s'il y en a), modale refermée, `prepend` de la ligne dans la liste.
   - `app/views/teams/schools/update.turbo_stream.erb`
     - Toast, `replace` de la ligne et de l'en-tête (chacun ignoré s'il n'est pas sur la page).
   - `app/views/teams/schools/deactivate.turbo_stream.erb`
@@ -2253,8 +2250,6 @@ Chaque lot vertical :
 - **Dépend de**    : socle
 - **Test associé** :
   - `test/domain/dtos/school/school_input_test.rb`
-  - `test/domain/use_cases/school/create_school_test.rb`
-    - Avec le référentiel de développement : lycée public **77** classes, lycée privé **38**, lycée mixte 38 (barème privé), « Collège moderne » public **28** et aucune de second cycle ; noms espacés (« 6ème 1 », « Tle D 3 ») ; une `1ere` sans série liée est sautée et comptée ; codes d'adhésion tous distincts ; échec d'insertion des classes → **aucune école créée**.
   - `test/domain/use_cases/school/update_school_test.rb`
     - Changer le cycle ne crée ni ne supprime de classe.
   - `test/domain/use_cases/school/deactivate_school_test.rb`
@@ -2262,19 +2257,19 @@ Chaque lot vertical :
   - `test/infrastructure/queries/school/schools_query_test.rb`
   - `test/infrastructure/queries/school/school_detail_query_test.rb`
   - `test/controllers/teams/schools_controller_test.rb`
-    - Non-équipe : 403 ; Turbo Stream ; 422 ; repli HTML.
+    - Non-équipe : 403 ; Turbo Stream ; 422 ; repli HTML ; `GET /teams/schools/new` et `POST /teams/schools` ne créent rien (aucune route).
   - `test/system/teams/schools_test.rb`
-    - Filtrer la liste ; créer un lycée public (toast « 77 classes ») ; le modifier ; le désactiver ; échouer à supprimer un établissement référencé : tout **sans rechargement de page**.
-- **Done quand**   : les critères SC-03, SC-04, SC-05, SC-06, SC-07 et SC-09 sont verts ; l'entrée « Établissements » de la navigation équipe mène à la liste ; tout se fait **sans rechargement de page**.
-- **Hotwire**      : liste filtrée et paginée dans un frame ; modales ; 422 ; streams `create`, `update`, `deactivate`, `destroy` ; repli HTML.
+    - L'action principale de la liste ouvre la modale d'import ; aucun bouton de création ; filtrer la liste ; modifier un établissement ; le désactiver ; échouer à supprimer un établissement référencé : tout **sans rechargement de page**.
+- **Done quand**   : les critères SC-04, SC-05, SC-06 et SC-07 sont verts, ainsi que le scénario « Pas de formulaire de création » de SC-03 ; l'entrée « Établissements » de la navigation équipe mène à la liste, dont l'action principale est l'import ; tout se fait **sans rechargement de page**.
+- **Hotwire**      : liste filtrée et paginée dans un frame ; modales ; 422 ; streams `update`, `deactivate`, `destroy` ; repli HTML.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/index.html.erb`, `show.html.erb`, `_form.html.erb` ; `⟨ancienne⟩ domain/…/generate_default_classrooms.rb` (table des classes, reprise par l'ADR-0030) ; capture `teams/team-school-id-school.png`
-- **Fiches d'inventaire** : SC-03 à SC-07, SC-09. CL-01 (génération).
-- **Non-régression** : aucun élève de démonstration créé ; aucune école sans ses classes ; aucune classe pré-créée ni régénérée hors de la création de l'école ; supprimer une école utilisée est refusé.
+- **Fiches d'inventaire** : SC-03 (pas de création à l'écran), SC-04 à SC-07.
+- **Non-régression** : aucun écran ni aucune route ne crée un établissement ; modifier une école ne crée ni ne supprime de classe ; supprimer une école utilisée est refusé.
 - **UDR**          : UDR-0036 — Établissements
 
 ---
 
-## Lot S3 — Import des établissements, avec génération des classes
+## Lot S3 — Import des établissements, avec génération des classes (seule voie de création)
 
 - **Couche**       : domaine (adaptateur d'import) + delivery (job) + ui (aide) + schéma + performance
 - **Fichiers**     :
@@ -2293,17 +2288,17 @@ Chaque lot vertical :
 - **Dépend de**    : socle
 - **Test associé** :
   - `test/domain/use_cases/school/import_schools_test.rb`
-    - `assert_importer_contract` ; alias ; « Collège » (accents et casse ignorés) → `first` ; mixte → barème privé ; DRENA par élément ; doublon en base et doublon dans le fichier ignorés et comptés ; **fichier mixte → rapport exact** (8 écoles valides, 2 invalides à `schools[3].type` et `schools[6].name`, 1 doublon : `imported_count` 8, `error_count` 2, `skipped_count` 1, `total_count` 11, aucune ligne ni classe pour les invalides) ; enveloppe `lnclass.courses` → `rejected`, zéro écriture ; lot en échec (code d'adhésion pris entre la validation et l'écriture) rejoué élément par élément.
+    - `assert_importer_contract` ; alias ; « Collège » (accents et casse ignorés) → `first` ; mixte → barème privé ; avec le référentiel de développement : lycée public **77** classes, lycée privé **38**, lycée mixte 38, collège public **28** et aucune de second cycle ; noms espacés (« 6ème 1 », « Tle D 3 ») ; une `1ere` sans série liée est sautée et comptée dans `details` ; échec d'insertion des classes d'une école → cette école en erreur, sans aucune ligne ; DRENA par élément ; doublon en base et doublon dans le fichier ignorés et comptés ; **fichier mixte → rapport exact** (8 écoles valides, 2 invalides à `schools[3].type` et `schools[6].name`, 1 doublon : `imported_count` 8, `error_count` 2, `skipped_count` 1, `total_count` 11, aucune ligne ni classe pour les invalides) ; enveloppe `lnclass.courses` → `rejected`, zéro écriture ; lot en échec (code d'adhésion pris entre la validation et l'écriture) rejoué élément par élément.
   - `test/jobs/school/import_schools_job_test.rb`
     - Le job écrit l'extrait réel `schools_legacy_sample.json` du socle : écoles et classes créées, rapport `completed`.
   - `test/system/school/import_schools_test.rb`
     - `open_in_modal(new_teams_import_path(kind: "schools"))` : l'aide du type est affichée ; un fichier mixte donne, **sans rechargement de page**, le rapport exact avec les chemins d'erreur.
   - `test/performance/school/import_schools_performance_test.rb`
     - **500 écoles** (44 % de collèges, public, privé et mixte) → environ **35 000 classes**, `RunImport` complet en **moins de 120 s** ; mémoire du processus consignée. Ignoré sans `PERF=1`.
-- **Done quand**   : le critère SC-08 est vert ; un fichier de l'ancienne application, **une fois enveloppé**, s'importe classes comprises ; un fichier mixte donne un rapport exact ; le suivi se fait **sans rechargement de page** ; le test de performance passe en local.
+- **Done quand**   : les critères SC-03 (création par import), SC-08 et SC-09 sont verts ; un fichier de l'ancienne application, **une fois enveloppé**, s'importe classes comprises ; un fichier mixte donne un rapport exact ; le suivi se fait **sans rechargement de page** ; le test de performance passe en local.
 - **Hotwire**      : aucun contrôleur propre ; la modale, les streams et le suivi sont ceux du socle (0e) ; ce lot fournit le partial du type.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/_import_form.html.erb` ; `⟨ancienne⟩ domain/…/school_import_strategy.rb` pour les clés acceptées ; exemples `.Business/content_pedagogics/DRENAS/`.
-- **Fiches d'inventaire** : SC-08, SC-09, TR-28.
+- **Fiches d'inventaire** : SC-03, SC-08, SC-09, TR-28. CL-01 (génération).
 - **Non-régression** : aucun élève de démonstration ; codes d'adhésion uniques ; une école invalide ne bloque pas les valides ; aucune école existante mise à jour ; les classes naissent avec leur école importée, jamais avant (lycée public 77, privé ou mixte 38, collège public 28).
 - **UDR**          : UDR-0037 — Import des établissements
 
@@ -2447,10 +2442,10 @@ Chaque lot vertical :
 | Migrations, schéma, modèles `Orm::`, fabriques, `test_helper` | tous | **0a** |
 | `Gemfile`, `package.json`, `esbuild.config.mjs`, `config/environments/test.rb` | tous | **0a** ; `config/credentials.yml.enc` par l'orchestrateur |
 | Ports, entités, policies, DTO du socle, `Shared::Result`, `TransactionPort` | tous | **0b**, gelés au merge |
-| `DefaultClassroomPlan`, `TaxonomyLookup`, `Slug`, `NaturalKey`, `ContentNode`, `ImportKind` | S2, S3, I1 à I3, seeds | **0b** |
+| `DefaultClassroomPlan`, `TaxonomyLookup`, `Slug`, `NaturalKey`, `ContentNode`, `ImportKind` | S3, I1 à I3, seeds | **0b** |
 | `ApplicationController`, `AuthenticatedController`, `Teams::BaseController`, concerns, helpers de test système | tous | **0d** |
 | Repositories `identity` et transaction | B7, B8, D1, A1, tous les use cases | **0d** |
-| Les 18 autres repositories | par exemple `AssignmentRepository` : A2, A3, B3, C2, D4 à D7 ; `ClassroomRepository#insert_generated` : S2, S3, seeds | **0e** |
+| Les 18 autres repositories | par exemple `AssignmentRepository` : A2, A3, B3, C2, D4 à D7 ; `ClassroomRepository#insert_generated` : S3, seeds | **0e** |
 | Moteur d'import (`StartImport`, `RunImport`, contrat `Importer`, `Shared::ImportJob`, `Teams::ImportsController`, écran de suivi, `config.x.import_jobs`) | S3, I1, I2, I3 | **0e** ; chaque lot n'ajoute que son adaptateur, son job, son schéma et son partial `kinds/_<kind>` |
 | `ContentTreeWriter` | I1, I2, I3 | **0e** |
 | Chargement Stimulus par motif, `math_controller`, `rich_text_editor_controller`, gabarit de rendu Action Text, morphing dans le layout | A1 à D8, R, S | **0e** : aucun manifeste à éditer |
@@ -2525,17 +2520,17 @@ Source : [feuille de route §6](../refonte-application/feuille-de-route.md#6-tra
 | CO-09 | Toasts | 0c (composant), tous les streams |
 | SC-01 | Gérer les DRENA | S1 |
 | SC-02 | *(écartée par le porteur)* Importer des DRENA : elles se créent à l'écran | — |
-| SC-03 | Créer un établissement | S2 |
+| SC-03 | Créer un établissement | S3 (import JSON, seule voie) ; S2 (aucun formulaire de création) |
 | SC-04 | Liste nationale des établissements | S2 |
 | SC-05 | Consulter un établissement | S2 |
 | SC-06 | Modifier un établissement | S2 |
 | SC-07 | Supprimer un établissement (ou le désactiver) | S2 |
 | SC-08 | Importer des établissements | S3 (adaptateur), 0e (moteur) |
-| SC-09 | Générer les classes par défaut | 0b (`DefaultClassroomPlan`), 0e (`insert_generated`), S2 (création unitaire), S3 (import) |
+| SC-09 | Générer les classes par défaut | 0b (`DefaultClassroomPlan`), 0e (`insert_generated`), S3 (import) |
 | SC-26 | API des établissements d'une DRENA | D1 |
 | SC-27 | Rattachement à l'école à l'inscription | D1 |
-| CL-01 | Créer une classe | D8 (unitaire), S2 et S3 (génération) |
-| CL-04 | Générer et afficher le code | 0b (`JoinCode`), D8 et S2 (génération), D4 (affichage) |
+| CL-01 | Créer une classe | D8 (unitaire), S3 (génération) |
+| CL-04 | Générer et afficher le code | 0b (`JoinCode`), D8 et S3 (génération), D4 (affichage) |
 | CL-06 | Rejoindre par `/c/<code>` | A1 |
 | CL-07 | S'inscrire avec un code | A1 |
 | CL-08 | Vérification du code (la liste des classes est écartée) | A1 |
@@ -2620,8 +2615,8 @@ Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne su
 | Le moteur d'import est câblé par `Shared::ImportJob` et `config.x.import_jobs` (nom du job par type, résolu à l'appel) : un lot d'import n'édite aucun fichier du socle. | Précision | ADR-0039 |
 | **Un test de performance par type** (`test/performance/<ctx>/import_<kind>_performance_test.rb`), au lieu du fichier unique `test/performance/imports_test.rb` de l'ADR-0039 : chaque lot possède le sien, sans collision. Hors CI, joués avec `PERF=1` avant la recette. | Écart assumé | ADR-0039 |
 | **Éditeur riche en V1** (retour du porteur du 2026-09-25) : le contenu des cours et des fiches essentielles est un rich text Action Text (`has_rich_text :content`), saisi dans Trix. Trix et `@rails/actiontext` sont chargés **uniquement sur les pages d'édition**, par import dynamique (`rich-text-editor`), hors du point d'entrée commun de 60 Ko. Les imports I1 et I2 écrivent du HTML **assaini** dans le même rich text. | **Amendement** | ADR-0051 (« Amendement du 2026-09-25 ») |
-| **Pièces jointes de l'éditeur refusées en V1** : un fichier glissé dans Trix est rejeté. Le téléversement direct vers le bucket (ADR-0047) exigerait d'ouvrir `connect-src` de la CSP (ADR-0049). **À confirmer par le porteur.** | Précision | ADR-0051 |
-| **Classes générées à la création de l'établissement seulement** (retour du porteur du 2026-09-25) : par l'import (S3) et par la création unitaire (S2), jamais pré-créées ni semées. Totaux : lycée public 77, lycée privé ou mixte 38, collège public 28. | **Amendement** | ADR-0030 |
+| **Pièces jointes de l'éditeur refusées en V1, décision du porteur du 2026-09-25** : éditeur de texte uniquement. Le contrôleur `rich-text-editor` annule `trix-file-accept` et aucun `direct_upload` n'est branché (ADR-0047, ADR-0049). | Précision | ADR-0051 |
+| **Pas de formulaire de création d'établissement ; classes générées à l'import seulement** (retour du porteur du 2026-09-25) : un établissement n'arrive que par l'import JSON (S3), qui génère ses classes ; `School::CreateSchool` n'existe pas en V1. Jamais de classes pré-créées ni semées en production. Totaux : lycée public 77, lycée privé ou mixte 38, collège public 28. | **Amendement** | ADR-0030 |
 | `users.gender` conservé, non nul (`male`, `female`) : l'ancienne application le demandait et le PRD cadre le garde. Confirmé par le porteur le 2026-09-25. | Précision | ADR-0037 |
 | `friendly_id` **retiré** : slugs figés par `Orm::HasFrozenSlug`, `public_id` par `Orm::HasPublicId` ; la table `friendly_id_slugs` de V0 est supprimée. | Précision | ADR-0029 |
 | La CSS de KaTeX est un **fichier séparé** (`katex.css`), chargé par `math_controller` seulement sur les pages qui ont des formules : le budget CSS commun (30 Ko) reste tenu. | Précision | ADR-0051 |

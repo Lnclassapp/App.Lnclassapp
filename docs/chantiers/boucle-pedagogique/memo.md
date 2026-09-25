@@ -35,7 +35,7 @@ Le nouveau dépôt est vide : aucune table, aucun écran connecté.
 
 | Acteur | Moment du parcours |
 |---|---|
-| **Team** (équipe Lnclass) | Crée le référentiel (niveaux, séries, matières), les DRENA et les établissements, un par un ou par import JSON en masse ; chaque établissement reçoit ses classes par défaut. Publie des cours, leurs fiches essentielles et leurs exercices, saisis ou importés. Invite un collègue. Débloque un compte dont le PIN est perdu. |
+| **Team** (équipe Lnclass) | Crée le référentiel (niveaux, séries, matières), les DRENA à l'écran, et importe les établissements en JSON (pas de formulaire de création, décision du porteur du 2026-09-25) ; chaque établissement importé reçoit ses classes par défaut. Publie des cours, leurs fiches essentielles et leurs exercices, saisis ou importés. Invite un collègue. Débloque un compte dont le PIN est perdu. |
 | **Teacher** | S'inscrit, choisit son établissement et déclare les classes où il enseigne. Ouvre une classe, assigne un cours, une fiche ou un exercice. Débloque le PIN d'un de ses élèves. |
 | **Student** | S'inscrit avec le code de sa classe. Voit sur son accueil ce qui lui est assigné. Fait l'exercice, voit la correction immédiate, puis son résultat et son badge. |
 | **Visiteur** | Découvre la page d'accueil. Choisit « élève » ou « enseignant ». Se connecte ou crée son compte. |

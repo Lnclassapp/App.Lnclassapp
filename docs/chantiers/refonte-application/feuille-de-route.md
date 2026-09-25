@@ -363,7 +363,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 |---|---|---|---|---|
 | SC-01 | Gérer les DRENA | ⚠️ | V1 (`referentiels-equipe`, ADR-0034) | Une suppression qui échoue dès qu'une école a du personnel |
 | SC-02 | Importer des DRENA | ⚠️ | **écartée** : les 41 DRENA se saisissent à l'écran (ADR-0034) ; aucun format d'import (ADR-0039) | Une action d'import sans route (TR-29) |
-| SC-03 | Créer un établissement | ⚠️ | V1 (`referentiels-equipe`, classes générées : ADR-0030) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
+| SC-03 | Créer un établissement | ⚠️ | V1 (`referentiels-equipe`, par import JSON seulement, sans formulaire : décision du porteur du 2026-09-25 ; classes générées : ADR-0030) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
 | SC-04 | Liste nationale des établissements | ⚠️ | V1 (`referentiels-equipe`) | Des filtres factices ; un bouton « Nouvelle École » mort |
 | SC-05 | Consulter un établissement | ✅ | V1 (`referentiels-equipe`) | Une fiche ouverte à tout connecté |
 | SC-06 | Modifier un établissement | ⚠️ | V1 (`referentiels-equipe`, dont le cycle) | Une modification ouverte à tout connecté |
@@ -595,7 +595,7 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | `teacher` | `teachers` | V1 | ID-03, SC-27 | `material_id` avec clé étrangère : l'ancien n'en avait pas |
 | `student` | `students` | V1 | ID-01, ID-02 | Index unique sur `user_id` ; `matricule` n'était écrit que par les comptes démo : non créée |
 | `Drena` | `drenas` | V1 (équipe) | SC-01, SC-02 | `schools.drena_id` est obligatoire (§5 V1) |
-| `Schools` | `schools` | V1 (équipe, import) | SC-03…09 | `cycle` et `school_type` en colonnes ; classes générées à la création (ADR-0030) |
+| `Schools` | `schools` | V1 (équipe, import) | SC-03…09 | `cycle` et `school_type` en colonnes ; classes générées à l'import, seule voie de création (ADR-0030) |
 | `series` | `series` | V1 (équipe) | CA-23, CA-24 | Créées par l'équipe ; `A1 A2 C D` en seed de développement (ADR-0034) |
 | `Level` | `levels` | V1 (équipe) | CA-16…19 | Créés par l'équipe ; `6ème…Tle` en seed de développement (ADR-0034) ; supprimer un niveau ne détruit plus de classes (C-26) |
 | `level_series` | `level_series` | V1 (équipe) | CA-19 | Table vivante, contrairement à ce que disait l'inventaire |

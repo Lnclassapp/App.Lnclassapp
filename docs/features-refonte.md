@@ -80,7 +80,7 @@
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
 | ☐ | SC-01 | Gérer les DRENA | ⚠️ | V1 en lecture (seed) · V2 en écriture (`referentiels-equipe`) | Une suppression qui échoue dès qu'une école a du personnel |
-| ☐ | SC-03 | Créer un établissement | ⚠️ | V1 (seed) · V2 (écran) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
+| ☐ | SC-03 | Créer un établissement | ⚠️ | V1 (import JSON seulement, sans formulaire : décision du porteur du 2026-09-25) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
 | ☐ | SC-26 | API des établissements d'une DRENA | ✅ | V1 (inscription enseignant) | Un endpoint public sans limite de débit |
 | ☐ | SC-27 | Rattachement à l'école à l'inscription enseignant | ✅ | V1 (Lot D) | — |
 
