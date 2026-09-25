@@ -6,6 +6,9 @@ module UseCases
       NOW = Time.utc(2026, 9, 25, 12)
       Clock = Data.define(:now)
 
+      LEVELS = { "tle" => Entities::Catalog::Level.new(id: 7, slug: "tle", name: "Tle", cycle: "second"),
+                 "6eme" => Entities::Catalog::Level.new(id: 1, slug: "6eme", name: "6ème", cycle: "first") }.freeze
+
       # Couple unique, comme l'index de level_series.
       class FakeTaxonomy
         include Ports::Catalog::TaxonomyRepositoryPort
@@ -16,7 +19,7 @@ module UseCases
           @pairs = pairs
         end
 
-        def find_level(slug:) = { "tle" => Entities::Catalog::Level.new(id: 7, slug: "tle", name: "Tle") }[slug]
+        def find_level(slug:) = LEVELS[slug]
         def find_series(slug:) = { "d" => Entities::Catalog::Series.new(id: 105, slug: "d", name: "D") }[slug]
 
         def link(level_id:, series_id:, at:)
@@ -68,6 +71,16 @@ module UseCases
         assert_equal :conflict, result.code
         assert_equal({ base: [ :already_linked ] }, result.errors)
         assert_empty @audit_log.entries
+      end
+
+      test "un niveau du premier cycle n'ouvre aucune série : :invalid, sans écriture ni journal" do
+        result = link(level_slug: "6eme")
+
+        assert_equal :invalid, result.code
+        assert_equal({ base: [ :first_cycle ] }, result.errors)
+        assert_empty @taxonomy.pairs
+        assert_empty @audit_log.entries
+        assert_equal 0, @transaction.calls
       end
 
       test "hors de l'équipe : :forbidden ; un niveau ou une série inconnus : :not_found" do

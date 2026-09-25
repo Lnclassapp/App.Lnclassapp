@@ -81,6 +81,21 @@ class Teams::LevelSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal t("teams.level_series.destroy.refused"), flash[:alert]
   end
 
+  test "a forged request to open a series to a first-cycle level is refused in 422, with the reason" do
+    create_level(name: "6ème", position: 1, cycle: "first")
+    sign_in_as @member
+
+    post level_series_index_path("6eme"), params: { series_slug: "d" }, as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_equal 0, Orm::LevelSeries.count
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{t("teams.level_series.create.first_cycle", level: "6ème")}/
+
+    post level_series_index_path("6eme"), params: { series_slug: "d" }
+    assert_redirected_to series_index_path
+    assert_equal t("teams.level_series.create.first_cycle", level: "6ème"), flash[:alert]
+  end
+
   test "an unknown level or series is not found" do
     sign_in_as @member
 

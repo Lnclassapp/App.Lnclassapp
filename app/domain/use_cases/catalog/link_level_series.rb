@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::Catalog::LinkLevelSeries
-# Rôle : l'équipe ouvre une série à un niveau ; seul un couple lié est accepté sur une classe ou un cours
+# Rôle : l'équipe ouvre une série à un niveau du second cycle ; seul un couple lié est accepté sur une classe ou un cours
 # ADR  : 0026, 0028, 0034
 module UseCases
   module Catalog
@@ -12,7 +12,7 @@ module UseCases
         @clock = clock
       end
 
-      # → Result | :forbidden | :not_found | :conflict (base: already_linked)
+      # → Result | :forbidden | :not_found | :invalid (base: first_cycle) | :conflict (base: already_linked)
       def call(actor:, level_slug:, series_slug:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -20,6 +20,8 @@ module UseCases
         level = @taxonomy.find_level(slug: level_slug)
         series = @taxonomy.find_series(slug: series_slug)
         return Shared::Result.failure(:not_found) if level.nil? || series.nil?
+        # Les séries n'existent qu'au second cycle, comme dans DefaultClassroomPlan.
+        return Shared::Result.failure(:invalid, errors: { base: [ :first_cycle ] }) if level.first_cycle?
 
         now = @clock.now
         @transaction.call do

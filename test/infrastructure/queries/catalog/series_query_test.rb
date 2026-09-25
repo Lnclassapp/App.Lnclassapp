@@ -7,6 +7,7 @@ module Queries
         @second = create_level(name: "2nde", position: 5)
         @tle = create_level(name: "Tle", position: 7)
         @first = create_level(name: "1ère", position: 6)
+        @sixth = create_level(name: "6ème", position: 1, cycle: "first")
         @d = create_series(name: "D")
         @a = create_series(name: "A")
         @c = create_series(name: "C")
@@ -29,6 +30,11 @@ module Queries
       test "find renvoie la ligne d'une série par son slug, nil si elle n'existe pas" do
         assert_equal [ "c", [ "2nde" ] ], SeriesQuery.new.find(slug: "c").then { [ it.slug, it.level_names ] }
         assert_nil SeriesQuery.new.find(slug: "inconnue")
+      end
+
+      test "la matrice ne montre que les niveaux du second cycle ; cell répond aussi pour le premier" do
+        assert_not_includes SeriesQuery.new.matrix.levels.map(&:slug), "6eme"
+        assert_equal [ "6ème", false ], SeriesQuery.new.cell(level_slug: "6eme", series_slug: "d").then { [ it.level_name, it.linked ] }
       end
 
       test "la matrice croise les niveaux par position et les séries par nom ; chaque case sait si le couple est lié et utilisé" do
