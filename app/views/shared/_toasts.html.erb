@@ -1,5 +1,5 @@
 <%# 🌐 UI · shared/_toasts — région des notifications, rendue par le layout %>
-<%# Rôle : affiche le flash de la requête ; cible #toasts des Turbo Streams. Jamais data-turbo-permanent (le message se perdrait) %>
+<%# Rôle : affiche le flash de la requête ; cible #toasts des Turbo Streams. Jamais data-turbo-permanent sur la région (le flash de la page suivante se perdrait) : chaque toast l'est %>
 <%# UDR  : 0006 %>
 <div id="toasts" aria-live="polite" class="pointer-events-none fixed inset-x-0 top-0 z-50 flex flex-col items-center gap-3 p-4 sm:top-auto sm:bottom-0 sm:items-end sm:p-6">
   <% flash.each do |key, message| %>
