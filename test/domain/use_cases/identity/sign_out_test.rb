@@ -9,7 +9,10 @@ module UseCases
         attr_reader :destroyed
 
         def initialize(session) = @session = session
-        def find_by_token_digest(token_digest:) = (@session if token_digest == Entities::Identity::SecretDigest.hmac("token", key: "key"))
+        def find_by_token_digest(token_digest:)
+          @session if token_digest == Entities::Identity::SecretDigest.hmac("token", key: "key")
+        end
+
         def destroy(id:) = @destroyed = id
       end
 

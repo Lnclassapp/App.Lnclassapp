@@ -10,8 +10,13 @@ module UseCases
         include Ports::Identity::UserRepositoryPort
 
         def initialize(user) = @user = user
-        def authenticate(contact:, pin:) = (@user if contact == @user.contact && pin == "2468")
-        def find_by_contact(contact:) = (@user if contact == @user.contact)
+        def authenticate(contact:, pin:)
+          @user if contact == @user.contact && pin == "2468"
+        end
+
+        def find_by_contact(contact:)
+          @user if contact == @user.contact
+        end
       end
 
       class FakeAttempts

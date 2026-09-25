@@ -11,7 +11,10 @@ module UseCases
 
         attr_reader :confirmed
 
-        def verify_code(user_id:, code:, now:) = (42 if code == "123456")
+        def verify_code(user_id:, code:, now:)
+          42 if code == "123456"
+        end
+
         def confirm(user_id:, backup_code_digests:, at:) = @confirmed = [ user_id, backup_code_digests, at ]
       end
 

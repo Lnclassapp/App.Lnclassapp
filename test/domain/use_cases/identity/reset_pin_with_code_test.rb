@@ -11,7 +11,10 @@ module UseCases
 
         attr_reader :new_pin
 
-        def find_by_contact(contact:) = (Entities::Identity::User.new(id: 1, role: "student", contact:) if contact == "0701020304")
+        def find_by_contact(contact:)
+          Entities::Identity::User.new(id: 1, role: "student", contact:) if contact == "0701020304"
+        end
+
         def update_pin(user_id:, pin:) = @new_pin = pin
       end
 
