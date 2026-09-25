@@ -14,7 +14,7 @@ const TRANSLATED = ["title", "placeholder", "aria-label", "value"]
 function translate(lang, texts, root) {
   const french = new Map(Object.entries(texts).map(([key, text]) => [lang[key], text]))
   Object.assign(lang, texts)
-  root.querySelectorAll("trix-toolbar button, trix-toolbar input").forEach((node) => {
+  root.querySelectorAll("[data-trix-button-group] button, [data-trix-dialogs] input").forEach((node) => {
     TRANSLATED.forEach((name) => french.has(node.getAttribute(name)) && node.setAttribute(name, french.get(node.getAttribute(name))))
     if (node.tagName === "BUTTON" && french.has(node.textContent)) node.textContent = french.get(node.textContent)
   })
