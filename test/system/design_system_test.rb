@@ -83,12 +83,14 @@ class DesignSystemTest < ApplicationSystemTestCase
 
     assert_no_selector "#{dialog}[open]"
 
+    # Wait for the modal to be open before closing it: on a loaded machine, the key or the click came too early.
     click_on t("design.index.modal.open")
-    find(dialog).send_keys(:escape)
+    find("#{dialog}[open]").send_keys(:escape)
 
     assert_no_selector "#{dialog}[open]"
 
     click_on t("design.index.modal.open")
+    assert_selector "#{dialog}[open]"
     page.driver.browser.action.move_to_location(5, 5).click.perform
 
     assert_no_selector "#{dialog}[open]"
