@@ -3,6 +3,9 @@
 # ADR  : 0026, 0034, 0036 · UDR : 0006, 0033
 module Teams
   class LevelSeriesController < BaseController
+    # Refus rendus en place (422), avec la clé de leur raison : couple déjà lié ou utilisé, niveau du premier cycle.
+    REFUSALS = { conflict: :refused, invalid: :first_cycle }.freeze
+
     def create
       respond_with_cell link_level_series.call(actor: current_actor, **pair)
     end
@@ -13,20 +16,21 @@ module Teams
 
     private
 
-    # :conflict (couple déjà lié, ou utilisé) : la case est resynchronisée avec la base, et la raison dite.
+    # Un refus resynchronise la case avec la base et dit sa raison.
     def respond_with_cell(result)
-      return render_toggle(refused: true) if result.code == :conflict
+      refusal = REFUSALS[result.code]
+      return render_toggle(refusal) if refusal
 
-      render_result result, success: ->(_) { render_toggle(refused: false) }
+      render_result result, success: ->(_) { render_toggle(:done) }
     end
 
-    def render_toggle(refused:)
-      @refused = refused
+    def render_toggle(outcome)
+      @refused = outcome != :done
       @cell = Queries::Catalog::SeriesQuery.new.cell(**pair)
-      message = t(".#{refused ? :refused : :done}", level: @cell.level_name, series: @cell.series_name)
+      @message = t(".#{outcome}", level: @cell.level_name, series: @cell.series_name)
       respond_to do |format|
-        format.turbo_stream { render status: refused ? :unprocessable_entity : :ok }
-        format.html { redirect_to series_index_path, flash: { (refused ? :alert : :notice) => message }, status: :see_other }
+        format.turbo_stream { render status: @refused ? :unprocessable_entity : :ok }
+        format.html { redirect_to series_index_path, flash: { (@refused ? :alert : :notice) => @message }, status: :see_other }
       end
     end
 
