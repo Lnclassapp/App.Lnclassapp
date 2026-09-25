@@ -3,7 +3,7 @@ require "test_helper"
 class NavigationHelperTest < ActionView::TestCase
   helper ComponentsHelper
 
-  # Seules ces routes « existent » ici : les autres destinations restent inactives, comme avant la V1.
+  # Ces routes sont remplacées ici ; les V1 sont dessinées (config/routes), celles des vagues suivantes restent inactives.
   def courses_path = "/courses"
   def student_home_path = "/student"
   def profile_path = "/profile"
@@ -20,10 +20,11 @@ class NavigationHelperTest < ActionView::TestCase
   end
 
   test "nav_path resolves a drawn route and leaves the others inactive" do
-    courses, classroom = navigation_for(:student).values_at(1, 2)
+    courses = navigation_for(:student)[1]
+    dashboard = navigation_for(:team).last
 
     assert_equal "/courses", nav_path(courses)
-    assert_nil nav_path(classroom)
+    assert_nil nav_path(dashboard)
   end
 
   test "a destination is active by its URL or by the key the view declares" do
@@ -57,14 +58,14 @@ class NavigationHelperTest < ActionView::TestCase
 
   test "home_path_for falls back to the root when the home route is missing" do
     assert_equal "/student", home_path_for(:student)
-    assert_equal root_path, home_path_for(:teacher)
+    assert_equal root_path, home_path_for(:school_admin)
   end
 
   test "account_links point to drawn routes and mark sign out as dangerous" do
     profile, sign_out = account_links
 
     assert_equal({ label: I18n.t("shared.navigation.profile"), href: "/profile", icon: "user-circle", method: nil, tone: :default }, profile)
-    assert_nil sign_out[:href]
+    assert_equal "/session", sign_out[:href]
     assert_equal :delete, sign_out[:method]
     assert_equal :danger, sign_out[:tone]
   end
