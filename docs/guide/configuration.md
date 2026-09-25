@@ -38,6 +38,15 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 | `RAILS_MASTER_KEY` | Déchiffre `config/credentials.yml.enc` | **L'application ne démarre pas.** Contenu de `config/master.key`, qui est gitignoré — à copier à la main dans Railway |
 | `DATABASE_URL` | Connexion PostgreSQL | L'application ne démarre pas. Fournie automatiquement par Railway si la base est liée au service |
 | `RAILS_ENV` | `production` | Valeurs par défaut de développement en production |
+| `RAILWAY_PUBLIC_DOMAIN` | Hôte autorisé par `config.hosts` | Fournie par Railway. Sans elle ni `APP_HOSTS`, seul `localhost` est servi : toute page répond 403, sauf `/up` |
+
+### Facultatives — hôtes et stockage
+
+| Variable | Rôle |
+|---|---|
+| `APP_HOSTS` | Domaines personnalisés autorisés, séparés par des virgules |
+| `ACTIVE_STORAGE_SERVICE` | `local` par défaut ; `amazon` pour le bucket S3-compatible (ADR-0047 à venir) |
+| `AWS_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `AWS_ENDPOINT_URL`, `AWS_FORCE_PATH_STYLE` | Lues par le service `amazon` de `config/storage.yml` ; références au bucket Railway |
 
 ### Facultatives — réglage de charge
 
@@ -48,7 +57,6 @@ Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure 
 | `WEB_CONCURRENCY` | Nombre de processus Puma |
 | `RAILS_MAX_THREADS` | Threads par processus |
 | `JOB_CONCURRENCY` | Concurrence des jobs Solid Queue |
-| `SOLID_QUEUE_IN_PUMA` | Exécute les jobs dans le processus web au lieu d'un worker dédié |
 | `PORT` | Port d'écoute — Railway le fournit |
 | `RAILS_LOG_LEVEL` | `info` par défaut |
 | `PIDFILE` | Chemin du fichier PID |
