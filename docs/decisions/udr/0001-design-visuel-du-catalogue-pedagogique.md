@@ -1,12 +1,14 @@
 # UDR-0001 : Design Visuel du Catalogue Pédagogique
 
+> ⚠️ **Remplacée partiellement par [UDR-0005](./0005-design-system-fondateur.md)** (2026-09-25) : la section « Tokens » ne s'applique plus. Utilisez les tokens `@theme` et la table de correspondance de l'UDR-0005 §3. Les autres sections restent valables.
+
 | | |
 |---|---|
 | **Statut** | Accepté — *« Validé » dans le document d'origine* |
 | **Date** | — |
 | **Chantier** | — |
 | **ADR lié** | [ADR-0022 — Modélisation hexagonale du catalogue pédagogique](../adr/0022-modelisation-hexagonale-du-catalogue-pedagogique.md) |
-| **Remplacé par** | — |
+| **Remplacé par** | [UDR-0005](./0005-design-system-fondateur.md), section « Tokens » seulement |
 
 ---
 

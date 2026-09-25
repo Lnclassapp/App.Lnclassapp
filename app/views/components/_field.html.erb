@@ -1,0 +1,33 @@
+<%# 🌐 UI · components/_field — libellé, contrôle, aide et erreur, appelé par ui_field %>
+<%# Rôle : un seul mécanisme d'erreur de validation, sous le champ, relié par aria-describedby %>
+<%# UDR  : 0005 %>
+<div class="space-y-1.5">
+  <% if kind == :checkbox %>
+    <div class="flex items-start gap-3">
+      <span class="flex min-h-6 items-center"><%= control %></span>
+      <%= form.label method, class: "cursor-pointer text-sm font-medium text-ink" do %>
+        <%= label %><% if required %><span class="text-error" aria-hidden="true"> *</span><% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= form.label method, class: "block text-sm font-medium text-ink" do %>
+      <%= label %><% if required %><span class="text-error" aria-hidden="true"> *</span><% end %>
+    <% end %>
+    <% if kind == :select %>
+      <div class="relative">
+        <%= control %>
+        <%= ui_icon "chevron-down", variant: :mini, class: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-mute" %>
+      </div>
+    <% else %>
+      <%= control %>
+    <% end %>
+  <% end %>
+  <% if hint %>
+    <p id="<%= id %>_hint" class="text-sm text-mute"><%= hint %></p>
+  <% end %>
+  <% if error %>
+    <p id="<%= id %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+    </p>
+  <% end %>
+</div>

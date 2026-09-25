@@ -1,0 +1,17 @@
+<%# 🌐 UI · components/_loading_state — chargement (rotation ou squelette), appelé par ui_loading_state %>
+<%# Rôle : role="status" + aria-live ; le squelette porte aria-busy %>
+<%# UDR  : 0005, 0006 %>
+<% if variant == :spinner %>
+  <div role="status" aria-live="polite" class="flex items-center justify-center gap-3 py-10 text-mute">
+    <%= ui_spinner size: :lg %>
+    <span class="text-sm font-medium"><%= label || t(".label") %></span>
+  </div>
+<% else %>
+  <div role="status" aria-live="polite" aria-busy="true" class="space-y-3">
+    <span class="sr-only"><%= label || t(".label") %></span>
+    <div class="h-6 w-1/3 animate-pulse rounded-sm bg-mist"></div>
+    <% widths.each do |width| %>
+      <div class="h-4 animate-pulse rounded-sm bg-mist <%= width %>"></div>
+    <% end %>
+  </div>
+<% end %>

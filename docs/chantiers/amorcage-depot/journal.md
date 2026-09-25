@@ -114,7 +114,7 @@ Le contexte `ci` est le nom du job de `.github/workflows/ci.yml` : il n'existe c
 | `:contact` filtré | `filter_parameters` + `:contact`, `/\Apin/` (ADR-0025) | `parameter_filtering_test.rb` |
 | CSP | `content_security_policy.rb` d'ADR-0049, nonce par requête | `content_security_policy_test.rb` (`/` et `/teams/jobs`, nonce différent à chaque requête) ; `production_configuration_test.rb` |
 | `config.hosts` | `RAILWAY_PUBLIC_DOMAIN` + `APP_HOSTS` ; sans variable, `localhost` seul (fermé par défaut) | `production_configuration_test.rb` : hôte inconnu → 403, domaine perso → 200, sans variable → `["localhost"]` |
-| Stockage (F-25) | `:local` par défaut ; `ACTIVE_STORAGE_SERVICE=amazon` bascule sur le service S3-compatible | `production_configuration_test.rb` : service `:amazon` construit avec bucket et endpoint Railway |
+| Stockage (F-25, ADR-0047) | service `:railway` (bucket Railway, `BUCKET_*`) en production, mode proxy partout, purge quotidienne des blobs orphelins de plus de 48 h ; `image_processing` et `libvips` retirés | `test/config/storage_test.rb` (service `railway`, bucket, endpoint, `rails_storage_proxy`, refus de démarrer sans bucket) ; `test/jobs/shared/purge_unattached_blobs_job_test.rb` ; `recurring_tasks_test.rb` |
 | Traductions | `raise_on_missing_translations = true` en dev et test ; `default_locale = :fr` ; `rails-i18n` ; `config/locales/**/*.yml` chargés | `i18n_configuration_test.rb`, `development_configuration_test.rb` |
 | Navigateurs (ADR-0051) | `allow_browser` ne bloque plus, pose `@outdated_browser` ; `public/406-unsupported-browser.html` supprimé | `application_controller_test.rb` ; `supported_browsers_test.rb` **en attente de design** (bandeau) |
 | Worker (ADR-0052) | `plugin :solid_queue` sans condition ; `:solid_queue` en dev et prod ; tables dans la base principale | `repository_rules_test.rb`, `development_configuration_test.rb`, `production_configuration_test.rb`, `recurring_tasks_test.rb` |
@@ -123,13 +123,25 @@ Le contexte `ci` est le nom du job de `.github/workflows/ci.yml` : il n'existe c
 
 Les réglages de production sont prouvés sur un **vrai démarrage en production** (`test/support/environment_probe.rb` : `bin/rails runner` dans un processus enfant, requêtes Rack contre l'application), pas en relisant le fichier de configuration.
 
-### 7. Test système « page d'accueil » — ⚠️ écrit, non prouvé localement
+### 7. Test système « page d'accueil » — ✅ vert sous Chrome headless (imports de design simulés)
 
 `test/system/homepage_test.rb` : titre, `h1`, et Turbo démarré sous la CSP (preuve que le JavaScript de l'application n'est pas bloqué). Pilote `selenium` + `headless_chrome`, jamais `rack_test`.
 
-**Non prouvé** dans le bac à sable de l'agent : pas de réseau (selenium-manager ne peut pas télécharger Chrome), et Chromium en snap refuse de démarrer (`snap-confine has elevated permissions and is not confined`). Conformément à [configuration.md §4.3](../../guide/configuration.md), un test système qui n'a pas tourné dans un navigateur est **non prouvé**, pas prouvé. À lancer quand Chrome sera réparé (`sudo systemctl start snapd.apparmor`, décision du porteur) : `CHROME_BIN=/snap/bin/chromium CHROMEDRIVER_PATH=/snap/bin/chromium.chromedriver bin/ci`, puis en CI GitHub (Chrome préinstallé).
+Chromium en snap refuse de démarrer sur ce poste (`snapd.apparmor` arrêté). L'orchestrateur a installé **Chrome for Testing 154**, hors snap :
 
-`test/application_system_test_case.rb` lit `CHROME_BIN` et `CHROMEDRIVER_PATH` s'ils sont posés, sinon selenium-manager ; options `--headless=new`, `--no-sandbox`, `--disable-dev-shm-usage`, fenêtre 1400×1400. `bin/check-chrome` passe avant les tests système dans `bin/ci` et échoue avec un message explicite :
+```
+$ CHROME_BIN=~/.cache/chrome-for-testing/chrome-linux64/chrome \
+  CHROMEDRIVER_PATH=~/.cache/chrome-for-testing/chromedriver-linux64/chromedriver bin/check-chrome
+✅ Chrome : Google Chrome for Testing 154.0.8037.57
+✅ chromedriver : ChromeDriver 154.0.8037.57
+$ COVERAGE=0 bin/rails test:system        (mêmes variables)
+Capybara starting Puma... Listening on http://127.0.0.1:36699
+2 runs, 3 assertions, 0 failures, 0 errors, 0 skips          exit 0
+```
+
+**Réserve** : lancé avec les deux imports `trix` / `@rails/actiontext` retirés de `application.js` **le temps de l'essai, non commité** — sur cette branche, le build JS échoue tant que design n'est pas mergé. Le test prouve donc la chaîne telle qu'elle sera après la fusion, pas la branche seule. À rejouer après le merge de `design-baseline`.
+
+`test/application_system_test_case.rb` lit `CHROME_BIN` et `CHROMEDRIVER_PATH` s'ils sont posés, sinon selenium-manager ; options `--headless=new`, `--no-sandbox`, `--disable-gpu`, `--disable-dev-shm-usage`, fenêtre 1400×1400. Variables documentées dans [configuration.md §2](../../guide/configuration.md). `bin/check-chrome` passe avant les tests système dans `bin/ci` et échoue avec un message explicite :
 
 ```
 ❌ Chrome ne démarre pas (chromium) : les tests système ne sont PAS prouvés.
@@ -149,7 +161,8 @@ Les réglages de production sont prouvés sur un **vrai démarrage en production
 | 2026-09-25 | `.yarnrc.yml` (`nodeLinker: node-modules`) et `packageManager: yarn@4.5.3` versionnés | le poste de dev le tenait d'un `~/.yarnrc.yml` global : la CI et Docker auraient résolu en PnP | non |
 | 2026-09-25 | `Teams::BaseController` refuse tout (redirection vers l'accueil) | ADR-0052 le crée en V0, l'authentification arrive en V1 : fermé par défaut | non |
 | 2026-09-25 | Paquets yarn `trix` et `@rails/actiontext`, framework Action Text et sa table retirés ; les imports JS et `actiontext.css` restent à design | arbitrage de l'orchestrateur : `package.json` appartient à l'amorçage, `app/javascript` à design | non |
-| 2026-09-25 | `ACTIVE_STORAGE_SERVICE` choisit le service de stockage en production (défaut `local`) | prépare ADR-0047 sans le trancher | à confirmer par ADR-0047 |
+| 2026-09-25 | ADR-0047 appliqué : service `railway` en production, mode proxy, purge à 48 h, plus de `libvips` | ADR accepté ; remplace le `ACTIVE_STORAGE_SERVICE` provisoire | ADR-0047 |
+| 2026-09-25 | La production refuse de démarrer sans `BUCKET_NAME` (erreur du SDK S3 au chargement de `ActiveStorage::Blob`) | un stockage absent doit casser le déploiement, pas perdre des fichiers en silence ; le build Docker n'est pas touché (pas de chargement anticipé en tâche rake) | non |
 
 ## Ce qui a dérapé
 
@@ -180,6 +193,6 @@ Variables Railway (par environnement, `Staging` et `main`) :
 | `DATABASE_URL` | référence au PostgreSQL de l'environnement |
 | `RAILWAY_PUBLIC_DOMAIN` | fournie par Railway — rien à faire |
 | `APP_HOSTS` | domaines personnalisés, séparés par des virgules (facultatif) |
-| `ACTIVE_STORAGE_SERVICE`, `AWS_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `AWS_ENDPOINT_URL`, `AWS_FORCE_PATH_STYLE` | à poser avec ADR-0047 : `amazon` et les références au bucket Railway (`BUCKET`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `REGION`, `ENDPOINT`) |
+| `BUCKET_NAME`, `BUCKET_ENDPOINT`, `BUCKET_ACCESS_KEY_ID`, `BUCKET_SECRET_ACCESS_KEY`, `BUCKET_REGION` (+ `BUCKET_FORCE_PATH_STYLE` si besoin) | **obligatoires** (ADR-0047) : créer un bucket Railway par environnement **avant** le premier déploiement, puis référencer `${{Bucket.BUCKET}}`, `${{Bucket.ENDPOINT}}`, `${{Bucket.ACCESS_KEY_ID}}`, `${{Bucket.SECRET_ACCESS_KEY}}`, `${{Bucket.REGION}}` |
 
 `SOLID_QUEUE_IN_PUMA` ne sert plus (worker toujours dans Puma)  : retiré de [configuration.md §2](../../guide/configuration.md), où les variables d'hôte et de stockage sont ajoutées.

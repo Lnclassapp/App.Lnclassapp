@@ -1,0 +1,15 @@
+<%# 🌐 UI · shared/home/_skeleton — squelette de la page d'accueil d'un rôle %>
+<%# Rôle : en-tête de bienvenue puis les sections du rôle ; chaque vague remplace un état par ses données %>
+<%# UDR  : 0006 %>
+<%= ui_page_header title: t(".greeting", name: user.first_name), subtitle: t(".subtitle.#{user.role}") %>
+<div class="grid gap-5">
+  <% home_sections_for(user.role).each_with_index do |(key, icon), index| %>
+    <%= ui_card title: t("shared.home.sections.#{key}.title"), subtitle: t("shared.home.sections.#{key}.subtitle"), icon: do %>
+      <% if index.zero? %>
+        <%= ui_loading_state variant: :skeleton %>
+      <% else %>
+        <%= ui_empty_state title: t("shared.home.sections.#{key}.empty"), icon: %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

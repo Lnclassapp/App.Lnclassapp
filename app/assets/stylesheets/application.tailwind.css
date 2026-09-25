@@ -1,16 +1,157 @@
-@import "tailwindcss";
+/* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
+   Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
+   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006 */
 
-/* Identité Lnclass — couleurs reprises des logos (app/assets/images/logo) */
+/* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
+@import "tailwindcss" source(none);
+@source "../../views";
+@source "../../helpers";
+@source "../../javascript";
+
+/* Polices servies par l'application (ADR-0049 : aucune police tierce). Sous-ensemble latin, variable. */
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url("/dm-sans-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* UDR-0005 — Les familles remises à zéro (couleurs, rayons, ombres, polices) n'existent QUE par leurs tokens :
+   `bg-slate-50`, `rounded-xl` ou `shadow-md` ne produisent plus rien. Le test du design system le vérifie. */
 @theme {
+  /* Typographie — identité de la landing */
+  --font-*: initial;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --leading-display: 1.05;
+
+  /* Couleurs — palette de la landing, seule autorisée */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-ink: #262626;
+  --color-mute: #5e5a54;
+  --color-line: #e6e1d8;
+  --color-mist: #f2eee7;
+  --color-paper: #faf8f4;
 
   --color-brand: #00a0ff;
   --color-brand-soft: #e5f5ff;
-  --color-ink: #262626;
-  --color-paper: #faf8f4;
+  --color-brand-strong: #0070b3;
+
+  /* Couleurs de rôle */
   --color-teacher: #ff8a00;
   --color-school: #1b365d;
-  --color-gold: #f39c12;
   --color-team: #7b3aed;
+  --color-gold: #f39c12;
+
+  /* Couleurs d'état — texte AA sur blanc et sur leur fond doux */
+  --color-success: #18723f;
+  --color-success-soft: #e7f5ed;
+  --color-warning: #9a5200;
+  --color-warning-soft: #fff1dc;
+  --color-error: #c8322b;
+  --color-error-soft: #fdecea;
+  --color-info: var(--color-brand-strong);
+  --color-info-soft: var(--color-brand-soft);
+
+  /* Rayons — `rounded-full` reste disponible pour les pilules et les avatars */
+  --radius-*: initial;
+  --radius-sm: 0.5rem;
+  --radius-ln: 0.75rem;
+  --radius-card: 1.5rem;
+  --radius-sheet: 2rem;
+
+  /* Ombres — trois niveaux d'élévation, teintés d'encre */
+  --shadow-*: initial;
+  --shadow-card: 0 2px 8px rgb(38 38 38 / 0.04);
+  --shadow-lift: 0 12px 24px rgb(38 38 38 / 0.08);
+  --shadow-pop: 0 20px 40px -8px rgb(38 38 38 / 0.2);
+
+  /* Espacements nommés — l'échelle numérique autorisée est listée dans UDR-0005 §3 */
+  --spacing-tap: 3rem;
+  --spacing-gutter: 1.25rem;
+  --spacing-bar: 4rem;
+  --spacing-rail: 18rem;
+
+  /* Largeurs de contenu */
+  --container-page: 72rem;
+  --container-form: 28rem;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.2s ease-out both;
+  --animate-slide-up: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(0.75rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  /* Une modale ouverte fige la page derrière elle. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  /* Rails enveloppe les champs en erreur : l'enveloppe ne doit pas casser la mise en page du composant champ. */
+  .field_with_errors {
+    display: contents;
+  }
+
+  .turbo-progress-bar {
+    height: 3px;
+    background-color: var(--color-brand);
+  }
+}
+
+/* Cadrage de la photo du héros de la landing */
+@utility object-hero {
+  object-position: 30% 50%;
+}
+
+/* Barre de navigation basse au-dessus de l'indicateur système (iPhone, Android gestuel) */
+@utility pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+/* Bande défilante sans barre visible (onglets sur mobile) : le geste suffit, la barre mangerait la hauteur. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+}
+
+/* ADR-0051 — bandeau « navigateur ancien » : CSS simple, hors utilitaires, pour rester lisible là où
+   les fonctions récentes de Tailwind v4 (couches, oklch, :where) ne sont pas comprises. */
+.outdated-browser {
+  background: #fff1dc;
+  color: #262626;
+  padding: 0.5rem 1rem;
+  text-align: center;
 }

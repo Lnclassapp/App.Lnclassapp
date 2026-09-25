@@ -38,6 +38,7 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 | `RAILS_MASTER_KEY` | Déchiffre `config/credentials.yml.enc` | **L'application ne démarre pas.** Contenu de `config/master.key`, qui est gitignoré — à copier à la main dans Railway |
 | `DATABASE_URL` | Connexion PostgreSQL | L'application ne démarre pas. Fournie automatiquement par Railway si la base est liée au service |
 | `RAILS_ENV` | `production` | Valeurs par défaut de développement en production |
+| `BUCKET_NAME`, `BUCKET_ENDPOINT`, `BUCKET_ACCESS_KEY_ID`, `BUCKET_SECRET_ACCESS_KEY` | Service `railway` de `config/storage.yml` (ADR-0047) ; références aux variables du bucket Railway de l'environnement (`${{Bucket.BUCKET}}`, `${{Bucket.ENDPOINT}}`…) | **L'application ne démarre pas** (`missing required option :name`) : Railway garde l'ancienne version, `/up` ne répond pas |
 | `RAILWAY_PUBLIC_DOMAIN` | Hôte autorisé par `config.hosts` | Fournie par Railway. Sans elle ni `APP_HOSTS`, seul `localhost` est servi : toute page répond 403, sauf `/up` |
 
 ### Facultatives — hôtes et stockage
@@ -45,8 +46,8 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 | Variable | Rôle |
 |---|---|
 | `APP_HOSTS` | Domaines personnalisés autorisés, séparés par des virgules |
-| `ACTIVE_STORAGE_SERVICE` | `local` par défaut ; `amazon` pour le bucket S3-compatible (ADR-0047 à venir) |
-| `AWS_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `AWS_ENDPOINT_URL`, `AWS_FORCE_PATH_STYLE` | Lues par le service `amazon` de `config/storage.yml` ; références au bucket Railway |
+| `BUCKET_REGION` | Région du bucket, `auto` par défaut |
+| `BUCKET_FORCE_PATH_STYLE` | `true` si le bucket Railway annonce des URL en *path-style* |
 
 ### Facultatives — réglage de charge
 
@@ -64,6 +65,16 @@ Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure 
 ### Développement local uniquement
 
 `DATABASE_NAME` · `DATABASE_USERNAME` · `DATABASE_PASSWORD` · `DATABASE_PORT` — lues par `config/database.yml`. En production, `DATABASE_URL` prime.
+
+`CHROME_BIN` · `CHROMEDRIVER_PATH` — lues par `test/application_system_test_case.rb` et `bin/check-chrome`. Un Chrome et son pilote locaux, hors snap, par exemple Chrome for Testing :
+
+```bash
+CHROME_BIN=~/.cache/chrome-for-testing/chrome-linux64/chrome \
+CHROMEDRIVER_PATH=~/.cache/chrome-for-testing/chromedriver-linux64/chromedriver \
+  bin/ci
+```
+
+Sans elles, selenium-manager trouve Chrome (runner GitHub) ou le télécharge (réseau requis). `bin/check-chrome` arrête `bin/ci` avec un message explicite si le navigateur ne démarre pas.
 
 > Dans l'ancienne application, `config/database.yml` contenait un mot de passe de développement **en clair et versionné**. Toléré parce qu'il ne concernait qu'une base locale. **Dans le nouveau projet, ces quatre variables doivent venir d'un `.env` non versionné.**
 
@@ -91,16 +102,7 @@ config.active_storage.service = :local
 
 Sur Railway, le disque du conteneur est **éphémère** : chaque déploiement efface les fichiers téléversés. Les images de couverture et les messages vocaux disparaîtraient à la première mise à jour, sans erreur ni avertissement.
 
-Il faut un service objet (S3, GCS, ou le volume persistant de Railway), ce qui ajoute ses propres secrets :
-
-| Variable | Exemple pour S3 |
-|---|---|
-| `AWS_ACCESS_KEY_ID` | clé d'accès |
-| `AWS_SECRET_ACCESS_KEY` | secret |
-| `AWS_REGION` | région du bucket |
-| `AWS_BUCKET` | nom du bucket |
-
-À placer dans `config/credentials.yml.enc` plutôt qu'en variables d'environnement — c'est ce à quoi sert `RAILS_MASTER_KEY`.
+**Réglé dans le nouveau projet par l'[ADR-0047](../decisions/adr/)** : service `railway` (bucket Railway, S3-compatible) en production, fichiers servis par l'application (`rails_storage_proxy`), variables `BUCKET_*` du §2.
 
 ### L'hôte des liens de mail est un exemple
 
