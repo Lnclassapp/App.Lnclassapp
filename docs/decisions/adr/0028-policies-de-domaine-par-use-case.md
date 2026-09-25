@@ -45,7 +45,7 @@ Le PRD cadre exige une policy par use case et un test de refus.
 
 **Traduction** : `RendersResult` (ADR-0026) répond `:forbidden` par une 403, ou par une redirection vers la connexion si `actor` est `nil`. Une policy de **lecture** peut répondre `:not_found` au lieu de `:forbidden` quand la réponse ne doit pas confirmer que la ressource existe (brouillon, ADR-0035).
 
-**Use cases d'authentification**, seuls exemptés de policy, listés nommément dans le test d'architecture avec leur raison : `Identity::Authenticate`, `Identity::ResetPinWithCode` et `Identity::AcceptInvitation`. Ils sont l'acte même d'établir l'identité ; leur protection est la limitation de débit et le verrouillage (ADR-0050, ADR-0032, ADR-0038).
+**Use cases d'authentification**, seuls exemptés de policy, listés nommément dans le test d'architecture avec leur raison : `Identity::Authenticate`, `Identity::ResetPinWithCode` et `Identity::AcceptInvitation`, exemptions acceptées par le porteur le 2026-09-25. Ils sont l'acte même d'établir l'identité ; leur protection est la limitation de débit et le verrouillage (ADR-0050, ADR-0032, ADR-0038).
 
 **Adhésion par code** : `Classroom::JoinWithCode` **a** une policy, `Classroom::JoinPolicy`, qui accepte un acteur anonyme (`actor: nil`) ou un élève. Elle vérifie que la classe est `active` (donc non archivée), que le code saisi est égal au `join_code` courant (valide et non révoqué, ADR-0041) et que l'effectif actif est sous `max_students`. Sinon elle répond `:forbidden`, avec `errors[:base]` qui nomme la raison (`classroom_archived`, `join_code_revoked`, `classroom_full`). Un code qui ne correspond à aucune classe donne `:not_found` avant la policy.
 
@@ -54,13 +54,14 @@ Le PRD cadre exige une policy par use case et un test de refus.
 | Policy | Autorise |
 |---|---|
 | `Catalog::ReadPublishedPolicy` | tout acteur connecté sur un contenu `published` ; `team` sur tout statut |
-| `Catalog::ManageContentPolicy` | `team` |
+| `Catalog::ManageContentPolicy` | `team` : contenu, imports de cours, de fiches et d'exercices (ADR-0039) |
 | `Catalog::ManageTaxonomyPolicy` | `team` (sous-rôles `admin` et `content` à partir de la V4) : niveaux, séries, `level_series`, matières (ADR-0034) |
 | `Assessment::StartSessionPolicy` | `student`, sur un exercice publié dont les parents sont publiés |
 | `Assessment::ReadSessionPolicy` | l'élève propriétaire ; l'enseignant d'une classe active de l'élève ; `team` |
 | `Assessment::RevealAnswersPolicy` | l'élève, pour une question déjà tentée dans sa session ; `team` |
 | `Classroom::JoinPolicy` | acteur anonyme ou `student` ; classe active, code valide et non révoqué, effectif sous le plafond |
 | `Classroom::TeachPolicy` / `Classroom::AssignPolicy` | l'enseignant présent dans `teacher_classrooms` pour la classe ; `team` |
+| `School::ManageSchoolPolicy` | `team` (sous-rôles `admin` et `field` à partir de la V4) : DRENA, établissements, imports d'établissements (ADR-0030, ADR-0034, ADR-0039) |
 | `Classroom::ManageClassroomPolicy` | `team` en V1 ; la direction de l'école à partir de la V2 (ADR-0030) |
 | `Identity::ReadUserPolicy` | soi-même ; l'enseignant pour les élèves de ses classes (sans le contact) ; `team` |
 | `Identity::InviteTeamPolicy`, `Identity::DeleteUserPolicy` | `team` (sous-rôle `admin` à partir de la V4, ADR-0038) |

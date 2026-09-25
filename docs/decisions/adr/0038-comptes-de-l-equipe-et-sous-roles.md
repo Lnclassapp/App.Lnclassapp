@@ -67,9 +67,9 @@ Index unique partiel `(kind, contact) WHERE accepted_at IS NULL AND revoked_at I
 | Inviter, changer le sous-rôle d'un membre, réinitialiser son TOTP | ✅ | | |
 | Anonymiser un compte | ✅ | | |
 | Superviser les jobs (`/teams/jobs`) | ✅ | | |
-| Créer, publier, archiver le contenu ; importer (ADR-0039) | ✅ | ✅ | |
+| Créer, publier, archiver le contenu ; importer cours, fiches, exercices (ADR-0039) | ✅ | ✅ | |
 | Gérer la taxonomie : niveaux, séries, matières (ADR-0034) | ✅ | ✅ | |
-| Gérer DRENA, écoles, classes ; inviter la direction | ✅ | | ✅ |
+| Gérer DRENA, établissements (import compris), classes ; inviter la direction | ✅ | | ✅ |
 | Émettre un code de récupération du PIN | ✅ | | ✅ |
 | Publier une annonce nationale (ADR-0045) | ✅ | ✅ | ✅ |
 | Lire les indicateurs agrégés ([ADR-0049](./0049-mesure-d-audience-cote-serveur-et-csp-stricte.md)) | ✅ | ✅ | ✅ |

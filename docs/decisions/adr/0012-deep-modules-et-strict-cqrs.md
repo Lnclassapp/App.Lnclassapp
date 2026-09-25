@@ -11,7 +11,7 @@
 ---
 
 > ⚠️ **Décision remplacée — les lectures et les imports suivent d'autres ADR.**
-> Le §3.1 (`ViewObjects`) est remplacé par l'[ADR-0026](./0026-contrat-result-entites-et-dto.md) : une query renvoie un `Data`. Le §3.3 (import polymorphe) est remplacé par l'[ADR-0039](./0039-format-d-import-du-contenu.md) : format arbre versionné, tout ou rien. Le use case CRUD générique du §3.2 est abandonné. Aucune partie de cet ADR ne reste en vigueur depuis le 2026-09-25.
+> Le §3.1 (`ViewObjects`) est remplacé par l'[ADR-0026](./0026-contrat-result-entites-et-dto.md) : une query renvoie un `Data`. Le §3.3 (import polymorphe) est remplacé par l'[ADR-0039](./0039-format-d-import-du-contenu.md) : imports JSON versionnés, import partiel atomique par élément racine. Le use case CRUD générique du §3.2 est abandonné. Aucune partie de cet ADR ne reste en vigueur depuis le 2026-09-25.
 
 ## 1. Contexte et problématique
 Suite à une seconde revue d'architecture (Refactoring V2), nous avons identifié plusieurs "modules superficiels" (shallow modules) et des violations d'isolation dans le monolithe hexagonal :

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Remplacé — *voir l'avertissement ci-dessous* |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-08-29 |
 | **Chantier** | — |
 | **Remplace** | — |
@@ -10,8 +10,8 @@
 
 ---
 
-> ⚠️ **Décision remplacée — l'import du contenu suit l'ADR-0039.**
-> L'[ADR-0039](./0039-format-d-import-du-contenu.md) remplace cet ADR en entier le 2026-09-25 : format arbre versionné, schéma JSON, transaction unique, rapport persisté. La partie sur les élèves démo tombe avec eux, retirés du plan.
+> ⚠️ **Décision remplacée partiellement — les imports suivent l'ADR-0039.**
+> L'[ADR-0039](./0039-format-d-import-du-contenu.md) remplace le 2026-09-25 le format et l'orchestration des imports : quatre formats versionnés, job, validation complète, import partiel atomique par élément racine, rapport persisté. La technique d'insertion reste en vigueur : §2.1 (`insert_all` dans les repositories) et §2.2 (identifiants calculés avant l'insertion). Le §2.3 tombe avec les élèves démo, retirés du plan.
 
 ## 1. Contexte et problématique
 Dans le cadre de l'onboarding des administrateurs et du lancement initial des DRENA et établissements, le système doit importer un catalogue massif de données via des tâches en arrière-plan (`ImportSchoolsJsonJob`, `ImportCoursesJsonJob`). 

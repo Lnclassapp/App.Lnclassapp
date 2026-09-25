@@ -27,9 +27,10 @@ Les ADR acceptés le 2026-09-25 transforment chaque constat en règle du projet 
 | 15 | [ADR-0027](../../decisions/adr/0027-contextes-bornes-et-arborescence.md) | Profils 1-1 à clé `user_id`, unicité en base |
 | 17 | [ADR-0050](../../decisions/adr/0050-authentification-et-session.md) | Table `audit_events` |
 | 20, 22, 23, 26 | [ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md) | Une policy par use case, testée ; une liste reçoit l'acteur et filtre par lui |
+| 28 | [ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md) | Fichier d'import stocké par Active Storage, jamais dans `tmp/` ; aucun nom de fichier client dans un chemin disque |
 | 30 | [ADR-0054](../../decisions/adr/0054-moteur-d-evaluation-soumission-et-cloture.md) | Une tentative par question et par session, unique et immuable en base |
 
-Les n° 11, 13, 14, 16, 25, 27, 28, 29 et 31 sont des règles d'implémentation : ils restent vérifiés par les critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses).
+Les n° 11, 13, 14, 16, 25, 27, 29 et 31 sont des règles d'implémentation : ils restent vérifiés par les critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses).
 
 ---
 

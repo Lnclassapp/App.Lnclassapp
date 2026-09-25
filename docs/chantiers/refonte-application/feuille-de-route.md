@@ -16,11 +16,11 @@
 ```
 V0  Amorçage du dépôt                 garde-fous avant tout code métier
  │
-V1  Boucle pédagogique                équipe publie → enseignant assigne → élève fait l'exercice
- │                                    (= plan.md, périmètre « 72 h »)
+V1  Boucle pédagogique                référentiels et imports en masse → équipe publie
+ │                                    → enseignant assigne → élève fait l'exercice
  ├──────────────┬───────────────────┐
-V2  Organisation scolaire    V4  Contenu à l'échelle
-    et espace direction          imports, catalogue complet, back-office équipe
+V2  Espace direction         V4  Contenu à l'échelle
+    et comptes                   catalogue complet, pilotage, sous-rôles
  │                                  │
 V3  Suivi pédagogique enseignant    │
     rapports, multi-établissements  │
@@ -77,12 +77,12 @@ Pièges connus, à ne pas rejouer : les trois défauts de CI trouvés sur la PR 
 | **F-09** | Design system fondateur | palette `@theme` · palette `slate/blue` de `.interface-design/system.md` · mode sombre ou non · iconographie | Palette `@theme` seule (tokens courts, `rounded-ln` et non `rounded-[var(--radius-ln)]`) ; échelles d'espacement, d'ombre, de rayon ; peu de composants, tous substantiels ; **pas de mode sombre en V1** (on retire les bascules) ; heroicons seul ; test qui refuse `[…]` et `#hex` dans les vues ; KaTeX servi par le bundle | V1 (0c) | UDR-0005, remplace les sections « Tokens » des UDR-0001, 0002, 0003 ; UDR-0004 déclarée non applicable au projet cible | ouvert |
 | **F-10** | Barème et vocabulaire des badges | ADR-0008 (or ≥ 80 %, bronze/argent/or, remplacement si `>=`) · code (or = 100 %, `>`) · UDR-0003 (Argent/Or/Diamant) | Trancher **un** barème, **un** jeu de noms, la règle de remplacement, et si l'historique des badges est conservé ; « Diamant » supprimé ou défini | V1 (Lot C) | [ADR-0033](../../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), remplace ADR-0008 §3 | **Accepté** 2026-09-25 |
 | **F-11** | Seuils pédagogiques et sens du score | réussite 50 %, maîtrise 70 %, note sur 20 implicites ; `percentage` = avancement **puis** score | Constantes métier nommées dans le domaine ; deux champs distincts, avancement et score | V1 (Lot C), V3 | [ADR-0033](../../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (même ADR que F-10) | **Accepté** 2026-09-25 |
-| **F-12** | Reprise des données | base vide · référentiel seedé · migration de l'ancienne base | Confirmer qu'**aucune donnée utilisateur réelle** n'existe (l'ancienne app n'est pas en ligne) ; seeder le **référentiel ivoirien** (niveaux `6ème…Tle`, séries `A1 A2 C D`, `level_series`, matières) dès V1 ; DRENA et écoles importées en V2 ; contenu importé en V4 | V1 (seed), V2, V4 | [ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md) | **Accepté** 2026-09-25 |
+| **F-12** | Reprise des données | base vide · référentiel seedé · migration de l'ancienne base | Confirmer qu'**aucune donnée utilisateur réelle** n'existe (l'ancienne app n'est pas en ligne) ; référentiel (niveaux, séries, `level_series`, matières), DRENA et écoles **créés par l'équipe dès la V1**, écoles aussi par import ; aucun seed métier en production | V1 | [ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md) | **Accepté** 2026-09-25 |
 | **F-13** | Cycle de vie du contenu | statut libre (« publié »/« published »…) · énumération | Énumération `draft` / `published` / `archived` sur cours, fiches **et** exercices ; un brouillon n'est lisible que par l'équipe (policy, pas filtre d'index) ; `published_at` renseigné à la publication ; auteur tracé | V1 (Lot B) | [ADR-0035](../../decisions/adr/0035-cycle-de-vie-et-propriete-du-contenu.md) | **Accepté** 2026-09-25 |
 | **F-14** | Suppression et archivage | cascades de l'ancien · restriction · archivage | Contenu consommé par des élèves : archivage, jamais suppression ; taxonomie : suppression refusée tant qu'elle est référencée ; comptes : anonymisation ; classes : archivage de fin d'année (voir F-19) | V1 (Lot B), V2 | [ADR-0036](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md), étend ADR-0005 et ADR-0016 | **Accepté** 2026-09-25 |
 | **F-15** | Saisie et normalisation des noms | nom complet découpé au dernier mot · deux champs | Deux champs **Nom** et **Prénom(s)** ; plus de `titleize` automatique sur les noms propres ni les titres de contenu (« Svt », « D'almeida ») ; normalisation limitée aux espaces | V1 (Lot A) | [ADR-0037](../../decisions/adr/0037-nom-et-prenoms-en-deux-champs.md) | **Accepté** 2026-09-25 |
 | **F-16** | Comptes internes de l'équipe | un rôle `team` · sous-rôles (admin, contenu, terrain, gestionnaire DRENA…) | V1 : un seul rôle `team`, créé par seed puis invitation. Sous-rôles et matrice fine avant V4 (back-office) | V1 (minimal), V4 | [ADR-0038](../../decisions/adr/0038-comptes-de-l-equipe-et-sous-roles.md) | **Accepté** 2026-09-25 |
-| **F-17** | Format d'import du contenu | format de l'ancien import de cours (arbre complet) · format par ressource | Reprendre le format arbre de l'ancien (seul format réellement utilisé), versionné, validé par un schéma ; rapport d'import persisté et consultable ; **aucune création implicite de taxonomie** | V4 | [ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md), remplace ADR-0012 §3.3 et ADR-0020 §2.1 pour l'import | **Accepté** 2026-09-25 |
+| **F-17** | Format d'import du contenu | format de l'ancien import de cours (arbre complet) · format par ressource | Reprendre le format arbre de l'ancien (seul format réellement utilisé), versionné, validé par un schéma ; rapport d'import persisté et consultable ; **aucune création implicite de taxonomie** ; porteur : quatre formats (écoles, cours, fiches, exercices), en masse, import partiel atomique par élément racine | V1 | [ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md), remplace ADR-0012 §3.3 et ADR-0020 sauf §2.1 et §2.2 | **Accepté** 2026-09-25 |
 | **F-18** | Multi-classes de l'élève | une classe visible (état de l'ancien) · sélecteur de classe (promesse de l'ADR-0003) | V1 : une classe principale, garantie unique par index partiel ; sélecteur en V3 si la demande est confirmée | V3 | [ADR-0040](../../decisions/adr/0040-classe-principale-unique-de-l-eleve.md), amende ADR-0003 | **Accepté** 2026-09-25 |
 | **F-19** | Vie d'une classe | éternelle · année scolaire · archivage | Année scolaire sur la classe, archivage en fin d'année ; code d'adhésion révocable et régénérable, plafond d'effectif | V3 | [ADR-0041](../../decisions/adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) | **Accepté** 2026-09-25 |
 | **F-20** | Élèves de démonstration | reprendre l'ADR-0019 · refonte · abandon | Les comptes démo de l'ancien étaient de **vrais comptes** (`users` avec mot de passe `123456`) qui occupaient des numéros de téléphone et gonflaient les listes nominatives, sans jamais être filtrés ni produire d'activité (simulation et purge jamais appelées). Ils n'étaient pas connectables **par accident** — `/login` ne garde que les chiffres du contact ([`complements-school-classroom.md`](inventaire/complements-school-classroom.md) CL-24) —, et leur slug aléatoire sur 2 octets fait échouer la création d'écoles à mesure que le volume croît. Si la feature est gardée : données simulées **hors de `users`**, non authentifiables par construction, visibles comme telles, purgeables | — | ADR-0042, remplace ADR-0019, **seulement si** la feature revient au plan | **retiré du plan** (2026-09-22) |
@@ -198,29 +198,29 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe crée la taxonomie (niveaux, séries, leurs associations, matières) puis publie un cours, une fiche, un exercice ; un enseignant déclare ses classes et leur assigne le contenu ; un élève rejoint sa classe par code, voit ce qui lui est assigné, fait l'exercice, obtient son résultat et son badge |
-| **Chantiers** | Plan détaillé existant : [`plan.md`](plan.md) (Lots 0a, 0b, 0c, A, B, C, D, E). À son ouverture, il est déplacé dans le chantier `boucle-pedagogique` |
-| **Tables** | `users`, `students`, `teachers`, `teams`, `schools`, `drenas` *(lecture, seedée)*, `classrooms`, `classroom_students`, `teacher_classrooms` ou `teacher_schools` (F-06), `levels`, `series`, `level_series`, `materials` *(créées par l'équipe, ADR-0034)*, `courses`, `essentials`, `exercises`, `questions`, `answers`, `exercise_sessions`, `question_attempts`, `exercise_badges`, `classroom_assignments` + journal d'audit et journal d'échecs de connexion |
-| **Décisions préalables** | F-01, F-02, F-03, F-04, F-05, F-06, F-07, F-08, F-09, F-10, F-11, F-12 (taxonomie par l'équipe), F-13, F-14 (contenu), F-15, F-16, F-26, F-28, F-31, F-32, F-34 ; F-25 si téléversement |
+| **Objectif** | L'équipe crée les référentiels (niveaux, séries, matières, DRENA), importe en masse les établissements, dont les classes sont générées, et le contenu, puis publie un cours, une fiche, un exercice ; un enseignant déclare ses classes et leur assigne le contenu ; un élève rejoint sa classe par code, voit ce qui lui est assigné, fait l'exercice, obtient son résultat et son badge |
+| **Chantiers** | Plan détaillé existant : [`plan.md`](plan.md) (Lots 0a, 0b, 0c, A, B, C, D, E). À son ouverture, il est déplacé dans le chantier `boucle-pedagogique` · `referentiels-equipe` (taxonomie, DRENA, établissements, import JSON d'établissements, génération des classes, ADR-0030, ADR-0034) · `import-contenu` (cours, fiches, exercices, ADR-0039) |
+| **Tables** | `users`, `students`, `teachers`, `teams`, `schools`, `drenas` *(créées par l'équipe)*, `classrooms`, `classroom_students`, `teacher_classrooms` ou `teacher_schools` (F-06), `levels`, `series`, `level_series`, `materials` *(créées par l'équipe, ADR-0034)*, `courses`, `essentials`, `exercises`, `questions`, `answers`, `exercise_sessions`, `question_attempts`, `exercise_badges`, `classroom_assignments`, `import_reports` + journal d'audit et journal d'échecs de connexion |
+| **Décisions préalables** | F-01, F-02, F-03, F-04, F-05, F-06, F-07, F-08, F-09, F-10, F-11, F-12 (référentiels par l'équipe), F-13, F-14 (contenu), F-15, F-16, F-17, F-25 (fichiers d'import), F-26, F-28, F-31, F-32, F-34 |
 | **Dépend de** | V0 |
-| **Porte** | Critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses) verts ; parcours bout en bout en navigateur réel ; recette sur `Staging` par un rôle distinct |
+| **Porte** | Critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses) verts ; parcours bout en bout en navigateur réel ; recette sur `Staging` par un rôle distinct ; test de performance de l'ADR-0039 vert : 500 écoles (≈ 35 000 classes) ou 200 cours complets importés en moins de 2 minutes en local, avec un rapport exact (importés, ignorés, en erreur, total) et aucun élément de taxonomie parasite |
 
 Écarts avec [`plan.md`](plan.md), à corriger à l'ouverture du chantier :
 
-- La table `drenas` y est écartée, alors que `schools.drena_id` est obligatoire (ADR-0023). Elle entre en V1, en lecture seule et seedée.
+- La table `drenas` y est écartée, alors que `schools.drena_id` est obligatoire (ADR-0023). Elle entre en V1, gérée par l'équipe (ADR-0034).
 - `teacher_schools` y est écartée, alors que F-06 recommande de la garder avec un drapeau « principale ». Elle entre en V1 (ADR-0030).
 - Le Lot 0b reprend la règle « le dernier mot du nom complet est le prénom ». L'ADR-0037 tranche : deux champs, sans changement de casse.
 - Le Lot A laisse ouverte l'inscription par listes en cascade. Le [PRD cadre](prd.md#2-acteurs) exige un code de classe valide : la cascade école + niveau → classe est écartée (ID-08, CL-08).
-- Le plan suppose une taxonomie seedée. L'ADR-0034 (arbitrage du porteur, 2026-09-25) la fait créer par l'équipe dans l'interface dès la V1 : CA-18, CA-19, CA-20, CA-22, CA-24 et CA-25 entrent en V1, et les seeds de taxonomie ne servent qu'en développement et en test.
+- Le plan suppose une taxonomie seedée et des écoles créées une à une. Les arbitrages du porteur du 2026-09-25 font entrer en V1 tout le chantier `referentiels-equipe` (taxonomie, DRENA, établissements et leur import, génération des classes : ADR-0030, ADR-0034) et les imports de contenu (ADR-0039). Les seeds ne servent qu'en développement et en test.
 - Liste des features livrées par la V1 : §6, colonne « Vague » = V1. C'est elle qui remplace le décompte approximatif « environ 25 features » du plan.
 
 ### V2 — Organisation scolaire et espace direction
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe administre les DRENA, les écoles et les classes (la taxonomie est gérée dès la V1, ADR-0034) ; une direction d'établissement, invitée, gère ses classes, ses enseignants et ses élèves ; chacun gère son compte |
-| **Chantiers** | `referentiels-equipe` (DRENA, écoles, import JSON d'écoles, génération des classes par défaut) · `espace-direction` · `mon-compte` (profil, PIN avec PIN actuel, avatar) · `annuaire-equipe` (liste, fiche, anonymisation) |
-| **Tables** | `school_roles`, `school_staffs` ; `drenas` et `schools` en écriture |
+| **Objectif** | Une direction d'établissement, invitée, gère ses classes, ses enseignants et ses élèves ; chacun gère son compte ; l'équipe consulte et anonymise les comptes. Les référentiels et les établissements sont gérés dès la V1 |
+| **Chantiers** | `espace-direction` · `mon-compte` (profil, PIN avec PIN actuel, avatar) · `annuaire-equipe` (liste, fiche, anonymisation) |
+| **Tables** | `school_staffs` (fonction en colonne, ADR-0044) |
 | **Décisions préalables** | F-14, F-16, F-22 ; F-25 (avatar) |
 | **Dépend de** | V1 |
 | **Porte** | Une direction invitée administre son seul établissement ; aucune fuite inter-établissements (test de refus) |
@@ -233,19 +233,19 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Chantiers** | `rapports-de-classe` · `multi-etablissements-enseignant` · `vie-de-la-classe` (année scolaire, archivage, code révocable, retrait d'élève) · `multi-classes-eleve` si F-18 le confirme |
 | **Tables** | colonnes d'année scolaire et d'archivage ; aucune table nouvelle hors décision |
 | **Décisions préalables** | F-11, F-18, F-19 |
-| **Dépend de** | V1, V2 (établissements administrés) |
+| **Dépend de** | V1, V2 (direction) |
 | **Porte** | Rapports sans cache périmé (invalidation à la clôture de session) ; seuils issus des constantes de F-11 |
 
 ### V4 — Contenu à l'échelle et back-office équipe
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe alimente la plateforme en masse et la pilote : imports JSON avec rapport, catalogue complet (filtres, pagination, pages niveau et matière), tableau de bord équipe, installation PWA |
-| **Chantiers** | `import-contenu` · `catalogue-complet` · `pilotage-equipe` · `installation-pwa` |
-| **Tables** | table de rapports d'import |
-| **Décisions préalables** | F-16 (sous-rôles), F-17, F-25 |
+| **Objectif** | L'équipe pilote la plateforme : catalogue complet (filtres, pagination, pages niveau et matière), tableau de bord équipe, installation PWA, sous-rôles appliqués. Les imports en masse sont livrés en V1 |
+| **Chantiers** | `catalogue-complet` · `pilotage-equipe` · `installation-pwa` · `sous-roles-equipe` (matrice de l'ADR-0038) |
+| **Tables** | aucune nouvelle : `team_role` existe depuis la V1 |
+| **Décisions préalables** | F-16 (sous-rôles), F-27 (indicateurs) |
 | **Dépend de** | V1 — peut chevaucher V2-V3 si fichiers et contrats disjoints |
-| **Porte** | Un import de 50 cours produit un rapport exact (importés, ignorés, en erreur) et aucun élément de taxonomie parasite |
+| **Porte** | Chaque sous-rôle n'accède qu'à sa colonne de la matrice de l'ADR-0038 (un test de refus par case vide) ; indicateurs lus côté serveur |
 
 ### V5 — Remédiation et lacunes
 
@@ -361,15 +361,15 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
-| SC-01 | Gérer les DRENA | ⚠️ | V1 en lecture (seed) · V2 en écriture (`referentiels-equipe`) | Une suppression qui échoue dès qu'une école a du personnel |
-| SC-02 | Importer des DRENA | ⚠️ | V2 (`referentiels-equipe`) | Une action d'import sans route (TR-29) |
-| SC-03 | Créer un établissement | ⚠️ | V1 (seed) · V2 (écran) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
-| SC-04 | Liste nationale des établissements | ⚠️ | V2 | Des filtres factices ; un bouton « Nouvelle École » mort |
-| SC-05 | Consulter un établissement | ✅ | V2 | Une fiche ouverte à tout connecté |
-| SC-06 | Modifier un établissement | ⚠️ | V2 | Une modification ouverte à tout connecté |
-| SC-07 | Supprimer un établissement | ❌ | V2 (F-14) | `RecordNotDestroyed` dès qu'un membre du personnel existe ; une suppression ouverte à tout connecté |
-| SC-08 | Importer des établissements | ⚠️ | V2 (F-17 pour le format) | Aucun rapport d'import ; des comptes démo créés en effet de bord |
-| SC-09 | Générer les classes par défaut | ⚠️ | V2 | Des collisions de slug qui laissent l'école sans classes |
+| SC-01 | Gérer les DRENA | ⚠️ | V1 (`referentiels-equipe`, ADR-0034) | Une suppression qui échoue dès qu'une école a du personnel |
+| SC-02 | Importer des DRENA | ⚠️ | **écartée** : les 41 DRENA se saisissent à l'écran (ADR-0034) ; aucun format d'import (ADR-0039) | Une action d'import sans route (TR-29) |
+| SC-03 | Créer un établissement | ⚠️ | V1 (`referentiels-equipe`, classes générées : ADR-0030) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
+| SC-04 | Liste nationale des établissements | ⚠️ | V1 (`referentiels-equipe`) | Des filtres factices ; un bouton « Nouvelle École » mort |
+| SC-05 | Consulter un établissement | ✅ | V1 (`referentiels-equipe`) | Une fiche ouverte à tout connecté |
+| SC-06 | Modifier un établissement | ⚠️ | V1 (`referentiels-equipe`, dont le cycle) | Une modification ouverte à tout connecté |
+| SC-07 | Supprimer un établissement | ❌ | V1 (`referentiels-equipe`, F-14) | `RecordNotDestroyed` dès qu'un membre du personnel existe ; une suppression ouverte à tout connecté |
+| SC-08 | Importer des établissements | ⚠️ | V1 (`referentiels-equipe`, import en masse : ADR-0039) | Aucun rapport d'import ; des comptes démo créés en effet de bord |
+| SC-09 | Générer les classes par défaut | ⚠️ | V1 (`referentiels-equipe`, ADR-0030) | Des collisions de slug qui laissent l'école sans classes |
 | SC-10 | S'inscrire comme administrateur d'établissement | ⚠️ | **écartée** (= ID-05) | — |
 | SC-11 | Lister et créer les rôles d'un établissement | ⚠️ | V2 (F-22 : rôles de référence) | Un échec de création silencieux |
 | SC-12 | Supprimer un rôle | ⚠️ | V2 | Une suppression non scopée à l'école de l'URL |
@@ -394,7 +394,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
 | CL-01 | Créer une classe (équipe) | ❌ | V1 (Lot D : « les classes sont créées par l'équipe », [`plan.md`](plan.md) §1) | Un slug passé à `find_by_id` ; un code de 6 caractères pour une colonne de 5 |
-| CL-02 | Modifier une classe | ❌ | V2 (`referentiels-equipe`) | Un échec muet |
+| CL-02 | Modifier une classe | ❌ | V1 (`referentiels-equipe`) | Un échec muet |
 | CL-03 | Supprimer une classe | ⚠️ | V3 (`vie-de-la-classe` : archivage, F-19) | Une suppression définitive qui détruit l'historique des assignations |
 | CL-04 | Générer et afficher le code d'adhésion | ⚠️ | V1 (Lot D) | Un affichage tantôt en minuscules, tantôt en majuscules |
 | CL-05 | Partager le lien de classe sur WhatsApp | 💀 | V3 (`vie-de-la-classe`) | — |
@@ -433,14 +433,14 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | CA-05 | Créer un cours | ⚠️ | V1 (Lot B) | Aucun point d'entrée dans l'interface |
 | CA-06 | Modifier un cours | ❌ | V1 (Lot B) | Deux familles d'entités incompatibles (C-19) |
 | CA-07 | Supprimer un cours | ✅ | V1 (Lot B, archivage : F-14) | Une cascade qui détruit lacunes et assignations |
-| CA-08 | Importer des cours en masse | ⚠️ | V4 (`import-contenu`, F-17) | Un import non atomique, sans rapport, qui crée de la taxonomie implicite |
-| CA-09 | « Import JSON Express » dans le formulaire | 💀 | **écartée** : aucun contrôleur JavaScript n'existe ; l'import de V4 le remplace | — |
+| CA-08 | Importer des cours en masse | ⚠️ | V1 (`import-contenu`, ADR-0039) | Un import non atomique, sans rapport, qui crée de la taxonomie implicite |
+| CA-09 | « Import JSON Express » dans le formulaire | 💀 | **écartée** : aucun contrôleur JavaScript n'existe ; l'import de la V1 (ADR-0039) le remplace | — |
 | CA-10 | Lister les fiches d'un cours | ⚠️ | V1 (Lot B) | — |
 | CA-11 | Consulter une fiche et sa progression | ✅ | V1 (Lot B / C) | — |
 | CA-12 | Créer une fiche | ❌ | V1 (Lot B, `team` seulement) | Une création ouverte à tout connecté |
 | CA-13 | Modifier une fiche | ❌ | V1 (Lot B) | Idem ; C-19 |
 | CA-14 | Supprimer une fiche | ✅ | V1 (Lot B, archivage) | Idem ; cascade |
-| CA-15 | Importer des fiches dans un cours | 💀 | V4 (F-17) | Un import synchrone ouvert à tout connecté |
+| CA-15 | Importer des fiches dans un cours | 💀 | V1 (`import-contenu`, ADR-0039) | Un import synchrone ouvert à tout connecté |
 | CA-16 | Lister les niveaux | ✅ | V1 (écran de l'équipe, ADR-0034) | — |
 | CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) | — |
 | CA-18 | Gérer les niveaux | ⚠️ | V1 (écran de l'équipe, ADR-0034) | Supprimer un niveau détruit ses classes |
@@ -465,7 +465,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-03 | Créer un exercice par le formulaire | ❌ | V1 (Lot B) — **à construire** | « + Ajouter une question » inerte (contrôleur Stimulus absent) ; des questions jamais persistées ; un titre passé en `titleize` |
 | AS-04 | Modifier un exercice | ❌ | V1 (Lot B) | Idem |
 | AS-05 | Supprimer un exercice | ✅ | V1 (Lot B, archivage : F-14) | Une cascade qui détruit sessions, tentatives et badges des élèves |
-| AS-06 | Importer des exercices par le « content engine » | ❌ 💀 | **écartée** : le service n'a jamais existé dans aucun commit ; l'import de V4 (F-17) le remplace | — |
+| AS-06 | Importer des exercices par le « content engine » | ❌ 💀 | **écartée** : le service n'a jamais existé dans aucun commit ; l'import d'exercices de la V1 (ADR-0039) le remplace | — |
 | AS-07 | Démarrer une session | ✅ | V1 (Lot C) | — |
 | AS-08 | Reprendre une session en cours | ✅ | V1 (Lot C) | — |
 | AS-09 | Répondre aux questions une à une | ❌ ⚠️ | V1 (Lot C, F-34) | Une question déjà répondue qu'on peut re-soumettre après avoir vu le corrigé, doublon compté dans le score ; une réponse vide qui produit une erreur 500 en Turbo |
@@ -497,7 +497,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-35 | Importer des sujets en JSON | ❌ | **écartée** — retirée du plan le 2026-09-22 | Un message d'erreur d'import passé en `html_safe` (injection HTML par fichier) |
 | AS-36 | Exercices de ma classe sur l'accueil élève | ❌ | V1 (Lot A / D) (= TR-04) | — |
 | AS-37 | Ma progression sur la fiche d'un chapitre | ⚠️ | V1 (Lot C) (= CA-11) | Des exercices non publiés listés à l'élève |
-| AS-38 | Créer exercices, questions et réponses par l'import de cours | ⚠️ | V4 (`import-contenu`, = CA-08) | `questions.position` jamais écrite |
+| AS-38 | Créer exercices, questions et réponses par l'import de cours | ⚠️ | V1 (`import-contenu`, = CA-08) | `questions.position` jamais écrite |
 | AS-39 | Aperçu des questions sur la carte d'exercice | ❌ | V1 (Lot C) | **Fuite des bonnes réponses** : un fragment mis en cache par question, sans le rôle dans la clé, servi à un élève après un enseignant ([`securite.md`](securite.md) n° 29) |
 | AS-40 | Durée estimée d'un exercice | 💀 | **écartée** : jamais affichée, aucune règle décidée | — |
 
@@ -517,7 +517,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-10 | « Control Center » équipe | ❌ | V4 (`pilotage-equipe`) | Un tableau de bord sans test (méthode renommée sans mise à jour de l'appelant) |
 | TR-11 | Rechercher un élève ou un enseignant | ❌ | V4 | — |
 | TR-12 | Répartition des élèves par niveau | 💀 | V4 | — |
-| TR-13 | « Configuration Plateforme » | ✅ | V1 (taxonomie, ADR-0034) · V2 (DRENA, écoles, `referentiels-equipe`) | — |
+| TR-13 | « Configuration Plateforme » | ✅ | V1 (`referentiels-equipe`, ADR-0034) | — |
 | TR-14 | « LnclassAI » | ⚠️ | **écartée** — retirée du plan le 2026-09-22 : iframe vers un artefact externe non inspecté, aucun besoin documenté | Charger un contenu tiers dans l'espace équipe sans CSP |
 | TR-15 | Tableau de bord de l'établissement | ⚠️ | V2 (= SC-15) | — |
 | TR-16 | « En attente d'affectation » | ✅ | V2 (= SC-16) | — |
@@ -532,8 +532,8 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-25 | Bandeau d'installation | ⚠️ | V4 (= ID-26) | — |
 | TR-26 | Mesure d'audience | ⚠️ | V0 (F-27) | Des identifiants en dur, sans consentement ni CSP |
 | TR-27 | Navigation par rôle | ⚠️ | V1 (Lot 0c, F-31) | 4 × 4 partials divergents |
-| TR-28 | Imports JSON en arrière-plan | ⚠️ | V2 (écoles) · V4 (contenu) | Un échec de job silencieux ; un fichier posé sur le disque éphémère du conteneur ; un nom de fichier client dans un chemin disque |
-| TR-29 | Import des DRENA en arrière-plan | 💀 | V2 (= SC-02) | — |
+| TR-28 | Imports JSON en arrière-plan | ⚠️ | V1 (écoles et contenu, ADR-0039) | Un échec de job silencieux ; un fichier posé sur le disque éphémère du conteneur ; un nom de fichier client dans un chemin disque |
+| TR-29 | Import des DRENA en arrière-plan | 💀 | **écartée** (= SC-02) | — |
 | TR-30 | Démos : générer et simuler | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-31 | Purge horaire des jobs terminés | ⚠️ | V0 (F-30) | Un job récurrent qui dépend d'un worker jamais lancé |
 | TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) · V3 (rapports) | Un cache actif en production seulement |
@@ -565,31 +565,20 @@ Les huit chantiers ouverts par l'audit du 2026-09-18 ([`chantiers/README.md`](..
 
 ### 6.9 Bilan
 
-Compté par script sur les tables ci-dessus, après les retraits du 2026-09-22 ; mis à jour le 2026-09-25 (taxonomie en V1, ADR-0034 : six features passent de V2 à V1).
+Compté par script sur les tables ci-dessus, après les retraits du 2026-09-22 ; mis à jour le 2026-09-25, après les arbitrages du porteur (référentiels, établissements et imports en V1 : ADR-0030, ADR-0034, ADR-0039).
 
 | Préfixe | Features | V0-V1 | V2-V4 | V5-V6 | Écartées ou retirées |
 |---|---|---|---|---|---|
 | `ID` | 34 | 12 | 12 | 0 | 10 |
 | `CO` | 13 | 1 | 0 | 10 | 2 |
-| `SC` | 27 | 4 | 22 | 0 | 1 |
-| `CL` | 28 | 14 | 6 | 0 | 8 |
-| `CA` | 29 | 19 | 7 | 1 | 2 |
-| `TR` | 42 | 17 | 12 | 0 | 13 |
-| `AS` | 40 | 17 | 7 | 4 | 12 |
-| **Total** | **213** | **84** | **66** | **15** | **48** |
+| `SC` | 27 | 10 | 15 | 0 | 2 |
+| `CL` | 28 | 15 | 5 | 0 | 8 |
+| `CA` | 29 | 21 | 5 | 1 | 2 |
+| `TR` | 42 | 18 | 10 | 0 | 14 |
+| `AS` | 40 | 18 | 6 | 4 | 12 |
+| **Total** | **213** | **95** | **53** | **15** | **50** |
 
-Certaines features sont réparties sur deux vagues, par exemple une lecture seedée en V1 et un écran en V2. Elles sont comptées dans la **première** vague qui les livre. Les 48 écartées comprennent 26 features retirées du plan le 2026-09-22 ; les autres sont des doublons, du code mort ou des routes qu'aucune règle ne justifie.
-
----|---|---|---|---|---|
-| `ID` | 34 | 12 | 12 | 3 | 7 |
-| `CO` | 13 | 1 | 0 | 11 | 1 |
-| `SC` | 27 | 4 | 22 | 0 | 1 |
-| `CL` | 28 | 14 | 6 | 3 | 5 |
-| `CA` | 29 | 14 | 12 | 1 | 2 |
-| `TR` | 42 | 16 | 13 | 7 | 6 |
-| `AS` | 40 | 21 | 9 | 4 | 12 |
-
-Certaines features sont réparties sur deux vagues, par exemple une lecture seedée en V1 et un écran en V2. Elles sont comptées dans la **première** vague qui les livre.
+Certaines features sont réparties sur deux vagues, par exemple une liste simple en V1 et un catalogue complet en V4. Elles sont comptées dans la **première** vague qui les livre. Les 50 écartées comprennent 26 features retirées du plan le 2026-09-22 et l'import des DRENA (SC-02, TR-29), écarté le 2026-09-25 ; les autres sont des doublons, du code mort ou des routes qu'aucune règle ne justifie.
 
 ---
 
@@ -605,8 +594,8 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | `team` | `teams` | V1 | ID-04 (remplacée), TR-09 | Créée par seed puis invitation (F-16), index unique sur `user_id` |
 | `teacher` | `teachers` | V1 | ID-03, SC-27 | `material_id` avec clé étrangère : l'ancien n'en avait pas |
 | `student` | `students` | V1 | ID-01, ID-02 | Index unique sur `user_id` ; `matricule` n'était écrit que par les comptes démo : non créée |
-| `Drena` | `drenas` | V1 (lecture, seed) · V2 (écriture) | SC-01, SC-02 | `schools.drena_id` est obligatoire (§5 V1) |
-| `Schools` | `schools` | V1 (seed) · V2 (écriture) | SC-03…09 | — |
+| `Drena` | `drenas` | V1 (équipe) | SC-01, SC-02 | `schools.drena_id` est obligatoire (§5 V1) |
+| `Schools` | `schools` | V1 (équipe, import) | SC-03…09 | `cycle` et `school_type` en colonnes ; classes générées à la création (ADR-0030) |
 | `series` | `series` | V1 (équipe) | CA-23, CA-24 | Créées par l'équipe ; `A1 A2 C D` en seed de développement (ADR-0034) |
 | `Level` | `levels` | V1 (équipe) | CA-16…19 | Créés par l'équipe ; `6ème…Tle` en seed de développement (ADR-0034) ; supprimer un niveau ne détruit plus de classes (C-26) |
 | `level_series` | `level_series` | V1 (équipe) | CA-19 | Table vivante, contrairement à ce que disait l'inventaire |
@@ -655,7 +644,7 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | Codes de récupération du PIN | V1 | F-08 |
 | Secrets TOTP et codes de secours de l'équipe | V1 | F-07 |
 | Invitations (équipe en V1, direction en V2) | V1, V2 | F-16, F-22 |
-| Rapports d'import | V4 | F-17 |
+| Rapports d'import | V1 | F-17 (ADR-0039) |
 | `message_dismissals` (l'ancien utilisait un cookie de session) | V6 | F-23 |
 
 ---

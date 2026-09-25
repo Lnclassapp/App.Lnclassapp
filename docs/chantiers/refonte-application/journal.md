@@ -187,8 +187,19 @@ Les annonces restent en V6. Les 26 features concernées gardent leur ligne dans 
 **Les trois corrections du porteur**
 
 1. **Badges** ([ADR-0033](../../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md)) : quatre paliers, Bronze ≥ 50 %, Argent ≥ 70 %, Or ≥ 80 %, Diamant = 100 % (sans faute). Un badge par exercice, qui ne monte que vers un palier strictement supérieur. Seuils nommés dans le domaine : `PASS_THRESHOLD` 50, `MASTERY_THRESHOLD` 70, `GOLD_THRESHOLD` 80, `PERFECT_THRESHOLD` 100. « Diamant » redevient un terme d'interface autorisé ([UDR-0007](../../decisions/udr/0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md), glossaire).
-2. **Taxonomie** ([ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md)) : niveaux, séries, `level_series` et matières (avec leur catégorie, CA-26) sont **créés par l'équipe dans l'interface**, pas seedés en production. Les seeds (`db/seeds/<contexte>.rb`) ne servent qu'en développement et en test, sous un garde d'environnement. La gestion de la taxonomie passe en V1 (CA-18, 19, 20, 22, 24, 25 et TR-13) ; le chantier V2 `referentiels-equipe` ne garde que les DRENA, les écoles et l'import d'écoles. Les DRENA, que le porteur n'a pas citées, restent seedées dans tous les environnements.
+2. **Taxonomie** ([ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md)) : niveaux, séries, `level_series` et matières (avec leur catégorie, CA-26) sont **créés par l'équipe dans l'interface**, pas seedés en production. Les seeds (`db/seeds/<contexte>.rb`) ne servent qu'en développement et en test, sous un garde d'environnement. La gestion de la taxonomie passe en V1 (CA-18, 19, 20, 22, 24, 25 et TR-13). Les précisions ci-dessous étendent la règle aux DRENA et aux établissements.
 3. **Adhésion par code** ([ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md)) : pas d'exception. `Classroom::JoinWithCode` a sa policy, `Classroom::JoinPolicy`, qui accepte un acteur anonyme et vérifie une classe active et non archivée, un effectif sous le plafond, un code valide et non révoqué. ADR-0040 et ADR-0041 alignés.
+
+**Précisions du porteur, intégrées avant l'acceptation**
+
+- **A. DRENA** ([ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md)) : créées par l'équipe, comme la taxonomie ; aucun seed en production. `drenas.yml` devient une donnée de développement et de test. Aucun format d'import de DRENA : SC-02 est écartée.
+- **B. Établissements** ([ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md)) : importés en JSON par l'équipe dès la V1 (format `lnclass.schools`, alias de clés de l'ancien acceptés, rattachement à une DRENA), création unitaire à l'écran possible. Le type `mixte` n'est pas accepté.
+- **C. Classes par défaut** ([ADR-0030](../../decisions/adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md)) : générées dans la transaction qui crée ou importe l'établissement, avec le plan de l'ancien (public et privé). Corrigé : `schools.cycle` (`first`, `both`) en colonne, déduit à l'import du mot « collège » sans tenir compte des accents, modifiable ; correspondance par slug de niveau et de série, jamais par libellé ; niveau ou série absent sauté et compté ; noms toujours espacés (« Tle A1 2 ») ; aucun élève de démonstration ; code d'adhésion unique en base et dans le lot ; plafond et année selon l'ADR-0041.
+- **D. Contenu** ([ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md)) : cours en arbre, fiches et exercices (questions et propositions comprises) s'importent en JSON dès la V1.
+- **Imports en masse et partiels** ([ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md)) : fichier de 20 Mo au plus, stocké par Active Storage (ADR-0047), traité par un job Solid Queue (ADR-0052) ; validation complète (schéma, puis règles métier) avant toute écriture, erreurs avec leur chemin JSON ; les éléments valides sont écrits par lots `insert_all`, chacun entier ou pas du tout (une école avec ses classes, un cours avec sa descendance, une fiche avec ses exercices, un exercice avec ses questions et propositions) ; doublons ignorés et comptés ; rapport à quatre compteurs (importés, ignorés, en erreur, total). Seul un fichier à l'enveloppe ou à la version invalide, ou au-delà des limites, est rejeté en bloc. L'ADR-0020 passe en « Remplacé partiellement » : §2.1 et §2.2 restent en vigueur. Critère : 500 écoles ou 200 cours complets en moins de 2 minutes en local, par un test de performance écrit.
+- **Exemptions** ([ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md)) : `Identity::Authenticate`, `Identity::ResetPinWithCode` et `Identity::AcceptInvitation`, use cases anonymes d'avant l'authentification, sont acceptés sans policy. Nouvelle policy V1 : `School::ManageSchoolPolicy`.
+- **Remédiation de l'ADR-0043** validée telle quelle.
+- **E. Feuille de route** : la V1 gagne tout `referentiels-equipe` (DRENA, établissements et leur import, génération des classes, taxonomie) et le chantier `import-contenu`. La V2 garde `espace-direction`, `mon-compte` et `annuaire-equipe`. La V4 garde `catalogue-complet`, `pilotage-equipe` et `installation-pwa`, plus `sous-roles-equipe`. F-12 et F-17 bloquent la V1. Bilan du §6 : 95 fonctionnalités en V1, 53 en V2, 15 plus tard, 50 écartées.
 
 **Valeurs par défaut acceptées sans modification**
 
@@ -202,11 +213,10 @@ Les annonces restent en V6. Les 26 features concernées gardent leur ligne dans 
 **Appliqué dans la foulée**
 
 - Statut `Accepté` dans les 24 ADR, l'UDR-0007 et l'index des ADR ; anciens ADR marqués (encadré, lignes `Remplacé par`, `Amendé par` ou `Complété par`, table « Décisions remplacées ») ; UDR-0001 et UDR-0003 marquées pour leur vocabulaire. L'index des UDR est tenu par l'agent des UDR.
-- Feuille de route : F-01 à F-34 acceptées (sauf F-09, F-20, F-24, F-31) ; 40 contradictions fermées ; V1 et V2, §6 et §7 mis à jour pour la taxonomie.
-- Documents de rang 5 corrigés : glossaire, `architecture.md` §2.7 et §5, blueprints `result` et `policy`, [`securite.md`](securite.md).
+- Feuille de route : F-01 à F-34 acceptées (sauf F-09, F-20, F-24, F-31) ; 40 contradictions fermées ; §3, §5 (V1, V2, V4), §6, §6.9 et §7 mis à jour pour la taxonomie, les référentiels et les imports.
+- ADR-0012 et ADR-0020 : encadrés alignés sur l'import partiel.
+- Documents de rang 5 corrigés : glossaire (Drena, School), `architecture.md` §2.7 et §5, blueprints `result` et `policy`, [`securite.md`](securite.md).
 
 **Reste ouvert**
 
-- La liste officielle des DRENA (`db/seeds/data/drenas.yml`) doit être fournie avant la première mise en production.
-- Écoles en production pendant la V1 : ni seedées ni gérées à l'écran avant la V2, alors que [`plan.md`](plan.md) les fait créer par l'équipe dès la V1. À trancher avant le Lot 0 de la V1.
 - F-09 (UDR-0005) et F-31 (UDR-0006) suivent leur propre acceptation.
