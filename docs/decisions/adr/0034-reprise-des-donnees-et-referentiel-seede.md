@@ -118,3 +118,10 @@ raise "db/seeds/catalog.rb est réservé au développement et au test" unless Ra
 - Les DRENA sont créées par l'équipe, comme la taxonomie : aucun seed en production. `drenas.yml` ne sert qu'au développement et au test, et comme fichier d'exemple : la liste de référence que l'équipe saisit à l'écran, dont les slugs sont repris par les fichiers d'exemple d'import d'écoles (ADR-0039).
 - Les établissements s'importent en JSON en masse dès la V1, et leurs classes sont générées dans la même transaction (ADR-0030, ADR-0039).
 - Le niveau s'écrit `2nde`.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Production** : aucun seed de DRENA, d'établissement ni de référentiel (niveaux, séries, `level_series`, matières). La production démarre vide, et l'équipe crée ou importe tout (ADR-0039). `db/seeds/catalog.rb`, `db/seeds/school.rb` et `db/seeds/development.rb` lèvent une erreur hors développement et test. Seul `db/seeds/identity.rb` s'exécute en production.
+- **Codes** : il n'y a **pas de colonne `code`** sur `levels` ni sur `series`. Le **slug figé** à la création (ADR-0029) en tient lieu. Ce sont ces slugs qu'utilisent la génération des classes (ADR-0030) et la résolution des imports (ADR-0039) : `6eme`, `5eme`, `4eme`, `3eme`, `2nde`, `1ere`, `tle` ; `a`, `a1`, `a2`, `c`, `d`. Renommer un niveau ou une série ne change pas son slug.

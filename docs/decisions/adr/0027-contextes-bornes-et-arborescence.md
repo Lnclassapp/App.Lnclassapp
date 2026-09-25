@@ -114,3 +114,10 @@ Fichier : `app/domain/ports/assessment/knowledge_gap_repository_port.rb` (C-49 :
 
 - `teacher_schools` est rangé dans `school` (rattachement à l'établissement), et non dans `classroom`.
 - `audit_events` est rangé dans `identity` : le journal est centré sur l'acteur.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Erratum — emplacement de `TransactionPort`.** L'arborescence du §4 le range dans `app/domain/shared/`, sous `Shared::`. Il vit dans **`app/domain/ports/shared/transaction_port.rb`**, sous le nom **`Ports::Shared::TransactionPort`**, comme le nomme l'ADR-0026 : c'est un port, rangé avec les autres ports. Son adaptateur est `Repositories::Shared::Transaction`.
+- `app/domain/shared/` ne contient que `Shared::Result`.

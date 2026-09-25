@@ -122,3 +122,18 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
 - Doublons ignorés et comptés, jamais mis à jour ; tout contenu importé naît brouillon.
 - Le type d'établissement `mixte` est accepté ; les DRENA ne s'importent pas, elles se créent par le formulaire.
 - Limites acceptées : 5 000 écoles, 500 cours, 2 000 fiches, 10 000 exercices par fichier ; 1 000 erreurs détaillées ; `import_reports` dans `catalog`.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Erratum — `errors` devient `import_errors`.** La colonne du rapport nommée `errors` au §4 s'appelle **`import_errors`** (`jsonb`, défaut `[]`, même contenu) : `ActiveModel` réserve `errors` sur tout modèle.
+- **Quatre types d'import**, et pas de DRENA : `kind` ∈ `schools`, `course_tree`, `essentials`, `exercises`, garanti par la contrainte `import_reports_kind_values`.
+- **Table `import_reports`**, telle que la migration `20260925100030_create_import_reports` l'implémente :
+  - statuts : `queued` (défaut), `validating`, `importing`, `completed`, `rejected`, `failed`, garantis par la contrainte `import_reports_status_values` ;
+  - compteurs : `total_count`, `processed_count` (progression), `imported_count`, `skipped_count`, `error_count`, tous entiers non nuls, défaut 0 ;
+  - fichier : `filename`, `byte_size`, `checksum_sha256`, `format_version` (connu après lecture de l'enveloppe), et la pièce jointe Active Storage `source` ;
+  - `scope` (`jsonb`) : la cible de l'import (`drena`, `course` ou `essential`) ; `details` et `import_errors` en `jsonb`.
+- **Un seul import actif par type** : un index unique partiel sur `kind`, pour les statuts `queued`, `validating` et `importing` (`index_import_reports_one_running_per_kind`). Un second import du même type donne `:conflict`. Aucun index unique sur le checksum : réimporter un fichier est permis, et ses éléments déjà écrits sont comptés en doublons.
+- **Jobs** : les jobs `<Contexte>::Import…Job` héritent de `Shared::ImportJob`. `config.x.import_jobs` associe chaque `kind` à son job, résolu à l'appel.
+- **Test de performance par type** : `test/performance/<contexte>/import_<kind>_performance_test.rb`, un par lot d'import, au lieu du fichier unique `test/performance/imports_test.rb` du §7. Volumes et seuil inchangés. Ces tests sont hors suite par défaut et se jouent avec `PERF=1`.

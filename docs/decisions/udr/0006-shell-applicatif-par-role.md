@@ -82,3 +82,10 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - Ajouter une destination revient à modifier `DESTINATIONS` et la locale `shared.navigation`, **jamais** un partial. Au-delà de 5 destinations pour un rôle, il faut une nouvelle UDR : la barre basse n'en tient pas plus.
 - L'accueil d'un rôle n'est « livré » que lorsque ses sections affichent des données réelles et que son test système passe.
 - Interdit désormais : un partial de navigation par rôle, un tiroir de navigation mobile, un toast dont le texte est produit côté client, `data-turbo-permanent` sur `#toasts`, un CRUD qui recharge la page ou redirige depuis la modale.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **`schools_path` devient actif en V1.** Les établissements entrent dans le périmètre de la V1 (ADR-0030, ADR-0034) : le lot S2 de la boucle pédagogique livre leur liste. L'entrée « Établissements » de la navigation `team` est donc active.
+- En V1, seules `team_dashboard_path` et `profile_path` restent inactives.

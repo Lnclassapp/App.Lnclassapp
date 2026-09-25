@@ -115,3 +115,23 @@ end
 ## 9. Points à confirmer par le porteur
 
 - L'enseignant voit le nom de ses élèves, mais pas leur contact téléphonique (`Identity::ReadUserPolicy`).
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+Huit policies s'ajoutent au tableau du §4.
+
+| Policy | Autorise |
+|---|---|
+| `Identity::SessionPolicy` | le porteur du jeton, sur **sa** session : reprise et déconnexion ; refus si la session est absente |
+| `Identity::SecondFactorPolicy` | un compte `team` : l'enrôlement si le second facteur n'est pas confirmé ; la vérification s'il l'est et que la session n'est pas encore vérifiée (ADR-0031) |
+| `Identity::RegisterTeacherPolicy` | un acteur anonyme seulement : seul un visiteur s'inscrit comme enseignant |
+| `Identity::IssuePinRecoveryCodePolicy` | l'enseignant, pour un élève de ses classes ; `team`, pour tout compte sauf le sien (ADR-0032) |
+| `Identity::ResetSecondFactorPolicy` | `team`, sur un autre compte `team`, jamais le sien (ADR-0031) |
+| `Classroom::DeclareTeachingPolicy` | l'enseignant, sur une classe active de son école principale (ADR-0030) |
+| `Classroom::ReadClassroomPolicy` | `team` ; l'enseignant de la classe ; l'élève dont c'est la classe principale active. La liste nominative n'est montrée qu'à `team` et à l'enseignant |
+| `Assessment::SubmitAttemptPolicy` | l'élève propriétaire d'une session `started` (ADR-0054) |
+
+- Les mécanismes de session (reprise, déconnexion, second facteur) ont donc une policy : les exemptions restent les trois use cases d'authentification listés au §4.
+- La lecture d'un rapport d'import applique la policy de son type (`School::ManageSchoolPolicy` ou `Catalog::ManageContentPolicy`) : aucune policy n'est propre aux rapports.
