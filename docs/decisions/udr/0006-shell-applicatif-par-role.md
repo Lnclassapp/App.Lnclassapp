@@ -22,6 +22,7 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 4. **Accueil de chaque rôle** : un en-tête de bienvenue (prénom, comme l'ancienne application) suivi des sections du rôle, en cartes. Le squelette est livré au Lot 0c. Chaque vague remplace l'état d'une section par ses données, **dans la vague qui livre ce rôle**.
 5. **Toasts** : le message est rendu côté serveur dans le HTML du toast. Il survit ainsi au Turbo Stream comme à la redirection. Une seule région, `#toasts`, dans le layout commun.
 6. **États** vide, chargement et erreur par les composants de l'UDR-0005, jamais par du balisage local.
+7. **Tous les CRUD passent par Hotwire** (règle du porteur). Le formulaire s'ouvre en modale dans un frame du layout, un échec le re-rend en 422 dans ce frame et un succès répond en Turbo Stream. On ne recharge jamais la page, et il n'existe pas de page « new » ou « edit » autonome.
 
 ## 3. Règles d'implémentation
 
@@ -58,6 +59,15 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - Turbo Stream : `render turbo_stream: helpers.turbo_stream_toast(message, type:)` fait un `append` dans `toasts`. Le message est dans le HTML, jamais reconstruit par le JavaScript.
 - Délais : 5 s pour un succès ou une information, 8 s pour un avertissement. Une **erreur reste** jusqu'à sa fermeture et porte `role="alert"`. Le survol et le focus suspendent le délai.
 
+**CRUD Hotwire**
+- Le layout commun porte `<turbo-frame id="modal">` (vide) et `#toasts`. Le shell en hérite.
+- Ouvrir : un lien `data-turbo-frame="modal"` vers `new` ou `edit`. La vue répond `turbo_frame_tag "modal" { ui_modal(title:, open: true) { form_with … id: "…-form" } }`. La modale s'ouvre dès son arrivée. Le bouton d'envoi, placé dans `modal.footer`, vise le formulaire par `form: "…-form"`.
+- Échec : `render :new, status: :unprocessable_entity`. Le frame est remplacé, la modale se rouvre et `ui_field` affiche la première erreur de chaque champ (`aria-invalid`, `aria-describedby`). Les valeurs saisies sont conservées.
+- Succès : `render turbo_stream: [turbo_stream_toast(…), turbo_stream.append/replace/remove(…)]`. Le contrôleur `modal` ferme la modale sur `turbo:submit-end` réussi. **Jamais de redirection** depuis un formulaire servi dans le frame « modal » : le frame chercherait sa cible dans la page d'arrivée.
+- Fermer (bouton, Échap, fond, succès) vide le frame et retire son `src`, pour que le même lien puisse le recharger.
+- Chargement différé : `turbo_frame_tag id, src:, loading: :lazy, class: "block transition-opacity aria-busy:pointer-events-none aria-busy:opacity-50" { ui_loading_state variant: :skeleton }`. La réponse rend le même frame avec ses données ou `ui_empty_state`. Pendant un rechargement, Turbo pose `aria-busy` sur le frame, qui s'estompe.
+- Démonstration et test : section « CRUD Hotwire » de `/design` (`GET/POST /design/modal`, `GET /design/frame`).
+
 **États obligatoires** : chaque section d'accueil affiche `ui_loading_state variant: :skeleton` pendant son chargement, `ui_empty_state` sans données et `ui_error_state` en échec (avec `retry_href:` si la section peut être rechargée).
 
 **Accessibilité**
@@ -71,4 +81,4 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 
 - Ajouter une destination revient à modifier `DESTINATIONS` et la locale `shared.navigation`, **jamais** un partial. Au-delà de 5 destinations pour un rôle, il faut une nouvelle UDR : la barre basse n'en tient pas plus.
 - L'accueil d'un rôle n'est « livré » que lorsque ses sections affichent des données réelles et que son test système passe.
-- Interdit désormais : un partial de navigation par rôle, un tiroir de navigation mobile, un toast dont le texte est produit côté client, `data-turbo-permanent` sur `#toasts`.
+- Interdit désormais : un partial de navigation par rôle, un tiroir de navigation mobile, un toast dont le texte est produit côté client, `data-turbo-permanent` sur `#toasts`, un CRUD qui recharge la page ou redirige depuis la modale.
