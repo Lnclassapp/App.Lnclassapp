@@ -16,7 +16,7 @@
         </li>
         <li class="space-y-2">
           <p class="font-medium"><%= t(".manual") %></p>
-          <p class="rounded-ln bg-mist px-4 py-3 text-center font-mono text-base tracking-widest break-all" id="second-factor-secret"><%= @enrollment.secret.scan(/.{1,4}/).join(" ") %></p>
+          <p class="rounded-ln bg-mist px-4 py-3 text-center font-mono text-sm tracking-wider" id="second-factor-secret"><%= @enrollment.secret.scan(/.{1,4}/).join(" ") %></p>
         </li>
         <li>
           <%= form_with model: @form, scope: :second_factor, url: identity_second_factor_enrollment_path, id: "second-factor-enrollment-form", class: "space-y-5" do |form| %>
