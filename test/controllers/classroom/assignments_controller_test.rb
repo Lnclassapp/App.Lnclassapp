@@ -40,9 +40,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
       assignment = Orm::ClassroomAssignment.find_by!(assignable_type: type, assignable_id: record.id)
       assert_equal [ @classroom.id, "active", @teacher.id ], [ assignment.classroom_id, assignment.status, assignment.assigned_by_id ]
       assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done", name:, classroom: "6ème 1"))
-      assert_select "turbo-stream[action=replace][target=#{toggle_id(type, key)}]" do
+      assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}']" do
         assert_select "template ##{toggle_id(type, key)}", text: including(tl("toggle.assigned"))
-        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=classroom_public_id][value=#{@classroom.public_id}]"
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=classroom_public_id][value='#{@classroom.public_id}']"
       end
 
       withdraw(assignment, as: :turbo_stream)
@@ -52,7 +52,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
       assert_equal [ "archived", @teacher.id ], assignment.reload.values_at(:status, :archived_by_id)
       assert_not_nil assignment.archived_at
       assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("archive.done", name:, classroom: "6ème 1"))
-      assert_select "turbo-stream[action=replace][target=#{toggle_id(type, key)}] template" do
+      assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}'] template" do
         assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']" do
           assert_select "input[name='assignment[assignable_type]'][value=#{type}]"
           assert_select "input[name='assignment[assignable_key]'][value='#{key}']"
