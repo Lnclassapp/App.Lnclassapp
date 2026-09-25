@@ -58,7 +58,7 @@ module Repositories
 
         @writer.write(author_id: @author.id, at: @at, courses: [ course("genetique", content: dirty), course("ecologie", content: " ") ])
 
-        assert_equal "<p>Hérédité alert(1)<strong>forte</strong></p>", Orm::Course.find_by!(slug: "genetique").content.body.to_html
+        assert_equal "<p>Hérédité <strong>forte</strong></p>", Orm::Course.find_by!(slug: "genetique").content.body.to_html
         assert_nil ActionText::RichText.find_by(record: Orm::Course.find_by!(slug: "ecologie"))
         assert_equal "<p>Fiche ecologie-a</p>", Orm::Essential.find_by!(slug: "ecologie-a").content.body.to_html
         assert_equal [ "Orm::Course", "Orm::Essential" ], ActionText::RichText.distinct.order(:record_type).pluck(:record_type)

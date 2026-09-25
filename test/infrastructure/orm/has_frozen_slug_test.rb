@@ -15,6 +15,11 @@ class Orm::HasFrozenSlugTest < ActiveSupport::TestCase
     assert_equal "tle-3", create_level("tle ", 3).slug
   end
 
+  test "a name without any latin letter falls back on the model name" do
+    assert_equal "level", create_level("π", 1).slug
+    assert_equal "level-2", create_level("???", 2).slug
+  end
+
   test "renaming never changes the slug" do
     level = create_level("2nde", 1)
     level.update!(name: "Seconde")
