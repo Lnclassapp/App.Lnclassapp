@@ -2,6 +2,11 @@
 # One list of steps, one place: bin/ci and the GitHub workflow never diverge.
 # Order: cheapest and most fundamental first (feuille-de-route §2, garde-fou n° 4).
 
+# The Yarn audit is network-bound (2 min 40 s measured locally) and its result only moves with the JS dependencies.
+# GitHub (CI=true) always runs it; locally it runs only when package.json or yarn.lock differ from origin/Develop.
+# Fail-safe: if git cannot compare (no origin/Develop), `system` returns false and the audit runs.
+yarn_audit = ENV["CI"] || !system("git diff --quiet origin/Develop -- package.json yarn.lock", err: File::NULL)
+
 CI.run do
   step "Setup", "bin/setup --skip-server"
 
@@ -12,7 +17,11 @@ CI.run do
   step "Style: Ruby", "bin/rubocop"
 
   step "Security: Gem audit", "bin/bundler-audit"
-  step "Security: Yarn vulnerability audit", "yarn npm audit --all --recursive"
+  if yarn_audit
+    step "Security: Yarn vulnerability audit", "yarn npm audit --all --recursive"
+  else
+    step "Security: Yarn vulnerability audit (skipped locally: JS dependencies unchanged since Develop)", "true"
+  end
   step "Security: Brakeman code analysis", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
 
   # Full suite: SimpleCov fails the step below 100 % lines or branches (ADR-0024).

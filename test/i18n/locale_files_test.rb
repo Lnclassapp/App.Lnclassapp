@@ -4,8 +4,6 @@ require "test_helper"
 class LocaleFilesTest < ActiveSupport::TestCase
   FILES = Rails.root.glob("config/locales/**/*.fr.yml").freeze
   FORBIDDEN = /(?<![[:alpha:]])(habilet|notions? clés?|leçon|quiz|essai|platine|médaille|trophée)/i
-  # V0 screens written before UDR-0007: their wording belongs to the landing lot (A4) and the style guide.
-  LEGACY_VOCABULARY = %w[config/locales/homepage/index.fr.yml config/locales/design/index.fr.yml].freeze
 
   test "the French locale files exist" do
     assert_operator FILES.size, :>=, 6
@@ -31,7 +29,7 @@ class LocaleFilesTest < ActiveSupport::TestCase
   end
 
   test "no term forbidden by UDR-0007" do
-    offences = FILES.reject { LEGACY_VOCABULARY.include?(relative(it)) }.flat_map do |path|
+    offences = FILES.flat_map do |path|
       leaves(YAML.load_file(path), values: true).filter_map { |key, value| "#{relative(path)} #{key}" if value.to_s.match?(FORBIDDEN) }
     end
 
