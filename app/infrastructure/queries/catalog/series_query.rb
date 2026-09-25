@@ -22,10 +22,10 @@ module Queries
       # → Row | nil
       def find(slug:) = rows(Orm::Series.where(slug:)).first
 
-      # Niveaux par position en lignes, séries par nom en colonnes.
-      def matrix = build_matrix(Orm::Level.all, Orm::Series.all)
+      # Niveaux du second cycle par position en lignes, séries par nom en colonnes : il n'y a pas de série au premier cycle.
+      def matrix = build_matrix(Orm::Level.where(cycle: "second"), Orm::Series.all)
 
-      # → Cell | nil, quand le niveau ou la série n'existe pas
+      # → Cell | nil, quand le niveau ou la série n'existe pas ; tout cycle, pour nommer un refus
       def cell(level_slug:, series_slug:)
         matrix = build_matrix(Orm::Level.where(slug: level_slug), Orm::Series.where(slug: series_slug))
         return nil if matrix.levels.empty? || matrix.series.empty?
