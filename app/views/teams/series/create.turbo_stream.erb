@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/series/create — succès de la création %>
+<%# Rôle : toast, ligne ajoutée au tableau, matrice remplacée (nouvelle colonne) ; la modale se ferme sur l'envoi réussi %>
+<%# ADR  : 0034 · UDR : 0006, 0033 %>
+<%= turbo_stream_toast t(".created", name: @row.name), type: :success %>
+<%= turbo_stream.remove "series_empty" %>
+<%= turbo_stream.append "series", partial: "series_row", locals: { row: @row } %>
+<%= turbo_stream.replace "level_series_matrix", partial: "matrix", locals: { matrix: @matrix } %>

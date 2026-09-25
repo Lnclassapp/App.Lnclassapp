@@ -1,0 +1,9 @@
+<%# 🌐 UI · teams/level_series/destroy — couple décoché, ou refusé parce qu'une classe ou un cours l'utilise (422) %>
+<%# Rôle : la case est remplacée par son état en base ; le refus dit sa raison dans un toast d'erreur %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0033 %>
+<% if @refused %>
+  <%= turbo_stream_toast t(".refused", level: @cell.level_name, series: @cell.series_name), type: :error %>
+<% else %>
+  <%= turbo_stream_toast t(".done", level: @cell.level_name, series: @cell.series_name), type: :success %>
+<% end %>
+<%= turbo_stream.replace "level_series_#{@cell.level_slug}_#{@cell.series_slug}", partial: "cell", locals: { cell: @cell } %>
