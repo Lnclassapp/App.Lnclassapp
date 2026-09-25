@@ -1,0 +1,5 @@
+<%# 🌐 UI · assessment/question_attempts/create — réponse enregistrée, sans rechargement de page %>
+<%# Rôle : le frame « question » devient le verdict de la question, la progression est remplacée %>
+<%# ADR  : 0054 · UDR : 0006, 0022 %>
+<%= turbo_stream.replace "question", partial: "assessment/exercise_sessions/feedback_card", locals: { play: @play, feedback: @play.last_feedback } %>
+<%= turbo_stream.replace "progress_bar", partial: "assessment/exercise_sessions/progress_bar", locals: { play: @play } %>
