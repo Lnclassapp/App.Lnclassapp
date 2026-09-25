@@ -131,6 +131,19 @@ module UseCases
         assert_equal 0, @transaction.attempts
       end
 
+      test "AS-03 : N propositions correctes demandent au moins N + 1 propositions ; Vrai/Faux garde sa seule règle des 2" do
+        result = create(questions: {
+          "0" => question("Choix unique tout juste", "single_choice", [ "A", true ]),
+          "1" => question("Deux correctes, rien d'autre", "multiple_correct_2", [ "A", true ], [ "B", true ]),
+          "2" => question("Trois correctes, rien d'autre", "multiple_correct_3", [ "A", true ], [ "B", true ], [ "C", true ]),
+          "3" => question("Vrai/Faux seul", "true_false", [ "Vrai", true ])
+        })
+
+        assert_equal({ "questions[0]": [ :too_few_answers ], "questions[1]": [ :too_few_answers ],
+                       "questions[2]": [ :too_few_answers ], "questions[3]": [ :true_false_needs_two_answers ] }, result.errors)
+        assert_nil @exercises.created
+      end
+
       test "une écriture refusée par la base est un conflit, sans exception" do
         result = create(exercises: FakeExercises.new(refuse: true))
 

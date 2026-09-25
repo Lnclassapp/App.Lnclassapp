@@ -108,7 +108,7 @@ module UseCases
 
         assert_equal [ :invalid, [ :title ] ], [ blank.code, blank.errors.keys ]
         assert_equal [ :invalid, [ :title ] ], [ long.code, long.errors.keys ]
-        assert_equal [ :invalid, { "questions[0]": [ :wrong_correct_count ] } ], [ wrong.code, wrong.errors ]
+        assert_equal [ :invalid, { "questions[0]": %i[too_few_answers wrong_correct_count] } ], [ wrong.code, wrong.errors ]
         assert_empty @exercises.updates
       end
 

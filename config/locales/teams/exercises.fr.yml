@@ -27,7 +27,7 @@ fr:
               invalid: "Certaines questions sont incomplètes : complétez les champs signalés."
               needed_while_published: "Un exercice publié garde au moins une question."
               true_false_needs_two_answers: "Une question Vrai / Faux a exactement 2 propositions."
-              too_few_answers: "Il manque des propositions pour ce type de question."
+              too_few_answers: "Ajoutez au moins une proposition incorrecte en plus des propositions correctes."
               wrong_correct_count: "Le nombre de propositions correctes ne correspond pas au type de la question."
         dtos/assessment/question_input:
           attributes:
@@ -63,7 +63,7 @@ fr:
         description_hint: "Consigne lue par l'élève avant de commencer. Facultative."
         exercise_type_hint: "Fixation : pour s'entraîner. Évaluation : pour faire le point."
         questions_title: "Questions"
-        questions_hint: "Vrai / Faux : exactement 2 propositions, dont 1 correcte. Choix unique : 1 proposition correcte. 2 ou 3 propositions correctes : autant de cases cochées, et au moins une proposition incorrecte."
+        questions_hint: "Vrai / Faux : exactement 2 propositions, dont 1 correcte. Choix unique, 2 ou 3 propositions correctes : autant de cases cochées, et au moins une proposition incorrecte en plus."
         add_question: "Ajouter une question"
         locked_title: "Questions verrouillées"
         locked_body: "Des élèves ont déjà fait cet exercice. Vous pouvez modifier son titre et sa description ; ses questions, leurs propositions et son type ne changent plus."
@@ -89,6 +89,6 @@ fr:
         published: "Exercice « %{title} » publié."
         archived: "Exercice « %{title} » archivé."
         refusals:
-          transition_not_allowed: "Ce changement de statut n'est pas permis."
+          transition_not_allowed: "Cet exercice est déjà dans cet état ou ne peut pas prendre ce statut. Rechargez la page pour voir son statut actuel."
           parent_not_published: "Publiez d'abord la fiche essentielle et son cours."
           not_publishable: "Ajoutez au moins une question bien construite avant de publier l'exercice."
