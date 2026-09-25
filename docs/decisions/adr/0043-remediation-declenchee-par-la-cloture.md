@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-21**, bloque la V5 |
 | **Remplace** | [ADR-0018](./0018-remediation-just-in-time-et-historique-lacunes.md) §3 |

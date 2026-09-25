@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-33**, vague V8 (hors plan) |
 | **Remplace** | [ADR-0011](./0011-validation-collaborative-crowdsourcing.md) |

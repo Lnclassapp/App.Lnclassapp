@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-22**, bloque la V2 |
 | **Remplace** | — |

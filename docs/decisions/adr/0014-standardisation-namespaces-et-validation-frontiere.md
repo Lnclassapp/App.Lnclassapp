@@ -2,13 +2,17 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-08-15 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0027](./0027-contextes-bornes-et-arborescence.md) *(§2.2)* |
+| **Amendé par** | [ADR-0026](./0026-contrat-result-entites-et-dto.md) : §2.1 (DTO sans ActiveRecord) |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — les namespaces suivent l'ADR-0027.**
+> Le §2.2 est remplacé par l'[ADR-0027](./0027-contextes-bornes-et-arborescence.md) le 2026-09-25 : rangement par couche puis par contexte, sans `presentation/` ni `adapters/`. Le §2.1 est amendé par l'[ADR-0026](./0026-contrat-result-entites-et-dto.md). La validation aux frontières par DTO reste en vigueur.
 
 ## 1. Contexte et problématique
 Consolidation de l'Architecture Hexagonale suite à la migration vers Rails 8.

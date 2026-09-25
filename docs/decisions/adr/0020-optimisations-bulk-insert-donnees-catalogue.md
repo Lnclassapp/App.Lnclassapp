@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-08-29 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0039](./0039-format-d-import-du-contenu.md) |
 
 ---
+
+> ⚠️ **Décision remplacée — l'import du contenu suit l'ADR-0039.**
+> L'[ADR-0039](./0039-format-d-import-du-contenu.md) remplace cet ADR en entier le 2026-09-25 : format arbre versionné, schéma JSON, transaction unique, rapport persisté. La partie sur les élèves démo tombe avec eux, retirés du plan.
 
 ## 1. Contexte et problématique
 Dans le cadre de l'onboarding des administrateurs et du lancement initial des DRENA et établissements, le système doit importer un catalogue massif de données via des tâches en arrière-plan (`ImportSchoolsJsonJob`, `ImportCoursesJsonJob`). 

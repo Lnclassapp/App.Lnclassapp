@@ -1,8 +1,8 @@
-# UDR-0007 : Vocabulaire d'interface — « Fiche essentielle », « Exercice », « Session », « Tentative », jamais « Quiz »
+# UDR-0007 : Vocabulaire d'interface — « Fiche essentielle », « Exercice », « Session », « Tentative », quatre badges, jamais « Quiz »
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-32**, étendue à C-48 ; bloque la V1 (Lot B) |
 | **ADR lié** | [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (noms des badges) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (sessions et tentatives) · [ADR-0053](../adr/0053-validation-collaborative-requalifiee.md) (aucun label de conformité) |
@@ -20,7 +20,7 @@ Un même objet porte cinq noms selon l'écran (**C-33**) :
 - « essentiels (habiletés) » dans l'UDR-0001 ;
 - « habilletés » dans `feature_listing.md`.
 
-Pour l'évaluation (**C-48**), l'UDR-0003 parle de « Quiz interactif », que le glossaire interdit, et l'écran enseignant intitule « Tentatives » un compteur de **sessions**. La landing promet un badge « Diamant » qui n'existe pas (ADR-0033). Un élève qui lit « Habileté » en classe et « Fiche » dans l'application ne sait pas qu'il s'agit de la même chose ; un agent qui lit trois mots écrit trois clés de locale.
+Pour l'évaluation (**C-48**), l'UDR-0003 parle de « Quiz interactif », que le glossaire interdit, et l'écran enseignant intitule « Tentatives » un compteur de **sessions**. La landing promet un badge « Diamant » que rien ne définit ; l'ADR-0033 en fait le badge du sans-faute. Un élève qui lit « Habileté » en classe et « Fiche » dans l'application ne sait pas qu'il s'agit de la même chose ; un agent qui lit trois mots écrit trois clés de locale.
 
 ## 2. Décision
 
@@ -33,7 +33,7 @@ Pour l'évaluation (**C-48**), l'UDR-0003 parle de « Quiz interactif », que le
 | `ExerciseSession` | Session (« session d'exercice » quand le contexte ne suffit pas) | Sessions | Tentative, Essai, Partie |
 | `QuestionAttempt` | Tentative | Tentatives | Essai |
 | `Answer` | Proposition | Propositions | Réponse, comme nom d'objet (ambigu avec la tentative) ; le verbe « répondre » reste libre |
-| `ExerciseBadge` | Badge Bronze · Badge Argent · Badge Or | Badges | Diamant, Platine, Médaille |
+| `ExerciseBadge` | Badge Bronze (≥ 50 %) · Badge Argent (≥ 70 %) · Badge Or (≥ 80 %) · Badge Diamant (100 %, sans faute) | Badges | Platine, Médaille, Trophée |
 | Maîtrise (ADR-0033) | Acquis · Fragile · En difficulté | — | Validé, Échoué |
 | Score | Score (en %) ; Note (sur 20) | — | Pourcentage, Moyenne |
 | — | aucun label de conformité (ADR-0053) | — | Conforme au programme, Validé par la communauté |
@@ -68,7 +68,7 @@ La connexion ne dit jamais « session » : on écrit « Connexion » et « Se d�
 ## 4. Conséquences
 
 - Le glossaire (§3, §4, §8) est mis à jour avec la colonne « Terme d'interface » et la liste des interdits d'écran.
-- L'UDR-0001 (« essentiels (habiletés) ») et l'UDR-0003 (« Quiz interactif », « Diamant ») sont remplacées **pour leur vocabulaire** à l'acceptation de cette UDR.
-- `test/i18n/vocabulary_test.rb` parcourt `config/locales/**/*.fr.yml` et `app/views/**/*`, et échoue sur les termes interdits, sans tenir compte de la casse : `quiz`, `habilet`, `notion(s) clé(s)`, `diamant`, `conforme au programme`.
-- **Point à confirmer par le porteur** : « Fiche essentielle » plutôt que « Habileté », le terme des programmes ivoiriens.
-- **Point à confirmer par le porteur** : « Session » pour `ExerciseSession`, et « Tentative » réservé à la réponse à une question, comme dans le glossaire.
+- L'UDR-0001 (« essentiels (habiletés) ») et l'UDR-0003 (« Quiz interactif », badges Argent / Or / Diamant sans Bronze ni seuils) sont remplacées **pour leur vocabulaire** depuis le 2026-09-25.
+- `test/i18n/vocabulary_test.rb` parcourt `config/locales/**/*.fr.yml` et `app/views/**/*`, et échoue sur les termes interdits, sans tenir compte de la casse : `quiz`, `habilet`, `notion(s) clé(s)`, `conforme au programme`. « Diamant » est un terme **autorisé** : c'est le badge du sans-faute.
+- **Accepté par le porteur le 2026-09-25** : « Fiche essentielle » plutôt que « Habileté », et « Session » pour `ExerciseSession`, « Tentative » restant réservé à la réponse à une question.
+- **Arbitrage du porteur (2026-09-25)** : quatre badges, dont « Diamant » pour le sans-faute (ADR-0033). « Diamant » quitte la liste des termes interdits.

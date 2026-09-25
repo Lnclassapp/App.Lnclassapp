@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-19**, bloque la V3 (colonnes posées dès la V1) |
 | **Remplace** | — |
@@ -58,7 +58,7 @@ Dans l'ancien, une classe est éternelle : pas d'année scolaire, pas de fin. So
 - policy : enseignant de la classe (`Classroom::TeachPolicy`), direction de l'école (V2), `team` ;
 - `/c/:code` est limité à 10 requêtes par minute et par IP.
 
-**Plafond** : `Classroom::JoinWithCode` compte les adhésions actives (`left_at IS NULL`). Si le plafond est atteint : `:conflict`, avec `errors[:base]` = « Cette classe est complète ». Le comptage se fait sous verrou de ligne de la classe (`SELECT … FOR UPDATE`).
+**Plafond** : `Classroom::JoinWithCode` compte les adhésions actives (`left_at IS NULL`) sous verrou de ligne de la classe (`SELECT … FOR UPDATE`) et passe ce nombre à `Classroom::JoinPolicy` (ADR-0028). Celle-ci vérifie aussi que la classe est `active` et que le code est le `join_code` courant. Plafond atteint : `:forbidden`, `errors[:base]` = « Cette classe est complète ».
 
 **Archivage** : `Classroom::ArchiveSchoolYear(school_year:)`, par `team` en V3.
 
@@ -106,7 +106,7 @@ end
 ## 7. Comment vérifier que la décision est respectée
 
 - Test unitaire : `SchoolYear.current(Date.new(2027, 8, 31)) == "2026-2027"` et `SchoolYear.current(Date.new(2027, 9, 1)) == "2027-2028"`.
-- Test de use case : le 81ᵉ élève reçoit `:conflict`. Deux adhésions concurrentes au 80ᵉ siège : une seule passe (test de concurrence avec deux connexions).
+- Test de use case : le 81ᵉ élève reçoit `:forbidden` (`classroom_full`). Deux adhésions concurrentes au 80ᵉ siège : une seule passe (test de concurrence avec deux connexions).
 - Test de policy : une classe archivée refuse assignation et adhésion.
 
 ## 8. Remplace, complète, amende

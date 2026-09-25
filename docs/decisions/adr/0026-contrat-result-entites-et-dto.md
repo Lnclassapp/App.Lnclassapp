@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décisions de fondation **F-01** et **F-03**, bloque la V1 |
 | **Remplace** | [ADR-0006](./0006-separation-ecriture-lecture-et-optimisation-queries.md) · [ADR-0012](./0012-deep-modules-et-strict-cqrs.md) §3.1 · [ADR-0021](./0021-gestion-de-l-identite.md) · [ADR-0022](./0022-modelisation-hexagonale-du-catalogue-pedagogique.md) §2.A à §2.C |
@@ -42,7 +42,7 @@ L'ancien dépôt n'a aucun contrat de retour : `OpenStruct`, `Struct` locaux, ex
 | `:forbidden` | la policy refuse | 403, ou redirection vers la connexion si anonyme |
 | `:not_found` | la ressource n'existe pas pour cet acteur | 404 |
 | `:invalid` | la saisie est invalide ; `errors` porte `{ champ: [messages] }` | 422 |
-| `:conflict` | l'état ne permet pas l'action (déjà répondu, classe pleine) ; `errors[:base]` explique | 422 |
+| `:conflict` | l'état ne permet pas l'action (question déjà répondue, élément encore référencé) ; `errors[:base]` explique | 422 |
 | `:locked` | compte verrouillé (ADR-0050) ; `errors[:retry_after]` | 429 |
 | `:expired` | jeton ou code périmé (ADR-0032, ADR-0038) | 422 |
 
@@ -68,7 +68,7 @@ Ajouter un code demande d'amender cet ADR.
 
 - Le câblage est explicite : chaque contrôleur construit son use case avec ses repositories, ce qui est verbeux.
 - Une query par écran : on accepte une duplication de SQL entre écrans voisins plutôt qu'une couche de lecture générique.
-- Les blueprints [`result.md`](../../blueprints/result.md) et [`policy.md`](../../blueprints/policy.md) sont à réécrire à l'acceptation.
+- Les blueprints [`result.md`](../../blueprints/result.md) et [`policy.md`](../../blueprints/policy.md) sont réécrits sur ce contrat le 2026-09-25.
 
 ## 6. Notes d'implémentation
 

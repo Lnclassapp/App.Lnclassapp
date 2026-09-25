@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-34**, bloque la V1 (Lot C) |
 | **Remplace** | [ADR-0008](./0008-moteur-evaluation-et-gamification.md) §3 (statuts et correction) et §6 (`evaluate_and_award_badges!`) |
@@ -108,7 +108,7 @@ end
 
 - **Remplace** l'ADR-0008 §3 (C-42, C-43) et §6.
 - Le barème des badges est remplacé par l'ADR-0033. Le reste de l'ADR-0008 (correction sans N+1, verrouillage des sessions terminées) est conservé.
-- **Corrige** le glossaire §4 (C-44, C-45) et l'architecture §2.7 (C-42) à l'acceptation.
+- **Corrige** le glossaire §4 (C-44, C-45) et l'architecture §2.7 (C-42), corrigés le 2026-09-25.
 
 ## 9. Points à confirmer par le porteur
 

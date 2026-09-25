@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-14**, bloque la V1 (Lot B) et la V2 |
 | **Complète** | [ADR-0005](./0005-decouplage-audit-admin-et-integrite-donnees.md) · [ADR-0016](./0016-conservation-historique-assignations.md) |

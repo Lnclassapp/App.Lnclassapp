@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-18**, bloque la V3 (le schéma est posé en V1) |
 | **Amende** | [ADR-0003](./0003-multi-appartenance-et-denormalisation-eleves.md) §2 (appartenance illimitée) et §4 (rejoindre une classe supplémentaire) |
@@ -48,7 +48,7 @@ L'ADR-0003 permet à un élève d'appartenir à un nombre illimité de classes, 
 
 **Règles de la V1** :
 
-- `/c/:code` (`Classroom::JoinWithCode`, anonyme) crée le compte élève **et** son adhésion `primary = true`, dans une transaction (ADR-0050 pour le PIN).
+- `/c/:code` (`Classroom::JoinWithCode`, policy `Classroom::JoinPolicy`, acteur anonyme accepté, ADR-0028) crée le compte élève **et** son adhésion `primary = true`, dans une transaction (ADR-0050 pour le PIN).
 - Un élève **connecté** qui ouvre `/c/:code` :
   - s'il a une classe principale active, reçoit `:conflict` et le message « Tu es déjà inscrit dans une classe » ;
   - si sa classe est archivée (ADR-0041), il la rejoint comme nouvelle principale (`Classroom::JoinAsStudent`), sans créer de compte.

@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-08-27 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0043](./0043-remediation-declenchee-par-la-cloture.md) *(§3)*, [ADR-0027](./0027-contextes-bornes-et-arborescence.md) *(noms du §3.2)*, [ADR-0029](./0029-identifiants-exposes-public-id-et-slugs.md) *(clé nanoid)* |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — la remédiation est déclenchée par la clôture.**
+> Le §3 est remplacé par l'[ADR-0043](./0043-remediation-declenchee-par-la-cloture.md) le 2026-09-25 : lacunes ouvertes et résolues par le seul use case de clôture. Les noms du §3.2 suivent l'[ADR-0027](./0027-contextes-bornes-et-arborescence.md), la clé des lacunes passe en `bigint` (l'[ADR-0029](./0029-identifiants-exposes-public-id-et-slugs.md)). Le principe *just-in-time* et l'historique des lacunes restent en vigueur.
 
 ## 1. Contexte et problématique
 L'application nécessite un système de "Remédiation" pour accompagner les élèves lorsqu'ils échouent à un exercice ou une évaluation. L'objectif est double : fournir un exercice de rattrapage ciblé à l'élève, et permettre au professeur de suivre un tableau de bord précis des difficultés de sa classe. 

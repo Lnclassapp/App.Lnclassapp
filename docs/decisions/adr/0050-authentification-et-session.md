@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-28**, bloque la V1 (Lot 0b) |
 | **Remplace** | [ADR-0002](./0002-authentification-native-contact-telephonique-sans-devise.md) §3.2, §3.3 et §5 ; §1 pour la mention de Wave |

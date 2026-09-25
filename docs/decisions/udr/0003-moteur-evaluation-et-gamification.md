@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | — |
 | **Chantier** | — |
 | **ADR lié** | [ADR-0008 — Moteur d'évaluation et gamification](../adr/0008-moteur-evaluation-et-gamification.md) |
-| **Remplacé par** | — |
+| **Remplacé par** | UDR-0007 *(vocabulaire)*, ADR-0033 *(badges)* |
 
 ---
+
+> ⚠️ **Vocabulaire remplacé — plus de « Quiz », quatre badges.**
+> Le 2026-09-25, « Quiz interactif » est remplacé par « Exercice » ([UDR-0007](./0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md)). Les badges sont Bronze (≥ 50 %), Argent (≥ 70 %), Or (≥ 80 %) et Diamant (100 %, sans faute) : le « Diamant » cité ici est défini par l'[ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md). Le reste de cette UDR reste en vigueur.
 
 ## 1. Contexte
 

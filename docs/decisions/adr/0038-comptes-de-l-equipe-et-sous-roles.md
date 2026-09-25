@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-16**, bloque la V1 (minimal) et la V4 |
 | **Remplace** | — |
@@ -68,6 +68,7 @@ Index unique partiel `(kind, contact) WHERE accepted_at IS NULL AND revoked_at I
 | Anonymiser un compte | ✅ | | |
 | Superviser les jobs (`/teams/jobs`) | ✅ | | |
 | Créer, publier, archiver le contenu ; importer (ADR-0039) | ✅ | ✅ | |
+| Gérer la taxonomie : niveaux, séries, matières (ADR-0034) | ✅ | ✅ | |
 | Gérer DRENA, écoles, classes ; inviter la direction | ✅ | | ✅ |
 | Émettre un code de récupération du PIN | ✅ | | ✅ |
 | Publier une annonce nationale (ADR-0045) | ✅ | ✅ | ✅ |

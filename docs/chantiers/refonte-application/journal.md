@@ -177,3 +177,36 @@ Les annonces restent en V6. Les 26 features concernées gardent leur ligne dans 
 - **Choix du porteur, contre la lettre de l'ADR-0010** : Thruster est gardé, parce que la compression sert le budget de l'ADR-0051.
 - **Non vérifié, à confirmer au premier déploiement de recette** : l'expansion de `$PORT` par Railway, et la compatibilité de Mission Control Jobs avec la CSP sous nonce de l'ADR-0049.
 - **Les trois décisions qui bloquaient la V0 (F-27, F-29, F-30) sont acceptées.** Prochaine étape : ouvrir le chantier `amorcage-depot` et fixer la date de la V1.
+
+## 2026-09-25 — Décisions de fondation acceptées en bloc
+
+| Sujet | Décision |
+|---|---|
+| ADR-0026 à ADR-0054 (sans 0042 ni 0046) et UDR-0007 | **Acceptés** par le porteur le 2026-09-25, avec trois corrections. Liste et effets : [`decisions-a-accepter.md`](decisions-a-accepter.md) |
+
+**Les trois corrections du porteur**
+
+1. **Badges** ([ADR-0033](../../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md)) : quatre paliers, Bronze ≥ 50 %, Argent ≥ 70 %, Or ≥ 80 %, Diamant = 100 % (sans faute). Un badge par exercice, qui ne monte que vers un palier strictement supérieur. Seuils nommés dans le domaine : `PASS_THRESHOLD` 50, `MASTERY_THRESHOLD` 70, `GOLD_THRESHOLD` 80, `PERFECT_THRESHOLD` 100. « Diamant » redevient un terme d'interface autorisé ([UDR-0007](../../decisions/udr/0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md), glossaire).
+2. **Taxonomie** ([ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md)) : niveaux, séries, `level_series` et matières (avec leur catégorie, CA-26) sont **créés par l'équipe dans l'interface**, pas seedés en production. Les seeds (`db/seeds/<contexte>.rb`) ne servent qu'en développement et en test, sous un garde d'environnement. La gestion de la taxonomie passe en V1 (CA-18, 19, 20, 22, 24, 25 et TR-13) ; le chantier V2 `referentiels-equipe` ne garde que les DRENA, les écoles et l'import d'écoles. Les DRENA, que le porteur n'a pas citées, restent seedées dans tous les environnements.
+3. **Adhésion par code** ([ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md)) : pas d'exception. `Classroom::JoinWithCode` a sa policy, `Classroom::JoinPolicy`, qui accepte un acteur anonyme et vérifie une classe active et non archivée, un effectif sous le plafond, un code valide et non révoqué. ADR-0040 et ADR-0041 alignés.
+
+**Valeurs par défaut acceptées sans modification**
+
+- Le niveau s'écrit `2nde`.
+- Plafond d'effectif d'une classe : 80 (ADR-0041).
+- TOTP obligatoire pour l'équipe et pour la direction (ADR-0031, ADR-0044).
+- Verrouillage progressif à 5, 10 puis 20 échecs (ADR-0050).
+- Bucket Railway sans sauvegarde automatique en V1 (ADR-0047).
+- Sous-rôles d'équipe `admin`, `content`, `field` (ADR-0038).
+
+**Appliqué dans la foulée**
+
+- Statut `Accepté` dans les 24 ADR, l'UDR-0007 et l'index des ADR ; anciens ADR marqués (encadré, lignes `Remplacé par`, `Amendé par` ou `Complété par`, table « Décisions remplacées ») ; UDR-0001 et UDR-0003 marquées pour leur vocabulaire. L'index des UDR est tenu par l'agent des UDR.
+- Feuille de route : F-01 à F-34 acceptées (sauf F-09, F-20, F-24, F-31) ; 40 contradictions fermées ; V1 et V2, §6 et §7 mis à jour pour la taxonomie.
+- Documents de rang 5 corrigés : glossaire, `architecture.md` §2.7 et §5, blueprints `result` et `policy`, [`securite.md`](securite.md).
+
+**Reste ouvert**
+
+- La liste officielle des DRENA (`db/seeds/data/drenas.yml`) doit être fournie avant la première mise en production.
+- Écoles en production pendant la V1 : ni seedées ni gérées à l'écran avant la V2, alors que [`plan.md`](plan.md) les fait créer par l'équipe dès la V1. À trancher avant le Lot 0 de la V1.
+- F-09 (UDR-0005) et F-31 (UDR-0006) suivent leur propre acceptation.

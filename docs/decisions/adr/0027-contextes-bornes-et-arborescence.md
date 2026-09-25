@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-02**, bloque la V1 |
 | **Remplace** | [ADR-0023](./0023-modelisation-de-l-organisation-scolaire.md) · [ADR-0014](./0014-standardisation-namespaces-et-validation-frontiere.md) §2.2 |
@@ -79,7 +79,7 @@ L'ADR-0014 §2.2 prévoit `app/presentation/` et `adapters/`, qui n'existent pas
 
 - `teacher_schools` vit dans `school` et `teacher_classrooms` dans `classroom` : le rattachement d'un enseignant touche deux contextes.
 - `Orm::` reste à plat : on ne voit pas le contexte d'un modèle à son nom. Le tableau ci-dessus fait foi.
-- [`architecture.md`](../../guide/architecture.md) §5 et le glossaire §1-2 sont à corriger à l'acceptation.
+- [`architecture.md`](../../guide/architecture.md) §5 et le glossaire §1-2 sont corrigés le 2026-09-25.
 
 ## 6. Notes d'implémentation
 

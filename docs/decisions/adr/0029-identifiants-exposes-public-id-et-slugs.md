@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-05**, bloque la V1 |
 | **Complète** | [ADR-0017](./0017-remplacement-nanoid-par-secure-random.md) |

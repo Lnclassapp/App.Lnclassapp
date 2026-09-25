@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-06**, bloque la V1 (Lot D) |
 | **Remplace** | [ADR-0004](./0004-autorisation-multi-etablissements-enseignants.md) §3.1 (plusieurs écoles) et §2 (création de classe par l'enseignant) |

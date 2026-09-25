@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-26**, bloque la V1 (Lot D) |
 | **Remplace** | [ADR-0016](./0016-conservation-historique-assignations.md) §2 (statuts, réactivation, `teacher_id` de session) · [ADR-0007](./0007-hierarchie-pedagogique-et-assignations-polymorphes.md) §5 (statuts et types assignables) |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-17**, bloque la V4 |
 | **Remplace** | [ADR-0012](./0012-deep-modules-et-strict-cqrs.md) §3.3 · [ADR-0020](./0020-optimisations-bulk-insert-donnees-catalogue.md) |
@@ -41,7 +41,7 @@ Le schéma vit dans `config/schemas/course_tree.v1.json` ; il est validé avec l
 
 **Résolution de la taxonomie**, sans jamais rien créer :
 
-`level_name`, `material_name` et `series_name` sont comparés, après `parameterize`, au `slug` des lignes seedées (ADR-0034) ; `material_name` peut aussi valoir le `shortname`. « Physique Chimie » est donc résolu en `physique-chimie`. Un nom inconnu, ou une série hors `level_series`, est une erreur de ligne.
+`level_name`, `material_name` et `series_name` sont comparés, après `parameterize`, au `slug` des lignes créées par l'équipe (ADR-0034) ; `material_name` peut aussi valoir le `shortname`. « Physique Chimie » est donc résolu en `physique-chimie`. Un nom inconnu, ou une série hors `level_series`, est une erreur de ligne.
 
 **Règles de cohérence**, en plus du schéma : exactement 1 réponse correcte pour `true_false` et `single_choice`, 2 et 3 pour les deux autres ; `true_false` a exactement 2 réponses ; tout exercice a au moins une question.
 

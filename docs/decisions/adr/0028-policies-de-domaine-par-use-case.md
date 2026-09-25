@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-04**, bloque la V1 |
 | **Complète** | [ADR-0004](./0004-autorisation-multi-etablissements-enseignants.md) §3.3 · [ADR-0015](./0015-strategie-de-tests-metier-isolement-des-policies.md) |
@@ -45,7 +45,9 @@ Le PRD cadre exige une policy par use case et un test de refus.
 
 **Traduction** : `RendersResult` (ADR-0026) répond `:forbidden` par une 403, ou par une redirection vers la connexion si `actor` est `nil`. Une policy de **lecture** peut répondre `:not_found` au lieu de `:forbidden` quand la réponse ne doit pas confirmer que la ressource existe (brouillon, ADR-0035).
 
-**Use cases anonymes**, listés nommément dans le test d'architecture avec leur raison : `Identity::Authenticate`, `Identity::ResetPinWithCode`, `Identity::AcceptInvitation`, `Classroom::JoinWithCode`.
+**Use cases d'authentification**, seuls exemptés de policy, listés nommément dans le test d'architecture avec leur raison : `Identity::Authenticate`, `Identity::ResetPinWithCode` et `Identity::AcceptInvitation`. Ils sont l'acte même d'établir l'identité ; leur protection est la limitation de débit et le verrouillage (ADR-0050, ADR-0032, ADR-0038).
+
+**Adhésion par code** : `Classroom::JoinWithCode` **a** une policy, `Classroom::JoinPolicy`, qui accepte un acteur anonyme (`actor: nil`) ou un élève. Elle vérifie que la classe est `active` (donc non archivée), que le code saisi est égal au `join_code` courant (valide et non révoqué, ADR-0041) et que l'effectif actif est sous `max_students`. Sinon elle répond `:forbidden`, avec `errors[:base]` qui nomme la raison (`classroom_archived`, `join_code_revoked`, `classroom_full`). Un code qui ne correspond à aucune classe donne `:not_found` avant la policy.
 
 **Policies de la V1** (les autres vagues ajoutent les leurs sur le même modèle) :
 
@@ -53,9 +55,11 @@ Le PRD cadre exige une policy par use case et un test de refus.
 |---|---|
 | `Catalog::ReadPublishedPolicy` | tout acteur connecté sur un contenu `published` ; `team` sur tout statut |
 | `Catalog::ManageContentPolicy` | `team` |
+| `Catalog::ManageTaxonomyPolicy` | `team` (sous-rôles `admin` et `content` à partir de la V4) : niveaux, séries, `level_series`, matières (ADR-0034) |
 | `Assessment::StartSessionPolicy` | `student`, sur un exercice publié dont les parents sont publiés |
 | `Assessment::ReadSessionPolicy` | l'élève propriétaire ; l'enseignant d'une classe active de l'élève ; `team` |
 | `Assessment::RevealAnswersPolicy` | l'élève, pour une question déjà tentée dans sa session ; `team` |
+| `Classroom::JoinPolicy` | acteur anonyme ou `student` ; classe active, code valide et non révoqué, effectif sous le plafond |
 | `Classroom::TeachPolicy` / `Classroom::AssignPolicy` | l'enseignant présent dans `teacher_classrooms` pour la classe ; `team` |
 | `Classroom::ManageClassroomPolicy` | `team` en V1 ; la direction de l'école à partir de la V2 (ADR-0030) |
 | `Identity::ReadUserPolicy` | soi-même ; l'enseignant pour les élèves de ses classes (sans le contact) ; `team` |
@@ -98,7 +102,7 @@ end
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `test/architecture/use_case_policy_test.rb` échoue si le constructeur d'une classe de `UseCases::` n'accepte pas `policy:`, sauf pour les use cases anonymes listés.
+- `test/architecture/use_case_policy_test.rb` échoue si le constructeur d'une classe de `UseCases::` n'accepte pas `policy:`, sauf pour les trois use cases d'authentification listés. `Classroom::JoinPolicy` a un test de refus pour chacune des trois raisons.
 - Chaque policy a son test dans `test/domain/policies/<contexte>/`, avec au moins un cas de refus par rôle non autorisé.
 - Chaque use case a un test « refus → le repository double n'a rien enregistré ».
 
