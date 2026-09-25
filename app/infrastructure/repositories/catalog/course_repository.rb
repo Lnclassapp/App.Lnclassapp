@@ -52,7 +52,7 @@ module Repositories
         { name: course.name, subtitle: course.subtitle, content: course.content }
       end
 
-      # Le savepoint garde intacte la transaction du use case quand l'index unique refuse la ligne.
+      # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
       def persist(record)
         Orm::Course.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record))

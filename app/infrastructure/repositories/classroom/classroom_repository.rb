@@ -47,6 +47,7 @@ module Repositories
 
       def insert(classroom, retries:)
         record = Orm::Classroom.new(attributes_of(classroom).merge(join_code: Entities::Classroom::JoinCode.generate(random: @random)))
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::Classroom.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record))
       rescue ActiveRecord::RecordNotUnique => error

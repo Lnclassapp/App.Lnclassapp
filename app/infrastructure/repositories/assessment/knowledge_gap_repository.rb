@@ -20,6 +20,7 @@ module Repositories
       def open(student_id:, essential_id:, source_session_id:, at:)
         record = Orm::KnowledgeGap.new(student_id:, essential_id:, source_session_id:, status: "pending",
                                        failed_sessions_count: 1, created_at: at, updated_at: at)
+        # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::KnowledgeGap.transaction(requires_new: true) { record.save! }
         map_to_entity(record)
       rescue ActiveRecord::RecordNotUnique
