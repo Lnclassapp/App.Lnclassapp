@@ -1,3 +1,6 @@
+# 🔌 INFRASTRUCTURE · ApplicationJob
+# Rôle : job parent, exécuté par Solid Queue dans Puma
+# ADR  : 0010, 0052
 class ApplicationJob < ActiveJob::Base
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked

@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+# bin/check-chrome — run by bin/ci before the system tests. A missing browser
+# must fail loudly: a system test that never ran in Chrome is not proven
+# (docs/guide/configuration.md §4.3).
+require "open3"
+
+def runs?(command)
+  output, status = Open3.capture2e(command, "--version")
+  [ status.success?, output.strip.lines.last.to_s.strip ]
+rescue SystemCallError => error
+  [ false, error.message ]
+end
+
+def find(env, candidates)
+  return ENV[env] if ENV[env].to_s != ""
+
+  candidates.find { |name| ENV["PATH"].split(File::PATH_SEPARATOR).any? { |dir| File.executable?(File.join(dir, name)) } }
+end
+
+chrome = find("CHROME_BIN", %w[google-chrome google-chrome-stable chromium chromium-browser])
+abort <<~MSG unless chrome
+  ❌ Chrome introuvable : les tests système ne peuvent pas tourner, ils ne sont PAS prouvés.
+     Installe Chrome, ou pose CHROME_BIN (et CHROMEDRIVER_PATH) :
+       CHROME_BIN=/snap/bin/chromium CHROMEDRIVER_PATH=/snap/bin/chromium.chromedriver bin/ci
+MSG
+
+ok, version = runs?(chrome)
+unless ok
+  hint = "\n   Chromium en snap exige le service snapd.apparmor : sudo systemctl start snapd.apparmor" if version.include?("snap")
+  abort "❌ Chrome ne démarre pas (#{chrome}) : les tests système ne sont PAS prouvés.\n   #{version}#{hint}"
+end
+puts "✅ Chrome : #{version} (#{chrome})"
+
+driver = find("CHROMEDRIVER_PATH", %w[chromedriver])
+if driver
+  ok, version = runs?(driver)
+  abort "❌ chromedriver ne démarre pas (#{driver}) :\n   #{version}" unless ok
+  puts "✅ chromedriver : #{version} (#{driver})"
+else
+  puts "ℹ️  Aucun chromedriver local : selenium-manager le téléchargera (réseau requis)."
+end

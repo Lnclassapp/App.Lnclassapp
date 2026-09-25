@@ -1,68 +1,59 @@
-<% content_for :title, "Lnclass — La plateforme scolaire qui fait grandir chaque élève" %>
-<% content_for :head do %>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
-<% end %>
+<%# 🌐 UI · homepage/index — landing publique de Lnclass %>
+<%# Rôle : présente la plateforme et oriente vers l'inscription ; source de l'identité visuelle du design system %>
+<%# UDR  : 0005 · ADR : 0049 (polices servies par l'application, plus de Google Fonts) %>
+<% content_for :title, t(".page_title") %>
 
 <div class="min-h-screen bg-paper font-sans text-ink antialiased">
   <%# ---------- En-tête ---------- %>
   <header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
     <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
       <%= link_to root_path, class: "flex items-center gap-2.5" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-9 rounded-lg" %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-9 rounded-sm" %>
         <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
       <% end %>
 
       <ul class="hidden items-center gap-8 text-sm font-medium text-ink/70 md:flex">
-        <li><a href="#pour-qui" class="hover:text-ink">Pour qui ?</a></li>
-        <li><a href="#fonctionnalites" class="hover:text-ink">Fonctionnalités</a></li>
-        <li><a href="#comment" class="hover:text-ink">Comment ça marche</a></li>
+        <li><a href="#pour-qui" class="hover:text-ink"><%= t(".nav.audience") %></a></li>
+        <li><a href="#fonctionnalites" class="hover:text-ink"><%= t(".nav.features") %></a></li>
+        <li><a href="#comment" class="hover:text-ink"><%= t(".nav.how") %></a></li>
       </ul>
 
       <div class="flex items-center gap-2">
-        <a href="#rejoindre" class="hidden rounded-full px-4 py-2 text-sm font-medium hover:bg-ink/5 sm:inline-block">Se connecter</a>
-        <a href="#rejoindre" class="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-ink/85">Commencer</a>
+        <%= ui_button t(".nav.sign_in"), href: "#rejoindre", variant: :ghost, size: :sm, class: "max-sm:hidden" %>
+        <%= ui_button t(".nav.start"), href: "#rejoindre", size: :sm %>
       </div>
     </nav>
   </header>
 
   <main>
-    <%# ---------- Hero ---------- %>
+    <%# ---------- Héros ---------- %>
     <section class="relative overflow-hidden bg-brand">
       <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-2 md:py-24">
         <div>
           <p class="mb-5 inline-flex items-center gap-2 rounded-full bg-ink/10 px-3 py-1 text-sm font-medium">
             <span class="size-2 rounded-full bg-ink"></span>
-            La classe, partout, tout le temps
+            <%= t(".hero.eyebrow") %>
           </p>
-          <h1 class="font-display text-4xl leading-[1.05] font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-            Faire grandir chaque élève, comme un baobab.
+          <h1 class="font-display text-4xl leading-display font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+            <%= t(".hero.title") %>
           </h1>
-          <p class="mt-6 max-w-lg text-lg text-ink/80">
-            Lnclass réunit élèves, enseignants, parents et établissements sur une même plateforme&nbsp;:
-            cours, exercices, suivi des progrès et échanges, directement depuis le téléphone.
-          </p>
+          <p class="mt-6 max-w-lg text-lg text-ink/80"><%= t(".hero.lead") %></p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#rejoindre" class="rounded-full bg-ink px-6 py-3 font-medium text-white shadow-lg shadow-ink/20 hover:bg-ink/85">
-              Créer mon compte
-            </a>
-            <a href="#pour-qui" class="rounded-full border-2 border-ink px-6 py-3 font-medium hover:bg-ink hover:text-white">
-              Découvrir Lnclass
-            </a>
+            <%= ui_button t(".hero.create_account"), href: "#rejoindre", size: :lg, class: "shadow-lift" %>
+            <%= ui_button t(".hero.discover"), href: "#pour-qui", variant: :ghost, size: :lg,
+                  class: "border-2 border-ink hover:bg-ink hover:text-white" %>
           </div>
         </div>
 
         <div class="relative">
-          <div class="absolute -inset-3 translate-x-4 translate-y-4 rounded-3xl bg-ink" aria-hidden="true"></div>
-          <%= image_tag "homepage/student.png",
-                alt: "Deux élèves font leurs devoirs avec Lnclass sur leur téléphone",
-                class: "relative aspect-[4/3] w-full rounded-3xl object-cover object-[30%_50%]" %>
-          <div class="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl bg-white p-3 pr-5 shadow-xl sm:-left-8">
-            <%= image_tag "logo/teacher.jpg", alt: "", class: "size-11 rounded-xl" %>
+          <div class="absolute -inset-3 translate-x-4 translate-y-4 rounded-card bg-ink" aria-hidden="true"></div>
+          <%= image_tag "homepage/student.png", alt: t(".hero.image_alt"),
+                class: "relative aspect-4/3 w-full rounded-card object-cover object-hero" %>
+          <div class="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-card bg-white p-3 pr-5 shadow-pop sm:-left-8">
+            <%= image_tag "logo/teacher.jpg", alt: "", class: "size-11 rounded-ln" %>
             <div class="text-sm leading-tight">
-              <p class="font-bold">Nouveau devoir</p>
-              <p class="text-ink/60">Mathématiques · à rendre jeudi</p>
+              <p class="font-bold"><%= t(".hero.card_title") %></p>
+              <p class="text-ink/60"><%= t(".hero.card_meta") %></p>
             </div>
           </div>
         </div>
@@ -73,33 +64,25 @@
     <section id="pour-qui" class="scroll-mt-20 py-20 md:py-28">
       <div class="mx-auto max-w-6xl px-5">
         <div class="max-w-2xl">
-          <p class="text-sm font-bold tracking-widest text-brand uppercase">Pour qui ?</p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Un même arbre, quatre façons d'y grandir.
-          </h2>
-          <p class="mt-4 text-lg text-ink/70">
-            Chaque membre de la communauté scolaire a son espace, pensé pour ses besoins.
-          </p>
+          <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".audience.eyebrow") %></p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".audience.title") %></h2>
+          <p class="mt-4 text-lg text-ink/70"><%= t(".audience.lead") %></p>
         </div>
 
         <% roles = [
-          { logo: "logo/student.jpg", title: "Élèves", accent: "bg-brand",
-            text: "Révisez vos cours, entraînez-vous avec des exercices et suivez votre progression, à votre rythme." },
-          { logo: "logo/teacher.jpg", title: "Enseignants", accent: "bg-teacher",
-            text: "Publiez vos cours et devoirs, corrigez plus vite et gardez un œil sur chaque élève de vos classes." },
-          { logo: "logo/parent.jpg", title: "Parents", accent: "bg-brand",
-            text: "Suivez les notes, les devoirs et l'assiduité de vos enfants, et échangez facilement avec l'école." },
-          { logo: "logo/school.jpg", title: "Établissements", accent: "bg-school",
-            text: "Pilotez vos classes, vos enseignants et vos annonces depuis un seul tableau de bord." }
+          { key: :students, logo: "logo/student.jpg", accent: "bg-brand" },
+          { key: :teachers, logo: "logo/teacher.jpg", accent: "bg-teacher" },
+          { key: :parents, logo: "logo/parent.jpg", accent: "bg-brand" },
+          { key: :schools, logo: "logo/school.jpg", accent: "bg-school" }
         ] %>
 
         <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <% roles.each do |role| %>
-            <article class="group relative overflow-hidden rounded-3xl border border-ink/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-xl">
+            <article class="group relative overflow-hidden rounded-card border border-ink/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-pop">
               <div class="absolute inset-x-0 top-0 h-1.5 <%= role[:accent] %>"></div>
-              <%= image_tag role[:logo], alt: "", class: "size-16 rounded-2xl" %>
-              <h3 class="mt-5 font-display text-xl font-extrabold"><%= role[:title] %></h3>
-              <p class="mt-2 text-ink/70"><%= role[:text] %></p>
+              <%= image_tag role[:logo], alt: "", class: "size-16 rounded-card" %>
+              <h3 class="mt-5 font-display text-xl font-extrabold"><%= t(".audience.roles.#{role[:key]}.title") %></h3>
+              <p class="mt-2 text-ink/70"><%= t(".audience.roles.#{role[:key]}.text") %></p>
             </article>
           <% end %>
         </div>
@@ -109,33 +92,21 @@
     <%# ---------- Fonctionnalités ---------- %>
     <section id="fonctionnalites" class="scroll-mt-20 bg-ink py-20 text-white md:py-28">
       <div class="mx-auto max-w-6xl px-5">
-        <div class="grid gap-12 md:grid-cols-[1fr_1.4fr] md:gap-16">
-          <div>
-            <p class="text-sm font-bold tracking-widest text-brand uppercase">Fonctionnalités</p>
-            <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Tout ce qu'il faut pour apprendre, rien de superflu.
-            </h2>
-            <p class="mt-4 text-lg text-white/70">
-              Une application légère, conçue pour fonctionner sur tous les téléphones,
-              même avec une connexion modeste.
-            </p>
+        <div class="grid gap-12 md:grid-cols-5 md:gap-16">
+          <div class="md:col-span-2">
+            <p class="text-sm font-bold tracking-widest text-brand uppercase"><%= t(".features.eyebrow") %></p>
+            <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".features.title") %></h2>
+            <p class="mt-4 text-lg text-white/70"><%= t(".features.lead") %></p>
           </div>
 
-          <% features = [
-            { title: "Cours & exercices", text: "Des leçons claires et des exercices corrigés, classés par niveau et par matière." },
-            { title: "Suivi des progrès", text: "Notes, moyennes et points à travailler, visibles en un coup d'œil." },
-            { title: "Devoirs en ligne", text: "Les enseignants publient, les élèves rendent, les parents sont informés." },
-            { title: "Communication", text: "Annonces de l'établissement et messages entre familles et enseignants." }
-          ] %>
-
-          <dl class="grid gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2">
-            <% features.each_with_index do |feature, i| %>
+          <dl class="grid gap-px overflow-hidden rounded-card bg-white/10 sm:grid-cols-2 md:col-span-3">
+            <% %i[courses progress homework communication].each_with_index do |feature, i| %>
               <div class="bg-ink p-6">
                 <dt class="flex items-baseline gap-3">
                   <span class="font-display text-sm font-extrabold text-brand"><%= format("%02d", i + 1) %></span>
-                  <span class="font-display text-lg font-extrabold"><%= feature[:title] %></span>
+                  <span class="font-display text-lg font-extrabold"><%= t(".features.items.#{feature}.title") %></span>
                 </dt>
-                <dd class="mt-2 text-white/65"><%= feature[:text] %></dd>
+                <dd class="mt-2 text-white/65"><%= t(".features.items.#{feature}.text") %></dd>
               </div>
             <% end %>
           </dl>
@@ -147,24 +118,16 @@
     <section id="comment" class="scroll-mt-20 py-20 md:py-28">
       <div class="mx-auto max-w-6xl px-5">
         <div class="mx-auto max-w-2xl text-center">
-          <p class="text-sm font-bold tracking-widest text-brand uppercase">Comment ça marche</p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Prêt en trois étapes.
-          </h2>
+          <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".how.eyebrow") %></p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".how.title") %></h2>
         </div>
 
-        <% steps = [
-          { title: "Créez votre compte", text: "Choisissez votre profil : élève, enseignant, parent ou établissement." },
-          { title: "Rejoignez votre classe", text: "Rattachez-vous à votre établissement et à vos classes en quelques secondes." },
-          { title: "Apprenez et suivez", text: "Cours, devoirs, notes et messages : tout est au même endroit." }
-        ] %>
-
         <ol class="mt-14 grid gap-8 md:grid-cols-3">
-          <% steps.each_with_index do |step, i| %>
-            <li class="relative rounded-3xl bg-brand-soft p-7">
+          <% %i[account classroom learn].each_with_index do |step, i| %>
+            <li class="relative rounded-card bg-brand-soft p-6">
               <span class="grid size-12 place-items-center rounded-full bg-ink font-display text-lg font-extrabold text-white"><%= i + 1 %></span>
-              <h3 class="mt-5 font-display text-xl font-extrabold"><%= step[:title] %></h3>
-              <p class="mt-2 text-ink/70"><%= step[:text] %></p>
+              <h3 class="mt-5 font-display text-xl font-extrabold"><%= t(".how.steps.#{step}.title") %></h3>
+              <p class="mt-2 text-ink/70"><%= t(".how.steps.#{step}.text") %></p>
             </li>
           <% end %>
         </ol>
@@ -173,19 +136,15 @@
 
     <%# ---------- Appel à l'action ---------- %>
     <section id="rejoindre" class="scroll-mt-20 px-5 pb-20 md:pb-28">
-      <div class="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-brand px-6 py-14 sm:px-12 md:py-20">
+      <div class="relative mx-auto max-w-6xl overflow-hidden rounded-sheet bg-brand px-6 py-14 sm:px-12 md:py-20">
         <%= image_tag "logo/lnclass.jpeg", alt: "",
-              class: "pointer-events-none absolute -right-16 -bottom-20 w-80 opacity-90 mix-blend-multiply md:w-[26rem]" %>
+              class: "pointer-events-none absolute -right-16 -bottom-20 w-80 opacity-90 mix-blend-multiply md:w-104" %>
         <div class="relative max-w-xl">
-          <h2 class="font-display text-3xl font-extrabold tracking-tight sm:text-5xl">
-            Plantez la graine aujourd'hui.
-          </h2>
-          <p class="mt-4 text-lg text-ink/80">
-            Rejoignez Lnclass et donnez à chaque élève les moyens de réussir.
-          </p>
+          <h2 class="font-display text-3xl font-extrabold tracking-tight sm:text-5xl"><%= t(".join.title") %></h2>
+          <p class="mt-4 text-lg text-ink/80"><%= t(".join.lead") %></p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <button type="button" class="cursor-pointer rounded-full bg-ink px-6 py-3 font-medium text-white hover:bg-ink/85">Créer mon compte</button>
-            <button type="button" class="cursor-pointer rounded-full bg-white px-6 py-3 font-medium hover:bg-white/80">Inscrire mon établissement</button>
+            <%= ui_button t(".join.create_account"), size: :lg %>
+            <%= ui_button t(".join.register_school"), variant: :secondary, size: :lg, class: "border-transparent" %>
           </div>
         </div>
       </div>
@@ -196,14 +155,14 @@
   <footer class="border-t border-ink/10">
     <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-ink/60 sm:flex-row">
       <div class="flex items-center gap-2">
-        <%= image_tag "lnclass/lnclass.png", alt: "", class: "size-6 rounded-md" %>
+        <%= image_tag "lnclass/lnclass.png", alt: "", class: "size-6 rounded-sm" %>
         <span class="font-display font-extrabold text-ink">Lnclass</span>
         <span>© <%= Date.current.year %></span>
       </div>
       <ul class="flex gap-6">
-        <li><a href="#pour-qui" class="hover:text-ink">Pour qui ?</a></li>
-        <li><a href="#fonctionnalites" class="hover:text-ink">Fonctionnalités</a></li>
-        <li><a href="#rejoindre" class="hover:text-ink">Contact</a></li>
+        <li><a href="#pour-qui" class="hover:text-ink"><%= t(".nav.audience") %></a></li>
+        <li><a href="#fonctionnalites" class="hover:text-ink"><%= t(".nav.features") %></a></li>
+        <li><a href="#rejoindre" class="hover:text-ink"><%= t(".nav.contact") %></a></li>
       </ul>
     </div>
   </footer>

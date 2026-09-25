@@ -1,0 +1,6 @@
+<%# 🌐 UI · design/shell — aperçu du shell et de l'accueil d'un rôle %>
+<%# Rôle : rend layouts/shell avec un utilisateur fictif du rôle demandé %>
+<%# UDR  : 0006 %>
+<% content_for :title, t(".title", role: t("shared.roles.#{@role}")) %>
+<% content_for :nav_key, "home" %>
+<%= render "shared/home/skeleton", user: shell_user %>

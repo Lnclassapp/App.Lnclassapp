@@ -1,24 +1,28 @@
-# Run using bin/ci
+# Run using bin/ci — locally and on GitHub (.github/workflows/ci.yml runs this very file).
+# One list of steps, one place: bin/ci and the GitHub workflow never diverge.
+# Order: cheapest and most fundamental first (feuille-de-route §2, garde-fou n° 4).
 
 CI.run do
   step "Setup", "bin/setup --skip-server"
 
+  # Golden rules, pure Ruby, no Rails boot (CLAUDE.md, conventions.md §5 and §7, ADR-0024).
+  step "Guard: Domain purity", "ruby -Itest test/domain/domain_purity_test.rb"
+  step "Guard: HITL headers, no :nocov:, worker in Puma", "ruby -Itest test/guards/repository_rules_test.rb"
+
   step "Style: Ruby", "bin/rubocop"
 
   step "Security: Gem audit", "bin/bundler-audit"
-  step "Security: Yarn vulnerability audit", "yarn audit"
+  step "Security: Yarn vulnerability audit", "yarn npm audit --all --recursive"
   step "Security: Brakeman code analysis", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
-  step "Tests: Rails", "bin/rails test"
+
+  # Full suite: SimpleCov fails the step below 100 % lines or branches (ADR-0024).
+  step "Tests: Rails (coverage 100 % lines and branches)", "bin/rails test"
+
+  # Real browser, never rack_test (configuration.md §4.3). Partial run: no threshold (§4.1).
+  step "Tests: System (headless Chrome)", "bin/check-chrome && env COVERAGE=0 bin/rails test:system"
+
   step "Tests: Seeds", "env RAILS_ENV=test bin/rails db:seed:replant"
 
-  # Optional: Run system tests
-  # step "Tests: System", "bin/rails test:system"
-
-  # Optional: set a green GitHub commit status to unblock PR merge.
-  # Requires the `gh` CLI and `gh extension install basecamp/gh-signoff`.
-  # if success?
-  #   step "Signoff: All systems go. Ready for merge and deploy.", "gh signoff"
-  # else
-  #   failure "Signoff: CI failed. Do not merge or deploy.", "Fix the issues and try again."
-  # end
+  # ADR-0051 : gzip ceilings, on freshly compiled assets.
+  step "Assets: Budget", "yarn build && yarn build:css && bin/check-asset-budget"
 end

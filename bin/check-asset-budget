@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# bin/check-asset-budget — ADR-0051 : gzip ceilings of the common JS entry point and of the CSS.
+# Run by bin/ci after `yarn build` and `yarn build:css`. Raising a ceiling takes a new ADR, not an edit here.
+require "zlib"
+
+Dir.chdir(File.expand_path("..", __dir__))
+
+BUDGET = { "app/assets/builds/application.js" => 60, "app/assets/builds/application.css" => 30 }.freeze
+
+def gzip_kb(path) = Zlib.gzip(File.binread(path), level: Zlib::BEST_COMPRESSION).bytesize / 1024.0
+
+missing = BUDGET.keys.reject { |path| File.exist?(path) }
+abort "ADR-0051 : compile d'abord les assets (yarn build && yarn build:css) — absent : #{missing.join(', ')}" if missing.any?
+
+over = BUDGET.filter_map do |path, limit_kb|
+  size_kb = gzip_kb(path)
+  puts format("%-40s %6.1f Ko gzip / %d Ko", path, size_kb, limit_kb)
+  path if size_kb > limit_kb
+end
+
+Dir["app/assets/builds/*.digested.js"].each { |chunk| puts format("%-40s %6.1f Ko gzip (à la demande)", chunk, gzip_kb(chunk)) }
+
+abort "ADR-0051 : budget dépassé pour #{over.join(', ')}" if over.any?
