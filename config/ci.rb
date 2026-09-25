@@ -23,6 +23,9 @@ CI.run do
 
   step "Tests: Seeds", "env RAILS_ENV=test bin/rails db:seed:replant"
 
+  # ADR-0039 : bulk imports under 2 minutes. Skipped by `bin/rails test` without PERF.
+  step "Tests: Import performance", "env PERF=1 COVERAGE=0 bin/rails test test/performance"
+
   # ADR-0051 : gzip ceilings, on freshly compiled assets.
   step "Assets: Budget", "yarn build && yarn build:css && bin/check-asset-budget"
 end
