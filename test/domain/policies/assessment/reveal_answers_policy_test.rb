@@ -17,8 +17,15 @@ module Policies
         assert RevealAnswersPolicy.new.call(actor: Entities::Identity::Actor.new(user_id: 1, role: :team)).success?
       end
 
-      test "l'enseignant ne voit jamais les bonnes réponses" do
-        assert_equal :forbidden, call(:teacher).code
+      test "l'enseignant voit toujours les bonnes réponses, hors session" do
+        assert RevealAnswersPolicy.new.call(actor: Entities::Identity::Actor.new(user_id: 1, role: :teacher)).success?
+      end
+
+      test "l'élève ne voit pas la correction d'une question non tentée, même hors session" do
+        assert_equal :forbidden, RevealAnswersPolicy.new.call(actor: Entities::Identity::Actor.new(user_id: 1, role: :student)).code
+      end
+
+      test "la direction et le visiteur ne voient jamais les bonnes réponses" do
         assert_equal :forbidden, call(:school_admin).code
         assert_equal :forbidden, call(nil).code
       end
