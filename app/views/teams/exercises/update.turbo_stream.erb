@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/exercises/update — succès de la modification d'un exercice %>
+<%# Rôle : toast ; la page hôte (fiche essentielle ou exercice, autres lots) est rafraîchie par morphing %>
+<%# ADR  : 0036 · UDR : 0006, 0017 · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
+<%= turbo_stream_toast t(".updated", title: @exercise.title), type: :success %>
+<%= turbo_stream.refresh(request_id: nil) %>

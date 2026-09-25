@@ -1,0 +1,25 @@
+<%# 🌐 UI · teams/exercises/_answer_fields — une proposition : son texte et la case « Proposition correcte » %>
+<%# Rôle : rendue par fields_for, ou clonée depuis <template> ; « Retirer » l'ôte du formulaire, sans requête %>
+<%# ADR  : 0054 · UDR : 0007, 0017 · Stimulus : teams--nested-form %>
+<% error = form.object.errors[:content].first %>
+<div data-nested-answer class="relative space-y-1">
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <%= form.label :content, t(".placeholder"), class: "sr-only" %>
+    <%= form.text_field :content, required: true, maxlength: Dtos::Assessment::AnswerInput::CONTENT_MAX,
+                                  placeholder: t(".placeholder"), autocomplete: "off",
+                                  "aria-invalid": ("true" if error), "aria-describedby": ("#{form.field_id(:content)}_error" if error),
+                                  class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap min-w-0 flex-1 basis-56",
+                                                     ComponentsHelper::FIELD_STATES[error ? :invalid : :valid]) %>
+    <label class="flex min-h-tap shrink-0 cursor-pointer items-center gap-2 text-sm font-medium text-ink">
+      <%= form.check_box :correct, class: ComponentsHelper::FIELD_CHECKBOX %>
+      <%= t(".correct") %>
+    </label>
+    <%= ui_button variant: :ghost, size: :sm, icon: "x-mark", "aria-label": t(".remove"),
+                  data: { action: "teams--nested-form#remove" } %>
+  </div>
+  <% if error %>
+    <p id="<%= form.field_id(:content) %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+    </p>
+  <% end %>
+</div>
