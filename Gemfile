@@ -18,7 +18,14 @@ gem "stimulus-rails"
 gem "cssbundling-rails"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
+
+# TOTP second factor for the team, QR code rendered as inline SVG (ADR-0031)
+gem "rotp", "~> 6.3"
+gem "rqrcode", "~> 2.2"
+
+# JSON Schema validation of bulk imports (ADR-0039)
+gem "json_schemer", "~> 2.3"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -77,9 +84,6 @@ group :test do
   # Coverage: 100 % lines and branches, blocking (ADR-0024)
   gem "simplecov", require: false
 end
-
-############### URL and SLUGS ###########
-gem "friendly_id", "~> 5.7"
 
 # json 3.x n'accepte plus de hash positionnel dans JSON.parse, ce qui casse
 # ActiveSupport::JSON.decode (lecture des cookies de session) en Rails 8.1

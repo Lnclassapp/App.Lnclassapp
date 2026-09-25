@@ -29,6 +29,10 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 
+# Every helper of test/support includes itself (plan boucle-pedagogique §0a.5): a lot adds
+# its own without touching this file. Test files living there are run, never required.
+Dir[File.expand_path("support/**/*.rb", __dir__)].sort.reject { it.end_with?("_test.rb") }.each { require it }
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers
@@ -36,6 +40,9 @@ module ActiveSupport
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
+
+    # rate_limit counts in the cache (ADR-0050): no count may leak from one test to the next.
+    setup { Rails.cache.clear }
 
     # Add more helper methods to be used by all tests here...
   end

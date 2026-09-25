@@ -1,7 +1,8 @@
 require_relative "boot"
 
-# rails/all without Action Text: Trix and rich text are out of the common
-# bundle (ADR-0051) and no screen uses them yet.
+# rails/all, listed out. Action Text is back for course and essential content (owner's
+# decision); Trix stays out of the common bundle (ADR-0051): the rich-text-editor
+# controller loads it on demand.
 require "rails"
 require "active_record/railtie"
 require "active_storage/engine"
@@ -11,6 +12,7 @@ require "action_mailer/railtie"
 require "active_job/railtie"
 require "action_cable/engine"
 require "action_mailbox/engine"
+require "action_text/engine"
 require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -32,7 +34,8 @@ module AppLnclassapp
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    # Côte d'Ivoire: UTC+0 all year, no daylight saving time.
+    config.time_zone = "Africa/Abidjan"
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Interface in French, code in English. One locale file per context and screen:

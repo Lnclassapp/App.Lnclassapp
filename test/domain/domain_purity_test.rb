@@ -6,7 +6,7 @@ require "tmpdir"
 # Golden rule 1 (CLAUDE.md, ADR-0001): the domain never reaches the infrastructure.
 class DomainPurityTest < Minitest::Test
   ROOT = File.expand_path("../..", __dir__)
-  FORBIDDEN = /\b(ActiveRecord|ApplicationRecord|Orm::|Repositories::|Queries::)/
+  FORBIDDEN = /\b(ActiveRecord|ApplicationRecord|Orm::|Repositories::|Queries::|ActiveStorage|ActionController|ActionDispatch)/
 
   def self.offenses_in(files)
     files.flat_map do |file|
@@ -23,7 +23,8 @@ class DomainPurityTest < Minitest::Test
 
     assert_empty offenses, <<~MSG
       app/domain/ doit rester du Ruby pur : ni ActiveRecord, ni ApplicationRecord, ni Orm::,
-      ni Repositories::, ni Queries::. Passe par un port (app/domain/ports/).
+      ni Repositories::, ni Queries::, ni ActiveStorage, ActionController ou ActionDispatch.
+      Passe par un port (app/domain/ports/).
       #{offenses.join("\n")}
     MSG
   end
@@ -38,9 +39,12 @@ class DomainPurityTest < Minitest::Test
         ApplicationRecord
         Repositories::Catalog::CourseRepository.new
         Queries::School::EngagementQuery.new
+        ActiveStorage::Blob.find(1)
+        ActionController::Parameters.new
+        ActionDispatch::Http::UploadedFile
       RUBY
 
-      assert_equal 5, self.class.offenses_in([ dirty ]).size
+      assert_equal 8, self.class.offenses_in([ dirty ]).size
     end
   end
 end
