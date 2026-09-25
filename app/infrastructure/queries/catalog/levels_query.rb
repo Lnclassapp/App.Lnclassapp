@@ -1,10 +1,14 @@
 # 🔌 INFRA · Queries::Catalog::LevelsQuery
-# Rôle : niveaux de l'écran de l'équipe, par position, avec leurs séries et ce qui les utilise (classes, cours)
-# ADR  : 0026, 0034, 0036
+# Rôle : niveaux de l'écran de l'équipe, par position : séries, usage (classes, cours), présence dans la génération des classes
+# ADR  : 0026, 0030, 0034, 0036
 module Queries
   module Catalog
     class LevelsQuery
-      Row = Data.define(:slug, :name, :position, :cycle, :series_names, :classrooms_count, :courses_count)
+      Row = Data.define(:slug, :name, :position, :cycle, :series_names, :classrooms_count, :courses_count,
+                        :generates_classrooms)
+
+      # Codes reconnus par la génération des classes (ADR-0030) : les clés du plan, barèmes public et privé réunis.
+      GENERATED_SLUGS = Entities::Classroom::DefaultClassroomPlan::PLAN.values.flat_map(&:keys).uniq.freeze
 
       def call = rows(Orm::Level.all)
 
@@ -23,7 +27,8 @@ module Queries
 
         levels.map do |id, slug, name, position, cycle|
           Row.new(slug:, name:, position:, cycle:, series_names: series.fetch(id, []),
-                  classrooms_count: classrooms.fetch(id, 0), courses_count: courses.fetch(id, 0))
+                  classrooms_count: classrooms.fetch(id, 0), courses_count: courses.fetch(id, 0),
+                  generates_classrooms: GENERATED_SLUGS.include?(slug))
         end
       end
 

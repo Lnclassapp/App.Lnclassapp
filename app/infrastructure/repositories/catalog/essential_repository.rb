@@ -7,7 +7,8 @@ module Repositories
       include Ports::Catalog::EssentialRepositoryPort
 
       def find_by_slug(slug:)
-        record = Orm::Essential.with_rich_text_content.includes(:course).find_by(slug:)
+        # A single record: no eager loading, which Bullet reports as unused (lot B2). Rich text and course cost one query each.
+        record = Orm::Essential.find_by(slug:)
         record && map_to_entity(record)
       end
 

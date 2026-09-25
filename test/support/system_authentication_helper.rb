@@ -3,8 +3,8 @@
 module SystemAuthenticationHelper
   ActionDispatch::SystemTestCase.include(self)
 
-  # bcrypt, then the first render of the arrival page: under a loaded full suite, more than Capybara's 2 s.
-  SIGN_IN_WAIT = 10
+  # bcrypt, then the first render of the arrival page: under a loaded full suite (4 lots in parallel), up to 10 s and more.
+  SIGN_IN_WAIT = 20
 
   def sign_in_as(user, pin: "2468")
     visit new_session_path
