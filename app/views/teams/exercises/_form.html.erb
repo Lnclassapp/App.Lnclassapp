@@ -61,7 +61,7 @@
           <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= input.errors[:questions].to_sentence %>
         </p>
       <% end %>
-      <div data-teams--nested-form-target="list" class="space-y-4 [counter-reset:question]">
+      <div data-teams--nested-form-target="list" class="space-y-4 counter-questions">
         <%= form.fields_for :questions do |question_form| %>
           <%= render "question_fields", form: question_form, errors: input.errors[:"questions[#{question_form.index}]"] %>
         <% end %>

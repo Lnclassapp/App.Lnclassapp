@@ -1,9 +1,9 @@
 <%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : énoncé, type, explication, propositions %>
 <%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form %>
 <%# ADR  : 0054 · UDR : 0007, 0017 · Stimulus : teams--nested-form (errors : structure de la question, « questions[i] ») %>
-<fieldset data-nested-question class="relative rounded-card border border-line bg-white p-4 [counter-increment:question]">
+<fieldset data-nested-question class="relative rounded-card border border-line bg-white p-4 counter-question">
   <legend class="float-left w-full pr-14 font-medium text-ink">
-    <%= t(".legend") %> <span class="before:content-[counter(question)]"></span>
+    <%= t(".legend") %> <span class="question-number"></span>
   </legend>
   <%= ui_button variant: :ghost, size: :sm, icon: "trash", "aria-label": t(".remove"), class: "absolute! top-3 right-3",
                 data: { action: "teams--nested-form#remove" } %>
