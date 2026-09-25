@@ -89,3 +89,4 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 
 - **`schools_path` devient actif en V1.** Les établissements entrent dans le périmètre de la V1 (ADR-0030, ADR-0034) : le lot S2 de la boucle pédagogique livre leur liste. L'entrée « Établissements » de la navigation `team` est donc active.
 - En V1, seules `team_dashboard_path` et `profile_path` restent inactives.
+- **Entrée « Imports » (`teams_imports_path`, icône `arrow-up-tray`) ajoutée à la navigation `team`**, entre « Établissements » et « Pilotage », par l'étape e4 du Lot 0e (ADR-0039). La navigation `team` compte maintenant **5 destinations**, le maximum de la règle du §4 : toute destination de plus pour ce rôle exige une nouvelle UDR.
