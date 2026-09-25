@@ -1642,7 +1642,7 @@ Chaque lot vertical :
   - `app/domain/use_cases/assessment/close_exercise_session.rb`
     - `correct_count` recalculé depuis les tentatives ; `Grading.score_percent` ; `complete` ; badge par `Grading.badge_for` et `upgrade?` (ADR-0033 : Bronze 50, Argent 70, Or 80, Diamant 100) ; lacune par `GapDecision` (ADR-0043) : `open`, `increment` ou `resolve`. Renvoie `Row(score_percent, badge_level, earned_now)`.
   - `app/infrastructure/queries/assessment/session_play_query.rb`
-    - `Row(session_public_id, exercise_title, answered_count, question_count, progress_percent, next_question:, last_feedback:)`. `next_question` : première question sans tentative ; propositions **sans** `correct`, mélangées de façon stable (`Random.new(session_id ^ question_id)`). `last_feedback` : la question qui vient d'être tentée, avec ses propositions correctes et son explication (`RevealAnswersPolicy` : question tentée).
+    - `Row(session_public_id, exercise_title, answered_count, question_count, progress_percent, next_question:, last_feedback:)`. `next_question` : première question sans tentative ; propositions **sans** `correct`, mélangées de façon stable (`Random.new(session_id ^ question_id)`). `last_feedback` : la question qui vient d'être tentée, avec le verdict (`question_attempts.correct`), les propositions choisies par l'élève et l'explication ; jamais `answers.correct` (décision du porteur du 2026-09-25 : l'élève ne voit jamais les bonnes réponses, `RevealAnswersPolicy` le refuse toujours).
   - `app/controllers/assessment/exercise_sessions_controller.rb`
     - `allow_roles :student`. `create` → `show`. `show` d'une session `completed` → `exercise_session_result_path`.
   - `app/controllers/assessment/question_attempts_controller.rb`
@@ -1652,7 +1652,7 @@ Chaque lot vertical :
   - `app/views/assessment/exercise_sessions/_question_card.html.erb`
     - Radios pour `true_false` et `single_choice` ; cases à cocher avec « Plusieurs propositions correctes » pour `multiple_*`. KaTeX.
   - `app/views/assessment/exercise_sessions/_feedback_card.html.erb`
-    - « Bonne réponse » ou « Mauvaise réponse », les propositions correctes, l'explication, puis « Question suivante » (recharge le frame `question`) ou « Voir mon résultat ».
+    - « Bonne réponse » ou « Mauvaise réponse », les propositions choisies, l'explication, puis « Question suivante » (recharge le frame `question`) ou « Voir mon résultat ».
   - `app/views/assessment/exercise_sessions/_progress_bar.html.erb`
   - `app/views/assessment/question_attempts/create.turbo_stream.erb`
     - `replace "question"` par la correction, `replace "progress_bar"`.
@@ -1690,7 +1690,7 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui (Stimulus)
 - **Fichiers**     :
   - `app/infrastructure/queries/assessment/session_result_query.rb`
-    - `Row(exercise, essential, score_percent, grade_on_20, correct_count, question_count, mastery, badge_level, earned_now, review:)`. `review` : pour chaque question, les propositions choisies et correctes, et l'explication. Le contrôleur applique `ReadSessionPolicy`, puis `RevealAnswersPolicy` : **l'enseignant voit le score, la note et la revue complète, propositions correctes comprises** (décision du porteur du 2026-09-25, amendement de l'ADR-0028). La session étant close, l'élève propriétaire voit lui aussi sa revue : toutes ses questions sont tentées.
+    - `Row(exercise, essential, score_percent, grade_on_20, correct_count, question_count, mastery, badge_level, earned_now, review:)`. `review` : pour chaque question, les propositions choisies et correctes, et l'explication. Le contrôleur applique `ReadSessionPolicy`, puis `RevealAnswersPolicy` : **l'enseignant voit le score, la note et la revue complète, propositions correctes comprises** (décision du porteur du 2026-09-25, amendement de l'ADR-0028). L'élève propriétaire voit sa revue **sans** les propositions correctes : ses choix, le verdict de chaque question et l'explication (même décision du porteur).
   - `app/controllers/assessment/session_results_controller.rb`
     - `show`, pour student, teacher et team. Session absente : 404 ; refus : 403 ; session non terminée : retour à la session.
   - `app/views/assessment/session_results/show.html.erb`
@@ -2678,5 +2678,5 @@ Porte **de vague**, issue de la [feuille de route §5 V1](../refonte-application
 3. Il importe lui-même un fichier réel de l'ancienne application (enveloppé) et un fichier de 500 écoles, et **chronomètre** : moins de 2 min, sinon la porte ne passe pas. Il fait de même avec 200 cours complets.
 4. Il importe un fichier **mixte** qu'il a lui-même préparé (valides, invalides, doublons) : le rapport doit être exact au compteur près, chaque erreur à son chemin JSON, et seuls les éléments valides doivent être en base. Un fichier à la version 2 doit être rejeté en bloc.
 5. Il rejoue au moins ces chemins d'erreur : 6e échec de connexion ; réponse vide ; double soumission ; enseignant hors de sa classe ; brouillon ouvert par son URL ; PIN oublié ; classe pleine ; second import du même type pendant qu'un premier tourne.
-6. Il vérifie le HTML servi à l'élève et à l'enseignant avec les outils du navigateur : aucune proposition correcte servie à l'élève hors de sa correction, les propositions correctes bien visibles pour l'enseignant, et le code de la classe affiché à l'élève sans liste nominative.
+6. Il vérifie le HTML servi à l'élève et à l'enseignant avec les outils du navigateur : aucune proposition correcte servie à l'élève, même après sa correction, les propositions correctes bien visibles pour l'enseignant, et le code de la classe affiché à l'élève sans liste nominative.
 7. Il consigne dans `journal.md` ce qu'il a fait, observé et mesuré.
