@@ -30,7 +30,9 @@ module UseCases
 
       private
 
+      # Une invitation expirée, jamais acceptée, occupe encore l'index partiel : révoquée, elle libère le numéro.
       def invite(actor, dto, token, now)
+        @invitations.revoke_expired(kind: KIND, contact: dto.contact, at: now)
         created = @invitations.create(kind: KIND, contact: dto.contact, team_role: dto.team_role, invited_by_id: actor.user_id,
                                       token_digest: Entities::Identity::SecretDigest.hmac(token, key: @digest_key),
                                       expires_at: now + Entities::Identity::Invitation::TTL)

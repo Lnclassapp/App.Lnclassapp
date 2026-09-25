@@ -101,6 +101,17 @@ class Teams::InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#invitation_contact_error", "Une invitation attend déjà ce numéro."
   end
 
+  test "an expired invitation never accepted is revoked and the number invited again" do
+    expired = create_invitation(contact: "0100000009", expires_at: 1.minute.ago)
+    sign_in_as @admin
+
+    post teams_invitations_path, params: invitation_params, as: :turbo_stream
+
+    assert_response :success
+    assert_not_nil expired.reload.revoked_at
+    assert_equal 1, Orm::Invitation.where(contact: "0100000009", revoked_at: nil).count
+  end
+
   test "without Turbo, the link is rendered in the page, never in a flash" do
     sign_in_as @admin
 

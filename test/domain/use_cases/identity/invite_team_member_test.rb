@@ -9,19 +9,28 @@ module UseCases
       Clock = Data.define(:now)
       ADMIN = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "admin")
 
-      # Like the partial unique index: a number that already waits for an invitation is a conflict.
+      # Like the partial unique index: a number that already waits for an invitation is a conflict, until the expired
+      # one is revoked. Pending invitations are { contact => expires_at }.
       class FakeInvitations
         include Ports::Identity::InvitationRepositoryPort
 
-        attr_reader :created
+        attr_reader :created, :revocations
 
-        def initialize(pending: [])
-          @pending = pending
+        def initialize(pending: {})
+          @pending = pending.dup
           @created = []
+          @revocations = []
+        end
+
+        def revoke_expired(kind:, contact:, at:)
+          @revocations << { kind:, contact:, at: }
+          expired = @pending.select { |pending_contact, expires_at| pending_contact == contact && expires_at <= at }
+          expired.each_key { @pending.delete(it) }
+          expired.size
         end
 
         def create(kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:, school_id: nil, position: nil)
-          return Shared::Result.failure(:conflict, errors: { contact: [ :already_invited ] }) if @pending.include?(contact)
+          return Shared::Result.failure(:conflict, errors: { contact: [ :already_invited ] }) if @pending.key?(contact)
 
           @created << { kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:, school_id:, position: }
           Shared::Result.success(Entities::Identity::Invitation.new(id: 31, kind:, contact:, team_role:, invited_by_id:, expires_at:))
@@ -50,7 +59,7 @@ module UseCases
         def record(**event) = (@events ||= []) << event
       end
 
-      def invite(contact: "07 00 00 00 09", team_role: "content", actor: ADMIN, pending: [], accounts: [])
+      def invite(contact: "07 00 00 00 09", team_role: "content", actor: ADMIN, pending: {}, accounts: [])
         @invitations = FakeInvitations.new(pending:)
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
@@ -112,12 +121,20 @@ module UseCases
         assert_empty @invitations.created
       end
 
-      test "a number that already waits for an invitation is a conflict, without audit" do
-        result = invite(pending: [ "0700000009" ])
+      test "a number that already waits for a valid invitation is a conflict, without audit" do
+        result = invite(pending: { "0700000009" => NOW + 1.second })
 
         assert_equal :conflict, result.code
         assert_equal({ contact: [ :already_invited ] }, result.errors)
         assert_nil @audit.events
+      end
+
+      test "an expired invitation never accepted is revoked first and no longer blocks a new one" do
+        result = invite(pending: { "0700000009" => NOW })
+
+        assert result.success?
+        assert_equal [ { kind: "team", contact: "0700000009", at: NOW } ], @invitations.revocations
+        assert_equal [ "0700000009" ], @invitations.created.map { it[:contact] }
       end
 
       test "the typed number is kept for the form" do

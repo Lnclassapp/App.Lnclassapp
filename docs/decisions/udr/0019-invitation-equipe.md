@@ -56,7 +56,7 @@ Deux frictions sont à éviter :
 - Erreur :
   - numéro hors format : « Saisissez un numéro ivoirien à 10 chiffres, par exemple 01 02 03 04 05. » ;
   - numéro qui a déjà un compte : « Ce numéro a déjà un compte Lnclass. » ;
-  - invitation en attente : « Une invitation attend déjà ce numéro. » ;
+  - invitation encore valable pour ce numéro : « Une invitation attend déjà ce numéro. ». Une invitation expirée jamais acceptée ne bloque pas : elle est révoquée, puis la nouvelle est créée ;
   - rôle absent : « Choisissez le rôle de la personne invitée. ».
 - Acceptation : chaque message sous son champ, sauf « numéro devenu un compte », qui s'affiche en tête dans le bloc `role="alert"`.
 - Succès : le lien dans la modale ; à l'acceptation, le toast sur « Se connecter ».
