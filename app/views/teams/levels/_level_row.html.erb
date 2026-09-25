@@ -1,9 +1,19 @@
 <%# 🌐 UI · teams/levels/_level_row — une ligne du tableau des niveaux, identifiée par le slug %>
-<%# Rôle : nom, code figé, position, cycle, séries, usage ; « Modifier » en modale, « Supprimer » confirmé dans la page %>
+<%# Rôle : nom (badge si hors génération des classes), code figé, position, cycle, séries, usage ; « Modifier » en modale, « Supprimer » confirmé dans la page %>
 <%# ADR  : 0029, 0036 · UDR : 0006, 0032 · Stimulus : modal %>
 <% delete_id = "delete-level-#{level.slug}" %>
 <tr id="<%= level_dom_id(level.slug) %>" class="align-middle">
-  <td class="px-4 py-3 font-medium whitespace-nowrap text-ink"><%= level.name %></td>
+  <td class="px-4 py-3 font-medium whitespace-nowrap text-ink">
+    <span class="flex items-center gap-2">
+      <%= level.name %>
+      <% unless level.generates_classrooms %>
+        <span data-generation="outside" title="<%= t(".outside_generation_hint") %>">
+          <%= ui_badge t(".outside_generation"), tone: :warning, size: :sm, icon: "exclamation-triangle" %>
+          <span class="sr-only"><%= t(".outside_generation_hint") %></span>
+        </span>
+      <% end %>
+    </span>
+  </td>
   <td class="px-4 py-3"><code class="font-mono text-xs text-mute"><%= level.slug %></code></td>
   <td class="px-4 py-3 tabular-nums"><%= level.position %></td>
   <td class="px-4 py-3 whitespace-nowrap"><%= t("teams.levels.cycles.#{level.cycle}") %></td>

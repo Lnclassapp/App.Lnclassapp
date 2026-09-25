@@ -1,0 +1,32 @@
+<%# 🌐 UI · teams/essentials/_form — nom, sous-titre et contenu d'une fiche essentielle, dans la modale %>
+<%# Rôle : éditeur riche Trix chargé à la demande, sans pièce jointe ; erreurs sous leur champ, valeurs saisies conservées %>
+<%# ADR  : 0035, 0047, 0051 · UDR : 0005, 0016 · Stimulus : rich-text-editor %>
+<%= form_with model: input, scope: :essential, url:, method:, id: "essential-form", class: "space-y-5" do |form| %>
+  <% if input.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= input.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%= ui_field form, :name, required: true, maxlength: Entities::Catalog::Essential::NAME_MAX, autocomplete: "off",
+                            placeholder: t(".name_placeholder"), hint: t(".name_hint") %>
+  <%= ui_field form, :subtitle, maxlength: Entities::Catalog::Essential::SUBTITLE_MAX, autocomplete: "off",
+                                placeholder: t(".subtitle_placeholder") %>
+  <% content_error = input.errors[:content].first %>
+  <div class="space-y-1.5">
+    <%= form.label :content, class: "block text-sm font-medium text-ink" %>
+    <div data-controller="rich-text-editor">
+      <%= form.rich_textarea :content,
+            "aria-describedby": [ "essential_content_hint", ("essential_content_error" if content_error) ].compact.join(" "),
+            "aria-invalid": ("true" if content_error),
+            class: class_names("trix-content block min-h-48 w-full rounded-ln border bg-white px-4 py-3 text-base text-ink",
+                               content_error ? "border-error" : "border-line") %>
+    </div>
+    <p id="essential_content_hint" class="text-sm text-mute"><%= t(".content_hint") %></p>
+    <% if content_error %>
+      <p id="essential_content_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= content_error %>
+      </p>
+    <% end %>
+  </div>
+<% end %>

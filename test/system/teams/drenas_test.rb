@@ -14,12 +14,6 @@ class Teams::DrenasTest < ApplicationSystemTestCase
     assert_current_path team_home_path
   end
 
-  # The toasts sit over the header actions, as for any user who has not closed them yet.
-  def dismiss_toasts
-    all("#toasts [data-action='toast#dismiss']").each(&:click)
-    assert_no_selector "#toasts [data-controller=toast]"
-  end
-
   def fill_drena_modal(name, submit:)
     within "turbo-frame#modal dialog[open]" do
       fill_in "drena[name]", with: name
@@ -48,7 +42,6 @@ class Teams::DrenasTest < ApplicationSystemTestCase
       assert_toast "DRENA « Abidjan 1 Plateau » modifiée."
       assert_selector "#drenas tr", count: 1, text: /Abidjan 1 Plateau\s+abidjan-1/
 
-      dismiss_toasts
       click_on "Nouvelle DRENA"
       fill_drena_modal("Abidjan 1 Plateau", submit: "Créer la DRENA")
 

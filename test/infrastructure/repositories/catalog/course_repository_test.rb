@@ -29,6 +29,17 @@ module Repositories
         assert_nil @repository.find_by_slug(slug: "inconnu")
       end
 
+      test "le contenu saisi est assaini à l'écriture, à la création comme à la modification" do
+        forged = %(<p onclick="x()">A<script>alert(1)</script></p><action-text-attachment sgid="x"></action-text-attachment>)
+        created = @repository.create(course: course(content: forged)).value
+
+        assert_equal "<p>A</p>", created.content
+        created.content = %(<a href="javascript:alert(1)">B</a>)
+        @repository.update(course: created)
+
+        assert_equal "<a>B</a>", @repository.find_by_slug(slug: created.slug).content
+      end
+
       test "garde le slug et le statut fournis ; un cours sans contenu se relit sans contenu" do
         created = @repository.create(course: course(slug: "genetique-tle-d", status: "published", content: nil)).value
 

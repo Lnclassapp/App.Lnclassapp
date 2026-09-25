@@ -29,7 +29,8 @@ module Entities
 
       test "borne nom et sigle, et exige une DRENA" do
         assert build(name: "a" * 151).invalid?
-        assert build(sigle: "a" * 16).invalid?
+        assert build(sigle: "a" * 20).valid?
+        assert build(sigle: "a" * 21).invalid?
         assert build(drena_id: nil).invalid?
       end
 

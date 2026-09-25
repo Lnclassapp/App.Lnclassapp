@@ -1,0 +1,51 @@
+<%# 🌐 UI · teams/schools/_school_row — un établissement de la liste nationale %>
+<%# Rôle : lien vers la fiche (hors du frame), « Modifier » en modale, désactivation et suppression confirmées dans la page ;
+         actions en icônes (libellé sr-only) pour que la ligne tienne sans défilement sur un écran de bureau %>
+<%# ADR  : 0030, 0036 · UDR : 0006, 0036 %>
+<tr id="school_<%= school.public_id %>" class="align-middle">
+  <td class="min-w-48 px-4 py-3">
+    <%= link_to school.name, school_path(school.public_id), data: { turbo_frame: "_top" },
+                class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+    <% if school.sigle %>
+      <span class="block text-xs text-mute"><%= school.sigle %></span>
+    <% end %>
+  </td>
+  <td class="px-4 py-3 whitespace-nowrap text-mute"><%= school.drena_name %></td>
+  <td class="px-4 py-3 whitespace-nowrap"><%= t("school_types.#{school.school_type}") %></td>
+  <td class="px-4 py-3"><%= t("teams.schools.cycles.#{school.cycle}") %></td>
+  <td class="px-4 py-3"><%= ui_badge t("school_statuses.#{school.status}"), tone: school_status_tone(school.status), size: :sm, dot: true %></td>
+  <td class="px-4 py-3 tabular-nums"><%= school.classrooms_count %></td>
+  <td class="px-4 py-3 tabular-nums"><%= school.teachers_count %></td>
+  <td class="px-4 py-3">
+    <div class="flex items-center justify-end gap-1">
+      <%= ui_button tag.span(t(".edit"), class: "sr-only"), href: edit_school_path(school.public_id), variant: :ghost,
+                    icon: "pencil-square", title: t(".edit"),
+                    data: { turbo_frame: "modal" }, "aria-label": t(".edit_label", name: school.name) %>
+      <% if school.status == "inactive" %>
+        <%# Place vide de la largeur d'un bouton icône : les icônes restent alignées d'une ligne à l'autre. %>
+        <span class="w-15 shrink-0" aria-hidden="true"></span>
+      <% else %>
+        <%= ui_modal title: t(".deactivate_title", name: school.name), id: "deactivate-school-#{school.public_id}", size: :sm,
+                     trigger: tag.span(t(".deactivate"), class: "sr-only"), trigger_variant: :ghost, trigger_icon: "no-symbol" do |modal| %>
+          <% modal.footer do %>
+            <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+            <%= ui_button t(".confirm_deactivate"), type: :submit, form: "deactivate-school-form-#{school.public_id}" %>
+          <% end %>
+          <%= form_with url: deactivate_school_path(school.public_id), method: :patch, id: "deactivate-school-form-#{school.public_id}" do %>
+            <p class="text-sm text-mute"><%= t(".deactivate_warning") %></p>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= ui_modal title: t(".delete_title", name: school.name), id: "delete-school-#{school.public_id}", size: :sm,
+                   trigger: tag.span(t(".delete"), class: "sr-only"), trigger_variant: :ghost, trigger_icon: "trash" do |modal| %>
+        <% modal.footer do %>
+          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+          <%= ui_button t(".confirm_delete"), type: :submit, variant: :danger, form: "delete-school-form-#{school.public_id}" %>
+        <% end %>
+        <%= form_with url: school_path(school.public_id), method: :delete, id: "delete-school-form-#{school.public_id}" do %>
+          <p class="text-sm text-mute"><%= t(".delete_warning") %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </td>
+</tr>

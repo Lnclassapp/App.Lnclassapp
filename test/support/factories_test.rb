@@ -7,7 +7,7 @@ class FactoriesTest < ActiveSupport::TestCase
     %i[create_user create_student create_teacher create_team_member create_invitation create_pin_recovery_code
        create_backup_code create_login_session create_login_attempt create_audit_event create_drena create_school
        create_classroom create_assignment create_level create_series link_level_series create_material create_course
-       create_essential create_import_report create_exercise create_session create_attempt create_badge create_gap].each do |factory|
+       create_essential create_import_report create_exercise create_exercise_session create_attempt create_badge create_gap].each do |factory|
       record = factory == :create_user ? create_user(role: "student") : public_send(factory)
 
       assert record.persisted?, factory
@@ -53,7 +53,7 @@ class FactoriesTest < ActiveSupport::TestCase
 
   test "an exercise has single choice questions, a completed session its score" do
     exercise = create_exercise(questions: 3)
-    session = create_session(exercise:, status: "completed", score_percent: 67)
+    session = create_exercise_session(exercise:, status: "completed", score_percent: 67)
     wrong = create_attempt(session:, correct: false)
 
     assert_equal [ 3, [ 1 ] * 3 ], [ exercise.questions.count, exercise.questions.map { |question| question.answers.count(&:correct) } ]
@@ -63,7 +63,7 @@ class FactoriesTest < ActiveSupport::TestCase
 
   test "a gap opens on a failed session and makes remediation sessions" do
     gap = create_gap
-    remediation = create_session(student: gap.student, exercise: gap.source_session.exercise, gap:)
+    remediation = create_exercise_session(student: gap.student, exercise: gap.source_session.exercise, gap:)
 
     assert_equal [ 40, "remediation" ], [ gap.source_session.score_percent, remediation.kind ]
     assert create_gap(status: "remediated").resolved_at

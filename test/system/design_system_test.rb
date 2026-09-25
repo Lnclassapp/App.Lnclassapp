@@ -83,12 +83,14 @@ class DesignSystemTest < ApplicationSystemTestCase
 
     assert_no_selector "#{dialog}[open]"
 
+    # Wait for the modal to be open before closing it: on a loaded machine, the key or the click came too early.
     click_on t("design.index.modal.open")
-    find(dialog).send_keys(:escape)
+    find("#{dialog}[open]").send_keys(:escape)
 
     assert_no_selector "#{dialog}[open]"
 
     click_on t("design.index.modal.open")
+    assert_selector "#{dialog}[open]"
     page.driver.browser.action.move_to_location(5, 5).click.perform
 
     assert_no_selector "#{dialog}[open]"
@@ -164,6 +166,17 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_no_selector "#toasts [data-toast-type=error]"
   end
 
+  # Lot B4: a stream that sends a toast and a refresh lost the toast, since the morph removed it from #toasts.
+  test "a toast sent with a refresh survives the morph of the page" do
+    find("button[data-stream=success]").click
+    assert_selector "#toasts [data-toast-type=success]"
+    execute_script("addEventListener('turbo:morph', () => document.body.dataset.morphed = 'yes', { once: true })")
+    execute_script("Turbo.renderStreamMessage('<turbo-stream action=\"refresh\"></turbo-stream>')")
+
+    assert_selector "body[data-morphed=yes]"
+    assert_selector "#toasts [data-toast-type=success]", text: t("components.toast.titles.success")
+  end
+
   # Lot S1: at the top, a toast covered the actions of the page header. On a desktop it now sits at the bottom;
   # on a phone it stays at the top, since the bottom bar holds the navigation.
   test "a toast never covers the page header on a desktop, and stays above the bottom bar on a phone" do
@@ -177,6 +190,24 @@ class DesignSystemTest < ApplicationSystemTestCase
     with_mobile_viewport do
       assert_operator toast_top.call, :<, evaluate_script("window.innerHeight / 2")
     end
+  end
+
+  # Lot B2: builds/trix.css sits in no layer and is linked inside the edit form, after application.css. It erased the
+  # rich text typography (`.trix-content * { margin: 0 }`) and brought back the file button that V1 refuses.
+  test "the rich text typography and the hidden file button win over trix.css, even when it comes last" do
+    page.evaluate_async_script(<<~JS, ActionController::Base.helpers.stylesheet_path("trix"))
+      const [href, done] = arguments
+      document.body.insertAdjacentHTML("beforeend", `
+        <div class="trix-content"><p id="rich-first">Un</p><ul id="rich-list"><li id="rich-item">Deux</li></ul></div>
+        <trix-toolbar><span class="trix-button-group" data-trix-button-group="file-tools" id="file-tools">Fichier</span></trix-toolbar>`)
+      const link = Object.assign(document.createElement("link"), { rel: "stylesheet", href, onload: () => done() })
+      document.body.append(link)
+    JS
+
+    assert_equal "none", css(find("#file-tools", visible: :all), "display")
+    assert_equal "24px", css(find("#rich-list"), "padding-left")
+    assert_equal "12px", css(find("#rich-list"), "margin-top")
+    assert_equal "0px", css(find("#rich-item"), "margin-left")
   end
 
   test "a toast survives a redirect through the flash, then leaves by itself" do

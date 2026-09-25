@@ -7,7 +7,8 @@ module Repositories
       include Ports::Catalog::CourseRepositoryPort
 
       def find_by_slug(slug:)
-        record = Orm::Course.with_rich_text_content.find_by(slug:)
+        # A single record: no eager loading, which Bullet reports as unused (lot B2). The rich text costs one query.
+        record = Orm::Course.find_by(slug:)
         record && map_to_entity(record)
       end
 
@@ -49,7 +50,7 @@ module Repositories
       private
 
       def editable_attributes(course)
-        { name: course.name, subtitle: course.subtitle, content: course.content }
+        { name: course.name, subtitle: course.subtitle, content: RichTextSanitizer.call(course.content) }
       end
 
       # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
@@ -60,7 +61,7 @@ module Repositories
         ::Shared::Result.failure(:conflict, errors: { name: [ :taken ] })
       end
 
-      # Le HTML brut du contenu riche : il est assaini au rendu par Action Text.
+      # Le HTML du contenu riche, assaini à l'écriture (RichTextSanitizer) puis de nouveau au rendu par Action Text.
       def map_to_entity(record)
         Entities::Catalog::Course.new(
           id: record.id, slug: record.slug, name: record.name, subtitle: record.subtitle, level_id: record.level_id,
