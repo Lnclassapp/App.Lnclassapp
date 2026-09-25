@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-25) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/refonte-application`](../../chantiers/refonte-application/) (Lot 0c, décision F-31) |
 | **ADR lié** | [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget de poids) · UDR-0005 (tokens et composants) |

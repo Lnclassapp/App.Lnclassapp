@@ -56,7 +56,7 @@ Le dépôt est amorcé quand **chacune** de ces lignes est vraie, et prouvée pa
 - [ ] `bin/setup` pose `git config core.hooksPath .githooks` et est idempotent
 - [ ] Le pre-commit refuse : un `Orm::`/`ActiveRecord` dans `app/domain/`, un fichier de `app/` sans en-tête HITL, un `# :nocov:`, une offense rubocop
 - [ ] La CI refuse : pureté du domaine, rubocop, tests, tests système (Chrome headless), brakeman, bundler-audit, couverture < 100 % lignes **et** branches ([ADR-0024](../decisions/adr/0024-couverture-de-tests-a-100-pourcent.md))
-- [ ] Les branches `Develop`, `Staging`, `main` existent et sont protégées (aucun push direct, PR obligatoire)
+- [ ] Les branches `Develop`, `Staging`, `main` existent et sont protégées (aucun push direct, PR obligatoire). Si l'offre GitHub ne permet pas la protection (dépôt privé en offre gratuite), l'écart est consigné au journal d'amorçage avec sa parade : hook pre-commit local, discipline des PR, passage vers `main` réservé au porteur
 - [ ] La production a `force_ssl`, une route `/up`, `:contact` dans `filter_parameters`, un stockage de fichiers persistant
 - [ ] Un test système « squelette » (page d'accueil) passe en CI — la chaîne entière est prouvée avant qu'on y mette du métier
 

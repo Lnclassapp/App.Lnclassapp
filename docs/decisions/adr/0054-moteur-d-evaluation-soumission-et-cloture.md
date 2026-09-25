@@ -114,3 +114,11 @@ end
 
 - « Recommencer » abandonne la session ouverte ; aucun job n'abandonne les sessions inactives.
 - Réponse stockée en tableau d'identifiants (`bigint[]`) plutôt qu'en `jsonb`.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`, décision du porteur du 2026-09-25. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Bonnes réponses** : la règle du §4 vaut pour **l'élève**. Aucune vue ne lui rend `answers.correct` pour une question qu'il n'a pas encore tentée dans sa session. L'enseignant et l'équipe voient les propositions correctes, dans l'aperçu d'un exercice et dans le résultat d'un élève (`Assessment::RevealAnswersPolicy`, amendement de l'ADR-0028).
+- La phrase « Aucun cache de fragment ne contient de proposition marquée correcte » est maintenue : les vues qui affichent des propositions correctes ne sont pas mises en cache. Un rendu destiné à un enseignant ne peut donc pas être resservi à un élève.
+- Le test système du §7 s'applique au HTML **servi à l'élève**. Un test complémentaire vérifie que l'enseignant voit la marque « Proposition correcte ».
