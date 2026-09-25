@@ -10,7 +10,7 @@ module Entities
       CYCLES = %w[first both].freeze
       STATUSES = %w[draft active inactive].freeze
       NAME_MAX = 150
-      SIGLE_MAX = 15
+      SIGLE_MAX = 20 # plan.md et db/schema.rb : string(20)
       COLLEGE_WORD = "college".freeze
 
       attr_accessor :id, :public_id, :drena_id, :school_type, :cycle
