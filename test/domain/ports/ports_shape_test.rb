@@ -3,7 +3,7 @@ require "test_helper"
 module Ports
   # Contrat de chaque port, sans base : toute méthode lève NotImplementedError,
   # avec un message qui la nomme, tant qu'un repository ne l'implémente pas.
-  class PortContractsTest < ActiveSupport::TestCase
+  class PortsShapeTest < ActiveSupport::TestCase
     ROOT = Rails.root.join("app/domain/ports")
 
     def self.ports
