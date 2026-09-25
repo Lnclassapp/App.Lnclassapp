@@ -1,0 +1,21 @@
+<%# 🌐 UI · teams/level_series/_cell — une case de la matrice niveau × série, remplacée seule après chaque envoi %>
+<%# Rôle : bouton bascule (aria-pressed) ; coché, il retire le couple (DELETE), décoché, il le crée (POST) %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0033 %>
+<% label = t(".label", level: cell.level_name, series: cell.series_name) %>
+<% label = "#{label}, #{t('.used')}" if cell.used %>
+<% toggle = class_names("relative inline-grid size-8 cursor-pointer place-items-center rounded-sm border-2 transition after:absolute after:-inset-2",
+                        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+                        cell.linked ? "border-brand bg-brand text-ink hover:bg-brand/85" : "border-line bg-white text-transparent hover:border-brand") %>
+<td id="level_series_<%= cell.level_slug %>_<%= cell.series_slug %>" class="px-2 py-2 text-center">
+  <% if cell.linked %>
+    <%= button_to level_series_path(cell.level_slug, cell.series_slug), method: :delete, class: toggle, form_class: "inline-flex",
+                  "aria-pressed": "true", "aria-label": label, title: label do %>
+      <%= ui_icon(cell.used ? "lock-closed" : "check", variant: :mini, size: :sm) %>
+    <% end %>
+  <% else %>
+    <%= button_to level_series_index_path(cell.level_slug), params: { series_slug: cell.series_slug }, class: toggle,
+                  form_class: "inline-flex", "aria-pressed": "false", "aria-label": label, title: label do %>
+      <%= ui_icon "check", variant: :mini, size: :sm %>
+    <% end %>
+  <% end %>
+</td>

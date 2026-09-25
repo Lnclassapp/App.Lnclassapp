@@ -1,0 +1,11 @@
+<%# 🌐 UI · teams/series/destroy — suppression d'une série, ou son refus (422) %>
+<%# Rôle : succès : toast, ligne retirée, matrice remplacée ; refus : toast d'erreur avec la raison, ligne re-rendue %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0033 %>
+<% if @refused %>
+  <%= turbo_stream_toast t(".referenced", name: @row.name), type: :error %>
+  <%= turbo_stream.replace "series_#{@row.slug}", partial: "series_row", locals: { row: @row } %>
+<% else %>
+  <%= turbo_stream_toast t(".deleted", name: @row.name), type: :success %>
+  <%= turbo_stream.remove "series_#{@row.slug}" %>
+  <%= turbo_stream.replace "level_series_matrix", partial: "matrix", locals: { matrix: @matrix } %>
+<% end %>
