@@ -73,4 +73,15 @@ class Teams::SeriesTest < ApplicationSystemTestCase
       assert_selector "#series_c"
     end
   end
+
+  test "on a phone, the tables scroll inside their frame, never the page" do
+    create_series(name: "A")
+    link_level_series(level: @tle, series: Orm::Series.find_by!(slug: "a"))
+    visit series_index_path
+
+    with_mobile_viewport do
+      assert_selector "#level_series_matrix"
+      assert page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth"), "la page défile sur le côté"
+    end
+  end
 end
