@@ -1,0 +1,15 @@
+<%# 🌐 UI · teams/materials/destroy — suppression d'une matière, ou son refus (422) %>
+<%# Rôle : succès : toast, ligne retirée, état vide si c'était la dernière ; refus : toast d'erreur, ligne re-rendue %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0034 %>
+<% if @kept_material %>
+  <%= turbo_stream_toast t(".referenced"), type: :error %>
+  <%= turbo_stream.replace "material_#{@kept_material.slug}", partial: "material_row", locals: { material: @kept_material } %>
+<% else %>
+  <%= turbo_stream_toast t(".done"), type: :success %>
+  <%= turbo_stream.remove "material_#{params[:slug]}" %>
+  <% if @materials.empty? %>
+    <%= turbo_stream.update "materials_empty" do %>
+      <%= ui_empty_state title: t("teams.materials.index.empty_title"), description: t("teams.materials.index.empty_description"), icon: "book-open" %>
+    <% end %>
+  <% end %>
+<% end %>
