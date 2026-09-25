@@ -9,6 +9,11 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
+      # Même hydratation, par id (la session ne connaît que exercise_id). → Entities::Assessment::Exercise | nil
+      def find(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find"
+      end
+
       # Exercice, questions et propositions. → Entities::Assessment::Exercise
       def create(exercise:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"

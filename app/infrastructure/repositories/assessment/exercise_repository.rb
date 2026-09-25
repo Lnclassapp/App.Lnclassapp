@@ -7,7 +7,12 @@ module Repositories
       include Ports::Assessment::ExerciseRepositoryPort
 
       def find_by_public_id(public_id:)
-        record = Orm::Exercise.includes({ essential: :course }, questions: :answers).find_by(public_id:)
+        record = hydrated.find_by(public_id:)
+        record && map_to_entity(record)
+      end
+
+      def find(id:)
+        record = hydrated.find_by(id:)
         record && map_to_entity(record)
       end
 
@@ -62,6 +67,8 @@ module Repositories
       end
 
       private
+
+      def hydrated = Orm::Exercise.includes({ essential: :course }, questions: :answers)
 
       def editable_attributes(exercise)
         { title: exercise.title, description: exercise.description, exercise_type: exercise.exercise_type }
