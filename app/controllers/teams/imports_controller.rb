@@ -7,10 +7,6 @@ module Teams
     STATUS_TONES = { "queued" => :neutral, "validating" => :info, "importing" => :info, "completed" => :success,
                      "rejected" => :error, "failed" => :error }.freeze
 
-    # Le layout « shell » d'AuthenticatedController masque celui de turbo-rails : dans une réponse de frame complète,
-    # le premier turbo-frame#modal serait celui, vide, du layout, et la modale resterait vide.
-    layout -> { turbo_frame_request? ? "turbo_rails/frame" : "shell" }
-
     before_action :require_known_kind, only: %i[new create]
     helper_method :import_status_tone
 
