@@ -51,7 +51,7 @@ L'équipe saisit les cours du catalogue : nom, sous-titre, niveau, série, mati�
 
 **Comportement**
 
-- `create` et `update` : Turbo Stream avec un toast, `update "modal"` (modale vidée) et `refresh(request_id: nil)`. Le message du toast est aussi posé dans le flash : la région `#toasts` est re-rendue par le morphing du refresh, et le toast y reste affiché.
+- `create` et `update` : Turbo Stream avec un toast, `update "modal"` (modale vidée) et `refresh(request_id: nil)`. Le toast survit au morphing du refresh : chaque toast est permanent, avec un id unique (UDR-0006).
 - `publish` et `archive` rendent `transition.turbo_stream.erb` : un toast et le `replace` de `content_status_course_<slug>`. Une transition refusée (`:conflict`) répond en **422**, avec un toast d'erreur et le panneau re-rendu dans son état relu.
 - Une saisie invalide re-rend `new` ou `edit` en **422** dans la modale : l'erreur est sous son champ, et les valeurs saisies sont conservées, contenu riche compris.
 - Repli sans Turbo : chaque écriture redirige en 303 vers la page du cours (`course_path`), avec un flash `notice` ou `alert`.

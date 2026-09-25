@@ -113,7 +113,7 @@ class Teams::CourseManagementTest < ApplicationSystemTestCase
   private
 
   # The host page is re-requested and morphed (turbo_stream.refresh): the morph drops this attribute, absent from
-  # the server's HTML. The toast must survive it, carried by the flash.
+  # the server's HTML. The toast must survive it (each toast is permanent).
   def mark_host_page = page.execute_script("document.querySelector('main').dataset.beforeRefresh = 'true'")
 
   def assert_refreshed_with_toast(text)

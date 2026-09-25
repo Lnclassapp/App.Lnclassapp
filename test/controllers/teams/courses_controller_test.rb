@@ -87,7 +87,6 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("create.created", name: course.name))
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=refresh]:not([request-id])"
-    assert_equal tc("create.created", name: course.name), flash[:notice]
   end
 
   test "an invalid entry reopens the modal in 422 with its errors and the typed values" do

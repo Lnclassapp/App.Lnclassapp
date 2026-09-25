@@ -41,13 +41,13 @@ module Teams
 
     private
 
-    # Le flash accompagne le stream : le morphing du refresh re-rend la région des toasts, qui le réaffiche.
     def respond_written(course, message)
       @course = course
-      notice = t("teams.courses.#{action_name}.#{message}", name: course.name)
       respond_to do |format|
-        format.turbo_stream { flash[:notice] = notice }
-        format.html { redirect_to course_path(course.slug), notice:, status: :see_other }
+        format.turbo_stream
+        format.html do
+          redirect_to course_path(course.slug), notice: t("teams.courses.#{action_name}.#{message}", name: course.name), status: :see_other
+        end
       end
     end
 
