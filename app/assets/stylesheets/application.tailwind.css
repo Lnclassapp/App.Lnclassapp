@@ -149,7 +149,11 @@
     & blockquote { @apply border-l-4 border-line pl-4 text-mute; }
     & pre { @apply overflow-x-auto rounded-ln bg-mist p-3 font-mono text-sm; }
     & img { @apply h-auto max-w-full rounded-ln; }
-    & .attachment__caption { @apply text-sm text-mute; }
+  }
+
+  /* V1 refuse toute pièce jointe (ADR-0047, ADR-0049) : le bouton de fichier de l'éditeur disparaît. */
+  trix-toolbar [data-trix-button-group="file-tools"] {
+    display: none;
   }
 }
 
