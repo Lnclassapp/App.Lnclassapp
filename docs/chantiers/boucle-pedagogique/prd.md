@@ -36,20 +36,24 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 | Voir le catalogue publié (cours, fiches essentielles, exercices) | — | ✅ | ✅ | ✅ *brouillons et archives compris* | `Catalog::ReadPublishedPolicy` |
 | Créer, modifier, publier, archiver et importer du contenu | — | — | — | ✅ | `Catalog::ManageContentPolicy` |
 | Suivre un import | — | — | — | ✅ | la policy de son type (`School::ManageSchoolPolicy` ou `Catalog::ManageContentPolicy`) |
-| Voir les propositions correctes hors de sa session | — | — | — | ✅ | `Assessment::RevealAnswersPolicy` |
-| Voir la correction d'une question | — | ✅ *question déjà tentée* | — | ✅ | `Assessment::RevealAnswersPolicy` |
+| Voir les propositions correctes d'un exercice (aperçu, résultat d'un élève) | — | — | ✅ *tout exercice qu'il peut lire* | ✅ | `Assessment::RevealAnswersPolicy` |
+| Voir la correction d'une question | — | ✅ *question déjà tentée dans sa session* | ✅ | ✅ | `Assessment::RevealAnswersPolicy` |
 | Démarrer ou reprendre une session | — | ✅ *exercice publié, parents publiés* | — | — | `Assessment::StartSessionPolicy` |
 | Répondre à une question | — | ✅ *sa session en cours* | — | — | `Assessment::SubmitAttemptPolicy` |
 | Voir le résultat d'une session | — | ✅ *la sienne* | ✅ *élève d'une classe active qu'il enseigne* | ✅ | `Assessment::ReadSessionPolicy` |
 | Ouvrir une classe | — | ✅ *la sienne* | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` |
-| Voir la liste nominative et le code d'une classe | — | — | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` (fait `show_roster`) |
+| Voir le code d'adhésion d'une classe | — | ✅ *sa classe principale* | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` |
+| Voir la liste nominative d'une classe | — | — | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` (fait `show_roster`) |
 | Déclarer ou retirer une classe enseignée | — | — | ✅ *classe active de son école* | — | `Classroom::DeclareTeachingPolicy` |
 | Assigner / retirer une ressource | — | — | ✅ *s'il y enseigne* | ✅ | `Classroom::AssignPolicy` |
 | Créer une classe | — | — | — | ✅ | `Classroom::ManageClassroomPolicy` |
 
+Décisions du porteur du 2026-09-25 (voir [`journal.md`](journal.md)) :
+- **l'élève voit le code de sa classe**, en majuscules, sur son accueil et sur « Ma classe », comme dans l'ancienne application ; il ne voit jamais la liste nominative ;
+- **l'enseignant voit les propositions correctes** des exercices, comme l'équipe : dans l'aperçu d'un exercice et dans le résultat d'un élève (amendement de l'ADR-0028). **L'élève ne les voit pas pendant sa session**, sauf la correction de la question à laquelle il vient de répondre (AS-10).
+
 Écarts assumés avec le PRD cadre :
-- l'élève ne voit **pas** le code de sa classe dans la V1 : il l'a déjà utilisé, et le partage revient à l'enseignant (CL-05, V3) ;
-- **l'enseignant ne voit pas les propositions correctes** d'un exercice, ni dans l'aperçu ni dans le résultat d'un élève : il voit le score et la note (ADR-0028) ;
+- l'enseignant voit les propositions correctes de **tout exercice qu'il peut lire**, et pas seulement de ceux assignés à ses classes : il prépare un exercice avant de l'assigner ;
 - **tout exercice publié est démarrable** par un élève, assigné ou non ; l'assignation oriente l'accueil de l'élève, elle ne conditionne pas l'accès (ADR-0028).
 
 ## 3. Parcours utilisateur
@@ -64,7 +68,7 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 6. Un élève ouvre `/c/kfm37`, voit « Tle D 1 — Lycée Classique d'Abidjan », remplit Nom, Prénom(s), genre, numéro, PIN et confirmation, puis arrive sur son accueil : « Bienvenue dans ta classe ! ».
 7. Sur son accueil, il voit l'exercice assigné et le démarre. Il répond aux 2 questions, avec une correction immédiate après chacune. La dernière réponse clôt la session.
 8. Il voit sa note (20/20), son score (100 %), la maîtrise « Acquis » et le badge « Diamant ». Les confettis s'affichent.
-9. L'enseignant ouvre le résultat de l'élève : score, note et maîtrise, sans les propositions correctes.
+9. L'enseignant ouvre le résultat de l'élève : score, note, maîtrise, et la correction question par question, avec les propositions choisies et les propositions correctes.
 
 ### Chemins alternatifs et erreurs
 
@@ -109,11 +113,12 @@ Scénario: [TR-cadre-2] Verrouillage progressif
   Quand le compteur atteint 10, puis 20 échecs consécutifs
   Alors le refus dure 1 heure, puis jusqu'à la réinitialisation du PIN par un code de récupération
 
-Scénario: [TR-cadre-3] Aucune proposition correcte servie hors de la correction de l'élève
+Scénario: [TR-cadre-3] Aucune proposition correcte servie à l'élève hors de sa correction
   Étant donné le cache de fragments actif
-  Et un membre de l'équipe qui a affiché l'exercice « Méiose » avec ses propositions correctes
-  Quand un enseignant, puis un élève affichent le même exercice
-  Alors aucun des deux HTML ne contient de marqueur de proposition correcte ni l'identifiant d'une proposition correcte
+  Et un membre de l'équipe, puis un enseignant, qui ont affiché l'exercice « Méiose » avec ses propositions correctes
+  Quand un élève affiche le même exercice
+  Alors son HTML ne contient ni marqueur de proposition correcte ni l'identifiant d'une proposition correcte
+  Et l'enseignant, lui, a bien vu les propositions correctes marquées
 
 Scénario: [TR-cadre-4] Un enseignant hors de la classe est refusé
   Étant donné un enseignant qui n'enseigne pas en 3ème B
@@ -460,7 +465,8 @@ Scénario: [CL-10] Fiche d'une classe
 
 Scénario: [CL-10] Accès d'un élève à sa classe
   Quand un élève ouvre sa classe ou son accueil
-  Alors il ne voit ni la liste nominative ni le code d'adhésion de sa classe
+  Alors il voit le code d'adhésion de sa classe, en majuscules
+  Et il ne voit pas la liste nominative
   Quand il ouvre l'URL de la page enseignant de sa classe
   Alors il reçoit 403
 
@@ -652,6 +658,8 @@ Scénario: [AS-39] Aperçu des questions, sans fuite
   Quand l'équipe ouvre un exercice
   Alors elle voit les questions avec les propositions correctes marquées
   Quand un enseignant ouvre un exercice, assigné ou non à ses classes
+  Alors il voit aussi les questions avec les propositions correctes marquées
+  Quand un élève ouvre le même exercice
   Alors il voit les questions sans marque de proposition correcte
   Et le critère TR-cadre-3 est vert
 
@@ -761,7 +769,7 @@ Scénario: [AS-13] Recommencer
 
 Scénario: [AS-12][AS-39] Lecture d'une session
   Alors l'élève propriétaire, l'enseignant d'une classe active de l'élève et l'équipe peuvent voir le résultat
-  Et l'enseignant voit le score, la note et la maîtrise, sans les propositions correctes
+  Et l'enseignant voit le score, la note, la maîtrise et la correction de chaque question, propositions correctes comprises
   Et un autre élève reçoit « Accès interdit. » avec un statut 403
 
 Scénario: [AS-37] Exercices non publiés
@@ -880,7 +888,7 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 
 - ADR-0026 — `Shared::Result`, queries de lecture, DTO `…Input`, transactions (F-01, F-03)
 - ADR-0027 — Contextes bornés et arborescence (F-02) — **erratum** du 2026-09-25 : `TransactionPort` dans `app/domain/ports/shared/`
-- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04) — **amendé** le 2026-09-25 : huit policies ajoutées (voir [`plan.md`](plan.md), « Décisions que ce plan suppose »)
+- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04) — **amendé** le 2026-09-25 : huit policies ajoutées (voir [`plan.md`](plan.md), « Décisions que ce plan suppose ») ; puis, au retour du porteur, l'enseignant voit les propositions correctes et l'élève le code de sa classe
 - ADR-0029 — `public_id` de 14 caractères et slugs figés (F-05)
 - ADR-0030 — Une école principale par enseignant, déclaration des classes, établissements et génération des classes (F-06)
 - ADR-0031 — TOTP et codes de secours pour l'équipe (F-07)

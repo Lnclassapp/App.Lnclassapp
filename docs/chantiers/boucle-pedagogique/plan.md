@@ -807,7 +807,7 @@ Forme unique : `Policies::<Ctx>::<Nom>Policy.new.call(actor:, **faits) → Share
 | `app/domain/policies/assessment/start_session_policy.rb` | Student ; exercice publié et parents publiés. **Aucune exigence d'assignation** (ADR-0028). | `test/domain/policies/assessment/start_session_policy_test.rb` |
 | `app/domain/policies/assessment/submit_attempt_policy.rb` | Student propriétaire de la session ; session `started` (ADR-0054). | `test/domain/policies/assessment/submit_attempt_policy_test.rb` |
 | `app/domain/policies/assessment/read_session_policy.rb` | Élève propriétaire ; teacher dont une classe **active** contient l'élève (fait `teaches_student`) ; team. | `test/domain/policies/assessment/read_session_policy_test.rb` |
-| `app/domain/policies/assessment/reveal_answers_policy.rb` | **Student** : seulement pour une question déjà tentée dans la session (fait `attempted_question_ids`). **Team** : tout. **L'enseignant ne voit pas les bonnes réponses** (ADR-0028). | `test/domain/policies/assessment/reveal_answers_policy_test.rb` |
+| `app/domain/policies/assessment/reveal_answers_policy.rb` | **Student** : seulement pour une question déjà tentée dans la session (fait `attempted_question_ids`) ; jamais une question qu'il n'a pas encore tentée. **Teacher** : tout exercice qu'il peut lire (décision du porteur du 2026-09-25, amendement de l'ADR-0028). **Team** : tout. | `test/domain/policies/assessment/reveal_answers_policy_test.rb` : l'enseignant est autorisé ; l'élève est refusé sur une question non tentée, autorisé sur une question tentée ; le visiteur est refusé |
 
 ### 0b.5 DTO du socle
 
@@ -1152,7 +1152,7 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/student_home_query.rb`
-    - `Row(school_name, level_name, classroom_name, classmates_count, assigned_exercises:, recent_sessions:, pending_gaps:)`.
+    - `Row(school_name, level_name, classroom_name, join_code_display, classmates_count, assigned_exercises:, recent_sessions:, pending_gaps:)`. `join_code_display` : le code de la classe principale, en majuscules (CL-04).
     - `assigned_exercises` : exercices assignés **actifs**, directement ou par leur fiche ou leur cours, à la classe principale, **publiés** ainsi que leurs parents. Pour chacun : `public_id, title, material_name, material_category, badge_level, best_score_percent, completed_count, started_session_public_id`.
     - `recent_sessions` : les 10 dernières sessions `completed`, avec score et note sur 20.
     - `pending_gaps` : lacunes `pending` (ADR-0043), avec le nom de la fiche essentielle.
@@ -1161,7 +1161,7 @@ Chaque lot vertical :
   - `app/views/classroom/student_homes/show.html.erb`
     - Sections dans l'ordre de `NavigationHelper::HOME_SECTIONS[:student]`.
   - `app/views/classroom/student_homes/_classroom_card.html.erb`
-    - Classe, établissement, niveau, nombre de camarades. **Pas de code d'adhésion.**
+    - Classe, établissement, niveau, nombre de camarades, et **le code de la classe** en majuscules, comme dans l'ancienne application (décision du porteur du 2026-09-25). Jamais la liste nominative.
   - `app/views/classroom/student_homes/_assigned_exercise.html.erb`
     - `ui_subject_badge`, badge par `badge_label` (Bronze, Argent, Or, Diamant), meilleur score et maîtrise, nombre de sessions, bouton « Commencer » ou « Reprendre ».
   - `app/views/classroom/student_homes/_recent_activity.html.erb`
@@ -1173,7 +1173,7 @@ Chaque lot vertical :
   - `test/infrastructure/queries/classroom/student_home_query_test.rb`
     - Assignation retirée, exercice archivé ou brouillon : absent. Assignation par cours : présent. Meilleur score. Classe principale seulement.
   - `test/controllers/classroom/student_homes_controller_test.rb`
-    - 200 ; sans classe : une redirection ; enseignant 403 ; le HTML ne contient pas le code de la classe.
+    - 200 ; sans classe : une redirection ; enseignant 403 ; le HTML contient le code de la classe en majuscules, et le nom d'aucun camarade.
   - `test/system/classroom/student_home_test.rb`
     - Un élève connecté voit son exercice assigné et son badge ; « Commencer » mène à la session. En 390 px, la barre du bas est visible.
 - **Done quand**   : un élève connecté voit ses exercices assignés et leur progression. Les critères CL-23, TR-04 et AS-36 sont verts.
@@ -1183,7 +1183,7 @@ Chaque lot vertical :
   - `⟨ancienne⟩ views/students/feed/content/_feed_header.html.erb`, `_classroom.html.erb`, `_exercises.html.erb`, `_activities.html.erb`, `_empty_state.html.erb`
   - `⟨ancienne⟩ views/components/_exercise_card.html.erb` et `_exercise_badge.html.erb`
 - **Fiches d'inventaire** : TR-04, CL-23, AS-36, TR-02 (élève sans classe).
-- **Non-régression** : pas de boucle de redirection pour l'élève sans classe ; aucun exercice non publié listé ; le code de la classe n'est jamais montré à l'élève.
+- **Non-régression** : pas de boucle de redirection pour l'élève sans classe ; aucun exercice non publié listé ; aucun nom de camarade montré à l'élève.
 - **UDR**          : UDR-0010 — Accueil élève
 
 ---
@@ -1193,9 +1193,9 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui
 - **Fichiers**     :
   - `app/infrastructure/queries/classroom/student_classroom_query.rb`
-    - `Row(classroom_name, level_name, series_name, school_name, school_year, courses:)`. `courses` : cours assignés actifs et publiés, avec `slug, name, subtitle, material_name, material_category, essentials_count`. **Ni code, ni liste nominative.**
+    - `Row(classroom_name, level_name, series_name, school_name, school_year, courses:)`. `courses` : cours assignés actifs et publiés, avec `slug, name, subtitle, material_name, material_category, essentials_count`. **Pas de liste nominative.** Le code vient de l'en-tête (`ClassroomHeaderQuery`).
   - `app/controllers/classroom/student_classrooms_controller.rb`
-    - `allow_roles :student`. L'en-tête vient de `ClassroomHeaderQuery`, sous `ReadClassroomPolicy` ; la vue n'en rend ni `join_code_display` ni `student_ids`.
+    - `allow_roles :student`. L'en-tête vient de `ClassroomHeaderQuery`, sous `ReadClassroomPolicy` ; la vue en rend `join_code_display` (le code de la classe, en majuscules), jamais `student_ids`.
   - `app/views/classroom/student_classrooms/show.html.erb`
   - `app/views/classroom/student_classrooms/_assigned_course.html.erb`
   - `config/locales/classroom/student_classrooms.fr.yml`
@@ -1203,10 +1203,10 @@ Chaque lot vertical :
 - **Test associé** :
   - `test/infrastructure/queries/classroom/student_classroom_query_test.rb`
   - `test/controllers/classroom/student_classrooms_controller_test.rb`
-    - Le HTML ne contient ni le code de la classe ni le nom d'un autre élève.
+    - Le HTML contient le code de la classe en majuscules, et le nom d'aucun autre élève.
   - `test/system/classroom/student_classroom_test.rb`
     - L'élève voit ses cours assignés, ouvre l'un d'eux.
-- **Done quand**   : les critères CL-22 et CL-10 (volet élève) sont verts ; **l'élève ne voit pas le code de sa classe**.
+- **Done quand**   : les critères CL-22 et CL-10 (volet élève) sont verts ; **l'élève voit le code de sa classe**, pas la liste nominative.
 - **Hotwire**      : lecture seule, pas de stream ; test système du rendu.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/students/classroom/show.html.erb`, `⟨ancienne⟩ views/students/feed/content/_courses.html.erb`
 - **Fiches d'inventaire** : CL-22, CL-10 (volet élève).
@@ -1602,11 +1602,11 @@ Chaque lot vertical :
   - `app/infrastructure/queries/assessment/exercise_progress_query.rb`
     - Pour un élève : `badge_level`, `best_score_percent`, `mastery`, `completed_count`, `started_session_public_id`.
   - `app/controllers/assessment/exercises_controller.rb`
-    - `show`. `ReadPublishedPolicy` (refus → 404), puis `RevealAnswersPolicy` pour l'aperçu : **vrai pour l'équipe seulement** ; l'élève voit les corrections dans sa session, pas ici. `StartSessionPolicy` décide du bouton.
+    - `show`. `ReadPublishedPolicy` (refus → 404), puis `RevealAnswersPolicy` pour l'aperçu : **vrai pour l'équipe et l'enseignant** ; faux pour l'élève, qui voit les corrections dans sa session, pas ici. `StartSessionPolicy` décide du bouton.
   - `app/views/assessment/exercises/show.html.erb`
     - Titre, description, nombre de questions, matière. Élève : progression, « Commencer » (POST `exercise_sessions_path`) ou « Reprendre » et « Recommencer » (`restart: true`). Équipe : `content_status_panel` et « Modifier » (modale de B5).
   - `app/views/assessment/exercises/_questions_preview.html.erb`
-    - Questions dans `data-controller="math"`. La marque « Proposition correcte » n'est rendue que si `reveal`. **Aucun `cache`** dans ce partial ni dans la vue.
+    - Questions dans `data-controller="math"`. La marque « Proposition correcte » n'est rendue que si `reveal`. **Aucun `cache`** dans ce partial ni dans la vue : c'est ce qui empêche le HTML d'un enseignant ou de l'équipe d'être resservi à un élève.
   - `app/views/assessment/exercises/_student_progress.html.erb`
   - `config/locales/assessment/exercises.fr.yml`
 - **Dépend de**    : socle
@@ -1615,7 +1615,7 @@ Chaque lot vertical :
   - `test/infrastructure/queries/assessment/exercise_progress_query_test.rb`
   - `test/controllers/assessment/exercises_controller_test.rb`
   - `test/integration/assessment/answer_leak_test.rb`
-    - TR-cadre-3. Sous `with_fragment_caching`, l'équipe affiche l'exercice, puis l'enseignant, puis l'élève. Le HTML de l'enseignant et de l'élève ne contient ni la marque de proposition correcte ni l'identifiant d'une proposition correcte.
+    - TR-cadre-3. Sous `with_fragment_caching`, l'équipe affiche l'exercice, puis l'enseignant, puis l'élève. Le HTML de l'équipe et de l'enseignant contient la marque « Proposition correcte » ; celui de l'élève ne contient ni la marque ni l'identifiant d'une proposition correcte.
   - `test/system/assessment/exercise_page_test.rb`
     - L'élève voit sa progression et clique « Commencer » : il arrive sur la première question.
 - **Done quand**   : les critères AS-02 et AS-39 sont verts.
@@ -1624,7 +1624,7 @@ Chaque lot vertical :
   - `⟨ancienne⟩ views/assessment/exercises/show.html.erb`, `_questions_list.html.erb` et `_exercise.html.erb`
   - `⟨ancienne⟩ views/components/_question_card.html.erb`
 - **Fiches d'inventaire** : AS-02, AS-39. Sécurité n° 29.
-- **Non-régression** : aucune proposition correcte servie par un cache partagé entre les rôles.
+- **Non-régression** : aucune proposition correcte servie à un élève, ni directement ni par un cache partagé entre les rôles.
 - **UDR**          : UDR-0021 — Page exercice
 
 ---
@@ -1690,7 +1690,7 @@ Chaque lot vertical :
 - **Couche**       : infrastructure (query) + delivery + ui (Stimulus)
 - **Fichiers**     :
   - `app/infrastructure/queries/assessment/session_result_query.rb`
-    - `Row(exercise, essential, score_percent, grade_on_20, correct_count, question_count, mastery, badge_level, earned_now, review:)`. `review` : pour chaque question, les propositions choisies et correctes, et l'explication. Le contrôleur applique `ReadSessionPolicy`, puis `RevealAnswersPolicy` : **l'enseignant voit le score et la note, pas les propositions correctes** (ADR-0028).
+    - `Row(exercise, essential, score_percent, grade_on_20, correct_count, question_count, mastery, badge_level, earned_now, review:)`. `review` : pour chaque question, les propositions choisies et correctes, et l'explication. Le contrôleur applique `ReadSessionPolicy`, puis `RevealAnswersPolicy` : **l'enseignant voit le score, la note et la revue complète, propositions correctes comprises** (décision du porteur du 2026-09-25, amendement de l'ADR-0028). La session étant close, l'élève propriétaire voit lui aussi sa revue : toutes ses questions sont tentées.
   - `app/controllers/assessment/session_results_controller.rb`
     - `show`, pour student, teacher et team. Session absente : 404 ; refus : 403 ; session non terminée : retour à la session.
   - `app/views/assessment/session_results/show.html.erb`
@@ -1706,7 +1706,7 @@ Chaque lot vertical :
 - **Test associé** :
   - `test/infrastructure/queries/assessment/session_result_query_test.rb`
   - `test/controllers/assessment/session_results_controller_test.rb`
-    - Autre élève : 403. Enseignant d'une classe active de l'élève : 200, sans proposition correcte dans le HTML. Équipe : 200.
+    - Autre élève : 403. Enseignant d'une classe active de l'élève : 200, avec les propositions correctes marquées dans la revue. Équipe : 200.
   - `test/system/assessment/session_result_test.rb`
     - 10/10 : « Diamant » et « Nouveau badge ! » ; 9/10 : « Or » ; « Recommencer » ouvre une nouvelle session.
 - **Done quand**   : les critères AS-11 (affichage), AS-12 et AS-13 sont verts.
@@ -1847,7 +1847,7 @@ Chaque lot vertical :
   - `app/infrastructure/queries/classroom/classroom_overview_query.rb`
     - Cours assignés actifs et publiés, avec `classroom_course_path` ; puis, **seulement si `show_roster`**, les élèves (`public_id, display_name, contact, last_score_percent`).
   - `app/controllers/classroom/classrooms_controller.rb`
-    - `allow_roles :teacher, :team`. En-tête par `ClassroomHeaderQuery` ; `ReadClassroomPolicy`. Un élève reçoit 403 : il n'a pas accès à cette page, ni au code.
+    - `allow_roles :teacher, :team`. En-tête par `ClassroomHeaderQuery` ; `ReadClassroomPolicy`. Un élève reçoit 403 : il n'a pas accès à cette page ni à la liste nominative (il voit le code de sa classe sur ses propres pages, A2 et A3).
   - `app/views/classroom/classrooms/show.html.erb`
   - `app/views/classroom/classrooms/_header.html.erb`
     - Nom, année scolaire, code en majuscules et bouton « Copier » ; effectif / plafond.
@@ -2407,8 +2407,8 @@ Chaque lot vertical :
   - `test/system/boucle_pedagogique_test.rb`
     - Base vierge **sans seed de contenu** (seul `identity.rb`). L'équipe accepte l'invitation d'amorçage, enrôle son TOTP, crée par les vrais boutons le référentiel (niveau « Tle », série « D », liés ; matière SVT, catégorie science), une DRENA et un lycée public : **6 classes « Tle D 1 » à « Tle D 6 »** générées, les autres niveaux du barème étant absents et comptés comme sautés. Elle crée un cours, une fiche essentielle et un exercice de 2 questions, et les publie.
     - L'enseignant s'inscrit, déclare une classe générée, ouvre la classe, le cours et la fiche, assigne l'exercice ; il génère un code de récupération pour un élève.
-    - L'élève ouvre `/c/<code>`, s'inscrit, voit l'exercice sur son accueil (sans le code de sa classe), répond aux 2 questions ; la session se clôt seule ; il voit « Félicitations ! », 20/20 et le badge « Diamant ».
-    - L'enseignant ouvre le résultat de l'élève : score et note, sans propositions correctes.
+    - L'élève ouvre `/c/<code>`, s'inscrit, voit l'exercice sur son accueil (avec le code de sa classe, en majuscules), répond aux 2 questions ; la session se clôt seule ; il voit « Félicitations ! », 20/20 et le badge « Diamant ».
+    - L'enseignant ouvre le résultat de l'élève : score, note et revue, propositions correctes comprises.
     - Chaque écriture (création, publication, assignation, réponse) est enveloppée dans `assert_no_page_reload`. Partie élève rejouée en viewport mobile.
   - `test/system/imports_end_to_end_test.rb`
     - L'équipe importe un fichier d'écoles au format de l'ancienne application **enveloppé**, puis un `course_tree` ; elle suit le rapport jusqu'à « Terminé » sans recharger ; les classes et le contenu en brouillon apparaissent dans leurs écrans ; un fichier **mixte** affiche ses compteurs exacts et ses chemins d'erreur, et seuls ses éléments valides sont en base ; un fichier à l'enveloppe invalide finit « Rejeté » sans rien écrire.
@@ -2682,5 +2682,5 @@ Porte **de vague**, issue de la [feuille de route §5 V1](../refonte-application
 3. Il importe lui-même un fichier réel de l'ancienne application (enveloppé) et un fichier de 500 écoles, et **chronomètre** : moins de 2 min, sinon la porte ne passe pas. Il fait de même avec 200 cours complets.
 4. Il importe un fichier **mixte** qu'il a lui-même préparé (valides, invalides, doublons) : le rapport doit être exact au compteur près, chaque erreur à son chemin JSON, et seuls les éléments valides doivent être en base. Un fichier à la version 2 doit être rejeté en bloc.
 5. Il rejoue au moins ces chemins d'erreur : 6e échec de connexion ; réponse vide ; double soumission ; enseignant hors de sa classe ; brouillon ouvert par son URL ; PIN oublié ; classe pleine ; second import du même type pendant qu'un premier tourne.
-6. Il vérifie le HTML servi à l'élève et à l'enseignant avec les outils du navigateur : aucune proposition correcte hors de la correction de l'élève, et aucun code de classe dans les pages de l'élève.
+6. Il vérifie le HTML servi à l'élève et à l'enseignant avec les outils du navigateur : aucune proposition correcte servie à l'élève hors de sa correction, les propositions correctes bien visibles pour l'enseignant, et le code de la classe affiché à l'élève sans liste nominative.
 7. Il consigne dans `journal.md` ce qu'il a fait, observé et mesuré.

@@ -135,3 +135,16 @@ Huit policies s'ajoutent au tableau du §4.
 
 - Les mécanismes de session (reprise, déconnexion, second facteur) ont donc une policy : les exemptions restent les trois use cases d'authentification listés au §4.
 - La lecture d'un rapport d'import applique la policy de son type (`School::ManageSchoolPolicy` ou `Catalog::ManageContentPolicy`) : aucune policy n'est propre aux rapports.
+
+## Amendement du 2026-09-25 — retour du porteur
+
+*Chantier `docs/chantiers/boucle-pedagogique`, décisions du porteur du 2026-09-25. Le texte ci-dessus et l'amendement précédent restent tels qu'acceptés ; en cas d'écart, cette section fait foi.*
+
+| Policy | Autorise désormais |
+|---|---|
+| `Assessment::RevealAnswersPolicy` | l'élève, pour une question **déjà tentée** dans sa session ; **l'enseignant**, pour tout exercice qu'il peut lire, dans l'aperçu comme dans le résultat d'un élève ; `team` |
+| `Classroom::ReadClassroomPolicy` | inchangée pour l'accès. **Le code d'adhésion est montré à l'élève** dont c'est la classe principale active, comme à l'enseignant et à `team`. La liste nominative reste réservée à `team` et à l'enseignant (fait `show_roster`) |
+
+- **L'élève ne voit jamais une proposition correcte avant d'avoir répondu** : ni dans l'aperçu d'un exercice, ni pendant sa session pour une question non tentée. Cette règle de l'ADR-0054 est inchangée.
+- Puisque l'enseignant voit les propositions correctes et l'élève non, aucun fragment de cache contenant une proposition correcte ne doit pouvoir être resservi à un élève. Le test « équipe, puis enseignant, puis élève, cache actif » (TR-cadre-3) le prouve.
+- La ligne « l'enseignant ne voit jamais les bonnes réponses en V1 », que le journal du chantier marquait « à rouvrir », est **tranchée** : l'enseignant les voit.
