@@ -1,0 +1,55 @@
+<%# 🌐 UI · teams/imports/kinds/_schools — aide de l'import des établissements, dans la modale de téléversement %>
+<%# Rôle : format et clés acceptées, exemple minimal, génération des classes, slugs des DRENA à citer %>
+<%# ADR  : 0030, 0039 · UDR : 0037 %>
+<% drenas = Queries::School::SchoolOptionsQuery.new.drenas %>
+<section id="import-help-schools" aria-labelledby="import-help-schools-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
+  <h3 id="import-help-schools-title" class="font-medium text-ink"><%= t(".title") %></h3>
+  <p class="text-mute"><%= t(".intro_html") %></p>
+
+  <dl class="space-y-2">
+    <% UseCases::School::ImportSchools::ALIASES.merge("drena" => %w[drena]).each do |key, aliases| %>
+      <div class="space-y-0.5">
+        <dt>
+          <%= safe_join(aliases.map { tag.code(it, class: "font-mono text-xs text-ink") }, " · ") %>
+        </dt>
+        <dd class="text-mute"><%= t(".keys.#{key}") %></dd>
+      </div>
+    <% end %>
+  </dl>
+
+  <div class="space-y-1.5">
+    <h4 class="font-medium text-ink"><%= t(".example") %></h4>
+    <pre class="overflow-x-auto rounded-ln border border-line bg-white p-3 font-mono text-xs text-ink"><code>{
+  "format": "lnclass.schools",
+  "version": 1,
+  "drena": "abidjan-1",
+  "schools": [
+    { "name": "Lycée Classique d'Abidjan", "sigle": "LCA",
+      "type": "public" },
+    { "nom": "Collège Notre Dame du Plateau",
+      "schooltype": "privée", "drena": "abidjan-2" }
+  ]
+}</code></pre>
+  </div>
+
+  <div class="flex items-start gap-2 text-ink">
+    <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>
+    <p><%= t(".classrooms") %></p>
+  </div>
+
+  <% if drenas.any? %>
+    <details class="rounded-ln border border-line bg-white">
+      <summary class="flex min-h-tap cursor-pointer items-center px-3 font-medium text-ink"><%= t(".drenas", count: drenas.size) %></summary>
+      <ul id="import-help-drenas" class="grid max-h-48 gap-1 overflow-y-auto px-3 pb-3 sm:grid-cols-2">
+        <% drenas.each do |drena| %>
+          <li><code class="font-mono text-xs text-ink"><%= drena.slug %></code> <span class="text-mute"><%= drena.name %></span></li>
+        <% end %>
+      </ul>
+    </details>
+  <% else %>
+    <p id="import-help-drenas" class="text-mute">
+      <%= t(".no_drenas") %>
+      <%= link_to t(".no_drenas_link"), drenas_path, class: "font-medium text-brand-strong underline", data: { turbo_frame: "_top" } %>
+    </p>
+  <% end %>
+</section>
