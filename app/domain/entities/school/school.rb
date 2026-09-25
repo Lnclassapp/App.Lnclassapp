@@ -13,7 +13,8 @@ module Entities
       SIGLE_MAX = 15
       COLLEGE_WORD = "college".freeze
 
-      attr_accessor :id, :public_id, :drena_id, :school_type, :cycle, :status
+      attr_accessor :id, :public_id, :drena_id, :school_type, :cycle
+      attr_writer :status
       attr_reader :name, :sigle
 
       validates :name, presence: true, length: { maximum: NAME_MAX }
@@ -27,6 +28,8 @@ module Entities
       def self.cycle_for(name:)
         name.to_s.parameterize.split("-").include?(COLLEGE_WORD) ? "first" : "both"
       end
+
+      def status = @status || "active"
 
       def name=(value)
         @name = value&.squish

@@ -137,3 +137,23 @@ def self.for(school_type) = PLAN.fetch(school_type == "public" ? "public" : "pri
 - L'enseignant se déclare lui-même dans les classes de son école en V1 ; la direction gère les classes à partir de la V2.
 - Les classes par niveau sont générées automatiquement à la création ou à l'import d'un établissement, avec le plan de l'ancien, corrigé : cycle en colonne, correspondance par slug, noms toujours espacés, aucun élève de démonstration.
 - Le type `mixed` (Mixte) est conservé et suit le barème du privé.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`, précision du porteur du 2026-09-25. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+**Pas de formulaire de création d'établissement.** Un établissement n'arrive que par l'**import JSON** (`School::ImportSchools`, lot S3 de la V1). L'écran Établissements n'a pas de bouton « Nouvel établissement » ; son action principale est « Importer des établissements ». `School::CreateSchool`, cité au §4 ci-dessus et dans le tableau de l'ADR-0034, n'existe pas en V1.
+
+**Quand les classes par défaut sont générées.** Uniquement à l'**import d'un établissement**, dans le même élément racine : si la génération échoue, l'établissement n'est pas créé et figure en erreur dans le rapport.
+
+**Jamais de classes pré-créées.** Aucune classe n'existe avant son établissement. Aucun seed ni aucune tâche ne crée de classes en avance, ni en production ni ailleurs : en développement et en test, les seeds et les fabriques créent des établissements par les mêmes repositories et la même génération. Modifier un établissement (type, cycle) ne régénère jamais ses classes. En dehors de la génération, une classe ne naît que par `Classroom::CreateClassroom` (équipe en V1).
+
+**Totaux attendus**, avec le référentiel de l'ADR-0034 (2nde liée à A et C ; 1ère et Tle liées à A1, A2, C et D) :
+
+| Établissement | Premier cycle | 2nde | 1ère | Tle | **Total** |
+|---|---|---|---|---|---|
+| Lycée public (`public`, `both`) | 4 + 4 + 10 + 10 = 28 | 2 séries × 6 = 12 | 4 séries × 6 = 24 | 2 + 6 + 3 + 2 = 13 | **77** |
+| Lycée privé ou mixte (`private` ou `mixed`, `both`) | 2 + 2 + 4 + 4 = 12 | 2 × 3 = 6 | 4 × 3 = 12 | 1 + 3 + 2 + 2 = 8 | **38** |
+| Collège public (`public`, `first`) | 28 | — | — | — | **28** |
+
+Ces totaux dépendent des liaisons `level_series` en base : un niveau ou une série absent est sauté et compté (§4). Les 71 classes d'un lycée public dans l'ancienne application venaient d'un référentiel qui ne liait que C à la 2nde.

@@ -7,7 +7,7 @@
 
 ## 1. Contexte
 
-La production démarre **vide** : aucun référentiel ni établissement n'y est seedé (ADR-0034). L'équipe y crée le référentiel (niveaux, séries, matières) et les DRENA à l'écran, puis les établissements, un par un ou par import JSON ; chaque établissement reçoit ses classes par défaut (ADR-0030). Elle publie des cours, leurs fiches essentielles et leurs exercices, saisis à l'écran ou importés. Un enseignant s'inscrit, déclare ses classes et leur assigne du contenu. Un élève rejoint sa classe par code, fait un exercice, voit la correction, son résultat et son badge.
+La production démarre **vide** : aucun référentiel ni établissement n'y est seedé (ADR-0034). L'équipe y crée le référentiel (niveaux, séries, matières) et les DRENA à l'écran, puis importe les établissements en JSON, seule voie de création (aucun formulaire) ; chaque établissement importé reçoit ses classes par défaut (ADR-0030). Elle publie des cours, leurs fiches essentielles et leurs exercices, saisis à l'écran ou importés. Un enseignant s'inscrit, déclare ses classes et leur assigne du contenu. Un élève rejoint sa classe par code, fait un exercice, voit la correction, son résultat et son badge.
 
 La V1 pose aussi le socle des vagues suivantes :
 
@@ -36,20 +36,27 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 | Voir le catalogue publié (cours, fiches essentielles, exercices) | — | ✅ | ✅ | ✅ *brouillons et archives compris* | `Catalog::ReadPublishedPolicy` |
 | Créer, modifier, publier, archiver et importer du contenu | — | — | — | ✅ | `Catalog::ManageContentPolicy` |
 | Suivre un import | — | — | — | ✅ | la policy de son type (`School::ManageSchoolPolicy` ou `Catalog::ManageContentPolicy`) |
-| Voir les propositions correctes hors de sa session | — | — | — | ✅ | `Assessment::RevealAnswersPolicy` |
-| Voir la correction d'une question | — | ✅ *question déjà tentée* | — | ✅ | `Assessment::RevealAnswersPolicy` |
+| Voir les propositions correctes d'un exercice (aperçu, résultat d'un élève) | — | — | ✅ *tout exercice qu'il peut lire* | ✅ | `Assessment::RevealAnswersPolicy` |
+| Voir la correction d'une question | — | ✅ *question déjà tentée dans sa session* | ✅ | ✅ | `Assessment::RevealAnswersPolicy` |
 | Démarrer ou reprendre une session | — | ✅ *exercice publié, parents publiés* | — | — | `Assessment::StartSessionPolicy` |
 | Répondre à une question | — | ✅ *sa session en cours* | — | — | `Assessment::SubmitAttemptPolicy` |
 | Voir le résultat d'une session | — | ✅ *la sienne* | ✅ *élève d'une classe active qu'il enseigne* | ✅ | `Assessment::ReadSessionPolicy` |
 | Ouvrir une classe | — | ✅ *la sienne* | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` |
-| Voir la liste nominative et le code d'une classe | — | — | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` (fait `show_roster`) |
+| Voir le code d'adhésion d'une classe | — | ✅ *sa classe principale* | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` |
+| Voir la liste nominative d'une classe | — | — | ✅ *s'il y enseigne* | ✅ | `Classroom::ReadClassroomPolicy` (fait `show_roster`) |
 | Déclarer ou retirer une classe enseignée | — | — | ✅ *classe active de son école* | — | `Classroom::DeclareTeachingPolicy` |
 | Assigner / retirer une ressource | — | — | ✅ *s'il y enseigne* | ✅ | `Classroom::AssignPolicy` |
 | Créer une classe | — | — | — | ✅ | `Classroom::ManageClassroomPolicy` |
 
-Écarts assumés avec le PRD cadre :
-- l'élève ne voit **pas** le code de sa classe dans la V1 : il l'a déjà utilisé, et le partage revient à l'enseignant (CL-05, V3) ;
-- **l'enseignant ne voit pas les propositions correctes** d'un exercice, ni dans l'aperçu ni dans le résultat d'un élève : il voit le score et la note (ADR-0028) ;
+Décisions du porteur du 2026-09-25 (voir [`journal.md`](journal.md)) :
+- **pas de formulaire de création d'établissement** : les établissements arrivent uniquement par l'import JSON, qui génère leurs classes ; « Importer des établissements » est l'action principale de l'écran Établissements ;
+- **éditeur de texte uniquement** : aucune pièce jointe dans l'éditeur riche ;
+- **l'élève voit le code de sa classe**, en majuscules, sur son accueil et sur « Ma classe », comme dans l'ancienne application ; il ne voit jamais la liste nominative ;
+- **l'enseignant voit les propositions correctes** des exercices, comme l'équipe : dans l'aperçu d'un exercice et dans le résultat d'un élève (amendement de l'ADR-0028). **L'élève ne les voit pas pendant sa session**, sauf la correction de la question à laquelle il vient de répondre (AS-10).
+
+Décision de l'orchestrateur du 2026-09-25, que le porteur peut rouvrir : l'enseignant voit les propositions correctes de **tout exercice qu'il peut lire**, y compris avant de l'assigner, pour préparer sa classe. Le PRD cadre est aligné sur ce point.
+
+Écart assumé avec le PRD cadre :
 - **tout exercice publié est démarrable** par un élève, assigné ou non ; l'assignation oriente l'accueil de l'élève, elle ne conditionne pas l'accès (ADR-0028).
 
 ## 3. Parcours utilisateur
@@ -64,7 +71,7 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 6. Un élève ouvre `/c/kfm37`, voit « Tle D 1 — Lycée Classique d'Abidjan », remplit Nom, Prénom(s), genre, numéro, PIN et confirmation, puis arrive sur son accueil : « Bienvenue dans ta classe ! ».
 7. Sur son accueil, il voit l'exercice assigné et le démarre. Il répond aux 2 questions, avec une correction immédiate après chacune. La dernière réponse clôt la session.
 8. Il voit sa note (20/20), son score (100 %), la maîtrise « Acquis » et le badge « Diamant ». Les confettis s'affichent.
-9. L'enseignant ouvre le résultat de l'élève : score, note et maîtrise, sans les propositions correctes.
+9. L'enseignant ouvre le résultat de l'élève : score, note, maîtrise, et la correction question par question, avec les propositions choisies et les propositions correctes.
 
 ### Chemins alternatifs et erreurs
 
@@ -109,11 +116,12 @@ Scénario: [TR-cadre-2] Verrouillage progressif
   Quand le compteur atteint 10, puis 20 échecs consécutifs
   Alors le refus dure 1 heure, puis jusqu'à la réinitialisation du PIN par un code de récupération
 
-Scénario: [TR-cadre-3] Aucune proposition correcte servie hors de la correction de l'élève
+Scénario: [TR-cadre-3] Aucune proposition correcte servie à l'élève hors de sa correction
   Étant donné le cache de fragments actif
-  Et un membre de l'équipe qui a affiché l'exercice « Méiose » avec ses propositions correctes
-  Quand un enseignant, puis un élève affichent le même exercice
-  Alors aucun des deux HTML ne contient de marqueur de proposition correcte ni l'identifiant d'une proposition correcte
+  Et un membre de l'équipe, puis un enseignant, qui ont affiché l'exercice « Méiose » avec ses propositions correctes
+  Quand un élève affiche le même exercice
+  Alors son HTML ne contient ni marqueur de proposition correcte ni l'identifiant d'une proposition correcte
+  Et l'enseignant, lui, a bien vu les propositions correctes marquées
 
 Scénario: [TR-cadre-4] Un enseignant hors de la classe est refusé
   Étant donné un enseignant qui n'enseigne pas en 3ème B
@@ -310,29 +318,43 @@ Scénario: [SC-01] Gérer les DRENA
 
 # SC-02 (import de DRENA) est écartée par le porteur : les 41 DRENA se créent à l'écran.
 
-Scénario: [SC-03][SC-09][CL-01] Créer un établissement génère ses classes
+Scénario: [SC-03] Pas de formulaire de création d'établissement
+  Quand l'équipe ouvre « Établissements » depuis la navigation
+  Alors l'action principale est « Importer des établissements », qui ouvre la modale d'import
+  Et aucun bouton ne crée un établissement à l'écran
+  Et aucune route ne crée un établissement hors de l'import
+
+Scénario: [SC-03][SC-09][CL-01] Importer un établissement génère ses classes
   Étant donné le référentiel du seed de développement (6ème à 3ème en cycle first ; 2nde liée à A et C ; 1ère et Tle liées à A1, A2, C, D)
-  Quand l'équipe crée le lycée public « Lycée Moderne de Cocody », sigle « LMC », dans la DRENA Abidjan 1
+  Quand l'équipe importe le lycée public « Lycée Moderne de Cocody », sigle « LMC », dans la DRENA Abidjan 1
   Alors l'établissement existe avec le type « Public », le statut « active » et le cycle « both »
   Et 77 classes de l'année scolaire en cours existent, dont « 6ème 1 » à « 6ème 4 », « 2nde A 1 » à « 2nde A 6 », « 1ère A1 1 » à « 1ère A1 6 » et « Tle D 1 » à « Tle D 6 »
   Et chaque classe a un code d'adhésion unique et un plafond de 80 élèves
   Et aucun élève n'existe
-  Et un toast annonce « Établissement créé : 77 classes générées », sans rechargement de page
-  Quand l'équipe crée le « Collège moderne de Cocody » (public)
-  Alors son cycle proposé est « first » et seules les classes de 6ème à 3ème sont créées, soit 28
-  Quand elle crée un lycée privé, puis un lycée mixte
+  Et le rapport d'import détaille les 77 classes générées, sans rechargement de page
+  Quand l'équipe importe le « Collège moderne de Cocody » (public)
+  Alors son cycle est « first » et seules les classes de 6ème à 3ème sont créées, soit 28
+  Quand elle importe un lycée privé et un lycée mixte
   Alors chacun reçoit 38 classes (le barème privé s'applique aussi au mixte)
+
+Scénario: [SC-09] Jamais de classes pré-créées
+  Étant donné une production vierge
+  Alors aucune classe n'existe
+  Et une classe ne naît que par l'import de son établissement ou par « Ajouter une classe » de l'équipe
+  Quand l'équipe modifie le type ou le cycle d'un établissement
+  Alors aucune classe n'est créée ni supprimée
 
 Scénario: [SC-09] Niveau sans série liée
   Étant donné une 1ère qui n'est liée à aucune série
-  Quand l'équipe crée un lycée public
+  Quand l'équipe importe un lycée public
   Alors aucune classe de 1ère n'est créée
-  Et le niveau sauté est signalé dans le toast et compté dans le détail
+  Et le niveau sauté est signalé et compté dans le détail du rapport d'import
 
 Scénario: [SC-03] Création atomique
-  Étant donné une génération de classes qui échoue en base
-  Quand l'équipe crée un établissement
-  Alors ni l'établissement ni aucune classe n'existent
+  Étant donné une génération de classes qui échoue en base pour un établissement du fichier
+  Quand l'équipe importe le fichier
+  Alors ni cet établissement ni aucune de ses classes n'existent
+  Et il figure en erreur dans le rapport, les autres établissements étant importés
 
 Scénario: [SC-04] Liste nationale des établissements
   Étant donné 600 établissements dans 3 DRENA
@@ -364,6 +386,7 @@ Scénario: [SC-08][SC-09][TR-28] Importer des établissements avec leurs classes
   Quand l'équipe l'importe depuis la modale d'import
   Alors l'écran de suivi passe de « En file d'attente » à « Vérification », « Import en cours » puis « Terminé », sans recharger la page
   Et chaque établissement est créé avec son type (« privée » → private, « mixte » → mixed), son cycle (un nom contenant « collège » → first) et ses classes par défaut
+  Et un lycée public importé reçoit 77 classes, un lycée privé ou mixte 38, un collège public 28, avec le référentiel du seed de développement
   Et le rapport compte les établissements importés, ignorés et en erreur, et détaille les classes générées
 
 Scénario: [SC-08][TR-28] Import partiel : un fichier mixte donne un rapport exact
@@ -460,7 +483,8 @@ Scénario: [CL-10] Fiche d'une classe
 
 Scénario: [CL-10] Accès d'un élève à sa classe
   Quand un élève ouvre sa classe ou son accueil
-  Alors il ne voit ni la liste nominative ni le code d'adhésion de sa classe
+  Alors il voit le code d'adhésion de sa classe, en majuscules
+  Et il ne voit pas la liste nominative
   Quand il ouvre l'URL de la page enseignant de sa classe
   Alors il reçoit 403
 
@@ -551,9 +575,25 @@ Scénario: [CA-04] Non-régression : brouillon par URL directe
   Alors il reçoit 404
 
 Scénario: [CA-05] Créer un cours
-  Quand l'équipe clique « Nouveau cours » et soumet, dans la modale, Nom, sous-titre, niveau, série, matière et contenu
+  Quand l'équipe clique « Nouveau cours » et soumet, dans la modale, Nom, sous-titre, niveau, série, matière et contenu saisi dans l'éditeur riche
   Alors le cours existe en brouillon, son auteur est l'utilisateur connecté et son nom est enregistré sans changement de casse
   Et le catalogue le montre, sans rechargement de page, avec le libellé « Brouillon — visible uniquement par l'équipe »
+
+Scénario: [CA-05][CA-12] Éditeur riche du contenu (Action Text et Trix)
+  Quand l'équipe ouvre le formulaire d'un cours ou d'une fiche essentielle
+  Alors le contenu se saisit dans l'éditeur riche, qui fonctionne sous la CSP stricte
+  Quand elle met un passage en gras, ajoute une liste à puces et enregistre
+  Alors la page du cours ou de la fiche affiche le gras et la liste
+  Et à la réouverture du formulaire, l'éditeur contient le contenu enregistré
+  Quand elle glisse un fichier dans l'éditeur
+  Alors il est refusé : pas de pièce jointe en V1
+  Et une page sans formulaire de contenu (catalogue, fiche, session d'un élève) ne télécharge ni Trix ni Action Text
+  Et le point d'entrée JavaScript commun reste sous 60 Ko gzip
+
+Scénario: [CA-04] Le contenu est assaini au rendu
+  Étant donné un cours dont le contenu en base contient une balise <script> et un attribut onclick
+  Quand un élève ouvre le cours
+  Alors le HTML servi ne contient ni la balise ni l'attribut
 
 Scénario: [CA-06] Modifier et publier un cours
   Quand l'équipe modifie le nom puis clique « Publier »
@@ -574,6 +614,14 @@ Scénario: [CA-08][TR-28] Importer des cours complets
   Alors tout est créé en brouillon, quelle que soit la clé status du fichier, et l'auteur est l'utilisateur connecté
   Et un cours déjà présent (même nom normalisé, niveau, matière et série) est ignoré et compté comme doublon
   Et la matière « Physique Chimie » est reconnue par son slug « physique-chimie »
+  Et le contenu HTML des cours et des fiches essentielles est écrit dans leur rich text, celui que l'éditeur ouvre
+
+Scénario: [CA-08][CA-15] Le HTML importé est assaini
+  Étant donné un fichier dont un cours et une fiche essentielle ont un content contenant <script>, un attribut onclick et un lien javascript:
+  Quand l'équipe l'importe
+  Alors le cours et la fiche sont importés
+  Et leur contenu en base ne contient ni la balise, ni l'attribut, ni le lien
+  Et le gras, les listes et les formules $…$ du fichier sont conservés
 
 Scénario: [CA-08] Import partiel : un fichier mixte donne un rapport exact
   Étant donné un fichier de 10 cours dont le 2e contient une question à choix unique avec 2 propositions correctes au chemin courses[1].essentials[0].exercises[2].questions[3], le 5e une matière inconnue, et le 8e un cours déjà en base
@@ -628,6 +676,8 @@ Scénario: [AS-39] Aperçu des questions, sans fuite
   Quand l'équipe ouvre un exercice
   Alors elle voit les questions avec les propositions correctes marquées
   Quand un enseignant ouvre un exercice, assigné ou non à ses classes
+  Alors il voit aussi les questions avec les propositions correctes marquées
+  Quand un élève ouvre le même exercice
   Alors il voit les questions sans marque de proposition correcte
   Et le critère TR-cadre-3 est vert
 
@@ -737,7 +787,7 @@ Scénario: [AS-13] Recommencer
 
 Scénario: [AS-12][AS-39] Lecture d'une session
   Alors l'élève propriétaire, l'enseignant d'une classe active de l'élève et l'équipe peuvent voir le résultat
-  Et l'enseignant voit le score, la note et la maîtrise, sans les propositions correctes
+  Et l'enseignant voit le score, la note, la maîtrise et la correction de chaque question, propositions correctes comprises
   Et un autre élève reçoit « Accès interdit. » avec un statut 403
 
 Scénario: [AS-37] Exercices non publiés
@@ -846,9 +896,9 @@ Le détail exécutable est dans [`plan.md`](plan.md), sous-lots 0a, 0b, 0d et 0e
 | Couche | Éléments prévus |
 |---|---|
 | Domaine | `Shared::Result` ; entités et objets-valeurs de 5 contextes (identity, school, classroom, catalog, assessment), dont `DefaultClassroomPlan`, `ImportKind`, `ImportItem`, `ContentNode`, `NaturalKey` ; 27 ports, plus `TransactionPort` ; 23 policies `call(actor:, **faits)` ; DTO `…Input` par formulaire ; use cases par lot ; moteur d'import (`StartImport`, `RunImport`) et 4 adaptateurs derrière un contrat commun |
-| Infrastructure | 31 migrations ; modèles `Orm::` ; un repository par port (TOTP, fichier, schéma et file d'attente compris, sans dossier `adapters/`) ; écritures en masse par `insert_all`, par lots de 100 éléments racines ; queries de lecture par écran ; seeds d'amorçage (production) et de développement (local seulement) |
+| Infrastructure | 32 migrations, dont la table d'Action Text (`action_text_rich_texts`) ; modèles `Orm::`, dont `has_rich_text :content` sur les cours et les fiches essentielles ; un repository par port (TOTP, fichier, schéma et file d'attente compris, sans dossier `adapters/`) ; écritures en masse par `insert_all`, par lots de 100 éléments racines ; queries de lecture par écran ; seeds d'amorçage (production) et de développement (local seulement) |
 | Delivery | 7 fichiers de routes dessinés en entier au socle, dont `teams.rb` ; socle d'authentification ; `Teams::BaseController` ; job de base `Shared::ImportJob` et un job par type ; un contrôleur par écran |
-| UI | Shell par rôle et composants du Lot 0c ; vues ERB par lot, CRUD en modales avec réponses `*.turbo_stream.erb` ; rafraîchissement par morphing ; écran de suivi des imports ; contrôleurs Stimulus chargés par motif |
+| UI | Shell par rôle et composants du Lot 0c ; vues ERB par lot, CRUD en modales avec réponses `*.turbo_stream.erb` ; rafraîchissement par morphing ; écran de suivi des imports ; contrôleurs Stimulus chargés par motif ; éditeur riche Trix chargé à la demande sur les formulaires de cours et de fiches |
 
 ## 6. Décisions rattachées
 
@@ -856,7 +906,7 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 
 - ADR-0026 — `Shared::Result`, queries de lecture, DTO `…Input`, transactions (F-01, F-03)
 - ADR-0027 — Contextes bornés et arborescence (F-02) — **erratum** du 2026-09-25 : `TransactionPort` dans `app/domain/ports/shared/`
-- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04) — **amendé** le 2026-09-25 : huit policies ajoutées (voir [`plan.md`](plan.md), « Décisions que ce plan suppose »)
+- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04) — **amendé** le 2026-09-25 : huit policies ajoutées (voir [`plan.md`](plan.md), « Décisions que ce plan suppose ») ; puis, au retour du porteur, l'enseignant voit les propositions correctes et l'élève le code de sa classe
 - ADR-0029 — `public_id` de 14 caractères et slugs figés (F-05)
 - ADR-0030 — Une école principale par enseignant, déclaration des classes, établissements et génération des classes (F-06)
 - ADR-0031 — TOTP et codes de secours pour l'équipe (F-07)
@@ -874,7 +924,7 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 - ADR-0047 — Stockage des fichiers (S3 Railway)
 - ADR-0048 — Assignations `active/archived`, nouvelle ligne à la réassignation (F-26)
 - ADR-0050 — Authentification, contact, session et verrouillage (F-28)
-- ADR-0051 — Navigateurs et budget des assets
+- ADR-0051 — Navigateurs et budget des assets — **amendé** le 2026-09-25 : l'édition riche revient en V1, Trix chargé à la demande sur les pages d'édition
 - ADR-0052 — Chaîne de livraison et worker toujours actif
 - ADR-0054 — Moteur d'évaluation et clôture automatique (F-34)
 - UDR-0005 — Design system (F-09)

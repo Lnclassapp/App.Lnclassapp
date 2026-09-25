@@ -71,17 +71,24 @@ SimpleCov failed with exit 2 due to a coverage related error
 
 **La mesure tient avec la parallélisation de minitest** (`parallelize(workers: 3, threshold: 1)` forcé le temps d'un essai) : `Coverage report generated for Minitest, Minitest (subprocess: 1), (subprocess: 2), (subprocess: 3)` — `Line coverage: 19 / 19 (100.00%)`. Un lancement partiel ne réutilise pas les résultats d'un lancement précédent (vérifié : 4 tests → 26,31 %, refusé).
 
-### 5. Branches protégées — ⏳ à exécuter par l'orchestrateur
+### 5. Branches protégées — ⚠️ écart assumé, abandonné par le porteur (2026-09-25)
 
-Aucune action GitHub depuis un agent. Commandes exactes, dépôt `Lnclassapp/App.Lnclassapp` :
+**Décision du porteur** : la protection des branches GitHub est **abandonnée**. Le dépôt `Lnclassapp/App.Lnclassapp` est privé et sur l'offre gratuite de GitHub : l'API de protection répond **HTTP 403** (fonction réservée aux offres payantes pour un dépôt privé). Aucun push direct n'est donc refusé par GitHub, et la preuve exigée (« un push direct refusé ») ne peut pas être produite.
+
+**Ce qui protège à la place** :
+
+- le **hook pre-commit local** (garde-fous 2 et 3), actif dans tous les worktrees par `core.hooksPath`, jamais contourné (`SKIP_HOOKS` et `--no-verify` exclus) ;
+- la **discipline des PR** : tout passe par une branche de chantier et une PR vers `Develop` ([conventions §3](../../guide/conventions.md#3-branches)), avec `bin/ci` vert ;
+- **seul le porteur fait le passage `Develop` → `main`** (recette `Staging` comprise). Aucun agent ne pousse ni ne fusionne vers `Staging` ou `main`.
+
+`Staging` existe sur GitHub. La branche que déploie Railway reste celle de l'ADR-0052 : `Staging` pour la recette, `main` pour la production.
+
+<details>
+<summary>Pour mémoire : les commandes de protection, si le dépôt passe un jour sur une offre qui l'autorise</summary>
 
 ```bash
-# 1. Créer Staging depuis Develop
-SHA=$(gh api repos/Lnclassapp/App.Lnclassapp/git/ref/heads/Develop --jq .object.sha)
-gh api repos/Lnclassapp/App.Lnclassapp/git/refs -f ref=refs/heads/Staging -f sha="$SHA"
-
-# 2. Protéger Develop, Staging et main : PR obligatoire, job « ci » vert, aucun push direct,
-#    même pour les administrateurs, ni force-push ni suppression.
+# Protéger Develop, Staging et main : PR obligatoire, job « ci » vert, aucun push direct,
+# même pour les administrateurs, ni force-push ni suppression.
 for BRANCH in Develop Staging main; do
   gh api -X PUT "repos/Lnclassapp/App.Lnclassapp/branches/$BRANCH/protection" --input - <<'JSON'
 {
@@ -94,14 +101,11 @@ for BRANCH in Develop Staging main; do
 }
 JSON
 done
-
-# 3. Preuve : un push direct est refusé (GH006 Protected branch update failed)
-git switch -c tmp/preuve-push Develop && git commit --allow-empty -m "chore(infra): direct push probe"
-git push origin HEAD:Develop    # attendu : refus
-git switch - && git branch -D tmp/preuve-push
 ```
 
-Le contexte `ci` est le nom du job de `.github/workflows/ci.yml` : il n'existe côté GitHub qu'après une première exécution du workflow (pousser la branche avant de protéger, ou protéger après la première PR). `required_approving_review_count: 0` impose la PR sans exiger de relecteur humain ; à monter quand l'équipe grandit.
+Le contexte `ci` est le nom du job de `.github/workflows/ci.yml`. Preuve attendue alors : un push direct refusé (`GH006 Protected branch update failed`).
+
+</details>
 
 **Railway** (ADR-0052) : l'environnement de recette suit `Staging`, la production suit `main`, chacun avec sa base.
 
@@ -204,3 +208,8 @@ Variables Railway (par environnement, `Staging` et `main`) :
 - `bin/ci` passe en entier (5 min 16 s), tests système compris : 16 tests sous Chrome for Testing 154, lancés avec `CHROME_BIN` et `CHROMEDRIVER_PATH`. Budget : JS 36,9 Ko gzip sur 60, CSS 7,4 Ko sur 30.
 - **Garde-fous 4 et 7 prouvés.** Le 5 attend le porteur (commandes `gh` du §5), le 1 est consigné comme écart (socle documentaire ajouté en `624ee23`).
 - Poste local : Chromium en snap ne démarre pas sous « no new privileges ». On utilise à la place Chrome for Testing, installé dans `~/.cache/chrome-for-testing/`.
+
+## 2026-09-25 — Garde-fou 5 : écart assumé
+
+- Le porteur abandonne la protection des branches GitHub : dépôt privé en offre gratuite, API en **HTTP 403**. Le §5 ci-dessus consigne l'écart et ce qui protège à la place : hook pre-commit local, discipline des PR, et le passage `Develop` → `main` réservé au porteur.
+- Bilan des garde-fous : 2, 3, 4, 6 et 7 prouvés ; 1 et 5 consignés comme écarts assumés.

@@ -28,7 +28,7 @@ Règle qui gouverne tout le tableau : **chaque use case déclare sa policy, chaq
 | Voir le catalogue publié (cours, fiches, exercices) | ✅ | ✅ | ✅ | ✅ | `Catalog::ReadPublishedPolicy` |
 | Voir un contenu **non publié** | — | — | ✅ | — | idem |
 | Créer, modifier, archiver du contenu | — | — | ✅ | — | `Catalog::ManageContentPolicy` |
-| Voir les **bonnes réponses** d'un exercice hors correction | — | ✅ *(classe assignée)* | ✅ | — | `Assessment::RevealAnswersPolicy` |
+| Voir les **bonnes réponses** d'un exercice hors correction | — | ✅ *(tout exercice qu'il peut lire, y compris avant de l'assigner ; 2026-09-25)* | ✅ | — | `Assessment::RevealAnswersPolicy` |
 | Démarrer une session sur un exercice | ✅ *s'il est assigné à l'une de ses classes et publié* | — | — | — | `Assessment::StartSessionPolicy` |
 | Voir le résultat d'une session | ✅ *la sienne* | ✅ *élève de sa classe* | ✅ | — | `Assessment::ReadSessionPolicy` |
 | Rejoindre une classe par code | ✅ | — | — | — | `Classroom::JoinPolicy` |
