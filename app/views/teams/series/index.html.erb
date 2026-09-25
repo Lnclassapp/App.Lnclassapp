@@ -1,0 +1,30 @@
+<%# 🌐 UI · teams/series/index — écran des séries de l'équipe %>
+<%# Rôle : tableau des séries (code, niveaux, classes, cours), puis la matrice niveau × série ; tout s'écrit sans rechargement %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0033 %>
+<% content_for :title, t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
+  <%= ui_button t(".new"), href: new_series_path, icon: "plus", data: { turbo_frame: "modal" } %>
+<% end %>
+
+<div class="relative mb-8 overflow-x-auto rounded-card border border-line bg-white shadow-card">
+  <table class="w-full min-w-2xl text-left text-sm">
+    <thead class="border-b border-line text-xs text-mute">
+      <tr>
+        <% %i[name slug levels classrooms courses].each do |column| %>
+          <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+        <% end %>
+        <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.actions") %></th>
+      </tr>
+    </thead>
+    <tbody id="series" class="divide-y divide-line">
+      <%= render partial: "series_row", collection: @series, as: :row %>
+    </tbody>
+  </table>
+  <% if @series.empty? %>
+    <div id="series_empty" class="p-6">
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "squares-2x2" %>
+    </div>
+  <% end %>
+</div>
+
+<%= render "matrix", matrix: @matrix %>

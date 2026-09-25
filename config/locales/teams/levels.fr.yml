@@ -1,0 +1,86 @@
+# Niveaux du référentiel, écran de l'équipe (plan boucle-pedagogique, Lot R1) — ADR-0034, UDR-0007, UDR-0032
+fr:
+  activemodel:
+    attributes:
+      dtos/catalog/level_input:
+        name: "Nom"
+        position: "Position"
+        cycle: "Cycle"
+    errors:
+      models:
+        dtos/catalog/level_input:
+          attributes:
+            name:
+              taken: "est déjà pris par un autre niveau"
+            position:
+              taken: "est déjà prise par un autre niveau"
+  teams:
+    levels:
+      cycles:
+        first: "Premier cycle"
+        second: "Second cycle"
+      index:
+        page_title: "Niveaux"
+        title: "Niveaux"
+        subtitle: "Les niveaux scolaires, dans l'ordre de leur position. Leur code sert à la génération des classes et aux imports."
+        new: "Nouveau niveau"
+        generation_help: "Les classes sont générées pour les niveaux 6ème, 5ème, 4ème, 3ème, 2nde, 1ère et Tle (codes %{codes}). Un autre niveau reste utilisable, mais aucune classe n'y est générée."
+        empty_title: "Aucun niveau pour l'instant"
+        empty_description: "Créez les niveaux de la 6ème à la Tle : les classes et les cours s'y rattachent."
+        columns:
+          name: "Nom"
+          code: "Code"
+          position: "Position"
+          cycle: "Cycle"
+          series: "Séries"
+          classrooms: "Classes"
+          courses: "Cours"
+          actions: "Actions"
+      level_row:
+        no_series: "Aucune"
+        outside_generation: "Hors génération des classes"
+        outside_generation_hint: "Son code n'est pas reconnu : aucune classe n'est générée pour ce niveau."
+        edit: "Modifier"
+        edit_label: "Modifier le niveau %{name}"
+        delete: "Supprimer"
+        delete_title: "Supprimer « %{name} » ?"
+        delete_warning: "La suppression est définitive. Un niveau lié à une série, ou utilisé par une classe ou un cours, ne peut pas être supprimé."
+        delete_confirm: "Supprimer le niveau"
+        cancel: "Annuler"
+      form:
+        name_placeholder: "Ex. : 6ème, 2nde, Tle"
+        position_hint: "Ordre d'affichage : 1 pour le premier niveau."
+        cycle_prompt: "Choisir un cycle"
+        recognized_names: "Noms reconnus par la génération des classes : 6ème, 5ème, 4ème, 3ème, 2nde, 1ère, Tle."
+      new:
+        title: "Nouveau niveau"
+        name_hint: "20 caractères au plus. Le code du niveau est tiré du nom à la création, puis ne change plus."
+        submit: "Créer le niveau"
+        cancel: "Annuler"
+      edit:
+        title: "Modifier le niveau"
+        code: "Code :"
+        code_frozen: "— il ne change pas, même si le niveau est renommé."
+        outside_generation: "Aucune classe n'est générée pour ce code."
+        name_hint: "20 caractères au plus. Renommer le niveau ne change pas son code."
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      create:
+        created: "Niveau « %{name} » créé."
+      update:
+        updated: "Niveau « %{name} » modifié."
+      destroy:
+        deleted: "Niveau supprimé."
+        referenced_title: "Ce niveau est utilisé"
+        referenced: "« %{name} » compte encore %{usage} : il ne peut pas être supprimé."
+        referenced_alert: "Ce niveau est utilisé : « %{name} » compte encore %{usage}. Il ne peut pas être supprimé."
+        usage:
+          series:
+            one: "%{count} série"
+            other: "%{count} séries"
+          classrooms:
+            one: "%{count} classe"
+            other: "%{count} classes"
+          courses:
+            one: "%{count} cours"
+            other: "%{count} cours"

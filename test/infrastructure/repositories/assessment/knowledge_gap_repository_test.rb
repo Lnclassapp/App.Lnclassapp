@@ -8,7 +8,7 @@ module Repositories
         @student = create_student
         @essential = create_essential
         @exercise = create_exercise(essential: @essential)
-        @failed = create_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30)
+        @failed = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30)
         @at = Time.zone.parse("2026-09-25 10:00")
       end
 
@@ -35,7 +35,7 @@ module Repositories
 
       test "compte les échecs, puis résout la lacune une seule fois" do
         gap = open_gap
-        remediation = create_session(student: @student, exercise: @exercise, status: "completed", score_percent: 90)
+        remediation = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 90)
 
         assert @repository.increment(id: gap.id)
         assert_equal 2, @repository.find(id: gap.id).failed_sessions_count

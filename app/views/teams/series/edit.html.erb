@@ -1,0 +1,12 @@
+<%# 🌐 UI · teams/series/edit — renommage d'une série, servi dans le frame « modal » %>
+<%# Rôle : modale ouverte dès son arrivée ; le slug ne change pas ; un échec la re-rend en 422 %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0033 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title", name: @row.name), id: "series-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "series-form" %>
+    <% end %>
+    <%= render "form", form: @form, url: series_path(@row.slug), method: :patch %>
+  <% end %>
+<% end %>

@@ -5,7 +5,8 @@ module Entities
   module Assessment
     # answers : [Answer]
     Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers) do
-      # Règles de l'ADR-0039 → [Symbol], vide si la question est bien construite.
+      # Règles de l'ADR-0039 et du PRD (AS-03) → [Symbol], vide si la question est bien construite.
+      # Hors Vrai/Faux, au moins une proposition incorrecte s'ajoute aux correctes : N correctes → N + 1 propositions.
       # answers : objets qui répondent à correct (Answer, ou proposition importée).
       def self.structure_errors_for(question_type:, answers:)
         expected = Question::EXPECTED[question_type.to_s.to_sym]
@@ -13,7 +14,7 @@ module Entities
 
         errors = []
         errors << :true_false_needs_two_answers if question_type.to_s == "true_false" && answers.size != 2
-        errors << :too_few_answers if answers.size < expected
+        errors << :too_few_answers if question_type.to_s != "true_false" && answers.size <= expected
         errors << :wrong_correct_count if answers.count(&:correct) != expected
         errors
       end

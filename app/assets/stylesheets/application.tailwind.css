@@ -133,21 +133,25 @@
   }
 }
 
-/* Contenu riche d'un cours ou d'une fiche (Action Text), en lecture : la typographie suit les tokens.
-   Le CSS de l'éditeur Trix n'est chargé que par les pages d'édition (builds/trix.css). */
-@layer components {
+/* Contenu riche d'un cours ou d'une fiche (Action Text) : la typographie suit les tokens.
+   Hors couche et préfixé par :root, exprès. builds/trix.css (pages d'édition seulement) n'est dans aucune couche
+   et se lie souvent dans la page, donc après ce fichier : une règle en couche perdrait toujours contre lui
+   (`.trix-content * { margin: 0 }` effaçait les listes, le bouton de fichier réapparaissait). :root ajoute
+   un niveau de spécificité, pour gagner quel que soit l'ordre des feuilles. */
+:root {
   .trix-content {
     @apply text-base leading-relaxed text-ink;
 
-    & > * + * { @apply mt-3; }
+    & > :not(:first-child) { @apply mt-3; }
     & h1 { @apply font-display text-2xl font-bold; }
     & h2 { @apply font-display text-xl font-bold; }
     & a { @apply text-brand-strong underline; }
     & strong { @apply font-semibold; }
     & ul { @apply list-disc pl-6; }
     & ol { @apply list-decimal pl-6; }
-    & blockquote { @apply border-l-4 border-line pl-4 text-mute; }
-    & pre { @apply overflow-x-auto rounded-ln bg-mist p-3 font-mono text-sm; }
+    & li { @apply ml-0; }
+    & blockquote { @apply ml-0 border-l-4 border-line pl-4 text-mute; }
+    & pre { @apply block w-full overflow-x-auto rounded-ln bg-mist p-3 font-mono text-sm whitespace-pre; }
     & img { @apply h-auto max-w-full rounded-ln; }
   }
 

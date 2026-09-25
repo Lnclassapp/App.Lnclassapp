@@ -1,0 +1,37 @@
+<%# 🌐 UI · teams/courses/_form — nom, sous-titre, référentiel et contenu riche d'un cours, partagé par new et edit %>
+<%# Rôle : séries rangées par niveau (seuls les couples ouverts) ; contenu dans Trix chargé à la demande, sans pièce jointe %>
+<%# ADR  : 0035, 0047, 0049, 0051 · UDR : 0006, 0014 · Stimulus : rich-text-editor %>
+<%# Servi dans le frame « modal », le formulaire n'a pas de <head> : la feuille de l'éditeur est liée ici. %>
+<%= stylesheet_link_tag "trix" %>
+<%= form_with model: input, scope: :course, url:, method:, id: "course-form", class: "space-y-5" do |form| %>
+  <% if input.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= input.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%= ui_field form, :name, required: true, maxlength: Entities::Catalog::Course::NAME_MAX, autocomplete: "off",
+                            autofocus: true, placeholder: t(".name_placeholder") %>
+  <%= ui_field form, :subtitle, maxlength: Entities::Catalog::Course::SUBTITLE_MAX, autocomplete: "off",
+                                hint: t(".subtitle_hint") %>
+  <div class="grid gap-5 sm:grid-cols-3">
+    <%= ui_field form, :level_slug, as: :select, required: true, prompt: t(".level_prompt"),
+                                    choices: options.levels.map { [ it.name, it.slug ] } %>
+    <%= ui_field form, :series_slug, as: :select, hint: t(".series_hint"),
+                 choices: safe_join([ tag.option(t(".no_series"), value: ""),
+                                      grouped_options_for_select(options.levels.filter_map { |level|
+                                        series = options.series_by_level[level.id]
+                                        [ level.name, series.map { [ it.name, it.slug ] } ] if series
+                                      }, input.series_slug) ]) %>
+    <%= ui_field form, :material_slug, as: :select, required: true, prompt: t(".material_prompt"),
+                                       choices: options.materials.map { [ it.name, it.slug ] } %>
+  </div>
+  <div class="space-y-1.5">
+    <%= form.label :content, class: "block text-sm font-medium text-ink" %>
+    <div data-controller="rich-text-editor" class="rounded-ln bg-white">
+      <%= form.rich_textarea :content, id: form.field_id(:content), "aria-describedby": "#{form.field_id(:content)}_hint",
+                                       placeholder: t(".content_placeholder") %>
+    </div>
+    <p id="<%= form.field_id(:content) %>_hint" class="text-sm text-mute"><%= t(".content_hint") %></p>
+  </div>
+<% end %>
