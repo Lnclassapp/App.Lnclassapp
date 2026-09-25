@@ -24,9 +24,14 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #transition"
       end
 
-      # Clés de doublon de l'import. → Set[[NameKey.call(name), level_id, material_id, series_id]]
+      # Clés de doublon de l'import. → Set[[Entities::Shared::NaturalKey.normalize(name), level_id, material_id, series_id]]
       def existing_keys
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
+      end
+
+      # Slugs déjà pris, pour les calculer avant une insertion en masse (Entities::Catalog::Slug). → Set[String]
+      def taken_slugs
+        raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"
       end
     end
   end

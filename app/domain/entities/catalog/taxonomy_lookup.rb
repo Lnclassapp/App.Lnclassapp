@@ -26,7 +26,7 @@ module Entities
       def resolve_material(name) = @materials_by_key[name.to_s.parameterize]
 
       def pair?(level_id, series_id) = @pairs.include?([ level_id, series_id ])
-      def series_for_level(level_id) = @series.select { |item| pair?(level_id, item.id) }
+      def series_for(level_id) = @series.select { |item| pair?(level_id, item.id) }
 
       private
 

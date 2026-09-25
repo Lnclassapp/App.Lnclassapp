@@ -10,7 +10,7 @@ module Entities
       SUBTITLE_MAX = 150
 
       attr_accessor :id, :slug, :course_id, :position, :author_id, :status, :published_at, :archived_at,
-                    :content_html, :course_status
+                    :content, :course_status
       attr_reader :name, :subtitle
 
       validates :name, presence: true, length: { maximum: NAME_MAX }

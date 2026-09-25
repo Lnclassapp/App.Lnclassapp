@@ -50,7 +50,7 @@ module Entities
 
       # « par série » : chaque série liée au niveau ; un niveau sans série est sauté et compté.
       def self.per_series(level, count, lookup, skipped)
-        linked = lookup.series_for_level(level.id)
+        linked = lookup.series_for(level.id)
         skipped << level.slug if linked.empty?
         linked.map { |series| [ series, count ] }
       end

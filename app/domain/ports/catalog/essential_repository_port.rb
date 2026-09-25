@@ -24,14 +24,19 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #transition"
       end
 
-      # Clés de doublon de l'import. → Set[NameKey.call(name)]
-      def name_keys_in(course_id:)
-        raise NotImplementedError, "#{self.class} doit implémenter #name_keys_in"
+      # Clés de doublon de l'import, pour les cours donnés ou tous. → Set[[course_id, Entities::Shared::NaturalKey.normalize(name)]]
+      def existing_keys(course_ids: nil)
+        raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
       # → Integer
       def next_position(course_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #next_position"
+      end
+
+      # → Set[String]
+      def taken_slugs
+        raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"
       end
     end
   end

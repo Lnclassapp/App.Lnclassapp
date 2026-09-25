@@ -31,9 +31,9 @@ module Entities
 
         assert @lookup.pair?(tle.id, @lookup.find_series("d").id)
         assert_not @lookup.pair?(tle.id, @lookup.find_series("a").id)
-        assert_equal %w[a1 a2 c d], @lookup.series_for_level(tle.id).map(&:slug)
-        assert_equal %w[a c], @lookup.series_for_level(@lookup.level("2nde").id).map(&:slug)
-        assert_empty @lookup.series_for_level(@lookup.level("3eme").id)
+        assert_equal %w[a1 a2 c d], @lookup.series_for(tle.id).map(&:slug)
+        assert_equal %w[a c], @lookup.series_for(@lookup.level("2nde").id).map(&:slug)
+        assert_empty @lookup.series_for(@lookup.level("3eme").id)
       end
 
       test "un slug n'est jamais masqué par le nom d'un autre élément" do
