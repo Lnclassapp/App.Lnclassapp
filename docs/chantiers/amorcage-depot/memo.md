@@ -22,7 +22,7 @@ Les sept garde-fous de la feuille de route §2, chacun avec sa preuve dans [`jou
 2. `bin/setup` active le hook pre-commit, de façon idempotente ;
 3. pre-commit : pureté du domaine, en-tête HITL, `# :nocov:`, rubocop ;
 4. une seule CI (`config/ci.rb`), lancée par `bin/ci` en local et par GitHub, couverture 100 % lignes et branches, tests système Chrome headless, budget de poids ;
-5. branches protégées (commandes pour l'orchestrateur) ;
+5. branches protégées (commandes pour l'orchestrateur) : **abandonné par le porteur le 2026-09-25**, dépôt privé en offre gratuite (API en 403), écart consigné au [journal](journal.md) ;
 6. configuration de production (HTTPS, hôtes, CSP, filtres de logs, stockage, i18n, navigateurs, worker) ;
 7. un test système « page d'accueil ».
 

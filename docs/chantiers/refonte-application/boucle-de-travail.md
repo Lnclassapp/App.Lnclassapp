@@ -28,7 +28,7 @@
 
 | Rôle | Tenu par | Responsabilité | Ne fait jamais |
 |---|---|---|---|
-| **Porteur produit** | Kamkara | accepte les ADR/UDR, tranche les questions ouvertes, fait la recette sur `Staging`, autorise les push et les déploiements | — |
+| **Porteur produit** | Kamkara | accepte les ADR/UDR, tranche les questions ouvertes, fait la recette sur `Staging`, autorise les push et les déploiements, **fait seul le passage `Develop` → `main`** | — |
 | **Orchestrateur** | Claude (session principale) | ouvre les chantiers, **écrit les Lots 0** (contrats gelés), dispatche, merge, lance `bin/ci`, tient `journal.md` et la feuille de route | déléguer un Lot 0, merger un lot rouge |
 | **Rédacteur de décisions** | 1 sous-agent | rédige les ADR/UDR de fondation d'après les recommandations | coder |
 | **Planificateurs** | 1 sous-agent par vague à ouvrir | `memo.md` + `prd.md` + `plan.md` du chantier de la vague (`/feature` puis `/plan-lots`) | coder, toucher `app/` |
@@ -193,5 +193,7 @@ Toutes les branches de l'étape 0 partent de `feature/amorcage-depot`, qui porte
 
 - Tout `git push` vers GitHub et toute PR : une autorisation **par vague** suffit.
 - Toute action Railway : variables, environnement `Staging`, déploiement.
-- Toute fusion vers `Staging` ou `main`.
+- Toute fusion vers `Staging` ou `main`. **Le passage `Develop` → `main` (par `Staging`) est fait par le porteur lui-même**, jamais par un agent.
 - Toute contradiction nouvelle entre sources : elle est inscrite au registre §4 de la feuille de route et tranchée par le porteur. Un agent ne la tranche jamais seul.
+
+> **Aucune protection de branche côté GitHub** (décision du porteur du 2026-09-25) : le dépôt est privé, en offre gratuite, et l'API de protection répond 403. Rien n'empêche techniquement un push direct sur `Develop`, `Staging` ou `main`. Ce qui protège : le hook pre-commit local, jamais contourné, et la discipline des PR ([conventions §3](../../guide/conventions.md#3-branches)). Un agent ne pousse **jamais** sans le feu vert de cette section. Écart consigné au [journal d'amorçage §5](../amorcage-depot/journal.md).

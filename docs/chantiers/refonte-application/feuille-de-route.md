@@ -52,7 +52,7 @@ L'ordre V2 → V6 suit la priorité déjà décidée au §5 de [`plan.md`](plan.
 | 2 | `bin/setup` pose `core.hooksPath .githooks`, idempotent | un second `bin/setup` ne change rien |
 | 3 | Pre-commit : pureté du domaine, HITL, `:nocov:`, rubocop | quatre commits fautifs, quatre refus |
 | 4 | CI : purity → lint + brakeman + bundler-audit → tests → tests système Chrome headless ; SimpleCov 100 % lignes et branches, `track_files "{app,lib}/**/*.rb"` | une PR à 99 % refusée |
-| 5 | Branches `Develop`, `Staging`, `main` protégées ; Railway déploie `main` | un push direct refusé |
+| 5 | Branches `Develop`, `Staging`, `main` protégées ; Railway déploie `main` | un push direct refusé. **Écart assumé le 2026-09-25** : protection GitHub impossible (dépôt privé en offre gratuite, API en 403) ; hook pre-commit local, discipline des PR, et seul le porteur fait passer `Develop` vers `main` ([journal d'amorçage §5](../amorcage-depot/journal.md)) |
 | 6 | Production : `force_ssl`, `assume_ssl`, route `/up`, `:contact` filtré des logs, CSP active, `config.hosts`, stockage de fichiers persistant (F-25), `raise_on_missing_translations` en dev/test | test d'intégration par point |
 | 7 | Un test système « page d'accueil » vert en CI | la chaîne complète est prouvée à vide |
 
