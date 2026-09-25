@@ -35,6 +35,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     get teams_imports_path
 
     assert_response :success
+    assert_select "nav a[href='#{teams_imports_path}'][aria-current=page]", text: "Imports"
     assert_select "#imports tr", 2
     assert_select "#imports", text: /Terminé/
     assert_select "#imports", text: /Rejeté/
@@ -149,6 +150,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", "Import : Établissements"
+    assert_select "nav a[href='#{teams_imports_path}'][aria-current=page]", text: "Imports"
     assert_select "#import_counter_imported", "1"
     assert_select "#import_counter_total", "4"
     assert_select "li", text: /Classes générées : 77/
