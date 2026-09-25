@@ -13,6 +13,11 @@ module Entities
         assert build.active?
       end
 
+      test "un établissement sans statut est actif" do
+        assert_equal "active", build(status: nil).status
+        assert_equal "draft", build(status: "draft").status
+      end
+
       test "garde le nom tel que saisi, après squish" do
         school = build(name: "  lycée   MODERNE ", sigle: "  ")
 
