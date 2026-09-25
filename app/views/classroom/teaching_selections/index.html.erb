@@ -1,0 +1,30 @@
+<%# 🌐 UI · classroom/teaching_selections/index — « Quelles classes enseignez-vous ? » %>
+<%# Rôle : une carte par niveau, une bascule par classe (stream), compteur #teaching_counter ; « Terminer » tant que l'onboarding n'est pas fini %>
+<%# ADR  : 0030 · UDR : 0006, 0025 · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
+<% content_for :title, t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @selection.school_name) %>
+
+<% if @selection.levels.empty? %>
+  <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
+<% else %>
+  <div class="space-y-6">
+    <%= render partial: "classroom/teaching_selections/level_group", collection: @selection.levels, as: :level %>
+  </div>
+
+  <div class="mt-8 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+    <%= render "classroom/teachings/counter", count: @selection.declared_count %>
+    <% if @selection.onboarded %>
+      <%= ui_button t(".back_home"), href: teacher_home_path, variant: :secondary, icon_end: "arrow-right" %>
+    <% else %>
+      <%= form_with url: teacher_onboarding_path, id: "teacher-onboarding-form", class: "flex flex-col gap-2 sm:items-end" do %>
+        <% if @onboarding_error %>
+          <p id="teacher-onboarding-error" role="alert" class="rounded-ln bg-error-soft px-4 py-2 text-sm font-medium text-error">
+            <%= @onboarding_error %>
+          </p>
+        <% end %>
+        <%= ui_button t(".finish"), type: :submit, variant: :brand, size: :lg, icon_end: "arrow-right",
+                                    "aria-describedby": ("teacher-onboarding-error" if @onboarding_error) %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
