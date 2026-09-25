@@ -855,8 +855,8 @@ Le détail exécutable est dans [`plan.md`](plan.md), sous-lots 0a, 0b, 0d et 0e
 Toutes acceptées le 2026-09-25, sauf mention contraire.
 
 - ADR-0026 — `Shared::Result`, queries de lecture, DTO `…Input`, transactions (F-01, F-03)
-- ADR-0027 — Contextes bornés et arborescence (F-02)
-- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04) — **amendement requis** : policies ajoutées (voir [`plan.md`](plan.md), « Décisions que ce plan suppose »)
+- ADR-0027 — Contextes bornés et arborescence (F-02) — **erratum** du 2026-09-25 : `TransactionPort` dans `app/domain/ports/shared/`
+- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04) — **amendé** le 2026-09-25 : huit policies ajoutées (voir [`plan.md`](plan.md), « Décisions que ce plan suppose »)
 - ADR-0029 — `public_id` de 14 caractères et slugs figés (F-05)
 - ADR-0030 — Une école principale par enseignant, déclaration des classes, établissements et génération des classes (F-06)
 - ADR-0031 — TOTP et codes de secours pour l'équipe (F-07)
@@ -867,7 +867,7 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 - ADR-0036 — Suppression restreinte et archivage (F-14)
 - ADR-0037 — Nom et Prénom(s) (F-15)
 - ADR-0038 — Rôles et invitations (F-16)
-- ADR-0039 — Import de contenu (TR-28) : quatre types, import partiel atomique par élément racine, rapport exact — **erratum requis** : la colonne `errors` s'appelle `import_errors`
+- ADR-0039 — Import de contenu (TR-28) : quatre types, import partiel atomique par élément racine, rapport exact — **erratum** du 2026-09-25 : la colonne `errors` s'appelle `import_errors` ; un test de performance par type
 - ADR-0040 — Adhésion par code
 - ADR-0041 — Classes, année scolaire, plafond, code d'adhésion
 - ADR-0043 — Lacunes de connaissance
@@ -878,7 +878,7 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 - ADR-0052 — Chaîne de livraison et worker toujours actif
 - ADR-0054 — Moteur d'évaluation et clôture automatique (F-34)
 - UDR-0005 — Design system (F-09)
-- UDR-0006 — Shell par rôle, toasts et CRUD par Hotwire (F-31) — **amendement requis** : l'entrée « Établissements » est active en V1
+- UDR-0006 — Shell par rôle, toasts et CRUD par Hotwire (F-31) — **amendé** le 2026-09-25 : l'entrée « Établissements » est active en V1
 - UDR-0007 — Vocabulaire d'interface (F-32)
 - UDR-0008 à UDR-0040 — une UDR par écran, écrite par le lot qui le livre (numéros réservés dans [`plan.md`](plan.md))
 

@@ -25,6 +25,10 @@
 | 2026-09-25 | Clés Active Record Encryption posées dans les credentials par l'orchestrateur ; clés de test fixes dans `config/environments/test.rb` ; `cache_store :memory_store` en test pour `rate_limit` | La CI n'a pas de clé maître ; `rate_limit` exige un cache réel | Non |
 | 2026-09-25 | `courses.content` et `essentials.content` en `text` ; éditeur riche reporté | Action Text retiré en V0 | Non |
 | 2026-09-25 | L'élève ne voit pas le code de sa classe | Choix du porteur | Non |
+| 2026-09-25 | **L'enseignant ne voit jamais les bonnes réponses en V1**, même pour préparer sa classe. **À rouvrir** si les enseignants le demandent : ce serait un amendement de `Assessment::RevealAnswersPolicy` et de la clé de cache par rôle | Choix du porteur | ADR-0028 |
+| 2026-09-25 | Classes générées : table de l'ancien code (ADR-0030), le mixte suit le privé. 77 pour un lycée public avec le référentiel de l'ADR-0034 (2nde en A et C) ; les 71 de l'ancienne application venaient d'une 2nde liée à C seule | Réponse du porteur ; le total dépend de `level_series` | ADR-0030 |
+| 2026-09-25 | `users.gender` obligatoire (`male`, `female`) ; limites d'import de l'ADR-0039 acceptées | Réponses du porteur | ADR-0037, ADR-0039 |
+| 2026-09-25 | Vague 3 découpée en quatre sous-vagues de 8 lots au plus (3a à 3d), chemin critique d'abord | Demande de team-lead : limiter les agents et la file de merge | Non (organisation du chantier) |
 | 2026-09-25 | `friendly_id` retiré (0a) : slugs figés par `Orm::HasFrozenSlug`, table `friendly_id_slugs` supprimée | Gem inutilisée, slugs figés à la création | Précision de l'ADR-0029 |
 
 ## Ce qui a dérapé
@@ -35,11 +39,13 @@
 
 - Le `ui_subject_badge(name)` du Lot 0c (état au 2026-09-25) déduit la couleur du nom de la matière, soit le défaut CA-26. Signalé à team-lead. Le Lot 0e fournit `ui_subject_badge(label, category:)`.
 
-## Amendements requis avant le Lot 0a
+## Amendements écrits dans la branche du plan (2026-09-25)
 
+- **ADR-0027** (erratum) : `TransactionPort` vit dans `app/domain/ports/shared/` (`Ports::Shared::TransactionPort`, ADR-0026).
 - **UDR-0006** : l'entrée « Établissements » (`schools_path`) de la navigation équipe est active dès la V1.
 - **ADR-0028** : policies ajoutées (`DeclareTeachingPolicy`, `IssuePinRecoveryCodePolicy`, `ResetSecondFactorPolicy`, `RegisterTeacherPolicy`, `ReadClassroomPolicy`, `SubmitAttemptPolicy`, `Identity::SessionPolicy`, `Identity::SecondFactorPolicy`) ; les exemptions restent les trois de l'ADR.
-- **ADR-0039** (erratum) : la colonne `errors` s'appelle `import_errors`, `errors` étant réservé par `ActiveModel`.
+- **ADR-0039** (erratum et précisions) : la colonne `errors` s'appelle `import_errors`, `errors` étant réservé par `ActiveModel` ; un test de performance par type ; jobs dérivés de `Shared::ImportJob`, associés par `config.x.import_jobs`.
+- **ADR-0034** : rien à amender. Il exclut déjà tout seed de DRENA, d'établissement et de référentiel en production, et fait des slugs figés de `levels` et `series` les codes de la génération des classes.
 
 ## Dette laissée derrière
 

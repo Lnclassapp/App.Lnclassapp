@@ -11,6 +11,8 @@
 
 ---
 
+> **Amendement du 2026-09-25** (chantier `docs/chantiers/boucle-pedagogique`). Le plan de la V1 ajoute huit policies à la liste du §4 : `Identity::SessionPolicy`, `Identity::SecondFactorPolicy`, `Identity::RegisterTeacherPolicy`, `Identity::IssuePinRecoveryCodePolicy`, `Identity::ResetSecondFactorPolicy`, `Classroom::DeclareTeachingPolicy`, `Classroom::ReadClassroomPolicy` et `Assessment::SubmitAttemptPolicy`. Les mécanismes de session (reprise, déconnexion, second facteur) ont donc leur policy : les exemptions restent les trois use cases d'authentification listés. La lecture d'un rapport d'import applique la policy de son type (`School::ManageSchoolPolicy` ou `Catalog::ManageContentPolicy`) : il n'y a pas de policy propre aux rapports.
+
 ## 1. Contexte et problématique
 
 L'ancien dépôt n'a qu'une policy, `Policies::ClassroomAccessPolicy`, qui renvoie un booléen ; le reste de l'autorisation est absent ou dans les contrôleurs. L'exploration du 2026-09-22 a trouvé des trous que l'ancien `securite.md` ne cite pas : tout compte connecté peut créer, modifier, supprimer ou importer des fiches (CA-12 à CA-15) et des établissements (SC-06 à SC-08) ; on gère le personnel d'une autre école (SC-11 à SC-14) ; `GET /classrooms` renvoie la liste nationale (CL-28) ; `GET /users/:id` expose le contact de n'importe quel compte (TR-21).
@@ -66,6 +68,14 @@ Le PRD cadre exige une policy par use case et un test de refus.
 | `Identity::ReadUserPolicy` | soi-même ; l'enseignant pour les élèves de ses classes (sans le contact) ; `team` |
 | `Identity::InviteTeamPolicy`, `Identity::DeleteUserPolicy` | `team` (sous-rôle `admin` à partir de la V4, ADR-0038) |
 | `Identity::UpdateSelfPolicy` | soi-même |
+| `Identity::SessionPolicy` *(amendement)* | le porteur du jeton, sur **sa** session : reprise et déconnexion ; refus si la session est absente |
+| `Identity::SecondFactorPolicy` *(amendement)* | un compte `team` : enrôlement si le second facteur n'est pas confirmé, vérification s'il l'est et que la session n'est pas encore vérifiée (ADR-0031) |
+| `Identity::RegisterTeacherPolicy` *(amendement)* | acteur anonyme seulement : seul un visiteur s'inscrit comme enseignant |
+| `Identity::IssuePinRecoveryCodePolicy` *(amendement)* | l'enseignant pour un élève de ses classes ; `team` pour tout compte sauf le sien (ADR-0032) |
+| `Identity::ResetSecondFactorPolicy` *(amendement)* | `team`, sur un autre compte `team`, jamais le sien (ADR-0031) |
+| `Classroom::DeclareTeachingPolicy` *(amendement)* | l'enseignant, sur une classe active de son école principale (ADR-0030) |
+| `Classroom::ReadClassroomPolicy` *(amendement)* | `team` ; l'enseignant de la classe ; l'élève dont c'est la classe principale active. La liste nominative n'est montrée qu'à `team` et à l'enseignant |
+| `Assessment::SubmitAttemptPolicy` *(amendement)* | l'élève propriétaire d'une session `started` (ADR-0054) |
 
 ## 5. Conséquences
 

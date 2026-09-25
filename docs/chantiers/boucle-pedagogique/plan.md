@@ -32,10 +32,10 @@ V0 + Lot 0c (design) ── déjà dans Develop (32fb626)
   │            Lot 0e  repositories · moteur d'import · front partagé ◄── 0a, 0b
   │                    └─ étape e4 (écran des imports, seeds, gardes)  ◄── 0d mergé
   │
-  ├─ Vague 3 : 30 lots en parallèle ────────────────────────────────────────────────────┐
+  ├─ Vague 3 : 30 lots, en sous-vagues de 8 au plus (3a → 3d) ──────────────────────────┐
   │                                                                                     │
   │  R — Référentiel (équipe)   S — DRENA, établissements      I — Import de contenu    │
-  │  ├─► R1 niveaux             ├─► S1 DRENA                   ├─► I1 cours (arbre)     │
+  │  ├─► R1 niveaux             ├─► S1 DRENA : gestion         ├─► I1 cours (arbre)     │
   │  ├─► R2 séries, couples     ├─► S2 établissements          ├─► I2 fiches ess.       │
   │  └─► R3 matières            │       + génération classes   └─► I3 exercices         │
   │                             └─► S3 import établissements                            │
@@ -65,7 +65,7 @@ V0 + Lot 0c (design) ── déjà dans Develop (32fb626)
 **Pourquoi B (publication) ne dépend pas de R (référentiel).**
 - B a besoin de niveaux, de séries et de matières **en base**, pas des écrans qui les créent. Ses tests les créent avec les fabriques de 0a. En développement, le seed du référentiel les fournit (ADR-0034).
 - Les écrans R ne sont nécessaires qu'au parcours réel, donc au Lot E, qui dépend de tout.
-- B et R partent donc ensemble en vague 3. Le même raisonnement vaut pour S (établissements) face à D (enseignant), et pour I (import) face à B.
+- B et R partent donc dans la même vague 3 (sous-vagues 3a et 3b). Le même raisonnement vaut pour S (établissements) face à D (enseignant), et pour I (import) face à B.
 
 ### Pourquoi le socle est plus gros que « des routes vides »
 
@@ -91,12 +91,37 @@ Les contrôleurs Stimulus sont chargés **par motif de fichier** (`esbuild-rails
 |---|---|---|---|---|
 | **0a** | Dépendances, 31 migrations, schéma, modèles `Orm::`, routes V1 complètes, fabriques, configuration de test | V0 et 0c (dans `Develop`) | 0b | `lnclass-lot-0a` · `feature/boucle-pedagogique-lot-0a` |
 | **0b** | Domaine pur : `Shared::Result`, entités, objets-valeurs, **tous les ports**, policies, DTO du socle | V0 | 0a | `lnclass-lot-0b` · `feature/boucle-pedagogique-lot-0b` |
-| **0d** | Transaction, 9 repositories `identity`, use cases d'authentification et de second facteur, contrôleurs et écrans de connexion, shell branché, helpers de test | 0a **et** 0b mergés | 0e | `lnclass-lot-0d` · `feature/boucle-pedagogique-lot-0d` |
-| **0e** | 18 autres repositories, moteur d'import, front partagé, puis (e4) écran des imports, seeds et gardes d'architecture | 0a **et** 0b mergés ; **e4 attend le merge de 0d** | 0d (étapes e1 à e3) | `lnclass-lot-0e` · `feature/boucle-pedagogique-lot-0e` |
+| **0d** | Transaction, 9 repositories `identity`, use cases d'authentification et de second facteur, contrôleurs et écrans de connexion, `Teams::BaseController`, shell branché, helpers de test | départ : 0a mergé ; merge : 0a **et** 0b | 0e | `lnclass-lot-0d` · `feature/boucle-pedagogique-lot-0d` |
+| **0e** | 18 autres repositories, moteur d'import, front partagé, puis (e4) écran des imports, seeds et gardes d'architecture | départ : 0a mergé ; merge : 0a **et** 0b ; **e4 attend le merge de 0d** | 0d (étapes e1 à e3) | `lnclass-lot-0e` · `feature/boucle-pedagogique-lot-0e` |
+
+**Dépendances réelles.**
+
+| Sous-lot | Peut partir quand | Peut être mergé quand | Pourquoi |
+|---|---|---|---|
+| 0a | tout de suite | quand il est vert | ne lit aucun fichier d'un autre sous-lot |
+| 0b | tout de suite | quand il est vert | Ruby pur : n'ouvre ni la base ni `Orm::` |
+| 0d | 0a mergé | 0a **et** 0b mergés | ses repositories lisent `Orm::` (0a) et incluent les ports (0b). Les signatures des ports sont **gelées dans ce plan** (0b.3) : 0d peut les coder avant le merge de 0b, mais ses tests ne passent qu'après, une fois sa branche rebasée. |
+| 0e (e1 à e3) | 0a mergé | 0a **et** 0b mergés | même raison que 0d ; le moteur (e2) appelle `ImportKind`, `ImportReport` et `TransactionPort#attempt`, figés dans 0b.2 et 0b.3 |
+| 0e (e4) | 0d mergé | 0a, 0b et 0d mergés | `Teams::ImportsController` hérite de `Teams::BaseController` (0d) ; son test système se connecte par l'authentification de 0d |
+
+**Correspondance avec la numérotation 0.1 à 0.11** de la version précédente de ce plan (`efee7fd`), citée dans des échanges antérieurs :
+
+| Ancienne étape | Sous-lot actuel |
+|---|---|
+| 0.1 Dépendances · 0.2 Migrations · 0.3 `Orm::` | 0a.1 · 0a.2 · 0a.3 |
+| 0.4 Domaine · 0.6 Policies, DTO | 0b.1 à 0b.5 (les use cases d'authentification sont passés dans 0d.2) |
+| 0.5 Ports **et repositories** | ports : 0b.3 ; repositories : 0d.1 (`identity`, transaction) et e1 (les 18 autres) |
+| 0.7 Moteur d'import | e2, e4 |
+| 0.8 Queries et helpers partagés | e3 |
+| 0.9 Seeds | e4 |
+| 0.10 Routes, authentification, shell | routes : 0a.4 ; authentification, second facteur, shell branché, `Teams::BaseController` : 0d |
+| 0.11 Support de test, garde-fous | fabriques : 0a.5 ; assertions Turbo : 0d.4 ; garde-fous d'architecture : e4 |
+
+Les routes et les fabriques sont dans 0a, et non dans un sous-lot plus tardif : elles ne dépendent que du schéma, et tous les autres sous-lots en ont besoin pour leurs tests.
 
 **Règles propres au socle.**
 - Les quatre sous-lots ont des fichiers **disjoints** : la vérification de collision en fin de plan le prouve.
-- Les ports sont écrits en entier par 0b. Ils sont **gelés** au merge de 0b : 0d, 0e et les lots verticaux les implémentent ou les appellent, sans les modifier. Un besoin de changement arrête le sous-lot et remonte à l'orchestrateur.
+- Les ports sont écrits en entier par 0b. Leurs signatures sont **gelées dès ce plan**, et leur code au merge de 0b : 0d, 0e et les lots verticaux les implémentent ou les appellent, sans les modifier. Un besoin de changement arrête le sous-lot et remonte à l'orchestrateur.
 - Chaque sous-lot fait un commit par sous-étape (`feat(<ctx>): …`), garde `bin/ci` vert à chaque merge, et respecte le brief standard.
 - Les lots verticaux partent **après le merge des quatre sous-lots**.
 
@@ -797,7 +822,7 @@ Forme unique : `Policies::<Ctx>::<Nom>Policy.new.call(actor:, **faits) → Share
 
 - **Couche**       : infrastructure (transaction, repositories `identity`, queries) + domaine (use cases d'authentification) + delivery + ui
 - **Fichiers**     : les chemins des tableaux 0d.1 à 0d.4, exhaustifs.
-- **Dépend de**    : 0a et 0b mergés. Parallèle de 0e.
+- **Dépend de**    : part dès que 0a est mergé, en codant contre les signatures de ports gelées en 0b.3 ; mergé après 0a **et** 0b. Parallèle de 0e.
 - **Test associé** : colonne « Test » des tableaux, et le test système de connexion (0d.4).
 - **Done quand**   :
   - un élève, un enseignant et un membre de l'équipe créés par les fabriques se connectent ; le membre de l'équipe passe son TOTP ; chacun est redirigé vers sa destination (`HomeDestination`), qui peut encore répondre 404 tant que son lot n'est pas mergé ;
@@ -884,7 +909,7 @@ Une seule méthode publique `call(...) → Shared::Result`. Ports, policies et h
 
 - **Couche**       : infrastructure (repositories, queries) + domaine (moteur d'import) + delivery (écran des imports, job de base) + ui (front partagé) + seeds + gardes d'architecture
 - **Fichiers**     : les chemins des tableaux e1 à e4, exhaustifs.
-- **Dépend de**    : 0a et 0b mergés. **L'étape e4 attend le merge de 0d** (contrôleur d'équipe, authentification, `UserRepository`, `AuditLogRepository`, `Transaction`). Les étapes e1 à e3 avancent en parallèle de 0d.
+- **Dépend de**    : part dès que 0a est mergé, en codant contre les signatures de ports gelées en 0b.2 et 0b.3 ; e1 à e3 sont mergées après 0a **et** 0b. **L'étape e4 attend le merge de 0d** (contrôleur d'équipe, authentification, `UserRepository`, `AuditLogRepository`, `Transaction`). Les étapes e1 à e3 avancent en parallèle de 0d.
 - **Test associé** : colonne « Test » des tableaux, test système du parcours d'import (fin de e4), gardes d'architecture.
 - **Done quand**   :
   - chaque repository passe son test de contrat, `AssignmentRepository` à 100 % lignes et branches pour les trois types de ressource ;
@@ -2129,7 +2154,7 @@ Chaque lot vertical :
 
 ---
 
-## Lot S1 — DRENA
+## Lot S1 — DRENA : gestion
 
 - **Couche**       : domaine (DTO, use cases) + infrastructure (query) + delivery + ui
 - **Fichiers**     :
@@ -2431,17 +2456,26 @@ Chaque lot vertical :
 ## Vagues de dispatch
 
 ```
-Vague 0 : V0 + Lot 0c (design)                               → mergés dans Develop (32fb626)
-Vague 1 : 0a ‖ 0b                                            → 2 agents, fichiers disjoints
-Vague 2 : 0d ‖ 0e (étapes e1 à e3), puis e4 après le merge de 0d   → 2 agents
-Vague 3 : A1 ‖ A2 ‖ A3 ‖ A4
-          ‖ B1 ‖ B2 ‖ B3 ‖ B4 ‖ B5 ‖ B6 ‖ B7 ‖ B8
-          ‖ C1 ‖ C2 ‖ C3
-          ‖ D1 ‖ D2 ‖ D3 ‖ D4 ‖ D5 ‖ D8
-          ‖ R1 ‖ R2 ‖ R3 ‖ S1 ‖ S2 ‖ S3 ‖ I1 ‖ I2 ‖ I3      → 30 agents, worktrees isolés
-Vague 4 : D6 ‖ D7 (dépendent de D5)                          → 2 agents
-Vague 5 : Lot E (dépend de tous)                             → 1 agent, rôle distinct des auteurs
+Vague 0 : V0 + Lot 0c (design)                         → mergés dans Develop (32fb626)
+Vague 1 : 0a ‖ 0b                                      → 2 agents, fichiers disjoints
+Vague 2 : 0d ‖ 0e (e1 à e3) dès le merge de 0a,
+          mergés après 0b ; e4 après le merge de 0d    → 2 agents
+Vague 3 : 30 lots verticaux, en quatre sous-vagues de 8 au plus
+  3a : R1 ‖ R2 ‖ R3 ‖ S1 ‖ S2 ‖ B2 ‖ B4 ‖ B5            → 8 agents
+  3b : D1 ‖ D2 ‖ D4 ‖ D5 ‖ A1 ‖ A2 ‖ C1 ‖ C2            → 8 agents
+  3c : C3 ‖ B7 ‖ S3 ‖ I1 ‖ I2 ‖ I3 ‖ B1 ‖ B3            → 8 agents
+  3d : A3 ‖ A4 ‖ B6 ‖ B8 ‖ D3 ‖ D8                     → 6 agents
+Vague 4 : D6 ‖ D7 (dépendent de D5, mergé en 3b),
+          lancés avec 3d                               → 2 agents (3d + 4 = 8)
+Vague 5 : Lot E (dépend de tous)                       → 1 agent, rôle distinct des auteurs
 ```
+
+**Ordre des sous-vagues : le chemin critique d'abord.**
+- **3a et 3b, puis C3 et B7 en tête de 3c**, forment le chemin critique du parcours bout en bout. L'équipe crée le référentiel, une DRENA et un établissement, qui génère ses classes. Elle publie un cours, une fiche essentielle et un exercice, et invite un collègue. L'enseignant s'inscrit, déclare ses classes, ouvre sa classe et assigne. L'élève rejoint sa classe, voit son accueil, fait l'exercice et obtient son badge.
+- **3c** ajoute les imports (S3, I1, I2, I3), puis la lecture du catalogue et des fiches (B1, B3).
+- **3d** livre le reste : A3, A4, B6, B8, D3, D8, et D6 et D7, qui attendent D5.
+- Les lots d'une même sous-vague ne dépendent que du socle : aucun n'attend un autre lot de la même sous-vague. Le découpage ne change donc pas le graphe. Il limite seulement le nombre d'agents et la file de merge.
+- **Une sous-vague part quand la précédente est entièrement mergée** et que `bin/ci` est vert sur la branche de chantier. Si l'orchestrateur a de la capacité, il peut avancer un lot de la sous-vague suivante dès qu'une place se libère, en respectant l'ordre de la liste. Il ne dépasse jamais 8 lots verticaux actifs.
 
 Chaque lot travaille dans son propre worktree, créé depuis la branche de chantier une fois ses dépendances mergées :
 
@@ -2451,14 +2485,9 @@ git worktree add ../lnclass-lot-s3 -b feature/boucle-pedagogique-lot-s3 feature/
 
 **Ordre de merge.**
 - Vague 1 : 0a et 0b dans l'ordre où ils finissent ; aucun fichier commun.
-- Vague 2 : 0d, puis la fin de 0e (e4 part de la branche de chantier après le merge de 0d).
-- Vague 3 : dans l'ordre où les lots finissent ; les fichiers sont disjoints, il n'y a jamais de conflit textuel. D5 est mergé avant le départ de D6 et D7.
+- Vague 2 : 0d et e1 à e3 après 0a et 0b ; e4 part de la branche de chantier après le merge de 0d.
+- Vague 3 : dans chaque sous-vague, dans l'ordre où les lots finissent ; les fichiers sont disjoints, il n'y a jamais de conflit textuel. D5 est mergé (3b) avant le départ de D6 et D7.
 - Après chaque merge, l'orchestrateur lance `bin/ci` sur la branche de chantier : un lot qui la casse est retiré, pas corrigé sur place.
-
-**Si l'orchestrateur doit limiter le parallélisme**, la vague 3 se découpe sans changer le graphe :
-- **d'abord le chemin critique** du parcours bout en bout : R1, R2, R3, S1, S2, B2, B4, B5, D1, D2, D4, D5, A1, A2, C1, C2, C3, B7 ;
-- **ensuite** les imports : S3, I1, I2, I3 ;
-- **enfin le reste** : A3, A4, B1, B3, B6, B8, D3, D8.
 
 ## Traçabilité — feature V1 → lot
 
@@ -2566,7 +2595,7 @@ Source : [feuille de route §6](../refonte-application/feuille-de-route.md#6-tra
 
 ## Décisions que ce plan suppose
 
-Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne sur eux. Restent des **amendements** à écrire avant le départ de 0a, et des **précisions** que les ADR laissent ouvertes, ajustables par l'orchestrateur sans toucher aux lots verticaux.
+Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne sur eux. Les **amendements** et **errata** qu'il exige sont **écrits dans la branche de ce plan** (`docs/boucle-pedagogique`) : UDR-0006, ADR-0028, ADR-0039 et ADR-0027. Restent des **précisions** que les ADR laissent ouvertes, ajustables par l'orchestrateur sans toucher aux lots verticaux.
 
 | Décision supposée | Nature | Où elle doit figurer |
 |---|---|---|
@@ -2574,11 +2603,12 @@ Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne su
 | L'entrée « Établissements » (`schools_path`) de la navigation équipe est **active** dès la V1 : les établissements sont entrés dans le périmètre. `team_dashboard_path` et `profile_path` restent inactives. | **Amendement** | UDR-0006 (ligne « En V1, … restent inactives ») |
 | Policies ajoutées à la liste de l'ADR-0028 : `DeclareTeachingPolicy` (ADR-0030), `IssuePinRecoveryCodePolicy` (ADR-0032), `ResetSecondFactorPolicy` (ADR-0031), `RegisterTeacherPolicy`, `ReadClassroomPolicy`, `SubmitAttemptPolicy` (règle de l'ADR-0054), `Identity::SessionPolicy` et `Identity::SecondFactorPolicy`. Ces deux dernières donnent une policy aux mécanismes de session, qui ne sont donc **pas** exemptés : les exemptions restent les trois de l'ADR-0028. La lecture d'un rapport d'import applique la policy de son type : pas de `ReadImportReportPolicy`. | **Amendement** | ADR-0028 |
 | La destination d'accueil est une **query** (`HomeDestinationQuery`, qui délègue à l'entité `HomeDestination`), pas un use case : c'est une lecture. | Précision | ADR-0028 |
+| `TransactionPort` vit dans `app/domain/ports/shared/` (`Ports::Shared::TransactionPort`, ADR-0026), et non dans `app/domain/shared/`. | **Erratum** | ADR-0027 |
 | `Ports::Shared::TransactionPort#attempt` : un bloc dont l'écriture est refusée par la base renvoie `failure(:conflict)` au lieu de lever. C'est ce qui permet au moteur de rejouer un lot élément par élément sans nommer une exception d'infrastructure dans le domaine. | Précision | ADR-0026 |
 | Le moteur d'import est câblé par `Shared::ImportJob` et `config.x.import_jobs` (nom du job par type, résolu à l'appel) : un lot d'import n'édite aucun fichier du socle. | Précision | ADR-0039 |
 | **Un test de performance par type** (`test/performance/<ctx>/import_<kind>_performance_test.rb`), au lieu du fichier unique `test/performance/imports_test.rb` de l'ADR-0039 : chaque lot possède le sien, sans collision. Hors CI, joués avec `PERF=1` avant la recette. | Écart assumé | ADR-0039 |
 | `courses.content` et `essentials.content` en **`text`** (HTML simple nettoyé à l'affichage, saisi dans un `text_area`) : Action Text a été retiré en V0 ; l'éditeur riche est reporté. | Précision | ADR-0035 |
-| `users.gender` conservé, non nul (`male`, `female`) : l'ancienne application le demandait et le PRD cadre le garde. | Choix ouvert | ADR-0037 |
+| `users.gender` conservé, non nul (`male`, `female`) : l'ancienne application le demandait et le PRD cadre le garde. Confirmé par le porteur le 2026-09-25. | Précision | ADR-0037 |
 | `friendly_id` **retiré** : slugs figés par `Orm::HasFrozenSlug`, `public_id` par `Orm::HasPublicId` ; la table `friendly_id_slugs` de V0 est supprimée. | Précision | ADR-0029 |
 | La CSS de KaTeX est un **fichier séparé** (`katex.css`), chargé par `math_controller` seulement sur les pages qui ont des formules : le budget CSS commun (30 Ko) reste tenu. | Précision | ADR-0051 |
 | `rate_limit` exige un cache réel en test : `config/environments/test.rb` passe à `:memory_store`, vidé avant chaque test. | Précision | ADR-0050 |
@@ -2597,9 +2627,9 @@ Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne su
 | **Job tué** en cours d'import (déploiement) : rapport bloqué en `importing`. | `StartImport` passe `failed` tout rapport commencé depuis plus de 30 min ; relancer le fichier compte en doublons ce qui était déjà écrit. |
 | **`RAILS_MASTER_KEY`** absente ou différente sur Railway : les secrets TOTP chiffrés deviennent illisibles. | À vérifier par l'orchestrateur avant le déploiement de la V1 ; les tests n'en dépendent pas (clés de test dans `test.rb`). |
 | **Stockage S3 Railway** (ADR-0047) : sans lui, les fichiers d'import ne sont pas conservés en production. | Le bucket et ses variables sont une action Railway, avec le feu vert du porteur, requise avant le déploiement de la V1 ; en local et en test, services `local` et `test`. |
-| **Amendements non écrits** (UDR-0006, ADR-0028, erratum de l'ADR-0039) : sans eux, le plan contredit des décisions acceptées. | Signalés à team-lead dans le rapport ; à écrire avant le départ de 0a. |
+| **Amendements non mergés** (UDR-0006, ADR-0028, ADR-0039, ADR-0027) : sans eux, le plan contredit des décisions acceptées. | Écrits dans la branche de ce plan ; ils entrent dans `Develop` avec lui. |
 | Un test système de lot ne voit pas la page hôte d'un autre lot (pas encore mergée). | `open_in_modal` depuis une page du socle ; le parcours par les vrais boutons est rejoué au Lot E. |
-| 30 agents en parallèle : file de merge et temps de CI longs. | Chemin critique d'abord (« Vagues de dispatch ») ; `bin/ci` après chaque merge. |
+| 30 lots verticaux : file de merge et temps de CI longs. | Quatre sous-vagues de 8 lots au plus, chemin critique d'abord (« Vagues de dispatch ») ; `bin/ci` après chaque merge. |
 
 ## Portes de sortie
 

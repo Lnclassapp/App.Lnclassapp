@@ -117,18 +117,19 @@ Tant qu'elle n'est pas livrée, aucun élève réel ne peut utiliser la nouvelle
 
 ## Questions encore ouvertes
 
-- **Genre** : `users.gender` est conservé, obligatoire (`male`, `female`). À confirmer (ADR-0037).
-- **Amendements à écrire avant le Lot 0a** :
-  - UDR-0006 : l'entrée « Établissements » (`schools_path`) de la navigation équipe devient active en V1 ;
-  - ADR-0028 : policies ajoutées (`DeclareTeachingPolicy`, `IssuePinRecoveryCodePolicy`, `ResetSecondFactorPolicy`, `RegisterTeacherPolicy`, `ReadClassroomPolicy`, `SubmitAttemptPolicy`, `Identity::SessionPolicy`, `Identity::SecondFactorPolicy`) ;
-  - ADR-0039 (erratum) : la colonne `errors` s'appelle `import_errors`.
+- Aucune. Les amendements et errata sont écrits dans la branche du plan (2026-09-25) :
+  - UDR-0006 : l'entrée « Établissements » (`schools_path`) de la navigation équipe est active en V1 ;
+  - ADR-0028 : huit policies ajoutées (`DeclareTeachingPolicy`, `IssuePinRecoveryCodePolicy`, `ResetSecondFactorPolicy`, `RegisterTeacherPolicy`, `ReadClassroomPolicy`, `SubmitAttemptPolicy`, `Identity::SessionPolicy`, `Identity::SecondFactorPolicy`) ;
+  - ADR-0039 (erratum) : la colonne `errors` s'appelle `import_errors` ; un test de performance par type ; `Shared::ImportJob` ;
+  - ADR-0027 (erratum) : `TransactionPort` vit dans `app/domain/ports/shared/`.
 
 ### Questions résolues le 2026-09-25
 
+- **Genre** : `users.gender` conservé et obligatoire (`male`, `female`), comme dans l'ancienne application. Confirmé par le porteur.
 - **Séries et codes du référentiel** : repris de l'ADR-0034 (A et C liées à la 2nde). Pas de colonne `code` : le slug figé à la création en tient lieu (`6eme`, `2nde`, `tle`…). « Par série » désigne une liaison `level_series`.
-- **Nombre de classes générées** : ADR-0030 — lycée public 77, privé 38, mixte 38, collège public 28, noms espacés (« Tle D 3 »).
+- **Nombre de classes générées** : la table de l'ancien code, reprise telle quelle par l'ADR-0030 ; le mixte suit le barème du privé. Le total dépend des séries liées à chaque niveau (« par série »). Avec le référentiel de l'ADR-0034 (A et C en 2nde, A1, A2, C, D en 1ère), un lycée public reçoit **77** classes, un privé ou mixte 38, un collège public 28. Les 71 de l'ancienne application venaient de son référentiel, qui ne liait que C à la 2nde (6 classes de 2nde au lieu de 12). Noms espacés (« Tle D 3 »).
 - **Limites d'import** : ADR-0039 — 20 Mo ; 5 000 écoles, 500 cours, 2 000 fiches, 10 000 exercices par fichier.
 - **Import partiel** : validé par le porteur ; la remédiation (ADR-0043, V5) est validée telle quelle.
-- **Enseignant et bonnes réponses** : l'ADR-0028 accepté les lui refuse.
+- **Enseignant et bonnes réponses** : l'enseignant ne les voit jamais en V1 (ADR-0028, confirmé par le porteur). Question réouvrable plus tard : consignée au journal.
 - **Clés Active Record Encryption** : ajoutées aux credentials par l'orchestrateur (`db:encryption:init`) ; le porteur n'a rien à fournir. Des clés de test fixes vivent dans `config/environments/test.rb`.
 - **Données d'exemple** : les fichiers `.Business` de l'ancienne application servent d'exemples et de données de développement et de test, jamais de seed de production.

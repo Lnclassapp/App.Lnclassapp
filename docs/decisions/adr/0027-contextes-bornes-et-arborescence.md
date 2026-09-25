@@ -10,6 +10,8 @@
 
 ---
 
+> **Erratum du 2026-09-25** (chantier `docs/chantiers/boucle-pedagogique`). L'arborescence plaçait `TransactionPort` dans `app/domain/shared/`, sous `Shared::`. L'ADR-0026 le nomme `Ports::Shared::TransactionPort` : c'est un port, il vit avec les autres ports, dans `app/domain/ports/shared/`. Seul `Shared::Result` reste dans `app/domain/shared/`. La ligne de l'arborescence est corrigée.
+
 ## 1. Contexte et problématique
 
 Trois sources placent les mêmes concepts à trois endroits : l'ADR-0023 met DRENA, école et classe dans `Identity`, les conventions dans `school` et `classroom`, l'architecture §5 la DRENA dans `catalog` (**C-03**).
@@ -47,7 +49,8 @@ L'ADR-0014 §2.2 prévoit `app/presentation/` et `adapters/`, qui n'existent pas
 
 | Emplacement | Namespace |
 |---|---|
-| `app/domain/shared/` | `Shared::` (`Result`, `TransactionPort`) |
+| `app/domain/shared/` | `Shared::Result` |
+| `app/domain/ports/shared/` | `Ports::Shared::TransactionPort` (ADR-0026) |
 | `app/domain/{entities,use_cases,ports,dtos,policies}/<contexte>/` | `Entities::<Contexte>::…`, etc. |
 | `app/infrastructure/orm/` | `Orm::<Modèle>`, à plat, un modèle par table |
 | `app/infrastructure/repositories/<contexte>/` | `Repositories::<Contexte>::…` |
