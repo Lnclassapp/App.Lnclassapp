@@ -19,6 +19,11 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+# Chaque worktree git a ses propres bases, pour que des agents en parallèle
+# ne partagent jamais une base de test. Dépôt principal : suffixe vide.
+<% wt = File.basename(File.expand_path("..", __dir__)) %>
+<% db_suffix = wt == "App.Lnclassapp" ? "" : "_" + wt.downcase.gsub(/[^a-z0-9]/, "_") %>
+
 # db config
 db_config: &db_config
   username: dev-rails
@@ -29,7 +34,7 @@ db_config: &db_config
 development:
   <<: *default
   <<: *db_config
-  database: app_lnclassapp_development
+  database: app_lnclassapp_development<%= db_suffix %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -64,7 +69,7 @@ development:
 test:
   <<: *default
   <<: *db_config
-  database: app_lnclassapp_test
+  database: app_lnclassapp_test<%= db_suffix %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
