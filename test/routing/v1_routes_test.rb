@@ -23,15 +23,23 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
   end
 
   # The first matching route, without loading its controller: most are not merged yet.
-  def first_match(path)
-    request = ActionDispatch::Request.new(Rack::MockRequest.env_for(path))
+  def first_match(path, method: "GET")
+    request = ActionDispatch::Request.new(Rack::MockRequest.env_for(path, method:))
     Rails.application.routes.router.recognize(request) { |_route, params| return params.slice(:controller, :action) }
+    nil
   end
 
   test "new is never captured by a slug or a public_id" do
-    %w[courses schools levels series materials drenas].each do |resource|
+    %w[courses levels series materials drenas].each do |resource|
       assert_equal({ controller: "teams/#{resource}", action: "new" }, first_match("/teams/#{resource}/new"))
     end
+  end
+
+  test "schools are created by JSON import only, never through a form" do
+    assert_not helpers.respond_to?(:new_school_path)
+    assert_nil first_match("/teams/schools", method: "POST")
+    assert_equal({ controller: "teams/imports", action: "create" }, first_match("/teams/imports", method: "POST"))
+    assert_equal({ controller: "teams/school_classrooms", action: "new" }, first_match("/teams/schools/abcdefghijkmno/classrooms/new"))
   end
 
   test "resources are addressed by public_id or slug" do

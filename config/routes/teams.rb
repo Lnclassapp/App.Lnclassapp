@@ -6,7 +6,8 @@ get "teams", to: "teams/homes#show", as: :team_home # gelé
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
 scope "teams", module: "teams" do
   resources :drenas, param: :public_id, except: :show
-  resources :schools, param: :public_id do
+  # Aucun formulaire de création : les établissements n'entrent que par import JSON (teams/imports, kind « schools »).
+  resources :schools, param: :public_id, except: %i[new create] do
     member { patch :deactivate }
     resources :classrooms, only: %i[new create], controller: "school_classrooms"
   end
