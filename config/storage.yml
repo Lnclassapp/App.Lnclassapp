@@ -6,13 +6,17 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-# Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   bucket: your_own_bucket-<%= Rails.env %>
+# ADR-0047 : one Railway bucket per environment (recette, production), S3-compatible.
+# The web service's BUCKET_* variables reference the bucket's own (${{Bucket.ENDPOINT}}…),
+# never stored in the repository.
+railway:
+  service: S3
+  endpoint: <%= ENV["BUCKET_ENDPOINT"] %>
+  bucket: <%= ENV["BUCKET_NAME"] %>
+  access_key_id: <%= ENV["BUCKET_ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["BUCKET_SECRET_ACCESS_KEY"] %>
+  region: <%= ENV.fetch("BUCKET_REGION", "auto") %>
+  force_path_style: <%= ENV["BUCKET_FORCE_PATH_STYLE"] == "true" %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

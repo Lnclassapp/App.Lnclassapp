@@ -1,6 +1,17 @@
 require_relative "boot"
 
-require "rails/all"
+# rails/all without Action Text: Trix and rich text are out of the common
+# bundle (ADR-0051) and no screen uses them yet.
+require "rails"
+require "active_record/railtie"
+require "active_storage/engine"
+require "action_controller/railtie"
+require "action_view/railtie"
+require "action_mailer/railtie"
+require "active_job/railtie"
+require "action_cable/engine"
+require "action_mailbox/engine"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +34,19 @@ module AppLnclassapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Interface in French, code in English. One locale file per context and screen:
+    # config/locales/<context>/<screen>.fr.yml (boucle-de-travail §6).
+    config.i18n.default_locale = :fr
+    config.i18n.available_locales = %i[fr en]
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
+
+    # ADR-0047 : files are served through the application (proxy mode): URLs stay on
+    # our origin and the CSP never lists the bucket.
+    config.active_storage.resolve_model_to_route = :rails_storage_proxy
+
+    # ADR-0052 : Mission Control Jobs is protected by the team area authentication.
+    config.mission_control.jobs.base_controller_class = "Teams::BaseController"
+    config.mission_control.jobs.http_basic_auth_enabled = false
   end
 end

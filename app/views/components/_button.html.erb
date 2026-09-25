@@ -1,0 +1,15 @@
+<%# 🌐 UI · components/_button — bouton ou lien, appelé par ui_button %>
+<%# Rôle : balisage ; variantes, tailles et états sont calculés dans ComponentsHelper %>
+<%# UDR  : 0005 %>
+<%= content_tag tag_name, attributes do %>
+  <% if loading %>
+    <%= ui_spinner size: icon_size %>
+    <span class="sr-only"><%= t(".loading") %></span>
+  <% elsif icon %>
+    <%= ui_icon icon, size: icon_size %>
+  <% end %>
+  <%= content %>
+  <% if icon_end %>
+    <%= ui_icon icon_end, size: icon_size %>
+  <% end %>
+<% end %>

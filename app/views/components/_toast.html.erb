@@ -1,0 +1,17 @@
+<%# 🌐 UI · components/_toast — notification, appelée par ui_toast et turbo_stream_toast %>
+<%# Rôle : message rendu côté serveur ; l'erreur reste affichée jusqu'à fermeture (role="alert") %>
+<%# UDR  : 0006 · Stimulus : toast %>
+<%= tag.div role: (type == :error ? "alert" : nil), data: { controller: "toast", toast_delay_value: delay, toast_type: type,
+      action: "mouseenter->toast#pause mouseleave->toast#resume focusin->toast#pause focusout->toast#resume" },
+      class: "pointer-events-auto relative flex w-full max-w-sm items-start gap-3 overflow-hidden rounded-card border border-line bg-white py-4 pr-2 pl-5 shadow-pop animate-slide-up" do %>
+  <span class="absolute inset-y-0 left-0 w-1 <%= config[:bar] %>" aria-hidden="true"></span>
+  <%= ui_icon config[:icon], size: :lg, class: config[:tone] %>
+  <div class="min-w-0 flex-1 pt-0.5">
+    <p class="font-semibold text-ink"><%= title || t(".titles.#{type}") %></p>
+    <p class="mt-0.5 text-sm text-mute"><%= message %></p>
+  </div>
+  <button type="button" data-action="toast#dismiss" aria-label="<%= t(".dismiss") %>"
+          class="-my-2 grid size-tap shrink-0 cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand">
+    <%= ui_icon "x-mark" %>
+  </button>
+<% end %>

@@ -1,8 +1,10 @@
 # UDR-0004 : Identité et Profils (Identity UI)
 
+> ⚠️ **Non applicable au projet cible** ([UDR-0005](./0005-design-system-fondateur.md), 2026-09-25). Cette UDR décrit une migration à iso-interface de l'ancienne application (5 rôles dont `parent`, tiroir et barre latérale « non altérés »). Le projet cible a 4 rôles et un shell unique : voir [UDR-0006](./0006-shell-applicatif-par-role.md).
+
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Accepté — non applicable au projet cible (UDR-0005) |
 | **Date** | — |
 | **Chantier** | — |
 | **ADR lié** | [ADR-0021 — Migration de la gestion de l'identité vers le domaine pur](../adr/0021-gestion-de-l-identite.md) |
