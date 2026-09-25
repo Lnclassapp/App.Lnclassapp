@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/exercises/create — succès de la création d'un exercice %>
+<%# Rôle : toast ; la page hôte (fiche essentielle, autre lot) est rafraîchie par morphing ; la modale se ferme seule %>
+<%# ADR  : 0035 · UDR : 0006, 0017 · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
+<%= turbo_stream_toast t(".created", title: @exercise.title), type: :success %>
+<%= turbo_stream.refresh(request_id: nil) %>

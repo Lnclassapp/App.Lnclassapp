@@ -1,0 +1,13 @@
+<%# 🌐 UI · teams/exercises/new — création d'un exercice dans une fiche essentielle, servie dans le frame « modal » %>
+<%# Rôle : grande modale ; échec re-rendu ici en 422, succès en Turbo Stream (create.turbo_stream) %>
+<%# ADR  : 0035, 0054 · UDR : 0006, 0017 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "exercise-modal", size: :lg, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "exercise-form", icon: "plus" %>
+    <% end %>
+    <p id="exercise-essential" class="mb-5 text-sm text-mute"><%= t(".essential", name: @essential.name) %></p>
+    <%= render "form", input: @form, url: teams_essential_exercises_path(@essential.slug), method: :post, locked: false, exercise: nil %>
+  <% end %>
+<% end %>

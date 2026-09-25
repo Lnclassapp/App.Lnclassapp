@@ -1,0 +1,13 @@
+<%# 🌐 UI · teams/exercises/edit — modification d'un exercice, servie dans le frame « modal » %>
+<%# Rôle : grande modale ; après une session, questions en lecture seule (ADR-0036) ; échec en 422, succès en Turbo Stream %>
+<%# ADR  : 0036, 0054 · UDR : 0006, 0017 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "exercise-modal", size: :lg, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "exercise-form" %>
+    <% end %>
+    <%= render "form", input: @form, url: teams_exercise_path(@exercise.public_id), method: :patch,
+                       locked: @questions_locked, exercise: @exercise %>
+  <% end %>
+<% end %>
