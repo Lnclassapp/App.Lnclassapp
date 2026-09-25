@@ -32,6 +32,8 @@
     <%# ADR-0051 : navigateur hors liste — on prévient sans bloquer (@outdated_browser posé par allow_browser) %>
     <% if @outdated_browser %><div class="outdated-browser" role="status"><%= t("layouts.outdated_browser") %></div><% end %>
     <%= render "shared/toasts" %>
+    <%# UDR-0006 : cible des modales CRUD (lien data-turbo-frame="modal"), vidée à la fermeture %>
+    <%= turbo_frame_tag "modal" %>
     <%= content_for?(:body) ? yield(:body) : yield %>
     <%= debugbar_body(nonce: content_security_policy_nonce) if defined?(Debugbar) %>
   </body>

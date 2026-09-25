@@ -171,6 +171,44 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_no_selector "#toasts [data-toast-type=success]", wait: 7
   end
 
+  test "a CRUD form opens in the modal frame, keeps its errors in 422 and closes on success" do
+    click_on t("design.index.hotwire.open")
+    within("turbo-frame#modal") do
+      assert_selector "dialog#design-crud-modal[open]"
+      fill_in "sample_name", with: "   " # passe la validation du navigateur, pas celle du serveur
+      click_on t("design.modal.submit")
+
+      assert_selector "#sample_name[aria-invalid=true]"
+      assert_selector "#sample_name_error", text: t("design.index.sample.errors.name")
+      fill_in "sample_name", with: "Awa Koné"
+      click_on t("design.modal.submit")
+    end
+
+    assert_no_selector "dialog#design-crud-modal", visible: :all
+    assert_selector "#toasts [data-toast-type=success]", text: "Awa Koné"
+    assert_selector "#design-created", text: "Awa Koné"
+
+    click_on t("design.index.hotwire.open")
+
+    assert_selector "dialog#design-crud-modal[open]"
+    find("dialog#design-crud-modal").send_keys(:escape)
+
+    assert_no_selector "turbo-frame#modal *", visible: :all
+  end
+
+  test "a lazy frame loads when it scrolls into view, then reloads in place" do
+    example = find("[data-example=crud-frame]")
+
+    assert_selector "turbo-frame#design-frame[loading=lazy] [role=status]"
+    scroll_to example
+    within(example) do
+      assert_selector "turbo-frame#design-frame", text: t("design.frame.title")
+      click_on t("design.frame.reload")
+
+      assert_selector "turbo-frame#design-frame:not([aria-busy])", text: t("design.frame.title")
+    end
+  end
+
   test "empty, error and loading states" do
     assert_selector "[data-example=empty-action] a", text: t("design.index.states.empty_cta")
     assert_selector "[data-example=error-retry] [role=alert] a", text: t("components.error_state.retry")

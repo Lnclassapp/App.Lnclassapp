@@ -11,7 +11,7 @@
   </header>
 
   <nav aria-label="<%= t(".toc") %>" class="mt-8 flex flex-wrap gap-2">
-    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications states pagination shell].each do |anchor| %>
+    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination shell].each do |anchor| %>
       <%= link_to t(".sections.#{anchor}"), "##{anchor}", class: "rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium hover:bg-mist" %>
     <% end %>
   </nav>
@@ -285,6 +285,23 @@
         <% end %>
       </div>
     <% end %>
+  <% end %>
+
+  <%# ---------- CRUD Hotwire ---------- %>
+  <%= design_section(id: "hotwire", title: t(".sections.hotwire"), api: 'link data-turbo-frame="modal" → ui_modal(open: true) dans turbo_frame_tag "modal" · 422 → re-rendu · succès → turbo_stream_toast') do %>
+    <p class="max-w-2xl text-mute"><%= t(".hotwire.intro") %></p>
+    <div class="grid gap-8 md:grid-cols-2">
+      <%= design_example(name: "crud-modal", label: t(".hotwire.modal")) do %>
+        <%= ui_button t(".hotwire.open"), href: design_modal_path, variant: :secondary, icon: "plus", data: { turbo_frame: "modal" } %>
+        <div id="design-created" class="mt-4 flex min-h-8 flex-wrap gap-2" aria-live="polite"></div>
+      <% end %>
+      <%= design_example(name: "crud-frame", label: t(".hotwire.frame")) do %>
+        <%= turbo_frame_tag "design-frame", src: design_frame_path, loading: :lazy,
+              class: "block transition-opacity aria-busy:pointer-events-none aria-busy:opacity-50" do %>
+          <%= ui_loading_state variant: :skeleton %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 
   <%# ---------- États ---------- %>

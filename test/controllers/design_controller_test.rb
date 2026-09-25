@@ -53,4 +53,42 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", I18n.t("homepage.index.hero.title")
     assert_no_match(/fonts\.googleapis/, response.body)
   end
+
+  test "serves the CRUD form inside the modal frame" do
+    get design_modal_path, headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :success
+    assert_select "turbo-frame#modal [data-controller=modal][data-modal-open-value=true] form#design-crud-form"
+  end
+
+  test "re-renders the form with its errors in 422 when invalid" do
+    post design_modal_path, params: { sample: { name: "", email: "awa@exemple.ci" } }, as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal input#sample_name[aria-invalid=true]"
+    assert_select "#sample_name_error", I18n.t("design.index.sample.errors.name")
+    assert_select "input#sample_email[value='awa@exemple.ci']"
+  end
+
+  test "answers a valid submission with a toast and the new item" do
+    post design_modal_path, params: { sample: { name: "Awa Koné" } }, as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts] template [data-toast-type=success]"
+    assert_select "turbo-stream[action=append][target=design-created] template", text: /Awa Koné/
+  end
+
+  test "serves the lazy frame content" do
+    get design_frame_path, headers: { "Turbo-Frame" => "design-frame" }
+
+    assert_select "turbo-frame#design-frame", text: /#{I18n.t("design.frame.title")}/
+  end
+
+  test "the layout carries the modal frame and the toast stack" do
+    get design_path
+
+    assert_select "body > turbo-frame#modal"
+    assert_select "body > #toasts[aria-live=polite]"
+    assert_select "turbo-frame#design-frame[loading=lazy][src='#{design_frame_path}'] [role=status]"
+  end
 end
