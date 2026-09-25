@@ -17,4 +17,16 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1400,1400")
   end
+
+  MOBILE_VIEWPORT = [ 390, 844 ].freeze
+
+  # The same journey on a phone: the window shrinks for the block, then returns to its size.
+  def with_mobile_viewport(size = MOBILE_VIEWPORT)
+    window = page.current_window
+    original = window.size
+    window.resize_to(*size)
+    yield
+  ensure
+    window.resize_to(*original)
+  end
 end

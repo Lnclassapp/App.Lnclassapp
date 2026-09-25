@@ -1,0 +1,92 @@
+# Clés communes à tous les lots : codes d'erreur, attributs des DTO, statuts et libellés d'énumérations — UDR-0007
+fr:
+  time:
+    formats:
+      hour_minute: "%H h %M"
+  errors:
+    codes:
+      forbidden: "Accès interdit."
+      not_found: "Page introuvable."
+      invalid: "Vérifiez les informations saisies."
+      conflict: "Cette opération n'a pas pu aboutir. Réessayez."
+      locked: "Trop de tentatives. Réessayez plus tard."
+      expired: "Ce code a expiré. Demandez-en un nouveau."
+      rate_limited: "Trop de tentatives en une minute. Patientez un instant, puis réessayez."
+    session_expired: "Votre connexion a expiré. Connectez-vous de nouveau."
+    locked:
+      until: "Trop de tentatives. Réessayez à %{time}."
+      until_recovery: "Trop de tentatives. Demandez un code de récupération à votre enseignant ou à l'équipe."
+  activemodel:
+    attributes:
+      dtos/identity/credentials_input:
+        contact: "Numéro de téléphone"
+        pin: "PIN"
+      dtos/identity/second_factor_code_input:
+        code: "Code de vérification"
+      dtos/identity/pin_reset_input:
+        contact: "Numéro de téléphone"
+        code: "Code de récupération"
+        pin: "Nouveau PIN"
+        pin_confirmation: "Confirmation du PIN"
+      dtos/identity/person_name_input:
+        last_name: "Nom"
+        first_name: "Prénom(s)"
+    errors:
+      messages:
+        write_failed: "L'enregistrement n'a pas abouti. Réessayez."
+      models:
+        dtos/identity/credentials_input:
+          attributes:
+            base:
+              invalid_credentials: "Numéro ou PIN incorrect."
+            pin:
+              invalid: "Le PIN compte 4 chiffres."
+        dtos/identity/second_factor_code_input:
+          attributes:
+            code:
+              invalid: "Code incorrect."
+        dtos/identity/pin_reset_input:
+          attributes:
+            base:
+              invalid_recovery: "Numéro ou code de récupération incorrect."
+            code:
+              invalid: "Le code de récupération compte 8 chiffres."
+            pin:
+              invalid: "Le PIN compte 4 chiffres."
+            pin_confirmation:
+              confirmation: "Les deux PIN ne sont pas identiques."
+  content_status:
+    draft: "Brouillon"
+    published: "Publié"
+    archived: "Archivé"
+  badges:
+    bronze: "Bronze"
+    silver: "Argent"
+    gold: "Or"
+    diamond: "Diamant"
+    none: "Non acquis"
+  mastery:
+    acquired: "Acquis"
+    fragile: "Fragile"
+    struggling: "En difficulté"
+  materials:
+    categories:
+      literature: "Lettres"
+      science: "Sciences"
+      other: "Autres"
+  genders:
+    male: "Masculin"
+    female: "Féminin"
+  school_types:
+    public: "Public"
+    private: "Privé"
+    mixed: "Mixte"
+  school_statuses:
+    draft: "Brouillon"
+    active: "Active"
+    inactive: "Inactive"
+  import_kinds:
+    schools: "Établissements"
+    course_tree: "Cours et chapitres"
+    essentials: "Fiches essentielles"
+    exercises: "Exercices"

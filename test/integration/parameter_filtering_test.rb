@@ -17,4 +17,12 @@ class ParameterFilteringTest < ActiveSupport::TestCase
 
     assert_equal secrets.transform_values { "[FILTERED]" }, filter.filter(secrets)
   end
+
+  test "the TOTP secret carried by the enrollment form is filtered" do
+    filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters)
+
+    filtered = filter.filter("second_factor" => { "code" => "123456", "secret" => "JBSWY3DP", "secret_uri" => "otpauth://totp/x" })
+
+    assert_equal({ "code" => "[FILTERED]", "secret" => "[FILTERED]", "secret_uri" => "[FILTERED]" }, filtered["second_factor"])
+  end
 end
