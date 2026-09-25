@@ -58,11 +58,11 @@ module Entities
       end
 
       test "un exercice : au moins une question, cohérence de l'ADR-0039" do
-        assert_empty ContentNode.validate_exercise(exercise("questions" => [ question("true_false"), question("multiple_correct_2", answers: [ { "content" => "a", "correct" => true }, { "content" => "b", "correct" => true } ]) ]), path: "e")
+        assert_empty ContentNode.validate_exercise(exercise("questions" => [ question("true_false"), question("multiple_correct_2", answers: answers(true, true, false)) ]), path: "e")
         assert_equal [ [ "e.questions", "blank" ] ], codes(ContentNode.validate_exercise(exercise("questions" => nil), path: "e"))
 
         errors = ContentNode.validate_exercise(exercise("questions" => [ question("true_false", answers: answers(true, false, false)),
-                                                                         question("essay"), { "question_type" => "single_choice", "answers" => [ { "content" => "", "correct" => true } ] } ]),
+                                                                         question("essay"), { "question_type" => "single_choice", "answers" => [ { "content" => "", "correct" => true }, { "content" => "b", "correct" => false } ] } ]),
                                                path: "exercises[1]")
 
         assert_equal [ [ "exercises[1].questions[0].answers", "question_structure" ], [ "exercises[1].questions[1].question_type", "invalid_value" ],
