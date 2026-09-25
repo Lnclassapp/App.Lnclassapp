@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/invitations/created — repli HTML de la création d'une invitation, sans Turbo %>
+<%# Rôle : la modale du lien, ouverte sur le shell ; le lien n'est jamais placé dans un flash %>
+<%# ADR  : 0038 · UDR : 0006, 0019 %>
+<% content_for :title, t(".title") %>
+<%= turbo_frame_tag "modal" do %>
+  <%= render "created", invitation: @invitation, url: @invitation_url %>
+<% end %>

@@ -1,0 +1,46 @@
+<%# 🌐 UI · teams/invitations/new — invitation d'un membre de l'équipe, servie dans le frame « modal » (ouverte sur le shell sans frame) %>
+<%# Rôle : numéro et rôle de la personne invitée ; échec re-rendu en 422 dans la modale, succès : le lien remplace le formulaire %>
+<%# ADR  : 0038, 0050 · UDR : 0006, 0019 %>
+<% content_for :title, t(".title") %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "invitation-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "invitation-form", icon: "paper-airplane" %>
+    <% end %>
+    <p class="mb-5 text-sm text-mute"><%= t(".intro") %></p>
+    <%= form_with model: @form, scope: :invitation, url: teams_invitations_path, id: "invitation-form", class: "space-y-5" do |form| %>
+      <% if @form.errors[:base].any? %>
+        <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+          <p><%= @form.errors[:base].to_sentence %></p>
+        </div>
+      <% end %>
+      <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
+                   autocomplete: "off", autofocus: true, placeholder: t(".contact_placeholder"), hint: t(".contact_hint") %>
+      <% role_error = @form.errors[:team_role].first %>
+      <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("invitation_team_role_error" if role_error)) %>>
+        <legend class="mb-1.5 block text-sm font-medium text-ink">
+          <%= Dtos::Identity::TeamInvitationInput.human_attribute_name(:team_role) %><span class="text-error" aria-hidden="true"> *</span>
+        </legend>
+        <div class="space-y-3">
+          <% Entities::Identity::User::TEAM_ROLES.each do |team_role| %>
+            <label class="flex min-h-tap cursor-pointer items-start gap-3 rounded-ln border border-line bg-white px-4 py-3 transition has-checked:border-brand has-checked:bg-brand-soft">
+              <%= form.radio_button :team_role, team_role, required: true, class: "mt-0.5 size-5 shrink-0 accent-brand",
+                                    "aria-invalid": ("true" if role_error) %>
+              <span>
+                <span class="block text-sm font-medium text-ink"><%= t("teams.invitations.team_roles.#{team_role}") %></span>
+                <span class="block text-sm text-mute"><%= t("teams.invitations.team_role_hints.#{team_role}") %></span>
+              </span>
+            </label>
+          <% end %>
+        </div>
+        <% if role_error %>
+          <p id="invitation_team_role_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+            <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= role_error %>
+          </p>
+        <% end %>
+      </fieldset>
+    <% end %>
+  <% end %>
+<% end %>
