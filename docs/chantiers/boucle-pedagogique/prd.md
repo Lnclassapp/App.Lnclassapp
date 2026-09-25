@@ -3,19 +3,20 @@
 > Les specs sont figées ici. Toute évolution après la phase 3 modifie explicitement ce fichier.
 > Ce PRD **hérite** du [PRD cadre](../refonte-application/prd.md) : matrice des permissions, exigences transverses, critères §5. En cas de contradiction, le PRD cadre gagne, sauf décision contraire consignée dans un ADR ou une UDR.
 > Chaque critère porte l'ID d'inventaire de la feature ([feuille de route §6](../refonte-application/feuille-de-route.md#6-traçabilité--chaque-feature-de-lexistant-a-une-vague)). Le lot qui l'implémente est donné dans la traçabilité de [`plan.md`](plan.md).
-> Révision du 2026-09-25 : ADR-0026 à ADR-0054 et UDR-0007 acceptés ; V1 élargie par le porteur (DRENA, établissements et génération des classes, référentiel pédagogique, imports JSON en masse). Voir [`journal.md`](journal.md).
+> Révision du 2026-09-25 : ADR-0026 à ADR-0054 et UDR-0007 acceptés ; V1 élargie par le porteur (DRENA, établissements et génération des classes, référentiel pédagogique, imports JSON en masse) ; imports **partiels** (ADR-0039) ; tout CRUD par Hotwire (UDR-0006). Voir [`journal.md`](journal.md).
 
 ## 1. Contexte
 
-La production démarre **vide**. L'équipe y crée le référentiel (niveaux, séries, matières), les DRENA et les établissements, un par un ou par import JSON en masse ; chaque établissement reçoit ses classes par défaut. Elle publie des cours, leurs fiches essentielles et leurs exercices, saisis à l'écran ou importés. Un enseignant s'inscrit, déclare ses classes et leur assigne du contenu. Un élève rejoint sa classe par code, fait un exercice, voit la correction, son résultat et son badge.
+La production démarre **vide** : aucun référentiel ni établissement n'y est seedé (ADR-0034). L'équipe y crée le référentiel (niveaux, séries, matières) et les DRENA à l'écran, puis les établissements, un par un ou par import JSON ; chaque établissement reçoit ses classes par défaut (ADR-0030). Elle publie des cours, leurs fiches essentielles et leurs exercices, saisis à l'écran ou importés. Un enseignant s'inscrit, déclare ses classes et leur assigne du contenu. Un élève rejoint sa classe par code, fait un exercice, voit la correction, son résultat et son badge.
 
 La V1 pose aussi le socle des vagues suivantes :
 
 - toutes les tables de la boucle ;
 - les contrats de port ;
 - l'authentification avec limite de débit, verrouillage progressif, rotation de session, TOTP pour l'équipe et récupération assistée du PIN ;
-- le moteur d'import en arrière-plan (TR-28) ;
-- le shell par rôle.
+- le moteur d'import en arrière-plan, partiel et tolérant (TR-28, ADR-0039) ;
+- le shell par rôle ;
+- les briques Hotwire de tout CRUD : modale, flux Turbo, rafraîchissement par morphing (§4.8).
 
 ## 2. Acteurs et permissions
 
@@ -30,11 +31,11 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 | Générer un code de récupération de PIN | — | — | ✅ *élève d'une classe active qu'il enseigne* | ✅ *tout compte sauf le sien* | `Identity::IssuePinRecoveryCodePolicy` |
 | Réinitialiser le second facteur d'un membre | — | — | — | ✅ *sauf le sien* | `Identity::ResetSecondFactorPolicy` |
 | Rechercher un compte par numéro | — | — | — | ✅ | `Identity::ReadUserPolicy` |
-| Gérer et importer les DRENA et les établissements | — | — | — | ✅ | `School::ManageSchoolsPolicy` |
+| Gérer les DRENA ; gérer et importer les établissements | — | — | — | ✅ | `School::ManageSchoolPolicy` |
 | Gérer le référentiel (niveaux, séries, liaisons, matières) | — | — | — | ✅ | `Catalog::ManageTaxonomyPolicy` |
 | Voir le catalogue publié (cours, fiches essentielles, exercices) | — | ✅ | ✅ | ✅ *brouillons et archives compris* | `Catalog::ReadPublishedPolicy` |
 | Créer, modifier, publier, archiver et importer du contenu | — | — | — | ✅ | `Catalog::ManageContentPolicy` |
-| Suivre un import | — | — | — | ✅ | `Catalog::ReadImportReportPolicy` |
+| Suivre un import | — | — | — | ✅ | la policy de son type (`School::ManageSchoolPolicy` ou `Catalog::ManageContentPolicy`) |
 | Voir les propositions correctes hors de sa session | — | — | — | ✅ | `Assessment::RevealAnswersPolicy` |
 | Voir la correction d'une question | — | ✅ *question déjà tentée* | — | ✅ | `Assessment::RevealAnswersPolicy` |
 | Démarrer ou reprendre une session | — | ✅ *exercice publié, parents publiés* | — | — | `Assessment::StartSessionPolicy` |
@@ -56,11 +57,11 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 ### Chemin nominal
 
 1. Le porteur déploie la production avec `TEAM_BOOTSTRAP_CONTACT`. Le seed affiche une invitation d'amorçage. Le premier membre de l'équipe l'accepte (Nom, Prénom(s), PIN), enrôle son TOTP et note ses 10 codes de secours.
-2. L'équipe crée le référentiel : niveaux (6ème à Tle, avec leur code), séries (A1, A2, C, D), liaisons niveau–série, matières avec leur catégorie. Elle crée la DRENA « Abidjan 1 », puis importe le fichier JSON de ses établissements ; l'écran de suivi passe de « Vérification du fichier » à « Terminé » : 23 établissements et leurs classes par défaut sont créés.
+2. L'équipe crée le référentiel : niveaux (6ème à Tle ; leur slug, figé, sert de code), séries (A, A1, A2, C, D), liaisons niveau–série, matières avec leur catégorie. Chaque création se fait dans une modale, sans rechargement de page. Elle crée la DRENA « Abidjan 1 » (slug `abidjan-1`), puis importe le fichier JSON de ses établissements ; l'écran de suivi passe de « Vérification » à « Import en cours » puis à « Terminé » : 23 établissements importés, 1 ignoré (déjà présent), 1 en erreur avec son chemin JSON ; chaque établissement importé a reçu ses classes par défaut.
 3. L'équipe importe un fichier `course_tree` : le cours « Génétique et évolution » (Tle D, SVT), ses fiches essentielles et leurs exercices arrivent en brouillon. Elle les relit, puis publie le cours, une fiche essentielle et un exercice de 2 questions.
-4. Un enseignant s'inscrit : DRENA Abidjan 1, Lycée Classique d'Abidjan, SVT. Il arrive sur « Quelles classes enseignez-vous ? », déclare « Tle D1 » et termine sa configuration.
-5. Il ouvre « Tle D1 », relève le code `KFM37`, ouvre le cours puis la fiche essentielle, et assigne l'exercice. Le bouton passe à « Assigné ».
-6. Un élève ouvre `/c/kfm37`, voit « Tle D1 — Lycée Classique d'Abidjan », remplit Nom, Prénom(s), genre, numéro, PIN et confirmation, puis arrive sur son accueil : « Bienvenue dans ta classe ! ».
+4. Un enseignant s'inscrit : DRENA Abidjan 1, Lycée Classique d'Abidjan, SVT. Il arrive sur « Quelles classes enseignez-vous ? », déclare « Tle D 1 » et termine sa configuration.
+5. Il ouvre « Tle D 1 », relève le code `KFM37`, ouvre le cours puis la fiche essentielle, et assigne l'exercice. Le bouton passe à « Assigné ».
+6. Un élève ouvre `/c/kfm37`, voit « Tle D 1 — Lycée Classique d'Abidjan », remplit Nom, Prénom(s), genre, numéro, PIN et confirmation, puis arrive sur son accueil : « Bienvenue dans ta classe ! ».
 7. Sur son accueil, il voit l'exercice assigné et le démarre. Il répond aux 2 questions, avec une correction immédiate après chacune. La dernière réponse clôt la session.
 8. Il voit sa note (20/20), son score (100 %), la maîtrise « Acquis » et le badge « Diamant ». Les confettis s'affichent.
 9. L'enseignant ouvre le résultat de l'élève : score, note et maîtrise, sans les propositions correctes.
@@ -79,8 +80,12 @@ Les policies sont des objets de domaine, de forme `call(actor:, **faits) → Sha
 | Question déjà tentée soumise à nouveau | Rien n'est écrit ; retour à la session, toast « Question déjà répondue » |
 | Brouillon ouvert par URL par un non-équipe | 404 : le brouillon n'existe pas pour lui |
 | Ressource d'une autre classe | 403 et toast « Accès interdit. », aucune donnée de la classe dans la réponse |
-| Fichier d'import avec une erreur, même une seule | Rapport « Échoué », chaque erreur avec son chemin JSON ; **aucune ligne écrite** |
-| Fichier d'import déjà importé avec succès | Refus au téléversement : « Ce fichier a déjà été importé » |
+| Fichier d'import avec des éléments invalides | Rapport « Terminé » : les éléments valides sont importés, chaque élément invalide est listé avec son chemin JSON et son motif, et n'a laissé aucune ligne |
+| Enveloppe, version ou cible invalide, fichier illisible ou au-delà des limites | Rapport « Rejeté », motif affiché ; **aucune ligne écrite** |
+| Fichier déjà importé, réimporté | Accepté ; ses éléments déjà en base sont ignorés et comptés comme doublons ; rien n'est mis à jour |
+| Second import du même type pendant qu'un premier tourne | Refus dans la modale : « Un import de ce type est déjà en cours » |
+| Fichier de plus de 20 Mo | Refus dans la modale, rien n'est créé |
+| Formulaire en modale invalide | La modale se rouvre avec ses erreurs (422), sans rechargement de page |
 | Suppression d'un élément référencé (niveau, série, matière, DRENA, établissement) | Refus avec la raison ; un établissement peut être désactivé à la place |
 
 ## 4. Critères d'acceptation
@@ -294,28 +299,37 @@ Scénario: [CO-09] Le toast conserve son message
 Scénario: [SC-01] Gérer les DRENA
   Étant donné une production vierge
   Alors aucune DRENA n'existe
-  Quand l'équipe crée « Abidjan 1 », la renomme « Abidjan 1 Plateau », puis crée une seconde « Abidjan 1 Plateau »
-  Alors la seconde création est refusée en 422
+  Quand l'équipe crée « Abidjan 1 » dans une modale
+  Alors la DRENA apparaît dans la liste avec le slug « abidjan-1 », sans rechargement de page
+  Quand elle la renomme « Abidjan 1 Plateau »
+  Alors son slug reste « abidjan-1 »
+  Quand elle crée une seconde « Abidjan 1 Plateau »
+  Alors la modale se rouvre en 422 avec l'erreur sur le nom
   Quand l'équipe supprime une DRENA qui a des établissements
   Alors la suppression est refusée avec la raison, et rien n'est supprimé
 
-Scénario: [SC-02][TR-28] Importer des DRENA
-  Quand l'équipe importe un fichier de 41 DRENA dont 2 existent déjà et 1 est répétée
-  Alors 38 DRENA sont créées, le rapport compte 2 « déjà présentes » et 1 « en double »
+# SC-02 (import de DRENA) est écartée par le porteur : les 41 DRENA se créent à l'écran.
 
 Scénario: [SC-03][SC-09][CL-01] Créer un établissement génère ses classes
-  Étant donné le référentiel complet (niveaux 6e à tle, 2nde liée à C, 1ère et Tle liées à A1, A2, C, D)
-  Quand l'équipe crée le lycée public « Lycée Moderne de Cocody » dans la DRENA Abidjan 1
-  Alors l'établissement existe avec le cycle « both »
-  Et 71 classes de l'année scolaire en cours existent, dont « 6ème 1 » à « 6ème 4 », « 1ère A1 1 » à « 1ère A1 6 » et « Tle D1 » à « Tle D6 »
+  Étant donné le référentiel du seed de développement (6ème à 3ème en cycle first ; 2nde liée à A et C ; 1ère et Tle liées à A1, A2, C, D)
+  Quand l'équipe crée le lycée public « Lycée Moderne de Cocody », sigle « LMC », dans la DRENA Abidjan 1
+  Alors l'établissement existe avec le type « Public », le statut « active » et le cycle « both »
+  Et 77 classes de l'année scolaire en cours existent, dont « 6ème 1 » à « 6ème 4 », « 2nde A 1 » à « 2nde A 6 », « 1ère A1 1 » à « 1ère A1 6 » et « Tle D 1 » à « Tle D 6 »
   Et chaque classe a un code d'adhésion unique et un plafond de 80 élèves
   Et aucun élève n'existe
-  Quand l'équipe crée le « Collège Moderne de Cocody » (public)
+  Et un toast annonce « Établissement créé : 77 classes générées », sans rechargement de page
+  Quand l'équipe crée le « Collège moderne de Cocody » (public)
   Alors son cycle proposé est « first » et seules les classes de 6ème à 3ème sont créées, soit 28
-  Quand elle crée un lycée privé
-  Alors les nombres de classes sont ceux de la table « privé »
+  Quand elle crée un lycée privé, puis un lycée mixte
+  Alors chacun reçoit 38 classes (le barème privé s'applique aussi au mixte)
 
-Scénario: [SC-03] Création tout ou rien
+Scénario: [SC-09] Niveau sans série liée
+  Étant donné une 1ère qui n'est liée à aucune série
+  Quand l'équipe crée un lycée public
+  Alors aucune classe de 1ère n'est créée
+  Et le niveau sauté est signalé dans le toast et compté dans le détail
+
+Scénario: [SC-03] Création atomique
   Étant donné une génération de classes qui échoue en base
   Quand l'équipe crée un établissement
   Alors ni l'établissement ni aucune classe n'existent
@@ -324,21 +338,21 @@ Scénario: [SC-04] Liste nationale des établissements
   Étant donné 600 établissements dans 3 DRENA
   Quand l'équipe ouvre « Établissements » depuis la navigation
   Alors elle voit 50 établissements par page, avec le total
-  Et elle filtre par DRENA, secteur, cycle, statut et nom
+  Et elle filtre par DRENA, type, cycle, statut et nom, sans rechargement de page, et l'URL garde les filtres
 
 Scénario: [SC-05] Consulter un établissement
   Quand l'équipe ouvre un établissement
-  Alors elle voit sa DRENA, son secteur, son cycle, son statut, ses classes de l'année groupées par niveau avec leur code et leur effectif, et ses enseignants
+  Alors elle voit sa DRENA, son sigle, son type, son cycle, son statut, ses classes de l'année groupées par niveau avec leur code et leur effectif, et ses enseignants
 
 Scénario: [SC-06] Modifier un établissement
-  Quand l'équipe modifie le nom, l'abrégé, la DRENA ou le secteur
-  Alors les classes existantes ne changent pas
-  Et le cycle n'est plus modifiable
+  Quand l'équipe modifie le nom, le sigle, la DRENA, le type, le statut ou le cycle dans une modale
+  Alors la ligne et l'en-tête sont mis à jour sans rechargement de page
+  Et les classes existantes ne changent pas : aucune n'est créée ni supprimée
 
 Scénario: [SC-07] Supprimer ou désactiver un établissement
   Étant donné un établissement dont aucune classe n'a d'élève, d'enseignant ni d'assignation
   Quand l'équipe le supprime
-  Alors l'établissement et ses classes sont supprimés
+  Alors l'établissement et ses classes sont supprimés, et sa ligne disparaît sans rechargement de page
   Étant donné un établissement dont une classe a un élève
   Quand l'équipe le supprime
   Alors la suppression est refusée avec « Désactivez plutôt cet établissement »
@@ -346,16 +360,23 @@ Scénario: [SC-07] Supprimer ou désactiver un établissement
   Alors il n'apparaît plus à l'inscription enseignant, et ses classes et élèves existent toujours
 
 Scénario: [SC-08][SC-09][TR-28] Importer des établissements avec leurs classes
-  Étant donné la DRENA « Abidjan 1 » et le fichier schools_abidjan_1.json de l'ancienne application (tableau nu, clés name, schoolsigle, schooltype, schoolstatus)
-  Quand l'équipe l'importe en choisissant Abidjan 1
-  Alors l'écran de suivi passe de « Vérification du fichier » à « Enregistrement » puis « Terminé » sans recharger la page
-  Et chaque établissement est créé avec son secteur (« privée » → private), son cycle (« Collège… » → first) et ses classes par défaut
-  Et le rapport compte les établissements créés, les classes créées et les doublons ignorés
+  Étant donné la DRENA « Abidjan 1 » et un fichier de l'ancienne application enveloppé : { "format": "lnclass.schools", "version": 1, "drena": "abidjan-1", "schools": [...] }, avec les clés nom, schoolsigle, schooltype et schoolstatus
+  Quand l'équipe l'importe depuis la modale d'import
+  Alors l'écran de suivi passe de « En file d'attente » à « Vérification », « Import en cours » puis « Terminé », sans recharger la page
+  Et chaque établissement est créé avec son type (« privée » → private, « mixte » → mixed), son cycle (un nom contenant « collège » → first) et ses classes par défaut
+  Et le rapport compte les établissements importés, ignorés et en erreur, et détaille les classes générées
 
-Scénario: [SC-08] Validation complète avant écriture
-  Étant donné un fichier de 300 établissements dont le 212e a un secteur inconnu et le 250e une DRENA inconnue
+Scénario: [SC-08][TR-28] Import partiel : un fichier mixte donne un rapport exact
+  Étant donné un fichier de 300 établissements dont le 212e a le type « semi-public », le 250e la DRENA « inconnue », le 12e existe déjà en base et le 40e répète le 3e
   Quand l'équipe l'importe
-  Alors le rapport est « Échoué » avec les erreurs aux chemins schools[211].sector et schools[249].drena
+  Alors le rapport est « Terminé » avec 296 importés, 2 ignorés, 2 en erreur et un total de 300
+  Et les erreurs sont listées aux chemins schools[211].type et schools[249].drena, avec leur motif
+  Et les 296 établissements valides ont leurs classes, les 2 invalides n'ont laissé aucune ligne
+  Et l'établissement déjà présent n'a pas été modifié
+
+Scénario: [SC-08] Rejet en bloc
+  Quand l'équipe importe un fichier dont le format n'est pas « lnclass.schools », ou dont la version n'est pas 1, ou dont la DRENA d'enveloppe est inconnue, ou qui n'est pas du JSON
+  Alors le rapport est « Rejeté » avec le motif
   Et aucun établissement ni aucune classe n'a été créé
 
 Scénario: [SC-08] Import en masse dans le budget
@@ -376,15 +397,16 @@ Scénario: [SC-26] API des établissements d'une DRENA
 
 ```gherkin
 Scénario: [CL-01][CL-04] L'équipe ajoute une classe à un établissement
-  Quand l'équipe crée « Tle D7 » au Lycée Classique d'Abidjan, niveau Tle, série D
+  Quand l'équipe crée « Tle D 7 » au Lycée Classique d'Abidjan, niveau Tle, série D, dans la modale ouverte depuis la fiche de l'établissement
   Alors la classe existe pour l'année scolaire en cours, avec un code de 3 lettres sans i ni o suivies de 2 chiffres de 2 à 9, stocké en minuscules
+  Et un toast affiche ce code en majuscules, sans rechargement de page
   Et la page de la classe affiche ce code en majuscules
-  Quand elle crée une seconde « Tle D7 » dans le même établissement et la même année
-  Alors le formulaire est réaffiché en 422
+  Quand elle crée une seconde « Tle D 7 » dans le même établissement et la même année
+  Alors la modale se rouvre en 422 avec l'erreur sur le nom
 
 Scénario: [CL-01] Non-régression : série incompatible et code trop long
   Quand l'équipe choisit la série D pour la 6ème
-  Alors le formulaire est réaffiché en 422
+  Alors la modale se rouvre en 422
   Et la longueur de la colonne du code est égale à la longueur du code généré (test de schéma)
 
 Scénario: [CL-01] Année scolaire
@@ -417,7 +439,8 @@ Scénario: [CL-06] Élève déjà inscrit
 Scénario: [CL-09][TR-08 remplacée] Déclarer ses classes
   Étant donné un enseignant dont l'école principale a 6ème 1, 6ème 2 et 3ème B
   Quand il déclare 6ème 1 et 3ème B, puis clique « Terminer la configuration »
-  Alors il enseigne exactement ces deux classes
+  Alors chaque bascule et le compteur se mettent à jour sans rechargement de page
+  Et il enseigne exactement ces deux classes
   Et sa configuration est enregistrée comme terminée
   Et il arrive sur /teachers
 
@@ -436,8 +459,10 @@ Scénario: [CL-10] Fiche d'une classe
   Et la page répond 200 avec au moins un exercice assigné (non-régression)
 
 Scénario: [CL-10] Accès d'un élève à sa classe
-  Quand un élève ouvre sa classe
-  Alors il ne voit ni la liste nominative ni le code
+  Quand un élève ouvre sa classe ou son accueil
+  Alors il ne voit ni la liste nominative ni le code d'adhésion de sa classe
+  Quand il ouvre l'URL de la page enseignant de sa classe
+  Alors il reçoit 403
 
 Scénario: [CL-11] Cours dans la classe
   Quand l'enseignant ouvre un cours depuis sa classe
@@ -481,22 +506,22 @@ Scénario: [CL-23][TR-04][AS-36] Accueil élève
 Scénario: [CA-16][CA-18] Gérer les niveaux
   Étant donné une production vierge
   Alors aucun niveau n'existe
-  Quand l'équipe crée « 6ème » (code 6e, position 1, cycle first)
-  Alors il apparaît dans la liste, triée par position
+  Quand l'équipe crée « 6ème » (position 1, cycle first) dans une modale
+  Alors il apparaît dans la liste, triée par position, avec le slug « 6eme », sans rechargement de page
   Quand elle le renomme « Sixième »
-  Alors son slug et son code ne changent pas
+  Alors son slug reste « 6eme » : la génération des classes et les imports continuent de le reconnaître
   Quand elle supprime un niveau utilisé par une classe ou un cours
   Alors la suppression est refusée avec la raison
 
 Scénario: [CA-19][CA-24] Gérer les séries et leurs niveaux
-  Quand l'équipe crée la série « D » (code d) et coche le couple Tle × D dans la matrice
+  Quand l'équipe crée la série « D » (slug « d ») et coche le couple Tle × D dans la matrice, sans rechargement de page
   Alors la série D est proposée pour la Tle dans les formulaires de classe et de cours
   Quand elle décoche un couple utilisé par une classe ou un cours
   Alors le retrait est refusé avec la raison
 
 Scénario: [CA-20][CA-22][CA-26] Gérer les matières et leur catégorie
   Quand l'équipe crée « SVT » (abrégé SVT) sans catégorie
-  Alors le formulaire est réaffiché en 422
+  Alors la modale se rouvre en 422
   Quand elle choisit la catégorie « Sciences »
   Alors la matière s'affiche partout avec la couleur et l'icône de la catégorie sciences
   Quand elle renomme la matière
@@ -518,7 +543,7 @@ Scénario: [CA-01] Parcourir le catalogue publié
 
 Scénario: [CA-04] Consulter un cours
   Quand un élève ouvre un cours publié
-  Alors il voit le fil d'Ariane, les badges, le contenu riche et la liste des fiches essentielles publiées
+  Alors il voit le fil d'Ariane, les badges, le contenu et la liste des fiches essentielles publiées
   Et les formules $…$ sont rendues par KaTeX servi par le bundle de l'application
 
 Scénario: [CA-04] Non-régression : brouillon par URL directe
@@ -526,13 +551,14 @@ Scénario: [CA-04] Non-régression : brouillon par URL directe
   Alors il reçoit 404
 
 Scénario: [CA-05] Créer un cours
-  Quand l'équipe clique « Nouveau cours » et soumet Nom, sous-titre, niveau, série, matière et contenu
+  Quand l'équipe clique « Nouveau cours » et soumet, dans la modale, Nom, sous-titre, niveau, série, matière et contenu
   Alors le cours existe en brouillon, son auteur est l'utilisateur connecté et son nom est enregistré sans changement de casse
-  Et le libellé du statut est « Brouillon — visible uniquement par l'équipe »
+  Et le catalogue le montre, sans rechargement de page, avec le libellé « Brouillon — visible uniquement par l'équipe »
 
 Scénario: [CA-06] Modifier et publier un cours
   Quand l'équipe modifie le nom puis clique « Publier »
-  Alors le cours relu par le même agrégat porte le nouveau nom et une date de publication
+  Alors le panneau de statut passe à « Publié » sans rechargement de page
+  Et le cours relu par le même agrégat porte le nouveau nom et une date de publication
 
 Scénario: [CA-07] Archiver et republier un cours
   Étant donné un cours assigné à une classe
@@ -545,17 +571,20 @@ Scénario: [CA-07] Archiver et republier un cours
 Scénario: [CA-08][TR-28] Importer des cours complets
   Étant donné le référentiel complet
   Quand l'équipe importe un fichier lnclass.course-tree v1 de 3 cours, avec leurs fiches essentielles, exercices, questions et propositions
-  Alors tout est créé en brouillon, l'auteur est l'utilisateur connecté, et le rapport compte chaque type d'élément
-  Et un cours déjà présent (même nom, niveau, matière et série) est ignoré et compté « déjà présent »
-  Et la matière « Physique Chimie » est reconnue comme « physique-chimie »
+  Alors tout est créé en brouillon, quelle que soit la clé status du fichier, et l'auteur est l'utilisateur connecté
+  Et un cours déjà présent (même nom normalisé, niveau, matière et série) est ignoré et compté comme doublon
+  Et la matière « Physique Chimie » est reconnue par son slug « physique-chimie »
 
-Scénario: [CA-08] Erreur localisée, rien d'écrit
-  Quand le fichier contient une question à choix unique avec 2 propositions correctes au chemin courses[1].essentials[0].exercises[2].questions[3]
-  Alors le rapport est « Échoué » avec cette erreur et ce chemin
-  Et aucun cours, fiche essentielle, exercice, question ni proposition n'a été créé
+Scénario: [CA-08] Import partiel : un fichier mixte donne un rapport exact
+  Étant donné un fichier de 10 cours dont le 2e contient une question à choix unique avec 2 propositions correctes au chemin courses[1].essentials[0].exercises[2].questions[3], le 5e une matière inconnue, et le 8e un cours déjà en base
+  Quand l'équipe l'importe
+  Alors le rapport est « Terminé » avec 7 importés, 1 ignoré, 2 en erreur et un total de 10
+  Et chaque erreur est listée à son chemin avec son motif
+  Et les 7 cours valides existent avec toute leur descendance
+  Et les 2 cours invalides n'ont laissé ni cours, ni fiche essentielle, ni exercice, ni question, ni proposition
 
 Scénario: [CA-08] Import en masse dans le budget
-  Quand l'équipe importe 200 cours complets
+  Quand l'équipe importe 200 cours complets (8 fiches essentielles, 2 exercices par fiche, 10 questions, 4 propositions)
   Alors l'import est terminé en moins de 2 minutes
 
 Scénario: [CA-10][CA-11] Fiches essentielles d'un cours, fiche et progression
@@ -571,9 +600,12 @@ Scénario: [CA-12][CA-13][CA-14] Créer, modifier, publier, archiver une fiche e
   Et archiver une fiche essentielle conserve ses exercices et leurs sessions
 
 Scénario: [CA-15][TR-28] Importer des fiches essentielles dans un cours
-  Quand l'équipe clique « Importer des fiches essentielles » sur la page d'un cours et importe un fichier lnclass.essential-tree v1
+  Quand l'équipe clique « Importer des fiches essentielles » sur la page d'un cours et importe un fichier lnclass.essentials v1 dont l'enveloppe désigne ce cours par son slug
   Alors les fiches essentielles et leurs exercices sont créés en brouillon dans ce cours, à la suite des fiches existantes
-  Et une fiche essentielle déjà présente dans le cours est ignorée
+  Et une fiche essentielle déjà présente dans le cours est ignorée et comptée
+  Et une fiche invalide est listée avec son chemin, sans empêcher les autres
+  Quand le slug du cours de l'enveloppe est inconnu
+  Alors le rapport est « Rejeté » et rien n'est écrit
 
 Scénario: [CA-27] Assigner un cours depuis sa page
   Quand un enseignant ouvre un cours publié puis « Assigner à mes classes »
@@ -600,9 +632,10 @@ Scénario: [AS-39] Aperçu des questions, sans fuite
   Et le critère TR-cadre-3 est vert
 
 Scénario: [AS-03] Créer un exercice complet
-  Quand l'équipe crée l'exercice « Méiose » dans une fiche essentielle, avec une question Vrai/Faux et une question à choix unique de 3 propositions
+  Quand l'équipe crée l'exercice « Méiose » dans une fiche essentielle, avec une question Vrai/Faux et une question à choix unique de 3 propositions, dans une grande modale
   Alors l'exercice, ses 2 questions et leurs 5 propositions sont enregistrés en une transaction, en brouillon
   Et « + Ajouter une question » et « + Ajouter une proposition » fonctionnent sans rechargement
+  Et la modale se ferme, un toast confirme, et la fiche essentielle montre l'exercice, sans rechargement de page
   Et le titre est enregistré sans changement de casse
 
 Scénario: [AS-03] Règles structurelles
@@ -611,7 +644,7 @@ Scénario: [AS-03] Règles structurelles
   Et 2 propositions correctes exige au moins 3 propositions dont exactement 2 correctes
   Et 3 propositions correctes exige au moins 4 propositions dont exactement 3 correctes
   Et un exercice sans question, ou dont la fiche essentielle n'est pas publiée, ne peut pas être publié
-  Et une question invalide réaffiche le formulaire en 422 sans rien enregistrer
+  Et une question invalide rouvre la modale en 422 sans rien enregistrer
 
 Scénario: [AS-04] Modifier un exercice
   Étant donné un exercice sans session
@@ -625,9 +658,10 @@ Scénario: [AS-05] Archiver un exercice
   Et aucune route ne supprime un exercice
 
 Scénario: [AS-06 remplacée][TR-28] Importer des exercices dans une fiche essentielle
-  Quand l'équipe clique « Importer des exercices » sur une fiche essentielle et importe un fichier lnclass.exercise-tree v1
+  Quand l'équipe clique « Importer des exercices » sur une fiche essentielle et importe un fichier lnclass.exercises v1 dont l'enveloppe désigne cette fiche par son slug
   Alors les exercices, leurs questions et leurs propositions sont créés en brouillon dans cette fiche
-  Et une question mal formée fait échouer tout l'import, avec son chemin
+  Et un exercice dont une question est mal formée est listé en erreur avec le chemin de la question, et n'a laissé aucune ligne
+  Et les autres exercices du fichier sont importés, et le rapport est exact
 
 Scénario: [AS-07] Démarrer une session
   Quand un élève démarre un exercice publié, assigné ou non à sa classe
@@ -657,7 +691,7 @@ Scénario: [AS-09] Répondre une fois
 
 Scénario: [AS-09] Réponse vide
   Quand il valide sans rien cocher
-  Alors il reçoit 422 dans le cadre Turbo avec « Sélectionne au moins une proposition. »
+  Alors il reçoit 422 dans le cadre Turbo avec « Sélectionne au moins une proposition. », sans rechargement de page
 
 Scénario: [AS-09] Widgets
   Alors Vrai/Faux et choix unique s'affichent en boutons radio
@@ -666,7 +700,7 @@ Scénario: [AS-09] Widgets
 
 Scénario: [AS-10] Correction immédiate
   Quand l'élève valide une réponse
-  Alors il voit « Bonne réponse » ou « Mauvaise réponse », les propositions correctes de cette question et l'explication
+  Alors il voit, sans rechargement de page, « Bonne réponse » ou « Mauvaise réponse », les propositions correctes de cette question et l'explication
   Et la correction exige l'égalité exacte des ensembles d'identifiants, sans crédit partiel
   Et les propositions correctes d'une question non encore tentée ne figurent jamais dans le HTML
 
@@ -712,6 +746,16 @@ Scénario: [AS-37] Exercices non publiés
 
 ### 4.8 Transverse
 
+**Exigence transverse — tout CRUD passe par Hotwire** (règle du porteur, UDR-0006, brief standard §5). Elle s'applique à chaque écran de la V1 qui crée, modifie, supprime ou fait changer d'état une donnée :
+
+- création et édition dans la modale du layout (`turbo_frame_tag "modal"`), jamais sur une page `new` ou `edit` autonome ;
+- erreurs re-rendues en 422 dans la modale, avec les valeurs saisies ;
+- succès en Turbo Stream : un toast, la liste ou le panneau mis à jour, le formulaire refermé ou réinitialisé ; jamais de redirection depuis la modale ;
+- filtres, recherche et pagination dans un cadre Turbo, l'URL gardant l'état ;
+- une réponse HTML de repli pour chaque action ;
+- Stimulus seulement pour ce que Turbo ne couvre pas (champs imbriqués, copie, rechargement périodique) ;
+- **preuve** : un test système par écran concerné montre que le parcours se fait sans rechargement de page.
+
 ```gherkin
 Scénario: [TR-01] Landing
   Quand un visiteur ouvre /
@@ -734,14 +778,36 @@ Scénario: [TR-27] Navigation par rôle
   Et l'entrée « Établissements » de l'équipe est active et mène à la liste nationale
   Et une destination d'une vague future est affichée inactive, jamais en lien mort
 
-Scénario: [TR-28] Imports en arrière-plan, tout ou rien
-  Quand l'équipe téléverse un fichier d'import
-  Alors elle arrive sur l'écran de suivi, qui se met à jour seul toutes les 2 secondes
+Scénario: [TR-28] Imports en arrière-plan, partiels
+  Quand l'équipe téléverse un fichier d'import dans la modale d'import
+  Alors la modale affiche le suivi du rapport, sans rechargement de page, qui se recharge seul toutes les 3 secondes tant que l'import n'est pas fini
+  Et les statuts sont « En file d'attente », « Vérification », « Import en cours », puis « Terminé », « Rejeté » ou « Échoué »
   Et le fichier est traité par le worker, jamais dans la requête web
-  Et le rapport persiste le type, le fichier, son empreinte, l'auteur, les dates, les compteurs et les erreurs
-  Et un fichier plus gros que la limite de son type est refusé au téléversement
-  Et un fichier au-delà du nombre d'éléments permis échoue avec « trop d'éléments »
-  Et deux imports lancés ensemble s'exécutent l'un après l'autre
+  Et le rapport persiste le type, le fichier, son empreinte, l'auteur, les dates, la version du format, les compteurs (total, importés, ignorés, en erreur, traités), le détail et au plus 1 000 erreurs
+  Et le total est toujours la somme des importés, des ignorés et des erreurs
+  Et un fichier de plus de 20 Mo est refusé au téléversement
+  Et un fichier au-delà du nombre d'éléments permis pour son type est « Rejeté »
+  Et un second import du même type pendant qu'un premier tourne est refusé : « Un import de ce type est déjà en cours »
+  Et un import interrompu depuis plus de 30 minutes passe « Échoué » au lancement du suivant
+
+Scénario: [TR-28] Atomicité par élément racine
+  Étant donné un lot de 100 établissements dont l'un voit son code d'adhésion pris par une création concurrente
+  Quand l'écriture du lot échoue en base
+  Alors le lot est rejoué élément par élément
+  Et seul l'établissement en collision est en erreur, avec le motif « écriture refusée »
+  Et aucun élément racine n'est jamais écrit à moitié
+
+Scénario: [Hotwire] Aucun CRUD ne recharge la page
+  Étant donné un écran de création, de modification, de suppression ou de transition de la V1
+  Quand l'utilisateur ouvre le formulaire
+  Alors il s'affiche dans la modale du layout, chargée dans son cadre
+  Quand il le soumet avec une erreur
+  Alors la modale se rouvre en 422 avec les erreurs et les valeurs saisies
+  Quand il le soumet correctement
+  Alors la réponse est un Turbo Stream : un toast, la liste ou le panneau mis à jour, la modale fermée
+  Et la fenêtre n'a pas été rechargée
+  Et la même action, sans Turbo, répond en HTML par une redirection
+  Et chaque écran concerné a un test système qui le prouve
 
 Scénario: [TR-04][TR-05][TR-09] Accueils couverts par un test système
   Alors un test système par rôle se connecte réellement et ouvre l'accueil sans erreur
@@ -775,14 +841,14 @@ Scénario: [dette-contrats-ports-et-injection] Ports et injection
 
 ## 5. Modélisation préliminaire
 
-Le détail exécutable est dans [`plan.md`](plan.md), Lot 0.
+Le détail exécutable est dans [`plan.md`](plan.md), sous-lots 0a, 0b, 0d et 0e.
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | `Shared::Result` ; entités et objets-valeurs de 5 contextes (identity, school, classroom, catalog, assessment), dont `DefaultClassroomPlan`, `ImportKind`, `ContentTree` ; 27 ports, plus `TransactionPort` ; 20 policies `call(actor:, **faits)` ; DTO `…Input` par formulaire ; use cases par lot ; 5 importeurs derrière un contrat commun |
-| Infrastructure | 30 migrations ; modèles `Orm::` ; un repository par port (TOTP, fichier, schéma et file d'attente compris, sans dossier `adapters/`) ; écritures en masse par `insert_all` ; queries de lecture par écran ; seeds d'amorçage (production) et de développement |
-| Delivery | 7 fichiers de routes dessinés en entier au Lot 0, dont `teams.rb` ; socle d'authentification ; `Teams::BaseController` ; job `Catalog::RunImportJob` ; un contrôleur par écran |
-| UI | Shell par rôle et composants du Lot 0c ; vues ERB par lot ; écran de suivi des imports ; contrôleurs Stimulus chargés par motif |
+| Domaine | `Shared::Result` ; entités et objets-valeurs de 5 contextes (identity, school, classroom, catalog, assessment), dont `DefaultClassroomPlan`, `ImportKind`, `ImportItem`, `ContentNode`, `NaturalKey` ; 27 ports, plus `TransactionPort` ; 23 policies `call(actor:, **faits)` ; DTO `…Input` par formulaire ; use cases par lot ; moteur d'import (`StartImport`, `RunImport`) et 4 adaptateurs derrière un contrat commun |
+| Infrastructure | 31 migrations ; modèles `Orm::` ; un repository par port (TOTP, fichier, schéma et file d'attente compris, sans dossier `adapters/`) ; écritures en masse par `insert_all`, par lots de 100 éléments racines ; queries de lecture par écran ; seeds d'amorçage (production) et de développement (local seulement) |
+| Delivery | 7 fichiers de routes dessinés en entier au socle, dont `teams.rb` ; socle d'authentification ; `Teams::BaseController` ; job de base `Shared::ImportJob` et un job par type ; un contrôleur par écran |
+| UI | Shell par rôle et composants du Lot 0c ; vues ERB par lot, CRUD en modales avec réponses `*.turbo_stream.erb` ; rafraîchissement par morphing ; écran de suivi des imports ; contrôleurs Stimulus chargés par motif |
 
 ## 6. Décisions rattachées
 
@@ -790,18 +856,18 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 
 - ADR-0026 — `Shared::Result`, queries de lecture, DTO `…Input`, transactions (F-01, F-03)
 - ADR-0027 — Contextes bornés et arborescence (F-02)
-- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04)
+- ADR-0028 — Policies de domaine `call(actor:, **faits)` (F-04) — **amendement requis** : policies ajoutées (voir [`plan.md`](plan.md), « Décisions que ce plan suppose »)
 - ADR-0029 — `public_id` de 14 caractères et slugs figés (F-05)
-- ADR-0030 — Une école principale par enseignant, déclaration des classes (F-06)
+- ADR-0030 — Une école principale par enseignant, déclaration des classes, établissements et génération des classes (F-06)
 - ADR-0031 — TOTP et codes de secours pour l'équipe (F-07)
 - ADR-0032 — Récupération assistée du PIN (F-08)
 - ADR-0033 — Barème à 4 paliers et seuils pédagogiques (F-10, F-11)
-- ADR-0034 — Référentiel et seeds (F-12) — **amendement requis** : aucun seed de DRENA ni d'établissement en production ; écoles, référentiel et contenu en V1
+- ADR-0034 — Référentiel et seeds (F-12) : aucun seed de référentiel ni d'établissement en production ; les DRENA se créent à l'écran
 - ADR-0035 — Cycle de vie du contenu `draft/published/archived` (F-13)
 - ADR-0036 — Suppression restreinte et archivage (F-14)
 - ADR-0037 — Nom et Prénom(s) (F-15)
 - ADR-0038 — Rôles et invitations (F-16)
-- ADR-0039 — Import de contenu (TR-28) — **amendement requis** : cinq types, écriture en masse, limites, colonnes `scope`, `progress` et `import_errors`
+- ADR-0039 — Import de contenu (TR-28) : quatre types, import partiel atomique par élément racine, rapport exact — **erratum requis** : la colonne `errors` s'appelle `import_errors`
 - ADR-0040 — Adhésion par code
 - ADR-0041 — Classes, année scolaire, plafond, code d'adhésion
 - ADR-0043 — Lacunes de connaissance
@@ -812,7 +878,7 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 - ADR-0052 — Chaîne de livraison et worker toujours actif
 - ADR-0054 — Moteur d'évaluation et clôture automatique (F-34)
 - UDR-0005 — Design system (F-09)
-- UDR-0006 — Shell par rôle et toasts (F-31)
+- UDR-0006 — Shell par rôle, toasts et CRUD par Hotwire (F-31) — **amendement requis** : l'entrée « Établissements » est active en V1
 - UDR-0007 — Vocabulaire d'interface (F-32)
 - UDR-0008 à UDR-0040 — une UDR par écran, écrite par le lot qui le livre (numéros réservés dans [`plan.md`](plan.md))
 
@@ -822,7 +888,8 @@ Toutes acceptées le 2026-09-25, sauf mention contraire.
 |---|---|---|
 | Parcours bout en bout équipe → enseignant → élève, sur base vierge | impossible (questions jamais persistées) | vert en test système Chrome headless |
 | Accueils par rôle qui répondent 200 | 1 sur 3 | 3 sur 3 |
-| Import de 500 établissements (≈ 35 000 classes) | import synchrone, élèves de démonstration créés, sans rapport | < 2 min, tout ou rien, rapport persisté |
-| Import de 200 cours complets | import synchrone ligne à ligne | < 2 min, tout ou rien, rapport persisté |
+| Import de 500 établissements (≈ 35 000 classes) | import synchrone, élèves de démonstration créés, sans rapport | < 2 min, partiel, rapport exact persisté |
+| Import de 200 cours complets | import synchrone ligne à ligne | < 2 min, partiel, rapport exact persisté |
+| Écritures (CRUD) qui rechargent la page | la plupart | aucune (test système par écran) |
 | Couverture lignes et branches | non mesurée | 100 % (ADR-0024) |
 | JS de l'application, gzip | 622 Ko non compressés | dans le budget de l'ADR-0051 |
