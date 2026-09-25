@@ -164,6 +164,17 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_no_selector "#toasts [data-toast-type=error]"
   end
 
+  # Lot B4: a stream that sends a toast and a refresh lost the toast, since the morph removed it from #toasts.
+  test "a toast sent with a refresh survives the morph of the page" do
+    find("button[data-stream=success]").click
+    assert_selector "#toasts [data-toast-type=success]"
+    execute_script("addEventListener('turbo:morph', () => document.body.dataset.morphed = 'yes', { once: true })")
+    execute_script("Turbo.renderStreamMessage('<turbo-stream action=\"refresh\"></turbo-stream>')")
+
+    assert_selector "body[data-morphed=yes]"
+    assert_selector "#toasts [data-toast-type=success]", text: t("components.toast.titles.success")
+  end
+
   # Lot S1: at the top, a toast covered the actions of the page header. On a desktop it now sits at the bottom;
   # on a phone it stays at the top, since the bottom bar holds the navigation.
   test "a toast never covers the page header on a desktop, and stays above the bottom bar on a phone" do

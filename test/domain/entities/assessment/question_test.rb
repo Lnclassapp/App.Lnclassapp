@@ -25,10 +25,16 @@ module Entities
         assert_not multiple.correct?([ 1, 2, 3 ])
       end
 
-      test "structure selon l'ADR-0039" do
+      test "structure selon l'ADR-0039 et le PRD (AS-03)" do
         assert_empty question("true_false", true, false).structure_errors
-        assert_empty question("multiple_correct_3", true, true, true).structure_errors
+        assert_empty question("single_choice", true, false).structure_errors
+        assert_empty question("multiple_correct_2", true, false, true).structure_errors
+        assert_empty question("multiple_correct_3", true, true, false, true).structure_errors
         assert_equal [ :true_false_needs_two_answers ], question("true_false", true, false, false).structure_errors
+        assert_equal [ :true_false_needs_two_answers ], question("true_false", true).structure_errors
+        assert_equal [ :too_few_answers ], question("single_choice", true).structure_errors
+        assert_equal [ :too_few_answers ], question("multiple_correct_2", true, true).structure_errors
+        assert_equal [ :too_few_answers ], question("multiple_correct_3", true, true, true).structure_errors
         assert_equal [ :wrong_correct_count ], question("single_choice", true, true, false).structure_errors
         assert_equal %i[too_few_answers wrong_correct_count], question("multiple_correct_2", true).structure_errors
         assert_equal [ :unknown_question_type ], Question.structure_errors_for(question_type: "open", answers: [])
