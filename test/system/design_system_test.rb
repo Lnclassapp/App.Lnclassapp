@@ -164,6 +164,21 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_no_selector "#toasts [data-toast-type=error]"
   end
 
+  # Lot S1: at the top, a toast covered the actions of the page header. On a desktop it now sits at the bottom;
+  # on a phone it stays at the top, since the bottom bar holds the navigation.
+  test "a toast never covers the page header on a desktop, and stays above the bottom bar on a phone" do
+    toast_top = lambda do
+      find("button[data-stream=success]").click
+      find("#toasts [data-toast-type=success]", match: :first).evaluate_script("this.getBoundingClientRect().top")
+    end
+
+    assert_operator toast_top.call, :>, evaluate_script("window.innerHeight / 2")
+
+    with_mobile_viewport do
+      assert_operator toast_top.call, :<, evaluate_script("window.innerHeight / 2")
+    end
+  end
+
   test "a toast survives a redirect through the flash, then leaves by itself" do
     find("button[data-redirect]").click
 
