@@ -1,7 +1,7 @@
 require "test_helper"
 
 # The V1 routes are the contract of the shell (Lot 0c, UDR-0006) and of every vertical lot
-# (plan boucle-pedagogique §0.10). No numeric :id is ever exposed (ADR-0029).
+# (plan boucle-pedagogique §0a.4). No numeric :id is ever exposed (ADR-0029).
 class V1RoutesTest < ActionDispatch::IntegrationTest
   FROZEN = %i[student_home_path student_classroom_path teacher_home_path teacher_classrooms_path team_home_path
               courses_path session_path schools_path].freeze
@@ -40,6 +40,7 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     assert_equal "/c/abc23", helpers.join_classroom_path("abc23")
     assert_equal "/sessions/abcdefghijkmno/result", helpers.exercise_session_result_path("abcdefghijkmno")
     assert_equal "/teams/levels/tle/series/d", helpers.level_series_path("tle", "d")
+    assert_equal "/drenas/abcdefghijkmno/schools", helpers.drena_schools_path("abcdefghijkmno")
   end
 
   test "no application route contains a numeric :id" do

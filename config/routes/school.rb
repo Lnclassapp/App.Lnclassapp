@@ -1,5 +1,4 @@
 # 🌐 DELIVERY · routes du contexte school (hors espace équipe)
-# Rôle : liste des établissements d'une DRENA pour l'inscription enseignant (JSON)
+# Rôle : établissements d'une DRENA pour l'inscription enseignant, en HTML (frame) et en JSON
 # ADR  : 0030
-get "api/v1/drenas/:drena_public_id/schools", to: "school/api/schools#index",
-                                               as: :api_v1_drena_schools, defaults: { format: :json }
+get "drenas/:drena_public_id/schools", to: "school/drena_schools#index", as: :drena_schools

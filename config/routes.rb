@@ -1,4 +1,4 @@
-# Every V1 route is drawn here once, by context (plan boucle-pedagogique §0.10); no vertical
+# Every V1 route is drawn here once, by context (plan boucle-pedagogique §0a.4); no vertical
 # lot edits them. A route whose controller is not merged yet breaks nothing until it is called.
 # No numeric :id anywhere (ADR-0029): public_id or slug only.
 Rails.application.routes.draw do
