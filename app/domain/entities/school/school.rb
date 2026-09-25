@@ -24,7 +24,9 @@ module Entities
       validates :status, inclusion: { in: STATUSES }
 
       # « first » si le nom contient le mot collège, accents et casse ignorés (« Collége », « COLLEGE »).
-      def self.cycle_for(name:) = name.to_s.parameterize.split("-").include?(COLLEGE_WORD) ? "first" : "both"
+      def self.cycle_for(name:)
+        name.to_s.parameterize.split("-").include?(COLLEGE_WORD) ? "first" : "both"
+      end
 
       def name=(value)
         @name = value&.squish
@@ -35,7 +37,10 @@ module Entities
       end
 
       # Un établissement mixte suit le barème du privé (ADR-0030).
-      def plan_type = school_type == "public" ? "public" : "private"
+      def plan_type
+        school_type == "public" ? "public" : "private"
+      end
+
       def first_cycle_only? = cycle == "first"
       def active? = status == "active"
     end
