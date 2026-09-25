@@ -6,7 +6,6 @@ class CreateEssentials < ActiveRecord::Migration[8.1]
       t.string :slug, null: false, index: { unique: true }
       t.string :name, limit: 150, null: false
       t.string :subtitle, limit: 150
-      t.text :content
       t.integer :position, null: false
       t.references :author, null: false, foreign_key: { to_table: :users, on_delete: :restrict }
       t.string :status, null: false, default: "draft", index: true

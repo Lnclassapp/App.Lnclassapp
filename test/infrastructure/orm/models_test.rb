@@ -10,6 +10,9 @@ class Orm::ModelsTest < ActiveSupport::TestCase
   STUDENT_PRODUCTION = %w[exercise_sessions question_attempts exercise_badges knowledge_gaps
                           classroom_students classroom_assignments].freeze
 
+  # Declared by has_one_attached and has_rich_text: they point to the framework, not to Orm::.
+  FRAMEWORK_ASSOCIATIONS = /\A(rich_text_\w+|\w+_attachment|\w+_blob)\z/
+
   def user(role, contact, **attributes)
     Orm::User.create!(last_name: "Koné", first_name: "Awa", contact:, gender: "female", role:, pin: "1234", **attributes)
   end
@@ -46,7 +49,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
 
   test "every association resolves to an Orm model and states its class name" do
     MODELS.each do |model|
-      model.reflect_on_all_associations.reject { |reflection| reflection.name.to_s.end_with?("_attachment", "_blob") }.each do |reflection|
+      model.reflect_on_all_associations.reject { |reflection| reflection.name.to_s.match?(FRAMEWORK_ASSOCIATIONS) }.each do |reflection|
         assert reflection.options[:class_name].to_s.start_with?("Orm::"), "#{model.name}##{reflection.name}"
         assert reflection.klass < ApplicationRecord, "#{model.name}##{reflection.name}"
       end
@@ -134,5 +137,15 @@ class Orm::ModelsTest < ActiveSupport::TestCase
 
     assert report.reload.source.attached?
     assert_equal({ "status" => "queued", "import_errors" => [] }, report.attributes.slice("status", "import_errors"))
+  end
+
+  test "a course and an essential keep their rich content, rendered in the design tokens" do
+    graph[:course].update!(content: "<h2>Définition</h2><p>Un nombre <strong>complexe</strong> s'écrit <em>a + ib</em>.</p>")
+    graph[:essential].update!(content: "<ul><li>Module</li><li>Argument</li></ul>")
+    course = Orm::Course.find(graph[:course].id)
+
+    assert_includes course.content.to_plain_text, "Un nombre complexe s'écrit a + ib."
+    assert_includes Orm::Essential.find(graph[:essential].id).content.body.to_html, "<li>Argument</li>"
+    assert_match(/<div class="trix-content[^"]*">.*<strong>complexe<\/strong>/m, course.content.to_s)
   end
 end

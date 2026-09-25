@@ -68,7 +68,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
   # ADR-0036 : the closed list of cascades, from a parent to its technical rows.
   CASCADES = %w[sessions login_attempts totp_credentials backup_codes pin_recovery_codes].freeze
-  FRAMEWORK_TABLES = /\A(active_storage_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
+  FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
 
   def connection = ActiveRecord::Base.connection
 
@@ -156,8 +156,13 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     %w[levels series].each { |table| assert_not_includes connection.columns(table).map(&:name), "code", table }
   end
 
-  test "neither friendly_id nor Action Text leaves a table behind" do
-    assert_empty connection.tables.grep(/\A(friendly_id_slugs|action_text_)/)
+  test "friendly_id leaves no table behind" do
+    assert_not connection.table_exists?("friendly_id_slugs")
+  end
+
+  test "course and essential content lives in Action Text, once per record and field" do
+    assert_includes unique_indexes("action_text_rich_texts"), [ %w[record_type record_id name], nil ]
+    %w[courses essentials].each { |table| assert_not_includes connection.columns(table).map(&:name), "content", table }
   end
 
   test "the database refuses what the application must never write" do

@@ -133,6 +133,30 @@
   }
 }
 
+/* Contenu riche d'un cours ou d'une fiche (Action Text), en lecture : la typographie suit les tokens.
+   Le CSS de l'éditeur Trix n'est chargé que par les pages d'édition (builds/trix.css). */
+@layer components {
+  .trix-content {
+    @apply text-base leading-relaxed text-ink;
+
+    & > * + * { @apply mt-3; }
+    & h1 { @apply font-display text-2xl font-bold; }
+    & h2 { @apply font-display text-xl font-bold; }
+    & a { @apply text-brand-strong underline; }
+    & strong { @apply font-semibold; }
+    & ul { @apply list-disc pl-6; }
+    & ol { @apply list-decimal pl-6; }
+    & blockquote { @apply border-l-4 border-line pl-4 text-mute; }
+    & pre { @apply overflow-x-auto rounded-ln bg-mist p-3 font-mono text-sm; }
+    & img { @apply h-auto max-w-full rounded-ln; }
+  }
+
+  /* V1 refuse toute pièce jointe (ADR-0047, ADR-0049) : le bouton de fichier de l'éditeur disparaît. */
+  trix-toolbar [data-trix-button-group="file-tools"] {
+    display: none;
+  }
+}
+
 /* Cadrage de la photo du héros de la landing */
 @utility object-hero {
   object-position: 30% 50%;
