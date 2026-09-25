@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_25_100031) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_25_100032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
@@ -134,7 +144,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100031) do
   create_table "courses", force: :cascade do |t|
     t.datetime "archived_at"
     t.bigint "author_id", null: false
-    t.text "content"
     t.datetime "created_at", null: false
     t.bigint "level_id", null: false
     t.bigint "material_id", null: false
@@ -169,7 +178,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100031) do
   create_table "essentials", force: :cascade do |t|
     t.datetime "archived_at"
     t.bigint "author_id", null: false
-    t.text "content"
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.string "name", limit: 150, null: false

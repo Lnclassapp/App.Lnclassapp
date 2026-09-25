@@ -14,6 +14,8 @@ module Orm
     belongs_to :series, class_name: "Orm::Series", optional: true
     belongs_to :author, class_name: "Orm::User"
 
+    has_rich_text :content
+
     has_many :essentials, class_name: "Orm::Essential", inverse_of: :course, dependent: :restrict_with_error
   end
 end
