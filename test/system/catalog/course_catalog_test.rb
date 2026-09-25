@@ -8,7 +8,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   # The team home belongs to a later lot: until it is merged, a stand-in answers where the sign-in lands, as in
   # test/system/teams/course_management_test.rb. A merged controller is autoloadable, so the stand-in steps aside by itself.
   unless Object.const_defined?("Teams::HomesController")
-    Teams.const_set(:HomesController, Class.new(Teams::BaseController) { def show = render(html: "home", layout: true) })
+    Teams.const_set(:HomesController, Class.new(Teams::BaseController) { def show = render(html: "home", layout: true, formats: :html) })
   end
 
   setup do
