@@ -1,12 +1,14 @@
 # UDR-0002 : UI/UX de l'Organisation Scolaire
 
+> ⚠️ **Remplacée partiellement par [UDR-0005](./0005-design-system-fondateur.md)** (2026-09-25) : la section « Tokens » ne s'applique plus. Utilisez les tokens `@theme` et la table de correspondance de l'UDR-0005 §3. Les autres sections restent valables.
+
 | | |
 |---|---|
 | **Statut** | Accepté |
 | **Date** | — |
 | **Chantier** | — |
 | **ADR lié** | [ADR-0023 — Modélisation de l'organisation scolaire](../adr/0023-modelisation-de-l-organisation-scolaire.md) |
-| **Remplacé par** | — |
+| **Remplacé par** | [UDR-0005](./0005-design-system-fondateur.md), section « Tokens » seulement |
 
 ---
 

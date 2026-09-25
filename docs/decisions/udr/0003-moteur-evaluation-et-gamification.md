@@ -1,12 +1,14 @@
 # UDR-0003 : Moteur d'Évaluation & Gamification (Assessment UI)
 
+> ⚠️ **Remplacée partiellement par [UDR-0005](./0005-design-system-fondateur.md)** (2026-09-25) : la section « Tokens » ne s'applique plus. Utilisez les tokens `@theme` et la table de correspondance de l'UDR-0005 §3. Les autres sections restent valables.
+
 | | |
 |---|---|
 | **Statut** | Accepté |
 | **Date** | — |
 | **Chantier** | — |
 | **ADR lié** | [ADR-0008 — Moteur d'évaluation et gamification](../adr/0008-moteur-evaluation-et-gamification.md) |
-| **Remplacé par** | — |
+| **Remplacé par** | [UDR-0005](./0005-design-system-fondateur.md), section « Tokens » seulement |
 
 ---
 
