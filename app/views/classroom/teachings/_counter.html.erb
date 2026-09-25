@@ -1,0 +1,6 @@
+<%# 🌐 UI · classroom/teachings/_counter — nombre de classes déclarées %>
+<%# Rôle : #teaching_counter, région aria-live remplacée par les streams de déclaration et de retrait %>
+<%# ADR  : 0030 · UDR : 0025 %>
+<p id="teaching_counter" aria-live="polite" class="text-sm text-mute">
+  <%= t(".count", count:) %>
+</p>
