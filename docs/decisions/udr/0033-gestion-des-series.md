@@ -23,6 +23,7 @@ L'ancienne application n'avait aucune page pour voir les séries : `index` et `s
 - **Matrice plutôt que cases dans le formulaire du niveau.** L'équipe voit en un coup d'œil toute la structure du second cycle. Un clic sur une case écrit un seul couple, sans ouvrir de formulaire. Le formulaire du niveau (Lot R1) ne porte plus les séries.
 - **Création et renommage en modale** (UDR-0006 §7). Le formulaire ne demande que le nom. Le code (slug) est dérivé du nom à la création, puis figé (ADR-0029). Il est affiché dans le tableau, parce que les fichiers d'import et la génération des classes l'utilisent.
 - **Suppression confirmée dans la page**, par une modale native, jamais par `window.confirm`. Une série liée à un niveau, ou portée par une classe ou un cours, est gardée : le refus donne sa raison.
+- **Les séries n'existent qu'au second cycle** (arbitrage de l'orchestrateur, 2026-09-25) : la matrice ne montre que les niveaux du second cycle, et lier une série à un niveau du premier cycle est refusé (`:invalid`, 422, toast avec la raison).
 - **Un couple utilisé ne se décoche pas.** Le refus est affiché dans un toast d'erreur et la case reste cochée. Une serrure signale d'avance les couples utilisés.
 
 ## 3. Règles d'implémentation
