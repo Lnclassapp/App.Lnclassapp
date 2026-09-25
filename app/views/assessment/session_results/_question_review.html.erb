@@ -1,0 +1,53 @@
+<%# 🌐 UI · assessment/session_results/_question_review — correction d'une question dans le résultat %>
+<%# Rôle : verdict, énoncé, propositions (les seules cochées pour l'élève ; toutes, correctes marquées, si reveal), explication %>
+<%# ADR  : 0028, 0054 · UDR : 0007, 0022, 0023 %>
+<% tone = { true => :success, false => :error }.fetch(question.correct, :none) %>
+<li id="question_review_<%= question.id %>">
+  <%= ui_card padding: :none, class: "overflow-hidden" do %>
+    <div class="flex items-center justify-between gap-3 border-b border-line bg-mist px-5 py-3 sm:px-6">
+      <p class="text-sm font-medium text-mute"><%= t(".number", number: question.number) %></p>
+      <%= ui_badge t(".verdict.#{tone}"), tone: { success: :success, error: :error, none: :neutral }.fetch(tone),
+                   icon: { success: "check-circle", error: "x-circle", none: "minus-circle" }.fetch(tone) %>
+    </div>
+    <div class="space-y-4 p-5 sm:p-6">
+      <p class="font-semibold whitespace-pre-line text-ink"><%= question.content %></p>
+      <% unless reveal || question.answers.empty? %>
+        <p class="text-xs font-semibold tracking-wide text-mute uppercase"><%= t(".selected") %></p>
+      <% end %>
+      <ul class="space-y-2" aria-label="<%= t(".answers") %>">
+        <% question.answers.each do |answer| %>
+          <% if reveal && answer.correct %>
+            <li class="flex min-h-tap items-center gap-3 rounded-ln border border-success bg-success-soft px-4 py-2" data-correct
+                <%= "data-selected" if answer.selected %>>
+              <%= ui_icon "check-circle", variant: :mini, class: "text-success" %>
+              <span class="min-w-0 flex-1 font-medium text-ink"><%= answer.content %></span>
+              <%= ui_badge t(".correct"), tone: :success, size: :sm %>
+              <% if answer.selected %><%= ui_badge t(".student_choice"), tone: :neutral, size: :sm %><% end %>
+            </li>
+          <% elsif reveal && answer.selected %>
+            <li class="flex min-h-tap items-center gap-3 rounded-ln border border-error bg-error-soft px-4 py-2" data-selected>
+              <%= ui_icon "x-circle", variant: :mini, class: "text-error" %>
+              <span class="min-w-0 flex-1 font-medium text-ink"><%= answer.content %></span>
+              <%= ui_badge t(".student_choice"), tone: :neutral, size: :sm %>
+            </li>
+          <% elsif reveal %>
+            <li class="flex min-h-tap items-center gap-3 rounded-ln border border-line px-4 py-2">
+              <span class="size-4 shrink-0 rounded-full border-2 border-line" aria-hidden="true"></span>
+              <span class="min-w-0 flex-1 text-mute"><%= answer.content %></span>
+            </li>
+          <% else %>
+            <li class="flex min-h-tap items-center rounded-ln border border-ink bg-mist px-4 py-2 font-medium"><%= answer.content %></li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% if question.explanation.present? %>
+        <div class="rounded-ln bg-info-soft px-4 py-3">
+          <p class="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-info uppercase">
+            <%= ui_icon "light-bulb", variant: :mini, size: :sm %><%= t(".explanation") %>
+          </p>
+          <p class="mt-1 text-sm whitespace-pre-line text-ink"><%= question.explanation %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</li>
