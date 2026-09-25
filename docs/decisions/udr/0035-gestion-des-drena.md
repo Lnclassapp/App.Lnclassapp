@@ -26,16 +26,16 @@ Dans l'ancienne application, trois défauts gênaient ce travail :
 2. **Création et renommage en modale**, sans rechargement (UDR-0006 §7). Le nom est enregistré tel que saisi, espaces normalisés et casse conservée.
 3. **Le slug est tiré du nom à la création, puis ne change plus.** La modale d'édition le rappelle, pour que l'équipe sache qu'un renommage ne casse aucun fichier d'import.
 4. **Suppression confirmée dans la ligne**, par une `<dialog>` de l'application, jamais par le `confirm()` du navigateur. Une DRENA qui a des établissements n'est **pas supprimée** : un toast d'erreur donne la raison et le nombre d'établissements, et la ligne reste. Aucune cascade (ADR-0036).
-5. **État vide piloté par le tableau** : il paraît dès que le tableau n'a plus de ligne, que ce soit au premier affichage ou après la dernière suppression, sans que chaque stream ait à le gérer.
+5. **État vide sous le tableau**, dans la même carte, comme l'écran des imports : il paraît au premier affichage sans DRENA et revient quand la dernière est supprimée ; la première création l'efface.
 
 ## 3. Règles d'implémentation
 
 > Contrat d'exécution. Un agent l'applique littéralement.
 
 **Structure**
-- Écran `teams/drenas/index` : `ui_page_header` (titre « DRENA », sous-titre, bouton « Nouvelle DRENA » `data-turbo-frame="modal"`), puis un conteneur `group/drenas` qui contient :
-  - le tableau (`rounded-card border-line bg-white shadow-card`, `overflow-x-auto relative`), `tbody#drenas`, colonnes Nom · Slug (à utiliser dans les fichiers d'import) · Établissements · Classes · actions ;
-  - `#drenas_empty` : `ui_empty_state` « Aucune DRENA pour l'instant », icône `building-library`.
+- Écran `teams/drenas/index` : `ui_page_header` (titre « DRENA », sous-titre, bouton « Nouvelle DRENA » `data-turbo-frame="modal"`), puis une carte (`rounded-card border-line bg-white shadow-card`, `overflow-x-auto relative`) qui contient :
+  - le tableau, `tbody#drenas`, colonnes Nom · Slug (à utiliser dans les fichiers d'import) · Établissements · Classes · actions ;
+  - `div#drenas_empty.p-6.empty:hidden` : `ui_empty_state` « Aucune DRENA pour l'instant », icône `building-library`, rendu seulement quand il n'y a aucune DRENA. Vide, le bloc ne prend aucune place.
 - Ligne `teams/drenas/_drena_row` : `tr#drena_<public_id>`. Le slug est dans un `<code>` ; les compteurs sont alignés à droite en `tabular-nums`. Actions : `ui_button` « Modifier » (`ghost`, `sm`, `pencil-square`, `data-turbo-frame="modal"`) et `ui_modal` à déclencheur « Supprimer » (`ghost`, `trash`), `id: "delete-drena-<public_id>"`, taille `sm`. Son pied contient « Annuler » et un formulaire `DELETE` dont le bouton « Supprimer la DRENA » est `danger`.
 - Modales `new` et `edit` : `turbo_frame_tag "modal"` → `ui_modal(id: "drena-modal", open: true)` → `form#drena-form`, un seul `ui_field :name` (obligatoire, 80 caractères au plus). L'aide de `new` explique que le slug sera figé ; celle d'`edit` affiche le slug actuel dans un `<code>`.
 - Navigation : l'écran déclare `content_for :nav_key, "schools"` (organisation scolaire).
@@ -45,10 +45,9 @@ Dans l'ancienne application, trois défauts gênaient ce travail :
 - Aucune couleur ni classe reprise de l'ancienne application.
 
 **Comportement**
-- `create` et `update` : `create.turbo_stream.erb` / `update.turbo_stream.erb` envoient un toast de succès, vident `modal` et font `update "drenas"` avec toute la liste. La liste est triée par nom : une création ou un renommage peut déplacer une ligne.
+- `create` et `update` : `create.turbo_stream.erb` / `update.turbo_stream.erb` envoient un toast de succès, vident `modal` et font `update "drenas"` avec toute la liste. La liste est triée par nom : une création ou un renommage peut déplacer une ligne. `create` vide aussi `drenas_empty`.
 - Nom vide, trop long ou déjà pris : la modale est re-rendue en 422 avec l'erreur sous le champ (« Une DRENA porte déjà ce nom. »).
-- `destroy` : succès, toast et `remove "drena_<public_id>"`. Refus (`:conflict`, `has_schools`) : statut 422, toast d'erreur « La DRENA « X » a N établissements : elle ne peut pas être supprimée. », et `replace` de la ligne, qui referme sa `<dialog>`.
-- État vide en CSS : le tableau porte `hidden group-has-[#drenas>tr]/drenas:block`, l'état vide `group-has-[#drenas>tr]/drenas:hidden` (`:has()` fait partie du socle navigateur de l'ADR-0051).
+- `destroy` : succès, toast et `remove "drena_<public_id>"` ; si c'était la dernière DRENA, `update "drenas_empty"` avec l'état vide. Refus (`:conflict`, `has_schools`) : statut 422, toast d'erreur « La DRENA « X » a N établissements : elle ne peut pas être supprimée. », et `replace` de la ligne, qui referme sa `<dialog>`.
 - Repli sans Turbo : chaque écriture redirige vers la liste (`303`) avec un flash (`notice` ou `alert` pour le refus).
 
 **États obligatoires**
@@ -66,4 +65,4 @@ Dans l'ancienne application, trois défauts gênaient ce travail :
 
 - La suppression d'une DRENA n'efface jamais une école : l'équipe désactive les écoles, puis supprime une DRENA vide.
 - Un renommage ne demande aucune mise à jour des fichiers d'import déjà écrits.
-- Les écrans de gestion de l'équipe qui suivent (niveaux, séries, matières) peuvent reprendre la même confirmation de suppression dans la ligne et le même état vide piloté par CSS.
+- Les écrans de gestion de l'équipe qui suivent (niveaux, séries, matières) peuvent reprendre la même confirmation de suppression dans la ligne et le même état vide sous le tableau.

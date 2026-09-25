@@ -7,27 +7,23 @@
   <%= ui_button t(".new"), href: new_drena_path, icon: "plus", data: { turbo_frame: "modal" } %>
 <% end %>
 
-<%# L'état vide suit le tableau par CSS : il paraît quand #drenas n'a plus de ligne, quel que soit le stream qui l'a vidé. %>
-<div class="group/drenas">
-  <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card hidden group-has-[#drenas>tr]/drenas:block">
-    <table class="w-full min-w-2xl text-left text-sm">
-      <thead class="border-b border-line text-xs text-mute">
-        <tr>
-          <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.name") %></th>
-          <th scope="col" class="px-4 py-3 font-medium">
-            <%= t(".columns.slug") %> <span class="font-normal">(<%= t(".columns.slug_hint") %>)</span>
-          </th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.schools") %></th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.classrooms") %></th>
-          <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
-        </tr>
-      </thead>
-      <tbody id="drenas" class="divide-y divide-line">
-        <%= render partial: "drena_row", collection: @drenas, as: :drena %>
-      </tbody>
-    </table>
-  </div>
-  <div id="drenas_empty" class="group-has-[#drenas>tr]/drenas:hidden">
-    <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "building-library" %>
-  </div>
+<div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
+  <table class="w-full min-w-2xl text-left text-sm">
+    <thead class="border-b border-line text-xs text-mute">
+      <tr>
+        <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.name") %></th>
+        <th scope="col" class="px-4 py-3 font-medium">
+          <%= t(".columns.slug") %> <span class="font-normal">(<%= t(".columns.slug_hint") %>)</span>
+        </th>
+        <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.schools") %></th>
+        <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.classrooms") %></th>
+        <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+      </tr>
+    </thead>
+    <tbody id="drenas" class="divide-y divide-line">
+      <%= render partial: "drena_row", collection: @drenas, as: :drena %>
+    </tbody>
+  </table>
+  <%# Vidé par create, rempli par destroy quand la dernière ligne part : sans contenu, il ne prend aucune place. %>
+  <div id="drenas_empty" class="p-6 empty:hidden"><%= ui_empty_state(title: t(".empty_title"), description: t(".empty_description"), icon: "building-library") if @drenas.empty? %></div>
 </div>

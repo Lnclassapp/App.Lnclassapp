@@ -36,6 +36,7 @@ module Teams
 
       render_result result, success: lambda { |drena|
         @drena = drena
+        @last_removed = drenas_query.call.empty?
         respond_to do |format|
           format.turbo_stream
           format.html { redirect_to drenas_path, notice: t(".deleted", name: drena.name), status: :see_other }

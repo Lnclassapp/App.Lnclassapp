@@ -54,6 +54,7 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{row(abidjan)} td.tabular-nums", text: "1", count: 2
     assert_select "#{row(yamoussoukro)} code", "yamoussoukro"
     assert_select "th", text: /Slug\s+\(à utiliser dans les fichiers d'import\)/
+    assert_select "#drenas_empty:empty"
   end
 
   test "with no DRENA, the list is empty and says what to do" do
@@ -99,6 +100,7 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_equal "abidjan-1", drena.slug
     assert_select "turbo-stream[action=append][target=toasts]", text: /DRENA « Abidjan 1 » créée/
     assert_select "turbo-stream[action=update][target=modal]"
+    assert_select "turbo-stream[action=update][target=drenas_empty]"
     assert_select "turbo-stream[action=update][target=drenas] template" do
       assert_select "tr", 2
       assert_select "tr:first-child#drena_#{drena.public_id} code", "abidjan-1"
@@ -218,6 +220,7 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
 
   test "deleting a DRENA without school removes its row in Turbo Stream" do
     drena = create_drena(name: "Abidjan 1")
+    create_drena(name: "Abidjan 2")
     sign_in_as @member
 
     delete drena_path(drena), as: :turbo_stream
@@ -226,7 +229,18 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::Drena.exists?(drena.id)
     assert_select "turbo-stream[action=append][target=toasts]", text: /DRENA « Abidjan 1 » supprimée/
     assert_select "turbo-stream[action=remove][target=drena_#{drena.public_id}]"
+    assert_select "turbo-stream[target=drenas_empty]", 0
     assert_equal({ "change" => "drena.deleted", "name" => "Abidjan 1" }, Orm::AuditEvent.sole.metadata)
+  end
+
+  test "deleting the last DRENA brings the empty state back" do
+    drena = create_drena(name: "Abidjan 1")
+    sign_in_as @member
+
+    delete drena_path(drena), as: :turbo_stream
+
+    assert_select "turbo-stream[action=remove][target=drena_#{drena.public_id}]"
+    assert_select "turbo-stream[action=update][target=drenas_empty] template", text: /Aucune DRENA pour l'instant/
   end
 
   test "deleting a DRENA that has schools is refused with the reason, in 422, and nothing is deleted" do
