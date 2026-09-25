@@ -1,0 +1,16 @@
+<%# 🌐 UI · teams/drenas/destroy — suppression d'une DRENA, ou son refus %>
+<%# Rôle : succès : toast, ligne retirée, état vide après la dernière ; refus (établissements) : toast d'erreur avec la raison, ligne rendue de nouveau %>
+<%# ADR  : 0036 · UDR : 0006, 0035 %>
+<% if @refusal %>
+  <%= turbo_stream_toast @refusal, type: :error %>
+  <%= turbo_stream.replace "drena_#{@drena.public_id}", partial: "drena_row", locals: { drena: @drena } %>
+<% else %>
+  <%= turbo_stream_toast t(".deleted", name: @drena.name), type: :success %>
+  <%= turbo_stream.remove "drena_#{@drena.public_id}" %>
+  <% if @last_removed %>
+    <%= turbo_stream.update "drenas_empty" do %>
+      <%= ui_empty_state title: t("teams.drenas.index.empty_title"), description: t("teams.drenas.index.empty_description"),
+                         icon: "building-library" %>
+    <% end %>
+  <% end %>
+<% end %>

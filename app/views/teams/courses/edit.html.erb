@@ -1,0 +1,15 @@
+<%# 🌐 UI · teams/courses/edit — modification d'un cours, servie dans le frame « modal » %>
+<%# Rôle : le contenu enregistré est rechargé dans l'éditeur ; le statut s'affiche mais ne se change pas ici ; échec en 422 %>
+<%# ADR  : 0029, 0035, 0037 · UDR : 0006, 0014 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "course-modal", size: :lg, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "course-form" %>
+    <% end %>
+    <p class="mb-5 flex flex-wrap items-center gap-2 text-sm text-mute">
+      <%= content_status_badge(@course.status) %> <%= t(".status_notice") %>
+    </p>
+    <%= render "form", input: @form, options: @options, url: teams_course_path(@course.slug), method: :patch %>
+  <% end %>
+<% end %>
