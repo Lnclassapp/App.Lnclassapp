@@ -78,7 +78,7 @@ Sept familles de fichiers seraient partagées par plusieurs lots verticaux. Le s
 2. **Les repositories.** Un même port sert plusieurs lots. Par exemple, `AssignmentRepositoryPort` sert A2, C2, D5 et D6, et `ClassroomRepositoryPort#insert_generated` sert S2, S3 et les seeds. Chaque repository est donc écrit au socle, avec son test. Les lots n'écrivent que leurs **use cases**, leurs **queries** (une par écran), leurs contrôleurs et leurs vues.
 3. **Les fabriques de test.** Deux lots d'un même contexte se disputeraient `test/support/factories/<ctx>.rb`. 0a les écrit **complètes**, pour toutes les tables. Un lot qui a besoin d'un assemblage particulier l'écrit dans son propre fichier de test.
 4. **Le moteur d'import en masse.** Quatre types d'import partagent le téléversement, le rapport, le job, la validation complète avant écriture, l'écriture par lots avec rejeu élément par élément et l'écran de suivi (ADR-0039). 0e écrit ce moteur. Chaque lot d'import (S3, I1, I2, I3) n'apporte que son **adaptateur** : son use case importeur, son job, son schéma JSON, son aide à l'écran et son test de performance.
-5. **La génération des classes** (`Entities::Classroom::DefaultClassroomPlan`, ADR-0030). Elle sert à la création unitaire (S2), à l'import (S3) et aux seeds : elle est dans 0b.
+5. **La génération des classes** (`Entities::Classroom::DefaultClassroomPlan`, ADR-0030 et son amendement du 2026-09-25). Elle se déclenche **à la création d'un établissement, et seulement là** : à l'import (S3), à la création unitaire (S2), et dans les seeds de développement, qui créent des établissements. **Jamais de classes pré-créées.** Totaux attendus : lycée public 77, lycée privé ou mixte 38, collège public 28. Elle est dans 0b.
 6. **Les briques Hotwire communes** : le frame `modal` et `#toasts` (Lot 0c, déjà là), le rafraîchissement par morphing (0e), le panneau de statut d'un contenu (0e), et les assertions de test système `assert_no_page_reload` et `open_in_modal` (0d).
 7. **L'éditeur de texte riche** (décision du porteur du 2026-09-25, amendement de l'ADR-0051). Action Text et Trix servent aux formulaires de cours (B2) et de fiches essentielles (B4), et les imports I1 et I2 écrivent dans le même rich text. Le socle livre donc le framework, la table, `has_rich_text` (0a), l'assainissement du HTML importé (0e, e1) et le contrôleur `rich-text-editor`, qui charge Trix à la demande (0e, e3).
 
@@ -2269,7 +2269,7 @@ Chaque lot vertical :
 - **Hotwire**      : liste filtrée et paginée dans un frame ; modales ; 422 ; streams `create`, `update`, `deactivate`, `destroy` ; repli HTML.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/index.html.erb`, `show.html.erb`, `_form.html.erb` ; `⟨ancienne⟩ domain/…/generate_default_classrooms.rb` (table des classes, reprise par l'ADR-0030) ; capture `teams/team-school-id-school.png`
 - **Fiches d'inventaire** : SC-03 à SC-07, SC-09. CL-01 (génération).
-- **Non-régression** : aucun élève de démonstration créé ; aucune école sans ses classes ; supprimer une école utilisée est refusé.
+- **Non-régression** : aucun élève de démonstration créé ; aucune école sans ses classes ; aucune classe pré-créée ni régénérée hors de la création de l'école ; supprimer une école utilisée est refusé.
 - **UDR**          : UDR-0036 — Établissements
 
 ---
@@ -2304,7 +2304,7 @@ Chaque lot vertical :
 - **Hotwire**      : aucun contrôleur propre ; la modale, les streams et le suivi sont ceux du socle (0e) ; ce lot fournit le partial du type.
 - **Écrans de l'ancienne application** : `⟨ancienne⟩ views/catalog/schools/_import_form.html.erb` ; `⟨ancienne⟩ domain/…/school_import_strategy.rb` pour les clés acceptées ; exemples `.Business/content_pedagogics/DRENAS/`.
 - **Fiches d'inventaire** : SC-08, SC-09, TR-28.
-- **Non-régression** : aucun élève de démonstration ; codes d'adhésion uniques ; une école invalide ne bloque pas les valides ; aucune école existante mise à jour.
+- **Non-régression** : aucun élève de démonstration ; codes d'adhésion uniques ; une école invalide ne bloque pas les valides ; aucune école existante mise à jour ; les classes naissent avec leur école importée, jamais avant (lycée public 77, privé ou mixte 38, collège public 28).
 - **UDR**          : UDR-0037 — Import des établissements
 
 ---
@@ -2621,6 +2621,7 @@ Les ADR-0026 à ADR-0054 et l'UDR-0007 sont **acceptés** et ce plan s'aligne su
 | **Un test de performance par type** (`test/performance/<ctx>/import_<kind>_performance_test.rb`), au lieu du fichier unique `test/performance/imports_test.rb` de l'ADR-0039 : chaque lot possède le sien, sans collision. Hors CI, joués avec `PERF=1` avant la recette. | Écart assumé | ADR-0039 |
 | **Éditeur riche en V1** (retour du porteur du 2026-09-25) : le contenu des cours et des fiches essentielles est un rich text Action Text (`has_rich_text :content`), saisi dans Trix. Trix et `@rails/actiontext` sont chargés **uniquement sur les pages d'édition**, par import dynamique (`rich-text-editor`), hors du point d'entrée commun de 60 Ko. Les imports I1 et I2 écrivent du HTML **assaini** dans le même rich text. | **Amendement** | ADR-0051 (« Amendement du 2026-09-25 ») |
 | **Pièces jointes de l'éditeur refusées en V1** : un fichier glissé dans Trix est rejeté. Le téléversement direct vers le bucket (ADR-0047) exigerait d'ouvrir `connect-src` de la CSP (ADR-0049). **À confirmer par le porteur.** | Précision | ADR-0051 |
+| **Classes générées à la création de l'établissement seulement** (retour du porteur du 2026-09-25) : par l'import (S3) et par la création unitaire (S2), jamais pré-créées ni semées. Totaux : lycée public 77, lycée privé ou mixte 38, collège public 28. | **Amendement** | ADR-0030 |
 | `users.gender` conservé, non nul (`male`, `female`) : l'ancienne application le demandait et le PRD cadre le garde. Confirmé par le porteur le 2026-09-25. | Précision | ADR-0037 |
 | `friendly_id` **retiré** : slugs figés par `Orm::HasFrozenSlug`, `public_id` par `Orm::HasPublicId` ; la table `friendly_id_slugs` de V0 est supprimée. | Précision | ADR-0029 |
 | La CSS de KaTeX est un **fichier séparé** (`katex.css`), chargé par `math_controller` seulement sur les pages qui ont des formules : le budget CSS commun (30 Ko) reste tenu. | Précision | ADR-0051 |

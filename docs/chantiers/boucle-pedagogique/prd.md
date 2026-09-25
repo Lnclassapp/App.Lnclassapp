@@ -328,6 +328,13 @@ Scénario: [SC-03][SC-09][CL-01] Créer un établissement génère ses classes
   Quand elle crée un lycée privé, puis un lycée mixte
   Alors chacun reçoit 38 classes (le barème privé s'applique aussi au mixte)
 
+Scénario: [SC-09] Jamais de classes pré-créées
+  Étant donné une production vierge
+  Alors aucune classe n'existe
+  Et une classe ne naît que par la création d'un établissement (à l'écran ou par import) ou par « Ajouter une classe » de l'équipe
+  Quand l'équipe modifie le type ou le cycle d'un établissement
+  Alors aucune classe n'est créée ni supprimée
+
 Scénario: [SC-09] Niveau sans série liée
   Étant donné une 1ère qui n'est liée à aucune série
   Quand l'équipe crée un lycée public
@@ -369,6 +376,7 @@ Scénario: [SC-08][SC-09][TR-28] Importer des établissements avec leurs classes
   Quand l'équipe l'importe depuis la modale d'import
   Alors l'écran de suivi passe de « En file d'attente » à « Vérification », « Import en cours » puis « Terminé », sans recharger la page
   Et chaque établissement est créé avec son type (« privée » → private, « mixte » → mixed), son cycle (un nom contenant « collège » → first) et ses classes par défaut
+  Et un lycée public importé reçoit 77 classes, un lycée privé ou mixte 38, un collège public 28, avec le référentiel du seed de développement
   Et le rapport compte les établissements importés, ignorés et en erreur, et détaille les classes générées
 
 Scénario: [SC-08][TR-28] Import partiel : un fichier mixte donne un rapport exact
