@@ -33,6 +33,6 @@
 | | |
 |---|---|
 | **Livré le** | 2026-09-26 |
-| **PR** | |
+| **PR** | [#18](https://github.com/Lnclassapp/App.Lnclassapp/pull/18) |
 | **ADR produits** | aucun |
 | **UDR produits** | aucun |
