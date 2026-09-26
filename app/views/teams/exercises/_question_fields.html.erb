@@ -1,0 +1,44 @@
+<%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : énoncé, type, explication, propositions %>
+<%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form %>
+<%# ADR  : 0054 · UDR : 0007, 0017 · Stimulus : teams--nested-form (errors : structure de la question, « questions[i] ») %>
+<fieldset data-nested-question class="relative rounded-card border border-line bg-white p-4 counter-question">
+  <legend class="float-left w-full pr-14 font-medium text-ink">
+    <%= t(".legend") %> <span class="question-number"></span>
+  </legend>
+  <%= ui_button variant: :ghost, size: :sm, icon: "trash", "aria-label": t(".remove"), class: "absolute! top-3 right-3",
+                data: { action: "teams--nested-form#remove" } %>
+  <div class="clear-both space-y-4 pt-3">
+    <% if errors.any? %>
+      <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+        <p><%= errors.to_sentence %></p>
+      </div>
+    <% end %>
+    <%= ui_field form, :content, as: :textarea, rows: 2, required: true, placeholder: t(".content_placeholder") %>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <%= ui_field form, :question_type, as: :select, required: true,
+                                         choices: Entities::Assessment::Question::TYPES.map { [ t("teams.exercises.question_types.#{it}"), it ] } %>
+      <%= ui_field form, :explanation, hint: t(".explanation_hint") %>
+    </div>
+    <div class="space-y-2" data-controller="teams--nested-form" data-teams--nested-form-placeholder-value="NEW_ANSWER"
+         data-teams--nested-form-item-value="[data-nested-answer]">
+      <p class="text-sm font-medium text-ink"><%= t(".answers") %></p>
+      <% if form.object.errors[:answers].any? %>
+        <p id="<%= form.field_id(:answers) %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= form.object.errors[:answers].to_sentence %>
+        </p>
+      <% end %>
+      <div data-teams--nested-form-target="list" class="space-y-2">
+        <%= form.fields_for :answers do |answer_form| %>
+          <%= render "answer_fields", form: answer_form %>
+        <% end %>
+      </div>
+      <template data-teams--nested-form-target="template">
+        <%= form.fields_for :answers, Dtos::Assessment::AnswerInput.new, child_index: "NEW_ANSWER" do |answer_form| %>
+          <%= render "answer_fields", form: answer_form %>
+        <% end %>
+      </template>
+      <%= ui_button t(".add_answer"), variant: :ghost, size: :sm, icon: "plus", data: { action: "teams--nested-form#add" } %>
+    </div>
+  </div>
+</fieldset>

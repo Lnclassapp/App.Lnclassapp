@@ -1,0 +1,37 @@
+# Import des exercices d'une fiche essentielle (plan boucle-pedagogique, Lot I3) — ADR-0035, ADR-0039, UDR-0040, UDR-0007
+# Les libellés du rapport (teams.imports.status.details.questions_created, answers_created) viennent de l'import de cours (I1).
+fr:
+  teams:
+    imports:
+      kinds:
+        exercises:
+          title: "Format du fichier"
+          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.exercises</code>, version 1. L'enveloppe désigne la fiche essentielle cible par son slug, dans <code class=\"font-mono text-xs text-ink\">essential</code>. Chaque élément de <code class=\"font-mono text-xs text-ink\">exercises</code> est un exercice avec ses questions et leurs propositions. Un exercice entre entier, ou pas du tout."
+          essential: "Fiche essentielle cible :"
+          essential_hint: "placez ce slug dans la clé essential de l'enveloppe."
+          no_essential_html: "Ouvrez l'import depuis la fiche essentielle cible, ou citez son slug dans la clé <code class=\"font-mono text-xs text-ink\">essential</code> de l'enveloppe. Un slug inconnu fait rejeter tout le fichier."
+          nodes:
+            exercise: "Exercice"
+            question: "Question"
+            answer: "Proposition"
+          paths:
+            exercise: "exercises[]"
+            question: "questions[]"
+            answer: "answers[]"
+          keys:
+            exercise:
+              title: "Titre de l'exercice. Obligatoire, 150 caractères au plus."
+              description: "Consigne. Facultative."
+              exercise_type: "fixation ou evaluation. Obligatoire."
+              questions: "Ses questions, dans l'ordre. Au moins une."
+            question:
+              content: "Énoncé. Obligatoire."
+              question_type: "true_false, single_choice, multiple_correct_2 ou multiple_correct_3. Vrai/Faux : 2 propositions dont 1 correcte ; sinon 1, 2 ou 3 correctes, et au moins une incorrecte en plus."
+              explanation: "Explication de la correction. Facultative."
+              answers: "Ses propositions, dans l'ordre."
+            answer:
+              content: "Texte de la proposition. Obligatoire, 500 caractères au plus."
+              correct: "true si la proposition est correcte ; false par défaut."
+          example: "Exemple minimal"
+          drafts: "Tout arrive en brouillon, à la suite des exercices de la fiche essentielle, quelle que soit la clé status du fichier : relisez, puis publiez. Un exercice déjà présent dans cette fiche essentielle (même titre, sans tenir compte des accents ni de la casse) est ignoré et compté ; il n'est jamais modifié."
+          errors: "Un exercice dont une question est mal formée est listé en erreur, avec le chemin de la question, et n'entre pas en base ; les autres exercices du fichier sont importés."

@@ -177,6 +177,18 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_selector "#toasts [data-toast-type=success]", text: t("components.toast.titles.success")
   end
 
+  # Lot B1: a refresh morphs the formula back to its raw source, and the math controller, still connected, did not
+  # render it again. It now renders again after every morph.
+  test "a formula stays rendered after the morph of the page" do
+    assert_selector "#design_math .katex"
+    execute_script("addEventListener('turbo:morph', () => document.body.dataset.morphed = 'yes', { once: true })")
+    execute_script("Turbo.renderStreamMessage('<turbo-stream action=\"refresh\"></turbo-stream>')")
+
+    assert_selector "body[data-morphed=yes]"
+    assert_selector "#design_math .katex"
+    assert_no_text "$A ="
+  end
+
   # Lot S1: at the top, a toast covered the actions of the page header. On a desktop it now sits at the bottom;
   # on a phone it stays at the top, since the bottom bar holds the navigation.
   test "a toast never covers the page header on a desktop, and stays above the bottom bar on a phone" do

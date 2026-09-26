@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/second_factor_resets/create — succès de la réinitialisation du second facteur d'un membre %>
+<%# Rôle : toast, puis le résultat de la recherche remplacé : le second facteur y apparaît « Non activé » %>
+<%# ADR  : 0031 · UDR : 0006, 0020 %>
+<%= turbo_stream_toast t("teams.second_factor_resets.create.done", name: @member.display_name), type: :success %>
+<% if @account %>
+  <%= turbo_stream.replace "account-lookup-result", partial: "teams/account_lookups/result", locals: { account: @account } %>
+<% end %>

@@ -1,0 +1,76 @@
+<%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
+<%# Rôle : badge, « Félicitations ! » et confettis ou « Courage ! », note, score, maîtrise, « Recommencer », correction %>
+<%# ADR  : 0033, 0054 · UDR : 0007, 0023 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti %>
+<% result = @result %>
+<% tone = result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? :success : :error %>
+<% content_for :title, t(".page_title", title: result.exercise.title) %>
+<div class="mx-auto max-w-2xl space-y-8">
+  <nav aria-label="<%= t(".breadcrumb") %>" class="text-sm">
+    <%= link_to course_essential_path(result.essential.course_slug, result.essential.slug),
+                class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
+      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back", name: result.essential.name) %>
+    <% end %>
+  </nav>
+
+  <section id="session_result" aria-labelledby="session_result_title"
+           <%= tag.attributes(data: { controller: "assessment--confetti" }) if @owner && tone == :success %>>
+    <%= ui_card padding: :lg, class: "text-center" do %>
+      <div class="flex flex-col items-center gap-4">
+        <%= render "assessment/session_results/badge", level: result.badge_level, earned_now: result.earned_now %>
+        <div class="space-y-2">
+          <h1 id="session_result_title" class="font-display text-3xl font-extrabold tracking-tight"><%= t(".headline.#{tone}") %></h1>
+          <% if @owner %>
+            <% cheers = t(".cheers.#{tone}") %>
+            <p class="text-ink"><%= cheers[result.session_public_id.sum % cheers.size] %></p>
+          <% else %>
+            <p class="font-medium text-ink"><%= t(".student", name: result.student_name) %></p>
+          <% end %>
+          <p class="text-sm text-mute"><%= t(".exercise", title: result.exercise.title) %></p>
+        </div>
+      </div>
+
+      <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-6 sm:grid-cols-4">
+        <div>
+          <dt class="text-xs font-medium text-mute"><%= t(".grade") %></dt>
+          <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= grade_label(result.score_percent) %></dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium text-mute"><%= t(".score") %></dt>
+          <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium text-mute"><%= t(".mastery") %></dt>
+          <dd class="mt-2 font-medium"><%= mastery_label(result.score_percent) %></dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium text-mute"><%= t(".correct") %></dt>
+          <dd class="mt-2 font-medium tabular-nums">
+            <%= t(".correct_value", count: result.correct_count, total: result.question_count) %>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <% if @can_restart && result.score_percent < Entities::Assessment::Grading::PERFECT_THRESHOLD %>
+          <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form",
+                        class: "contents" do %>
+            <%= ui_button t(".restart"), type: :submit, variant: :brand, icon: "arrow-path" %>
+          <% end %>
+        <% end %>
+        <%= ui_button t(".exercise_link"), href: exercise_path(result.exercise.public_id), variant: :secondary, icon: "book-open" %>
+      </div>
+    <% end %>
+  </section>
+
+  <section id="session_review" aria-labelledby="session_review_title" class="space-y-4">
+    <div>
+      <h2 id="session_review_title" class="font-display text-xl font-extrabold"><%= t(".review_title") %></h2>
+      <p class="mt-1 text-sm text-mute"><%= @reveal ? t(".review_hint_reveal") : t(".review_hint_student") %></p>
+    </div>
+    <ol class="space-y-4" data-controller="math">
+      <% result.review.each do |question| %>
+        <%= render "assessment/session_results/question_review", question:, reveal: @reveal, owner: @owner %>
+      <% end %>
+    </ol>
+  </section>
+</div>

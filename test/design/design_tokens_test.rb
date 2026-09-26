@@ -21,7 +21,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     "valeur arbitraire `-[…]`" => /[\w:.\/-]*[\w)]-\[[^\]\s]+\]/,
     "propriété arbitraire `[prop:valeur]`" => /(?<![\w\]\[.])\[[a-z-]+:[^\]\s]+\]/,
     "variable CSS arbitraire `-(--…)`" => /-\(--[\w-]+\)/,
-    "couleur hexadécimale" => /#(?:\h{8}|\h{6}|\h{3,4})\b/,
+    "couleur hexadécimale" => /(?<![\w-])#(?:\h{8}|\h{6}|\h{3,4})\b/,
     "attribut `style`" => /\bstyle\s*[=:]\s*["'{]/,
     "variante `dark:` (pas de mode sombre en V1)" => /(?<![\w-])dark:/,
     "couleur de la palette par défaut" =>
@@ -55,14 +55,14 @@ class DesignTokensTest < ActiveSupport::TestCase
     {
       "valeur arbitraire `-[…]`" => %w[w-[26rem] md:grid-cols-[1fr_1.4fr] data-[open]:block],
       "propriété arbitraire `[prop:valeur]`" => [ 'class="[scrollbar-width:none]"' ],
-      "couleur hexadécimale" => %w[#fff #00a0ff],
+      "couleur hexadécimale" => %w[#fff #00a0ff bg-[#add] color:#add],
       "couleur de la palette par défaut" => %w[bg-slate-50 text-blue-600 hover:border-gray-200],
       "rayon hors tokens" => %w[rounded-xl rounded-t-2xl],
       "ombre hors tokens" => %w[shadow-lg]
     }.each do |rule, samples|
       samples.each { |sample| assert_match RULES.fetch(rule), sample, "#{rule} devrait refuser #{sample}" }
     end
-    %w[rounded-card shadow-pop bg-brand-soft role[:accent] href="#pour-qui" text-ink/60].each do |sample|
+    %w[rounded-card shadow-pop bg-brand-soft role[:accent] href="#pour-qui" text-ink/60 teams--nested-form#add].each do |sample|
       RULES.each_value { |pattern| assert_no_match pattern, sample }
     end
     assert_equal "7", SPACING.match("p-7")[1]

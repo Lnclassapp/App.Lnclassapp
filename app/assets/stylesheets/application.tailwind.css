@@ -166,6 +166,25 @@
   object-position: 30% 50%;
 }
 
+/* Page à deux colonnes : le contenu, puis un panneau latéral de 20 rem (fiche d'un établissement). */
+@utility grid-cols-main-aside {
+  grid-template-columns: minmax(0, 1fr) 20rem;
+}
+
+/* Numérotation des questions d'un exercice (formulaire) : la liste remet à zéro, chaque question compte,
+   le numéro s'affiche par ::before. */
+@utility counter-questions {
+  counter-reset: question;
+}
+@utility counter-question {
+  counter-increment: question;
+}
+@utility question-number {
+  &::before {
+    content: counter(question);
+  }
+}
+
 /* Barre de navigation basse au-dessus de l'indicateur système (iPhone, Android gestuel) */
 @utility pb-safe {
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));

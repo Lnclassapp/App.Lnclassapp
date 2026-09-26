@@ -6,7 +6,6 @@ module Repositories
     class ContentTreeWriter
       include Ports::Catalog::ContentTreeWriterPort
 
-      SANITIZER = Rails::HTML5::SafeListSanitizer.new
       NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::Exercise" => %w[public_id],
                        "Orm::Question" => %w[exercise_id position], "Orm::Answer" => [], "ActionText::RichText" => [] }.freeze
 
@@ -74,7 +73,7 @@ module Repositories
       # Le contenu importé est assaini avant d'entrer dans le contenu riche ; un contenu vide ne crée pas de ligne.
       def write_rich_texts(record_type, nodes, ids)
         rows = nodes.filter_map do |node|
-          body = SANITIZER.sanitize(node.content.to_s)
+          body = RichTextSanitizer.call(node.content.to_s)
           { record_type:, record_id: ids.fetch(node.slug), name: "content", body: } if body.present?
         end
         insert(ActionText::RichText, rows)

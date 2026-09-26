@@ -27,6 +27,12 @@ module Repositories
         assert_nil @repository.find_by_slug(slug: "inconnu")
       end
 
+      test "le contenu saisi est assaini à l'écriture" do
+        created = @repository.create(essential: essential(content: %(<p onclick="x()">A<script>alert(1)</script></p>))).value
+
+        assert_equal "<p>A</p>", @repository.find_by_slug(slug: created.slug).content
+      end
+
       test "garde le slug, la position et le statut fournis ; une fiche sans contenu se relit sans contenu" do
         created = @repository.create(essential: essential(slug: "mitose", position: 7, status: "published", content: nil)).value
 

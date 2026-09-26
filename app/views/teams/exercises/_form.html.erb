@@ -1,0 +1,79 @@
+<%# 🌐 UI · teams/exercises/_form — titre, description, type et questions d'un exercice, dans la grande modale %>
+<%# Rôle : questions imbriquées ajoutées et retirées par clonage de <template> ; verrouillées, elles sont en lecture seule %>
+<%# ADR  : 0036, 0054 · UDR : 0007, 0017 · Stimulus : teams--nested-form %>
+<%= form_with model: input, scope: :exercise, url:, method:, id: "exercise-form", class: "space-y-5" do |form| %>
+  <% if input.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= input.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%= ui_field form, :title, required: true, maxlength: Entities::Assessment::Exercise::TITLE_MAX, autocomplete: "off",
+                             placeholder: t(".title_placeholder") %>
+  <%= ui_field form, :description, as: :textarea, rows: 3, hint: t(".description_hint") %>
+
+  <% if locked %>
+    <%= form.hidden_field :exercise_type %>
+    <section id="exercise-questions" aria-labelledby="exercise-questions-title" class="space-y-4">
+      <p class="text-sm text-mute"><%= t(".locked_type", type: t("teams.exercises.exercise_types.#{exercise.exercise_type}")) %></p>
+      <div id="questions-locked" role="status" class="flex items-start gap-3 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
+        <%= ui_icon "lock-closed", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
+        <div>
+          <p id="exercise-questions-title" class="font-medium"><%= t(".locked_title") %></p>
+          <p class="mt-1 text-mute"><%= t(".locked_body") %></p>
+        </div>
+      </div>
+      <ol class="space-y-3">
+        <% exercise.questions.each do |question| %>
+          <li class="rounded-card border border-line p-4">
+            <p class="text-xs font-medium text-mute">
+              <%= t(".locked_question", position: question.position, type: t("teams.exercises.question_types.#{question.question_type}")) %>
+            </p>
+            <p class="mt-1 font-medium whitespace-pre-line"><%= question.content %></p>
+            <ul class="mt-3 space-y-1.5 text-sm">
+              <% question.answers.each do |answer| %>
+                <li class="flex items-start gap-2">
+                  <% if answer.correct %>
+                    <%= ui_icon "check-circle", variant: :mini, size: :sm, class: "mt-0.5 text-success", label: t(".correct") %>
+                  <% else %>
+                    <span class="mt-0.5 size-4 shrink-0" aria-hidden="true"></span>
+                  <% end %>
+                  <span><%= answer.content %></span>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ol>
+    </section>
+  <% else %>
+    <%= ui_field form, :exercise_type, as: :select, required: true, hint: t(".exercise_type_hint"),
+                                       choices: Entities::Assessment::Exercise::TYPES.map { [ t("teams.exercises.exercise_types.#{it}"), it ] } %>
+    <section id="exercise-questions" aria-labelledby="exercise-questions-title" class="space-y-4 border-t border-line pt-5"
+             data-controller="teams--nested-form" data-teams--nested-form-placeholder-value="NEW_QUESTION"
+             data-teams--nested-form-item-value="[data-nested-question]">
+      <div>
+        <h3 id="exercise-questions-title" class="font-display text-lg font-extrabold"><%= t(".questions_title") %></h3>
+        <p class="mt-1 text-sm text-mute"><%= t(".questions_hint") %></p>
+      </div>
+      <% if input.errors[:questions].any? %>
+        <p id="exercise_questions_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= input.errors[:questions].to_sentence %>
+        </p>
+      <% end %>
+      <div data-teams--nested-form-target="list" class="space-y-4 counter-questions">
+        <%= form.fields_for :questions do |question_form| %>
+          <%= render "question_fields", form: question_form, errors: input.errors[:"questions[#{question_form.index}]"] %>
+        <% end %>
+      </div>
+      <template data-teams--nested-form-target="template">
+        <%= form.fields_for :questions, Dtos::Assessment::QuestionInput.new(question_type: "single_choice",
+                                                                             answers: Array.new(2) { Dtos::Assessment::AnswerInput.new }),
+                            child_index: "NEW_QUESTION" do |question_form| %>
+          <%= render "question_fields", form: question_form, errors: [] %>
+        <% end %>
+      </template>
+      <%= ui_button t(".add_question"), variant: :secondary, icon: "plus", data: { action: "teams--nested-form#add" } %>
+    </section>
+  <% end %>
+<% end %>

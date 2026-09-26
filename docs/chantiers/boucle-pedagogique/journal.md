@@ -30,6 +30,8 @@
 | 2026-09-25 | `users.gender` obligatoire (`male`, `female`) ; limites d'import de l'ADR-0039 acceptées | Réponses du porteur | ADR-0037, ADR-0039 |
 | 2026-09-25 | Vague 3 découpée en quatre sous-vagues de 8 lots au plus (3a à 3d), chemin critique d'abord | Demande de team-lead : limiter les agents et la file de merge | Non (organisation du chantier) |
 | 2026-09-25 | `friendly_id` retiré (0a) : slugs figés par `Orm::HasFrozenSlug`, table `friendly_id_slugs` supprimée | Gem inutilisée, slugs figés à la création | Précision de l'ADR-0029 |
+| 2026-09-26 | La suite du chantier passe sur Claude Code on the web : un lot par session, PR vers `feature/boucle-pedagogique` ; état, brief et questions dans [`reprise/`](reprise/README.md) | Demande du porteur, pour aller plus vite | Non (organisation du chantier) |
+| 2026-09-26 | Nonce CSP stable par session (gardé dans la session) et rechargement complet de la page d'arrivée après une connexion, une inscription ou une déconnexion ; les erreurs 422 restent sans rechargement | Trix perdait ses styles après une navigation Turbo (reprise §3) ; validé par le porteur | Amendement de l'ADR-0049 |
 
 ## Retour du porteur du 2026-09-25
 

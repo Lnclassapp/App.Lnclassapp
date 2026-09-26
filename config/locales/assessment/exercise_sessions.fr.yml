@@ -1,0 +1,52 @@
+# Session d'exercice (AS-07 à AS-11) — Lot C2, UDR-0022 ; vocabulaire de l'UDR-0007
+fr:
+  activemodel:
+    attributes:
+      dtos/assessment/attempt_input:
+        answer_ids: "Propositions"
+    errors:
+      models:
+        dtos/assessment/attempt_input:
+          attributes:
+            answer_ids:
+              blank: "Sélectionne au moins une proposition."
+              wrong_selection: "Coche le nombre de propositions demandé, parmi celles de la question."
+            base:
+              already_answered: "Tu as déjà répondu à cette question."
+              session_closed: "Cette session est terminée."
+  assessment:
+    exercise_sessions:
+      show:
+        page_title: "%{title} — Session"
+        breadcrumb: "Fil d'Ariane"
+        quit: "Quitter la session"
+        abandoned: "Cette session a été remplacée par une nouvelle. Reprends l'exercice depuis sa page."
+      progress_bar:
+        answered:
+          one: "%{count} question répondue sur %{total}"
+          other: "%{count} questions répondues sur %{total}"
+        percent: "%{percent} %"
+        label: "Progression de la session"
+      question_card:
+        number: "Question %{number} sur %{total}"
+        multiple: "Plusieurs propositions correctes"
+        hint:
+          one: "Choisis une proposition."
+          other: "Coche %{count} propositions."
+        submit: "Valider"
+      feedback_card:
+        verdict:
+          success: "Bonne réponse"
+          error: "Mauvaise réponse"
+        encouragement:
+          success: "Bravo, continue comme ça !"
+          error: "Ce n'est pas grave : lis l'explication, puis continue."
+        number: "Question %{number} sur %{total}"
+        selected: "Ton choix"
+        explanation: "Explication"
+        next: "Question suivante"
+        result: "Voir mon résultat"
+    question_attempts:
+      create:
+        success: "Bonne réponse."
+        error: "Mauvaise réponse."

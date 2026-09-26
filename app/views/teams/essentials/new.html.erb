@@ -1,0 +1,17 @@
+<%# 🌐 UI · teams/essentials/new — création d'une fiche essentielle dans un cours, servie dans le frame « modal » %>
+<%# Rôle : nom, sous-titre et contenu riche (Trix, CSS posé ici) ; échec en 422 ici, succès en Turbo Stream %>
+<%# ADR  : 0035, 0047, 0051 · UDR : 0006, 0007, 0016 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= stylesheet_link_tag "trix" %>
+  <%= ui_modal title: t(".title"), id: "essential-modal", size: :lg, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "essential-form", icon: "plus" %>
+    <% end %>
+    <div class="mb-5 space-y-1">
+      <p id="essential-course" class="font-medium text-ink"><%= t(".course", name: @course.name) %></p>
+      <p class="text-sm text-mute"><%= t(".draft_notice") %></p>
+    </div>
+    <%= render "form", input: @form, url: teams_course_essentials_path(@course.slug), method: :post %>
+  <% end %>
+<% end %>

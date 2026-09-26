@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Import des établissements, version 1 (ADR-0039, UDR-0037)",
+  "description": "Enveloppe { format, version, drena?, schools[] }. Chaque école accepte les clés de l'ancienne application : la présence du nom, le type et les valeurs permises sont vérifiés par l'adaptateur, pour que l'erreur soit notée à la clé canonique.",
+  "type": "object",
+  "required": ["format", "version", "schools"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "lnclass.schools" },
+    "version": { "const": 1 },
+    "drena": { "type": "string" },
+    "schools": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/school" }
+    }
+  },
+  "$defs": {
+    "school": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "nom": { "type": "string" },
+        "sigle": { "type": "string" },
+        "schoolsigle": { "type": "string" },
+        "status": { "type": "string" },
+        "schoolstatus": { "type": "string" },
+        "statut": { "type": "string" },
+        "type": { "type": "string" },
+        "schooltype": { "type": "string" },
+        "cycle": { "type": "string" },
+        "drena": { "type": "string" }
+      }
+    }
+  }
+}

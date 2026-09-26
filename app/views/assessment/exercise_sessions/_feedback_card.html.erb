@@ -1,0 +1,46 @@
+<%# 🌐 UI · assessment/exercise_sessions/_feedback_card — verdict de la question qui vient d'être tentée %>
+<%# Rôle : « Bonne réponse » ou « Mauvaise réponse », seules les propositions cochées, explication ; jamais les propositions correctes %>
+<%# ADR  : 0028, 0054 · UDR : 0007, 0022 · Stimulus : math (KaTeX) %>
+<% tone = feedback.correct ? :success : :error %>
+<%= turbo_frame_tag "question" do %>
+  <%= ui_card padding: :none, id: "feedback-card", class: "overflow-hidden" do %>
+    <div role="status" class="flex items-center gap-3 border-b border-line px-5 py-4 sm:px-6 <%= feedback.correct ? "bg-success-soft" : "bg-error-soft" %>">
+      <%= ui_icon feedback.correct ? "check-circle" : "x-circle", variant: :solid, size: :lg,
+                  class: feedback.correct ? "text-success" : "text-error" %>
+      <div>
+        <p class="font-display text-lg font-extrabold <%= feedback.correct ? "text-success" : "text-error" %>"><%= t(".verdict.#{tone}") %></p>
+        <p class="text-sm text-ink"><%= t(".encouragement.#{tone}") %></p>
+      </div>
+    </div>
+    <div class="space-y-6 p-5 sm:p-6" data-controller="math">
+      <div class="space-y-1">
+        <p class="text-sm font-medium text-mute"><%= t(".number", number: feedback.number, total: play.question_count) %></p>
+        <p class="text-lg font-semibold whitespace-pre-line text-ink"><%= feedback.content %></p>
+      </div>
+      <div class="space-y-2">
+        <p id="feedback-selected" class="text-xs font-semibold tracking-wide text-mute uppercase"><%= t(".selected") %></p>
+        <ul class="space-y-2" aria-labelledby="feedback-selected">
+          <% feedback.selected_answers.each do |answer| %>
+            <li class="flex min-h-tap items-center rounded-ln border border-ink bg-mist px-4 py-3 font-medium"><%= answer.content %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% if feedback.explanation %>
+        <div class="rounded-ln bg-info-soft px-4 py-3">
+          <p class="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-info uppercase">
+            <%= ui_icon "light-bulb", variant: :mini, size: :sm %><%= t(".explanation") %>
+          </p>
+          <p class="mt-1 text-sm whitespace-pre-line text-ink"><%= feedback.explanation %></p>
+        </div>
+      <% end %>
+      <div class="flex justify-end border-t border-line pt-4">
+        <% if play.completed? %>
+          <%= ui_button t(".result"), href: exercise_session_result_path(play.session_public_id), variant: :brand, icon_end: "trophy",
+                                      data: { turbo_frame: "_top" } %>
+        <% else %>
+          <%= ui_button t(".next"), href: exercise_session_path(play.session_public_id), icon_end: "arrow-right" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

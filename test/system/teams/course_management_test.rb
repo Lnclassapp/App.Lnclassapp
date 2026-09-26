@@ -35,7 +35,8 @@ class Teams::CourseManagementTest < ApplicationSystemTestCase
       mark_host_page
       open_in_modal(new_teams_course_path)
       within "turbo-frame#modal dialog[open]" do
-        assert_selector "trix-toolbar [data-trix-attribute=bold]"
+        assert_selector "trix-toolbar [data-trix-attribute=bold][title=Gras]", text: "Gras"
+        assert_selector "trix-toolbar input[placeholder='Saisissez une adresse…']", visible: :all
         assert_no_selector "trix-toolbar [data-trix-action=attachFiles]"
 
         fill_in "course[name]", with: "   "

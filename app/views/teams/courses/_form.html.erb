@@ -28,7 +28,7 @@
   </div>
   <div class="space-y-1.5">
     <%= form.label :content, class: "block text-sm font-medium text-ink" %>
-    <div data-controller="rich-text-editor" class="rounded-ln bg-white">
+    <div data-controller="rich-text-editor" data-rich-text-editor-lang-value="<%= t("components.rich_text_editor.lang").to_json %>" class="rounded-ln bg-white">
       <%= form.rich_textarea :content, id: form.field_id(:content), "aria-describedby": "#{form.field_id(:content)}_hint",
                                        placeholder: t(".content_placeholder") %>
     </div>

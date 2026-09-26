@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/essentials/create — succès de la création d'une fiche essentielle %>
+<%# Rôle : toast ; la page hôte (cours, lot B1) est rafraîchie par morphing ; la modale est vidée %>
+<%# ADR  : 0035 · UDR : 0006, 0016 · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
+<%= turbo_stream_toast t(".created", name: @essential.name), type: :success %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.refresh request_id: nil %>

@@ -2,6 +2,8 @@ require "test_helper"
 
 # ADR-0028: every use case authorizes its actor. The policy is injected (`policy:`, a Policies:: object wired by
 # the controller or the job), or read from the import registry, whose every kind names its Policies:: class.
+# An import adapter has no actor: RunImport authorizes it through the registry entry of its KIND, whose policy
+# the adapter must reference as POLICY.
 class UseCasePoliciesTest < ActiveSupport::TestCase
   USE_CASES_ROOT = Rails.root.join("app/domain/use_cases")
   # The only exemptions (ADR-0028): no actor exists yet when they run.
@@ -21,8 +23,16 @@ class UseCasePoliciesTest < ActiveSupport::TestCase
   end
 
   def authorized?(name, source)
-    injected = name.constantize.instance_method(:initialize).parameters.include?([ :keyreq, :policy ])
-    injected || REGISTRY.all? { source.include?(it) }
+    klass = name.constantize
+    injected = klass.instance_method(:initialize).parameters.include?([ :keyreq, :policy ])
+    injected || registered_importer?(klass) || REGISTRY.all? { source.include?(it) }
+  end
+
+  def registered_importer?(klass)
+    return false unless klass.include?(UseCases::Catalog::Importer) && klass.const_defined?(:KIND, false)
+    return false unless Entities::Catalog::ImportKind.valid?(klass::KIND)
+
+    klass.const_defined?(:POLICY, false) && klass::POLICY == Entities::Catalog::ImportKind.fetch(klass::KIND).policy
   end
 
   test "every use case outside the named exemptions authorizes its actor" do
@@ -45,5 +55,15 @@ class UseCasePoliciesTest < ActiveSupport::TestCase
     assert authorized?("StrayUseCase", "kind = Entities::Catalog::ImportKind.fetch(dto.kind)\nkind.authorize(actor:)")
   ensure
     Object.send(:remove_const, :StrayUseCase)
+  end
+
+  test "an import adapter is authorized by its registry entry, with the same policy" do
+    adapter = ->(kind, policy) { Class.new { include UseCases::Catalog::Importer }.tap { it.const_set(:KIND, kind); it.const_set(:POLICY, policy) } }
+
+    assert registered_importer?(adapter.call("schools", Policies::School::ManageSchoolPolicy))
+    assert_not registered_importer?(adapter.call("schools", Policies::Catalog::ManageContentPolicy))
+    assert_not registered_importer?(adapter.call("inconnu", Policies::School::ManageSchoolPolicy))
+    assert_not registered_importer?(Class.new { include UseCases::Catalog::Importer })
+    assert_not registered_importer?(Class.new.tap { it.const_set(:KIND, "schools") })
   end
 end

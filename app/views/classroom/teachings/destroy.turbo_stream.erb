@@ -1,0 +1,6 @@
+<%# 🌐 UI · classroom/teachings/destroy — une classe retirée %>
+<%# Rôle : bascule rendue non déclarée (morph : le focus reste sur le bouton) et compteur à jour ; aucun toast, la bascule suffit %>
+<%# ADR  : 0030 · UDR : 0006, 0025 %>
+<%= turbo_stream.replace "teaching_#{@classroom.public_id}", method: :morph, partial: "classroom/teachings/toggle",
+                                                             locals: { classroom: @classroom } %>
+<%= turbo_stream.replace "teaching_counter", partial: "classroom/teachings/counter", locals: { count: @selection.declared_count } %>

@@ -1,0 +1,40 @@
+# Débloquer un compte : recherche par numéro exact, code de récupération, second facteur (plan boucle-pedagogique, Lot B8)
+# ID-15, F-07 — ADR-0031, ADR-0032, UDR-0020
+fr:
+  teams:
+    account_lookups:
+      show:
+        page_title: "Débloquer un compte"
+        title: "Débloquer un compte"
+        subtitle: "Retrouvez un compte par son numéro pour générer un code de récupération du PIN ou réinitialiser un second facteur."
+        search_label: "Rechercher un compte"
+        contact: "Numéro de téléphone"
+        contact_placeholder: "01 02 03 04 05"
+        contact_hint: "Le numéro exact du compte, 10 chiffres. Il n'y a pas d'annuaire : un numéro incomplet ne trouve rien."
+        submit: "Rechercher"
+        prompt_title: "Saisissez un numéro"
+        prompt_description: "Le compte trouvé s'affichera ici, avec les actions possibles."
+        not_found_title: "Aucun compte pour ce numéro"
+        not_found_description: "Vérifiez les 10 chiffres du numéro saisi (%{contact})."
+      result:
+        own_account: "Votre compte"
+        own_account_hint: "Vous ne pouvez pas débloquer votre propre compte : demandez-le à un autre membre de l'équipe."
+        classroom: "Classe"
+        no_classroom: "Aucune classe active"
+        team_role: "Rôle dans l'équipe"
+        second_factor: "Second facteur"
+        second_factor_confirmed: "Activé"
+        second_factor_missing: "Non activé"
+        issue_code: "Générer un code de récupération"
+        reset_second_factor: "Réinitialiser le second facteur"
+        reset_title: "Réinitialiser le second facteur de %{name} ?"
+        reset_body: "Cette personne sera déconnectée de toutes ses sessions. À sa prochaine connexion, elle devra activer de nouveau la vérification en deux étapes."
+        cancel: "Annuler"
+        confirm_reset: "Réinitialiser"
+      team_roles:
+        admin: "Administration"
+        content: "Contenu"
+        field: "Terrain"
+    second_factor_resets:
+      create:
+        done: "Second facteur réinitialisé pour %{name}."

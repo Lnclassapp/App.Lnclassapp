@@ -32,6 +32,19 @@ module UseCases
       end
       private_class_method :series_error
 
+      # Clé de doublon d'un cours, comme CourseRepository#existing_keys. taxonomy : { level_id:, material_id:, series_id: }
+      def self.course_key(name, taxonomy)
+        [ Entities::Shared::NaturalKey.compact(name), taxonomy[:level_id], taxonomy[:material_id], taxonomy[:series_id] ]
+      end
+
+      # Un nom qui ne diffère d'un autre, au même niveau, dans la même matière et la même série, que par la casse,
+      # les accents ou les espaces, est pris. L'index unique de la table reste le dernier rempart (:conflict).
+      def self.name_taken?(courses, key, except: nil)
+        (courses.existing_keys - [ except ]).include?(key)
+      end
+
+      def self.name_taken = Shared::Result.failure(:conflict, errors: { name: [ :taken ] })
+
       # dto : Dtos::Catalog::CourseInput. → Result(Course) | :forbidden | :invalid | :conflict (name taken)
       def call(actor:, dto:)
         allowed = @policy.call(actor:)
@@ -40,6 +53,7 @@ module UseCases
 
         taxonomy = self.class.taxonomy_ids(dto:, lookup: @taxonomy.lookup)
         return taxonomy if taxonomy.failure?
+        return self.class.name_taken if self.class.name_taken?(@courses, self.class.course_key(dto.name, taxonomy.value))
 
         @courses.create(course: Entities::Catalog::Course.new(
           name: dto.name, subtitle: dto.subtitle, content: dto.content, status: "draft", author_id: actor.user_id, **taxonomy.value

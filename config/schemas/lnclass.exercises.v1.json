@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Import des exercices d'une fiche essentielle, version 1 (ADR-0039, UDR-0040)",
+  "description": "Enveloppe { format, version, essential, exercises[] }. essential est le slug de la fiche essentielle cible. Chaque exercice porte ses questions[] → answers[]. Les clés de l'ancienne application sont acceptées (name pour title, is_correct pour correct) ; la présence du titre, le type et la structure des questions sont vérifiés par l'adaptateur, pour que l'erreur soit notée à la clé canonique. La clé status est ignorée : tout naît en brouillon.",
+  "type": "object",
+  "required": ["format", "version", "essential", "exercises"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "lnclass.exercises" },
+    "version": { "const": 1 },
+    "essential": { "type": "string" },
+    "exercises": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/exercise" }
+    }
+  },
+  "$defs": {
+    "text": { "type": ["string", "null"] },
+    "exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "name": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "exercise_type": { "$ref": "#/$defs/text" },
+        "status": { "$ref": "#/$defs/text" },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/question" }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": { "$ref": "#/$defs/text" },
+        "question_type": { "$ref": "#/$defs/text" },
+        "explanation": { "$ref": "#/$defs/text" },
+        "answers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/answer" }
+        }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": { "type": ["string", "null"], "maxLength": 500 },
+        "correct": { "type": ["boolean", "null"] },
+        "is_correct": { "type": ["boolean", "null"] }
+      }
+    }
+  }
+}

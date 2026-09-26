@@ -1,0 +1,13 @@
+<%# 🌐 UI · homepage/_role_modal — entrée « Je suis élève » ou « Je suis enseignant » et sa modale de rôle %>
+<%# Rôle : le bouton ouvre une <dialog> native (Stimulus modal) : se connecter, ou commencer par la porte du rôle %>
+<%# UDR  : 0012, 0005 · TR-01 %>
+<% sign_up_path = { student: new_join_code_path, teacher: new_teacher_registration_path }.fetch(role) %>
+<%= ui_modal title: t(".#{role}.title"), id: "role-modal-#{role}-#{placement}", size: :sm,
+      trigger: t(".#{role}.trigger"), trigger_variant: variant do %>
+  <p class="text-mute"><%= t(".#{role}.lead") %></p>
+  <div class="mt-5 flex flex-col gap-3">
+    <%= ui_button t(".sign_in"), href: new_session_path, icon: "arrow-right-end-on-rectangle", size: :lg, full: true %>
+    <%= ui_button t(".#{role}.sign_up"), href: sign_up_path, variant: :secondary, size: :lg, full: true %>
+  </div>
+  <p class="mt-4 text-center text-xs text-mute"><%= t(".#{role}.hint") %></p>
+<% end %>

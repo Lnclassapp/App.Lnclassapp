@@ -21,6 +21,11 @@ module Repositories
         map(record) unless record.nil?
       end
 
+      def revoke_expired(kind:, contact:, at:)
+        Orm::Invitation.where(kind:, contact:, accepted_at: nil, revoked_at: nil, expires_at: ..at)
+                       .update_all(revoked_at: at, updated_at: at)
+      end
+
       def mark_accepted(id:, user_id:, at:)
         Orm::Invitation.where(id:).update_all(accepted_at: at, accepted_user_id: user_id, updated_at: at)
         true

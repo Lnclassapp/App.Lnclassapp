@@ -1,0 +1,51 @@
+# Acceptation d'une invitation dans l'équipe (plan boucle-pedagogique, Lot B7) — F-16, ADR-0037, ADR-0038, ADR-0050, UDR-0019
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/invitation_acceptance_input:
+        last_name: "Nom"
+        first_name: "Prénom(s)"
+        gender: "Genre"
+        pin: "PIN"
+        pin_confirmation: "Confirmation du PIN"
+    errors:
+      models:
+        dtos/identity/invitation_acceptance_input:
+          attributes:
+            base:
+              contact_taken: "Ce numéro a déjà un compte Lnclass. Connectez-vous, ou demandez une nouvelle invitation pour un autre numéro."
+            last_name:
+              blank: "Saisissez votre nom."
+              too_long: "Le nom compte %{count} caractères au plus."
+              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
+            first_name:
+              blank: "Saisissez votre ou vos prénoms."
+              too_long: "Les prénoms comptent %{count} caractères au plus."
+              invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
+            gender:
+              inclusion: "Choisissez votre genre."
+            pin:
+              blank: "Choisissez un PIN à 4 chiffres."
+              invalid: "Le PIN compte 4 chiffres."
+            pin_confirmation:
+              confirmation: "Les deux PIN ne sont pas identiques."
+  identity:
+    invitations:
+      show:
+        page_title: "Rejoindre l'équipe · Lnclass"
+        welcome: "Bienvenue dans l'équipe Lnclass"
+        welcome_hint: "Vous avez été invité à rejoindre l'équipe. Créez votre accès pour gérer les contenus et suivre la plateforme."
+        title: "Créer votre compte équipe"
+        subtitle: "Votre numéro est celui qui a reçu l'invitation."
+        identity: "Identité"
+        last_name_placeholder: "Ex. : Kouassi"
+        first_name_placeholder: "Ex. : Aya Marie"
+        security: "Sécurité"
+        pin_hint: "4 chiffres, que vous seul connaissez."
+        second_factor: "À votre première connexion, vous activerez la vérification en deux étapes avec une application d'authentification."
+        submit: "Créer mon compte"
+        expired_title: "Ce lien d'invitation n'est plus valable"
+        expired_description: "Il a expiré, a déjà servi ou a été annulé. Demandez une nouvelle invitation à un administrateur de l'équipe."
+        sign_in: "Se connecter"
+      accept:
+        accepted: "Votre compte est créé. Connectez-vous : la vérification en deux étapes vous sera demandée."
