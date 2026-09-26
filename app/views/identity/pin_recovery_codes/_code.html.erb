@@ -1,0 +1,24 @@
+<%# 🌐 UI · identity/pin_recovery_codes/_code — le code de récupération, montré une seule fois, dans la modale %>
+<%# Rôle : code en grands chiffres, heure d'expiration, consigne de transmission orale ; rendu par create.turbo_stream et par la page show %>
+<%# ADR  : 0032 · UDR : 0006, 0020 · jamais dans un flash, jamais dans un cache %>
+<%= ui_modal title: t(".title"), id: "pin-recovery-code-modal", open: true do |modal| %>
+  <% modal.footer do %>
+    <%= ui_button t(".close"), variant: :secondary, data: { action: "modal#close" } %>
+  <% end %>
+  <div class="space-y-4">
+    <p class="text-sm text-ink"><%= t(".for", name: issued.user.display_name) %></p>
+    <div class="rounded-card bg-mist px-4 py-6 text-center">
+      <p id="pin-recovery-code-label" class="text-sm text-mute"><%= t(".code_label") %></p>
+      <p id="pin-recovery-code" aria-labelledby="pin-recovery-code-label"
+         class="mt-2 font-mono text-4xl font-extrabold tracking-widest text-ink tabular-nums select-all"><%= issued.code.scan(/\d{4}/).join(" ") %></p>
+      <p id="pin-recovery-code-expiry" class="mt-2 text-sm font-medium text-ink">
+        <%= t(".valid_until", time: l(issued.expires_at, format: :hour_minute)) %>
+      </p>
+    </div>
+    <p class="text-sm text-mute"><%= t(".instructions") %></p>
+    <p class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
+      <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <%= t(".once") %>
+    </p>
+  </div>
+<% end %>
