@@ -1,0 +1,58 @@
+<%# 🌐 UI · classroom/course_assignments/index — assigner un cours depuis sa page (CA-27) %>
+<%# Rôle : en-tête du cours, puis une ligne par classe active de l'enseignant avec la bascule d'assignation de D5 %>
+<%# ADR  : 0035, 0048 · UDR : 0006, 0007, 0028, 0030 %>
+<% course = @targets.course %>
+<% content_for :title, t(".page_title", course: course.name) %>
+<% content_for :nav_key, "courses" %>
+<nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
+  <%= link_to course_path(course.slug), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
+    <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back") %>
+  <% end %>
+</nav>
+
+<%= ui_card padding: :md, class: "mb-8" do %>
+  <div class="min-w-0 space-y-3">
+    <p class="text-sm font-medium text-mute"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= course.name %></h1>
+    <% if course.subtitle.present? %>
+      <p class="text-mute"><%= course.subtitle %></p>
+    <% end %>
+    <div class="flex flex-wrap items-center gap-2">
+      <%= ui_subject_badge course.material_name, category: course.material_category %>
+      <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
+    </div>
+  </div>
+<% end %>
+
+<section id="course_assignment_classrooms" aria-labelledby="course_assignment_classrooms_title">
+  <div class="mb-4">
+    <h2 id="course_assignment_classrooms_title" class="font-display text-xl font-extrabold"><%= t(".classrooms_title") %></h2>
+    <% if @targets.classrooms.any? %>
+      <p class="mt-1 text-sm text-mute"><%= t(".classrooms_hint") %></p>
+    <% end %>
+  </div>
+  <% if @targets.classrooms.empty? %>
+    <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "user-group",
+                       action: { label: t(".declare"), href: teacher_classrooms_path, icon: "plus" } %>
+  <% else %>
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+      <% @targets.classrooms.each do |classroom| %>
+        <li id="course_assignment_<%= classroom.public_id %>"
+            class="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+          <div class="min-w-0">
+            <%= link_to classroom.name, classroom_path(classroom.public_id),
+                        class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+            <p class="mt-0.5 truncate text-sm text-mute">
+              <%= [ [ classroom.level_name, classroom.series_name ].compact.join(" "), classroom.school_name ].join(" · ") %>
+            </p>
+          </div>
+          <div role="group" aria-label="<%= t(".classroom_assignment", classroom: classroom.name) %>">
+            <%= render "classroom/assignments/toggle", classroom_public_id: classroom.public_id, assignable_type: "Course",
+                       assignable_key: course.slug, assignable_name: course.name,
+                       assignment_public_id: classroom.assignment_public_id %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
