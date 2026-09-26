@@ -32,7 +32,7 @@ On part d'une idée brute et on élimine les zones d'ombre **avant** de parler t
 
 1. **PRD** — figer les specs : contexte, acteurs et permissions, parcours utilisateur, critères d'acceptation vérifiables.
 2. **ADR** — dès qu'un choix technique engage l'avenir (nouveau port, stratégie de persistance, dépendance, changement de contrat). Un ADR se relit dans deux ans : il dit le *contexte* et les *conséquences*, pas seulement la décision.
-3. **UDR** — dès qu'une vue est créée ou modifiée. L'UDR n'est pas un compte-rendu, c'est une **consigne exécutable par un agent** : quels tokens, quels états, quel comportement Turbo, quelle accessibilité.
+3. **UDR** — dès qu'une vue introduit un **nouveau motif** d'interface : nouveau composant, nouveau comportement Turbo, nouvelle mise en page, nouvel état. L'UDR n'est pas un compte-rendu, c'est une **consigne exécutable par un agent** : quels tokens, quels états, quel comportement Turbo, quelle accessibilité. Une vue qui réutilise des motifs déjà décidés n'en écrit pas : elle cite les UDR qu'elle applique, et ses écarts vont dans la PR.
 
 Les décisions se prennent **maintenant**, pas après le code. Un ADR écrit une fois le code livré ne décide rien, il justifie.
 
@@ -57,6 +57,13 @@ Trois règles :
 2. **Les fichiers partagés appartiennent au Lot 0.** C'est là que sont les vraies collisions.
 3. **Deux lots parallèles ne listent jamais le même fichier.** Si ça arrive, le fichier remonte au Lot 0.
 
+Avant de lancer les lots, deux étapes courtes :
+
+- **Relecture challenger du plan.** Un rôle distinct cherche seulement les contradictions entre le PRD, le plan, les ADR, les UDR et les décisions du porteur. Le porteur tranche tout en une fois ; les lots partent sans question ouverte.
+- **Briefs prédigérés.** Le brief d'un lot contient l'extrait du plan, les lignes d'ADR et d'UDR utiles, les contrats voisins (routes, locals de partials, clés de locale) et les pièges déjà rencontrés. L'agent lit son brief et les fichiers à imiter, pas toute la documentation.
+
+Un lot qui dépend d'un autre part **après** sa fusion. Sinon, le Lot 0 fournit la doublure commune du contrôleur attendu ; un lot n'en écrit pas une à lui.
+
 **On ne décide pas d'un nombre d'agents.** Le nombre d'agents est égal au nombre de lots sans dépendance en attente. Chacun travaille dans son worktree git isolé.
 
 ### Phase 4 — EXÉCUTER
@@ -74,6 +81,12 @@ L'ordre est imposé par l'architecture hexagonale, **à l'intérieur de chaque l
 | 5 | **UI** (`app/views/`, `app/javascript/`) | Régie par l'UDR |
 
 Chaque fichier créé porte son [en-tête HITL](../guide/conventions.md#5-en-tête-hitl) de 3 lignes.
+
+**Trous du socle.** Un lot qui découvre un petit manque du Lot 0 le comble lui-même, dans un commit séparé préfixé `socle:`, avec son test : une méthode ajoutée à un port existant et à son adaptateur, une policy simple, une clé de locale commune, un utilitaire CSS nommé. L'orchestrateur relit ce commit à la fusion. Tout le reste l'arrête et remonte à l'orchestrateur : migration, nouveau port, contrat modifié, fichier partagé que deux lots touchent.
+
+**Décisions en cours de lot.** Quand le PRD, le plan et le code se contredisent, l'orchestrateur applique sa recommandation tout de suite et la consigne dans le `journal.md` du chantier. Le porteur tranche la liste une fois par jour et peut la renverser.
+
+**Tests proportionnés.** Un seul test système par lot, pour le parcours principal sans rechargement. Les autres cas vont en tests de contrôleur et de domaine. Un test de performance ne fait pas partie du *Done quand* d'un lot : il relève d'un chantier d'optimisation.
 
 ### Phase 5 — PROUVER
 
@@ -94,13 +107,15 @@ C'est la phase que la v1 n'avait pas, et c'est celle qui manquait le plus.
 
 Toutes les phases existent toujours. Leur poids change.
 
-| | **Feature** | **Bugfix** | **Refactoring** | **Optimisation** | **Hotfix** |
-|---|---|---|---|---|---|
-| **1. Cadrer** | Memo + grill complet | Symptôme + reproduction | Motif du refactoring, périmètre gelé | Mesure **avant**, chiffrée | Constat, 3 lignes |
-| **2. Décider** | PRD + ADR si archi + **UDR si vue** | ADR seulement si la cause est architecturale | **ADR obligatoire** | ADR si le contrat change | Aucun — rattrapé après |
-| **3. Planifier** | Graphe de lots complet | Souvent un seul lot | Lots par zone, iso-comportement | Un lot par optimisation mesurable | Pas de plan |
-| **4. Exécuter** | Toutes les couches | **Test de reproduction rouge d'abord** | **Characterization tests d'abord** | Le bench sert de test | Correctif minimal |
-| **5. Prouver** | Challenger empirique | Le test de reproduction passe au vert | Le challenger vérifie que **rien** n'a changé fonctionnellement | **Bench après, chiffré.** Pas de chiffre = rejet | Vérification manuelle + chantier de suivi obligatoire |
+| | **Feature** | **Feature légère** | **Bugfix** | **Refactoring** | **Optimisation** | **Hotfix** |
+|---|---|---|---|---|---|---|
+| **1. Cadrer** | Memo + grill complet | Une fiche d'une page : problème, critères, fichiers | Symptôme + reproduction | Motif du refactoring, périmètre gelé | Mesure **avant**, chiffrée | Constat, 3 lignes |
+| **2. Décider** | PRD + ADR si archi + **UDR si nouveau motif** | Dans la fiche ; UDR seulement si nouveau motif | ADR seulement si la cause est architecturale | **ADR obligatoire** | ADR si le contrat change | Aucun — rattrapé après |
+| **3. Planifier** | Graphe de lots complet | Un lot, brief prédigéré | Souvent un seul lot | Lots par zone, iso-comportement | Un lot par optimisation mesurable | Pas de plan |
+| **4. Exécuter** | Toutes les couches | Toutes les couches, trous du socle en commit `socle:` | **Test de reproduction rouge d'abord** | **Characterization tests d'abord** | Le bench sert de test | Correctif minimal |
+| **5. Prouver** | Challenger empirique | CI verte + un parcours système ; challenger sur le parcours | Le test de reproduction passe au vert | Le challenger vérifie que **rien** n'a changé fonctionnellement | **Bench après, chiffré.** Pas de chiffre = rejet | Vérification manuelle + chantier de suivi obligatoire |
+
+La **feature légère** est la voie par défaut d'une fonctionnalité qui tient en un écran ou un parcours, sans nouvelle table, sans nouveau port et sans question de sécurité. Cible : de la demande à la PR en 2 h. Dès qu'une migration, un contrat, une règle métier nouvelle ou la sécurité entre en jeu, c'est une **feature** complète.
 
 Détail de chaque cycle : [`feature.md`](feature.md) · [`bugfix.md`](bugfix.md) · [`refactoring.md`](refactoring.md) · [`optimisation.md`](optimisation.md) · [`hotfix.md`](hotfix.md)
 
@@ -117,7 +132,7 @@ Quel que soit le cycle :
 - **Patcher un bug sans test de reproduction.** Le test s'écrit avant le correctif et doit échouer.
 - **Refactoriser et changer le comportement dans le même lot.** Un refactoring qui change un comportement est une feature déguisée.
 - **Optimiser sans mesure avant et après.** Sans chiffres, ce n'est pas une optimisation, c'est une intuition.
-- **Écrire une vue sans UDR.** C'est ce qui produit des interfaces incohérentes d'une session à l'autre.
+- **Introduire un nouveau motif d'interface sans UDR.** C'est ce qui produit des interfaces incohérentes d'une session à l'autre.
 - **Livrer sans qu'un rôle distinct ait exécuté le résultat.**
 
 ---

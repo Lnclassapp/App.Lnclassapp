@@ -228,7 +228,7 @@ Deux bugs latents déjà identifiés, si tu cherches une cible réelle : les ré
 | « Où va ce fichier ? » | [`architecture.md`](architecture.md) puis [`../blueprints/`](../blueprints/) | Poste le cas dans le canal équipe |
 | « Pourquoi c'est fait comme ça ? » | [`../decisions/adr/`](../decisions/adr/) — l'index est dans [`README.md`](../decisions/adr/README.md) | Si aucun ADR ne couvre le sujet, c'est qu'il faut l'écrire |
 | « Ce mot veut dire quoi ? » | [`glossaire.md`](glossaire.md) | Un terme métier absent du glossaire = à ajouter, pas à improviser |
-| « À quoi doit ressembler cette vue ? » | [`../decisions/udr/`](../decisions/udr/) et [`../design/README.md`](../design/README.md) | Une vue sans UDR ne s'écrit pas |
+| « À quoi doit ressembler cette vue ? » | [`../decisions/udr/`](../decisions/udr/) et [`../design/README.md`](../design/README.md) | Un nouveau motif d'interface sans UDR ne s'écrit pas ; une vue qui réutilise les motifs existants n'en demande pas |
 | « La commande X échoue » | Ce fichier, puis le dernier run CI sur `main` | Canal équipe, avec la sortie complète |
 | « La doc dit A, le code fait B » | Les deux sections « écarts connus » | **C'est un bug de la documentation.** Ouvre un chantier `docs/<slug>`. Une doc fausse coûte plus cher qu'une doc absente. |
 

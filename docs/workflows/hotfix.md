@@ -34,7 +34,7 @@ Si tu hésites, ce n'est pas un hotfix. Le doute lui-même est le signal : un vr
 | Le grill du memo | Un cas limite non vu peut rester cassé | Memo complet réécrit et grillé |
 | Le PRD | Le comportement attendu n'est écrit nulle part | PRD rétroactif, ou référence au PRD existant |
 | L'ADR | Une décision structurante prise sans trace | **ADR écrit sous 5 jours ouvrés** si le correctif a touché un contrat |
-| L'UDR | Une vue modifiée hors design system | **UDR écrite sous 5 jours ouvrés** si un écran a bougé |
+| L'UDR | Une vue modifiée hors design system | **UDR écrite sous 5 jours ouvrés** si le correctif a introduit un nouveau motif d'interface |
 | `plan.md` | Aucun découpage — assumé, le correctif est minimal | Sans objet |
 | Les tests exhaustifs | Couverture partielle | **Test de reproduction ajouté** + tests des cas voisins |
 | Le challenger empirique | Vérification faite par l'auteur seul | Rejeu par un rôle distinct |
