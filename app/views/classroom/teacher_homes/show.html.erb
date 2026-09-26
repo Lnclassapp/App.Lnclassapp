@@ -10,15 +10,15 @@
   <% home_sections_for(:teacher).each do |key, icon| %>
     <% if key == :classrooms %>
       <%= ui_card title: t(".classrooms_title"), subtitle: t(".classrooms_subtitle"), icon:, id: "teacher_home_classrooms" do |card| %>
-        <% card.actions do %>
-          <%= ui_button t(".edit_classrooms"), href: teacher_classrooms_path, variant: :secondary, size: :sm, icon: "pencil-square" %>
-        <% end %>
         <% if @home.classrooms.empty? %>
           <%= ui_empty_state title: t(".classrooms_empty"), description: t(".classrooms_empty_description"), icon: %>
         <% else %>
           <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom %>
           </ul>
+        <% end %>
+        <% card.footer do %>
+          <%= ui_button t(".edit_classrooms"), href: teacher_classrooms_path, variant: :secondary, size: :sm, icon: "pencil-square" %>
         <% end %>
       <% end %>
     <% elsif key == :activity %>
