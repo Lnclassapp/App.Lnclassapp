@@ -1,0 +1,71 @@
+<%# 🌐 UI · teams/imports/kinds/_exercises — aide de l'import des exercices d'une fiche essentielle, dans la modale de téléversement %>
+<%# Rôle : slug de la fiche essentielle cible reçu en paramètre, clés acceptées à chaque étage, exemple minimal, brouillon et doublons %>
+<%# ADR  : 0035, 0039 · UDR : 0040 %>
+<% essential = params[:essential].to_s.parameterize.presence %>
+<% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
+<% tree = { "exercise" => UseCases::Assessment::ImportExercises::ALIASES.merge(own.("description", "exercise_type", "questions")),
+            "question" => own.("content", "question_type", "explanation", "answers"),
+            "answer" => { "content" => %w[content], "correct" => %w[correct is_correct] } } %>
+<section id="import-help-exercises" aria-labelledby="import-help-exercises-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
+  <h3 id="import-help-exercises-title" class="font-medium text-ink"><%= t(".title") %></h3>
+  <p class="text-mute"><%= t(".intro_html") %></p>
+
+  <div id="import-help-essential" class="flex items-start gap-2 rounded-ln border border-line bg-white p-3">
+    <%= ui_icon "document-text", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>
+    <% if essential %>
+      <p class="text-ink">
+        <%= t(".essential") %> <code class="font-mono text-xs text-ink"><%= essential %></code>
+        <span class="text-mute"><%= t(".essential_hint") %></span>
+      </p>
+    <% else %>
+      <p class="text-mute"><%= t(".no_essential_html") %></p>
+    <% end %>
+  </div>
+
+  <div id="import-help-keys" class="space-y-2">
+    <% tree.each_with_index do |(node, keys), index| %>
+      <details class="rounded-ln border border-line bg-white" <%= "open" if index.zero? %>>
+        <summary class="flex min-h-tap cursor-pointer items-center gap-2 px-3 font-medium text-ink">
+          <%= t(".nodes.#{node}") %> <code class="font-mono text-xs text-mute"><%= t(".paths.#{node}") %></code>
+        </summary>
+        <dl class="space-y-2 px-3 pb-3">
+          <% keys.each do |key, aliases| %>
+            <div class="space-y-0.5">
+              <dt><%= safe_join(aliases.map { tag.code(it, class: "font-mono text-xs text-ink") }, " · ") %></dt>
+              <dd class="text-mute"><%= t(".keys.#{node}.#{key}") %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </details>
+    <% end %>
+  </div>
+
+  <div class="space-y-1.5">
+    <h4 class="font-medium text-ink"><%= t(".example") %></h4>
+    <pre id="import-help-example" class="overflow-x-auto rounded-ln border border-line bg-white p-3 font-mono text-xs text-ink"><code>{
+  "format": "lnclass.exercises",
+  "version": 1,
+  "essential": "<%= essential || "genetique-et-evolution-brassage-genetique" %>",
+  "exercises": [
+    { "title": "Crossing-over",
+      "exercise_type": "fixation",
+      "questions": [
+        { "content": "Le crossing-over a lieu en prophase I.",
+          "question_type": "true_false",
+          "answers": [
+            { "content": "Vrai", "correct": true },
+            { "content": "Faux", "correct": false }
+          ] }
+      ] }
+  ]
+}</code></pre>
+  </div>
+
+  <div class="flex items-start gap-2 text-ink">
+    <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>
+    <div class="space-y-1">
+      <p><%= t(".drafts") %></p>
+      <p><%= t(".errors") %></p>
+    </div>
+  </div>
+</section>
