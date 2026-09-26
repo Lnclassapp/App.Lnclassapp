@@ -11,6 +11,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= document_reload_tag %>
 
     <%# Un turbo_stream.refresh re-demande la page courante et la fusionne, sans recharger la fenêtre %>
     <% turbo_refreshes_with method: :morph, scroll: :preserve %>

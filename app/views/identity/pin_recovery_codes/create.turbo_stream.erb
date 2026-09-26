@@ -1,0 +1,5 @@
+<%# 🌐 UI · identity/pin_recovery_codes/create — succès de l'émission d'un code de récupération du PIN %>
+<%# Rôle : toast, puis la modale du code ouverte dans le frame « modal » : le code n'est jamais placé dans un flash %>
+<%# ADR  : 0032 · UDR : 0006, 0020 %>
+<%= turbo_stream_toast t(".issued"), type: :success %>
+<%= turbo_stream.update "modal", partial: "code", locals: { issued: @issued } %>

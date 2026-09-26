@@ -1,0 +1,67 @@
+<%# 🌐 UI · teams/account_lookups/_result — le compte trouvé (Queries::Identity::AccountLookupQuery::Row) et ses actions %>
+<%# Rôle : identité, rôle, classe ; « Générer un code de récupération » (stream : modale du code) et, pour un autre membre de l'équipe, la réinitialisation confirmée %>
+<%# ADR  : 0031, 0032 · UDR : 0006, 0020 · remplacé par teams/second_factor_resets/create.turbo_stream %>
+<%= ui_card id: "account-lookup-result", "aria-live": "polite" do %>
+  <div class="flex items-center gap-4">
+    <%= ui_avatar account.display_name, size: :lg %>
+    <div class="min-w-0 flex-1">
+      <p class="font-display text-lg leading-tight font-extrabold text-ink"><%= account.display_name %></p>
+      <div class="mt-1.5 flex flex-wrap items-center gap-2">
+        <%= ui_role_badge account.role %>
+        <% if account.own_account %>
+          <%= ui_badge t(".own_account"), tone: :info %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <dl class="mt-5 grid gap-4 border-t border-line pt-4 text-sm sm:grid-cols-2">
+    <% if account.role == :student %>
+      <div>
+        <dt class="text-mute"><%= t(".classroom") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= account.classroom_name || t(".no_classroom") %></dd>
+      </div>
+    <% end %>
+    <% if account.role == :team %>
+      <div>
+        <dt class="text-mute"><%= t(".team_role") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= t("teams.account_lookups.team_roles.#{account.team_role}") %></dd>
+      </div>
+      <div>
+        <dt class="text-mute"><%= t(".second_factor") %></dt>
+        <dd id="account-second-factor" class="mt-1">
+          <% if account.second_factor_confirmed %>
+            <%= ui_badge t(".second_factor_confirmed"), tone: :success, dot: true %>
+          <% else %>
+            <%= ui_badge t(".second_factor_missing"), tone: :warning, dot: true %>
+          <% end %>
+        </dd>
+      </div>
+    <% end %>
+  </dl>
+
+  <% if account.own_account %>
+    <p class="mt-5 flex items-start gap-2 rounded-ln bg-info-soft px-4 py-3 text-sm text-ink">
+      <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <%= t(".own_account_hint") %>
+    </p>
+  <% else %>
+    <div class="mt-5 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row sm:flex-wrap">
+      <%= form_with url: account_pin_recovery_codes_path(account.public_id), id: "pin-recovery-code-form" do %>
+        <%= ui_button t(".issue_code"), type: :submit, icon: "key", full: true %>
+      <% end %>
+      <% if account.role == :team %>
+        <%= ui_modal title: t(".reset_title", name: account.display_name), id: "reset-second-factor-modal", size: :sm,
+                     trigger: t(".reset_second_factor"), trigger_icon: "arrow-path" do |modal| %>
+          <% modal.footer do %>
+            <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+            <%= form_with url: teams_member_second_factor_reset_path(account.public_id), id: "second-factor-reset-form" do %>
+              <%= ui_button t(".confirm_reset"), type: :submit, variant: :danger, icon: "arrow-path", full: true %>
+            <% end %>
+          <% end %>
+          <p class="text-sm text-mute"><%= t(".reset_body") %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
