@@ -1,0 +1,36 @@
+<%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
+<%# Rôle : sections dans l'ordre de HOME_SECTIONS[:teacher] (mes classes, activité « Bientôt », cours) ; aucun montant %>
+<%# ADR  : 0026, 0048 · UDR : 0006, 0007, 0026 %>
+<% content_for :title, t(".page_title") %>
+<%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle", school: @home.school_name) do %>
+  <%= ui_subject_badge @home.material_name, category: @home.material_category %>
+<% end %>
+
+<div class="grid gap-5">
+  <% home_sections_for(:teacher).each do |key, icon| %>
+    <% if key == :classrooms %>
+      <%= ui_card title: t(".classrooms_title"), subtitle: t(".classrooms_subtitle"), icon:, id: "teacher_home_classrooms" do |card| %>
+        <% card.actions do %>
+          <%= ui_button t(".edit_classrooms"), href: teacher_classrooms_path, variant: :secondary, size: :sm, icon: "pencil-square" %>
+        <% end %>
+        <% if @home.classrooms.empty? %>
+          <%= ui_empty_state title: t(".classrooms_empty"), description: t(".classrooms_empty_description"), icon: %>
+        <% else %>
+          <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom %>
+          </ul>
+        <% end %>
+      <% end %>
+    <% elsif key == :activity %>
+      <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon:, id: "teacher_home_activity" do %>
+        <%= ui_empty_state title: t(".activity_soon"), description: t(".activity_soon_description"), icon: %>
+      <% end %>
+    <% elsif key == :courses %>
+      <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle"), icon:, href: courses_path, id: "teacher_home_courses" do %>
+        <span class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
+          <%= t(".courses_action") %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
+        </span>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
