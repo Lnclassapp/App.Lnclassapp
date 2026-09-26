@@ -1,0 +1,55 @@
+# Ajout d'une classe à un établissement par l'équipe (plan boucle-pedagogique, Lot D8) — UDR-0031, UDR-0007
+fr:
+  activemodel:
+    attributes:
+      dtos/classroom/classroom_input:
+        school_public_id: "Établissement"
+        level_slug: "Niveau"
+        series_slug: "Série"
+        name: "Nom de la classe"
+        max_students: "Nombre maximal d'élèves"
+    errors:
+      models:
+        dtos/classroom/classroom_input:
+          attributes:
+            base:
+              school_inactive: "Cet établissement est désactivé : il ne reçoit plus de nouvelle classe."
+            school_public_id:
+              blank: "Choisissez un établissement."
+            level_slug:
+              blank: "Choisissez un niveau."
+              inclusion: "Ce niveau n'existe pas."
+              not_allowed: "Ce niveau n'existe pas dans un collège."
+            series_slug:
+              blank: "Choisissez une série : ce niveau en a."
+              inclusion: "Cette série n'existe pas."
+              not_allowed: "Cette série n'est pas ouverte à ce niveau."
+            name:
+              blank: "Indiquez le nom de la classe."
+              too_long: "Le nom compte %{count} caractères au plus."
+              taken: "Une classe de cet établissement porte déjà ce nom cette année."
+            max_students:
+              not_a_number: "Indiquez un nombre d'élèves."
+              not_an_integer: "Indiquez un nombre entier d'élèves."
+              in: "Le nombre maximal d'élèves va de 1 à 150."
+  teams:
+    school_classrooms:
+      new:
+        title: "Ajouter une classe"
+        school_year_notice: "%{school} · année scolaire %{year}"
+        cancel: "Annuler"
+        submit: "Créer la classe"
+      form:
+        level_prompt: "Choisir un niveau"
+        no_series: "Aucune série"
+        series_hint: "Seules les séries ouvertes à un niveau sont proposées, rangées sous ce niveau."
+        name_placeholder: "Ex. : Tle D 7"
+        name_hint:
+          one: "%{count} caractère au plus."
+          other: "%{count} caractères au plus."
+        max_students_hint:
+          one: "De 1 à %{count} élève."
+          other: "De 1 à %{count} élèves."
+        join_code_hint: "Le code d'adhésion de la classe est créé automatiquement. Il s'affiche dès la création."
+      create:
+        created: "Classe créée. Code : %{code}"
