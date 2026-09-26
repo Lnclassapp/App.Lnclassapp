@@ -1,0 +1,43 @@
+# Import des fiches essentielles d'un cours (plan boucle-pedagogique, Lot I2) — ADR-0035, ADR-0039, UDR-0039, UDR-0007
+# Les libellés du rapport (teams.imports.status.details.*_created) sont ceux de l'import des cours complets.
+fr:
+  teams:
+    imports:
+      kinds:
+        essentials:
+          title: "Format du fichier"
+          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.essentials</code>, version 1. La clé <code class=\"font-mono text-xs text-ink\">course</code> de l'enveloppe désigne le cours par son slug ; chaque élément de <code class=\"font-mono text-xs text-ink\">essentials</code> est une fiche essentielle avec ses exercices, qui entre entière, ou pas du tout."
+          course: "Cours cible :"
+          course_hint: "à recopier tel quel dans la clé course de l'enveloppe."
+          no_course_html: "Citez le cours cible par son slug, dans la clé <code class=\"font-mono text-xs text-ink\">course</code> : c'est la fin de l'adresse de sa page, après <code class=\"font-mono text-xs text-ink\">/courses/</code>. Un slug inconnu fait rejeter tout le fichier."
+          nodes:
+            essential: "Fiche essentielle"
+            exercise: "Exercice"
+            question: "Question"
+            answer: "Proposition"
+          paths:
+            essential: "essentials[]"
+            exercise: "exercises[]"
+            question: "questions[]"
+            answer: "answers[]"
+          keys:
+            essential:
+              name: "Nom de la fiche essentielle. Obligatoire, 150 caractères au plus, unique dans son cours."
+              subtitle: "Sous-titre. Facultatif, 150 caractères au plus."
+              content: "Contenu HTML. Facultatif ; le HTML est assaini."
+              exercises: "Ses exercices, dans l'ordre. Facultatifs."
+            exercise:
+              title: "Titre de l'exercice. Obligatoire, 150 caractères au plus."
+              description: "Consigne. Facultative."
+              exercise_type: "fixation ou evaluation. Obligatoire."
+              questions: "Ses questions, dans l'ordre. Au moins une."
+            question:
+              content: "Énoncé. Obligatoire."
+              question_type: "true_false, single_choice, multiple_correct_2 ou multiple_correct_3. Vrai/Faux : 2 propositions dont 1 correcte ; sinon 1, 2 ou 3 correctes, et au moins une incorrecte en plus."
+              explanation: "Explication de la correction. Facultative."
+              answers: "Ses propositions, dans l'ordre."
+            answer:
+              content: "Texte de la proposition. Obligatoire, 500 caractères au plus."
+              correct: "true si la proposition est correcte ; false par défaut."
+          example: "Exemple minimal"
+          drafts: "Tout arrive en brouillon, à la suite des fiches essentielles du cours, quelle que soit la clé status du fichier : relisez, puis publiez. Une fiche essentielle déjà présente dans ce cours (même nom, sans tenir compte des accents, de la casse ni des espaces) est ignorée et comptée ; elle n'est jamais modifiée."
