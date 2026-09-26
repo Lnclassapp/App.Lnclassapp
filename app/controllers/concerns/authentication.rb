@@ -5,6 +5,8 @@ module Authentication
   extend ActiveSupport::Concern
 
   COOKIE = :session_token
+  # ADR-0049 : une nouvelle session tire un nouveau nonce CSP ; la page d'arrivée recharge donc le document entier.
+  RELOAD_FLASH = :reload_document
   # Symbole de HomeDestination → route de l'accueil (UDR-0006, routes gelées du Lot 0a).
   HOME_ROUTES = {
     student_home: :student_home_path, teacher_home: :teacher_home_path, teacher_classrooms: :teacher_classrooms_path,
@@ -63,6 +65,7 @@ module Authentication
   # Nouvel identifiant de session Rails et nouveau cookie à chaque connexion (ADR-0050).
   def start_session(token)
     reset_session
+    flash[RELOAD_FLASH] = true
     cookies.signed.permanent[COOKIE] = { value: token, httponly: true, same_site: :lax, secure: !Rails.env.local? }
     @resolution = nil
   end
@@ -71,6 +74,7 @@ module Authentication
     sign_out.call(token: cookies.signed[COOKIE])
     cookies.delete(COOKIE)
     reset_session
+    flash[RELOAD_FLASH] = true
   end
 
   def redirect_to_home(**options)

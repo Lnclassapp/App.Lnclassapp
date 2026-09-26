@@ -171,3 +171,17 @@ end
 ```
 
 Un lien sortant (`<a href="https://…">`) reste permis et n'est pas signalé (expression vérifiée le 2026-09-24 sur six cas : lien sortant et script local acceptés ; script et feuille de style CDN, iframe, GTM refusés). Si le test signale un faux positif, on affine l'expression, on ne le désactive pas.
+
+## Amendement du 2026-09-26 — un nonce par session
+
+**Constat.** Le nonce était tiré à chaque requête. Une navigation Turbo Drive garde le document, donc la CSP reçue avec sa première page, mais remplace `meta[name=csp-nonce]` par celui de la nouvelle page. Trix lit cette balise pour ses `<style>` en ligne : après une seule navigation, ils étaient refusés (`style-src-elem`), l'éditeur perdait son habillage et son champ de lien caché interceptait les clics. Parcours cassé : se connecter, accueil équipe, « Nouveau cours ». Le défaut restait invisible tant que l'accueil équipe de test forçait un rechargement complet.
+
+**Décision, validée par le porteur.**
+
+1. **Un nonce par session**, tiré au hasard et gardé dans la session : `request.session[:csp_nonce] ||= SecureRandom.base64(16)`. On ne reprend pas l'identifiant de session (forme proposée par le guide Rails) : il peut être vide pour un visiteur neuf, et il n'a pas à figurer dans le HTML.
+2. **Une nouvelle session recharge le document.** La connexion, l'inscription (enseignant, élève par code) et la déconnexion appellent `reset_session`, donc tirent un nouveau nonce. `Authentication` pose alors un drapeau de flash. Si la page d'arrivée est demandée par Turbo (en-tête `X-Turbo-Request-Id`), elle porte `<meta name="turbo-visit-control" content="reload">` et Turbo recharge le document entier, avec la bonne CSP ; le flash est gardé une requête de plus, et le toast s'affiche sur la page rechargée. Un chargement hors Turbo reçoit déjà la bonne CSP : rien à recharger. Le second facteur ne renouvelle pas la session et n'a pas besoin de rechargement.
+3. **Les erreurs restent sans rechargement** : un formulaire refusé (422) est re-rendu par Turbo comme avant ; seul le succès recharge.
+
+**Ce qui ne change pas.** La CSP reste bloquante, sans `'unsafe-inline'` ni `'unsafe-eval'` pour les scripts, sans hôte tiers. Un nonce stable pendant une session reste imprévisible pour un tiers, et il change à chaque connexion.
+
+**Preuves.** `test/integration/content_security_policy_test.rb` (nonce stable dans la session, nouveau à la connexion et à la déconnexion, rechargement unique avec son toast) et `test/system/shared/csp_turbo_navigation_test.rb` (connexion, accueil, « Cours », « Nouveau cours » : la barre de Trix est habillée, le texte se saisit, aucune violation de CSP).
