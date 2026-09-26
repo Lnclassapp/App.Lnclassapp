@@ -1,0 +1,26 @@
+<%# 🌐 UI · classroom/student_classrooms/_assigned_course — un cours assigné à la classe de l'élève (CL-22) %>
+<%# Rôle : toute la ligne mène au cours du catalogue : nom, sous-titre, matière, niveau, fiches essentielles publiées %>
+<%# ADR  : 0035, 0048 · UDR : 0007, 0011 %>
+<%# locals: (course:) -%>
+<li id="course_<%= course.slug %>">
+  <%= link_to course_path(course.slug),
+              class: "group flex min-h-tap items-center gap-4 px-5 py-4 transition hover:bg-mist sm:px-6 focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <span class="grid size-10 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true">
+      <%= ui_icon "book-open" %>
+    </span>
+    <div class="min-w-0 flex-1 space-y-1.5">
+      <p class="font-display font-extrabold text-balance text-ink"><%= course.name %></p>
+      <% if course.subtitle.present? %>
+        <p class="line-clamp-2 text-sm text-mute"><%= course.subtitle %></p>
+      <% end %>
+      <div class="flex flex-wrap items-center gap-2">
+        <%= ui_subject_badge course.material_name, category: course.material_category, size: :sm %>
+        <%= ui_badge [ course.level_name, course.series_name ].compact.join(" · "), size: :sm %>
+        <span class="inline-flex items-center gap-1.5 text-xs text-mute">
+          <%= ui_icon "document-text", size: :sm %><%= t(".essentials", count: course.essentials_count) %>
+        </span>
+      </div>
+    </div>
+    <%= ui_icon "chevron-right", variant: :mini, class: "text-mute transition group-hover:translate-x-0.5 group-hover:text-brand-strong" %>
+  <% end %>
+</li>
