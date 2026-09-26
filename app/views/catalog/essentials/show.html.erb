@@ -1,0 +1,82 @@
+<%# 🌐 UI · catalog/essentials/show — page d'une fiche essentielle (CA-11, AS-37), pour l'élève, l'enseignant et l'équipe %>
+<%# Rôle : en-tête et contenu (Action Text, KaTeX) ; menu de l'équipe en modales ; lacune de l'élève ; liste des exercices %>
+<%# ADR  : 0028, 0033, 0035, 0043 · UDR : 0006, 0007, 0015 · lecture seule, rafraîchie par les streams de B4 et B5 %>
+<% essential = @detail.essential %>
+<% course = @detail.course %>
+<% exercises = @detail.exercises %>
+<% content_for :title, t(".page_title", name: essential.name) %>
+<% content_for :nav_key, "courses" %>
+<div id="essential_header" class="mb-8">
+  <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
+    <%= link_to course_path(course.slug),
+                class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
+      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back", name: course.name) %>
+    <% end %>
+  </nav>
+  <%= ui_card padding: :md do %>
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+      <div class="min-w-0 space-y-3">
+        <p class="text-sm text-mute"><%= t(".eyebrow", course: course.name) %></p>
+        <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= essential.name %></h1>
+        <% if essential.subtitle.present? %>
+          <p id="essential_subtitle" class="text-mute"><%= essential.subtitle %></p>
+        <% end %>
+        <div class="flex flex-wrap items-center gap-2">
+          <%= ui_subject_badge course.material_name, category: course.material_category %>
+          <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
+        </div>
+      </div>
+      <% if @status_record %>
+        <div id="essential_team_actions" role="group" aria-label="<%= t(".team_actions") %>"
+             class="flex flex-wrap items-center gap-2 lg:max-w-md lg:shrink-0 lg:justify-end">
+          <%= content_status_panel(record: @status_record) %>
+          <%= ui_button t(".edit"), href: edit_teams_essential_path(essential.slug), variant: :secondary, size: :sm,
+                        icon: "pencil-square", data: { turbo_frame: "modal" }, "aria-label": t(".edit_label", name: essential.name) %>
+          <%= ui_button t(".new_exercise"), href: new_teams_essential_exercise_path(essential.slug), size: :sm, icon: "plus",
+                        data: { turbo_frame: "modal" } %>
+          <%= ui_button t(".import_exercises"), href: new_teams_import_path(kind: "exercises", essential: essential.slug),
+                        variant: :secondary, size: :sm, icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+        </div>
+      <% end %>
+    </div>
+    <div id="essential_content" class="mt-6 max-w-prose border-t border-line pt-6" data-controller="math">
+      <% if essential.content.present? %>
+        <%= essential.content %>
+      <% else %>
+        <p class="text-mute"><%= t(".no_content") %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="space-y-8">
+  <% if (gap = @detail.pending_gap) %>
+    <section id="essential_gap" aria-labelledby="essential_gap_title"
+             class="flex gap-4 rounded-card border border-warning/30 bg-warning-soft p-5 sm:p-6">
+      <%= ui_icon "light-bulb", class: "text-warning" %>
+      <div class="min-w-0 space-y-1">
+        <h2 id="essential_gap_title" class="font-display text-lg font-extrabold"><%= t(".gap_title") %></h2>
+        <p class="text-sm text-mute"><%= t(".gap_since", date: l(gap.opened_at.to_date, format: :long)) %></p>
+        <p class="text-ink"><%= t(".gap_body", threshold: Entities::Assessment::Grading::MASTERY_THRESHOLD) %></p>
+      </div>
+    </section>
+  <% end %>
+
+  <%= ui_card title: t(".exercises_title"), icon: "academic-cap", id: "essential_exercises" do |card| %>
+    <% card.actions do %>
+      <%= ui_badge t(".exercises_count", count: exercises.size), tone: :brand, size: :sm %>
+    <% end %>
+    <% if exercises.empty? %>
+      <% if @status_record %>
+        <%= ui_empty_state title: t(".team_empty_title"), description: t(".team_empty_description"), icon: "academic-cap" %>
+      <% else %>
+        <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "academic-cap" %>
+      <% end %>
+    <% else %>
+      <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6" data-controller="math">
+        <%= render partial: "exercise_progress", collection: exercises, as: :exercise,
+                   locals: { student: @student, team: @status_record.present? } %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
