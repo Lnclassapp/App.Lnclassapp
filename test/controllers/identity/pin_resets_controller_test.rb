@@ -11,6 +11,16 @@ class Identity::PinResetsControllerTest < ActionDispatch::IntegrationTest
     %w[contact code pin pin_confirmation].each { assert_select "input[name='pin_reset[#{it}]']" }
   end
 
+  # The code is shown « 1234 5678 » to the teacher: typed as shown, it must fit in the field.
+  test "the code field takes the code as it is shown, with its space" do
+    create_pin_recovery_code(user: @student)
+    get new_identity_pin_reset_path
+
+    assert_select "input[name='pin_reset[code]'][maxlength='9']"
+    post identity_pin_reset_path, params: { pin_reset: reset_params(code: "1234 5678") }
+    assert_redirected_to new_session_path
+  end
+
   test "the right code sets the new PIN and returns to the sign-in page" do
     create_pin_recovery_code(user: @student)
 
