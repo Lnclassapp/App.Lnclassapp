@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Import des fiches essentielles d'un cours, version 1 (ADR-0039, UDR-0039)",
+  "description": "Enveloppe { format, version, course, essentials[] }. course est le slug du cours cible, obligatoire. Chaque fiche porte ses exercices : exercises[] → questions[] → answers[], avec les clés de l'import des cours complets. La présence des noms et la structure des questions sont vérifiées par l'adaptateur, pour que l'erreur soit notée à la clé canonique. La clé status est ignorée : tout naît en brouillon.",
+  "type": "object",
+  "required": ["format", "version", "course", "essentials"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "lnclass.essentials" },
+    "version": { "const": 1 },
+    "course": { "type": "string" },
+    "essentials": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/essential" }
+    }
+  },
+  "$defs": {
+    "text": { "type": ["string", "null"] },
+    "essential": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "subtitle": { "$ref": "#/$defs/text" },
+        "content": { "$ref": "#/$defs/text" },
+        "status": { "$ref": "#/$defs/text" },
+        "exercises": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/exercise" }
+        }
+      }
+    },
+    "exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "name": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "exercise_type": { "$ref": "#/$defs/text" },
+        "status": { "$ref": "#/$defs/text" },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/question" }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": { "$ref": "#/$defs/text" },
+        "question_type": { "$ref": "#/$defs/text" },
+        "explanation": { "$ref": "#/$defs/text" },
+        "answers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/answer" }
+        }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": { "type": ["string", "null"], "maxLength": 500 },
+        "correct": { "type": ["boolean", "null"] },
+        "is_correct": { "type": ["boolean", "null"] }
+      }
+    }
+  }
+}
