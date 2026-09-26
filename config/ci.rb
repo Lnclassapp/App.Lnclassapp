@@ -7,6 +7,9 @@
 # Fail-safe: if git cannot compare (no origin/Develop), `system` returns false and the audit runs.
 yarn_audit = ENV["CI"] || !system("git diff --quiet origin/Develop -- package.json yarn.lock", err: File::NULL)
 
+# `bin/rails test` alone still runs the guards, locally; bin/ci runs them once, in their own steps.
+guards_excluded = "test/{system/**/*,dummy/**/*,fixtures/**/*,guards/**/*,domain/domain_purity}_test.rb"
+
 CI.run do
   step "Setup", "bin/setup --skip-server"
 
@@ -25,7 +28,9 @@ CI.run do
   step "Security: Brakeman code analysis", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error"
 
   # Full suite: SimpleCov fails the step below 100 % lines or branches (ADR-0024).
-  step "Tests: Rails (coverage 100 % lines and branches)", "bin/rails test"
+  # The two guards above already ran: the suite leaves them out here (Rails' default exclusion, plus the guards).
+  step "Tests: Rails (coverage 100 % lines and branches)",
+       "env DEFAULT_TEST_EXCLUDE='#{guards_excluded}' bin/rails test"
 
   # Real browser, never rack_test (configuration.md §4.3). Partial run: no threshold (§4.1).
   step "Tests: System (headless Chrome)", "bin/check-chrome && env COVERAGE=0 bin/rails test:system"
