@@ -57,7 +57,7 @@
       <div class="min-w-0 space-y-1">
         <h2 id="essential_gap_title" class="font-display text-lg font-extrabold"><%= t(".gap_title") %></h2>
         <p class="text-sm text-mute"><%= t(".gap_since", date: l(gap.opened_at.to_date, format: :long)) %></p>
-        <p class="text-ink"><%= t(".gap_body", threshold: Entities::Assessment::Grading::MASTERY_THRESHOLD) %></p>
+        <p class="text-ink"><%= t(".gap_body", threshold: Entities::Assessment::Grading::PASS_THRESHOLD) %></p>
       </div>
     </section>
   <% end %>
