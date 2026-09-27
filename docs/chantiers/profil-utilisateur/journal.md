@@ -41,3 +41,12 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+## Lot A — Lire son profil et modifier son nom
+
+- 2026-09-27 · `aria-current="page"` sur « Mon profil » (UDR-0041) : `ui_dropdown_item` le pose lui-même sur un lien vers la page ouverte, jamais sur une action (`method:`). Fichier hors plan (`app/helpers/components_helper.rb`), `NavigationHelper` reste intact ; aucun autre lot ne le touche. Test dans `test/helpers/components_helper_test.rb`.
+- Pas de DTO nouveau : `UpdateOwnName` reprend `Dtos::Identity::PersonNameInput`, celui de l'inscription (mêmes limites 50 / 80, même format). Ses messages d'erreur vivent dans `profiles.fr.yml` : chaque DTO d'inscription qui en hérite garde les siens.
+- `UpdateOwnName#call(actor:, user:, dto:, ip:)` suit la forme de `VerifyOwnPin` (le compte chargé par le contrôleur). Un nom inchangé réussit sans écriture ni trace d'audit.
+- `#profile_security` est dans `show`, hors du partial `_information` : le Turbo Stream du nom remplace la seule carte des informations.
+- Piège d'environnement : `db:prepare` sur une base de test neuve y joue les seeds (matières « SVT »…) et fait échouer les fabriques ; `db:schema:load` en test la laisse vide.
+- Écart connu : le nom affiché dans l'en-tête du shell (menu du compte) ne se met à jour qu'au prochain chargement de page ; la carte, elle, change sans rechargement (PR-03).

@@ -198,6 +198,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span[role=menuitem][aria-disabled=true]", text: "Bientôt"
   end
 
+  test "ui_dropdown_item marks the link of the current page, never an action on it (UDR-0041)" do
+    request.path_info = "/profile"
+    show ui_dropdown_item("Mon profil", href: "/profile") + ui_dropdown_item("Modifier", href: "/edit") +
+         ui_dropdown_item("Supprimer", href: "/profile", method: :delete)
+
+    assert_select "a[aria-current=page][href='/profile']", text: "Mon profil"
+    assert_select "a[aria-current]", 1
+  end
+
   test "ui_dropdown accepts a custom trigger and id" do
     show ui_dropdown(label: "Compte", id: "account", trigger: "Awa") { "" }
 

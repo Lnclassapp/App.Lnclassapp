@@ -1,0 +1,51 @@
+# Page « Mon profil » et modale du nom (plan profil-utilisateur, Lot A) — PR-01 à PR-03, ADR-0055, UDR-0041
+fr:
+  activemodel:
+    errors:
+      models:
+        dtos/identity/person_name_input:
+          attributes:
+            last_name:
+              blank: "Saisissez votre nom."
+              too_long: "Le nom compte %{count} caractères au plus."
+              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
+            first_name:
+              blank: "Saisissez votre ou vos prénoms."
+              too_long: "Les prénoms comptent %{count} caractères au plus."
+              invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
+  identity:
+    profiles:
+      show:
+        page_title: "Mon profil"
+        title: "Mon profil"
+        subtitle: "Ce que Lnclass sait de vous, et ce que vous pouvez changer."
+        security_title: "Mon PIN"
+        security_body: "Votre PIN protège votre compte. Changez-le si vous pensez qu'une autre personne le connaît."
+        change_pin: "Changer mon PIN"
+      information:
+        title: "Mes informations"
+        name: "Nom"
+        edit_name: "Modifier"
+        edit_name_label: "Modifier mon nom"
+        contact: "Numéro"
+        change_contact: "Changer mon numéro"
+        classroom: "Classe"
+        no_classroom: "Aucune classe"
+        school: "Établissement"
+        material: "Matière"
+        team_role: "Rôle"
+        second_factor_active: "Second facteur : actif"
+        pending: "Compte en attente"
+        registered_on: "Inscrit le"
+        missing: "—"
+        team_roles:
+          admin: "Administration"
+          content: "Contenu"
+          field: "Terrain"
+    profile_names:
+      edit:
+        title: "Modifier mon nom"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      update:
+        updated: "Votre nom est enregistré."
