@@ -13,7 +13,8 @@ module UseCases
       end
 
       # dto : Dtos::Classroom::ClassroomInput.
-      # → Result(Classroom) | :forbidden | :invalid | :not_found (établissement) | :conflict (établissement désactivé, nom pris)
+      # → Result(Classroom) | :forbidden | :invalid | :not_found (établissement)
+      #   | :conflict (établissement désactivé ou en brouillon, nom pris)
       def call(actor:, dto:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -22,6 +23,8 @@ module UseCases
         school = @schools.find_by_public_id(public_id: dto.school_public_id)
         return Shared::Result.failure(:not_found) if school.nil?
         return Shared::Result.failure(:conflict, errors: { base: [ :school_inactive ] }) if school.status == "inactive"
+        # Décision du porteur (2026-09-27) : un établissement en brouillon est activé avant de recevoir une classe.
+        return Shared::Result.failure(:conflict, errors: { base: [ :school_draft ] }) if school.status == "draft"
 
         taxonomy = taxonomy_ids(dto, school, @taxonomy.lookup)
         return taxonomy if taxonomy.failure?

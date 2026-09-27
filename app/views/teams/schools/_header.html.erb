@@ -2,6 +2,8 @@
 <%# Rôle : nom, sigle, DRENA, type, cycle, statut ; « Ajouter une classe », « Modifier » en modale, « Désactiver » confirmé dans la page %>
 <%# ADR  : 0030, 0036 · UDR : 0006, 0036 %>
 <% active = school.status != "inactive" %>
+<%# Seul un établissement actif reçoit une classe : ni désactivé, ni en brouillon (décision du porteur, 2026-09-27) %>
+<% accepts_classrooms = school.status == "active" %>
 <div id="school_header" class="mb-8">
   <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
     <%= link_to schools_path, class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
@@ -33,7 +35,7 @@
         </div>
       </div>
       <div class="flex flex-wrap gap-3 lg:shrink-0 lg:flex-nowrap">
-        <% if active %>
+        <% if accepts_classrooms %>
           <%= ui_button t(".add_classroom"), href: new_school_classroom_path(school.public_id), icon: "plus",
                         data: { turbo_frame: "modal" } %>
         <% end %>

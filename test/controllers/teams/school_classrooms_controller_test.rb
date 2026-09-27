@@ -150,6 +150,17 @@ class Teams::SchoolClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Classroom.count
   end
 
+  test "a draft school takes no classroom until it is activated: 422 with the reason in the modal" do
+    draft = create_school(status: "draft")
+    sign_in_as @member
+
+    post create_path(draft), params: classroom_params
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal [role=alert]", text: error(:base, :school_draft)
+    assert_equal 0, Orm::Classroom.count
+  end
+
   test "without Turbo, the new form is a modal open on the shell, and a created classroom leads to its page" do
     sign_in_as @member
 
