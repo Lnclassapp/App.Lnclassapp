@@ -773,8 +773,9 @@ Scénario: [AS-11] Lacune de connaissance
   Étant donné un élève qui termine une session avec 40 %
   Alors une lacune « à revoir » est ouverte sur la fiche essentielle de l'exercice
   Et elle apparaît sur son accueil dans « Fiches essentielles à revoir »
-  Quand il obtient ensuite au moins 70 % sur un exercice de cette fiche
+  Quand il obtient ensuite au moins 75 % sur un exercice de cette fiche
   Alors la lacune est résolue
+  Et un score entre 50 et 74 % la laisse « à revoir », sans compter d'échec de plus
 
 Scénario: [AS-12] Échec
   Étant donné un score de 40 %
