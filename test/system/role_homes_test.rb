@@ -107,14 +107,24 @@ class RoleHomesTest < ApplicationSystemTestCase
 
   # The account menu of the header: « Mon profil » is not drawn in V1, « Se déconnecter » ends the session.
   def assert_signs_out
-    find("button[aria-controls='account-menu']").click
-    within("#account-menu") { assert_selector "[role=menuitem][aria-disabled='true']", text: tn(:profile) }
-    # Clicked outside `within`: the sign-out replaces the document (new session, ADR-0049), and a scope kept on the old
-    # menu would go stale under a loaded run.
+    open_account_menu
+    assert_selector "#account-menu [role=menuitem][aria-disabled='true']", text: tn(:profile)
+    # Found from the page, never from a kept scope: the sign-out replaces the document (new session, ADR-0049), and a
+    # scope kept on the old menu would go stale under a loaded run.
     find("#account-menu [role=menuitem]", text: tn(:sign_out)).click
 
     assert_current_path root_path
     visit student_home_path
     assert_current_path new_session_path
+  end
+
+  # Under a loaded run, the page may still be swapped (Turbo visit, then the reload of ADR-0049) after the first click:
+  # the menu opened on the old document vanishes with it. The toggle is clicked again, on the document now shown.
+  def open_account_menu
+    3.times do
+      find("button[aria-controls='account-menu']").click
+      return if page.has_selector?("#account-menu", wait: 3)
+    end
+    assert_selector "#account-menu"
   end
 end
