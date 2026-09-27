@@ -69,6 +69,18 @@ module Repositories
         assert_equal 1, @repository.destroy_all_for(user_id: student.id)
         assert_equal 1, Orm::Session.count
       end
+
+      test "destroy_all_except keeps the given session of the account, and only it" do
+        student = create_student
+        kept = create_for(student)
+        create_for(student, digest: "f" * 64)
+        create_for(student, digest: "e" * 64)
+        other = create_for(create_student, digest: "g" * 64)
+
+        assert_equal 2, @repository.destroy_all_except(user_id: student.id, keep_id: kept)
+        assert_equal [ kept, other ].sort, Orm::Session.pluck(:id).sort
+        assert_equal 0, @repository.destroy_all_except(user_id: student.id, keep_id: kept)
+      end
     end
   end
 end

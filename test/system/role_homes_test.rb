@@ -100,10 +100,10 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path active.fetch(:home, home)
   end
 
-  # The account menu of the header: « Mon profil » is not drawn in V1, « Se déconnecter » ends the session.
+  # The account menu of the header: « Mon profil » links to the profile (route drawn, ADR-0055), « Se déconnecter » ends the session.
   def assert_signs_out
     find("button[aria-controls='account-menu']").click
-    within("#account-menu") { assert_selector "[role=menuitem][aria-disabled='true']", text: tn(:profile) }
+    within("#account-menu") { assert_selector "a[role=menuitem][href='#{profile_path}']", text: tn(:profile) }
     # Clicked outside `within`: the sign-out replaces the document (new session, ADR-0049), and a scope kept on the old
     # menu would go stale under a loaded run.
     find("#account-menu [role=menuitem]", text: tn(:sign_out)).click

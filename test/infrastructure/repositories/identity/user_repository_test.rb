@@ -54,6 +54,32 @@ module Repositories
         assert_equal Entities::Identity::Actor.new(user_id: member.id, role: :team, team_role: "content"),
                      @repository.actor_for(user_id: member.id)
       end
+
+      test "update_name replaces the last and first names" do
+        record = create_student(last_name: "Kouassi", first_name: "Aya")
+
+        assert @repository.update_name(user_id: record.id, first_name: "Aya Marie", last_name: "Koné")
+        assert_equal [ "Koné", "Aya Marie" ], @repository.find(id: record.id).then { [ it.last_name, it.first_name ] }
+      end
+
+      test "update_contact replaces the number the account signs in with" do
+        record = create_student(contact: "0102030405", pin: "1357")
+
+        assert @repository.update_contact(user_id: record.id, contact: "0711223344").success?
+        assert_equal record.id, @repository.authenticate(contact: "0711223344", pin: "1357").id
+        assert_nil @repository.find_by_contact(contact: "0102030405")
+      end
+
+      # The unique index refuses inside a savepoint: the transaction of the caller stays usable (reload below).
+      test "update_contact is a conflict on a number held by another account, and writes nothing" do
+        record = create_student(contact: "0102030405")
+        create_student(contact: "0711223344")
+
+        result = @repository.update_contact(user_id: record.id, contact: "0711223344")
+
+        assert_equal [ :conflict, { contact: [ :taken ] } ], [ result.code, result.errors ]
+        assert_equal "0102030405", record.reload.contact
+      end
     end
   end
 end
