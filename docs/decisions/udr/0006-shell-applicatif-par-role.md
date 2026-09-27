@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-25) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/refonte-application`](../../chantiers/refonte-application/) (Lot 0c, décision F-31) |
 | **ADR lié** | [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget de poids) · UDR-0005 (tokens et composants) |
@@ -82,3 +82,12 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - Ajouter une destination revient à modifier `DESTINATIONS` et la locale `shared.navigation`, **jamais** un partial. Au-delà de 5 destinations pour un rôle, il faut une nouvelle UDR : la barre basse n'en tient pas plus.
 - L'accueil d'un rôle n'est « livré » que lorsque ses sections affichent des données réelles et que son test système passe.
 - Interdit désormais : un partial de navigation par rôle, un tiroir de navigation mobile, un toast dont le texte est produit côté client, `data-turbo-permanent` sur `#toasts`, un CRUD qui recharge la page ou redirige depuis la modale.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **`schools_path` devient actif en V1.** Les établissements entrent dans le périmètre de la V1 (ADR-0030, ADR-0034) : le lot S2 de la boucle pédagogique livre leur liste. L'entrée « Établissements » de la navigation `team` est donc active.
+- En V1, seules `team_dashboard_path` et `profile_path` restent inactives.
+- **Entrée « Imports » (`teams_imports_path`, icône `arrow-up-tray`) ajoutée à la navigation `team`**, entre « Établissements » et « Pilotage », par l'étape e4 du Lot 0e (ADR-0039). La navigation `team` compte maintenant **5 destinations**, le maximum de la règle du §4 : toute destination de plus pour ce rôle exige une nouvelle UDR.
+- **Position de la région `#toasts`** : sur ordinateur (`sm` et plus), elle est **en bas à droite**. En haut, un toast recouvrait les actions de l'en-tête de page, comme « Ajouter » (constaté au lot S1). Sur téléphone, elle reste **en haut**, parce que la barre basse porte la navigation. Preuve : `test/system/design_system_test.rb`, « a toast never covers the page header on a desktop ».

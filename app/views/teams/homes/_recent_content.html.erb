@@ -1,0 +1,88 @@
+<%# 🌐 UI · teams/homes/_recent_content — contenu du frame différé de l'activité récente (TR-09) %>
+<%# Rôle : les 5 derniers cours, exercices et imports modifiés, tous statuts, chacun vers sa page %>
+<%# ADR  : 0035, 0039 · UDR : 0007, 0018 %>
+<%# locals: (courses:, exercises:, imports:) -%>
+<% item_class = "group flex min-h-tap items-center gap-3 rounded-ln px-3 py-2 transition hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" %>
+<%= turbo_frame_tag Teams::HomesController::RECENT_CONTENT_FRAME, target: "_top" do %>
+  <div class="grid gap-6 lg:grid-cols-3">
+    <section id="team_home_recent_courses" aria-labelledby="team_home_recent_courses_title">
+      <h3 id="team_home_recent_courses_title" class="mb-2 font-display text-base font-extrabold"><%= t(".courses_title") %></h3>
+      <% if courses.empty? %>
+        <p class="text-sm text-mute"><%= t(".courses_empty") %></p>
+      <% else %>
+        <ul class="space-y-1">
+          <% courses.each do |course| %>
+            <li id="recent_course_<%= course.slug %>">
+              <%= link_to course_path(course.slug), class: item_class do %>
+                <span class="min-w-0 flex-1 space-y-1">
+                  <span class="block truncate text-sm font-medium text-ink"><%= course.name %></span>
+                  <span class="flex flex-wrap items-center gap-2">
+                    <%= ui_subject_badge course.material_name, category: course.material_category, size: :sm %>
+                    <span class="text-xs text-mute"><%= course.level_name %></span>
+                  </span>
+                  <span class="flex flex-wrap items-center gap-2 text-xs text-mute">
+                    <%= content_status_badge(course.status) %>
+                    <span><%= t(".updated", time: time_ago_in_words(course.updated_at)) %></span>
+                  </span>
+                </span>
+                <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+
+    <section id="team_home_recent_exercises" aria-labelledby="team_home_recent_exercises_title">
+      <h3 id="team_home_recent_exercises_title" class="mb-2 font-display text-base font-extrabold"><%= t(".exercises_title") %></h3>
+      <% if exercises.empty? %>
+        <p class="text-sm text-mute"><%= t(".exercises_empty") %></p>
+      <% else %>
+        <ul class="space-y-1">
+          <% exercises.each do |exercise| %>
+            <li id="recent_exercise_<%= exercise.public_id %>">
+              <%= link_to exercise_path(exercise.public_id), class: item_class do %>
+                <span class="min-w-0 flex-1 space-y-1">
+                  <span class="block truncate text-sm font-medium text-ink"><%= exercise.title %></span>
+                  <span class="block truncate text-xs text-mute"><%= exercise.essential_name %></span>
+                  <span class="flex flex-wrap items-center gap-2 text-xs text-mute">
+                    <%= content_status_badge(exercise.status) %>
+                    <span><%= t(".updated", time: time_ago_in_words(exercise.updated_at)) %></span>
+                  </span>
+                </span>
+                <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+
+    <section id="team_home_recent_imports" aria-labelledby="team_home_recent_imports_title">
+      <h3 id="team_home_recent_imports_title" class="mb-2 font-display text-base font-extrabold"><%= t(".imports_title") %></h3>
+      <% if imports.empty? %>
+        <p class="text-sm text-mute"><%= t(".imports_empty") %></p>
+      <% else %>
+        <ul class="space-y-1">
+          <% imports.each do |import| %>
+            <li id="recent_import_<%= import.public_id %>">
+              <%= link_to teams_import_path(import.public_id), class: item_class do %>
+                <span class="min-w-0 flex-1 space-y-1">
+                  <span class="block truncate text-sm font-medium text-ink"><%= t("import_kinds.#{import.kind}") %></span>
+                  <% if import.filename %>
+                    <span class="block truncate text-xs text-mute"><%= import.filename %></span>
+                  <% end %>
+                  <span class="flex flex-wrap items-center gap-2 text-xs text-mute">
+                    <%= ui_badge t("teams.imports.statuses.#{import.status}"), tone: import_status_tone(import.status), dot: true %>
+                    <span><%= t(".updated", time: time_ago_in_words(import.updated_at)) %></span>
+                  </span>
+                </span>
+                <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+  </div>
+<% end %>

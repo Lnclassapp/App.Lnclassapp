@@ -1,0 +1,16 @@
+<%# 🌐 UI · teams/essentials/edit — modification d'une fiche essentielle, servie dans le frame « modal » %>
+<%# Rôle : le contenu enregistré est rechargé dans l'éditeur ; le statut est affiché, il ne se change pas ici %>
+<%# ADR  : 0035, 0047, 0051 · UDR : 0006, 0007, 0016 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= stylesheet_link_tag "trix" %>
+  <%= ui_modal title: t(".title"), id: "essential-modal", size: :lg, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "essential-form" %>
+    <% end %>
+    <p id="essential-status" class="mb-5 flex flex-wrap items-center gap-2 text-sm text-mute">
+      <%= t(".status") %> <%= content_status_badge(@essential.status) %>
+    </p>
+    <%= render "form", input: @form, url: teams_essential_path(@essential.slug), method: :patch %>
+  <% end %>
+<% end %>

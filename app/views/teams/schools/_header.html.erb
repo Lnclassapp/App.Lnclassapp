@@ -1,0 +1,59 @@
+<%# 🌐 UI · teams/schools/_header — en-tête de la fiche d'un établissement, remplacé par les streams update et deactivate %>
+<%# Rôle : nom, sigle, DRENA, type, cycle, statut ; « Ajouter une classe », « Modifier » en modale, « Désactiver » confirmé dans la page %>
+<%# ADR  : 0030, 0036 · UDR : 0006, 0036 %>
+<% active = school.status != "inactive" %>
+<%# Seul un établissement actif reçoit une classe : ni désactivé, ni en brouillon (décision du porteur, 2026-09-27) %>
+<% accepts_classrooms = school.status == "active" %>
+<div id="school_header" class="mb-8">
+  <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
+    <%= link_to schools_path, class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
+      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back") %>
+    <% end %>
+  </nav>
+  <%= ui_card padding: :md do %>
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex min-w-0 items-start gap-4">
+        <span class="grid size-14 shrink-0 place-items-center rounded-card bg-ink font-display text-lg font-extrabold text-white" aria-hidden="true">
+          <%= (school.sigle || school.name).first(3).upcase %>
+        </span>
+        <div class="min-w-0">
+          <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= school.name %></h1>
+          <dl class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-mute">
+            <% if school.sigle %>
+              <div class="flex gap-1"><dt><%= t(".sigle") %></dt><dd class="font-medium text-ink"><%= school.sigle %></dd></div>
+            <% end %>
+            <div class="flex items-center gap-1">
+              <dt><%= ui_icon "map-pin", size: :sm, label: t(".drena") %></dt><dd><%= school.drena_name %></dd>
+            </div>
+            <div class="flex gap-1"><dt class="sr-only"><%= t(".type") %></dt><dd><%= t("school_types.#{school.school_type}") %></dd></div>
+            <div class="flex gap-1"><dt class="sr-only"><%= t(".cycle") %></dt><dd><%= t("teams.schools.cycles.#{school.cycle}") %></dd></div>
+            <div class="flex gap-1">
+              <dt class="sr-only"><%= t(".status") %></dt>
+              <dd><%= ui_badge t("school_statuses.#{school.status}"), tone: school_status_tone(school.status), size: :sm, dot: true %></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3 lg:shrink-0 lg:flex-nowrap">
+        <% if accepts_classrooms %>
+          <%= ui_button t(".add_classroom"), href: new_school_classroom_path(school.public_id), icon: "plus",
+                        data: { turbo_frame: "modal" } %>
+        <% end %>
+        <%= ui_button t(".edit"), href: edit_school_path(school.public_id), variant: :secondary, icon: "pencil-square",
+                      data: { turbo_frame: "modal" } %>
+        <% if active %>
+          <%= ui_modal title: t(".deactivate_title", name: school.name), id: "deactivate-school-header", size: :sm,
+                       trigger: t(".deactivate"), trigger_variant: :ghost, trigger_icon: "no-symbol" do |modal| %>
+            <% modal.footer do %>
+              <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+              <%= ui_button t(".confirm_deactivate"), type: :submit, form: "deactivate-school-header-form" %>
+            <% end %>
+            <%= form_with url: deactivate_school_path(school.public_id), method: :patch, id: "deactivate-school-header-form" do %>
+              <p class="text-sm text-mute"><%= t(".deactivate_warning") %></p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

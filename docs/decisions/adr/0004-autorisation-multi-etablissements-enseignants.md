@@ -2,13 +2,17 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *en production* |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-06-25 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md) *(§2, §3.1)* |
+| **Complété par** | [ADR-0028](./0028-policies-de-domaine-par-use-case.md) : §3.3 (la policy renvoie un `Result`, pour tous les use cases) |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — une école par enseignant en V1.**
+> Le §2 et le §3.1 sont remplacés par l'[ADR-0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md) le 2026-09-25 : une seule école `primary` par enseignant en V1, classes créées par l'équipe puis par la direction. Le §3.3 est complété par l'[ADR-0028](./0028-policies-de-domaine-par-use-case.md). Le principe d'une policy pure reste en vigueur.
 
 ## 1. Contexte et problématique
 Dans l'enseignement secondaire ivoirien et africain, la majorité des professeurs de lycée (notamment dans les matières scientifiques comme les Maths, la Physique-Chimie et la SVT) dispensent des cours dans **plusieurs établissements scolaires différents** (ex: un lycée public en matinée et un ou deux collèges/lycées privés l'après-midi ou le samedi).

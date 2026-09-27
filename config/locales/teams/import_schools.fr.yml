@@ -1,0 +1,27 @@
+# Import des établissements (plan boucle-pedagogique, Lot S3) — ADR-0030, ADR-0039, UDR-0037
+fr:
+  teams:
+    imports:
+      kinds:
+        schools:
+          title: "Format du fichier"
+          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.schools</code>, version 1. La DRENA se cite par son slug : dans l'enveloppe pour tout le fichier, ou sur une école pour elle seule."
+          keys:
+            name: "Nom de l'établissement. Obligatoire, 150 caractères au plus."
+            sigle: "Sigle. Facultatif, 20 caractères au plus."
+            status: "draft, active ou inactive. active par défaut."
+            type: "public, privée ou mixte. Obligatoire."
+            cycle: "first ou both. Facultatif : un nom qui contient « collège » donne first, sinon both."
+            drena: "Slug de la DRENA de cette école. Facultatif : remplace celle de l'enveloppe."
+          example: "Exemple minimal"
+          classrooms: "Les classes sont générées selon le type et le cycle de chaque établissement : lycée public 77, lycée privé ou mixte 38, collège public 28, avec le référentiel complet. Aucun établissement existant n'est modifié : un doublon est ignoré et compté."
+          drenas:
+            one: "Slug de la DRENA (%{count})"
+            other: "Slugs des DRENA (%{count})"
+          no_drenas: "Aucune DRENA pour l'instant : créez-les avant d'importer leurs établissements."
+          no_drenas_link: "Ouvrir les DRENA"
+      status:
+        details:
+          classrooms_created: "Classes générées"
+          skipped_levels: "Niveaux sautés (absents du référentiel ou sans série)"
+          skipped_series: "Séries sautées (absentes du référentiel ou non liées au niveau)"

@@ -189,3 +189,14 @@ end
 - Test système (Chrome headless, donc au-dessus du plancher) sur les parcours de la vague : la cible supportée reste testée de bout en bout.
 
 Aucune page ne renvoie plus `406` pour cause de navigateur : si `public/406-unsupported-browser.html` existe encore dans le nouveau dépôt, il est supprimé.
+
+## Amendement du 2026-09-25
+
+*Chantier `docs/chantiers/boucle-pedagogique`, retour du porteur du 2026-09-25. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **La vague qui réintroduit l'édition riche, c'est la V1.** La ligne « Chargement à la demande de Trix — à la vague qui réintroduit l'édition riche » du §4 se lit donc **V1**, lots B2 (gestion des cours) et B4 (gestion des fiches essentielles). V0 avait retiré Action Text (paquets, framework et table) faute d'écran qui s'en serve ; la V1 les remet.
+- **Périmètre** : Action Text et Trix servent au contenu des **cours** et des **fiches essentielles**, comme dans l'ancienne application (`has_rich_text :content`). Les annonces de la V6 restent en texte simple (ADR-0045).
+- **Chargement** : `trix` et `@rails/actiontext` sont chargés **uniquement sur les pages d'édition**, par import dynamique, depuis le contrôleur Stimulus `rich_text_editor` (identifiant `rich-text-editor`). Ils restent **hors du point d'entrée commun de 60 Ko** : aucun `import` statique de ces paquets n'est permis, et un test d'architecture le vérifie. La feuille de style de Trix (`trix.css`) est un fichier à part, ajouté au `<head>` par le même contrôleur : le budget CSS commun de 30 Ko n'est pas touché.
+- **Sécurité** : Trix lit le nonce de `csp_meta_tag` et fonctionne sous la CSP stricte de l'ADR-0049, ce qu'un test système prouve. Le contenu est assaini **au rendu** par Action Text. Le HTML écrit par les imports JSON (`course_tree`, `essentials`, ADR-0039) est **assaini avant écriture**, avec la même liste blanche, et un test vérifie qu'un `<script>`, un attribut `on*` ou un lien `javascript:` n'arrive pas en base.
+- **Pièces jointes** : aucune dans l'éditeur en V1, **décision du porteur** : c'est un éditeur de texte uniquement. Le contrôleur `rich_text_editor` annule l'événement `trix-file-accept` et masque le bouton de fichier ; aucun `direct_upload` n'est branché, ce qui évite d'ouvrir `connect-src` vers le bucket (ADR-0047, ADR-0049).
+- Rien ne change pour le plancher des navigateurs, les plafonds du budget ou leur contrôle en CI.

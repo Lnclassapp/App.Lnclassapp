@@ -16,11 +16,11 @@
 ```
 V0  Amorçage du dépôt                 garde-fous avant tout code métier
  │
-V1  Boucle pédagogique                équipe publie → enseignant assigne → élève fait l'exercice
- │                                    (= plan.md, périmètre « 72 h »)
+V1  Boucle pédagogique                référentiels et imports en masse → équipe publie
+ │                                    → enseignant assigne → élève fait l'exercice
  ├──────────────┬───────────────────┐
-V2  Organisation scolaire    V4  Contenu à l'échelle
-    et espace direction          imports, catalogue complet, back-office équipe
+V2  Espace direction         V4  Contenu à l'échelle
+    et comptes                   catalogue complet, pilotage, sous-rôles
  │                                  │
 V3  Suivi pédagogique enseignant    │
     rapports, multi-établissements  │
@@ -52,7 +52,7 @@ L'ordre V2 → V6 suit la priorité déjà décidée au §5 de [`plan.md`](plan.
 | 2 | `bin/setup` pose `core.hooksPath .githooks`, idempotent | un second `bin/setup` ne change rien |
 | 3 | Pre-commit : pureté du domaine, HITL, `:nocov:`, rubocop | quatre commits fautifs, quatre refus |
 | 4 | CI : purity → lint + brakeman + bundler-audit → tests → tests système Chrome headless ; SimpleCov 100 % lignes et branches, `track_files "{app,lib}/**/*.rb"` | une PR à 99 % refusée |
-| 5 | Branches `Develop`, `Staging`, `main` protégées ; Railway déploie `main` | un push direct refusé |
+| 5 | Branches `Develop`, `Staging`, `main` protégées ; Railway déploie `main` | un push direct refusé. **Écart assumé le 2026-09-25** : protection GitHub impossible (dépôt privé en offre gratuite, API en 403) ; hook pre-commit local, discipline des PR, et seul le porteur fait passer `Develop` vers `main` ([journal d'amorçage §5](../amorcage-depot/journal.md)) |
 | 6 | Production : `force_ssl`, `assume_ssl`, route `/up`, `:contact` filtré des logs, CSP active, `config.hosts`, stockage de fichiers persistant (F-25), `raise_on_missing_translations` en dev/test | test d'intégration par point |
 | 7 | Un test système « page d'accueil » vert en CI | la chaîne complète est prouvée à vide |
 
@@ -66,45 +66,45 @@ Pièges connus, à ne pas rejouer : les trois défauts de CI trouvés sur la PR 
 
 | ID | Question | Options | Recommandation | Bloque | Tranché par | Statut |
 |---|---|---|---|---|---|---|
-| **F-01** | Contrat de retour des use cases **et** des queries | `OpenStruct` · `Struct` local · objet `Result` partagé · exceptions | Un `Result` immuable partagé (`Data.define(:value, :errors)`, `success?`, code d'erreur symbolique dont `:forbidden`, `:not_found`, `:invalid`), une seule méthode publique `call`. Les queries retournent des objets de lecture typés (`Data`), jamais une relation | V1 | ADR-0026 | ouvert |
-| **F-02** | Découpage des contextes bornés et arborescence | ADR-0023 (école et classe dans `identity`) · conventions (`school`, `classroom`) · architecture (DRENA dans `catalog`) | `identity` = comptes, profils, sessions ; `school` = DRENA, écoles, rôles et personnel ; `classroom` = classes, adhésions, enseignement, assignations ; `catalog` = taxonomie et contenu ; `assessment` = exercices, sessions, badges, lacunes ; `communication` = annonces. Pas de `app/presentation/` ni `adapters/` avant besoin (ADR-0014 §2.2 à remplacer) | V1 | ADR-0027, remplace ADR-0023 et ADR-0014 §2.2 | ouvert |
-| **F-03** | Nature des entités et DTO | Ruby pur (`Data`) · `ActiveModel::Model` toléré | Garder la tolérance `ActiveModel::Model/Validations/Attributes` (ADR-0014) et l'**étendre explicitement aux entités** ; jamais `ActiveRecord` ; le garde-fou de pureté l'encode | V1 | ADR-0026 (même ADR que F-01) | ouvert |
-| **F-04** | Forme des policies | `before_action` · Pundit · policies de domaine | Une policy de domaine par use case, Ruby pur, injectée, appelée **en premier** par le use case, qui renvoie `Result` `:forbidden` ; le contrôleur traduit en 403 ou redirection. Un test par policy, avec cas de refus | V1 | ADR-0028, étend ADR-0004 §3.3 et ADR-0015 | ouvert |
-| **F-05** | Identifiants exposés | `id` séquentiel · slug · `public_id` préfixé par rôle | `public_id` opaque `SecureRandom.base58` dans toutes les URL de comptes, classes, sessions ; **sans préfixe de rôle** (il divulgue le rôle) ; slugs réservés au contenu public du catalogue ; clés primaires `bigint` partout, y compris lacunes | V1 | ADR-0029, complète ADR-0017 | ouvert |
-| **F-06** | Établissements d'un enseignant en V1 | une école (décidé) — modélisée par colonne ou par table n-n | **Décision déjà prise : une école visible par enseignant en V1.** Modélisation recommandée : garder la table `teacher_schools` avec un drapeau « principale » — la V3 ajoutera le sélecteur sans migration | V1 (Lot D) | ADR-0030, remplace ADR-0004 §3.1 | décidé, ADR manquant |
-| **F-07** | Second facteur des comptes `team` | TOTP · code SMS · WebAuthn | TOTP (application d'authentification), codes de secours à usage unique ; aucun coût par message | V1 (0b) | ADR-0031, complète ADR-0025 comp. 5 | ouvert |
-| **F-08** | Récupération du PIN | SMS (ADR-0002) · réinitialisation assistée · question secrète | V1 : **réinitialisation assistée** — l'enseignant de la classe ou l'équipe génère un code à usage unique (15 min, journalisé). SMS en vague ultérieure quand un fournisseur est choisi | V1 (0b) | ADR-0032, complète ADR-0025 comp. 6, amende ADR-0002 §4 | ouvert |
-| **F-09** | Design system fondateur | palette `@theme` · palette `slate/blue` de `.interface-design/system.md` · mode sombre ou non · iconographie | Palette `@theme` seule (tokens courts, `rounded-ln` et non `rounded-[var(--radius-ln)]`) ; échelles d'espacement, d'ombre, de rayon ; peu de composants, tous substantiels ; **pas de mode sombre en V1** (on retire les bascules) ; heroicons seul ; test qui refuse `[…]` et `#hex` dans les vues ; KaTeX servi par le bundle | V1 (0c) | UDR-0005, remplace les sections « Tokens » des UDR-0001, 0002, 0003 ; UDR-0004 déclarée non applicable au projet cible | ouvert |
-| **F-10** | Barème et vocabulaire des badges | ADR-0008 (or ≥ 80 %, bronze/argent/or, remplacement si `>=`) · code (or = 100 %, `>`) · UDR-0003 (Argent/Or/Diamant) | Trancher **un** barème, **un** jeu de noms, la règle de remplacement, et si l'historique des badges est conservé ; « Diamant » supprimé ou défini | V1 (Lot C) | ADR-0033, remplace ADR-0008 §3 | ouvert |
-| **F-11** | Seuils pédagogiques et sens du score | réussite 50 %, maîtrise 70 %, note sur 20 implicites ; `percentage` = avancement **puis** score | Constantes métier nommées dans le domaine ; deux champs distincts, avancement et score | V1 (Lot C), V3 | ADR-0033 (même ADR que F-10) | ouvert |
-| **F-12** | Reprise des données | base vide · référentiel seedé · migration de l'ancienne base | Confirmer qu'**aucune donnée utilisateur réelle** n'existe (l'ancienne app n'est pas en ligne) ; seeder le **référentiel ivoirien** (niveaux `6ème…Tle`, séries `A1 A2 C D`, `level_series`, matières) dès V1 ; DRENA et écoles importées en V2 ; contenu importé en V4 | V1 (seed), V2, V4 | ADR-0034 | ouvert |
-| **F-13** | Cycle de vie du contenu | statut libre (« publié »/« published »…) · énumération | Énumération `draft` / `published` / `archived` sur cours, fiches **et** exercices ; un brouillon n'est lisible que par l'équipe (policy, pas filtre d'index) ; `published_at` renseigné à la publication ; auteur tracé | V1 (Lot B) | ADR-0035 | ouvert |
-| **F-14** | Suppression et archivage | cascades de l'ancien · restriction · archivage | Contenu consommé par des élèves : archivage, jamais suppression ; taxonomie : suppression refusée tant qu'elle est référencée ; comptes : anonymisation ; classes : archivage de fin d'année (voir F-19) | V1 (Lot B), V2 | ADR-0036, étend ADR-0005 et ADR-0016 | ouvert |
-| **F-15** | Saisie et normalisation des noms | nom complet découpé au dernier mot · deux champs | Deux champs **Nom** et **Prénom(s)** ; plus de `titleize` automatique sur les noms propres ni les titres de contenu (« Svt », « D'almeida ») ; normalisation limitée aux espaces | V1 (Lot A) | ADR-0037 | ouvert |
-| **F-16** | Comptes internes de l'équipe | un rôle `team` · sous-rôles (admin, contenu, terrain, gestionnaire DRENA…) | V1 : un seul rôle `team`, créé par seed puis invitation. Sous-rôles et matrice fine avant V4 (back-office) | V1 (minimal), V4 | ADR-0038 | ouvert |
-| **F-17** | Format d'import du contenu | format de l'ancien import de cours (arbre complet) · format par ressource | Reprendre le format arbre de l'ancien (seul format réellement utilisé), versionné, validé par un schéma ; rapport d'import persisté et consultable ; **aucune création implicite de taxonomie** | V4 | ADR-0039, remplace ADR-0012 §3.3 et ADR-0020 §2.1 pour l'import | ouvert |
-| **F-18** | Multi-classes de l'élève | une classe visible (état de l'ancien) · sélecteur de classe (promesse de l'ADR-0003) | V1 : une classe principale, garantie unique par index partiel ; sélecteur en V3 si la demande est confirmée | V3 | ADR-0040, amende ADR-0003 | ouvert |
-| **F-19** | Vie d'une classe | éternelle · année scolaire · archivage | Année scolaire sur la classe, archivage en fin d'année ; code d'adhésion révocable et régénérable, plafond d'effectif | V3 | ADR-0041 | ouvert |
+| **F-01** | Contrat de retour des use cases **et** des queries | `OpenStruct` · `Struct` local · objet `Result` partagé · exceptions | Un `Result` immuable partagé (`Data.define(:value, :errors)`, `success?`, code d'erreur symbolique dont `:forbidden`, `:not_found`, `:invalid`), une seule méthode publique `call`. Les queries retournent des objets de lecture typés (`Data`), jamais une relation | V1 | [ADR-0026](../../decisions/adr/0026-contrat-result-entites-et-dto.md) | **Accepté** 2026-09-25 |
+| **F-02** | Découpage des contextes bornés et arborescence | ADR-0023 (école et classe dans `identity`) · conventions (`school`, `classroom`) · architecture (DRENA dans `catalog`) | `identity` = comptes, profils, sessions ; `school` = DRENA, écoles, rôles et personnel ; `classroom` = classes, adhésions, enseignement, assignations ; `catalog` = taxonomie et contenu ; `assessment` = exercices, sessions, badges, lacunes ; `communication` = annonces. Pas de `app/presentation/` ni `adapters/` avant besoin (ADR-0014 §2.2 à remplacer) | V1 | [ADR-0027](../../decisions/adr/0027-contextes-bornes-et-arborescence.md), remplace ADR-0023 et ADR-0014 §2.2 | **Accepté** 2026-09-25 |
+| **F-03** | Nature des entités et DTO | Ruby pur (`Data`) · `ActiveModel::Model` toléré | Garder la tolérance `ActiveModel::Model/Validations/Attributes` (ADR-0014) et l'**étendre explicitement aux entités** ; jamais `ActiveRecord` ; le garde-fou de pureté l'encode | V1 | [ADR-0026](../../decisions/adr/0026-contrat-result-entites-et-dto.md) (même ADR que F-01) | **Accepté** 2026-09-25 |
+| **F-04** | Forme des policies | `before_action` · Pundit · policies de domaine | Une policy de domaine par use case, Ruby pur, injectée, appelée **en premier** par le use case, qui renvoie `Result` `:forbidden` ; le contrôleur traduit en 403 ou redirection. Un test par policy, avec cas de refus | V1 | [ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md), étend ADR-0004 §3.3 et ADR-0015 | **Accepté** 2026-09-25 |
+| **F-05** | Identifiants exposés | `id` séquentiel · slug · `public_id` préfixé par rôle | `public_id` opaque `SecureRandom.base58` dans toutes les URL de comptes, classes, sessions ; **sans préfixe de rôle** (il divulgue le rôle) ; slugs réservés au contenu public du catalogue ; clés primaires `bigint` partout, y compris lacunes | V1 | [ADR-0029](../../decisions/adr/0029-identifiants-exposes-public-id-et-slugs.md), complète ADR-0017 | **Accepté** 2026-09-25 |
+| **F-06** | Établissements d'un enseignant en V1 | une école (décidé) — modélisée par colonne ou par table n-n | **Décision déjà prise : une école visible par enseignant en V1.** Modélisation recommandée : garder la table `teacher_schools` avec un drapeau « principale » — la V3 ajoutera le sélecteur sans migration | V1 (Lot D) | [ADR-0030](../../decisions/adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), remplace ADR-0004 §3.1 | **Accepté** 2026-09-25 |
+| **F-07** | Second facteur des comptes `team` | TOTP · code SMS · WebAuthn | TOTP (application d'authentification), codes de secours à usage unique ; aucun coût par message | V1 (0b) | [ADR-0031](../../decisions/adr/0031-second-facteur-totp-pour-l-equipe.md), complète ADR-0025 comp. 5 | **Accepté** 2026-09-25 |
+| **F-08** | Récupération du PIN | SMS (ADR-0002) · réinitialisation assistée · question secrète | V1 : **réinitialisation assistée** — l'enseignant de la classe ou l'équipe génère un code à usage unique (15 min, journalisé). SMS en vague ultérieure quand un fournisseur est choisi | V1 (0b) | [ADR-0032](../../decisions/adr/0032-recuperation-assistee-du-pin.md), complète ADR-0025 comp. 6, amende ADR-0002 §4 | **Accepté** 2026-09-25 |
+| **F-09** | Design system fondateur | palette `@theme` · palette `slate/blue` de `.interface-design/system.md` · mode sombre ou non · iconographie | Palette `@theme` seule (tokens courts, `rounded-ln` et non `rounded-[var(--radius-ln)]`) ; échelles d'espacement, d'ombre, de rayon ; peu de composants, tous substantiels ; **pas de mode sombre en V1** (on retire les bascules) ; heroicons seul ; test qui refuse `[…]` et `#hex` dans les vues ; KaTeX servi par le bundle | V1 (0c) | UDR-0005, remplace les sections « Tokens » des UDR-0001, 0002, 0003 ; UDR-0004 déclarée non applicable au projet cible | **Accepté** 2026-09-25 ([UDR-0005](../../decisions/udr/0005-design-system-fondateur.md)) : thème sombre écarté en V1, approuvé par le porteur |
+| **F-10** | Barème et vocabulaire des badges | ADR-0008 (or ≥ 80 %, bronze/argent/or, remplacement si `>=`) · code (or = 100 %, `>`) · UDR-0003 (Argent/Or/Diamant) | Trancher **un** barème, **un** jeu de noms, la règle de remplacement, et si l'historique des badges est conservé ; « Diamant » supprimé ou défini | V1 (Lot C) | [ADR-0033](../../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), remplace ADR-0008 §3 | **Accepté** 2026-09-25 |
+| **F-11** | Seuils pédagogiques et sens du score | réussite 50 %, maîtrise 70 %, note sur 20 implicites ; `percentage` = avancement **puis** score | Constantes métier nommées dans le domaine ; deux champs distincts, avancement et score | V1 (Lot C), V3 | [ADR-0033](../../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (même ADR que F-10) | **Accepté** 2026-09-25 |
+| **F-12** | Reprise des données | base vide · référentiel seedé · migration de l'ancienne base | Confirmer qu'**aucune donnée utilisateur réelle** n'existe (l'ancienne app n'est pas en ligne) ; référentiel (niveaux, séries, `level_series`, matières), DRENA et écoles **créés par l'équipe dès la V1**, écoles aussi par import ; aucun seed métier en production | V1 | [ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md) | **Accepté** 2026-09-25 |
+| **F-13** | Cycle de vie du contenu | statut libre (« publié »/« published »…) · énumération | Énumération `draft` / `published` / `archived` sur cours, fiches **et** exercices ; un brouillon n'est lisible que par l'équipe (policy, pas filtre d'index) ; `published_at` renseigné à la publication ; auteur tracé | V1 (Lot B) | [ADR-0035](../../decisions/adr/0035-cycle-de-vie-et-propriete-du-contenu.md) | **Accepté** 2026-09-25 |
+| **F-14** | Suppression et archivage | cascades de l'ancien · restriction · archivage | Contenu consommé par des élèves : archivage, jamais suppression ; taxonomie : suppression refusée tant qu'elle est référencée ; comptes : anonymisation ; classes : archivage de fin d'année (voir F-19) | V1 (Lot B), V2 | [ADR-0036](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md), étend ADR-0005 et ADR-0016 | **Accepté** 2026-09-25 |
+| **F-15** | Saisie et normalisation des noms | nom complet découpé au dernier mot · deux champs | Deux champs **Nom** et **Prénom(s)** ; plus de `titleize` automatique sur les noms propres ni les titres de contenu (« Svt », « D'almeida ») ; normalisation limitée aux espaces | V1 (Lot A) | [ADR-0037](../../decisions/adr/0037-nom-et-prenoms-en-deux-champs.md) | **Accepté** 2026-09-25 |
+| **F-16** | Comptes internes de l'équipe | un rôle `team` · sous-rôles (admin, contenu, terrain, gestionnaire DRENA…) | V1 : un seul rôle `team`, créé par seed puis invitation. Sous-rôles et matrice fine avant V4 (back-office) | V1 (minimal), V4 | [ADR-0038](../../decisions/adr/0038-comptes-de-l-equipe-et-sous-roles.md) | **Accepté** 2026-09-25 |
+| **F-17** | Format d'import du contenu | format de l'ancien import de cours (arbre complet) · format par ressource | Reprendre le format arbre de l'ancien (seul format réellement utilisé), versionné, validé par un schéma ; rapport d'import persisté et consultable ; **aucune création implicite de taxonomie** ; porteur : quatre formats (écoles, cours, fiches, exercices), en masse, import partiel atomique par élément racine | V1 | [ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md), remplace ADR-0012 §3.3 et ADR-0020 sauf §2.1 et §2.2 | **Accepté** 2026-09-25 |
+| **F-18** | Multi-classes de l'élève | une classe visible (état de l'ancien) · sélecteur de classe (promesse de l'ADR-0003) | V1 : une classe principale, garantie unique par index partiel ; sélecteur en V3 si la demande est confirmée | V3 | [ADR-0040](../../decisions/adr/0040-classe-principale-unique-de-l-eleve.md), amende ADR-0003 | **Accepté** 2026-09-25 |
+| **F-19** | Vie d'une classe | éternelle · année scolaire · archivage | Année scolaire sur la classe, archivage en fin d'année ; code d'adhésion révocable et régénérable, plafond d'effectif | V3 | [ADR-0041](../../decisions/adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) | **Accepté** 2026-09-25 |
 | **F-20** | Élèves de démonstration | reprendre l'ADR-0019 · refonte · abandon | Les comptes démo de l'ancien étaient de **vrais comptes** (`users` avec mot de passe `123456`) qui occupaient des numéros de téléphone et gonflaient les listes nominatives, sans jamais être filtrés ni produire d'activité (simulation et purge jamais appelées). Ils n'étaient pas connectables **par accident** — `/login` ne garde que les chiffres du contact ([`complements-school-classroom.md`](inventaire/complements-school-classroom.md) CL-24) —, et leur slug aléatoire sur 2 octets fait échouer la création d'écoles à mesure que le volume croît. Si la feature est gardée : données simulées **hors de `users`**, non authentifiables par construction, visibles comme telles, purgeables | — | ADR-0042, remplace ADR-0019, **seulement si** la feature revient au plan | **retiré du plan** (2026-09-22) |
-| **F-21** | Remédiation | reprendre l'ADR-0018 · la reconcevoir | La reconcevoir : déclenchée par **le** use case de clôture unique, caractère « remédiation » persisté sur la session, une seule lacune en attente garantie en base | V5 | ADR-0043, remplace ADR-0018 §3 | ouvert |
-| **F-22** | Rattachement de la direction | auto-déclaration (ancien) · invitation · validation par l'équipe · code d'établissement | Invitation par l'équipe ou par un membre déjà rattaché ; rôles d'établissement de référence (Proviseur, Censeur, Éducateur, Secrétaire) plutôt que texte libre | V2 | ADR-0044 | ouvert |
-| **F-23** | Communication | annonces seules · messagerie de classe | V6a : annonces refondues (`published_at` horodaté + job de publication, rejets en base, audience `school_admin`, pièces jointes validées). La messagerie de classe et le temps réel sont **retirés du plan** le 2026-09-22 | V6 | ADR-0045 | ouvert |
+| **F-21** | Remédiation | reprendre l'ADR-0018 · la reconcevoir | La reconcevoir : déclenchée par **le** use case de clôture unique, caractère « remédiation » persisté sur la session, une seule lacune en attente garantie en base | V5 | [ADR-0043](../../decisions/adr/0043-remediation-declenchee-par-la-cloture.md), remplace ADR-0018 §3 | **Accepté** 2026-09-25 |
+| **F-22** | Rattachement de la direction | auto-déclaration (ancien) · invitation · validation par l'équipe · code d'établissement | Invitation par l'équipe ou par un membre déjà rattaché ; rôles d'établissement de référence (Proviseur, Censeur, Éducateur, Secrétaire) plutôt que texte libre | V2 | [ADR-0044](../../decisions/adr/0044-rattachement-de-la-direction-par-invitation.md) | **Accepté** 2026-09-25 |
+| **F-23** | Communication | annonces seules · messagerie de classe | V6a : annonces refondues (`published_at` horodaté + job de publication, rejets en base, audience `school_admin`, pièces jointes validées). La messagerie de classe et le temps réel sont **retirés du plan** le 2026-09-22 | V6 | [ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md) | **Accepté** 2026-09-25 |
 | **F-24** | Examens et Prepa BAC | reporter · spécifier | Décision produit d'abord : modèle économique (paywall, `prepa_status`, acquisitions enseignant) ; puis modèle de données des sujets d'examen de zéro | — | décision produit + ADR-0046, **seulement si** la feature revient au plan | **retiré du plan** (2026-09-22) |
-| **F-25** | Stockage des fichiers en production | disque du conteneur (ancien, perdu à chaque déploiement) · stockage objet | Stockage objet compatible S3 dès qu'un téléversement existe | V0 si V1 téléverse, sinon V4 | ADR-0047 | ouvert |
-| **F-26** | Statuts d'une assignation | `added` / `active` / `validated` / `archived` (défaut SQL `active`, code `added`, `validated` jamais écrit) | Deux statuts, `active` et `archived` ; `assigned_by_id` référence un **utilisateur** | V1 (Lot D) | ADR-0048, remplace ADR-0016 §2 (statuts) et ADR-0007 §5 | ouvert |
+| **F-25** | Stockage des fichiers en production | disque du conteneur (ancien, perdu à chaque déploiement) · stockage objet | Stockage objet compatible S3 dès qu'un téléversement existe | V0 si V1 téléverse, sinon V4 | [ADR-0047](../../decisions/adr/0047-stockage-objet-s3-sur-railway.md) | **Accepté** 2026-09-25 |
+| **F-26** | Statuts d'une assignation | `added` / `active` / `validated` / `archived` (défaut SQL `active`, code `added`, `validated` jamais écrit) | Deux statuts, `active` et `archived` ; `assigned_by_id` référence un **utilisateur** | V1 (Lot D) | [ADR-0048](../../decisions/adr/0048-statuts-d-assignation-active-et-archived.md), remplace ADR-0016 §2 (statuts) et ADR-0007 §5 | **Accepté** 2026-09-25 |
 | **F-27** | Analytique, consentement, CSP | GTM + Clarity en dur (ancien) · rien · outil configurable | Identifiants en variables d'environnement, CSP stricte, consentement si l'outil pose des cookies | V0 | [ADR-0049](../../decisions/adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) — option C, mesure côté serveur | **Accepté** 2026-09-24 |
 
 **Décisions ajoutées après l'exploration du 2026-09-22** ([`inventaire/complements-*.md`](inventaire/)) :
 
 | ID | Question | Options | Recommandation | Bloque | Tranché par | Statut |
 |---|---|---|---|---|---|---|
-| **F-28** | Authentification et session | notes d'implémentation de l'ADR-0002 (contact 10 à 15 chiffres, quatre réseaux dont Wave, rotation de session annoncée) · code (10 chiffres exactement, préfixes `01/05/07`, aucune rotation) | Contact : exactement 10 chiffres, préfixes `01/05/07`, normalisation des indicatifs `225`/`00225` ; `reset_session` à la connexion et à la déconnexion ; authentification par **un** use case appelé par le contrôleur (l'ancien lisait l'ORM directement) ; aucun écran n'affiche un PIN en clair, connexion comprise | V1 (0b) | ADR-0050, remplace les §3.2, §3.3 et §5 de l'ADR-0002 | ouvert |
+| **F-28** | Authentification et session | notes d'implémentation de l'ADR-0002 (contact 10 à 15 chiffres, quatre réseaux dont Wave, rotation de session annoncée) · code (10 chiffres exactement, préfixes `01/05/07`, aucune rotation) | Contact : exactement 10 chiffres, préfixes `01/05/07`, normalisation des indicatifs `225`/`00225` ; `reset_session` à la connexion et à la déconnexion ; authentification par **un** use case appelé par le contrôleur (l'ancien lisait l'ORM directement) ; aucun écran n'affiche un PIN en clair, connexion comprise | V1 (0b) | [ADR-0050](../../decisions/adr/0050-authentification-et-session.md), remplace les §3.2, §3.3 et §5 de l'ADR-0002 | **Accepté** 2026-09-25 |
 | **F-29** | Navigateurs supportés et budget de performance | `allow_browser :modern` (ancien : 406 sur un Chrome 99 Android) · liste explicite · aucune restriction | Aligner sur le public de l'ADR-0009 : Android d'entrée de gamme en 3G. Liste de navigateurs **minimale** fixée par l'ADR, budget JS et CSS chiffré, vérifié en CI ; aucune bibliothèque chargée depuis un CDN tiers (KaTeX dans le bundle) | V0 | [ADR-0051](../../decisions/adr/0051-navigateurs-supportes-et-budget-de-poids.md) — option C, plancher non bloquant, complète ADR-0009 | **Accepté** 2026-09-24 |
 | **F-30** | Chaîne de livraison et exécution des jobs | ancien : configuration Railway non versionnée, `main` 58 commits en retard, worker conditionné par une variable jamais posée, `/up` absent, Thruster contre l'ADR-0010 | Configuration de déploiement **versionnée** ; branche déployée écrite ; worker Solid Queue lancé de la même façon en dev, en test et en production ; échecs de job visibles (tableau de supervision ou alerte) ; `/up` testé | V0 | [ADR-0052](../../decisions/adr/0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md) — worker dans Puma, Mission Control, Thruster gardé, recette Railway ; amende ADR-0010 §3.1 et §5 | **Accepté** 2026-09-24 |
-| **F-31** | Shell applicatif par rôle | ancien : 4 × 4 partials de navigation divergents, aucune UDR sur les accueils, les tableaux de bord, la navigation ni les toasts | Une UDR de fondation : en-tête, navigation bureau et mobile, page d'accueil de chaque rôle, toasts (message conservé en Turbo Stream), états vide, chargement, erreur ; l'écran d'accueil d'un rôle est livré **dans la vague** qui livre ce rôle | V1 (0c) | UDR-0006 | ouvert |
-| **F-32** | Nom de l'`Essential` à l'écran | glossaire « Fiche essentielle » · UI « Habilité » (sic) et « Habiletés » · ADR-0022 « Notions clés » · UDR-0001 « essentiels (habiletés) » | **Un** terme d'interface, écrit dans le glossaire et la locale `fr`, repris par toutes les UDR | V1 (Lot B) | glossaire + UDR-0007 | ouvert |
-| **F-33** | Validation collaborative | ADR-0011 (Accepté, rédigé au passé, jamais implémenté) · abandon · report | Requalifier l'ADR-0011 en `Proposé` : le bandeau « Conforme au programme » affiché à tous est **retiré** ; la feature n'entre en vague qu'après décision produit (qui est « certifié », quelle table) | V8 | ADR-0053, remplace ADR-0011 | ouvert |
-| **F-34** | Moteur d'évaluation | ADR-0008 : `CompleteExerciseSession` central, comparaison des **contenus**, statuts `in_progress/completed` · code : `SubmitQuestionAttempt`, comparaison des **ids**, statuts `started/completed/abandoned`, réponse stockée en texte `inspect` | **Un** use case de soumission et **un** de clôture ; comparaison par identifiants de réponse ; une tentative par question et par session, garantie en base, **immuable** une fois corrigée ; réponse stockée en données structurées ; statuts de session fixés ; `exercises.essential_id` obligatoire | V1 (Lot C) | ADR-0054, remplace ADR-0008 §3 et §6 | ouvert |
+| **F-31** | Shell applicatif par rôle | ancien : 4 × 4 partials de navigation divergents, aucune UDR sur les accueils, les tableaux de bord, la navigation ni les toasts | Une UDR de fondation : en-tête, navigation bureau et mobile, page d'accueil de chaque rôle, toasts (message conservé en Turbo Stream), états vide, chargement, erreur ; l'écran d'accueil d'un rôle est livré **dans la vague** qui livre ce rôle | V1 (0c) | UDR-0006 | **Accepté** 2026-09-25 ([UDR-0006](../../decisions/udr/0006-shell-applicatif-par-role.md)) : shell unique par rôle, approuvé par le porteur |
+| **F-32** | Nom de l'`Essential` à l'écran | glossaire « Fiche essentielle » · UI « Habilité » (sic) et « Habiletés » · ADR-0022 « Notions clés » · UDR-0001 « essentiels (habiletés) » | **Un** terme d'interface, écrit dans le glossaire et la locale `fr`, repris par toutes les UDR | V1 (Lot B) | glossaire + [UDR-0007](../../decisions/udr/0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) | **Accepté** 2026-09-25 |
+| **F-33** | Validation collaborative | ADR-0011 (Accepté, rédigé au passé, jamais implémenté) · abandon · report | Requalifier l'ADR-0011 en `Proposé` : le bandeau « Conforme au programme » affiché à tous est **retiré** ; la feature n'entre en vague qu'après décision produit (qui est « certifié », quelle table) | V8 | [ADR-0053](../../decisions/adr/0053-validation-collaborative-requalifiee.md), remplace ADR-0011 | **Accepté** 2026-09-25 |
+| **F-34** | Moteur d'évaluation | ADR-0008 : `CompleteExerciseSession` central, comparaison des **contenus**, statuts `in_progress/completed` · code : `SubmitQuestionAttempt`, comparaison des **ids**, statuts `started/completed/abandoned`, réponse stockée en texte `inspect` | **Un** use case de soumission et **un** de clôture ; comparaison par identifiants de réponse ; une tentative par question et par session, garantie en base, **immuable** une fois corrigée ; réponse stockée en données structurées ; statuts de session fixés ; `exercises.essential_id` obligatoire | V1 (Lot C) | [ADR-0054](../../decisions/adr/0054-moteur-d-evaluation-soumission-et-cloture.md), remplace ADR-0008 §3 et §6 | **Accepté** 2026-09-25 |
 
 Recoupements consignés sans nouvelle ligne, parce qu'une décision existante les couvre :
 
@@ -129,60 +129,60 @@ Recoupements consignés sans nouvelle ligne, parce qu'une décision existante le
 
 | ID | Sujet | Source A | Source B | Fermée par |
 |---|---|---|---|---|
-| C-01 | Établissements d'un enseignant | ADR-0004 : plusieurs, table `teacher_schools` | [`plan.md`](plan.md) : une seule école en V1, « tranché par ADR » — ADR inexistant | F-06 |
-| C-02 | Barème des badges | ADR-0008 : or ≥ 80 %, bronze/argent/or, remplacement si `>=` | Code : or = 100 %, remplacement si `>` · UDR-0003 : Argent/Or/**Diamant** · glossaire : bronze ≥ 50, argent ≥ 80, or 100 | F-10 (voir aussi C-46) |
-| C-03 | Contexte de DRENA, école, classe | ADR-0023 : contexte `Identity` | conventions et architecture §5 : contextes `school` et `classroom` ; architecture §5 : DRENA dans `catalog` | F-02 |
-| C-04 | Types assignables à une classe | ADR-0007 : `Course`, `Essential`, `ExamSubject` | glossaire et code : + `Exercise` | F-02 / F-26 |
+| C-01 | Établissements d'un enseignant | ADR-0004 : plusieurs, table `teacher_schools` | [`plan.md`](plan.md) : une seule école en V1, « tranché par ADR » — ADR inexistant | ✅ **Fermée** 2026-09-25 — F-06 |
+| C-02 | Barème des badges | ADR-0008 : or ≥ 80 %, bronze/argent/or, remplacement si `>=` | Code : or = 100 %, remplacement si `>` · UDR-0003 : Argent/Or/**Diamant** · glossaire : bronze ≥ 50, argent ≥ 80, or 100 | ✅ **Fermée** 2026-09-25 — F-10 (voir aussi C-46) |
+| C-03 | Contexte de DRENA, école, classe | ADR-0023 : contexte `Identity` | conventions et architecture §5 : contextes `school` et `classroom` ; architecture §5 : DRENA dans `catalog` | ✅ **Fermée** 2026-09-25 — F-02 |
+| C-04 | Types assignables à une classe | ADR-0007 : `Course`, `Essential`, `ExamSubject` | glossaire et code : + `Exercise` | ✅ **Fermée** 2026-09-25 — F-02 / F-26 |
 | C-05 | Tokens des UDR | UDR-0001/0002/0003 : classes Tailwind brutes (`slate`, `shadow-[…]`, `bg-green-100`) | [`plan.md`](plan.md) Lot 0c : aucune valeur arbitraire, tokens `@theme` seuls · `.interface-design/system.md` : palette `slate/blue` | F-09 |
-| C-06 | Couche de lecture | ADR-0012 : `ViewObjects` typés, use case CRUD générique, `Strategies` | architecture §7 : aucun `ViewObject` n'existe, queries renvoient des Hash | F-01 |
-| C-07 | Arborescence de présentation | ADR-0014 : `app/presentation/`, `adapters/`, ports d'entrée et de sortie | conventions et architecture : `app/controllers/`, pas de presenters | F-02 |
-| C-08 | Récupération du mot de passe | ADR-0002 : par SMS | ADR-0025 : obligatoire, moyen non fixé · ADR-0010 : aucune infrastructure SMS | F-08 |
+| C-06 | Couche de lecture | ADR-0012 : `ViewObjects` typés, use case CRUD générique, `Strategies` | architecture §7 : aucun `ViewObject` n'existe, queries renvoient des Hash | ✅ **Fermée** 2026-09-25 — F-01 |
+| C-07 | Arborescence de présentation | ADR-0014 : `app/presentation/`, `adapters/`, ports d'entrée et de sortie | conventions et architecture : `app/controllers/`, pas de presenters | ✅ **Fermée** 2026-09-25 — F-02 |
+| C-08 | Récupération du mot de passe | ADR-0002 : par SMS | ADR-0025 : obligatoire, moyen non fixé · ADR-0010 : aucune infrastructure SMS | ✅ **Fermée** 2026-09-25 — F-08 |
 | C-09 | Élèves de démonstration *(sans objet : retirés du plan le 2026-09-22)* | ADR-0019 : génération « à la création d'une classe », `is_demo` pour filtrer l'analytique, aucun marquage visuel | ADR-0019 §2.4 et code : à la création d'un **établissement** ; jamais filtrés · [`plan.md`](plan.md) : écartés · [`securite.md`](securite.md) : comptes connectables — **démenti** : `/login` ne les retrouve pas (CL-24) | F-20 |
-| C-10 | Statuts d'assignation | ADR-0016 : `archived`, réactivation en `added` | colonne : défaut `active` · entité : `validated` jamais écrit | F-26 |
-| C-11 | `public_id` | glossaire : préfixe de rôle (`stdt_`, `tch_`…) | [`securite.md`](securite.md) : le rôle se lit dans l'URL ; ADR-0017 : 14 caractères base58 sans préfixe | F-05 |
-| C-12 | Multi-classes élève | ADR-0003 : illimité, classe principale | interface : une seule classe visible, aucun sélecteur | F-18 |
+| C-10 | Statuts d'assignation | ADR-0016 : `archived`, réactivation en `added` | colonne : défaut `active` · entité : `validated` jamais écrit | ✅ **Fermée** 2026-09-25 — F-26 |
+| C-11 | `public_id` | glossaire : préfixe de rôle (`stdt_`, `tch_`…) | [`securite.md`](securite.md) : le rôle se lit dans l'URL ; ADR-0017 : 14 caractères base58 sans préfixe | ✅ **Fermée** 2026-09-25 — F-05 |
+| C-12 | Multi-classes élève | ADR-0003 : illimité, classe principale | interface : une seule classe visible, aucun sélecteur | ✅ **Fermée** 2026-09-25 — F-18 |
 | C-13 | Rôles de l'interface | UDR-0004 : 5 rôles dont `parent`, drawer et sidebar « non altérés » | memo : `Parent` hors périmètre ; UDR-0004 décrit une migration de l'ancienne app | F-09 (UDR-0004 non applicable au projet cible) |
-| C-14 | Seuil de l'or dans l'architecture | [`guide/architecture.md` §2.7](../../guide/architecture.md) : or 100 % présenté comme règle | ADR-0008 : or ≥ 80 % | F-10 |
-| C-15 | Clé primaire des lacunes | ADR-0018 : `has_nanoid(:id)`, clé `string` | toutes les autres tables : `bigint` | F-05 |
+| C-14 | Seuil de l'or dans l'architecture | [`guide/architecture.md` §2.7](../../guide/architecture.md) : or 100 % présenté comme règle | ADR-0008 : or ≥ 80 % | ✅ **Fermée** 2026-09-25 — F-10 |
+| C-15 | Clé primaire des lacunes | ADR-0018 : `has_nanoid(:id)`, clé `string` | toutes les autres tables : `bigint` | ✅ **Fermée** 2026-09-25 — F-05 |
 
 **Contradictions ajoutées par l'exploration du 2026-09-22.** Chaque ligne cite le complément qui la prouve, où se trouvent les références `chemin:ligne` : [identity-communication](inventaire/complements-identity-communication.md) (IC), [school-classroom](inventaire/complements-school-classroom.md) (SC), [catalog](inventaire/complements-catalog.md) (CA), [transverse](inventaire/complements-transverse.md) (TR).
 
 | ID | Sujet | Source A | Source B | Fermée par |
 |---|---|---|---|---|
-| C-16 | Statut des ADR « appliqués » | ADR-0011, 0012, 0020, 0021 se déclarent `Accepté` et **mis en place** | Le code ne les applique pas : aucune validation collaborative (0011), aucun `ViewObject` (0012), aucun `insert_all` pour les cours (0020), une délégation ORM → entités qui n'existe que sur une branche non fusionnée et cassée (0021). Voir CA §4, IC §4 | Ces ADR ne décrivent pas le projet cible. Chaque ADR de fondation qui les couvre les marque `Remplacé` ; l'ADR-0011 est remplacé par F-33 |
-| C-17 | Chemin de lecture | ADR-0006 §3.2 et ADR-0012 §3.1 : les lectures n'appellent **jamais** de use case, les contrôleurs appellent les queries | ADR-0022 §2.C : les contrôleurs appellent `BrowseCatalog` et `ViewCourse`. Le code fait les deux, et les quatre fils d'accueil passent par `UseCases::Identity::Get*Feed` (CA §4, TR §4) | F-01 |
-| C-18 | Import de contenu | ADR-0012 §3.3 : `ImportCatalogData` + `Strategies` | ADR-0020 §2.1 : méthode de repository dédiée avec `insert_all!`. Le code fait un troisième choix : `save` cours par cours, sans atomicité (CA §4) | F-17 |
-| C-19 | Forme des entités et des ports du catalogue | ADR-0022 §2.A-B : `Course` porte `status`, `published_at` et ses références ; les ports exposent `find_by_slug`, `find_published` | Les entités `Entities::Catalog::*` n'ont ni statut ni clé étrangère. Des entités racine complètes coexistent, et les méthodes des ports divergent de leur implémentation. C'est la cause des éditions cassées (CA-06, CA-13) | F-01 / F-03 |
-| C-20 | Rôles privilégiés et second facteur | ADR-0025 comp. 5 : second facteur pour `team` seulement | `school_admin` lit des listes nominatives de mineurs et rattache des comptes ; `feature_listing.md` prévoit des sous-rôles d'équipe (IC §4) | F-16 et F-22 : chacune dit si le rôle qu'elle crée exige un second facteur |
-| C-21 | Secret dérivé de l'identifiant | ADR-0025 comp. 4 et [`securite.md`](securite.md) n° 5 : un seul chemin, `/c/<code>` | `/teachers/prepa_acquisitions` crée **systématiquement** un compte dont le PIN est le contact ; la page de connexion affiche le PIN en clair (IC §4, TR §5.2) | F-28. D'ici là, [`securite.md`](securite.md) est mis à jour |
-| C-22 | Contact téléphonique | ADR-0002 §5 : 10 à 15 chiffres ; §1 : réseaux Orange, MTN, Moov, **Wave** | ADR-0002 §3.2 et code : exactement 10 chiffres, trois préfixes, Wave n'a pas de préfixe propre (IC §4) | F-28 |
-| C-23 | Rotation de session | ADR-0002 §3.3 : cookies chiffrés, rotation de session | Aucun `reset_session` dans le code (IC §4) · [PRD cadre §4](prd.md#4-exigences-transverses--valables-dès-la-vague-1) : `reset_session` exigé | F-28 |
-| C-24 | Suppression d'un compte élève | ADR-0005 : aucune suppression de compte n'anéantit des résultats. L'ADR ne vise pourtant que les créateurs `team` | `DELETE /users/:id` détruit en cascade les sessions, les badges et les lacunes (IC §4) | F-14 |
-| C-25 | Traçabilité de l'activité par enseignant | ADR-0016 §2 : `ExerciseSession` porte le `teacher_id` | `exercise_sessions` n'a ni `teacher_id` ni `classroom_id` (SC §4) | F-26 |
-| C-26 | Suppression d'une classe ou d'un niveau | ADR-0016 : l'historique des assignations ne se détruit pas | `dependent: :destroy` de la classe vers ses assignations, et du niveau vers ses classes (SC §4) | F-14 / F-19 |
-| C-27 | Création d'une classe par l'enseignant | ADR-0004 §2 : l'enseignant crée des classes dans ses établissements | Code : seuls `team` et `school_admin` en créent (SC §4) | F-06 |
-| C-28 | Rejoindre une classe supplémentaire | ADR-0003 §4 : un élève rejoint « n'importe quel cours du soir » avec un code | Code : `/c/:code` et `/student-signup` **créent un compte**, aucun chemin n'existe pour un élève déjà connecté (SC §4) | F-18 |
-| C-29 | Unicité « sans collision » | ADR-0020 §2.3 : « 0 % de probabilité de conflit » | Le slug aléatoire des comptes démo, sur 2 octets, fait échouer environ une création d'école sur quatre vers 50 écoles (calcul non exécuté, SC §2) | F-05 |
-| C-30 | Personnel d'établissement : combien d'écoles | Glossaire §1 : unicité « par école », ce qui laisse entendre plusieurs écoles | `has_one :school_staff` : une seule école ; aucun index unique (SC §4, TR §4) | F-22 |
+| C-16 | Statut des ADR « appliqués » | ADR-0011, 0012, 0020, 0021 se déclarent `Accepté` et **mis en place** | Le code ne les applique pas : aucune validation collaborative (0011), aucun `ViewObject` (0012), aucun `insert_all` pour les cours (0020), une délégation ORM → entités qui n'existe que sur une branche non fusionnée et cassée (0021). Voir CA §4, IC §4 | ✅ **Fermée** 2026-09-25 — Ces ADR ne décrivent pas le projet cible. Chaque ADR de fondation qui les couvre les marque `Remplacé` ; l'ADR-0011 est remplacé par F-33 |
+| C-17 | Chemin de lecture | ADR-0006 §3.2 et ADR-0012 §3.1 : les lectures n'appellent **jamais** de use case, les contrôleurs appellent les queries | ADR-0022 §2.C : les contrôleurs appellent `BrowseCatalog` et `ViewCourse`. Le code fait les deux, et les quatre fils d'accueil passent par `UseCases::Identity::Get*Feed` (CA §4, TR §4) | ✅ **Fermée** 2026-09-25 — F-01 |
+| C-18 | Import de contenu | ADR-0012 §3.3 : `ImportCatalogData` + `Strategies` | ADR-0020 §2.1 : méthode de repository dédiée avec `insert_all!`. Le code fait un troisième choix : `save` cours par cours, sans atomicité (CA §4) | ✅ **Fermée** 2026-09-25 — F-17 |
+| C-19 | Forme des entités et des ports du catalogue | ADR-0022 §2.A-B : `Course` porte `status`, `published_at` et ses références ; les ports exposent `find_by_slug`, `find_published` | Les entités `Entities::Catalog::*` n'ont ni statut ni clé étrangère. Des entités racine complètes coexistent, et les méthodes des ports divergent de leur implémentation. C'est la cause des éditions cassées (CA-06, CA-13) | ✅ **Fermée** 2026-09-25 — F-01 / F-03 |
+| C-20 | Rôles privilégiés et second facteur | ADR-0025 comp. 5 : second facteur pour `team` seulement | `school_admin` lit des listes nominatives de mineurs et rattache des comptes ; `feature_listing.md` prévoit des sous-rôles d'équipe (IC §4) | ✅ **Fermée** 2026-09-25 — F-16 et F-22 : chacune dit si le rôle qu'elle crée exige un second facteur |
+| C-21 | Secret dérivé de l'identifiant | ADR-0025 comp. 4 et [`securite.md`](securite.md) n° 5 : un seul chemin, `/c/<code>` | `/teachers/prepa_acquisitions` crée **systématiquement** un compte dont le PIN est le contact ; la page de connexion affiche le PIN en clair (IC §4, TR §5.2) | ✅ **Fermée** 2026-09-25 — F-28. D'ici là, [`securite.md`](securite.md) est mis à jour |
+| C-22 | Contact téléphonique | ADR-0002 §5 : 10 à 15 chiffres ; §1 : réseaux Orange, MTN, Moov, **Wave** | ADR-0002 §3.2 et code : exactement 10 chiffres, trois préfixes, Wave n'a pas de préfixe propre (IC §4) | ✅ **Fermée** 2026-09-25 — F-28 |
+| C-23 | Rotation de session | ADR-0002 §3.3 : cookies chiffrés, rotation de session | Aucun `reset_session` dans le code (IC §4) · [PRD cadre §4](prd.md#4-exigences-transverses--valables-dès-la-vague-1) : `reset_session` exigé | ✅ **Fermée** 2026-09-25 — F-28 |
+| C-24 | Suppression d'un compte élève | ADR-0005 : aucune suppression de compte n'anéantit des résultats. L'ADR ne vise pourtant que les créateurs `team` | `DELETE /users/:id` détruit en cascade les sessions, les badges et les lacunes (IC §4) | ✅ **Fermée** 2026-09-25 — F-14 |
+| C-25 | Traçabilité de l'activité par enseignant | ADR-0016 §2 : `ExerciseSession` porte le `teacher_id` | `exercise_sessions` n'a ni `teacher_id` ni `classroom_id` (SC §4) | ✅ **Fermée** 2026-09-25 — F-26 |
+| C-26 | Suppression d'une classe ou d'un niveau | ADR-0016 : l'historique des assignations ne se détruit pas | `dependent: :destroy` de la classe vers ses assignations, et du niveau vers ses classes (SC §4) | ✅ **Fermée** 2026-09-25 — F-14 / F-19 |
+| C-27 | Création d'une classe par l'enseignant | ADR-0004 §2 : l'enseignant crée des classes dans ses établissements | Code : seuls `team` et `school_admin` en créent (SC §4) | ✅ **Fermée** 2026-09-25 — F-06 |
+| C-28 | Rejoindre une classe supplémentaire | ADR-0003 §4 : un élève rejoint « n'importe quel cours du soir » avec un code | Code : `/c/:code` et `/student-signup` **créent un compte**, aucun chemin n'existe pour un élève déjà connecté (SC §4) | ✅ **Fermée** 2026-09-25 — F-18 |
+| C-29 | Unicité « sans collision » | ADR-0020 §2.3 : « 0 % de probabilité de conflit » | Le slug aléatoire des comptes démo, sur 2 octets, fait échouer environ une création d'école sur quatre vers 50 écoles (calcul non exécuté, SC §2) | ✅ **Fermée** 2026-09-25 — F-05 |
+| C-30 | Personnel d'établissement : combien d'écoles | Glossaire §1 : unicité « par école », ce qui laisse entendre plusieurs écoles | `has_one :school_staff` : une seule école ; aucun index unique (SC §4, TR §4) | ✅ **Fermée** 2026-09-25 — F-22 |
 | C-31 | Interface de l'organisation scolaire | UDR-0002 : recherche et filtre DRENA, carte d'école unique, onglets école → classes, badges `bg-green-100` | Maquette non branchée, deux cartes d'école, aucun onglet, badges `bg-green-50` (SC §4) | F-09 (tokens) + UDR de la V2 |
 | C-32 | Interface du catalogue | UDR-0001 : la carte de cours sert partout, « titre + badge de matière », Physique en bleu | Trois balisages de carte, une carte plus riche, Physique en violet et Mathématiques en bleu (CA §4) | F-09 + UDR de la V1 (Lot B) |
-| C-33 | Vocabulaire de la fiche | Glossaire : « Fiche essentielle » | UI « Habilité » (sic) et « Habiletés », ADR-0022 « Notions clés », UDR-0001 « essentiels (habiletés) », `feature_listing.md` « habilletés » (CA §4) | F-32 |
-| C-34 | Validation collaborative | ADR-0011 : réservée aux enseignants **certifiés**, entités à la racine | Glossaire : aucune certification ; conventions : tout est namespacé ; code : rien, sauf un bandeau « Conforme au programme » affiché à tous (CA-29) | F-33 |
+| C-33 | Vocabulaire de la fiche | Glossaire : « Fiche essentielle » | UI « Habilité » (sic) et « Habiletés », ADR-0022 « Notions clés », UDR-0001 « essentiels (habiletés) », `feature_listing.md` « habilletés » (CA §4) | ✅ **Fermée** 2026-09-25 — F-32 |
+| C-34 | Validation collaborative | ADR-0011 : réservée aux enseignants **certifiés**, entités à la racine | Glossaire : aucune certification ; conventions : tout est namespacé ; code : rien, sauf un bandeau « Conforme au programme » affiché à tous (CA-29) | ✅ **Fermée** 2026-09-25 — F-33 |
 | C-35 | Tables de liaison classe ↔ contenu | [`feature_listing.md`](../../feature_listing.md) : `classroom_courses`, `classroom_essentials`, `classroom_exercises` | ADR-0007, glossaire et schéma : une table unique `classroom_assignments`. Les trois anciennes tables n'existent plus, mais le code des fils d'accueil les appelle encore (TR §5.1) | Correction de `feature_listing.md` : aucun ADR, la décision existe |
 | C-36 | Public cible et navigateurs | ADR-0009 : Android d'entrée de gamme en 3G/4G, JavaScript minimal | `allow_browser :modern` renvoie 406 à Chrome 99 Android ; bundle JS de 622 Ko ; KaTeX, GTM et Clarity viennent d'un CDN tiers (TR §4) | F-29 |
-| C-37 | Worker, SMS, temps réel, Thruster | ADR-0010 : worker intégré à Puma, SMS par jobs, notifications Solid Cable, Thruster non requis | Worker conditionné par une variable jamais posée ; aucun SMS ni broadcast ; `Dockerfile` lancé via Thruster (TR §4) | F-30 (et F-23 pour le temps réel) |
+| C-37 | Worker, SMS, temps réel, Thruster | ADR-0010 : worker intégré à Puma, SMS par jobs, notifications Solid Cable, Thruster non requis | Worker conditionné par une variable jamais posée ; aucun SMS ni broadcast ; `Dockerfile` lancé via Thruster (TR §4) | ✅ **Fermée** 2026-09-25 — F-30 (et F-23 pour le temps réel) |
 | C-38 | Mode sombre | ADR-0013 §2.1 : le thème sombre est un état géré par Stimulus | Bascule présente, mais aucune variante `dark:` ni palette sombre (TR §4) | F-09 (aucun mode sombre en V1) |
-| C-39 | Dépendances du domaine | ADR-0001 §3 : communication **exclusivement** par injection | 20 fichiers de `app/domain/` instancient `Repositories::…` par défaut ; le test de pureté ne le détecte pas (TR §4) | F-03. Le garde-fou de pureté (phase 0, n° 3) refuse aussi `Repositories::` et `Queries::` dans le domaine |
-| C-40 | `/admin` | ADR-0006 §1 : tableau de bord administrateur `/admin` | Aucune route `/admin` ; l'équivalent `/teams/dashboard` lève une exception (TR §4) | F-01 : l'ADR qui remplace l'ADR-0006 corrige la référence |
+| C-39 | Dépendances du domaine | ADR-0001 §3 : communication **exclusivement** par injection | 20 fichiers de `app/domain/` instancient `Repositories::…` par défaut ; le test de pureté ne le détecte pas (TR §4) | ✅ **Fermée** 2026-09-25 — F-03. Le garde-fou de pureté (phase 0, n° 3) refuse aussi `Repositories::` et `Queries::` dans le domaine |
+| C-40 | `/admin` | ADR-0006 §1 : tableau de bord administrateur `/admin` | Aucune route `/admin` ; l'équivalent `/teams/dashboard` lève une exception (TR §4) | ✅ **Fermée** 2026-09-25 — F-01 : l'ADR qui remplace l'ADR-0006 corrige la référence |
 | C-41 | Écarts connus des conventions | Conventions §8 : trois écarts connus | L'exploration en ajoute plus de trente, rassemblés ici | Conventions §8 renvoie à ce registre (fait le 2026-09-22) |
-| C-42 | Moteur de correction | ADR-0008 §3 et §6 : `CompleteExerciseSession` central, comparaison des contenus, logique dans `evaluate_and_award_badges!` | Code : `SubmitQuestionAttempt`, comparaison des ids, méthode inexistante ; [`architecture.md`](../../guide/architecture.md) §2.7 présente `SubmitQuestionAttempt` comme « le meilleur exemple du dépôt » ([AS](inventaire/complements-assessment.md) E-05) | F-34 ; `architecture.md` §2.7 corrigé ensuite (rang 5) |
-| C-43 | Statuts d'une session | ADR-0008 §3 : `in_progress` / `completed` | Glossaire et code : `started` / `completed` / `abandoned` (AS E-04) | F-34 |
-| C-44 | Stockage de la réponse de l'élève | Glossaire §4 : `answer_data` (jsonb) | Code : `answer_data` et `attempted_answer_ids` jamais écrits ; un tableau stocké sous sa forme `inspect` Ruby dans `provided_answer` (AS E-17) | F-34 |
-| C-45 | Rattachement d'un exercice | Glossaire §3 : un exercice est « rattaché à un `Essential` » | Schéma : `exercises.essential_id` nullable (AS E-20) | F-34 |
-| C-46 | Barème et échelles | ADR-0008 : Or à 80 % ; §4 : l'élève voit son score sur 100, sa note sur 20 et son badge · ADR-0018 : 50 % | Code : cinq seuils non nommés (50, 70, **75**, 80, 100) ; l'élève ne voit que le pourcentage ; /10 sur un sujet ; la landing promet « Diamant » (AS E-01, E-02, E-07, E-15) | F-10 / F-11 (complète C-02) |
-| C-47 | Remédiation | ADR-0018 §3.1 : détection « lors de l'échec d'une session », une **ou plusieurs** lacunes ; une session de remédiation reconnaissable | Code : une lacune au plus, déclenchée par une simulation morte ; aucune colonne ne marque la session de remédiation (AS E-08, E-11) | F-21 |
-| C-48 | Vocabulaire de l'évaluation | Glossaire : « tentative » = `QuestionAttempt` ; ne jamais écrire « Quiz » | UDR-0003 §2 : « Quiz interactif » ; UI enseignant : « Tentatives » compte des sessions (AS E-18, E-19) | F-32 (étendue au vocabulaire de l'évaluation) |
-| C-49 | Nommage des lacunes | ADR-0018 §3.2 : `Entities::KnowledgeGap`, `Ports::KnowledgeGapRepository` à la racine | Conventions §2 : tout est namespacé par contexte borné (AS E-09) | F-02 |
+| C-42 | Moteur de correction | ADR-0008 §3 et §6 : `CompleteExerciseSession` central, comparaison des contenus, logique dans `evaluate_and_award_badges!` | Code : `SubmitQuestionAttempt`, comparaison des ids, méthode inexistante ; [`architecture.md`](../../guide/architecture.md) §2.7 présente `SubmitQuestionAttempt` comme « le meilleur exemple du dépôt » ([AS](inventaire/complements-assessment.md) E-05) | ✅ **Fermée** 2026-09-25 — F-34 ; `architecture.md` §2.7 corrigé ensuite (rang 5) |
+| C-43 | Statuts d'une session | ADR-0008 §3 : `in_progress` / `completed` | Glossaire et code : `started` / `completed` / `abandoned` (AS E-04) | ✅ **Fermée** 2026-09-25 — F-34 |
+| C-44 | Stockage de la réponse de l'élève | Glossaire §4 : `answer_data` (jsonb) | Code : `answer_data` et `attempted_answer_ids` jamais écrits ; un tableau stocké sous sa forme `inspect` Ruby dans `provided_answer` (AS E-17) | ✅ **Fermée** 2026-09-25 — F-34 |
+| C-45 | Rattachement d'un exercice | Glossaire §3 : un exercice est « rattaché à un `Essential` » | Schéma : `exercises.essential_id` nullable (AS E-20) | ✅ **Fermée** 2026-09-25 — F-34 |
+| C-46 | Barème et échelles | ADR-0008 : Or à 80 % ; §4 : l'élève voit son score sur 100, sa note sur 20 et son badge · ADR-0018 : 50 % | Code : cinq seuils non nommés (50, 70, **75**, 80, 100) ; l'élève ne voit que le pourcentage ; /10 sur un sujet ; la landing promet « Diamant » (AS E-01, E-02, E-07, E-15) | ✅ **Fermée** 2026-09-25 — F-10 / F-11 (complète C-02) |
+| C-47 | Remédiation | ADR-0018 §3.1 : détection « lors de l'échec d'une session », une **ou plusieurs** lacunes ; une session de remédiation reconnaissable | Code : une lacune au plus, déclenchée par une simulation morte ; aucune colonne ne marque la session de remédiation (AS E-08, E-11) | ✅ **Fermée** 2026-09-25 — F-21 |
+| C-48 | Vocabulaire de l'évaluation | Glossaire : « tentative » = `QuestionAttempt` ; ne jamais écrire « Quiz » | UDR-0003 §2 : « Quiz interactif » ; UI enseignant : « Tentatives » compte des sessions (AS E-18, E-19) | ✅ **Fermée** 2026-09-25 — F-32 (étendue au vocabulaire de l'évaluation) |
+| C-49 | Nommage des lacunes | ADR-0018 §3.2 : `Entities::KnowledgeGap`, `Ports::KnowledgeGapRepository` à la racine | Conventions §2 : tout est namespacé par contexte borné (AS E-09) | ✅ **Fermée** 2026-09-25 — F-02 |
 
 Les écarts d'**état** — le code ne fait pas ce que tout le monde attend, par exemple la réactivation d'une assignation (ADR-0016) ou le fil de la direction toujours vide — ne sont pas des contradictions entre sources. Ce sont des bugs de l'ancien, listés dans la colonne « Ne pas reproduire » du §6.
 
@@ -198,28 +198,29 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe publie un cours, une fiche, un exercice ; un enseignant déclare ses classes et leur assigne le contenu ; un élève rejoint sa classe par code, voit ce qui lui est assigné, fait l'exercice, obtient son résultat et son badge |
-| **Chantiers** | Plan détaillé existant : [`plan.md`](plan.md) (Lots 0a, 0b, 0c, A, B, C, D, E). À son ouverture, il est déplacé dans le chantier `boucle-pedagogique` |
-| **Tables** | `users`, `students`, `teachers`, `teams`, `schools`, `drenas` *(lecture, seedée)*, `classrooms`, `classroom_students`, `teacher_classrooms` ou `teacher_schools` (F-06), `levels`, `series`, `level_series`, `materials`, `courses`, `essentials`, `exercises`, `questions`, `answers`, `exercise_sessions`, `question_attempts`, `exercise_badges`, `classroom_assignments` + journal d'audit et journal d'échecs de connexion |
-| **Décisions préalables** | F-01, F-02, F-03, F-04, F-05, F-06, F-07, F-08, F-09, F-10, F-11, F-12 (seed), F-13, F-14 (contenu), F-15, F-16, F-26, F-28, F-31, F-32, F-34 ; F-25 si téléversement |
+| **Objectif** | L'équipe crée les référentiels (niveaux, séries, matières, DRENA), importe en masse les établissements, dont les classes sont générées, et le contenu, puis publie un cours, une fiche, un exercice ; un enseignant déclare ses classes et leur assigne le contenu ; un élève rejoint sa classe par code, voit ce qui lui est assigné, fait l'exercice, obtient son résultat et son badge |
+| **Chantiers** | Plan détaillé existant : [`plan.md`](plan.md) (Lots 0a, 0b, 0c, A, B, C, D, E). À son ouverture, il est déplacé dans le chantier `boucle-pedagogique` · `referentiels-equipe` (taxonomie, DRENA, établissements, import JSON d'établissements, génération des classes, ADR-0030, ADR-0034) · `import-contenu` (cours, fiches, exercices, ADR-0039) |
+| **Tables** | `users`, `students`, `teachers`, `teams`, `schools`, `drenas` *(créées par l'équipe)*, `classrooms`, `classroom_students`, `teacher_classrooms` ou `teacher_schools` (F-06), `levels`, `series`, `level_series`, `materials` *(créées par l'équipe, ADR-0034)*, `courses`, `essentials`, `exercises`, `questions`, `answers`, `exercise_sessions`, `question_attempts`, `exercise_badges`, `classroom_assignments`, `import_reports` + journal d'audit et journal d'échecs de connexion |
+| **Décisions préalables** | F-01, F-02, F-03, F-04, F-05, F-06, F-07, F-08, F-09, F-10, F-11, F-12 (référentiels par l'équipe), F-13, F-14 (contenu), F-15, F-16, F-17, F-25 (fichiers d'import), F-26, F-28, F-31, F-32, F-34 |
 | **Dépend de** | V0 |
-| **Porte** | Critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses) verts ; parcours bout en bout en navigateur réel ; recette sur `Staging` par un rôle distinct |
+| **Porte** | Critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses) verts ; parcours bout en bout en navigateur réel ; recette sur `Staging` par un rôle distinct ; test de performance de l'ADR-0039 vert : 500 écoles (≈ 35 000 classes) ou 200 cours complets importés en moins de 2 minutes en local, avec un rapport exact (importés, ignorés, en erreur, total) et aucun élément de taxonomie parasite |
 
 Écarts avec [`plan.md`](plan.md), à corriger à l'ouverture du chantier :
 
-- La table `drenas` y est écartée, alors que `schools.drena_id` est obligatoire (ADR-0023). Elle entre en V1, en lecture seule et seedée.
-- `teacher_schools` y est écartée, alors que F-06 recommande de la garder avec un drapeau « principale ». Elle entre en V1 si l'ADR-0030 suit la recommandation.
-- Le Lot 0b reprend la règle « le dernier mot du nom complet est le prénom ». F-15 recommande deux champs : c'est l'ADR-0037 qui tranche, pas le plan.
+- La table `drenas` y est écartée, alors que `schools.drena_id` est obligatoire (ADR-0023). Elle entre en V1, gérée par l'équipe (ADR-0034).
+- `teacher_schools` y est écartée, alors que F-06 recommande de la garder avec un drapeau « principale ». Elle entre en V1 (ADR-0030).
+- Le Lot 0b reprend la règle « le dernier mot du nom complet est le prénom ». L'ADR-0037 tranche : deux champs, sans changement de casse.
 - Le Lot A laisse ouverte l'inscription par listes en cascade. Le [PRD cadre](prd.md#2-acteurs) exige un code de classe valide : la cascade école + niveau → classe est écartée (ID-08, CL-08).
+- Le plan suppose une taxonomie seedée et des écoles créées une à une. Les arbitrages du porteur du 2026-09-25 font entrer en V1 tout le chantier `referentiels-equipe` (taxonomie, DRENA, établissements et leur import, génération des classes : ADR-0030, ADR-0034) et les imports de contenu (ADR-0039). Les seeds ne servent qu'en développement et en test.
 - Liste des features livrées par la V1 : §6, colonne « Vague » = V1. C'est elle qui remplace le décompte approximatif « environ 25 features » du plan.
 
 ### V2 — Organisation scolaire et espace direction
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe administre les référentiels (niveaux, séries, matières, DRENA, écoles) et les classes ; une direction d'établissement, invitée, gère ses classes, ses enseignants et ses élèves ; chacun gère son compte |
-| **Chantiers** | `referentiels-equipe` (taxonomie, DRENA, écoles, import JSON d'écoles, génération des classes par défaut) · `espace-direction` · `mon-compte` (profil, PIN avec PIN actuel, avatar) · `annuaire-equipe` (liste, fiche, anonymisation) |
-| **Tables** | `school_roles`, `school_staffs` ; `drenas` et `schools` en écriture |
+| **Objectif** | Une direction d'établissement, invitée, gère ses classes, ses enseignants et ses élèves ; chacun gère son compte ; l'équipe consulte et anonymise les comptes. Les référentiels et les établissements sont gérés dès la V1 |
+| **Chantiers** | `espace-direction` · `mon-compte` (profil, PIN avec PIN actuel, avatar) · `annuaire-equipe` (liste, fiche, anonymisation) |
+| **Tables** | `school_staffs` (fonction en colonne, ADR-0044) |
 | **Décisions préalables** | F-14, F-16, F-22 ; F-25 (avatar) |
 | **Dépend de** | V1 |
 | **Porte** | Une direction invitée administre son seul établissement ; aucune fuite inter-établissements (test de refus) |
@@ -232,19 +233,19 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Chantiers** | `rapports-de-classe` · `multi-etablissements-enseignant` · `vie-de-la-classe` (année scolaire, archivage, code révocable, retrait d'élève) · `multi-classes-eleve` si F-18 le confirme |
 | **Tables** | colonnes d'année scolaire et d'archivage ; aucune table nouvelle hors décision |
 | **Décisions préalables** | F-11, F-18, F-19 |
-| **Dépend de** | V1, V2 (établissements administrés) |
+| **Dépend de** | V1, V2 (direction) |
 | **Porte** | Rapports sans cache périmé (invalidation à la clôture de session) ; seuils issus des constantes de F-11 |
 
 ### V4 — Contenu à l'échelle et back-office équipe
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe alimente la plateforme en masse et la pilote : imports JSON avec rapport, catalogue complet (filtres, pagination, pages niveau et matière), tableau de bord équipe, installation PWA |
-| **Chantiers** | `import-contenu` · `catalogue-complet` · `pilotage-equipe` · `installation-pwa` |
-| **Tables** | table de rapports d'import |
-| **Décisions préalables** | F-16 (sous-rôles), F-17, F-25 |
+| **Objectif** | L'équipe pilote la plateforme : catalogue complet (filtres, pagination, pages niveau et matière), tableau de bord équipe, installation PWA, sous-rôles appliqués. Les imports en masse sont livrés en V1 |
+| **Chantiers** | `catalogue-complet` · `pilotage-equipe` · `installation-pwa` · `sous-roles-equipe` (matrice de l'ADR-0038) |
+| **Tables** | aucune nouvelle : `team_role` existe depuis la V1 |
+| **Décisions préalables** | F-16 (sous-rôles), F-27 (indicateurs) |
 | **Dépend de** | V1 — peut chevaucher V2-V3 si fichiers et contrats disjoints |
-| **Porte** | Un import de 50 cours produit un rapport exact (importés, ignorés, en erreur) et aucun élément de taxonomie parasite |
+| **Porte** | Chaque sous-rôle n'accède qu'à sa colonne de la matrice de l'ADR-0038 (un test de refus par case vide) ; indicateurs lus côté serveur |
 
 ### V5 — Remédiation et lacunes
 
@@ -360,15 +361,15 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
-| SC-01 | Gérer les DRENA | ⚠️ | V1 en lecture (seed) · V2 en écriture (`referentiels-equipe`) | Une suppression qui échoue dès qu'une école a du personnel |
-| SC-02 | Importer des DRENA | ⚠️ | V2 (`referentiels-equipe`) | Une action d'import sans route (TR-29) |
-| SC-03 | Créer un établissement | ⚠️ | V1 (seed) · V2 (écran) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
-| SC-04 | Liste nationale des établissements | ⚠️ | V2 | Des filtres factices ; un bouton « Nouvelle École » mort |
-| SC-05 | Consulter un établissement | ✅ | V2 | Une fiche ouverte à tout connecté |
-| SC-06 | Modifier un établissement | ⚠️ | V2 | Une modification ouverte à tout connecté |
-| SC-07 | Supprimer un établissement | ❌ | V2 (F-14) | `RecordNotDestroyed` dès qu'un membre du personnel existe ; une suppression ouverte à tout connecté |
-| SC-08 | Importer des établissements | ⚠️ | V2 (F-17 pour le format) | Aucun rapport d'import ; des comptes démo créés en effet de bord |
-| SC-09 | Générer les classes par défaut | ⚠️ | V2 | Des collisions de slug qui laissent l'école sans classes |
+| SC-01 | Gérer les DRENA | ⚠️ | V1 (`referentiels-equipe`, ADR-0034) | Une suppression qui échoue dès qu'une école a du personnel |
+| SC-02 | Importer des DRENA | ⚠️ | **écartée** : les 41 DRENA se saisissent à l'écran (ADR-0034) ; aucun format d'import (ADR-0039) | Une action d'import sans route (TR-29) |
+| SC-03 | Créer un établissement | ⚠️ | V1 (`referentiels-equipe`, par import JSON seulement, sans formulaire : décision du porteur du 2026-09-25 ; classes générées : ADR-0030) | Une erreur 500 pour les rôles non autorisés au lieu d'un refus |
+| SC-04 | Liste nationale des établissements | ⚠️ | V1 (`referentiels-equipe`) | Des filtres factices ; un bouton « Nouvelle École » mort |
+| SC-05 | Consulter un établissement | ✅ | V1 (`referentiels-equipe`) | Une fiche ouverte à tout connecté |
+| SC-06 | Modifier un établissement | ⚠️ | V1 (`referentiels-equipe`, dont le cycle) | Une modification ouverte à tout connecté |
+| SC-07 | Supprimer un établissement | ❌ | V1 (`referentiels-equipe`, F-14) | `RecordNotDestroyed` dès qu'un membre du personnel existe ; une suppression ouverte à tout connecté |
+| SC-08 | Importer des établissements | ⚠️ | V1 (`referentiels-equipe`, import en masse : ADR-0039) | Aucun rapport d'import ; des comptes démo créés en effet de bord |
+| SC-09 | Générer les classes par défaut | ⚠️ | V1 (`referentiels-equipe`, ADR-0030) | Des collisions de slug qui laissent l'école sans classes |
 | SC-10 | S'inscrire comme administrateur d'établissement | ⚠️ | **écartée** (= ID-05) | — |
 | SC-11 | Lister et créer les rôles d'un établissement | ⚠️ | V2 (F-22 : rôles de référence) | Un échec de création silencieux |
 | SC-12 | Supprimer un rôle | ⚠️ | V2 | Une suppression non scopée à l'école de l'URL |
@@ -393,7 +394,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
 | CL-01 | Créer une classe (équipe) | ❌ | V1 (Lot D : « les classes sont créées par l'équipe », [`plan.md`](plan.md) §1) | Un slug passé à `find_by_id` ; un code de 6 caractères pour une colonne de 5 |
-| CL-02 | Modifier une classe | ❌ | V2 (`referentiels-equipe`) | Un échec muet |
+| CL-02 | Modifier une classe | ❌ | V1 (`referentiels-equipe`) | Un échec muet |
 | CL-03 | Supprimer une classe | ⚠️ | V3 (`vie-de-la-classe` : archivage, F-19) | Une suppression définitive qui détruit l'historique des assignations |
 | CL-04 | Générer et afficher le code d'adhésion | ⚠️ | V1 (Lot D) | Un affichage tantôt en minuscules, tantôt en majuscules |
 | CL-05 | Partager le lien de classe sur WhatsApp | 💀 | V3 (`vie-de-la-classe`) | — |
@@ -432,24 +433,24 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | CA-05 | Créer un cours | ⚠️ | V1 (Lot B) | Aucun point d'entrée dans l'interface |
 | CA-06 | Modifier un cours | ❌ | V1 (Lot B) | Deux familles d'entités incompatibles (C-19) |
 | CA-07 | Supprimer un cours | ✅ | V1 (Lot B, archivage : F-14) | Une cascade qui détruit lacunes et assignations |
-| CA-08 | Importer des cours en masse | ⚠️ | V4 (`import-contenu`, F-17) | Un import non atomique, sans rapport, qui crée de la taxonomie implicite |
-| CA-09 | « Import JSON Express » dans le formulaire | 💀 | **écartée** : aucun contrôleur JavaScript n'existe ; l'import de V4 le remplace | — |
+| CA-08 | Importer des cours en masse | ⚠️ | V1 (`import-contenu`, ADR-0039) | Un import non atomique, sans rapport, qui crée de la taxonomie implicite |
+| CA-09 | « Import JSON Express » dans le formulaire | 💀 | **écartée** : aucun contrôleur JavaScript n'existe ; l'import de la V1 (ADR-0039) le remplace | — |
 | CA-10 | Lister les fiches d'un cours | ⚠️ | V1 (Lot B) | — |
 | CA-11 | Consulter une fiche et sa progression | ✅ | V1 (Lot B / C) | — |
 | CA-12 | Créer une fiche | ❌ | V1 (Lot B, `team` seulement) | Une création ouverte à tout connecté |
 | CA-13 | Modifier une fiche | ❌ | V1 (Lot B) | Idem ; C-19 |
 | CA-14 | Supprimer une fiche | ✅ | V1 (Lot B, archivage) | Idem ; cascade |
-| CA-15 | Importer des fiches dans un cours | 💀 | V4 (F-17) | Un import synchrone ouvert à tout connecté |
-| CA-16 | Lister les niveaux | ✅ | V1 (seed, lecture) · V2 (écran) | — |
+| CA-15 | Importer des fiches dans un cours | 💀 | V1 (`import-contenu`, ADR-0039) | Un import synchrone ouvert à tout connecté |
+| CA-16 | Lister les niveaux | ✅ | V1 (écran de l'équipe, ADR-0034) | — |
 | CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) | — |
-| CA-18 | Gérer les niveaux | ⚠️ | V2 (`referentiels-equipe`) | Supprimer un niveau détruit ses classes |
-| CA-19 | Associer des séries à un niveau | ✅ | V2 | — |
-| CA-20 | Lister les matières | ⚠️ | V1 (seed) · V2 | — |
+| CA-18 | Gérer les niveaux | ⚠️ | V1 (écran de l'équipe, ADR-0034) | Supprimer un niveau détruit ses classes |
+| CA-19 | Associer des séries à un niveau | ✅ | V1 (ADR-0034) | — |
+| CA-20 | Lister les matières | ⚠️ | V1 (écran de l'équipe, ADR-0034) | — |
 | CA-21 | Page matière | ⚠️ | V4 | — |
-| CA-22 | Gérer les matières | ⚠️ | V2 | `category` laissée à `NULL` ; une clé de cache jamais invalidée |
+| CA-22 | Gérer les matières | ⚠️ | V1 (ADR-0034, `category` obligatoire) | `category` laissée à `NULL` ; une clé de cache jamais invalidée |
 | CA-23 | Pages des séries | ❌ | V2 | — |
-| CA-24 | Gérer les séries | ⚠️ | V2 | — |
-| CA-25 | Taxonomie depuis l'onglet « Setup » | ⚠️ | V2 (= TR-13) | — |
+| CA-24 | Gérer les séries | ⚠️ | V1 (ADR-0034) | — |
+| CA-25 | Taxonomie depuis l'onglet « Setup » | ⚠️ | V1 (= TR-13, ADR-0034) | — |
 | CA-26 | Icône et couleur de la matière | ✅ | V1 (Lot B, UDR) | Une couleur déduite du nom au lieu de `category` |
 | CA-27 | Affecter un cours depuis sa page | 💀 | V1 (Lot D) : le point d'entrée de l'assignation est fixé par l'UDR du lot | Un bouton inatteignable (`@teacher_classrooms` jamais affecté) |
 | CA-28 | Validation collaborative | 💀 | V8 (F-33) | — |
@@ -464,7 +465,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-03 | Créer un exercice par le formulaire | ❌ | V1 (Lot B) — **à construire** | « + Ajouter une question » inerte (contrôleur Stimulus absent) ; des questions jamais persistées ; un titre passé en `titleize` |
 | AS-04 | Modifier un exercice | ❌ | V1 (Lot B) | Idem |
 | AS-05 | Supprimer un exercice | ✅ | V1 (Lot B, archivage : F-14) | Une cascade qui détruit sessions, tentatives et badges des élèves |
-| AS-06 | Importer des exercices par le « content engine » | ❌ 💀 | **écartée** : le service n'a jamais existé dans aucun commit ; l'import de V4 (F-17) le remplace | — |
+| AS-06 | Importer des exercices par le « content engine » | ❌ 💀 | **écartée** : le service n'a jamais existé dans aucun commit ; l'import d'exercices de la V1 (ADR-0039) le remplace | — |
 | AS-07 | Démarrer une session | ✅ | V1 (Lot C) | — |
 | AS-08 | Reprendre une session en cours | ✅ | V1 (Lot C) | — |
 | AS-09 | Répondre aux questions une à une | ❌ ⚠️ | V1 (Lot C, F-34) | Une question déjà répondue qu'on peut re-soumettre après avoir vu le corrigé, doublon compté dans le score ; une réponse vide qui produit une erreur 500 en Turbo |
@@ -496,7 +497,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-35 | Importer des sujets en JSON | ❌ | **écartée** — retirée du plan le 2026-09-22 | Un message d'erreur d'import passé en `html_safe` (injection HTML par fichier) |
 | AS-36 | Exercices de ma classe sur l'accueil élève | ❌ | V1 (Lot A / D) (= TR-04) | — |
 | AS-37 | Ma progression sur la fiche d'un chapitre | ⚠️ | V1 (Lot C) (= CA-11) | Des exercices non publiés listés à l'élève |
-| AS-38 | Créer exercices, questions et réponses par l'import de cours | ⚠️ | V4 (`import-contenu`, = CA-08) | `questions.position` jamais écrite |
+| AS-38 | Créer exercices, questions et réponses par l'import de cours | ⚠️ | V1 (`import-contenu`, = CA-08) | `questions.position` jamais écrite |
 | AS-39 | Aperçu des questions sur la carte d'exercice | ❌ | V1 (Lot C) | **Fuite des bonnes réponses** : un fragment mis en cache par question, sans le rôle dans la clé, servi à un élève après un enseignant ([`securite.md`](securite.md) n° 29) |
 | AS-40 | Durée estimée d'un exercice | 💀 | **écartée** : jamais affichée, aucune règle décidée | — |
 
@@ -516,7 +517,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-10 | « Control Center » équipe | ❌ | V4 (`pilotage-equipe`) | Un tableau de bord sans test (méthode renommée sans mise à jour de l'appelant) |
 | TR-11 | Rechercher un élève ou un enseignant | ❌ | V4 | — |
 | TR-12 | Répartition des élèves par niveau | 💀 | V4 | — |
-| TR-13 | « Configuration Plateforme » | ✅ | V2 (`referentiels-equipe`) | — |
+| TR-13 | « Configuration Plateforme » | ✅ | V1 (`referentiels-equipe`, ADR-0034) | — |
 | TR-14 | « LnclassAI » | ⚠️ | **écartée** — retirée du plan le 2026-09-22 : iframe vers un artefact externe non inspecté, aucun besoin documenté | Charger un contenu tiers dans l'espace équipe sans CSP |
 | TR-15 | Tableau de bord de l'établissement | ⚠️ | V2 (= SC-15) | — |
 | TR-16 | « En attente d'affectation » | ✅ | V2 (= SC-16) | — |
@@ -526,13 +527,13 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-20 | Annuaire des comptes | ⚠️ | V2 (= ID-21) | — |
 | TR-21 | Fiche d'un compte | ⚠️ | V2 (= ID-22) | — |
 | TR-22 | Modifier ou supprimer un compte | ⚠️ | V2 (= ID-18, ID-23) | — |
-| TR-23 | Thème clair / sombre | 💀 | **écartée** en V1 (F-09) | Une bascule sans palette sombre |
+| TR-23 | Thème clair / sombre | 💀 | **écartée** en V1 (F-09, approuvée le 2026-09-25) | Une bascule sans palette sombre |
 | TR-24 | Manifeste PWA et service worker | ⚠️ | V4 (`installation-pwa`) | Un service worker entièrement commenté |
 | TR-25 | Bandeau d'installation | ⚠️ | V4 (= ID-26) | — |
 | TR-26 | Mesure d'audience | ⚠️ | V0 (F-27) | Des identifiants en dur, sans consentement ni CSP |
 | TR-27 | Navigation par rôle | ⚠️ | V1 (Lot 0c, F-31) | 4 × 4 partials divergents |
-| TR-28 | Imports JSON en arrière-plan | ⚠️ | V2 (écoles) · V4 (contenu) | Un échec de job silencieux ; un fichier posé sur le disque éphémère du conteneur ; un nom de fichier client dans un chemin disque |
-| TR-29 | Import des DRENA en arrière-plan | 💀 | V2 (= SC-02) | — |
+| TR-28 | Imports JSON en arrière-plan | ⚠️ | V1 (écoles et contenu, ADR-0039) | Un échec de job silencieux ; un fichier posé sur le disque éphémère du conteneur ; un nom de fichier client dans un chemin disque |
+| TR-29 | Import des DRENA en arrière-plan | 💀 | **écartée** (= SC-02) | — |
 | TR-30 | Démos : générer et simuler | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-31 | Purge horaire des jobs terminés | ⚠️ | V0 (F-30) | Un job récurrent qui dépend d'un worker jamais lancé |
 | TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) · V3 (rapports) | Un cache actif en production seulement |
@@ -564,31 +565,20 @@ Les huit chantiers ouverts par l'audit du 2026-09-18 ([`chantiers/README.md`](..
 
 ### 6.9 Bilan
 
-Compté par script sur les tables ci-dessus, après les retraits du 2026-09-22.
+Compté par script sur les tables ci-dessus, après les retraits du 2026-09-22 ; mis à jour le 2026-09-25, après les arbitrages du porteur (référentiels, établissements et imports en V1 : ADR-0030, ADR-0034, ADR-0039).
 
 | Préfixe | Features | V0-V1 | V2-V4 | V5-V6 | Écartées ou retirées |
 |---|---|---|---|---|---|
 | `ID` | 34 | 12 | 12 | 0 | 10 |
 | `CO` | 13 | 1 | 0 | 10 | 2 |
-| `SC` | 27 | 4 | 22 | 0 | 1 |
-| `CL` | 28 | 14 | 6 | 0 | 8 |
-| `CA` | 29 | 14 | 12 | 1 | 2 |
-| `TR` | 42 | 16 | 13 | 0 | 13 |
-| `AS` | 40 | 17 | 7 | 4 | 12 |
-| **Total** | **213** | **78** | **72** | **15** | **48** |
+| `SC` | 27 | 10 | 15 | 0 | 2 |
+| `CL` | 28 | 15 | 5 | 0 | 8 |
+| `CA` | 29 | 21 | 5 | 1 | 2 |
+| `TR` | 42 | 18 | 10 | 0 | 14 |
+| `AS` | 40 | 18 | 6 | 4 | 12 |
+| **Total** | **213** | **95** | **53** | **15** | **50** |
 
-Certaines features sont réparties sur deux vagues, par exemple une lecture seedée en V1 et un écran en V2. Elles sont comptées dans la **première** vague qui les livre. Les 48 écartées comprennent 26 features retirées du plan le 2026-09-22 ; les autres sont des doublons, du code mort ou des routes qu'aucune règle ne justifie.
-
----|---|---|---|---|---|
-| `ID` | 34 | 12 | 12 | 3 | 7 |
-| `CO` | 13 | 1 | 0 | 11 | 1 |
-| `SC` | 27 | 4 | 22 | 0 | 1 |
-| `CL` | 28 | 14 | 6 | 3 | 5 |
-| `CA` | 29 | 14 | 12 | 1 | 2 |
-| `TR` | 42 | 16 | 13 | 7 | 6 |
-| `AS` | 40 | 21 | 9 | 4 | 12 |
-
-Certaines features sont réparties sur deux vagues, par exemple une lecture seedée en V1 et un écran en V2. Elles sont comptées dans la **première** vague qui les livre.
+Certaines features sont réparties sur deux vagues, par exemple une liste simple en V1 et un catalogue complet en V4. Elles sont comptées dans la **première** vague qui les livre. Les 50 écartées comprennent 26 features retirées du plan le 2026-09-22 et l'import des DRENA (SC-02, TR-29), écarté le 2026-09-25 ; les autres sont des doublons, du code mort ou des routes qu'aucune règle ne justifie.
 
 ---
 
@@ -604,15 +594,15 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | `team` | `teams` | V1 | ID-04 (remplacée), TR-09 | Créée par seed puis invitation (F-16), index unique sur `user_id` |
 | `teacher` | `teachers` | V1 | ID-03, SC-27 | `material_id` avec clé étrangère : l'ancien n'en avait pas |
 | `student` | `students` | V1 | ID-01, ID-02 | Index unique sur `user_id` ; `matricule` n'était écrit que par les comptes démo : non créée |
-| `Drena` | `drenas` | V1 (lecture, seed) · V2 (écriture) | SC-01, SC-02 | `schools.drena_id` est obligatoire (§5 V1) |
-| `Schools` | `schools` | V1 (seed) · V2 (écriture) | SC-03…09 | — |
-| `series` | `series` | V1 (seed) | CA-23, CA-24 | Référentiel ivoirien `A1 A2 C D` (F-12) |
-| `Level` | `levels` | V1 (seed) | CA-16…19 | `6ème…Tle` (F-12) ; supprimer un niveau ne détruit plus de classes (C-26) |
-| `level_series` | `level_series` | V1 (seed) | CA-19 | Table vivante, contrairement à ce que disait l'inventaire |
+| `Drena` | `drenas` | V1 (équipe) | SC-01, SC-02 | `schools.drena_id` est obligatoire (§5 V1) |
+| `Schools` | `schools` | V1 (équipe, import) | SC-03…09 | `cycle` et `school_type` en colonnes ; classes générées à l'import, seule voie de création (ADR-0030) |
+| `series` | `series` | V1 (équipe) | CA-23, CA-24 | Créées par l'équipe ; `A1 A2 C D` en seed de développement (ADR-0034) |
+| `Level` | `levels` | V1 (équipe) | CA-16…19 | Créés par l'équipe ; `6ème…Tle` en seed de développement (ADR-0034) ; supprimer un niveau ne détruit plus de classes (C-26) |
+| `level_series` | `level_series` | V1 (équipe) | CA-19 | Table vivante, contrairement à ce que disait l'inventaire |
 | `classrooms` | `classrooms` | V1 | CL-01…04, SC-09 | Longueur de `unique_code` égale à celle du code généré ; `public_id` dans les URL (F-05) ; année scolaire en V3 (F-19) |
 | `teacher_classrooms` | `teacher_classrooms` | V1 | CL-09 | Table vivante, contrairement à ce que disait l'inventaire |
 | `classroom_students` | `classroom_students` | V1 | ID-01, ID-02, CL-06, CL-07 | Une seule adhésion `primary: true` par élève, garantie par index partiel |
-| `materials` | `materials` | V1 (seed) | CA-20…22, CA-26 | `category` renseignée (la palette de couleurs en dépend, CA-26) |
+| `materials` | `materials` | V1 (équipe) | CA-20…22, CA-26 | `category` renseignée (la palette de couleurs en dépend, CA-26) |
 | `courses` | `courses` | V1 | CA-01…08 | Énumération de statut et `published_at` (F-13), auteur (F-13) |
 | `essentials` | `essentials` | V1 | CA-10…15 | Libellé à l'écran selon F-32 ; `validated_at` et `validated_by` **non** créés avant F-33 |
 | `classroom_courses` | — | **écartée** | — | N'existe plus : fusionnée dans `classroom_assignments` (C-35) |
@@ -654,7 +644,7 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | Codes de récupération du PIN | V1 | F-08 |
 | Secrets TOTP et codes de secours de l'équipe | V1 | F-07 |
 | Invitations (équipe en V1, direction en V2) | V1, V2 | F-16, F-22 |
-| Rapports d'import | V4 | F-17 |
+| Rapports d'import | V1 | F-17 (ADR-0039) |
 | `message_dismissals` (l'ancien utilisait un cookie de session) | V6 | F-23 |
 
 ---

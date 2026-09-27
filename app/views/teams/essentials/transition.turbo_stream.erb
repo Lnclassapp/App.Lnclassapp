@@ -1,0 +1,11 @@
+<%# 🌐 UI · teams/essentials/transition — publication ou archivage d'une fiche essentielle, ou son refus (422) %>
+<%# Rôle : succès : toast et panneau de statut remplacé ; refus : toast d'erreur qui en donne la raison %>
+<%# ADR  : 0035 · UDR : 0006, 0016 %>
+<% if @reason %>
+  <%= turbo_stream_toast t(".#{@reason}"), type: :error, title: t(".refused_title.#{action_name}") %>
+<% else %>
+  <%= turbo_stream_toast t(".#{@essential.status}", name: @essential.name), type: :success %>
+  <%= turbo_stream.replace "content_status_essential_#{@essential.slug}" do %>
+    <%= content_status_panel(record: @essential) %>
+  <% end %>
+<% end %>

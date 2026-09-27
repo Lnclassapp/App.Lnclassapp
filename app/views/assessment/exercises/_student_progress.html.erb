@@ -1,0 +1,60 @@
+<%# 🌐 UI · assessment/exercises/_student_progress — progression de l'élève sur l'exercice, et son bouton de session %>
+<%# Rôle : meilleur score, maîtrise, badge, sessions terminées ; « Commencer l'exercice », ou « Reprendre » et « Recommencer » %>
+<%# ADR  : 0033, 0054 · UDR : 0007, 0021 · « Commencer » change de page (Turbo Drive), aucun stream %>
+<section id="student_progress" aria-labelledby="student_progress_title">
+  <%= ui_card padding: :md do %>
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+      <div class="min-w-0">
+        <h2 id="student_progress_title" class="font-display text-xl font-extrabold"><%= t(".title") %></h2>
+        <dl class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div>
+            <dt class="text-xs font-medium text-mute"><%= t(".best_score") %></dt>
+            <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums">
+              <% if progress.best_score_percent %>
+                <%= t(".score", score: progress.best_score_percent) %>
+              <% else %>
+                <span class="text-base font-medium text-mute"><%= t(".no_score") %></span>
+              <% end %>
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs font-medium text-mute"><%= t(".mastery") %></dt>
+            <dd class="mt-1 font-medium">
+              <%= progress.mastery ? t("assessment.badges.mastery.#{progress.mastery}") : t(".no_mastery") %>
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs font-medium text-mute"><%= t(".badge") %></dt>
+            <dd class="mt-1">
+              <% if progress.badge_level %>
+                <%= ui_badge t(".badge_level", level: badge_label(progress.badge_level)), tone: badge_tone(progress.badge_level), icon: "trophy" %>
+              <% else %>
+                <span class="text-sm text-mute"><%= t(".no_badge") %></span>
+              <% end %>
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs font-medium text-mute"><%= t(".sessions") %></dt>
+            <dd class="mt-1 font-medium tabular-nums"><%= t(".completed", count: progress.completed_count) %></dd>
+          </div>
+        </dl>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row lg:shrink-0">
+        <% if progress.started_session_public_id %>
+          <%= ui_button t(".resume"), href: exercise_session_path(progress.started_session_public_id), icon: "play" %>
+          <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "restart-exercise-form", class: "contents" do %>
+            <%= hidden_field_tag :restart, true, id: nil %>
+            <%= ui_button t(".restart"), type: :submit, variant: :secondary, icon: "arrow-path" %>
+          <% end %>
+        <% else %>
+          <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "start-exercise-form", class: "contents" do %>
+            <%= ui_button t(".start"), type: :submit, icon: "play" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% if progress.started_session_public_id %>
+      <p class="mt-4 text-sm text-mute"><%= t(".restart_hint") %></p>
+    <% end %>
+  <% end %>
+</section>

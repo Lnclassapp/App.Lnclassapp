@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/materials/create — succès de la création %>
+<%# Rôle : toast, tableau re-rendu dans l'ordre des noms, état vide retiré ; la modale se ferme sur l'envoi réussi %>
+<%# ADR  : 0034 · UDR : 0006, 0034 %>
+<%= turbo_stream_toast t(".done", name: @form.name), type: :success %>
+<%= turbo_stream.update "materials_empty", "" %>
+<%= turbo_stream.update "materials", partial: "material_row", collection: @materials, as: :material %>

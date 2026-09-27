@@ -8,6 +8,32 @@ Tous les constats ci-dessous ont été vérifiés dans le code du dépôt actuel
 
 ---
 
+## Ce que les décisions de fondation ferment (2026-09-25)
+
+Les ADR acceptés le 2026-09-25 transforment chaque constat en règle du projet cible. Un constat reste une porte de mise en ligne tant que son test n'est pas vert.
+
+| # | Fermé par | Règle retenue |
+|---|---|---|
+| 1 | [ADR-0038](../../decisions/adr/0038-comptes-de-l-equipe-et-sous-roles.md) | Un compte `team` naît **uniquement par invitation** ; la première invitation vient d'un seed, sans PIN connu |
+| 2, 21 | [ADR-0044](../../decisions/adr/0044-rattachement-de-la-direction-par-invitation.md) | La direction est rattachée par invitation de l'équipe ou d'un membre de la même école, avec un TOTP obligatoire |
+| 3 | [ADR-0052](../../decisions/adr/0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md) | `force_ssl` actif, `/up` exclu et testé |
+| 4 | [ADR-0050](../../decisions/adr/0050-authentification-et-session.md), [ADR-0031](../../decisions/adr/0031-second-facteur-totp-pour-l-equipe.md), [ADR-0044](../../decisions/adr/0044-rattachement-de-la-direction-par-invitation.md) | `rate_limit`, verrouillage progressif à 5, 10 puis 20 échecs, validation serveur du PIN ; TOTP pour l'équipe et la direction |
+| 5, 19 | [ADR-0050](../../decisions/adr/0050-authentification-et-session.md) | Aucun secret dérivé du contact : un PIN vide est `:invalid`. Ferme C-21 |
+| 6 | [ADR-0050](../../decisions/adr/0050-authentification-et-session.md) | `reset_session` à la connexion et à la déconnexion, table `sessions` révocable, expiration à 30 jours (12 h pour `team` et `school_admin`) |
+| 7 | [ADR-0032](../../decisions/adr/0032-recuperation-assistee-du-pin.md) | Récupération assistée du PIN par un code de 15 minutes, qui coupe toutes les sessions. Le changement avec le PIN actuel vient avec `mon-compte` (V2) |
+| 8, 24 | [ADR-0026](../../decisions/adr/0026-contrat-result-entites-et-dto.md) | Un use case déclare ses paramètres et reçoit un DTO ; le CRUD générique est abandonné |
+| 9 | [ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md), [ADR-0029](../../decisions/adr/0029-identifiants-exposes-public-id-et-slugs.md) | `Identity::ReadUserPolicy` ; aucune route ne prend un `:id` |
+| 10, 12, 18 | [ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md), [ADR-0047](../../decisions/adr/0047-stockage-objet-s3-sur-railway.md) | Audience filtrée par la query et la policy ; pièces jointes validées ; rejets en base (`message_dismissals`) |
+| 15 | [ADR-0027](../../decisions/adr/0027-contextes-bornes-et-arborescence.md) | Profils 1-1 à clé `user_id`, unicité en base |
+| 17 | [ADR-0050](../../decisions/adr/0050-authentification-et-session.md) | Table `audit_events` |
+| 20, 22, 23, 26 | [ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md) | Une policy par use case, testée ; une liste reçoit l'acteur et filtre par lui |
+| 28 | [ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md) | Fichier d'import stocké par Active Storage, jamais dans `tmp/` ; aucun nom de fichier client dans un chemin disque |
+| 30 | [ADR-0054](../../decisions/adr/0054-moteur-d-evaluation-soumission-et-cloture.md) | Une tentative par question et par session, unique et immuable en base |
+
+Les n° 11, 13, 14, 16, 25, 27, 29 et 31 sont des règles d'implémentation : ils restent vérifiés par les critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses).
+
+---
+
 ## 🔴 Bloquants — l'application ne se déploie pas avant
 
 ### 1. Inscription publique au rôle le plus privilégié
@@ -28,7 +54,7 @@ inconnu ─► POST /team-signup ─► compte team ─► GET /users ─► DEL
                                                              └─► destroy en cascade
 ```
 
-**Règle pour le nouveau projet** : aucun rôle privilégié ne se crée par formulaire public. Les comptes `team` naissent par seed ou par invitation d'un `team` existant. Un test vérifie qu'aucune route publique ne crée un rôle autre que l'apprenant.
+**Règle pour le nouveau projet** : aucun rôle privilégié ne se crée par formulaire public. Les comptes `team` naissent par invitation d'un `team` existant ; seule la première invitation vient d'un seed ([ADR-0038](../../decisions/adr/0038-comptes-de-l-equipe-et-sous-roles.md)). Un test vérifie qu'aucune route publique ne crée un rôle autre que l'apprenant.
 
 ### 2. Administration d'un établissement sans lien avec lui
 
@@ -144,7 +170,7 @@ L'exploration du 2026-09-22 a trouvé les défauts ci-dessous. Chaque preuve `ch
 | 20 | 🔴 | Tout compte connecté peut **modifier, supprimer ou importer** des établissements : aucune garde de rôle | [SC](inventaire/complements-school-classroom.md) SC-06 à SC-08 | Une policy par use case (PRD cadre §3, `School::ManageSchoolPolicy`) |
 | 21 | 🔴 | Rôles et personnel d'un établissement : tout compte connecté les crée ou les supprime. La suppression n'est pas scopée à l'école de l'URL, et un rôle d'une autre école est accepté | [SC](inventaire/complements-school-classroom.md) SC-11 à SC-14 | Même règle que le n° 2 |
 | 22 | 🟠 | Tout compte connecté, **élève compris**, peut créer, modifier, supprimer ou importer des fiches | [CA](inventaire/complements-catalog.md) CA-12 à CA-15 | `Catalog::ManageContentPolicy` |
-| 23 | 🟠 | `GET /classrooms` renvoie la liste nationale des classes à tout compte connecté. `GET /classrooms/:id` et `/classrooms/:id/students` ouvrent n'importe quelle classe, liste d'élèves comprise | [SC](inventaire/complements-school-classroom.md) CL-14, CL-15, CL-28 | `Classroom::AccessPolicy` |
+| 23 | 🟠 | `GET /classrooms` renvoie la liste nationale des classes à tout compte connecté. `GET /classrooms/:id` et `/classrooms/:id/students` ouvrent n'importe quelle classe, liste d'élèves comprise | [SC](inventaire/complements-school-classroom.md) CL-14, CL-15, CL-28 | `Classroom::TeachPolicy` et une query de liste filtrée par l'acteur ([ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md)) |
 | 24 | 🟠 | Le CRUD générique du catalogue (`ManageResource`) affecte tout attribut reçu par `send("#{key}=")`, pour toutes les ressources. Le n° 8 ne visait que les comptes | [CA](inventaire/complements-catalog.md) §4 | Même règle que le n° 8 |
 | 25 | 🟡 | Le PIN s'affiche aussi **en clair sur la page de connexion**, en plus des formulaires du n° 11 | [IC](inventaire/complements-identity-communication.md) §4 | `password_field`, toujours |
 | 26 | 🟡 | Le PDF « Analyse de récurrence » se télécharge sans contrôle de rôle | [TR](inventaire/complements-transverse.md) TR-18 | Toute ressource réservée à un rôle a sa policy |
@@ -168,5 +194,7 @@ Sur six contextes inventoriés, le même défaut revient partout : **l'applicati
 **La règle qui en découle, pour le nouveau projet :**
 
 > Chaque use case déclare sa policy. Chaque policy a son test. Un use case sans policy ne passe pas la revue.
+
+Cette règle est l'[ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md), acceptée le 2026-09-25 : seuls les trois use cases d'authentification en sont exemptés, et un test d'architecture le vérifie.
 
 Ce n'est pas une préférence de style. C'est la seule contre-mesure qui tienne quand 97 % du code est écrit par des agents : un garde-fou déclaré au niveau du métier, testé, et impossible à oublier — au lieu d'une ligne à ne pas oublier en haut d'un fichier.

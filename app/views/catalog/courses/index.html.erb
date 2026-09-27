@@ -1,0 +1,60 @@
+<%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
+<%# Rôle : filtres niveau et matière qui visent le frame « courses », seul renvoyé à ses requêtes ; équipe : création et import en modale %>
+<%# ADR  : 0028, 0035 · UDR : 0006, 0013 %>
+<% content_for :title, t(".page_title") %>
+<% content_for :nav_key, "courses" %>
+<% team = current_actor.team? %>
+<% unless list_frame_request? %>
+  <% if team %>
+    <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
+      <%= ui_button t(".import"), href: new_teams_import_path(kind: "course_tree"), variant: :secondary, icon: "arrow-up-tray",
+                                  data: { turbo_frame: "modal" } %>
+      <%= ui_button t(".new_course"), href: new_teams_course_path, icon: "plus", data: { turbo_frame: "modal" } %>
+    <% end %>
+  <% else %>
+    <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+  <% end %>
+
+  <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
+  <% selects = {
+       level: [ [ t(".filters.all_levels"), "" ], *filter_options.levels.map { [ it.name, it.slug ] } ],
+       material: [ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ]
+     } %>
+  <%= form_with url: courses_path, method: :get, id: "courses-filters", role: "search", "aria-label": t(".filters.label"),
+                data: { turbo_frame: "courses", turbo_action: "advance" },
+                class: "mb-6 grid items-end gap-3 rounded-card border border-line bg-white p-4 shadow-card sm:grid-cols-2 lg:grid-cols-3" do %>
+    <% selects.each do |name, choices| %>
+      <div class="space-y-1.5">
+        <%= label_tag "filter_#{name}", t(".filters.#{name}"), class: "block text-sm font-medium text-ink" %>
+        <div class="relative">
+          <%= select_tag name, options_for_select(choices, @filters[name]), id: "filter_#{name}", class: select_class %>
+          <%= ui_icon "chevron-down", variant: :mini, class: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-mute" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="flex flex-wrap gap-3 sm:col-span-2 lg:col-span-1 lg:justify-end">
+      <%= ui_button t(".filters.submit"), type: :submit, icon: "funnel" %>
+      <%= ui_button t(".filters.reset"), href: courses_path, variant: :ghost %>
+    </div>
+  <% end %>
+<% end %>
+
+<%# target _top : une carte ouvre la page du cours, pas le frame. %>
+<%= turbo_frame_tag "courses", target: "_top", data: { turbo_action: "advance" } do %>
+  <p id="courses_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @courses.size) %></p>
+  <% if @courses.any? %>
+    <ul id="courses_list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      <%= render partial: "course_card", collection: @courses, as: :course, locals: { show_status: team } %>
+    </ul>
+  <% else %>
+    <div id="courses_empty">
+      <% if @filters.values.any?(&:present?) %>
+        <%= ui_empty_state title: t(".no_match_title"), description: t(".no_match_description"), icon: "magnifying-glass" do %>
+          <%= ui_button t(".clear_filters"), href: courses_path, variant: :secondary, icon: "x-mark" %>
+        <% end %>
+      <% else %>
+        <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

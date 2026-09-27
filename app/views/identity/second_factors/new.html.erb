@@ -1,0 +1,24 @@
+<%# 🌐 UI · identity/second_factors/new — code du second facteur d'un compte team %>
+<%# Rôle : code TOTP à 6 chiffres ou code de secours ; échec re-rendu en 422 par Turbo %>
+<%# ADR  : 0031 · UDR : 0005 %>
+<% content_for :title, t(".page_title") %>
+<main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-sm">
+    <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "shield-check", padding: :lg do %>
+      <%= form_with model: @form, scope: :second_factor, url: identity_second_factor_path, id: "second-factor-form", class: "space-y-5" do |form| %>
+        <% if @form.errors[:base].any? %>
+          <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+            <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+            <p><%= @form.errors[:base].to_sentence %></p>
+          </div>
+        <% end %>
+        <%= ui_field form, :code, required: true, value: "", hint: t(".code_hint"), inputmode: "text",
+                     autocomplete: "one-time-code", autofocus: true, maxlength: 12 %>
+        <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
+      <% end %>
+      <div class="mt-5 flex justify-center">
+        <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :ghost, size: :sm %>
+      </div>
+    <% end %>
+  </div>
+</main>

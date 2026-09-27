@@ -1,0 +1,28 @@
+<%# 🌐 UI · teams/school_classrooms/_form — niveau, série, nom et plafond d'une nouvelle classe %>
+<%# Rôle : séries rangées sous leur niveau (seuls les couples ouverts) ; le code d'adhésion n'est jamais saisi, il est tiré à la création %>
+<%# ADR  : 0030, 0041 · UDR : 0031 %>
+<% classroom = Entities::Classroom::Classroom %>
+<%= form_with model: input, scope: :classroom, url: school_classrooms_path(@school.public_id), method: :post,
+              id: "classroom-form", class: "space-y-5" do |form| %>
+  <% if input.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= input.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <%= ui_field form, :level_slug, as: :select, required: true, prompt: t(".level_prompt"), choices: level_choices %>
+    <%= ui_field form, :series_slug, as: :select, hint: t(".series_hint"),
+                 choices: safe_join([ tag.option(t(".no_series"), value: ""),
+                                      grouped_options_for_select(series_choices, input.series_slug) ]) %>
+  </div>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <%= ui_field form, :name, required: true, maxlength: classroom::NAME_MAX, autocomplete: "off", autofocus: true,
+                 placeholder: t(".name_placeholder"), hint: t(".name_hint", count: classroom::NAME_MAX) %>
+    <%= ui_field form, :max_students, as: :number, required: true, min: 1, max: classroom::MAX_STUDENTS_LIMIT, step: 1,
+                 hint: t(".max_students_hint", count: classroom::MAX_STUDENTS_LIMIT) %>
+  </div>
+  <p class="flex items-start gap-2 rounded-ln bg-info-soft p-3 text-sm text-info">
+    <%= ui_icon "information-circle", variant: :mini, class: "mt-0.5" %><span><%= t(".join_code_hint") %></span>
+  </p>
+<% end %>

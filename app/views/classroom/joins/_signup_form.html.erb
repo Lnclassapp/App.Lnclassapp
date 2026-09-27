@@ -1,0 +1,53 @@
+<%# 🌐 UI · classroom/joins/_signup_form — inscription de l'élève : identité, contact, sécurité (reprise de l'ancienne application) %>
+<%# Rôle : aucun champ de rôle ni de classe (le code suffit) ; PIN obligatoire et confirmé ; échec re-rendu en 422 par Turbo %>
+<%# ADR  : 0037, 0040, 0050 · UDR : 0009 %>
+<%= form_with model: @form, scope: :join, url: join_classroom_path(@code), method: :post, id: "join-form", class: "mt-6 space-y-6" do |form| %>
+  <% if @form.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= @form.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".identity") %></legend>
+    <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
+    <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
+    <% gender_error = @form.errors[:gender].first %>
+    <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("join_gender_error" if gender_error)) %>>
+      <legend class="mb-1.5 block text-sm font-medium text-ink">
+        <%= Dtos::Classroom::JoinWithCodeInput.human_attribute_name(:gender) %><span class="text-error" aria-hidden="true"> *</span>
+      </legend>
+      <div class="grid grid-cols-2 gap-3">
+        <% Entities::Identity::User::GENDERS.each do |gender| %>
+          <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-4 transition has-checked:border-brand has-checked:bg-brand-soft">
+            <%= form.radio_button :gender, gender, required: true, class: "size-5 shrink-0 accent-brand",
+                                  "aria-invalid": ("true" if gender_error) %>
+            <span class="text-sm font-medium text-ink"><%= t("genders.#{gender}") %></span>
+          </label>
+        <% end %>
+      </div>
+      <% if gender_error %>
+        <p id="join_gender_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= gender_error %>
+        </p>
+      <% end %>
+    </fieldset>
+  </fieldset>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".contact") %></legend>
+    <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
+                 autocomplete: "tel", placeholder: t(".contact_placeholder"), hint: t(".contact_hint") %>
+  </fieldset>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
+    <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
+                 hint: t(".pin_hint") %>
+    <%= ui_field form, :pin_confirmation, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+                 autocomplete: "new-password" %>
+  </fieldset>
+
+  <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true %>
+<% end %>

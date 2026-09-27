@@ -1,0 +1,72 @@
+# Écran des séries et de leur association aux niveaux (plan boucle-pedagogique, Lot R2) — UDR-0033, UDR-0007
+fr:
+  activemodel:
+    attributes:
+      dtos/catalog/series_input:
+        name: "Nom"
+    errors:
+      models:
+        dtos/catalog/series_input:
+          attributes:
+            name:
+              blank: "Indiquez le nom de la série."
+              too_long: "Le nom compte %{count} caractères au plus."
+              taken: "Une série porte déjà ce nom."
+  teams:
+    series:
+      index:
+        page_title: "Séries"
+        title: "Séries"
+        subtitle: "Les séries du second cycle, et les niveaux auxquels chacune est ouverte."
+        new: "Nouvelle série"
+        columns:
+          name: "Nom"
+          slug: "Code"
+          levels: "Niveaux"
+          classrooms: "Classes"
+          courses: "Cours"
+          actions: "Actions"
+        empty_title: "Aucune série pour l'instant"
+        empty_description: "Créez la première série : son code, tiré du nom, ne changera plus."
+      series_row:
+        no_level: "Aucun niveau"
+        edit: "Modifier"
+        delete: "Supprimer"
+        delete_title: "Supprimer la série %{name} ?"
+        delete_body: "La suppression est définitive. Une série liée à un niveau, ou portée par une classe ou un cours, ne peut pas être supprimée."
+        confirm: "Supprimer la série"
+        cancel: "Annuler"
+      matrix:
+        title: "Séries par niveau"
+        subtitle: "Cochez une case pour ouvrir la série au niveau. Seuls les couples cochés sont proposés dans les formulaires de classe et de cours."
+        level: "Niveau"
+        empty: "Créez d'abord des niveaux et des séries pour les associer."
+        used_legend: "Couple utilisé par une classe ou un cours : il ne peut pas être retiré."
+      form:
+        name_hint: "10 caractères au plus. Le code de la série, tiré du nom à la création, ne change plus ensuite."
+      new:
+        title: "Nouvelle série"
+        submit: "Créer la série"
+        cancel: "Annuler"
+      edit:
+        title: "Modifier la série %{name}"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      create:
+        created: "Série « %{name} » créée."
+      update:
+        updated: "Série « %{name} » enregistrée."
+      destroy:
+        deleted: "Série « %{name} » supprimée."
+        referenced: "La série « %{name} » est liée à un niveau, ou portée par une classe ou un cours : elle ne peut pas être supprimée."
+    level_series:
+      cell:
+        label: "%{level} × %{series}"
+        used: "utilisé par une classe ou un cours"
+      create:
+        done: "%{level} × %{series} : série ouverte au niveau."
+        refused: "%{level} × %{series} : ce couple existe déjà."
+        first_cycle: "%{level} est un niveau du premier cycle : aucune série ne s'y ouvre."
+      destroy:
+        done: "%{level} × %{series} : série retirée du niveau."
+        refused: "%{level} × %{series} est utilisé par une classe ou un cours : le couple ne peut pas être retiré."

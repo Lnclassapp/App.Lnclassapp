@@ -4,6 +4,7 @@
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
+@import "katex/dist/katex.min.css";
 @source "../../views";
 @source "../../helpers";
 @source "../../javascript";
@@ -132,9 +133,56 @@
   }
 }
 
+/* Contenu riche d'un cours ou d'une fiche (Action Text) : la typographie suit les tokens.
+   Hors couche et préfixé par :root, exprès. builds/trix.css (pages d'édition seulement) n'est dans aucune couche
+   et se lie souvent dans la page, donc après ce fichier : une règle en couche perdrait toujours contre lui
+   (`.trix-content * { margin: 0 }` effaçait les listes, le bouton de fichier réapparaissait). :root ajoute
+   un niveau de spécificité, pour gagner quel que soit l'ordre des feuilles. */
+:root {
+  .trix-content {
+    @apply text-base leading-relaxed text-ink;
+
+    & > :not(:first-child) { @apply mt-3; }
+    & h1 { @apply font-display text-2xl font-bold; }
+    & h2 { @apply font-display text-xl font-bold; }
+    & a { @apply text-brand-strong underline; }
+    & strong { @apply font-semibold; }
+    & ul { @apply list-disc pl-6; }
+    & ol { @apply list-decimal pl-6; }
+    & li { @apply ml-0; }
+    & blockquote { @apply ml-0 border-l-4 border-line pl-4 text-mute; }
+    & pre { @apply block w-full overflow-x-auto rounded-ln bg-mist p-3 font-mono text-sm whitespace-pre; }
+    & img { @apply h-auto max-w-full rounded-ln; }
+  }
+
+  /* V1 refuse toute pièce jointe (ADR-0047, ADR-0049) : le bouton de fichier de l'éditeur disparaît. */
+  trix-toolbar [data-trix-button-group="file-tools"] {
+    display: none;
+  }
+}
+
 /* Cadrage de la photo du héros de la landing */
 @utility object-hero {
   object-position: 30% 50%;
+}
+
+/* Page à deux colonnes : le contenu, puis un panneau latéral de 20 rem (fiche d'un établissement). */
+@utility grid-cols-main-aside {
+  grid-template-columns: minmax(0, 1fr) 20rem;
+}
+
+/* Numérotation des questions d'un exercice (formulaire) : la liste remet à zéro, chaque question compte,
+   le numéro s'affiche par ::before. */
+@utility counter-questions {
+  counter-reset: question;
+}
+@utility counter-question {
+  counter-increment: question;
+}
+@utility question-number {
+  &::before {
+    content: counter(question);
+  }
 }
 
 /* Barre de navigation basse au-dessus de l'indicateur système (iPhone, Android gestuel) */

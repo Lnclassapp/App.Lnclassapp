@@ -1,0 +1,9 @@
+<%# 🌐 UI · teams/levels/update — succès de la modification d'un niveau %>
+<%# Rôle : toast, tableau rendu de nouveau (une position modifiée change l'ordre) ; la modale se ferme seule %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0032 · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
+<%= turbo_stream_toast t(".updated", name: @level.name), type: :success %>
+<%= turbo_stream.replace "levels" do %>
+  <tbody id="levels" class="divide-y divide-line">
+    <%= render partial: "level_row", collection: @levels, as: :level %>
+  </tbody>
+<% end %>

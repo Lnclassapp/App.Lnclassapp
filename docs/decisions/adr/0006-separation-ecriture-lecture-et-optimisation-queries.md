@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *instauré pour tous les tableaux de bord et rapports de statistiques* |
+| **Statut** | Remplacé — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-07-08 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0026](./0026-contrat-result-entites-et-dto.md) |
 
 ---
+
+> ⚠️ **Décision remplacée — le contrat de lecture et d'écriture est fixé par l'ADR-0026.**
+> L'[ADR-0026](./0026-contrat-result-entites-et-dto.md) remplace cet ADR en entier le 2026-09-25. Son §3.2 (le contrôleur appelle directement une query) et la règle anti-`group_by` y sont repris ; une query renvoie désormais un `Data` (constante `Row`), et la référence `/admin` tombe.
 
 ## 1. Contexte et problématique
 Dans l'architecture hexagonale, un Use Case modélise une action métier en chargeant les Entités nécessaires via un Repository, en appliquant des validations sur ces objets purement Ruby, puis en sauvegardant l'état en base de données.

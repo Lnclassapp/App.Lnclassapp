@@ -1,0 +1,75 @@
+<%# 🌐 UI · teams/imports/kinds/_essentials — aide de l'import des fiches essentielles d'un cours, dans la modale de téléversement %>
+<%# Rôle : slug du cours cible reçu de sa page, clés acceptées à chaque étage, exemple minimal, brouillon et doublons %>
+<%# ADR  : 0035, 0039 · UDR : 0039 %>
+<% course = params[:course].to_s.strip.presence %>
+<% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
+<% tree = { "essential" => own.("name", "subtitle", "content", "exercises"),
+            "exercise" => UseCases::Catalog::ImportCourseTree::EXERCISE_ALIASES.merge(own.("description", "exercise_type", "questions")),
+            "question" => own.("content", "question_type", "explanation", "answers"),
+            "answer" => { "content" => %w[content], "correct" => %w[correct is_correct] } } %>
+<section id="import-help-essentials" aria-labelledby="import-help-essentials-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
+  <h3 id="import-help-essentials-title" class="font-medium text-ink"><%= t(".title") %></h3>
+  <p class="text-mute"><%= t(".intro_html") %></p>
+
+  <div id="import-help-course" class="flex items-start gap-2 rounded-ln border border-line bg-white p-3">
+    <%= ui_icon "book-open", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>
+    <% if course %>
+      <%= hidden_field_tag :course, course %>
+      <p class="text-ink">
+        <%= t(".course") %> <code class="font-mono text-xs text-ink"><%= course %></code>
+        <span class="text-mute"><%= t(".course_hint") %></span>
+      </p>
+    <% else %>
+      <p class="text-mute"><%= t(".no_course_html") %></p>
+    <% end %>
+  </div>
+
+  <div id="import-help-keys" class="space-y-2">
+    <% tree.each_with_index do |(node, keys), index| %>
+      <details class="rounded-ln border border-line bg-white" <%= "open" if index.zero? %>>
+        <summary class="flex min-h-tap cursor-pointer items-center gap-2 px-3 font-medium text-ink">
+          <%= t(".nodes.#{node}") %> <code class="font-mono text-xs text-mute"><%= t(".paths.#{node}") %></code>
+        </summary>
+        <dl class="space-y-2 px-3 pb-3">
+          <% keys.each do |key, aliases| %>
+            <div class="space-y-0.5">
+              <dt><%= safe_join(aliases.map { tag.code(it, class: "font-mono text-xs text-ink") }, " · ") %></dt>
+              <dd class="text-mute"><%= t(".keys.#{node}.#{key}") %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </details>
+    <% end %>
+  </div>
+
+  <div class="space-y-1.5">
+    <h4 class="font-medium text-ink"><%= t(".example") %></h4>
+    <pre id="import-help-example" class="overflow-x-auto rounded-ln border border-line bg-white p-3 font-mono text-xs text-ink"><code>{
+  "format": "lnclass.essentials",
+  "version": 1,
+  "course": "<%= course || "genetique-et-evolution" %>",
+  "essentials": [
+    { "name": "Brassage génétique par la méiose",
+      "subtitle": "Crossing-over et ségrégation",
+      "content": "&lt;p&gt;La méiose produit des gamètes …&lt;/p&gt;",
+      "exercises": [
+        { "title": "Crossing-over",
+          "exercise_type": "fixation",
+          "questions": [
+            { "content": "Le crossing-over a lieu en prophase I.",
+              "question_type": "true_false",
+              "answers": [
+                { "content": "Vrai", "correct": true },
+                { "content": "Faux", "correct": false }
+              ] }
+          ] }
+      ] }
+  ]
+}</code></pre>
+  </div>
+
+  <div class="flex items-start gap-2 text-ink">
+    <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>
+    <p><%= t(".drafts") %></p>
+  </div>
+</section>

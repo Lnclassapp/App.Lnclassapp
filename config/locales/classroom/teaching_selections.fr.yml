@@ -1,0 +1,30 @@
+# Déclaration des classes enseignées et fin de l'onboarding enseignant (plan boucle-pedagogique, Lot D2) — ADR-0030, UDR-0007, UDR-0025
+fr:
+  classroom:
+    teaching_selections:
+      index:
+        page_title: "Mes classes"
+        title: "Quelles classes enseignez-vous ?"
+        subtitle: "Sélectionnez vos classes dans l'établissement %{school}."
+        empty_title: "Aucune classe ouverte cette année"
+        empty_description: "Les classes de votre établissement ne sont pas encore créées pour cette année scolaire. Revenez un peu plus tard."
+        finish: "Terminer la configuration"
+        back_home: "Retour à l'accueil"
+      level_group:
+        classrooms:
+          one: "%{count} classe"
+          other: "%{count} classes"
+    teachings:
+      counter:
+        count:
+          zero: "Aucune classe sélectionnée"
+          one: "%{count} classe sélectionnée"
+          other: "%{count} classes sélectionnées"
+      create:
+        declared: "%{name} fait partie de vos classes."
+      destroy:
+        withdrawn: "%{name} ne fait plus partie de vos classes."
+    teacher_onboardings:
+      create:
+        completed: "Vos classes sont enregistrées. Bienvenue dans votre espace !"
+        no_classroom: "Sélectionnez au moins une classe."

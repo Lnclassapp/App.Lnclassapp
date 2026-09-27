@@ -17,4 +17,21 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1400,1400")
   end
+
+  # The test adapter is shared by every test of the process: an import test that sets perform_enqueued_jobs would leave
+  # it on for the next one, which then sees an import « Terminé » instead of « En file d'attente ». Each test starts
+  # with jobs queued, not performed; a test that needs them performed sets it in its own setup, which runs after this one.
+  setup { ActiveJob::Base.queue_adapter.perform_enqueued_jobs = false }
+
+  MOBILE_VIEWPORT = [ 390, 844 ].freeze
+
+  # The same journey on a phone: the window shrinks for the block, then returns to its size.
+  def with_mobile_viewport(size = MOBILE_VIEWPORT)
+    window = page.current_window
+    original = window.size
+    window.resize_to(*size)
+    yield
+  ensure
+    window.resize_to(*original)
+  end
 end

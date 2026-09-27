@@ -1,0 +1,33 @@
+<%# 🌐 UI · classroom/classrooms/_assigned_courses — cours assignés à la classe, actifs et publiés (CL-10) %>
+<%# Rôle : une carte par cours (matière, niveau, fiches essentielles publiées), lien vers le cours dans la classe %>
+<%# ADR  : 0048 · UDR : 0007, 0027 %>
+<section id="assigned_courses" aria-labelledby="assigned_courses_title" class="min-w-0">
+  <h2 id="assigned_courses_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <% if courses.empty? %>
+    <div id="assigned_courses_empty">
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
+    </div>
+  <% else %>
+    <ul class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <% courses.each do |course| %>
+        <li id="course_<%= course.slug %>"
+            class="relative flex flex-col gap-3 rounded-card border border-line bg-white p-4 shadow-card transition hover:border-brand/40 hover:shadow-lift">
+          <div class="flex flex-wrap gap-1.5">
+            <%= ui_subject_badge course.material_name, category: course.material_category, size: :sm %>
+            <%= ui_badge [ course.level_name, course.series_name ].compact.join(" · "), size: :sm %>
+          </div>
+          <div class="min-w-0">
+            <%= link_to course.name, classroom_course_path(classroom.public_id, course.slug),
+                        class: "font-display font-extrabold text-balance after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+            <% if course.subtitle.present? %>
+              <p class="mt-1 line-clamp-2 text-sm text-mute"><%= course.subtitle %></p>
+            <% end %>
+          </div>
+          <p class="mt-auto flex items-center gap-1.5 text-xs text-mute">
+            <%= ui_icon "document-text", size: :sm %><%= t(".essentials", count: course.essentials_count) %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

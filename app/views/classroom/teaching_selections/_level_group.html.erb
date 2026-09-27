@@ -1,0 +1,10 @@
+<%# 🌐 UI · classroom/teaching_selections/_level_group — les classes d'un niveau %>
+<%# Rôle : carte titrée par le niveau et son nombre de classes, grille de bascules %>
+<%# ADR  : 0030 · UDR : 0025 %>
+<%= ui_card title: level.name, subtitle: t(".classrooms", count: level.classrooms.size), heading: :h2 do %>
+  <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <% level.classrooms.each do |classroom| %>
+      <li><%= render "classroom/teachings/toggle", classroom: %></li>
+    <% end %>
+  </ul>
+<% end %>

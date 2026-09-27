@@ -1,0 +1,94 @@
+# Exercices, formulaire de l'équipe en modale (plan boucle-pedagogique, Lot B5) — ADR-0035, ADR-0036, ADR-0054, UDR-0007, UDR-0017
+fr:
+  activemodel:
+    attributes:
+      dtos/assessment/exercise_input:
+        title: "Titre"
+        description: "Description"
+        exercise_type: "Type d'exercice"
+        questions: "Questions"
+      dtos/assessment/question_input:
+        content: "Énoncé"
+        explanation: "Explication"
+        question_type: "Type de question"
+        answers: "Propositions"
+      dtos/assessment/answer_input:
+        content: "Proposition"
+        correct: "Proposition correcte"
+    errors:
+      models:
+        dtos/assessment/exercise_input:
+          attributes:
+            base:
+              questions_locked: "Des élèves ont déjà fait cet exercice : ses questions et son type ne se modifient plus."
+            title:
+              blank: "Donnez un titre à l'exercice."
+            questions:
+              invalid: "Certaines questions sont incomplètes : complétez les champs signalés."
+              needed_while_published: "Un exercice publié garde au moins une question."
+              true_false_needs_two_answers: "Une question Vrai / Faux a exactement 2 propositions."
+              too_few_answers: "Ajoutez au moins une proposition incorrecte en plus des propositions correctes."
+              wrong_correct_count: "Le nombre de propositions correctes ne correspond pas au type de la question."
+        dtos/assessment/question_input:
+          attributes:
+            content:
+              blank: "Saisissez l'énoncé de la question."
+            answers:
+              invalid: "Complétez ou retirez les propositions vides."
+        dtos/assessment/answer_input:
+          attributes:
+            content:
+              blank: "Saisissez le texte de la proposition."
+  teams:
+    exercises:
+      exercise_types:
+        fixation: "Fixation"
+        evaluation: "Évaluation"
+      question_types:
+        true_false: "Vrai / Faux"
+        single_choice: "Choix unique"
+        multiple_correct_2: "2 propositions correctes"
+        multiple_correct_3: "3 propositions correctes"
+      new:
+        title: "Nouvel exercice"
+        essential: "Fiche essentielle : %{name}"
+        submit: "Créer l'exercice"
+        cancel: "Annuler"
+      edit:
+        title: "Modifier l'exercice"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      form:
+        title_placeholder: "Ex. : Brassage génétique par la méiose"
+        description_hint: "Consigne lue par l'élève avant de commencer. Facultative."
+        exercise_type_hint: "Fixation : pour s'entraîner. Évaluation : pour faire le point."
+        questions_title: "Questions"
+        questions_hint: "Vrai / Faux : exactement 2 propositions, dont 1 correcte. Choix unique, 2 ou 3 propositions correctes : autant de cases cochées, et au moins une proposition incorrecte en plus."
+        add_question: "Ajouter une question"
+        locked_title: "Questions verrouillées"
+        locked_body: "Des élèves ont déjà fait cet exercice. Vous pouvez modifier son titre et sa description ; ses questions, leurs propositions et son type ne changent plus."
+        locked_type: "Type d'exercice : %{type}"
+        locked_question: "Question %{position} · %{type}"
+        correct: "Proposition correcte"
+      question_fields:
+        legend: "Question"
+        remove: "Retirer la question"
+        answers: "Propositions"
+        add_answer: "Ajouter une proposition"
+        content_placeholder: "Énoncé de la question"
+        explanation_hint: "Montrée à l'élève après sa réponse. Facultative."
+      answer_fields:
+        placeholder: "Texte de la proposition"
+        correct: "Proposition correcte"
+        remove: "Retirer la proposition"
+      create:
+        created: "Exercice « %{title} » créé (brouillon)."
+      update:
+        updated: "Exercice « %{title} » modifié."
+      transition:
+        published: "Exercice « %{title} » publié."
+        archived: "Exercice « %{title} » archivé."
+        refusals:
+          transition_not_allowed: "Cet exercice est déjà dans cet état ou ne peut pas prendre ce statut. Rechargez la page pour voir son statut actuel."
+          parent_not_published: "Publiez d'abord la fiche essentielle et son cours."
+          not_publishable: "Ajoutez au moins une question bien construite avant de publier l'exercice."

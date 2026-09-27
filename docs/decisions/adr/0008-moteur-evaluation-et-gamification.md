@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *en production (Use Cases d'exécution d'exercices et attribution de badges actifs)* |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-07-18 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0033](./0033-bareme-des-badges-et-seuils-pedagogiques.md) *(badges du §3, §4)*, [ADR-0054](./0054-moteur-d-evaluation-soumission-et-cloture.md) *(statuts et correction du §3, §6)* |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — barème des badges et moteur d'évaluation.**
+> Le barème des badges du §3 et les échelles du §4 sont remplacés par l'[ADR-0033](./0033-bareme-des-badges-et-seuils-pedagogiques.md) le 2026-09-25 : Bronze 50, Argent 70, Or 80, Diamant 100. Les statuts de session et la correction du §3, ainsi que le §6, sont remplacés par l'[ADR-0054](./0054-moteur-d-evaluation-soumission-et-cloture.md). La correction sans N+1 et le verrouillage des sessions terminées restent en vigueur.
 
 ## 1. Contexte et problématique
 Une plateforme éducative interactive ne peut pas se contenter d'afficher des cours statiques ; elle doit évaluer la progression réelle de l'apprenant à travers des exercices, calculer ses scores de précision et stimuler sa motivation par un système de récompenses (gamification).

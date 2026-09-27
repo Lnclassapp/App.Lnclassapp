@@ -1,0 +1,10 @@
+<%# 🌐 UI · errors/not_found — réponse 404 rendue par RendersResult %>
+<%# Rôle : « Page introuvable. », lien vers l'accueil ; toujours dans le layout application %>
+<%# ADR  : 0026, 0029 %>
+<% content_for :title, t(".page_title") %>
+<main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-md">
+    <%= ui_empty_state title: t(".title"), description: t(".description"), icon: "map",
+                       action: { label: t(".home"), href: main_app.root_path } %>
+  </div>
+</main>

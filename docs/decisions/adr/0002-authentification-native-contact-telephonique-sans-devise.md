@@ -2,13 +2,17 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *en production* |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-06-12 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0050](./0050-authentification-et-session.md) *(§3.2, §3.3, §5, Wave au §1)* |
+| **Amendé par** | [ADR-0032](./0032-recuperation-assistee-du-pin.md) : §4 (le SMS n'est plus le moyen de récupération de la V1) |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — l'authentification et la session suivent l'ADR-0050.**
+> Le §3.2, le §3.3, le §5 et la mention de Wave au §1 sont remplacés par l'[ADR-0050](./0050-authentification-et-session.md) le 2026-09-25 : contact normalisé, `Identity::Authenticate`, `reset_session` et table `sessions`, verrouillage progressif. Le §4 est amendé par l'[ADR-0032](./0032-recuperation-assistee-du-pin.md). Le principe (connexion par contact téléphonique, sans Devise ni email) reste en vigueur.
 
 ## 1. Contexte et problématique
 Dans l'écosystème web traditionnel et les standards Rails, la gem **Devise** est la solution d'authentification par défaut. Cependant, Devise est intrinsèquement conçue autour d'un paradigme occidental centré sur l'**adresse email** comme identifiant unique fondamental.

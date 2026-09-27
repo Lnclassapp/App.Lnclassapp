@@ -2,13 +2,16 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-07-29 |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0053](./0053-validation-collaborative-requalifiee.md) |
 
 ---
+
+> ⚠️ **Décision remplacée — la validation collaborative n'entre pas dans le projet cible.**
+> L'[ADR-0053](./0053-validation-collaborative-requalifiee.md) remplace cet ADR en entier le 2026-09-25 : aucune table ni route de validation avant une décision produit (V8), et aucun label « Conforme au programme » n'est affiché.
 
 ## 1. Contexte et problématique
 Lnclass a besoin d'assurer l'excellence de ses fiches (Essentials) et de ses exercices, en permettant aux enseignants (Teachers) de signaler les erreurs et les non-conformités au programme officiel.

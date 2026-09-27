@@ -177,3 +177,63 @@ Les annonces restent en V6. Les 26 features concernées gardent leur ligne dans 
 - **Choix du porteur, contre la lettre de l'ADR-0010** : Thruster est gardé, parce que la compression sert le budget de l'ADR-0051.
 - **Non vérifié, à confirmer au premier déploiement de recette** : l'expansion de `$PORT` par Railway, et la compatibilité de Mission Control Jobs avec la CSP sous nonce de l'ADR-0049.
 - **Les trois décisions qui bloquaient la V0 (F-27, F-29, F-30) sont acceptées.** Prochaine étape : ouvrir le chantier `amorcage-depot` et fixer la date de la V1.
+
+## 2026-09-25 — Décisions de fondation acceptées en bloc
+
+| Sujet | Décision |
+|---|---|
+| ADR-0026 à ADR-0054 (sans 0042 ni 0046) et UDR-0007 | **Acceptés** par le porteur le 2026-09-25, avec trois corrections. Liste et effets : [`decisions-a-accepter.md`](decisions-a-accepter.md) |
+
+**Les trois corrections du porteur**
+
+1. **Badges** ([ADR-0033](../../decisions/adr/0033-bareme-des-badges-et-seuils-pedagogiques.md)) : quatre paliers, Bronze ≥ 50 %, Argent ≥ 70 %, Or ≥ 80 %, Diamant = 100 % (sans faute). Un badge par exercice, qui ne monte que vers un palier strictement supérieur. Seuils nommés dans le domaine : `PASS_THRESHOLD` 50, `MASTERY_THRESHOLD` 70, `GOLD_THRESHOLD` 80, `PERFECT_THRESHOLD` 100. « Diamant » redevient un terme d'interface autorisé ([UDR-0007](../../decisions/udr/0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md), glossaire).
+2. **Taxonomie** ([ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md)) : niveaux, séries, `level_series` et matières (avec leur catégorie, CA-26) sont **créés par l'équipe dans l'interface**, pas seedés en production. Les seeds (`db/seeds/<contexte>.rb`) ne servent qu'en développement et en test, sous un garde d'environnement. La gestion de la taxonomie passe en V1 (CA-18, 19, 20, 22, 24, 25 et TR-13). Les précisions ci-dessous étendent la règle aux DRENA et aux établissements.
+3. **Adhésion par code** ([ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md)) : pas d'exception. `Classroom::JoinWithCode` a sa policy, `Classroom::JoinPolicy`, qui accepte un acteur anonyme et vérifie une classe active et non archivée, un effectif sous le plafond, un code valide et non révoqué. ADR-0040 et ADR-0041 alignés.
+
+**Précisions du porteur, intégrées avant l'acceptation**
+
+- **A. DRENA** ([ADR-0034](../../decisions/adr/0034-reprise-des-donnees-et-referentiel-seede.md)) : créées par l'équipe, comme la taxonomie ; aucun seed en production. `drenas.yml` devient une donnée de développement et de test, et un fichier d'exemple dont les slugs servent aux imports d'écoles d'exemple. Aucun format d'import de DRENA : SC-02 est écartée.
+- **B. Établissements** ([ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md)) : importés en JSON par l'équipe dès la V1 (format `lnclass.schools`, alias de clés de l'ancien acceptés, rattachement à une DRENA), création unitaire à l'écran possible. Le type `mixte` est conservé (voir plus bas).
+- **C. Classes par défaut** ([ADR-0030](../../decisions/adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md)) : générées dans la transaction qui crée ou importe l'établissement, avec le plan de l'ancien (public et privé) ; les séries de chaque niveau sont lues dans les `level_series` saisis par l'équipe. Corrigé : `schools.cycle` (`first`, `both`) en colonne, déduit à l'import du mot « collège » sans tenir compte des accents, modifiable ; correspondance par slug de niveau et de série, jamais par libellé ; niveau ou série absent sauté et compté ; noms toujours espacés (« Tle A1 2 ») ; aucun élève de démonstration ; code d'adhésion unique en base et dans le lot ; plafond et année selon l'ADR-0041.
+- **D. Contenu** ([ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md)) : cours en arbre, fiches et exercices (questions et propositions comprises) s'importent en JSON dès la V1.
+- **Imports en masse et partiels** ([ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md)) : fichier de 20 Mo au plus, stocké par Active Storage (ADR-0047), traité par un job Solid Queue (ADR-0052) ; validation complète (schéma, puis règles métier) avant toute écriture, erreurs avec leur chemin JSON ; les éléments valides sont écrits par lots `insert_all`, chacun entier ou pas du tout (une école avec ses classes, un cours avec sa descendance, une fiche avec ses exercices, un exercice avec ses questions et propositions) ; doublons ignorés et comptés ; rapport à quatre compteurs (importés, ignorés, en erreur, total). Seul un fichier à l'enveloppe ou à la version invalide, ou au-delà des limites, est rejeté en bloc. L'ADR-0020 passe en « Remplacé partiellement » : §2.1 et §2.2 restent en vigueur. Critère : 500 écoles ou 200 cours complets en moins de 2 minutes en local, par un test de performance écrit.
+- **Exemptions** ([ADR-0028](../../decisions/adr/0028-policies-de-domaine-par-use-case.md)) : `Identity::Authenticate`, `Identity::ResetPinWithCode` et `Identity::AcceptInvitation`, use cases anonymes d'avant l'authentification, sont acceptés sans policy. Nouvelle policy V1 : `School::ManageSchoolPolicy`.
+- **Remédiation de l'ADR-0043** validée telle quelle.
+- **Hotwire pour tous les CRUD** ([ADR-0009](../../decisions/adr/0009-stack-frontend-vanilla-css-tailwind-hotwire.md) §3, point 6) : formulaire dans un Turbo Frame, liste mise à jour par un Turbo Stream. Ligne ajoutée à l'ADR-0009, sans nouvel ADR.
+- **E. Feuille de route** : la V1 gagne tout `referentiels-equipe` (DRENA, établissements et leur import, génération des classes, taxonomie) et le chantier `import-contenu`. La V2 garde `espace-direction`, `mon-compte` et `annuaire-equipe`. La V4 garde `catalogue-complet`, `pilotage-equipe` et `installation-pwa`, plus `sous-roles-equipe`. F-12 et F-17 bloquent la V1. Bilan du §6 : 95 fonctionnalités en V1, 53 en V2, 15 plus tard, 50 écartées.
+
+**Valeurs par défaut acceptées sans modification**
+
+- Le niveau s'écrit `2nde`.
+- Plafond d'effectif d'une classe : 80 (ADR-0041).
+- TOTP obligatoire pour l'équipe et pour la direction (ADR-0031, ADR-0044).
+- Verrouillage progressif à 5, 10 puis 20 échecs (ADR-0050).
+- Bucket Railway sans sauvegarde automatique en V1 (ADR-0047).
+- Sous-rôles d'équipe `admin`, `content`, `field` (ADR-0038).
+
+**Appliqué dans la foulée**
+
+- Statut `Accepté` dans les 24 ADR, l'UDR-0007 et l'index des ADR ; anciens ADR marqués (encadré, lignes `Remplacé par`, `Amendé par` ou `Complété par`, table « Décisions remplacées ») ; UDR-0001 et UDR-0003 marquées pour leur vocabulaire. L'index des UDR est tenu par l'agent des UDR.
+- Feuille de route : F-01 à F-34 acceptées (sauf F-09, F-20, F-24, F-31) ; 40 contradictions fermées ; §3, §5 (V1, V2, V4), §6, §6.9 et §7 mis à jour pour la taxonomie, les référentiels et les imports.
+- ADR-0012 et ADR-0020 : encadrés alignés sur l'import partiel. ADR-0009 : encadré et §3 complétés (Hotwire pour tous les CRUD).
+- Documents de rang 5 corrigés : glossaire (Drena, School), `architecture.md` §2.7 et §5, blueprints `result` et `policy`, [`securite.md`](securite.md).
+
+**Réponses du porteur aux choix du rédacteur (2026-09-25)**
+
+- DRENA : créées par le formulaire de création, sans import ; SC-02 reste écartée.
+- Type d'établissement : `mixte` est **conservé**. `school_type IN ('public','private','mixed')`, libellés Public, Privé, Mixte ; à l'import, `mixte` et ses alias sont acceptés. Pour la génération des classes, un établissement mixte suit le barème du privé, comme l'ancien code ([ADR-0030](../../decisions/adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [ADR-0039](../../decisions/adr/0039-format-d-import-du-contenu.md), glossaire).
+- Acceptés : limites d'import (5 000 écoles, 500 cours, 2 000 fiches, 10 000 exercices, 1 000 erreurs détaillées) ; `import_reports` dans le contexte `catalog` ; chantier V4 `sous-roles-equipe` ; noms de classes toujours espacés ; séries A et C rattachées à la 2nde dans le seed de développement.
+
+**Reste ouvert**
+
+- F-09 (UDR-0005) et F-31 (UDR-0006) suivent leur propre acceptation.
+
+## 2026-09-25 — Retour du porteur sur la V1
+
+Consigné en détail dans le [journal de la boucle pédagogique](../boucle-pedagogique/journal.md#retour-du-porteur-du-2026-09-25). Ce qui touche le programme :
+
+- **PRD cadre, §3 (qui peut quoi)** : l'enseignant voit les bonnes réponses de **tout exercice qu'il peut lire**, y compris avant de l'assigner, pour préparer sa classe (au lieu de « classe assignée »). Décision de l'orchestrateur, que le porteur peut rouvrir. L'élève ne voit jamais une bonne réponse avant d'avoir répondu (amendements des ADR-0028 et ADR-0054).
+- **F-09** (UDR-0005, thème sombre écarté en V1) et **F-31** (UDR-0006, shell unique par rôle) sont **acceptées** : le point « Reste ouvert » ci-dessus est fermé.
+- Protection des branches GitHub abandonnée (offre gratuite, HTTP 403) : le hook pre-commit et la discipline des PR la remplacent ; seul le porteur fait `Develop` → `main`.
+- Établissements créés **uniquement par import JSON**, classes générées à ce moment ; éditeur riche (Action Text + Trix) en V1, texte seulement, sans pièce jointe (amendements des ADR-0030 et ADR-0051).
+

@@ -1,0 +1,38 @@
+<%# 🌐 UI · teams/schools/_classroom_group — les classes d'un niveau, sur la fiche d'un établissement %>
+<%# Rôle : une carte par classe : nom (lien vers sa page), code d'adhésion affiché, effectif, enseignants %>
+<%# ADR  : 0030, 0041 · UDR : 0036 %>
+<% heading_id = "level_#{level.name.parameterize}" %>
+<section aria-labelledby="<%= heading_id %>">
+  <div class="mb-4 flex items-center justify-between gap-3 border-b border-line pb-3">
+    <h3 id="<%= heading_id %>" class="font-display text-lg font-extrabold"><%= level.name %></h3>
+    <%= ui_badge t(".count", count: level.classrooms.size), size: :sm %>
+  </div>
+  <ul class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <% level.classrooms.each do |classroom| %>
+      <li id="classroom_<%= classroom.public_id %>"
+          class="relative rounded-card border border-line bg-white p-4 shadow-card transition hover:border-brand/40 hover:shadow-lift">
+        <div class="flex items-start justify-between gap-2">
+          <%= link_to classroom.name, classroom_path(classroom.public_id), data: { turbo_frame: "_top" },
+                      class: "font-display font-extrabold after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+          <% if classroom.status == "archived" %>
+            <%= ui_badge t(".archived"), size: :sm %>
+          <% end %>
+        </div>
+        <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
+          <div>
+            <dt class="text-xs text-mute"><%= t(".join_code") %></dt>
+            <dd class="font-mono font-medium tracking-widest"><%= classroom.join_code_display || t(".no_join_code") %></dd>
+          </div>
+          <div>
+            <dt class="text-xs text-mute"><%= t(".students") %></dt>
+            <dd class="tabular-nums font-medium"><%= classroom.students_count %></dd>
+          </div>
+          <div class="col-span-2">
+            <dt class="text-xs text-mute"><%= t(".teachers") %></dt>
+            <dd class="truncate"><%= classroom.teacher_names.any? ? classroom.teacher_names.join(", ") : t(".no_teacher") %></dd>
+          </div>
+        </dl>
+      </li>
+    <% end %>
+  </ul>
+</section>

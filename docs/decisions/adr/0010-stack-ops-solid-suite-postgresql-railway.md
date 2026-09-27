@@ -8,6 +8,7 @@
 | **Remplace** | — |
 | **Remplacé par** | — |
 | **Amendé par** | [ADR-0052](./0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md) : §3.1 (worker sans condition) et §5 (Thruster requis) |
+| **Complété par** | [ADR-0047](./0047-stockage-objet-s3-sur-railway.md) : stockage de fichiers sur un bucket Railway compatible S3 |
 
 ---
 

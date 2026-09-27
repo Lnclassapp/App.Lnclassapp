@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/level_series/create — couple coché, ou refusé (déjà lié, ou niveau du premier cycle : 422) %>
+<%# Rôle : la case est remplacée par son état en base, avec un toast %>
+<%# ADR  : 0034 · UDR : 0006, 0033 %>
+<%= turbo_stream_toast @message, type: @refused ? :error : :success %>
+<%= turbo_stream.replace "level_series_#{@cell.level_slug}_#{@cell.series_slug}", partial: "cell", locals: { cell: @cell } %>

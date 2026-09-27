@@ -1,0 +1,51 @@
+<%# 🌐 UI · teams/imports/_status — suivi d'un import, frame rechargé toutes les 3 s tant que l'import tourne %>
+<%# Rôle : phase et progression pendant l'import ; à la fin, compteurs, détails et erreurs ; rejet : son motif %>
+<%# ADR  : 0039 · UDR : 0006 · Stimulus : teams--import-status %>
+<%# Pas de src sur le frame : Turbo le chargerait dès son arrivée ; le contrôleur le pose au premier rechargement. %>
+<%= turbo_frame_tag "import_status",
+                    data: { controller: "teams--import-status", teams__import_status_url_value: teams_import_path(import.public_id) } do %>
+  <div data-teams--import-status-target="state" data-status="<%= import.status %>" class="space-y-5" aria-live="polite">
+    <div class="flex flex-wrap items-center gap-3">
+      <%= ui_badge t("teams.imports.statuses.#{import.status}"), tone: import_status_tone(import.status), dot: true %>
+      <% if import.finished_at %>
+        <span class="text-sm text-mute"><%= t(".finished_at", time: l(import.finished_at, format: :short)) %></span>
+      <% end %>
+    </div>
+
+    <% case import.status %>
+    <% when "queued", "validating", "importing" %>
+      <div class="space-y-2">
+        <p class="text-sm font-medium"><%= t(".phases.#{import.status}") %></p>
+        <progress class="h-2 w-full overflow-hidden rounded-full accent-brand" aria-label="<%= t(".phases.#{import.status}") %>"></progress>
+        <p class="text-sm text-mute"><%= t(".processed", count: import.processed_count) %></p>
+      </div>
+    <% when "completed" %>
+      <dl class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <% { imported: import.imported_count, skipped: import.skipped_count, errors: import.error_count, total: import.total_count }.each do |counter, value| %>
+          <div class="rounded-ln bg-mist px-4 py-3">
+            <dt class="text-xs text-mute"><%= t(".counters.#{counter}") %></dt>
+            <dd id="import_counter_<%= counter %>" class="font-display text-2xl font-extrabold tabular-nums"><%= value %></dd>
+          </div>
+        <% end %>
+      </dl>
+      <% if import.details.any? %>
+        <div>
+          <h3 class="mb-2 text-sm font-medium"><%= t(".details_title") %></h3>
+          <ul class="space-y-1 text-sm">
+            <% import.details.each do |key, value| %>
+              <li><%= t(".details.#{key}", default: key.to_s.humanize) %> : <span class="font-medium tabular-nums"><%= value %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <% if import.import_errors.any? %>
+        <%= render "teams/imports/import_errors", import: %>
+      <% end %>
+    <% when "rejected" %>
+      <div role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".rejected") %></div>
+      <%= render "teams/imports/import_errors", import: %>
+    <% when "failed" %>
+      <div role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".failed") %></div>
+    <% end %>
+  </div>
+<% end %>

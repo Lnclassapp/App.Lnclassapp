@@ -1,0 +1,86 @@
+# Écran des imports de l'équipe (plan boucle-pedagogique, 0e.e4) — ADR-0039, UDR-0007
+fr:
+  teams:
+    imports:
+      statuses:
+        queued: "En file d'attente"
+        validating: "Vérification"
+        importing: "Import en cours"
+        completed: "Terminé"
+        rejected: "Rejeté"
+        failed: "Échoué"
+      error_codes:
+        json_invalid: "Le fichier n'est pas un JSON lisible."
+        format_mismatch: "Le format du fichier ne correspond pas à ce type d'import (attendu : %{expected})."
+        version_unsupported: "Cette version du format n'est pas prise en charge (attendue : %{expected})."
+        unknown_target: "La cible indiquée est introuvable."
+        too_many_roots: "Le fichier contient %{count} éléments ; %{max} au plus."
+        too_large: "Le fichier est trop volumineux."
+        schema: "Valeur non conforme au format attendu (%{keyword})."
+        blank: "Valeur obligatoire manquante."
+        too_long: "Valeur trop longue."
+        unknown_level: "Niveau inconnu."
+        unknown_series: "Série inconnue."
+        unknown_material: "Matière inconnue."
+        unknown_drena: "DRENA inconnue."
+        series_not_allowed: "Cette série n'est pas proposée pour ce niveau."
+        invalid_value: "Valeur non valide."
+        question_structure: "Question incomplète : vérifiez ses propositions et la bonne réponse."
+        write_failed: "L'enregistrement de cet élément n'a pas abouti."
+      index:
+        page_title: "Imports"
+        title: "Imports"
+        subtitle: "Établissements, cours, fiches essentielles et exercices importés depuis un fichier JSON."
+        new: "Nouvel import"
+        all: "Tous"
+        filter_label: "Filtrer par type d'import"
+        empty_title: "Aucun import pour l'instant"
+        empty_description: "Chaque fichier importé apparaîtra ici avec son bilan."
+        columns:
+          date: "Date"
+          kind: "Type"
+          file: "Fichier"
+          status: "Statut"
+          imported: "Importés"
+          skipped: "Ignorés"
+          errors: "En erreur"
+          author: "Auteur"
+      new:
+        title: "Importer : %{kind}"
+        file: "Fichier JSON"
+        limits: "Un fichier .json de %{megabytes} Mo au plus, avec %{roots} éléments au plus."
+        submit: "Lancer l'import"
+        cancel: "Annuler"
+      create:
+        started: "Import lancé."
+        tracking_title: "Import : %{kind}"
+        close: "Fermer"
+      show:
+        page_title: "Import : %{kind}"
+        title: "Import : %{kind}"
+        subtitle: "%{filename} · %{author} · %{date}"
+        back: "Retour aux imports"
+      status:
+        finished_at: "Fini le %{time}"
+        processed:
+          one: "%{count} élément vérifié"
+          other: "%{count} éléments vérifiés"
+        phases:
+          queued: "Le fichier attend son tour."
+          validating: "Vérification de tout le fichier…"
+          importing: "Écriture des éléments valides…"
+        counters:
+          imported: "Importés"
+          skipped: "Ignorés (doublons)"
+          errors: "En erreur"
+          total: "Total"
+        details_title: "Détails"
+        details:
+          classrooms: "Classes générées"
+        rejected: "Le fichier a été rejeté en bloc : rien n'a été écrit. Corrigez le motif ci-dessous, puis relancez l'import."
+        failed: "L'import s'est arrêté sur une erreur imprévue. Relancé, le fichier comptera en doublons ce qui a déjà été écrit."
+      import_errors:
+        title: "Erreurs"
+        more:
+          one: "Et %{count} autre élément en erreur, non détaillé."
+          other: "Et %{count} autres éléments en erreur, non détaillés."

@@ -1,0 +1,32 @@
+<%# 🌐 UI · classroom/teacher_homes/_classroom_card — une classe déclarée sur l'accueil enseignant %>
+<%# Rôle : nom, niveau, effectif, assignations actives et score moyen ; toute la carte mène à la page de la classe %>
+<%# ADR  : 0048 · UDR : 0007, 0026 %>
+<%# locals: (classroom:) -%>
+<li id="classroom_<%= classroom.public_id %>">
+  <%= link_to classroom_path(classroom.public_id),
+              class: "group flex h-full flex-col gap-4 rounded-ln border border-line bg-brand-soft/40 p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <div class="min-w-0 space-y-1">
+      <p class="truncate font-display text-lg font-extrabold text-ink"><%= classroom.name %></p>
+      <p class="text-sm text-mute"><%= classroom.level_name %></p>
+    </div>
+    <ul class="space-y-1.5 text-sm text-mute">
+      <li class="inline-flex w-full items-center gap-1.5">
+        <%= ui_icon "users", variant: :mini, size: :sm %><%= t(".students", count: classroom.active_students_count) %>
+      </li>
+      <li class="inline-flex w-full items-center gap-1.5">
+        <%= ui_icon "clipboard-document-list", variant: :mini, size: :sm %><%= t(".assignments", count: classroom.active_assignments_count) %>
+      </li>
+      <li class="inline-flex w-full items-center gap-1.5">
+        <%= ui_icon "chart-bar", variant: :mini, size: :sm %>
+        <% if classroom.average_score_percent %>
+          <span class="font-medium text-ink"><%= t(".score", score: classroom.average_score_percent) %></span>
+        <% else %>
+          <%= t(".no_score") %>
+        <% end %>
+      </li>
+    </ul>
+    <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
+      <%= t(".open") %><%= ui_icon "arrow-right", variant: :mini, size: :sm, class: "transition group-hover:translate-x-0.5" %>
+    </span>
+  <% end %>
+</li>

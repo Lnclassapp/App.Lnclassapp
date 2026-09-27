@@ -2,13 +2,17 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé partiellement — *voir l'avertissement ci-dessous* |
 | **Date** | 2026-08 *(jour non documenté)* |
 | **Chantier** | — |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | [ADR-0048](./0048-statuts-d-assignation-active-et-archived.md) *(§2)* |
+| **Complété par** | [ADR-0036](./0036-suppression-archivage-et-anonymisation.md) et [ADR-0041](./0041-vie-d-une-classe-annee-scolaire-et-code.md) : archivage étendu aux classes, au contenu et aux annonces |
 
 ---
+
+> ⚠️ **Décision partiellement remplacée — les statuts d'assignation suivent l'ADR-0048.**
+> Le §2 (statuts, réactivation, `teacher_id`) est remplacé par l'[ADR-0048](./0048-statuts-d-assignation-active-et-archived.md) le 2026-09-25 : deux statuts, une nouvelle ligne à chaque réassignation. L'archivage est étendu par l'[ADR-0036](./0036-suppression-archivage-et-anonymisation.md) et l'[ADR-0041](./0041-vie-d-une-classe-annee-scolaire-et-code.md). Le principe « archiver plutôt que détruire » reste en vigueur.
 
 ## 1. Contexte et problématique
 Les enseignants ont besoin de pouvoir assigner et retirer facilement des ressources pédagogiques (Cours, Essentiels) à leurs classes via une interface fluide de type "Toggle".
