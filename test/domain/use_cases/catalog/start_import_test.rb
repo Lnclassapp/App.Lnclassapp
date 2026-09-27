@@ -11,13 +11,14 @@ module UseCases
       class FakeReports
         include Ports::Catalog::ImportReportRepositoryPort
 
-        attr_reader :reports
+        attr_reader :reports, :stale_before
 
         def initialize(reports = [])
           @reports = reports
         end
 
         def fail_stale(kind:, before:, at:)
+          @stale_before = before
           stale = @reports.select { it.kind == kind && %w[validating importing].include?(it.status) && it.started_at < before }
           @reports = @reports.map { stale.include?(it) ? it.with(status: "failed", finished_at: at) : it }
           stale.size
@@ -106,11 +107,12 @@ module UseCases
         assert start(kind: "course_tree").success?
       end
 
-      test "un rapport bloqué depuis 31 minutes passe failed et libère le type" do
-        @reports = FakeReports.new([ self.class.report(id: 1, kind: "schools", status: "importing", started_at: NOW - 31 * 60) ])
+      test "un rapport bloqué depuis 11 minutes passe failed et libère le type : la limite est de 10 minutes" do
+        @reports = FakeReports.new([ self.class.report(id: 1, kind: "schools", status: "importing", started_at: NOW - 11 * 60) ])
 
         assert start.success?
         assert_equal [ "failed", NOW ], @reports.reports.first.to_h.values_at(:status, :finished_at)
+        assert_equal NOW - (10 * 60), @reports.stale_before
       end
     end
   end

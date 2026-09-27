@@ -29,7 +29,9 @@ module Repositories
       end
 
       def fail_stale(kind:, before:, at:)
-        Orm::ImportReport.where(kind:, status: %w[validating importing], started_at: ...before)
+        running = Orm::ImportReport.where(status: %w[validating importing], started_at: ...before)
+        never_claimed = Orm::ImportReport.where(status: "queued", created_at: ...before)
+        Orm::ImportReport.where(kind:).merge(running.or(never_claimed))
                          .update_all(status: "failed", finished_at: at, updated_at: at)
       end
 

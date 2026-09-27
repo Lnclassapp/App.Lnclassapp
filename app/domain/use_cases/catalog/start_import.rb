@@ -4,8 +4,9 @@
 module UseCases
   module Catalog
     class StartImport
-      # Au-delà, un rapport encore validating ou importing vient d'un job tué (déploiement).
-      STALE_AFTER = 30 * 60
+      # Au-delà, un rapport encore queued, validating ou importing vient d'un job tué ou jamais pris (déploiement, worker
+      # arrêté). Décision du porteur (2026-09-27, ADR-0039) : 10 min, quand un import normal dure moins de 2 min.
+      STALE_AFTER = 10 * 60
 
       def initialize(reports:, files:, queue:, transaction:, clock:)
         @reports = reports
