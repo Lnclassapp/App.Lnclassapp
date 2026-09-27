@@ -1,0 +1,19 @@
+<%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
+<%# Rôle : carte de profil puis la liste des destinations du rôle — la même que la barre basse %>
+<%# UDR  : 0006 %>
+<aside class="fixed top-bar bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
+  <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
+    <%= ui_avatar user.name, src: user.avatar_url %>
+    <div class="min-w-0">
+      <p class="truncate font-semibold"><%= user.name %></p>
+      <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
+    </div>
+  </div>
+  <nav aria-label="<%= t(".label") %>" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">
+    <ul class="space-y-1">
+      <% navigation_for(user.role).each do |destination| %>
+        <li><%= nav_link destination, style: :sidebar %></li>
+      <% end %>
+    </ul>
+  </nav>
+</aside>

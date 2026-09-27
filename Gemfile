@@ -16,11 +16,16 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
+
+# TOTP second factor for the team, QR code rendered as inline SVG (ADR-0031)
+gem "rotp", "~> 6.3"
+gem "rqrcode", "~> 2.2"
+
+# JSON Schema validation of bulk imports (ADR-0039)
+gem "json_schemer", "~> 2.3"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -33,14 +38,18 @@ gem "solid_cable"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
+# Dashboard for Solid Queue jobs, mounted under /teams/jobs (ADR-0052)
+gem "mission_control-jobs"
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 2.1"
+# S3-compatible storage for Active Storage (Railway bucket, ADR-0047)
+gem "aws-sdk-s3", require: false
+
+# French locale data for Rails (default locale is :fr)
+gem "rails-i18n", "~> 8.1"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -71,11 +80,11 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-end
 
-############### URL and SLUGS ###########
-gem "friendly_id", "~> 5.7"
+  # Coverage: 100 % lines and branches, blocking (ADR-0024)
+  gem "simplecov", require: false
+end
 
 # json 3.x n'accepte plus de hash positionnel dans JSON.parse, ce qui casse
 # ActiveSupport::JSON.decode (lecture des cookies de session) en Rails 8.1
-gem "json", "~> 3.0"
+gem "json", "~> 2.21"

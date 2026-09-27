@@ -1,0 +1,15 @@
+<%# 🌐 UI · design/modal — formulaire de démonstration servi dans le frame « modal » %>
+<%# Rôle : GET l'ouvre, POST en échec le re-rend en 422 avec ses erreurs ; le succès répond en Turbo Stream %>
+<%# UDR  : 0006 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "design-crud-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "design-crud-form" %>
+    <% end %>
+    <%= form_with model: @sample, scope: :sample, url: design_modal_path, id: "design-crud-form", class: "space-y-5" do |form| %>
+      <%= ui_field form, :name, label: t(".name"), required: true %>
+      <%= ui_field form, :email, as: :email, label: t(".email"), hint: t(".email_hint") %>
+    <% end %>
+  <% end %>
+<% end %>

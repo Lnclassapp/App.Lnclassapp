@@ -52,6 +52,15 @@ Rails.application.configure do
   # Append comments with runtime information tags to SQL queries in logs.
   config.active_record.query_log_tags_enabled = true
 
+  # ADR-0052 : same queue adapter as production; the worker runs inside Puma.
+  config.active_job.queue_adapter = :solid_queue
+
+  # ADR-0031 : development keys for `encrypts :secret`, never used outside this machine.
+  # Production reads its own keys from the credentials (active_record_encryption).
+  config.active_record.encryption.primary_key = "development-primary-key-lnclass-00"
+  config.active_record.encryption.deterministic_key = "development-deterministic-key-lnc"
+  config.active_record.encryption.key_derivation_salt = "development-key-derivation-salt-0"
+
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
 
@@ -62,7 +71,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 
   # Annotate rendered view with file names.
   config.action_view.annotate_rendered_view_with_filenames = true

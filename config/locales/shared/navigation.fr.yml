@@ -1,0 +1,70 @@
+# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006
+fr:
+  layouts:
+    shell:
+      skip: "Aller au contenu"
+  shared:
+    roles:
+      student: "Élève"
+      teacher: "Enseignant"
+      team: "Équipe"
+      school_admin: "Direction"
+    navigation:
+      home: "Accueil"
+      courses: "Cours"
+      classroom: "Ma classe"
+      classrooms: "Classes"
+      schools: "Établissements"
+      imports: "Imports"
+      dashboard: "Pilotage"
+      teachers: "Enseignants"
+      students: "Élèves"
+      profile: "Mon profil"
+      sign_out: "Se déconnecter"
+      header:
+        account: "Mon compte"
+      sidebar:
+        label: "Navigation principale"
+      bottom_bar:
+        label: "Navigation principale"
+    home:
+      skeleton:
+        greeting: "Bonjour, %{name}"
+        subtitle:
+          student: "Voici ce qui t'attend aujourd'hui."
+          teacher: "Vos classes et vos élèves, en un coup d'œil."
+          team: "L'état de la plateforme, région par région."
+          school_admin: "Votre établissement, ses classes et son équipe."
+      sections:
+        todo:
+          title: "À faire"
+          subtitle: "Les exercices donnés par tes enseignants"
+          empty: "Rien à faire pour l'instant"
+        classroom:
+          title: "Ma classe"
+          subtitle: "Tes enseignants et tes camarades"
+          empty: "Tu n'as pas encore rejoint de classe"
+        courses:
+          title: "Cours"
+          subtitle: "Le catalogue, classé par niveau et par matière"
+          empty: "Aucun cours pour l'instant"
+        classrooms:
+          title: "Mes classes"
+          subtitle: "Les classes dans lesquelles vous enseignez"
+          empty: "Aucune classe pour l'instant"
+        activity:
+          title: "Activités"
+          subtitle: "Ce qui s'est passé récemment"
+          empty: "Aucune activité récente"
+        regions:
+          title: "Régions éducatives"
+          subtitle: "Les DRENA de Côte d'Ivoire"
+          empty: "Aucune DRENA enregistrée"
+        levels:
+          title: "Structure scolaire"
+          subtitle: "Les niveaux, de la 6e à la terminale"
+          empty: "Aucun niveau enregistré"
+        overview:
+          title: "Tableau de bord"
+          subtitle: "Classes, élèves et enseignants de l'établissement"
+          empty: "Aucune donnée pour l'instant"

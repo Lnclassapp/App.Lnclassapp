@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/series/_form — formulaire d'une série, partagé par new et edit %>
+<%# Rôle : le nom seul ; le code (slug) se dérive du nom à la création et ne change plus %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0033 %>
+<%= form_with model: form, scope: :series, url:, method:, id: "series-form", class: "space-y-5" do |f| %>
+  <%= ui_field f, :name, required: true, maxlength: Entities::Catalog::Series::NAME_MAX, autofocus: true,
+               hint: t("teams.series.form.name_hint") %>
+<% end %>

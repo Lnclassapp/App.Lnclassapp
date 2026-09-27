@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/drenas/update — succès du renommage d'une DRENA %>
+<%# Rôle : toast, modale refermée, tableau #drenas rendu de nouveau (un nouveau nom peut changer l'ordre) %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0035 %>
+<%= turbo_stream_toast t(".updated", name: @drena.name), type: :success %>
+<%= turbo_stream.update "modal", "" %>
+<%= turbo_stream.update "drenas", partial: "drena_row", collection: @drenas, as: :drena %>

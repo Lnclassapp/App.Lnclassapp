@@ -1,0 +1,74 @@
+<%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en quatre rubriques %>
+<%# Rôle : la DRENA filtre la liste des établissements (frame « schools ») sans être enregistrée ; échec re-rendu en 422 %>
+<%# ADR  : 0030, 0037, 0050 · UDR : 0024 %>
+<%# Formulaire GET de la seule DRENA : son sélecteur et le bouton de repli s'y rattachent par l'attribut form. %>
+<form id="teacher-signup-drena" action="<%= new_teacher_registration_path %>" method="get"></form>
+
+<%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",
+              class: "space-y-6",
+              data: { controller: "school--drena-schools", "school--drena-schools-url-value": drena_schools_path("__drena__") } do |form| %>
+  <% if @form.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= @form.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".personal") %></legend>
+    <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
+    <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
+    <% gender_error = @form.errors[:gender].first %>
+    <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("teacher_registration_gender_error" if gender_error)) %>>
+      <legend class="mb-1.5 block text-sm font-medium text-ink">
+        <%= Dtos::Identity::TeacherRegistrationInput.human_attribute_name(:gender) %><span class="text-error" aria-hidden="true"> *</span>
+      </legend>
+      <div class="grid grid-cols-2 gap-3">
+        <% Entities::Identity::User::GENDERS.each do |gender| %>
+          <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-4 transition has-checked:border-brand has-checked:bg-brand-soft">
+            <%= form.radio_button :gender, gender, required: true, class: "size-5 shrink-0 accent-brand",
+                                  "aria-invalid": ("true" if gender_error) %>
+            <span class="text-sm font-medium text-ink"><%= t("genders.#{gender}") %></span>
+          </label>
+        <% end %>
+      </div>
+      <% if gender_error %>
+        <p id="teacher_registration_gender_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= gender_error %>
+        </p>
+      <% end %>
+    </fieldset>
+  </fieldset>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".contact") %></legend>
+    <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
+                 autocomplete: "tel", placeholder: t(".contact_placeholder"), hint: t(".contact_hint") %>
+  </fieldset>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school_and_subject") %></legend>
+    <div class="space-y-2">
+      <%= ui_field form, :drena_public_id, as: :select, required: true, choices: drena_options, prompt: t(".drena_prompt"),
+                   form: "teacher-signup-drena", data: { action: "change->school--drena-schools#load" } %>
+      <%# Repli sans JavaScript : noscript plutôt qu'un attribut posé par Stimulus, que le morphing du 422 effacerait. %>
+      <noscript>
+        <%= ui_button t(".show_schools"), type: :submit, variant: :secondary, size: :sm, icon: "magnifying-glass",
+                      form: "teacher-signup-drena" %>
+      </noscript>
+    </div>
+    <%= render template: "school/drena_schools/index",
+               locals: { schools: school_options, drena_public_id: @form.drena_public_id, registration: @form } %>
+    <%= ui_field form, :material_slug, as: :select, required: true, choices: material_options, prompt: t(".material_prompt") %>
+  </fieldset>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
+    <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
+                 hint: t(".pin_hint") %>
+    <%= ui_field form, :pin_confirmation, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+                 autocomplete: "new-password" %>
+  </fieldset>
+
+  <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true %>
+<% end %>

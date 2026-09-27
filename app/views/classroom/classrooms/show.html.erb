@@ -1,0 +1,13 @@
+<%# 🌐 UI · classroom/classrooms/show — page d'une classe (CL-10), enseignant qui y enseigne et équipe %>
+<%# Rôle : en-tête et code copiable, cours assignés, liste des élèves ; lecture seule, aucun stream propre %>
+<%# ADR  : 0026, 0028 · UDR : 0006, 0027 %>
+<% content_for :title, t(".page_title", name: @header.name, school: @header.school_name) %>
+<% content_for :nav_key, "classrooms" %>
+<%= render "header", classroom: @header %>
+
+<div class="space-y-10">
+  <%= render "assigned_courses", classroom: @header, courses: @overview.courses %>
+  <% if @overview.students %>
+    <%= render "roster", classroom: @header, students: @overview.students %>
+  <% end %>
+</div>

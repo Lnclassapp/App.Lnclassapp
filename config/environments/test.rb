@@ -20,7 +20,18 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-  config.cache_store = :null_store
+  # A real store: `rate_limit` counts in the cache, a null store would never limit.
+  config.cache_store = :memory_store
+  config.action_controller.perform_caching = false
+
+  # ADR-0052 : jobs are enqueued, never run, unless a test performs them.
+  config.active_job.queue_adapter = :test
+
+  # ADR-0031 : fixed keys for `encrypts :secret` in tests. Production reads its own
+  # keys from the credentials (active_record_encryption).
+  config.active_record.encryption.primary_key = "test-primary-key-lnclass-000000000"
+  config.active_record.encryption.deterministic_key = "test-deterministic-key-lnclass-000"
+  config.active_record.encryption.key_derivation_salt = "test-key-derivation-salt-lnclass-0"
 
   # Render exception templates for rescuable exceptions and raise for other exceptions.
   config.action_dispatch.show_exceptions = :rescuable
@@ -43,7 +54,7 @@ Rails.application.configure do
   config.active_support.deprecation = :stderr
 
   # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true

@@ -1,0 +1,354 @@
+<%# 🌐 UI · design/index — guide de style vivant de Lnclass (dev et test uniquement) %>
+<%# Rôle : chaque token, chaque composant dans chaque variante et chaque état ; vérifié par test/system/design_system_test.rb %>
+<%# UDR  : 0005, 0006 %>
+<% content_for :title, t(".title") %>
+
+<div class="mx-auto max-w-page px-gutter py-10 lg:px-8">
+  <header class="max-w-2xl">
+    <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".eyebrow") %></p>
+    <h1 class="mt-3 font-display text-4xl leading-display font-extrabold tracking-tight sm:text-5xl"><%= t(".title") %></h1>
+    <p class="mt-4 text-lg text-mute"><%= t(".intro") %></p>
+  </header>
+
+  <nav aria-label="<%= t(".toc") %>" class="mt-8 flex flex-wrap gap-2">
+    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination shell].each do |anchor| %>
+      <%= link_to t(".sections.#{anchor}"), "##{anchor}", class: "rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium hover:bg-mist" %>
+    <% end %>
+  </nav>
+
+  <%# ---------- Couleurs ---------- %>
+  <%= design_section(id: "colors", title: t(".sections.colors")) do %>
+    <% swatches = [
+      [ "ink", "bg-ink" ], [ "mute", "bg-mute" ], [ "line", "bg-line" ], [ "mist", "bg-mist" ], [ "paper", "bg-paper" ],
+      [ "white", "bg-white" ], [ "brand", "bg-brand" ], [ "brand-soft", "bg-brand-soft" ], [ "brand-strong", "bg-brand-strong" ],
+      [ "teacher", "bg-teacher" ], [ "school", "bg-school" ], [ "team", "bg-team" ], [ "gold", "bg-gold" ],
+      [ "success", "bg-success" ], [ "success-soft", "bg-success-soft" ], [ "warning", "bg-warning" ],
+      [ "warning-soft", "bg-warning-soft" ], [ "error", "bg-error" ], [ "error-soft", "bg-error-soft" ],
+      [ "info", "bg-info" ], [ "info-soft", "bg-info-soft" ]
+    ] %>
+    <ul class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
+      <% swatches.each do |name, klass| %>
+        <li data-token="<%= name %>">
+          <div class="h-16 rounded-ln border border-line <%= klass %>"></div>
+          <p class="mt-2 font-mono text-xs"><%= name %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%# ---------- Typographie ---------- %>
+  <%= design_section(id: "typography", title: t(".sections.typography")) do %>
+    <div class="space-y-3">
+      <p class="font-display text-5xl leading-display font-extrabold tracking-tight"><%= t(".typography.display") %></p>
+      <p class="font-display text-3xl font-extrabold tracking-tight"><%= t(".typography.title") %></p>
+      <p class="font-display text-xl font-extrabold"><%= t(".typography.subtitle") %></p>
+      <p class="text-base"><%= t(".typography.body") %></p>
+      <p class="text-sm text-mute"><%= t(".typography.secondary") %></p>
+      <p class="text-2xs font-medium tracking-widest text-mute uppercase"><%= t(".typography.caption") %></p>
+      <p id="design_math" class="text-base" data-controller="math"><%= t(".typography.math") %></p>
+    </div>
+  <% end %>
+
+  <%# ---------- Rayons, ombres, espacements ---------- %>
+  <%= design_section(id: "shape", title: t(".sections.shape")) do %>
+    <%= design_example(name: "radius", label: t(".shape.radius")) do %>
+      <div class="flex flex-wrap gap-4">
+        <% [ [ "sm", "rounded-sm" ], [ "ln", "rounded-ln" ], [ "card", "rounded-card" ], [ "sheet", "rounded-sheet" ], [ "full", "rounded-full" ] ].each do |name, klass| %>
+          <div class="grid size-24 place-items-center border border-line bg-white font-mono text-xs <%= klass %>"><%= name %></div>
+        <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "shadow", label: t(".shape.shadow")) do %>
+      <div class="flex flex-wrap gap-6">
+        <% [ [ "card", "shadow-card" ], [ "lift", "shadow-lift" ], [ "pop", "shadow-pop" ] ].each do |name, klass| %>
+          <div class="grid size-28 place-items-center rounded-card bg-white font-mono text-xs <%= klass %>"><%= name %></div>
+        <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "spacing", label: t(".shape.spacing")) do %>
+      <ul class="space-y-2 font-mono text-xs">
+        <li class="flex items-center gap-3"><span class="h-3 w-tap rounded-sm bg-brand"></span>tap — 3rem</li>
+        <li class="flex items-center gap-3"><span class="h-3 w-gutter rounded-sm bg-brand"></span>gutter — 1.25rem</li>
+        <li class="flex items-center gap-3"><span class="h-3 w-bar rounded-sm bg-brand"></span>bar — 4rem</li>
+        <li class="flex items-center gap-3"><span class="h-3 w-rail rounded-sm bg-brand"></span>rail — 18rem</li>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <%# ---------- Icônes ---------- %>
+  <%= design_section(id: "icons", title: t(".sections.icons"), api: 'ui_icon "home", variant: :outline|:solid|:mini, size: :sm|:md|:lg|:xl, label: nil') do %>
+    <%= design_example(name: "icon-variants", label: t(".icons.variants")) do %>
+      <div class="flex flex-wrap items-center gap-6">
+        <% %i[outline solid mini].each do |variant| %>
+          <span class="flex items-center gap-2 text-sm" data-variant="<%= variant %>"><%= ui_icon "academic-cap", variant: %><%= variant %></span>
+        <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "icon-sizes", label: t(".icons.sizes")) do %>
+      <div class="flex flex-wrap items-end gap-6">
+        <% %i[sm md lg xl].each do |size| %>
+          <span data-size="<%= size %>"><%= ui_icon "book-open", size: %></span>
+        <% end %>
+        <span data-labelled="true"><%= ui_icon "check-circle", size: :lg, label: t(".icons.labelled"), class: "text-success" %></span>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# ---------- Boutons ---------- %>
+  <%= design_section(id: "buttons", title: t(".sections.buttons"), api: "ui_button(label, variant:, size:, href:, type:, icon:, icon_end:, disabled:, loading:, method:, full:, **html)") do %>
+    <%= design_example(name: "button-variants", label: t(".buttons.variants")) do %>
+      <div class="flex flex-wrap gap-3">
+        <% %i[primary brand secondary ghost danger].each do |variant| %>
+          <%= ui_button t(".buttons.variant_names.#{variant}"), variant:, data: { variant: } %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "button-sizes", label: t(".buttons.sizes")) do %>
+      <div class="flex flex-wrap items-center gap-3">
+        <% %i[sm md lg].each do |size| %>
+          <%= ui_button t(".buttons.size_names.#{size}"), size:, data: { size: } %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "button-states", label: t(".buttons.states")) do %>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= ui_button t(".buttons.with_icon"), icon: "plus", data: { state: "icon" } %>
+        <%= ui_button t(".buttons.with_icon_end"), variant: :secondary, icon_end: "chevron-right", data: { state: "icon-end" } %>
+        <%= ui_button t(".buttons.disabled"), disabled: true, data: { state: "disabled" } %>
+        <%= ui_button t(".buttons.loading"), loading: true, data: { state: "loading" } %>
+        <%= ui_button t(".buttons.link"), href: design_path(anchor: "buttons"), variant: :brand, data: { state: "link" } %>
+        <%= ui_button t(".buttons.disabled_link"), href: design_path, variant: :secondary, disabled: true, data: { state: "disabled-link" } %>
+      </div>
+      <div class="mt-3 max-w-form"><%= ui_button t(".buttons.full"), full: true, data: { state: "full" } %></div>
+    <% end %>
+  <% end %>
+
+  <%# ---------- Badges ---------- %>
+  <%= design_section(id: "badges", title: t(".sections.badges"), api: "ui_badge(label, tone:, size:, icon:, dot:) · ui_role_badge(role) · ui_subject_badge(label, category:)") do %>
+    <%= design_example(name: "badge-tones", label: t(".badges.tones")) do %>
+      <div class="flex flex-wrap gap-2">
+        <% ComponentsHelper::BADGE_TONES.each_key do |tone| %>
+          <span data-tone="<%= tone %>"><%= ui_badge tone.to_s, tone:, dot: true %></span>
+        <% end %>
+        <%= ui_badge t(".badges.small"), size: :sm %>
+        <%= ui_badge t(".badges.with_icon"), tone: :success, icon: "check-circle" %>
+      </div>
+    <% end %>
+    <%= design_example(name: "badge-roles", label: t(".badges.roles")) do %>
+      <div class="flex flex-wrap gap-2">
+        <% NavigationHelper::DESTINATIONS.each_key do |role| %>
+          <span data-role="<%= role %>"><%= ui_role_badge role %></span>
+        <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "badge-subjects", label: t(".badges.subjects")) do %>
+      <div class="flex flex-wrap gap-2">
+        <% [ *ComponentsHelper::SUBJECT_CATEGORIES.keys, :unknown ].each do |category| %>
+          <span data-category="<%= category %>"><%= ui_subject_badge t(".badges.subject_examples.#{category}"), category: %></span>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# ---------- Avatars ---------- %>
+  <%= design_section(id: "avatars", title: t(".sections.avatars"), api: "ui_avatar(name, src:, size:, tone:)") do %>
+    <%= design_example(name: "avatar-variants", label: t(".avatars.variants")) do %>
+      <div class="flex flex-wrap items-center gap-4">
+        <% %i[sm md lg].each do |size| %>
+          <%= ui_avatar t(".avatars.name"), size: %>
+        <% end %>
+        <% ComponentsHelper::AVATAR_TONES.each_key do |tone| %>
+          <%= ui_avatar t(".avatars.name"), tone: %>
+        <% end %>
+        <%= ui_avatar t(".avatars.single") %>
+        <%= ui_avatar t(".avatars.name"), src: "logo/teacher.jpg", size: :lg %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# ---------- Cartes ---------- %>
+  <%= design_section(id: "cards", title: t(".sections.cards"), api: "ui_card(title:, subtitle:, icon:, href:, padding:, heading:) { |card| card.actions { … }; card.footer { … } }") do %>
+    <div class="grid gap-5 md:grid-cols-2">
+      <%= design_example(name: "card-plain", label: t(".cards.plain")) do %>
+        <%= ui_card do %><p class="text-mute"><%= t(".cards.body") %></p><% end %>
+      <% end %>
+      <%= design_example(name: "card-header", label: t(".cards.header")) do %>
+        <%= ui_card title: t(".cards.title"), subtitle: t(".cards.subtitle"), icon: "building-library" do |card| %>
+          <% card.actions do %><%= ui_button t(".cards.see_all"), variant: :ghost, size: :sm %><% end %>
+          <% card.footer do %>
+            <%= ui_button t(".cards.cancel"), variant: :secondary, size: :sm %>
+            <%= ui_button t(".cards.save"), size: :sm %>
+          <% end %>
+          <p class="text-mute"><%= t(".cards.body") %></p>
+        <% end %>
+      <% end %>
+      <%= design_example(name: "card-link", label: t(".cards.link")) do %>
+        <%= ui_card title: t(".cards.course"), subtitle: t(".cards.course_meta"), icon: "book-open", href: design_path(anchor: "cards") do %>
+          <%= ui_subject_badge t(".cards.subject"), category: :science %>
+        <% end %>
+      <% end %>
+      <%= design_example(name: "card-paddings", label: t(".cards.paddings")) do %>
+        <div class="space-y-3">
+          <% %i[none sm lg].each do |padding| %>
+            <%= ui_card padding:, data: { padding: } do %><p class="text-sm text-mute"><%= padding %></p><% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ---------- Champs ---------- %>
+  <%= design_section(id: "fields", title: t(".sections.fields"), api: "ui_field(form, :attribut, as:, label:, hint:, required:, choices:, **input_html)") do %>
+    <div class="grid gap-8 md:grid-cols-2">
+      <%= design_example(name: "field-valid", label: t(".fields.valid")) do %>
+        <%= form_with model: @sample, scope: :sample, url: design_path, method: :get, class: "space-y-5" do |form| %>
+          <%= ui_field form, :name, label: t(".fields.name"), required: true, placeholder: t(".fields.name_placeholder") %>
+          <%= ui_field form, :email, as: :email, label: t(".fields.email"), hint: t(".fields.email_hint") %>
+          <%= ui_field form, :password, as: :password, label: t(".fields.password") %>
+          <%= ui_field form, :bio, as: :textarea, label: t(".fields.bio") %>
+          <%= ui_field form, :level, as: :select, label: t(".fields.level"), choices: t(".fields.levels"), prompt: t(".fields.level_prompt") %>
+          <%= ui_field form, :terms, as: :checkbox, label: t(".fields.terms") %>
+        <% end %>
+      <% end %>
+      <%= design_example(name: "field-invalid", label: t(".fields.invalid")) do %>
+        <%= form_with model: @invalid_sample, scope: :invalid_sample, url: design_path, method: :get, class: "space-y-5" do |form| %>
+          <%= ui_field form, :name, label: t(".fields.name"), required: true %>
+          <%= ui_field form, :email, as: :email, label: t(".fields.email"), hint: t(".fields.email_hint") %>
+          <%= ui_field form, :level, as: :select, label: t(".fields.level"), choices: t(".fields.levels"), prompt: t(".fields.level_prompt") %>
+          <%= ui_field form, :terms, as: :checkbox, label: t(".fields.terms"), required: true %>
+          <%= ui_field form, :bio, label: t(".fields.disabled"), disabled: true %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ---------- Modale ---------- %>
+  <%= design_section(id: "modal", title: t(".sections.modal"), api: "ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, open:) { |modal| modal.footer { … } }") do %>
+    <div class="flex flex-wrap gap-3" data-example="modal">
+      <%= ui_modal title: t(".modal.title"), id: "demo-modal", trigger: t(".modal.open"), trigger_icon: "sparkles" do |modal| %>
+        <% modal.footer do %>
+          <%= ui_button t(".modal.cancel"), variant: :secondary, data: { action: "modal#close" } %>
+          <%= ui_button t(".modal.confirm"), data: { action: "modal#close" } %>
+        <% end %>
+        <p class="text-mute"><%= t(".modal.body") %></p>
+      <% end %>
+      <%= ui_modal title: t(".modal.small_title"), id: "demo-modal-small", size: :sm, trigger: t(".modal.open_small"), trigger_variant: :ghost do %>
+        <p class="text-mute"><%= t(".modal.body") %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ---------- Menu déroulant ---------- %>
+  <%= design_section(id: "dropdown", title: t(".sections.dropdown"), api: "ui_dropdown(label:, icon:, trigger:, align:, id:) { ui_dropdown_item(label, href:, icon:, method:, tone:) }") do %>
+    <div class="flex flex-wrap items-start gap-6" data-example="dropdown">
+      <%= ui_dropdown label: t(".dropdown.label"), id: "demo-menu", align: :start do %>
+        <%= ui_dropdown_item t(".dropdown.edit"), href: design_path(anchor: "dropdown"), icon: "pencil-square" %>
+        <%= ui_dropdown_item t(".dropdown.duplicate"), href: design_path(anchor: "dropdown"), icon: "document-duplicate" %>
+        <%= ui_dropdown_item t(".dropdown.unavailable"), icon: "sparkles" %>
+        <%= ui_dropdown_item t(".dropdown.delete"), href: design_path(anchor: "dropdown"), icon: "trash", tone: :danger %>
+      <% end %>
+      <%= ui_dropdown label: t(".dropdown.account"), id: "demo-account-menu", align: :start,
+            trigger: safe_join([ ui_avatar(t(".avatars.name"), size: :sm), tag.span(t(".avatars.name"), class: "text-sm font-medium") ]) do %>
+        <%= ui_dropdown_item t("shared.navigation.profile"), href: design_path(anchor: "dropdown"), icon: "user-circle" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ---------- Onglets ---------- %>
+  <%= design_section(id: "tabs", title: t(".sections.tabs"), api: "ui_tabs(id:, label:, selected:) { |tabs| tabs.tab(:key, label, icon:) { … } }") do %>
+    <div data-example="tabs">
+      <%= ui_tabs id: "demo-tabs", label: t(".tabs.label") do |tabs| %>
+        <% tabs.tab :steering, t(".tabs.steering"), icon: "chart-bar" do %><p><%= t(".tabs.steering_body") %></p><% end %>
+        <% tabs.tab :community, t(".tabs.community"), icon: "user-group" do %><p><%= t(".tabs.community_body") %></p><% end %>
+        <% tabs.tab :academy, t(".tabs.academy"), icon: "academic-cap" do %><p><%= t(".tabs.academy_body") %></p><% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ---------- Toasts ---------- %>
+  <%= design_section(id: "notifications", title: t(".sections.notifications"), api: "ui_toast(message, type:, title:, persistent:) · turbo_stream_toast(message, type:) · flash[:notice|:alert|:success|:error|:warning|:info]") do %>
+    <%= design_example(name: "toast-types", label: t(".toasts.types")) do %>
+      <div class="grid gap-3 md:grid-cols-2">
+        <% ComponentsHelper::TOAST_TYPES.each_key do |type| %>
+          <%= ui_toast t(".toasts.messages.#{type}"), type:, persistent: true %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "toast-live", label: t(".toasts.live")) do %>
+      <div class="flex flex-wrap gap-3">
+        <% ComponentsHelper::TOAST_TYPES.each_key do |type| %>
+          <%= form_with url: design_toast_path(type:) do %>
+            <%= ui_button t(".toasts.stream.#{type}"), type: :submit, variant: :secondary, size: :sm, data: { stream: type } %>
+          <% end %>
+        <% end %>
+        <%= form_with url: design_toast_path(type: :success), data: { turbo: false } do %>
+          <%= ui_button t(".toasts.redirect"), type: :submit, variant: :ghost, size: :sm, data: { redirect: true } %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# ---------- CRUD Hotwire ---------- %>
+  <%= design_section(id: "hotwire", title: t(".sections.hotwire"), api: 'link data-turbo-frame="modal" → ui_modal(open: true) dans turbo_frame_tag "modal" · 422 → re-rendu · succès → turbo_stream_toast') do %>
+    <p class="max-w-2xl text-mute"><%= t(".hotwire.intro") %></p>
+    <div class="grid gap-8 md:grid-cols-2">
+      <%= design_example(name: "crud-modal", label: t(".hotwire.modal")) do %>
+        <%= ui_button t(".hotwire.open"), href: design_modal_path, variant: :secondary, icon: "plus", data: { turbo_frame: "modal" } %>
+        <div id="design-created" class="mt-4 flex min-h-8 flex-wrap gap-2" aria-live="polite"></div>
+      <% end %>
+      <%= design_example(name: "crud-frame", label: t(".hotwire.frame")) do %>
+        <%= turbo_frame_tag "design-frame", src: design_frame_path, loading: :lazy,
+              class: "block transition-opacity aria-busy:pointer-events-none aria-busy:opacity-50" do %>
+          <%= ui_loading_state variant: :skeleton %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ---------- États ---------- %>
+  <%= design_section(id: "states", title: t(".sections.states"), api: "ui_empty_state(title:, description:, icon:, action:) · ui_error_state(title:, message:, retry_href:, retry_label:) · ui_loading_state(label:, variant:, lines:)") do %>
+    <div class="grid gap-5 md:grid-cols-2">
+      <%= design_example(name: "empty-action", label: t(".states.empty_action")) do %>
+        <%= ui_empty_state title: t(".states.empty_title"), description: t(".states.empty_description"), icon: "building-library",
+                           action: { label: t(".states.empty_cta"), href: design_path(anchor: "states"), icon: "plus" } %>
+      <% end %>
+      <%= design_example(name: "empty-block", label: t(".states.empty_block")) do %>
+        <%= ui_empty_state title: t(".states.empty_title") do %>
+          <%= ui_button t(".states.empty_secondary"), variant: :secondary %>
+        <% end %>
+      <% end %>
+      <%= design_example(name: "error-retry", label: t(".states.error_retry")) do %>
+        <%= ui_error_state retry_href: design_path(anchor: "states") %>
+      <% end %>
+      <%= design_example(name: "error-plain", label: t(".states.error_plain")) do %>
+        <%= ui_error_state title: t(".states.error_title"), message: t(".states.error_message") %>
+      <% end %>
+      <%= design_example(name: "loading-spinner", label: t(".states.loading_spinner")) do %>
+        <%= ui_loading_state %>
+      <% end %>
+      <%= design_example(name: "loading-skeleton", label: t(".states.loading_skeleton")) do %>
+        <%= ui_loading_state variant: :skeleton, lines: 4 %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ---------- Pagination ---------- %>
+  <%= design_section(id: "pagination", title: t(".sections.pagination"), api: "ui_pagination(page:, pages:, param:)") do %>
+    <% [ 1, 3, 5 ].each do |page| %>
+      <%= design_example(name: "pagination-#{page}", label: t(".pagination.page", page:)) do %>
+        <%= ui_pagination page:, pages: 5 %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# ---------- Shell ---------- %>
+  <%= design_section(id: "shell", title: t(".sections.shell")) do %>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <% NavigationHelper::DESTINATIONS.each_key do |role| %>
+        <%= ui_card title: t("shared.roles.#{role}"), subtitle: t(".shell.preview"), icon: "squares-2x2", href: design_shell_path(role), heading: :h3 do %>
+          <%= ui_role_badge role, size: :sm %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

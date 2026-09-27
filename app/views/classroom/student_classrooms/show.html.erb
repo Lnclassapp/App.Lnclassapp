@@ -1,0 +1,58 @@
+<%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève (CL-22, CL-10 volet élève) %>
+<%# Rôle : la classe principale et son code en majuscules, puis les cours assignés ; lecture seule, jamais la liste nominative %>
+<%# ADR  : 0028, 0048 · UDR : 0006, 0007, 0011 %>
+<% content_for :title, t(".page_title") %>
+<% courses = @classroom.courses %>
+<%= ui_page_header title: t(".title"),
+                   subtitle: t(".subtitle", school: @classroom.school_name, classroom: @classroom.classroom_name) %>
+
+<div class="grid gap-5">
+  <%= ui_card id: "student_classroom_header" do %>
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex min-w-0 items-start gap-4">
+        <span class="grid size-12 shrink-0 place-items-center rounded-card bg-brand-soft text-brand-strong" aria-hidden="true">
+          <%= ui_icon "academic-cap", size: :lg %>
+        </span>
+        <div class="min-w-0">
+          <h2 class="font-display text-xl font-extrabold text-balance"><%= @classroom.classroom_name %></h2>
+          <dl class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-mute">
+            <div class="flex">
+              <dt class="sr-only"><%= t(".level") %></dt>
+              <dd><%= ui_badge [ @classroom.level_name, @classroom.series_name ].compact.join(" · "), size: :sm %></dd>
+            </div>
+            <div class="flex items-center gap-1">
+              <dt><%= ui_icon "building-library", size: :sm, label: t(".school") %></dt><dd><%= @classroom.school_name %></dd>
+            </div>
+            <div class="flex items-center gap-1">
+              <dt><%= ui_icon "calendar", size: :sm, label: t(".school_year") %></dt><dd><%= @classroom.school_year %></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <% if @header.join_code_display %>
+        <div class="rounded-card bg-brand-soft p-4 sm:shrink-0">
+          <p id="student_classroom_join_code_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".join_code") %></p>
+          <p id="student_classroom_join_code" aria-labelledby="student_classroom_join_code_label"
+             class="mt-1 font-mono text-2xl font-bold tracking-widest text-ink"><%= @header.join_code_display %></p>
+          <p class="mt-2 max-w-xs text-xs text-mute"><%= t(".join_code_hint") %></p>
+        </div>
+      <% else %>
+        <p class="rounded-card bg-mist p-4 text-sm text-mute sm:shrink-0"><%= t(".no_join_code") %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle"), icon: "book-open", id: "student_classroom_courses" do |card| %>
+    <% if courses.empty? %>
+      <%= ui_empty_state title: t(".courses_empty"), description: t(".courses_empty_description"), icon: "book-open" %>
+    <% else %>
+      <% card.actions do %>
+        <%= ui_badge t(".courses_count", count: courses.size), tone: :brand, size: :sm %>
+      <% end %>
+      <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+        <%= render partial: "assigned_course", collection: courses, as: :course %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

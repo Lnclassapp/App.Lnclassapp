@@ -1,0 +1,59 @@
+# Écran des DRENA de l'équipe (plan boucle-pedagogique, Lot S1) — SC-01, ADR-0036, UDR-0035
+fr:
+  activemodel:
+    attributes:
+      dtos/school/drena_input:
+        name: "Nom de la DRENA"
+    errors:
+      models:
+        dtos/school/drena_input:
+          attributes:
+            name:
+              blank: "Indiquez le nom de la DRENA."
+              too_long: "Le nom compte %{count} caractères au plus."
+              taken: "Une DRENA porte déjà ce nom."
+  teams:
+    drenas:
+      index:
+        page_title: "DRENA"
+        title: "DRENA"
+        subtitle: "Les directions régionales de l'éducation nationale. Les établissements s'importent dans une DRENA, par son slug."
+        new: "Nouvelle DRENA"
+        empty_title: "Aucune DRENA pour l'instant"
+        empty_description: "Créez la première DRENA : ses établissements s'importeront ensuite par son slug."
+        columns:
+          name: "Nom"
+          slug: "Slug"
+          slug_hint: "à utiliser dans les fichiers d'import"
+          schools: "Établissements"
+          classrooms: "Classes"
+          actions: "Actions"
+      drena_row:
+        edit: "Modifier"
+        edit_label: "Modifier la DRENA « %{name} »"
+        delete: "Supprimer"
+        delete_title: "Supprimer la DRENA « %{name} » ?"
+        delete_body: "La DRENA disparaît de la liste. Une DRENA qui a des établissements ne peut pas être supprimée."
+        cancel: "Annuler"
+        confirm_delete: "Supprimer la DRENA"
+      form:
+        name_placeholder: "Ex. : Abidjan 1"
+        name_hint_new: "Le slug est tiré du nom à la création, puis ne change plus : c'est lui que citent les fichiers d'import."
+        name_hint_edit_html: "Le slug <code class=\"rounded-sm bg-mist px-1.5 py-0.5 font-mono text-ink\">%{slug}</code> ne change pas : les fichiers d'import qui le citent restent valides."
+      new:
+        title: "Nouvelle DRENA"
+        submit: "Créer la DRENA"
+        cancel: "Annuler"
+      edit:
+        title: "Modifier la DRENA"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      create:
+        created: "DRENA « %{name} » créée."
+      update:
+        updated: "DRENA « %{name} » modifiée."
+      destroy:
+        deleted: "DRENA « %{name} » supprimée."
+        has_schools:
+          one: "La DRENA « %{name} » a %{count} établissement : elle ne peut pas être supprimée."
+          other: "La DRENA « %{name} » a %{count} établissements : elle ne peut pas être supprimée."

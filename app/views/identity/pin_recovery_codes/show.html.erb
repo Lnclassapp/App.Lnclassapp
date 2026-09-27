@@ -1,0 +1,7 @@
+<%# 🌐 UI · identity/pin_recovery_codes/show — repli HTML de l'émission d'un code de récupération, sans Turbo %>
+<%# Rôle : la modale du code, ouverte sur le shell ; le code n'est jamais placé dans un flash %>
+<%# ADR  : 0032 · UDR : 0006, 0020 %>
+<% content_for :title, t(".page_title") %>
+<%= turbo_frame_tag "modal" do %>
+  <%= render "code", issued: @issued %>
+<% end %>

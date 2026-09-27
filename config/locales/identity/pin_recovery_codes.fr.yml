@@ -1,0 +1,17 @@
+# Code de récupération du PIN, affiché une seule fois à l'émetteur (plan boucle-pedagogique, Lot B8)
+# ID-15 — ADR-0032, UDR-0020
+fr:
+  identity:
+    pin_recovery_codes:
+      create:
+        issued: "Code de récupération généré."
+      show:
+        page_title: "Code de récupération"
+      code:
+        title: "Code de récupération"
+        for: "Pour %{name}"
+        code_label: "Code à dicter"
+        valid_until: "Valable jusqu'à %{time}."
+        instructions: "Dictez ce code de vive voix. La personne ouvre « PIN oublié », saisit son numéro, ce code, puis son nouveau PIN."
+        once: "Ce code ne s'affiche qu'une fois. En générer un nouveau annule celui-ci."
+        close: "Fermer"

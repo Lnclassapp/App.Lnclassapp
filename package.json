@@ -1,18 +1,20 @@
 {
   "name": "app",
   "private": true,
+  "packageManager": "yarn@4.5.3",
   "devDependencies": {
-    "esbuild": "^0.28.2"
+    "esbuild": "^0.28.2",
+    "esbuild-rails": "^1.0.8"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build": "node esbuild.config.mjs",
     "build:css": "npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.23",
-    "@rails/actiontext": "^7.2.302",
     "@tailwindcss/cli": "^4.3.3",
+    "katex": "^0.18.9",
     "tailwindcss": "^4.3.3",
     "trix": "^2.1.19"
   }

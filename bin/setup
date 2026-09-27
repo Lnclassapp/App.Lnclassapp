@@ -16,7 +16,12 @@ FileUtils.chdir APP_ROOT do
   system("bundle check") || system!("bundle install")
 
   # Install JavaScript dependencies
-  system("yarn install --check-files")
+  system!("yarn install")
+
+  # The pre-commit hook lives in the repository (.githooks/). Idempotent: git
+  # config rewrites the same value. Shared by every worktree of the repository.
+  puts "\n== Enabling the pre-commit hook =="
+  system! "git config core.hooksPath .githooks"
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

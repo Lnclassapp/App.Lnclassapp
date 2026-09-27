@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/drenas/create — succès de la création d'une DRENA %>
+<%# Rôle : toast, modale refermée, tableau #drenas rendu de nouveau (ordre des noms), état vide effacé %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0035 %>
+<%= turbo_stream_toast t(".created", name: @drena.name), type: :success %>
+<%= turbo_stream.update "modal", "" %>
+<%= turbo_stream.update "drenas", partial: "drena_row", collection: @drenas, as: :drena %>
+<%= turbo_stream.update "drenas_empty", "" %>

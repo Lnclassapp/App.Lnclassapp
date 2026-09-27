@@ -1,0 +1,21 @@
+<%# 🌐 UI · teams/levels/edit — modification d'un niveau, servie dans le frame « modal » %>
+<%# Rôle : nom, position et cycle ; le code (slug) est affiché, jamais modifiable, signalé s'il est hors génération des classes ; échec en 422, succès en Turbo Stream %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0032 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "level-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "level-form" %>
+    <% end %>
+    <p id="level-code" class="mb-5 flex flex-wrap items-center gap-2 rounded-ln bg-mist px-4 py-3 text-sm text-mute">
+      <%= t(".code") %> <code class="font-mono font-medium text-ink"><%= @slug %></code> <%= t(".code_frozen") %>
+      <% unless Queries::Catalog::LevelsQuery::GENERATED_SLUGS.include?(@slug) %>
+        <span data-generation="outside" class="flex flex-wrap items-center gap-2">
+          <%= ui_badge t("teams.levels.level_row.outside_generation"), tone: :warning, size: :sm, icon: "exclamation-triangle" %>
+          <%= t(".outside_generation") %>
+        </span>
+      <% end %>
+    </p>
+    <%= render "form", input: @form, url: level_path(@slug), method: :patch, name_hint: t(".name_hint") %>
+  <% end %>
+<% end %>

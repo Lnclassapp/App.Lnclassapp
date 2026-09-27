@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/materials/update — succès de la modification %>
+<%# Rôle : toast et tableau re-rendu (l'ordre suit le nom ; le badge suit la catégorie) ; la modale se ferme sur l'envoi réussi %>
+<%# ADR  : 0034 · UDR : 0006, 0034 %>
+<%= turbo_stream_toast t(".done", name: @form.name), type: :success %>
+<%= turbo_stream.update "materials", partial: "material_row", collection: @materials, as: :material %>

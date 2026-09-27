@@ -1,0 +1,45 @@
+<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36) %>
+<%# Rôle : sections dans l'ordre de HOME_SECTIONS[:student] (à faire, ma classe, cours), puis l'activité récente, différée %>
+<%# ADR  : 0033, 0043 · UDR : 0006, 0007, 0010 %>
+<% content_for :title, t(".page_title") %>
+<% exercises = @home.assigned_exercises %>
+<%= ui_page_header title: t(".greeting", name: shell_user.first_name),
+                   subtitle: t(".subtitle", school: @home.school_name, classroom: @home.classroom_name) %>
+
+<div class="grid gap-5">
+  <% home_sections_for(:student).each do |key, icon| %>
+    <% if key == :todo %>
+      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises" do |card| %>
+        <% if exercises.empty? %>
+          <%= ui_empty_state title: t(".todo_empty"), description: t(".todo_empty_description"), icon: %>
+        <% else %>
+          <% card.actions do %>
+            <%= ui_badge t(".todo_progress", done: exercises.count { it.completed_count.positive? }, total: exercises.size),
+                         tone: :brand, size: :sm %>
+          <% end %>
+          <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+            <%= render partial: "assigned_exercise", collection: exercises, as: :exercise %>
+          </ul>
+        <% end %>
+      <% end %>
+      <% if @home.pending_gaps.any? %>
+        <%= render "pending_gaps", gaps: @home.pending_gaps %>
+      <% end %>
+    <% elsif key == :classroom %>
+      <%= render "classroom_card", home: @home, icon: %>
+    <% elsif key == :courses %>
+      <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle"), icon:, href: courses_path do %>
+        <span class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
+          <%= t(".courses_action") %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
+        </span>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon: "bolt" do %>
+    <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, src: student_home_path, loading: :lazy,
+                        target: "_top" do %>
+      <%= ui_loading_state variant: :skeleton %>
+    <% end %>
+  <% end %>
+</div>

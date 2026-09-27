@@ -1,0 +1,64 @@
+<%# 🌐 UI · catalog/courses/show — page d'un cours (CA-04, CA-10), pour tous les rôles connectés %>
+<%# Rôle : fil d'Ariane, badges, actions du rôle, contenu riche assaini sous KaTeX, fiches essentielles ; rafraîchie par morphing (B2, B4) %>
+<%# ADR  : 0028, 0035, 0051 · UDR : 0006, 0007, 0013 %>
+<% course = @detail.course %>
+<% team = !@status_record.nil? %>
+<% content_for :title, t(".page_title", name: course.name) %>
+<% content_for :nav_key, "courses" %>
+<% crumb_class = "inline-flex min-h-tap items-center font-medium transition hover:text-ink" %>
+<nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
+  <ol class="flex flex-wrap items-center gap-1.5 text-mute">
+    <li><%= link_to t(".catalog"), courses_path, class: crumb_class %></li>
+    <li aria-hidden="true"><%= ui_icon "chevron-right", variant: :mini, size: :sm %></li>
+    <li><%= link_to course.material_name, courses_path(material: course.material_slug), class: crumb_class %></li>
+    <li aria-hidden="true"><%= ui_icon "chevron-right", variant: :mini, size: :sm %></li>
+    <li aria-current="page" class="min-w-0 truncate font-medium text-ink"><%= course.name %></li>
+  </ol>
+</nav>
+
+<div id="course_header" class="mb-8">
+  <%= ui_card padding: :md do %>
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+      <div class="min-w-0 space-y-3">
+        <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= course.name %></h1>
+        <% if course.subtitle.present? %>
+          <p class="text-mute"><%= course.subtitle %></p>
+        <% end %>
+        <div class="flex flex-wrap items-center gap-2">
+          <%= ui_subject_badge course.material_name, category: course.material_category %>
+          <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
+        </div>
+      </div>
+      <%= render "role_actions", course:, status_record: @status_record %>
+    </div>
+  <% end %>
+</div>
+
+<div class="space-y-10">
+  <% if course.content.present? %>
+    <section id="course_content" aria-label="<%= t(".content_title") %>">
+      <%= ui_card padding: :lg do %>
+        <%# Rendu par Action Text, qui l'assainit par sa liste blanche. Au morphing d'un rafraîchissement (B2), un contenu
+            inchangé garde ses formules rendues (élément permanent) ; un contenu modifié change d'empreinte, donc d'id : son
+            conteneur est remplacé, et KaTeX rend le nouveau. Un permanent seul ne serait jamais retiré par le morphing. %>
+        <% content_html = course.content.to_s %>
+        <% digest = Digest::SHA256.hexdigest(content_html).first(16) %>
+        <div id="course_content_<%= digest %>">
+          <div id="course_math_<%= digest %>" data-turbo-permanent data-controller="math"><%= content_html %></div>
+        </div>
+      <% end %>
+    </section>
+  <% end %>
+
+  <section id="course_essentials" aria-labelledby="course_essentials_title">
+    <h2 id="course_essentials_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".essentials_title") %></h2>
+    <% if @detail.essentials.empty? %>
+      <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "document-text" %>
+    <% else %>
+      <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+        <%= render partial: "essential_row", collection: @detail.essentials, as: :essential,
+                   locals: { course_slug: course.slug, show_status: team } %>
+      </ul>
+    <% end %>
+  </section>
+</div>

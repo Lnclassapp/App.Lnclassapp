@@ -1,0 +1,142 @@
+# Établissements : liste nationale, fiche, modification (plan boucle-pedagogique, Lot S2) — ADR-0030, ADR-0036, UDR-0007, UDR-0036
+fr:
+  activemodel:
+    attributes:
+      dtos/school/school_input:
+        drena_public_id: "DRENA"
+        name: "Nom"
+        sigle: "Sigle"
+        school_type: "Type"
+        status: "Statut"
+        cycle: "Cycle"
+    errors:
+      models:
+        dtos/school/school_input:
+          attributes:
+            drena_public_id:
+              blank: "Choisissez la DRENA de l'établissement."
+              inclusion: "Cette DRENA n'existe plus. Choisissez-en une autre."
+            name:
+              blank: "Saisissez le nom de l'établissement."
+              too_long: "Le nom compte %{count} caractères au plus."
+              taken: "Un établissement de cette DRENA porte déjà ce nom."
+            sigle:
+              too_long: "Le sigle compte %{count} caractères au plus."
+            school_type:
+              inclusion: "Choisissez le type : public, privé ou mixte."
+            status:
+              inclusion: "Choisissez le statut de l'établissement."
+            cycle:
+              inclusion: "Choisissez le cycle de l'établissement."
+  teams:
+    schools:
+      cycles:
+        first: "Premier cycle"
+        both: "Premier et second cycles"
+      index:
+        page_title: "Établissements"
+        title: "Établissements"
+        subtitle: "Tous les établissements du pays. Ils arrivent par import, chacun avec ses classes."
+        import: "Importer des établissements"
+        total:
+          zero: "Aucun établissement"
+          one: "%{count} établissement"
+          other: "%{count} établissements"
+        caption: "Liste nationale des établissements"
+        columns:
+          school: "Établissement"
+          drena: "DRENA"
+          type: "Type"
+          cycle: "Cycle"
+          status: "Statut"
+          classrooms: "Classes"
+          teachers: "Enseignants"
+          actions: "Actions"
+        empty_title: "Aucun établissement pour l'instant"
+        empty_description: "Importez le fichier JSON des établissements d'une DRENA : chacun reçoit ses classes."
+        no_match_title: "Aucun établissement ne correspond"
+        no_match_description: "Changez la recherche ou les filtres."
+        clear_filters: "Effacer les filtres"
+      filters:
+        label: "Rechercher un établissement"
+        search: "Nom ou sigle"
+        search_placeholder: "Ex. : Lycée Classique, LCA"
+        drena: "DRENA"
+        school_type: "Type"
+        cycle: "Cycle"
+        status: "Statut"
+        all_drena: "Toutes les DRENA"
+        all_school_type: "Tous les types"
+        all_cycle: "Tous les cycles"
+        all_status: "Tous les statuts"
+        submit: "Filtrer"
+        reset: "Réinitialiser"
+      school_row:
+        edit: "Modifier"
+        edit_label: "Modifier l'établissement %{name}"
+        deactivate: "Désactiver"
+        deactivate_title: "Désactiver « %{name} » ?"
+        deactivate_warning: "L'établissement n'est plus proposé à l'inscription des enseignants ni à la création de classe. Ses classes, ses élèves et ses enseignants sont conservés."
+        confirm_deactivate: "Désactiver l'établissement"
+        delete: "Supprimer"
+        delete_title: "Supprimer « %{name} » ?"
+        delete_warning: "L'établissement et ses classes disparaissent. Un établissement dont une classe a un élève, un enseignant ou une assignation ne peut pas être supprimé : désactivez-le plutôt."
+        confirm_delete: "Supprimer l'établissement"
+        cancel: "Annuler"
+      header:
+        breadcrumb: "Fil d'Ariane"
+        back: "Établissements"
+        sigle: "Sigle :"
+        drena: "DRENA"
+        type: "Type"
+        cycle: "Cycle"
+        status: "Statut"
+        add_classroom: "Ajouter une classe"
+        edit: "Modifier"
+        deactivate: "Désactiver"
+        deactivate_title: "Désactiver « %{name} » ?"
+        deactivate_warning: "L'établissement n'est plus proposé à l'inscription des enseignants ni à la création de classe. Ses classes, ses élèves et ses enseignants sont conservés."
+        confirm_deactivate: "Désactiver l'établissement"
+        cancel: "Annuler"
+      show:
+        page_title: "%{name} · Établissements"
+        classrooms:
+          zero: "Classes"
+          one: "Classes (%{count})"
+          other: "Classes (%{count})"
+        school_year: "Année scolaire %{year}"
+        no_classrooms: "Aucune classe cette année"
+        no_classrooms_description: "Ajoutez une classe, ou importez de nouveau l'établissement l'an prochain."
+        teachers:
+          zero: "Enseignants"
+          one: "Enseignants (%{count})"
+          other: "Enseignants (%{count})"
+        no_teachers: "Aucun enseignant rattaché"
+        no_teachers_description: "Les enseignants choisissent leur établissement à l'inscription."
+        secondary_school: "Établissement secondaire"
+      classroom_group:
+        count:
+          one: "%{count} classe"
+          other: "%{count} classes"
+        archived: "Archivée"
+        join_code: "Code"
+        no_join_code: "Aucun code"
+        students: "Élèves"
+        teachers: "Enseignants"
+        no_teacher: "Aucun enseignant"
+      form:
+        name_hint: "%{count} caractères au plus."
+        sigle_placeholder: "Ex. : LCA"
+        sigle_hint: "Facultatif, %{count} caractères au plus."
+        classrooms_hint: "Changer le type ou le cycle ne crée ni ne supprime aucune classe. Pour une classe de plus, utilisez « Ajouter une classe » sur la fiche."
+      edit:
+        title: "Modifier l'établissement"
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      update:
+        done: "Établissement « %{name} » enregistré."
+      deactivate:
+        done: "Établissement « %{name} » désactivé."
+      destroy:
+        done: "Établissement supprimé."
+        referenced: "Cet établissement a des élèves, des enseignants ou des assignations : il ne peut pas être supprimé. Désactivez plutôt cet établissement."

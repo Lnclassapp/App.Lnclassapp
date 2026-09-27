@@ -1,0 +1,34 @@
+<%# 🌐 UI · teams/levels/index — niveaux du référentiel, écran de l'équipe %>
+<%# Rôle : aide sur les niveaux générés ; tableau #levels par position ; « Nouveau niveau » ouvre la modale de création dans le frame « modal » %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0032 %>
+<% content_for :title, t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
+  <%= ui_button t(".new"), href: new_level_path, icon: "plus", data: { turbo_frame: "modal" } %>
+<% end %>
+
+<p id="levels-generation-help" class="mb-4 flex items-start gap-2 text-sm text-mute">
+  <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-info" %>
+  <span><%= t(".generation_help", codes: Queries::Catalog::LevelsQuery::GENERATED_SLUGS.to_sentence) %></span>
+</p>
+
+<%# relative : le libellé sr-only de la colonne des actions reste dans le conteneur défilant, sans élargir la page. %>
+<div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
+  <table class="w-full min-w-3xl text-left text-sm">
+    <thead class="border-b border-line text-xs text-mute">
+      <tr>
+        <% %i[name code position cycle series classrooms courses].each do |column| %>
+          <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+        <% end %>
+        <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+      </tr>
+    </thead>
+    <tbody id="levels" class="divide-y divide-line">
+      <%= render partial: "level_row", collection: @levels, as: :level %>
+    </tbody>
+  </table>
+  <% if @levels.empty? %>
+    <div id="levels_empty" class="p-6">
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "queue-list" %>
+    </div>
+  <% end %>
+</div>

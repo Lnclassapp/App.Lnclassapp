@@ -1,0 +1,79 @@
+# Inscription enseignant et liste des établissements d'une DRENA (plan boucle-pedagogique, Lot D1) — ADR-0030, ADR-0050, UDR-0007, UDR-0024
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/teacher_registration_input:
+        last_name: "Nom"
+        first_name: "Prénom(s)"
+        gender: "Genre"
+        contact: "Numéro de téléphone"
+        pin: "PIN"
+        pin_confirmation: "Confirmation du PIN"
+        drena_public_id: "DRENA"
+        school_public_id: "Établissement"
+        material_slug: "Matière enseignée"
+    errors:
+      models:
+        dtos/identity/teacher_registration_input:
+          attributes:
+            last_name:
+              blank: "Saisissez votre nom."
+              too_long: "Le nom compte %{count} caractères au plus."
+              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
+            first_name:
+              blank: "Saisissez votre ou vos prénoms."
+              too_long: "Les prénoms comptent %{count} caractères au plus."
+              invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
+            gender:
+              inclusion: "Choisissez votre genre."
+            contact:
+              blank: "Saisissez votre numéro de téléphone."
+              invalid: "Saisissez un numéro ivoirien à 10 chiffres, par exemple 05 01 02 03 04."
+              taken: "Ce numéro est déjà utilisé."
+            pin:
+              blank: "Choisissez un PIN à 4 chiffres."
+              invalid: "Le PIN compte 4 chiffres."
+            pin_confirmation:
+              confirmation: "Les deux PIN ne sont pas identiques."
+            drena_public_id:
+              blank: "Choisissez votre DRENA."
+              inclusion: "Cette DRENA n'existe pas. Choisissez-en une autre."
+            school_public_id:
+              blank: "Choisissez votre établissement."
+              inclusion: "Cet établissement n'est pas proposé dans cette DRENA. Choisissez-en un autre."
+            material_slug:
+              blank: "Choisissez la matière que vous enseignez."
+              inclusion: "Cette matière n'existe pas. Choisissez-en une autre."
+  identity:
+    teacher_registrations:
+      new:
+        page_title: "Inscription enseignant · Lnclass"
+        welcome: "Bienvenue sur Lnclass"
+        welcome_hint: "Créez votre compte enseignant en une minute, avec votre numéro de téléphone et un PIN à 4 chiffres."
+        title: "Créer un compte enseignant"
+        subtitle: "Vous choisirez ensuite les classes où vous enseignez."
+        have_account: "Déjà un compte ?"
+        sign_in: "Se connecter"
+      form:
+        personal: "Informations personnelles"
+        last_name_placeholder: "Ex. : Kouassi"
+        first_name_placeholder: "Ex. : Aya Marie"
+        contact: "Contact"
+        contact_placeholder: "05 00 00 00 00"
+        contact_hint: "10 chiffres. Il vous servira à vous connecter."
+        school_and_subject: "Établissement et matière"
+        drena_prompt: "Choisissez votre DRENA"
+        show_schools: "Afficher les établissements"
+        material_prompt: "Choisissez votre matière"
+        security: "Sécurité"
+        pin_hint: "4 chiffres, que vous seul connaissez."
+        submit: "Créer mon compte"
+      create:
+        welcome: "Bienvenue ! Sélectionnez vos classes pour commencer."
+  school:
+    drena_schools:
+      index:
+        label: "Établissement"
+        prompt: "Choisissez votre établissement"
+        choose_drena_first: "Choisissez d'abord votre DRENA."
+        none: "Aucun établissement actif dans cette DRENA. Vérifiez la DRENA choisie."

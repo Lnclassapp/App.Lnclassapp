@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/schools/update — succès de la modification %>
+<%# Rôle : toast, ligne de la liste et en-tête de la fiche remplacés (chacun ignoré s'il n'est pas sur la page) ; la modale se ferme sur l'envoi réussi %>
+<%# ADR  : 0030 · UDR : 0006, 0036 %>
+<%= turbo_stream_toast t(".done", name: @school.name), type: :success %>
+<%= turbo_stream.replace "school_#{@school.public_id}", partial: "school_row", locals: { school: @school } %>
+<%= turbo_stream.replace "school_header", partial: "header", locals: { school: @school } %>

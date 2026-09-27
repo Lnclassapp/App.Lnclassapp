@@ -1,0 +1,21 @@
+<%# 🌐 UI · components/_tabs — onglets WAI-ARIA, appelés par ui_tabs %>
+<%# Rôle : onglet actif rendu côté serveur, flèches / Début / Fin au clavier %>
+<%# UDR  : 0005 · Stimulus : tabs %>
+<div data-controller="tabs">
+  <div role="tablist" aria-label="<%= label %>" data-action="keydown->tabs#keydown"
+       class="scrollbar-none flex gap-1 overflow-x-auto border-b border-line">
+    <% tabs.each do |tab| %>
+      <% active = tab.key == selected %>
+      <button type="button" role="tab" id="<%= id %>-tab-<%= tab.key %>" aria-controls="<%= id %>-panel-<%= tab.key %>"
+              aria-selected="<%= active %>" tabindex="<%= active ? 0 : -1 %>" data-tabs-target="tab" data-action="tabs#select"
+              class="inline-flex min-h-tap cursor-pointer items-center gap-2 border-b-2 border-transparent px-4 text-sm font-medium whitespace-nowrap text-mute transition hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand aria-selected:border-brand aria-selected:text-ink">
+        <% if tab.icon %><%= ui_icon tab.icon, size: :sm %><% end %>
+        <%= tab.label %>
+      </button>
+    <% end %>
+  </div>
+  <% tabs.each do |tab| %>
+    <%= tag.div tab.content, role: "tabpanel", id: "#{id}-panel-#{tab.key}", "aria-labelledby": "#{id}-tab-#{tab.key}",
+          tabindex: 0, hidden: tab.key != selected, data: { tabs_target: "panel" }, class: "pt-5 focus:outline-none" %>
+  <% end %>
+</div>
