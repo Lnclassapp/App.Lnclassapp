@@ -31,7 +31,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Renouvellement de session dupliqué entre `ChangeOwnContact` et `ChangeOwnPin` | Lots B et C livrés en parallèle ; l'extraction touche le fichier du Lot B | Intégration du chantier (avant la PR) |
 
 ## Clôture
 
@@ -49,3 +49,11 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 - Dérapage : une redirection depuis la modale vers une page de `AuthenticatedController` revient dans le layout `turbo_rails/frame`, **sans** la balise de rechargement de l'ADR-0049 : Turbo ne trouve pas le frame `modal` et la page reste sur place. Corrigé dans `AuthenticatedController` (fichier hors plan) : la première requête Turbo d'une session neuve reçoit le shell, qui porte la balise ; Turbo quitte le frame et recharge `Mon profil` avec le toast. Le Lot C (PIN) en dépend aussi. Preuves : `test/controllers/authenticated_controller_test.rb`, `test/system/identity/profile_contact_test.rb`.
 - Le test système remplace `Identity::ProfilesController` par un double tant que le Lot A n'est pas fusionné (même motif que `sign_in_test.rb`) ; il s'efface de lui-même ensuite.
 - Hors plan aussi : `test/domain/dtos/identity/contact_change_input_test.rb`.
+
+## Lot C — Changer son PIN
+
+- Livré : `ChangeOwnPin` (policy, DTO validé **avant** le PIN, `VerifyOwnPin`, PIN identique refusé — seulement **après** la vérification du PIN actuel, sinon « C'est déjà votre PIN. » pourrait être faux —, puis dans une transaction `update_pin`, nouvelle session, `destroy_all_except`, audit `pin.changed` sans métadonnées), `PinChangeInput`, `Identity::ProfilePinsController` (edit/update), la modale `sm` et `profile_pins.fr.yml`. Critères PR-06, PR-07 (par le PIN).
+- Aligné sur le Lot B (fusionné dans la branche du Lot C) : même renouvellement de session, même ordre de contrôle, « PIN incorrect. » en alerte `role="alert"`, pas sous le champ ; le correctif `AuthenticatedController` du Lot B sert tel quel pour la redirection vers `Mon profil`.
+- Dérapage : le correctif du Lot B ne couvre pas le **verrouillage**. Depuis la modale, la redirection vers la connexion (`Identity::SessionsController`, hors `AuthenticatedController`) revient dans le layout `turbo_rails/frame` de turbo-rails, sans balise de rechargement : « Content missing », l'utilisateur reste sur la page. Corrigé par `app/views/layouts/turbo_rails/frame.html.erb` (hors plan, surcharge prévue par turbo-rails) qui pose `document_reload_tag`. Vaut aussi pour le verrouillage du Lot B. Preuves : `test/controllers/identity/profile_pins_controller_test.rb` (« reloads the whole document ») et le second test de `test/system/identity/profile_pin_test.rb`, tous deux rouges sans ce fichier.
+- Dette : le renouvellement de session (`renew`, 5 lignes) est dupliqué entre `ChangeOwnContact` et `ChangeOwnPin` ; l'extraire dans un use case partagé demande de modifier le fichier du Lot B, laissé intact ici. À faire à l'intégration.
+- Le test système remplace `Identity::ProfilesController` par un double tant que le Lot A n'est pas fusionné ; le double rend en HTML (`formats: :html`), comme le ferait `show.html.erb` pour la requête de frame qui suit la redirection.
