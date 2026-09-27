@@ -41,3 +41,11 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+## Lot B — Changer son numéro
+
+- Livré : `ChangeOwnContact` (policy, DTO validé **avant** le PIN — une faute de saisie ne coûte pas d'essai —, numéro identique refusé, `VerifyOwnPin`, puis dans une transaction `update_contact`, nouvelle session, `destroy_all_except`, audit `contact.changed` masqué `********44`), `ContactChangeInput`, `Identity::ProfileContactsController` (edit/update), la modale `sm` et `profile_contacts.fr.yml`.
+- Écart assumé : la session est renouvelée en **créant** une nouvelle session (nouveau jeton, second facteur reporté s'il était vérifié), puis `destroy_all_except(keep_id: <nouvelle>)` : l'ancienne session en cours disparaît avec les autres, aucune ligne orpheline. Le Lot C a intérêt à suivre le même motif.
+- Dérapage : une redirection depuis la modale vers une page de `AuthenticatedController` revient dans le layout `turbo_rails/frame`, **sans** la balise de rechargement de l'ADR-0049 : Turbo ne trouve pas le frame `modal` et la page reste sur place. Corrigé dans `AuthenticatedController` (fichier hors plan) : la première requête Turbo d'une session neuve reçoit le shell, qui porte la balise ; Turbo quitte le frame et recharge `Mon profil` avec le toast. Le Lot C (PIN) en dépend aussi. Preuves : `test/controllers/authenticated_controller_test.rb`, `test/system/identity/profile_contact_test.rb`.
+- Le test système remplace `Identity::ProfilesController` par un double tant que le Lot A n'est pas fusionné (même motif que `sign_in_test.rb`) ; il s'efface de lui-même ensuite.
+- Hors plan aussi : `test/domain/dtos/identity/contact_change_input_test.rb`.
