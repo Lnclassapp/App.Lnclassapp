@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B7, critère F-16 (ID-04 remplacée) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (acceptation exemptée de policy) · [ADR-0031](../adr/0031-second-facteur-totp-pour-l-equipe.md) (TOTP) · [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) · [ADR-0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · [UDR-0006](0006-shell-applicatif-par-role.md) |

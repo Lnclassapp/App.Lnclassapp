@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B6, critères TR-09, CA-25 ; TR-10 hors périmètre (V4) |
 | **ADR lié** | [ADR-0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md) (référentiel créé à l'écran) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts du contenu) · [ADR-0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md) (invitation par un admin) · [ADR-0039](../adr/0039-format-d-import-du-contenu.md) (imports) · [ADR-0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) (année scolaire) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) (shell, sections d'accueil) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |

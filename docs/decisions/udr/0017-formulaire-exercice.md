@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot B5 ; AS-03, AS-04, AS-05, TR-cadre-6) |
 | **ADR lié** | [ADR-0026](../adr/0026-contrat-result-entites-et-dto.md) (DTO de saisie) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (brouillon, publication, archivage) · [ADR-0036](../adr/0036-suppression-archivage-et-anonymisation.md) (archiver sans détruire) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (questions verrouillées après une session) · UDR-0006 (CRUD Hotwire) · UDR-0007 (vocabulaire) |

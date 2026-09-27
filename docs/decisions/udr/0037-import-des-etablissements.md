@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot S3 ; critères SC-03, SC-08, SC-09 |
 | **ADR lié** | [ADR-0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md) (classes générées) · [ADR-0039](../adr/0039-format-d-import-du-contenu.md) (format, import partiel) · [UDR-0006](0006-shell-applicatif-par-role.md) §7 (CRUD Hotwire) · [UDR-0035](0035-gestion-des-drena.md) (slug des DRENA) · [UDR-0036](0036-gestion-des-etablissements.md) (aucune création à l'écran) · UDR-0007 |

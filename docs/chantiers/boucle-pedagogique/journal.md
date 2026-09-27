@@ -32,6 +32,14 @@
 | 2026-09-25 | `friendly_id` retiré (0a) : slugs figés par `Orm::HasFrozenSlug`, table `friendly_id_slugs` supprimée | Gem inutilisée, slugs figés à la création | Précision de l'ADR-0029 |
 | 2026-09-26 | La suite du chantier passe sur Claude Code on the web : un lot par session, PR vers `feature/boucle-pedagogique` ; état, brief et questions dans [`reprise/`](reprise/README.md) | Demande du porteur, pour aller plus vite | Non (organisation du chantier) |
 | 2026-09-26 | Nonce CSP stable par session (gardé dans la session) et rechargement complet de la page d'arrivée après une connexion, une inscription ou une déconnexion ; les erreurs 422 restent sans rechargement | Trix perdait ses styles après une navigation Turbo (reprise §3) ; validé par le porteur | Amendement de l'ADR-0049 |
+| 2026-09-27 | Une lacune n'est résolue qu'à partir de 75 % (`REMEDIATION_THRESHOLD`) ; entre 50 et 74 %, elle reste « à revoir » sans échec de plus | Décision du porteur (le PRD disait 70 %, l'ADR 50 %) | Amendement de l'ADR-0043 |
+| 2026-09-27 | Réussite de la classe (D6) : part des élèves présents dont le meilleur score atteint 50 %, au lieu d'une moyenne de scores | Décision du porteur | UDR-0029 mise à jour |
+| 2026-09-27 | Un établissement en brouillon ne reçoit pas de classe créée à la main ; le bouton est masqué et l'envoi direct est refusé en 422 | Décision du porteur | UDR-0031 mise à jour |
+| 2026-09-27 | Lien « Voir le résultat » sur le dernier score de chaque élève, dans la page de classe | Décision du porteur (manque relevé par le Lot E) | UDR-0027 mise à jour |
+| 2026-09-27 | Un import bloqué passe « Échoué » après 10 min, en file, en validation ou en cours (30 min avant, et jamais pour « en file ») | Décision du porteur (risque relevé par le Lot E) | Amendement de l'ADR-0039 |
+| 2026-09-27 | Libellé de l'import `course_tree` : « Cours complets » | Décision du porteur (UDR-0007 ne connaît pas « chapitre ») | UDR-0038 mise à jour |
+| 2026-09-27 | UDR-0009 à UDR-0040 acceptées et indexées | Décision du porteur | Index des UDR |
+| 2026-09-27 | Page profil pour tous les utilisateurs : chantier séparé à ouvrir (`/feature`) | Décision du porteur | Non (nouveau chantier) |
 
 ## Retour du porteur du 2026-09-25
 

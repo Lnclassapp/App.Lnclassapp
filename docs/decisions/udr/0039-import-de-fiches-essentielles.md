@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot I2 ; critères CA-15, TR-28 |
 | **ADR lié** | [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (tout naît en brouillon) · [ADR-0039](../adr/0039-format-d-import-du-contenu.md) (format, cible, import partiel) · [UDR-0006](0006-shell-applicatif-par-role.md) §7 (CRUD Hotwire) · [UDR-0038](0038-import-de-cours.md) (aide de l'arbre étage par étage) · UDR-0007 (vocabulaire) |
