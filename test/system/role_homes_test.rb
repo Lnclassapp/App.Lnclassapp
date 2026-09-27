@@ -96,7 +96,12 @@ class RoleHomesTest < ApplicationSystemTestCase
       assert_selector "main#main", text: /\S/
     end
     home = page.current_path
+    # The logo may lead back to the very page on screen (an account without active destination): the path alone would
+    # match before the visit ends, and the next step would act on the document about to be replaced. The mark on the
+    # old body is gone only once the new one is drawn.
+    page.execute_script("document.body.dataset.leaving = 'true'")
     find("header a", match: :first).click
+    assert_no_selector "body[data-leaving]"
     assert_current_path active.fetch(:home, home)
   end
 
