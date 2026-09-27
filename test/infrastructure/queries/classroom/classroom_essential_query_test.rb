@@ -27,9 +27,9 @@ module Queries
         assert_equal [ @course.slug, "Génétique et évolution" ], [ row.course_slug, row.course_name ]
         assert_equal [ @essential.slug, "La méiose", "Deux divisions", nil ],
                      row.essential.to_h.values_at(:slug, :name, :subtitle, :assignment_public_id)
-        assert_equal [ [ @first.public_id, "Les phases", 3, nil, nil, 0 ], [ @second.public_id, "Le brassage", 1, nil, nil, 0 ] ],
+        assert_equal [ [ @first.public_id, "Les phases", 3, nil, nil, 0, 0 ], [ @second.public_id, "Le brassage", 1, nil, nil, 0, 0 ] ],
                      row.exercises.map { it.to_h.values_at(:public_id, :title, :questions_count, :assignment_public_id,
-                                                           :average_score_percent, :completed_students_count) }
+                                                           :success_percent, :passed_students_count, :completed_students_count) }
       end
 
       test "l'assignation active de la fiche et de chaque exercice, jamais une ligne archivée ni celle d'une autre classe" do
@@ -47,14 +47,14 @@ module Queries
         assert_equal [ first_assignment.public_id, nil ], row.exercises.map(&:assignment_public_id)
       end
 
-      test "le taux de réussite de la classe : moyenne des sessions terminées de ses élèves présents, par exercice" do
+      test "la réussite de la classe : part de ses élèves présents dont le meilleur score atteint le seuil, par exercice" do
         alice = create_student(classroom: @classroom)
         bruno = create_student(classroom: @classroom)
         gone = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
         create_exercise_session(student: alice, exercise: @first, status: "completed", score_percent: 40)
         create_exercise_session(student: alice, exercise: @first, status: "completed", score_percent: 80)
-        create_exercise_session(student: bruno, exercise: @first, status: "completed", score_percent: 75)
+        create_exercise_session(student: bruno, exercise: @first, status: "completed", score_percent: 49)
         create_exercise_session(student: bruno, exercise: @first, status: "started")
         create_exercise_session(student: bruno, exercise: @second, status: "started")
         create_exercise_session(student: gone, exercise: @second, status: "completed", score_percent: 10)
@@ -62,7 +62,9 @@ module Queries
 
         row = query
 
-        assert_equal [ [ 65, 2 ], [ nil, 0 ] ], row.exercises.map { [ it.average_score_percent, it.completed_students_count ] }
+        # Alice réussit par son meilleur score (80), Bruno non (49) ; un élève parti ou d'une autre classe ne compte pas.
+        assert_equal [ [ 50, 1, 2 ], [ nil, 0, 0 ] ],
+                     row.exercises.map { [ it.success_percent, it.passed_students_count, it.completed_students_count ] }
       end
 
       test "une fiche sans exercice publié" do

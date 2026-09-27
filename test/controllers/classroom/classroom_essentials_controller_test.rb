@@ -41,7 +41,7 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     end
     assert_select toggle_id("Exercise", @brassage.public_id), text: including(toggle(:assign))
     assert_select "#classroom_essential_exercises", text: including(tl("questions", count: 3))
-    assert_select "#classroom_essential_exercises", text: including(tl("success_rate", percent: 72, count: 1))
+    assert_select "#classroom_essential_exercises", text: including(tl("success_rate", percent: 100, passed: 1, count: 1))
     assert_select "#classroom_essential_exercises", text: including(tl("no_result"))
   end
 
