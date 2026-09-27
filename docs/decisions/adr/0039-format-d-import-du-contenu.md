@@ -137,3 +137,13 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
 - **Un seul import actif par type** : un index unique partiel sur `kind`, pour les statuts `queued`, `validating` et `importing` (`index_import_reports_one_running_per_kind`). Un second import du même type donne `:conflict`. Aucun index unique sur le checksum : réimporter un fichier est permis, et ses éléments déjà écrits sont comptés en doublons.
 - **Jobs** : les jobs `<Contexte>::Import…Job` héritent de `Shared::ImportJob`. `config.x.import_jobs` associe chaque `kind` à son job, résolu à l'appel.
 - **Test de performance par type** : `test/performance/<contexte>/import_<kind>_performance_test.rb`, un par lot d'import, au lieu du fichier unique `test/performance/imports_test.rb` du §7. Volumes et seuil inchangés. Ces tests sont hors suite par défaut et se jouent avec `PERF=1`.
+
+## Amendement du 2026-09-27 — un import bloqué est libéré après 10 minutes
+
+*Décision du porteur. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Un import qui ne progresse plus passe `failed` après 10 minutes**, au lieu de 30, et quel que soit son statut actif :
+  - `validating` ou `importing` commencé depuis plus de 10 minutes (job tué, par exemple par un déploiement) ;
+  - `queued` créé depuis plus de 10 minutes : le job n'a jamais été pris (worker arrêté). Avant cet amendement, un tel rapport restait en file pour toujours et bloquait tous les imports de son type.
+- Le contrôle se fait au dépôt de l'import suivant du même type (`Catalog::StartImport`, `STALE_AFTER = 10 * 60`, `ImportReportRepository#fail_stale`). Un import normal dure moins de 2 minutes (§7), donc 10 minutes laissent une large marge.
+- Preuves : `test/infrastructure/repositories/catalog/import_report_repository_test.rb` (les deux cas) et `test/system/error_paths_test.rb` (import interrompu, import jamais pris, par les vrais boutons).

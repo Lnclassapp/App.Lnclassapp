@@ -52,8 +52,9 @@
             <p class="font-medium text-ink"><%= exercise.title %></p>
             <p class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-mute">
               <span><%= t(".questions", count: exercise.questions_count) %></span>
-              <% if exercise.average_score_percent %>
-                <span><%= t(".success_rate", percent: exercise.average_score_percent, count: exercise.completed_students_count) %></span>
+              <% if exercise.success_percent %>
+                <span><%= t(".success_rate", percent: exercise.success_percent, passed: exercise.passed_students_count,
+                                              count: exercise.completed_students_count) %></span>
               <% else %>
                 <span><%= t(".no_result") %></span>
               <% end %>

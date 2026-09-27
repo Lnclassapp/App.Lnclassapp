@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot R1 ; CA-16, CA-18, CA-25) |
 | **ADR lié** | [ADR-0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md) (slug figé) · [ADR-0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md) (référentiel créé par l'équipe) · [ADR-0036](../adr/0036-suppression-archivage-et-anonymisation.md) (suppression refusée) · UDR-0006 (CRUD Hotwire) |

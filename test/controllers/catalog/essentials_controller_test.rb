@@ -85,7 +85,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#essential_gap", text: /#{I18n.t("#{scope}.show.gap_title")}/
     assert_select "#essential_gap", text: /12 septembre 2026/
-    assert_select "#essential_gap", text: /#{Entities::Assessment::Grading::PASS_THRESHOLD} %/
+    assert_select "#essential_gap", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/
   end
 
   test "the teacher reads the published exercises, without progress, session button nor team menu" do

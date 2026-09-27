@@ -19,7 +19,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
-      # Passe failed les rapports validating ou importing commencés avant `before` (job tué). → Integer
+      # Passe failed les rapports validating ou importing commencés avant `before` (job tué), et les rapports queued créés
+      # avant `before` (job jamais pris). → Integer
       def fail_stale(kind:, before:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #fail_stale"
       end

@@ -134,7 +134,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
 
     open_sidebar_entry "Imports"
     assert_selector "#imports tr", count: 2
-    assert_selector "#imports tr", text: /Cours et chapitres.*cours.*\.json.*Terminé/m
+    assert_selector "#imports tr", text: /#{I18n.t("import_kinds.course_tree")}.*cours.*\.json.*Terminé/m
     assert_selector "#imports tr", text: /Établissements.*ecoles.*\.json.*Terminé/m
   end
 

@@ -7,10 +7,12 @@ module Queries
       Row = Data.define(:classroom_public_id, :classroom_name, :course_slug, :course_name, :essential, :exercises)
       # assignment_public_id : l'assignation active à cette classe, ou nil.
       EssentialRow = Data.define(:slug, :name, :subtitle, :assignment_public_id)
-      # average_score_percent : moyenne des sessions terminées des élèves présents, nil sans session ;
-      # completed_students_count : élèves présents qui ont terminé au moins une session.
-      ExerciseRow = Data.define(:public_id, :title, :questions_count, :assignment_public_id, :average_score_percent,
-                                :completed_students_count)
+      # Décision du porteur (2026-09-27) : la réussite est la part des élèves en réussite, pas une moyenne de scores.
+      # completed_students_count : élèves présents qui ont terminé au moins une session ;
+      # passed_students_count : parmi eux, ceux dont le meilleur score atteint PASS_THRESHOLD ;
+      # success_percent : leur part arrondie, nil sans session.
+      ExerciseRow = Data.define(:public_id, :title, :questions_count, :assignment_public_id, :success_percent,
+                                :passed_students_count, :completed_students_count)
 
       ESSENTIAL_COLUMNS = %w[essentials.id essentials.slug essentials.name essentials.subtitle courses.slug courses.name].freeze
 
@@ -47,18 +49,23 @@ module Queries
         questions = Orm::Question.where(exercise_id: ids).group(:exercise_id).count
         results = results(classroom_id, ids)
         exercises.map do |id, public_id, title|
-          average, students = results.fetch(id, [ nil, 0 ])
           ExerciseRow.new(public_id:, title:, questions_count: questions.fetch(id, 0), assignment_public_id: active[[ "Exercise", id ]],
-                          average_score_percent: average, completed_students_count: students)
+                          **success(results.fetch(id, [])))
         end
       end
 
-      # { exercise_id => [moyenne arrondie, nombre d'élèves] }, en une requête, sur les seuls élèves présents dans la classe.
+      def success(best_scores)
+        passed = best_scores.count { it >= Entities::Assessment::Grading::PASS_THRESHOLD }
+        percent = (passed * 100.0 / best_scores.size).round unless best_scores.empty?
+        { success_percent: percent, passed_students_count: passed, completed_students_count: best_scores.size }
+      end
+
+      # { exercise_id => [meilleur score de chaque élève] }, en une requête, sur les seuls élèves présents dans la classe.
       def results(classroom_id, exercise_ids)
         members = Orm::ClassroomStudent.where(classroom_id:, left_at: nil).select(:student_id)
-        Orm::ExerciseSession.where(exercise_id: exercise_ids, student_id: members, status: "completed").group(:exercise_id)
-                            .pluck(:exercise_id, Arel.sql("ROUND(AVG(score_percent))"), Arel.sql("COUNT(DISTINCT student_id)"))
-                            .to_h { |id, average, students| [ id, [ average.to_i, students ] ] }
+        Orm::ExerciseSession.where(exercise_id: exercise_ids, student_id: members, status: "completed")
+                            .group(:exercise_id, :student_id).pluck(:exercise_id, Arel.sql("MAX(score_percent)"))
+                            .group_by(&:first).transform_values { |rows| rows.map(&:last) }
       end
     end
   end

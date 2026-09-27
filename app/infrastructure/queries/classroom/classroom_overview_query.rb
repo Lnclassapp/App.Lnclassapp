@@ -8,7 +8,8 @@ module Queries
       Overview = Data.define(:courses, :students)
       CourseRow = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category,
                               :essentials_count)
-      StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent)
+      # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
+      StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id)
 
       COURSE_COLUMNS = %w[courses.id courses.slug courses.name courses.subtitle levels.name series.name materials.name
                           materials.category].freeze
@@ -40,17 +41,20 @@ module Queries
       def students(classroom_id)
         rows = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)
                                     .order("users.last_name", "users.first_name").pluck(*STUDENT_COLUMNS)
-        scores = last_scores(rows.map(&:first))
+        sessions = last_sessions(rows.map(&:first))
 
         rows.map do |id, public_id, first_name, last_name, contact|
-          StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact:, last_score_percent: scores[id])
+          score, session_public_id = sessions[id]
+          StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact:, last_score_percent: score,
+                         last_session_public_id: session_public_id)
         end
       end
 
-      # Score de la dernière session terminée de chaque élève, en une requête.
-      def last_scores(student_ids)
+      # { student_id => [score, public_id] } de la dernière session terminée de chaque élève, en une requête.
+      def last_sessions(student_ids)
         Orm::ExerciseSession.where(student_id: student_ids, status: "completed").order(:student_id, completed_at: :desc)
-                            .pluck(Arel.sql("DISTINCT ON (student_id) student_id"), :score_percent).to_h
+                            .pluck(Arel.sql("DISTINCT ON (student_id) student_id"), :score_percent, :public_id)
+                            .to_h { |id, score, public_id| [ id, [ score, public_id ] ] }
       end
     end
   end

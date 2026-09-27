@@ -172,6 +172,17 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
   end
 
+  test "a draft school page offers no « Ajouter une classe » until the school is activated" do
+    draft = create_school(status: "draft")
+    sign_in_as create_team_member
+
+    get school_path(draft.public_id)
+
+    assert_response :success
+    assert_select "a[href='#{new_school_classroom_path(draft.public_id)}']", count: 0
+    assert_select "#school_header a[href='#{edit_school_path(draft.public_id)}']"
+  end
+
   test "a school without classrooms nor teachers says so; an inactive one offers no deactivation" do
     school = create_school(drena: @drena, status: "inactive")
     sign_in_as @member

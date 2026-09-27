@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot A3, critères CL-22, CL-10 (volet élève) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadClassroomPolicy`, fait `show_roster`) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (cours publiés) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [UDR-0006](0006-shell-applicatif-par-role.md) (shell, entrée « Ma classe ») · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) · [UDR-0010](0010-accueil-eleve.md) (carte « Ma classe » de l'accueil) · [UDR-0027](0027-page-classe.md) (page classe de l'enseignant) |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot C1, critères AS-02, AS-39, TR-cadre-3 ; sécurité n° 29 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, `RevealAnswersPolicy`, `StartSessionPolicy`) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (démarrer, reprendre, recommencer) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0017](0017-formulaire-exercice.md) (modale « Modifier ») |

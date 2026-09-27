@@ -325,8 +325,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog[open]"
     end
 
-    # No screen of the teacher links to a student's session yet: the result is opened by its address.
-    visit exercise_session_result_path(session.public_id)
+    # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27).
+    within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.see_result") }
+    assert_current_path exercise_session_result_path(session.public_id)
     assert_text t("assessment.session_results.show.student", name: "Aya Kouassi")
     assert_text "20/20"
     assert_text "100 %"

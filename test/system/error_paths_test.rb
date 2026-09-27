@@ -230,8 +230,8 @@ class ErrorPathsTest < ApplicationSystemTestCase
     assert_equal 2, Orm::ImportReport.count
   end
 
-  test "an import interrupted for more than 30 minutes no longer blocks the next one and ends failed" do
-    stale = create_import_report(kind: "schools", status: "importing", started_at: 31.minutes.ago)
+  test "an import interrupted for more than 10 minutes no longer blocks the next one and ends failed" do
+    stale = create_import_report(kind: "schools", status: "importing", started_at: 11.minutes.ago)
 
     sign_in_as create_team_member
     click_on t("shared.navigation.imports"), match: :first
@@ -240,6 +240,19 @@ class ErrorPathsTest < ApplicationSystemTestCase
       assert_selector "#import-tracking-modal", text: t("teams.imports.statuses.queued")
     end
     assert_equal "failed", stale.reload.status
+    assert_equal 2, Orm::ImportReport.where(kind: "schools").count
+  end
+
+  test "an import never picked up for more than 10 minutes no longer blocks the next one and ends failed" do
+    never_claimed = create_import_report(kind: "schools", status: "queued", created_at: 11.minutes.ago)
+
+    sign_in_as create_team_member
+    click_on t("shared.navigation.imports"), match: :first
+    assert_no_page_reload do
+      upload_import(:schools, "ecoles.json")
+      assert_selector "#import-tracking-modal", text: t("teams.imports.statuses.queued")
+    end
+    assert_equal "failed", never_claimed.reload.status
     assert_equal 2, Orm::ImportReport.where(kind: "schools").count
   end
 

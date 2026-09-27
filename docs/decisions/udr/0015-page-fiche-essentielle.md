@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B3, critères CA-10, CA-11, AS-37 ; CA-29 (bandeau retiré) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, tout exercice publié se démarre) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (lacune) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [ADR-0053](../adr/0053-validation-collaborative-requalifiee.md) (aucun label de conformité) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0016](0016-formulaire-fiche-essentielle.md) (modale « Modifier ») · [UDR-0017](0017-formulaire-exercice.md) (modale « Nouvel exercice ») · [UDR-0021](0021-page-exercice.md) (page d'un exercice) |

@@ -115,3 +115,21 @@ end
 
 - Une lacune en attente par élève **et par fiche** : l'unicité par élève seul, que suggérerait la lettre du registre, serait trop restrictive.
 - La remédiation réutilise un exercice existant, sans génération de questions.
+
+## Amendement du 2026-09-27 — une lacune n'est résolue qu'à partir de 75 %
+
+*Décision du porteur. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+Le tableau « À la clôture » du §4 devient :
+
+| Cas | Effet |
+|---|---|
+| `score_percent < PASS_THRESHOLD` (50), aucune lacune en attente | création d'une lacune `pending` |
+| `score_percent < PASS_THRESHOLD`, une lacune en attente | `failed_sessions_count + 1` |
+| `PASS_THRESHOLD <= score_percent < REMEDIATION_THRESHOLD` (75), une lacune en attente | aucun effet : la lacune reste `pending`, sans échec de plus |
+| `score_percent >= REMEDIATION_THRESHOLD`, lacune en attente, session `remediation` | `remediated` |
+| `score_percent >= REMEDIATION_THRESHOLD`, lacune en attente, session `standard` | `self_corrected` |
+
+- `Entities::Assessment::Grading::REMEDIATION_THRESHOLD = 75` ; `GapDecision` l'applique. Les seuils de réussite (50), de maîtrise (70) et des badges (ADR-0033) ne changent pas.
+- L'encart de la fiche essentielle annonce ce seuil à l'élève (« obtiens au moins 75 % à l'un de ses exercices »).
+- Le PRD (AS-11, qui disait 70 %) est aligné sur ce seuil.

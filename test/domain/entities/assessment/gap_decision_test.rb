@@ -10,9 +10,15 @@ module Entities
         assert_equal :increment, decide(0, :gap)
       end
 
-      test "au seuil : résout la lacune en attente selon le type de session" do
+      test "entre la réussite et le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
         assert_equal :none, decide(50, nil)
-        assert_equal :remediated, decide(50, :gap, :remediation)
+        assert_equal :none, decide(50, :gap, :remediation)
+        assert_equal :none, decide(74, :gap, "standard")
+      end
+
+      test "au seuil de remédiation (75 %) : résout la lacune en attente selon le type de session" do
+        assert_equal 75, Grading::REMEDIATION_THRESHOLD
+        assert_equal :remediated, decide(75, :gap, :remediation)
         assert_equal :self_corrected, decide(100, :gap, "standard")
       end
     end

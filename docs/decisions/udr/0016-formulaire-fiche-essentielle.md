@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot B4 ; CA-12, CA-13, CA-14) |
 | **ADR lié** | [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (cycle de vie) · [ADR-0047](../adr/0047-stockage-objet-s3-sur-railway.md) et [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucune pièce jointe, CSP stricte) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Trix hors du bundle commun) · UDR-0006 (CRUD Hotwire) · UDR-0007 (vocabulaire) |

@@ -19,7 +19,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     create_assignment(classroom: @classroom, assignable: course, by: @teacher)
     create_assignment(classroom: @classroom, assignable: create_course(name: "Brouillon", status: "draft"), by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", contact: "0102030405")
-    create_exercise_session(student: awa, status: "completed", score_percent: 85)
+    session = create_exercise_session(student: awa, status: "completed", score_percent: 85)
     create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
     sign_in_as @teacher
 
@@ -52,9 +52,12 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{awa.public_id}", text: /Awa Bamba/
     assert_select "#student_#{awa.public_id}", text: /01 02 03 04 05/
     assert_select "#student_#{awa.public_id}", text: /85 %/
+    assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']",
+                  text: I18n.t("#{scope}.roster.see_result")
     assert_select "#student_#{awa.public_id} form[method=post][action='#{account_pin_recovery_codes_path(awa.public_id)}'] " \
                   "button[type=submit]", text: I18n.t("#{scope}.roster.issue_code")
     assert_select "#classroom_roster", text: /#{I18n.t("#{scope}.roster.no_score")}/
+    assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
 
   test "non-régression CS#B8 : la page répond 200 avec un exercice et une fiche assignés" do

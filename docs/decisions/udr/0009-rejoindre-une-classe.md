@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot A1, critères ID-01, ID-02, ID-07, CL-06, CL-07, CL-08, TR-cadre-1, sécurité n° 5 |
 | **ADR lié** | [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) (nom et prénoms) · [ADR-0040](../adr/0040-classe-principale-unique-de-l-eleve.md) (classe principale) · [ADR-0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) (code, plafond, débit) · [ADR-0050](../adr/0050-authentification-et-session.md) (PIN, session) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0024](0024-inscription-enseignant.md) |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot S2 ; SC-03 à SC-07) |
 | **ADR lié** | [ADR-0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md) (les classes naissent à l'import) · [ADR-0036](../adr/0036-suppression-archivage-et-anonymisation.md) (suppression refusée, désactivation) · UDR-0005, UDR-0006, UDR-0007 |

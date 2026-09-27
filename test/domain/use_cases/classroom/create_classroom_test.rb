@@ -76,11 +76,19 @@ module UseCases
         assert_equal "2027-2028", create(now: Time.utc(2027, 9, 1), name: "Tle D 8").value.school_year
       end
 
-      test "un niveau sans série, sans série donnée ; un établissement en brouillon reçoit aussi des classes" do
-        result = create(school_public_id: "brouillon", level_slug: "6eme", series_slug: nil, name: "6ème 5")
+      test "un niveau sans série, sans série donnée" do
+        result = create(level_slug: "6eme", series_slug: nil, name: "6ème 5")
 
         assert result.success?
-        assert_equal [ 7, 1, nil ], [ result.value.school_id, result.value.level_id, result.value.series_id ]
+        assert_equal [ 5, 1, nil ], [ result.value.school_id, result.value.level_id, result.value.series_id ]
+      end
+
+      test "un établissement en brouillon ne reçoit pas de classe : :conflict, il faut d'abord l'activer" do
+        result = create(school_public_id: "brouillon")
+
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :school_draft ] }, result.errors)
+        assert_empty @classrooms.created
       end
 
       test "hors de l'équipe : :forbidden, rien n'est écrit, avant même de lire la saisie" do
