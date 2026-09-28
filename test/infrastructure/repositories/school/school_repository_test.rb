@@ -9,20 +9,67 @@ module Repositories
         @at = Time.zone.parse("2026-09-25 10:00")
       end
 
-      def school(name: "Lycée Classique", **attributes)
+      def school(name: "Lycée Classique", school_code: Entities::School::SchoolCode.generate, **attributes)
         Entities::School::School.new(drena_id: @drena.id, name:, sigle: "LCA", school_type: "public", cycle: "both",
-                                     status: "active", **attributes)
+                                     status: "active", school_code:, **attributes)
+      end
+
+      def row(name, school_code: Entities::School::SchoolCode.generate, **overrides)
+        { public_id: SecureRandom.base58(14), drena_id: @drena.id, name:, sigle: nil, school_type: "public", cycle: "both",
+          status: "active", school_code:, **overrides }
       end
 
       test "crée puis retrouve un établissement par public_id" do
-        created = @repository.create(school: school).value
+        created = @repository.create(school: school(school_code: "k7m4qz")).value
 
         found = @repository.find_by_public_id(public_id: created.public_id)
 
         assert_instance_of Entities::School::School, found
-        assert_equal [ "Lycée Classique", "LCA", "public", "both", "active", @drena.id ],
-                     [ found.name, found.sigle, found.school_type, found.cycle, found.status, found.drena_id ]
+        assert_equal [ "Lycée Classique", "LCA", "public", "both", "active", @drena.id, "k7m4qz" ],
+                     [ found.name, found.sigle, found.school_type, found.cycle, found.status, found.drena_id, found.school_code ]
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
+      end
+
+      test "CE-01: retrouve un établissement par son code, quel que soit son statut ; nil pour un code inconnu (ADR-0057)" do
+        active = create_school(drena: @drena, school_code: "k7m4qz")
+        inactive = create_school(drena: @drena, school_code: "abc234", status: "inactive")
+
+        assert_equal [ active.id, "active" ], @repository.find_by_school_code(school_code: "k7m4qz").then { [ it.id, it.status ] }
+        assert_equal "inactive", @repository.find_by_school_code(school_code: "abc234").status
+        assert_equal inactive.public_id, @repository.find_by_school_code(school_code: "abc234").public_id
+        assert_nil @repository.find_by_school_code(school_code: "zzz999")
+      end
+
+      test "CE-10: donne l'ensemble des codes d'établissement déjà pris" do
+        create_school(drena: @drena, school_code: "k7m4qz")
+        create_school(school_code: "abc234")
+
+        assert_equal Set["k7m4qz", "abc234"], @repository.taken_school_codes
+      end
+
+      test "CE-07: remplace le code et date la régénération ; un code déjà pris donne :conflict sans rien changer" do
+        record = create_school(drena: @drena, school_code: "k7m4qz")
+        create_school(school_code: "abc234")
+
+        replaced = @repository.replace_school_code(id: record.id, school_code: "xyz789", at: @at)
+
+        assert replaced.success?
+        assert_equal [ "xyz789", record.public_id ], [ replaced.value.school_code, replaced.value.public_id ]
+        assert_equal [ "xyz789", @at ], record.reload.attributes.values_at("school_code", "school_code_rotated_at")
+
+        taken = @repository.replace_school_code(id: record.id, school_code: "abc234", at: @at + 1.hour)
+
+        assert_equal :conflict, taken.code
+        assert_equal [ "xyz789", @at ], record.reload.attributes.values_at("school_code", "school_code_rotated_at")
+      end
+
+      test "la modification d'un établissement ne touche pas à son code" do
+        entity = @repository.create(school: school(school_code: "k7m4qz")).value
+        edited = Entities::School::School.new(id: entity.id, public_id: entity.public_id, drena_id: @drena.id, name: "Lycée B",
+                                              school_type: "public", cycle: "both", status: "active")
+
+        assert @repository.update(school: edited).success?
+        assert_equal "k7m4qz", Orm::School.find(entity.id).school_code
       end
 
       test "un nom déjà pris dans la DRENA donne :conflict" do
@@ -91,14 +138,14 @@ module Repositories
       end
 
       test "insère en masse et renvoie de quoi générer les classes" do
-        rows = [ "Lycée A", "Collège B" ].map do |name|
-          { public_id: SecureRandom.base58(14), drena_id: @drena.id, name:, sigle: nil, school_type: "private",
-            cycle: Entities::School::School.cycle_for(name:), status: "active" }
+        rows = [ [ "Lycée A", "k7m4qz" ], [ "Collège B", "abc234" ] ].map do |name, school_code|
+          row(name, school_code:, school_type: "private", cycle: Entities::School::School.cycle_for(name:))
         end
 
         inserted = @repository.insert_many(rows:, at: @at)
 
         assert_equal [ "Lycée A", "Collège B" ], inserted.map(&:name)
+        assert_equal %w[k7m4qz abc234], Orm::School.where(id: inserted.map(&:id)).order(:id).pluck(:school_code)
         assert_equal %w[both first], inserted.map(&:cycle)
         assert_instance_of Ports::School::SchoolRepositoryPort::Inserted, inserted.first
         assert_equal @at, Orm::School.find(inserted.first.id).created_at
@@ -107,10 +154,13 @@ module Repositories
 
       test "une insertion en masse qui heurte l'index unique lève" do
         create_school(drena: @drena, name: "Lycée A")
-        rows = [ { public_id: SecureRandom.base58(14), drena_id: @drena.id, name: "Lycée A", sigle: nil,
-                   school_type: "public", cycle: "both", status: "active" } ]
+        create_school(drena: @drena, name: "Lycée B", school_code: "k7m4qz")
 
-        assert_raises(ActiveRecord::RecordNotUnique) { @repository.insert_many(rows:, at: @at) }
+        [ row("Lycée A"), row("Lycée C", school_code: "k7m4qz") ].each do |taken|
+          assert_raises(ActiveRecord::RecordNotUnique, taken[:name]) do
+            Orm::School.transaction(requires_new: true) { @repository.insert_many(rows: [ taken ], at: @at) }
+          end
+        end
       end
 
       test "candidates of the generation: active or draft, without any classroom of the year, by id (ADR-0056, GC-05)" do

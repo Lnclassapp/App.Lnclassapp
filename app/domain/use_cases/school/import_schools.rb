@@ -22,6 +22,7 @@ module UseCases
 
       # classroom_plan : le barème, lu une fois à la préparation (ADR-0058) ; random : tirage des codes, injectable.
       def initialize(drenas:, schools:, classrooms:, taxonomy:, classroom_plan:, random: SecureRandom)
+
         @drenas = drenas
         @schools = schools
         @classrooms = classrooms
@@ -40,10 +41,11 @@ module UseCases
         Shared::Result.success(drena)
       end
 
-      # Les codes déjà pris sont gardés pour write, qui les complète lot après lot.
+      # Les codes déjà pris (classes et établissements) sont gardés pour write, qui les complète lot après lot.
       def prepare(target:)
         ids_by_slug = @drenas.ids_by_slug
         @taken_codes = @classrooms.taken_join_codes
+        @taken_school_codes = @schools.taken_school_codes
         Entities::Catalog::ImportContext.new(target:, existing_keys: @schools.existing_keys(drena_ids: ids_by_slug.values),
                                              data: { ids_by_slug:, lookup: @taxonomy.lookup, plan: @classroom_plan.plan,
                                                                      taken_codes: @taken_codes })
@@ -60,9 +62,9 @@ module UseCases
                                           plan: plan_for(school, context.data))
       end
 
-      # Les écoles, puis toutes les classes du lot, dans la transaction du moteur : un refus annule les deux.
+      # Les écoles avec leur code, puis toutes les classes du lot, dans la transaction du moteur : un refus annule les deux.
       def write(items:, author_id:, at:)
-        inserted = @schools.insert_many(rows: items.map { it.plan.fetch(:school) }, at:)
+        inserted = @schools.insert_many(rows: with_school_codes(items.map { it.plan.fetch(:school) }), at:)
         school_ids = inserted.to_h { [ it.public_id, it.id ] }
         school_year = Entities::Classroom::SchoolYear.current(at.to_date)
         rows = items.flat_map do |item|
@@ -129,6 +131,12 @@ module UseCases
         { school: { public_id: school.public_id, drena_id: school.drena_id, name: school.name, sigle: school.sigle,
                     school_type: school.school_type, cycle: school.cycle, status: school.status },
           classrooms: generation.rows, skipped: generation.skipped }
+      end
+
+      # Codes d'établissement uniques en base et dans tout l'import (ADR-0057).
+      def with_school_codes(rows)
+        codes = Entities::School::SchoolCode.generate_unique(count: rows.size, taken: @taken_school_codes)
+        rows.zip(codes).map { |row, school_code| row.merge(school_code:) }
       end
 
       # Codes uniques en base et dans tout le lot (ADR-0041).
