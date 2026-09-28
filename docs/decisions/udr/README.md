@@ -56,6 +56,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0046](./0046-classes-par-niveau.md) | Classes par niveau | Proposé | 2026-09-28 | [0059](../adr/0059-ajuster-les-classes-d-un-niveau.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md), [0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) | Bloc de la fiche d'un établissement : une ligne par niveau et série, « − n + », retrait confirmé, mise à jour en Turbo Stream ; numéro = plus haut + 3 |
 | [0051](./0051-afficher-le-code-pin.md) | Afficher le code PIN | Accepté | 2026-09-28 | [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0050](../adr/0050-authentification-et-session.md) | Un bouton œil dans chaque champ de PIN (`ui_field … reveal: true`, contrôleur `password-reveal`), masqué au chargement et avant l'envoi, absent sans JavaScript. Amende UDR-0005 |
 
+
 ---
 
 ## Conventions de nommage

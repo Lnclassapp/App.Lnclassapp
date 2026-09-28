@@ -1,0 +1,35 @@
+<%# 🌐 UI · teams/classroom_plans/_line_row — une ligne du barème : niveau, série, nombre public et privé %>
+<%# Rôle : « Non défini » signalé ; niveau du second cycle sans série : renvoi vers Séries, sans menu ; sinon menu ⋮ « Modifier » en modale %>
+<%# ADR  : 0058 · UDR : 0042, 0045 · Stimulus : dropdown %>
+<%# locals: (line:) -%>
+<tr id="<%= line_dom_id(line) %>" class="align-middle">
+  <th scope="row" class="px-4 py-3 font-medium whitespace-nowrap text-ink"><%= line.level.name %></th>
+  <% if line.unlinked? %>
+    <td colspan="3" class="px-4 py-3 text-mute">
+      <%= t(".no_series") %>
+      <%= link_to t(".link_series"), series_index_path, class: "ml-1 font-medium text-brand-strong underline underline-offset-2" %>
+    </td>
+    <td class="px-4 py-3"></td>
+  <% else %>
+    <td class="px-4 py-3"><%= line.series ? ui_badge(line.series.name, size: :sm) : t(".no_series_placeholder") %></td>
+    <% Entities::Classroom::ClassroomPlan::SCHOOL_TYPES.each do |school_type| %>
+      <% count = line.counts[school_type] %>
+      <td class="px-4 py-3 tabular-nums">
+        <% if count.nil? %>
+          <span data-plan="undefined"><%= ui_badge t(".undefined"), tone: :warning, size: :sm, icon: "exclamation-triangle" %></span>
+        <% elsif count.zero? %>
+          <span class="text-mute">0</span><span class="sr-only"><%= t(".none") %></span>
+        <% else %>
+          <span class="font-medium text-ink"><%= count %></span>
+        <% end %>
+      </td>
+    <% end %>
+    <td class="px-4 py-3">
+      <div class="flex justify-end">
+        <%= ui_dropdown label: t(".actions", name: line.name), id: "classroom-plan-actions-#{line.key}", fixed: true do %>
+          <%= ui_dropdown_item t(".edit"), href: edit_classroom_plan_line_path(line.level_slug, line.series_slug), icon: "pencil-square", frame: "modal" %>
+        <% end %>
+      </div>
+    </td>
+  <% end %>
+</tr>

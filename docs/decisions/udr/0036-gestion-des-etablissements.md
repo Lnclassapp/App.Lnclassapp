@@ -112,3 +112,9 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - **Modale `school-modal`** : type et statut restent des `select`, sur deux colonnes (`sm:grid-cols-2`) ; le cycle devient `ui_radio_group` « Cycle » (`fieldset#school_cycle`) sur toute la largeur, sous eux : « Premier cycle » (`first`), « Premier et second cycles » (`both`), côte à côte dès `sm`, empilées au téléphone.
 - **Valeur cochée** : le cycle enregistré (le formulaire ne sert qu'à modifier ; un établissement a toujours un cycle). Le « 1er cycle par défaut » demandé le 2026-09-28 n'a d'objet qu'à la création, qui n'existe pas ici (§2) : sa valeur équivalente serait `first`.
 - **Le filtre « Tous les cycles » reste une liste déroulante** : c'est un filtre avec une option « tous », pas une saisie.
+
+## Amendement du 2026-09-28 — menu « Classes » de l'en-tête
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md). En cas d'écart, cette section fait foi.*
+
+- L'en-tête de la liste porte « Importer des établissements » (principale), puis le menu « Classes » (génération des classes manquantes, barème des classes) : voir UDR-0043 et UDR-0045, amendements du 2026-09-28.

@@ -154,7 +154,7 @@
   <%= design_section(id: "avatars", title: t(".sections.avatars"), api: "ui_avatar(name, src:, size:, tone:)") do %>
     <%= design_example(name: "avatar-variants", label: t(".avatars.variants")) do %>
       <div class="flex flex-wrap items-center gap-4">
-        <% %i[sm md lg].each do |size| %>
+        <% ComponentsHelper::AVATAR_SIZES.each_key do |size| %>
           <%= ui_avatar t(".avatars.name"), size: %>
         <% end %>
         <% ComponentsHelper::AVATAR_TONES.each_key do |tone| %>

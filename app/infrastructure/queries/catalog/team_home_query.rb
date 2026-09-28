@@ -1,11 +1,11 @@
 # 🔌 INFRA · Queries::Catalog::TeamHomeQuery
-# Rôle : accueil équipe (TR-09, CA-25) : compteurs, niveaux et leurs séries, derniers cours, exercices et imports
-# ADR  : 0026, 0034, 0035, 0039, 0041 · UDR : 0018
+# Rôle : accueil équipe (TR-09, CA-25) : compteurs, niveaux et leurs séries, total du barème, derniers cours, exercices et imports
+# ADR  : 0026, 0034, 0035, 0039, 0041, 0058 · UDR : 0018, 0045
 module Queries
   module Catalog
     class TeamHomeQuery
       Row = Data.define(:drenas_count, :schools_count, :classrooms_count, :levels, :series_count, :materials_count,
-                        :recent_courses, :recent_exercises, :recent_imports)
+                        :classroom_plan_total, :recent_courses, :recent_exercises, :recent_imports)
       LevelRow = Data.define(:slug, :name, :series_names)
       CourseRow = Data.define(:slug, :name, :status, :level_name, :material_name, :material_category, :updated_at)
       ExerciseRow = Data.define(:public_id, :title, :status, :essential_name, :updated_at)
@@ -19,7 +19,7 @@ module Queries
       def call(today: Date.current)
         Row.new(drenas_count: Orm::Drena.count, schools_count: Orm::School.count,
                 classrooms_count: Orm::Classroom.where(status: "active", school_year: Entities::Classroom::SchoolYear.current(today)).count,
-                levels:, series_count: Orm::Series.count, materials_count: Orm::Material.count,
+                levels:, series_count: Orm::Series.count, materials_count: Orm::Material.count, classroom_plan_total:,
                 recent_courses:, recent_exercises:, recent_imports:)
       end
 
@@ -43,6 +43,13 @@ module Queries
       end
 
       private
+
+      # Classes d'un lycée public selon le barème actuel (ADR-0058) : la tuile « Barème des classes ».
+      def classroom_plan_total
+        Entities::Classroom::DefaultClassroomPlan.sheet(plan: Repositories::Classroom::ClassroomPlanRepository.new.plan,
+                                                         lookup: Repositories::Catalog::TaxonomyRepository.new.lookup)
+                                                  .totals.dig("public", "both")
+      end
 
       def levels
         series = Orm::LevelSeries.joins(:series).order("series.name").pluck(:level_id, "series.name")

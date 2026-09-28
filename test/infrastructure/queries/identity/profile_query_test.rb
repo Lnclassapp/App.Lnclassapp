@@ -44,6 +44,14 @@ module Queries
         assert_equal :school_admin, @query.call(user_id: create_user(role: "school_admin").id).role
         assert_nil @query.call(user_id: 0)
       end
+
+      test "the row gives the public id, and the version of the photo when there is one (ADR-0060)" do
+        student = create_student
+
+        assert_equal [ student.public_id, nil ], @query.call(user_id: student.id).then { [ it.public_id, it.photo_version ] }
+        attach_photo(student)
+        assert_equal PhotoVersions.for(user_ids: [ student.id ])[student.id], @query.call(user_id: student.id).photo_version
+      end
     end
   end
 end

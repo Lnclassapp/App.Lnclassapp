@@ -21,9 +21,9 @@ module Queries
         rows = LevelsQuery.new.call
 
         assert_equal [ Row.new(slug: "6eme", name: "6ème", position: 1, cycle: "first", series_names: [],
-                               classrooms_count: 0, courses_count: 1, generates_classrooms: true),
+                               classrooms_count: 0, courses_count: 1, generates_classrooms: false),
                        Row.new(slug: "tle", name: "Tle", position: 7, cycle: "second", series_names: %w[C D],
-                               classrooms_count: 2, courses_count: 1, generates_classrooms: true) ], rows
+                               classrooms_count: 2, courses_count: 1, generates_classrooms: false) ], rows
       end
 
       test "un niveau par son slug, ou rien" do
@@ -32,23 +32,25 @@ module Queries
         create_classroom(level:)
 
         assert_equal Row.new(slug: "2nde", name: "2nde", position: 5, cycle: "second", series_names: [ "A" ],
-                             classrooms_count: 1, courses_count: 0, generates_classrooms: true),
+                             classrooms_count: 1, courses_count: 0, generates_classrooms: false),
                      LevelsQuery.new.find(slug: "2nde")
         assert_nil LevelsQuery.new.find(slug: "inconnu")
       end
 
-      test "un niveau dont le code n'est pas une clé du plan de génération est signalé hors génération" do
-        create_level(name: "Sixième", position: 1, cycle: "first")
-        create_level(name: "1ère", position: 6)
+      test "un niveau sans aucun nombre positif au barème est signalé hors barème (ADR-0058)" do
+        sixth = create_level(name: "6ème", position: 1, cycle: "first")
+        zero = create_level(name: "5ème", position: 2, cycle: "first")
+        tle = create_level(name: "Tle", position: 7)
+        unlinked = create_level(name: "1ère", position: 6)
+        create_level(name: "Sixième", position: 3, cycle: "first")
+        d = create_series(name: "D")
+        link_level_series(level: tle, series: d)
+        plan = Repositories::Classroom::ClassroomPlanRepository.new
+        entry = ->(level, count, series = nil) { Entities::Classroom::ClassroomPlan::Entry.new(school_type: "private", level_id: level.id, series_id: series&.id, count:) }
+        plan.save(entries: [ entry.call(sixth, 2), entry.call(zero, 0), entry.call(tle, 3, d), entry.call(unlinked, 3, d) ], at: Time.current)
 
-        assert_equal({ "sixieme" => false, "1ere" => true }, LevelsQuery.new.call.to_h { [ it.slug, it.generates_classrooms ] })
-      end
-
-      test "les codes générés sont ceux du plan, public et privé réunis, sans liste recopiée" do
-        plan = Entities::Classroom::DefaultClassroomPlan::PLAN
-
-        assert_equal (plan.fetch("public").keys | plan.fetch("private").keys), LevelsQuery::GENERATED_SLUGS
-        assert_equal %w[6eme 5eme 4eme 3eme 2nde 1ere tle], LevelsQuery::GENERATED_SLUGS
+        assert_equal({ "6eme" => true, "5eme" => false, "sixieme" => false, "1ere" => false, "tle" => true },
+                     LevelsQuery.new.call.to_h { [ it.slug, it.generates_classrooms ] })
       end
 
       test "une seule requête par table, quel que soit le nombre de niveaux" do
@@ -56,7 +58,7 @@ module Queries
 
         queries = count_queries { LevelsQuery.new.call }
 
-        assert_equal 4, queries
+        assert_equal 5, queries
       end
 
       def count_queries(&)

@@ -57,6 +57,8 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
         assert_select "input[name='essential[subtitle]'][maxlength='150']"
         assert_select "label[for=essential_content]", text: I18n.t("activemodel.attributes.dtos/catalog/essential_input.content")
         assert_select "[data-controller=rich-text-editor] trix-editor#essential_content[aria-describedby=essential_content_hint]"
+        # ADR-0060: no direct upload address, the Active Storage routes are not drawn.
+        assert_select "trix-editor#essential_content[data-direct-upload-url=''][data-blob-url-template='']"
         assert_select "input[type=hidden][name='essential[content]']", 1
         assert_select "input[type=file]", 0
       end

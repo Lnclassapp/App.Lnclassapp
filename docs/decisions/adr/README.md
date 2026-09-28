@@ -66,7 +66,10 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0054](./0054-moteur-d-evaluation-soumission-et-cloture.md) | Moteur d'évaluation — un use case de soumission, un de clôture, une tentative immuable par question et par session | Accepté — *remplace 0008 §3 et §6* | 2026-09-25 | Correction par identifiants ; tentative unique et immuable (`bigint[]`) ; statuts `started`/`completed`/`abandoned` ; `essential_id` obligatoire ; clôture seul point de score, badge et lacune. F-34. |
 | [0055](./0055-profil-modification-de-soi-et-revocation-des-sessions.md) | Chaque utilisateur modifie son propre compte sous PIN actuel ; un changement de PIN ou de numéro ferme ses autres sessions | Accepté | 2026-09-28 | Page profil : trois use cases `identity` sous `UpdateSelfPolicy`, PIN actuel et double saisie, échec compté comme à la connexion, autres sessions fermées, audit `profile.name_changed`, `contact.changed`, `pin.changed`. |
 | [0056](./0056-generation-des-classes-manquantes.md) | Les classes manquantes se génèrent après coup, en arrière-plan, pour les seuls établissements sans classe de l'année | Accepté | 2026-09-28 | Job par lots de 200 établissements, barème et codes de l'import ; compte rendu = `import_report` de `kind` `classrooms`, sans fichier. Amende ADR-0030 et ADR-0039. |
-| [0059](./0059-ajuster-les-classes-d-un-niveau.md) | Ajuster les classes d'un niveau : la suivante au nom du barème, la dernière supprimée seulement si elle n'a jamais servi | Proposé | 2026-09-28 | « + » nomme la classe suivante (plus grand numéro + 1), mêmes règles qu'« Ajouter une classe » ; « − » supprime la dernière du couple niveau/série, sous verrou, si aucune adhésion, aucun enseignant ni assignation, sinon `:conflict`. Audit `school.changed`. Numéro = plus haut + 3 (chantiers parallèles). Précise ADR-0036 et ADR-0041. |
+
+| [0058](./0058-bareme-des-classes-en-base.md) | Le barème des classes générées est en base, modifiable par l'équipe, repris à l'identique au déploiement | Accepté | 2026-09-28 | Table `classroom_plan_entries` (type, niveau, série, 0–30) ; reprise par slug ; ligne absente = 0, « Non défini », comptée sautée ; `DefaultClassroomPlan` reçoit le barème. Amende ADR-0030 et ADR-0056. ADR-0057 laissé libre (chantiers parallèles). |
+
+
 
 ---
 
