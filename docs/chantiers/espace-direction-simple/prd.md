@@ -11,7 +11,7 @@ La direction d'un établissement n'a aujourd'hui aucun accès à Lnclass. Le por
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
 | Team (`admin`, `field`) | Inviter la direction d'un établissement actif | Inviter sur un numéro qui a déjà un compte |
-| Direction (`school_admin`) | Lire les enseignants et le travail des élèves de **son** établissement ; son profil | Voir un autre établissement ; écrire quoi que ce soit ; valider un enseignant ; lire ou régénérer le code d'établissement ; ajouter une classe |
+| Direction (`school_admin`) | Lire les enseignants et le travail des élèves de **son** établissement ; son profil | Voir un autre établissement ; écrire quoi que ce soit hors son profil ; valider un enseignant ; lire ou régénérer le code d'établissement ; ajouter une classe |
 | Teacher, Student | Rien de nouveau | Ouvrir une page de la direction |
 
 Règles : `Policies::Identity::InviteSchoolStaffPolicy` pour l'invitation ; `Policies::School::ReadOwnSchoolPolicy` pour les lectures, l'établissement étant toujours celui du compte (ADR-0065).
