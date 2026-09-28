@@ -48,8 +48,9 @@ class Teams::LevelsTest < ApplicationSystemTestCase
 
       assert_toast tl("update.updated", name: "Sixième")
       assert_no_selector "dialog[open]"
-      # A level created on screen has no barème yet (ADR-0058): its name carries the « Hors barème » badge.
-      assert_selector "#level_6eme", text: /Sixième\s+#{tl('level_row.outside_generation')}.*6eme/m
+      # D1 (owner, 2026-09-28): a 6ème created on screen gets its barème defaults, so no « Hors barème » badge.
+      assert_selector "#level_6eme", text: /Sixième\s+6eme/
+      assert_no_selector "#level_6eme [data-generation]"
 
       click_menu_action("#level_6eme", tl("level_row.delete"))
       within("dialog#delete-level-6eme[open]") { click_on tl("level_row.delete_confirm") }

@@ -51,7 +51,7 @@ module UseCases
           changes.each do |entry, from|
             @audit_log.record(action: "classroom_plan.changed", actor_id: actor.user_id, at: now, subject_type: "Level",
                               subject_id: level.id, metadata: { school_type: entry.school_type, level: level.slug,
-                                                                series: series&.slug, from:, to: entry.count })
+                                                                series: series&.slug, from:, to: entry.count, source: "manual" })
           end
         end
       end

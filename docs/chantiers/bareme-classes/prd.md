@@ -40,7 +40,8 @@ Règle : `Policies::Classroom::ManageClassroomPlanPolicy` (équipe), vérifiée 
 | Ligne inconnue (niveau ou série inconnu, couple non lié, série sur un niveau du premier cycle) | 404 |
 | Référentiel vide | état vide : « Aucun niveau pour l'instant », lien vers Niveaux ; totaux à 0 |
 | Niveau du second cycle sans série liée | ligne « Aucune série liée : aucune classe », sans menu, lien vers Séries |
-| Ligne non définie (nouveau niveau, nouvelle série liée) | badge « Non défini », compteur en tête ; à l'import et à la génération, 0 classe et ligne comptée comme sautée |
+| Série liée par l'équipe, niveau du premier cycle au code connu | nombres par défaut écrits automatiquement (D1), jamais par-dessus une ligne existante |
+| Ligne non définie (couple lié avant le déploiement hors ancien barème, niveau sans règle) | badge « Non défini », compteur en tête ; à l'import et à la génération, 0 classe et ligne comptée comme sautée |
 | Non-équipe | 403 |
 | Échap ou « Annuler » dans la modale | rien n'est écrit |
 
@@ -65,7 +66,15 @@ Et le journal d'audit porte une seule entrée « classroom_plan.changed » (publ
 Quand l'équipe saisit 31, -1, 2.5 ou rien
 Alors la modale se rouvre en 422 avec l'erreur sous le champ, et le barème n'a pas changé
 
-# BC-04 — ligne non définie
+# BC-04b — D1, décidé par le porteur le 2026-09-28 : une série liée reçoit ses nombres par défaut
+Étant donné le référentiel de développement
+Quand l'équipe lie la série A à la 1ère dans la matrice des séries
+Alors l'écran du barème montre « 1ère A » à 6 en public et 3 en privé, sans saisie
+Et le journal porte deux entrées « classroom_plan.changed » de source « auto »
+Et une ligne déjà renseignée n'est jamais écrasée ; délier puis relier retrouve son nombre
+Et un niveau du premier cycle créé avec le code 4eme reçoit 10 et 4 ; un autre code reste « Non défini »
+
+# BC-04 — ligne non définie (couple lié avant le déploiement, hors ancien barème ; niveau sans règle)
 Étant donné une série E liée à la Tle après la reprise
 Alors l'écran montre « Tle E » « Non défini » et le compte des lignes à renseigner
 Et un lycée importé ne reçoit aucune Tle E, et le rapport compte une série sautée
@@ -116,6 +125,7 @@ Et « Barème des classes » mène à l'écran du barème
 | BC-02, BC-03 (règles) | `test/domain/use_cases/classroom/update_classroom_plan_line_test.rb`, `test/domain/dtos/classroom/classroom_plan_line_input_test.rb` |
 | BC-01 (lecture) | `test/domain/use_cases/classroom/show_classroom_plan_test.rb`, `test/domain/entities/classroom/default_classroom_plan_test.rb` |
 | BC-04 | `test/domain/entities/classroom/default_classroom_plan_test.rb`, `test/domain/use_cases/school/import_schools_test.rb` |
+| BC-04b | `test/domain/entities/classroom/classroom_plan_defaults_test.rb`, `test/domain/use_cases/catalog/{link_level_series,create_level}_test.rb`, `test/controllers/teams/{level_series,levels}_controller_test.rb`, `test/system/teams/classroom_plan_test.rb`, `test/system/boucle_pedagogique_test.rb` |
 | BC-05, BC-06 | `test/system/teams/classroom_plan_test.rb`, `test/domain/use_cases/school/import_schools_test.rb`, `test/jobs/classroom/generate_missing_classrooms_job_test.rb` |
 | BC-07 | `test/db/classroom_plan_data_migration_test.rb` |
 | BC-08 | `test/controllers/teams/classroom_plans_controller_test.rb`, `test/domain/policies/classroom/manage_classroom_plan_policy_test.rb` |

@@ -108,21 +108,13 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     import_the_lycee
   end
 
-  # A new referential has no barème yet (ADR-0058): Tle D is « Non défini » until the team sets it on screen.
+  # D1 (owner, 2026-09-28): linking D to Tle filled its barème line, 6 public and 3 private, without any entry by hand.
   def team_sets_the_classroom_plan
     navigate_to team_home_path
     click_referential(classroom_plan_path)
-    assert_selector "#classroom_plan_line_tle_d [data-plan=undefined]", count: 2
-    assert_no_page_reload do
-      click_menu_action "#classroom_plan_line_tle_d", t("teams.classroom_plans.line_row.edit")
-      within "turbo-frame#modal dialog[open]" do
-        fill_in "classroom_plan_line[public_count]", with: "6"
-        fill_in "classroom_plan_line[private_count]", with: "3"
-        click_on t("teams.classroom_plans.edit.submit")
-      end
-      assert_toast t("teams.classroom_plans.update.updated", name: "Tle D")
-      within("#classroom_plan_total_public_both") { assert_text "6" }
-    end
+    within("#classroom_plan_line_tle_d") { assert_text(/Tle\s+D\s+6\s+3/) }
+    assert_no_selector "[data-plan=undefined]"
+    within("#classroom_plan_total_public_both") { assert_text "6" }
   end
 
   # The only seed of production (ADR-0034, ADR-0038): its link is printed once, as the operator reads it.

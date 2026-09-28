@@ -14,6 +14,10 @@
 | 2026-09-28 | Badge de l'écran Niveaux : « Hors barème » (aucun nombre positif, au premier cycle ou pour un couple lié) | La constante `GENERATED_SLUGS` disparaît avec l'ancien barème | Oui — amendement UDR-0032 |
 | 2026-09-28 | Demande du porteur en cours de chantier : génération et barème dans un menu « Classes » à droite de l'import, sur l'écran Établissements | — | Oui — amendements UDR-0043, UDR-0045, UDR-0036 ; BC-11 au PRD |
 | 2026-09-28 | Déclencheur libellé « Classes » + chevron (`ui_dropdown trigger:`), pas un ⋮ | UDR-0042 réserve le ⋮ aux actions sur un objet ; celles-ci portent sur toute la liste | Oui — amendement UDR-0043 |
+| 2026-09-28 | **D1 décidé par le porteur** : remplissage automatique d'un couple lié (2nde/1ère/autre 6/3 ; Tle C 2/1, D 6/3, A1 3/2, A2 2/2, autre 6/3) et d'un niveau du premier cycle au code connu (4/2, 10/4) ; autre niveau du premier cycle « Non défini » ; jamais d'écrasement ; délier garde les lignes ; audit `source: auto` | Demande explicite du porteur | Oui — amendement ADR-0058, UDR-0045 |
+| 2026-09-28 | Remplissage porté par `Entities::Classroom::ClassroomPlanDefaults.fill` (ports reçus en argument), appelé par `LinkLevelSeries` et `CreateLevel` | Un module sous `use_cases/` serait pris pour un use case sans policy par `test/architecture/use_case_policies_test.rb` | Non |
+| 2026-09-28 | Merge de `Develop` (#46 finitions, #47 cycles en radio) : génération dans le menu « Classes » avec le toast d'information « déjà en cours » et la redirection vers le rapport de #46 ; amendements UDR-0032/0036/0043 des deux côtés gardés | — | Non |
+| 2026-09-28 | Menu « Classes » tenu à droite de l'import dès `sm` par un bloc local `#schools-header-actions` (`sm:shrink-0 sm:flex-nowrap`), sans toucher `ui_page_header` ; au téléphone, le bloc passe à la ligne (import puis menu dessous) | Demande du porteur ; `ui_page_header` partagé par tous les écrans | Non — amendement UDR-0043 |
 | 2026-09-28 | Le composant `_dropdown` n'est pas modifié (le déclencheur libellé garde son style « pilule » d'avatar) | Le chantier parallèle `finitions-generation-menu` touche les menus ⋮ ; éviter un conflit sur un composant partagé | Non |
 
 ## Ce qui a dérapé
@@ -47,10 +51,9 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Sur l'écran Établissements, à 1 280 px, le menu « Classes » passe sous « Importer des établissements » (le bloc d'actions de `ui_page_header` rétrécit) | Déjà relevé par `generer-classes` ; changer `components/_page_header` touche tous les écrans | — |
 | Le déclencheur libellé d'`ui_dropdown` a le style « pilule » de l'avatar, pas celui d'un bouton secondaire | Composant partagé, chantier parallèle sur les menus | — |
 | Aucun écran d'historique des changements du barème (journal d'audit seulement) | Hors périmètre (D5) | — |
-| D1 à D5 à confirmer par le porteur | Décisions par défaut | — |
+| D2 à D5 à confirmer par le porteur (D1 tranché) | Décisions par défaut | — |
 
 ## Clôture
 

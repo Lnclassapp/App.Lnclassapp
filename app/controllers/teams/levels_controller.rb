@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::LevelsController
 # Rôle : niveaux du référentiel : liste par position, création et modification en modale, suppression refusée si utilisé
-# ADR  : 0026, 0029, 0034, 0036 · UDR : 0006, 0032
+# ADR  : 0026, 0029, 0034, 0036, 0058 · UDR : 0006, 0032
 module Teams
   class LevelsController < BaseController
     helper_method :level_dom_id
@@ -83,7 +83,9 @@ module Teams
 
     def levels_query = Queries::Catalog::LevelsQuery.new
 
-    def create_level = UseCases::Catalog::CreateLevel.new(**use_case_dependencies)
+    def create_level
+      UseCases::Catalog::CreateLevel.new(classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new, **use_case_dependencies)
+    end
     def update_level = UseCases::Catalog::UpdateLevel.new(**use_case_dependencies)
     def delete_level = UseCases::Catalog::DeleteLevel.new(**use_case_dependencies)
 

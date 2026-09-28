@@ -117,7 +117,7 @@ class Teams::ClassroomPlansControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ 5, 2 ], [ entry("6eme").count, entry("6eme", school_type: "private").count ]
     event = Orm::AuditEvent.sole
     assert_equal [ "classroom_plan.changed", @member.id, "Level" ], [ event.action, event.actor_id, event.subject_type ]
-    assert_equal({ "school_type" => "public", "level" => "6eme", "series" => nil, "from" => 4, "to" => 5 }, event.metadata)
+    assert_equal({ "school_type" => "public", "level" => "6eme", "series" => nil, "from" => 4, "to" => 5, "source" => "manual" }, event.metadata)
   end
 
   test "BC-05: a change never touches the classrooms already created" do

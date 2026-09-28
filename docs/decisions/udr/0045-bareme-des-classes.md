@@ -79,3 +79,10 @@ Le nombre de classes créées à l'import d'un établissement ou par la généra
 
 - L'écran Établissements donne aussi accès au barème : entrée « Barème des classes » (icône `calculator`) du menu **« Classes »** de son en-tête, à droite de « Importer des établissements », à côté de « Générer les classes manquantes » (UDR-0043, amendement du même jour). Menu libellé avec chevron plutôt qu'un ⋮ : ce sont des actions de page, pas d'objet (UDR-0042) ; `fixed: true`, parce que l'en-tête se replie au téléphone.
 - Preuve : `test/system/teams/classroom_plan_test.rb` (« the « Classes » menu of the schools screen leads to the barème ») et `test/system/school/generate_classrooms_test.rb` (390 px).
+
+## Amendement du 2026-09-28 — D1 décidé par le porteur
+
+*En cas d'écart avec ce qui précède, cette section fait foi. Règle métier : ADR-0058, amendement du même jour.*
+
+- Lier une série à un niveau dans la matrice des séries (UDR-0033) ou créer un niveau du premier cycle au code connu (UDR-0032) remplit la ligne du barème avec ses nombres par défaut : aucune saisie à l'écran, aucun changement visuel sur ces écrans. L'écran du barème les montre comme des nombres ordinaires.
+- « Non défini » ne concerne plus que les lignes sans règle sûre (niveau du premier cycle au code inconnu) et les couples liés avant le déploiement hors de l'ancien barème ; le badge et le bandeau restent inchangés.

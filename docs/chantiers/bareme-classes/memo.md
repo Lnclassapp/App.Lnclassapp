@@ -42,8 +42,8 @@ La production est ouverte depuis le 2026-09-27 ; l'équipe importe et génère m
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Que devient la production au déploiement : un barème vide ne génère plus rien ? | Non : le barème actuel est **repris** tel quel sur le référentiel existant, par code de niveau et de série. « Par série liée » devient une ligne par série liée **au moment de la reprise**. | Reprise de données au déploiement ; le test prouve le même résultat que l'ancien barème (lycée public 89, lycée privé 44, collège public 28, collège privé 12 avec les séries A1, A2, C, D). |
-| Une série liée à la 2nde **après** le déploiement reçoit-elle 6 classes, comme avant ? | Non. Le « par série » disparaît : chaque couple niveau × série a son propre nombre. Un couple sans nombre vaut **0** et apparaît « Non défini » à l'écran, à renseigner. | Décision par défaut à confirmer (D1). Le rapport d'import et de génération compte ces lignes comme sautées, pour que l'oubli se voie. |
-| Et un nouveau niveau du premier cycle ? | Même règle : « Non défini », 0 classe, compté comme niveau sauté. | D1. |
+| Une série liée à la 2nde **après** le déploiement reçoit-elle 6 classes, comme avant ? | Oui, depuis la décision du porteur (D1) : le lien remplit le barème avec les défauts ; le « par série » implicite disparaît pourtant du calcul : chaque couple niveau × série a son propre nombre. Un couple sans nombre vaut **0** et apparaît « Non défini » à l'écran, à renseigner. | Décision par défaut à confirmer (D1). Le rapport d'import et de génération compte ces lignes comme sautées, pour que l'oubli se voie. |
+| Et un nouveau niveau du premier cycle ? | 4/2 ou 10/4 s'il porte un code de l'ancien barème, sinon « Non défini », 0 classe, compté comme niveau sauté. | D1. |
 | Une ligne à 0 et une ligne non définie, c'est pareil ? | Même effet (aucune classe), sens différent : 0 est un choix de l'équipe, « non défini » un oubli. Le rapport ne compte que l'oubli. | Distinction gardée en base (absence de ligne) et à l'écran (badge d'alerte). |
 | Quelles lignes montre l'écran ? | Celles que le référentiel rend possibles : un niveau du premier cycle = une ligne ; un niveau du second cycle = une ligne par série liée. Un niveau du second cycle sans série est affiché « aucune série liée », sans nombre. | Les lignes suivent le référentiel ; aucune saisie libre de niveau ou de série. |
 | Un couple délié garde-t-il son nombre ? | Oui, en base, sans effet : il n'apparaît plus et ne génère rien. Relié, il retrouve son nombre. Un niveau ou une série supprimé emporte ses lignes. | Les lignes partent avec leur niveau ou leur série, sans jamais retenir leur suppression ; aucune règle de plus sur « délier ». |
@@ -60,7 +60,7 @@ La production est ouverte depuis le 2026-09-27 ; l'équipe importe et génère m
 
 | # | Décision prise par défaut | Alternative écartée |
 |---|---|---|
-| D1 | Une ligne manquante (nouveau niveau, nouvelle série liée) vaut **0**, s'affiche « Non défini » et est comptée comme sautée dans le rapport. | Hériter du « par série » de l'ancien barème (2nde et 1ère : 6 / 3 pour toute nouvelle série) : garderait une règle cachée que l'écran ne montre pas. |
+| D1 | **Décidé par le porteur le 2026-09-28** : « renseigner ces valeurs automatiquement à chaque nouvelle série liée ». Un couple niveau × série lié par l'équipe reçoit ses nombres par défaut — 2nde, 1ère et tout autre niveau du second cycle : public 6 / privé 3 ; Tle : C 2/1, D 6/3, A1 3/2, A2 2/2, autre série 6/3. Un niveau du premier cycle créé ensuite reçoit 4/2 (codes `6eme`, `5eme`) ou 10/4 (`4eme`, `3eme`) ; tout autre niveau du premier cycle n'a pas de règle sûre et reste « Non défini ». Une ligne existante n'est jamais écrasée ; délier garde les lignes (relier retrouve le nombre). Chaque remplissage est tracé (`classroom_plan.changed`, source `auto`). Reste « Non défini » : un couple lié avant le déploiement et absent de l'ancien barème, ou un niveau sans règle. | Ligne manquante à 0 sans défaut (proposition initiale) : refusée par le porteur. |
 | D2 | Les mixtes suivent le barème privé ; pas de colonne « mixte ». | Troisième colonne : aucun besoin exprimé, et ADR-0030 le tranche. |
 | D3 | Bornes 0 à 30 classes par ligne. | Aucune borne : une faute de frappe (300) créerait des centaines de classes à l'import suivant. |
 | D4 | Une modale par ligne (public et privé ensemble), ouverte depuis le menu ⋮. | Saisie en ligne dans le tableau : deux champs par ligne × 15 lignes, et le téléphone la rend illisible. |
@@ -77,4 +77,4 @@ La production est ouverte depuis le 2026-09-27 ; l'équipe importe et génère m
 
 ## Questions encore ouvertes
 
-- D1 à D5 à confirmer par le porteur.
+- D2 à D5 à confirmer par le porteur (D1 tranché le 2026-09-28).

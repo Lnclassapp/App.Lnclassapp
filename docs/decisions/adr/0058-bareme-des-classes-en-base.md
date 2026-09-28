@@ -87,7 +87,7 @@ Avec le référentiel A1/A2/C/D lié à la 2nde, la 1ère et la Tle, le barème 
 
 ### 🔴 Coûts consentis
 
-- **Une série liée plus tard n'a pas de classes** tant que l'équipe ne l'a pas renseignée, alors que l'ancien « par série » lui en donnait 6 (public) ou 3 (privé) en 2nde et en 1ère. Décision par défaut D1 du memo, à confirmer par le porteur ; le rapport compte ces lignes comme sautées et l'écran les signale.
+- ~~**Une série liée plus tard n'a pas de classes**~~ *(levé par l'amendement ci-dessous : D1 décidé par le porteur)* — tant que l'équipe ne l'a pas renseignée, alors que l'ancien « par série » lui en donnait 6 (public) ou 3 (privé) en 2nde et en 1ère. Décision par défaut D1 du memo, à confirmer par le porteur ; le rapport compte ces lignes comme sautées et l'écran les signale.
 - Le compteur `skipped_levels` ne compte plus les niveaux « absents du référentiel » : un référentiel vide ne donne plus « 21 niveaux sautés » pour 3 établissements.
 - La reprise suppose que 6ème à 3ème sont du premier cycle et 2nde à Tle du second (référentiel de l'ADR-0034). Un niveau `6eme` passé au second cycle garderait sa ligne sans effet : l'écran l'afficherait sans série liée.
 - Un couple délié garde son nombre en base, invisible : relié, il retrouve l'ancien nombre sans que l'écran l'ait montré entre-temps.
@@ -138,3 +138,15 @@ Orm::ClassroomPlanEntry.where(plan_entries).delete_all if plan_entries
 
 - **Amende l'ADR-0030** §4 « Génération des classes par défaut » : le tableau du barème n'est plus dans le code mais la **valeur initiale** de `classroom_plan_entries` ; « par série » devient une ligne par série liée à la reprise ; « un niveau ou une série absent du référentiel est sauté et compté » devient « une ligne absente du barème ». Le coût « le plan de génération est dans le code » est levé.
 - **Amende l'ADR-0056** : la génération lit le barème en base au démarrage, en plus du référentiel.
+
+## Amendement du 2026-09-28 — D1 décidé par le porteur : remplissage automatique
+
+*Décision du porteur : « renseigner ces valeurs automatiquement à chaque nouvelle série liée ». En cas d'écart avec ce qui précède, cette section fait foi.*
+
+- **Un couple niveau × série lié par l'équipe** (`UseCases::Catalog::LinkLevelSeries`, même transaction) reçoit ses nombres par défaut (`Entities::Classroom::ClassroomPlanDefaults`) : 2nde, 1ère et tout autre niveau du second cycle, public 6 / privé 3 ; Tle, les nombres de l'ancien barème (C 2/1, D 6/3, A1 3/2, A2 2/2), toute autre série 6/3.
+- **Un niveau du premier cycle créé par l'équipe** (`UseCases::Catalog::CreateLevel`) reçoit 4/2 pour les codes `6eme` et `5eme`, 10/4 pour `4eme` et `3eme`. Tout autre niveau du premier cycle n'a **pas de règle sûre** (on ne sait pas s'il ressemble à une 6ème ou à une 3ème) : il reste « Non défini », signalé à l'écran et compté sauté.
+- **Jamais d'écrasement** : seul un type encore absent est écrit ; une ligne existante, même à 0, est gardée. **Délier garde les lignes** (sans effet tant que le couple est délié) : relier retrouve le nombre choisi auparavant plutôt que le défaut.
+- **Audit** : une entrée `classroom_plan.changed` par nombre écrit, `metadata.source` = `auto` (`from` nul) ; les modifications à l'écran portent `source` = `manual`.
+- **La reprise de données ne change pas** : elle reproduit exactement l'ancien comportement (une série de Tle hors de l'ancienne liste, liée avant le déploiement, reste non définie ; l'ancien code ne lui donnait aucune classe).
+- Les liens posés hors du use case (fabriques de test, console) ne remplissent rien.
+- Preuves : `test/domain/entities/classroom/classroom_plan_defaults_test.rb`, `test/domain/use_cases/catalog/{link_level_series,create_level}_test.rb`, `test/controllers/teams/{level_series,levels}_controller_test.rb`, `test/system/teams/classroom_plan_test.rb` (lier une série dans la matrice → 6/3 au barème), `test/system/boucle_pedagogique_test.rb`.

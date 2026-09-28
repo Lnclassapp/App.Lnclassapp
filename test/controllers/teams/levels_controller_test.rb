@@ -123,7 +123,10 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=replace][target=levels] tbody#levels tr", 2
     assert_select "turbo-stream[action=replace][target=levels] tr:first-child#level_6eme"
     assert_equal [ "taxonomy.changed", @member.id, "Level", level.id ],
-                 Orm::AuditEvent.pluck(:action, :actor_id, :subject_type, :subject_id).sole
+                 Orm::AuditEvent.where(action: "taxonomy.changed").pluck(:action, :actor_id, :subject_type, :subject_id).sole
+    # D1 (owner, 2026-09-28): 6ème gets its barème defaults, and the row no longer says « Hors barème ».
+    assert_equal({ "private" => 2, "public" => 4 }, Orm::ClassroomPlanEntry.where(level:).pluck(:school_type, :count).to_h)
+    assert_select "turbo-stream[action=replace][target=levels] #level_6eme [data-generation]", 0
   end
 
   test "an invalid form reopens in the modal (422), with its errors and the values typed" do

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::LevelSeriesController
 # Rôle : coche ou décoche un couple de la matrice niveau × série ; la case est remplacée, un refus répond en 422
-# ADR  : 0026, 0034, 0036 · UDR : 0006, 0033
+# ADR  : 0026, 0034, 0036, 0058 · UDR : 0006, 0033
 module Teams
   class LevelSeriesController < BaseController
     # Refus rendus en place (422), avec la clé de leur raison : couple déjà lié ou utilisé, niveau du premier cycle.
@@ -36,7 +36,9 @@ module Teams
 
     def pair = { level_slug: params[:level_slug], series_slug: params[:series_slug] }
 
-    def link_level_series = UseCases::Catalog::LinkLevelSeries.new(**dependencies)
+    def link_level_series
+      UseCases::Catalog::LinkLevelSeries.new(classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new, **dependencies)
+    end
     def unlink_level_series = UseCases::Catalog::UnlinkLevelSeries.new(**dependencies)
 
     def dependencies

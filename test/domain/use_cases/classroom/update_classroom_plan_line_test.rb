@@ -56,7 +56,7 @@ module UseCases
         assert_equal [ [ Entry.new(school_type: "public", level_id: 1, series_id: nil, count: 5) ] ], @plan.saves
         assert_equal 1, @transaction.calls
         assert_equal [ { action: "classroom_plan.changed", actor_id: 7, at: NOW, subject_type: "Level", subject_id: 1,
-                         metadata: { school_type: "public", level: "6eme", series: nil, from: 4, to: 5 } } ], @audit_log.records
+                         metadata: { school_type: "public", level: "6eme", series: nil, from: 4, to: 5, source: "manual" } } ], @audit_log.records
       end
 
       test "a pair of the second cycle, undefined until now, gets its two counts, each journaled from nil" do

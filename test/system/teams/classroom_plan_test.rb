@@ -65,6 +65,17 @@ class Teams::ClassroomPlanTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Barème des classes"
   end
 
+  test "D1: link a series in the matrix, and the barème shows 6 and 3 for it without any entry by hand" do
+    visit series_index_path
+
+    find("#level_series_1ere_a button[aria-pressed=false]").click
+    assert_selector "#level_series_1ere_a button[aria-pressed=true]"
+
+    visit classroom_plan_path
+    within("#classroom_plan_line_1ere_a") { assert_text(/1ère\s+A\s+6\s+3/) }
+    assert_no_selector "#classroom_plan_line_1ere_a [data-plan=undefined]"
+  end
+
   test "an invalid count reopens the modal with its error, and nothing changes" do
     visit classroom_plan_path
 
