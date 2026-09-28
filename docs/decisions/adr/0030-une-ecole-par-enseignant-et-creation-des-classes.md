@@ -191,3 +191,11 @@ Ces totaux dépendent des liaisons `level_series` en base : un niveau ou une sé
 ## Amendement du 2026-09-28 — compte en attente (ADR-0063)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* Un enseignant sans école principale n'accède qu'à l'écran d'attente et à la déconnexion (garde de `AuthenticatedController`). L'inscription sans code (code national ou DRENA → établissement) crée ce compte, avec une demande `school_join_requests` que l'équipe ou un garant du même établissement décide.
+
+## Amendement du 2026-09-28 — la direction en V2 (ADR-0066, proposé)
+
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+
+- « À partir de la V2, aussi le `school_admin` rattaché à l'école de la classe » se limite à **ajouter la classe suivante d'un niveau** (`AddLevelClassroom`, ADR-0059), autorisé par `Policies::School::StaffPolicy` (`:add_classroom`). `CreateClassroom` (nom libre) et `RemoveLevelClassroom` (« − ») restent à l'équipe : `ManageClassroomPolicy` ne change pas (Q3 du porteur).
+- « En V2, la direction peut retirer une déclaration » devient : le Proviseur ou le Censeur **retire un enseignant de l'établissement** (`School::DetachTeacher`) : sa ligne `teacher_schools` et ses déclarations des classes de l'établissement disparaissent ; classes, devoirs et résultats restent.
+- « Un enseignant qui change d'établissement passe par l'équipe » : un enseignant **sans** école principale (retiré) rejoint un établissement avec son code d'établissement, depuis son écran d'attente (`School::RejoinSchoolWithCode`).

@@ -74,3 +74,10 @@ Chantier [`recette-v1-defauts`](../../chantiers/recette-v1-defauts/memo.md) (D1)
 - `/join` vérifie le code avant de rediriger : il ne mène à `/c/<code>` que si cette page a un aperçu. Sinon (code inconnu, remplacé, fermé, classe archivée), l'écran se ré-affiche en **422**, la saisie gardée, avec sous le champ « Code de classe invalide. Vérifie le code auprès de ton professeur, puis saisis-le de nouveau. » : les mots de la page 404 de `/c/<code>`, rien de plus.
 - Pourquoi : une soumission de formulaire Turbo suivie d'une page 4xx après redirection n'est pas rendue de façon fiable (recette `Staging` : écran resté sur `/join`, sans message).
 - La vérification lit la même requête que `/c/<code>` (`Queries::Classroom::JoinPreviewQuery`) et **partage son compteur** : 10 requêtes par minute et par adresse, `/join` (envoi) et `/c/<code>` confondus ; au-delà, 429 et « Trop de tentatives. Patiente une minute, puis réessaie. » sous le champ, sans rien chercher.
+
+## Amendement du 2026-09-28 — matricule (UDR-0053, proposé)
+
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md), [ADR-0065](../adr/0065-matricule-de-l-eleve.md). Statut : **proposé** ; il fait foi dès que l'[UDR-0053](0053-matricule-de-l-eleve.md) est acceptée. En cas d'écart, cette section fait foi.*
+
+- La rubrique « Ton identité » gagne le champ obligatoire **« Matricule »**, après « Prénom(s) » ; ses attributs, son aide et ses trois messages d'erreur sont ceux de l'UDR-0053 §3.1.
+- Le point 4 du §2 devient : « trois rubriques — Ton identité (Nom, Prénom(s), Matricule, Genre), Ton contact, Sécurité ».

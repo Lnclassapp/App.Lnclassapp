@@ -64,7 +64,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | « Déjà en cours » en toast d'information vers le rapport, badge « Génération en cours », ⋮ collé à droite des tableaux au téléphone (amendements UDR-0042, UDR-0043) |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | Barème des classes générées en base, modifiable par l'équipe à l'écran ; menu « Classes » des établissements (ADR-0058, UDR-0045) |
 | [`recette-v1-defauts`](recette-v1-defauts/memo.md) | livré | Recette V1, en production le 2026-09-28 (#81, #83) : `/join` refuse en 422 un code sans classe, sous la limite de débit de `/c/` (amendement UDR-0009) ; pages d'erreur statiques en français |
-| [`espace-direction`](espace-direction/memo.md) | décision | V2, ouverte le 2026-09-28 : la direction invitée administre son seul établissement (classes, enseignants, élèves par matricule, personnel, code, tableau de bord) |
+| [`espace-direction`](espace-direction/memo.md) | planifié | V2, ouverte le 2026-09-28 : la direction invitée administre son seul établissement (classes, enseignants, élèves par matricule, personnel, code, tableau de bord) |
 | [`afficher-pin`](afficher-pin/memo.md) | livré | Bouton œil dans les 13 champs de PIN (connexion, inscriptions, profil, PIN oublié), masqué par défaut et avant l'envoi (UDR-0051, amendement UDR-0005) |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | Actions de modification et de suppression des écrans de l'équipe dans un menu ⋮ (UDR-0042) |
 | [`cycles-en-radio`](cycles-en-radio/memo.md) | livré | Cycle d'un niveau et d'un établissement en boutons radio, 1er cycle par défaut (UDR-0005 ter) |

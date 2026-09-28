@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-09-28 |
 | **Branche** | `feature/espace-direction` |
 | **Programme** | `refonte-application`, vague V2 ([feuille de route §5](../refonte-application/feuille-de-route.md#v2--organisation-scolaire-et-espace-direction)) |

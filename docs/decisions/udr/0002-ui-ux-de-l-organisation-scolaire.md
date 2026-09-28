@@ -12,6 +12,9 @@
 
 ---
 
+> ⚠️ **C-31 fermée le 2026-09-28 par l'[UDR-0052](0052-espace-direction.md)** *(proposée)* : pour la direction, la carte d'école devient l'en-tête de la page « Établissement » et les onglets école → classes deviennent les destinations du shell ; côté équipe, les UDR-0036, 0044 et 0046 font foi. Cette UDR n'a plus de section en vigueur pour l'organisation scolaire.
+
+
 ## 1. Contexte
 
 L'espace permettant d'afficher et de gérer les écoles, les DRENAs et les classes doit être repensé. Actuellement (ou dans la vision cible), cet espace est potentiellement lourd et administratif. L'objectif est de le rendre clair, hiérarchique et aligné avec la philosophie *Premium* définie dans `system.md`.

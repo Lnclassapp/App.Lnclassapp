@@ -46,3 +46,10 @@ Une page unique, dans le shell du rôle, avec une carte « Mes informations » e
 
 - L'entrée « Mon profil » du menu du compte n'est plus jamais inactive ; le test des accueils de chaque rôle (`role_homes_test.rb`) l'attend active.
 - Aucune autre page ne modifie le compte de l'utilisateur ; l'équipe garde le déblocage (UDR-0020) pour les comptes des autres.
+
+## Amendement du 2026-09-28 — direction et matricule (UDR-0052, UDR-0053, proposé)
+
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé**. En cas d'écart, cette section fait foi.*
+
+- Un membre de la direction voit le badge de sa fonction (plus « En attente ») et une ligne « Établissement » (« <Fonction> · <Établissement> »), UDR-0052 §3.11.
+- Un élève voit une ligne « Matricule » en lecture seule, sans bouton, UDR-0053 §3.2.

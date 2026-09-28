@@ -99,3 +99,12 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - **`team_dashboard_path` devient actif** : la route `GET /teams/dashboard` est dessinée (V4, `pilotage-equipe`). L'entrée « Pilotage » (icône `chart-bar`) de la navigation `team` mène à la page de l'UDR-0049 et porte `aria-current="page"` quand elle est ouverte.
 - La navigation `team` n'a plus aucune entrée inactive ; elle garde ses **5 destinations**, le maximum du §4. Aucune destination n'est ajoutée.
 - Preuve : `test/system/role_homes_test.rb` (l'équipe ouvre ses cinq destinations, aucune inactive) et `test/system/teams/dashboard_test.rb`.
+
+## Amendement du 2026-09-28 — navigation de la direction (UDR-0052, proposé)
+
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
+
+- La navigation `school_admin` gagne une **cinquième destination**, « Établissement » (`school_admin_school_path`, icône `building-library`), après « Élèves ». Elle compte **5 destinations**, le maximum du §4.
+- Les quatre routes de la direction sont dessinées : aucune entrée de la direction n'est inactive.
+- L'accueil de la direction est son tableau de bord (UDR-0052 §3.2) ; `HOME_SECTIONS[:school_admin]` n'est plus rendu.
+- Le détail du shell d'un `school_admin` est « <Fonction> · <Établissement> ».

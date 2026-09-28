@@ -73,3 +73,10 @@ Deux frictions sont à éviter :
 - L'invitation d'amorçage du seed (ADR-0034) s'accepte par la même page.
 - Le lien n'a pas de bouton « Copier » : cette action demanderait un contrôleur Stimulus hors du lot. Le champ en lecture seule se sélectionne et se copie à la main. Un lot ultérieur peut ajouter le bouton sans changer ce contrat.
 - Le point d'entrée « Inviter un membre » de l'accueil équipe appartient au lot de cet écran : il ouvre `/teams/invitations/new` dans le frame `modal`.
+
+## Amendement du 2026-09-28 — invitation de la direction (UDR-0052, proposé)
+
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
+
+- La page `/invitations/<jeton>` accepte aussi une invitation de direction (`kind = "school_staff"`) : bandeau « Rejoindre la direction de <établissement> · Fonction : <…> », même formulaire, même activation du second facteur (UDR-0052 §3.8).
+- La modale « lien créé » de la direction est `shared/staff_invitations/_created`, au gabarit de `teams/invitations/_created`.

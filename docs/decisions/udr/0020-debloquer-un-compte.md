@@ -83,3 +83,11 @@ Deux frictions sont à éviter :
 - Le point d'entrée « Débloquer un compte » de l'accueil équipe ou de la navigation appartient au lot de cet écran. Il pointe vers `teams_account_lookup_path`.
 - Le bouton « Générer un code de récupération » de l'enseignant appartient à la page de la classe (lot D4) : un `form_with` en POST vers `account_pin_recovery_codes_path(<public_id de l'élève>)`, sans `data-turbo-frame`. Le stream ouvre la modale du code.
 - Le code n'a pas de bouton « Copier », qui demanderait un contrôleur Stimulus ; il est fait pour être dicté.
+
+## Amendement du 2026-09-28 — matricule et direction (UDR-0053, proposé)
+
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0053](0053-matricule-de-l-eleve.md). En cas d'écart, cette section fait foi.*
+
+- La recherche prend un **numéro ou un matricule** entier (paramètre `q` ; `contact` reste lu).
+- La carte d'un élève affiche son matricule et « Corriger le matricule » (modale).
+- La carte d'un membre de la direction affiche l'état de son second facteur et « Réinitialiser le second facteur », comme pour un membre de l'équipe (ADR-0066).

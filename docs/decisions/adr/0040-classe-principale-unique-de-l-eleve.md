@@ -99,3 +99,11 @@ add_index :classroom_students, :student_id, unique: true,
 ## 9. Points à confirmer par le porteur
 
 - Pas de seconde classe (cours du soir) avant la V3.
+
+## Amendement du 2026-09-28 — changement de classe par la direction (ADR-0066, proposé)
+
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+
+- L'index unique `(classroom_id, student_id)` devient **partiel** : `WHERE left_at IS NULL`. Un élève peut revenir dans une classe qu'il a quittée (erreur de classe corrigée) ; chaque passage garde sa ligne.
+- La direction de l'établissement **rattache** un élève par son matricule (ADR-0065) ou le **change de classe** dans son établissement (`School::PlaceStudent`) : l'adhésion principale active est close (`left_at`), la nouvelle est ouverte, dans une transaction, sous le verrou de la classe cible et son plafond (ADR-0041).
+- Un élève dont la classe principale est active, de l'année en cours, dans un **autre** établissement n'est jamais pris par la direction : il rejoint sa nouvelle classe par son code, comme en V1.
