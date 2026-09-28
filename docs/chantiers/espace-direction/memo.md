@@ -86,5 +86,5 @@ La V1 est close et en production. La V2 est la vague suivante du programme ; le 
 ## Questions encore ouvertes
 
 - **Aucun élève en production** (dit par le porteur, grill 3) : à revérifier juste avant la migration du Lot F, pour rendre le matricule obligatoire sans rattrapage.
-- **Élève dont la classe de l'an dernier reste `active`** (l'archivage de fin d'année est en V3) : il ne peut ni être déplacé par la direction, ni rejoindre une nouvelle classe par code. Sans élève en production, à trancher avant la première rentrée (V3 ou `changement-etablissement-eleve`).
+- **Élève dont la classe de l'an dernier reste `active`** (l'archivage de fin d'année est en V3) : il ne peut ni être déplacé par la direction, ni rejoindre une nouvelle classe par code. Sans élève en production, à trancher avant la première rentrée (V3 ou `changement-etablissement-eleve`). **Porteur, 2026-09-28 : l'archivage de fin d'année sera développé « au bon moment », avant la première rentrée ; la V2 n'en fait rien.**
 - **Retirer un élève de l'établissement** (départ en cours d'année) : non demandé, hors V2 ; à ranger avec CL-02 en V3 si besoin.
