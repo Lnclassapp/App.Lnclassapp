@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (par défaut, à confirmer par le porteur) |
+| **Statut** | Accepté (décidé par le porteur le 2026-09-28) |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/memo.md) — V4, TR-10, TR-11, TR-12 |
 | **Complète** | [ADR-0049](./0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (F-27, option C : indicateurs côté serveur) · [ADR-0038](./0038-comptes-de-l-equipe-et-sous-roles.md) (« Lire les indicateurs agrégés ») |

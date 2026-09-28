@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (par défaut, à confirmer par le porteur) |
+| **Statut** | Accepté (décidé par le porteur le 2026-09-28) |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/prd.md) — V4, TR-10, TR-11, TR-12 |
 | **ADR lié** | [ADR-0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md) (définitions, lectures bornées) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun traceur) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget) · [ADR-0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0018](0018-accueil-equipe.md) |

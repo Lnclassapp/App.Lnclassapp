@@ -94,7 +94,7 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 
 ## Amendement du 2026-09-28 — « Pilotage » actif
 
-*Chantier [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/prd.md), [UDR-0049](0049-page-pilotage-de-l-equipe.md), [ADR-0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md). Statut : accepté (par défaut, à confirmer par le porteur). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/prd.md), [UDR-0049](0049-page-pilotage-de-l-equipe.md), [ADR-0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md). Statut : accepté, décidé par le porteur le 2026-09-28. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **`team_dashboard_path` devient actif** : la route `GET /teams/dashboard` est dessinée (V4, `pilotage-equipe`). L'entrée « Pilotage » (icône `chart-bar`) de la navigation `team` mène à la page de l'UDR-0049 et porte `aria-current="page"` quand elle est ouverte.
 - La navigation `team` n'a plus aucune entrée inactive ; elle garde ses **5 destinations**, le maximum du §4. Aucune destination n'est ajoutée.

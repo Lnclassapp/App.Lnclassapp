@@ -10,6 +10,7 @@
 | 2026-09-28 | Les neuf décisions par défaut du memo | Le porteur laisse les décisions par défaut ; chacune est marquée « à confirmer » | oui, ADR-0062 et UDR-0049 |
 | 2026-09-28 | Helper nommé `Teams::DashboardsHelper` et non `School::DashboardHelper` | Un module `::School` de premier niveau aurait pu masquer des références `School::…` hors de leur namespace ; `Teams` existe déjà | non |
 | 2026-09-28 | La couverture des établissements s'écrit en SQL constant (`COVERAGE`), seule l'année liée | Brakeman signalait l'interpolation de sous-requêtes construites par `to_sql` ; le SQL constant supprime l'alerte sans exception dans `brakeman.ignore` | non |
+| 2026-09-28 | Le porteur valide les neuf décisions par défaut telles que proposées (« je valide les choix du pilotage ») : memo marqué « décidé par le porteur le 2026-09-28 », ADR-0062 et UDR-0049 (et les amendements des UDR-0006 et 0018) passent à « Accepté » | Décision du porteur relayée par l'orchestrateur | oui, ADR-0062 et UDR-0049 |
 | 2026-09-28 | Aucun use case : deux queries et deux policies appelées par le contrôleur | Lecture pure (ADR-0006, ADR-0012) ; `UseCasePoliciesTest` ne concerne que `app/domain/use_cases`, rien à y ajouter | non |
 
 ## Ce qui a dérapé
@@ -57,7 +58,6 @@ Budget (ADR-0051) : JavaScript 39,1 Ko gzip / 60 (aucun octet ajouté), CSS 12,6
 | Index sur les dates (`exercise_sessions.started_at`, `completed_at`, `users.created_at`, `classroom_assignments.assigned_at`) et trigramme sur le nom | Inutiles aux volumes de la V1 ; seuil de reprise de 300 ms écrit dans l'ADR-0062 | `optimize` à ouvrir au seuil |
 | Tendance (comparaison à la période précédente), courbes, export | Hors périmètre de la V1 du pilotage | V2 du pilotage, à la demande |
 | Fiche de compte depuis la recherche | ID-21/22, V2 | V2 |
-| Neuf décisions par défaut | Le porteur ne les a pas encore confirmées | Revue porteur |
 
 ## Clôture
 

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | livré (décisions par défaut à confirmer) |
+| **Statut** | livré |
 | **Ouvert le** | 2026-09-28 |
 | **Branche** | `feature/pilotage-equipe` |
 | **Programme** | [`refonte-application`](../refonte-application/feuille-de-route.md) — vague **V4**, traçabilité TR-09, TR-10, TR-11, TR-12 |
@@ -42,7 +42,7 @@ La V1 est livrée : les élèves, les classes, les sessions d'exercice et les as
 |---|---|---|
 | Qu'est-ce qu'un compte « actif » ? Il n'existe pas de statut de compte. | Un compte non anonymisé (`anonymized_at` vide, ADR-0036). | Les comptes anonymisés ne sont comptés nulle part, ni recherchés. |
 | Un élève « actif sur 7 jours » : une session terminée, ou commencée ? | Commencée : un élève qui ouvre un exercice sans le finir a quand même travaillé. | Critère sur la date de début de session, tous statuts confondus. Les exercices **terminés** sont un indicateur séparé. |
-| Le filtre de période et les « 7 jours » demandés : qui gagne ? | Tous les indicateurs de **flux** (inscrits, élèves actifs, exercices terminés, taux de réussite, assignations) suivent la période choisie, 7 jours par défaut. Les indicateurs de **stock** (comptes, établissements, classes, répartition par niveau) n'en dépendent pas. | Deux blocs de cartes, « Sur la période » et « En ce moment ». Les nouveaux inscrits sur 30 jours se lisent en choisissant « 30 jours ». *Décision par défaut.* |
+| Le filtre de période et les « 7 jours » demandés : qui gagne ? | Tous les indicateurs de **flux** (inscrits, élèves actifs, exercices terminés, taux de réussite, assignations) suivent la période choisie, 7 jours par défaut. Les indicateurs de **stock** (comptes, établissements, classes, répartition par niveau) n'en dépendent pas. | Deux blocs de cartes, « Sur la période » et « En ce moment ». Les nouveaux inscrits sur 30 jours se lisent en choisissant « 30 jours ». *Décidé par le porteur le 2026-09-28.* |
 | À quelle DRENA appartient un élève ? Il n'y a pas de colonne. | À celle de l'établissement de sa **classe principale active de l'année en cours** (ADR-0040, ADR-0041). Un élève sans classe n'a pas de DRENA. | Le filtre DRENA exclut les élèves sans classe ; la répartition nationale les montre sur une ligne « Sans classe ». |
 | Et un enseignant ? | Par son établissement **principal** (ADR-0030). | Même règle pour le compte des enseignants par DRENA. |
 | L'équipe a-t-elle une DRENA ? | Non. | Sous un filtre DRENA, la carte « Équipe » affiche un tiret et les comptes récents de l'équipe disparaissent. |
@@ -67,19 +67,19 @@ La V1 est livrée : les élèves, les classes, les sessions d'exercice et les as
 - Une recherche d'un seul caractère : aucun résultat, message « Tapez au moins 2 caractères ».
 - Une recherche qui contient `%` ou `_` : échappée, jamais interprétée comme joker.
 
-## Décisions par défaut à confirmer
+## Décisions par défaut — décidé par le porteur le 2026-09-28
 
-> Le porteur laisse les décisions par défaut ; celles-ci ont été prises pour avancer et sont **à confirmer**. Chacune est reprise dans l'[ADR-0062](../../decisions/adr/0062-indicateurs-de-pilotage-lus-en-direct.md) ou l'[UDR-0049](../../decisions/udr/0049-page-pilotage-de-l-equipe.md) avec le statut « Accepté (par défaut, à confirmer par le porteur) ».
+> Prises par défaut pour avancer, puis **validées telles que proposées par le porteur le 2026-09-28** (« je valide les choix du pilotage »). Chacune est reprise dans l'[ADR-0062](../../decisions/adr/0062-indicateurs-de-pilotage-lus-en-direct.md) ou l'[UDR-0049](../../decisions/udr/0049-page-pilotage-de-l-equipe.md), au statut « Accepté ».
 
-1. **La période gouverne tous les indicateurs de flux**, 7 jours par défaut (7 j, 30 j, année scolaire) ; les stocks n'en dépendent pas.
-2. **Élève actif** = au moins une session d'exercice **commencée** dans la période, quel qu'en soit le statut.
-3. **Rattachement territorial** : un élève par sa classe principale active de l'année, un enseignant par son établissement principal ; l'équipe n'a pas de DRENA.
-4. **Le filtre DRENA s'applique à toute la page**, tableau « Par DRENA » compris (une seule ligne) ; la recherche reste nationale.
-5. **Numéros masqués** dans la liste des inscrits **et** dans la recherche (deux premiers et deux derniers chiffres).
-6. **Recherche** : élèves et enseignants seulement, 2 caractères minimum (4 chiffres pour un numéro), 20 résultats par page ; pour un enseignant, la colonne « Classe » donne le nombre de classes qu'il enseigne cette année.
-7. **Aucun cache, aucun index** en V1 du pilotage ; seuil de reprise au journal.
-8. **Taux de réussite** = moyenne des scores des sessions terminées dans la période (remédiations comprises), arrondie à l'unité.
-9. **Placement de la page** : « Pilotage » est la 5ᵉ entrée de la navigation équipe, déjà réservée ; aucune entrée ajoutée.
+1. **La période gouverne tous les indicateurs de flux**, 7 jours par défaut (7 j, 30 j, année scolaire) ; les stocks n'en dépendent pas. — *décidé par le porteur le 2026-09-28*
+2. **Élève actif** = au moins une session d'exercice **commencée** dans la période, quel qu'en soit le statut. — *décidé par le porteur le 2026-09-28*
+3. **Rattachement territorial** : un élève par sa classe principale active de l'année, un enseignant par son établissement principal ; l'équipe n'a pas de DRENA. — *décidé par le porteur le 2026-09-28*
+4. **Le filtre DRENA s'applique à toute la page**, tableau « Par DRENA » compris (une seule ligne) ; la recherche reste nationale. — *décidé par le porteur le 2026-09-28*
+5. **Numéros masqués** dans la liste des inscrits **et** dans la recherche (deux premiers et deux derniers chiffres). — *décidé par le porteur le 2026-09-28*
+6. **Recherche** : élèves et enseignants seulement, 2 caractères minimum (4 chiffres pour un numéro), 20 résultats par page ; pour un enseignant, la colonne « Classe » donne le nombre de classes qu'il enseigne cette année. — *décidé par le porteur le 2026-09-28*
+7. **Aucun cache, aucun index** en V1 du pilotage ; seuil de reprise au journal. — *décidé par le porteur le 2026-09-28*
+8. **Taux de réussite** = moyenne des scores des sessions terminées dans la période (remédiations comprises), arrondie à l'unité. — *décidé par le porteur le 2026-09-28*
+9. **Placement de la page** : « Pilotage » est la 5ᵉ entrée de la navigation équipe, déjà réservée ; aucune entrée ajoutée. — *décidé par le porteur le 2026-09-28*
 
 ## Questions encore ouvertes
 
