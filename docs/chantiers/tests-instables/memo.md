@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | livré (PR vers `Develop`, en attente de fusion) |
+| **Statut** | livré ([PR #85](https://github.com/Lnclassapp/App.Lnclassapp/pull/85) vers `Develop`, en attente de fusion) |
 | **Ouvert le** | 2026-09-28 |
 | **Branche** | `fix/tests-instables` |
 | **Programme** | `refonte-application` — étape 0 de l'ordre V2 → V6, question Q15 ([feuille de route §5](../refonte-application/feuille-de-route.md#dette-suivie-par-le-programme)) |

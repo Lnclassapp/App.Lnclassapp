@@ -70,6 +70,6 @@ Le log du job en échec du run 151 (essai 3, `system:4/6`, graine 28331) a été
 | | |
 |---|---|
 | **Livré le** | 2026-09-28 (PR ouverte, non fusionnée) |
-| **PR** | voir la description de la branche `fix/tests-instables` |
+| **PR** | [#85](https://github.com/Lnclassapp/App.Lnclassapp/pull/85) |
 | **ADR produits** | aucun (cause non architecturale) |
 | **UDR produits** | aucune (rien ne change à l'écran) |
