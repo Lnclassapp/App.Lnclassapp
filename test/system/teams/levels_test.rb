@@ -39,7 +39,7 @@ class Teams::LevelsTest < ApplicationSystemTestCase
       assert_no_selector "dialog[open]"
       assert_selector "#levels tr:first-child#level_6eme", text: "6eme"
 
-      within("#level_6eme") { click_on tl("level_row.edit") }
+      click_menu_action("#level_6eme", tl("level_row.edit"))
       within "turbo-frame#modal dialog[open]" do
         assert_selector "#level-code", text: "6eme"
         fill_level(name: "Sixième")
@@ -50,7 +50,7 @@ class Teams::LevelsTest < ApplicationSystemTestCase
       assert_no_selector "dialog[open]"
       assert_selector "#level_6eme", text: /Sixième\s+6eme/
 
-      within("#level_6eme") { click_on tl("level_row.delete") }
+      click_menu_action("#level_6eme", tl("level_row.delete"))
       within("dialog#delete-level-6eme[open]") { click_on tl("level_row.delete_confirm") }
 
       assert_toast tl("destroy.deleted")
@@ -82,7 +82,7 @@ class Teams::LevelsTest < ApplicationSystemTestCase
     visit levels_path
 
     assert_no_page_reload do
-      within("#level_tle") { click_on tl("level_row.delete") }
+      click_menu_action("#level_tle", tl("level_row.delete"))
       within("dialog#delete-level-tle[open]") { click_on tl("level_row.delete_confirm") }
 
       assert_toast tl("destroy.referenced", name: "Tle", usage: "1 cours")

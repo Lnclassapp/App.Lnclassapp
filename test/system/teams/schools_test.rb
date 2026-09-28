@@ -78,7 +78,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
 
     assert_no_page_reload do
-      within("#school_header") { click_on I18n.t("#{header_scope}.edit") }
+      click_menu_action("#school_header", I18n.t("#{header_scope}.edit"))
       within "turbo-frame#modal dialog[open]" do
         fill_in "school[name]", with: "Lycée Moderne"
         click_on I18n.t("teams.schools.edit.submit")
@@ -100,14 +100,18 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       end
       assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
 
-      within("#school_header") { click_on I18n.t("#{header_scope}.deactivate") }
+      click_menu_action("#school_header", I18n.t("#{header_scope}.deactivate"))
       within("#school_header dialog[open]") { click_on I18n.t("#{header_scope}.confirm_deactivate") }
 
       assert_toast I18n.t("teams.schools.deactivate.done", name: "Lycée Classique d'Abidjan")
       within "#school_header" do
         assert_text I18n.t("school_statuses.inactive")
         assert_no_link I18n.t("#{header_scope}.add_classroom")
-        assert_no_button I18n.t("#{header_scope}.deactivate")
+        find("button[aria-haspopup=menu]").click
+        within("[role=menu]") do
+          assert_link I18n.t("#{header_scope}.edit")
+          assert_no_button I18n.t("#{header_scope}.deactivate")
+        end
       end
     end
     assert_equal 1, Orm::Classroom.where(school_id: school.id).count
@@ -120,7 +124,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     visit schools_path
 
     assert_no_page_reload do
-      within("#school_#{unused.public_id}") { click_on I18n.t("#{row_scope}.edit") }
+      click_menu_action("#school_#{unused.public_id}", I18n.t("#{row_scope}.edit"))
       within("turbo-frame#modal dialog[open]") do
         select I18n.t("school_types.mixed"), from: "school[school_type]"
         click_on I18n.t("teams.schools.edit.submit")
@@ -128,20 +132,20 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       assert_toast I18n.t("teams.schools.update.done", name: "Lycée Moderne")
       assert_selector "#school_#{unused.public_id}", text: I18n.t("school_types.mixed")
 
-      within("#school_#{used.public_id}") { click_on I18n.t("#{row_scope}.delete") }
+      click_menu_action("#school_#{used.public_id}", I18n.t("#{row_scope}.delete"))
       within("#school_#{used.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
 
       assert_toast I18n.t("teams.schools.destroy.referenced")
       assert_selector "#school_#{used.public_id}", text: "Lycée Classique"
       assert_no_selector "#school_#{used.public_id} dialog[open]"
 
-      within("#school_#{used.public_id}") { click_on I18n.t("#{row_scope}.deactivate") }
+      click_menu_action("#school_#{used.public_id}", I18n.t("#{row_scope}.deactivate"))
       within("#school_#{used.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_deactivate") }
 
       assert_toast I18n.t("teams.schools.deactivate.done", name: "Lycée Classique")
       assert_selector "#school_#{used.public_id}", text: I18n.t("school_statuses.inactive")
 
-      within("#school_#{unused.public_id}") { click_on I18n.t("#{row_scope}.delete") }
+      click_menu_action("#school_#{unused.public_id}", I18n.t("#{row_scope}.delete"))
       within("#school_#{unused.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
 
       assert_toast I18n.t("teams.schools.destroy.done")
@@ -157,7 +161,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     assert_selector "#schools_total", text: I18n.t("teams.schools.index.total", count: 1)
 
     assert_no_page_reload do
-      within("#school_#{last.public_id}") { click_on I18n.t("#{row_scope}.delete") }
+      click_menu_action("#school_#{last.public_id}", I18n.t("#{row_scope}.delete"))
       within("#school_#{last.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
 
       assert_toast I18n.t("teams.schools.destroy.done")

@@ -1,25 +1,26 @@
 <%# 🌐 UI · teams/drenas/_drena_row — une ligne du tableau des DRENA (Queries::School::DrenasQuery::Row) %>
-<%# Rôle : nom, slug, compteurs ; « Modifier » dans le frame modal, « Supprimer » confirmé dans une <dialog> de la ligne %>
-<%# ADR  : 0029, 0036 · UDR : 0006, 0035 %>
+<%# Rôle : nom, slug, compteurs ; menu ⋮ : « Modifier » dans le frame modal, « Supprimer » confirmé dans une <dialog> de la ligne %>
+<%# ADR  : 0029, 0036 · UDR : 0006, 0035, 0042 %>
 <tr id="drena_<%= drena.public_id %>" class="align-middle">
   <td class="px-4 py-3 font-medium text-ink"><%= drena.name %></td>
   <td class="px-4 py-3"><code class="rounded-sm bg-mist px-1.5 py-0.5 font-mono text-xs text-ink"><%= drena.slug %></code></td>
   <td class="px-4 py-3 text-right tabular-nums"><%= drena.schools_count %></td>
   <td class="px-4 py-3 text-right tabular-nums"><%= drena.classrooms_count %></td>
   <td class="px-4 py-3">
-    <div class="flex items-center justify-end gap-2">
-      <%= ui_button t(".edit"), href: edit_drena_path(drena.public_id), variant: :ghost, size: :sm, icon: "pencil-square",
-                               "aria-label": t(".edit_label", name: drena.name), data: { turbo_frame: "modal" } %>
-      <%= ui_modal title: t(".delete_title", name: drena.name), id: "delete-drena-#{drena.public_id}", size: :sm,
-                   trigger: t(".delete"), trigger_variant: :ghost, trigger_icon: "trash" do |modal| %>
-        <% modal.footer do %>
-          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
-          <%= form_with url: drena_path(drena.public_id), method: :delete, id: "delete-drena-#{drena.public_id}-form" do %>
-            <%= ui_button t(".confirm_delete"), type: :submit, variant: :danger, icon: "trash", full: true %>
-          <% end %>
-        <% end %>
-        <p class="text-sm text-mute"><%= t(".delete_body") %></p>
+    <div class="flex justify-end">
+      <%= ui_dropdown label: t(".actions", name: drena.name), id: "drena-actions-#{drena.public_id}", fixed: true do %>
+        <%= ui_dropdown_item t(".edit"), href: edit_drena_path(drena.public_id), icon: "pencil-square", frame: "modal" %>
+        <%= ui_dropdown_item t(".delete"), dialog: "delete-drena-#{drena.public_id}", icon: "trash", tone: :danger %>
       <% end %>
     </div>
+    <%= ui_modal title: t(".delete_title", name: drena.name), id: "delete-drena-#{drena.public_id}", size: :sm do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+        <%= form_with url: drena_path(drena.public_id), method: :delete, id: "delete-drena-#{drena.public_id}-form" do %>
+          <%= ui_button t(".confirm_delete"), type: :submit, variant: :danger, icon: "trash", full: true %>
+        <% end %>
+      <% end %>
+      <p class="text-sm text-mute"><%= t(".delete_body") %></p>
+    <% end %>
   </td>
 </tr>
