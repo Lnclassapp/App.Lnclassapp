@@ -4,6 +4,9 @@
 module Policies
   module Classroom
     class AssignPolicy
+      # ESSAI JETABLE ci-rapide : jamais appelée, la couverture doit tomber sous 100 %.
+      def self.essai_non_couvert(flag) = flag ? :oui : :non
+
       def call(actor:, classroom:)
         teach = TeachPolicy.new.call(actor:, classroom:)
         return teach if teach.failure?
