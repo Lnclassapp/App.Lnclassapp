@@ -89,3 +89,10 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - **Les actions d'une ligne ne sont plus des icônes à libellé caché** : elles passent dans le menu ⋮ « Actions pour <nom> » (`#school-actions-<public_id>`, `fixed: true`) — « Modifier », « Désactiver » (absente pour un établissement inactif ; la place vide `w-15` disparaît), « Supprimer » (`:danger`). Les modales `deactivate-school-<public_id>` et `delete-school-<public_id>` sont rendues sans `trigger:`.
 - **En-tête de la fiche** : « Ajouter une classe » reste un bouton ; « Modifier » et « Désactiver » (si actif) passent dans le menu ⋮ `#school-header-actions`, la confirmation `deactivate-school-header` est rendue sans `trigger:`.
 - Le §4 « actions de ligne en icônes à libellé caché » est remplacé par : actions de ligne dans un menu ⋮ (UDR-0042).
+
+## Amendement du 2026-09-28 — générer les classes manquantes
+
+*Chantier [`docs/chantiers/generer-classes`](../../chantiers/generer-classes/prd.md), [UDR-0043](0043-generer-les-classes-manquantes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- L'en-tête de la liste gagne une action secondaire, « Générer les classes manquantes » (`sparkles`), à gauche de « Importer des établissements », qui reste l'action principale. Sa confirmation et son suivi sont décrits par l'UDR-0043.
+- Le §4 « tout établissement a ses classes dès sa naissance » admet une exception : un établissement importé avant le référentiel les reçoit par cette génération (ADR-0056).

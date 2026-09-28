@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_25_100032) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_28_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -264,7 +264,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100032) do
   end
 
   create_table "import_reports", force: :cascade do |t|
-    t.string "checksum_sha256", limit: 64, null: false
+    t.string "checksum_sha256", limit: 64
     t.datetime "created_at", null: false
     t.jsonb "details", default: {}, null: false
     t.integer "error_count", default: 0, null: false
@@ -285,7 +285,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_100032) do
     t.index ["kind", "created_at"], name: "index_import_reports_on_kind_and_created_at"
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY ((ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying])::text[]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
-    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying]::text[])", name: "import_reports_kind_values"
+    t.check_constraint "kind::text = 'classrooms'::text OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
+    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying]::text[])", name: "import_reports_kind_values"
     t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying, 'completed'::character varying, 'rejected'::character varying, 'failed'::character varying]::text[])", name: "import_reports_status_values"
   end

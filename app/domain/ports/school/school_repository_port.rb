@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039
+# ADR  : 0030, 0036, 0039, 0056
 module Ports
   module School
     module SchoolRepositoryPort
-      # Ligne insérée en masse : de quoi générer ses classes (DefaultClassroomPlan).
+      # Ligne insérée en masse, ou candidate à la génération : de quoi générer ses classes (DefaultClassroomPlan).
       Inserted = Data.define(:id, :public_id, :drena_id, :name, :school_type, :cycle)
 
       # → Entities::School::School | nil
@@ -38,6 +38,12 @@ module Ports
       # → [Inserted]
       def insert_many(rows:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #insert_many"
+      end
+
+      # Candidats à la génération des classes manquantes (ADR-0056) : statut active ou draft, aucune classe (active ou
+      # archivée) de school_year, id > after_id, par id croissant, `limit` au plus. → [Inserted]
+      def without_classrooms(school_year:, after_id:, limit:)
+        raise NotImplementedError, "#{self.class} doit implémenter #without_classrooms"
       end
 
       # Une seule école principale par enseignant (index partiel). → Result | failure(:conflict)

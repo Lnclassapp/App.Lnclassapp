@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/imports/index — écran des imports de l'équipe %>
-<%# Rôle : rapports récents filtrables par type ; « Nouvel import » ouvre la modale de téléversement du type choisi %>
-<%# ADR  : 0039 · UDR : 0006 %>
+<%# Rôle : rapports récents filtrables par type (génération des classes comprise) ; « Nouvel import » : téléversement %>
+<%# ADR  : 0039, 0056 · UDR : 0006, 0043 %>
 <% content_for :title, t(".page_title") %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
   <%= ui_dropdown label: t(".new"), id: "new-import-menu",
@@ -14,7 +14,7 @@
 <% end %>
 
 <nav aria-label="<%= t(".filter_label") %>" class="mb-5 flex flex-wrap gap-2">
-  <% [ nil, *Entities::Catalog::ImportKind::KINDS ].each do |kind| %>
+  <% [ nil, *Entities::Catalog::ImportKind::REPORT_KINDS ].each do |kind| %>
     <%= link_to (kind ? t("import_kinds.#{kind}") : t(".all")), teams_imports_path(kind:),
                 "aria-current": ("page" if kind == @kind),
                 class: class_names("inline-flex min-h-10 items-center rounded-full border px-4 text-sm font-medium transition",

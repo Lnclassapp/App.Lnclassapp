@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
-# Rôle : traduit Orm::School ↔ Entities::School::School ; insertion en masse des imports, rattachement des enseignants
-# ADR  : 0030, 0036, 0039
+# Rôle : traduit Orm::School ↔ Entities::School::School ; insertion en masse, candidats à la génération, enseignants
+# ADR  : 0030, 0036, 0039, 0056
 module Repositories
   module School
     class SchoolRepository
@@ -8,6 +8,7 @@ module Repositories
 
       INSERTED_COLUMNS = %w[id public_id drena_id name school_type cycle].freeze
       ATTRIBUTES = %i[drena_id name sigle school_type cycle status].freeze
+      GENERATION_STATUSES = %w[active draft].freeze
 
       def find_by_public_id(public_id:)
         record = Orm::School.find_by(public_id:)
@@ -47,6 +48,14 @@ module Repositories
 
         Orm::School.insert_all!(rows.map { |row| row.merge(created_at: at, updated_at: at) }, returning: INSERTED_COLUMNS)
                    .map { |row| Inserted.new(**row.symbolize_keys) }
+      end
+
+      # NOT EXISTS sur l'index (school_id, school_year, name) des classes ; lecture par clé, sans OFFSET.
+      def without_classrooms(school_year:, after_id:, limit:)
+        classrooms = Orm::Classroom.where(school_year:).where("classrooms.school_id = schools.id")
+        Orm::School.where(status: GENERATION_STATUSES).where(id: (after_id + 1)..).where.not(classrooms.arel.exists)
+                   .order(:id).limit(limit).pluck(*INSERTED_COLUMNS)
+                   .map { |values| Inserted.new(**INSERTED_COLUMNS.map(&:to_sym).zip(values).to_h) }
       end
 
       def attach_teacher(teacher_id:, school_id:, primary:, at:)
