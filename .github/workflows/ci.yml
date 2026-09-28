@@ -80,7 +80,11 @@ jobs:
       fail-fast: false
       matrix:
         # The unit suite is never split: SimpleCov measures the whole suite (ADR-0024, configuration.md §4.1).
-        group: [ "unit,seeds", "system:1/4", "system:2/4", "system:3/4", "system:4/4", "perf:1/2", "perf:2/2" ]
+        # Six system parts and three import parts, balanced on script/ci/test_timings.yml, end with the unit job:
+        # a part costs about a minute of runner before its first test, more parts buy nothing (chantier ci-rapide).
+        group: [ "unit,seeds",
+                 "system:1/6", "system:2/6", "system:3/6", "system:4/6", "system:5/6", "system:6/6",
+                 "perf:1/3", "perf:2/3", "perf:3/3" ]
     env:
       CI_GROUP: ${{ matrix.group }}
 
@@ -93,7 +97,8 @@ jobs:
           POSTGRES_PASSWORD: dev-rails
         ports:
           - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+        # The job waits for the first healthy check: every second, not every ten.
+        options: --health-cmd="pg_isready" --health-interval=1s --health-timeout=5s --health-retries=30
 
     steps:
       - uses: actions/checkout@v6

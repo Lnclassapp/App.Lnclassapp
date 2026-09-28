@@ -14,11 +14,17 @@ classes = CiPlan.files("test/**/*_test.rb").each_with_object({}) do |file, map|
   File.foreach(File.join(root, file)) { |line| map[$1] = file if line =~ /^\s*class\s+([\w:]+)\s*</ }
 end
 
+# A test that prints (the [PERF] lines) splits its verbose line in two: « Class#test = », its output, then « 1.23 s = . ».
 durations = Hash.new(0.0)
+pending = nil
 ARGF.each_line do |line|
-  next unless line =~ /([\w:]+)#\S.* = (\d+\.\d+) s = [.FESN]/
-
-  file = classes[$1] and durations[file] += $2.to_f
+  if line =~ /([\w:]+)#\S.* = (?:(\d+\.\d+) s = [.FESN])?\s*$/
+    pending = $2 ? nil : $1
+    file = classes[$1] and $2 and durations[file] += $2.to_f
+  elsif pending && line =~ /(?:^|Z )(\d+\.\d+) s = [.FESN]\s*$/
+    file = classes[pending] and durations[file] += $1.to_f
+    pending = nil
+  end
 end
 abort "Aucune durée lue : lancez les tests avec -v (TESTOPTS=-v)." if durations.empty?
 
