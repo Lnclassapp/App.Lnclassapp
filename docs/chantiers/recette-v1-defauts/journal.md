@@ -22,4 +22,8 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| D3 : `style-src-attr 'unsafe-inline'` à consigner dans un ADR | Hors périmètre du bugfix | à ouvrir |
+| ~~D3 : `style-src-attr 'unsafe-inline'` à consigner dans un ADR~~ | Déjà consigné : ADR-0049, « Coûts consentis » (KaTeX) ; clos le 2026-09-28 | aucun |
+
+## Mise en production
+
+2026-09-28 : #81 fusionnée dans `Develop` après la vérification locale complète (rubocop, 2331 tests à 100 % de couverture, 194 tests système, brakeman), la CI GitHub étant indisponible. Promotion par #82 (`Staging`, vérifié) et #83 (`main`). Déploiement de production déclenché directement (`071630e7`), vérifié sur www.lnclass.com et lnclass.com.
