@@ -73,3 +73,9 @@ Pourquoi des radios-badges plutôt qu'un `select` suivi d'un aperçu dynamique :
 - Une matière ne peut plus exister sans catégorie : ni à l'écran (422), ni en base (`NOT NULL` + `CHECK`).
 - Aucune suppression en cascade : une matière utilisée se garde, l'équipe retire d'abord ses cours ou change la matière de ses enseignants.
 - Le libellé de la catégorie `other` vient de la locale commune (`materials.categories.other`, « Autres ») ; le plan écrivait « Autre ».
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#material-actions-<slug>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-material-<slug>"`, `:danger`). La modale est rendue sans `trigger:`, son formulaire est inchangé. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.

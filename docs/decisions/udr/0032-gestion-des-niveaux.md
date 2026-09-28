@@ -73,3 +73,9 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 - Cette forme (tableau, modale, confirmation dans la page, refus en 422 qui nomme la raison) peut servir de modèle aux écrans Séries (R2) et Matières (R3), sans les contraindre : leurs UDR décident.
 - Interdit désormais sur cet écran : la suppression en cascade d'un niveau, une confirmation par `confirm()` du navigateur, et un formulaire qui modifie le slug.
 - Preuve : `test/system/teams/levels_test.rb` crée, renomme et supprime un niveau vierge, échoue à supprimer un niveau utilisé, rouvre la modale en 422, le tout sous `assert_no_page_reload`, et vérifie que la page ne défile pas latéralement sur mobile.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#level-actions-<slug>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-level-<slug>"`, `:danger`). La modale `delete-level-<slug>` est rendue sans `trigger:`, son pied et son formulaire sont inchangés. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.

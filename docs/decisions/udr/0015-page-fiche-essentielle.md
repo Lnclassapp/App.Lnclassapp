@@ -70,3 +70,9 @@ La fiche essentielle est la page que l'élève ouvre pour réviser, puis pour s'
 - Le test système `test/system/catalog/essential_page_test.rb` prouve le rendu, sur la fiche, du contenu saisi dans Trix (gras, liste, formule) et des exercices créés par la modale du Lot B5, sans rechargement de page.
 - Un futur bouton de remédiation (`StartRemediationSession`, ADR-0043) prendra place dans `#essential_gap`.
 - « Supprimer une fiche essentielle » disparaît de l'interface ; l'archivage (UDR-0016) le remplace.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **« Modifier » passe dans le menu ⋮** « Actions pour <nom> » (`#essential-actions-menu`), seule entrée, placé après « Nouvel exercice » et « Importer des exercices », qui restent des boutons. Le nom accessible « Modifier la fiche essentielle « … » » est remplacé par celui du bouton ⋮.

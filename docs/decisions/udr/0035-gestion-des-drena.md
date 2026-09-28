@@ -66,3 +66,9 @@ Dans l'ancienne application, trois défauts gênaient ce travail :
 - La suppression d'une DRENA n'efface jamais une école : l'équipe désactive les écoles, puis supprime une DRENA vide.
 - Un renommage ne demande aucune mise à jour des fichiers d'import déjà écrits.
 - Les écrans de gestion de l'équipe qui suivent (niveaux, séries, matières) peuvent reprendre la même confirmation de suppression dans la ligne et le même état vide sous le tableau.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#drena-actions-<public_id>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-drena-<public_id>"`, `:danger`). La modale est rendue sans `trigger:`, son pied est inchangé. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.
