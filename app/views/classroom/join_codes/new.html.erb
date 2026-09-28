@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/join_codes/new — « Rejoindre une classe » : un seul champ, le code donné par le professeur %>
-<%# Rôle : le code, saisi n'importe comment, mène à /c/<code> ; erreur re-rendue en 422 par Turbo, sans rechargement %>
+<%# Rôle : le code, saisi n'importe comment, mène à /c/<code> s'il y ouvre un aperçu ; sinon erreur re-rendue en 422 (429 au-delà du débit) par Turbo %>
 <%# ADR  : 0041 · UDR : 0005, 0009 %>
 <% content_for :title, t(".page_title") %>
 <main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
