@@ -83,6 +83,34 @@ module Entities
         assert_nil facts("hostile/bypass_exif.jpg")
       end
 
+      # Allowlist (second challenge of PR #50): only the segments and chunks needed to draw the image are kept, rewritten
+      # to their standard form when they have free fields; everything else leaves, whatever its name or signature.
+      test "an ICC, Adobe or JFXX segment and a private or tIME PNG chunk carrying a secret leave nothing behind" do
+        %w[app2_secret.jpg app14_secret.jpg jfxx_thumb_app0.jpg png_private_chunk.png].each do |name|
+          original = file_fixture("photos/hostile/#{name}").binread
+          stripped = ImageHeader.strip(original)
+
+          assert facts("hostile/#{name}").metadata, name
+          %w[SECRET GPS JFXX gpSx tIME ICC_PROFILE].each { assert_not_includes stripped, it, "#{name} garde #{it}" }
+          assert_equal facts("hostile/#{name}").with(metadata: false), ImageHeader.read(stripped), name
+        end
+      end
+
+      test "a JFIF segment is rewritten to its standard form, without its thumbnail; a standard Adobe segment is kept" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        app0 = jpeg.byteslice(2, 18)
+        thumbnail = "\xFF\xE0".b + [ 16 + 3 ].pack("n") + "JFIF\0\x01\x02\x01\x00\x48\x00\x48\x01\x01SEC".b
+        adobe = "\xFF\xEE\x00\x0EAdobe\x00\x64\x00\x00\x00\x00\x01".b
+        with_thumbnail = jpeg.byteslice(0, 2) + thumbnail + jpeg.byteslice(20..)
+        with_adobe = jpeg.byteslice(0, 20) + adobe + jpeg.byteslice(20..)
+
+        assert ImageHeader.read(with_thumbnail).metadata
+        assert_equal jpeg, ImageHeader.strip(with_thumbnail)
+        assert_equal app0, ImageHeader.strip(with_thumbnail).byteslice(2, 18)
+        assert_not ImageHeader.read(with_adobe).metadata
+        assert_equal with_adobe, ImageHeader.strip(with_adobe)
+      end
+
       test "the location of a PNG and of a WebP is removed with their metadata chunks" do
         %w[gps.png gps.webp].each do |name|
           stripped = ImageHeader.strip(file_fixture("photos/hostile/#{name}").binread)
