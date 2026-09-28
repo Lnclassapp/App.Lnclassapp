@@ -147,3 +147,11 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
   - `queued` créé depuis plus de 10 minutes : le job n'a jamais été pris (worker arrêté). Avant cet amendement, un tel rapport restait en file pour toujours et bloquait tous les imports de son type.
 - Le contrôle se fait au dépôt de l'import suivant du même type (`Catalog::StartImport`, `STALE_AFTER = 10 * 60`, `ImportReportRepository#fail_stale`). Un import normal dure moins de 2 minutes (§7), donc 10 minutes laissent une large marge.
 - Preuves : `test/infrastructure/repositories/catalog/import_report_repository_test.rb` (les deux cas) et `test/system/error_paths_test.rb` (import interrompu, import jamais pris, par les vrais boutons).
+
+## Amendement du 2026-09-28 — un rapport sans fichier : la génération des classes manquantes
+
+*Chantier [`docs/chantiers/generer-classes`](../../chantiers/generer-classes/prd.md), [ADR-0056](./0056-generation-des-classes-manquantes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- `import_reports.kind` accepte aussi **`classrooms`** : le rapport de la génération des classes manquantes. Ce n'est pas un type d'import (aucun format, aucun téléversement) : il n'est pas dans `ImportKind::ALL`, mais dans `ImportKind::REPORT_KINDS`.
+- Ce rapport n'a ni pièce jointe ni checksum : `checksum_sha256` devient nul, et la contrainte `import_reports_checksum_unless_generation` l'exige pour tout autre type.
+- Même cycle de vie que les imports : un seul en cours (index unique partiel), libéré après 10 minutes, suivi par `/teams/imports/:public_id`, journal `import.run`.

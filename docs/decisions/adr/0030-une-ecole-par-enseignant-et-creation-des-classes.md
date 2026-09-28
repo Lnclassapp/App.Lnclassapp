@@ -157,3 +157,10 @@ def self.for(school_type) = PLAN.fetch(school_type == "public" ? "public" : "pri
 | Collège public (`public`, `first`) | 28 | — | — | — | **28** |
 
 Ces totaux dépendent des liaisons `level_series` en base : un niveau ou une série absent est sauté et compté (§4). Les 71 classes d'un lycée public dans l'ancienne application venaient d'un référentiel qui ne liait que C à la 2nde.
+
+## Amendement du 2026-09-28 — génération après coup des classes manquantes
+
+*Chantier [`docs/chantiers/generer-classes`](../../chantiers/generer-classes/prd.md), [ADR-0056](./0056-generation-des-classes-manquantes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les classes par défaut naissent à l'import, ou après coup pour un établissement qui n'en a aucune de l'année.** L'équipe peut lancer, depuis l'écran Établissements, la génération des classes manquantes : un job reprend le même barème (`DefaultClassroomPlan`) pour chaque établissement actif ou en brouillon sans aucune classe de l'année scolaire en cours.
+- La règle « modifier un établissement ne régénère jamais ses classes » tient toujours : un établissement qui a au moins une classe de l'année n'est jamais touché.
