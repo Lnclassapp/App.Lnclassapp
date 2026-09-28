@@ -70,6 +70,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0058](./0058-bareme-des-classes-en-base.md) | Le barème des classes générées est en base, modifiable par l'équipe, repris à l'identique au déploiement | Accepté | 2026-09-28 | Table `classroom_plan_entries` (type, niveau, série, 0–30) ; reprise par slug ; ligne absente = 0, « Non défini », comptée sautée ; `DefaultClassroomPlan` reçoit le barème. Amende ADR-0030 et ADR-0056. ADR-0057 laissé libre (chantiers parallèles). |
 
 
+
 ---
 
 ## Décisions remplacées — à lire avant d'agir

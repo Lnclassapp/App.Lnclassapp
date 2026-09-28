@@ -62,6 +62,16 @@ module Queries
                      students.first.to_h.values_at(:display_name, :contact, :last_score_percent, :last_session_public_id)
       end
 
+      test "chaque élève porte la version de sa photo, en une seule requête pour la classe (ADR-0060)" do
+        with_photo = attach_photo(create_student(classroom: @classroom, last_name: "Bamba"))
+        create_student(classroom: @classroom, last_name: "Yao")
+
+        versions = overview.students.map(&:photo_version)
+
+        assert_equal [ Queries::Identity::PhotoVersions.for(user_ids: [ with_photo.id ])[with_photo.id], nil ], versions
+        assert_not_nil versions.first
+      end
+
       test "sans show_roster, aucun élève n'est lu ; une classe vide a une liste vide" do
         assert_empty overview.students
 
