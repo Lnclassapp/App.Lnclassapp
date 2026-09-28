@@ -1,4 +1,4 @@
-# Import des établissements (plan boucle-pedagogique, Lot S3) — ADR-0030, ADR-0039, ADR-0058, UDR-0037
+# Import des établissements (plan boucle-pedagogique, Lot S3) — ADR-0030, ADR-0039, ADR-0058, ADR-0063, UDR-0037
 fr:
   teams:
     imports:
@@ -12,6 +12,7 @@ fr:
             status: "draft, active ou inactive. active par défaut."
             type: "public, privée ou mixte. Obligatoire."
             cycle: "first ou both. Facultatif : un nom qui contient « collège » donne first, sinon both."
+            national_code: "Code national à 6 chiffres (résultats du BEPC). Facultatif, unique : sert à l'inscription des enseignants sans code."
             drena: "Slug de la DRENA de cette école. Facultatif : remplace celle de l'enveloppe."
           example: "Exemple minimal"
           classrooms: "Les classes sont générées selon le type et le cycle de chaque établissement, d'après le barème des classes du référentiel. Aucun établissement existant n'est modifié : un doublon est ignoré et compté."

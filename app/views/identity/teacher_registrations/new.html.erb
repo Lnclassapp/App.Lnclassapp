@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/teacher_registrations/new — inscription enseignant, en deux colonnes (reprise de l'ancienne application) %>
-<%# Rôle : accueil à gauche, formulaire à droite ; /e/<code> refusé en 404 (carte), débit dépassé en 429 ; échec re-rendu en 422 %>
-<%# ADR  : 0030, 0050, 0057 · UDR : 0005, 0024, 0044 %>
+<%# Rôle : accueil à gauche, formulaire à droite ; /e/<code> refusé en 404 (carte), débit dépassé en 429 ; échec re-rendu en 422 ; @pending : sans code %>
+<%# ADR  : 0030, 0050, 0057, 0063 · UDR : 0005, 0024, 0044, 0050 %>
 <% content_for :title, t(".page_title") %>
 <main class="grid min-h-dvh bg-paper md:grid-cols-2">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
@@ -35,11 +35,11 @@
       <% else %>
         <%= ui_card padding: :lg do %>
           <div class="mb-8 text-center">
-            <h2 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h2>
-            <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
+            <h2 class="font-display text-xl font-extrabold text-ink"><%= t(@pending ? ".pending_title" : ".title") %></h2>
+            <p class="mt-1 text-sm text-mute"><%= t(@pending ? ".pending_subtitle" : ".subtitle") %></p>
           </div>
 
-          <%= render "form" %>
+          <%= render "identity/teacher_registrations/form" %>
 
           <p class="mt-6 text-center text-sm text-mute">
             <%= t(".have_account") %>

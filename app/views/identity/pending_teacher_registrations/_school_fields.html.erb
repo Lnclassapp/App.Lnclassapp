@@ -1,0 +1,16 @@
+<%# 🌐 UI · identity/pending_teacher_registrations/_school_fields — l'établissement d'une inscription sans code %>
+<%# Rôle : code national (6 chiffres), ou DRENA puis établissement dans le frame « schools » (UDR-0024) ; Stimulus school--drena-schools %>
+<%# ADR  : 0030, 0063 · UDR : 0024, 0050 %>
+<%# locals: (form:) -%>
+<%= ui_field form, :national_code, value: @form.raw_national_code, maxlength: 8, inputmode: "numeric", autocomplete: "off",
+             placeholder: t(".national_code_placeholder"), hint: t(".national_code_hint"), class: "font-display tracking-widest" %>
+<p class="text-center text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".or") %></p>
+<div class="space-y-2">
+  <%= ui_field form, :drena_public_id, as: :select, choices: drena_options, prompt: t(".drena_prompt"),
+               form: "teacher-signup-drena", data: { action: "change->school--drena-schools#load" } %>
+  <%# Repli sans JavaScript : noscript plutôt qu'un attribut posé par Stimulus, que le morphing du 422 effacerait. %>
+  <noscript>
+    <%= ui_button t(".show_schools"), type: :submit, variant: :secondary, size: :sm, icon: "magnifying-glass", form: "teacher-signup-drena" %>
+  </noscript>
+</div>
+<%= render template: "school/drena_schools/index", locals: { schools: school_options, drena_public_id: @form.drena_public_id, registration: @form } %>

@@ -22,7 +22,8 @@ module Factories
     def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], **attributes)
       create_user(role: "teacher", **attributes).tap do |teacher|
         Orm::TeacherProfile.create!(user: teacher, material:, onboarding_completed_at: (Time.current if onboarded))
-        Orm::TeacherSchool.create!(teacher:, school:, primary: true)
+        # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
+        Orm::TeacherSchool.create!(teacher:, school:, primary: true) if school
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }
       end
     end

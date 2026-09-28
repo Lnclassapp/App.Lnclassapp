@@ -13,6 +13,29 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   def scope = "classroom.classrooms"
 
+  test "CP-08: « Partager sur WhatsApp » envoie le lien /c/<code> et le code, sans aucun nom d'élève (ADR-0063)" do
+    create_student(classroom: @classroom, first_name: "Zoé", last_name: "Unique")
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    message = I18n.t("#{scope}.header.share_message", classroom: "6ème 1", school: "Lycée Classique d'Abidjan",
+                                                       link: join_classroom_url("KFM37"), code: "KFM37")
+    assert_select "#classroom_header a#classroom_whatsapp_share[href='https://wa.me/?text=#{ERB::Util.url_encode(message)}']" \
+                  "[target=_blank][rel=noopener]", text: I18n.t("#{scope}.header.share_whatsapp")
+    assert_no_match(/Zoé|Unique/, message)
+    assert_includes message, "/c/KFM37"
+  end
+
+  test "CP-08: une classe sans code n'a rien à partager" do
+    @classroom.update!(join_code: nil)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_whatsapp_share", 0
+  end
+
   test "l'enseignant de la classe voit l'en-tête, le code en majuscules, les cours assignés et ses élèves" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_essential(course:)
