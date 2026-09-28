@@ -76,3 +76,10 @@ return wrong_pin unless @users.authenticate(contact: user.contact, pin: dto.curr
 - Tests d'adaptateur : `update_contact` rend `:conflict` sur un numéro pris ; `destroy_all_except` garde la session donnée et elle seule.
 - Test de contrôleur : aucun PIN dans le journal d'audit ni dans la réponse ; message neutre sur un numéro pris.
 - Test système : changement de PIN dans un navigateur, puis l'ancienne session d'un second navigateur ramène à la connexion.
+
+## Amendement du 2026-09-28 — le matricule de l'élève (ADR-0065, accepté)
+
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[ADR-0065](./0065-matricule-de-l-eleve.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+
+- L'élève modifie aussi son **matricule** depuis son profil (`Identity::ChangeOwnStudentNumber`), sous son **PIN actuel** vérifié comme ici (un PIN faux compte comme un échec de connexion). Personne d'autre ne modifie un matricule.
+- Le matricule n'est pas un secret d'authentification : son changement **ne ferme pas** les autres sessions et ne renouvelle pas la session en cours. Il est tracé (`student_number.changed`, matricules masqués) et borné à 10 tentatives par heure et par compte.

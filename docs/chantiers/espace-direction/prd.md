@@ -69,7 +69,7 @@ Un établissement importé par l'équipe n'a aujourd'hui personne pour l'adminis
 
 ## 4. Critères d'acceptation
 
-Chaque critère devient au moins un test ; le lot qui le porte est indiqué entre crochets, et le chemin du test est dans [`plan.md`](plan.md). « La direction de A » désigne un membre actif de l'établissement actif A ; B est un autre établissement actif. **Chaque cas d'usage a son test de refus inter-établissements** (ED-10, ED-18, ED-22, ED-26, ED-31, ED-38, ED-41, ED-47, ED-62) et **chaque geste sensible son refus Éducateur et Secrétaire, les deux nommés** (ED-08, ED-16, ED-21, ED-37, ED-61). Règle des deux barrières (ADR-0066 §4.4) : le use case qui reçoit l'établissement B répond `forbidden` ; le contrôleur, qui passe toujours l'établissement de l'acteur, répond 404 pour une ressource de B. **65 critères** (ED-01 à ED-65). Relecture du porteur du 2026-09-28 : ED-40, ED-41, ED-43, ED-44, ED-47, ED-52, ED-53, ED-54, ED-58 et ED-59 **réécrits** (même numéro, sens nouveau) ; ED-60 à ED-65 **ajoutés** ; aucun supprimé.
+Chaque critère devient au moins un test ; le lot qui le porte est indiqué entre crochets, et le chemin du test est dans [`plan.md`](plan.md). « La direction de A » désigne un membre actif de l'établissement actif A ; B est un autre établissement actif. **Chaque cas d'usage a son test de refus inter-établissements** (ED-10, ED-18, ED-22, ED-26, ED-31, ED-38, ED-41, ED-47, ED-62) et **chaque geste sensible son refus Éducateur et Secrétaire, les deux nommés** (ED-08, ED-16, ED-21, ED-37, ED-61). Règle des deux barrières (ADR-0066 §4.4) : le use case qui reçoit l'établissement B répond `forbidden` ; le contrôleur, qui passe toujours l'établissement de l'acteur, répond 404 pour une ressource de B. **65 critères** (ED-01 à ED-65). Relecture du porteur du 2026-09-28 : ED-40, ED-41, ED-43, ED-44, ED-46, ED-47, ED-52, ED-53, ED-54, ED-56, ED-58 et ED-59 **réécrits** (même numéro, sens nouveau) ; ED-60 à ED-65 **ajoutés** ; aucun supprimé.
 
 ### 4.1 Accès de la direction — [Lot 0]
 
@@ -540,7 +540,8 @@ Scénario: ED-54 — seul l'élève corrige son propre matricule
   Quand un membre de l'équipe, le Proviseur de A et un enseignant appellent chacun le cas d'usage de correction pour cet élève
   Alors chacun reçoit « forbidden »
   Et le matricule est toujours 12345678A
-  Et « Débloquer un compte » ne propose ni recherche par matricule ni « Corriger le matricule »
+  Et « Débloquer un compte », saisi avec « 12345678A », ne montre aucune carte d'élève
+  Et la carte de cet élève, trouvé par son numéro, ne montre ni son matricule ni « Corriger le matricule »
 
 Scénario: ED-65 — correction refusée : PIN, format, matricule pris, débit
   Étant donné un élève au matricule 12345678A et un autre au matricule 87654321B
@@ -573,10 +574,10 @@ Scénario: ED-55 — l'équipe réinitialise le second facteur d'une direction
 
 ## 6. Décisions rattachées
 
-- [ADR-0065](../../decisions/adr/0065-matricule-de-l-eleve.md) — Le matricule MENA de l'élève (**Accepté** le 2026-09-28, avec les retours du porteur). Amende ADR-0036.
+- [ADR-0065](../../decisions/adr/0065-matricule-de-l-eleve.md) — Le matricule MENA de l'élève (**Accepté** le 2026-09-28, avec les retours du porteur). Amende ADR-0036 ; complète ADR-0055.
 - [ADR-0066](../../decisions/adr/0066-espace-direction-droits-et-gestes.md) — L'espace direction : une policy à gestes pour deux niveaux de droits (**Accepté** le 2026-09-28, avec les retours du porteur). Amende ADR-0044, ADR-0057, ADR-0030, ADR-0031, ADR-0040.
 - [ADR-0067](../../decisions/adr/0067-tableau-de-bord-de-l-etablissement.md) — Le tableau de bord de l'établissement (**Accepté** le 2026-09-28). Complète ADR-0062.
-- Amendements datés ajoutés dans ADR-0030, ADR-0031, ADR-0036, ADR-0040, ADR-0044, ADR-0057.
+- Amendements datés (acceptés le 2026-09-28) dans ADR-0030, ADR-0031, ADR-0036, ADR-0040, ADR-0044, ADR-0055, ADR-0057.
 - [UDR-0052](../../decisions/udr/0052-espace-direction.md) — Espace direction (**Accepté** le 2026-09-28, avec les retours du porteur). Ferme **C-31**. Amende UDR-0006, 0019, 0036, 0041, 0050 ; note en tête de l'UDR-0002.
 - [UDR-0053](../../decisions/udr/0053-matricule-de-l-eleve.md) — Matricule de l'élève (**Accepté** le 2026-09-28, avec les retours du porteur). Amende UDR-0009, 0020, 0041.
 

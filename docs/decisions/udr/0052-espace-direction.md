@@ -163,7 +163,7 @@ Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resource
 ### 3.6 Élèves (`school_admin/students/index`) et changement de classe
 
 **Structure de la liste**
-- `ui_page_header(title: "Élèves", subtitle: "<n> élèves")` avec, en action, `ui_button` « Chercher par matricule » (`secondary`, icône `magnifying-glass`, `href: new_school_admin_student_placement_path`, `data: { turbo_frame: "modal" }`), pour **toutes** les fonctions, affiché seulement si la liste n'est pas vide.
+- `ui_page_header(title: "Élèves", subtitle: "<n> élèves")` avec, en action, `ui_button` « Chercher par matricule » (`secondary`, icône `magnifying-glass`, `href: new_school_admin_student_placement_path`, `data: { turbo_frame: "modal" }`), pour **toutes** les fonctions, affiché seulement si l'établissement a au moins un élève (même quand un filtre vide la liste).
 - `form#students-filter` : comme 3.5 (`students_list`, `name="classroom"`).
 - `turbo_frame_tag "students_list"` : `ul#school_students` de `li#student_<public_id>` : `ui_avatar` (initiales), nom, matricule (`font-mono tracking-wider text-sm text-mute`, `aria-label` « Matricule <valeur épelée> »), classe (badge texte) ; `ui_dropdown(label: "Actions pour <nom>")` avec l'item « Changer de classe » : `ui_dropdown_item` lien vers `school_admin_edit_student_placement_path(public_id)`, `frame: "modal"` — il ouvre directement l'étape 2 **par l'identifiant public** de l'élève, sans matricule ni compteur de débit. Aucun numéro de téléphone, aucune note. Puis `ui_pagination`.
 

@@ -58,7 +58,7 @@ L'élève doit désormais donner son **matricule** en s'inscrivant (ADR-0065) : 
 **Routes** (Lot 0b, `config/routes/identity.rb`, dans `resource :profile`) : `resource :student_number, only: %i[edit update], controller: :profile_student_numbers` → `GET /profile/student_number/edit` (`edit_profile_student_number_path`) et `PATCH /profile/student_number` (`profile_student_number_path`). Aucun identifiant : toujours le compte de la session (ADR-0055).
 
 **Comportement**
-- `PATCH` → `Identity::ChangeOwnStudentNumber` (ADR-0065) : PIN actuel vérifié d'abord (un PIN faux compte comme un échec de connexion) ; nouveau matricule normalisé puis validé.
+- `PATCH` → `Identity::ChangeOwnStudentNumber` (ADR-0065), dans cet ordre, comme `ChangeOwnPin` : le formulaire (vide, format) est vérifié d'abord, sans coûter d'essai de PIN ; puis le PIN actuel (un PIN faux compte comme un échec de connexion) ; puis « inchangé » et l'unicité : « déjà utilisé » n'est dit qu'une fois le PIN reconnu.
 - Succès : `update.turbo_stream.erb` remplace `#profile_information`, ferme la modale, toast `success` « Ton matricule est enregistré. » ; repli HTML : 303 vers `profile_path` avec `notice`. La session n'est pas renouvelée (le matricule n'est pas un secret).
 - Échec : 422, modale re-rendue, PIN vidé, matricule gardé : « PIN incorrect. » en alerte `role="alert"` (UDR-0041) ; sous le champ : vide, format ou pris (messages du §3.1) ; inchangé « C'est déjà ton matricule. ». Compte verrouillé : message de verrouillage de la connexion (ADR-0050).
 - **Débit** : 10 tentatives par heure et par compte ; au-delà, 429 et, dans la modale, « Trop de tentatives. Réessaie dans une heure. » sans formulaire.

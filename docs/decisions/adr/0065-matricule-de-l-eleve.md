@@ -6,7 +6,7 @@
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-40 à ED-43, ED-48 à ED-54, ED-56, ED-59, ED-65 |
 | **Remplace** | — |
-| **Amende** | [ADR-0036](./0036-suppression-archivage-et-anonymisation.md) (l'anonymisation efface le matricule) |
+| **Amende** | [ADR-0036](./0036-suppression-archivage-et-anonymisation.md) (l'anonymisation efface le matricule) ; complète [ADR-0055](./0055-profil-modification-de-soi-et-revocation-des-sessions.md) (l'élève corrige son matricule sous PIN actuel) |
 | **Remplacé par** | — |
 
 ---
@@ -81,6 +81,7 @@ Option B retenue.
 - Depuis « Mon profil », comme le changement de PIN (ADR-0055, UDR-0041 amendée par l'UDR-0053) : **PIN actuel** exigé, vérifié par `VerifyOwnPin` (un PIN faux compte comme un échec de connexion, même verrouillage) ; nouveau matricule normalisé, même format, même unicité.
 - Policy `Policies::Identity::ChangeOwnStudentNumberPolicy` : acteur `student`, cible = le compte de l'acteur (profil sans identifiant, ADR-0055). L'équipe, la direction et l'enseignant sont refusés : **aucun écran ne leur permet de modifier un matricule**, et `Identity::ChangeStudentNumber` (correction par l'équipe) n'existe pas.
 - `UserRepositoryPort#update_student_number(user_id:, student_number:)` → `Result | failure(:conflict, errors: { student_number: [:taken] })`.
+- Ordre, comme `ChangeOwnPin` : formulaire (vide, format) d'abord, sans coûter d'essai de PIN ; puis PIN actuel ; puis inchangé et unicité — l'oracle « déjà utilisé » ne répond qu'à qui connaît le PIN.
 - Refus : format → `:invalid` ; matricule inchangé → `:invalid` (`student_number: [:unchanged]`) ; déjà porté par un autre compte → `:conflict`, message neutre « Ce matricule est déjà utilisé… », **sans jamais dire à qui** (le même qu'à l'inscription).
 - **Débit** : 10 tentatives par heure et **par compte** (`by: current_actor.user_id`, compteur propre) : la réponse « déjà utilisé » est un oracle, au plus aussi ouvert que celui de l'inscription.
 - Le changement ne ferme pas les autres sessions (le matricule n'est pas un secret d'authentification, ADR-0055) et ne renouvelle pas la session.
