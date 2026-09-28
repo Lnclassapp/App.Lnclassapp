@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_28_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_28_140100) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -103,6 +104,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_110000) do
     t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "classroom_assignments_archived_at_iff_archived"
     t.check_constraint "assignable_type::text = ANY (ARRAY['Course'::character varying, 'Essential'::character varying, 'Exercise'::character varying]::text[])", name: "classroom_assignments_type_values"
     t.check_constraint "status::text = ANY (ARRAY['active'::character varying, 'archived'::character varying]::text[])", name: "classroom_assignments_status_values"
+  end
+
+  create_table "classroom_plan_entries", force: :cascade do |t|
+    t.integer "count", null: false
+    t.datetime "created_at", null: false
+    t.bigint "level_id", null: false
+    t.string "school_type", null: false
+    t.bigint "series_id"
+    t.datetime "updated_at", null: false
+    t.index ["school_type", "level_id", "series_id"], name: "index_classroom_plan_entries_on_pair", unique: true, where: "(series_id IS NOT NULL)"
+    t.index ["school_type", "level_id"], name: "index_classroom_plan_entries_on_level", unique: true, where: "(series_id IS NULL)"
+    t.index ["series_id"], name: "index_classroom_plan_entries_on_series_id"
+    t.check_constraint "count >= 0 AND count <= 30", name: "classroom_plan_entries_count_range"
+    t.check_constraint "school_type::text = ANY (ARRAY['public'::character varying, 'private'::character varying]::text[])", name: "classroom_plan_entries_school_type_values"
   end
 
   create_table "classroom_students", force: :cascade do |t|
@@ -701,6 +716,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_110000) do
   add_foreign_key "classroom_assignments", "classrooms", on_delete: :restrict
   add_foreign_key "classroom_assignments", "users", column: "archived_by_id", on_delete: :restrict
   add_foreign_key "classroom_assignments", "users", column: "assigned_by_id", on_delete: :restrict
+  add_foreign_key "classroom_plan_entries", "levels", on_delete: :restrict
+  add_foreign_key "classroom_plan_entries", "series", on_delete: :restrict
   add_foreign_key "classroom_students", "classrooms", on_delete: :restrict
   add_foreign_key "classroom_students", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "classrooms", "levels", on_delete: :restrict

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::TaxonomyRepository
 # Rôle : référentiel géré par l'équipe (niveaux, séries, liaisons, matières) et son index en mémoire pour les imports
-# ADR  : 0029, 0034, 0036
+# ADR  : 0029, 0034, 0036, 0058
 module Repositories
   module Catalog
     class TaxonomyRepository
@@ -43,7 +43,7 @@ module Repositories
 
       def delete_level(id:)
         delete(Orm::Level, id, Orm::Classroom.exists?(level_id: id) || Orm::Course.exists?(level_id: id) ||
-                               Orm::LevelSeries.exists?(level_id: id))
+                               Orm::LevelSeries.exists?(level_id: id), plan_entries: { level_id: id })
       end
 
       def create_series(series:)
@@ -56,7 +56,7 @@ module Repositories
 
       def delete_series(id:)
         delete(Orm::Series, id, Orm::Classroom.exists?(series_id: id) || Orm::Course.exists?(series_id: id) ||
-                                Orm::LevelSeries.exists?(series_id: id))
+                                Orm::LevelSeries.exists?(series_id: id), plan_entries: { series_id: id })
       end
 
       def create_material(material:)
@@ -106,10 +106,12 @@ module Repositories
         ::Shared::Result.failure(:conflict, errors: { field => [ :taken ] })
       end
 
-      # scope : un modèle et un id, ou une relation déjà filtrée (id nil).
-      def delete(scope, id, referenced)
+      # scope : un modèle et un id, ou une relation déjà filtrée (id nil). plan_entries : les lignes du barème qui
+      # partent avec un niveau ou une série supprimé (ADR-0058) ; elles ne retiennent jamais la suppression.
+      def delete(scope, id, referenced, plan_entries: nil)
         return ::Shared::Result.failure(:conflict, errors: { base: [ :referenced ] }) if referenced
 
+        Orm::ClassroomPlanEntry.where(plan_entries).delete_all if plan_entries
         (id ? scope.where(id:) : scope).delete_all
         ::Shared::Result.success
       end

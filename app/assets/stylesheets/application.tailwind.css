@@ -1,6 +1,6 @@
 /* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
    Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
-   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006 */
+   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051 */
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
@@ -125,6 +125,12 @@
   /* Rails enveloppe les champs en erreur : l'enveloppe ne doit pas casser la mise en page du composant champ. */
   .field_with_errors {
     display: contents;
+  }
+
+  /* UDR-0051 — Edge a son propre œil dans un champ mot de passe : masqué dès que le bouton œil du champ est visible.
+     Sans JavaScript, le bouton reste `hidden` et Edge garde le sien. */
+  [data-controller~="password-reveal"]:has(> button:not([hidden])) input::-ms-reveal {
+    display: none;
   }
 
   .turbo-progress-bar {

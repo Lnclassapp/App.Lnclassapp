@@ -172,6 +172,40 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
   end
 
+  test "CE-06: a school's page shows its code, the buttons to copy it and its link, and « Régénérer le code » in the menu" do
+    school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    header = "teams.schools.header"
+    link = school_code_signup_url("k7m4qz")
+    assert_select "#school_code #school_code_label", text: I18n.t("#{header}.school_code")
+    assert_select "#school_code #school_code_value[aria-labelledby=school_code_label]", text: "K7M-4QZ"
+    assert_select "#school_code [data-controller='classroom--join-code-copy'][data-classroom--join-code-copy-code-value='K7M-4QZ'] " \
+                  "button[aria-label='#{I18n.t("#{header}.copy_code_label", code: 'K7M-4QZ')}']", text: I18n.t("#{header}.copy_code")
+    assert_select "#school_code [data-controller='classroom--join-code-copy'][data-classroom--join-code-copy-code-value='#{link}'] " \
+                  "button[aria-label=\"#{I18n.t("#{header}.copy_link_label")}\"]", text: I18n.t("#{header}.copy_link")
+    assert_select "#school_code a#school_code_link[href='#{link}']", text: link
+    assert_select "#school_code", text: /#{Regexp.escape(I18n.t("#{header}.school_code_hint"))}/
+    assert_select "#school_code", { text: /#{Regexp.escape(I18n.t("#{header}.school_code_inactive"))}/, count: 0 }
+    assert_select "#school-header-actions button[aria-controls=regenerate-school-code]", text: I18n.t("#{header}.regenerate_code")
+    assert_select "dialog#regenerate-school-code form#regenerate-school-code-form[action='#{school_code_path(school.public_id)}'] " \
+                  "input[name=_method][value=patch]"
+    assert_select "dialog#regenerate-school-code", text: /K7M-4QZ/
+  end
+
+  test "CE-06: the page of a school that is not active warns that its code lets nobody sign up" do
+    sign_in_as @member
+
+    %w[draft inactive].each do |status|
+      school = create_school(drena: @drena, status:)
+
+      get school_path(school.public_id)
+
+      assert_select "#school_code", text: /#{Regexp.escape(I18n.t("teams.schools.header.school_code_inactive"))}/
+    end
+  end
 
   test "CN-01, UDR-0046: the « Classes par niveau » block counts each level and series; its sum is the page's and the list's" do
     referential = seed_referential
@@ -223,7 +257,6 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#school_level_classrooms", text: /#{I18n.t('teams.level_classrooms.block.empty_title')}/
     assert_select "#school_level_classrooms_inactive", 0
-
   end
 
   test "a draft school page offers no « Ajouter une classe » until the school is activated" do
@@ -316,6 +349,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: /#{I18n.t('teams.schools.update.done', name: "Lycée Classique d'Abidjan")}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr#school_#{school.public_id}", text: /Bouaké/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('teams.schools.cycles.first')}/
+    assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms" # UDR-0046
     assert_equal "school.changed", Orm::AuditEvent.sole.action
   end
 
@@ -371,6 +405,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{I18n.t('teams.schools.deactivate.done', name: 'Lycée Classique')}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr", text: /#{I18n.t('school_statuses.inactive')}/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('school_statuses.inactive')}/
+    assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms_inactive" # UDR-0046
   end
 
   test "without Turbo, a deactivation leads back to the list with a notice" do

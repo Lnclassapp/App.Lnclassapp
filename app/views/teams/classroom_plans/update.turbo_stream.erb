@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/classroom_plans/update — succès de la modification d'une ligne du barème %>
+<%# Rôle : toast, ligne, totaux et compte des lignes non définies remplacés ; la modale se ferme seule %>
+<%# ADR  : 0058 · UDR : 0006, 0045 · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
+<%= turbo_stream_toast t(".updated", name: @line.name), type: :success %>
+<%= turbo_stream.replace line_dom_id(@line), partial: "line_row", locals: { line: @line } %>
+<%= turbo_stream.replace "classroom_plan_totals", partial: "totals", locals: { sheet: @sheet } %>
+<%= turbo_stream.replace "classroom_plan_undefined", partial: "undefined", locals: { sheet: @sheet } %>

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/levels/index — niveaux du référentiel, écran de l'équipe %>
-<%# Rôle : aide sur les niveaux générés ; tableau #levels par position ; « Nouveau niveau » ouvre la modale de création dans le frame « modal » %>
-<%# ADR  : 0029, 0034 · UDR : 0006, 0032 %>
+<%# Rôle : aide qui renvoie au barème des classes ; tableau #levels par position ; « Nouveau niveau » ouvre la modale de création dans le frame « modal » %>
+<%# ADR  : 0029, 0034, 0058 · UDR : 0006, 0032, 0045 %>
 <% content_for :title, t(".page_title") %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
   <%= ui_button t(".new"), href: new_level_path, icon: "plus", data: { turbo_frame: "modal" } %>
@@ -8,7 +8,7 @@
 
 <p id="levels-generation-help" class="mb-4 flex items-start gap-2 text-sm text-mute">
   <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-info" %>
-  <span><%= t(".generation_help", codes: Queries::Catalog::LevelsQuery::GENERATED_SLUGS.to_sentence) %></span>
+  <span><%= t(".generation_help") %> <%= link_to t(".classroom_plan_link"), classroom_plan_path, class: "font-medium text-brand-strong underline underline-offset-2" %></span>
 </p>
 
 <%# relative : le libellé sr-only de la colonne des actions reste dans le conteneur défilant, sans élargir la page. %>

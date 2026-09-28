@@ -3,8 +3,8 @@ require "test_helper"
 # ADR-0034: the seeds fill development and test with the referential, the DRENA and a few schools; production
 # only gets the bootstrap invitation of the first team member.
 class SeedsTest < ActiveSupport::TestCase
-  TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::Material,
-             Orm::User, Orm::Invitation ].freeze
+  TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::ClassroomPlanEntry,
+             Orm::Material, Orm::User, Orm::Invitation ].freeze
 
   def counts = TABLES.to_h { [ it.name, it.count ] }
 
@@ -34,6 +34,7 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal 41, Orm::Drena.count
     assert_equal %w[6eme 5eme 4eme 3eme 2nde 1ere tle], Orm::Level.order(:position).pluck(:slug)
     assert_equal 10, Orm::LevelSeries.count
+    assert_equal 28, Orm::ClassroomPlanEntry.count
     assert_equal %w[literature literature literature literature science science science], Orm::Material.order(:category).pluck(:category)
     assert_equal({ "Lycée Moderne de Treichville" => 77, "Lycée privé Les Lauriers" => 38, "Lycée mixte La Réussite" => 38,
                    "Collège Moderne de Marcory" => 28 },

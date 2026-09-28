@@ -20,8 +20,14 @@ class School::GenerateClassroomsTest < ApplicationSystemTestCase
 
   def classrooms_of(school) = Orm::Classroom.where(school:)
 
+  # UDR-0043, UDR-0045 (amendments of 2026-09-28): the generation and the barème live in the « Classes » menu of the header.
+  def open_generation
+    find("button[aria-controls=schools-classrooms-menu]").click
+    within("#schools-classrooms-menu") { click_on "Générer les classes manquantes" }
+  end
+
   test "the confirmation says who is concerned; once confirmed and run, only the schools without classrooms get theirs" do
-    click_on "Générer les classes manquantes"
+    open_generation
 
     within "dialog#generate-classrooms-modal[open]" do
       assert_selector "h2", text: "Générer les classes manquantes ?"
@@ -48,12 +54,45 @@ class School::GenerateClassroomsTest < ApplicationSystemTestCase
   end
 
   test "Annuler closes the confirmation, and nothing is launched" do
-    click_on "Générer les classes manquantes"
+    open_generation
 
     within("dialog#generate-classrooms-modal[open]") { click_on "Annuler" }
 
     assert_no_selector "dialog#generate-classrooms-modal[open]"
     assert_equal 0, Orm::ImportReport.count
     assert_no_enqueued_jobs
+  end
+
+  # Owner's request (2026-09-28): the « Classes » menu sits to the right of the import button, on the same line, at 1280 px.
+  def box(selector) = page.evaluate_script("(({ top, left }) => ({ top: Math.round(top), left }))(document.querySelector(#{selector.to_json}).getBoundingClientRect())")
+
+  test "at 1280 px, the « Classes » menu is on the line of the import button, to its right" do
+    page.current_window.resize_to(1280, 900)
+    visit schools_path
+
+    import = box("#schools-header-actions a[href*='kind=schools']")
+    menu = box("button[aria-controls=schools-classrooms-menu]")
+    assert_equal import["top"], menu["top"], "le menu passe sous l'import"
+    assert_operator menu["left"], :>, import["left"]
+  ensure
+    page.current_window.resize_to(1400, 1400)
+  end
+
+  test "on a phone, the « Classes » menu opens the confirmed generation, and leads to the barème" do
+    with_mobile_viewport do
+      visit schools_path
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+
+      open_generation
+      within("dialog#generate-classrooms-modal[open]") { click_on "Lancer la génération" }
+      assert_toast "Génération des classes lancée."
+      assert_equal 1, Orm::ImportReport.where(kind: "classrooms").count
+
+      visit schools_path
+      find("button[aria-controls=schools-classrooms-menu]").click
+      within("#schools-classrooms-menu") { click_on "Barème des classes" }
+      assert_selector "h1", text: "Barème des classes"
+    end
   end
 end
