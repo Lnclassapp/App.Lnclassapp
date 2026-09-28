@@ -15,6 +15,7 @@
 
 - Premier jet de `keepShown` : l'événement `turbo:before-morph-attribute` des icônes remonte jusqu'au bouton. Sans filtre sur `event.target`, les icônes auraient gardé l'état affiché après un 422. Filtré sur le bouton seul.
 - Test système : un écouteur `submit` sur `window` ne voit rien, Turbo arrête la propagation au document. Le type envoyé se lit au `turbo:submit-start`.
+- Les captures d'écran ont montré le curseur au début du PIN après la bascule, alors que le test du focus passait : Chrome remet la sélection à 0 **après** le gestionnaire de clic, sur le changement de type. La sélection est replacée aussi à l'image suivante, et le test système vérifie désormais la position du curseur deux images plus tard (rouge sans le correctif).
 - Le journal du navigateur (Selenium) est partagé entre les tests du processus et relève les 422 attendus (« Failed to load resource ») : vidé au début de chaque test, les erreurs réseau écartées.
 
 ## Ce qu'on a appris sur la codebase

@@ -27,8 +27,12 @@ export default class extends Controller {
     this.render(this.inputTarget.type === "password")
     if (event.detail === 0) return
 
+    // Chrome remet le curseur au début après un changement de type, de façon asynchrone : on le replace aussi à
+    // l'image suivante.
+    const restore = () => this.inputTarget.setSelectionRange(selectionStart, selectionEnd)
     this.inputTarget.focus()
-    this.inputTarget.setSelectionRange(selectionStart, selectionEnd)
+    restore()
+    requestAnimationFrame(restore)
   }
 
   // Le bouton ne prend pas le focus au pointeur : le clavier virtuel du téléphone reste ouvert.

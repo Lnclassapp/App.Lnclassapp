@@ -103,10 +103,22 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     assert_revealed name
     assert_equal field, active_element, "au pointeur, le focus reste dans le champ"
     assert_equal "4821", field.value
+    assert_caret_at_end field
 
     toggle_for(name).click
     assert_masked name
     assert_equal field, active_element
+    assert_caret_at_end field
+  end
+
+  # The caret stays where it was (after the last digit), even once Chrome has reset it on the change of type.
+  def assert_caret_at_end(field)
+    caret = page.evaluate_async_script(<<~JS, field)
+      const [input, done] = arguments
+      requestAnimationFrame(() => requestAnimationFrame(() => done([input.selectionStart, input.selectionEnd])))
+    JS
+
+    assert_equal [ 4, 4 ], caret
   end
 
   def failed_sign_up_masks_again
