@@ -63,6 +63,21 @@ class School::GenerateClassroomsTest < ApplicationSystemTestCase
     assert_no_enqueued_jobs
   end
 
+  # Owner's request (2026-09-28): the « Classes » menu sits to the right of the import button, on the same line, at 1280 px.
+  def box(selector) = page.evaluate_script("(({ top, left }) => ({ top: Math.round(top), left }))(document.querySelector(#{selector.to_json}).getBoundingClientRect())")
+
+  test "at 1280 px, the « Classes » menu is on the line of the import button, to its right" do
+    page.current_window.resize_to(1280, 900)
+    visit schools_path
+
+    import = box("#schools-header-actions a[href*='kind=schools']")
+    menu = box("button[aria-controls=schools-classrooms-menu]")
+    assert_equal import["top"], menu["top"], "le menu passe sous l'import"
+    assert_operator menu["left"], :>, import["left"]
+  ensure
+    page.current_window.resize_to(1400, 1400)
+  end
+
   test "on a phone, the « Classes » menu opens the confirmed generation, and leads to the barème" do
     with_mobile_viewport do
       visit schools_path
