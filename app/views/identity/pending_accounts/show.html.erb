@@ -1,6 +1,6 @@
-<%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
-<%# Rôle : écran de sortie, sans redirection ; seules issues : rejoindre une classe (élève) ou se déconnecter ; état de la demande %>
-<%# ADR  : 0030, 0040, 0063 · UDR : 0006, 0050 %>
+<%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, direction sans établissement, enseignant sans école ou en attente %>
+<%# Rôle : écran de sortie, sans redirection ; issues : rejoindre une classe (élève), un établissement par son code (enseignant), mon profil, se déconnecter %>
+<%# ADR  : 0030, 0040, 0063, 0066 · UDR : 0006, 0044, 0050, 0052 %>
 <% content_for :title, t(".page_title") %>
 <% if @join_request %>
   <% state = @join_request.status == "rejected" ? "rejected" : "pending" %>
@@ -8,12 +8,27 @@
   <% description = t(".join_request.#{state}.description", school: @join_request.school_name) %>
   <% icon = state == "rejected" ? "no-symbol" : "clock" %>
 <% else %>
-  <% title, description, icon = t(".#{@case}.title"), t(".#{@case}.description"), "clock" %>
+  <% icon = @case.in?(%i[school_admin_without_school teacher_without_school]) ? "building-library" : "clock" %>
+  <% title, description = t(".#{@case}.title"), t(".#{@case}.description") %>
 <% end %>
+<%# Une demande refusée n'empêche pas de rejoindre un autre établissement par son code (UDR-0052 §3.9, cas 2). %>
+<% rejoin = @case == :teacher_without_school || @join_request&.status == "rejected" %>
 <div id="pending_account">
   <%= ui_empty_state title:, description:, icon: do %>
     <% if @case == :student %>
       <%= ui_button t(".student.join"), href: new_join_code_path, variant: :brand, icon: "academic-cap" %>
+    <% end %>
+    <% if rejoin %>
+      <%= form_with model: @rejoin || false, scope: :school_rejoin, url: school_rejoin_path, method: :post, id: "school-rejoin-form",
+                    class: "w-full max-w-sm space-y-4 text-left" do |form| %>
+        <%= ui_field form, :school_code, label: t(".rejoin.school_code"), required: true, maxlength: 12, autocomplete: "off",
+                                         autocapitalize: "characters", spellcheck: false, placeholder: t(".rejoin.placeholder"),
+                                         hint: t(".rejoin.hint"), class: "font-display tracking-widest uppercase" %>
+        <%= ui_button t(".rejoin.submit"), type: :submit, variant: :brand, full: true %>
+      <% end %>
+    <% end %>
+    <% if @case == :school_admin_without_school %>
+      <%= ui_button t("shared.navigation.profile"), href: profile_path, variant: :secondary, icon: "user-circle" %>
     <% end %>
     <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary %>
   <% end %>

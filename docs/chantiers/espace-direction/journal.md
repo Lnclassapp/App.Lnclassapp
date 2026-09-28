@@ -122,6 +122,42 @@ Branche `feature/espace-direction-lot-0a`. Quatre migrations (matricule **nullab
 
 - `reinstate_teacher` renverrait `:conflict other_school` si l'enseignant avait une ligne `teacher_schools` **non principale** dans cet établissement (index `(teacher_id, school_id)`) ; aucun parcours n'en crée en V2.
 
+## Lot 0b — Garde d'accès et fichiers partagés (2026-09-29)
+
+Branche `feature/espace-direction-lot-0b`. Second facteur de la direction, acteur et accueil, garde de la direction sans établissement, 27 routes (20 de la direction, 4 de l'équipe, 1 d'identité, 2 du profil de l'élève), navigation à cinq entrées, écran d'attente entier, profil (fonction, établissement, matricule), page « Établissement », squelette de l'accueil, `DirectionSchoolQuery` et `DirectionClassroomsQuery`.
+
+**Décisions en route**
+
+| Décision | Pourquoi |
+|---|---|
+| `Authentication#forget_resolution` après la vérification du second facteur, puis `redirect_to_home` | La résolution mémorisée avant la vérification n'a pas d'acteur : `redirect_to_home` renvoyait vers le second facteur |
+| `helper_method :current_session` ; « J'ai noté mes codes » mène à `home_path_for(current_session.role)` | `second_factor_enrollments_controller.rb` n'est pas dans le lot : l'acteur y est lu avant l'activation, `current_actor` vaut `nil` dans la vue des codes |
+| La garde `hold_detached_school_admin` est dans `AuthenticatedController` (exemptions par `controller_path` : `identity/pending_accounts`, `identity/profile*`, `identity/account_photos`) ; `SchoolAdmin::BaseController` n'a que `allow_roles :school_admin` | La garde du parent s'exécute avant tout filtre de `BaseController` : le renvoi « sans établissement » de l'ADR-0066 §6 y serait du code mort (couverture 100 %) |
+| Écran d'attente : `@case` ∈ `:student`, `:school_admin_without_school`, `:teacher` (demande en attente ou refusée), `:teacher_without_school`, `:other` ; une demande **approuvée** ne compte plus (cas 3) ; un enseignant ou une direction rattachés qui ouvrent l'adresse à la main lisent le cas générique | UDR-0052 §3.9 ; corrige l'affichage « en cours de validation » d'une demande approuvée |
+| Libellé de la fonction traduit par la delivery (`AuthenticatedController#shell_detail`, `_information`) ; les queries renvoient `position` | Aucun `I18n` dans `app/infrastructure` |
+| Rattachement lu en ligne dans `ShellUserQuery` et `ProfileQuery` (rattachement actif, établissement `active`, comme `actor_for`) | Un fichier partagé entre les deux aurait été hors du champ du lot |
+| `GET`/`PATCH school/code` et `POST teachers/:public_id/reinstatement` écrits à la main | `resource :code` ajoute un `PUT` (21 routes) ; une ressource imbriquée nomme le paramètre `teacher_public_id` au lieu de `public_id` (UDR-0052 §3.0) |
+| Squelette de l'accueil titré par `shared.home.sections.overview.title` | `school_admin/homes.fr.yml` appartient au Lot D |
+| `school_admin.shared.refusals.forbidden` / `not_found` posés, sans méthode dans `BaseController` | Aucun contrôleur du 0b ne rend un refus en Turbo Stream : une méthode non appelée casserait la couverture |
+
+**Écart au plan : frames sans `src` tant que leur contrôleur manque.** Le plan supposait des frames « en erreur de routage ». Une route dont le contrôleur n'existe pas lève `ActionDispatch::MissingController` (erreur 500, non « rescuable ») : Capybara la remonte, et **cinq tests système existants** ouvrent la fiche d'un établissement côté équipe. Les frames `school_code`, `school_staff` (direction) et `school_staff` (équipe) ne reçoivent donc leur `src` que si leur contrôleur est défini (`defined?(…Controller)`), et gardent leur squelette sinon. À la fusion des Lots G et B, le `src` apparaît sans toucher ces vues ; la condition, devenue toujours vraie, est à retirer à la clôture du chantier (porteur).
+
+**Écarts au champ `Fichiers` (tests seulement)**
+
+- `test/controllers/teams/{homes,dashboards,drenas,school_classrooms,level_classrooms}_controller_test.rb` : `create_user(role: "school_admin")` → `create_school_admin`. Une direction **sans établissement** est désormais renvoyée vers l'écran d'attente avant `allow_roles :team` (redirection au lieu de 403) ; une direction rattachée reçoit toujours 403. Un mot par fichier ; `level_classrooms_controller_test.rb` est au Lot D, qui part de cette version.
+
+**Pour les lots A à G**
+
+- Tout contrôleur `SchoolAdmin::` hérite de `SchoolAdmin::BaseController` : `current_actor.school_id` est **toujours** un établissement actif (sinon l'acteur est déjà sur l'écran d'attente).
+- `Queries::School::DirectionClassroomsQuery#call(school_id:)` → `[Level(name, classrooms: [Row(public_id, name, level_name, students_count, capacity)])]`, triées par niveau, série, numéro ; `#includes?(school_id:, public_id:)` pour ignorer un filtre d'une classe étrangère (C, E) ou refuser un choix (E).
+- `Queries::School::DirectionSchoolQuery#call(school_id:)` → `Row(public_id, name, drena_name, school_type, status, school_code)` et `school_code_display` (G peut le relire).
+- Refus en Turbo Stream : `t("school_admin.shared.refusals.forbidden")` (« Votre fonction ne permet pas ce geste. ») et `…not_found` ; libellés : `t("school_admin.shared.positions.<position>")`.
+- **Lot C** : re-rendre `identity/pending_accounts/show` avec `@case = :teacher_without_school` et `@rejoin`, un objet qui répond à `school_code` (la **saisie brute**, re-rendue) et à `errors` (sur `:school_code`) ; le formulaire est `form_with model: @rejoin || false, scope: :school_rejoin` (paramètre `school_rejoin[school_code]`). `Identity::SchoolRejoinsController` doit `skip_before_action :hold_pending_teacher`.
+- **Lots B et G** : les frames de la page « Établissement » (et `school_staff` de la fiche équipe) se branchent seuls à la fusion (voir l'écart ci-dessus).
+- **Lot D** : reprendre `school_admin/homes_controller.rb` et `homes/show.html.erb` (squelette `shared/home/_skeleton`) ; `HOME_SECTIONS[:school_admin]` ne servira plus.
+- `test/integration/school_admin_access_test.rb` couvre chaque route `school_admin/` dont le contrôleur est chargé : un lot qui livre un contrôleur y est testé sans rien écrire (ED-01, ED-02, ED-03).
+- `test/system/role_homes_test.rb` ne suit que « Accueil » et « Établissement » de la direction ; C, D, E ouvrent leurs pages dans leurs propres tests système.
+
 ## Clôture
 
 | | |

@@ -39,10 +39,29 @@ module Queries
                      [ row.role, row.school_name, row.material_name, row.classroom_name ]
       end
 
-      test "a team member shows their team role, a school admin only their role; an unknown account is nil" do
+      test "a team member shows their team role; an unknown account is nil" do
         assert_equal [ :team, "content" ], @query.call(user_id: create_team_member(team_role: "content").id).then { [ it.role, it.team_role ] }
-        assert_equal :school_admin, @query.call(user_id: create_user(role: "school_admin").id).role
         assert_nil @query.call(user_id: 0)
+      end
+
+      # ED-05, UDR-0052 §3.11: the position and the school of the active attachment, none once it ended or its school is inactive.
+      test "a member of the direction shows their position and school, none without an active attachment" do
+        member = create_school_admin(school: create_school(name: "Lycée Moderne de Treichville"), position: "secretary")
+        left = create_school_admin
+        Orm::SchoolStaff.where(user_id: left.id).update_all(left_at: Time.current)
+        inactive = create_school_admin(school: create_school(status: "inactive"))
+
+        assert_equal [ :school_admin, "secretary", "Lycée Moderne de Treichville" ],
+                     @query.call(user_id: member.id).to_h.values_at(:role, :position, :school_name)
+        [ left, inactive ].each do |account|
+          assert_equal [ nil, nil ], @query.call(user_id: account.id).to_h.values_at(:position, :school_name)
+        end
+      end
+
+      # ED-52, UDR-0053 §3.2: the student reads their MENA number; nobody else has one on their profile.
+      test "a student shows their MENA number, the other roles none" do
+        assert_equal "12345678A", @query.call(user_id: create_student(student_number: "12345678A").id).student_number
+        assert_nil @query.call(user_id: create_teacher.id).student_number
       end
 
       test "the row gives the public id, and the version of the photo when there is one (ADR-0060)" do

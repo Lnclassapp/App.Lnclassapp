@@ -19,14 +19,29 @@ class NavigationHelperTest < ActionView::TestCase
     assert_raises(KeyError) { navigation_for(:parent) }
   end
 
+  # Every destination of every role is drawn since the Lot 0b of espace-direction; a route not drawn stays inactive.
+  UNDRAWN = NavigationHelper::Destination.new(key: :teachers, route: :undrawn_destination_path, icon: "user-group")
+
   test "nav_path resolves a drawn route and leaves the others inactive" do
     courses = navigation_for(:student)[1]
     dashboard = navigation_for(:team).last
-    school_admin_classrooms = navigation_for(:school_admin)[1]
 
     assert_equal "/courses", nav_path(courses)
     assert_equal "/teams/dashboard", nav_path(dashboard)
-    assert_nil nav_path(school_admin_classrooms)
+    assert_nil nav_path(UNDRAWN)
+  end
+
+  # ED-04, UDR-0052 §3.1: five destinations for the direction, all drawn, « Établissement » last.
+  test "the direction has five active destinations" do
+    destinations = navigation_for(:school_admin)
+
+    assert_equal %i[home classrooms teachers students school], destinations.map(&:key)
+    assert_equal [ "/school-admin", "/school-admin/classrooms", "/school-admin/teachers", "/school-admin/students",
+                   "/school-admin/school" ], destinations.map { nav_path(it) }
+    assert_equal %w[home squares-2x2 user-group users building-library], destinations.map(&:icon)
+    assert_equal "Établissement", I18n.t("shared.navigation.school")
+    assert_equal "grid-cols-5", nav_grid_class(destinations.size)
+    assert_equal "/school-admin", home_path_for(:school_admin)
   end
 
   test "a destination is active by its URL or by the key the view declares" do
@@ -59,18 +74,18 @@ class NavigationHelperTest < ActionView::TestCase
   end
 
   test "nav_link renders an idle, inactive bottom link when the route is missing" do
-    # The team dashboard is drawn since V4 (UDR-0049): the direction's destinations are the ones still undrawn.
-    teachers = navigation_for(:school_admin).find { it.key == :teachers }
-    self.rendered = self.class.content_class.new(nav_link(teachers, style: :bottom))
+    self.rendered = self.class.content_class.new(nav_link(UNDRAWN, style: :bottom))
 
     assert_select "a:not([href])[aria-disabled=true]:not([aria-current]).opacity-50.text-2xs",
                   text: /#{I18n.t("shared.navigation.teachers")}/
-    assert_raises(KeyError) { nav_link(teachers, style: :drawer) }
+    assert_raises(KeyError) { nav_link(UNDRAWN, style: :drawer) }
   end
 
   test "home_path_for falls back to the root when the home route is missing" do
     assert_equal "/student", home_path_for(:student)
-    assert_equal root_path, home_path_for(:school_admin)
+    define_singleton_method(:respond_to?) { |name, include_all = false| name != :team_home_path && super(name, include_all) }
+
+    assert_equal root_path, home_path_for(:team)
   end
 
   test "account_links point to drawn routes and mark sign out as dangerous" do

@@ -24,6 +24,31 @@ class Identity::SecondFactorsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil Orm::Session.find_by!(user: @member).second_factor_verified_at
   end
 
+  # ADR-0066 §4.2, UDR-0052 §3.12: the direction verifies like the team, then lands on its own home.
+  test "a member of the direction verifies their session and lands on the direction home, not the team one" do
+    principal = create_school_admin
+    sign_in_pin(principal)
+
+    get new_identity_second_factor_path
+    assert_response :success
+    post identity_second_factor_path, params: { second_factor: { code: ROTP::TOTP.new(principal.totp_secret).now } }
+
+    assert_redirected_to school_admin_home_path
+    assert_response :see_other
+    assert_equal "Vérification réussie", flash[:notice]
+    get new_identity_second_factor_path
+    assert_redirected_to school_admin_home_path
+  end
+
+  test "a member of the direction without school lands on the waiting screen after the verification" do
+    member = create_user(role: "school_admin")
+    sign_in_pin(member)
+
+    post identity_second_factor_path, params: { second_factor: { code: ROTP::TOTP.new(member.totp_secret).now } }
+
+    assert_redirected_to pending_account_path
+  end
+
   test "a code already used is refused" do
     freeze_time do
       sign_in_as @member

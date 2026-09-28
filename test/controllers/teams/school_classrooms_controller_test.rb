@@ -23,7 +23,7 @@ class Teams::SchoolClassroomsControllerTest < ActionDispatch::IntegrationTest
   def create_path(school = @school) = school_classrooms_path(school.public_id)
 
   test "a student, a teacher or a school head receives 403, not 500, and nothing is written" do
-    [ create_student, create_teacher(school: @school), create_user(role: "school_admin") ].each do |outsider|
+    [ create_student, create_teacher(school: @school), create_school_admin ].each do |outsider|
       sign_in_as outsider
 
       get new_school_classroom_path(@school.public_id), headers: { "Turbo-Frame" => "modal" }

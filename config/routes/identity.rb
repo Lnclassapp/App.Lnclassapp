@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte identity
 # Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil
-# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063
+# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0065, 0066
 get "login", to: "identity/sessions#new", as: :new_session
 resource :session, only: %i[create destroy], controller: "identity/sessions" # session_path, gelé : DELETE = « Se déconnecter »
 namespace :identity do
@@ -9,6 +9,8 @@ namespace :identity do
   resource :pin_reset, only: %i[new create], path: "pin-reset"
 end
 get "account/pending", to: "identity/pending_accounts#show", as: :pending_account
+# ADR-0066 §4.4, UDR-0052 §3.9 : l'enseignant sans école rejoint un établissement par son code, depuis l'écran d'attente.
+post "account/pending/school", to: "identity/school_rejoins#create", as: :school_rejoin
 get "teacher-signup", to: "identity/teacher_registrations#new", as: :new_teacher_registration
 post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher_registrations
 # ADR-0063 : « Mon établissement n'a pas encore de code Lnclass » : code national ou DRENA → établissement, compte en attente.
@@ -31,5 +33,7 @@ scope module: :identity do
     resource :contact, only: %i[edit update], controller: :profile_contacts
     resource :pin, only: %i[edit update], controller: :profile_pins
     resource :photo, only: %i[edit update destroy], controller: :profile_photos
+    # ADR-0065, UDR-0053 §3.2 : l'élève seul corrige son matricule, sous son PIN actuel.
+    resource :student_number, only: %i[edit update], controller: :profile_student_numbers
   end
 end

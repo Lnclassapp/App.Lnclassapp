@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Authentication — session serveur, cookie signé, garde du second facteur et des rôles
-# Rôle : résout la session à chaque requête ; un compte team non vérifié n'a pas d'acteur et ne voit que le second facteur
-# ADR  : 0028, 0031, 0050
+# Rôle : résout la session à chaque requête ; un compte de l'équipe ou de la direction non vérifié n'a pas d'acteur
+# ADR  : 0028, 0031, 0050, 0066
 module Authentication
   extend ActiveSupport::Concern
 
@@ -10,13 +10,14 @@ module Authentication
   # Symbole de HomeDestination → route de l'accueil (UDR-0006, routes gelées du Lot 0a).
   HOME_ROUTES = {
     student_home: :student_home_path, teacher_home: :teacher_home_path, teacher_classrooms: :teacher_classrooms_path,
-    team_home: :team_home_path, pending_account: :pending_account_path
+    team_home: :team_home_path, school_admin_home: :school_admin_home_path, pending_account: :pending_account_path
   }.freeze
 
   included do
     before_action :require_authentication
     before_action :require_verified_second_factor
-    helper_method :current_actor, :authenticated?
+    # current_session : le rôle d'une session pas encore rendue en acteur (codes de secours, UDR-0052 §3.12).
+    helper_method :current_actor, :current_session, :authenticated?
   end
 
   class_methods do
@@ -75,6 +76,11 @@ module Authentication
     cookies.delete(COOKIE)
     reset_session
     flash[RELOAD_FLASH] = true
+  end
+
+  # La session vient d'être vérifiée (second facteur) : l'acteur se relit, la résolution mémorisée n'en avait pas.
+  def forget_resolution
+    @resolution = nil
   end
 
   def redirect_to_home(**options)

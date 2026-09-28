@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/_information — carte « Mes informations » (Queries::Identity::ProfileQuery::Row) %>
-<%# Rôle : nom, numéro groupé, informations du rôle, date d'inscription ; nom et numéro s'ouvrent dans le frame modal ; remplacée par profile_names/update %>
-<%# ADR  : 0055, 0060 · UDR : 0006, 0041, 0047 %>
+<%# Rôle : nom, numéro, informations du rôle (matricule de l'élève, fonction et établissement de la direction), inscription ; modales dans le frame modal %>
+<%# ADR  : 0055, 0060, 0065, 0066 · UDR : 0006, 0041, 0047, 0052, 0053 %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
   <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
   <div class="mt-4 flex items-center gap-4">
@@ -11,8 +11,9 @@
         <%= ui_role_badge profile.role %>
         <% if profile.role == :team %>
           <%= ui_badge t(".second_factor_active"), tone: :success, dot: true %>
-        <% elsif profile.role == :school_admin %>
-          <%= ui_badge t(".pending"), tone: :warning, dot: true %>
+        <% elsif profile.position %>
+          <%= ui_badge t("school_admin.shared.positions.#{profile.position}"),
+                       tone: Entities::School::StaffPosition::MANAGERS.include?(profile.position) ? :info : :neutral %>
         <% end %>
       </div>
     </div>
@@ -45,6 +46,15 @@
     </div>
     <% case profile.role %>
     <% when :student %>
+      <div class="flex flex-wrap items-center justify-between gap-3 py-3">
+        <div class="min-w-0">
+          <dt class="text-mute"><%= t(".student_number") %></dt>
+          <dd id="profile_student_number" class="mt-0.5 font-mono font-medium tracking-wider text-ink"><%= profile.student_number %></dd>
+        </div>
+        <%= ui_button t(".correct_student_number"), href: edit_profile_student_number_path, variant: :secondary, size: :sm,
+                                                    icon: "pencil-square", "aria-label": t(".correct_student_number_label"),
+                                                    data: { turbo_frame: "modal" } %>
+      </div>
       <div class="py-3">
         <dt class="text-mute"><%= t(".classroom") %></dt>
         <dd class="mt-0.5 font-medium text-ink"><%= profile.classroom_name || t(".no_classroom") %></dd>
@@ -57,6 +67,17 @@
       <div class="py-3">
         <dt class="text-mute"><%= t(".material") %></dt>
         <dd class="mt-0.5 font-medium text-ink"><%= profile.material_name || t(".missing") %></dd>
+      </div>
+    <% when :school_admin %>
+      <div class="py-3">
+        <dt class="text-mute"><%= t(".school") %></dt>
+        <% if profile.position %>
+          <dd class="mt-0.5 font-medium text-ink">
+            <%= t(".position_at_school", position: t("school_admin.shared.positions.#{profile.position}"), school: profile.school_name) %>
+          </dd>
+        <% else %>
+          <dd class="mt-0.5 text-mute"><%= t(".no_school") %></dd>
+        <% end %>
       </div>
     <% when :team %>
       <div class="py-3">

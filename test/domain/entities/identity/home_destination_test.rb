@@ -32,9 +32,17 @@ module Entities
         assert_equal :teacher_home, destination(actor(:teacher), school_id: 4, onboarded: true)
       end
 
-      test "l'équipe va à son accueil, la direction attend la V2" do
+      test "l'équipe va à son accueil" do
         assert_equal :team_home, destination(actor(:team))
+      end
+
+      # ADR-0066 §4.1 : l'acteur de la direction porte l'établissement de son rattachement actif, nil sans.
+      test "la direction rattachée va à son accueil, sans établissement elle attend" do
+        attached = Actor.new(user_id: 1, role: :school_admin, school_id: 4, position: "censor")
+
+        assert_equal :school_admin_home, destination(attached)
         assert_equal :pending_account, destination(actor(:school_admin))
+        assert_includes HomeDestination::ALL, :school_admin_home
       end
     end
   end

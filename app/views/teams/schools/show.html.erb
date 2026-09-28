@@ -1,9 +1,17 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
-<%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année par niveau, enseignants en attente et rattachés %>
-<%# ADR  : 0030, 0041, 0059, 0063 · UDR : 0006, 0036, 0046, 0050 %>
+<%# Rôle : en-tête, direction (frame différé), classes par niveau (« − n + »), classes de l'année par niveau, enseignants %>
+<%# ADR  : 0030, 0041, 0059, 0063, 0066 · UDR : 0006, 0036, 0046, 0050, 0052 %>
 <% content_for :title, t(".page_title", name: @school.name) %>
 <% content_for :nav_key, "schools" %>
 <%= render "header", school: @school %>
+
+<%# UDR-0052 §3.10 : la direction de l'établissement, rendue par teams/school_staff_members (Lot B). Le src n'est posé
+    qu'une fois ce contrôleur fusionné : une route sans contrôleur lève une erreur serveur. %>
+<% staff_src = school_staff_members_path(@school.public_id) if defined?(Teams::SchoolStaffMembersController) %>
+<%= turbo_frame_tag "school_staff", src: staff_src, loading: :lazy,
+                                    class: "mb-8 block transition-opacity aria-busy:pointer-events-none aria-busy:opacity-50" do %>
+  <%= ui_loading_state variant: :skeleton, lines: 3 %>
+<% end %>
 
 <div class="grid gap-8 lg:grid-cols-main-aside">
   <section id="school_classrooms" aria-labelledby="school_classrooms_title" class="min-w-0 space-y-8">

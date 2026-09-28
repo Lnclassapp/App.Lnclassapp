@@ -30,6 +30,22 @@ class Identity::SecondFactorEnrollmentsControllerTest < ActionDispatch::Integrat
     assert_empty flash.to_h
   end
 
+  # ADR-0066 §4.2, UDR-0052 §3.12: the direction enrolls like the team; « Terminé » leads to its own home.
+  test "a member of the direction enrolls, and the backup codes lead to the direction home" do
+    sign_out
+    @member = create_school_admin(second_factor: false)
+    post session_path, params: { session: { contact: @member.contact, pin: "2468" } }
+    get new_identity_second_factor_enrollment_path
+    assert_select "p", text: "Obligatoire pour l'équipe et la direction."
+
+    post identity_second_factor_enrollment_path, params: { second_factor: enrollment_params(code: current_code) }
+
+    assert_response :success
+    assert_select "a[href='#{school_admin_home_path}']", text: "J'ai noté mes codes"
+    get school_admin_home_path
+    assert_response :success
+  end
+
   test "under Turbo, the backup codes replace the enrollment in place" do
     get new_identity_second_factor_enrollment_path
 

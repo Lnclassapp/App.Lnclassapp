@@ -107,13 +107,55 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#profile_information", text: /Second facteur : actif/
   end
 
-  test "a pending school admin reads that the account waits" do
+  # ED-05, UDR-0052 §3.11: the position badge replaces « En attente »; the school line reads « <Fonction> · <Établissement> ».
+  test "ED-05: a secretary reads her position and her school, and no waiting badge" do
+    sign_in_as create_school_admin(school: create_school(name: "Lycée Moderne de Treichville"), position: "secretary")
+
+    get profile_path
+
+    assert_response :success
+    assert_select "#profile_information" do
+      assert_select ".rounded-full", text: "Secrétaire"
+      assert_select "dt", text: "Établissement"
+      assert_select "dd", text: "Secrétaire · Lycée Moderne de Treichville"
+      assert_modal_link edit_profile_name_path, /Modifier/
+      assert_modal_link edit_profile_photo_path, /photo/
+    end
+    assert_select "#profile_information", text: /Compte en attente/, count: 0
+    assert_modal_link edit_profile_pin_path, /Changer mon PIN/
+  end
+
+  test "ED-03: a member of the direction without school opens their profile and reads « Aucun établissement »" do
     sign_in_as create_user(role: "school_admin")
 
     get profile_path
 
     assert_response :success
-    assert_select "#profile_information", text: /Compte en attente/
-    assert_select "dt", text: "Rôle", count: 0
+    assert_select "dd.text-mute", text: "Aucun établissement"
+    assert_select "#profile_information", text: /Compte en attente/, count: 0
+  end
+
+  # ED-52, UDR-0053 §3.2: the line and the « Corriger » button, whose modal arrives with the Lot F.
+  test "ED-52: a student reads their MENA number, with the button to correct it" do
+    sign_in_as create_student(student_number: "12345678A")
+
+    get profile_path
+
+    assert_select "dt", text: "Matricule"
+    assert_select "dd#profile_student_number.font-mono.tracking-wider", text: "12345678A"
+    assert_select "a[href='#{edit_profile_student_number_path}'][data-turbo-frame=modal][aria-label='Corriger mon matricule']",
+                  text: /Corriger/
+  end
+
+  test "ED-52: a teacher, a member of the direction and a team member see neither the line nor the button" do
+    [ create_teacher, create_school_admin, create_team_member ].each do |account|
+      sign_in_as account
+
+      get profile_path
+
+      assert_select "dt", text: "Matricule", count: 0
+      assert_select "a[href='#{edit_profile_student_number_path}']", 0
+      sign_out
+    end
   end
 end

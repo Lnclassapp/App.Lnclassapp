@@ -30,6 +30,13 @@ module Policies
         assert call(session, :enroll, actor: Entities::Identity::Actor.new(user_id: 7, role: :team)).success?
       end
 
+      # ADR-0066 §4.2 : la direction a le second facteur de l'équipe.
+      test "un compte de la direction s'enrôle et vérifie comme l'équipe" do
+        assert call(session(role: "school_admin"), :enroll).success?
+        assert call(session(role: "school_admin", confirmed: true), :verify).success?
+        assert_equal :forbidden, call(session(role: "student"), :verify).code
+      end
+
       test "une étape inconnue lève ArgumentError" do
         assert_raises(ArgumentError) { call(session, :reset) }
       end

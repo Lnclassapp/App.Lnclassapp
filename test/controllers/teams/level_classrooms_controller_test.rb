@@ -19,7 +19,7 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
   def remove_path(classroom, school = @school) = school_level_classroom_path(school.public_id, classroom.public_id)
 
   test "CN-09 : un élève, un enseignant ou une direction reçoivent 403, et rien n'est écrit" do
-    [ create_student, create_teacher(school: @school), create_user(role: "school_admin") ].each do |outsider|
+    [ create_student, create_teacher(school: @school), create_school_admin ].each do |outsider|
       sign_in_as outsider
 
       post add_path, params: { level: "6eme" }, as: :turbo_stream

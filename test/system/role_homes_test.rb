@@ -52,15 +52,30 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_signs_out
   end
 
-  # school_admin is V2 (HomeDestination): the account lands on the pending screen, in the shell of its role, whose four
-  # destinations are all inactive.
-  test "the school admin lands on the pending screen, with every destination of their navigation inactive" do
-    # Lot 0a: the direction is not asked for its second factor before the Lot 0b (ADR-0066 §4.2), whose test replaces this one.
-    sign_in_as create_user(role: "school_admin", second_factor: false, first_name: "Koffi")
+  # ED-03, ED-04 (UDR-0052 §3.1, §3.9): the direction's five destinations are drawn. Without an active school, the account
+  # lands on the waiting screen « Aucun établissement », its five entries active, and keeps its profile.
+  test "a member of the direction without school lands on the waiting screen, with five active destinations" do
+    sign_in_as create_user(role: "school_admin", first_name: "Koffi")
 
     assert_home pending_account_path
-    assert_selector "main", text: I18n.t("identity.pending_accounts.show.other.title")
-    assert_navigation inactive: %i[home classrooms teachers students]
+    assert_selector "main", text: I18n.t("identity.pending_accounts.show.school_admin_without_school.title")
+    assert_direction_navigation
+    assert_signs_out
+  end
+
+  # The controllers of Classes, Enseignants and Élèves arrive with the lots C, D, E: only the home and « Établissement »
+  # are followed here; their own system tests open the others.
+  test "an attached member of the direction reaches their home, then « Établissement »" do
+    sign_in_as create_school_admin(first_name: "Koffi", position: "censor")
+
+    assert_home school_admin_home_path, greeting: I18n.t("shared.home.skeleton.greeting", name: "Koffi")
+    assert_direction_navigation
+    { school: school_admin_school_path, home: school_admin_home_path }.each do |key, path|
+      within("aside nav") { click_link tn(key) }
+
+      assert_current_path path
+      within("aside nav") { assert_selector "a[aria-current='page'][href='#{path}']", text: tn(key) }
+    end
     assert_signs_out
   end
 
@@ -150,6 +165,17 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path root_path
     visit student_home_path
     assert_current_path new_session_path
+  end
+
+  DIRECTION_DESTINATIONS = %i[home classrooms teachers students school].freeze
+
+  # Five real links, none inactive, in the sidebar and in the bottom bar alike.
+  def assert_direction_navigation
+    within("aside nav") do
+      assert_selector "a[href]", count: 5
+      assert_no_selector "a[aria-disabled]"
+      DIRECTION_DESTINATIONS.each { |key| assert_selector "a[href]", text: tn(key) }
+    end
   end
 
   # Under a loaded run, the page may still be swapped (Turbo visit, then the reload of ADR-0049) after the menu opened:

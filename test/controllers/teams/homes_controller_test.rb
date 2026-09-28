@@ -16,7 +16,7 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
   def get_recent_content = get(team_home_path, headers: { "Turbo-Frame" => RECENT_FRAME })
 
   test "a teacher, a student and a school admin receive 403" do
-    [ create_teacher, create_student, create_user(role: "school_admin") ].each do |user|
+    [ create_teacher, create_student, create_school_admin ].each do |user|
       sign_in_as user
 
       get team_home_path

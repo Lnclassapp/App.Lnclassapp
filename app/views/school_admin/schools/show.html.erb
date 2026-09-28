@@ -1,0 +1,18 @@
+<%# 🌐 UI · school_admin/schools/show — page « Établissement » de la direction (Queries::School::DirectionSchoolQuery::Row) %>
+<%# Rôle : en-tête (nom, DRENA, type) ; frames différés du code (school_codes, Lot G) et du personnel (staff_members, Lot B) %>
+<%# ADR  : 0057, 0066 · UDR : 0005, 0044, 0052 %>
+<% content_for :title, t(".page_title", name: @school.name) %>
+<%= ui_page_header title: @school.name, subtitle: t(".subtitle", drena: @school.drena_name, type: t("school_types.#{@school.school_type}")) %>
+
+<%# Le frame ne reçoit son src qu'une fois son contrôleur fusionné (Lot G : code, Lot B : personnel) : une route sans
+    contrôleur lève une erreur serveur ; d'ici là, le frame garde son squelette. %>
+<% frames = { "school_code" => (school_admin_school_code_path if defined?(SchoolAdmin::SchoolCodesController)),
+              "school_staff" => (school_admin_staff_members_path if defined?(SchoolAdmin::StaffMembersController)) } %>
+<div class="grid gap-6">
+  <% frames.each do |frame, src| %>
+    <%= turbo_frame_tag frame, src:, loading: :lazy, "aria-label": t(".frames.#{frame}"),
+                               class: "block transition-opacity aria-busy:pointer-events-none aria-busy:opacity-50" do %>
+      <%= ui_loading_state variant: :skeleton, lines: 3 %>
+    <% end %>
+  <% end %>
+</div>

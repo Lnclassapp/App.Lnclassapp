@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::SecondFactorsController
-# Rôle : vérification du second facteur d'un compte team (code TOTP ou code de secours), une fois par session
-# ADR  : 0026, 0031, 0050
+# Rôle : vérification du second facteur de l'équipe et de la direction (code TOTP ou de secours), une fois par session
+# ADR  : 0026, 0031, 0050, 0066 · UDR : 0052
 module Identity
   class SecondFactorsController < ApplicationController
     allow_unverified_second_factor
@@ -14,13 +14,14 @@ module Identity
     def create
       @form = form_input
       render_result verify.call(session: current_session, dto: @form, ip: request.remote_ip), form: :new, success: lambda { |_|
-        redirect_to main_app.team_home_path, notice: t(".verified"), status: :see_other
+        forget_resolution
+        redirect_to_home notice: t(".verified"), status: :see_other
       }
     end
 
     private
 
-    # Déjà vérifié (ou compte hors équipe) : l'accueil ; pas encore enrôlé : l'enrôlement.
+    # Déjà vérifié (ou compte sans second facteur) : l'accueil ; pas encore enrôlé : l'enrôlement.
     def leave_when_not_expected
       return redirect_to_home if current_actor
 

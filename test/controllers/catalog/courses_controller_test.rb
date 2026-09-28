@@ -207,8 +207,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{edit_teams_course_path(@course.slug)}']", 0
   end
 
-  test "a school staff member reads the catalogue and a published course, without any action" do
-    sign_in_as create_user(role: "school_admin")
+  test "an attached member of the direction reads the catalogue and a published course, without any action" do
+    sign_in_as create_school_admin
 
     get courses_path
     assert_response :success
@@ -217,6 +217,17 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#course-actions-menu", 0
     assert_select "a[href='#{course_assignments_path(@course.slug)}']", 0
+  end
+
+  # ED-03, ADR-0066 §4.2: without an active school, the direction is held on the waiting screen.
+  test "a member of the direction without school is sent to the waiting screen by the catalogue" do
+    sign_in_as create_user(role: "school_admin")
+
+    [ courses_path, course_path(@course.slug) ].each do |path|
+      get path
+
+      assert_redirected_to pending_account_path, path
+    end
   end
 
   test "a course without essential sheet nor content shows the empty state and no content section" do

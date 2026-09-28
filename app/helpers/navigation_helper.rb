@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006
+# UDR  : 0006, 0052
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -22,7 +22,8 @@ module NavigationHelper
             [ :schools, :schools_path, "building-library" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
             [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
     school_admin: [ [ :home, :school_admin_home_path, "home" ], [ :classrooms, :school_admin_classrooms_path, "squares-2x2" ],
-                    [ :teachers, :school_admin_teachers_path, "user-group" ], [ :students, :school_admin_students_path, "users" ] ]
+                    [ :teachers, :school_admin_teachers_path, "user-group" ], [ :students, :school_admin_students_path, "users" ],
+                    [ :school, :school_admin_school_path, "building-library" ] ]
   }.freeze
   ACCOUNT_LINKS = [ [ :profile, :profile_path, "user-circle", nil ],
                     [ :sign_out, :session_path, "arrow-right-start-on-rectangle", :delete ] ].freeze

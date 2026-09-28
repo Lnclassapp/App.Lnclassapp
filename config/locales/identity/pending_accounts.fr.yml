@@ -1,4 +1,4 @@
-# Compte sans accueil : élève sans classe, enseignant sans école ou en attente de validation — ADR-0030, ADR-0040, ADR-0063, UDR-0050
+# Compte sans accueil : élève sans classe, direction sans établissement, enseignant sans école ou en attente de validation — ADR-0030, ADR-0040, ADR-0063, ADR-0066, UDR-0050, UDR-0052 §3.9
 fr:
   identity:
     pending_accounts:
@@ -9,12 +9,20 @@ fr:
           title: "Tu n'as pas encore de classe"
           description: "Demande le code de ta classe à ton enseignant, puis rejoins-la."
           join: "Rejoindre une classe"
-        teacher:
-          title: "Votre compte attend son école"
-          description: "L'équipe Lnclass vous rattache à votre établissement. Vous serez prévenu dès que c'est fait."
+        school_admin_without_school:
+          title: "Aucun établissement"
+          description: "Votre compte de direction n'est rattaché à aucun établissement actif. Contactez l'équipe Lnclass."
+        teacher_without_school:
+          title: "Vous n'êtes rattaché à aucun établissement"
+          description: "Saisissez le code de votre nouvel établissement pour le rejoindre. Retiré par erreur ? Demandez à votre ancienne direction de vous réintégrer."
         other:
           title: "Votre compte est en attente"
           description: "Cet espace n'est pas encore ouvert. Contactez l'équipe Lnclass."
+        rejoin:
+          school_code: "Code d'établissement"
+          placeholder: "K7M-4QZ"
+          hint: "6 caractères, transmis par votre établissement."
+          submit: "Rejoindre l'établissement"
         join_request:
           pending:
             title: "Votre demande est en cours de validation"

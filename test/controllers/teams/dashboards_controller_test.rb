@@ -15,7 +15,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
   def figure(key, count) = including("#{count} #{tl("key_figures.#{key}", count:)}")
 
   test "a teacher, a student and a school admin receive 403; a visitor goes to the sign-in" do
-    [ create_teacher, create_student, create_user(role: "school_admin") ].each do |user|
+    [ create_teacher, create_student, create_school_admin ].each do |user|
       sign_in_as user
 
       get team_dashboard_path

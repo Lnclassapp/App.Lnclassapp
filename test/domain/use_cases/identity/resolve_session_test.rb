@@ -77,6 +77,12 @@ module UseCases
         assert_equal 9, result.value.session.user_id
       end
 
+      # ADR-0066 §4.2 : la direction n'a pas d'acteur tant que son second facteur n'est pas vérifié.
+      test "a school admin session without a verified second factor gets no actor, a verified one gets it" do
+        assert_nil resolve(session(role: "school_admin", created_at: NOW - 1.hour)).value.actor
+        assert_not_nil resolve(session(role: "school_admin", created_at: NOW - 1.hour, verified_at: NOW - 1.hour)).value.actor
+      end
+
       test "a verified team account gets its actor" do
         assert resolve(session(role: "team", created_at: NOW - 1.hour, verified_at: NOW - 1.hour)).value.actor.team?
       end

@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · UseCases::Identity::ResolveSession
 # Rôle : retrouve la session d'un jeton, l'expire ou la rafraîchit, et construit l'acteur
-# ADR  : 0028, 0031, 0050
+# ADR  : 0028, 0031, 0050, 0066
 module UseCases
   module Identity
     class ResolveSession
-      # actor est nil pour un compte team dont le second facteur n'est pas vérifié (ADR-0031).
+      # actor est nil pour un compte de l'équipe ou de la direction dont le second facteur n'est pas vérifié (ADR-0031, ADR-0066).
       Resolved = Data.define(:actor, :session)
 
       def initialize(sessions:, users:, policy:, digest_key:, clock:)
@@ -44,7 +44,7 @@ module UseCases
       end
 
       def actor_for(session)
-        return if session.team? && !session.verified?
+        return if session.privileged? && !session.verified?
 
         @users.actor_for(user_id: session.user_id)
       end

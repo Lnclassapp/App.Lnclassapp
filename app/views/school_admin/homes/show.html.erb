@@ -1,0 +1,5 @@
+<%# 🌐 UI · school_admin/homes/show — accueil de la direction, squelette (Lot 0b) ; le tableau de bord le remplace (Lot D) %>
+<%# Rôle : la direction connectée atterrit sur une page qui existe ; sections de HOME_SECTIONS[:school_admin] %>
+<%# ADR  : 0066 · UDR : 0006, 0052 %>
+<% content_for :title, t("shared.home.sections.overview.title") %>
+<%= render "shared/home/skeleton", user: shell_user %>

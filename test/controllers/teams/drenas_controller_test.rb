@@ -12,7 +12,7 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
   test "a teacher, a student and a school admin receive 403 on every action" do
     drena = create_drena
 
-    [ create_teacher, create_student, create_user(role: "school_admin") ].each do |user|
+    [ create_teacher, create_student, create_school_admin ].each do |user|
       sign_in_as user
 
       get drenas_path
