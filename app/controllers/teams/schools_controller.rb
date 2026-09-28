@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolsController
 # Rôle : liste nationale filtrée, fiche (et enseignants en attente), modification en modale, désactivation, suppression refusée
-# ADR  : 0026, 0030, 0036, 0063 · UDR : 0006, 0036, 0050 · aucune création : un établissement n'entre que par l'import
+# ADR  : 0026, 0030, 0036, 0059, 0063 · UDR : 0006, 0036, 0046, 0050 · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
     LIST_FRAME = "schools".freeze
@@ -19,6 +19,7 @@ module Teams
       @school = Queries::School::SchoolDetailQuery.new.call(public_id: params[:public_id])
       return render_not_found if @school.nil?
 
+      @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
       @join_requests = Queries::School::JoinRequestsQuery.new.for_school(school_public_id: @school.public_id)
     end
 

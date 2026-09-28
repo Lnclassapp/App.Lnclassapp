@@ -55,7 +55,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open]" do
         fill_in "level[name]", with: "Tle"
         fill_in "level[position]", with: "7"
-        select t("teams.levels.cycles.second"), from: "level[cycle]"
+        choose t("teams.levels.cycles.second")
         click_on t("teams.levels.new.submit")
       end
       assert_toast t("teams.levels.create.created", name: "Tle")

@@ -72,6 +72,27 @@ class DesignSystemTest < ApplicationSystemTestCase
     end
   end
 
+  test "a radio group is a fieldset of 48 px options, driven by the arrow keys, its error under the group" do
+    within("[data-example=field-valid] fieldset#sample_cycle") do
+      assert_selector "legend", text: t("design.index.fields.cycle")
+      assert_checked_field "sample_cycle_first"
+      assert_selector "input[type=radio][aria-describedby=sample_cycle_hint]", count: 2
+      option = find("label", text: t("design.index.fields.cycles").first[:label])
+      assert_operator option.native.rect.height, :>=, 48
+      assert_equal "rgb(229, 245, 255)", css(option, "background-color")
+
+      find_field("sample_cycle_first").send_keys(:right)
+      assert_checked_field "sample_cycle_second"
+      assert_selector "label:has(input:checked)", count: 1, text: t("design.index.fields.cycles").last[:label]
+    end
+    within("[data-example=field-invalid] fieldset#invalid_sample_cycle") do
+      assert_no_selector "input:checked"
+      assert_selector "input[aria-invalid=true][aria-describedby=invalid_sample_cycle_error]", count: 2
+      assert_selector "div.grid + #invalid_sample_cycle_error", text: t("design.index.sample.errors.cycle")
+      assert_equal "rgb(200, 50, 43)", css(first("label"), "border-top-color")
+    end
+  end
+
   test "the modal opens, closes by its button, by Escape and by the backdrop" do
     dialog = "dialog#demo-modal"
     click_on t("design.index.modal.open")

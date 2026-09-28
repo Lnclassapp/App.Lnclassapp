@@ -9,8 +9,10 @@ module Teams
       @levels = levels_query.call
     end
 
+    # Position suivante proposée, et premier cycle coché par défaut (chantier cycles-en-radio).
     def new
-      @form = Dtos::Catalog::LevelInput.new(position: levels_query.call.map(&:position).max.to_i + 1)
+      @form = Dtos::Catalog::LevelInput.new(position: levels_query.call.map(&:position).max.to_i + 1,
+                                            cycle: Entities::Catalog::Level::CYCLES.first)
     end
 
     def create
