@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-27 |
 | **Chantier** | `docs/chantiers/profil-utilisateur` |
 | **Remplace** | — |
