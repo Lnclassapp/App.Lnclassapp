@@ -105,3 +105,10 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - Le menu ⋮ `#school-header-actions` devient : « Modifier », « Régénérer le code » (confirmation `regenerate-school-code`), « Désactiver » si actif.
 - L'état vide des enseignants dit désormais qu'ils s'inscrivent avec le code d'établissement.
 
+## Amendement du 2026-09-28 — cycle en boutons radio
+
+*Chantier [`docs/chantiers/cycles-en-radio`](../../chantiers/cycles-en-radio/prd.md), [UDR-0005](0005-design-system-fondateur.md#amendement-du-2026-09-28--groupe-de-boutons-radio). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Modale `school-modal`** : type et statut restent des `select`, sur deux colonnes (`sm:grid-cols-2`) ; le cycle devient `ui_radio_group` « Cycle » (`fieldset#school_cycle`) sur toute la largeur, sous eux : « Premier cycle » (`first`), « Premier et second cycles » (`both`), côte à côte dès `sm`, empilées au téléphone.
+- **Valeur cochée** : le cycle enregistré (le formulaire ne sert qu'à modifier ; un établissement a toujours un cycle). Le « 1er cycle par défaut » demandé le 2026-09-28 n'a d'objet qu'à la création, qui n'existe pas ici (§2) : sa valeur équivalente serait `first`.
+- **Le filtre « Tous les cycles » reste une liste déroulante** : c'est un filtre avec une option « tous », pas une saisie.

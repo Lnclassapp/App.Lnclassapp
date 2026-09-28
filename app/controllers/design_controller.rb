@@ -12,15 +12,17 @@ class DesignController < ApplicationController
     attribute :password, :string
     attribute :bio, :string
     attribute :level, :string
+    attribute :cycle, :string, default: "first"
     attribute :terms, :boolean
 
     validate { errors.add(:name, I18n.t("design.index.sample.errors.name")) if name.blank? }
 
     def self.with_errors
-      new(email: "awa@exemple").tap do |sample|
+      new(email: "awa@exemple", cycle: nil).tap do |sample|
         sample.errors.add(:name, I18n.t("design.index.sample.errors.name"))
         sample.errors.add(:email, I18n.t("design.index.sample.errors.email"))
         sample.errors.add(:level, I18n.t("design.index.sample.errors.level"))
+        sample.errors.add(:cycle, I18n.t("design.index.sample.errors.cycle"))
         sample.errors.add(:terms, I18n.t("design.index.sample.errors.terms"))
       end
     end
