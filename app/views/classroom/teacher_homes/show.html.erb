@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
-<%# Rôle : sections dans l'ordre de HOME_SECTIONS[:teacher] (mes classes, activité « Bientôt », cours) ; aucun montant %>
-<%# ADR  : 0026, 0048 · UDR : 0006, 0007, 0026 %>
+<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes, activité, cours), puis « Inviter un collègue » ; aucun montant %>
+<%# ADR  : 0026, 0048, 0063 · UDR : 0006, 0007, 0026, 0050 %>
 <% content_for :title, t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle", school: @home.school_name) do %>
   <%= ui_subject_badge @home.material_name, category: @home.material_category %>
@@ -32,5 +32,8 @@
         </span>
       <% end %>
     <% end %>
+  <% end %>
+  <% if @invite %>
+    <%= render "identity/referrals/invite", invite: @invite %>
   <% end %>
 </div>

@@ -1,0 +1,38 @@
+<%# 🌐 UI · identity/referrals/_invite — bloc « Inviter un collègue » (Queries::Identity::ReferralQuery::Row) %>
+<%# Rôle : lien personnel /e/<code>?ref=<jeton>, WhatsApp, SMS, copier, partage natif (comptés par identity--share), compteur %>
+<%# ADR  : 0049, 0057, 0063 · UDR : 0050 · Stimulus : identity--share %>
+<%# locals: (invite:) -%>
+<% link = school_code_signup_url(invite.school_code, ref: invite.referral_token) %>
+<% message = t("identity.referrals.invite.message", school: invite.school_name, link:) %>
+<%= ui_card title: t("identity.referrals.invite.title"), subtitle: t("identity.referrals.invite.subtitle", school: invite.school_name),
+            icon: "user-plus", id: "invite_colleagues" do %>
+  <div class="flex flex-wrap items-center gap-3">
+    <p id="referral_count" class="text-sm text-mute">
+      <% if invite.referred_count.zero? %>
+        <%= t("identity.referrals.invite.count", count: 0) %>
+      <% else %>
+        <span class="font-display text-2xl font-extrabold text-ink tabular-nums"><%= invite.referred_count %></span>
+        <%= t("identity.referrals.invite.count_label", count: invite.referred_count) %>
+      <% end %>
+    </p>
+  </div>
+
+  <p class="mt-4 text-xs font-semibold tracking-wider text-mute uppercase"><%= t("identity.referrals.invite.link_label") %></p>
+  <a id="referral_link" href="<%= link %>" class="mt-1 block text-sm font-medium break-all text-brand-strong underline-offset-4 hover:underline"><%= link %></a>
+
+  <div id="referral_share_actions" class="mt-5 flex flex-wrap gap-3" data-controller="identity--share"
+       data-identity--share-url-value="<%= teacher_referral_shares_path %>" data-identity--share-link-value="<%= link %>"
+       data-identity--share-text-value="<%= message %>">
+    <%= ui_button t("identity.referrals.invite.whatsapp"), href: whatsapp_share_url(message), variant: :brand, icon: "chat-bubble-left-right",
+                  target: "_blank", rel: "noopener",
+                  data: { action: "identity--share#record", "identity--share-channel-param": "whatsapp" } %>
+    <%= ui_button t("identity.referrals.invite.sms"), href: sms_share_url(message), variant: :secondary, icon: "device-phone-mobile",
+                  data: { action: "identity--share#record", "identity--share-channel-param": "sms" } %>
+    <%= ui_button t("identity.referrals.invite.copy"), variant: :secondary, icon: "link", "aria-label": t("identity.referrals.invite.copy_label"),
+                  data: { action: "identity--share#copy" } %>
+    <%= ui_button t("identity.referrals.invite.native"), variant: :secondary, icon: "share", hidden: true,
+                  data: { action: "identity--share#native", "identity--share-target": "native" } %>
+    <template data-identity--share-target="copied"><%= ui_toast t("identity.referrals.invite.copied"), type: :success %></template>
+    <template data-identity--share-target="failed"><%= ui_toast t("identity.referrals.invite.copy_failed"), type: :warning %></template>
+  </div>
+<% end %>

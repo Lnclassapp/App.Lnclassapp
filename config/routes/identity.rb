@@ -14,6 +14,7 @@ post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher
 # ADR-0057 : le lien à partager d'un code d'établissement ouvre l'inscription, établissement déjà trouvé (limité en débit).
 get "e/:code", to: "identity/teacher_registrations#with_code", as: :school_code_signup
 # ADR-0063 : « Inviter un collègue » ; un clic « Partager » est enregistré par le serveur (204), sur la session.
+get "teachers/invite", to: "identity/referrals#show", as: :teacher_invite
 post "teachers/invite/shares", to: "identity/referral_shares#create", as: :teacher_referral_shares
 get "invitations/:token", to: "identity/invitations#show", as: :invitation
 post "invitations/:token", to: "identity/invitations#accept", as: :accept_invitation
