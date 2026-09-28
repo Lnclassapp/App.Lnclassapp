@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
-<%# Rôle : en-tête, classes de l'année groupées par niveau (code, effectif, enseignants), enseignants rattachés %>
-<%# ADR  : 0030, 0041 · UDR : 0006, 0036 %>
+<%# Rôle : en-tête, classes par niveau (bloc « − n + »), classes de l'année groupées par niveau (code, effectif, enseignants), enseignants %>
+<%# ADR  : 0030, 0041, 0059 · UDR : 0006, 0036, 0046 %>
 <% content_for :title, t(".page_title", name: @school.name) %>
 <% content_for :nav_key, "schools" %>
 <%= render "header", school: @school %>
@@ -13,6 +13,7 @@
       </h2>
       <p class="mt-1 text-sm text-mute"><%= t(".school_year", year: @school.school_year) %></p>
     </div>
+    <%= render "level_classrooms", block: @level_classrooms %>
     <% if @school.levels.empty? %>
       <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
     <% else %>
