@@ -333,7 +333,8 @@ module UseCases
         schools = RecordingSchools.new
         subject = ImportSchools.new(drenas: Repositories::School::DrenaRepository.new, schools:,
                                     classrooms: Repositories::Classroom::ClassroomRepository.new,
-                                    taxonomy: Repositories::Catalog::TaxonomyRepository.new)
+                                    taxonomy: Repositories::Catalog::TaxonomyRepository.new,
+                                    classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new)
 
         report = run_import(document({ "name" => "Lycée A", "type" => "public" }, { "name" => "Lycée B", "type" => "privée" },
                                      { "name" => "Collège C", "type" => "public" }), adapter: subject)

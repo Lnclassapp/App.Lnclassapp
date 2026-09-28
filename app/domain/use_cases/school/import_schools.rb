@@ -22,7 +22,6 @@ module UseCases
 
       # classroom_plan : le barème, lu une fois à la préparation (ADR-0058) ; random : tirage des codes, injectable.
       def initialize(drenas:, schools:, classrooms:, taxonomy:, classroom_plan:, random: SecureRandom)
-
         @drenas = drenas
         @schools = schools
         @classrooms = classrooms

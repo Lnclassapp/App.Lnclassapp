@@ -59,7 +59,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | « Mon profil » pour tous : nom, numéro et PIN modifiables sous PIN actuel (ADR-0055, UDR-0041) |
 | [`generer-classes`](generer-classes/memo.md) | livré | Générer après coup les classes des établissements qui n'en ont aucune de l'année (ADR-0056, UDR-0043) |
 | [`photo-de-profil`](photo-de-profil/memo.md) | en cours | Photo de profil pour tous : recadrée par le navigateur, vérifiée par le serveur, visible de soi, de ses enseignants et de l'équipe (ADR-0060, UDR-0047) |
-
+| [`classes-par-niveau`](classes-par-niveau/memo.md) | livré | Ajuster les classes d'un établissement niveau par niveau : ajouter la suivante, retirer la dernière si elle n'a jamais servi (ADR-0059, UDR-0046) |
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | « Déjà en cours » en toast d'information vers le rapport, badge « Génération en cours », ⋮ collé à droite des tableaux au téléphone (amendements UDR-0042, UDR-0043) |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | Barème des classes générées en base, modifiable par l'équipe à l'écran ; menu « Classes » des établissements (ADR-0058, UDR-0045) |
 
