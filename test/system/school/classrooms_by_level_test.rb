@@ -65,12 +65,40 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
     assert_not_reloaded
   end
 
+  # Après un refus, la confirmation est vraiment refermée : la page reste utilisable sans rechargement.
+  def assert_page_usable
+    assert_no_selector "dialog[open]"
+    assert page.evaluate_script("document.querySelectorAll('dialog:modal').length === 0"), "une <dialog> reste modale"
+    within("#school_header") { find("button[aria-haspopup=menu]").click }
+    assert_selector "#school_header [role=menu]", visible: true
+    find("#school_header button[aria-haspopup=menu]").click
+    within("#level_classrooms_5eme") { click_on "Ajouter une classe de 5ème" }
+    assert_toast "Classe « 5ème 1 » ajoutée."
+    assert_not_reloaded
+  end
+
+  # Un autre onglet a retiré la classe entre l'ouverture de la confirmation et son envoi : 404.
+  def refuse_gone
+    mark_page
+    within("#level_classrooms_6eme") { click_on "Retirer une classe de 6ème" }
+    Orm::Classroom.where(id: @sixths.last.id).delete_all
+    within("dialog[open]") { click_on "Retirer la classe" }
+
+    assert_toast "Cette classe n'existe plus"
+    assert_page_usable
+  end
+
   test "« + » ajoute la 6ème 5, « − » la retire après confirmation, sans rechargement" do
     add_then_remove
   end
 
-  test "« − » refuse une classe qui a un élève, et rien ne change" do
+  test "« − » refuse une classe qui a un élève, et rien ne change ; la page reste utilisable" do
     refuse_used
+    assert_page_usable
+  end
+
+  test "« − » sur une classe retirée par un autre onglet : 404, et la page reste utilisable" do
+    refuse_gone
   end
 
   test "« Annuler » ferme la confirmation sans rien retirer" do
@@ -90,6 +118,14 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
 
       add_then_remove
       refuse_used
+      assert_page_usable
+    end
+  end
+
+  test "à 390 px, un 404 laisse aussi la page utilisable" do
+    with_mobile_viewport do
+      visit school_path(@school.public_id)
+      refuse_gone
     end
   end
 end

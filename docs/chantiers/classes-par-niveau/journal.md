@@ -23,10 +23,13 @@
 - Première capture au bureau : en grille à deux colonnes, `last:border-b-0` laissait une bordure sous l'avant-dernière ligne seulement. Bordure passée en haut de chaque ligne.
 - Le titre de la fiche est « Classes (5) », pas « 5 classes » : première version du test système corrigée avant exécution.
 
+- **Bug bloquant trouvé par le challenger (PR #48)** : après un « − » refusé (422 ou 404), la `<dialog>` perdait son attribut `open` sous le `replace … method: :morph` mais restait `:modal` (couche supérieure) : toute la page devenait inerte jusqu'au rechargement, au bureau comme à 390 px. `modal#submitEnd` ne ferme qu'un envoi réussi, et le morphing retire `open` sans appeler `close()`. Le test système ne le voyait pas : le refus était toujours la dernière action du parcours. Test rouge ajouté (refus puis menu ⋮ et « + », et le 404 d'un second onglet, à 1 280 et 390 px : 4 échecs « une <dialog> reste modale »), puis correctif générique dans `modal_controller` : un `MutationObserver` sur `open` referme vraiment (`close()`) une boîte restée modale sans `open`. Toute modale morphée en profite (refresh, menus de ligne UDR-0042).
+
 ## Ce qu'on a appris sur la codebase
 
 - `ui_modal(trigger:)` accepte un contenu HTML : un `span.sr-only` suffit pour un déclencheur icône seule avec un nom accessible, sans toucher au composant.
 - `Orm::Classroom.lock.exists?(id:)` pose bien `FOR UPDATE` : c'est le même verrou que `lock_by_join_code`, ce qui sérialise un retrait et une adhésion.
+- Retirer l'attribut `open` d'une `<dialog>` ouverte par `showModal()` ne la retire pas de la couche supérieure dans Chrome : seul `close()` le fait. Tout morphing (Turbo 8) d'une boîte ouverte y est exposé.
 - Les clés étrangères vers `classrooms` sont toutes `restrict` : même un oubli dans `delete_if_unused` ne supprimerait pas une classe utilisée.
 
 ## Vérifications (2026-09-28, local)
@@ -41,6 +44,7 @@
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Le refus conseille « archivez-la plutôt », mais aucun geste n'archive une seule classe | Hors périmètre (ADR-0041 : archivage de l'année, V3) | à ouvrir si le porteur confirme le besoin |
+| La vérification « dernière du niveau » se fait hors verrou : un « + » concurrent entre la vérification et la suppression ferait retirer une classe qui n'est plus la dernière (vide, donc sans perte, mais numérotation trouée). La déplacer sous le `FOR UPDATE` de la classe ne suffirait pas (un verrou de ligne n'empêche pas l'insertion d'une autre classe) : il faudrait verrouiller la ligne de l'établissement dans l'ajout **et** le retrait, donc toucher `SchoolRepositoryPort`, partagé avec les chantiers parallèles | Fenêtre de quelques millisecondes, conséquence bénigne | à ouvrir après les merges parallèles |
 | Pas de saisie d'un nombre cible par niveau | Hors périmètre ; les use cases le permettraient en boucle | — |
 | Décisions par défaut du memo à confirmer par le porteur (suppression physique, « − » sur un établissement non actif, audit sous `school.changed`) | ADR-0059 et UDR-0046 restent « Proposé » | — |
 

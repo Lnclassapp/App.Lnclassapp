@@ -47,7 +47,7 @@ Sur la fiche d'un établissement (UDR-0036), les classes de l'année sont group�
 - Réponse unique `teams/level_classrooms/update.turbo_stream.erb`. Succès (Turbo Stream) : toast de succès — « Classe « 6ème 5 » ajoutée. Code : KFM37 » (code par `JoinCode.display`) ou « Classe « 6ème 5 » retirée. » ; `replace "school_level_classrooms"` en `method: :morph` ; `refresh(request_id: nil)`.
 - Refus (Turbo Stream, 422 ; 404 pour une classe déjà retirée) : toast d'erreur au motif du use case, `replace "school_level_classrooms"` (la `<dialog>` se referme). 403 : toast d'erreur « forbidden » seul.
 - Sans Turbo : redirection 303 vers la fiche, `notice` ou `alert` au même texte.
-- Aucun contrôleur Stimulus nouveau : `modal` (UDR-0005) pour la confirmation.
+- Aucun contrôleur Stimulus nouveau : `modal` (UDR-0005) pour la confirmation. Le morphing du bloc retire `open` d'une boîte ouverte par `showModal()` : `modal` observe cet attribut et referme alors vraiment la boîte (`close()`), sinon elle resterait dans la couche supérieure et la page serait inerte (bug du 2026-09-28, PR #48). Après un refus, la page doit rester utilisable sans rechargement (test système).
 
 **États obligatoires**
 - Vide : référentiel sans niveau (`ui_empty_state`) ; ligne à 0 (« − » désactivé). Chargement : état occupé de Turbo sur le formulaire soumis (bouton désactivé pendant l'envoi). Erreur : toast d'erreur, bloc inchangé. Succès : toast, nombre à jour, fiche fusionnée.
