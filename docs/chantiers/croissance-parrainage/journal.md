@@ -85,4 +85,4 @@
 
 ## Suites prévues
 
-- **Vérification du numéro par WhatsApp** (demande du porteur, 2026-09-28) : à l'inscription sans code, un code envoyé sur WhatsApp par un hook **n8n** confirme le numéro avant que la demande n'entre dans la file de l'établissement. Réduit la saturation des 5 places (M1) et la réservation du numéro d'un tiers. Chantier à ouvrir ; rien n'est livré ici.
+- **Vérification du numéro par WhatsApp** (demande du porteur, 2026-09-28) : à l'inscription sans code, un code envoyé sur WhatsApp par un hook **n8n** confirme le numéro avant que la demande n'entre dans la file de l'établissement. Réduit la saturation des 5 places (M1) et la réservation du numéro d'un tiers. Chantier ouvert au backlog : [`verification-whatsapp`](../verification-whatsapp/memo.md) ; rien n'est livré ici.
