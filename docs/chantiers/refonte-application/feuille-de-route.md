@@ -256,7 +256,8 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Tables** | `school_staffs` (fonction en colonne, ADR-0044). Les invitations de direction réutilisent `invitations`, dont le type `school_staff` existe depuis la V1. Aucune autre table sans décision |
 | **Décisions préalables** | F-14 (ADR-0036), F-16 (ADR-0038), F-22 (ADR-0044), F-25 (ADR-0047) : toutes `Accepté` le 2026-09-25. ADR-0057 et UDR-0044 (code d'établissement), ADR-0063 et UDR-0050 (comptes en attente) : **acceptées par le porteur le 2026-09-28** (Q4), la V2 peut les amender |
 | **Contradiction ouverte** | C-31 (interface de l'organisation scolaire). F-09 a tranché les tokens ; la structure (recherche, carte d'école, onglets école → classes) se tranche par l'UDR de l'espace direction, écrite dans le chantier |
-| **Questions au porteur** | Q1 à Q4 (voir « Questions à poser au porteur » plus bas) |
+| **Questions au porteur** | Q1 à Q4 : **répondues le 2026-09-28**. Grill du chantier `espace-direction` ([memo](../espace-direction/memo.md)) : matricule MENA obligatoire de l'élève, multi-établissement de l'enseignant (ID-09, SC-23) repoussé en V3 avec Q7, droits Proviseur et Censeur |
+| **Ouverte le** | **2026-09-28**, sur décision du porteur (« Lançons le V2 ») : sortie du backlog, chantier [`espace-direction`](../espace-direction/memo.md) en décision |
 | **Dépend de** | V1 |
 | **Porte** | Inchangée : une direction invitée administre son seul établissement ; aucune fuite inter-établissements (test de refus). Précisée : ID-19 et ID-20 recettées côté direction ; une direction ne valide que les enseignants en attente de son établissement (test de refus) ; C-31 fermée par l'UDR de la vague |
 
@@ -385,9 +386,9 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 
 | # | Vague | Question |
 |---|---|---|
-| Q1 | V2 | La direction valide-t-elle les enseignants en attente de son établissement (ADR-0063) ? À la place de l'équipe, ou en plus d'elle ? |
-| Q2 | V2 | La direction voit-elle le code de son établissement, et peut-elle le régénérer (ADR-0057) ? |
-| Q3 | V2 | La direction crée-t-elle des classes (SC-19), ou ajoute-t-elle seulement la suivante d'un niveau comme l'équipe (ADR-0059) ? Modifie-t-elle ses classes (CL-02, V3) ? |
+| Q1 | V2 | La direction valide-t-elle les enseignants en attente de son établissement (ADR-0063) ? À la place de l'équipe, ou en plus d'elle ? **Répondue le 2026-09-28 : non ; les collègues déjà approuvés (garants) et l'équipe valident, comme en V1.** |
+| Q2 | V2 | La direction voit-elle le code de son établissement, et peut-elle le régénérer (ADR-0057) ? **Répondue le 2026-09-28 : elle le voit et le régénère (Proviseur et Censeur).** |
+| Q3 | V2 | La direction crée-t-elle des classes (SC-19), ou ajoute-t-elle seulement la suivante d'un niveau comme l'équipe (ADR-0059) ? Modifie-t-elle ses classes (CL-02, V3) ? **Répondue le 2026-09-28 : comme l'équipe (classe suivante d'un niveau) ; CL-02 reste en V3.** |
 | Q4 | V2, V3, V4 | ADR-0057, 0059, 0063 et 0064, UDR-0044, 0046 et 0050 sont en production avec leurs défauts du 2026-09-28 : les acceptes-tu tels quels ? **Répondue le 2026-09-28 : acceptées telles quelles.** |
 | Q5 | V3 | Le multi-classes de l'élève (cours du soir, ADR-0040) est-il demandé ? Sinon, `multi-classes-eleve` sort du plan |
 | Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059 |
