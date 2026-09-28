@@ -107,6 +107,31 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
     assert_not stored.attached?
   end
 
+  # Challenge of PR #50: a WebP of 40 bytes decodes to an empty image; the browser refuses it instead of sending a
+  # blank square. A corrupt WebP that does not decode reaches the server, which refuses it.
+  test "an image that decodes to nothing is refused by the browser; a corrupt one by the server; nothing is stored" do
+    sign_in_as @student
+    open_photo_modal
+
+    attach_file "profile_photo[photo]", file_fixture("photos/hostile/truncated.webp")
+    within "turbo-frame#modal dialog[open]" do
+      assert_selector "[role=alert]", text: "Cette image est illisible ou abîmée. Choisissez-en une autre."
+      assert_no_selector "img[data-identity--photo-picker-target=preview]"
+      assert_selector "input[type=file][aria-invalid=true]"
+      click_on "Enregistrer"
+    end
+    assert_selector "turbo-frame#modal dialog[open]"
+
+    attach_file "profile_photo[photo]", file_fixture("photos/hostile/corrupt.webp")
+    assert_no_selector "[role=alert]", text: "Cette image est illisible"
+    within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
+
+    within "turbo-frame#modal dialog[open]" do
+      assert_selector "#profile_photo_photo_error", text: "Choisissez une photo JPEG, PNG ou WebP."
+    end
+    assert_not stored.attached?
+  end
+
   test "on a 390 px phone, the modal fits the screen and the photo is added" do
     sign_in_as @student
     with_mobile_viewport do

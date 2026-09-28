@@ -27,7 +27,8 @@ module Dtos
       def photo_is_a_small_image
         return errors.add(:photo, :blank) if photo.nil?
         return errors.add(:photo, :too_large, count: PHOTO::MAX_MEGABYTES) if photo.size > PHOTO::MAX_BYTES
-        return errors.add(:photo, :unsupported) if facts.nil?
+        # Fail closed : un flux incomplet ou mal formé n'est pas une image, et les octets gardés sont relus sans métadonnées.
+        return errors.add(:photo, :unsupported) if facts.nil? || HEADER.read(data)&.metadata != false
 
         errors.add(:photo, :too_wide, count: PHOTO::MAX_SIDE) if [ width, height ].max > PHOTO::MAX_SIDE
       end

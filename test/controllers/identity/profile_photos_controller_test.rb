@@ -143,4 +143,24 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     assert Orm::User.find(other.id).photo.attached?
     assert_equal "image/jpeg", Orm::User.find(other.id).photo.content_type
   end
+
+  # Challenge of PR #50: files posted directly, without the browser's crop.
+  test "a direct post of a truncated, corrupt or stray-byte image is refused; fill bytes cannot smuggle Exif in" do
+    sign_in_as @student
+
+    { "truncated.webp" => "image/webp", "bomb_header.webp" => "image/webp", "corrupt.webp" => "image/webp",
+      "bypass_exif.jpg" => "image/jpeg" }.each do |name, type|
+      change(upload("hostile/#{name}", type), headers: MODAL)
+
+      assert_response :unprocessable_entity, name
+      assert_select "#profile_photo_photo_error", text: "Choisissez une photo JPEG, PNG ou WebP."
+    end
+    assert_not stored.attached?
+
+    change(upload("hostile/bypass_fill.jpg"))
+
+    assert_response :success
+    assert_not_includes stored.download, "Exif"
+    assert_not_includes stored.download, "SECRETCAM"
+  end
 end

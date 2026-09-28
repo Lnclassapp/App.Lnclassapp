@@ -34,6 +34,33 @@ module Dtos
         assert_not Entities::Identity::ImageHeader.read(dto.data).metadata
       end
 
+      # Challenge of PR #50: files posted directly, without the browser's crop.
+      test "a truncated, header-only or corrupt image, or a JPEG with a stray byte, is unsupported" do
+        %w[truncated.webp bomb_header.webp corrupt.webp bypass_exif.jpg].each do |name|
+          assert_equal({ error: :unsupported }, error(input("hostile/#{name}")), name)
+        end
+      end
+
+      test "a JPEG with fill bytes before its Exif is kept without its Exif nor its hidden camera name" do
+        dto = input("hostile/bypass_fill.jpg")
+
+        assert dto.valid?
+        assert_not_includes dto.data, "Exif"
+        assert_not_includes dto.data, "SECRETCAM"
+      end
+
+      test "the kept bytes are read again: if stripping ever left metadata, the image would be refused" do
+        header = Entities::Identity::ImageHeader
+        strip = header.method(:strip)
+        header.define_singleton_method(:strip) { |bytes| bytes }
+        assert_equal({ error: :unsupported }, error(input("photo_exif.jpg")))
+
+        header.define_singleton_method(:strip) { |_| "damaged" }
+        assert_equal({ error: :unsupported }, error(input("photo.jpg")))
+      ensure
+        header.define_singleton_method(:strip, strip)
+      end
+
       test "no file: blank" do
         assert_equal({ error: :blank }, error(input))
       end
