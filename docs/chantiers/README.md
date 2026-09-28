@@ -64,6 +64,14 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`bareme-classes`](bareme-classes/memo.md) | livré | Barème des classes générées en base, modifiable par l'équipe à l'écran ; menu « Classes » des établissements (ADR-0058, UDR-0045) |
 | [`afficher-pin`](afficher-pin/memo.md) | livré | Bouton œil dans les 13 champs de PIN (connexion, inscriptions, profil, PIN oublié), masqué par défaut et avant l'envoi (UDR-0051, amendement UDR-0005) |
 
+## Backlog
+
+Chantiers ouverts puis mis de côté par le porteur ; le memo dit où reprendre.
+
+| Chantier | En une phrase |
+|---|---|
+| [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2 |
+
 ## Cycle de vie
 
 Un chantier livré reste en place. Son `memo.md` porte `Statut: livré` et son `journal.md` est clos. On ne supprime pas un chantier : c'est la mémoire du projet.
