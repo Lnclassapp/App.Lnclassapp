@@ -69,6 +69,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 
 | [0057](./0057-code-d-etablissement.md) | Un code d'établissement unique, obligatoire à l'inscription enseignant, régénérable par l'équipe | Proposé *(défauts du 2026-09-28, à confirmer)* | 2026-09-28 | `schools.school_code` `string(6) NOT NULL`, unique, `CHECK` de format ; 32 symboles, affiché `K7M-4QZ`, lien `/e/<code>` limité à 10 par minute ; tiré à l'import, rempli par lots pour l'existant ; régénération par l'équipe, auditée. Amende ADR-0030. |
 | [0059](./0059-ajuster-les-classes-d-un-niveau.md) | Ajuster les classes d'un niveau : la suivante au nom du barème, la dernière supprimée seulement si elle n'a jamais servi | Proposé | 2026-09-28 | « + » nomme la classe suivante (plus grand numéro + 1), mêmes règles qu'« Ajouter une classe » ; « − » supprime la dernière du couple niveau/série, sous verrou, si aucune adhésion, aucun enseignant ni assignation, sinon `:conflict`. Audit `school.changed`. Numéro = plus haut + 3 (chantiers parallèles). Précise ADR-0036 et ADR-0041. |
+| [0064](./0064-ci-parallele-par-groupes-de-bin-ci.md) | La CI GitHub joue les groupes de `bin/ci` en parallèle, une seule liste d'étapes | Proposé | 2026-09-28 | `config/ci.rb` range ses étapes en groupes ; chaque job lance `CI_GROUP=<groupe>` ou une part (`system:k/n`) ; job final `ci` ; tests unitaires jamais découpés (ADR-0024). |
 
 
 ---
