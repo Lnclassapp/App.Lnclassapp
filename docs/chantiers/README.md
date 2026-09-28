@@ -70,6 +70,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`code-etablissement`](code-etablissement/memo.md) | livré | L'enseignant s'inscrit avec le code secret de son établissement (ADR-0057, UDR-0044) |
 | [`pilotage-equipe`](pilotage-equipe/memo.md) | livré | V4 : page Pilotage de l'équipe, indicateurs lus en direct, recherche d'un élève ou d'un enseignant (ADR-0062, UDR-0049) |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | Parrainage entre enseignants, démarrage à froid par le code national, page Croissance de l'équipe (ADR-0063, UDR-0050) |
+| [`tests-instables`](tests-instables/memo.md) | livré en PR, en attente de fusion | Q15 : trois tests instables reproduits puis corrigés à leur cause — requêtes préparées périmées après les tests de migration, menu ouvert sur l'aperçu de Turbo, attente de 2 s trop courte pour « Recommencer » |
 
 ## Backlog
 
