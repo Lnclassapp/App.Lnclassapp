@@ -37,6 +37,14 @@ module Repositories
         assert create_report(kind: "course_tree")
       end
 
+      test "the generation of the classrooms has a report without a file; a second one running gives :conflict (ADR-0056)" do
+        report = @repository.create(kind: "classrooms", checksum_sha256: nil, imported_by_id: @member.id, at: @at).value
+
+        assert_equal [ "classrooms", "queued" ], [ report.kind, report.status ]
+        assert_nil Orm::ImportReport.find(report.id).checksum_sha256
+        assert_equal :conflict, @repository.create(kind: "classrooms", checksum_sha256: nil, imported_by_id: @member.id, at: @at).code
+      end
+
       test "fail_stale passe failed les rapports commencés avant la limite, et eux seuls" do
         stale = create_import_report(kind: "schools", status: "importing", started_at: @at - 11.minutes)
         fresh = create_import_report(kind: "essentials", status: "validating", started_at: @at - 5.minutes)

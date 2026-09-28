@@ -62,7 +62,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_sessions" => { "status" => %w[started completed abandoned], "kind" => %w[standard remediation] },
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises],
+    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms],
                           "status" => %w[queued validating importing completed rejected failed] }
   }.freeze
 
@@ -170,6 +170,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
       "a team account without sub-role" => "INSERT INTO users (public_id, last_name, first_name, gender, role, pin_digest, created_at, updated_at) VALUES ('abcdefghijklmn', 'K', 'A', 'male', 'team', 'x', now(), now())",
       "a contact that is not ivorian" => "INSERT INTO users (public_id, last_name, first_name, contact, gender, role, pin_digest, created_at, updated_at) VALUES ('abcdefghijklmn', 'K', 'A', '0912345678', 'male', 'student', 'x', now(), now())",
       "a school year that skips a year" => "INSERT INTO classrooms (public_id, school_id, level_id, name, school_year, created_at, updated_at) VALUES ('abcdefghijklmn', 1, 1, '6ème 1', '2026-2028', now(), now())",
+      "an import without the checksum of its file" => "INSERT INTO import_reports (public_id, kind, status, imported_by_id, created_at, updated_at) VALUES ('abcdefghijklmo', 'schools', 'queued', 1, now(), now())",
       "a completed import whose counts do not add up" => "INSERT INTO import_reports (public_id, kind, status, checksum_sha256, total_count, imported_count, imported_by_id, created_at, updated_at) VALUES ('abcdefghijklmn', 'schools', 'completed', 'x', 3, 2, 1, now(), now())"
     }
 
