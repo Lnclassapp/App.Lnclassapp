@@ -480,6 +480,13 @@ git worktree add ../lnclass-espace-direction-lot-a -b feature/espace-direction-l
 
 (tiret, pas slash : `feature/espace-direction-lot-a`). Brief de chaque agent : chemin absolu du worktree, son lot recopié en entier (4 champs), les liens vers `prd.md`, l'ADR et l'UDR qui le gouvernent, l'ordre intra-lot (test rouge → domaine → infrastructure → delivery → UI), l'interdiction de toucher un fichier hors de son champ `Fichiers`, `git -C <worktree>` et chemins absolus. Fusion dans `feature/espace-direction` au fur et à mesure ; **une seule PR** vers `Develop`.
 
+**Règles de vérification des lots** (porteur, 2026-09-28 ; la CI GitHub est indisponible jusqu'au 2026-10-03) :
+
+1. Pendant son travail, l'agent d'un lot ne lance que les tests de son lot (`COVERAGE=0 bin/rails test <fichiers>`). La vérification complète (`bin/rubocop` ; `CI=1 PARALLEL_WORKERS=2 bin/rails test` à 100 % lignes et branches ; `COVERAGE=0 bin/rails test:system` ; `bin/brakeman -q --no-pager`) tourne **une seule fois**, à la fin, avant de rendre la main.
+2. Avant chaque fusion dans `feature/espace-direction`, l'orchestrateur rejoue la vérification complète sur la tête du lot.
+3. Chaque lot a son worktree et ses bases de test suffixées : les lots ne se gênent pas.
+4. **Au plus trois vérifications complètes en même temps** : la machine est partagée, et une suite système de plus ralentit toutes les autres. Les autres lots continuent de coder et attendent leur tour.
+
 Ordre de fusion conseillé dans la vague 3 (aucune dépendance de fichier, seulement de démonstration) : G et B d'abord (la page « Établissement » se remplit), A ensuite (le bouton « Inviter » de B mène quelque part), puis C, D, E, F dans l'ordre d'arrivée.
 
 ---
