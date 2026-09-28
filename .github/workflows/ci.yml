@@ -26,7 +26,9 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    # Job permissions replace the workflow's: the private repository needs contents too (HTTP 403 without it).
     permissions:
+      contents: read
       pull-requests: read
     outputs:
       code: ${{ steps.diff.outputs.code }}
@@ -37,7 +39,7 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
         run: |
           code=true
-          if [ -n "$PR" ] && files=$(gh pr diff "$PR" --name-only --repo "$GITHUB_REPOSITORY") && [ -n "$files" ]; then
+          if [ -n "$PR" ] && files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[].filename') && [ -n "$files" ]; then
             echo "$files"
             echo "$files" | grep -qvE '^docs/|\.md$' || code=false
           fi
