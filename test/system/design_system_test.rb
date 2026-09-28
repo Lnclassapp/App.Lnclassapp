@@ -72,6 +72,26 @@ class DesignSystemTest < ApplicationSystemTestCase
     end
   end
 
+  # UDR-0051: the eye button of a password field, shown by its controller, eye then eye-slash.
+  test "a password field with reveal shows then hides its value" do
+    within("[data-example=field-valid]") do
+      field = find_field("sample[password]")
+      field.fill_in with: "2468"
+      toggle = find("button[aria-controls=sample_password]")
+
+      assert_equal %w[48px 48px], [ css(toggle, "width"), css(toggle, "height") ]
+      assert_equal "Afficher le code", toggle["aria-label"]
+      toggle.assert_selector "span[data-icon=eye]", visible: true
+      toggle.click
+      assert_equal "text", field[:type]
+      assert_equal "true", toggle["aria-pressed"]
+      assert_equal "Masquer le code", toggle["aria-label"]
+      toggle.assert_selector "span[data-icon=eye-slash]", visible: true
+      toggle.click
+      assert_equal "password", field[:type]
+    end
+  end
+
   test "a radio group is a fieldset of 48 px options, driven by the arrow keys, its error under the group" do
     within("[data-example=field-valid] fieldset#sample_cycle") do
       assert_selector "legend", text: t("design.index.fields.cycle")
