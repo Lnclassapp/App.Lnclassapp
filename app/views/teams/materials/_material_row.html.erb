@@ -7,7 +7,7 @@
   <td class="px-4 py-3 whitespace-nowrap text-mute"><%= t("materials.categories.#{material.category}") %></td>
   <td class="px-4 py-3 tabular-nums"><%= material.courses_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= material.teachers_count %></td>
-  <td class="px-4 py-3">
+  <td class="sticky-actions px-4 py-3">
     <div class="flex justify-end">
       <%= ui_dropdown label: t(".actions", name: material.name), id: "material-actions-#{material.slug}", fixed: true do %>
         <%= ui_dropdown_item t(".edit"), href: edit_material_path(material.slug), icon: "pencil-square", frame: "modal" %>

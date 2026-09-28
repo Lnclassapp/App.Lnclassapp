@@ -162,6 +162,44 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { view.fields(:user) { |form| ui_field(form, :name, as: :color_wheel) } }
   end
 
+  # --- Groupe de boutons radio ------------------------------------------------
+
+  test "ui_radio_group renders a legend and one 48 px option per choice, checking the object's value" do
+    show view.fields(:user, model: Record.new(level: "5e")) { |form|
+      ui_radio_group(form, :level, label: "Niveau", required: true, choices: [ [ "Sixième", "6e" ], [ "Cinquième", "5e" ] ])
+    }
+
+    assert_select "fieldset#user_level > legend", text: /Niveau\s*\*/
+    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line", 2
+    assert_select "label", text: "Sixième" do
+      assert_select "input#user_level_6e[type=radio][name='user[level]'][value='6e'][required]:not([checked])"
+    end
+    assert_select "input#user_level_5e[type=radio][checked]"
+    assert_select "input[aria-invalid], input[aria-describedby], p", 0
+  end
+
+  test "ui_radio_group wires its hint and first error to every option" do
+    record = Record.new
+    record.errors.add(:level, "Premier")
+    record.errors.add(:level, "Second")
+    show view.fields(:user, model: record) { |form|
+      ui_radio_group(form, :level, hint: "Aide", columns: 3, choices: [ %w[6e 6e], %w[5e 5e] ])
+    }
+
+    assert_select "legend", text: "Level"
+    assert_select "legend span", 0
+    assert_select "div.sm\\:grid-cols-3 > label.border-error", 2
+    assert_select "input[type=radio]:not([required]):not([checked])[aria-invalid=true][aria-describedby='user_level_hint user_level_error']", 2
+    assert_select "fieldset > p#user_level_hint + p#user_level_error", text: "Premier"
+  end
+
+  test "ui_radio_group stacks its options on one column and refuses an unknown column count" do
+    show view.fields(:user, model: Record.new) { |form| ui_radio_group(form, :level, columns: 1, choices: [ %w[A a] ]) }
+
+    assert_select "fieldset div.grid:not([class*=grid-cols]) > label", 1
+    assert_raises(ArgumentError) { view.fields(:user) { |form| ui_radio_group(form, :level, columns: 4, choices: []) } }
+  end
+
   # --- Modale, menu, onglets --------------------------------------------------
 
   test "ui_modal renders a native dialog with its trigger and footer" do
@@ -352,6 +390,17 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_equal :error, toast_type_for("alert")
     assert_equal :warning, toast_type_for(:warning)
     assert_equal :info, toast_type_for(:whatever)
+  end
+
+  test "flash_toast renders a flash message, or a message with its own title; any other value renders nothing" do
+    show flash_toast(:alert, "Échec") + flash_toast(:info, { "message" => "Une seule à la fois.", "title" => "Déjà en cours" })
+
+    assert_select "div[role=alert][data-toast-type=error]", text: /#{I18n.t("components.toast.titles.error")}\s*Échec/
+    assert_select "div[data-toast-type=info]:not([role=alert])" do
+      assert_select "p.font-semibold", text: "Déjà en cours"
+      assert_select "p.text-mute", text: "Une seule à la fois."
+    end
+    assert_nil flash_toast(:reload_document, true)
   end
 
   test "turbo_stream_toast appends the rendered toast to the stack" do

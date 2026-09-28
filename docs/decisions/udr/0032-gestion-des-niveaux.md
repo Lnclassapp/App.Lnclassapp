@@ -80,6 +80,14 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 
 - **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#level-actions-<slug>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-level-<slug>"`, `:danger`). La modale `delete-level-<slug>` est rendue sans `trigger:`, son pied et son formulaire sont inchangés. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.
 
+## Amendement du 2026-09-28 — cycle en boutons radio
+
+*Chantier [`docs/chantiers/cycles-en-radio`](../../chantiers/cycles-en-radio/prd.md), [UDR-0005](0005-design-system-fondateur.md#amendement-du-2026-09-28--groupe-de-boutons-radio). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **`_form.html.erb`** : le cycle n'est plus un `select` mais `ui_radio_group` « Cycle » (`fieldset#level_cycle`), deux options côte à côte dès `sm` : « Premier cycle » (`first`), « Second cycle » (`second`). L'invite « Choisir un cycle » (`teams.levels.form.cycle_prompt`) disparaît.
+- **Valeur cochée** : à la création, **Premier cycle** (`Entities::Catalog::Level::CYCLES.first`, posé par `Teams::LevelsController#new` à côté de la position proposée) ; en modification, le cycle enregistré ; en 422, la saisie.
+- Mêmes valeurs soumises (`level[cycle]`), mêmes validations ; une saisie sans cycle revient en 422 avec l'erreur sous le groupe.
+
 ## Amendement du 2026-09-28 — barème des classes
 
 *Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), [ADR-0058](../adr/0058-bareme-des-classes-en-base.md), [UDR-0045](0045-bareme-des-classes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*

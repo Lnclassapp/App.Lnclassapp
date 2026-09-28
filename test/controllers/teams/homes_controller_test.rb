@@ -194,6 +194,16 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "li#recent_import_#{other.public_id} *", text: including(".json"), count: 0
   end
 
+  test "a running generation of the classrooms is « Génération en cours », not « Import en cours »" do
+    running = create_import_report(kind: "classrooms", checksum_sha256: nil, status: "importing")
+    sign_in_as @member
+
+    get_recent_content
+
+    assert_select "li#recent_import_#{running.public_id}", text: including("Génération en cours")
+    assert_select "li#recent_import_#{running.public_id}", text: including("Import en cours"), count: 0
+  end
+
   test "nothing created yet: each recent list has its empty state" do
     sign_in_as @member
 

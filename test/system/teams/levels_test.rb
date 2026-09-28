@@ -20,7 +20,7 @@ class Teams::LevelsTest < ApplicationSystemTestCase
   def fill_level(name:, position: nil, cycle: nil)
     fill_in "level[name]", with: name
     fill_in "level[position]", with: position if position
-    select tl("cycles.#{cycle}"), from: "level[cycle]" if cycle
+    choose tl("cycles.#{cycle}") if cycle
   end
 
   test "create, rename, then delete a blank level, in position order, without a page reload" do
@@ -91,6 +91,46 @@ class Teams::LevelsTest < ApplicationSystemTestCase
       assert_selector "#level_tle", text: "Tle"
     end
     assert_equal 1, Orm::Level.count
+  end
+
+  test "CR-01, CR-03: the cycle is a radio group, first cycle checked; the keyboard picks the second one" do
+    visit levels_path
+
+    assert_no_page_reload do
+      click_on tl("index.new")
+      within "turbo-frame#modal dialog[open]" do
+        assert_no_select "level[cycle]"
+        within("fieldset#level_cycle", text: Dtos::Catalog::LevelInput.human_attribute_name(:cycle)) do
+          assert_checked_field tl("cycles.first")
+          assert_unchecked_field tl("cycles.second")
+        end
+        fill_level(name: "Tle", position: "7")
+        find_field(tl("cycles.first")).send_keys(:right)
+
+        assert_checked_field tl("cycles.second")
+        assert_equal "level_cycle_second", page.evaluate_script("document.activeElement.id")
+        click_on tl("new.submit")
+      end
+      assert_toast tl("create.created", name: "Tle")
+    end
+    assert_equal "second", Orm::Level.find_by!(slug: "tle").cycle
+
+    click_menu_action("#level_tle", tl("level_row.edit"))
+    within("turbo-frame#modal dialog[open]") { assert_checked_field tl("cycles.second") }
+  end
+
+  test "CR-06: on a phone, each cycle option is a 48 px target and the modal does not widen the page" do
+    with_mobile_viewport do
+      visit levels_path
+      click_on tl("index.new")
+
+      within "turbo-frame#modal dialog[open]" do
+        options = all("fieldset#level_cycle label", count: 2)
+        assert(options.all? { |option| option.native.rect.height >= 48 })
+        assert_equal options.first.native.rect.width, options.last.native.rect.width
+      end
+      assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+    end
   end
 
   test "on a phone, only the table scrolls sideways, never the page" do
