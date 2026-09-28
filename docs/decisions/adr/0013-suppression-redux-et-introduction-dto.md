@@ -12,6 +12,8 @@
 
 > ℹ️ **Cet ADR remplace la partie « Redux » de l'[ADR-0009](./0009-stack-frontend-vanilla-css-tailwind-hotwire.md).** Les autres décisions frontend de l'ADR-0009 (Tailwind v4, Hotwire, KaTeX) restent en vigueur.
 
+> ℹ️ **Précision du 2026-09-28 (contradiction C-38 de la [feuille de route](../../chantiers/refonte-application/feuille-de-route.md#4-registre-des-contradictions-entre-sources)).** Le « thème sombre » cité au §2.1 n'est qu'un exemple d'état local. Le projet cible n'a **pas de mode sombre** : [UDR-0005](../udr/0005-design-system-fondateur.md) §2, point 4 (F-09, acceptée le 2026-09-25). La règle du §2.1, un état local tenu par Stimulus, reste en vigueur.
+
 ## 1. Contexte et problématique
 Migration Lnclassapp vers Rails 8.
 

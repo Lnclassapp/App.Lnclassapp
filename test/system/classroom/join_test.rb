@@ -49,7 +49,23 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_current_path new_join_code_path
   end
 
+  test "D1: a well-formed but unknown code, typed on /join, is refused in the field, on a desktop and at 390 px" do
+    [ nil, MOBILE_VIEWPORT ].each do |size|
+      size ? with_mobile_viewport(size) { refuse_an_unknown_code } : refuse_an_unknown_code
+    end
+  end
+
   private
+
+  def refuse_an_unknown_code
+    visit new_join_code_path
+    fill_in "join[code]", with: "ZZZ99"
+    click_on I18n.t("classroom.join_codes.new.submit")
+
+    assert_selector "#join_code_error", text: I18n.t("classroom.joins.new.invalid_code.title")
+    assert_current_path new_join_code_path
+    assert_field "join[code]", with: "ZZZ99"
+  end
 
   def sign_up_after_a_wrong_confirmation
     assert_no_page_reload do

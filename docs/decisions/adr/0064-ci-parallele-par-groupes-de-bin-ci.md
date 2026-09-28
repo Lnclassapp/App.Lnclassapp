@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | `docs/chantiers/ci-rapide` |
 | **Remplace** | — |

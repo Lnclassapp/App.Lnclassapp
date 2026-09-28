@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré *(en production sur lnclass.com depuis le 2026-09-27, PR #33 et #36 vers `main` ; clos le 2026-09-28, recette `Staging` par un rôle distinct en cours)* |
 | **Ouvert le** | 2026-09-25 |
 | **Branche** | `feature/boucle-pedagogique` |
 | **Programme** | `refonte-application` — vague V1 ([feuille de route §5](../refonte-application/feuille-de-route.md#v1--boucle-pédagogique)) |
