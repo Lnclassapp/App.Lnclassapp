@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé *(défauts appliqués le 2026-09-28, à confirmer par le porteur)* |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md) — critères CE-01 à CE-10 |
 | **Remplace** | — *(amende [ADR-0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md) : « l'enseignant choisit son école »)* |

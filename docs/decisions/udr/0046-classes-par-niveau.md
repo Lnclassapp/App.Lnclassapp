@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé (à confirmer par le porteur avec l'ADR-0059) |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/classes-par-niveau`](../../chantiers/classes-par-niveau/prd.md) (CN-01 à CN-10) |
 | **ADR lié** | [ADR-0059](../adr/0059-ajuster-les-classes-d-un-niveau.md) · [ADR-0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) · [ADR-0036](../adr/0036-suppression-archivage-et-anonymisation.md) · UDR-0006, UDR-0031, UDR-0036, UDR-0042 |

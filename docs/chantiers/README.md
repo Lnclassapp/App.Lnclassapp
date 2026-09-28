@@ -72,10 +72,15 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 
 ## Backlog
 
-Chantiers ouverts puis mis de côté par le porteur ; le memo dit où reprendre.
+Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 2026-09-28 : aucune n'est ouverte avant une décision datée du porteur ; leur périmètre, leurs chantiers et leurs questions sont au [§5 de la feuille de route](refonte-application/feuille-de-route.md#5-les-vagues). Pour un chantier, le memo dit où reprendre.
 
 | Chantier | En une phrase |
 |---|---|
+| **V2 — Organisation scolaire et espace direction** | 29 features : `espace-direction`, puis `annuaire-equipe`. Questions Q1 à Q3 ouvertes ([feuille de route §5](refonte-application/feuille-de-route.md#v2--organisation-scolaire-et-espace-direction)) |
+| **V3 — Suivi pédagogique enseignant** | 11 features : `rapports-de-classe`, `vie-de-la-classe` (dont CL-02), `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 le confirme |
+| **V4 — Contenu à l'échelle et back-office** | 9 features : `catalogue-complet`, `installation-pwa`, `sous-roles-equipe` ; Q9 et Q10 ouvertes |
+| **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
+| **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2. Rattaché à la V4 s'il reprend ([feuille de route §5](refonte-application/feuille-de-route.md#chantiers-hors-plan)) |
 
 ## Cycle de vie
