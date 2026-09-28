@@ -40,6 +40,8 @@ namespace :teams do
   resources :imports, only: %i[index new create show], param: :public_id
   resources :invitations, only: %i[new create]
   resource :account_lookup, only: :show, path: "accounts"
+  # ADR-0063 : « Croissance », indicateurs du parrainage ; liée depuis l'accueil, sans entrée de navigation (UDR-0006).
+  resource :growth, only: :show, controller: "growth"
   post "members/:user_public_id/second-factor-reset", to: "second_factor_resets#create", as: :member_second_factor_reset
 
   # ADR-0052 : failed jobs are read and retried here, behind the team area authentication.

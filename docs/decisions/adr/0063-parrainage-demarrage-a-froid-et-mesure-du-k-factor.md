@@ -91,7 +91,7 @@ Clés étrangères en `ON DELETE RESTRICT`, comme les autres références à `us
 | `schools_leaderboard` | 10 établissements ayant le plus d'enseignants actifs (équipe seulement) |
 | `pending_requests` | nombre de demandes en attente et les 5 plus anciennes |
 
-Huit requêtes, quel que soit le volume. Page `/teams/growth` (`Teams::GrowthController`, `Identity::ReadGrowthPolicy`), liée depuis l'accueil équipe, **aucune entrée de navigation** (UDR-0006 : 5 destinations).
+Quatre requêtes, quel que soit le volume (les compteurs en une seule, par sous-requêtes scalaires). Page `/teams/growth` (`Teams::GrowthController`, `Identity::ReadGrowthPolicy`), liée depuis l'accueil équipe, **aucune entrée de navigation** (UDR-0006 : 5 destinations).
 
 ### Leviers sans argent
 

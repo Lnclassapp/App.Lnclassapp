@@ -174,4 +174,4 @@ Et « /teams/dashboard » n'est pas modifié
 | Conversion par partage | non mesuré | 25 % | idem |
 | Cycle viral médian | non mesuré | ≤ 7 j | idem |
 | Élèves par enseignant actif | non mesuré | 40 | idem |
-| Requêtes de la query de métriques | — | bornées (≤ 12) | test de comptage |
+| Requêtes de la query de métriques | — | bornées | 4, quel que soit le volume (test de comptage) |

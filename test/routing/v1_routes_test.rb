@@ -83,4 +83,18 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
   test "the jobs dashboard stays under the team area" do
     assert Rails.application.routes.routes.any? { |route| route.path.spec.to_s == "/teams/jobs" }
   end
+
+  # ADR-0063: the growth routes; « Croissance » is no navigation destination (UDR-0006).
+  test "the growth routes are drawn, none of them in the navigation" do
+    { [ "/teachers/invite", "GET" ] => "identity/referrals#show", [ "/teachers/invite/shares", "POST" ] => "identity/referral_shares#create",
+      [ "/teacher-signup/without-code", "GET" ] => "identity/pending_teacher_registrations#new",
+      [ "/teacher-signup/without-code", "POST" ] => "identity/pending_teacher_registrations#create",
+      [ "/teachers/join-requests/r1/vouch", "POST" ] => "school/join_request_vouches#create",
+      [ "/teams/schools/s1/join-requests/r1", "PATCH" ] => "teams/join_requests#update",
+      [ "/teams/growth", "GET" ] => "teams/growth#show" }.each do |(path, method), target|
+      controller, action = target.split("#")
+      assert_equal({ controller:, action: }, first_match(path, method:), "#{method} #{path}")
+    end
+    assert_not_includes NavigationHelper::DESTINATIONS.values.flatten, :teams_growth_path
+  end
 end

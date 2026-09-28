@@ -112,6 +112,7 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{teams_imports_path}']", text: including(tl("shortcuts.imports"))
       assert_select "a[href='#{new_teams_invitation_path}'][data-turbo-frame=modal]", text: including(tl("shortcuts.invite"))
       assert_select "a[href='#{teams_account_lookup_path}']", text: including(tl("shortcuts.unlock_account"))
+      assert_select "a[href='#{teams_growth_path}']", text: including(tl("shortcuts.growth"))
     end
   end
 
@@ -120,7 +121,7 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
 
     get team_home_path
 
-    assert_select "#team_home_shortcuts a", 4
+    assert_select "#team_home_shortcuts a", 5
     assert_select "a[href='#{new_teams_invitation_path}']", 0
   end
 
