@@ -22,22 +22,41 @@ module Entities
       JPEG_END = 0xD9
       # Hors d'un scan : 0x00, TEM, RSTn ou un second SOI ne sont pas des marqueurs de segment.
       JPEG_UNEXPECTED = [ 0x00, 0x01, *(0xD0..0xD8) ].freeze
+      # Premier octet qui n'est pas un remplissage ; dans un scan, le prochain marqueur (0xFF suivi d'autre chose que 0x00,
+      # bourrage, ou RSTn, remise à zéro). Cherchés par une expression, sans boucle octet par octet.
+      JPEG_NOT_FILL = /[^\xFF]/n
+      JPEG_MARKER = /\xFF[^\x00\xD0-\xD7]/n
+      # Plafonds : une photo compte une vingtaine de segments et une dizaine de scans ; un fichier fait de centaines de
+      # milliers de parties vides est refusé avant d'être lu en entier.
+      JPEG_MAX_SEGMENTS = 256
+      JPEG_MAX_SCANS = 64
       # Ce qui suit le premier EOI (Motion Photo, image MPF, carte de gain d'un téléphone) : lu comme une partie retirée.
       JPEG_TRAILER = :trailer
       JPEG_DQT = 0xDB
       JPEG_DHT = 0xC4
       JPEG_DAC = 0xCC
+      JPEG_DRI = 0xDD
+      # Codage arithmétique : SOF9 à SOF15 (les seuls où une table DAC sert).
+      JPEG_ARITHMETIC = [ 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF ].freeze
+      JPEG_PROGRESSIVE = [ 0xC2, 0xC6, 0xCA, 0xCE ].freeze
+      JPEG_DEFINITIONS = [ JPEG_DQT, JPEG_DHT, JPEG_DAC, JPEG_DRI ].freeze
       # Liste blanche : seuls les segments et chunks qui dessinent l'image restent, réécrits dans leur forme standard
       # quand ils ont des champs libres. Tout le reste part, quels que soient son nom ou sa signature — un profil ICC
       # (APP2, iCCP, ICCP) aussi : son contenu est libre, il a transporté un secret dans la contre-épreuve de la PR #50.
       # JPEG : SOFn, DHT, DAC, DQT, DRI, DNL, SOS (avec son scan), EOI ; JFIF (APP0) et Adobe (APP14) réécrits.
-      JPEG_KEPT = [ *JPEG_FRAMES, JPEG_DHT, JPEG_DAC, JPEG_DQT, 0xDD, 0xDC, JPEG_SCAN, JPEG_END ].freeze
+      JPEG_KEPT = [ *JPEG_FRAMES, JPEG_DHT, JPEG_DAC, JPEG_DQT, JPEG_DRI, 0xDC, JPEG_SCAN, JPEG_END ].freeze
       JPEG_JFIF = 0xE0
       JPEG_ADOBE = 0xEE
       # JFIF 1.01, sans unité, rapport 1:1, sans vignette ; Adobe version 100, drapeaux nuls, puis la transformée d'origine.
       JFIF_SEGMENT = "\xFF\xE0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00".b.freeze
       ADOBE_PREFIX = "\xFF\xEE\x00\x0EAdobe\x00\x64\x00\x00\x00\x00".b.freeze
-      PNG_KEPT = %w[IHDR PLTE IDAT IEND tRNS gAMA cHRM sRGB].freeze
+      # cHRM part (ses 32 octets sont libres et inutiles sans profil) ; PLTE seulement en mode indexé (en couleurs, c'est
+      # une palette suggérée, inutile au rendu) ; gAMA seulement dans une plage plausible (gamma de 0,01 à 10).
+      PNG_KEPT = %w[IHDR PLTE IDAT IEND tRNS gAMA sRGB].freeze
+      PNG_GAMMA = (1_000..1_000_000)
+      # Avant le premier IDAT (PNG § 5.6) ; IDAT consécutifs.
+      PNG_BEFORE_IMAGE = %w[PLTE tRNS gAMA cHRM sRGB].freeze
+      PNG_MAX_CHUNKS = 4096
       # Profondeurs permises par type de couleur (PNG § 11.2.2) ; chunks uniques ; longueur fixe des chunks sans tableau.
       PNG_DEPTHS = { 0 => [ 1, 2, 4, 8, 16 ], 2 => [ 8, 16 ], 3 => [ 1, 2, 4, 8 ], 4 => [ 8, 16 ], 6 => [ 8, 16 ] }.freeze
       PNG_ONCE = %w[IHDR PLTE tRNS gAMA cHRM sRGB IEND].freeze
@@ -53,26 +72,20 @@ module Entities
       WEBP_EXTENDED_LENGTH = [ 10 ].pack("V").freeze
       # En-tête ALPH : bits réservés (7-6), pré-traitement 2 ou 3 (bit 5) et compression 2 ou 3 (bit 1) interdits.
       WEBP_ALPHA_FORBIDDEN = 0xE2
+      WEBP_MAX_CHUNKS = 64
 
       module_function
 
       # bytes : String → Facts | nil (ni JPEG, ni PNG, ni WebP, ou flux incomplet ou mal formé)
-      def read(bytes)
-        bytes = bytes.to_s.b
-        case format_of(bytes)
-        when :jpeg then jpeg(bytes)
-        when :png then png(bytes)
-        when :webp then webp(bytes)
-        end
-      end
+      def read(bytes) = analyze(bytes.to_s.b)&.first
 
       # Les seules parties de la liste blanche, dans leur forme standard. Un fichier que read refuse est rendu tel quel :
-      # il n'est jamais stocké, et ses parties mal formées ne sont jamais réécrites.
+      # il n'est jamais stocké, et ses parties mal formées ne sont jamais réécrites. Le fichier n'est lu qu'une fois.
       def strip(bytes)
         bytes = bytes.to_s.b
-        return bytes if read(bytes).nil?
+        _facts, parts = analyze(bytes)
+        return bytes if parts.nil?
 
-        parts = parts_of(bytes)
         stripped = [ bytes.byteslice(0, parts.first.at), *parts.filter_map { kept(bytes, it) } ].join.b
         format_of(bytes) == :webp ? fix_webp(stripped) : stripped
       end
@@ -84,12 +97,12 @@ module Entities
         end
       end
 
-      # Appelé sur une image que read a lue : son format est connu.
-      def parts_of(bytes)
+      # [Facts, parties] | nil : une seule lecture sert à read et à strip.
+      def analyze(bytes)
         case format_of(bytes)
-        when :jpeg then jpeg_parts(bytes)
-        when :png then png_parts(bytes)
-        else webp_parts(bytes)
+        when :jpeg then jpeg(bytes)
+        when :png then png(bytes)
+        when :webp then webp(bytes)
         end
       end
 
@@ -98,8 +111,17 @@ module Entities
         raw = bytes.byteslice(part.at, part.size)
         case format_of(bytes)
         when :jpeg then jpeg_kept(bytes, part)
-        when :png then raw if PNG_KEPT.include?(part.type)
+        when :png then raw if png_kept?(bytes, part)
         else webp_kept(raw, part)
+        end
+      end
+
+      # Le type de couleur est l'octet 25 du fichier (IHDR vient en premier, déjà vérifié).
+      def png_kept?(bytes, part)
+        case part.type
+        when "PLTE" then bytes.getbyte(25) == PNG_PALETTE
+        when "gAMA" then PNG_GAMMA.cover?(bytes.unpack1("N", offset: part.data))
+        else PNG_KEPT.include?(part.type)
         end
       end
 
@@ -131,15 +153,104 @@ module Entities
         frames = parts.each_index.select { JPEG_FRAMES.include?(parts[it].type) }
         frame = frames.first
         scan = parts.index { it.type == JPEG_SCAN }
-        return unless frames.one? && scan && frame < scan
+        return unless frames.one? && scan && frame < scan && jpeg_adobe?(bytes, parts) && jpeg_frame?(bytes, parts, parts[frame])
 
         height, width = fields(bytes, parts[frame].data + 3, "nn", 4)
-        facts(bytes, :jpeg, [ width, height ], parts)
+        result(bytes, :jpeg, [ width, height ], parts)
       end
+
+      # Un seul segment Adobe ; gardé (longueur standard), sa transformée vaut 0 (aucune), 1 (YCbCr) ou 2 (YCCK).
+      def jpeg_adobe?(bytes, parts)
+        adobe = parts.select { it.type == JPEG_ADOBE && bytes.byteslice(it.data + 2, 5) == "Adobe" }
+        adobe.size <= 1 && adobe.all? { bytes.unpack1("n", offset: it.data) != 14 || bytes.getbyte(it.data + 13) <= 2 }
+      end
+
+      # Chaque table définie (DQT, DHT, DAC) et chaque intervalle DRI sert avant d'être redéfini : DQT aux composantes du
+      # SOF, DHT (codage de Huffman) ou DAC (codage arithmétique) et DRI au scan qui suit. Une table jamais utilisée, ou
+      # redéfinie sans avoir servi, ne transporterait que des octets libres. Un JPEG progressif redéfinit ses tables DHT
+      # entre deux scans : chaque définition sert au scan suivant, elle est gardée.
+      def jpeg_frame?(bytes, parts, frame)
+        components = (0...bytes.getbyte(frame.data + 7)).to_h { bytes.byteslice(frame.data + 8 + (3 * it), 3).unpack("CxC") }
+        jpeg_sequential?(bytes, parts, frame, components) && jpeg_coherent?(bytes, parts, frame, components)
+      end
+
+      # Un JPEG séquentiel (non progressif) code chaque composante dans exactement un scan : un scan de plus ne
+      # transporterait que des données entropiques libres.
+      def jpeg_sequential?(bytes, parts, frame, components)
+        return true if JPEG_PROGRESSIVE.include?(frame.type)
+
+        coded = parts.select { it.type == JPEG_SCAN }.flat_map do |scan|
+          bytes.byteslice(scan.data + 3, 2 * bytes.getbyte(scan.data + 2)).bytes.each_slice(2).map(&:first)
+        end
+        coded.sort == components.keys.sort
+      end
+
+      def jpeg_coherent?(bytes, parts, frame, components)
+        coding = JPEG_ARITHMETIC.include?(frame.type) ? :arithmetic : :huffman
+        pending = {}
+        parts.each do |part|
+          defined = jpeg_definitions(bytes, part)
+          used = jpeg_uses(bytes, part, components, coding)
+          return false if defined.nil? || used.nil?
+
+          defined.each do |key|
+            return false if pending.key?(key)
+
+            pending[key] = true
+          end
+          used.each { pending.delete(it) }
+        end
+        pending.empty?
+      end
+
+      def jpeg_definitions(bytes, part)
+        return [] unless JPEG_DEFINITIONS.include?(part.type)
+
+        payload = jpeg_payload(bytes, part)
+        case part.type
+        when JPEG_DQT then jpeg_table_specs(part.type, payload).map { [ :quantization, it & 0x0F ] }
+        when JPEG_DHT then jpeg_table_specs(part.type, payload).map { [ :huffman, it >> 4, it & 0x0F ] }
+        when JPEG_DAC then jpeg_conditioning(payload)
+        else [ [ :restart ] ]
+        end
+      end
+
+      # DAC : des paires (classe et numéro, valeur) ; classe 0 (DC) : bornes L ≤ U ; classe 1 (AC) : Kx de 1 à 63.
+      def jpeg_conditioning(payload)
+        payload.bytes.each_slice(2).map do |spec, value|
+          klass, table = spec >> 4, spec & 0x0F
+          return unless klass <= 1 && table <= 3 && (klass == 1 ? value.between?(1, 63) : (value & 0x0F) <= (value >> 4))
+
+          [ :arithmetic, klass, table ]
+        end
+      end
+
+      def jpeg_uses(bytes, part, components, coding)
+        case part.type
+        when *JPEG_FRAMES then components.values.map { [ :quantization, it ] }
+        when JPEG_SCAN then jpeg_scan_tables(bytes, part, components, coding)
+        else []
+        end
+      end
+
+      # Composantes du scan : 1 à 4, toutes déclarées par le SOF. Table DC servie par un premier passage DC (Ss = 0,
+      # Ah = 0), table AC dès que Se > 0 ; un JPEG sans perte (SOF3), qu'aucun appareil photo n'écrit, est donc refusé.
+      def jpeg_scan_tables(bytes, part, components, coding)
+        count = bytes.getbyte(part.data + 2)
+        selectors = bytes.byteslice(part.data + 3, 2 * count).bytes.each_slice(2)
+        start, stop, approximation = bytes.byteslice(part.data + 3 + (2 * count), 3).bytes
+        return unless count.between?(1, 4) && selectors.all? { components.key?(it.first) }
+
+        selectors.flat_map do |_, spec|
+          [ ([ coding, 0, spec >> 4 ] if start.zero? && (approximation >> 4).zero?), ([ coding, 1, spec & 0x0F ] if stop.positive?) ]
+        end.compact + [ [ :restart ] ]
+      end
+
+      def jpeg_payload(bytes, part) = bytes.byteslice(part.data + 2, bytes.unpack1("n", offset: part.data) - 2)
 
       def png(bytes)
         parts = png_parts(bytes)
-        facts(bytes, :png, fields(bytes, parts.first.data, "NN", 8), parts) if parts
+        result(bytes, :png, fields(bytes, parts.first.data, "NN", 8), parts) if parts
       end
 
       # Une seule image (VP8 ou VP8L) : une animation n'est pas une photo. Elle donne la taille ; l'en-tête étendu, s'il
@@ -152,7 +263,7 @@ module Entities
         return unless images.one? && webp_layout?(parts.map(&:type), images.first.type)
 
         size = webp_size(bytes, images.first)
-        facts(bytes, :webp, size, parts) if size && webp_extension?(bytes, parts, size)
+        result(bytes, :webp, size, parts) if size && webp_extension?(bytes, parts, size)
       end
 
       # VP8X seulement en premier ; ALPH au plus une fois, dans un fichier étendu, avant une image avec perte.
@@ -204,11 +315,11 @@ module Entities
         fields(payload, 6, "vv", 4).map { it & 0x3FFF }
       end
 
-      def facts(bytes, format, size, parts)
+      def result(bytes, format, size, parts)
         width, height = size
         return unless size.all?(&:positive?)
 
-        Facts.new(format:, width:, height:, metadata: parts.any? { metadata?(bytes, it) })
+        [ Facts.new(format:, width:, height:, metadata: parts.any? { metadata?(bytes, it) }), parts ]
       end
 
       # Tout le fichier, segment par segment, scans compris, jusqu'au premier EOI. Octets de remplissage 0xFF acceptés
@@ -216,12 +327,12 @@ module Entities
       # rend le fichier illisible. Ce qui suit EOI (images secondaires d'un téléphone) forme une dernière partie, retirée.
       def jpeg_parts(bytes)
         parts = []
+        counts = [ 0, 0 ]
         at = 2
         loop do
           return unless bytes.getbyte(at) == 0xFF
 
-          marker_at = at
-          marker_at += 1 while bytes.getbyte(marker_at + 1) == 0xFF
+          marker_at = (bytes.index(JPEG_NOT_FILL, at + 1) || bytes.bytesize) - 1
           marker = bytes.getbyte(marker_at + 1)
           return if marker.nil? || JPEG_UNEXPECTED.include?(marker)
 
@@ -229,6 +340,8 @@ module Entities
           return if stop.nil? || !jpeg_exact?(bytes, marker, marker_at + 2)
 
           parts << Part.new(type: marker, at:, size: stop - at, data: marker_at + 2)
+          counts[marker == JPEG_SCAN ? 1 : 0] += 1
+          return if counts.first > JPEG_MAX_SEGMENTS || counts.last > JPEG_MAX_SCANS
           return parts + jpeg_trailer(bytes, stop) if marker == JPEG_END
 
           at = stop
@@ -236,7 +349,7 @@ module Entities
       end
 
       # Fin du segment : EOI n'a pas de longueur ; un scan continue par ses données entropiques jusqu'au prochain
-      # marqueur (0xFF suivi d'autre chose que 0x00, bourrage, ou RSTn, remise à zéro).
+      # marqueur (0xFF suivi d'autre chose que 0x00, bourrage, ou RSTn, remise à zéro) ; sans marqueur, illisible.
       def jpeg_segment_end(bytes, marker, data)
         return data if marker == JPEG_END
 
@@ -244,14 +357,7 @@ module Entities
         return unless length && length >= 2 && data + length <= bytes.bytesize
         return data + length unless marker == JPEG_SCAN
 
-        at = data + length
-        while (at = bytes.index("\xFF".b, at))
-          following = bytes.getbyte(at + 1)
-          return at unless following.nil? || following.zero? || (0xD0..0xD7).cover?(following)
-          return if following.nil?
-
-          at += 2
-        end
+        bytes.index(JPEG_MARKER, data + length)
       end
 
       def jpeg_trailer(bytes, stop)
@@ -269,29 +375,37 @@ module Entities
         when JPEG_SCAN then payload.bytesize == 4 + (2 * payload.getbyte(0).to_i)
         when 0xDD, 0xDC then payload.bytesize == 2
         when JPEG_DAC then payload.bytesize.positive? && payload.bytesize.even?
-        when JPEG_DQT then jpeg_tables?(payload) { |precision, _| 1 + (64 * (precision + 1)) }
-        when JPEG_DHT then jpeg_tables?(payload) { |_, counts| 17 + counts.sum if counts.size == 16 }
+        when JPEG_DQT, JPEG_DHT then !jpeg_table_specs(marker, payload).nil?
         else true
         end
       end
 
+      # DQT : précision, puis 64 valeurs d'un ou deux octets ; DHT : 16 effectifs, puis autant de codes.
+      def jpeg_table_specs(marker, payload)
+        if marker == JPEG_DQT then jpeg_tables(payload) { |precision, _| 1 + (64 * (precision + 1)) }
+        else jpeg_tables(payload) { |_, counts| 17 + counts.sum if counts.size == 16 }
+        end
+      end
+
       # Chaque table : classe ou précision 0 ou 1, numéro 0 à 3, puis la longueur que rend le bloc ; la dernière finit
-      # exactement le segment.
-      def jpeg_tables?(payload)
+      # exactement le segment. Rend l'octet d'en-tête de chaque table, ou nil.
+      def jpeg_tables(payload)
         at = 0
+        specs = []
         while at < payload.bytesize
           spec = payload.getbyte(at)
           size = yield(spec >> 4, payload.byteslice(at + 1, 16).bytes) if spec >> 4 <= 1 && (spec & 0x0F) <= 3
-          return false if size.nil?
+          return if size.nil?
 
+          specs << spec
           at += size
         end
-        at.positive? && at == payload.bytesize
+        specs if specs.any? && at == payload.bytesize
       end
 
       # Chunks PNG (longueur, type, données, CRC) : IHDR d'abord, IDAT au moins, IEND à la toute fin, une seule fois.
       def png_parts(bytes)
-        parts = chunks(bytes, 8) do |at|
+        parts = chunks(bytes, 8, PNG_MAX_CHUNKS) do |at|
           length, type = fields(bytes, at, "Na4", 8)
           next unless length && type.match?(/\A[A-Za-z]{4}\z/) && at + 12 + length <= bytes.bytesize
           next unless fields(bytes, at + 8 + length, "N", 4).first == Zlib.crc32(bytes.byteslice(at + 4, 4 + length))
@@ -310,8 +424,19 @@ module Entities
         palette = parts.find { it.type == "PLTE" }
         entries = palette ? (palette.size - 12) / 3 : 0
         PNG_DEPTHS.fetch(color, []).include?(depth) && (compression | filter).zero? && interlace <= 1 &&
-          PNG_ONCE.all? { types.count(it) <= 1 } && png_palette?(palette, color) &&
+          PNG_ONCE.all? { types.count(it) <= 1 } && png_palette?(palette, color) && png_ordered?(types) &&
           parts.all? { png_chunk?(bytes, it, color, depth, entries) }
+      end
+
+      # IDAT consécutifs ; PLTE, tRNS, gAMA, cHRM, sRGB avant eux ; tRNS après PLTE. (IHDR premier et IEND dernier, unique,
+      # sont vérifiés par png_parts.)
+      def png_ordered?(types)
+        first = types.index("IDAT")
+        last = types.rindex("IDAT")
+        transparency = types.index("tRNS")
+        palette = types.index("PLTE")
+        types[first..last].all?("IDAT") && PNG_BEFORE_IMAGE.all? { types.index(it).to_i < first } &&
+          (transparency.nil? || palette.nil? || transparency > palette)
       end
 
       # Palette exigée en mode indexé, interdite en gris, permise en couleurs.
@@ -347,7 +472,7 @@ module Entities
       def webp_parts(bytes)
         return unless fields(bytes, 4, "V", 4).first == bytes.bytesize - 8
 
-        chunks(bytes, 12) do |at|
+        chunks(bytes, 12, WEBP_MAX_CHUNKS) do |at|
           type, length = fields(bytes, at, "a4V", 8)
           next if length.nil?
 
@@ -359,11 +484,11 @@ module Entities
       end
 
       # Parties successives du bloc jusqu'à la fin exacte du fichier ; nil dès qu'une partie est illisible.
-      def chunks(bytes, at)
+      def chunks(bytes, at, limit)
         parts = []
         while at < bytes.bytesize
           part = yield(at)
-          return if part.nil?
+          return if part.nil? || parts.size >= limit
 
           parts << part
           at += part.size

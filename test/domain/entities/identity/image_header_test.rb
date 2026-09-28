@@ -201,8 +201,7 @@ module Entities
       end
 
       test "strip leaves an image without metadata, and any other file, byte for byte" do
-        %w[photo.jpg photo_progressive.jpg photo.png photo_palette.png photo_gray_trns.png photo_color.png photo_lossy.webp
-           photo_lossless.webp photo_alpha.webp document.pdf].each do |name|
+        %w[photo.jpg photo_progressive.jpg photo.png photo_palette.png photo_gray_trns.png photo_lossy.webp photo_lossless.webp photo_alpha.webp document.pdf].each do |name|
           bytes = file_fixture("photos/#{name}").binread
           assert_equal bytes, ImageHeader.strip(bytes), name
         end
@@ -315,7 +314,6 @@ module Entities
         dri = jpeg.byteslice(0, 20) + jpeg_segment(0xDD, "\0\x10".b) + jpeg.byteslice(20..)
         assert_not_nil ImageHeader.read(dri)
         dac = jpeg.byteslice(0, 20) + jpeg_segment(0xCC, "\x00\x10".b) + jpeg.byteslice(20..)
-        assert_not_nil ImageHeader.read(dac)
         sof = jpeg.index("\xFF\xC0".b)
 
         { dqt_long: with_segment(jpeg, 0xDB) { it + "SECRET" }, dqt_precision: with_segment(jpeg, 0xDB) { "\x20".b + it.byteslice(1..) },
@@ -325,7 +323,7 @@ module Entities
           sof_long: with_segment(jpeg, 0xC0) { it + "SECRET" }, sos_long: with_segment(jpeg, 0xDA) { it + "SECRET" },
           sof_short: with_segment(jpeg, 0xC0) { it.byteslice(0, 4) }, zero_height: with_segment(jpeg, 0xC0) { it.byteslice(0, 1) + "\0\0" + it.byteslice(3..) },
           dri_long: with_segment(dri, 0xDD) { it + "SECRET" }, dac_odd: with_segment(dac, 0xCC) { it + "S" },
-          dac_empty: with_segment(dac, 0xCC) { "" },
+          dac_empty: with_segment(dac, 0xCC) { "" }, dac_in_huffman_frame: dac,
           two_frames: jpeg.byteslice(0, sof) + jpeg.byteslice(sof, 19) + jpeg.byteslice(sof..) }.each do |label, bytes|
           assert_refused(label, bytes)
         end
@@ -393,6 +391,131 @@ module Entities
         assert_equal file_fixture("photos/photo.jpg").binread, ImageHeader.strip(motion)
         assert_equal file_fixture("photos/photo.jpg").binread, ImageHeader.strip(file_fixture("photos/photo.jpg").binread + "tail")
         refused_or_clean(motion:, tail: file_fixture("photos/photo.jpg").binread + "SECRET")
+      end
+
+      # Second challenge of PR #65: tables nobody uses, tables redefined before use, arithmetic conditioning in a Huffman
+      # frame, a second Adobe segment, a free gAMA, cHRM or suggested palette, chunks out of order, and files made of
+      # hundreds of thousands of empty parts.
+      def arithmetic(jpeg)
+        without_huffman = jpeg.gsub(/\xFF\xC4..(?:.(?!\xFF[\xC4\xDA]))*./mn) { "" }
+        sof = without_huffman.index("\xFF\xC0".b)
+        without_huffman.byteslice(0, sof) + jpeg_segment(0xCC, "\x00\x10\x10\x05\x01\x21\x11\x3F".b) + "\xFF\xC9".b +
+          without_huffman.byteslice(sof + 2..)
+      end
+
+      test "a DAC segment is kept only in an arithmetic frame, with bounded values, each table once and used" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        coded = arithmetic(jpeg)
+
+        assert_equal [ 64, 48 ], ImageHeader.read(coded).then { [ it.width, it.height ] }
+        assert_equal coded, ImageHeader.strip(coded)
+        { dac_class: with_segment(coded, 0xCC) { "\x20\x10".b }, dac_table: with_segment(coded, 0xCC) { "\x04\x10".b },
+          dac_dc_bounds: with_segment(coded, 0xCC) { "\x00\x01".b }, dac_ac_zero: with_segment(coded, 0xCC) { "\x10\x00".b },
+          dac_ac_high: with_segment(coded, 0xCC) { "\x10\x40".b }, dac_twice: with_segment(coded, 0xCC) { "\x00\x10\x00\x10".b },
+          dac_unused: with_segment(coded, 0xCC) { it + "\x03\x10".b },
+          dac_secret: with_segment(coded, 0xCC) { "SECRET-PAYLOAD".b },
+          dht_in_arithmetic: coded.sub("\xFF\xC9".b, jpeg_segment(0xC4, "\x00".b + ([ 0 ] * 15 + [ 1 ]).pack("C*") + "\x00") + "\xFF\xC9".b) }
+          .each { |label, bytes| assert_refused(label, bytes) }
+      end
+
+      test "a DQT or DHT table that no component uses, or that is redefined before being used, is no image" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        progressive = file_fixture("photos/photo_progressive.jpg").binread
+        sof = jpeg.index("\xFF\xC0".b)
+        table = ("SECRET-PAYLOAD" * 5).byteslice(0, 64)
+        dqt = jpeg_segment(0xDB, "\x03".b + table)
+        dht = jpeg_segment(0xC4, "\x13".b + ([ 0 ] * 7 + [ 14 ] + [ 0 ] * 8).pack("C*") + "SECRET-PAYLOAD")
+        first_dqt = jpeg.byteslice(jpeg.index("\xFF\xDB".b), 69)
+        first_dht = jpeg.byteslice(jpeg.index("\xFF\xC4".b), 33)
+        after_frame = jpeg.index("\xFF\xC4".b)
+
+        assert_not_nil ImageHeader.read(progressive)
+        { dqt_unused: jpeg.byteslice(0, sof) + dqt + jpeg.byteslice(sof..),
+          dqt_many: jpeg.byteslice(0, sof) + (dqt * 50) + jpeg.byteslice(sof..),
+          dqt_redefined: jpeg.byteslice(0, sof) + first_dqt + jpeg.byteslice(sof..),
+          dqt_after_frame: jpeg.byteslice(0, after_frame) + first_dqt.sub("\xFF\xDB\x00\x43\x00".b, "\xFF\xDB\x00\x43\x03".b) + jpeg.byteslice(after_frame..),
+          dht_unused: jpeg.byteslice(0, sof) + dht + jpeg.byteslice(sof..),
+          dht_redefined: jpeg.byteslice(0, after_frame) + first_dht + jpeg.byteslice(after_frame..),
+          dri_unused: jpeg.byteslice(0, jpeg.rindex("\xFF\xD9".b)) + jpeg_segment(0xDD, "\0\x10".b) + "\xFF\xD9".b,
+          scan_foreign_component: with_segment(jpeg, 0xDA) { it.byteslice(0, 1) + "\x09".b + it.byteslice(2..) },
+          progressive_foreign_component: with_segment(progressive, 0xDA) { it.byteslice(0, 1) + "\x09".b + it.byteslice(2..) },
+          progressive_no_component: with_segment(progressive, 0xDA) { "\x00\x00\x00\x00".b },
+          sequential_extra_scan: jpeg.byteslice(0, jpeg.rindex("\xFF\xD9".b)) + jpeg_segment(0xDA, "\x01\x01\x00\x00\x3F\x00".b) +
+                                 "SECRET-PAYLOAD\xFF\xD9".b }.each { |label, bytes| assert_refused(label, bytes) }
+      end
+
+      test "a single Adobe segment is kept with a transform of 0 to 2; a second one or another transform is no image" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        adobe = ->(transform) { jpeg_segment(0xEE, "Adobe\x00\x64\x00\x00\x00\x00".b + transform.chr) }
+        with = ->(*segments) { jpeg.byteslice(0, 20) + segments.join + jpeg.byteslice(20..) }
+
+        assert_not_nil ImageHeader.read(with.(adobe.(2)))
+        assert_not_nil facts("hostile/app14_secret.jpg")
+        { transform: with.(adobe.(3)), twice: with.(adobe.(1), adobe.(1)),
+          secret: with.(*"SECRET".bytes.map { adobe.(it) }) }.each { |label, bytes| assert_refused(label, bytes) }
+      end
+
+      test "a suggested palette, a cHRM chunk and an implausible gAMA are removed from a PNG" do
+        png = file_fixture("photos/photo.png").binread
+        color = file_fixture("photos/photo_color.png").binread
+        insert = ->(type, data) { png.byteslice(0, 33) + png_chunk(type, data) + png.byteslice(33..) }
+        gamma = insert.("gAMA", [ 45_455 ].pack("N"))
+
+        assert_equal gamma, ImageHeader.strip(gamma)
+        { plte: insert.("PLTE", ("SECRET" * 12).byteslice(0, 72)), gama: insert.("gAMA", "SECR"),
+          gama_low: insert.("gAMA", [ 999 ].pack("N")), chrm: insert.("cHRM", ("SECRET" * 6).byteslice(0, 32)) }.each do |label, bytes|
+          assert ImageHeader.read(bytes).metadata, label
+          assert_equal png, ImageHeader.strip(bytes), label
+        end
+        stripped = ImageHeader.strip(color)
+        assert ImageHeader.read(color).metadata
+        assert_not_includes stripped, "cHRM"
+        assert_includes stripped, "gAMA"
+        assert_includes stripped, "sRGB"
+        assert_not ImageHeader.read(stripped).metadata
+      end
+
+      test "PNG chunks out of the order of the standard are no image" do
+        png = file_fixture("photos/photo.png").binread
+        palette = file_fixture("photos/photo_palette.png").binread
+        idat = png.index("IDAT") - 4
+        iend = png.bytesize - 12
+        plte = palette.index("PLTE") - 4
+        plte_chunk = palette.byteslice(plte, 12 + palette.unpack1("N", offset: plte))
+        trns = palette.index("tRNS") - 4
+        trns_chunk = palette.byteslice(trns, 12 + palette.unpack1("N", offset: trns))
+        palette_idat = palette.index("IDAT") - 4
+
+        { gama_after_idat: png.byteslice(0, iend) + png_chunk("gAMA", [ 45_455 ].pack("N")) + png.byteslice(iend..),
+          srgb_after_idat: png.byteslice(0, iend) + png_chunk("sRGB", "\0") + png.byteslice(iend..),
+          idat_split: png.byteslice(0, iend) + png_chunk("tEXt", "a\0SECRET") + png_chunk("IDAT", "") + png.byteslice(iend..),
+          trns_before_plte: palette.byteslice(0, plte) + trns_chunk + plte_chunk + palette.byteslice(palette_idat..),
+          plte_after_idat: palette.byteslice(0, plte) + trns_chunk.then { "" } + palette.byteslice(palette_idat, palette.bytesize - palette_idat - 12) +
+                           plte_chunk + palette.byteslice(-12..),
+          trns_after_idat: png.byteslice(0, iend) + png_chunk("tRNS", "\0\1\0\2\0\3".b) + png.byteslice(iend..) }
+          .each { |label, bytes| assert_refused(label, bytes) }
+        assert_not_nil ImageHeader.read(png.byteslice(0, idat) + png_chunk("tEXt", "a\0b") + png.byteslice(idat..))
+      end
+
+      test "a 1 MB file made of empty parts is decided in less than half a second" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        png = file_fixture("photos/photo.png").binread
+        eoi = jpeg.rindex("\xFF\xD9".b)
+        idat = png.index("IDAT") - 4
+        scan = "\xFF\xDA\x00\x08\x01\x01\x00\x00\x3F\x00".b
+
+        { dri: jpeg.byteslice(0, 20) + (jpeg_segment(0xDD, "\0\x10".b) * 174_000) + jpeg.byteslice(20..),
+          scans: jpeg.byteslice(0, eoi) + (scan * 104_000) + "\xFF\xD9".b,
+          idat: png.byteslice(0, idat) + (png_chunk("IDAT", "") * 87_000) + png.byteslice(idat..),
+          fill: jpeg.byteslice(0, 2) + ("\xFF".b * 1_000_000) + jpeg.byteslice(2..),
+          stuffed: jpeg.byteslice(0, eoi) + ("\xFF\x00".b * 500_000) + "\xFF\xD9".b }.each do |label, bytes|
+          started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          facts = ImageHeader.read(bytes)
+          stripped = ImageHeader.strip(bytes)
+          ImageHeader.read(stripped)
+          assert_operator Process.clock_gettime(Process::CLOCK_MONOTONIC) - started, :<, 0.5, label
+          assert_nil facts, label if %i[dri scans idat].include?(label)
+        end
       end
     end
   end
