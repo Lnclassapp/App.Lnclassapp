@@ -95,3 +95,5 @@ Ce que le tableau dit :
 ## Questions encore ouvertes
 
 - Voir [`plan.md` — Décisions à soumettre au porteur](plan.md#décisions-à-soumettre-au-porteur).
+
+<!-- ESSAI JETABLE ci-rapide : PR qui ne touche que la documentation -->
