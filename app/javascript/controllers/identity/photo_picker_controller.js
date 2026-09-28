@@ -122,8 +122,10 @@ export default class extends Controller {
     this.showUnreadable(true)
   }
 
+  // La bulle native du champ requis reprend notre message au lieu d'en afficher un second (« Veuillez sélectionner un fichier »).
   showUnreadable(shown) {
     this.unreadableTarget.hidden = !shown
+    this.inputTarget.setCustomValidity(shown ? this.unreadableTarget.textContent.trim() : "")
     const describedBy = (this.inputTarget.getAttribute("aria-describedby") || "").split(" ").filter((id) => id && id !== this.unreadableTarget.id)
     if (shown) describedBy.push(this.unreadableTarget.id)
     this.inputTarget.setAttribute("aria-describedby", describedBy.join(" "))

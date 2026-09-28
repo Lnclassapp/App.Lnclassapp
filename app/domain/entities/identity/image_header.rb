@@ -21,14 +21,21 @@ module Entities
       JPEG_END = 0xD9
       # Hors d'un scan : 0x00, TEM, RSTn ou un second SOI ne sont pas des marqueurs de segment.
       JPEG_UNEXPECTED = [ 0x00, 0x01, *(0xD0..0xD8) ].freeze
-      # APPn gardés : JFIF (APP0), profil ICC (APP2), Adobe (APP14). Tout autre APPn et les commentaires (COM) partent.
-      JPEG_KEPT_APPS = [ 0xE0, 0xE2, 0xEE ].freeze
-      JPEG_COMMENT = 0xFE
-      PNG_METADATA = %w[eXIf iTXt tEXt zTXt].freeze
-      WEBP_METADATA = [ "EXIF", "XMP " ].freeze
+      # Liste blanche : seuls les segments et chunks qui dessinent l'image restent, réécrits dans leur forme standard
+      # quand ils ont des champs libres. Tout le reste part, quels que soient son nom ou sa signature — un profil ICC
+      # (APP2, iCCP, ICCP) aussi : son contenu est libre, il a transporté un secret dans la contre-épreuve de la PR #50.
+      # JPEG : SOFn, DHT, DAC, DQT, DRI, DNL, SOS (avec son scan), EOI ; JFIF (APP0) et Adobe (APP14) réécrits.
+      JPEG_KEPT = [ *JPEG_FRAMES, 0xC4, 0xCC, 0xDB, 0xDD, 0xDC, JPEG_SCAN, JPEG_END ].freeze
+      JPEG_JFIF = 0xE0
+      JPEG_ADOBE = 0xEE
+      # JFIF 1.01, sans unité, rapport 1:1, sans vignette ; Adobe version 100, drapeaux nuls, puis la transformée d'origine.
+      JFIF_SEGMENT = "\xFF\xE0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00".b.freeze
+      ADOBE_PREFIX = "\xFF\xEE\x00\x0EAdobe\x00\x64\x00\x00\x00\x00".b.freeze
+      PNG_KEPT = %w[IHDR PLTE IDAT IEND tRNS gAMA cHRM sRGB].freeze
+      WEBP_KEPT = [ "VP8 ", "VP8L", "VP8X", "ALPH" ].freeze
       WEBP_IMAGES = [ "VP8 ", "VP8L" ].freeze
-      # Drapeaux Exif (0x08) et XMP (0x04) de l'en-tête étendu VP8X.
-      WEBP_METADATA_FLAGS = 0x0C
+      # Seul le drapeau de transparence (0x10) de l'en-tête étendu VP8X reste : ni ICC, ni Exif, ni XMP, ni animation.
+      WEBP_ALPHA_FLAG = 0x10
 
       module_function
 
@@ -42,15 +49,14 @@ module Entities
         end
       end
 
-      # Les mêmes octets sans les segments ou chunks de métadonnées. Un fichier illisible est rendu tel quel : read l'a
-      # déjà refusé, il n'est jamais stocké.
+      # Les seules parties de la liste blanche, dans leur forme standard. Un fichier illisible est rendu tel quel : read
+      # l'a déjà refusé, il n'est jamais stocké.
       def strip(bytes)
         bytes = bytes.to_s.b
         parts = parts_of(bytes)
         return bytes if parts.nil?
 
-        kept = parts.reject { metadata?(bytes, it) }.map { bytes.byteslice(it.at, it.size) }
-        stripped = [ bytes.byteslice(0, parts.first.at), *kept ].join.b
+        stripped = [ bytes.byteslice(0, parts.first.at), *parts.filter_map { kept(bytes, it) } ].join.b
         format_of(bytes) == :webp ? fix_webp(stripped) : stripped
       end
 
@@ -69,13 +75,28 @@ module Entities
         end
       end
 
-      def metadata?(bytes, part)
+      # Ce qui reste d'une partie après le filtre : ses octets, sa forme standard, ou nil.
+      def kept(bytes, part)
+        raw = bytes.byteslice(part.at, part.size)
         case format_of(bytes)
-        when :jpeg then part.type == JPEG_COMMENT || ((0xE0..0xEF).cover?(part.type) && !JPEG_KEPT_APPS.include?(part.type))
-        when :png then PNG_METADATA.include?(part.type)
-        else WEBP_METADATA.include?(part.type)
+        when :jpeg then jpeg_kept(bytes, part)
+        when :png then raw if PNG_KEPT.include?(part.type)
+        else raw if WEBP_KEPT.include?(part.type)
         end
       end
+
+      # Sans les octets de remplissage : le segment commence à son marqueur.
+      def jpeg_kept(bytes, part)
+        segment = bytes.byteslice(part.data - 2, part.at + part.size - part.data + 2)
+        case part.type
+        when JPEG_JFIF then JFIF_SEGMENT if segment.byteslice(4, 5) == "JFIF\0"
+        when JPEG_ADOBE then ADOBE_PREFIX + segment.byteslice(15, 1) if segment.byteslice(4, 5) == "Adobe" && segment.bytesize == 16
+        else segment if JPEG_KEPT.include?(part.type)
+        end
+      end
+
+      # Une partie retirée ou réécrite signale des métadonnées.
+      def metadata?(bytes, part) = kept(bytes, part) != bytes.byteslice(part.at, part.size)
 
       # Le premier SOF, avant le premier scan, donne la taille.
       def jpeg(bytes)
@@ -221,9 +242,9 @@ module Entities
         parts
       end
 
-      # Le conteneur RIFF annonce sa longueur, et VP8X la présence d'Exif et de XMP : les deux sont recalculés.
+      # Le conteneur RIFF annonce sa longueur, et VP8X les chunks qu'il contient : les deux sont recalculés.
       def fix_webp(body)
-        body.setbyte(20, body.getbyte(20) & ~WEBP_METADATA_FLAGS) if body.byteslice(12, 4) == "VP8X"
+        body.setbyte(20, body.getbyte(20) & WEBP_ALPHA_FLAG) if body.byteslice(12, 4) == "VP8X"
         body[4, 4] = [ body.bytesize - 8 ].pack("V")
         body
       end
