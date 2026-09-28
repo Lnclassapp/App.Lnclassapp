@@ -16,6 +16,8 @@ scope "teams", module: "teams" do
     resource :code, only: :update, controller: "school_codes"
     # ADR-0059 : « + » et « − » du bloc « Classes par niveau » de la fiche.
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
+    # ADR-0057 : régénération du code d'établissement (PATCH seul ; le code se lit sur la fiche).
+    resource :code, only: :update, controller: "school_codes"
   end
   resources :levels, param: :slug, except: :show
   resources :series, param: :slug, except: :show

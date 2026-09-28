@@ -145,3 +145,11 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 - **Accessibilité** : chaque radio porte `aria-describedby` (aide puis erreur) et `aria-invalid="true"` en erreur, `required` si demandé ; le clavier est celui du navigateur (Tab entre sur l'option cochée, les flèches changent le choix). Une valeur `columns:` inconnue lève `ArgumentError`.
 - **Quand l'utiliser** : un choix unique parmi deux à six valeurs courtes, à saisir (pas un filtre). Une liste longue, ou un filtre avec une option « tous », reste un `ui_field as: :select`.
 - Visible sur `/design` (section « Champs de formulaire », au repos et en erreur), vérifié par `test/system/design_system_test.rb`.
+
+## Amendement du 2026-09-28 (quater) — afficher le code PIN
+
+*Chantier [`docs/chantiers/afficher-pin`](../../chantiers/afficher-pin/prd.md), [UDR-0051](0051-afficher-le-code-pin.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Champ** : l'API devient `ui_field(form, :attribut, as:, label:, hint:, required:, choices:, reveal: false, **input_html)`. `reveal: true` (refusé hors `as: :password`, `ArgumentError`) ajoute dans le champ, à droite, un bouton œil de 48 px, `hidden` tant que le contrôleur Stimulus `password-reveal` ne l'a pas montré : `eye` et « Afficher le code » quand le PIN est masqué, `eye-slash` et « Masquer le code » quand il est affiché (heroicons outline, taille `md`). Règles complètes dans l'UDR-0051.
+- **Contrôleur** : `password-reveal` (bascule `password` ↔ `text`, `aria-pressed`, libellé ; remasque au chargement, avant l'envoi et avant la mise en cache ; garde le bouton visible au morphing du 422).
+- Visible sur `/design` (champ mot de passe de la section « Champs de formulaire »), vérifié par `test/system/design_system_test.rb`.

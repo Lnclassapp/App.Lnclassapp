@@ -51,8 +51,10 @@ module Teams
 
     private
 
+    # Sur la fiche, le bloc « Classes par niveau » suit le statut (« + » réservé à un établissement actif, UDR-0046).
     def respond_with_school(notice:)
       @school = schools_query.find(public_id: params[:public_id])
+      @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
       redirect_or_stream(notice:)
     end
 

@@ -349,6 +349,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: /#{I18n.t('teams.schools.update.done', name: "Lycée Classique d'Abidjan")}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr#school_#{school.public_id}", text: /Bouaké/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('teams.schools.cycles.first')}/
+    assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms" # UDR-0046
     assert_equal "school.changed", Orm::AuditEvent.sole.action
   end
 
@@ -404,6 +405,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{I18n.t('teams.schools.deactivate.done', name: 'Lycée Classique')}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr", text: /#{I18n.t('school_statuses.inactive')}/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('school_statuses.inactive')}/
+    assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms_inactive" # UDR-0046
   end
 
   test "without Turbo, a deactivation leads back to the list with a notice" do
