@@ -81,6 +81,47 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Écran de réintégration pour l'équipe | L'équipe a le geste dans `StaffPolicy`, pas d'écran | À ouvrir si besoin |
 | Retirer un élève de l'établissement (départ en cours d'année) | Hors V2 (memo) | V3, avec CL-02 |
 
+## Lot 0a — Schéma et contrats (2026-09-29)
+
+Branche `feature/espace-direction-lot-0a`. Quatre migrations (matricule **nullable**, `school_staffs`, index partiel de `classroom_students`, `teacher_school_departures`), entités, ports gelés et leurs adaptateurs, `StaffPolicy`, fabriques, seed. Aucun écran.
+
+**Décisions en route**
+
+| Décision | Pourquoi |
+|---|---|
+| `Entities::School::StaffMember` gagne `active?` et `principal?` | Lecture directe des règles « seul l'équipe retire un Proviseur » (Lot B) ; aucune donnée de plus |
+| `SessionState#privileged?` posé ici (équipe, direction), testé dans `session_policy_test` ; `ResolveSession` et `SecondFactorPolicy` ne l'utilisent qu'au Lot 0b | `session_state.rb` est au Lot 0a ; le comportement ne change qu'avec le Lot 0b |
+| `SchoolRepository#detach_teacher` supprime la seule ligne `teacher_schools` **principale** de cet établissement ; `:not_found` sinon, rien d'écrit | ADR-0066 §4.4 : `:not_found` pour un enseignant dont l'école principale n'est pas celle-ci |
+| `reinstate_teacher` verrouille le départ ouvert, puis clôt le départ et recrée la ligne principale dans un même point de sauvegarde : l'index « une école principale » refusé annule aussi la clôture (`:conflict other_school`, départ toujours ouvert) | « Rien d'écrit sur un refus » (ADR-0066 §4.4) |
+| `StaffRepository#attach` distingue le conflit par le nom de l'index (`index_school_staffs_one_principal` → `principal_taken`, sinon `other_school`) | Même procédé que `SchoolRepository#persist` |
+| `school_staffs` : index `(school_id, left_at)` en plus des deux index uniques de l'ADR-0044 | Lectures « membres actifs d'un établissement » (Lot B, `principal_active?`) |
+| `Orm::SchoolStaff` n'a pas d'`inverse_of` vers `Orm::School` | `app/infrastructure/orm/school.rb` n'est pas dans le champ du lot ; l'association inverse peut venir avec un lot qui le touche |
+| Scope `Orm::TeacherSchoolDeparture.not_reinstated` (et non `open`) | `open` est une méthode de `Kernel` |
+| `create_user(role: "school_admin")` reçoit un second facteur confirmé (`second_factor:` désactivable) ; `create_team_member` passe par la même aide `confirm_second_factor` ; `create_student` pose un matricule unique par défaut (`student_number: nil` pour s'en passer) | Plan, « Done quand » |
+| Seed : Proviseur `0700000002` (Mariam Bamba), second facteur à activer, rattaché au Lycée Moderne de Treichville ; matricule `12345678A` de l'élève du seed, complété s'il manque | Plan, « Détail des contrats » |
+
+**Écarts au champ `Fichiers` (tests seulement)**
+
+- `test/infrastructure/orm/models_test.rb` : le compte des modèles `Orm::` passe de 34 à 36 (`school_staffs`, `teacher_school_departures`). Le tableau de collision range `test/infrastructure/orm/*` au Lot F ; la modification est une ligne, séquentielle, sans conflit possible.
+- `test/system/role_homes_test.rb` (au Lot 0b) : le cas `school_admin` passe `second_factor: false`. Sans cela, `sign_in_as` attend le formulaire du second facteur, que la direction ne voit qu'à partir du Lot 0b. **Le Lot 0b retire ce `second_factor: false`** en réécrivant le cas.
+- Tests existants complétés : `user_test`, `audit_action_test`, `session_policy_test`, `test/support/factories_test.rb` (couverture des nouveautés des fichiers du lot).
+
+**Dérapages**
+
+- Le schéma régénéré par `db:migrate` réécrivait **toutes** les contraintes `CHECK … = ANY (ARRAY[…])` (rendu de la version locale de PostgreSQL) : `db/schema.rb` a été reconstruit à la main à partir de `HEAD`, avec les seuls ajouts du lot (vérifié : même contenu que le dump, hors ce rendu). À surveiller par chaque lot qui migre (Lot F).
+- Première passe complète : un échec (`models_test`, compte des modèles) et une erreur système (`role_homes_test`, ci-dessus) ; corrigés, puis vérification complète rejouée.
+
+**Pour le Lot 0b**
+
+- Retirer `second_factor: false` du cas `school_admin` de `role_homes_test` (le réécrire : cinq entrées actives, écran d'attente).
+- `create_user(role: "school_admin")` a déjà son second facteur : les tests de refus (403) resteront verts une fois le second facteur exigé, puisque `sign_in_as` le saisit.
+- `SessionState#privileged?` est prêt pour `ResolveSession` et `SecondFactorPolicy`.
+- `Actor#position` et `UserRepository#actor_for` (rattachement actif, établissement `active`) sont prêts pour `HomeDestination` et `hold_detached_school_admin`.
+
+**Dette**
+
+- `reinstate_teacher` renverrait `:conflict other_school` si l'enseignant avait une ligne `teacher_schools` **non principale** dans cet établissement (index `(teacher_id, school_id)`) ; aucun parcours n'en crée en V2.
+
 ## Clôture
 
 | | |
