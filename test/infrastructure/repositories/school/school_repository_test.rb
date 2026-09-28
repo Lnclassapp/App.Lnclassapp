@@ -113,6 +113,30 @@ module Repositories
         assert_raises(ActiveRecord::RecordNotUnique) { @repository.insert_many(rows:, at: @at) }
       end
 
+      test "candidates of the generation: active or draft, without any classroom of the year, by id (ADR-0056, GC-05)" do
+        year = current_school_year
+        active = create_school(drena: @drena, name: "Lycée sans classe")
+        draft = create_school(drena: @drena, name: "Lycée brouillon", status: "draft", school_type: "private", cycle: "first")
+        create_school(drena: @drena, name: "Lycée désactivé", status: "inactive")
+        archived = create_school(drena: @drena, name: "Lycée à la classe archivée")
+        create_classroom(school: archived, status: "archived", join_code: nil)
+        last_year = create_school(drena: @drena, name: "Lycée de l'an dernier")
+        create_classroom(school: last_year, school_year: current_school_year(on: 1.year.ago.to_date))
+        equipped = create_school(drena: @drena, name: "Lycée doté")
+        create_classroom(school: equipped)
+
+        candidates = @repository.without_classrooms(school_year: year, after_id: 0, limit: 10)
+
+        assert_equal [ active.id, draft.id, last_year.id ], candidates.map(&:id)
+        assert_instance_of Ports::School::SchoolRepositoryPort::Inserted, candidates.first
+        assert_equal [ draft.public_id, @drena.id, "Lycée brouillon", "private", "first" ],
+                     candidates.second.to_h.values_at(:public_id, :drena_id, :name, :school_type, :cycle)
+        assert_equal [ active.id ], @repository.without_classrooms(school_year: year, after_id: 0, limit: 1).map(&:id)
+        assert_equal [ last_year.id ], @repository.without_classrooms(school_year: year, after_id: draft.id, limit: 10).map(&:id)
+        assert_equal [ archived.id, last_year.id, equipped.id ],
+                     @repository.without_classrooms(school_year: "2020-2021", after_id: draft.id, limit: 10).map(&:id)
+      end
+
       test "rattache un enseignant ; une seconde école principale donne :conflict (ADR-0030)" do
         teacher = create_user(role: "teacher")
         first = create_school

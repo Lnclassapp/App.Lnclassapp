@@ -49,6 +49,9 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0038](./0038-import-de-cours.md) | Import de cours | Accepté | 2026-09-25 | [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Aide de l'arbre étage par étage dans la modale d'import, noms du référentiel à portée de main, rapport qui compte les lignes créées |
 | [0039](./0039-import-de-fiches-essentielles.md) | Import de fiches essentielles | Accepté | 2026-09-25 | [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Le slug du cours rappelé dans la modale, l'arbre sous la fiche étage par étage, les fiches à la suite de celles du cours |
 | [0040](./0040-import-d-exercices.md) | Import d'exercices | Accepté | 2026-09-26 | [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Fiche essentielle cible rappelée dans la modale d'import, aide de l'exercice à la proposition, rapport qui compte questions et propositions |
+| [0041](./0041-page-profil.md) | Page profil | Accepté | 2026-09-28 | [0055](../adr/0055-profil-modification-de-soi-et-revocation-des-sessions.md) | Mes informations, puis nom, numéro et PIN modifiables en modale |
+| [0042](./0042-actions-de-ligne-dans-un-menu.md) | Actions de ligne dans un menu ⋮ | Accepté | 2026-09-28 | — | Modifier, désactiver et supprimer un objet passent par son menu ⋮, même seuls ; confirmations en `<dialog>` inchangées |
+| [0043](./0043-generer-les-classes-manquantes.md) | Générer les classes manquantes | Accepté | 2026-09-28 | [0056](../adr/0056-generation-des-classes-manquantes.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Bouton secondaire de l'écran Établissements, confirmation qui dit le périmètre, suivi dans le rapport des imports |
 
 ---
 

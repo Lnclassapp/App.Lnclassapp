@@ -67,6 +67,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       click_on t("catalog.courses.role_actions.edit")
       within "turbo-frame#modal dialog[open]" do
         editor = find("trix-editor")
+        # Trix se charge à la demande : l'élément existe avant que son éditeur soit branché.
+        page.document.synchronize { raise Capybara::ExpectationNotMet unless page.evaluate_script("!!arguments[0].editor", editor) }
         editor.click
         page.execute_script("const editor = arguments[0].editor; editor.setSelectedRange(editor.getDocument().getLength() - 1)", editor)
         editor.send_keys(:enter)

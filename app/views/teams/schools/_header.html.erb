@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_header — en-tête de la fiche d'un établissement, remplacé par les streams update et deactivate %>
-<%# Rôle : nom, sigle, DRENA, type, cycle, statut ; « Ajouter une classe », « Modifier » en modale, « Désactiver » confirmé dans la page %>
-<%# ADR  : 0030, 0036 · UDR : 0006, 0036 %>
+<%# Rôle : nom, sigle, DRENA, type, cycle, statut ; « Ajouter une classe », menu ⋮ : « Modifier » en modale, « Désactiver » confirmé dans la page %>
+<%# ADR  : 0030, 0036 · UDR : 0006, 0036, 0042 %>
 <% active = school.status != "inactive" %>
 <%# Seul un établissement actif reçoit une classe : ni désactivé, ni en brouillon (décision du porteur, 2026-09-27) %>
 <% accepts_classrooms = school.status == "active" %>
@@ -34,16 +34,19 @@
           </dl>
         </div>
       </div>
-      <div class="flex flex-wrap gap-3 lg:shrink-0 lg:flex-nowrap">
+      <div class="flex flex-wrap items-center gap-3 lg:shrink-0 lg:flex-nowrap">
         <% if accepts_classrooms %>
           <%= ui_button t(".add_classroom"), href: new_school_classroom_path(school.public_id), icon: "plus",
                         data: { turbo_frame: "modal" } %>
         <% end %>
-        <%= ui_button t(".edit"), href: edit_school_path(school.public_id), variant: :secondary, icon: "pencil-square",
-                      data: { turbo_frame: "modal" } %>
+        <%= ui_dropdown label: t(".actions", name: school.name), id: "school-header-actions", fixed: true do %>
+          <%= ui_dropdown_item t(".edit"), href: edit_school_path(school.public_id), icon: "pencil-square", frame: "modal" %>
+          <% if active %>
+            <%= ui_dropdown_item t(".deactivate"), dialog: "deactivate-school-header", icon: "no-symbol" %>
+          <% end %>
+        <% end %>
         <% if active %>
-          <%= ui_modal title: t(".deactivate_title", name: school.name), id: "deactivate-school-header", size: :sm,
-                       trigger: t(".deactivate"), trigger_variant: :ghost, trigger_icon: "no-symbol" do |modal| %>
+          <%= ui_modal title: t(".deactivate_title", name: school.name), id: "deactivate-school-header", size: :sm do |modal| %>
             <% modal.footer do %>
               <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
               <%= ui_button t(".confirm_deactivate"), type: :submit, form: "deactivate-school-header-form" %>

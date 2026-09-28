@@ -239,7 +239,7 @@
   <% end %>
 
   <%# ---------- Menu déroulant ---------- %>
-  <%= design_section(id: "dropdown", title: t(".sections.dropdown"), api: "ui_dropdown(label:, icon:, trigger:, align:, id:) { ui_dropdown_item(label, href:, icon:, method:, tone:) }") do %>
+  <%= design_section(id: "dropdown", title: t(".sections.dropdown"), api: "ui_dropdown(label:, icon:, trigger:, align:, id:, fixed:) { ui_dropdown_item(label, href:, icon:, method:, tone:, frame:, dialog:) }") do %>
     <div class="flex flex-wrap items-start gap-6" data-example="dropdown">
       <%= ui_dropdown label: t(".dropdown.label"), id: "demo-menu", align: :start do %>
         <%= ui_dropdown_item t(".dropdown.edit"), href: design_path(anchor: "dropdown"), icon: "pencil-square" %>

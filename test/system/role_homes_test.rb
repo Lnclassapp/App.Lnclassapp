@@ -105,10 +105,18 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path active.fetch(:home, home)
   end
 
-  # The account menu of the header: « Mon profil » is not drawn in V1, « Se déconnecter » ends the session.
+  # The account menu of the header: « Mon profil » opens the profile, in the shell of the role, and the entry is then
+  # marked current (ADR-0055, UDR-0041); « Se déconnecter » ends the session.
   def assert_signs_out
-    open_account_menu
-    assert_selector "#account-menu [role=menuitem][aria-disabled='true']", text: tn(:profile)
+    with_account_menu { assert_selector "#account-menu a[role=menuitem]:not([aria-current])", text: tn(:profile) }
+    find("#account-menu a[role=menuitem][href='#{profile_path}']", text: tn(:profile)).click
+
+    assert_current_path profile_path
+    assert_selector "aside nav"
+    assert_selector "h1", text: I18n.t("identity.profiles.show.title")
+    with_account_menu do
+      assert_selector "#account-menu a[role=menuitem][aria-current='page'][href='#{profile_path}']", text: tn(:profile)
+    end
     # Found from the page, never from a kept scope: the sign-out replaces the document (new session, ADR-0049), and a
     # scope kept on the old menu would go stale under a loaded run.
     find("#account-menu [role=menuitem]", text: tn(:sign_out)).click
@@ -118,13 +126,19 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path new_session_path
   end
 
-  # Under a loaded run, the page may still be swapped (Turbo visit, then the reload of ADR-0049) after the first click:
-  # the menu opened on the old document vanishes with it. The toggle is clicked again, on the document now shown.
-  def open_account_menu
-    3.times do
-      find("button[aria-controls='account-menu']").click
-      return if page.has_selector?("#account-menu", wait: 3)
+  # Under a loaded run, the page may still be swapped (Turbo visit, then the reload of ADR-0049) after the menu opened:
+  # the menu vanishes with the old document. The menu is reopened on the document now shown, and the expectations on
+  # its content are checked again, three times at most.
+  def with_account_menu
+    attempts = 0
+    begin
+      find("button[aria-controls='account-menu']").click if page.has_no_selector?("#account-menu", wait: 0)
+      assert_selector "#account-menu"
+      yield
+    rescue Minitest::Assertion, Capybara::ElementNotFound, Selenium::WebDriver::Error::StaleElementReferenceError
+      raise if (attempts += 1) >= 3
+
+      retry
     end
-    assert_selector "#account-menu"
   end
 end

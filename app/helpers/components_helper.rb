@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -209,18 +209,25 @@ module ComponentsHelper
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
-  def ui_dropdown(label:, icon: "ellipsis-vertical", trigger: nil, align: :end, id: nil, &block)
-    render "components/dropdown", label:, icon:, trigger:, id: id || "menu-#{label.parameterize}",
+  # `fixed: true` place le menu en position fixe à l'ouverture : il échappe au défilement d'un tableau (UDR-0042).
+  def ui_dropdown(label:, icon: "ellipsis-vertical", trigger: nil, align: :end, id: nil, fixed: false, &block)
+    render "components/dropdown", label:, icon:, trigger:, id: id || "menu-#{label.parameterize}", fixed:,
            align_class: option!(DROPDOWN_ALIGNS, align, "ui_dropdown align"), items: capture(&block)
   end
 
-  def ui_dropdown_item(label, href: nil, icon: nil, method: nil, tone: :default)
+  # Entrée de menu : lien (`href:`, `method:`, `frame:` pour l'ouvrir dans un Turbo Frame), bouton qui ouvre une
+  # <dialog> de la page (`dialog:` son id, UDR-0042), ou entrée inactive sans l'un ni l'autre.
+  def ui_dropdown_item(label, href: nil, icon: nil, method: nil, tone: :default, frame: nil, dialog: nil)
     classes = class_names("flex min-h-tap w-full items-center gap-3 rounded-sm px-3 text-sm font-medium focus:outline-none",
                           option!(DROPDOWN_TONES, tone, "ui_dropdown_item tone"))
     content = safe_join([ (ui_icon(icon, class: "opacity-70") if icon), tag.span(label) ].compact)
+    return dropdown_dialog_item(content, classes, dialog) if dialog
     return tag.span(content, class: class_names(classes, "opacity-50"), role: "menuitem", "aria-disabled": "true", tabindex: -1) if href.nil?
 
-    link_to content, href, class: classes, role: "menuitem", tabindex: -1, data: (method ? { turbo_method: method } : {})
+    # Un lien vers la page ouverte est marqué courant (« Mon profil », UDR-0041) ; une action (DELETE…) ne l'est jamais.
+    link_to content, href, class: classes, role: "menuitem", tabindex: -1,
+                           data: { turbo_method: method, turbo_frame: frame, action: ("dropdown#dismiss" if frame) }.compact,
+                           "aria-current": ("page" if method.nil? && current_page?(href))
   end
 
   def ui_tabs(id:, label: nil, selected: nil, &block)
@@ -314,6 +321,13 @@ module ComponentsHelper
 
   def option!(table, key, component)
     table.fetch(key.to_sym) { raise ArgumentError, "#{component} : « #{key} » inconnu (#{table.keys.join(', ')})" }
+  end
+
+  # Ferme le menu, rend le focus au bouton ⋮ puis ouvre la <dialog> : à sa fermeture, le focus revient au bouton.
+  def dropdown_dialog_item(content, classes, dialog)
+    tag.button(content, type: "button", class: class_names(classes, "cursor-pointer text-left"), role: "menuitem",
+                        tabindex: -1, "aria-haspopup": "dialog", "aria-controls": dialog,
+                        data: { action: "dropdown#openDialog", dropdown_dialog_param: dialog })
   end
 
   def heroicon_source(set, name)

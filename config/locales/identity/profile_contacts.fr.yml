@@ -1,0 +1,34 @@
+# Profil : changer son numéro sous PIN actuel (chantier profil-utilisateur, Lot B) — ADR-0055, UDR-0041
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/contact_change_input:
+        current_pin: "PIN actuel"
+        contact: "Nouveau numéro"
+        contact_confirmation: "Confirmez le nouveau numéro"
+    errors:
+      models:
+        dtos/identity/contact_change_input:
+          attributes:
+            current_pin:
+              blank: "Saisissez votre PIN actuel."
+              invalid: "Le PIN compte 4 chiffres."
+              incorrect: "PIN incorrect."
+            contact:
+              blank: "Saisissez votre nouveau numéro."
+              invalid: "Saisissez un numéro ivoirien à 10 chiffres, par exemple 05 01 02 03 04."
+              unchanged: "C'est déjà votre numéro."
+              taken: "Ce numéro ne peut pas être utilisé."
+            contact_confirmation:
+              confirmation: "Les deux numéros ne sont pas identiques."
+  identity:
+    profile_contacts:
+      edit:
+        title: "Changer mon numéro"
+        intro: "Vous vous connecterez ensuite avec le nouveau numéro. Vos autres appareils seront déconnectés."
+        current_pin_hint: "Le PIN à 4 chiffres que vous utilisez pour vous connecter."
+        contact_placeholder: "07 00 00 00 00"
+        cancel: "Annuler"
+        submit: "Changer mon numéro"
+      update:
+        changed: "Votre numéro est changé."

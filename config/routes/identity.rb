@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte identity
-# Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations
-# ADR  : 0031, 0032, 0038, 0050
+# Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil
+# ADR  : 0031, 0032, 0038, 0050, 0055
 get "login", to: "identity/sessions#new", as: :new_session
 resource :session, only: %i[create destroy], controller: "identity/sessions" # session_path, gelé : DELETE = « Se déconnecter »
 namespace :identity do
@@ -14,3 +14,11 @@ post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher
 get "invitations/:token", to: "identity/invitations#show", as: :invitation
 post "invitations/:token", to: "identity/invitations#accept", as: :accept_invitation
 post "accounts/:user_public_id/pin-recovery-codes", to: "identity/pin_recovery_codes#create", as: :account_pin_recovery_codes
+# Le profil ne prend aucun identifiant : toujours le compte de la session (ADR-0055). profile_path, gelé : « Mon profil ».
+scope module: :identity do
+  resource :profile, only: :show do
+    resource :name, only: %i[edit update], controller: :profile_names
+    resource :contact, only: %i[edit update], controller: :profile_contacts
+    resource :pin, only: %i[edit update], controller: :profile_pins
+  end
+end

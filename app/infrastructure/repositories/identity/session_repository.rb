@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::SessionRepository
 # Rôle : sessions serveur adressées par l'empreinte de leur jeton ; jamais le jeton en clair
-# ADR  : 0031, 0050
+# ADR  : 0031, 0050, 0055
 module Repositories
   module Identity
     class SessionRepository
@@ -41,6 +41,7 @@ module Repositories
       end
 
       def destroy_all_for(user_id:) = Orm::Session.where(user_id:).delete_all
+      def destroy_all_except(user_id:, keep_id:) = Orm::Session.where(user_id:).where.not(id: keep_id).delete_all
     end
   end
 end

@@ -78,6 +78,13 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal :danger, sign_out[:tone]
   end
 
+  # « Mon profil » is drawn since the profil-utilisateur chantier; an account route not drawn yet keeps its entry inactive.
+  test "an account link whose route is not drawn has no href" do
+    define_singleton_method(:respond_to?) { |name, include_all = false| name != :profile_path && super(name, include_all) }
+
+    assert_nil account_links.first[:href]
+  end
+
   test "home sections and accents exist for every role" do
     NavigationHelper::DESTINATIONS.each_key do |role|
       assert_not_empty home_sections_for(role.to_s)
