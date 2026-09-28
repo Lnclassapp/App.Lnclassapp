@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
 # Rôle : contrat de persistance des classes, de leur code d'adhésion et de la génération par défaut
-# ADR  : 0030, 0039, 0041
+# ADR  : 0030, 0039, 0041, 0059
 module Ports
   module Classroom
     module ClassroomRepositoryPort
@@ -36,6 +36,18 @@ module Ports
       # Noms déjà pris dans l'école pour l'année. → Set[String]
       def names_in(school_id:, school_year:)
         raise NotImplementedError, "#{self.class} doit implémenter #names_in"
+      end
+
+      # Noms des classes d'un couple niveau/série (series_id nil : sans série) dans l'école pour l'année. → [String]
+      def names_in_level(school_id:, school_year:, level_id:, series_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #names_in_level"
+      end
+
+      # ADR-0059 : dans la transaction de l'appelant, verrouille la classe (comme l'adhésion par code), puis la supprime
+      # si elle n'a jamais eu d'adhésion (même terminée), d'enseignant ni d'assignation (même archivée).
+      # → Result | failure(:not_found) | failure(:conflict, errors: { base: [:has_students | :has_teachers | :has_assignments] })
+      def delete_if_unused(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #delete_if_unused"
       end
     end
   end

@@ -161,7 +161,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: I18n.t("teams.schools.header.add_classroom")
     assert_select "#school_header a[data-turbo-frame=modal][href='#{edit_school_path(school.public_id)}']"
     assert_select "#school_header form[action='#{deactivate_school_path(school.public_id)}']"
-    assert_select "section[aria-labelledby] h3", 2
+    assert_select "section[aria-labelledby^=level_] h3", 2
     assert_select "section h3", text: "6ème"
     assert_select "#classroom_#{tle.public_id}", text: /Tle D 1/
     assert_select "#classroom_#{tle.public_id}", text: /KFM37/
@@ -170,6 +170,58 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_teachers li", text: /Awa Koné/
     assert_select "#school_teachers li", text: /SVT/
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
+  end
+
+  test "CN-01, UDR-0046: the « Classes par niveau » block counts each level and series; its sum is the page's and the list's" do
+    referential = seed_referential
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody", cycle: "both")
+    sixths = (1..4).map { create_classroom(school:, level: referential[:levels]["6eme"], name: "6ème #{it}") }
+    create_classroom(school:, level: referential[:levels]["tle"], series: referential[:series]["d"], name: "Tle D 1",
+                     status: "archived")
+    create_classroom(school:, level: referential[:levels]["6eme"], name: "6ème 9", school_year: "2020-2021")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_response :success
+    within_block = "#school_classrooms #school_level_classrooms"
+    assert_select "#{within_block} h3#school_level_classrooms_title", text: I18n.t("teams.level_classrooms.block.title")
+    assert_select "#{within_block} li", 14
+    assert_select "#{within_block} #level_classrooms_6eme [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "6ème", count: 4)
+    assert_select "#{within_block} #level_classrooms_tle-d [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "Tle D", count: 1)
+    assert_select "#{within_block} #level_classrooms_tle-a1 [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "Tle A1", count: 0)
+    assert_select "#{within_block} #level_classrooms_6eme dialog form[action='#{school_level_classroom_path(school.public_id, sixths.last.public_id)}'] input[name=_method][value=delete]", 1
+    assert_select "#{within_block} #level_classrooms_6eme dialog h2", text: I18n.t("teams.level_classrooms.block.remove_title", name: "6ème 4")
+    assert_select "#{within_block} #level_classrooms_tle-a1 button[disabled]", text: I18n.t("teams.level_classrooms.block.remove", level: "Tle A1")
+    assert_select "#{within_block} #level_classrooms_tle-a1 form[action='#{school_level_classrooms_path(school.public_id)}'] input[name=series][value=a1]"
+    assert_select "#{within_block} form[action='#{school_level_classrooms_path(school.public_id)}'] button[type=submit]", 14
+    assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 5)
+
+    get schools_path
+    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5"
+  end
+
+  test "UDR-0046: a draft school's block keeps « − » but offers no « + », and says why" do
+    referential = seed_referential
+    draft = create_school(status: "draft")
+    create_classroom(school: draft, level: referential[:levels]["6eme"], name: "6ème 1")
+    sign_in_as @member
+
+    get school_path(draft.public_id)
+
+    assert_select "#school_level_classrooms_inactive", text: I18n.t("teams.level_classrooms.block.inactive")
+    assert_select "#school_level_classrooms form[action='#{school_level_classrooms_path(draft.public_id)}']", 0
+    assert_select "#level_classrooms_6eme dialog form[action^='#{school_level_classrooms_path(draft.public_id)}/']"
+  end
+
+  test "UDR-0046: without any level in the referential, the block says so" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "#school_level_classrooms", text: /#{I18n.t('teams.level_classrooms.block.empty_title')}/
+    assert_select "#school_level_classrooms_inactive", 0
   end
 
   test "a draft school page offers no « Ajouter une classe » until the school is activated" do
