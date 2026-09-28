@@ -7,7 +7,7 @@
   <td class="max-w-56 truncate px-4 py-3">
     <%= link_to import.filename || t("teams.imports.import_row.no_file"), teams_import_path(import.public_id), class: "font-medium text-ink underline-offset-4 hover:underline", data: { turbo_frame: "_top" } %>
   </td>
-  <td class="px-4 py-3"><%= ui_badge t("teams.imports.statuses.#{import.status}"), tone: import_status_tone(import.status), dot: true %></td>
+  <td class="px-4 py-3"><%= ui_badge import_status_label(import), tone: import_status_tone(import.status), dot: true %></td>
   <td class="px-4 py-3 tabular-nums"><%= import.imported_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= import.skipped_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= import.error_count %></td>

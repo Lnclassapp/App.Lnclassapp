@@ -128,3 +128,10 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 *Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Menu déroulant** : l'API devient `ui_dropdown(label:, icon:, trigger:, align:, id:, fixed: false) { ui_dropdown_item(label, href:, icon:, method:, tone:, frame:, dialog:) }`. `frame:` ouvre le lien dans un Turbo Frame et ferme le menu ; `dialog:` rend un `<button role="menuitem">` qui ferme le menu, rend le focus au bouton et ouvre la `<dialog>` d'id donné en `showModal()` ; `fixed: true` place le menu en position fixe (`z-50`) pour qu'il échappe au défilement d'un tableau. Contrôleur `dropdown` : actions `dismiss`, `openDialog`, `place`.
+
+## Amendement du 2026-09-28 (bis)
+
+*Chantier [`docs/chantiers/finitions-generation-menu`](../../chantiers/finitions-generation-menu/memo.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Utilitaires maison** : s'ajoute `sticky-actions` (colonne d'actions d'un tableau collée au bord droit, fond `--color-white` ; `z-index: 50` tant que son menu est ouvert). Aucun nouveau token.
+- **Toasts du flash** : `flash_toast(key, value)` rend un message, ou `{ "message", "title" }` pour un titre propre à la situation ; les types restent ceux de `ui_toast`.
