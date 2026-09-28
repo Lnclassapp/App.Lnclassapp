@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Identity::TeacherRegistrationInput
 # Rôle : forme de l'inscription enseignant ; aucun rôle saisi, l'établissement est désigné par son code, jamais choisi
-# ADR  : 0026, 0030, 0037, 0050, 0057 · UDR : 0024, 0044
+# ADR  : 0026, 0030, 0037, 0050, 0057, 0063 · UDR : 0024, 0044, 0050
 module Dtos
   module Identity
     class TeacherRegistrationInput < PersonNameInput
@@ -10,6 +10,8 @@ module Dtos
       attribute :pin_confirmation, :string
       attribute :school_code, :string
       attribute :material_slug, :string
+      # Jeton du parrain (ADR-0063), porté par le lien /e/<code>?ref= puis par un champ caché ; mal formé, il est oublié.
+      attribute :ref, :string
 
       attr_reader :raw_contact, :raw_school_code
 
@@ -29,6 +31,10 @@ module Dtos
       def school_code=(raw)
         @raw_school_code = raw.to_s
         super(Entities::School::SchoolCode.normalize(raw))
+      end
+
+      def ref=(raw)
+        super(Entities::Identity::ReferralToken.normalize(raw))
       end
 
       private

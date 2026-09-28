@@ -1,11 +1,20 @@
 <%# 🌐 UI · identity/profiles/show — « Mon profil », dans le shell du rôle %>
-<%# Rôle : carte « Mes informations » (nom, numéro), carte du PIN ; chaque changement s'ouvre dans le frame modal %>
-<%# ADR  : 0055 · UDR : 0006, 0041 %>
+<%# Rôle : « Mes informations », badge Ambassadeur (enseignant), carte du PIN ; chaque changement s'ouvre dans le frame modal %>
+<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050 %>
 <% content_for :title, t(".page_title") %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
 
 <div class="grid max-w-2xl gap-6">
   <%= render "information", profile: @profile %>
+
+  <% if @referral && Entities::Identity::Ambassador.ambassador?(referred_count: @referral.referred_count) %>
+    <%= ui_card id: "profile_ambassador" do %>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= ui_badge t("identity.referrals.ambassador.badge"), tone: :gold, icon: "trophy" %>
+        <p class="text-sm text-mute"><%= t("identity.referrals.ambassador.thanks", count: @referral.referred_count) %></p>
+      </div>
+    <% end %>
+  <% end %>
 
   <%= ui_card id: "profile_security", "aria-labelledby": "profile_security_title" do %>
     <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>

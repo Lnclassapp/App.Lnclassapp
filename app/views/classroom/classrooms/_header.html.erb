@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_header — en-tête de la page d'une classe (CL-10, CL-04) %>
 <%# Rôle : nom, niveau, établissement, année scolaire ; code en majuscules et « Copier » (Stimulus) ; effectif / plafond %>
-<%# ADR  : 0028, 0041 · UDR : 0027 · Stimulus : classroom--join-code-copy %>
+<%# ADR  : 0028, 0041, 0063 · UDR : 0027, 0050 · Stimulus : classroom--join-code-copy · WhatsApp : lien sortant, sans nom d'élève %>
 <div id="classroom_header" class="mb-8">
   <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
     <%= link_to home_path_for(shell_user.role), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
@@ -53,6 +53,10 @@
                           data: { action: "classroom--join-code-copy#copy" } %>
           </div>
           <p class="mt-2 max-w-xs text-xs text-mute"><%= t(".join_code_hint") %></p>
+          <% share = t(".share_message", classroom: classroom.name, school: classroom.school_name,
+                                         link: join_classroom_url(classroom.join_code_display), code: classroom.join_code_display) %>
+          <%= ui_button t(".share_whatsapp"), href: whatsapp_share_url(share), variant: :brand, size: :sm, icon: "chat-bubble-left-right",
+                                              id: "classroom_whatsapp_share", target: "_blank", rel: "noopener", class: "mt-3" %>
           <template data-classroom--join-code-copy-target="copied"><%= ui_toast t(".copied"), type: :success %></template>
           <template data-classroom--join-code-copy-target="failed"><%= ui_toast t(".copy_failed"), type: :warning %></template>
         </div>

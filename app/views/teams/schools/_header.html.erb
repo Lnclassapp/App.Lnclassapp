@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_header — en-tête de la fiche d'un établissement, remplacé par les streams update et deactivate %>
 <%# Rôle : nom, sigle, DRENA, type, cycle, statut, code d'établissement (copier, lien) ; menu ⋮ : modifier, régénérer le code, désactiver %>
-<%# ADR  : 0030, 0036, 0057 · UDR : 0006, 0036, 0042, 0044 · Stimulus : classroom--join-code-copy %>
+<%# ADR  : 0030, 0036, 0057, 0063 · UDR : 0006, 0036, 0042, 0044, 0050 · Stimulus : classroom--join-code-copy %>
 <% active = school.status != "inactive" %>
 <%# Seul un établissement actif reçoit une classe : ni désactivé, ni en brouillon (décision du porteur, 2026-09-27) %>
 <% accepts_classrooms = school.status == "active" %>
@@ -27,6 +27,11 @@
             <div class="flex items-center gap-1">
               <dt><%= ui_icon "map-pin", size: :sm, label: t(".drena") %></dt><dd><%= school.drena_name %></dd>
             </div>
+            <% if school.national_code %>
+              <div id="school_national_code" class="flex gap-1">
+                <dt><%= t(".national_code") %></dt><dd class="font-mono font-medium text-ink"><%= school.national_code %></dd>
+              </div>
+            <% end %>
             <div class="flex gap-1"><dt class="sr-only"><%= t(".type") %></dt><dd><%= t("school_types.#{school.school_type}") %></dd></div>
             <div class="flex gap-1"><dt class="sr-only"><%= t(".cycle") %></dt><dd><%= t("teams.schools.cycles.#{school.cycle}") %></dd></div>
             <div class="flex gap-1">

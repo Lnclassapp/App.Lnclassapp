@@ -14,7 +14,7 @@ module Entities
 
       test "les erreurs d'enveloppe rejettent tout le fichier" do
         assert ImportError.new(path: "$.version", code: "version_unsupported").blocking?
-        assert_equal 17, ImportError::CODES.size
+        assert_equal 18, ImportError::CODES.size # + national_code_taken (ADR-0063)
       end
 
       test "un motif hors liste lève ArgumentError" do
