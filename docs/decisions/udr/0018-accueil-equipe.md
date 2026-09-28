@@ -72,3 +72,10 @@ L'équipe a besoin de voir l'état de la plateforme d'un coup d'œil, et d'attei
 - L'accueil équipe ne lit aucun cache : sa lecture est bornée (sept comptages, deux lectures du référentiel, trois listes de 5 éléments) et ne dépend pas du volume des tables listées.
 - Le « Control Center » (TR-10) reste hors périmètre (V4) : l'entrée « Pilotage » du shell reste inactive.
 - Les messages de l'ancien fil (CO) ne sont pas repris en V1 : une section « Messages » s'ajoutera ici quand la communication sera livrée.
+
+## Amendement du 2026-09-28 — le « Control Center » est livré
+
+*Chantier [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/prd.md). Statut : accepté (par défaut, à confirmer par le porteur). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Le §4 « l'entrée Pilotage du shell reste inactive » ne vaut plus : TR-10 est livré en V4 par la page « Pilotage » ([UDR-0049](0049-page-pilotage-de-l-equipe.md)), active dans la navigation.
+- L'accueil ne change pas : il garde ses compteurs du référentiel. Les indicateurs d'usage (élèves actifs, exercices terminés, couverture) vivent sur « Pilotage », pas sur l'accueil, pour que l'accueil reste une lecture bornée et rapide.

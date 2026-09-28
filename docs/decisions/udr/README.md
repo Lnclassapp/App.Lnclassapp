@@ -52,6 +52,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0041](./0041-page-profil.md) | Page profil | Accepté | 2026-09-28 | [0055](../adr/0055-profil-modification-de-soi-et-revocation-des-sessions.md) | Mes informations, puis nom, numéro et PIN modifiables en modale |
 | [0042](./0042-actions-de-ligne-dans-un-menu.md) | Actions de ligne dans un menu ⋮ | Accepté | 2026-09-28 | — | Modifier, désactiver et supprimer un objet passent par son menu ⋮, même seuls ; confirmations en `<dialog>` inchangées |
 | [0043](./0043-generer-les-classes-manquantes.md) | Générer les classes manquantes | Accepté | 2026-09-28 | [0056](../adr/0056-generation-des-classes-manquantes.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Bouton secondaire de l'écran Établissements, confirmation qui dit le périmètre, suivi dans le rapport des imports |
+| [0049](./0049-page-pilotage-de-l-equipe.md) | Page « Pilotage » de l'équipe | Accepté (par défaut, à confirmer par le porteur) | 2026-09-28 | [0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md), [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md), [0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md) | Chiffres clés sur la période et en ce moment, filtres GET (période, DRENA), barres en CSS pur, couverture par DRENA, inscrits à numéro masqué, recherche dans un frame |
 
 ---
 
