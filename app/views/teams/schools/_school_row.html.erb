@@ -16,7 +16,7 @@
   <td class="px-4 py-3"><%= ui_badge t("school_statuses.#{school.status}"), tone: school_status_tone(school.status), size: :sm, dot: true %></td>
   <td class="px-4 py-3 tabular-nums"><%= school.classrooms_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= school.teachers_count %></td>
-  <td class="px-4 py-3">
+  <td class="sticky-actions px-4 py-3">
     <div class="flex justify-end">
       <%= ui_dropdown label: t(".actions", name: school.name), id: "school-actions-#{school.public_id}", fixed: true do %>
         <%= ui_dropdown_item t(".edit"), href: edit_school_path(school.public_id), icon: "pencil-square", frame: "modal" %>

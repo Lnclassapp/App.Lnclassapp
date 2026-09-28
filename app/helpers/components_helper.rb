@@ -273,6 +273,13 @@ module ComponentsHelper
     render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay]
   end
 
+  # Un flash est un message, ou { "message", "title" } quand le titre du type ne dit pas la situation. Toute autre valeur
+  # (le drapeau de rechargement de l'authentification) ne donne aucun toast.
+  def flash_toast(flash_key, value)
+    message, title = value.is_a?(Hash) ? value.values_at("message", "title") : value
+    ui_toast(message, type: toast_type_for(flash_key), title:) if message.is_a?(String)
+  end
+
   def toast_type_for(flash_key)
     key = flash_key.to_sym
     FLASH_TYPES.fetch(key) { TOAST_TYPES.key?(key) ? key : :info }
