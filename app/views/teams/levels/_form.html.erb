@@ -9,7 +9,7 @@
     </div>
   <% end %>
   <%= ui_field form, :name, required: true, maxlength: Entities::Catalog::Level::NAME_MAX, autocomplete: "off",
-                            placeholder: t(".name_placeholder"), hint: "#{name_hint} #{t('.recognized_names')}" %>
+                            placeholder: t(".name_placeholder"), hint: name_hint %>
   <%= ui_field form, :position, as: :number, required: true, min: 0, max: Dtos::Catalog::LevelInput::POSITION_MAX,
                                 step: 1, inputmode: "numeric", hint: t(".position_hint") %>
   <%= ui_radio_group form, :cycle, required: true,

@@ -41,7 +41,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "question_attempts" => [ [ %w[exercise_session_id question_id], nil ] ],
     "exercise_badges" => [ [ %w[student_id exercise_id], nil ] ],
     "knowledge_gaps" => [ [ %w[student_id essential_id], "status='pending'" ] ],
-    "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ] ]
+    "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ] ],
+    "classroom_plan_entries" => [ [ %w[school_type level_id series_id], "series_idISNOTNULL" ], [ %w[school_type level_id], "series_idISNULL" ] ]
   }.freeze
 
   # table => { column => allowed values } for every string enumeration.
@@ -63,7 +64,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms],
-                          "status" => %w[queued validating importing completed rejected failed] }
+                          "status" => %w[queued validating importing completed rejected failed] },
+    "classroom_plan_entries" => { "school_type" => %w[public private] }
   }.freeze
 
   # ADR-0036 : the closed list of cascades, from a parent to its technical rows.

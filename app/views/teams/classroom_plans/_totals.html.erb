@@ -1,0 +1,15 @@
+<%# 🌐 UI · teams/classroom_plans/_totals — classes d'un établissement selon le barème : collège et lycée, public et privé %>
+<%# Rôle : quatre totaux recalculés à chaque modification (Turbo Stream replace) %>
+<%# ADR  : 0030, 0058 · UDR : 0045 %>
+<%# locals: (sheet:) -%>
+<ul id="classroom_plan_totals" class="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="<%= t(".label") %>">
+  <% sheet.totals.each do |school_type, by_cycle| %>
+    <% by_cycle.each do |cycle, total| %>
+      <li id="classroom_plan_total_<%= school_type %>_<%= cycle %>" class="rounded-ln bg-mist px-3 py-4">
+        <span class="block text-sm font-medium text-ink"><%= t(".#{school_type}_#{cycle}") %></span>
+        <span class="font-display text-3xl font-extrabold tabular-nums text-ink"><%= total %></span>
+        <span class="text-sm text-mute"><%= t(".classrooms", count: total) %></span>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

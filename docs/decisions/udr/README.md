@@ -52,8 +52,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0041](./0041-page-profil.md) | Page profil | Accepté | 2026-09-28 | [0055](../adr/0055-profil-modification-de-soi-et-revocation-des-sessions.md) | Mes informations, puis nom, numéro et PIN modifiables en modale |
 | [0042](./0042-actions-de-ligne-dans-un-menu.md) | Actions de ligne dans un menu ⋮ | Accepté | 2026-09-28 | — | Modifier, désactiver et supprimer un objet passent par son menu ⋮, même seuls ; confirmations en `<dialog>` inchangées |
 | [0043](./0043-generer-les-classes-manquantes.md) | Générer les classes manquantes | Accepté | 2026-09-28 | [0056](../adr/0056-generation-des-classes-manquantes.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Bouton secondaire de l'écran Établissements, confirmation qui dit le périmètre, suivi dans le rapport des imports |
-| [0047](./0047-photo-de-profil.md) | Photo de profil | Accepté | 2026-09-28 | [0060](../adr/0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md), [0041](./0041-page-profil.md) | Ligne « Photo » du profil, modale avec aperçu recadré, photo à la place des initiales ; numéro = plus haut (0043) + 4 |
-
+| [0045](./0045-bareme-des-classes.md) | Barème des classes | Accepté | 2026-09-28 | [0058](../adr/0058-bareme-des-classes-en-base.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md) | Tableau public/privé par ligne du référentiel, totaux par établissement, « Non défini » signalé, modification en modale au menu ⋮ ; accès depuis l'accueil, Niveaux et le menu « Classes » des établissements. UDR-0044 laissée libre (chantiers parallèles). |
 
 ---
 
