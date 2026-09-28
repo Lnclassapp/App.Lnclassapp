@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé *(défauts appliqués le 2026-09-28, à confirmer par le porteur)* |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/croissance-parrainage`](../../chantiers/croissance-parrainage/prd.md) — critères CP-01 à CP-18 |
 | **Remplace** | — *(amende [ADR-0057](./0057-code-d-etablissement.md) et [ADR-0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md))* |

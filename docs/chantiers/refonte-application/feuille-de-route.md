@@ -6,25 +6,29 @@
 | **Écrite le** | 2026-09-22 |
 | **Sources** | ADR/UDR ([`decisions/`](../../decisions/)) · [`conventions.md`](../../guide/conventions.md) · [PRD cadre](prd.md) · [inventaire](inventaire/) et ses compléments · [`securite.md`](securite.md) · [`feature_listing.md`](../../feature_listing.md) |
 | **Prompt d'origine** | [`prompt-exploration.md`](prompt-exploration.md) |
-| **Mise à jour** | 2026-09-28 — état d'avancement, livraisons hors ordre, §5, §6, §8, §9 |
+| **Mise à jour** | 2026-09-28 — état d'avancement, livraisons hors ordre, §5, §6, §8, §9 · 2026-09-28 (suite) — clôture de la V1, recadrage des vagues V2 à V6 (§4, §5, §6, §6.9, §8, §9) |
 
 ## État d'avancement au 2026-09-28
 
-La V1 est en production sur lnclass.com depuis le **2026-09-27** (PR #33 et #36 vers `main`). Le 2026-09-28, trois mises en production ont suivi (PR #45, #69 et #73 vers `main`), dont plusieurs chantiers **hors ordre des vagues**. Le détail feature par feature est au §6 : la mention « livrée » dans la colonne « Vague ».
+> **2026-09-28 — Vagues V2 à V6 au backlog** (décision du porteur). Elles restent décrites au §5, mais aucune ne s'ouvre avant une décision datée ; elles figurent dans la table « Backlog » de [`chantiers/README.md`](../README.md#backlog).
+
+La V1 est en production sur lnclass.com depuis le **2026-09-27** (PR #33 et #36 vers `main`). Le 2026-09-28, quatre mises en production ont suivi (PR #45, #69, #73 et #78 vers `main`), dont plusieurs chantiers **hors ordre des vagues**. La V1 est close le 2026-09-28, sauf sa recette `Staging` par un rôle distinct, en cours ; les vagues V2 à V6 sont recadrées au §5. Le détail feature par feature est au §6 : la mention « livrée » dans la colonne « Vague ».
 
 | Vague | Livré | En cours | Reste |
 |---|---|---|---|
-| **V0** Amorçage | [`amorcage-depot`](../amorcage-depot/journal.md), fusionné le 2026-09-25 (#6). Garde-fous 2, 3, 4, 6 et 7 prouvés ; 1 et 5 en écarts assumés | — | Passer son memo en `livré` (il dit encore « en cours ») |
-| **V1** Boucle pédagogique | [`boucle-pedagogique`](../boucle-pedagogique/memo.md) : tous les lots, Lot E compris, en production le 2026-09-27. 94 features sur 95. Suites livrées le 2026-09-28 : [`generer-classes`](../generer-classes/memo.md) (ADR-0056), [`actions-en-menu`](../actions-en-menu/memo.md) (UDR-0042), [`modales-sans-js`](../modales-sans-js/memo.md), [`finitions-generation-menu`](../finitions-generation-menu/memo.md), [`cycles-en-radio`](../cycles-en-radio/memo.md) (UDR-0005 ter), [`afficher-pin`](../afficher-pin/memo.md) (UDR-0051, #60) | — | CL-02 (modifier une classe). Recette `Staging` par un rôle distinct, non consignée. Clôture du chantier : memo encore « planifié », journal sans clôture |
-| **V2** Direction et comptes | Partie « profil, PIN, photo » de `mon-compte` : [`profil-utilisateur`](../profil-utilisateur/memo.md) (ADR-0055, UDR-0041, #37), [`photo-de-profil`](../photo-de-profil/memo.md) (ADR-0060, UDR-0047, #50) | Durcissement de la photo (PR #75) | `espace-direction`, `annuaire-equipe`, profil de direction |
-| **V3** Suivi enseignant | Partage du lien de classe sur WhatsApp (CL-05), par `croissance-parrainage` (#71) | — | `rapports-de-classe`, `multi-etablissements-enseignant`, `vie-de-la-classe`, `multi-classes-eleve` |
-| **V4** Contenu et back-office | [`pilotage-equipe`](../pilotage-equipe/memo.md) (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12 | — | `catalogue-complet`, `installation-pwa`, `sous-roles-equipe` |
+| **V0** Amorçage | [`amorcage-depot`](../amorcage-depot/journal.md), fusionné le 2026-09-25 (#6), **clos** le 2026-09-28 (memo `livré`, journal clos). Garde-fous 2, 3, 4, 6 et 7 prouvés ; 1 et 5 en écarts assumés | — | — |
+| **V1** Boucle pédagogique | [`boucle-pedagogique`](../boucle-pedagogique/memo.md) : tous les lots, Lot E compris, en production le 2026-09-27, **clos** le 2026-09-28 (memo `livré`, journal clos). 94 features sur 94 : CL-02 est déplacée en V3. Suites livrées le 2026-09-28 : [`generer-classes`](../generer-classes/memo.md) (ADR-0056), [`actions-en-menu`](../actions-en-menu/memo.md) (UDR-0042), [`modales-sans-js`](../modales-sans-js/memo.md), [`finitions-generation-menu`](../finitions-generation-menu/memo.md), [`cycles-en-radio`](../cycles-en-radio/memo.md) (UDR-0005 ter), [`afficher-pin`](../afficher-pin/memo.md) (UDR-0051, #60) | Recette `Staging` par un rôle distinct (2026-09-28) | Consigner le rapport de recette et cocher le §9 |
+| **V2** Direction et comptes | Partie « profil, PIN, photo » de `mon-compte` : [`profil-utilisateur`](../profil-utilisateur/memo.md) (ADR-0055, UDR-0041, #37), [`photo-de-profil`](../photo-de-profil/memo.md) (ADR-0060, UDR-0047, #50 ; durcie par #65 et #75, en production par #78) | — | `espace-direction` (dont le profil de direction), `annuaire-equipe` : 29 features |
+| **V3** Suivi enseignant | Partage du lien de classe sur WhatsApp (CL-05), par `croissance-parrainage` (#71) | — | `rapports-de-classe`, `vie-de-la-classe` (dont CL-02, venue de V1), `multi-etablissements-enseignant`, `multi-classes-eleve` (si confirmé) : 11 features |
+| **V4** Contenu et back-office | [`pilotage-equipe`](../pilotage-equipe/memo.md) (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12 | — | `catalogue-complet` (dont CA-23, venue de V2), `installation-pwa`, `sous-roles-equipe` : 9 features |
 | **V5** Remédiation | Détection et résolution des lacunes (AS-14, AS-15), livrées en avance avec la V1 (ADR-0043 amendé) | — | `remediation` : session de remédiation (AS-16), suivi par l'enseignant (AS-17) |
-| **V6** Communication | — | `canal-whatsapp`, cadré par une autre session (PR #70, non fusionnée) | `annonces` |
+| **V6** Communication | — | `canal-whatsapp`, cadré par une autre session (PR #70, non fusionnée), **rattaché à la V6** le 2026-09-28 | `annonces` (10 features), puis `canal-whatsapp` |
 | **V8** À décider | — | — | Une décision produit |
-| **Hors plan** | [`code-etablissement`](../code-etablissement/memo.md) (ADR-0057, UDR-0044, #49), [`classes-par-niveau`](../classes-par-niveau/memo.md) (ADR-0059, UDR-0046, #48), [`bareme-classes`](../bareme-classes/memo.md) (ADR-0058, UDR-0045, #52), [`croissance-parrainage`](../croissance-parrainage/memo.md) (ADR-0063, UDR-0050, #71), CI parallèle [`ci-rapide`](../ci-rapide/journal.md) (ADR-0064, #53). Rattachement : §5, « Chantiers hors plan » | — | Backlog : [`verification-whatsapp`](../verification-whatsapp/memo.md) |
+| **Hors plan** | [`code-etablissement`](../code-etablissement/memo.md) (ADR-0057, UDR-0044, #49), [`classes-par-niveau`](../classes-par-niveau/memo.md) (ADR-0059, UDR-0046, #48), [`bareme-classes`](../bareme-classes/memo.md) (ADR-0058, UDR-0045, #52), [`croissance-parrainage`](../croissance-parrainage/memo.md) (ADR-0063, UDR-0050, #71), CI parallèle [`ci-rapide`](../ci-rapide/journal.md) (ADR-0064, #53). Rattachement : §5, « Chantiers hors plan » | — | Backlog : [`verification-whatsapp`](../verification-whatsapp/memo.md), rattaché à la V4 s'il reprend |
 
 Contrainte en cours : la CI GitHub est **bloquée jusqu'au 2026-10-03** (limite de minutes). Voir §8.
+
+Ordre recommandé pour la suite, décisions à prendre et questions au porteur : §5, [« Ordre recommandé V2 → V6 »](#ordre-recommandé-v2--v6-recadrage-du-2026-09-28) et suivants.
 
 > **Ce document est le plan de recodage complet.** Il couvre toutes les features de l'ancienne application, les répartit en vagues livrables, et dit pour chacune ce qui doit être décidé avant d'écrire la première ligne. Les lots détaillés n'existent que pour la vague 1 ([`plan.md`](plan.md)) : les suivantes seront découpées à leur ouverture, par `/feature` puis `/plan-lots` (planning roulant, [`programme.md` §3](../../workflows/programme.md#3-planifier--feuille-de-routemd)).
 
@@ -152,7 +156,7 @@ Recoupements consignés sans nouvelle ligne, parce qu'une décision existante le
 | C-02 | Barème des badges | ADR-0008 : or ≥ 80 %, bronze/argent/or, remplacement si `>=` | Code : or = 100 %, remplacement si `>` · UDR-0003 : Argent/Or/**Diamant** · glossaire : bronze ≥ 50, argent ≥ 80, or 100 | ✅ **Fermée** 2026-09-25 — F-10 (voir aussi C-46) |
 | C-03 | Contexte de DRENA, école, classe | ADR-0023 : contexte `Identity` | conventions et architecture §5 : contextes `school` et `classroom` ; architecture §5 : DRENA dans `catalog` | ✅ **Fermée** 2026-09-25 — F-02 |
 | C-04 | Types assignables à une classe | ADR-0007 : `Course`, `Essential`, `ExamSubject` | glossaire et code : + `Exercise` | ✅ **Fermée** 2026-09-25 — F-02 / F-26 |
-| C-05 | Tokens des UDR | UDR-0001/0002/0003 : classes Tailwind brutes (`slate`, `shadow-[…]`, `bg-green-100`) | [`plan.md`](plan.md) Lot 0c : aucune valeur arbitraire, tokens `@theme` seuls · `.interface-design/system.md` : palette `slate/blue` | F-09 |
+| C-05 | Tokens des UDR | UDR-0001/0002/0003 : classes Tailwind brutes (`slate`, `shadow-[…]`, `bg-green-100`) | [`plan.md`](plan.md) Lot 0c : aucune valeur arbitraire, tokens `@theme` seuls · `.interface-design/system.md` : palette `slate/blue` | ✅ **Fermée** 2026-09-28 — F-09 : l'[UDR-0005](../../decisions/udr/0005-design-system-fondateur.md) (acceptée le 2026-09-25) remplace les sections « Tokens » des UDR-0001, 0002 et 0003, qui le disent en tête ; `.interface-design/system.md` n'est pas dans le dépôt, et [`design/README.md`](../../design/README.md) le déclare historique |
 | C-06 | Couche de lecture | ADR-0012 : `ViewObjects` typés, use case CRUD générique, `Strategies` | architecture §7 : aucun `ViewObject` n'existe, queries renvoient des Hash | ✅ **Fermée** 2026-09-25 — F-01 |
 | C-07 | Arborescence de présentation | ADR-0014 : `app/presentation/`, `adapters/`, ports d'entrée et de sortie | conventions et architecture : `app/controllers/`, pas de presenters | ✅ **Fermée** 2026-09-25 — F-02 |
 | C-08 | Récupération du mot de passe | ADR-0002 : par SMS | ADR-0025 : obligatoire, moyen non fixé · ADR-0010 : aucune infrastructure SMS | ✅ **Fermée** 2026-09-25 — F-08 |
@@ -160,7 +164,7 @@ Recoupements consignés sans nouvelle ligne, parce qu'une décision existante le
 | C-10 | Statuts d'assignation | ADR-0016 : `archived`, réactivation en `added` | colonne : défaut `active` · entité : `validated` jamais écrit | ✅ **Fermée** 2026-09-25 — F-26 |
 | C-11 | `public_id` | glossaire : préfixe de rôle (`stdt_`, `tch_`…) | [`securite.md`](securite.md) : le rôle se lit dans l'URL ; ADR-0017 : 14 caractères base58 sans préfixe | ✅ **Fermée** 2026-09-25 — F-05 |
 | C-12 | Multi-classes élève | ADR-0003 : illimité, classe principale | interface : une seule classe visible, aucun sélecteur | ✅ **Fermée** 2026-09-25 — F-18 |
-| C-13 | Rôles de l'interface | UDR-0004 : 5 rôles dont `parent`, drawer et sidebar « non altérés » | memo : `Parent` hors périmètre ; UDR-0004 décrit une migration de l'ancienne app | F-09 (UDR-0004 non applicable au projet cible) |
+| C-13 | Rôles de l'interface | UDR-0004 : 5 rôles dont `parent`, drawer et sidebar « non altérés » | memo : `Parent` hors périmètre ; UDR-0004 décrit une migration de l'ancienne app | ✅ **Fermée** 2026-09-28 — F-09 : l'UDR-0005 §2, point 9, déclare l'UDR-0004 non applicable ; l'UDR-0004 et l'index le disent. Le shell à 4 rôles est l'UDR-0006 |
 | C-14 | Seuil de l'or dans l'architecture | [`guide/architecture.md` §2.7](../../guide/architecture.md) : or 100 % présenté comme règle | ADR-0008 : or ≥ 80 % | ✅ **Fermée** 2026-09-25 — F-10 |
 | C-15 | Clé primaire des lacunes | ADR-0018 : `has_nanoid(:id)`, clé `string` | toutes les autres tables : `bigint` | ✅ **Fermée** 2026-09-25 — F-05 |
 
@@ -184,13 +188,13 @@ Recoupements consignés sans nouvelle ligne, parce qu'une décision existante le
 | C-29 | Unicité « sans collision » | ADR-0020 §2.3 : « 0 % de probabilité de conflit » | Le slug aléatoire des comptes démo, sur 2 octets, fait échouer environ une création d'école sur quatre vers 50 écoles (calcul non exécuté, SC §2) | ✅ **Fermée** 2026-09-25 — F-05 |
 | C-30 | Personnel d'établissement : combien d'écoles | Glossaire §1 : unicité « par école », ce qui laisse entendre plusieurs écoles | `has_one :school_staff` : une seule école ; aucun index unique (SC §4, TR §4) | ✅ **Fermée** 2026-09-25 — F-22 |
 | C-31 | Interface de l'organisation scolaire | UDR-0002 : recherche et filtre DRENA, carte d'école unique, onglets école → classes, badges `bg-green-100` | Maquette non branchée, deux cartes d'école, aucun onglet, badges `bg-green-50` (SC §4) | F-09 (tokens) + UDR de la V2 |
-| C-32 | Interface du catalogue | UDR-0001 : la carte de cours sert partout, « titre + badge de matière », Physique en bleu | Trois balisages de carte, une carte plus riche, Physique en violet et Mathématiques en bleu (CA §4) | F-09 + UDR de la V1 (Lot B) |
+| C-32 | Interface du catalogue | UDR-0001 : la carte de cours sert partout, « titre + badge de matière », Physique en bleu | Trois balisages de carte, une carte plus riche, Physique en violet et Mathématiques en bleu (CA §4) | ✅ **Fermée** 2026-09-28 — F-09 + [UDR-0013](../../decisions/udr/0013-catalogue-et-page-cours.md) (Lot B, acceptée) : **une** carte `_course_card`, réutilisée par tout écran qui liste des cours, sans la liste des fiches ; la couleur d'une matière vient de sa **catégorie** (`ui_subject_badge(category:)`, UDR-0005 §3), plus de son nom |
 | C-33 | Vocabulaire de la fiche | Glossaire : « Fiche essentielle » | UI « Habilité » (sic) et « Habiletés », ADR-0022 « Notions clés », UDR-0001 « essentiels (habiletés) », `feature_listing.md` « habilletés » (CA §4) | ✅ **Fermée** 2026-09-25 — F-32 |
 | C-34 | Validation collaborative | ADR-0011 : réservée aux enseignants **certifiés**, entités à la racine | Glossaire : aucune certification ; conventions : tout est namespacé ; code : rien, sauf un bandeau « Conforme au programme » affiché à tous (CA-29) | ✅ **Fermée** 2026-09-25 — F-33 |
 | C-35 | Tables de liaison classe ↔ contenu | [`feature_listing.md`](../../feature_listing.md) : `classroom_courses`, `classroom_essentials`, `classroom_exercises` | ADR-0007, glossaire et schéma : une table unique `classroom_assignments`. Les trois anciennes tables n'existent plus, mais le code des fils d'accueil les appelle encore (TR §5.1) | Correction de `feature_listing.md` : aucun ADR, la décision existe |
 | C-36 | Public cible et navigateurs | ADR-0009 : Android d'entrée de gamme en 3G/4G, JavaScript minimal | `allow_browser :modern` renvoie 406 à Chrome 99 Android ; bundle JS de 622 Ko ; KaTeX, GTM et Clarity viennent d'un CDN tiers (TR §4) | F-29 |
 | C-37 | Worker, SMS, temps réel, Thruster | ADR-0010 : worker intégré à Puma, SMS par jobs, notifications Solid Cable, Thruster non requis | Worker conditionné par une variable jamais posée ; aucun SMS ni broadcast ; `Dockerfile` lancé via Thruster (TR §4) | ✅ **Fermée** 2026-09-25 — F-30 (et F-23 pour le temps réel) |
-| C-38 | Mode sombre | ADR-0013 §2.1 : le thème sombre est un état géré par Stimulus | Bascule présente, mais aucune variante `dark:` ni palette sombre (TR §4) | F-09 (aucun mode sombre en V1) |
+| C-38 | Mode sombre | ADR-0013 §2.1 : le thème sombre est un état géré par Stimulus | Bascule présente, mais aucune variante `dark:` ni palette sombre (TR §4) | ✅ **Fermée** 2026-09-28 — F-09 : aucun mode sombre, `dark:` refusé par le test des tokens (UDR-0005 §2, point 4). L'ADR-0013 porte une précision datée : le thème sombre n'y était qu'un exemple d'état local, la règle « état local dans Stimulus » reste valable |
 | C-39 | Dépendances du domaine | ADR-0001 §3 : communication **exclusivement** par injection | 20 fichiers de `app/domain/` instancient `Repositories::…` par défaut ; le test de pureté ne le détecte pas (TR §4) | ✅ **Fermée** 2026-09-25 — F-03. Le garde-fou de pureté (phase 0, n° 3) refuse aussi `Repositories::` et `Queries::` dans le domaine |
 | C-40 | `/admin` | ADR-0006 §1 : tableau de bord administrateur `/admin` | Aucune route `/admin` ; l'équivalent `/teams/dashboard` lève une exception (TR §4) | ✅ **Fermée** 2026-09-25 — F-01 : l'ADR qui remplace l'ADR-0006 corrige la référence |
 | C-41 | Écarts connus des conventions | Conventions §8 : trois écarts connus | L'exploration en ajoute plus de trente, rassemblés ici | Conventions §8 renvoie à ce registre (fait le 2026-09-22) |
@@ -225,7 +229,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Décisions préalables** | F-01, F-02, F-03, F-04, F-05, F-06, F-07, F-08, F-09, F-10, F-11, F-12 (référentiels par l'équipe), F-13, F-14 (contenu), F-15, F-16, F-17, F-25 (fichiers d'import), F-26, F-28, F-31, F-32, F-34 |
 | **Dépend de** | V0 |
 | **Porte** | Critères du [PRD cadre §5](prd.md#5-critères-dacceptation-transverses) verts ; parcours bout en bout en navigateur réel ; recette sur `Staging` par un rôle distinct ; test de performance de l'ADR-0039 vert : 500 écoles (≈ 35 000 classes) ou 200 cours complets importés en moins de 2 minutes en local, avec un rapport exact (importés, ignorés, en erreur, total) et aucun élément de taxonomie parasite |
-| **État au 2026-09-28** | **En production** sur lnclass.com depuis le 2026-09-27 (#33, #36 vers `main`). 94 features sur 95 livrées ; CL-02 (modifier une classe) ne l'est pas. Lacunes (AS-14, AS-15) livrées en avance sur la V5. Suites livrées le 2026-09-28 : `generer-classes`, `actions-en-menu`, `modales-sans-js`, `finitions-generation-menu`, `cycles-en-radio`, `afficher-pin`. Reste pour fermer la porte : consigner la recette `Staging` par un rôle distinct et clore le chantier (memo encore « planifié ») |
+| **État au 2026-09-28** | **En production** sur lnclass.com depuis le 2026-09-27 (#33, #36 vers `main`). **Close** le 2026-09-28 : les 94 features de V0-V1 sont livrées ; CL-02 (modifier une classe), qu'aucun lot ne portait, est déplacée en V3 (`vie-de-la-classe`) ; C-05, C-13, C-32 et C-38 sont fermées ; [`boucle-pedagogique`](../boucle-pedagogique/journal.md#clôture) et [`amorcage-depot`](../amorcage-depot/journal.md#clôture) sont clos. Lacunes (AS-14, AS-15) livrées en avance sur la V5. Suites livrées le 2026-09-28 : `generer-classes`, `actions-en-menu`, `modales-sans-js`, `finitions-generation-menu`, `cycles-en-radio`, `afficher-pin`. Reste pour fermer la porte : la recette `Staging` par un rôle distinct, **en cours (2026-09-28)** |
 
 Écarts avec [`plan.md`](plan.md), à corriger à l'ouverture du chantier :
 
@@ -236,67 +240,87 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 - Le plan suppose une taxonomie seedée et des écoles créées une à une. Les arbitrages du porteur du 2026-09-25 font entrer en V1 tout le chantier `referentiels-equipe` (taxonomie, DRENA, établissements et leur import, génération des classes : ADR-0030, ADR-0034) et les imports de contenu (ADR-0039). Les seeds ne servent qu'en développement et en test.
 - Liste des features livrées par la V1 : §6, colonne « Vague » = V1. C'est elle qui remplace le décompte approximatif « environ 25 features » du plan.
 
+> **Recadrage du 2026-09-28.** Les fiches V2 à V6 ci-dessous sont réécrites après la clôture de la V1 : le périmètre restant retire ce qui est livré hors ordre, chaque feature restante est rangée dans son chantier, et les décisions encore à prendre sont nommées. L'ordre recommandé, le tableau de collision V2/V4, la dette suivie et les questions à poser au porteur suivent les fiches. Seules la V2 et la vague qui la chevauche ouvrent leurs chantiers : les autres restent au niveau de ce document (planning roulant).
+
 ### V2 — Organisation scolaire et espace direction
 
 | Champ | Contenu |
 |---|---|
 | **Objectif** | Une direction d'établissement, invitée, gère ses classes, ses enseignants et ses élèves ; chacun gère son compte ; l'équipe consulte et anonymise les comptes. Les référentiels et les établissements sont gérés dès la V1 |
-| **Chantiers** | `espace-direction` · `mon-compte` (profil, PIN avec PIN actuel, avatar) · `annuaire-equipe` (liste, fiche, anonymisation) |
-| **Déjà livré (hors ordre)** | `mon-compte`, **en partie** : profil et PIN sous PIN actuel par [`profil-utilisateur`](../profil-utilisateur/memo.md) (ADR-0055, UDR-0041, #37, 2026-09-28), photo par [`photo-de-profil`](../photo-de-profil/memo.md) (ADR-0060, UDR-0047, #50, 2026-09-28 ; durcissement en cours, PR #75). Features : ID-17 livrée ; ID-19 (avatar) et ID-20 (PIN) livrées pour tous les rôles, à recetter côté direction |
-| **Reste** | `espace-direction` en entier ; `annuaire-equipe` en entier ; dans `mon-compte`, le profil de direction (ID-19, SC-24) |
-| **Tables** | `school_staffs` (fonction en colonne, ADR-0044) |
-| **Décisions préalables** | F-14, F-16, F-22 ; F-25 (avatar) |
+| **Chantiers, dans l'ordre** | 1. `espace-direction` (cycle feature) : invitation et second facteur de la direction, rôles de référence, personnel, classes, élèves et enseignants de l'établissement, tableau de bord, profil de direction. 2. `annuaire-equipe` (cycle feature) : liste, fiche, modification et anonymisation des comptes par l'équipe. Le second peut démarrer dès que le Lot 0 du premier est fusionné : contextes `school` et `identity`, fichiers partagés limités aux routes, à la locale et à la navigation du shell. **`mon-compte` n'est plus un chantier** : sa partie livrée est close, son reste (profil de direction, recette du PIN côté direction) passe dans `espace-direction` |
+| **Déjà livré (hors ordre)** | [`profil-utilisateur`](../profil-utilisateur/memo.md) : profil et PIN sous PIN actuel (ADR-0055, UDR-0041, #37). [`photo-de-profil`](../photo-de-profil/memo.md) : photo (ADR-0060, UDR-0047, #50), durcie par #65 et #75, en production le 2026-09-28 (#78). ID-17 livrée ; ID-19 (avatar) et ID-20 (PIN) livrées pour tous les rôles, à recetter côté direction |
+| **Reste : `espace-direction`** (22 features) | ID-09, ID-10, ID-11, ID-19 (profil de direction), ID-20 (recette côté direction), SC-11, SC-12, SC-13, SC-14, SC-15, SC-16, SC-17, SC-18, SC-19, SC-20, SC-21, SC-22, SC-23, SC-24, SC-25, TR-15, TR-16 |
+| **Reste : `annuaire-equipe`** (7 features) | ID-18, ID-21, ID-22, ID-23, TR-20, TR-21, TR-22 |
+| **Ajouts venus des chantiers hors plan** | La direction valide ou refuse les enseignants en attente de son établissement : `croissance-parrainage` l'a reporté à la V2 ([memo](../croissance-parrainage/memo.md), ADR-0063). La direction lit le code de son établissement, et peut-être le régénère : l'ADR-0057 annonce pour la V2 un amendement de `School::ManageSchoolPolicy` |
+| **Sorti de la vague** | CA-23 (pages des séries) passe en V4, `catalogue-complet` : c'est une page publique du catalogue, sœur de CA-17 (niveau) et CA-21 (matière). Gardée en V2, elle aurait fait entrer le contexte `catalog` dans un chantier qui n'en a pas besoin, et créé une collision avec la V4 |
+| **Tables** | `school_staffs` (fonction en colonne, ADR-0044). Les invitations de direction réutilisent `invitations`, dont le type `school_staff` existe depuis la V1. Aucune autre table sans décision |
+| **Décisions préalables** | F-14 (ADR-0036), F-16 (ADR-0038), F-22 (ADR-0044), F-25 (ADR-0047) : toutes `Accepté` le 2026-09-25. ADR-0057 et UDR-0044 (code d'établissement), ADR-0063 et UDR-0050 (comptes en attente) : **acceptées par le porteur le 2026-09-28** (Q4), la V2 peut les amender |
+| **Contradiction ouverte** | C-31 (interface de l'organisation scolaire). F-09 a tranché les tokens ; la structure (recherche, carte d'école, onglets école → classes) se tranche par l'UDR de l'espace direction, écrite dans le chantier |
+| **Questions au porteur** | Q1 à Q4 (voir « Questions à poser au porteur » plus bas) |
 | **Dépend de** | V1 |
-| **Porte** | Une direction invitée administre son seul établissement ; aucune fuite inter-établissements (test de refus) |
+| **Porte** | Inchangée : une direction invitée administre son seul établissement ; aucune fuite inter-établissements (test de refus). Précisée : ID-19 et ID-20 recettées côté direction ; une direction ne valide que les enseignants en attente de son établissement (test de refus) ; C-31 fermée par l'UDR de la vague |
 
 ### V3 — Suivi pédagogique enseignant
 
 | Champ | Contenu |
 |---|---|
 | **Objectif** | L'enseignant suit sa classe : rapport par exercice (synthèse et détaillé), fiche élève, compteurs de badges, tableau de bord de classe, liste paginée d'élèves ; il gère ses établissements ; les classes vivent au rythme de l'année scolaire |
-| **Chantiers** | `rapports-de-classe` · `multi-etablissements-enseignant` · `vie-de-la-classe` (année scolaire, archivage, code révocable, retrait d'élève) · `multi-classes-eleve` si F-18 le confirme |
-| **Déjà livré (hors ordre)** | CL-05 (partager le lien de classe sur WhatsApp), par `croissance-parrainage` (#71, 2026-09-28). Tout le reste de la vague est à faire |
-| **Tables** | colonnes d'année scolaire et d'archivage ; aucune table nouvelle hors décision |
-| **Décisions préalables** | F-11, F-18, F-19 |
-| **Dépend de** | V1, V2 (direction) |
-| **Porte** | Rapports sans cache périmé (invalidation à la clôture de session) ; seuils issus des constantes de F-11 |
+| **Chantiers, dans l'ordre** | 1. `rapports-de-classe` (la V5 en dépend). 2. `vie-de-la-classe`, qui peut chevaucher le premier si son Lot 0 attribue la page classe de l'enseignant (UDR-0027), que les deux touchent. 3. `multi-etablissements-enseignant`, après la V2. 4. `multi-classes-eleve`, **seulement si** le porteur confirme la demande (Q5) |
+| **Déjà livré (hors ordre)** | CL-05 (partager le lien de classe sur WhatsApp), par `croissance-parrainage` (#71) |
+| **Reste : `rapports-de-classe`** (8 features) | CL-13, CL-14, CL-15, AS-21, AS-22, AS-23, AS-24, AS-25 ; plus la partie V3 de TR-05 (activité des élèves sur l'accueil enseignant) et de TR-32 (cache des rapports) |
+| **Reste : `vie-de-la-classe`** (2 features) | CL-02 (modifier une classe, **déplacée de la V1 le 2026-09-28**), CL-03 (archiver au lieu de supprimer). Sans ID d'inventaire : année scolaire et archivage (ADR-0041), code révocable et régénérable, retrait d'un élève, changement de classe par l'enseignant ou l'équipe (ADR-0040), libération des codes d'adhésion à l'archivage (dette de la V1), reconduction des classes à la rentrée (ADR-0041) |
+| **Reste : `multi-etablissements-enseignant`** (1 feature) | ID-27 |
+| **`multi-classes-eleve`** | Aucune feature d'inventaire : sélecteur de classe et adhésions non principales (ADR-0040, contradictions C-12 et C-28 fermées) |
+| **Pourquoi CL-02 est ici** | Modifier une classe touche aux contrats de l'ADR-0041 (plafond d'effectif, année, code) que ce chantier ouvre, et à la numérotation des classes générées (ADR-0030, ADR-0059) : renommer « Tle D 3 » casse la règle « plus haut numéro + 1 ». Aucun lot de la V1 ne la portait. La direction pourra modifier ses classes si la V2 lui en donne le droit (Q3) |
+| **Tables** | Aucune table nouvelle : `classrooms.school_year`, `status` et `archived_at` existent depuis la V1 (ADR-0041) |
+| **Décisions préalables** | F-11 (ADR-0033), F-18 (ADR-0040), F-19 (ADR-0041) : `Accepté`. À faire accepter : ADR-0059 et UDR-0046 (le retrait d'une classe « jamais servie » côtoie l'archivage), ADR-0057 (Q7) |
+| **Questions au porteur** | Q5 à Q8 |
+| **Dépend de** | V1 pour `rapports-de-classe` et `vie-de-la-classe`. V2 pour `multi-etablissements-enseignant` (rattachement par la direction, ID-09). Le tableau de bord de classe de la direction (SC-18, V2) lit la page classe livrée en V1 ; `rapports-de-classe` l'enrichira sans changer son contrat, sinon par ADR |
+| **Porte** | Inchangée : rapports sans cache périmé (invalidation à la clôture de session) ; seuils issus des constantes de F-11. Précisée : archiver une classe garde son historique et libère son code (test) ; un enseignant de plusieurs établissements ne voit que les classes des siens (test de refus) |
 
 ### V4 — Contenu à l'échelle et back-office équipe
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe pilote la plateforme : catalogue complet (filtres, pagination, pages niveau et matière), tableau de bord équipe, installation PWA, sous-rôles appliqués. Les imports en masse sont livrés en V1 |
-| **Chantiers** | `catalogue-complet` · `pilotage-equipe` · `installation-pwa` · `sous-roles-equipe` (matrice de l'ADR-0038) |
-| **Déjà livré (hors ordre)** | [`pilotage-equipe`](../pilotage-equipe/memo.md) **livré** le 2026-09-28 (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12, et le volet V4 de TR-09. La fiche d'un compte (ID-21, ID-22) reste en V2 |
-| **Reste** | `catalogue-complet`, `installation-pwa`, `sous-roles-equipe` |
-| **Tables** | aucune nouvelle : `team_role` existe depuis la V1 |
-| **Décisions préalables** | F-16 (sous-rôles), F-27 (indicateurs) |
-| **Dépend de** | V1 — peut chevaucher V2-V3 si fichiers et contrats disjoints |
-| **Porte** | Chaque sous-rôle n'accède qu'à sa colonne de la matrice de l'ADR-0038 (un test de refus par case vide) ; indicateurs lus côté serveur |
+| **Objectif** | L'équipe pilote la plateforme : catalogue complet (filtres, pagination, pages niveau, matière et série), tableau de bord équipe, installation PWA, sous-rôles appliqués. Les imports en masse sont livrés en V1 |
+| **Chantiers, dans l'ordre** | 1. `catalogue-complet`, qui peut démarrer **avec** la V2 (contexte `catalog`, disjoint de la V2 ; voir le tableau de collision). 2. `installation-pwa`, en parallèle de la V2 si le gabarit du shell a un seul propriétaire. 3. `sous-roles-equipe`, **après** `annuaire-equipe` : il réécrit toutes les policies de l'équipe, y compris celles de l'annuaire |
+| **Déjà livré (hors ordre)** | [`pilotage-equipe`](../pilotage-equipe/memo.md) (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12, et la partie V4 de TR-09. [`croissance-parrainage`](../croissance-parrainage/memo.md) (ADR-0063, UDR-0050, #71), hors plan, rattaché ici. La fiche d'un compte (ID-21, ID-22) reste en V2 |
+| **Reste : `catalogue-complet`** (6 features) | CA-02, CA-03, CA-17, CA-21, CA-23 (venue de la V2 le 2026-09-28), AS-01 ; plus la partie V4 de CA-01 |
+| **Reste : `installation-pwa`** (3 features) | ID-26, TR-24, TR-25 |
+| **Reste : `sous-roles-equipe`** | Aucune feature d'inventaire : la matrice de l'ADR-0038 (`admin`, `content`, `field`), un test de refus par case vide |
+| **Tables** | Colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` (§7.1). `team_role` existe depuis la V1 |
+| **Décisions préalables** | F-16 (ADR-0038), F-27 (ADR-0049) : `Accepté`. **À prendre** : un amendement de l'ADR-0038 pour les pages livrées après lui (Q9) ; ADR-0063 et UDR-0050 acceptées le 2026-09-28 (Q4) ; un ADR si la PWA fonctionne hors ligne (Q10) |
+| **Questions au porteur** | Q4, Q9, Q10 |
+| **Dépend de** | V1. `sous-roles-equipe` dépend aussi d'`annuaire-equipe` (V2) |
+| **Porte** | Inchangée : chaque sous-rôle n'accède qu'à sa colonne de la matrice de l'ADR-0038 (un test de refus par case vide) ; indicateurs lus côté serveur |
 
 ### V5 — Remédiation et lacunes
 
 | Champ | Contenu |
 |---|---|
 | **Objectif** | Un élève en échec sur une notion voit une remédiation ciblée ; l'enseignant voit qui est en difficulté, qui s'est corrigé seul, qui a réussi sa remédiation |
-| **Chantiers** | `remediation` |
-| **Tables** | `knowledge_gaps` (et sessions marquées « remédiation ») |
-| **Décisions préalables** | F-21 |
-| **Dépend de** | V3 (rapports), V1 (clôture de session unique) |
-| **Porte** | Le parcours **réel** de l'élève crée et résout les lacunes — c'est exactement ce que l'ancienne app ne faisait pas |
-| **Déjà livré (avec la V1)** | La clôture de session ouvre et résout les lacunes (AS-14, AS-15 ; seuil de résolution 75 %, amendement de l'ADR-0043 du 2026-09-27). La table `knowledge_gaps` existe. Reste : la session de remédiation (AS-16) et le suivi par l'enseignant (AS-17) |
+| **Chantier** | `remediation` |
+| **Déjà livré (avec la V1)** | La clôture de session ouvre et résout les lacunes (AS-14, AS-15 ; seuil de résolution 75 %, amendement de l'ADR-0043 du 2026-09-27). `knowledge_gaps` existe, et `exercise_sessions.kind` accepte déjà `remediation` |
+| **Reste** (2 features) | AS-16 (l'élève lance une session de remédiation, `Assessment::StartRemediationSession`), AS-17 (l'enseignant suit les remédiations de sa classe) |
+| **Tables** | Aucune : le schéma de l'ADR-0043 est posé depuis la V1 |
+| **Décisions préalables** | F-21 (ADR-0043, amendé le 2026-09-27) : `Accepté`. Aucune question ouverte : l'ADR fixe le choix de l'exercice de remédiation |
+| **Dépend de** | V1 pour AS-16, côté élève ; V3 (`rapports-de-classe`) pour AS-17, qui s'affiche dans les rapports de l'enseignant |
+| **Porte** | Inchangée : le parcours **réel** de l'élève crée et résout les lacunes, et lance la remédiation |
 
 ### V6 — Communication
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe publie des annonces riches ciblées, planifiables, que chacun peut écarter durablement |
-| **Chantiers** | `annonces` |
-| **Tables** | `messages`, `message_dismissals` |
-| **Décisions préalables** | F-23, F-25 |
-| **Dépend de** | V1 |
-| **Porte** | Aucune annonce lisible hors de son audience ni avant sa publication, même par URL directe |
-| **État au 2026-09-28** | Rien de livré. Le chantier `canal-whatsapp` est cadré par une autre session (PR #70, non fusionnée) et touche cette vague : son rattachement sera tranché à sa fusion |
+| **Objectif** | L'équipe publie des annonces riches ciblées, planifiables, que chacun peut écarter durablement ; ceux qui y consentent en sont avertis sur WhatsApp |
+| **Chantiers, dans l'ordre** | 1. `annonces` (V6a). 2. [`canal-whatsapp`](https://github.com/Lnclassapp/App.Lnclassapp/pull/70), rattaché à la V6 le 2026-09-28 (cadrage ouvert par une autre session, PR #70 non fusionnée, memo en brouillon) |
+| **Reste : `annonces`** (10 features) | CO-01, CO-02, CO-03, CO-04, CO-05, CO-06, CO-07, CO-10, CO-11, CO-12 |
+| **Ce que `canal-whatsapp` ajoute aux annonces** | Aucune feature d'inventaire. Aujourd'hui une annonce n'est vue qu'à la prochaine visite (ADR-0045, « Conséquences ») ; le canal la pousse **hors de l'application**, sur WhatsApp, vers l'audience de l'annonce. Il sort donc du « hors périmètre » de l'ADR-0045 (notifications et SMS) : il lui faut son ADR et un amendement de l'ADR-0045. Il vise aussi la récupération du PIN, contrat de la V1 (ADR-0032, qui reporte le SMS) : ce volet est un amendement de l'ADR-0032, et peut attendre (Q14) |
+| **Lien avec `verification-whatsapp`** | Le [backlog](../verification-whatsapp/memo.md) a tranché, à sa question 1 : chantier séparé, **port d'envoi commun** (contexte `communication`) et adaptateur n8n posés par `verification-whatsapp`, réutilisés par `canal-whatsapp`. Si le backlog ne reprend pas avant, c'est `canal-whatsapp` qui pose le port. Fournisseur, coût et sécurité du hook sont une seule décision pour les deux (Q13) |
+| **Tables** | `messages`, `message_dismissals` (ADR-0045). Pour le canal : à décider dans son ADR (consentement, journal d'envoi) |
+| **Décisions préalables** | F-23 (ADR-0045), F-25 (ADR-0047) : `Accepté`. **À prendre pour `canal-whatsapp`** : un ADR (fournisseur derrière n8n, signature HMAC dans les deux sens, données transmises, coût, consentement des mineurs, désinscription) et l'amendement de l'ADR-0045 |
+| **Questions au porteur** | Q11 à Q14 |
+| **Dépend de** | V1 ; V2 pour l'audience `school_admin` (CO-11). `canal-whatsapp` dépend d'`annonces` |
+| **Porte** | Inchangée : aucune annonce lisible hors de son audience ni avant sa publication, même par URL directe. Précisée pour le canal : aucun message WhatsApp envoyé hors de l'audience, avant la publication, ou à qui n'y a pas consenti (tests de refus) |
 
 ### Chantiers hors plan
 
@@ -310,6 +334,72 @@ Livrés le 2026-09-28 à la demande du porteur, hors de l'ordre des vagues. Aucu
 | [`croissance-parrainage`](../croissance-parrainage/memo.md) | Parrainage entre enseignants, démarrage à froid par le code national avec compte en attente, page Croissance de l'équipe, partage du lien de classe sur WhatsApp | ADR-0063, UDR-0050 | #71 | **V4** | Son acteur principal est l'équipe : elle valide les comptes en attente et lit les indicateurs de croissance, à côté du pilotage (TR-10), côté serveur (ADR-0049). Il livre aussi CL-05 (V3) |
 
 La CI parallèle ([`ci-rapide`](../ci-rapide/journal.md), ADR-0064, #53) est de l'outillage : elle ne se rattache à aucune vague.
+
+Chantiers hors plan **non livrés**, rattachés le 2026-09-28 :
+
+| Chantier | État | Rattaché à | Pourquoi |
+|---|---|---|---|
+| [`canal-whatsapp`](https://github.com/Lnclassapp/App.Lnclassapp/pull/70) | Cadrage ouvert par une autre session (PR #70, non fusionnée) : memo en brouillon, grill non commencé | **V6**, après `annonces` | Il pousse les annonces hors de l'application ; il amende l'ADR-0045 (et l'ADR-0032 pour le PIN, Q14) |
+| [`verification-whatsapp`](../verification-whatsapp/memo.md) | Backlog (porteur, 2026-09-28), grill interrompu à la question 2 | **V4** si repris : il protège la file d'attente de `croissance-parrainage` (ADR-0063, constat M1) | Il pose le port d'envoi commun que `canal-whatsapp` réutilisera |
+
+### Ordre recommandé V2 → V6 (recadrage du 2026-09-28)
+
+| Étape | Ce qui s'ouvre | Peut chevaucher | Condition d'entrée |
+|---|---|---|---|
+| **0. Avant tout chantier** | Clore la V1 (recette `Staging` en cours) ; ~~faire accepter les décisions en production encore `Proposé` (Q4)~~ fait le 2026-09-28 ; un chantier `bugfix` pour les tests instables (Q15) | — | La CI GitHub revient le 2026-10-03 : d'ici là, un test instable coûte un `bin/ci` local complet à chaque fusion |
+| **1. V2** | `espace-direction`, puis `annuaire-equipe` après son Lot 0 | **V4 `catalogue-complet`** dès le départ ; **V4 `installation-pwa`** si le gabarit du shell a un seul propriétaire | Q1 à Q4 répondues ; C-31 tranchée dans l'UDR du chantier |
+| **2. V3** | `rapports-de-classe` et `vie-de-la-classe` (page classe attribuée au Lot 0) ; puis `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 = oui | **V4 `sous-roles-equipe`** (policies de l'équipe, disjointes de celles de l'enseignant) ; **V5, lot AS-16** (côté élève) | V2 livrée et recettée ; Q5 à Q8 répondues |
+| **3. V4** | `sous-roles-equipe`, après `annuaire-equipe` | V3 | Q9 répondue ; amendement de l'ADR-0038 accepté |
+| **4. V5** | `remediation` : AS-16 peut partir dès l'étape 2, AS-17 attend `rapports-de-classe` | V3, V6 | `rapports-de-classe` livré pour AS-17 |
+| **5. V6** | `annonces`, puis `canal-whatsapp` | V5 (contextes `assessment` et `communication` disjoints ; seuls les accueils sont partagés, à attribuer au Lot 0) | V2 livrée (audience `school_admin`) ; ADR du canal accepté (Q11 à Q14) |
+
+La règle du [planning roulant](../../workflows/programme.md#3-planifier--feuille-de-routemd) tient : à l'étape 1, seuls les chantiers de la V2 et `catalogue-complet` ouvrent leur dossier ; les autres attendent leur étape.
+
+### Chevauchement V2 / V4 — tableau de collision
+
+Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([`programme.md` §4](../../workflows/programme.md#4-exécuter--une-vague-à-la-fois)). Chantiers concernés : `espace-direction` et `annuaire-equipe` (V2) ; `catalogue-complet`, `installation-pwa` et `sous-roles-equipe` (V4).
+
+| Fichier ou contrat | V2 | V4 | Verdict |
+|---|---|---|---|
+| `config/routes.rb`, `config/locales/fr.yml` | ajouts des deux chantiers | ajouts des trois chantiers | Fichiers partagés : chaque Lot 0 écrit ses routes et ses clés, les Lots 0 fusionnent l'un après l'autre |
+| `db/schema.rb` | `school_staffs` | colonnes `users.install_banner_*` | Migrations disjointes ; `schema.rb` régénéré à la fusion, la seconde fusion rejoue `db:migrate` |
+| Gabarit et navigation du shell (UDR-0006) | entrées de la direction activées | bandeau d'installation (`installation-pwa`) ; entrées masquées par sous-rôle (`sous-roles-equipe`) | **Collision.** Un seul propriétaire à la fois : `espace-direction` d'abord, `installation-pwa` ensuite ou par un lot qui ne touche qu'un partial dédié |
+| Policies de l'équipe (`app/domain/policies/`) | `annuaire-equipe` en crée (liste, fiche, anonymisation) | `sous-roles-equipe` les réécrit toutes selon `team_role` | **Collision de contrat** : `sous-roles-equipe` après `annuaire-equipe`, sans chevauchement |
+| Validation des comptes en attente (ADR-0063) | la direction valide (Q1) | `sous-roles-equipe` dit quel sous-rôle de l'équipe valide (Q9) | **Collision de contrat** : un seul amendement de l'ADR-0063, écrit avant les deux |
+| Contexte `catalog` (catalogue, pages niveau, matière et série) | aucun, depuis que CA-23 est en V4 | `catalogue-complet` | Disjoint : chevauchement permis |
+| Table `users`, contexte `identity` | anonymisation (`annuaire-equipe`, ADR-0036) | colonnes du bandeau (`installation-pwa`) | Colonnes et use cases distincts : chevauchement permis, migrations séparées |
+
+### Dette suivie par le programme
+
+| Dette | Où elle est consignée | Traitement proposé |
+|---|---|---|
+| **Test instable `JoinRequestConcurrencyTest`** (`test/infrastructure/repositories/school/join_request_concurrency_test.rb`) : échec intermittent `cached plan must not change result type` (PostgreSQL) | Signalée le 2026-09-28 ; non encore consignée dans un journal de chantier | Chantier `bugfix` avant la V2, qui touche aux demandes en attente (Q15) |
+| **Test système instable `RoleHomesTest`** (menu du compte, lien « Mon profil ») : un échec sur trois exécutions du même SHA | [`ci-rapide`, journal](../ci-rapide/journal.md) | Même chantier `bugfix` ; ne pas relancer jusqu'au vert |
+| Test système instable `session_result_test.rb:42` (« Recommencer ») | [`pilotage-equipe`, journal](../pilotage-equipe/journal.md) | À surveiller, dans le même chantier si elle se reproduit |
+| **Photo de profil : limites documentées** (octets libres possibles dans les données compressées JPEG, PNG et WebP ; un navigateur sans canvas envoie le fichier brut, refusé s'il est trop lourd) | [ADR-0060](../../decisions/adr/0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md), « Conséquences » ; [`photo-de-profil`, journal](../photo-de-profil/journal.md) | Limites acceptées : seul un décodage de l'image côté serveur les lèverait, ce que l'ADR écarte. Rien à planifier sans nouvelle décision |
+| Codes d'adhésion consommés tant que les classes archivées gardent le leur | [`boucle-pedagogique`, journal](../boucle-pedagogique/journal.md) | V3, `vie-de-la-classe` |
+| 3 900 codes d'établissement à transmettre à la main, faute de canal | [ADR-0057](../../decisions/adr/0057-code-d-etablissement.md), « Conséquences » | V2 (la direction voit son code, Q2) ; plus tard `canal-whatsapp` |
+| `feature_listing.md` cite encore trois tables disparues (C-35) | §4 | Correction documentaire, sans ADR |
+
+### Questions à poser au porteur
+
+| # | Vague | Question |
+|---|---|---|
+| Q1 | V2 | La direction valide-t-elle les enseignants en attente de son établissement (ADR-0063) ? À la place de l'équipe, ou en plus d'elle ? |
+| Q2 | V2 | La direction voit-elle le code de son établissement, et peut-elle le régénérer (ADR-0057) ? |
+| Q3 | V2 | La direction crée-t-elle des classes (SC-19), ou ajoute-t-elle seulement la suivante d'un niveau comme l'équipe (ADR-0059) ? Modifie-t-elle ses classes (CL-02, V3) ? |
+| Q4 | V2, V3, V4 | ADR-0057, 0059, 0063 et 0064, UDR-0044, 0046 et 0050 sont en production avec leurs défauts du 2026-09-28 : les acceptes-tu tels quels ? **Répondue le 2026-09-28 : acceptées telles quelles.** |
+| Q5 | V3 | Le multi-classes de l'élève (cours du soir, ADR-0040) est-il demandé ? Sinon, `multi-classes-eleve` sort du plan |
+| Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059 |
+| Q7 | V3 | Un enseignant rejoint un second établissement comment : avec le code de cet établissement (ADR-0057), ou rattaché par sa direction (ID-09) ? |
+| Q8 | V3 | Archivage de fin d'année (ADR-0041) : à quelle date, et faut-il un outil de reconduction des classes à la rentrée ? |
+| Q9 | V4 | Matrice des sous-rôles (ADR-0038) pour les pages livrées après elle : Pilotage, Croissance, validation des comptes en attente, barème et génération des classes. Qui voit quoi ? |
+| Q10 | V4 | PWA : installation seule, ou aussi un usage hors ligne ? Le hors-ligne demande un ADR (service worker, cache, budget de l'ADR-0051) |
+| Q11 | V6 | `canal-whatsapp` est rattaché à la V6, après `annonces` : d'accord ? Le message WhatsApp porte-t-il l'annonce entière, ou un avis avec le lien ? |
+| Q12 | V6 | Un élève mineur reçoit-il des messages WhatsApp sans accord explicite ? Consentement à l'inscription, désinscription ? |
+| Q13 | V6 | Fournisseur derrière n8n (API WhatsApp Business), coût par message et qui le paie. Une seule décision pour `canal-whatsapp` et `verification-whatsapp` |
+| Q14 | V6 | Envoyer le code de récupération du PIN par WhatsApp (amendement de l'ADR-0032) : dans `canal-whatsapp`, ou plus tard ? |
+| Q15 | transverse | Ouvrir un chantier `bugfix` pour les tests instables avant la V2 ? |
 
 ### V8 — Hors vague, à décider
 
@@ -436,7 +526,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
 | CL-01 | Créer une classe (équipe) | ❌ | V1 (Lot D : « les classes sont créées par l'équipe », [`plan.md`](plan.md) §1) — livrée 2026-09-27 (#33) | Un slug passé à `find_by_id` ; un code de 6 caractères pour une colonne de 5 |
-| CL-02 | Modifier une classe | ❌ | V1 (`referentiels-equipe`) — **non livrée** : au 2026-09-28, aucun écran ne modifie une classe (ajout et retrait seulement, `classes-par-niveau`) | Un échec muet |
+| CL-02 | Modifier une classe | ❌ | V3 (`vie-de-la-classe`) — **déplacée de V1 le 2026-09-28** : aucun lot de la V1 ne la portait (ajout et retrait seulement, `classes-par-niveau`) ; elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059 | Un échec muet |
 | CL-03 | Supprimer une classe | ⚠️ | V3 (`vie-de-la-classe` : archivage, F-19) | Une suppression définitive qui détruit l'historique des assignations |
 | CL-04 | Générer et afficher le code d'adhésion | ⚠️ | V1 (Lot D) — livrée 2026-09-27 (#33) | Un affichage tantôt en minuscules, tantôt en majuscules |
 | CL-05 | Partager le lien de classe sur WhatsApp | 💀 | V3 (`vie-de-la-classe`) — livrée 2026-09-28 (#71), hors ordre des vagues : chantier `croissance-parrainage` | — |
@@ -490,7 +580,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | CA-20 | Lister les matières | ⚠️ | V1 (écran de l'équipe, ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-21 | Page matière | ⚠️ | V4 | — |
 | CA-22 | Gérer les matières | ⚠️ | V1 (ADR-0034, `category` obligatoire) — livrée 2026-09-27 (#33) | `category` laissée à `NULL` ; une clé de cache jamais invalidée |
-| CA-23 | Pages des séries | ❌ | V2 | — |
+| CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 | — |
 | CA-24 | Gérer les séries | ⚠️ | V1 (ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-25 | Taxonomie depuis l'onglet « Setup » | ⚠️ | V1 (= TR-13, ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-26 | Icône et couleur de la matière | ✅ | V1 (Lot B, UDR) — livrée 2026-09-27 (#33) | Une couleur déduite du nom au lieu de `category` |
@@ -607,20 +697,20 @@ Les huit chantiers ouverts par l'audit du 2026-09-18 ([`chantiers/README.md`](..
 
 ### 6.9 Bilan
 
-Compté par script sur les tables ci-dessus, après les retraits du 2026-09-22 ; mis à jour le 2026-09-25, après les arbitrages du porteur (référentiels, établissements et imports en V1 : ADR-0030, ADR-0034, ADR-0039).
+Compté par script sur les tables ci-dessus, après les retraits du 2026-09-22 ; mis à jour le 2026-09-25, après les arbitrages du porteur (référentiels, établissements et imports en V1 : ADR-0030, ADR-0034, ADR-0039), puis le 2026-09-28, au recadrage : CL-02 passe de V1 en V3, CA-23 de V2 en V4.
 
 | Préfixe | Features | V0-V1 | V2-V4 | V5-V6 | Écartées ou retirées | dont livrées au 2026-09-28 |
 |---|---|---|---|---|---|---|
 | `ID` | 34 | 12 | 12 | 0 | 10 | 13 |
 | `CO` | 13 | 1 | 0 | 10 | 2 | 1 |
 | `SC` | 27 | 10 | 15 | 0 | 2 | 10 |
-| `CL` | 28 | 15 | 5 | 0 | 8 | 15 |
+| `CL` | 28 | 14 | 6 | 0 | 8 | 15 |
 | `CA` | 29 | 21 | 5 | 1 | 2 | 21 |
 | `TR` | 42 | 18 | 10 | 0 | 14 | 21 |
 | `AS` | 40 | 18 | 6 | 4 | 12 | 20 |
-| **Total** | **213** | **95** | **53** | **15** | **50** | **101** |
+| **Total** | **213** | **94** | **54** | **15** | **50** | **101** |
 
-La dernière colonne n'entre pas dans la somme : elle compte, parmi les colonnes de vague, les lignes marquées « livrée » dans leur **première** vague. Les 101 livrées se répartissent en 94 de V0-V1 (toutes sauf CL-02), 5 de V2-V4 livrées hors ordre (ID-17, CL-05, TR-10, TR-11, TR-12) et 2 de V5 livrées avec la V1 (AS-14, AS-15). ID-19 et ID-20, livrées en partie, ne sont pas comptées. Compté par script le 2026-09-28.
+La dernière colonne n'entre pas dans la somme : elle compte, parmi les colonnes de vague, les lignes marquées « livrée » dans leur **première** vague. Les 101 livrées se répartissent en 94 de V0-V1 (toutes, depuis que CL-02 est passée en V3), 5 de V2-V4 livrées hors ordre (ID-17, CL-05, TR-10, TR-11, TR-12) et 2 de V5 livrées avec la V1 (AS-14, AS-15). ID-19 et ID-20, livrées en partie, ne sont pas comptées. Compté par script le 2026-09-28, après les deux déplacements.
 
 Certaines features sont réparties sur deux vagues, par exemple une liste simple en V1 et un catalogue complet en V4. Elles sont comptées dans la **première** vague qui les livre. Les 50 écartées comprennent 26 features retirées du plan le 2026-09-22 et l'import des DRENA (SC-02, TR-29), écarté le 2026-09-25 ; les autres sont des doublons, du code mort ou des routes qu'aucune règle ne justifie.
 
@@ -705,6 +795,7 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | **CI GitHub bloquée jusqu'au 2026-10-03** (limite de minutes atteinte, constat du 2026-09-28) | Avant chaque fusion : `bin/ci` complet en local, sortie consignée dans la PR. Seul l'agent fusionne, après CI verte (locale tant que GitHub est bloquée) ; aucune fusion depuis l'interface web (option A du porteur, 2026-09-28). Déploiement de production déclenché **à la main** sur Railway par le porteur. Revenir à la CI GitHub dès le 2026-10-03 |
 | **Chantiers livrés hors ordre des vagues** (2026-09-28) : la V2, la V4 et des demandes hors plan passent avant la clôture de la V1 | Chacun est rattaché à une vague (§5, « Chantiers hors plan ») ; ceux qui touchent un contrat de V1 passent par un ADR (ADR-0057, ADR-0058, ADR-0059) |
 | **Fusions web qui cassent `Develop`** : #48/#49 et #50/#52 ont dû être réparées (#56, #61) | Option A du porteur : seul l'agent fusionne, après CI verte |
+| **Tests instables sous CI bloquée** (2026-09-28) : `JoinRequestConcurrencyTest` (« cached plan must not change result type »), `RoleHomesTest`, `session_result_test.rb` | Un chantier `bugfix` avant la V2 (§5, « Dette suivie », Q15) ; ne jamais relancer jusqu'au vert |
 
 ---
 
@@ -715,7 +806,7 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 - [x] Inventaire complet : chaque table, route et branche non fusionnée rattachée ou déclarée morte (§6, §7 ; compléments du 2026-09-22)
 - [x] `prd.md` cadre : matrice acteurs × permissions, exigences transverses
 - [x] Registre des décisions : chaque décision consommée par V1 est `Accepté` (2026-09-25, §3)
-- [ ] Registre des contradictions : aucune contradiction ouverte ne touche V1 — C-05, C-13, C-32 et C-38 renvoient à F-09, acceptée le 2026-09-25, mais ne sont pas marquées fermées au §4 : à vérifier puis fermer
+- [x] Registre des contradictions : aucune contradiction ouverte ne touche V1 — C-05, C-13, C-32 et C-38 fermées le 2026-09-28 par F-09 (UDR-0005) et l'UDR-0013 (§4). Restent ouvertes : C-31 (V2, UDR de l'espace direction), C-35 (correction de `feature_listing.md`), C-09 (sans objet)
 - [x] Table de traçabilité : chaque feature a une vague ou une raison d'écart (213 features, §6)
-- [ ] Chaque vague livrée : chantiers clos, recette sur `Staging` par un rôle distinct — V1 en production le 2026-09-27, mais aucune recette `Staging` par un rôle distinct n'est consignée dans le [journal de la boucle pédagogique](../boucle-pedagogique/journal.md), et le chantier n'est pas clos
-- [x] `feuille-de-route.md` et `journal.md` mis à jour après chaque vague — V0 et V1 : mise à jour du 2026-09-28
+- [ ] Chaque vague livrée : chantiers clos, recette sur `Staging` par un rôle distinct — V0 et V1 : chantiers clos le 2026-09-28 (`amorcage-depot`, `boucle-pedagogique`) ; recette `Staging` de la V1 par un rôle distinct : **acceptée avec réserves le 2026-09-28** (voir le [journal de la boucle pédagogique](../boucle-pedagogique/journal.md#recette-staging-du-2026-09-28)) : parcours publics OK sur `Staging` ; volet authentifié prouvé en local seulement, faute de compte équipe de recette — la case se coche quand ce volet est recetté sur `Staging`
+- [x] `feuille-de-route.md` et `journal.md` mis à jour après chaque vague — V0 et V1 : mise à jour du 2026-09-28, puis clôture de la V1 et recadrage des vagues V2 à V6 le même jour

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé (décisions par défaut à confirmer par le porteur, voir §9) |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/classes-par-niveau`](../../chantiers/classes-par-niveau/prd.md) |
 | **Remplace** | — (précise [ADR-0036](./0036-suppression-archivage-et-anonymisation.md) et [ADR-0041](./0041-vie-d-une-classe-annee-scolaire-et-code.md), voir §8) |

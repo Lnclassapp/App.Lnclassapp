@@ -55,13 +55,15 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 
 | Chantier | Statut | En une phrase |
 |---|---|---|
-| [`boucle-pedagogique`](boucle-pedagogique/memo.md) | en production, à clore | V1 : équipe → contenu → enseignant → élève → résultat, en production depuis le 2026-09-27 ; recette `Staging` par un rôle distinct non consignée |
+| [`amorcage-depot`](amorcage-depot/memo.md) | livré | V0 : les garde-fous avant tout code métier (#6) ; garde-fous 1 et 5 en écarts assumés |
+| [`boucle-pedagogique`](boucle-pedagogique/memo.md) | livré | V1 : équipe → contenu → enseignant → élève → résultat, en production depuis le 2026-09-27, clos le 2026-09-28 ; recette `Staging` par un rôle distinct en cours |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | « Mon profil » pour tous : nom, numéro et PIN modifiables sous PIN actuel (ADR-0055, UDR-0041) |
 | [`generer-classes`](generer-classes/memo.md) | livré | Générer après coup les classes des établissements qui n'en ont aucune de l'année (ADR-0056, UDR-0043) |
-| [`photo-de-profil`](photo-de-profil/memo.md) | en production, durcissement en cours (PR #75) | Photo de profil pour tous : recadrée par le navigateur, vérifiée par le serveur, visible de soi, de ses enseignants et de l'équipe (ADR-0060, UDR-0047) |
+| [`photo-de-profil`](photo-de-profil/memo.md) | en production, durcissement livré (#65, #75) ; memo encore « en cours », à clore | Photo de profil pour tous : recadrée par le navigateur, vérifiée par le serveur, visible de soi, de ses enseignants et de l'équipe (ADR-0060, UDR-0047) |
 | [`classes-par-niveau`](classes-par-niveau/memo.md) | livré | Ajuster les classes d'un établissement niveau par niveau : ajouter la suivante, retirer la dernière si elle n'a jamais servi (ADR-0059, UDR-0046) |
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | « Déjà en cours » en toast d'information vers le rapport, badge « Génération en cours », ⋮ collé à droite des tableaux au téléphone (amendements UDR-0042, UDR-0043) |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | Barème des classes générées en base, modifiable par l'équipe à l'écran ; menu « Classes » des établissements (ADR-0058, UDR-0045) |
+| [`recette-v1-defauts`](recette-v1-defauts/memo.md) | livré (PR en revue) | Recette V1 : `/join` refuse en 422 un code sans classe, sous la limite de débit de `/c/` (amendement UDR-0009) ; pages d'erreur statiques en français |
 | [`afficher-pin`](afficher-pin/memo.md) | livré | Bouton œil dans les 13 champs de PIN (connexion, inscriptions, profil, PIN oublié), masqué par défaut et avant l'envoi (UDR-0051, amendement UDR-0005) |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | Actions de modification et de suppression des écrans de l'équipe dans un menu ⋮ (UDR-0042) |
 | [`cycles-en-radio`](cycles-en-radio/memo.md) | livré | Cycle d'un niveau et d'un établissement en boutons radio, 1er cycle par défaut (UDR-0005 ter) |
@@ -71,11 +73,16 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 
 ## Backlog
 
-Chantiers ouverts puis mis de côté par le porteur ; le memo dit où reprendre.
+Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 2026-09-28 : aucune n'est ouverte avant une décision datée du porteur ; leur périmètre, leurs chantiers et leurs questions sont au [§5 de la feuille de route](refonte-application/feuille-de-route.md#5-les-vagues). Pour un chantier, le memo dit où reprendre.
 
 | Chantier | En une phrase |
 |---|---|
-| [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2 |
+| **V2 — Organisation scolaire et espace direction** | 29 features : `espace-direction`, puis `annuaire-equipe`. Questions Q1 à Q3 ouvertes ([feuille de route §5](refonte-application/feuille-de-route.md#v2--organisation-scolaire-et-espace-direction)) |
+| **V3 — Suivi pédagogique enseignant** | 11 features : `rapports-de-classe`, `vie-de-la-classe` (dont CL-02), `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 le confirme |
+| **V4 — Contenu à l'échelle et back-office** | 9 features : `catalogue-complet`, `installation-pwa`, `sous-roles-equipe` ; Q9 et Q10 ouvertes |
+| **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
+| **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
+| [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2. Rattaché à la V4 s'il reprend ([feuille de route §5](refonte-application/feuille-de-route.md#chantiers-hors-plan)) |
 
 ## Cycle de vie
 

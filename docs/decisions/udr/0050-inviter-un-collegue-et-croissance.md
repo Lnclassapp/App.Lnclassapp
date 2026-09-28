@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé *(défauts appliqués le 2026-09-28, à confirmer par le porteur)* |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/croissance-parrainage`](../../chantiers/croissance-parrainage/prd.md) — critères CP-01 à CP-18 |
 | **ADR lié** | [ADR-0063](../adr/0063-parrainage-demarrage-a-froid-et-mesure-du-k-factor.md) · [ADR-0057](../adr/0057-code-d-etablissement.md) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) · amende [UDR-0006](0006-shell-applicatif-par-role.md) (aucune entrée), [UDR-0018](0018-accueil-equipe.md) (raccourci), [UDR-0026](0026-accueil-enseignant.md), [UDR-0025](0025-declaration-des-classes.md), [UDR-0027](0027-page-classe.md), [UDR-0036](0036-gestion-des-etablissements.md), [UDR-0041](0041-page-profil.md), [UDR-0044](0044-inscription-enseignant-par-code-d-etablissement.md) · composants [UDR-0005](0005-design-system-fondateur.md) |

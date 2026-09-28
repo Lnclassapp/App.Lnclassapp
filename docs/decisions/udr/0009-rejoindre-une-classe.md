@@ -66,3 +66,11 @@ Dans l'ancienne application, un élève rejoignait sa classe par deux chemins au
 - ID-08 (cascade) n'est pas reprise : un élève sans code demande le code à son professeur.
 - L'API publique de vérification d'un code (CL-08) disparaît : la page `/c/<code>` limitée en débit la remplace.
 - Un élève connecté qui ouvre le code d'une autre classe voit l'aperçu et le bouton ; le refus « Tu es déjà inscrit dans une classe. » s'affiche quand il le presse (le Lot A1 ne lit pas l'adhésion à l'ouverture de la page).
+
+## Amendement du 2026-09-28 — `/join` vérifie le code
+
+Chantier [`recette-v1-defauts`](../../chantiers/recette-v1-defauts/memo.md) (D1). Remplace la dernière phrase du point 1 (« Cet écran ne cherche pas la classe »).
+
+- `/join` vérifie le code avant de rediriger : il ne mène à `/c/<code>` que si cette page a un aperçu. Sinon (code inconnu, remplacé, fermé, classe archivée), l'écran se ré-affiche en **422**, la saisie gardée, avec sous le champ « Code de classe invalide. Vérifie le code auprès de ton professeur, puis saisis-le de nouveau. » : les mots de la page 404 de `/c/<code>`, rien de plus.
+- Pourquoi : une soumission de formulaire Turbo suivie d'une page 4xx après redirection n'est pas rendue de façon fiable (recette `Staging` : écran resté sur `/join`, sans message).
+- La vérification lit la même requête que `/c/<code>` (`Queries::Classroom::JoinPreviewQuery`) et **partage son compteur** : 10 requêtes par minute et par adresse, `/join` (envoi) et `/c/<code>` confondus ; au-delà, 429 et « Trop de tentatives. Patiente une minute, puis réessaie. » sous le champ, sans rien chercher.

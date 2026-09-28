@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature (sans UI métier) |
-| **Statut** | en cours |
+| **Statut** | livré *(fusionné dans `Develop` le 2026-09-25, PR #6 ; en production avec la V1 le 2026-09-27 ; clos le 2026-09-28)* |
 | **Ouvert le** | 2026-09-25 |
 | **Branche** | `feature/amorcage-depot` |
 | **Programme** | `refonte-application` — vague V0 ([feuille de route §2](../refonte-application/feuille-de-route.md#2-phase-0--amorçage-du-dépôt)) |
