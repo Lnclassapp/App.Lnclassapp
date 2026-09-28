@@ -83,6 +83,45 @@ module Repositories
         assert_equal Set["6ème 1"], ClassroomRepository.new.names_in(school_id: @school.id, school_year: @year)
       end
 
+      test "liste les noms d'un couple niveau/série d'une école pour une année (CN-07)" do
+        series = create_series(name: "D")
+        create_classroom(school: @school, level: @level, series:, name: "Tle D 1")
+        create_classroom(school: @school, level: @level, series:, name: "Tle D 2")
+        create_classroom(school: @school, level: @level, name: "Tle 1")
+        create_classroom(school: @school, level: @level, series:, name: "Tle D 9", school_year: "2020-2021")
+        create_classroom(level: @level, series:, name: "Tle D 3")
+
+        repository = ClassroomRepository.new
+
+        assert_equal [ "Tle D 1", "Tle D 2" ],
+                     repository.names_in_level(school_id: @school.id, school_year: @year, level_id: @level.id, series_id: series.id).sort
+        assert_equal [ "Tle 1" ], repository.names_in_level(school_id: @school.id, school_year: @year, level_id: @level.id, series_id: nil)
+      end
+
+      test "supprime une classe qui n'a jamais servi (CN-05, ADR-0059)" do
+        record = create_classroom(school: @school)
+
+        assert ClassroomRepository.new.delete_if_unused(id: record.id).success?
+        assert_not Orm::Classroom.exists?(record.id)
+        assert_equal :not_found, ClassroomRepository.new.delete_if_unused(id: record.id).code
+      end
+
+      test "refuse une classe qui a eu un élève, même parti, un enseignant ou une assignation, même archivée (CN-06)" do
+        left = create_classroom(school: @school)
+        Orm::ClassroomStudent.create!(classroom: left, student: create_student, joined_at: @at, left_at: @at)
+        taught = create_classroom(school: @school)
+        create_teacher(school: @school, classrooms: [ taught ])
+        assigned = create_classroom(school: @school)
+        create_assignment(classroom: assigned, status: "archived")
+        repository = ClassroomRepository.new
+
+        assert_equal({ base: [ :has_students ] }, repository.delete_if_unused(id: left.id).errors)
+        assert_equal({ base: [ :has_teachers ] }, repository.delete_if_unused(id: taught.id).errors)
+        assert_equal({ base: [ :has_assignments ] }, repository.delete_if_unused(id: assigned.id).errors)
+        assert_equal :conflict, repository.delete_if_unused(id: left.id).code
+        assert_equal 3, Orm::Classroom.where(id: [ left.id, taught.id, assigned.id ]).count
+      end
+
       test "insère 1 000 classes générées d'un coup" do
         codes = JoinCode.generate_unique(count: 1_000, taken: ClassroomRepository.new.taken_join_codes)
         rows = codes.each_with_index.map do |join_code, index|

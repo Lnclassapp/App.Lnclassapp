@@ -65,6 +65,15 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     assert_equal "/drenas/abcdefghijkmno/schools", helpers.drena_schools_path("abcdefghijkmno")
   end
 
+  # ADR-0057: a teacher signs up by the code of the school, typed or carried by /e/<code>; the team regenerates it.
+  test "the school code has its short sign-up link and its regeneration under the school" do
+    assert_equal "/e/k7m4qz", helpers.school_code_signup_path("k7m4qz")
+    assert_equal({ controller: "identity/teacher_registrations", action: "with_code" }, first_match("/e/k7m4qz"))
+    assert_nil first_match("/e/k7m4qz", method: "POST")
+    assert_equal "/teams/schools/abcdefghijkmno/code", helpers.school_code_path("abcdefghijkmno")
+    assert_equal({ controller: "teams/school_codes", action: "update" }, first_match("/teams/schools/abcdefghijkmno/code", method: "PATCH"))
+  end
+
   test "no application route contains a numeric :id" do
     offenders = Rails.application.routes.routes.map { |route| route.path.spec.to_s }
                      .reject { |path| path.start_with?("/rails/") }.grep(/:id\b/)

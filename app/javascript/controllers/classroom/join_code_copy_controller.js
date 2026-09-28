@@ -1,6 +1,6 @@
-// ⚡ FRONT · classroom/join_code_copy_controller — copie le code d'adhésion d'une classe, tel qu'affiché (en majuscules)
+// ⚡ FRONT · classroom/join_code_copy_controller — copie un code tel qu'affiché (classe, établissement) ou un lien
 // Rôle : écrit le code dans le presse-papiers, puis pose le toast rendu par le serveur (« Code copié », ou l'échec) ; Turbo ne copie pas
-// ADR  : 0051 · UDR : 0027
+// ADR  : 0051, 0057 · UDR : 0027, 0044
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {

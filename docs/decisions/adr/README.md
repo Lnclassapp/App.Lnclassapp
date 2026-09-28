@@ -68,6 +68,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0056](./0056-generation-des-classes-manquantes.md) | Les classes manquantes se génèrent après coup, en arrière-plan, pour les seuls établissements sans classe de l'année | Accepté | 2026-09-28 | Job par lots de 200 établissements, barème et codes de l'import ; compte rendu = `import_report` de `kind` `classrooms`, sans fichier. Amende ADR-0030 et ADR-0039. |
 | [0062](./0062-indicateurs-de-pilotage-lus-en-direct.md) | Les indicateurs de pilotage se lisent en direct, par deux queries bornées, sur des définitions métier fixées | Accepté (décidé par le porteur le 2026-09-28) | 2026-09-28 | Page « Pilotage » de l'équipe (V4, TR-10/11/12) : définitions d'une phrase (compte actif, élève placé, élève actif, DRENA d'un compte…), période 7 j / 30 j / année, filtre DRENA, numéro masqué, recherche bornée ; ni table, ni index, ni cache ; nombre de requêtes fixe. Complète ADR-0049 et ADR-0038. |
 
+
 ---
 
 ## Décisions remplacées — à lire avant d'agir

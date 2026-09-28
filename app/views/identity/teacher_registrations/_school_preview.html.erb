@@ -1,0 +1,11 @@
+<%# 🌐 UI · identity/teacher_registrations/_school_preview — bandeau « Votre établissement » d'un code d'établissement trouvé %>
+<%# Rôle : ne montre que le nom de l'établissement et celui de sa DRENA : ni identifiant, ni effectif, ni enseignant %>
+<%# ADR  : 0057 · UDR : 0044 %>
+<div id="school-preview" class="flex items-center gap-3 rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
+  <span class="grid size-10 shrink-0 place-items-center rounded-full bg-white text-brand-strong"><%= ui_icon "building-library" %></span>
+  <div class="min-w-0">
+    <p class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".label") %></p>
+    <p class="font-display font-extrabold text-ink"><%= preview.school_name %></p>
+    <p class="text-sm text-mute"><%= t(".drena", drena: preview.drena_name) %></p>
+  </div>
+</div>

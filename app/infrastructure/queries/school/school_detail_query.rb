@@ -1,10 +1,11 @@
 # 🔌 INFRA · Queries::School::SchoolDetailQuery
-# Rôle : fiche d'un établissement (SC-05) : en-tête, classes de l'année groupées par niveau (code, effectif, enseignants), enseignants
-# ADR  : 0026, 0030, 0041 · UDR : 0036
+# Rôle : fiche d'un établissement (SC-05) : en-tête et code d'établissement, classes de l'année par niveau, enseignants
+# ADR  : 0026, 0030, 0041, 0057 · UDR : 0036, 0044
 module Queries
   module School
     class SchoolDetailQuery
-      Detail = Data.define(:public_id, :name, :sigle, :drena_name, :school_type, :cycle, :status, :school_year, :levels, :teachers) do
+      Detail = Data.define(:public_id, :name, :sigle, :drena_name, :school_type, :cycle, :status, :school_code, :school_year, :levels,
+                           :teachers) do
         def classrooms_count = levels.sum { it.classrooms.size }
       end
       Level = Data.define(:name, :classrooms)
@@ -12,18 +13,18 @@ module Queries
       TeacherRow = Data.define(:name, :material_name, :material_category, :primary)
 
       SCHOOL_COLUMNS = %w[schools.id schools.public_id schools.name schools.sigle drenas.name schools.school_type schools.cycle
-                          schools.status].freeze
+                          schools.status schools.school_code].freeze
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name classrooms.join_code classrooms.status
                              levels.name levels.position series.name].freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
 
       # → Detail | nil
       def call(public_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
-        id, public_id, name, sigle, drena_name, school_type, cycle, status =
+        id, public_id, name, sigle, drena_name, school_type, cycle, status, school_code =
           Orm::School.joins(:drena).where(public_id:).pick(*SCHOOL_COLUMNS)
         return if id.nil?
 
-        Detail.new(public_id:, name:, sigle:, drena_name:, school_type:, cycle:, status:, school_year:,
+        Detail.new(public_id:, name:, sigle:, drena_name:, school_type:, cycle:, status:, school_code:, school_year:,
                    levels: levels(id, school_year), teachers: teachers(id))
       end
 

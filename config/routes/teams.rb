@@ -14,6 +14,8 @@ scope "teams", module: "teams" do
   resources :schools, param: :public_id, except: %i[new create] do
     member { patch :deactivate }
     resources :classrooms, only: %i[new create], controller: "school_classrooms"
+    # ADR-0059 : « + » et « − » du bloc « Classes par niveau » de la fiche.
+    resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
   end
   resources :levels, param: :slug, except: :show
   resources :series, param: :slug, except: :show
