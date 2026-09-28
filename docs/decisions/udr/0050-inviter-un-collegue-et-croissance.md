@@ -64,7 +64,7 @@ Un enseignant convaincu n'a aucun geste pour faire venir ses collègues ; il rec
 ### Partage de la classe — `classroom/classrooms/_header`
 
 - Dans le bloc du code (si `join_code_display`), sous l'aide : `ui_button` `brand` `sm` « Partager sur WhatsApp », icône `chat-bubble-left-right`, `href` `https://wa.me/?text=<message>`, `target="_blank"`, `rel="noopener"`, `id="classroom_whatsapp_share"`.
-- Message : « Rejoignez la classe <classe> (<établissement>) sur Lnclass : <URL /c/code>. Code de la classe : <ABC12>. » Jamais de nom d'élève ni d'effectif.
+- Message : « Rejoignez la classe <classe> (<établissement>) sur Lnclass : <URL /c/ABC12>. Code de la classe : <ABC12>. » Le code du lien est en majuscules, comme partout sur la page (UDR-0027 ; `/c/` normalise la casse). Jamais de nom d'élève ni d'effectif.
 
 ### Inscription sans code — `identity/pending_teacher_registrations/new`
 
