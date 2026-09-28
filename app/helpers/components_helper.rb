@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -220,7 +220,9 @@ module ComponentsHelper
     content = safe_join([ (ui_icon(icon, class: "opacity-70") if icon), tag.span(label) ].compact)
     return tag.span(content, class: class_names(classes, "opacity-50"), role: "menuitem", "aria-disabled": "true", tabindex: -1) if href.nil?
 
-    link_to content, href, class: classes, role: "menuitem", tabindex: -1, data: (method ? { turbo_method: method } : {})
+    # Un lien vers la page ouverte est marqué courant (« Mon profil », UDR-0041) ; une action (DELETE…) ne l'est jamais.
+    link_to content, href, class: classes, role: "menuitem", tabindex: -1, data: (method ? { turbo_method: method } : {}),
+                           "aria-current": ("page" if method.nil? && current_page?(href))
   end
 
   def ui_tabs(id:, label: nil, selected: nil, &block)

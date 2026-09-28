@@ -1,10 +1,12 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
-# Rôle : lit les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur
-# ADR  : 0026, 0028, 0050
+# Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur
+# ADR  : 0026, 0028, 0050, 0055
 module Repositories
   module Identity
     class UserRepository
       include Ports::Identity::UserRepositoryPort
+
+      TAKEN = { contact: [ :taken ] }.freeze
 
       def find(id:) = map(Orm::User.find_by(id:))
       def find_by_public_id(public_id:) = map(Orm::User.find_by(public_id:))
@@ -16,6 +18,19 @@ module Repositories
       def update_pin(user_id:, pin:)
         Orm::User.find(user_id).update!(pin:)
         true
+      end
+
+      def update_name(user_id:, first_name:, last_name:)
+        Orm::User.find(user_id).update!(first_name:, last_name:)
+        true
+      end
+
+      # Point de sauvegarde : l'index unique refusé n'invalide pas la transaction du use case.
+      def update_contact(user_id:, contact:)
+        Orm::User.transaction(requires_new: true) { Orm::User.find(user_id).update!(contact:) }
+        ::Shared::Result.success
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict, errors: TAKEN)
       end
 
       def actor_for(user_id:)

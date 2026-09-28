@@ -105,10 +105,18 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path active.fetch(:home, home)
   end
 
-  # The account menu of the header: « Mon profil » is not drawn in V1, « Se déconnecter » ends the session.
+  # The account menu of the header: « Mon profil » opens the profile, in the shell of the role, and the entry is then
+  # marked current (ADR-0055, UDR-0041); « Se déconnecter » ends the session.
   def assert_signs_out
     open_account_menu
-    assert_selector "#account-menu [role=menuitem][aria-disabled='true']", text: tn(:profile)
+    assert_selector "#account-menu a[role=menuitem]:not([aria-current])", text: tn(:profile)
+    find("#account-menu a[role=menuitem][href='#{profile_path}']", text: tn(:profile)).click
+
+    assert_current_path profile_path
+    assert_selector "aside nav"
+    assert_selector "h1", text: I18n.t("identity.profiles.show.title")
+    open_account_menu
+    assert_selector "#account-menu a[role=menuitem][aria-current='page'][href='#{profile_path}']", text: tn(:profile)
     # Found from the page, never from a kept scope: the sign-out replaces the document (new session, ADR-0049), and a
     # scope kept on the old menu would go stale under a loaded run.
     find("#account-menu [role=menuitem]", text: tn(:sign_out)).click

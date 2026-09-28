@@ -49,6 +49,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0038](./0038-import-de-cours.md) | Import de cours | Accepté | 2026-09-25 | [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Aide de l'arbre étage par étage dans la modale d'import, noms du référentiel à portée de main, rapport qui compte les lignes créées |
 | [0039](./0039-import-de-fiches-essentielles.md) | Import de fiches essentielles | Accepté | 2026-09-25 | [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Le slug du cours rappelé dans la modale, l'arbre sous la fiche étage par étage, les fiches à la suite de celles du cours |
 | [0040](./0040-import-d-exercices.md) | Import d'exercices | Accepté | 2026-09-26 | [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Fiche essentielle cible rappelée dans la modale d'import, aide de l'exercice à la proposition, rapport qui compte questions et propositions |
+| [0041](./0041-page-profil.md) | Page profil | Proposé | 2026-09-27 | [0055](../adr/0055-profil-modification-de-soi-et-revocation-des-sessions.md) | Mes informations, puis nom, numéro et PIN modifiables en modale |
 
 ---
 
