@@ -18,6 +18,7 @@
 | 2026-09-28 | Remplissage porté par `Entities::Classroom::ClassroomPlanDefaults.fill` (ports reçus en argument), appelé par `LinkLevelSeries` et `CreateLevel` | Un module sous `use_cases/` serait pris pour un use case sans policy par `test/architecture/use_case_policies_test.rb` | Non |
 | 2026-09-28 | Merge de `Develop` (#46 finitions, #47 cycles en radio) : génération dans le menu « Classes » avec le toast d'information « déjà en cours » et la redirection vers le rapport de #46 ; amendements UDR-0032/0036/0043 des deux côtés gardés | — | Non |
 | 2026-09-28 | Menu « Classes » tenu à droite de l'import dès `sm` par un bloc local `#schools-header-actions` (`sm:shrink-0 sm:flex-nowrap`), sans toucher `ui_page_header` ; au téléphone, le bloc passe à la ligne (import puis menu dessous) | Demande du porteur ; `ui_page_header` partagé par tous les écrans | Non — amendement UDR-0043 |
+| 2026-09-28 | **D2 à D5 décidées par le porteur** telles que proposées : mixtes au barème privé, 0 à 30 par ligne, une modale par ligne, pas d'historique à l'écran (journal d'audit) | Confirmation du porteur | Oui — ADR-0058, UDR-0045 |
 | 2026-09-28 | Le composant `_dropdown` n'est pas modifié (le déclencheur libellé garde son style « pilule » d'avatar) | Le chantier parallèle `finitions-generation-menu` touche les menus ⋮ ; éviter un conflit sur un composant partagé | Non |
 
 ## Ce qui a dérapé
@@ -53,7 +54,6 @@
 |---|---|---|
 | Le déclencheur libellé d'`ui_dropdown` a le style « pilule » de l'avatar, pas celui d'un bouton secondaire | Composant partagé, chantier parallèle sur les menus | — |
 | Aucun écran d'historique des changements du barème (journal d'audit seulement) | Hors périmètre (D5) | — |
-| D2 à D5 à confirmer par le porteur (D1 tranché) | Décisions par défaut | — |
 
 ## Clôture
 

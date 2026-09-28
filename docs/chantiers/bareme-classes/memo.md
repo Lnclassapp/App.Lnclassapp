@@ -56,15 +56,15 @@ La production est ouverte depuis le 2026-09-27 ; l'équipe importe et génère m
 | Les totaux par établissement (lycée public 89…) servent-ils ? | Oui : c'est ce que l'équipe vérifie avant d'importer. | Quatre totaux en tête : collège / lycée × public / privé et mixte, recalculés à chaque modification. |
 | L'écran Niveaux affiche un badge « Hors génération des classes » pour un code inconnu du plan. Il reste juste ? | Non : n'importe quel niveau peut maintenant avoir des classes, s'il a un nombre au barème. | Le badge dit désormais « Hors barème » : aucun nombre positif au barème. Amendement UDR-0032. |
 
-## Décisions par défaut à confirmer par le porteur
+## Décisions par défaut, toutes décidées par le porteur le 2026-09-28
 
 | # | Décision prise par défaut | Alternative écartée |
 |---|---|---|
 | D1 | **Décidé par le porteur le 2026-09-28** : « renseigner ces valeurs automatiquement à chaque nouvelle série liée ». Un couple niveau × série lié par l'équipe reçoit ses nombres par défaut — 2nde, 1ère et tout autre niveau du second cycle : public 6 / privé 3 ; Tle : C 2/1, D 6/3, A1 3/2, A2 2/2, autre série 6/3. Un niveau du premier cycle créé ensuite reçoit 4/2 (codes `6eme`, `5eme`) ou 10/4 (`4eme`, `3eme`) ; tout autre niveau du premier cycle n'a pas de règle sûre et reste « Non défini ». Une ligne existante n'est jamais écrasée ; délier garde les lignes (relier retrouve le nombre). Chaque remplissage est tracé (`classroom_plan.changed`, source `auto`). Reste « Non défini » : un couple lié avant le déploiement et absent de l'ancien barème, ou un niveau sans règle. | Ligne manquante à 0 sans défaut (proposition initiale) : refusée par le porteur. |
-| D2 | Les mixtes suivent le barème privé ; pas de colonne « mixte ». | Troisième colonne : aucun besoin exprimé, et ADR-0030 le tranche. |
-| D3 | Bornes 0 à 30 classes par ligne. | Aucune borne : une faute de frappe (300) créerait des centaines de classes à l'import suivant. |
-| D4 | Une modale par ligne (public et privé ensemble), ouverte depuis le menu ⋮. | Saisie en ligne dans le tableau : deux champs par ligne × 15 lignes, et le téléphone la rend illisible. |
-| D5 | Aucun historique à l'écran ; le journal d'audit suffit. | Onglet d'historique : pas demandé. |
+| D2 | **Décidé par le porteur le 2026-09-28**, tel que proposé : Les mixtes suivent le barème privé ; pas de colonne « mixte ». | Troisième colonne : aucun besoin exprimé, et ADR-0030 le tranche. |
+| D3 | **Décidé par le porteur le 2026-09-28**, tel que proposé : Bornes 0 à 30 classes par ligne. | Aucune borne : une faute de frappe (300) créerait des centaines de classes à l'import suivant. |
+| D4 | **Décidé par le porteur le 2026-09-28**, tel que proposé : Une modale par ligne (public et privé ensemble), ouverte depuis le menu ⋮. | Saisie en ligne dans le tableau : deux champs par ligne × 15 lignes, et le téléphone la rend illisible. |
+| D5 | **Décidé par le porteur le 2026-09-28**, tel que proposé : Aucun historique à l'écran ; le journal d'audit suffit. | Onglet d'historique : pas demandé. |
 
 ## Cas limites identifiés
 
@@ -77,4 +77,4 @@ La production est ouverte depuis le 2026-09-27 ; l'équipe importe et génère m
 
 ## Questions encore ouvertes
 
-- D2 à D5 à confirmer par le porteur (D1 tranché le 2026-09-28).
+- Aucune : D1 à D5 sont décidées par le porteur (2026-09-28).

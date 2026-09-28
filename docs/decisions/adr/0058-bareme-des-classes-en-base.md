@@ -150,3 +150,12 @@ Orm::ClassroomPlanEntry.where(plan_entries).delete_all if plan_entries
 - **La reprise de données ne change pas** : elle reproduit exactement l'ancien comportement (une série de Tle hors de l'ancienne liste, liée avant le déploiement, reste non définie ; l'ancien code ne lui donnait aucune classe).
 - Les liens posés hors du use case (fabriques de test, console) ne remplissent rien.
 - Preuves : `test/domain/entities/classroom/classroom_plan_defaults_test.rb`, `test/domain/use_cases/catalog/{link_level_series,create_level}_test.rb`, `test/controllers/teams/{level_series,levels}_controller_test.rb`, `test/system/teams/classroom_plan_test.rb` (lier une série dans la matrice → 6/3 au barème), `test/system/boucle_pedagogique_test.rb`.
+
+## Amendement du 2026-09-28 — D2 à D5 décidés par le porteur
+
+*Confirmation du porteur, telles que proposées au memo. Aucun changement de code.*
+
+- **D2** : un établissement mixte suit le barème privé ; pas de colonne « mixte » (`school_type IN ('public','private')`).
+- **D3** : de 0 à 30 classes par ligne (`CHECK (count BETWEEN 0 AND 30)`, `ClassroomPlan::COUNTS`).
+- **D4** et **D5** relèvent de l'écran (UDR-0045) : une modale par ligne ; pas d'historique à l'écran, le journal d'audit `classroom_plan.changed` (sources `auto` et `manual`) suffit.
+- Toutes les décisions par défaut du chantier (D1 à D5) sont donc décidées par le porteur ; le statut reste **Accepté**.

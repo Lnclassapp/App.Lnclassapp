@@ -86,3 +86,13 @@ Le nombre de classes créées à l'import d'un établissement ou par la généra
 
 - Lier une série à un niveau dans la matrice des séries (UDR-0033) ou créer un niveau du premier cycle au code connu (UDR-0032) remplit la ligne du barème avec ses nombres par défaut : aucune saisie à l'écran, aucun changement visuel sur ces écrans. L'écran du barème les montre comme des nombres ordinaires.
 - « Non défini » ne concerne plus que les lignes sans règle sûre (niveau du premier cycle au code inconnu) et les couples liés avant le déploiement hors de l'ancien barème ; le badge et le bandeau restent inchangés.
+
+## Amendement du 2026-09-28 — D2 à D5 décidés par le porteur
+
+*Confirmation du porteur, telles que proposées au memo. Aucun changement d'interface.*
+
+- **D2** : colonne « Privé et mixte », pas de colonne « mixte » ; totaux « Collège / Lycée privé ou mixte ».
+- **D3** : champs de 0 à 30 (`min`/`max`, refus serveur en 422 au-delà).
+- **D4** : une modale par ligne (public et privé ensemble), ouverte par « Modifier » du menu ⋮ ; pas de saisie dans le tableau.
+- **D5** : aucun historique à l'écran ; le journal d'audit suffit.
+- Statut : **Accepté** (inchangé).
