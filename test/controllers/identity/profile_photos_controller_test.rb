@@ -80,6 +80,17 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
                    "replaced" => false }, event.metadata)
   end
 
+  # Challenge of PR #65, M4: a smartphone JPEG (Motion Photo, MPF, gain map) is accepted, cut at its first EOI.
+  test "a JPEG with a secondary image and a secret after its EOI is stored without them" do
+    sign_in_as @student
+
+    change(upload("hostile/motion_photo_trailer.jpg"))
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Votre photo est enregistrée\./
+    assert_equal file_fixture("photos/photo.jpg").binread, stored.download
+  end
+
   test "without Turbo, a valid photo redirects to the profile with the toast, and the profile shows it" do
     sign_in_as @student
 

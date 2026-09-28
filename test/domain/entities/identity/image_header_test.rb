@@ -141,13 +141,12 @@ module Entities
         end
       end
 
-      test "a JPEG without a frame before its scan, or with data after EOI, is no image" do
+      test "a JPEG without a frame before its scan is no image" do
         jpeg = file_fixture("photos/photo.jpg").binread
         sof = jpeg.index("\xFF\xC0".b)
         without_frame = jpeg.byteslice(0, sof) + jpeg.byteslice(sof + 2 + jpeg.unpack1("n", offset: sof + 2)..)
 
         assert_nil ImageHeader.read(without_frame)
-        assert_nil ImageHeader.read(jpeg + "tail")
       end
 
       test "a WebP reads its size past a foreign chunk; a too short VP8X or VP8, or a bad VP8L signature, is no image" do
@@ -188,7 +187,7 @@ module Entities
       end
 
       test "strip removes the Exif of a JPEG, a PNG and a WebP, and keeps the image and its size" do
-        %w[photo_exif.jpg photo_exif.png photo_exif.webp].each do |name|
+        %w[photo_exif.jpg photo_exif.png photo_exif.webp photo_exif_lossless.webp].each do |name|
           original = file_fixture("photos/#{name}").binread
           stripped = ImageHeader.strip(original)
 
@@ -202,11 +201,198 @@ module Entities
       end
 
       test "strip leaves an image without metadata, and any other file, byte for byte" do
-        %w[photo.jpg photo.png photo_lossy.webp photo_lossless.webp photo_alpha.webp document.pdf].each do |name|
+        %w[photo.jpg photo_progressive.jpg photo.png photo_palette.png photo_gray_trns.png photo_color.png photo_lossy.webp
+           photo_lossless.webp photo_alpha.webp document.pdf].each do |name|
           bytes = file_fixture("photos/#{name}").binread
           assert_equal bytes, ImageHeader.strip(bytes), name
         end
         assert_equal "\xFF\xD8".b, ImageHeader.strip("\xFF\xD8".b)
+      end
+
+      # Challenge of PR #65: free bytes must not survive inside the kept parts either. Each hostile variant is built
+      # from a real fixture; it is either no image, or its stripped bytes no longer carry the hidden bytes. Nothing
+      # raises, and every variant is decided in well under 2 seconds.
+      def refused_or_clean(variants)
+        variants.each do |label, bytes|
+          within_two_seconds(label) do
+            facts = ImageHeader.read(bytes)
+            next if facts.nil?
+
+            stripped = ImageHeader.strip(bytes)
+            assert_not_includes stripped, "SECRET", label
+            assert_equal facts.with(metadata: false), ImageHeader.read(stripped), label
+          end
+        end
+      end
+
+      def assert_refused(label, bytes)
+        within_two_seconds(label) do
+          assert_nil ImageHeader.read(bytes), label
+          assert_equal bytes.b, ImageHeader.strip(bytes), label
+        end
+      end
+
+      def within_two_seconds(label)
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        yield
+        assert_operator Process.clock_gettime(Process::CLOCK_MONOTONIC) - started, :<, 2, label
+      end
+
+      def png_chunk(type, data) = [ data.bytesize ].pack("N") + type + data + [ Zlib.crc32(type + data) ].pack("N")
+      def riff(body) = "RIFF".b + [ body.bytesize + 4 ].pack("V") + "WEBP" + body
+      def webp_chunk(type, data) = type.b + [ data.bytesize ].pack("V") + data + ("\0" * (data.bytesize % 2))
+      def webp_chunks(name) = file_fixture("photos/#{name}").binread.byteslice(12..)
+
+      # A JPEG segment rebuilt with its payload and its length recomputed.
+      def jpeg_segment(marker, payload) = [ 0xFF, marker, payload.bytesize + 2 ].pack("CCn") + payload
+
+      def with_segment(jpeg, marker, &)
+        at = (2...jpeg.bytesize).find { jpeg.getbyte(it) == 0xFF && jpeg.getbyte(it + 1) == marker }
+        length = jpeg.unpack1("n", offset: at + 2)
+        jpeg.byteslice(0, at) + jpeg_segment(marker, yield(jpeg.byteslice(at + 4, length - 2))) + jpeg.byteslice(at + 2 + length..)
+      end
+
+      test "M1: a gAMA, sRGB or cHRM chunk longer than the standard, or an sRGB intent out of range, is no image" do
+        png = file_fixture("photos/photo.png").binread
+        insert = ->(type, data) { png.byteslice(0, 33) + png_chunk(type, data) + png.byteslice(33..) }
+
+        assert_not_nil ImageHeader.read(insert.("gAMA", [ 45_455 ].pack("N")))
+        { gama: insert.("gAMA", [ 45_455 ].pack("N") + "SECRET"), srgb: insert.("sRGB", "\0SECRET".b),
+          srgb_intent: insert.("sRGB", "\x04".b), chrm: insert.("cHRM", ("\0" * 32) + "SECRET"),
+          chrm_short: insert.("cHRM", "\0" * 31) }.each do |label, bytes|
+          assert_refused(label, bytes)
+        end
+      end
+
+      test "M1: a PLTE or tRNS chunk outside the bounds of the standard for the colour type is no image" do
+        rgb = file_fixture("photos/photo.png").binread
+        palette = file_fixture("photos/photo_palette.png").binread
+        gray = file_fixture("photos/photo_gray_trns.png").binread
+        replace = lambda do |png, type, data|
+          at = png.index(type) - 4
+          png.byteslice(0, at) + png_chunk(type, data) + png.byteslice(at + 12 + png.unpack1("N", offset: at)..)
+        end
+        insert = ->(png, type, data) { png.byteslice(0, 33) + png_chunk(type, data) + png.byteslice(33..) }
+
+        assert_not_nil ImageHeader.read(insert.(rgb, "tRNS", "\0\x01\0\x02\0\x03".b))
+        assert_not_nil ImageHeader.read(insert.(rgb, "PLTE", "\0" * 6))
+        { plte_not_triplet: replace.(palette, "PLTE", "\0" * 47), plte_too_long: replace.(palette, "PLTE", "\0" * 771),
+          plte_beyond_depth: replace.(palette, "PLTE", "\0" * 3 * 17), plte_empty: replace.(palette, "PLTE", ""),
+          plte_in_gray: insert.(gray, "PLTE", "\0" * 3), no_plte: palette.sub(/....PLTE.*?(?=....tRNS)/mn, ""),
+          trns_longer_than_palette: replace.(palette, "tRNS", "\0" * 17), trns_gray: replace.(gray, "tRNS", "\0\x11SECRET".b),
+          trns_rgb: insert.(rgb, "tRNS", "\0\x01\0\x02\0\x03SECRET".b), trns_gray_high_byte: replace.(gray, "tRNS", "\x53\x11".b),
+          trns_rgb_high_byte: insert.(rgb, "tRNS", "\0\x01\x53\x02\0\x03".b),
+          trns_with_alpha: insert.(rgb.dup.tap { it.setbyte(25, 6) }.then { fix_ihdr(it) }, "tRNS", "\0") }.each do |label, bytes|
+          assert_refused(label, bytes)
+        end
+      end
+
+      test "M1: a chunk after the first IEND, a second IHDR or a non-empty IEND is no image" do
+        png = file_fixture("photos/photo.png").binread
+        idat = png.index("IDAT") - 4
+        idat_chunk = png.byteslice(idat, 12 + png.unpack1("N", offset: idat))
+        iend = png.bytesize - 12
+
+        { idat_after_iend: png + idat_chunk + png_chunk("IEND", ""), iend_twice: png + png_chunk("IEND", ""),
+          secret_after_iend: png + png_chunk("IDAT", "SECRET") + png_chunk("IEND", ""),
+          iend_with_data: png.byteslice(0, iend) + png_chunk("IEND", "SECRET"),
+          ihdr_twice: png.byteslice(0, 33) + png.byteslice(8, 25) + png.byteslice(33..) }.each do |label, bytes|
+          assert_refused(label, bytes)
+        end
+      end
+
+      test "M1: an IHDR with an unknown compression, filter or interlace method, or a bad depth for its colour type, is no image" do
+        png = file_fixture("photos/photo.png").binread
+        { depth: [ 24, 4 ], color: [ 25, 5 ], compression: [ 26, 1 ], filter: [ 27, 1 ], interlace: [ 28, 2 ] }.each do |label, (at, value)|
+          assert_refused(label, fix_ihdr(png.dup.tap { it.setbyte(at, value) }))
+        end
+      end
+
+      def fix_ihdr(png) = png.byteslice(0, 8) + png_chunk("IHDR", png.byteslice(16, 13)) + png.byteslice(33..)
+
+      test "M2: a DQT, DHT, SOF, SOS, DRI or DAC segment longer than its tables, or a second frame, is no image" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        dri = jpeg.byteslice(0, 20) + jpeg_segment(0xDD, "\0\x10".b) + jpeg.byteslice(20..)
+        assert_not_nil ImageHeader.read(dri)
+        dac = jpeg.byteslice(0, 20) + jpeg_segment(0xCC, "\x00\x10".b) + jpeg.byteslice(20..)
+        assert_not_nil ImageHeader.read(dac)
+        sof = jpeg.index("\xFF\xC0".b)
+
+        { dqt_long: with_segment(jpeg, 0xDB) { it + "SECRET" }, dqt_precision: with_segment(jpeg, 0xDB) { "\x20".b + it.byteslice(1..) },
+          dqt_table: with_segment(jpeg, 0xDB) { "\x04".b + it.byteslice(1..) }, dqt_empty: with_segment(jpeg, 0xDB) { "" },
+          dht_long: with_segment(jpeg, 0xC4) { it + "SECRET" }, dht_class: with_segment(jpeg, 0xC4) { "\x20".b + it.byteslice(1..) },
+          dht_table: with_segment(jpeg, 0xC4) { "\x04".b + it.byteslice(1..) }, dht_counts: with_segment(jpeg, 0xC4) { it.byteslice(0, 10) },
+          sof_long: with_segment(jpeg, 0xC0) { it + "SECRET" }, sos_long: with_segment(jpeg, 0xDA) { it + "SECRET" },
+          sof_short: with_segment(jpeg, 0xC0) { it.byteslice(0, 4) }, zero_height: with_segment(jpeg, 0xC0) { it.byteslice(0, 1) + "\0\0" + it.byteslice(3..) },
+          dri_long: with_segment(dri, 0xDD) { it + "SECRET" }, dac_odd: with_segment(dac, 0xCC) { it + "S" },
+          dac_empty: with_segment(dac, 0xCC) { "" },
+          two_frames: jpeg.byteslice(0, sof) + jpeg.byteslice(sof, 19) + jpeg.byteslice(sof..) }.each do |label, bytes|
+          assert_refused(label, bytes)
+        end
+      end
+
+      test "M1, M2: a VP8X longer than 10 bytes, a second VP8X or a non-zero padding byte is no image" do
+        alpha = webp_chunks("photo_alpha.webp")
+        vp8x = alpha.byteslice(0, 18)
+
+        { vp8x_long: riff(webp_chunk("VP8X", alpha.byteslice(8, 10) + "SECRET") + alpha.byteslice(18..)),
+          vp8x_twice: riff(alpha + vp8x), odd_padding: riff(webp_chunks("photo_lossy.webp") + webp_chunk("ICCP", "abc").tap { it.setbyte(-1, 0x53) }) }.each do |label, bytes|
+          assert_refused(label, bytes)
+        end
+      end
+
+      test "M1: the flags and reserved bytes of VP8X are rewritten to zero, the transparency flag aside" do
+        alpha = file_fixture("photos/photo_alpha.webp").binread
+        hidden = alpha.dup.tap { it.setbyte(20, 0xFF) }.tap { |b| (21..23).each { b.setbyte(it, 0x53) } }
+
+        assert ImageHeader.read(hidden).metadata
+        assert_equal alpha, ImageHeader.strip(hidden)
+        refused_or_clean(vp8x_reserved: hidden)
+      end
+
+      test "M2: an ALPH chunk with a bad header, a raw alpha plane of the wrong size, twice or with a lossless image is no image" do
+        alpha = webp_chunks("photo_alpha.webp")
+        vp8x, alph, vp8 = alpha.byteslice(0, 18), alpha.byteslice(18, 28), alpha.byteslice(46..)
+        header = ->(byte) { webp_chunk("ALPH", byte.chr + alph.byteslice(9, 19)) }
+        raw = ->(size) { webp_chunk("ALPH", "\0" + ("\x80".b * size)) }
+        lossless = webp_chunks("photo_lossless.webp")
+
+        assert_not_nil ImageHeader.read(riff(vp8x + raw.(64 * 48) + vp8))
+        assert_not_nil ImageHeader.read(riff(vp8x + header.(0x1D) + vp8))
+        { compression: header.(0x02), preprocessing: header.(0x21), reserved: header.(0x41) + "", raw_long: raw.(64 * 48 + 6),
+          raw_short: raw.(64 * 48 - 1), empty: webp_chunk("ALPH", "") }.each do |label, chunk|
+          assert_refused(label, riff(vp8x + chunk + vp8))
+        end
+        { twice: riff(vp8x + alph + alph + vp8), after_image: riff(vp8x + vp8 + alph), with_lossless: riff(vp8x + alph + lossless),
+          without_vp8x: riff(alph + vp8) }.each do |label, bytes|
+          assert_refused(label, bytes)
+        end
+      end
+
+      test "M3: a VP8X canvas that differs from the size of its VP8 or VP8L bitstream is no image" do
+        alpha = file_fixture("photos/photo_alpha.webp").binread
+        lossless = ImageHeader.strip(file_fixture("photos/photo_exif_lossless.webp").binread)
+
+        assert_equal [ 64, 48 ], ImageHeader.read(lossless).then { [ it.width, it.height ] }
+        [ alpha, lossless ].each do |webp|
+          [ 24, 27 ].each { |at| assert_refused("#{webp.bytesize} @#{at}", webp.dup.tap { it.setbyte(at, it.getbyte(at) + 1) }) }
+        end
+      end
+
+      test "M1: a VP8L with a non-zero version is no image" do
+        lossless = file_fixture("photos/photo_lossless.webp").binread
+        assert_refused(:vp8l_version, lossless.dup.tap { it.setbyte(24, it.getbyte(24) | 0x20) })
+      end
+
+      # M4 (decision of the coordinator): a smartphone JPEG carries a Motion Photo, an MPF secondary image or a gain map
+      # after the EOI of its main stream. The file is accepted and everything after the first EOI is cut.
+      test "M4: a JPEG with an MPF index and a secondary image after EOI is kept without them" do
+        motion = file_fixture("photos/hostile/motion_photo_trailer.jpg").binread
+
+        assert_equal ImageHeader::Facts.new(format: :jpeg, width: 64, height: 48, metadata: true), ImageHeader.read(motion)
+        assert_equal file_fixture("photos/photo.jpg").binread, ImageHeader.strip(motion)
+        assert_equal file_fixture("photos/photo.jpg").binread, ImageHeader.strip(file_fixture("photos/photo.jpg").binread + "tail")
+        refused_or_clean(motion:, tail: file_fixture("photos/photo.jpg").binread + "SECRET")
       end
     end
   end
