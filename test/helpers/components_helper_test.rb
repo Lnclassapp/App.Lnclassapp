@@ -183,6 +183,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[aria-haspopup]", 0
   end
 
+  # Chantier modales-sans-js : une modale servie ouverte l'est dès le HTML, pour rester lisible sans JavaScript ; une
+  # modale à déclencheur reste fermée.
+  test "ui_modal served open carries the open attribute of its dialog, a closed one does not" do
+    show ui_modal(title: "Modifier", id: "served", open: true) + ui_modal(title: "Plus tard", id: "later", trigger: "Ouvrir")
+
+    assert_select "dialog#served[open]"
+    assert_select "dialog#later[open]", 0
+  end
+
   test "ui_dropdown renders a menu button and its items" do
     html = ui_dropdown(label: "Actions", align: :start) do
       ui_dropdown_item("Modifier", href: "/edit", icon: "pencil") +

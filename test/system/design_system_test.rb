@@ -237,6 +237,8 @@ class DesignSystemTest < ApplicationSystemTestCase
     click_on t("design.index.hotwire.open")
     within("turbo-frame#modal") do
       assert_selector "dialog#design-crud-modal[open]"
+      # Servie ouverte dès le HTML (modales-sans-js), elle reste une vraie modale : focus piégé, fond, Échap.
+      assert page.evaluate_script("document.querySelector('dialog#design-crud-modal').matches(':modal')")
       fill_in "sample_name", with: "   " # passe la validation du navigateur, pas celle du serveur
       click_on t("design.modal.submit")
 
