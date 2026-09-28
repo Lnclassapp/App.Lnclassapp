@@ -1,0 +1,44 @@
+<%# 🌐 UI · identity/profile_photos/edit — « Ma photo », servie dans le frame « modal » (ouverte sur le shell sans frame) %>
+<%# Rôle : avatar actuel, aperçu recadré par identity--photo-picker, champ photo, retrait s'il y a une photo ; échec en 422 ici %>
+<%# ADR  : 0060 · UDR : 0006, 0041, 0047 %>
+<% content_for :title, t(".title") %>
+<% photo_error = @form.errors[:photo].first %>
+<% src = account_photo_src(profile.public_id, profile.photo_version) %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "profile-photo-modal", size: :sm, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "profile-photo-form", icon: "check" %>
+    <% end %>
+    <%= form_with model: @form, scope: :profile_photo, url: profile_photo_path, method: :patch, id: "profile-photo-form",
+                  multipart: true, class: "space-y-5",
+                  data: { controller: "identity--photo-picker", action: "submit->identity--photo-picker#hold" } do |f| %>
+      <div class="flex justify-center">
+        <div data-identity--photo-picker-target="current"><%= ui_avatar profile.display_name, src:, size: :xl %></div>
+        <img hidden alt="<%= t(".preview") %>" data-identity--photo-picker-target="preview" class="size-28 rounded-full object-cover">
+      </div>
+      <div class="space-y-1.5">
+        <%= f.label :photo, class: "block text-sm font-medium text-ink" do %>
+          <%= Dtos::Identity::ProfilePhotoInput.human_attribute_name(:photo) %><span class="text-error" aria-hidden="true"> *</span>
+        <% end %>
+        <%= f.file_field :photo, accept: "image/jpeg,image/png,image/webp,image/*", required: true,
+                         "aria-invalid": ("true" if photo_error),
+                         "aria-describedby": [ "profile_photo_photo_hint", ("profile_photo_photo_error" if photo_error) ].compact.join(" "),
+                         data: { "identity--photo-picker-target": "input", action: "change->identity--photo-picker#pick" },
+                         class: class_names("block w-full cursor-pointer rounded-ln border bg-white text-sm text-ink file:mr-4 file:min-h-tap file:cursor-pointer file:border-0 file:bg-mist file:px-4 file:font-medium",
+                                            photo_error ? "border-error" : "border-line") %>
+        <p id="profile_photo_photo_hint" class="text-sm text-mute"><%= t(".hint") %></p>
+        <% if photo_error %>
+          <p id="profile_photo_photo_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+            <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= photo_error %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+    <% if src %>
+      <%= form_with url: profile_photo_path, method: :delete, class: "mt-5 border-t border-line pt-4" do %>
+        <%= ui_button t(".remove"), type: :submit, variant: :secondary, size: :sm, icon: "trash" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

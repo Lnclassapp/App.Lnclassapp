@@ -111,7 +111,7 @@ module ComponentsHelper
   }.freeze
   SUBJECT_FALLBACK = { tone: :neutral, icon: "book-open" }.freeze
 
-  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg" }.freeze
+  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
     brand: "bg-brand text-ink", teacher: "bg-teacher text-ink", school: "bg-school text-white",
     team: "bg-team text-white", gold: "bg-gold text-ink"
@@ -259,7 +259,8 @@ module ComponentsHelper
   def ui_avatar(name, src: nil, size: :md, tone: nil)
     classes = class_names("inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold",
                           option!(AVATAR_SIZES, size, "ui_avatar size"))
-    return image_tag(src, alt: name, class: class_names(classes, "object-cover")) if src
+    # Photo de profil (ADR-0060, UDR-0047) : une seule taille servie, recadrée par le rond ; hors écran, pas chargée.
+    return image_tag(src, alt: name, loading: "lazy", decoding: "async", class: class_names(classes, "object-cover")) if src
 
     tone ||= AVATAR_TONES.keys[name.to_s.sum % AVATAR_TONES.size]
     tag.span(avatar_initials(name), role: "img", "aria-label": name,

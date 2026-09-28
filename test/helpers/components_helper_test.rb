@@ -330,6 +330,14 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "img[alt=Awa][src='/a.png'].size-8"
   end
 
+  # ADR-0060, UDR-0047: a photo is round, cropped to fill, loaded lazily; the xl size serves the photo modal.
+  test "ui_avatar shows a photo round and cropped, lazily, in every size up to xl" do
+    show ui_avatar("Awa Koné", src: "/accounts/abc/photo?v=1", size: :xl)
+
+    assert_select "img[alt='Awa Koné'][src='/accounts/abc/photo?v=1'][loading=lazy][decoding=async].rounded-full.object-cover.size-28"
+    assert_includes ui_avatar("Awa Koné", size: :xl), "size-28"
+  end
+
   # --- Toasts -----------------------------------------------------------------
 
   test "ui_toast carries its message, title and delay" do

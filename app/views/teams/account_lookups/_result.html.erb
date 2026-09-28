@@ -1,9 +1,9 @@
 <%# 🌐 UI · teams/account_lookups/_result — le compte trouvé (Queries::Identity::AccountLookupQuery::Row) et ses actions %>
 <%# Rôle : identité, rôle, classe ; « Générer un code de récupération » (stream : modale du code) et, pour un autre membre de l'équipe, la réinitialisation confirmée %>
-<%# ADR  : 0031, 0032 · UDR : 0006, 0020 · remplacé par teams/second_factor_resets/create.turbo_stream %>
+<%# ADR  : 0031, 0032, 0060 · UDR : 0006, 0020, 0047 · remplacé par teams/second_factor_resets/create.turbo_stream %>
 <%= ui_card id: "account-lookup-result", "aria-live": "polite" do %>
   <div class="flex items-center gap-4">
-    <%= ui_avatar account.display_name, size: :lg %>
+    <%= ui_avatar account.display_name, src: account_photo_src(account.public_id, account.photo_version), size: :lg %>
     <div class="min-w-0 flex-1">
       <p class="font-display text-lg leading-tight font-extrabold text-ink"><%= account.display_name %></p>
       <div class="mt-1.5 flex flex-wrap items-center gap-2">
