@@ -18,7 +18,7 @@
     <div data-controller="rich-text-editor" data-rich-text-editor-lang-value="<%= t("components.rich_text_editor.lang").to_json %>">
       <%= form.rich_textarea :content,
             "aria-describedby": [ "essential_content_hint", ("essential_content_error" if content_error) ].compact.join(" "),
-            "aria-invalid": ("true" if content_error),
+            "aria-invalid": ("true" if content_error), data: rich_text_without_uploads,
             class: class_names("trix-content block min-h-48 w-full rounded-ln border bg-white px-4 py-3 text-base text-ink",
                                content_error ? "border-error" : "border-line") %>
     </div>

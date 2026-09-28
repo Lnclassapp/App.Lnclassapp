@@ -73,6 +73,13 @@ L'équipe a besoin de voir l'état de la plateforme d'un coup d'œil, et d'attei
 - Le « Control Center » (TR-10) reste hors périmètre (V4) : l'entrée « Pilotage » du shell reste inactive.
 - Les messages de l'ancien fil (CO) ne sont pas repris en V1 : une section « Messages » s'ajoutera ici quand la communication sera livrée.
 
+## Amendement du 2026-09-28 — le « Control Center » est livré
+
+*Chantier [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/prd.md). Statut : accepté, décidé par le porteur le 2026-09-28. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Le §4 « l'entrée Pilotage du shell reste inactive » ne vaut plus : TR-10 est livré en V4 par la page « Pilotage » ([UDR-0049](0049-page-pilotage-de-l-equipe.md)), active dans la navigation.
+- L'accueil ne change pas : il garde ses compteurs du référentiel. Les indicateurs d'usage (élèves actifs, exercices terminés, couverture) vivent sur « Pilotage », pas sur l'accueil, pour que l'accueil reste une lecture bornée et rapide.
+
 ## Amendement du 2026-09-28 — raccourci « Croissance » (UDR-0050)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* Les raccourcis gagnent « Croissance » (`secondary`, icône `arrow-trending-up`, vers `teams_growth_path`), après « Importer ». C'est le seul accès à `/teams/growth` : la navigation équipe reste à 5 destinations (UDR-0006).

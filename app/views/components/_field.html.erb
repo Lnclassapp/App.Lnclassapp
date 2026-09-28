@@ -1,6 +1,6 @@
 <%# 🌐 UI · components/_field — libellé, contrôle, aide et erreur, appelé par ui_field %>
 <%# Rôle : un seul mécanisme d'erreur de validation, sous le champ, relié par aria-describedby %>
-<%# UDR  : 0005 %>
+<%# UDR  : 0005, 0051 %>
 <div class="space-y-1.5">
   <% if kind == :checkbox %>
     <div class="flex items-start gap-3">
@@ -17,6 +17,20 @@
       <div class="relative">
         <%= control %>
         <%= ui_icon "chevron-down", variant: :mini, class: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-mute" %>
+      </div>
+    <% elsif reveal %>
+      <%# UDR-0051 : bouton œil, caché sans JavaScript ; le contrôleur password-reveal le montre et bascule le type. %>
+      <div class="relative" data-controller="password-reveal"
+           data-password-reveal-show-label-value="<%= t(".reveal.show") %>"
+           data-password-reveal-hide-label-value="<%= t(".reveal.hide") %>">
+        <%= control %>
+        <button type="button" hidden class="<%= ComponentsHelper::FIELD_REVEAL_BUTTON %>" aria-controls="<%= id %>"
+                aria-pressed="false" aria-label="<%= t(".reveal.show") %>"
+                data-password-reveal-target="toggle"
+                data-action="password-reveal#toggle mousedown->password-reveal#keepFocus turbo:before-morph-attribute->password-reveal#keepShown">
+          <span data-icon="eye" data-password-reveal-target="maskedIcon"><%= ui_icon "eye", variant: :outline, size: :md %></span>
+          <span data-icon="eye-slash" data-password-reveal-target="revealedIcon" hidden><%= ui_icon "eye-slash", variant: :outline, size: :md %></span>
+        </button>
       </div>
     <% else %>
       <%= control %>

@@ -113,6 +113,12 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - **Valeur cochée** : le cycle enregistré (le formulaire ne sert qu'à modifier ; un établissement a toujours un cycle). Le « 1er cycle par défaut » demandé le 2026-09-28 n'a d'objet qu'à la création, qui n'existe pas ici (§2) : sa valeur équivalente serait `first`.
 - **Le filtre « Tous les cycles » reste une liste déroulante** : c'est un filtre avec une option « tous », pas une saisie.
 
+## Amendement du 2026-09-28 — menu « Classes » de l'en-tête
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md). En cas d'écart, cette section fait foi.*
+
+- L'en-tête de la liste porte « Importer des établissements » (principale), puis le menu « Classes » (génération des classes manquantes, barème des classes) : voir UDR-0043 et UDR-0045, amendements du 2026-09-28.
+
 ## Amendement du 2026-09-28 — code national et enseignants en attente (UDR-0050)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* La fiche montre le code national dans l'en-tête et le formulaire le modifie (facultatif, 6 chiffres, unique) ; la recherche porte aussi sur lui ; la section « Enseignants en attente » (Valider / Refuser) précède les enseignants rattachés quand il y a des demandes. Contrat : UDR-0050 §3.

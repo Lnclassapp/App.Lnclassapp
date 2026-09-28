@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · AuthenticatedController
 # Rôle : parent des espaces connectés ; rend le shell, lui fournit la personne connectée, retient l'enseignant en attente
-# ADR  : 0026, 0049, 0055, 0063 · UDR : 0006, 0050
+# ADR  : 0026, 0049, 0055, 0060, 0063 · UDR : 0006, 0047, 0050
 class AuthenticatedController < ApplicationController
   # Une requête de frame (modale, re-rendu 422) garde le layout minimal de turbo-rails : le shell en ferait une page
   # complète, et Turbo y prendrait le frame vide du layout application. Sauf la page atteinte par Turbo juste après un
@@ -21,9 +21,11 @@ class AuthenticatedController < ApplicationController
     redirect_to pending_account_path if current_actor.teacher? && current_actor.school_id.nil?
   end
 
+  # La photo remplace les initiales du menu du compte et de la barre latérale (ADR-0060).
   def shell_user
-    @shell_user ||= NavigationHelper::ShellUser.new(
-      **Queries::Identity::ShellUserQuery.new.call(user_id: current_session.user_id).to_h
-    )
+    @shell_user ||= Queries::Identity::ShellUserQuery.new.call(user_id: current_session.user_id).then do |row|
+      NavigationHelper::ShellUser.new(name: row.name, role: row.role, detail: row.detail,
+                                      avatar_url: helpers.account_photo_src(row.public_id, row.photo_version))
+    end
   end
 end

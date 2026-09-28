@@ -1,4 +1,4 @@
-# Import des établissements (plan boucle-pedagogique, Lot S3) — ADR-0030, ADR-0039, ADR-0063, UDR-0037
+# Import des établissements (plan boucle-pedagogique, Lot S3) — ADR-0030, ADR-0039, ADR-0058, ADR-0063, UDR-0037
 fr:
   teams:
     imports:
@@ -15,7 +15,7 @@ fr:
             national_code: "Code national à 6 chiffres (résultats du BEPC). Facultatif, unique : sert à l'inscription des enseignants sans code."
             drena: "Slug de la DRENA de cette école. Facultatif : remplace celle de l'enveloppe."
           example: "Exemple minimal"
-          classrooms: "Les classes sont générées selon le type et le cycle de chaque établissement : lycée public 77, lycée privé ou mixte 38, collège public 28, avec le référentiel complet. Aucun établissement existant n'est modifié : un doublon est ignoré et compté."
+          classrooms: "Les classes sont générées selon le type et le cycle de chaque établissement, d'après le barème des classes du référentiel. Aucun établissement existant n'est modifié : un doublon est ignoré et compté."
           drenas:
             one: "Slug de la DRENA (%{count})"
             other: "Slugs des DRENA (%{count})"
@@ -24,5 +24,5 @@ fr:
       status:
         details:
           classrooms_created: "Classes générées"
-          skipped_levels: "Niveaux sautés (absents du référentiel ou sans série)"
-          skipped_series: "Séries sautées (absentes du référentiel ou non liées au niveau)"
+          skipped_levels: "Niveaux sautés (non définis au barème, ou sans série liée)"
+          skipped_series: "Séries sautées (couple niveau × série non défini au barème)"

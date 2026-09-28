@@ -29,7 +29,10 @@ class Teams::LevelSeriesControllerTest < ActionDispatch::IntegrationTest
     assert Orm::LevelSeries.exists?(level: @tle, series: @d)
     assert_select "turbo-stream[action=replace][target=level_series_tle_d] button[aria-pressed=true]"
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{t("teams.level_series.create.done")}/
-    assert_equal "taxonomy.changed", Orm::AuditEvent.sole.action
+    assert_equal [ "classroom_plan.changed", "classroom_plan.changed", "taxonomy.changed" ], Orm::AuditEvent.order(:action).pluck(:action)
+    # D1 (owner, 2026-09-28): the new pair gets its barème defaults, written in base.
+    assert_equal({ "private" => 3, "public" => 6 },
+                 Orm::ClassroomPlanEntry.where(level: @tle, series: @d).pluck(:school_type, :count).to_h)
   end
 
   test "a pair already linked is refused in 422, its cell resynchronised" do

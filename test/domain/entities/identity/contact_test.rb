@@ -21,6 +21,15 @@ module Entities
         assert_nil Contact.normalize("070102030")
         assert_nil Contact.normalize(nil)
       end
+
+      test "masque un numéro : seuls les deux premiers et les deux derniers chiffres se lisent (ADR-0062)" do
+        assert_equal "01 •• •• •• 45", Contact.mask("0102030445")
+      end
+
+      test "ne masque rien d'absent" do
+        assert_nil Contact.mask(nil)
+        assert_nil Contact.mask("")
+      end
     end
   end
 end

@@ -1,0 +1,8 @@
+<%# 🌐 UI · teams/classroom_plans/_undefined — compte des lignes non définies du barème, cible Turbo toujours présente %>
+<%# Rôle : vide si tout est renseigné ; sinon un avertissement : ces lignes ne donnent aucune classe %>
+<%# ADR  : 0058 · UDR : 0045 %>
+<%# locals: (sheet:) -%>
+<div id="classroom_plan_undefined"><% if sheet.undefined_count.positive? %><div role="status" class="mb-4 flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
+  <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
+  <p><%= t(".undefined", count: sheet.undefined_count) %></p>
+</div><% end %></div>

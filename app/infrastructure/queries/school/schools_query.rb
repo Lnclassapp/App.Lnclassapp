@@ -20,7 +20,7 @@ module Queries
         scope = filtered(drena:, school_type:, cycle:, status:, search:)
         total_count = scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
-        page = page.to_i.clamp(1, pages)
+        page = page.to_s.to_i.clamp(1, pages) # to_s : page[]=2 ou page[a]=1 donnent un tableau ou un hash
         rows = scope.order(:name, :id).offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck(*columns(school_year))
         Page.new(rows: rows.map { |values| Row.new(*values) }, total_count:, page:, pages:)
       end

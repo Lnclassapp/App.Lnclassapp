@@ -35,6 +35,9 @@ module Queries
         assert_equal [ 2, 10 ], query(page: "99").then { [ it.page, it.rows.size ] }
         assert_equal 1, query(page: "-3").page
         assert_equal 1, query(page: "abc").page
+        # A query string such as page[]=2 or page[a]=1 hands an array or a hash: page 1, never a 500.
+        assert_equal 1, query(page: [ "2" ]).page
+        assert_equal 1, query(page: { "a" => "1" }).page
         assert_equal 1, query(page: nil).page
       end
 

@@ -12,7 +12,11 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
     visit school_path(@school.public_id)
   end
 
+  # Sous charge (4 navigateurs en parallèle), une réponse Turbo Stream dépasse parfois l'attente par défaut de Capybara.
+  RESPONSE_WAIT = 10
+
   def sixth_row = find("#level_classrooms_6eme")
+  def assert_toast(text) = using_wait_time(RESPONSE_WAIT) { super }
   def sixth_count(count) = "[role=group][aria-label='6ème : #{count} classes']"
 
   # Un marqueur posé dans la page survit à la mise à jour : la preuve qu'elle n'a pas été rechargée.
@@ -65,10 +69,20 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
     assert_not_reloaded
   end
 
+  # Un toast d'erreur reste jusqu'à sa fermeture et peut couvrir l'en-tête (au téléphone surtout) : on le ferme par son
+  # vrai bouton, comme le ferait l'équipe, et on attend qu'il ait quitté la page.
+  def dismiss_toasts
+    all("#toasts button[data-action='toast#dismiss']").each(&:click)
+    assert_no_selector "#toasts [data-controller=toast]"
+  end
+
   # Après un refus, la confirmation est vraiment refermée : la page reste utilisable sans rechargement.
   def assert_page_usable
     assert_no_selector "dialog[open]"
     assert page.evaluate_script("document.querySelectorAll('dialog:modal').length === 0"), "une <dialog> reste modale"
+    dismiss_toasts
+    # À 390 px, le bouton ⋮ ramené juste au bord de l'écran passe sous la barre supérieure collante : on remonte en haut.
+    page.execute_script("window.scrollTo(0, 0)")
     within("#school_header") { find("button[aria-haspopup=menu]").click }
     assert_selector "#school_header [role=menu]", visible: true
     find("#school_header button[aria-haspopup=menu]").click
@@ -99,6 +113,31 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
 
   test "« − » sur une classe retirée par un autre onglet : 404, et la page reste utilisable" do
     refuse_gone
+  end
+
+  test "après « Désactiver » depuis l'en-tête, le bloc n'offre plus « + » et dit pourquoi, sans rechargement" do
+    mark_page
+    click_menu_action("#school_header", "Désactiver")
+    within("dialog[open]") { click_on "Désactiver l'établissement" }
+
+    assert_toast "désactivé"
+    assert_selector "#school_level_classrooms_inactive", text: "Seul un établissement actif reçoit de nouvelles classes."
+    assert_no_button "Ajouter une classe de 6ème"
+    assert_button "Retirer une classe de 6ème"
+    assert_not_reloaded
+  end
+
+  test "un passage en brouillon par « Modifier » retire aussi « + » du bloc" do
+    mark_page
+    click_menu_action("#school_header", "Modifier")
+    within("dialog[open]") do
+      select "Brouillon", from: "Statut"
+      click_on "Enregistrer"
+    end
+
+    assert_selector "#school_level_classrooms_inactive"
+    assert_no_button "Ajouter une classe de 6ème"
+    assert_not_reloaded
   end
 
   test "« Annuler » ferme la confirmation sans rien retirer" do

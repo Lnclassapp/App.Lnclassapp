@@ -17,9 +17,16 @@ class Queries::Catalog::TeamHomeQueryTest < ActiveSupport::TestCase
 
     assert_equal [ 0, 0, 0, 0, 0 ], home.to_h.values_at(:drenas_count, :schools_count, :classrooms_count, :series_count, :materials_count)
     assert_empty home.levels
+    assert_equal 0, home.classroom_plan_total
     assert_empty home.recent_courses
     assert_empty home.recent_exercises
     assert_empty home.recent_imports
+  end
+
+  test "the barème total is the number of classrooms a public lycée gets (ADR-0058)" do
+    seed_referential
+
+    assert_equal 77, @query.call.classroom_plan_total
   end
 
   test "the counters read DRENA, schools, active classrooms of the school year, series and materials" do

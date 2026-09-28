@@ -42,4 +42,15 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       within("[role=menu]") { click_on label }
     end
   end
+
+  # Trix is loaded on demand (ADR-0051, rich_text_editor_controller): <trix-editor> is in the page before its editor is
+  # attached. Keys sent in between are refused (element not interactable) or typed into a bare element that Trix then
+  # overwrites with its empty hidden input: the text is silently lost. Wait for the editor before touching it.
+  def find_rich_text_editor(selector = "trix-editor", **)
+    find(selector, **).tap do |editor|
+      page.document.synchronize do
+        raise Capybara::ExpectationNotMet, "Trix n'est pas encore branché sur #{selector}" unless page.evaluate_script("!!arguments[0].editor", editor)
+      end
+    end
+  end
 end

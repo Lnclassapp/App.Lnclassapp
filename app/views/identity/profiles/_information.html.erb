@@ -1,10 +1,10 @@
 <%# 🌐 UI · identity/profiles/_information — carte « Mes informations » (Queries::Identity::ProfileQuery::Row) %>
 <%# Rôle : nom, numéro groupé, informations du rôle, date d'inscription ; nom et numéro s'ouvrent dans le frame modal ; remplacée par profile_names/update %>
-<%# ADR  : 0055 · UDR : 0006, 0041 %>
+<%# ADR  : 0055, 0060 · UDR : 0006, 0041, 0047 %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
   <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
   <div class="mt-4 flex items-center gap-4">
-    <%= ui_avatar profile.display_name, size: :lg %>
+    <%= ui_avatar profile.display_name, src: account_photo_src(profile.public_id, profile.photo_version), size: :lg %>
     <div class="min-w-0 flex-1">
       <p class="truncate font-display text-lg leading-tight font-extrabold text-ink"><%= profile.display_name %></p>
       <div class="mt-1.5 flex flex-wrap items-center gap-2">
@@ -19,6 +19,14 @@
   </div>
 
   <dl class="mt-5 divide-y divide-line border-t border-line text-sm">
+    <div class="flex flex-wrap items-center justify-between gap-3 py-3">
+      <div class="min-w-0">
+        <dt class="text-mute"><%= t(".photo") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= t(profile.photo_version ? ".photo_present" : ".photo_absent") %></dd>
+      </div>
+      <%= ui_button t(profile.photo_version ? ".change_photo" : ".add_photo"), href: edit_profile_photo_path, variant: :secondary,
+                                                                               size: :sm, icon: "camera", data: { turbo_frame: "modal" } %>
+    </div>
     <div class="flex flex-wrap items-center justify-between gap-3 py-3">
       <div class="min-w-0">
         <dt class="text-mute"><%= t(".name") %></dt>

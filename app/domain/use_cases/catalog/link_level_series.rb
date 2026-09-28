@@ -1,11 +1,13 @@
 # 🧠 DOMAINE · UseCases::Catalog::LinkLevelSeries
-# Rôle : l'équipe ouvre une série à un niveau du second cycle ; seul un couple lié est accepté sur une classe ou un cours
-# ADR  : 0026, 0028, 0034
+# Rôle : l'équipe ouvre une série à un niveau du second cycle, et le couple reçoit ses nombres par défaut au barème
+# ADR  : 0026, 0028, 0034, 0058
 module UseCases
   module Catalog
     class LinkLevelSeries
-      def initialize(taxonomy:, audit_log:, transaction:, policy:, clock:)
+      # classroom_plan : le barème ; un couple nouveau y reçoit ses nombres par défaut, jamais écrasés (ADR-0058, D1).
+      def initialize(taxonomy:, classroom_plan:, audit_log:, transaction:, policy:, clock:)
         @taxonomy = taxonomy
+        @classroom_plan = classroom_plan
         @audit_log = audit_log
         @transaction = transaction
         @policy = policy
@@ -26,7 +28,11 @@ module UseCases
         now = @clock.now
         @transaction.call do
           linked = @taxonomy.link(level_id: level.id, series_id: series.id, at: now)
-          record(actor, level, series, now) if linked.success?
+          if linked.success?
+            record(actor, level, series, now)
+            Entities::Classroom::ClassroomPlanDefaults.fill(classroom_plan: @classroom_plan, audit_log: @audit_log, actor:,
+                                                            level:, series:, at: now)
+          end
           linked
         end
       end

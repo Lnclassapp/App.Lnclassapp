@@ -104,7 +104,17 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#drenas tr", text: /Abidjan 1\s+abidjan-1/
     end
 
+    team_sets_the_classroom_plan
     import_the_lycee
+  end
+
+  # D1 (owner, 2026-09-28): linking D to Tle filled its barème line, 6 public and 3 private, without any entry by hand.
+  def team_sets_the_classroom_plan
+    navigate_to team_home_path
+    click_referential(classroom_plan_path)
+    within("#classroom_plan_line_tle_d") { assert_text(/Tle\s+D\s+6\s+3/) }
+    assert_no_selector "[data-plan=undefined]"
+    within("#classroom_plan_total_public_both") { assert_text "6" }
   end
 
   # The only seed of production (ADR-0034, ADR-0038): its link is printed once, as the operator reads it.
@@ -137,8 +147,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_current_path team_home_path
   end
 
-  # A public lycée in the old application's format, enveloped (ADR-0039): Tle D gets its 6 classrooms, every other
-  # level of the scale is absent from the referential and counted as skipped.
+  # A public lycée in the old application's format, enveloped (ADR-0039): Tle D gets the 6 classrooms of the barème, and
+  # nothing else exists in the referential.
   def import_the_lycee
     file = json_file("ecoles", {
       "format" => "lnclass.schools", "version" => Entities::Catalog::ImportKind::VERSION, "drena" => "abidjan-1",
@@ -161,7 +171,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         assert_selector "#import_counter_imported", text: "1"
         assert_selector "#import_counter_errors", text: "0"
         assert_text "Classes générées : 6"
-        assert_text "Niveaux sautés"
+        assert_no_text "sautés"
       end
       within("turbo-frame#modal dialog[open]") { click_on t("teams.imports.create.close") }
       assert_no_selector "turbo-frame#modal dialog[open]"
@@ -186,7 +196,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         select "Tle", from: "course[level_slug]"
         select "D", from: "course[series_slug]"
         select "SVT", from: "course[material_slug]"
-        type_rich_text find("trix-editor"), "L'ADN porte l'information génétique."
+        type_rich_text find_rich_text_editor, "L'ADN porte l'information génétique."
         click_on t("teams.courses.new.submit")
       end
       assert_toast t("teams.courses.create.created", name: COURSE)
@@ -207,7 +217,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       click_on t("catalog.courses.role_actions.new_essential")
       within "turbo-frame#modal dialog[open]" do
         fill_in "essential[name]", with: ESSENTIAL
-        type_rich_text find("trix-editor#essential_content"), "La méiose produit quatre cellules haploïdes."
+        type_rich_text find_rich_text_editor("trix-editor#essential_content"), "La méiose produit quatre cellules haploïdes."
         click_on t("teams.essentials.new.submit")
       end
       assert_toast t("teams.essentials.create.created", name: ESSENTIAL)

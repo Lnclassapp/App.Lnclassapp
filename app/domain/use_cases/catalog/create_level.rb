@@ -1,11 +1,13 @@
 # 🧠 DOMAINE · UseCases::Catalog::CreateLevel
 # Rôle : l'équipe crée un niveau ; son slug, dérivé du nom puis figé, est le code de la génération des classes
-# ADR  : 0026, 0028, 0029, 0034
+# ADR  : 0026, 0028, 0029, 0034, 0058
 module UseCases
   module Catalog
     class CreateLevel
-      def initialize(taxonomy:, audit_log:, transaction:, policy:, clock:)
+      # classroom_plan : le barème ; un niveau du premier cycle au code connu y reçoit ses nombres par défaut (ADR-0058, D1).
+      def initialize(taxonomy:, classroom_plan:, audit_log:, transaction:, policy:, clock:)
         @taxonomy = taxonomy
+        @classroom_plan = classroom_plan
         @audit_log = audit_log
         @transaction = transaction
         @policy = policy
@@ -31,8 +33,14 @@ module UseCases
         if created.success?
           @audit_log.record(action: "taxonomy.changed", actor_id: actor.user_id, at: @clock.now, subject_type: "Level",
                             subject_id: created.value.id, metadata: { operation: "create", slug: created.value.slug })
+          fill_plan(actor, created.value) if created.value.first_cycle?
         end
         created
+      end
+
+      def fill_plan(actor, level)
+        Entities::Classroom::ClassroomPlanDefaults.fill(classroom_plan: @classroom_plan, audit_log: @audit_log, actor:, level:,
+                                                        series: nil, at: @clock.now)
       end
     end
   end

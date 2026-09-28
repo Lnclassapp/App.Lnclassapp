@@ -9,7 +9,8 @@ module Queries
         school = create_school(name: "Lycée classique d'Abidjan")
         student = create_student(first_name: "Awa", last_name: "Koné", classroom: create_classroom(school:, name: "Tle D 1"))
 
-        assert_equal ShellUserQuery::Row.new(name: "Awa Koné", role: :student, detail: "Tle D 1 · Lycée classique d'Abidjan"),
+        assert_equal ShellUserQuery::Row.new(name: "Awa Koné", role: :student, detail: "Tle D 1 · Lycée classique d'Abidjan",
+                                             public_id: student.public_id, photo_version: nil),
                      @query.call(user_id: student.id)
       end
 
@@ -26,14 +27,18 @@ module Queries
       test "a team member has no detail, an unknown account is nil" do
         row = @query.call(user_id: create_team_member(first_name: "Kam", last_name: "Kara").id)
 
-        assert_equal [ "Kam Kara", :team, nil ], row.to_h.values
+        assert_equal [ "Kam Kara", :team, nil, nil ], row.to_h.values_at(:name, :role, :detail, :photo_version)
         assert_nil @query.call(user_id: 0)
       end
 
-      test "the row feeds the shell" do
-        row = @query.call(user_id: create_team_member.id)
+      test "an account with a photo gives its public id and the version of its photo (ADR-0060)" do
+        student = attach_photo(create_student)
 
-        assert_equal :team, NavigationHelper::ShellUser.new(**row.to_h).role
+        row = @query.call(user_id: student.id)
+
+        assert_equal student.public_id, row.public_id
+        assert_equal PhotoVersions.for(user_ids: [ student.id ])[student.id], row.photo_version
+        assert_not_nil row.photo_version
       end
     end
   end

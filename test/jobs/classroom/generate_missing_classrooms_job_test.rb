@@ -11,6 +11,10 @@ class Classroom::GenerateMissingClassroomsJobTest < ActiveJob::TestCase
 
   def classrooms_of(school) = Orm::Classroom.where(school:)
 
+  # A classroom on a level of the referential: a level created on the fly would be a level without series nor barème,
+  # skipped and counted for every lycée (ADR-0058).
+  def create_classroom(**) = super(level: Orm::Level.find_by!(slug: "6eme"), **)
+
   test "schools without a classroom of the year receive the plan of the import; the others are left as they were" do
     lycee = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
     college = create_school(drena: @drena, name: "Collège Saint Paul", school_type: "private", cycle: "first")
@@ -36,6 +40,17 @@ class Classroom::GenerateMissingClassroomsJobTest < ActiveJob::TestCase
     assert_equal [ current_school_year ], classrooms_of(lycee).distinct.pluck(:school_year)
     assert_equal Orm::Classroom.count, Orm::Classroom.distinct.count(:join_code)
     assert Orm::AuditEvent.exists?(action: "import.run", actor_id: @author.id, subject_id: report.id)
+  end
+
+  test "BC-06: the generation reads the barème in base, as the team left it" do
+    lycee = create_school(drena: @drena, name: "Lycée Moderne")
+    tle = Orm::Level.find_by!(slug: "tle")
+    Orm::ClassroomPlanEntry.find_by!(school_type: "public", level: tle, series: Orm::Series.find_by!(slug: "d")).update!(count: 1)
+
+    Classroom::GenerateMissingClassroomsJob.perform_now(create_import_report(kind: "classrooms", checksum_sha256: nil, imported_by: @author).id)
+
+    assert_equal 77 - 5, classrooms_of(lycee).count
+    assert_equal [ "Tle D 1" ], classrooms_of(lycee).where("name LIKE 'Tle D%'").pluck(:name)
   end
 
   test "a second run writes nothing more" do

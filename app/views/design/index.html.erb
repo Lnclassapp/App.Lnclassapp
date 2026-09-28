@@ -154,7 +154,7 @@
   <%= design_section(id: "avatars", title: t(".sections.avatars"), api: "ui_avatar(name, src:, size:, tone:)") do %>
     <%= design_example(name: "avatar-variants", label: t(".avatars.variants")) do %>
       <div class="flex flex-wrap items-center gap-4">
-        <% %i[sm md lg].each do |size| %>
+        <% ComponentsHelper::AVATAR_SIZES.each_key do |size| %>
           <%= ui_avatar t(".avatars.name"), size: %>
         <% end %>
         <% ComponentsHelper::AVATAR_TONES.each_key do |tone| %>
@@ -204,7 +204,7 @@
         <%= form_with model: @sample, scope: :sample, url: design_path, method: :get, class: "space-y-5" do |form| %>
           <%= ui_field form, :name, label: t(".fields.name"), required: true, placeholder: t(".fields.name_placeholder") %>
           <%= ui_field form, :email, as: :email, label: t(".fields.email"), hint: t(".fields.email_hint") %>
-          <%= ui_field form, :password, as: :password, label: t(".fields.password") %>
+          <%= ui_field form, :password, as: :password, reveal: true, label: t(".fields.password") %>
           <%= ui_field form, :bio, as: :textarea, label: t(".fields.bio") %>
           <%= ui_field form, :level, as: :select, label: t(".fields.level"), choices: t(".fields.levels"), prompt: t(".fields.level_prompt") %>
           <%= ui_radio_group form, :cycle, label: t(".fields.cycle"), required: true, hint: t(".fields.cycle_hint"),
