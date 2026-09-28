@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (décisions par défaut à confirmer) |
 | **Ouvert le** | 2026-09-28 |
 | **Branche** | `feature/pilotage-equipe` |
 | **Programme** | [`refonte-application`](../refonte-application/feuille-de-route.md) — vague **V4**, traçabilité TR-09, TR-10, TR-11, TR-12 |
@@ -55,7 +55,7 @@ La V1 est livrée : les élèves, les classes, les sessions d'exercice et les as
 | Un établissement « actif » ? | Statut `active` (ADR-0030). Brouillons et inactifs ne comptent pas dans la couverture. | Couverture sur les seuls établissements actifs. |
 | Les barres de la répartition : une bibliothèque de graphiques ? | Non (ADR-0051, budget 60 Ko). Et l'UDR-0005 interdit l'attribut `style`. | Largeurs par classes Tailwind littérales (`w-1/20` … `w-full`), en pas de 5 %, avec le nombre et le pourcentage écrits. |
 | Combien de requêtes pour afficher la page ? | Un nombre fixe, qui ne dépend pas du nombre de DRENA, d'établissements ni d'élèves. | Un test compte les requêtes sur deux volumes et exige le même nombre. |
-| Faut-il un index ? | Mesure faite (EXPLAIN au journal) : aux volumes de la V1, les parcours séquentiels restent sous la milliseconde. | Aucun index en V1 ; seuil de reprise noté au journal. |
+| Faut-il un index ? | Mesure faite (EXPLAIN au journal) : parcours séquentiels de 18 à 24 ms sur 100 000 lignes ; page entière 0,17 à 0,27 s pour 10 000 élèves, 0,64 s pour 100 000. Les volumes de la V1 sont bien en dessous. | Aucun index en V1 ; seuil de reprise (300 ms en production) écrit dans l'ADR-0062. |
 
 ## Cas limites identifiés
 

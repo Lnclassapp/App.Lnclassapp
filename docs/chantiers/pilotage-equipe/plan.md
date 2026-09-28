@@ -36,10 +36,10 @@ Le lot B est **séparé** parce que la recherche est un cas d'usage distinct (TR
 - **Couche**       : infrastructure + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/school/team_dashboard_query.rb`
                      `app/controllers/teams/dashboards_controller.rb`
-                     `app/helpers/school/dashboard_helper.rb`
+                     `app/helpers/teams/dashboards_helper.rb`
                      `app/views/teams/dashboards/show.html.erb` · `_filters` · `_key_figures` · `_levels` · `_drenas` · `_recent_signups`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/infrastructure/queries/school/team_dashboard_query_test.rb` · `test/controllers/teams/dashboards_controller_test.rb` · `test/helpers/school/dashboard_helper_test.rb` · `test/system/teams/dashboard_test.rb`
+- **Test associé** : `test/infrastructure/queries/school/team_dashboard_query_test.rb` · `test/controllers/teams/dashboards_controller_test.rb` · `test/helpers/teams/dashboards_helper_test.rb` · `test/system/teams/dashboard_test.rb`
 - **Done quand**   : un membre de l'équipe ouvre « Pilotage » depuis la navigation, voit les chiffres, change de période et filtre par DRENA, au bureau et à 390 px ; le nombre de requêtes est constant
 
 ---
@@ -76,8 +76,8 @@ Le lot B est **séparé** parce que la recherche est un cas d'usage distinct (TR
 - [x] ADR-0062 écrit, indexé dans `decisions/adr/README.md`
 - [x] UDR-0049 écrite, indexée dans `decisions/udr/README.md` ; UDR-0006 et UDR-0018 amendées
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests (100 %) · système · brakeman · budget d'assets : au vert
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur *(à faire par le challenger : l'auteur a seulement exécuté les tests système et les captures)*
+- [x] Pureté domaine · rubocop · tests (100 %) · système · brakeman · budget d'assets : au vert
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

@@ -78,7 +78,7 @@ Trois questions restaient ouvertes :
 
 ### 🔴 Coûts consentis
 
-- **Le coût croît avec le volume** : les comptages parcourent `users`, `exercise_sessions` et `classroom_assignments` sans index sur leurs dates. Mesuré le 2026-09-28 (journal) : négligeable en V1. **Seuil de reprise** : quand la page dépasse 300 ms en production, ou `exercise_sessions` 1 million de lignes, un chantier d'optimisation ajoute d'abord des index sur `exercise_sessions.started_at`, `exercise_sessions.completed_at`, `users.created_at` et `classroom_assignments.assigned_at`, puis, s'il le faut, un cache court avec clé complète.
+- **Le coût croît avec le volume** : les comptages parcourent `users`, `exercise_sessions` et `classroom_assignments` sans index sur leurs dates. Mesuré le 2026-09-28 (journal, base de test locale, 2 000 établissements, 10 000 classes) : **0,17 à 0,27 s** pour 10 000 élèves et 10 000 sessions, **0,64 s** pour 100 000 élèves et 100 000 sessions ; la recherche, 0,12 s puis 0,7 s. Les volumes de la V1 sont bien en dessous du premier point. **Seuil de reprise** : quand la page dépasse 300 ms en production (vers 20 000 à 30 000 élèves d'après ces mesures), un chantier d'optimisation ajoute d'abord des index sur `exercise_sessions.started_at`, `exercise_sessions.completed_at`, `users.created_at` et `classroom_assignments.assigned_at`, puis, s'il le faut, un cache court avec clé complète ; pour la recherche, un index trigramme (`pg_trgm`) sur le nom.
 - **Pas d'historique** : on ne peut pas comparer à la période précédente, ni tracer une courbe. Une V2 du pilotage le fera, sur les mêmes définitions.
 - **La recherche partielle par numéro** ouvre l'annuaire que l'UDR-0020 réservait à la V4 : elle est bornée (équipe seule, 20 par page, numéro masqué dans la réponse).
 - Les définitions du territoire ignorent les élèves non placés sous un filtre DRENA : un élève sans classe n'apparaît que dans la vue nationale.
@@ -88,28 +88,48 @@ Trois questions restaient ouvertes :
 ```ruby
 # app/domain/entities/school/reporting_period.rb
 ReportingPeriod = Data.define(:key, :since) do
+  # Une clé absente ou inconnue (paramètre d'URL) vaut la période par défaut.
   def self.parse(key, today:)
-    key = KEYS.include?(key) ? key : DEFAULT
-    since = key == "year" ? Date.new(SchoolYear first year, 9, 1) : today - (DAYS.fetch(key) - 1)
+    key = self::DEFAULT unless self::KEYS.include?(key)
+    since = self::DAYS.key?(key) ? today - (self::DAYS.fetch(key) - 1) : school_year_start(today)
     new(key:, since:)
   end
+  # …
 end
+ReportingPeriod::DAYS = { "7d" => 7, "30d" => 30 }.freeze
+ReportingPeriod::KEYS = [ *ReportingPeriod::DAYS.keys, "year" ].freeze
 ```
 
 ```ruby
 # app/controllers/teams/dashboards_controller.rb
 def show
   render_result Policies::School::ReadIndicatorsPolicy.new.call(actor: current_actor), success: lambda { |_|
-    return render_search if turbo_frame_request_id == SEARCH_FRAME
-
-    @period = Entities::School::ReportingPeriod.parse(params[:period], today: Date.current)
-    @dashboard = Queries::School::TeamDashboardQuery.new.call(period: @period, drena_public_id: params[:drena])
-    @search = search
+    render_result Policies::Identity::ReadUserPolicy.new.call(actor: current_actor), success: ->(_) { respond_with_search }
   }
+end
+
+# Le frame de recherche ne reçoit que ses résultats : chercher ne recalcule pas les indicateurs.
+def respond_with_search
+  @search = Queries::Identity::AccountSearchQuery.new.call(term: params[:q], page: params[:page])
+  return render(partial: "search_results", locals: { search: @search }) if turbo_frame_request_id == SEARCH_FRAME
+
+  @period = Entities::School::ReportingPeriod.parse(params[:period], today: Date.current)
+  @dashboard = Queries::School::TeamDashboardQuery.new.call(period: @period, drena_public_id: params[:drena])
+  @drenas = Queries::School::SchoolOptionsQuery.new.drenas
 end
 ```
 
-Lectures groupées : un `GROUP BY` par dimension (rôle, niveau, DRENA), des `COUNT(*) FILTER (WHERE EXISTS …)` pour la couverture, et, pour les inscrits récents, deux lectures groupées de leurs établissements (élèves par classe, enseignants par établissement principal), jamais une par compte.
+```ruby
+# app/infrastructure/queries/school/team_dashboard_query.rb — un élève est placé par sa classe principale de l'année
+def placements(territorial: true)
+  scope = Orm::ClassroomStudent.joins(:student, classroom: :school)
+                               .where(primary: true, left_at: nil, users: { anonymized_at: nil },
+                                      classrooms: { status: "active", school_year: @year })
+  territorial ? in_drena(scope) : scope
+end
+```
+
+Lectures groupées : un `GROUP BY` par dimension (rôle, niveau, DRENA) ; la couverture en une lecture de `COUNT(*) FILTER (WHERE EXISTS …)`, en SQL constant où seule l'année est liée ; les inscrits récents avec deux lectures groupées de leurs établissements, jamais une par compte. Mesure du 2026-09-28 : **18 requêtes** en vue nationale, **21** sous un filtre DRENA, **4** pour une recherche, identiques quel que soit le volume.
 
 ## 7. Comment vérifier que la décision est respectée
 

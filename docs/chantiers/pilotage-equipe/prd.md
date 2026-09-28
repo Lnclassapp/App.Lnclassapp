@@ -143,7 +143,7 @@ Scénario: la navigation de l'équipe n'a plus d'entrée inactive
 | Domaine | `Entities::School::ReportingPeriod` (valeur), `Entities::Identity::Contact.mask`, `Policies::School::ReadIndicatorsPolicy`. Aucun use case : lecture seule (CQRS, ADR-0006) |
 | Infrastructure | `Queries::School::TeamDashboardQuery`, `Queries::Identity::AccountSearchQuery`. Aucune migration, aucune table, aucun index |
 | Delivery | `get "teams/dashboard"` → `Teams::DashboardsController#show` (`team_dashboard_path`, nom gelé par l'UDR-0006) |
-| UI | `teams/dashboards/show` et ses partials, `School::DashboardHelper` (largeur des barres), locale `teams.dashboards` |
+| UI | `teams/dashboards/show` et ses partials, `Teams::DashboardsHelper` (largeur des barres), locale `teams.dashboards` |
 
 ## 6. Décisions rattachées
 
