@@ -13,6 +13,8 @@ module Classroom
 
       @home = Queries::Classroom::TeacherHomeQuery.new.call(teacher_id: current_actor.user_id)
       @invite = colleague_invite
+      # Seul un enseignant qui peut inviter (établissement actif) peut se porter garant : la même condition (ADR-0063).
+      @pending_colleagues = Queries::School::JoinRequestsQuery.new.for_colleague(teacher_id: current_actor.user_id) if @invite
     end
   end
 end

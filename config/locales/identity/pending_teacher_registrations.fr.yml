@@ -1,0 +1,36 @@
+# Inscription enseignant sans code d'établissement : code national ou DRENA → établissement, compte en attente — ADR-0063, UDR-0050
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/pending_teacher_registration_input:
+        national_code: "Code national de l'établissement"
+        drena_public_id: "DRENA"
+        school_public_id: "Établissement"
+    errors:
+      models:
+        dtos/identity/pending_teacher_registration_input:
+          attributes:
+            base:
+              school_missing: "Saisissez le code national ou choisissez votre établissement."
+              too_many_pending: "Trop de demandes sont en attente pour cet établissement. Réessayez plus tard ou contactez l'équipe Lnclass."
+            national_code:
+              invalid: "Le code national compte 6 chiffres, par exemple 012345."
+              inclusion: "Établissement introuvable. Vérifiez le code national."
+            school_public_id:
+              inclusion: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."
+  identity:
+    teacher_registrations:
+      new:
+        pending_title: "S'inscrire sans code d'établissement"
+        pending_subtitle: "Votre compte sera validé par l'équipe Lnclass ou par un collègue déjà inscrit."
+      form:
+        no_school_code: "Mon établissement n'a pas encore de code Lnclass"
+    pending_teacher_registrations:
+      school_fields:
+        national_code_placeholder: "012345"
+        national_code_hint: "6 chiffres, celui des résultats du BEPC."
+        or: "ou"
+        drena_prompt: "Choisissez votre DRENA"
+        show_schools: "Afficher les établissements"
+      create:
+        done: "Compte créé. Il sera activé dès qu'il est validé."

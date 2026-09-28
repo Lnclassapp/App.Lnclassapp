@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
-<%# Rôle : en-tête, classes de l'année groupées par niveau (code, effectif, enseignants), enseignants rattachés %>
-<%# ADR  : 0030, 0041 · UDR : 0006, 0036 %>
+<%# Rôle : en-tête, classes de l'année groupées par niveau (code, effectif, enseignants), enseignants en attente et rattachés %>
+<%# ADR  : 0030, 0041, 0063 · UDR : 0006, 0036, 0050 %>
 <% content_for :title, t(".page_title", name: @school.name) %>
 <% content_for :nav_key, "schools" %>
 <%= render "header", school: @school %>
@@ -21,6 +21,9 @@
   </section>
 
   <section id="school_teachers" aria-labelledby="school_teachers_title" class="min-w-0">
+    <% if @join_requests.any? %>
+      <%= render "teams/schools/join_requests", school: @school, requests: @join_requests %>
+    <% end %>
     <h2 id="school_teachers_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".teachers", count: @school.teachers.size) %></h2>
     <% if @school.teachers.empty? %>
       <%= ui_empty_state title: t(".no_teachers"), description: t(".no_teachers_description"), icon: "user-group" %>

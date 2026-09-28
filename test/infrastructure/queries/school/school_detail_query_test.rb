@@ -24,6 +24,12 @@ module Queries
                                            :school_code)
       end
 
+      test "CP-10 : l'en-tête porte le code national, ou nil (ADR-0063)" do
+        assert_nil detail.national_code
+        @school.update!(national_code: "012345")
+        assert_equal "012345", detail.national_code
+      end
+
       test "SC-05 : les classes de l'année, groupées par niveau dans l'ordre du référentiel, avec code, effectif et enseignants" do
         d_series = create_series(name: "D")
         a_series = create_series(name: "A1")

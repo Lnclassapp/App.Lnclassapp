@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
-<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes, activité, cours), puis « Inviter un collègue » ; aucun montant %>
+<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes, activité, cours), collègues en attente, « Inviter un collègue » %>
 <%# ADR  : 0026, 0048, 0063 · UDR : 0006, 0007, 0026, 0050 %>
 <% content_for :title, t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle", school: @home.school_name) do %>
@@ -32,6 +32,9 @@
         </span>
       <% end %>
     <% end %>
+  <% end %>
+  <% if @pending_colleagues %>
+    <%= render "classroom/teacher_homes/pending_colleagues", pending: @pending_colleagues %>
   <% end %>
   <% if @invite %>
     <%= render "identity/referrals/invite", invite: @invite %>

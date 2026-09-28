@@ -22,13 +22,24 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_school_code"
       end
 
+      # Code national (ADR-0063), quel que soit le statut. → Entities::School::School | nil
+      def find_by_national_code(national_code:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_national_code"
+      end
+
+      # Codes nationaux déjà pris, pour l'import. → Set[String]
+      def taken_national_codes
+        raise NotImplementedError, "#{self.class} doit implémenter #taken_national_codes"
+      end
+
       # school : Entities::School::School sans id, avec son school_code tiré par le domaine.
       # → Result(School) | failure(:conflict, errors: { name: [:taken] })
       def create(school:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
-      # Ne touche jamais au code d'établissement. → Result(School) | failure(:conflict, errors: { name: [:taken] })
+      # Ne touche jamais au code d'établissement.
+      # → Result(School) | failure(:conflict, errors: { name: [:taken] } ou { national_code: [:taken] })
       def update(school:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end
@@ -44,7 +55,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
-      # rows : [{ public_id:, drena_id:, name:, sigle:, school_type:, cycle:, status:, school_code: }], public_id et
+      # rows : [{ public_id:, drena_id:, name:, sigle:, school_type:, cycle:, status:, national_code:, school_code: }], public_id et
       # school_code tirés par le domaine ; insert_all avec RETURNING, created_at et updated_at posés par le repository.
       # → [Inserted]
       def insert_many(rows:, at:)

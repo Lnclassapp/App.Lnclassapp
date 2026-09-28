@@ -250,6 +250,37 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school-form", text: /#{I18n.t('teams.schools.form.classrooms_hint')}/
   end
 
+  test "CP-10: the national code is read on the header, edited in the form, and a taken one is refused (ADR-0063)" do
+    school = create_school(drena: @drena, name: "Lycée Classique", national_code: "012345")
+    other = create_school(drena: @drena, name: "Lycée Moderne")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+    assert_select "#school_header #school_national_code", text: /012345/
+    get edit_school_path(school.public_id), headers: { "Turbo-Frame" => "modal" }
+    assert_select "input[name='school[national_code]'][value='012345'][inputmode=numeric][maxlength='6']"
+
+    patch school_path(other.public_id), params: school_params(name: "Lycée Moderne", national_code: "012345"),
+                                        headers: { "Turbo-Frame" => "modal" }
+    assert_response :unprocessable_entity
+    assert_select "#school_national_code_error", text: error_message(:national_code, :taken)
+
+    patch school_path(other.public_id), params: school_params(name: "Lycée Moderne", national_code: "023 456"), as: :turbo_stream
+    assert_equal "023456", other.reload.national_code
+  end
+
+  test "CP-10: a school without national code shows none; the list is searched by it" do
+    create_school(drena: @drena, name: "Lycée Classique", national_code: "012345")
+    school = create_school(drena: @drena, name: "Lycée Moderne")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+    assert_select "#school_national_code", 0
+    get schools_path(search: "012345")
+    assert_select "tbody tr", 1
+    assert_select "tbody", text: /Lycée Classique/
+  end
+
   test "outside the frame, the edition opens as a modal over the shell; an unknown school has none" do
     school = create_school(drena: @drena)
     sign_in_as @member

@@ -1,0 +1,27 @@
+<%# 🌐 UI · classroom/teacher_homes/_pending_colleagues — « Collègues en attente » (Queries::School::JoinRequestsQuery::Colleagues) %>
+<%# Rôle : collègues inscrits sans code dans l'établissement ; « Je confirme » (garant) retire la ligne en Turbo Stream ; jamais le numéro %>
+<%# ADR  : 0063 · UDR : 0026, 0050 %>
+<%# locals: (pending:) -%>
+<%= ui_card title: t("classroom.teacher_homes.pending_colleagues.title"),
+            subtitle: t("classroom.teacher_homes.pending_colleagues.subtitle", school: pending.school_name), icon: "hand-raised",
+            id: "pending_colleagues" do %>
+  <ul class="divide-y divide-line">
+    <% pending.requests.each do |request| %>
+      <li id="join_request_<%= request.public_id %>" class="flex flex-wrap items-center justify-between gap-3 py-3">
+        <div class="min-w-0">
+          <p class="font-medium text-ink"><%= request.name %></p>
+          <div class="mt-1 flex flex-wrap items-center gap-2 text-xs text-mute">
+            <% if request.material_name %>
+              <%= ui_subject_badge request.material_name, category: request.material_category, size: :sm %>
+            <% end %>
+            <span><%= t("classroom.teacher_homes.pending_colleagues.requested_on", date: l(request.created_at.to_date, format: :long)) %></span>
+          </div>
+        </div>
+        <%= form_with url: join_request_vouch_path(request.public_id), method: :post do %>
+          <%= ui_button t("classroom.teacher_homes.pending_colleagues.vouch"), type: :submit, variant: :secondary, size: :sm, icon: "check",
+                        "aria-label": t("classroom.teacher_homes.pending_colleagues.vouch_label", name: request.name, school: pending.school_name) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

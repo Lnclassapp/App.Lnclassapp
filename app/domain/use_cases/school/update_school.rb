@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · UseCases::School::UpdateSchool
-# Rôle : modifie nom, sigle, DRENA, type, statut et cycle d'un établissement ; ne crée ni ne supprime aucune classe
-# ADR  : 0026, 0028, 0030, 0050 · UDR : 0036
+# Rôle : modifie nom, sigle, DRENA, type, statut, cycle et code national ; ne crée ni ne supprime aucune classe
+# ADR  : 0026, 0028, 0030, 0050, 0063 · UDR : 0036, 0050
 module UseCases
   module School
     class UpdateSchool
-      AUDITED = %w[drena_id name sigle school_type status cycle].freeze
+      AUDITED = %w[drena_id name sigle school_type status cycle national_code].freeze
 
       def initialize(schools:, drenas:, audit_log:, policy:, transaction:, clock:)
         @schools = schools
@@ -15,7 +15,7 @@ module UseCases
         @clock = clock
       end
 
-      # dto : Dtos::School::SchoolInput. → Result(School) | :forbidden | :not_found | :invalid | :conflict (nom pris dans la DRENA)
+      # dto : Dtos::School::SchoolInput. → Result(School) | :forbidden | :not_found | :invalid | :conflict (nom pris, code national pris)
       def call(actor:, public_id:, dto:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?

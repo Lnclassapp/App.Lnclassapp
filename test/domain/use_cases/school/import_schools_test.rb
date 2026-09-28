@@ -324,6 +324,24 @@ module UseCases
         assert_equal Set[existing.school_code, *codes], schools.taken
       end
 
+      test "CP-09: the optional national code is stored; malformed or taken (in base or earlier in the file), its line is in error" do
+        create_school(drena: @drena, name: "Lycée déjà là", national_code: "111111")
+
+        report = run_import(document({ "name" => "Lycée A", "type" => "public", "national_code" => "012 345" },
+                                     { "name" => "Lycée B", "type" => "public", "national_code" => 23_456 },
+                                     { "name" => "Lycée C", "type" => "public", "national_code" => "12345" },
+                                     { "name" => "Lycée D", "type" => "public", "national_code" => "111111" },
+                                     { "name" => "Lycée E", "type" => "public", "national_code" => "012345" },
+                                     { "name" => "Lycée F", "type" => "public" }))
+
+        assert_equal [ "completed", 6, 3, 3 ], report.values_at(:status, :total_count, :imported_count, :error_count)
+        assert_equal [ [ "schools[2].national_code", "invalid_value" ], [ "schools[3].national_code", "national_code_taken" ],
+                       [ "schools[4].national_code", "national_code_taken" ] ],
+                     report.import_errors.map { it.values_at("path", "code") }
+        assert_equal({ "Lycée A" => "012345", "Lycée B" => "023456", "Lycée F" => nil },
+                     Orm::School.where(name: [ "Lycée A", "Lycée B", "Lycée F" ]).pluck(:name, :national_code).to_h)
+      end
+
       test "an author who lost the team role is refused: the import fails, nothing is written" do
         teacher = create_teacher
 
