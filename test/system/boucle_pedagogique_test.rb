@@ -196,7 +196,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         select "Tle", from: "course[level_slug]"
         select "D", from: "course[series_slug]"
         select "SVT", from: "course[material_slug]"
-        type_rich_text find("trix-editor"), "L'ADN porte l'information génétique."
+        type_rich_text find_rich_text_editor, "L'ADN porte l'information génétique."
         click_on t("teams.courses.new.submit")
       end
       assert_toast t("teams.courses.create.created", name: COURSE)
@@ -217,7 +217,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       click_on t("catalog.courses.role_actions.new_essential")
       within "turbo-frame#modal dialog[open]" do
         fill_in "essential[name]", with: ESSENTIAL
-        type_rich_text find("trix-editor#essential_content"), "La méiose produit quatre cellules haploïdes."
+        type_rich_text find_rich_text_editor("trix-editor#essential_content"), "La méiose produit quatre cellules haploïdes."
         click_on t("teams.essentials.new.submit")
       end
       assert_toast t("teams.essentials.create.created", name: ESSENTIAL)
