@@ -17,7 +17,8 @@ class AuthenticatedController < ApplicationController
   def document_reload? = flash[Authentication::RELOAD_FLASH] && request.headers["X-Turbo-Request-Id"].present?
 
   def hold_pending_teacher
-    redirect_to pending_account_path if current_actor&.teacher? && current_actor.school_id.nil?
+    # L'acteur existe : la garde du second facteur (Authentication) s'arrête avant ce filtre sinon.
+    redirect_to pending_account_path if current_actor.teacher? && current_actor.school_id.nil?
   end
 
   def shell_user

@@ -72,3 +72,7 @@ L'équipe a besoin de voir l'état de la plateforme d'un coup d'œil, et d'attei
 - L'accueil équipe ne lit aucun cache : sa lecture est bornée (sept comptages, deux lectures du référentiel, trois listes de 5 éléments) et ne dépend pas du volume des tables listées.
 - Le « Control Center » (TR-10) reste hors périmètre (V4) : l'entrée « Pilotage » du shell reste inactive.
 - Les messages de l'ancien fil (CO) ne sont pas repris en V1 : une section « Messages » s'ajoutera ici quand la communication sera livrée.
+
+## Amendement du 2026-09-28 — raccourci « Croissance » (UDR-0050)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* Les raccourcis gagnent « Croissance » (`secondary`, icône `arrow-trending-up`, vers `teams_growth_path`), après « Importer ». C'est le seul accès à `/teams/growth` : la navigation équipe reste à 5 destinations (UDR-0006).

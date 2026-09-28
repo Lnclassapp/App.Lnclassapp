@@ -15,7 +15,7 @@ module Policies
 
       test "refuse un autre établissement, un établissement non actif, le demandeur lui-même" do
         [ [ teacher(school_id: 32), school ], [ teacher, school(status: "inactive") ], [ teacher(user_id: 41, school_id: 31), school ],
-          [ teacher(school_id: nil), school ] ].each do |actor, fact|
+          [ teacher(school_id: nil), school ], [ teacher, nil ] ].each do |actor, fact|
           assert_equal :forbidden, VouchPolicy.new.call(actor:, request:, school: fact).code
         end
       end

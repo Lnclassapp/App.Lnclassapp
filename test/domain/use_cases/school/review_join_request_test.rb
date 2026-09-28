@@ -49,8 +49,10 @@ module UseCases
       end
 
       test "a decision decided meanwhile by a sponsor: the conflict of the repository, without audit" do
-        @requests.approve(id: 5, decided_by_id: 9, via: "sponsor", at: NOW)
-        @requests.writes.clear
+        requests = @requests
+        requests.define_singleton_method(:find_by_public_id) { |public_id:| super(public_id:)&.with(status: "pending") }
+        requests.approve(id: 5, decided_by_id: 9, via: "sponsor", at: NOW)
+        requests.writes.clear
 
         assert_equal :conflict, review.code
         assert_empty @audit.events

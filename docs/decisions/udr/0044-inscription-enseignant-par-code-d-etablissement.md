@@ -83,3 +83,7 @@ L'enseignant qui s'inscrit cherche son établissement : une DRENA, puis une list
 - Aucun écran ne propose plus de choisir un établissement dans une liste pour s'y rattacher. `school/drena_schools/index` et `school--drena-schools` n'ont plus de consommateur dans l'inscription ; l'adresse reste une API (UDR-0024 §4).
 - Tout futur code partagé (par exemple pour la direction, V2) suit ce patron : saisie normalisée, lien court `/<lettre>/<code>` limité en débit, un seul message pour tout refus, lecture et régénération sur la fiche de l'objet, régénération dans le menu ⋮ avec confirmation.
 - La fiche de l'établissement a désormais trois entrées de menu ; « Régénérer le code » s'intercale entre « Modifier » et « Désactiver ».
+
+## Amendement du 2026-09-28 — jeton de parrainage et inscription sans code (UDR-0050)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* `/e/<code>?ref=<jeton>` porte le jeton du parrain dans un champ caché `teacher_registration[ref]` (mal formé : absent). Sous le champ du code, le lien `#no-school-code` « Mon établissement n'a pas encore de code Lnclass » mène à l'inscription sans code. Contrat : UDR-0050 §3.

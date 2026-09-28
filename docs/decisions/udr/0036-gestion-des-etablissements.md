@@ -112,3 +112,7 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - **Modale `school-modal`** : type et statut restent des `select`, sur deux colonnes (`sm:grid-cols-2`) ; le cycle devient `ui_radio_group` « Cycle » (`fieldset#school_cycle`) sur toute la largeur, sous eux : « Premier cycle » (`first`), « Premier et second cycles » (`both`), côte à côte dès `sm`, empilées au téléphone.
 - **Valeur cochée** : le cycle enregistré (le formulaire ne sert qu'à modifier ; un établissement a toujours un cycle). Le « 1er cycle par défaut » demandé le 2026-09-28 n'a d'objet qu'à la création, qui n'existe pas ici (§2) : sa valeur équivalente serait `first`.
 - **Le filtre « Tous les cycles » reste une liste déroulante** : c'est un filtre avec une option « tous », pas une saisie.
+
+## Amendement du 2026-09-28 — code national et enseignants en attente (UDR-0050)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* La fiche montre le code national dans l'en-tête et le formulaire le modifie (facultatif, 6 chiffres, unique) ; la recherche porte aussi sur lui ; la section « Enseignants en attente » (Valider / Refuser) précède les enseignants rattachés quand il y a des demandes. Contrat : UDR-0050 §3.

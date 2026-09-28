@@ -7,7 +7,8 @@ module ColleagueInvitation
   private
 
   def colleague_invite
-    school = Repositories::School::SchoolRepository.new.find_by_id(id: current_actor.school_id) if current_actor.school_id
+    # Un enseignant sans école n'arrive pas jusqu'ici (écran d'attente, ADR-0063) : son école principale existe.
+    school = Repositories::School::SchoolRepository.new.find_by_id(id: current_actor.school_id)
     return unless Policies::Identity::InviteColleaguePolicy.new.call(actor: current_actor, school:).success?
 
     Queries::Identity::ReferralQuery.new.call(teacher_id: current_actor.user_id)
