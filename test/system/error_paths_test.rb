@@ -17,9 +17,10 @@ class ErrorPathsTest < ApplicationSystemTestCase
     fill_in "join[code]", with: "ZZZ99"
     click_on t("classroom.join_codes.new.submit")
 
-    assert_selector "h1", text: t("classroom.joins.new.invalid_code.title")
+    # recette-v1-defauts, D1 : le code inconnu est refusé dans son champ, sur /join même.
+    assert_selector "#join_code_error", text: t("classroom.joins.new.invalid_code.title")
+    assert_current_path new_join_code_path
     assert_no_selector "#join-form"
-    click_on t("classroom.joins.new.invalid_code.other_code")
 
     fill_in "join[code]", with: "k1"
     click_on t("classroom.join_codes.new.submit")
