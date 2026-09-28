@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolsController
-# Rôle : liste nationale filtrée, fiche, modification en modale, désactivation, suppression refusée tant qu'il est utilisé
-# ADR  : 0026, 0030, 0036, 0059 · UDR : 0006, 0036, 0046 · aucune création : un établissement n'entre que par l'import
+# Rôle : liste nationale filtrée, fiche (et enseignants en attente), modification en modale, désactivation, suppression refusée
+# ADR  : 0026, 0030, 0036, 0059, 0063 · UDR : 0006, 0036, 0046, 0050 · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
     LIST_FRAME = "schools".freeze
@@ -20,13 +20,15 @@ module Teams
       return render_not_found if @school.nil?
 
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
+      @join_requests = Queries::School::JoinRequestsQuery.new.for_school(school_public_id: @school.public_id)
     end
 
     def edit
       school = schools_query.find(public_id: params[:public_id])
       return render_not_found if school.nil?
 
-      @form = Dtos::School::SchoolInput.new(**school.to_h.slice(:drena_public_id, :name, :sigle, :school_type, :status, :cycle))
+      @form = Dtos::School::SchoolInput.new(**school.to_h.slice(:drena_public_id, :name, :sigle, :school_type, :status, :cycle,
+                                                                 :national_code))
     end
 
     def update
@@ -74,7 +76,7 @@ module Teams
     end
 
     def form_input
-      Dtos::School::SchoolInput.new(**params.expect(school: %i[drena_public_id name sigle school_type status cycle]).to_h.symbolize_keys)
+      Dtos::School::SchoolInput.new(**params.expect(school: %i[drena_public_id name sigle school_type status cycle national_code]).to_h.symbolize_keys)
     end
 
     def list_frame_request? = turbo_frame_request_id == LIST_FRAME

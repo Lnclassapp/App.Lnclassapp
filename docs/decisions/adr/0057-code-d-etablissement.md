@@ -160,3 +160,10 @@ Chaque étape vérifie ce qui existe déjà (`if_not_exists` pour la colonne et 
 - `test/domain/use_cases/identity/register_teacher_test.rb` : code inconnu, établissement inactif ou en brouillon → la même erreur ; aucun port DRENA.
 - `test/domain/use_cases/school/regenerate_school_code_test.rb` : policy, collision puis nouveau tirage, audit.
 - `test/controllers/identity/teacher_registrations_controller_test.rb` : 404 neutre et 429 de `/e/<code>`.
+
+## Amendement du 2026-09-28 — liens de parrainage (ADR-0063)
+
+*Chantier `docs/chantiers/croissance-parrainage`. Le texte ci-dessus reste tel quel ; en cas d'écart, cette section fait foi.*
+
+- Le code n'est plus transmis par la seule équipe : chaque enseignant d'un établissement **actif** le diffuse dans son lien de parrainage `/e/<code>?ref=<jeton>` (ADR-0063).
+- **Régénérer le code casse aussi tous les liens de parrainage** de l'établissement : les enseignants doivent repartager leur lien.
