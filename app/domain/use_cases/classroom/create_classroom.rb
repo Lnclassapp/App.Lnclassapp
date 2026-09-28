@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::CreateClassroom
 # Rôle : l'équipe ajoute une classe à un établissement pour l'année scolaire en cours ; le repository tire son code
-# ADR  : 0026, 0028, 0030, 0041 · UDR : 0031
+# ADR  : 0026, 0028, 0030, 0041, 0059 · UDR : 0031
 module UseCases
   module Classroom
     class CreateClassroom
@@ -26,47 +26,15 @@ module UseCases
         # Décision du porteur (2026-09-27) : un établissement en brouillon est activé avant de recevoir une classe.
         return Shared::Result.failure(:conflict, errors: { base: [ :school_draft ] }) if school.status == "draft"
 
-        taxonomy = taxonomy_ids(dto, school, @taxonomy.lookup)
-        return taxonomy if taxonomy.failure?
+        placement = Entities::Classroom::Placement.resolve(school:, level_slug: dto.level_slug, series_slug: dto.series_slug,
+                                                           lookup: @taxonomy.lookup)
+        return placement if placement.failure?
 
         @classrooms.create(classroom: Entities::Classroom::Classroom.new(
           school_id: school.id, school_year: Entities::Classroom::SchoolYear.current(@clock.now.to_date), status: "active",
-          **taxonomy.value, **dto.to_h
+          **placement.value.ids, **dto.to_h
         ))
       end
-
-      private
-
-      # Comme la génération (DefaultClassroomPlan) : un collège n'a que le premier cycle, et une classe d'un niveau à
-      # séries en porte une, ouverte à ce niveau. → Result({ level_id:, series_id: }) | failure(:invalid, errors:)
-      def taxonomy_ids(dto, school, lookup)
-        level = lookup.level(dto.level_slug)
-        return invalid(:level_slug, :inclusion) if level.nil?
-        return invalid(:level_slug, :not_allowed) if school.cycle == "first" && !level.first_cycle?
-
-        series = lookup.find_series(dto.series_slug)
-        error = series_error(dto.series_slug, series, level, lookup)
-        return invalid(:series_slug, error) if error
-
-        Shared::Result.success({ level_id: level.id, series_id: series_id(series) })
-      end
-
-      def series_error(slug, series, level, lookup)
-        return missing_series(level, lookup) if slug.nil?
-        return :inclusion if series.nil?
-
-        :not_allowed unless lookup.pair?(level.id, series.id)
-      end
-
-      def missing_series(level, lookup)
-        :blank if lookup.series_for(level.id).any?
-      end
-
-      def series_id(series)
-        series.id if series
-      end
-
-      def invalid(field, kind) = Shared::Result.failure(:invalid, errors: { field => [ kind ] })
     end
   end
 end
