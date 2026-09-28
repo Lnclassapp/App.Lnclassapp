@@ -73,3 +73,10 @@ Deux frictions sont à éviter :
 - L'invitation d'amorçage du seed (ADR-0034) s'accepte par la même page.
 - Le lien n'a pas de bouton « Copier » : cette action demanderait un contrôleur Stimulus hors du lot. Le champ en lecture seule se sélectionne et se copie à la main. Un lot ultérieur peut ajouter le bouton sans changer ce contrat.
 - Le point d'entrée « Inviter un membre » de l'accueil équipe appartient au lot de cet écran : il ouvre `/teams/invitations/new` dans le frame `modal`.
+
+## Amendement du 2026-09-28 — invitation de la direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md), [UDR-0052](0052-espace-direction-simple.md), [ADR-0065](../adr/0065-espace-direction-simple-en-lecture-seule.md). Statut : `Proposé`.*
+
+- La même page d'acceptation sert l'invitation de la direction. Pour elle, l'encadré `bg-info-soft` dit « Vous rejoignez <établissement> comme direction. », sans annoncer de second facteur, et le toast sur « Se connecter » dit « Votre compte est créé. Connectez-vous avec votre numéro et votre PIN. ».
+- La modale d'invitation de la direction s'ouvre depuis la fiche d'un établissement, sans choix de rôle : UDR-0052 §3.

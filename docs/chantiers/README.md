@@ -71,15 +71,19 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`pilotage-equipe`](pilotage-equipe/memo.md) | livré | V4 : page Pilotage de l'équipe, indicateurs lus en direct, recherche d'un élève ou d'un enseignant (ADR-0062, UDR-0049) |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | Parrainage entre enseignants, démarrage à froid par le code national, page Croissance de l'équipe (ADR-0063, UDR-0050) |
 | [`tests-instables`](tests-instables/memo.md) | livré en PR, en attente de fusion | Q15 : trois tests instables reproduits puis corrigés à leur cause — requêtes préparées périmées après les tests de migration, menu ouvert sur l'aperçu de Turbo, attente de 2 s trop courte pour « Recommencer » |
+| [`espace-direction-simple`](espace-direction-simple/memo.md) | planifié | V2 en version simple (porteur, 2026-09-28) : la direction, invitée par l'équipe et connectée par PIN, lit « Enseignants » et « Travail des élèves » de son seul établissement (ADR-0065, UDR-0052, proposés) |
 
 ## Backlog
 
-Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 2026-09-28 : aucune n'est ouverte avant une décision datée du porteur ; leur périmètre, leurs chantiers et leurs questions sont au [§5 de la feuille de route](refonte-application/feuille-de-route.md#5-les-vagues). Pour un chantier, le memo dit où reprendre.
+Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 2026-09-28 (la V2 en sort le jour même dans sa version simple, [`espace-direction-simple`](espace-direction-simple/memo.md)) : aucune n'est ouverte avant une décision datée du porteur ; leur périmètre, leurs chantiers et leurs questions sont au [§5 de la feuille de route](refonte-application/feuille-de-route.md#5-les-vagues). Pour un chantier, le memo dit où reprendre.
 
 | Chantier | En une phrase |
 |---|---|
-| **V2 — Organisation scolaire et espace direction** | 29 features : `espace-direction`, puis `annuaire-equipe`. Questions Q1 à Q3 ouvertes ([feuille de route §5](refonte-application/feuille-de-route.md#v2--organisation-scolaire-et-espace-direction)) |
-| **V3 — Suivi pédagogique enseignant** | 11 features : `rapports-de-classe`, `vie-de-la-classe` (dont CL-02), `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 le confirme |
+| `espace-direction` (V2 complète) | Matricule MENA de l'élève, quatre fonctions de direction et leurs droits, personnel, retrait et réintégration d'enseignants, changement de classe, code d'établissement, ajout de classes, tableau de bord élaboré. À reprendre « quand on comprendra le fonctionnement de l'administration » (porteur, 2026-09-28). Conception (memo, PRD, ADR, UDR, plan, Lot 0a) sur la branche [`feature/espace-direction`](https://github.com/Lnclassapp/App.Lnclassapp/tree/feature/espace-direction) ; ses numéros ADR-0065 à 0067 et UDR-0052, 0053 sont à renuméroter |
+| `annuaire-equipe` (V2) | Grill fait : l'équipe modifie nom, genre et numéro ; désactive puis anonymise automatiquement à 30 jours ; entrée « Comptes » qui remplace « Débloquer un compte » ; ni soi-même ni le dernier admin ; recherche par nom partiel, numéro ou matricule exacts. Memo sur la branche [`feature/annuaire-equipe`](https://github.com/Lnclassapp/App.Lnclassapp/tree/feature/annuaire-equipe). Il retirera aussi une direction |
+| `multi-etablissements-enseignant` | Un enseignant rattaché à plusieurs établissements (ID-09, SC-23, ID-27, Q7) : chaque direction voit sa part. Reporté par le porteur le 2026-09-28 |
+| `changement-etablissement-eleve` | Un élève change d'établissement en cours de scolarité ; aujourd'hui, un élève dont la classe est active ne rejoint aucune autre classe. Reporté par le porteur le 2026-09-28 |
+| **V3 — Suivi pédagogique enseignant** | `rapports-de-classe`, `vie-de-la-classe` (dont CL-02) ; `multi-classes-eleve` si Q5 le confirme. `multi-etablissements-enseignant` est une ligne à part, ci-dessus |
 | **V4 — Contenu à l'échelle et back-office** | 9 features : `catalogue-complet`, `installation-pwa`, `sous-roles-equipe` ; Q9 et Q10 ouvertes |
 | **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
 | **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
