@@ -517,6 +517,47 @@ module Entities
           assert_nil facts, label if %i[dri scans idat].include?(label)
         end
       end
+
+      # Third challenge of PR #65: a Huffman table is a real code (T.81 § C, Annex K): at most 256 codes, lengths a
+      # prefix code can hold without the all-ones code, DC categories 0 to 11, AC run/size pairs, each symbol once.
+      def with_table(jpeg, spec)
+        at = (2...jpeg.bytesize).find { jpeg.getbyte(it) == 0xFF && jpeg.getbyte(it + 1) == 0xC4 && jpeg.getbyte(it + 4) == spec }
+        length = jpeg.unpack1("n", offset: at + 2)
+        jpeg.byteslice(0, at) + jpeg_segment(0xC4, spec.chr + yield) + jpeg.byteslice(at + 2 + length..)
+      end
+
+      test "a Huffman table with too many codes, impossible lengths, the all-ones code or invalid symbols is no image" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        ac_symbols = [ 0x00, 0xF0, *(1..10).flat_map { |size| [ size, 0x10 | size ] } ]
+        table = ->(counts, symbols) { counts.pack("C*") + symbols.pack("C*") }
+        staircase = [ 1 ] * 16
+
+        assert_not_nil ImageHeader.read(with_table(jpeg, 0x10) { table.(staircase, ac_symbols.first(16)) })
+        assert_not_nil ImageHeader.read(with_table(jpeg, 0x00) { table.([ 0, 1, 5, 1, 1, 1, 1, 1, 1 ] + [ 0 ] * 7, (0..11).to_a) })
+        { too_many_codes: with_table(jpeg, 0x10) { table.([ 0 ] * 14 + [ 255, 255 ], ("SECRET-PAYLOAD" * 40).bytes.first(510)) },
+          kraft: with_table(jpeg, 0x10) { table.([ 3 ] + [ 0 ] * 15, [ 0x01, 0x02, 0x03 ]) },
+          all_ones: with_table(jpeg, 0x10) { table.([ 1 ] * 15 + [ 2 ], ac_symbols.first(17)) },
+          empty: with_table(jpeg, 0x10) { table.([ 0 ] * 16, []) },
+          dc_category: with_table(jpeg, 0x00) { table.([ 0, 1 ] + [ 0 ] * 14, [ 12 ]) },
+          dc_twice: with_table(jpeg, 0x00) { table.([ 0, 2 ] + [ 0 ] * 14, [ 3, 3 ]) },
+          ac_size: with_table(jpeg, 0x10) { table.([ 0, 1 ] + [ 0 ] * 14, [ 0x0B ]) },
+          ac_zero_size: with_table(jpeg, 0x10) { table.([ 0, 1 ] + [ 0 ] * 14, [ 0x10 ]) },
+          ac_twice: with_table(jpeg, 0x10) { table.([ 0, 2 ] + [ 0 ] * 14, [ 0x01, 0x01 ]) } }.each do |label, bytes|
+          assert_refused(label, bytes)
+        end
+      end
+
+      test "a DNL segment or a lossless frame is no image" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        eoi = jpeg.rindex("\xFF\xD9".b)
+        sof = jpeg.index("\xFF\xC0".b)
+        without_huffman = jpeg.gsub(/\xFF\xC4..(?:.(?!\xFF[\xC4\xDA]))*./mn) { "" }
+
+        { dnl_after_scan: jpeg.byteslice(0, eoi) + jpeg_segment(0xDC, "\x00\x30".b) + "\xFF\xD9".b,
+          dnl_before_frame: jpeg.byteslice(0, sof) + jpeg_segment(0xDC, "SE") + jpeg.byteslice(sof..),
+          lossless_without_huffman: without_huffman.sub("\xFF\xC0".b, "\xFF\xC3".b),
+          lossless: jpeg.sub("\xFF\xC0".b, "\xFF\xC3".b) }.each { |label, bytes| assert_refused(label, bytes) }
+      end
     end
   end
 end

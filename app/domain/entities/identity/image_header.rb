@@ -21,7 +21,9 @@ module Entities
       JPEG_SCAN = 0xDA
       JPEG_END = 0xD9
       # Hors d'un scan : 0x00, TEM, RSTn ou un second SOI ne sont pas des marqueurs de segment.
-      JPEG_UNEXPECTED = [ 0x00, 0x01, *(0xD0..0xD8) ].freeze
+      # DNL (0xDC) aussi : il ne sert qu'à une hauteur nulle dans le SOF, qui est refusée ; accepté, il porterait deux
+      # octets libres.
+      JPEG_UNEXPECTED = [ 0x00, 0x01, *(0xD0..0xD8), 0xDC ].freeze
       # Premier octet qui n'est pas un remplissage ; dans un scan, le prochain marqueur (0xFF suivi d'autre chose que 0x00,
       # bourrage, ou RSTn, remise à zéro). Cherchés par une expression, sans boucle octet par octet.
       JPEG_NOT_FILL = /[^\xFF]/n
@@ -39,12 +41,21 @@ module Entities
       # Codage arithmétique : SOF9 à SOF15 (les seuls où une table DAC sert).
       JPEG_ARITHMETIC = [ 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF ].freeze
       JPEG_PROGRESSIVE = [ 0xC2, 0xC6, 0xCA, 0xCE ].freeze
+      # Sans perte (SOF3, 7, 11, 15) : aucun appareil photo n'en écrit ; refusé.
+      JPEG_LOSSLESS = [ 0xC3, 0xC7, 0xCB, 0xCF ].freeze
+      # Table de Huffman (T.81 Annexe K, précision de 8 bits) : 256 codes au plus ; DC : catégories 0 à 11 ; AC : EOB
+      # (0x00), ZRL (0xF0) ou une paire course/taille de taille 1 à 10 ; en progressif, aussi EOBn (taille 0, course 1 à
+      # 14, § G.1.2.2).
+      JPEG_MAX_CODES = 256
+      JPEG_DC_SYMBOLS = (0..11)
+      JPEG_AC_SIZES = (1..10)
       JPEG_DEFINITIONS = [ JPEG_DQT, JPEG_DHT, JPEG_DAC, JPEG_DRI ].freeze
       # Liste blanche : seuls les segments et chunks qui dessinent l'image restent, réécrits dans leur forme standard
       # quand ils ont des champs libres. Tout le reste part, quels que soient son nom ou sa signature — un profil ICC
       # (APP2, iCCP, ICCP) aussi : son contenu est libre, il a transporté un secret dans la contre-épreuve de la PR #50.
-      # JPEG : SOFn, DHT, DAC, DQT, DRI, DNL, SOS (avec son scan), EOI ; JFIF (APP0) et Adobe (APP14) réécrits.
-      JPEG_KEPT = [ *JPEG_FRAMES, JPEG_DHT, JPEG_DAC, JPEG_DQT, JPEG_DRI, 0xDC, JPEG_SCAN, JPEG_END ].freeze
+      # JPEG : SOFn (sauf sans perte), DHT, DAC, DQT, DRI, SOS (avec son scan), EOI ; JFIF (APP0) et Adobe (APP14)
+      # réécrits. (DNL est refusé, voir JPEG_UNEXPECTED.)
+      JPEG_KEPT = [ *JPEG_FRAMES, JPEG_DHT, JPEG_DAC, JPEG_DQT, JPEG_DRI, JPEG_SCAN, JPEG_END ].freeze
       JPEG_JFIF = 0xE0
       JPEG_ADOBE = 0xEE
       # JFIF 1.01, sans unité, rapport 1:1, sans vignette ; Adobe version 100, drapeaux nuls, puis la transformée d'origine.
@@ -153,7 +164,7 @@ module Entities
         frames = parts.each_index.select { JPEG_FRAMES.include?(parts[it].type) }
         frame = frames.first
         scan = parts.index { it.type == JPEG_SCAN }
-        return unless frames.one? && scan && frame < scan && jpeg_adobe?(bytes, parts) && jpeg_frame?(bytes, parts, parts[frame])
+        return unless frames.one? && scan && frame < scan && !JPEG_LOSSLESS.include?(parts[frame].type) && jpeg_adobe?(bytes, parts) && jpeg_frame?(bytes, parts, parts[frame])
 
         height, width = fields(bytes, parts[frame].data + 3, "nn", 4)
         result(bytes, :jpeg, [ width, height ], parts)
@@ -187,9 +198,10 @@ module Entities
 
       def jpeg_coherent?(bytes, parts, frame, components)
         coding = JPEG_ARITHMETIC.include?(frame.type) ? :arithmetic : :huffman
+        progressive = JPEG_PROGRESSIVE.include?(frame.type)
         pending = {}
         parts.each do |part|
-          defined = jpeg_definitions(bytes, part)
+          defined = jpeg_definitions(bytes, part, progressive)
           used = jpeg_uses(bytes, part, components, coding)
           return false if defined.nil? || used.nil?
 
@@ -203,13 +215,13 @@ module Entities
         pending.empty?
       end
 
-      def jpeg_definitions(bytes, part)
+      def jpeg_definitions(bytes, part, progressive)
         return [] unless JPEG_DEFINITIONS.include?(part.type)
 
         payload = jpeg_payload(bytes, part)
         case part.type
         when JPEG_DQT then jpeg_table_specs(part.type, payload).map { [ :quantization, it & 0x0F ] }
-        when JPEG_DHT then jpeg_table_specs(part.type, payload).map { [ :huffman, it >> 4, it & 0x0F ] }
+        when JPEG_DHT then jpeg_table_specs(part.type, payload, progressive:)&.map { [ :huffman, it >> 4, it & 0x0F ] }
         when JPEG_DAC then jpeg_conditioning(payload)
         else [ [ :restart ] ]
         end
@@ -365,7 +377,7 @@ module Entities
       end
 
       # Longueur exacte des segments gardés (T.81 § B.2) : aucun octet libre derrière leurs champs. SOF : 3 octets par
-      # composante ; SOS : 2 ; DRI et DNL : une valeur ; DAC : 2 octets par table ; DQT et DHT : tables successives.
+      # composante ; SOS : 2 ; DRI : une valeur ; DAC : 2 octets par table ; DQT et DHT : tables successives.
       def jpeg_exact?(bytes, marker, data)
         return true if marker == JPEG_END
 
@@ -373,7 +385,7 @@ module Entities
         case marker
         when *JPEG_FRAMES then payload.bytesize == 6 + (3 * payload.getbyte(5).to_i)
         when JPEG_SCAN then payload.bytesize == 4 + (2 * payload.getbyte(0).to_i)
-        when 0xDD, 0xDC then payload.bytesize == 2
+        when JPEG_DRI then payload.bytesize == 2
         when JPEG_DAC then payload.bytesize.positive? && payload.bytesize.even?
         when JPEG_DQT, JPEG_DHT then !jpeg_table_specs(marker, payload).nil?
         else true
@@ -381,9 +393,38 @@ module Entities
       end
 
       # DQT : précision, puis 64 valeurs d'un ou deux octets ; DHT : 16 effectifs, puis autant de codes.
-      def jpeg_table_specs(marker, payload)
+      # progressive : à la lecture des segments, le SOF n'est pas encore connu, les EOBn sont admis ; jpeg_coherent?
+      # revérifie chaque table avec le vrai type de trame.
+      def jpeg_table_specs(marker, payload, progressive: true)
         if marker == JPEG_DQT then jpeg_tables(payload) { |precision, _| 1 + (64 * (precision + 1)) }
-        else jpeg_tables(payload) { |_, counts| 17 + counts.sum if counts.size == 16 }
+        else jpeg_tables(payload) { |klass, at| jpeg_huffman_size(payload, klass, at, progressive) }
+        end
+      end
+
+      # Une table de Huffman réalisable : 1 à 256 codes ; à chaque longueur, le code canonique suivant tient dans cette
+      # longueur sans être le code tout à 1 (T.81 § C, comme libjpeg) ; symboles distincts, valides pour la classe.
+      def jpeg_huffman_size(payload, klass, at, progressive)
+        counts = payload.byteslice(at, 16).bytes
+        total = counts.sum
+        symbols = payload.byteslice(at + 16, total).to_s.bytes
+        return unless counts.size == 16 && total.between?(1, JPEG_MAX_CODES) && symbols.uniq.size == total
+        return unless jpeg_prefix_code?(counts) && symbols.all? { jpeg_symbol?(klass, it, progressive) }
+
+        17 + total
+      end
+
+      def jpeg_prefix_code?(counts)
+        code = 0
+        counts.each.with_index(1).all? do |count, length|
+          code += count
+          (code < (1 << length)).tap { code <<= 1 }
+        end
+      end
+
+      def jpeg_symbol?(klass, symbol, progressive)
+        if klass.zero? then JPEG_DC_SYMBOLS.cover?(symbol)
+        elsif (symbol & 0x0F).zero? then [ 0x00, 0xF0 ].include?(symbol) || progressive
+        else JPEG_AC_SIZES.cover?(symbol & 0x0F)
         end
       end
 
@@ -394,7 +435,7 @@ module Entities
         specs = []
         while at < payload.bytesize
           spec = payload.getbyte(at)
-          size = yield(spec >> 4, payload.byteslice(at + 1, 16).bytes) if spec >> 4 <= 1 && (spec & 0x0F) <= 3
+          size = yield(spec >> 4, at + 1) if spec >> 4 <= 1 && (spec & 0x0F) <= 3
           return if size.nil?
 
           specs << spec
