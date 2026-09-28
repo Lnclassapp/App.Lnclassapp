@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-09-27 |
 | **Chantier** | [`docs/chantiers/profil-utilisateur`](../../chantiers/profil-utilisateur/prd.md) — critères PR-01 à PR-07 |
 | **ADR lié** | [ADR-0055](../adr/0055-profil-modification-de-soi-et-revocation-des-sessions.md) · [ADR-0025](../adr/0025-pin-a-4-chiffres-comme-secret-d-authentification.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) |
