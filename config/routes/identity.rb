@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte identity
 # Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil
-# ADR  : 0031, 0032, 0038, 0050, 0055
+# ADR  : 0031, 0032, 0038, 0050, 0055, 0057
 get "login", to: "identity/sessions#new", as: :new_session
 resource :session, only: %i[create destroy], controller: "identity/sessions" # session_path, gelé : DELETE = « Se déconnecter »
 namespace :identity do
@@ -11,6 +11,8 @@ end
 get "account/pending", to: "identity/pending_accounts#show", as: :pending_account
 get "teacher-signup", to: "identity/teacher_registrations#new", as: :new_teacher_registration
 post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher_registrations
+# ADR-0057 : le lien à partager d'un code d'établissement ouvre l'inscription, établissement déjà trouvé (limité en débit).
+get "e/:code", to: "identity/teacher_registrations#with_code", as: :school_code_signup
 get "invitations/:token", to: "identity/invitations#show", as: :invitation
 post "invitations/:token", to: "identity/invitations#accept", as: :accept_invitation
 post "accounts/:user_public_id/pin-recovery-codes", to: "identity/pin_recovery_codes#create", as: :account_pin_recovery_codes

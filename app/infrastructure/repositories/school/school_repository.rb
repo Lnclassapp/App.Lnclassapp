@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
-# Rôle : traduit Orm::School ↔ Entities::School::School ; insertion en masse, candidats à la génération, enseignants
-# ADR  : 0030, 0036, 0039, 0056
+# Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
+# ADR  : 0030, 0036, 0039, 0056, 0057
 module Repositories
   module School
     class SchoolRepository
@@ -15,8 +15,13 @@ module Repositories
         record && map_to_entity(record)
       end
 
+      def find_by_school_code(school_code:)
+        record = Orm::School.find_by(school_code:)
+        record && map_to_entity(record)
+      end
+
       def create(school:)
-        persist(Orm::School.new(attributes_of(school)))
+        persist(Orm::School.new(**attributes_of(school), school_code: school.school_code))
       end
 
       def update(school:)
@@ -48,6 +53,17 @@ module Repositories
 
         Orm::School.insert_all!(rows.map { |row| row.merge(created_at: at, updated_at: at) }, returning: INSERTED_COLUMNS)
                    .map { |row| Inserted.new(**row.symbolize_keys) }
+      end
+
+      def taken_school_codes = Orm::School.pluck(:school_code).to_set
+
+      # Savepoint : un code déjà pris (index unique) se traduit en :conflict sans casser la transaction du use case.
+      def replace_school_code(id:, school_code:, at:)
+        record = Orm::School.find(id)
+        Orm::School.transaction(requires_new: true) { record.update!(school_code:, school_code_rotated_at: at) }
+        ::Shared::Result.success(map_to_entity(record))
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict)
       end
 
       # NOT EXISTS sur l'index (school_id, school_year, name) des classes ; lecture par clé, sans OFFSET.
@@ -94,7 +110,7 @@ module Repositories
       def map_to_entity(record)
         Entities::School::School.new(id: record.id, public_id: record.public_id, drena_id: record.drena_id,
                                      name: record.name, sigle: record.sigle, school_type: record.school_type,
-                                     cycle: record.cycle, status: record.status)
+                                     cycle: record.cycle, status: record.status, school_code: record.school_code)
       end
     end
   end

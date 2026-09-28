@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_28_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_28_110000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -425,6 +425,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_100000) do
     t.bigint "drena_id", null: false
     t.string "name", limit: 150, null: false
     t.string "public_id", limit: 14, null: false
+    t.string "school_code", limit: 6, null: false
+    t.datetime "school_code_rotated_at"
     t.string "school_type", null: false
     t.string "sigle", limit: 20
     t.string "status", default: "active", null: false
@@ -432,7 +434,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_100000) do
     t.index ["drena_id", "name"], name: "index_schools_on_drena_id_and_name", unique: true
     t.index ["drena_id"], name: "index_schools_on_drena_id"
     t.index ["public_id"], name: "index_schools_on_public_id", unique: true
+    t.index ["school_code"], name: "index_schools_on_school_code", unique: true
     t.check_constraint "cycle::text = ANY (ARRAY['first'::character varying, 'both'::character varying]::text[])", name: "schools_cycle_values"
+    t.check_constraint "school_code::text ~ '^[a-hj-np-z2-9]{6}$'::text", name: "schools_school_code_format"
     t.check_constraint "school_type::text = ANY (ARRAY['public'::character varying, 'private'::character varying, 'mixed'::character varying]::text[])", name: "schools_school_type_values"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'active'::character varying, 'inactive'::character varying]::text[])", name: "schools_status_values"
   end
