@@ -98,10 +98,20 @@ Hors chantier, en parallèle : `feature/code-etablissement` touche `config/route
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle (un seul agent, lots enchaînés)
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord (système : rouge prouvé après coup, voir le journal)
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur — **à faire** : seul l'auteur (agent) a exécuté les parcours
+- [x] Pureté domaine · rubocop · tests (couverture 100 % lignes et branches) · brakeman : au vert
+- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR — branche poussée, PR non ouverte (consigne)
+- [x] `journal.md` tenu (dérapages, dette, chantiers de suivi) ; clôture à la fusion
+
+| Critère | Test |
+|---|---|
+| PH-01 | `test/system/identity/profile_photo_test.rb` (1er test) · `test/controllers/identity/profile_photos_controller_test.rb` · `test/integration/identity/profile_photo_display_test.rb` · `test/domain/use_cases/identity/change_own_photo_test.rb` |
+| PH-02 | `test/system/identity/profile_photo_test.rb` (image de 700 px et plus de 1 Mo) |
+| PH-03 | `test/system/identity/profile_photo_test.rb` · `test/domain/use_cases/identity/remove_own_photo_test.rb` · `test/infrastructure/repositories/identity/profile_photo_store_test.rb` |
+| PH-04 | `test/domain/dtos/identity/profile_photo_input_test.rb` · `test/domain/entities/identity/image_header_test.rb` · contrôleur (422) · système (PDF) |
+| PH-05 | `test/domain/use_cases/identity/read_account_photo_test.rb` · `test/controllers/identity/account_photos_controller_test.rb` · affichage (liste de classe, compte retrouvé) |
+| PH-06 | contrôleur (« the actions take no identifier ») · use cases (refus de la policy) |
+| PH-07 | `test/system/identity/profile_photo_test.rb` (390 px) |

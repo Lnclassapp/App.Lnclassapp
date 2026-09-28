@@ -35,12 +35,12 @@ Le porteur demande une photo de profil pour tous les comptes (2026-09-28). Activ
 
 ## 4. Décision
 
-> **Le navigateur recadre au centre en carré de 512 px et compresse (WebP, sinon JPEG, 80 %) avant l'envoi ; le serveur identifie le format par le contenu, sans bibliothèque, et refuse au-delà de 1 Mo, de 1024 px de côté, hors JPEG/PNG/WebP ou avec des métadonnées ; l'image est lue par `GET /accounts/:user_public_id/photo`, sous session et sous `ReadUserPolicy`, en `Cache-Control: private`, l'adresse portant une version tirée de l'empreinte du fichier.**
+> **Le navigateur recadre au centre en carré de 512 px et compresse (WebP, sinon JPEG, 80 %) avant l'envoi ; le serveur identifie le format par le contenu, sans bibliothèque, refuse au-delà de 1 Mo, de 1024 px de côté ou hors JPEG/PNG/WebP, et retire les métadonnées de ce qu'il garde ; l'image est lue par `GET /accounts/:user_public_id/photo`, sous session et sous `ReadUserPolicy`, en `Cache-Control: private`, l'adresse portant une version tirée de l'empreinte du fichier.**
 
 - **Domaine (`identity`)** :
-  - `Entities::Identity::ImageHeader.read(bytes)` → `Facts(format, width, height, metadata)` | nil : lecture des en-têtes JPEG (segments SOFn ; APP1 Exif/XMP, APP13 IPTC), PNG (IHDR ; `eXIf`, `iTXt`) et WebP (`VP8 `, `VP8L`, `VP8X` ; `EXIF`, `XMP `). Ruby pur.
+  - `Entities::Identity::ImageHeader.read(bytes)` → `Facts(format, width, height, metadata)` | nil : lecture des en-têtes JPEG (segments SOFn ; APP1 Exif/XMP, APP13 IPTC), PNG (IHDR ; `eXIf`, `iTXt`, `tEXt`, `zTXt`) et WebP (`VP8 `, `VP8L`, `VP8X` ; `EXIF`, `XMP `). `ImageHeader.strip(bytes)` retire ces segments et chunks (et, en WebP, recalcule la longueur RIFF et les drapeaux de VP8X). Ruby pur.
   - `Entities::Identity::ProfilePhoto` : `CONTENT_TYPES` (jpeg, png, webp), `MAX_BYTES` = 1 Mo, `MAX_SIDE` = 1024.
-  - `Dtos::Identity::ProfilePhotoInput(io:)` : présence, poids **avant** lecture, puis format, dimensions et métadonnées.
+  - `Dtos::Identity::ProfilePhotoInput(photo:)` : présence, poids **avant** lecture, puis format et dimensions ; `data` = les octets sans métadonnées.
   - Port `Ports::Identity::ProfilePhotoStorePort` : `attach(user_id:, data:, content_type:)` → true (remplace), `attached?(user_id:)` → Boolean, `remove(user_id:)` → Boolean (efface le fichier), `read(user_id:)` → `StoredPhoto(content_type, data)` | nil.
   - Use cases `ChangeOwnPhoto` et `RemoveOwnPhoto` sous `UpdateSelfPolicy` (ADR-0028), `Shared::Result` (ADR-0026), audit `profile.photo_changed` (format, poids, dimensions) et `profile.photo_removed` ; `ReadAccountPhoto` sous `ReadUserPolicy`, où « enseigne » = la classe principale de l'élève (active ou archivée, comme la liste nominative) est déclarée par l'enseignant.
 - **Infrastructure** : `Orm::User has_one_attached :photo` (aucune migration : les tables Active Storage existent) ; `Repositories::Identity::ProfilePhotoStore` ; le blob est créé `analyzed: true` pour qu'aucun `AnalyzeJob` ne cherche libvips. `Queries::Identity::PhotoVersions` donne la version (empreinte MD5 du blob, en base64 URL) aux requêtes du shell, du profil, de la liste de classe et du compte retrouvé.
@@ -60,10 +60,11 @@ Le porteur demande une photo de profil pour tous les comptes (2026-09-28). Activ
 ### 🔴 Coûts consentis
 
 - Chaque image affichée repasse par Rails (session, règle, lecture du bucket) : une liste de quarante élèves coûte quarante requêtes au premier affichage, puis zéro grâce au cache privé.
-- Un navigateur sans canvas ni `DataTransfer` envoie le fichier brut : une photo de téléphone y sera refusée (trop lourde ou avec Exif). Le message dit quoi faire, mais l'utilisateur n'a pas d'autre recours.
+- Un navigateur sans canvas ni `DataTransfer` envoie le fichier brut : une photo de téléphone y sera refusée (trop lourde, trop grande). Le message dit la limite, mais l'utilisateur n'a pas d'autre recours.
+- Retirer l'Exif d'un JPEG envoyé brut retire aussi son orientation : une telle photo peut s'afficher couchée. Le canvas, lui, applique l'orientation avant de l'oublier.
 - Une seule taille (512 px) sert tous les avatars, y compris ceux de 32 px.
 - Le cache privé du navigateur garde la photo sur un téléphone partagé après la déconnexion (au plus un jour).
-- Le lecteur d'en-têtes est du code maison : il ne valide pas l'image entière, seulement son format, ses dimensions et ses métadonnées. Une image corrompue au-delà de l'en-tête s'affiche cassée ; elle n'est jamais décodée par le serveur.
+- Le lecteur d'en-têtes est du code maison : il ne valide pas l'image entière, seulement son format, ses dimensions et ses segments de métadonnées. Une image corrompue au-delà de l'en-tête s'affiche cassée ; elle n'est jamais décodée par le serveur.
 
 ## 6. Notes d'implémentation
 

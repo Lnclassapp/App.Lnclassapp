@@ -36,7 +36,7 @@ Règles d'autorisation : écrire = `Identity::UpdateSelfPolicy` (soi seulement) 
 | Fichier qui n'est pas une image JPEG, PNG ou WebP (PDF, texte, image renommée) | 422, « Choisissez une photo JPEG, PNG ou WebP. » ; rien n'est stocké |
 | Image de plus de 1 Mo (navigateur qui n'a pas pu la réduire) | 422, « La photo pèse 1 Mo au plus. » |
 | Image de plus de 1024 px de côté | 422, « La photo mesure 1024 pixels de côté au plus. » |
-| Image qui porte des métadonnées de prise de vue (Exif, XMP, IPTC) | 422, « Cette image contient des informations cachées (lieu, appareil). Choisissez-la depuis cette page pour qu'elles soient retirées. » |
+| Image qui porte des métadonnées de prise de vue (Exif, XMP, IPTC, textes PNG) | acceptée si elle respecte le reste ; ses métadonnées sont **retirées** avant le stockage *(amendé le 2026-09-28, voir le journal)* |
 | Retirer sans photo | succès silencieux, aucune trace d'audit |
 | Requête sans Turbo | repli HTML : redirection 303 vers « Mon profil » avec le toast |
 | Adresse de l'image demandée par un autre élève, un enseignant qui n'enseigne pas l'élève | 403 ; visiteur : redirection vers la connexion ; compte sans photo ou inconnu : 404 |
@@ -66,9 +66,10 @@ Scénario: [PH-03] Changer puis retirer sa photo
   Et le journal d'audit contient « profile.photo_removed »
 
 Scénario: [PH-04] Le serveur refuse ce qui n'est pas une petite image propre
-  Quand un fichier PDF, une image de plus de 1 Mo, une image de plus de 1024 px ou une image avec des métadonnées Exif arrive
+  Quand un fichier PDF, une image de plus de 1 Mo ou une image de plus de 1024 px arrive
   Alors la modale est re-rendue en 422 avec le message du cas, sous le champ
   Et rien n'est stocké ni tracé
+  Mais une petite image qui porte des métadonnées Exif est stockée sans elles
 
 Scénario: [PH-05] La photo d'un élève n'est visible que de lui, de ses enseignants et de l'équipe
   Étant donné un élève avec une photo, dans la classe d'un enseignant
