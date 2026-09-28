@@ -347,7 +347,7 @@ Chantiers hors plan **non livrés**, rattachés le 2026-09-28 :
 
 | Étape | Ce qui s'ouvre | Peut chevaucher | Condition d'entrée |
 |---|---|---|---|
-| **0. Avant tout chantier** | Clore la V1 (volet authentifié de la recette `Staging` en attente d'un compte, sans bloquer la suite) ; ~~faire accepter les décisions en production encore `Proposé` (Q4)~~ fait le 2026-09-28 ; un chantier `bugfix` pour les tests instables (Q15) | — | La CI GitHub revient le 2026-10-03 : d'ici là, un test instable coûte un `bin/ci` local complet à chaque fusion |
+| **0. Avant tout chantier** | Clore la V1 (volet authentifié de la recette `Staging` en attente d'un compte, sans bloquer la suite) ; ~~faire accepter les décisions en production encore `Proposé` (Q4)~~ fait le 2026-09-28 ; ~~un chantier `bugfix` pour les tests instables (Q15)~~ [`tests-instables`](../tests-instables/memo.md), ouvert et livré en PR le 2026-09-28 | — | La CI GitHub revient le 2026-10-03 : d'ici là, un test instable coûte un `bin/ci` local complet à chaque fusion |
 | **1. V2** | `espace-direction`, puis `annuaire-equipe` après son Lot 0 | **V4 `catalogue-complet`** dès le départ ; **V4 `installation-pwa`** si le gabarit du shell a un seul propriétaire | Q1 à Q4 répondues ; C-31 tranchée dans l'UDR du chantier |
 | **2. V3** | `rapports-de-classe` et `vie-de-la-classe` (page classe attribuée au Lot 0) ; puis `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 = oui | **V4 `sous-roles-equipe`** (policies de l'équipe, disjointes de celles de l'enseignant) ; **V5, lot AS-16** (côté élève) | V2 livrée et recettée ; Q5 à Q8 répondues |
 | **3. V4** | `sous-roles-equipe`, après `annuaire-equipe` | V3 | Q9 répondue ; amendement de l'ADR-0038 accepté |
@@ -374,9 +374,9 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 
 | Dette | Où elle est consignée | Traitement proposé |
 |---|---|---|
-| **Test instable `JoinRequestConcurrencyTest`** (`test/infrastructure/repositories/school/join_request_concurrency_test.rb`) : échec intermittent `cached plan must not change result type` (PostgreSQL) | Signalée le 2026-09-28 ; non encore consignée dans un journal de chantier | Chantier `bugfix` avant la V2, qui touche aux demandes en attente (Q15) |
-| **Test système instable `RoleHomesTest`** (menu du compte, lien « Mon profil ») : un échec sur trois exécutions du même SHA | [`ci-rapide`, journal](../ci-rapide/journal.md) | Même chantier `bugfix` ; ne pas relancer jusqu'au vert |
-| Test système instable `session_result_test.rb:42` (« Recommencer ») | [`pilotage-equipe`, journal](../pilotage-equipe/journal.md) | À surveiller, dans le même chantier si elle se reproduit |
+| ~~**Test instable `JoinRequestConcurrencyTest`**~~ (`test/infrastructure/repositories/school/join_request_concurrency_test.rb`) : échec intermittent `cached plan must not change result type` (PostgreSQL) | [`tests-instables`, memo et journal](../tests-instables/memo.md) | **Corrigé** (2026-09-28) : les tests de migration réordonnaient les colonnes de `schools` sans vider les requêtes préparées des autres connexions du pool ; reproduit à la graine 4, corrigé par `changing_schema` |
+| ~~**Test système instable `RoleHomesTest`**~~ (menu du compte, lien « Mon profil ») : un échec sur trois exécutions du même SHA | [`ci-rapide`, journal](../ci-rapide/journal.md) ; [`tests-instables`](../tests-instables/memo.md) | **Corrigé** (2026-09-28) : le menu était ouvert sur l'aperçu de Turbo (page en cache) avant que la page reçue ne le remplace ; le test attend la fin de la visite |
+| ~~Test système instable `session_result_test.rb:42`~~ (« Recommencer ») | [`pilotage-equipe`, journal](../pilotage-equipe/journal.md) ; [`tests-instables`](../tests-instables/memo.md) | **Corrigé** (2026-09-28) : deux allers-retours attendus 2 s (défaut de Capybara) sous une suite chargée ; reproduit sous latence réseau, attente explicite de 10 s |
 | **Photo de profil : limites documentées** (octets libres possibles dans les données compressées JPEG, PNG et WebP ; un navigateur sans canvas envoie le fichier brut, refusé s'il est trop lourd) | [ADR-0060](../../decisions/adr/0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md), « Conséquences » ; [`photo-de-profil`, journal](../photo-de-profil/journal.md) | Limites acceptées : seul un décodage de l'image côté serveur les lèverait, ce que l'ADR écarte. Rien à planifier sans nouvelle décision |
 | Codes d'adhésion consommés tant que les classes archivées gardent le leur | [`boucle-pedagogique`, journal](../boucle-pedagogique/journal.md) | V3, `vie-de-la-classe` |
 | 3 900 codes d'établissement à transmettre à la main, faute de canal | [ADR-0057](../../decisions/adr/0057-code-d-etablissement.md), « Conséquences » | V2 (la direction voit son code, Q2) ; plus tard `canal-whatsapp` |
@@ -400,7 +400,7 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 | Q12 | V6 | Un élève mineur reçoit-il des messages WhatsApp sans accord explicite ? Consentement à l'inscription, désinscription ? |
 | Q13 | V6 | Fournisseur derrière n8n (API WhatsApp Business), coût par message et qui le paie. Une seule décision pour `canal-whatsapp` et `verification-whatsapp` |
 | Q14 | V6 | Envoyer le code de récupération du PIN par WhatsApp (amendement de l'ADR-0032) : dans `canal-whatsapp`, ou plus tard ? |
-| Q15 | transverse | Ouvrir un chantier `bugfix` pour les tests instables avant la V2 ? |
+| Q15 | transverse | Ouvrir un chantier `bugfix` pour les tests instables avant la V2 ? **Répondue le 2026-09-28 : oui, [`tests-instables`](../tests-instables/memo.md), les trois tests corrigés à la cause.** |
 
 ### V8 — Hors vague, à décider
 
@@ -796,7 +796,7 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | **CI GitHub bloquée jusqu'au 2026-10-03** (limite de minutes atteinte, constat du 2026-09-28) | Avant chaque fusion : `bin/ci` complet en local, sortie consignée dans la PR. Seul l'agent fusionne, après CI verte (locale tant que GitHub est bloquée) ; aucune fusion depuis l'interface web (option A du porteur, 2026-09-28). Déploiement de production déclenché **à la main** sur Railway par le porteur. Revenir à la CI GitHub dès le 2026-10-03 |
 | **Chantiers livrés hors ordre des vagues** (2026-09-28) : la V2, la V4 et des demandes hors plan passent avant la clôture de la V1 | Chacun est rattaché à une vague (§5, « Chantiers hors plan ») ; ceux qui touchent un contrat de V1 passent par un ADR (ADR-0057, ADR-0058, ADR-0059) |
 | **Fusions web qui cassent `Develop`** : #48/#49 et #50/#52 ont dû être réparées (#56, #61) | Option A du porteur : seul l'agent fusionne, après CI verte |
-| **Tests instables sous CI bloquée** (2026-09-28) : `JoinRequestConcurrencyTest` (« cached plan must not change result type »), `RoleHomesTest`, `session_result_test.rb` | Un chantier `bugfix` avant la V2 (§5, « Dette suivie », Q15) ; ne jamais relancer jusqu'au vert |
+| ~~**Tests instables sous CI bloquée**~~ (2026-09-28) : `JoinRequestConcurrencyTest` (« cached plan must not change result type »), `RoleHomesTest`, `session_result_test.rb` | Traité par le chantier [`tests-instables`](../tests-instables/memo.md) (Q15) : chaque instabilité reproduite puis corrigée à sa cause, sans relance ; la dette restante est consignée dans son [journal](../tests-instables/journal.md) |
 
 ---
 

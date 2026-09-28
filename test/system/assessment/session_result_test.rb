@@ -6,6 +6,8 @@ require "application_system_test_case"
 class Assessment::SessionResultTest < ApplicationSystemTestCase
   SCOPE = "assessment.session_results".freeze
   GRADING = Entities::Assessment::Grading
+  # « Recommencer » : le POST puis la page de la session, sous une suite chargée ; au-delà, la page n'a vraiment pas changé.
+  RESTART_WAIT = 10
 
   setup do
     @student = create_student(classroom: create_classroom)
@@ -47,6 +49,12 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     with_mobile_viewport { play_nine_out_of_ten }
   end
 
+  # Chantier tests-instables : « Recommencer » coûte deux allers-retours (le POST, puis la session vers laquelle il
+  # redirige). Sous une suite chargée, ils dépassaient les 2 s d'attente par défaut de Capybara.
+  test "« Recommencer » ouvre une nouvelle session même quand le serveur répond lentement" do
+    on_a_slow_network { play_nine_out_of_ten }
+  end
+
   test "sous le seuil : « Courage ! », « Non acquis », aucun confetti" do
     session = completed_session(correct: 4)
 
@@ -76,7 +84,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
 
     click_on I18n.t("#{SCOPE}.show.restart")
 
-    assert_current_path %r{\A/sessions/(?!#{session.public_id})[^/]+\z}
+    assert_current_path %r{\A/sessions/(?!#{session.public_id})[^/]+\z}, wait: RESTART_WAIT
     fresh = Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "started").sole
     assert_current_path exercise_session_path(fresh.public_id)
     assert_equal [ "completed", GRADING.score_percent(correct: 9, total: 10) ], session.reload.values_at(:status, :score_percent)
