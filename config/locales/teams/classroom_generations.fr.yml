@@ -4,7 +4,9 @@ fr:
     classroom_generations:
       create:
         started: "Génération des classes lancée."
-        already_running: "Une génération des classes est déjà en cours. Suivez-la dans « Imports »."
+        # Déjà en cours : état attendu, toast d'information (chantier finitions-generation-menu).
+        already_running_title: "Génération déjà en cours"
+        already_running: "Une seule génération des classes à la fois : voici l'avancement de celle qui tourne."
     imports:
       import_row:
         no_file: "Voir le rapport"
@@ -13,6 +15,10 @@ fr:
       status:
         by_kind:
           classrooms:
+            # Badge du statut (liste, rapport, accueil) ; les statuts absents gardent le libellé des imports.
+            statuses:
+              validating: "Recherche des établissements"
+              importing: "Génération en cours"
             phases:
               queued: "La génération attend son tour."
               validating: "Recherche des établissements sans classe…"

@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -79,8 +79,21 @@ module ComponentsHelper
     valid: "border-line focus:border-brand focus:ring-brand/20",
     invalid: "border-error focus:border-error focus:ring-error/20"
   }.freeze
+  # Bouton œil d'un champ PIN (UDR-0051) : 48 px de large sur toute la hauteur du champ, à droite, dans le champ.
+  FIELD_REVEAL_INPUT = "pr-14"
+  FIELD_REVEAL_BUTTON = "absolute inset-y-0 right-0 flex w-tap cursor-pointer items-center justify-center rounded-ln " \
+                        "text-mute transition hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-2 " \
+                        "focus-visible:outline-brand"
   FIELD_CHECKBOX = "size-5 shrink-0 cursor-pointer rounded-sm accent-brand focus-visible:outline-2 " \
                    "focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed"
+  # Une option = toute l'étiquette cliquable, 48 px de haut ; l'option cochée prend la teinte de marque.
+  RADIO_OPTION = "flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border bg-white px-4 text-sm font-medium " \
+                 "text-ink transition hover:bg-mist has-checked:border-brand has-checked:bg-brand-soft"
+  RADIO_STATES = { valid: "border-line", invalid: "border-error" }.freeze
+  RADIO_INPUT = "size-5 shrink-0 cursor-pointer accent-brand focus-visible:outline-2 focus-visible:outline-offset-2 " \
+                "focus-visible:outline-brand"
+  # Au téléphone, les options s'empilent toujours ; les colonnes ne s'ouvrent qu'à partir de `sm`.
+  RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
@@ -111,7 +124,7 @@ module ComponentsHelper
   }.freeze
   SUBJECT_FALLBACK = { tone: :neutral, icon: "book-open" }.freeze
 
-  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg" }.freeze
+  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
     brand: "bg-brand text-ink", teacher: "bg-teacher text-ink", school: "bg-school text-white",
     team: "bg-team text-white", gold: "bg-gold text-ink"
@@ -181,9 +194,11 @@ module ComponentsHelper
   end
 
   # Champ complet : libellé, contrôle, aide, erreur, reliés par `aria-describedby`. Tout attribut en plus va au contrôle.
-  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], **input_html)
+  # `reveal: true` (mot de passe seulement) ajoute le bouton œil du contrôleur `password-reveal` (UDR-0051).
+  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], reveal: false, **input_html)
     builder = option!(FIELD_BUILDERS, as, "ui_field as")
     kind = as.to_sym
+    raise ArgumentError, "ui_field reveal : réservé à as: :password (reçu « #{kind} »)" if reveal && kind != :password
     id = form.field_id(method)
     error = field_errors(form.object, method).first
     described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact
@@ -191,13 +206,30 @@ module ComponentsHelper
     input_html = input_html.merge(
       id:, required:, "aria-invalid": ("true" if error), "aria-describedby": described_by.join(" ").presence
     )
-    input_html[:class] = field_classes(kind, error, input_html[:class])
+    input_html[:class] = field_classes(kind, error, class_names(input_html[:class], { FIELD_REVEAL_INPUT => reveal }))
+    input_html[:data] = { **input_html.fetch(:data, {}), password_reveal_target: "input" } if reveal
     control = case kind
     when :select then form.select(method, choices, { prompt: input_html.delete(:prompt) }, input_html)
     else form.public_send(builder, method, input_html)
     end
 
-    render "components/field", form:, method:, kind:, control:, id:, hint:, error:, required:,
+    render "components/field", form:, method:, kind:, control:, id:, hint:, error:, required:, reveal:,
+           label: label || field_label(form.object, method)
+  end
+
+  # Groupe de boutons radio : `fieldset` et `legend`, une option de 48 px par choix `[libellé, valeur]`, la valeur
+  # de l'objet cochée. L'aide et la première erreur, sous le groupe, sont reliées à chaque option.
+  def ui_radio_group(form, method, choices:, label: nil, hint: nil, required: false, columns: 2)
+    grid = RADIO_COLUMNS.fetch(columns) do
+      raise ArgumentError, "ui_radio_group columns : « #{columns} » inconnu (#{RADIO_COLUMNS.keys.join(', ')})"
+    end
+    id = form.field_id(method)
+    error = field_errors(form.object, method).first
+    described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact.join(" ").presence
+    input_html = { required:, class: RADIO_INPUT, "aria-invalid": ("true" if error), "aria-describedby": described_by }
+
+    render "components/radio_group", form:, method:, choices:, id:, hint:, error:, required:, grid:, input_html:,
+           option_class: class_names(RADIO_OPTION, RADIO_STATES[error ? :invalid : :valid]),
            label: label || field_label(form.object, method)
   end
 
@@ -259,7 +291,8 @@ module ComponentsHelper
   def ui_avatar(name, src: nil, size: :md, tone: nil)
     classes = class_names("inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold",
                           option!(AVATAR_SIZES, size, "ui_avatar size"))
-    return image_tag(src, alt: name, class: class_names(classes, "object-cover")) if src
+    # Photo de profil (ADR-0060, UDR-0047) : une seule taille servie, recadrée par le rond ; hors écran, pas chargée.
+    return image_tag(src, alt: name, loading: "lazy", decoding: "async", class: class_names(classes, "object-cover")) if src
 
     tone ||= AVATAR_TONES.keys[name.to_s.sum % AVATAR_TONES.size]
     tag.span(avatar_initials(name), role: "img", "aria-label": name,
@@ -271,6 +304,13 @@ module ComponentsHelper
   def ui_toast(message, type: :info, title: nil, persistent: false)
     config = option!(TOAST_TYPES, type, "ui_toast type")
     render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay]
+  end
+
+  # Un flash est un message, ou { "message", "title" } quand le titre du type ne dit pas la situation. Toute autre valeur
+  # (le drapeau de rechargement de l'authentification) ne donne aucun toast.
+  def flash_toast(flash_key, value)
+    message, title = value.is_a?(Hash) ? value.values_at("message", "title") : value
+    ui_toast(message, type: toast_type_for(flash_key), title:) if message.is_a?(String)
   end
 
   def toast_type_for(flash_key)

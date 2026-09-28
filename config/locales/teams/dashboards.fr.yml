@@ -1,0 +1,119 @@
+# Pilotage de l'équipe (chantier pilotage-equipe, V4, TR-10, TR-11, TR-12) — UDR-0049, ADR-0062
+fr:
+  teams:
+    dashboards:
+      periods:
+        7d: "7 jours"
+        30d: "30 jours"
+        year: "Année scolaire"
+      period_scopes:
+        7d: "les 7 derniers jours"
+        30d: "les 30 derniers jours"
+        year: "l'année scolaire %{year}"
+      show:
+        page_title: "Pilotage"
+        title: "Pilotage"
+        subtitle: "Indicateurs agrégés, lus en direct dans les données de Lnclass."
+        scope: "Périmètre : %{territory} · %{period}"
+        national: "toute la Côte d'Ivoire"
+      filters:
+        period_label: "Période"
+        drena_form_label: "Filtrer par DRENA"
+        drena_label: "DRENA"
+        all_drenas: "Toutes les DRENA"
+        submit: "Filtrer"
+        clear: "Toute la Côte d'Ivoire"
+      key_figures:
+        period_title: "Sur la période"
+        period_subtitle: "Ce qui s'est passé sur %{period}"
+        now_title: "En ce moment"
+        now_subtitle: "Comptes actifs, établissements actifs et classes de l'année"
+        signups:
+          one: "nouvel inscrit"
+          other: "nouveaux inscrits"
+        active_students:
+          one: "élève actif"
+          other: "élèves actifs"
+        active_students_hint: "Au moins une session d'exercice commencée"
+        completed_sessions:
+          one: "exercice terminé"
+          other: "exercices terminés"
+        success_rate: "Réussite moyenne : %{rate} %"
+        no_success_rate: "Réussite moyenne : —"
+        assignments:
+          one: "assignation"
+          other: "assignations"
+        assignments_hint: "Faites par les enseignants"
+        students:
+          one: "élève"
+          other: "élèves"
+        teachers:
+          one: "enseignant"
+          other: "enseignants"
+        team:
+          one: "membre de l'équipe"
+          other: "membres de l'équipe"
+        team_label: "membres de l'équipe"
+        team_without_drena: "Sans DRENA"
+        classrooms:
+          one: "classe"
+          other: "classes"
+        classrooms_hint: "Année %{year}"
+        schools:
+          one: "établissement actif"
+          other: "établissements actifs"
+        coverage_label: "Couverture des établissements actifs"
+        with_classroom: "dont %{count} avec une classe"
+        with_teacher: "dont %{count} avec un enseignant"
+        with_student: "dont %{count} avec un élève"
+      levels:
+        title: "Élèves par niveau"
+        subtitle: "Élèves placés dans une classe active de l'année"
+        share:
+          one: "%{count} élève · %{percent} %"
+          other: "%{count} élèves · %{percent} %"
+        without_classroom:
+          one: "Sans classe : %{count} élève"
+          other: "Sans classe : %{count} élèves"
+        empty_title: "Aucun élève placé"
+        empty_description: "La répartition apparaîtra quand des élèves auront rejoint une classe de l'année."
+      drenas:
+        title: "Par DRENA"
+        subtitle: "Couverture, triée par nombre d'élèves"
+        caption: "Couverture par DRENA sur %{period}"
+        columns:
+          name: "DRENA"
+          schools: "Établissements actifs"
+          classrooms: "Classes"
+          teachers: "Enseignants"
+          students: "Élèves"
+          active_students: "Élèves actifs"
+        empty_title: "Aucune DRENA"
+        empty_description: "Les DRENA se créent depuis l'écran des DRENA."
+      recent_signups:
+        title: "Inscrits récents"
+        subtitle: "Les 10 derniers comptes, numéro masqué"
+        no_school: "Sans établissement"
+        joined: "il y a %{time}"
+        empty_title: "Aucun inscrit pour l'instant"
+        empty_description: "Les nouveaux comptes apparaîtront ici."
+      search:
+        title: "Rechercher un élève ou un enseignant"
+        subtitle: "Par nom ou par numéro, 20 résultats par page"
+        form_label: "Rechercher un compte"
+        label: "Nom ou numéro"
+        hint: "2 caractères au moins, 4 chiffres pour un numéro"
+        submit: "Rechercher"
+      search_results:
+        prompt: "Tapez un nom ou un numéro."
+        too_short: "Tapez au moins 2 caractères."
+        total:
+          one: "1 compte trouvé"
+          other: "%{count} comptes trouvés"
+        empty_title: "Aucun compte trouvé"
+        empty_description: "Vérifiez l'orthographe, ou cherchez par 4 chiffres du numéro."
+        classrooms:
+          one: "%{count} classe"
+          other: "%{count} classes"
+        no_school: "Sans établissement"
+        no_classroom: "Sans classe"

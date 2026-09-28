@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# TR-04, TR-05, TR-09 (chantier queries-constantes-orm-disparues, plan Lot E): for every role, a real sign-in, the home
+# TR-04, TR-05, TR-09, TR-10 (chantier queries-constantes-orm-disparues, plan Lot E): for every role, a real sign-in, the home
 # without error, then every destination of the shell opened by its real link, and the real « Se déconnecter ». A
 # destination whose route is not drawn in V1 renders as an inactive entry (NavigationHelper): it is checked as inactive,
 # never followed. The data holds one assignment of each kind: on an empty base, the old feeds passed green by mistake.
@@ -42,12 +42,13 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_signs_out
   end
 
-  test "the team member reaches their home, then every destination of their navigation; the dashboard is inactive" do
+  # TR-10 (UDR-0049, amendment of UDR-0006 of 2026-09-28): « Pilotage » is drawn, no team destination is inactive.
+  test "the team member reaches their home, then every destination of their navigation, the dashboard included" do
     sign_in_as create_team_member(first_name: "Awa")
 
     assert_home team_home_path, greeting: I18n.t("teams.homes.show.greeting", name: "Awa")
-    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, imports: teams_imports_path },
-                      inactive: %i[dashboard]
+    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, imports: teams_imports_path,
+                                dashboard: team_dashboard_path }
     assert_signs_out
   end
 

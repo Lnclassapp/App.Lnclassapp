@@ -6,7 +6,7 @@
   <td class="px-4 py-3"><code class="rounded-sm bg-mist px-1.5 py-0.5 font-mono text-xs text-ink"><%= drena.slug %></code></td>
   <td class="px-4 py-3 text-right tabular-nums"><%= drena.schools_count %></td>
   <td class="px-4 py-3 text-right tabular-nums"><%= drena.classrooms_count %></td>
-  <td class="px-4 py-3">
+  <td class="sticky-actions px-4 py-3">
     <div class="flex justify-end">
       <%= ui_dropdown label: t(".actions", name: drena.name), id: "drena-actions-#{drena.public_id}", fixed: true do %>
         <%= ui_dropdown_item t(".edit"), href: edit_drena_path(drena.public_id), icon: "pencil-square", frame: "modal" %>

@@ -12,7 +12,8 @@ module Queries
         now = Time.current
         Orm::School.insert_all!(Array.new(count) do |index|
           { public_id: "sch#{format('%011d', index)}", drena_id: drenas[index % drenas.size].id, name: format("École %03d", index),
-            school_type: %w[public private mixed][index % 3], cycle: "both", status: "active", created_at: now, updated_at: now }
+            school_type: %w[public private mixed][index % 3], cycle: "both", status: "active", created_at: now, updated_at: now,
+            school_code: format("aa%04d", index).tr("01", "ab") }
         end)
       end
 
@@ -34,13 +35,16 @@ module Queries
         assert_equal [ 2, 10 ], query(page: "99").then { [ it.page, it.rows.size ] }
         assert_equal 1, query(page: "-3").page
         assert_equal 1, query(page: "abc").page
+        # A query string such as page[]=2 or page[a]=1 hands an array or a hash: page 1, never a 500.
+        assert_equal 1, query(page: [ "2" ]).page
+        assert_equal 1, query(page: { "a" => "1" }).page
         assert_equal 1, query(page: nil).page
       end
 
       test "une ligne : DRENA, type, cycle, statut, classes de l'année et enseignants" do
         drena = create_drena(name: "Abidjan 1")
         school = create_school(drena:, name: "Lycée Classique d'Abidjan", sigle: "LCA", school_type: "mixed", cycle: "first",
-                               status: "draft")
+                               status: "draft", school_code: "k7m4qz")
         create_classroom(school:, school_year: YEAR)
         create_classroom(school:, school_year: YEAR)
         create_classroom(school:, school_year: "2025-2026")
@@ -48,7 +52,7 @@ module Queries
 
         assert_equal SchoolsQuery::Row.new(public_id: school.public_id, name: "Lycée Classique d'Abidjan", sigle: "LCA",
                                            drena_public_id: drena.public_id, drena_name: "Abidjan 1", school_type: "mixed", cycle: "first", status: "draft",
-                                           classrooms_count: 2, teachers_count: 1),
+                                           classrooms_count: 2, teachers_count: 1, school_code: "k7m4qz"),
                      query.rows.sole
       end
 

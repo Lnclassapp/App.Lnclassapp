@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolsController
 # Rôle : liste nationale filtrée, fiche, modification en modale, désactivation, suppression refusée tant qu'il est utilisé
-# ADR  : 0026, 0030, 0036 · UDR : 0006, 0036 · aucune création : un établissement n'entre que par l'import
+# ADR  : 0026, 0030, 0036, 0059 · UDR : 0006, 0036, 0046 · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
     LIST_FRAME = "schools".freeze
@@ -17,7 +17,9 @@ module Teams
     # « /teams/schools/new » n'a pas de route : il arrive ici comme un public_id inconnu, donc 404.
     def show
       @school = Queries::School::SchoolDetailQuery.new.call(public_id: params[:public_id])
-      render_not_found if @school.nil?
+      return render_not_found if @school.nil?
+
+      @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
     end
 
     def edit
@@ -49,8 +51,10 @@ module Teams
 
     private
 
+    # Sur la fiche, le bloc « Classes par niveau » suit le statut (« + » réservé à un établissement actif, UDR-0046).
     def respond_with_school(notice:)
       @school = schools_query.find(public_id: params[:public_id])
+      @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
       redirect_or_stream(notice:)
     end
 

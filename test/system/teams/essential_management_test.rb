@@ -24,7 +24,7 @@ class Teams::EssentialManagementTest < ApplicationSystemTestCase
   # PRD §4: messages are compared through their locale key, never written out in the test.
   def tl(key, **) = I18n.t("teams.essentials.#{key}", **)
 
-  def editor = find("trix-editor#essential_content")
+  def editor = find_rich_text_editor("trix-editor#essential_content")
 
   # The stream refreshes the host page by morphing (turbo:morph): the next modal opens once it is done.
   def expect_refresh
@@ -103,7 +103,7 @@ class Teams::EssentialManagementTest < ApplicationSystemTestCase
 
   test "a file dropped in the editor is refused: no attachment in V1" do
     open_in_modal(new_teams_course_essential_path(@course.slug))
-    assert_selector "trix-editor#essential_content"
+    find_rich_text_editor("trix-editor#essential_content")
 
     page.execute_script(<<~JS)
       document.querySelector("trix-editor#essential_content").editor.insertFile(new File(["x"], "schema.png", { type: "image/png" }))

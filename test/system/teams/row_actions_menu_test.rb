@@ -69,6 +69,46 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
     assert Orm::Drena.exists?(drena.id)
   end
 
+  # True when, the page brought down to the row by a vertical scroll only (the filters of the schools come first), the
+  # whole element lies inside the viewport with nothing scrolled sideways (page nor table), and the point at its middle
+  # is the element itself: the ⋮ is visible without any horizontal scroll.
+  def visible_without_horizontal_scroll?(selector)
+    page.evaluate_script(<<~JS)
+      (() => {
+        const element = document.querySelector(#{selector.to_json})
+        window.scrollTo(0, window.scrollY + element.getBoundingClientRect().top - window.innerHeight / 2)
+        const box = element.getBoundingClientRect()
+        const scroller = element.closest(".overflow-x-auto")
+        const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2)
+        return window.scrollX === 0 && scroller.scrollLeft === 0 && box.left >= 0 && box.top >= 0 &&
+          box.right <= document.documentElement.clientWidth && box.bottom <= window.innerHeight && element.contains(hit)
+      })()
+    JS
+  end
+
+  # finitions-generation-menu: at 390 px the column of the actions stays stuck to the right edge of each team table.
+  test "on a phone, the ⋮ of the first row of every team table is on screen at load, and opens its menu" do
+    create_school(name: "Lycée Classique d'Abidjan")
+    create_level(name: "Terminale")
+    create_series(name: "Série D")
+    create_material(name: "Sciences de la vie et de la Terre")
+    first_rows = { drenas_path => "#drenas", schools_path => "#schools_list", series_index_path => "#series",
+                   levels_path => "#levels", materials_path => "#materials" }
+
+    with_mobile_viewport do
+      first_rows.each do |path, body|
+        visit path
+        row = "#{body} > tr:first-child"
+        button = "#{row} button[aria-haspopup=menu]"
+        assert_selector button
+
+        assert visible_without_horizontal_scroll?(button), "#{path} : le ⋮ de la première ligne est hors de l'écran"
+        find(button).click
+        assert_selector "#{row} [role=menu] [role=menuitem]", minimum: 2, visible: true
+      end
+    end
+  end
+
   test "on a phone, the menu of a school row opens whole inside the screen, and the page never scrolls sideways" do
     school = create_school(name: "Lycée Classique d'Abidjan")
 

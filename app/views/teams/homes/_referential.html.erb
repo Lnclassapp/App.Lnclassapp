@@ -1,11 +1,12 @@
 <%# 🌐 UI · teams/homes/_referential — section « Référentiel » de l'accueil équipe (CA-25) %>
-<%# Rôle : compteurs des DRENA, niveaux, séries et matières, chacun vers son écran de gestion ; niveaux et leurs séries %>
-<%# ADR  : 0034 · UDR : 0018 %>
+<%# Rôle : compteurs des DRENA, niveaux, séries, matières et total du barème, chacun vers son écran de gestion ; niveaux et leurs séries %>
+<%# ADR  : 0034, 0058 · UDR : 0018, 0045 %>
 <%# locals: (home:, icon:) -%>
 <% figures = [ [ :drenas, home.drenas_count, drenas_path, "map-pin" ], [ :levels, home.levels.size, levels_path, "squares-2x2" ],
-               [ :series, home.series_count, series_index_path, "rectangle-stack" ], [ :materials, home.materials_count, materials_path, "book-open" ] ] %>
+               [ :series, home.series_count, series_index_path, "rectangle-stack" ], [ :materials, home.materials_count, materials_path, "book-open" ],
+               [ :classroom_plan, home.classroom_plan_total, classroom_plan_path, "calculator" ] ] %>
 <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon:, id: "team_home_referential" do %>
-  <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4">
+  <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
     <% figures.each do |figure, count, path, figure_icon| %>
       <li>
         <%= link_to path, class: "group flex h-full flex-col gap-3 rounded-ln border border-line p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>

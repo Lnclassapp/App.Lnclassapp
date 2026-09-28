@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/school_codes/update — succès de la régénération du code d'établissement %>
+<%# Rôle : toast qui donne le nouveau code, en-tête de la fiche remplacé (ce qui referme la confirmation) %>
+<%# ADR  : 0057 · UDR : 0044 %>
+<%= turbo_stream_toast @notice, type: :success %>
+<%= turbo_stream.replace "school_header", partial: "teams/schools/header", locals: { school: @school } %>

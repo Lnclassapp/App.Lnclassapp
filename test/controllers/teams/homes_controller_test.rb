@@ -79,6 +79,15 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "BC-10: the referential leads to the barème of the classrooms, with the total of a public lycée" do
+    seed_referential
+    sign_in_as @member
+
+    get team_home_path
+
+    assert_select "#team_home_referential a[href='#{classroom_plan_path}']", text: figure("referential.classroom_plan", 77)
+  end
+
   test "the counts follow the last creation, with no cache" do
     sign_in_as @member
     get team_home_path
@@ -183,6 +192,16 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "li#recent_import_#{report.public_id}", text: including("exercices.json")
     assert_select "li#recent_import_#{other.public_id}", text: including(I18n.t("import_kinds.schools"))
     assert_select "li#recent_import_#{other.public_id} *", text: including(".json"), count: 0
+  end
+
+  test "a running generation of the classrooms is « Génération en cours », not « Import en cours »" do
+    running = create_import_report(kind: "classrooms", checksum_sha256: nil, status: "importing")
+    sign_in_as @member
+
+    get_recent_content
+
+    assert_select "li#recent_import_#{running.public_id}", text: including("Génération en cours")
+    assert_select "li#recent_import_#{running.public_id}", text: including("Import en cours"), count: 0
   end
 
   test "nothing created yet: each recent list has its empty state" do

@@ -8,6 +8,7 @@ class ComponentsHelperTest < ActionView::TestCase
     attribute :name, :string
     attribute :level, :string
     attribute :terms, :boolean
+    attribute :pin, :string
   end
 
   # --- Icônes -----------------------------------------------------------------
@@ -160,6 +161,103 @@ class ComponentsHelperTest < ActionView::TestCase
 
   test "ui_field refuses an unknown type" do
     assert_raises(ArgumentError) { view.fields(:user) { |form| ui_field(form, :name, as: :color_wheel) } }
+  end
+
+  # --- Afficher le code PIN (UDR-0051) ----------------------------------------
+
+  test "a password field has no reveal button unless asked" do
+    show view.fields(:user, model: Record.new) { |form| ui_field(form, :pin, as: :password) }
+
+    assert_select "input#user_pin[type=password]"
+    assert_select "[data-controller=password-reveal]", 0
+    assert_select "button", 0
+  end
+
+  test "reveal: true renders the masked state, labelled « Afficher le code », hidden until JavaScript" do
+    show view.fields(:user, model: Record.new) { |form|
+      ui_field(form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                           autocomplete: "current-password", hint: "4 chiffres")
+    }
+
+    assert_select "div.relative[data-controller=password-reveal]" \
+                  "[data-password-reveal-show-label-value='Afficher le code']" \
+                  "[data-password-reveal-hide-label-value='Masquer le code']" do
+      assert_select "input#user_pin[type=password].pr-14[data-password-reveal-target=input][maxlength='4']" \
+                    "[inputmode=numeric][autocomplete=current-password][required][aria-describedby=user_pin_hint]"
+      assert_select "input + button[type=button][hidden][aria-controls=user_pin][aria-pressed=false]" \
+                    "[aria-label='Afficher le code'][data-password-reveal-target=toggle].w-tap.right-0"
+      assert_select "button[data-action~='password-reveal#toggle'][data-action~='mousedown->password-reveal#keepFocus']"
+    end
+    assert_select "p#user_pin_hint", text: "4 chiffres"
+  end
+
+  test "masked shows the eye icon, shown the eye-slash icon, both outline at the field icon size" do
+    show view.fields(:user, model: Record.new) { |form| ui_field(form, :pin, as: :password, reveal: true) }
+
+    masked = css_select("button span[data-icon=eye]").first
+    revealed = css_select("button span[data-icon=eye-slash]").first
+
+    assert_not masked.key?("hidden"), "PIN masqué : l'œil est visible"
+    assert revealed.key?("hidden"), "PIN masqué : l'œil barré attend l'état affiché"
+    assert_equal "maskedIcon", masked["data-password-reveal-target"]
+    assert_equal "revealedIcon", revealed["data-password-reveal-target"]
+    assert_equal icon_paths(ui_icon("eye", variant: :outline, size: :md)), icon_paths(masked)
+    assert_equal icon_paths(ui_icon("eye-slash", variant: :outline, size: :md)), icon_paths(revealed)
+    assert_not_equal icon_paths(masked), icon_paths(revealed)
+    assert_select "button svg.size-5[aria-hidden=true]", 2
+  end
+
+  test "reveal: true is refused outside a password field" do
+    error = assert_raises(ArgumentError) { view.fields(:user) { |form| ui_field(form, :name, reveal: true) } }
+
+    assert_match "reveal", error.message
+  end
+
+  test "an invalid PIN keeps its error wiring next to the reveal button" do
+    record = Record.new
+    record.errors.add(:pin, "PIN incorrect.")
+    show view.fields(:user, model: record) { |form| ui_field(form, :pin, as: :password, reveal: true) }
+
+    assert_select "input#user_pin.border-error[aria-invalid=true][aria-describedby=user_pin_error]"
+    assert_select "p#user_pin_error", text: "PIN incorrect."
+  end
+
+  # --- Groupe de boutons radio ------------------------------------------------
+
+  test "ui_radio_group renders a legend and one 48 px option per choice, checking the object's value" do
+    show view.fields(:user, model: Record.new(level: "5e")) { |form|
+      ui_radio_group(form, :level, label: "Niveau", required: true, choices: [ [ "Sixième", "6e" ], [ "Cinquième", "5e" ] ])
+    }
+
+    assert_select "fieldset#user_level > legend", text: /Niveau\s*\*/
+    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line", 2
+    assert_select "label", text: "Sixième" do
+      assert_select "input#user_level_6e[type=radio][name='user[level]'][value='6e'][required]:not([checked])"
+    end
+    assert_select "input#user_level_5e[type=radio][checked]"
+    assert_select "input[aria-invalid], input[aria-describedby], p", 0
+  end
+
+  test "ui_radio_group wires its hint and first error to every option" do
+    record = Record.new
+    record.errors.add(:level, "Premier")
+    record.errors.add(:level, "Second")
+    show view.fields(:user, model: record) { |form|
+      ui_radio_group(form, :level, hint: "Aide", columns: 3, choices: [ %w[6e 6e], %w[5e 5e] ])
+    }
+
+    assert_select "legend", text: "Level"
+    assert_select "legend span", 0
+    assert_select "div.sm\\:grid-cols-3 > label.border-error", 2
+    assert_select "input[type=radio]:not([required]):not([checked])[aria-invalid=true][aria-describedby='user_level_hint user_level_error']", 2
+    assert_select "fieldset > p#user_level_hint + p#user_level_error", text: "Premier"
+  end
+
+  test "ui_radio_group stacks its options on one column and refuses an unknown column count" do
+    show view.fields(:user, model: Record.new) { |form| ui_radio_group(form, :level, columns: 1, choices: [ %w[A a] ]) }
+
+    assert_select "fieldset div.grid:not([class*=grid-cols]) > label", 1
+    assert_raises(ArgumentError) { view.fields(:user) { |form| ui_radio_group(form, :level, columns: 4, choices: []) } }
   end
 
   # --- Modale, menu, onglets --------------------------------------------------
@@ -330,6 +428,14 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "img[alt=Awa][src='/a.png'].size-8"
   end
 
+  # ADR-0060, UDR-0047: a photo is round, cropped to fill, loaded lazily; the xl size serves the photo modal.
+  test "ui_avatar shows a photo round and cropped, lazily, in every size up to xl" do
+    show ui_avatar("Awa Koné", src: "/accounts/abc/photo?v=1", size: :xl)
+
+    assert_select "img[alt='Awa Koné'][src='/accounts/abc/photo?v=1'][loading=lazy][decoding=async].rounded-full.object-cover.size-28"
+    assert_includes ui_avatar("Awa Koné", size: :xl), "size-28"
+  end
+
   # --- Toasts -----------------------------------------------------------------
 
   test "ui_toast carries its message, title and delay" do
@@ -352,6 +458,17 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_equal :error, toast_type_for("alert")
     assert_equal :warning, toast_type_for(:warning)
     assert_equal :info, toast_type_for(:whatever)
+  end
+
+  test "flash_toast renders a flash message, or a message with its own title; any other value renders nothing" do
+    show flash_toast(:alert, "Échec") + flash_toast(:info, { "message" => "Une seule à la fois.", "title" => "Déjà en cours" })
+
+    assert_select "div[role=alert][data-toast-type=error]", text: /#{I18n.t("components.toast.titles.error")}\s*Échec/
+    assert_select "div[data-toast-type=info]:not([role=alert])" do
+      assert_select "p.font-semibold", text: "Déjà en cours"
+      assert_select "p.text-mute", text: "Une seule à la fois."
+    end
+    assert_nil flash_toast(:reload_document, true)
   end
 
   test "turbo_stream_toast appends the rendered toast to the stack" do
@@ -434,6 +551,12 @@ class ComponentsHelperTest < ActionView::TestCase
   private
 
   # Les helpers rendent leurs partials par `render`, qui accumule dans `rendered` : on n'examine que le fragment voulu.
+  # Les tracés d'une icône heroicons : ce qui la distingue d'une autre, quelle que soit la sérialisation.
+  def icon_paths(node)
+    node = Nokogiri::HTML5.fragment(node.to_s) unless node.respond_to?(:css)
+    node.css("svg path").map { it["d"] }
+  end
+
   def show(html)
     self.rendered = self.class.content_class.new(html.to_s)
   end

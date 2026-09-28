@@ -3,9 +3,9 @@ require "application_system_test_case"
 # Lot E, PRD §5 (V1 gate): the whole teaching loop on a blank base, through the real buttons only — no open_in_modal,
 # no stand-in controller, no factory. The team accepts the bootstrap invitation, builds the referential, a DRENA and a
 # public lycée by import (6 « Tle D » classrooms generated), then writes and publishes a course, a sheet and an exercise;
-# the teacher signs up, declares a classroom and assigns the exercise; the student joins by the code, plays the exercise
-# on a phone and wins « Diamant »; the teacher issues a recovery code and reads the result. Every write is wrapped in
-# assert_no_page_reload.
+# the teacher signs up with the school code the team read on the school page, declares a classroom and assigns the
+# exercise; the student joins by the code, plays the exercise on a phone and wins « Diamant »; the teacher issues a
+# recovery code and reads the result. Every write is wrapped in assert_no_page_reload.
 class BouclePedagogiqueTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
 
@@ -55,7 +55,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open]" do
         fill_in "level[name]", with: "Tle"
         fill_in "level[position]", with: "7"
-        select t("teams.levels.cycles.second"), from: "level[cycle]"
+        choose t("teams.levels.cycles.second")
         click_on t("teams.levels.new.submit")
       end
       assert_toast t("teams.levels.create.created", name: "Tle")
@@ -104,7 +104,17 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#drenas tr", text: /Abidjan 1\s+abidjan-1/
     end
 
+    team_sets_the_classroom_plan
     import_the_lycee
+  end
+
+  # D1 (owner, 2026-09-28): linking D to Tle filled its barème line, 6 public and 3 private, without any entry by hand.
+  def team_sets_the_classroom_plan
+    navigate_to team_home_path
+    click_referential(classroom_plan_path)
+    within("#classroom_plan_line_tle_d") { assert_text(/Tle\s+D\s+6\s+3/) }
+    assert_no_selector "[data-plan=undefined]"
+    within("#classroom_plan_total_public_both") { assert_text "6" }
   end
 
   # The only seed of production (ADR-0034, ADR-0038): its link is printed once, as the operator reads it.
@@ -137,8 +147,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_current_path team_home_path
   end
 
-  # A public lycée in the old application's format, enveloped (ADR-0039): Tle D gets its 6 classrooms, every other
-  # level of the scale is absent from the referential and counted as skipped.
+  # A public lycée in the old application's format, enveloped (ADR-0039): Tle D gets the 6 classrooms of the barème, and
+  # nothing else exists in the referential.
   def import_the_lycee
     file = json_file("ecoles", {
       "format" => "lnclass.schools", "version" => Entities::Catalog::ImportKind::VERSION, "drena" => "abidjan-1",
@@ -161,7 +171,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         assert_selector "#import_counter_imported", text: "1"
         assert_selector "#import_counter_errors", text: "0"
         assert_text "Classes générées : 6"
-        assert_text "Niveaux sautés"
+        assert_no_text "sautés"
       end
       within("turbo-frame#modal dialog[open]") { click_on t("teams.imports.create.close") }
       assert_no_selector "turbo-frame#modal dialog[open]"
@@ -173,6 +183,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     (1..6).each { |n| assert_selector "[id^=classroom_]", text: "Tle D #{n}" }
     assert_no_text "Tle D 7"
     assert_equal (1..6).map { "Tle D #{it}" }, Orm::Classroom.order(:name).pluck(:name)
+    # ADR-0057: the team reads the school code on the school's page, and hands it to the teacher.
+    @school_code = find("#school_code_value").text
   end
 
   def team_publishes_a_course_a_sheet_and_an_exercise
@@ -184,7 +196,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         select "Tle", from: "course[level_slug]"
         select "D", from: "course[series_slug]"
         select "SVT", from: "course[material_slug]"
-        type_rich_text find("trix-editor"), "L'ADN porte l'information génétique."
+        type_rich_text find_rich_text_editor, "L'ADN porte l'information génétique."
         click_on t("teams.courses.new.submit")
       end
       assert_toast t("teams.courses.create.created", name: COURSE)
@@ -205,7 +217,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       click_on t("catalog.courses.role_actions.new_essential")
       within "turbo-frame#modal dialog[open]" do
         fill_in "essential[name]", with: ESSENTIAL
-        type_rich_text find("trix-editor#essential_content"), "La méiose produit quatre cellules haploïdes."
+        type_rich_text find_rich_text_editor("trix-editor#essential_content"), "La méiose produit quatre cellules haploïdes."
         click_on t("teams.essentials.new.submit")
       end
       assert_toast t("teams.essentials.create.created", name: ESSENTIAL)
@@ -256,8 +268,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       fill_in "teacher_registration[first_name]", with: "Koffi"
       choose t("genders.male")
       fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
-      select "Abidjan 1", from: "teacher_registration[drena_public_id]"
-      select SCHOOL, from: "teacher_registration[school_public_id]"
+      fill_in "teacher_registration[school_code]", with: @school_code
       select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[pin]", with: "1357"
       fill_in "teacher_registration[pin_confirmation]", with: "1357"
