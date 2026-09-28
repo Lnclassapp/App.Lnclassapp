@@ -96,3 +96,9 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 
 - L'en-tête de la liste gagne une action secondaire, « Générer les classes manquantes » (`sparkles`), à gauche de « Importer des établissements », qui reste l'action principale. Sa confirmation et son suivi sont décrits par l'UDR-0043.
 - Le §4 « tout établissement a ses classes dès sa naissance » admet une exception : un établissement importé avant le référentiel les reçoit par cette génération (ADR-0056).
+
+## Amendement du 2026-09-28 — menu « Classes » de l'en-tête
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md). En cas d'écart, cette section fait foi.*
+
+- L'en-tête de la liste porte « Importer des établissements » (principale), puis le menu « Classes » (génération des classes manquantes, barème des classes) : voir UDR-0043 et UDR-0045, amendements du 2026-09-28.

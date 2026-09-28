@@ -79,3 +79,11 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 *Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#level-actions-<slug>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-level-<slug>"`, `:danger`). La modale `delete-level-<slug>` est rendue sans `trigger:`, son pied et son formulaire sont inchangés. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.
+
+## Amendement du 2026-09-28 — barème des classes
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), [ADR-0058](../adr/0058-bareme-des-classes-en-base.md), [UDR-0045](0045-bareme-des-classes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le badge « Hors génération des classes » devient « Hors barème »** (`[data-generation=outside]`, même place, même ton) : il signale un niveau sans aucun nombre positif au barème, public ou privé (au premier cycle, ou pour un couple encore lié). Le code du niveau n'entre plus en compte.
+- **L'aide `#levels-generation-help`** renvoie au barème (lien « Ouvrir le barème des classes », `classroom_plan_path`) au lieu de lister les codes reconnus.
+- La modale de modification n'affiche plus d'avertissement « code non reconnu », et l'indice du nom ne liste plus les « noms reconnus par la génération » : le slug ne sert plus à la génération.

@@ -65,3 +65,14 @@
 - Toute future action de masse sur une liste (tous les objets, pas un seul) suit ce patron : bouton secondaire d'en-tête, confirmation qui dit le périmètre, job suivi par un rapport.
 - L'écran des imports affiche des rapports qui ne sont pas des imports : chaque nouveau type sans fichier fournit ses libellés sous `teams.imports.status.by_kind.<kind>`.
 - UDR-0036 : l'en-tête de l'écran Établissements gagne cette seconde action ; « Importer des établissements » reste l'action principale.
+
+## Amendement du 2026-09-28 — menu « Classes »
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), demande du porteur du 2026-09-28, [UDR-0045](0045-bareme-des-classes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le bouton secondaire devient une entrée de menu.** L'en-tête de `teams/schools/index` porte, dans cet ordre : « Importer des établissements » (principale, inchangée), puis le menu **« Classes »** : `ui_dropdown(label: "Actions sur les classes", id: "schools-classrooms-menu", fixed: true, trigger: icône rectangle-group + « Classes »)` — déclencheur libellé avec chevron, pas un ⋮ : ces actions portent sur l'ensemble des établissements, pas sur un objet (UDR-0042 réserve le ⋮ aux objets).
+- Entrées : « Générer les classes manquantes » (`ui_dropdown_item dialog: "generate-classrooms-modal"`, icône `sparkles`), puis « Barème des classes » (`href: classroom_plan_path`, icône `calculator`).
+- La confirmation `dialog#generate-classrooms-modal` est rendue **sans `trigger:`**, sœur du menu ; son contenu, son pied, sa route et le suivi dans le rapport ne changent pas. L'entrée de menu l'ouvre (`dropdown#openDialog`), le focus revient au déclencheur à la fermeture.
+- La règle de la phrase du barème (`generate_rule_plan`) renvoie au « barème des classes » (ADR-0058), plus au « barème de l'import ».
+- Pas de libellé « Génération en cours » dans ce menu : ce comportement n'existe pas sur cette branche (chantier parallèle `finitions-generation-menu`) ; s'il arrive, il se place sur l'entrée « Générer les classes manquantes ».
+- Preuve : `test/controllers/teams/classroom_generations_controller_test.rb` (menu à droite de l'import, entrées, confirmation) ; `test/system/school/generate_classrooms_test.rb` (bureau et 390 px : ouvrir le menu, confirmer la génération, ouvrir le barème).
