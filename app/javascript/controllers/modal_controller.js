@@ -12,8 +12,14 @@ export default class extends Controller {
     if (this.openValue) this.open()
   }
 
+  // Servie ouverte dès le HTML (lisible sans JavaScript), la <dialog> l'est sans être modale : elle est rouverte par
+  // showModal(), qui refuse une boîte déjà ouverte, pour piéger le focus et poser le fond.
   open() {
-    if (!this.dialogTarget.open) this.dialogTarget.showModal()
+    const dialog = this.dialogTarget
+    if (dialog.open && dialog.matches(":modal")) return
+
+    dialog.removeAttribute("open")
+    dialog.showModal()
   }
 
   close() {
@@ -33,7 +39,8 @@ export default class extends Controller {
   // Chargée dans le frame « modal », la modale fermée libère le frame : le même lien pourra la recharger.
   closed() {
     const frame = this.element.closest("turbo-frame#modal")
-    if (!frame) return
+    // Une boîte déjà rouverte (open() juste après son arrivée) n'est pas fermée : le frame garde son contenu.
+    if (!frame || this.dialogTarget.open) return
 
     frame.removeAttribute("src")
     frame.replaceChildren()

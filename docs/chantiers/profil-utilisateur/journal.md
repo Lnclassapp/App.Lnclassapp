@@ -31,8 +31,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Sans JavaScript, les modales (dont celles du profil) restent fermées : `<dialog>` sans `open`, page blanche. Le repli HTML du serveur fonctionne. | Commun à toutes les modales de l'application (UDR-0006), hors périmètre | À ouvrir (repli sans JS des modales) |
-| Au verrouillage depuis le profil, seule la session en cours est fermée ; les autres sessions du compte restent ouvertes | Conforme au PRD (« la session en cours ») ; le verrou empêche toute nouvelle connexion | Aucun, à rediscuter si besoin |
+| Sans JavaScript, les modales (dont celles du profil) restent fermées : `<dialog>` sans `open`, page blanche. Le repli HTML du serveur fonctionne. | Commun à toutes les modales de l'application (UDR-0006), hors périmètre | [`modales-sans-js`](../modales-sans-js/memo.md), ouvert le 2026-09-28 à la demande du porteur |
+| Au verrouillage depuis le profil, seule la session en cours est fermée ; les autres sessions du compte restent ouvertes | Conforme au PRD (« la session en cours ») ; le verrou empêche toute nouvelle connexion. **Conservé par décision du porteur du 2026-09-28.** | Aucun |
 
 ## Recette (challenger empirique, 2026-09-28)
 
