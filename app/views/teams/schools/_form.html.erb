@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_form — modification d'un établissement, dans la modale d'edit (aucune création) %>
-<%# Rôle : nom, sigle, DRENA, type, statut, cycle en radios ; rappelle que changer le type ou le cycle ne touche à aucune classe %>
-<%# ADR  : 0030, 0036 · UDR : 0005, 0036 %>
+<%# Rôle : nom, sigle, DRENA, code national, type, statut, cycle en radios ; changer le type ou le cycle ne touche à aucune classe %>
+<%# ADR  : 0030, 0036, 0063 · UDR : 0005, 0036, 0050 %>
 <% school = Entities::School::School %>
 <%= form_with model: @form, scope: :school, url:, method: :patch, id: "school-form", class: "space-y-5" do |form| %>
   <%= ui_field form, :name, required: true, maxlength: school::NAME_MAX, autofocus: true,
@@ -10,6 +10,8 @@
                  hint: t(".sigle_hint", count: school::SIGLE_MAX) %>
     <%= ui_field form, :drena_public_id, as: :select, required: true, choices: drena_options.map { [ it.name, it.public_id ] } %>
   </div>
+  <%= ui_field form, :national_code, maxlength: Entities::School::NationalCode::LENGTH, inputmode: "numeric", autocomplete: "off",
+               hint: t(".national_code_hint") %>
   <div class="grid gap-5 sm:grid-cols-2">
     <%= ui_field form, :school_type, as: :select, required: true,
                  choices: school::SCHOOL_TYPES.map { [ t("school_types.#{it}"), it ] } %>

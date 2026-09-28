@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
 module Ports
   module School
     module SchoolRepositoryPort
@@ -12,9 +12,24 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
+      # Quel que soit son statut (ADR-0063). → Entities::School::School | nil
+      def find_by_id(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_id"
+      end
+
       # Quel que soit son statut : l'appelant décide (ADR-0057). → Entities::School::School | nil
       def find_by_school_code(school_code:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_school_code"
+      end
+
+      # Code national (ADR-0063), quel que soit le statut. → Entities::School::School | nil
+      def find_by_national_code(national_code:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_national_code"
+      end
+
+      # Codes nationaux déjà pris, pour l'import. → Set[String]
+      def taken_national_codes
+        raise NotImplementedError, "#{self.class} doit implémenter #taken_national_codes"
       end
 
       # school : Entities::School::School sans id, avec son school_code tiré par le domaine.
@@ -23,7 +38,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
-      # Ne touche jamais au code d'établissement. → Result(School) | failure(:conflict, errors: { name: [:taken] })
+      # Ne touche jamais au code d'établissement.
+      # → Result(School) | failure(:conflict, errors: { name: [:taken] } ou { national_code: [:taken] })
       def update(school:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end
@@ -39,7 +55,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
-      # rows : [{ public_id:, drena_id:, name:, sigle:, school_type:, cycle:, status:, school_code: }], public_id et
+      # rows : [{ public_id:, drena_id:, name:, sigle:, school_type:, cycle:, status:, national_code:, school_code: }], public_id et
       # school_code tirés par le domaine ; insert_all avec RETURNING, created_at et updated_at posés par le repository.
       # → [Inserted]
       def insert_many(rows:, at:)

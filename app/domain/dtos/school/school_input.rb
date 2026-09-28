@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::School::SchoolInput
-# Rôle : modification d'un établissement : DRENA, nom (150), sigle (20), type, statut et cycle ; jamais de création
-# ADR  : 0030, 0036 · UDR : 0036
+# Rôle : modification d'un établissement : DRENA, nom (150), sigle (20), type, statut, cycle, code national ; jamais de création
+# ADR  : 0030, 0036, 0063 · UDR : 0036, 0050
 module Dtos
   module School
     class SchoolInput
@@ -13,6 +13,7 @@ module Dtos
       attribute :school_type, :string
       attribute :status, :string
       attribute :cycle, :string
+      attribute :national_code, :string
 
       validates :drena_public_id, presence: true
       validates :name, presence: true, length: { maximum: Entities::School::School::NAME_MAX }
@@ -20,12 +21,14 @@ module Dtos
       validates :school_type, inclusion: { in: Entities::School::School::SCHOOL_TYPES }
       validates :status, inclusion: { in: Entities::School::School::STATUSES }
       validates :cycle, inclusion: { in: Entities::School::School::CYCLES }
+      validates :national_code, format: { with: Entities::School::NationalCode::FORMAT, allow_nil: true }
 
       def name = super.to_s.squish
       def sigle = super.to_s.squish.presence
+      def national_code = Entities::School::NationalCode.normalize(super)
 
       # La DRENA reste à part : le use case la résout par son public_id avant de construire l'entité.
-      def to_h = { name:, sigle:, school_type:, status:, cycle: }
+      def to_h = { name:, sigle:, school_type:, status:, cycle:, national_code: }
     end
   end
 end

@@ -1,0 +1,35 @@
+# Code national d'un établissement et enseignants en attente de validation, sur la fiche — ADR-0063, UDR-0050
+fr:
+  activemodel:
+    attributes:
+      dtos/school/school_input:
+        national_code: "Code national"
+    errors:
+      models:
+        dtos/school/school_input:
+          attributes:
+            national_code:
+              invalid: "Le code national compte 6 chiffres."
+              taken: "Ce code national est déjà celui d'un autre établissement."
+  teams:
+    schools:
+      header:
+        national_code: "Code national"
+      form:
+        national_code_hint: "6 chiffres, facultatif. Sert à l'inscription des enseignants sans code."
+      join_requests:
+        title: "Enseignants en attente (%{count})"
+        hint: "Inscrits sans code d'établissement : validez ceux qui enseignent ici. Un collègue déjà inscrit peut aussi les confirmer."
+        requested_on: "Demande du %{date}"
+        approve: "Valider"
+        approve_label: "Valider %{name}"
+        reject: "Refuser"
+        reject_title: "Refuser la demande de %{name} ?"
+        reject_warning: "Le compte restera bloqué sur l'écran d'attente. Vous pourrez toujours le supprimer ensuite."
+        confirm_reject: "Refuser la demande"
+        cancel: "Annuler"
+    join_requests:
+      update:
+        approved: "%{name} est rattaché(e) à l'établissement."
+        rejected: "La demande de %{name} est refusée."
+        already_decided: "Cette demande a déjà été traitée."

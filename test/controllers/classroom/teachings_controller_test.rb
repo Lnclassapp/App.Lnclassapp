@@ -103,14 +103,14 @@ class Classroom::TeachingsControllerTest < ActionDispatch::IntegrationTest
     assert_empty declared_ids
   end
 
-  test "a teacher without a primary school is refused" do
+  test "a teacher without a primary school is held on the waiting screen (ADR-0063)" do
     lost = create_teacher(school: @school, onboarded: false)
     Orm::TeacherSchool.where(teacher: lost).delete_all
     sign_in_as lost
 
     post classroom_teaching_path(@sixth1.public_id), as: :turbo_stream
 
-    assert_response :forbidden
+    assert_redirected_to pending_account_path
     assert_not Orm::TeacherClassroom.exists?(teacher: lost)
   end
 

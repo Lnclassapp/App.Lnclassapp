@@ -184,3 +184,10 @@ Ces totaux dépendent des liaisons `level_series` en base : un niveau ou une sé
 - `Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup:, plan:)` reçoit le barème : le domaine ne lit toujours aucune base.
 - Inchangé : correspondance par identifiant de niveau (le slug ne sert plus qu'à la reprise), `mixed` suit `private`, un collège ne prend que le premier cycle, noms « 6ème 1 » / « Tle D 3 », aucune classe existante régénérée.
 
+- **L'enseignant ne choisit plus son école : il la désigne par son code d'établissement**, transmis par l'équipe (saisi, ou porté par le lien `/e/<code>`). Un code inconnu, remplacé, ou d'un établissement inactif ou en brouillon est refusé par le même message. Le rattachement reste une ligne `teacher_schools` principale, créée dans la transaction du compte.
+- Le coût consenti « un enseignant peut se déclarer dans n'importe quelle classe de son école » est borné : « son école » est celle qui lui a transmis son code.
+- Chaque établissement naît avec son code (import) ; les établissements existants l'ont reçu par migration.
+
+## Amendement du 2026-09-28 — compte en attente (ADR-0063)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* Un enseignant sans école principale n'accède qu'à l'écran d'attente et à la déconnexion (garde de `AuthenticatedController`). L'inscription sans code (code national ou DRENA → établissement) crée ce compte, avec une demande `school_join_requests` que l'équipe ou un garant du même établissement décide.
