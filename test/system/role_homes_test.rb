@@ -72,7 +72,26 @@ class RoleHomesTest < ApplicationSystemTestCase
     end
   end
 
+  # Chantier tests-instables: back to a home already visited, Turbo first draws its cached copy (a preview), then the
+  # page received. On a slow network, the account menu opened on the preview vanished with it.
+  test "back home by the logo on a slow network, the account menu opens on the page received, not on its preview" do
+    sign_in_as @student
+    assert_home student_home_path
+    within("aside nav") { click_link tn(:courses) }
+    assert_current_path courses_path
+
+    on_a_slow_network do
+      back_home_by_logo(student_home_path)
+      with_account_menu { assert_selector "#account-menu a[role=menuitem]", text: tn(:profile) }
+      sleep SLOW_NETWORK_LATENCY / 1000.0
+      assert_selector "#account-menu a[role=menuitem][href='#{profile_path}']", text: tn(:profile)
+    end
+  end
+
   private
+
+  # The page received after a preview, under a loaded run.
+  VISIT_WAIT = 10
 
   # The page arrived in the shell, not on an error page (rendered in the bare layout): the sidebar is there.
   def assert_home(path, greeting: nil)
@@ -96,14 +115,19 @@ class RoleHomesTest < ApplicationSystemTestCase
       within(nav) { assert_selector "a[aria-current='page'][href='#{path}']", text: tn(key) }
       assert_selector "main#main", text: /\S/
     end
-    home = page.current_path
-    # The logo may lead back to the very page on screen (an account without active destination): the path alone would
-    # match before the visit ends, and the next step would act on the document about to be replaced. The mark on the
-    # old body is gone only once the new one is drawn.
+    back_home_by_logo(active.fetch(:home, page.current_path))
+  end
+
+  # The logo may lead back to the very page on screen (an account without active destination): the path alone would
+  # match before the visit ends, and the next step would act on the document about to be replaced. The mark on the
+  # old body is gone only once a new one is drawn; but a home already visited is first drawn from Turbo's cache (a
+  # preview), then replaced by the page received. The visit is over only once Turbo lifts aria-busy from <html>.
+  def back_home_by_logo(home)
     page.execute_script("document.body.dataset.leaving = 'true'")
     find("header a", match: :first).click
     assert_no_selector "body[data-leaving]"
-    assert_current_path active.fetch(:home, home)
+    assert_no_selector "html[aria-busy]", wait: VISIT_WAIT
+    assert_current_path home
   end
 
   # The account menu of the header: « Mon profil » opens the profile, in the shell of the role, and the entry is then
