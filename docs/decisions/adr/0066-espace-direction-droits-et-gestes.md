@@ -4,7 +4,7 @@
 |---|---|
 | **Statut** | Proposé |
 | **Date** | 2026-09-28 |
-| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-01 à ED-47, ED-55 |
+| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-01 à ED-47, ED-55, ED-57 à ED-59 |
 | **Remplace** | — |
 | **Amende** | [ADR-0044](./0044-rattachement-de-la-direction-par-invitation.md) (droits par fonction, invitations), [ADR-0057](./0057-code-d-etablissement.md) (la direction voit et régénère le code), [ADR-0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md) (la direction ajoute des classes, retire un enseignant), [ADR-0031](./0031-second-facteur-totp-pour-l-equipe.md) (second facteur de la direction), [ADR-0040](./0040-classe-principale-unique-de-l-eleve.md) (changement de classe) |
 | **Remplacé par** | — |
@@ -63,14 +63,17 @@ Options C et F retenues.
 
 ### 4.2 Second facteur (amendement de l'ADR-0031, application de l'ADR-0044 C-20)
 
-- `Entities::Identity::SessionState#privileged?` = rôle `team` ou `school_admin`. `ResolveSession` ne construit pas d'acteur pour une session privilégiée non vérifiée ; `SecondFactorPolicy` accepte les sessions privilégiées. Le parcours d'activation et de vérification est celui de l'équipe (ADR-0031), sans changement d'écran.
+- `Entities::Identity::SessionState#privileged?` = rôle `team` ou `school_admin`. `ResolveSession` ne construit pas d'acteur pour une session privilégiée non vérifiée ; `SecondFactorPolicy` accepte les sessions privilégiées. Activation, vérification et codes de secours sont ceux de l'ADR-0031.
+- **Deux écrans changent** : après la vérification, `Identity::SecondFactorsController` renvoie vers l'accueil **du rôle** (`redirect_to_home`), et non plus vers `team_home_path` ; le bouton « Terminé » des codes de secours (`identity/second_factor_enrollments/backup_codes`) mène à `home_path_for(role)`. Le sous-titre « Obligatoire pour les comptes de l'équipe. » devient « Obligatoire pour l'équipe et la direction. » (UDR-0052 §3.12).
 - `ResetSecondFactorPolicy` : l'équipe réinitialise le second facteur d'un membre de l'équipe **ou** d'un `school_admin`, jamais le sien. Personne de la direction ne réinitialise un second facteur.
+- **Direction sans établissement** : `AuthenticatedController#hold_detached_school_admin` renvoie un `school_admin` sans `school_id` vers l'écran d'attente sur **toute** page connectée, sauf l'écran d'attente, le profil (`identity/profile*`, `identity/account_photos`) et la déconnexion — comme `hold_pending_teacher` (ADR-0063). Le catalogue ne lui est donc plus ouvert.
 
 ### 4.3 La table des droits
 
 `Policies::School::StaffPolicy#call(actor:, school:, gesture:)` — `school` est un `Entities::School::School`.
 
-1. `actor.team?` → succès, quel que soit l'établissement et le geste (sous-rôles : V4).
+0. Geste hors de la table → `ArgumentError`, quel que soit l'acteur.
+1. `actor.team?` → succès, quel que soit l'établissement (sous-rôles : V4).
 2. Sinon `:forbidden` si l'acteur n'est pas `school_admin`, n'a pas de fonction, si `actor.school_id != school.id`, ou si l'établissement n'est pas `active`.
 3. Sinon `:forbidden` (`errors: { base: [:position] }`) si la fonction n'a pas le geste :
 
@@ -78,12 +81,14 @@ Options C et F retenues.
 |---|---|---|---|---|---|
 | `:read` — tableau de bord, classes, enseignants, élèves, personnel, code | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `:add_classroom` — classe suivante d'un niveau (ADR-0059) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `:place_student` — rattacher ou changer de classe par matricule | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `:place_student` — rattacher ou changer de classe | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `:invite_staff` — inviter Censeur, Éducateur, Secrétaire | ✅ | ✅ | | | ✅ |
-| `:invite_principal` — inviter un Proviseur | ✅ | | | | ✅ |
+| `:invite_principal` — inviter un Proviseur | | | | | ✅ |
 | `:regenerate_code` — régénérer le code d'établissement | ✅ | ✅ | | | ✅ |
 | `:detach_teacher` — retirer un enseignant de l'établissement | ✅ | ✅ | | | ✅ |
 | `:detach_staff` — retirer un membre du personnel | ✅ | ✅ | | | ✅ |
+
+`:invite_principal` est réservé à l'équipe : un établissement n'a qu'un Proviseur actif, qui ne peut donc jamais en inviter un second, et « seule l'équipe retire ou remplace le Proviseur » (memo). La passation d'un Proviseur à son successeur n'existe pas en V2 (point à confirmer, §9).
 
 Règles attachées aux gestes, dans les use cases (la policy ne voit pas la cible) :
 
@@ -93,39 +98,49 @@ Règles attachées aux gestes, dans les use cases (la policy ne voit pas la cibl
 
 ### 4.4 Les gestes et leurs use cases
 
-Tous prennent `actor:` et appellent `StaffPolicy` avec l'établissement lu **avant** toute écriture. Les contrôleurs de la direction ne portent jamais d'identifiant d'établissement dans l'URL : l'établissement est toujours celui de l'acteur (`current_actor.school_id`). Une ressource d'un autre établissement (classe, enseignant, membre) est donc **introuvable** (`:not_found`, 404), et le use case la refuse aussi quand on la lui passe (`:forbidden`) : double barrière, deux tests.
+**Règle des deux barrières.** Chaque use case de la direction reçoit `school_id:` — le contrôleur y passe **toujours** `current_actor.school_id`, jamais un paramètre de l'URL — et appelle `StaffPolicy` avec cet établissement, lu **avant** toute écriture. Donc :
 
-| Use case | Geste | Écritures (une transaction) | Refus | Audit |
+- établissement différent de celui de l'acteur → **`:forbidden`** (policy) — c'est le test de refus inter-établissements **au niveau du use case** ;
+- ressource (classe, enseignant, membre, élève) hors de l'établissement reçu → **`:not_found`** — c'est ce que voit le contrôleur (404), puisqu'il passe toujours le bon établissement.
+
+**Rien d'écrit sur un refus.** `TransactionPort#call` n'annule que sur exception : un use case qui écrit plusieurs lignes vérifie d'abord tout ce qui peut l'être sans écrire (fonction, établissement actif, Proviseur déjà présent), puis lève `Aborted` sur un `Result` en échec tardif (index unique sous concurrence), comme `JoinWithCode`.
+
+| Use case et signature | Geste | Écritures (une transaction) | Refus | Audit |
 |---|---|---|---|---|
-| `School::InviteStaffMember` (ADR-0044) | `:invite_staff`, ou `:invite_principal` si la fonction visée est `principal` | révoque les invitations expirées du numéro, crée `invitations` (`kind: "school_staff"`, 72 h) | `:conflict` : numéro qui a déjà un compte (`contact: [:taken]`), invitation en cours (`contact: [:already_invited]`), Proviseur actif déjà présent pour une invitation de Proviseur (`position: [:principal_taken]`), établissement non actif (`base: [:school_inactive]`) | `invitation.sent` `{ school_public_id:, position: }` |
-| `Identity::AcceptInvitation` (étendu) | — (le visiteur n'a que le lien, ADR-0028) | compte `school_admin`, puis `school_staffs` (fonction, établissement, `invited_by_id`), invitation acceptée | `:conflict` si le Proviseur est pris entre-temps (index unique) ou si l'établissement n'est plus actif : **rien n'est créé** | `invitation.accepted` `{ school_public_id:, position: }` |
-| `School::DetachStaffMember` (ADR-0044) | `:detach_staff` | `school_staffs.left_at`, suppression de **toutes** les sessions du compte | `:not_found` (membre d'un autre établissement ou déjà parti), `:forbidden` (`self`, `principal`) | `staff.detached` `{ school_public_id:, position: }` |
-| `School::RegenerateSchoolCode` (ADR-0057, policy changée) | `:regenerate_code` | inchangées | inchangés | inchangé (`school.changed`, `code_regenerated`) |
-| `Classroom::AddLevelClassroom` (ADR-0059, policy changée) | `:add_classroom` | inchangées | inchangés (`school_inactive`, `school_draft`, `name_taken`…) | inchangé |
-| `School::DetachTeacher` (nouveau) | `:detach_teacher` | supprime la ligne `teacher_schools` de cet établissement et les lignes `teacher_classrooms` des classes de cet établissement (liaisons, comme `WithdrawTeaching`, ADR-0030) ; **ne touche** ni aux assignations, ni aux sessions, ni aux classes, ni au compte, ni à la demande `school_join_requests` | `:not_found` (enseignant dont l'école principale n'est pas celle-ci) | `teacher.detached` `{ school_public_id:, classrooms_count: }` |
-| `School::RejoinSchoolWithCode` (nouveau) | — : l'acteur est l'enseignant lui-même, **sans** école principale et **sans** demande en attente | ligne `teacher_schools` principale (`attach_teacher`), comme l'inscription par code (ADR-0057) | code inconnu, remplacé, établissement inactif ou brouillon : la même erreur que l'inscription ; `:forbidden` pour un enseignant rattaché ou en attente | `school.changed` `{ change: "teacher_rejoined" }`, sujet l'établissement |
-| `School::FindStudentForPlacement` (nouveau, lecture sous règle) | `:place_student` | aucune | hors format : `:invalid` ; sinon **`:not_found` neutre** (ADR-0065) | aucun |
-| `School::PlaceStudent` (nouveau) | `:place_student` | verrou de la classe cible (`SELECT … FOR UPDATE`, comme `JoinWithCode`), clôt l'adhésion principale active (`left_at`), crée la nouvelle adhésion principale | `:not_found` neutre (mêmes cas que la recherche) ; classe d'un autre établissement, archivée ou d'une autre année : `:not_found` ; classe pleine : `:forbidden` `classroom_full` ; déjà dans cette classe : `:conflict` `already_member` | `student.placed` `{ classroom_public_id:, from_classroom_public_id: \| nil }` |
+| `School::InviteStaffMember#call(actor:, school_id:, dto:)` (ADR-0044) — `dto` : `Dtos::School::StaffInvitationInput` (`contact`, `position`) | `:invite_staff`, ou `:invite_principal` si `position == "principal"` | révoque les invitations expirées du numéro, crée `invitations` (`kind: "school_staff"`, 72 h) | `:conflict` : numéro qui a déjà un compte (`contact: [:taken]`), invitation en cours (`contact: [:already_invited]`), Proviseur actif pour une invitation de Proviseur (`position: [:principal_taken]`), établissement non actif (`base: [:school_inactive]`) | `invitation.sent` `{ school_public_id:, position: }` |
+| `Identity::AcceptInvitation#call(token:, dto:)` (étendu) | — (le visiteur n'a que le lien, ADR-0028) | vérifie d'abord établissement actif et Proviseur libre ; compte `school_admin`, `school_staffs` (fonction, établissement, `invited_by_id`), invitation acceptée ; `Aborted` si l'index du Proviseur refuse sous concurrence | `:conflict` (`base: [:no_longer_valid]`) : **rien n'est créé** | `invitation.accepted` `{ school_public_id:, position: }` |
+| `School::DetachStaffMember#call(actor:, school_id:, user_public_id:)` (ADR-0044) | `:detach_staff` | `school_staffs.left_at`, suppression de **toutes** les sessions du compte | `:not_found` (membre d'un autre établissement ou déjà parti), `:forbidden` (`self`, `principal`) | `staff.detached` `{ school_public_id:, position: }` |
+| `School::RegenerateSchoolCode#call(actor:, public_id:)` (ADR-0057, policy changée) | `:regenerate_code` | inchangées | inchangés | inchangé (`school.changed`, `code_regenerated`) |
+| `Classroom::AddLevelClassroom#call(actor:, school_public_id:, level_slug:, series_slug:)` (ADR-0059, policy changée) | `:add_classroom` | inchangées | inchangés (`school_inactive`, `school_draft`, `name_taken`…) | inchangé |
+| `School::DetachTeacher#call(actor:, school_id:, teacher_public_id:)` (nouveau) | `:detach_teacher` | supprime la ligne `teacher_schools` de cet établissement et les lignes `teacher_classrooms` des classes de cet établissement (liaisons, comme `WithdrawTeaching`, ADR-0030) ; **écrit un départ** `teacher_school_departures` ; **ne touche** ni aux assignations, ni aux sessions, ni aux classes, ni au compte, ni à la demande `school_join_requests` | `:not_found` (enseignant dont l'école principale n'est pas celle-ci) | `teacher.detached` `{ school_public_id:, classrooms_count: }` |
+| `School::RejoinSchoolWithCode#call(actor:, dto:)` (nouveau) — policy `Policies::School::RejoinSchoolPolicy` : enseignant **sans** école principale et **sans** demande `pending` (une demande `rejected` n'empêche pas) | — | ligne `teacher_schools` principale (`attach_teacher`), comme l'inscription par code (ADR-0057) | code inconnu, remplacé, établissement inactif ou brouillon, **ou établissement qui a retiré cet enseignant** (`departed?`) : la même erreur que l'inscription (`school_code: [:inclusion]`) ; `:forbidden` hors policy | `school.changed` `{ change: "teacher_rejoined" }`, sujet l'établissement |
+| `School::FindStudentForPlacement#call(actor:, school_id:, dto:)` (nouveau, lecture sous règle) — `dto` : `Dtos::School::StudentLookupInput` (`student_number`) | `:place_student` | aucune | hors format : `:invalid` ; sinon **`:not_found` neutre** (ADR-0065) | aucun |
+| `School::PlaceStudent#call(actor:, school_id:, classroom_public_id:, student_number: nil, student_public_id: nil)` (nouveau) — `student_number` depuis « Rattacher un élève », `student_public_id` depuis « Changer de classe » d'un élève **déjà placé dans cet établissement** | `:place_student` | verrou de la classe cible (`lock_by_public_id`, comme `JoinWithCode`), clôt l'adhésion principale active (`left_at`), crée la nouvelle adhésion principale ; `Aborted` si l'écriture échoue | `:not_found` neutre (mêmes cas que la recherche ; élève par `public_id` hors de l'établissement) ; classe hors de l'établissement, archivée ou d'une autre année : `:not_found` ; classe pleine : `:forbidden` `classroom_full` ; déjà dans cette classe : `:conflict` `already_member` | `student.placed` `{ classroom_public_id:, from_classroom_public_id: \| nil }` |
 
 **Élève rattachable** (`Entities::School::StudentPlacement.placeable?(membership:, school_id:, school_year:)`, distinct d'`Entities::Classroom::Placement`, qui place une classe dans un niveau) : un élève non anonymisé dont l'adhésion principale active (`left_at IS NULL`) est **absente**, ou dans une classe **archivée**, ou dans une classe d'une **autre année scolaire**, ou dans une classe **du même établissement**. Est **non rattachable** l'élève dont l'adhésion principale active est dans une classe **active de l'année en cours d'un autre établissement** : il change d'établissement en rejoignant sa nouvelle classe par son code (ADR-0040). La recherche et le rattachement appliquent la même règle, avec la même réponse neutre.
 
 **Changement de classe** (amendement de l'ADR-0040) : l'index unique `(classroom_id, student_id)` devient **partiel**, `WHERE left_at IS NULL`. Un élève peut avoir plusieurs lignes, closes, pour la même classe ; une seule ouverte. Ses résultats restent attachés à leurs devoirs.
 
-### 4.5 Ports (gelés au Lot 0)
+**Départ d'un enseignant** : table `teacher_school_departures` (`teacher_id` → users, `school_id` → schools, `detached_by_id` → users, `created_at` ; index `(teacher_id, school_id)` ; clés `RESTRICT`). Elle garde la trace du retrait (ce que la suppression des liaisons efface) et empêche l'enseignant retiré de revenir **seul**, par le code diffusé, dans l'établissement qui l'a retiré.
+
+### 4.5 Ports (gelés au Lot 0a, **implémentés au Lot 0a**)
+
+`test/architecture/port_contracts_test.rb` exige qu'un adaptateur implémente chaque méthode de son port : chaque méthode ajoutée ici est donc implémentée dans le même lot socle que le port.
 
 | Port | Méthode | Contrat |
 |---|---|---|
-| `Ports::School::StaffRepositoryPort` (**nouveau**) | `attach(user_id:, school_id:, position:, invited_by_id:, at:)` | `Result(StaffMember)` \| `failure(:conflict, errors: { base: [:other_school] })` \| `failure(:conflict, errors: { position: [:principal_taken] })` (index uniques) |
+| `Ports::School::StaffRepositoryPort` (**nouveau**) | `attach(user_id:, school_id:, position:, invited_by_id:, at:)` | `Result(StaffMember)` \| `failure(:conflict, errors: { base: [:other_school] })` \| `failure(:conflict, errors: { position: [:principal_taken] })` (index uniques) ; `ArgumentError` si le compte n'est pas `school_admin` (aucun `CHECK` ne peut lire `users`) |
 | | `find_active(user_public_id:, school_id:)` | `Entities::School::StaffMember \| nil` |
 | | `principal_active?(school_id:)` | `Boolean` |
 | | `detach(id:, at:)` | `true` |
 | `Ports::Identity::UserRepositoryPort` | `actor_for` | + `position` (§4.1) |
 | | `find_student_by_number(student_number:)`, `update_student_number(user_id:, student_number:)` | ADR-0065 |
-| `Ports::Identity::RegistrationRepositoryPort` | `create_student` | conflit `student_number` (ADR-0065) |
-| `Ports::Classroom::MembershipRepositoryPort` | `primary_for(student_id:)` | `Membership` gagne `school_id` et `school_year` de la classe |
+| `Ports::Identity::RegistrationRepositoryPort` | `create_student` | conflit `student_number` (ADR-0065) — implémenté au Lot F avec l'inscription |
+| `Ports::Classroom::MembershipRepositoryPort` | `primary_for(student_id:)` | `Membership` gagne `school_id`, `school_year`, `classroom_public_id` et `classroom_name` de la classe, **avec valeur par défaut `nil`** (`initialize` à défauts, comme `Actor`) : les appelants existants ne changent pas |
 | `Ports::Classroom::ClassroomRepositoryPort` | `lock_by_public_id(public_id:)` (**nouveau**) | verrou, `Classroom` avec `active_students_count` \| `nil` |
 | `Ports::Classroom::TeachingRepositoryPort` | `withdraw_all_in_school(teacher_id:, school_id:)` (**nouveau**) | `Integer` (lignes supprimées) |
-| `Ports::School::SchoolRepositoryPort` | `detach_teacher(teacher_id:, school_id:)` (**nouveau**) | `Result \| failure(:not_found)` |
+| `Ports::School::SchoolRepositoryPort` | `detach_teacher(teacher_id:, school_id:, detached_by_id:, at:)` (**nouveau**) | supprime la ligne `teacher_schools`, écrit le départ ; `Result \| failure(:not_found)` |
+| | `departed?(teacher_id:, school_id:)` (**nouveau**) | `Boolean` |
 | `Ports::School::JoinRequestRepositoryPort` | `pending_for(teacher_id:)` (**nouveau**) | `Entities::School::JoinRequest \| nil` (demande `pending` de l'enseignant) |
 
 Entités nouvelles : `Entities::School::StaffMember` (`id, user_id, school_id, position, invited_by_id, joined_at, left_at`), `Entities::School::StaffPosition` (`ALL`, `MANAGERS = %w[principal censor]`, table des gestes de §4.3) et `Entities::School::StudentPlacement` (règle « rattachable »). `Entities::Identity::Invitation::POSITIONS` reste dans `identity` (pas de dépendance d'un contexte à l'autre) ; un test vérifie qu'il égale `StaffPosition::ALL`.
@@ -137,10 +152,13 @@ Chaque liste lit l'établissement **de l'acteur** et lui seul ; aucune ne renvoi
 | Query | Contenu | Pagination |
 |---|---|---|
 | `Queries::School::DirectionSchoolQuery` | nom, DRENA, type, statut, code (affiché `K7M-4QZ`) de l'établissement de l'acteur | — |
+| `Queries::School::DirectionClassroomsQuery` | classes actives de l'année de l'établissement, par niveau, avec effectif et plafond (filtres et choix de classe) | — |
 | `Queries::School::StaffMembersQuery` | membres actifs : nom, fonction, date d'arrivée, `user_public_id` | non (≤ quelques dizaines) |
 | `Queries::School::SchoolTeachersQuery` | enseignants dont l'école principale est celle-ci, non anonymisés : nom, matière, classes de l'année dans cet établissement ; filtre par classe | 20 par page |
 | `Queries::School::SchoolStudentsQuery` | élèves placés (définition « élève placé », ADR-0062) dans une classe de l'établissement : nom, matricule, classe ; filtre par classe | 20 par page |
 | `Queries::School::SchoolDashboardQuery` | ADR-0067 | — |
+
+**Limites de débit** (en plus de l'ADR-0065) : l'invitation (`staff_invitations#create`, direction et équipe) est bornée à **10 par heure et par compte** — elle dit si un numéro a un compte Lnclass ; le retour par code (`school_rejoins#create`) à **10 par minute et par adresse**, compteur propre.
 
 ## 5. Conséquences
 
@@ -149,16 +167,18 @@ Chaque liste lit l'établissement **de l'acteur** et lui seul ; aucune ne renvoi
 - L'établissement se gère sans l'équipe : classes, personnel, code, enseignants, élèves.
 - Une seule table dit qui peut quoi ; un test paramétré la parcourt, cellule vide comprise.
 - Les gestes que le porteur a refusés restent refusés par construction : `ManageSchoolPolicy` et `ManageClassroomPolicy` ne changent pas.
-- Le retrait d'un enseignant ne perd ni classe, ni devoir, ni résultat ; l'enseignant garde son compte et peut rejoindre un autre établissement par son code.
+- Le retrait d'un enseignant ne perd ni classe, ni devoir, ni résultat ; l'enseignant garde son compte et peut rejoindre un **autre** établissement par son code ; le départ reste tracé.
 - Le changement de classe garde l'historique complet de l'élève.
 
 ### 🔴 Coûts consentis
 
 - **Deux notions « établissement » dans `Actor`** selon le rôle : l'école principale d'un enseignant, le rattachement actif d'une direction. Une policy qui oublie le rôle pourrait confondre les deux ; `StaffPolicy` teste le rôle d'abord.
 - **Un établissement inactif coupe sa direction sans prévenir** : elle voit l'écran d'attente. C'est voulu (memo), mais aucune notification.
-- **Un Proviseur parti bloque la fonction** tant que l'équipe ne l'a pas retiré ; un Censeur ne peut pas inviter de Proviseur.
+- **Un Proviseur parti bloque la fonction** tant que l'équipe ne l'a pas retiré ; **seule l'équipe invite un Proviseur** : pas de passation directe d'un Proviseur à son successeur.
 - **L'index partiel de `classroom_students`** autorise plusieurs lignes closes pour un même couple : une lecture historique « l'élève est passé par cette classe » doit dédoublonner.
-- **Retirer un enseignant supprime ses déclarations** d'enseignement (liaisons) : on ne sait plus qu'il a enseigné dans ces classes, sauf par l'audit et par `classroom_assignments.assigned_by_id`.
+- **Retirer un enseignant supprime ses déclarations** d'enseignement (liaisons) : on ne sait plus dans quelles classes il a enseigné, sauf par l'audit et par `classroom_assignments.assigned_by_id` ; `teacher_school_departures` garde seulement l'établissement.
+- **Un enseignant retiré par erreur ne revient pas seul** dans l'établissement qui l'a retiré : le code l'y refuse. En V2, aucun écran ne lève ce refus (ni la direction, ni l'équipe) ; il faut un chantier de suivi (V3, `multi-etablissements-enseignant`). Sans ce refus, le retrait n'aurait aucun effet : le code est diffusé à tous les enseignants.
+- **L'invitation est un oracle des numéros** : elle dit à un Proviseur ou un Censeur si un numéro a déjà un compte Lnclass, numéros d'élèves compris. Borné à 10 invitations par heure et par compte, tracé par `invitation.sent` ; le message ne dit ni le rôle ni le nom du compte.
 - **L'enseignant retiré reste en session** : il est renvoyé vers l'écran d'attente à sa requête suivante (garde de l'ADR-0063), sans fermeture de session.
 - **Un enseignant retiré qui avait une demande approuvée** (démarrage à froid) ne peut pas en recréer une : l'index unique `school_join_requests.teacher_id` l'en empêche. Il revient seulement par un code d'établissement.
 - **Une invitation ne vise qu'un numéro sans compte** : un enseignant qui devient Censeur, ou un ancien membre qu'on réinvite, doit utiliser un autre numéro, ou attendre un chantier de rattachement d'un compte existant.
@@ -178,13 +198,15 @@ module Entities
       ALL = %w[principal censor educator secretary].freeze
       MANAGERS = %w[principal censor].freeze
       EVERYONE = %i[read add_classroom place_student].freeze
+      MANAGE = %i[invite_staff regenerate_code detach_teacher detach_staff].freeze
       GESTURES = {
-        "principal" => [ *EVERYONE, :invite_staff, :invite_principal, :regenerate_code, :detach_teacher, :detach_staff ],
-        "censor" => [ *EVERYONE, :invite_staff, :regenerate_code, :detach_teacher, :detach_staff ],
+        "principal" => [ *EVERYONE, *MANAGE ],
+        "censor" => [ *EVERYONE, *MANAGE ],
         "educator" => EVERYONE,
         "secretary" => EVERYONE
       }.freeze
-      ALL_GESTURES = GESTURES.values.flatten.uniq.freeze
+      # :invite_principal n'est à aucune fonction : l'équipe seule (StaffPolicy, règle 1).
+      ALL_GESTURES = [ *EVERYONE, *MANAGE, :invite_principal ].freeze
 
       def self.allows?(position, gesture)
         raise ArgumentError, "geste inconnu : #{gesture.inspect}" unless ALL_GESTURES.include?(gesture)
@@ -205,7 +227,8 @@ module Policies
   module School
     class StaffPolicy
       def call(actor:, school:, gesture:)
-        return Shared::Result.success if actor&.team? && Entities::School::StaffPosition::ALL_GESTURES.include?(gesture)
+        raise ArgumentError, "geste inconnu : #{gesture.inspect}" unless Entities::School::StaffPosition::ALL_GESTURES.include?(gesture)
+        return Shared::Result.success if actor&.team?
         return Shared::Result.failure(:forbidden) unless member_of?(actor, school)
         return Shared::Result.failure(:forbidden, errors: { base: [ :position ] }) unless
           Entities::School::StaffPosition.allows?(actor.position, gesture)
@@ -225,6 +248,15 @@ end
 
 ```ruby
 # db/migrate/20260929090100_create_school_staffs.rb — ADR-0044 §6, inchangé
+# db/migrate/20260929090300_create_teacher_school_departures.rb
+create_table :teacher_school_departures do |t|
+  t.references :teacher, null: false, foreign_key: { to_table: :users }, index: false
+  t.references :school, null: false, foreign_key: true
+  t.references :detached_by, null: false, foreign_key: { to_table: :users }
+  t.datetime :created_at, null: false
+end
+add_index :teacher_school_departures, %i[teacher_id school_id]
+
 # db/migrate/20260929090200_partial_unique_classroom_students.rb
 class PartialUniqueClassroomStudents < ActiveRecord::Migration[8.1]
   def change
@@ -242,7 +274,10 @@ Contrôleur de base : `SchoolAdmin::BaseController < AuthenticatedController`, `
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `test/domain/policies/school/staff_policy_test.rb` : **chaque cellule** de la table (§4.3), y compris les vides ; un membre d'un établissement A refusé sur B pour **chaque** geste ; établissement inactif refusé ; `school_admin` sans fonction refusé ; équipe acceptée partout ; geste inconnu → `ArgumentError`.
+- `test/domain/policies/school/staff_policy_test.rb` : **chaque cellule** de la table (§4.3), y compris les vides ; un membre d'un établissement A refusé sur B pour **chaque** geste ; établissement inactif refusé ; `school_admin` sans fonction refusé ; équipe acceptée partout ; geste inconnu → `ArgumentError` pour l'équipe, un membre et un visiteur.
+- `test/architecture/port_contracts_test.rb` (existant) : chaque méthode ajoutée au §4.5 a son adaptateur dès le Lot 0a.
+- `test/architecture/use_case_policies_test.rb` (existant) : chaque nouveau use case prend `policy:` (dont `RejoinSchoolWithCode` → `RejoinSchoolPolicy`).
+- `test/domain/use_cases/school/rejoin_school_with_code_test.rb` : l'établissement qui a retiré l'enseignant répond comme un code invalide.
 - Un test de use case par geste du §4.4, dont un **refus inter-établissements** et, pour les gestes de gestion, un **refus Éducateur et Secrétaire**.
 - `test/domain/use_cases/school/detach_teacher_test.rb` : aucune assignation, session, classe ni demande touchée ; seules les déclarations des classes de **cet** établissement disparaissent.
 - `test/infrastructure/repositories/school/staff_repository_test.rb` : second rattachement actif → `:conflict other_school` ; second Proviseur actif → `:conflict principal_taken`.
@@ -253,9 +288,9 @@ Contrôleur de base : `SchoolAdmin::BaseController < AuthenticatedController`, `
 
 ## 8. Remplace, complète, amende
 
-- **Amende l'ADR-0044** : invitations par le Proviseur et le Censeur seulement (le Proviseur seul invite un Proviseur) ; retrait d'un membre par le Proviseur, le Censeur ou l'équipe, jamais de soi ni d'un Proviseur par la direction ; `School::InviteStaffPolicy` n'existe pas, `StaffPolicy` la remplace ; une invitation ne vise qu'un numéro sans compte ; journal `staff.detached` avec la fonction.
+- **Amende l'ADR-0044** : invitations par le Proviseur et le Censeur seulement, un Proviseur par l'équipe seule ; retrait d'un membre par le Proviseur, le Censeur ou l'équipe, jamais de soi ni d'un Proviseur par la direction ; `School::InviteStaffPolicy` n'existe pas, `StaffPolicy` la remplace ; une invitation ne vise qu'un numéro sans compte ; journal `staff.detached` avec la fonction.
 - **Amende l'ADR-0057** : `RegenerateSchoolCode` est autorisé par `StaffPolicy` (`:regenerate_code`) ; toute la direction lit le code ; `ManageSchoolPolicy` reste à l'équipe.
-- **Amende l'ADR-0030** : `AddLevelClassroom` est autorisé par `StaffPolicy` (`:add_classroom`) ; `CreateClassroom` et `RemoveLevelClassroom` restent à l'équipe (`ManageClassroomPolicy`) ; la direction retire un enseignant de l'établissement (`DetachTeacher`), et un enseignant sans école rejoint un établissement par son code (`RejoinSchoolWithCode`).
+- **Amende l'ADR-0030** (et crée `teacher_school_departures`) : `AddLevelClassroom` est autorisé par `StaffPolicy` (`:add_classroom`) ; `CreateClassroom` et `RemoveLevelClassroom` restent à l'équipe (`ManageClassroomPolicy`) ; la direction retire un enseignant de l'établissement (`DetachTeacher`), et un enseignant sans école rejoint un établissement par son code (`RejoinSchoolWithCode`).
 - **Amende l'ADR-0031** : le second facteur et sa réinitialisation par l'équipe valent pour `school_admin`.
 - **Amende l'ADR-0040** : index unique partiel `WHERE left_at IS NULL` ; la direction change un élève de classe.
 - **Complète l'ADR-0063** : la direction ne valide pas les comptes en attente (Q1) ; `ReviewJoinRequest` et `VouchForTeacher` ne changent pas.
@@ -267,6 +302,8 @@ Décisions prises par délégation (memo, 2026-09-28), amendables :
 - La direction n'a **pas** le « − » (retrait de la dernière classe jamais utilisée) : seulement le « + » (Q3 le limite à « ajouter la classe suivante »).
 - Toute la direction **lit** le code d'établissement ; seuls le Proviseur et le Censeur le régénèrent.
 - Une invitation ne vise qu'un numéro **sans** compte Lnclass.
-- Un enseignant retiré revient **seulement** par un code d'établissement, depuis son écran d'attente.
+- Un enseignant retiré revient **seulement** par un code d'établissement, depuis son écran d'attente, et **jamais** dans l'établissement qui l'a retiré (aucun écran ne lève ce refus en V2).
+- **Seule l'équipe invite un Proviseur** ; pas de passation d'un Proviseur à son successeur. (Le memo disait « seul un Proviseur invite un Proviseur » et « un seul Proviseur actif » : les deux ensemble rendaient le geste impossible.)
+- Invitations bornées à 10 par heure et par compte.
 - La direction voit le **code d'adhésion** de ses classes sans pouvoir le régénérer ni le fermer (ADR-0041 : « direction de l'école (V2) » reste à trancher).
 - Un établissement inactif renvoie sa direction à l'écran d'attente.

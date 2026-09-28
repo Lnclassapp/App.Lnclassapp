@@ -4,9 +4,9 @@
 |---|---|
 | **Statut** | Proposé |
 | **Date** | 2026-09-28 |
-| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-01 à ED-47, ED-56 |
+| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-01 à ED-47, ED-56 à ED-59 |
 | **ADR lié** | [ADR-0066](../adr/0066-espace-direction-droits-et-gestes.md) (droits, gestes) · [ADR-0067](../adr/0067-tableau-de-bord-de-l-etablissement.md) (tableau de bord) · [ADR-0065](../adr/0065-matricule-de-l-eleve.md) (matricule) · [ADR-0044](../adr/0044-rattachement-de-la-direction-par-invitation.md) · [ADR-0057](../adr/0057-code-d-etablissement.md) · [ADR-0059](../adr/0059-ajuster-les-classes-d-un-niveau.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0042](0042-actions-de-ligne-dans-un-menu.md) |
-| **Amende** | [UDR-0006](0006-shell-applicatif-par-role.md) (cinquième destination de la direction) · [UDR-0019](0019-invitation-equipe.md) (acceptation d'une invitation de direction) · [UDR-0036](0036-gestion-des-etablissements.md) (section « Direction » de la fiche) · [UDR-0041](0041-page-profil.md) (fonction et établissement) · [UDR-0050](0050-inviter-un-collegue-et-croissance.md) (écran d'attente) · ferme **C-31** ([UDR-0002](0002-ui-ux-de-l-organisation-scolaire.md)) |
+| **Amende** | [UDR-0006](0006-shell-applicatif-par-role.md) (cinquième destination de la direction) · [UDR-0019](0019-invitation-equipe.md) (acceptation d'une invitation de direction, second facteur) · [UDR-0036](0036-gestion-des-etablissements.md) (section « Direction » de la fiche) · [UDR-0041](0041-page-profil.md) (fonction et établissement) · [UDR-0050](0050-inviter-un-collegue-et-croissance.md) (écran d'attente) · ferme **C-31** ([UDR-0002](0002-ui-ux-de-l-organisation-scolaire.md)) |
 | **Remplacé par** | — |
 
 ---
@@ -50,13 +50,15 @@ La contradiction **C-31** (feuille de route §4) reste ouverte : l'UDR-0002 pré
 | `GET /school-admin/students/placement/new` | `student_placements#new` | `new_school_admin_student_placement_path` |
 | `POST /school-admin/students/placement/lookup` | `student_placements#lookup` | `lookup_school_admin_student_placement_path` |
 | `POST /school-admin/students/placement` | `student_placements#create` | `school_admin_student_placement_path` |
+| `GET /school-admin/students/:student_public_id/placement/edit` | `student_placements#edit` | `school_admin_edit_student_placement_path` |
+| `PATCH /school-admin/students/:student_public_id/placement` | `student_placements#update` | `school_admin_update_student_placement_path` |
 | `GET /school-admin/school` | `schools#show` | `school_admin_school_path` |
 | `GET` · `PATCH /school-admin/school/code` | `school_codes#show` · `#update` | `school_admin_school_code_path` |
 | `GET /school-admin/school/staff` | `staff_members#index` | `school_admin_staff_members_path` |
 | `DELETE /school-admin/school/staff/:user_public_id` | `staff_members#destroy` | `school_admin_staff_member_path` |
 | `GET …/school/staff/invitations/new` · `POST …/school/staff/invitations` | `staff_invitations#new` · `#create` | `new_school_admin_staff_invitation_path` · `school_admin_staff_invitations_path` |
 
-Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resources :staff_members, only: %i[index destroy], path: "staff", param: :user_public_id, controller: "school_staff_members"` et `resources :staff_invitations, only: %i[new create], path: "staff/invitations", controller: "school_staff_invitations"`. Côté identité : `post "account/pending/school", to: "identity/school_rejoins#create", as: :school_rejoin`.
+Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resources :staff_members, only: %i[index destroy], path: "staff", param: :user_public_id, controller: "school_staff_members"` et `resources :staff_invitations, only: %i[new create], path: "staff/invitations", controller: "school_staff_invitations"`. Côté identité : `post "account/pending/school", to: "identity/school_rejoins#create", as: :school_rejoin`. Les deux routes de changement de classe se déclarent dans le `scope … as: "school_admin"` avec `as: :edit_student_placement` et `as: :update_student_placement` ; le test de routage du Lot 0b fixe les noms de helper exacts de ce tableau (19 routes de la direction).
 
 **Contrôleurs** : tout contrôleur `SchoolAdmin::` hérite de `SchoolAdmin::BaseController` (`allow_roles :school_admin`, renvoi vers `pending_account_path` sans établissement, ADR-0066). Aucun ne lit `params[:school_…]` : l'établissement est `current_actor.school_id`. Une ressource d'un autre établissement répond **404** (`render_not_found`).
 
@@ -79,7 +81,7 @@ Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resource
 
 **Structure**
 - `ui_page_header(title: "Tableau de bord", subtitle: <nom de l'établissement>)`.
-- `section#dashboard_totals` (`aria-labelledby="dashboard_totals_title"`, titre `sr-only` « Chiffres de l'établissement ») : grille `grid grid-cols-3 gap-3` de trois `ui_card(padding: :md)` : « Classes », « Enseignants », « Élèves » ; chiffre `text-3xl`, libellé `text-sm text-mute`. Chaque carte est un lien (`href:`) vers sa destination.
+- `section#dashboard_totals` (`aria-labelledby="dashboard_totals_title"`, titre `sr-only` « Chiffres de l'établissement ») : grille `grid grid-cols-3 gap-3` de trois `ui_card(padding: :md)` (exception assumée à la règle des deux colonnes du §3.0 : trois chiffres courts tiennent à 390 px) : « Classes », « Enseignants », « Élèves » ; chiffre `text-3xl`, libellé `text-sm text-mute`. Chaque carte est un lien (`href:`) vers sa destination.
 - `section#dashboard_classrooms` (`aria-labelledby`, `h2` « Mes classes ») : une `ui_card` contenant `ul` de `li#dashboard_classroom_<public_id>`, triés par niveau puis nom. Chaque `li` est un lien pleine largeur vers `school_admin_classroom_path` (`min-h-tap`), `grid grid-cols-2 sm:grid-cols-6 gap-2 py-3 border-t border-line` :
   - nom de la classe (`font-medium`, `sm:col-span-2`) et niveau (`text-sm text-mute`) ;
   - « Effectif » `34 / 80` ; « Devoirs » `12` ; « Rendu » `68 %` ; « Moyenne » `54 %`, chacun avec son libellé `text-2xs text-mute uppercase` au-dessus (visible en mobile, `sm:sr-only` en bureau, où une ligne d'en-tête `div[aria-hidden]` les porte).
@@ -110,7 +112,7 @@ Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resource
 
 **États** : vide → `ui_empty_state(icon: "academic-cap", title: "Aucun niveau ouvert", description: "Le référentiel ne propose aucun niveau à cet établissement. Contactez l'équipe Lnclass.")` ; chargement : `aria-busy` du formulaire pendant l'envoi ; erreur : toast ; succès : toast et ligne remplacée.
 
-**Accessibilité** : `div[role=group]` de chaque ligne nommé « <niveau> : <n> classes » ; le « + » a son nom `sr-only` ; le focus reste sur le « + » après le remplacement (Turbo Stream `replace` suivi de `focus` via `autofocus` sur le bouton re-rendu de la ligne ciblée).
+**Accessibilité** : `div[role=group]` de chaque ligne nommé « <niveau> : <n> classes » ; le « + » a son nom `sr-only` ; le résultat est annoncé par le toast (région `#toasts` `aria-live`) ; le focus n'est pas déplacé par le code (aucun contrôleur Stimulus nouveau) : après le `replace`, il revient au document, ce qui est accepté.
 
 ### 3.4 Page d'une classe (`school_admin/classrooms/show`)
 
@@ -153,16 +155,17 @@ Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resource
 **Structure de la liste**
 - `ui_page_header(title: "Élèves", subtitle: "<n> élèves")` avec, en action, `ui_button` « Rattacher un élève » (`primary`, icône `user-plus`, `href: new_school_admin_student_placement_path`, `data: { turbo_frame: "modal" }`), pour **toutes** les fonctions.
 - `form#students-filter` : comme 3.5 (`students_list`, `name="classroom"`).
-- `turbo_frame_tag "students_list"` : `ul#school_students` de `li#student_<public_id>` : `ui_avatar` (initiales), nom, matricule (`font-mono tracking-wider text-sm text-mute`, `aria-label` « Matricule <valeur épelée> »), classe (badge texte) ; `ui_dropdown(label: "Actions pour <nom>")` avec l'item « Changer de classe », qui est un `button_to` `POST lookup_school_admin_student_placement_path` (champ caché `student_number`, `data-turbo-frame="modal"`). Aucun numéro de téléphone, aucune note. Puis `ui_pagination`.
+- `turbo_frame_tag "students_list"` : `ul#school_students` de `li#student_<public_id>` : `ui_avatar` (initiales), nom, matricule (`font-mono tracking-wider text-sm text-mute`, `aria-label` « Matricule <valeur épelée> »), classe (badge texte) ; `ui_dropdown(label: "Actions pour <nom>")` avec l'item « Changer de classe » : `ui_dropdown_item` lien vers `school_admin_edit_student_placement_path(public_id)`, `frame: "modal"` — il ouvre directement l'étape 2 **par l'identifiant public** de l'élève, sans matricule ni compteur de débit (l'élève est déjà dans l'établissement : rien à sonder). Aucun numéro de téléphone, aucune note. Puis `ui_pagination`.
 
 **Structure de la modale de rattachement** (`turbo_frame_tag "modal"` → `ui_modal(id: "student-placement-modal", open: true, title: "Rattacher un élève")`)
 - **Étape 1** (`new`, et re-rendu de `lookup` en échec) : `form#student-lookup-form` (`POST lookup_school_admin_student_placement_path`, scope `student_lookup`) : `ui_field :student_number`, libellé « Matricule de l'élève », `required`, `maxlength` 16, `autocomplete="off"`, `autocapitalize="characters"`, `spellcheck=false`, `inputmode="text"`, `placeholder` « 12345678A », classes `font-mono tracking-wider uppercase`, aide « Le matricule complet, 8 chiffres et une lettre. ». Pied : « Annuler » et « Rechercher » (`type: :submit`, `form: "student-lookup-form"`).
-- **Étape 2** (`lookup` réussi, et re-rendu de `create` en échec) : `div#student-placement-candidate` (`bg-brand-soft border border-brand/30 rounded-ln px-4 py-3`) : nom en `font-display font-extrabold`, matricule `font-mono`, situation : « Actuellement en <classe> » (classe de cet établissement) ou « Sans classe cette année ». Puis `form#student-placement-form` (`POST school_admin_student_placement_path`, scope `student_placement`) : champ caché `student_number`, `ui_field :classroom_public_id, as: :select` libellé « Classe », `required`, classes actives de l'année groupées par niveau (« 6ème 2 — 34 / 80 »), la classe actuelle en `disabled` avec « (classe actuelle) ». Pied : « Retour » (`secondary`, lien vers `new_school_admin_student_placement_path`, `data-turbo-frame="modal"`) et « Rattacher » (`primary`, `type: :submit`) — « Changer de classe » si l'élève est déjà dans l'établissement.
+- **Étape 2** (`lookup` réussi, et re-rendu de `create` en échec) : `div#student-placement-candidate` (`bg-brand-soft border border-brand/30 rounded-ln px-4 py-3`) : nom en `font-display font-extrabold`, matricule `font-mono`, situation : « Actuellement en <classe> » (classe de cet établissement) ou « Sans classe cette année ». Puis `form#student-placement-form` (`POST school_admin_student_placement_path`, scope `student_placement`) : champ caché `student_number` (depuis la recherche) — ou, ouvert par « Changer de classe », `form_with url: school_admin_update_student_placement_path(public_id), method: :patch` sans matricule — puis `ui_field :classroom_public_id, as: :select` libellé « Classe », `required`, classes actives de l'année groupées par niveau (« 6ème 2 — 34 / 80 »), la classe actuelle en `disabled` avec « (classe actuelle) ». Pied : « Retour » (`secondary`, lien vers `new_school_admin_student_placement_path`, `data-turbo-frame="modal"`) et « Rattacher » (`primary`, `type: :submit`) — « Changer de classe » si l'élève est déjà dans l'établissement.
 
 **Comportement**
-- `lookup` : format invalide → 422, étape 1, erreur sous le champ « Le matricule compte 8 chiffres et une lettre, par exemple 12345678A. », **sans lecture en base** ; introuvable ou non rattachable → **422, étape 1, erreur sous le champ « Aucun élève ne peut être rattaché avec ce matricule. Vérifiez-le auprès de l'élève. »** — mêmes octets pour les deux cas ; trouvé → 200, étape 2.
+- `lookup` : format invalide → 422, étape 1, erreur sous le champ « Le matricule compte 8 chiffres et une lettre, par exemple 12345678A. », saisie gardée, **sans lecture en base** ; introuvable ou non rattachable → **422, étape 1, champ re-rendu vide, erreur sous le champ « Aucun élève ne peut être rattaché avec ce matricule. Vérifiez-le auprès de l'élève. »** — mêmes octets pour tous ces cas, jeton CSRF excepté (le champ vide retire aussi le matricule de la réponse) ; trouvé → 200, étape 2.
+- `edit` / `update` (changement de classe par identifiant public) : élève non placé dans l'établissement → 404 ; mêmes refus que `create` pour la classe ; **hors** du compteur de débit.
 - `create` : succès → Turbo Stream : toast `success` « <nom> est rattaché(e) à <classe>. », `replace "students_list"` (première page, sans filtre), fermeture de la modale (`turbo_stream.update "modal", ""`) ; repli HTML : 303 vers `school_admin_students_path` avec `notice`. Classe pleine → 422, étape 2, alerte `role="alert"` `bg-error-soft text-error` « Cette classe est complète (80 / 80). Choisissez-en une autre. » ; déjà dans cette classe → 422, étape 2, « <nom> est déjà dans cette classe. » ; élève devenu non rattachable ou introuvable entre les deux étapes → 422, étape 1 et le message neutre ; classe d'un autre établissement ou archivée → 404 (toast).
-- **Débit** (ADR-0065) : `lookup` et `create` partagent 10 par minute et 100 par jour par compte ; au-delà, **429**, la modale affiche `ui_error_state(title: "Trop de recherches", message: "Réessayez dans une minute.")` et aucun formulaire.
+- **Débit** (ADR-0065) : `lookup` et `create` (les deux seuls qui reçoivent un matricule) partagent 10 par minute et 100 par jour par compte ; au-delà, **429**, la modale affiche `ui_error_state(title: "Trop de recherches", message: "Réessayez dans une minute.")` et aucun formulaire.
 - Le matricule n'est jamais dans une URL ; `student_number` est filtré des journaux.
 
 **États**
@@ -172,7 +175,7 @@ Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resource
 - Erreur : sous le champ (étape 1), alerte (étape 2), `ui_error_state` (429), toast (403, 404).
 - Succès : toast, liste remplacée, modale fermée.
 
-**Accessibilité** : erreurs reliées par `aria-describedby`, `aria-invalid` (`ui_field`) ; à l'étape 2, le focus va sur le `select` (`autofocus`) ; l'encadré du candidat est `aria-live="polite"` ; cibles ≥ 48 px ; la modale est une feuille basse à 390 px.
+**Accessibilité** : erreurs reliées par `aria-describedby`, `aria-invalid` (`ui_field`) ; à l'étape 2, le `select` porte `autofocus` (la modale s'ouvre avec la réponse du frame) ; l'encadré du candidat est `aria-live="polite"` ; cibles ≥ 48 px ; la modale est une feuille basse à 390 px.
 
 ### 3.7 Établissement (`school_admin/schools/show`), code et personnel
 
@@ -195,39 +198,50 @@ Côté équipe (`config/routes/teams.rb`, sous `resources :schools`) : `resource
 - États : vide impossible (l'acteur en fait partie) ; chargement : squelette ; erreur : `ui_error_state(retry_href:)` ; succès : liste.
 
 **Invitation** (`school_admin/staff_invitations/new`, `create` ; côté équipe `teams/school_staff_invitations`) — partiels partagés `shared/staff_invitations/_form` et `_created`
-- `ui_modal(id: "staff-invitation-modal", open: true, title: "Inviter un membre de la direction")` : `form#staff-invitation-form` (scope `staff_invitation`) : `ui_field :contact, as: :tel` (« Numéro de téléphone », aide « 10 chiffres. Ce numéro ne doit pas déjà avoir un compte Lnclass. ») et `ui_radio_group :position` (« Fonction ») : les fonctions que l'acteur peut inviter — Proviseur seulement pour un Proviseur ou l'équipe. Pied : « Annuler », « Créer le lien d'invitation ».
+- `ui_modal(id: "staff-invitation-modal", open: true, title: "Inviter un membre de la direction")` : `form#staff-invitation-form` (scope `staff_invitation`) : `ui_field :contact, as: :tel` (« Numéro de téléphone », aide « 10 chiffres. Ce numéro ne doit pas déjà avoir un compte Lnclass. ») et `ui_radio_group :position` (« Fonction ») : les fonctions que l'acteur peut inviter : Censeur, Éducateur, Secrétaire pour la direction ; les quatre, Proviseur compris, pour l'équipe seulement (ADR-0066 §4.3). Pied : « Annuler », « Créer le lien d'invitation ».
 - Succès : `turbo_stream.update "modal"` avec `_created` (gabarit de `teams/invitations/_created`, UDR-0019) : « Invitation de <07 00 00 00 09> comme <Censeur> à <établissement>. », champ en lecture seule du lien, « Copier le lien » (`classroom--join-code-copy`), consigne « Transmettez ce lien à la personne invitée, hors de Lnclass. Il expire dans 72 heures. », encadré `bg-warning-soft` « Ce lien ne s'affichera qu'une fois. ». Repli HTML : page `created`, 201.
 - Erreurs (422, sous le champ) : « Ce numéro a déjà un compte Lnclass. » ; « Une invitation est déjà en cours pour ce numéro. » ; « L'établissement a déjà un Proviseur. » (sous la fonction) ; établissement non actif → alerte `role="alert"` « L'établissement n'est pas actif. ».
+- **Débit** : 10 invitations par heure et par compte (direction et équipe) ; au-delà, 429 et `ui_error_state(title: "Trop d'invitations", message: "Réessayez dans une heure.")` dans la modale.
 
 **Accessibilité** : frames `aria-busy` ; boutons de copie nommés ; confirmations en `<dialog>` ; `ui_radio_group` en `<fieldset>` avec `<legend>` ; cibles ≥ 48 px.
 
 ### 3.8 Acceptation d'une invitation de direction — amende l'UDR-0019
 
 - `identity/invitations/show` pour `kind = "school_staff"` : titre « Rejoindre la direction de <établissement> », sous-titre « Fonction : <Censeur> » (bandeau `bg-brand-soft`, icône `building-library`), puis **le même formulaire** que l'équipe (nom, prénoms, genre, PIN et confirmation, UDR-0019).
-- Succès : même issue que l'équipe (connexion, puis activation du second facteur) ; à la fin, arrivée sur `school_admin_home_path` avec le toast « Bienvenue dans l'espace de <établissement>. ».
+- Succès : même issue que l'équipe (UDR-0019 : page de connexion et son toast, puis activation du second facteur, codes de secours) ; « Terminé » mène à `school_admin_home_path` (§3.12). Aucun toast propre à la direction.
 - `:conflict` (Proviseur déjà pris, établissement inactif) : alerte `role="alert"` « Cette invitation ne peut plus être acceptée. Demandez-en une nouvelle. », sans formulaire ; lien périmé : page existante.
 
 ### 3.9 Écran d'attente — amende l'UDR-0050
 
+Toute la vue (quatre cas) et `Identity::PendingAccountsController` appartiennent au socle (Lot 0b) ; `Identity::SchoolRejoinsController` (Lot C) la re-rend en erreur.
+
 Ordre du premier cas applicable dans `identity/pending_accounts/show` :
 
 1. `school_admin` sans établissement : `ui_empty_state(icon: "building-library", title: "Aucun établissement", description: "Votre compte de direction n'est rattaché à aucun établissement actif. Contactez l'équipe Lnclass.")`, boutons « Mon profil » (`secondary`, `profile_path`) et « Se déconnecter ».
-2. `teacher` avec demande `pending` ou `rejected` : inchangé (UDR-0050).
+2. `teacher` avec demande `pending` : inchangé (UDR-0050) ; demande `rejected` : texte inchangé, suivi du formulaire de code du cas 3.
 3. `teacher` sans école principale, sans demande en attente (retiré, ou demande approuvée puis retiré) : `ui_empty_state(icon: "building-library", title: "Vous n'êtes rattaché à aucun établissement", description: "Saisissez le code de votre nouvel établissement pour le rejoindre.")`, puis `form#school-rejoin-form` (`POST school_rejoin_path`, scope `school_rejoin`) : `ui_field :school_code` au gabarit de l'UDR-0044 (« Code d'établissement », `K7M-4QZ`, mêmes erreurs), bouton « Rejoindre l'établissement » (`brand`, pleine largeur) ; puis « Se déconnecter ».
 4. Les autres cas : inchangés.
 
-- `POST /account/pending/school` : succès → 303 vers `teacher_home_path`, toast « Bienvenue à <établissement>. » ; erreur → 422, écran re-rendu, saisie gardée ; **10 par minute et par adresse**, compteur `school_code` de `/e/<code>` ; au-delà, 429, `ui_error_state` « Trop de tentatives ».
+- `POST /account/pending/school` (`Identity::SchoolRejoinsController`, Lot C) : succès → 303 vers `teacher_home_path`, toast « Bienvenue à <établissement>. » ; erreur (dont l'établissement qui a retiré l'enseignant, ADR-0066) → 422, l'écran d'attente re-rendu **par ce contrôleur avec la vue `identity/pending_accounts/show`** (variables `@case = :teacher_without_school`, `@rejoin` : le DTO en erreur), saisie gardée ; **10 par minute et par adresse**, compteur propre à ce contrôleur ; au-delà, 429, `ui_error_state` « Trop de tentatives ».
+- Cas `rejected` (2) : sous le texte existant, le même formulaire de code que le cas 3 (une demande refusée n'empêche pas de rejoindre un autre établissement par son code).
 - Accessibilité : erreur reliée au champ ; cibles ≥ 48 px ; 390 px.
 
 ### 3.10 Fiche de l'établissement côté équipe — amende l'UDR-0036
 
 - Dans `teams/schools/show`, après l'en-tête et avant les classes, `turbo_frame_tag "school_staff", src: school_staff_members_path(school.public_id), loading: :lazy` (squelette).
-- `teams/school_staff_members/index` : `ui_card#school_staff` « Direction (<n>) », bouton « Inviter la direction » (`secondary`, `user-plus`, modale `shared/staff_invitations`, toutes fonctions proposées) ; liste au gabarit de 3.7, menu ⋮ « Retirer » sur **chaque** membre, Proviseur compris. Vide : `ui_empty_state(icon: "user-group", title: "Aucun membre de la direction", description: "Invitez le Proviseur : l'établissement pourra se gérer lui-même.")`.
-- Retrait : succès → toast et `replace "school_staff"` ; repli HTML : 303 vers la fiche.
+- `teams/school_staff_members/index` : `turbo_frame_tag "school_staff"` contenant `ui_card#teams_school_staff` « Direction (<n>) », bouton « Inviter la direction » (`secondary`, `user-plus`, modale `shared/staff_invitations`, toutes fonctions proposées) ; liste au gabarit de 3.7, menu ⋮ « Retirer » sur **chaque** membre, Proviseur compris. Vide : `ui_empty_state(icon: "user-group", title: "Aucun membre de la direction", description: "Invitez le Proviseur : l'établissement pourra se gérer lui-même.")`.
+- Retrait : succès → toast et `replace "teams_school_staff"` (la carte, jamais le frame, pour que le frame reste rechargeable) ; repli HTML : 303 vers la fiche.
 
 ### 3.11 Profil de la direction — amende l'UDR-0041
 
 - `identity/profiles/_information` pour `school_admin` : le badge « En attente » disparaît ; à sa place, le badge de la fonction. Une ligne de la `dl` « Établissement » : « <Fonction> · <Établissement> », ou « Aucun établissement » (`text-mute`). Nom, numéro, PIN et photo : inchangés (ID-19, ID-20).
+
+### 3.12 Second facteur de la direction — amende l'UDR-0019
+
+- `identity/second_factors/new` et `identity/second_factor_enrollments/new` : sous-titre « Obligatoire pour l'équipe et la direction. » (au lieu de « … les comptes de l'équipe. »). Rien d'autre ne change à l'écran.
+- Vérification réussie : `redirect_to_home` (accueil du rôle : `team_home_path` ou `school_admin_home_path`), toast inchangé.
+- Codes de secours : le bouton « Terminé » mène à `home_path_for(current_actor.role)`.
+- États, accessibilité, 390 px : ceux de l'UDR-0019, inchangés.
 
 ## 4. Conséquences
 

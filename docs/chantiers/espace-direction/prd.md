@@ -17,16 +17,16 @@ Un établissement importé par l'équipe n'a aujourd'hui personne pour l'adminis
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| **Proviseur** (`school_admin`, `principal`) | Tout voir de son établissement ; ajouter la classe suivante d'un niveau ; rattacher un élève ou le changer de classe par matricule ; inviter tout membre (un Proviseur seulement si aucun n'est actif) ; retirer un enseignant ; retirer un Censeur, un Éducateur, une Secrétaire ; lire et régénérer le code ; gérer son profil | Se retirer lui-même ; valider un enseignant en attente ; créer une classe au nom libre, retirer ou modifier une classe ; voir la note d'un élève nommé ; voir un numéro de téléphone ; toucher un autre établissement |
-| **Censeur** (`censor`) | Comme le Proviseur, sauf inviter un Proviseur | Inviter ou retirer un Proviseur ; se retirer ; tout ce que le Proviseur ne peut pas |
+| **Proviseur** (`school_admin`, `principal`) | Tout voir de son établissement ; ajouter la classe suivante d'un niveau ; rattacher un élève ou le changer de classe par matricule ; inviter un Censeur, un Éducateur ou une Secrétaire ; retirer un enseignant ; retirer un Censeur, un Éducateur, une Secrétaire ; lire et régénérer le code ; gérer son profil | Se retirer lui-même ; inviter un Proviseur (l'équipe seule) ; valider un enseignant en attente ; créer une classe au nom libre, retirer ou modifier une classe ; voir la note d'un élève nommé ; voir un numéro de téléphone ; toucher un autre établissement |
+| **Censeur** (`censor`) | Comme le Proviseur | Retirer un Proviseur ; se retirer ; tout ce que le Proviseur ne peut pas |
 | **Éducateur**, **Secrétaire** (`educator`, `secretary`) | Tout voir de son établissement ; ajouter la classe suivante d'un niveau ; rattacher un élève ou le changer de classe ; lire le code ; gérer son profil | Inviter ; retirer un enseignant ou un membre ; régénérer le code ; tout ce que le Proviseur ne peut pas |
-| **Direction sans établissement** (retirée, ou établissement inactif) | Voir l'écran d'attente et son profil ; se déconnecter | Tout le reste |
-| **Équipe** (`team`) | Tous les gestes de la direction sur tout établissement ; inviter la première direction ; retirer tout membre, Proviseur compris ; retrouver un compte par matricule et corriger le matricule ; réinitialiser le second facteur d'un membre de la direction | Réinitialiser son propre second facteur |
-| **Enseignant** | Inchangé ; retiré de son établissement, il rejoint un autre établissement avec son code, depuis l'écran d'attente | Accéder à l'espace direction |
+| **Direction sans établissement** (retirée, ou établissement inactif) | Voir l'écran d'attente et son profil ; se déconnecter | Tout le reste, catalogue compris |
+| **Équipe** (`team`) | Tous les gestes de la direction sur tout établissement ; inviter la première direction et tout Proviseur ; retirer tout membre, Proviseur compris ; retrouver un compte par matricule et corriger le matricule ; réinitialiser le second facteur d'un membre de la direction | Réinitialiser son propre second facteur |
+| **Enseignant** | Inchangé ; retiré de son établissement, il rejoint un **autre** établissement avec son code, depuis l'écran d'attente | Accéder à l'espace direction ; revenir seul dans l'établissement qui l'a retiré |
 | **Élève** | S'inscrire avec son matricule (obligatoire) ; lire son matricule au profil | Modifier son matricule ; accéder à l'espace direction |
 | **Parent** | — (hors périmètre, memo) | — |
 
-**Règles d'autorisation** : `Policies::School::StaffPolicy` (table fonction × geste, établissement de l'acteur, établissement actif — [ADR-0066](../../decisions/adr/0066-espace-direction-droits-et-gestes.md) §4.3) ; `Policies::Identity::ChangeStudentNumberPolicy` (équipe) ; `SecondFactorPolicy` et `ResetSecondFactorPolicy` étendues à la direction ; `ManageSchoolPolicy` et `ManageClassroomPolicy` **inchangées** (équipe seule). Second facteur exigé pour toute la direction ([ADR-0044](../../decisions/adr/0044-rattachement-de-la-direction-par-invitation.md), ADR-0066 §4.2).
+**Règles d'autorisation** : `Policies::School::StaffPolicy` (table fonction × geste, établissement de l'acteur, établissement actif — [ADR-0066](../../decisions/adr/0066-espace-direction-droits-et-gestes.md) §4.3) ; `Policies::Identity::ChangeStudentNumberPolicy` (équipe) ; `Policies::School::RejoinSchoolPolicy` (enseignant sans école ni demande en attente) ; `SecondFactorPolicy` et `ResetSecondFactorPolicy` étendues à la direction ; `ManageSchoolPolicy` et `ManageClassroomPolicy` **inchangées** (équipe seule). Second facteur exigé pour toute la direction ([ADR-0044](../../decisions/adr/0044-rattachement-de-la-direction-par-invitation.md), ADR-0066 §4.2).
 
 ## 3. Parcours utilisateur
 
@@ -49,7 +49,9 @@ Un établissement importé par l'équipe n'a aujourd'hui personne pour l'adminis
 | Éducateur ou Secrétaire qui force un geste de gestion | 403 ; rien n'est écrit ; le bouton ne lui est pas affiché |
 | Ressource d'un autre établissement (classe, enseignant, membre) | 404 ; rien n'est écrit |
 | Invitation vers un numéro qui a déjà un compte | « Ce numéro a déjà un compte Lnclass. » |
-| Invitation d'un Proviseur alors qu'un Proviseur est actif | « L'établissement a déjà un Proviseur. » |
+| Invitation d'un Proviseur par la direction | Fonction non proposée ; forcée, 403 (seule l'équipe invite un Proviseur) |
+| Invitation d'un Proviseur par l'équipe alors qu'un Proviseur est actif | « L'établissement a déjà un Proviseur. » |
+| Plus de 10 invitations dans l'heure | 429 « Trop d'invitations » |
 | Acceptation après qu'un Proviseur a été rattaché entre-temps, ou établissement désactivé | « Cette invitation ne peut plus être acceptée. » ; aucun compte créé |
 | Matricule hors format (recherche) | Message de format, sans lecture |
 | Matricule inconnu, compte anonymisé, élève dans une classe active de l'année d'un autre établissement | **Le même message neutre**, même statut |
@@ -57,13 +59,15 @@ Un établissement importé par l'équipe n'a aujourd'hui personne pour l'adminis
 | Classe pleine au rattachement | « Cette classe est complète (80 / 80). Choisissez-en une autre. » |
 | Élève déjà dans la classe choisie | « <nom> est déjà dans cette classe. » |
 | Matricule déjà pris à l'inscription | « Ce matricule est déjà utilisé… » ; jamais le nom du détenteur ; aucun compte créé |
-| Enseignant retiré qui saisit un code inconnu ou d'un établissement inactif | Message de l'inscription enseignant ; 429 au-delà de 10 par minute |
+| Enseignant retiré qui saisit un code inconnu, d'un établissement inactif, ou de l'établissement qui l'a retiré | Le même message que l'inscription enseignant ; 429 au-delà de 10 par minute |
+| Direction sans établissement qui ouvre le catalogue | Écran d'attente |
+| Changer de classe un élève déjà listé | Étape 2 directement, sans matricule ni limite de débit |
 | Établissement sans classe, sans enseignant ou sans élève | État vide qui dit quoi faire (ajouter une classe, transmettre le code, rattacher un élève) |
 | Mille élèves | Liste paginée par 20, filtrable par classe |
 
 ## 4. Critères d'acceptation
 
-Chaque critère devient au moins un test ; le lot qui le porte est indiqué entre crochets, et le chemin du test est dans [`plan.md`](plan.md). « La direction de A » désigne un membre actif de l'établissement actif A ; B est un autre établissement actif. **Chaque cas d'usage a son test de refus inter-établissements** (ED-10, ED-18, ED-22, ED-26, ED-31, ED-38, ED-47) et **chaque geste sensible son refus Éducateur et Secrétaire** (ED-08, ED-16, ED-21, ED-37). 56 critères.
+Chaque critère devient au moins un test ; le lot qui le porte est indiqué entre crochets, et le chemin du test est dans [`plan.md`](plan.md). « La direction de A » désigne un membre actif de l'établissement actif A ; B est un autre établissement actif. **Chaque cas d'usage a son test de refus inter-établissements** (ED-10, ED-18, ED-22, ED-26, ED-31, ED-38, ED-47) et **chaque geste sensible son refus Éducateur et Secrétaire, les deux nommés** (ED-08, ED-16, ED-21, ED-37). Règle des deux barrières (ADR-0066 §4.4) : le use case qui reçoit l'établissement B répond `forbidden` ; le contrôleur, qui passe toujours l'établissement de l'acteur, répond 404 pour une ressource de B. 59 critères.
 
 ### 4.1 Accès de la direction — [Lot 0]
 
@@ -82,8 +86,9 @@ Scénario: ED-02 — l'espace direction est réservé à la direction
 Scénario: ED-03 — une direction sans établissement actif ne voit que l'écran d'attente et son profil
   Étant donné un membre de la direction dont le rattachement est terminé
   Et un membre de la direction de l'établissement C désactivé
-  Quand chacun ouvre le tableau de bord de l'espace direction
-  Alors chacun est redirigé vers l'écran d'attente
+  Quand chacun ouvre le tableau de bord de l'espace direction, puis le catalogue
+  Alors chacun est redirigé vers l'écran d'attente les deux fois
+  Et chacun voit « Aucun établissement »
   Et chacun peut ouvrir « Mon profil »
 
 Scénario: ED-04 — le shell de la direction a cinq destinations actives
@@ -140,13 +145,15 @@ Scénario: ED-08 — l'Éducateur et la Secrétaire n'invitent pas
   Et le bouton « Inviter un membre » ne leur est pas affiché
   Et aucune invitation n'est créée
 
-Scénario: ED-09 — un seul Proviseur, invité par un Proviseur
-  Étant donné le Censeur de A
-  Quand il invite un Proviseur
-  Alors il reçoit un refus de fonction
-  Étant donné le Proviseur actif de A
-  Quand il invite un second Proviseur
-  Alors il lit « L'établissement a déjà un Proviseur. »
+Scénario: ED-09 — seule l'équipe invite un Proviseur, et il n'y en a qu'un
+  Étant donné le Proviseur de A et le Censeur de A
+  Quand chacun ouvre « Inviter un membre »
+  Alors la fonction « Proviseur » ne lui est pas proposée
+  Quand chacun force une invitation de Proviseur
+  Alors chacun reçoit 403
+  Étant donné un membre de l'équipe et le Proviseur actif de A
+  Quand l'équipe invite un second Proviseur pour A
+  Alors elle lit « L'établissement a déjà un Proviseur. »
 
 Scénario: ED-10 — pas d'invitation pour un autre établissement
   Étant donné le Proviseur de A
@@ -169,6 +176,12 @@ Scénario: ED-12 — accepter une invitation de direction
   Et à sa première connexion elle active son second facteur
   Et elle arrive sur le tableau de bord de A
   Et le journal enregistre « invitation.accepted »
+
+Scénario: ED-58 — l'invitation est bornée en débit
+  Étant donné le Censeur de A qui a créé 10 invitations dans l'heure
+  Quand il en crée une 11ᵉ
+  Alors il reçoit 429 « Trop d'invitations »
+  Et aucune invitation n'est créée
 
 Scénario: ED-13 — une invitation devenue impossible ne crée rien
   Étant donné une invitation de Proviseur pour A
@@ -196,10 +209,10 @@ Scénario: ED-15 — le Proviseur retire un Éducateur
   Et le journal enregistre « staff.detached »
 
 Scénario: ED-16 — l'Éducateur et la Secrétaire ne retirent personne
-  Étant donné l'Éducateur de A
-  Quand il envoie le retrait de la Secrétaire de A
-  Alors il reçoit 403
-  Et le menu « Retirer » ne lui est pas affiché
+  Étant donné l'Éducateur de A et la Secrétaire de A
+  Quand chacun envoie le retrait de l'autre
+  Alors chacun reçoit 403
+  Et le menu « Retirer » n'est affiché à aucun des deux
 
 Scénario: ED-17 — ni soi-même, ni le Proviseur, sauf par l'équipe
   Étant donné le Censeur de A
@@ -214,6 +227,7 @@ Scénario: ED-18 — pas de retrait dans un autre établissement
   Quand il envoie le retrait d'un membre de B
   Alors il reçoit 404
   Et le membre de B reste rattaché
+  Et le cas d'usage de retrait répond « forbidden » s'il reçoit l'établissement B
 ```
 
 ### 4.4 Code d'établissement — [Lot G]
@@ -229,13 +243,13 @@ Scénario: ED-20 — le Censeur régénère le code
   Étant donné le Censeur de A
   Quand il régénère le code et confirme
   Alors un nouveau code s'affiche
-  Et l'ancien code répond 404 sur « /e/<ancien code> »
+  Et, pour un visiteur non connecté, l'ancien code répond 404 sur « /e/<ancien code> »
   Et le journal enregistre « school.changed » avec « code_regenerated »
 
 Scénario: ED-21 — l'Éducateur et la Secrétaire ne régénèrent pas
-  Étant donné l'Éducateur de A
-  Quand il envoie la régénération du code
-  Alors il reçoit 403
+  Étant donné l'Éducateur de A et la Secrétaire de A
+  Quand chacun envoie la régénération du code
+  Alors chacun reçoit 403
   Et le code de A n'a pas changé
 
 Scénario: ED-22 — pas de régénération pour un autre établissement
@@ -282,11 +296,12 @@ Scénario: ED-28 — les chiffres de l'établissement
   Alors il lit 3 classes, 2 enseignants et 5 élèves
 
 Scénario: ED-29 — les chiffres par classe
-  Étant donné une classe de 4 élèves et 2 devoirs
-  Et 3 sessions terminées de 2 élèves sur ces devoirs (scores 40, 60, 80) et 1 session de remédiation terminée
+  Étant donné une classe de 6 élèves et 2 devoirs
+  Et 5 élèves qui ont terminé une session sur ces devoirs (scores 40, 50, 60, 70, 80) et 1 session de remédiation terminée (score 100)
   Quand le Proviseur ouvre le tableau de bord
-  Alors la ligne de la classe affiche effectif 4, 2 devoirs, rendu 50 %, moyenne 60 %
+  Alors la ligne de la classe affiche effectif 6, 2 devoirs, rendu 83 %, moyenne 60 %
   Et une classe sans devoir affiche « — » pour le rendu et la moyenne
+  Et une classe où moins de 5 élèves ont rendu affiche son rendu et « — » pour la moyenne
 
 Scénario: ED-30 — aucune note d'élève nommé
   Étant donné des sessions terminées dans les classes de A
@@ -342,11 +357,17 @@ Scénario: ED-36 — code refusé ou trop d'essais
   Alors il reçoit 429 « Trop de tentatives »
 
 Scénario: ED-37 — l'Éducateur et la Secrétaire ne retirent pas d'enseignant
-  Étant donné la Secrétaire de A
-  Quand elle envoie le retrait d'un enseignant de A
-  Alors elle reçoit 403
+  Étant donné l'Éducateur de A et la Secrétaire de A
+  Quand chacun envoie le retrait d'un enseignant de A
+  Alors chacun reçoit 403
   Et l'enseignant reste rattaché
-  Et le menu « Retirer de l'établissement » ne lui est pas affiché
+  Et le menu « Retirer de l'établissement » n'est affiché à aucun des deux
+
+Scénario: ED-57 — l'enseignant retiré ne revient pas seul dans l'établissement qui l'a retiré
+  Étant donné un enseignant retiré de A, qui connaît le code de A
+  Quand il saisit le code de A sur son écran d'attente
+  Alors il lit « Code d'établissement invalide. Vérifiez-le auprès de votre établissement. »
+  Et il n'est pas rattaché à A
 
 Scénario: ED-38 — pas de retrait d'un enseignant d'un autre établissement
   Étant donné le Proviseur de A
@@ -376,7 +397,9 @@ Scénario: ED-41 — une seule réponse pour tout élève non rattachable
   Étant donné un matricule inconnu, le matricule d'un compte anonymisé et celui d'un élève placé cette année dans une classe active de B
   Quand le Proviseur de A cherche chacun
   Alors il reçoit trois fois le statut 422 et le même corps de réponse, jeton CSRF excepté
+  Et le champ du matricule y est vide
   Et le texte « Aucun élève ne peut être rattaché avec ce matricule. Vérifiez-le auprès de l'élève. »
+  # Le compte anonymisé est fabriqué en base : une fois AnonymizeUser livré, il n'a plus de matricule (ADR-0065 §7).
 
 Scénario: ED-42 — pas de recherche partielle
   Quand la direction de A cherche « 1234 », puis « 12345678 »
@@ -414,12 +437,21 @@ Scénario: ED-47 — pas de rattachement dans un autre établissement
   Quand il envoie le rattachement d'un élève à la classe de B
   Alors il reçoit 404
   Et l'élève n'a pas changé de classe
-  Et le cas d'usage de rattachement répond « forbidden » s'il reçoit l'établissement B
+  Et les cas d'usage de recherche et de rattachement répondent « forbidden » s'ils reçoivent l'établissement B
+
+Scénario: ED-59 — changer de classe un élève listé, sans matricule ni limite
+  Étant donné l'Éducateur de A qui a atteint sa limite de 10 recherches dans la minute
+  Et un élève de « 6ème 1 » de A dans la liste des élèves
+  Quand il choisit « Changer de classe » sur cette ligne, puis « 6ème 2 »
+  Alors l'élève est dans « 6ème 2 »
+  Et aucun matricule n'a été saisi ni envoyé
+  Quand il ouvre « Changer de classe » pour un élève de B par son identifiant
+  Alors il reçoit 404
 
 Scénario: ED-56 — le matricule ne fuit ni dans les journaux ni dans les adresses
   Quand la direction cherche et rattache un élève
-  Alors le matricule n'apparaît dans aucune adresse
-  Et il est filtré dans le journal des requêtes
+  Alors le matricule n'apparaît dans aucune adresse de l'espace direction
+  Et il est filtré dans le journal des requêtes, comme le paramètre « q » de la recherche de l'équipe
 ```
 
 ### 4.8 Matricule à l'inscription et côté équipe — [Lot F]
@@ -472,9 +504,9 @@ Scénario: ED-55 — l'équipe réinitialise le second facteur d'une direction
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | Entités : `School::StaffMember`, `School::StaffPosition`, `School::StudentPlacement`, `Identity::StudentNumber` (nouvelles) ; `Identity::Actor#position`, `Identity::User#student_number` et `#school_admin?`, `Classroom::Membership#school_id` et `#school_year`, `Identity::SessionState#privileged?`, `Identity::HomeDestination` (`:school_admin_home`), `Identity::AuditAction` (+4). Port **nouveau** `School::StaffRepositoryPort` ; méthodes ajoutées à `UserRepositoryPort`, `RegistrationRepositoryPort`, `MembershipRepositoryPort`, `ClassroomRepositoryPort`, `TeachingRepositoryPort`, `SchoolRepositoryPort` (ADR-0066 §4.5). Policies : `School::StaffPolicy`, `Identity::ChangeStudentNumberPolicy` (nouvelles) ; `SecondFactorPolicy`, `ResetSecondFactorPolicy` (étendues). Use cases nouveaux : `School::InviteStaffMember`, `School::DetachStaffMember`, `School::DetachTeacher`, `School::RejoinSchoolWithCode`, `School::FindStudentForPlacement`, `School::PlaceStudent`, `Identity::ChangeStudentNumber` ; modifiés : `Identity::AcceptInvitation`, `Identity::ResolveSession`, `Classroom::JoinWithCode`, `Classroom::AddLevelClassroom`, `School::RegenerateSchoolCode` |
-| Infrastructure | Migrations : `school_staffs` (ADR-0044), `users.student_number` en deux temps (ADR-0065), index partiel de `classroom_students` (ADR-0066). `Orm::SchoolStaff`. `Repositories::School::StaffRepository` ; méthodes ajoutées aux repositories existants. Queries nouvelles : `School::DirectionSchoolQuery`, `School::StaffMembersQuery`, `School::SchoolTeachersQuery`, `School::SchoolStudentsQuery`, `School::SchoolDashboardQuery`, `School::DirectionClassroomsQuery` ; modifiées : `Identity::ShellUserQuery`, `Identity::ProfileQuery`, `Identity::AccountLookupQuery`, `Identity::HomeDestinationQuery` |
-| Delivery | `config/routes/school_admin.rb` (nouveau) ; ajouts dans `config/routes/teams.rb` et `identity.rb`. `SchoolAdmin::BaseController`, `HomesController`, `ClassroomsController`, `LevelClassroomsController`, `TeachersController`, `StudentsController`, `StudentPlacementsController`, `SchoolsController`, `SchoolCodesController`, `StaffMembersController`, `StaffInvitationsController` ; `Teams::SchoolStaffMembersController`, `Teams::SchoolStaffInvitationsController`, `Teams::StudentNumbersController` ; `Identity::SchoolRejoinsController`. Modifiés : `Identity::InvitationsController`, `Identity::PendingAccountsController`, `Classroom::JoinsController`, `Teams::AccountLookupsController`, `Teams::SecondFactorResetsController`, `Authentication` |
+| Domaine | Entités : `School::StaffMember`, `School::StaffPosition`, `School::StudentPlacement`, `Identity::StudentNumber` (nouvelles) ; `Identity::Actor#position`, `Identity::User#student_number` et `#school_admin?`, `Classroom::Membership#school_id` et `#school_year`, `Identity::SessionState#privileged?`, `Identity::HomeDestination` (`:school_admin_home`), `Identity::AuditAction` (+4) ; `Classroom::Membership` gagne `school_id`, `school_year`, `classroom_public_id`, `classroom_name` (défauts `nil`). Port **nouveau** `School::StaffRepositoryPort` ; méthodes ajoutées à `UserRepositoryPort`, `RegistrationRepositoryPort`, `MembershipRepositoryPort`, `ClassroomRepositoryPort`, `TeachingRepositoryPort`, `SchoolRepositoryPort` (ADR-0066 §4.5). Policies : `School::StaffPolicy`, `School::RejoinSchoolPolicy`, `Identity::ChangeStudentNumberPolicy` (nouvelles) ; `SecondFactorPolicy`, `ResetSecondFactorPolicy` (étendues). Use cases nouveaux : `School::InviteStaffMember`, `School::DetachStaffMember`, `School::DetachTeacher`, `School::RejoinSchoolWithCode`, `School::FindStudentForPlacement`, `School::PlaceStudent`, `Identity::ChangeStudentNumber` ; modifiés : `Identity::AcceptInvitation`, `Identity::ResolveSession`, `Classroom::JoinWithCode`, `Classroom::AddLevelClassroom`, `School::RegenerateSchoolCode` |
+| Infrastructure | Migrations : `school_staffs` (ADR-0044), `teacher_school_departures` et index partiel de `classroom_students` (ADR-0066), `users.student_number` en deux temps (ADR-0065). `Orm::SchoolStaff`. `Repositories::School::StaffRepository` ; méthodes ajoutées aux repositories existants. Queries nouvelles : `School::DirectionSchoolQuery`, `School::StaffMembersQuery`, `School::SchoolTeachersQuery`, `School::SchoolStudentsQuery`, `School::SchoolDashboardQuery`, `School::DirectionClassroomsQuery` ; modifiées : `Identity::ShellUserQuery`, `Identity::ProfileQuery`, `Identity::AccountLookupQuery` |
+| Delivery | `config/routes/school_admin.rb` (nouveau) ; ajouts dans `config/routes/teams.rb` et `identity.rb`. `SchoolAdmin::BaseController`, `HomesController`, `ClassroomsController`, `LevelClassroomsController`, `TeachersController`, `StudentsController`, `StudentPlacementsController`, `SchoolsController`, `SchoolCodesController`, `StaffMembersController`, `StaffInvitationsController` ; `Teams::SchoolStaffMembersController`, `Teams::SchoolStaffInvitationsController`, `Teams::StudentNumbersController` ; `Identity::SchoolRejoinsController`. Modifiés : `AuthenticatedController` (garde de la direction sans établissement), `Identity::SecondFactorsController`, `Identity::InvitationsController`, `Identity::PendingAccountsController`, `Classroom::JoinsController`, `Teams::AccountLookupsController`, `Teams::SecondFactorResetsController`, `Authentication` |
 | UI | Vues `school_admin/**` ; partiels `shared/staff_invitations/_form` et `_created` ; `teams/school_staff_members/index` ; `teams/student_numbers/edit`. Modifiées : `identity/pending_accounts/show`, `identity/invitations/show`, `identity/profiles/_information`, `classroom/joins/_signup_form`, `teams/account_lookups/show` et `_result`, `teams/schools/show` ; `NavigationHelper` (5ᵉ destination). Aucun nouveau contrôleur Stimulus : `classroom--join-code-copy`, `modal` et `dropdown` existent |
 
 ## 6. Décisions rattachées

@@ -48,10 +48,11 @@ Les données sont celles de mineurs : la direction ne doit jamais lire la note d
 | Effectif d'une classe | Élèves non anonymisés dont l'adhésion à la classe n'est pas quittée (`left_at IS NULL`) ; affiché avec le plafond (« 34 / 80 ») |
 | Devoirs donnés | Lignes `classroom_assignments` de la classe, tous statuts (un devoir retiré a été donné) |
 | Taux de rendu | Parmi l'effectif, part des élèves qui ont **terminé** au moins une session d'exercice `standard` rattachée à un devoir de la classe ; arrondi à l'unité ; « — » si l'effectif est nul ou si la classe n'a aucun devoir |
-| Moyenne de la classe | Moyenne arrondie des `score_percent` des sessions `completed`, `kind = 'standard'`, rattachées à un devoir de la classe, **quel que soit l'élève** (un élève parti garde ses résultats, ADR-0036) ; « — » sans session terminée |
+| Moyenne de la classe | Moyenne arrondie des `score_percent` des sessions `completed`, `kind = 'standard'`, rattachées à un devoir de la classe, **quel que soit l'élève** (un élève parti garde ses résultats, ADR-0036) ; « — » si **moins de 5 élèves distincts** ont une telle session (`MIN_STUDENTS_FOR_AVERAGE = 5`) : croisée avec la liste des élèves de la classe, la moyenne d'un ou deux élèves serait une note nominative |
 
 - Les sessions de remédiation (`kind = 'remediation'`, ADR-0043) ne comptent ni dans le rendu ni dans la moyenne : elles ne sont pas des devoirs.
 - Le tableau liste **toutes** les classes de l'année, triées par niveau (`levels.position`) puis par nom, sans pagination (77 au plus pour un lycée public, ADR-0030).
+- Le seuil de 5 élèves est une règle de minimisation, pas une préférence d'affichage : il tient le moteur 2 même quand deux pages se croisent (moyenne de la classe × liste de ses élèves).
 - La même query sert la page d'une classe (`#classroom(public_id:)`) avec les mêmes définitions, plus la liste des **noms** de ses enseignants.
 
 **Nombre de requêtes** : fixe, quel que soit le nombre de classes, d'élèves et de sessions — une lecture des compteurs d'en-tête (sous-requêtes scalaires), une des classes avec leur effectif, une des devoirs groupés par classe, une du rendu et de la moyenne groupés par classe. Un test le vérifie en triplant le volume.
@@ -69,6 +70,7 @@ Les données sont celles de mineurs : la direction ne doit jamais lire la note d
 ### 🔴 Coûts consentis
 
 - **Le taux de rendu est grossier** : un élève qui a terminé un seul exercice d'un seul devoir compte comme « rendu ». Un taux par devoir (élève × devoir) demanderait de déplier les cours et les fiches assignés en exercices ; il attend `rapports-de-classe` (V3).
+- **Une petite classe n'a pas de moyenne** : sous 5 élèves ayant rendu, « — », même si la direction voudrait le chiffre.
 - **La moyenne mélange** élèves partis et présents, et tous les devoirs de l'année : elle dit le niveau de travail de la classe, pas celui de l'effectif actuel.
 - **Le coût croît avec les sessions** : les agrégats parcourent `exercise_sessions` par `classroom_assignment_id` (indexé) ; au-delà de 300 ms en production, un chantier d'optimisation ajoute un index composite `(classroom_assignment_id, status, kind)`, comme l'ADR-0062 le prévoit pour le pilotage.
 - **Pas d'historique ni de période** : l'année scolaire en cours seulement.
@@ -110,5 +112,5 @@ GROUP BY a.classroom_id
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `test/infrastructure/queries/school/school_dashboard_query_test.rb` : un test par ligne du tableau §4 ; classe sans devoir → « — » ; élève parti compté dans la moyenne, pas dans l'effectif ni le rendu ; session de remédiation ignorée ; élève anonymisé exclu ; classe archivée ou d'une autre année exclue ; **données d'un autre établissement absentes** ; nombre de requêtes identique quand le volume triple.
+- `test/infrastructure/queries/school/school_dashboard_query_test.rb` : un test par ligne du tableau §4 ; classe sans devoir → « — » ; moins de 5 élèves ayant rendu → moyenne « — » ; élève parti compté dans la moyenne, pas dans l'effectif ni le rendu ; session de remédiation ignorée ; élève anonymisé exclu ; classe archivée ou d'une autre année exclue ; **données d'un autre établissement absentes** ; nombre de requêtes identique quand le volume triple.
 - `test/views/school_admin/homes_view_test.rb` (ou le test système) : aucun `score_percent` ni nom d'élève dans le HTML du tableau de bord et de la page classe.

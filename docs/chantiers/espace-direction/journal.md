@@ -18,13 +18,26 @@
 | 2026-09-28 | Cinquième destination « Établissement » (code et personnel) | Le code et le personnel n'avaient pas de place dans les quatre destinations prévues par l'UDR-0006 ; cinq est le maximum | UDR-0052, amende UDR-0006 |
 | 2026-09-28 | Les listes de la direction affichent les initiales, pas la photo | Élargir `ReadUserPolicy` (ADR-0060) toucherait une policy que `annuaire-equipe` va modifier | ADR-0066 (coûts) |
 | 2026-09-28 | Deux socles séquentiels (0a données et contrats, 0b accès et fichiers partagés) | Le socle dépasse une poignée de fichiers : un nouveau rôle actif et sept contrats. Chaque moitié reste démontrable | — |
+| 2026-09-28 | Accueil de la direction : squelette au Lot 0b, repris par le seul Lot D | `HomeDestination` mène la direction à son accueil dès le Lot 0b : sans page, la connexion aboutirait à une erreur jusqu'à la fusion de D. Relevé en relecture du plan | — |
+| 2026-09-28 | Challenge 1 ([`challenge-1.md`](challenge-1.md)) : 20 KO, 10 à améliorer, tous traités dans les documents | Voir « Ce qui a dérapé » | ADR-0065, 0066, 0067 amendés avant acceptation |
+| 2026-09-28 | Seule l'équipe invite un Proviseur (point 8) | Un seul Proviseur actif : un Proviseur ne peut jamais en inviter un second ; le geste était mort. Passation à confirmer | ADR-0066 §4.3 |
+| 2026-09-28 | Table `teacher_school_departures` ; retour par code refusé vers l'établissement qui a retiré (point 10) | Le code est diffusé : sans ce refus, le retrait n'a aucun effet. Coût : un retrait par erreur ne se défait pas en V2 | ADR-0066 §4.4 |
+| 2026-09-28 | Invitations bornées à 10 par heure et par compte (point 11) | L'invitation dit si un numéro a un compte : oracle des numéros de mineurs | ADR-0066 |
+| 2026-09-28 | `q` filtré des journaux ; repli sans matricule dans l'URL (point 12) | Passer de `contact` à `q` aurait fait régresser le filtrage du numéro | ADR-0065 |
+| 2026-09-28 | Moyenne « — » sous 5 élèves ayant rendu (point 26) | Croisée avec la liste des élèves, la moyenne d'un ou deux élèves est une note nominative | ADR-0067 |
+| 2026-09-28 | « Changer de classe » par identifiant public, hors compteur (point 25) | L'élève est déjà dans l'établissement : rien à sonder ; la limite bloquait la correction d'un lot d'élèves | ADR-0066 §4.4, UDR-0052 §3.6 |
+| 2026-09-28 | Adaptateurs des nouvelles méthodes de port, écran d'attente, `DirectionClassroomsQuery`, second facteur, garde de la direction et `role_homes_test` remontés aux socles (points 1, 3, 5, 16, 17, 27) | `port_contracts_test` et les fichiers touchés par plusieurs lots | — |
 | 2026-09-28 | Profil (`_information`, `ProfileQuery`) et écran d'attente attribués chacun à un seul lot (0b, C) | Deux lots les auraient touchés (profil : direction et matricule ; attente : direction et enseignant retiré) | — |
 
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- **Le premier plan ne passait pas `bin/ci` au Lot 0** (challenge 1, points 3 à 5) : un port gelé sans son adaptateur casse `test/architecture/port_contracts_test.rb` ; un champ ajouté à un `Data.define` sans défaut casse tous ses appelants ; dessiner des routes rend actives des entrées que `role_homes_test` voulait inactives. Leçon : avant de geler un contrat, lire `test/architecture/` et chercher les appelants (`grep -rn "Membership.new"`).
+- **Des écrans existants renvoyaient en dur vers l'équipe** (`team_home_path` après le second facteur) : « même parcours que l'équipe » ne se vérifie qu'en lisant les contrôleurs de ce parcours.
+- **Une règle déléguée contradictoire** (« seul un Proviseur invite un Proviseur » + « un seul Proviseur actif ») est passée du memo à l'ADR sans être vue ; le challenger l'a trouvée en déroulant le cas.
+- **Le retrait d'un enseignant était sans effet** tant que le code d'établissement, diffusé à tous, permettait de revenir aussitôt.
+- La feuille de route contredisait encore Q1 dans la porte de la V2 ; corrigée.
 
 ## Ce qu'on a appris sur la codebase
 

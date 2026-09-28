@@ -4,7 +4,7 @@
 |---|---|
 | **Statut** | Proposé |
 | **Date** | 2026-09-28 |
-| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-40 à ED-43, ED-48 à ED-54, ED-56 |
+| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-40 à ED-43, ED-48 à ED-54, ED-56, ED-59 |
 | **Remplace** | — |
 | **Amende** | [ADR-0036](./0036-suppression-archivage-et-anonymisation.md) (l'anonymisation efface le matricule) |
 | **Remplacé par** | — |
@@ -79,7 +79,7 @@ Option B retenue.
 - Policy `Policies::Identity::ChangeStudentNumberPolicy` : acteur `team` (tout sous-rôle en V2 ; la matrice de la V4 la rangera avec « Émettre un code de récupération », ADR-0038), cible élève non anonymisé.
 - `UserRepositoryPort#update_student_number(user_id:, student_number:)` → `Result | failure(:conflict, errors: { student_number: [:taken] })`.
 - Audit `student_number.changed`, sujet le compte, métadonnées `{ previous: StudentNumber.mask(ancien), current: StudentNumber.mask(nouveau) }`.
-- Le compte se retrouve par son matricule exact sur « Débloquer un compte » (UDR-0020, amendée par l'UDR-0053) : `Queries::Identity::AccountLookupQuery` accepte un numéro **ou** un matricule entier.
+- Le compte se retrouve par son matricule exact sur « Débloquer un compte » (UDR-0020, amendée par l'UDR-0053) : `Queries::Identity::AccountLookupQuery` accepte un numéro **ou** un matricule entier, en `GET ?q=` (filtré des journaux), comme la recherche par numéro l'était déjà en `?contact=`.
 - Personne d'autre ne modifie un matricule : ni l'élève (profil en lecture seule), ni la direction, ni l'enseignant.
 
 ### Recherche par la direction (`School::FindStudentForPlacement`, ADR-0066)
@@ -88,7 +88,7 @@ Option B retenue.
 - Une saisie hors format reçoit un message de format (le format n'est pas un secret), **sans lecture en base**.
 - Matricule inconnu, compte anonymisé et élève non rattachable (ADR-0066 §4) reçoivent **la même réponse** : même statut HTTP, même texte, même gabarit.
 - **Débit** : la recherche et le rattachement (qui reprend le matricule) partagent un compteur **par compte** de la direction, pas par adresse (une salle des professeurs partage une adresse, UDR-0020) : **10 par minute et 100 par jour**. Au-delà, 429, sans lecture.
-- `student_number` rejoint `filter_parameters` : le matricule n'apparaît jamais dans les journaux de requêtes. La recherche est un `POST` : le matricule n'est jamais dans une URL.
+- `student_number` et le paramètre de recherche de l'équipe `q` (expression `/\Aq\z/`, pour ne masquer rien d'autre) rejoignent `filter_parameters` : le matricule n'apparaît jamais dans les journaux de requêtes. **Côté direction**, la recherche est un `POST` et le changement de classe passe par l'identifiant public de l'élève : le matricule n'est jamais dans une URL ; le champ re-rendu après un refus neutre est **vide**.
 
 ### Anonymisation (amendement de l'ADR-0036)
 
@@ -115,6 +115,7 @@ Option B retenue.
 - **Un matricule peut être usurpé** : un tiers qui connaît le matricule d'un élève s'inscrit avec avant lui. L'élève légitime est refusé et doit contacter l'équipe. L'équipe corrige le compte usurpateur si elle connaît son vrai matricule ; sinon, le matricule ne se libère que par l'**anonymisation** de ce compte, livrée par `annuaire-equipe` (ID-23). Les deux chantiers de la V2 doivent donc être en production **avant** l'ouverture aux élèves (§9).
 - **Après anonymisation, le matricule redevient libre** : la personne à qui il appartient peut recréer un compte. « Jamais réattribué » s'entend donc ainsi : jamais porté par deux comptes vivants, jamais changé sans l'équipe.
 - **La direction lit le nom d'un élève dont elle connaît le matricule entier**, s'il n'est dans aucune classe active d'un autre établissement cette année : c'est la confirmation voulue par le porteur.
+- **La recherche de l'équipe porte le matricule dans l'URL** (`?q=`, historique du navigateur de l'équipe), comme elle y portait déjà le numéro : l'équipe est protégée par son second facteur, les journaux le filtrent.
 - Une colonne propre à un rôle dans `users`, table partagée par les quatre rôles : deux `CHECK` de plus à lire pour qui découvre la table.
 - La migration **échoue** si un élève sans matricule existe (contrainte `users_student_number_required` validée). C'est voulu : c'est le contrôle « aucun élève en production ». En développement, les seeds et les fabriques reçoivent un matricule.
 
@@ -186,7 +187,8 @@ rate_limit to: 100, within: 1.day, only: %i[lookup create], name: "student-numbe
 - `test/domain/use_cases/classroom/join_with_code_test.rb` : matricule absent ou hors format → `:invalid` ; pris → `:conflict` sans compte créé.
 - `test/domain/use_cases/identity/change_student_number_test.rb` : refus hors équipe (direction, enseignant, élève), cible non élève, conflit, audit masqué.
 - `test/controllers/school_admin/student_placements_controller_test.rb` : matricule inconnu et élève d'un autre établissement → réponse identique octet pour octet hors jeton CSRF ; 11ᵉ requête en une minute → 429 sans lecture ; aucun matricule dans `log/test.log`.
-- `test/integration/filter_parameters_test.rb` (ou l'existant) : `student_number` filtré.
+- `test/integration/parameter_filtering_test.rb` (existant, Lot 0a) : `student_number` et `q` filtrés, `quantity` (ou tout paramètre qui contient « q ») non filtré.
+- Le cas « compte anonymisé » de la recherche neutre (ED-41) est fabriqué en base par le test : une fois `AnonymizeUser` livré (`annuaire-equipe`), un compte anonymisé n'a plus de matricule, et le cas reste couvert par « matricule inconnu ».
 
 ## 8. Remplace, complète, amende
 
@@ -201,3 +203,4 @@ rate_limit to: 100, within: 1.day, only: %i[lookup create], name: "student-numbe
 - Un matricule usurpé ne se libère que par l'anonymisation (`annuaire-equipe`) : **les deux chantiers de la V2 sont livrés avant l'ouverture aux élèves**.
 - L'équipe (tout sous-rôle) corrige un matricule ; la matrice de la V4 la réservera à `admin` et `field`.
 - Débit de la direction : 10 recherches par minute et 100 par jour, par compte.
+- **L'anonymisation efface le matricule, qui redevient libre** : « jamais réattribué » (grill 3) est lu comme « jamais porté par deux comptes vivants, jamais changé sans l'équipe ». Garder le matricule d'un compte anonymisé contredirait l'ADR-0036 ; le garder sous forme d'empreinte demanderait une table de plus.

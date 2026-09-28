@@ -105,6 +105,6 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 *Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
 
 - La navigation `school_admin` gagne une **cinquième destination**, « Établissement » (`school_admin_school_path`, icône `building-library`), après « Élèves ». Elle compte **5 destinations**, le maximum du §4.
-- Les quatre routes de la direction sont dessinées : aucune entrée de la direction n'est inactive.
+- Les cinq routes de la direction sont dessinées : aucune entrée de la direction n'est inactive.
 - L'accueil de la direction est son tableau de bord (UDR-0052 §3.2) ; `HOME_SECTIONS[:school_admin]` n'est plus rendu.
 - Le détail du shell d'un `school_admin` est « <Fonction> · <Établissement> ».

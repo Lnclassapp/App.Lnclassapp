@@ -62,11 +62,11 @@ L'équipe, elle, doit retrouver un compte par son matricule quand un élève app
 - `_result` pour un **membre de la direction** (`school_admin`) : la `dl` affiche « Fonction · Établissement » et l'état du second facteur (`ui_badge` « Activé » `success`, « Non activé » `warning`), comme pour l'équipe ; l'action « Réinitialiser le second facteur » et sa confirmation `reset-second-factor-modal` sont celles de l'UDR-0020.
 - Modale `teams/student_numbers/edit` : `turbo_frame_tag "modal" { ui_modal(title: "Corriger le matricule de <nom>", open: true) }` : `form#student-number-form` (`PATCH teams_account_student_number_path(public_id)`, scope `student_number`) : `ui_field :student_number` (valeur actuelle, mêmes attributs que 3.1, aide « Le matricule complet. L'ancien cessera de désigner ce compte. »). Pied : « Annuler », « Enregistrer ».
 
-**Routes** (Lot 0) : dans `namespace :teams`, `get "accounts/:user_public_id/student-number/edit", to: "student_numbers#edit", as: :edit_account_student_number` et `patch "accounts/:user_public_id/student-number", to: "student_numbers#update", as: :account_student_number`.
+**Routes** (Lot 0b) : dans `namespace :teams`, `resources :accounts, only: [], param: :user_public_id do resource :student_number, only: %i[edit update], path: "student-number", controller: "student_numbers" end`, soit `GET /teams/accounts/:account_user_public_id/student-number/edit` → `edit_teams_account_student_number_path(public_id)` et `PATCH …/student-number` → `teams_account_student_number_path(public_id)` (noms vérifiés par le test de routage du Lot 0b).
 
 **Comportement**
-- Recherche : GET dans le frame `account_lookup`, URL avancée (`?q=`) ; une saisie au format d'un numéro cherche le numéro, au format d'un matricule cherche le matricule ; sinon, « Aucun compte ».
-- Correction : succès → Turbo Stream : toast `success` « Matricule de <nom> corrigé. » et `replace "account-lookup-result"` ; repli HTML : 303 vers `/teams/accounts?q=<nouveau matricule>`. Échec → 422, modale re-rendue : format (message de 3.1), pris « Ce matricule est déjà celui d'un autre compte. » ; refus → 403 en toast ; compte inconnu ou non élève → 404.
+- Recherche : GET dans le frame `account_lookup`, URL avancée (`?q=`, paramètre filtré des journaux par `/\Aq\z/`, ADR-0065) ; une saisie au format d'un numéro cherche le numéro, au format d'un matricule cherche le matricule ; sinon, « Aucun compte ».
+- Correction : succès → Turbo Stream : toast `success` « Matricule de <nom> corrigé. » et `replace "account-lookup-result"` ; repli HTML : 303 vers `/teams/accounts` (sans paramètre : jamais le matricule dans une URL de redirection) avec `notice`. Échec → 422, modale re-rendue : format (message de 3.1), pris « Ce matricule est déjà celui d'un autre compte. » ; refus → 403 en toast ; compte inconnu ou non élève → 404.
 - Réinitialisation du second facteur d'un `school_admin` : comportement de l'UDR-0020, inchangé.
 
 **États obligatoires**

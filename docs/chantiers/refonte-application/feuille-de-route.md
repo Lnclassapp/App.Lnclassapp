@@ -249,9 +249,9 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Objectif** | Une direction d'établissement, invitée, gère ses classes, ses enseignants et ses élèves ; chacun gère son compte ; l'équipe consulte et anonymise les comptes. Les référentiels et les établissements sont gérés dès la V1 |
 | **Chantiers, dans l'ordre** | 1. `espace-direction` (cycle feature) : invitation et second facteur de la direction, rôles de référence, personnel, classes, élèves et enseignants de l'établissement, tableau de bord, profil de direction. 2. `annuaire-equipe` (cycle feature) : liste, fiche, modification et anonymisation des comptes par l'équipe. Le second peut démarrer dès que le Lot 0 du premier est fusionné : contextes `school` et `identity`, fichiers partagés limités aux routes, à la locale et à la navigation du shell. **`mon-compte` n'est plus un chantier** : sa partie livrée est close, son reste (profil de direction, recette du PIN côté direction) passe dans `espace-direction` |
 | **Déjà livré (hors ordre)** | [`profil-utilisateur`](../profil-utilisateur/memo.md) : profil et PIN sous PIN actuel (ADR-0055, UDR-0041, #37). [`photo-de-profil`](../photo-de-profil/memo.md) : photo (ADR-0060, UDR-0047, #50), durcie par #65 et #75, en production le 2026-09-28 (#78). ID-17 livrée ; ID-19 (avatar) et ID-20 (PIN) livrées pour tous les rôles, à recetter côté direction |
-| **Reste : `espace-direction`** (22 features) | ID-09, ID-10, ID-11, ID-19 (profil de direction), ID-20 (recette côté direction), SC-11, SC-12, SC-13, SC-14, SC-15, SC-16, SC-17, SC-18, SC-19, SC-20, SC-21, SC-22, SC-23, SC-24, SC-25, TR-15, TR-16 |
+| **Reste : `espace-direction`** (20 features ; ID-09 et SC-23 passent en V3 avec Q7, grill 6) | ID-10, ID-11, ID-19 (profil de direction), ID-20 (recette côté direction), SC-11, SC-12, SC-13, SC-14, SC-15, SC-16, SC-17, SC-18, SC-19, SC-20, SC-21, SC-22, SC-24, SC-25, TR-15, TR-16 |
 | **Reste : `annuaire-equipe`** (7 features) | ID-18, ID-21, ID-22, ID-23, TR-20, TR-21, TR-22 |
-| **Ajouts venus des chantiers hors plan** | La direction valide ou refuse les enseignants en attente de son établissement : `croissance-parrainage` l'a reporté à la V2 ([memo](../croissance-parrainage/memo.md), ADR-0063). La direction lit le code de son établissement, et peut-être le régénère : l'ADR-0057 annonce pour la V2 un amendement de `School::ManageSchoolPolicy` |
+| **Ajouts venus des chantiers hors plan** | ~~La direction valide ou refuse les enseignants en attente de son établissement~~ : **écarté par Q1** (2026-09-28) ; les garants et l'équipe valident, comme en V1 (ADR-0063 inchangé, critère ED-23 d'`espace-direction`). La direction lit le code de son établissement, et peut-être le régénère : l'ADR-0057 annonce pour la V2 un amendement de `School::ManageSchoolPolicy` |
 | **Sorti de la vague** | CA-23 (pages des séries) passe en V4, `catalogue-complet` : c'est une page publique du catalogue, sœur de CA-17 (niveau) et CA-21 (matière). Gardée en V2, elle aurait fait entrer le contexte `catalog` dans un chantier qui n'en a pas besoin, et créé une collision avec la V4 |
 | **Tables** | `school_staffs` (fonction en colonne, ADR-0044). Les invitations de direction réutilisent `invitations`, dont le type `school_staff` existe depuis la V1. Aucune autre table sans décision |
 | **Décisions préalables** | F-14 (ADR-0036), F-16 (ADR-0038), F-22 (ADR-0044), F-25 (ADR-0047) : toutes `Accepté` le 2026-09-25. ADR-0057 et UDR-0044 (code d'établissement), ADR-0063 et UDR-0050 (comptes en attente) : **acceptées par le porteur le 2026-09-28** (Q4), la V2 peut les amender |
@@ -259,7 +259,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Questions au porteur** | Q1 à Q4 : **répondues le 2026-09-28**. Grill du chantier `espace-direction` ([memo](../espace-direction/memo.md)) : matricule MENA obligatoire de l'élève, multi-établissement de l'enseignant (ID-09, SC-23) repoussé en V3 avec Q7, droits Proviseur et Censeur |
 | **Ouverte le** | **2026-09-28**, sur décision du porteur (« Lançons le V2 ») : sortie du backlog, chantier [`espace-direction`](../espace-direction/memo.md) en décision |
 | **Dépend de** | V1 |
-| **Porte** | Inchangée : une direction invitée administre son seul établissement ; aucune fuite inter-établissements (test de refus). Précisée : ID-19 et ID-20 recettées côté direction ; une direction ne valide que les enseignants en attente de son établissement (test de refus) ; C-31 fermée par l'UDR de la vague |
+| **Porte** | Inchangée : une direction invitée administre son seul établissement ; aucune fuite inter-établissements (test de refus). Précisée : ID-19 et ID-20 recettées côté direction ; **la direction ne valide pas les enseignants en attente** (Q1, test de refus ED-23) ; C-31 fermée par l'UDR-0052 |
 
 ### V3 — Suivi pédagogique enseignant
 
@@ -445,7 +445,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID-06 | S'inscrire depuis la page « Prépa BAC » | ❌ | **écartée** — retirée du plan le 2026-09-22 | Une route publique qui crée un compte dont le PIN est le contact |
 | ID-07 | Vérifier en direct un code de classe | ⚠️ | V1 (Lot A) — livrée 2026-09-27 (#33) | Un endpoint énumérable, sans limite de débit, qui renvoie plus que le strict nécessaire |
 | ID-08 | Listes en cascade DRENA → écoles, école + niveau → classes | ✅ | V1 pour DRENA → écoles (inscription enseignant) — livrée 2026-09-27 (#33), remplacée le 2026-09-28 par le code d'établissement (ADR-0057, #49) · **écartée** pour école + niveau → classes | Rejoindre une classe sans son code |
-| ID-09 | Rattacher un enseignant existant à l'établissement | ⚠️ | V2 (`espace-direction`) | Un formulaire sans vue (`MissingTemplate`) |
+| ID-09 | Rattacher un enseignant existant à l'établissement | ⚠️ | V3, `multi-etablissements-enseignant` (grill 6 d'`espace-direction`, 2026-09-28) | Un formulaire sans vue (`MissingTemplate`) |
 | ID-10 | Rattacher un élève existant à une classe | ⚠️ | V2 (`espace-direction`) | Idem ; adhésion non principale sans règle |
 | ID-11 | Lister les enseignants et les élèves de l'établissement | ⚠️ | V2 (`espace-direction`) | Comptes démo mêlés aux vrais élèves |
 | ID-12 | Se connecter | ⚠️ | V1 (0b) — livrée 2026-09-27 (#33) | PIN affiché en clair ; aucune limite de débit ; aucune rotation de session |
@@ -516,7 +516,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | SC-20 | Lister les élèves de l'établissement | ✅ | V2 (= ID-11) | — |
 | SC-21 | Ajouter un élève existant à une classe | ❌ | V2 (= ID-10) | — |
 | SC-22 | Lister les enseignants de l'établissement | ✅ | V2 (= ID-11) | — |
-| SC-23 | Rattacher un enseignant existant | ❌ | V2 (= ID-09) | — |
+| SC-23 | Rattacher un enseignant existant | ❌ | V3, `multi-etablissements-enseignant` (= ID-09 ; grill 6 d'`espace-direction`, 2026-09-28) | — |
 | SC-24 | Profil de direction | ✅ | V2 (= ID-19) | — |
 | SC-25 | Changer son PIN côté direction | ⚠️ | V2 (= ID-20) | — |
 | SC-26 | API des établissements d'une DRENA | ✅ | V1 (inscription enseignant) — livrée 2026-09-27 (#33) ; l'inscription ne l'appelle plus depuis le code d'établissement (ADR-0057, #49), l'adresse reste publique | Un endpoint public sans limite de débit |
