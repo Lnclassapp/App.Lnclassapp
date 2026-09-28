@@ -202,6 +202,6 @@ end
 *Constaté pendant la mise en recette de la V1. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Le pré-déploiement devient `bin/rails db:prepare db:seed`.** `db:prepare` ne sème qu'une base qu'il crée ; or la base PostgreSQL de Railway existe déjà quand l'application se déploie la première fois. Sans `db:seed`, l'invitation d'amorçage du premier compte équipe (`db/seeds/identity.rb`, ADR-0034) n'était jamais émise, et personne ne pouvait se connecter.
-- En production, seul `db/seeds/identity.rb` tourne : il ne fait rien dès qu'un compte équipe existe, ou quand `TEAM_BOOTSTRAP_CONTACT` est absente. Le lien d'invitation s'affiche une fois, dans les logs du pré-déploiement.
+- En production, seul `db/seeds/identity.rb` tourne : il ne fait rien dès qu'un compte équipe existe, ou quand `TEAM_BOOTSTRAP_CONTACT` est absente. Le lien d'invitation s'affiche dans les logs du pré-déploiement ; tant qu'aucun compte équipe n'existe, chaque déploiement révoque l'invitation ouverte et en affiche une nouvelle, car Railway peut couper ces logs à l'arrêt du conteneur (constaté au premier déploiement de production, 2026-09-27).
 - **Réglages de service constatés à tort sur Railway** (corrigés le 2026-09-27, en recette et en production) : builder Railpack au lieu du `Dockerfile` (l'application démarrait sans `RAILS_ENV=production`), domaines pointés sur le port 3000 au lieu du port d'écoute de Thruster (`PORT=8080`).
 - Preuve : `test/config/railway_deployment_test.rb`.

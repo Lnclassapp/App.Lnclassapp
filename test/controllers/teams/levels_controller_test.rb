@@ -57,7 +57,7 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#levels tr", 2
     assert_select "#levels tr:first-child#level_6eme", text: /6ème\s+6eme\s+1\s+#{tl('cycles.first')}/
     assert_select "#level_tle", text: /#{tl('cycles.second')}\s+D\s+1\s+0/
-    assert_select "#level_tle a[data-turbo-frame=modal][href='#{edit_level_path('tle')}']", text: including(tl("level_row.edit"))
+    assert_select "#level_tle [role=menu] a[role=menuitem][data-turbo-frame=modal][href='#{edit_level_path('tle')}']", text: including(tl("level_row.edit"))
     assert_select "#level_tle dialog#delete-level-tle form#delete-level-tle-form[action='#{level_path('tle')}']" do
       assert_select "input[name=_method][value=delete]", 1
     end

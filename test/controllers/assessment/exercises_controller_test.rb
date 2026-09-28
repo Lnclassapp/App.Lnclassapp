@@ -99,7 +99,9 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#content_status_exercise_#{exercise.public_id}", text: /Brouillon/
     assert_select "#content_status_exercise_#{exercise.public_id} form[action='#{publish_teams_exercise_path(exercise.public_id)}']"
-    assert_select "a[href='#{edit_teams_exercise_path(exercise.public_id)}'][data-turbo-frame=modal]",
+    # UDR-0042: « Modifier » lives in the ⋮ menu of the exercise, even alone.
+    assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: exercise.title)
+    assert_select "[role=menu] a[role=menuitem][href='#{edit_teams_exercise_path(exercise.public_id)}'][data-turbo-frame=modal]",
                   text: I18n.t("#{scope}.show.edit")
     assert_select "#exercise_questions li.answer[data-correct]", 2
     assert_select "#student_progress", 0

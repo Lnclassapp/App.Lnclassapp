@@ -27,6 +27,19 @@ class AuthenticatedControllerTest < ActionDispatch::IntegrationTest
     assert_select "#toasts", 0
   end
 
+  # ADR-0049, ADR-0055: a session renewed from a modal (number or PIN changed) lands on a page asked for by the frame;
+  # the shell carries the reload tag, so Turbo leaves the frame and reloads the whole document with the new nonce.
+  test "the first Turbo frame request of a new session receives the shell, with the reload tag" do
+    sign_in_as create_student
+
+    get pending_account_path, headers: { "Turbo-Frame" => "modal", "X-Turbo-Request-Id" => "1" }
+
+    assert_select "main#main"
+    assert_select "meta[name=turbo-visit-control][content=reload]"
+    get pending_account_path, headers: { "Turbo-Frame" => "modal", "X-Turbo-Request-Id" => "2" }
+    assert_select "main#main", 0
+  end
+
   test "a 422 re-render in a frame holds a single modal frame, with its content" do
     token = SecureRandom.base58(32)
     create_login_session(user: create_student, token:)

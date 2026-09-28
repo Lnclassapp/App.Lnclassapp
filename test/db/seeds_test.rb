@@ -74,7 +74,7 @@ class SeedsTest < ActiveSupport::TestCase
     assert_match "réservé au développement", error.message
   end
 
-  test "without a team account, the bootstrap contact receives one admin invitation, whose link is printed once" do
+  test "without a team account, the bootstrap contact receives one admin invitation, whose link is printed" do
     output = with_bootstrap_contact("0700000042") { as_production { run_seeds } }
 
     invitation = Orm::Invitation.sole
@@ -82,11 +82,18 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal [ "team", "0700000042", "admin", nil ], invitation.values_at(:kind, :contact, :team_role, :invited_by_id)
     assert_equal secret_digest(token), invitation.token_digest
     assert_in_delta 72.hours.from_now, invitation.expires_at, 5
+  end
 
-    again = with_bootstrap_contact("0700000042") { as_production { run_seeds } }
+  # The link lives only in the pre-deploy logs, which Railway may cut when the container stops: a later run revokes the
+  # open invitation and prints a new link, so a lost link never locks the platform out.
+  test "a later run revokes the open bootstrap invitation and prints a new link" do
+    first = with_bootstrap_contact("0700000042") { as_production { run_seeds } }[%r{/invitations/(\w+)}, 1]
 
-    assert_equal 1, Orm::Invitation.count
-    assert_no_match "/invitations/", again
+    again = with_bootstrap_contact("0700000042") { as_production { run_seeds } }[%r{/invitations/(\w+)}, 1]
+
+    assert_not_equal first, again
+    assert_equal [ secret_digest(again) ], Orm::Invitation.where(revoked_at: nil).pluck(:token_digest)
+    assert_equal 2, Orm::Invitation.count
   end
 
   test "an expired bootstrap invitation is revoked and replaced" do

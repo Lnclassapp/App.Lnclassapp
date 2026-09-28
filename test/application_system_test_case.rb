@@ -34,4 +34,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   ensure
     window.resize_to(*original)
   end
+
+  # UDR-0042: the actions of a row or of a header live in its ⋮ menu. Open the menu, then choose the item.
+  def click_menu_action(scope, label, **filters)
+    within(scope, **filters) do
+      find("button[aria-haspopup=menu]").click
+      within("[role=menu]") { click_on label }
+    end
+  end
 end

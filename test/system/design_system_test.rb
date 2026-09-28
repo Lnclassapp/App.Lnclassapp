@@ -226,13 +226,19 @@ class DesignSystemTest < ApplicationSystemTestCase
     find("button[data-redirect]").click
 
     assert_selector "#toasts [data-toast-type=success]", text: /\d{2}:\d{2}:\d{2}/
-    assert_no_selector "#toasts [data-toast-type=success]", wait: 7
+    # The toast pauses while hovered (UDR-0006), and the pointer stays where the button was clicked: after the reload,
+    # the toast may land under it and never leave. The pointer moves away first; the wait covers the 5 s delay with
+    # room for a loaded run.
+    find("h1", match: :first).hover
+    assert_no_selector "#toasts [data-toast-type=success]", wait: 12
   end
 
   test "a CRUD form opens in the modal frame, keeps its errors in 422 and closes on success" do
     click_on t("design.index.hotwire.open")
     within("turbo-frame#modal") do
       assert_selector "dialog#design-crud-modal[open]"
+      # Servie ouverte dès le HTML (modales-sans-js), elle reste une vraie modale : focus piégé, fond, Échap.
+      assert page.evaluate_script("document.querySelector('dialog#design-crud-modal').matches(':modal')")
       fill_in "sample_name", with: "   " # passe la validation du navigateur, pas celle du serveur
       click_on t("design.modal.submit")
 

@@ -183,6 +183,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[aria-haspopup]", 0
   end
 
+  # Chantier modales-sans-js : une modale servie ouverte l'est dès le HTML, pour rester lisible sans JavaScript ; une
+  # modale à déclencheur reste fermée.
+  test "ui_modal served open carries the open attribute of its dialog, a closed one does not" do
+    show ui_modal(title: "Modifier", id: "served", open: true) + ui_modal(title: "Plus tard", id: "later", trigger: "Ouvrir")
+
+    assert_select "dialog#served[open]"
+    assert_select "dialog#later[open]", 0
+  end
+
   test "ui_dropdown renders a menu button and its items" do
     html = ui_dropdown(label: "Actions", align: :start) do
       ui_dropdown_item("Modifier", href: "/edit", icon: "pencil") +
@@ -198,11 +207,58 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span[role=menuitem][aria-disabled=true]", text: "Bientôt"
   end
 
+  test "ui_dropdown_item marks the link of the current page, never an action on it (UDR-0041)" do
+    request.path_info = "/profile"
+    show ui_dropdown_item("Mon profil", href: "/profile") + ui_dropdown_item("Modifier", href: "/edit") +
+         ui_dropdown_item("Supprimer", href: "/profile", method: :delete)
+
+    assert_select "a[aria-current=page][href='/profile']", text: "Mon profil"
+    assert_select "a[aria-current]", 1
+  end
+
   test "ui_dropdown accepts a custom trigger and id" do
     show ui_dropdown(label: "Compte", id: "account", trigger: "Awa") { "" }
 
     assert_select "button[aria-controls=account]", text: /Awa/
     assert_select "div#account.right-0"
+    assert_select "[data-dropdown-fixed-value]", 0
+    assert_select "div#account.z-30"
+  end
+
+  test "ui_dropdown fixed escapes a scrolling table and follows it (UDR-0042)" do
+    show ui_dropdown(label: "Actions pour Abidjan 1", id: "row-menu", fixed: true) { "" }
+
+    assert_select "[data-controller=dropdown][data-dropdown-fixed-value=true]"
+    assert_select "div#row-menu[role=menu].z-50", 1, "au-dessus de la barre basse (z-40) du mobile"
+    assert_select "[data-controller=dropdown][data-action*='scroll@window->dropdown#place:capture']"
+    assert_select "[data-controller=dropdown][data-action*='resize@window->dropdown#place']"
+    assert_select "button[aria-label='Actions pour Abidjan 1'][aria-controls=row-menu] svg"
+  end
+
+  test "ui_dropdown_item frame: opens the link in a Turbo frame and dismisses the menu (UDR-0042)" do
+    show ui_dropdown_item("Modifier", href: "/drenas/1/edit", icon: "pencil-square", frame: "modal")
+
+    assert_select "a[role=menuitem][tabindex='-1'][href='/drenas/1/edit'][data-turbo-frame=modal]" \
+                  "[data-action='dropdown#dismiss']", text: "Modifier"
+    assert_select "a[data-turbo-method]", 0
+  end
+
+  test "ui_dropdown_item dialog: is a button that opens a dialog of the page (UDR-0042)" do
+    show ui_dropdown_item("Supprimer", dialog: "delete-drena-1", icon: "trash", tone: :danger)
+
+    assert_select "button[type=button][role=menuitem][tabindex='-1'][aria-haspopup=dialog][aria-controls=delete-drena-1]" \
+                  "[data-action='dropdown#openDialog'][data-dropdown-dialog-param=delete-drena-1].text-error.min-h-tap svg",
+                  count: 1
+    assert_select "button", text: "Supprimer"
+    assert_select "a", 0
+  end
+
+  test "ui_dropdown_item keeps the default tone for a dialog, and refuses an unknown tone" do
+    show ui_dropdown_item("Désactiver", dialog: "deactivate-school-1")
+
+    assert_select "button.text-ink[role=menuitem]", text: "Désactiver"
+    assert_select "button.text-error", 0
+    assert_raises(ArgumentError) { ui_dropdown_item("X", dialog: "x", tone: :loud) }
   end
 
   test "ui_tabs selects the first tab unless told otherwise" do

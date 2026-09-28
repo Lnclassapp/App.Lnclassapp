@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/series/_series_row — une ligne du tableau des séries %>
-<%# Rôle : nom, code figé, niveaux liés, usages ; « Modifier » en modale, « Supprimer » confirmé dans la page %>
-<%# ADR  : 0029, 0036 · UDR : 0006, 0033 %>
+<%# Rôle : nom, code figé, niveaux liés, usages ; menu ⋮ : « Modifier » en modale, « Supprimer » confirmé dans la page %>
+<%# ADR  : 0029, 0036 · UDR : 0006, 0033, 0042 %>
 <tr id="series_<%= row.slug %>" class="align-middle">
   <td class="px-4 py-3 font-medium whitespace-nowrap"><%= row.name %></td>
   <td class="px-4 py-3"><code class="font-mono text-xs text-mute"><%= row.slug %></code></td>
@@ -18,19 +18,20 @@
   <td class="px-4 py-3 tabular-nums"><%= row.classrooms_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= row.courses_count %></td>
   <td class="px-4 py-3">
-    <div class="flex items-center justify-end gap-2">
-      <%= ui_button t(".edit"), href: edit_series_path(row.slug), variant: :ghost, size: :sm, icon: "pencil-square",
-                    data: { turbo_frame: "modal" } %>
-      <%= ui_modal title: t(".delete_title", name: row.name), id: "delete-series-#{row.slug}", size: :sm,
-                   trigger: t(".delete"), trigger_variant: :ghost, trigger_icon: "trash" do |modal| %>
-        <% modal.footer do %>
-          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
-          <%= form_with url: series_path(row.slug), method: :delete do %>
-            <%= ui_button t(".confirm"), type: :submit, variant: :danger, full: true %>
-          <% end %>
-        <% end %>
-        <p class="text-sm text-mute"><%= t(".delete_body") %></p>
+    <div class="flex justify-end">
+      <%= ui_dropdown label: t(".actions", name: row.name), id: "series-actions-#{row.slug}", fixed: true do %>
+        <%= ui_dropdown_item t(".edit"), href: edit_series_path(row.slug), icon: "pencil-square", frame: "modal" %>
+        <%= ui_dropdown_item t(".delete"), dialog: "delete-series-#{row.slug}", icon: "trash", tone: :danger %>
       <% end %>
     </div>
+    <%= ui_modal title: t(".delete_title", name: row.name), id: "delete-series-#{row.slug}", size: :sm do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+        <%= form_with url: series_path(row.slug), method: :delete do %>
+          <%= ui_button t(".confirm"), type: :submit, variant: :danger, full: true %>
+        <% end %>
+      <% end %>
+      <p class="text-sm text-mute"><%= t(".delete_body") %></p>
+    <% end %>
   </td>
 </tr>

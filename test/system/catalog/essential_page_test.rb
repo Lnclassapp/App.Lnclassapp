@@ -114,7 +114,7 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
       assert_selector "#essential_exercises li", count: 3
       assert_rich_content
 
-      click_on I18n.t("#{scope}.show.edit")
+      click_menu_action("#essential_team_actions", I18n.t("#{scope}.show.edit"))
       within "turbo-frame#modal dialog[open]" do
         fill_in "essential[name]", with: "La méiose et ses anomalies"
         expect_morph

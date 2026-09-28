@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::UserRepositoryPort
 # Rôle : contrat de lecture des comptes et de leur PIN (bcrypt côté repository)
-# ADR  : 0026, 0028, 0050
+# ADR  : 0026, 0028, 0050, 0055
 module Ports
   module Identity
     module UserRepositoryPort
@@ -27,6 +27,16 @@ module Ports
       # → true
       def update_pin(user_id:, pin:)
         raise NotImplementedError, "#{self.class} doit implémenter #update_pin"
+      end
+
+      # → true ; noms déjà validés par le domaine
+      def update_name(user_id:, first_name:, last_name:)
+        raise NotImplementedError, "#{self.class} doit implémenter #update_name"
+      end
+
+      # → Shared::Result : success | :conflict (errors { contact: [:taken] }) si le numéro appartient à un autre compte
+      def update_contact(user_id:, contact:)
+        raise NotImplementedError, "#{self.class} doit implémenter #update_contact"
       end
 
       # → Entities::Identity::Actor ; school_id = école principale de l'enseignant, sinon nil

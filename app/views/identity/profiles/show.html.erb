@@ -1,0 +1,17 @@
+<%# 🌐 UI · identity/profiles/show — « Mon profil », dans le shell du rôle %>
+<%# Rôle : carte « Mes informations » (nom, numéro), carte du PIN ; chaque changement s'ouvre dans le frame modal %>
+<%# ADR  : 0055 · UDR : 0006, 0041 %>
+<% content_for :title, t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+
+<div class="grid max-w-2xl gap-6">
+  <%= render "information", profile: @profile %>
+
+  <%= ui_card id: "profile_security", "aria-labelledby": "profile_security_title" do %>
+    <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
+    <p class="mt-2 text-sm text-mute"><%= t(".security_body") %></p>
+    <div class="mt-4">
+      <%= ui_button t(".change_pin"), href: edit_profile_pin_path, icon: "key", data: { turbo_frame: "modal" } %>
+    </div>
+  <% end %>
+</div>

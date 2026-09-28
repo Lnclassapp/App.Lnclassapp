@@ -70,3 +70,9 @@ L'ancienne application n'avait aucune page pour voir les séries : `index` et `s
 - Une série ne se supprime qu'après avoir été retirée de tous ses niveaux. Une série portée par une classe ou un cours ne se supprime pas en V1.
 - Interdit désormais : la remise à `NULL` silencieuse de la série d'une classe ou d'un cours, et un retrait de couple qui échoue sans le dire.
 - Hors périmètre : la page publique d'une série (CA-23).
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#series-actions-<slug>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-series-<slug>"`, `:danger`). La modale est rendue sans `trigger:`, son pied est inchangé. La matrice des bascules ne change pas.
