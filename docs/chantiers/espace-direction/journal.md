@@ -49,6 +49,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Une règle déléguée contradictoire** (« seul un Proviseur invite un Proviseur » + « un seul Proviseur actif ») est passée du memo à l'ADR sans être vue ; le challenger l'a trouvée en déroulant le cas.
 - **Le retrait d'un enseignant était sans effet** tant que le code d'établissement, diffusé à tous, permettait de revenir aussitôt.
 - La feuille de route contredisait encore Q1 dans la porte de la V2 ; corrigée.
+- **Relecture adverse des retours du porteur** (2026-09-28, sans sous-agent disponible : relue en rôle de challenger) : le retrait du rattachement d'un élève venu d'ailleurs laisse **bloqué** un élève dont la classe de l'an dernier est restée `active` (ni déplacé, ni admis par code) — noté en point ouvert ; l'ordre des vérifications de la correction du matricule devait suivre `ChangeOwnPin` (sinon l'oracle « déjà utilisé » répondait sans PIN) ; ED-54 n'était pas testable (« ne propose pas ») ; l'ADR-0055 n'avait pas d'amendement daté ; le compte des critères réécrits était faux. Tous corrigés.
 
 ## Ce qu'on a appris sur la codebase
 
