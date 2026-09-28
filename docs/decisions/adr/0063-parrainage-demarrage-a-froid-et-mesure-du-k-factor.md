@@ -164,3 +164,7 @@ Import `lnclass.schools` v1 : clé facultative `national_code` (chaîne ou nombr
 - **Partages** : 30 par heure et par compte ; un enseignant en attente reçoit 403 (pas l'écran d'attente), un enseignant sans profil (sans jeton) n'est pas compté (`referral_token_for`).
 - **Mesure** : inscriptions et cohorte excluent les comptes en attente ou refusés ; la conversion par partage et le *c* de la cohorte ne comptent que les parrainages **par lien** (k = i × c) ; les parrainages par garant restent dans « dont parrainées » ; le classement ignore les établissements non actifs.
 
+## Amendement du 2026-09-28 — décision du porteur sur la saturation (M1)
+
+- **La limite de 5 demandes en attente par établissement est gardée.** Le risque est connu : les codes nationaux sont publics et le numéro n'est pas vérifié, donc un tiers peut occuper les 5 places d'un établissement (5 par minute et par IP au rythme de la limite de débit).
+- **Parade prévue, hors de ce chantier** : vérifier le numéro par WhatsApp via un hook n8n avant qu'une demande n'entre dans la file. Elle fera l'objet de son propre chantier et de son ADR.

@@ -6,6 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
+| 2026-09-28 | Le porteur garde la limite de 5 demandes en attente par établissement, malgré le risque de saturation (M1) | Accepté en l'état ; la vérification du numéro par WhatsApp (hook n8n) viendra dans un chantier suivant | Oui — ADR-0063, amendement du 2026-09-28 (décision du porteur) |
 | 2026-09-28 | Défauts appliqués sans arbitrage : badge à 3 filleuls, 5 demandes en attente par établissement, un seul garant, compte refusé conservé, nom du parrain non affiché | Le porteur a demandé d'avancer ; chaque défaut est listé « à confirmer » dans le memo | Oui — ADR-0063, UDR-0050 (statut *Proposé*) |
 | 2026-09-28 | Table `referrals` plutôt que `users.referred_by_id` | Source (lien / garant), date et établissement lisibles par les métriques ; `users` inchangé | Oui — ADR-0063 §3 |
 | 2026-09-28 | Jeton de parrainage tiré par la base (`DEFAULT`), pas par le domaine | Aucun chemin d'écriture à toucher (inscription, seeds, fabriques, existant) ; le jeton n'a pas de sens métier | Oui — ADR-0063, coût consenti |
@@ -43,7 +44,7 @@
 | Partages sans limite ; en attente redirigé au lieu de 403 ; sans profil compté | 30/h, 403, rien compté |
 | Cohorte avec comptes en attente, conversion avec garants, classement avec inactifs | exclus |
 | k à deux décimales, « 67% », partage natif sans url, en-tête HITL sur 4 lignes | corrigés |
-| M1 — saturation des 5 places par un attaquant | inchangé, soumis au porteur par le coordinateur |
+| M1 — saturation des 5 places par un attaquant | **décision du porteur (2026-09-28) : la limite de 5 est gardée.** Parade prévue plus tard : vérification du numéro par WhatsApp via un hook n8n (voir « Suites prévues ») |
 
 ## Mesures
 
@@ -81,3 +82,7 @@
 | **PR** | *(ouverte par le coordinateur)* |
 | **ADR produits** | ADR-0063 ; amendements ADR-0057, ADR-0030 |
 | **UDR produits** | UDR-0050 ; amendements UDR-0018, UDR-0026, UDR-0036, UDR-0044 |
+
+## Suites prévues
+
+- **Vérification du numéro par WhatsApp** (demande du porteur, 2026-09-28) : à l'inscription sans code, un code envoyé sur WhatsApp par un hook **n8n** confirme le numéro avant que la demande n'entre dans la file de l'établissement. Réduit la saturation des 5 places (M1) et la réservation du numéro d'un tiers. Chantier à ouvrir ; rien n'est livré ici.
