@@ -80,6 +80,8 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | Chantier | En une phrase |
 |---|---|
 | **V3 — Suivi pédagogique enseignant** | 11 features : `rapports-de-classe`, `vie-de-la-classe` (dont CL-02), `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 le confirme |
+| `multi-etablissements-enseignant` | Un enseignant rattaché à plusieurs établissements (ID-09, SC-23, Q7) : chaque direction voit sa part et ne retire que son rattachement (grill 5 d'[`espace-direction`](espace-direction/memo.md)). Sorti de la V2 par le porteur le 2026-09-28 |
+| `changement-etablissement-eleve` | Un élève change d'établissement en cours de scolarité (mutation, déménagement) : aujourd'hui, un élève dont la classe est active ne rejoint aucune autre classe. Reporté par le porteur le 2026-09-28, pendant le cadrage d'[`espace-direction`](espace-direction/memo.md) |
 | **V4 — Contenu à l'échelle et back-office** | 9 features : `catalogue-complet`, `installation-pwa`, `sous-roles-equipe` ; Q9 et Q10 ouvertes |
 | **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
 | **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |

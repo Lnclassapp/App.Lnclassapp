@@ -110,7 +110,7 @@ Option B retenue.
 
 ### 🔴 Coûts consentis
 
-- **Le format est une hypothèse.** Si le vrai matricule MENA diffère (longueur, lettre en tête, chiffres seuls), le `CHECK` et l'entité changent avant le Lot 0 ; après, il faut une migration de la contrainte.
+- **Le format est fixé** sur l'exemple donné par le porteur le 2026-09-28 (`12345678A` : 8 chiffres puis une lettre). Un matricule MENA d'une autre forme serait refusé ; l'élucider ensuite demanderait une migration de la contrainte.
 - **L'inscription dit qu'un matricule est pris.** C'est un oracle : quiconque a un code de classe valide peut tester si un matricule est déjà inscrit (sans apprendre à qui). Il est borné par la limite de débit de `/c/<code>` (10 par minute et par adresse, ADR-0041), la même qui borne déjà l'oracle « ce numéro est déjà utilisé ».
 - **Un matricule peut être usurpé** : un tiers qui connaît le matricule d'un élève s'inscrit avec avant lui. L'élève légitime est refusé et doit contacter l'équipe. L'équipe corrige le compte usurpateur si elle connaît son vrai matricule ; sinon, le matricule ne se libère que par l'**anonymisation** de ce compte, livrée par `annuaire-equipe` (ID-23). Les deux chantiers de la V2 doivent donc être en production **avant** l'ouverture aux élèves (§9).
 - **Après anonymisation, le matricule redevient libre** : la personne à qui il appartient peut recréer un compte. « Jamais réattribué » s'entend donc ainsi : jamais porté par deux comptes vivants, jamais changé sans l'équipe.
@@ -198,7 +198,7 @@ rate_limit to: 100, within: 1.day, only: %i[lookup create], name: "student-numbe
 
 ## 9. Points à confirmer par le porteur
 
-- **Le format exact du matricule MENA**, sur un vrai matricule, avant le Lot 0 (hypothèse : 8 chiffres et une lettre).
+- ~~Le format exact du matricule MENA~~ : **confirmé le 2026-09-28** par le porteur sur l'exemple `12345678A` (8 chiffres puis une lettre).
 - **Aucun élève en production** au moment de la migration du Lot F (sinon elle échoue, et il faut un écran de rattrapage).
 - Un matricule usurpé ne se libère que par l'anonymisation (`annuaire-equipe`) : **les deux chantiers de la V2 sont livrés avant l'ouverture aux élèves**.
 - L'équipe (tout sous-rôle) corrige un matricule ; la matrice de la V4 la réservera à `admin` et `field`.
