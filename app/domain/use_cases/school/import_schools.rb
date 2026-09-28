@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::School::ImportSchools
-# Rôle : adaptateur d'import des établissements (clés de l'ancien acceptées), chacun écrit avec ses classes générées
-# ADR  : 0028, 0030, 0039, 0041, 0058 · UDR : 0037
+# Rôle : adaptateur d'import des établissements (clés de l'ancien acceptées), chacun écrit avec son code et ses classes générées
+# ADR  : 0028, 0030, 0039, 0041, 0057, 0058 · UDR : 0037
 module UseCases
   module School
     class ImportSchools
@@ -20,7 +20,8 @@ module UseCases
       ERROR_KEYS = { name: "name", sigle: "sigle", status: "status", school_type: "type", cycle: "cycle" }.freeze
       ERROR_CODES = { blank: "blank", too_long: "too_long", inclusion: "invalid_value" }.freeze
 
-      # classroom_plan : le barème, lu une fois à la préparation (ADR-0058) ; random : tirage des codes, injectable.
+      # classroom_plan : le barème, lu une fois à la préparation (ADR-0058) ; random : tirage des codes d'adhésion des
+      # classes, injectable pour les tests ; les codes d'établissement ont le leur.
       def initialize(drenas:, schools:, classrooms:, taxonomy:, classroom_plan:, random: SecureRandom)
         @drenas = drenas
         @schools = schools

@@ -344,6 +344,8 @@ module UseCases
         assert_equal 3, codes.compact.uniq.size
         assert(codes.all? { Entities::School::SchoolCode.valid?(it) })
         assert_not_includes codes, existing.school_code
+        # ADR-0058: the same import reads the barème (public lycée 77, private lycée 38, public collège 28).
+        assert_equal [ 77, 38, 28 ], [ "Lycée A", "Lycée B", "Collège C" ].map { classrooms_of(it).count }
         assert_equal Set[existing.school_code, *codes], schools.taken
       end
 
