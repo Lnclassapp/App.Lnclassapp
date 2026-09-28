@@ -16,12 +16,19 @@ module Teams
 
     # Le frame de recherche ne reçoit que ses résultats : chercher ne recalcule pas les indicateurs.
     def respond_with_search
-      @search = Queries::Identity::AccountSearchQuery.new.call(term: params[:q], page: params[:page])
+      @search = Queries::Identity::AccountSearchQuery.new.call(term: text_param(:q), page: text_param(:page))
       return render(partial: "search_results", locals: { search: @search }) if turbo_frame_request_id == SEARCH_FRAME
 
-      @period = Entities::School::ReportingPeriod.parse(params[:period], today: Date.current)
-      @dashboard = Queries::School::TeamDashboardQuery.new.call(period: @period, drena_public_id: params[:drena])
+      @period = Entities::School::ReportingPeriod.parse(text_param(:period), today: Date.current)
+      @dashboard = Queries::School::TeamDashboardQuery.new.call(period: @period, drena_public_id: text_param(:drena))
       @drenas = Queries::School::SchoolOptionsQuery.new.drenas
+    end
+
+    # Un paramètre de la page n'est lu que s'il est un texte sans octet nul : un tableau (q[]=), un hash (page[a]=) ou
+    # un octet nul (PostgreSQL le refuse) est une valeur invalide, ignorée comme un paramètre absent.
+    def text_param(key)
+      value = params[key]
+      value if value.is_a?(String) && !value.include?("\0")
     end
   end
 end

@@ -2,7 +2,8 @@
 <%# Rôle : rôle, établissement et classe (ou nombre de classes), numéro masqué ; aucune fiche de compte avant la V2 %>
 <%# ADR  : 0062 · UDR : 0049 %>
 <%# locals: (search:) -%>
-<%= turbo_frame_tag Teams::DashboardsController::SEARCH_FRAME,
+<%# Les liens de pagination avancent l'URL : un rechargement garde la page courante. %>
+<%= turbo_frame_tag Teams::DashboardsController::SEARCH_FRAME, data: { turbo_action: "advance" },
                     class: "block transition-opacity aria-busy:pointer-events-none aria-busy:opacity-50" do %>
   <% if search.term.blank? %>
     <p class="text-sm text-mute"><%= t(".prompt") %></p>

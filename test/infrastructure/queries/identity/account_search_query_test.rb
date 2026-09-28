@@ -83,6 +83,9 @@ class Queries::Identity::AccountSearchQueryTest < ActiveSupport::TestCase
     assert_equal "Élève Zadi 20", second.rows.first.display_name
     assert_equal 2, search("zadi", page: "99").page
     assert_equal 1, search("zadi", page: "-1").page
+    # page[]=2 or page[a]=1 in the query string hands an array or a hash: page 1, never a 500.
+    assert_equal 1, search("zadi", page: [ "2" ]).page
+    assert_equal 1, search("zadi", page: { "a" => "1" }).page
   end
 
   test "the number of queries does not depend on the number of results" do
