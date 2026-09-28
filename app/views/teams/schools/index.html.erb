@@ -1,9 +1,25 @@
 <%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
-<%# Rôle : action principale « Importer des établissements » ; filtres et pages dans le frame « schools », seul renvoyé à ses requêtes %>
-<%# ADR  : 0030, 0036 · UDR : 0006, 0036 · aucun bouton de création : un établissement n'entre que par l'import %>
+<%# Rôle : « Importer des établissements » (principale), « Générer les classes manquantes » confirmée ; filtres et pages dans le frame « schools » %>
+<%# ADR  : 0030, 0036, 0056 · UDR : 0006, 0036, 0043 · aucun bouton de création : un établissement n'entre que par l'import %>
 <% content_for :title, t(".page_title") %>
 <% unless list_frame_request? %>
   <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
+    <%= ui_modal title: t(".generate_title"), id: "generate-classrooms-modal", trigger: t(".generate"),
+                 trigger_variant: :secondary, trigger_icon: "sparkles" do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".generate_cancel"), variant: :secondary, data: { action: "modal#close" } %>
+        <%= ui_button t(".generate_confirm"), type: :submit, form: "generate-classrooms-form", icon: "sparkles" %>
+      <% end %>
+      <%= form_with url: classroom_generations_path, id: "generate-classrooms-form", class: "space-y-3 text-sm" do %>
+        <p class="text-ink"><%= t(".generate_intro") %></p>
+        <ul id="generate-classrooms-rules" class="list-disc space-y-1 pl-5 text-mute">
+          <li><%= t(".generate_rule_scope_html", year: Entities::Classroom::SchoolYear.current(Date.current)) %></li>
+          <li><%= t(".generate_rule_plan") %></li>
+          <li><%= t(".generate_rule_untouched") %></li>
+        </ul>
+        <p class="text-mute"><%= t(".generate_background") %></p>
+      <% end %>
+    <% end %>
     <%= ui_button t(".import"), href: new_teams_import_path(kind: "schools"), icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
   <% end %>
   <%= render "filters", filters: @filters %>
