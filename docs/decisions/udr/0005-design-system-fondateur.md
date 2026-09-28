@@ -128,3 +128,13 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 *Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Menu déroulant** : l'API devient `ui_dropdown(label:, icon:, trigger:, align:, id:, fixed: false) { ui_dropdown_item(label, href:, icon:, method:, tone:, frame:, dialog:) }`. `frame:` ouvre le lien dans un Turbo Frame et ferme le menu ; `dialog:` rend un `<button role="menuitem">` qui ferme le menu, rend le focus au bouton et ouvre la `<dialog>` d'id donné en `showModal()` ; `fixed: true` place le menu en position fixe (`z-50`) pour qu'il échappe au défilement d'un tableau. Contrôleur `dropdown` : actions `dismiss`, `openDialog`, `place`.
+
+## Amendement du 2026-09-28 — groupe de boutons radio
+
+*Chantier [`docs/chantiers/cycles-en-radio`](../../chantiers/cycles-en-radio/prd.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Nouveau composant** : `ui_radio_group(form, :attribut, choices:, label:, hint:, required: false, columns: 1|2|3)` (`components/_radio_group.html.erb`). `choices:` est une liste `[libellé, valeur]` ; la valeur de l'objet est cochée. Balisage : `fieldset#<id du champ>` → `legend` (libellé, astérisque si `required`) → grille `grid gap-2` (options empilées au téléphone, `sm:grid-cols-2` ou `sm:grid-cols-3` à partir de `sm`) → une `<label>` par option, qui contient le radio (`size-5 accent-brand`, contour de focus `brand`) et son texte → aide `#<id>_hint` et première erreur `#<id>_error` **sous le groupe**.
+- **Tokens** : option `min-h-tap rounded-ln border bg-white px-4`, bordure `line` au repos et `error` en erreur, survol `mist`, option cochée `has-checked:border-brand has-checked:bg-brand-soft`. Constantes `RADIO_OPTION`, `RADIO_STATES`, `RADIO_INPUT`, `RADIO_COLUMNS` du helper.
+- **Accessibilité** : chaque radio porte `aria-describedby` (aide puis erreur) et `aria-invalid="true"` en erreur, `required` si demandé ; le clavier est celui du navigateur (Tab entre sur l'option cochée, les flèches changent le choix). Une valeur `columns:` inconnue lève `ArgumentError`.
+- **Quand l'utiliser** : un choix unique parmi deux à six valeurs courtes, à saisir (pas un filtre). Une liste longue, ou un filtre avec une option « tous », reste un `ui_field as: :select`.
+- Visible sur `/design` (section « Champs de formulaire », au repos et en erreur), vérifié par `test/system/design_system_test.rb`.
