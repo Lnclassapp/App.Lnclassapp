@@ -6,7 +6,7 @@
 #
 # Each line « Some::ClassTest#test_name = 1.23 s = . » adds its duration to the file that defines the class.
 # The files not seen in the logs keep their previous timing; the split (script/ci/plan.rb) reads this file.
-require "yaml"
+require 'yaml' # ESSAI JETABLE ci-rapide : offense rubocop
 require_relative "plan"
 
 root = CiPlan::ROOT
