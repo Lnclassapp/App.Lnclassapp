@@ -35,7 +35,7 @@ Les deux lots verticaux partagent le contrôleur, la vue du bloc et le test syst
                      `app/infrastructure/repositories/classroom/classroom_repository.rb` (`names_in_level`)
                      `app/controllers/teams/level_classrooms_controller.rb` (`create`)
                      `app/views/teams/schools/_level_classrooms.html.erb` · `app/views/teams/schools/show.html.erb` · `app/controllers/teams/schools_controller.rb`
-                     `app/views/teams/level_classrooms/create.turbo_stream.erb`
+                     `app/views/teams/level_classrooms/update.turbo_stream.erb`
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/classroom/add_level_classroom_test.rb` · `test/controllers/teams/level_classrooms_controller_test.rb`
                      `test/system/school/classrooms_by_level_test.rb`
@@ -47,7 +47,7 @@ Les deux lots verticaux partagent le contrôleur, la vue du bloc et le test syst
 - **Fichiers**     : `app/domain/use_cases/classroom/remove_level_classroom.rb`
                      `app/infrastructure/repositories/classroom/classroom_repository.rb` (`delete_if_unused`)
                      `app/controllers/teams/level_classrooms_controller.rb` (`destroy`)
-                     `app/views/teams/level_classrooms/destroy.turbo_stream.erb`
+                     (réponse Turbo Stream commune au Lot A)
 - **Dépend de**    : Lot A (fichiers partagés, en séquence)
 - **Test associé** : `test/domain/use_cases/classroom/remove_level_classroom_test.rb`
                      `test/infrastructure/repositories/classroom/classroom_repository_test.rb`

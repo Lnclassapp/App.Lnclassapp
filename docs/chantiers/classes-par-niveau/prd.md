@@ -118,7 +118,7 @@ Et les parcours CN-02, CN-05 et CN-06 se jouent de la même façon
 | Domaine | `UseCases::Classroom::AddLevelClassroom`, `UseCases::Classroom::RemoveLevelClassroom` ; `Entities::Classroom::ClassroomNumbering` (préfixe, nom suivant, dernière) ; `Entities::Classroom::Placement` (contrôle niveau/série, extrait de `CreateClassroom`) ; `ClassroomRepositoryPort#names_in_level` et `#delete_if_unused` |
 | Infrastructure | `ClassroomRepository#names_in_level`, `#delete_if_unused` (verrou, trois vérifications, suppression) ; `Queries::School::LevelClassroomsQuery` (lignes du bloc) |
 | Delivery | `POST /teams/schools/:school_public_id/level-classrooms`, `DELETE /teams/schools/:school_public_id/level-classrooms/:public_id` → `Teams::LevelClassroomsController` |
-| UI | `teams/schools/_level_classrooms` rendu dans `show` ; `teams/level_classrooms/{create,destroy}.turbo_stream.erb` |
+| UI | `teams/schools/_level_classrooms` rendu dans `show` ; `teams/level_classrooms/update.turbo_stream.erb` (réponse commune de « + » et « − ») |
 
 Aucune migration.
 

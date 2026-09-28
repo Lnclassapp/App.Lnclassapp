@@ -27,7 +27,7 @@ Sur la fiche d'un établissement (UDR-0036), les classes de l'année sont group�
 ## 3. Règles d'implémentation
 
 **Structure**
-- `teams/schools/show` : dans `section#school_classrooms`, juste après le titre et l'année, `render "level_classrooms", school: @school, rows: @level_rows` — `@level_rows` vient de `Queries::School::LevelClassroomsQuery`.
+- `teams/schools/show` : dans `section#school_classrooms`, juste après le titre et l'année, `render "level_classrooms", block: @level_classrooms` — `@level_classrooms` est le `Block` de `Queries::School::LevelClassroomsQuery` (établissement, statut, lignes).
 - `teams/schools/_level_classrooms` : `<section id="school_level_classrooms" aria-labelledby="school_level_classrooms_title">`, carte `rounded-card border border-line bg-white shadow-card`.
   1. En-tête `px-4 pt-4 sm:px-5` : `h3#school_level_classrooms_title` « Classes par niveau » (`font-display text-lg font-extrabold`) ; aide `text-sm text-mute` « Ajoutez la classe suivante du niveau, ou retirez la dernière si elle n'a jamais servi. »
   2. Établissement non actif : `p#school_level_classrooms_inactive` `text-sm text-warning`, « Seul un établissement actif reçoit de nouvelles classes. » (le brouillon et le désactivé n'ont pas de « + »).
@@ -44,7 +44,7 @@ Sur la fiche d'un établissement (UDR-0036), les classes de l'année sont group�
 
 **Comportement**
 - `POST /teams/schools/:school_public_id/level-classrooms` (`level`, `series`) → `Teams::LevelClassroomsController#create` ; `DELETE …/level-classrooms/:public_id` → `#destroy`.
-- Succès (Turbo Stream) : toast de succès — « Classe « 6ème 5 » ajoutée. Code : KFM37 » (code par `JoinCode.display`) ou « Classe « 6ème 5 » retirée. » ; `replace "school_level_classrooms"` en `method: :morph` ; `refresh(request_id: nil)`.
+- Réponse unique `teams/level_classrooms/update.turbo_stream.erb`. Succès (Turbo Stream) : toast de succès — « Classe « 6ème 5 » ajoutée. Code : KFM37 » (code par `JoinCode.display`) ou « Classe « 6ème 5 » retirée. » ; `replace "school_level_classrooms"` en `method: :morph` ; `refresh(request_id: nil)`.
 - Refus (Turbo Stream, 422 ; 404 pour une classe déjà retirée) : toast d'erreur au motif du use case, `replace "school_level_classrooms"` (la `<dialog>` se referme). 403 : toast d'erreur « forbidden » seul.
 - Sans Turbo : redirection 303 vers la fiche, `notice` ou `alert` au même texte.
 - Aucun contrôleur Stimulus nouveau : `modal` (UDR-0005) pour la confirmation.
