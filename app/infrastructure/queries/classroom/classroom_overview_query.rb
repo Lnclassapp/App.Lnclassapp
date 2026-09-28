@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : cours assignés actifs et publiés ; élèves présents, seulement si show_roster
-# ADR  : 0026, 0028, 0048 · UDR : 0027
+# ADR  : 0026, 0028, 0048, 0060 · UDR : 0027, 0047
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -9,7 +9,8 @@ module Queries
       CourseRow = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category,
                               :essentials_count)
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
-      StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id)
+      # photo_version : nil sans photo (ADR-0060).
+      StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version)
 
       COURSE_COLUMNS = %w[courses.id courses.slug courses.name courses.subtitle levels.name series.name materials.name
                           materials.category].freeze
@@ -42,11 +43,12 @@ module Queries
         rows = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)
                                     .order("users.last_name", "users.first_name").pluck(*STUDENT_COLUMNS)
         sessions = last_sessions(rows.map(&:first))
+        photos = Queries::Identity::PhotoVersions.for(user_ids: rows.map(&:first))
 
         rows.map do |id, public_id, first_name, last_name, contact|
           score, session_public_id = sessions[id]
           StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact:, last_score_percent: score,
-                         last_session_public_id: session_public_id)
+                         last_session_public_id: session_public_id, photo_version: photos[id])
         end
       end
 

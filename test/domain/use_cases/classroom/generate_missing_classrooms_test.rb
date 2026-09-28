@@ -1,7 +1,9 @@
 require "test_helper"
 require_relative "../../../support/domain/taxonomy_fixture"
+require_relative "../../../support/domain/fake_classroom_plan"
 
 # ADR-0056, GC-03, GC-06, GC-07, GC-08: the generation of the missing classrooms, on simulated ports.
+# ADR-0058, BC-06, BC-09: with the barème it reads once, at the start.
 module UseCases
   module Classroom
     class GenerateMissingClassroomsTest < ActiveSupport::TestCase
@@ -140,10 +142,11 @@ module UseCases
       end
 
       def generate(schools = [ LYCEE, COLLEGE, GROUPE ], actor: @team, lookup: Fixture.lookup, batch_size: 200,
-                   reports: @reports)
+                   reports: @reports, plan: Fixture.plan(lookup))
         @schools = FakeSchools.new(schools, @classrooms)
+        @plan = FakeClassroomPlan.new(plan)
         GenerateMissingClassrooms.new(
-          reports:, schools: @schools, classrooms: @classrooms, taxonomy: FakeTaxonomy.new(lookup),
+          reports:, schools: @schools, classrooms: @classrooms, taxonomy: FakeTaxonomy.new(lookup), classroom_plan: @plan,
           users: FakeUsers.new(actor), audit_log: @audit, transaction: @transaction,
           policy: Policies::School::ManageSchoolPolicy.new, clock: Clock.new(NOW),
           random: Random.new(42), batch_size:
@@ -220,9 +223,32 @@ module UseCases
         generate(lookup: Fixture.lookup(levels: [], pairs: {}))
 
         assert_equal({ total_count: 3, imported_count: 0, skipped_count: 3, error_count: 0 }, counts)
-        assert_equal({ "classrooms_created" => 0, "skipped_levels" => 21 }, @reports.finished[:details])
+        assert_equal({ "classrooms_created" => 0 }, @reports.finished[:details])
         assert_equal 0, @classrooms.inserts
         assert_equal 0, @transaction.attempts
+      end
+
+      test "the barème is read once, at the start, and its counts are the ones generated" do
+        lookup = Fixture.lookup
+        sixth = lookup.level("6eme")
+        entries = Fixture.plan(lookup).entries.map { it.level_id == sixth.id && it.school_type == "public" ? it.with(count: 6) : it }
+        schools = Array.new(5) { self.class.school(it + 1, "Lycée #{it + 1}") }
+
+        generate(schools, batch_size: 2, plan: Entities::Classroom::ClassroomPlan.new(entries:))
+
+        assert_equal 1, @plan.reads
+        assert_equal 5 * 79, @classrooms.rows.size
+        assert_equal [ 6 ], schools.map { |school| classrooms_of(school).count { it[:level_id] == sixth.id } }.uniq
+      end
+
+      test "an undefined line of the barème gives no classroom and is counted as skipped" do
+        lookup = Fixture.lookup
+        entries = Fixture.plan(lookup).entries.reject { it.series_id == lookup.find_series("d").id && it.school_type == "public" }
+
+        generate([ LYCEE ], lookup:, plan: Entities::Classroom::ClassroomPlan.new(entries:))
+
+        assert_equal 77 - 6 - 6, classrooms_of(LYCEE).size
+        assert_equal({ "classrooms_created" => 65, "skipped_series" => 2 }, @reports.finished[:details])
       end
 
       test "a refused batch is replayed school by school: the refused one is in error, named, the others equipped" do

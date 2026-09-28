@@ -1,4 +1,5 @@
-# ADR-0034: the development and test referential — 7 levels, 5 series, 10 level/series pairs, 7 materials.
+# ADR-0034: the development and test referential — 7 levels, 5 series, 10 level/series pairs, 7 materials — and its
+# barème of the classrooms, taken over exactly as the deployment did (ADR-0058).
 # Idempotent by slug. Never in production: the team creates its referential on screen.
 raise "db/seeds/catalog.rb est réservé au développement et au test" unless Rails.env.local?
 
@@ -23,3 +24,6 @@ series_by_level.each do |level, names|
   end
 end
 materials.each { |name, shortname, category| by_slug.call(Orm::Material, name, shortname:, category:) }
+
+require Rails.root.join("db/migrate/20260928140100_fill_classroom_plan_entries").to_s
+FillClassroomPlanEntries.fill

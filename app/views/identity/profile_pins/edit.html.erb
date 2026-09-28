@@ -19,11 +19,11 @@
           <p><%= alerts.to_sentence %></p>
         </div>
       <% end %>
-      <%= ui_field form, :current_pin, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+      <%= ui_field form, :current_pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                    autocomplete: "current-password", autofocus: true %>
-      <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
+      <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                    hint: t(".pin_hint") %>
-      <%= ui_field form, :pin_confirmation, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+      <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                    autocomplete: "new-password" %>
     <% end %>
   <% end %>

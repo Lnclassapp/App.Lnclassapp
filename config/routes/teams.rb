@@ -1,6 +1,7 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, imports, invitations, comptes, jobs
 # ADR  : 0031, 0034, 0038, 0039, 0052, 0056, 0057, 0059
+
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
@@ -12,6 +13,8 @@ scope "teams", module: "teams" do
   resources :schools, param: :public_id, except: %i[new create] do
     member { patch :deactivate }
     resources :classrooms, only: %i[new create], controller: "school_classrooms"
+    # ADR-0057 : régénération du code d'établissement (PATCH seul ; le code se lit sur la fiche).
+    resource :code, only: :update, controller: "school_codes"
     # ADR-0059 : « + » et « − » du bloc « Classes par niveau » de la fiche.
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
     # ADR-0057 : régénération du code d'établissement (PATCH seul ; le code se lit sur la fiche).
@@ -21,6 +24,10 @@ scope "teams", module: "teams" do
   resources :series, param: :slug, except: :show
   resources :level_series, only: %i[create destroy], path: "levels/:level_slug/series", param: :series_slug
   resources :materials, param: :slug, except: :show
+  # ADR-0058 : le barème des classes ; une ligne = un niveau du premier cycle, ou un couple niveau × série liée.
+  get "classroom-plan", to: "classroom_plans#show", as: :classroom_plan
+  get "classroom-plan/:level_slug(/:series_slug)/edit", to: "classroom_plans#edit", as: :edit_classroom_plan_line
+  patch "classroom-plan/:level_slug(/:series_slug)", to: "classroom_plans#update", as: :classroom_plan_line
 end
 
 namespace :teams do

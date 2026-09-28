@@ -14,10 +14,11 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
 
   setup do
     queue_adapter.perform_enqueued_jobs = true
-    # Only Tle, D and SVT: a public lycée gets « Tle D 1 » to « Tle D 6 », a private one three; every other level of the
-    # scale is skipped and counted.
+    # Only Tle, D and SVT, with the barème taken over as at the deployment (ADR-0058): a public lycée gets « Tle D 1 » to
+    # « Tle D 6 », a private one three; nothing else is in the referential, so nothing is skipped.
     tle = create_level(name: "Tle", position: 7, cycle: "second")
     link_level_series(level: tle, series: create_series(name: "D"))
+    seed_classroom_plan
     create_material(name: "SVT", shortname: "SVT", category: "science")
     create_drena(name: "Abidjan 2")
     sign_in_as create_team_member
@@ -87,8 +88,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
         assert_text "Terminé"
         assert_counters(imported: 2, skipped: 0, errors: 0, total: 2)
         assert_text "Classes générées : 9"
-        assert_text "Niveaux sautés (absents du référentiel ou sans série) : 12"
-        assert_text "Séries sautées (absentes du référentiel ou non liées au niveau) : 6"
+        assert_no_text "sautés"
         assert_no_selector "#import_errors"
       end
       close_tracking

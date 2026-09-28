@@ -87,3 +87,11 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 - **`_form.html.erb`** : le cycle n'est plus un `select` mais `ui_radio_group` « Cycle » (`fieldset#level_cycle`), deux options côte à côte dès `sm` : « Premier cycle » (`first`), « Second cycle » (`second`). L'invite « Choisir un cycle » (`teams.levels.form.cycle_prompt`) disparaît.
 - **Valeur cochée** : à la création, **Premier cycle** (`Entities::Catalog::Level::CYCLES.first`, posé par `Teams::LevelsController#new` à côté de la position proposée) ; en modification, le cycle enregistré ; en 422, la saisie.
 - Mêmes valeurs soumises (`level[cycle]`), mêmes validations ; une saisie sans cycle revient en 422 avec l'erreur sous le groupe.
+
+## Amendement du 2026-09-28 — barème des classes
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), [ADR-0058](../adr/0058-bareme-des-classes-en-base.md), [UDR-0045](0045-bareme-des-classes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le badge « Hors génération des classes » devient « Hors barème »** (`[data-generation=outside]`, même place, même ton) : il signale un niveau sans aucun nombre positif au barème, public ou privé (au premier cycle, ou pour un couple encore lié). Le code du niveau n'entre plus en compte.
+- **L'aide `#levels-generation-help`** renvoie au barème (lien « Ouvrir le barème des classes », `classroom_plan_path`) au lieu de lister les codes reconnus.
+- La modale de modification n'affiche plus d'avertissement « code non reconnu », et l'indice du nom ne liste plus les « noms reconnus par la génération » : le slug ne sert plus à la génération.

@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -79,6 +79,11 @@ module ComponentsHelper
     valid: "border-line focus:border-brand focus:ring-brand/20",
     invalid: "border-error focus:border-error focus:ring-error/20"
   }.freeze
+  # Bouton œil d'un champ PIN (UDR-0051) : 48 px de large sur toute la hauteur du champ, à droite, dans le champ.
+  FIELD_REVEAL_INPUT = "pr-14"
+  FIELD_REVEAL_BUTTON = "absolute inset-y-0 right-0 flex w-tap cursor-pointer items-center justify-center rounded-ln " \
+                        "text-mute transition hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-2 " \
+                        "focus-visible:outline-brand"
   FIELD_CHECKBOX = "size-5 shrink-0 cursor-pointer rounded-sm accent-brand focus-visible:outline-2 " \
                    "focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed"
   # Une option = toute l'étiquette cliquable, 48 px de haut ; l'option cochée prend la teinte de marque.
@@ -119,7 +124,7 @@ module ComponentsHelper
   }.freeze
   SUBJECT_FALLBACK = { tone: :neutral, icon: "book-open" }.freeze
 
-  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg" }.freeze
+  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
     brand: "bg-brand text-ink", teacher: "bg-teacher text-ink", school: "bg-school text-white",
     team: "bg-team text-white", gold: "bg-gold text-ink"
@@ -189,9 +194,11 @@ module ComponentsHelper
   end
 
   # Champ complet : libellé, contrôle, aide, erreur, reliés par `aria-describedby`. Tout attribut en plus va au contrôle.
-  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], **input_html)
+  # `reveal: true` (mot de passe seulement) ajoute le bouton œil du contrôleur `password-reveal` (UDR-0051).
+  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], reveal: false, **input_html)
     builder = option!(FIELD_BUILDERS, as, "ui_field as")
     kind = as.to_sym
+    raise ArgumentError, "ui_field reveal : réservé à as: :password (reçu « #{kind} »)" if reveal && kind != :password
     id = form.field_id(method)
     error = field_errors(form.object, method).first
     described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact
@@ -199,13 +206,14 @@ module ComponentsHelper
     input_html = input_html.merge(
       id:, required:, "aria-invalid": ("true" if error), "aria-describedby": described_by.join(" ").presence
     )
-    input_html[:class] = field_classes(kind, error, input_html[:class])
+    input_html[:class] = field_classes(kind, error, class_names(input_html[:class], { FIELD_REVEAL_INPUT => reveal }))
+    input_html[:data] = { **input_html.fetch(:data, {}), password_reveal_target: "input" } if reveal
     control = case kind
     when :select then form.select(method, choices, { prompt: input_html.delete(:prompt) }, input_html)
     else form.public_send(builder, method, input_html)
     end
 
-    render "components/field", form:, method:, kind:, control:, id:, hint:, error:, required:,
+    render "components/field", form:, method:, kind:, control:, id:, hint:, error:, required:, reveal:,
            label: label || field_label(form.object, method)
   end
 
@@ -283,7 +291,8 @@ module ComponentsHelper
   def ui_avatar(name, src: nil, size: :md, tone: nil)
     classes = class_names("inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold",
                           option!(AVATAR_SIZES, size, "ui_avatar size"))
-    return image_tag(src, alt: name, class: class_names(classes, "object-cover")) if src
+    # Photo de profil (ADR-0060, UDR-0047) : une seule taille servie, recadrée par le rond ; hors écran, pas chargée.
+    return image_tag(src, alt: name, loading: "lazy", decoding: "async", class: class_names(classes, "object-cover")) if src
 
     tone ||= AVATAR_TONES.keys[name.to_s.sum % AVATAR_TONES.size]
     tag.span(avatar_initials(name), role: "img", "aria-label": name,
