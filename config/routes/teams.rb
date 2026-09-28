@@ -1,7 +1,9 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0038, 0039, 0052, 0056
+# ADR  : 0031, 0034, 0038, 0039, 0052, 0056, 0062
 get "teams", to: "teams/homes#show", as: :team_home # gelé
+# ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
+get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
 
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
 scope "teams", module: "teams" do
