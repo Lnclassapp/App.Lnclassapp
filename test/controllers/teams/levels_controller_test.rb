@@ -94,7 +94,15 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#level_name_hint", text: including(tl("new.name_hint"))
       assert_select "#level_name_hint", text: including(tl("form.recognized_names"))
       assert_select "input[name='level[position]'][value='2']"
-      assert_select "select[name='level[cycle]'] option[value=first]", text: tl("cycles.first")
+      assert_select "select[name='level[cycle]']", 0
+      assert_select "fieldset#level_cycle > legend", text: /#{Dtos::Catalog::LevelInput.human_attribute_name(:cycle)}/
+      assert_select "fieldset#level_cycle label.min-h-tap", 2
+      assert_select "label", text: tl("cycles.first") do
+        assert_select "input#level_cycle_first[type=radio][name='level[cycle]'][value=first][checked][required]"
+      end
+      assert_select "label", text: tl("cycles.second") do
+        assert_select "input#level_cycle_second[type=radio][value=second]:not([checked])"
+      end
     end
     assert_select "button[type=submit][form=level-form]", text: tl("new.submit")
   end
@@ -127,7 +135,9 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[name='level[name]'][value='#{'a' * 21}'][aria-invalid=true]"
       assert_select "input[name='level[position]'][value=sept][aria-invalid=true]"
       assert_select "#level_position_error", text: including(I18n.t("errors.messages.not_a_number"))
-      assert_select "#level_cycle_error"
+      assert_select "fieldset#level_cycle > #level_cycle_error", text: including(I18n.t("errors.messages.inclusion"))
+      assert_select "input[name='level[cycle]'][checked]", 0
+      assert_select "input[name='level[cycle]'][aria-invalid=true][aria-describedby=level_cycle_error]", 2
     end
     assert_equal 0, Orm::Level.count
   end
@@ -174,7 +184,8 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[name=_method][value=patch]"
       assert_select "input[name='level[name]'][value='6ème']"
       assert_select "input[name='level[position]'][value='1']"
-      assert_select "select[name='level[cycle]'] option[selected][value=first]"
+      assert_select "input#level_cycle_first[type=radio][checked]"
+      assert_select "input#level_cycle_second[type=radio]:not([checked])"
     end
     assert_select "#level-code", text: /6eme/
     assert_select "#level-code [data-generation]", 0

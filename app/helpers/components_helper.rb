@@ -81,6 +81,14 @@ module ComponentsHelper
   }.freeze
   FIELD_CHECKBOX = "size-5 shrink-0 cursor-pointer rounded-sm accent-brand focus-visible:outline-2 " \
                    "focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed"
+  # Une option = toute l'étiquette cliquable, 48 px de haut ; l'option cochée prend la teinte de marque.
+  RADIO_OPTION = "flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border bg-white px-4 text-sm font-medium " \
+                 "text-ink transition hover:bg-mist has-checked:border-brand has-checked:bg-brand-soft"
+  RADIO_STATES = { valid: "border-line", invalid: "border-error" }.freeze
+  RADIO_INPUT = "size-5 shrink-0 cursor-pointer accent-brand focus-visible:outline-2 focus-visible:outline-offset-2 " \
+                "focus-visible:outline-brand"
+  # Au téléphone, les options s'empilent toujours ; les colonnes ne s'ouvrent qu'à partir de `sm`.
+  RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
@@ -198,6 +206,22 @@ module ComponentsHelper
     end
 
     render "components/field", form:, method:, kind:, control:, id:, hint:, error:, required:,
+           label: label || field_label(form.object, method)
+  end
+
+  # Groupe de boutons radio : `fieldset` et `legend`, une option de 48 px par choix `[libellé, valeur]`, la valeur
+  # de l'objet cochée. L'aide et la première erreur, sous le groupe, sont reliées à chaque option.
+  def ui_radio_group(form, method, choices:, label: nil, hint: nil, required: false, columns: 2)
+    grid = RADIO_COLUMNS.fetch(columns) do
+      raise ArgumentError, "ui_radio_group columns : « #{columns} » inconnu (#{RADIO_COLUMNS.keys.join(', ')})"
+    end
+    id = form.field_id(method)
+    error = field_errors(form.object, method).first
+    described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact.join(" ").presence
+    input_html = { required:, class: RADIO_INPUT, "aria-invalid": ("true" if error), "aria-describedby": described_by }
+
+    render "components/radio_group", form:, method:, choices:, id:, hint:, error:, required:, grid:, input_html:,
+           option_class: class_names(RADIO_OPTION, RADIO_STATES[error ? :invalid : :valid]),
            label: label || field_label(form.object, method)
   end
 
