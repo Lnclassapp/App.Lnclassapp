@@ -13,7 +13,7 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
 
   def migrate(direction)
     order = direction == :down ? MIGRATIONS.reverse : MIGRATIONS
-    ActiveRecord::Migration.suppress_messages { order.each { it.new.migrate(direction) } }
+    changing_schema { ActiveRecord::Migration.suppress_messages { order.each { it.new.migrate(direction) } } }
     [ Orm::TeacherProfile, Orm::School ].each(&:reset_column_information)
   end
 
@@ -50,7 +50,7 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
     %i[referrals referral_shares school_join_requests].each { assert ActiveRecord::Base.connection.table_exists?(it), it }
 
     assert_no_changes -> { Orm::TeacherProfile.where(user_id: @teacher_ids).order(:id).pluck(:referral_token) } do
-      ActiveRecord::Migration.suppress_messages { AddNationalCodeToSchools.new.migrate(:up) }
+      changing_schema { ActiveRecord::Migration.suppress_messages { AddNationalCodeToSchools.new.migrate(:up) } }
     end
   end
 end
