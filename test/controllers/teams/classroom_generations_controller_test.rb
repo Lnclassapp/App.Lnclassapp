@@ -9,12 +9,19 @@ class Teams::ClassroomGenerationsControllerTest < ActionDispatch::IntegrationTes
     @member = create_team_member(team_role: "field")
   end
 
-  test "the schools screen offers the generation as a secondary action, confirmed in a dialog" do
+  test "the schools screen offers the generation in the « Classes » menu, right of the import, confirmed in a dialog" do
     sign_in_as @member
 
     get schools_path
 
-    assert_select "button[aria-controls=generate-classrooms-modal][aria-haspopup=dialog]", text: /Générer les classes manquantes/
+    assert_select "button[aria-haspopup=menu][aria-controls=schools-classrooms-menu][aria-label='Actions sur les classes']", text: /Classes/
+    assert_select "#schools-classrooms-menu[role=menu]" do
+      assert_select "button[role=menuitem][aria-controls=generate-classrooms-modal][aria-haspopup=dialog]", text: /Générer les classes manquantes/
+      assert_select "a[role=menuitem][href='#{classroom_plan_path}']", text: /Barème des classes/
+    end
+    import = response.body.index(ERB::Util.html_escape(new_teams_import_path(kind: "schools")))
+    assert_operator import, :<, response.body.index('aria-controls="schools-classrooms-menu"'), "le menu est à droite de l'import"
+    assert_select "button[aria-controls=generate-classrooms-modal]:not([role=menuitem])", 0
     assert_select "dialog#generate-classrooms-modal" do
       assert_select "h2", text: "Générer les classes manquantes ?"
       assert_select "form#generate-classrooms-form[action='#{classroom_generations_path}'][method=post]"

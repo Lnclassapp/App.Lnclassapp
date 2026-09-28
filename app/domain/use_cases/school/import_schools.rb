@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::School::ImportSchools
 # Rôle : adaptateur d'import des établissements (clés de l'ancien acceptées), chacun écrit avec ses classes générées
-# ADR  : 0028, 0030, 0039, 0041 · UDR : 0037
+# ADR  : 0028, 0030, 0039, 0041, 0058 · UDR : 0037
 module UseCases
   module School
     class ImportSchools
@@ -20,12 +20,13 @@ module UseCases
       ERROR_KEYS = { name: "name", sigle: "sigle", status: "status", school_type: "type", cycle: "cycle" }.freeze
       ERROR_CODES = { blank: "blank", too_long: "too_long", inclusion: "invalid_value" }.freeze
 
-      # random : tirage des codes d'adhésion, injectable pour les tests.
-      def initialize(drenas:, schools:, classrooms:, taxonomy:, random: SecureRandom)
+      # classroom_plan : le barème, lu une fois à la préparation (ADR-0058) ; random : tirage des codes, injectable.
+      def initialize(drenas:, schools:, classrooms:, taxonomy:, classroom_plan:, random: SecureRandom)
         @drenas = drenas
         @schools = schools
         @classrooms = classrooms
         @taxonomy = taxonomy
+        @classroom_plan = classroom_plan
         @random = random
       end
 
@@ -44,7 +45,8 @@ module UseCases
         ids_by_slug = @drenas.ids_by_slug
         @taken_codes = @classrooms.taken_join_codes
         Entities::Catalog::ImportContext.new(target:, existing_keys: @schools.existing_keys(drena_ids: ids_by_slug.values),
-                                             data: { ids_by_slug:, lookup: @taxonomy.lookup, taken_codes: @taken_codes })
+                                             data: { ids_by_slug:, lookup: @taxonomy.lookup, plan: @classroom_plan.plan,
+                                                                     taken_codes: @taken_codes })
       end
 
       def validate_root(root:, path:, context:)
@@ -55,7 +57,7 @@ module UseCases
         return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
 
         Entities::Catalog::ImportItem.new(path:, key: [ drena_id, Entities::Shared::NaturalKey.normalize(school.name) ],
-                                          plan: plan_for(school, context.data.fetch(:lookup)))
+                                          plan: plan_for(school, context.data))
       end
 
       # Les écoles, puis toutes les classes du lot, dans la transaction du moteur : un refus annule les deux.
@@ -122,8 +124,8 @@ module UseCases
         end
       end
 
-      def plan_for(school, lookup)
-        generation = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup:)
+      def plan_for(school, data)
+        generation = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup: data.fetch(:lookup), plan: data.fetch(:plan))
         { school: { public_id: school.public_id, drena_id: school.drena_id, name: school.name, sigle: school.sigle,
                     school_type: school.school_type, cycle: school.cycle, status: school.status },
           classrooms: generation.rows, skipped: generation.skipped }

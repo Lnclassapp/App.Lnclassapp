@@ -52,7 +52,8 @@ module UseCases
 
       def adapter(classrooms: Repositories::Classroom::ClassroomRepository.new, random: SecureRandom)
         ImportSchools.new(drenas: Repositories::School::DrenaRepository.new, schools: Repositories::School::SchoolRepository.new,
-                          classrooms:, taxonomy: Repositories::Catalog::TaxonomyRepository.new, random:)
+                          classrooms:, taxonomy: Repositories::Catalog::TaxonomyRepository.new,
+                          classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new, random:)
       end
 
       def drena_entity = Repositories::School::DrenaRepository.new.find_by_slug(slug: "abidjan-2")
@@ -214,12 +215,33 @@ module UseCases
         assert_equal 0, Orm::Classroom.joins(:level).where(levels: { slug: "1ere" }).count
       end
 
-      test "a Tle series missing from the referential is skipped and counted" do
+      test "a Tle pair no longer linked gives no classroom, and is not counted: it is no line of the barème" do
         Orm::LevelSeries.where(level: Orm::Level.find_by!(slug: "tle"), series: Orm::Series.find_by!(slug: "c")).delete_all
 
         report = run_import(document({ "name" => "Lycée Moderne", "type" => "public" }))
 
-        assert_equal({ "classrooms_created" => 75, "skipped_series" => 1 }, report.details)
+        assert_equal({ "classrooms_created" => 75 }, report.details)
+      end
+
+      test "BC-04: a series linked to Tle after the take-over is undefined in the barème: no classroom, counted as skipped" do
+        link_level_series(level: Orm::Level.find_by!(slug: "tle"), series: create_series(name: "E"))
+
+        report = run_import(document({ "name" => "Lycée Moderne", "type" => "public" }))
+
+        assert_equal({ "classrooms_created" => 77, "skipped_series" => 1 }, report.details)
+        assert_not Orm::Classroom.exists?(name: "Tle E 1")
+      end
+
+      test "BC-06: the import reads the barème in base, as the team left it" do
+        sixth = Orm::Level.find_by!(slug: "6eme")
+        Orm::ClassroomPlanEntry.find_by!(school_type: "public", level: sixth).update!(count: 6)
+        Orm::ClassroomPlanEntry.find_by!(school_type: "private", level: sixth).update!(count: 0)
+
+        report = run_import(document({ "name" => "Lycée Moderne", "type" => "public" }, { "name" => "Lycée privé", "type" => "privée" }))
+
+        assert_equal({ "classrooms_created" => 79 + 36 }, report.details)
+        assert_equal 6, classrooms_of("Lycée Moderne").where(level: sixth).count
+        assert_equal 0, classrooms_of("Lycée privé").where(level: sixth).count
       end
 
       test "when the base refuses the classrooms of a school, that school is in error and leaves no row" do

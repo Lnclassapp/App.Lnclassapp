@@ -79,6 +79,15 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "BC-10: the referential leads to the barème of the classrooms, with the total of a public lycée" do
+    seed_referential
+    sign_in_as @member
+
+    get team_home_path
+
+    assert_select "#team_home_referential a[href='#{classroom_plan_path}']", text: figure("referential.classroom_plan", 77)
+  end
+
   test "the counts follow the last creation, with no cache" do
     sign_in_as @member
     get team_home_path

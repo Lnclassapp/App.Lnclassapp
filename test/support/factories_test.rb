@@ -76,6 +76,7 @@ class FactoriesTest < ActiveSupport::TestCase
     assert_equal %w[a c a1 a2 d], referential[:series].keys
     assert_equal [ 7, 5, 10, 7 ], [ Orm::Level.count, Orm::Series.count, Orm::LevelSeries.count, Orm::Material.count ]
     assert_equal %w[a c], referential[:levels]["2nde"].series.map(&:slug).sort
+    assert_equal 28, Orm::ClassroomPlanEntry.count
   end
 
   test "the school year follows the Ivorian calendar" do

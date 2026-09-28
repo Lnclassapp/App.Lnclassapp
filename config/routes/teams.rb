@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0038, 0039, 0052, 0056
+# ADR  : 0031, 0034, 0038, 0039, 0052, 0056, 0058
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
@@ -17,6 +17,10 @@ scope "teams", module: "teams" do
   resources :series, param: :slug, except: :show
   resources :level_series, only: %i[create destroy], path: "levels/:level_slug/series", param: :series_slug
   resources :materials, param: :slug, except: :show
+  # ADR-0058 : le barème des classes ; une ligne = un niveau du premier cycle, ou un couple niveau × série liée.
+  get "classroom-plan", to: "classroom_plans#show", as: :classroom_plan
+  get "classroom-plan/:level_slug(/:series_slug)/edit", to: "classroom_plans#edit", as: :edit_classroom_plan_line
+  patch "classroom-plan/:level_slug(/:series_slug)", to: "classroom_plans#update", as: :classroom_plan_line
 end
 
 namespace :teams do

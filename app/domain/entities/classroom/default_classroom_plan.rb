@@ -1,62 +1,81 @@
 # 🧠 DOMAINE · Entities::Classroom::DefaultClassroomPlan
-# Rôle : nombre de classes générées par niveau et série à la création d'un établissement
-# ADR  : 0030, 0034, 0039
+# Rôle : classes générées pour un établissement, fonction pure du référentiel et du barème reçu ; feuille de l'écran du barème
+# ADR  : 0030, 0034, 0039, 0058
 module Entities
   module Classroom
     module DefaultClassroomPlan
-      PLAN = {
-        "public" => { "6eme" => 4, "5eme" => 4, "4eme" => 10, "3eme" => 10, "2nde" => { per_series: 6 },
-                      "1ere" => { per_series: 6 }, "tle" => { "c" => 2, "d" => 6, "a1" => 3, "a2" => 2 } },
-        "private" => { "6eme" => 2, "5eme" => 2, "4eme" => 4, "3eme" => 4, "2nde" => { per_series: 3 },
-                       "1ere" => { per_series: 3 }, "tle" => { "c" => 1, "d" => 3, "a1" => 2, "a2" => 2 } }
-      }.freeze
-
-      # rows : [{ name:, level_id:, series_id: }] ; skipped : { levels: ["1ere"], series: ["tle/c"] }, les niveaux
-      # et les couples niveau/série absents du référentiel, sautés et comptés dans le rapport d'import.
+      # rows : [{ name:, level_id:, series_id: }] ; skipped : { levels: ["1ere"], series: ["tle/e"] }, les niveaux et les
+      # couples niveau/série sans nombre au barème (ou niveau du second cycle sans série), sautés et comptés au rapport.
       Generation = Data.define(:rows, :skipped)
 
-      # Un établissement mixed suit le barème private, comme dans l'ancien.
-      def self.for(school_type)
-        PLAN.fetch(school_type == "public" ? "public" : "private")
+      # Une ligne du barème : un niveau du premier cycle (series nil), un couple niveau × série liée, ou un niveau du
+      # second cycle sans série (unlinked). counts : { "public" => Integer | nil, "private" => Integer | nil }.
+      Line = Data.define(:level, :series, :counts) do
+        def unlinked? = !level.first_cycle? && series.nil?
+        def undefined? = !unlinked? && counts.values.any?(&:nil?)
+        def name = [ level.name, series&.name ].compact.join(" ")
+        def key = [ level.slug, series&.slug ].compact.join("_")
+        def level_slug = level.slug
+        def series_slug = series&.slug
       end
 
-      # school : répond à school_type et cycle (entité ou ligne insérée) ; lookup : Entities::Catalog::TaxonomyLookup
-      def self.rows_for(school:, lookup:)
+      # totals : { "public" => { "first" => collège, "both" => lycée }, "private" => … }
+      Sheet = Data.define(:lines, :totals) do
+        def undefined_count = lines.count(&:undefined?)
+      end
+
+      CYCLES = %w[first both].freeze
+      # Établissement type d'un total.
+      Target = Data.define(:school_type, :cycle)
+      private_constant :Target
+
+      # school : répond à school_type et cycle (entité ou ligne insérée) ; lookup : Entities::Catalog::TaxonomyLookup ;
+      # plan : ClassroomPlan. Un collège (cycle first) ne prend que les niveaux du premier cycle.
+      def self.rows_for(school:, lookup:, plan:)
         rows = []
         skipped = { levels: [], series: [] }
-        self.for(school.school_type).each do |level_slug, config|
-          level = lookup.level(level_slug)
-          next skipped[:levels] << level_slug if level.nil?
+        slots(lookup).each do |level, series|
           next if school.cycle == "first" && !level.first_cycle?
+          next skipped[:levels] << level.slug if !level.first_cycle? && series.nil?
 
-          counts = counts_for(level, config, lookup, skipped)
-          counts.each { |series, count| rows.concat(rows_of(level, series, count)) }
+          count = plan.count(school_type: school.school_type, level_id: level.id, series_id: series&.id)
+          next skip(level, series, skipped) if count.nil?
+
+          rows.concat(rows_of(level, series, count))
         end
         Generation.new(rows:, skipped:)
       end
 
-      # → [[série ou nil, nombre de classes]]
-      def self.counts_for(level, config, lookup, skipped)
-        return [ [ nil, config ] ] if config.is_a?(Integer)
-        return per_series(level, config[:per_series], lookup, skipped) if config.key?(:per_series)
+      # La feuille de l'écran : les lignes du référentiel avec leurs deux nombres, et le total par établissement.
+      def self.sheet(plan:, lookup:)
+        lines = slots(lookup).map do |level, series|
+          counts = ClassroomPlan::SCHOOL_TYPES.to_h { [ it, plan.count(school_type: it, level_id: level.id, series_id: series&.id) ] }
+          Line.new(level:, series:, counts:)
+        end
+        totals = ClassroomPlan::SCHOOL_TYPES.to_h do |school_type|
+          [ school_type, CYCLES.to_h { |cycle| [ cycle, rows_for(school: Target.new(school_type:, cycle:), lookup:, plan:).rows.size ] } ]
+        end
+        Sheet.new(lines:, totals:)
+      end
 
-        config.filter_map do |series_slug, count|
-          series = lookup.find_series(series_slug)
-          next [ series, count ] if series && lookup.pair?(level.id, series.id)
+      # → [[niveau, série | nil]], par position : un niveau du premier cycle, chaque série liée d'un niveau du second,
+      # ou [niveau, nil] pour un niveau du second cycle sans série.
+      def self.slots(lookup)
+        lookup.levels.sort_by(&:position).flat_map do |level|
+          next [ [ level, nil ] ] if level.first_cycle?
 
-          skipped[:series] << "#{level.slug}/#{series_slug}"
-          nil
+          linked = lookup.series_for(level.id)
+          linked.empty? ? [ [ level, nil ] ] : linked.map { [ level, it ] }
         end
       end
-      private_class_method :counts_for
+      private_class_method :slots
 
-      # « par série » : chaque série liée au niveau ; un niveau sans série est sauté et compté.
-      def self.per_series(level, count, lookup, skipped)
-        linked = lookup.series_for(level.id)
-        skipped[:levels] << level.slug if linked.empty?
-        linked.map { |series| [ series, count ] }
+      def self.skip(level, series, skipped)
+        return skipped[:levels] << level.slug if series.nil?
+
+        skipped[:series] << "#{level.slug}/#{series.slug}"
       end
-      private_class_method :per_series
+      private_class_method :skip
 
       # Noms toujours espacés : « 6ème 1 », « Tle D 3 », « Tle A1 2 ».
       def self.rows_of(level, series, count)

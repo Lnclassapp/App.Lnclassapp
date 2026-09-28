@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/levels/_level_row — une ligne du tableau des niveaux, identifiée par le slug %>
-<%# Rôle : nom (badge si hors génération des classes), code figé, position, cycle, séries, usage ; menu ⋮ : « Modifier » en modale, « Supprimer » confirmé dans la page %>
-<%# ADR  : 0029, 0036 · UDR : 0006, 0032, 0042 · Stimulus : dropdown, modal %>
+<%# Rôle : nom (badge si hors barème des classes), code figé, position, cycle, séries, usage ; menu ⋮ : « Modifier » en modale, « Supprimer » confirmé dans la page %>
+<%# ADR  : 0029, 0036, 0058 · UDR : 0006, 0032, 0042, 0045 · Stimulus : dropdown, modal %>
 <% delete_id = "delete-level-#{level.slug}" %>
 <tr id="<%= level_dom_id(level.slug) %>" class="align-middle">
   <td class="px-4 py-3 font-medium whitespace-nowrap text-ink">

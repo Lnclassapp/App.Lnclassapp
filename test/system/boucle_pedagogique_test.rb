@@ -104,7 +104,25 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#drenas tr", text: /Abidjan 1\s+abidjan-1/
     end
 
+    team_sets_the_classroom_plan
     import_the_lycee
+  end
+
+  # A new referential has no barème yet (ADR-0058): Tle D is « Non défini » until the team sets it on screen.
+  def team_sets_the_classroom_plan
+    navigate_to team_home_path
+    click_referential(classroom_plan_path)
+    assert_selector "#classroom_plan_line_tle_d [data-plan=undefined]", count: 2
+    assert_no_page_reload do
+      click_menu_action "#classroom_plan_line_tle_d", t("teams.classroom_plans.line_row.edit")
+      within "turbo-frame#modal dialog[open]" do
+        fill_in "classroom_plan_line[public_count]", with: "6"
+        fill_in "classroom_plan_line[private_count]", with: "3"
+        click_on t("teams.classroom_plans.edit.submit")
+      end
+      assert_toast t("teams.classroom_plans.update.updated", name: "Tle D")
+      within("#classroom_plan_total_public_both") { assert_text "6" }
+    end
   end
 
   # The only seed of production (ADR-0034, ADR-0038): its link is printed once, as the operator reads it.
@@ -137,8 +155,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_current_path team_home_path
   end
 
-  # A public lycée in the old application's format, enveloped (ADR-0039): Tle D gets its 6 classrooms, every other
-  # level of the scale is absent from the referential and counted as skipped.
+  # A public lycée in the old application's format, enveloped (ADR-0039): Tle D gets the 6 classrooms of the barème, and
+  # nothing else exists in the referential.
   def import_the_lycee
     file = json_file("ecoles", {
       "format" => "lnclass.schools", "version" => Entities::Catalog::ImportKind::VERSION, "drena" => "abidjan-1",
@@ -161,7 +179,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         assert_selector "#import_counter_imported", text: "1"
         assert_selector "#import_counter_errors", text: "0"
         assert_text "Classes générées : 6"
-        assert_text "Niveaux sautés"
+        assert_no_text "sautés"
       end
       within("turbo-frame#modal dialog[open]") { click_on t("teams.imports.create.close") }
       assert_no_selector "turbo-frame#modal dialog[open]"
