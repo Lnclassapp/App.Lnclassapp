@@ -73,7 +73,7 @@
                     <span class="block truncate text-xs text-mute"><%= import.filename %></span>
                   <% end %>
                   <span class="flex flex-wrap items-center gap-2 text-xs text-mute">
-                    <%= ui_badge t("teams.imports.statuses.#{import.status}"), tone: import_status_tone(import.status), dot: true %>
+                    <%= ui_badge import_status_label(import), tone: import_status_tone(import.status), dot: true %>
                     <span><%= t(".updated", time: time_ago_in_words(import.updated_at)) %></span>
                   </span>
                 </span>

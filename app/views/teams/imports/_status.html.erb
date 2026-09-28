@@ -6,7 +6,7 @@
                     data: { controller: "teams--import-status", teams__import_status_url_value: teams_import_path(import.public_id) } do %>
   <div data-teams--import-status-target="state" data-status="<%= import.status %>" class="space-y-5" aria-live="polite">
     <div class="flex flex-wrap items-center gap-3">
-      <%= ui_badge t("teams.imports.statuses.#{import.status}"), tone: import_status_tone(import.status), dot: true %>
+      <%= ui_badge import_status_label(import), tone: import_status_tone(import.status), dot: true %>
       <% if import.finished_at %>
         <span class="text-sm text-mute"><%= t(".finished_at", time: l(import.finished_at, format: :short)) %></span>
       <% end %>
