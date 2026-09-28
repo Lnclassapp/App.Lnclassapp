@@ -44,6 +44,16 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
     get teacher_invite_path
 
     assert_select "#referral_count", text: I18n.t("#{PAGE}.invite.count", count: 2)
+    assert_select "#invite_colleagues", text: /#{I18n.t("#{PAGE}.ambassador.badge")}/, count: 0
+  end
+
+  test "CP-15: from 3 referees, the block shows the « Ambassadeur » badge" do
+    3.times { create_referral(referrer: @teacher) }
+    sign_in_as @teacher
+
+    get teacher_invite_path
+
+    assert_select "#invite_colleagues", text: /#{I18n.t("#{PAGE}.ambassador.badge")}/
   end
 
   test "CP-07: a teacher of a draft school reads that the invitation is not open, without link" do

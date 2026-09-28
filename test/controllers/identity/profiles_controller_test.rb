@@ -83,6 +83,20 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to pending_account_path
   end
 
+  test "CP-15: a teacher with 3 colleagues signed up thanks to them wears the « Ambassadeur » badge; with 2, not yet" do
+    teacher = create_teacher
+    2.times { create_referral(referrer: teacher) }
+    sign_in_as teacher
+
+    get profile_path
+    assert_select "#profile_ambassador", 0
+
+    create_referral(referrer: teacher)
+    get profile_path
+    assert_select "#profile_ambassador", text: /#{I18n.t("identity.referrals.ambassador.badge")}/
+    assert_select "#profile_ambassador", text: /#{I18n.t("identity.referrals.ambassador.thanks", count: 3)}/
+  end
+
   test "a team member reads their team role and that the second factor is active" do
     sign_in_as create_team_member(team_role: "content")
 

@@ -15,6 +15,9 @@
         <%= t("identity.referrals.invite.count_label", count: invite.referred_count) %>
       <% end %>
     </p>
+    <% if Entities::Identity::Ambassador.ambassador?(referred_count: invite.referred_count) %>
+      <%= ui_badge t("identity.referrals.ambassador.badge"), tone: :gold, icon: "trophy" %>
+    <% end %>
   </div>
 
   <p class="mt-4 text-xs font-semibold tracking-wider text-mute uppercase"><%= t("identity.referrals.invite.link_label") %></p>
