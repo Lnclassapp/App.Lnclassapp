@@ -67,6 +67,8 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "select[name='course[series_slug]'] optgroup[label='2nde'] option[value=c]"
     assert_select "select[name='course[material_slug]'] option[value=svt]"
     assert_select "[data-controller=rich-text-editor] trix-editor#course_content[input]"
+    # ADR-0060: no direct upload address, the Active Storage routes are not drawn.
+    assert_select "trix-editor#course_content[data-direct-upload-url=''][data-blob-url-template='']"
     assert_select "input[type=hidden][name='course[content]']"
     assert_select "button[type=submit][form=course-form]", text: tc("new.submit")
     assert_select "select[name='course[status]']", 0
