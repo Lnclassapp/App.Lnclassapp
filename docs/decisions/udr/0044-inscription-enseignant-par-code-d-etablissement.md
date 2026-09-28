@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé *(défauts appliqués le 2026-09-28, à confirmer par le porteur)* |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md) — critères CE-01 à CE-08 |
 | **ADR lié** | [ADR-0057](../adr/0057-code-d-etablissement.md) · [ADR-0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · amende [UDR-0024](0024-inscription-enseignant.md) et [UDR-0036](0036-gestion-des-etablissements.md) · [UDR-0009](0009-rejoindre-une-classe.md) (patron du code) · [UDR-0042](0042-actions-de-ligne-dans-un-menu.md) (menu ⋮) · [UDR-0005](0005-design-system-fondateur.md) |

@@ -325,3 +325,9 @@ Avant tout chantier : recette de la V1, acceptation des décisions en production
 - Rapport de la recette `Staging` de la V1, puis la case du §9.
 - Réponses du porteur aux questions Q1 à Q15 (feuille de route, §5).
 - Memo de `photo-de-profil` encore « en cours » alors que le chantier est en production et durci.
+
+## 2026-09-28 — Décisions acceptées, vagues V2 à V6 au backlog
+
+- **Q4 répondue** : le porteur accepte telles quelles les décisions en production encore `Proposé` : ADR-0057, ADR-0059, ADR-0063, ADR-0064, UDR-0044, UDR-0046, UDR-0050 (défauts du 2026-09-28 compris).
+- **Vagues V2 à V6 mises au backlog** par le porteur : elles restent décrites au §5, mais aucune ne s'ouvre avant une décision datée ; elles figurent dans la table « Backlog » de [`chantiers/README.md`](../README.md#backlog).
+- **Défauts de la recette V1** : D1 (formulaire `/join` muet sur un code inconnu) et D2 (pages d'erreur statiques en anglais) sont corrigés dans le chantier `recette-v1-defauts` ; D3 (`style-src-attr 'unsafe-inline'`) reste à consigner.

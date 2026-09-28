@@ -10,6 +10,8 @@
 
 ## État d'avancement au 2026-09-28
 
+> **2026-09-28 — Vagues V2 à V6 au backlog** (décision du porteur). Elles restent décrites au §5, mais aucune ne s'ouvre avant une décision datée ; elles figurent dans la table « Backlog » de [`chantiers/README.md`](../README.md#backlog).
+
 La V1 est en production sur lnclass.com depuis le **2026-09-27** (PR #33 et #36 vers `main`). Le 2026-09-28, quatre mises en production ont suivi (PR #45, #69, #73 et #78 vers `main`), dont plusieurs chantiers **hors ordre des vagues**. La V1 est close le 2026-09-28, sauf sa recette `Staging` par un rôle distinct, en cours ; les vagues V2 à V6 sont recadrées au §5. Le détail feature par feature est au §6 : la mention « livrée » dans la colonne « Vague ».
 
 | Vague | Livré | En cours | Reste |
@@ -252,7 +254,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Ajouts venus des chantiers hors plan** | La direction valide ou refuse les enseignants en attente de son établissement : `croissance-parrainage` l'a reporté à la V2 ([memo](../croissance-parrainage/memo.md), ADR-0063). La direction lit le code de son établissement, et peut-être le régénère : l'ADR-0057 annonce pour la V2 un amendement de `School::ManageSchoolPolicy` |
 | **Sorti de la vague** | CA-23 (pages des séries) passe en V4, `catalogue-complet` : c'est une page publique du catalogue, sœur de CA-17 (niveau) et CA-21 (matière). Gardée en V2, elle aurait fait entrer le contexte `catalog` dans un chantier qui n'en a pas besoin, et créé une collision avec la V4 |
 | **Tables** | `school_staffs` (fonction en colonne, ADR-0044). Les invitations de direction réutilisent `invitations`, dont le type `school_staff` existe depuis la V1. Aucune autre table sans décision |
-| **Décisions préalables** | F-14 (ADR-0036), F-16 (ADR-0038), F-22 (ADR-0044), F-25 (ADR-0047) : toutes `Accepté` le 2026-09-25. **À faire accepter avant le Lot 0** (Q4) : ADR-0057 et UDR-0044 (code d'établissement), ADR-0063 et UDR-0050 (comptes en attente). Elles sont en production mais encore `Proposé` ; la V2 les amende, et on n'amende pas une décision que personne n'a acceptée |
+| **Décisions préalables** | F-14 (ADR-0036), F-16 (ADR-0038), F-22 (ADR-0044), F-25 (ADR-0047) : toutes `Accepté` le 2026-09-25. ADR-0057 et UDR-0044 (code d'établissement), ADR-0063 et UDR-0050 (comptes en attente) : **acceptées par le porteur le 2026-09-28** (Q4), la V2 peut les amender |
 | **Contradiction ouverte** | C-31 (interface de l'organisation scolaire). F-09 a tranché les tokens ; la structure (recherche, carte d'école, onglets école → classes) se tranche par l'UDR de l'espace direction, écrite dans le chantier |
 | **Questions au porteur** | Q1 à Q4 (voir « Questions à poser au porteur » plus bas) |
 | **Dépend de** | V1 |
@@ -287,7 +289,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Reste : `installation-pwa`** (3 features) | ID-26, TR-24, TR-25 |
 | **Reste : `sous-roles-equipe`** | Aucune feature d'inventaire : la matrice de l'ADR-0038 (`admin`, `content`, `field`), un test de refus par case vide |
 | **Tables** | Colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` (§7.1). `team_role` existe depuis la V1 |
-| **Décisions préalables** | F-16 (ADR-0038), F-27 (ADR-0049) : `Accepté`. **À prendre** : un amendement de l'ADR-0038 pour les pages livrées après lui (Q9) ; ADR-0063 et UDR-0050 à accepter (Q4) ; un ADR si la PWA fonctionne hors ligne (Q10) |
+| **Décisions préalables** | F-16 (ADR-0038), F-27 (ADR-0049) : `Accepté`. **À prendre** : un amendement de l'ADR-0038 pour les pages livrées après lui (Q9) ; ADR-0063 et UDR-0050 acceptées le 2026-09-28 (Q4) ; un ADR si la PWA fonctionne hors ligne (Q10) |
 | **Questions au porteur** | Q4, Q9, Q10 |
 | **Dépend de** | V1. `sous-roles-equipe` dépend aussi d'`annuaire-equipe` (V2) |
 | **Porte** | Inchangée : chaque sous-rôle n'accède qu'à sa colonne de la matrice de l'ADR-0038 (un test de refus par case vide) ; indicateurs lus côté serveur |
@@ -344,7 +346,7 @@ Chantiers hors plan **non livrés**, rattachés le 2026-09-28 :
 
 | Étape | Ce qui s'ouvre | Peut chevaucher | Condition d'entrée |
 |---|---|---|---|
-| **0. Avant tout chantier** | Clore la V1 (recette `Staging` en cours) ; faire accepter les décisions en production encore `Proposé` (Q4) ; un chantier `bugfix` pour les tests instables (Q15) | — | La CI GitHub revient le 2026-10-03 : d'ici là, un test instable coûte un `bin/ci` local complet à chaque fusion |
+| **0. Avant tout chantier** | Clore la V1 (recette `Staging` en cours) ; ~~faire accepter les décisions en production encore `Proposé` (Q4)~~ fait le 2026-09-28 ; un chantier `bugfix` pour les tests instables (Q15) | — | La CI GitHub revient le 2026-10-03 : d'ici là, un test instable coûte un `bin/ci` local complet à chaque fusion |
 | **1. V2** | `espace-direction`, puis `annuaire-equipe` après son Lot 0 | **V4 `catalogue-complet`** dès le départ ; **V4 `installation-pwa`** si le gabarit du shell a un seul propriétaire | Q1 à Q4 répondues ; C-31 tranchée dans l'UDR du chantier |
 | **2. V3** | `rapports-de-classe` et `vie-de-la-classe` (page classe attribuée au Lot 0) ; puis `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 = oui | **V4 `sous-roles-equipe`** (policies de l'équipe, disjointes de celles de l'enseignant) ; **V5, lot AS-16** (côté élève) | V2 livrée et recettée ; Q5 à Q8 répondues |
 | **3. V4** | `sous-roles-equipe`, après `annuaire-equipe` | V3 | Q9 répondue ; amendement de l'ADR-0038 accepté |
@@ -377,7 +379,6 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 | **Photo de profil : limites documentées** (octets libres possibles dans les données compressées JPEG, PNG et WebP ; un navigateur sans canvas envoie le fichier brut, refusé s'il est trop lourd) | [ADR-0060](../../decisions/adr/0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md), « Conséquences » ; [`photo-de-profil`, journal](../photo-de-profil/journal.md) | Limites acceptées : seul un décodage de l'image côté serveur les lèverait, ce que l'ADR écarte. Rien à planifier sans nouvelle décision |
 | Codes d'adhésion consommés tant que les classes archivées gardent le leur | [`boucle-pedagogique`, journal](../boucle-pedagogique/journal.md) | V3, `vie-de-la-classe` |
 | 3 900 codes d'établissement à transmettre à la main, faute de canal | [ADR-0057](../../decisions/adr/0057-code-d-etablissement.md), « Conséquences » | V2 (la direction voit son code, Q2) ; plus tard `canal-whatsapp` |
-| Décisions en production encore `Proposé` : ADR-0057, ADR-0059, ADR-0063, ADR-0064 ; UDR-0044, UDR-0046, UDR-0050 | Index des [ADR](../../decisions/adr/README.md) et des [UDR](../../decisions/udr/README.md) | Q4, avant le Lot 0 de la V2 |
 | `feature_listing.md` cite encore trois tables disparues (C-35) | §4 | Correction documentaire, sans ADR |
 
 ### Questions à poser au porteur
@@ -387,7 +388,7 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 | Q1 | V2 | La direction valide-t-elle les enseignants en attente de son établissement (ADR-0063) ? À la place de l'équipe, ou en plus d'elle ? |
 | Q2 | V2 | La direction voit-elle le code de son établissement, et peut-elle le régénérer (ADR-0057) ? |
 | Q3 | V2 | La direction crée-t-elle des classes (SC-19), ou ajoute-t-elle seulement la suivante d'un niveau comme l'équipe (ADR-0059) ? Modifie-t-elle ses classes (CL-02, V3) ? |
-| Q4 | V2, V3, V4 | ADR-0057, 0059, 0063 et 0064, UDR-0044, 0046 et 0050 sont en production avec leurs défauts du 2026-09-28 : les acceptes-tu tels quels ? |
+| Q4 | V2, V3, V4 | ADR-0057, 0059, 0063 et 0064, UDR-0044, 0046 et 0050 sont en production avec leurs défauts du 2026-09-28 : les acceptes-tu tels quels ? **Répondue le 2026-09-28 : acceptées telles quelles.** |
 | Q5 | V3 | Le multi-classes de l'élève (cours du soir, ADR-0040) est-il demandé ? Sinon, `multi-classes-eleve` sort du plan |
 | Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059 |
 | Q7 | V3 | Un enseignant rejoint un second établissement comment : avec le code de cet établissement (ADR-0057), ou rattaché par sa direction (ID-09) ? |
@@ -795,7 +796,6 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | **Chantiers livrés hors ordre des vagues** (2026-09-28) : la V2, la V4 et des demandes hors plan passent avant la clôture de la V1 | Chacun est rattaché à une vague (§5, « Chantiers hors plan ») ; ceux qui touchent un contrat de V1 passent par un ADR (ADR-0057, ADR-0058, ADR-0059) |
 | **Fusions web qui cassent `Develop`** : #48/#49 et #50/#52 ont dû être réparées (#56, #61) | Option A du porteur : seul l'agent fusionne, après CI verte |
 | **Tests instables sous CI bloquée** (2026-09-28) : `JoinRequestConcurrencyTest` (« cached plan must not change result type »), `RoleHomesTest`, `session_result_test.rb` | Un chantier `bugfix` avant la V2 (§5, « Dette suivie », Q15) ; ne jamais relancer jusqu'au vert |
-| **Décisions en production restées `Proposé`** : ADR-0057, 0059, 0063, 0064 ; UDR-0044, 0046, 0050 | Les faire accepter avant le Lot 0 de la V2 (Q4) : la V2 et la V3 les amendent |
 
 ---
 
