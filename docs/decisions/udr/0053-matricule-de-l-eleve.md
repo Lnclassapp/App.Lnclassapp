@@ -1,12 +1,12 @@
-# UDR-0053 : Le matricule de l'élève — un champ de plus à l'inscription, une ligne en lecture seule au profil, une recherche et une correction par l'équipe
+# UDR-0053 : Le matricule de l'élève — un champ de plus à l'inscription, une ligne au profil que l'élève corrige lui-même sous son PIN
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, avec ses retours)* |
 | **Date** | 2026-09-28 |
-| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-48 à ED-55 |
+| **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-48 à ED-55, ED-65 |
 | **ADR lié** | [ADR-0065](../adr/0065-matricule-de-l-eleve.md) (matricule) · [ADR-0066](../adr/0066-espace-direction-droits-et-gestes.md) (second facteur de la direction) · [UDR-0005](0005-design-system-fondateur.md) |
-| **Amende** | [UDR-0009](0009-rejoindre-une-classe.md) (inscription élève) · [UDR-0041](0041-page-profil.md) (profil) · [UDR-0020](0020-debloquer-un-compte.md) (débloquer un compte) |
+| **Amende** | [UDR-0009](0009-rejoindre-une-classe.md) (inscription élève) · [UDR-0041](0041-page-profil.md) (profil) · [UDR-0020](0020-debloquer-un-compte.md) (débloquer un compte : second facteur de la direction) |
 | **Remplacé par** | — |
 
 ---
@@ -15,14 +15,14 @@
 
 L'élève doit désormais donner son **matricule** en s'inscrivant (ADR-0065) : c'est par lui que la direction de son établissement le retrouvera. Il le saisit sur un téléphone, souvent sans l'avoir sous les yeux, au milieu d'une classe qui s'inscrit en même temps : il se trompera de caractère, tapera des espaces, une minuscule. S'il se trompe, ou si quelqu'un a déjà pris son matricule, il doit savoir **quoi faire** sans apprendre à qui le matricule appartient.
 
-L'équipe, elle, doit retrouver un compte par son matricule quand un élève appelle (« mon matricule est déjà pris ») et le corriger. Elle réinitialise aussi, désormais, le second facteur d'un membre de la direction qui a perdu son téléphone (ADR-0066).
+À la relecture de la phase Décider (2026-09-28), le porteur a décidé que **seul l'élève corrige son matricule** : depuis son profil, sous son PIN actuel, comme il change déjà son PIN (UDR-0041, ADR-0055). L'équipe ne cherche plus un compte par matricule et ne le corrige plus. Elle réinitialise, en revanche, le second facteur d'un membre de la direction qui a perdu son téléphone (ADR-0066).
 
 ## 2. Décision
 
 1. **Un champ « Matricule »** dans la rubrique « Ton identité » de l'inscription, après le nom et les prénoms : saisie libre (espaces, tirets, minuscules acceptés), normalisée par le serveur.
 2. **Trois messages seulement** : vide, format, déjà utilisé. « Déjà utilisé » ne dit jamais à qui et dit quoi faire (contacter l'équipe).
-3. **Au profil, le matricule se lit, il ne se modifie pas** : une ligne sans bouton, avec l'indication de qui peut le corriger.
-4. **« Débloquer un compte » cherche par numéro ou par matricule**, dans le même champ ; la carte d'un élève affiche son matricule et offre « Corriger le matricule » en modale ; la carte d'un membre de la direction affiche l'état de son second facteur et offre « Réinitialiser le second facteur », comme pour l'équipe.
+3. **Au profil, l'élève lit son matricule et le corrige lui-même** : une ligne avec « Corriger », une modale au gabarit de « Changer mon PIN » (PIN actuel, nouveau matricule), les mêmes trois messages qu'à l'inscription.
+4. **« Débloquer un compte » ne change pas pour les élèves** : la recherche reste par numéro, la carte d'un élève n'affiche pas son matricule. Seule la carte d'un membre de la direction change : l'état de son second facteur et « Réinitialiser le second facteur », comme pour l'équipe.
 
 ## 3. Règles d'implémentation
 
@@ -43,43 +43,44 @@ L'équipe, elle, doit retrouver un compte par son matricule quand un élève app
 **États obligatoires**
 - Vide : le champ, son aide.
 - Chargement : sans objet (Turbo pose `aria-busy` sur le formulaire).
-- Erreur, sous le champ : vide « Saisis ton matricule. » ; format « Le matricule compte 8 chiffres et une lettre, par exemple 12345678A. » ; pris « Ce matricule est déjà utilisé. Vérifie-le ; s'il est bien le tien, demande à ton professeur de contacter l'équipe Lnclass. ».
+- Erreur, sous le champ : vide « Saisis ton matricule. » ; format « Le matricule compte 8 chiffres et une lettre, par exemple 12345678A. » ; pris « Ce matricule est déjà utilisé. Vérifie-le ; s'il est bien le tien, demande à ton professeur de contacter l'équipe Lnclass. » (le même au profil, §3.2).
 - Succès : inchangé (toast « Bienvenue dans ta classe ! » sur l'accueil).
 
 **Accessibilité** : libellé visible, aide et erreur reliées par `aria-describedby`, `aria-invalid` (via `ui_field`) ; cible ≥ 48 px ; parcours prouvé à 390 px.
 
-### 3.2 Profil de l'élève — `identity/profiles/_information` (amende l'UDR-0041)
-
-- Pour un élève, une ligne de la `dl`, après « Numéro » : `dt` « Matricule », `dd#profile_student_number` en `font-mono tracking-wider`, et sous la valeur `p.text-sm.text-mute` « Pour le corriger, demande à ton professeur de contacter l'équipe Lnclass. ». **Aucun bouton**, aucun lien d'édition.
-- Élève sans matricule (compte anonymisé : il ne se connecte plus) : sans objet.
-
-### 3.3 Débloquer un compte — `teams/account_lookups` (amende l'UDR-0020)
+### 3.2 Profil de l'élève — `identity/profiles/_information` et modale « Corriger mon matricule » (amende l'UDR-0041)
 
 **Structure**
-- `form#account-lookup-form` : le champ devient `input[type=text][name=q]`, libellé « Numéro ou matricule », aide « Un numéro complet (10 chiffres) ou un matricule complet (8 chiffres et une lettre). », `autocomplete="off"`. Le paramètre `contact` reste lu s'il est seul (liens déjà partagés).
-- États vides : « Saisissez un numéro ou un matricule » ; « Aucun compte pour « <saisie> » ».
-- `_result` pour un **élève** : la `dl` gagne « Matricule » (`font-mono`) ; les actions gagnent `ui_button` « Corriger le matricule » (`secondary`, icône `pencil-square`, `href: edit_teams_account_student_number_path(public_id)`, `data: { turbo_frame: "modal" }`).
-- `_result` pour un **membre de la direction** (`school_admin`) : la `dl` affiche « Fonction · Établissement » et l'état du second facteur (`ui_badge` « Activé » `success`, « Non activé » `warning`), comme pour l'équipe ; l'action « Réinitialiser le second facteur » et sa confirmation `reset-second-factor-modal` sont celles de l'UDR-0020.
-- Modale `teams/student_numbers/edit` : `turbo_frame_tag "modal" { ui_modal(title: "Corriger le matricule de <nom>", open: true) }` : `form#student-number-form` (`PATCH teams_account_student_number_path(public_id)`, scope `student_number`) : `ui_field :student_number` (valeur actuelle, mêmes attributs que 3.1, aide « Le matricule complet. L'ancien cessera de désigner ce compte. »). Pied : « Annuler », « Enregistrer ».
+- Pour un élève, une ligne de la `dl`, après « Numéro » : `dt` « Matricule », `dd#profile_student_number` en `font-mono tracking-wider`, et le bouton « Corriger » (`secondary`, `sm`, icône `pencil-square`, `href: edit_profile_student_number_path`, `data-turbo-frame="modal"`, `aria-label` « Corriger mon matricule »), au gabarit des boutons « Modifier » de la carte (UDR-0041). Ligne et bouton : Lot 0b ; la route répond dès le Lot 0b, son contrôleur arrive au Lot F.
+- Modale `identity/profile_student_numbers/edit` (`ui_modal` dans `turbo_frame_tag "modal"`, taille `sm`, titre « Corriger mon matricule ») : `form#profile-student-number-form` (`PATCH profile_student_number_path`, scope `student_number_change`) : « PIN actuel » (mêmes attributs que la modale « Changer mon PIN » : `inputmode="numeric"`, `autocomplete="current-password"`, 4 chiffres, `reveal: true`), puis `ui_field :student_number` aux attributs du §3.1, valeur actuelle pré-remplie, aide « Ton matricule complet : 8 chiffres et une lettre. ». Pied : « Annuler », « Enregistrer ».
+- Élève sans matricule (compte anonymisé : il ne se connecte plus) : sans objet.
 
-**Routes** (Lot 0b) : dans `namespace :teams`, `resources :accounts, only: [], param: :user_public_id do resource :student_number, only: %i[edit update], path: "student-number", controller: "student_numbers" end`, soit `GET /teams/accounts/:account_user_public_id/student-number/edit` → `edit_teams_account_student_number_path(public_id)` et `PATCH …/student-number` → `teams_account_student_number_path(public_id)` (noms vérifiés par le test de routage du Lot 0b).
+**Routes** (Lot 0b, `config/routes/identity.rb`, dans `resource :profile`) : `resource :student_number, only: %i[edit update], controller: :profile_student_numbers` → `GET /profile/student_number/edit` (`edit_profile_student_number_path`) et `PATCH /profile/student_number` (`profile_student_number_path`). Aucun identifiant : toujours le compte de la session (ADR-0055).
 
 **Comportement**
-- Recherche : GET dans le frame `account_lookup`, URL avancée (`?q=`, paramètre filtré des journaux par `/\Aq\z/`, ADR-0065) ; une saisie au format d'un numéro cherche le numéro, au format d'un matricule cherche le matricule ; sinon, « Aucun compte ».
-- Correction : succès → Turbo Stream : toast `success` « Matricule de <nom> corrigé. » et `replace "account-lookup-result"` ; repli HTML : 303 vers `/teams/accounts` (sans paramètre : jamais le matricule dans une URL de redirection) avec `notice`. Échec → 422, modale re-rendue : format (message de 3.1), pris « Ce matricule est déjà celui d'un autre compte. » ; refus → 403 en toast ; compte inconnu ou non élève → 404.
-- Réinitialisation du second facteur d'un `school_admin` : comportement de l'UDR-0020, inchangé.
+- `PATCH` → `Identity::ChangeOwnStudentNumber` (ADR-0065) : PIN actuel vérifié d'abord (un PIN faux compte comme un échec de connexion) ; nouveau matricule normalisé puis validé.
+- Succès : `update.turbo_stream.erb` remplace `#profile_information`, ferme la modale, toast `success` « Ton matricule est enregistré. » ; repli HTML : 303 vers `profile_path` avec `notice`. La session n'est pas renouvelée (le matricule n'est pas un secret).
+- Échec : 422, modale re-rendue, PIN vidé, matricule gardé : « PIN incorrect. » en alerte `role="alert"` (UDR-0041) ; sous le champ : vide, format ou pris (messages du §3.1) ; inchangé « C'est déjà ton matricule. ». Compte verrouillé : message de verrouillage de la connexion (ADR-0050).
+- **Débit** : 10 tentatives par heure et par compte ; au-delà, 429 et, dans la modale, « Trop de tentatives. Réessaie dans une heure. » sans formulaire.
+- Un compte qui n'est pas élève : la ligne et le bouton n'existent pas ; la route forcée → 403.
 
 **États obligatoires**
-- Vide : « Saisissez un numéro ou un matricule ».
-- Chargement : `aria-busy` du frame et du formulaire de la modale.
-- Erreur : sous le champ (422), toast (403, 404).
-- Succès : toast, carte remplacée avec le nouveau matricule.
+- Vide : sans objet (un élève a toujours un matricule).
+- Chargement : bouton de soumission en `loading` (`aria-busy`).
+- Erreur : alerte (PIN), sous le champ (matricule), message 429 dans la modale.
+- Succès : toast, carte « Mes informations » remplacée avec le nouveau matricule.
 
-**Accessibilité** : le formulaire reste `role="search"` étiqueté ; le matricule de la carte est lu par son `dt` ; la modale est une `<dialog>` native (focus piégé, Échap) ; cibles ≥ 48 px ; 390 px.
+**Accessibilité** : libellés visibles ; erreurs reliées par `aria-describedby`, `aria-invalid` ; modale `<dialog>` native (focus piégé, Échap) ; cibles ≥ 48 px ; 390 px.
+
+### 3.3 Débloquer un compte — `teams/account_lookups/_result` (amende l'UDR-0020)
+
+- La recherche **ne change pas** : un numéro complet, paramètre `contact` (UDR-0020). Aucune recherche par matricule, aucun matricule sur la carte d'un élève, aucune action sur le matricule.
+- `_result` pour un **membre de la direction** (`school_admin`) : la `dl` affiche « Fonction · Établissement » (ou « Aucun établissement ») et l'état du second facteur (`ui_badge` « Activé » `success`, « Non activé » `warning`), comme pour l'équipe ; l'action « Réinitialiser le second facteur » et sa confirmation `reset-second-factor-modal` sont celles de l'UDR-0020.
+- Comportement, états, accessibilité : ceux de l'UDR-0020, inchangés.
 
 ## 4. Conséquences
 
 - L'inscription d'un élève demande un champ de plus ; la page reste en trois rubriques (UDR-0009).
-- Personne ne corrige un matricule ailleurs que dans « Débloquer un compte » ; quand l'annuaire des comptes (`annuaire-equipe`) livrera la fiche d'un compte, il y **déplacera** « Corriger le matricule » en réutilisant `Identity::ChangeStudentNumber` et `teams/student_numbers`, sans nouveau geste.
-- Le paramètre `contact` de `/teams/accounts` est remplacé par `q` ; l'ancien reste lu.
-- Interdit : afficher à l'élève à qui appartient un matricule pris ; une recherche partielle par matricule.
+- **Personne d'autre que l'élève ne corrige un matricule** : ni l'équipe, ni la direction, ni l'enseignant. Un matricule usurpé se libère par l'anonymisation du compte usurpateur (`annuaire-equipe`), dont la recherche de comptes retrouve un élève par son matricule entier (PRD §8).
+- « Débloquer un compte » garde son paramètre `contact` et sa recherche par numéro.
+- Interdit : afficher à l'élève à qui appartient un matricule pris ; une recherche partielle par matricule ; un écran de modification du matricule hors du profil de l'élève.

@@ -127,9 +127,9 @@ Un enseignant convaincu n'a aucun geste pour faire venir ses collègues ; il rec
 - Paramètre `period` lu seulement en texte ; tout autre forme vaut 30 jours.
 
 
-## Amendement du 2026-09-28 — écran d'attente de la direction et de l'enseignant retiré (UDR-0052, proposé)
+## Amendement du 2026-09-28 — écran d'attente de la direction et de l'enseignant retiré (UDR-0052, accepté)
 
-*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
 
 - Un `school_admin` sans établissement actif voit « Aucun établissement », avec « Mon profil » et « Se déconnecter ».
-- Un enseignant sans école principale et sans demande en attente (retiré par sa direction, ou demande approuvée puis retiré) voit le formulaire « Rejoindre l'établissement » par code (UDR-0052 §3.9) ; une demande approuvée n'affiche plus « Votre demande est en cours de validation ».
+- Un enseignant sans école principale et sans demande en attente (retiré par sa direction, ou demande approuvée puis retiré) voit le formulaire « Rejoindre l'établissement » par code (UDR-0052 §3.9), qui refuse l'établissement qui l'a retiré ; seule sa direction peut l'y réintégrer ; une demande approuvée n'affiche plus « Votre demande est en cours de validation ».

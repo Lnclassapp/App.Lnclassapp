@@ -112,9 +112,9 @@ production:
 
 - L'anonymisation garde les résultats pseudonymes : ce n'est pas un effacement total.
 
-## Amendement du 2026-09-28 — matricule et rattachements de la direction (ADR-0065, ADR-0066, proposé)
+## Amendement du 2026-09-28 — matricule et rattachements de la direction (ADR-0065, ADR-0066, accepté)
 
-*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) ; mise en œuvre par `annuaire-equipe` (ID-23). Statut : **proposé** avec l'[ADR-0065](./0065-matricule-de-l-eleve.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) ; mise en œuvre par `annuaire-equipe` (ID-23). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[ADR-0065](./0065-matricule-de-l-eleve.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
 
 - L'anonymisation met aussi **`users.student_number` à `NULL`** (matricule d'un mineur), comme `contact`.
 - Elle termine aussi le **rattachement actif à la direction** (`school_staffs.left_at`), comme les adhésions.

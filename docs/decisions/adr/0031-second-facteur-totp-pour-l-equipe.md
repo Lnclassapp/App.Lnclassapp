@@ -117,9 +117,9 @@ end
 
 - Le second facteur est demandé à chaque nouvelle session, sans « se souvenir de cet appareil ».
 
-## Amendement du 2026-09-28 — la direction (ADR-0044, ADR-0066, proposé)
+## Amendement du 2026-09-28 — la direction (ADR-0044, ADR-0066, accepté)
 
-*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
 
 - Le régime de cet ADR s'applique **aussi au rôle `school_admin`** (C-20, déjà décidé par l'ADR-0044) : `SessionState#privileged?` (équipe ou direction) remplace `team?` dans `ResolveSession` et `SecondFactorPolicy`. Même activation, même vérification, mêmes codes de secours.
 - **Perte du téléphone** : un membre de l'équipe réinitialise le second facteur d'un `school_admin` par `Identity::ResetSecondFactor` (écran « Débloquer un compte », UDR-0020 amendée par l'UDR-0053). Aucun membre de la direction ne réinitialise un second facteur.

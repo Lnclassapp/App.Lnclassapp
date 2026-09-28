@@ -28,6 +28,17 @@
 | 2026-09-28 | « Changer de classe » par identifiant public, hors compteur (point 25) | L'élève est déjà dans l'établissement : rien à sonder ; la limite bloquait la correction d'un lot d'élèves | ADR-0066 §4.4, UDR-0052 §3.6 |
 | 2026-09-28 | Adaptateurs des nouvelles méthodes de port, écran d'attente, `DirectionClassroomsQuery`, second facteur, garde de la direction et `role_homes_test` remontés aux socles (points 1, 3, 5, 16, 17, 27) | `port_contracts_test` et les fichiers touchés par plusieurs lots | — |
 | 2026-09-28 | Profil (`_information`, `ProfileQuery`) et écran d'attente attribués chacun à un seul lot (0b, C) | Deux lots les auraient touchés (profil : direction et matricule ; attente : direction et enseignant retiré) | — |
+| 2026-09-28 | Relecture de la phase Décider par le porteur : ADR-0065, 0066, 0067, UDR-0052, 0053 **acceptés avec retours** ; amendements datés passés à « accepté » ; C-31 fermée dans la feuille de route | Porteur | Statuts et index |
+| 2026-09-28 | **Réintégration** d'un enseignant retiré par le Proviseur ou le Censeur (`School::ReinstateTeacher`, `:reinstate_teacher`), depuis « Enseignants retirés » ; `teacher_school_departures` gagne `reinstated_at`/`reinstated_by_id` et un index unique partiel « un départ ouvert » ; `departed?` = départ ouvert | Porteur : « aucun écran ne permet d'annuler un retrait » ; le code d'établissement refuse toujours le retour seul | ADR-0066 §4.3, §4.4 ; ED-60 à ED-63 |
+| 2026-09-28 | La réintégration rend l'établissement, **pas les classes** : l'enseignant se redéclare (`DeclareTeaching`) | Délégué par le porteur ; garder les déclarations dans le départ ajouterait une table ou une colonne sérialisée | ADR-0066 §9 (amendable) |
+| 2026-09-28 | Un enseignant retiré qui a rejoint un autre établissement, ou anonymisé, n'est plus réintégrable ; `:not_found` neutre, absent de la liste | Une seule école par enseignant en V2 ; ne rien dire d'un autre établissement | ADR-0066 §4.4 |
+| 2026-09-28 | Invitations : 30 par heure et par compte (au lieu de 10) | Porteur : un lycée a beaucoup de personnel | ADR-0066 §4.6 ; ED-58 réécrit |
+| 2026-09-28 | Code d'adhésion d'une classe : critère ED-64 (présent dès la création d'une classe ajoutée par la direction) | Porteur ; déjà vrai dans `ClassroomRepository#insert`, le critère le prouve | UDR-0052 §2.10, §3.3 |
+| 2026-09-28 | **Seul l'élève corrige son matricule**, depuis son profil, sous PIN actuel (`Identity::ChangeOwnStudentNumber`, 10 par heure et par compte, autres sessions gardées) ; `Identity::ChangeStudentNumber`, `Teams::StudentNumbersController` et la recherche par matricule de « Débloquer un compte » supprimés ; `q` n'est plus filtré (le paramètre reste `contact`) | Porteur ; la recherche par matricule ne servait pas au déblocage (l'élève connaît toujours son numéro) | ADR-0065, UDR-0053 ; ED-52, ED-53, ED-54 réécrits, ED-65 |
+| 2026-09-28 | La recherche d'un matricule par l'équipe passe à `annuaire-equipe` (recherche exacte, pour anonymiser un usurpateur), qui ne modifie jamais un matricule | Un matricule usurpé ne se libère que par l'anonymisation | PRD §8 |
+| 2026-09-28 | **La direction ne cherche que les élèves de son établissement** ; le rattachement d'un élève venu d'ailleurs disparaît ; `PlaceStudent` ne reçoit plus que l'identifiant public ; route `POST …/students/placement` supprimée (20 routes avec les deux de la réintégration) ; le compteur de débit ne porte plus que sur `lookup` | Porteur | ADR-0065, ADR-0066 §4.4, UDR-0052 §3.6 ; ED-40, 41, 43, 44, 47, 59 réécrits |
+| 2026-09-28 | Critères : IDs gardés, réécrits en place, nouveaux à partir d'ED-60 ; aucun supprimé | Éviter de renuméroter les références croisées des ADR, UDR et du plan | — |
+| 2026-09-28 | La matrice fonction × geste est une matrice de départ, à revoir avec des directions réelles | Porteur : « ne connaît pas bien le fonctionnement de l'administration » | ADR-0066 §9 |
 
 ## Ce qui a dérapé
 
@@ -64,6 +75,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Photos dans les listes de la direction | `ReadUserPolicy` non élargie | `annuaire-equipe` ou suivant |
 | Taux de rendu par devoir (élève × devoir) | Déplier cours et fiches en exercices | `rapports-de-classe` (V3) |
 | Régénérer ou fermer le code d'adhésion d'une classe par la direction | Non demandé ; ADR-0041 le prévoyait | V3, `vie-de-la-classe` |
+| Élève dont la classe de l'an dernier reste `active` : ni déplacé par la direction, ni admis dans une nouvelle classe par code | Rattachement d'un élève venu d'ailleurs retiré par le porteur ; archivage de fin d'année en V3 | V3 ou `changement-etablissement-eleve` (à trancher avant la première rentrée) |
+| Rendre ses anciennes classes à un enseignant réintégré | Délégué : il se redéclare | À rouvrir si le porteur le demande |
+| Écran de réintégration pour l'équipe | L'équipe a le geste dans `StaffPolicy`, pas d'écran | À ouvrir si besoin |
 | Retirer un élève de l'établissement (départ en cours d'année) | Hors V2 (memo) | V3, avec CL-02 |
 
 ## Clôture

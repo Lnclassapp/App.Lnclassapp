@@ -168,9 +168,9 @@ Chaque étape vérifie ce qui existe déjà (`if_not_exists` pour la colonne et 
 - Le code n'est plus transmis par la seule équipe : chaque enseignant d'un établissement **actif** le diffuse dans son lien de parrainage `/e/<code>?ref=<jeton>` (ADR-0063).
 - **Régénérer le code casse aussi tous les liens de parrainage** de l'établissement : les enseignants doivent repartager leur lien.
 
-## Amendement du 2026-09-28 — la direction voit et régénère le code (ADR-0066, proposé)
+## Amendement du 2026-09-28 — la direction voit et régénère le code (ADR-0066, accepté)
 
-*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md), Q2 du porteur. Statut : **proposé** avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md) ; il fait foi dès que celui-ci est accepté. Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md), Q2 du porteur. Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
 
 - **Lecture** : toute la direction active de l'établissement lit son code et son lien `/e/<code>` (espace direction, page « Établissement », UDR-0052).
 - **Régénération** : `School::RegenerateSchoolCode` n'est plus autorisé par `School::ManageSchoolPolicy` mais par `Policies::School::StaffPolicy`, geste `:regenerate_code` : l'équipe, le Proviseur et le Censeur **de cet établissement**. L'Éducateur, la Secrétaire et la direction d'un autre établissement sont refusés.

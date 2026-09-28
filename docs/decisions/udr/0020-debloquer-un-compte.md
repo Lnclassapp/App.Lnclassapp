@@ -84,10 +84,9 @@ Deux frictions sont à éviter :
 - Le bouton « Générer un code de récupération » de l'enseignant appartient à la page de la classe (lot D4) : un `form_with` en POST vers `account_pin_recovery_codes_path(<public_id de l'élève>)`, sans `data-turbo-frame`. Le stream ouvre la modale du code.
 - Le code n'a pas de bouton « Copier », qui demanderait un contrôleur Stimulus ; il est fait pour être dicté.
 
-## Amendement du 2026-09-28 — matricule et direction (UDR-0053, proposé)
+## Amendement du 2026-09-28 — second facteur de la direction (UDR-0053, accepté)
 
-*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0053](0053-matricule-de-l-eleve.md). En cas d'écart, cette section fait foi.*
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[UDR-0053](0053-matricule-de-l-eleve.md). En cas d'écart, cette section fait foi.*
 
-- La recherche prend un **numéro ou un matricule** entier (paramètre `q` ; `contact` reste lu).
-- La carte d'un élève affiche son matricule et « Corriger le matricule » (modale).
+- La recherche reste par **numéro** (paramètre `contact`) : aucune recherche par matricule, aucun matricule sur la carte d'un élève, aucune correction de matricule ici. Seul l'élève corrige son matricule, depuis son profil (porteur, 2026-09-28 ; UDR-0053 §3.2).
 - La carte d'un membre de la direction affiche l'état de son second facteur et « Réinitialiser le second facteur », comme pour un membre de l'équipe (ADR-0066).

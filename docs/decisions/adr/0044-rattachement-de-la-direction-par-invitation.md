@@ -118,15 +118,16 @@ add_index :school_staffs, :school_id, unique: true, where: "position = 'principa
 - Second facteur **obligatoire** pour la direction.
 - Liste fermée de quatre fonctions.
 
-## Amendement du 2026-09-28 — deux niveaux de droits (ADR-0066, proposé)
+## Amendement du 2026-09-28 — deux niveaux de droits (ADR-0066, accepté)
 
-*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md), grill 8 du porteur. Statut : **proposé** avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md) ; il fait foi dès que celui-ci est accepté. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md), grill 8 du porteur. Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
-- **Deux niveaux de droits.** Le Proviseur et le Censeur gèrent : ils invitent, retirent un enseignant, régénèrent le code d'établissement, retirent un membre du personnel. L'Éducateur et la Secrétaire voient tout l'établissement, ajoutent des classes et rattachent des élèves. La table fonction × geste est celle de l'ADR-0066 §4.3, appliquée par `Policies::School::StaffPolicy`.
+- **Deux niveaux de droits.** Le Proviseur et le Censeur gèrent : ils invitent, retirent un enseignant, régénèrent le code d'établissement, retirent un membre du personnel. L'Éducateur et la Secrétaire voient tout l'établissement, ajoutent des classes et changent un élève de l'établissement de classe. Le Proviseur et le Censeur réintègrent aussi un enseignant retiré (porteur, 2026-09-28). La table fonction × geste est celle de l'ADR-0066 §4.3, appliquée par `Policies::School::StaffPolicy`.
 - **Invitation** : par l'équipe (tout établissement) ou par le Proviseur ou le Censeur **de l'établissement**, et non plus par tout membre. **Seule l'équipe invite un Proviseur** (il n'y en a qu'un actif : un Proviseur ne peut pas inviter son successeur). `School::InviteStaffPolicy` n'est pas créée : `StaffPolicy` (gestes `:invite_staff`, `:invite_principal`) la remplace.
 - **Une invitation ne vise qu'un numéro sans compte Lnclass** (`:conflict`, `contact: [:taken]` sinon). « Un compte déjà rattaché à une autre école reçoit `:conflict` » en découle.
 - **Départ** : `School::DetachStaffMember` est autorisé au Proviseur, au Censeur et à l'équipe. Nul ne se retire lui-même ; seule l'équipe retire un Proviseur.
 - **Fonction de l'acteur** : `Actor#position`, lue sur le rattachement actif d'un établissement **actif** ; un établissement inactif renvoie sa direction à l'écran d'attente.
 - Journal : `staff.detached` porte la fonction et l'établissement.
-- Les invitations sont bornées à 10 par heure et par compte (elles disent si un numéro a déjà un compte).
+- Les invitations sont bornées à **30 par heure et par compte** (porteur, 2026-09-28 : un lycée a beaucoup de personnel ; elles disent si un numéro a déjà un compte).
+- La table des droits est une matrice de départ, **à revoir avec des directions réelles** (ADR-0066 §9).
 - Point à confirmer du §9 « Tout membre rattaché peut inviter » : **tranché par le porteur (grill 8)** : Proviseur et Censeur seulement.

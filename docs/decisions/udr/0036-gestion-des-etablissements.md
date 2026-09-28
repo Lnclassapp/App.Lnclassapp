@@ -123,8 +123,8 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 
 *Chantier `docs/chantiers/croissance-parrainage`.* La fiche montre le code national dans l'en-tête et le formulaire le modifie (facultatif, 6 chiffres, unique) ; la recherche porte aussi sur lui ; la section « Enseignants en attente » (Valider / Refuser) précède les enseignants rattachés quand il y a des demandes. Contrat : UDR-0050 §3.
 
-## Amendement du 2026-09-28 — section « Direction » de la fiche (UDR-0052, proposé)
+## Amendement du 2026-09-28 — section « Direction » de la fiche (UDR-0052, accepté)
 
-*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
 
 - La fiche d'un établissement gagne, après l'en-tête, un frame différé `school_staff` : la liste de la direction, « Inviter la direction » et « Retirer » sur chaque membre, Proviseur compris (UDR-0052 §3.10).

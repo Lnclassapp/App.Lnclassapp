@@ -100,9 +100,9 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - La navigation `team` n'a plus aucune entrée inactive ; elle garde ses **5 destinations**, le maximum du §4. Aucune destination n'est ajoutée.
 - Preuve : `test/system/role_homes_test.rb` (l'équipe ouvre ses cinq destinations, aucune inactive) et `test/system/teams/dashboard_test.rb`.
 
-## Amendement du 2026-09-28 — navigation de la direction (UDR-0052, proposé)
+## Amendement du 2026-09-28 — navigation de la direction (UDR-0052, accepté)
 
-*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
+*Chantier [`espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[UDR-0052](0052-espace-direction.md). En cas d'écart, cette section fait foi.*
 
 - La navigation `school_admin` gagne une **cinquième destination**, « Établissement » (`school_admin_school_path`, icône `building-library`), après « Élèves ». Elle compte **5 destinations**, le maximum du §4.
 - Les cinq routes de la direction sont dessinées : aucune entrée de la direction n'est inactive.

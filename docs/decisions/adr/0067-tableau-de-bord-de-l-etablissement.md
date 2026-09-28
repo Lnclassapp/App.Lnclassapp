@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, avec ses retours)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md) — critères ED-27 à ED-32 (SC-15, SC-18, TR-15) |
 | **Complète** | [ADR-0062](./0062-indicateurs-de-pilotage-lus-en-direct.md) (définitions et forme de lecture) |
@@ -114,3 +114,7 @@ GROUP BY a.classroom_id
 
 - `test/infrastructure/queries/school/school_dashboard_query_test.rb` : un test par ligne du tableau §4 ; classe sans devoir → « — » ; moins de 5 élèves ayant rendu → moyenne « — » ; élève parti compté dans la moyenne, pas dans l'effectif ni le rendu ; session de remédiation ignorée ; élève anonymisé exclu ; classe archivée ou d'une autre année exclue ; **données d'un autre établissement absentes** ; nombre de requêtes identique quand le volume triple.
 - `test/views/school_admin/homes_view_test.rb` (ou le test système) : aucun `score_percent` ni nom d'élève dans le HTML du tableau de bord et de la page classe.
+
+## 8. Relecture du porteur
+
+- Accepté le 2026-09-28 tel quel, **moyenne « — » sous 5 élèves ayant rendu comprise** (grill 9 délégué, puis relu).

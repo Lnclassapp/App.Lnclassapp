@@ -100,10 +100,10 @@ add_index :classroom_students, :student_id, unique: true,
 
 - Pas de seconde classe (cours du soir) avant la V3.
 
-## Amendement du 2026-09-28 — changement de classe par la direction (ADR-0066, proposé)
+## Amendement du 2026-09-28 — changement de classe par la direction (ADR-0066, accepté)
 
-*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **proposé** avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/espace-direction`](../../chantiers/espace-direction/prd.md). Statut : **accepté** par le porteur le 2026-09-28 (avec ses retours), avec l'[ADR-0066](./0066-espace-direction-droits-et-gestes.md). Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
 
 - L'index unique `(classroom_id, student_id)` devient **partiel** : `WHERE left_at IS NULL`. Un élève peut revenir dans une classe qu'il a quittée (erreur de classe corrigée) ; chaque passage garde sa ligne.
-- La direction de l'établissement **rattache** un élève par son matricule (ADR-0065) ou le **change de classe** dans son établissement (`School::PlaceStudent`) : l'adhésion principale active est close (`left_at`), la nouvelle est ouverte, dans une transaction, sous le verrou de la classe cible et son plafond (ADR-0041).
-- Un élève dont la classe principale est active, de l'année en cours, dans un **autre** établissement n'est jamais pris par la direction : il rejoint sa nouvelle classe par son code, comme en V1.
+- La direction de l'établissement **change de classe** un élève de son établissement (classe active de l'année en cours), retrouvé dans sa liste ou par son matricule (ADR-0065) (`School::PlaceStudent`) ; elle ne rattache aucun élève venu d'ailleurs ou sans classe cette année (porteur, 2026-09-28) : l'adhésion principale active est close (`left_at`), la nouvelle est ouverte, dans une transaction, sous le verrou de la classe cible et son plafond (ADR-0041).
+- Un élève qui n'est pas dans une classe active de l'année en cours de l'établissement n'est ni trouvé ni déplacé par la direction : il rejoint sa nouvelle classe par son code, comme en V1. Le changement d'établissement d'un élève est au backlog (`changement-etablissement-eleve`).
