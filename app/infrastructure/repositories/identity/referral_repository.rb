@@ -16,6 +16,8 @@ module Repositories
         user_id && Referrer.new(user_id:, school_id:, school_active: status == ACTIVE)
       end
 
+      def referral_token_for(user_id:) = Orm::TeacherProfile.where(user_id:).pick(:referral_token)
+
       # Savepoint : un filleul déjà parrainé devient :conflict sans casser la transaction du use case.
       def record_referral(referrer_id:, referee_id:, school_id:, source:, at:)
         Orm::Referral.transaction(requires_new: true) do

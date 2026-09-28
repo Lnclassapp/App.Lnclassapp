@@ -49,9 +49,18 @@ class School::JoinRequestVouchesControllerTest < ActionDispatch::IntegrationTest
     assert_equal I18n.t("school.join_request_vouches.create.done", name: "Awa Koné"), flash[:notice]
   end
 
-  test "a teacher of another school, the team and a student are refused; nothing changes" do
+  test "m5: a teacher of another school reads the same 404 as for an unknown request" do
+    sign_in_as create_teacher
+
+    post join_request_vouch_path(@join_request.public_id)
+
+    assert_response :not_found
+    assert_equal "pending", @join_request.reload.status
+  end
+
+  test "the team and a student are refused; nothing changes" do
     team = create_team_member
-    [ create_teacher, team, create_student(classroom: create_classroom(school: @school)) ].each do |user|
+    [ team, create_student(classroom: create_classroom(school: @school)) ].each do |user|
       sign_in_as user
       post join_request_vouch_path(@join_request.public_id), as: :turbo_stream
 

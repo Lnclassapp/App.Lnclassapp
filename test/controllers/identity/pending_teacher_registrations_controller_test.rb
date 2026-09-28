@@ -98,6 +98,17 @@ class Identity::PendingTeacherRegistrationsControllerTest < ActionDispatch::Inte
     assert_equal 0, Orm::User.count
   end
 
+  test "m2: a DRENA or a school identifier with a NUL byte is ignored, never a 500" do
+    get new_pending_teacher_registration_path, params: { teacher_registration: { drena_public_id: "\u0000" } }
+    assert_response :success
+    assert_select "turbo-frame#schools select[disabled]"
+
+    post pending_teacher_registrations_path,
+         params: { teacher_registration: registration_params(drena_public_id: "a\u0000", school_public_id: "b\u0000") }
+    assert_response :unprocessable_entity
+    assert_equal 0, Orm::User.count
+  end
+
   test "a signed-in person is sent home" do
     sign_in_as create_teacher
 

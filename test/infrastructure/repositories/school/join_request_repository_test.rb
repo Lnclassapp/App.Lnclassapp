@@ -15,23 +15,25 @@ module Repositories
       end
 
       test "creates one pending request per teacher, read back by its public id with the teacher's name" do
-        created = @repository.create(teacher_id: @teacher.id, school_id: @school.id, at: NOW)
+        created = @repository.create(teacher_id: @teacher.id, school_id: @school.id, at: NOW, max_pending: 5)
 
         assert created.success?
         request = @repository.find_by_public_id(public_id: created.value.public_id)
         assert_equal [ @teacher.id, @school.id, "pending", "Awa Koné" ], [ request.teacher_id, request.school_id, request.status, request.teacher_name ]
         assert_equal 14, request.public_id.size
-        assert_equal :conflict, @repository.create(teacher_id: @teacher.id, school_id: create_school.id, at: NOW).code
+        assert_equal :conflict, @repository.create(teacher_id: @teacher.id, school_id: create_school.id, at: NOW, max_pending: 5).code
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
       end
 
-      test "counts the pending requests of a school only" do
-        create_join_request(school: @school)
-        create_join_request(school: @school)
+      test "B2: refuses a request beyond the cap of pending requests of the school; decided ones and other schools do not count" do
+        2.times { create_join_request(school: @school) }
         create_join_request(school: @school, status: "rejected")
         create_join_request
 
-        assert_equal 2, @repository.pending_count(school_id: @school.id)
+        refused = @repository.create(teacher_id: @teacher.id, school_id: @school.id, at: NOW, max_pending: 2)
+        assert_equal [ :invalid, { base: [ :too_many_pending ] } ], [ refused.code, refused.errors ]
+        assert_not Orm::SchoolJoinRequest.exists?(teacher: @teacher)
+        assert @repository.create(teacher_id: @teacher.id, school_id: @school.id, at: NOW, max_pending: 3).success?
       end
 
       test "approve decides the request and attaches the teacher as primary, once" do

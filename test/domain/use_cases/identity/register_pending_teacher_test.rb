@@ -65,10 +65,10 @@ module UseCases
           @refuse = refuse
         end
 
-        def pending_count(school_id:) = @pending.fetch(school_id, 0)
-
-        def create(teacher_id:, school_id:, at:)
+        # Le plafond est tenu par le repository, sous verrou (B2) : le faux le reproduit à partir de `pending`.
+        def create(teacher_id:, school_id:, at:, max_pending:)
           return Shared::Result.failure(:conflict) if @refuse
+          return Shared::Result.failure(:invalid, errors: { base: [ :too_many_pending ] }) if @pending.fetch(school_id, 0) >= max_pending
 
           @journal << [ :join_request, teacher_id, school_id, at ]
           Shared::Result.success(Entities::School::JoinRequest.new(id: 5, public_id: "req-5", teacher_id:, school_id:,
@@ -147,12 +147,23 @@ module UseCases
         assert_equal [ :invalid, { material_slug: [ :inclusion ] } ], [ result.code, result.errors ]
       end
 
-      test "CP-14: a school that already has 5 pending requests refuses a sixth, nothing is written" do
+      test "M4: the national code is judged only once the rest of the form is valid — no oracle through another error" do
+        assert_equal({ material_slug: [ :inclusion ] }, register(national_code: "000000", material_slug: "latin").errors)
+        assert_equal [ :pin_confirmation ], register(national_code: "000000", pin_confirmation: "1357").errors.keys
+        assert_equal({ national_code: [ :inclusion ] }, register(national_code: "000000").errors)
+      end
+
+      test "CP-14, B2: a school that already has 5 pending requests refuses a sixth, under the lock; the account is rolled back" do
         result = register(national_code: "012345", pending: { 31 => 5 })
 
         assert_equal [ :invalid, { base: [ :too_many_pending ] } ], [ result.code, result.errors ]
         assert_empty @journal
+        assert_equal 1, @transaction.calls
         assert register(national_code: "012345", pending: { 31 => 4 }).success?
+      end
+
+      test "B2: the cap handed to the repository is the one of the domain" do
+        assert_equal 5, Entities::School::JoinRequest::MAX_PENDING_PER_SCHOOL
       end
 
       test "a signed-in person, a malformed form: refused before any write" do

@@ -39,8 +39,9 @@ module Identity
     def material_options = Queries::Catalog::ReferentialOptionsQuery.new.call.materials.map { [ it.name, it.slug ] }
     def drena_options = options.drenas.map { [ it.name, it.public_id ] }
 
+    # Seule une DRENA connue est cherchée (comme School::DrenaSchoolsController) : un identifiant forgé ne touche pas la base.
     def school_options
-      return [] if @form.drena_public_id.blank?
+      return [] unless options.drenas.any? { it.public_id == @form.drena_public_id }
 
       options.schools_for(drena_public_id: @form.drena_public_id)
     end

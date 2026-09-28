@@ -152,3 +152,15 @@ Import `lnclass.schools` v1 : clé facultative `national_code` (chaîne ou nombr
 - **Amende l'ADR-0057** : le code secret est aussi diffusé par les liens de parrainage des enseignants actifs ; la régénération les invalide.
 - **Amende l'ADR-0030** : un enseignant sans école principale n'accède qu'à l'écran d'attente ; le démarrage à froid le crée ainsi.
 - **Complète l'ADR-0049** : premiers indicateurs de croissance, lus côté serveur.
+
+## Amendement du 2026-09-28 — retour du challenger (916b6e01 KO)
+
+*Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+
+- **Suppression d'un établissement** : une demande d'enseignant (même décidée) ou un parrainage le référencent ; la suppression répond `:conflict` (« désactivez-le plutôt »), jamais une violation de clé étrangère.
+- **Plafond des demandes en attente** : `JoinRequestRepositoryPort#create(…, max_pending:)` verrouille la ligne de l'école (`SELECT … FOR UPDATE`) jusqu'à la fin de la transaction d'inscription, puis compte et insère. Douze inscriptions simultanées n'en laissent que cinq en attente (test de concurrence). Le compte est créé avant : « trop de demandes » ne se lit qu'au bout d'un formulaire entièrement valide, et l'annule.
+- **Oracle du code national** : le formulaire est validé, puis la matière, et seulement ensuite l'établissement désigné.
+- **Garant** : une demande d'un autre établissement répond 404, comme une demande inconnue. Côté équipe, une demande ne se décide que depuis la fiche de son établissement (404 sinon).
+- **Partages** : 30 par heure et par compte ; un enseignant en attente reçoit 403 (pas l'écran d'attente), un enseignant sans profil (sans jeton) n'est pas compté (`referral_token_for`).
+- **Mesure** : inscriptions et cohorte excluent les comptes en attente ou refusés ; la conversion par partage et le *c* de la cohorte ne comptent que les parrainages **par lien** (k = i × c) ; les parrainages par garant restent dans « dont parrainées » ; le classement ignore les établissements non actifs.
+

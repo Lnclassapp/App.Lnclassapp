@@ -12,6 +12,11 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_referrer"
       end
 
+      # Jeton de parrainage d'un enseignant ; nil sans profil enseignant. → String | nil
+      def referral_token_for(user_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #referral_token_for"
+      end
+
       # source : "link" | "sponsor". → Result | failure(:conflict) (le filleul a déjà un parrain)
       def record_referral(referrer_id:, referee_id:, school_id:, source:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #record_referral"

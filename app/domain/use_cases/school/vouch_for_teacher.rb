@@ -14,13 +14,14 @@ module UseCases
         @clock = clock
       end
 
-      # → Result(JoinRequest) | :not_found | :forbidden | :conflict (déjà traitée)
+      # Hors de son établissement, la demande n'existe pas pour l'acteur : :not_found, comme une demande inconnue (ADR-0028).
+      # → Result(JoinRequest) | :not_found | :conflict (déjà traitée)
       def call(actor:, public_id:)
         request = @join_requests.find_by_public_id(public_id:)
         return Shared::Result.failure(:not_found) if request.nil?
 
         allowed = @policy.call(actor:, request:, school: @schools.find_by_id(id: request.school_id))
-        return allowed if allowed.failure?
+        return Shared::Result.failure(:not_found) if allowed.failure?
         return Shared::Result.failure(:conflict, errors: { base: [ :already_decided ] }) unless request.pending?
 
         now = @clock.now

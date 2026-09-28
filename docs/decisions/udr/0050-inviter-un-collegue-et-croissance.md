@@ -118,3 +118,11 @@ Un enseignant convaincu n'a aucun geste pour faire venir ses collègues ; il rec
 - La navigation équipe reste à 5 destinations ; la page Croissance n'est atteinte que par l'accueil équipe (et l'URL).
 - Tout futur partage (annonce, fiche) reprend `identity--share` et la règle : lien réel, enregistrement par `sendBeacon`, message sans donnée d'élève.
 - La fiche établissement a désormais une section qui n'apparaît qu'en présence de demandes.
+
+## Amendement du 2026-09-28 — retour du challenger
+
+- Page Croissance : k à **une décimale** (`#growth_k_value`), décomposition « = i partage(s) par enseignant × c % de conversion » avec *c* par lien seulement ; pourcentages écrits « 67 % » avec une espace insécable (U+00A0).
+- Partage natif : `navigator.share({ text, url })`.
+- `POST /teachers/invite/shares` : 429 au-delà de 30 par heure ; 403 pour un enseignant en attente ou sans profil.
+- Paramètre `period` lu seulement en texte ; tout autre forme vaut 30 jours.
+

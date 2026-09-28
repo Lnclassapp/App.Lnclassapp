@@ -4,11 +4,9 @@
 module Entities
   module School
     JoinRequest = Data.define(:id, :public_id, :teacher_id, :school_id, :status, :teacher_name) do
-      def self.room_for_another?(pending_count:) = pending_count < JoinRequest::MAX_PENDING_PER_SCHOOL
-
       def pending? = status == "pending"
     end
-    # Défaut à confirmer par le porteur (ADR-0063) : au-delà, une nouvelle demande est refusée.
+    # Défaut à confirmer par le porteur (ADR-0063) : au-delà, une nouvelle demande est refusée (compté sous verrou, B2).
     JoinRequest::MAX_PENDING_PER_SCHOOL = 5
   end
 end

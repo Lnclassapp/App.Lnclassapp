@@ -65,6 +65,28 @@ module Queries
         assert_equal [ "Lycée Classique d'Abidjan" ], row.oldest_pending.map(&:school_name)
       end
 
+      test "m7: pending or refused accounts are neither sign-ups nor cohort; sponsored referrals do not convert shares" do
+        create_join_request(teacher: create_teacher(school: nil, created_at: NOW - 5.days))
+        create_join_request(teacher: create_teacher(school: nil, created_at: NOW - 4.days), status: "rejected")
+        approved = create_teacher(school: @school, created_at: NOW - 3.days)
+        create_join_request(school: @school, teacher: approved, status: "approved")
+        create_referral(referrer: @aya, referee: approved, source: "sponsor", created_at: NOW - 3.days)
+
+        row = metrics
+
+        assert_equal [ 4, 4 ], [ row.teacher_signups, row.viral.cohort_size ]
+        assert_equal 4, row.referred_signups
+        assert_in_delta 0.6, row.conversion_rate, 0.001, "3 parrainages par lien pour 5 partages"
+        assert_equal 2, row.viral.referees, "les filleuls par lien de la cohorte"
+      end
+
+      test "m7: an inactive school is not ranked" do
+        closed = create_school(status: "inactive")
+        3.times { create_teacher(school: closed) }
+
+        assert_equal [ @school.public_id ], metrics.schools_leaderboard.map(&:public_id)
+      end
+
       test "an empty period: zeros, and no division by zero" do
         row = GrowthMetricsQuery.new.call(from: NOW + 1.day, to: NOW + 2.days)
 

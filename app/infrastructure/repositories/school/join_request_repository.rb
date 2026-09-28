@@ -8,21 +8,27 @@ module Repositories
 
       PENDING = "pending".freeze
       ALREADY_DECIDED = { base: [ :already_decided ] }.freeze
+      TOO_MANY = { base: [ :too_many_pending ] }.freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
       COLUMNS = [ "school_join_requests.id", "school_join_requests.public_id", "school_join_requests.teacher_id",
                   "school_join_requests.school_id", "school_join_requests.status", FULL_NAME ].freeze
 
-      # Savepoint : un enseignant qui a déjà une demande devient :conflict sans casser la transaction du use case.
-      def create(teacher_id:, school_id:, at:)
+      # Le plafond tient en concurrence (B2) : la ligne de l'école est verrouillée (FOR UPDATE) jusqu'à la fin de la
+      # transaction du use case, puis on compte et on insère. Savepoint : un enseignant qui a déjà une demande devient
+      # :conflict sans casser la transaction englobante.
+      def create(teacher_id:, school_id:, at:, max_pending:)
         record = Orm::SchoolJoinRequest.transaction(requires_new: true) do
+          Orm::School.where(id: school_id).lock.pick(:id)
+          next if Orm::SchoolJoinRequest.where(school_id:, status: PENDING).count >= max_pending
+
           Orm::SchoolJoinRequest.create!(teacher_id:, school_id:, status: PENDING, created_at: at, updated_at: at)
         end
+        return ::Shared::Result.failure(:invalid, errors: TOO_MANY) if record.nil?
+
         ::Shared::Result.success(find_by_public_id(public_id: record.public_id))
       rescue ActiveRecord::RecordNotUnique
         ::Shared::Result.failure(:conflict)
       end
-
-      def pending_count(school_id:) = Orm::SchoolJoinRequest.where(school_id:, status: PENDING).count
 
       def find_by_public_id(public_id:)
         values = Orm::SchoolJoinRequest.joins(:teacher).where(public_id:).pick(*COLUMNS)

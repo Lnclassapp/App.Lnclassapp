@@ -38,6 +38,37 @@ class Identity::ReferralSharesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::ReferralShare.count
   end
 
+  test "m6: a teacher waiting for validation is refused in 403, as the PRD says" do
+    sign_in_as create_teacher(school: nil)
+
+    post teacher_referral_shares_path, params: { channel: "sms" }
+
+    assert_response :forbidden
+    assert_equal 0, Orm::ReferralShare.count
+  end
+
+  test "m6: a teacher without profile has no link, so nothing is counted" do
+    teacher = create_user(role: "teacher")
+    Orm::TeacherSchool.create!(teacher:, school: create_school, primary: true)
+    sign_in_as teacher
+
+    post teacher_referral_shares_path, params: { channel: "sms" }
+
+    assert_response :forbidden
+    assert_equal 0, Orm::ReferralShare.count
+  end
+
+  test "m6: at most 30 shares per hour per teacher" do
+    teacher = create_teacher
+    sign_in_as teacher
+
+    30.times { post teacher_referral_shares_path, params: { channel: "copy" } }
+    post teacher_referral_shares_path, params: { channel: "copy" }
+
+    assert_response :too_many_requests
+    assert_equal 30, Orm::ReferralShare.where(user: teacher).count
+  end
+
   test "a visitor is sent to the sign-in page" do
     post teacher_referral_shares_path, params: { channel: "whatsapp" }
 

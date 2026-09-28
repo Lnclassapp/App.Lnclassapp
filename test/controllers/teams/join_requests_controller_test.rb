@@ -75,6 +75,15 @@ class Teams::JoinRequestsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "pending", @join_request.reload.status
   end
 
+  test "m3: a request decided through the URL of another school is not found, and stays pending" do
+    sign_in_as @member
+
+    patch school_join_request_path(create_school.public_id, @join_request.public_id), params: { decision: "approve" }
+
+    assert_response :not_found
+    assert_equal "pending", @join_request.reload.status
+  end
+
   test "a teacher of the school and a student are refused in 403" do
     [ create_teacher(school: @school), create_student(classroom: create_classroom(school: @school)) ].each do |user|
       sign_in_as user

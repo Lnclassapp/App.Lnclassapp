@@ -8,10 +8,18 @@ module Teams
 
     def show
       render_result Policies::Identity::ReadGrowthPolicy.new.call(actor: current_actor), success: lambda { |_|
-        @period = PERIODS.include?(params[:period].to_i) ? params[:period].to_i : DEFAULT_PERIOD
+        @period = period
         to = Time.current
         @metrics = Queries::Identity::GrowthMetricsQuery.new.call(from: to - @period.days, to:)
       }
+    end
+
+    private
+
+    # Lu en texte : un tableau ou un hash (period[]=7) vaut la période par défaut.
+    def period
+      days = params[:period].is_a?(String) ? params[:period].to_i : DEFAULT_PERIOD
+      PERIODS.include?(days) ? days : DEFAULT_PERIOD
     end
   end
 end

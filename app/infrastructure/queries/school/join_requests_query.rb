@@ -29,6 +29,11 @@ module Queries
         Colleagues.new(school_name:, requests:) if requests.any?
       end
 
+      # La demande appartient-elle à l'établissement de l'URL ? (m3) → Boolean
+      def in_school?(public_id:, school_public_id:)
+        Orm::SchoolJoinRequest.joins(:school).exists?(public_id:, schools: { public_id: school_public_id })
+      end
+
       # → Status | nil (enseignant sans demande)
       def status_for(teacher_id:)
         values = Orm::SchoolJoinRequest.joins(:school).where(teacher_id:).pick("schools.name", :status)

@@ -77,10 +77,10 @@ module UseCases
         assert_empty @audit.events
       end
 
-      test "a teacher of another school, or the team, is forbidden; nothing is written" do
+      test "m5: a teacher of another school, or the team, reads not found — the request is not confirmed to exist" do
         [ Entities::Identity::Actor.new(user_id: 8, role: :teacher, school_id: 32),
           Entities::Identity::Actor.new(user_id: 9, role: :team, team_role: "admin") ].each do |actor|
-          assert_equal :forbidden, vouch(actor:).code
+          assert_equal :not_found, vouch(actor:).code
         end
         assert_empty @requests.writes
       end

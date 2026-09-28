@@ -5,7 +5,8 @@
 <% viral = @metrics.viral %>
 <% dash = "—" %>
 <% number = ->(value, precision = 1) { value.nil? ? dash : number_with_precision(value, precision:, strip_insignificant_zeros: true) } %>
-<% percent = ->(value) { value.nil? ? dash : number_to_percentage(value * 100, precision: 0) } %>
+<%# « 67 % » : espace insécable avant le signe, comme le veut la typographie française. %>
+<% percent = ->(value) { value.nil? ? dash : "#{(value * 100).round}\u00A0%" } %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle", count: @period) %>
 
 <nav id="growth_periods" aria-label="<%= t(".periods_label") %>" class="mb-6 flex flex-wrap gap-2">
@@ -22,9 +23,10 @@
     <%= ui_card do %>
       <h2 id="growth_k_title" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".k_title") %></h2>
       <div class="mt-2 flex flex-wrap items-end gap-x-6 gap-y-3">
-        <p class="font-display text-5xl font-extrabold text-ink tabular-nums"><%= number.call(viral.k, 2) %></p>
+        <p id="growth_k_value" class="font-display text-5xl font-extrabold text-ink tabular-nums"><%= number.call(viral.k) %></p>
         <p class="pb-2 text-sm text-mute">
-          <%= t(".k_formula", invitations: number.call(viral.invitations_per_user), conversion: percent.call(viral.conversion_rate)) %>
+          <%= t(".k_formula", invitations: number.call(viral.invitations_per_user), unit: t(".k_unit"),
+                              conversion: percent.call(viral.conversion_rate)) %>
         </p>
         <div class="pb-2">
           <%= ui_badge t(".target", target: number.call(Entities::Identity::ViralCoefficient::TARGET, 2),

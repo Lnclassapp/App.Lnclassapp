@@ -105,8 +105,10 @@ module Repositories
 
       def attributes_of(school) = ATTRIBUTES.index_with { |attribute| school.public_send(attribute) }
 
+      # Une demande d'enseignant (même décidée) ou un parrainage le référencent aussi (ADR-0063) : l'historique reste.
       def referenced?(school_id, classroom_ids)
         Orm::TeacherSchool.exists?(school_id:) || Orm::Invitation.exists?(school_id:) ||
+          Orm::SchoolJoinRequest.exists?(school_id:) || Orm::Referral.exists?(school_id:) ||
           Orm::ClassroomStudent.exists?(classroom_id: classroom_ids) ||
           Orm::TeacherClassroom.exists?(classroom_id: classroom_ids) ||
           Orm::ClassroomAssignment.exists?(classroom_id: classroom_ids)

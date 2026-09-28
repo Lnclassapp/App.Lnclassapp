@@ -30,6 +30,21 @@
 - Fusion d'`origin/Develop` (PR #49 fusionnée, puis PR #48) : **le côté Develop avait perdu la route `resource :code` des codes d'établissement et les lignes ADR-0057 / UDR-0044 des index** (résolution de conflit de la PR #48). La fusion de ce chantier les rétablit ; à vérifier sur Develop.
 - Couverture de branches à 99,7 % au premier passage complet : trois gardes devenues mortes avec la garde générale (`school_id.nil?`, `&.`) retirées, deux cas de test ajoutés (concurrence équipe / garant, garant sans école).
 
+### Retour du challenger (916b6e01 rendu KO)
+
+| Constat | Correction (test rouge d'abord) |
+|---|---|
+| B1 — supprimer un établissement ayant une demande ou un parrainage : 500 (clé étrangère) | `referenced?` compte `school_join_requests` et `referrals` → `:conflict` |
+| B2 — 12 inscriptions simultanées laissaient 7 demandes en attente | comptage et insertion sous `FOR UPDATE` sur la ligne de l'école ; test de concurrence (rouge sans le verrou : 12 au lieu de 5) |
+| `period[]=7` → 500 ; `drena_public_id=%00` → 500 | période lue en texte ; DRENA cherchée seulement si connue, identifiants hors alphabet oubliés par le DTO |
+| Demande décidée par l'URL d'un autre établissement | 404 |
+| Oracle du code national, « trop de demandes » révélé tôt | ordre : formulaire, matière, établissement ; plafond dans la transaction, après le compte |
+| Garant d'un autre établissement : 403 ≠ 404 | 404 pour les deux |
+| Partages sans limite ; en attente redirigé au lieu de 403 ; sans profil compté | 30/h, 403, rien compté |
+| Cohorte avec comptes en attente, conversion avec garants, classement avec inactifs | exclus |
+| k à deux décimales, « 67% », partage natif sans url, en-tête HITL sur 4 lignes | corrigés |
+| M1 — saturation des 5 places par un attaquant | inchangé, soumis au porteur par le coordinateur |
+
 ## Mesures
 
 | Mesure | Valeur |

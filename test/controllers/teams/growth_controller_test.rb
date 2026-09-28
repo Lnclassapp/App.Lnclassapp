@@ -31,6 +31,16 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
     assert_select "#growth_pending a[href='#{school_path(@school.public_id)}']"
   end
 
+  test "m8: k with one decimal, and a decomposition that multiplies back to it, percentages with a non-breaking space" do
+    sign_in_as @member
+
+    get teams_growth_path
+
+    assert_select "#growth_k_value", text: "0,5"
+    assert_select "#growth_k", text: /= 1 #{Regexp.escape(I18n.t("#{SCOPE}.k_unit"))} × 50\u00A0%/
+    assert_select "#growth_metrics", text: /50\u00A0%/
+  end
+
   test "the period is 7, 30 or 90 days; anything else reads 30" do
     sign_in_as @member
 
@@ -38,6 +48,17 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav#growth_periods a[aria-current=page][href='#{teams_growth_path(period: 7)}']"
     get teams_growth_path(period: 1000)
     assert_select "nav#growth_periods a[aria-current=page][href='#{teams_growth_path(period: 30)}']"
+  end
+
+  test "m1: a period sent as an array or a hash reads 30, never a 500" do
+    sign_in_as @member
+
+    [ "period[]=7", "period[a]=7" ].each do |query|
+      get "#{teams_growth_path}?#{query}"
+
+      assert_response :success, query
+      assert_select "nav#growth_periods a[aria-current=page][href='#{teams_growth_path(period: 30)}']"
+    end
   end
 
   test "an empty platform reads dashes and empty states" do

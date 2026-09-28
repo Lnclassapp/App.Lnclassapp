@@ -12,7 +12,12 @@ module UseCases
 
         attr_reader :shares
 
-        def initialize = @shares = []
+        def initialize(tokens: { 7 => "0a1b2c3d4e5f" })
+          @shares = []
+          @tokens = tokens
+        end
+
+        def referral_token_for(user_id:) = @tokens[user_id]
 
         def record_share(user_id:, channel:, at:)
           @shares << [ user_id, channel, at ]
@@ -25,6 +30,13 @@ module UseCases
 
         def initialize(*schools) = @schools = schools
         def find_by_id(id:) = @schools.find { it.id == id }
+      end
+
+      test "m6: a teacher without referral token (no profile) has nothing to share: forbidden, nothing is recorded" do
+        @referrals = FakeReferrals.new(tokens: {})
+
+        assert_equal :forbidden, record(actor: teacher).code
+        assert_empty @referrals.shares
       end
 
       setup do

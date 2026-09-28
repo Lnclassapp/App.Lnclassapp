@@ -428,6 +428,20 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::Classroom.exists?
   end
 
+  test "B1: deleting a school with a join request (even refused) or a referral is refused in 422, never a 500 (ADR-0063)" do
+    requested = create_join_request(school: create_school(drena: @drena), status: "rejected").school
+    sponsored = create_school(drena: @drena)
+    create_referral(school_id: sponsored.id)
+    sign_in_as @member
+
+    [ requested, sponsored ].each do |school|
+      delete school_path(school.public_id), as: :turbo_stream
+
+      assert_response :unprocessable_entity
+      assert Orm::School.exists?(school.id)
+    end
+  end
+
   test "SC-07: deleting a school whose classroom has a student is refused — deactivate it instead — and nothing is deleted" do
     school = create_school(drena: @drena)
     create_student(classroom: create_classroom(school:))

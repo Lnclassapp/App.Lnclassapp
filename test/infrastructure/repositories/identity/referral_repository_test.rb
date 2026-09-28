@@ -41,6 +41,13 @@ module Repositories
         assert_equal [ [ referrer.id, "link", NOW ] ], Orm::Referral.where(referee:).pluck(:referrer_id, :source, :created_at)
       end
 
+      test "m6: the referral token of a teacher, nil without profile" do
+        teacher = create_teacher
+
+        assert_equal token_of(teacher), @repository.referral_token_for(user_id: teacher.id)
+        assert_nil @repository.referral_token_for(user_id: create_user(role: "teacher").id)
+      end
+
       test "records a share with its channel and time, nothing else" do
         teacher = create_teacher
 

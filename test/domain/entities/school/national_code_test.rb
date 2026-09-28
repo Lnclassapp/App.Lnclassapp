@@ -30,8 +30,6 @@ module Entities
 
       test "at most 5 pending requests per school (default, to be confirmed)" do
         assert_equal 5, JoinRequest::MAX_PENDING_PER_SCHOOL
-        assert JoinRequest.room_for_another?(pending_count: 4)
-        assert_not JoinRequest.room_for_another?(pending_count: 5)
       end
     end
   end

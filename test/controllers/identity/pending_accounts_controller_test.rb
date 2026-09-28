@@ -55,7 +55,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to pending_account_path, path
     end
     post teacher_referral_shares_path, params: { channel: "sms" }
-    assert_redirected_to pending_account_path
+    assert_response :forbidden, "m6 : le PRD répond 403 à l'enregistrement d'un partage"
     assert_equal 0, Orm::ReferralShare.count
   end
 

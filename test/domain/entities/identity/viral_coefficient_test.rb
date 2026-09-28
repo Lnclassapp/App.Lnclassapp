@@ -17,7 +17,7 @@ module Entities
         assert_in_delta 3.0, ViralCoefficient.new(cohort_size: 1, shares: 1, referees: 3).conversion_rate
       end
 
-      test "no cohort: neither i nor k; no share: no conversion, but k still counts the sponsored referees" do
+      test "no cohort: neither i nor k; no share: no conversion, but k still counts the referees" do
         assert_nil ViralCoefficient.new(cohort_size: 0, shares: 0, referees: 0).k
         assert_nil ViralCoefficient.new(cohort_size: 0, shares: 0, referees: 0).invitations_per_user
         viral = ViralCoefficient.new(cohort_size: 4, shares: 0, referees: 2)

@@ -154,6 +154,17 @@ module Repositories
         end
       end
 
+      test "B1 : refuse de supprimer un établissement visé par une demande d'enseignant (même refusée) ou un parrainage (ADR-0063)" do
+        requested = create_join_request(status: "rejected").school
+        sponsored = create_school
+        create_referral(school_id: sponsored.id)
+
+        [ requested, sponsored ].each do |record|
+          assert_equal :conflict, @repository.delete_if_unreferenced(id: record.id).code
+          assert Orm::School.exists?(record.id)
+        end
+      end
+
       test "donne les clés de doublon (DRENA, nom normalisé) des DRENA demandées" do
         create_school(drena: @drena, name: "Lycée  Moderne de Cocody")
         create_school(name: "Collège ailleurs")

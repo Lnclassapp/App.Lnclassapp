@@ -30,7 +30,7 @@ export default class extends Controller {
 
   async native() {
     try {
-      await navigator.share({ text: this.textValue })
+      await navigator.share({ text: this.textValue, url: this.linkValue })
     } catch {
       return // partage annulé : rien n'est compté
     }

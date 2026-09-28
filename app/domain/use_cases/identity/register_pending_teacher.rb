@@ -36,10 +36,12 @@ module UseCases
         return allowed if allowed.failure?
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) unless dto.valid?
 
-        school = designated_school(dto)
+        # L'établissement n'est jugé qu'une fois tout le reste valide : le formulaire ne sert pas d'oracle du code national.
         material = @taxonomy.find_material(slug: dto.material_slug)
-        errors = fact_errors(dto, school, material)
-        return Shared::Result.failure(:invalid, errors:) if errors.any?
+        return Shared::Result.failure(:invalid, errors: { material_slug: [ :inclusion ] }) if material.nil?
+
+        school = designated_school(dto)
+        return Shared::Result.failure(:invalid, errors: { school_field(dto) => [ :inclusion ] }) unless school&.active?
 
         register(dto, school, material, ip, user_agent)
       rescue Aborted => e
@@ -55,21 +57,16 @@ module UseCases
       end
 
       # Inconnu, inactif ou en brouillon : la même erreur, comme pour le code d'établissement (ADR-0057).
-      def fact_errors(dto, school, material)
-        errors = {}
-        errors[dto.national_code ? :national_code : :school_public_id] = [ :inclusion ] unless school&.active?
-        errors[:material_slug] = [ :inclusion ] if material.nil?
-        return errors if errors.any?
-
-        pending = @join_requests.pending_count(school_id: school.id)
-        Entities::School::JoinRequest.room_for_another?(pending_count: pending) ? {} : { base: [ :too_many_pending ] }
-      end
+      def school_field(dto) = dto.national_code ? :national_code : :school_public_id
 
       def register(dto, school, material, ip, user_agent)
         now = @clock.now
         @transaction.call do
           user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id))
-          written(@join_requests.create(teacher_id: user.id, school_id: school.id, at: now))
+          # Plafond compté et tenu sous verrou par le repository (B2), après le compte : « trop de demandes » ne se lit
+          # qu'au bout d'un formulaire entièrement valide.
+          written(@join_requests.create(teacher_id: user.id, school_id: school.id, at: now,
+                                        max_pending: Entities::School::JoinRequest::MAX_PENDING_PER_SCHOOL))
           Shared::Result.success(Registered.new(user:, token: open_session(user, ip, user_agent, now)))
         end
       end

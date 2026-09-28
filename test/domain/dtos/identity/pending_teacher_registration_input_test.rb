@@ -28,6 +28,14 @@ module Dtos
         assert errors_of(input(national_code: "12345")).of_kind?(:national_code, :invalid)
       end
 
+      test "m2: an identifier outside the public id alphabet (NUL byte) is forgotten" do
+        form = input(drena_public_id: "a\u0000", school_public_id: "b\u0000")
+
+        assert_nil form.drena_public_id
+        assert_nil form.school_public_id
+        assert errors_of(form).of_kind?(:base, :school_missing)
+      end
+
       test "the rest of the teacher sign-up still applies" do
         assert errors_of(input(national_code: "012345", pin_confirmation: "1357")).of_kind?(:pin_confirmation, :confirmation)
       end
