@@ -4,6 +4,8 @@
 module UseCases
   module Identity
     class ChangeOwnContact
+      include SessionRenewal
+
       # token : le jeton en clair de la nouvelle session, que le contrôleur pose dans le cookie (start_session).
       Changed = Data.define(:token)
       UNCHANGED = { contact: [ :unchanged ] }.freeze
@@ -49,16 +51,6 @@ module UseCases
         @audit_log.record(action: "contact.changed", actor_id: user.id, subject_type: "User", subject_id: user.id,
                           metadata: { from: mask(user.contact), to: mask(dto.contact) }, ip: dto.ip, at: now)
         Shared::Result.success(Changed.new(token:))
-      end
-
-      # Une nouvelle session remplace toutes les autres, celle en cours comprise ; le second facteur vérifié le reste.
-      def renew(user, session, dto, now)
-        token = Entities::Identity::SecretDigest.generate_token
-        id = @sessions.create(user_id: user.id, token_digest: Entities::Identity::SecretDigest.hmac(token, key: @digest_key),
-                              ip: dto.ip, user_agent: dto.user_agent, at: now)
-        @sessions.mark_second_factor_verified(id:, at: now) if session.verified?
-        @sessions.destroy_all_except(user_id: user.id, keep_id: id)
-        token
       end
 
       # Seuls les deux derniers chiffres restent lisibles dans le journal.
