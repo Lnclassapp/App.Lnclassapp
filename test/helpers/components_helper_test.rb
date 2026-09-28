@@ -221,6 +221,44 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "button[aria-controls=account]", text: /Awa/
     assert_select "div#account.right-0"
+    assert_select "[data-dropdown-fixed-value]", 0
+    assert_select "div#account.z-30"
+  end
+
+  test "ui_dropdown fixed escapes a scrolling table and follows it (UDR-0042)" do
+    show ui_dropdown(label: "Actions pour Abidjan 1", id: "row-menu", fixed: true) { "" }
+
+    assert_select "[data-controller=dropdown][data-dropdown-fixed-value=true]"
+    assert_select "div#row-menu[role=menu].z-50", 1, "au-dessus de la barre basse (z-40) du mobile"
+    assert_select "[data-controller=dropdown][data-action*='scroll@window->dropdown#place:capture']"
+    assert_select "[data-controller=dropdown][data-action*='resize@window->dropdown#place']"
+    assert_select "button[aria-label='Actions pour Abidjan 1'][aria-controls=row-menu] svg"
+  end
+
+  test "ui_dropdown_item frame: opens the link in a Turbo frame and dismisses the menu (UDR-0042)" do
+    show ui_dropdown_item("Modifier", href: "/drenas/1/edit", icon: "pencil-square", frame: "modal")
+
+    assert_select "a[role=menuitem][tabindex='-1'][href='/drenas/1/edit'][data-turbo-frame=modal]" \
+                  "[data-action='dropdown#dismiss']", text: "Modifier"
+    assert_select "a[data-turbo-method]", 0
+  end
+
+  test "ui_dropdown_item dialog: is a button that opens a dialog of the page (UDR-0042)" do
+    show ui_dropdown_item("Supprimer", dialog: "delete-drena-1", icon: "trash", tone: :danger)
+
+    assert_select "button[type=button][role=menuitem][tabindex='-1'][aria-haspopup=dialog][aria-controls=delete-drena-1]" \
+                  "[data-action='dropdown#openDialog'][data-dropdown-dialog-param=delete-drena-1].text-error.min-h-tap svg",
+                  count: 1
+    assert_select "button", text: "Supprimer"
+    assert_select "a", 0
+  end
+
+  test "ui_dropdown_item keeps the default tone for a dialog, and refuses an unknown tone" do
+    show ui_dropdown_item("Désactiver", dialog: "deactivate-school-1")
+
+    assert_select "button.text-ink[role=menuitem]", text: "Désactiver"
+    assert_select "button.text-error", 0
+    assert_raises(ArgumentError) { ui_dropdown_item("X", dialog: "x", tone: :loud) }
   end
 
   test "ui_tabs selects the first tab unless told otherwise" do

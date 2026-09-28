@@ -64,3 +64,9 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 - Tout écran qui montre des propositions (C2 pour la correction d'une question, C3 pour le résultat) lit `correct` par une query qui ne le sélectionne que si `RevealAnswersPolicy` l'accorde, et ne met rien en cache sans le rôle dans la clé.
 - Le test `test/integration/assessment/answer_leak_test.rb` (TR-cadre-3) est le garde de cette page : il affiche l'exercice pour l'équipe, puis l'enseignant, puis l'élève, **cache de fragments actif**.
 - « Supprimer un exercice » disparaît de l'interface ; l'archivage (UDR-0017) le remplace.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **« Modifier » passe dans le menu ⋮** « Actions pour <titre> » (`#exercise-actions-menu`), seule entrée, après le panneau de statut. Le nom accessible « Modifier l'exercice « … » » est remplacé par celui du bouton ⋮.

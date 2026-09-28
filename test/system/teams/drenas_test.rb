@@ -35,7 +35,7 @@ class Teams::DrenasTest < ApplicationSystemTestCase
       assert_selector "#drenas tr", count: 1, text: /Abidjan 1\s+abidjan-1\s+0\s+0/
       assert_no_selector "#drenas_empty"
 
-      within("#drenas tr", text: "Abidjan 1") { click_on "Modifier" }
+      click_menu_action("#drenas tr", "Modifier", text: "Abidjan 1")
       within("turbo-frame#modal dialog[open]") { assert_selector "#drena_name_hint code", text: "abidjan-1" }
       fill_drena_modal("Abidjan 1 Plateau", submit: "Enregistrer")
 
@@ -52,7 +52,7 @@ class Teams::DrenasTest < ApplicationSystemTestCase
       end
       assert_no_selector "turbo-frame#modal dialog[open]"
 
-      within("#drenas tr", text: "Abidjan 1 Plateau") { click_on "Supprimer" }
+      click_menu_action("#drenas tr", "Supprimer", text: "Abidjan 1 Plateau")
       within("dialog[open]") { click_on "Supprimer la DRENA" }
 
       assert_toast "DRENA « Abidjan 1 Plateau » supprimée."
@@ -68,7 +68,7 @@ class Teams::DrenasTest < ApplicationSystemTestCase
     visit drenas_path
 
     assert_no_page_reload do
-      within("#drena_#{drena.public_id}") { click_on "Supprimer" }
+      click_menu_action("#drena_#{drena.public_id}", "Supprimer")
       within("dialog[open]") { click_on "Supprimer la DRENA" }
 
       within "#toasts [role=alert]" do

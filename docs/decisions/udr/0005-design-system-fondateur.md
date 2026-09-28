@@ -122,3 +122,9 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 - Un nouveau composant n'existe qu'une fois appelable par `ComponentsHelper`, visible sur `/design` et couvert par le test système.
 - Les teintes de matière suivent `materials.category`. Une règle fondée sur le nom de la matière est interdite.
 - Interdit désormais : `dark:`, les couleurs `slate/gray/blue…` de Tailwind, `rounded-xl` et apparentés, `shadow-md` et apparentés, toute valeur entre crochets, tout `#hex` et tout `style=` dans les vues, toute police ou icône servie par un tiers.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Menu déroulant** : l'API devient `ui_dropdown(label:, icon:, trigger:, align:, id:, fixed: false) { ui_dropdown_item(label, href:, icon:, method:, tone:, frame:, dialog:) }`. `frame:` ouvre le lien dans un Turbo Frame et ferme le menu ; `dialog:` rend un `<button role="menuitem">` qui ferme le menu, rend le focus au bouton et ouvre la `<dialog>` d'id donné en `showModal()` ; `fixed: true` place le menu en position fixe (`z-50`) pour qu'il échappe au défilement d'un tableau. Contrôleur `dropdown` : actions `dismiss`, `openDialog`, `place`.
