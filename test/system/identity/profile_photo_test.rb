@@ -118,6 +118,8 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       assert_selector "[role=alert]", text: "Cette image est illisible ou abîmée. Choisissez-en une autre."
       assert_no_selector "img[data-identity--photo-picker-target=preview]"
       assert_selector "input[type=file][aria-invalid=true]"
+      assert_equal "Cette image est illisible ou abîmée. Choisissez-en une autre.",
+                   find("input[type=file]", visible: :all).evaluate_script("this.validationMessage")
       click_on "Enregistrer"
     end
     assert_selector "turbo-frame#modal dialog[open]"

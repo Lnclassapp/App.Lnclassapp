@@ -1,8 +1,7 @@
-<figure class="attachment attachment--<%= blob.representable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
-  <% if blob.representable? %>
-    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ]) %>
-  <% end %>
-
+<%# 🌐 UI · active_storage/blobs/_blob — pièce jointe d'un contenu riche (Action Text), rendue sans adresse %>
+<%# Rôle : légende, ou nom et taille ; ni image ni lien : les routes Active Storage ne sont pas dessinées et l'éditeur refuse les pièces jointes %>
+<%# ADR  : 0060 %>
+<figure class="attachment attachment--file attachment--<%= blob.filename.extension %>">
   <figcaption class="attachment__caption">
     <% if caption = blob.try(:caption) %>
       <%= caption %>
