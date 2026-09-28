@@ -7,7 +7,7 @@ class HomepageTest < ApplicationSystemTestCase
     visit root_path
 
     assert_selector "h1"
-    assert_title(/ESSAI JETABLE ci-rapide : titre faux/)
+    assert_title(/Lnclass/)
   end
 
   test "the browser loads the application JavaScript under the CSP" do
