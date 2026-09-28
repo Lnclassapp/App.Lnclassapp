@@ -164,3 +164,11 @@ Ces totaux dépendent des liaisons `level_series` en base : un niveau ou une sé
 
 - **Les classes par défaut naissent à l'import, ou après coup pour un établissement qui n'en a aucune de l'année.** L'équipe peut lancer, depuis l'écran Établissements, la génération des classes manquantes : un job reprend le même barème (`DefaultClassroomPlan`) pour chaque établissement actif ou en brouillon sans aucune classe de l'année scolaire en cours.
 - La règle « modifier un établissement ne régénère jamais ses classes » tient toujours : un établissement qui a au moins une classe de l'année n'est jamais touché.
+
+## Amendement du 2026-09-28 — code d'établissement
+
+*Chantier [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md), [ADR-0057](./0057-code-d-etablissement.md) (défauts à confirmer par le porteur). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **L'enseignant ne choisit plus son école : il la désigne par son code d'établissement**, transmis par l'équipe (saisi, ou porté par le lien `/e/<code>`). Un code inconnu, remplacé, ou d'un établissement inactif ou en brouillon est refusé par le même message. Le rattachement reste une ligne `teacher_schools` principale, créée dans la transaction du compte.
+- Le coût consenti « un enseignant peut se déclarer dans n'importe quelle classe de son école » est borné : « son école » est celle qui lui a transmis son code.
+- Chaque établissement naît avec son code (import) ; les établissements existants l'ont reçu par migration.

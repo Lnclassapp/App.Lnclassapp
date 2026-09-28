@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0038, 0039, 0052, 0056
+# ADR  : 0031, 0034, 0038, 0039, 0052, 0056, 0057
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
@@ -12,6 +12,8 @@ scope "teams", module: "teams" do
   resources :schools, param: :public_id, except: %i[new create] do
     member { patch :deactivate }
     resources :classrooms, only: %i[new create], controller: "school_classrooms"
+    # ADR-0057 : régénération du code d'établissement (PATCH seul ; le code se lit sur la fiche).
+    resource :code, only: :update, controller: "school_codes"
   end
   resources :levels, param: :slug, except: :show
   resources :series, param: :slug, except: :show
