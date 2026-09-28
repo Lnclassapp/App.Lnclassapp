@@ -66,3 +66,13 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 - Interdit désormais : un bouton « Modifier », « Désactiver » ou « Supprimer » en ligne dans un tableau ou dans l'en-tête d'un objet ; une icône d'action à libellé caché (`sr-only`) ; une place vide pour aligner des icônes ; un `link_to role="menuitem"` écrit à la main à la place d'`ui_dropdown_item`.
 - Les clés `edit_label` des lignes et des pages converties disparaissent : c'est le bouton ⋮ qui nomme l'objet (clé `actions`).
 - Les UDR 0005, 0015, 0021, 0032, 0033, 0034, 0035 et 0036 portent un amendement du 2026-09-28 qui renvoie ici.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/finitions-generation-menu`](../../chantiers/finitions-generation-menu/memo.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Colonne d'actions collante.** À 390 px, les tableaux de l'équipe sont plus larges que l'écran : le ⋮, en dernière colonne, n'était atteignable qu'en faisant défiler le tableau. L'en-tête (`<th>`) et chaque cellule (`<td>`) de la colonne d'actions portent désormais l'utilitaire maison `sticky-actions` : `position: sticky; right: 0`, fond `--color-white` qui masque les colonnes qui passent dessous. Le ⋮ de chaque ligne est à l'écran au chargement ; les autres colonnes défilent sous lui. Au bureau, où le tableau tient dans sa carte, rien ne change.
+- Structure du §3 : `<td class="sticky-actions px-4 py-3">` → `div.flex.justify-end` → `ui_dropdown(…, fixed: true)`, puis les `ui_modal` de confirmation. Écrans : DRENA, établissements, séries, niveaux, matières.
+- **Empilement.** `position: sticky` crée un contexte d'empilement qui enfermerait le menu fixe (`z-50`) sous la barre basse (`z-40`) : tant que son menu est ouvert (`:has([aria-expanded="true"])`), la cellule passe en `z-index: 50`. `ui_dropdown(fixed: true)` et son placement sont inchangés.
+- Tout nouveau tableau qui défile en largeur et porte un ⋮ par ligne applique `sticky-actions` à sa colonne d'actions.
+- Preuve : `test/system/teams/row_actions_menu_test.rb`, « on a phone, the ⋮ of the first row of every team table is on screen at load, and opens its menu » (rectangle du ⋮ dans l'écran sans défilement horizontal, puis menu ouvert) ; le test « menu … opens whole inside the screen » reste vert.

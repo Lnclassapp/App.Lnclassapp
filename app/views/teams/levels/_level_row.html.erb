@@ -30,7 +30,7 @@
   </td>
   <td class="px-4 py-3 tabular-nums"><%= level.classrooms_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= level.courses_count %></td>
-  <td class="px-4 py-3">
+  <td class="sticky-actions px-4 py-3">
     <div class="flex justify-end">
       <%= ui_dropdown label: t(".actions", name: level.name), id: "level-actions-#{level.slug}", fixed: true do %>
         <%= ui_dropdown_item t(".edit"), href: edit_level_path(level.slug), icon: "pencil-square", frame: "modal" %>
