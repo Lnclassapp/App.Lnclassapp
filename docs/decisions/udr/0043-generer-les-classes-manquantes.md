@@ -65,3 +65,13 @@
 - Toute future action de masse sur une liste (tous les objets, pas un seul) suit ce patron : bouton secondaire d'en-tête, confirmation qui dit le périmètre, job suivi par un rapport.
 - L'écran des imports affiche des rapports qui ne sont pas des imports : chaque nouveau type sans fichier fournit ses libellés sous `teams.imports.status.by_kind.<kind>`.
 - UDR-0036 : l'en-tête de l'écran Établissements gagne cette seconde action ; « Importer des établissements » reste l'action principale.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/finitions-generation-menu`](../../chantiers/finitions-generation-menu/memo.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Déjà en cours n'est pas une erreur.** Une génération à la fois est l'état attendu (index partiel, ADR-0056), pas un échec : le toast `error` (« Une erreur est survenue », rouge, persistant, `role="alert"`) est retiré. Remplace la ligne « Déjà en cours (`:conflict`) » du §3 *Comportement* et le « toast d'erreur « déjà en cours » » du §3 *États obligatoires* :
+  - `:conflict` → `303` vers le **rapport de la génération en cours** (`teams_import_path(public_id)`, la plus récente du type `classrooms` : aucune ne peut naître pendant qu'une tourne) ;
+  - flash `info` sous la forme `{ "title", "message" }` → toast **d'information** (bleu, se ferme seul), titre `teams.classroom_generations.create.already_running_title` « Génération déjà en cours », message `.already_running` « Une seule génération des classes à la fois : voici l'avancement de celle qui tourne. ».
+  - Le layout rend tout flash par `flash_toast(key, value)` (`ComponentsHelper`) : un message, ou `{ "message", "title" }` quand le titre par défaut du type ne dit pas la situation.
+- **Le badge du statut suit le type.** Liste des imports, rapport et accueil de l'équipe : le libellé du badge est cherché d'abord sous `teams.imports.status.by_kind.<kind>.statuses.<status>` (`import_status_label`, `Catalog::ImportStatusHelper`), sinon `teams.imports.statuses.<status>`. Génération des classes : `validating` « Recherche des établissements », `importing` « Génération en cours » ; `queued` « En file d'attente », `completed` « Terminé » et `failed` « Échoué » gardent le libellé commun, juste pour les deux.

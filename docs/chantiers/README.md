@@ -58,6 +58,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`boucle-pedagogique`](boucle-pedagogique/memo.md) | en recette | V1 : équipe → contenu → enseignant → élève → résultat, en production depuis le 2026-09-27 |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | « Mon profil » pour tous : nom, numéro et PIN modifiables sous PIN actuel (ADR-0055, UDR-0041) |
 | [`generer-classes`](generer-classes/memo.md) | livré | Générer après coup les classes des établissements qui n'en ont aucune de l'année (ADR-0056, UDR-0043) |
+| [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | « Déjà en cours » en toast d'information vers le rapport, badge « Génération en cours », ⋮ collé à droite des tableaux au téléphone (amendements UDR-0042, UDR-0043) |
 
 ## Cycle de vie
 

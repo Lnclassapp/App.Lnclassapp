@@ -231,6 +231,29 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", text: /La génération s'est arrêtée sur une erreur imprévue/
   end
 
+  # finitions-generation-menu: the status badge follows the kind too — a generation is never « Import en cours ».
+  test "the status badge of a generation speaks of a generation, in the list as in its report" do
+    running = create_import_report(kind: "classrooms", checksum_sha256: nil, status: "importing")
+    checking = create_import_report(kind: "schools", status: "validating")
+    sign_in_as @member
+
+    get teams_imports_path
+
+    assert_select "#import_#{running.public_id}", text: /Génération en cours/
+    assert_select "#import_#{running.public_id}", text: /Import en cours/, count: 0
+    assert_select "#import_#{checking.public_id}", text: /Vérification/
+
+    get teams_import_path(running.public_id)
+
+    assert_select "#import_status [data-status=importing] > div:first-child", text: /Génération en cours/
+    assert_select "#import_status", text: /Import en cours/, count: 0
+
+    running.update!(status: "validating")
+    get teams_import_path(running.public_id), headers: { "Turbo-Frame" => "import_status" }
+
+    assert_select "[data-status=validating] > div:first-child", text: /Recherche des établissements/
+  end
+
   test "a teacher may not read the report of a generation" do
     report = create_import_report(kind: "classrooms", checksum_sha256: nil)
     sign_in_as create_teacher

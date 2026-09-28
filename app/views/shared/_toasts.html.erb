@@ -3,6 +3,6 @@
 <%# UDR  : 0006 %>
 <div id="toasts" aria-live="polite" class="pointer-events-none fixed inset-x-0 top-0 z-50 flex flex-col items-center gap-3 p-4 sm:top-auto sm:bottom-0 sm:items-end sm:p-6">
   <% flash.each do |key, message| %>
-    <%= ui_toast(message, type: toast_type_for(key)) if message.is_a?(String) %>
+    <%= flash_toast(key, message) %>
   <% end %>
 </div>

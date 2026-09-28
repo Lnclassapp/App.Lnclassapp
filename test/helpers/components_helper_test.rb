@@ -392,6 +392,17 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_equal :info, toast_type_for(:whatever)
   end
 
+  test "flash_toast renders a flash message, or a message with its own title; any other value renders nothing" do
+    show flash_toast(:alert, "Échec") + flash_toast(:info, { "message" => "Une seule à la fois.", "title" => "Déjà en cours" })
+
+    assert_select "div[role=alert][data-toast-type=error]", text: /#{I18n.t("components.toast.titles.error")}\s*Échec/
+    assert_select "div[data-toast-type=info]:not([role=alert])" do
+      assert_select "p.font-semibold", text: "Déjà en cours"
+      assert_select "p.text-mute", text: "Une seule à la fois."
+    end
+    assert_nil flash_toast(:reload_document, true)
+  end
+
   test "turbo_stream_toast appends the rendered toast to the stack" do
     show view.turbo_stream_toast("Fait", type: :success)
 
