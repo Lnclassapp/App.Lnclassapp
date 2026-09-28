@@ -31,6 +31,10 @@
 - Un `dropdb` sans mot de passe a attendu une saisie et bloqué une série de tests système pendant 10 minutes ; tué, base supprimée par `psql`.
 - Une entrée `stash@{0}` (branche `feature/cycles-en-radio`) existe dans le dépôt partagé : elle n'est pas de ce chantier, elle n'a pas été touchée.
 
+- **CI rouge de la PR #52** (job 108839836776) : couverture des branches 99,48 %, `app/domain/dtos/classroom/classroom_plan_line_input.rb` à 0 % en branches alors que ses lignes étaient à 100 %. Reproduit en local seulement avec `CI=1` (donc `eager_load`) et deux processus. Cause : le DTO n'avait que des méthodes d'une ligne (`def public_count = super&.strip`). Chargé d'avance par le processus parent, il n'exécutait **aucune ligne** dans les processus de test (Ruby ne compte pas l'appel d'une méthode d'une ligne comme ligne exécutée) ; à la fusion, SimpleCov (`CoverageAccumulator#reconcile_synthesized`) prend un côté sans ligne exécutée pour un fichier jamais chargé et garde les branches de l'autre côté (le parent : tout à 0). Correctif : méthodes écrites sur plusieurs lignes, commentaire dans le fichier ; aucun test retiré ni affaibli. Local sans `CI=1` : vert, parce que le fichier est chargé dans les processus de test.
+
+- **Après le merge de #52 dans `Develop` (b0e2ca1c)**, la fusion avec #49 (code d'établissement) avait laissé : le test CE-10 de l'import construire `ImportSchools` sans `classroom_plan:` (`ArgumentError`, rouge), une ligne vide en tête d'`initialize` (rubocop) et l'en-tête HITL sans ADR-0057. Corrigé dans `fix/bareme-classes-suivi`, avec le DTO ci-dessus ; CE-10 vérifie en plus que le même import lit le barème (77 / 38 / 28).
+
 ## Mesures (`env PERF=1 COVERAGE=0 PARALLEL_WORKERS=1 bin/rails test test/performance/classroom test/performance/school`, local, PostgreSQL 16, deux passes chacune)
 
 | Cas | `Develop` (avant) | `feature/bareme-classes` (après) |
