@@ -213,3 +213,13 @@ Variables Railway (par environnement, `Staging` et `main`) :
 
 - Le porteur abandonne la protection des branches GitHub : dépôt privé en offre gratuite, API en **HTTP 403**. Le §5 ci-dessus consigne l'écart et ce qui protège à la place : hook pre-commit local, discipline des PR, et le passage `Develop` → `main` réservé au porteur.
 - Bilan des garde-fous : 2, 3, 4, 6 et 7 prouvés ; 1 et 5 consignés comme écarts assumés.
+
+## Clôture
+
+| | |
+|---|---|
+| **Livré le** | 2026-09-25 (fusion dans `Develop`) · en production avec la V1 le 2026-09-27 (PR #33 vers `main`) · clos le 2026-09-28 |
+| **PR** | #6 (`feature/amorcage-depot` → `Develop`), qui embarque le Lot 0c (`feature/design-baseline`) |
+| **ADR produits** | Aucun. Le chantier applique les ADR-0024, 0047, 0049, 0051 et 0052, acceptés avant lui |
+| **UDR produits** | Aucune. Le design du Lot 0c relève de l'UDR-0005 (programme, F-09) |
+| **Garde-fous** | 2, 3, 4, 6 et 7 prouvés. **1 et 5 restent des écarts assumés** : le socle documentaire est entré en `624ee23`, avant tout code métier mais pas au premier commit (réécrire l'historique de `Develop` n'a pas été demandé) ; la protection des branches est impossible en offre gratuite (HTTP 403), remplacée par le hook pre-commit, la discipline des PR et le passage `Develop` → `main` réservé au porteur |

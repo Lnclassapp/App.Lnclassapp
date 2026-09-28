@@ -1,6 +1,6 @@
 # Features de la refonte Lnclass — liste de reprise
 
-> Généré le 2026-09-22, régénéré le 2026-09-28 à partir de la table de traçabilité de [`chantiers/refonte-application/feuille-de-route.md` §6](chantiers/refonte-application/feuille-de-route.md#6-traçabilité--chaque-feature-de-lexistant-a-une-vague), **qui fait foi** : en cas d'écart, c'est elle qui gagne. Ce fichier est une vue de travail, rangée par vague, avec une case à cocher par feature.
+> Généré le 2026-09-22, régénéré le 2026-09-28 (puis mis à jour le même jour : clôture de la V1, CL-02 en V3, CA-23 en V4) à partir de la table de traçabilité de [`chantiers/refonte-application/feuille-de-route.md` §6](chantiers/refonte-application/feuille-de-route.md#6-traçabilité--chaque-feature-de-lexistant-a-une-vague), **qui fait foi** : en cas d'écart, c'est elle qui gagne. Ce fichier est une vue de travail, rangée par vague, avec une case à cocher par feature.
 > La fiche détaillée de chaque ID (règles métier, preuves `chemin:ligne`) est dans [`chantiers/refonte-application/inventaire/complements-*.md`](chantiers/refonte-application/inventaire/).
 
 **Légende.**
@@ -12,12 +12,12 @@
 
 ## Où reprendre
 
-État au 2026-09-28 : la V0 et la V1 sont en production depuis le 2026-09-27 ; plusieurs chantiers sont livrés hors ordre. Détail : [état d'avancement de la feuille de route](chantiers/refonte-application/feuille-de-route.md#état-davancement-au-2026-09-28).
+État au 2026-09-28 : la V0 et la V1 sont en production depuis le 2026-09-27 et **closes** (chantiers `amorcage-depot` et `boucle-pedagogique`) ; plusieurs chantiers sont livrés hors ordre ; les vagues V2 à V6 sont recadrées. Détail : [état d'avancement](chantiers/refonte-application/feuille-de-route.md#état-davancement-au-2026-09-28) et [§5 de la feuille de route](chantiers/refonte-application/feuille-de-route.md#5-les-vagues).
 
-1. **Clore la V1** : consigner la recette `Staging` par un rôle distinct dans le [journal de la boucle pédagogique](chantiers/boucle-pedagogique/journal.md), passer les memos de `boucle-pedagogique` et d'`amorcage-depot` en `livré`, livrer ou écarter CL-02 (modifier une classe).
-2. **Travailler sous CI bloquée jusqu'au 2026-10-03** : `bin/ci` complet en local avant chaque fusion, fusion par l'agent seul, déploiement de production à la main sur Railway ([§8](chantiers/refonte-application/feuille-de-route.md#8-risques-du-programme)).
-3. **Finir ce qui est en cours** : durcissement de la photo (PR #75) ; cadrage de `canal-whatsapp` (PR #70, V6).
-4. **Reprendre la V2** : `espace-direction`, `annuaire-equipe`, profil de direction. La partie « profil, PIN, photo » de `mon-compte` est livrée.
+1. **Finir la V1** : la recette `Staging` par un rôle distinct est en cours (2026-09-28) ; son rapport va dans le [journal de la boucle pédagogique](chantiers/boucle-pedagogique/journal.md#clôture). CL-02 (modifier une classe) est passée en V3.
+2. **Avant la V2** : faire accepter les décisions en production restées `Proposé` (ADR-0057, 0059, 0063, 0064 ; UDR-0044, 0046, 0050), corriger les tests instables, obtenir du porteur les réponses aux [questions Q1 à Q15](chantiers/refonte-application/feuille-de-route.md#questions-à-poser-au-porteur).
+3. **Travailler sous CI bloquée jusqu'au 2026-10-03** : `bin/ci` complet en local avant chaque fusion, fusion par l'agent seul, déploiement de production à la main sur Railway ([§8](chantiers/refonte-application/feuille-de-route.md#8-risques-du-programme)).
+4. **Ouvrir la V2** : `espace-direction`, puis `annuaire-equipe` ; en parallèle, `catalogue-complet` (V4), disjoint de la V2 ([tableau de collision](chantiers/refonte-application/feuille-de-route.md#chevauchement-v2--v4--tableau-de-collision)).
 5. **Corriger [`feature_listing.md`](feature_listing.md)** : `classroom_courses`, `classroom_essentials` et `classroom_exercises` n'existent plus ; elles sont fusionnées dans `classroom_assignments` (contradiction C-35).
 
 ## Sommaire
@@ -25,10 +25,10 @@
 | Groupe | Features | dont livrées au 2026-09-28 |
 |---|---|---|
 | V0 — Amorçage du dépôt | 10 | 10 |
-| V1 — Boucle pédagogique | 85 | 84 |
-| V2 — Organisation scolaire et espace direction | 31 | 1 |
-| V3 — Suivi pédagogique enseignant | 11 | 1 |
-| V4 — Contenu à l'échelle et back-office équipe | 11 | 3 |
+| V1 — Boucle pédagogique | 84 | 84 |
+| V2 — Organisation scolaire et espace direction | 30 | 1 |
+| V3 — Suivi pédagogique enseignant | 12 | 1 |
+| V4 — Contenu à l'échelle et back-office équipe | 12 | 3 |
 | V5 — Remédiation et lacunes | 4 | 2 |
 | V6 — Communication (annonces) | 10 | 0 |
 | V8 — Hors vague, à décider | 1 | 0 |
@@ -100,7 +100,6 @@
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
 | ☑ | CL-01 | Créer une classe (équipe) | ❌ | V1 (Lot D : « les classes sont créées par l'équipe », [`plan.md`](plan.md) §1) — livrée 2026-09-27 (#33) | Un slug passé à `find_by_id` ; un code de 6 caractères pour une colonne de 5 |
-| ☐ | CL-02 | Modifier une classe | ❌ | V1 (`referentiels-equipe`) — **non livrée** : au 2026-09-28, aucun écran ne modifie une classe (ajout et retrait seulement, `classes-par-niveau`) | Un échec muet |
 | ☑ | CL-04 | Générer et afficher le code d'adhésion | ⚠️ | V1 (Lot D) — livrée 2026-09-27 (#33) | Un affichage tantôt en minuscules, tantôt en majuscules |
 | ☑ | CL-06 | Rejoindre une classe par `/c/<code>` | ⚠️ | V1 (Lot A) (= ID-02) — livrée 2026-09-27 (#33) | — |
 | ☑ | CL-07 | S'inscrire avec un code | ✅ | V1 (Lot A) (= ID-01) — livrée 2026-09-27 (#33) | — |
@@ -215,12 +214,6 @@
 | ☐ | SC-24 | Profil de direction | ✅ | V2 (= ID-19) | — |
 | ☐ | SC-25 | Changer son PIN côté direction | ⚠️ | V2 (= ID-20) | — |
 
-### Catalogue — `CA`
-
-| | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
-|---|---|---|---|---|---|
-| ☐ | CA-23 | Pages des séries | ❌ | V2 | — |
-
 ### Transverse — `TR`
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
@@ -244,6 +237,7 @@
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
+| ☐ | CL-02 | Modifier une classe | ❌ | V3 (`vie-de-la-classe`) — **déplacée de V1 le 2026-09-28** : aucun lot de la V1 ne la portait (ajout et retrait seulement, `classes-par-niveau`) ; elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059 | Un échec muet |
 | ☐ | CL-03 | Supprimer une classe | ⚠️ | V3 (`vie-de-la-classe` : archivage, F-19) | Une suppression définitive qui détruit l'historique des assignations |
 | ☑ | CL-05 | Partager le lien de classe sur WhatsApp | 💀 | V3 (`vie-de-la-classe`) — livrée 2026-09-28 (#71), hors ordre des vagues : chantier `croissance-parrainage` | — |
 | ☐ | CL-13 | Fiche d'un élève de sa classe | ❌ | V3 (`rapports-de-classe`) | — |
@@ -277,6 +271,7 @@
 | ☐ | CA-03 | Pagination infinie | 💀 | V4 | Un lien de page jamais rendu |
 | ☐ | CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) | — |
 | ☐ | CA-21 | Page matière | ⚠️ | V4 | — |
+| ☐ | CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 | — |
 
 ### Évaluation — `AS`
 
