@@ -8,20 +8,22 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   JOIN_CODE_LENGTH = defined?(Entities::Classroom::JoinCode::LENGTH) ? Entities::Classroom::JoinCode::LENGTH : 5
 
   PUBLIC_ID_TABLES = %w[users drenas schools classrooms classroom_assignments exercises exercise_sessions
-                        knowledge_gaps import_reports].freeze
+                        knowledge_gaps import_reports school_join_requests].freeze
   SLUG_TABLES = %w[drenas levels series materials courses essentials].freeze
 
   # table => [[columns], where] for every unique index beyond public_id and slug. The
   # condition is compared without casts, parentheses nor spaces: PostgreSQL rewrites it.
   UNIQUE_INDEXES = {
     "users" => [ [ %w[contact], "contactISNOTNULL" ] ],
-    "teacher_profiles" => [ [ %w[user_id], nil ] ],
+    "teacher_profiles" => [ [ %w[user_id], nil ], [ %w[referral_token], nil ] ],
+    "referrals" => [ [ %w[referee_id], nil ] ],
+    "school_join_requests" => [ [ %w[teacher_id], nil ] ],
     "sessions" => [ [ %w[token_digest], nil ] ],
     "totp_credentials" => [ [ %w[user_id], nil ] ],
     "pin_recovery_codes" => [ [ %w[user_id], "used_atISNULLANDrevoked_atISNULL" ] ],
     "invitations" => [ [ %w[token_digest], nil ], [ %w[kind contact], "accepted_atISNULLANDrevoked_atISNULL" ] ],
     "drenas" => [ [ %w[name], nil ] ],
-    "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ] ],
+    "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ] ],
     "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
     "series" => [ [ %w[name], nil ] ],
@@ -62,6 +64,9 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_sessions" => { "status" => %w[started completed abandoned], "kind" => %w[standard remediation] },
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
+    "referrals" => { "source" => %w[link sponsor] },
+    "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
+    "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms],
                           "status" => %w[queued validating importing completed rejected failed] }
   }.freeze
@@ -108,6 +113,53 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
       assert_raises(error, code) { connection.transaction(requires_new: true) { insert.call(code, name) } }
     end
     assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { insert.call("'k7m4q0'", "Lycée E") } }
+  end
+
+  test "CP-01: every teacher profile draws its own opaque referral token of 12 hexadecimal characters (ADR-0063)" do
+    tokens = Array.new(3) { create_teacher.teacher_profile.reload.referral_token }
+
+    assert_equal 3, tokens.uniq.size
+    assert(tokens.all? { it.match?(/\A[0-9a-f]{12}\z/) }, tokens.inspect)
+    profile = create_teacher.teacher_profile
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { profile.update_column(:referral_token, "ABC") } }
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { profile.update_column(:referral_token, tokens.first) }
+    end
+  end
+
+  test "CP-02: a referee has one referrer, never themself" do
+    referrer = create_teacher
+    referee = create_teacher
+    school_id = Orm::TeacherSchool.find_by!(teacher: referrer).school_id
+    Orm::Referral.create!(referrer:, referee:, school_id:, source: "link", created_at: Time.current)
+
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { Orm::Referral.create!(referrer: create_teacher, referee:, school_id:, source: "link") }
+    end
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { Orm::Referral.create!(referrer:, referee: referrer, school_id:, source: "link") }
+    end
+  end
+
+  test "CP-09: a national code is 6 digits, unique when present, optional" do
+    create_school(national_code: nil)
+    create_school(national_code: nil)
+    create_school(national_code: "012345")
+
+    assert_raises(ActiveRecord::RecordNotUnique) { connection.transaction(requires_new: true) { create_school(national_code: "012345") } }
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { create_school(national_code: "12345") } }
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { create_school(national_code: "12345a") } }
+  end
+
+  test "CP-11: a join request is decided exactly when it is no longer pending" do
+    request = create_join_request
+
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { request.update_columns(status: "approved") } }
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { request.update_columns(decided_at: Time.current) }
+    end
+    request.update_columns(status: "rejected", decided_at: Time.current, decided_via: "team")
+    assert_equal "rejected", request.reload.status
   end
 
   test "every exposed table has a 14 character public_id with a unique index" do

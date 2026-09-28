@@ -1,8 +1,11 @@
 <%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en quatre rubriques %>
 <%# Rôle : l'établissement est désigné par son code (champ, ou bandeau quand il est déjà trouvé) ; échec re-rendu en 422 %>
-<%# ADR  : 0030, 0037, 0050, 0057 · UDR : 0024, 0044 %>
+<%# ADR  : 0030, 0037, 0050, 0057, 0063 · UDR : 0024, 0044, 0050 %>
 <%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",
               class: "space-y-6" do |form| %>
+  <% if @form.ref %>
+    <%= form.hidden_field :ref %>
+  <% end %>
   <% if @form.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
       <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
 module Ports
   module School
     module SchoolRepositoryPort
@@ -10,6 +10,11 @@ module Ports
       # → Entities::School::School | nil
       def find_by_public_id(public_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
+      end
+
+      # Quel que soit son statut (ADR-0063). → Entities::School::School | nil
+      def find_by_id(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_id"
       end
 
       # Quel que soit son statut : l'appelant décide (ADR-0057). → Entities::School::School | nil

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
 # Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
 module Repositories
   module School
     class SchoolRepository
@@ -12,6 +12,11 @@ module Repositories
 
       def find_by_public_id(public_id:)
         record = Orm::School.find_by(public_id:)
+        record && map_to_entity(record)
+      end
+
+      def find_by_id(id:)
+        record = Orm::School.find_by(id:)
         record && map_to_entity(record)
       end
 

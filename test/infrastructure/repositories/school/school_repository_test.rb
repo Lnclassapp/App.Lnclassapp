@@ -30,6 +30,13 @@ module Repositories
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
       end
 
+      test "CP-07: retrouve un établissement par son id, quel que soit son statut ; nil pour un id inconnu (ADR-0063)" do
+        draft = create_school(drena: @drena, status: "draft")
+
+        assert_equal [ draft.id, "draft" ], @repository.find_by_id(id: draft.id).then { [ it.id, it.status ] }
+        assert_nil @repository.find_by_id(id: 0)
+      end
+
       test "CE-01: retrouve un établissement par son code, quel que soit son statut ; nil pour un code inconnu (ADR-0057)" do
         active = create_school(drena: @drena, school_code: "k7m4qz")
         inactive = create_school(drena: @drena, school_code: "abc234", status: "inactive")
