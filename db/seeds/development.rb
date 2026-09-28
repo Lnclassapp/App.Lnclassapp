@@ -1,6 +1,7 @@
 # ADR-0034: fictitious accounts and content for local development, PIN 2468 everywhere — a team member with a
-# second factor, an onboarded SVT teacher of « Tle D 1 », a student of that classroom, and a published course
-# with one essential and one exercise of 2 questions. Idempotent by contact and by name.
+# second factor, an onboarded SVT teacher of « Tle D 1 », a student of that classroom with a MENA number, the principal
+# of that school (second factor to enroll at first sign-in, ADR-0066), and a published course with one essential and one
+# exercise of 2 questions. Idempotent by contact and by name.
 raise "db/seeds/development.rb est réservé au développement" unless Rails.env.development?
 
 pin = "2468"
@@ -29,10 +30,19 @@ unless Orm::TeacherClassroom.exists?(teacher_id: teacher.id, classroom:)
   Orm::TeacherClassroom.create!(teacher_id: teacher.id, classroom:)
 end
 
-student = account.call("0100000001", role: "student", last_name: "Traoré", first_name: "Awa")
+student = account.call("0100000001", role: "student", last_name: "Traoré", first_name: "Awa", student_number: "12345678A")
 unless Orm::ClassroomStudent.exists?(student_id: student.id)
   Orm::ClassroomStudent.create!(student_id: student.id, classroom:, primary: true, joined_at: Time.current)
 end
+# ADR-0065: a development database seeded before the MENA number gets it, and passes the migration that makes it mandatory.
+student.update!(student_number: "12345678A") if student.student_number.nil?
+
+principal = account.call("0700000002", role: "school_admin", last_name: "Bamba", first_name: "Mariam")
+unless Orm::SchoolStaff.active.exists?(user_id: principal.id)
+  Orm::SchoolStaff.create!(user_id: principal.id, school_id: classroom.school_id, position: "principal", invited_by: member,
+                           joined_at: Time.current)
+end
+puts "Direction : 0700000002, PIN #{pin}, Proviseur du #{classroom.school.name} (second facteur à activer)"
 
 now = Time.current
 published = { status: "published", published_at: now }

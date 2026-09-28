@@ -14,7 +14,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   # table => [[columns], where] for every unique index beyond public_id and slug. The
   # condition is compared without casts, parentheses nor spaces: PostgreSQL rewrites it.
   UNIQUE_INDEXES = {
-    "users" => [ [ %w[contact], "contactISNOTNULL" ] ],
+    "users" => [ [ %w[contact], "contactISNOTNULL" ], [ %w[student_number], "student_numberISNOTNULL" ] ],
     "teacher_profiles" => [ [ %w[user_id], nil ], [ %w[referral_token], nil ] ],
     "referrals" => [ [ %w[referee_id], nil ] ],
     "school_join_requests" => [ [ %w[teacher_id], nil ] ],
@@ -30,7 +30,9 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "level_series" => [ [ %w[level_id series_id], nil ] ],
     "materials" => [ [ %w[name], nil ], [ %w[shortname], nil ] ],
     "classrooms" => [ [ %w[school_id school_year name], nil ], [ %w[join_code], "join_codeISNOTNULL" ] ],
-    "classroom_students" => [ [ %w[classroom_id student_id], nil ], [ %w[student_id], "primaryANDleft_atISNULL" ] ],
+    "classroom_students" => [ [ %w[classroom_id student_id], "left_atISNULL" ], [ %w[student_id], "primaryANDleft_atISNULL" ] ],
+    "school_staffs" => [ [ %w[user_id], "left_atISNULL" ], [ %w[school_id], "position='principal'ANDleft_atISNULL" ] ],
+    "teacher_school_departures" => [ [ %w[teacher_id school_id], "reinstated_atISNULL" ] ],
     "teacher_classrooms" => [ [ %w[teacher_id classroom_id], nil ] ],
     "courses" => [ [ %w[level_id material_id name], "series_idISNULL" ],
                    [ %w[level_id material_id series_id name], "series_idISNOTNULL" ] ],
@@ -53,6 +55,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "login_attempts" => { "kind" => %w[pin second_factor] },
     "invitations" => { "kind" => %w[team school_staff], "team_role" => %w[admin content field],
                        "position" => %w[principal censor educator secretary] },
+    "school_staffs" => { "position" => %w[principal censor educator secretary] },
     "schools" => { "school_type" => %w[public private mixed], "cycle" => %w[first both], "status" => %w[draft active inactive] },
     "levels" => { "cycle" => %w[first second] },
     "materials" => { "category" => %w[literature science other] },
@@ -162,6 +165,77 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     end
     request.update_columns(status: "rejected", decided_at: Time.current, decided_via: "team")
     assert_equal "rejected", request.reload.status
+  end
+
+  def refused(error, label = error.name, &block)
+    assert_raises(error, label) { connection.transaction(requires_new: true, &block) }
+  end
+
+  test "ED-50: the student number is 8 digits and a letter, unique, and only a student's (ADR-0065)" do
+    column = connection.columns("users").find { |candidate| candidate.name == "student_number" }
+    assert_equal [ 12, true ], [ column.limit, column.null ]
+
+    create_student(student_number: "12345678A")
+    create_student(student_number: nil)
+    create_student(student_number: nil)
+
+    refused(ActiveRecord::RecordNotUnique) { create_student(student_number: "12345678A") }
+    refused(ActiveRecord::CheckViolation) { create_teacher(student_number: "12345679A") }
+    refused(ActiveRecord::CheckViolation) { create_user(role: "school_admin", student_number: "12345679A") }
+    %w[1234567A 12345678a A12345678 12345678AB].each do |malformed|
+      refused(ActiveRecord::CheckViolation, malformed) { create_student(student_number: malformed) }
+    end
+    assert_match(/users_student_number_format/, connection.check_constraints("users").map(&:name).join(" "))
+  end
+
+  test "school_staffs: a closed position, one active school per member, one active principal per school (ADR-0044)" do
+    school = create_school
+    principal = create_school_admin(school:, position: "principal")
+    staff = ->(user, position, left_at: nil) { Orm::SchoolStaff.create!(user:, school:, position:, joined_at: Time.current, left_at:) }
+
+    refused(ActiveRecord::CheckViolation) { staff.call(create_user(role: "school_admin"), "director") }
+    refused(ActiveRecord::RecordNotUnique) { staff.call(create_user(role: "school_admin"), "principal") }
+    refused(ActiveRecord::RecordNotUnique) do
+      Orm::SchoolStaff.create!(user: principal, school: create_school, position: "censor", joined_at: Time.current)
+    end
+    staff.call(create_user(role: "school_admin"), "principal", left_at: Time.current)
+    staff.call(create_user(role: "school_admin"), "censor")
+    Orm::SchoolStaff.find_by!(user: principal).update!(left_at: Time.current)
+    staff.call(create_user(role: "school_admin"), "principal")
+
+    assert_equal 1, Orm::SchoolStaff.where(school:, position: "principal", left_at: nil).count
+  end
+
+  test "classroom_students: a student may leave and come back, one open membership per classroom (ADR-0066 §4.4)" do
+    classroom = create_classroom
+    student = create_student
+    membership = ->(left_at) { Orm::ClassroomStudent.create!(classroom:, student:, primary: false, joined_at: Time.current, left_at:) }
+
+    membership.call(Time.current)
+    membership.call(Time.current)
+    membership.call(nil)
+
+    refused(ActiveRecord::RecordNotUnique) { membership.call(nil) }
+    assert_equal 3, Orm::ClassroomStudent.where(classroom:, student:).count
+  end
+
+  test "teacher_school_departures: one open departure per teacher and school, reinstated with its author (ADR-0066 §4.4)" do
+    school = create_school
+    teacher = create_teacher(school: nil)
+    principal = create_school_admin(school:)
+    departure = lambda do |reinstated_at: nil, reinstated_by: nil|
+      Orm::TeacherSchoolDeparture.create!(teacher:, school:, detached_by: principal, created_at: Time.current, reinstated_at:,
+                                          reinstated_by:)
+    end
+
+    departure.call(reinstated_at: Time.current, reinstated_by: principal)
+    departure.call
+    departure.call(reinstated_at: Time.current, reinstated_by: principal)
+
+    refused(ActiveRecord::RecordNotUnique) { departure.call }
+    refused(ActiveRecord::CheckViolation) { departure.call(reinstated_at: Time.current) }
+    refused(ActiveRecord::CheckViolation) { departure.call(reinstated_by: principal) }
+    assert_equal 1, Orm::TeacherSchoolDeparture.where(teacher:, school:, reinstated_at: nil).count
   end
 
   test "every exposed table has a 14 character public_id with a unique index" do

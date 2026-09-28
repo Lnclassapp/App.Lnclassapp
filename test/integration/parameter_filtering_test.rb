@@ -25,4 +25,14 @@ class ParameterFilteringTest < ActiveSupport::TestCase
 
     assert_equal({ "code" => "[FILTERED]", "secret" => "[FILTERED]", "secret_uri" => "[FILTERED]" }, filtered["second_factor"])
   end
+
+  test "the student number never reaches the logs, nested included (ADR-0065)" do
+    filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters)
+
+    filtered = filter.filter("student_number" => "12345678A", "student_lookup" => { "student_number" => "12345678A" },
+                             "join" => { "student_number" => "12345678A", "last_name" => "Koné" })
+
+    assert_equal({ "student_number" => "[FILTERED]", "student_lookup" => { "student_number" => "[FILTERED]" },
+                   "join" => { "student_number" => "[FILTERED]", "last_name" => "Koné" } }, filtered)
+  end
 end

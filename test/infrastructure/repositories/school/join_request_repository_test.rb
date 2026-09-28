@@ -64,6 +64,16 @@ module Repositories
         assert_equal 0, Orm::TeacherSchool.where(teacher: @teacher).count
         assert_equal :conflict, @repository.reject(id: request.id, decided_by_id: @team.id, at: NOW).code
       end
+
+      test "pending_for reads the pending request of a teacher, and nothing once it is decided (ADR-0066 §4.5)" do
+        created = @repository.create(teacher_id: @teacher.id, school_id: @school.id, at: NOW, max_pending: 5).value
+
+        assert_equal created, @repository.pending_for(teacher_id: @teacher.id)
+        assert_nil @repository.pending_for(teacher_id: create_teacher(school: nil).id)
+
+        @repository.reject(id: created.id, decided_by_id: @team.id, at: NOW)
+        assert_nil @repository.pending_for(teacher_id: @teacher.id)
+      end
     end
   end
 end

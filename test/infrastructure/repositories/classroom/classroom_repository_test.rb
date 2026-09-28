@@ -74,6 +74,19 @@ module Repositories
         assert_nil ClassroomRepository.new.lock_by_join_code(join_code: "zzz99")
       end
 
+      test "verrouille une classe par son identifiant public, avec son effectif ; nil si elle est inconnue (ADR-0066 §4.5)" do
+        record = create_classroom(school: @school)
+        create_student(classroom: record)
+        Orm::ClassroomStudent.create!(classroom: record, student: create_student, primary: false, joined_at: Time.current,
+                                      left_at: Time.current)
+
+        locked = Orm::Classroom.transaction { ClassroomRepository.new.lock_by_public_id(public_id: record.public_id) }
+
+        assert_instance_of Entities::Classroom::Classroom, locked
+        assert_equal [ record.id, 1 ], [ locked.id, locked.active_students_count ]
+        assert_nil ClassroomRepository.new.lock_by_public_id(public_id: "inconnu")
+      end
+
       test "liste les codes pris et les noms d'une école pour une année" do
         record = create_classroom(school: @school, name: "6ème 1", school_year: @year)
         create_classroom(school: @school, join_code: nil, name: "6ème 2", school_year: "2020-2021")

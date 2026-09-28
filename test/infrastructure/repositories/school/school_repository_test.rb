@@ -235,6 +235,79 @@ module Repositories
         assert_equal first.id, @repository.primary_school_id_for(teacher_id: teacher.id)
         assert_nil @repository.primary_school_id_for(teacher_id: create_user(role: "teacher").id)
       end
+
+      test "detach_teacher removes the primary school and writes an open departure; departed? reads it (ADR-0066 §4.4)" do
+        school = create_school
+        teacher = create_teacher(school:)
+        principal = create_school_admin(school:)
+
+        assert @repository.detach_teacher(teacher_id: teacher.id, school_id: school.id, detached_by_id: principal.id, at: @at).success?
+
+        assert_nil @repository.primary_school_id_for(teacher_id: teacher.id)
+        departure = Orm::TeacherSchoolDeparture.sole
+        assert_equal [ teacher.id, school.id, principal.id, @at, nil, nil ],
+                     [ departure.teacher_id, departure.school_id, departure.detached_by_id, departure.created_at,
+                       departure.reinstated_at, departure.reinstated_by_id ]
+        assert @repository.departed?(teacher_id: teacher.id, school_id: school.id)
+        assert_not @repository.departed?(teacher_id: teacher.id, school_id: create_school.id)
+        assert_not @repository.departed?(teacher_id: create_teacher.id, school_id: school.id)
+      end
+
+      test "detach_teacher of a teacher whose primary school is another one: not found, nothing written" do
+        school = create_school
+        teacher = create_teacher
+        principal = create_school_admin(school:)
+
+        result = @repository.detach_teacher(teacher_id: teacher.id, school_id: school.id, detached_by_id: principal.id, at: @at)
+
+        assert_equal :not_found, result.code
+        assert_equal 0, Orm::TeacherSchoolDeparture.count
+        assert_not_nil @repository.primary_school_id_for(teacher_id: teacher.id)
+      end
+
+      test "reinstate_teacher gives the school back as primary and closes the departure; departed? is then false" do
+        school = create_school
+        teacher = create_teacher(school:)
+        principal = create_school_admin(school:)
+        censor = create_school_admin(school:, position: "censor")
+        @repository.detach_teacher(teacher_id: teacher.id, school_id: school.id, detached_by_id: principal.id, at: @at)
+
+        result = @repository.reinstate_teacher(teacher_id: teacher.id, school_id: school.id, reinstated_by_id: censor.id, at: @at + 1.hour)
+
+        assert result.success?
+        assert_equal school.id, @repository.primary_school_id_for(teacher_id: teacher.id)
+        assert_equal [ @at + 1.hour, censor.id ], Orm::TeacherSchoolDeparture.sole.then { [ it.reinstated_at, it.reinstated_by_id ] }
+        assert_not @repository.departed?(teacher_id: teacher.id, school_id: school.id)
+        assert @repository.detach_teacher(teacher_id: teacher.id, school_id: school.id, detached_by_id: principal.id, at: @at).success?
+        assert_equal 2, Orm::TeacherSchoolDeparture.count
+      end
+
+      test "reinstate_teacher without an open departure of that school: not found, nothing written" do
+        school = create_school
+        teacher = create_teacher(school: nil)
+        principal = create_school_admin(school:)
+        @repository.detach_teacher(teacher_id: create_teacher(school:).id, school_id: school.id, detached_by_id: principal.id, at: @at)
+
+        result = @repository.reinstate_teacher(teacher_id: teacher.id, school_id: school.id, reinstated_by_id: principal.id, at: @at)
+
+        assert_equal :not_found, result.code
+        assert_nil @repository.primary_school_id_for(teacher_id: teacher.id)
+      end
+
+      test "reinstate_teacher of a teacher who meanwhile joined another school: conflict other_school, the departure stays open" do
+        school = create_school
+        teacher = create_teacher(school:)
+        principal = create_school_admin(school:)
+        @repository.detach_teacher(teacher_id: teacher.id, school_id: school.id, detached_by_id: principal.id, at: @at)
+        other = create_school
+        @repository.attach_teacher(teacher_id: teacher.id, school_id: other.id, primary: true, at: @at)
+
+        result = @repository.reinstate_teacher(teacher_id: teacher.id, school_id: school.id, reinstated_by_id: principal.id, at: @at)
+
+        assert_equal [ :conflict, { base: [ :other_school ] } ], [ result.code, result.errors ]
+        assert_equal other.id, @repository.primary_school_id_for(teacher_id: teacher.id)
+        assert @repository.departed?(teacher_id: teacher.id, school_id: school.id)
+      end
     end
   end
 end

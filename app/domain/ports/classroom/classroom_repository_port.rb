@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
 # Rôle : contrat de persistance des classes, de leur code d'adhésion et de la génération par défaut
-# ADR  : 0030, 0039, 0041, 0059
+# ADR  : 0030, 0039, 0041, 0059, 0066
 module Ports
   module Classroom
     module ClassroomRepositoryPort
@@ -13,6 +13,12 @@ module Ports
       # → Entities::Classroom::Classroom | nil
       def lock_by_join_code(join_code:)
         raise NotImplementedError, "#{self.class} doit implémenter #lock_by_join_code"
+      end
+
+      # Verrou (SELECT … FOR UPDATE), à appeler dans une transaction (changement de classe, ADR-0066 §4.4).
+      # → Entities::Classroom::Classroom (avec active_students_count) | nil
+      def lock_by_public_id(public_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #lock_by_public_id"
       end
 
       # Tire le code d'adhésion, retente une fois sur collision.

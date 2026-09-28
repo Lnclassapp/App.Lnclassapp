@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::TeachingRepositoryPort
 # Rôle : contrat des déclarations d'enseignement (teacher_classrooms)
-# ADR  : 0030
+# ADR  : 0030, 0066
 module Ports
   module Classroom
     module TeachingRepositoryPort
@@ -17,6 +17,12 @@ module Ports
       # → [Integer]
       def classroom_ids_for(teacher_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #classroom_ids_for"
+      end
+
+      # Retrait d'un enseignant de l'établissement : supprime ses déclarations des classes de cet établissement seulement,
+      # sans toucher aux assignations ni aux sessions. → Integer (lignes supprimées)
+      def withdraw_all_in_school(teacher_id:, school_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #withdraw_all_in_school"
       end
     end
   end

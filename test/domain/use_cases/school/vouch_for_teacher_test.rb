@@ -85,6 +85,15 @@ module UseCases
         assert_empty @requests.writes
       end
 
+      test "ED-23: the principal of the school is no sponsor: refused as not found, the request stays pending" do
+        principal = Entities::Identity::Actor.new(user_id: 9, role: :school_admin, school_id: 31, position: "principal")
+
+        assert_equal :not_found, vouch(actor: principal).code
+        assert_empty @requests.writes
+        assert_empty @audit.events
+        assert @requests.find_by_public_id(public_id: "req-5").pending?
+      end
+
       test "an unknown request is not found; a request already decided is a conflict" do
         assert_equal :not_found, vouch(public_id: "req-0").code
         assert_equal [ :conflict, { base: [ :already_decided ] } ], vouch(public_id: "req-6").then { [ it.code, it.errors ] }

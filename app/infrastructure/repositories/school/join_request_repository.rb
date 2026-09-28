@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::JoinRequestRepository
 # Rôle : demandes d'enseignants inscrits sans code ; une décision ne vaut que sur une demande en attente, et rattache l'enseignant
-# ADR  : 0029, 0063
+# ADR  : 0029, 0063, 0066
 module Repositories
   module School
     class JoinRequestRepository
@@ -32,6 +32,11 @@ module Repositories
 
       def find_by_public_id(public_id:)
         values = Orm::SchoolJoinRequest.joins(:teacher).where(public_id:).pick(*COLUMNS)
+        values && Entities::School::JoinRequest.new(*values)
+      end
+
+      def pending_for(teacher_id:)
+        values = Orm::SchoolJoinRequest.joins(:teacher).where(teacher_id:, status: PENDING).pick(*COLUMNS)
         values && Entities::School::JoinRequest.new(*values)
       end
 
