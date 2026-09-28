@@ -68,14 +68,33 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_select "dt", text: "Classe", count: 0
   end
 
-  test "a teacher without a school nor a subject reads a dash" do
+  test "a teacher without a subject reads a dash; without a school, the waiting screen holds them (ADR-0063)" do
     teacher = create_user(role: "teacher")
+    Orm::TeacherSchool.create!(teacher:, school: create_school, primary: true)
     sign_in_as teacher
 
     get profile_path
 
     assert_response :success
-    assert_select "dd", text: "—", count: 2
+    assert_select "dd", text: "—", count: 1
+
+    Orm::TeacherSchool.where(teacher:).delete_all
+    get profile_path
+    assert_redirected_to pending_account_path
+  end
+
+  test "CP-15: a teacher with 3 colleagues signed up thanks to them wears the « Ambassadeur » badge; with 2, not yet" do
+    teacher = create_teacher
+    2.times { create_referral(referrer: teacher) }
+    sign_in_as teacher
+
+    get profile_path
+    assert_select "#profile_ambassador", 0
+
+    create_referral(referrer: teacher)
+    get profile_path
+    assert_select "#profile_ambassador", text: /#{I18n.t("identity.referrals.ambassador.badge")}/
+    assert_select "#profile_ambassador", text: /#{I18n.t("identity.referrals.ambassador.thanks", count: 3)}/
   end
 
   test "a team member reads their team role and that the second factor is active" do

@@ -68,3 +68,10 @@ L'entrée « Pilotage » de la navigation équipe est grisée depuis la V1. L'é
 - L'entrée « Pilotage » (`team_dashboard_path`) est active : l'UDR-0006 et l'UDR-0018 sont amendées. La navigation équipe n'a plus d'entrée inactive.
 - Un nouvel indicateur s'ajoute par une définition dans l'ADR-0062, une ligne de query testée et une tuile de `_key_figures`, jamais par un script.
 - Interdit sur cette page : une bibliothèque de graphiques, un attribut `style`, un numéro complet, un lien vers une fiche de compte avant la V2.
+
+## Amendement du 2026-09-28 — paramètres invalides et pages de la recherche
+
+*Retour du challenger de la PR #51. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Paramètre invalide** : `q`, `page`, `period` et `drena` ne sont lus que s'ils sont un texte sans octet nul. Un tableau (`page[]=2`), un hash (`page[a]=1`) ou un octet nul (`q=ko%00ua`, `drena=x%00`) est ignoré comme un paramètre absent : vue nationale, 7 jours, recherche vide, page 1. Jamais de 500.
+- **Pages de la recherche** : le frame `team_dashboard_search` porte `data-turbo-action="advance"` : un lien de pagination avance l'URL, et un rechargement garde la page courante.

@@ -37,6 +37,8 @@ Règles d'autorisation : écrire = `Identity::UpdateSelfPolicy` (soi seulement) 
 | Image de plus de 1 Mo (navigateur qui n'a pas pu la réduire) | 422, « La photo pèse 1 Mo au plus. » |
 | Image incomplète ou mal formée, envoyée sans recadrage (JPEG sans EOI ou avec un octet égaré, PNG sans IEND ou au CRC faux, WebP plus court que sa longueur RIFF) | 422, « Choisissez une photo JPEG, PNG ou WebP. » ; rien n'est stocké *(amendé le 2026-09-28, contre-épreuve de la PR #50)* |
 | Image qui se décode en rien dans le navigateur (0 × 0, aucun pixel visible) | refusée avant l'envoi : « Cette image est illisible ou abîmée. Choisissez-en une autre. », le champ est vidé *(idem)* |
+| Partie gardée hors de sa norme, envoyée sans recadrage (DQT ou gAMA allongé, chunk après IEND, VP8X de plus de 10 octets ou dont la taille diffère de l'image, ALPH invalide…) | 422, « Choisissez une photo JPEG, PNG ou WebP. » ; rien n'est stocké *(amendé le 2026-09-28, retour du challenger #65)* |
+| JPEG de téléphone suivi, après son EOI, d'images secondaires (Motion Photo, MPF, carte de gain) | accepté ; tout ce qui suit le premier EOI est retiré avant le stockage *(idem, décision du coordinateur)* |
 | Image de plus de 1024 px de côté | 422, « La photo mesure 1024 pixels de côté au plus. » |
 | Image qui porte des métadonnées de prise de vue (Exif, XMP, IPTC, textes PNG) | acceptée si elle respecte le reste ; ses métadonnées sont **retirées** avant le stockage *(amendé le 2026-09-28, voir le journal)* |
 | Retirer sans photo | succès silencieux, aucune trace d'audit |

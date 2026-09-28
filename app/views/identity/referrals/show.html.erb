@@ -1,0 +1,13 @@
+<%# 🌐 UI · identity/referrals/show — page « Inviter un collègue », atteinte depuis la déclaration des classes %>
+<%# Rôle : le bloc d'invitation ; sans établissement actif, un état vide qui dit pourquoi %>
+<%# ADR  : 0063 · UDR : 0006, 0050 %>
+<% content_for :title, t(".page_title") %>
+<% content_for :nav_key, "classrooms" %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+<div class="max-w-3xl">
+  <% if @invite %>
+    <%= render "identity/referrals/invite", invite: @invite %>
+  <% else %>
+    <%= ui_empty_state title: t(".closed_title"), description: t(".closed_description"), icon: "user-plus" %>
+  <% end %>
+</div>

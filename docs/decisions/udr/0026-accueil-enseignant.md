@@ -67,3 +67,7 @@ L'enseignant a besoin de savoir, d'un coup d'œil, où en sont ses classes et d'
 - L'accueil enseignant n'affiche aucun montant ni aucune donnée simulée ; un futur encart de rémunération exige d'abord une source de vérité du paiement (TR-06).
 - « Activité de vos classes » est réservée à la V3 : la remplir ne change que le corps de sa carte.
 - Le score moyen ne compte que la matière de l'enseignant ; une classe vue par l'équipe (UDR-0027) n'affiche aucun score moyen.
+
+## Amendement du 2026-09-28 — inviter et confirmer (UDR-0050)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* Après les sections du shell, l'accueil rend « Collègues en attente » (si l'établissement en a) puis « Inviter un collègue », pour un enseignant d'un établissement actif seulement. Contrat : UDR-0050 §3.

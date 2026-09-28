@@ -35,6 +35,9 @@ module Queries
         assert_equal [ 2, 10 ], query(page: "99").then { [ it.page, it.rows.size ] }
         assert_equal 1, query(page: "-3").page
         assert_equal 1, query(page: "abc").page
+        # A query string such as page[]=2 or page[a]=1 hands an array or a hash: page 1, never a 500.
+        assert_equal 1, query(page: [ "2" ]).page
+        assert_equal 1, query(page: { "a" => "1" }).page
         assert_equal 1, query(page: nil).page
       end
 
@@ -49,7 +52,7 @@ module Queries
 
         assert_equal SchoolsQuery::Row.new(public_id: school.public_id, name: "Lycée Classique d'Abidjan", sigle: "LCA",
                                            drena_public_id: drena.public_id, drena_name: "Abidjan 1", school_type: "mixed", cycle: "first", status: "draft",
-                                           classrooms_count: 2, teachers_count: 1, school_code: "k7m4qz"),
+                                           classrooms_count: 2, teachers_count: 1, school_code: "k7m4qz", national_code: nil),
                      query.rows.sole
       end
 
@@ -83,6 +86,14 @@ module Queries
         assert_equal [ "ÉCOLE PRIMAIRE 100%" ], names.call("100%")
         assert_empty names.call("_")
         assert_equal 3, query(search: "  ").total_count
+      end
+
+      test "CP-10 : recherche aussi sur le code national, que la ligne porte (ADR-0063)" do
+        create_school(name: "Lycée Classique", national_code: "012345")
+        create_school(name: "Lycée Moderne")
+
+        assert_equal [ [ "Lycée Classique", "012345" ] ], query(search: "012345").rows.map { [ it.name, it.national_code ] }
+        assert_equal [ "Lycée Classique" ], query(search: "0123").rows.map(&:name)
       end
 
       test "aucun établissement : une page vide" do

@@ -1,9 +1,9 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
-# Rôle : inscription enseignant publique, par code d'établissement saisi ou lien /e/<code> (limité en débit) ; succès : session
-# ADR  : 0026, 0028, 0030, 0050, 0057 · UDR : 0024, 0044
+# Rôle : inscription enseignant publique, par code saisi ou lien /e/<code>?ref= (limité en débit, parrain noté) ; succès : session
+# ADR  : 0026, 0028, 0030, 0050, 0057, 0063 · UDR : 0024, 0044, 0050
 module Identity
   class TeacherRegistrationsController < ApplicationController
-    FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_code material_slug].freeze
+    FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_code material_slug ref].freeze
 
     allow_unauthenticated_access
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { render_rate_limited(:new) }
@@ -18,11 +18,12 @@ module Identity
       @form = Dtos::Identity::TeacherRegistrationInput.new
     end
 
-    # /e/<code> : le même formulaire, l'établissement déjà trouvé ; un code refusé répond 404 sans dire pourquoi.
+    # /e/<code> : le même formulaire, l'établissement déjà trouvé ; un code refusé répond 404 sans dire pourquoi. Le jeton
+    # du parrain (?ref=, ADR-0063) voyage dans un champ caché, sans cookie ni session.
     def with_code
       return redirect_to_home if authenticated?
 
-      @form = Dtos::Identity::TeacherRegistrationInput.new(school_code: params[:code])
+      @form = Dtos::Identity::TeacherRegistrationInput.new(school_code: params[:code], ref: params[:ref])
       @preview = preview_of(@form.school_code)
       @invalid_code = @preview.nil?
       render :new, status: @invalid_code ? :not_found : :ok
@@ -57,6 +58,7 @@ module Identity
       UseCases::Identity::RegisterTeacher.new(
         registrations: Repositories::Identity::RegistrationRepository.new, schools: Repositories::School::SchoolRepository.new,
         taxonomy: Repositories::Catalog::TaxonomyRepository.new, sessions: Repositories::Identity::SessionRepository.new,
+        referrals: Repositories::Identity::ReferralRepository.new,
         policy: Policies::Identity::RegisterTeacherPolicy.new, transaction: Repositories::Shared::Transaction.new,
         digest_key: secret_digest_key, clock: Time.zone
       )

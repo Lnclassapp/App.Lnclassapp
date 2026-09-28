@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
-# Rôle : inscrit un enseignant (rôle imposé), le rattache à l'établissement de son code et ouvre sa session, en une transaction
-# ADR  : 0026, 0028, 0030, 0050, 0057 · UDR : 0024, 0044
+# Rôle : inscrit un enseignant (rôle imposé), le rattache à l'établissement de son code, note son parrain, ouvre sa session
+# ADR  : 0026, 0028, 0030, 0050, 0057, 0063 · UDR : 0024, 0044, 0050
 module UseCases
   module Identity
     class RegisterTeacher
@@ -17,8 +17,9 @@ module UseCases
         end
       end
 
-      def initialize(registrations:, schools:, taxonomy:, sessions:, policy:, transaction:, digest_key:, clock:)
+      def initialize(registrations:, schools:, taxonomy:, sessions:, referrals:, policy:, transaction:, digest_key:, clock:)
         @registrations = registrations
+        @referrals = referrals
         @schools = schools
         @taxonomy = taxonomy
         @sessions = sessions
@@ -60,8 +61,18 @@ module UseCases
         @transaction.call do
           user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id))
           written(@schools.attach_teacher(teacher_id: user.id, school_id: school.id, primary: true, at: now))
+          record_referrer(dto.ref, user, school, now)
           Shared::Result.success(Registered.new(user:, token: open_session(user, ip, user_agent, now)))
         end
+      end
+
+      # Le parrain doit enseigner dans l'établissement actif du code (ADR-0063) ; sinon, ni parrain ni erreur. Un refus de
+      # la base (filleul déjà parrainé) n'annule pas l'inscription.
+      def record_referrer(token, user, school, now)
+        referrer = token && @referrals.find_referrer(token:)
+        return unless referrer&.school_active && referrer.school_id == school.id
+
+        @referrals.record_referral(referrer_id: referrer.user_id, referee_id: user.id, school_id: school.id, source: "link", at: now)
       end
 
       def user_from(dto)

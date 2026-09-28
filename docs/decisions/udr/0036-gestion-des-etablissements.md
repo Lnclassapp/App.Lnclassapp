@@ -118,3 +118,7 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 *Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md). En cas d'écart, cette section fait foi.*
 
 - L'en-tête de la liste porte « Importer des établissements » (principale), puis le menu « Classes » (génération des classes manquantes, barème des classes) : voir UDR-0043 et UDR-0045, amendements du 2026-09-28.
+
+## Amendement du 2026-09-28 — code national et enseignants en attente (UDR-0050)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* La fiche montre le code national dans l'en-tête et le formulaire le modifie (facultatif, 6 chiffres, unique) ; la recherche porte aussi sur lui ; la section « Enseignants en attente » (Valider / Refuser) précède les enseignants rattachés quand il y a des demandes. Contrat : UDR-0050 §3.

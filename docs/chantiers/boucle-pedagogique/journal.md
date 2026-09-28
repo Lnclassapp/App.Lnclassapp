@@ -61,7 +61,10 @@ Aucune question ne reste ouverte pour le porteur.
 
 ## Ce qui a dérapé
 
-- …
+- **La date.** Le plan à 72 h du 2026-09-18 visait une mise en ligne ferme au 2026-09-22 ; la V1 est passée en production le **2026-09-27** (PR #33, complétée par #36). Le périmètre avait entre-temps doublé : référentiels, établissements et imports sont entrés en V1 le 2026-09-25 (décisions du porteur, [journal du programme](../refonte-application/journal.md#2026-09-25--décisions-de-fondation-acceptées-en-bloc)).
+- **CL-02 (modifier une classe) n'est pas livrée.** Aucun lot ne l'avait en charge : ni S2 (fiche de l'établissement), ni D (classes de l'enseignant). Elle part en V3, chantier `vie-de-la-classe` ([feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)).
+- **La recette `Staging` par un rôle distinct n'a pas précédé la mise en production.** Les suites livrées le 2026-09-28 (profil, génération, pilotage…) sont passées avant elle. Elle est menée le 2026-09-28 ; son rapport sera consigné ici.
+- **Deux correctifs après la mise en production** : menu du compte des accueils (#34) et réémission de l'invitation de démarrage (#35).
 
 ## Ce qu'on a appris sur la codebase
 
@@ -82,12 +85,38 @@ Aucune question ne reste ouverte pour le porteur.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Espace des codes d'adhésion (884 736) consommé tant que les classes archivées gardent leur code | Libération des codes à l'archivage de l'année prévue en V3 | V3 (ADR-0041) |
+| CL-02 : modifier une classe | Aucun lot ne la portait ; l'ajout et le retrait de classes sont livrés à part (`classes-par-niveau`, ADR-0059) | V3, `vie-de-la-classe` |
+| Recette `Staging` par un rôle distinct | Menée après la mise en production | En cours le 2026-09-28 ; rapport à consigner ici |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-09-27 (production, lnclass.com) · clos le 2026-09-28 |
+| **PR** | Vers `Develop` : #8 (plan), #11, #13, #14, #15, #16, #28 (les lots, dont ceux du Lot E : #23 à #26, fusionnés dans `feature/boucle-pedagogique`) · vers `main` : **#33** et **#36** · correctifs après la mise en production : #34, #35 |
+| **ADR produits** | Aucun nouvel ADR. Amendements : ADR-0027 (erratum `TransactionPort`), ADR-0028 (policies, retour du porteur), ADR-0030 (import seul, classes générées), ADR-0034, ADR-0039 (erratum, import bloqué libéré après 10 min), ADR-0043 (seuil de résolution à 75 %), ADR-0049 (nonce par session), ADR-0051 (éditeur riche), ADR-0052 (seed d'identité avant chaque déploiement, #31), ADR-0054 ; ligne Hotwire ajoutée à l'ADR-0009 |
+| **UDR produits** | UDR-0009 à UDR-0040 (32 UDR d'écran, acceptées le 2026-09-27). UDR-0005 et UDR-0006 viennent du Lot 0c, au titre du programme (F-09, F-31) |
+| **Recette `Staging`** | En cours le 2026-09-28, par un rôle distinct ; la case du [§9 de la feuille de route](../refonte-application/feuille-de-route.md#9-portes-de-sortie-du-programme) sera cochée avec son rapport |
+
+## Recette Staging du 2026-09-28
+
+Rôle distinct (agent de recette, sans secret ni accès équipe), sur `applnclassapp-staging-005b` (code `cb9d588f`), Chromium headless en 1280 et 390 px. **Verdict : acceptée avec réserves.**
+
+| Critère | Résultat |
+|---|---|
+| Accueil, connexion, PIN masqué et bouton œil, 3 échecs de connexion (422, PIN vidé, numéro gardé) | OK |
+| `/c/<code inconnu>` : 404 en français avec lien de reprise | OK |
+| Formulaires d'inscription enseignant (avec et sans code) | OK à l'affichage |
+| CSP à nonce, HSTS, cookie `secure; httponly; samesite=lax`, `nosniff`, `referrer-policy` | OK |
+| Aucun défilement horizontal à 390 px (9 pages) ; `x-runtime` ≈ 10 ms | OK |
+| Pages protégées sans session → `/login` | OK |
+| Verrouillage à 5 échecs, inscription élève par code, injection `role=team` | Non recettés sur `Staging` (pas d'accès, écritures refusées) ; couverts par les tests |
+| Boucle complète équipe → enseignant → élève → résultat et badge | **Preuve locale seulement** : `boucle_pedagogique_test` 1 run, 163 assertions, 0 échec |
+
+**Défauts relevés**
+
+- **D1 (majeur, à confirmer dans un vrai navigateur)** : sur `/join` au téléphone, un code bien formé mais inconnu (`ZZZ99`) redirige vers `/c/zzz99` (404), mais l'écran reste sur `/join`, sans message. Possible effet de l'interception réseau de la recette.
+- **D2 (mineur)** : `public/404.html` est la page Rails par défaut, en anglais.
+- **D3 (mineur)** : la CSP autorise `style-src-attr 'unsafe-inline'` ; à consigner dans un ADR si c'est voulu.
+
+**Pour cocher la porte** : un compte équipe de recette sur `Staging` (TOTP ou code de secours transmis hors dépôt), un code d'établissement ou un compte enseignant de recette, et l'accord du porteur pour créer un élève et un enseignant de recette et tester le verrouillage à 5 échecs.

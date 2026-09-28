@@ -208,6 +208,55 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
   private
 
+  test "CP-01: the referral link carries its token in a hidden field, and nowhere else" do
+    token = Orm::TeacherProfile.find_by!(user: create_teacher(school: @school)).referral_token
+
+    get school_code_signup_path("k7m4qz", ref: token.upcase)
+
+    assert_response :success
+    assert_select "#school-preview"
+    assert_select "input[type=hidden][name='teacher_registration[ref]'][value='#{token}']"
+    assert_nil cookies[:session_token]
+    assert_empty session.to_h.except("session_id", "_csrf_token", "csp_nonce"), "le jeton ne va ni en session ni en cookie"
+    assert_equal [ Rails.application.config.session_options[:key] ], response.headers["Set-Cookie"].to_s.scan(/^([^=;\s]+)=/).flatten
+  end
+
+  test "CP-03: a malformed token is not carried" do
+    get school_code_signup_path("k7m4qz", ref: "usr-41")
+
+    assert_select "input[name='teacher_registration[ref]']", 0
+  end
+
+  test "CP-02: a sign-up by a referral link records the referrer, source link, in the school of the code" do
+    referrer = create_teacher(school: @school)
+    token = Orm::TeacherProfile.find_by!(user: referrer).referral_token
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(ref: token) }
+
+    assert_redirected_to teacher_classrooms_path
+    referee = Orm::User.find_by!(contact: "0501020304")
+    assert_equal [ [ referrer.id, @school.id, "link" ] ], Orm::Referral.where(referee:).pluck(:referrer_id, :school_id, :source)
+  end
+
+  test "CP-03: the token of a teacher of another school gives a sign-up without referrer" do
+    other = create_teacher(school: create_school(drena: @drena))
+    token = Orm::TeacherProfile.find_by!(user: other).referral_token
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(ref: token) }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal 0, Orm::Referral.count
+  end
+
+  test "CP-01: after an error, the token is kept in the re-rendered form" do
+    token = Orm::TeacherProfile.find_by!(user: create_teacher(school: @school)).referral_token
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(ref: token, pin_confirmation: "1357") }
+
+    assert_response :unprocessable_entity
+    assert_select "input[type=hidden][name='teacher_registration[ref]'][value='#{token}']"
+  end
+
   def registration_params(**overrides)
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821",
       pin_confirmation: "4821", school_code: "K7M-4QZ", material_slug: @material.slug, **overrides }

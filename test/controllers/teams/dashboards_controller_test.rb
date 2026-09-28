@@ -181,4 +181,38 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#search_results li", 20
     assert_select "turbo-frame##{SEARCH_FRAME} a[href*='page=2'][href*='q=zadi']"
   end
+
+  # Challenger of PR #51: a malformed query string never gives a 500. A non-scalar value, or text holding a null byte,
+  # is an invalid value: the parameter is ignored (national view, 7 days, no search, page 1).
+  test "a malformed parameter is ignored: array or hash page, null byte in the search, the DRENA or the period" do
+    create_student(first_name: "Aya", last_name: "Kouassi")
+    sign_in_as @member
+    frame = { "Turbo-Frame" => SEARCH_FRAME }
+
+    [ "q=koua&page[]=2", "q=koua&page[a]=1" ].each do |query|
+      get "#{team_dashboard_path}?#{query}", headers: frame
+      assert_response :success, query
+      assert_select "#search_total", text: tl("search_results.total", count: 1)
+    end
+
+    get "#{team_dashboard_path}?q=ko%00ua", headers: frame
+    assert_response :success
+    assert_select "turbo-frame##{SEARCH_FRAME}", text: including(tl("search_results.prompt"))
+
+    [ "q=ko%00ua", "drena=x%00", "period=7d%00", "q[]=koua&drena[a]=x&period[]=30d" ].each do |query|
+      get "#{team_dashboard_path}?#{query}"
+      assert_response :success, query
+      assert_select "#team_dashboard_scope", text: including(tl("show.national"))
+      assert_select "#team_dashboard_filters nav a[aria-current=true]", text: tl("periods.7d")
+    end
+  end
+
+  test "the search pages advance the URL, so a reload keeps the current page" do
+    21.times { |index| create_student(last_name: format("Zadi %02d", index)) }
+    sign_in_as @member
+
+    get team_dashboard_path(q: "zadi")
+
+    assert_select "turbo-frame##{SEARCH_FRAME}[data-turbo-action=advance] a[href*='page=2']"
+  end
 end
