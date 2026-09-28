@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-09-27 |
 | **Branche** | `feature/profil-utilisateur` |
 | **Programme** | — |

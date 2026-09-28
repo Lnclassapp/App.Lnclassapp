@@ -67,7 +67,7 @@ Scénario: [PR-04] Changer son numéro
   Alors il peut se connecter avec le nouveau numéro, plus avec l'ancien
   Et ses autres sessions sont fermées, et la sienne est renouvelée
   Et le journal d'audit contient « contact.changed », sans aucun PIN
-  Et l'écriture se fait sans rechargement de page, un toast confirme
+  Et la page d'arrivée « Mon profil » est rechargée (session renouvelée, nouveau nonce CSP, ADR-0049 ; UDR-0041), un toast confirme
 
 Scénario: [PR-05] Numéro refusé
   Alors un PIN actuel faux donne « PIN incorrect. » et compte un échec de connexion

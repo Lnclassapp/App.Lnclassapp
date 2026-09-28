@@ -31,16 +31,40 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
+| Sans JavaScript, les modales (dont celles du profil) restent fermées : `<dialog>` sans `open`, page blanche. Le repli HTML du serveur fonctionne. | Commun à toutes les modales de l'application (UDR-0006), hors périmètre | À ouvrir (repli sans JS des modales) |
+| Au verrouillage depuis le profil, seule la session en cours est fermée ; les autres sessions du compte restent ouvertes | Conforme au PRD (« la session en cours ») ; le verrou empêche toute nouvelle connexion | Aucun, à rediscuter si besoin |
+
+## Recette (challenger empirique, 2026-09-28)
+
+Un agent distinct des auteurs a joué les parcours dans Chromium (390×844) contre l'application lancée en développement, sans relire le code.
+
+| Point | Résultat |
+|---|---|
+| PR-01 lecture du profil (élève, enseignant, équipe), `aria-current` | OK |
+| PR-02 aucun identifiant accepté, visiteur renvoyé à la connexion | OK (`/profile?id=1` affiche la session, `/profile/1` → 404) |
+| PR-03 nom : carte mise à jour sans rechargement (marqueur `window` conservé), toast, audit, vu par l'enseignant, refus 422 | OK |
+| PR-04 numéro : 303, session renouvelée, autre session → connexion, ancien numéro refusé, audit masqué | OK |
+| PR-05 PIN faux, confirmation, format, numéro pris (message neutre), numéro identique : 422, rien d'écrit | OK |
+| PR-06 PIN : 303, ancien PIN refusé, nouveau accepté, autre session révoquée, refus 422 | OK |
+| PR-07 verrouillage au 5ᵉ échec → connexion, « Trop de tentatives » | OK |
+| Repli HTML sans Turbo (nom, numéro) | OK |
+
+Temps serveur : nom 16–34 ms ; numéro ou PIN 270–580 ms (bcrypt) ; refus avant vérification du PIN ≈ 15 ms.
+
+Écart trouvé : le Gherkin PR-04 disait « sans rechargement de page » alors que l'UDR-0041 et l'ADR-0049 veulent un rechargement de la page d'arrivée après un changement de numéro ou de PIN. Le PRD est corrigé (l'UDR fait foi).
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
 | Renouvellement de session dupliqué entre `ChangeOwnContact` et `ChangeOwnPin` | Lots B et C livrés en parallèle ; l'extraction touche le fichier du Lot B | Intégration du chantier (avant la PR) |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-09-28 |
+| **PR** | [#37](https://github.com/Lnclassapp/App.Lnclassapp/pull/37) |
+| **ADR produits** | ADR-0055 |
+| **UDR produits** | UDR-0041 |
 
 ## Lot B — Changer son numéro
 
