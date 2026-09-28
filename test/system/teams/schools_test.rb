@@ -86,7 +86,9 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
         assert_selector "#school_name_error",
                         text: I18n.t("activemodel.errors.models.dtos/school/school_input.attributes.name.taken")
         fill_in "school[name]", with: "Lycée Classique d'Abidjan"
-        select I18n.t("teams.schools.cycles.first"), from: "school[cycle]"
+        assert_no_select "school[cycle]"
+        assert_checked_field I18n.t("teams.schools.cycles.both")
+        choose I18n.t("teams.schools.cycles.first")
         select "Bouaké", from: "school[drena_public_id]"
         click_on I18n.t("teams.schools.edit.submit")
       end
@@ -171,6 +173,33 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       assert_field "filter_drena", with: @abidjan.public_id
     end
     assert_current_path schools_path(drena: @abidjan.public_id)
+  end
+
+  test "CR-04, CR-06, CR-07: the cycle of a school is a radio group set to its saved value, chosen by keyboard, even on a phone" do
+    school = create_school(drena: @abidjan, name: "Collège Moderne", cycle: "first")
+
+    with_mobile_viewport do
+      visit schools_path
+      assert_selector "select#filter_cycle option:checked", text: I18n.t("teams.schools.filters.all_cycle")
+      assert_no_selector "#schools-filters input[type=radio]"
+
+      assert_no_page_reload do
+        click_menu_action("#school_#{school.public_id}", I18n.t("#{row_scope}.edit"))
+        within "turbo-frame#modal dialog[open]" do
+          within("fieldset#school_cycle", text: Dtos::School::SchoolInput.human_attribute_name(:cycle)) do
+            assert_checked_field I18n.t("teams.schools.cycles.first")
+            options = all("label", count: 2)
+            assert(options.all? { |option| option.native.rect.height >= 48 })
+          end
+          find_field(I18n.t("teams.schools.cycles.first")).send_keys(:down)
+          assert_checked_field I18n.t("teams.schools.cycles.both")
+          click_on I18n.t("teams.schools.edit.submit")
+        end
+        assert_toast I18n.t("teams.schools.update.done", name: "Collège Moderne")
+      end
+      assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+    end
+    assert_equal "both", Orm::School.find_by!(public_id: school.public_id).cycle
   end
 
   test "on a phone, neither the list nor a school's page scrolls sideways" do

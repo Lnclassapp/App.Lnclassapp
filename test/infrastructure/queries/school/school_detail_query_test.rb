@@ -8,18 +8,20 @@ module Queries
       setup do
         @drena = create_drena(name: "Abidjan 1")
         @school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", sigle: "LCA", school_type: "public",
-                                cycle: "both", status: "active")
+                                cycle: "both", status: "active", school_code: "k7m4qz")
         @sixth = create_level(name: "6ème", position: 1, cycle: "first")
         @final = create_level(name: "Tle", position: 7)
       end
 
       def detail(public_id: @school.public_id) = SchoolDetailQuery.new.call(public_id:, school_year: YEAR)
 
-      test "SC-05 : l'en-tête de l'établissement, avec sa DRENA" do
+      test "SC-05, CE-06 : l'en-tête de l'établissement, avec sa DRENA et son code" do
         school = detail
 
-        assert_equal [ @school.public_id, "Lycée Classique d'Abidjan", "LCA", "Abidjan 1", "public", "both", "active", YEAR ],
-                     school.to_h.values_at(:public_id, :name, :sigle, :drena_name, :school_type, :cycle, :status, :school_year)
+        assert_equal [ @school.public_id, "Lycée Classique d'Abidjan", "LCA", "Abidjan 1", "public", "both", "active", YEAR,
+                       "k7m4qz" ],
+                     school.to_h.values_at(:public_id, :name, :sigle, :drena_name, :school_type, :cycle, :status, :school_year,
+                                           :school_code)
       end
 
       test "SC-05 : les classes de l'année, groupées par niveau dans l'ordre du référentiel, avec code, effectif et enseignants" do

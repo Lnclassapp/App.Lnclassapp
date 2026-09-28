@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
-# Rôle : inscrit un enseignant (rôle imposé), le rattache à son école principale et ouvre sa session, en une transaction
-# ADR  : 0026, 0028, 0030, 0050 · UDR : 0024
+# Rôle : inscrit un enseignant (rôle imposé), le rattache à l'établissement de son code et ouvre sa session, en une transaction
+# ADR  : 0026, 0028, 0030, 0050, 0057 · UDR : 0024, 0044
 module UseCases
   module Identity
     class RegisterTeacher
@@ -17,10 +17,9 @@ module UseCases
         end
       end
 
-      def initialize(registrations:, schools:, drenas:, taxonomy:, sessions:, policy:, transaction:, digest_key:, clock:)
+      def initialize(registrations:, schools:, taxonomy:, sessions:, policy:, transaction:, digest_key:, clock:)
         @registrations = registrations
         @schools = schools
-        @drenas = drenas
         @taxonomy = taxonomy
         @sessions = sessions
         @policy = policy
@@ -36,9 +35,9 @@ module UseCases
         return allowed if allowed.failure?
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) unless dto.valid?
 
-        school = @schools.find_by_public_id(public_id: dto.school_public_id)
+        school = @schools.find_by_school_code(school_code: dto.school_code)
         material = @taxonomy.find_material(slug: dto.material_slug)
-        errors = fact_errors(@drenas.find_by_public_id(public_id: dto.drena_public_id), school, material)
+        errors = fact_errors(school, material)
         return Shared::Result.failure(:invalid, errors:) if errors.any?
 
         register(dto, school, material, ip, user_agent)
@@ -48,19 +47,12 @@ module UseCases
 
       private
 
-      # Une DRENA inconnue ne contient aucun établissement : seule la DRENA est signalée.
-      def fact_errors(drena, school, material)
+      # Code inconnu, remplacé, ou d'un établissement inactif ou en brouillon : la même erreur, rien n'est révélé.
+      def fact_errors(school, material)
         errors = {}
-        errors[:drena_public_id] = [ :inclusion ] if drena.nil?
-        errors[:school_public_id] = [ :inclusion ] if drena && !open_in?(school, drena)
+        errors[:school_code] = [ :inclusion ] unless school&.active?
         errors[:material_slug] = [ :inclusion ] if material.nil?
         errors
-      end
-
-      def open_in?(school, drena)
-        return false if school.nil?
-
-        school.active? && school.drena_id == drena.id
       end
 
       def register(dto, school, material, ip, user_agent)

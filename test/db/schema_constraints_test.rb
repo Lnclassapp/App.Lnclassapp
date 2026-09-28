@@ -21,7 +21,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "pin_recovery_codes" => [ [ %w[user_id], "used_atISNULLANDrevoked_atISNULL" ] ],
     "invitations" => [ [ %w[token_digest], nil ], [ %w[kind contact], "accepted_atISNULLANDrevoked_atISNULL" ] ],
     "drenas" => [ [ %w[name], nil ] ],
-    "schools" => [ [ %w[drena_id name], nil ] ],
+    "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ] ],
     "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
     "series" => [ [ %w[name], nil ] ],
@@ -82,6 +82,32 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
   test "the join code column is exactly as long as the generated code" do
     assert_equal JOIN_CODE_LENGTH, connection.columns("classrooms").find { |column| column.name == "join_code" }.limit
+  end
+
+  test "CE-09: every school has a school code of exactly 6 symbols, unique, in the documented alphabet (ADR-0057)" do
+    column = connection.columns("schools").find { |candidate| candidate.name == "school_code" }
+
+    assert_equal [ Entities::School::SchoolCode::LENGTH, false ], [ column.limit, column.null ]
+    assert_match(/school_code.*\[a-hj-np-z2-9\]\{6\}/, check_expressions("schools"))
+    assert connection.columns("schools").find { |candidate| candidate.name == "school_code_rotated_at" }.null
+  end
+
+  test "CE-09: the database refuses a school without code, with a malformed one or with one already taken" do
+    drena_id = create_drena.id
+    insert = lambda do |code, name|
+      connection.execute("INSERT INTO schools (public_id, drena_id, name, school_type, school_code, created_at, updated_at) " \
+                         "VALUES ('#{SecureRandom.base58(14)}', #{drena_id}, '#{name}', 'public', #{code}, now(), now())")
+    end
+    insert.call("'k7m4qz'", "Lycée A")
+
+    {
+      ActiveRecord::NotNullViolation => [ "NULL", "Lycée B" ],
+      ActiveRecord::CheckViolation => [ "'K7M4QZ'", "Lycée C" ],
+      ActiveRecord::RecordNotUnique => [ "'k7m4qz'", "Lycée D" ]
+    }.each do |error, (code, name)|
+      assert_raises(error, code) { connection.transaction(requires_new: true) { insert.call(code, name) } }
+    end
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { insert.call("'k7m4q0'", "Lycée E") } }
   end
 
   test "every exposed table has a 14 character public_id with a unique index" do

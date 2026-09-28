@@ -65,3 +65,12 @@ Un enseignant s'inscrit seul, depuis `/teacher-signup`. Il doit choisir son éta
 - Aucun sélecteur « école + niveau → classe » n'existe dans l'application (ID-08) : l'élève rejoint sa classe par son code (UDR-0009).
 - Le formulaire « Prepa BAC — Ressources Enseignants » (TR-17) n'est pas repris : l'inscription enseignant n'a qu'une entrée.
 - Tout autre écran qui aurait besoin des établissements d'une DRENA réutilise l'adresse `/drenas/:drena_public_id/schools`, en frame ou en JSON, plutôt qu'un nouveau point d'accès.
+
+## Amendement du 2026-09-28 — code d'établissement
+
+*Chantier [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md), [UDR-0044](0044-inscription-enseignant-par-code-d-etablissement.md), [ADR-0057](../adr/0057-code-d-etablissement.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- La rubrique « Établissement et matière » n'a plus de DRENA ni de liste d'établissements : un champ « Code d'établissement », puis la matière. Les §2.2 à §2.4 (frame `schools`, DRENA voyageant avec la liste, formulaire `GET` sans JavaScript) et les règles correspondantes du §3 ne s'appliquent plus à l'inscription.
+- `/e/<code>` ouvre la même page, l'établissement déjà trouvé (bandeau), limitée à 10 requêtes par minute ; un code refusé y répond 404.
+- `/drenas/:drena_public_id/schools` reste servi (frame et JSON, §4), sans consommateur dans l'inscription.
+

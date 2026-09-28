@@ -172,6 +172,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
   end
 
+
   test "CN-01, UDR-0046: the « Classes par niveau » block counts each level and series; its sum is the page's and the list's" do
     referential = seed_referential
     school = create_school(drena: @drena, name: "Lycée Moderne de Cocody", cycle: "both")
@@ -222,6 +223,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#school_level_classrooms", text: /#{I18n.t('teams.level_classrooms.block.empty_title')}/
     assert_select "#school_level_classrooms_inactive", 0
+
   end
 
   test "a draft school page offers no « Ajouter une classe » until the school is activated" do
@@ -262,7 +264,15 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='school[sigle]'][value=LM][maxlength='#{Entities::School::School::SIGLE_MAX}']"
     assert_select "select[name='school[school_type]'] option:not([value=''])", 3
     assert_select "select[name='school[school_type]'] option[selected][value=mixed]", text: I18n.t("school_types.mixed")
-    assert_select "select[name='school[cycle]'] option[selected][value=first]"
+    assert_select "select[name='school[cycle]']", 0
+    assert_select "fieldset#school_cycle > legend", text: /#{Dtos::School::SchoolInput.human_attribute_name(:cycle)}/
+    assert_select "fieldset#school_cycle label.min-h-tap", 2
+    assert_select "label", text: I18n.t("teams.schools.cycles.first") do
+      assert_select "input#school_cycle_first[type=radio][name='school[cycle]'][value=first][checked][required]"
+    end
+    assert_select "label", text: I18n.t("teams.schools.cycles.both") do
+      assert_select "input#school_cycle_both[type=radio][value=both]:not([checked])"
+    end
     assert_select "select[name='school[status]'] option[selected][value=draft]"
     assert_select "#school-form", text: /#{I18n.t('teams.schools.form.classrooms_hint')}/
   end
@@ -318,7 +328,9 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-frame#modal dialog#school-modal form#school-form"
     assert_select "#school_name_error", text: error_message(:name, :blank)
-    assert_select "#school_cycle_error", text: error_message(:cycle, :inclusion)
+    assert_select "fieldset#school_cycle > #school_cycle_error", text: error_message(:cycle, :inclusion)
+    assert_select "input[name='school[cycle]'][checked]", 0
+    assert_select "input[name='school[cycle]'][aria-invalid=true][aria-describedby=school_cycle_error]", 2
     assert_select "input[name='school[sigle]'][value=LCA]"
 
     patch school_path(school.public_id), params: school_params(name: "Lycée Moderne")
