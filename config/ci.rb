@@ -45,9 +45,15 @@ CI_PLAN = CiPlan.define do
 
   # Real browser, never rack_test (configuration.md §4.3). Partial run: no threshold (§4.1).
   # -v prints each test's duration: script/ci/record_timings rebuilds the timings of the split from any log.
+  # A part names its files, and `bin/rails test <files>` skips test:prepare (the asset build) and runs fewer than
+  # 50 tests in a single process: the part builds the assets itself and asks for one worker per CPU.
   sharded "system", files: CiPlan.files("test/system/**/*_test.rb") do |files, part|
-    tests = part ? "test #{files.join(' ')}" : "test:system"
-    step [ "Tests: System (headless Chrome)", part ].compact.join(" "), "bin/check-chrome && env COVERAGE=0 bin/rails #{tests} -v"
+    if part
+      step "Tests: System (headless Chrome) #{part}", "bin/check-chrome && bin/rails test:prepare && " \
+           "env COVERAGE=0 PARALLEL_WORKERS=$(nproc) bin/rails test #{files.join(' ')} -v"
+    else
+      step "Tests: System (headless Chrome)", "bin/check-chrome && env COVERAGE=0 bin/rails test:system -v"
+    end
   end
 
   group "seeds", db: true do
