@@ -61,7 +61,10 @@ Aucune question ne reste ouverte pour le porteur.
 
 ## Ce qui a dérapé
 
-- …
+- **La date.** Le plan à 72 h du 2026-09-18 visait une mise en ligne ferme au 2026-09-22 ; la V1 est passée en production le **2026-09-27** (PR #33, complétée par #36). Le périmètre avait entre-temps doublé : référentiels, établissements et imports sont entrés en V1 le 2026-09-25 (décisions du porteur, [journal du programme](../refonte-application/journal.md#2026-09-25--décisions-de-fondation-acceptées-en-bloc)).
+- **CL-02 (modifier une classe) n'est pas livrée.** Aucun lot ne l'avait en charge : ni S2 (fiche de l'établissement), ni D (classes de l'enseignant). Elle part en V3, chantier `vie-de-la-classe` ([feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)).
+- **La recette `Staging` par un rôle distinct n'a pas précédé la mise en production.** Les suites livrées le 2026-09-28 (profil, génération, pilotage…) sont passées avant elle. Elle est menée le 2026-09-28 ; son rapport sera consigné ici.
+- **Deux correctifs après la mise en production** : menu du compte des accueils (#34) et réémission de l'invitation de démarrage (#35).
 
 ## Ce qu'on a appris sur la codebase
 
@@ -82,12 +85,15 @@ Aucune question ne reste ouverte pour le porteur.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Espace des codes d'adhésion (884 736) consommé tant que les classes archivées gardent leur code | Libération des codes à l'archivage de l'année prévue en V3 | V3 (ADR-0041) |
+| CL-02 : modifier une classe | Aucun lot ne la portait ; l'ajout et le retrait de classes sont livrés à part (`classes-par-niveau`, ADR-0059) | V3, `vie-de-la-classe` |
+| Recette `Staging` par un rôle distinct | Menée après la mise en production | En cours le 2026-09-28 ; rapport à consigner ici |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-09-27 (production, lnclass.com) · clos le 2026-09-28 |
+| **PR** | Vers `Develop` : #8 (plan), #11, #13, #14, #15, #16, #28 (les lots, dont ceux du Lot E : #23 à #26, fusionnés dans `feature/boucle-pedagogique`) · vers `main` : **#33** et **#36** · correctifs après la mise en production : #34, #35 |
+| **ADR produits** | Aucun nouvel ADR. Amendements : ADR-0027 (erratum `TransactionPort`), ADR-0028 (policies, retour du porteur), ADR-0030 (import seul, classes générées), ADR-0034, ADR-0039 (erratum, import bloqué libéré après 10 min), ADR-0043 (seuil de résolution à 75 %), ADR-0049 (nonce par session), ADR-0051 (éditeur riche), ADR-0052 (seed d'identité avant chaque déploiement, #31), ADR-0054 ; ligne Hotwire ajoutée à l'ADR-0009 |
+| **UDR produits** | UDR-0009 à UDR-0040 (32 UDR d'écran, acceptées le 2026-09-27). UDR-0005 et UDR-0006 viennent du Lot 0c, au titre du programme (F-09, F-31) |
+| **Recette `Staging`** | En cours le 2026-09-28, par un rôle distinct ; la case du [§9 de la feuille de route](../refonte-application/feuille-de-route.md#9-portes-de-sortie-du-programme) sera cochée avec son rapport |
