@@ -1,0 +1,258 @@
+# 🧠 DOMAINE · Entities::Identity::ImageHeader
+# Rôle : lit une image JPEG, PNG ou WebP entière sans bibliothèque (format réel, dimensions, métadonnées) et retire ses métadonnées
+# ADR  : 0060
+module Entities
+  module Identity
+    # Fail closed : un fichier n'est une image que si tout son flux est bien formé — le JPEG jusqu'à EOI, le PNG jusqu'à
+    # IEND avec des CRC justes, le WebP dans sa longueur RIFF. Sinon read rend nil : aucune partie du fichier ne peut
+    # échapper à la lecture, donc au retrait des métadonnées.
+    module ImageHeader
+      Facts = Data.define(:format, :width, :height, :metadata)
+      # Une partie du fichier : segment JPEG, chunk PNG ou WebP. at : son premier octet (remplissage compris) ; size : sa
+      # longueur totale ; data : le premier octet après le marqueur, ou après l'en-tête du chunk.
+      Part = Data.define(:type, :at, :size, :data)
+
+      JPEG_SIGNATURE = "\xFF\xD8".b.freeze
+      PNG_SIGNATURE = "\x89PNG\r\n\x1A\n".b.freeze
+      VP8_START_CODE = "\x9D\x01\x2A".b.freeze
+      # Segments d'image SOF0 à SOF15, sauf DHT (C4), JPG (C8) et DAC (CC) : hauteur puis largeur.
+      JPEG_FRAMES = ((0xC0..0xCF).to_a - [ 0xC4, 0xC8, 0xCC ]).freeze
+      JPEG_SCAN = 0xDA
+      JPEG_END = 0xD9
+      # Hors d'un scan : 0x00, TEM, RSTn ou un second SOI ne sont pas des marqueurs de segment.
+      JPEG_UNEXPECTED = [ 0x00, 0x01, *(0xD0..0xD8) ].freeze
+      # Liste blanche : seuls les segments et chunks qui dessinent l'image restent, réécrits dans leur forme standard
+      # quand ils ont des champs libres. Tout le reste part, quels que soient son nom ou sa signature — un profil ICC
+      # (APP2, iCCP, ICCP) aussi : son contenu est libre, il a transporté un secret dans la contre-épreuve de la PR #50.
+      # JPEG : SOFn, DHT, DAC, DQT, DRI, DNL, SOS (avec son scan), EOI ; JFIF (APP0) et Adobe (APP14) réécrits.
+      JPEG_KEPT = [ *JPEG_FRAMES, 0xC4, 0xCC, 0xDB, 0xDD, 0xDC, JPEG_SCAN, JPEG_END ].freeze
+      JPEG_JFIF = 0xE0
+      JPEG_ADOBE = 0xEE
+      # JFIF 1.01, sans unité, rapport 1:1, sans vignette ; Adobe version 100, drapeaux nuls, puis la transformée d'origine.
+      JFIF_SEGMENT = "\xFF\xE0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00".b.freeze
+      ADOBE_PREFIX = "\xFF\xEE\x00\x0EAdobe\x00\x64\x00\x00\x00\x00".b.freeze
+      PNG_KEPT = %w[IHDR PLTE IDAT IEND tRNS gAMA cHRM sRGB].freeze
+      WEBP_KEPT = [ "VP8 ", "VP8L", "VP8X", "ALPH" ].freeze
+      WEBP_IMAGES = [ "VP8 ", "VP8L" ].freeze
+      # Seul le drapeau de transparence (0x10) de l'en-tête étendu VP8X reste : ni ICC, ni Exif, ni XMP, ni animation.
+      WEBP_ALPHA_FLAG = 0x10
+
+      module_function
+
+      # bytes : String → Facts | nil (ni JPEG, ni PNG, ni WebP, ou flux incomplet ou mal formé)
+      def read(bytes)
+        bytes = bytes.to_s.b
+        case format_of(bytes)
+        when :jpeg then jpeg(bytes)
+        when :png then png(bytes)
+        when :webp then webp(bytes)
+        end
+      end
+
+      # Les seules parties de la liste blanche, dans leur forme standard. Un fichier illisible est rendu tel quel : read
+      # l'a déjà refusé, il n'est jamais stocké.
+      def strip(bytes)
+        bytes = bytes.to_s.b
+        parts = parts_of(bytes)
+        return bytes if parts.nil?
+
+        stripped = [ bytes.byteslice(0, parts.first.at), *parts.filter_map { kept(bytes, it) } ].join.b
+        format_of(bytes) == :webp ? fix_webp(stripped) : stripped
+      end
+
+      def format_of(bytes)
+        if bytes.start_with?(JPEG_SIGNATURE) then :jpeg
+        elsif bytes.start_with?(PNG_SIGNATURE) then :png
+        elsif bytes.start_with?("RIFF") && bytes.byteslice(8, 4) == "WEBP" then :webp
+        end
+      end
+
+      def parts_of(bytes)
+        case format_of(bytes)
+        when :jpeg then jpeg_parts(bytes)
+        when :png then png_parts(bytes)
+        when :webp then webp_parts(bytes)
+        end
+      end
+
+      # Ce qui reste d'une partie après le filtre : ses octets, sa forme standard, ou nil.
+      def kept(bytes, part)
+        raw = bytes.byteslice(part.at, part.size)
+        case format_of(bytes)
+        when :jpeg then jpeg_kept(bytes, part)
+        when :png then raw if PNG_KEPT.include?(part.type)
+        else raw if WEBP_KEPT.include?(part.type)
+        end
+      end
+
+      # Sans les octets de remplissage : le segment commence à son marqueur.
+      def jpeg_kept(bytes, part)
+        segment = bytes.byteslice(part.data - 2, part.at + part.size - part.data + 2)
+        case part.type
+        when JPEG_JFIF then JFIF_SEGMENT if segment.byteslice(4, 5) == "JFIF\0"
+        when JPEG_ADOBE then ADOBE_PREFIX + segment.byteslice(15, 1) if segment.byteslice(4, 5) == "Adobe" && segment.bytesize == 16
+        else segment if JPEG_KEPT.include?(part.type)
+        end
+      end
+
+      # Une partie retirée ou réécrite signale des métadonnées.
+      def metadata?(bytes, part) = kept(bytes, part) != bytes.byteslice(part.at, part.size)
+
+      # Le premier SOF, avant le premier scan, donne la taille.
+      def jpeg(bytes)
+        parts = jpeg_parts(bytes)
+        return if parts.nil?
+
+        frame = parts.index { JPEG_FRAMES.include?(it.type) }
+        scan = parts.index { it.type == JPEG_SCAN }
+        return unless frame && scan && frame < scan
+
+        height, width = fields(bytes, parts[frame].data + 3, "nn", 4)
+        facts(bytes, :jpeg, [ width, height ], parts)
+      end
+
+      def png(bytes)
+        parts = png_parts(bytes)
+        facts(bytes, :png, fields(bytes, parts.first.data, "NN", 8), parts) if parts
+      end
+
+      # Une seule image (VP8 ou VP8L) : une animation n'est pas une photo. L'en-tête étendu, s'il existe, vient en premier
+      # et donne la taille ; sinon, l'image la donne.
+      def webp(bytes)
+        parts = webp_parts(bytes)
+        return if parts.nil?
+
+        images = parts.select { WEBP_IMAGES.include?(it.type) }
+        extended = parts.index { it.type == "VP8X" }
+        return unless images.one? && extended.to_i.zero?
+
+        facts(bytes, :webp, webp_size(bytes, extended ? parts.first : images.first), parts)
+      end
+
+      # Taille lue dans l'en-tête étendu (VP8X), sans perte (VP8L) ou avec perte (VP8 ), toujours dans le chunk lui-même.
+      def webp_size(bytes, part)
+        payload = bytes.byteslice(part.data, part.size - 8)
+        case part.type
+        when "VP8X"
+          width_low, width_high, height_low, height_high = fields(payload, 4, "vCvC", 6)
+          [ width_low + (width_high << 16) + 1, height_low + (height_high << 16) + 1 ] if height_high
+        when "VP8L"
+          signature, bits = fields(payload, 0, "CV", 5)
+          [ (bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1 ] if signature == 0x2F
+        else vp8_size(payload)
+        end
+      end
+
+      # Image clé seulement, dont la première partition tient dans le chunk.
+      def vp8_size(payload)
+        low, high = fields(payload, 0, "vC", 3)
+        return if high.nil?
+
+        tag = low | (high << 16)
+        return unless tag.nobits?(1) && 10 + (tag >> 5) <= payload.bytesize && payload.byteslice(3, 3) == VP8_START_CODE
+
+        fields(payload, 6, "vv", 4).map { it & 0x3FFF }
+      end
+
+      def facts(bytes, format, size, parts)
+        width, height = size
+        return unless size&.all? { it.to_i.positive? }
+
+        Facts.new(format:, width:, height:, metadata: parts.any? { metadata?(bytes, it) })
+      end
+
+      # Tout le fichier, segment par segment, scans compris, jusqu'à EOI qui doit le terminer. Octets de remplissage 0xFF
+      # acceptés avant un marqueur (T.81 § B.1.1.2) ; tout autre octet hors segment rend le fichier illisible.
+      def jpeg_parts(bytes)
+        parts = []
+        at = 2
+        loop do
+          return unless bytes.getbyte(at) == 0xFF
+
+          marker_at = at
+          marker_at += 1 while bytes.getbyte(marker_at + 1) == 0xFF
+          marker = bytes.getbyte(marker_at + 1)
+          return if marker.nil? || JPEG_UNEXPECTED.include?(marker)
+
+          stop = jpeg_segment_end(bytes, marker, marker_at + 2)
+          return if stop.nil?
+
+          parts << Part.new(type: marker, at:, size: stop - at, data: marker_at + 2)
+          return (parts if stop == bytes.bytesize) if marker == JPEG_END
+
+          at = stop
+        end
+      end
+
+      # Fin du segment : EOI n'a pas de longueur ; un scan continue par ses données entropiques jusqu'au prochain
+      # marqueur (0xFF suivi d'autre chose que 0x00, bourrage, ou RSTn, remise à zéro).
+      def jpeg_segment_end(bytes, marker, data)
+        return data if marker == JPEG_END
+
+        length = fields(bytes, data, "n", 2)&.first
+        return unless length && length >= 2 && data + length <= bytes.bytesize
+        return data + length unless marker == JPEG_SCAN
+
+        at = data + length
+        while (at = bytes.index("\xFF".b, at))
+          following = bytes.getbyte(at + 1)
+          return at unless following.nil? || following.zero? || (0xD0..0xD7).cover?(following)
+          return if following.nil?
+
+          at += 2
+        end
+      end
+
+      # Chunks PNG (longueur, type, données, CRC) : IHDR d'abord, IDAT au moins, IEND à la toute fin.
+      def png_parts(bytes)
+        parts = chunks(bytes, 8) do |at|
+          length, type = fields(bytes, at, "Na4", 8)
+          next unless length && type.match?(/\A[A-Za-z]{4}\z/) && at + 12 + length <= bytes.bytesize
+          next unless fields(bytes, at + 8 + length, "N", 4).first == Zlib.crc32(bytes.byteslice(at + 4, 4 + length))
+
+          Part.new(type:, at:, size: 12 + length, data: at + 8)
+        end
+        parts if parts&.first&.type == "IHDR" && parts.first.size == 25 && parts.last.type == "IEND" &&
+                 parts.any? { it.type == "IDAT" }
+      end
+
+      # Chunks RIFF (type, longueur, données, bourrage après une longueur impaire), exactement dans la longueur annoncée.
+      def webp_parts(bytes)
+        return unless fields(bytes, 4, "V", 4).first == bytes.bytesize - 8
+
+        chunks(bytes, 12) do |at|
+          type, length = fields(bytes, at, "a4V", 8)
+          next if length.nil?
+
+          size = 8 + length + (length % 2)
+          Part.new(type:, at:, size:, data: at + 8) if at + size <= bytes.bytesize
+        end
+      end
+
+      # Parties successives du bloc jusqu'à la fin exacte du fichier ; nil dès qu'une partie est illisible.
+      def chunks(bytes, at)
+        parts = []
+        while at < bytes.bytesize
+          part = yield(at)
+          return if part.nil?
+
+          parts << part
+          at += part.size
+        end
+        parts
+      end
+
+      # Le conteneur RIFF annonce sa longueur, et VP8X les chunks qu'il contient : les deux sont recalculés.
+      def fix_webp(body)
+        body.setbyte(20, body.getbyte(20) & WEBP_ALPHA_FLAG) if body.byteslice(12, 4) == "VP8X"
+        body[4, 4] = [ body.bytesize - 8 ].pack("V")
+        body
+      end
+
+      def fields(bytes, at, directive, length)
+        slice = bytes.byteslice(at, length)
+        slice.unpack(directive) if slice.to_s.bytesize == length
+      end
+    end
+  end
+end

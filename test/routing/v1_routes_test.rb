@@ -4,8 +4,9 @@ require "test_helper"
 # (plan boucle-pedagogique §0a.4). No numeric :id is ever exposed (ADR-0029).
 class V1RoutesTest < ActionDispatch::IntegrationTest
   FROZEN = %i[student_home_path student_classroom_path teacher_home_path teacher_classrooms_path team_home_path
-              courses_path session_path schools_path profile_path].freeze
-  NOT_IN_V1 = %i[team_dashboard_path].freeze
+              courses_path session_path schools_path profile_path team_dashboard_path].freeze
+  # team_dashboard_path is drawn in V4 (pilotage-equipe, UDR-0049): no shell destination of these roles is left undrawn.
+  NOT_IN_V1 = %i[].freeze
 
   def helpers = Rails.application.routes.url_helpers
 
@@ -62,6 +63,15 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     assert_equal "/sessions/abcdefghijkmno/result", helpers.exercise_session_result_path("abcdefghijkmno")
     assert_equal "/teams/levels/tle/series/d", helpers.level_series_path("tle", "d")
     assert_equal "/drenas/abcdefghijkmno/schools", helpers.drena_schools_path("abcdefghijkmno")
+  end
+
+  # ADR-0057: a teacher signs up by the code of the school, typed or carried by /e/<code>; the team regenerates it.
+  test "the school code has its short sign-up link and its regeneration under the school" do
+    assert_equal "/e/k7m4qz", helpers.school_code_signup_path("k7m4qz")
+    assert_equal({ controller: "identity/teacher_registrations", action: "with_code" }, first_match("/e/k7m4qz"))
+    assert_nil first_match("/e/k7m4qz", method: "POST")
+    assert_equal "/teams/schools/abcdefghijkmno/code", helpers.school_code_path("abcdefghijkmno")
+    assert_equal({ controller: "teams/school_codes", action: "update" }, first_match("/teams/schools/abcdefghijkmno/code", method: "PATCH"))
   end
 
   test "no application route contains a numeric :id" do

@@ -1,0 +1,26 @@
+# The runner's toolchain, shared by every job of .github/workflows/ci.yml. It prepares tools only:
+# what the job checks is in config/ci.rb, played by bin/ci (ADR-0064).
+name: Toolchain
+description: Ruby with its bundle, Node with Yarn, and libpq for the pg gem.
+
+runs:
+  using: composite
+  steps:
+    # The pg gem compiles against libpq-dev only when the bundle cache misses; the ubuntu image usually ships it.
+    - name: libpq-dev (only if missing)
+      shell: bash
+      run: dpkg -s libpq-dev >/dev/null 2>&1 || { sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev; }
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Set up Node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .node-version
+
+    - name: Enable Yarn (corepack)
+      shell: bash
+      run: corepack enable

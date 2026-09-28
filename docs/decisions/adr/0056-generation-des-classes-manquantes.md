@@ -91,3 +91,11 @@ Orm::School.where(status: GENERATION_STATUSES).where(id: (after_id + 1)..).where
 
 - **Amende l'ADR-0030** (amendement du 2026-09-25, « Quand les classes par défaut sont générées ») : en plus de l'import, les classes par défaut d'un établissement **sans aucune classe de l'année** peuvent être générées après coup par l'équipe. Un établissement qui a des classes n'est toujours jamais régénéré.
 - **Complète l'ADR-0039** : `import_reports.kind` accepte `classrooms`, rapport sans fichier ni checksum, suivi par le même écran ; un seul en cours, libéré après 10 minutes comme les autres types.
+
+## Amendement du 2026-09-28 — barème en base
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), [ADR-0058](0058-bareme-des-classes-en-base.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- La génération lit le **barème en base** (`Ports::Classroom::ClassroomPlanRepositoryPort#plan`) une seule fois, au démarrage, avec le référentiel : un changement du barème pendant une génération s'applique à la suivante. Aucune requête de plus par lot ni par établissement.
+- `skipped_levels` / `skipped_series` comptent désormais les lignes **non définies** du barème (et les niveaux du second cycle sans série) ; un référentiel vide ne compte plus aucun niveau sauté — le compteur « Sans classe à générer » le dit.
+- Le bouton « Générer les classes manquantes » passe dans le menu « Classes » de l'en-tête de l'écran Établissements, à droite de l'import, avec l'accès au barème (UDR-0043 et UDR-0045, amendements du 2026-09-28). La confirmation, la route et le suivi ne changent pas.

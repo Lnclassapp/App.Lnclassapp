@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::GenerateMissingClassrooms
 # Rôle : donne leurs classes par défaut aux établissements sans classe de l'année, par lots, et tient le rapport
-# ADR  : 0028, 0030, 0039, 0041, 0056
+# ADR  : 0028, 0030, 0039, 0041, 0056, 0058
 module UseCases
   module Classroom
     class GenerateMissingClassrooms
@@ -9,13 +9,15 @@ module UseCases
       Plan = Data.define(:school, :rows, :skipped)
 
       # policy : Policies::School::ManageSchoolPolicy, revérifiée pour l'auteur au démarrage (ADR-0028) ;
+      # classroom_plan : le barème, lu une fois au démarrage (ADR-0058) ;
       # random : tirage des codes d'adhésion ; batch_size : établissements par transaction. Injectables pour les tests.
-      def initialize(reports:, schools:, classrooms:, taxonomy:, users:, audit_log:, transaction:, policy:, clock:,
-                     random: SecureRandom, batch_size: BATCH_SIZE)
+      def initialize(reports:, schools:, classrooms:, taxonomy:, classroom_plan:, users:, audit_log:, transaction:, policy:,
+                     clock:, random: SecureRandom, batch_size: BATCH_SIZE)
         @reports = reports
         @schools = schools
         @classrooms = classrooms
         @taxonomy = taxonomy
+        @classroom_plan = classroom_plan
         @users = users
         @audit_log = audit_log
         @transaction = transaction
@@ -59,6 +61,7 @@ module UseCases
         at = @clock.now
         school_year = Entities::Classroom::SchoolYear.current(at.to_date)
         @lookup = @taxonomy.lookup
+        @plan = @classroom_plan.plan
         @taken_codes = @classrooms.taken_join_codes
         after_id = 0
         done = 0
@@ -73,7 +76,7 @@ module UseCases
       end
 
       def plan_for(school, school_year)
-        generation = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup: @lookup)
+        generation = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup: @lookup, plan: @plan)
         rows = generation.rows.map { it.merge(school_id: school.id, school_year:) }
         Plan.new(school:, rows:, skipped: generation.skipped)
       end

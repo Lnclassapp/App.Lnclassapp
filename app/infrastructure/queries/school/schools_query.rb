@@ -1,12 +1,12 @@
 # 🔌 INFRA · Queries::School::SchoolsQuery
 # Rôle : liste nationale des établissements (SC-04) : filtres DRENA, type, cycle, statut et nom, 50 par page avec le total
-# ADR  : 0026, 0030 · UDR : 0036
+# ADR  : 0026, 0030, 0057 · UDR : 0036, 0044
 module Queries
   module School
     class SchoolsQuery
       PER_PAGE = 50
       Row = Data.define(:public_id, :name, :sigle, :drena_public_id, :drena_name, :school_type, :cycle, :status,
-                        :classrooms_count, :teachers_count)
+                        :classrooms_count, :teachers_count, :school_code)
       Page = Data.define(:rows, :total_count, :page, :pages)
 
       # La recherche ignore casse et accents sans extension PostgreSQL : les deux côtés passent par la même table.
@@ -19,7 +19,7 @@ module Queries
         scope = filtered(drena:, school_type:, cycle:, status:, search:)
         total_count = scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
-        page = page.to_i.clamp(1, pages)
+        page = page.to_s.to_i.clamp(1, pages) # to_s : page[]=2 ou page[a]=1 donnent un tableau ou un hash
         rows = scope.order(:name, :id).offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck(*columns(school_year))
         Page.new(rows: rows.map { |values| Row.new(*values) }, total_count:, page:, pages:)
       end
@@ -47,7 +47,7 @@ module Queries
           "schools.cycle", "schools.status",
           Arel.sql(Orm::School.sanitize_sql_array([ "(SELECT COUNT(*) FROM classrooms WHERE classrooms.school_id = schools.id " \
                                                     "AND classrooms.school_year = ?)", school_year ])),
-          Arel.sql("(SELECT COUNT(*) FROM teacher_schools WHERE teacher_schools.school_id = schools.id)") ]
+          Arel.sql("(SELECT COUNT(*) FROM teacher_schools WHERE teacher_schools.school_id = schools.id)"), "schools.school_code" ]
       end
 
       def current_school_year = Entities::Classroom::SchoolYear.current(Date.current)

@@ -22,9 +22,11 @@ class NavigationHelperTest < ActionView::TestCase
   test "nav_path resolves a drawn route and leaves the others inactive" do
     courses = navigation_for(:student)[1]
     dashboard = navigation_for(:team).last
+    school_admin_classrooms = navigation_for(:school_admin)[1]
 
     assert_equal "/courses", nav_path(courses)
-    assert_nil nav_path(dashboard)
+    assert_equal "/teams/dashboard", nav_path(dashboard)
+    assert_nil nav_path(school_admin_classrooms)
   end
 
   test "a destination is active by its URL or by the key the view declares" do
@@ -57,11 +59,13 @@ class NavigationHelperTest < ActionView::TestCase
   end
 
   test "nav_link renders an idle, inactive bottom link when the route is missing" do
-    self.rendered = self.class.content_class.new(nav_link(navigation_for(:team).last, style: :bottom))
+    # The team dashboard is drawn since V4 (UDR-0049): the direction's destinations are the ones still undrawn.
+    teachers = navigation_for(:school_admin).find { it.key == :teachers }
+    self.rendered = self.class.content_class.new(nav_link(teachers, style: :bottom))
 
     assert_select "a:not([href])[aria-disabled=true]:not([aria-current]).opacity-50.text-2xs",
-                  text: /#{I18n.t("shared.navigation.dashboard")}/
-    assert_raises(KeyError) { nav_link(navigation_for(:team).last, style: :drawer) }
+                  text: /#{I18n.t("shared.navigation.teachers")}/
+    assert_raises(KeyError) { nav_link(teachers, style: :drawer) }
   end
 
   test "home_path_for falls back to the root when the home route is missing" do

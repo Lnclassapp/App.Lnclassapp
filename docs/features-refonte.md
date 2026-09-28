@@ -290,9 +290,9 @@
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
-| ☐ | TR-10 | « Control Center » équipe | ❌ | V4 (`pilotage-equipe`) | Un tableau de bord sans test (méthode renommée sans mise à jour de l'appelant) |
-| ☐ | TR-11 | Rechercher un élève ou un enseignant | ❌ | V4 | — |
-| ☐ | TR-12 | Répartition des élèves par niveau | 💀 | V4 | — |
+| ☑ | TR-10 | « Control Center » équipe | ❌ | V4 (`pilotage-equipe`) | Un tableau de bord sans test (méthode renommée sans mise à jour de l'appelant) |
+| ☑ | TR-11 | Rechercher un élève ou un enseignant | ❌ | V4 | — |
+| ☑ | TR-12 | Répartition des élèves par niveau | 💀 | V4 | — |
 | ☐ | TR-24 | Manifeste PWA et service worker | ⚠️ | V4 (`installation-pwa`) | Un service worker entièrement commenté |
 | ☐ | TR-25 | Bandeau d'installation | ⚠️ | V4 (= ID-26) | — |
 

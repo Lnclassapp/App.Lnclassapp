@@ -136,6 +136,13 @@ fr:
           - "Seconde"
           - "Première"
           - "Terminale"
+        cycle: "Cycle"
+        cycle_hint: "Un seul choix, toujours visible : les flèches du clavier passent d'une option à l'autre."
+        cycles:
+          - label: "Premier cycle"
+            value: "first"
+          - label: "Second cycle"
+            value: "second"
         terms: "J'accepte les conditions d'utilisation"
         disabled: "Champ désactivé"
       sample:
@@ -143,6 +150,7 @@ fr:
           name: "Le nom complet est obligatoire"
           email: "L'adresse e-mail n'est pas valide"
           level: "Choisissez un niveau"
+          cycle: "Choisissez un cycle"
           terms: "Vous devez accepter les conditions"
       hotwire:
         intro: "Tous les CRUD passent par Hotwire : le formulaire s'ouvre en modale dans le frame « modal » du layout, un échec le re-rend en 422 avec ses erreurs, un succès répond en Turbo Stream (toast, liste mise à jour) et la modale se ferme."

@@ -17,7 +17,7 @@
   </td>
   <td class="px-4 py-3 tabular-nums"><%= row.classrooms_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= row.courses_count %></td>
-  <td class="px-4 py-3">
+  <td class="sticky-actions px-4 py-3">
     <div class="flex justify-end">
       <%= ui_dropdown label: t(".actions", name: row.name), id: "series-actions-#{row.slug}", fixed: true do %>
         <%= ui_dropdown_item t(".edit"), href: edit_series_path(row.slug), icon: "pencil-square", frame: "modal" %>

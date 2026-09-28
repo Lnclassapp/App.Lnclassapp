@@ -1,4 +1,5 @@
 require "test_helper"
+require_relative "../../../support/domain/fake_classroom_plan"
 
 module UseCases
   module Catalog
@@ -44,12 +45,13 @@ module UseCases
         @taxonomy = FakeTaxonomy.new
         @audit_log = FakeAuditLog.new
         @transaction = FakeTransaction.new
+        @plan = FakeClassroomPlan.new
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
       def create(actor: @team, name: "6ème", position: "1", cycle: "first")
         dto = Dtos::Catalog::LevelInput.new(name:, position:, cycle:)
-        CreateLevel.new(taxonomy: @taxonomy, audit_log: @audit_log, transaction: @transaction,
+        CreateLevel.new(taxonomy: @taxonomy, classroom_plan: @plan, audit_log: @audit_log, transaction: @transaction,
                         policy: Policies::Catalog::ManageTaxonomyPolicy.new, clock: Clock.new(NOW))
                    .call(actor:, dto:)
       end
@@ -60,9 +62,25 @@ module UseCases
         assert result.success?
         assert_equal [ 1, "6eme", "6ème", 1, "first" ],
                      [ result.value.id, result.value.slug, result.value.name, result.value.position, result.value.cycle ]
-        assert_equal [ { action: "taxonomy.changed", actor_id: 7, at: NOW, subject_type: "Level", subject_id: 1,
-                         metadata: { operation: "create", slug: "6eme" } } ], @audit_log.records
+        assert_equal({ action: "taxonomy.changed", actor_id: 7, at: NOW, subject_type: "Level", subject_id: 1,
+                       metadata: { operation: "create", slug: "6eme" } }, @audit_log.records.first)
         assert_equal 1, @transaction.calls
+      end
+
+      test "D1 (owner, 2026-09-28): a level of the first cycle with a known code gets its barème defaults, journaled" do
+        create(name: "4ème", cycle: "first")
+
+        assert_equal [ 10, 4 ], %w[public private].map { @plan.plan.count(school_type: it, level_id: 1) }
+        assert_equal [ [ "public", nil, 10, "auto" ], [ "private", nil, 4, "auto" ] ],
+                     @audit_log.records.drop(1).map { it[:metadata].values_at(:school_type, :from, :to, :source) }
+      end
+
+      test "no reliable rule: another level of the first cycle, or a level of the second, stays undefined" do
+        create(name: "Sixième bis", cycle: "first")
+        create(name: "Tle", position: "7", cycle: "second")
+
+        assert_empty @plan.saves
+        assert_equal [ "taxonomy.changed" ], @audit_log.records.map { it[:action] }.uniq
       end
 
       test "hors équipe, rien n'est écrit, même avec une saisie invalide : la policy passe en premier" do
@@ -98,7 +116,8 @@ module UseCases
         assert_equal({ position: [ :taken ] }, create(name: "5ème").errors)
         assert_equal :conflict, create(position: "2").code
         assert_equal 1, @taxonomy.levels.size
-        assert_equal 1, @audit_log.records.size
+        assert_equal 1, @audit_log.records.count { it[:action] == "taxonomy.changed" }
+        assert_equal 1, @plan.saves.size
       end
     end
   end

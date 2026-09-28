@@ -65,3 +65,25 @@
 - Toute future action de masse sur une liste (tous les objets, pas un seul) suit ce patron : bouton secondaire d'en-tête, confirmation qui dit le périmètre, job suivi par un rapport.
 - L'écran des imports affiche des rapports qui ne sont pas des imports : chaque nouveau type sans fichier fournit ses libellés sous `teams.imports.status.by_kind.<kind>`.
 - UDR-0036 : l'en-tête de l'écran Établissements gagne cette seconde action ; « Importer des établissements » reste l'action principale.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/finitions-generation-menu`](../../chantiers/finitions-generation-menu/memo.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Déjà en cours n'est pas une erreur.** Une génération à la fois est l'état attendu (index partiel, ADR-0056), pas un échec : le toast `error` (« Une erreur est survenue », rouge, persistant, `role="alert"`) est retiré. Remplace la ligne « Déjà en cours (`:conflict`) » du §3 *Comportement* et le « toast d'erreur « déjà en cours » » du §3 *États obligatoires* :
+  - `:conflict` → `303` vers le **rapport de la génération en cours** (`teams_import_path(public_id)`, la plus récente du type `classrooms` : aucune ne peut naître pendant qu'une tourne) ;
+  - flash `info` sous la forme `{ "title", "message" }` → toast **d'information** (bleu, se ferme seul), titre `teams.classroom_generations.create.already_running_title` « Génération déjà en cours », message `.already_running` « Une seule génération des classes à la fois : voici l'avancement de celle qui tourne. ».
+  - Le layout rend tout flash par `flash_toast(key, value)` (`ComponentsHelper`) : un message, ou `{ "message", "title" }` quand le titre par défaut du type ne dit pas la situation.
+- **Le badge du statut suit le type.** Liste des imports, rapport et accueil de l'équipe : le libellé du badge est cherché d'abord sous `teams.imports.status.by_kind.<kind>.statuses.<status>` (`import_status_label`, `Catalog::ImportStatusHelper`), sinon `teams.imports.statuses.<status>`. Génération des classes : `validating` « Recherche des établissements », `importing` « Génération en cours » ; `queued` « En file d'attente », `completed` « Terminé » et `failed` « Échoué » gardent le libellé commun, juste pour les deux.
+
+## Amendement du 2026-09-28 — menu « Classes » (bareme-classes)
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), demande du porteur du 2026-09-28, [UDR-0045](0045-bareme-des-classes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le bouton secondaire devient une entrée de menu.** L'en-tête de `teams/schools/index` porte, dans cet ordre : « Importer des établissements » (principale, inchangée), puis le menu **« Classes »** : `ui_dropdown(label: "Actions sur les classes", id: "schools-classrooms-menu", fixed: true, trigger: icône rectangle-group + « Classes »)` — déclencheur libellé avec chevron, pas un ⋮ : ces actions portent sur l'ensemble des établissements, pas sur un objet (UDR-0042 réserve le ⋮ aux objets).
+- Entrées : « Générer les classes manquantes » (`ui_dropdown_item dialog: "generate-classrooms-modal"`, icône `sparkles`), puis « Barème des classes » (`href: classroom_plan_path`, icône `calculator`).
+- La confirmation `dialog#generate-classrooms-modal` est rendue **sans `trigger:`**, sœur du menu ; son contenu, son pied, sa route et le suivi dans le rapport ne changent pas. L'entrée de menu l'ouvre (`dropdown#openDialog`), le focus revient au déclencheur à la fermeture.
+- La règle de la phrase du barème (`generate_rule_plan`) renvoie au « barème des classes » (ADR-0058), plus au « barème de l'import ».
+- Le comportement de l'amendement précédent (`finitions-generation-menu`) est inchangé : « déjà en cours » donne un toast d'information et mène au rapport de la génération en cours ; le badge « Génération en cours » reste celui du rapport.
+- **Placement** : l'import et le menu vivent dans `div#schools-header-actions` (`flex flex-wrap items-center gap-3 sm:shrink-0 sm:flex-nowrap`), dans le bloc d'actions de `ui_page_header`, qui n'est pas modifié. Dès `sm`, ce bloc ne rétrécit ni ne se replie : le menu reste à droite de l'import, sur la même ligne, et c'est le titre qui cède la place. À 390 px, les deux ne tiennent pas côte à côte (≈ 414 px pour 350 disponibles) : le menu passe sous l'import, aligné à gauche, sans défilement latéral.
+- Preuve : `test/system/school/generate_classrooms_test.rb` « at 1280 px, the « Classes » menu is on the line of the import button, to its right » (même `top`, `left` plus grand) ; `test/controllers/teams/classroom_generations_controller_test.rb` (menu à droite de l'import, entrées, confirmation) ; `test/system/school/generate_classrooms_test.rb` (bureau et 390 px : ouvrir le menu, confirmer la génération, ouvrir le barème).

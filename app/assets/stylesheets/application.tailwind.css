@@ -1,6 +1,6 @@
 /* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
    Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
-   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006 */
+   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051 */
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
@@ -127,6 +127,12 @@
     display: contents;
   }
 
+  /* UDR-0051 — Edge a son propre œil dans un champ mot de passe : masqué dès que le bouton œil du champ est visible.
+     Sans JavaScript, le bouton reste `hidden` et Edge garde le sien. */
+  [data-controller~="password-reveal"]:has(> button:not([hidden])) input::-ms-reveal {
+    display: none;
+  }
+
   .turbo-progress-bar {
     height: 3px;
     background-color: var(--color-brand);
@@ -188,6 +194,20 @@
 /* Barre de navigation basse au-dessus de l'indicateur système (iPhone, Android gestuel) */
 @utility pb-safe {
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+/* Colonne des actions (⋮) d'un tableau qui défile en largeur : collée au bord droit du tableau, sur un fond blanc qui
+   masque les colonnes qui passent dessous. Au téléphone, le ⋮ est à l'écran sans faire défiler le tableau (UDR-0042).
+   `sticky` crée un contexte d'empilement qui enfermerait le menu fixe (z-50) sous la barre basse (z-40) : menu ouvert,
+   la cellule monte au niveau du menu. */
+@utility sticky-actions {
+  position: sticky;
+  right: 0;
+  background-color: var(--color-white);
+
+  &:has([aria-expanded="true"]) {
+    z-index: 50;
+  }
 }
 
 /* Bande défilante sans barre visible (onglets sur mobile) : le geste suffit, la barre mangerait la hauteur. */
