@@ -68,9 +68,18 @@ Vérifications demandées : `BCrypt` est au coût minimal en test (`ActiveModel:
 
 ### Erreurs volontaires refusées par la CI
 
-Branche jetable `perf/ci-rapide-essai-fautes`, sur une base jetable (PR #57, run 160) : une méthode jamais appelée dans `Policies::Classroom::AssignPolicy`, une assertion fausse dans `test/system/homepage_test.rb`, une offense Rubocop dans `script/ci/record_timings`. Le pre-commit les laisse passer toutes les trois (tests système jamais lancés, fichier sans extension non linté, tests ciblés en `COVERAGE=0`) : seule la CI peut les arrêter.
+Branche jetable `perf/ci-rapide-essai-fautes`, sur une base jetable `perf/ci-rapide-essai-base` (PR #57, [run 162](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/36405639147)) : une méthode jamais appelée dans `Policies::Classroom::AssignPolicy`, une assertion fausse dans `test/system/homepage_test.rb`, une offense Rubocop dans `config.ru`. Le pre-commit les laisse passer toutes les trois (il ne lance jamais les tests système, ne linte pas `config.ru`, et lance les tests ciblés en `COVERAGE=0`) : seule la CI peut les arrêter.
 
-Résultat : voir la section « Preuve des échecs » ci-dessous.
+| Erreur | Job rouge | Raison affichée |
+|---|---|---|
+| Offense Rubocop | `checks (lint)` | « 817 files inspected, 3 offenses detected » |
+| Couverture < 100 % | `tests (unit)` | « Branch coverage (99.86%) is below the expected minimum coverage (100.00%) » — `assign_policy.rb` 66,67 % |
+| Test système cassé | `tests (system:1/6)` | `HomepageTest` : titre attendu non trouvé |
+| — | `ci` | rouge (`checks: failure`, `tests: failure`) |
+
+Les 11 autres jobs du run sont verts : une erreur se lit dans le nom du job qui l'a produite. Le premier essai d'offense (des apostrophes simples dans `script/ci/record_timings`) n'était pas une offense pour la configuration omakase : l'erreur venait de l'essai, pas de la CI ; elle a été remplacée par une vraie offense.
+
+Le push de la seconde offense a **annulé** le run 160 en cours (`concurrency` avec `cancel-in-progress`) : le levier D est prouvé au passage.
 
 La garde « les jobs redonnent `bin/ci` » a aussi été prise en défaut volontairement : sur l'essai du profil unitaire (run 152), le workflow ne jouait plus que `lint` et `unit` ; `checks (lint)` a échoué sur `test/guards/ci_plan_test.rb`, et `ci` est passé au rouge.
 
@@ -110,7 +119,8 @@ La garde « les jobs redonnent `bin/ci` » a aussi été prise en défaut volont
 |---|---|---|
 | Test système instable `RoleHomesTest` (menu du compte) | Hors périmètre ; une instabilité ne se corrige pas en relançant | à ouvrir (`bugfix`) |
 | Durées de `script/ci/test_timings.yml` à régénérer quand les parts se déséquilibrent | Pas de seuil automatique | — |
-| Branches jetables `perf/ci-rapide-essai`, `perf/ci-rapide-essai-docs` non supprimées | La suppression de branche est refusée depuis cette session (HTTP 403 du proxy) | à supprimer par le porteur |
+| Branches jetables `perf/ci-rapide-essai`, `perf/ci-rapide-essai-docs`, `perf/ci-rapide-essai-docs2`, `perf/ci-rapide-essai-fautes`, `perf/ci-rapide-essai-base` non supprimées (PR #54, #55, #57, #58 fermées) | La suppression de branche est refusée depuis cette session (HTTP 403 de la politique réseau) | à supprimer par le porteur |
+| PR #53 en conflit avec `Develop` (index des ADR) : aucun run `pull_request` possible | `Develop` est rouge ; le pre-commit refuse le commit de fusion tant qu'il l'est | fusionner `Develop` après la PR #56 |
 | `actions/setup-node@v4` et `actions/upload-artifact@v4` ciblent Node 20, déprécié | Avertissement seulement | — |
 
 ## Clôture
