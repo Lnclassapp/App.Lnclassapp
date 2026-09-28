@@ -41,6 +41,16 @@ module Dtos
         end
       end
 
+      # Challenge of PR #65, M4: a smartphone JPEG with a Motion Photo or an MPF image after its EOI is accepted, cut
+      # at the first EOI of its main stream.
+      test "a JPEG with a secondary image and a secret after its EOI is kept without them" do
+        dto = input("hostile/motion_photo_trailer.jpg")
+
+        assert dto.valid?
+        assert_equal file_fixture("photos/photo.jpg").binread, dto.data
+        assert_not_includes dto.data, "SECRET"
+      end
+
       test "a JPEG with fill bytes before its Exif is kept without its Exif nor its hidden camera name" do
         dto = input("hostile/bypass_fill.jpg")
 
