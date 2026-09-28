@@ -1,0 +1,28 @@
+<%# 🌐 UI · teams/dashboards/_levels — répartition des élèves placés par niveau (TR-12), en barres CSS pures %>
+<%# Rôle : nombre et pourcentage écrits ; la barre est décorative (aria-hidden) ; « Sans classe » en vue nationale seulement %>
+<%# ADR  : 0051, 0062 · UDR : 0005, 0049 %>
+<%# locals: (dashboard:) -%>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "squares-2x2", id: "team_dashboard_levels" do %>
+  <% if dashboard.placed_students_count.zero? %>
+    <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "squares-2x2" %>
+  <% else %>
+    <ul class="space-y-3">
+      <% dashboard.levels.each do |level| %>
+        <li id="level_share_<%= level.slug %>">
+          <div class="flex items-baseline justify-between gap-3 text-sm">
+            <span class="font-medium text-ink"><%= level.name %></span>
+            <span class="tabular-nums text-mute"><%= t(".share", count: level.students_count, percent: level.percent) %></span>
+          </div>
+          <div class="mt-1 h-2 rounded-full bg-mist" aria-hidden="true">
+            <div class="<%= class_names("h-2 rounded-full bg-brand", dashboard_bar_width(level.percent)) %>"></div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if dashboard.unplaced_students_count %>
+    <p id="students_without_classroom" class="mt-4 text-sm text-mute">
+      <%= t(".without_classroom", count: dashboard.unplaced_students_count) %>
+    </p>
+  <% end %>
+<% end %>
