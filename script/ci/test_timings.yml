@@ -1,0 +1,7 @@
+# Seconds per test file, summed from `-v` runs. Written by script/ci/record_timings, read by script/ci/plan.rb
+# to balance the parts of a sharded group. Stale values only unbalance the parts; they never skip a test.
+test/performance/assessment/import_exercises_performance_test.rb: 45.0
+test/performance/catalog/import_course_tree_performance_test.rb: 30.0
+test/performance/catalog/import_essentials_performance_test.rb: 40.0
+test/performance/classroom/generate_missing_classrooms_performance_test.rb: 10.9
+test/performance/school/import_schools_performance_test.rb: 11.2

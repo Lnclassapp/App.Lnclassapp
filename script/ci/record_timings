@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# Rebuilds script/ci/test_timings.yml from the verbose output (-v) of test runs, locally or from GitHub logs:
+#
+#   script/ci/record_timings tmp/system.log [more.log …]
+#   gh run view <run-id> --log | script/ci/record_timings
+#
+# Each line « Some::ClassTest#test_name = 1.23 s = . » adds its duration to the file that defines the class.
+# The files not seen in the logs keep their previous timing; the split (script/ci/plan.rb) reads this file.
+require "yaml"
+require_relative "plan"
+
+root = CiPlan::ROOT
+classes = CiPlan.files("test/**/*_test.rb").each_with_object({}) do |file, map|
+  File.foreach(File.join(root, file)) { |line| map[$1] = file if line =~ /^\s*class\s+([\w:]+)\s*</ }
+end
+
+durations = Hash.new(0.0)
+ARGF.each_line do |line|
+  next unless line =~ /([\w:]+)#\S.* = (\d+\.\d+) s = [.FESN]/
+
+  file = classes[$1] and durations[file] += $2.to_f
+end
+abort "Aucune durée lue : lancez les tests avec -v (TESTOPTS=-v)." if durations.empty?
+
+timings = CiPlan.timings.merge(durations.transform_values { it.round(1) })
+File.write(CiPlan::TIMINGS, <<~YAML + timings.sort.to_h.to_yaml.delete_prefix("---\n"))
+  # Seconds per test file, summed from `-v` runs. Written by script/ci/record_timings, read by script/ci/plan.rb
+  # to balance the parts of a sharded group. Stale values only unbalance the parts; they never skip a test.
+YAML
+puts "#{durations.size} fichiers mis à jour dans #{CiPlan::TIMINGS.delete_prefix("#{root}/")}"
