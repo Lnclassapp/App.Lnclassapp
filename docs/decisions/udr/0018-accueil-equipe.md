@@ -73,8 +73,11 @@ L'équipe a besoin de voir l'état de la plateforme d'un coup d'œil, et d'attei
 - Le « Control Center » (TR-10) reste hors périmètre (V4) : l'entrée « Pilotage » du shell reste inactive.
 - Les messages de l'ancien fil (CO) ne sont pas repris en V1 : une section « Messages » s'ajoutera ici quand la communication sera livrée.
 
-## Amendement du 2026-09-28 — tuile « Barème des classes »
 
-*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), [UDR-0045](0045-bareme-des-classes.md). En cas d'écart, cette section fait foi.*
+## Amendement du 2026-09-28 — le « Control Center » est livré
 
-- La section « Référentiel » compte **cinq tuiles** : DRENA, niveaux, séries, matières, puis « Barème des classes » (icône `calculator`, lien `classroom_plan_path`), dont le nombre est le total des classes d'un lycée public selon le barème. Grille `grid-cols-2 sm:grid-cols-3 xl:grid-cols-5`.
+*Chantier [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/prd.md). Statut : accepté, décidé par le porteur le 2026-09-28. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Le §4 « l'entrée Pilotage du shell reste inactive » ne vaut plus : TR-10 est livré en V4 par la page « Pilotage » ([UDR-0049](0049-page-pilotage-de-l-equipe.md)), active dans la navigation.
+- L'accueil ne change pas : il garde ses compteurs du référentiel. Les indicateurs d'usage (élèves actifs, exercices terminés, couverture) vivent sur « Pilotage », pas sur l'accueil, pour que l'accueil reste une lecture bornée et rapide.
+

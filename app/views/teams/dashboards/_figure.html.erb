@@ -1,0 +1,11 @@
+<%# 🌐 UI · teams/dashboards/_figure — une tuile de chiffre : nombre puis libellé accordé, précision facultative %>
+<%# Rôle : se lit en entier (« 12 élèves actifs ») ; un nombre absent s'écrit « — » %>
+<%# ADR  : 0062 · UDR : 0049 %>
+<%# locals: (key:, count:, label:, hint: nil) -%>
+<li id="figure_<%= key %>" class="rounded-ln bg-mist px-3 py-4">
+  <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= count || "—" %></span>
+  <span class="text-sm text-mute"><%= label %></span>
+  <% if hint %>
+    <span class="mt-1 block text-xs text-mute"><%= hint %></span>
+  <% end %>
+</li>
