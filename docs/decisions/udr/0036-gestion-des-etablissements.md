@@ -96,3 +96,12 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 
 - L'en-tête de la liste gagne une action secondaire, « Générer les classes manquantes » (`sparkles`), à gauche de « Importer des établissements », qui reste l'action principale. Sa confirmation et son suivi sont décrits par l'UDR-0043.
 - Le §4 « tout établissement a ses classes dès sa naissance » admet une exception : un établissement importé avant le référentiel les reçoit par cette génération (ADR-0056).
+
+## Amendement du 2026-09-28 — code d'établissement
+
+*Chantier [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md), [UDR-0044](0044-inscription-enseignant-par-code-d-etablissement.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- L'en-tête de la fiche gagne le bloc `#school_code` : le code d'établissement (`K7M-4QZ`), « Copier le code », « Copier le lien », le lien `/e/<code>`, et un avertissement si l'établissement n'est pas actif.
+- Le menu ⋮ `#school-header-actions` devient : « Modifier », « Régénérer le code » (confirmation `regenerate-school-code`), « Désactiver » si actif.
+- L'état vide des enseignants dit désormais qu'ils s'inscrivent avec le code d'établissement.
+
