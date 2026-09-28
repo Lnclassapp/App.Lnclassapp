@@ -38,8 +38,11 @@ class Teams::ClassroomGenerationsControllerTest < ActionDispatch::IntegrationTes
     assert_equal "Génération des classes lancée.", flash[:notice]
   end
 
-  test "while a generation runs, a second one is refused with its reason, back on the schools screen" do
-    create_import_report(kind: "classrooms", status: "importing", checksum_sha256: nil, started_at: Time.current)
+  # finitions-generation-menu: one generation at a time is the expected state, not a failure. The team is told so in an
+  # information toast (never the red « Une erreur est survenue ») and lands on the report of the running generation.
+  test "while a generation runs, a second one is not queued: an information toast leads to the running report" do
+    create_import_report(kind: "classrooms", status: "completed", checksum_sha256: nil, created_at: 1.hour.ago)
+    running = create_import_report(kind: "classrooms", status: "importing", checksum_sha256: nil, started_at: Time.current)
     sign_in_as @member
 
     assert_no_enqueued_jobs do
@@ -48,9 +51,16 @@ class Teams::ClassroomGenerationsControllerTest < ActionDispatch::IntegrationTes
       end
     end
 
-    assert_redirected_to schools_path
+    assert_redirected_to teams_import_path(running.public_id)
     assert_response :see_other
-    assert_equal "Une génération des classes est déjà en cours. Suivez-la dans « Imports ».", flash[:alert]
+    follow_redirect!
+
+    assert_select "#toasts [data-toast-type]", 1
+    assert_select "#toasts [data-toast-type=info]:not([role=alert])" do
+      assert_select "p.font-semibold", text: "Génération déjà en cours"
+      assert_select "p.text-mute", text: "Une seule génération des classes à la fois : voici l'avancement de celle qui tourne."
+    end
+    assert_select "#toasts", text: /Une erreur est survenue/, count: 0
   end
 
   test "a teacher is refused in 403 and nothing is created; a visitor is sent to sign in" do

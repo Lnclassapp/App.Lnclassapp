@@ -190,6 +190,20 @@
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* Colonne des actions (⋮) d'un tableau qui défile en largeur : collée au bord droit du tableau, sur un fond blanc qui
+   masque les colonnes qui passent dessous. Au téléphone, le ⋮ est à l'écran sans faire défiler le tableau (UDR-0042).
+   `sticky` crée un contexte d'empilement qui enfermerait le menu fixe (z-50) sous la barre basse (z-40) : menu ouvert,
+   la cellule monte au niveau du menu. */
+@utility sticky-actions {
+  position: sticky;
+  right: 0;
+  background-color: var(--color-white);
+
+  &:has([aria-expanded="true"]) {
+    z-index: 50;
+  }
+}
+
 /* Bande défilante sans barre visible (onglets sur mobile) : le geste suffit, la barre mangerait la hauteur. */
 @utility scrollbar-none {
   scrollbar-width: none;
