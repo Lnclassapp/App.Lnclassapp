@@ -1,0 +1,28 @@
+<%# 🌐 UI · teams/dashboards/_recent_signups — les 10 derniers comptes : rôle, établissement, date, numéro masqué %>
+<%# Rôle : voir que les inscriptions arrivent, sans contacter : le numéro complet n'atteint pas cette vue (ADR-0062) %>
+<%# ADR  : 0049, 0062 · UDR : 0049 · aucune fiche de compte avant la V2 %>
+<%# locals: (signups:) -%>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "user-plus", id: "team_dashboard_signups" do %>
+  <% if signups.empty? %>
+    <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-plus" %>
+  <% else %>
+    <ol class="divide-y divide-line">
+      <% signups.each do |signup| %>
+        <li id="signup_<%= signup.public_id %>" class="flex items-center gap-3 py-2.5">
+          <%= ui_avatar signup.display_name, size: :sm %>
+          <div class="min-w-0 flex-1">
+            <p class="flex flex-wrap items-center gap-2">
+              <span class="truncate text-sm font-medium text-ink"><%= signup.display_name %></span>
+              <%= ui_role_badge signup.role, size: :sm %>
+            </p>
+            <p class="flex flex-wrap gap-x-3 text-xs text-mute">
+              <span><%= signup.school_name || t(".no_school") %></span>
+              <span class="font-mono"><%= signup.contact %></span>
+              <time datetime="<%= signup.created_at.iso8601 %>"><%= t(".joined", time: time_ago_in_words(signup.created_at)) %></time>
+            </p>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+<% end %>

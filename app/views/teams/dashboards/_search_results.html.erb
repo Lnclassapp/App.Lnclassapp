@@ -1,0 +1,37 @@
+<%# 🌐 UI · teams/dashboards/_search_results — contenu du frame de recherche : total, comptes, pages %>
+<%# Rôle : rôle, établissement et classe (ou nombre de classes), numéro masqué ; aucune fiche de compte avant la V2 %>
+<%# ADR  : 0062 · UDR : 0049 %>
+<%# locals: (search:) -%>
+<%= turbo_frame_tag Teams::DashboardsController::SEARCH_FRAME,
+                    class: "block transition-opacity aria-busy:pointer-events-none aria-busy:opacity-50" do %>
+  <% if search.term.blank? %>
+    <p class="text-sm text-mute"><%= t(".prompt") %></p>
+  <% elsif search.too_short %>
+    <p class="text-sm text-mute" role="status"><%= t(".too_short") %></p>
+  <% elsif search.rows.empty? %>
+    <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "magnifying-glass" %>
+  <% else %>
+    <p id="search_total" class="mb-2 text-sm text-mute" aria-live="polite"><%= t(".total", count: search.total_count) %></p>
+    <ul id="search_results" class="divide-y divide-line">
+      <% search.rows.each do |account| %>
+        <li id="account_<%= account.public_id %>" class="flex items-center gap-3 py-2.5">
+          <%= ui_avatar account.display_name, size: :sm %>
+          <div class="min-w-0 flex-1">
+            <p class="flex flex-wrap items-center gap-2">
+              <span class="truncate text-sm font-medium text-ink"><%= account.display_name %></span>
+              <%= ui_role_badge account.role, size: :sm %>
+            </p>
+            <p class="flex flex-wrap gap-x-3 text-xs text-mute">
+              <span>
+                <%= account.school_name || t(".no_school") %> ·
+                <%= account.classrooms_count ? t(".classrooms", count: account.classrooms_count) : account.classroom_name || t(".no_classroom") %>
+              </span>
+              <span class="font-mono"><%= account.contact %></span>
+            </p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class="mt-4"><%= ui_pagination page: search.page, pages: search.pages %></div>
+  <% end %>
+<% end %>

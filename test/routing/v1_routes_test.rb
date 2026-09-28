@@ -4,8 +4,9 @@ require "test_helper"
 # (plan boucle-pedagogique §0a.4). No numeric :id is ever exposed (ADR-0029).
 class V1RoutesTest < ActionDispatch::IntegrationTest
   FROZEN = %i[student_home_path student_classroom_path teacher_home_path teacher_classrooms_path team_home_path
-              courses_path session_path schools_path profile_path].freeze
-  NOT_IN_V1 = %i[team_dashboard_path].freeze
+              courses_path session_path schools_path profile_path team_dashboard_path].freeze
+  # team_dashboard_path is drawn in V4 (pilotage-equipe, UDR-0049): no shell destination of these roles is left undrawn.
+  NOT_IN_V1 = %i[].freeze
 
   def helpers = Rails.application.routes.url_helpers
 
