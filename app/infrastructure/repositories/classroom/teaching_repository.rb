@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::TeachingRepository
 # Rôle : déclarations d'enseignement (teacher_classrooms), idempotentes ; les retirer ne touche à rien d'autre
-# ADR  : 0030
+# ADR  : 0030, 0066
 module Repositories
   module Classroom
     class TeachingRepository
@@ -19,6 +19,10 @@ module Repositories
 
       def classroom_ids_for(teacher_id:)
         Orm::TeacherClassroom.where(teacher_id:).order(:classroom_id).pluck(:classroom_id)
+      end
+
+      def withdraw_all_in_school(teacher_id:, school_id:)
+        Orm::TeacherClassroom.where(teacher_id:, classroom_id: Orm::Classroom.where(school_id:).select(:id)).delete_all
       end
     end
   end

@@ -55,7 +55,8 @@ class RoleHomesTest < ApplicationSystemTestCase
   # school_admin is V2 (HomeDestination): the account lands on the pending screen, in the shell of its role, whose four
   # destinations are all inactive.
   test "the school admin lands on the pending screen, with every destination of their navigation inactive" do
-    sign_in_as create_user(role: "school_admin", first_name: "Koffi")
+    # Lot 0a: the direction is not asked for its second factor before the Lot 0b (ADR-0066 §4.2), whose test replaces this one.
+    sign_in_as create_user(role: "school_admin", second_factor: false, first_name: "Koffi")
 
     assert_home pending_account_path
     assert_selector "main", text: I18n.t("identity.pending_accounts.show.other.title")

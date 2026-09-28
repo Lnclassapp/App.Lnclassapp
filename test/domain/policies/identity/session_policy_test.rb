@@ -26,6 +26,12 @@ module Policies
         assert session.team?
         assert_not session.with(role: "student").team?
       end
+
+      test "une session est privilégiée pour l'équipe et la direction seulement (ADR-0066 §4.2)" do
+        assert session.privileged?
+        assert session.with(role: "school_admin").privileged?
+        %w[student teacher].each { assert_not session.with(role: it).privileged?, it }
+      end
     end
   end
 end

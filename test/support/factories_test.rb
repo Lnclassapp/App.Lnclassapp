@@ -4,7 +4,7 @@ require "test_helper"
 # must write a row the database accepts, with the defaults alone.
 class FactoriesTest < ActiveSupport::TestCase
   test "every factory creates a valid row with its defaults" do
-    %i[create_user create_student create_teacher create_team_member create_invitation create_pin_recovery_code
+    %i[create_user create_student create_teacher create_team_member create_school_admin create_invitation create_pin_recovery_code
        create_backup_code create_login_session create_login_attempt create_audit_event create_drena create_school
        create_classroom create_assignment create_level create_series link_level_series create_material create_course
        create_essential create_import_report create_exercise create_exercise_session create_attempt create_badge create_gap].each do |factory|
@@ -32,6 +32,27 @@ class FactoriesTest < ActiveSupport::TestCase
     assert_equal member.totp_secret, member.totp_credential.secret
     assert_not_includes stored, member.totp_secret
     assert_nil create_team_member(second_factor: false).totp_credential
+  end
+
+  test "a student has a MENA number of their own; a member of the direction has a position, a school and a second factor" do
+    students = [ create_student, create_student ]
+    school = create_school
+    censor = create_school_admin(school:, position: "censor")
+
+    assert(students.all? { Entities::Identity::StudentNumber.valid?(it.student_number) })
+    assert_equal 2, students.map(&:student_number).uniq.size
+    assert_nil create_student(student_number: nil).student_number
+    assert_equal [ school.id, "censor", nil ], censor.school_staffs.sole.then { [ it.school_id, it.position, it.left_at ] }
+    assert_equal censor.totp_secret, censor.totp_credential.secret
+    assert create_school_admin.school_staffs.sole.position == "principal"
+  end
+
+  test "create_user gives a school_admin a confirmed second factor by default, and nobody else" do
+    admin = create_user(role: "school_admin")
+
+    assert_not_nil admin.totp_credential.confirmed_at
+    assert_nil create_user(role: "school_admin", second_factor: false).totp_credential
+    %w[student teacher team].each { assert_nil create_user(role: it).totp_credential, it }
   end
 
   test "secrets are stored as HMAC digests and PINs by bcrypt" do

@@ -22,6 +22,25 @@ module Repositories
         assert membership.classroom_active?
       end
 
+      test "l'adhésion principale porte l'établissement, l'année, l'identifiant public et le nom de sa classe (ADR-0066 §4.5)" do
+        school = create_school
+        classroom = create_classroom(school:, name: "Tle D 1", school_year: "2026-2027")
+        @repository.add_primary(classroom_id: classroom.id, student_id: @student.id, at: @at)
+
+        membership = @repository.primary_for(student_id: @student.id)
+
+        assert_equal [ school.id, "2026-2027", classroom.public_id, "Tle D 1" ],
+                     [ membership.school_id, membership.school_year, membership.classroom_public_id, membership.classroom_name ]
+      end
+
+      test "construite sans les champs de la classe, une adhésion les laisse à nil" do
+        membership = Entities::Classroom::Membership.new(classroom_id: 1, student_id: 2, primary: true, joined_at: @at, left_at: nil,
+                                                         classroom_status: "active")
+
+        assert_equal [ nil, nil, nil, nil ],
+                     [ membership.school_id, membership.school_year, membership.classroom_public_id, membership.classroom_name ]
+      end
+
       test "une seconde classe principale active donne :conflict" do
         @repository.add_primary(classroom_id: create_classroom.id, student_id: @student.id, at: @at)
 

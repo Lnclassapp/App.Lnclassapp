@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
 # Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0066
 module Repositories
   module School
     class SchoolRepository
@@ -99,6 +99,31 @@ module Repositories
 
       def primary_school_id_for(teacher_id:)
         Orm::TeacherSchool.where(teacher_id:, primary: true).pick(:school_id)
+      end
+
+      # Dans la transaction du use case : la liaison supprimée et le départ écrit vont ensemble (ADR-0066 §4.4).
+      def detach_teacher(teacher_id:, school_id:, detached_by_id:, at:)
+        return ::Shared::Result.failure(:not_found) if Orm::TeacherSchool.where(teacher_id:, school_id:, primary: true).delete_all.zero?
+
+        Orm::TeacherSchoolDeparture.create!(teacher_id:, school_id:, detached_by_id:, created_at: at)
+        ::Shared::Result.success
+      end
+
+      def departed?(teacher_id:, school_id:) = Orm::TeacherSchoolDeparture.not_reinstated.exists?(teacher_id:, school_id:)
+
+      # Verrou sur le départ ouvert ; savepoint : l'index « une école principale » refusé (enseignant rattaché entre-temps)
+      # annule aussi la clôture du départ, sans casser la transaction du use case.
+      def reinstate_teacher(teacher_id:, school_id:, reinstated_by_id:, at:)
+        departure = Orm::TeacherSchoolDeparture.not_reinstated.lock.find_by(teacher_id:, school_id:)
+        return ::Shared::Result.failure(:not_found) if departure.nil?
+
+        Orm::TeacherSchool.transaction(requires_new: true) do
+          departure.update!(reinstated_at: at, reinstated_by_id:)
+          Orm::TeacherSchool.create!(teacher_id:, school_id:, primary: true, created_at: at)
+        end
+        ::Shared::Result.success
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict, errors: { base: [ :other_school ] })
       end
 
       private

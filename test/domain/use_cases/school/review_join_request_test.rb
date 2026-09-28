@@ -70,6 +70,15 @@ module UseCases
         end
         assert_empty @requests.writes
       end
+
+      test "ED-23: the principal of the school does not decide a pending teacher (ADR-0066 §4.3, Q1)" do
+        principal = Entities::Identity::Actor.new(user_id: 9, role: :school_admin, school_id: 31, position: "principal")
+
+        %w[approve reject].each { assert_equal :forbidden, review(actor: principal, decision: it).code, it }
+        assert_empty @requests.writes
+        assert_empty @audit.events
+        assert @requests.find_by_public_id(public_id: "req-5").pending?
+      end
     end
   end
 end

@@ -1,10 +1,11 @@
 # 🧠 DOMAINE · Ports::Classroom::MembershipRepositoryPort
 # Rôle : contrat des adhésions d'élèves, une seule classe principale active par élève
-# ADR  : 0040
+# ADR  : 0040, 0066
 module Ports
   module Classroom
     module MembershipRepositoryPort
-      # Adhésion principale active (left_at nul), avec le statut de sa classe. → Entities::Classroom::Membership | nil
+      # Adhésion principale active (left_at nul), avec le statut, l'établissement, l'année, l'identifiant public et le nom de
+      # sa classe. → Entities::Classroom::Membership | nil
       def primary_for(student_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #primary_for"
       end

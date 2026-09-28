@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0066
 module Ports
   module School
     module SchoolRepositoryPort
@@ -86,6 +86,24 @@ module Ports
       # → Integer | nil
       def primary_school_id_for(teacher_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #primary_school_id_for"
+      end
+
+      # Retrait d'un enseignant (ADR-0066 §4.4) : supprime sa ligne teacher_schools principale de cet établissement et écrit
+      # un départ ouvert (teacher_school_departures). → Result | failure(:not_found) (école principale ailleurs, ou aucune)
+      def detach_teacher(teacher_id:, school_id:, detached_by_id:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #detach_teacher"
+      end
+
+      # Un départ ouvert (reinstated_at nul) existe. → Boolean
+      def departed?(teacher_id:, school_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #departed?"
+      end
+
+      # Réintégration : rend la ligne teacher_schools principale et clôt le départ ouvert, en une écriture.
+      # → Result | failure(:not_found) (aucun départ ouvert)
+      #   | failure(:conflict, errors: { base: [:other_school] }) (école principale prise entre-temps)
+      def reinstate_teacher(teacher_id:, school_id:, reinstated_by_id:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #reinstate_teacher"
       end
     end
   end

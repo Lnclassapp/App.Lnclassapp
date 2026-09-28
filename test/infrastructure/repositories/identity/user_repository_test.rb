@@ -55,6 +55,64 @@ module Repositories
                      @repository.actor_for(user_id: member.id)
       end
 
+      test "actor_for gives a member of the direction the position and the school of their active membership (ADR-0066 §4.1)" do
+        school = create_school
+        admin = create_school_admin(school:, position: "censor")
+
+        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: school.id, position: "censor"),
+                     @repository.actor_for(user_id: admin.id)
+      end
+
+      test "actor_for: a member of the direction without active membership, or of an inactive school, has neither school nor position" do
+        detached = create_school_admin
+        Orm::SchoolStaff.where(user: detached).update_all(left_at: Time.current)
+        inactive = create_school_admin(school: create_school(status: "inactive"))
+        draft = create_school_admin(school: create_school(status: "draft"))
+        never = create_user(role: "school_admin")
+
+        [ detached, inactive, draft, never ].each do |admin|
+          assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin), @repository.actor_for(user_id: admin.id)
+        end
+      end
+
+      test "actor_for: a teacher's school is their primary school, whatever a staff row says" do
+        teacher = create_teacher(school: nil)
+
+        assert_equal Entities::Identity::Actor.new(user_id: teacher.id, role: :teacher), @repository.actor_for(user_id: teacher.id)
+      end
+
+      test "the student number is mapped; find_student_by_number is an exact match on living students (ADR-0065)" do
+        student = create_student(student_number: "12345678A")
+        create_student(student_number: "87654321B", anonymized_at: Time.current)
+
+        found = @repository.find_student_by_number(student_number: "12345678A")
+
+        assert_equal [ student.id, "12345678A" ], [ found.id, found.student_number ]
+        assert_equal "12345678A", @repository.find(id: student.id).student_number
+        assert_nil @repository.find_student_by_number(student_number: "87654321B")
+        assert_nil @repository.find_student_by_number(student_number: "12345678")
+        assert_nil @repository.find_student_by_number(student_number: "%")
+        assert_nil @repository.find_student_by_number(student_number: "99999999Z")
+      end
+
+      test "update_student_number replaces the number of the student" do
+        student = create_student(student_number: "12345678A")
+
+        assert @repository.update_student_number(user_id: student.id, student_number: "12345678B").success?
+        assert_equal "12345678B", student.reload.student_number
+      end
+
+      # The unique index refuses inside a savepoint: the transaction of the caller stays usable (reload below).
+      test "update_student_number is a conflict on a number held by another account, and writes nothing" do
+        student = create_student(student_number: "12345678A")
+        create_student(student_number: "12345678B")
+
+        result = @repository.update_student_number(user_id: student.id, student_number: "12345678B")
+
+        assert_equal [ :conflict, { student_number: [ :taken ] } ], [ result.code, result.errors ]
+        assert_equal "12345678A", student.reload.student_number
+      end
+
       test "update_name replaces the last and first names" do
         record = create_student(last_name: "Kouassi", first_name: "Aya")
 

@@ -11,11 +11,20 @@ module Entities
         assert actor.team?
       end
 
-      test "sous-rôle et école sont facultatifs" do
+      test "sous-rôle, école et fonction sont facultatifs" do
         actor = Actor.new(user_id: 2, role: :teacher)
 
         assert_nil actor.team_role
         assert_nil actor.school_id
+        assert_nil actor.position
+      end
+
+      test "un membre de la direction porte sa fonction et son établissement (ADR-0066 §4.1)" do
+        actor = Actor.new(user_id: 3, role: :school_admin, school_id: 31, position: "censor")
+
+        assert_equal [ 31, "censor" ], [ actor.school_id, actor.position ]
+        assert_equal actor, Actor.new(user_id: 3, role: :school_admin, school_id: 31, position: "censor")
+        assert_not_equal actor, Actor.new(user_id: 3, role: :school_admin, school_id: 31, position: "educator")
       end
 
       test "chaque prédicat répond à son rôle" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_29_090300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -125,7 +125,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.datetime "left_at"
     t.boolean "primary", default: false, null: false
     t.bigint "student_id", null: false
-    t.index ["classroom_id", "student_id"], name: "index_classroom_students_on_classroom_id_and_student_id", unique: true
+    t.index ["classroom_id", "student_id"], name: "index_classroom_students_one_open_per_classroom", unique: true, where: "(left_at IS NULL)"
     t.index ["student_id"], name: "index_classroom_students_one_active_primary", unique: true, where: "(\"primary\" AND (left_at IS NULL))"
   end
 
@@ -475,6 +475,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'approved'::character varying, 'rejected'::character varying]::text[])", name: "school_join_requests_status_values"
   end
 
+  create_table "school_staffs", force: :cascade do |t|
+    t.bigint "invited_by_id"
+    t.datetime "joined_at", null: false
+    t.datetime "left_at"
+    t.string "position", null: false
+    t.bigint "school_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["invited_by_id"], name: "index_school_staffs_on_invited_by_id"
+    t.index ["school_id", "left_at"], name: "index_school_staffs_on_school_id_and_left_at"
+    t.index ["school_id"], name: "index_school_staffs_one_principal", unique: true, where: "(((\"position\")::text = 'principal'::text) AND (left_at IS NULL))"
+    t.index ["user_id"], name: "index_school_staffs_one_active_school", unique: true, where: "(left_at IS NULL)"
+    t.check_constraint "\"position\"::text = ANY (ARRAY['principal'::character varying, 'censor'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "school_staffs_position_values"
+  end
+
   create_table "schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "cycle", default: "both", null: false
@@ -713,6 +727,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.check_constraint "referral_token::text ~ '^[0-9a-f]{12}$'::text", name: "teacher_profiles_referral_token_format"
   end
 
+  create_table "teacher_school_departures", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "detached_by_id", null: false
+    t.datetime "reinstated_at"
+    t.bigint "reinstated_by_id"
+    t.bigint "school_id", null: false
+    t.bigint "teacher_id", null: false
+    t.index ["detached_by_id"], name: "index_teacher_school_departures_on_detached_by_id"
+    t.index ["reinstated_by_id"], name: "index_teacher_school_departures_on_reinstated_by_id"
+    t.index ["school_id"], name: "index_teacher_school_departures_on_school_id"
+    t.index ["teacher_id", "school_id"], name: "index_teacher_school_departures_one_open", unique: true, where: "(reinstated_at IS NULL)"
+    t.check_constraint "(reinstated_at IS NULL) = (reinstated_by_id IS NULL)", name: "teacher_school_departures_reinstated_pair"
+  end
+
   create_table "teacher_schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.boolean "primary", default: false, null: false
@@ -743,15 +771,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.string "pin_digest", null: false
     t.string "public_id", limit: 14, null: false
     t.string "role", null: false
+    t.string "student_number", limit: 12
     t.string "team_role"
     t.datetime "updated_at", null: false
     t.index ["contact"], name: "index_users_on_contact", unique: true, where: "(contact IS NOT NULL)"
     t.index ["public_id"], name: "index_users_on_public_id", unique: true
     t.index ["role"], name: "index_users_on_role"
+    t.index ["student_number"], name: "index_users_on_student_number", unique: true, where: "(student_number IS NOT NULL)"
     t.check_constraint "(role::text = 'team'::text) = (team_role IS NOT NULL)", name: "users_team_role_iff_team"
     t.check_constraint "contact::text ~ '^0[157][0-9]{8}$'::text", name: "users_contact_format"
     t.check_constraint "gender::text = ANY (ARRAY['male'::character varying, 'female'::character varying]::text[])", name: "users_gender_values"
     t.check_constraint "role::text = ANY (ARRAY['student'::character varying, 'teacher'::character varying, 'school_admin'::character varying, 'team'::character varying]::text[])", name: "users_role_values"
+    t.check_constraint "student_number IS NULL OR role::text = 'student'::text", name: "users_student_number_only_students"
+    t.check_constraint "student_number::text ~ '^[0-9]{8}[A-Z]$'::text", name: "users_student_number_format"
     t.check_constraint "team_role::text = ANY (ARRAY['admin'::character varying, 'content'::character varying, 'field'::character varying]::text[])", name: "users_team_role_values"
   end
 
@@ -808,6 +840,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
   add_foreign_key "school_join_requests", "schools", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "decided_by_id", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "teacher_id", on_delete: :restrict
+  add_foreign_key "school_staffs", "schools", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", column: "invited_by_id", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", on_delete: :restrict
   add_foreign_key "schools", "drenas", on_delete: :restrict
   add_foreign_key "sessions", "users", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
@@ -822,6 +857,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
   add_foreign_key "teacher_classrooms", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_profiles", "materials", on_delete: :restrict
   add_foreign_key "teacher_profiles", "users", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "schools", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "detached_by_id", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "reinstated_by_id", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_schools", "schools", on_delete: :restrict
   add_foreign_key "teacher_schools", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "totp_credentials", "users", on_delete: :cascade

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::JoinRequestRepositoryPort
 # Rôle : contrat des demandes d'enseignants inscrits sans code : création, plafond, décision qui rattache l'enseignant
-# ADR  : 0063
+# ADR  : 0063, 0066
 module Ports
   module School
     module JoinRequestRepositoryPort
@@ -24,6 +24,11 @@ module Ports
       # → Result | failure(:conflict, errors: { base: [:already_decided] })
       def reject(id:, decided_by_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #reject"
+      end
+
+      # Demande en attente de l'enseignant (ADR-0066 §4.5). → Entities::School::JoinRequest | nil
+      def pending_for(teacher_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #pending_for"
       end
     end
   end

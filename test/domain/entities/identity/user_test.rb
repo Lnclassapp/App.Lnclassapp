@@ -77,6 +77,22 @@ module Entities
         assert build(role: "team", team_role: "boss").invalid?
         assert build(role: "teacher", team_role: "admin").invalid?
       end
+
+      test "un compte de la direction se reconnaît (ADR-0066 §4.1)" do
+        assert build(role: "school_admin").school_admin?
+        assert_not build.school_admin?
+      end
+
+      # ADR-0065 : la présence est exigée par l'inscription et par la base, pas par l'entité.
+      test "le matricule est facultatif, et au format s'il est présent" do
+        assert build.valid?
+        assert_nil build.student_number
+        assert build(student_number: "12345678A").valid?
+
+        user = build(student_number: "1234567A")
+        assert_not user.valid?
+        assert user.errors.of_kind?(:student_number, :invalid)
+      end
     end
   end
 end

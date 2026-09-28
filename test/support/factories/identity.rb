@@ -1,5 +1,5 @@
 # Accounts of every role and the identity technical rows (ADR-0031, ADR-0032, ADR-0037,
-# ADR-0038, ADR-0050). Secrets are stored as the application stores them: PIN by bcrypt,
+# ADR-0038, ADR-0050, ADR-0065, ADR-0066). Secrets are stored as the application stores them: PIN by bcrypt,
 # codes and tokens by HMAC-SHA256 under the "lnclass-secrets" key, TOTP secret encrypted.
 module Factories
   module Identity
@@ -7,14 +7,18 @@ module Factories
 
     CONTACT_PREFIXES = { "student" => "01", "teacher" => "05", "school_admin" => "07", "team" => "07" }.freeze
 
+    # A school_admin gets a confirmed second factor by default, as the team does (ADR-0066 §4.2): a PIN-only session of
+    # the direction is not an actor. `second_factor: false` leaves it to enroll.
     def create_user(role:, contact: nil, pin: "2468", last_name: "Koné", first_name: "Awa", gender: "female",
-                    team_role: (role == "team" ? "admin" : nil), **attributes)
+                    team_role: (role == "team" ? "admin" : nil), second_factor: role == "school_admin", **attributes)
       contact ||= format("%s%08d", CONTACT_PREFIXES.fetch(role), factory_sequence)
       Orm::User.create!(role:, contact:, pin:, last_name:, first_name:, gender:, team_role:, **attributes)
+               .tap { |user| confirm_second_factor(user) if second_factor }
     end
 
-    def create_student(classroom: nil, **attributes)
-      create_user(role: "student", **attributes).tap do |student|
+    # Every student has a MENA number (ADR-0065), unique within a test; `student_number: nil` leaves it out.
+    def create_student(classroom: nil, student_number: format("%08dA", factory_sequence), **attributes)
+      create_user(role: "student", student_number:, **attributes).tap do |student|
         Orm::ClassroomStudent.create!(classroom:, student:, primary: true, joined_at: Time.current) if classroom
       end
     end
@@ -31,12 +35,14 @@ module Factories
     # Returns the account; with a second factor, `member.totp_secret` is the clear secret
     # an authenticator app would hold, to compute the current code (ROTP::TOTP).
     def create_team_member(team_role: "admin", second_factor: true, **attributes)
-      create_user(role: "team", team_role:, **attributes).tap do |member|
-        next unless second_factor
+      create_user(role: "team", team_role:, second_factor:, **attributes)
+    end
 
-        secret = ROTP::Base32.random
-        Orm::TotpCredential.create!(user: member, secret:, confirmed_at: Time.current)
-        member.define_singleton_method(:totp_secret) { secret }
+    # A member of a school's direction (ADR-0044, ADR-0066): a school_admin account with its second factor, actively
+    # attached to the school with its position. `member.totp_secret` as for the team.
+    def create_school_admin(school: create_school, position: "principal", invited_by: nil, joined_at: Time.current, **attributes)
+      create_user(role: "school_admin", **attributes).tap do |member|
+        Orm::SchoolStaff.create!(user: member, school:, position:, invited_by:, joined_at:)
       end
     end
 
@@ -71,6 +77,13 @@ module Factories
 
     def create_audit_event(actor: nil, action: "login.failed", **attributes)
       Orm::AuditEvent.create!(actor:, action:, **attributes)
+    end
+
+    # `user.totp_secret` is the clear secret an authenticator app would hold.
+    def confirm_second_factor(user)
+      secret = ROTP::Base32.random
+      Orm::TotpCredential.create!(user:, secret:, confirmed_at: Time.current)
+      user.define_singleton_method(:totp_secret) { secret }
     end
 
     # Entities::Identity::SecretDigest (ADR-0031, ADR-0032, ADR-0038), under the key the controllers inject.

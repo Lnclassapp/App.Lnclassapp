@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
 # Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; code d'adhésion, verrou, génération en masse, retrait d'une classe vide
-# ADR  : 0030, 0039, 0041, 0059
+# ADR  : 0030, 0039, 0041, 0059, 0066
 module Repositories
   module Classroom
     class ClassroomRepository
@@ -23,6 +23,11 @@ module Repositories
 
       def lock_by_join_code(join_code:)
         record = Orm::Classroom.lock.find_by(join_code:)
+        record && map_to_entity(record)
+      end
+
+      def lock_by_public_id(public_id:)
+        record = Orm::Classroom.lock.find_by(public_id:)
         record && map_to_entity(record)
       end
 
