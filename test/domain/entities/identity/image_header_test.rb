@@ -558,6 +558,17 @@ module Entities
           lossless_without_huffman: without_huffman.sub("\xFF\xC0".b, "\xFF\xC3".b),
           lossless: jpeg.sub("\xFF\xC0".b, "\xFF\xC3".b) }.each { |label, bytes| assert_refused(label, bytes) }
       end
+
+      test "a JPEG frame is 8-bit only: another sample precision is no image" do
+        jpeg = file_fixture("photos/photo.jpg").binread
+        precision = jpeg.index("\xFF\xC0".b) + 4
+
+        [ 0, 12, 16, 255 ].each do |bits|
+          bytes = jpeg.dup.tap { it.setbyte(precision, bits) }
+          assert_refused("precision #{bits}", bytes)
+        end
+        assert_equal [ 64, 48 ], ImageHeader.read(jpeg).then { [ it.width, it.height ] }
+      end
     end
   end
 end

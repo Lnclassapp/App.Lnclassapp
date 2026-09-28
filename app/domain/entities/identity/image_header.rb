@@ -180,7 +180,10 @@ module Entities
       # SOF, DHT (codage de Huffman) ou DAC (codage arithmétique) et DRI au scan qui suit. Une table jamais utilisée, ou
       # redéfinie sans avoir servi, ne transporterait que des octets libres. Un JPEG progressif redéfinit ses tables DHT
       # entre deux scans : chaque définition sert au scan suivant, elle est gardée.
+      # Précision 8 bits seulement : un JPEG 12 ou 16 bits n'est affiché par aucun navigateur.
       def jpeg_frame?(bytes, parts, frame)
+        return false unless bytes.getbyte(frame.data + 2) == 8
+
         components = (0...bytes.getbyte(frame.data + 7)).to_h { bytes.byteslice(frame.data + 8 + (3 * it), 3).unpack("CxC") }
         jpeg_sequential?(bytes, parts, frame, components) && jpeg_coherent?(bytes, parts, frame, components)
       end
