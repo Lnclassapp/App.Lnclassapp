@@ -54,6 +54,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0043](./0043-generer-les-classes-manquantes.md) | Générer les classes manquantes | Accepté | 2026-09-28 | [0056](../adr/0056-generation-des-classes-manquantes.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0039](../adr/0039-format-d-import-du-contenu.md) | Bouton secondaire de l'écran Établissements, confirmation qui dit le périmètre, suivi dans le rapport des imports |
 | [0047](./0047-photo-de-profil.md) | Photo de profil | Accepté | 2026-09-28 | [0060](../adr/0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md), [0041](./0041-page-profil.md) | Ligne « Photo » du profil, modale avec aperçu recadré, photo à la place des initiales ; numéro = plus haut (0043) + 4 |
 
+
 ---
 
 ## Conventions de nommage

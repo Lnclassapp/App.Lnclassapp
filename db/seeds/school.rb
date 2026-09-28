@@ -11,8 +11,12 @@ drena = Orm::Drena.find_by!(slug: "abidjan-2")
 schools = [ [ "Lycée Moderne de Treichville", "LMT", "public", "both" ], [ "Lycée privé Les Lauriers", "LPL", "private", "both" ],
             [ "Lycée mixte La Réussite", "LMR", "mixed", "both" ], [ "Collège Moderne de Marcory", "CMM", "public", "first" ] ]
 existing = Orm::School.where(drena:).pluck(:name)
-rows = schools.reject { |name, *| existing.include?(name) }.map do |name, sigle, school_type, cycle|
-  { public_id: SecureRandom.base58(14), drena_id: drena.id, name:, sigle:, school_type:, cycle:, status: "active" }
+missing = schools.reject { |name, *| existing.include?(name) }
+# ADR-0057: each school gets its school code, drawn by the domain as the import does.
+school_codes = Entities::School::SchoolCode.generate_unique(count: missing.size,
+                                                           taken: Repositories::School::SchoolRepository.new.taken_school_codes)
+rows = missing.zip(school_codes).map do |(name, sigle, school_type, cycle), school_code|
+  { public_id: SecureRandom.base58(14), drena_id: drena.id, name:, sigle:, school_type:, cycle:, status: "active", school_code: }
 end
 
 now = Time.current

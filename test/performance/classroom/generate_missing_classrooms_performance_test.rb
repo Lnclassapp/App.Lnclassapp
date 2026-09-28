@@ -26,10 +26,11 @@ class Classroom::GenerateMissingClassroomsPerformanceTest < ActiveSupport::TestC
   def insert_schools(count, types:, college_ratio:)
     colleges = (count * college_ratio).round
     now = Time.current
+    codes = Entities::School::SchoolCode.generate_unique(count:, taken: Set.new)
     rows = Array.new(count) do |index|
       { public_id: SecureRandom.base58(14), drena_id: @drena.id, name: "#{index < colleges ? 'Collège' : 'Lycée'} Moderne #{index + 1}",
         school_type: types[index % types.size], cycle: index < colleges ? "first" : "both", status: "active",
-        created_at: now, updated_at: now }
+        school_code: codes[index], created_at: now, updated_at: now }
     end
     rows.each_slice(1_000) { Orm::School.insert_all!(it) }
   end

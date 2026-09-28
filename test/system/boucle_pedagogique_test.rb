@@ -3,9 +3,9 @@ require "application_system_test_case"
 # Lot E, PRD §5 (V1 gate): the whole teaching loop on a blank base, through the real buttons only — no open_in_modal,
 # no stand-in controller, no factory. The team accepts the bootstrap invitation, builds the referential, a DRENA and a
 # public lycée by import (6 « Tle D » classrooms generated), then writes and publishes a course, a sheet and an exercise;
-# the teacher signs up, declares a classroom and assigns the exercise; the student joins by the code, plays the exercise
-# on a phone and wins « Diamant »; the teacher issues a recovery code and reads the result. Every write is wrapped in
-# assert_no_page_reload.
+# the teacher signs up with the school code the team read on the school page, declares a classroom and assigns the
+# exercise; the student joins by the code, plays the exercise on a phone and wins « Diamant »; the teacher issues a
+# recovery code and reads the result. Every write is wrapped in assert_no_page_reload.
 class BouclePedagogiqueTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
 
@@ -55,7 +55,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open]" do
         fill_in "level[name]", with: "Tle"
         fill_in "level[position]", with: "7"
-        select t("teams.levels.cycles.second"), from: "level[cycle]"
+        choose t("teams.levels.cycles.second")
         click_on t("teams.levels.new.submit")
       end
       assert_toast t("teams.levels.create.created", name: "Tle")
@@ -173,6 +173,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     (1..6).each { |n| assert_selector "[id^=classroom_]", text: "Tle D #{n}" }
     assert_no_text "Tle D 7"
     assert_equal (1..6).map { "Tle D #{it}" }, Orm::Classroom.order(:name).pluck(:name)
+    # ADR-0057: the team reads the school code on the school's page, and hands it to the teacher.
+    @school_code = find("#school_code_value").text
   end
 
   def team_publishes_a_course_a_sheet_and_an_exercise
@@ -256,8 +258,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       fill_in "teacher_registration[first_name]", with: "Koffi"
       choose t("genders.male")
       fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
-      select "Abidjan 1", from: "teacher_registration[drena_public_id]"
-      select SCHOOL, from: "teacher_registration[school_public_id]"
+      fill_in "teacher_registration[school_code]", with: @school_code
       select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[pin]", with: "1357"
       fill_in "teacher_registration[pin_confirmation]", with: "1357"

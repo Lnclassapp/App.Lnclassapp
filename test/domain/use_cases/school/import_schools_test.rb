@@ -299,6 +299,31 @@ module UseCases
         assert_equal 77 + 38 + 1, Orm::Classroom.distinct.count(:join_code)
       end
 
+      # Keeps the set of taken codes it hands out, to prove the adapter draws against it and completes it.
+      class RecordingSchools < Repositories::School::SchoolRepository
+        attr_reader :taken
+
+        def taken_school_codes = @taken = super
+      end
+
+      test "CE-10: every imported school gets its own valid school code, distinct from the codes already taken (ADR-0057)" do
+        existing = create_school(drena: @drena, name: "Lycée déjà là")
+        schools = RecordingSchools.new
+        subject = ImportSchools.new(drenas: Repositories::School::DrenaRepository.new, schools:,
+                                    classrooms: Repositories::Classroom::ClassroomRepository.new,
+                                    taxonomy: Repositories::Catalog::TaxonomyRepository.new)
+
+        report = run_import(document({ "name" => "Lycée A", "type" => "public" }, { "name" => "Lycée B", "type" => "privée" },
+                                     { "name" => "Collège C", "type" => "public" }), adapter: subject)
+
+        assert_equal "completed", report.status
+        codes = Orm::School.where(name: [ "Lycée A", "Lycée B", "Collège C" ]).pluck(:school_code)
+        assert_equal 3, codes.compact.uniq.size
+        assert(codes.all? { Entities::School::SchoolCode.valid?(it) })
+        assert_not_includes codes, existing.school_code
+        assert_equal Set[existing.school_code, *codes], schools.taken
+      end
+
       test "an author who lost the team role is refused: the import fails, nothing is written" do
         teacher = create_teacher
 

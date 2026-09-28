@@ -68,6 +68,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0056](./0056-generation-des-classes-manquantes.md) | Les classes manquantes se génèrent après coup, en arrière-plan, pour les seuls établissements sans classe de l'année | Accepté | 2026-09-28 | Job par lots de 200 établissements, barème et codes de l'import ; compte rendu = `import_report` de `kind` `classrooms`, sans fichier. Amende ADR-0030 et ADR-0039. |
 | [0060](./0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md) | La photo de profil est recadrée par le navigateur, vérifiée sans bibliothèque par le serveur, et servie seulement après la règle de lecture d'un compte | Accepté | 2026-09-28 | Pas de libvips : canvas 512 px WebP/JPEG côté navigateur ; en-têtes JPEG/PNG/WebP lus en Ruby pur (≤ 1 Mo, ≤ 1024 px, Exif retiré) ; port `ProfilePhotoStorePort` ; lecture par `GET /accounts/:id/photo` sous `ReadUserPolicy`, cache privé. Numéro = plus haut (0056) + 4. |
 
+
 ---
 
 ## Décisions remplacées — à lire avant d'agir
