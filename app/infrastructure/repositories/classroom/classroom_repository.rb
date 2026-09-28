@@ -1,12 +1,15 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
-# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; code d'adhésion, verrou, génération en masse
-# ADR  : 0030, 0039, 0041
+# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; code d'adhésion, verrou, génération en masse, retrait d'une classe vide
+# ADR  : 0030, 0039, 0041, 0059
 module Repositories
   module Classroom
     class ClassroomRepository
       include Ports::Classroom::ClassroomRepositoryPort
 
       JOIN_CODE_INDEX = "index_classrooms_on_join_code".freeze
+      # ADR-0059 : ce qui fait qu'une classe a servi, dans l'ordre où la raison est donnée.
+      USAGES = { has_students: Orm::ClassroomStudent, has_teachers: Orm::TeacherClassroom,
+                 has_assignments: Orm::ClassroomAssignment }.freeze
 
       # random : source des codes d'adhésion, injectable pour rendre une collision reproductible.
       def initialize(random: SecureRandom)
@@ -43,7 +46,25 @@ module Repositories
         Orm::Classroom.where(school_id:, school_year:).pluck(:name).to_set
       end
 
+      def names_in_level(school_id:, school_year:, level_id:, series_id:)
+        Orm::Classroom.where(school_id:, school_year:, level_id:, series_id:).pluck(:name)
+      end
+
+      # Le verrou est celui que prend l'adhésion par code (lock_by_join_code) : un élève ne rejoint pas une classe en cours
+      # de retrait. Les clés étrangères `restrict` refuseraient de toute façon ; on nomme la raison avant.
+      def delete_if_unused(id:)
+        return ::Shared::Result.failure(:not_found) unless Orm::Classroom.lock.exists?(id:)
+
+        reason = usage_of(id)
+        return ::Shared::Result.failure(:conflict, errors: { base: [ reason ] }) if reason
+
+        Orm::Classroom.where(id:).delete_all
+        ::Shared::Result.success
+      end
+
       private
+
+      def usage_of(classroom_id) = USAGES.find { |_, model| model.exists?(classroom_id:) }&.first
 
       def insert(classroom, retries:)
         record = Orm::Classroom.new(attributes_of(classroom).merge(join_code: Entities::Classroom::JoinCode.generate(random: @random)))
