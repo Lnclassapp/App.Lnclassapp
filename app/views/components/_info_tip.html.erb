@@ -1,8 +1,8 @@
 <%# 🌐 UI · components/_info_tip — infobulle native (<details>), appelée par ui_info_tip %>
-<%# Rôle : aide lisible au toucher et au clavier (pas de title=, pas de popover : Safari 16.4) ; panneau dans le flux %>
-<%# UDR  : 0054 (§3.4) · aucun contrôleur %>
-<details class="group inline-block align-middle">
-  <summary class="summary-plain inline-grid size-tap cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand">
+<%# Rôle : aide lisible au survol, au toucher et au clavier (pas de title=, pas de popover : Safari 16.4) ; panneau dans le flux %>
+<%# UDR  : 0054 (§3.4 et son amendement « survol ») · contrôleur info-tip pour la souris ; clic, toucher, clavier natifs %>
+<details class="group inline-block align-middle" data-controller="info-tip" data-action="pointerenter->info-tip#enter pointerleave->info-tip#leave">
+  <summary class="summary-plain inline-grid size-tap cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand" data-action="click->info-tip#pin">
     <%= ui_icon "information-circle", size: :sm %>
     <span class="sr-only"><%= t("components.info_tip.label", label:) %></span>
   </summary>

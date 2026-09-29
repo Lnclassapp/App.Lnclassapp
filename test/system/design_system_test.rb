@@ -526,6 +526,36 @@ class DesignSystemTest < ApplicationSystemTestCase
     end
   end
 
+  # UDR-0054 §3.4, amendement « survol » : la souris ouvre l'aide et la referme en partant ; un clic pendant le survol la
+  # garde ouverte, le clic suivant la ferme.
+  test "an info tip opens on mouse hover, closes when the mouse leaves, and a click keeps it open" do
+    text = t("design.index.finishes.info_tip.text")
+
+    within("[data-example=finish-info-tip]") do
+      assert_no_text text
+      find("details summary").hover
+
+      assert_selector("details[open]", text:)
+    end
+    first("h1").hover
+
+    within("[data-example=finish-info-tip]") do
+      assert_no_selector "details[open]"
+      summary = find("details summary")
+      summary.hover
+      assert_selector "details[open]"
+      summary.click
+    end
+    first("h1").hover
+
+    within("[data-example=finish-info-tip]") do
+      assert_selector("details[open]", text:)
+      find("details summary").click
+
+      assert_no_selector "details[open]"
+    end
+  end
+
   # Page mode: a page that declares its field focuses it on arrival (here « Se connecter », UDR-0054 §3.3).
   test "the page autofocus goes to the field the screen declares" do
     visit new_session_path

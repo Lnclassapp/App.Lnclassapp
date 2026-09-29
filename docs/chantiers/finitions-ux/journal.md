@@ -464,4 +464,12 @@ Branche `feature/finitions-ux-lot-z`, depuis `feature/finitions-ux` (les 11 lots
 | `StudentWorkQuery` sans `search:` (filtre en Ruby sur les élèves déjà lus) | Consigne de l'orchestrateur (chantier perf parallèle) | `perf/cache-ecrans-lourds` |
 | `_figure` du pilotage ne porte pas d'infobulle (tuile « exercices terminés » écrite dans `_key_figures`) | Hors du champ des lots | Refactor du pilotage |
 | Infobulle par liste, pas par ligne, sur `_exercise_progress` et `_assigned_exercise` | Choix du Lot F (dix aides identiques évitées) | Si le porteur la veut par ligne |
-| Textes des infobulles à valider par le porteur | Décision du cadrage (question 10) | PR du chantier |
+| ~~Textes des infobulles à valider par le porteur~~ | **Fait le 2026-09-29** : validés, et ouverture au survol ajoutée | [UDR-0054, amendement « survol »](../../decisions/udr/0054-finitions-d-interface.md#amendement-du-2026-09-29--textes-validés-ouverture-au-survol) |
+
+## 2026-09-29 — Après clôture : textes validés, infobulle au survol
+
+- Le porteur valide les textes des infobulles et demande qu'elles s'ouvrent au passage de la souris.
+- Nouveau contrôleur `info-tip` sur le `<details>` : il ouvre au `pointerenter` d'une souris et ferme au `pointerleave`, et un clic pendant le survol garde l'infobulle ouverte. Clavier, toucher et rendu sans JavaScript sont inchangés.
+- **Ce qui a dérapé** :
+  - La première version filtrait par `matchMedia("(hover: hover)")`. Chrome sans interface répond `false` : le test système ne pouvait pas ouvrir l'infobulle. Le filtre lit donc `event.pointerType`.
+  - Dans le test, `assert_selector "details[open]", text:` en fin de ligne prenait la ligne suivante (un clic) comme valeur de `text:` : le test fermait l'infobulle avant de vérifier. D'où l'écriture `assert_selector("details[open]", text:)`, entre parenthèses.
