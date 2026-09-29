@@ -28,6 +28,13 @@ module Factories
       end
     end
 
+    # ADR-0065: a direction account attached to its school, signing in by PIN alone.
+    def create_school_admin(school: create_school, invited_by: nil, **attributes)
+      create_user(role: "school_admin", **attributes).tap do |admin|
+        Orm::SchoolStaff.create!(user: admin, school:, invited_by:)
+      end
+    end
+
     # Returns the account; with a second factor, `member.totp_secret` is the clear secret
     # an authenticator app would hold, to compute the current code (ROTP::TOTP).
     def create_team_member(team_role: "admin", second_factor: true, **attributes)

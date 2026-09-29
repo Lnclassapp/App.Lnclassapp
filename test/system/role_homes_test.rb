@@ -52,16 +52,8 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_signs_out
   end
 
-  # school_admin is V2 (HomeDestination): the account lands on the pending screen, in the shell of its role, whose four
-  # destinations are all inactive.
-  test "the school admin lands on the pending screen, with every destination of their navigation inactive" do
-    sign_in_as create_user(role: "school_admin", first_name: "Koffi")
-
-    assert_home pending_account_path
-    assert_selector "main", text: I18n.t("identity.pending_accounts.show.other.title")
-    assert_navigation inactive: %i[home classrooms teachers students]
-    assert_signs_out
-  end
+  # The school admin's journey (sign-in, « Travail des élèves », « Enseignants ») is the system test of espace-direction-simple
+  # Lot C (test/system/school_admin/student_work_test.rb): its pages are not drawn before it.
 
   test "on a phone, the student opens every destination from the bottom bar" do
     sign_in_as @student
