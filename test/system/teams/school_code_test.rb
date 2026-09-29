@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CE-06, CE-07 (ADR-0057, UDR-0044): on a school's page, the team reads the school code, copies it and its sign-up link,
+# CE-06, CE-07, FU-26 (ADR-0057, UDR-0044, UDR-0054): on a school's page, the team reads the school code, copies it and its sign-up link,
 # and regenerates it from the ⋮ menu after a confirmation — without reloading the page. The old code stops working.
 class Teams::SchoolCodeTest < ApplicationSystemTestCase
   HEADER = "teams.schools.header".freeze
@@ -23,11 +23,11 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
     end
     assert_no_page_reload do
       click_on I18n.t("#{HEADER}.copy_code")
-      assert_toast I18n.t("#{HEADER}.code_copied")
+      assert_toast I18n.t("shared.clipboard.copied_code")
       assert_equal "K7M-4QZ", clipboard
 
       click_on I18n.t("#{HEADER}.copy_link")
-      assert_toast I18n.t("#{HEADER}.link_copied")
+      assert_toast I18n.t("shared.clipboard.copied_link")
       assert_equal school_code_signup_url("k7m4qz", host: URI(current_url).host, port: URI(current_url).port), clipboard
     end
   end
@@ -65,7 +65,7 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
       click_on I18n.t("#{HEADER}.copy_code")
-      assert_toast I18n.t("#{HEADER}.code_copied")
+      assert_toast I18n.t("shared.clipboard.copied_code")
     end
   end
 end

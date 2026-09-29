@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
-# Rôle : corps de la page d'une classe (CL-10) : cours assignés actifs et publiés ; élèves présents, seulement si show_roster
-# ADR  : 0026, 0028, 0048, 0060 · UDR : 0027, 0047
+# Rôle : corps de la page d'une classe (CL-10) : cours assignés actifs et publiés ; élèves présents, seulement si show_roster, filtrés par nom (search:)
+# ADR  : 0026, 0028, 0048, 0060 · UDR : 0027, 0047, 0054
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -15,13 +15,16 @@ module Queries
       COURSE_COLUMNS = %w[courses.id courses.slug courses.name courses.subtitle levels.name series.name materials.name
                           materials.category].freeze
       STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact].freeze
+      # « Awa Bamba » se trouve par « awa », « bamba » ou « awa bamba » (UDR-0054 §3.9).
+      STUDENT_NAME = "concat_ws(' ', users.first_name, users.last_name)".freeze
 
+      # search : « Chercher un élève » ; vide ou nil → toute la liste. Il ne filtre que les élèves de cette classe.
       # → Overview | nil
-      def call(public_id:, show_roster:)
+      def call(public_id:, show_roster:, search: nil)
         id = Orm::Classroom.where(public_id:).pick(:id)
         return if id.nil?
 
-        Overview.new(courses: courses(id), students: (students(id) if show_roster))
+        Overview.new(courses: courses(id), students: (students(id, search) if show_roster))
       end
 
       private
@@ -39,9 +42,10 @@ module Queries
         end
       end
 
-      def students(classroom_id)
-        rows = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)
-                                    .order("users.last_name", "users.first_name").pluck(*STUDENT_COLUMNS)
+      def students(classroom_id, search)
+        scope = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)
+        rows = Queries::Shared::TextSearch.apply(scope, search, columns: [ STUDENT_NAME ])
+                                          .order("users.last_name", "users.first_name").pluck(*STUDENT_COLUMNS)
         sessions = last_sessions(rows.map(&:first))
         photos = Queries::Identity::PhotoVersions.for(user_ids: rows.map(&:first))
 

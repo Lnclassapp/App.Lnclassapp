@@ -1,15 +1,11 @@
 <%# 🌐 UI · classroom/classroom_essentials/show — une fiche essentielle vue depuis une classe (CL-12, AS-20) %>
 <%# Rôle : en-tête de la fiche avec sa bascule, puis ses exercices publiés, chacun avec la sienne et la réussite de la classe %>
-<%# ADR  : 0048 · UDR : 0006, 0007, 0028, 0029 %>
+<%# ADR  : 0048 · UDR : 0006, 0007, 0028, 0029, 0054 · retour : le cours dans la classe %>
 <% essential = @essential.essential %>
 <% active = @classroom.status == "active" %>
-<% content_for :title, t(".page_title", essential: essential.name, classroom: @classroom.name) %>
+<% page_title essential.name %>
 <% content_for :nav_key, "classrooms" %>
-<nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-  <%= link_to classroom_course_path(@classroom.public_id, @essential.course_slug), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-    <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back", course: @essential.course_name) %>
-  <% end %>
-</nav>
+<%= ui_back_link @essential.course_name, href: classroom_course_path(@classroom.public_id, @essential.course_slug) %>
 
 <%= ui_card padding: :md, class: "mb-8" do %>
   <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">

@@ -128,3 +128,13 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 *Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md). Statut : `Proposé`. Contrat : [UDR-0052](0052-espace-direction-simple.md) §3.*
 
 - Le menu ⋮ `#school-header-actions` de la fiche gagne, en premier, « Inviter la direction » (`user-plus`, frame `modal`), absent pour un établissement non actif.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Recherche pendant la frappe** : `form#schools-filters` porte le contrôleur `search` : envoi 300 ms après la dernière frappe dans la recherche (au moins 2 caractères, ou vide), URL remplacée ; envoi au changement des quatre listes (URL avancée) ; « Filtrer » masqué dès que le contrôleur est connecté, présent sans JavaScript. Le patron du §4 pour les listes longues inclut désormais ce contrôleur.
+- **Retour de la fiche** : « Établissements » vise `back_href(schools_path, from: schools_path)` : la liste filtrée d'où l'on vient, sinon la liste sans filtre.
+- **Pas d'index** pour la recherche (UDR-0054 §2.12, mesure au PRD §7 du chantier).
+- **Infobulles** : statut (brouillon, actif, désactivé) et « Code d'établissement » (UDR-0054 §3.4).
+- Titres : « Établissements · Équipe · Lnclass », « <nom> · Équipe · Lnclass », « Modifier l'établissement · Équipe · Lnclass ».

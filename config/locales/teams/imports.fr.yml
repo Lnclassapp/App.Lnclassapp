@@ -12,11 +12,12 @@ fr:
       error_codes:
         json_invalid: "Le fichier n'est pas un JSON lisible."
         format_mismatch: "Le format du fichier ne correspond pas à ce type d'import (attendu : %{expected})."
+        format_of_other_kind: "Ce fichier est un import « %{received_kind} » (format %{received}), pas un import « %{expected_kind} » (format %{expected}) : téléversez-le depuis l'import « %{received_kind} »."
         version_unsupported: "Cette version du format n'est pas prise en charge (attendue : %{expected})."
         unknown_target: "La cible indiquée est introuvable."
         too_many_roots: "Le fichier contient %{count} éléments ; %{max} au plus."
         too_large: "Le fichier est trop volumineux."
-        schema: "Valeur non conforme au format attendu (%{keyword})."
+        schema: "Valeur non conforme au format attendu."
         blank: "Valeur obligatoire manquante."
         too_long: "Valeur trop longue."
         unknown_level: "Niveau inconnu."
@@ -29,6 +30,19 @@ fr:
         question_structure: "Question incomplète : vérifiez ses propositions et la bonne réponse."
         write_failed: "L'enregistrement de cet élément n'a pas abouti."
         taken: "Ce nom est déjà pris par une autre DRENA."
+        no_latin_character: "Le nom doit contenir au moins une lettre ou un chiffre latin."
+      # Erreurs de schéma, par mot-clé json_schemer (Teams::ImportsHelper) ; les autres prennent error_codes.schema.
+      schema_keywords:
+        schema: "Clé inconnue : ce format ne la prévoit pas."
+        required: "Clé obligatoire manquante."
+        string: "Valeur attendue : un texte."
+        integer: "Valeur attendue : un nombre entier."
+        number: "Valeur attendue : un nombre."
+        boolean: "Valeur attendue : vrai ou faux."
+        array: "Valeur attendue : une liste."
+        object: "Valeur attendue : un objet."
+        const: "Valeur inattendue pour cette clé."
+        maxLength: "Valeur trop longue."
       index:
         page_title: "Imports"
         title: "Imports"
@@ -49,6 +63,13 @@ fr:
           author: "Auteur"
       new:
         title: "Importer : %{kind}"
+        # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
+        page_titles:
+          schools: "Importer des établissements"
+          course_tree: "Importer des cours complets"
+          essentials: "Importer des fiches essentielles"
+          exercises: "Importer des exercices"
+          drenas: "Importer des DRENA"
         file: "Fichier JSON"
         limits: "Un fichier .json de %{megabytes} Mo au plus, avec %{roots} éléments au plus."
         submit: "Lancer l'import"
@@ -58,10 +79,16 @@ fr:
         tracking_title: "Import : %{kind}"
         close: "Fermer"
       show:
-        page_title: "Import : %{kind}"
+        # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
+        page_titles:
+          schools: "Import d'établissements"
+          course_tree: "Import de cours complets"
+          essentials: "Import de fiches essentielles"
+          exercises: "Import d'exercices"
+          drenas: "Import de DRENA"
         title: "Import : %{kind}"
         subtitle: "%{filename} · %{author} · %{date}"
-        back: "Retour aux imports"
+        back: "Imports"
       status:
         finished_at: "Fini le %{time}"
         processed:

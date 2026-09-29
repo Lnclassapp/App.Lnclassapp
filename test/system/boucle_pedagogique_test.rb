@@ -139,9 +139,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     click_on t("identity.sessions.new.submit")
 
     secret = find("#second-factor-secret", wait: SIGN_IN_WAIT).text.delete(" ")
+    # The code leaves by itself at the sixth digit; the codes go on once they are kept (UDR-0054 §3.6, §3.7).
     fill_in "second_factor[code]", with: ROTP::TOTP.new(secret).now
-    click_on t("identity.second_factor_enrollments.new.submit")
-    click_on t("identity.second_factor_enrollments.backup_codes.done"), wait: SIGN_IN_WAIT
+    check t("identity.second_factor_enrollments.backup_codes.kept"), wait: SIGN_IN_WAIT
+    click_on t("identity.second_factor_enrollments.backup_codes.continue")
 
     assert_selector "main#main", wait: SIGN_IN_WAIT
     assert_current_path team_home_path

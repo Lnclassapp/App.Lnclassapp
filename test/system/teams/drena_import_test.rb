@@ -30,6 +30,21 @@ class Teams::DrenaImportTest < ApplicationSystemTestCase
     using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }
   end
 
+  def box(selector) = page.evaluate_script("(({ top, left }) => ({ top: Math.round(top), left }))(document.querySelector(#{selector.to_json}).getBoundingClientRect())")
+
+  # UDR-0053 : at 1280 px, the two buttons stay side by side, « Importer des DRENA » first — the long subtitle yields.
+  test "at 1280 px, « Importer des DRENA » and « Nouvelle DRENA » are on one line" do
+    page.current_window.resize_to(1280, 900)
+    visit drenas_path
+
+    import = box("#drenas-header-actions a[href*='kind=drenas']")
+    create = box("#drenas-header-actions a[href$='/drenas/new']")
+    assert_equal import["top"], create["top"], "« Nouvelle DRENA » passe sous l'import"
+    assert_operator create["left"], :>, import["left"]
+  ensure
+    page.current_window.resize_to(1400, 1400)
+  end
+
   test "the import button opens the modal with its help; the delivered file gives 41 imported, then 41 skipped" do
     assert_selector "#drenas_empty", text: "Créez la première DRENA, ou importez-les toutes depuis un fichier JSON."
     assert_link "Importer des DRENA", href: new_teams_import_path(kind: "drenas")

@@ -181,6 +181,17 @@ module UseCases
         run_import([ { "name" => "Lycée A" } ])
 
         assert_equal [ [ "format", "format_mismatch" ] ], error_pairs
+        assert_equal({ expected: "lnclass.schools" }, @reports.report.import_errors.sole.params)
+      end
+
+      # Le rapport dit quel format il a reçu, pour que l'écran nomme le bon import (fichier d'écoles dans l'import des DRENA).
+      test "le rejet sur le format note le format reçu, s'il est un texte" do
+        run_import(schools("Lycée A").merge("format" => "lnclass.drenas"))
+        assert_equal({ expected: "lnclass.schools", received: "lnclass.drenas" }, @reports.report.import_errors.sole.params)
+
+        @reports = FakeReports.new
+        run_import(schools("Lycée A").merge("format" => 12))
+        assert_equal({ expected: "lnclass.schools" }, @reports.report.import_errors.sole.params)
       end
 
       test "un lot refusé par la base est rejoué élément par élément : un seul élément en write_failed" do

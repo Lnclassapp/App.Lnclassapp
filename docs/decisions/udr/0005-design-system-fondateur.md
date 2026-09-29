@@ -153,3 +153,13 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 - **Champ** : l'API devient `ui_field(form, :attribut, as:, label:, hint:, required:, choices:, reveal: false, **input_html)`. `reveal: true` (refusé hors `as: :password`, `ArgumentError`) ajoute dans le champ, à droite, un bouton œil de 48 px, `hidden` tant que le contrôleur Stimulus `password-reveal` ne l'a pas montré : `eye` et « Afficher le code » quand le PIN est masqué, `eye-slash` et « Masquer le code » quand il est affiché (heroicons outline, taille `md`). Règles complètes dans l'UDR-0051.
 - **Contrôleur** : `password-reveal` (bascule `password` ↔ `text`, `aria-pressed`, libellé ; remasque au chargement, avant l'envoi et avant la mise en cache ; garde le bouton visible au morphing du 422).
 - Visible sur `/design` (champ mot de passe de la section « Champs de formulaire »), vérifié par `test/system/design_system_test.rb`.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Nouveaux composants** (API dans `ComponentsHelper`, visibles sur `/design`, section « Finitions », vérifiés par `test/system/design_system_test.rb`) : `ui_back_link(label, href:)` (`components/_back_link`) ; `ui_info_tip(text, label:)` (`components/_info_tip`, `<details>` natif) ; `ui_copy_button(text, label:, copied:, failed:, aria_label:, variant:, size:, icon:)` (`components/_copy_button`, contrôleur `clipboard`). Règles complètes : UDR-0054 §3.
+- **API modifiées** : `ui_page_header(title:, subtitle:, back: nil)` (`back: { label:, href: }` rend le lien de retour au-dessus du `h1`) ; `ui_modal(…, document_title: nil)` (titre de l'onglet tant que la modale est ouverte) ; `ui_field(…, autofocus: true)` pose `data-autofocus-target="field"` au lieu de l'attribut `autofocus`.
+- **Contrôleurs** : `clipboard`, `autofocus`, `autosubmit`, `search`, `download` s'ajoutent ; `modal` émet `modal:opened` après `showModal()` et gère le titre de l'onglet ; `classroom--join-code-copy` est supprimé.
+- **Utilitaire maison** : s'ajoute `summary-plain` (résumé de `<details>` sans marqueur). Aucun nouveau token.
+- Interdits ajoutés au §4 : l'attribut `autofocus` dans une vue, `title=` comme seule aide.

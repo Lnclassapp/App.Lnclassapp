@@ -546,6 +546,97 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "h1", text: "Mes classes"
     assert_select "h1", text: "Seul"
     assert_includes rendered, "Action"
+    assert_select "nav", 0
+  end
+
+  # --- Finitions (UDR-0054) ---------------------------------------------------
+
+  test "ui_back_link is a named nav holding one chevron link labelled by the page it leads to" do
+    show ui_back_link("Établissements", href: "/teams/schools?search=lyc")
+
+    assert_select "nav.mb-4.text-sm[aria-label=?]", I18n.t("components.back_link.label") do
+      assert_select "a.inline-flex.min-h-tap.text-mute[href='/teams/schools?search=lyc']", text: "Établissements" do
+        assert_select "svg.size-4[aria-hidden=true]"
+        assert_select "span.truncate", text: "Établissements"
+      end
+    end
+  end
+
+  test "ui_page_header renders its back link above the h1" do
+    show ui_page_header(title: "Lycée moderne de Cocody", back: { label: "Établissements", href: "/teams/schools" })
+
+    assert_select "nav[aria-label=?] + div h1", I18n.t("components.back_link.label"), text: "Lycée moderne de Cocody"
+    assert_select "nav a[href='/teams/schools']", text: "Établissements"
+  end
+
+  test "ui_info_tip is a native details whose summary names the help and whose panel stays in the flow" do
+    show ui_info_tip("Part des devoirs rendus.", label: "Taux de rendu")
+
+    assert_select "details.group.inline-block.align-middle" do
+      assert_select "summary.summary-plain.size-tap.cursor-pointer" do
+        assert_select "svg[aria-hidden=true]"
+        assert_select "span.sr-only", text: I18n.t("components.info_tip.label", label: "Taux de rendu")
+      end
+      assert_select "summary + div.max-w-form.bg-mist.text-ink", text: "Part des devoirs rendus."
+    end
+    assert_select "details [class*=absolute]", 0
+  end
+
+  test "ui_copy_button carries the value, a hidden button and both toasts for the clipboard controller" do
+    show ui_copy_button("https://lnclass.ci/c/KFM37", label: "Copier le lien", copied: "Lien copié.",
+                                                      aria_label: "Copier le lien de la classe", icon: "link")
+
+    assert_select "span[data-controller=clipboard][data-clipboard-text-value='https://lnclass.ci/c/KFM37']" do
+      assert_select "button[type=button][hidden][data-clipboard-target=button][data-action='clipboard#copy']" \
+                    "[aria-label='Copier le lien de la classe'].border-line.h-10", text: "Copier le lien"
+      assert_select "template[data-clipboard-target=copied]"
+      assert_select "template[data-clipboard-target=failed]"
+    end
+    copied, failed = Nokogiri::HTML5.fragment(rendered).css("template").map { it.inner_html }
+
+    assert_match "Lien copié.", copied
+    assert_match "data-toast-type=\"success\"", copied
+    assert_match I18n.t("shared.clipboard.failed"), failed
+    assert_match "data-toast-type=\"error\"", failed
+  end
+
+  test "ui_copy_button defaults: secondary, small, clipboard icon, no aria-label of its own" do
+    show ui_copy_button("KFM37", label: "Copier", copied: "Code copié.", failed: "Raté.", variant: :ghost, size: :md)
+
+    assert_select "button[hidden].min-h-tap:not([aria-label])", text: "Copier"
+    assert_equal icon_paths(ui_icon("clipboard-document", size: :md)), icon_paths(css_select("button").first)
+    assert_match "Raté.", Nokogiri::HTML5.fragment(rendered).css("template").last.inner_html
+  end
+
+  test "ui_modal hands its document title to the modal controller and its dialog to the autofocus controller" do
+    html = ui_modal(title: "Nouveau niveau", id: "level", document_title: "Nouveau niveau · Équipe · Lnclass") do |modal|
+      modal.footer { "Pied" }
+      "Corps"
+    end
+    show html
+
+    assert_select "[data-controller=modal][data-modal-document-title-value='Nouveau niveau · Équipe · Lnclass']"
+    assert_select "dialog#level[data-controller=autofocus][data-autofocus-mode-value=dialog]"
+    assert_select "dialog#level[data-action~='modal:opened->autofocus#focus']"
+    assert_select "dialog#level div[data-autofocus-footer]", text: "Pied"
+  end
+
+  test "ui_modal without a document title leaves the tab title alone" do
+    show ui_modal(title: "Supprimer ?", id: "confirm")
+
+    assert_select "[data-controller=modal]:not([data-modal-document-title-value])"
+    assert_select "dialog#confirm[data-controller=autofocus]"
+  end
+
+  test "ui_field autofocus declares the autofocus target instead of the autofocus attribute" do
+    show view.fields(:user, model: Record.new) { |form|
+      ui_field(form, :name, autofocus: true) + ui_field(form, :pin, as: :password, reveal: true, autofocus: true) +
+        ui_field(form, :level, data: { turbo_permanent: true })
+    }
+
+    assert_select "input#user_name[data-autofocus-target=field]:not([autofocus])"
+    assert_select "input#user_pin[data-autofocus-target=field][data-password-reveal-target=input]:not([autofocus])"
+    assert_select "input#user_level[data-turbo-permanent]:not([data-autofocus-target])"
   end
 
   private

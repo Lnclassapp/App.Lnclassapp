@@ -139,6 +139,10 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: /Import lancé/
     assert_select "turbo-stream[action=update][target=modal] turbo-frame#import_status[data-controller='teams--import-status']"
     assert_select "turbo-stream[action=update][target=modal] [data-status=queued]"
+    # UDR-0054 §3.1: the tracking modal names the tab like the page of the report.
+    tab = "Import d'établissements · Équipe · Lnclass"
+    assert_select "turbo-stream[action=update][target=modal] #import-tracking-modal", 1
+    assert_select "turbo-stream[action=update][target=modal] [data-modal-document-title-value=\"#{tab}\"]"
     assert_select "turbo-stream[action=prepend][target=imports] tr#import_#{report.public_id}", text: /ecoles\.json/
     assert_equal @member.id, report.imported_by_id
   end
@@ -168,7 +172,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /Classes générées : 77/
     assert_select "li", text: /Levels skipped : 2/
     assert_select "#import_errors li", 2
-    assert_select "#import_errors li", text: /schools\[4\]\s*Valeur non conforme au format attendu \(required\)/
+    assert_select "#import_errors li", text: /schools\[4\]\s*Clé obligatoire manquante\./
   end
 
   test "the tracking frame alone answers a request coming from the frame" do
@@ -197,6 +201,19 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
 
     get teams_import_path(failed.public_id)
     assert_select "[role=alert]", text: /erreur imprévue/
+  end
+
+  # UDR-0053 (amendment): a file of schools uploaded to the DRENA import names the right import.
+  test "a file of another import kind names that kind in the report" do
+    report = create_import_report(kind: "drenas", status: "rejected", finished_at: Time.current,
+                                  import_errors: [ { "path" => "format", "code" => "format_mismatch",
+                                                     "params" => { "expected" => "lnclass.drenas", "received" => "lnclass.schools" } } ])
+    sign_in_as @member
+
+    get teams_import_path(report.public_id)
+
+    assert_select "#import_errors li",
+                  text: /Ce fichier est un import « Établissements » \(format lnclass\.schools\), pas un import « DRENA »/
   end
 
   test "a generation of the classrooms: listed and filtered, its report without a file and with its own words (ADR-0056)" do

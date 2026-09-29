@@ -14,8 +14,8 @@ class ErrorPathsTest < ApplicationSystemTestCase
     users = Orm::User.count
 
     visit new_join_code_path
+    # A well-formed code leaves by itself at its fifth character (UDR-0054 §3.6): no click on « Continuer ».
     fill_in "join[code]", with: "ZZZ99"
-    click_on t("classroom.join_codes.new.submit")
 
     # recette-v1-defauts, D1 : le code inconnu est refusé dans son champ, sur /join même.
     assert_selector "#join_code_error", text: t("classroom.joins.new.invalid_code.title")
@@ -27,7 +27,6 @@ class ErrorPathsTest < ApplicationSystemTestCase
     assert_text t("classroom.join_codes.create.invalid")
 
     fill_in "join[code]", with: " Kfm 37 "
-    click_on t("classroom.join_codes.new.submit")
     assert_current_path join_classroom_path("kfm37")
     assert_selector "#classroom-preview", text: "Tle D 1"
 
@@ -48,7 +47,6 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
     visit new_join_code_path
     fill_in "join[code]", with: "BCD23"
-    click_on t("classroom.join_codes.new.submit")
     fill_in_student_signup(contact: "07 11 22 33 44")
     click_on t("classroom.joins.signup_form.submit")
 
@@ -177,21 +175,19 @@ class ErrorPathsTest < ApplicationSystemTestCase
     assert_current_path new_identity_second_factor_path, wait: SIGN_IN_WAIT
     assert_no_team_page(new_identity_second_factor_path)
 
+    # The code leaves by itself at the sixth digit (UDR-0054 §3.6): no click on « Vérifier ».
     fill_in "second_factor[code]", with: wrong_totp(member)
-    click_on t("identity.second_factors.new.submit")
     assert_text t("activemodel.errors.models.dtos/identity/second_factor_code_input.attributes.code.invalid")
     assert_no_team_page(new_identity_second_factor_path)
 
     code = ROTP::TOTP.new(member.totp_secret).now
     fill_in "second_factor[code]", with: code
-    click_on t("identity.second_factors.new.submit")
     assert_current_path team_home_path, wait: SIGN_IN_WAIT
 
     sign_out
     visit new_session_path
     sign_in_with(member.contact, "2468")
     fill_in "second_factor[code]", with: code
-    click_on t("identity.second_factors.new.submit")
     assert_text t("activemodel.errors.models.dtos/identity/second_factor_code_input.attributes.code.invalid")
     assert_no_team_page(new_identity_second_factor_path)
   end

@@ -17,7 +17,7 @@ module Entities
     ImportError::BLOCKING = %w[json_invalid format_mismatch version_unsupported unknown_target too_many_roots
                                too_large].freeze
     ImportError::ELEMENT = %w[schema blank too_long unknown_level unknown_series unknown_material unknown_drena
-                              series_not_allowed invalid_value question_structure write_failed national_code_taken taken].freeze
+                              series_not_allowed invalid_value question_structure write_failed national_code_taken taken no_latin_character].freeze
     ImportError::CODES = (ImportError::BLOCKING + ImportError::ELEMENT).freeze
   end
 end

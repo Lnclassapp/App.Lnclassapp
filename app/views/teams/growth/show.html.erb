@@ -1,13 +1,14 @@
 <%# 🌐 UI · teams/growth/show — « Croissance » : k enseignant (i × c) face à sa cible, indicateurs, parrains, classement, attente %>
 <%# Rôle : lecture seule (Queries::Identity::GrowthMetricsQuery::Row) ; période 7 / 30 / 90 jours ; équipe seulement %>
-<%# ADR  : 0049, 0063 · UDR : 0006, 0050 %>
-<% content_for :title, t(".page_title") %>
+<%# ADR  : 0049, 0063 · UDR : 0006, 0050, 0054 (retour « Accueil », infobulles des indicateurs) %>
+<% page_title t(".page_title") %>
 <% viral = @metrics.viral %>
 <% dash = "—" %>
 <% number = ->(value, precision = 1) { value.nil? ? dash : number_with_precision(value, precision:, strip_insignificant_zeros: true) } %>
 <%# « 67 % » : espace insécable avant le signe, comme le veut la typographie française. %>
 <% percent = ->(value) { value.nil? ? dash : "#{(value * 100).round}\u00A0%" } %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", count: @period) %>
+<% tipped = %i[conversion viral_cycle students_per_teacher] %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", count: @period), back: { label: t(".back"), href: team_home_path } %>
 
 <nav id="growth_periods" aria-label="<%= t(".periods_label") %>" class="mb-6 flex flex-wrap gap-2">
   <% Teams::GrowthController::PERIODS.each do |days| %>
@@ -21,7 +22,10 @@
 <div class="grid gap-5">
   <section id="growth_k" aria-labelledby="growth_k_title">
     <%= ui_card do %>
-      <h2 id="growth_k_title" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".k_title") %></h2>
+      <div class="flex flex-wrap items-center gap-x-1">
+        <h2 id="growth_k_title" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".k_title") %></h2>
+        <%= ui_info_tip t(".tips.k"), label: t(".k_title") %>
+      </div>
       <div class="mt-2 flex flex-wrap items-end gap-x-6 gap-y-3">
         <p id="growth_k_value" class="font-display text-5xl font-extrabold text-ink tabular-nums"><%= number.call(viral.k) %></p>
         <p class="pb-2 text-sm text-mute">
@@ -45,7 +49,12 @@
          [ :students_per_teacher, number.call(@metrics.students_per_teacher) ] ].each do |key, value| %>
       <li class="rounded-ln bg-mist p-4">
         <p class="font-display text-3xl font-extrabold text-ink tabular-nums"><%= value %></p>
-        <p class="mt-1 text-sm text-mute"><%= t(".metrics.#{key}") %></p>
+        <div class="mt-1 text-sm text-mute">
+          <%= t(".metrics.#{key}") %>
+          <% if key.in?(tipped) %>
+            <%= ui_info_tip t(".tips.#{key}"), label: t(".metrics.#{key}") %>
+          <% end %>
+        </div>
       </li>
     <% end %>
   </ul>

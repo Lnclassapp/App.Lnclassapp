@@ -31,7 +31,7 @@ L'UDR-0035 a posé l'écran des DRENA avec un seul bouton d'en-tête. Le porteur
 - `app/views/teams/drenas/index.html.erb`, bloc de `ui_page_header`, dans cet ordre :
   1. `ui_button t(".import"), href: new_teams_import_path(kind: "drenas"), variant: :secondary, icon: "arrow-up-tray", data: { turbo_frame: "modal" }` — libellé « Importer des DRENA » ;
   2. le bouton « Nouvelle DRENA » existant, inchangé (`icon: "plus"`, variant par défaut).
-  Les deux sont dans le même bloc de `ui_page_header`, qui les aligne et les fait passer à la ligne sur téléphone. Aucun conteneur ni classe de marge ajoutés.
+  Les deux sont dans `div#drenas-header-actions.flex.flex-wrap.items-center.gap-3.sm:shrink-0.sm:flex-nowrap`, dans le bloc de `ui_page_header` : dès `sm`, ils restent sur une seule ligne et le sous-titre cède la place ; sur téléphone, ils passent à la ligne s'ils ne tiennent pas. C'est le motif de `#schools-header-actions`. *(Amendé le 2026-09-29 : le challenger a vu les boutons empilés à 1 280 px.)*
 - L'état vide de l'écran (`div#drenas_empty`) garde son titre, mais sa description devient « Créez la première DRENA, ou importez-les toutes depuis un fichier JSON. ». Aucun bouton n'est ajouté dans l'état vide : ceux de l'en-tête suffisent.
 - Nouveau partial `app/views/teams/imports/kinds/_drenas.html.erb`, rendu automatiquement par `teams/imports/new` sous le champ de fichier (même mécanisme que `_schools`) :
   - `section#import-help-drenas` (`rounded-ln bg-mist p-4 text-sm space-y-4`), avec `aria-labelledby="import-help-drenas-title"` sur son `h3#import-help-drenas-title` « Format du fichier » (`font-medium text-ink`) ;
@@ -69,6 +69,8 @@ L'UDR-0035 a posé l'écran des DRENA avec un seul bouton d'en-tête. Le porteur
 - Le tableau des DRENA **n'est pas** mis à jour en direct pendant l'import. À la fin, le suivi affiche le bilan, et l'équipe recharge ou rouvre l'écran pour voir les nouvelles lignes. Aucun Turbo Stream ni broadcast n'est ajouté.
 - Échec du téléversement (fichier absent, trop gros, pas du JSON) : re-rendu en 422 dans la modale, comme les autres types.
 - Erreurs par ligne : chemins `drenas[i].name` dans le rapport du socle.
+- *(Amendé le 2026-09-29, pour tous les types d'import.)* Une erreur de schéma du rapport (`code: "schema"`) s'affiche par `Teams::ImportsHelper#import_error_message`, selon son mot-clé json_schemer, avec les clés `teams.imports.schema_keywords.<mot-clé>` : `schema` → « Clé inconnue : ce format ne la prévoit pas. », `required` → « Clé obligatoire manquante. », `string` → « Valeur attendue : un texte. », `array` → « Valeur attendue : une liste. », `object` → « Valeur attendue : un objet. », etc. Un mot-clé sans phrase, ou une erreur sans mot-clé, affiche « Valeur non conforme au format attendu. ». Le mot-clé brut ne paraît jamais à l'écran.
+- *(Amendé le 2026-09-29, pour tous les types d'import.)* Un rejet `format_mismatch` dont le format reçu est celui d'un autre type d'import nomme ce type et le bon bouton : « Ce fichier est un import « Établissements » (format lnclass.schools), pas un import « DRENA » (format lnclass.drenas) : téléversez-le depuis l'import « Établissements ». ». Le moteur note le format reçu (`params.received`) quand c'est un texte. Un format inconnu ou absent garde le message générique « Le format du fichier ne correspond pas à ce type d'import (attendu : …). ».
 
 **États obligatoires**
 - Vide (aucune DRENA) : l'état vide de l'écran, avec la description ci-dessus. Les deux boutons de l'en-tête restent visibles.

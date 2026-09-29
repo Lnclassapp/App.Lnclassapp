@@ -68,7 +68,8 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
         within "turbo-frame#import_status" do
           assert_text "Rejeté"
           assert_selector "[role=alert]", text: "rejeté en bloc"
-          assert_selector "#import_errors li", text: /\Aformat\s+Le format du fichier ne correspond pas/
+          assert_selector "#import_errors li",
+                          text: /\Aformat\s+Ce fichier est un import « Fiches essentielles » \(format lnclass\.essentials\), pas un import « Établissements »/
         end
       end
     end

@@ -1,8 +1,9 @@
 <%# 🌐 UI · teams/classroom_plans/show — barème des classes générées, écran du référentiel de l'équipe %>
 <%# Rôle : garde-fou (classes existantes inchangées), lignes non définies, totaux par établissement, tableau #classroom_plan_lines ; « Modifier » au menu ⋮ %>
-<%# ADR  : 0030, 0058 · UDR : 0006, 0042, 0045 %>
-<% content_for :title, t(".page_title") %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+<%# ADR  : 0030, 0058 · UDR : 0006, 0042, 0045, 0054 %>
+<% page_title t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
+                   back: { label: t(".back"), href: team_home_path } %>
 
 <p id="classroom-plan-notice" class="mb-4 flex items-start gap-2 text-sm text-mute">
   <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-info" %>

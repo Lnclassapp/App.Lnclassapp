@@ -83,3 +83,11 @@ Deux frictions sont à éviter :
 - Le point d'entrée « Débloquer un compte » de l'accueil équipe ou de la navigation appartient au lot de cet écran. Il pointe vers `teams_account_lookup_path`.
 - Le bouton « Générer un code de récupération » de l'enseignant appartient à la page de la classe (lot D4) : un `form_with` en POST vers `account_pin_recovery_codes_path(<public_id de l'élève>)`, sans `data-turbo-frame`. Le stream ouvre la modale du code.
 - Le code n'a pas de bouton « Copier », qui demanderait un contrôleur Stimulus ; il est fait pour être dicté.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Recherche pendant la frappe** : `form#account-lookup-form` porte le contrôleur `search` en mode `digits` : la recherche part seule dès que le numéro est complet (10 chiffres, ou 13 avec `225`, ou 15 avec `00225`), 300 ms après la dernière frappe, URL remplacée ; un numéro incomplet n'envoie rien. La recherche reste **exacte** (§2.1 inchangé) ; « Rechercher » reste sans JavaScript. Le champ reçoit le focus d'arrivée.
+- **Le code de récupération reste sans bouton « Copier »** (décision du porteur du 2026-09-29, UDR-0054 §2.7) : §4 confirmé.
+- Retour « Accueil » vers l'accueil équipe ; titre « Débloquer un compte · Équipe · Lnclass ».

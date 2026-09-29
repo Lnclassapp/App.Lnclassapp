@@ -1,7 +1,7 @@
 <%# 🌐 UI · teams/homes/show — accueil équipe (TR-09, CA-25) %>
 <%# Rôle : raccourcis, puis les sections de HOME_SECTIONS[:team] (régions, référentiel, activité récente différée) %>
-<%# ADR  : 0034, 0038, 0041 · UDR : 0006, 0007, 0018 %>
-<% content_for :title, t(".page_title") %>
+<%# ADR  : 0034, 0038, 0041 · UDR : 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass ») %>
+<% page_title t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle") %>
 
 <%= render "shortcuts", can_invite: @can_invite %>

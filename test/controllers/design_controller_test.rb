@@ -21,6 +21,13 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # UDR-0054 §3.9: the search form is a named search landmark (form_with renders them only through `html:`).
+  test "the search demonstration is a named search landmark" do
+    get design_path
+
+    assert_select "form#design-search-form[role=search][aria-label='#{I18n.t("design.index.finishes.search.label")}']"
+  end
+
   test "refuses an unknown role" do
     assert_raises(ActionController::UrlGenerationError) { design_shell_path(role: "admin") }
   end

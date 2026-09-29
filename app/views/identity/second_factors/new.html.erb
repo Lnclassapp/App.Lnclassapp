@@ -1,19 +1,40 @@
 <%# 🌐 UI · identity/second_factors/new — code du second facteur d'un compte team %>
-<%# Rôle : code TOTP à 6 chiffres ou code de secours ; échec re-rendu en 422 par Turbo %>
-<%# ADR  : 0031 · UDR : 0005 %>
-<% content_for :title, t(".page_title") %>
+<%# Rôle : code TOTP envoyé dès le 6ᵉ chiffre, ou code de secours (`backup`) envoyé à la main ; échec re-rendu en 422 %>
+<%# ADR  : 0031 · UDR : 0005, 0054 (§3.6) %>
+<% page_title t(".page_title") %>
 <main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
   <div class="w-full max-w-sm">
-    <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "shield-check", padding: :lg do %>
-      <%= form_with model: @form, scope: :second_factor, url: identity_second_factor_path, id: "second-factor-form", class: "space-y-5" do |form| %>
+    <%= ui_card title: t(".title"), subtitle: t(@backup ? ".backup_subtitle" : ".subtitle"), icon: "shield-check", padding: :lg do %>
+      <%# Le code de secours a son propre champ, sans envoi automatique : il ne peut pas partir tronqué au 6ᵉ caractère.
+          La bascule est une visite ordinaire, pas un « replace » : sur le même chemin, Turbo fusionnerait la page (morph)
+          sans reconnecter <body>, et l'auto-focus ne viserait pas le nouveau champ. %>
+      <%= form_with model: @form, scope: :second_factor, url: identity_second_factor_path, id: "second-factor-form", class: "space-y-5",
+                    data: (@backup ? {} : { controller: "autosubmit", autosubmit_pattern_value: '^\d{6}$',
+                                            autosubmit_message_value: t("shared.autosubmit.sending") }) do |form| %>
         <% if @form.errors[:base].any? %>
           <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
             <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
             <p><%= @form.errors[:base].to_sentence %></p>
           </div>
         <% end %>
-        <%= ui_field form, :code, required: true, value: "", hint: t(".code_hint"), inputmode: "text",
-                     autocomplete: "one-time-code", autofocus: true, maxlength: 12 %>
+        <% if @backup %>
+          <%= hidden_field_tag :backup, "1", id: nil %>
+          <%= ui_field form, :code, label: t(".backup_label"), required: true, value: "", autofocus: true,
+                                    inputmode: "text", autocomplete: "off", autocapitalize: "none", maxlength: 12 %>
+          <p class="text-sm">
+            <%= link_to t(".use_app"), new_identity_second_factor_path,
+                        class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+          </p>
+        <% else %>
+          <%= ui_field form, :code, required: true, value: "", autofocus: true, hint: t("shared.autosubmit.hint_second_factor"),
+                                    inputmode: "numeric", autocomplete: "one-time-code", maxlength: 6, pattern: '\d{6}',
+                                    data: { autosubmit_target: "input" } %>
+          <p class="sr-only" role="status" aria-live="polite" data-autosubmit-target="status"></p>
+          <p class="text-sm">
+            <%= link_to t(".use_backup"), new_identity_second_factor_path(backup: 1),
+                        class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+          </p>
+        <% end %>
         <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
       <% end %>
       <div class="mt-5 flex justify-center">

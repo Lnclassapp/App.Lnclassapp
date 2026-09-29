@@ -1,8 +1,10 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
 <%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année par niveau, enseignants en attente et rattachés %>
-<%# ADR  : 0030, 0041, 0059, 0063 · UDR : 0006, 0036, 0046, 0050 %>
-<% content_for :title, t(".page_title", name: @school.name) %>
+<%# ADR  : 0030, 0041, 0059, 0063 · UDR : 0006, 0036, 0046, 0050, 0054 · retour vers la liste filtrée d'où la fiche a été ouverte %>
+<% page_title @school.name %>
 <% content_for :nav_key, "schools" %>
+<%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
+<%= ui_back_link t(".back"), href: back_href(schools_path, from: schools_path) %>
 <%= render "header", school: @school %>
 
 <div class="grid gap-8 lg:grid-cols-main-aside">
