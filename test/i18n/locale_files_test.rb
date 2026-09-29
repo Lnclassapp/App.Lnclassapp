@@ -28,6 +28,14 @@ class LocaleFilesTest < ActiveSupport::TestCase
     assert_empty owners.select { |_, paths| paths.size > 1 }
   end
 
+  # The import report shows each error by its code (teams/imports/_import_errors): a code without a message would
+  # print « translation missing » to the team.
+  test "every import error code has its French message" do
+    missing = Entities::Catalog::ImportError::CODES.reject { I18n.exists?("teams.imports.error_codes.#{it}", :fr) }
+
+    assert_empty missing
+  end
+
   test "no term forbidden by UDR-0007" do
     offences = FILES.flat_map do |path|
       leaves(YAML.load_file(path), values: true).filter_map { |key, value| "#{relative(path)} #{key}" if value.to_s.match?(FORBIDDEN) }

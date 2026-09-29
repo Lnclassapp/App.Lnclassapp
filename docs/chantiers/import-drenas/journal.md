@@ -8,6 +8,7 @@
 |---|---|---|---|
 | 2026-09-29 | Le repository des DRENA (`taken_names`, `insert_many`) remonte du Lot B au Lot 0 | `test/architecture/port_contracts_test.rb` exige qu'un adaptateur implémente toute méthode de son port : déclarer le port sans l'implémenter rendrait le Lot 0 rouge | Non |
 | 2026-09-29 | L'import des écoles garde la comparaison après `parameterize` (ADR-0039) : « Drena-Abidjan-1 » résout, `abidjan-1` non | « Slug exact » voulait dire « sans préfixe ajouté », pas « sans normalisation » ; précisé dans l'ADR-0066 §4 | Oui (ADR-0066 §4) |
+| 2026-09-29 | À l'import, un nom sans lettre ni chiffre latin a son motif propre, `no_latin_character`, qui affiche le message du formulaire (avant : « Valeur non valide. », générique) | Demande du porteur après le bilan du challenger. Un garde-fou vérifie désormais que chaque motif d'import a son message en français | Oui (ADR-0066 §4, amendé) |
 | 2026-09-29 | Plafond du fichier de DRENA à 500 lignes, celui des établissements reste à 5 000 | Le porteur s'inquiétait d'une limite trop basse pour ses plus de 3 000 écoles : les 500 lignes ne concernent que les DRENA, et ses 3 851 écoles tiennent dans les 5 000 | Oui (ADR-0066 §4) |
 
 ## Ce qui a dérapé
@@ -38,7 +39,6 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | `test/domain/use_cases/identity/register_teacher_test.rb` construit encore des DRENA factices aux slugs `abidjan-1`, `abidjan-2` | Le test ne dépend pas du format du slug et passe ; le réécrire élargirait le lot | aucun (cosmétique) |
 | À 640 px, les deux boutons ne se replient plus et le sous-titre des DRENA tient sur environ 6 lignes (constat du challenger) | Conforme à l'UDR-0053 amendée, mais peu lisible sur tablette ; à arbitrer (sous-titre plus court, ou repli des boutons sous `md`) | à ouvrir |
-| À l'import, « ??? » affiche le libellé générique « Valeur non valide. », alors que le formulaire dit « Le nom doit contenir au moins une lettre ou un chiffre latin. » | Les libellés d'erreur d'import sont communs à tous les types ; un libellé propre aux DRENA demande un motif ou un paramètre de plus | à ouvrir |
 | Une clé inconnue s'affiche « Valeur non conforme au format attendu (schema). », avec le mot-clé brut | Cela vient du socle d'import commun (ADR-0039), pas de ce chantier | à ouvrir |
 
 ## Clôture

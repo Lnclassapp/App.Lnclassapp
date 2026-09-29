@@ -78,7 +78,7 @@ module UseCases
         assert validate({ "name" => "M" * 80 }).valid?
 
         letterless = validate({ "name" => "???" })
-        assert_equal [ [ "drenas[0].name", "invalid_value" ] ], error_pairs(letterless)
+        assert_equal [ [ "drenas[0].name", "no_latin_character" ] ], error_pairs(letterless)
         assert_equal({ value: "???" }, letterless.errors.first.params)
         assert_nil letterless.plan
         assert_nil letterless.key
@@ -91,7 +91,7 @@ module UseCases
 
         assert_equal [ "completed", 4, 0, 0, 4 ],
                      report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
-        assert_equal [ [ "drenas[0].name", "blank" ], [ "drenas[1].name", "too_long" ], [ "drenas[2].name", "invalid_value" ] ],
+        assert_equal [ [ "drenas[0].name", "blank" ], [ "drenas[1].name", "too_long" ], [ "drenas[2].name", "no_latin_character" ] ],
                      report.import_errors.first(3).map { it.values_at("path", "code") }
         assert_equal "schema", report.import_errors.last["code"]
         assert_match(/\Adrenas\[3\]/, report.import_errors.last["path"])
