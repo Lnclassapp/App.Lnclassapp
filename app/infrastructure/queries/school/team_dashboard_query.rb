@@ -16,6 +16,8 @@ module Queries
                              :active_students_count)
       # contact : toujours masqué (Entities::Identity::Contact.mask) ; le numéro complet ne quitte pas cette query.
       SignupRow = Data.define(:public_id, :display_name, :role, :school_name, :contact, :created_at)
+      # Élèves placés d'un couple (niveau, DRENA), et combien sont actifs dans la période.
+      Placed = Data.define(:level_id, :drena_id, :students, :active)
 
       RECENT = 10
 
@@ -39,13 +41,14 @@ module Queries
         @since = period.since.in_time_zone
         drena_id, drena = find_drena(drena_public_id)
         @drena_id = drena_id
-        accounts = accounts_by_role
-        placed = placed_by_level
+        placed = placed_students
+        placed_count = placed.sum(&:students)
+        accounts = accounts_by_role(placed_count)
 
         Row.new(period:, school_year: @year, drena:, accounts:, **flows, schools: coverage, classrooms_count: classrooms.count,
-                levels: levels(placed), placed_students_count: placed.values.sum,
-                unplaced_students_count: (accounts.students - placed.values.sum if drena.nil?),
-                drenas: drena_rows, recent_signups:)
+                levels: levels(tally(placed, :level_id)), placed_students_count: placed_count,
+                unplaced_students_count: (accounts.students - placed_count if drena.nil?),
+                drenas: drena_rows(placed), recent_signups:)
       end
 
       private
@@ -81,8 +84,9 @@ module Queries
         Orm::User.where(id: placements.select(:student_id)).or(Orm::User.where(id: teacher_placements.select(:teacher_id)))
       end
 
-      def accounts_by_role
-        return Accounts.new(students: placements.count, teachers: teacher_placements.count, team: nil) if @drena_id
+      # placed_count : sous un filtre, les élèves du territoire sont ses élèves placés.
+      def accounts_by_role(placed_count)
+        return Accounts.new(students: placed_count, teachers: teacher_placements.count, team: nil) if @drena_id
 
         counts = active_users.group(:role).count
         Accounts.new(students: counts.fetch("student", 0), teachers: counts.fetch("teacher", 0), team: counts.fetch("team", 0))
@@ -110,7 +114,18 @@ module Queries
         Coverage.new(active:, with_classroom:, with_teacher:, with_student:)
       end
 
-      def placed_by_level = placements.group("classrooms.level_id").count
+      # Une seule lecture des élèves placés, groupée par (niveau, DRENA) : le total, la répartition par niveau et les lignes
+      # par DRENA en découlent, sur la même définition. Actif : au moins une session commencée dans la période (ADR-0062).
+      def placed_students
+        started = Orm::ExerciseSession.where(started_at: @since..).select(:student_id).to_sql
+        placements.group("classrooms.level_id", "schools.drena_id")
+                  .pluck("classrooms.level_id", "schools.drena_id", Arel.sql("COUNT(*)"),
+                         Arel.sql("COUNT(*) FILTER (WHERE classroom_students.student_id IN (#{started}))"))
+                  .map { Placed.new(*it) }
+      end
+
+      # { niveau ou DRENA => nombre }
+      def tally(placed, key, value = :students) = placed.group_by(&key).transform_values { |rows| rows.sum(&value) }
 
       # Tous les niveaux, par position, même vides : la répartition se lit sur l'échelle entière (TR-12).
       def levels(placed)
@@ -122,14 +137,13 @@ module Queries
       end
 
       # Une lecture groupée par dimension, jamais une par DRENA ; tri par élèves décroissants, puis par nom.
-      def drena_rows
+      def drena_rows(placed)
         counts = {
           schools_count: in_drena(Orm::School.where(status: "active")).group(:drena_id).count,
           classrooms_count: classrooms.group("schools.drena_id").count,
           teachers_count: teacher_placements.group("schools.drena_id").count,
-          students_count: placements.group("schools.drena_id").count,
-          active_students_count: placements.where(student_id: Orm::ExerciseSession.where(started_at: @since..).select(:student_id))
-                                           .group("schools.drena_id").count
+          students_count: tally(placed, :drena_id),
+          active_students_count: tally(placed, :drena_id, :active)
         }
         drenas = @drena_id ? Orm::Drena.where(id: @drena_id) : Orm::Drena.all
         rows = drenas.order(:name).pluck(:id, :public_id, :name).map do |id, public_id, name|

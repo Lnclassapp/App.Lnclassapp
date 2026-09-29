@@ -207,6 +207,42 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     assert_equal 2, dashboard(drena: there.public_id).recent_signups.size
   end
 
+  # Non-regression of the placement definition (chantier cache-ecrans-lourds, lot 2): the total, the levels, the DRENA
+  # rows, their active students and the DRENA filter all read the same placed students, whatever the edge case.
+  test "placed students agree across the total, the levels, the DRENA rows and the filter, on every edge case" do
+    first, second = create_level(name: "6ème", position: 1), create_level(name: "5ème", position: 2)
+    here, there = create_drena(name: "Abidjan 1"), create_drena(name: "Bouaké")
+    here_school, there_school = create_school(drena: here), create_school(drena: there)
+    first_class, second_class = create_classroom(school: here_school, level: first), create_classroom(school: here_school, level: second)
+    there_class = create_classroom(school: there_school, level: second)
+    placed_student(first_class).tap { create_exercise_session(student: it, started_at: 1.day.ago) }
+    placed_student(second_class).tap { create_exercise_session(student: it, started_at: 40.days.ago) }
+    twice = placed_student(first_class).tap { create_exercise_session(student: it, started_at: 2.days.ago) }
+    Orm::ClassroomStudent.create!(classroom: there_class, student: twice, primary: false, joined_at: Time.current)
+    create_student.tap { Orm::ClassroomStudent.create!(classroom: first_class, student: it, primary: false, joined_at: Time.current) }
+    placed_student(create_classroom(school: here_school, level: first, status: "archived"))
+    placed_student(create_classroom(school: here_school, level: first, school_year: "2020-2021"))
+    placed_student(first_class, anonymized_at: Time.current).tap { create_exercise_session(student: it, started_at: 1.day.ago) }
+    placed_student(first_class).tap { Orm::ClassroomStudent.where(student: it).update_all(left_at: Time.current) }
+    placed_student(there_class).tap { create_exercise_session(student: it, started_at: 3.days.ago) }
+    create_student.tap { create_exercise_session(student: it, started_at: 1.day.ago) }
+
+    board = dashboard
+
+    assert_equal [ 4, 5 ], board.to_h.values_at(:placed_students_count, :unplaced_students_count)
+    assert_equal [ 2, 2 ], levels_of(board, first, second)
+    assert_equal [ [ "Abidjan 1", 3, 2 ], [ "Bouaké", 1, 1 ] ], board.drenas.map { [ it.name, it.students_count, it.active_students_count ] }
+    assert_equal 4, board.active_students_count
+
+    filtered = dashboard(drena: here.public_id)
+
+    assert_equal [ 3, nil, 2 ], filtered.to_h.values_at(:placed_students_count, :unplaced_students_count, :active_students_count)
+    assert_equal 3, filtered.accounts.students
+    assert_equal [ 2, 1 ], levels_of(filtered, first, second)
+    assert_equal [ [ "Abidjan 1", 3, 2 ] ], filtered.drenas.map { [ it.name, it.students_count, it.active_students_count ] }
+    assert_equal [ [ "Bouaké", 1, 1 ] ], dashboard(drena: there.public_id).drenas.map { [ it.name, it.students_count, it.active_students_count ] }
+  end
+
   test "an unknown DRENA gives the national view" do
     create_drena
     create_team_member
@@ -248,10 +284,12 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
     assert_equal small, count_queries { dashboard(drena: nil) }
     assert_equal filtered_small, count_queries { dashboard(drena: Orm::Drena.first.public_id) }
-    assert_equal [ 18, 21 ], [ small, filtered_small ], "national, then under a DRENA filter (ADR-0062)"
+    assert_equal [ 16, 18 ], [ small, filtered_small ], "national, then under a DRENA filter (ADR-0062, ADR-0067)"
   end
 
   private
+
+  def levels_of(board, *levels) = levels.map { |level| board.levels.find { it.slug == level.slug }.students_count }
 
   def seed_territory(count)
     level = Orm::Level.first || create_level
