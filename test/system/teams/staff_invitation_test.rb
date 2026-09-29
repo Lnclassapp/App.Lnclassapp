@@ -46,7 +46,9 @@ class Teams::StaffInvitationTest < ApplicationSystemTestCase
 
         assert_selector "#session-form", wait: SIGN_IN_WAIT
         assert_toast "Votre compte est créé. Connectez-vous avec votre numéro et votre PIN."
-        fill_in "session[contact]", with: "0799000009"
+        # UDR-0054 §3.8: « Se connecter » arrives with the number filled in, the focus on the PIN.
+        assert_field "session[contact]", with: "07 99 00 00 09"
+        assert_selector "#session_pin:focus"
         fill_in "session[pin]", with: "4821"
         click_on I18n.t("identity.sessions.new.submit")
 

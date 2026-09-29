@@ -27,7 +27,7 @@ class Classroom::CourseAssignmentsControllerTest < ActionDispatch::IntegrationTe
     assert_response :success
     assert_select "title", text: including(tl("page_title", course: "Génétique et évolution"))
     assert_select "h1", text: "Génétique et évolution"
-    assert_select "a[href='#{course_path(@course.slug)}']", text: including(tl("back"))
+    assert_select "nav[aria-label='Retour'] a[href='#{course_path(@course.slug)}']", text: "Génétique et évolution"
     assert_select "#course_assignment_classrooms li", 2
     assert_select "#course_assignment_classrooms", text: including("Tle D · Lycée Classique")
     assert_select "a[href='#{classroom_path(@tle.public_id)}']", text: "Tle D 1"

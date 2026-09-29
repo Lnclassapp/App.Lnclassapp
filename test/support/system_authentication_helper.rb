@@ -1,5 +1,5 @@
 # Signs in through the real forms, in the browser (ADR-0050): the PIN, then, for a team account
-# that has a second factor, the current TOTP code computed from the factory secret.
+# that has a second factor, the current TOTP code computed from the factory secret, sent by itself at its sixth digit.
 module SystemAuthenticationHelper
   ActionDispatch::SystemTestCase.include(self)
 
@@ -14,8 +14,8 @@ module SystemAuthenticationHelper
     assert_no_selector "#session-form", wait: SIGN_IN_WAIT
     return unless user.respond_to?(:totp_secret)
 
+    # The code leaves by itself at the sixth digit (UDR-0054 §3.6): a click on « Vérifier » could hit a page already gone.
     fill_in "second_factor[code]", with: ROTP::TOTP.new(user.totp_secret).now
-    click_on I18n.t("identity.second_factors.new.submit")
     assert_no_selector "#second-factor-form", wait: SIGN_IN_WAIT
   end
 
