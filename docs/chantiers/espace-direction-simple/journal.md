@@ -32,7 +32,7 @@
 
 ## Lot 0 — Socle (2026-09-29)
 
-**Statut : arrêté, pas vert.** Deux fichiers hors du champ `Fichiers` sont nécessaires pour que `bin/rails test` et `bin/rails test:system` passent ; conformément à la consigne, l'agent s'est arrêté au lieu de les écrire.
+**Statut au premier passage : arrêté, pas vert** (rouvert plus bas). Deux fichiers hors du champ `Fichiers` sont nécessaires pour que `bin/rails test` et `bin/rails test:system` passent ; conformément à la consigne, l'agent s'est arrêté au lieu de les écrire.
 
 Fait (branche `feature/espace-direction-simple-lot-0`) :
 
@@ -57,6 +57,16 @@ Bloquants (à trancher par le porteur, puis rouvrir le Lot 0) :
 - `SchoolAdmin::BaseController` n'a pas de test propre au Lot 0 (aucune action avant les Lots B et C) ; ses refus sont testés par les contrôleurs des Lots B et C (DS-11).
 
 Portes, lancées une fois : `bin/rubocop` 0 offense (990 fichiers) ; `CI=1 PARALLEL_WORKERS=2 bin/rails test` 2342 tests, **1 échec** (`PortContractsTest`), 7 skips préexistants (tests de performance sous `PERF=1`), couverture 100 % lignes (8450/8450) et branches (2065/2065) ; `COVERAGE=0 bin/rails test:system` 195 tests, **1 échec** (`design_system_test.rb:340`) ; `bin/brakeman -q --no-pager` 0 alerte.
+
+### Lot 0 rouvert (2026-09-29) — vert
+
+Décision de l'orchestrateur : les deux fichiers bloquants remontent au Lot 0 (plan mis à jour : `Fichiers` des Lots 0 et A, tableau de collision, note du Lot C).
+
+- `Repositories::School::StaffRepository#attach` (+ `test/infrastructure/repositories/school/staff_repository_test.rb`) : écrit la ligne `school_staffs` datée de `at`, rend `true` ; un second rattachement lève `RecordNotUnique`. Le Lot A l'utilise, il ne l'écrit plus.
+- `design/shell` déclare comme `nav_key` la première destination du rôle. `test/system/design_system_test.rb:340` codait « Accueil » en dur pour **chaque** rôle, direction comprise : il attend maintenant le libellé de la première destination du rôle, seule assertion juste depuis que la direction n'a plus d'accueil (UDR-0052 §2.1).
+- UDR-0052 : amendement daté du 2026-09-29, clé de navigation `student_work`.
+
+Portes, lancées une fois : `bin/rubocop` 0 offense (992 fichiers) ; `CI=1 PARALLEL_WORKERS=2 bin/rails test` 2344 tests, 0 échec, 0 erreur, 7 skips préexistants (`PERF=1`), couverture 100 % lignes (8457/8457) et branches (2065/2065) ; `COVERAGE=0 bin/rails test:system` 195 tests, 0 échec ; `bin/brakeman -q --no-pager` 0 alerte.
 
 ## Clôture
 

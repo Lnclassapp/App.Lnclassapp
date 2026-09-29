@@ -31,10 +31,12 @@ Deux règles : le Lot 0 gèle les contrats (un lot qui doit changer un port s'ar
                      app/domain/ports/school/staff_repository_port.rb
                      app/domain/policies/school/read_own_school_policy.rb
                      app/infrastructure/repositories/identity/user_repository.rb
+                     app/infrastructure/repositories/school/staff_repository.rb
                      app/controllers/school_admin/base_controller.rb
                      app/helpers/navigation_helper.rb
                      config/routes.rb · config/routes/school_admin.rb · config/routes/teams.rb
                      config/locales/shared/navigation.fr.yml
+                     app/views/design/shell.html.erb
                      test/support/factories/identity.rb
                      test/system/role_homes_test.rb
 - **Dépend de**    : —
@@ -42,11 +44,15 @@ Deux règles : le Lot 0 gèle les contrats (un lot qui doit changer un port s'ar
                      test/domain/entities/identity/invitation_test.rb
                      test/domain/policies/school/read_own_school_policy_test.rb
                      test/infrastructure/repositories/identity/user_repository_test.rb
+                     test/infrastructure/repositories/school/staff_repository_test.rb
                      test/helpers/navigation_helper_test.rb
                      test/routing/school_admin_routes_test.rb (DS-11, GET seulement)
+                     test/system/design_system_test.rb (shell de démonstration)
 - **Done quand**   : `bin/rails db:migrate` crée `school_staffs` ; une direction créée par `create_school_admin(school:)` se connecte par PIN et son acteur porte l'établissement ; `/school-admin/classrooms`, `/school-admin/classrooms/:public_id`, `/school-admin/teachers` et `/teams/schools/:school_public_id/staff-invitations` sont dessinées ; la navigation de la direction a deux entrées ; `bin/rails test` au vert
 
 Contrats gelés : `StaffRepositoryPort#attach(user_id:, school_id:, invited_by_id:, at:)` ; `ReadOwnSchoolPolicy#call(actor:)` ; `Actor#school_id` d'un `school_admin` = son établissement ; noms de route `school_admin_classrooms`, `school_admin_classroom`, `school_admin_teachers`, `school_staff_invitations`, `new_school_staff_invitation`. Le cas `school_admin` de `role_homes_test.rb` est retiré ici : son parcours passe au test système du Lot C.
+
+> **Rouvert le 2026-09-29** (décision de l'orchestrateur, journal « Lot 0 ») : `Repositories::School::StaffRepository` et son test remontent du Lot A au Lot 0, car `test/architecture/port_contracts_test.rb` exige un adaptateur par port ; `app/views/design/shell.html.erb` y entre, car la direction n'a plus d'accueil à marquer actif. Clé de navigation de « Travail des élèves » : `student_work` (amendement de l'UDR-0052).
 
 ---
 
@@ -57,7 +63,6 @@ Contrats gelés : `StaffRepositoryPort#attach(user_id:, school_id:, invited_by_i
                      app/domain/policies/identity/invite_school_staff_policy.rb
                      app/domain/dtos/identity/school_staff_invitation_input.rb
                      app/domain/use_cases/identity/accept_invitation.rb
-                     app/infrastructure/repositories/school/staff_repository.rb
                      app/infrastructure/repositories/identity/invitation_repository.rb
                      app/infrastructure/queries/identity/profile_query.rb
                      app/infrastructure/queries/identity/shell_user_query.rb
@@ -73,7 +78,6 @@ Contrats gelés : `StaffRepositoryPort#attach(user_id:, school_id:, invited_by_i
 - **Test associé** : test/domain/use_cases/identity/invite_school_staff_test.rb (DS-01, DS-02)
                      test/domain/policies/identity/invite_school_staff_policy_test.rb (DS-04)
                      test/domain/use_cases/identity/accept_invitation_test.rb (DS-03)
-                     test/infrastructure/repositories/school/staff_repository_test.rb
                      test/controllers/teams/staff_invitations_controller_test.rb (DS-02, DS-04)
                      test/system/teams/staff_invitation_test.rb (DS-01, DS-03)
 - **Done quand**   : depuis la fiche d'un établissement actif, l'équipe obtient un lien ; ce lien crée un compte de direction qui se connecte par PIN sans second facteur et dont le profil nomme l'établissement
@@ -109,6 +113,7 @@ Contrats gelés : `StaffRepositoryPort#attach(user_id:, school_id:, invited_by_i
                      test/infrastructure/queries/school/student_work_query_test.rb (DS-07, DS-08, DS-09, DS-10)
                      test/controllers/school_admin/classrooms_controller_test.rb (DS-10, DS-11)
                      test/system/school_admin/student_work_test.rb (DS-05, DS-09)
+- **Note**         : les deux pages déclarent `content_for :nav_key, "student_work"` (amendement du 2026-09-29 de l'UDR-0052), pas `"classrooms"`.
 - **Done quand**   : une direction se connecte, arrive sur « Travail des élèves », ouvre une classe et voit chaque élève avec ses devoirs rendus et son score moyen ; la classe d'un autre établissement donne 404
 
 ---
@@ -127,6 +132,8 @@ Doublons cherchés par la commande de la skill `plan-lots` (sortie vide), puis r
 | `test/system/role_homes_test.rb` | Lot 0 |
 | `app/controllers/school_admin/base_controller.rb` | Lot 0 |
 | `app/infrastructure/repositories/identity/user_repository.rb` | Lot 0 |
+| `app/infrastructure/repositories/school/staff_repository.rb` (+ test) | Lot 0 (remonté du Lot A le 2026-09-29) |
+| `app/views/design/shell.html.erb`, `test/system/design_system_test.rb` | Lot 0 |
 | `app/domain/entities/identity/home_destination.rb`, `app/controllers/concerns/authentication.rb` | Lot C (seul lot qui a une page d'accueil à donner) |
 | `app/views/identity/profiles/_information.html.erb`, `app/infrastructure/queries/identity/shell_user_query.rb` | Lot A |
 | `config/locales/school_admin/teachers.fr.yml` / `classrooms.fr.yml` | Lot B / Lot C (fichiers distincts) |
