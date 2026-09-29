@@ -12,6 +12,25 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{new_identity_pin_reset_path}']", text: "PIN oublié ?"
   end
 
+  test "FU-03, FU-19: the page is « Connexion · Lnclass », its logo leads home, the number is the autofocus target" do
+    get new_session_path
+
+    assert_select "title", "Connexion · Lnclass"
+    assert_select "a[href='#{root_path}'][aria-label='Lnclass, accueil'] img[alt='']", 2
+    assert_select "input[name='session[contact]'][autocomplete=username][data-autofocus-target=field]:not([autofocus])"
+    assert_select "input[name='session[pin]'][autocomplete=current-password]:not([data-autofocus-target])"
+    assert_select "details summary .sr-only", "Aide : PIN"
+    assert_select "details", text: /Code secret de 4 chiffres, choisi à l'inscription/
+  end
+
+  test "a signed-in person who opens the sign-in page is sent home, the kept number dropped" do
+    sign_in_as create_teacher
+    get new_session_path
+
+    assert_redirected_to teacher_home_path
+    assert_nil session[:login_contact]
+  end
+
   test "a signed-in person who opens the sign-in page is sent home" do
     sign_in_as create_teacher
 

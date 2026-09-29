@@ -41,6 +41,74 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_nil cookies[:session_token].presence
   end
 
+  test "FU-30: the page is « Créer mon compte · Lnclass », its logo leads home, « Nom » is the autofocus target" do
+    get invitation_path(@invitation.token)
+
+    assert_select "title", "Créer mon compte · Lnclass"
+    assert_select "a[href='#{root_path}'][aria-label='Lnclass, accueil'] img[alt='']", 2
+    assert_select "[data-autofocus-target=field]", 1
+    assert_select "input[name='invitation[last_name]'][data-autofocus-target=field]:not([autofocus])"
+  end
+
+  test "FU-31: accepting keeps the number for the sign-in in the Rails session, never in the URL nor the flash" do
+    post accept_invitation_path(@invitation.token), params: acceptance_params
+
+    assert_equal "0100000009", session[:login_contact]
+    assert_redirected_to new_session_path
+    assert_no_match(/0100000009|01 00/, response.location)
+    assert_no_match(/0100000009|01 00/, flash.to_h.values.join)
+    assert_nil cookies[:session_token].presence
+    assert_equal 0, Orm::Session.count
+
+    get new_session_path
+
+    assert_select "input[name='session[contact]'][value='01 00 00 00 09']:not([data-autofocus-target])"
+    assert_select "input[name='session[pin]'][data-autofocus-target=field]:not([value])"
+    assert_nil session[:login_contact]
+  end
+
+  test "FU-32: the number is used once: a reload of the sign-in page no longer shows it" do
+    post accept_invitation_path(@invitation.token), params: acceptance_params
+    get new_session_path
+
+    get new_session_path
+
+    assert_select "input[name='session[contact]']:not([value])"
+    assert_select "input[name='session[contact]'][data-autofocus-target=field]"
+    assert_select "input[name='session[pin]']:not([data-autofocus-target])"
+  end
+
+  test "FU-32: a school admin invitation leads to the same pre-filled sign-in" do
+    invitation = create_invitation(kind: "school_staff", contact: "0500000007")
+
+    post accept_invitation_path(invitation.token), params: acceptance_params
+
+    assert_redirected_to new_session_path
+    assert_equal "Votre compte est créé. Connectez-vous avec votre numéro et votre PIN.", flash[:notice]
+    follow_redirect!
+    assert_select "input[name='session[contact]'][value='05 00 00 00 07']"
+  end
+
+  test "FU-33: an invalid form keeps nothing for the sign-in page" do
+    post accept_invitation_path(@invitation.token), params: acceptance_params(last_name: "")
+
+    assert_response :unprocessable_entity
+    assert_select "input[name='invitation[last_name]'][aria-invalid=true]"
+    assert_nil session[:login_contact]
+
+    get new_session_path
+    assert_select "input[name='session[contact]']:not([value])"
+  end
+
+  test "a number that got an account meanwhile keeps nothing for the sign-in page" do
+    create_teacher(contact: "0100000009")
+
+    post accept_invitation_path(@invitation.token), params: acceptance_params
+
+    assert_response :unprocessable_entity
+    assert_nil session[:login_contact]
+  end
+
   test "a link already used does not work a second time" do
     post accept_invitation_path(@invitation.token), params: acceptance_params
 

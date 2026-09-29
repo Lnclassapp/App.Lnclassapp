@@ -1,16 +1,20 @@
 # 🌐 DELIVERY · Identity::SessionsController
 # Rôle : connexion par numéro et PIN, déconnexion ; échec re-rendu en 422 (le champ PIN ne renvoie jamais sa valeur)
-# ADR  : 0026, 0050
+# ADR  : 0026, 0050 · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique)
 module Identity
   class SessionsController < ApplicationController
     allow_unauthenticated_access only: %i[new create]
     allow_unverified_second_factor only: :destroy
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { render_rate_limited(:new) }
 
+    # Le numéro laissé par une invitation acceptée est lu et supprimé : un rechargement ne le montre plus.
     def new
+      contact = Entities::Identity::Contact.normalize(session.delete(:login_contact))
       return redirect_to_home if authenticated?
 
+      @prefilled = contact.present?
       @form = Dtos::Identity::CredentialsInput.new
+      @form.contact = contact.scan(/\d{2}/).join(" ") if @prefilled
     end
 
     def create

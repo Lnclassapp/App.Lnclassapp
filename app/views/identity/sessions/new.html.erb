@@ -1,11 +1,15 @@
 <%# 🌐 UI · identity/sessions/new — connexion par numéro et PIN, en deux colonnes (reprise de l'ancienne application) %>
-<%# Rôle : échec re-rendu en 422 par Turbo, sans rechargement ; message unique au-dessus des champs %>
-<%# ADR  : 0050 · UDR : 0005 %>
-<% content_for :title, t(".page_title") %>
-<main class="grid min-h-dvh bg-paper md:grid-cols-2">
+<%# Rôle : échec re-rendu en 422 par Turbo ; focus sur le numéro, ou sur le PIN quand une invitation l'a pré-rempli %>
+<%# ADR  : 0050 · UDR : 0005, 0019, 0054 (§3.2 logo, §3.3 focus, §3.4 infobulle du PIN, §3.8 numéro pré-rempli) %>
+<% page_title t(".page_title") %>
+<%# Le re-rendu 422 est un morphing : <body> ne se reconnecte pas, le focus repart à « turbo:morph » (UDR-0054 §3.3). %>
+<main class="grid min-h-dvh bg-paper md:grid-cols-2" data-action="turbo:morph@document->autofocus#focus">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
     <div class="max-w-sm text-center">
-      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-6 size-16 rounded-card object-cover shadow-card" %>
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
+      <% end %>
       <h1 class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></h1>
       <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
     </div>
@@ -13,7 +17,10 @@
 
   <section class="flex flex-col items-center justify-center px-gutter py-10">
     <div class="mb-8 text-center md:hidden">
-      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-3 size-14 rounded-card object-cover shadow-card" %>
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto mb-3 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+      <% end %>
       <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
     </div>
 
@@ -32,9 +39,12 @@
             </div>
           <% end %>
           <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15,
-                       placeholder: t(".contact_placeholder"), inputmode: "tel", autocomplete: "tel", autofocus: true %>
-          <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
-                       autocomplete: "current-password", hint: t(".pin_hint") %>
+                       placeholder: t(".contact_placeholder"), inputmode: "tel", autocomplete: "username", autofocus: !@prefilled %>
+          <div>
+            <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                         autocomplete: "current-password", hint: t(".pin_hint"), autofocus: @prefilled %>
+            <%= ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin) %>
+          </div>
           <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
           <p class="text-center text-sm">
             <%= link_to t(".forgot_pin"), new_identity_pin_reset_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
