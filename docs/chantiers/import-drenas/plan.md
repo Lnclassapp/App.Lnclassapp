@@ -37,6 +37,7 @@ Lot 0 — SOCLE (séquentiel) : règle du slug, 5e type d'import, port, migratio
                      `test/domain/entities/school/drena_test.rb`
                      `test/domain/entities/catalog/import_kind_test.rb`
                      `test/db/schema_constraints_test.rb`
+                     `test/domain/dtos/catalog/import_upload_input_test.rb` (prenait `drenas` pour exemple de type inconnu)
 - **Dépend de**    : —
 - **Test associé** : `test/domain/entities/school/drena_test.rb` (`slug_for("Bouaké 1") == "drena-bouake-1"`, `slug_for("???")` nil) · `test/domain/entities/catalog/import_kind_test.rb` (cinq types) · `test/db/schema_constraints_test.rb` (`drenas` accepté par la contrainte)
 - **Done quand**   : `bin/rails db:migrate` passe, un rapport de type `drenas` s'enregistre en base, `Entities::Catalog::ImportKind.fetch("drenas")` répond, et les contrats du port sont gelés

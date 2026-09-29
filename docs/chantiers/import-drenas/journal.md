@@ -22,6 +22,8 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - La CI exige 100 % de couverture des lignes **et** des branches (`config/ci.rb`, ADR-0024) : chaque branche d'un adaptateur d'import doit avoir son test.
 - `config/database.yml` suffixe le nom de la base par le nom du worktree : chaque worktree de lot a sa propre base.
 - Le conteneur de la session avait Ruby 3.3.6, alors que `.ruby-version` exige 3.4.9 : il a fallu l'installer avec `rbenv install`, et démarrer PostgreSQL avec son rôle `dev-rails`.
+- `test/infrastructure/queries/classroom/student_classroom_query_test.rb` échoue en local si la base est en collation `C.UTF-8` (tri « Écologie » / « Génétique ») : la CI utilise `en_US.utf8`. Sans lien avec le chantier.
+- `bin/rails db:migrate` sous PostgreSQL 16 réécrit toutes les contraintes `ANY (ARRAY[…])` de `db/schema.rb` dans un autre format : il faut garder seulement le vrai changement.
 - L'index des UDR (`docs/decisions/udr/README.md`) ne liste que 0001 à 0007, alors que les fichiers vont jusqu'à 0040.
 
 ## Dette laissée derrière

@@ -12,7 +12,7 @@ module Repositories
         create_drena(name: "Bouake 1")
         create_drena(name: "Man")
 
-        assert_equal Set[ "Bouake 1", "Man" ], @repository.taken_names
+        assert_equal Set["Bouake 1", "Man"], @repository.taken_names
       end
 
       test "sans DRENA, aucun nom n'est pris" do

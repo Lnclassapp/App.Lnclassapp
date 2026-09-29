@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportKind
-# Rôle : registre fermé des quatre types d'import : format, version, racines, cible, plafond et policy
-# ADR  : 0028, 0039
+# Rôle : registre fermé des cinq types d'import : format, version, racines, cible, plafond et policy
+# ADR  : 0028, 0039, 0055
 module Entities
   module Catalog
     module ImportKind
@@ -26,7 +26,10 @@ module Entities
                        policy: Policies::Catalog::ManageContentPolicy),
         Definition.new(kind: "exercises", format: "lnclass.exercises", version: VERSION, roots_key: "exercises",
                        target_key: "essential", target_required: true, max_roots: 10_000,
-                       policy: Policies::Catalog::ManageContentPolicy)
+                       policy: Policies::Catalog::ManageContentPolicy),
+        Definition.new(kind: "drenas", format: "lnclass.drenas", version: VERSION, roots_key: "drenas",
+                       target_key: nil, target_required: false, max_roots: 500,
+                       policy: Policies::School::ManageSchoolPolicy)
       ].index_by(&:kind).freeze
       KINDS = ALL.keys.freeze
 
