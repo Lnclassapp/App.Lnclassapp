@@ -178,7 +178,8 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
         assert_text "Rejeté"
         assert_selector "[role=alert]", text: "rejeté en bloc : rien n'a été écrit"
-        assert_selector "#import_errors li", text: /\Aformat\s+Le format du fichier ne correspond pas/
+        assert_selector "#import_errors li",
+                        text: /\Aformat\s+Ce fichier est un import « Cours complets » \(format lnclass\.course-tree\), pas un import « Établissements »/
         assert_no_selector "#import_counter_imported"
       end
       assert_selector "#imports tr", text: /Établissements.*mauvaise-enveloppe.*\.json.*Rejeté/m

@@ -137,6 +137,13 @@
     height: 3px;
     background-color: var(--color-brand);
   }
+
+  /* UDR-0054 §3.7 — une page imprimée (codes de secours) ne porte pas les notifications. */
+  @media print {
+    #toasts {
+      display: none;
+    }
+  }
 }
 
 /* Contenu riche d'un cours ou d'une fiche (Action Text) : la typographie suit les tokens.
@@ -207,6 +214,15 @@
 
   &:has([aria-expanded="true"]) {
     z-index: 50;
+  }
+}
+
+/* UDR-0054 §3.4 — résumé d'une infobulle (<details>) sans le triangle du navigateur : l'icône suffit. */
+@utility summary-plain {
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
   }
 }
 

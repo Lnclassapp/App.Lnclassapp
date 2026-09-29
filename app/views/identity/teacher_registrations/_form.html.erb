@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en quatre rubriques %>
 <%# Rôle : l'établissement est désigné par son code (champ, ou bandeau quand il est déjà trouvé), ou sans code (@pending) ; 422 %>
-<%# ADR  : 0030, 0037, 0050, 0057, 0063 · UDR : 0024, 0044, 0050 %>
+<%# ADR  : 0030, 0037, 0050, 0057, 0063 · UDR : 0024, 0044, 0050, 0054 (§3.4 : infobulle du code d'établissement) %>
 <% if @pending %>
   <%# Formulaire GET de la seule DRENA (repli sans JavaScript, UDR-0024) : son sélecteur s'y rattache par l'attribut form. %>
   <form id="teacher-signup-drena" action="<%= new_pending_teacher_registration_path %>" method="get"></form>
@@ -65,6 +65,7 @@
       <%= ui_field form, :school_code, required: true, value: @form.raw_school_code, maxlength: 12, autocomplete: "off",
                    autocapitalize: "characters", spellcheck: false, placeholder: t(".school_code_placeholder"),
                    hint: t(".school_code_hint"), class: "font-display tracking-widest uppercase" %>
+      <%= ui_info_tip t(".school_code_info_tip"), label: Dtos::Identity::TeacherRegistrationInput.human_attribute_name(:school_code) %>
       <%= link_to t(".no_school_code"), new_pending_teacher_registration_path, id: "no-school-code",
                   class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
     <% end %>

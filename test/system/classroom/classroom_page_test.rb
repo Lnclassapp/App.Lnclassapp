@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
-# CL-10, CL-04 — UDR-0027. L'enseignant ouvre sa classe : il voit le code en majuscules, le copie (toast « Code copié »,
-# presse-papiers en majuscules) sans rechargement de page, et voit la liste de ses élèves. Le bouton du code de
+# CL-10, CL-04 — UDR-0027. L'enseignant ouvre sa classe : il voit le code en majuscules, le copie (toast « Code copié. »,
+# presse-papiers en majuscules, contrôleur clipboard depuis UDR-0054) sans rechargement de page, et voit la liste de ses élèves. Le bouton du code de
 # récupération vise la route de B8 ; son parcours complet est rejoué au Lot E.
 class Classroom::ClassroomPageTest < ApplicationSystemTestCase
   # L'accueil enseignant appartient au Lot D3 : tant qu'il n'est pas fusionné, un remplaçant répond là où la connexion
@@ -45,7 +45,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_no_page_reload do
       click_on I18n.t("#{scope}.header.copy")
 
-      assert_toast I18n.t("#{scope}.header.copied")
+      assert_toast I18n.t("shared.clipboard.copied_code")
     end
     assert_equal "KFM37", page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
   end
@@ -56,8 +56,8 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
     click_on I18n.t("#{scope}.header.copy")
 
-    assert_toast I18n.t("#{scope}.header.copy_failed")
-    assert_no_selector "#toasts", text: I18n.t("#{scope}.header.copied")
+    assert_toast I18n.t("shared.clipboard.failed")
+    assert_no_selector "#toasts", text: I18n.t("shared.clipboard.copied_code")
     assert_selector "#classroom_join_code", exact_text: "KFM37"
   end
 
@@ -69,7 +69,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
       click_on I18n.t("#{scope}.header.copy")
-      assert_toast I18n.t("#{scope}.header.copied")
+      assert_toast I18n.t("shared.clipboard.copied_code")
       assert find_link(I18n.t("#{scope}.header.share_whatsapp"))[:href].start_with?("https://wa.me/?text=")
       growth_shot("390-classe-partager-whatsapp", desktop: false, scroll_to: "#classroom_whatsapp_share")
     end

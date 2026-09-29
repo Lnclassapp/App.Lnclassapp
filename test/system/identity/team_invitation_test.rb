@@ -1,7 +1,8 @@
 require "application_system_test_case"
 
 # F-16, ADR-0038, ADR-0031, UDR-0019: an admin invites in the modal (422 in the modal, then the link in the modal,
-# without a page reload); in a second browser session the link is accepted, the TOTP enrolled, /teams reached.
+# without a page reload); in a second browser session the link is accepted, the sign-in found with the number filled in
+# (FU-30, FU-31, UDR-0054 §3.8), the TOTP enrolled, /teams reached.
 class Identity::TeamInvitationTest < ApplicationSystemTestCase
   # The team home belongs to a later lot: until it is merged, a stand-in answers where the sign-in lands, as in
   # test/system/identity/sign_in_test.rb. A merged controller is autoloadable, so the stand-in steps aside by itself.
@@ -37,6 +38,9 @@ class Identity::TeamInvitationTest < ApplicationSystemTestCase
 
     using_session(:invitee) do
       visit link
+      # FU-30 (UDR-0054 §3.8): the focus is on « Nom », no number field.
+      assert_selector "#invitation_last_name:focus"
+      assert_no_field "invitation[contact]"
       fill_in "invitation[last_name]", with: "Kouassi"
       fill_in "invitation[first_name]", with: "Aya Marie"
       choose "Féminin"
@@ -54,14 +58,17 @@ class Identity::TeamInvitationTest < ApplicationSystemTestCase
 
       assert_selector "#session-form", wait: SIGN_IN_WAIT
       assert_toast "Votre compte est créé."
-      fill_in "session[contact]", with: "0100000009"
+      # FU-31: the number is already there, the focus waits on the PIN.
+      assert_field "session[contact]", with: "01 00 00 00 09"
+      assert_selector "#session_pin:focus"
       fill_in "session[pin]", with: "4821"
       click_on I18n.t("identity.sessions.new.submit")
 
       secret = find("#second-factor-secret", wait: SIGN_IN_WAIT).text.delete(" ")
+      # The code leaves by itself at the sixth digit; the codes go on once they are kept (UDR-0054 §3.6, §3.7).
       fill_in "second_factor[code]", with: ROTP::TOTP.new(secret).now
-      click_on I18n.t("identity.second_factor_enrollments.new.submit")
-      click_on I18n.t("identity.second_factor_enrollments.backup_codes.done"), wait: SIGN_IN_WAIT
+      check I18n.t("identity.second_factor_enrollments.backup_codes.kept"), wait: SIGN_IN_WAIT
+      click_on I18n.t("identity.second_factor_enrollments.backup_codes.continue")
 
       assert_selector "main#main", wait: SIGN_IN_WAIT
       assert_current_path team_home_path

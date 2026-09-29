@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052
+# UDR  : 0006, 0052, 0054
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -91,5 +91,14 @@ module NavigationHelper
 
   def role_accent(role)
     ROLE_ACCENTS.fetch(role.to_sym)
+  end
+
+  # Retour vers une liste filtrée (UDR-0054 §3.2) : l'URL de provenance si elle est de ce même hôte et que son chemin
+  # est exactement `from` (chaîne de requête conservée), sinon `default`. Jamais une adresse d'un autre site.
+  def back_href(default, from:)
+    referer = URI.parse(request.referer.to_s)
+    referer.host == request.host && referer.path == from ? referer.request_uri : default
+  rescue URI::InvalidURIError
+    default
   end
 end

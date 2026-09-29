@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/dashboards/_key_figures — chiffres « Sur la période » (flux) puis « En ce moment » (stocks) %>
 <%# Rôle : inscrits, élèves actifs, exercices terminés et réussite, assignations ; comptes, classes, couverture des établissements %>
-<%# ADR  : 0062 · UDR : 0049 %>
+<%# ADR  : 0062 · UDR : 0049, 0054 (infobulle de « Réussite moyenne », panneau dans le flux de la tuile) %>
 <%# locals: (dashboard:, period_scope:) -%>
 <% tile = ->(key, count, hint = nil) { render "figure", key:, count:, hint:, label: t(".#{key}", count: count || 0) } %>
 <% rate = dashboard.average_score ? t(".success_rate", rate: dashboard.average_score) : t(".no_success_rate") %>
@@ -8,7 +8,14 @@
   <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4">
     <%= tile.call(:signups, dashboard.signups_count) %>
     <%= tile.call(:active_students, dashboard.active_students_count, t(".active_students_hint")) %>
-    <%= tile.call(:completed_sessions, dashboard.completed_sessions_count, rate) %>
+    <li id="figure_completed_sessions" class="rounded-ln bg-mist px-3 py-4">
+      <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= dashboard.completed_sessions_count %></span>
+      <span class="text-sm text-mute"><%= t(".completed_sessions", count: dashboard.completed_sessions_count) %></span>
+      <div class="mt-1 text-xs text-mute">
+        <%= rate %>
+        <%= ui_info_tip t(".success_rate_tip"), label: t(".success_rate_label") %>
+      </div>
+    </li>
     <%= tile.call(:assignments, dashboard.assignments_count, t(".assignments_hint")) %>
   </ul>
 <% end %>

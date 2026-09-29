@@ -182,10 +182,18 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     link = school_code_signup_url("k7m4qz")
     assert_select "#school_code #school_code_label", text: I18n.t("#{header}.school_code")
     assert_select "#school_code #school_code_value[aria-labelledby=school_code_label]", text: "K7M-4QZ"
-    assert_select "#school_code [data-controller='classroom--join-code-copy'][data-classroom--join-code-copy-code-value='K7M-4QZ'] " \
-                  "button[aria-label='#{I18n.t("#{header}.copy_code_label", code: 'K7M-4QZ')}']", text: I18n.t("#{header}.copy_code")
-    assert_select "#school_code [data-controller='classroom--join-code-copy'][data-classroom--join-code-copy-code-value='#{link}'] " \
-                  "button[aria-label=\"#{I18n.t("#{header}.copy_link_label")}\"]", text: I18n.t("#{header}.copy_link")
+    # FU-26 : les deux copies passent par le contrôleur unique `clipboard` (UDR-0054 §3.5), boutons cachés sans JavaScript.
+    assert_select "[data-controller~='classroom--join-code-copy']", 0
+    assert_select "#school_code [data-controller=clipboard][data-clipboard-text-value='K7M-4QZ'] " \
+                  "button[hidden][data-action='clipboard#copy'][aria-label='#{I18n.t("#{header}.copy_code_label", code: 'K7M-4QZ')}']",
+                  text: I18n.t("#{header}.copy_code")
+    assert_select "#school_code [data-controller=clipboard][data-clipboard-text-value='#{link}'] " \
+                  "button[hidden][data-action='clipboard#copy'][aria-label=\"#{I18n.t("#{header}.copy_link_label")}\"]",
+                  text: I18n.t("#{header}.copy_link")
+    assert_select "#school_code [data-clipboard-text-value='K7M-4QZ'] template[data-clipboard-target=copied]",
+                  text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_code'))}/
+    assert_select "#school_code [data-clipboard-text-value='#{link}'] template[data-clipboard-target=copied]",
+                  text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_link'))}/
     assert_select "#school_code a#school_code_link[href='#{link}']", text: link
     assert_select "#school_code", text: /#{Regexp.escape(I18n.t("#{header}.school_code_hint"))}/
     assert_select "#school_code", { text: /#{Regexp.escape(I18n.t("#{header}.school_code_inactive"))}/, count: 0 }
@@ -506,5 +514,107 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     delete school_path(used.public_id)
     assert_redirected_to schools_path
     assert_equal I18n.t("teams.schools.destroy.referenced"), flash[:alert]
+  end
+
+  # ── Finitions UX (UDR-0054, Lot D1) ──────────────────────────────────────────────────────────────────────────────
+
+  test "FU-01: the list is titled « Établissements · Équipe · Lnclass »" do
+    sign_in_as @member
+
+    get schools_path
+
+    assert_select "title", text: "Établissements · Équipe · Lnclass"
+  end
+
+  test "FU-45, FU-46: the filters form searches while typing and sends its lists on change, and keeps « Filtrer » without JavaScript" do
+    sign_in_as @member
+
+    get schools_path
+
+    assert_select "form#schools-filters[method=get][action='#{schools_path}'][data-controller=search]" \
+                  "[data-turbo-frame=schools][data-turbo-action=advance]" \
+                  "[role=search][aria-label='#{I18n.t('teams.schools.filters.label')}']" do
+      assert_select "input#filter_search[type=search][name=search][data-action='input->search#queue']"
+      %w[drena school_type cycle status].each do |name|
+        assert_select "select#filter_#{name}[name=#{name}][data-action='change->search#submit']"
+      end
+      assert_select "button[type=submit][data-search-target=button]:not([hidden])", text: I18n.t("teams.schools.filters.submit")
+    end
+    assert_select "turbo-frame#schools.transition-opacity.aria-busy\\:opacity-50"
+    assert_select "turbo-frame#schools #schools_total[aria-live=polite]"
+  end
+
+  test "FU-46: without JavaScript, the search sent by « Filtrer » renders the whole filtered page, accents ignored" do
+    create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    create_school(drena: @drena, name: "Collège Sainte-Marie")
+    sign_in_as @member
+
+    get schools_path(search: "COC", drena: @drena.public_id)
+
+    assert_response :success
+    assert_select "h1", text: I18n.t("teams.schools.index.title")
+    assert_select "input#filter_search[value=COC]"
+    assert_select "#schools_list tr", 1
+    assert_select "#schools_list tr", text: /Lycée Moderne de Cocody/
+    assert_select "#schools_total", text: I18n.t("teams.schools.index.total", count: 1)
+  end
+
+  test "UDR-0054 §3.4: the status column of the list explains the statuses in a tip" do
+    create_school(drena: @drena)
+    sign_in_as @member
+
+    get schools_path
+
+    assert_select "thead th details summary .sr-only", text: I18n.t("components.info_tip.label",
+                                                                   label: I18n.t("teams.schools.index.columns.status"))
+    assert_select "thead th details", text: /#{Regexp.escape(I18n.t('shared.info_tips.school_status'))}/
+  end
+
+  test "FU-09: « Établissements » leads back to the filtered list the school was opened from" do
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    sign_in_as @member
+    filtered = schools_path(search: "coc", drena: @drena.public_id)
+
+    get school_path(school.public_id), headers: { "Referer" => "http://www.example.com#{filtered}" }
+
+    assert_select "main nav[aria-label='#{I18n.t('components.back_link.label')}'] a[href='#{filtered}']",
+                  text: I18n.t("teams.schools.show.back")
+    assert_select "#school_header nav", 0
+    assert_select "nav[aria-label='#{I18n.t('components.back_link.label')}'] ~ #school_header"
+  end
+
+  test "FU-09: opened from a direct link, another page or another site, « Établissements » leads to the unfiltered list" do
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    sign_in_as @member
+    back = "nav[aria-label='#{I18n.t('components.back_link.label')}'] a"
+
+    [ nil, "http://www.example.com#{team_home_path}?search=coc", "http://evil.example#{schools_path}?search=coc" ].each do |referer|
+      get school_path(school.public_id), headers: { "Referer" => referer }.compact
+
+      assert_select "#{back}[href='#{schools_path}']", { text: I18n.t("teams.schools.show.back") }, "Referer : #{referer.inspect}"
+    end
+  end
+
+  test "UDR-0054 §3.1, §3.4: a school's page is titled by its name; its code and status are explained in tips" do
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "title", text: "Lycée Moderne de Cocody · Équipe · Lnclass"
+    assert_select "#school_code details", text: /#{Regexp.escape(I18n.t('teams.schools.header.school_code_tip'))}/
+    assert_select "#school_code details summary .sr-only",
+                  text: I18n.t("components.info_tip.label", label: I18n.t("teams.schools.header.school_code"))
+    assert_select "#school_header details", text: /#{Regexp.escape(I18n.t('shared.info_tips.school_status'))}/
+  end
+
+  test "UDR-0054 §3.1: the edition modal carries its title, also when opened by its URL" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+
+    get edit_school_path(school.public_id)
+
+    assert_select "title", text: "Modifier l'établissement · Équipe · Lnclass"
+    assert_select "[data-modal-document-title-value=\"Modifier l'établissement · Équipe · Lnclass\"] dialog#school-modal"
   end
 end

@@ -71,3 +71,11 @@ Le catalogue est la porte d'entrée de l'élève, de l'enseignant et de l'équip
 - Les formulaires ouverts depuis ces pages (B2, B4, imports) répondent par `turbo_stream.refresh` et ne rendent aucun partial de B1.
 - Toute page qui passe du contenu à KaTeX et qui est rafraîchie par morphing reprend le motif « conteneur à empreinte + élément permanent ».
 - Interdit désormais : « Habileté(s) » à l'écran, « Supprimer un cours », une couleur de matière tirée de son nom, un script ou une feuille de style servis par un CDN.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Catalogue** : le formulaire des filtres (`form#courses-filters`) gagne un champ `q` (`ui_field as: :search`, « Rechercher un cours ») sur le nom du cours, sans casse ni accents, et porte le contrôleur `search` : envoi 300 ms après la dernière frappe (URL remplacée), envoi au changement des listes niveau et matière ; « Filtrer » reste sans JavaScript. État vide « Aucun cours ne correspond », avec « Effacer la recherche ». Pas de pagination dans ce chantier.
+- **Page cours** : le fil d'Ariane complet (« Cours › Matière › Nom ») est remplacé par le lien de retour « Cours » (UDR-0054 §3.2).
+- Titres par `page_title` : « Cours · <espace> · Lnclass », « <nom du cours> · <espace> · Lnclass ».

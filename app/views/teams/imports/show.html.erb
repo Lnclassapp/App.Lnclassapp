@@ -1,15 +1,12 @@
 <%# 🌐 UI · teams/imports/show — page de suivi d'un import %>
-<%# Rôle : en-tête du rapport (type, fichier, auteur, date), puis le suivi rechargé tant que l'import tourne ; « Imports » reste actif %>
-<%# ADR  : 0039, 0056 · UDR : 0006, 0043 %>
+<%# Rôle : retour « Imports », en-tête du rapport (type, fichier, auteur, date), puis le suivi rechargé tant que l'import tourne %>
+<%# ADR  : 0039, 0056 · UDR : 0006, 0043, 0054 · « Imports » reste actif dans la navigation %>
 <% content_for :nav_key, "imports" %>
 <% kind = t("import_kinds.#{@import.kind}") %>
 <%# Un rapport sans fichier (génération des classes, UDR-0043) porte le nom de son type, sans « Import : ». %>
 <% import_kind = Entities::Catalog::ImportKind.valid?(@import.kind) %>
-<% content_for :title, import_kind ? t(".page_title", kind:) : kind %>
-<div class="mb-4">
-  <%= ui_button t(".back"), href: teams_imports_path, variant: :ghost, size: :sm, icon: "arrow-left" %>
-</div>
-<%= ui_page_header title: (import_kind ? t(".title", kind:) : kind),
+<% page_title(import_kind ? t(".page_titles.#{@import.kind}") : kind) %>
+<%= ui_page_header title: (import_kind ? t(".title", kind:) : kind), back: { label: t(".back"), href: teams_imports_path },
                    subtitle: t(import_kind ? ".subtitle" : ".subtitle_without_file", filename: @import.filename,
                                author: @import.imported_by_name, date: l(@import.created_at, format: :short)) %>
 <%= ui_card do %>

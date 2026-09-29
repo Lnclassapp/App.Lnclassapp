@@ -1,8 +1,9 @@
 <%# 🌐 UI · identity/profiles/show — « Mon profil », dans le shell du rôle %>
-<%# Rôle : « Mes informations », badge Ambassadeur (enseignant), carte du PIN ; chaque changement s'ouvre dans le frame modal %>
-<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050 %>
-<% content_for :title, t(".page_title") %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+<%# Rôle : retour « Accueil » du rôle, « Mes informations », badge Ambassadeur (enseignant), carte du PIN ; chaque changement s'ouvre dans le frame modal %>
+<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050, 0054 %>
+<% page_title t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
+                   back: { label: t(".back"), href: home_path_for(current_actor.role) } %>
 
 <div class="grid max-w-2xl gap-6">
   <%= render "information", profile: @profile %>

@@ -3,7 +3,8 @@
 <%# ADR  : 0062 · UDR : 0049 %>
 <%# locals: (search:, period:, drena:) -%>
 <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "magnifying-glass", id: "team_dashboard_search_card" do %>
-  <%= form_with url: team_dashboard_path, method: :get, role: "search", "aria-label": t(".form_label"),
+  <%# `role` et `aria-label` passent par `html:` : au premier niveau, form_with ne les rend pas. %>
+  <%= form_with url: team_dashboard_path, method: :get, html: { role: "search", "aria-label": t(".form_label") },
                 data: { turbo_frame: Teams::DashboardsController::SEARCH_FRAME, turbo_action: "advance" },
                 class: "mb-5 flex flex-wrap items-end gap-3" do %>
     <%= hidden_field_tag :period, period.key, id: nil %>

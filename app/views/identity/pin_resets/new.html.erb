@@ -1,9 +1,16 @@
 <%# 🌐 UI · identity/pin_resets/new — nouveau PIN par le code de récupération %>
 <%# Rôle : numéro, code à 8 chiffres, nouveau PIN et confirmation ; échec re-rendu en 422 par Turbo %>
-<%# ADR  : 0032, 0050 · UDR : 0005 %>
-<% content_for :title, t(".page_title") %>
+<%# ADR  : 0032, 0050 · UDR : 0005, 0054 (§3.2 : logo vers l'accueil public, retour « Se connecter ») %>
+<% page_title t(".page_title") %>
 <main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
   <div class="w-full max-w-sm">
+    <div class="mb-6 text-center">
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+      <% end %>
+    </div>
+    <%= ui_back_link t(".back"), href: new_session_path %>
     <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "key", padding: :lg do %>
       <%= form_with model: @form, scope: :pin_reset, url: identity_pin_reset_path, id: "pin-reset-form", class: "space-y-5" do |form| %>
         <% if @form.errors[:base].any? %>
@@ -21,9 +28,6 @@
         <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                      autocomplete: "new-password" %>
         <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
-        <p class="text-center text-sm">
-          <%= link_to t(".back"), new_session_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
-        </p>
       <% end %>
     <% end %>
   </div>

@@ -1,8 +1,8 @@
 <%# 🌐 UI · teams/levels/new — création d'un niveau, servie dans le frame « modal » %>
 <%# Rôle : position suivante proposée ; échec re-rendu ici en 422, succès en Turbo Stream (create.turbo_stream) %>
-<%# ADR  : 0029, 0034 · UDR : 0006, 0032 %>
+<%# ADR  : 0029, 0034 · UDR : 0006, 0032, 0054 %>
 <%= turbo_frame_tag "modal" do %>
-  <%= ui_modal title: t(".title"), id: "level-modal", open: true do |modal| %>
+  <%= ui_modal title: t(".title"), document_title: page_title(t(".title")), id: "level-modal", open: true do |modal| %>
     <% modal.footer do %>
       <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
       <%= ui_button t(".submit"), type: :submit, form: "level-form", icon: "plus" %>

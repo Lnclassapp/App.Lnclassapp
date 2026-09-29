@@ -36,17 +36,19 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     end
   end
 
-  test "SC-04: filter the list by DRENA, type and name; the URL keeps the filters, the page is not reloaded" do
+  test "SC-04, FU-45: filter the list by DRENA, type and name as they change; the URL keeps the filters, no page reload" do
     create_school(drena: @abidjan, name: "Lycée Classique", school_type: "public")
     create_school(drena: @abidjan, name: "Collège Moderne de Cocody", school_type: "private", cycle: "first")
     create_school(drena: @bouake, name: "Lycée Municipal", school_type: "private")
     visit schools_path
     assert_selector "#schools_list tr", count: 3
+    # UDR-0054 §3.9 : avec JavaScript, « Filtrer » s'efface ; chaque liste part au changement, la frappe après une pause.
+    assert_no_button I18n.t("teams.schools.filters.submit")
 
     assert_no_page_reload do
       select "Abidjan 1", from: "filter_drena"
+      assert_selector "#schools_list tr", count: 2
       select I18n.t("school_types.private"), from: "filter_school_type"
-      click_on I18n.t("teams.schools.filters.submit")
 
       assert_selector "#schools_list tr", count: 1
       assert_selector "#schools_list tr", text: "Collège Moderne de Cocody"
@@ -56,15 +58,15 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       end
 
       select I18n.t("teams.schools.filters.all_drena"), from: "filter_drena"
+      assert_selector "#schools_list tr", count: 2
       select I18n.t("teams.schools.filters.all_school_type"), from: "filter_school_type"
+      assert_selector "#schools_list tr", count: 3
       fill_in "filter_search", with: "lycee"
-      click_on I18n.t("teams.schools.filters.submit")
 
       assert_selector "#schools_list tr", count: 2
       assert_no_selector "#schools_list tr", text: "Collège"
 
       fill_in "filter_search", with: "introuvable"
-      click_on I18n.t("teams.schools.filters.submit")
 
       assert_selector "#schools_empty", text: I18n.t("teams.schools.index.no_match_title")
     end

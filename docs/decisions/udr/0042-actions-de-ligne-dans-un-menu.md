@@ -76,3 +76,9 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 - **Empilement.** `position: sticky` crée un contexte d'empilement qui enfermerait le menu fixe (`z-50`) sous la barre basse (`z-40`) : tant que son menu est ouvert (`:has([aria-expanded="true"])`), la cellule passe en `z-index: 50`. `ui_dropdown(fixed: true)` et son placement sont inchangés.
 - Tout nouveau tableau qui défile en largeur et porte un ⋮ par ligne applique `sticky-actions` à sa colonne d'actions.
 - Preuve : `test/system/teams/row_actions_menu_test.rb`, « on a phone, the ⋮ of the first row of every team table is on screen at load, and opens its menu » (rectangle du ⋮ dans l'écran sans défilement horizontal, puis menu ouvert) ; le test « menu … opens whole inside the screen » reste vert.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Focus des confirmations** : une `<dialog>` de confirmation ouverte depuis un menu ⋮ place le focus sur « Annuler » (premier bouton de fermeture de son pied), jamais sur la croix (UDR-0054 §3.3). À la fermeture, le focus revient au bouton ⋮ (inchangé).

@@ -87,3 +87,10 @@ L'enseignant qui s'inscrit cherche son établissement : une DRENA, puis une list
 ## Amendement du 2026-09-28 — jeton de parrainage et inscription sans code (UDR-0050)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* `/e/<code>?ref=<jeton>` porte le jeton du parrain dans un champ caché `teacher_registration[ref]` (mal formé : absent). Sous le champ du code, le lien `#no-school-code` « Mon établissement n'a pas encore de code Lnclass » mène à l'inscription sans code. Contrat : UDR-0050 §3.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Copie** : les boutons « Copier le code » et « Copier le lien » de la fiche passent de `classroom--join-code-copy` à `ui_copy_button` (contrôleur `clipboard`) ; libellés, valeurs et toasts inchangés.
+- **Inscription** : « Code d'établissement » est suivi d'une infobulle (où le trouver) ; après un 422, focus sur le premier champ en erreur ; le logo mène à l'accueil public.

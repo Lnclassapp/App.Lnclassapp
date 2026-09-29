@@ -1,7 +1,7 @@
 <%# 🌐 UI · teams/imports/index — écran des imports de l'équipe %>
 <%# Rôle : rapports récents filtrables par type (génération des classes comprise) ; « Nouvel import » : téléversement %>
-<%# ADR  : 0039, 0056 · UDR : 0006, 0043 %>
-<% content_for :title, t(".page_title") %>
+<%# ADR  : 0039, 0056 · UDR : 0006, 0043, 0054 %>
+<% page_title t(".page_title") %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
   <%= ui_dropdown label: t(".new"), id: "new-import-menu",
                   trigger: tag.span(safe_join([ ui_icon("arrow-up-tray", size: :sm), t(".new") ]), class: "flex items-center gap-2 pl-3 text-sm font-medium") do %>

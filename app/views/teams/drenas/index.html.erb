@@ -1,11 +1,16 @@
 <%# 🌐 UI · teams/drenas/index — écran des DRENA de l'équipe %>
 <%# Rôle : tableau #drenas par nom, slug à citer dans les imports, compteurs ; « Importer des DRENA » et « Nouvelle DRENA » ouvrent la modale %>
-<%# ADR  : 0029, 0034, 0066 · UDR : 0006, 0035, 0053 %>
-<% content_for :title, t(".page_title") %>
+<%# ADR  : 0029, 0034, 0066 · UDR : 0006, 0035, 0053, 0054 %>
+<% page_title t(".page_title") %>
 <% content_for :nav_key, "schools" %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
-  <%= ui_button t(".import"), href: new_teams_import_path(kind: "drenas"), variant: :secondary, icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
-  <%= ui_button t(".new"), href: new_drena_path, icon: "plus", data: { turbo_frame: "modal" } %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
+                   back: { label: t(".back"), href: team_home_path } do %>
+  <%# Les deux boutons restent sur une ligne dès sm (UDR-0053) : ce bloc ne se replie pas et le sous-titre cède la place.
+      Au téléphone, il passe à la ligne s'il ne tient pas. %>
+  <div id="drenas-header-actions" class="flex flex-wrap items-center gap-3 sm:shrink-0 sm:flex-nowrap">
+    <%= ui_button t(".import"), href: new_teams_import_path(kind: "drenas"), variant: :secondary, icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+    <%= ui_button t(".new"), href: new_drena_path, icon: "plus", data: { turbo_frame: "modal" } %>
+  </div>
 <% end %>
 
 <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
