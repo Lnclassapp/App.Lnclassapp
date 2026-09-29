@@ -75,3 +75,12 @@ L'entrée « Pilotage » de la navigation équipe est grisée depuis la V1. L'é
 
 - **Paramètre invalide** : `q`, `page`, `period` et `drena` ne sont lus que s'ils sont un texte sans octet nul. Un tableau (`page[]=2`), un hash (`page[a]=1`) ou un octet nul (`q=ko%00ua`, `drena=x%00`) est ignoré comme un paramètre absent : vue nationale, 7 jours, recherche vide, page 1. Jamais de 500.
 - **Pages de la recherche** : le frame `team_dashboard_search` porte `data-turbo-action="advance"` : un lien de pagination avance l'URL, et un rechargement garde la page courante.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Filtre DRENA** : la liste déroulante part au changement (contrôleur `search`, action `submit`) ; « Filtrer » reste sans JavaScript.
+- **Infobulles** : « Réussite moyenne » (et son « — »), « Élèves actifs » et « Établissements actifs » du tableau par DRENA (UDR-0054 §3.4).
+- La recherche d'un compte du pilotage **n'est pas** dynamique (décision du porteur, 2026-09-29).
+- Titre : « Pilotage · Équipe · Lnclass ».

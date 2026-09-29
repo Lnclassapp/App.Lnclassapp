@@ -54,6 +54,27 @@ module Queries
         assert_empty catalog(:student, material: "inconnue")
       end
 
+      # FU-47 (UDR-0054 §3.9) : recherche par nom, sans casse ni accents, qui se combine aux filtres.
+      test "la recherche trouve un cours par son nom sans casse ni accents, et se combine aux filtres" do
+        maths = create_course(name: "Mathématiques 3e", level: @seconde, material: create_material(name: "Maths"))
+
+        assert_equal [ maths.slug ], catalog(:student, search: "mathematiques").map(&:slug)
+        assert_equal [ maths.slug ], catalog(:student, search: "  MATHÉ  ").map(&:slug)
+        assert_equal [ @genetique.slug ], catalog(:student, search: "GENETIQUE").map(&:slug)
+        assert_equal [ @cellule.slug ], catalog(:student, search: "cellule", material: @svt.slug).map(&:slug)
+        assert_empty catalog(:student, search: "cellule", level: @tle.slug)
+        assert_empty catalog(:student, search: "zzz")
+      end
+
+      test "la recherche ne porte que sur le nom, garde la règle de statut, et un terme vide la laisse de côté" do
+        assert_empty catalog(:student, search: "gène à l'espèce")
+        assert_empty catalog(:student, search: "Brouillon")
+        assert_equal [ @brouillon.slug ], catalog(:team, search: "brouillon").map(&:slug)
+        assert_equal 3, catalog(:student, search: "").size
+        assert_equal 3, catalog(:student, search: nil).size
+        assert_empty catalog(:student, search: "%")
+      end
+
       test "une seule requête, quel que soit le nombre de cours" do
         queries = count_queries { catalog(:team, level: @tle.slug) }
 

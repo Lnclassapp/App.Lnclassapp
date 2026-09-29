@@ -75,10 +75,12 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#levels-generation-help", text: including(tl("index.generation_help"))
     assert_select "#levels-generation-help a[href='#{classroom_plan_path}']", text: tl("index.classroom_plan_link")
-    assert_select "#level_sixieme-bis [data-generation=outside]", text: including(tl("level_row.outside_generation")) do |badge|
-      assert_equal tl("level_row.outside_generation_hint"), badge.first["title"]
+    # UDR-0054 §3.4 (FU-22): the badge is followed by an info tip « Aide : Hors barème », and nothing carries a title.
+    assert_select "#level_sixieme-bis [data-generation=outside]", text: including(tl("level_row.outside_generation")) do
+      assert_select "details summary .sr-only", text: "Aide : #{tl("level_row.outside_generation")}"
+      assert_select "details div", text: tl("level_row.outside_generation_tip")
     end
-    assert_select "#level_sixieme-bis [data-generation=outside] .sr-only", text: tl("level_row.outside_generation_hint")
+    assert_select "#level_sixieme-bis [title]", 0
     assert_select "#level_6eme"
     assert_select "#level_6eme [data-generation]", 0
   end

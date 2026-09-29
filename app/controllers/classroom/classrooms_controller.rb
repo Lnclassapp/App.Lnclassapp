@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomsController
-# Rôle : page d'une classe (CL-10) pour l'enseignant qui y enseigne et l'équipe : en-tête, cours assignés, liste des élèves
-# ADR  : 0026, 0028 · UDR : 0006, 0027 · un élève reçoit 403 : il voit le code de sa classe sur ses propres pages
+# Rôle : page d'une classe (CL-10) pour l'enseignant qui y enseigne et l'équipe : en-tête, cours assignés, élèves (filtrés par `q`)
+# ADR  : 0026, 0028 · UDR : 0006, 0027, 0054 · un élève reçoit 403 : il voit le code de sa classe sur ses propres pages
 module Classroom
   class ClassroomsController < AuthenticatedController
     allow_roles :teacher, :team
@@ -15,8 +15,11 @@ module Classroom
 
     private
 
+    # « Chercher un élève » (UDR-0054 §3.9) : la recherche filtre la liste déjà accordée par la policy, jamais plus.
     def overview(access)
-      Queries::Classroom::ClassroomOverviewQuery.new.call(public_id: @header.public_id, show_roster: access.show_roster)
+      @search = params[:q].to_s
+      Queries::Classroom::ClassroomOverviewQuery.new.call(public_id: @header.public_id, show_roster: access.show_roster,
+                                                          search: @search)
     end
   end
 end

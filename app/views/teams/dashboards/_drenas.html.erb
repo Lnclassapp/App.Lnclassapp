@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/dashboards/_drenas — couverture par DRENA, triée par nombre d'élèves %>
 <%# Rôle : tableau (caption, scope) qui défile dans sa carte sur téléphone, jamais la page %>
-<%# ADR  : 0062 · UDR : 0049 %>
+<%# ADR  : 0062 · UDR : 0049, 0054 (infobulles des colonnes, panneau dans l'en-tête : le tableau défile, pas la page) %>
 <%# locals: (rows:, period_scope:) -%>
 <% columns = %i[schools_count classrooms_count teachers_count students_count active_students_count] %>
 <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "map-pin", id: "team_dashboard_drenas" do %>
@@ -14,7 +14,12 @@
           <tr>
             <th scope="col" class="px-2 py-3 font-medium"><%= t(".columns.name") %></th>
             <% %i[schools classrooms teachers students active_students].each do |column| %>
-              <th scope="col" class="px-2 py-3 text-right font-medium"><%= t(".columns.#{column}") %></th>
+              <th scope="col" class="px-2 py-3 text-right font-medium">
+                <%= t(".columns.#{column}") %>
+                <% if column.in?(%i[schools active_students]) %>
+                  <%= ui_info_tip t(".tips.#{column}"), label: t(".columns.#{column}") %>
+                <% end %>
+              </th>
             <% end %>
           </tr>
         </thead>

@@ -21,6 +21,22 @@ class Teams::AccountLookupsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#account_lookup", text: /Saisissez un numéro/
   end
 
+  # UDR-0054 §3.2, §3.3, §3.9, amendment of UDR-0020: title, back to the home, arrival focus, search once the number is whole.
+  test "the page is named, leads back to the home, focuses the number and searches by itself once it is complete" do
+    sign_in_as @actor
+
+    get teams_account_lookup_path
+
+    assert_select "title", "Débloquer un compte · Équipe · Lnclass"
+    assert_select "main nav[aria-label=Retour] a[href='#{team_home_path}']", "Accueil"
+    assert_select "form#account-lookup-form[role=search][aria-label='Rechercher un compte'][data-controller=search][data-search-digits-value=true][data-search-min-length-value='0']" do
+      assert_select "input#account_lookup_contact[data-autofocus-target=field][data-action='search#queue']"
+      assert_select "input[autofocus]", 0
+      assert_select "button[type=submit][data-search-target=button]", "Rechercher"
+    end
+    assert_select "turbo-frame#account_lookup.aria-busy\\:opacity-50"
+  end
+
   test "a student is found by their number in any form: identity, classroom and the code button, no reset" do
     sign_in_as @actor
 

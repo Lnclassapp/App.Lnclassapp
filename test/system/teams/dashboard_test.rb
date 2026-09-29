@@ -50,8 +50,9 @@ class Teams::DashboardTest < ApplicationSystemTestCase
     click_link tl("periods.30d")
     assert_selector "#team_dashboard_filters a[aria-current=true]", text: tl("periods.30d")
 
+    # UDR-0054 §3.9: the DRENA applies on change; « Filtrer » only shows without JavaScript.
+    assert_no_button tl("filters.submit")
     select "Abidjan 1", from: tl("filters.drena_label")
-    click_button tl("filters.submit")
 
     assert_selector "#team_dashboard_scope", text: "Abidjan 1"
     assert_selector "#figure_students", text: /\A1\s+#{tl('key_figures.students', count: 1)}\z/

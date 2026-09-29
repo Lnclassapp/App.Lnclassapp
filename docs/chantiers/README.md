@@ -74,6 +74,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | Premier déploiement sur base neuve : seeds joués deux fois (`db:prepare` semait avant `db:seed`), corrigé par `seeds: false` en production (amendement ADR-0052) ; processeur de variantes Active Storage désactivé, aucune variante n'étant utilisée (ADR-0060) |
 
 | [`espace-direction-simple`](espace-direction-simple/memo.md) | livré (#86) | V2 en version simple (porteur, 2026-09-28) : la direction, invitée par l'équipe et connectée par PIN, lit « Enseignants » et « Travail des élèves » de son seul établissement (ADR-0065, UDR-0052, acceptés le 2026-09-29) |
+| [`finitions-ux`](finitions-ux/memo.md) | planifié | Retour, auto-focus, infobulles, « Copier », envoi automatique, recherche dynamique et titre de page harmonisés par des briques communes ([audit](finitions-ux/audit.md)) ; le caching relève d'un chantier `optimize` séparé |
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré sur `fix/secrets-hors-cache`, sans PR | Codes de secours, clé TOTP, code de récupération du PIN et liens d'invitation hors de tout cache : `secret_response` pose `no-store` + `Pragma` et exempte la page du cache Turbo (amendement ADR-0031) |
 
 ## Backlog

@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/_student_progress — progression de l'élève sur l'exercice, et son bouton de session %>
 <%# Rôle : meilleur score, maîtrise, badge, sessions terminées ; « Commencer l'exercice », ou « Reprendre » et « Recommencer » %>
-<%# ADR  : 0033, 0054 · UDR : 0007, 0021 · « Commencer » change de page (Turbo Drive), aucun stream %>
+<%# ADR  : 0033, 0054 · UDR : 0007, 0021, 0054 · « Commencer » change de page (Turbo Drive), aucun stream ; seuils en infobulle %>
 <section id="student_progress" aria-labelledby="student_progress_title">
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -18,13 +18,13 @@
             </dd>
           </div>
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".mastery") %></dt>
+            <dt class="text-xs font-medium text-mute"><%= t(".mastery") %><%= ui_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
             <dd class="mt-1 font-medium">
               <%= progress.mastery ? t("assessment.badges.mastery.#{progress.mastery}") : t(".no_mastery") %>
             </dd>
           </div>
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".badge") %></dt>
+            <dt class="text-xs font-medium text-mute"><%= t(".badge") %><%= ui_info_tip t("shared.info_tips.badges"), label: t(".badge") %></dt>
             <dd class="mt-1">
               <% if progress.badge_level %>
                 <%= ui_badge t(".badge_level", level: badge_label(progress.badge_level)), tone: badge_tone(progress.badge_level), icon: "trophy" %>

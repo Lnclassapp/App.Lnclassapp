@@ -1,13 +1,13 @@
 <%# 🌐 UI · identity/second_factor_enrollments/new — activation du second facteur d'un compte team %>
-<%# Rôle : QR code et secret en texte, premier code pour confirmer ; échec re-rendu en 422 avec le même QR code %>
-<%# ADR  : 0031 · UDR : 0005 %>
-<% content_for :title, t(".page_title") %>
+<%# Rôle : QR code et secret en texte, premier code envoyé dès le 6ᵉ chiffre ; échec re-rendu en 422 avec le même QR code %>
+<%# ADR  : 0031 · UDR : 0005, 0054 (§3.2, §3.4, §3.6) %>
+<% page_title t(".page_title") %>
 <main id="second-factor-enrollment" class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
   <div class="w-full max-w-md">
     <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "qr-code", padding: :lg do %>
       <ol class="space-y-6 text-sm text-ink">
         <li class="space-y-3">
-          <p class="font-medium"><%= t(".scan") %></p>
+          <div class="font-medium"><%= t(".scan") %> <%= ui_info_tip t(".app_tip"), label: t(".app_tip_label") %></div>
           <% if @enrollment.provisioning_uri.present? %>
             <div class="mx-auto size-48 rounded-ln border border-line bg-white p-2" role="img" aria-label="<%= t(".qr_label") %>">
               <%= RQRCode::QRCode.new(@enrollment.provisioning_uri).as_svg(module_size: 4, use_path: true, viewbox: true, standalone: true).html_safe %>
@@ -19,15 +19,22 @@
           <p class="rounded-ln bg-mist px-4 py-3 text-center font-mono text-sm tracking-wider" id="second-factor-secret"><%= @enrollment.secret.scan(/.{1,4}/).join(" ") %></p>
         </li>
         <li>
-          <%= form_with model: @form, scope: :second_factor, url: identity_second_factor_enrollment_path, id: "second-factor-enrollment-form", class: "space-y-5" do |form| %>
+          <%# Pas de cible `field` : le QR code est à lire d'abord (UDR-0054 §3.3). %>
+          <%= form_with model: @form, scope: :second_factor, url: identity_second_factor_enrollment_path, id: "second-factor-enrollment-form", class: "space-y-5",
+                        data: { controller: "autosubmit", autosubmit_pattern_value: '^\d{6}$',
+                                autosubmit_message_value: t("shared.autosubmit.sending") } do |form| %>
             <%= form.hidden_field :secret, value: @enrollment.secret %>
             <%= form.hidden_field :secret_uri, value: @enrollment.provisioning_uri %>
-            <%= ui_field form, :code, required: true, value: "", hint: t(".code_hint"), inputmode: "numeric",
-                         autocomplete: "one-time-code", maxlength: 6 %>
+            <%= ui_field form, :code, required: true, value: "", hint: t("shared.autosubmit.hint_second_factor"), inputmode: "numeric",
+                                      autocomplete: "one-time-code", maxlength: 6, pattern: '\d{6}', data: { autosubmit_target: "input" } %>
+            <p class="sr-only" role="status" aria-live="polite" data-autosubmit-target="status"></p>
             <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
           <% end %>
         </li>
       </ol>
+      <div class="mt-5 flex justify-center">
+        <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :ghost, size: :sm %>
+      </div>
     <% end %>
   </div>
 </main>

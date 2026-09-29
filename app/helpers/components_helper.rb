@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -195,7 +195,9 @@ module ComponentsHelper
 
   # Champ complet : libellé, contrôle, aide, erreur, reliés par `aria-describedby`. Tout attribut en plus va au contrôle.
   # `reveal: true` (mot de passe seulement) ajoute le bouton œil du contrôleur `password-reveal` (UDR-0051).
-  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], reveal: false, **input_html)
+  # `autofocus: true` désigne le champ au contrôleur `autofocus` (UDR-0054 §3.3), jamais par l'attribut `autofocus`.
+  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], reveal: false,
+               autofocus: false, **input_html)
     builder = option!(FIELD_BUILDERS, as, "ui_field as")
     kind = as.to_sym
     raise ArgumentError, "ui_field reveal : réservé à as: :password (reçu « #{kind} »)" if reveal && kind != :password
@@ -208,6 +210,7 @@ module ComponentsHelper
     )
     input_html[:class] = field_classes(kind, error, class_names(input_html[:class], { FIELD_REVEAL_INPUT => reveal }))
     input_html[:data] = { **input_html.fetch(:data, {}), password_reveal_target: "input" } if reveal
+    input_html[:data] = { **input_html.fetch(:data, {}), autofocus_target: "field" } if autofocus
     control = case kind
     when :select then form.select(method, choices, { prompt: input_html.delete(:prompt) }, input_html)
     else form.public_send(builder, method, input_html)
@@ -233,11 +236,14 @@ module ComponentsHelper
            label: label || field_label(form.object, method)
   end
 
-  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false, &block)
+  # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
+  # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
+  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
+               document_title: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
-           trigger_icon:, open:, body:, slots:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
+           trigger_icon:, open:, body:, slots:, document_title:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
@@ -353,8 +359,29 @@ module ComponentsHelper
            next_href: (pagination_href(param, page + 1) if page < pages)
   end
 
-  def ui_page_header(title:, subtitle: nil, &block)
-    render "components/page_header", title:, subtitle:, actions: (capture(&block) if block)
+  # `back: { label:, href: }` pose le lien de retour au-dessus du titre (UDR-0054 §3.2).
+  def ui_page_header(title:, subtitle: nil, back: nil, &block)
+    render "components/page_header", title:, subtitle:, back:, actions: (capture(&block) if block)
+  end
+
+  # Retour : lien discret à chevron, libellé du nom de la page d'arrivée, sans « Retour à » (UDR-0054 §3.2).
+  def ui_back_link(label, href:)
+    render "components/back_link", label:, href:
+  end
+
+  # Aide à la demande : <details> natif, ouvert au clic, au toucher et au clavier, panneau dans le flux (UDR-0054 §3.4).
+  def ui_info_tip(text, label:)
+    render "components/info_tip", text:, label:
+  end
+
+  # Copie d'une valeur rendue par le serveur (contrôleur `clipboard`, UDR-0054 §3.5). Le bouton reste caché sans
+  # JavaScript ; `copied:` et `failed:` sont les messages des deux toasts.
+  def ui_copy_button(text, label:, copied:, failed: t("shared.clipboard.failed"), aria_label: nil, variant: :secondary,
+                     size: :sm, icon: "clipboard-document")
+    button = ui_button(label, variant:, size:, icon:, hidden: true, "aria-label": aria_label,
+                              data: { clipboard_target: "button", action: "clipboard#copy" })
+    render "components/copy_button", text:, button:, copied: ui_toast(copied, type: :success),
+           failed: ui_toast(failed, type: :error)
   end
 
   private

@@ -95,3 +95,11 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 - **Le badge « Hors génération des classes » devient « Hors barème »** (`[data-generation=outside]`, même place, même ton) : il signale un niveau sans aucun nombre positif au barème, public ou privé (au premier cycle, ou pour un couple encore lié). Le code du niveau n'entre plus en compte.
 - **L'aide `#levels-generation-help`** renvoie au barème (lien « Ouvrir le barème des classes », `classroom_plan_path`) au lieu de lister les codes reconnus.
 - La modale de modification n'affiche plus d'avertissement « code non reconnu », et l'indice du nom ne liste plus les « noms reconnus par la génération » : le slug ne sert plus à la génération.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- Le badge « Hors barème » perd son attribut `title` et son texte `sr-only` d'explication ; il est suivi de `ui_info_tip` (nom « Aide : Hors barème ») (« Ce niveau n'est pas utilisé pour générer les classes des établissements. », à valider par le porteur).
+- Retour « Accueil » vers l'accueil équipe ; titres « Niveaux · Équipe · Lnclass », « Nouveau niveau · Équipe · Lnclass », « Modifier le niveau · Équipe · Lnclass ».
+- La modale vise le champ « Nom » à l'ouverture ; la confirmation de suppression vise « Annuler ».

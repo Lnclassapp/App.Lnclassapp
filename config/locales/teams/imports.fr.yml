@@ -63,6 +63,13 @@ fr:
           author: "Auteur"
       new:
         title: "Importer : %{kind}"
+        # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
+        page_titles:
+          schools: "Importer des établissements"
+          course_tree: "Importer des cours complets"
+          essentials: "Importer des fiches essentielles"
+          exercises: "Importer des exercices"
+          drenas: "Importer des DRENA"
         file: "Fichier JSON"
         limits: "Un fichier .json de %{megabytes} Mo au plus, avec %{roots} éléments au plus."
         submit: "Lancer l'import"
@@ -72,10 +79,16 @@ fr:
         tracking_title: "Import : %{kind}"
         close: "Fermer"
       show:
-        page_title: "Import : %{kind}"
+        # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
+        page_titles:
+          schools: "Import d'établissements"
+          course_tree: "Import de cours complets"
+          essentials: "Import de fiches essentielles"
+          exercises: "Import d'exercices"
+          drenas: "Import de DRENA"
         title: "Import : %{kind}"
         subtitle: "%{filename} · %{author} · %{date}"
-        back: "Retour aux imports"
+        back: "Imports"
       status:
         finished_at: "Fini le %{time}"
         processed:

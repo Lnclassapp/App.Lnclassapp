@@ -1,0 +1,8 @@
+<%# 🌐 UI · components/_copy_button — bouton « Copier », appelé par ui_copy_button %>
+<%# Rôle : la valeur exacte vient du serveur ; le contrôleur montre le bouton, copie, pose l'un des deux toasts %>
+<%# UDR  : 0054 (§3.5) · Stimulus : clipboard (émet clipboard:copied) %>
+<span data-controller="clipboard" data-clipboard-text-value="<%= text %>">
+  <%= button %>
+  <template data-clipboard-target="copied"><%= copied %></template>
+  <template data-clipboard-target="failed"><%= failed %></template>
+</span>

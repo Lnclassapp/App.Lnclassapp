@@ -1,7 +1,7 @@
 <%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
 <%# Rôle : « Importer des établissements » (principale), puis le menu « Classes » : génération confirmée, barème ; filtres et pages dans le frame « schools » %>
-<%# ADR  : 0030, 0036, 0056, 0058 · UDR : 0006, 0036, 0043, 0045 · aucun bouton de création : un établissement n'entre que par l'import %>
-<% content_for :title, t(".page_title") %>
+<%# ADR  : 0030, 0036, 0056, 0058 · UDR : 0006, 0036, 0043, 0045, 0054 · aucun bouton de création ; recherche pendant la frappe (frame estompé pendant l'envoi) %>
+<% page_title t(".page_title") %>
 <% unless list_frame_request? %>
   <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
     <%# Le menu reste à droite de l'import dès sm (demande du porteur) : ce bloc ne se replie pas et le titre cède la place.
@@ -35,7 +35,7 @@
   <%= render "filters", filters: @filters %>
 <% end %>
 
-<%= turbo_frame_tag "schools", data: { turbo_action: "advance" } do %>
+<%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50", data: { turbo_action: "advance" } do %>
   <p id="schools_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
   <% if @page.rows.any? %>
     <%# relative : les libellés sr-only de la dernière colonne restent pris dans le défilement du tableau, pas dans celui de la page. %>
@@ -45,7 +45,11 @@
         <thead class="border-b border-line text-xs text-mute">
           <tr>
             <% %i[school drena type cycle status classrooms teachers].each do |column| %>
-              <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+              <th scope="col" class="px-4 py-3 font-medium">
+                <%= t(".columns.#{column}") %>
+                <%# UDR-0054 §3.4 : les statuts s'expliquent une fois, dans l'en-tête, pas sur chaque ligne. %>
+                <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".columns.status") if column == :status %>
+              </th>
             <% end %>
             <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
           </tr>

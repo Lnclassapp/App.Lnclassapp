@@ -72,6 +72,16 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[type=radio]", 0
     end
     assert_select "button[type=submit][form=staff-invitation-form]", "Créer l'invitation"
+    assert_select "[data-modal-document-title-value='Inviter la direction · Équipe · Lnclass'] dialog#staff-invitation-modal"
+    assert_select "input[name='invitation[contact]'][data-autofocus-target=field]:not([autofocus])"
+  end
+
+  test "UDR-0054 §3.1: opened by its URL, the invitation modal titles the tab" do
+    sign_in_as @member
+
+    get new_school_staff_invitation_path(@school.public_id)
+
+    assert_select "title", text: "Inviter la direction · Équipe · Lnclass"
   end
 
   test "DS-01: an invitation for this school, without position: toast, and the link replaces the form in the modal" do
@@ -90,6 +100,10 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
       assert_select "dialog#staff-invitation-created-modal p", text: "Invitation pour le 07 99 00 00 09, direction de Lycée Moderne de Bouaké."
       link = css_select("input#invitation-link[readonly]").sole["value"]
       assert_equal secret_digest(link.delete_prefix("http://www.example.com/invitations/")), invitation.token_digest
+      # FU-25 : « Copier le lien » copie exactement le lien affiché (contrôleur `clipboard`, bouton caché sans JavaScript).
+      assert_select "dialog#staff-invitation-created-modal [data-controller=clipboard][data-clipboard-text-value='#{link}'] " \
+                    "button[hidden][data-action='clipboard#copy'][aria-label=\"Copier le lien d'invitation\"]", text: "Copier le lien"
+      assert_select "[data-clipboard-text-value='#{link}'] template[data-clipboard-target=copied]", text: /Lien copié\./
     end
     assert_no_link_in_flash
     assert_equal({ "kind" => "school_staff", "school_id" => @school.id },
@@ -104,6 +118,10 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :created
     assert_secret_response
     assert_select "main#main turbo-frame#modal dialog#staff-invitation-created-modal input#invitation-link[readonly]"
+    link = css_select("input#invitation-link").sole["value"]
+    assert_select "dialog#staff-invitation-created-modal [data-controller=clipboard][data-clipboard-text-value='#{link}'] button[hidden]",
+                  text: "Copier le lien"
+    assert_select "title", text: "Invitation créée · Équipe · Lnclass"
     assert_no_link_in_flash
   end
 

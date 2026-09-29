@@ -1,7 +1,7 @@
 <%# 🌐 UI · identity/pin_recovery_codes/_code — le code de récupération, montré une seule fois, dans la modale %>
 <%# Rôle : code en grands chiffres, heure d'expiration, consigne de transmission orale ; rendu par create.turbo_stream et par la page show %>
-<%# ADR  : 0032 · UDR : 0006, 0020 · jamais dans un flash, jamais dans un cache %>
-<%= ui_modal title: t(".title"), id: "pin-recovery-code-modal", open: true do |modal| %>
+<%# ADR  : 0032 · UDR : 0006, 0020, 0054 · jamais dans un flash, jamais dans un cache, jamais de « Copier » (code à dicter) %>
+<%= ui_modal title: t(".title"), id: "pin-recovery-code-modal", open: true, document_title: page_title(t(".title")) do |modal| %>
   <% modal.footer do %>
     <%= ui_button t(".close"), variant: :secondary, data: { action: "modal#close" } %>
   <% end %>

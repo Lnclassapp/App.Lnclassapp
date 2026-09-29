@@ -83,3 +83,13 @@ Une direction connectée arrive aujourd'hui sur l'écran d'attente : elle ne voi
 ## Amendement du 2026-09-29 — clé de navigation de « Travail des élèves »
 
 Le libellé d'une destination se lit sous sa clé (`shared.navigation.<clé>`, partiel `shared/navigation/_link`), et `classrooms` vaut déjà « Classes » pour l'enseignant. La destination « Travail des élèves » a donc la clé **`student_work`** : `[:student_work, :school_admin_classrooms_path, "chart-bar"]`. Les pages `school_admin/classrooms/index` et `show` déclarent `content_for :nav_key, "student_work"` (au lieu de `"classrooms"` au §3). La page de démonstration du shell (`design/shell`) marque active la première destination du rôle. Constaté au Lot 0 du chantier.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Retour** : le bouton `ghost` `arrow-left` « Travail des élèves » devient le lien de retour commun (`ui_page_header(back:)`, UDR-0054 §3.2).
+- **Chercher un élève** : la page d'une classe gagne `form#student-work-search` (GET, champ `q`, contrôleur `search`) et le frame `student_work_students` ; la recherche ne lit que les élèves de cette classe ; état vide « Aucun élève ne correspond ». Aucun identifiant d'élève n'entre dans le HTML (inchangé).
+- **Infobulles** : « Taux de rendu », « Moyenne », « Score moyen » et la légende de « — », sur la liste et sur la page d'une classe (UDR-0054 §3.4).
+- Titres : « Travail des élèves · Direction · Lnclass », « <nom de la classe> · Direction · Lnclass » (au lieu du nom brut).
+- Ces règles s'appliquent aux pages de cette UDR, en production depuis la V2 simple.
