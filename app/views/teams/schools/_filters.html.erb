@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_filters — recherche et filtres de la liste nationale %>
-<%# Rôle : formulaire GET qui vise le frame « schools » et avance l'URL : les filtres survivent au retour arrière et au partage du lien %>
-<%# ADR  : 0030 · UDR : 0006, 0036 %>
+<%# Rôle : formulaire GET qui vise le frame « schools » : la frappe part après une pause (URL remplacée), une liste au changement %>
+<%# ADR  : 0030 · UDR : 0006, 0036, 0054 · Stimulus : search · sans JavaScript, « Filtrer » envoie le même GET %>
 <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
 <% selects = {
      drena: drena_options.map { [ it.name, it.public_id ] },
@@ -8,14 +8,16 @@
      cycle: Entities::School::School::CYCLES.map { [ t("teams.schools.cycles.#{it}"), it ] },
      status: Entities::School::School::STATUSES.map { [ t("school_statuses.#{it}"), it ] }
    } %>
-<%= form_with url: schools_path, method: :get, id: "schools-filters", role: "search", "aria-label": t(".label"),
-              data: { turbo_frame: "schools", turbo_action: "advance" },
+<%# role et aria-label passent par html: — form_with ignore ces options au premier niveau. %>
+<%= form_with url: schools_path, method: :get, id: "schools-filters", html: { role: "search", "aria-label": t(".label") },
+              data: { controller: "search", turbo_frame: "schools", turbo_action: "advance" },
               class: "mb-6 grid items-end gap-3 rounded-card border border-line bg-white p-4 shadow-card sm:grid-cols-2 lg:grid-cols-4" do %>
   <div class="space-y-1.5 sm:col-span-2">
     <%= label_tag "filter_search", t(".search"), class: "block text-sm font-medium text-ink" %>
     <div class="relative">
       <%= ui_icon "magnifying-glass", size: :sm, class: "pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-mute" %>
       <%= search_field_tag :search, filters[:search], id: "filter_search", placeholder: t(".search_placeholder"),
+                           autocomplete: "off", data: { action: "input->search#queue" },
                            class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap pl-10", ComponentsHelper::FIELD_STATES[:valid]) %>
     </div>
   </div>
@@ -24,13 +26,13 @@
       <%= label_tag "filter_#{name}", t(".#{name}"), class: "block text-sm font-medium text-ink" %>
       <div class="relative">
         <%= select_tag name, options_for_select([ [ t(".all_#{name}"), "" ], *choices ], filters[name]), id: "filter_#{name}",
-                       class: select_class %>
+                       class: select_class, data: { action: "change->search#submit" } %>
         <%= ui_icon "chevron-down", variant: :mini, class: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-mute" %>
       </div>
     </div>
   <% end %>
   <div class="flex flex-wrap gap-3 sm:col-span-2 lg:justify-end">
-    <%= ui_button t(".submit"), type: :submit, icon: "funnel" %>
+    <%= ui_button t(".submit"), type: :submit, icon: "funnel", data: { search_target: "button" } %>
     <%= ui_button t(".reset"), href: schools_path, variant: :ghost, data: { turbo_frame: "_top" } %>
   </div>
 <% end %>

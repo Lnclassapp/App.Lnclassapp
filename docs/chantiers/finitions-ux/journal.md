@@ -67,3 +67,52 @@ Un lot vertical qui aurait besoin d'en changer une s'arrête : le Lot 0 rouvre.
 - `COVERAGE=0 bin/rails test:system` : 208 runs, 2562 assertions, 0 échec, 0 erreur, 0 skip.
 - `bin/brakeman -q --no-pager` : 0 avertissement.
 - `bin/check-asset-budget` : `application.js` 41,8 Ko gzip / 60 Ko.
+
+## Lot D1 — Équipe : établissements (2026-09-29)
+
+Branche `feature/finitions-ux-lot-d1`, depuis `feature/finitions-ux` (Lot 0 fusionné). Critères : FU-01, FU-09, FU-25, FU-26 (fiche), FU-45, FU-46 ; FU-51 vérifié sur la liste.
+
+### Ce qui a été fait
+
+- **Liste** : `page_title` (« Établissements · Équipe · Lnclass ») ; `form#schools-filters` porte le contrôleur `search` (frappe → `search#queue`, quatre listes → `search#submit`, « Filtrer » en cible `button`, gardé sans JavaScript) ; frame `schools` estompé pendant l'envoi (`aria-busy:opacity-50`) ; infobulle du statut dans l'en-tête de la colonne « Statut » (une fois, pas par ligne).
+- **Fiche** : titre = nom de l'établissement ; retour `ui_back_link "Établissements", href: back_href(schools_path, from: schools_path)` posé dans `show`, **hors** de `#school_header` (les streams modification, désactivation et régénération du code remplacent l'en-tête et gardent le retour) ; l'ancien `nav` « Fil d'Ariane » de `_header` disparaît ; copies du code et du lien `/e/<code>` passées à `ui_copy_button` (plus de `classroom--join-code-copy` ici, toasts `shared.clipboard.*`) ; infobulles du code d'établissement (texte UDR-0054 §3.4) et du statut.
+- **Modales** : modifier l'établissement, ajouter une classe, inviter la direction, invitation créée : `page_title` passé à `ui_modal(document_title:)`. `content_for :title` retiré des vues du lot.
+- **Invitation de la direction** : « Copier le lien » (`ui_copy_button`, nom accessible « Copier le lien d'invitation », toast « Lien copié. ») sous le lien affiché, dans la modale et la page de repli.
+
+### Mesure du PRD §7
+
+`GET /teams/schools?search=coc` avec `Turbo-Frame: schools`, base de démonstration (`db:prepare` de développement) + 3 000 établissements (6 types de noms × 20 villes, dont « Cocody »), 150 résultats, 50 lignes rendues ; session d'intégration connectée (équipe, second facteur), 3 appels d'échauffement puis **médiane de 20 appels**, durée `process_action.action_controller`. Machine à 4 cœurs partagée avec les autres lots.
+
+| Code | Mode | Médiane | dont SQL | Charge |
+|---|---|---|---|---|
+| Avant (`feature/finitions-ux`) | développement | 130,0 ms | 24,7 ms | ~1,3 |
+| Avant | proche production (classes chargées, gabarits en cache) | 121,7 ms · 128,4 ms | 24,9 ms · 25,7 ms | ~1,2 |
+| Après (Lot D1) | développement | 124,1 ms · 130,1 ms | 24,8 ms · 24,6 ms | ~1,3 |
+| Après | proche production | 123,4 ms · 133,9 ms | 25,5 ms · 25,7 ms | ~1,2 |
+| Après, liste sans recherche (3 004) | proche production | 108,9 ms | 6,8 ms | ~1,2 |
+
+- **Sous la cible de 150 ms** à charge normale, avant comme après : le lot ne change pas la requête. Premier essai sous forte charge (moyenne de charge 12, dix lots en parallèle) : 174 ms en développement ; non retenu, mais la marge est mince (~20 ms).
+- La recherche coûte **~19 ms de SQL** (25 ms contre 7 ms sans filtre, `translate(lower(…)) LIKE` sur 3 000 lignes) ; le reste (~100 ms) est le **rendu** des 50 lignes (menu ⋮ et deux confirmations `<dialog>` par ligne). Un index trigramme ne gagnerait que la part SQL : pas de quoi arrêter le lot. Si la cible devait être tenue sous charge, le levier est le rendu de la ligne, pas un index (à voir avec `perf/cache-ecrans-lourds`).
+- Requêtes par frappe : 0 sous 2 caractères, une par pause de 300 ms (test système FU-51).
+- Scripts (hors dépôt) : `seed_schools.rb` (3 000 lignes marquées « (mesure) », `insert_all!`) et `measure.rb` (session d'intégration, abonnement à `process_action`).
+
+### Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-09-29 | Le retour de la fiche vit dans `show`, pas dans `_header` | Trois streams remplacent `#school_header` ; dans l'en-tête, `back_href` y aurait lu le `Referer` de la fiche et perdu les filtres | Non |
+| 2026-09-29 | Infobulle du statut dans l'en-tête de colonne de la liste, pas sur chaque badge | Une aide par ligne répèterait 50 fois le même texte | Non |
+| 2026-09-29 | `role` et `aria-label` du formulaire passés par `html:` | `form_with` ignore ces options au premier niveau : le `role="search"` existant n'était jamais rendu (relevé par le Lot G) | Non |
+| 2026-09-29 | Modales : `page_title(t(".title"))`, pas de clé `page_title` dédiée | Le titre de l'onglet est celui de la modale ; une seconde clé répèterait le même texte | Non |
+
+### Écarts
+
+- **`Queries::Shared::TextSearch` non branché sur `SchoolsQuery`** : `app/infrastructure/queries/school/schools_query.rb` n'est pas dans le champ `Fichiers` du lot. La recherche des établissements garde ses `ACCENTED`/`PLAIN` (même comportement). Dette du Lot 0 reportée à un refactor ou au Lot Z.
+- **État d'erreur dans le frame** (PRD §3, « Erreur serveur pendant une recherche ») : aucune brique du Lot 0 ne rend `ui_error_state` dans un frame sur une réponse non 2xx (il faudrait un écouteur `turbo:frame-missing` ou une page d'erreur qui porte le frame). Non fait ici (hors champ, brique gelée) : à trancher au Lot Z.
+- `_school_row`, `schools/_form`, `school_classrooms/_form` : rien à changer (l'auto-focus passe déjà par `ui_field autofocus:`, les confirmations visent « Annuler » par `_modal`).
+
+### Vérification (tests du lot seulement)
+
+- `COVERAGE=0 bin/rails test test/controllers/teams/schools_controller_test.rb test/controllers/teams/staff_invitations_controller_test.rb test/controllers/teams/school_classrooms_controller_test.rb test/integration/i18n_configuration_test.rb`
+- `COVERAGE=0 bin/rails test test/system/finitions/schools_search_test.rb test/system/teams/schools_test.rb test/system/teams/school_code_test.rb test/system/teams/staff_invitation_test.rb test/system/teams/school_classroom_creation_test.rb`
+- `bin/rubocop` sur les fichiers Ruby du lot ; garde HITL (`test/guards/repository_rules_test.rb`).
