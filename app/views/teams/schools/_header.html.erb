@@ -1,8 +1,8 @@
 <%# 🌐 UI · teams/schools/_header — en-tête de la fiche d'un établissement, remplacé par les streams update et deactivate %>
-<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code d'établissement (copier, lien) ; menu ⋮ : modifier, régénérer le code, désactiver %>
-<%# ADR  : 0030, 0036, 0057, 0063 · UDR : 0006, 0036, 0042, 0044, 0050 · Stimulus : classroom--join-code-copy %>
+<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code d'établissement (copier, lien) ; menu ⋮ : inviter la direction, modifier, régénérer le code, désactiver %>
+<%# ADR  : 0030, 0036, 0057, 0063, 0065 · UDR : 0006, 0036, 0042, 0044, 0050, 0052 · Stimulus : classroom--join-code-copy %>
 <% active = school.status != "inactive" %>
-<%# Seul un établissement actif reçoit une classe : ni désactivé, ni en brouillon (décision du porteur, 2026-09-27) %>
+<%# Seul un établissement actif reçoit une classe ou une direction : ni désactivé, ni en brouillon (porteur, 2026-09-27 ; ADR-0065) %>
 <% accepts_classrooms = school.status == "active" %>
 <% code = Entities::School::SchoolCode.display(school.school_code) %>
 <% link = school_code_signup_url(school.school_code) %>
@@ -47,6 +47,10 @@
                         data: { turbo_frame: "modal" } %>
         <% end %>
         <%= ui_dropdown label: t(".actions", name: school.name), id: "school-header-actions", fixed: true do %>
+          <% if accepts_classrooms %>
+            <%= ui_dropdown_item t(".invite_staff"), href: new_school_staff_invitation_path(school.public_id), icon: "user-plus",
+                                                     frame: "modal" %>
+          <% end %>
           <%= ui_dropdown_item t(".edit"), href: edit_school_path(school.public_id), icon: "pencil-square", frame: "modal" %>
           <%= ui_dropdown_item t(".regenerate_code"), dialog: "regenerate-school-code", icon: "arrow-path" %>
           <% if active %>

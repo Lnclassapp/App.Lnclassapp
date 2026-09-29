@@ -76,3 +76,29 @@ Portes, lancées une fois : `bin/rubocop` 0 offense (992 fichiers) ; `CI=1 PARAL
 | **PR** | — |
 | **ADR produits** | [0065](../../decisions/adr/0065-espace-direction-simple-en-lecture-seule.md) |
 | **UDR produits** | [0052](../../decisions/udr/0052-espace-direction-simple.md) |
+
+## Lot A — L'équipe invite, la direction crée son compte (2026-09-29)
+
+**Statut : vert.** Branche `feature/espace-direction-simple-lot-a`. Critères DS-01 à DS-04.
+
+Fait :
+
+- `Policies::Identity::InviteSchoolStaffPolicy` : compte `team` de sous-rôle `admin` ou `field`.
+- `Dtos::Identity::SchoolStaffInvitationInput` (numéro seul ; `school_public_id` vient de l'adresse de la fiche) et `UseCases::Identity::InviteSchoolStaff` : mêmes règles que `InviteTeamMember` ; établissement inconnu `:not_found` (404), non actif (brouillon compris) `:invalid` `school: [:inactive]` ; invitation `school_staff` sans fonction ; journal `invitation.sent` `{ kind:, school_id: }`.
+- `AcceptInvitation` accepte les deux types : `school_staff` → compte `school_admin`, puis `StaffRepositoryPort#attach` dans la même transaction ; journal `invitation.accepted` `{ kind:, school_id: }` pour la direction.
+- `Teams::StaffInvitationsController` et ses vues (`new`, `_created`, `created`, `create.turbo_stream`) : modale de l'UDR-0019 réduite au numéro, refus « Cet établissement n'est pas actif. » en tête de la modale, lien affiché une fois, `Cache-Control: no-store`.
+- Fiche : « Inviter la direction » en premier dans le menu ⋮, pour un établissement actif seulement.
+- Acceptation : variante direction (encadré « Vous rejoignez <établissement> comme direction. », toast « Votre compte est créé. Connectez-vous avec votre numéro et votre PIN. »).
+- Profil : plus de badge « Compte en attente » pour la direction ; ligne « Établissement ». Shell : le nom de l'établissement sous le nom (`ShellUserQuery`).
+
+Écarts au plan et à l'UDR-0052 :
+
+- **`app/infrastructure/repositories/identity/invitation_repository.rb` n'a pas changé** : `create` acceptait déjà `school_id:` et `position: nil`.
+- **Un test hors du champ, modifié par conséquence mécanique** : `test/controllers/identity/profiles_controller_test.rb` attendait le badge « Compte en attente » de la direction, que l'UDR-0052 retire ; le cas devient « la direction lit son établissement » (profil et shell). Les tests d'intégration de l'acceptation (page de la variante, toast, compte rattaché) sont dans `test/controllers/teams/staff_invitations_controller_test.rb`, pour ne pas toucher `test/controllers/identity/invitations_controller_test.rb`.
+- **Page d'acceptation : titre et accueil de la variante direction** (« Créer votre compte de direction », « Bienvenue sur Lnclass »…) en plus de l'encadré prescrit : l'accueil « Bienvenue dans l'équipe Lnclass » aurait menti à la direction. Les clés `identity.invitations.show.*` propres à chaque type passent sous `team.` et `school_staff.`.
+- **Le nom de l'établissement de la page d'acceptation** se lit par `SchoolRepository#find_by_id` depuis le contrôleur (helper `invitation_school_name`), y compris quand le formulaire est re-rendu en 422 ; l'entité `Invitation` (Lot 0) n'a pas été touchée.
+- `DTO#school` renvoie `school_public_id` : ActiveModel lit l'attribut qui porte l'erreur `school: [:inactive]` de l'ADR-0065.
+- Les tests d'intégration et système invitent le **0799000009**, pas le 0700000009 du PRD : la fabrique donne aux comptes `team` des numéros `07` + séquence, et le 0700000009 est déjà pris dès la 9ᵉ fabrication (échec intermittent vu par le pre-commit, 422 au lieu de 200).
+- Après connexion, la direction arrive encore sur l'écran d'attente : son accueil « Travail des élèves » est au Lot C. Le test système de DS-03 ne vérifie donc pas la page d'arrivée, seulement l'absence de second facteur et le profil.
+
+Portes, lancées une fois : `bin/rubocop` 0 offense (1000 fichiers) ; `CI=1 PARALLEL_WORKERS=2 bin/rails test` 2367 tests, 0 échec, 0 erreur, 7 skips préexistants (`PERF=1`), couverture 100 % lignes (8552/8552) et branches (2095/2095) ; `COVERAGE=0 bin/rails test:system` 196 tests, **3 échecs et 2 erreurs de délai** (`boucle_pedagogique_test`, `teams/essential_management_test`, `identity/cold_start_test`, `error_paths_test`, `school/classrooms_by_level_test`) sous une charge de 21 à 26 (trois lots en parallèle sur la machine), aucun dans un fichier touché par le lot ; relancés seuls pour diagnostic, ces 5 fichiers passent (27 tests, 0 échec) ; `bin/brakeman -q --no-pager` 0 alerte.
