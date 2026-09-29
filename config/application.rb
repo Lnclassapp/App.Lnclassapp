@@ -51,6 +51,9 @@ module AppLnclassapp
     # session and a policy) nor uploads directly (imports go through their form; the rich text editor refuses
     # attachments). Its routes are not drawn: a leaked signed id opens nothing, and no visitor creates a blob.
     config.active_storage.draw_routes = false
+    # ADR-0060 : no image variant is ever generated (the browser crops the photo, the server serves it as is), and
+    # neither image_processing nor libvips is in the image. Disabled explicitly, so that no boot asks for them.
+    config.active_storage.variant_processor = :disabled
 
     # ADR-0052 : Mission Control Jobs is protected by the team area authentication.
     config.mission_control.jobs.base_controller_class = "Teams::BaseController"

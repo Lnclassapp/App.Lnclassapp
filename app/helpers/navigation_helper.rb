@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006
+# UDR  : 0006, 0052
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -21,12 +21,13 @@ module NavigationHelper
     team: [ [ :home, :team_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
             [ :schools, :schools_path, "building-library" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
             [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
-    school_admin: [ [ :home, :school_admin_home_path, "home" ], [ :classrooms, :school_admin_classrooms_path, "squares-2x2" ],
-                    [ :teachers, :school_admin_teachers_path, "user-group" ], [ :students, :school_admin_students_path, "users" ] ]
+    # UDR-0052 : deux destinations, sans accueil ; « Travail des élèves » est l'accueil de la direction.
+    school_admin: [ [ :student_work, :school_admin_classrooms_path, "chart-bar" ], [ :teachers, :school_admin_teachers_path, "user-group" ] ]
   }.freeze
   ACCOUNT_LINKS = [ [ :profile, :profile_path, "user-circle", nil ],
                     [ :sign_out, :session_path, "arrow-right-start-on-rectangle", :delete ] ].freeze
   # Sections de l'accueil de chaque rôle (squelette) — reprises des fils d'accueil de l'ancienne application.
+  # Celles de la direction ne servent plus qu'à la page de démonstration du shell (UDR-0052).
   HOME_SECTIONS = {
     student: [ [ :todo, "clipboard-document-check" ], [ :classroom, "academic-cap" ], [ :courses, "book-open" ] ],
     teacher: [ [ :classrooms, "user-group" ], [ :activity, "bolt" ], [ :courses, "book-open" ] ],

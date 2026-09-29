@@ -107,13 +107,16 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#profile_information", text: /Second facteur : actif/
   end
 
-  test "a pending school admin reads that the account waits" do
-    sign_in_as create_user(role: "school_admin")
+  # DS-03, UDR-0052: no « En attente » badge any more; the school of the management, as for a teacher, and under the name.
+  test "a school admin reads their school" do
+    sign_in_as create_school_admin(school: create_school(name: "Lycée Moderne de Bouaké"))
 
     get profile_path
 
     assert_response :success
-    assert_select "#profile_information", text: /Compte en attente/
+    assert_select "#profile_information", text: /Compte en attente/, count: 0
+    assert_select "#profile_information div", text: /Établissement\s+Lycée Moderne de Bouaké/
     assert_select "dt", text: "Rôle", count: 0
+    assert_select "header", text: /Lycée Moderne de Bouaké/
   end
 end

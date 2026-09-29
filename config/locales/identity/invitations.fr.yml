@@ -1,4 +1,5 @@
-# Acceptation d'une invitation dans l'équipe (plan boucle-pedagogique, Lot B7) — F-16, ADR-0037, ADR-0038, ADR-0050, UDR-0019
+# Acceptation d'une invitation dans l'équipe (plan boucle-pedagogique, Lot B7) ou dans la direction d'un établissement
+# (chantier espace-direction-simple, Lot A) — F-16, DS-03, ADR-0037, ADR-0038, ADR-0050, ADR-0065, UDR-0019, UDR-0052
 fr:
   activemodel:
     attributes:
@@ -32,20 +33,28 @@ fr:
   identity:
     invitations:
       show:
-        page_title: "Rejoindre l'équipe · Lnclass"
-        welcome: "Bienvenue dans l'équipe Lnclass"
-        welcome_hint: "Vous avez été invité à rejoindre l'équipe. Créez votre accès pour gérer les contenus et suivre la plateforme."
-        title: "Créer votre compte équipe"
+        team:
+          page_title: "Rejoindre l'équipe · Lnclass"
+          welcome: "Bienvenue dans l'équipe Lnclass"
+          welcome_hint: "Vous avez été invité à rejoindre l'équipe. Créez votre accès pour gérer les contenus et suivre la plateforme."
+          title: "Créer votre compte équipe"
+          second_factor: "À votre première connexion, vous activerez la vérification en deux étapes avec une application d'authentification."
+        school_staff:
+          page_title: "Rejoindre Lnclass · Direction"
+          welcome: "Bienvenue sur Lnclass"
+          welcome_hint: "Vous avez été invité comme direction de votre établissement. Créez votre accès pour suivre ses enseignants et le travail de ses élèves."
+          title: "Créer votre compte de direction"
+          joining: "Vous rejoignez %{school} comme direction."
         subtitle: "Votre numéro est celui qui a reçu l'invitation."
         identity: "Identité"
         last_name_placeholder: "Ex. : Kouassi"
         first_name_placeholder: "Ex. : Aya Marie"
         security: "Sécurité"
         pin_hint: "4 chiffres, que vous seul connaissez."
-        second_factor: "À votre première connexion, vous activerez la vérification en deux étapes avec une application d'authentification."
         submit: "Créer mon compte"
         expired_title: "Ce lien d'invitation n'est plus valable"
         expired_description: "Il a expiré, a déjà servi ou a été annulé. Demandez une nouvelle invitation à un administrateur de l'équipe."
         sign_in: "Se connecter"
       accept:
         accepted: "Votre compte est créé. Connectez-vous : la vérification en deux étapes vous sera demandée."
+        accepted_school_admin: "Votre compte est créé. Connectez-vous avec votre numéro et votre PIN."
