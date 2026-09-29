@@ -1,13 +1,9 @@
 <%# 🌐 UI · assessment/exercise_sessions/show — une session d'exercice de l'élève (AS-07 à AS-10) %>
 <%# Rôle : progression, puis le frame « question » : la prochaine question, remplacée par son verdict sans rechargement %>
-<%# ADR  : 0054 · UDR : 0007, 0022 %>
-<% content_for :title, t(".page_title", title: @play.exercise_title) %>
+<%# ADR  : 0054 · UDR : 0007, 0022, 0054 · retour « Quitter la session », seule exception au nom de la page d'arrivée %>
+<% page_title t(".page_title", title: @play.exercise_title) %>
 <div class="mx-auto max-w-2xl space-y-6">
-  <nav aria-label="<%= t(".breadcrumb") %>" class="text-sm">
-    <%= link_to exercise_path(@play.exercise_public_id), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".quit") %>
-    <% end %>
-  </nav>
+  <%= ui_back_link t(".quit"), href: exercise_path(@play.exercise_public_id) %>
   <header class="space-y-4">
     <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= @play.exercise_title %></h1>
     <%= render "assessment/exercise_sessions/progress_bar", play: @play %>

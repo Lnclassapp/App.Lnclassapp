@@ -154,6 +154,19 @@ Branche `feature/finitions-ux-lot-a`, depuis `feature/finitions-ux` (Lot 0 fusio
 - **Inscription enseignant** : infobulle « Code d'établissement » ; focus sur le champ fautif après un 422.
 - **Titres** : « Connexion », « PIN oublié », « Inscription enseignant », « Rejoindre une classe », « Rejoindre ma classe », « Accès interdit », « Page introuvable », « Accueil » (landing), par `page_title`, sans suffixe dans les locales.
 
+## Lot F — Catalogue, exercice, élève (2026-09-29)
+
+Branche `feature/finitions-ux-lot-f`, depuis `feature/finitions-ux` (Lot 0 fusionné). Critères : FU-02 (élève), FU-14, FU-27 (élève), FU-47, FU-53 (catalogue). Briques du Lot 0 utilisées telles quelles : `page_title`, `ui_back_link`, `ui_info_tip`, `ui_field as: :search`, contrôleur `search`, `Queries::Shared::TextSearch`, `shared.info_tips.{badges,mastery}`.
+
+### Ce qui a été fait
+
+- **Catalogue** : `CourseCatalogQuery#call(search:)` passe par `TextSearch.apply(…, columns: ["courses.name"])` (aucun index) ; `Catalog::CoursesController` lit `q`. Le formulaire `#courses-filters` porte `search`, le champ « Rechercher un cours » (`search#queue`), les listes en `change->search#submit`, « Filtrer » en cible `button` ; le frame `courses` s'estompe (`aria-busy`). État vide unique « Aucun cours ne correspond » + « Effacer la recherche ».
+- **Page cours** : le fil complet devient `ui_back_link "Cours"` (FU-14).
+- **Retours** : fiche → nom du cours, exercice → nom de la fiche, résultat → nom de la fiche, session → « Quitter la session » ; tous par `ui_back_link`.
+- **Titres** (`page_title`) : « Cours », « <cours> », « <fiche> », « <exercice> » (page et session), « Résultat de <exercice> », « Accueil », « Ma classe » ; suffixes « — Session », « — Résultat », « — Cours », « Fiche essentielle : » retirés des locales.
+- **Infobulles** (textes de `shared.info_tips`) : maîtrise et badge de la progression (exercice), maîtrise et palier du résultat, badges de la fiche (élève), badges et maîtrise de l'accueil élève.
+- « Ma classe » : titre seulement ; le code reste sans « Copier » (FU-27, testé).
+
 ### Décisions prises en cours de route
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
@@ -206,6 +219,17 @@ Aucune.
 ### Ce qui a dérapé
 
 - Base de test : `db:prepare` sur une base neuve a chargé les seeds (181 classes, niveaux « 6ème »…) ; les tests système qui créent un niveau « 6ème » tombaient en `UniqueViolation`. `bin/rails db:test:prepare` a rendu une base vide.
+
+| 2026-09-29 | Sur la fiche et l'accueil élève, une infobulle par liste (en tête de la liste), pas une par ligne | Les badges de chaque ligne sont dans `catalog/essentials/_exercise_progress` et `classroom/student_homes/_assigned_exercise`, hors du champ `Fichiers` ; une aide par liste évite aussi dix `<details>` identiques | Non |
+| 2026-09-29 | Un seul état vide « Aucun cours ne correspond » (recherche ou filtres), bouton « Effacer la recherche » vers `courses_path` | FU-47 ; la clé `clear_filters` devient `clear_search` | Non |
+| 2026-09-29 | `role` et `aria-label` du formulaire passés par `html:` | Au premier niveau de `form_with`, ils n'étaient pas rendus (relevé par le Lot G) ; le test du contrôleur les vérifie désormais | Non |
+| 2026-09-29 | Titre de la session d'exercice = titre de l'exercice | UDR-0022 non amendée ; la règle « nom de l'objet = le `h1` » de l'UDR-0054 §3.1 | Non |
+| 2026-09-29 | Test système dans `module Finitions` imbriqué (`module Finitions` / `class CatalogAndStudentTest`) | Le module n'existe pas ailleurs : `Finitions::…` au premier niveau lève `NameError` ; la forme imbriquée tient quel que soit l'ordre de chargement des fichiers des autres lots | Non |
+
+### Ce qui a dérapé
+
+- `db:prepare` sur la base de test neuve l'a semée : les usines butaient sur `index_levels_on_name`. `bin/rails db:schema:load` (RAILS_ENV=test) a vidé la base.
+- `test/system/catalog/course_catalog_test.rb` cliquait « Filtrer » : le bouton est caché avec JavaScript, le test choisit la liste et attend la mise à jour sans clic.
 
 ### Dette laissée derrière
 
@@ -322,3 +346,12 @@ Deux tests de contrôleur hors du champ `Fichiers` affirment l'ancien rendu et �
 - `COVERAGE=0 bin/rails test test/system/finitions/public_pages_test.rb test/system/identity/team_invitation_test.rb test/system/identity/teacher_signup_test.rb test/system/classroom/join_test.rb` : 22 runs, 139 assertions, 0 échec.
 - `test/system/homepage_test.rb`, `error_paths_test.rb:130` (PIN oublié) : verts ; `error_paths_test.rb:12` et `:44` : instables, voir la dette.
 - `bin/rubocop` sur les fichiers Ruby du lot : aucune offense ; garde HITL (`test/guards/repository_rules_test.rb`) : verte.
+
+| État d'erreur du frame (`ui_error_state` + « Réessayer » sur une réponse non 2xx, UDR-0054 §3.9) non posé sur le catalogue | Aucune brique du Lot 0 ne le porte (le contrôleur `search` ne gère pas l'échec, le frame reçoit la page d'erreur sans frame) ; aucun critère FU du lot | Lot Z (ou réouverture du Lot 0) |
+| Infobulle par ligne sur `_exercise_progress` et `_assigned_exercise` | Hors champ `Fichiers` | Si le porteur la veut par ligne : Lot Z |
+
+### Vérification (règle de la vague : tests du lot seulement)
+
+- `COVERAGE=0 bin/rails test test/infrastructure/queries/catalog/course_catalog_query_test.rb test/controllers/catalog test/controllers/assessment test/controllers/classroom/student_homes_controller_test.rb test/controllers/classroom/student_classrooms_controller_test.rb test/i18n test/helpers` : 208 runs, 0 échec.
+- `COVERAGE=0 bin/rails test test/system/finitions/catalog_and_student_test.rb test/system/catalog/course_catalog_test.rb test/system/catalog/essential_page_test.rb test/system/classroom/student_home_test.rb test/system/classroom/student_classroom_test.rb test/system/assessment/` : 28 runs, 0 échec.
+- `bin/rubocop` sur les fichiers Ruby du lot : aucune offense.
