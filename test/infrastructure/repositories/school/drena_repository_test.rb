@@ -21,16 +21,17 @@ module Repositories
         record = create_drena(name: "Abidjan 2")
 
         assert_equal record.id, @repository.find_by_public_id(public_id: record.public_id).id
-        assert_equal "abidjan-2", @repository.find_by_slug(slug: "abidjan-2").slug
+        assert_equal "drena-abidjan-2", @repository.find_by_slug(slug: "drena-abidjan-2").slug
         assert_nil @repository.find_by_slug(slug: "inconnue")
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
       end
 
-      test "crée une DRENA avec son slug dérivé du nom" do
+      # DR-01 (ADR-0055) : le formulaire donne le même slug que l'import, préfixé drena-.
+      test "crée une DRENA avec son slug dérivé du nom, préfixé drena-" do
         result = @repository.create(drena: drena("Bouaké 1"))
 
         assert result.success?
-        assert_equal "bouake-1", result.value.slug
+        assert_equal "drena-bouake-1", result.value.slug
         assert_equal 14, result.value.public_id.length
         assert Orm::Drena.exists?(result.value.id)
       end
@@ -47,13 +48,13 @@ module Repositories
 
       test "renomme une DRENA sans toucher à son slug" do
         record = create_drena(name: "Daloa")
-        entity = @repository.find_by_slug(slug: "daloa")
+        entity = @repository.find_by_slug(slug: "drena-daloa")
         entity.name = "Daloa Ouest"
 
         result = @repository.update(drena: entity)
 
         assert result.success?
-        assert_equal [ "Daloa Ouest", "daloa" ], record.reload.attributes.values_at("name", "slug")
+        assert_equal [ "Daloa Ouest", "drena-daloa" ], record.reload.attributes.values_at("name", "slug")
       end
 
       test "un renommage vers un nom pris donne :conflict" do
@@ -80,7 +81,7 @@ module Repositories
       test "indexe les identifiants par slug pour les imports" do
         record = create_drena(name: "San Pedro")
 
-        assert_equal record.id, @repository.ids_by_slug["san-pedro"]
+        assert_equal record.id, @repository.ids_by_slug["drena-san-pedro"]
       end
     end
   end

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Drena
-# Rôle : table drenas, directions régionales, cibles des imports d'établissements par leur slug
-# ADR  : 0029, 0034
+# Rôle : table drenas, directions régionales, cibles des imports d'établissements par leur slug figé drena-…
+# ADR  : 0029, 0034, 0055
 module Orm
   class Drena < ApplicationRecord
     include HasPublicId
@@ -8,7 +8,8 @@ module Orm
 
     self.table_name = "drenas"
 
-    has_frozen_slug from: :name
+    # Même règle qu'à l'import : « Bouaké 1 » → « drena-bouake-1 » (Entities::School::Drena.slug_for).
+    has_frozen_slug from: -> { Entities::School::Drena.slug_for(name) }
 
     has_many :schools, class_name: "Orm::School", inverse_of: :drena, dependent: :restrict_with_error
 

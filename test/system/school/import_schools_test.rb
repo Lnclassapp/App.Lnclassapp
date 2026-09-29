@@ -30,7 +30,7 @@ class School::ImportSchoolsTest < ApplicationSystemTestCase
   end
 
   test "the help of the kind is shown, then a mixed file gives the exact report without a page reload" do
-    document = mixed(schools_document(count: 11, drena: "abidjan-2"), invalid_at: [ 6 ], duplicate_of: { 9 => 1 })
+    document = mixed(schools_document(count: 11, drena: "drena-abidjan-2"), invalid_at: [ 6 ], duplicate_of: { 9 => 1 })
     document["schools"][3]["schooltype"] = "semi-public"
     file = json_file(document.to_json)
 
@@ -42,7 +42,7 @@ class School::ImportSchoolsTest < ApplicationSystemTestCase
         assert_selector "#import-help-schools", text: "Aucun établissement existant n'est modifié"
         assert_selector "#import-help-schools code", text: "schooltype"
         find("summary", text: "Slug de la DRENA (1)").click
-        assert_selector "#import-help-drenas code", text: "abidjan-2"
+        assert_selector "#import-help-drenas code", exact_text: "drena-abidjan-2"
 
         attach_file "import[io]", file.path
         click_on "Lancer l'import"

@@ -39,7 +39,7 @@ module UseCases
       end
 
       def update(name, public_id: "abj1abj1abj1ab", actor: TEAM, taken: [])
-        drena = Entities::School::Drena.new(id: 12, public_id: "abj1abj1abj1ab", slug: "abidjan-1", name: "Abidjan 1")
+        drena = Entities::School::Drena.new(id: 12, public_id: "abj1abj1abj1ab", slug: "drena-abidjan-1", name: "Abidjan 1")
         @drenas = FakeDrenas.new(drena, taken:)
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
@@ -53,7 +53,7 @@ module UseCases
 
         assert result.success?
         assert_equal "Abidjan 1 Plateau", @drenas.updated.name
-        assert_equal "abidjan-1", @drenas.updated.slug
+        assert_equal "drena-abidjan-1", @drenas.updated.slug
         assert_equal 1, @transaction.calls
         assert_equal [ { action: "school.changed", actor_id: 7, at: NOW, subject_type: "Drena", subject_id: 12,
                          metadata: { change: "drena.updated", name: "Abidjan 1 Plateau", previous_name: "Abidjan 1" } } ],
