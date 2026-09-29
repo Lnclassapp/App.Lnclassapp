@@ -75,7 +75,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 
 | [`espace-direction-simple`](espace-direction-simple/memo.md) | livré (#86) | V2 en version simple (porteur, 2026-09-28) : la direction, invitée par l'équipe et connectée par PIN, lit « Enseignants » et « Travail des élèves » de son seul établissement (ADR-0065, UDR-0052, acceptés le 2026-09-29) |
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré sur `fix/secrets-hors-cache`, sans PR | Codes de secours, clé TOTP, code de récupération du PIN et liens d'invitation hors de tout cache : `secret_response` pose `no-store` + `Pragma` et exempte la page du cache Turbo (amendement ADR-0031) |
-| [`cache-ecrans-lourds`](cache-ecrans-lourds/memo.md) | cadrage | Mesurer avant de mettre en cache (porteur, 2026-09-29) : 28 écrans au volume de la feuille de route, aucun N+1 ; pilotage (333 à 390 ms), recherche du pilotage (263 ms) et Travail des élèves (214 ms) coûtent en SQL, établissements et catalogue au rendu ; cinq pistes classées, aucune appliquée |
+| [`cache-ecrans-lourds`](cache-ecrans-lourds/memo.md) | lots 1 à 4 sur `perf/cache-ecrans-lourds`, sans PR ; lot 5 après les lots UX | Budgets gravés (ADR-0067 : p95 < 300 ms pilotage, < 100 ms ailleurs, HTML < 150 Ko). Index et requêtes, sans cache ni vue modifiée : Travail des élèves 213 → 56 ms, pilotage 7 j 338 → 199 ms, recherche 264 → 38 ms (p50) ; pilotage « année » à 304 ms en p95, à la limite ; `pg_trgm` activée (amendement ADR-0062) |
 
 ## Backlog
 

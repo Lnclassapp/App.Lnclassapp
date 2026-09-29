@@ -8,7 +8,7 @@ Rejouable par le challenger sans poser de question. Worktree propre, base de dé
 
 ```bash
 bin/rails db:reset                                 # 4 établissements de db/seeds + comptes de développement (PIN 2468)
-bin/rails runner script/perf/seed_dataset.rb       # ≈ 2 min ; refuse de semer deux fois
+bin/rails runner script/perf/seed_dataset.rb       # ≈ 2 min ; refuse de semer deux fois (module : script/perf/dataset.rb)
 # Mode production sur la base de développement. Les variables BUCKET_* sont factices : elles ne servent
 # qu'à charger config/storage.yml, aucun appel n'est fait.
 RAILS_ENV=production SECRET_KEY_BASE_DUMMY=1 RAILS_LOG_LEVEL=warn \
@@ -63,6 +63,25 @@ Le coût n'est pas concentré dans une requête : il est réparti sur des jointu
 - Établissements : chaque ligne porte un menu ⋮, **deux** `ui_modal`, chacune avec son `form_with` (jeton CSRF compris), et les icônes SVG en ligne. Cela fait **≈ 11 Ko de HTML par ligne**, 578 Ko pour 50 lignes, 113 000 allocations et 61 ms de vue. Le SQL tient en 5 ms.
 - Catalogue : 210 cartes à ≈ 2,6 Ko chacune (badge de matière, badge de niveau, icône SVG), 550 Ko, 117 000 allocations, 58 ms de vue. Le SQL tient en 5 ms (une seule requête `pluck`).
 
+### Après les leviers (2026-09-29, phases 4 et 5)
+
+Requête par requête, `psql` sur la base semée, médiane de 5 exécutions (connexion comprise, ≈ 1 ms) :
+
+| Requête | Avant | Après | Levier |
+|---|--:|--:|---|
+| `StudentWorkQuery#totals_by` (77 classes, 765 devoirs) | 195 ms | **29 ms** | lot 1 : réécriture seule 195 → 65 ms ; + index partiel → 36 ms (`Index Only Scan`, 0 lecture de table) |
+| Pilotage 7 j, élèves actifs (`COUNT(DISTINCT)` sur `started_at`) | 53 ms | 30 ms | lot 2a, `(started_at, student_id)` en index seul |
+| Pilotage 7 j, exercices terminés + moyenne | 35 ms | 21 ms | lot 2a, index partiel `completed_at` |
+| Pilotage, 10 derniers inscrits | 17,5 ms | 1,9 ms | lot 2a, `users (created_at, id)` lu à rebours |
+| Pilotage, nouveaux inscrits | 5,4 ms | 3,7 ms | lot 2a |
+| Pilotage 7 j, assignations | 8,7 ms | 7,6 ms | lot 2a, `assigned_at` (voir « leviers gardés à la limite ») |
+| Pilotage 7 j, 3 jointures des placements | 40 + 36 + 88 ms | **59 ms** (une lecture) | lot 2b |
+| Pilotage année, 3 jointures des placements | 40 + 40 + 123 ms | **98 ms** (une lecture) | lot 2b |
+| Recherche « kou », `COUNT(*)` puis page | 125 + 125 ms | 14,5 + 16 ms | lot 3, `BitmapOr` sur les deux index trigrammes |
+| Recherche « ko » (2 caractères) | 124 ms | 124 ms | aucun trigramme complet : parcours séquentiel, comme avant — pas de régression |
+
+Ce qui reste dans le pilotage « année » (≈ 250 ms de SQL) : les élèves actifs (70 ms, 145 000 sessions depuis le 1ᵉʳ septembre, soit la moitié de la table), la lecture groupée des placements (98 ms, dont la table de hachage des 148 000 sessions de la période), la couverture (42 ms, trois `EXISTS` par établissement), les exercices terminés (32 ms). Tous croissent avec les sessions de l'année.
+
 ## Décisions prises en cours de route
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
@@ -72,9 +91,24 @@ Le coût n'est pas concentré dans une requête : il est réparti sur des jointu
 | 2026-09-29 | Ni `question_attempts` ni photos dans le jeu | Aucun des écrans mesurés ne les lit (page de résultat d'une session hors liste) | non |
 | 2026-09-29 | Scripts dans `script/perf/`, pas dans `test/performance` | Ils écrivent dans la base de développement et ne doivent jamais tourner dans la suite ; `bin/rubocop` les couvre | non |
 
+| 2026-09-29 | `totals_by` part des adhésions présentes des classes et lit une ligne par (classe, devoir, élève) | Le planificateur estimait 1 ligne pour 29 177 et joignait toutes les adhésions ; pré-agréger par couple supprime aussi le tri du `COUNT(DISTINCT (élève, devoir))` | non : mêmes définitions (ADR-0065 §4) |
+| 2026-09-29 | Index de sessions **couvrants** (`INCLUDE`) et partiels | Les lectures se font en `Index Only Scan` sans toucher la table ; l'index partiel ne porte que les sessions qui comptent | ADR-0067 §4 (liste des leviers) |
+| 2026-09-29 | `users (created_at, id)` plutôt que `users (created_at)` | Le même index sert le comptage de la période et « les 10 derniers inscrits » (`ORDER BY created_at DESC, id DESC`) : 17,5 → 1,9 ms | non |
+| 2026-09-29 | Trigramme aussi sur `schools.national_code` | Sans lui, le `OR` de `SchoolsQuery` ne peut pas se faire en `BitmapOr` : un seul membre sans index et tout repart en parcours séquentiel. Mesuré sur 4 032 établissements (jeu × 8, proche des ≈ 3 900 de la production) : 14 ms en parcours, 0,8 ms avec les trois index | amendement ADR-0062 |
+| 2026-09-29 | `script/perf/seed_dataset.rb` scindé : le module va dans `script/perf/dataset.rb` | Le test `PERF=1` sème le même jeu dans la base de test ; `seed_dataset.rb` garde sa garde « développement seulement » | non |
+| 2026-09-29 | Le test `PERF=1` **commet** le jeu puis `VACUUM ANALYZE`, et vide les tables après | Dans la transaction d'un test, aucune page n'est « all-visible » : chaque `Index Only Scan` retournerait à la table et le test mesurerait un cas qui n'existe pas en production | ADR-0067 §6 |
+
+## Leviers gardés à la limite, leviers écartés
+
+- **`classroom_assignments (assigned_at)`** : gain de 1 ms sur 7 jours (8,7 → 7,6 ms), nul sur l'année. Le cycle dit d'annuler un levier marginal. Il est gardé parce que le porteur l'a demandé et que l'ADR-0062 l'avait décidé : la table n'est jamais purgée, et sans index le comptage de la semaine parcourt les devoirs de toutes les années. **À réévaluer** si l'écriture des devoirs en pâtit.
+- **Index trigrammes des établissements** : aucun gain au volume du bench (504 établissements : le planificateur garde le parcours séquentiel, 3 ms). Gardés sur la mesure au volume de la production (≈ 3 900 établissements, ci-dessus).
+- **Réécriture des « élèves actifs »** en `users WHERE id IN (sessions de la période)` : 67 → 55 ms sur l'année, 31 → 30 ms sur 7 jours. Marginal : **non appliquée**.
+- **Cache court du pilotage** : non appliqué (ADR-0062, option B écartée). Voir le memo pour la vue « année ».
+
 ## Ce qui a dérapé
 
 - Premier lancement en mode production : échec au démarrage, parce que `config/storage.yml` (service `railway`) exige `BUCKET_NAME`. Contourné par des variables factices : Active Storage n'est jamais appelé par les écrans mesurés.
+- **Mesures faussées par la charge.** Un autre agent (`finitions-ux`) jouait ses tests système en même temps (charge de 5 à 20 sur 4 vCPU). Une série prise sous charge donnait le pilotage 7 j à 214 ms au lieu de 190 et « Établissements, recherche » à 50 ms au lieu de 38. La mesure « après » retenue attend une charge sous 1,5 avant chaque exécution (`bench_quiet`, même script, même jeu).
 - Deuxième lancement du bench dans la même minute : `POST /session` renvoie un 429 (`rate_limit to: 5, within: 1.minute`, par adresse). Corrigé par une adresse distante tirée au hasard pour chaque compte.
 
 ## Ce qu'on a appris sur la codebase
@@ -88,8 +122,10 @@ Le coût n'est pas concentré dans une requête : il est réparti sur des jointu
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Les cinq pistes du memo | Porteur, 2026-09-29 : mesurer d'abord, ne rien optimiser encore | ce chantier, phases 2 à 5, après décision |
-| Un bench avec des sessions réparties sur une année complète | Pas encore demandé (question 3 du memo) | ce chantier |
+| Piste 5 : listes légères (modale unique des établissements, fragment des cartes du catalogue) | Porteur, 2026-09-29 : après les lots UX qui touchent ces vues ; le fragment demande un ADR de cache | ce chantier, lot 5 du [plan](plan.md) |
+| Un bench avec des sessions réparties sur une année complète (≈ 1,5 million) | Question 3 du memo, non tranchée ; le pilotage « année » est à la limite du budget | ce chantier ou un suivi |
+| Recherche par numéro (`users.contact LIKE '%1234%'`) | Hors décision du porteur (noms seulement) ; parcours séquentiel de `users` | à mesurer si la recherche devient dynamique |
+| Coût en écriture des nouveaux index | Non mesuré | à mesurer à la prochaine recette d'import |
 
 ## Clôture
 
@@ -97,5 +133,5 @@ Le coût n'est pas concentré dans une requête : il est réparti sur des jointu
 |---|---|
 | **Livré le** | — |
 | **PR** | — |
-| **ADR produits** | — |
+| **ADR produits** | [ADR-0067](../../decisions/adr/0067-budgets-de-temps-serveur-des-ecrans.md) ; amendement de l'[ADR-0062](../../decisions/adr/0062-indicateurs-de-pilotage-lus-en-direct.md) |
 | **UDR produits** | — |

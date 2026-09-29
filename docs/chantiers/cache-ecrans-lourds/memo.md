@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | cadrage |
+| **Statut** | lots 1 à 4 livrés sur la branche (sans PR) ; lot 5 reporté après les lots UX |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/cache-ecrans-lourds` |
 
@@ -121,9 +121,77 @@ L'[ADR-0051](../../decisions/adr/0051-navigateurs-supportes-et-budget-de-poids.m
 | Vue p50 et HTML de `/teams/schools` | 504 établissements, 50 par page | 61 ms, 578 Ko | < 25 ms, < 150 Ko | idem |
 | Vue p50 et HTML de `/courses` (équipe) | 210 cours | 58 ms, 550 Ko | < 25 ms, < 150 Ko | idem |
 
-## Pistes classées (non appliquées)
+## Mesure après (2026-09-29, lots 1 à 3)
 
-Les pistes sont classées par ratio gain/risque, comme l'exige le [cycle optimisation](../../workflows/optimisation.md) : un lot = un levier = un chiffre. Les gains sont **estimés** à partir des plans `EXPLAIN ANALYZE` du journal, pas prouvés. Chaque lot les mesure avant d'être gardé.
+Même machine, même jeu (`script/perf/seed_dataset.rb`, non resemé), même script, 30 requêtes × 3 exécutions, **médiane des 3**. Code : `perf/cache-ecrans-lourds` après fusion de `origin/Develop`. Chaque exécution a démarré avec une charge machine sous 1,5 : un autre agent jouait ses tests système, et une série prise sous charge (4 à 20) donnait jusqu'à +25 % (journal, « Ce qui a dérapé »). La mesure « avant » a été reprise sur le code fusionné, avant le premier levier : elle retrouve celle du cadrage à 5 % près (pilotage 7 j 338 ms, année 386, recherche 264, Travail des élèves 213 en p50).
+
+Lecture pas à pas, sur les écrans visés (p50 / p95 ms, médiane de 3) :
+
+| Écran | Avant | Lot 1 | Lot 2a (index) | Lot 2b (placements) | Lot 3 (trigrammes) | **Après (charge < 1,5)** | Budget p95 (ADR-0067) | Tenu ? |
+|---|--:|--:|--:|--:|--:|--:|--:|:-:|
+| Travail des élèves `/school-admin/classrooms` | 213 / 223 | 64 / 97 | — | — | — | **56 / 71** | < 100 | oui |
+| Une classe (direction) | 15 / 20 | 19 / 33 | — | — | — | **16 / 24** | < 100 | oui |
+| Pilotage 7 j | 338 / 402 | — | 257 / 304 | 190 / 240 | — | **199 / 220** | < 300 | oui |
+| Pilotage année | 386 / 409 | — | 336 / 386 | 279 / 316 | — | **281 / 304** | < 300 | **non, à 1 %** |
+| Pilotage DRENA | 203 / 221 | — | 179 / 201 | 139 / 163 | — | **150 / 189** | < 300 | oui |
+| Recherche du pilotage « kou » (frame) | 264 / 295 | — | — | — | 53 / 89 | **38 / 47** | < 100 | oui |
+| Établissements, recherche « bouake » | 38 / 58 | — | — | — | 50 / 119 *(sous charge)* | **37 / 46** | < 100 | oui |
+
+Tableau complet après, 28 écrans (colonnes du tableau « avant ») :
+
+| Écran | p50 ms | p95 ms | SQL ms | Vue ms | Requêtes | Ko | Ko gzip |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| **Pilotage 7 j** | **199** | **220** | 161 | 12 | 21 | 65 | 10 |
+| **Pilotage année** | **281** | **304** | 248 | 10 | 21 | 65 | 10 |
+| Pilotage DRENA | 150 | 189 | 117 | 9 | 22 | 46 | 8 |
+| **Recherche du pilotage** (frame) | **38** | **47** | 29 | 3 | 7 | 22 | 2 |
+| **Travail des élèves** | **56** | **71** | 40 | 8 | 10 | 64 | 6 |
+| Établissements, page 1 | 74 | 109 | 5 | 61 | 7 | **578** | 20 |
+| Établissements, page 6 | 77 | 84 | 8 | 61 | 7 | **578** | 20 |
+| Établissements, recherche | 37 | 46 | 8 | 25 | 7 | 208 | 12 |
+| Catalogue (équipe, 210 cartes) | 68 | 78 | 5 | 57 | 8 | **550** | 16 |
+| Catalogue (élève, 200 cartes) | 58 | 73 | 6 | 46 | 9 | **474** | 15 |
+| Catalogue (enseignant) | 58 | 76 | 6 | 46 | 10 | **474** | 15 |
+| Accueil enseignant | 55 | 62 | 34 | 8 | 17 | 51 | 8 |
+| Fiche établissement | 46 | 60 | 10 | 24 | 15 | **279** | 17 |
+| Accueil équipe | 40 | 69 | 15 | 8 | 19 | 36 | 5 |
+| Classe (enseignant) | 38 | 49 | 8 | 20 | 15 | **159** | 12 |
+| Croissance | 28 | 34 | 15 | 6 | 8 | 28 | 5 |
+| Accueil élève | 25 | 35 | 8 | 9 | 14 | 58 | 8 |
+| Mes classes (enseignant) | 26 | 32 | 5 | 16 | 10 | 81 | 7 |
+| Exercice | 25 | 40 | 9 | 6 | 16 | 27 | 5 |
+| Fiche essentielle | 21 | 29 | 6 | 8 | 13 | 24 | 5 |
+| Enseignants (direction) | 17 | 25 | 6 | 7 | 8 | 74 | 6 |
+| Cours dans la classe | 19 | 24 | 6 | 7 | 14 | 27 | 5 |
+| Page cours | 18 | 25 | 5 | 8 | 10 | 25 | 4 |
+| Une classe (direction) | 16 | 24 | 5 | 6 | 9 | 30 | 4 |
+| Ma classe (élève) | 17 | 25 | 6 | 5 | 12 | 18 | 4 |
+| Devoirs d'un cours | 15 | 21 | 4 | 7 | 9 | 25 | 5 |
+| Imports | 11 | 15 | 3 | 5 | 5 | 20 | 4 |
+| Activité récente de l'élève (frame) | 7 | 9 | 2 | 2 | 4 | 9 | 1 |
+
+| Métrique | Contexte / volume | Avant | Cible | **Après** | Tenu ? |
+|---|---|--:|--:|--:|:-:|
+| p95 `/teams/dashboard` (7 j) | 40 000 élèves, 312 000 sessions | 361 ms | < 300 ms | **220 ms** | oui |
+| p95 `/teams/dashboard?period=year` | idem (28 jours au 29 septembre) | 429 ms | < 300 ms | **304 ms** | **non** (p50 281 ms ; 298 à 313 selon l'exécution) |
+| p95 recherche du pilotage `q=kou` | 44 154 comptes, 5 693 trouvés | 293 ms | < 100 ms | **47 ms** | oui |
+| p95 `/school-admin/classrooms` | 77 classes, 4 235 élèves, 765 devoirs | 240 ms | < 100 ms | **71 ms** | oui |
+| Vue p50 et HTML de `/teams/schools` | 504 établissements | 61 ms, 578 Ko | < 25 ms, < 150 Ko | 61 ms, 578 Ko | non : lot 5, reporté |
+| Vue p50 et HTML de `/courses` (équipe) | 210 cours | 58 ms, 550 Ko | < 25 ms, < 150 Ko | 57 ms, 550 Ko | non : lot 5, reporté |
+
+Ce que la mesure après dit :
+
+1. **Travail des élèves** : ÷ 3,8 en p50 (213 → 56 ms), la requête des totaux ÷ 6,7 (195 → 29 ms). La réécriture seule en rapportait la moitié, l'index partiel l'autre.
+2. **Pilotage 7 j** : 338 → 199 ms en p50, sous le seuil de l'ADR-0062. Les index de période ont payé 80 ms, la lecture unique des placements 65 ms, comme estimé au cadrage.
+3. **Pilotage « année » : la piste ne tient pas tout son gain.** 386 → 281 ms en p50, mais **304 ms en p95**, à 1 % du budget. Le reste est proportionnel aux sessions de l'année (la moitié de la table au 29 septembre) : les index n'y servent plus, le planificateur lit en séquence. En mai, avec 9 mois de sessions, la page dépassera nettement 300 ms. Le levier suivant, selon l'ADR-0062, est un cache court à clé complète ou une table d'agrégats : il demande un ADR qui remplace l'option C, après une mesure avec un an de sessions (question 3).
+4. **Recherche** : ÷ 7 (264 → 38 ms en p50), le SQL ÷ 8,7. Un terme de 2 caractères reste en parcours séquentiel (124 ms), comme avant.
+5. **Établissements** : aucun gain au volume du jeu (504 établissements, 8 ms de SQL, le planificateur garde le parcours). Les index trigrammes paient au volume de la production (≈ 3 900 : 14 → 0,8 ms par requête, journal).
+6. **Test `PERF=1` des budgets** (`test/performance/school/heavy_screens_budget_test.rb`, base de test, même jeu, 15 lectures après 3 de chauffe, charge < 2) : pilotage 7 j **261 ms**, pilotage année **368 ms — rouge**, recherche « kou » **34 ms**, Travail des élèves **62 ms**. L'environnement de test est plus lent que le bench (Bullet actif, journal SQL en `debug`, pas d'eager load) : il est pessimiste, et il dit la même chose que le bench — l'année est hors budget. **Il reste rouge volontairement** tant que le porteur n'a pas tranché le levier suivant. Les tests `PERF=1` d'import (écritures massives sur les tables nouvellement indexées) restent verts : exercices 37 s, fiches 29 s, cours 26 s, établissements 3 à 6 s, génération de classes 3 à 7 s.
+7. **Aucun autre écran n'a bougé** au-delà du bruit (± 10 %) ; aucun N+1 ; le pilotage fait 21 requêtes au lieu de 23.
+
+## Pistes classées (appliquées : 1 à 4 ; reportée : 5)
+
+Classement du cadrage, conservé tel quel ; les chiffres réels sont dans « Mesure après ». Les pistes sont classées par ratio gain/risque, comme l'exige le [cycle optimisation](../../workflows/optimisation.md) : un lot = un levier = un chiffre. Les gains sont **estimés** à partir des plans `EXPLAIN ANALYZE` du journal, pas prouvés. Chaque lot les mesure avant d'être gardé.
 
 | # | Levier | Écran | Nature | Gain estimé | Risque / décision |
 |---|---|---|---|---|---|
@@ -143,7 +211,7 @@ Leviers **écartés par la mesure**, et pourquoi :
 
 ## Hors périmètre
 
-- **Appliquer un levier** : ce chantier s'arrête à la mesure (porteur, 2026-09-29). Les pistes deviennent des lots après décision.
+- ~~Appliquer un levier~~ : le porteur a décidé le 2026-09-29 (après le cadrage) d'appliquer les pistes 1 à 4 dans ce chantier, **SQL et index seulement, aucune vue modifiée**. La piste 5 touche des vues : elle attend la fin des lots UX ([plan](plan.md), lot 5).
 - Le poids du JavaScript et du CSS, déjà budgété et vérifié en CI (ADR-0051).
 - La pagination ou les filtres par défaut du catalogue, et toute modification visible d'un écran : ce sont des chantiers `feature`.
 - Les jobs (imports, génération de classes), qui ont déjà leurs tests de performance (`test/performance`, `PERF=1`).
@@ -167,6 +235,8 @@ Leviers **écartés par la mesure**, et pourquoi :
 - Les temps sont mesurés sur une base locale, sans latence réseau. Sur Railway, chaque requête ajoute un aller-retour vers PostgreSQL : un écran de 20 requêtes et plus y perdra davantage qu'un écran de 7.
 
 ## Questions encore ouvertes
+
+*Réponses du porteur du 2026-09-29 : 1. oui, budgets gravés dans l'[ADR-0067](../../decisions/adr/0067-budgets-de-temps-serveur-des-ecrans.md) ; 2. les deux, direction d'abord ; 4. oui, [amendement de l'ADR-0062](../../decisions/adr/0062-indicateurs-de-pilotage-lus-en-direct.md#amendement-du-2026-09-29--index-lecture-groupée-des-placements-et-pg_trgm) ; 5. après les lots UX, avec son ADR. La question 3 reste ouverte, et elle compte maintenant (voir « Mesure après »).*
 
 1. **Budgets** : les cibles p95 proposées (300 ms pour le pilotage, 100 ms ailleurs, 150 Ko de HTML brut) conviennent-elles ? Faut-il les graver dans un ADR, à côté du budget de poids de l'ADR-0051 ?
 2. **Ordre des lots** : commencer par la direction (piste 1 : gain ÷ 7, risque faible) ou par le pilotage (pistes 3 et 4, pour repasser sous le seuil de l'ADR-0062) ?
