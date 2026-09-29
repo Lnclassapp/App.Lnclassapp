@@ -7,7 +7,9 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
   Period = Entities::School::ReportingPeriod
   Query = Queries::School::TeamDashboardQuery
 
-  def dashboard(period: "7d", drena: nil) = Query.new.call(period: Period.parse(period, today: Date.current), drena_public_id: drena)
+  def dashboard(period: "7d", drena: nil, cache: Rails.cache)
+    Query.new(cache:).call(period: Period.parse(period, today: Date.current), drena_public_id: drena)
+  end
 
   # A student placed in an active classroom of the school year (ADR-0040, ADR-0041).
   def placed_student(classroom, **) = create_student(classroom:, **)
@@ -274,6 +276,88 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     assert_nil signups.last.school_name
     assert(signups.none? { it.contact.match?(/\d{3}/) })
     assert_equal teacher.public_id, signups.second.public_id
+  end
+
+  # ADR-0062, amendement du 2026-09-29 (cache de la vue « année ») : the school-year figures are kept 5 minutes, per
+  # school year, start of period and DRENA; the latest signups stay live; 7 days and 30 days are never cached.
+  def a_year_session(student, score) = create_exercise_session(student:, exercise: an_exercise, status: "completed",
+                                                                score_percent: score, completed_at: 1.hour.ago)
+
+  def sql_during(&)
+    statements = []
+    recorder = ->(*, payload) { statements << payload[:sql] unless payload[:name] == "SCHEMA" }
+    ActiveSupport::Notifications.subscribed(recorder, "sql.active_record", &)
+    statements
+  end
+
+  test "the year view gives the same figures with and without the cache, from a cold or a warm entry" do
+    travel_to Time.zone.local(2026, 10, 15, 12) do
+      a_year_session(placed_student(create_classroom), 80)
+      live = dashboard(period: "year", cache: ActiveSupport::Cache::NullStore.new)
+
+      assert_equal live, dashboard(period: "year"), "cold"
+      assert_equal live, dashboard(period: "year"), "warm"
+      assert_equal 1, live.completed_sessions_count
+    end
+  end
+
+  test "a second year read within 5 minutes runs none of the figure queries, only the latest signups" do
+    travel_to Time.zone.local(2026, 10, 15, 12) do
+      a_year_session(placed_student(create_classroom), 80)
+      cold = sql_during { dashboard(period: "year") }
+      warm = sql_during { dashboard(period: "year") }
+
+      assert(cold.any? { it.include?("exercise_sessions") })
+      assert_empty warm.grep(/exercise_sessions|classroom_assignments|GROUP BY/)
+      assert_operator warm.size, :<=, 3, warm.join("\n")
+    end
+  end
+
+  test "the year figures are at most 5 minutes late, and the latest signups are never late" do
+    travel_to Time.zone.local(2026, 10, 15, 12) do
+      student = placed_student(create_classroom)
+      a_year_session(student, 80)
+      dashboard(period: "year")
+      a_year_session(student, 40)
+      newcomer = create_student(first_name: "Awa", last_name: "Koné")
+
+      travel 5.minutes - 1.second
+      board = dashboard(period: "year")
+
+      assert_equal [ 1, 80 ], board.to_h.values_at(:completed_sessions_count, :average_score)
+      assert_equal "Awa Koné", board.recent_signups.first.display_name
+      assert_equal newcomer.public_id, board.recent_signups.first.public_id
+
+      travel 2.seconds
+
+      assert_equal [ 2, 60 ], dashboard(period: "year").to_h.values_at(:completed_sessions_count, :average_score)
+    end
+  end
+
+  test "two DRENA filters, or a filter and the national view, never share a year entry" do
+    travel_to Time.zone.local(2026, 10, 15, 12) do
+      here, there = create_drena(name: "Abidjan 1"), create_drena(name: "Bouaké")
+      2.times { a_year_session(placed_student(create_classroom(school: create_school(drena: here))), 90) }
+      a_year_session(placed_student(create_classroom(school: create_school(drena: there))), 30)
+
+      national = dashboard(period: "year")
+      filtered_here = dashboard(period: "year", drena: here.public_id)
+      filtered_there = dashboard(period: "year", drena: there.public_id)
+
+      assert_equal [ 3, 2, 1 ], [ national, filtered_here, filtered_there ].map(&:completed_sessions_count)
+      assert_equal [ 70, 90, 30 ], [ national, filtered_here, filtered_there ].map(&:average_score)
+      assert_equal [ nil, "Abidjan 1", "Bouaké" ], [ national, filtered_here, filtered_there ].map { it.drena&.name }
+      assert_equal national, dashboard(period: "year", drena: "inconnue").with(drena: nil), "an unknown DRENA reads the national entry"
+    end
+  end
+
+  test "7 days and 30 days are read live, every time" do
+    a_year_session(placed_student(create_classroom), 80)
+    %w[7d 30d].each do |period|
+      dashboard(period:)
+
+      assert(sql_during { dashboard(period:) }.any? { it.include?("exercise_sessions") }, period)
+    end
   end
 
   test "the number of queries does not grow with the volume" do

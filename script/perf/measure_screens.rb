@@ -9,7 +9,8 @@
 #   bin/rails runner script/perf/measure_screens.rb
 #
 # PERF_RUNS (30 par défaut) requêtes mesurées par écran, après 3 de chauffe ; PERF_ONLY=dashboard,schools limite
-# aux écrans nommés. La requête passe par toute la pile Rack (Integration::Session), sans réseau ni navigateur.
+# aux écrans nommés. PERF_COLD=1 vide le cache (Rails.cache) avant chaque requête, hors du temps mesuré : la mesure à
+# froid du pilotage « année », dont les chiffres sont gardés 5 minutes (ADR-0062, amendement du 2026-09-29). La requête passe par toute la pile Rack (Integration::Session), sans réseau ni navigateur.
 # Aucune donnée n'est écrite, sauf les sessions de connexion des quatre comptes de mesure.
 require "json"
 require "zlib"
@@ -22,6 +23,7 @@ module PerfScreens
   IGNORED = %w[SCHEMA TRANSACTION].freeze
   SLOWEST = 3
   SLOW_DB_MS = 50
+  COLD = ENV["PERF_COLD"] == "1"
 
   module_function
 
@@ -99,6 +101,7 @@ module PerfScreens
   end
 
   def measure(session, path, headers)
+    Rails.cache.clear if COLD # avant les abonnements : ni compté ni chronométré
     queries = []
     cached = 0
     subscriber = ActiveSupport::Notifications.subscribe("sql.active_record") do |_, start, finish, _, payload|

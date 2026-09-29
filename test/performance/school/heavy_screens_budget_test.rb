@@ -38,6 +38,7 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
     today = Date.current
     budgets = {
       "pilotage 7 j" => [ PILOTAGE_MS, -> { dashboard("7d", today) } ],
+      # Chiffres de l'année gardés 5 minutes (ADR-0062, amendement du 2026-09-29) : le budget porte sur l'entrée chaude.
       "pilotage année" => [ PILOTAGE_MS, -> { dashboard("year", today) } ],
       "recherche « kou »" => [ SCREEN_MS, -> { Queries::Identity::AccountSearchQuery.new.call(term: "kou") } ],
       "Travail des élèves" => [ SCREEN_MS, -> { Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus) } ]
@@ -49,17 +50,20 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
     measured = budgets.transform_values { |budget, read| [ budget, p95_ms(&read) ] }
 
     measured.each { |name, (budget, p95)| puts format("\n[PERF] %-20s p95 %6.1f ms (budget %d ms)", name, p95, budget) }
+    cold = p95_ms { dashboard("year", today, cache: ActiveSupport::Cache::NullStore.new) }
+    puts format("\n[PERF] %-20s p95 %6.1f ms (à froid, une lecture toutes les 5 minutes au plus ; noté, non budgété)",
+                "pilotage année", cold)
     measured.each { |name, (budget, p95)| assert_operator p95, :<, budget, name }
   end
 
   private
 
-  def dashboard(key, today)
-    Queries::School::TeamDashboardQuery.new.call(period: Entities::School::ReportingPeriod.parse(key, today:), today:)
+  def dashboard(key, today, cache: Rails.cache)
+    Queries::School::TeamDashboardQuery.new(cache:).call(period: Entities::School::ReportingPeriod.parse(key, today:), today:)
   end
 
   def p95_ms(&read)
-    ActiveRecord::Base.uncached do # every run reads the base, as a new request would
+    ActiveRecord::Base.uncached do # every run reads the base (or Rails.cache), as a new request would
       WARMUP.times { read.call }
       times = Array.new(RUNS) do
         started = Process.clock_gettime(Process::CLOCK_MONOTONIC)

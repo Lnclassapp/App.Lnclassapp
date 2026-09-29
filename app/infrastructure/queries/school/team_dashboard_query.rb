@@ -20,6 +20,11 @@ module Queries
       Placed = Data.define(:level_id, :drena_id, :students, :active)
 
       RECENT = 10
+      # ADR-0062, amendement du 2026-09-29 : les chiffres de l'année scolaire sont gardés 5 minutes ; 7 et 30 jours restent
+      # lus en direct. Changer une définition ou la forme des chiffres, c'est changer CACHE_VERSION.
+      CACHED_PERIODS = %w[year].freeze
+      CACHE_TTL = 5.minutes
+      CACHE_VERSION = 1
 
       # Une seule lecture : les établissements actifs, et combien ont une classe, un enseignant, un élève (élève placé :
       # ADR-0062). SQL constant : seule l'année scolaire est liée.
@@ -35,23 +40,44 @@ module Queries
         "AND classrooms.status = 'active' AND classrooms.school_year = :year AND users.anonymized_at IS NULL))"
       ].freeze
 
+      # cache : Rails.cache (Solid Cache en production) ; un test passe un NullStore pour lire en direct.
+      def initialize(cache: Rails.cache)
+        @cache = cache
+      end
+
       # period : Entities::School::ReportingPeriod ; une DRENA inconnue donne la vue nationale.
       def call(period:, drena_public_id: nil, today: Date.current)
         @year = Entities::Classroom::SchoolYear.current(today)
         @since = period.since.in_time_zone
         drena_id, drena = find_drena(drena_public_id)
         @drena_id = drena_id
-        placed = placed_students
-        placed_count = placed.sum(&:students)
-        accounts = accounts_by_role(placed_count)
+        values = if CACHED_PERIODS.include?(period.key)
+          @cache.fetch(cache_key(period, drena), expires_in: CACHE_TTL) { figures(drena) }
+        else
+          figures(drena)
+        end
 
-        Row.new(period:, school_year: @year, drena:, accounts:, **flows, schools: coverage, classrooms_count: classrooms.count,
-                levels: levels(tally(placed, :level_id)), placed_students_count: placed_count,
-                unplaced_students_count: (accounts.students - placed_count if drena.nil?),
-                drenas: drena_rows(placed), recent_signups:)
+        # Les derniers inscrits ne sont jamais gardés : ce sont des comptes (noms), et ils doivent apparaître tout de suite.
+        Row.new(period:, school_year: @year, drena:, **values, recent_signups:)
       end
 
       private
+
+      # Tout le reste de la page : des agrégats, sans aucune donnée personnelle.
+      def figures(drena)
+        placed = placed_students
+        placed_count = placed.sum(&:students)
+        accounts = accounts_by_role(placed_count)
+        { accounts:, **flows, schools: coverage, classrooms_count: classrooms.count, levels: levels(tally(placed, :level_id)),
+          placed_students_count: placed_count, unplaced_students_count: (accounts.students - placed_count if drena.nil?),
+          drenas: drena_rows(placed) }
+      end
+
+      # Une entrée par année scolaire, début de période et DRENA résolue (une DRENA inconnue lit la vue nationale) ; aucune
+      # valeur venue telle quelle de l'URL, aucune donnée d'acteur.
+      def cache_key(period, drena)
+        [ "team_dashboard", "v#{CACHE_VERSION}", period.key, @year, period.since.iso8601, drena&.public_id || "national" ].join("/")
+      end
 
       def find_drena(public_id)
         return if public_id.blank?
