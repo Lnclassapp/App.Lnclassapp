@@ -71,7 +71,9 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`pilotage-equipe`](pilotage-equipe/memo.md) | livré | V4 : page Pilotage de l'équipe, indicateurs lus en direct, recherche d'un élève ou d'un enseignant (ADR-0062, UDR-0049) |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | Parrainage entre enseignants, démarrage à froid par le code national, page Croissance de l'équipe (ADR-0063, UDR-0050) |
 | [`tests-instables`](tests-instables/memo.md) | livré en PR, en attente de fusion | Q15 : trois tests instables reproduits puis corrigés à leur cause — requêtes préparées périmées après les tests de migration, menu ouvert sur l'aperçu de Turbo, attente de 2 s trop courte pour « Recommencer » |
-| [`espace-direction-simple`](espace-direction-simple/memo.md) | planifié | V2 en version simple (porteur, 2026-09-28) : la direction, invitée par l'équipe et connectée par PIN, lit « Enseignants » et « Travail des élèves » de son seul établissement (ADR-0065, UDR-0052, proposés) |
+| [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | Premier déploiement sur base neuve : seeds joués deux fois (`db:prepare` semait avant `db:seed`), corrigé par `seeds: false` en production (amendement ADR-0052) ; processeur de variantes Active Storage désactivé, aucune variante n'étant utilisée (ADR-0060) |
+
+| [`espace-direction-simple`](espace-direction-simple/memo.md) | livré (#86) | V2 en version simple (porteur, 2026-09-28) : la direction, invitée par l'équipe et connectée par PIN, lit « Enseignants » et « Travail des élèves » de son seul établissement (ADR-0065, UDR-0052, acceptés le 2026-09-29) |
 
 ## Backlog
 
