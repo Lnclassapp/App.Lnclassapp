@@ -21,6 +21,8 @@
       </div>
       <%= ui_button t(".search_submit"), type: :submit, variant: :secondary, icon: "magnifying-glass",
                                          data: { search_target: "button" } %>
+      <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
+      <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
     <% end %>
     <%= turbo_frame_tag "classroom_roster_list", class: "block transition-opacity aria-busy:opacity-50" do %>
       <div class="mb-3 flex flex-wrap items-center justify-between gap-2">

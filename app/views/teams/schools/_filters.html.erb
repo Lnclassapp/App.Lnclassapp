@@ -35,4 +35,6 @@
     <%= ui_button t(".submit"), type: :submit, icon: "funnel", data: { search_target: "button" } %>
     <%= ui_button t(".reset"), href: schools_path, variant: :ghost, data: { turbo_frame: "_top" } %>
   </div>
+  <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
+  <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
 <% end %>
