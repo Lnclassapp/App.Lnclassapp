@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 # CP-01 to CP-06 (ADR-0063, UDR-0050): a teacher invites a colleague from the home — WhatsApp, copy — each share counted by
 # the server; the colleague signs up by the link and the counter of the referrer moves. The same on a 390 px phone.
+# Since UDR-0054, the copy goes through the clipboard controller; identity--share counts it on clipboard:copied.
 class Identity::InviteColleagueTest < ApplicationSystemTestCase
   INVITE = "identity.referrals.invite".freeze
 
@@ -33,7 +34,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     new_window.close
     click_on I18n.t("#{INVITE}.copy")
 
-    assert_toast I18n.t("#{INVITE}.copied")
+    assert_toast I18n.t("shared.clipboard.copied_link")
     assert_equal @token, page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")[/ref=(\h+)/, 1]
     Timeout.timeout(10) { sleep 0.1 until shares.size == 2 }
     assert_equal %w[whatsapp copy], shares
@@ -74,7 +75,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
       growth_shot("390-inviter-un-collegue", desktop: false)
       click_on I18n.t("#{INVITE}.copy")
 
-      assert_toast I18n.t("#{INVITE}.copied")
+      assert_toast I18n.t("shared.clipboard.copied_link")
       Timeout.timeout(10) { sleep 0.1 until shares == %w[copy] }
     end
   end
