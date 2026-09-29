@@ -1,12 +1,12 @@
 # Contenus pédagogiques
 
-Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **progressions** qui créent les cours, le **prompt** qui rédige les fiches essentielles et leurs exercices, et les **leçons déjà traitées**. Ce dossier ne contient pas de code, seulement des fichiers importables et leur mode d'emploi.
+Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **progressions** qui créent les cours de l'année, le **prompt** qui rédige une leçon complète (cours, fiches essentielles, exercices), et les **leçons déjà traitées**. Ce dossier ne contient pas de code, seulement des fichiers importables et leur mode d'emploi.
 
 | Fichier | Rôle |
 |---|---|
-| [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 cours sans fiche), à importer depuis **Imports → Cours complets**. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
-| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger un cours : règle de l'analogie, structure d'une fiche, 3 exercices par fiche, contraintes de l'application, format de sortie `lnclass.essentials` v1 |
-| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt (fiches essentielles et exercices, `lnclass.essentials`), rangées par niveau et série. Pour l'instant `tle-d/` : la première leçon de Maths, Physique, Chimie et SVT |
+| [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 cours sans fiche), à importer depuis **Imports → Cours complets**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
+| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche, 3 exercices par fiche, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : le cours, ses fiches et leurs exercices |
+| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par cours complet, rangées par niveau et série. Pour l'instant `tle-d/` : la première leçon de Maths, Physique, Chimie et SVT |
 
 ## Le principe
 
@@ -21,13 +21,19 @@ Exemple de référence, le théorème des gendarmes : deux policiers tiennent un
 
 ## Utiliser le prompt
 
-1. Le cours doit exister dans Lnclass. Il est créé par l'import de sa progression ([`progressions-2026-2027/`](progressions-2026-2027/)).
-2. Copier le prompt, puis remplir son bloc **ENTRÉE** : cours, **slug exact du cours** (à lire dans l'application), niveau, série, matière, place dans la progression.
-3. Importer le JSON obtenu depuis **Imports → Fiches essentielles**. Tout le contenu arrive en brouillon.
-4. Faire relire le contenu par un enseignant de la discipline, puis publier.
-5. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/` et ajouter une ligne au tableau ci-dessous.
+1. Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression.
+2. Importer le JSON obtenu depuis **Imports → Cours complets**. **Un seul import** crée le cours, ses fiches essentielles et les exercices de chaque fiche, en brouillon.
+3. Faire relire le contenu par un enseignant de la discipline, puis publier.
+4. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/` et ajouter une ligne au tableau ci-dessous.
 
-Le slug se lit dans l'application, jamais à partir du nom : plusieurs cours portent le même nom selon le niveau ou la série, et leur slug prend alors un suffixe (`limites-et-continuite-4`).
+## Ordre des imports
+
+Un import ne met jamais à jour l'existant : un cours déjà présent (même nom, niveau, matière et série) est **ignoré** comme doublon, fiches comprises. D'où l'ordre :
+
+1. **D'abord les leçons traitées** (`lecons-traitees/`) : elles créent les cours complets.
+2. **Ensuite les progressions** (`progressions-2026-2027/`) : elles créent les autres cours de l'année, vides, et ignorent ceux qui existent déjà.
+
+Si la progression a déjà été importée, le cours de la leçon existe vide, et l'import du cours complet sera ignoré. Un cours ne se supprime pas, et un cours archivé compte encore comme doublon. Il faut donc **renommer** le cours vide dans l'écran des cours (par exemple « Limites et continuité (vide) »), l'archiver, puis importer le cours complet.
 
 ## Leçons traitées
 
@@ -35,12 +41,12 @@ Le slug se lit dans l'application, jamais à partir du nom : plusieurs cours por
 
 | Fichier | Cours | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|
-| `limites-et-continuite-4.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
-| `cinematique-du-point-2.json` | Cinématique du point (Physique) | 3 | 9 | 45 |
-| `les-alcools-2.json` | Les alcools (Chimie) | 3 | 9 | 54 |
+| `limites-et-continuite.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
+| `cinematique-du-point.json` | Cinématique du point (Physique) | 3 | 9 | 45 |
+| `les-alcools.json` | Les alcools (Chimie) | 3 | 9 | 54 |
 | `le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères (SVT) | 3 | 9 | 53 |
 
-Les 4 fichiers ont été importés le 2026-09-29 dans une base de développement, par la vraie chaîne d'import, **sans aucune erreur**. Leur champ `course` contient le slug de cette base : **il faut le remplacer par celui de ton application avant l'import**.
+Les 4 fichiers ont été importés le 2026-09-29 sur une base neuve, par la vraie chaîne d'import, **sans aucune erreur** : 4 cours, 12 fiches, 36 exercices, 203 questions, 786 propositions. Les progressions de Maths, Physique-Chimie et SVT importées ensuite ont ignoré ces 4 cours comme doublons et créé les autres.
 
 À faire valider par un enseignant, car le programme détaillé n'était pas disponible :
 
