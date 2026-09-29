@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | décision |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `feature/finitions-ux` |
 | **Programme** | — |
@@ -31,57 +31,82 @@ La V1 et la direction simple sont en production. Ces écarts sont les premiers q
 
 ## Hors périmètre
 
-- **Le caching** (point 8 de l'audit) : il demande un chantier `optimize` séparé, qui mesure avant d'optimiser (ADR-0062).
-- Tout changement d'authentification sans décision d'architecture : l'ouverture de session dès l'acceptation d'une invitation touche l'ADR-0050.
+- **Le caching** (point 8 de l'audit) : chantier `optimize` séparé, déjà en cours ; il mesure avant d'optimiser (ADR-0062). Décision du porteur, 2026-09-29.
+- **Les secrets hors du cache** (`no-store` et exemption du cache Turbo sur la page des codes de secours et sur la clé du second facteur) : correctif séparé, déjà en cours (`secrets-hors-cache`). Ce chantier ne touche ni aux en-têtes HTTP ni au cache Turbo de ces pages.
 - Une refonte de la navigation (UDR-0006) ou un fil d'Ariane complet sur toutes les pages.
 - Une combobox d'établissements à l'inscription enseignant.
-- Les textes d'aide eux-mêmes : le chantier fournit l'emplacement, le porteur valide les définitions.
+- La recherche pendant la frappe sur le pilotage (recherche d'un compte) et sur la déclaration des classes de l'enseignant : le porteur a limité la recherche dynamique à quatre listes. L'envoi au changement des filtres en liste déroulante, lui, est dans le périmètre (question 24).
+- La pagination du catalogue : après mesure, dans le chantier de caching.
+- Le partage des liens d'invitation par WhatsApp ou SMS : « Copier » seulement (question 14).
+- La copie de la clé du second facteur (saisie manuelle) : ce n'est pas un lien, et le porteur a limité « Copier » aux liens et aux codes de secours.
+- Un annuaire des comptes : « Débloquer un compte » reste une recherche par numéro entier. L'annuaire est le chantier `annuaire-equipe`.
 
 ## Ce que le grill a révélé
 
-> Rempli après la session de questions adverses. Un memo qui sort du grill inchangé signifie que le grill a été mal fait.
+> Réponses du porteur du 2026-09-29, une ligne par réponse. Les questions qu'elles laissaient ouvertes sont tranchées plus bas, sur délégation.
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| 1. Où lever l'interdiction de « Copier » ? | Pour les **liens seulement** : lien d'invitation (équipe et direction), lien de classe `/c/<code>`, codes de secours du second facteur. Le code de l'élève et le code de récupération du PIN restent à dicter. Un seul contrôleur de copie, qui fusionne les deux existants. | UDR-0019 amendée (le bouton prévu « à un lot ultérieur » arrive) ; UDR-0011 et UDR-0020 amendées pour confirmer l'interdiction et la fonder sur une règle commune (« un code à dicter ne se copie pas ») ; UDR-0027, 0044 et 0050 amendées : le nouveau contrôleur remplace l'ancien et la copie du partage. |
+| 2. Envoi automatique du second facteur ? | Dès 6 chiffres, sur un champ `one-time-code` numérique, **une seule soumission**, annoncée aux lecteurs d'écran. Un lien « J'utilise un code de secours » bascule vers un champ séparé **sans** envoi automatique. | Le piège du code de secours qui commence par 6 chiffres disparaît : les deux saisies sont deux champs. La bascule doit marcher sans JavaScript (lien, pas bouton). Un échec n'est jamais renvoyé seul : le verrouillage (5 envois par minute) reste lisible. |
+| 3. Codes de secours ? | Boutons **Télécharger, Copier, Imprimer** ; la suite ne se débloque qu'après la confirmation « Je les ai gardés ». Pas de téléchargement automatique. | Le fichier est construit par le navigateur (les codes ne sont stockés qu'en empreinte). La confirmation est une case obligatoire qui bloque la suite, même sans JavaScript. |
+| 4. Acceptation d'une invitation ? | Garder le formulaire ; focus sur le premier champ, numéro pré-rempli ; après validation, **connexion immédiate**. | Vérifié le 2026-09-29 : ce n'est **pas** le cas aujourd'hui (la personne est renvoyée vers « Se connecter » et ressaisit son numéro). La connexion immédiate change le contrat de l'acceptation et le parcours de l'UDR-0019 : ADR-0068. Le numéro est montré en lecture seule, jamais envoyé ni modifiable. |
+| 5. Recherche dynamique : où ? | Établissements (équipe), catalogue, élèves d'une classe (enseignant et direction), débloquer un compte (équipe). Délai, cadre Turbo, formulaire GET qui marche sans JavaScript, annonce du nombre de résultats ; index adaptés si recherche partielle, et ADR si index ou extension. | Le catalogue gagne un champ texte. Les élèves d'une classe se cherchent côté serveur (même motif partout). « Débloquer un compte » part dès que le numéro est complet, sans recherche partielle. Aucune table ne justifie un index : pas d'ADR (PRD §7, UDR-0054 §2). |
+| 6. Titre de page ? | Format « Page · Espace · Lnclass » partout, modales comprises, par un seul helper. | Les trois accueils se distinguent par l'espace (question 26). Toute page, et toute modale ouverte directement par son URL, pose son titre ; un test le vérifie à la fin. |
+| 7. Infobulles ? | Composant accessible sans JavaScript (base `<details>` ou équivalent compatible Safari 16.4) ; textes rédigés par le chantier, **validés par le porteur dans la PR**. | Les textes proposés sont écrits dans l'UDR-0054 ; la PR liste les textes pour validation. Le `title=` des niveaux disparaît. |
+| 8. Retour ? | Une seule façon, sur les écrans listés par l'audit ; corriger les retours faux (page de classe vue par l'équipe → fiche établissement ; sortie de l'enrôlement du second facteur). | Un emplacement « retour » dans l'en-tête de page et une brique autonome pour les pages sans en-tête. Les motifs « bouton » (imports, direction) disparaissent. L'enrôlement gagne « Se déconnecter ». |
+| 9. Auto-focus ? | Un contrôleur ; après une erreur, focus sur le premier champ en erreur ; dans une modale, le premier champ, pas la croix. | Les `autofocus` posés à la main disparaissent au profit d'une règle unique. Les confirmations sans champ visent « Annuler » (question 9). |
+| 10. Caching et secrets hors cache ? | Hors périmètre : chantiers séparés en cours. | Aucun lot ne pose d'en-tête HTTP de cache ni d'exemption du cache Turbo. Les lots qui touchent les mêmes pages que `secrets-hors-cache` le signalent (plan, collisions entre chantiers). |
 
 ## Cas limites identifiés
 
-- Second facteur : un code de secours (base58) peut commencer par 6 chiffres ; chaque envoi automatique d'un mauvais code consomme un essai (limite de 5 par minute, paliers de verrouillage).
-- Codes de secours : ils ne sont stockés qu'en empreinte, donc le fichier ne peut être produit que par le navigateur. Un téléchargement sans geste de l'utilisateur peut être bloqué (iOS).
-- Infobulles : l'API `popover` exige Safari 17, alors que le plancher de l'ADR-0051 est Safari 16.4.
-- Recherche dynamique : `LIKE '%…%'` sans index sur les établissements et les comptes ; `advance` à chaque frappe remplit l'historique.
+- Second facteur : un code de secours (base58) peut commencer par 6 chiffres ; chaque envoi automatique d'un mauvais code consomme un essai (limite de 5 par minute, paliers de verrouillage). **Tranché** : deux champs distincts, l'envoi automatique n'existe que sur le champ à 6 chiffres, et jamais deux fois pour la même valeur.
+- Codes de secours : ils ne sont stockés qu'en empreinte, donc le fichier ne peut être produit que par le navigateur. Un téléchargement sans geste de l'utilisateur peut être bloqué (iOS). **Tranché** : pas de téléchargement automatique ; sans JavaScript, seules la liste et « Imprimer » par le navigateur restent, et la confirmation « Je les ai gardés » suffit à continuer.
+- Infobulles : l'API `popover` exige Safari 17, alors que le plancher de l'ADR-0051 est Safari 16.4. **Tranché** : `<details>`.
+- Recherche dynamique : `LIKE '%…%'` sans index sur les établissements ; `advance` à chaque frappe remplit l'historique. **Tranché** : l'URL est remplacée pendant la frappe, pas empilée ; pas d'index (volumes, PRD §7).
 - Auto-focus : au téléphone, il ouvre le clavier sur les pages publiques ; après un 422, il doit viser le champ en erreur.
-- Retour : la page d'une classe est ouverte par l'enseignant et par l'équipe, qui n'arrivent pas du même endroit.
+- Retour : la page d'une classe est ouverte par l'enseignant et par l'équipe, qui n'arrivent pas du même endroit. **Tranché** : la cible dépend du rôle.
+- Invitation : la personne invitée ouvre le lien sur un téléphone où quelqu'un d'autre est déjà connecté. La connexion immédiate remplace cette session (même règle que l'inscription enseignant).
+- Invitation d'un membre de l'équipe : la session ouverte à l'acceptation n'a pas encore de second facteur ; elle ne mène qu'à l'enrôlement, comme une connexion.
+- Direction : la liste de ses classes et la page d'une classe sont réécrites par le chantier `espace-direction` ; la recherche et le retour de la direction s'appliquent à la version qui sera en place.
+- Double envoi : l'utilisateur tape Entrée au moment où le 6ᵉ chiffre part seul ; une seule requête doit partir.
+
+## Questions tranchées
+
+Les 27 questions du cadrage, chacune avec sa réponse. **Porteur** : réponse du 2026-09-29. **Délégué** : la recommandation du memo, retenue sur délégation du porteur, amendable dans la PR.
+
+1. **Périmètre** : un seul chantier pour les sept finitions ; le caching en sort. Les lots ne suivent pas l'ordre des briques recommandé : un Lot 0 pose toutes les briques, puis un lot par espace applique les sept finitions à ses écrans, pour que deux lots ne touchent jamais la même vue. — *Délégué, adapté (collisions).*
+2. **Forme** : une UDR « finitions » unique (UDR-0054), plus des amendements courts là où une UDR d'écran la contredit ou doit la mentionner. — *Porteur.*
+3. **Retour, motif** : le lien discret à chevron gauche, posé par l'emplacement « retour » de l'en-tête de page ou par la brique autonome. — *Porteur (une seule façon) ; délégué (le lien discret plutôt que le bouton).*
+4. **Retour depuis la page d'une classe** : l'équipe revient à la fiche de l'établissement, l'enseignant à ses classes. — *Porteur.*
+5. **Pages publiques** : logo cliquable vers l'accueil public sur toutes les pages publiques ; un « Retour » en plus là où il y a un parcours (PIN oublié → connexion, inscription sans code → inscription avec code). — *Délégué.*
+6. **Enrôlement du second facteur** : « Se déconnecter », comme sur la vérification. — *Porteur.*
+7. **Auto-focus sur les pages publiques** : oui dans les modales ; sur les pages publiques, seulement pour les formulaires à un champ (connexion, `/join`, second facteur) et, par décision du porteur, pour l'acceptation d'une invitation. — *Délégué, plus porteur (invitation).*
+8. **Auto-focus après une erreur** : premier champ en erreur, partout. — *Porteur.*
+9. **Confirmations** : focus sur « Annuler ». — *Délégué.*
+10. **Infobulles, textes** : le chantier les rédige, le porteur les valide dans la PR. — *Porteur.*
+11. **Infobulles, forme** : `<details>`, sans JavaScript. — *Porteur.*
+12. **Copier le code de l'élève** : non, l'interdiction reste. — *Porteur.*
+13. **Copier le code de récupération du PIN** : non. — *Porteur.*
+14. **Liens d'invitation** : « Copier » oui ; WhatsApp non (le lien donne accès à un compte, et le porteur a limité l'ajout à « Copier »). — *Porteur (Copier) ; délégué (pas de WhatsApp).*
+15. **Lien de classe** : « Copier le lien » à côté de « Copier » le code. — *Porteur.*
+16. **Contrôleur de copie** : un seul, générique, qui remplace les deux existants ; le partage garde WhatsApp, SMS, le partage natif et le comptage. — *Porteur.*
+17. **Invitation acceptée** : la session s'ouvre à l'acceptation (ADR-0068) ; le numéro est montré pré-rempli en lecture seule sur le formulaire. — *Porteur.*
+18. **Second facteur** : envoi automatique au 6ᵉ chiffre sur la vérification **et** sur l'enrôlement ; bascule « J'utilise un code de secours » sur la vérification seulement ; jamais de nouvel envoi automatique de la même valeur après un échec. — *Porteur.*
+19. **Codes de secours** : boutons seulement, et la suite ne se débloque qu'après « Je les ai gardés ». — *Porteur.*
+20. **Sécurité de la page des codes de secours** : correctif séparé, déjà en cours. — *Porteur.*
+21. **`/join`** : envoi automatique au 5ᵉ caractère valide du code de classe (3 lettres, 2 chiffres), avec la même brique que le second facteur. — *Délégué.*
+22. **Recherche dynamique, listes** : établissements, catalogue, élèves d'une classe (enseignant et direction), débloquer un compte. Ni le pilotage ni la déclaration des classes. — *Porteur.*
+23. **Catalogue** : une recherche par nom ; pas de pagination dans ce chantier. — *Porteur (recherche) ; délégué (pagination après mesure).*
+24. **Filtres en liste déroulante** (catalogue, établissements, DRENA du pilotage) : envoi au changement ; le bouton « Filtrer » reste pour qui n'a pas de JavaScript. — *Délégué.*
+25. **Titre de page** : « Page · Espace · Lnclass », par un helper, avec un test qui vérifie que chaque page pose un titre. — *Porteur.*
+26. **Titres des accueils** : distingués par l'espace (« Accueil · Élève · Lnclass », « Accueil · Équipe · Lnclass »). — *Délégué (conséquence du format du porteur).*
+27. **Caching** : chantier `optimize` séparé, déjà ouvert. — *Porteur.*
 
 ## Questions encore ouvertes
 
-Questions au porteur, une par ligne, avec la recommandation de l'audit. Aucune n'est tranchée ici.
+Aucune ne bloque le Lot 0. À confirmer par le porteur dans la PR :
 
-1. **Périmètre** : les huit points en un seul chantier, ou un lot par point, livrés un par un ? — *Recommandation : un chantier, un lot par brique, dans cet ordre : titre, retour, copie, auto-focus, infobulles, recherche, envoi automatique.*
-2. **Forme** : une UDR « finitions » unique, qui amende UDR-0005, 0006 et 0036, ou un amendement par UDR d'écran ? — *Recommandation : une UDR unique, plus des amendements d'une ligne là où une UDR d'écran contredit la règle.*
-3. **Retour** : quel motif pour tout le monde, le lien `chevron-left` discret (8 écrans) ou le bouton `arrow-left` (2 écrans) ? — *Recommandation : le lien discret, via un partial `back_link` ou un emplacement `back:` dans `ui_page_header`.*
-4. **Retour depuis la page d'une classe** : pour l'équipe, retour à la fiche établissement plutôt qu'à « Accueil » ? — *Recommandation : oui, cible selon le rôle.*
-5. **Pages publiques** (`/login`, `/join`, `/c/<code>`, inscriptions, invitation) : lien retour vers la landing, ou logo cliquable ? — *Recommandation : logo cliquable, plus « Retour » là où il y a un parcours.*
-6. **Enrôlement du second facteur** : ajouter « Se déconnecter », comme sur la vérification ? — *Recommandation : oui.*
-7. **Auto-focus** : sur toutes les pages publiques, y compris au téléphone où le clavier cache l'accueil ? — *Recommandation : oui dans les modales ; sur les pages publiques, seulement pour les formulaires à un champ (connexion, `/join`, second facteur).*
-8. **Auto-focus après une erreur** : focus sur le premier champ en erreur plutôt que sur le premier champ ? — *Recommandation : oui, partout.*
-9. **Confirmations** (désactiver, supprimer) : focus sur « Annuler » plutôt que sur ✕ ? — *Recommandation : oui.*
-10. **Infobulles** : qui écrit et valide les définitions (taux de rendu, moyenne, « — », k enseignant, badges, codes) ? — *Recommandation : le chantier propose les textes et le porteur les valide avant le lot.*
-11. **Infobulles, forme** : `<details>` ouvert au toucher (compatible Safari 16.4) ou `popover` avec repli ? — *Recommandation : `<details>`, sans JS.*
-12. **Copier, code de l'élève** : lever l'UDR-0011, qui interdit le bouton sur « Ma classe » ? — *Recommandation : non, garder l'interdiction.*
-13. **Copier, code de récupération du PIN** : lever l'UDR-0020 (« fait pour être dicté ») ? — *Recommandation : non.*
-14. **Copier, liens d'invitation équipe et direction** : ajouter « Copier », et WhatsApp comme pour le parrainage ? — *Recommandation : « Copier » oui (UDR-0019 le prévoyait) ; WhatsApp à trancher, le lien donnant accès à un compte.*
-15. **Copier, lien de classe `/c/<code>`** : ajouter « Copier le lien » à côté de « Copier » le code ? — *Recommandation : oui, comme sur la fiche établissement.*
-16. **Contrôleur de copie** : fusionner `classroom--join-code-copy` et la copie d'`identity--share` en un contrôleur `clipboard` générique ? — *Recommandation : oui, avec amendement de l'UDR-0027.*
-17. **Invitation acceptée** : que veut dire « auto-submit » ? Ouvrir la session tout de suite (ADR-0050 à amender) ou pré-remplir le numéro sur `/login` ? — *Recommandation : pré-remplir et placer le focus sur le PIN ; l'ouverture directe demande une ADR.*
-18. **Second facteur** : envoi automatique au 6ᵉ chiffre sur la vérification, ou seulement sur l'enrôlement, où les codes de secours ne sont pas acceptés ? — *Recommandation : les deux, avec une bascule « J'utilise un code de secours » sur la vérification et sans nouvel envoi automatique après un échec.*
-19. **Codes de secours** : téléchargement automatique à l'affichage, ou seulement les boutons « Télécharger », « Copier » et « Imprimer » ? — *Recommandation : boutons seulement ; le téléchargement automatique n'est pas fiable et ne doit jamais bloquer « C'est noté ».*
-20. **Sécurité de la page des codes de secours** (`no-store`, exemption du cache Turbo) : dans ce chantier ou en correctif séparé ? — *Recommandation : correctif séparé et prioritaire (`/bugfix`).*
-21. **`/join`** : envoi automatique au 5ᵉ caractère valide du code de classe ? — *Recommandation : oui, c'est le même contrôleur que pour le second facteur.*
-22. **Recherche dynamique** : sur quelles listes ? — *Recommandation : établissements, recherche du pilotage, élèves d'une classe et classes de l'enseignant (filtre dans le navigateur). Le catalogue seulement si on lui ajoute un champ texte.*
-23. **Catalogue** : ajouter une recherche par nom et une pagination ? — *Recommandation : la recherche oui ; la pagination après mesure.*
-24. **Filtres en liste déroulante** (catalogue, DRENA du pilotage) : envoi au changement, sans bouton « Filtrer » ? — *Recommandation : oui, en gardant le bouton sans JS.*
-25. **Titre de page** : format unique « Page · Contexte · Lnclass » pour tous, espaces connectés compris ? — *Recommandation : oui, via un helper `page_title` et un test qui vérifie que chaque page pose un titre.*
-26. **Titres des accueils** : « Accueil » identique pour trois rôles, faut-il les distinguer (« Accueil élève », « Accueil équipe ») ? — *Recommandation : oui.*
-27. **Caching** : ouvrir tout de suite un chantier `optimize` séparé (mesure du pilotage, de la croissance, des établissements, du catalogue et des pages de la direction), ou attendre un signal de lenteur en production ? — *Recommandation : l'ouvrir, en commençant par une mesure. La recherche dynamique en dépend (index des recherches `LIKE`), et l'ADR-0062 a déjà écarté le cache du pilotage.*
+- Les textes des infobulles (UDR-0054 §3, table « Textes proposés »).
+- Le numéro affiché sur la page d'acceptation : un lien d'invitation intercepté révèle désormais le numéro invité (ADR-0068, coûts consentis).
+- L'ordre de fusion avec `espace-direction`, `annuaire-equipe` et `secrets-hors-cache`, qui touchent des écrans de ce chantier (plan, « Collisions avec d'autres chantiers »).
