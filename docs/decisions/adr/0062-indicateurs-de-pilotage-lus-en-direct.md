@@ -145,5 +145,29 @@ Lectures groupées : un `GROUP BY` par dimension (rôle, niveau, DRENA) ; la cou
 - **Le seuil de reprise est atteint** au volume de la feuille de route (40 000 élèves, 312 000 sessions : 338 ms en p50 sur 7 jours). Le premier temps prévu au §5 est appliqué, **dans l'ordre** : `exercise_sessions (started_at, student_id)`, `exercise_sessions (completed_at) INCLUDE (student_id, score_percent) WHERE status = 'completed'`, `users (created_at, id)` (qui sert aussi les derniers inscrits), `classroom_assignments (assigned_at)`.
 - **Les placements se lisent une fois.** Le §4 « un `GROUP BY` par dimension » devient, pour les élèves placés, **une seule lecture groupée par (niveau, DRENA)** avec `COUNT(*) FILTER` pour les actifs de la période : le total, la répartition par niveau, les élèves et les actifs par DRENA en découlent. Les définitions du §4 sont inchangées, un test de non-régression couvre leurs cas limites. Nombre de requêtes : **16** en vue nationale (au lieu de 18), **18** sous un filtre DRENA (au lieu de 21), toujours indépendant du volume.
 - **`pg_trgm` est activée** (première extension du projet hors `plpgsql`). C'est une extension standard, livrée avec PostgreSQL (`contrib`) et donc avec l'image officielle sur laquelle repose l'image Railway `postgres-ssl` ; elle est « trusted » depuis PostgreSQL 13 (le propriétaire de la base peut l'activer sans superutilisateur). Cinq index GIN `gin_trgm_ops` portent **exactement** les expressions de recherche : nom dans les deux ordres pour `AccountSearchQuery`, nom, sigle et code national pour `SchoolsQuery`. La recherche garde sa définition (casse et accents ignorés par `translate(lower(...))`, pas `unaccent`) ; `test/infrastructure/queries/trigram_search_indexes_test.rb` échoue si une expression s'écarte de son index. Un terme de 2 caractères n'a aucun trigramme complet : il reste en parcours séquentiel, comme avant.
-- **Le cache court reste écarté.** Après ces leviers, la vue 7 jours passe sous 300 ms ; la vue « année » est à la limite au 29 septembre et croîtra avec l'année scolaire. Le cache ne revient qu'après une mesure avec un an de sessions, par un ADR qui remplacerait l'option C.
+- **Le cache court** : écarté par cet amendement, puis retenu pour la seule vue « année » par l'amendement suivant.
+
+## Amendement du 2026-09-29 (second) — les chiffres de l'année scolaire sont gardés 5 minutes
+
+*Chantier [`docs/chantiers/cache-ecrans-lourds`](../../chantiers/cache-ecrans-lourds/memo.md), décision du porteur du 2026-09-29, prise sur la mesure après les index et la lecture groupée. Le texte ci-dessus et l'amendement précédent restent tels qu'acceptés ; en cas d'écart, cette section fait foi.*
+
+**Pourquoi.** Après les index, la vue « année » restait à **304 ms en p95** (budget 300 ms, [ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md)). Son coût suit les sessions de l'année scolaire : les index n'y servent plus (la période couvre la moitié de la table au 29 septembre, bientôt toute l'année), et la page dépassera nettement le budget avant la fin de l'année. C'est le « second temps » prévu au §5 : un cache court, à clé complète.
+
+**Décision.** Pour la **seule période `year`**, `Queries::School::TeamDashboardQuery` garde ses **agrégats** dans `Rails.cache` (Solid Cache en production) **5 minutes** (`expires_in: 5.minutes`). Les périodes 7 et 30 jours restent lues en direct, filtre DRENA compris. L'option B du §3 est donc retenue pour cette vue, et pour elle seule.
+
+| | |
+|---|---|
+| **Ce qui est gardé** | Tout ce que la page calcule, **sauf les derniers inscrits** : comptes par rôle, flux de la période, couverture, classes, répartition par niveau, élèves placés et non placés, lignes par DRENA. Des nombres seulement. |
+| **Ce qui ne l'est jamais** | Les derniers inscrits (noms, numéro masqué) : lus en direct à chaque page. Un compte créé apparaît tout de suite, et aucune donnée personnelle n'entre dans le cache. |
+| **Clé** | `team_dashboard/v<CACHE_VERSION>/year/<année scolaire>/<début de période>/<public_id de la DRENA résolue ou national>`. Tout vient de la base ou de l'horloge, rien de l'URL tel quel : une DRENA inconnue lit l'entrée nationale, deux DRENA ont deux entrées, et rien ne dépend de l'acteur (toute l'équipe voit les mêmes chiffres, ADR-0038). `CACHE_VERSION` change avec une définition du §4 ou la forme des chiffres. |
+| **Durée** | 5 minutes, puis la page suivante relit la base. |
+| **Invalidation** | **Aucune invalidation fine.** Les chiffres dépendent de sessions, de devoirs, d'inscriptions, de placements et d'établissements, écrits par de nombreux use cases de plusieurs contextes (évaluation, classe, identité, établissement) : purger l'entrée à chacun d'eux couplerait toute l'écriture à un écran de lecture, pour gagner au plus 5 minutes. L'expiration suffit. |
+
+**Coût consenti.** Les chiffres de l'année peuvent avoir **jusqu'à 5 minutes de retard** : une session terminée, un devoir ou une inscription n'y apparaît qu'à la lecture suivante après expiration. Sur un indicateur cumulé depuis le 1ᵉʳ septembre, ce retard ne change pas la lecture de la page ; il reste le défaut que l'UDR-0018 refuse pour un accueil, et c'est pourquoi les vues 7 et 30 jours, faites pour suivre l'activité récente, restent en direct. La première page après expiration paie le calcul complet (≈ 280 ms aujourd'hui, davantage en fin d'année) : le budget de l'ADR-0067 s'applique à l'entrée chaude, le froid est mesuré et noté.
+
+**Vérification.**
+
+- `test/infrastructure/queries/school/team_dashboard_query_test.rb` : mêmes chiffres à froid, à chaud et sans cache (`NullStore`) ; une seconde lecture dans les 5 minutes ne lance aucune requête de chiffres ; chiffres en retard à 4 min 59 s et à jour à 5 min 01 s, derniers inscrits jamais en retard ; deux filtres DRENA, et un filtre face à la vue nationale, n'ont jamais la même entrée ; 7 et 30 jours relisent la base.
+- `PERF=1 test/performance/school/heavy_screens_budget_test.rb` : p95 de la vue « année » à chaud sous 300 ms ; le froid est affiché.
+- `script/perf/measure_screens.rb` et `PERF_COLD=1` : la page à chaud et à froid.
 

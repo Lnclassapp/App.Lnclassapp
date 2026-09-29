@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | lots 1 à 4 livrés sur la branche (sans PR) ; lot 5 reporté après les lots UX |
+| **Statut** | lots 1 à 4 et 2c (cache de la vue « année ») livrés sur la branche (sans PR) ; lot 5 reporté après les lots UX |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/cache-ecrans-lourds` |
 
@@ -173,7 +173,7 @@ Tableau complet après, 28 écrans (colonnes du tableau « avant ») :
 | Métrique | Contexte / volume | Avant | Cible | **Après** | Tenu ? |
 |---|---|--:|--:|--:|:-:|
 | p95 `/teams/dashboard` (7 j) | 40 000 élèves, 312 000 sessions | 361 ms | < 300 ms | **220 ms** | oui |
-| p95 `/teams/dashboard?period=year` | idem (28 jours au 29 septembre) | 429 ms | < 300 ms | **304 ms** | **non** (p50 281 ms ; 298 à 313 selon l'exécution) |
+| p95 `/teams/dashboard?period=year` | idem (28 jours au 29 septembre) | 429 ms | < 300 ms | 304 ms sans cache ; **36 ms à chaud**, 312 ms à froid (lot 2c) | **oui à chaud** ; non à froid |
 | p95 recherche du pilotage `q=kou` | 44 154 comptes, 5 693 trouvés | 293 ms | < 100 ms | **47 ms** | oui |
 | p95 `/school-admin/classrooms` | 77 classes, 4 235 élèves, 765 devoirs | 240 ms | < 100 ms | **71 ms** | oui |
 | Vue p50 et HTML de `/teams/schools` | 504 établissements | 61 ms, 578 Ko | < 25 ms, < 150 Ko | 61 ms, 578 Ko | non : lot 5, reporté |
@@ -183,11 +183,25 @@ Ce que la mesure après dit :
 
 1. **Travail des élèves** : ÷ 3,8 en p50 (213 → 56 ms), la requête des totaux ÷ 6,7 (195 → 29 ms). La réécriture seule en rapportait la moitié, l'index partiel l'autre.
 2. **Pilotage 7 j** : 338 → 199 ms en p50, sous le seuil de l'ADR-0062. Les index de période ont payé 80 ms, la lecture unique des placements 65 ms, comme estimé au cadrage.
-3. **Pilotage « année » : la piste ne tient pas tout son gain.** 386 → 281 ms en p50, mais **304 ms en p95**, à 1 % du budget. Le reste est proportionnel aux sessions de l'année (la moitié de la table au 29 septembre) : les index n'y servent plus, le planificateur lit en séquence. En mai, avec 9 mois de sessions, la page dépassera nettement 300 ms. Le levier suivant, selon l'ADR-0062, est un cache court à clé complète ou une table d'agrégats : il demande un ADR qui remplace l'option C, après une mesure avec un an de sessions (question 3).
+3. **Pilotage « année » : les index et la réécriture ne tiennent pas tout leur gain** (d'où le lot 2c, cache de 5 minutes, décidé ensuite par le porteur). 386 → 281 ms en p50, mais **304 ms en p95**, à 1 % du budget. Le reste est proportionnel aux sessions de l'année (la moitié de la table au 29 septembre) : les index n'y servent plus, le planificateur lit en séquence. En mai, avec 9 mois de sessions, la page dépassera nettement 300 ms. Le levier suivant, selon l'ADR-0062, est un cache court à clé complète ou une table d'agrégats : il demande un ADR qui remplace l'option C, après une mesure avec un an de sessions (question 3).
 4. **Recherche** : ÷ 7 (264 → 38 ms en p50), le SQL ÷ 8,7. Un terme de 2 caractères reste en parcours séquentiel (124 ms), comme avant.
 5. **Établissements** : aucun gain au volume du jeu (504 établissements, 8 ms de SQL, le planificateur garde le parcours). Les index trigrammes paient au volume de la production (≈ 3 900 : 14 → 0,8 ms par requête, journal).
-6. **Test `PERF=1` des budgets** (`test/performance/school/heavy_screens_budget_test.rb`, base de test, même jeu, 15 lectures après 3 de chauffe, charge < 2) : pilotage 7 j **261 ms**, pilotage année **368 ms — rouge**, recherche « kou » **34 ms**, Travail des élèves **62 ms**. L'environnement de test est plus lent que le bench (Bullet actif, journal SQL en `debug`, pas d'eager load) : il est pessimiste, et il dit la même chose que le bench — l'année est hors budget. **Il reste rouge volontairement** tant que le porteur n'a pas tranché le levier suivant. Les tests `PERF=1` d'import (écritures massives sur les tables nouvellement indexées) restent verts : exercices 37 s, fiches 29 s, cours 26 s, établissements 3 à 6 s, génération de classes 3 à 7 s.
+6. **Test `PERF=1` des budgets** (`test/performance/school/heavy_screens_budget_test.rb`, base de test, même jeu, 15 lectures après 3 de chauffe). Première exécution, avant le cache, sous une charge qui retombait : pilotage année 368 ms, **rouge**. Après le lot 2c, charge < 2 : pilotage 7 j **199 ms**, pilotage année **5,5 ms à chaud** (budgété) et **280 ms à froid** (affiché, non budgété), recherche « kou » **41 ms**, Travail des élèves **46 ms** — **vert**. L'environnement de test (Bullet actif, journal SQL en `debug`, pas d'eager load) est pessimiste. Les tests `PERF=1` d'import (écritures massives sur les tables nouvellement indexées) restent verts : exercices 37 s, fiches 29 s, cours 26 s, établissements 3 à 6 s, génération de classes 3 à 7 s.
 7. **Aucun autre écran n'a bougé** au-delà du bruit (± 10 %) ; aucun N+1 ; le pilotage fait 21 requêtes au lieu de 23.
+
+## Mesure après le cache de la vue « année » (2026-09-29, lot 2c)
+
+Décision du porteur, prise sur la mesure ci-dessus : les agrégats de la vue « année » sont gardés **5 minutes** dans Solid Cache ; 7 et 30 jours restent en direct, filtre DRENA compris ; les derniers inscrits sont toujours lus en direct ([ADR-0062, second amendement du 2026-09-29](../../decisions/adr/0062-indicateurs-de-pilotage-lus-en-direct.md#amendement-du-2026-09-29-second--les-chiffres-de-lannée-scolaire-sont-gardés-5-minutes)).
+
+Même jeu, même script, `PERF_ONLY=dashboard`, 3 exécutions × 30 requêtes, médiane, charge < 1,5 au départ de chaque exécution. **À chaud** : les 3 requêtes de chauffe remplissent l'entrée, les 30 mesurées la lisent. **À froid** : `PERF_COLD=1` vide le cache avant chaque requête, hors du temps mesuré.
+
+| Écran | Avant le chantier p50 / p95 | Après index, sans cache | **À chaud** | **À froid** | Budget p95 | Tenu ? |
+|---|--:|--:|--:|--:|--:|:-:|
+| Pilotage année | 386 / 409 | 281 / 304 | **21 / 36** (SQL 5 ms, 9 requêtes) | 298 / 312 (23 requêtes, lecture et écriture du cache comprises) | < 300 | **oui à chaud** ; le froid le dépasse, une fois par 5 minutes au plus |
+| Pilotage 7 j (en direct) | 338 / 402 | 199 / 220 | 201 / 238 | 198 / 229 | < 300 | oui |
+| Pilotage DRENA 7 j (en direct) | 203 / 221 | 150 / 189 | 147 / 170 | 147 / 170 | < 300 | oui |
+
+Test `PERF=1` (base de test, pessimiste) : voir ci-dessous, point 6.
 
 ## Pistes classées (appliquées : 1 à 4 ; reportée : 5)
 

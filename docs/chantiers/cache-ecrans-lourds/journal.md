@@ -97,13 +97,17 @@ Ce qui reste dans le pilotage « année » (≈ 250 ms de SQL) : les élèves ac
 | 2026-09-29 | Trigramme aussi sur `schools.national_code` | Sans lui, le `OR` de `SchoolsQuery` ne peut pas se faire en `BitmapOr` : un seul membre sans index et tout repart en parcours séquentiel. Mesuré sur 4 032 établissements (jeu × 8, proche des ≈ 3 900 de la production) : 14 ms en parcours, 0,8 ms avec les trois index | amendement ADR-0062 |
 | 2026-09-29 | `script/perf/seed_dataset.rb` scindé : le module va dans `script/perf/dataset.rb` | Le test `PERF=1` sème le même jeu dans la base de test ; `seed_dataset.rb` garde sa garde « développement seulement » | non |
 | 2026-09-29 | Le test `PERF=1` **commet** le jeu puis `VACUUM ANALYZE`, et vide les tables après | Dans la transaction d'un test, aucune page n'est « all-visible » : chaque `Index Only Scan` retournerait à la table et le test mesurerait un cas qui n'existe pas en production | ADR-0067 §6 |
+| 2026-09-29 | Vue « année » : agrégats gardés 5 min dans Solid Cache, derniers inscrits exclus du cache | Décision du porteur. Exclure les inscrits garde le cache sans donnée personnelle et montre un nouveau compte tout de suite ; ils coûtent 5 ms en direct | ADR-0062, second amendement |
+| 2026-09-29 | Clé construite sur la DRENA **résolue** (son `public_id` en base), l'année scolaire et le début de période, versionnée | Une valeur d'URL n'entre jamais dans la clé ; une DRENA inconnue lit l'entrée nationale au lieu d'en créer une par valeur tapée | ADR-0062, second amendement |
+| 2026-09-29 | Cache injecté dans la query (`cache: Rails.cache`) | Le test compare avec un `NullStore` ; le store de test est déjà un `memory_store` vidé avant chaque test | non |
+| 2026-09-29 | `GrowthMigrationsTest` rejoue `AddTrigramSearchIndexes` après « up » | Ce test supprime et recrée `schools.national_code`, ce qui effaçait l'index trigramme de sa base de test ; la vérification de l'index dans `trigram_search_indexes_test.rb` était alors intermittente. On restaure l'état plutôt que d'affaiblir la vérification | non |
 
 ## Leviers gardés à la limite, leviers écartés
 
 - **`classroom_assignments (assigned_at)`** : gain de 1 ms sur 7 jours (8,7 → 7,6 ms), nul sur l'année. Le cycle dit d'annuler un levier marginal. Il est gardé parce que le porteur l'a demandé et que l'ADR-0062 l'avait décidé : la table n'est jamais purgée, et sans index le comptage de la semaine parcourt les devoirs de toutes les années. **À réévaluer** si l'écriture des devoirs en pâtit.
 - **Index trigrammes des établissements** : aucun gain au volume du bench (504 établissements : le planificateur garde le parcours séquentiel, 3 ms). Gardés sur la mesure au volume de la production (≈ 3 900 établissements, ci-dessus).
 - **Réécriture des « élèves actifs »** en `users WHERE id IN (sessions de la période)` : 67 → 55 ms sur l'année, 31 → 30 ms sur 7 jours. Marginal : **non appliquée**.
-- **Cache court du pilotage** : non appliqué (ADR-0062, option B écartée). Voir le memo pour la vue « année ».
+- **Cache court du pilotage** : d'abord écarté (ADR-0062, option B). Après la mesure (vue « année » à 304 ms en p95), le porteur l'a retenu le 2026-09-29 pour la seule vue « année », 5 minutes (lot 2c, second amendement de l'ADR-0062). 7 et 30 jours restent en direct.
 
 ## Ce qui a dérapé
 

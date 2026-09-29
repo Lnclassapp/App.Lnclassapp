@@ -12,6 +12,8 @@ Lot 0 — Bench et budgets (fait en cadrage : script/perf/, mesure « avant »)
   ├─► Lot 2a — Pilotage : index de période (ADR-0062)                ├─ séquentiels ici (un seul agent,
   │     ↓                                                            │  une seule base de mesure) ;
   │   Lot 2b — Pilotage : placements lus une fois                    │  indépendants par les fichiers
+  │     ↓                                                            │
+  │   Lot 2c — Pilotage « année » : cache 5 min (porteur)            │
   └─► Lot 3 — Recherche : pg_trgm + index trigrammes                 ┘
   ↓
 Lot 4 — Budgets : ADR-0067, test PERF=1, amendement ADR-0062, mesure « après »
@@ -56,6 +58,16 @@ Contrat d'exécution de chaque lot (cycle optimisation, étape 4) :
 - **Dépend de**    : Lot 2a (même écran : mesurer après 2a pour isoler le gain de 2b)
 - **Test associé** : `team_dashboard_query_test.rb` (nouveau cas limite des placements ; nombre de requêtes 16 / 18)
 - **Done quand**   : p95 du pilotage **< 300 ms** sur 7 jours **et** sur l'année, mesuré au même volume
+
+## Lot 2c — Pilotage « année » : chiffres gardés 5 minutes (décision du porteur, après la mesure de 2b)
+
+- **Couche**       : infrastructure
+- **Fichiers**     : `app/infrastructure/queries/school/team_dashboard_query.rb` · `test/infrastructure/queries/school/team_dashboard_query_test.rb`
+                     `script/perf/measure_screens.rb` (`PERF_COLD=1`) · `test/performance/school/heavy_screens_budget_test.rb`
+                     `docs/decisions/adr/0062-…` *(second amendement)*
+- **Dépend de**    : Lot 2b (le cache ne se pose qu'après les index et la réécriture, ADR-0062)
+- **Test associé** : `team_dashboard_query_test.rb` (mêmes chiffres avec et sans cache ; pas de SQL de chiffres dans les 5 min ; expiré après 5 min ; deux filtres, deux entrées ; 7 et 30 jours en direct)
+- **Done quand**   : p95 de la vue « année » **< 300 ms à chaud**, froid mesuré et noté ; `PERF=1` vert
 
 ## Lot 3 — Recherche : `pg_trgm`
 
@@ -104,7 +116,7 @@ Contrat d'exécution de chaque lot (cycle optimisation, étape 4) :
 - [x] `memo.md` : métrique nommée, **valeur avant chiffrée**, volume de données précisé, cible chiffrée
 - [x] Protocole de mesure écrit et reproductible par quelqu'un d'autre
 - [x] Explorer coût rendu : où part réellement le temps (pas une hypothèse)
-- [x] ADR écrit si un contrat change (ADR-0067 budgets ; amendement ADR-0062 : index, `pg_trgm`, lecture groupée)
+- [x] ADR écrit si un contrat change (ADR-0067 budgets ; amendements ADR-0062 : index, `pg_trgm`, lecture groupée ; cache 5 min de la vue « année »)
 - [x] Bench versionné, produisant la valeur avant
 - [x] Tests de non-régression fonctionnelle verts **avant** le premier levier
 - [x] Un lot = un levier = un chiffre

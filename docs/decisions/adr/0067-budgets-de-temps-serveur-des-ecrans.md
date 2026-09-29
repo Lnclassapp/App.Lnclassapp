@@ -53,6 +53,7 @@ Un écran qui dépasse son budget ouvre un chantier `optimize`. L'ordre des levi
 1. `exercise_sessions (classroom_assignment_id, student_id) INCLUDE (score_percent) WHERE status = 'completed' AND kind = 'standard'`, et `StudentWorkQuery#totals_by` qui part des adhésions présentes des classes (mêmes définitions, ADR-0065 §4).
 2. Les index de période annoncés par l'ADR-0062 : `exercise_sessions (started_at, student_id)`, `exercise_sessions (completed_at) INCLUDE (student_id, score_percent) WHERE status = 'completed'`, `users (created_at, id)`, `classroom_assignments (assigned_at)` ; puis une seule lecture groupée des élèves placés du pilotage au lieu de quatre (mêmes définitions).
 3. L'extension `pg_trgm` et cinq index GIN trigrammes sur les expressions de recherche (amendement de l'ADR-0062).
+4. En dernier recours, pour la seule vue « année » du pilotage : ses agrégats gardés 5 minutes dans Solid Cache (second amendement de l'ADR-0062, décision du porteur).
 
 ## 5. Conséquences
 
@@ -65,10 +66,10 @@ Un écran qui dépasse son budget ouvre un chantier `optimize`. L'ordre des levi
 ### 🔴 Coûts consentis
 
 - **La CI ne vérifie pas les budgets.** Ils se vérifient avant la recette et dans les chantiers qui touchent ces écrans. Une régression entre deux recettes peut passer.
-- **Le test `PERF=1` tourne en environnement de test** (Bullet, journal SQL, pas d'eager load) : il est plus lent que la production, donc pessimiste. À sa création, il est **rouge sur le pilotage « année »** (368 ms), comme le bench (304 ms en p95) : c'est l'écart que le porteur doit trancher, pas un défaut du test.
+- **Le test `PERF=1` tourne en environnement de test** (Bullet, journal SQL, pas d'eager load) : il est plus lent que la production, donc pessimiste. À sa création, il était rouge sur le pilotage « année » (368 ms) ; il est vert depuis le cache de 5 minutes de cette vue, qui est mesurée à chaud (le froid est affiché, pas budgété).
 - **Le test `PERF=1` ne voit que le SQL** des trois queries lourdes (pilotage, recherche, Travail des élèves). Le temps de rendu et le HTML ne se vérifient que par le script, et à la main.
 - **Deux écrans sont hors budget HTML à la date de l'ADR** : la liste des établissements (578 Ko) et le catalogue (474 à 550 Ko). Leur correction (modale unique, fragment des cartes) attend la fin des lots UX qui touchent ces vues ; le fragment introduira un cache et donc un ADR.
-- **Le pilotage « année » est à la limite** : son coût croît avec les sessions de l'année scolaire. Au 29 septembre il couvre 28 jours ; en mai il en couvrira 270. Le budget devra être remesuré avec un an de sessions (question ouverte du chantier).
+- **Le pilotage « année » ne tient son budget qu'avec un cache.** Son coût croît avec les sessions de l'année scolaire (28 jours au 29 septembre, 270 en mai) : après les index, il restait à 304 ms en p95. Le porteur a retenu le 2026-09-29 de garder ses chiffres **5 minutes** ([ADR-0062, second amendement du 2026-09-29](./0062-indicateurs-de-pilotage-lus-en-direct.md#amendement-du-2026-09-29-second--les-chiffres-de-lannée-scolaire-sont-gardés-5-minutes)) : le budget porte sur l'entrée chaude ; la lecture froide, une fois par 5 minutes au plus, est mesurée et notée. Elle devra être remesurée avec un an de sessions.
 - Les index ajoutés coûtent en écriture : `exercise_sessions` porte trois index de plus, `users` trois, `schools` trois, `classroom_assignments` un, maintenus à chaque session, inscription ou devoir. Ce coût **n'a pas été mesuré** ; les tests de performance d'import (`PERF=1`) restent le garde-fou des écritures massives.
 - Le temps réseau entre Rails et PostgreSQL n'est pas dans le budget : sur Railway, un écran de 20 requêtes perd davantage qu'un écran de 7.
 
@@ -94,7 +95,7 @@ RAILS_ENV=production … bin/rails runner script/perf/measure_screens.rb   # PER
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `PERF=1 PARALLEL_WORKERS=1 bin/rails test test/performance/school/heavy_screens_budget_test.rb` : le p95 SQL des trois queries lourdes, au volume de référence, sous le budget de leur page.
+- `PERF=1 PARALLEL_WORKERS=1 bin/rails test test/performance/school/heavy_screens_budget_test.rb` : le p95 SQL des trois queries lourdes, au volume de référence, sous le budget de leur page (la vue « année » à chaud ; son froid est affiché).
 - `script/perf/measure_screens.rb` : p95 et Ko de chaque écran ; le tableau « après » du chantier qui touche un écran budgété est comparé à ce tableau-ci.
 - `test/infrastructure/queries/trigram_search_indexes_test.rb` (dans la CI) : les expressions des recherches restent servies par leurs index trigrammes.
 - Rien ne vérifie automatiquement le budget HTML : il se lit dans la colonne « Ko » du script.
