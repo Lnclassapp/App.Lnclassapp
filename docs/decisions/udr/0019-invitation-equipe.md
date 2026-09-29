@@ -83,7 +83,7 @@ Deux frictions sont à éviter :
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Copier** : la modale `_created` gagne, sous `input#invitation-link`, `ui_copy_button(<lien>, label: "Copier le lien", aria_label: "Copier le lien d'invitation", icon: "link")` ; toast « Lien copié. ». C'est le bouton prévu au §4 « par un lot ultérieur ». Pas de WhatsApp ni de SMS. Même règle pour la modale de l'invitation de la direction.
 - **Acceptation, §2.4 précisé** (décision du porteur du 2026-09-29) : toujours **aucune session ouverte** ; la personne arrive sur « Se connecter » avec son **numéro pré-rempli** (jamais le PIN) et le focus sur le PIN. Le numéro voyage dans la session Rails chiffrée (`session[:login_contact]`, lu et supprimé par « Se connecter »), jamais dans l'URL ni dans le flash (UDR-0054 §3.8). Toasts inchangés.

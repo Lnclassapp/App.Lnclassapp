@@ -61,7 +61,6 @@ class FinitionsTeamReferentialTest < ApplicationSystemTestCase
 
   # FU-18: a confirmation without a field targets « Annuler », and leaves the tab title alone.
   test "the delete confirmation of a level targets Cancel" do
-    skip "Lot 0 : dropdown#openDialog ouvre la confirmation par showModal() sans émettre modal:opened (journal, Lot C1)"
     visit levels_path
 
     click_menu_action "#level_6eme", "Supprimer"
@@ -98,15 +97,14 @@ class FinitionsTeamReferentialTest < ApplicationSystemTestCase
     end
   end
 
-  # FU-22: the « hors génération » badge loses its title and gets an info tip.
+  # FU-22: the « Hors barème » badge loses its title and gets an info tip named after it.
   test "the badge of a level outside the generation has an info tip, and no title" do
-    skip "Hors du champ Fichiers : test/controllers/teams/levels_controller_test.rb exige encore le title (journal, Lot C1)"
     Orm::ClassroomPlanEntry.where(level: Orm::Level.find_by!(slug: "6eme")).delete_all
     visit levels_path
 
     within "#level_6eme" do
       assert_no_selector "[title]"
-      find("summary", text: "Aide : hors génération").click
+      find("summary", text: "Aide : Hors barème", visible: :all).click
       assert_text "Ce niveau n'est pas utilisé pour générer les classes des établissements."
     end
   end

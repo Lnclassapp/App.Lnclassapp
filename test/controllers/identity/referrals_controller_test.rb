@@ -30,7 +30,8 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
                     "[data-action='identity--share#record'][data-identity--share-channel-param=whatsapp]",
                     text: I18n.t("#{PAGE}.invite.whatsapp")
       assert_select "a[href='sms:?body=#{ERB::Util.url_encode(share_message)}'][data-identity--share-channel-param=sms]"
-      assert_select "button[data-action='identity--share#copy'][aria-label=\"#{I18n.t("#{PAGE}.invite.copy_label")}\"]"
+      assert_select "[data-controller=clipboard][data-clipboard-text-value='#{link}'] " \
+                    "button[data-action='clipboard#copy'][aria-label=\"#{I18n.t("#{PAGE}.invite.copy_label")}\"]"
       assert_select "button[hidden][data-identity--share-target=native][data-action='identity--share#native']"
       assert_select "#referral_count", text: I18n.t("#{PAGE}.invite.count", count: 0)
     end

@@ -400,3 +400,68 @@ Deux tests de contrôleur hors du champ `Fichiers` affirment l'ancien rendu et �
 - `COVERAGE=0 bin/rails test test/controllers/teams/schools_controller_test.rb test/controllers/teams/staff_invitations_controller_test.rb test/controllers/teams/school_classrooms_controller_test.rb test/integration/i18n_configuration_test.rb`
 - `COVERAGE=0 bin/rails test test/system/finitions/schools_search_test.rb test/system/teams/schools_test.rb test/system/teams/school_code_test.rb test/system/teams/staff_invitation_test.rb test/system/teams/school_classroom_creation_test.rb`
 - `bin/rubocop` sur les fichiers Ruby du lot ; garde HITL (`test/guards/repository_rules_test.rb`).
+
+## Lot Z — Clôture (2026-09-29)
+
+Branche `feature/finitions-ux-lot-z`, depuis `feature/finitions-ux` (les 11 lots fusionnés, tête `ee458785`). Champ `Fichiers` élargi à la dette remontée par les lots (plan, Lot Z ; la ligne `test/views/…` du plan, tronquée depuis sa première version, est rétablie).
+
+### Ce qui a été fait
+
+| Point | Ce qui change |
+|---|---|
+| Gardes du plan | Repli `content_for :title` retiré du layout (`<title><%= document_title %></title>`) ; `classroom/join_code_copy_controller.js` supprimé. `test/views/page_titles_test.rb` : toute vue de page appelle `page_title` (ou rend par `render template:` une vue qui l'appelle), aucune `content_for :title`, aucun attribut `autofocus` (l'option `autofocus:` n'est admise que dans un appel `ui_field`), aucun « · Lnclass » dans une valeur de locale, ni `arrow-left` ni fil d'Ariane (FU-06, FU-11, FU-20). `test/system/finitions/narrow_screens_test.rb` : pages publiques, équipe, enseignant, direction à 390 px, infobulles ouvertes (FU-53, FU-23), `/design` compris ; `classroom--join-code-copy` n'est plus enregistré, `clipboard` l'est (FU-54). |
+| `autofocus` et morphing (Lots A, B) | En mode `page`, le contrôleur écoute `turbo:morph` sur `document` et rejoue sa règle ; les six `data-action="turbo:morph@document->autofocus#focus"` posés à la main par le Lot A sont retirés. Preuve : `test/system/finitions/focus_and_search_errors_test.rb` — code de secours faux envoyé par un **clic** (focus sur le champ en erreur après le 422 fusionné ; rouge sans l'écoute, vérifié) ; modale « Modifier l'établissement » en 422 : focus sur le code national en erreur, pas sur le nom. |
+| FU-18 (Lot C1) | `dropdown#openDialog` émet `modal:opened` (préfixe `modal`) sur la `<dialog>` après `showModal()` : la confirmation ouverte depuis le menu ⋮ vise « Annuler ». Test réactivé. |
+| FU-22 (Lot C1) | Badge « Hors barème » : `title=` et `.sr-only` remplacés par `ui_info_tip`, aide nommée « Aide : Hors barème » (décision de l'orchestrateur ; PRD FU-22 et amendement d'UDR-0032 corrigés), texte de l'UDR-0054 §3.4 (clé `outside_generation_tip`, l'ancienne `outside_generation_hint` retirée). `levels_controller_test` adapté ; test système réactivé. **Plus aucun `skip` dans les tests du chantier** (grep : seuls les 5 tests de performance `PERF=1`). |
+| Envoi automatique (Lots A, B) | `sign_in_as` ne clique plus « Vérifier » ; `team_invitation`, `secret_back_navigation`, `boucle_pedagogique` : plus de clic après les 6 chiffres, « Je les ai gardés » puis « Continuer » ; `error_paths` : trois clics « Continuer » retirés après un code `/join` bien formé (celui de « k1 » gardé), plus de clic « Vérifier » après un code TOTP. `staff_invitation` passait ; il vérifie désormais le numéro pré-rempli et le focus sur le PIN au lieu de retaper le numéro. |
+| Lot E | `referrals_controller_test` et `course_assignments_controller_test` : correctifs du journal appliqués tels quels. |
+| `role`/`aria-label` | `teams/dashboards/_search` et le formulaire de recherche de `/design` passent par `html:` ; vérifiés par `dashboards_controller_test` et `design_controller_test`. |
+| État d'erreur des frames (UDR-0054 §3.9) | Le contrôleur `search` gagne la cible `error` (`<template>` rendu par `ui_error_state`) : sur `turbo:frame-missing` du frame visé (réponse non 2xx sans le frame) ou `turbo:fetch-request-error` du formulaire, il pose l'état d'erreur dans le frame ; « Réessayer » rejoue la recherche échouée en page entière (`_top`). Aucun JS en ligne. Posé sur les quatre listes (établissements, catalogue, élèves de la classe côté enseignant et direction). Test : la classe disparaît sous l'enseignant, la recherche montre l'erreur, « Réessayer » ramène la liste filtrée. |
+| Imports (Lot C2) | La modale de suivi (`create.turbo_stream`) nomme l'onglet comme la page du rapport (« Import d'établissements · Équipe · Lnclass »), testé. Titres visibles gardés avec leur deux-points : l'UDR ne le demande pas (§3.1 vise le segment « Page » de l'onglet). |
+| UDR | UDR-0054 : amendement de clôture daté (bascule code / code de secours en visite ordinaire à cause du morphing, `turbo:morph`, `modal:opened` du menu, « Aide : Hors barème », état d'erreur des frames, titres des imports). Les notes d'amendement des 21 UDR passent de « Proposé » à « Accepté » (au passé) ; PRD §6 idem. |
+| `/design` à 390 px | La ligne d'API d'une section (`design_helper`) passe à la ligne n'importe où (`wrap-anywhere`) : `flash[:notice|…]` ne fait plus défiler la page (test rouge sans le correctif, vérifié). |
+
+### Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-09-29 | `turbo:morph` rejoue la règle complète (erreur, puis cible `field`), pas seulement le champ en erreur | Même sémantique que `connect()` à chaque rendu ; un 422 sans champ marqué (erreur de base, PIN faux) revient au champ déclaré, comme les actions du Lot A le faisaient | Non (UDR-0054, amendement) |
+| 2026-09-29 | « Réessayer » en page entière (`_top`) vers la recherche échouée, pas vers l'URL de la page | L'URL de la page n'a pas encore reçu la recherche (remplacée au succès) ; une session expirée ou une classe disparue montre ainsi sa vraie page au lieu de boucler dans le frame | Non (UDR-0054, amendement) |
+| 2026-09-29 | `config/initializers/mission_control_jobs.rb` : un module préfixé à `MissionControl::Jobs::NavigationHelper` rend `page_title(page)` au helper de l'application | L'engine déclare un lecteur `page_title` sans argument qui masque le nôtre dans ses vues : la page 403 (`errors/forbidden`, passée à `page_title` au Lot A) rendue sous `/teams/jobs` levait `ArgumentError` — 2 tests rouges sur la branche de chantier (`teams/base_controller_test`, `concerns/authentication_test`), non signalés par les lots (vérifications ciblées) | Non |
+| 2026-09-29 | `Queries::Shared::TextSearch` non branché sur `SchoolsQuery`/`AccountSearchQuery` | Trivial, mais `SchoolsQuery` est dans le périmètre du chantier perf qui tourne en parallèle : risque de conflit pour un gain nul (même comportement) | Non |
+
+### Ce qui a dérapé
+
+- Le premier commit du lot a emporté la suppression de `join_code_copy_controller.js` (déjà indexée par `git rm`) ; le message du commit de clôture le dit.
+- `teams/base_controller_test` : un premier test du tableau Mission Control connecté échouait (`TestAdapter#activating` inconnu, l'engine attend Solid Queue) ; remplacé par une vérification du lecteur de l'engine sur une vue nue.
+
+### Budget JS (ADR-0051, FU-54)
+
+`bin/check-asset-budget` : `application.js` **42,0 Ko gzip / 60 Ko** (39,7 Ko le 2026-09-25 avant le chantier, 41,8 Ko au Lot 0) ; `application.css` 12,8 Ko / 30 Ko.
+
+### Portes (une passe complète, en fin de lot)
+
+- `bin/rubocop` : 1041 fichiers, aucune offense.
+- `CI=1 PARALLEL_WORKERS=2 bin/rails test` : 2512 runs, 32313 assertions, 0 échec, 0 erreur, 7 skips (tests de performance `PERF=1`, préexistants) ; lignes 8768/8768 (100 %), branches 2141/2141 (100 %).
+- `COVERAGE=0 bin/rails test:system` : 284 runs, 3248 assertions, 0 échec, 0 erreur, 0 skip — du premier coup, aucun test relancé.
+- `bin/brakeman -q --no-pager` : 0 avertissement.
+- `bin/check-asset-budget` : `application.js` 42,0 Ko gzip / 60 Ko ; `application.css` 12,8 Ko / 30 Ko.
+
+## Clôture du chantier
+
+### Ce qui a dérapé sur l'ensemble
+
+- **Base de test semée** : `RAILS_ENV=test bin/rails db:prepare` sur une base neuve charge les seeds ; quatre lots (C1, D1, D2, F) ont perdu du temps sur des `UniqueViolation`. La bonne commande est `bin/rails db:test:prepare`.
+- **Frontière des lots contre tests hors champ** : l'envoi automatique (Lots A, B) et le retrait de clés (Lot E) ont cassé des tests que leur champ `Fichiers` n'autorisait pas à toucher ; la règle « tests du lot seulement » les a laissés rouges jusqu'au Lot Z. De même, deux erreurs (page 403 sous Mission Control) n'étaient visibles que dans la suite complète.
+- **Brique gelée incomplète** : l'auto-focus du Lot 0 promettait le re-rendu 422 « par `connect()` » ; le morphing du layout l'a démenti. Contourné par le Lot A (actions à la main), corrigé au Lot Z.
+- `form_with` ignore `role` et `aria-label` au premier niveau : le Lot 0 a posé un motif qui ne rendait rien ; trois lots l'ont corrigé chacun chez eux, le Lot Z les deux restes.
+
+### Dette restante
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| `SchoolsQuery` et `AccountSearchQuery` gardent leurs `ACCENTED`/`PLAIN` au lieu de `Queries::Shared::TextSearch` | Même comportement ; conflit probable avec le chantier perf en cours | Un refactor, après `perf/cache-ecrans-lourds` |
+| `StudentWorkQuery` sans `search:` (filtre en Ruby sur les élèves déjà lus) | Consigne de l'orchestrateur (chantier perf parallèle) | `perf/cache-ecrans-lourds` |
+| `_figure` du pilotage ne porte pas d'infobulle (tuile « exercices terminés » écrite dans `_key_figures`) | Hors du champ des lots | Refactor du pilotage |
+| Infobulle par liste, pas par ligne, sur `_exercise_progress` et `_assigned_exercise` | Choix du Lot F (dix aides identiques évitées) | Si le porteur la veut par ligne |
+| Textes des infobulles à valider par le porteur | Décision du cadrage (question 10) | PR du chantier |

@@ -67,7 +67,7 @@ L'enseignant ouvre une de ses classes pour **relever le code** à transmettre au
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Copie** : le contrôleur `classroom--join-code-copy` est remplacé par `clipboard` (`ui_copy_button`). Le §4 devient : « tout écran qui propose de copier un code ou un lien utilise `ui_copy_button` ».
 - **Lien de classe** : à côté de « Copier », `ui_copy_button(join_classroom_url(code), label: "Copier le lien", aria_label: "Copier le lien de la classe", icon: "link")` ; toast « Lien copié. ». Absent sans code.

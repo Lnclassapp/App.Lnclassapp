@@ -406,8 +406,8 @@
       <% end %>
 
       <%= design_example(name: "finish-search", label: t(".finishes.search.example")) do %>
-        <%= form_with scope: :design_search, url: design_frame_path, method: :get, id: "design-search-form", role: "search",
-                      class: "mb-4 grid gap-3 sm:grid-cols-2", "aria-label": t(".finishes.search.label"),
+        <%= form_with scope: :design_search, url: design_frame_path, method: :get, id: "design-search-form",
+                      html: { role: "search", "aria-label": t(".finishes.search.label") }, class: "mb-4 grid gap-3 sm:grid-cols-2",
                       data: { turbo_frame: "design-search", controller: "search" } do |form| %>
           <%= ui_field form, :q, as: :search, label: t(".finishes.search.label"), name: "q", autocomplete: "off",
                                  data: { action: "search#queue" } %>

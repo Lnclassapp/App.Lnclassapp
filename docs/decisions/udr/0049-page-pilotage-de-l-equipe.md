@@ -78,7 +78,7 @@ L'entrée « Pilotage » de la navigation équipe est grisée depuis la V1. L'é
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Filtre DRENA** : la liste déroulante part au changement (contrôleur `search`, action `submit`) ; « Filtrer » reste sans JavaScript.
 - **Infobulles** : « Réussite moyenne » (et son « — »), « Élèves actifs » et « Établissements actifs » du tableau par DRENA (UDR-0054 §3.4).

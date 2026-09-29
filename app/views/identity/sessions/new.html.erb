@@ -2,8 +2,7 @@
 <%# Rôle : échec re-rendu en 422 par Turbo ; focus sur le numéro, ou sur le PIN quand une invitation l'a pré-rempli %>
 <%# ADR  : 0050 · UDR : 0005, 0019, 0054 (§3.2 logo, §3.3 focus, §3.4 infobulle du PIN, §3.8 numéro pré-rempli) %>
 <% page_title t(".page_title") %>
-<%# Le re-rendu 422 est un morphing : <body> ne se reconnecte pas, le focus repart à « turbo:morph » (UDR-0054 §3.3). %>
-<main class="grid min-h-dvh bg-paper md:grid-cols-2" data-action="turbo:morph@document->autofocus#focus">
+<main class="grid min-h-dvh bg-paper md:grid-cols-2">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
     <div class="max-w-sm text-center">
       <%= link_to root_path, "aria-label": t(".logo_home"),

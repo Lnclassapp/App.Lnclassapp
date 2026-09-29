@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré *(2026-09-29, Lot Z : portes vertes ; PR vers `Develop` à ouvrir, textes d'infobulles à valider par le porteur)* |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `feature/finitions-ux` |
 | **Programme** | — |

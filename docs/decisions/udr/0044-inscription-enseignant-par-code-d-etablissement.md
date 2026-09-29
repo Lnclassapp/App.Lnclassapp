@@ -90,7 +90,7 @@ L'enseignant qui s'inscrit cherche son établissement : une DRENA, puis une list
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Copie** : les boutons « Copier le code » et « Copier le lien » de la fiche passent de `classroom--join-code-copy` à `ui_copy_button` (contrôleur `clipboard`) ; libellés, valeurs et toasts inchangés.
 - **Inscription** : « Code d'établissement » est suivi d'une infobulle (où le trouver) ; après un 422, focus sur le premier champ en erreur ; le logo mène à l'accueil public.

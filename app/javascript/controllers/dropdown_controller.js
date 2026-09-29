@@ -1,6 +1,6 @@
 // ⚡ FRONT · dropdown_controller — menu déroulant au motif WAI-ARIA « menu button »
 // Rôle : bascule, flèches / Début / Fin, Échap rend le focus au bouton, clic extérieur et Tab ferment ; ouvre une <dialog>
-// UDR  : 0005, 0042
+// UDR  : 0005, 0042, 0054 · émet modal:opened sur la <dialog> ouverte par `openDialog`
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -29,10 +29,15 @@ export default class extends Controller {
     this.buttonTarget.focus()
   }
 
-  // Entrée `dialog:` d'ui_dropdown_item (UDR-0042) : la confirmation d'une ligne s'ouvre en showModal().
+  // Entrée `dialog:` d'ui_dropdown_item (UDR-0042) : la confirmation d'une ligne s'ouvre en showModal(), puis émet
+  // `modal:opened` comme le contrôleur modal : l'auto-focus de la boîte vise « Annuler » (UDR-0054 §3.3).
   openDialog({ params: { dialog } }) {
     this.dismiss()
-    document.getElementById(dialog)?.showModal()
+    const element = document.getElementById(dialog)
+    if (!element) return
+
+    element.showModal()
+    this.dispatch("opened", { target: element, prefix: "modal" })
   }
 
   // Menu `fixed` (UDR-0042) : placé sous le bouton, ou au-dessus s'il manque de place en bas, jamais hors de l'écran.

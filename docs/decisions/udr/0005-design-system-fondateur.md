@@ -156,7 +156,7 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Nouveaux composants** (API dans `ComponentsHelper`, visibles sur `/design`, section « Finitions », vérifiés par `test/system/design_system_test.rb`) : `ui_back_link(label, href:)` (`components/_back_link`) ; `ui_info_tip(text, label:)` (`components/_info_tip`, `<details>` natif) ; `ui_copy_button(text, label:, copied:, failed:, aria_label:, variant:, size:, icon:)` (`components/_copy_button`, contrôleur `clipboard`). Règles complètes : UDR-0054 §3.
 - **API modifiées** : `ui_page_header(title:, subtitle:, back: nil)` (`back: { label:, href: }` rend le lien de retour au-dessus du `h1`) ; `ui_modal(…, document_title: nil)` (titre de l'onglet tant que la modale est ouverte) ; `ui_field(…, autofocus: true)` pose `data-autofocus-target="field"` au lieu de l'attribut `autofocus`.

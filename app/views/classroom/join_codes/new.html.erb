@@ -2,8 +2,7 @@
 <%# Rôle : le code, saisi n'importe comment, mène à /c/<code> s'il y ouvre un aperçu ; sinon erreur re-rendue en 422 (429 au-delà du débit) par Turbo %>
 <%# ADR  : 0041 · UDR : 0005, 0009, 0054 (§3.2 logo, §3.3 focus sur le code, §3.6 envoi au 5ᵉ caractère valide) %>
 <% page_title t(".page_title") %>
-<%# Le re-rendu 422 est un morphing : <body> ne se reconnecte pas, le focus repart à « turbo:morph » (UDR-0054 §3.3). %>
-<main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10" data-action="turbo:morph@document->autofocus#focus">
+<main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
   <div class="w-full max-w-sm">
     <div class="mb-8 text-center">
       <%= link_to root_path, "aria-label": t(".logo_home"),

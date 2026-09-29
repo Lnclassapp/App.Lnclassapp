@@ -77,7 +77,7 @@ Chantier [`recette-v1-defauts`](../../chantiers/recette-v1-defauts/memo.md) (D1)
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **`/join`** : le formulaire porte le contrôleur `autosubmit` (motif du code d'adhésion, 3 lettres puis 2 chiffres, espaces et tiret retirés) ; il part au 5ᵉ caractère valide, une seule fois ; l'aide dit « La classe s'ouvre dès le code complet. » ; « Rejoindre » reste. Le champ du code garde le focus d'arrivée (`data-autofocus-target="field"`).
 - **`/c/<code>`** : pas de focus d'arrivée ; après un 422, focus sur le premier champ en erreur.

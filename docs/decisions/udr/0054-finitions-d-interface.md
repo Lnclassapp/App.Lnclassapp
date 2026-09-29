@@ -266,3 +266,16 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 - Toute nouvelle liste longue filtrée reprend `search` : GET, frame, URL remplacée pendant la frappe, compteur `aria-live`.
 - Toute aide à la demande passe par `ui_info_tip` ; `title=` comme seule aide est interdit.
 - Interdit désormais : l'attribut `autofocus` dans une vue, `content_for :title` (après le Lot Z), un suffixe « · Lnclass » écrit dans une locale, un bouton `arrow-left` de retour, un fil d'Ariane complet, un téléchargement automatique.
+
+---
+
+## Amendement du 2026-09-29 — clôture du chantier (Lot Z)
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/journal.md), Lot Z. Précisions tirées de l'exécution des lots ; elles font foi en cas d'écart avec les sections ci-dessus.*
+
+- **§3.6, bascule code / code de secours** : les liens « J'utilise un code de secours » et « Utiliser le code de l'application » sont des **visites ordinaires** (`advance`), **sans** `data-turbo-action="replace"`. Le layout déclare `turbo_refreshes_with method: :morph` : Turbo traite un `replace` vers le même chemin comme un rafraîchissement et fusionne la page, qui garderait le focus sur le lien au lieu du nouveau champ. Coût accepté : un pas d'historique de plus (Lot B).
+- **§3.3, déclenchement** : en mode `page`, le contrôleur `autofocus` rejoue aussi sa règle à `turbo:morph` (sur `document`). Un re-rendu 422 d'un formulaire de page est un rafraîchissement fusionné : `<body>` n'est pas reconnecté et `connect()` ne repasse pas. Aucune vue n'a à déclarer `turbo:morph@document->autofocus#focus`.
+- **§3.3, confirmations ouvertes depuis un menu ⋮** : `dropdown#openDialog` (UDR-0042) émet lui aussi `modal:opened` sur la `<dialog>` après `showModal()` ; la confirmation vise « Annuler » comme celle ouverte par `modal#open`.
+- **§3.4, badge des niveaux** : le badge s'appelle « Hors barème » (UDR-0045) ; son aide se nomme donc « Aide : Hors barème » (le libellé du badge, règle « Aide : <libellé> »), et non « hors génération ». Texte inchangé.
+- **§3.9, état d'erreur** : le formulaire de recherche porte un `<template data-search-target="error">` rendu par `ui_error_state` ; sur `turbo:frame-missing` (réponse sans le frame : page d'erreur, non 2xx) ou `turbo:fetch-request-error` (réseau), le contrôleur `search` le pose dans le frame. « Réessayer » rejoue **la recherche qui a échoué** (action du formulaire et ses champs) en page entière (`data-turbo-frame="_top"`) : une session expirée ou une classe disparue y montre sa vraie page. Posé sur les quatre listes : établissements, catalogue, élèves d'une classe (enseignant, direction).
+- **§3.1, titres visibles des imports** : le deux-points est retiré du seul **titre de l'onglet** ; les titres visibles « Importer : DRENA » et « Import : Établissements » le gardent (la règle du segment « Page » vise l'onglet). La modale de suivi d'un import nomme l'onglet comme la page du rapport (« Import d'établissements · Équipe · Lnclass »).
