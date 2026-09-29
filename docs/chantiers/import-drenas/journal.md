@@ -37,12 +37,17 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | `test/domain/use_cases/identity/register_teacher_test.rb` construit encore des DRENA factices aux slugs `abidjan-1`, `abidjan-2` | Le test ne dépend pas du format du slug et passe ; le réécrire élargirait le lot | aucun (cosmétique) |
+| À 640 px, les deux boutons ne se replient plus et le sous-titre des DRENA tient sur environ 6 lignes (constat du challenger) | Conforme à l'UDR-0053 amendée, mais peu lisible sur tablette ; à arbitrer (sous-titre plus court, ou repli des boutons sous `md`) | à ouvrir |
+| À l'import, « ??? » affiche le libellé générique « Valeur non valide. », alors que le formulaire dit « Le nom doit contenir au moins une lettre ou un chiffre latin. » | Les libellés d'erreur d'import sont communs à tous les types ; un libellé propre aux DRENA demande un motif ou un paramètre de plus | à ouvrir |
+| Une clé inconnue s'affiche « Valeur non conforme au format attendu (schema). », avec le mot-clé brut | Cela vient du socle d'import commun (ADR-0039), pas de ce chantier | à ouvrir |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-09-29 |
+| **PR** | Lnclassapp/App.Lnclassapp#88 (fusionnée), Lnclassapp/App.Lnclassapp#92 (boutons de l'en-tête sur une ligne, arrivés après la fusion) |
+| **ADR produits** | [ADR-0066](../../decisions/adr/0066-import-des-drena-et-slug-prefixe.md) |
+| **UDR produits** | [UDR-0053](../../decisions/udr/0053-import-des-drena.md) (amendée le 2026-09-29) |
+| **Challenger** | Parcours rejoués dans l'application sur `f8bac7d` (copie figée, base dédiée, Chromium) : 7 étapes ✅. DRENA : 41 importées, puis 41 ignorées au réimport. Établissements : 3 851 importés, 0 `unknown_drena`. Chemin d'erreur : `invalid_value`, `blank`, `too_long`, `taken`, erreur de schéma, 1 doublon. Rejets en bloc (format, version, 501 lignes). 403 pour la direction et l'élève. Formulaire : `drena-nouvelle-region-test`, et « ??? » refusé en 422. Boutons sur une ligne à 1 280, 1 440 et 1 920 px |
+| **CI GitHub** | En panne pendant tout le chantier : les jobs échouent en 3 s, avant la moindre étape, y compris sur `Develop`. Les étapes de `bin/ci` ont été rejouées en local : suite à 100 % de couverture, 199 tests système verts, seeds, performance, rubocop, brakeman |
