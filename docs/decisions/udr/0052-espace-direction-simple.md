@@ -79,3 +79,7 @@ Une direction connectée arrive aujourd'hui sur l'écran d'attente : elle ne voi
 - La navigation `school_admin` passe de 4 entrées (dont 3 sans route) à 2 : l'UDR-0006 est amendée.
 - Interdit sur ces pages : un bouton, un formulaire, un identifiant d'élève ou d'enseignant, un numéro de téléphone.
 - Une vraie demande d'une direction (filtre, export, geste) passe par une nouvelle UDR, pas par un ajout discret à celle-ci.
+
+## Amendement du 2026-09-29 — clé de navigation de « Travail des élèves »
+
+Le libellé d'une destination se lit sous sa clé (`shared.navigation.<clé>`, partiel `shared/navigation/_link`), et `classrooms` vaut déjà « Classes » pour l'enseignant. La destination « Travail des élèves » a donc la clé **`student_work`** : `[:student_work, :school_admin_classrooms_path, "chart-bar"]`. Les pages `school_admin/classrooms/index` et `show` déclarent `content_for :nav_key, "student_work"` (au lieu de `"classrooms"` au §3). La page de démonstration du shell (`design/shell`) marque active la première destination du rôle. Constaté au Lot 0 du chantier.
