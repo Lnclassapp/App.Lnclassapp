@@ -1,20 +1,11 @@
 <%# 🌐 UI · catalog/courses/show — page d'un cours (CA-04, CA-10), pour tous les rôles connectés %>
-<%# Rôle : fil d'Ariane, badges, actions du rôle, contenu riche assaini sous KaTeX, fiches essentielles ; rafraîchie par morphing (B2, B4) %>
-<%# ADR  : 0028, 0035, 0051 · UDR : 0006, 0007, 0013 %>
+<%# Rôle : retour « Cours » (le fil complet a disparu, UDR-0054 §3.2), badges, actions du rôle, contenu riche assaini sous KaTeX, fiches essentielles ; rafraîchie par morphing (B2, B4) %>
+<%# ADR  : 0028, 0035, 0051 · UDR : 0006, 0007, 0013, 0054 %>
 <% course = @detail.course %>
 <% team = !@status_record.nil? %>
-<% content_for :title, t(".page_title", name: course.name) %>
+<% page_title t(".page_title", name: course.name) %>
 <% content_for :nav_key, "courses" %>
-<% crumb_class = "inline-flex min-h-tap items-center font-medium transition hover:text-ink" %>
-<nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-  <ol class="flex flex-wrap items-center gap-1.5 text-mute">
-    <li><%= link_to t(".catalog"), courses_path, class: crumb_class %></li>
-    <li aria-hidden="true"><%= ui_icon "chevron-right", variant: :mini, size: :sm %></li>
-    <li><%= link_to course.material_name, courses_path(material: course.material_slug), class: crumb_class %></li>
-    <li aria-hidden="true"><%= ui_icon "chevron-right", variant: :mini, size: :sm %></li>
-    <li aria-current="page" class="min-w-0 truncate font-medium text-ink"><%= course.name %></li>
-  </ol>
-</nav>
+<%= ui_back_link t(".back"), href: courses_path %>
 
 <div id="course_header" class="mb-8">
   <%= ui_card padding: :md do %>

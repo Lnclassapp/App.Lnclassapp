@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
-# CA-01, CA-04, CA-10, TR-41 — UDR-0013. Le catalogue se filtre dans son frame, sans rechargement de page, et l'URL
-# suit le filtre. La page d'un cours rend son contenu riche, assaini, avec ses formules par KaTeX servi par
+# CA-01, CA-04, CA-10, TR-41 — UDR-0013. Le catalogue se filtre dans son frame, sans rechargement de page, dès le choix
+# d'une liste, et l'URL suit le filtre. La page d'un cours rend son contenu riche, assaini, avec ses formules par KaTeX servi par
 # l'application. L'équipe y modifie le contenu dans l'éditeur riche (modale du Lot B2), puis publie et archive le cours
 # depuis le panneau de statut : chaque écriture sans rechargement de page, les formules toujours rendues après morphing.
 class Catalog::CourseCatalogTest < ApplicationSystemTestCase
@@ -29,8 +29,9 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     assert_selector "#courses_list > li", count: 2
 
     assert_no_page_reload do
+      # Au changement de la liste, sans « Filtrer », caché avec JavaScript (UDR-0054 §3.9).
+      assert_no_button t("catalog.courses.index.filters.submit")
       select "SVT", from: t("catalog.courses.index.filters.material")
-      click_on t("catalog.courses.index.filters.submit")
       assert_selector "#courses_list > li", count: 1
       assert_selector "#course_#{@course.slug}"
       assert_current_path(/\A#{courses_path}\?.*material=#{@svt.slug}/)

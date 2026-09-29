@@ -1,16 +1,17 @@
 # 🌐 DELIVERY · Catalog::CoursesController
-# Rôle : catalogue filtré (frame « courses ») et page d'un cours, pour tous les rôles connectés ; non publié : 404 hors équipe
-# ADR  : 0026, 0028, 0035 · UDR : 0006, 0013
+# Rôle : catalogue filtré et cherché par nom (frame « courses », `q`) et page d'un cours, pour tous les rôles connectés ; non publié : 404 hors équipe
+# ADR  : 0026, 0028, 0035 · UDR : 0006, 0013, 0054
 module Catalog
   class CoursesController < AuthenticatedController
     LIST_FRAME = "courses".freeze
-    FILTERS = %i[level material].freeze
+    FILTERS = %i[level material q].freeze
 
     helper_method :list_frame_request?, :filter_options
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
-      @courses = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, **@filters)
+      @courses = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, level: @filters[:level],
+                                                               material: @filters[:material], search: @filters[:q])
     end
 
     def show

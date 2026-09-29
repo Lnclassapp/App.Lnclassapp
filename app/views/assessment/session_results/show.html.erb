@@ -1,16 +1,11 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
 <%# Rôle : badge, « Félicitations ! » et confettis ou « Courage ! », note, score, maîtrise, « Recommencer », correction %>
-<%# ADR  : 0033, 0054 · UDR : 0007, 0023 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti %>
+<%# ADR  : 0033, 0054 · UDR : 0007, 0023, 0054 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti %>
 <% result = @result %>
 <% tone = result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? :success : :error %>
-<% content_for :title, t(".page_title", title: result.exercise.title) %>
+<% page_title t(".page_title", title: result.exercise.title) %>
 <div class="mx-auto max-w-2xl space-y-8">
-  <nav aria-label="<%= t(".breadcrumb") %>" class="text-sm">
-    <%= link_to course_essential_path(result.essential.course_slug, result.essential.slug),
-                class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back", name: result.essential.name) %>
-    <% end %>
-  </nav>
+  <%= ui_back_link result.essential.name, href: course_essential_path(result.essential.course_slug, result.essential.slug) %>
 
   <section id="session_result" aria-labelledby="session_result_title"
            <%= tag.attributes(data: { controller: "assessment--confetti" }) if @owner && tone == :success %>>
@@ -39,7 +34,7 @@
           <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
         </div>
         <div>
-          <dt class="text-xs font-medium text-mute"><%= t(".mastery") %></dt>
+          <dt class="text-xs font-medium text-mute"><%= t(".mastery") %><%= ui_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
           <dd class="mt-2 font-medium"><%= mastery_label(result.score_percent) %></dd>
         </div>
         <div>
