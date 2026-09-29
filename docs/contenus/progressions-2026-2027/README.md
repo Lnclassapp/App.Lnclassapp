@@ -2,7 +2,7 @@
 
 Source : page « Progressions du Secondaire 2026-2027 » de la DPFC (https://dpfc-ci.net/?page_id=5267), PDF téléchargés le 2026-09-29.
 
-Chaque fichier est un import **`lnclass.course-tree` v1** (écran Imports → « Cours complets ») : une leçon = un cours, en brouillon, sans fiche ni exercice.
+Chaque fichier est un import **`lnclass.course-tree` v1** (écran Imports → « Cours complets ») : une leçon = un cours, en brouillon, sans fiche ni exercice. Les fiches essentielles de ces cours se rédigent avec [`../prompt-redaction.md`](../prompt-redaction.md) et se rangent dans [`../lecons-traitees/`](../lecons-traitees/).
 
 ## Règles appliquées
 
