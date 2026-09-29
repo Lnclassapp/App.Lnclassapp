@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_29_200200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
@@ -96,6 +97,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
     t.datetime "updated_at", null: false
     t.index ["archived_by_id"], name: "index_classroom_assignments_on_archived_by_id"
     t.index ["assignable_type", "assignable_id"], name: "idx_on_assignable_type_assignable_id_89cda988b0"
+    t.index ["assigned_at"], name: "index_classroom_assignments_on_assigned_at"
     t.index ["assigned_by_id"], name: "index_classroom_assignments_on_assigned_by_id"
     t.index ["classroom_id", "assignable_type", "assignable_id"], name: "index_classroom_assignments_one_active", unique: true, where: "((status)::text = 'active'::text)"
     t.index ["classroom_id"], name: "index_classroom_assignments_on_classroom_id"
@@ -240,10 +242,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
     t.string "status", default: "started", null: false
     t.bigint "student_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["classroom_assignment_id", "student_id"], name: "index_exercise_sessions_handed_in", where: "(((status)::text = 'completed'::text) AND ((kind)::text = 'standard'::text))", include: ["score_percent"]
     t.index ["classroom_assignment_id"], name: "index_exercise_sessions_on_classroom_assignment_id"
+    t.index ["completed_at"], name: "index_exercise_sessions_completed_on_completed_at", where: "((status)::text = 'completed'::text)", include: ["student_id", "score_percent"]
     t.index ["exercise_id"], name: "index_exercise_sessions_on_exercise_id"
     t.index ["knowledge_gap_id"], name: "index_exercise_sessions_on_knowledge_gap_id"
     t.index ["public_id"], name: "index_exercise_sessions_on_public_id", unique: true
+    t.index ["started_at", "student_id"], name: "index_exercise_sessions_on_started_at_and_student_id"
     t.index ["student_id", "completed_at"], name: "index_exercise_sessions_on_student_id_and_completed_at"
     t.index ["student_id", "exercise_id"], name: "index_exercise_sessions_one_started", unique: true, where: "((status)::text = 'started'::text)"
     t.check_constraint "(kind::text = 'remediation'::text) = (knowledge_gap_id IS NOT NULL)", name: "exercise_sessions_remediation_iff_gap"
@@ -498,9 +503,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
     t.string "sigle", limit: 20
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
+    t.index "translate(lower((name)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_name", using: :gin
+    t.index "translate(lower((sigle)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_sigle", using: :gin
     t.index ["drena_id", "name"], name: "index_schools_on_drena_id_and_name", unique: true
     t.index ["drena_id"], name: "index_schools_on_drena_id"
     t.index ["national_code"], name: "index_schools_on_national_code", unique: true, where: "(national_code IS NOT NULL)"
+    t.index ["national_code"], name: "index_schools_on_national_code_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["public_id"], name: "index_schools_on_public_id", unique: true
     t.index ["school_code"], name: "index_schools_on_school_code", unique: true
     t.check_constraint "cycle::text = ANY (ARRAY['first'::character varying, 'both'::character varying]::text[])", name: "schools_cycle_values"
@@ -755,7 +763,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
     t.string "role", null: false
     t.string "team_role"
     t.datetime "updated_at", null: false
+    t.index "translate(lower((((first_name)::text || ' '::text) || (last_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_full_name", using: :gin
+    t.index "translate(lower((((last_name)::text || ' '::text) || (first_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_reversed_name", using: :gin
     t.index ["contact"], name: "index_users_on_contact", unique: true, where: "(contact IS NOT NULL)"
+    t.index ["created_at", "id"], name: "index_users_on_created_at_and_id"
     t.index ["public_id"], name: "index_users_on_public_id", unique: true
     t.index ["role"], name: "index_users_on_role"
     t.check_constraint "(role::text = 'team'::text) = (team_role IS NOT NULL)", name: "users_team_role_iff_team"

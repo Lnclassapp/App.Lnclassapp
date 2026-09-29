@@ -131,6 +131,28 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     assert_equal [ 1, 55 ], detail(klass).students.map { [ it.submitted_count, it.average_percent ] }.first
   end
 
+  # Non-regression of the definitions (chantier cache-ecrans-lourds, lot 1): a student in two classrooms hands in each
+  # assignment for its own classroom only, and only while present in it; the sessions are read from the assignment.
+  test "a student in two classrooms counts only in the classroom of the assignment, and only while present in it" do
+    first, second = classroom, classroom(name: "2nde C 2")
+    first_assignment, second_assignment = assignment(first), assignment(second)
+    both = create_student(classroom: first, first_name: "Awa", last_name: "Koné")
+    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    submit(both, first_assignment, 40)
+    submit(both, second_assignment, 80)
+    submit(both, second_assignment, 60)
+    left = create_student(classroom: first, first_name: "Yao", last_name: "Kouassi")
+    Orm::ClassroomStudent.create!(classroom: second, student: left, primary: false, joined_at: Time.current, left_at: Time.current)
+    submit(left, second_assignment, 100)
+    submit(left, first_assignment, 20)
+
+    assert_equal [ 2, 1, 100 ], row_of(first).to_h.values_at(:students_count, :assignments_count, :submission_rate)
+    assert_equal [ 1, 1, 100 ], row_of(second).to_h.values_at(:students_count, :assignments_count, :submission_rate)
+    assert_equal [ [ "Awa Koné", 1, 40 ], [ "Yao Kouassi", 1, 20 ] ],
+                 detail(first).students.map { [ it.display_name, it.submitted_count, it.average_percent ] }
+    assert_equal [ [ "Awa Koné", 1, 70 ] ], detail(second).students.map { [ it.display_name, it.submitted_count, it.average_percent ] }
+  end
+
   test "DS-08: the classroom average shows from 5 students having handed in, over all their sessions" do
     klass = classroom
     given = assignment(klass)
