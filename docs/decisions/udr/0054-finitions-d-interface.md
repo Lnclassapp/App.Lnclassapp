@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-09-29 ; textes d'infobulles à valider dans la PR)* |
 | **Date** | 2026-09-29 |
 | **Chantier** | [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md) — critères FU-01 à FU-54 |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script en ligne) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Safari 16.4, 60 Ko de JS) · [ADR-0031](../adr/0031-second-facteur-totp-pour-l-equipe.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) |

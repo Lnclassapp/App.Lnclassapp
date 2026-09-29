@@ -1,10 +1,11 @@
 <%# 🌐 UI · layouts/application — document HTML commun (pages publiques et shell) %>
 <%# Rôle : en-tête HTML, feuille et script uniques, région des toasts ; le shell y injecte :body %>
-<%# UDR  : 0005, 0006 · ADR : 0031, 0049, 0051 %>
+<%# UDR  : 0005, 0006, 0054 · ADR : 0031, 0049, 0051 %>
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
-    <title><%= content_for(:title) || "Lnclass" %></title>
+    <%# UDR-0054 §3.1 : « Page · Espace · Lnclass ». Repli jusqu'au Lot Z : une vue qui pose encore :title le garde. %>
+    <title><%= content_for?(:title) && !content_for?(:page_title) ? content_for(:title) : document_title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Lnclass">
@@ -33,7 +34,8 @@
     <%= debugbar_head if defined?(Debugbar) %>
   </head>
 
-  <body>
+  <%# UDR-0054 §3.3 : auto-focus de page (premier champ en erreur, sinon le champ que l'écran déclare) %>
+  <body data-controller="autofocus">
     <%# ADR-0051 : navigateur hors liste — on prévient sans bloquer (@outdated_browser posé par allow_browser) %>
     <% if @outdated_browser %><div class="outdated-browser" role="status"><%= t("layouts.outdated_browser") %></div><% end %>
     <%= render "shared/toasts" %>

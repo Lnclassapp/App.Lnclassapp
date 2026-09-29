@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · DesignController — guide de style vivant (/design), dessiné hors production seulement
 # Rôle : rend chaque composant dans ses variantes et états, le shell de chaque rôle, et un CRUD Hotwire de démonstration
-# UDR  : 0005, 0006
+# UDR  : 0005, 0006, 0054
 class DesignController < ApplicationController
   # Formulaire d'exemple : fournit au composant champ un objet avec et sans erreurs, sans toucher au domaine.
   class Sample
@@ -68,8 +68,15 @@ class DesignController < ApplicationController
     ]
   end
 
-  # Contenu d'un frame paresseux : l'état vide remplace l'état de chargement servi par la page.
+  # Contenu d'un frame paresseux : l'état vide remplace l'état de chargement servi par la page. Sert aussi les frames
+  # des démonstrations d'envoi automatique (le code reçu) et de recherche pendant la frappe (liste filtrée, UDR-0054).
   def frame
+    @code = params[:code].to_s
+    query = Queries::Shared::TextSearch.normalize(params[:q])
+    cycle = params[:cycle].to_s
+    @items = t("design.frame.search.items").select do |item|
+      Queries::Shared::TextSearch.normalize(item[:name]).include?(query) && [ "", item[:cycle] ].include?(cycle)
+    end
   end
 
   private
