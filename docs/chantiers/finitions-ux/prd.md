@@ -342,6 +342,11 @@ Alors le formulaire part seul et ses 10 codes de secours s'affichent
 Alors son aide dit « Le code est envoyé dès le 6ᵉ chiffre. » et lui est reliée par aria-describedby
 Et à l'envoi, la région d'état annonce « Envoi du code… »
 
+```
+
+### Envoi automatique de `/join`
+
+```gherkin
 # FU-44
 Étant donné un visiteur sur « /join »
 Quand il tape « kfm37 »

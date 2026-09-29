@@ -41,7 +41,7 @@ Deux contraintes restent : le second facteur est obligatoire pour l'équipe (ADR
 - `UseCases::Identity::AcceptInvitation` reçoit le port de sessions existant (`Repositories::Identity::SessionRepository`, déjà injecté dans `RegisterTeacher`) et prend `ip:` et `user_agent:` dans `#call`.
 - `#call` renvoie `success(Accepted(user:, token:))` au lieu de `success(User)`. Les échecs (`:not_found`, `:expired`, `:invalid`, `:conflict`) sont inchangés. `#check` est inchangé.
 - La session est créée **après** l'écriture du compte, du rattachement (direction) et du marquage de l'invitation, dans la même transaction : un échec n'ouvre aucune session.
-- `Identity::InvitationsController#accept`, au succès : `start_session(accepted.token)` (reset de la session Rails, nouveau cookie, rechargement du document pour le nonce CSP), puis `redirect_to_home` avec le toast du rôle. Équipe : `current_actor` est `nil` tant que le TOTP n'est pas vérifié, donc `redirect_to_home` mène à `new_identity_second_factor_enrollment_path`. Direction : « Travail des élèves ».
+- `Identity::InvitationsController#accept`, au succès : `start_session(accepted.token)` (reset de la session Rails, nouveau cookie, rechargement du document pour le nonce CSP), puis une redirection **explicite selon le rôle du compte créé**, avec le toast du rôle : équipe → `new_identity_second_factor_enrollment_path` ; direction → `school_admin_classrooms_path`. On ne passe pas par `redirect_to_home` : il résout l'acteur depuis le cookie posé dans la même réponse, ce qui n'apporte rien ici et lie la redirection à un détail du magasin de cookies. À la requête suivante, le garde habituel (`require_verified_second_factor`) s'applique.
 - Une personne déjà connectée sur l'appareil (autre compte) : sa session est remplacée, comme à l'inscription enseignant. Le journal d'audit garde `invitation.accepted` ; aucune nouvelle action d'audit (une session ouverte par inscription n'en écrit pas non plus).
 - Le débit reste limité à 5 requêtes par minute et par adresse (inchangé).
 
@@ -77,9 +77,14 @@ Contrôleur, au succès (motif de `Identity::TeacherRegistrationsController#crea
 
 ```ruby
 # app/controllers/identity/invitations_controller.rb (cible)
+DESTINATIONS = { "team" => :new_identity_second_factor_enrollment_path,
+                 "school_admin" => :school_admin_classrooms_path }.freeze
+
 success: lambda { |accepted|
+  role = accepted.user.role
   start_session(accepted.token)
-  redirect_to_home notice: t(accepted.user.role == "school_admin" ? ".accepted_school_admin" : ".accepted"), status: :see_other
+  redirect_to public_send(DESTINATIONS.fetch(role)), status: :see_other,
+              notice: t(role == "school_admin" ? ".accepted_school_admin" : ".accepted")
 }
 ```
 

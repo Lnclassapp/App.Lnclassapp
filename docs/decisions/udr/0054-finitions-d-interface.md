@@ -174,7 +174,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 **Structure**
 - Contrôleur `autosubmit` (`app/javascript/controllers/autosubmit_controller.js`), posé sur le `<form>`. Valeur : `pattern` (expression régulière, sans les barres). Cibles : `input`, `status` (région `aria-live="polite"`, `sr-only`).
   - Sur `input` : valeur débarrassée des espaces ; si elle correspond au motif, n'est pas celle du dernier envoi et qu'aucun envoi n'est en cours → `form.requestSubmit()`, écrit « Envoi du code… » dans `status`.
-  - Verrou : posé à l'envoi (`turbo:submit-start`, que l'envoi vienne du contrôleur, d'Entrée ou du bouton), levé à `turbo:submit-end`. Un `submit` pendant le verrou est annulé (`preventDefault`).
+  - Verrou : posé juste avant `requestSubmit()` et à `turbo:submit-start` (que l'envoi vienne du contrôleur, d'Entrée ou du bouton), levé à `turbo:submit-end`. Un `submit` pendant le verrou est annulé (`preventDefault`).
   - Jamais deux envois automatiques de la même valeur. Après un 422, la page re-rendue vide le champ (comportement actuel) : l'envoi automatique repart à la saisie suivante.
 - Le bouton d'envoi **reste** (sans JavaScript, rien ne change).
 - L'aide du champ annonce le geste : « Le code est envoyé dès le 6ᵉ chiffre. » (second facteur) ; « La classe s'ouvre dès le code complet. » (`/join`).
@@ -200,7 +200,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 **Structure** (`identity/invitations/show`)
 - En tête de la rubrique Identité, `input#invitation_contact[type=tel][readonly][autocomplete=username]` **sans `name`**, valeur = le numéro invité groupé par deux (« 01 00 00 00 09 »), libellé « Numéro de téléphone », aide « Vous vous connecterez avec ce numéro. » ; fond `bg-mist`, pas de bordure d'erreur possible.
 - « Nom » porte la cible `field` de l'auto-focus.
-- Succès (ADR-0068) : 303 vers la destination de l'acteur (équipe : enrôlement du second facteur ; direction : « Travail des élèves ») ; toast « Votre compte est créé. Activez maintenant la vérification en deux étapes. » (équipe) ou « Votre compte est créé. Bienvenue sur Lnclass. » (direction). Le document est rechargé (nouveau nonce CSP, `start_session`).
+- Succès (ADR-0068) : 303 vers la destination du rôle du compte créé (équipe : `new_identity_second_factor_enrollment_path` ; direction : `school_admin_classrooms_path`) ; toast « Votre compte est créé. Activez maintenant la vérification en deux étapes. » (équipe) ou « Votre compte est créé. Bienvenue sur Lnclass. » (direction). Le document est rechargé (nouveau nonce CSP, `start_session`).
 - L'encadré `bg-info-soft` de l'équipe dit « Après la création de votre compte, vous activerez la vérification en deux étapes. ».
 
 ### 3.9 Recherche pendant la frappe
@@ -226,6 +226,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 
 - Recherche serveur par nom : fragment commun `Queries::Shared::TextSearch` (`translate(lower(col), accentuées, simples) LIKE :pattern`, motif échappé par `sanitize_sql_like`), le même que celui des établissements.
 - La recherche des élèves d'une classe n'est proposée que si la classe a au moins un élève ; le formulaire n'apparaît pas sur une classe vide.
+- Dans un frame de résultats, tout lien ou formulaire qui ne doit pas recharger le frame porte `data-turbo-frame="_top"` : « Voir le résultat » (existant), et le formulaire « Générer un code de récupération » de la liste des élèves, dont la réponse Turbo Stream ouvre la modale du code et dont le repli HTML est une page entière.
 
 **États obligatoires** (recherche)
 - Vide : aucun résultat → `ui_empty_state(icon: "magnifying-glass")` : « Aucun établissement ne correspond » (existant), « Aucun cours ne correspond » avec « Effacer la recherche », « Aucun élève ne correspond » avec « Effacer la recherche ».
@@ -252,7 +253,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 
 - `/design` gagne une section « Finitions » : `ui_back_link`, `ui_page_header(back:)`, `ui_info_tip`, `ui_copy_button`, un formulaire `autosubmit` (motif 6 chiffres), un formulaire `search` sur un frame de démonstration, une modale avec champs et une confirmation (auto-focus), le titre composé. `test/system/design_system_test.rb` les exerce dans Chrome.
 - `test/helpers/page_title_helper_test.rb`, `test/helpers/components_helper_test.rb` : 100 % des lignes et branches des helpers.
-- `test/views/page_titles_test.rb` (Lot Z) : toute vue de page (hors partials, layouts, composants, Turbo Streams, `design/`) appelle `page_title`, et aucun `autofocus` ni `content_for :title` ne subsiste dans `app/views`.
+- `test/views/page_titles_test.rb` (Lot Z) : toute vue de page (hors partials, layouts, composants, Turbo Streams, vues servies seulement dans un frame comme `school/drena_schools/index`, et démonstrations `design/modal` et `design/frame`) appelle `page_title`, et aucun `autofocus` ni `content_for :title` ne subsiste dans `app/views`.
 - Budget JS (ADR-0051) : les quatre nouveaux contrôleurs et la suppression de `classroom--join-code-copy` tiennent sous 60 Ko gzip (`bin/check-asset-budget`).
 
 ## 4. Conséquences
