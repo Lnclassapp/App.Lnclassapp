@@ -3,11 +3,19 @@ require "test_helper"
 module Entities
   module Catalog
     class ImportKindTest < ActiveSupport::TestCase
-      test "quatre types fermés, sans import de DRENA" do
-        assert_equal %w[schools course_tree essentials exercises], ImportKind::KINDS
-        assert_not ImportKind.valid?("drenas")
+      test "cinq types fermés, dont les DRENA (ADR-0055)" do
+        assert_equal %w[schools course_tree essentials exercises drenas], ImportKind::KINDS
+        assert ImportKind.valid?("drenas")
         assert ImportKind.valid?(:schools)
-        assert_raises(ArgumentError) { ImportKind.fetch("drenas") }
+        assert_raises(ArgumentError) { ImportKind.fetch("regions") }
+      end
+
+      test "les DRENA : sans cible, 500 lignes, policy de l'organisation scolaire" do
+        drenas = ImportKind.fetch("drenas")
+
+        assert_equal [ "lnclass.drenas", 1, "drenas", nil, false, 500 ],
+                     [ drenas.format, drenas.version, drenas.roots_key, drenas.target_key, drenas.target_required, drenas.max_roots ]
+        assert_equal Policies::School::ManageSchoolPolicy, drenas.policy
       end
 
       test "format, racines, cible et plafond de chaque type" do

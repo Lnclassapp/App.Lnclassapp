@@ -62,7 +62,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_sessions" => { "status" => %w[started completed abandoned], "kind" => %w[standard remediation] },
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises],
+    "import_reports" => { "kind" => %w[schools course_tree essentials exercises drenas],
                           "status" => %w[queued validating importing completed rejected failed] }
   }.freeze
 
