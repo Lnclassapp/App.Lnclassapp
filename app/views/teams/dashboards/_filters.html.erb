@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/dashboards/_filters — période (trois liens) et DRENA (liste déroulante validée), en GET %>
-<%# Rôle : l'URL porte period et drena : elle se partage et survit au retour arrière ; aucun envoi automatique %>
-<%# ADR  : 0062 · UDR : 0049 %>
+<%# Rôle : l'URL porte period et drena : elle se partage et survit au retour arrière ; la DRENA part au changement (search) %>
+<%# ADR  : 0062 · UDR : 0049, 0054 · « Filtrer » reste pour qui n'a pas de JavaScript %>
 <%# locals: (period:, drena:, drenas:) -%>
 <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
 <div id="team_dashboard_filters" class="grid gap-4 rounded-card border border-line bg-white p-4 shadow-card lg:grid-cols-2 lg:items-end">
@@ -17,18 +17,19 @@
       <% end %>
     </ul>
   </nav>
-  <%= form_with url: team_dashboard_path, method: :get, id: "team-dashboard-drena", role: "search", "aria-label": t(".drena_form_label"),
-                class: "flex flex-wrap items-end gap-3" do %>
+  <%= form_with url: team_dashboard_path, method: :get, id: "team-dashboard-drena",
+                html: { role: "search", "aria-label": t(".drena_form_label") },
+                data: { controller: "search" }, class: "flex flex-wrap items-end gap-3" do %>
     <%= hidden_field_tag :period, period.key, id: nil %>
     <div class="min-w-0 flex-1 basis-60 space-y-1.5">
       <%= label_tag "dashboard_drena", t(".drena_label"), class: "block text-sm font-medium text-ink" %>
       <div class="relative">
         <%= select_tag :drena, options_for_select([ [ t(".all_drenas"), "" ], *drenas.map { [ it.name, it.public_id ] } ], drena&.public_id),
-                       id: "dashboard_drena", class: select_class %>
+                       id: "dashboard_drena", class: select_class, data: { action: "change->search#submit" } %>
         <%= ui_icon "chevron-down", variant: :mini, class: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-mute" %>
       </div>
     </div>
-    <%= ui_button t(".submit"), type: :submit, icon: "funnel" %>
+    <%= ui_button t(".submit"), type: :submit, icon: "funnel", data: { search_target: "button" } %>
     <% if drena %>
       <%= ui_button t(".clear"), href: team_dashboard_path(period: period.key), variant: :ghost, icon: "x-mark" %>
     <% end %>

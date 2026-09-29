@@ -67,3 +67,42 @@ Un lot vertical qui aurait besoin d'en changer une s'arrête : le Lot 0 rouvre.
 - `COVERAGE=0 bin/rails test:system` : 208 runs, 2562 assertions, 0 échec, 0 erreur, 0 skip.
 - `bin/brakeman -q --no-pager` : 0 avertissement.
 - `bin/check-asset-budget` : `application.js` 41,8 Ko gzip / 60 Ko.
+
+## Lot D2 — Équipe : accueil, comptes, pilotage, croissance, invitation équipe (2026-09-29)
+
+Branche `feature/finitions-ux-lot-d2`, depuis `feature/finitions-ux` (Lot 0 fusionné). Briques du Lot 0 utilisées telles quelles, aucune modifiée.
+
+### Ce qui a été fait
+
+| Écran | Finitions |
+|---|---|
+| Accueil équipe | `page_title` → « Accueil · Équipe · Lnclass » (FU-02) |
+| Débloquer un compte | titre ; retour « Accueil » (FU-10) ; `form#account-lookup-form` sous `search` en mode `digits`, `minLength` 0, « Rechercher » caché avec JavaScript ; champ numéro cible `field` de l'auto-focus ; frame `aria-busy:opacity-50` ; aide du champ qui annonce l'envoi au numéro complet (FU-50). `_result` non touché |
+| Pilotage | titre ; DRENA → `change->search#submit`, « Filtrer » caché avec JavaScript (FU-52) ; infobulles « Réussite moyenne » (tuile rendue dans `_key_figures`, `_figure` étant hors lot), « Établissements actifs » et « Élèves actifs » dans l'en-tête du tableau par DRENA (FU-21, FU-23). Aucune requête touchée |
+| Croissance | titre sans suffixe dans la locale ; retour « Accueil » (FU-10) ; infobulles « k enseignant », « Conversion par partage », « Cycle viral médian », « Élèves arrivés par enseignant actif » (FU-21) |
+| Invitation équipe | modale « Inviter un membre de l'équipe » et « Invitation créée » : `page_title` passé à `ui_modal(document_title:)` ; « Copier le lien » (`ui_copy_button`, icône `link`, nom accessible « Copier le lien d'invitation », toast « Lien copié. ») sous le lien, même valeur que le champ (FU-24). Flux `create.turbo_stream` (`SecretResponse`) intact |
+
+### Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-09-29 | `role` et `aria-label` des formulaires de « Débloquer un compte » et du filtre DRENA passés par `html:` | Au premier niveau de `form_with`, Rails ne les rend pas (relevé par le Lot G) : les deux formulaires n'avaient en fait ni `role=search` ni nom accessible. Vérifiés par les tests | Non |
+| 2026-09-29 | `Queries::Shared::TextSearch` non utilisé pour « Débloquer un compte » | La recherche reste **exacte** par numéro (UDR-0020 §2.1, UDR-0054 §3.9 « numéro exact (inchangé) ») : aucun fragment texte à appliquer ; `AccountLookupQuery` et `AccountSearchQuery` hors du champ du lot | Non |
+| 2026-09-29 | Panneau d'infobulle dans un `div`, jamais dans un `p` | Le parseur HTML ferme un `<p>` ouvert devant `<details>` : le panneau sortirait de son libellé | Non |
+
+### Ce qui a dérapé
+
+- `RAILS_ENV=test bin/rails db:prepare` sur une base neuve l'a **semée** (niveaux, matières) : 7 tests de l'accueil en échec d'unicité. Rechargée par `db:schema:load` ; `bin/rails db:test:prepare` est la bonne commande.
+
+### Vérification (règle de la vague : tests du lot seulement)
+
+- Tests rouges d'abord : `test/system/finitions/team_accounts_test.rb` (7/7 en échec sur la base, pour la bonne raison), assertions ajoutées aux tests de contrôleur (4 échecs).
+- `COVERAGE=0 bin/rails test` sur `test/controllers/teams/{account_lookups,invitations,dashboards,growth,homes}_controller_test.rb`, `test/system/finitions/team_accounts_test.rb`, `test/system/teams/{account_unlock,dashboard,growth,team_home}_test.rb`, `test/i18n/locale_files_test.rb` : 0 échec, 0 erreur.
+- `bin/rubocop` sur les fichiers Ruby touchés : aucune offense.
+
+### Dette laissée derrière
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| `_figure` ne sait pas porter une infobulle : la tuile « exercices terminés » est écrite dans `_key_figures` | `_figure.html.erb` hors du champ `Fichiers` | Lot Z ou un refactor du pilotage |
+| La recherche de compte du pilotage (`_search`) garde `role`/`aria-label` au premier niveau de `form_with` (non rendus) | `_search.html.erb` hors du champ `Fichiers` ; recherche non dynamique par décision du porteur | Lot Z |
