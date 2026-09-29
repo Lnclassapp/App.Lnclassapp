@@ -290,7 +290,11 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
   - **Clic pendant le survol** : il garde l'infobulle ouverte (le navigateur la refermerait sous la souris). Elle devient ouverte « au clic » : le pointeur qui part ne la ferme plus, le clic suivant la ferme.
   - **Une infobulle déjà ouverte par un clic** n'est pas reprise par le survol.
   - **Clavier, toucher, sans JavaScript** : inchangés, le `<details>` natif suffit.
-- **Panneau** : il reste **dans le flux** (§3.4). Au survol, il pousse le contenu qui suit comme au clic. Une bulle flottante serait coupée par les tableaux défilants (`overflow-x-auto`) et déborderait à 390 px.
+- **Panneau au survol : une bulle.** Au survol, le panneau **flotte** sous l'icône, en `position: fixed`, et ne pousse rien. La règle « dans le flux » du §3.4 vaut toujours pour l'infobulle ouverte au clic, au toucher ou au clavier, et pour celle qu'un clic a épinglée.
+  - **Pourquoi pas dans le flux** : ouvert dans le flux, le panneau élargit le `<details>` et déplace l'icône (en-tête de la classe, à 390 px comme au bureau). La souris n'est plus dessus : l'infobulle se ferme, l'icône revient, elle se rouvre, et ainsi de suite.
+  - **Pourquoi `fixed`, pas `absolute`** : une bulle absolue serait coupée par les tableaux défilants (`overflow-x-auto`). La position fixe y échappe. Le contrôleur la calcule depuis l'icône : bord gauche aligné, contenue dans la fenêtre à 16 px des bords, au-dessus de l'icône s'il manque la place dessous. Elle est replacée à chaque défilement.
+  - **Style** : les classes `group-data-[floating]:` du partial (`fixed`, `z-50`, `w-max`, `max-w` limité à `--container-form` et à la fenêtre moins 2 rem, `shadow-pop`). Le contrôleur pose et retire `data-floating` ; ses seules écritures de style passent par le CSSOM (`left`, `top`), que la CSP stricte (ADR-0049) autorise.
+  - **Épinglée par un clic**, la bulle retourne dans le flux.
 - **Vérification** :
-  - `test/system/design_system_test.rb` : ouverture au survol, fermeture au départ du pointeur, clic qui garde ouvert, clic suivant qui ferme ;
+  - `test/system/design_system_test.rb` : ouverture au survol en bulle fixe, sans que l'icône bouge ; fermeture au départ du pointeur ; clic qui garde ouvert, de retour dans le flux ; clic suivant qui ferme ;
   - `test/helpers/components_helper_test.rb` : le contrôleur et ses actions sont posés.

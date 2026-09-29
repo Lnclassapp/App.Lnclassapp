@@ -469,7 +469,9 @@ Branche `feature/finitions-ux-lot-z`, depuis `feature/finitions-ux` (les 11 lots
 ## 2026-09-29 — Après clôture : textes validés, infobulle au survol
 
 - Le porteur valide les textes des infobulles et demande qu'elles s'ouvrent au passage de la souris.
-- Nouveau contrôleur `info-tip` sur le `<details>` : il ouvre au `pointerenter` d'une souris et ferme au `pointerleave`, et un clic pendant le survol garde l'infobulle ouverte. Clavier, toucher et rendu sans JavaScript sont inchangés.
+- Nouveau contrôleur `info-tip` sur le `<details>` : il ouvre au `pointerenter` d'une souris, en bulle fixe sous l'icône, et ferme au `pointerleave`. Un clic pendant le survol garde l'infobulle ouverte, de retour dans le flux. Clavier, toucher et rendu sans JavaScript sont inchangés.
 - **Ce qui a dérapé** :
   - La première version filtrait par `matchMedia("(hover: hover)")`. Chrome sans interface répond `false` : le test système ne pouvait pas ouvrir l'infobulle. Le filtre lit donc `event.pointerType`.
   - Dans le test, `assert_selector "details[open]", text:` en fin de ligne prenait la ligne suivante (un clic) comme valeur de `text:` : le test fermait l'infobulle avant de vérifier. D'où l'écriture `assert_selector("details[open]", text:)`, entre parenthèses.
+  - La version « dans le flux » faisait scintiller l'infobulle : le panneau ouvert déplace l'icône hors de la souris (en-tête de la classe). Trois tests système de `finitions` l'ont montré. D'où la bulle fixe au survol.
+  - La bulle se fermait au défilement ; mais Capybara (et un utilisateur en fin de défilement) fait défiler juste avant le survol, et l'événement arrivait après l'ouverture. La bulle est donc replacée au défilement, pas fermée.

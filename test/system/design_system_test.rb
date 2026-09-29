@@ -526,16 +526,24 @@ class DesignSystemTest < ApplicationSystemTestCase
     end
   end
 
-  # UDR-0054 §3.4, amendement « survol » : la souris ouvre l'aide et la referme en partant ; un clic pendant le survol la
-  # garde ouverte, le clic suivant la ferme.
+  # Boîte d'un élément dans la page (et non dans la fenêtre) : indépendante du défilement que fait Capybara.
+  PAGE_BOX = "(r => [r.left + scrollX, r.top + scrollY, r.width, r.height].map(Math.round))(this.getBoundingClientRect())"
+
+  # UDR-0054 §3.4, amendement « survol » : la souris ouvre l'aide en bulle et la referme en partant ; un clic pendant le
+  # survol la garde ouverte, dans le flux, et le clic suivant la ferme.
   test "an info tip opens on mouse hover, closes when the mouse leaves, and a click keeps it open" do
     text = t("design.index.finishes.info_tip.text")
 
     within("[data-example=finish-info-tip]") do
       assert_no_text text
-      find("details summary").hover
+      summary = find("details summary")
+      before = summary.evaluate_script(PAGE_BOX)
+      summary.hover
 
       assert_selector("details[open]", text:)
+      # En bulle : le panneau flotte sous l'icône, rien ne bouge sous la souris.
+      assert_equal "fixed", css(find("details[open] div", text:), "position")
+      assert_equal before, summary.evaluate_script(PAGE_BOX)
     end
     first("h1").hover
 
@@ -549,7 +557,8 @@ class DesignSystemTest < ApplicationSystemTestCase
     first("h1").hover
 
     within("[data-example=finish-info-tip]") do
-      assert_selector("details[open]", text:)
+      # Épinglée par le clic : de retour dans le flux (§3.4).
+      assert_equal "static", css(find("details[open] div", text:), "position")
       find("details summary").click
 
       assert_no_selector "details[open]"
