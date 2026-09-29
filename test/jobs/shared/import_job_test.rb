@@ -11,7 +11,7 @@ class Shared::ImportJobTest < ActiveJob::TestCase
   end
 
   test "a mixed file ends completed, with exact counts, errors at their path and an audit event" do
-    report = queued_report(mixed(schools_document(count: 10, drena: "abidjan-2")))
+    report = queued_report(mixed(schools_document(count: 10, drena: "drena-abidjan-2")))
     FakeImportJob.importer_options = { existing: [ "Lycée Moderne 9" ] }
 
     assert_difference -> { Orm::AuditEvent.where(action: "import.run").count } do
@@ -28,7 +28,7 @@ class Shared::ImportJobTest < ActiveJob::TestCase
   end
 
   test "an element refused by the test schema is reported at its JSON path" do
-    document = schools_document(count: 2, drena: "abidjan-2").tap { it["schools"][1]["name"] = 42 }
+    document = schools_document(count: 2, drena: "drena-abidjan-2").tap { it["schools"][1]["name"] = 42 }
     report = queued_report(document)
 
     FakeImportJob.perform_now(report.id)
@@ -40,7 +40,7 @@ class Shared::ImportJobTest < ActiveJob::TestCase
   end
 
   test "the abstract job has no adapter and leaves the report queued" do
-    report = queued_report(schools_document(count: 1, drena: "abidjan-2"))
+    report = queued_report(schools_document(count: 1, drena: "drena-abidjan-2"))
 
     error = assert_raises(NotImplementedError) { Shared::ImportJob.perform_now(report.id) }
 

@@ -7,5 +7,6 @@ Rails.application.config.x.import_jobs = {
   "course_tree" => "Catalog::ImportCourseTreeJob",
   "essentials" => "Catalog::ImportEssentialsJob",
   "exercises" => "Assessment::ImportExercisesJob",
-  "classrooms" => "Classroom::GenerateMissingClassroomsJob"
+  "classrooms" => "Classroom::GenerateMissingClassroomsJob",
+  "drenas" => "School::ImportDrenasJob"
 }.freeze

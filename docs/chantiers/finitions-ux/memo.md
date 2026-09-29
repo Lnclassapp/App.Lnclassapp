@@ -32,14 +32,14 @@ La V1 et la direction simple sont en production. Ces écarts sont les premiers q
 ## Hors périmètre
 
 - **Le caching** (point 8 de l'audit) : chantier `optimize` séparé, déjà en cours ; il mesure avant d'optimiser (ADR-0062). Décision du porteur, 2026-09-29.
-- **Les secrets hors du cache** (`no-store` et exemption du cache Turbo sur la page des codes de secours et sur la clé du second facteur) : correctif séparé, déjà en cours (`secrets-hors-cache`). Ce chantier ne touche ni aux en-têtes HTTP ni au cache Turbo de ces pages.
+- **Les secrets hors du cache** (`no-store` et exemption du cache Turbo sur la page des codes de secours, la clé du second facteur, les liens d'invitation et le code de récupération) : correctif `secrets-hors-cache`, **fusionné dans `Develop`** (concern `SecretResponse`, `secret_response_meta_tag`, `turbo_stream_secret_response`). Ce chantier le réutilise tel quel et ne pose lui-même aucun en-tête de cache.
 - Une refonte de la navigation (UDR-0006) ou un fil d'Ariane complet sur toutes les pages.
 - Une combobox d'établissements à l'inscription enseignant.
 - La recherche pendant la frappe sur le pilotage (recherche d'un compte) et sur la déclaration des classes de l'enseignant : le porteur a limité la recherche dynamique à quatre listes. L'envoi au changement des filtres en liste déroulante, lui, est dans le périmètre (question 24).
 - La pagination du catalogue : après mesure, dans le chantier de caching.
 - Le partage des liens d'invitation par WhatsApp ou SMS : « Copier » seulement (question 14).
 - La copie de la clé du second facteur (saisie manuelle) : ce n'est pas un lien, et le porteur a limité « Copier » aux liens et aux codes de secours.
-- Un annuaire des comptes : « Débloquer un compte » reste une recherche par numéro entier. L'annuaire est le chantier `annuaire-equipe`.
+- Un annuaire des comptes : « Débloquer un compte » reste, tel qu'il existe, une recherche par numéro entier. L'annuaire (`annuaire-equipe`) est au backlog.
 
 ## Ce que le grill a révélé
 
@@ -50,13 +50,13 @@ La V1 et la direction simple sont en production. Ces écarts sont les premiers q
 | 1. Où lever l'interdiction de « Copier » ? | Pour les **liens seulement** : lien d'invitation (équipe et direction), lien de classe `/c/<code>`, codes de secours du second facteur. Le code de l'élève et le code de récupération du PIN restent à dicter. Un seul contrôleur de copie, qui fusionne les deux existants. | UDR-0019 amendée (le bouton prévu « à un lot ultérieur » arrive) ; UDR-0011 et UDR-0020 amendées pour confirmer l'interdiction et la fonder sur une règle commune (« un code à dicter ne se copie pas ») ; UDR-0027, 0044 et 0050 amendées : le nouveau contrôleur remplace l'ancien et la copie du partage. |
 | 2. Envoi automatique du second facteur ? | Dès 6 chiffres, sur un champ `one-time-code` numérique, **une seule soumission**, annoncée aux lecteurs d'écran. Un lien « J'utilise un code de secours » bascule vers un champ séparé **sans** envoi automatique. | Le piège du code de secours qui commence par 6 chiffres disparaît : les deux saisies sont deux champs. La bascule doit marcher sans JavaScript (lien, pas bouton). Un échec n'est jamais renvoyé seul : le verrouillage (5 envois par minute) reste lisible. |
 | 3. Codes de secours ? | Boutons **Télécharger, Copier, Imprimer** ; la suite ne se débloque qu'après la confirmation « Je les ai gardés ». Pas de téléchargement automatique. | Le fichier est construit par le navigateur (les codes ne sont stockés qu'en empreinte). La confirmation est une case obligatoire qui bloque la suite, même sans JavaScript. |
-| 4. Acceptation d'une invitation ? | Garder le formulaire ; focus sur le premier champ, numéro pré-rempli ; après validation, **connexion immédiate**. | Vérifié le 2026-09-29 : ce n'est **pas** le cas aujourd'hui (la personne est renvoyée vers « Se connecter » et ressaisit son numéro). La connexion immédiate change le contrat de l'acceptation et le parcours de l'UDR-0019 : ADR-0068. Le numéro est montré en lecture seule, jamais envoyé ni modifiable. |
+| 4. Acceptation d'une invitation ? | Garder le formulaire ; focus sur le premier champ, numéro pré-rempli ; après validation, connexion immédiate. **Précisé par le porteur le 2026-09-29 : pas de session ouverte** ; la personne est renvoyée vers « Se connecter » avec son numéro pré-rempli, jamais le PIN. | Vérifié : c'est déjà le renvoi vers « Se connecter » (sans pré-remplissage). ADR-0050 et UDR-0019 §2.4 tiennent, aucun ADR. Le numéro passe par la session Rails chiffrée, lue une fois par « Se connecter » : ni URL (journaux, historique, `Referer`), ni flash (rendu en toast). Focus sur le PIN quand le numéro est là. |
 | 5. Recherche dynamique : où ? | Établissements (équipe), catalogue, élèves d'une classe (enseignant et direction), débloquer un compte (équipe). Délai, cadre Turbo, formulaire GET qui marche sans JavaScript, annonce du nombre de résultats ; index adaptés si recherche partielle, et ADR si index ou extension. | Le catalogue gagne un champ texte. Les élèves d'une classe se cherchent côté serveur (même motif partout). « Débloquer un compte » part dès que le numéro est complet, sans recherche partielle. Aucune table ne justifie un index : pas d'ADR (PRD §7, UDR-0054 §2). |
 | 6. Titre de page ? | Format « Page · Espace · Lnclass » partout, modales comprises, par un seul helper. | Les trois accueils se distinguent par l'espace (question 26). Toute page, et toute modale ouverte directement par son URL, pose son titre ; un test le vérifie à la fin. |
 | 7. Infobulles ? | Composant accessible sans JavaScript (base `<details>` ou équivalent compatible Safari 16.4) ; textes rédigés par le chantier, **validés par le porteur dans la PR**. | Les textes proposés sont écrits dans l'UDR-0054 ; la PR liste les textes pour validation. Le `title=` des niveaux disparaît. |
 | 8. Retour ? | Une seule façon, sur les écrans listés par l'audit ; corriger les retours faux (page de classe vue par l'équipe → fiche établissement ; sortie de l'enrôlement du second facteur). | Un emplacement « retour » dans l'en-tête de page et une brique autonome pour les pages sans en-tête. Les motifs « bouton » (imports, direction) disparaissent. L'enrôlement gagne « Se déconnecter ». |
 | 9. Auto-focus ? | Un contrôleur ; après une erreur, focus sur le premier champ en erreur ; dans une modale, le premier champ, pas la croix. | Les `autofocus` posés à la main disparaissent au profit d'une règle unique. Les confirmations sans champ visent « Annuler » (question 9). |
-| 10. Caching et secrets hors cache ? | Hors périmètre : chantiers séparés en cours. | Aucun lot ne pose d'en-tête HTTP de cache ni d'exemption du cache Turbo. Les lots qui touchent les mêmes pages que `secrets-hors-cache` le signalent (plan, collisions entre chantiers). |
+| 10. Caching et secrets hors cache ? | Hors périmètre : chantiers séparés. | Aucun lot ne pose d'en-tête HTTP de cache ni d'exemption du cache Turbo. `secrets-hors-cache` est fusionné dans `Develop` (mise à jour du 2026-09-29) : les lots qui touchent ses pages réutilisent `SecretResponse` sans le recréer ni le retirer. |
 
 ## Cas limites identifiés
 
@@ -66,9 +66,9 @@ La V1 et la direction simple sont en production. Ces écarts sont les premiers q
 - Recherche dynamique : `LIKE '%…%'` sans index sur les établissements ; `advance` à chaque frappe remplit l'historique. **Tranché** : l'URL est remplacée pendant la frappe, pas empilée ; pas d'index (volumes, PRD §7).
 - Auto-focus : au téléphone, il ouvre le clavier sur les pages publiques ; après un 422, il doit viser le champ en erreur.
 - Retour : la page d'une classe est ouverte par l'enseignant et par l'équipe, qui n'arrivent pas du même endroit. **Tranché** : la cible dépend du rôle.
-- Invitation : la personne invitée ouvre le lien sur un téléphone où quelqu'un d'autre est déjà connecté. La connexion immédiate remplace cette session (même règle que l'inscription enseignant).
-- Invitation d'un membre de l'équipe : la session ouverte à l'acceptation n'a pas encore de second facteur ; elle ne mène qu'à l'enrôlement, comme une connexion.
-- Direction : la liste de ses classes et la page d'une classe sont réécrites par le chantier `espace-direction` ; la recherche et le retour de la direction s'appliquent à la version qui sera en place.
+- Invitation : la personne recharge « Se connecter » ou y revient plus tard : le numéro n'est plus pré-rempli (valeur à usage unique), elle le tape.
+- Invitation sur un téléphone où quelqu'un est déjà connecté : « Se connecter » renvoie une session active vers son accueil (comportement actuel) ; le numéro pré-rempli est consommé sans être montré.
+- Direction : la recherche et le retour s'appliquent aux pages de l'espace direction simple, déjà en production (« Travail des élèves », page d'une classe, « Enseignants »).
 - Double envoi : l'utilisateur tape Entrée au moment où le 6ᵉ chiffre part seul ; une seule requête doit partir.
 
 ## Questions tranchées
@@ -91,7 +91,7 @@ Les 27 questions du cadrage, chacune avec sa réponse. **Porteur** : réponse du
 14. **Liens d'invitation** : « Copier » oui ; WhatsApp non (le lien donne accès à un compte, et le porteur a limité l'ajout à « Copier »). — *Porteur (Copier) ; délégué (pas de WhatsApp).*
 15. **Lien de classe** : « Copier le lien » à côté de « Copier » le code. — *Porteur.*
 16. **Contrôleur de copie** : un seul, générique, qui remplace les deux existants ; le partage garde WhatsApp, SMS, le partage natif et le comptage. — *Porteur.*
-17. **Invitation acceptée** : la session s'ouvre à l'acceptation (ADR-0068) ; le numéro est montré pré-rempli en lecture seule sur le formulaire. — *Porteur.*
+17. **Invitation acceptée** : pas de session ; renvoi vers « Se connecter » avec le numéro pré-rempli (session chiffrée, usage unique) et le focus sur le PIN. — *Porteur (précision du 2026-09-29).*
 18. **Second facteur** : envoi automatique au 6ᵉ chiffre sur la vérification **et** sur l'enrôlement ; bascule « J'utilise un code de secours » sur la vérification seulement ; jamais de nouvel envoi automatique de la même valeur après un échec. — *Porteur.*
 19. **Codes de secours** : boutons seulement, et la suite ne se débloque qu'après « Je les ai gardés ». — *Porteur.*
 20. **Sécurité de la page des codes de secours** : correctif séparé, déjà en cours. — *Porteur.*
@@ -108,5 +108,4 @@ Les 27 questions du cadrage, chacune avec sa réponse. **Porteur** : réponse du
 Aucune ne bloque le Lot 0. À confirmer par le porteur dans la PR :
 
 - Les textes des infobulles (UDR-0054 §3, table « Textes proposés »).
-- Le numéro affiché sur la page d'acceptation : un lien d'invitation intercepté révèle désormais le numéro invité (ADR-0068, coûts consentis).
-- L'ordre de fusion avec `espace-direction`, `annuaire-equipe` et `secrets-hors-cache`, qui touchent des écrans de ce chantier (plan, « Collisions avec d'autres chantiers »).
+- Aucune dépendance à un autre chantier en cours : `espace-direction` (complet) et `annuaire-equipe` sont au backlog ; `espace-direction-simple` et `secrets-hors-cache` sont fusionnés et forment la base des lots (mise à jour du 2026-09-29).

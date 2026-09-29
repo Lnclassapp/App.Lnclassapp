@@ -1,0 +1,12 @@
+# Import des DRENA (chantier import-drenas, Lot 0) — ADR-0066, UDR-0053
+fr:
+  teams:
+    imports:
+      kinds:
+        drenas:
+          title: "Format du fichier"
+          intro_html: "Format <code class=\"font-mono text-xs text-ink\">lnclass.drenas</code>, version 1. Chaque DRENA ne porte que son nom."
+          keys:
+            name: "Obligatoire, 80 caractères au plus. Le nom est enregistré tel quel, espaces normalisés."
+          example: "Exemple minimal"
+          slug_rule_html: "Le slug est tiré du nom, préfixé par <code class=\"font-mono text-xs text-ink\">drena-</code> : « Bouaké 1 » devient <code class=\"font-mono text-xs text-ink\">drena-bouake-1</code>. C'est lui que citent les fichiers d'établissements. Une DRENA dont le slug existe déjà est ignorée et comptée : aucune DRENA existante n'est modifiée."

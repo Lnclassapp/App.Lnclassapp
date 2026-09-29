@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Entrées : [`prd.md`](prd.md) (FU-01 à FU-54), [UDR-0054](../../decisions/udr/0054-finitions-d-interface.md) (§3 = contrat de chaque lot), [ADR-0068](../../decisions/adr/0068-session-ouverte-a-l-acceptation-d-une-invitation.md).
+> Entrées : [`prd.md`](prd.md) (FU-01 à FU-54), [UDR-0054](../../decisions/udr/0054-finitions-d-interface.md) (§3 = contrat de chaque lot).
 
 ## Principe du découpage
 
@@ -19,7 +19,7 @@ Chaque lot vertical est démontrable seul : à sa fin, les écrans de son espace
 ```
 Lot 0 — SOCLE : briques des finitions (séquentiel)
   ↓
-  ├─► Lot A  Entrée publique et invitation (ADR-0068)   ┐
+  ├─► Lot A  Entrée publique et invitation                 ┐
   ├─► Lot B  Second facteur et codes de secours          │
   ├─► Lot C1 Équipe : référentiel                        │
   ├─► Lot C2 Équipe : contenu et imports                 │
@@ -28,7 +28,7 @@ Lot 0 — SOCLE : briques des finitions (séquentiel)
   ├─► Lot E  Enseignant : classe, cours dans la classe, parrainage │
   ├─► Lot F  Catalogue, exercice, élève                  │
   ├─► Lot H  Profil et pages de compte                   │
-  └─► Lot G  Direction  (+ fusion d'espace-direction, voir « Collisions avec d'autres chantiers ») ┘
+  └─► Lot G  Direction (pages de l'espace direction simple)  ┘
   ↓
 Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
 ```
@@ -47,7 +47,7 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
                      app/views/components/_page_header.html.erb
                      app/views/components/_modal.html.erb *(contrôleur `autofocus` sur la `<dialog>`, pied marqué `data-autofocus-footer`)*
                      app/views/components/_field.html.erb
-                     app/views/layouts/application.html.erb *(`document_title` avec repli `content_for :title`, `autofocus` sur `<body>`, `print:hidden` sur les toasts)*
+                     app/views/layouts/application.html.erb *(`document_title` avec repli `content_for :title`, `autofocus` sur `<body>`, `print:hidden` sur les toasts ; la ligne `secret_response_meta_tag` reste)*
                      app/javascript/controllers/clipboard_controller.js *(nouveau)*
                      app/javascript/controllers/autofocus_controller.js *(nouveau)*
                      app/javascript/controllers/autosubmit_controller.js *(nouveau)*
@@ -75,9 +75,9 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
 
 ## Lot A — Entrée publique et invitation
 
-- **Couche**       : domaine + delivery + ui
-- **Fichiers**     : app/domain/use_cases/identity/accept_invitation.rb *(ADR-0068 : port de sessions, `Accepted(user:, token:)`)*
-                     app/controllers/identity/invitations_controller.rb
+- **Couche**       : delivery + ui
+- **Fichiers**     : app/controllers/identity/invitations_controller.rb *(`session[:login_contact]` au succès, aucune session d'authentification)*
+                     app/controllers/identity/sessions_controller.rb *(`new` lit et supprime `session[:login_contact]`)*
                      app/views/identity/invitations/show.html.erb
                      app/views/identity/sessions/new.html.erb
                      app/views/identity/pin_resets/new.html.erb
@@ -102,8 +102,8 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
                      test/system/identity/teacher_signup_test.rb
                      test/system/classroom/join_test.rb
 - **Dépend de**    : Lot 0
-- **Test associé** : test/domain/use_cases/identity/accept_invitation_test.rb · test/controllers/identity/invitations_controller_test.rb · test/system/identity/team_invitation_test.rb · test/system/finitions/public_pages_test.rb — FU-03, FU-13, FU-17, FU-19, FU-30, FU-31, FU-32, FU-33, FU-44, FU-53 (acceptation)
-- **Done quand**   : une personne invitée arrive connectée, sans repasser par « Se connecter » (équipe : activation du second facteur ; direction : « Travail des élèves ») ; le logo de chaque page publique mène à l'accueil public ; `/join` s'ouvre au 5ᵉ caractère valide ; une erreur d'inscription met le focus sur le champ fautif
+- **Test associé** : test/controllers/identity/invitations_controller_test.rb · test/controllers/identity/sessions_controller_test.rb · test/system/identity/team_invitation_test.rb · test/system/finitions/public_pages_test.rb — FU-03, FU-13, FU-17, FU-19, FU-30, FU-31, FU-32, FU-33, FU-44, FU-53 (acceptation)
+- **Done quand**   : une personne invitée arrive sur « Se connecter » avec son numéro pré-rempli et le focus sur le PIN, sans session ouverte ni numéro dans l'URL ou le flash ; le logo de chaque page publique mène à l'accueil public ; `/join` s'ouvre au 5ᵉ caractère valide ; une erreur d'inscription met le focus sur le champ fautif
 
 ---
 
@@ -121,7 +121,7 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
 - **Test associé** : test/controllers/identity/second_factors_controller_test.rb · test/system/finitions/second_factor_test.rb — FU-12, FU-34, FU-35, FU-36, FU-37, FU-38, FU-39, FU-40, FU-41, FU-42, FU-43, FU-53 (codes de secours, vérification)
 - **Done quand**   : un membre de l'équipe tape 6 chiffres et arrive sur son accueil sans cliquer, une seule tentative étant journalisée ; il bascule sur le code de secours sans envoi automatique ; il télécharge, copie et imprime ses codes et ne continue qu'après « Je les ai gardés » ; l'activation a « Se déconnecter »
 
-> Ne touche **ni** aux en-têtes `Cache-Control` **ni** à l'exemption du cache Turbo : c'est le correctif `secrets-hors-cache`.
+> **Part de la base qui contient déjà `SecretResponse`** (`secrets-hors-cache`, fusionné) : `second_factor_enrollments_controller.rb` déclare `secret_response :new, :create` et son flux ajoute `turbo_stream_secret_response`. Le lot le **réutilise tel quel** : il ne recrée ni ne déplace rien, ne modifie pas ce contrôleur, et ne pose lui-même aucun en-tête. La page des codes de secours reste hors cache ; le texte du fichier téléchargé (valeur `content` du contrôleur `download`) n'ajoute aucun secret qui n'y soit déjà. La vérification (`second_factors_controller.rb`) n'affiche aucun secret et n'a pas à être marquée.
 
 ---
 
@@ -249,6 +249,8 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
 - **Test associé** : test/system/finitions/team_accounts_test.rb — FU-02 (équipe), FU-10 (Croissance, Débloquer un compte), FU-21 (pilotage), FU-23, FU-24, FU-50, FU-52
 - **Done quand**   : « Débloquer un compte » cherche seul dès le numéro complet et jamais avant ; la DRENA du pilotage part au changement ; les indicateurs du pilotage et de Croissance ont leurs infobulles ; le lien d'invitation de l'équipe se copie ; l'accueil s'appelle « Accueil · Équipe · Lnclass »
 
+
+> « Débloquer un compte » **tel qu'il existe** (`/teams/accounts`, `teams/account_lookups/show`, UDR-0020) : pas de page « Comptes », pas d'annuaire. Seuls la recherche en mode `digits`, le retour, le titre et le focus changent ; la carte `_result` n'est pas touchée.
 ---
 
 ## Lot E — Enseignant : classe, cours dans la classe, parrainage
@@ -324,7 +326,7 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
 
 ## Lot G — Direction
 
-- **Couche**       : infrastructure + delivery + ui
+- **Couche**       : infrastructure + delivery + ui *(pages de l'espace direction simple, UDR-0052 / ADR-0065, en production)*
 - **Fichiers**     : app/infrastructure/queries/school/student_work_query.rb *(`search:` sur les élèves d'une classe)*
                      app/controllers/school_admin/classrooms_controller.rb *(lecture de `q`)*
                      app/views/school_admin/classrooms/index.html.erb
@@ -334,7 +336,7 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
                      config/locales/school_admin/teachers.fr.yml
                      test/controllers/school_admin/classrooms_controller_test.rb
                      test/system/school_admin/student_work_test.rb
-- **Dépend de**    : Lot 0 **et** la décision d'ordre avec `espace-direction` (ci-dessous)
+- **Dépend de**    : Lot 0
 - **Test associé** : test/infrastructure/queries/school/student_work_query_test.rb · test/system/finitions/school_admin_test.rb — FU-10 (Classe, direction), FU-11 (direction), FU-21, FU-49
 - **Done quand**   : la direction lit la définition de « Taux de rendu », « Moyenne » et « — » d'un toucher, cherche un élève dans une classe de son établissement, revient par le lien « Travail des élèves »
 
@@ -415,7 +417,7 @@ Sortie de la commande le 2026-09-29 : `app/views/layouts/application.html.erb` s
 
 | Fichier | Lot propriétaire | Remarque |
 |---|---|---|
-| `app/views/layouts/application.html.erb` | Lot 0, puis Lot Z | Séquentiel : Z retire le repli après la fusion de tous les lots |
+| `app/views/layouts/application.html.erb` | Lot 0, puis Lot Z | Séquentiel : Z retire le repli après la fusion de tous les lots ; `secret_response_meta_tag` n'est jamais touché |
 | `app/helpers/components_helper.rb`, `app/helpers/page_title_helper.rb`, `app/helpers/navigation_helper.rb` | Lot 0 | API gelées ; aucun lot vertical ne les modifie |
 | `app/views/components/*` | Lot 0 | Idem |
 | `app/javascript/controllers/*_controller.js` (racine) et `modal_controller.js` | Lot 0 | Idem |
@@ -435,22 +437,28 @@ Sortie de la commande le 2026-09-29 : `app/views/layouts/application.html.erb` s
 | `db/*` | aucun | Aucune migration, aucun index |
 | `test/fixtures/*` | aucun | Les tests créent leurs données par les usines existantes ; un lot qui aurait besoin d'une fixture partagée s'arrête et remonte au Lot 0 |
 
-## Collisions avec d'autres chantiers
+## Base de départ et chantiers voisins
 
-Trois chantiers en cours touchent des fichiers de ce plan. La règle : **le premier fusionné dans `Develop` gagne ; l'autre rebase et ré-applique** ses lignes, sans jamais écraser.
+Mise à jour du 2026-09-29 : `Develop` contient la V2 **espace direction simple** (#86) et le correctif **`secrets-hors-cache`** (#91). Le chantier `espace-direction` complet et `annuaire-equipe` sont au backlog : **aucun lot n'en dépend**. Les fichiers de la base que des lots touchent sont listés ici avec leur unique propriétaire, pour qu'aucun lot ne défasse ce qui vient d'être fusionné.
 
-| Chantier | Fichiers communs | Lot ici | Conduite |
-|---|---|---|---|
-| `espace-direction` (Lots 0b, A, D, F) | `identity/invitations/show.html.erb`, `identity/second_factor_enrollments/backup_codes.html.erb`, `identity/profiles/*`, `classroom/joins/_signup_form.html.erb`, `teams/schools/show.html.erb`, `teams/staff_invitations/*` (déplacés en `teams/school_staff_invitations/*`), `school_admin/classrooms/*`, `config/locales/identity/profiles.fr.yml` | A, B, H, D1, G | **Lot G attend** la fusion du Lot D d'`espace-direction` (il réécrit ces deux vues) ; à confirmer par le porteur s'il préfère l'inverse. Pour A, B, H et D1 : ajouts de quelques lignes, rebase simple ; si `teams/school_staff_invitations/*` existe au départ du Lot D1, la copie du lien s'y applique au lieu de `teams/staff_invitations/*`. |
-| `annuaire-equipe` | `teams/account_lookups/*` (fusion avec « Comptes ») | D2 | Si l'annuaire est fusionné avant, la recherche en mode `digits` s'applique à sa barre « Comptes » pour la recherche par numéro, sans toucher à sa recherche par nom. |
-| `secrets-hors-cache` | `identity/second_factor_enrollments_controller.rb`, `backup_codes.html.erb`, `second_factor_enrollments/new.html.erb` | B | Le Lot B ne touche ni aux en-têtes ni au cache Turbo ; il ne modifie pas `second_factor_enrollments_controller.rb`. Conflit limité aux vues, résolu au rebase. |
+| Fichier fusionné (origine) | Lot propriétaire | Ce que le lot garde intact |
+|---|---|---|
+| `app/views/layouts/application.html.erb` (`secrets-hors-cache`) | Lot 0, puis Lot Z | La ligne `secret_response_meta_tag` du `<head>` |
+| `app/controllers/concerns/secret_response.rb`, `app/helpers/secret_response_helper.rb`, `app/controllers/application_controller.rb` (`secrets-hors-cache`) | aucun | Réutilisés, jamais modifiés |
+| `app/controllers/identity/second_factor_enrollments_controller.rb` (`secrets-hors-cache`) | aucun | `secret_response :new, :create` et le flux `turbo_stream_secret_response` |
+| `app/views/identity/second_factor_enrollments/new.html.erb`, `backup_codes.html.erb` | Lot B | Rendus sous `secret_response` : rien à ajouter |
+| `app/views/teams/invitations/create.turbo_stream.erb`, `app/views/teams/staff_invitations/create.turbo_stream.erb`, `app/views/identity/pin_recovery_codes/create.turbo_stream.erb` (`secrets-hors-cache`) | aucun | Les lots D2, D1 et H ne touchent que les partials `_created` / `_code` et les pages de repli |
+| `app/views/teams/invitations/_created.html.erb`, `created.html.erb` | Lot D2 | Le lien reste rendu par le serveur ; « Copier » lit la même valeur |
+| `app/views/teams/staff_invitations/new.html.erb`, `_created.html.erb`, `created.html.erb` (V2 simple) | Lot D1 | Idem |
+| `app/views/identity/invitations/show.html.erb`, `app/controllers/identity/invitations_controller.rb` (V2 simple : variante direction) | Lot A | L'encadré et le toast propres à la direction ; `AcceptInvitation` n'est pas modifié |
+| `app/views/school_admin/classrooms/index.html.erb`, `show.html.erb`, `app/views/school_admin/teachers/index.html.erb`, `app/controllers/school_admin/classrooms_controller.rb`, `app/infrastructure/queries/school/student_work_query.rb` (V2 simple) | Lot G | Lecture seule, aucun identifiant d'élève dans le HTML, « — » sous 5 élèves (ADR-0065) |
+| `app/views/identity/pin_recovery_codes/_code.html.erb`, `show.html.erb` | Lot H | Toujours sans « Copier » |
 
 ## Dispatch
 
 ```
 Vague 1 : Lot 0                                            → 1 agent, séquentiel
-Vague 2 : A ‖ B ‖ C1 ‖ C2 ‖ D1 ‖ D2 ‖ E ‖ F ‖ H              → 9 agents, worktrees isolés
-          (+ G dès que le Lot D d'espace-direction est fusionné → 10)
+Vague 2 : A ‖ B ‖ C1 ‖ C2 ‖ D1 ‖ D2 ‖ E ‖ F ‖ G ‖ H         → 10 agents, worktrees isolés
 Vague 3 : Lot Z                                            → 1 agent, séquentiel
 ```
 
@@ -489,9 +497,9 @@ Brief de chaque agent : chemin absolu de son worktree ; son lot recopié en enti
 Portes propres à ce chantier :
 
 - [ ] Les textes d'infobulle (UDR-0054 §3.4) sont listés dans la PR et validés par le porteur
-- [ ] L'ordre de fusion avec `espace-direction`, `annuaire-equipe` et `secrets-hors-cache` est tranché avant le Lot G et vérifié au Lot Z
-- [ ] Numéros UDR-0054 et ADR-0068 revérifiés contre `Develop` avant la PR (0053, 0066 et 0067 sont pris par `espace-direction`)
+- [ ] `SecretResponse` intact au Lot Z : `secret_response_meta_tag` dans le layout, `secret_response :new, :create` sur l'activation, flux des invitations et du code de récupération inchangés
+- [ ] Numéro UDR-0054 revérifié contre `Develop` avant la PR (le 2026-09-29 : UDR-0053 est pris par l'import des DRENA, 0054 est libre). Aucun ADR dans ce chantier
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >
-> Pour ce chantier : il refait au téléphone (390 px) le parcours de l'invitation d'équipe jusqu'à l'accueil (FU-31, FU-34, FU-40), tape un code faux au second facteur puis Entrée en même temps (FU-35, FU-36), copie un lien d'invitation, cherche un établissement et revient à la liste filtrée (FU-09, FU-45), et navigue au clavier seul dans une modale et une confirmation (FU-15, FU-18). Il vérifie aussi un parcours **sans JavaScript** (FU-37, FU-46).
+> Pour ce chantier : il refait au téléphone (390 px) le parcours de l'invitation d'équipe, de « Se connecter » pré-rempli jusqu'à l'accueil, en vérifiant que le numéro n'apparaît ni dans l'URL ni dans le journal de la requête (FU-31, FU-34, FU-40), tape un code faux au second facteur puis Entrée en même temps (FU-35, FU-36), copie un lien d'invitation, cherche un établissement et revient à la liste filtrée (FU-09, FU-45), et navigue au clavier seul dans une modale et une confirmation (FU-15, FU-18). Il vérifie aussi un parcours **sans JavaScript** (FU-37, FU-46).

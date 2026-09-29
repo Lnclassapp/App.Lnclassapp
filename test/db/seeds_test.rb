@@ -39,7 +39,7 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal({ "Lycée Moderne de Treichville" => 77, "Lycée privé Les Lauriers" => 38, "Lycée mixte La Réussite" => 38,
                    "Collège Moderne de Marcory" => 28 },
                  Orm::School.joins(:classrooms).group(:name).count)
-    assert_equal "abidjan-2", Orm::School.first.drena.slug
+    assert_equal "drena-abidjan-2", Orm::School.first.drena.slug
     assert_equal 0, Orm::User.count
   end
 

@@ -116,3 +116,17 @@ end
 ## 9. Points à confirmer par le porteur
 
 - Le second facteur est demandé à chaque nouvelle session, sans « se souvenir de cet appareil ».
+
+---
+
+## Amendement du 2026-09-29 — un secret affiché ne reste dans aucun cache
+
+**Constat** (audit `finitions-ux`, § 5c ; chantier [`secrets-hors-cache`](../../chantiers/secrets-hors-cache/memo.md)). La page des codes de secours et celle de l'enrôlement (clé TOTP, QR) n'avaient ni `Cache-Control: no-store` ni exemption du cache Turbo : après « J'ai noté mes codes », Retour ré-affichait les codes depuis le cache Turbo. Le code de récupération du PIN (ADR-0032) et les liens d'invitation (ADR-0038) posaient `no-store` à la main, dans la branche succès seule, sans exemption Turbo.
+
+**Décision.**
+
+1. **Un marquage unique, au contrôleur** : `secret_response :action, …` (concern `SecretResponse`, inclus dans `ApplicationController`). Une action marquée pose `Cache-Control: no-store` et `Pragma: no-cache` sur **toute** sa réponse (succès, 422, repli HTML), par `before_action`.
+2. **Cache Turbo** : pour une page HTML, le layout `application` pose `<meta name="turbo-cache-control" content="no-cache">` quand l'action est marquée ; pour un flux Turbo (modale, remplacement en place), le flux commence par `turbo_stream_secret_response`, qui ajoute ce meta au `<head>` de la page hôte. Aucun script, aucun attribut en ligne : CSP de l'ADR-0049 inchangée.
+3. **Liste close** : `test/controllers/concerns/secret_response_test.rb` énumère les actions à secret ; un écran à secret non marqué, ou une marque hors liste, fait échouer la suite. Tout nouvel écran qui affiche un secret à usage unique s'y ajoute.
+
+Actions marquées au 2026-09-29 : `Identity::SecondFactorEnrollmentsController#new/#create`, `Identity::PinRecoveryCodesController#create`, `Teams::InvitationsController#create`, `Teams::StaffInvitationsController#create`.

@@ -8,7 +8,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     @member = create_team_member
   end
 
-  def upload(content = schools_document(count: 2, drena: "abidjan-2").to_json, filename: "ecoles.json")
+  def upload(content = schools_document(count: 2, drena: "drena-abidjan-2").to_json, filename: "ecoles.json")
     Rack::Test::UploadedFile.new(StringIO.new(content), "application/json", original_filename: filename)
   end
 
@@ -69,6 +69,18 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[type=file][name='import[io]'][accept='.json,application/json']"
     assert_select "input[type=hidden][name='import[kind]'][value=schools]"
     assert_select "#import_io_hint", text: /20 Mo au plus, avec 5 000 éléments au plus/
+  end
+
+  # ADR-0066, UDR-0053 §3: the schools help cites the DRENA by their prefixed slug.
+  test "the schools help gives an example and a list of DRENA slugs, all prefixed drena-" do
+    create_drena(name: "Abidjan 2")
+    sign_in_as @member
+
+    get new_teams_import_path(kind: "schools"), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "#import-help-schools pre code", text: /"drena": "drena-abidjan-1",.*"drena": "drena-abidjan-2"/m
+    assert_select "#import-help-schools pre code", text: /"drena": "abidjan-/, count: 0
+    assert_select "#import-help-drenas li code", "drena-abidjan-2"
   end
 
   test "an unknown kind has no upload form" do

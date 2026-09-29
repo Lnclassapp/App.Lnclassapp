@@ -5,7 +5,7 @@
 | **Statut** | Proposé |
 | **Date** | 2026-09-29 |
 | **Chantier** | [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md) — critères FU-01 à FU-54 |
-| **ADR lié** | [ADR-0068](../adr/0068-session-ouverte-a-l-acceptation-d-une-invitation.md) (session à l'acceptation) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script en ligne) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Safari 16.4, 60 Ko de JS) · [ADR-0031](../adr/0031-second-facteur-totp-pour-l-equipe.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) |
+| **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script en ligne) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Safari 16.4, 60 Ko de JS) · [ADR-0031](../adr/0031-second-facteur-totp-pour-l-equipe.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) |
 | **Amende** | UDR-0005, 0006, 0009, 0011, 0013, 0015, 0019, 0020, 0021, 0023, 0027, 0028, 0029, 0030, 0032, 0036, 0042, 0044, 0049, 0050, 0052 (section « Amendement du 2026-09-29 » de chacune) |
 | **Remplacé par** | — |
 
@@ -36,7 +36,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 7. **Copier** : un seul contrôleur, `clipboard`, qui remplace `classroom--join-code-copy` et la copie d'`identity--share`. On copie les **liens** (invitation équipe et direction, lien de classe `/c/<code>`, lien de parrainage, lien `/e/<code>`), les codes d'adhésion déjà copiables (classe, établissement) et les **codes de secours**. **Un code fait pour être dicté ne se copie pas** : code de la classe vu par l'élève (UDR-0011), code de récupération du PIN (UDR-0020).
 8. **Envoi automatique** : un contrôleur, `autosubmit`, qui envoie le formulaire **une seule fois** quand la valeur d'un champ correspond à un motif. Il sert au code du second facteur (6 chiffres, vérification et enrôlement) et au code de classe de `/join` (5 caractères valides). Le code de secours a **son propre champ**, sans envoi automatique, derrière le lien « J'utilise un code de secours » : un code de secours qui commencerait par six chiffres ne peut plus partir tronqué.
 9. **Codes de secours** : « Télécharger », « Copier », « Imprimer », puis la case « Je les ai gardés », obligatoire pour « Continuer ». Pas de téléchargement automatique : il peut être bloqué sans prévenir (iOS), et on ne saurait pas s'il a réussi.
-10. **Acceptation d'une invitation** : le formulaire reste ; le numéro invité est montré en lecture seule ; le focus est sur « Nom » ; « Créer mon compte » ouvre la session (ADR-0068) et mène à l'enrôlement du second facteur (équipe) ou à « Travail des élèves » (direction).
+10. **Acceptation d'une invitation** (décision du porteur du 2026-09-29) : le formulaire reste ; le focus est sur « Nom » ; « Créer mon compte » **n'ouvre pas** de session (UDR-0019 §2.4 et ADR-0050 inchangés) : la personne arrive sur « Se connecter » avec **son numéro pré-rempli** et le focus sur le PIN. Le numéro passe par la session Rails (cookie chiffré et signé), jamais par l'URL ni par le flash : une URL finit dans les journaux, l'historique et l'en-tête `Referer`, et tout le flash est rendu en toast. Le PIN n'est jamais pré-rempli.
 11. **Recherche pendant la frappe** sur quatre listes : établissements, catalogue, élèves d'une classe (enseignant et direction), « Débloquer un compte ». Le formulaire reste un `GET` qui marche sans JavaScript, visant un Turbo Frame ; le contrôleur `search` l'envoie après 300 ms sans frappe. Pendant la frappe, l'URL est **remplacée** (pas d'historique empilé). Les listes déroulantes de filtre (catalogue, établissements, DRENA du pilotage) partent au changement. « Débloquer un compte » reste une recherche par **numéro entier** : elle part quand le numéro est complet.
 12. **Pas d'index de recherche** : les tables cherchées sont petites (établissements : quelques milliers au plus ; cours : quelques centaines ; élèves d'une classe : moins de 100 ; comptes : égalité sur un index unique). Le délai de 300 ms et l'annulation par Turbo de la requête précédente bornent la charge. La mesure avant/après est au PRD §7 ; un index trigramme, s'il devenait nécessaire, passerait par le chantier de caching et un ADR.
 
@@ -49,7 +49,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 **Structure**
 - Helper `page_title(page)` dans `app/helpers/page_title_helper.rb` : pose `content_for(:page_title, page)` et **renvoie** le titre complet (« Page · Espace · Lnclass »). Un argument vide lève `ArgumentError` (« page_title : titre vide »).
 - Helper `document_title` (même fichier) : `[content_for(:page_title), espace, "Lnclass"].compact_blank.join(" · ")`. `espace` = `t("shared.page_title.spaces.<rôle>")` pour l'acteur connecté (`student` « Élève », `teacher` « Enseignant », `team` « Équipe », `school_admin` « Direction ») ; sans acteur (public, second facteur en cours), aucun espace.
-- `layouts/application` : `<title><%= document_title %></title>`. Tant que le Lot Z n'est pas passé, une vue qui pose encore `content_for :title` garde son titre tel quel (repli) ; le Lot Z retire le repli.
+- `layouts/application` : `<title><%= document_title %></title>`, sans toucher à `secret_response_meta_tag` (ADR-0031, `secrets-hors-cache`). Tant que le Lot Z n'est pas passé, une vue qui pose encore `content_for :title` garde son titre tel quel (repli) ; le Lot Z retire le repli.
 - **« Page »** est un seul segment, sans séparateur interne (ni « · », ni « — », ni « : ») : le libellé court de l'écran (« Établissements », « Débloquer un compte »), ou le nom de l'objet pour une page d'objet (le `h1` : « 3e A », « Lycée moderne de Cocody »). Exemples : « Accueil · Équipe · Lnclass », « Connexion · Lnclass », « Nouveau niveau · Équipe · Lnclass ».
 - Clé de locale : `<vue>.page_title`, sans suffixe « · Lnclass » (le helper l'ajoute). Les suffixes existants sont retirés.
 - **Modale** : sa vue appelle `page_title` (titre de la page si elle est ouverte directement par son URL) et passe le résultat à `ui_modal(document_title:)`. Le contrôleur `modal` pose ce titre sur `document.title` à l'ouverture et rend le précédent à la fermeture. Une confirmation rendue dans une page ne change pas le titre (pas de `document_title:`).
@@ -102,7 +102,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 - Déclenchement : `connect()` en mode `page` (chaque rendu Turbo Drive reconnecte `<body>`, re-rendu 422 compris) ; événement `modal:opened` (émis par le contrôleur `modal` juste après `showModal()`) en mode `dialog`.
 - `focus({ preventScroll: false })` ; aucun `select()` du texte.
 - **Plus aucun attribut `autofocus`** dans les vues : ils sont remplacés par `data-autofocus-target="field"` (option `autofocus: true` de `ui_field`, qui pose cet attribut).
-- Écrans qui déclarent une cible `field` sur une page : connexion (numéro), `/join` (code), vérification du second facteur (code, ou code de secours), acceptation d'une invitation (Nom), « Débloquer un compte » (numéro). Les autres pages publiques (`/c/<code>`, inscriptions, PIN oublié, enrôlement du second facteur) n'en déclarent pas : seul le cas 1 (erreur) s'y applique.
+- Écrans qui déclarent une cible `field` sur une page : connexion (numéro, ou PIN quand le numéro est pré-rempli après une invitation), `/join` (code), vérification du second facteur (code, ou code de secours), acceptation d'une invitation (Nom), « Débloquer un compte » (numéro). Les autres pages publiques (`/c/<code>`, inscriptions, PIN oublié, enrôlement du second facteur) n'en déclarent pas : seul le cas 1 (erreur) s'y applique.
 - Confirmations en `<dialog>` (désactiver, supprimer, générer, réinitialiser, régénérer) : le focus va sur « Annuler ». Sans cible `fallback` déclarée, le contrôleur prend le premier élément `[data-action~="modal#close"]` **du pied** de la modale (`components/_modal` marque le pied par `data-autofocus-footer`) ; la croix de l'en-tête, qui porte la même action, n'est jamais retenue. Aucune vue n'a donc à l'écrire.
 - Champ fichier (photo, import) : il est visé comme un autre ; le focus n'ouvre pas le sélecteur.
 
@@ -188,7 +188,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 
 ### 3.7 Codes de secours
 
-**Structure** (`identity/second_factor_enrollments/backup_codes`)
+**Structure** (`identity/second_factor_enrollments/backup_codes`, déjà rendue hors cache par `SecretResponse` : rien à ajouter ni à retirer)
 - Sous la grille des codes, `div.flex.flex-wrap.gap-3.print:hidden` : « Télécharger » (`arrow-down-tray`), « Copier » (`ui_copy_button`), « Imprimer » (`printer`), tous `secondary`, `sm`, `hidden` tant que leur contrôleur n'est pas connecté.
 - Contrôleur `download` (`app/javascript/controllers/download_controller.js`). Valeurs : `content` (texte du fichier, rendu par le serveur), `filename` (`lnclass-codes-de-secours.txt`). Actions : `save` (Blob `text/plain;charset=utf-8`, `URL.createObjectURL`, `a[download]` créé et cliqué, puis `revokeObjectURL`, toast « Fichier des codes de secours téléchargé. » cloné depuis un `<template>`) et `print` (`window.print()`).
 - Contenu du fichier : « Codes de secours Lnclass », la date, la consigne « Chaque code ne sert qu'une fois. », puis les 10 codes, un par ligne.
@@ -197,11 +197,13 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 
 ### 3.8 Acceptation d'une invitation
 
-**Structure** (`identity/invitations/show`)
-- En tête de la rubrique Identité, `input#invitation_contact[type=tel][readonly][autocomplete=username]` **sans `name`**, valeur = le numéro invité groupé par deux (« 01 00 00 00 09 »), libellé « Numéro de téléphone », aide « Vous vous connecterez avec ce numéro. » ; fond `bg-mist`, pas de bordure d'erreur possible.
-- « Nom » porte la cible `field` de l'auto-focus.
-- Succès (ADR-0068) : 303 vers la destination du rôle du compte créé (équipe : `new_identity_second_factor_enrollment_path` ; direction : `school_admin_classrooms_path`) ; toast « Votre compte est créé. Activez maintenant la vérification en deux étapes. » (équipe) ou « Votre compte est créé. Bienvenue sur Lnclass. » (direction). Le document est rechargé (nouveau nonce CSP, `start_session`).
-- L'encadré `bg-info-soft` de l'équipe dit « Après la création de votre compte, vous activerez la vérification en deux étapes. ».
+**Structure** (`identity/invitations/show`, puis `identity/sessions/new`)
+- Page d'acceptation : aucun champ de numéro (UDR-0019 §2.3 inchangé). « Nom » porte la cible `field` de l'auto-focus ; après un 422, le premier champ en erreur.
+- Succès (`Identity::InvitationsController#accept`) : `session[:login_contact] = <numéro du compte créé>` (10 chiffres normalisés), puis 303 vers `new_session_path` avec le toast actuel (UDR-0019 §2.4, amendement 2026-09-28 pour la direction). **Aucune session d'authentification n'est ouverte**, aucun paramètre d'URL n'est ajouté, rien n'est mis dans le flash.
+- « Se connecter » (`Identity::SessionsController#new`) : lit **et supprime** `session[:login_contact]` (`session.delete`), à usage unique. S'il est présent et valide (`Entities::Identity::Contact.normalize`), le champ numéro est rendu avec cette valeur, groupée par deux (« 01 00 00 00 09 »), modifiable, et le champ PIN porte la cible `field` de l'auto-focus ; sinon, rendu inchangé (focus sur le numéro).
+- Le champ PIN reste vide, `autocomplete="current-password"` ; le numéro `autocomplete="username"`.
+- Un rechargement de « Se connecter » perd le pré-remplissage (valeur consommée) : c'est voulu, la valeur ne vit qu'une requête.
+- L'encadré `bg-info-soft` de l'équipe (page d'acceptation) est inchangé.
 
 ### 3.9 Recherche pendant la frappe
 

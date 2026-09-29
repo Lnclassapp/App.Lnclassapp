@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-Sept finitions d'interface manquent ou varient d'un écran à l'autre ([audit](audit.md), [memo](memo.md)) : titre de l'onglet, lien de retour, auto-focus, aide à la demande, bouton « Copier », envoi automatique des gestes clés et recherche pendant la frappe. Le porteur a tranché le 2026-09-29 (memo, « Ce que le grill a révélé ») ; le caching et les secrets hors cache sont des chantiers séparés. Le chantier livre une brique commune par finition ([UDR-0054](../../decisions/udr/0054-finitions-d-interface.md)), l'applique écran par écran, et ouvre la session dès l'acceptation d'une invitation ([ADR-0068](../../decisions/adr/0068-session-ouverte-a-l-acceptation-d-une-invitation.md)).
+Sept finitions d'interface manquent ou varient d'un écran à l'autre ([audit](audit.md), [memo](memo.md)) : titre de l'onglet, lien de retour, auto-focus, aide à la demande, bouton « Copier », envoi automatique des gestes clés et recherche pendant la frappe. Le porteur a tranché le 2026-09-29 (memo, « Ce que le grill a révélé ») ; le caching et les secrets hors cache sont des chantiers séparés. Le chantier livre une brique commune par finition ([UDR-0054](../../decisions/udr/0054-finitions-d-interface.md)), l'applique écran par écran, et renvoie la personne qui accepte une invitation sur « Se connecter » avec son numéro pré-rempli.
 
 ## 2. Acteurs et permissions
 
@@ -12,7 +12,7 @@ Le chantier n'ajoute **aucun droit** : chaque écran garde sa règle d'autorisat
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| Public (non connecté) | Revenir à l'accueil public par le logo ; envoyer `/join` au 5ᵉ caractère valide ; accepter une invitation et arriver connecté | Voir le numéro d'une invitation sans en détenir le lien |
+| Public (non connecté) | Revenir à l'accueil public par le logo ; envoyer `/join` au 5ᵉ caractère valide ; après une invitation acceptée, trouver son numéro pré-rempli sur « Se connecter » | Voir un numéro pré-rempli par l'URL ou par un autre navigateur ; recevoir un PIN pré-rempli |
 | Élève | Voir des titres, retours et infobulles (badges, maîtrise) | Copier le code de sa classe (UDR-0011) |
 | Enseignant | Copier le code **et** le lien de sa classe ; chercher un élève de sa classe | Chercher un élève d'une classe qu'il n'enseigne pas (`ReadClassroomPolicy`, 403 inchangé) ; copier un code de récupération du PIN (UDR-0020) |
 | Équipe | Copier les liens d'invitation ; chercher pendant la frappe dans les établissements et « Débloquer un compte » ; second facteur à envoi automatique ; télécharger, copier, imprimer ses codes de secours | Chercher un compte par numéro partiel (UDR-0020, inchangé) ; continuer après l'activation sans confirmer « Je les ai gardés » |
@@ -22,7 +22,7 @@ Le chantier n'ajoute **aucun droit** : chaque écran garde sa règle d'autorisat
 
 ### Chemin nominal
 
-1. **Équipe, invitation** : la personne invitée ouvre le lien ; le numéro invité s'affiche en lecture seule et le focus est sur « Nom » ; elle remplit, clique « Créer mon compte » ; elle arrive **connectée** sur l'activation du second facteur ; elle scanne le QR code, tape 6 chiffres : le code part seul ; elle voit ses 10 codes, les télécharge, coche « Je les ai gardés », clique « Continuer » et arrive sur l'accueil « Accueil · Équipe · Lnclass ».
+1. **Équipe, invitation** : la personne invitée ouvre le lien ; le focus est sur « Nom » ; elle remplit, clique « Créer mon compte » ; elle arrive sur « Se connecter » avec **son numéro déjà rempli** et le focus sur le PIN ; elle tape son PIN ; sur l'activation du second facteur, elle scanne le QR code et tape 6 chiffres : le code part seul ; elle voit ses 10 codes, les télécharge, coche « Je les ai gardés », clique « Continuer » et arrive sur l'accueil « Accueil · Équipe · Lnclass ».
 2. **Équipe, établissements** : elle tape « coc » dans la recherche ; 300 ms après la dernière frappe, la liste se met à jour sans rechargement et le nombre de résultats est annoncé ; elle choisit une DRENA, la liste part aussitôt ; elle ouvre une fiche, puis revient par « Établissements » à la **même liste filtrée** ; elle invite la direction et copie le lien d'un clic (« Lien copié. »).
 3. **Enseignant, classe** : il ouvre sa classe, copie le lien `/c/<code>` ; tape « awa » dans « Chercher un élève », retrouve Awa Bamba et génère son code de récupération (qui se dicte, sans « Copier ») ; revient par « Accueil ».
 4. **Direction** : sur « Travail des élèves », elle ouvre l'aide de « Taux de rendu » d'un toucher, lit la définition ; ouvre une classe, cherche un élève, revient par « Travail des élèves ».
@@ -37,9 +37,10 @@ Le chantier n'ajoute **aucun droit** : chaque écran garde sa règle d'autorisat
 | Code de secours | Lien « J'utilise un code de secours » → champ séparé, sans envoi automatique ; « Vérifier » à la main |
 | Sans JavaScript | Titres, retours, infobulles (`<details>`), recherche (bouton « Filtrer »), bascule du code de secours et confirmation « Je les ai gardés » marchent ; « Copier », « Télécharger », « Imprimer » sont absents ; rien ne part seul |
 | Presse-papiers refusé (page hors HTTPS, navigateur) | Toast d'avertissement « La copie a échoué : sélectionnez le texte et copiez-le à la main. » |
-| Invitation invalide à l'envoi (champ manquant) | 422, **aucune session**, focus sur le premier champ en erreur |
-| Invitation périmée, servie ou révoquée | Message seul, aucune session (inchangé) |
-| Numéro devenu un compte entre-temps | 422, alerte en tête, aucune session (inchangé) |
+| Invitation invalide à l'envoi (champ manquant) | 422, focus sur le premier champ en erreur, rien n'est gardé pour « Se connecter » |
+| « Se connecter » rechargée après une acceptation | Numéro plus pré-rempli (valeur à usage unique) |
+| Invitation périmée, servie ou révoquée | Message seul (inchangé) |
+| Numéro devenu un compte entre-temps | 422, alerte en tête (inchangé) |
 | Recherche d'un seul caractère | Rien ne part ; effacer le champ ré-affiche toute la liste |
 | « Débloquer un compte », numéro incomplet | Rien ne part ; numéro complet (10 chiffres, ou avec `+225`/`00225`) → recherche exacte |
 | Recherche sans résultat | État vide « Aucun … ne correspond » avec « Effacer la recherche » |
@@ -274,33 +275,35 @@ Quand l'utilisateur clique un bouton de copie
 Alors le toast « La copie a échoué : sélectionnez le texte et copiez-le à la main. » s'affiche
 ```
 
-### Acceptation d'une invitation (ADR-0068)
+### Acceptation d'une invitation
 
 ```gherkin
 # FU-30
-Étant donné une invitation valable pour le 01 00 00 00 09
+Étant donné une invitation valable
 Quand la personne invitée ouvre le lien
-Alors le numéro « 01 00 00 00 09 » est affiché en lecture seule
-Et le focus est sur le champ « Nom »
-Et le formulaire n'envoie aucun numéro
+Alors le focus est sur le champ « Nom »
+Et aucun champ de numéro n'est affiché
 
 # FU-31
-Étant donné une invitation d'équipe valable
+Étant donné une invitation d'équipe valable pour le 01 00 00 00 09
 Quand la personne invitée envoie un formulaire valide
-Alors une session est ouverte pour le nouveau compte, avec un nouvel identifiant de session
-Et elle arrive sur l'activation du second facteur sans passer par « Se connecter »
-Et « /teams » la renvoie à l'activation tant que le second facteur n'est pas actif
+Alors aucune session d'authentification n'est ouverte
+Et elle arrive sur « Se connecter » avec le numéro « 01 00 00 00 09 » pré-rempli et le champ PIN vide
+Et le focus est sur le champ PIN
+Et ni l'URL de redirection ni le flash ne contiennent le numéro
 
 # FU-32
-Étant donné une invitation de direction valable
-Quand la personne invitée envoie un formulaire valide
-Alors elle arrive connectée sur « Travail des élèves »
+Étant donné la personne arrivée sur « Se connecter » avec son numéro pré-rempli
+Quand elle recharge la page
+Alors le champ numéro est vide
+Et une invitation de direction acceptée mène de même à « Se connecter », numéro pré-rempli, puis à « Travail des élèves » après le PIN
 
 # FU-33
 Étant donné une invitation valable
 Quand la personne invitée envoie un formulaire sans nom
-Alors la page est re-rendue en 422, aucune session n'est ouverte
+Alors la page est re-rendue en 422
 Et le focus est sur le champ « Nom »
+Et une visite de « Se connecter » ensuite n'a pas de numéro pré-rempli
 ```
 
 ### Envoi automatique et second facteur
@@ -466,17 +469,16 @@ Et le contrôleur « classroom--join-code-copy » n'existe plus
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | `UseCases::Identity::AcceptInvitation` : port de sessions injecté, `#call(token:, dto:, ip:, user_agent:)` → `success(Accepted(user:, token:))` (ADR-0068). Aucune entité, aucun port nouveau. |
+| Domaine | Rien. `AcceptInvitation` renvoie déjà le compte créé, dont le contrôleur lit le numéro. Aucune entité, aucun port, aucun contrat modifié. |
 | Infrastructure | `Queries::Shared::TextSearch` (fragment de recherche sans casse ni accents). Paramètre `search:` sur `Queries::Catalog::CourseCatalogQuery`, `Queries::Classroom::ClassroomOverviewQuery` (élèves) et `Queries::School::StudentWorkQuery` (élèves d'une classe). `school_public_id` ajouté à `Queries::Classroom::ClassroomHeaderQuery::Row`. **Aucune migration, aucun index.** |
-| Delivery | `Identity::InvitationsController#accept` (session, destination du rôle) ; `Identity::SecondFactorsController#new/#create` (paramètre `backup`) ; lecture de `q` dans `Catalog::CoursesController`, `Classroom::ClassroomsController`, `SchoolAdmin::ClassroomsController`. **Aucune route nouvelle.** |
+| Delivery | `Identity::InvitationsController#accept` (`session[:login_contact]`) ; `Identity::SessionsController#new` (lecture unique de `session[:login_contact]`) ; `Identity::SecondFactorsController#new/#create` (paramètre `backup`) ; lecture de `q` dans `Catalog::CoursesController`, `Classroom::ClassroomsController`, `SchoolAdmin::ClassroomsController`. **Aucune route nouvelle.** |
 | UI | Helpers `page_title`, `document_title`, `back_href`, `ui_back_link`, `ui_page_header(back:)`, `ui_info_tip`, `ui_copy_button`, `ui_modal(document_title:)` ; partials `components/_back_link`, `_info_tip`, `_copy_button` ; contrôleurs Stimulus `clipboard`, `autofocus`, `autosubmit`, `search`, `download` ; suppression de `classroom--join-code-copy` ; utilitaire CSS `summary-plain` ; ≈ 75 vues touchées (titre, retour, auto-focus, infobulle, copie, recherche). |
 
 ## 6. Décisions rattachées
 
-- [ADR-0068](../../decisions/adr/0068-session-ouverte-a-l-acceptation-d-une-invitation.md) — l'acceptation d'une invitation ouvre la session. Complète ADR-0050, amende ADR-0065 et UDR-0019 §2.4. `Proposé`.
-- **Pas d'ADR de recherche** : aucun index ni extension (UDR-0054 §2.12, mesure au §7). Un index trigramme éventuel relèverait du chantier de caching.
+- **Aucun ADR** : l'authentification ne change pas (ADR-0050 et UDR-0019 §2.4 tenus : pas de session à l'acceptation, décision du porteur du 2026-09-29) ; la recherche n'ajoute ni index ni extension (UDR-0054 §2.12, mesure au §7).
 - [UDR-0054](../../decisions/udr/0054-finitions-d-interface.md) — finitions d'interface. `Proposé`.
-- Amendements datés du 2026-09-29 (`Proposé`) : UDR-0005 (briques), 0006 (titre, retour, auto-focus, toasts à l'impression), 0009 (`/join`), 0011 (copie toujours interdite), 0013 (recherche du catalogue, retour de la page cours), 0015, 0021, 0023, 0028, 0029, 0030 (libellés de retour et titres), 0019 (copie, numéro, session), 0020 (recherche pendant la frappe, copie toujours interdite), 0027 (contrôleur de copie, lien de classe, retour selon le rôle, recherche d'élève), 0032 (infobulle du badge), 0036 (recherche, retour filtré), 0042 (focus des confirmations), 0044 (contrôleur de copie), 0049 (DRENA au changement, infobulles), 0050 (copie du partage, retours, infobulles de Croissance), 0052 (retour, recherche, infobulles de la direction).
+- Amendements datés du 2026-09-29 (`Proposé`) : UDR-0005 (briques), 0006 (titre, retour, auto-focus, toasts à l'impression), 0009 (`/join`), 0011 (copie toujours interdite), 0013 (recherche du catalogue, retour de la page cours), 0015, 0021, 0023, 0028, 0029, 0030 (libellés de retour et titres), 0019 (copie, numéro pré-rempli sur « Se connecter », focus), 0020 (recherche pendant la frappe, copie toujours interdite), 0027 (contrôleur de copie, lien de classe, retour selon le rôle, recherche d'élève), 0032 (infobulle du badge), 0036 (recherche, retour filtré), 0042 (focus des confirmations), 0044 (contrôleur de copie), 0049 (DRENA au changement, infobulles), 0050 (copie du partage, retours, infobulles de Croissance), 0052 (retour, recherche, infobulles de la direction).
 
 ## 7. Mesures
 

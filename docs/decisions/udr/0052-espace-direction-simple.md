@@ -92,4 +92,4 @@ Le libellé d'une destination se lit sous sa clé (`shared.navigation.<clé>`, p
 - **Chercher un élève** : la page d'une classe gagne `form#student-work-search` (GET, champ `q`, contrôleur `search`) et le frame `student_work_students` ; la recherche ne lit que les élèves de cette classe ; état vide « Aucun élève ne correspond ». Aucun identifiant d'élève n'entre dans le HTML (inchangé).
 - **Infobulles** : « Taux de rendu », « Moyenne », « Score moyen » et la légende de « — », sur la liste et sur la page d'une classe (UDR-0054 §3.4).
 - Titres : « Travail des élèves · Direction · Lnclass », « <nom de la classe> · Direction · Lnclass » (au lieu du nom brut).
-- Ces règles s'appliquent à la version de ces écrans en place au moment du lot : le chantier `espace-direction` les réécrit (plan de `finitions-ux`, collisions entre chantiers).
+- Ces règles s'appliquent aux pages de cette UDR, en production depuis la V2 simple.

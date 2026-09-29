@@ -101,7 +101,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         click_on t("teams.drenas.new.submit")
       end
       assert_toast "DRENA « Abidjan 1 » créée."
-      assert_selector "#drenas tr", text: /Abidjan 1\s+abidjan-1/
+      assert_selector "#drenas tr", text: /Abidjan 1\s+drena-abidjan-1/
     end
 
     team_sets_the_classroom_plan
@@ -151,7 +151,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # nothing else exists in the referential.
   def import_the_lycee
     file = json_file("ecoles", {
-      "format" => "lnclass.schools", "version" => Entities::Catalog::ImportKind::VERSION, "drena" => "abidjan-1",
+      "format" => "lnclass.schools", "version" => Entities::Catalog::ImportKind::VERSION, "drena" => "drena-abidjan-1",
       "schools" => [ { "name" => SCHOOL, "schoolsigle" => "LCA", "schoolstatus" => "active", "schooltype" => "public" } ]
     })
 
