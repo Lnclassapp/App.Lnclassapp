@@ -48,6 +48,22 @@ module Repositories
         assert_equal Entities::Identity::Actor.new(user_id: teacher.id, role: :teacher, school_id: school.id), actor
       end
 
+      # ADR-0065 : une direction se connecte par PIN, et son acteur porte l'établissement de son rattachement.
+      test "a school admin signs in by PIN and their actor carries their school" do
+        school = create_school
+        admin = create_school_admin(school:, pin: "1357")
+
+        assert_equal admin.id, @repository.authenticate(contact: admin.contact, pin: "1357").id
+        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: school.id),
+                     @repository.actor_for(user_id: admin.id)
+      end
+
+      test "actor_for gives a school admin without attachment no school" do
+        admin = create_user(role: "school_admin")
+
+        assert_nil @repository.actor_for(user_id: admin.id).school_id
+      end
+
       test "actor_for carries the team role and no school" do
         member = create_team_member(team_role: "content")
 

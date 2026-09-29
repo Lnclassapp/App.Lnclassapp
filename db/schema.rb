@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_29_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -326,7 +326,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.index ["token_digest"], name: "index_invitations_on_token_digest", unique: true
     t.check_constraint "\"position\"::text = ANY (ARRAY['principal'::character varying, 'censor'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "invitations_position_values"
     t.check_constraint "contact::text ~ '^0[157][0-9]{8}$'::text", name: "invitations_contact_format"
-    t.check_constraint "kind::text <> 'school_staff'::text OR school_id IS NOT NULL AND \"position\" IS NOT NULL", name: "invitations_staff_has_school"
+    t.check_constraint "kind::text <> 'school_staff'::text OR school_id IS NOT NULL", name: "invitations_staff_has_school"
     t.check_constraint "kind::text <> 'team'::text OR team_role IS NOT NULL", name: "invitations_team_has_role"
     t.check_constraint "kind::text = ANY (ARRAY['team'::character varying, 'school_staff'::character varying]::text[])", name: "invitations_kind_values"
     t.check_constraint "team_role::text = ANY (ARRAY['admin'::character varying, 'content'::character varying, 'field'::character varying]::text[])", name: "invitations_team_role_values"
@@ -473,6 +473,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.check_constraint "(status::text = 'pending'::text) = (decided_at IS NULL)", name: "school_join_requests_decided_iff_not_pending"
     t.check_constraint "decided_via::text = ANY (ARRAY['team'::character varying, 'sponsor'::character varying]::text[])", name: "school_join_requests_decided_via_values"
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'approved'::character varying, 'rejected'::character varying]::text[])", name: "school_join_requests_status_values"
+  end
+
+  create_table "school_staffs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "invited_by_id"
+    t.bigint "school_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["invited_by_id"], name: "index_school_staffs_on_invited_by_id"
+    t.index ["school_id"], name: "index_school_staffs_on_school_id"
+    t.index ["user_id"], name: "index_school_staffs_on_user_id", unique: true
   end
 
   create_table "schools", force: :cascade do |t|
@@ -808,6 +818,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
   add_foreign_key "school_join_requests", "schools", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "decided_by_id", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "teacher_id", on_delete: :restrict
+  add_foreign_key "school_staffs", "schools", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", column: "invited_by_id", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", on_delete: :restrict
   add_foreign_key "schools", "drenas", on_delete: :restrict
   add_foreign_key "sessions", "users", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade

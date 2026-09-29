@@ -1,0 +1,36 @@
+# Invitation de la direction d'un établissement (chantier espace-direction-simple, Lot A) — DS-01 à DS-04, ADR-0065, UDR-0052
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/school_staff_invitation_input:
+        contact: "Numéro de la personne invitée"
+        school: "Établissement"
+    errors:
+      models:
+        dtos/identity/school_staff_invitation_input:
+          attributes:
+            contact:
+              blank: "Saisissez le numéro de la personne invitée."
+              invalid: "Saisissez un numéro ivoirien à 10 chiffres, par exemple 01 02 03 04 05."
+              taken: "Ce numéro a déjà un compte Lnclass."
+              already_invited: "Une invitation attend déjà ce numéro."
+            school:
+              inactive: "Cet établissement n'est pas actif."
+  teams:
+    staff_invitations:
+      new:
+        title: "Inviter la direction"
+        intro: "La personne invitée verra les enseignants et le travail des élèves de %{school}."
+        contact_placeholder: "07 00 00 00 00"
+        contact_hint: "10 chiffres. Ce numéro lui servira à se connecter."
+        submit: "Créer l'invitation"
+        cancel: "Annuler"
+      create:
+        created: "Invitation créée"
+      created:
+        title: "Invitation créée"
+        summary: "Invitation pour le %{contact}, direction de %{school}."
+        link: "Lien d'invitation"
+        instructions: "Transmettez ce lien à la personne invitée ; il expire dans 72 h."
+        once: "Ce lien ne s'affiche qu'une fois. Copiez-le avant de fermer cette fenêtre."
+        close: "Fermer"
