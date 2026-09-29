@@ -67,3 +67,36 @@ Un lot vertical qui aurait besoin d'en changer une s'arrête : le Lot 0 rouvre.
 - `COVERAGE=0 bin/rails test:system` : 208 runs, 2562 assertions, 0 échec, 0 erreur, 0 skip.
 - `bin/brakeman -q --no-pager` : 0 avertissement.
 - `bin/check-asset-budget` : `application.js` 41,8 Ko gzip / 60 Ko.
+
+## Lot G — Direction (2026-09-29)
+
+Branche `feature/finitions-ux-lot-g`, depuis `feature/finitions-ux` (Lot 0 fusionné). Critères couverts : FU-10 (classe, direction), FU-11 (direction), FU-21, FU-49 ; titres « Travail des élèves », « <classe> », « Enseignants » · Direction · Lnclass (FU-06 côté direction).
+
+- **Retour** : le bouton `ghost` `arrow-left` de la page d'une classe devient `ui_page_header(back: { label: "Travail des élèves", href: school_admin_classrooms_path })`.
+- **Infobulles** (textes de l'UDR-0054 §3.4 repris tels quels, clés `school_admin.classrooms.tips.*`) : « Taux de rendu » et « Moyenne » en en-tête de colonne (liste) et sur les tuiles (classe), « Score moyen » en en-tête de colonne, légende « — Chiffre non calculé » sous chaque tableau avec l'aide de « — ». La phrase `average_rule` de la liste est retirée : l'aide de « Moyenne » la contient.
+- **Recherche d'un élève** : `form#student-work-search` (GET, `q`, contrôleur `search`, `role="search"`), frame `student_work_students` avec compteur `aria-live` et état vide « Aucun élève ne correspond » + « Effacer la recherche » (`_top`) ; absent sur une classe sans élève. Les tuiles et le sous-titre restent ceux de la classe entière.
+
+### Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-09-29 | La recherche filtre dans le contrôleur les élèves **déjà lus** par `StudentWorkQuery#classroom`, avec `Queries::Shared::TextSearch.normalize` des deux côtés (sans casse ni accents, sous-chaîne) ; `student_work_query.rb` **n'est pas modifié** (écart au champ `Fichiers` du plan, qui prévoyait `search:`) | Consigne de l'orchestrateur : un chantier perf parallèle réécrit `StudentWorkQuery`. Une classe compte au plus quelques dizaines d'élèves déjà chargés : aucune requête en plus, même résultat que le `LIKE` serveur | Non |
+| 2026-09-29 | `role` et `aria-label` du formulaire passés par `html:` | `form_with` ignore ces options au premier niveau (vérifié au rendu) | Non |
+
+### Ce qui a dérapé
+
+- `test/infrastructure/queries/school/student_work_query_test.rb` (champ `Test associé`) n'est pas touché, la requête ne changeant pas : FU-49 est prouvé par `test/controllers/school_admin/classrooms_controller_test.rb` et `test/system/finitions/school_admin_test.rb`. Si le chantier perf veut porter la recherche en SQL, il ajoute `search:` à la requête et le contrôleur n'a plus qu'à la lui passer.
+- Constaté hors lot : le formulaire de recherche de `/design` (`design/index`, Lot 0) passe `role:` et `"aria-label":` au premier niveau de `form_with` : ils ne sont pas rendus. À corriger au Lot Z (ou par les lots E et F s'ils recopient ce motif).
+
+### Dette laissée derrière
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| État d'erreur du frame `student_work_students` (UDR-0054 §3.9 : `ui_error_state` + « Réessayer » sur une réponse non 2xx) | Aucune brique du Lot 0 ne le fournit (il faudrait un gestionnaire `turbo:frame-missing`) ; une classe devenue inaccessible rend la page 404 entière | Lot 0 rouvert ou Lot Z |
+
+### Vérifications (tests du lot seulement)
+
+- `COVERAGE=0 bin/rails test test/controllers/school_admin/classrooms_controller_test.rb` : 14 runs, 0 échec (7 nouveaux cas écrits d'abord, rouges faute de retour, d'aides, de formulaire et de clés).
+- `COVERAGE=0 bin/rails test test/system/finitions/school_admin_test.rb test/system/school_admin/student_work_test.rb` : 4 runs, 0 échec.
+- `COVERAGE=0 bin/rails test test/i18n/locale_files_test.rb test/controllers/school_admin/teachers_controller_test.rb` : 11 runs, 0 échec.
+- `bin/rubocop` sur les fichiers Ruby du lot : aucune offense.

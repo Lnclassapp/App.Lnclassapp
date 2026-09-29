@@ -1,7 +1,7 @@
 <%# 🌐 UI · school_admin/teachers/index — « Enseignants » de la direction (DS-06) %>
 <%# Rôle : une ligne par enseignant : nom, matière, classes de l'année ; lecture seule, ni identifiant ni numéro %>
-<%# ADR  : 0065 · UDR : 0005, 0052 %>
-<% content_for :title, t(".title") %>
+<%# ADR  : 0065 · UDR : 0005, 0052, 0054 %>
+<% page_title t(".page_title") %>
 <% content_for :nav_key, "teachers" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, count: @overview.teachers.size) %>
 

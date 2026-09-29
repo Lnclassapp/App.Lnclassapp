@@ -1,9 +1,17 @@
 # Travail des élèves de la direction (chantier espace-direction-simple, Lot C, DS-05, DS-07 à DS-10) — UDR-0052, ADR-0065
+# Finitions (chantier finitions-ux, Lot G) : infobulles, retour, recherche d'un élève — UDR-0054 §3.4, §3.9
 fr:
   school_admin:
     classrooms:
       percent: "%{value} %"
       not_computed: "non calculé"
+      tips:
+        submission_rate: "Part des devoirs rendus : devoirs rendus par les élèves ÷ (élèves × devoirs donnés). Un devoir est rendu quand l'élève a terminé au moins un exercice de ce devoir."
+        average: "Moyenne des scores des exercices rendus par les élèves de la classe. Elle s'affiche à partir de 5 élèves ayant rendu un devoir."
+        student_average: "Moyenne des scores de l'élève sur les exercices qu'il a rendus dans cette classe."
+        missing: "— : pas encore de chiffre (aucun élève, aucun devoir, ou moins de 5 élèves pour une moyenne)."
+      legend:
+        label: "Chiffre non calculé"
       index:
         page_title: "Travail des élèves"
         title: "Travail des élèves"
@@ -15,7 +23,6 @@ fr:
           assignments: "Devoirs donnés"
           submission_rate: "Taux de rendu"
           average: "Moyenne"
-        average_rule: "La moyenne s'affiche à partir de 5 élèves ayant rendu un devoir."
         empty: "Aucune classe cette année"
       show:
         back: "Travail des élèves"
@@ -33,3 +40,12 @@ fr:
           average: "Score moyen"
         submitted: "%{count} / %{total}"
         empty: "Aucun élève dans cette classe"
+        search:
+          label: "Chercher un élève"
+          submit: "Chercher"
+          count:
+            zero: "Aucun élève ne correspond"
+            one: "1 élève"
+            other: "%{count} élèves"
+          empty: "Aucun élève ne correspond"
+          clear: "Effacer la recherche"
