@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+# Counts the GitHub Actions minutes a CI run bills (chantier ci-quota): each job is billed by the minute started,
+# so a job of 5 s costs 1 minute and a job of 2 min 01 costs 3.
+#
+#   script/ci/billed_minutes <run-id> [<run-id> …]          # reads the jobs with `gh api`
+#   script/ci/billed_minutes jobs.json [more.json …]         # or the saved answer of GET /actions/runs/<id>/jobs
+#
+# For each run: its jobs, their duration, the bin/ci step inside them, the minutes billed. Then the median.
+# The billing API (GET /actions/runs/<id>/timing) answers 0 ms on this repository: the jobs' timestamps are the source.
+require "json"
+require "open3"
+require "time"
+
+REPOSITORY = ENV.fetch("GITHUB_REPOSITORY", "Lnclassapp/App.Lnclassapp")
+
+def jobs_of(source)
+  return JSON.parse(File.read(source))["jobs"] if File.file?(source)
+
+  out, status = Open3.capture2("gh", "api", "repos/#{REPOSITORY}/actions/runs/#{source}/jobs?per_page=100")
+  abort "❌ Run #{source} unreadable (gh api)." unless status.success?
+  JSON.parse(out)["jobs"]
+end
+
+def seconds(from, to) = (from && to) ? (Time.parse(to) - Time.parse(from)).round : nil
+
+def median(values)
+  sorted = values.sort
+  (sorted[(sorted.size - 1) / 2] + sorted[sorted.size / 2]) / 2.0
+end
+
+runs = ARGV.map do |source|
+  listed = jobs_of(source)
+  jobs = listed.filter_map do |job|
+    duration = seconds(job["started_at"], job["completed_at"]) or next
+    work = job["steps"].find { |step| step["name"].start_with?("Run bin/ci") }
+    { name: job["name"], duration:, billed: [ (duration / 60.0).ceil, 1 ].max,
+      work: work && seconds(work["started_at"], work["completed_at"]) }
+  end
+  abort "❌ #{source}: no job ran." if jobs.empty?
+
+  wall = seconds(listed.filter_map { |job| job["created_at"] }.min, listed.filter_map { |job| job["completed_at"] }.max)
+  run = { source:, jobs:, wall:, duration: jobs.sum { |job| job[:duration] },
+          billed: jobs.sum { |job| job[:billed] }, work: jobs.sum { |job| job[:work].to_i } }
+
+  puts "Run #{source}: #{jobs.size} jobs · wall #{run[:wall]} s · jobs #{run[:duration]} s · " \
+       "bin/ci #{run[:work]} s · billed #{run[:billed]} min"
+  jobs.each { |job| puts format("  %-28s %5d s  %2d min  bin/ci %s", job[:name], job[:duration], job[:billed], job[:work] || "-") }
+  run
+end
+
+exit if runs.size < 2
+
+puts "Median over #{runs.size} runs: billed #{median(runs.map { |run| run[:billed] })} min · " \
+     "wall #{median(runs.map { |run| run[:wall] })} s · bin/ci #{median(runs.map { |run| run[:work] })} s"
