@@ -1,11 +1,15 @@
 <%# 🌐 UI · classroom/joins/new — /c/<code> : aperçu de la classe, puis inscription (visiteur) ou bouton « Rejoindre » (élève) %>
 <%# Rôle : code inconnu en 404, débit dépassé en 429 sans aperçu ; échec re-rendu en 422 (ou 403 avec sa raison) par Turbo %>
-<%# ADR  : 0040, 0041, 0050 · UDR : 0005, 0009 %>
-<% content_for :title, t(".page_title") %>
-<main class="grid min-h-dvh bg-paper md:grid-cols-2">
+<%# ADR  : 0040, 0041, 0050 · UDR : 0005, 0009, 0054 (§3.2 : logo vers l'accueil public ; aucun focus d'arrivée) %>
+<% page_title t(".page_title") %>
+<%# Le re-rendu 422 est un morphing : <body> ne se reconnecte pas, le focus repart à « turbo:morph » (UDR-0054 §3.3). %>
+<main class="grid min-h-dvh bg-paper md:grid-cols-2" data-action="turbo:morph@document->autofocus#focus">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
     <div class="max-w-sm text-center">
-      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-6 size-16 rounded-card object-cover shadow-card" %>
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
+      <% end %>
       <p class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></p>
       <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
     </div>
@@ -13,7 +17,10 @@
 
   <section class="flex flex-col items-center justify-center px-gutter py-10">
     <div class="mb-8 text-center md:hidden">
-      <%= image_tag "logo/lnclass.jpeg", alt: "Lnclass", class: "mx-auto mb-3 size-14 rounded-card object-cover shadow-card" %>
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto mb-3 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+      <% end %>
       <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
     </div>
 

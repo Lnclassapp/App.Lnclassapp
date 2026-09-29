@@ -24,6 +24,8 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
 
       assert_selector "#teacher_registration_school_code_error", text: I18n.t("#{ERRORS}.school_code.inclusion")
       assert_no_text "Lycée fermé"
+      # FU-17 (UDR-0054 §3.3): after a 422, the focus is on the field in error.
+      assert_selector "#teacher_registration_school_code[aria-invalid=true]:focus"
 
       fill_in "teacher_registration[school_code]", with: "k7m 4qz"
       fill_in "teacher_registration[pin]", with: "4821"
@@ -33,6 +35,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
       assert_selector "#teacher_registration_pin_confirmation_error",
                       text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
       assert_selector "#school-preview", text: "Lycée Classique d'Abidjan"
+      assert_selector "#teacher_registration_pin_confirmation:focus"
     end
     assert_field "teacher_registration[last_name]", with: "Kouassi"
     assert_equal 0, Orm::User.count
@@ -45,6 +48,15 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     assert_current_path teacher_classrooms_path
     teacher = Orm::User.find_by!(contact: "0501020304", role: "teacher")
     assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
+  end
+
+  test "FU-19: no field takes the focus on arrival; the school code has its help, read with a touch" do
+    visit new_teacher_registration_path
+
+    assert_title "Inscription enseignant · Lnclass"
+    assert_equal "BODY", page.evaluate_script("document.activeElement.tagName")
+    find("#teacher-registration-form details summary").click
+    assert_text I18n.t("#{FORM}.school_code_info_tip")
   end
 
   test "CE-02: the link shows the school and its DRENA, and the sign-up attaches the teacher to it" do

@@ -1,14 +1,16 @@
-# PIN oublié : nouveau PIN par code de récupération — ADR-0032
+# PIN oublié : nouveau PIN par code de récupération — ADR-0032 ; logo et retour — UDR-0054
 fr:
   identity:
     pin_resets:
       new:
-        page_title: "PIN oublié · Lnclass"
+        page_title: "PIN oublié"
+        logo_home: "Lnclass, accueil"
         title: "PIN oublié"
         subtitle: "Saisissez le code de récupération remis par votre enseignant ou par l'équipe."
         code_hint: "8 chiffres, valable 15 minutes."
         pin_hint: "4 chiffres."
         submit: "Enregistrer le nouveau PIN"
-        back: "Retour à la connexion"
+        # Lien de retour : le nom de la page d'arrivée (UDR-0054 §3.2).
+        back: "Se connecter"
       create:
         pin_changed: "Votre nouveau PIN est enregistré. Connectez-vous."

@@ -141,6 +141,19 @@ Branche `feature/finitions-ux-lot-b`, depuis `feature/finitions-ux` (Lot 0 fusio
 
 Critères couverts : FU-12, FU-34, FU-35, FU-36, FU-37, FU-38, FU-39, FU-40, FU-41, FU-42, FU-43, FU-53 (vérification, codes de secours) — `test/system/finitions/second_factor_test.rb` (9 cas), `test/controllers/identity/second_factors_controller_test.rb`, `test/controllers/identity/second_factor_enrollments_controller_test.rb`, `test/system/identity/sign_in_test.rb`.
 
+## Lot A — Entrée publique et invitation (2026-09-29)
+
+Branche `feature/finitions-ux-lot-a`, depuis `feature/finitions-ux` (Lot 0 fusionné). Critères : FU-03, FU-13, FU-17, FU-19, FU-30, FU-31, FU-32, FU-33, FU-44, FU-53 (acceptation d'une invitation). Briques du Lot 0 utilisées telles quelles (`page_title`, `ui_back_link`, `ui_info_tip`, `ui_field(autofocus:)`, contrôleurs `autofocus` et `autosubmit`) ; aucune modifiée.
+
+### Ce qui a été fait
+
+- **Invitation** : `InvitationsController#accept` pose `session[:login_contact]` (numéro normalisé du compte créé) avant le 303 vers « Se connecter » ; aucune session d'authentification, rien dans l'URL ni dans le flash. « Nom » est la cible `field` de l'auto-focus. Titre « Créer mon compte · Lnclass » pour les deux variantes (équipe, direction), comme le dit l'amendement de l'UDR-0019 ; les deux anciennes clés `team.page_title` et `school_staff.page_title` sont retirées.
+- **Se connecter** : `SessionsController#new` lit **et supprime** `session[:login_contact]` (avant la redirection d'une personne déjà connectée, pour qu'il ne survive pas) ; numéro valide → champ rendu groupé par deux, cible `field` sur le PIN ; sinon cible sur le numéro. Numéro `autocomplete="username"` (UDR-0054 §3.8). Infobulle du PIN.
+- **Pages publiques** : le logo (les deux, colonne large et en-tête mobile) est un lien « Lnclass, accueil » vers `root_path`, `alt=""` sur l'image (le lien porte le nom). « PIN oublié » gagne un logo (il n'en avait pas) et le lien de retour « Se connecter » remplace le lien texte (la clé `back` est gardée, sa valeur devient « Se connecter » : `test/system/error_paths_test.rb` la lit).
+- **`/join`** : `autosubmit` (motif de l'UDR-0054 §3.6), aide « 3 lettres puis 2 chiffres. La classe s'ouvre dès le code complet. », région `status` ; « Continuer » reste.
+- **Inscription enseignant** : infobulle « Code d'établissement » ; focus sur le champ fautif après un 422.
+- **Titres** : « Connexion », « PIN oublié », « Inscription enseignant », « Rejoindre une classe », « Rejoindre ma classe », « Accès interdit », « Page introuvable », « Accueil » (landing), par `page_title`, sans suffixe dans les locales.
+
 ### Décisions prises en cours de route
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
@@ -185,6 +198,14 @@ Aucune.
 - Tests rouges d'abord : `test/system/finitions/team_accounts_test.rb` (7/7 en échec sur la base, pour la bonne raison), assertions ajoutées aux tests de contrôleur (4 échecs).
 - `COVERAGE=0 bin/rails test` sur `test/controllers/teams/{account_lookups,invitations,dashboards,growth,homes}_controller_test.rb`, `test/system/finitions/team_accounts_test.rb`, `test/system/teams/{account_unlock,dashboard,growth,team_home}_test.rb`, `test/i18n/locale_files_test.rb` : 0 échec, 0 erreur.
 - `bin/rubocop` sur les fichiers Ruby touchés : aucune offense.
+
+| 2026-09-29 | `<main data-action="turbo:morph@document->autofocus#focus">` sur les six pages publiques à formulaire | Le re-rendu 422 est un **morphing** (`turbo_refreshes_with method: :morph`) : `<body>` n'est pas reconnecté, `autofocus#connect` ne repasse pas, le focus reste sur le bouton (FU-17 et FU-33 rouges pour cette raison). L'action appelle l'API gelée (`autofocus#focus`) sans toucher au contrôleur | Non — **à remonter** : le contrat du Lot 0 (« re-rendu 422 compris ») ne tient pas en page ; le contrôleur devrait écouter `turbo:morph` lui-même, et ces attributs deviendraient superflus (inoffensifs) |
+| 2026-09-29 | Infobulles (PIN, code d'établissement) **sous** le champ, pas dans le libellé | `ui_field` rend le libellé dans un `<label>` et n'a pas d'emplacement après lui ; un `<details>` dans un `<label>` est du contenu interactif interdit | Non |
+| 2026-09-29 | Landing : titre « Accueil · Lnclass » (au lieu du slogan) | UDR-0054 §3.1 : un seul segment, libellé court de l'écran | Non |
+
+### Ce qui a dérapé
+
+- Base de test : `db:prepare` sur une base neuve a chargé les seeds (181 classes, niveaux « 6ème »…) ; les tests système qui créent un niveau « 6ème » tombaient en `UniqueViolation`. `bin/rails db:test:prepare` a rendu une base vide.
 
 ### Dette laissée derrière
 
@@ -291,3 +312,13 @@ Deux tests de contrôleur hors du champ `Fichiers` affirment l'ancien rendu et �
 - `COVERAGE=0 bin/rails test test/controllers/identity/second_factors_controller_test.rb test/controllers/identity/second_factor_enrollments_controller_test.rb` : 22 runs, 0 échec.
 - `COVERAGE=0 bin/rails test test/system/finitions/second_factor_test.rb test/system/identity/sign_in_test.rb` : 14 runs, 0 échec, trois passes de suite.
 - `bin/rubocop` sur les fichiers Ruby du lot : aucune offense.
+
+| `test/system/error_paths_test.rb` : lignes 17-18, 29-30 et 50-51, `click_on "Continuer"` après un code **bien formé** tapé sur `/join` : l'envoi automatique part avant le clic, qui touche un bouton périmé (`StaleElementReferenceError`, 1 fois sur 3 pour le test l. 12, 2 fois sur 3 pour le test l. 44). Retirer ces trois clics (garder celui de « k1 », l. 26, qui ne part pas seul) | Fichier hors du champ du Lot A (règle 4 du plan) | Lot Z |
+| `autofocus` en mode page ne suit pas un re-rendu 422 morphé (voir décisions) | Brique gelée du Lot 0 | Lot 0 rouvert ou Lot Z |
+
+### Vérifications (ciblées, règle de la vague)
+
+- `COVERAGE=0 bin/rails test` sur `test/controllers/{homepage_controller,homepage_redirection}_test.rb`, `test/controllers/classroom/{join_codes,joins}_controller_test.rb`, `test/controllers/identity/{invitations,pending_teacher_registrations,pin_resets,sessions,teacher_registrations}_controller_test.rb` : 109 runs, 0 échec.
+- `COVERAGE=0 bin/rails test test/system/finitions/public_pages_test.rb test/system/identity/team_invitation_test.rb test/system/identity/teacher_signup_test.rb test/system/classroom/join_test.rb` : 22 runs, 139 assertions, 0 échec.
+- `test/system/homepage_test.rb`, `error_paths_test.rb:130` (PIN oublié) : verts ; `error_paths_test.rb:12` et `:44` : instables, voir la dette.
+- `bin/rubocop` sur les fichiers Ruby du lot : aucune offense ; garde HITL (`test/guards/repository_rules_test.rb`) : verte.
