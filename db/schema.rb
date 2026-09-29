@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_29_200100) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_29_200200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
@@ -502,9 +503,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_200100) do
     t.string "sigle", limit: 20
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
+    t.index "translate(lower((name)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_name", using: :gin
+    t.index "translate(lower((sigle)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_sigle", using: :gin
     t.index ["drena_id", "name"], name: "index_schools_on_drena_id_and_name", unique: true
     t.index ["drena_id"], name: "index_schools_on_drena_id"
     t.index ["national_code"], name: "index_schools_on_national_code", unique: true, where: "(national_code IS NOT NULL)"
+    t.index ["national_code"], name: "index_schools_on_national_code_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["public_id"], name: "index_schools_on_public_id", unique: true
     t.index ["school_code"], name: "index_schools_on_school_code", unique: true
     t.check_constraint "cycle::text = ANY (ARRAY['first'::character varying, 'both'::character varying]::text[])", name: "schools_cycle_values"
@@ -759,6 +763,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_200100) do
     t.string "role", null: false
     t.string "team_role"
     t.datetime "updated_at", null: false
+    t.index "translate(lower((((first_name)::text || ' '::text) || (last_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_full_name", using: :gin
+    t.index "translate(lower((((last_name)::text || ' '::text) || (first_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_reversed_name", using: :gin
     t.index ["contact"], name: "index_users_on_contact", unique: true, where: "(contact IS NOT NULL)"
     t.index ["created_at", "id"], name: "index_users_on_created_at_and_id"
     t.index ["public_id"], name: "index_users_on_public_id", unique: true
