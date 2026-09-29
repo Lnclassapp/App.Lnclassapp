@@ -15,6 +15,7 @@ class Identity::SecondFactorEnrollmentsControllerTest < ActionDispatch::Integrat
     assert_select "[role=img] svg"
     assert_select "#second-factor-secret", text: secret.scan(/.{1,4}/).join(" ")
     assert_select "input[type=hidden][name='second_factor[secret]'][value=?]", secret
+    assert_secret_response
   end
 
   test "the first code activates the second factor and renders the backup codes" do
@@ -28,6 +29,7 @@ class Identity::SecondFactorEnrollmentsControllerTest < ActionDispatch::Integrat
     assert_not_nil Orm::TotpCredential.find_by!(user: @member).confirmed_at
     assert_not_nil Orm::Session.find_by!(user: @member).second_factor_verified_at
     assert_empty flash.to_h
+    assert_secret_response
   end
 
   test "under Turbo, the backup codes replace the enrollment in place" do
@@ -39,6 +41,7 @@ class Identity::SecondFactorEnrollmentsControllerTest < ActionDispatch::Integrat
     assert_response :success
     assert_match(/turbo-stream action="replace" target="second-factor-enrollment"/, response.body)
     assert_equal 10, response.body.scan("<li").size
+    assert_secret_response(stream: true)
   end
 
   test "a wrong code re-renders the same QR code in 422" do
@@ -51,6 +54,7 @@ class Identity::SecondFactorEnrollmentsControllerTest < ActionDispatch::Integrat
     assert_select "#second_factor_code_error", text: "Code incorrect."
     assert_select "#second-factor-secret", text: secret.scan(/.{1,4}/).join(" ")
     assert_select "[role=img] svg"
+    assert_secret_response
   end
 
   test "a submitted address that is not a TOTP URI draws no QR code" do

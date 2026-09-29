@@ -84,7 +84,7 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "school_staff", "0799000009", @school.id, nil, nil, @member.id ],
                  [ invitation.kind, invitation.contact, invitation.school_id, invitation.position, invitation.team_role, invitation.invited_by_id ]
     assert_in_delta 72.hours.from_now, invitation.expires_at, 5.seconds
-    assert_equal "no-store", response.headers["Cache-Control"]
+    assert_secret_response(stream: true)
     assert_select "turbo-stream[action=append][target=toasts] template", text: /Invitation créée/
     assert_select "turbo-stream[action=update][target=modal] template" do
       assert_select "dialog#staff-invitation-created-modal p", text: "Invitation pour le 07 99 00 00 09, direction de Lycée Moderne de Bouaké."
@@ -102,6 +102,7 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     post school_staff_invitations_path(@school.public_id), params: invitation_params
 
     assert_response :created
+    assert_secret_response
     assert_select "main#main turbo-frame#modal dialog#staff-invitation-created-modal input#invitation-link[readonly]"
     assert_no_link_in_flash
   end

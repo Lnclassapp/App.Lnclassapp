@@ -139,7 +139,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
   end
 
   test "a mixed file shows its exact counters and error paths, and only its valid schools are written" do
-    create_school(drena: Orm::Drena.find_by!(slug: "abidjan-2"), name: PUBLIC_SCHOOL)
+    create_school(drena: Orm::Drena.find_by!(slug: "drena-abidjan-2"), name: PUBLIC_SCHOOL)
     document = legacy_schools("Lycée Moderne de Cocody", "Lycée Sainte Marie", PUBLIC_SCHOOL, "Lycée Moderne de Cocody",
                               "Lycée Moderne d'Angré")
     document["schools"][1]["name"] = ""

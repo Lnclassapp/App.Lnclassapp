@@ -1,22 +1,22 @@
 # 🌐 DELIVERY · Teams::StaffInvitationsController
 # Rôle : l'équipe invite la direction d'un établissement en modale, depuis sa fiche ; le lien s'affiche une fois, dans la modale
-# ADR  : 0026, 0028, 0038, 0065 · UDR : 0019, 0052
+# ADR  : 0026, 0028, 0031, 0038, 0065 · UDR : 0019, 0052
 module Teams
   class StaffInvitationsController < BaseController
     before_action :authorize_invitation, only: :new
     before_action :load_school
+    secret_response :create
 
     def new
       @form = Dtos::Identity::SchoolStaffInvitationInput.new(school_public_id: @school.public_id)
     end
 
-    # Succès : toast, la modale montre le lien ; repli HTML : la page `created`. Le lien ne doit rester dans aucun cache.
+    # Succès : toast, la modale montre le lien ; repli HTML : la page `created`. Le lien ne reste dans aucun cache (secret_response).
     def create
       @form = form_input
       render_result invite.call(actor: current_actor, dto: @form), form: :new, success: lambda { |invited|
         @invitation = invited.invitation
         @invitation_url = invitation_url(invited.token)
-        response.headers["Cache-Control"] = "no-store"
         respond_to do |format|
           format.turbo_stream
           format.html { render :created, status: :created }

@@ -30,7 +30,7 @@ module Dtos
       end
 
       test "un type inconnu, un fichier absent ou qui n'est pas du JSON sont refusés" do
-        assert input(kind: "drenas").tap(&:valid?).errors.of_kind?(:kind, :inclusion)
+        assert input(kind: "regions").tap(&:valid?).errors.of_kind?(:kind, :inclusion)
         assert input(nil).tap(&:valid?).errors.of_kind?(:io, :blank)
         assert input(filename: "ecoles.csv").tap(&:valid?).errors.of_kind?(:filename, :invalid)
         assert input(filename: "").tap(&:valid?).errors.of_kind?(:filename, :blank)

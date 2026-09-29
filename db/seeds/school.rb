@@ -4,10 +4,10 @@
 raise "db/seeds/school.rb est réservé au développement et au test" unless Rails.env.local?
 
 YAML.load_file(Rails.root.join("db/seeds/data/drenas.yml")).each do |name|
-  Orm::Drena.create!(name:) unless Orm::Drena.exists?(slug: name.parameterize)
+  Orm::Drena.create!(name:) unless Orm::Drena.exists?(slug: Entities::School::Drena.slug_for(name))
 end
 
-drena = Orm::Drena.find_by!(slug: "abidjan-2")
+drena = Orm::Drena.find_by!(slug: "drena-abidjan-2")
 schools = [ [ "Lycée Moderne de Treichville", "LMT", "public", "both" ], [ "Lycée privé Les Lauriers", "LPL", "private", "both" ],
             [ "Lycée mixte La Réussite", "LMR", "mixed", "both" ], [ "Collège Moderne de Marcory", "CMM", "public", "first" ] ]
 existing = Orm::School.where(drena:).pluck(:name)
