@@ -1,10 +1,11 @@
 # 🔌 INFRA · Queries::Identity::ShellUserQuery
 # Rôle : ce que le shell affiche de la personne connectée (nom, rôle, détail), lu une fois par requête
-# ADR  : 0026, 0060 · UDR : 0006, 0047
+# ADR  : 0026, 0060, 0065 · UDR : 0006, 0047, 0052
 module Queries
   module Identity
     class ShellUserQuery
-      # detail : classe de l'élève, matière de l'enseignant, et son école ; photo_version : nil sans photo (ADR-0060).
+      # detail : classe de l'élève, matière de l'enseignant, et son école ; établissement de la direction (UDR-0052) ;
+      # photo_version : nil sans photo (ADR-0060).
       Row = Data.define(:name, :role, :detail, :public_id, :photo_version)
 
       COLUMNS = [ :first_name, :last_name, :role, :public_id, PhotoVersions::CHECKSUM ].freeze
@@ -24,6 +25,7 @@ module Queries
         parts = case role
         when "student" then student_detail(user_id)
         when "teacher" then teacher_detail(user_id)
+        when "school_admin" then Orm::SchoolStaff.joins(:school).where(user_id:).pick("schools.name")
         end
         Array(parts).compact.join(" · ").presence
       end
