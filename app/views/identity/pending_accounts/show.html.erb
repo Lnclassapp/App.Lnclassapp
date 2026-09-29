@@ -1,7 +1,7 @@
 <%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
 <%# Rôle : écran de sortie, sans redirection ; seules issues : rejoindre une classe (élève) ou se déconnecter ; état de la demande %>
-<%# ADR  : 0030, 0040, 0063 · UDR : 0006, 0050 %>
-<% content_for :title, t(".page_title") %>
+<%# ADR  : 0030, 0040, 0063 · UDR : 0006, 0050, 0054 %>
+<% page_title t(".page_title") %>
 <% if @join_request %>
   <% state = @join_request.status == "rejected" ? "rejected" : "pending" %>
   <% title = t(".join_request.#{state}.title") %>

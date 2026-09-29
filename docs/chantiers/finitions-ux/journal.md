@@ -67,3 +67,39 @@ Un lot vertical qui aurait besoin d'en changer une s'arrête : le Lot 0 rouvre.
 - `COVERAGE=0 bin/rails test:system` : 208 runs, 2562 assertions, 0 échec, 0 erreur, 0 skip.
 - `bin/brakeman -q --no-pager` : 0 avertissement.
 - `bin/check-asset-budget` : `application.js` 41,8 Ko gzip / 60 Ko.
+
+## Lot H — Profil et pages de compte (2026-09-29)
+
+Branche `feature/finitions-ux-lot-h`, depuis `feature/finitions-ux` (Lot 0 fusionné). Briques du Lot 0 utilisées telles quelles : `page_title`, `ui_page_header(back:)`, `ui_modal(document_title:)`, `home_path_for` (existant) ; aucune API modifiée.
+
+### Ce qui est fait
+
+| Écran | Finitions |
+|---|---|
+| « Mon profil » | Titre « Mon profil · <Espace> · Lnclass » ; retour « Accueil » vers l'accueil du rôle (`home_path_for(current_actor.role)`, donc « Travail des élèves » pour la direction), premier lien du `main` (FU-10) |
+| Modales du nom, du numéro, du PIN, de la photo | `page_title` passé à `ui_modal(document_title:)` (FU-05 : `/profile/name/edit` ouverte par son URL → « Modifier mon nom · Élève · Lnclass ») ; `autofocus: true` retiré : le contrôleur `autofocus` (mode `dialog`) vise le premier champ (nom, PIN actuel, PIN actuel, champ photo) |
+| Compte en attente | `page_title` ; suffixe « · Lnclass » retiré de la locale |
+| Code de récupération (modale et repli HTML) | `page_title` ; la modale (`_code`) nomme l'onglet, aussi quand elle arrive par le Turbo Stream de `create` ; toujours **aucun** « Copier » (FU-27) |
+
+Test : `test/system/finitions/account_pages_test.rb` (6 cas), rouge d'abord pour la bonne raison (titres sans espace ni suffixe, pas de retour), vert ensuite.
+
+### Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-09-29 | `page_title` appelé dans le partial `_code` (pas seulement dans `show`) | `create.turbo_stream.erb` n'est dans aucun lot : c'est le seul moyen que la modale ouverte par le flux porte son titre. Dans `show`, le premier appel nomme la page, le second compose seulement (même texte) | Non |
+| 2026-09-29 | Locale du retour : `identity.profiles.show.back` (« Accueil ») | Texte propre à l'écran, `shared` fermé aux lots verticaux | Non |
+
+### Ce qui a dérapé
+
+- `RAILS_ENV=test bin/rails db:prepare` sur une base neuve charge les **seeds** (matière « SVT »…) : `test/system/identity/profile_test.rb` tombe alors en `PG::UniqueViolation` sur `index_materials_on_name`, sans lien avec le lot. Corrigé par `RAILS_ENV=test bin/rails db:schema:load` dans le worktree. À signaler aux autres worktrees du chantier (même commande de mise en place).
+
+### Dette laissée derrière
+
+Aucune.
+
+### Vérifications (tests du lot seulement)
+
+- `COVERAGE=0 bin/rails test test/system/finitions/account_pages_test.rb test/system/identity/profile_test.rb test/system/identity/profile_contact_test.rb test/system/identity/profile_pin_test.rb test/system/identity/profile_photo_test.rb` : 16 runs, 0 échec, 0 erreur.
+- `COVERAGE=0 bin/rails test` des contrôleurs `identity/{profiles,profile_*,pending_accounts,pin_recovery_codes}` : 70 runs, 0 échec.
+- `bin/rubocop` sur le test du lot : aucune offense.

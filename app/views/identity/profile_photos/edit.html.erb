@@ -1,11 +1,11 @@
 <%# 🌐 UI · identity/profile_photos/edit — « Ma photo », servie dans le frame « modal » (ouverte sur le shell sans frame) %>
 <%# Rôle : avatar actuel, aperçu recadré par identity--photo-picker, champ photo, retrait s'il y a une photo ; échec en 422 ici %>
-<%# ADR  : 0060 · UDR : 0006, 0041, 0047 %>
-<% content_for :title, t(".title") %>
+<%# ADR  : 0060 · UDR : 0006, 0041, 0047, 0054 %>
+<% tab_title = page_title(t(".title")) %>
 <% photo_error = @form.errors[:photo].first %>
 <% src = account_photo_src(profile.public_id, profile.photo_version) %>
 <%= turbo_frame_tag "modal" do %>
-  <%= ui_modal title: t(".title"), id: "profile-photo-modal", size: :sm, open: true do |modal| %>
+  <%= ui_modal title: t(".title"), id: "profile-photo-modal", size: :sm, open: true, document_title: tab_title do |modal| %>
     <% modal.footer do %>
       <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
       <%= ui_button t(".submit"), type: :submit, form: "profile-photo-form", icon: "check" %>
