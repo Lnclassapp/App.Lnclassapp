@@ -109,3 +109,9 @@ end
 
 - Paliers de verrouillage : 5, 10 et 20 échecs.
 - Durées de session : 30 jours, et 12 h pour les rôles privilégiés.
+
+## Amendement du 2026-09-29
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md). Statut : `Proposé`.*
+
+- **Complété par l'[ADR-0068](./0068-session-ouverte-a-l-acceptation-d-une-invitation.md)** : l'acceptation d'une invitation ouvre une session, comme la connexion et les inscriptions ; même cookie régénéré (`start_session`), même garde du second facteur pour l'équipe.

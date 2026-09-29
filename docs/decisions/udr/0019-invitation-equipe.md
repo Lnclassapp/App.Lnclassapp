@@ -80,3 +80,13 @@ Deux frictions sont à éviter :
 
 - La même page d'acceptation sert l'invitation de la direction. Pour elle, l'encadré `bg-info-soft` dit « Vous rejoignez <établissement> comme direction. », sans annoncer de second facteur, et le toast sur « Se connecter » dit « Votre compte est créé. Connectez-vous avec votre numéro et votre PIN. ».
 - La modale d'invitation de la direction s'ouvre depuis la fiche d'un établissement, sans choix de rôle : UDR-0052 §3.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+
+- **Copier** : la modale `_created` gagne, sous `input#invitation-link`, `ui_copy_button(<lien>, label: "Copier le lien", aria_label: "Copier le lien d'invitation", icon: "link")` ; toast « Lien copié. ». C'est le bouton prévu au §4 « par un lot ultérieur ». Pas de WhatsApp ni de SMS. Même règle pour la modale de l'invitation de la direction.
+- **Acceptation** (ADR-0068) : le §2.4 est remplacé. Le succès **ouvre la session** et mène à l'activation du second facteur (équipe) ou à « Travail des élèves » (direction), avec le toast « Votre compte est créé. Activez maintenant la vérification en deux étapes. » ou « Votre compte est créé. Bienvenue sur Lnclass. ». Un échec n'ouvre aucune session.
+- **Numéro** : la rubrique Identité commence par le numéro invité, en lecture seule, sans `name`, `autocomplete="username"` (UDR-0054 §3.8). Le §2.3 (« jamais le numéro ») devient « le numéro n'est jamais **saisi** ».
+- **Focus** : sur « Nom » à l'arrivée ; sur le premier champ en erreur après un 422.
+- Titres : « Inviter un membre de l'équipe · Équipe · Lnclass » (modale) ; page publique « Créer mon compte · Lnclass ».

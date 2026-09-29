@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `feature/finitions-ux` |
 | **Programme** | — |

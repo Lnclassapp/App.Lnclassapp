@@ -76,3 +76,11 @@ La fiche essentielle est la page que l'élève ouvre pour réviser, puis pour s'
 *Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **« Modifier » passe dans le menu ⋮** « Actions pour <nom> » (`#essential-actions-menu`), seule entrée, placé après « Nouvel exercice » et « Importer des exercices », qui restent des boutons. Le nom accessible « Modifier la fiche essentielle « … » » est remplacé par celui du bouton ⋮.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+
+- Retour : `ui_back_link` vers `course_path`, libellé = nom du cours (au lieu de « Cours : <nom> »).
+- Titre : « <nom de la fiche> · <espace> · Lnclass » (au lieu de « Fiche essentielle : <nom> »).
+- Badges de progression : suivis d'une infobulle des seuils (UDR-0054 §3.4).

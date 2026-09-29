@@ -139,3 +139,9 @@ end
 - `test/domain/policies/school/read_own_school_policy_test.rb` : refus pour `teacher`, `student`, `team` et une direction sans établissement.
 - `test/infrastructure/queries/school/student_work_query_test.rb` et `school_teachers_query_test.rb` : un test par ligne du tableau §4, données d'un autre établissement absentes, nombre de requêtes constant.
 - `test/controllers/school_admin/classrooms_controller_test.rb` et `teachers_controller_test.rb` : chaque page refusée aux autres rôles ; la classe d'un autre établissement donne 404. `test/routing/school_admin_routes_test.rb` : aucune route d'écriture sous `/school-admin`.
+
+## Amendement du 2026-09-29
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md). Statut : `Proposé`.*
+
+- **Connexion** : la première session d'un membre de la direction s'ouvre à l'acceptation de son invitation ([ADR-0068](./0068-session-ouverte-a-l-acceptation-d-une-invitation.md)) ; les suivantes, par téléphone et PIN, comme décidé ici.

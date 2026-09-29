@@ -64,3 +64,14 @@ L'enseignant ouvre une de ses classes pour **relever le code** à transmettre au
 - Tout écran qui affiche un code d'adhésion l'affiche en majuscules et, s'il propose de le copier, réutilise `classroom--join-code-copy` plutôt qu'un nouveau contrôleur.
 - Le tableau de bord générique de l'ancienne application (onglets, « % actifs », « Moyenne classe », « Progression ») n'est pas repris ; une vue d'activité de la classe relève de la V3.
 - La fiche d'un élève (CL-13) est en V3 (`rapports-de-classe`) : les lignes de la liste ne sont pas des liens.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+
+- **Copie** : le contrôleur `classroom--join-code-copy` est remplacé par `clipboard` (`ui_copy_button`). Le §4 devient : « tout écran qui propose de copier un code ou un lien utilise `ui_copy_button` ».
+- **Lien de classe** : à côté de « Copier », `ui_copy_button(join_classroom_url(code), label: "Copier le lien", aria_label: "Copier le lien de la classe", icon: "link")` ; toast « Lien copié. ». Absent sans code.
+- **Retour selon le rôle** : l'enseignant garde « Accueil » (`teacher_home_path`) ; l'équipe revient à la fiche de l'établissement (`school_path`, libellé = nom de l'établissement). `ClassroomHeaderQuery::Row` gagne `school_public_id`.
+- **Chercher un élève** : si la liste n'est pas vide, `_roster` commence par `form#classroom-roster-search` (GET `classroom_path`, `role="search"`, champ `q` « Chercher un élève », contrôleur `search`) ; la liste est dans `turbo_frame_tag "classroom_roster_list"` avec un compteur `aria-live` ; état vide « Aucun élève ne correspond », avec « Effacer la recherche ». La recherche ne lit que les élèves de la classe, sous la même policy.
+- **Infobulles** : effectif (le plafond), « Dernier score » (UDR-0054 §3.4).
+- Titre : « <nom de la classe> · <espace> · Lnclass ».

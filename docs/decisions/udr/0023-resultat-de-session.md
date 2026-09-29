@@ -64,3 +64,11 @@
 - Aucune vue destinée à l'élève ne contient le texte d'une proposition juste qu'il n'a pas choisie : un test du contrôleur le prouve, et un autre prouve que l'enseignant la voit marquée.
 - Le fait `teaches_student` de `ReadSessionPolicy` est lu par la query du résultat (`teaches_student?`) : élève inscrit (`left_at` nul) dans une classe `active` que l'enseignant a déclarée. Un autre écran qui en aurait besoin la réutilise.
 - Si le porteur retire l'explication de la correction de l'élève (question ouverte de l'UDR-0022), seul `_question_review` change.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+
+- Retour : `ui_back_link` vers `course_essential_path`, libellé = nom de la fiche (au lieu de « Fiche essentielle : <nom> »).
+- Titre : « Résultat de <titre de l'exercice> · <espace> · Lnclass ».
+- Badge : suivi d'une infobulle des seuils (UDR-0054 §3.4).

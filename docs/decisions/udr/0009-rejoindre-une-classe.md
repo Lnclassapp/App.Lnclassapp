@@ -74,3 +74,12 @@ Chantier [`recette-v1-defauts`](../../chantiers/recette-v1-defauts/memo.md) (D1)
 - `/join` vérifie le code avant de rediriger : il ne mène à `/c/<code>` que si cette page a un aperçu. Sinon (code inconnu, remplacé, fermé, classe archivée), l'écran se ré-affiche en **422**, la saisie gardée, avec sous le champ « Code de classe invalide. Vérifie le code auprès de ton professeur, puis saisis-le de nouveau. » : les mots de la page 404 de `/c/<code>`, rien de plus.
 - Pourquoi : une soumission de formulaire Turbo suivie d'une page 4xx après redirection n'est pas rendue de façon fiable (recette `Staging` : écran resté sur `/join`, sans message).
 - La vérification lit la même requête que `/c/<code>` (`Queries::Classroom::JoinPreviewQuery`) et **partage son compteur** : 10 requêtes par minute et par adresse, `/join` (envoi) et `/c/<code>` confondus ; au-delà, 429 et « Trop de tentatives. Patiente une minute, puis réessaie. » sous le champ, sans rien chercher.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+
+- **`/join`** : le formulaire porte le contrôleur `autosubmit` (motif du code d'adhésion, 3 lettres puis 2 chiffres, espaces et tiret retirés) ; il part au 5ᵉ caractère valide, une seule fois ; l'aide dit « La classe s'ouvre dès le code complet. » ; « Rejoindre » reste. Le champ du code garde le focus d'arrivée (`data-autofocus-target="field"`).
+- **`/c/<code>`** : pas de focus d'arrivée ; après un 422, focus sur le premier champ en erreur.
+- **Pages publiques** : le logo est un lien vers l'accueil public (« Lnclass, accueil »).
+- Titres : « Rejoindre une classe · Lnclass », « Rejoindre ma classe · Lnclass » par `page_title`.

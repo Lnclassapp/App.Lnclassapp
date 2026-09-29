@@ -70,3 +70,10 @@ L'enseignant prépare sa classe en lui assignant un cours, une fiche essentielle
 - D6 (fiche essentielle dans la classe) et D7 (assigner un cours depuis sa page) rendent la même bascule avec les mêmes locaux, et reçoivent les streams de ce lot sans en écrire.
 - Aucun contenu non publié n'est proposé à l'assignation, et aucun ne peut l'être par une requête forgée.
 - Retirer puis réassigner est un geste sûr : l'historique garde chaque ligne.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+
+- Retour : `ui_back_link` vers `classroom_path`, libellé = nom de la classe (au lieu de « Retour à <classe> »).
+- Titre : « <nom du cours> · Enseignant · Lnclass ».

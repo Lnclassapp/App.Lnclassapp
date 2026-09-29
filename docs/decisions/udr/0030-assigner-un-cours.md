@@ -56,3 +56,10 @@ Un enseignant qui parcourt le catalogue trouve un cours et veut le proposer à s
 
 - Le point d'entrée de l'assignation depuis le catalogue est cette page ; la page du cours n'affiche jamais de liste de classes.
 - Toute évolution de la bascule (UDR-0028) s'applique ici sans changement.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+
+- Retour : `ui_back_link` vers `course_path`, libellé = nom du cours (au lieu de « Retour au cours »).
+- Titre : « Assigner à mes classes · Enseignant · Lnclass ».
