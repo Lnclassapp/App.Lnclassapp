@@ -92,6 +92,14 @@ Branche `feature/finitions-ux-lot-c2`, depuis `feature/finitions-ux` (Lot 0 fusi
 - `teams/imports/index` et `show` : `content_for :title` → `page_title`.
 - Titres d'onglet des imports sans deux-points : `teams.imports.new.page_titles.<type>` (« Importer des DRENA ») et `teams.imports.show.page_titles.<type>` (« Import d'établissements ») ; `show.page_title` (« Import : %{kind} ») retiré. Une clé par type plutôt qu'une interpolation : l'article français change avec le type (« des », « d' », « de »).
 
+## Lot G — Direction (2026-09-29)
+
+Branche `feature/finitions-ux-lot-g`, depuis `feature/finitions-ux` (Lot 0 fusionné). Critères couverts : FU-10 (classe, direction), FU-11 (direction), FU-21, FU-49 ; titres « Travail des élèves », « <classe> », « Enseignants » · Direction · Lnclass (FU-06 côté direction).
+
+- **Retour** : le bouton `ghost` `arrow-left` de la page d'une classe devient `ui_page_header(back: { label: "Travail des élèves", href: school_admin_classrooms_path })`.
+- **Infobulles** (textes de l'UDR-0054 §3.4 repris tels quels, clés `school_admin.classrooms.tips.*`) : « Taux de rendu » et « Moyenne » en en-tête de colonne (liste) et sur les tuiles (classe), « Score moyen » en en-tête de colonne, légende « — Chiffre non calculé » sous chaque tableau avec l'aide de « — ». La phrase `average_rule` de la liste est retirée : l'aide de « Moyenne » la contient.
+- **Recherche d'un élève** : `form#student-work-search` (GET, `q`, contrôleur `search`, `role="search"`), frame `student_work_students` avec compteur `aria-live` et état vide « Aucun élève ne correspond » + « Effacer la recherche » (`_top`) ; absent sur une classe sans élève. Les tuiles et le sous-titre restent ceux de la classe entière.
+
 ### Décisions prises en cours de route
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
@@ -115,6 +123,14 @@ Aucune.
 
 | 2026-09-29 | Le deux-points disparaît du **titre de l'onglet** ; le titre **visible** de la modale (« Importer : DRENA ») et le `h1` du rapport (« Import : Établissements ») restent | UDR-0054 §3.1 vise le segment « Page » de l'onglet ; les titres visibles sont vérifiés par `test/system/teams/drena_import_test.rb` et `test/controllers/teams/imports_controller_test.rb`, hors du champ `Fichiers` du lot | Non |
 
+| 2026-09-29 | La recherche filtre dans le contrôleur les élèves **déjà lus** par `StudentWorkQuery#classroom`, avec `Queries::Shared::TextSearch.normalize` des deux côtés (sans casse ni accents, sous-chaîne) ; `student_work_query.rb` **n'est pas modifié** (écart au champ `Fichiers` du plan, qui prévoyait `search:`) | Consigne de l'orchestrateur : un chantier perf parallèle réécrit `StudentWorkQuery`. Une classe compte au plus quelques dizaines d'élèves déjà chargés : aucune requête en plus, même résultat que le `LIKE` serveur | Non |
+| 2026-09-29 | `role` et `aria-label` du formulaire passés par `html:` | `form_with` ignore ces options au premier niveau (vérifié au rendu) | Non |
+
+### Ce qui a dérapé
+
+- `test/infrastructure/queries/school/student_work_query_test.rb` (champ `Test associé`) n'est pas touché, la requête ne changeant pas : FU-49 est prouvé par `test/controllers/school_admin/classrooms_controller_test.rb` et `test/system/finitions/school_admin_test.rb`. Si le chantier perf veut porter la recherche en SQL, il ajoute `search:` à la requête et le contrôleur n'a plus qu'à la lui passer.
+- Constaté hors lot : le formulaire de recherche de `/design` (`design/index`, Lot 0) passe `role:` et `"aria-label":` au premier niveau de `form_with` : ils ne sont pas rendus. À corriger au Lot Z (ou par les lots E et F s'ils recopient ce motif).
+
 ### Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
@@ -131,3 +147,12 @@ Aucune.
 - `COVERAGE=0 bin/rails test test/system/finitions/team_content_test.rb` : 5 runs, 0 échec.
 - `COVERAGE=0 bin/rails test test/system/teams/{course_management,essential_management,exercise_form,import_flow,drena_import}_test.rb test/controllers/teams/{courses,essentials,exercises,imports}_controller_test.rb test/i18n/locale_files_test.rb` : 85 runs, 0 échec (l'erreur de morphing ci-dessus mise à part, repassée verte).
 - `bin/rubocop test/system/finitions/team_content_test.rb` : aucune offense.
+
+| État d'erreur du frame `student_work_students` (UDR-0054 §3.9 : `ui_error_state` + « Réessayer » sur une réponse non 2xx) | Aucune brique du Lot 0 ne le fournit (il faudrait un gestionnaire `turbo:frame-missing`) ; une classe devenue inaccessible rend la page 404 entière | Lot 0 rouvert ou Lot Z |
+
+### Vérifications (tests du lot seulement)
+
+- `COVERAGE=0 bin/rails test test/controllers/school_admin/classrooms_controller_test.rb` : 14 runs, 0 échec (7 nouveaux cas écrits d'abord, rouges faute de retour, d'aides, de formulaire et de clés).
+- `COVERAGE=0 bin/rails test test/system/finitions/school_admin_test.rb test/system/school_admin/student_work_test.rb` : 4 runs, 0 échec.
+- `COVERAGE=0 bin/rails test test/i18n/locale_files_test.rb test/controllers/school_admin/teachers_controller_test.rb` : 11 runs, 0 échec.
+- `bin/rubocop` sur les fichiers Ruby du lot : aucune offense.
