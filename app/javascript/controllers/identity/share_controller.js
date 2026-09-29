@@ -1,10 +1,10 @@
-// ⚡ FRONT · identity/share_controller — partage d'un lien d'invitation : WhatsApp, SMS, copie, partage natif du système
-// Rôle : chaque partage est enregistré par notre serveur (sendBeacon, sur la session), sans traceur ; le lien s'ouvre quoi qu'il arrive
-// ADR  : 0049, 0051, 0063 · UDR : 0050
+// ⚡ FRONT · identity/share_controller — partage d'un lien d'invitation : WhatsApp, SMS, partage natif du système, comptage de la copie
+// Rôle : chaque partage est enregistré par notre serveur (sendBeacon, sur la session), sans traceur ; la copie elle-même est au contrôleur clipboard
+// ADR  : 0049, 0051, 0063 · UDR : 0050, 0054 (§3.5 : « clipboard:copied->identity--share#recordCopy »)
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["native", "copied", "failed"]
+  static targets = ["native"]
   static values = { url: String, link: String, text: String }
 
   // Le partage natif n'existe que sur certains navigateurs : le bouton reste caché ailleurs.
@@ -17,14 +17,8 @@ export default class extends Controller {
     this.send(channel)
   }
 
-  async copy() {
-    try {
-      await navigator.clipboard.writeText(this.linkValue)
-    } catch {
-      // Presse-papiers absent (page hors HTTPS) ou refusé par le navigateur.
-      return this.toast(this.failedTarget)
-    }
-    this.toast(this.copiedTarget)
+  // Le contrôleur clipboard a copié le lien (événement clipboard:copied) : seule une copie réussie est comptée.
+  recordCopy() {
     this.send("copy")
   }
 
@@ -43,12 +37,5 @@ export default class extends Controller {
     const token = document.querySelector("meta[name=csrf-token]")?.content
     if (token) body.append("authenticity_token", token)
     navigator.sendBeacon(this.urlValue, body)
-  }
-
-  // Même motif que classroom--join-code-copy : le toast est rendu par le serveur, cloné avec un id neuf.
-  toast(template) {
-    const toast = template.content.firstElementChild.cloneNode(true)
-    toast.id = `toast-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`
-    document.getElementById("toasts").append(toast)
   }
 }

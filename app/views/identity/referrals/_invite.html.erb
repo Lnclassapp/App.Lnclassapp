@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/referrals/_invite — bloc « Inviter un collègue » (Queries::Identity::ReferralQuery::Row) %>
 <%# Rôle : lien personnel /e/<code>?ref=<jeton>, WhatsApp, SMS, copier, partage natif (comptés par identity--share), compteur %>
-<%# ADR  : 0049, 0057, 0063 · UDR : 0050 · Stimulus : identity--share %>
+<%# ADR  : 0049, 0057, 0063 · UDR : 0050, 0054 · Stimulus : identity--share, clipboard (la copie est comptée sur clipboard:copied) %>
 <%# locals: (invite:) -%>
 <% link = school_code_signup_url(invite.school_code, ref: invite.referral_token) %>
 <% message = t("identity.referrals.invite.message", school: invite.school_name, link:) %>
@@ -25,17 +25,15 @@
 
   <div id="referral_share_actions" class="mt-5 flex flex-wrap gap-3" data-controller="identity--share"
        data-identity--share-url-value="<%= teacher_referral_shares_path %>" data-identity--share-link-value="<%= link %>"
-       data-identity--share-text-value="<%= message %>">
+       data-identity--share-text-value="<%= message %>" data-action="clipboard:copied->identity--share#recordCopy">
     <%= ui_button t("identity.referrals.invite.whatsapp"), href: whatsapp_share_url(message), variant: :brand, icon: "chat-bubble-left-right",
                   target: "_blank", rel: "noopener",
                   data: { action: "identity--share#record", "identity--share-channel-param": "whatsapp" } %>
     <%= ui_button t("identity.referrals.invite.sms"), href: sms_share_url(message), variant: :secondary, icon: "device-phone-mobile",
                   data: { action: "identity--share#record", "identity--share-channel-param": "sms" } %>
-    <%= ui_button t("identity.referrals.invite.copy"), variant: :secondary, icon: "link", "aria-label": t("identity.referrals.invite.copy_label"),
-                  data: { action: "identity--share#copy" } %>
+    <%= ui_copy_button link, label: t("identity.referrals.invite.copy"), aria_label: t("identity.referrals.invite.copy_label"),
+                             copied: t("shared.clipboard.copied_link"), variant: :secondary, size: :md, icon: "link" %>
     <%= ui_button t("identity.referrals.invite.native"), variant: :secondary, icon: "share", hidden: true,
                   data: { action: "identity--share#native", "identity--share-target": "native" } %>
-    <template data-identity--share-target="copied"><%= ui_toast t("identity.referrals.invite.copied"), type: :success %></template>
-    <template data-identity--share-target="failed"><%= ui_toast t("identity.referrals.invite.copy_failed"), type: :warning %></template>
   </div>
 <% end %>

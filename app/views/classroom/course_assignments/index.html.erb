@@ -1,14 +1,10 @@
 <%# 🌐 UI · classroom/course_assignments/index — assigner un cours depuis sa page (CA-27) %>
 <%# Rôle : en-tête du cours, puis une ligne par classe active de l'enseignant avec la bascule d'assignation de D5 %>
-<%# ADR  : 0035, 0048 · UDR : 0006, 0007, 0028, 0030 %>
+<%# ADR  : 0035, 0048 · UDR : 0006, 0007, 0028, 0030, 0054 · retour : le cours %>
 <% course = @targets.course %>
-<% content_for :title, t(".page_title", course: course.name) %>
+<% page_title t(".page_title") %>
 <% content_for :nav_key, "courses" %>
-<nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-  <%= link_to course_path(course.slug), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-    <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back") %>
-  <% end %>
-</nav>
+<%= ui_back_link course.name, href: course_path(course.slug) %>
 
 <%= ui_card padding: :md, class: "mb-8" do %>
   <div class="min-w-0 space-y-3">

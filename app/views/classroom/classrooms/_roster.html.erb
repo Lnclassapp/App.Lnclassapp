@@ -1,9 +1,10 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
-<%# Rôle : une ligne par élève présent (nom, numéro, dernier score et lien vers son résultat) ; « Générer un code de récupération » (ID-15), dont le stream vient de B8 %>
-<%# ADR  : 0028, 0032, 0060 · UDR : 0007, 0020, 0027, 0047 %>
+<%# Rôle : « Chercher un élève » (GET hors du frame, contrôleur search) ; frame classroom_roster_list : compteur, une ligne par élève, code de récupération %>
+<%# ADR  : 0028, 0032, 0060 · UDR : 0007, 0020, 0027, 0047, 0054 · le formulaire du code vise _top : sa réponse est le stream de la modale %>
+<%# locals: (classroom:, students:, search: "") -%>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
-  <h2 id="classroom_roster_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title", count: students.size) %></h2>
-  <% if students.empty? %>
+  <h2 id="classroom_roster_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title", count: classroom.active_students_count) %></h2>
+  <% if classroom.active_students_count.zero? %>
     <div id="classroom_roster_empty">
       <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
     </div>
@@ -11,41 +12,69 @@
     <% if classroom.status == "active" %>
       <p class="mb-3 text-sm text-mute"><%= t(".issue_code_hint") %></p>
     <% end %>
-    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
-      <% students.each do |student| %>
-        <li id="student_<%= student.public_id %>" class="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center">
-          <div class="flex min-w-0 flex-1 items-center gap-3">
-            <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>
-            <div class="min-w-0">
-              <p class="truncate text-sm font-medium"><%= student.display_name %></p>
-              <% if student.contact %>
-                <p class="text-xs text-mute tabular-nums">
-                  <span class="sr-only"><%= t(".contact") %></span> <%= student.contact.scan(/\d{2}/).join(" ") %>
+    <%= form_with scope: :classroom_roster_search, url: classroom_path(classroom.public_id), method: :get, id: "classroom-roster-search",
+                  html: { role: "search", "aria-label": t(".search_label") }, class: "mb-4 flex flex-col gap-3 sm:flex-row sm:items-end",
+                  data: { turbo_frame: "classroom_roster_list", controller: "search" } do |form| %>
+      <div class="min-w-0 sm:flex-1">
+        <%= ui_field form, :q, as: :search, label: t(".search_label"), name: "q", value: search, autocomplete: "off",
+                               data: { action: "search#queue" } %>
+      </div>
+      <%= ui_button t(".search_submit"), type: :submit, variant: :secondary, icon: "magnifying-glass",
+                                         data: { search_target: "button" } %>
+    <% end %>
+    <%= turbo_frame_tag "classroom_roster_list", class: "block transition-opacity aria-busy:opacity-50" do %>
+      <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <p aria-live="polite" class="text-sm text-mute">
+          <%= students.empty? ? t(".no_match") : t(".count", count: students.size) %>
+        </p>
+        <p class="flex items-center gap-1 text-sm text-mute">
+          <%= t(".last_score") %><%= ui_info_tip t(".last_score_tip"), label: t(".last_score") %>
+        </p>
+      </div>
+      <% if students.empty? %>
+        <%= ui_empty_state title: t(".no_match"), icon: "magnifying-glass" do %>
+          <%= ui_button t(".clear_search"), href: classroom_path(classroom.public_id), variant: :secondary, icon: "x-mark",
+                                            data: { turbo_frame: "_top" } %>
+        <% end %>
+      <% else %>
+        <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+          <% students.each do |student| %>
+            <li id="student_<%= student.public_id %>" class="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center">
+              <div class="flex min-w-0 flex-1 items-center gap-3">
+                <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>
+                <div class="min-w-0">
+                  <p class="truncate text-sm font-medium"><%= student.display_name %></p>
+                  <% if student.contact %>
+                    <p class="text-xs text-mute tabular-nums">
+                      <span class="sr-only"><%= t(".contact") %></span> <%= student.contact.scan(/\d{2}/).join(" ") %>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+              <div class="flex flex-wrap items-center justify-between gap-3 sm:flex-nowrap sm:justify-end sm:gap-4">
+                <p class="text-sm sm:text-right">
+                  <span class="block text-xs text-mute"><%= t(".last_score") %></span>
+                  <% if student.last_score_percent %>
+                    <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
+                    <%# Décision du porteur (2026-09-27) : le score mène au résultat détaillé (note, revue, propositions correctes) %>
+                    <%= link_to t(".see_result"), exercise_session_result_path(student.last_session_public_id), data: { turbo_frame: "_top" },
+                                class: "block text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+                  <% else %>
+                    <span class="text-mute"><%= t(".no_score") %></span>
+                  <% end %>
                 </p>
-              <% end %>
-            </div>
-          </div>
-          <div class="flex flex-wrap items-center justify-between gap-3 sm:flex-nowrap sm:justify-end sm:gap-4">
-            <p class="text-sm sm:text-right">
-              <span class="block text-xs text-mute"><%= t(".last_score") %></span>
-              <% if student.last_score_percent %>
-                <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
-                <%# Décision du porteur (2026-09-27) : le score mène au résultat détaillé (note, revue, propositions correctes) %>
-                <%= link_to t(".see_result"), exercise_session_result_path(student.last_session_public_id), data: { turbo_frame: "_top" },
-                            class: "block text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-              <% else %>
-                <span class="text-mute"><%= t(".no_score") %></span>
-              <% end %>
-            </p>
-            <% if classroom.status == "active" %>
-              <%= form_with url: account_pin_recovery_codes_path(student.public_id), method: :post, class: "shrink-0" do %>
-                <%= ui_button t(".issue_code"), type: :submit, variant: :secondary, size: :sm, icon: "key",
-                              "aria-label": t(".issue_code_label", name: student.display_name) %>
-              <% end %>
-            <% end %>
-          </div>
-        </li>
+                <% if classroom.status == "active" %>
+                  <%= form_with url: account_pin_recovery_codes_path(student.public_id), method: :post, class: "shrink-0",
+                                data: { turbo_frame: "_top" } do %>
+                    <%= ui_button t(".issue_code"), type: :submit, variant: :secondary, size: :sm, icon: "key",
+                                  "aria-label": t(".issue_code_label", name: student.display_name) %>
+                  <% end %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
+    <% end %>
   <% end %>
 </section>

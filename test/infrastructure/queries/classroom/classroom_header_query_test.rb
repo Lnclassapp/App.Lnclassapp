@@ -20,6 +20,15 @@ module Queries
         assert_equal [ 1, [ present.id ], [ teacher.id ] ], [ row.active_students_count, row.student_ids, row.teacher_ids ]
       end
 
+      # UDR-0054 §3.2 (FU-07) : l'équipe revient de la classe à la fiche de son établissement.
+      test "l'en-tête porte l'identifiant public de l'établissement de la classe" do
+        school = create_school(name: "Lycée moderne de Cocody")
+        classroom = create_classroom(school:)
+        create_school
+
+        assert_equal school.public_id, ClassroomHeaderQuery.new.call(public_id: classroom.public_id).school_public_id
+      end
+
       test "une classe sans série ni code, ou inconnue" do
         classroom = create_classroom(join_code: nil)
 

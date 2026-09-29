@@ -1,15 +1,11 @@
 <%# 🌐 UI · classroom/classroom_courses/show — un cours vu depuis une classe (CL-11) %>
 <%# Rôle : en-tête du cours avec sa bascule, puis ses fiches essentielles publiées, chacune avec la sienne %>
-<%# ADR  : 0048 · UDR : 0006, 0007, 0028 %>
+<%# ADR  : 0048 · UDR : 0006, 0007, 0028, 0054 · retour : la classe %>
 <% course = @course.course %>
 <% active = @classroom.status == "active" %>
-<% content_for :title, t(".page_title", course: course.name, classroom: @classroom.name) %>
+<% page_title course.name %>
 <% content_for :nav_key, "classrooms" %>
-<nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-  <%= link_to classroom_path(@classroom.public_id), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-    <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back", classroom: @classroom.name) %>
-  <% end %>
-</nav>
+<%= ui_back_link @classroom.name, href: classroom_path(@classroom.public_id) %>
 
 <%= ui_card padding: :md, class: "mb-8" do %>
   <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
