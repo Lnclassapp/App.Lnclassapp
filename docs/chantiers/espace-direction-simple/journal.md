@@ -76,3 +76,18 @@ Portes, lancées une fois : `bin/rubocop` 0 offense (992 fichiers) ; `CI=1 PARAL
 | **PR** | — |
 | **ADR produits** | [0065](../../decisions/adr/0065-espace-direction-simple-en-lecture-seule.md) |
 | **UDR produits** | [0052](../../decisions/udr/0052-espace-direction-simple.md) |
+
+## Lot B — Enseignants (2026-09-29)
+
+**Statut : fait.** Branche `feature/espace-direction-simple-lot-b`, dans le seul champ `Fichiers` du lot ; aucun port du Lot 0 touché.
+
+- `Queries::School::SchoolTeachersQuery#call(school_id:, school_year:)` → `Overview(school_name, teachers)` ; `TeacherRow(name, material_name, material_category, classroom_names)`. Trois requêtes fixes (établissement, enseignants, classes) : la jointure enseignant → matière reprend celle de `SchoolDetailQuery#teachers`, plus le filtre `users.anonymized_at IS NULL`. Un enseignant en attente n'a pas de ligne `teacher_schools` (ADR-0063) : il est absent sans filtre de plus.
+- Classes d'un enseignant : ses `teacher_classrooms` dont la classe est de l'établissement, `active` et de l'année (définition « Classe » de l'ADR-0065 §4), triées par `levels.position` puis nom.
+- `SchoolAdmin::TeachersController#index` : une ligne, `school_id` pris de `current_actor` ; la garde et le 403 viennent de `SchoolAdmin::BaseController` (Lot 0).
+- `school_admin/teachers/index` conforme à l'UDR-0052 §3 : `ui_page_header`, `ui_card#school_teachers` (`padding: :none`, pour aligner les cellules sur le bord de la carte) → `div.relative.overflow-x-auto` → `table.min-w-xl` avec `caption.sr-only` et `scope` ; `tr#teacher_<index>` ; « Aucune classe » en `text-mute` ; matière absente : « — » `aria-hidden` + « non calculé » `sr-only` ; état vide `user-group`. Aucun JavaScript, formulaire, identifiant ni numéro.
+
+Tests (rouges d'abord : constante et contrôleur absents) : `test/infrastructure/queries/school/school_teachers_query_test.rb` (DS-06, DS-10, nombre de requêtes constant en triplant les données), `test/controllers/school_admin/teachers_controller_test.rb` (DS-06, DS-10, DS-11 : élève, enseignant, équipe → 403 ; visiteur → « Se connecter » ; aucun numéro de téléphone dans la page).
+
+Écart mineur : la fabrique `create_school_admin` nomme la direction « Awa Koné » par défaut, comme l'enseignante de DS-06 ; le test de refus inter-établissements utilise donc un autre nom d'enseignant.
+
+Portes, lancées une fois : `bin/rubocop` 0 offense (996 fichiers) ; `CI=1 PARALLEL_WORKERS=2 bin/rails test` 2354 tests, 0 échec, 0 erreur, 7 skips préexistants (`PERF=1`), couverture 100 % lignes (8478/8478) et branches (2065/2065) ; `COVERAGE=0 bin/rails test:system` 195 tests, 0 échec, **1 erreur hors lot** (`Teams::ImportFlowTest` « a file over 20 MB is refused in the modal », `StaleElementReferenceError` de Selenium ; relancé seul, le fichier passe 4/4 : test instable, sans lien avec ce lot) ; `bin/brakeman -q --no-pager` 0 alerte.
