@@ -5,7 +5,7 @@ module Entities
     class HomeDestinationTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 9, 25)
 
-      def actor(role) = Actor.new(user_id: 1, role:)
+      def actor(role, school_id: nil) = Actor.new(user_id: 1, role:, school_id:)
 
       def membership(left_at: nil, classroom_status: "active")
         Entities::Classroom::Membership.new(classroom_id: 3, student_id: 1, primary: true, joined_at: NOW,
@@ -32,9 +32,16 @@ module Entities
         assert_equal :teacher_home, destination(actor(:teacher), school_id: 4, onboarded: true)
       end
 
-      test "l'équipe va à son accueil, la direction attend la V2" do
+      test "l'équipe va à son accueil" do
         assert_equal :team_home, destination(actor(:team))
+      end
+
+      # DS-05 (ADR-0065, UDR-0052) : « Travail des élèves » est l'accueil de la direction rattachée ; sans établissement,
+      # ReadOwnSchoolPolicy lui refuserait cette page : elle attend, sans boucle de redirection.
+      test "une direction rattachée arrive sur « Travail des élèves », une direction sans établissement attend" do
+        assert_equal :school_admin_classrooms, destination(actor(:school_admin, school_id: 4))
         assert_equal :pending_account, destination(actor(:school_admin))
+        assert_includes HomeDestination::ALL, :school_admin_classrooms
       end
     end
   end

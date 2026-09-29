@@ -76,3 +76,21 @@ Portes, lancées une fois : `bin/rubocop` 0 offense (992 fichiers) ; `CI=1 PARAL
 | **PR** | — |
 | **ADR produits** | [0065](../../decisions/adr/0065-espace-direction-simple-en-lecture-seule.md) |
 | **UDR produits** | [0052](../../decisions/udr/0052-espace-direction-simple.md) |
+
+## Lot C — Travail des élèves (2026-09-29)
+
+Fait (branche `feature/espace-direction-simple-lot-c`), strictement dans le champ `Fichiers` :
+
+- `HomeDestination` : une direction **rattachée** (`actor.school_id`) arrive sur `:school_admin_classrooms` ; sans établissement, elle reste sur l'écran d'attente, car `ReadOwnSchoolPolicy` lui refuserait la page (pas de boucle 403). `Authentication::HOME_ROUTES` y mène par `school_admin_classrooms_path`. Le logo suivait déjà la première destination du rôle (`NavigationHelper#home_path_for`, Lot 0) : rien à changer.
+- `Queries::School::StudentWorkQuery#classrooms` et `#classroom` : les définitions de l'ADR-0065 §4 écrites en SQL groupé ; 5 requêtes pour la liste, 4 pour une classe, constantes (testé en triplant les données). Aucune requête existante ne convenait telle quelle : `TeamDashboardQuery` agrège par DRENA sur les classes principales, `ClassroomOverviewQuery` lit la dernière session de chaque élève ; la définition « classe » (active, de l'année) et « élève présent » (non anonymisé, adhésion non quittée) est celle de l'ADR-0062.
+- `SchoolAdmin::ClassroomsController` (index, show ; 404 par `render_not_found` quand la query rend `nil`), vues `school_admin/classrooms/index` et `show` conformes à l'UDR-0052 (`nav_key` `student_work`, tableaux `caption`/`scope`, « — » `aria-hidden` + « non calculé » `sr-only`, états vides), locale `school_admin/classrooms.fr.yml`.
+
+Précisions d'implémentation (sans écart à l'ADR) :
+
+- Une classe archivée ou d'une autre année de **son** établissement donne aussi 404 : la page d'une classe lit les mêmes classes que la liste.
+- Un devoir rendu deux fois compte une fois dans le taux, mais ses deux sessions comptent dans les moyennes (« moyenne des `score_percent` des sessions rendues »).
+- Les sessions rendues sont celles des élèves **présents** dans la classe : un élève parti emporte ses résultats (coût déjà consenti dans l'ADR).
+
+Observation pour le porteur (non corrigée, UDR appliquée littéralement) : sur un téléphone de 390 px, le tableau des élèves d'une classe (3 colonnes) garde `min-w-xl` (« même tableau que la liste ») et défile donc dans sa carte, alors qu'il tiendrait à l'écran. À retirer par un amendement de l'UDR-0052 si le porteur le souhaite.
+
+Tests : `test/domain/entities/identity/home_destination_test.rb` (DS-05), `test/infrastructure/queries/school/student_work_query_test.rb` (DS-07 à DS-10, une par définition, requêtes constantes), `test/controllers/school_admin/classrooms_controller_test.rb` (DS-07, DS-09, DS-10, DS-11), `test/system/school_admin/student_work_test.rb` (DS-05, DS-09, bureau et 390 px). Rouges d'abord : `HomeDestination` rendait `:pending_account`, `StudentWorkQuery` et `SchoolAdmin::ClassroomsController` n'existaient pas.
