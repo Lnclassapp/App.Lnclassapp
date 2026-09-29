@@ -168,7 +168,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /Classes générées : 77/
     assert_select "li", text: /Levels skipped : 2/
     assert_select "#import_errors li", 2
-    assert_select "#import_errors li", text: /schools\[4\]\s*Valeur non conforme au format attendu \(required\)/
+    assert_select "#import_errors li", text: /schools\[4\]\s*Clé obligatoire manquante\./
   end
 
   test "the tracking frame alone answers a request coming from the frame" do

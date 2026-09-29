@@ -16,7 +16,7 @@ fr:
         unknown_target: "La cible indiquée est introuvable."
         too_many_roots: "Le fichier contient %{count} éléments ; %{max} au plus."
         too_large: "Le fichier est trop volumineux."
-        schema: "Valeur non conforme au format attendu (%{keyword})."
+        schema: "Valeur non conforme au format attendu."
         blank: "Valeur obligatoire manquante."
         too_long: "Valeur trop longue."
         unknown_level: "Niveau inconnu."
@@ -30,6 +30,18 @@ fr:
         write_failed: "L'enregistrement de cet élément n'a pas abouti."
         taken: "Ce nom est déjà pris par une autre DRENA."
         no_latin_character: "Le nom doit contenir au moins une lettre ou un chiffre latin."
+      # Erreurs de schéma, par mot-clé json_schemer (Teams::ImportsHelper) ; les autres prennent error_codes.schema.
+      schema_keywords:
+        schema: "Clé inconnue : ce format ne la prévoit pas."
+        required: "Clé obligatoire manquante."
+        string: "Valeur attendue : un texte."
+        integer: "Valeur attendue : un nombre entier."
+        number: "Valeur attendue : un nombre."
+        boolean: "Valeur attendue : vrai ou faux."
+        array: "Valeur attendue : une liste."
+        object: "Valeur attendue : un objet."
+        const: "Valeur inattendue pour cette clé."
+        maxLength: "Valeur trop longue."
       index:
         page_title: "Imports"
         title: "Imports"
