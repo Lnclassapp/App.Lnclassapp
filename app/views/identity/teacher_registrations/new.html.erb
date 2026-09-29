@@ -2,8 +2,7 @@
 <%# Rôle : accueil à gauche, formulaire à droite ; /e/<code> refusé en 404 (carte), débit dépassé en 429 ; échec re-rendu en 422 ; @pending : sans code %>
 <%# ADR  : 0030, 0050, 0057, 0063 · UDR : 0005, 0024, 0044, 0050, 0054 (§3.2 : logo vers l'accueil public) %>
 <% page_title t(".page_title") %>
-<%# Le re-rendu 422 est un morphing : <body> ne se reconnecte pas, le focus repart à « turbo:morph » (UDR-0054 §3.3). %>
-<main class="grid min-h-dvh bg-paper md:grid-cols-2" data-action="turbo:morph@document->autofocus#focus">
+<main class="grid min-h-dvh bg-paper md:grid-cols-2">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
     <div class="max-w-sm text-center">
       <%= link_to root_path, "aria-label": t(".logo_home"),
