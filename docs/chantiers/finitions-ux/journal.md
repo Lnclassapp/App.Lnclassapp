@@ -67,3 +67,32 @@ Un lot vertical qui aurait besoin d'en changer une s'arrête : le Lot 0 rouvre.
 - `COVERAGE=0 bin/rails test:system` : 208 runs, 2562 assertions, 0 échec, 0 erreur, 0 skip.
 - `bin/brakeman -q --no-pager` : 0 avertissement.
 - `bin/check-asset-budget` : `application.js` 41,8 Ko gzip / 60 Ko.
+
+## Lot B — Second facteur et codes de secours (2026-09-29)
+
+Branche `feature/finitions-ux-lot-b`, depuis `feature/finitions-ux` (Lot 0 fusionné). Briques du Lot 0 utilisées telles quelles (`page_title`, `ui_field(autofocus:)`, `ui_info_tip`, `ui_copy_button`, contrôleurs `autosubmit` et `download`) ; `SecretResponse` réutilisé sans rien y toucher (le contrôleur d'activation n'est pas modifié, aucun en-tête posé).
+
+Critères couverts : FU-12, FU-34, FU-35, FU-36, FU-37, FU-38, FU-39, FU-40, FU-41, FU-42, FU-43, FU-53 (vérification, codes de secours) — `test/system/finitions/second_factor_test.rb` (9 cas), `test/controllers/identity/second_factors_controller_test.rb`, `test/controllers/identity/second_factor_enrollments_controller_test.rb`, `test/system/identity/sign_in_test.rb`.
+
+### Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-09-29 | Les liens « J'utilise un code de secours » / « Utiliser le code de l'application » sont des visites ordinaires, **sans** `data-turbo-action="replace"` (écart à UDR-0054 §3.6) | Le layout déclare `turbo_refreshes_with method: :morph` ; Turbo traite un `replace` vers le **même chemin** comme un rafraîchissement et fusionne la page (morph) : `<body>` n'est pas reconnecté, l'auto-focus ne vise pas le champ « Code de secours » (le focus restait sur le lien fusionné). Une visite `advance` remplace le `<body>` : le focus arrive sur le champ. Coût : un pas d'historique de plus | Non (à reporter dans UDR-0054 au Lot Z) |
+| 2026-09-29 | Le texte du fichier téléchargé est composé dans la vue : titre, date (`l(Date.current, format: :long)`), consigne, ligne vide, les 10 codes | UDR-0054 §3.7 ; rien d'autre que ce que la page affiche déjà | Non |
+| 2026-09-29 | Le paramètre `backup` est lu par un `before_action` du contrôleur de vérification (`@backup`), gardé au 422 par un champ caché | Sans JavaScript, le lien mène à la même variante ; un échec ne ramène pas au code de l'application | Non |
+
+### Ce qui a dérapé — à traiter hors du lot (le lot s'est arrêté à sa frontière)
+
+- **Brique du Lot 0 incomplète : l'auto-focus ne suit pas un re-rendu 422 fusionné.** Le rendu d'un formulaire en échec est lui aussi un rafraîchissement pour Turbo (`isPageRefresh` vrai sans visite) ; avec `morph`, `<body>` n'est pas reconnecté et `autofocus#connect` ne se rejoue pas. Constaté : code de secours faux envoyé par un clic sur « Vérifier » → le focus reste sur le bouton, pas sur le champ en erreur. FU-35 passe parce que la saisie garde le focus dans le champ. Correction proposée (Lot 0 rouvert ou Lot Z) : `autofocus` en mode page écoute aussi `turbo:morph` (ou `turbo:render`). Le test correspondant n'est **pas** dans ce lot (il échouerait) : à ajouter avec la correction.
+- **Tests hors du champ `Fichiers` que ce lot casse** (non modifiés, conformément à la consigne) :
+  - `test/support/system_authentication_helper.rb` — `sign_in_as` tape le code puis clique « Vérifier » ; avec l'envoi automatique, la page peut déjà être partie : **erreur intermittente** (1 sur 3 constatée sur `sign_in_test` avant de le contourner dans ce fichier). Tous les tests système qui connectent un membre de l'équipe en dépendent. Correction : retirer le `click_on` (le code part seul), comme `sign_in_with_second_factor` de `sign_in_test.rb`.
+  - `test/system/identity/team_invitation_test.rb` (Lot A), `test/system/identity/secret_back_navigation_test.rb`, `test/system/error_paths_test.rb` (2 cas), `test/system/boucle_pedagogique_test.rb` — cliquent `identity.second_factor_enrollments.backup_codes.done` (clé retirée : le bouton est devenu « Continuer », derrière la case obligatoire « Je les ai gardés ») et/ou « Activer »/« Vérifier » après l'envoi automatique. Correction : `check "Je les ai gardés"` puis `click_on "Continuer"`, et plus de clic après les 6 chiffres.
+- FU-12 : « Se déconnecter » mène, comme sur la vérification, à l'accueil public (`root_path`, `SessionsController#destroy`, hors lot), pas directement à « Se connecter ». Le test vérifie la session fermée (l'activation renvoie ensuite à « Se connecter »).
+- Le titre « Accueil · Équipe · Lnclass » de l'accueil de l'équipe relève du Lot D2 : il n'est pas vérifié ici.
+
+### Vérifications du lot
+
+- `COVERAGE=0 bin/rails test test/controllers/identity/second_factors_controller_test.rb test/controllers/identity/second_factor_enrollments_controller_test.rb` : 22 runs, 0 échec.
+- `COVERAGE=0 bin/rails test test/system/finitions/second_factor_test.rb test/system/identity/sign_in_test.rb` : 14 runs, 0 échec, trois passes de suite.
+- `bin/rubocop` sur les fichiers Ruby du lot : aucune offense.
