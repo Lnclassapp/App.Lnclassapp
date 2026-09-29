@@ -98,33 +98,44 @@ Règles des questions :
 - Dire « proposition » pour un choix de réponse.
 - Aucune mention « conforme au programme ».
 
-## Format de sortie : JSON importable (`lnclass.essentials` v1)
+## Format de sortie : JSON importable (`lnclass.course-tree` v1)
 
-Le fichier est à importer depuis l'écran **Imports → Fiches essentielles**. `course` est le **slug exact** du cours cible, tel qu'affiché dans Lnclass. Tout le contenu naît en brouillon.
+Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, les exercices de chaque fiche, leurs questions et leurs propositions. Il s'importe **en une fois** depuis l'écran **Imports → Cours complets**. Tout le contenu naît en brouillon.
+
+- `name` : l'intitulé exact de la leçon dans la progression. `subtitle` : « Leçon N — progression DPFC 2026-2027 ».
+- `level_name` : `6ème`, `5ème`, `4ème`, `3ème`, `2nde`, `1ère` ou `Tle`. `material_name` : le nom de la matière dans Lnclass (ex. « Physique-Chimie » pour la physique comme pour la chimie). `series_name` : la série (A1, A2, C, D…), à omettre au 1er cycle.
 
 ```json
 {
-  "format": "lnclass.essentials",
+  "format": "lnclass.course-tree",
   "version": 1,
-  "course": "<slug-du-cours>",
-  "essentials": [
+  "courses": [
     {
-      "name": "Le théorème des gendarmes",
-      "subtitle": "Encadrer une suite pour trouver sa limite",
-      "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>…</li></ul><h2>L'image pour comprendre</h2><p>…</p>…",
-      "exercises": [
+      "name": "Limites et continuité",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "essentials": [
         {
-          "title": "Comprendre — Reconnaître un encadrement",
-          "exercise_type": "fixation",
-          "questions": [
+          "name": "Le théorème des gendarmes",
+          "subtitle": "Encadrer une suite pour trouver sa limite",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>…</li></ul><h2>L'image pour comprendre</h2><p>…</p>…",
+          "exercises": [
             {
-              "content": "On sait que $u_n \\le v_n \\le w_n$ et que $\\lim u_n = \\lim w_n = 2$. Que vaut $\\lim v_n$ ?",
-              "question_type": "single_choice",
-              "explanation": "Les deux « policiers » $u_n$ et $w_n$ vont vers 2 : le « prisonnier » $v_n$ y va aussi. …",
-              "answers": [
-                { "content": "$2$", "correct": true },
-                { "content": "On ne peut pas savoir", "correct": false },
-                { "content": "$0$", "correct": false }
+              "title": "Comprendre — Reconnaître un encadrement",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On sait que $u_n \\le v_n \\le w_n$ et que $\\lim u_n = \\lim w_n = 2$. Que vaut $\\lim v_n$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux « policiers » $u_n$ et $w_n$ vont vers 2 : le « prisonnier » $v_n$ y va aussi. …",
+                  "answers": [
+                    { "content": "$2$", "correct": true },
+                    { "content": "On ne peut pas savoir", "correct": false },
+                    { "content": "$0$", "correct": false }
+                  ]
+                }
               ]
             }
           ]
@@ -157,8 +168,8 @@ Le fichier est à importer depuis l'écran **Imports → Fiches essentielles**. 
 ## ENTRÉE (à remplir à chaque appel)
 
 - **Cours** : <intitulé exact, ex. « Limites et comportement asymptotique »>
-- **Slug du cours dans Lnclass** : <ex. « limites-et-comportement-asymptotique-2 »>
 - **Niveau / série** : <ex. Tle D>
+- **Rang dans la progression** : <ex. 1, pour le sous-titre « Leçon 1 — progression DPFC 2026-2027 »>
 - **Matière** : <ex. Mathématiques>
 - **Place dans la progression DPFC 2026-2027** : <ex. leçon 4, semaines 8 à 11>
 - **Notions à couvrir** (facultatif) : <liste du programme, si tu l'as>
