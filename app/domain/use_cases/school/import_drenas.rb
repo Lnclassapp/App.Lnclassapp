@@ -48,7 +48,7 @@ module UseCases
         drena.validate
         return error(path, "blank") if drena.errors.of_kind?(:name, :blank)
         return error(path, "too_long", max: Entities::School::Drena::NAME_MAX) if drena.errors.of_kind?(:name, :too_long)
-        return error(path, "invalid_value", value: drena.name) if slug.nil?
+        return error(path, "no_latin_character", value: drena.name) if slug.nil?
 
         error(path, "taken", value: drena.name) if taken?(drena.name, slug, context)
       end

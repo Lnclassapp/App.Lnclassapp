@@ -33,7 +33,7 @@ Règle d'autorisation : `Policies::School::ManageSchoolPolicy` (équipe seulemen
 |---|---|
 | Une ligne a le slug d'une DRENA existante, ou d'une ligne plus haut dans le fichier | Elle est ignorée et comptée « ignorée ». La DRENA existante n'est pas modifiée |
 | Une ligne porte un nom déjà pris en base sous un autre slug | Erreur de la ligne `drenas[i].name`, code `taken`. Les autres lignes sont importées |
-| Une ligne a un nom vide, fait d'espaces, de plus de 80 caractères, ou sans lettre latine | Erreur de la ligne à `drenas[i].name` (`blank`, `too_long`, `invalid_value`) |
+| Une ligne a un nom vide, fait d'espaces, de plus de 80 caractères, ou sans lettre latine | Erreur de la ligne à `drenas[i].name` (`blank`, `too_long`, `no_latin_character` — « Le nom doit contenir au moins une lettre ou un chiffre latin. », le même message qu'au formulaire) |
 | Une ligne porte une clé inconnue (`code`, `region`…) | Erreur de schéma de la ligne |
 | Format autre que `lnclass.drenas`, version autre que 1, ou JSON illisible | Rejet en bloc, rien n'est écrit |
 | Plus de 500 lignes | Rejet en bloc `too_many_roots` |
@@ -74,7 +74,7 @@ Et « Man » est importée
 
 # DR-05 — lignes invalides
 Quand l'équipe importe un nom vide, un nom de 81 caractères, « ??? » et une ligne { "name": "Man", "code": "M1" }
-Alors chaque ligne est en erreur à son chemin drenas[i] (blank, too_long, invalid_value, schéma)
+Alors chaque ligne est en erreur à son chemin drenas[i] (blank, too_long, no_latin_character, schéma)
 Et aucune DRENA n'est créée
 
 # DR-06 — rejets en bloc

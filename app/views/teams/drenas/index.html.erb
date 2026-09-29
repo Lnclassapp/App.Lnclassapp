@@ -4,8 +4,12 @@
 <% content_for :title, t(".page_title") %>
 <% content_for :nav_key, "schools" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
-  <%= ui_button t(".import"), href: new_teams_import_path(kind: "drenas"), variant: :secondary, icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
-  <%= ui_button t(".new"), href: new_drena_path, icon: "plus", data: { turbo_frame: "modal" } %>
+  <%# Les deux boutons restent sur une ligne dès sm (UDR-0053) : ce bloc ne se replie pas et le sous-titre cède la place.
+      Au téléphone, il passe à la ligne s'il ne tient pas. %>
+  <div id="drenas-header-actions" class="flex flex-wrap items-center gap-3 sm:shrink-0 sm:flex-nowrap">
+    <%= ui_button t(".import"), href: new_teams_import_path(kind: "drenas"), variant: :secondary, icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+    <%= ui_button t(".new"), href: new_drena_path, icon: "plus", data: { turbo_frame: "modal" } %>
+  </div>
 <% end %>
 
 <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
