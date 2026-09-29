@@ -1,16 +1,16 @@
 <%# 🌐 UI · identity/profile_names/edit — « Modifier mon nom », servi dans le frame « modal » (ouverte sur le shell sans frame) %>
 <%# Rôle : nom (50 max) et prénom(s) (80 max) ; échec re-rendu en 422 dans la modale, succès en Turbo Stream %>
-<%# ADR  : 0037, 0055 · UDR : 0006, 0041 %>
-<% content_for :title, t(".title") %>
+<%# ADR  : 0037, 0055 · UDR : 0006, 0041, 0054 %>
+<% tab_title = page_title(t(".title")) %>
 <%= turbo_frame_tag "modal" do %>
-  <%= ui_modal title: t(".title"), id: "profile-name-modal", size: :sm, open: true do |modal| %>
+  <%= ui_modal title: t(".title"), id: "profile-name-modal", size: :sm, open: true, document_title: tab_title do |modal| %>
     <% modal.footer do %>
       <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
       <%= ui_button t(".submit"), type: :submit, form: "profile-name-form", icon: "check" %>
     <% end %>
     <%= form_with model: @form, scope: :profile_name, url: profile_name_path, method: :patch, id: "profile-name-form",
                   class: "space-y-5" do |f| %>
-      <%= ui_field f, :last_name, required: true, maxlength: 50, autocomplete: "family-name", autofocus: true %>
+      <%= ui_field f, :last_name, required: true, maxlength: 50, autocomplete: "family-name" %>
       <%= ui_field f, :first_name, required: true, maxlength: 80, autocomplete: "given-name" %>
     <% end %>
   <% end %>
