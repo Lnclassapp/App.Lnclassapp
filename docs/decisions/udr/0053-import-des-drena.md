@@ -31,7 +31,7 @@ L'UDR-0035 a posé l'écran des DRENA avec un seul bouton d'en-tête. Le porteur
 - `app/views/teams/drenas/index.html.erb`, bloc de `ui_page_header`, dans cet ordre :
   1. `ui_button t(".import"), href: new_teams_import_path(kind: "drenas"), variant: :secondary, icon: "arrow-up-tray", data: { turbo_frame: "modal" }` — libellé « Importer des DRENA » ;
   2. le bouton « Nouvelle DRENA » existant, inchangé (`icon: "plus"`, variant par défaut).
-  Les deux sont dans le même bloc de `ui_page_header`, qui les aligne et les fait passer à la ligne sur téléphone. Aucun conteneur ni classe de marge ajoutés.
+  Les deux sont dans `div#drenas-header-actions.flex.flex-wrap.items-center.gap-3.sm:shrink-0.sm:flex-nowrap`, dans le bloc de `ui_page_header` : dès `sm`, ils restent sur une seule ligne et le sous-titre cède la place ; sur téléphone, ils passent à la ligne s'ils ne tiennent pas. C'est le motif de `#schools-header-actions`. *(Amendé le 2026-09-29 : le challenger a vu les boutons empilés à 1 280 px.)*
 - L'état vide de l'écran (`div#drenas_empty`) garde son titre, mais sa description devient « Créez la première DRENA, ou importez-les toutes depuis un fichier JSON. ». Aucun bouton n'est ajouté dans l'état vide : ceux de l'en-tête suffisent.
 - Nouveau partial `app/views/teams/imports/kinds/_drenas.html.erb`, rendu automatiquement par `teams/imports/new` sous le champ de fichier (même mécanisme que `_schools`) :
   - `section#import-help-drenas` (`rounded-ln bg-mist p-4 text-sm space-y-4`), avec `aria-labelledby="import-help-drenas-title"` sur son `h3#import-help-drenas-title` « Format du fichier » (`font-medium text-ink`) ;
