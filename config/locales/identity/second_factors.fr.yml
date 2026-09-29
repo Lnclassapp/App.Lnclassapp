@@ -1,30 +1,46 @@
-# Second facteur des comptes de l'équipe : vérification, activation, codes de secours — ADR-0031
+# Second facteur des comptes de l'équipe : vérification, activation, codes de secours — ADR-0031, UDR-0054
 fr:
   identity:
     second_factors:
       new:
-        page_title: "Vérification · Lnclass"
+        page_title: "Vérification"
         title: "Vérification en deux étapes"
         subtitle: "Saisissez le code à 6 chiffres affiché par votre application d'authentification."
-        code_hint: "ou un code de secours"
+        backup_subtitle: "Saisissez l'un de vos codes de secours. Chaque code ne sert qu'une fois."
+        backup_label: "Code de secours"
+        use_backup: "J'utilise un code de secours"
+        use_app: "Utiliser le code de l'application"
         submit: "Vérifier"
         sign_out: "Se déconnecter"
       create:
         verified: "Vérification réussie"
     second_factor_enrollments:
       new:
-        page_title: "Activer la vérification · Lnclass"
+        page_title: "Activer la vérification"
         title: "Activez la vérification en deux étapes"
         subtitle: "Obligatoire pour les comptes de l'équipe."
         scan: "Scannez ce QR code avec votre application d'authentification."
+        app_tip_label: "Application d'authentification"
+        app_tip: "Une application qui affiche un code à 6 chiffres renouvelé toutes les 30 secondes, par exemple Google Authenticator ou Microsoft Authenticator."
         qr_label: "QR code d'activation"
         manual: "Ou saisissez ce secret dans l'application :"
-        code_hint: "Le code à 6 chiffres affiché par l'application."
         submit: "Activer"
+        sign_out: "Se déconnecter"
       backup_codes:
-        page_title: "Codes de secours · Lnclass"
+        page_title: "Codes de secours"
         title: "Vos codes de secours"
         subtitle: "Chaque code remplace une fois le code de l'application."
         list_label: "Codes de secours"
         once: "Ces codes sont affichés une seule fois. Notez-les et gardez-les en lieu sûr."
-        done: "J'ai noté mes codes"
+        download: "Télécharger"
+        copy: "Copier"
+        copy_label: "Copier les codes de secours"
+        print: "Imprimer"
+        saved: "Fichier des codes de secours téléchargé."
+        # Texte du fichier téléchargé : rien d'autre que les codes déjà affichés.
+        file:
+          name: "lnclass-codes-de-secours.txt"
+          heading: "Codes de secours Lnclass"
+          once: "Chaque code ne sert qu'une fois."
+        kept: "Je les ai gardés"
+        continue: "Continuer"

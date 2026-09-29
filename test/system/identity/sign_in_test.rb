@@ -47,7 +47,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
     assert_arrived_on teacher_home_path
   end
 
-  test "a team member goes through the second factor, then reaches the team home" do
+  test "a team member goes through the second factor without a click, then reaches the team home" do
     member = create_team_member
     visit new_session_path
     fill_in "session[contact]", with: member.contact
@@ -56,15 +56,14 @@ class Identity::SignInTest < ApplicationSystemTestCase
 
     assert_selector "#second-factor-form", wait: SIGN_IN_WAIT
     assert_current_path new_identity_second_factor_path
+    # UDR-0054 §3.6: the code leaves by itself at the sixth digit.
     assert_no_page_reload do
       fill_in "second_factor[code]", with: "000000"
-      click_on I18n.t("identity.second_factors.new.submit")
 
       assert_selector "#second_factor_code_error", text: "Code incorrect."
     end
 
     fill_in "second_factor[code]", with: ROTP::TOTP.new(member.totp_secret).now
-    click_on I18n.t("identity.second_factors.new.submit")
 
     assert_arrived_on team_home_path
   end
@@ -90,13 +89,22 @@ class Identity::SignInTest < ApplicationSystemTestCase
       assert_toast "Connexion réussie"
 
       sign_out
-      sign_in_as member
+      sign_in_with_second_factor member
 
       assert_arrived_on team_home_path
     end
   end
 
   private
+
+  # The code leaves by itself at the sixth digit (UDR-0054 §3.6): no click on « Vérifier », which may be gone already.
+  def sign_in_with_second_factor(member)
+    visit new_session_path
+    fill_in "session[contact]", with: member.contact
+    fill_in "session[pin]", with: "2468"
+    click_on I18n.t("identity.sessions.new.submit")
+    fill_in "second_factor[code]", with: ROTP::TOTP.new(member.totp_secret).now, wait: SIGN_IN_WAIT
+  end
 
   # Every home renders the shell: its main region is there before the URL is checked.
   def assert_arrived_on(path)
