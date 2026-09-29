@@ -74,6 +74,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | Premier déploiement sur base neuve : seeds joués deux fois (`db:prepare` semait avant `db:seed`), corrigé par `seeds: false` en production (amendement ADR-0052) ; processeur de variantes Active Storage désactivé, aucune variante n'étant utilisée (ADR-0060) |
 
 | [`espace-direction-simple`](espace-direction-simple/memo.md) | livré (#86) | V2 en version simple (porteur, 2026-09-28) : la direction, invitée par l'équipe et connectée par PIN, lit « Enseignants » et « Travail des élèves » de son seul établissement (ADR-0065, UDR-0052, acceptés le 2026-09-29) |
+| [`cache-ecrans-lourds`](cache-ecrans-lourds/memo.md) | cadrage | Mesurer avant de mettre en cache (porteur, 2026-09-29) : 28 écrans au volume de la feuille de route, aucun N+1 ; pilotage (333 à 390 ms), recherche du pilotage (263 ms) et Travail des élèves (214 ms) coûtent en SQL, établissements et catalogue au rendu ; cinq pistes classées, aucune appliquée |
 
 ## Backlog
 
