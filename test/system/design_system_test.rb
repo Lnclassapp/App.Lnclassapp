@@ -526,6 +526,45 @@ class DesignSystemTest < ApplicationSystemTestCase
     end
   end
 
+  # Boîte d'un élément dans la page (et non dans la fenêtre) : indépendante du défilement que fait Capybara.
+  PAGE_BOX = "(r => [r.left + scrollX, r.top + scrollY, r.width, r.height].map(Math.round))(this.getBoundingClientRect())"
+
+  # UDR-0054 §3.4, amendement « survol » : la souris ouvre l'aide en bulle et la referme en partant ; un clic pendant le
+  # survol la garde ouverte, dans le flux, et le clic suivant la ferme.
+  test "an info tip opens on mouse hover, closes when the mouse leaves, and a click keeps it open" do
+    text = t("design.index.finishes.info_tip.text")
+
+    within("[data-example=finish-info-tip]") do
+      assert_no_text text
+      summary = find("details summary")
+      before = summary.evaluate_script(PAGE_BOX)
+      summary.hover
+
+      assert_selector("details[open]", text:)
+      # En bulle : le panneau flotte sous l'icône, rien ne bouge sous la souris.
+      assert_equal "fixed", css(find("details[open] div", text:), "position")
+      assert_equal before, summary.evaluate_script(PAGE_BOX)
+    end
+    first("h1").hover
+
+    within("[data-example=finish-info-tip]") do
+      assert_no_selector "details[open]"
+      summary = find("details summary")
+      summary.hover
+      assert_selector "details[open]"
+      summary.click
+    end
+    first("h1").hover
+
+    within("[data-example=finish-info-tip]") do
+      # Épinglée par le clic : de retour dans le flux (§3.4).
+      assert_equal "static", css(find("details[open] div", text:), "position")
+      find("details summary").click
+
+      assert_no_selector "details[open]"
+    end
+  end
+
   # Page mode: a page that declares its field focuses it on arrival (here « Se connecter », UDR-0054 §3.3).
   test "the page autofocus goes to the field the screen declares" do
     visit new_session_path

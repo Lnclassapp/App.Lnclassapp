@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-09-29 ; textes d'infobulles à valider dans la PR)* |
+| **Statut** | Accepté *(par le porteur le 2026-09-29 ; textes d'infobulles validés le 2026-09-29, ouverture au survol ajoutée : voir l'amendement « survol »)* |
 | **Date** | 2026-09-29 |
 | **Chantier** | [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md) — critères FU-01 à FU-54 |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script en ligne) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Safari 16.4, 60 Ko de JS) · [ADR-0031](../adr/0031-second-facteur-totp-pour-l-equipe.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) |
@@ -119,7 +119,7 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 - Aucun contrôleur : ouverture et fermeture au clic, au toucher, à Entrée et à Espace, par le navigateur.
 - Le `title=` du badge « hors génération » (niveaux) est supprimé et remplacé par une infobulle.
 
-**Textes proposés** (à valider par le porteur dans la PR ; clés `shared.info_tips.*` pour les textes communs, sinon dans la locale de l'écran)
+**Textes** (validés par le porteur le 2026-09-29 ; clés `shared.info_tips.*` pour les textes communs, sinon dans la locale de l'écran)
 
 | Écran | Élément | Texte proposé |
 |---|---|---|
@@ -279,3 +279,22 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 - **§3.4, badge des niveaux** : le badge s'appelle « Hors barème » (UDR-0045) ; son aide se nomme donc « Aide : Hors barème » (le libellé du badge, règle « Aide : <libellé> »), et non « hors génération ». Texte inchangé.
 - **§3.9, état d'erreur** : le formulaire de recherche porte un `<template data-search-target="error">` rendu par `ui_error_state` ; sur `turbo:frame-missing` (réponse sans le frame : page d'erreur, non 2xx) ou `turbo:fetch-request-error` (réseau), le contrôleur `search` le pose dans le frame. « Réessayer » rejoue **la recherche qui a échoué** (action du formulaire et ses champs) en page entière (`data-turbo-frame="_top"`) : une session expirée ou une classe disparue y montre sa vraie page. Posé sur les quatre listes : établissements, catalogue, élèves d'une classe (enseignant, direction).
 - **§3.1, titres visibles des imports** : le deux-points est retiré du seul **titre de l'onglet** ; les titres visibles « Importer : DRENA » et « Import : Établissements » le gardent (la règle du segment « Page » vise l'onglet). La modale de suivi d'un import nomme l'onglet comme la page du rapport (« Import d'établissements · Équipe · Lnclass »).
+
+## Amendement du 2026-09-29 — textes validés, ouverture au survol
+
+*Décision du porteur du 2026-09-29 : « valide le tooltip et affiche le contenu au passage de la souris ». Elle fait foi en cas d'écart avec le §2.6 et le §3.4.*
+
+- **Textes** : les textes du §3.4 sont validés tels quels, avec la précision « Hors barème » de l'amendement précédent.
+- **Survol** : à la souris, l'infobulle s'ouvre quand le pointeur entre sur elle et se referme quand il en sort. La règle « aucun contrôleur » du §3.4 est levée pour cela seul : le contrôleur `info-tip` est posé sur le `<details>` (`pointerenter` / `pointerleave`).
+  - **Souris seulement** : le contrôleur lit `event.pointerType === "mouse"`, pas la media query `(hover: hover)`, que des appareils et Chrome sans interface déclarent mal. Au toucher, `pointerenter` précède le clic, qui reste seul à ouvrir.
+  - **Clic pendant le survol** : il garde l'infobulle ouverte (le navigateur la refermerait sous la souris). Elle devient ouverte « au clic » : le pointeur qui part ne la ferme plus, le clic suivant la ferme.
+  - **Une infobulle déjà ouverte par un clic** n'est pas reprise par le survol.
+  - **Clavier, toucher, sans JavaScript** : inchangés, le `<details>` natif suffit.
+- **Panneau au survol : une bulle.** Au survol, le panneau **flotte** sous l'icône, en `position: fixed`, et ne pousse rien. La règle « dans le flux » du §3.4 vaut toujours pour l'infobulle ouverte au clic, au toucher ou au clavier, et pour celle qu'un clic a épinglée.
+  - **Pourquoi pas dans le flux** : ouvert dans le flux, le panneau élargit le `<details>` et déplace l'icône (en-tête de la classe, à 390 px comme au bureau). La souris n'est plus dessus : l'infobulle se ferme, l'icône revient, elle se rouvre, et ainsi de suite.
+  - **Pourquoi `fixed`, pas `absolute`** : une bulle absolue serait coupée par les tableaux défilants (`overflow-x-auto`). La position fixe y échappe. Le contrôleur la calcule depuis l'icône : bord gauche aligné, contenue dans la fenêtre à 16 px des bords, au-dessus de l'icône s'il manque la place dessous. Elle est replacée à chaque défilement.
+  - **Style** : les classes `group-data-floating:` du partial (`fixed`, `z-50`, `w-max`, `max-w-bubble`, `shadow-pop`). Le nouvel utilitaire `@utility max-w-bubble` limite la bulle à `--container-form` et à la fenêtre moins 2 rem ; il s'ajoute à UDR-0005, comme `summary-plain`. Le contrôleur pose et retire `data-floating` ; ses seules écritures de style passent par le CSSOM (`left`, `top`), que la CSP stricte (ADR-0049) autorise.
+  - **Épinglée par un clic**, la bulle retourne dans le flux.
+- **Vérification** :
+  - `test/system/design_system_test.rb` : ouverture au survol en bulle fixe, sans que l'icône bouge ; fermeture au départ du pointeur ; clic qui garde ouvert, de retour dans le flux ; clic suivant qui ferme ;
+  - `test/helpers/components_helper_test.rb` : le contrôleur et ses actions sont posés.
