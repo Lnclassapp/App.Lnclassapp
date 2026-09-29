@@ -71,8 +71,9 @@ L'offre gratuite d'une organisation GitHub donne **2 000 minutes par mois** sur 
 
 | Métrique | Avant | Demandé | Budget du quota gratuit | Comment mesurée |
 |---|---:|---:|---:|---|
-| Horloge d'un run de PR de code | 2 min 36 – 2 min 39 | < 3 min | — | création → fin du run |
-| Minutes facturées par run de PR de code | 27 – 29 | *< 3 ? (voir grill, question 1)* | 66 min/jour ÷ runs par jour | `ceil` par job, [`script/ci/billed_minutes`](../../../script/ci/billed_minutes) |
+| Horloge d'un run de PR de chantier | 2 min 36 – 2 min 39 | **< 3 min** (runner local) | — | création → fin du run |
+| Minutes GitHub facturées par run de PR de chantier | 27 – 29 | **0** (runner local) | — | `ceil` par job hébergé, [`script/ci/billed_minutes`](../../../script/ci/billed_minutes) |
+| Minutes GitHub facturées par run de promotion (PR et push `Staging`, `main`) | 27 – 29 | **< 3** | — | idem |
 | Minutes facturées par jour de travail soutenu | ≈ 1 100 (40 runs) | — | **66** | idem, × runs du jour |
 
 ## Hors périmètre
@@ -83,7 +84,7 @@ L'offre gratuite d'une organisation GitHub donne **2 000 minutes par mois** sur 
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| 1. « Moins de 3 minutes » : l'horloge d'un run, ou les minutes facturées par run ? | **Les deux, selon la branche.** Les PR de chantier : verdict en moins de 3 minutes d'horloge, sur un **runner auto-hébergé sur la machine du porteur** (minutes non décomptées du quota). Les promotions `Develop` → `Staging` et `Staging` → `main` : **moins de 3 minutes facturées** par run, sur les runners GitHub. | Deux métriques et deux cibles au lieu d'une (tableau *Écart avec la demande*). Le runner local devient une dépendance de la CI : sa disponibilité (machine éteinte), son système et sa sécurité sont à trancher dans les questions suivantes. Les promotions ne rejouent plus la suite complète sur GitHub : il faut une preuve que le code promu a déjà été testé (question 2). |
 
 ## Cas limites identifiés
 
