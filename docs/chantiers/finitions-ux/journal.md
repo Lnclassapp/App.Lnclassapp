@@ -67,3 +67,34 @@ Un lot vertical qui aurait besoin d'en changer une s'arrête : le Lot 0 rouvre.
 - `COVERAGE=0 bin/rails test:system` : 208 runs, 2562 assertions, 0 échec, 0 erreur, 0 skip.
 - `bin/brakeman -q --no-pager` : 0 avertissement.
 - `bin/check-asset-budget` : `application.js` 41,8 Ko gzip / 60 Ko.
+
+## Lot C1 — Équipe : référentiel (2026-09-29)
+
+Branche `feature/finitions-ux-lot-c1`, depuis `feature/finitions-ux` (Lot 0 fusionné). Briques du Lot 0 utilisées telles quelles, aucune redéfinie.
+
+### Fait
+
+- **Titre** (FU-04, FU-05) : Niveaux, Séries, Matières, DRENA et Barème appellent `page_title` (plus de `content_for :title`) ; les neuf modales (`new`/`edit` des quatre référentiels, `edit` du barème) passent `document_title: page_title(…)` à `ui_modal`. Ouvertes par leur URL, elles donnent leur `<title>` (« Nouveau niveau · Équipe · Lnclass », « Nouvelle DRENA · Équipe · Lnclass »…).
+- **Retour** (FU-10) : `ui_page_header(back: { label: t(".back"), href: team_home_path })` sur les cinq écrans ; clé `back: "Accueil"` dans chaque locale d'écran.
+- **Auto-focus** (FU-15, FU-16) : rien à écrire dans les vues ; le contrôleur `autofocus` de la `<dialog>` vise le premier champ, puis le champ en erreur après un 422. Les `autofocus: true` de `ui_field` (séries, matières, DRENA) restent : ce sont des cibles `field`.
+- Test : `test/system/finitions/team_referential_test.rb`.
+
+### Bloqué (non livré, à trancher par l'orchestrateur)
+
+| Critère | Blocage | Ce qu'il faut |
+|---|---|---|
+| FU-18 | Les confirmations ouvertes depuis le menu ⋮ (`ui_dropdown_item dialog:` → `dropdown#openDialog`) passent par `showModal()` directement, sans `modal#open` : `modal:opened` n'est pas émis, l'auto-focus ne part pas, le navigateur pose le focus sur la croix. Sur `/design`, la confirmation s'ouvre par un déclencheur `modal#open`, d'où le vert du Lot 0. Touche aussi séries, matières, DRENA, établissements… | **Rouvrir le Lot 0** : `dropdown_controller#openDialog` doit émettre `modal:opened` sur la `<dialog>` (ou passer par le contrôleur `modal`). Aucune vue du lot n'a alors à changer. Test écrit, `skip` à retirer. |
+| FU-22 | Retirer le `title=` du badge « Hors barème » casse `test/controllers/teams/levels_controller_test.rb` (l. 78-81 : exige `title` et le `.sr-only`), **hors du champ `Fichiers`** du lot. `_level_row` n'a donc pas été touché. | Ajouter ce test au lot (ou le laisser à Lot Z) : dans `_level_row`, remplacer `title` et le `.sr-only` par `ui_info_tip t(".outside_generation_tip"), label: t(".outside_generation_tip_label")` dans une enveloppe `whitespace-normal` (la cellule est `whitespace-nowrap`) ; texte UDR-0054 §3.4. Test écrit, `skip` à retirer. |
+
+### Écart relevé
+
+- FU-22 nomme l'aide « Aide : hors génération » alors que le badge affiche « Hors barème » (UDR-0054 §3.4 : « Aide : <libellé> »). Le test suit le PRD ; à trancher par le porteur.
+
+### Ce qui a dérapé
+
+- `RAILS_ENV=test bin/rails db:prepare` sur une base neuve **charge les seeds** : les tests qui appellent `seed_referential` tombent alors en `RecordNotUnique` (et un premier test « vert » s'appuyait sur les seeds sans le savoir). Base de test refaite par `db:drop db:create db:schema:load`, et le test du lot appelle `seed_referential`.
+
+### Portes (ciblées, règle de la vague)
+
+- `COVERAGE=0 bin/rails test test/system/finitions/team_referential_test.rb test/system/teams/{levels,series,materials,drenas,classroom_plan}_test.rb test/controllers/teams/{levels,series,materials,drenas,classroom_plans}_controller_test.rb` : 104 runs, 942 assertions, 0 échec, 0 erreur, 2 skips (FU-18, FU-22 ci-dessus).
+- `bin/rubocop test/system/finitions/team_referential_test.rb` : aucune offense.
