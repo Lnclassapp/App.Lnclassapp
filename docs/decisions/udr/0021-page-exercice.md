@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot C1, critères AS-02, AS-39, TR-cadre-3 ; sécurité n° 29 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, `RevealAnswersPolicy`, `StartSessionPolicy`) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (démarrer, reprendre, recommencer) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0017](0017-formulaire-exercice.md) (modale « Modifier ») |
@@ -64,3 +64,17 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 - Tout écran qui montre des propositions (C2 pour la correction d'une question, C3 pour le résultat) lit `correct` par une query qui ne le sélectionne que si `RevealAnswersPolicy` l'accorde, et ne met rien en cache sans le rôle dans la clé.
 - Le test `test/integration/assessment/answer_leak_test.rb` (TR-cadre-3) est le garde de cette page : il affiche l'exercice pour l'équipe, puis l'enseignant, puis l'élève, **cache de fragments actif**.
 - « Supprimer un exercice » disparaît de l'interface ; l'archivage (UDR-0017) le remplace.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **« Modifier » passe dans le menu ⋮** « Actions pour <titre> » (`#exercise-actions-menu`), seule entrée, après le panneau de statut. Le nom accessible « Modifier l'exercice « … » » est remplacé par celui du bouton ⋮.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- Retour : `ui_back_link` vers `course_essential_path`, libellé = nom de la fiche (au lieu de « Fiche essentielle : <nom> »).
+- Titre : « <titre de l'exercice> · <espace> · Lnclass ».
+- Badge et maîtrise de l'élève : suivis d'une infobulle des seuils (UDR-0054 §3.4).

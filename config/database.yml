@@ -90,3 +90,6 @@ test:
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
+  # ADR-0052 (amendement du 2026-09-29) : db:prepare seeds a database it initializes, then the pre-deploy's db:seed
+  # would seed it again in the same process. In production, db:seed alone seeds: once per deploy.
+  seeds: false

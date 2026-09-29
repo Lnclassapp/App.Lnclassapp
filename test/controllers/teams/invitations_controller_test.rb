@@ -41,6 +41,8 @@ class Teams::InvitationsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[type=radio][name='invitation[team_role]']", 3
     end
     assert_select "button[type=submit][form=invitation-form]", "Créer l'invitation"
+    assert_select "[data-controller=modal][data-modal-document-title-value=\"Inviter un membre de l'équipe · Équipe · Lnclass\"]"
+    assert_select "input[name='invitation[contact]'][data-autofocus-target=field]"
   end
 
   test "without a frame, the same modal opens on the shell" do
@@ -61,13 +63,19 @@ class Teams::InvitationsControllerTest < ActionDispatch::IntegrationTest
     invitation = Orm::Invitation.sole
     assert_equal [ "team", "0100000009", "content", @admin.id ], [ invitation.kind, invitation.contact, invitation.team_role, invitation.invited_by_id ]
     assert_in_delta 72.hours.from_now, invitation.expires_at, 5.seconds
-    assert_equal "no-store", response.headers["Cache-Control"]
+    assert_secret_response(stream: true)
     assert_select "turbo-stream[action=append][target=toasts] template", text: /Invitation créée/
     assert_select "turbo-stream[action=update][target=modal] template" do
       link = css_select("input#invitation-link[readonly]").sole["value"]
       token = link.delete_prefix("http://www.example.com/invitations/")
       assert_equal secret_digest(token), invitation.token_digest
       assert_select "p", text: "Transmettez ce lien à la personne invitée ; il expire dans 72 h."
+      # UDR-0054 §3.5, amendment of UDR-0019: « Copier le lien » copies the very link shown, toast « Lien copié. ».
+      assert_select "[data-controller=clipboard][data-clipboard-text-value='#{link}']" do
+        assert_select "button[hidden][data-action='clipboard#copy'][aria-label=\"Copier le lien d'invitation\"]", "Copier le lien"
+        assert_select "template[data-clipboard-target=copied]", text: /Lien copié\./
+      end
+      assert_select "[data-controller=modal][data-modal-document-title-value='Invitation créée · Équipe · Lnclass']"
     end
     assert_no_link_in_flash
     assert_equal 1, Orm::AuditEvent.where(action: "invitation.sent", actor_id: @admin.id).count
@@ -118,7 +126,10 @@ class Teams::InvitationsControllerTest < ActionDispatch::IntegrationTest
     post teams_invitations_path, params: invitation_params
 
     assert_response :created
+    assert_secret_response
     assert_select "main#main turbo-frame#modal dialog#invitation-created-modal input#invitation-link[readonly]"
+    assert_select "title", "Invitation créée · Équipe · Lnclass"
+    assert_select "dialog#invitation-created-modal [data-controller=clipboard] button", "Copier le lien"
     assert_no_link_in_flash
   end
 

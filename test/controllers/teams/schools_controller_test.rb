@@ -161,7 +161,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: I18n.t("teams.schools.header.add_classroom")
     assert_select "#school_header a[data-turbo-frame=modal][href='#{edit_school_path(school.public_id)}']"
     assert_select "#school_header form[action='#{deactivate_school_path(school.public_id)}']"
-    assert_select "section[aria-labelledby] h3", 2
+    assert_select "section[aria-labelledby^=level_] h3", 2
     assert_select "section h3", text: "6ème"
     assert_select "#classroom_#{tle.public_id}", text: /Tle D 1/
     assert_select "#classroom_#{tle.public_id}", text: /KFM37/
@@ -170,6 +170,112 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_teachers li", text: /Awa Koné/
     assert_select "#school_teachers li", text: /SVT/
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
+  end
+
+  test "CE-06: a school's page shows its code, the buttons to copy it and its link, and « Régénérer le code » in the menu" do
+    school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    header = "teams.schools.header"
+    link = school_code_signup_url("k7m4qz")
+    assert_select "#school_code #school_code_label", text: I18n.t("#{header}.school_code")
+    assert_select "#school_code #school_code_value[aria-labelledby=school_code_label]", text: "K7M-4QZ"
+    # FU-26 : les deux copies passent par le contrôleur unique `clipboard` (UDR-0054 §3.5), boutons cachés sans JavaScript.
+    assert_select "[data-controller~='classroom--join-code-copy']", 0
+    assert_select "#school_code [data-controller=clipboard][data-clipboard-text-value='K7M-4QZ'] " \
+                  "button[hidden][data-action='clipboard#copy'][aria-label='#{I18n.t("#{header}.copy_code_label", code: 'K7M-4QZ')}']",
+                  text: I18n.t("#{header}.copy_code")
+    assert_select "#school_code [data-controller=clipboard][data-clipboard-text-value='#{link}'] " \
+                  "button[hidden][data-action='clipboard#copy'][aria-label=\"#{I18n.t("#{header}.copy_link_label")}\"]",
+                  text: I18n.t("#{header}.copy_link")
+    assert_select "#school_code [data-clipboard-text-value='K7M-4QZ'] template[data-clipboard-target=copied]",
+                  text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_code'))}/
+    assert_select "#school_code [data-clipboard-text-value='#{link}'] template[data-clipboard-target=copied]",
+                  text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_link'))}/
+    assert_select "#school_code a#school_code_link[href='#{link}']", text: link
+    assert_select "#school_code", text: /#{Regexp.escape(I18n.t("#{header}.school_code_hint"))}/
+    assert_select "#school_code", { text: /#{Regexp.escape(I18n.t("#{header}.school_code_inactive"))}/, count: 0 }
+    assert_select "#school-header-actions button[aria-controls=regenerate-school-code]", text: I18n.t("#{header}.regenerate_code")
+    assert_select "dialog#regenerate-school-code form#regenerate-school-code-form[action='#{school_code_path(school.public_id)}'] " \
+                  "input[name=_method][value=patch]"
+    assert_select "dialog#regenerate-school-code", text: /K7M-4QZ/
+  end
+
+  test "CE-06: the page of a school that is not active warns that its code lets nobody sign up" do
+    sign_in_as @member
+
+    %w[draft inactive].each do |status|
+      school = create_school(drena: @drena, status:)
+
+      get school_path(school.public_id)
+
+      assert_select "#school_code", text: /#{Regexp.escape(I18n.t("teams.schools.header.school_code_inactive"))}/
+    end
+  end
+
+  test "CN-01, UDR-0046: the « Classes par niveau » block counts each level and series; its sum is the page's and the list's" do
+    referential = seed_referential
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody", cycle: "both")
+    sixths = (1..4).map { create_classroom(school:, level: referential[:levels]["6eme"], name: "6ème #{it}") }
+    create_classroom(school:, level: referential[:levels]["tle"], series: referential[:series]["d"], name: "Tle D 1",
+                     status: "archived")
+    create_classroom(school:, level: referential[:levels]["6eme"], name: "6ème 9", school_year: "2020-2021")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_response :success
+    within_block = "#school_classrooms #school_level_classrooms"
+    assert_select "#{within_block} h3#school_level_classrooms_title", text: I18n.t("teams.level_classrooms.block.title")
+    assert_select "#{within_block} li", 14
+    assert_select "#{within_block} #level_classrooms_6eme [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "6ème", count: 4)
+    assert_select "#{within_block} #level_classrooms_tle-d [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "Tle D", count: 1)
+    assert_select "#{within_block} #level_classrooms_tle-a1 [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "Tle A1", count: 0)
+    assert_select "#{within_block} #level_classrooms_6eme dialog form[action='#{school_level_classroom_path(school.public_id, sixths.last.public_id)}'] input[name=_method][value=delete]", 1
+    assert_select "#{within_block} #level_classrooms_6eme dialog h2", text: I18n.t("teams.level_classrooms.block.remove_title", name: "6ème 4")
+    assert_select "#{within_block} #level_classrooms_tle-a1 button[disabled]", text: I18n.t("teams.level_classrooms.block.remove", level: "Tle A1")
+    assert_select "#{within_block} #level_classrooms_tle-a1 form[action='#{school_level_classrooms_path(school.public_id)}'] input[name=series][value=a1]"
+    assert_select "#{within_block} form[action='#{school_level_classrooms_path(school.public_id)}'] button[type=submit]", 14
+    assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 5)
+
+    get schools_path
+    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5"
+  end
+
+  test "UDR-0046: a draft school's block keeps « − » but offers no « + », and says why" do
+    referential = seed_referential
+    draft = create_school(status: "draft")
+    create_classroom(school: draft, level: referential[:levels]["6eme"], name: "6ème 1")
+    sign_in_as @member
+
+    get school_path(draft.public_id)
+
+    assert_select "#school_level_classrooms_inactive", text: I18n.t("teams.level_classrooms.block.inactive")
+    assert_select "#school_level_classrooms form[action='#{school_level_classrooms_path(draft.public_id)}']", 0
+    assert_select "#level_classrooms_6eme dialog form[action^='#{school_level_classrooms_path(draft.public_id)}/']"
+  end
+
+  test "UDR-0046: without any level in the referential, the block says so" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "#school_level_classrooms", text: /#{I18n.t('teams.level_classrooms.block.empty_title')}/
+    assert_select "#school_level_classrooms_inactive", 0
+  end
+
+  test "a draft school page offers no « Ajouter une classe » until the school is activated" do
+    draft = create_school(status: "draft")
+    sign_in_as create_team_member
+
+    get school_path(draft.public_id)
+
+    assert_response :success
+    assert_select "a[href='#{new_school_classroom_path(draft.public_id)}']", count: 0
+    assert_select "#school_header a[href='#{edit_school_path(draft.public_id)}']"
   end
 
   test "a school without classrooms nor teachers says so; an inactive one offers no deactivation" do
@@ -199,9 +305,48 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='school[sigle]'][value=LM][maxlength='#{Entities::School::School::SIGLE_MAX}']"
     assert_select "select[name='school[school_type]'] option:not([value=''])", 3
     assert_select "select[name='school[school_type]'] option[selected][value=mixed]", text: I18n.t("school_types.mixed")
-    assert_select "select[name='school[cycle]'] option[selected][value=first]"
+    assert_select "select[name='school[cycle]']", 0
+    assert_select "fieldset#school_cycle > legend", text: /#{Dtos::School::SchoolInput.human_attribute_name(:cycle)}/
+    assert_select "fieldset#school_cycle label.min-h-tap", 2
+    assert_select "label", text: I18n.t("teams.schools.cycles.first") do
+      assert_select "input#school_cycle_first[type=radio][name='school[cycle]'][value=first][checked][required]"
+    end
+    assert_select "label", text: I18n.t("teams.schools.cycles.both") do
+      assert_select "input#school_cycle_both[type=radio][value=both]:not([checked])"
+    end
     assert_select "select[name='school[status]'] option[selected][value=draft]"
     assert_select "#school-form", text: /#{I18n.t('teams.schools.form.classrooms_hint')}/
+  end
+
+  test "CP-10: the national code is read on the header, edited in the form, and a taken one is refused (ADR-0063)" do
+    school = create_school(drena: @drena, name: "Lycée Classique", national_code: "012345")
+    other = create_school(drena: @drena, name: "Lycée Moderne")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+    assert_select "#school_header #school_national_code", text: /012345/
+    get edit_school_path(school.public_id), headers: { "Turbo-Frame" => "modal" }
+    assert_select "input[name='school[national_code]'][value='012345'][inputmode=numeric][maxlength='6']"
+
+    patch school_path(other.public_id), params: school_params(name: "Lycée Moderne", national_code: "012345"),
+                                        headers: { "Turbo-Frame" => "modal" }
+    assert_response :unprocessable_entity
+    assert_select "#school_national_code_error", text: error_message(:national_code, :taken)
+
+    patch school_path(other.public_id), params: school_params(name: "Lycée Moderne", national_code: "023 456"), as: :turbo_stream
+    assert_equal "023456", other.reload.national_code
+  end
+
+  test "CP-10: a school without national code shows none; the list is searched by it" do
+    create_school(drena: @drena, name: "Lycée Classique", national_code: "012345")
+    school = create_school(drena: @drena, name: "Lycée Moderne")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+    assert_select "#school_national_code", 0
+    get schools_path(search: "012345")
+    assert_select "tbody tr", 1
+    assert_select "tbody", text: /Lycée Classique/
   end
 
   test "outside the frame, the edition opens as a modal over the shell; an unknown school has none" do
@@ -243,6 +388,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: /#{I18n.t('teams.schools.update.done', name: "Lycée Classique d'Abidjan")}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr#school_#{school.public_id}", text: /Bouaké/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('teams.schools.cycles.first')}/
+    assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms" # UDR-0046
     assert_equal "school.changed", Orm::AuditEvent.sole.action
   end
 
@@ -255,7 +401,9 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-frame#modal dialog#school-modal form#school-form"
     assert_select "#school_name_error", text: error_message(:name, :blank)
-    assert_select "#school_cycle_error", text: error_message(:cycle, :inclusion)
+    assert_select "fieldset#school_cycle > #school_cycle_error", text: error_message(:cycle, :inclusion)
+    assert_select "input[name='school[cycle]'][checked]", 0
+    assert_select "input[name='school[cycle]'][aria-invalid=true][aria-describedby=school_cycle_error]", 2
     assert_select "input[name='school[sigle]'][value=LCA]"
 
     patch school_path(school.public_id), params: school_params(name: "Lycée Moderne")
@@ -296,6 +444,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{I18n.t('teams.schools.deactivate.done', name: 'Lycée Classique')}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr", text: /#{I18n.t('school_statuses.inactive')}/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('school_statuses.inactive')}/
+    assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms_inactive" # UDR-0046
   end
 
   test "without Turbo, a deactivation leads back to the list with a notice" do
@@ -321,6 +470,20 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]:not([request-id])"
     assert_not Orm::School.exists?(school.id)
     assert_not Orm::Classroom.exists?
+  end
+
+  test "B1: deleting a school with a join request (even refused) or a referral is refused in 422, never a 500 (ADR-0063)" do
+    requested = create_join_request(school: create_school(drena: @drena), status: "rejected").school
+    sponsored = create_school(drena: @drena)
+    create_referral(school_id: sponsored.id)
+    sign_in_as @member
+
+    [ requested, sponsored ].each do |school|
+      delete school_path(school.public_id), as: :turbo_stream
+
+      assert_response :unprocessable_entity
+      assert Orm::School.exists?(school.id)
+    end
   end
 
   test "SC-07: deleting a school whose classroom has a student is refused — deactivate it instead — and nothing is deleted" do
@@ -351,5 +514,107 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     delete school_path(used.public_id)
     assert_redirected_to schools_path
     assert_equal I18n.t("teams.schools.destroy.referenced"), flash[:alert]
+  end
+
+  # ── Finitions UX (UDR-0054, Lot D1) ──────────────────────────────────────────────────────────────────────────────
+
+  test "FU-01: the list is titled « Établissements · Équipe · Lnclass »" do
+    sign_in_as @member
+
+    get schools_path
+
+    assert_select "title", text: "Établissements · Équipe · Lnclass"
+  end
+
+  test "FU-45, FU-46: the filters form searches while typing and sends its lists on change, and keeps « Filtrer » without JavaScript" do
+    sign_in_as @member
+
+    get schools_path
+
+    assert_select "form#schools-filters[method=get][action='#{schools_path}'][data-controller=search]" \
+                  "[data-turbo-frame=schools][data-turbo-action=advance]" \
+                  "[role=search][aria-label='#{I18n.t('teams.schools.filters.label')}']" do
+      assert_select "input#filter_search[type=search][name=search][data-action='input->search#queue']"
+      %w[drena school_type cycle status].each do |name|
+        assert_select "select#filter_#{name}[name=#{name}][data-action='change->search#submit']"
+      end
+      assert_select "button[type=submit][data-search-target=button]:not([hidden])", text: I18n.t("teams.schools.filters.submit")
+    end
+    assert_select "turbo-frame#schools.transition-opacity.aria-busy\\:opacity-50"
+    assert_select "turbo-frame#schools #schools_total[aria-live=polite]"
+  end
+
+  test "FU-46: without JavaScript, the search sent by « Filtrer » renders the whole filtered page, accents ignored" do
+    create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    create_school(drena: @drena, name: "Collège Sainte-Marie")
+    sign_in_as @member
+
+    get schools_path(search: "COC", drena: @drena.public_id)
+
+    assert_response :success
+    assert_select "h1", text: I18n.t("teams.schools.index.title")
+    assert_select "input#filter_search[value=COC]"
+    assert_select "#schools_list tr", 1
+    assert_select "#schools_list tr", text: /Lycée Moderne de Cocody/
+    assert_select "#schools_total", text: I18n.t("teams.schools.index.total", count: 1)
+  end
+
+  test "UDR-0054 §3.4: the status column of the list explains the statuses in a tip" do
+    create_school(drena: @drena)
+    sign_in_as @member
+
+    get schools_path
+
+    assert_select "thead th details summary .sr-only", text: I18n.t("components.info_tip.label",
+                                                                   label: I18n.t("teams.schools.index.columns.status"))
+    assert_select "thead th details", text: /#{Regexp.escape(I18n.t('shared.info_tips.school_status'))}/
+  end
+
+  test "FU-09: « Établissements » leads back to the filtered list the school was opened from" do
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    sign_in_as @member
+    filtered = schools_path(search: "coc", drena: @drena.public_id)
+
+    get school_path(school.public_id), headers: { "Referer" => "http://www.example.com#{filtered}" }
+
+    assert_select "main nav[aria-label='#{I18n.t('components.back_link.label')}'] a[href='#{filtered}']",
+                  text: I18n.t("teams.schools.show.back")
+    assert_select "#school_header nav", 0
+    assert_select "nav[aria-label='#{I18n.t('components.back_link.label')}'] ~ #school_header"
+  end
+
+  test "FU-09: opened from a direct link, another page or another site, « Établissements » leads to the unfiltered list" do
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    sign_in_as @member
+    back = "nav[aria-label='#{I18n.t('components.back_link.label')}'] a"
+
+    [ nil, "http://www.example.com#{team_home_path}?search=coc", "http://evil.example#{schools_path}?search=coc" ].each do |referer|
+      get school_path(school.public_id), headers: { "Referer" => referer }.compact
+
+      assert_select "#{back}[href='#{schools_path}']", { text: I18n.t("teams.schools.show.back") }, "Referer : #{referer.inspect}"
+    end
+  end
+
+  test "UDR-0054 §3.1, §3.4: a school's page is titled by its name; its code and status are explained in tips" do
+    school = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "title", text: "Lycée Moderne de Cocody · Équipe · Lnclass"
+    assert_select "#school_code details", text: /#{Regexp.escape(I18n.t('teams.schools.header.school_code_tip'))}/
+    assert_select "#school_code details summary .sr-only",
+                  text: I18n.t("components.info_tip.label", label: I18n.t("teams.schools.header.school_code"))
+    assert_select "#school_header details", text: /#{Regexp.escape(I18n.t('shared.info_tips.school_status'))}/
+  end
+
+  test "UDR-0054 §3.1: the edition modal carries its title, also when opened by its URL" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+
+    get edit_school_path(school.public_id)
+
+    assert_select "title", text: "Modifier l'établissement · Équipe · Lnclass"
+    assert_select "[data-modal-document-title-value=\"Modifier l'établissement · Équipe · Lnclass\"] dialog#school-modal"
   end
 end

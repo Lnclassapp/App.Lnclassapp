@@ -1,0 +1,53 @@
+# Barème des classes générées, écran de l'équipe (chantier bareme-classes) — ADR-0058, UDR-0045
+fr:
+  activemodel:
+    attributes:
+      dtos/classroom/classroom_plan_line_input:
+        public_count: "Public"
+        private_count: "Privé et mixte"
+  teams:
+    classroom_plans:
+      show:
+        page_title: "Barème des classes"
+        title: "Barème des classes"
+        back: "Accueil"
+        subtitle: "Le nombre de classes créées pour chaque établissement importé, ou doté par la génération des classes manquantes, selon son type."
+        notice: "Le barème s'applique aux prochains imports d'établissements et aux prochaines générations de classes. Les classes déjà créées ne changent pas. 0 : aucune classe pour cette ligne."
+        empty_title: "Aucun niveau pour l'instant"
+        empty_description: "Créez d'abord les niveaux et les séries : le barème en découle, une ligne par niveau du premier cycle et par couple niveau × série du second."
+        empty_action: "Ouvrir les niveaux"
+        columns:
+          level: "Niveau"
+          series: "Série"
+          public: "Public"
+          private: "Privé et mixte"
+          actions: "Actions"
+      undefined:
+        undefined:
+          one: "%{count} ligne n'est pas définie : aucune classe n'y est générée tant qu'elle n'est pas renseignée."
+          other: "%{count} lignes ne sont pas définies : aucune classe n'y est générée tant qu'elles ne sont pas renseignées."
+      totals:
+        label: "Classes par établissement"
+        public_first: "Collège public"
+        public_both: "Lycée public"
+        private_first: "Collège privé ou mixte"
+        private_both: "Lycée privé ou mixte"
+        classrooms:
+          one: "classe"
+          other: "classes"
+      line_row:
+        no_series: "Aucune série liée : aucune classe."
+        link_series: "Lier des séries"
+        no_series_placeholder: "—"
+        undefined: "Non défini"
+        none: "aucune classe"
+        actions: "Actions pour %{name}"
+        edit: "Modifier"
+      edit:
+        title: "Barème de « %{name} »"
+        hint: "De 0 à 30. 0 : aucune classe."
+        untouched: "S'applique aux prochains imports et générations. Les classes déjà créées ne changent pas."
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      update:
+        updated: "Barème de « %{name} » enregistré."

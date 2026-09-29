@@ -1,18 +1,13 @@
 <%# 🌐 UI · catalog/essentials/show — page d'une fiche essentielle (CA-11, AS-37), pour l'élève, l'enseignant et l'équipe %>
-<%# Rôle : en-tête et contenu (Action Text, KaTeX) ; menu de l'équipe en modales ; lacune de l'élève ; liste des exercices %>
-<%# ADR  : 0028, 0033, 0035, 0043 · UDR : 0006, 0007, 0015 · lecture seule, rafraîchie par les streams de B4 et B5 %>
+<%# Rôle : en-tête et contenu (Action Text, KaTeX) ; actions de l'équipe en modales, « Modifier » dans le menu ⋮ ; lacune de l'élève ; exercices %>
+<%# ADR  : 0028, 0033, 0035, 0043 · UDR : 0006, 0007, 0015, 0042, 0054 · lecture seule, rafraîchie par les streams de B4 et B5 %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
 <% exercises = @detail.exercises %>
-<% content_for :title, t(".page_title", name: essential.name) %>
+<% page_title t(".page_title", name: essential.name) %>
 <% content_for :nav_key, "courses" %>
 <div id="essential_header" class="mb-8">
-  <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-    <%= link_to course_path(course.slug),
-                class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back", name: course.name) %>
-    <% end %>
-  </nav>
+  <%= ui_back_link course.name, href: course_path(course.slug) %>
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
       <div class="min-w-0 space-y-3">
@@ -30,12 +25,13 @@
         <div id="essential_team_actions" role="group" aria-label="<%= t(".team_actions") %>"
              class="flex flex-wrap items-center gap-2 lg:max-w-md lg:shrink-0 lg:justify-end">
           <%= content_status_panel(record: @status_record) %>
-          <%= ui_button t(".edit"), href: edit_teams_essential_path(essential.slug), variant: :secondary, size: :sm,
-                        icon: "pencil-square", data: { turbo_frame: "modal" }, "aria-label": t(".edit_label", name: essential.name) %>
           <%= ui_button t(".new_exercise"), href: new_teams_essential_exercise_path(essential.slug), size: :sm, icon: "plus",
                         data: { turbo_frame: "modal" } %>
           <%= ui_button t(".import_exercises"), href: new_teams_import_path(kind: "exercises", essential: essential.slug),
                         variant: :secondary, size: :sm, icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+          <%= ui_dropdown label: t(".actions", name: essential.name), id: "essential-actions-menu", fixed: true do %>
+            <%= ui_dropdown_item t(".edit"), href: edit_teams_essential_path(essential.slug), icon: "pencil-square", frame: "modal" %>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -57,7 +53,7 @@
       <div class="min-w-0 space-y-1">
         <h2 id="essential_gap_title" class="font-display text-lg font-extrabold"><%= t(".gap_title") %></h2>
         <p class="text-sm text-mute"><%= t(".gap_since", date: l(gap.opened_at.to_date, format: :long)) %></p>
-        <p class="text-ink"><%= t(".gap_body", threshold: Entities::Assessment::Grading::PASS_THRESHOLD) %></p>
+        <p class="text-ink"><%= t(".gap_body", threshold: Entities::Assessment::Grading::REMEDIATION_THRESHOLD) %></p>
       </div>
     </section>
   <% end %>
@@ -65,6 +61,12 @@
   <%= ui_card title: t(".exercises_title"), icon: "academic-cap", id: "essential_exercises" do |card| %>
     <% card.actions do %>
       <%= ui_badge t(".exercises_count", count: exercises.size), tone: :brand, size: :sm %>
+    <% end %>
+    <% if @student && exercises.any? %>
+      <%# Les badges de chaque exercice (partial) s'expliquent ici, une fois pour la liste (UDR-0054 §3.4). %>
+      <div id="essential_badges_help" class="mb-3 text-sm text-mute">
+        <%= t(".badges_help") %><%= ui_info_tip t("shared.info_tips.badges"), label: t(".badges_help") %>
+      </div>
     <% end %>
     <% if exercises.empty? %>
       <% if @status_record %>

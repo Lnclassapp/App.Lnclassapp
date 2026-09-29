@@ -1,12 +1,16 @@
 <%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en quatre rubriques %>
-<%# Rôle : la DRENA filtre la liste des établissements (frame « schools ») sans être enregistrée ; échec re-rendu en 422 %>
-<%# ADR  : 0030, 0037, 0050 · UDR : 0024 %>
-<%# Formulaire GET de la seule DRENA : son sélecteur et le bouton de repli s'y rattachent par l'attribut form. %>
-<form id="teacher-signup-drena" action="<%= new_teacher_registration_path %>" method="get"></form>
-
-<%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",
-              class: "space-y-6",
-              data: { controller: "school--drena-schools", "school--drena-schools-url-value": drena_schools_path("__drena__") } do |form| %>
+<%# Rôle : l'établissement est désigné par son code (champ, ou bandeau quand il est déjà trouvé), ou sans code (@pending) ; 422 %>
+<%# ADR  : 0030, 0037, 0050, 0057, 0063 · UDR : 0024, 0044, 0050, 0054 (§3.4 : infobulle du code d'établissement) %>
+<% if @pending %>
+  <%# Formulaire GET de la seule DRENA (repli sans JavaScript, UDR-0024) : son sélecteur s'y rattache par l'attribut form. %>
+  <form id="teacher-signup-drena" action="<%= new_pending_teacher_registration_path %>" method="get"></form>
+<% end %>
+<%= form_with model: @form, scope: :teacher_registration, url: (@pending ? pending_teacher_registrations_path : teacher_registrations_path),
+              id: (@pending ? "pending-teacher-registration-form" : "teacher-registration-form"), class: "space-y-6",
+              data: ({ controller: "school--drena-schools", "school--drena-schools-url-value": drena_schools_path("__drena__") } if @pending) do |form| %>
+  <% if @form.ref %>
+    <%= form.hidden_field :ref %>
+  <% end %>
   <% if @form.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
       <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
@@ -48,25 +52,31 @@
 
   <fieldset class="space-y-4">
     <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school_and_subject") %></legend>
-    <div class="space-y-2">
-      <%= ui_field form, :drena_public_id, as: :select, required: true, choices: drena_options, prompt: t(".drena_prompt"),
-                   form: "teacher-signup-drena", data: { action: "change->school--drena-schools#load" } %>
-      <%# Repli sans JavaScript : noscript plutôt qu'un attribut posé par Stimulus, que le morphing du 422 effacerait. %>
-      <noscript>
-        <%= ui_button t(".show_schools"), type: :submit, variant: :secondary, size: :sm, icon: "magnifying-glass",
-                      form: "teacher-signup-drena" %>
-      </noscript>
-    </div>
-    <%= render template: "school/drena_schools/index",
-               locals: { schools: school_options, drena_public_id: @form.drena_public_id, registration: @form } %>
+    <% if @pending %>
+      <%= render "identity/pending_teacher_registrations/school_fields", form: %>
+    <% elsif @preview %>
+      <div class="space-y-2">
+        <%= render "identity/teacher_registrations/school_preview", preview: @preview %>
+        <%= form.hidden_field :school_code, value: Entities::School::SchoolCode.display(@form.school_code) %>
+        <%= link_to t(".other_code"), new_teacher_registration_path, id: "other-school-code",
+                    class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+      </div>
+    <% else %>
+      <%= ui_field form, :school_code, required: true, value: @form.raw_school_code, maxlength: 12, autocomplete: "off",
+                   autocapitalize: "characters", spellcheck: false, placeholder: t(".school_code_placeholder"),
+                   hint: t(".school_code_hint"), class: "font-display tracking-widest uppercase" %>
+      <%= ui_info_tip t(".school_code_info_tip"), label: Dtos::Identity::TeacherRegistrationInput.human_attribute_name(:school_code) %>
+      <%= link_to t(".no_school_code"), new_pending_teacher_registration_path, id: "no-school-code",
+                  class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+    <% end %>
     <%= ui_field form, :material_slug, as: :select, required: true, choices: material_options, prompt: t(".material_prompt") %>
   </fieldset>
 
   <fieldset class="space-y-4">
     <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
-    <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
+    <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                  hint: t(".pin_hint") %>
-    <%= ui_field form, :pin_confirmation, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+    <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                  autocomplete: "new-password" %>
   </fieldset>
 

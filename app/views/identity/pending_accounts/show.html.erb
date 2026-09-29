@@ -1,10 +1,20 @@
-<%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école %>
-<%# Rôle : écran de sortie, sans redirection ; seules issues : rejoindre une classe (élève) ou se déconnecter %>
-<%# ADR  : 0030, 0040 · UDR : 0006 %>
-<% content_for :title, t(".page_title") %>
-<%= ui_empty_state title: t(".#{@case}.title"), description: t(".#{@case}.description"), icon: "clock" do %>
-  <% if @case == :student %>
-    <%= ui_button t(".student.join"), href: new_join_code_path, variant: :brand, icon: "academic-cap" %>
-  <% end %>
-  <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary %>
+<%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
+<%# Rôle : écran de sortie, sans redirection ; seules issues : rejoindre une classe (élève) ou se déconnecter ; état de la demande %>
+<%# ADR  : 0030, 0040, 0063 · UDR : 0006, 0050, 0054 %>
+<% page_title t(".page_title") %>
+<% if @join_request %>
+  <% state = @join_request.status == "rejected" ? "rejected" : "pending" %>
+  <% title = t(".join_request.#{state}.title") %>
+  <% description = t(".join_request.#{state}.description", school: @join_request.school_name) %>
+  <% icon = state == "rejected" ? "no-symbol" : "clock" %>
+<% else %>
+  <% title, description, icon = t(".#{@case}.title"), t(".#{@case}.description"), "clock" %>
 <% end %>
+<div id="pending_account">
+  <%= ui_empty_state title:, description:, icon: do %>
+    <% if @case == :student %>
+      <%= ui_button t(".student.join"), href: new_join_code_path, variant: :brand, icon: "academic-cap" %>
+    <% end %>
+    <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary %>
+  <% end %>
+</div>

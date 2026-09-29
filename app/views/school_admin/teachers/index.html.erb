@@ -1,0 +1,45 @@
+<%# 🌐 UI · school_admin/teachers/index — « Enseignants » de la direction (DS-06) %>
+<%# Rôle : une ligne par enseignant : nom, matière, classes de l'année ; lecture seule, ni identifiant ni numéro %>
+<%# ADR  : 0065 · UDR : 0005, 0052, 0054 %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "teachers" %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, count: @overview.teachers.size) %>
+
+<% if @overview.teachers.any? %>
+  <%= ui_card id: "school_teachers", padding: :none, class: "overflow-hidden" do %>
+    <%# Au téléphone, le tableau défile dans sa carte, jamais la page. %>
+    <div class="relative overflow-x-auto">
+      <table class="w-full min-w-xl text-left text-sm">
+        <caption class="sr-only"><%= t(".caption", school: @overview.school_name) %></caption>
+        <thead class="border-b border-line text-xs text-mute">
+          <tr>
+            <% %i[teacher material classrooms].each do |column| %>
+              <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-line">
+          <% @overview.teachers.each_with_index do |teacher, index| %>
+            <tr id="teacher_<%= index %>">
+              <th scope="row" class="px-4 py-3 font-medium text-ink"><%= teacher.name %></th>
+              <td class="px-4 py-3">
+                <% if teacher.material_name %>
+                  <%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %>
+                <% else %>
+                  <span aria-hidden="true">—</span><span class="sr-only"><%= t(".missing") %></span>
+                <% end %>
+              </td>
+              <% if teacher.classroom_names.any? %>
+                <td class="px-4 py-3 text-ink"><%= teacher.classroom_names.join(", ") %></td>
+              <% else %>
+                <td class="px-4 py-3 text-mute"><%= t(".no_classroom") %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% else %>
+  <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description"), icon: "user-group" %>
+<% end %>

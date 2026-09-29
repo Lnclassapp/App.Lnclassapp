@@ -62,8 +62,8 @@ module UseCases
           SchoolEntity.new(id: 32, public_id: "sch-lmc", drena_id: 1, name: "Lycée Moderne", sigle: nil,
                            school_type: "private", cycle: "both", status: "active")
         )
-        @drenas = FakeDrenas.new(Drena.new(id: 1, public_id: "drn-abj1", slug: "abidjan-1", name: "Abidjan 1"),
-                                 Drena.new(id: 2, public_id: "drn-abj2", slug: "abidjan-2", name: "Abidjan 2"))
+        @drenas = FakeDrenas.new(Drena.new(id: 1, public_id: "drn-abj1", slug: "drena-abidjan-1", name: "Abidjan 1"),
+                                 Drena.new(id: 2, public_id: "drn-abj2", slug: "drena-abidjan-2", name: "Abidjan 2"))
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "field")
@@ -101,6 +101,13 @@ module UseCases
         assert_equal %i[schools drenas audit_log policy transaction clock],
                      UpdateSchool.instance_method(:initialize).parameters.map(&:last)
         assert_equal({ "school_type" => %w[public private], "cycle" => %w[both first] }, @audit.events.sole[:metadata][:changes])
+      end
+
+      test "CP-10 : le code national se saisit et se trace au journal (ADR-0063)" do
+        assert update(national_code: "012 345").success?
+
+        assert_equal "012345", @schools.stored("sch-lca").national_code
+        assert_equal({ "national_code" => [ nil, "012345" ] }, @audit.events.sole[:metadata][:changes])
       end
 
       test "hors de l'équipe : refus avant toute lecture, rien n'est écrit" do

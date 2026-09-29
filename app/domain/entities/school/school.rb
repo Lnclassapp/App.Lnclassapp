@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::School::School
 # Rôle : établissement d'une DRENA ; son type choisit le barème des classes, son cycle les niveaux
-# ADR  : 0030, 0036, 0037, 0039
+# ADR  : 0030, 0036, 0037, 0039, 0057, 0063
 module Entities
   module School
     class School
@@ -13,7 +13,7 @@ module Entities
       SIGLE_MAX = 20 # plan.md et db/schema.rb : string(20)
       COLLEGE_WORD = "college".freeze
 
-      attr_accessor :id, :public_id, :drena_id, :school_type, :cycle
+      attr_accessor :id, :public_id, :drena_id, :school_type, :cycle, :school_code, :national_code
       attr_writer :status
       attr_reader :name, :sigle
 

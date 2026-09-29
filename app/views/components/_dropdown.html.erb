@@ -1,8 +1,8 @@
 <%# 🌐 UI · components/_dropdown — menu déroulant accessible, appelé par ui_dropdown %>
-<%# Rôle : bouton aria-haspopup/aria-controls, flèches, Échap, clic extérieur %>
-<%# UDR  : 0005 · Stimulus : dropdown %>
-<div class="relative inline-block" data-controller="dropdown"
-     data-action="keydown->dropdown#keydown click@window->dropdown#outside turbo:before-cache@document->dropdown#close">
+<%# Rôle : bouton aria-haspopup/aria-controls, flèches, Échap, clic extérieur ; fixed → menu en position fixe qui suit le défilement %>
+<%# UDR  : 0005, 0042 · Stimulus : dropdown %>
+<div class="relative inline-block" data-controller="dropdown" <%= "data-dropdown-fixed-value=true" if fixed %>
+     data-action="keydown->dropdown#keydown click@window->dropdown#outside turbo:before-cache@document->dropdown#close<%= " scroll@window->dropdown#place:capture resize@window->dropdown#place" if fixed %>">
   <% if trigger %>
     <button type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="<%= id %>" aria-label="<%= label %>"
             data-dropdown-target="button" data-action="dropdown#toggle"
@@ -18,7 +18,7 @@
     </button>
   <% end %>
   <div id="<%= id %>" role="menu" aria-label="<%= label %>" data-dropdown-target="menu" hidden
-       class="absolute z-30 mt-2 w-64 rounded-ln border border-line bg-white p-1.5 shadow-pop animate-fade-in <%= align_class %>">
+       class="absolute <%= fixed ? "z-50" : "z-30" %> mt-2 w-64 rounded-ln border border-line bg-white p-1.5 shadow-pop animate-fade-in <%= align_class %>">
     <%= items %>
   </div>
 </div>

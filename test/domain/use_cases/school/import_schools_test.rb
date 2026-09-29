@@ -52,10 +52,11 @@ module UseCases
 
       def adapter(classrooms: Repositories::Classroom::ClassroomRepository.new, random: SecureRandom)
         ImportSchools.new(drenas: Repositories::School::DrenaRepository.new, schools: Repositories::School::SchoolRepository.new,
-                          classrooms:, taxonomy: Repositories::Catalog::TaxonomyRepository.new, random:)
+                          classrooms:, taxonomy: Repositories::Catalog::TaxonomyRepository.new,
+                          classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new, random:)
       end
 
-      def drena_entity = Repositories::School::DrenaRepository.new.find_by_slug(slug: "abidjan-2")
+      def drena_entity = Repositories::School::DrenaRepository.new.find_by_slug(slug: "drena-abidjan-2")
 
       # The real engine, on a report in base and its file.
       def run_import(document, adapter: self.adapter, transaction: Repositories::Shared::Transaction.new, author: @author)
@@ -70,7 +71,7 @@ module UseCases
         report.reload
       end
 
-      def document(*schools, drena: "abidjan-2")
+      def document(*schools, drena: "drena-abidjan-2")
         { "format" => "lnclass.schools", "version" => 1, "drena" => drena, "schools" => schools }.compact
       end
 
@@ -142,9 +143,9 @@ module UseCases
 
       test "the DRENA of the element wins over the envelope; without either, the element is in error" do
         create_drena(name: "Bouaké 1")
-        bouake = Orm::Drena.find_by!(slug: "bouake-1")
+        bouake = Orm::Drena.find_by!(slug: "drena-bouake-1")
 
-        assert_equal bouake.id, validate({ "name" => "Lycée X", "type" => "public", "drena" => "Bouaké 1" }).plan[:school][:drena_id]
+        assert_equal bouake.id, validate({ "name" => "Lycée X", "type" => "public", "drena" => "drena-bouake-1" }).plan[:school][:drena_id]
         assert_equal @drena.id, validate({ "name" => "Lycée X", "type" => "public" }).plan[:school][:drena_id]
 
         unknown = validate({ "name" => "Lycée X", "type" => "public", "drena" => "inconnue" })
@@ -155,11 +156,28 @@ module UseCases
         assert_equal [ [ "schools[0].drena", "unknown_drena" ] ], error_pairs(orphan)
       end
 
+      # DR-09 (ADR-0066): the old unprefixed slug is no longer a DRENA.
+      test "an element citing drena-abidjan-1 is imported there, one citing abidjan-1 is an unknown_drena error" do
+        abidjan = create_drena(name: "Abidjan 1")
+
+        report = run_import(document({ "name" => "Lycée Classique d'Abidjan", "type" => "public", "drena" => "drena-abidjan-1" },
+                                     { "name" => "Lycée Moderne du Plateau", "type" => "public", "drena" => "abidjan-1" },
+                                     drena: nil))
+
+        assert_equal "drena-abidjan-1", abidjan.slug
+        assert_equal [ "completed", 2, 1, 0, 1 ],
+                     report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
+        assert_equal abidjan.id, Orm::School.find_by!(name: "Lycée Classique d'Abidjan").drena_id
+        assert_equal [ { "path" => "schools[1].drena", "code" => "unknown_drena", "params" => { "value" => "abidjan-1" } } ],
+                     report.import_errors
+        assert_not Orm::School.exists?(name: "Lycée Moderne du Plateau")
+      end
+
       test "the envelope DRENA is optional, but an unknown one rejects the file in bloc" do
         subject = adapter
         assert subject.resolve_target(document: {}).success?
         assert_nil subject.resolve_target(document: {}).value
-        assert_equal @drena.id, subject.resolve_target(document: { "drena" => "Abidjan 2" }).value.id
+        assert_equal @drena.id, subject.resolve_target(document: { "drena" => "drena-abidjan-2" }).value.id
         assert_equal :not_found, subject.resolve_target(document: { "drena" => "inconnue" }).code
 
         report = run_import(document({ "name" => "Lycée X", "type" => "public" }, drena: "inconnue"))
@@ -214,12 +232,33 @@ module UseCases
         assert_equal 0, Orm::Classroom.joins(:level).where(levels: { slug: "1ere" }).count
       end
 
-      test "a Tle series missing from the referential is skipped and counted" do
+      test "a Tle pair no longer linked gives no classroom, and is not counted: it is no line of the barème" do
         Orm::LevelSeries.where(level: Orm::Level.find_by!(slug: "tle"), series: Orm::Series.find_by!(slug: "c")).delete_all
 
         report = run_import(document({ "name" => "Lycée Moderne", "type" => "public" }))
 
-        assert_equal({ "classrooms_created" => 75, "skipped_series" => 1 }, report.details)
+        assert_equal({ "classrooms_created" => 75 }, report.details)
+      end
+
+      test "BC-04: a series linked to Tle after the take-over is undefined in the barème: no classroom, counted as skipped" do
+        link_level_series(level: Orm::Level.find_by!(slug: "tle"), series: create_series(name: "E"))
+
+        report = run_import(document({ "name" => "Lycée Moderne", "type" => "public" }))
+
+        assert_equal({ "classrooms_created" => 77, "skipped_series" => 1 }, report.details)
+        assert_not Orm::Classroom.exists?(name: "Tle E 1")
+      end
+
+      test "BC-06: the import reads the barème in base, as the team left it" do
+        sixth = Orm::Level.find_by!(slug: "6eme")
+        Orm::ClassroomPlanEntry.find_by!(school_type: "public", level: sixth).update!(count: 6)
+        Orm::ClassroomPlanEntry.find_by!(school_type: "private", level: sixth).update!(count: 0)
+
+        report = run_import(document({ "name" => "Lycée Moderne", "type" => "public" }, { "name" => "Lycée privé", "type" => "privée" }))
+
+        assert_equal({ "classrooms_created" => 79 + 36 }, report.details)
+        assert_equal 6, classrooms_of("Lycée Moderne").where(level: sixth).count
+        assert_equal 0, classrooms_of("Lycée privé").where(level: sixth).count
       end
 
       test "when the base refuses the classrooms of a school, that school is in error and leaves no row" do
@@ -251,7 +290,7 @@ module UseCases
       end
 
       test "a mixed file gives an exact report, and invalid elements leave no row nor classroom" do
-        mixed = mixed(schools_document(count: 11, drena: "abidjan-2"), invalid_at: [ 6 ], duplicate_of: { 9 => 1 })
+        mixed = mixed(schools_document(count: 11, drena: "drena-abidjan-2"), invalid_at: [ 6 ], duplicate_of: { 9 => 1 })
         mixed["schools"][3]["schooltype"] = "semi-public"
 
         report = run_import(mixed)
@@ -268,7 +307,7 @@ module UseCases
       end
 
       test "an envelope of another format is rejected, with zero writes" do
-        report = run_import(schools_document(count: 3, drena: "abidjan-2").merge("format" => "lnclass.courses"))
+        report = run_import(schools_document(count: 3, drena: "drena-abidjan-2").merge("format" => "lnclass.courses"))
 
         assert_equal "rejected", report.status
         assert_equal [ "format" ], report.import_errors.pluck("path")
@@ -297,6 +336,52 @@ module UseCases
         assert_equal 1 + 2, transaction.attempts
         assert_equal 77 + 38, report.details["classrooms_created"]
         assert_equal 77 + 38 + 1, Orm::Classroom.distinct.count(:join_code)
+      end
+
+      # Keeps the set of taken codes it hands out, to prove the adapter draws against it and completes it.
+      class RecordingSchools < Repositories::School::SchoolRepository
+        attr_reader :taken
+
+        def taken_school_codes = @taken = super
+      end
+
+      test "CE-10: every imported school gets its own valid school code, distinct from the codes already taken (ADR-0057)" do
+        existing = create_school(drena: @drena, name: "Lycée déjà là")
+        schools = RecordingSchools.new
+        subject = ImportSchools.new(drenas: Repositories::School::DrenaRepository.new, schools:,
+                                    classrooms: Repositories::Classroom::ClassroomRepository.new,
+                                    taxonomy: Repositories::Catalog::TaxonomyRepository.new,
+                                    classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new)
+
+        report = run_import(document({ "name" => "Lycée A", "type" => "public" }, { "name" => "Lycée B", "type" => "privée" },
+                                     { "name" => "Collège C", "type" => "public" }), adapter: subject)
+
+        assert_equal "completed", report.status
+        codes = Orm::School.where(name: [ "Lycée A", "Lycée B", "Collège C" ]).pluck(:school_code)
+        assert_equal 3, codes.compact.uniq.size
+        assert(codes.all? { Entities::School::SchoolCode.valid?(it) })
+        assert_not_includes codes, existing.school_code
+        # ADR-0058: the same import reads the barème (public lycée 77, private lycée 38, public collège 28).
+        assert_equal [ 77, 38, 28 ], [ "Lycée A", "Lycée B", "Collège C" ].map { classrooms_of(it).count }
+        assert_equal Set[existing.school_code, *codes], schools.taken
+      end
+
+      test "CP-09: the optional national code is stored; malformed or taken (in base or earlier in the file), its line is in error" do
+        create_school(drena: @drena, name: "Lycée déjà là", national_code: "111111")
+
+        report = run_import(document({ "name" => "Lycée A", "type" => "public", "national_code" => "012 345" },
+                                     { "name" => "Lycée B", "type" => "public", "national_code" => 23_456 },
+                                     { "name" => "Lycée C", "type" => "public", "national_code" => "12345" },
+                                     { "name" => "Lycée D", "type" => "public", "national_code" => "111111" },
+                                     { "name" => "Lycée E", "type" => "public", "national_code" => "012345" },
+                                     { "name" => "Lycée F", "type" => "public" }))
+
+        assert_equal [ "completed", 6, 3, 3 ], report.values_at(:status, :total_count, :imported_count, :error_count)
+        assert_equal [ [ "schools[2].national_code", "invalid_value" ], [ "schools[3].national_code", "national_code_taken" ],
+                       [ "schools[4].national_code", "national_code_taken" ] ],
+                     report.import_errors.map { it.values_at("path", "code") }
+        assert_equal({ "Lycée A" => "012345", "Lycée B" => "023456", "Lycée F" => nil },
+                     Orm::School.where(name: [ "Lycée A", "Lycée B", "Lycée F" ]).pluck(:name, :national_code).to_h)
       end
 
       test "an author who lost the team role is refused: the import fails, nothing is written" do

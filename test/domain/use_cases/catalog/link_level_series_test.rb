@@ -1,4 +1,5 @@
 require "test_helper"
+require_relative "../../../support/domain/fake_classroom_plan"
 
 module UseCases
   module Catalog
@@ -50,7 +51,8 @@ module UseCases
       end
 
       def link(level_slug: "tle", series_slug: "d", actor: @team)
-        LinkLevelSeries.new(taxonomy: @taxonomy, audit_log: @audit_log, transaction: @transaction,
+        @plan ||= FakeClassroomPlan.new
+        LinkLevelSeries.new(taxonomy: @taxonomy, classroom_plan: @plan, audit_log: @audit_log, transaction: @transaction,
                             policy: Policies::Catalog::ManageTaxonomyPolicy.new, clock: Clock.new(NOW))
                        .call(actor:, level_slug:, series_slug:)
       end
@@ -58,9 +60,31 @@ module UseCases
       test "lie la série au niveau, à l'heure de l'horloge, et journalise taxonomy.changed" do
         assert link.success?
         assert_equal [ [ 7, 105, NOW ] ], @taxonomy.pairs
-        assert_equal [ { action: "taxonomy.changed", actor_id: 7, subject_type: "Series", subject_id: 105,
-                         metadata: { change: "level_series.linked", level: "tle", series: "d" }, at: NOW } ], @audit_log.entries
+        assert_equal({ action: "taxonomy.changed", actor_id: 7, subject_type: "Series", subject_id: 105,
+                       metadata: { change: "level_series.linked", level: "tle", series: "d" }, at: NOW }, @audit_log.entries.first)
         assert_equal 1, @transaction.calls
+      end
+
+      test "D1 (owner, 2026-09-28): the new pair gets its barème defaults, each journaled as automatic" do
+        assert link.success?
+
+        assert_equal [ 6, 3 ], %w[public private].map { @plan.plan.count(school_type: it, level_id: 7, series_id: 105) }
+        assert_equal [ { action: "classroom_plan.changed", actor_id: 7, at: NOW, subject_type: "Level", subject_id: 7,
+                         metadata: { school_type: "public", level: "tle", series: "d", from: nil, to: 6, source: "auto" } },
+                       { action: "classroom_plan.changed", actor_id: 7, at: NOW, subject_type: "Level", subject_id: 7,
+                         metadata: { school_type: "private", level: "tle", series: "d", from: nil, to: 3, source: "auto" } } ],
+                     @audit_log.entries.drop(1)
+      end
+
+      test "a count kept from an earlier link is never overwritten" do
+        entry = Entities::Classroom::ClassroomPlan::Entry
+        @plan = FakeClassroomPlan.new(Entities::Classroom::ClassroomPlan.new(
+          entries: %w[public private].map { entry.new(school_type: it, level_id: 7, series_id: 105, count: 1) }
+        ))
+
+        assert link.success?
+        assert_empty @plan.saves
+        assert_equal 1, @audit_log.entries.size
       end
 
       test "un couple déjà lié donne :conflict already_linked, sans journal" do
@@ -71,6 +95,7 @@ module UseCases
         assert_equal :conflict, result.code
         assert_equal({ base: [ :already_linked ] }, result.errors)
         assert_empty @audit_log.entries
+        assert_empty @plan.saves
       end
 
       test "un niveau du premier cycle n'ouvre aucune série : :invalid, sans écriture ni journal" do

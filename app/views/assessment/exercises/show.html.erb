@@ -1,18 +1,13 @@
 <%# 🌐 UI · assessment/exercises/show — page d'un exercice (AS-02), pour l'élève, l'enseignant et l'équipe %>
-<%# Rôle : en-tête ; progression et « Commencer » de l'élève ; statut et « Modifier » (modale) de l'équipe ; aperçu des questions %>
-<%# ADR  : 0028, 0054 · UDR : 0006, 0007, 0021 · aucun cache : le HTML dépend du rôle (sécurité n° 29) %>
+<%# Rôle : en-tête ; progression et « Commencer » de l'élève ; statut et menu ⋮ « Modifier » (modale) de l'équipe ; aperçu des questions %>
+<%# ADR  : 0028, 0054 · UDR : 0006, 0007, 0021, 0042, 0054 · aucun cache : le HTML dépend du rôle (sécurité n° 29) %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
-<% content_for :title, t(".page_title", title: exercise.title, essential: essential.name) %>
+<% page_title t(".page_title", title: exercise.title) %>
 <% content_for :nav_key, "courses" %>
 <div id="exercise_header" class="mb-8">
-  <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-    <%= link_to course_essential_path(course.slug, essential.slug),
-                class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back", name: essential.name) %>
-    <% end %>
-  </nav>
+  <%= ui_back_link essential.name, href: course_essential_path(course.slug, essential.slug) %>
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
       <div class="min-w-0 space-y-3">
@@ -28,8 +23,9 @@
       <% if @status_record %>
         <div class="flex flex-wrap items-center gap-2 lg:shrink-0 lg:justify-end">
           <%= content_status_panel(record: @status_record) %>
-          <%= ui_button t(".edit"), href: edit_teams_exercise_path(exercise.public_id), variant: :secondary, size: :sm,
-                        icon: "pencil-square", data: { turbo_frame: "modal" }, "aria-label": t(".edit_label", title: exercise.title) %>
+          <%= ui_dropdown label: t(".actions", name: exercise.title), id: "exercise-actions-menu", fixed: true do %>
+            <%= ui_dropdown_item t(".edit"), href: edit_teams_exercise_path(exercise.public_id), icon: "pencil-square", frame: "modal" %>
+          <% end %>
         </div>
       <% end %>
     </div>

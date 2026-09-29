@@ -1,6 +1,9 @@
 <%# 🌐 UI · components/_page_header — titre de page, sous-titre, actions, appelé par ui_page_header %>
-<%# Rôle : un seul <h1> par page, actions alignées à droite sur bureau %>
-<%# UDR  : 0006 %>
+<%# Rôle : un seul <h1> par page, actions alignées à droite sur bureau ; le retour (back:) le précède %>
+<%# UDR  : 0006, 0054 %>
+<% if back %>
+  <%= ui_back_link back.fetch(:label), href: back.fetch(:href) %>
+<% end %>
 <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
   <div class="min-w-0">
     <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= title %></h1>

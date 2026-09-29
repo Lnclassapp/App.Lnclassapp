@@ -1,0 +1,9 @@
+<%# 🌐 UI · school/join_request_vouches/create — réponse de « Je confirme » : toast, ligne retirée (ou la carte, si c'était la dernière) %>
+<%# Rôle : aucune redirection ; le collègue validé disparaît de « Collègues en attente » %>
+<%# ADR  : 0063 · UDR : 0050 %>
+<%= turbo_stream_toast @notice, type: :success %>
+<% if @remaining %>
+  <%= turbo_stream.remove "join_request_#{@request.public_id}" %>
+<% else %>
+  <%= turbo_stream.remove "pending_colleagues" %>
+<% end %>

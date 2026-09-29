@@ -1,0 +1,32 @@
+# Changer son PIN depuis « Mon profil » (chantier profil-utilisateur, Lot C) — PR-06, PR-07, ADR-0055, UDR-0041
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/pin_change_input:
+        current_pin: "PIN actuel"
+        pin: "Nouveau PIN"
+        pin_confirmation: "Confirmation du nouveau PIN"
+    errors:
+      models:
+        dtos/identity/pin_change_input:
+          attributes:
+            current_pin:
+              blank: "Saisissez votre PIN actuel."
+              invalid: "Le PIN compte 4 chiffres."
+              incorrect: "PIN incorrect."
+            pin:
+              blank: "Choisissez un nouveau PIN à 4 chiffres."
+              invalid: "Le PIN compte 4 chiffres."
+              unchanged: "C'est déjà votre PIN."
+            pin_confirmation:
+              confirmation: "Les deux PIN ne sont pas identiques."
+  identity:
+    profile_pins:
+      edit:
+        title: "Changer mon PIN"
+        intro: "Saisissez votre PIN actuel, puis deux fois le nouveau. Vos autres appareils seront déconnectés."
+        pin_hint: "4 chiffres, que vous seul connaissez."
+        cancel: "Annuler"
+        submit: "Changer mon PIN"
+      update:
+        changed: "Votre PIN est changé."

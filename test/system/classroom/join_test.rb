@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 # ID-01, ID-02, CL-06, CL-07 (UDR-0009): a visitor types the class code any way, sees the classroom, meets the 422 of
 # an unconfirmed PIN without reloading the page, then signs up and lands home, signed in — on a desktop and at 390 px.
+# /join sends a well-formed code by itself (FU-44, UDR-0054 §3.6): no click on « Continuer ».
 class Classroom::JoinTest < ApplicationSystemTestCase
   # The student home belongs to Lot A2: until it is merged, a stand-in answers on its route, as in
   # test/system/identity/sign_in_test.rb. A merged controller is autoloadable, so the stand-in steps aside by itself.
@@ -22,8 +23,8 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
   test "a code typed any way, the preview, an unconfirmed PIN shown without reloading, then the arrival home" do
     visit new_join_code_path
+    # FU-44 (UDR-0054 §3.6): the fifth valid character sends the code, without a click.
     fill_in "join[code]", with: "Kfm 37"
-    click_on I18n.t("classroom.join_codes.new.submit")
 
     assert_current_path join_classroom_path("kfm37")
     assert_selector "#classroom-preview", text: "6ème 1 — Lycée Classique d'Abidjan"
@@ -49,7 +50,22 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_current_path new_join_code_path
   end
 
+  test "D1: a well-formed but unknown code, typed on /join, is refused in the field, on a desktop and at 390 px" do
+    [ nil, MOBILE_VIEWPORT ].each do |size|
+      size ? with_mobile_viewport(size) { refuse_an_unknown_code } : refuse_an_unknown_code
+    end
+  end
+
   private
+
+  def refuse_an_unknown_code
+    visit new_join_code_path
+    fill_in "join[code]", with: "ZZZ99"
+
+    assert_selector "#join_code_error", text: I18n.t("classroom.joins.new.invalid_code.title")
+    assert_current_path new_join_code_path
+    assert_field "join[code]", with: "ZZZ99"
+  end
 
   def sign_up_after_a_wrong_confirmation
     assert_no_page_reload do

@@ -1,0 +1,112 @@
+<%# 🌐 UI · teams/growth/show — « Croissance » : k enseignant (i × c) face à sa cible, indicateurs, parrains, classement, attente %>
+<%# Rôle : lecture seule (Queries::Identity::GrowthMetricsQuery::Row) ; période 7 / 30 / 90 jours ; équipe seulement %>
+<%# ADR  : 0049, 0063 · UDR : 0006, 0050, 0054 (retour « Accueil », infobulles des indicateurs) %>
+<% page_title t(".page_title") %>
+<% viral = @metrics.viral %>
+<% dash = "—" %>
+<% number = ->(value, precision = 1) { value.nil? ? dash : number_with_precision(value, precision:, strip_insignificant_zeros: true) } %>
+<%# « 67 % » : espace insécable avant le signe, comme le veut la typographie française. %>
+<% percent = ->(value) { value.nil? ? dash : "#{(value * 100).round}\u00A0%" } %>
+<% tipped = %i[conversion viral_cycle students_per_teacher] %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", count: @period), back: { label: t(".back"), href: team_home_path } %>
+
+<nav id="growth_periods" aria-label="<%= t(".periods_label") %>" class="mb-6 flex flex-wrap gap-2">
+  <% Teams::GrowthController::PERIODS.each do |days| %>
+    <% current = days == @period %>
+    <%= link_to t(".period", count: days), teams_growth_path(period: days), "aria-current": ("page" if current),
+                class: class_names("inline-flex min-h-tap items-center rounded-full px-4 text-sm font-medium transition",
+                                   current ? "bg-ink text-white" : "border border-line bg-white text-ink hover:bg-mist") %>
+  <% end %>
+</nav>
+
+<div class="grid gap-5">
+  <section id="growth_k" aria-labelledby="growth_k_title">
+    <%= ui_card do %>
+      <div class="flex flex-wrap items-center gap-x-1">
+        <h2 id="growth_k_title" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".k_title") %></h2>
+        <%= ui_info_tip t(".tips.k"), label: t(".k_title") %>
+      </div>
+      <div class="mt-2 flex flex-wrap items-end gap-x-6 gap-y-3">
+        <p id="growth_k_value" class="font-display text-5xl font-extrabold text-ink tabular-nums"><%= number.call(viral.k) %></p>
+        <p class="pb-2 text-sm text-mute">
+          <%= t(".k_formula", invitations: number.call(viral.invitations_per_user), unit: t(".k_unit"),
+                              conversion: percent.call(viral.conversion_rate)) %>
+        </p>
+        <div class="pb-2">
+          <%= ui_badge t(".target", target: number.call(Entities::Identity::ViralCoefficient::TARGET, 2),
+                                    ambition: Entities::Identity::ViralCoefficient::AMBITION),
+                       tone: viral.on_target? ? :success : :warning, dot: true %>
+        </div>
+      </div>
+      <p class="mt-3 text-xs text-mute"><%= t(".k_note", cohort: viral.cohort_size) %></p>
+    <% end %>
+  </section>
+
+  <ul id="growth_metrics" class="grid grid-cols-2 gap-3 lg:grid-cols-3">
+    <% [ [ :shares, @metrics.shares ], [ :teacher_signups, @metrics.teacher_signups ], [ :referred_signups, @metrics.referred_signups ],
+         [ :conversion, percent.call(@metrics.conversion_rate) ],
+         [ :viral_cycle, @metrics.viral_cycle_days.nil? ? dash : t(".days", count: @metrics.viral_cycle_days.round) ],
+         [ :students_per_teacher, number.call(@metrics.students_per_teacher) ] ].each do |key, value| %>
+      <li class="rounded-ln bg-mist p-4">
+        <p class="font-display text-3xl font-extrabold text-ink tabular-nums"><%= value %></p>
+        <div class="mt-1 text-sm text-mute">
+          <%= t(".metrics.#{key}") %>
+          <% if key.in?(tipped) %>
+            <%= ui_info_tip t(".tips.#{key}"), label: t(".metrics.#{key}") %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="grid gap-5 lg:grid-cols-2">
+    <%= ui_card title: t(".top_referrers"), icon: "trophy", id: "growth_top_referrers" do %>
+      <% if @metrics.top_referrers.empty? %>
+        <p class="text-sm text-mute"><%= t(".no_referrers") %></p>
+      <% else %>
+        <ol class="divide-y divide-line">
+          <% @metrics.top_referrers.each do |referrer| %>
+            <li class="flex items-center justify-between gap-3 py-2 text-sm">
+              <span class="min-w-0"><span class="font-medium text-ink"><%= referrer.name %></span>
+                <span class="block truncate text-xs text-mute"><%= referrer.school_name %></span></span>
+              <span class="shrink-0 font-display font-extrabold tabular-nums"><%= t(".referrals", count: referrer.referrals_count) %></span>
+            </li>
+          <% end %>
+        </ol>
+      <% end %>
+    <% end %>
+
+    <%= ui_card title: t(".leaderboard"), subtitle: t(".leaderboard_hint"), icon: "building-library", id: "growth_leaderboard" do %>
+      <% if @metrics.schools_leaderboard.empty? %>
+        <p class="text-sm text-mute"><%= t(".no_schools") %></p>
+      <% else %>
+        <ol class="divide-y divide-line">
+          <% @metrics.schools_leaderboard.each do |school| %>
+            <li class="flex items-center justify-between gap-3 py-2 text-sm">
+              <span class="min-w-0">
+                <%= link_to school.name, school_path(school.public_id), class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+                <span class="block truncate text-xs text-mute"><%= school.drena_name %></span>
+              </span>
+              <span class="shrink-0 tabular-nums"><%= t(".teachers", count: school.teachers_count) %></span>
+            </li>
+          <% end %>
+        </ol>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= ui_card title: t(".pending", count: @metrics.pending_count), icon: "clock", id: "growth_pending" do %>
+    <% if @metrics.oldest_pending.empty? %>
+      <p class="text-sm text-mute"><%= t(".no_pending") %></p>
+    <% else %>
+      <ul class="divide-y divide-line">
+        <% @metrics.oldest_pending.each do |pending| %>
+          <li class="flex flex-wrap items-center justify-between gap-2 py-2 text-sm">
+            <%= link_to pending.school_name, school_path(pending.school_public_id), class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+            <span class="text-xs text-mute"><%= l(pending.created_at.to_date, format: :long) %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

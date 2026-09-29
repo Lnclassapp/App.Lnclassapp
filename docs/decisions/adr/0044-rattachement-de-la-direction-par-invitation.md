@@ -6,7 +6,7 @@
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-22**, bloque la V2 |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | — *(amendé par [ADR-0065](./0065-espace-direction-simple-en-lecture-seule.md) le 2026-09-28, statut `Proposé`)* |
 
 ---
 
@@ -117,3 +117,16 @@ add_index :school_staffs, :school_id, unique: true, where: "position = 'principa
 - Tout membre rattaché peut inviter, pas seulement le proviseur.
 - Second facteur **obligatoire** pour la direction.
 - Liste fermée de quatre fonctions.
+
+## Amendement du 2026-09-28 — version simple de l'espace direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/memo.md), [ADR-0065](./0065-espace-direction-simple-en-lecture-seule.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'ADR-0065 accepté, cette section fait foi en cas d'écart.*
+
+Décision du porteur : une direction qui **lit** son établissement, sans plus.
+
+- **Pas de fonction** : un seul type de compte direction. `school_staffs` n'a ni `position` ni `left_at` ; l'invitation `school_staff` n'exige plus de fonction (contrainte `invitations_staff_has_school` assouplie). Les index « un proviseur actif » et `School::DetachStaffMember` ne sont pas créés.
+- **Pas de second facteur** : la direction se connecte par téléphone et PIN, comme l'enseignant. Le paragraphe « Second facteur (C-20) » et le troisième test du §7 ne s'appliquent pas. Coût consenti dans l'ADR-0065 §5.
+- **Seule l'équipe invite** : un membre de la direction n'invite personne.
+- **Aucun départ** à l'écran : un compte à retirer passe par la console jusqu'à `annuaire-equipe`.
+- **Inchangé** : l'invitation comme seule entrée, un seul établissement par compte (index unique sur `user_id`), toute lecture limitée à l'établissement de l'acteur.
+- La conception complète (quatre fonctions, TOTP, personnel) reste au backlog, sur la branche `feature/espace-direction`.

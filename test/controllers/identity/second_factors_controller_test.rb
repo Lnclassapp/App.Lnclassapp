@@ -4,14 +4,68 @@ require "test_helper"
 class Identity::SecondFactorsControllerTest < ActionDispatch::IntegrationTest
   setup { @member = create_team_member }
 
-  test "an unverified team member sees the code form" do
+  # FU-34, FU-39 (UDR-0054 §3.6): six digits leave by themselves; the hint says so and is tied to the field.
+  test "an unverified team member sees the code form, sent at the sixth digit" do
     sign_in_pin(@member)
 
     get new_identity_second_factor_path
 
     assert_response :success
-    assert_select "input[name='second_factor[code]'][autocomplete=one-time-code]"
-    assert_select "p", text: "ou un code de secours"
+    assert_select "title", "Vérification · Lnclass"
+    assert_select "form#second-factor-form[data-controller=autosubmit][data-autosubmit-pattern-value=?]", '^\d{6}$' do
+      assert_select "input[name='second_factor[code]'][autocomplete=one-time-code][inputmode=numeric][maxlength='6']" \
+                    "[pattern=?][data-autosubmit-target=input][data-autofocus-target=field][aria-describedby=second_factor_code_hint]", '\d{6}'
+      assert_select "#second_factor_code_hint", text: "Le code est envoyé dès le 6ᵉ chiffre."
+      assert_select "[data-autosubmit-target=status][aria-live=polite].sr-only"
+      assert_select "input[name=backup]", 0
+    end
+    assert_select "form#second-factor-form[data-autosubmit-message-value=?]", "Envoi du code…"
+    assert_select "a[href=?]:not([data-turbo-action])", new_identity_second_factor_path(backup: 1),
+                  text: "J'utilise un code de secours"
+    assert_select "a[href=?][data-turbo-method=delete]", session_path, text: "Se déconnecter"
+  end
+
+  # FU-37: the backup code has its own field, never sent by itself; the link works without JavaScript.
+  test "the backup variant has its own field, without automatic sending" do
+    sign_in_pin(@member)
+
+    get new_identity_second_factor_path(backup: 1)
+
+    assert_response :success
+    assert_select "form#second-factor-form[data-controller]", 0
+    assert_select "label[for=second_factor_code]", text: /Code de secours/
+    assert_select "input[name='second_factor[code]'][inputmode=text][autocomplete=off][autocapitalize=none]" \
+                  "[maxlength='12'][data-autofocus-target=field]:not([pattern]):not([data-autosubmit-target])"
+    assert_select "input[type=hidden][name=backup][value='1']"
+    assert_select "a[href=?]:not([data-turbo-action])", new_identity_second_factor_path,
+                  text: "Utiliser le code de l'application"
+    assert_select "a", text: "J'utilise un code de secours", count: 0
+  end
+
+  test "a wrong backup code re-renders the backup variant in 422" do
+    sign_in_pin(@member)
+
+    post identity_second_factor_path, params: { backup: "1", second_factor: { code: "Zz9kP9wQ2m" } }
+
+    assert_response :unprocessable_entity
+    assert_select "#second_factor_code_error", text: "Code incorrect."
+    assert_select "input[name='second_factor[code]'][value=''][aria-invalid=true][inputmode=text]"
+    assert_select "input[type=hidden][name=backup][value='1']"
+    assert_select "form#second-factor-form[data-controller]", 0
+  end
+
+  # FU-35: one wrong code is one journaled attempt, and the field comes back empty.
+  test "a wrong code is one attempt and comes back empty, in the code variant" do
+    sign_in_pin(@member)
+
+    assert_difference -> { Orm::LoginAttempt.where(contact: @member.contact, kind: "second_factor").count }, 1 do
+      post identity_second_factor_path, params: { second_factor: { code: "000000" } }
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "input[name='second_factor[code]'][value=''][aria-invalid=true][inputmode=numeric]"
+    assert_select "form#second-factor-form[data-controller=autosubmit]"
+    assert_select "input[name=backup]", 0
   end
 
   test "the current code verifies the session and opens the team home" do

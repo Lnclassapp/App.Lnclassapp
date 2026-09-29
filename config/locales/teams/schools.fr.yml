@@ -1,4 +1,4 @@
-# Établissements : liste nationale, fiche, modification (plan boucle-pedagogique, Lot S2) — ADR-0030, ADR-0036, UDR-0007, UDR-0036
+# Établissements : liste nationale, fiche, modification (plan boucle-pedagogique, Lot S2), code d'établissement — ADR-0030, ADR-0036, ADR-0057, ADR-0065, UDR-0007, UDR-0036, UDR-0044
 fr:
   activemodel:
     attributes:
@@ -38,6 +38,18 @@ fr:
         title: "Établissements"
         subtitle: "Tous les établissements du pays. Ils arrivent par import, chacun avec ses classes."
         import: "Importer des établissements"
+        generate: "Générer les classes manquantes"
+        classrooms_menu: "Classes"
+        classrooms_menu_label: "Actions sur les classes"
+        classroom_plan: "Barème des classes"
+        generate_title: "Générer les classes manquantes ?"
+        generate_intro: "Les classes sont générées en arrière-plan, comme à l'import d'un établissement."
+        generate_rule_scope_html: "Seuls les établissements actifs ou en brouillon <strong class=\"font-medium text-ink\">sans aucune classe de l'année scolaire %{year}</strong> reçoivent leurs classes."
+        generate_rule_plan: "Elles suivent le barème des classes (public ou privé, collège = premier cycle), à partir des niveaux, séries et liaisons niveau/série actuels."
+        generate_rule_untouched: "Les autres établissements ne sont jamais modifiés : relancer la génération est sans risque."
+        generate_background: "Le compte rendu (établissements dotés, classes créées, niveaux et séries sautés) s'affiche dans « Imports »."
+        generate_cancel: "Annuler"
+        generate_confirm: "Lancer la génération"
         total:
           zero: "Aucun établissement"
           one: "%{count} établissement"
@@ -59,8 +71,8 @@ fr:
         clear_filters: "Effacer les filtres"
       filters:
         label: "Rechercher un établissement"
-        search: "Nom ou sigle"
-        search_placeholder: "Ex. : Lycée Classique, LCA"
+        search: "Nom, sigle ou code national"
+        search_placeholder: "Ex. : Lycée Classique, LCA, 012345"
         drena: "DRENA"
         school_type: "Type"
         cycle: "Cycle"
@@ -73,7 +85,7 @@ fr:
         reset: "Réinitialiser"
       school_row:
         edit: "Modifier"
-        edit_label: "Modifier l'établissement %{name}"
+        actions: "Actions pour %{name}"
         deactivate: "Désactiver"
         deactivate_title: "Désactiver « %{name} » ?"
         deactivate_warning: "L'établissement n'est plus proposé à l'inscription des enseignants ni à la création de classe. Ses classes, ses élèves et ses enseignants sont conservés."
@@ -84,22 +96,34 @@ fr:
         confirm_delete: "Supprimer l'établissement"
         cancel: "Annuler"
       header:
-        breadcrumb: "Fil d'Ariane"
-        back: "Établissements"
         sigle: "Sigle :"
         drena: "DRENA"
         type: "Type"
         cycle: "Cycle"
         status: "Statut"
         add_classroom: "Ajouter une classe"
+        invite_staff: "Inviter la direction"
+        actions: "Actions pour %{name}"
         edit: "Modifier"
         deactivate: "Désactiver"
         deactivate_title: "Désactiver « %{name} » ?"
         deactivate_warning: "L'établissement n'est plus proposé à l'inscription des enseignants ni à la création de classe. Ses classes, ses élèves et ses enseignants sont conservés."
         confirm_deactivate: "Désactiver l'établissement"
         cancel: "Annuler"
+        school_code: "Code d'établissement"
+        school_code_hint: "À transmettre aux enseignants de l'établissement : ils saisissent ce code à l'inscription, ou ouvrent le lien"
+        school_code_inactive: "Tant que l'établissement n'est pas actif, ce code ne permet pas de s'inscrire."
+        school_code_tip: "Code secret à transmettre aux enseignants de l'établissement pour qu'ils s'inscrivent. À ne pas confondre avec le code national, public, à 6 chiffres."
+        copy_code: "Copier le code"
+        copy_code_label: "Copier le code %{code}"
+        copy_link: "Copier le lien"
+        copy_link_label: "Copier le lien d'inscription"
+        regenerate_code: "Régénérer le code"
+        regenerate_title: "Régénérer le code de « %{name} » ?"
+        regenerate_warning: "L'ancien code %{code} cessera aussitôt de fonctionner : transmettez le nouveau aux enseignants qui ne sont pas encore inscrits. Les enseignants déjà inscrits ne sont pas touchés."
+        confirm_regenerate: "Régénérer le code"
       show:
-        page_title: "%{name} · Établissements"
+        back: "Établissements"
         classrooms:
           zero: "Classes"
           one: "Classes (%{count})"
@@ -112,7 +136,7 @@ fr:
           one: "Enseignants (%{count})"
           other: "Enseignants (%{count})"
         no_teachers: "Aucun enseignant rattaché"
-        no_teachers_description: "Les enseignants choisissent leur établissement à l'inscription."
+        no_teachers_description: "Les enseignants s'inscrivent avec le code d'établissement ci-dessus."
         secondary_school: "Établissement secondaire"
       classroom_group:
         count:
@@ -140,3 +164,6 @@ fr:
       destroy:
         done: "Établissement supprimé."
         referenced: "Cet établissement a des élèves, des enseignants ou des assignations : il ne peut pas être supprimé. Désactivez plutôt cet établissement."
+    school_codes:
+      update:
+        done: "Nouveau code d'établissement : %{code}."

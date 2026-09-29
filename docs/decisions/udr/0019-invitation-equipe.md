@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B7, critère F-16 (ID-04 remplacée) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (acceptation exemptée de policy) · [ADR-0031](../adr/0031-second-facteur-totp-pour-l-equipe.md) (TOTP) · [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) · [ADR-0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · [UDR-0006](0006-shell-applicatif-par-role.md) |
@@ -73,3 +73,19 @@ Deux frictions sont à éviter :
 - L'invitation d'amorçage du seed (ADR-0034) s'accepte par la même page.
 - Le lien n'a pas de bouton « Copier » : cette action demanderait un contrôleur Stimulus hors du lot. Le champ en lecture seule se sélectionne et se copie à la main. Un lot ultérieur peut ajouter le bouton sans changer ce contrat.
 - Le point d'entrée « Inviter un membre » de l'accueil équipe appartient au lot de cet écran : il ouvre `/teams/invitations/new` dans le frame `modal`.
+
+## Amendement du 2026-09-28 — invitation de la direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md), [UDR-0052](0052-espace-direction-simple.md), [ADR-0065](../adr/0065-espace-direction-simple-en-lecture-seule.md). Statut : `Proposé`.*
+
+- La même page d'acceptation sert l'invitation de la direction. Pour elle, l'encadré `bg-info-soft` dit « Vous rejoignez <établissement> comme direction. », sans annoncer de second facteur, et le toast sur « Se connecter » dit « Votre compte est créé. Connectez-vous avec votre numéro et votre PIN. ».
+- La modale d'invitation de la direction s'ouvre depuis la fiche d'un établissement, sans choix de rôle : UDR-0052 §3.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Copier** : la modale `_created` gagne, sous `input#invitation-link`, `ui_copy_button(<lien>, label: "Copier le lien", aria_label: "Copier le lien d'invitation", icon: "link")` ; toast « Lien copié. ». C'est le bouton prévu au §4 « par un lot ultérieur ». Pas de WhatsApp ni de SMS. Même règle pour la modale de l'invitation de la direction.
+- **Acceptation, §2.4 précisé** (décision du porteur du 2026-09-29) : toujours **aucune session ouverte** ; la personne arrive sur « Se connecter » avec son **numéro pré-rempli** (jamais le PIN) et le focus sur le PIN. Le numéro voyage dans la session Rails chiffrée (`session[:login_contact]`, lu et supprimé par « Se connecter »), jamais dans l'URL ni dans le flash (UDR-0054 §3.8). Toasts inchangés.
+- **Focus** : sur « Nom » à l'arrivée sur la page d'acceptation ; sur le premier champ en erreur après un 422. Le §2.3 (« jamais le numéro ») est inchangé : le numéro n'apparaît que sur « Se connecter ».
+- Titres : « Inviter un membre de l'équipe · Équipe · Lnclass » (modale) ; page publique « Créer mon compte · Lnclass ».

@@ -1,0 +1,42 @@
+<%# 🌐 UI · teams/dashboards/_key_figures — chiffres « Sur la période » (flux) puis « En ce moment » (stocks) %>
+<%# Rôle : inscrits, élèves actifs, exercices terminés et réussite, assignations ; comptes, classes, couverture des établissements %>
+<%# ADR  : 0062 · UDR : 0049, 0054 (infobulle de « Réussite moyenne », panneau dans le flux de la tuile) %>
+<%# locals: (dashboard:, period_scope:) -%>
+<% tile = ->(key, count, hint = nil) { render "figure", key:, count:, hint:, label: t(".#{key}", count: count || 0) } %>
+<% rate = dashboard.average_score ? t(".success_rate", rate: dashboard.average_score) : t(".no_success_rate") %>
+<%= ui_card title: t(".period_title"), subtitle: t(".period_subtitle", period: period_scope), icon: "bolt", id: "team_dashboard_period" do %>
+  <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4">
+    <%= tile.call(:signups, dashboard.signups_count) %>
+    <%= tile.call(:active_students, dashboard.active_students_count, t(".active_students_hint")) %>
+    <li id="figure_completed_sessions" class="rounded-ln bg-mist px-3 py-4">
+      <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= dashboard.completed_sessions_count %></span>
+      <span class="text-sm text-mute"><%= t(".completed_sessions", count: dashboard.completed_sessions_count) %></span>
+      <div class="mt-1 text-xs text-mute">
+        <%= rate %>
+        <%= ui_info_tip t(".success_rate_tip"), label: t(".success_rate_label") %>
+      </div>
+    </li>
+    <%= tile.call(:assignments, dashboard.assignments_count, t(".assignments_hint")) %>
+  </ul>
+<% end %>
+<%= ui_card title: t(".now_title"), subtitle: t(".now_subtitle"), icon: "chart-bar", id: "team_dashboard_now" do %>
+  <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4">
+    <%= tile.call(:students, dashboard.accounts.students) %>
+    <%= tile.call(:teachers, dashboard.accounts.teachers) %>
+    <% if dashboard.accounts.team %>
+      <%= tile.call(:team, dashboard.accounts.team) %>
+    <% else %>
+      <%= render "figure", key: :team, count: nil, label: t(".team_label"), hint: t(".team_without_drena") %>
+    <% end %>
+    <%= tile.call(:classrooms, dashboard.classrooms_count, t(".classrooms_hint", year: dashboard.school_year)) %>
+    <li id="figure_schools" class="col-span-2 rounded-ln bg-mist px-3 py-4 lg:col-span-4">
+      <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= dashboard.schools.active %></span>
+      <span class="text-sm text-mute"><%= t(".schools", count: dashboard.schools.active) %></span>
+      <ul id="team_dashboard_coverage" aria-label="<%= t(".coverage_label") %>" class="mt-2 grid gap-1 text-sm text-ink sm:grid-cols-3">
+        <% %i[with_classroom with_teacher with_student].each do |kind| %>
+          <li class="tabular-nums"><%= t(".#{kind}", count: dashboard.schools.public_send(kind)) %></li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+<% end %>

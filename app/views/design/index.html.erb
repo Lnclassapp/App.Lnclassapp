@@ -1,7 +1,7 @@
 <%# 🌐 UI · design/index — guide de style vivant de Lnclass (dev et test uniquement) %>
 <%# Rôle : chaque token, chaque composant dans chaque variante et chaque état ; vérifié par test/system/design_system_test.rb %>
-<%# UDR  : 0005, 0006 %>
-<% content_for :title, t(".title") %>
+<%# UDR  : 0005, 0006, 0054 %>
+<% page_title t(".page_title") %>
 
 <div class="mx-auto max-w-page px-gutter py-10 lg:px-8">
   <header class="max-w-2xl">
@@ -11,7 +11,7 @@
   </header>
 
   <nav aria-label="<%= t(".toc") %>" class="mt-8 flex flex-wrap gap-2">
-    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination shell].each do |anchor| %>
+    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination finishes shell].each do |anchor| %>
       <%= link_to t(".sections.#{anchor}"), "##{anchor}", class: "rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium hover:bg-mist" %>
     <% end %>
   </nav>
@@ -154,7 +154,7 @@
   <%= design_section(id: "avatars", title: t(".sections.avatars"), api: "ui_avatar(name, src:, size:, tone:)") do %>
     <%= design_example(name: "avatar-variants", label: t(".avatars.variants")) do %>
       <div class="flex flex-wrap items-center gap-4">
-        <% %i[sm md lg].each do |size| %>
+        <% ComponentsHelper::AVATAR_SIZES.each_key do |size| %>
           <%= ui_avatar t(".avatars.name"), size: %>
         <% end %>
         <% ComponentsHelper::AVATAR_TONES.each_key do |tone| %>
@@ -198,27 +198,34 @@
   <% end %>
 
   <%# ---------- Champs ---------- %>
-  <%= design_section(id: "fields", title: t(".sections.fields"), api: "ui_field(form, :attribut, as:, label:, hint:, required:, choices:, **input_html)") do %>
+  <%= design_section(id: "fields", title: t(".sections.fields"), api: "ui_field(form, :attribut, as:, label:, hint:, required:, choices:, **input_html) · ui_radio_group(form, :attribut, choices:, label:, hint:, required:, columns: 1|2|3)") do %>
     <div class="grid gap-8 md:grid-cols-2">
       <%= design_example(name: "field-valid", label: t(".fields.valid")) do %>
         <%= form_with model: @sample, scope: :sample, url: design_path, method: :get, class: "space-y-5" do |form| %>
           <%= ui_field form, :name, label: t(".fields.name"), required: true, placeholder: t(".fields.name_placeholder") %>
           <%= ui_field form, :email, as: :email, label: t(".fields.email"), hint: t(".fields.email_hint") %>
-          <%= ui_field form, :password, as: :password, label: t(".fields.password") %>
+          <%= ui_field form, :password, as: :password, reveal: true, label: t(".fields.password") %>
           <%= ui_field form, :bio, as: :textarea, label: t(".fields.bio") %>
           <%= ui_field form, :level, as: :select, label: t(".fields.level"), choices: t(".fields.levels"), prompt: t(".fields.level_prompt") %>
+          <%= ui_radio_group form, :cycle, label: t(".fields.cycle"), required: true, hint: t(".fields.cycle_hint"),
+                                           choices: t(".fields.cycles").map { [ it[:label], it[:value] ] } %>
           <%= ui_field form, :terms, as: :checkbox, label: t(".fields.terms") %>
         <% end %>
       <% end %>
+      <%# Exemples en erreur : hors de l'auto-focus de la page, qui n'y descend pas à chaque visite du guide. %>
+      <div data-autofocus-skip>
       <%= design_example(name: "field-invalid", label: t(".fields.invalid")) do %>
         <%= form_with model: @invalid_sample, scope: :invalid_sample, url: design_path, method: :get, class: "space-y-5" do |form| %>
           <%= ui_field form, :name, label: t(".fields.name"), required: true %>
           <%= ui_field form, :email, as: :email, label: t(".fields.email"), hint: t(".fields.email_hint") %>
           <%= ui_field form, :level, as: :select, label: t(".fields.level"), choices: t(".fields.levels"), prompt: t(".fields.level_prompt") %>
+          <%= ui_radio_group form, :cycle, label: t(".fields.cycle"), required: true, columns: 1,
+                                           choices: t(".fields.cycles").map { [ it[:label], it[:value] ] } %>
           <%= ui_field form, :terms, as: :checkbox, label: t(".fields.terms"), required: true %>
           <%= ui_field form, :bio, label: t(".fields.disabled"), disabled: true %>
         <% end %>
       <% end %>
+      </div>
     </div>
   <% end %>
 
@@ -239,7 +246,7 @@
   <% end %>
 
   <%# ---------- Menu déroulant ---------- %>
-  <%= design_section(id: "dropdown", title: t(".sections.dropdown"), api: "ui_dropdown(label:, icon:, trigger:, align:, id:) { ui_dropdown_item(label, href:, icon:, method:, tone:) }") do %>
+  <%= design_section(id: "dropdown", title: t(".sections.dropdown"), api: "ui_dropdown(label:, icon:, trigger:, align:, id:, fixed:) { ui_dropdown_item(label, href:, icon:, method:, tone:, frame:, dialog:) }") do %>
     <div class="flex flex-wrap items-start gap-6" data-example="dropdown">
       <%= ui_dropdown label: t(".dropdown.label"), id: "demo-menu", align: :start do %>
         <%= ui_dropdown_item t(".dropdown.edit"), href: design_path(anchor: "dropdown"), icon: "pencil-square" %>
@@ -339,6 +346,95 @@
         <%= ui_pagination page:, pages: 5 %>
       <% end %>
     <% end %>
+  <% end %>
+
+  <%# ---------- Finitions (UDR-0054) ---------- %>
+  <%= design_section(id: "finishes", title: t(".sections.finishes"), api: t(".finishes.api")) do %>
+    <p class="max-w-2xl text-mute"><%= t(".finishes.intro") %></p>
+    <div class="grid gap-8 md:grid-cols-2">
+      <%= design_example(name: "finish-title", label: t(".finishes.title.label")) do %>
+        <p class="text-sm"><code class="rounded-sm bg-mist px-1.5 py-0.5 font-mono"><%= document_title %></code></p>
+      <% end %>
+
+      <%= design_example(name: "finish-back", label: t(".finishes.back.label")) do %>
+        <%= ui_back_link t(".finishes.back.link"), href: design_path(anchor: "finishes") %>
+        <%= ui_card do %>
+          <%= ui_page_header title: t(".finishes.back.title"), subtitle: t(".finishes.back.subtitle"),
+                             back: { label: t(".finishes.back.link"), href: design_path(anchor: "finishes") } %>
+        <% end %>
+      <% end %>
+
+      <%= design_example(name: "finish-info-tip", label: t(".finishes.info_tip.example")) do %>
+        <p class="text-sm font-medium">
+          <%= t(".finishes.info_tip.label") %>
+          <%= ui_info_tip t(".finishes.info_tip.text"), label: t(".finishes.info_tip.label") %>
+        </p>
+      <% end %>
+
+      <%= design_example(name: "finish-copy", label: t(".finishes.copy.example")) do %>
+        <div class="flex flex-wrap items-center gap-3">
+          <code class="rounded-sm bg-mist px-1.5 py-0.5 font-mono text-sm"><%= t(".finishes.copy.value") %></code>
+          <%= ui_copy_button t(".finishes.copy.value"), label: t(".finishes.copy.label"), icon: "link",
+                             copied: t("shared.clipboard.copied_link"), aria_label: t(".finishes.copy.aria_label") %>
+        </div>
+      <% end %>
+
+      <%= design_example(name: "finish-download", label: t(".finishes.download.example")) do %>
+        <div class="flex flex-wrap gap-3" data-controller="download"
+             data-download-content-value="<%= t(".finishes.download.content") %>"
+             data-download-filename-value="lnclass-codes-de-demonstration.txt">
+          <%= ui_button t(".finishes.download.save"), variant: :secondary, size: :sm, icon: "arrow-down-tray", hidden: true,
+                                                      data: { download_target: "button", action: "download#save" } %>
+          <%= ui_button t(".finishes.download.print"), variant: :secondary, size: :sm, icon: "printer", hidden: true,
+                                                       data: { download_target: "button", action: "download#print" } %>
+          <template data-download-target="saved"><%= ui_toast t(".finishes.download.saved"), type: :success %></template>
+        </div>
+      <% end %>
+
+      <%= design_example(name: "finish-autosubmit", label: t(".finishes.autosubmit.example")) do %>
+        <%= form_with scope: :design_autosubmit, url: design_frame_path, method: :get, id: "design-autosubmit-form",
+                      class: "max-w-form space-y-3",
+                      data: { turbo_frame: "design-autosubmit", controller: "autosubmit", autosubmit_pattern_value: '^\d{6}$',
+                              autosubmit_message_value: t("shared.autosubmit.sending") } do |form| %>
+          <%= ui_field form, :code, label: t(".finishes.autosubmit.code"), hint: t("shared.autosubmit.hint_second_factor"),
+                                    name: "code", inputmode: "numeric", autocomplete: "one-time-code", maxlength: 6,
+                                    pattern: '\d{6}', data: { autosubmit_target: "input" } %>
+          <p id="design-autosubmit-status" class="sr-only" role="status" aria-live="polite" data-autosubmit-target="status"></p>
+          <%= ui_button t(".finishes.autosubmit.submit"), type: :submit, variant: :secondary, size: :sm %>
+        <% end %>
+        <%= turbo_frame_tag "design-autosubmit", class: "mt-3 block" %>
+      <% end %>
+
+      <%= design_example(name: "finish-search", label: t(".finishes.search.example")) do %>
+        <%= form_with scope: :design_search, url: design_frame_path, method: :get, id: "design-search-form",
+                      html: { role: "search", "aria-label": t(".finishes.search.label") }, class: "mb-4 grid gap-3 sm:grid-cols-2",
+                      data: { turbo_frame: "design-search", controller: "search" } do |form| %>
+          <%= ui_field form, :q, as: :search, label: t(".finishes.search.label"), name: "q", autocomplete: "off",
+                                 data: { action: "search#queue" } %>
+          <%= ui_field form, :cycle, as: :select, label: t(".finishes.search.cycle"), name: "cycle",
+                                     choices: t("design.frame.search.cycles").map { |value, label| [ label, value ] },
+                                     prompt: t(".finishes.search.all"), data: { action: "change->search#submit" } %>
+          <%= ui_button t(".finishes.search.submit"), type: :submit, variant: :secondary, size: :sm,
+                                                      data: { search_target: "button" } %>
+        <% end %>
+        <%= turbo_frame_tag "design-search", src: design_frame_path,
+                                             class: "block transition-opacity aria-busy:opacity-50" do %>
+          <%= ui_loading_state variant: :skeleton %>
+        <% end %>
+      <% end %>
+
+      <%= design_example(name: "finish-focus", label: t(".finishes.focus.example")) do %>
+        <p class="mb-3 text-sm text-mute"><%= t(".finishes.focus.intro") %></p>
+        <%= ui_modal title: t(".finishes.focus.title"), id: "design-confirm", size: :sm, trigger: t(".finishes.focus.open"),
+                     trigger_variant: :danger do |modal| %>
+          <% modal.footer do %>
+            <%= ui_button t(".finishes.focus.cancel"), variant: :secondary, data: { action: "modal#close" } %>
+            <%= ui_button t(".finishes.focus.confirm"), variant: :danger, data: { action: "modal#close" } %>
+          <% end %>
+          <p class="text-mute"><%= t(".finishes.focus.body") %></p>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 
   <%# ---------- Shell ---------- %>

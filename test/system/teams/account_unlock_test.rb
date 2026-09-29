@@ -16,9 +16,9 @@ class Teams::AccountUnlockTest < ApplicationSystemTestCase
     assert_current_path team_home_path
   end
 
+  # UDR-0054 §3.9: the search leaves by itself once the number is complete; « Rechercher » stays for a browser without JS.
   def look_up(contact)
     fill_in "contact", with: contact
-    click_on "Rechercher"
   end
 
   test "look up a number, issue a code in the modal, reset another member's second factor, without a page reload" do

@@ -1,4 +1,4 @@
-# Inscription enseignant et liste des établissements d'une DRENA (plan boucle-pedagogique, Lot D1) — ADR-0030, ADR-0050, UDR-0007, UDR-0024
+# Inscription enseignant par code d'établissement, et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0057, UDR-0007, UDR-0024, UDR-0044, UDR-0054
 fr:
   activemodel:
     attributes:
@@ -9,8 +9,7 @@ fr:
         contact: "Numéro de téléphone"
         pin: "PIN"
         pin_confirmation: "Confirmation du PIN"
-        drena_public_id: "DRENA"
-        school_public_id: "Établissement"
+        school_code: "Code d'établissement"
         material_slug: "Matière enseignée"
     errors:
       models:
@@ -35,25 +34,33 @@ fr:
               invalid: "Le PIN compte 4 chiffres."
             pin_confirmation:
               confirmation: "Les deux PIN ne sont pas identiques."
-            drena_public_id:
-              blank: "Choisissez votre DRENA."
-              inclusion: "Cette DRENA n'existe pas. Choisissez-en une autre."
-            school_public_id:
-              blank: "Choisissez votre établissement."
-              inclusion: "Cet établissement n'est pas proposé dans cette DRENA. Choisissez-en un autre."
+            school_code:
+              blank: "Saisissez le code de votre établissement."
+              invalid: "Code d'établissement invalide. Il compte 6 caractères, par exemple K7M-4QZ."
+              classroom_code: "Ce code est un code de classe. Demandez le code d'établissement à votre établissement."
+              inclusion: "Code d'établissement invalide. Vérifiez-le auprès de votre établissement."
             material_slug:
               blank: "Choisissez la matière que vous enseignez."
               inclusion: "Cette matière n'existe pas. Choisissez-en une autre."
   identity:
     teacher_registrations:
       new:
-        page_title: "Inscription enseignant · Lnclass"
+        page_title: "Inscription enseignant"
+        logo_home: "Lnclass, accueil"
         welcome: "Bienvenue sur Lnclass"
         welcome_hint: "Créez votre compte enseignant en une minute, avec votre numéro de téléphone et un PIN à 4 chiffres."
         title: "Créer un compte enseignant"
         subtitle: "Vous choisirez ensuite les classes où vous enseignez."
         have_account: "Déjà un compte ?"
         sign_in: "Se connecter"
+        rate_limited_title: "Trop de tentatives"
+        invalid_code:
+          title: "Code d'établissement invalide."
+          description: "Vérifiez le lien auprès de votre établissement, ou saisissez le code vous-même."
+          other_code: "Saisir le code"
+      school_preview:
+        label: "Votre établissement"
+        drena: "DRENA : %{drena}"
       form:
         personal: "Informations personnelles"
         last_name_placeholder: "Ex. : Kouassi"
@@ -62,8 +69,11 @@ fr:
         contact_placeholder: "05 00 00 00 00"
         contact_hint: "10 chiffres. Il vous servira à vous connecter."
         school_and_subject: "Établissement et matière"
-        drena_prompt: "Choisissez votre DRENA"
-        show_schools: "Afficher les établissements"
+        school_code_placeholder: "K7M-4QZ"
+        school_code_hint: "6 caractères, transmis par votre établissement."
+        # À valider par le porteur dans la PR (UDR-0054 §3.4).
+        school_code_info_tip: "Code de 6 caractères donné par votre établissement ou par l'équipe Lnclass. Sans code, inscrivez-vous avec le code national."
+        other_code: "Ce n'est pas votre établissement ? Saisir un autre code"
         material_prompt: "Choisissez votre matière"
         security: "Sécurité"
         pin_hint: "4 chiffres, que vous seul connaissez."

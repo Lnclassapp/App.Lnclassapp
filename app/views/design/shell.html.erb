@@ -1,6 +1,7 @@
 <%# 🌐 UI · design/shell — aperçu du shell et de l'accueil d'un rôle %>
 <%# Rôle : rend layouts/shell avec un utilisateur fictif du rôle demandé %>
-<%# UDR  : 0006 %>
-<% content_for :title, t(".title", role: t("shared.roles.#{@role}")) %>
-<% content_for :nav_key, "home" %>
+<%# UDR  : 0006, 0052, 0054 %>
+<% page_title t(".title", role: t("shared.roles.#{@role}")) %>
+<%# La première destination du rôle : la direction n’a pas d’accueil (UDR-0052). %>
+<% content_for :nav_key, navigation_for(@role).first.key.to_s %>
 <%= render "shared/home/skeleton", user: shell_user %>

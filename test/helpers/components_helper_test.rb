@@ -8,6 +8,7 @@ class ComponentsHelperTest < ActionView::TestCase
     attribute :name, :string
     attribute :level, :string
     attribute :terms, :boolean
+    attribute :pin, :string
   end
 
   # --- Icônes -----------------------------------------------------------------
@@ -162,6 +163,103 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { view.fields(:user) { |form| ui_field(form, :name, as: :color_wheel) } }
   end
 
+  # --- Afficher le code PIN (UDR-0051) ----------------------------------------
+
+  test "a password field has no reveal button unless asked" do
+    show view.fields(:user, model: Record.new) { |form| ui_field(form, :pin, as: :password) }
+
+    assert_select "input#user_pin[type=password]"
+    assert_select "[data-controller=password-reveal]", 0
+    assert_select "button", 0
+  end
+
+  test "reveal: true renders the masked state, labelled « Afficher le code », hidden until JavaScript" do
+    show view.fields(:user, model: Record.new) { |form|
+      ui_field(form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                           autocomplete: "current-password", hint: "4 chiffres")
+    }
+
+    assert_select "div.relative[data-controller=password-reveal]" \
+                  "[data-password-reveal-show-label-value='Afficher le code']" \
+                  "[data-password-reveal-hide-label-value='Masquer le code']" do
+      assert_select "input#user_pin[type=password].pr-14[data-password-reveal-target=input][maxlength='4']" \
+                    "[inputmode=numeric][autocomplete=current-password][required][aria-describedby=user_pin_hint]"
+      assert_select "input + button[type=button][hidden][aria-controls=user_pin][aria-pressed=false]" \
+                    "[aria-label='Afficher le code'][data-password-reveal-target=toggle].w-tap.right-0"
+      assert_select "button[data-action~='password-reveal#toggle'][data-action~='mousedown->password-reveal#keepFocus']"
+    end
+    assert_select "p#user_pin_hint", text: "4 chiffres"
+  end
+
+  test "masked shows the eye icon, shown the eye-slash icon, both outline at the field icon size" do
+    show view.fields(:user, model: Record.new) { |form| ui_field(form, :pin, as: :password, reveal: true) }
+
+    masked = css_select("button span[data-icon=eye]").first
+    revealed = css_select("button span[data-icon=eye-slash]").first
+
+    assert_not masked.key?("hidden"), "PIN masqué : l'œil est visible"
+    assert revealed.key?("hidden"), "PIN masqué : l'œil barré attend l'état affiché"
+    assert_equal "maskedIcon", masked["data-password-reveal-target"]
+    assert_equal "revealedIcon", revealed["data-password-reveal-target"]
+    assert_equal icon_paths(ui_icon("eye", variant: :outline, size: :md)), icon_paths(masked)
+    assert_equal icon_paths(ui_icon("eye-slash", variant: :outline, size: :md)), icon_paths(revealed)
+    assert_not_equal icon_paths(masked), icon_paths(revealed)
+    assert_select "button svg.size-5[aria-hidden=true]", 2
+  end
+
+  test "reveal: true is refused outside a password field" do
+    error = assert_raises(ArgumentError) { view.fields(:user) { |form| ui_field(form, :name, reveal: true) } }
+
+    assert_match "reveal", error.message
+  end
+
+  test "an invalid PIN keeps its error wiring next to the reveal button" do
+    record = Record.new
+    record.errors.add(:pin, "PIN incorrect.")
+    show view.fields(:user, model: record) { |form| ui_field(form, :pin, as: :password, reveal: true) }
+
+    assert_select "input#user_pin.border-error[aria-invalid=true][aria-describedby=user_pin_error]"
+    assert_select "p#user_pin_error", text: "PIN incorrect."
+  end
+
+  # --- Groupe de boutons radio ------------------------------------------------
+
+  test "ui_radio_group renders a legend and one 48 px option per choice, checking the object's value" do
+    show view.fields(:user, model: Record.new(level: "5e")) { |form|
+      ui_radio_group(form, :level, label: "Niveau", required: true, choices: [ [ "Sixième", "6e" ], [ "Cinquième", "5e" ] ])
+    }
+
+    assert_select "fieldset#user_level > legend", text: /Niveau\s*\*/
+    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line", 2
+    assert_select "label", text: "Sixième" do
+      assert_select "input#user_level_6e[type=radio][name='user[level]'][value='6e'][required]:not([checked])"
+    end
+    assert_select "input#user_level_5e[type=radio][checked]"
+    assert_select "input[aria-invalid], input[aria-describedby], p", 0
+  end
+
+  test "ui_radio_group wires its hint and first error to every option" do
+    record = Record.new
+    record.errors.add(:level, "Premier")
+    record.errors.add(:level, "Second")
+    show view.fields(:user, model: record) { |form|
+      ui_radio_group(form, :level, hint: "Aide", columns: 3, choices: [ %w[6e 6e], %w[5e 5e] ])
+    }
+
+    assert_select "legend", text: "Level"
+    assert_select "legend span", 0
+    assert_select "div.sm\\:grid-cols-3 > label.border-error", 2
+    assert_select "input[type=radio]:not([required]):not([checked])[aria-invalid=true][aria-describedby='user_level_hint user_level_error']", 2
+    assert_select "fieldset > p#user_level_hint + p#user_level_error", text: "Premier"
+  end
+
+  test "ui_radio_group stacks its options on one column and refuses an unknown column count" do
+    show view.fields(:user, model: Record.new) { |form| ui_radio_group(form, :level, columns: 1, choices: [ %w[A a] ]) }
+
+    assert_select "fieldset div.grid:not([class*=grid-cols]) > label", 1
+    assert_raises(ArgumentError) { view.fields(:user) { |form| ui_radio_group(form, :level, columns: 4, choices: []) } }
+  end
+
   # --- Modale, menu, onglets --------------------------------------------------
 
   test "ui_modal renders a native dialog with its trigger and footer" do
@@ -183,6 +281,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[aria-haspopup]", 0
   end
 
+  # Chantier modales-sans-js : une modale servie ouverte l'est dès le HTML, pour rester lisible sans JavaScript ; une
+  # modale à déclencheur reste fermée.
+  test "ui_modal served open carries the open attribute of its dialog, a closed one does not" do
+    show ui_modal(title: "Modifier", id: "served", open: true) + ui_modal(title: "Plus tard", id: "later", trigger: "Ouvrir")
+
+    assert_select "dialog#served[open]"
+    assert_select "dialog#later[open]", 0
+  end
+
   test "ui_dropdown renders a menu button and its items" do
     html = ui_dropdown(label: "Actions", align: :start) do
       ui_dropdown_item("Modifier", href: "/edit", icon: "pencil") +
@@ -198,11 +305,58 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span[role=menuitem][aria-disabled=true]", text: "Bientôt"
   end
 
+  test "ui_dropdown_item marks the link of the current page, never an action on it (UDR-0041)" do
+    request.path_info = "/profile"
+    show ui_dropdown_item("Mon profil", href: "/profile") + ui_dropdown_item("Modifier", href: "/edit") +
+         ui_dropdown_item("Supprimer", href: "/profile", method: :delete)
+
+    assert_select "a[aria-current=page][href='/profile']", text: "Mon profil"
+    assert_select "a[aria-current]", 1
+  end
+
   test "ui_dropdown accepts a custom trigger and id" do
     show ui_dropdown(label: "Compte", id: "account", trigger: "Awa") { "" }
 
     assert_select "button[aria-controls=account]", text: /Awa/
     assert_select "div#account.right-0"
+    assert_select "[data-dropdown-fixed-value]", 0
+    assert_select "div#account.z-30"
+  end
+
+  test "ui_dropdown fixed escapes a scrolling table and follows it (UDR-0042)" do
+    show ui_dropdown(label: "Actions pour Abidjan 1", id: "row-menu", fixed: true) { "" }
+
+    assert_select "[data-controller=dropdown][data-dropdown-fixed-value=true]"
+    assert_select "div#row-menu[role=menu].z-50", 1, "au-dessus de la barre basse (z-40) du mobile"
+    assert_select "[data-controller=dropdown][data-action*='scroll@window->dropdown#place:capture']"
+    assert_select "[data-controller=dropdown][data-action*='resize@window->dropdown#place']"
+    assert_select "button[aria-label='Actions pour Abidjan 1'][aria-controls=row-menu] svg"
+  end
+
+  test "ui_dropdown_item frame: opens the link in a Turbo frame and dismisses the menu (UDR-0042)" do
+    show ui_dropdown_item("Modifier", href: "/drenas/1/edit", icon: "pencil-square", frame: "modal")
+
+    assert_select "a[role=menuitem][tabindex='-1'][href='/drenas/1/edit'][data-turbo-frame=modal]" \
+                  "[data-action='dropdown#dismiss']", text: "Modifier"
+    assert_select "a[data-turbo-method]", 0
+  end
+
+  test "ui_dropdown_item dialog: is a button that opens a dialog of the page (UDR-0042)" do
+    show ui_dropdown_item("Supprimer", dialog: "delete-drena-1", icon: "trash", tone: :danger)
+
+    assert_select "button[type=button][role=menuitem][tabindex='-1'][aria-haspopup=dialog][aria-controls=delete-drena-1]" \
+                  "[data-action='dropdown#openDialog'][data-dropdown-dialog-param=delete-drena-1].text-error.min-h-tap svg",
+                  count: 1
+    assert_select "button", text: "Supprimer"
+    assert_select "a", 0
+  end
+
+  test "ui_dropdown_item keeps the default tone for a dialog, and refuses an unknown tone" do
+    show ui_dropdown_item("Désactiver", dialog: "deactivate-school-1")
+
+    assert_select "button.text-ink[role=menuitem]", text: "Désactiver"
+    assert_select "button.text-error", 0
+    assert_raises(ArgumentError) { ui_dropdown_item("X", dialog: "x", tone: :loud) }
   end
 
   test "ui_tabs selects the first tab unless told otherwise" do
@@ -274,6 +428,14 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "img[alt=Awa][src='/a.png'].size-8"
   end
 
+  # ADR-0060, UDR-0047: a photo is round, cropped to fill, loaded lazily; the xl size serves the photo modal.
+  test "ui_avatar shows a photo round and cropped, lazily, in every size up to xl" do
+    show ui_avatar("Awa Koné", src: "/accounts/abc/photo?v=1", size: :xl)
+
+    assert_select "img[alt='Awa Koné'][src='/accounts/abc/photo?v=1'][loading=lazy][decoding=async].rounded-full.object-cover.size-28"
+    assert_includes ui_avatar("Awa Koné", size: :xl), "size-28"
+  end
+
   # --- Toasts -----------------------------------------------------------------
 
   test "ui_toast carries its message, title and delay" do
@@ -296,6 +458,17 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_equal :error, toast_type_for("alert")
     assert_equal :warning, toast_type_for(:warning)
     assert_equal :info, toast_type_for(:whatever)
+  end
+
+  test "flash_toast renders a flash message, or a message with its own title; any other value renders nothing" do
+    show flash_toast(:alert, "Échec") + flash_toast(:info, { "message" => "Une seule à la fois.", "title" => "Déjà en cours" })
+
+    assert_select "div[role=alert][data-toast-type=error]", text: /#{I18n.t("components.toast.titles.error")}\s*Échec/
+    assert_select "div[data-toast-type=info]:not([role=alert])" do
+      assert_select "p.font-semibold", text: "Déjà en cours"
+      assert_select "p.text-mute", text: "Une seule à la fois."
+    end
+    assert_nil flash_toast(:reload_document, true)
   end
 
   test "turbo_stream_toast appends the rendered toast to the stack" do
@@ -373,11 +546,108 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "h1", text: "Mes classes"
     assert_select "h1", text: "Seul"
     assert_includes rendered, "Action"
+    assert_select "nav", 0
+  end
+
+  # --- Finitions (UDR-0054) ---------------------------------------------------
+
+  test "ui_back_link is a named nav holding one chevron link labelled by the page it leads to" do
+    show ui_back_link("Établissements", href: "/teams/schools?search=lyc")
+
+    assert_select "nav.mb-4.text-sm[aria-label=?]", I18n.t("components.back_link.label") do
+      assert_select "a.inline-flex.min-h-tap.text-mute[href='/teams/schools?search=lyc']", text: "Établissements" do
+        assert_select "svg.size-4[aria-hidden=true]"
+        assert_select "span.truncate", text: "Établissements"
+      end
+    end
+  end
+
+  test "ui_page_header renders its back link above the h1" do
+    show ui_page_header(title: "Lycée moderne de Cocody", back: { label: "Établissements", href: "/teams/schools" })
+
+    assert_select "nav[aria-label=?] + div h1", I18n.t("components.back_link.label"), text: "Lycée moderne de Cocody"
+    assert_select "nav a[href='/teams/schools']", text: "Établissements"
+  end
+
+  test "ui_info_tip is a native details whose summary names the help and whose panel stays in the flow" do
+    show ui_info_tip("Part des devoirs rendus.", label: "Taux de rendu")
+
+    assert_select "details.group.inline-block.align-middle" do
+      assert_select "summary.summary-plain.size-tap.cursor-pointer" do
+        assert_select "svg[aria-hidden=true]"
+        assert_select "span.sr-only", text: I18n.t("components.info_tip.label", label: "Taux de rendu")
+      end
+      assert_select "summary + div.max-w-form.bg-mist.text-ink", text: "Part des devoirs rendus."
+    end
+    assert_select "details [class*=absolute]", 0
+  end
+
+  test "ui_copy_button carries the value, a hidden button and both toasts for the clipboard controller" do
+    show ui_copy_button("https://lnclass.ci/c/KFM37", label: "Copier le lien", copied: "Lien copié.",
+                                                      aria_label: "Copier le lien de la classe", icon: "link")
+
+    assert_select "span[data-controller=clipboard][data-clipboard-text-value='https://lnclass.ci/c/KFM37']" do
+      assert_select "button[type=button][hidden][data-clipboard-target=button][data-action='clipboard#copy']" \
+                    "[aria-label='Copier le lien de la classe'].border-line.h-10", text: "Copier le lien"
+      assert_select "template[data-clipboard-target=copied]"
+      assert_select "template[data-clipboard-target=failed]"
+    end
+    copied, failed = Nokogiri::HTML5.fragment(rendered).css("template").map { it.inner_html }
+
+    assert_match "Lien copié.", copied
+    assert_match "data-toast-type=\"success\"", copied
+    assert_match I18n.t("shared.clipboard.failed"), failed
+    assert_match "data-toast-type=\"error\"", failed
+  end
+
+  test "ui_copy_button defaults: secondary, small, clipboard icon, no aria-label of its own" do
+    show ui_copy_button("KFM37", label: "Copier", copied: "Code copié.", failed: "Raté.", variant: :ghost, size: :md)
+
+    assert_select "button[hidden].min-h-tap:not([aria-label])", text: "Copier"
+    assert_equal icon_paths(ui_icon("clipboard-document", size: :md)), icon_paths(css_select("button").first)
+    assert_match "Raté.", Nokogiri::HTML5.fragment(rendered).css("template").last.inner_html
+  end
+
+  test "ui_modal hands its document title to the modal controller and its dialog to the autofocus controller" do
+    html = ui_modal(title: "Nouveau niveau", id: "level", document_title: "Nouveau niveau · Équipe · Lnclass") do |modal|
+      modal.footer { "Pied" }
+      "Corps"
+    end
+    show html
+
+    assert_select "[data-controller=modal][data-modal-document-title-value='Nouveau niveau · Équipe · Lnclass']"
+    assert_select "dialog#level[data-controller=autofocus][data-autofocus-mode-value=dialog]"
+    assert_select "dialog#level[data-action~='modal:opened->autofocus#focus']"
+    assert_select "dialog#level div[data-autofocus-footer]", text: "Pied"
+  end
+
+  test "ui_modal without a document title leaves the tab title alone" do
+    show ui_modal(title: "Supprimer ?", id: "confirm")
+
+    assert_select "[data-controller=modal]:not([data-modal-document-title-value])"
+    assert_select "dialog#confirm[data-controller=autofocus]"
+  end
+
+  test "ui_field autofocus declares the autofocus target instead of the autofocus attribute" do
+    show view.fields(:user, model: Record.new) { |form|
+      ui_field(form, :name, autofocus: true) + ui_field(form, :pin, as: :password, reveal: true, autofocus: true) +
+        ui_field(form, :level, data: { turbo_permanent: true })
+    }
+
+    assert_select "input#user_name[data-autofocus-target=field]:not([autofocus])"
+    assert_select "input#user_pin[data-autofocus-target=field][data-password-reveal-target=input]:not([autofocus])"
+    assert_select "input#user_level[data-turbo-permanent]:not([data-autofocus-target])"
   end
 
   private
 
   # Les helpers rendent leurs partials par `render`, qui accumule dans `rendered` : on n'examine que le fragment voulu.
+  # Les tracés d'une icône heroicons : ce qui la distingue d'une autre, quelle que soit la sérialisation.
+  def icon_paths(node)
+    node = Nokogiri::HTML5.fragment(node.to_s) unless node.respond_to?(:css)
+    node.css("svg path").map { it["d"] }
+  end
+
   def show(html)
     self.rendered = self.class.content_class.new(html.to_s)
   end

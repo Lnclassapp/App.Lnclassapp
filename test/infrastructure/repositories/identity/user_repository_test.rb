@@ -48,11 +48,53 @@ module Repositories
         assert_equal Entities::Identity::Actor.new(user_id: teacher.id, role: :teacher, school_id: school.id), actor
       end
 
+      # ADR-0065 : une direction se connecte par PIN, et son acteur porte l'établissement de son rattachement.
+      test "a school admin signs in by PIN and their actor carries their school" do
+        school = create_school
+        admin = create_school_admin(school:, pin: "1357")
+
+        assert_equal admin.id, @repository.authenticate(contact: admin.contact, pin: "1357").id
+        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: school.id),
+                     @repository.actor_for(user_id: admin.id)
+      end
+
+      test "actor_for gives a school admin without attachment no school" do
+        admin = create_user(role: "school_admin")
+
+        assert_nil @repository.actor_for(user_id: admin.id).school_id
+      end
+
       test "actor_for carries the team role and no school" do
         member = create_team_member(team_role: "content")
 
         assert_equal Entities::Identity::Actor.new(user_id: member.id, role: :team, team_role: "content"),
                      @repository.actor_for(user_id: member.id)
+      end
+
+      test "update_name replaces the last and first names" do
+        record = create_student(last_name: "Kouassi", first_name: "Aya")
+
+        assert @repository.update_name(user_id: record.id, first_name: "Aya Marie", last_name: "Koné")
+        assert_equal [ "Koné", "Aya Marie" ], @repository.find(id: record.id).then { [ it.last_name, it.first_name ] }
+      end
+
+      test "update_contact replaces the number the account signs in with" do
+        record = create_student(contact: "0102030405", pin: "1357")
+
+        assert @repository.update_contact(user_id: record.id, contact: "0711223344").success?
+        assert_equal record.id, @repository.authenticate(contact: "0711223344", pin: "1357").id
+        assert_nil @repository.find_by_contact(contact: "0102030405")
+      end
+
+      # The unique index refuses inside a savepoint: the transaction of the caller stays usable (reload below).
+      test "update_contact is a conflict on a number held by another account, and writes nothing" do
+        record = create_student(contact: "0102030405")
+        create_student(contact: "0711223344")
+
+        result = @repository.update_contact(user_id: record.id, contact: "0711223344")
+
+        assert_equal [ :conflict, { contact: [ :taken ] } ], [ result.code, result.errors ]
+        assert_equal "0102030405", record.reload.contact
       end
     end
   end

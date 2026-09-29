@@ -7,8 +7,11 @@
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-17**, bloque la V1 |
 | **Remplace** | [ADR-0012](./0012-deep-modules-et-strict-cqrs.md) §3.3 · [ADR-0020](./0020-optimisations-bulk-insert-donnees-catalogue.md), sauf §2.1 et §2.2 |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0066](./0066-import-des-drena-et-slug-prefixe.md) |
 
 ---
+
+> ⚠️ **Amendé par l'[ADR-0066](./0066-import-des-drena-et-slug-prefixe.md)** : les DRENA s'importent désormais (cinquième type `drenas`), et leur slug est préfixé `drena-`. Les exemples ci-dessous qui citent `abidjan-1` doivent se lire `drena-abidjan-1`.
 
 ## 1. Contexte et problématique
 
@@ -137,3 +140,21 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
 - **Un seul import actif par type** : un index unique partiel sur `kind`, pour les statuts `queued`, `validating` et `importing` (`index_import_reports_one_running_per_kind`). Un second import du même type donne `:conflict`. Aucun index unique sur le checksum : réimporter un fichier est permis, et ses éléments déjà écrits sont comptés en doublons.
 - **Jobs** : les jobs `<Contexte>::Import…Job` héritent de `Shared::ImportJob`. `config.x.import_jobs` associe chaque `kind` à son job, résolu à l'appel.
 - **Test de performance par type** : `test/performance/<contexte>/import_<kind>_performance_test.rb`, un par lot d'import, au lieu du fichier unique `test/performance/imports_test.rb` du §7. Volumes et seuil inchangés. Ces tests sont hors suite par défaut et se jouent avec `PERF=1`.
+
+## Amendement du 2026-09-27 — un import bloqué est libéré après 10 minutes
+
+*Décision du porteur. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Un import qui ne progresse plus passe `failed` après 10 minutes**, au lieu de 30, et quel que soit son statut actif :
+  - `validating` ou `importing` commencé depuis plus de 10 minutes (job tué, par exemple par un déploiement) ;
+  - `queued` créé depuis plus de 10 minutes : le job n'a jamais été pris (worker arrêté). Avant cet amendement, un tel rapport restait en file pour toujours et bloquait tous les imports de son type.
+- Le contrôle se fait au dépôt de l'import suivant du même type (`Catalog::StartImport`, `STALE_AFTER = 10 * 60`, `ImportReportRepository#fail_stale`). Un import normal dure moins de 2 minutes (§7), donc 10 minutes laissent une large marge.
+- Preuves : `test/infrastructure/repositories/catalog/import_report_repository_test.rb` (les deux cas) et `test/system/error_paths_test.rb` (import interrompu, import jamais pris, par les vrais boutons).
+
+## Amendement du 2026-09-28 — un rapport sans fichier : la génération des classes manquantes
+
+*Chantier [`docs/chantiers/generer-classes`](../../chantiers/generer-classes/prd.md), [ADR-0056](./0056-generation-des-classes-manquantes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- `import_reports.kind` accepte aussi **`classrooms`** : le rapport de la génération des classes manquantes. Ce n'est pas un type d'import (aucun format, aucun téléversement) : il n'est pas dans `ImportKind::ALL`, mais dans `ImportKind::REPORT_KINDS`.
+- Ce rapport n'a ni pièce jointe ni checksum : `checksum_sha256` devient nul, et la contrainte `import_reports_checksum_unless_generation` l'exige pour tout autre type.
+- Même cycle de vie que les imports : un seul en cours (index unique partiel), libéré après 10 minutes, suivi par `/teams/imports/:public_id`, journal `import.run`.

@@ -1,0 +1,36 @@
+# Photo de profil (chantier photo-de-profil) — PH-01 à PH-07, ADR-0060, UDR-0047
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/profile_photo_input:
+        photo: "Photo"
+    errors:
+      models:
+        dtos/identity/profile_photo_input:
+          attributes:
+            photo:
+              blank: "Choisissez une photo."
+              unsupported: "Choisissez une photo JPEG, PNG ou WebP."
+              too_large: "La photo pèse %{count} Mo au plus."
+              too_wide: "La photo mesure %{count} pixels de côté au plus."
+  identity:
+    profiles:
+      information:
+        photo: "Photo"
+        photo_present: "Votre photo remplace vos initiales."
+        photo_absent: "Aucune photo : vos initiales s'affichent."
+        add_photo: "Ajouter une photo"
+        change_photo: "Changer ma photo"
+    profile_photos:
+      edit:
+        title: "Ma photo"
+        hint: "JPEG, PNG ou WebP. Elle est recadrée en carré et allégée sur votre téléphone avant l'envoi."
+        preview: "Aperçu de votre nouvelle photo"
+        unreadable: "Cette image est illisible ou abîmée. Choisissez-en une autre."
+        submit: "Enregistrer"
+        cancel: "Annuler"
+        remove: "Retirer ma photo"
+      update:
+        changed: "Votre photo est enregistrée."
+      destroy:
+        removed: "Votre photo est retirée."

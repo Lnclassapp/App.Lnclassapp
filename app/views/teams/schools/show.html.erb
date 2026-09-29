@@ -1,8 +1,10 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
-<%# Rôle : en-tête, classes de l'année groupées par niveau (code, effectif, enseignants), enseignants rattachés %>
-<%# ADR  : 0030, 0041 · UDR : 0006, 0036 %>
-<% content_for :title, t(".page_title", name: @school.name) %>
+<%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année par niveau, enseignants en attente et rattachés %>
+<%# ADR  : 0030, 0041, 0059, 0063 · UDR : 0006, 0036, 0046, 0050, 0054 · retour vers la liste filtrée d'où la fiche a été ouverte %>
+<% page_title @school.name %>
 <% content_for :nav_key, "schools" %>
+<%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
+<%= ui_back_link t(".back"), href: back_href(schools_path, from: schools_path) %>
 <%= render "header", school: @school %>
 
 <div class="grid gap-8 lg:grid-cols-main-aside">
@@ -13,6 +15,7 @@
       </h2>
       <p class="mt-1 text-sm text-mute"><%= t(".school_year", year: @school.school_year) %></p>
     </div>
+    <%= render "level_classrooms", block: @level_classrooms %>
     <% if @school.levels.empty? %>
       <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
     <% else %>
@@ -21,6 +24,9 @@
   </section>
 
   <section id="school_teachers" aria-labelledby="school_teachers_title" class="min-w-0">
+    <% if @join_requests.any? %>
+      <%= render "teams/schools/join_requests", school: @school, requests: @join_requests %>
+    <% end %>
     <h2 id="school_teachers_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".teachers", count: @school.teachers.size) %></h2>
     <% if @school.teachers.empty? %>
       <%= ui_empty_state title: t(".no_teachers"), description: t(".no_teachers_description"), icon: "user-group" %>

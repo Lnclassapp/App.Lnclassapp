@@ -1,9 +1,9 @@
-# Compte sans accueil : élève sans classe, enseignant sans école — ADR-0030, ADR-0040
+# Compte sans accueil : élève sans classe, enseignant sans école ou en attente de validation — ADR-0030, ADR-0040, ADR-0063, UDR-0050
 fr:
   identity:
     pending_accounts:
       show:
-        page_title: "Compte en attente · Lnclass"
+        page_title: "Compte en attente"
         sign_out: "Se déconnecter"
         student:
           title: "Tu n'as pas encore de classe"
@@ -15,3 +15,10 @@ fr:
         other:
           title: "Votre compte est en attente"
           description: "Cet espace n'est pas encore ouvert. Contactez l'équipe Lnclass."
+        join_request:
+          pending:
+            title: "Votre demande est en cours de validation"
+            description: "Établissement : %{school}. Demandez à un collègue déjà inscrit sur Lnclass de confirmer votre demande depuis son accueil, ou attendez la validation de l'équipe Lnclass."
+          rejected:
+            title: "Votre demande n'a pas été acceptée"
+            description: "Établissement : %{school}. Contactez l'équipe Lnclass si vous pensez qu'il s'agit d'une erreur."

@@ -1,0 +1,22 @@
+<%# 🌐 UI · teams/classroom_plans/edit — modification d'une ligne du barème, servie dans le frame « modal » %>
+<%# Rôle : nombres public et privé (0 à 30), rappel que les classes existantes ne changent pas ; échec en 422, succès en Turbo Stream %>
+<%# ADR  : 0058 · UDR : 0006, 0045, 0054 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title", name: @line.name), document_title: page_title(t(".title", name: @line.name)), id: "classroom-plan-line-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "classroom-plan-line-form" %>
+    <% end %>
+    <%= form_with model: @form, scope: :classroom_plan_line, url: classroom_plan_line_path(@line.level_slug, @line.series_slug),
+                  method: :patch, id: "classroom-plan-line-form", class: "space-y-5" do |form| %>
+      <% %i[public_count private_count].each do |field| %>
+        <%= ui_field form, field, as: :number, required: true, min: Entities::Classroom::ClassroomPlan::COUNTS.min,
+                                  max: Entities::Classroom::ClassroomPlan::COUNTS.max, step: 1, inputmode: "numeric", hint: t(".hint") %>
+      <% end %>
+      <p class="flex items-start gap-2 rounded-ln bg-mist px-4 py-3 text-sm text-mute">
+        <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-info" %>
+        <span><%= t(".untouched") %></span>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

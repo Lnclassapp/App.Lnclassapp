@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
-# Rôle : contrat des établissements et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039
+# Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
 module Ports
   module School
     module SchoolRepositoryPort
-      # Ligne insérée en masse : de quoi générer ses classes (DefaultClassroomPlan).
+      # Ligne insérée en masse, ou candidate à la génération : de quoi générer ses classes (DefaultClassroomPlan).
       Inserted = Data.define(:id, :public_id, :drena_id, :name, :school_type, :cycle)
 
       # → Entities::School::School | nil
@@ -12,12 +12,34 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
-      # school : Entities::School::School sans id. → Result(School) | failure(:conflict, errors: { name: [:taken] })
+      # Quel que soit son statut (ADR-0063). → Entities::School::School | nil
+      def find_by_id(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_id"
+      end
+
+      # Quel que soit son statut : l'appelant décide (ADR-0057). → Entities::School::School | nil
+      def find_by_school_code(school_code:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_school_code"
+      end
+
+      # Code national (ADR-0063), quel que soit le statut. → Entities::School::School | nil
+      def find_by_national_code(national_code:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_national_code"
+      end
+
+      # Codes nationaux déjà pris, pour l'import. → Set[String]
+      def taken_national_codes
+        raise NotImplementedError, "#{self.class} doit implémenter #taken_national_codes"
+      end
+
+      # school : Entities::School::School sans id, avec son school_code tiré par le domaine.
+      # → Result(School) | failure(:conflict, errors: { name: [:taken] })
       def create(school:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
-      # → Result(School) | failure(:conflict, errors: { name: [:taken] })
+      # Ne touche jamais au code d'établissement.
+      # → Result(School) | failure(:conflict, errors: { name: [:taken] } ou { national_code: [:taken] })
       def update(school:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end
@@ -33,11 +55,27 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
-      # rows : [{ public_id:, drena_id:, name:, sigle:, school_type:, cycle:, status: }], public_id tiré par le
-      # domaine ; insert_all avec RETURNING, created_at et updated_at posés par le repository.
+      # rows : [{ public_id:, drena_id:, name:, sigle:, school_type:, cycle:, status:, national_code:, school_code: }], public_id et
+      # school_code tirés par le domaine ; insert_all avec RETURNING, created_at et updated_at posés par le repository.
       # → [Inserted]
       def insert_many(rows:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #insert_many"
+      end
+
+      # Codes d'établissement déjà pris, pour en tirer de nouveaux (ADR-0057). → Set[String]
+      def taken_school_codes
+        raise NotImplementedError, "#{self.class} doit implémenter #taken_school_codes"
+      end
+
+      # Remplace le code et date la régénération. → Result(School) | failure(:conflict) (code déjà pris)
+      def replace_school_code(id:, school_code:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #replace_school_code"
+      end
+
+      # Candidats à la génération des classes manquantes (ADR-0056) : statut active ou draft, aucune classe (active ou
+      # archivée) de school_year, id > after_id, par id croissant, `limit` au plus. → [Inserted]
+      def without_classrooms(school_year:, after_id:, limit:)
+        raise NotImplementedError, "#{self.class} doit implémenter #without_classrooms"
       end
 
       # Une seule école principale par enseignant (index partiel). → Result | failure(:conflict)

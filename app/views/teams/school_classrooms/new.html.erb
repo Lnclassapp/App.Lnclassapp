@@ -1,0 +1,13 @@
+<%# 🌐 UI · teams/school_classrooms/new — ajout d'une classe à un établissement, servi dans le frame « modal » %>
+<%# Rôle : modale ouverte dès son arrivée, depuis la fiche de l'établissement ; un échec la re-rend en 422 avec la saisie %>
+<%# ADR  : 0030, 0041 · UDR : 0006, 0031, 0054 · l'onglet porte le titre de la modale tant qu'elle est ouverte %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "classroom-modal", open: true, document_title: page_title(t(".title")) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "classroom-form", icon: "plus" %>
+    <% end %>
+    <p class="mb-5 text-sm text-mute"><%= t(".school_year_notice", school: @school.name, year: Entities::Classroom::SchoolYear.current(Date.current)) %></p>
+    <%= render "form", input: @form %>
+  <% end %>
+<% end %>

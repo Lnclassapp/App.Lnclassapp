@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot R1 ; CA-16, CA-18, CA-25) |
 | **ADR lié** | [ADR-0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md) (slug figé) · [ADR-0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md) (référentiel créé par l'équipe) · [ADR-0036](../adr/0036-suppression-archivage-et-anonymisation.md) (suppression refusée) · UDR-0006 (CRUD Hotwire) |
@@ -73,3 +73,33 @@ L'équipe ne voyait ni le code d'un niveau, ni ce qui l'utilisait.
 - Cette forme (tableau, modale, confirmation dans la page, refus en 422 qui nomme la raison) peut servir de modèle aux écrans Séries (R2) et Matières (R3), sans les contraindre : leurs UDR décident.
 - Interdit désormais sur cet écran : la suppression en cascade d'un niveau, une confirmation par `confirm()` du navigateur, et un formulaire qui modifie le slug.
 - Preuve : `test/system/teams/levels_test.rb` crée, renomme et supprime un niveau vierge, échoue à supprimer un niveau utilisé, rouvre la modale en 422, le tout sous `assert_no_page_reload`, et vérifie que la page ne défile pas latéralement sur mobile.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#level-actions-<slug>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-level-<slug>"`, `:danger`). La modale `delete-level-<slug>` est rendue sans `trigger:`, son pied et son formulaire sont inchangés. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.
+
+## Amendement du 2026-09-28 — cycle en boutons radio
+
+*Chantier [`docs/chantiers/cycles-en-radio`](../../chantiers/cycles-en-radio/prd.md), [UDR-0005](0005-design-system-fondateur.md#amendement-du-2026-09-28--groupe-de-boutons-radio). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **`_form.html.erb`** : le cycle n'est plus un `select` mais `ui_radio_group` « Cycle » (`fieldset#level_cycle`), deux options côte à côte dès `sm` : « Premier cycle » (`first`), « Second cycle » (`second`). L'invite « Choisir un cycle » (`teams.levels.form.cycle_prompt`) disparaît.
+- **Valeur cochée** : à la création, **Premier cycle** (`Entities::Catalog::Level::CYCLES.first`, posé par `Teams::LevelsController#new` à côté de la position proposée) ; en modification, le cycle enregistré ; en 422, la saisie.
+- Mêmes valeurs soumises (`level[cycle]`), mêmes validations ; une saisie sans cycle revient en 422 avec l'erreur sous le groupe.
+
+## Amendement du 2026-09-28 — barème des classes
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), [ADR-0058](../adr/0058-bareme-des-classes-en-base.md), [UDR-0045](0045-bareme-des-classes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le badge « Hors génération des classes » devient « Hors barème »** (`[data-generation=outside]`, même place, même ton) : il signale un niveau sans aucun nombre positif au barème, public ou privé (au premier cycle, ou pour un couple encore lié). Le code du niveau n'entre plus en compte.
+- **L'aide `#levels-generation-help`** renvoie au barème (lien « Ouvrir le barème des classes », `classroom_plan_path`) au lieu de lister les codes reconnus.
+- La modale de modification n'affiche plus d'avertissement « code non reconnu », et l'indice du nom ne liste plus les « noms reconnus par la génération » : le slug ne sert plus à la génération.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- Le badge « Hors barème » perd son attribut `title` et son texte `sr-only` d'explication ; il est suivi de `ui_info_tip` (nom « Aide : Hors barème ») (« Ce niveau n'est pas utilisé pour générer les classes des établissements. », à valider par le porteur).
+- Retour « Accueil » vers l'accueil équipe ; titres « Niveaux · Équipe · Lnclass », « Nouveau niveau · Équipe · Lnclass », « Modifier le niveau · Équipe · Lnclass ».
+- La modale vise le champ « Nom » à l'ouverture ; la confirmation de suppression vise « Annuler ».

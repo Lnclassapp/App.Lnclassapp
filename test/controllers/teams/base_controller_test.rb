@@ -15,6 +15,15 @@ class Teams::BaseControllerTest < ActionDispatch::IntegrationTest
     get "/teams/jobs"
 
     assert_response :forbidden
+    # UDR-0054 §3.1: the error page, rendered under the engine, still names itself (config/initializers/mission_control_jobs.rb).
+    assert_select "title", "Accès interdit · Enseignant · Lnclass"
+  end
+
+  test "without an argument, page_title stays the reader of the engine, for its own pages" do
+    view = ActionView::Base.empty.extend(MissionControl::Jobs::NavigationHelper)
+    view.instance_variable_set(:@page_title, "Queues")
+
+    assert_equal "Queues", view.page_title
   end
 
   test "a team member whose second factor is not verified is sent to the second factor" do

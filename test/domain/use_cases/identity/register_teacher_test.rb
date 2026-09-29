@@ -60,7 +60,7 @@ module UseCases
           @refuse_attach = refuse_attach
         end
 
-        def find_by_public_id(public_id:) = @schools.find { it.public_id == public_id }
+        def find_by_school_code(school_code:) = @schools.find { it.school_code == school_code }
 
         def attach_teacher(teacher_id:, school_id:, primary:, at:)
           return Shared::Result.failure(:conflict) if @refuse_attach
@@ -68,13 +68,6 @@ module UseCases
           @journal << [ :teacher_school, teacher_id, school_id, primary, at ]
           Shared::Result.success
         end
-      end
-
-      class FakeDrenas
-        include Ports::School::DrenaRepositoryPort
-
-        def initialize(*drenas) = @drenas = drenas
-        def find_by_public_id(public_id:) = @drenas.find { it.public_id == public_id }
       end
 
       class FakeTaxonomy
@@ -95,32 +88,61 @@ module UseCases
         end
       end
 
+      # Referrers by token (ADR-0063) : the teacher 7 teaches in the school 31 (active), the teacher 8 in the school 32.
+      class FakeReferrals
+        include Ports::Identity::ReferralRepositoryPort
+
+        REFERRERS = {
+          "0a1b2c3d4e5f" => Ports::Identity::ReferralRepositoryPort::Referrer.new(user_id: 7, school_id: 31, school_active: true),
+          "aaaaaaaaaaaa" => Ports::Identity::ReferralRepositoryPort::Referrer.new(user_id: 8, school_id: 32, school_active: false),
+          "bbbbbbbbbbbb" => Ports::Identity::ReferralRepositoryPort::Referrer.new(user_id: 9, school_id: 31, school_active: false)
+        }.freeze
+
+        attr_reader :lookups
+
+        def initialize(journal, refuse: false)
+          @journal = journal
+          @refuse = refuse
+          @lookups = []
+        end
+
+        def find_referrer(token:)
+          @lookups << token
+          REFERRERS[token]
+        end
+
+        def record_referral(referrer_id:, referee_id:, school_id:, source:, at:)
+          return Shared::Result.failure(:conflict) if @refuse
+
+          @journal << [ :referral, referrer_id, referee_id, school_id, source, at ]
+          Shared::Result.success
+        end
+      end
+
       setup do
         @journal = []
         @transaction = JournalTransaction.new(@journal)
-        @drenas = FakeDrenas.new(Entities::School::Drena.new(id: 1, public_id: "drn-abj1", slug: "abidjan-1", name: "Abidjan 1"),
-                                 Entities::School::Drena.new(id: 2, public_id: "drn-abj2", slug: "abidjan-2", name: "Abidjan 2"))
         @schools_list = [
           SchoolEntity.new(id: 31, public_id: "sch-lca", drena_id: 1, name: "Lycée Classique d'Abidjan", school_type: "public",
-                           cycle: "both", status: "active"),
+                           cycle: "both", status: "active", school_code: "k7m4qz"),
           SchoolEntity.new(id: 32, public_id: "sch-closed", drena_id: 1, name: "Lycée fermé", school_type: "public",
-                           cycle: "both", status: "inactive"),
-          SchoolEntity.new(id: 33, public_id: "sch-other", drena_id: 2, name: "Lycée d'Abidjan 2", school_type: "public",
-                           cycle: "both", status: "active")
+                           cycle: "both", status: "inactive", school_code: "abc234"),
+          SchoolEntity.new(id: 33, public_id: "sch-draft", drena_id: 2, name: "Lycée en brouillon", school_type: "public",
+                           cycle: "both", status: "draft", school_code: "xyz789")
         ]
         @taxonomy = FakeTaxonomy.new(Entities::Catalog::Material.new(id: 5, slug: "svt", name: "SVT", shortname: "SVT",
                                                                      category: "science"))
       end
 
-      def register(actor: nil, taken: [], refuse_attach: false, **attributes)
+      def register(actor: nil, taken: [], refuse_attach: false, refuse_referral: false, **attributes)
         @registrations = FakeRegistrations.new(@journal, taken:)
+        @referrals = FakeReferrals.new(@journal, refuse: refuse_referral)
         dto = Dtos::Identity::TeacherRegistrationInput.new(
           last_name: "Koné", first_name: "Awa", gender: "female", contact: "05 01 02 03 04", pin: "4821",
-          pin_confirmation: "4821", drena_public_id: "drn-abj1", school_public_id: "sch-lca", material_slug: "svt", **attributes
+          pin_confirmation: "4821", school_code: "K7M-4QZ", material_slug: "svt", **attributes
         )
         RegisterTeacher.new(
-          registrations: @registrations, schools: FakeSchools.new(@journal, *@schools_list, refuse_attach:), drenas: @drenas,
-          taxonomy: @taxonomy, sessions: FakeSessions.new(@journal), policy: Policies::Identity::RegisterTeacherPolicy.new,
+          registrations: @registrations, schools: FakeSchools.new(@journal, *@schools_list, refuse_attach:), taxonomy: @taxonomy, sessions: FakeSessions.new(@journal), referrals: @referrals, policy: Policies::Identity::RegisterTeacherPolicy.new,
           transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW)
         ).call(actor:, dto:, ip: "1.2.3.4", user_agent: "Chrome")
       end
@@ -140,6 +162,43 @@ module UseCases
                      [ @registrations.received[:user].last_name, @registrations.received[:user].first_name,
                        @registrations.received[:user].gender, @registrations.received[:pin] ]
         assert_equal 1, @transaction.calls
+      end
+
+      test "CP-01: sans jeton, aucun parrain n'est cherché" do
+        register
+
+        assert_empty @referrals.lookups
+        assert_not(@journal.any? { it.first == :referral })
+      end
+
+      test "CP-02: le parrain d'un lien valide est enregistré après le rattachement, dans la transaction" do
+        result = register(ref: " 0A1B2C3D4E5F ")
+
+        assert result.success?
+        assert_equal [ :teacher_school, 41, 31, true, NOW ], @journal[1]
+        assert_equal [ :referral, 7, 41, 31, "link", NOW ], @journal[2]
+        assert_equal 1, @transaction.calls
+      end
+
+      test "CP-03: jeton inconnu, d'un autre établissement ou d'un établissement inactif : inscrit, sans parrain" do
+        %w[cccccccccccc aaaaaaaaaaaa bbbbbbbbbbbb].each do |ref|
+          @journal.clear
+
+          assert register(ref:).success?, ref
+          assert_not(@journal.any? { it.first == :referral }, ref)
+        end
+      end
+
+      test "CP-03: un jeton mal formé n'est même pas cherché" do
+        assert register(ref: "usr-41").success?
+        assert_empty @referrals.lookups
+      end
+
+      test "CP-03: un parrainage refusé par la base n'empêche pas l'inscription" do
+        result = register(ref: "0a1b2c3d4e5f", refuse_referral: true)
+
+        assert result.success?
+        assert_includes @journal, [ :teacher_school, 41, 31, true, NOW ]
       end
 
       test "le rôle est imposé à teacher : l'entité transmise ne porte jamais un autre rôle" do
@@ -166,24 +225,34 @@ module UseCases
         assert_empty @journal
       end
 
-      test "un établissement d'une autre DRENA : :invalid sur l'établissement, aucun compte" do
-        result = register(school_public_id: "sch-other")
+      test "CE-01: l'établissement est celui du code, saisi n'importe comment (ADR-0057)" do
+        result = register(school_code: " k7m 4qz ")
 
-        assert_equal [ :invalid, { school_public_id: [ :inclusion ] } ], [ result.code, result.errors ]
+        assert result.success?
+        assert_includes @journal, [ :teacher_school, 41, 31, true, NOW ]
+      end
+
+      test "CE-03: code inconnu, établissement désactivé ou en brouillon : la même erreur sur le code, aucun compte" do
+        %w[zzz999 abc234 xyz789].each do |school_code|
+          result = register(school_code:)
+
+          assert_equal [ :invalid, { school_code: [ :inclusion ] } ], [ result.code, result.errors ], school_code
+        end
         assert_empty @journal
         assert_equal 0, @transaction.calls
       end
 
-      test "un établissement désactivé ou inconnu : :invalid sur l'établissement" do
-        assert_equal({ school_public_id: [ :inclusion ] }, register(school_public_id: "sch-closed").errors)
-        assert_equal({ school_public_id: [ :inclusion ] }, register(school_public_id: "sch-inconnu").errors)
+      test "CE-04: un code au mauvais format est refusé par le formulaire, avant toute recherche" do
+        result = register(school_code: "KFM37")
+
+        assert_equal [ :invalid, [ :school_code ] ], [ result.code, result.errors.keys ]
         assert_empty @journal
       end
 
-      test "une DRENA inconnue et une matière inconnue : :invalid sur chacune" do
-        result = register(drena_public_id: "drn-inconnue", material_slug: "latin")
+      test "un code inconnu et une matière inconnue : :invalid sur chacun" do
+        result = register(school_code: "zzz999", material_slug: "latin")
 
-        assert_equal [ :invalid, { drena_public_id: [ :inclusion ], material_slug: [ :inclusion ] } ], [ result.code, result.errors ]
+        assert_equal [ :invalid, { school_code: [ :inclusion ], material_slug: [ :inclusion ] } ], [ result.code, result.errors ]
         assert_empty @journal
       end
 

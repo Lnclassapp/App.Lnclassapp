@@ -8,7 +8,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     @member = create_team_member
   end
 
-  def upload(content = schools_document(count: 2, drena: "abidjan-2").to_json, filename: "ecoles.json")
+  def upload(content = schools_document(count: 2, drena: "drena-abidjan-2").to_json, filename: "ecoles.json")
     Rack::Test::UploadedFile.new(StringIO.new(content), "application/json", original_filename: filename)
   end
 
@@ -71,6 +71,18 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#import_io_hint", text: /20 Mo au plus, avec 5 000 éléments au plus/
   end
 
+  # ADR-0066, UDR-0053 §3: the schools help cites the DRENA by their prefixed slug.
+  test "the schools help gives an example and a list of DRENA slugs, all prefixed drena-" do
+    create_drena(name: "Abidjan 2")
+    sign_in_as @member
+
+    get new_teams_import_path(kind: "schools"), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "#import-help-schools pre code", text: /"drena": "drena-abidjan-1",.*"drena": "drena-abidjan-2"/m
+    assert_select "#import-help-schools pre code", text: /"drena": "abidjan-/, count: 0
+    assert_select "#import-help-drenas li code", "drena-abidjan-2"
+  end
+
   test "an unknown kind has no upload form" do
     sign_in_as @member
 
@@ -127,6 +139,10 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: /Import lancé/
     assert_select "turbo-stream[action=update][target=modal] turbo-frame#import_status[data-controller='teams--import-status']"
     assert_select "turbo-stream[action=update][target=modal] [data-status=queued]"
+    # UDR-0054 §3.1: the tracking modal names the tab like the page of the report.
+    tab = "Import d'établissements · Équipe · Lnclass"
+    assert_select "turbo-stream[action=update][target=modal] #import-tracking-modal", 1
+    assert_select "turbo-stream[action=update][target=modal] [data-modal-document-title-value=\"#{tab}\"]"
     assert_select "turbo-stream[action=prepend][target=imports] tr#import_#{report.public_id}", text: /ecoles\.json/
     assert_equal @member.id, report.imported_by_id
   end
@@ -156,7 +172,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /Classes générées : 77/
     assert_select "li", text: /Levels skipped : 2/
     assert_select "#import_errors li", 2
-    assert_select "#import_errors li", text: /schools\[4\]\s*Valeur non conforme au format attendu \(required\)/
+    assert_select "#import_errors li", text: /schools\[4\]\s*Clé obligatoire manquante\./
   end
 
   test "the tracking frame alone answers a request coming from the frame" do
@@ -185,6 +201,95 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
 
     get teams_import_path(failed.public_id)
     assert_select "[role=alert]", text: /erreur imprévue/
+  end
+
+  # UDR-0053 (amendment): a file of schools uploaded to the DRENA import names the right import.
+  test "a file of another import kind names that kind in the report" do
+    report = create_import_report(kind: "drenas", status: "rejected", finished_at: Time.current,
+                                  import_errors: [ { "path" => "format", "code" => "format_mismatch",
+                                                     "params" => { "expected" => "lnclass.drenas", "received" => "lnclass.schools" } } ])
+    sign_in_as @member
+
+    get teams_import_path(report.public_id)
+
+    assert_select "#import_errors li",
+                  text: /Ce fichier est un import « Établissements » \(format lnclass\.schools\), pas un import « DRENA »/
+  end
+
+  test "a generation of the classrooms: listed and filtered, its report without a file and with its own words (ADR-0056)" do
+    author = create_team_member(first_name: "Awa", last_name: "Koné", second_factor: false)
+    report = create_import_report(kind: "classrooms", checksum_sha256: nil, imported_by: author, status: "completed",
+                                  total_count: 5, imported_count: 3, skipped_count: 1, error_count: 1, finished_at: Time.current,
+                                  details: { "classrooms_created" => 150, "skipped_levels" => 2 },
+                                  import_errors: [ { "path" => "Lycée Moderne", "code" => "write_failed", "params" => {} } ])
+    create_import_report(kind: "schools")
+    sign_in_as @member
+
+    get teams_imports_path(kind: "classrooms")
+
+    assert_select "#imports tr", 1
+    assert_select "nav a[aria-current=page]", text: "Génération des classes"
+    assert_select "#import_#{report.public_id} a[href='#{teams_import_path(report.public_id)}']", text: "Voir le rapport"
+    assert_select "a[href=?]", new_teams_import_path(kind: "classrooms"), 0
+    assert_select "a[href=?]", new_teams_import_path(kind: "schools"), 1
+
+    get teams_import_path(report.public_id)
+
+    assert_response :success
+    assert_select "h1", "Génération des classes"
+    assert_select "p", text: /\A\s*Awa Koné · /
+    assert_select "dt", text: "Établissements dotés"
+    assert_select "dt", text: "Sans classe à générer"
+    assert_select "dt", text: "Établissements examinés"
+    assert_select "#import_counter_imported", "3"
+    assert_select "li", text: /Classes générées : 150/
+    assert_select "li", text: /Niveaux sautés .* : 2/
+    assert_select "#import_errors li", text: /Lycée Moderne\s*L'enregistrement de cet élément n'a pas abouti\./
+  end
+
+  test "a generation running or failed speaks of schools, not of a file" do
+    running = create_import_report(kind: "classrooms", checksum_sha256: nil, status: "importing", processed_count: 400)
+    sign_in_as @member
+
+    get teams_import_path(running.public_id), headers: { "Turbo-Frame" => "import_status" }
+    assert_match "400 établissements traités", response.body
+    assert_match "Génération des classes en cours…", response.body
+
+    running.update!(status: "failed", finished_at: Time.current)
+    get teams_import_path(running.public_id)
+    assert_select "[role=alert]", text: /La génération s'est arrêtée sur une erreur imprévue/
+  end
+
+  # finitions-generation-menu: the status badge follows the kind too — a generation is never « Import en cours ».
+  test "the status badge of a generation speaks of a generation, in the list as in its report" do
+    running = create_import_report(kind: "classrooms", checksum_sha256: nil, status: "importing")
+    checking = create_import_report(kind: "schools", status: "validating")
+    sign_in_as @member
+
+    get teams_imports_path
+
+    assert_select "#import_#{running.public_id}", text: /Génération en cours/
+    assert_select "#import_#{running.public_id}", text: /Import en cours/, count: 0
+    assert_select "#import_#{checking.public_id}", text: /Vérification/
+
+    get teams_import_path(running.public_id)
+
+    assert_select "#import_status [data-status=importing] > div:first-child", text: /Génération en cours/
+    assert_select "#import_status", text: /Import en cours/, count: 0
+
+    running.update!(status: "validating")
+    get teams_import_path(running.public_id), headers: { "Turbo-Frame" => "import_status" }
+
+    assert_select "[data-status=validating] > div:first-child", text: /Recherche des établissements/
+  end
+
+  test "a teacher may not read the report of a generation" do
+    report = create_import_report(kind: "classrooms", checksum_sha256: nil)
+    sign_in_as create_teacher
+
+    get teams_import_path(report.public_id)
+
+    assert_response :forbidden
   end
 
   test "beyond 1 000 errors, the rest is announced" do

@@ -39,7 +39,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get courses_path
 
     assert_response :success
-    assert_select "title", text: tl("index.page_title")
+    assert_select "title", text: "#{tl("index.page_title")} · Élève · Lnclass"
     assert_select "h1", text: tl("index.title")
     assert_select "turbo-frame#courses[data-turbo-action=advance][target=_top] #courses_list > li", 2
     assert_select "#courses_list li:first-child", text: /Philosophie.*Tle.*La conscience/m
@@ -84,6 +84,46 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{@course.slug}"
   end
 
+  test "the filters form searches while typing: a « q » search field, lists sent on change, « Filtrer » kept without JS (FU-47)" do
+    sign_in_as create_student
+
+    get courses_path(q: "généti")
+
+    assert_select "form#courses-filters[role=search][aria-label=?][data-controller=search]", tl("index.filters.label") do
+      assert_select "label[for=q]", text: tl("index.filters.search")
+      assert_select "input[type=search][name=q][id=q][value='généti'][autocomplete=off][data-action='search#queue']"
+      assert_select "select[name=level][data-action='change->search#submit']"
+      assert_select "select[name=material][data-action='change->search#submit']"
+      assert_select "button[type=submit][data-search-target=button]", text: tl("index.filters.submit")
+    end
+    assert_select "turbo-frame#courses.transition-opacity.aria-busy\\:opacity-50"
+    assert_select "#courses_list > li", 1
+    assert_select "#course_#{@course.slug}"
+    assert_select "#courses_total[aria-live=polite]", text: tl("index.total", count: 1)
+  end
+
+  test "the search ignores case and accents, and combines with the filters (FU-47)" do
+    create_course(name: "Mathématiques 3e", level: @seconde, material: @philo)
+    sign_in_as create_student
+
+    get courses_path(q: "MATHEMATIQUES"), headers: { "Turbo-Frame" => "courses" }
+    assert_select "#courses_list > li", 1
+    assert_select "#courses_list", text: including("Mathématiques 3e")
+
+    get courses_path(q: "mathematiques", level: @tle.slug), headers: { "Turbo-Frame" => "courses" }
+    assert_select "#courses_list", 0
+  end
+
+  test "no course matching the search offers « Effacer la recherche » (FU-47)" do
+    sign_in_as create_student
+
+    get courses_path(q: "zzz"), headers: { "Turbo-Frame" => "courses" }
+
+    assert_select "#courses_total", text: tl("index.total", count: 0)
+    assert_select "#courses_empty", text: including(tl("index.no_match_title"))
+    assert_select "#courses_empty a[href='#{courses_path}']", text: tl("index.clear_search")
+  end
+
   test "a request from the courses frame receives the frame only, filtered" do
     sign_in_as create_student
 
@@ -103,7 +143,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get courses_path(level: @seconde.slug)
 
     assert_select "#courses_empty", text: including(tl("index.no_match_title"))
-    assert_select "#courses_empty a[href='#{courses_path}']", text: tl("index.clear_filters")
+    assert_select "#courses_empty a[href='#{courses_path}']", text: tl("index.clear_search")
 
     Orm::Course.where(status: "published").update_all(status: "draft")
     get courses_path
@@ -127,7 +167,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   # ── Page d'un cours ────────────────────────────────────────────────────────
 
-  test "a student reads a published course: breadcrumb, badges, content under KaTeX, published essential sheets" do
+  test "a student reads a published course: back link, badges, content under KaTeX, published essential sheets" do
     meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions")
     create_exercise(essential: meiose)
     create_essential(course: @course, name: "Fiche en brouillon", status: "draft")
@@ -136,12 +176,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get course_path(@course.slug)
 
     assert_response :success
-    assert_select "title", text: tl("show.page_title", name: "Génétique et évolution")
-    assert_select "nav[aria-label=?]", tl("show.breadcrumb") do
-      assert_select "a[href='#{courses_path}']", text: tl("show.catalog")
-      assert_select "a[href='#{courses_path(material: @svt.slug)}']", text: "SVT"
-      assert_select "[aria-current=page]", text: "Génétique et évolution"
-    end
+    assert_select "title", text: "Génétique et évolution · Élève · Lnclass"
+    # FU-14 : le seul retour est « Cours », vers le catalogue ; le fil complet a disparu.
+    assert_select "main nav", 1
+    assert_select "nav[aria-label=?] a[href='#{courses_path}']", I18n.t("components.back_link.label"), text: tl("show.back")
+    assert_no_match(/href="#{Regexp.escape(courses_path)}\?material=/, response.body)
+    assert_select "main [aria-current=page]", 0
     assert_select "#course_header h1", text: "Génétique et évolution"
     assert_select "#course_header", text: including("Du gène à l'espèce")
     assert_select "#course_header", text: including("Tle D")

@@ -157,3 +157,37 @@ def self.for(school_type) = PLAN.fetch(school_type == "public" ? "public" : "pri
 | Collège public (`public`, `first`) | 28 | — | — | — | **28** |
 
 Ces totaux dépendent des liaisons `level_series` en base : un niveau ou une série absent est sauté et compté (§4). Les 71 classes d'un lycée public dans l'ancienne application venaient d'un référentiel qui ne liait que C à la 2nde.
+
+## Amendement du 2026-09-28 — génération après coup des classes manquantes
+
+*Chantier [`docs/chantiers/generer-classes`](../../chantiers/generer-classes/prd.md), [ADR-0056](./0056-generation-des-classes-manquantes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les classes par défaut naissent à l'import, ou après coup pour un établissement qui n'en a aucune de l'année.** L'équipe peut lancer, depuis l'écran Établissements, la génération des classes manquantes : un job reprend le même barème (`DefaultClassroomPlan`) pour chaque établissement actif ou en brouillon sans aucune classe de l'année scolaire en cours.
+- La règle « modifier un établissement ne régénère jamais ses classes » tient toujours : un établissement qui a au moins une classe de l'année n'est jamais touché.
+
+
+## Amendement du 2026-09-28 — code d'établissement
+
+*Chantier [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md), [ADR-0057](./0057-code-d-etablissement.md) (défauts à confirmer par le porteur). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **L'enseignant ne choisit plus son école : il la désigne par son code d'établissement**, transmis par l'équipe (saisi, ou porté par le lien `/e/<code>`). Un code inconnu, remplacé, ou d'un établissement inactif ou en brouillon est refusé par le même message. Le rattachement reste une ligne `teacher_schools` principale, créée dans la transaction du compte.
+- Le coût consenti « un enseignant peut se déclarer dans n'importe quelle classe de son école » est borné : « son école » est celle qui lui a transmis son code.
+- Chaque établissement naît avec son code (import) ; les établissements existants l'ont reçu par migration.
+
+## Amendement du 2026-09-28 — barème en base
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md), [ADR-0058](0058-bareme-des-classes-en-base.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le barème n'est plus dans le code.** Le tableau du §4 et la constante du §6 (`DefaultClassroomPlan::PLAN`) deviennent la **valeur initiale** de la table `classroom_plan_entries`, reprise au déploiement et modifiable par l'équipe à l'écran « Barème des classes » (UDR-0045). Le coût « le plan de génération est dans le code : le changer demande une PR » est levé.
+- « Par série » devient **une ligne par série liée au moment de la reprise** ; une série liée ensuite n'a pas de nombre tant que l'équipe ne l'a pas renseigné.
+- « Un niveau ou une série absent du référentiel est sauté et compté » devient : **une ligne absente du barème** (niveau du premier cycle, ou couple niveau × série liée) est sautée et comptée ; un niveau du second cycle sans série liée l'est toujours.
+- `Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup:, plan:)` reçoit le barème : le domaine ne lit toujours aucune base.
+- Inchangé : correspondance par identifiant de niveau (le slug ne sert plus qu'à la reprise), `mixed` suit `private`, un collège ne prend que le premier cycle, noms « 6ème 1 » / « Tle D 3 », aucune classe existante régénérée.
+
+- **L'enseignant ne choisit plus son école : il la désigne par son code d'établissement**, transmis par l'équipe (saisi, ou porté par le lien `/e/<code>`). Un code inconnu, remplacé, ou d'un établissement inactif ou en brouillon est refusé par le même message. Le rattachement reste une ligne `teacher_schools` principale, créée dans la transaction du compte.
+- Le coût consenti « un enseignant peut se déclarer dans n'importe quelle classe de son école » est borné : « son école » est celle qui lui a transmis son code.
+- Chaque établissement naît avec son code (import) ; les établissements existants l'ont reçu par migration.
+
+## Amendement du 2026-09-28 — compte en attente (ADR-0063)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* Un enseignant sans école principale n'accède qu'à l'écran d'attente et à la déconnexion (garde de `AuthenticatedController`). L'inscription sans code (code national ou DRENA → établissement) crée ce compte, avec une demande `school_join_requests` que l'équipe ou un garant du même établissement décide.

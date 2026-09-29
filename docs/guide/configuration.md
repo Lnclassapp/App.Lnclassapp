@@ -49,6 +49,14 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 | `BUCKET_REGION` | Région du bucket, `auto` par défaut |
 | `BUCKET_FORCE_PATH_STYLE` | `true` si le bucket Railway annonce des URL en *path-style* |
 
+### Pré-déploiement et invitation d'amorçage
+
+| Variable | Rôle |
+|---|---|
+| `TEAM_BOOTSTRAP_CONTACT` | Numéro du premier membre de l'équipe (ADR-0034, ADR-0038). Tant qu'aucun compte équipe n'existe, chaque déploiement révoque l'invitation ouverte et imprime **un** nouveau lien dans les logs du pré-déploiement. Absente : aucune invitation |
+
+La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`railway.json` et réglage « Pre-deploy Command » du service, ADR-0052). En production, `db:prepare` ne sème jamais (`seeds: false` dans `config/database.yml`) : sans cela, sur une base neuve, il semait avant que `db:seed` ne sème à nouveau, et deux liens s'imprimaient par déploiement (amendement du 2026-09-29).
+
 ### Facultatives — réglage de charge
 
 Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure à l'appui.
@@ -103,6 +111,8 @@ config.active_storage.service = :local
 Sur Railway, le disque du conteneur est **éphémère** : chaque déploiement efface les fichiers téléversés. Les images de couverture et les messages vocaux disparaîtraient à la première mise à jour, sans erreur ni avertissement.
 
 **Réglé dans le nouveau projet par l'[ADR-0047](../decisions/adr/)** : service `railway` (bucket Railway, S3-compatible) en production, fichiers servis par l'application (`rails_storage_proxy`), variables `BUCKET_*` du §2.
+
+Aucune variante d'image n'est générée (ADR-0060 : la photo est recadrée par le navigateur et servie telle quelle) : `config.active_storage.variant_processor = :disabled` dans `config/application.rb`, pour tous les environnements. Ni `image_processing` ni libvips ne sont dans l'image ; sans ce réglage, chaque démarrage réclamait la gem `image_processing` dans les logs. Une fonctionnalité qui voudrait des variantes rouvre la question par un ADR (gem, libvips dans le `Dockerfile`, processeur `:vips`). Preuve : `test/config/storage_test.rb`.
 
 ### L'hôte des liens de mail est un exemple
 

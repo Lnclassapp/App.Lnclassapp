@@ -36,17 +36,19 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     end
   end
 
-  test "SC-04: filter the list by DRENA, type and name; the URL keeps the filters, the page is not reloaded" do
+  test "SC-04, FU-45: filter the list by DRENA, type and name as they change; the URL keeps the filters, no page reload" do
     create_school(drena: @abidjan, name: "Lycée Classique", school_type: "public")
     create_school(drena: @abidjan, name: "Collège Moderne de Cocody", school_type: "private", cycle: "first")
     create_school(drena: @bouake, name: "Lycée Municipal", school_type: "private")
     visit schools_path
     assert_selector "#schools_list tr", count: 3
+    # UDR-0054 §3.9 : avec JavaScript, « Filtrer » s'efface ; chaque liste part au changement, la frappe après une pause.
+    assert_no_button I18n.t("teams.schools.filters.submit")
 
     assert_no_page_reload do
       select "Abidjan 1", from: "filter_drena"
+      assert_selector "#schools_list tr", count: 2
       select I18n.t("school_types.private"), from: "filter_school_type"
-      click_on I18n.t("teams.schools.filters.submit")
 
       assert_selector "#schools_list tr", count: 1
       assert_selector "#schools_list tr", text: "Collège Moderne de Cocody"
@@ -56,15 +58,15 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       end
 
       select I18n.t("teams.schools.filters.all_drena"), from: "filter_drena"
+      assert_selector "#schools_list tr", count: 2
       select I18n.t("teams.schools.filters.all_school_type"), from: "filter_school_type"
+      assert_selector "#schools_list tr", count: 3
       fill_in "filter_search", with: "lycee"
-      click_on I18n.t("teams.schools.filters.submit")
 
       assert_selector "#schools_list tr", count: 2
       assert_no_selector "#schools_list tr", text: "Collège"
 
       fill_in "filter_search", with: "introuvable"
-      click_on I18n.t("teams.schools.filters.submit")
 
       assert_selector "#schools_empty", text: I18n.t("teams.schools.index.no_match_title")
     end
@@ -78,7 +80,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
 
     assert_no_page_reload do
-      within("#school_header") { click_on I18n.t("#{header_scope}.edit") }
+      click_menu_action("#school_header", I18n.t("#{header_scope}.edit"))
       within "turbo-frame#modal dialog[open]" do
         fill_in "school[name]", with: "Lycée Moderne"
         click_on I18n.t("teams.schools.edit.submit")
@@ -86,7 +88,9 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
         assert_selector "#school_name_error",
                         text: I18n.t("activemodel.errors.models.dtos/school/school_input.attributes.name.taken")
         fill_in "school[name]", with: "Lycée Classique d'Abidjan"
-        select I18n.t("teams.schools.cycles.first"), from: "school[cycle]"
+        assert_no_select "school[cycle]"
+        assert_checked_field I18n.t("teams.schools.cycles.both")
+        choose I18n.t("teams.schools.cycles.first")
         select "Bouaké", from: "school[drena_public_id]"
         click_on I18n.t("teams.schools.edit.submit")
       end
@@ -100,14 +104,18 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       end
       assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
 
-      within("#school_header") { click_on I18n.t("#{header_scope}.deactivate") }
+      click_menu_action("#school_header", I18n.t("#{header_scope}.deactivate"))
       within("#school_header dialog[open]") { click_on I18n.t("#{header_scope}.confirm_deactivate") }
 
       assert_toast I18n.t("teams.schools.deactivate.done", name: "Lycée Classique d'Abidjan")
       within "#school_header" do
         assert_text I18n.t("school_statuses.inactive")
         assert_no_link I18n.t("#{header_scope}.add_classroom")
-        assert_no_button I18n.t("#{header_scope}.deactivate")
+        find("button[aria-haspopup=menu]").click
+        within("[role=menu]") do
+          assert_link I18n.t("#{header_scope}.edit")
+          assert_no_button I18n.t("#{header_scope}.deactivate")
+        end
       end
     end
     assert_equal 1, Orm::Classroom.where(school_id: school.id).count
@@ -120,7 +128,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     visit schools_path
 
     assert_no_page_reload do
-      within("#school_#{unused.public_id}") { click_on I18n.t("#{row_scope}.edit") }
+      click_menu_action("#school_#{unused.public_id}", I18n.t("#{row_scope}.edit"))
       within("turbo-frame#modal dialog[open]") do
         select I18n.t("school_types.mixed"), from: "school[school_type]"
         click_on I18n.t("teams.schools.edit.submit")
@@ -128,20 +136,20 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       assert_toast I18n.t("teams.schools.update.done", name: "Lycée Moderne")
       assert_selector "#school_#{unused.public_id}", text: I18n.t("school_types.mixed")
 
-      within("#school_#{used.public_id}") { click_on I18n.t("#{row_scope}.delete") }
+      click_menu_action("#school_#{used.public_id}", I18n.t("#{row_scope}.delete"))
       within("#school_#{used.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
 
       assert_toast I18n.t("teams.schools.destroy.referenced")
       assert_selector "#school_#{used.public_id}", text: "Lycée Classique"
       assert_no_selector "#school_#{used.public_id} dialog[open]"
 
-      within("#school_#{used.public_id}") { click_on I18n.t("#{row_scope}.deactivate") }
+      click_menu_action("#school_#{used.public_id}", I18n.t("#{row_scope}.deactivate"))
       within("#school_#{used.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_deactivate") }
 
       assert_toast I18n.t("teams.schools.deactivate.done", name: "Lycée Classique")
       assert_selector "#school_#{used.public_id}", text: I18n.t("school_statuses.inactive")
 
-      within("#school_#{unused.public_id}") { click_on I18n.t("#{row_scope}.delete") }
+      click_menu_action("#school_#{unused.public_id}", I18n.t("#{row_scope}.delete"))
       within("#school_#{unused.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
 
       assert_toast I18n.t("teams.schools.destroy.done")
@@ -157,7 +165,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     assert_selector "#schools_total", text: I18n.t("teams.schools.index.total", count: 1)
 
     assert_no_page_reload do
-      within("#school_#{last.public_id}") { click_on I18n.t("#{row_scope}.delete") }
+      click_menu_action("#school_#{last.public_id}", I18n.t("#{row_scope}.delete"))
       within("#school_#{last.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
 
       assert_toast I18n.t("teams.schools.destroy.done")
@@ -167,6 +175,33 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       assert_field "filter_drena", with: @abidjan.public_id
     end
     assert_current_path schools_path(drena: @abidjan.public_id)
+  end
+
+  test "CR-04, CR-06, CR-07: the cycle of a school is a radio group set to its saved value, chosen by keyboard, even on a phone" do
+    school = create_school(drena: @abidjan, name: "Collège Moderne", cycle: "first")
+
+    with_mobile_viewport do
+      visit schools_path
+      assert_selector "select#filter_cycle option:checked", text: I18n.t("teams.schools.filters.all_cycle")
+      assert_no_selector "#schools-filters input[type=radio]"
+
+      assert_no_page_reload do
+        click_menu_action("#school_#{school.public_id}", I18n.t("#{row_scope}.edit"))
+        within "turbo-frame#modal dialog[open]" do
+          within("fieldset#school_cycle", text: Dtos::School::SchoolInput.human_attribute_name(:cycle)) do
+            assert_checked_field I18n.t("teams.schools.cycles.first")
+            options = all("label", count: 2)
+            assert(options.all? { |option| option.native.rect.height >= 48 })
+          end
+          find_field(I18n.t("teams.schools.cycles.first")).send_keys(:down)
+          assert_checked_field I18n.t("teams.schools.cycles.both")
+          click_on I18n.t("teams.schools.edit.submit")
+        end
+        assert_toast I18n.t("teams.schools.update.done", name: "Collège Moderne")
+      end
+      assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+    end
+    assert_equal "both", Orm::School.find_by!(public_id: school.public_id).cycle
   end
 
   test "on a phone, neither the list nor a school's page scrolls sideways" do

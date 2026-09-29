@@ -1,0 +1,51 @@
+# Page « Croissance » de l'équipe : k-factor enseignant, parrainage, élèves par enseignant — ADR-0063, UDR-0050
+fr:
+  teams:
+    growth:
+      show:
+        page_title: "Croissance"
+        title: "Croissance"
+        back: "Accueil"
+        subtitle:
+          one: "Parrainage entre enseignants et arrivée des élèves, sur le dernier jour."
+          other: "Parrainage entre enseignants et arrivée des élèves, sur les %{count} derniers jours."
+        periods_label: "Période"
+        period:
+          one: "%{count} jour"
+          other: "%{count} jours"
+        k_title: "k enseignant"
+        k_formula: "= %{invitations} %{unit} × %{conversion} de conversion"
+        k_unit: "partage(s) par enseignant"
+        target: "Cible %{target} · ambition %{ambition}"
+        k_note: "Cohorte : %{cohort} enseignants inscrits et validés sur la période, et leurs filleuls par lien jusqu'à aujourd'hui. Un partage peut toucher tout un groupe : la conversion peut dépasser 100 %. Les parrainages par garant ne comptent pas dans la conversion."
+        days:
+          one: "%{count} j"
+          other: "%{count} j"
+        metrics:
+          shares: "Partages"
+          teacher_signups: "Inscriptions enseignants"
+          referred_signups: "dont parrainées"
+          conversion: "Conversion par partage"
+          viral_cycle: "Cycle viral médian"
+          students_per_teacher: "Élèves arrivés par enseignant actif"
+        # Infobulles des indicateurs (UDR-0054 §3.4, textes à valider par le porteur dans la PR)
+        tips:
+          k: "Nombre moyen d'enseignants inscrits grâce à chaque nouvel enseignant de la période. Au-dessus de 1, chaque enseignant en amène plus d'un."
+          conversion: "Inscriptions parrainées ÷ partages. Un partage peut toucher un groupe entier : elle peut dépasser 100 %."
+          viral_cycle: "Délai médian entre l'inscription d'un parrain et celle de son filleul."
+          students_per_teacher: "Élèves entrés dans une classe sur la période, divisés par le nombre d'enseignants actifs."
+        top_referrers: "Meilleurs parrains"
+        referrals:
+          one: "%{count} filleul"
+          other: "%{count} filleuls"
+        no_referrers: "Aucun parrainage sur la période."
+        leaderboard: "Établissements les plus actifs"
+        leaderboard_hint: "Par nombre d'enseignants actifs. Visible par l'équipe seulement."
+        teachers:
+          one: "%{count} enseignant"
+          other: "%{count} enseignants"
+        no_schools: "Aucun enseignant actif pour l'instant."
+        pending:
+          one: "Demande en attente (%{count})"
+          other: "Demandes en attente (%{count})"
+        no_pending: "Aucune demande en attente."

@@ -1,10 +1,12 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
-# Rôle : lit les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur
-# ADR  : 0026, 0028, 0050
+# Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur
+# ADR  : 0026, 0028, 0050, 0055, 0065
 module Repositories
   module Identity
     class UserRepository
       include Ports::Identity::UserRepositoryPort
+
+      TAKEN = { contact: [ :taken ] }.freeze
 
       def find(id:) = map(Orm::User.find_by(id:))
       def find_by_public_id(public_id:) = map(Orm::User.find_by(public_id:))
@@ -18,13 +20,32 @@ module Repositories
         true
       end
 
+      def update_name(user_id:, first_name:, last_name:)
+        Orm::User.find(user_id).update!(first_name:, last_name:)
+        true
+      end
+
+      # Point de sauvegarde : l'index unique refusé n'invalide pas la transaction du use case.
+      def update_contact(user_id:, contact:)
+        Orm::User.transaction(requires_new: true) { Orm::User.find(user_id).update!(contact:) }
+        ::Shared::Result.success
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict, errors: TAKEN)
+      end
+
       def actor_for(user_id:)
         user = Orm::User.find(user_id)
-        school_id = Orm::TeacherSchool.where(teacher_id: user_id, primary: true).pick(:school_id)
-        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id:)
+        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id: school_id_of(user))
       end
 
       private
+
+      # L'école principale d'un enseignant ; le rattachement d'une direction (ADR-0065).
+      def school_id_of(user)
+        return user.school_staff&.school_id if user.role == "school_admin"
+
+        Orm::TeacherSchool.where(teacher_id: user.id, primary: true).pick(:school_id)
+      end
 
       def map(record)
         return if record.nil?

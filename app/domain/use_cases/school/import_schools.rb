@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::School::ImportSchools
-# Rôle : adaptateur d'import des établissements (clés de l'ancien acceptées), chacun écrit avec ses classes générées
-# ADR  : 0028, 0030, 0039, 0041 · UDR : 0037
+# Rôle : adaptateur d'import des établissements (clés de l'ancien acceptées), chacun écrit avec son code et ses classes générées
+# ADR  : 0028, 0030, 0039, 0041, 0057, 0058, 0063 · UDR : 0037, 0050
 module UseCases
   module School
     class ImportSchools
@@ -12,7 +12,7 @@ module UseCases
       PUBLIC_ID_LENGTH = 14
       # Clé canonique de l'élément → clés acceptées, la première présente l'emporte (ADR-0039).
       ALIASES = { "name" => %w[name nom], "sigle" => %w[sigle schoolsigle], "status" => %w[status schoolstatus statut],
-                  "type" => %w[type schooltype], "cycle" => %w[cycle] }.freeze
+                  "type" => %w[type schooltype], "cycle" => %w[cycle], "national_code" => %w[national_code] }.freeze
       # Valeur normalisée (NaturalKey) → type stocké.
       SCHOOL_TYPES = { "public" => "public", "privee" => "private", "prive" => "private", "private" => "private",
                        "mixte" => "mixed", "mixed" => "mixed" }.freeze
@@ -20,12 +20,14 @@ module UseCases
       ERROR_KEYS = { name: "name", sigle: "sigle", status: "status", school_type: "type", cycle: "cycle" }.freeze
       ERROR_CODES = { blank: "blank", too_long: "too_long", inclusion: "invalid_value" }.freeze
 
-      # random : tirage des codes d'adhésion, injectable pour les tests.
-      def initialize(drenas:, schools:, classrooms:, taxonomy:, random: SecureRandom)
+      # classroom_plan : le barème, lu une fois à la préparation (ADR-0058) ; random : tirage des codes d'adhésion des
+      # classes, injectable pour les tests ; les codes d'établissement ont le leur.
+      def initialize(drenas:, schools:, classrooms:, taxonomy:, classroom_plan:, random: SecureRandom)
         @drenas = drenas
         @schools = schools
         @classrooms = classrooms
         @taxonomy = taxonomy
+        @classroom_plan = classroom_plan
         @random = random
       end
 
@@ -39,28 +41,31 @@ module UseCases
         Shared::Result.success(drena)
       end
 
-      # Les codes déjà pris sont gardés pour write, qui les complète lot après lot.
+      # Les codes déjà pris (classes et établissements) sont gardés pour write, qui les complète lot après lot.
       def prepare(target:)
         ids_by_slug = @drenas.ids_by_slug
         @taken_codes = @classrooms.taken_join_codes
+        @taken_school_codes = @schools.taken_school_codes
         Entities::Catalog::ImportContext.new(target:, existing_keys: @schools.existing_keys(drena_ids: ids_by_slug.values),
-                                             data: { ids_by_slug:, lookup: @taxonomy.lookup, taken_codes: @taken_codes })
+                                             data: { ids_by_slug:, lookup: @taxonomy.lookup, plan: @classroom_plan.plan,
+                                                     taken_codes: @taken_codes, national_codes: @schools.taken_national_codes })
       end
 
       def validate_root(root:, path:, context:)
         values = ALIASES.transform_values { |keys| root[keys.find { root.key?(it) }] }
         drena_id, drena_errors = drena_for(root, path, context)
         school = build_school(values, drena_id)
-        errors = drena_errors + school_errors(school, values, path)
+        errors = drena_errors + school_errors(school, values, path) + national_code_errors(values["national_code"], path, context)
         return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
 
+        context.data.fetch(:national_codes) << school.national_code if school.national_code
         Entities::Catalog::ImportItem.new(path:, key: [ drena_id, Entities::Shared::NaturalKey.normalize(school.name) ],
-                                          plan: plan_for(school, context.data.fetch(:lookup)))
+                                          plan: plan_for(school, context.data))
       end
 
-      # Les écoles, puis toutes les classes du lot, dans la transaction du moteur : un refus annule les deux.
+      # Les écoles avec leur code, puis toutes les classes du lot, dans la transaction du moteur : un refus annule les deux.
       def write(items:, author_id:, at:)
-        inserted = @schools.insert_many(rows: items.map { it.plan.fetch(:school) }, at:)
+        inserted = @schools.insert_many(rows: with_school_codes(items.map { it.plan.fetch(:school) }), at:)
         school_ids = inserted.to_h { [ it.public_id, it.id ] }
         school_year = Entities::Classroom::SchoolYear.current(at.to_date)
         rows = items.flat_map do |item|
@@ -91,7 +96,8 @@ module UseCases
         Entities::School::School.new(
           public_id: SecureRandom.base58(PUBLIC_ID_LENGTH), drena_id:, name:, sigle: values["sigle"],
           school_type: SCHOOL_TYPES[Entities::Shared::NaturalKey.normalize(values["type"])],
-          cycle: cycle_of(values["cycle"], name), status: normalized(values["status"]) || "active"
+          cycle: cycle_of(values["cycle"], name), status: normalized(values["status"]) || "active",
+          national_code: Entities::School::NationalCode.normalize(values["national_code"])
         )
       end
 
@@ -122,11 +128,27 @@ module UseCases
         end
       end
 
-      def plan_for(school, lookup)
-        generation = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup:)
+      # ADR-0063 : facultatif ; mal formé, ou déjà pris en base ou plus haut dans le fichier, l'élément est en erreur.
+      def national_code_errors(raw, path, context)
+        code = Entities::School::NationalCode.normalize(raw)
+        return [] if code.nil?
+        return [ error("#{path}.national_code", "invalid_value", value: raw) ] unless Entities::School::NationalCode.valid?(code)
+        return [] unless context.data.fetch(:national_codes).include?(code)
+
+        [ error("#{path}.national_code", "national_code_taken", value: code) ]
+      end
+
+      def plan_for(school, data)
+        generation = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup: data.fetch(:lookup), plan: data.fetch(:plan))
         { school: { public_id: school.public_id, drena_id: school.drena_id, name: school.name, sigle: school.sigle,
-                    school_type: school.school_type, cycle: school.cycle, status: school.status },
+                    school_type: school.school_type, cycle: school.cycle, status: school.status, national_code: school.national_code },
           classrooms: generation.rows, skipped: generation.skipped }
+      end
+
+      # Codes d'établissement uniques en base et dans tout l'import (ADR-0057).
+      def with_school_codes(rows)
+        codes = Entities::School::SchoolCode.generate_unique(count: rows.size, taken: @taken_school_codes)
+        rows.zip(codes).map { |row, school_code| row.merge(school_code:) }
       end
 
       # Codes uniques en base et dans tout le lot (ADR-0041).

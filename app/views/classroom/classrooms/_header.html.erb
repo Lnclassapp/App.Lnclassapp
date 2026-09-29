@@ -1,12 +1,12 @@
 <%# 🌐 UI · classroom/classrooms/_header — en-tête de la page d'une classe (CL-10, CL-04) %>
-<%# Rôle : nom, niveau, établissement, année scolaire ; code en majuscules et « Copier » (Stimulus) ; effectif / plafond %>
-<%# ADR  : 0028, 0041 · UDR : 0027 · Stimulus : classroom--join-code-copy %>
+<%# Rôle : retour selon le rôle ; nom, niveau, établissement, année ; code et lien /c/<code> à copier ; effectif / plafond expliqué %>
+<%# ADR  : 0028, 0041, 0063 · UDR : 0027, 0050, 0054 · Stimulus : clipboard · WhatsApp : lien sortant, sans nom d'élève %>
 <div id="classroom_header" class="mb-8">
-  <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-    <%= link_to home_path_for(shell_user.role), class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back") %>
-    <% end %>
-  </nav>
+  <% if shell_user.role.to_s == "team" %>
+    <%= ui_back_link classroom.school_name, href: school_path(classroom.school_public_id) %>
+  <% else %>
+    <%= ui_back_link t(".back"), href: teacher_home_path %>
+  <% end %>
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
       <div class="flex min-w-0 items-start gap-4">
@@ -31,30 +31,34 @@
             <div class="flex items-center gap-1">
               <dt><%= ui_icon "calendar", size: :sm, label: t(".school_year") %></dt><dd><%= classroom.school_year %></dd>
             </div>
-            <div class="flex items-center gap-1">
+            <div class="flex flex-wrap items-center gap-1">
               <dt><%= ui_icon "users", size: :sm, label: t(".headcount_label") %></dt>
               <dd id="classroom_headcount" class="font-medium tabular-nums text-ink">
                 <%= t(".headcount", count: classroom.active_students_count, max: classroom.max_students) %>
               </dd>
+              <dd><%= ui_info_tip t(".headcount_tip", max: classroom.max_students), label: t(".headcount_label") %></dd>
             </div>
           </dl>
         </div>
       </div>
 
       <% if classroom.join_code_display %>
-        <div data-controller="classroom--join-code-copy" data-classroom--join-code-copy-code-value="<%= classroom.join_code_display %>"
-             class="rounded-card bg-brand-soft p-4 lg:shrink-0">
+        <% code = classroom.join_code_display %>
+        <div class="rounded-card bg-brand-soft p-4 lg:shrink-0">
           <p id="classroom_join_code_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".join_code") %></p>
-          <div class="mt-1 flex items-center justify-between gap-4">
+          <div class="mt-1 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <span id="classroom_join_code" aria-labelledby="classroom_join_code_label"
-                  class="font-mono text-3xl font-bold tracking-widest text-ink"><%= classroom.join_code_display %></span>
-            <%= ui_button t(".copy"), variant: :secondary, size: :sm, icon: "clipboard-document",
-                          "aria-label": t(".copy_label", code: classroom.join_code_display),
-                          data: { action: "classroom--join-code-copy#copy" } %>
+                  class="font-mono text-3xl font-bold tracking-widest text-ink"><%= code %></span>
+            <div class="flex flex-wrap gap-2">
+              <%= ui_copy_button code, label: t(".copy"), aria_label: t(".copy_label", code:), copied: t("shared.clipboard.copied_code") %>
+              <%= ui_copy_button join_classroom_url(code), label: t(".copy_link"), aria_label: t(".copy_link_label"), icon: "link",
+                                                           copied: t("shared.clipboard.copied_link") %>
+            </div>
           </div>
           <p class="mt-2 max-w-xs text-xs text-mute"><%= t(".join_code_hint") %></p>
-          <template data-classroom--join-code-copy-target="copied"><%= ui_toast t(".copied"), type: :success %></template>
-          <template data-classroom--join-code-copy-target="failed"><%= ui_toast t(".copy_failed"), type: :warning %></template>
+          <% share = t(".share_message", classroom: classroom.name, school: classroom.school_name, link: join_classroom_url(code), code:) %>
+          <%= ui_button t(".share_whatsapp"), href: whatsapp_share_url(share), variant: :brand, size: :sm, icon: "chat-bubble-left-right",
+                                              id: "classroom_whatsapp_share", target: "_blank", rel: "noopener", class: "mt-3" %>
         </div>
       <% else %>
         <p class="rounded-card bg-mist p-4 text-sm text-mute lg:shrink-0"><%= t(".no_join_code") %></p>

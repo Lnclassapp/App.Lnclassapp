@@ -1,15 +1,16 @@
 <%# 🌐 UI · teams/levels/_level_row — une ligne du tableau des niveaux, identifiée par le slug %>
-<%# Rôle : nom (badge si hors génération des classes), code figé, position, cycle, séries, usage ; « Modifier » en modale, « Supprimer » confirmé dans la page %>
-<%# ADR  : 0029, 0036 · UDR : 0006, 0032 · Stimulus : modal %>
+<%# Rôle : nom (badge si hors barème des classes), code figé, position, cycle, séries, usage ; menu ⋮ : « Modifier » en modale, « Supprimer » confirmé dans la page %>
+<%# ADR  : 0029, 0036, 0058 · UDR : 0006, 0032, 0042, 0045, 0054 · Stimulus : dropdown, modal %>
 <% delete_id = "delete-level-#{level.slug}" %>
 <tr id="<%= level_dom_id(level.slug) %>" class="align-middle">
   <td class="px-4 py-3 font-medium whitespace-nowrap text-ink">
     <span class="flex items-center gap-2">
       <%= level.name %>
       <% unless level.generates_classrooms %>
-        <span data-generation="outside" title="<%= t(".outside_generation_hint") %>">
-          <%= ui_badge t(".outside_generation"), tone: :warning, size: :sm, icon: "exclamation-triangle" %>
-          <span class="sr-only"><%= t(".outside_generation_hint") %></span>
+        <%# UDR-0054 §3.4 : l'aide suit le badge, sans title= ; la cellule ne passe pas à la ligne, le panneau si. %>
+        <span data-generation="outside" class="flex items-start gap-1 whitespace-normal">
+          <span class="mt-3 whitespace-nowrap"><%= ui_badge t(".outside_generation"), tone: :warning, size: :sm, icon: "exclamation-triangle" %></span>
+          <%= ui_info_tip t(".outside_generation_tip"), label: t(".outside_generation") %>
         </span>
       <% end %>
     </span>
@@ -30,19 +31,20 @@
   </td>
   <td class="px-4 py-3 tabular-nums"><%= level.classrooms_count %></td>
   <td class="px-4 py-3 tabular-nums"><%= level.courses_count %></td>
-  <td class="px-4 py-3">
-    <div class="flex items-center justify-end gap-2">
-      <%= ui_button t(".edit"), href: edit_level_path(level.slug), variant: :secondary, size: :sm, icon: "pencil-square",
-                                "aria-label": t(".edit_label", name: level.name), data: { turbo_frame: "modal" } %>
-      <%= ui_modal title: t(".delete_title", name: level.name), id: delete_id, size: :sm,
-                   trigger: t(".delete"), trigger_variant: :ghost, trigger_icon: "trash" do |modal| %>
-        <% modal.footer do %>
-          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
-          <%= ui_button t(".delete_confirm"), type: :submit, form: "#{delete_id}-form", variant: :danger, icon: "trash" %>
-        <% end %>
-        <p class="text-sm text-mute"><%= t(".delete_warning") %></p>
-        <%= form_with url: level_path(level.slug), method: :delete, id: "#{delete_id}-form" do %><% end %>
+  <td class="sticky-actions px-4 py-3">
+    <div class="flex justify-end">
+      <%= ui_dropdown label: t(".actions", name: level.name), id: "level-actions-#{level.slug}", fixed: true do %>
+        <%= ui_dropdown_item t(".edit"), href: edit_level_path(level.slug), icon: "pencil-square", frame: "modal" %>
+        <%= ui_dropdown_item t(".delete"), dialog: delete_id, icon: "trash", tone: :danger %>
       <% end %>
     </div>
+    <%= ui_modal title: t(".delete_title", name: level.name), id: delete_id, size: :sm do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+        <%= ui_button t(".delete_confirm"), type: :submit, form: "#{delete_id}-form", variant: :danger, icon: "trash" %>
+      <% end %>
+      <p class="text-sm text-mute"><%= t(".delete_warning") %></p>
+      <%= form_with url: level_path(level.slug), method: :delete, id: "#{delete_id}-form" do %><% end %>
+    <% end %>
   </td>
 </tr>

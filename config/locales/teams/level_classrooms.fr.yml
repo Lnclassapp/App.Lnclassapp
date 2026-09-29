@@ -1,0 +1,35 @@
+# Bloc « Classes par niveau » de la fiche d'un établissement (ADR-0059, UDR-0046).
+fr:
+  teams:
+    level_classrooms:
+      create:
+        done: "Classe « %{name} » ajoutée. Code : %{code}"
+      destroy:
+        done: "Classe « %{name} » retirée."
+      errors:
+        has_students: "Cette classe a des élèves : archivez-la plutôt."
+        has_teachers: "Un enseignant a déclaré cette classe : archivez-la plutôt."
+        has_assignments: "Cette classe a des cours assignés : archivez-la plutôt."
+        not_last: "Cette classe n'est plus la dernière de son niveau : rechargez la fiche."
+        not_found: "Cette classe n'existe plus : elle a sans doute déjà été retirée."
+        forbidden: "Vous n'avez pas accès à cette action."
+        school_inactive: "Cet établissement est désactivé : il ne reçoit plus de classe."
+        school_draft: "Cet établissement est en brouillon : activez-le avant d'y ajouter une classe."
+        name_taken: "Le nom de la classe suivante vient d'être pris : réessayez."
+        invalid: "Ce niveau ne peut pas recevoir de classe dans cet établissement."
+      block:
+        title: "Classes par niveau"
+        hint: "Ajoutez la classe suivante du niveau, ou retirez la dernière si elle n'a jamais servi."
+        inactive: "Seul un établissement actif reçoit de nouvelles classes."
+        empty_title: "Aucun niveau au référentiel"
+        empty_description: "Créez les niveaux et les séries avant d'ajuster les classes."
+        count:
+          zero: "%{level} : 0 classe"
+          one: "%{level} : 1 classe"
+          other: "%{level} : %{count} classes"
+        add: "Ajouter une classe de %{level}"
+        remove: "Retirer une classe de %{level}"
+        remove_title: "Retirer la classe « %{name} » ?"
+        remove_warning: "Elle sera supprimée définitivement. Une classe qui a déjà eu un élève, un enseignant ou un cours assigné ne peut pas l'être : archivez-la plutôt."
+        cancel: "Annuler"
+        confirm_remove: "Retirer la classe"

@@ -1,0 +1,34 @@
+<%# 🌐 UI · teams/homes/show — accueil équipe (TR-09, CA-25) %>
+<%# Rôle : raccourcis, puis les sections de HOME_SECTIONS[:team] (régions, référentiel, activité récente différée) %>
+<%# ADR  : 0034, 0038, 0041 · UDR : 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass ») %>
+<% page_title t(".page_title") %>
+<%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle") %>
+
+<%= render "shortcuts", can_invite: @can_invite %>
+
+<div class="grid gap-5">
+  <% home_sections_for(:team).each do |key, icon| %>
+    <% if key == :regions %>
+      <%= ui_card title: t(".regions_title"), subtitle: t(".regions_subtitle"), icon:, id: "team_home_regions" do |card| %>
+        <ul class="grid grid-cols-3 gap-3">
+          <% { drenas: @home.drenas_count, schools: @home.schools_count, classrooms: @home.classrooms_count }.each do |figure, count| %>
+            <li class="rounded-ln bg-mist px-2 py-4 text-center">
+              <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= count %></span> <span class="text-sm text-mute"><%= t(".#{figure}", count:) %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% card.footer do %>
+          <%= ui_button t(".regions_action"), href: schools_path, variant: :secondary, size: :sm, icon: "building-library" %>
+        <% end %>
+      <% end %>
+    <% elsif key == :levels %>
+      <%= render "referential", home: @home, icon: %>
+    <% elsif key == :activity %>
+      <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon:, id: "team_home_activity" do %>
+        <%= turbo_frame_tag Teams::HomesController::RECENT_CONTENT_FRAME, src: team_home_path, loading: :lazy, target: "_top" do %>
+          <%= ui_loading_state variant: :skeleton %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

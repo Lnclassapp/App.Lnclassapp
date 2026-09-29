@@ -48,7 +48,7 @@ module Queries
         Orm::ClassroomStudent.where(student: left).update_all(left_at: Time.current)
         create_student(classroom: create_classroom, last_name: "Ailleurs")
         create_exercise_session(student: koffi, status: "completed", score_percent: 40, completed_at: 2.days.ago)
-        create_exercise_session(student: koffi, status: "completed", score_percent: 75, completed_at: 1.day.ago)
+        last = create_exercise_session(student: koffi, status: "completed", score_percent: 75, completed_at: 1.day.ago)
         create_exercise_session(student: koffi, status: "completed", score_percent: 50, completed_at: 3.days.ago)
         create_exercise_session(student: koffi)
         create_exercise_session(student: create_student(classroom: create_classroom), status: "completed", score_percent: 10)
@@ -56,8 +56,20 @@ module Queries
         students = overview.students
 
         assert_equal [ awa.public_id, koffi.public_id ], students.map(&:public_id)
-        assert_equal [ "Koffi Yao", "0102030405", 75 ], students.last.to_h.values_at(:display_name, :contact, :last_score_percent)
-        assert_equal [ "Awa Bamba", awa.contact, nil ], students.first.to_h.values_at(:display_name, :contact, :last_score_percent)
+        assert_equal [ "Koffi Yao", "0102030405", 75, last.public_id ],
+                     students.last.to_h.values_at(:display_name, :contact, :last_score_percent, :last_session_public_id)
+        assert_equal [ "Awa Bamba", awa.contact, nil, nil ],
+                     students.first.to_h.values_at(:display_name, :contact, :last_score_percent, :last_session_public_id)
+      end
+
+      test "chaque élève porte la version de sa photo, en une seule requête pour la classe (ADR-0060)" do
+        with_photo = attach_photo(create_student(classroom: @classroom, last_name: "Bamba"))
+        create_student(classroom: @classroom, last_name: "Yao")
+
+        versions = overview.students.map(&:photo_version)
+
+        assert_equal [ Queries::Identity::PhotoVersions.for(user_ids: [ with_photo.id ])[with_photo.id], nil ], versions
+        assert_not_nil versions.first
       end
 
       test "sans show_roster, aucun élève n'est lu ; une classe vide a une liste vide" do
@@ -67,6 +79,33 @@ module Queries
 
         assert_nil overview(show_roster: false).students
         assert_equal 1, overview.students.size
+      end
+
+      # FU-48, UDR-0054 §3.9 : « Chercher un élève » filtre la liste de la classe par nom, sans casse ni accents.
+      test "la recherche ne garde que les élèves de la classe dont le nom correspond, sans casse ni accents" do
+        awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+        koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+        eloise = create_student(classroom: @classroom, first_name: "Éloïse", last_name: "Kouamé")
+        create_student(classroom: create_classroom, first_name: "Awa", last_name: "Ailleurs")
+
+        search = ->(term) { ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: true, search: term) }
+
+        assert_equal [ awa.public_id ], search.call("awa").students.map(&:public_id)
+        assert_equal [ awa.public_id ], search.call("  AWA  BAMBA ").students.map(&:public_id)
+        assert_equal [ eloise.public_id ], search.call("eloise kouame").students.map(&:public_id)
+        assert_equal [ koffi.public_id ], search.call("yào").students.map(&:public_id)
+        assert_empty search.call("zzz").students
+        assert_empty search.call("%").students
+        assert_equal 3, search.call("").students.size
+        assert_equal 3, search.call(nil).students.size
+        assert_nil ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: false, search: "awa").students
+      end
+
+      test "la recherche ne touche pas aux cours assignés" do
+        create_assignment(classroom: @classroom, assignable: create_course(name: "Algèbre"))
+
+        assert_equal [ "Algèbre" ],
+                     ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: true, search: "zzz").courses.map(&:name)
       end
 
       test "une classe inconnue n'a pas de page" do

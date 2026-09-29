@@ -1,15 +1,41 @@
 <%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
-<%# Rôle : action principale « Importer des établissements » ; filtres et pages dans le frame « schools », seul renvoyé à ses requêtes %>
-<%# ADR  : 0030, 0036 · UDR : 0006, 0036 · aucun bouton de création : un établissement n'entre que par l'import %>
-<% content_for :title, t(".page_title") %>
+<%# Rôle : « Importer des établissements » (principale), puis le menu « Classes » : génération confirmée, barème ; filtres et pages dans le frame « schools » %>
+<%# ADR  : 0030, 0036, 0056, 0058 · UDR : 0006, 0036, 0043, 0045, 0054 · aucun bouton de création ; recherche pendant la frappe (frame estompé pendant l'envoi) %>
+<% page_title t(".page_title") %>
 <% unless list_frame_request? %>
   <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
-    <%= ui_button t(".import"), href: new_teams_import_path(kind: "schools"), icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+    <%# Le menu reste à droite de l'import dès sm (demande du porteur) : ce bloc ne se replie pas et le titre cède la place.
+        Au téléphone, il passe à la ligne s'il ne tient pas. %>
+    <div id="schools-header-actions" class="flex flex-wrap items-center gap-3 sm:shrink-0 sm:flex-nowrap">
+      <%= ui_button t(".import"), href: new_teams_import_path(kind: "schools"), icon: "arrow-up-tray", data: { turbo_frame: "modal" } %>
+      <%# Actions de page sur les classes (UDR-0043, UDR-0045, amendements du 2026-09-28) : un menu libellé, pas un ⋮ d'objet. %>
+      <%= ui_dropdown label: t(".classrooms_menu_label"), id: "schools-classrooms-menu", fixed: true,
+                      trigger: tag.span(safe_join([ ui_icon("rectangle-group", size: :sm), t(".classrooms_menu") ], " "),
+                                        class: "flex items-center gap-2 pl-2 text-sm font-semibold whitespace-nowrap text-ink") do %>
+        <%= ui_dropdown_item t(".generate"), dialog: "generate-classrooms-modal", icon: "sparkles" %>
+        <%= ui_dropdown_item t(".classroom_plan"), href: classroom_plan_path, icon: "calculator" %>
+      <% end %>
+    </div>
+    <%= ui_modal title: t(".generate_title"), id: "generate-classrooms-modal" do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".generate_cancel"), variant: :secondary, data: { action: "modal#close" } %>
+        <%= ui_button t(".generate_confirm"), type: :submit, form: "generate-classrooms-form", icon: "sparkles" %>
+      <% end %>
+      <%= form_with url: classroom_generations_path, id: "generate-classrooms-form", class: "space-y-3 text-sm" do %>
+        <p class="text-ink"><%= t(".generate_intro") %></p>
+        <ul id="generate-classrooms-rules" class="list-disc space-y-1 pl-5 text-mute">
+          <li><%= t(".generate_rule_scope_html", year: Entities::Classroom::SchoolYear.current(Date.current)) %></li>
+          <li><%= t(".generate_rule_plan") %></li>
+          <li><%= t(".generate_rule_untouched") %></li>
+        </ul>
+        <p class="text-mute"><%= t(".generate_background") %></p>
+      <% end %>
+    <% end %>
   <% end %>
   <%= render "filters", filters: @filters %>
 <% end %>
 
-<%= turbo_frame_tag "schools", data: { turbo_action: "advance" } do %>
+<%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50", data: { turbo_action: "advance" } do %>
   <p id="schools_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
   <% if @page.rows.any? %>
     <%# relative : les libellés sr-only de la dernière colonne restent pris dans le défilement du tableau, pas dans celui de la page. %>
@@ -19,9 +45,13 @@
         <thead class="border-b border-line text-xs text-mute">
           <tr>
             <% %i[school drena type cycle status classrooms teachers].each do |column| %>
-              <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+              <th scope="col" class="px-4 py-3 font-medium">
+                <%= t(".columns.#{column}") %>
+                <%# UDR-0054 §3.4 : les statuts s'expliquent une fois, dans l'en-tête, pas sur chaque ligne. %>
+                <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".columns.status") if column == :status %>
+              </th>
             <% end %>
-            <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+            <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
           </tr>
         </thead>
         <tbody id="schools_list" class="divide-y divide-line">

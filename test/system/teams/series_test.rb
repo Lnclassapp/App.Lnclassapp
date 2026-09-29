@@ -53,7 +53,7 @@ class Teams::SeriesTest < ApplicationSystemTestCase
     visit series_index_path
 
     assert_no_page_reload do
-      within("#series_a") { click_on t("teams.series.series_row.edit") }
+      click_menu_action("#series_a", t("teams.series.series_row.edit"))
       within "turbo-frame#modal dialog[open]" do
         fill_in "series[name]", with: "A bis"
         click_on t("teams.series.edit.submit")
@@ -62,12 +62,12 @@ class Teams::SeriesTest < ApplicationSystemTestCase
       assert_selector "#series_a", text: "A bis"
       assert_selector "#level_series_matrix th", text: "A bis"
 
-      within("#series_a") { click_on t("teams.series.series_row.delete") }
+      click_menu_action("#series_a", t("teams.series.series_row.delete"))
       within("#delete-series-a") { click_on t("teams.series.series_row.confirm") }
       assert_toast t("teams.series.destroy.deleted", name: "A bis")
       assert_no_selector "#series_a"
 
-      within("#series_c") { click_on t("teams.series.series_row.delete") }
+      click_menu_action("#series_c", t("teams.series.series_row.delete"))
       within("#delete-series-c") { click_on t("teams.series.series_row.confirm") }
       assert_toast t("teams.series.destroy.referenced", name: "C")
       assert_selector "#series_c"

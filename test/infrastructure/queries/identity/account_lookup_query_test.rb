@@ -16,7 +16,7 @@ class Queries::Identity::AccountLookupQueryTest < ActiveSupport::TestCase
     [ "0511223344", "05 11 22 33 44", "+225 0511223344", "00225 05.11.22.33.44" ].each do |typed|
       assert_equal Queries::Identity::AccountLookupQuery::Row.new(
         public_id: student.public_id, display_name: "Awa Koné", role: :student, team_role: nil, classroom_name: "6ème 2",
-        second_factor_confirmed: false, own_account: false
+        second_factor_confirmed: false, own_account: false, photo_version: nil
       ), lookup(typed)
     end
   end
@@ -52,8 +52,14 @@ class Queries::Identity::AccountLookupQueryTest < ActiveSupport::TestCase
   test "the row reveals neither the number, nor the PIN, nor the internal id" do
     student = create_student(contact: "0511223344")
 
-    assert_equal %i[public_id display_name role team_role classroom_name second_factor_confirmed own_account],
+    assert_equal %i[public_id display_name role team_role classroom_name second_factor_confirmed own_account photo_version],
                  Queries::Identity::AccountLookupQuery::Row.members
     assert_not_includes lookup("0511223344").to_h.values, student.id
+  end
+
+  test "an account with a photo gives the version of its photo (ADR-0060)" do
+    student = attach_photo(create_student(contact: "0511223344"))
+
+    assert_equal Queries::Identity::PhotoVersions.for(user_ids: [ student.id ])[student.id], lookup("0511223344").photo_version
   end
 end

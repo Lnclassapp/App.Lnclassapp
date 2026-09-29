@@ -1,8 +1,9 @@
 <%# 🌐 UI · teams/materials/index — matières du référentiel %>
 <%# Rôle : tableau par nom, badge de la catégorie sur chaque ligne ; création, modification et suppression sans rechargement %>
-<%# ADR  : 0034 · UDR : 0006, 0034 %>
-<% content_for :title, t(".page_title") %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
+<%# ADR  : 0034 · UDR : 0006, 0034, 0054 %>
+<% page_title t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
+                   back: { label: t(".back"), href: team_home_path } do %>
   <%= ui_button t(".new"), href: new_material_path, icon: "plus", data: { turbo_frame: "modal" } %>
 <% end %>
 
@@ -15,7 +16,7 @@
         <% %i[material shortname category courses teachers].each do |column| %>
           <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
         <% end %>
-        <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+        <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
       </tr>
     </thead>
     <tbody id="materials" class="divide-y divide-line">

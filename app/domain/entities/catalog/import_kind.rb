@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportKind
-# Rôle : registre fermé des quatre types d'import : format, version, racines, cible, plafond et policy
-# ADR  : 0028, 0039
+# Rôle : registre fermé des cinq types d'import (format, racines, cible, plafond, policy) et des types de rapport
+# ADR  : 0028, 0039, 0056, 0066
 module Entities
   module Catalog
     module ImportKind
@@ -26,11 +26,23 @@ module Entities
                        policy: Policies::Catalog::ManageContentPolicy),
         Definition.new(kind: "exercises", format: "lnclass.exercises", version: VERSION, roots_key: "exercises",
                        target_key: "essential", target_required: true, max_roots: 10_000,
-                       policy: Policies::Catalog::ManageContentPolicy)
+                       policy: Policies::Catalog::ManageContentPolicy),
+        Definition.new(kind: "drenas", format: "lnclass.drenas", version: VERSION, roots_key: "drenas",
+                       target_key: nil, target_required: false, max_roots: 500,
+                       policy: Policies::School::ManageSchoolPolicy)
       ].index_by(&:kind).freeze
       KINDS = ALL.keys.freeze
 
+      # Rapport sans fichier suivi par le même écran : la génération des classes manquantes (ADR-0056). Pas un type
+      # d'import : ni format, ni téléversement.
+      CLASSROOM_GENERATION = "classrooms"
+      REPORT_POLICIES = ALL.transform_values(&:policy).merge(CLASSROOM_GENERATION => Policies::School::ManageSchoolPolicy).freeze
+      REPORT_KINDS = REPORT_POLICIES.keys.freeze
+
       def self.valid?(kind) = ALL.key?(kind.to_s)
+
+      # Lire un rapport de ce type. Un type inconnu lève KeyError.
+      def self.authorize_report(kind:, actor:) = REPORT_POLICIES.fetch(kind.to_s).new.call(actor:)
 
       def self.fetch(kind)
         ALL.fetch(kind.to_s) { raise ArgumentError, "type d'import inconnu : #{kind.inspect}" }

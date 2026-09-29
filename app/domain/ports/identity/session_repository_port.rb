@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::SessionRepositoryPort
 # Rôle : contrat des sessions serveur, adressées par l'empreinte de leur jeton
-# ADR  : 0031, 0050
+# ADR  : 0031, 0050, 0055
 module Ports
   module Identity
     module SessionRepositoryPort
@@ -32,6 +32,11 @@ module Ports
       # → Integer (sessions supprimées)
       def destroy_all_for(user_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #destroy_all_for"
+      end
+
+      # → Integer (sessions supprimées) ; toutes celles du compte sauf keep_id, la session en cours
+      def destroy_all_except(user_id:, keep_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #destroy_all_except"
       end
     end
   end

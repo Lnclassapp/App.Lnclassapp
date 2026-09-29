@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B3, critères CA-10, CA-11, AS-37 ; CA-29 (bandeau retiré) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, tout exercice publié se démarre) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (lacune) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [ADR-0053](../adr/0053-validation-collaborative-requalifiee.md) (aucun label de conformité) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0016](0016-formulaire-fiche-essentielle.md) (modale « Modifier ») · [UDR-0017](0017-formulaire-exercice.md) (modale « Nouvel exercice ») · [UDR-0021](0021-page-exercice.md) (page d'un exercice) |
@@ -70,3 +70,17 @@ La fiche essentielle est la page que l'élève ouvre pour réviser, puis pour s'
 - Le test système `test/system/catalog/essential_page_test.rb` prouve le rendu, sur la fiche, du contenu saisi dans Trix (gras, liste, formule) et des exercices créés par la modale du Lot B5, sans rechargement de page.
 - Un futur bouton de remédiation (`StartRemediationSession`, ADR-0043) prendra place dans `#essential_gap`.
 - « Supprimer une fiche essentielle » disparaît de l'interface ; l'archivage (UDR-0016) le remplace.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **« Modifier » passe dans le menu ⋮** « Actions pour <nom> » (`#essential-actions-menu`), seule entrée, placé après « Nouvel exercice » et « Importer des exercices », qui restent des boutons. Le nom accessible « Modifier la fiche essentielle « … » » est remplacé par celui du bouton ⋮.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- Retour : `ui_back_link` vers `course_path`, libellé = nom du cours (au lieu de « Cours : <nom> »).
+- Titre : « <nom de la fiche> · <espace> · Lnclass » (au lieu de « Fiche essentielle : <nom> »).
+- Badges de progression : suivis d'une infobulle des seuils (UDR-0054 §3.4).

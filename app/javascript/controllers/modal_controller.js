@@ -1,19 +1,45 @@
 // ⚡ FRONT · modal_controller — ouvre et ferme une <dialog> native, y compris chargée dans le frame « modal »
 // Rôle : showModal() fournit le piège du focus et Échap ; fond cliquable ; fermeture après un envoi réussi ; frame vidé à la fermeture
-// UDR  : 0005, 0006
+// UDR  : 0005, 0006, 0046, 0054 · émet modal:opened (auto-focus) ; `documentTitle` nomme l'onglet tant qu'elle est ouverte
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["dialog"]
-  static values = { open: Boolean }
+  static values = { open: Boolean, documentTitle: String }
 
   // Une modale servie ouverte (open: true) s'ouvre dès son arrivée : c'est le cas du contenu chargé dans le frame « modal ».
   connect() {
+    this.openObserver = new MutationObserver(() => this.syncOpen())
+    this.openObserver.observe(this.dialogTarget, { attributes: true, attributeFilter: ["open"] })
     if (this.openValue) this.open()
   }
 
+  // Retirée ouverte (re-rendu 422 dans le frame) : l'onglet reprend son titre, sauf si une navigation l'a déjà changé.
+  disconnect() {
+    this.openObserver.disconnect()
+    this.restoreTitle()
+  }
+
+  // Un morphing Turbo (replace method: morph, refresh) retire l'attribut `open` d'une boîte ouverte par showModal() :
+  // elle quitte l'écran mais reste dans la couche supérieure, et toute la page devient inerte. On la referme vraiment.
+  syncOpen() {
+    const dialog = this.dialogTarget
+    if (dialog.open || !dialog.matches(":modal")) return
+
+    dialog.setAttribute("open", "")
+    dialog.close()
+  }
+
+  // Servie ouverte dès le HTML (lisible sans JavaScript), la <dialog> l'est sans être modale : elle est rouverte par
+  // showModal(), qui refuse une boîte déjà ouverte, pour piéger le focus et poser le fond.
   open() {
-    if (!this.dialogTarget.open) this.dialogTarget.showModal()
+    const dialog = this.dialogTarget
+    if (dialog.open && dialog.matches(":modal")) return
+
+    dialog.removeAttribute("open")
+    dialog.showModal()
+    this.nameTab()
+    this.dispatch("opened", { target: dialog })
   }
 
   close() {
@@ -32,10 +58,27 @@ export default class extends Controller {
 
   // Chargée dans le frame « modal », la modale fermée libère le frame : le même lien pourra la recharger.
   closed() {
+    this.restoreTitle()
     const frame = this.element.closest("turbo-frame#modal")
-    if (!frame) return
+    // Une boîte déjà rouverte (open() juste après son arrivée) n'est pas fermée : le frame garde son contenu.
+    if (!frame || this.dialogTarget.open) return
 
     frame.removeAttribute("src")
     frame.replaceChildren()
+  }
+
+  // UDR-0054 §3.1 : une confirmation n'a pas de `documentTitle` et laisse l'onglet tel quel.
+  nameTab() {
+    if (!this.documentTitleValue || this.previousTitle !== undefined) return
+
+    this.previousTitle = document.title
+    document.title = this.documentTitleValue
+  }
+
+  restoreTitle() {
+    if (this.previousTitle === undefined) return
+
+    if (document.title === this.documentTitleValue) document.title = this.previousTitle
+    this.previousTitle = undefined
   }
 }

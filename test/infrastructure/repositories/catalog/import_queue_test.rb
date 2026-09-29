@@ -9,10 +9,10 @@ module Repositories
         def perform(_report_id) = nil
       end
 
-      test "chaque type d'import nomme son job, sans le charger au démarrage" do
+      test "chaque type de rapport (imports et génération des classes) nomme son job, sans le charger au démarrage" do
         jobs = Rails.configuration.x.import_jobs
 
-        assert_equal Entities::Catalog::ImportKind::KINDS.sort, jobs.keys.sort
+        assert_equal Entities::Catalog::ImportKind::REPORT_KINDS.sort, jobs.keys.sort
         assert_equal "School::ImportSchoolsJob", jobs["schools"]
         assert jobs.values.all?(String)
       end

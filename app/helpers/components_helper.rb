@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -79,8 +79,21 @@ module ComponentsHelper
     valid: "border-line focus:border-brand focus:ring-brand/20",
     invalid: "border-error focus:border-error focus:ring-error/20"
   }.freeze
+  # Bouton œil d'un champ PIN (UDR-0051) : 48 px de large sur toute la hauteur du champ, à droite, dans le champ.
+  FIELD_REVEAL_INPUT = "pr-14"
+  FIELD_REVEAL_BUTTON = "absolute inset-y-0 right-0 flex w-tap cursor-pointer items-center justify-center rounded-ln " \
+                        "text-mute transition hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-2 " \
+                        "focus-visible:outline-brand"
   FIELD_CHECKBOX = "size-5 shrink-0 cursor-pointer rounded-sm accent-brand focus-visible:outline-2 " \
                    "focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed"
+  # Une option = toute l'étiquette cliquable, 48 px de haut ; l'option cochée prend la teinte de marque.
+  RADIO_OPTION = "flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border bg-white px-4 text-sm font-medium " \
+                 "text-ink transition hover:bg-mist has-checked:border-brand has-checked:bg-brand-soft"
+  RADIO_STATES = { valid: "border-line", invalid: "border-error" }.freeze
+  RADIO_INPUT = "size-5 shrink-0 cursor-pointer accent-brand focus-visible:outline-2 focus-visible:outline-offset-2 " \
+                "focus-visible:outline-brand"
+  # Au téléphone, les options s'empilent toujours ; les colonnes ne s'ouvrent qu'à partir de `sm`.
+  RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
@@ -111,7 +124,7 @@ module ComponentsHelper
   }.freeze
   SUBJECT_FALLBACK = { tone: :neutral, icon: "book-open" }.freeze
 
-  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg" }.freeze
+  AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
     brand: "bg-brand text-ink", teacher: "bg-teacher text-ink", school: "bg-school text-white",
     team: "bg-team text-white", gold: "bg-gold text-ink"
@@ -181,9 +194,13 @@ module ComponentsHelper
   end
 
   # Champ complet : libellé, contrôle, aide, erreur, reliés par `aria-describedby`. Tout attribut en plus va au contrôle.
-  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], **input_html)
+  # `reveal: true` (mot de passe seulement) ajoute le bouton œil du contrôleur `password-reveal` (UDR-0051).
+  # `autofocus: true` désigne le champ au contrôleur `autofocus` (UDR-0054 §3.3), jamais par l'attribut `autofocus`.
+  def ui_field(form, method, as: :text, label: nil, hint: nil, required: false, choices: [], reveal: false,
+               autofocus: false, **input_html)
     builder = option!(FIELD_BUILDERS, as, "ui_field as")
     kind = as.to_sym
+    raise ArgumentError, "ui_field reveal : réservé à as: :password (reçu « #{kind} »)" if reveal && kind != :password
     id = form.field_id(method)
     error = field_errors(form.object, method).first
     described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact
@@ -191,36 +208,64 @@ module ComponentsHelper
     input_html = input_html.merge(
       id:, required:, "aria-invalid": ("true" if error), "aria-describedby": described_by.join(" ").presence
     )
-    input_html[:class] = field_classes(kind, error, input_html[:class])
+    input_html[:class] = field_classes(kind, error, class_names(input_html[:class], { FIELD_REVEAL_INPUT => reveal }))
+    input_html[:data] = { **input_html.fetch(:data, {}), password_reveal_target: "input" } if reveal
+    input_html[:data] = { **input_html.fetch(:data, {}), autofocus_target: "field" } if autofocus
     control = case kind
     when :select then form.select(method, choices, { prompt: input_html.delete(:prompt) }, input_html)
     else form.public_send(builder, method, input_html)
     end
 
-    render "components/field", form:, method:, kind:, control:, id:, hint:, error:, required:,
+    render "components/field", form:, method:, kind:, control:, id:, hint:, error:, required:, reveal:,
            label: label || field_label(form.object, method)
   end
 
-  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false, &block)
+  # Groupe de boutons radio : `fieldset` et `legend`, une option de 48 px par choix `[libellé, valeur]`, la valeur
+  # de l'objet cochée. L'aide et la première erreur, sous le groupe, sont reliées à chaque option.
+  def ui_radio_group(form, method, choices:, label: nil, hint: nil, required: false, columns: 2)
+    grid = RADIO_COLUMNS.fetch(columns) do
+      raise ArgumentError, "ui_radio_group columns : « #{columns} » inconnu (#{RADIO_COLUMNS.keys.join(', ')})"
+    end
+    id = form.field_id(method)
+    error = field_errors(form.object, method).first
+    described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact.join(" ").presence
+    input_html = { required:, class: RADIO_INPUT, "aria-invalid": ("true" if error), "aria-describedby": described_by }
+
+    render "components/radio_group", form:, method:, choices:, id:, hint:, error:, required:, grid:, input_html:,
+           option_class: class_names(RADIO_OPTION, RADIO_STATES[error ? :invalid : :valid]),
+           label: label || field_label(form.object, method)
+  end
+
+  # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
+  # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
+  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
+               document_title: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
-           trigger_icon:, open:, body:, slots:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
+           trigger_icon:, open:, body:, slots:, document_title:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
-  def ui_dropdown(label:, icon: "ellipsis-vertical", trigger: nil, align: :end, id: nil, &block)
-    render "components/dropdown", label:, icon:, trigger:, id: id || "menu-#{label.parameterize}",
+  # `fixed: true` place le menu en position fixe à l'ouverture : il échappe au défilement d'un tableau (UDR-0042).
+  def ui_dropdown(label:, icon: "ellipsis-vertical", trigger: nil, align: :end, id: nil, fixed: false, &block)
+    render "components/dropdown", label:, icon:, trigger:, id: id || "menu-#{label.parameterize}", fixed:,
            align_class: option!(DROPDOWN_ALIGNS, align, "ui_dropdown align"), items: capture(&block)
   end
 
-  def ui_dropdown_item(label, href: nil, icon: nil, method: nil, tone: :default)
+  # Entrée de menu : lien (`href:`, `method:`, `frame:` pour l'ouvrir dans un Turbo Frame), bouton qui ouvre une
+  # <dialog> de la page (`dialog:` son id, UDR-0042), ou entrée inactive sans l'un ni l'autre.
+  def ui_dropdown_item(label, href: nil, icon: nil, method: nil, tone: :default, frame: nil, dialog: nil)
     classes = class_names("flex min-h-tap w-full items-center gap-3 rounded-sm px-3 text-sm font-medium focus:outline-none",
                           option!(DROPDOWN_TONES, tone, "ui_dropdown_item tone"))
     content = safe_join([ (ui_icon(icon, class: "opacity-70") if icon), tag.span(label) ].compact)
+    return dropdown_dialog_item(content, classes, dialog) if dialog
     return tag.span(content, class: class_names(classes, "opacity-50"), role: "menuitem", "aria-disabled": "true", tabindex: -1) if href.nil?
 
-    link_to content, href, class: classes, role: "menuitem", tabindex: -1, data: (method ? { turbo_method: method } : {})
+    # Un lien vers la page ouverte est marqué courant (« Mon profil », UDR-0041) ; une action (DELETE…) ne l'est jamais.
+    link_to content, href, class: classes, role: "menuitem", tabindex: -1,
+                           data: { turbo_method: method, turbo_frame: frame, action: ("dropdown#dismiss" if frame) }.compact,
+                           "aria-current": ("page" if method.nil? && current_page?(href))
   end
 
   def ui_tabs(id:, label: nil, selected: nil, &block)
@@ -252,7 +297,8 @@ module ComponentsHelper
   def ui_avatar(name, src: nil, size: :md, tone: nil)
     classes = class_names("inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold",
                           option!(AVATAR_SIZES, size, "ui_avatar size"))
-    return image_tag(src, alt: name, class: class_names(classes, "object-cover")) if src
+    # Photo de profil (ADR-0060, UDR-0047) : une seule taille servie, recadrée par le rond ; hors écran, pas chargée.
+    return image_tag(src, alt: name, loading: "lazy", decoding: "async", class: class_names(classes, "object-cover")) if src
 
     tone ||= AVATAR_TONES.keys[name.to_s.sum % AVATAR_TONES.size]
     tag.span(avatar_initials(name), role: "img", "aria-label": name,
@@ -264,6 +310,13 @@ module ComponentsHelper
   def ui_toast(message, type: :info, title: nil, persistent: false)
     config = option!(TOAST_TYPES, type, "ui_toast type")
     render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay]
+  end
+
+  # Un flash est un message, ou { "message", "title" } quand le titre du type ne dit pas la situation. Toute autre valeur
+  # (le drapeau de rechargement de l'authentification) ne donne aucun toast.
+  def flash_toast(flash_key, value)
+    message, title = value.is_a?(Hash) ? value.values_at("message", "title") : value
+    ui_toast(message, type: toast_type_for(flash_key), title:) if message.is_a?(String)
   end
 
   def toast_type_for(flash_key)
@@ -306,14 +359,42 @@ module ComponentsHelper
            next_href: (pagination_href(param, page + 1) if page < pages)
   end
 
-  def ui_page_header(title:, subtitle: nil, &block)
-    render "components/page_header", title:, subtitle:, actions: (capture(&block) if block)
+  # `back: { label:, href: }` pose le lien de retour au-dessus du titre (UDR-0054 §3.2).
+  def ui_page_header(title:, subtitle: nil, back: nil, &block)
+    render "components/page_header", title:, subtitle:, back:, actions: (capture(&block) if block)
+  end
+
+  # Retour : lien discret à chevron, libellé du nom de la page d'arrivée, sans « Retour à » (UDR-0054 §3.2).
+  def ui_back_link(label, href:)
+    render "components/back_link", label:, href:
+  end
+
+  # Aide à la demande : <details> natif, ouvert au clic, au toucher et au clavier, panneau dans le flux (UDR-0054 §3.4).
+  def ui_info_tip(text, label:)
+    render "components/info_tip", text:, label:
+  end
+
+  # Copie d'une valeur rendue par le serveur (contrôleur `clipboard`, UDR-0054 §3.5). Le bouton reste caché sans
+  # JavaScript ; `copied:` et `failed:` sont les messages des deux toasts.
+  def ui_copy_button(text, label:, copied:, failed: t("shared.clipboard.failed"), aria_label: nil, variant: :secondary,
+                     size: :sm, icon: "clipboard-document")
+    button = ui_button(label, variant:, size:, icon:, hidden: true, "aria-label": aria_label,
+                              data: { clipboard_target: "button", action: "clipboard#copy" })
+    render "components/copy_button", text:, button:, copied: ui_toast(copied, type: :success),
+           failed: ui_toast(failed, type: :error)
   end
 
   private
 
   def option!(table, key, component)
     table.fetch(key.to_sym) { raise ArgumentError, "#{component} : « #{key} » inconnu (#{table.keys.join(', ')})" }
+  end
+
+  # Ferme le menu, rend le focus au bouton ⋮ puis ouvre la <dialog> : à sa fermeture, le focus revient au bouton.
+  def dropdown_dialog_item(content, classes, dialog)
+    tag.button(content, type: "button", class: class_names(classes, "cursor-pointer text-left"), role: "menuitem",
+                        tabindex: -1, "aria-haspopup": "dialog", "aria-controls": dialog,
+                        data: { action: "dropdown#openDialog", dropdown_dialog_param: dialog })
   end
 
   def heroicon_source(set, name)

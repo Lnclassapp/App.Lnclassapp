@@ -1,10 +1,11 @@
 # 🧠 DOMAINE · Ports::Catalog::ImportReportRepositoryPort
 # Rôle : contrat des rapports d'import, un seul import en cours par type
-# ADR  : 0039
+# ADR  : 0039, 0056
 module Ports
   module Catalog
     module ImportReportRepositoryPort
-      # Rapport queued. → Result(Entities::Catalog::ImportReport) | failure(:conflict, errors: { kind: [:already_running] })
+      # Rapport queued ; checksum_sha256 nil pour un rapport sans fichier (génération des classes, ADR-0056).
+      # → Result(Entities::Catalog::ImportReport) | failure(:conflict, errors: { kind: [:already_running] })
       def create(kind:, checksum_sha256:, imported_by_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
@@ -19,7 +20,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
-      # Passe failed les rapports validating ou importing commencés avant `before` (job tué). → Integer
+      # Passe failed les rapports validating ou importing commencés avant `before` (job tué), et les rapports queued créés
+      # avant `before` (job jamais pris). → Integer
       def fail_stale(kind:, before:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #fail_stale"
       end

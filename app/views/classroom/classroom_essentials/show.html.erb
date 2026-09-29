@@ -1,0 +1,70 @@
+<%# 🌐 UI · classroom/classroom_essentials/show — une fiche essentielle vue depuis une classe (CL-12, AS-20) %>
+<%# Rôle : en-tête de la fiche avec sa bascule, puis ses exercices publiés, chacun avec la sienne et la réussite de la classe %>
+<%# ADR  : 0048 · UDR : 0006, 0007, 0028, 0029, 0054 · retour : le cours dans la classe %>
+<% essential = @essential.essential %>
+<% active = @classroom.status == "active" %>
+<% page_title essential.name %>
+<% content_for :nav_key, "classrooms" %>
+<%= ui_back_link @essential.course_name, href: classroom_course_path(@classroom.public_id, @essential.course_slug) %>
+
+<%= ui_card padding: :md, class: "mb-8" do %>
+  <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+    <div class="min-w-0 space-y-3">
+      <p class="text-sm text-mute"><%= t(".context", classroom: @classroom.name, school: @classroom.school_name) %></p>
+      <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= essential.name %></h1>
+      <% if essential.subtitle.present? %>
+        <p class="text-mute"><%= essential.subtitle %></p>
+      <% end %>
+    </div>
+    <div aria-label="<%= t(".essential_assignment") %>" role="group" class="lg:shrink-0">
+      <% if active %>
+        <%= render "classroom/assignments/toggle", classroom_public_id: @classroom.public_id, assignable_type: "Essential",
+                   assignable_key: essential.slug, assignable_name: essential.name,
+                   assignment_public_id: essential.assignment_public_id %>
+      <% elsif essential.assignment_public_id %>
+        <%= ui_badge t("classroom.assignments.toggle.assigned"), tone: :success, icon: "check" %>
+      <% end %>
+    </div>
+  </div>
+  <% unless active %>
+    <p class="mt-5 rounded-ln bg-warning-soft px-4 py-3 text-sm text-warning"><%= t(".archived_notice") %></p>
+  <% end %>
+<% end %>
+
+<section id="classroom_essential_exercises" aria-labelledby="classroom_essential_exercises_title">
+  <div class="mb-4">
+    <h2 id="classroom_essential_exercises_title" class="font-display text-xl font-extrabold"><%= t(".exercises_title") %></h2>
+    <% if active %>
+      <p class="mt-1 text-sm text-mute"><%= t(".hint") %></p>
+    <% end %>
+  </div>
+  <% if @essential.exercises.empty? %>
+    <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "clipboard-document-list" %>
+  <% else %>
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+      <% @essential.exercises.each do |exercise| %>
+        <li class="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+          <div class="min-w-0">
+            <p class="font-medium text-ink"><%= exercise.title %></p>
+            <p class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-mute">
+              <span><%= t(".questions", count: exercise.questions_count) %></span>
+              <% if exercise.success_percent %>
+                <span><%= t(".success_rate", percent: exercise.success_percent, passed: exercise.passed_students_count,
+                                              count: exercise.completed_students_count) %></span>
+              <% else %>
+                <span><%= t(".no_result") %></span>
+              <% end %>
+            </p>
+          </div>
+          <% if active %>
+            <%= render "classroom/assignments/toggle", classroom_public_id: @classroom.public_id, assignable_type: "Exercise",
+                       assignable_key: exercise.public_id, assignable_name: exercise.title,
+                       assignment_public_id: exercise.assignment_public_id %>
+          <% elsif exercise.assignment_public_id %>
+            <%= ui_badge t("classroom.assignments.toggle.assigned"), tone: :success, icon: "check" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

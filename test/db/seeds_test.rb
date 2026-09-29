@@ -3,8 +3,8 @@ require "test_helper"
 # ADR-0034: the seeds fill development and test with the referential, the DRENA and a few schools; production
 # only gets the bootstrap invitation of the first team member.
 class SeedsTest < ActiveSupport::TestCase
-  TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::Material,
-             Orm::User, Orm::Invitation ].freeze
+  TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::ClassroomPlanEntry,
+             Orm::Material, Orm::User, Orm::Invitation ].freeze
 
   def counts = TABLES.to_h { [ it.name, it.count ] }
 
@@ -34,11 +34,12 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal 41, Orm::Drena.count
     assert_equal %w[6eme 5eme 4eme 3eme 2nde 1ere tle], Orm::Level.order(:position).pluck(:slug)
     assert_equal 10, Orm::LevelSeries.count
+    assert_equal 28, Orm::ClassroomPlanEntry.count
     assert_equal %w[literature literature literature literature science science science], Orm::Material.order(:category).pluck(:category)
     assert_equal({ "Lycée Moderne de Treichville" => 77, "Lycée privé Les Lauriers" => 38, "Lycée mixte La Réussite" => 38,
                    "Collège Moderne de Marcory" => 28 },
                  Orm::School.joins(:classrooms).group(:name).count)
-    assert_equal "abidjan-2", Orm::School.first.drena.slug
+    assert_equal "drena-abidjan-2", Orm::School.first.drena.slug
     assert_equal 0, Orm::User.count
   end
 
@@ -74,7 +75,7 @@ class SeedsTest < ActiveSupport::TestCase
     assert_match "réservé au développement", error.message
   end
 
-  test "without a team account, the bootstrap contact receives one admin invitation, whose link is printed once" do
+  test "without a team account, the bootstrap contact receives one admin invitation, whose link is printed" do
     output = with_bootstrap_contact("0700000042") { as_production { run_seeds } }
 
     invitation = Orm::Invitation.sole
@@ -82,11 +83,18 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal [ "team", "0700000042", "admin", nil ], invitation.values_at(:kind, :contact, :team_role, :invited_by_id)
     assert_equal secret_digest(token), invitation.token_digest
     assert_in_delta 72.hours.from_now, invitation.expires_at, 5
+  end
 
-    again = with_bootstrap_contact("0700000042") { as_production { run_seeds } }
+  # The link lives only in the pre-deploy logs, which Railway may cut when the container stops: a later run revokes the
+  # open invitation and prints a new link, so a lost link never locks the platform out.
+  test "a later run revokes the open bootstrap invitation and prints a new link" do
+    first = with_bootstrap_contact("0700000042") { as_production { run_seeds } }[%r{/invitations/(\w+)}, 1]
 
-    assert_equal 1, Orm::Invitation.count
-    assert_no_match "/invitations/", again
+    again = with_bootstrap_contact("0700000042") { as_production { run_seeds } }[%r{/invitations/(\w+)}, 1]
+
+    assert_not_equal first, again
+    assert_equal [ secret_digest(again) ], Orm::Invitation.where(revoked_at: nil).pluck(:token_digest)
+    assert_equal 2, Orm::Invitation.count
   end
 
   test "an expired bootstrap invitation is revoked and replaced" do

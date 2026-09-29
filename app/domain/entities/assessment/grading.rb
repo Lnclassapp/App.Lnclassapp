@@ -1,11 +1,13 @@
 # 🧠 DOMAINE · Entities::Assessment::Grading
 # Rôle : seuils pédagogiques nommés, score, note sur 20, maîtrise et palier de badge
-# ADR  : 0033
+# ADR  : 0033, 0043
 module Entities
   module Assessment
     module Grading
       PASS_THRESHOLD = 50
       MASTERY_THRESHOLD = 70
+      # ADR-0043, amendement du 2026-09-27 : une lacune n'est résolue qu'à partir de ce score (décision du porteur).
+      REMEDIATION_THRESHOLD = 75
       GOLD_THRESHOLD = 80
       PERFECT_THRESHOLD = 100
       BADGE_THRESHOLDS = { bronze: PASS_THRESHOLD, silver: MASTERY_THRESHOLD,

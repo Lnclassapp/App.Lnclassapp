@@ -1,0 +1,24 @@
+<%# 🌐 UI · components/_radio_group — légende, options radio, aide et erreur, appelé par ui_radio_group %>
+<%# Rôle : un choix parmi peu de valeurs, toutes visibles ; flèches du clavier natives, erreur sous le groupe %>
+<%# UDR  : 0005 %>
+<fieldset id="<%= id %>" class="space-y-1.5">
+  <legend class="mb-1.5 block text-sm font-medium text-ink">
+    <%= label %><% if required %><span class="text-error" aria-hidden="true"> *</span><% end %>
+  </legend>
+  <div class="<%= class_names("grid gap-2", grid) %>">
+    <% choices.each do |text, value| %>
+      <label class="<%= option_class %>">
+        <%= form.radio_button method, value, input_html %>
+        <span><%= text %></span>
+      </label>
+    <% end %>
+  </div>
+  <% if hint %>
+    <p id="<%= id %>_hint" class="text-sm text-mute"><%= hint %></p>
+  <% end %>
+  <% if error %>
+    <p id="<%= id %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+    </p>
+  <% end %>
+</fieldset>

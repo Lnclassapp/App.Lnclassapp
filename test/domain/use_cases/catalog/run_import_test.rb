@@ -112,7 +112,7 @@ module UseCases
                  .call(report_id: 1)
       end
 
-      def schools(*names, drena: "abidjan-2")
+      def schools(*names, drena: "drena-abidjan-2")
         { "format" => "lnclass.schools", "version" => 1, "drena" => drena, "schools" => names.map { { "name" => it } } }
       end
 
@@ -181,6 +181,17 @@ module UseCases
         run_import([ { "name" => "Lycée A" } ])
 
         assert_equal [ [ "format", "format_mismatch" ] ], error_pairs
+        assert_equal({ expected: "lnclass.schools" }, @reports.report.import_errors.sole.params)
+      end
+
+      # Le rapport dit quel format il a reçu, pour que l'écran nomme le bon import (fichier d'écoles dans l'import des DRENA).
+      test "le rejet sur le format note le format reçu, s'il est un texte" do
+        run_import(schools("Lycée A").merge("format" => "lnclass.drenas"))
+        assert_equal({ expected: "lnclass.schools", received: "lnclass.drenas" }, @reports.report.import_errors.sole.params)
+
+        @reports = FakeReports.new
+        run_import(schools("Lycée A").merge("format" => 12))
+        assert_equal({ expected: "lnclass.schools" }, @reports.report.import_errors.sole.params)
       end
 
       test "un lot refusé par la base est rejoué élément par élément : un seul élément en write_failed" do
@@ -238,7 +249,7 @@ module UseCases
 
         @reports = FakeReports.new
         @adapter = FakeImporter.new
-        run_import(mixed(schools_document(count: 10, drena: "abidjan-2")))
+        run_import(mixed(schools_document(count: 10, drena: "drena-abidjan-2")))
 
         assert_equal({ total_count: 10, imported_count: 7, skipped_count: 1, error_count: 2 }, @reports.finished[:counts])
       end

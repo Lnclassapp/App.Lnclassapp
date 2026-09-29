@@ -85,7 +85,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#essential_gap", text: /#{I18n.t("#{scope}.show.gap_title")}/
     assert_select "#essential_gap", text: /12 septembre 2026/
-    assert_select "#essential_gap", text: /#{Entities::Assessment::Grading::PASS_THRESHOLD} %/
+    assert_select "#essential_gap", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/
   end
 
   test "the teacher reads the published exercises, without progress, session button nor team menu" do
@@ -118,8 +118,11 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#content_status_essential_#{essential.slug}", text: /Brouillon/
     assert_select "#content_status_essential_#{essential.slug} form[action='#{publish_teams_essential_path(essential.slug)}']"
     assert_select "#essential_team_actions" do
-      assert_select "a[data-turbo-frame=modal][href='#{edit_teams_essential_path(essential.slug)}']",
+      # UDR-0042: « Modifier » lives in the ⋮ menu of the sheet, even alone; creating and importing stay buttons.
+      assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: essential.name)
+      assert_select "[role=menu] a[role=menuitem][data-turbo-frame=modal][href='#{edit_teams_essential_path(essential.slug)}']",
                     text: I18n.t("#{scope}.show.edit")
+      assert_select "[role=menu] [role=menuitem]", 1
       assert_select "a[data-turbo-frame=modal][href='#{new_teams_essential_exercise_path(essential.slug)}']",
                     text: I18n.t("#{scope}.show.new_exercise")
       assert_select "a[data-turbo-frame=modal][href='#{new_teams_import_path(kind: "exercises", essential: essential.slug)}']",

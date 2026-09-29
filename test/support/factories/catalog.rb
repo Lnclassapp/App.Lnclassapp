@@ -1,4 +1,6 @@
-# Referential, content and import reports (ADR-0034, ADR-0035, ADR-0039).
+require Rails.root.join("db/migrate/20260928140100_fill_classroom_plan_entries").to_s
+
+# Referential, content and import reports (ADR-0034, ADR-0035, ADR-0039), and the barème of the classrooms (ADR-0058).
 module Factories
   module Catalog
     ActiveSupport::TestCase.include(self)
@@ -47,9 +49,13 @@ module Factories
       series = SERIES_BY_LEVEL.values.flatten.uniq.to_h { |name| [ name, create_series(name:) ] }
       SERIES_BY_LEVEL.each { |level, names| names.each { |name| link_level_series(level: levels[level], series: series[name]) } }
       materials = MATERIALS.map { |name, shortname, category| create_material(name:, shortname:, category:) }
+      seed_classroom_plan
 
       { levels: levels.values.index_by(&:slug), series: series.values.index_by(&:slug), materials: materials.index_by(&:slug) }
     end
+
+    # The old barème taken over on the referential in base, exactly as the deployment did (ADR-0058).
+    def seed_classroom_plan = FillClassroomPlanEntries.fill
 
     def create_import_report(kind: "schools", status: "queued", imported_by: create_team_member(second_factor: false),
                              checksum_sha256: SecureRandom.hex(32), **attributes)

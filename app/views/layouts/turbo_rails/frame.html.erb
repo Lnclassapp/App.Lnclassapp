@@ -1,0 +1,13 @@
+<%# 🌐 UI · layouts/turbo_rails/frame — layout minimal d'une requête de frame (remplace celui de turbo-rails) %>
+<%# Rôle : une session fermée depuis une modale (verrouillage) mène à une page publique : la balise recharge le document %>
+<%# ADR  : 0049, 0055 %>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= document_reload_tag %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

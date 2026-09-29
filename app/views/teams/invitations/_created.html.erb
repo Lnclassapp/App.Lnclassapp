@@ -1,7 +1,8 @@
 <%# 🌐 UI · teams/invitations/_created — le lien d'invitation, montré une seule fois, dans la modale %>
-<%# Rôle : champ en lecture seule et consigne de transmission ; rendu par create.turbo_stream et par la page created %>
-<%# ADR  : 0038 · UDR : 0006, 0019 %>
-<%= ui_modal title: t("teams.invitations.created.title"), id: "invitation-created-modal", open: true do |modal| %>
+<%# Rôle : champ en lecture seule, « Copier le lien » (la même valeur), consigne ; rendu par create.turbo_stream et par la page created %>
+<%# ADR  : 0038 · UDR : 0006, 0019, 0054 %>
+<%= ui_modal title: t("teams.invitations.created.title"), id: "invitation-created-modal", open: true,
+             document_title: page_title(t("teams.invitations.created.title")) do |modal| %>
   <% modal.footer do %>
     <%= ui_button t("teams.invitations.created.close"), variant: :secondary, data: { action: "modal#close" } %>
   <% end %>
@@ -15,6 +16,10 @@
       <input id="invitation-link" type="text" value="<%= url %>" readonly aria-describedby="invitation-link-hint"
              class="block min-h-tap w-full rounded-ln border border-line bg-mist px-4 font-mono text-sm text-ink">
       <p id="invitation-link-hint" class="text-sm text-mute"><%= t("teams.invitations.created.instructions") %></p>
+      <div class="flex flex-wrap gap-3">
+        <%= ui_copy_button url, label: t("teams.invitations.created.copy"), aria_label: t("teams.invitations.created.copy_label"),
+                                copied: t("shared.clipboard.copied_link"), icon: "link" %>
+      </div>
     </div>
     <p class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
       <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>

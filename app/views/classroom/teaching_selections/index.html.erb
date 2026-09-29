@@ -1,8 +1,10 @@
 <%# 🌐 UI · classroom/teaching_selections/index — « Quelles classes enseignez-vous ? » %>
 <%# Rôle : une carte par niveau, une bascule par classe (stream), compteur #teaching_counter ; « Terminer » tant que l'onboarding n'est pas fini %>
-<%# ADR  : 0030 · UDR : 0006, 0025 · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
-<% content_for :title, t(".page_title") %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @selection.school_name) %>
+<%# ADR  : 0030, 0063 · UDR : 0006, 0025, 0050, 0054 · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
+<% page_title t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @selection.school_name) do %>
+  <%= ui_button t(".invite"), href: teacher_invite_path, variant: :secondary, size: :sm, icon: "user-plus" %>
+<% end %>
 
 <% if @selection.levels.empty? %>
   <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>

@@ -1,8 +1,27 @@
-<%# 🌐 UI · design/frame — contenu du frame paresseux de /design %>
-<%# Rôle : remplace l'état de chargement par l'état vide ; le lien recharge le frame, qui passe en aria-busy %>
-<%# UDR  : 0006 %>
+<%# 🌐 UI · design/frame — contenu des frames de démonstration de /design %>
+<%# Rôle : l'état vide du frame paresseux ; le code reçu par l'envoi automatique ; la liste de la recherche pendant la frappe %>
+<%# UDR  : 0006, 0054 · Turbo n'extrait que le frame demandé %>
 <%= turbo_frame_tag "design-frame" do %>
   <%= ui_empty_state title: t(".title"), description: t(".description"), icon: "inbox" do %>
     <%= ui_button t(".reload"), href: design_frame_path, variant: :secondary, icon: "arrow-path" %>
+  <% end %>
+<% end %>
+
+<%= turbo_frame_tag "design-autosubmit" do %>
+  <% if @code.present? %>
+    <p class="text-sm font-medium text-success"><%= t(".autosubmit.received", code: @code) %></p>
+  <% end %>
+<% end %>
+
+<%= turbo_frame_tag "design-search", class: "block transition-opacity aria-busy:opacity-50" do %>
+  <p aria-live="polite" class="mb-3 text-sm text-mute"><%= t(".search.count", count: @items.size) %></p>
+  <% if @items.any? %>
+    <ul class="space-y-2">
+      <% @items.each do |item| %>
+        <li class="rounded-ln border border-line bg-white px-4 py-3 text-sm"><%= item[:name] %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= ui_empty_state title: t(".search.empty"), icon: "magnifying-glass" %>
   <% end %>
 <% end %>

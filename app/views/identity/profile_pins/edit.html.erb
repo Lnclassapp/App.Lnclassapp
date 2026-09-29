@@ -1,0 +1,30 @@
+<%# 🌐 UI · identity/profile_pins/edit — « Changer mon PIN », servie dans le frame « modal » (ouverte sur le shell sans frame) %>
+<%# Rôle : PIN actuel, nouveau PIN et confirmation ; 422 dans la modale, chaque champ PIN toujours vidé ; PIN faux en alerte %>
+<%# ADR  : 0025, 0055 · UDR : 0006, 0041, 0054 %>
+<% tab_title = page_title(t(".title")) %>
+<%# « PIN incorrect. » s'annonce en alerte, pas sous un champ (UDR-0041). %>
+<% alerts = @form.errors[:base] + @form.errors.where(:current_pin, :incorrect).map(&:message) %>
+<% @form.errors.delete(:current_pin, :incorrect) %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "profile-pin-modal", size: :sm, open: true, document_title: tab_title do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "profile-pin-form", icon: "key" %>
+    <% end %>
+    <p class="mb-5 text-sm text-mute"><%= t(".intro") %></p>
+    <%= form_with model: @form, scope: :pin_change, url: profile_pin_path, method: :patch, id: "profile-pin-form", class: "space-y-5" do |form| %>
+      <% if alerts.any? %>
+        <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+          <p><%= alerts.to_sentence %></p>
+        </div>
+      <% end %>
+      <%= ui_field form, :current_pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                   autocomplete: "current-password" %>
+      <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
+                   hint: t(".pin_hint") %>
+      <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                   autocomplete: "new-password" %>
+    <% end %>
+  <% end %>
+<% end %>

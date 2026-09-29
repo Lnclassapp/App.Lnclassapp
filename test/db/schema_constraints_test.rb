@@ -8,21 +8,24 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   JOIN_CODE_LENGTH = defined?(Entities::Classroom::JoinCode::LENGTH) ? Entities::Classroom::JoinCode::LENGTH : 5
 
   PUBLIC_ID_TABLES = %w[users drenas schools classrooms classroom_assignments exercises exercise_sessions
-                        knowledge_gaps import_reports].freeze
+                        knowledge_gaps import_reports school_join_requests].freeze
   SLUG_TABLES = %w[drenas levels series materials courses essentials].freeze
 
   # table => [[columns], where] for every unique index beyond public_id and slug. The
   # condition is compared without casts, parentheses nor spaces: PostgreSQL rewrites it.
   UNIQUE_INDEXES = {
     "users" => [ [ %w[contact], "contactISNOTNULL" ] ],
-    "teacher_profiles" => [ [ %w[user_id], nil ] ],
+    "teacher_profiles" => [ [ %w[user_id], nil ], [ %w[referral_token], nil ] ],
+    "referrals" => [ [ %w[referee_id], nil ] ],
+    "school_join_requests" => [ [ %w[teacher_id], nil ] ],
     "sessions" => [ [ %w[token_digest], nil ] ],
     "totp_credentials" => [ [ %w[user_id], nil ] ],
     "pin_recovery_codes" => [ [ %w[user_id], "used_atISNULLANDrevoked_atISNULL" ] ],
     "invitations" => [ [ %w[token_digest], nil ], [ %w[kind contact], "accepted_atISNULLANDrevoked_atISNULL" ] ],
     "drenas" => [ [ %w[name], nil ] ],
-    "schools" => [ [ %w[drena_id name], nil ] ],
+    "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ] ],
     "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ] ],
+    "school_staffs" => [ [ %w[user_id], nil ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
     "series" => [ [ %w[name], nil ] ],
     "level_series" => [ [ %w[level_id series_id], nil ] ],
@@ -41,7 +44,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "question_attempts" => [ [ %w[exercise_session_id question_id], nil ] ],
     "exercise_badges" => [ [ %w[student_id exercise_id], nil ] ],
     "knowledge_gaps" => [ [ %w[student_id essential_id], "status='pending'" ] ],
-    "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ] ]
+    "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ] ],
+    "classroom_plan_entries" => [ [ %w[school_type level_id series_id], "series_idISNOTNULL" ], [ %w[school_type level_id], "series_idISNULL" ] ]
   }.freeze
 
   # table => { column => allowed values } for every string enumeration.
@@ -62,8 +66,12 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_sessions" => { "status" => %w[started completed abandoned], "kind" => %w[standard remediation] },
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises],
-                          "status" => %w[queued validating importing completed rejected failed] }
+    "referrals" => { "source" => %w[link sponsor] },
+    "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
+    "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
+    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
+                          "status" => %w[queued validating importing completed rejected failed] },
+    "classroom_plan_entries" => { "school_type" => %w[public private] }
   }.freeze
 
   # ADR-0036 : the closed list of cascades, from a parent to its technical rows.
@@ -82,6 +90,99 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
   test "the join code column is exactly as long as the generated code" do
     assert_equal JOIN_CODE_LENGTH, connection.columns("classrooms").find { |column| column.name == "join_code" }.limit
+  end
+
+  test "CE-09: every school has a school code of exactly 6 symbols, unique, in the documented alphabet (ADR-0057)" do
+    column = connection.columns("schools").find { |candidate| candidate.name == "school_code" }
+
+    assert_equal [ Entities::School::SchoolCode::LENGTH, false ], [ column.limit, column.null ]
+    assert_match(/school_code.*\[a-hj-np-z2-9\]\{6\}/, check_expressions("schools"))
+    assert connection.columns("schools").find { |candidate| candidate.name == "school_code_rotated_at" }.null
+  end
+
+  test "CE-09: the database refuses a school without code, with a malformed one or with one already taken" do
+    drena_id = create_drena.id
+    insert = lambda do |code, name|
+      connection.execute("INSERT INTO schools (public_id, drena_id, name, school_type, school_code, created_at, updated_at) " \
+                         "VALUES ('#{SecureRandom.base58(14)}', #{drena_id}, '#{name}', 'public', #{code}, now(), now())")
+    end
+    insert.call("'k7m4qz'", "Lycée A")
+
+    {
+      ActiveRecord::NotNullViolation => [ "NULL", "Lycée B" ],
+      ActiveRecord::CheckViolation => [ "'K7M4QZ'", "Lycée C" ],
+      ActiveRecord::RecordNotUnique => [ "'k7m4qz'", "Lycée D" ]
+    }.each do |error, (code, name)|
+      assert_raises(error, code) { connection.transaction(requires_new: true) { insert.call(code, name) } }
+    end
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { insert.call("'k7m4q0'", "Lycée E") } }
+  end
+
+  test "CP-01: every teacher profile draws its own opaque referral token of 12 hexadecimal characters (ADR-0063)" do
+    tokens = Array.new(3) { create_teacher.teacher_profile.reload.referral_token }
+
+    assert_equal 3, tokens.uniq.size
+    assert(tokens.all? { it.match?(/\A[0-9a-f]{12}\z/) }, tokens.inspect)
+    profile = create_teacher.teacher_profile
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { profile.update_column(:referral_token, "ABC") } }
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { profile.update_column(:referral_token, tokens.first) }
+    end
+  end
+
+  test "CP-02: a referee has one referrer, never themself" do
+    referrer = create_teacher
+    referee = create_teacher
+    school_id = Orm::TeacherSchool.find_by!(teacher: referrer).school_id
+    Orm::Referral.create!(referrer:, referee:, school_id:, source: "link", created_at: Time.current)
+
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { Orm::Referral.create!(referrer: create_teacher, referee:, school_id:, source: "link") }
+    end
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { Orm::Referral.create!(referrer:, referee: referrer, school_id:, source: "link") }
+    end
+  end
+
+  test "CP-09: a national code is 6 digits, unique when present, optional" do
+    create_school(national_code: nil)
+    create_school(national_code: nil)
+    create_school(national_code: "012345")
+
+    assert_raises(ActiveRecord::RecordNotUnique) { connection.transaction(requires_new: true) { create_school(national_code: "012345") } }
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { create_school(national_code: "12345") } }
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { create_school(national_code: "12345a") } }
+  end
+
+  test "CP-11: a join request is decided exactly when it is no longer pending" do
+    request = create_join_request
+
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { request.update_columns(status: "approved") } }
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { request.update_columns(decided_at: Time.current) }
+    end
+    request.update_columns(status: "rejected", decided_at: Time.current, decided_via: "team")
+    assert_equal "rejected", request.reload.status
+  end
+
+  # ADR-0065 : un établissement par compte de direction ; une invitation de direction a une école, pas de fonction.
+  test "DS-03: a school admin is attached to one school only" do
+    school = create_school
+    admin = create_school_admin(school:)
+
+    assert_raises(ActiveRecord::RecordNotUnique) { Orm::SchoolStaff.create!(user: admin, school: create_school) }
+    assert_equal %w[created_at id invited_by_id school_id user_id], connection.columns("school_staffs").map(&:name).sort
+  end
+
+  test "DS-01: a school staff invitation needs a school, not a position" do
+    school = create_school
+
+    assert_nil create_invitation(kind: "school_staff", school:, position: nil).position
+    assert_raises(ActiveRecord::CheckViolation) do
+      Orm::Invitation.transaction(requires_new: true) do
+        Orm::Invitation.create!(kind: "school_staff", contact: "0700000009", token_digest: "x" * 64, expires_at: 1.day.from_now)
+      end
+    end
   end
 
   test "every exposed table has a 14 character public_id with a unique index" do
@@ -170,6 +271,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
       "a team account without sub-role" => "INSERT INTO users (public_id, last_name, first_name, gender, role, pin_digest, created_at, updated_at) VALUES ('abcdefghijklmn', 'K', 'A', 'male', 'team', 'x', now(), now())",
       "a contact that is not ivorian" => "INSERT INTO users (public_id, last_name, first_name, contact, gender, role, pin_digest, created_at, updated_at) VALUES ('abcdefghijklmn', 'K', 'A', '0912345678', 'male', 'student', 'x', now(), now())",
       "a school year that skips a year" => "INSERT INTO classrooms (public_id, school_id, level_id, name, school_year, created_at, updated_at) VALUES ('abcdefghijklmn', 1, 1, '6ème 1', '2026-2028', now(), now())",
+      "an import without the checksum of its file" => "INSERT INTO import_reports (public_id, kind, status, imported_by_id, created_at, updated_at) VALUES ('abcdefghijklmo', 'schools', 'queued', 1, now(), now())",
       "a completed import whose counts do not add up" => "INSERT INTO import_reports (public_id, kind, status, checksum_sha256, total_count, imported_count, imported_by_id, created_at, updated_at) VALUES ('abcdefghijklmn', 'schools', 'completed', 'x', 3, 2, 1, now(), now())"
     }
 

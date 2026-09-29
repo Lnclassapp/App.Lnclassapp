@@ -1,61 +1,50 @@
 require "test_helper"
 
-# ID-03, SC-27, TR-cadre-1 (ADR-0030, ADR-0050, UDR-0024): a visitor signs up as a teacher, with a primary school
-# chosen inside the chosen DRENA; the role is always teacher; the new teacher lands on the class selection.
+# ID-03, TR-cadre-1, CE-01 to CE-05 (ADR-0030, ADR-0050, ADR-0057, UDR-0024, UDR-0044): a visitor signs up as a teacher
+# with the code of their school, typed or carried by the link /e/<code>; the school is found by its code, never chosen in
+# a list; every refused code reads the same; the role is always teacher; the new teacher lands on the class selection.
 class Identity::TeacherRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/identity/teacher_registration_input.attributes".freeze
+  PAGE = "identity.teacher_registrations.new".freeze
 
   setup do
     @drena = create_drena(name: "Abidjan 1")
-    @school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan")
+    @school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
     @material = create_material(name: "SVT", shortname: "SVT")
   end
 
-  test "the form asks for the person, the number, the PIN twice, the DRENA, the school and the subject" do
-    closed = create_school(drena: @drena, name: "Lycée fermé", status: "inactive")
-
+  test "CE-01: the form asks for the person, the number, the PIN twice, the school code and the subject — no DRENA, no list" do
     get new_teacher_registration_path
 
     assert_response :success
-    assert_select "h2", text: I18n.t("identity.teacher_registrations.new.title")
+    assert_select "h2", text: I18n.t("#{PAGE}.title")
     %w[last_name first_name contact].each { assert_select "input[name='teacher_registration[#{it}]']" }
     assert_select "input[type=radio][name='teacher_registration[gender]']", count: 2
     assert_select "input[type=password][name='teacher_registration[pin]'][inputmode=numeric][maxlength='4']"
     assert_select "input[type=password][name='teacher_registration[pin_confirmation]']"
-    assert_select "select[name='teacher_registration[drena_public_id]'][form='teacher-signup-drena'] option[value='#{@drena.public_id}']",
-                  text: "Abidjan 1"
+    assert_select "input[type=text][name='teacher_registration[school_code]'][autocomplete=off][autocapitalize=characters]"
+    assert_select "label[for=teacher_registration_school_code]",
+                  text: /#{I18n.t("activemodel.attributes.dtos/identity/teacher_registration_input.school_code")}/
     assert_select "select[name='teacher_registration[material_slug]'] option[value='#{@material.slug}']", text: "SVT"
-    assert_select "turbo-frame#schools select[name='teacher_registration[school_public_id]'][disabled]"
-    assert_select "turbo-frame#schools option[value='#{closed.public_id}']", count: 0
+    assert_select "select[name='teacher_registration[drena_public_id]'], [name='teacher_registration[school_public_id]']", 0
+    assert_select "form#teacher-signup-drena, turbo-frame#schools, [data-controller~='school--drena-schools']", 0
+    assert_select "#school-preview", 0
     assert_select "input[name*=role]", count: 0
     assert_select "a[href='#{new_session_path}']"
   end
 
-  test "without JavaScript, the DRENA sent in GET lists its active schools in the frame" do
-    create_school(drena: @drena, name: "Lycée fermé", status: "inactive")
-    create_school(drena: @drena, name: "Collège Voltaire")
-
-    get new_teacher_registration_path, params: { teacher_registration: { drena_public_id: @drena.public_id } }
-
-    assert_response :success
-    assert_select "form#teacher-signup-drena[method=get][action='#{new_teacher_registration_path}']"
-    assert_match %r{<noscript>\s*<button[^>]+form="teacher-signup-drena"}, response.body
-    assert_select "select[name='teacher_registration[drena_public_id]'] option[selected][value='#{@drena.public_id}']"
-    assert_select "turbo-frame#schools input[type=hidden][name='teacher_registration[drena_public_id]'][value='#{@drena.public_id}']"
-    assert_equal [ "Collège Voltaire", "Lycée Classique d'Abidjan" ],
-                 css_select("turbo-frame#schools select option[value!='']").map(&:text)
-  end
-
-  test "a signed-in person who opens the sign-up page is sent home" do
+  test "a signed-in person who opens the sign-up page or a code link is sent home" do
     sign_in_as create_teacher
 
     get new_teacher_registration_path
+    assert_redirected_to teacher_home_path
 
+    get school_code_signup_path("k7m4qz")
     assert_redirected_to teacher_home_path
   end
 
-  test "a complete sign-up creates the teacher, attaches the school and lands on the class selection, signed in" do
-    post teacher_registrations_path, params: { teacher_registration: registration_params }
+  test "CE-01: a complete sign-up with the code typed anyhow creates the teacher attached to its school, signed in" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params(school_code: " k7m 4QZ ") }
 
     assert_redirected_to teacher_classrooms_path
     assert_response :see_other
@@ -75,39 +64,89 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_response :redirect, "la session est ouverte"
   end
 
+  test "CE-02: the link /e/<code> shows the school and its DRENA, carries the code hidden, and keeps a way out" do
+    get school_code_signup_path("K7M-4qz")
+
+    assert_response :success
+    assert_select "#school-preview", text: /Lycée Classique d'Abidjan/
+    assert_select "#school-preview", text: /Abidjan 1/
+    assert_select "form#teacher-registration-form[action='#{teacher_registrations_path}'] " \
+                  "input[type=hidden][name='teacher_registration[school_code]'][value='K7M-4QZ']"
+    assert_select "input[type=text][name='teacher_registration[school_code]']", 0
+    assert_select "a#other-school-code[href='#{new_teacher_registration_path}']"
+    assert_not_includes response.body, @school.public_id
+  end
+
+  test "CE-02: signing up from the link attaches the teacher to the school of the link" do
+    get school_code_signup_path("k7m4qz")
+    post teacher_registrations_path, params: { teacher_registration: registration_params(school_code: "K7M-4QZ") }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher: Orm::User.find_by!(contact: "0501020304")).pluck(:school_id)
+  end
+
+  test "CE-03: an unknown, replaced, inactive or draft code is refused in 422 with the same message, no account" do
+    create_school(drena: @drena, name: "Lycée fermé", status: "inactive", school_code: "abc234")
+    create_school(drena: @drena, name: "Lycée en brouillon", status: "draft", school_code: "xyz789")
+
+    %w[zzz999 abc234 xyz789].each do |school_code|
+      post teacher_registrations_path, params: { teacher_registration: registration_params(school_code:) }
+
+      assert_refused :school_code, I18n.t("#{ERRORS}.school_code.inclusion")
+      assert_select "input[type=text][name='teacher_registration[school_code]'][value='#{school_code}']"
+      assert_select "#school-preview", 0
+    end
+  end
+
+  test "CE-03: the link of an unknown, inactive or draft code answers 404 with the same card, never the school" do
+    create_school(drena: @drena, name: "Lycée fermé", status: "inactive", school_code: "abc234")
+    create_school(drena: @drena, name: "Lycée en brouillon", status: "draft", school_code: "xyz789")
+
+    %w[zzz999 abc234 xyz789 kfm37].each do |code|
+      get school_code_signup_path(code)
+
+      assert_response :not_found
+      assert_select "#invalid-school-code h2", text: I18n.t("#{PAGE}.invalid_code.title")
+      assert_select "#invalid-school-code a[href='#{new_teacher_registration_path}']", text: I18n.t("#{PAGE}.invalid_code.other_code")
+      assert_select "form#teacher-registration-form", 0
+      assert_no_match(/Lycée fermé|Lycée en brouillon/, response.body)
+    end
+  end
+
+  test "CE-04: a blank code, a malformed one and a classroom code each have their message, in 422" do
+    { "" => :blank, "k7m4q" => :invalid, "KFM 37" => :classroom_code }.each do |school_code, kind|
+      post teacher_registrations_path, params: { teacher_registration: registration_params(school_code:) }
+
+      assert_refused :school_code, I18n.t("#{ERRORS}.school_code.#{kind}")
+    end
+  end
+
+  test "CE-04: a school chosen by hand (old form) is ignored: without a code, no account" do
+    post teacher_registrations_path,
+         params: { teacher_registration: registration_params(school_code: nil, drena_public_id: @drena.public_id,
+                                                             school_public_id: @school.public_id) }
+
+    assert_refused :school_code, I18n.t("#{ERRORS}.school_code.blank")
+  end
+
+  test "an error after a good code shows the school instead of the field, the entries are kept, the PINs are not" do
+    post teacher_registrations_path,
+         params: { teacher_registration: registration_params(pin_confirmation: "1357", school_code: "k7m 4qz") }
+
+    assert_refused :pin_confirmation, I18n.t("#{ERRORS}.pin_confirmation.confirmation")
+    assert_select "#school-preview", text: /Lycée Classique d'Abidjan/
+    assert_select "input[type=hidden][name='teacher_registration[school_code]'][value='K7M-4QZ']"
+    assert_select "input[name='teacher_registration[last_name]'][value='Kouassi']"
+    assert_select "input[name='teacher_registration[contact]'][value='05 01 02 03 04']"
+    assert_select "input[name='teacher_registration[pin]'][value]", count: 0
+  end
+
   test "TR-cadre-1: a role added by hand is ignored, the account is a teacher and no team account exists" do
     post teacher_registrations_path, params: { teacher_registration: registration_params(role: "team", team_role: "admin") }
 
     assert_redirected_to teacher_classrooms_path
     assert_equal [ "teacher", nil ], Orm::User.where(contact: "0501020304").pick(:role, :team_role)
     assert_not Orm::User.exists?(role: %w[team school_admin])
-  end
-
-  test "a school of another DRENA is refused in 422 and no account is created" do
-    other = create_school(drena: create_drena(name: "Abidjan 2"), name: "Lycée d'Abidjan 2")
-
-    post teacher_registrations_path, params: { teacher_registration: registration_params(school_public_id: other.public_id) }
-
-    assert_refused :school_public_id, I18n.t("#{ERRORS}.school_public_id.inclusion")
-  end
-
-  test "an inactive school is refused in 422 and no account is created" do
-    closed = create_school(drena: @drena, name: "Lycée fermé", status: "inactive")
-
-    post teacher_registrations_path, params: { teacher_registration: registration_params(school_public_id: closed.public_id) }
-
-    assert_refused :school_public_id, I18n.t("#{ERRORS}.school_public_id.inclusion")
-    assert_select "turbo-frame#schools option[value='#{@school.public_id}']"
-  end
-
-  test "an unconfirmed PIN is refused under its confirmation, the entries are kept, the PINs are not" do
-    post teacher_registrations_path, params: { teacher_registration: registration_params(pin_confirmation: "1357") }
-
-    assert_refused :pin_confirmation, I18n.t("#{ERRORS}.pin_confirmation.confirmation")
-    assert_select "input[name='teacher_registration[last_name]'][value='Kouassi']"
-    assert_select "input[name='teacher_registration[contact]'][value='05 01 02 03 04']"
-    assert_select "input[name='teacher_registration[pin]'][value]", count: 0
-    assert_select "select[name='teacher_registration[school_public_id]'] option[selected][value='#{@school.public_id}']"
   end
 
   test "a number already used is refused in 422 with its message" do
@@ -146,12 +185,81 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
   end
 
+  test "CE-05: the eleventh code link opened in a minute from the same address receives 429, without the school" do
+    10.times { |index| get school_code_signup_path(index.even? ? "k7m4qz" : "zzz999") }
+
+    get school_code_signup_path("k7m4qz")
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: /#{Regexp.escape(I18n.t('errors.codes.rate_limited'))}/
+    assert_not_includes response.body, "Lycée Classique d'Abidjan"
+    assert_select "form#teacher-registration-form", 0
+  end
+
+  test "CE-05: the links have their own count: the sign-up form is still served, and the post still accepted" do
+    10.times { get school_code_signup_path("zzz999") }
+
+    get new_teacher_registration_path
+    assert_response :success
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params }
+    assert_redirected_to teacher_classrooms_path
+  end
+
   private
+
+  test "CP-01: the referral link carries its token in a hidden field, and nowhere else" do
+    token = Orm::TeacherProfile.find_by!(user: create_teacher(school: @school)).referral_token
+
+    get school_code_signup_path("k7m4qz", ref: token.upcase)
+
+    assert_response :success
+    assert_select "#school-preview"
+    assert_select "input[type=hidden][name='teacher_registration[ref]'][value='#{token}']"
+    assert_nil cookies[:session_token]
+    assert_empty session.to_h.except("session_id", "_csrf_token", "csp_nonce"), "le jeton ne va ni en session ni en cookie"
+    assert_equal [ Rails.application.config.session_options[:key] ], response.headers["Set-Cookie"].to_s.scan(/^([^=;\s]+)=/).flatten
+  end
+
+  test "CP-03: a malformed token is not carried" do
+    get school_code_signup_path("k7m4qz", ref: "usr-41")
+
+    assert_select "input[name='teacher_registration[ref]']", 0
+  end
+
+  test "CP-02: a sign-up by a referral link records the referrer, source link, in the school of the code" do
+    referrer = create_teacher(school: @school)
+    token = Orm::TeacherProfile.find_by!(user: referrer).referral_token
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(ref: token) }
+
+    assert_redirected_to teacher_classrooms_path
+    referee = Orm::User.find_by!(contact: "0501020304")
+    assert_equal [ [ referrer.id, @school.id, "link" ] ], Orm::Referral.where(referee:).pluck(:referrer_id, :school_id, :source)
+  end
+
+  test "CP-03: the token of a teacher of another school gives a sign-up without referrer" do
+    other = create_teacher(school: create_school(drena: @drena))
+    token = Orm::TeacherProfile.find_by!(user: other).referral_token
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(ref: token) }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal 0, Orm::Referral.count
+  end
+
+  test "CP-01: after an error, the token is kept in the re-rendered form" do
+    token = Orm::TeacherProfile.find_by!(user: create_teacher(school: @school)).referral_token
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(ref: token, pin_confirmation: "1357") }
+
+    assert_response :unprocessable_entity
+    assert_select "input[type=hidden][name='teacher_registration[ref]'][value='#{token}']"
+  end
 
   def registration_params(**overrides)
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821",
-      pin_confirmation: "4821", drena_public_id: @drena.public_id, school_public_id: @school.public_id,
-      material_slug: @material.slug, **overrides }
+      pin_confirmation: "4821", school_code: "K7M-4QZ", material_slug: @material.slug, **overrides }
   end
 
   def assert_refused(attribute, message)

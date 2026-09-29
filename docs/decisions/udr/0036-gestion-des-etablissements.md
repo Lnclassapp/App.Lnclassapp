@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot S2 ; SC-03 à SC-07) |
 | **ADR lié** | [ADR-0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md) (les classes naissent à l'import) · [ADR-0036](../adr/0036-suppression-archivage-et-anonymisation.md) (suppression refusée, désactivation) · UDR-0005, UDR-0006, UDR-0007 |
@@ -81,3 +81,60 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - Modifier un établissement ne crée ni ne supprime jamais de classe ; le seul geste qui en ajoute une est « Ajouter une classe ».
 - Aucune suppression en cascade : un établissement utilisé se désactive. Ses classes, élèves et enseignants restent.
 - Toute autre liste d'administration longue (plusieurs centaines de lignes, plusieurs filtres) reprend ce patron : formulaire `GET` hors du frame, frame `advance`, compteur `aria-live`, actions de ligne en icônes à libellé caché.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les actions d'une ligne ne sont plus des icônes à libellé caché** : elles passent dans le menu ⋮ « Actions pour <nom> » (`#school-actions-<public_id>`, `fixed: true`) — « Modifier », « Désactiver » (absente pour un établissement inactif ; la place vide `w-15` disparaît), « Supprimer » (`:danger`). Les modales `deactivate-school-<public_id>` et `delete-school-<public_id>` sont rendues sans `trigger:`.
+- **En-tête de la fiche** : « Ajouter une classe » reste un bouton ; « Modifier » et « Désactiver » (si actif) passent dans le menu ⋮ `#school-header-actions`, la confirmation `deactivate-school-header` est rendue sans `trigger:`.
+- Le §4 « actions de ligne en icônes à libellé caché » est remplacé par : actions de ligne dans un menu ⋮ (UDR-0042).
+
+## Amendement du 2026-09-28 — générer les classes manquantes
+
+*Chantier [`docs/chantiers/generer-classes`](../../chantiers/generer-classes/prd.md), [UDR-0043](0043-generer-les-classes-manquantes.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- L'en-tête de la liste gagne une action secondaire, « Générer les classes manquantes » (`sparkles`), à gauche de « Importer des établissements », qui reste l'action principale. Sa confirmation et son suivi sont décrits par l'UDR-0043.
+- Le §4 « tout établissement a ses classes dès sa naissance » admet une exception : un établissement importé avant le référentiel les reçoit par cette génération (ADR-0056).
+
+## Amendement du 2026-09-28 — code d'établissement
+
+*Chantier [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md), [UDR-0044](0044-inscription-enseignant-par-code-d-etablissement.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- L'en-tête de la fiche gagne le bloc `#school_code` : le code d'établissement (`K7M-4QZ`), « Copier le code », « Copier le lien », le lien `/e/<code>`, et un avertissement si l'établissement n'est pas actif.
+- Le menu ⋮ `#school-header-actions` devient : « Modifier », « Régénérer le code » (confirmation `regenerate-school-code`), « Désactiver » si actif.
+- L'état vide des enseignants dit désormais qu'ils s'inscrivent avec le code d'établissement.
+
+## Amendement du 2026-09-28 — cycle en boutons radio
+
+*Chantier [`docs/chantiers/cycles-en-radio`](../../chantiers/cycles-en-radio/prd.md), [UDR-0005](0005-design-system-fondateur.md#amendement-du-2026-09-28--groupe-de-boutons-radio). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Modale `school-modal`** : type et statut restent des `select`, sur deux colonnes (`sm:grid-cols-2`) ; le cycle devient `ui_radio_group` « Cycle » (`fieldset#school_cycle`) sur toute la largeur, sous eux : « Premier cycle » (`first`), « Premier et second cycles » (`both`), côte à côte dès `sm`, empilées au téléphone.
+- **Valeur cochée** : le cycle enregistré (le formulaire ne sert qu'à modifier ; un établissement a toujours un cycle). Le « 1er cycle par défaut » demandé le 2026-09-28 n'a d'objet qu'à la création, qui n'existe pas ici (§2) : sa valeur équivalente serait `first`.
+- **Le filtre « Tous les cycles » reste une liste déroulante** : c'est un filtre avec une option « tous », pas une saisie.
+
+## Amendement du 2026-09-28 — menu « Classes » de l'en-tête
+
+*Chantier [`docs/chantiers/bareme-classes`](../../chantiers/bareme-classes/prd.md). En cas d'écart, cette section fait foi.*
+
+- L'en-tête de la liste porte « Importer des établissements » (principale), puis le menu « Classes » (génération des classes manquantes, barème des classes) : voir UDR-0043 et UDR-0045, amendements du 2026-09-28.
+
+## Amendement du 2026-09-28 — code national et enseignants en attente (UDR-0050)
+
+*Chantier `docs/chantiers/croissance-parrainage`.* La fiche montre le code national dans l'en-tête et le formulaire le modifie (facultatif, 6 chiffres, unique) ; la recherche porte aussi sur lui ; la section « Enseignants en attente » (Valider / Refuser) précède les enseignants rattachés quand il y a des demandes. Contrat : UDR-0050 §3.
+
+## Amendement du 2026-09-28 — inviter la direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md). Statut : `Proposé`. Contrat : [UDR-0052](0052-espace-direction-simple.md) §3.*
+
+- Le menu ⋮ `#school-header-actions` de la fiche gagne, en premier, « Inviter la direction » (`user-plus`, frame `modal`), absent pour un établissement non actif.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Recherche pendant la frappe** : `form#schools-filters` porte le contrôleur `search` : envoi 300 ms après la dernière frappe dans la recherche (au moins 2 caractères, ou vide), URL remplacée ; envoi au changement des quatre listes (URL avancée) ; « Filtrer » masqué dès que le contrôleur est connecté, présent sans JavaScript. Le patron du §4 pour les listes longues inclut désormais ce contrôleur.
+- **Retour de la fiche** : « Établissements » vise `back_href(schools_path, from: schools_path)` : la liste filtrée d'où l'on vient, sinon la liste sans filtre.
+- **Pas d'index** pour la recherche (UDR-0054 §2.12, mesure au PRD §7 du chantier).
+- **Infobulles** : statut (brouillon, actif, désactivé) et « Code d'établissement » (UDR-0054 §3.4).
+- Titres : « Établissements · Équipe · Lnclass », « <nom> · Équipe · Lnclass », « Modifier l'établissement · Équipe · Lnclass ».

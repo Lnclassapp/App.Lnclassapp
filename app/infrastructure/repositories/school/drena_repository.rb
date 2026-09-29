@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::DrenaRepository
-# Rôle : traduit Orm::Drena ↔ Entities::School::Drena ; slug figé à la création, cible des imports d'écoles
-# ADR  : 0029, 0034, 0036
+# Rôle : traduit Orm::Drena ↔ Entities::School::Drena ; slug figé à la création, cible des imports d'écoles ; écriture en masse de l'import
+# ADR  : 0029, 0034, 0036, 0066
 module Repositories
   module School
     class DrenaRepository
@@ -39,6 +39,17 @@ module Repositories
 
       def ids_by_slug
         Orm::Drena.pluck(:slug, :id).to_h
+      end
+
+      def taken_names
+        Orm::Drena.pluck(:name).to_set
+      end
+
+      # Pas de rappel ORM : slug et public_id arrivent calculés. Une violation d'unicité lève, et le moteur annule le lot.
+      def insert_many(rows:, at:)
+        return 0 if rows.empty?
+
+        Orm::Drena.insert_all!(rows.map { |row| row.merge(created_at: at, updated_at: at) }).length
       end
 
       private

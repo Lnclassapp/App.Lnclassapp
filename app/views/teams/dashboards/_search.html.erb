@@ -1,0 +1,24 @@
+<%# 🌐 UI · teams/dashboards/_search — rechercher un élève ou un enseignant (TR-11) %>
+<%# Rôle : formulaire GET qui vise le frame « team_dashboard_search » et avance l'URL, en gardant période et DRENA %>
+<%# ADR  : 0062 · UDR : 0049 %>
+<%# locals: (search:, period:, drena:) -%>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "magnifying-glass", id: "team_dashboard_search_card" do %>
+  <%# `role` et `aria-label` passent par `html:` : au premier niveau, form_with ne les rend pas. %>
+  <%= form_with url: team_dashboard_path, method: :get, html: { role: "search", "aria-label": t(".form_label") },
+                data: { turbo_frame: Teams::DashboardsController::SEARCH_FRAME, turbo_action: "advance" },
+                class: "mb-5 flex flex-wrap items-end gap-3" do %>
+    <%= hidden_field_tag :period, period.key, id: nil %>
+    <%= hidden_field_tag :drena, drena&.public_id, id: nil %>
+    <div class="min-w-0 flex-1 basis-60 space-y-1.5">
+      <%= label_tag "dashboard_search", t(".label"), class: "block text-sm font-medium text-ink" %>
+      <div class="relative">
+        <%= ui_icon "magnifying-glass", size: :sm, class: "pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-mute" %>
+        <%= search_field_tag :q, search.term, id: "dashboard_search", "aria-describedby": "dashboard_search_hint", autocomplete: "off",
+                             class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap pl-10", ComponentsHelper::FIELD_STATES[:valid]) %>
+      </div>
+      <p id="dashboard_search_hint" class="text-xs text-mute"><%= t(".hint") %></p>
+    </div>
+    <%= ui_button t(".submit"), type: :submit, icon: "magnifying-glass" %>
+  <% end %>
+  <%= render "search_results", search: %>
+<% end %>
