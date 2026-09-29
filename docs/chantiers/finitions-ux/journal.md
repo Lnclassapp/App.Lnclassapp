@@ -67,3 +67,35 @@ Un lot vertical qui aurait besoin d'en changer une s'arrête : le Lot 0 rouvre.
 - `COVERAGE=0 bin/rails test:system` : 208 runs, 2562 assertions, 0 échec, 0 erreur, 0 skip.
 - `bin/brakeman -q --no-pager` : 0 avertissement.
 - `bin/check-asset-budget` : `application.js` 41,8 Ko gzip / 60 Ko.
+
+## Lot C2 — Équipe : contenu et imports (2026-09-29)
+
+Branche `feature/finitions-ux-lot-c2`, depuis `feature/finitions-ux` (Lot 0 fusionné). Briques du Lot 0 utilisées telles quelles (`page_title`, `ui_modal(document_title:)`, `ui_page_header(back:)`), aucune modifiée.
+
+- **FU-05 (cours)** : les modales cours, fiche essentielle et exercice (création et modification) et le téléversement d'un import passent `page_title(...)` à `ui_modal(document_title:)` ; ouvertes par leur URL, `<title>` vaut « Nouveau cours · Équipe · Lnclass ». Leur auto-focus vient de `_modal` (premier champ, puis champ en erreur après un 422) : aucune vue n'a eu à le déclarer (`autofocus: true` du nom du cours gardé, devenu cible `field`).
+- **FU-10 (Rapport d'import), FU-11** : le bouton `arrow-left` « Retour aux imports » devient le retour commun `ui_page_header(back: { label: "Imports", href: teams_imports_path })`.
+- `teams/imports/index` et `show` : `content_for :title` → `page_title`.
+- Titres d'onglet des imports sans deux-points : `teams.imports.new.page_titles.<type>` (« Importer des DRENA ») et `teams.imports.show.page_titles.<type>` (« Import d'établissements ») ; `show.page_title` (« Import : %{kind} ») retiré. Une clé par type plutôt qu'une interpolation : l'article français change avec le type (« des », « d' », « de »).
+
+### Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-09-29 | Le deux-points disparaît du **titre de l'onglet** ; le titre **visible** de la modale (« Importer : DRENA ») et le `h1` du rapport (« Import : Établissements ») restent | UDR-0054 §3.1 vise le segment « Page » de l'onglet ; les titres visibles sont vérifiés par `test/system/teams/drena_import_test.rb` et `test/controllers/teams/imports_controller_test.rb`, hors du champ `Fichiers` du lot | Non |
+
+### Dette laissée derrière
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| Titre visible « Importer : %{kind} » (modale) et `h1` « Import : %{kind} » (rapport) gardent leur deux-points | Les tests qui les vérifient sont hors du lot (voir ci-dessus) | Lot Z, si le porteur veut aligner le visible sur l'onglet |
+| `create.turbo_stream` des imports (« Import : %{kind} », modale de suivi sans `document_title`) | `app/views/teams/imports/create.turbo_stream.erb` est hors du champ `Fichiers` | Lot Z |
+
+### Ce qui a dérapé
+
+- `test/system/teams/exercise_form_test.rb` (AS-03) a échoué une fois sur « pas de morphing » pendant que neuf autres lots tournaient sur la machine, puis est passé trois fois de suite seul : attente du `turbo:morph` sous charge, sans lien avec le lot.
+
+### Portes (tests du lot seulement, règle de la vague)
+
+- `COVERAGE=0 bin/rails test test/system/finitions/team_content_test.rb` : 5 runs, 0 échec.
+- `COVERAGE=0 bin/rails test test/system/teams/{course_management,essential_management,exercise_form,import_flow,drena_import}_test.rb test/controllers/teams/{courses,essentials,exercises,imports}_controller_test.rb test/i18n/locale_files_test.rb` : 85 runs, 0 échec (l'erreur de morphing ci-dessus mise à part, repassée verte).
+- `bin/rubocop test/system/finitions/team_content_test.rb` : aucune offense.
