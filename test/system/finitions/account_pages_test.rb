@@ -61,11 +61,12 @@ class Finitions::AccountPagesTest < ApplicationSystemTestCase
       within("turbo-frame#modal dialog[open]") { assert_selector "h2", text: heading }
       assert_no_selector "[autofocus]", visible: :all
       assert_equal field, evaluate_script("document.activeElement.id")
-      assert_equal "#{heading} · Élève · Lnclass", page.title
+      assert_title "#{heading} · Élève · Lnclass"
 
       within("turbo-frame#modal dialog[open]") { click_on "Annuler" }
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_equal title, page.title
+      # Le titre revient à la fermeture de la <dialog>, un instant après sa disparition : assert_title attend.
+      assert_title title
     end
   end
 

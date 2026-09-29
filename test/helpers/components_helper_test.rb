@@ -572,8 +572,9 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_info_tip is a native details whose summary names the help and whose panel stays in the flow" do
     show ui_info_tip("Part des devoirs rendus.", label: "Taux de rendu")
 
-    assert_select "details.group.inline-block.align-middle" do
-      assert_select "summary.summary-plain.size-tap.cursor-pointer" do
+    assert_select "details.group.inline-block.align-middle[data-controller=info-tip]" \
+                  "[data-action='pointerenter->info-tip#enter pointerleave->info-tip#leave']" do
+      assert_select "summary.summary-plain.size-tap.cursor-pointer[data-action='click->info-tip#pin']" do
         assert_select "svg[aria-hidden=true]"
         assert_select "span.sr-only", text: I18n.t("components.info_tip.label", label: "Taux de rendu")
       end

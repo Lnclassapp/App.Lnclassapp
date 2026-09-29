@@ -217,6 +217,12 @@
   }
 }
 
+/* UDR-0054 §3.4, amendement « survol » — largeur de la bulle : celle d'un formulaire, jamais plus que la fenêtre moins
+   ses deux gouttières de 1 rem. */
+@utility max-w-bubble {
+  max-width: min(var(--container-form), calc(100vw - 2rem));
+}
+
 /* UDR-0054 §3.4 — résumé d'une infobulle (<details>) sans le triangle du navigateur : l'icône suffit. */
 @utility summary-plain {
   list-style: none;
