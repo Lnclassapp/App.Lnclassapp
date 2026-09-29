@@ -7,8 +7,11 @@
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-12**, bloque la V1 |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0055](./0055-import-des-drena-et-slug-prefixe.md) |
 
 ---
+
+> ⚠️ **Amendé par l'[ADR-0055](./0055-import-des-drena-et-slug-prefixe.md)** : les DRENA se créent au formulaire **ou par import**, et leur slug est préfixé `drena-`.
 
 ## 1. Contexte et problématique
 
