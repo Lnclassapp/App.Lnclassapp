@@ -32,6 +32,7 @@ Lot 0 — SOCLE (séquentiel) : règle du slug, 5e type d'import, port, migratio
                      `config/locales/teams/imports.fr.yml` (`error_codes.taken`, `index.subtitle`)
                      `config/locales/teams/drenas.fr.yml` (`index.import`, `index.subtitle`, `index.empty_description`, `form.name_hint_new`, erreur « nom sans lettre latine »)
                      `config/locales/teams/import_drenas.fr.yml` (textes de l'aide `_drenas`, UDR-0041 §3 — ajouté après le lancement de la vague 2)
+                     `app/domain/entities/catalog/import_error.rb` + `test/domain/entities/catalog/import_error_test.rb` (motif `taken` — remonté par le Lot B)
                      `db/seeds/data/imports/drenas-2026.json` (**déjà produit** : 41 DRENA, noms de `db/seeds/data/drenas.yml`)
                      `app/infrastructure/repositories/school/drena_repository.rb` (`taken_names`, `insert_many` — *remonté du Lot B, voir plus bas*)
                      `test/infrastructure/repositories/school/drena_repository_import_test.rb`

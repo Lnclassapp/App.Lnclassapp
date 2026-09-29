@@ -13,7 +13,9 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Le Lot 0 a oublié deux contrats que le Lot B consomme : les textes de l'aide `_drenas`, ajoutés après le lancement de la vague 2, et le motif d'erreur `taken`, que la liste fermée `ImportError::ELEMENT` refusait. Leçon : le Lot 0 doit relire chaque code d'erreur et chaque clé de locale cités par l'ADR et l'UDR.
+- Le Lot B n'a pas pu fusionner la branche de chantier dans son worktree, car le contrôle de permissions de la session a refusé l'opération. Son travail a été intégré dans l'autre sens : fusion du lot dans la branche de chantier, puis vérification sur celle-ci.
+- `bin/rails db:prepare` exécute les seeds quand il crée une base. Les bases de test des worktrees contenaient donc 41 DRENA à l'ancien slug, ce qui a faussé les premiers essais du Lot B. Il faut préparer une base de worktree avec `db:create db:schema:load`.
 
 ## Ce qu'on a appris sur la codebase
 

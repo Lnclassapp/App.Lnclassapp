@@ -14,7 +14,12 @@ module Entities
 
       test "les erreurs d'enveloppe rejettent tout le fichier" do
         assert ImportError.new(path: "$.version", code: "version_unsupported").blocking?
-        assert_equal 17, ImportError::CODES.size
+        assert_equal 18, ImportError::CODES.size
+      end
+
+      # ADR-0055 : un nom de DRENA déjà pris sous un autre slug est une erreur de la ligne.
+      test "un nom déjà pris est une erreur d'élément" do
+        assert_not ImportError.new(path: "drenas[0].name", code: "taken").blocking?
       end
 
       test "un motif hors liste lève ArgumentError" do
