@@ -28,6 +28,27 @@ module Dtos
         assert_not too_long.valid?
         assert too_long.errors.of_kind?(:name, :too_long)
       end
+
+      # DR-08 (ADR-0055) : sans lettre ni chiffre latin, le slug serait « drena » nu.
+      test "refuse un nom sans lettre ni chiffre latin, avec le message de la locale" do
+        [ "???", "π", "« — »" ].each do |name|
+          input = DrenaInput.new(name:)
+
+          assert_not input.valid?, name
+          assert_equal [ :invalid ], input.errors.details[:name].pluck(:error), name
+        end
+        assert_equal [ "Le nom doit contenir au moins une lettre ou un chiffre latin." ],
+                     DrenaInput.new(name: "???").tap(&:valid?).errors[:name]
+        assert DrenaInput.new(name: "Bouaké 1").valid?
+        assert DrenaInput.new(name: "1").valid?
+      end
+
+      test "un nom absent n'est signalé que vide, pas invalide" do
+        input = DrenaInput.new(name: "  ")
+
+        assert_not input.valid?
+        assert_equal [ :blank ], input.errors.details[:name].pluck(:error)
+      end
     end
   end
 end

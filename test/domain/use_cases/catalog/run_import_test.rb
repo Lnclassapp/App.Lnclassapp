@@ -112,7 +112,7 @@ module UseCases
                  .call(report_id: 1)
       end
 
-      def schools(*names, drena: "abidjan-2")
+      def schools(*names, drena: "drena-abidjan-2")
         { "format" => "lnclass.schools", "version" => 1, "drena" => drena, "schools" => names.map { { "name" => it } } }
       end
 
@@ -238,7 +238,7 @@ module UseCases
 
         @reports = FakeReports.new
         @adapter = FakeImporter.new
-        run_import(mixed(schools_document(count: 10, drena: "abidjan-2")))
+        run_import(mixed(schools_document(count: 10, drena: "drena-abidjan-2")))
 
         assert_equal({ total_count: 10, imported_count: 7, skipped_count: 1, error_count: 2 }, @reports.finished[:counts])
       end

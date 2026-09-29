@@ -62,8 +62,8 @@ module UseCases
           SchoolEntity.new(id: 32, public_id: "sch-lmc", drena_id: 1, name: "Lycée Moderne", sigle: nil,
                            school_type: "private", cycle: "both", status: "active")
         )
-        @drenas = FakeDrenas.new(Drena.new(id: 1, public_id: "drn-abj1", slug: "abidjan-1", name: "Abidjan 1"),
-                                 Drena.new(id: 2, public_id: "drn-abj2", slug: "abidjan-2", name: "Abidjan 2"))
+        @drenas = FakeDrenas.new(Drena.new(id: 1, public_id: "drn-abj1", slug: "drena-abidjan-1", name: "Abidjan 1"),
+                                 Drena.new(id: 2, public_id: "drn-abj2", slug: "drena-abidjan-2", name: "Abidjan 2"))
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "field")
