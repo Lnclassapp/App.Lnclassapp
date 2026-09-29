@@ -139,6 +139,10 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: /Import lancé/
     assert_select "turbo-stream[action=update][target=modal] turbo-frame#import_status[data-controller='teams--import-status']"
     assert_select "turbo-stream[action=update][target=modal] [data-status=queued]"
+    # UDR-0054 §3.1: the tracking modal names the tab like the page of the report.
+    tab = "Import d'établissements · Équipe · Lnclass"
+    assert_select "turbo-stream[action=update][target=modal] #import-tracking-modal", 1
+    assert_select "turbo-stream[action=update][target=modal] [data-modal-document-title-value=\"#{tab}\"]"
     assert_select "turbo-stream[action=prepend][target=imports] tr#import_#{report.public_id}", text: /ecoles\.json/
     assert_equal @member.id, report.imported_by_id
   end
