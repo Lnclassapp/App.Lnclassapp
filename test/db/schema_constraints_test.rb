@@ -69,7 +69,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "referrals" => { "source" => %w[link sponsor] },
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms],
+    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
                           "status" => %w[queued validating importing completed rejected failed] },
     "classroom_plan_entries" => { "school_type" => %w[public private] }
   }.freeze

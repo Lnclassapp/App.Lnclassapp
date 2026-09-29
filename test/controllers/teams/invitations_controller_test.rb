@@ -61,7 +61,7 @@ class Teams::InvitationsControllerTest < ActionDispatch::IntegrationTest
     invitation = Orm::Invitation.sole
     assert_equal [ "team", "0100000009", "content", @admin.id ], [ invitation.kind, invitation.contact, invitation.team_role, invitation.invited_by_id ]
     assert_in_delta 72.hours.from_now, invitation.expires_at, 5.seconds
-    assert_equal "no-store", response.headers["Cache-Control"]
+    assert_secret_response(stream: true)
     assert_select "turbo-stream[action=append][target=toasts] template", text: /Invitation créée/
     assert_select "turbo-stream[action=update][target=modal] template" do
       link = css_select("input#invitation-link[readonly]").sole["value"]
@@ -118,6 +118,7 @@ class Teams::InvitationsControllerTest < ActionDispatch::IntegrationTest
     post teams_invitations_path, params: invitation_params
 
     assert_response :created
+    assert_secret_response
     assert_select "main#main turbo-frame#modal dialog#invitation-created-modal input#invitation-link[readonly]"
     assert_no_link_in_flash
   end

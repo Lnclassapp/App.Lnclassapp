@@ -3,11 +3,19 @@ require "test_helper"
 module Entities
   module Catalog
     class ImportKindTest < ActiveSupport::TestCase
-      test "quatre types fermés, sans import de DRENA" do
-        assert_equal %w[schools course_tree essentials exercises], ImportKind::KINDS
-        assert_not ImportKind.valid?("drenas")
+      test "cinq types fermés, dont les DRENA (ADR-0066)" do
+        assert_equal %w[schools course_tree essentials exercises drenas], ImportKind::KINDS
+        assert ImportKind.valid?("drenas")
         assert ImportKind.valid?(:schools)
-        assert_raises(ArgumentError) { ImportKind.fetch("drenas") }
+        assert_raises(ArgumentError) { ImportKind.fetch("regions") }
+      end
+
+      test "les DRENA : sans cible, 500 lignes, policy de l'organisation scolaire" do
+        drenas = ImportKind.fetch("drenas")
+
+        assert_equal [ "lnclass.drenas", 1, "drenas", nil, false, 500 ],
+                     [ drenas.format, drenas.version, drenas.roots_key, drenas.target_key, drenas.target_required, drenas.max_roots ]
+        assert_equal Policies::School::ManageSchoolPolicy, drenas.policy
       end
 
       test "format, racines, cible et plafond de chaque type" do
@@ -38,12 +46,12 @@ module Entities
 
         assert_equal "classrooms", ImportKind::CLASSROOM_GENERATION
         assert_not ImportKind.valid?("classrooms")
-        assert_equal %w[schools course_tree essentials exercises classrooms], ImportKind::REPORT_KINDS
+        assert_equal %w[schools course_tree essentials exercises drenas classrooms], ImportKind::REPORT_KINDS
         assert ImportKind.authorize_report(kind: "classrooms", actor: team).success?
         assert_equal :forbidden, ImportKind.authorize_report(kind: "classrooms", actor: teacher).code
         assert_equal :forbidden, ImportKind.authorize_report(kind: :exercises, actor: teacher).code
         assert ImportKind.authorize_report(kind: "exercises", actor: team).success?
-        assert_raises(KeyError) { ImportKind.authorize_report(kind: "drenas", actor: team) }
+        assert_raises(KeyError) { ImportKind.authorize_report(kind: "regions", actor: team) }
       end
     end
   end

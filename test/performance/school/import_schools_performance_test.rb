@@ -41,10 +41,10 @@ class School::ImportSchoolsPerformanceTest < ActiveSupport::TestCase
   end
 
   test "500 schools of the plan mix and their classrooms are imported in under two minutes, every join code distinct" do
-    import(schools_document(count: SCHOOLS, drena: "abidjan-2"))
+    import(schools_document(count: SCHOOLS, drena: "drena-abidjan-2"))
   end
 
   test "500 public lycées, the worst case, give 38 500 classrooms in under two minutes" do
-    assert_equal SCHOOLS * 77, import(schools_document(count: SCHOOLS, drena: "abidjan-2", college_ratio: 0, types: %w[public]))
+    assert_equal SCHOOLS * 77, import(schools_document(count: SCHOOLS, drena: "drena-abidjan-2", college_ratio: 0, types: %w[public]))
   end
 end

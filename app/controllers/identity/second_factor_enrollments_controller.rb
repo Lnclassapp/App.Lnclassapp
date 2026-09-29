@@ -7,6 +7,8 @@ module Identity
 
     allow_unverified_second_factor
     before_action :leave_when_enrolled
+    # La clé TOTP (y compris le 422 qui remontre le QR) et les codes de secours ne restent dans aucun cache.
+    secret_response :new, :create
 
     def new
       render_result begin_enrollment.call(session: current_session), success: lambda { |enrollment|
@@ -22,7 +24,7 @@ module Identity
       render_result confirm.call(session: current_session, dto: @form), form: :new, success: lambda { |codes|
         @backup_codes = codes
         respond_to do |format|
-          format.turbo_stream { render turbo_stream: turbo_stream.replace("second-factor-enrollment", template: "identity/second_factor_enrollments/backup_codes") }
+          format.turbo_stream { render turbo_stream: [ helpers.turbo_stream_secret_response, turbo_stream.replace("second-factor-enrollment", template: "identity/second_factor_enrollments/backup_codes") ] }
           format.html { render :backup_codes }
         end
       }

@@ -17,7 +17,7 @@ class Identity::PinRecoveryCodesControllerTest < ActionDispatch::IntegrationTest
     issue_code @student, as: :turbo_stream
 
     assert_response :success
-    assert_equal "no-store", response.headers["Cache-Control"]
+    assert_secret_response(stream: true)
     recovery = Orm::PinRecoveryCode.sole
     assert_equal [ @student.id, @teacher.id ], [ recovery.user_id, recovery.issued_by_id ]
     assert_in_delta 15.minutes.from_now, recovery.expires_at, 5.seconds
@@ -87,6 +87,7 @@ class Identity::PinRecoveryCodesControllerTest < ActionDispatch::IntegrationTest
     issue_code @student
 
     assert_response :created
+    assert_secret_response
     assert_select "main#main turbo-frame#modal dialog#pin-recovery-code-modal #pin-recovery-code"
     assert_no_code_in_flash css_select("#pin-recovery-code").sole.text.delete(" ")
   end
