@@ -54,6 +54,8 @@ Règles de l'import `drenas` (moteur de l'ADR-0039, inchangé) :
 | Erreurs de ligne | `name` vide (`blank`), de plus de 80 caractères (`too_long`), sans lettre latine (`invalid_value`, sinon le slug serait « drena » nu), déjà pris en base ou plus haut dans le fichier sous un autre slug (`taken`) |
 | Écriture | `insert_all` par lots, avec `public_id` et slug calculés avant l'insertion (ADR-0039 §2.1, §2.2) |
 
+Résolution par l'import des établissements : inchangée depuis l'ADR-0039. La valeur `drena` est comparée aux slugs après `parameterize` (« Drena-Abidjan-1 » trouve `drena-abidjan-1`), mais **aucun préfixe n'est ajouté** : `abidjan-1` ne trouve plus rien et donne `unknown_drena`.
+
 Le registre des types et la contrainte `import_reports_kind_values` passent à cinq valeurs : `schools`, `course_tree`, `essentials`, `exercises` et `drenas`.
 
 ## 5. Conséquences

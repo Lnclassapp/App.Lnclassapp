@@ -7,6 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-09-29 | Le repository des DRENA (`taken_names`, `insert_many`) remonte du Lot B au Lot 0 | `test/architecture/port_contracts_test.rb` exige qu'un adaptateur implémente toute méthode de son port : déclarer le port sans l'implémenter rendrait le Lot 0 rouge | Non |
+| 2026-09-29 | L'import des écoles garde la comparaison après `parameterize` (ADR-0039) : « Drena-Abidjan-1 » résout, `abidjan-1` non | « Slug exact » voulait dire « sans préfixe ajouté », pas « sans normalisation » ; précisé dans l'ADR-0055 §4 | Oui (ADR-0055 §4) |
 | 2026-09-29 | Plafond du fichier de DRENA à 500 lignes, celui des établissements reste à 5 000 | Le porteur s'inquiétait d'une limite trop basse pour ses plus de 3 000 écoles : les 500 lignes ne concernent que les DRENA, et ses 3 851 écoles tiennent dans les 5 000 | Oui (ADR-0055 §4) |
 
 ## Ce qui a dérapé
@@ -34,6 +35,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
+| `test/domain/use_cases/identity/register_teacher_test.rb` construit encore des DRENA factices aux slugs `abidjan-1`, `abidjan-2` | Le test ne dépend pas du format du slug et passe ; le réécrire élargirait le lot | aucun (cosmétique) |
 | Index des UDR incomplet (0008 à 0040 absentes) | Hors périmètre ; seule la ligne 0041 est ajoutée | à ouvrir |
 
 ## Clôture
