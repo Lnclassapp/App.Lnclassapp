@@ -7,8 +7,11 @@
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-17**, bloque la V1 |
 | **Remplace** | [ADR-0012](./0012-deep-modules-et-strict-cqrs.md) §3.3 · [ADR-0020](./0020-optimisations-bulk-insert-donnees-catalogue.md), sauf §2.1 et §2.2 |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0066](./0066-import-des-drena-et-slug-prefixe.md) |
 
 ---
+
+> ⚠️ **Amendé par l'[ADR-0066](./0066-import-des-drena-et-slug-prefixe.md)** : les DRENA s'importent désormais (cinquième type `drenas`), et leur slug est préfixé `drena-`. Les exemples ci-dessous qui citent `abidjan-1` doivent se lire `drena-abidjan-1`.
 
 ## 1. Contexte et problématique
 

@@ -23,7 +23,7 @@ module UseCases
 
           drena.id = 12
           drena.public_id = "pub12345678901"
-          drena.slug = drena.name.parameterize
+          drena.slug = Entities::School::Drena.slug_for(drena.name)
           @created << drena
           Shared::Result.success(drena)
         end
@@ -51,7 +51,7 @@ module UseCases
 
         assert result.success?
         assert_equal "Abidjan 1", result.value.name
-        assert_equal "abidjan-1", result.value.slug
+        assert_equal "drena-abidjan-1", result.value.slug
         assert_equal [ result.value ], @drenas.created
         assert_equal 1, @transaction.calls
         assert_equal [ { action: "school.changed", actor_id: 7, at: NOW, subject_type: "Drena", subject_id: 12,
