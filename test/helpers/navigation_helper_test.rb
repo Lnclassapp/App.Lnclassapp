@@ -124,4 +124,27 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil user.detail
     assert_nil user.avatar_url
   end
+
+  # UDR-0054 §3.2 — the back link returns to the filtered list the person came from, and nowhere else.
+  test "back_href returns to the list the person came from, query string kept" do
+    request.env["HTTP_REFERER"] = "http://test.host/teams/schools?search=lyc%C3%A9e&status=active"
+
+    assert_equal "/teams/schools?search=lyc%C3%A9e&status=active", back_href("/teams/schools", from: "/teams/schools")
+  end
+
+  test "back_href falls back to its default without a referer, from another page or from another host" do
+    assert_equal "/teams/schools", back_href("/teams/schools", from: "/teams/schools")
+
+    {
+      "http://test.host/teams/schools/abc" => "another page",
+      "http://evil.example/teams/schools?search=x" => "another host",
+      "http://test.host/teams" => "a shorter path",
+      "not a uri at all ::" => "a malformed referer",
+      "mailto:x@y.ci" => "a referer without host"
+    }.each do |referer, reason|
+      request.env["HTTP_REFERER"] = referer
+
+      assert_equal "/teams/schools", back_href("/teams/schools", from: "/teams/schools"), reason
+    end
+  end
 end

@@ -1,0 +1,8 @@
+<%# 🌐 UI · components/_back_link — lien de retour, appelé par ui_back_link et ui_page_header(back:) %>
+<%# Rôle : un seul motif de retour, en tête de page, avant le h1 ; libellé = page d'arrivée, tronqué à 390 px %>
+<%# UDR  : 0054 (§3.2) %>
+<nav aria-label="<%= t("components.back_link.label") %>" class="mb-4 text-sm">
+  <a href="<%= href %>" class="inline-flex min-h-tap max-w-full items-center gap-1.5 font-medium text-mute transition hover:text-ink focus-visible:outline-2 focus-visible:outline-brand">
+    <%= ui_icon "chevron-left", variant: :mini, size: :sm %><span class="truncate"><%= label %></span>
+  </a>
+</nav>

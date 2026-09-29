@@ -14,10 +14,32 @@ fr:
       title: "Aucun devoir en attente"
       description: "Ce contenu est arrivé dans un frame paresseux, après son état de chargement."
       reload: "Recharger le frame"
+      autosubmit:
+        received: "Code reçu par le serveur : %{code}"
+      search:
+        count:
+          zero: "Aucune matière"
+          one: "1 matière"
+          other: "%{count} matières"
+        empty: "Aucune matière ne correspond"
+        cycles:
+          first: "Premier cycle"
+          second: "Second cycle"
+        items:
+          - name: "Mathématiques"
+            cycle: "first"
+          - name: "Français"
+            cycle: "first"
+          - name: "Physique-Chimie"
+            cycle: "second"
+          - name: "Sciences de la vie et de la Terre"
+            cycle: "second"
+          - name: "Histoire-Géographie"
+            cycle: "first"
     toast:
       message: "Notification envoyée par Turbo Stream à %{time}."
     shell:
-      title: "Shell — %{role}"
+      title: "Shell %{role}"
       names:
         student: "Awa Koné"
         teacher: "Mariam Traoré"
@@ -30,6 +52,7 @@ fr:
         school_admin: "Direction · Collège Saint-Viateur"
     index:
       title: "Design system Lnclass"
+      page_title: "Design system"
       eyebrow: "Guide de style"
       intro: "Chaque token et chaque composant, dans chacune de ses variantes et de ses états. Si ce n'est pas ici, ça n'existe pas : ajoutez-le ici d'abord."
       toc: "Sommaire"
@@ -50,6 +73,7 @@ fr:
         hotwire: "CRUD Hotwire"
         states: "États vide, erreur, chargement"
         pagination: "Pagination"
+        finishes: "Finitions"
         shell: "Shell par rôle"
       typography:
         display: "Faire grandir chaque élève"
@@ -211,3 +235,51 @@ fr:
         page: "Page %{page}"
       shell:
         preview: "Voir le shell et l'accueil"
+      # UDR-0054 — les briques des finitions, telles que les écrans les emploient
+      finishes:
+        api: "page_title(page) · document_title · ui_back_link(label, href:) · ui_page_header(back: { label:, href: }) · ui_info_tip(text, label:) · ui_copy_button(text, label:, copied:, failed:, aria_label:, variant:, size:, icon:) · ui_modal(document_title:) · ui_field(autofocus: true) · Stimulus autofocus, clipboard, autosubmit, search, download"
+        intro: "Titre de l'onglet, retour, auto-focus, infobulle, copie, envoi automatique et recherche pendant la frappe : une brique par finition, écrite une fois."
+        title:
+          label: "Titre de l'onglet (page_title)"
+        back:
+          label: "Retour (ui_back_link, ui_page_header back:)"
+          link: "Finitions"
+          title: "Lycée moderne de Cocody"
+          subtitle: "Le retour précède le titre et porte le nom de la page d'arrivée."
+        info_tip:
+          example: "Infobulle (ui_info_tip)"
+          label: "Taux de rendu"
+          text: "Part des devoirs rendus : devoirs rendus par les élèves ÷ (élèves × devoirs donnés). Un devoir est rendu quand l'élève a terminé au moins un exercice de ce devoir."
+        copy:
+          example: "Copier (ui_copy_button)"
+          label: "Copier le lien"
+          aria_label: "Copier le lien de la classe"
+          value: "https://lnclass.ci/c/KFM37"
+        download:
+          example: "Télécharger et imprimer (contrôleur download)"
+          save: "Télécharger"
+          print: "Imprimer"
+          saved: "Fichier de démonstration téléchargé."
+          content: |-
+            Codes de démonstration Lnclass
+            Chaque code ne sert qu'une fois.
+            abcd-1234
+            efgh-5678
+        autosubmit:
+          example: "Envoi automatique (contrôleur autosubmit, motif 6 chiffres)"
+          code: "Code à 6 chiffres"
+          submit: "Vérifier"
+        search:
+          example: "Recherche pendant la frappe (contrôleur search)"
+          label: "Rechercher une matière"
+          cycle: "Cycle"
+          all: "Tous les cycles"
+          submit: "Filtrer"
+        focus:
+          example: "Auto-focus d'une confirmation (contrôleur autofocus)"
+          intro: "La modale du CRUD Hotwire vise son premier champ ; une confirmation sans champ vise « Annuler », jamais la croix."
+          open: "Supprimer l'élément"
+          title: "Supprimer l'élément ?"
+          body: "L'élément de démonstration disparaîtra de la liste."
+          cancel: "Annuler"
+          confirm: "Supprimer"
