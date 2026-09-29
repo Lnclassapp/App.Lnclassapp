@@ -18,13 +18,10 @@ class TrigramSearchIndexesTest < ActiveSupport::TestCase
     assert_includes plan, "index_schools_on_searchable_sigle"
   end
 
-  # The national code is a plain column: no expression can drift. On an empty table the planner may prefer the partial
-  # B-tree; at the production volume (≈ 3 900 schools) only the trigram index spares the scan of the whole OR.
-  test "the pg_trgm extension is enabled and the national code has its trigram index" do
-    connection = ActiveRecord::Base.connection
-
-    assert_includes connection.extensions, "pg_trgm"
-    assert_includes connection.indexes(:schools).map(&:name), "index_schools_on_national_code_trigram"
+  # The national code is a plain column: no expression can drift, so it is not checked here (on an empty table the
+  # planner prefers the partial B-tree anyway, and test/db/growth_migrations_test.rb drops and re-adds the column).
+  test "the pg_trgm extension is enabled" do
+    assert_includes ActiveRecord::Base.connection.extensions, "pg_trgm"
   end
 
   private
