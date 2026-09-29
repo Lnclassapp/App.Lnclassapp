@@ -106,6 +106,7 @@ Ce qui reste dans le pilotage « année » (≈ 250 ms de SQL) : les élèves ac
 
 - **`classroom_assignments (assigned_at)`** : gain de 1 ms sur 7 jours (8,7 → 7,6 ms), nul sur l'année. Le cycle dit d'annuler un levier marginal. Il est gardé parce que le porteur l'a demandé et que l'ADR-0062 l'avait décidé : la table n'est jamais purgée, et sans index le comptage de la semaine parcourt les devoirs de toutes les années. **À réévaluer** si l'écriture des devoirs en pâtit.
 - **Index trigrammes des établissements** : aucun gain au volume du bench (504 établissements : le planificateur garde le parcours séquentiel, 3 ms). Gardés sur la mesure au volume de la production (≈ 3 900 établissements, ci-dessus).
+- **Recherches arrivées avec `origin/Develop` (#95, `Queries::Shared::TextSearch`)** : le catalogue (`courses.name`, ≈ 200 cours, 5 ms de SQL au bench) et « Chercher un élève » dans une classe (`concat_ws` du nom, filtré après la classe, 55 élèves au plus). **Pas d'index trigramme** : les deux lectures sont bornées par construction, un index n'y changerait rien.
 - **Réécriture des « élèves actifs »** en `users WHERE id IN (sessions de la période)` : 67 → 55 ms sur l'année, 31 → 30 ms sur 7 jours. Marginal : **non appliquée**.
 - **Cache court du pilotage** : d'abord écarté (ADR-0062, option B). Après la mesure (vue « année » à 304 ms en p95), le porteur l'a retenu le 2026-09-29 pour la seule vue « année », 5 minutes (lot 2c, second amendement de l'ADR-0062). 7 et 30 jours restent en direct.
 
@@ -113,6 +114,7 @@ Ce qui reste dans le pilotage « année » (≈ 250 ms de SQL) : les élèves ac
 
 - Premier lancement en mode production : échec au démarrage, parce que `config/storage.yml` (service `railway`) exige `BUCKET_NAME`. Contourné par des variables factices : Active Storage n'est jamais appelé par les écrans mesurés.
 - **Mesures faussées par la charge.** Un autre agent (`finitions-ux`) jouait ses tests système en même temps (charge de 5 à 20 sur 4 vCPU). Une série prise sous charge donnait le pilotage 7 j à 214 ms au lieu de 190 et « Établissements, recherche » à 50 ms au lieu de 38. La mesure « après » retenue attend une charge sous 1,5 avant chaque exécution (`bench_quiet`, même script, même jeu).
+- **Suite de tests cassée par un état de base laissé à moitié migré.** Pendant une passe, `origin/Develop` a été fusionné dans la branche par un autre acteur et d'autres suites ont tourné dans le même worktree, donc sur les mêmes bases de test. `GrowthMigrationsTest` a échoué entre son « down » et son « up » et a laissé la base d'un worker sans `schools.national_code` : 587 erreurs à la passe suivante, la base parallèle n'étant pas rechargée (empreinte du schéma inchangée). Corrigé par un `teardown` qui rejoue « up » si le test s'est arrêté après « down », et par la suppression des bases `_test_wt_perf_0…3`.
 - Deuxième lancement du bench dans la même minute : `POST /session` renvoie un 429 (`rate_limit to: 5, within: 1.minute`, par adresse). Corrigé par une adresse distante tirée au hasard pour chaque compte.
 
 ## Ce qu'on a appris sur la codebase

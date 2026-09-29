@@ -19,11 +19,15 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
     order = direction == :down ? MIGRATIONS.reverse : MIGRATIONS + LATER
     changing_schema { ActiveRecord::Migration.suppress_messages { order.each { it.new.migrate(direction) } } }
     [ Orm::TeacherProfile, Orm::School ].each(&:reset_column_information)
+    @down = direction == :down
   end
 
   def school_rows = Orm::School.where(id: @school_ids).order(:id).pluck(:id, :name, :school_code, :status, :drena_id)
 
   teardown do
+    # A failure between « down » and « up » must not leave this worker's database without the growth tables: every
+    # later test would fail on a missing column.
+    migrate(:up) if @down
     Orm::TeacherSchool.where(teacher_id: @teacher_ids).delete_all
     Orm::TeacherProfile.where(user_id: @teacher_ids).delete_all
     Orm::User.where(id: @teacher_ids).delete_all
