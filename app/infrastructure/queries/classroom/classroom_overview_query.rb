@@ -13,6 +13,8 @@ module Queries
       COURSE_COLUMNS = %w[courses.id courses.slug courses.name courses.subtitle levels.name series.name materials.name
                           materials.category].freeze
       STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact].freeze
+      # Tri alphabétique français, indépendant de la collation de la base (en C, « É » passerait après « Z »).
+      COURSE_ORDER = Arel.sql('courses.name COLLATE "fr-x-icu"')
 
       # → Overview | nil
       def call(public_id:, show_roster:)
@@ -28,7 +30,7 @@ module Queries
       def courses(classroom_id)
         assigned = Orm::ClassroomAssignment.where(classroom_id:, assignable_type: "Course", status: "active").select(:assignable_id)
         rows = Orm::Course.joins(:level, :material).left_joins(:series).where(id: assigned, status: "published")
-                          .order(:name).pluck(*COURSE_COLUMNS)
+                          .order(COURSE_ORDER).pluck(*COURSE_COLUMNS)
         essentials = Orm::Essential.where(course_id: rows.map(&:first), status: "published").group(:course_id).count
 
         rows.map do |id, slug, name, subtitle, level_name, series_name, material_name, material_category|
