@@ -1,5 +1,6 @@
 <%# 🌐 UI · teams/staff_invitations/create — succès de l'invitation de la direction %>
 <%# Rôle : toast « Invitation créée », le lien remplace le formulaire dans la modale, affiché une seule fois %>
-<%# ADR  : 0038, 0065 · UDR : 0019, 0052 %>
+<%# ADR  : 0031, 0038, 0065 · UDR : 0019, 0052 %>
+<%= turbo_stream_secret_response %>
 <%= turbo_stream_toast t(".created"), type: :success %>
 <%= turbo_stream.update "modal", partial: "created", locals: { invitation: @invitation, school: @school, url: @invitation_url } %>

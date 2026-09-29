@@ -1,21 +1,21 @@
 # 🌐 DELIVERY · Teams::InvitationsController
 # Rôle : un admin de l'équipe invite un membre en modale ; le lien s'affiche une fois dans la modale, jamais dans un flash
-# ADR  : 0026, 0028, 0038 · UDR : 0006, 0019
+# ADR  : 0026, 0028, 0031, 0038 · UDR : 0006, 0019
 module Teams
   class InvitationsController < BaseController
     before_action :authorize_invitation, only: :new
+    secret_response :create
 
     def new
       @form = Dtos::Identity::TeamInvitationInput.new
     end
 
-    # Succès : toast, la modale montre le lien ; repli HTML : la page `created`. Le lien ne doit rester dans aucun cache.
+    # Succès : toast, la modale montre le lien ; repli HTML : la page `created`. Le lien ne reste dans aucun cache (secret_response).
     def create
       @form = form_input
       render_result invite.call(actor: current_actor, dto: @form), form: :new, success: lambda { |invited|
         @invitation = invited.invitation
         @invitation_url = invitation_url(invited.token)
-        response.headers["Cache-Control"] = "no-store"
         respond_to do |format|
           format.turbo_stream
           format.html { render :created, status: :created }
