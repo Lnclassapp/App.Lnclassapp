@@ -6,7 +6,8 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-09-29 | Le repository des DRENA (`taken_names`, `insert_many`) remonte du Lot B au Lot 0 | `test/architecture/port_contracts_test.rb` exige qu'un adaptateur implémente toute méthode de son port : déclarer le port sans l'implémenter rendrait le Lot 0 rouge | Non |
+| 2026-09-29 | Plafond du fichier de DRENA à 500 lignes, celui des établissements reste à 5 000 | Le porteur s'inquiétait d'une limite trop basse pour ses plus de 3 000 écoles : les 500 lignes ne concernent que les DRENA, et ses 3 851 écoles tiennent dans les 5 000 | Oui (ADR-0055 §4) |
 
 ## Ce qui a dérapé
 
@@ -18,7 +19,10 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- La CI exige 100 % de couverture des lignes **et** des branches (`config/ci.rb`, ADR-0024) : chaque branche d'un adaptateur d'import doit avoir son test.
+- `config/database.yml` suffixe le nom de la base par le nom du worktree : chaque worktree de lot a sa propre base.
+- Le conteneur de la session avait Ruby 3.3.6, alors que `.ruby-version` exige 3.4.9 : il a fallu l'installer avec `rbenv install`, et démarrer PostgreSQL avec son rôle `dev-rails`.
+- L'index des UDR (`docs/decisions/udr/README.md`) ne liste que 0001 à 0007, alors que les fichiers vont jusqu'à 0040.
 
 ## Dette laissée derrière
 
@@ -26,7 +30,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Index des UDR incomplet (0008 à 0040 absentes) | Hors périmètre ; seule la ligne 0041 est ajoutée | à ouvrir |
 
 ## Clôture
 

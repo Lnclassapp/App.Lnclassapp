@@ -32,6 +32,8 @@ Lot 0 — SOCLE (séquentiel) : règle du slug, 5e type d'import, port, migratio
                      `config/locales/teams/imports.fr.yml` (`error_codes.taken`, `index.subtitle`)
                      `config/locales/teams/drenas.fr.yml` (`index.import`, `index.subtitle`, `index.empty_description`, `form.name_hint_new`, erreur « nom sans lettre latine »)
                      `db/seeds/data/imports/drenas-2026.json` (**déjà produit** : 41 DRENA, noms de `db/seeds/data/drenas.yml`)
+                     `app/infrastructure/repositories/school/drena_repository.rb` (`taken_names`, `insert_many` — *remonté du Lot B, voir plus bas*)
+                     `test/infrastructure/repositories/school/drena_repository_import_test.rb`
                      `test/domain/entities/school/drena_test.rb`
                      `test/domain/entities/catalog/import_kind_test.rb`
                      `test/db/schema_constraints_test.rb`
@@ -72,12 +74,10 @@ Lot 0 — SOCLE (séquentiel) : règle du slug, 5e type d'import, port, migratio
 
 - **Couche**       : domaine + infrastructure + delivery (job) + ui
 - **Fichiers**     : `app/domain/use_cases/school/import_drenas.rb` (adaptateur `UseCases::Catalog::Importer`, `KIND = "drenas"`)
-                     `app/infrastructure/repositories/school/drena_repository.rb` (`insert_many`, `taken_names`)
                      `app/jobs/school/import_drenas_job.rb`
                      `app/views/teams/imports/kinds/_drenas.html.erb`
                      `app/views/teams/drenas/index.html.erb` (bouton « Importer des DRENA » avant « Nouvelle DRENA »)
                      `test/domain/use_cases/school/import_drenas_test.rb`
-                     `test/infrastructure/repositories/school/drena_repository_import_test.rb`
                      `test/jobs/school/import_drenas_job_test.rb`
                      `test/controllers/teams/drena_imports_controller_test.rb`
                      `test/system/teams/drena_import_test.rb`
@@ -128,8 +128,8 @@ Aucun critère orphelin.
 | `app/domain/ports/school/drena_repository_port.rb` | Lot 0 |
 | `db/seeds/data/imports/drenas-2026.json` | Lot 0 (lu par B et C, jamais modifié) |
 | `app/infrastructure/orm/drena.rb` | Lot A |
-| `app/infrastructure/repositories/school/drena_repository.rb` | Lot B |
-| `test/infrastructure/repositories/school/drena_repository_test.rb` | Lot A — B écrit ses tests dans `drena_repository_import_test.rb` |
+| `app/infrastructure/repositories/school/drena_repository.rb` | Lot 0 — remonté du Lot B : `test/architecture/port_contracts_test.rb` exige que l'adaptateur implémente chaque méthode du port dès qu'elle est déclarée ; port et implémentation vont donc ensemble |
+| `test/infrastructure/repositories/school/drena_repository_test.rb` | Lot A — les tests d'écriture en masse sont dans `drena_repository_import_test.rb` (Lot 0) |
 | `test/controllers/teams/imports_controller_test.rb` | Lot A — B écrit DR-07 dans `drena_imports_controller_test.rb` |
 | `test/system/teams/drenas_test.rb`, `import_flow_test.rb` | Lot A — B écrit DR-10 dans `drena_import_test.rb` |
 | `app/views/teams/imports/kinds/_schools.html.erb` | Lot A |
