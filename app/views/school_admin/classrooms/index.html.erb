@@ -1,0 +1,47 @@
+<%# 🌐 UI · school_admin/classrooms/index — « Travail des élèves », accueil de la direction (DS-05, DS-07, DS-10) %>
+<%# Rôle : une ligne par classe de l'année ; le tableau défile dans sa carte sur téléphone, jamais la page ; aucun bouton %>
+<%# ADR  : 0065 · UDR : 0005, 0052 · « — » (aria-hidden) suivi de « non calculé » (sr-only) quand un chiffre n'a pas de sens %>
+<% content_for :title, t(".page_title") %>
+<% content_for :nav_key, "student_work" %>
+<% percent = lambda do |value|
+     next t("school_admin.classrooms.percent", value:) unless value.nil?
+
+     safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
+   end %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, year: @overview.school_year) %>
+
+<%= ui_card id: "student_work" do %>
+  <% if @overview.classrooms.empty? %>
+    <%= ui_empty_state title: t(".empty"), icon: "squares-2x2" %>
+  <% else %>
+    <div class="relative overflow-x-auto">
+      <table class="w-full min-w-xl text-left text-sm">
+        <caption class="sr-only"><%= t(".caption") %></caption>
+        <thead class="border-b border-line text-xs text-mute">
+          <tr>
+            <th scope="col" class="px-2 py-3 font-medium"><%= t(".columns.classroom") %></th>
+            <% %i[students assignments submission_rate average].each do |column| %>
+              <th scope="col" class="px-2 py-3 text-right font-medium"><%= t(".columns.#{column}") %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-line">
+          <% @overview.classrooms.each do |row| %>
+            <tr id="classroom_<%= row.public_id %>">
+              <th scope="row" class="px-2 py-2 font-normal">
+                <%= link_to row.name, school_admin_classroom_path(row.public_id),
+                      class: "inline-flex min-h-tap items-center font-medium text-ink hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+                <span class="block text-xs text-mute"><%= row.level_name %></span>
+              </th>
+              <td class="px-2 py-2 text-right tabular-nums"><%= row.students_count %></td>
+              <td class="px-2 py-2 text-right tabular-nums"><%= row.assignments_count %></td>
+              <td class="px-2 py-2 text-right tabular-nums"><%= percent.call(row.submission_rate) %></td>
+              <td class="px-2 py-2 text-right tabular-nums"><%= percent.call(row.average_percent) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-xs text-mute"><%= t(".average_rule") %></p>
+  <% end %>
+<% end %>

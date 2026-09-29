@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Authentication — session serveur, cookie signé, garde du second facteur et des rôles
 # Rôle : résout la session à chaque requête ; un compte team non vérifié n'a pas d'acteur et ne voit que le second facteur
-# ADR  : 0028, 0031, 0050
+# ADR  : 0028, 0031, 0050, 0065
 module Authentication
   extend ActiveSupport::Concern
 
@@ -10,7 +10,7 @@ module Authentication
   # Symbole de HomeDestination → route de l'accueil (UDR-0006, routes gelées du Lot 0a).
   HOME_ROUTES = {
     student_home: :student_home_path, teacher_home: :teacher_home_path, teacher_classrooms: :teacher_classrooms_path,
-    team_home: :team_home_path, pending_account: :pending_account_path
+    team_home: :team_home_path, school_admin_classrooms: :school_admin_classrooms_path, pending_account: :pending_account_path
   }.freeze
 
   included do
