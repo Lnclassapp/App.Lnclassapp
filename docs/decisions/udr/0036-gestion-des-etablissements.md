@@ -122,3 +122,9 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 ## Amendement du 2026-09-28 — code national et enseignants en attente (UDR-0050)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* La fiche montre le code national dans l'en-tête et le formulaire le modifie (facultatif, 6 chiffres, unique) ; la recherche porte aussi sur lui ; la section « Enseignants en attente » (Valider / Refuser) précède les enseignants rattachés quand il y a des demandes. Contrat : UDR-0050 §3.
+
+## Amendement du 2026-09-28 — inviter la direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md). Statut : `Proposé`. Contrat : [UDR-0052](0052-espace-direction-simple.md) §3.*
+
+- Le menu ⋮ `#school-header-actions` de la fiche gagne, en premier, « Inviter la direction » (`user-plus`, frame `modal`), absent pour un établissement non actif.

@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/_information — carte « Mes informations » (Queries::Identity::ProfileQuery::Row) %>
 <%# Rôle : nom, numéro groupé, informations du rôle, date d'inscription ; nom et numéro s'ouvrent dans le frame modal ; remplacée par profile_names/update %>
-<%# ADR  : 0055, 0060 · UDR : 0006, 0041, 0047 %>
+<%# ADR  : 0055, 0060, 0065 · UDR : 0006, 0041, 0047, 0052 %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
   <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
   <div class="mt-4 flex items-center gap-4">
@@ -11,8 +11,6 @@
         <%= ui_role_badge profile.role %>
         <% if profile.role == :team %>
           <%= ui_badge t(".second_factor_active"), tone: :success, dot: true %>
-        <% elsif profile.role == :school_admin %>
-          <%= ui_badge t(".pending"), tone: :warning, dot: true %>
         <% end %>
       </div>
     </div>
@@ -57,6 +55,11 @@
       <div class="py-3">
         <dt class="text-mute"><%= t(".material") %></dt>
         <dd class="mt-0.5 font-medium text-ink"><%= profile.material_name || t(".missing") %></dd>
+      </div>
+    <% when :school_admin %>
+      <div class="py-3">
+        <dt class="text-mute"><%= t(".school") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= profile.school_name || t(".missing") %></dd>
       </div>
     <% when :team %>
       <div class="py-3">

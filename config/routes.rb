@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   draw :assessment
   draw :communication
   draw :teams
+  draw :school_admin
 end

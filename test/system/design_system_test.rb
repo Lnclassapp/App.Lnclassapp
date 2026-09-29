@@ -337,7 +337,7 @@ class DesignSystemTest < ApplicationSystemTestCase
       assert_no_selector "nav.fixed.bottom-0"
       assert_selector "header", text: t("shared.roles.#{role}")
       assert_selector "main h1", text: t("design.shell.names.#{role}").split.first
-      assert_selector "aside a[aria-current=page]", text: t("shared.navigation.home")
+      assert_selector "aside a[aria-current=page]", text: t("shared.navigation.#{destinations.first.first}")
     end
 
     resize_to(390, 844) do
