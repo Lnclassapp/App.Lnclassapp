@@ -158,7 +158,8 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
 
     get team_dashboard_path(q: "kouadio", period: "30d", drena: drena.public_id)
 
-    assert_select "#team_dashboard_search_card form[data-turbo-frame=#{SEARCH_FRAME}][data-turbo-action=advance]" do
+    assert_select "#team_dashboard_search_card form[role=search][aria-label='#{tl("search.form_label")}']" \
+                  "[data-turbo-frame=#{SEARCH_FRAME}][data-turbo-action=advance]" do
       assert_select "input[type=hidden][name=period][value='30d']"
       assert_select "input[type=hidden][name=drena][value='#{drena.public_id}']"
       assert_select "input[name=q][value=kouadio]"

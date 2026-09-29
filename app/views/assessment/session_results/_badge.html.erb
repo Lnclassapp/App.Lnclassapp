@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/_badge — palier obtenu par la session : Bronze, Argent, Or, Diamant ou « Non acquis » %>
 <%# Rôle : médaillon et nom du palier, nommé en toutes lettres pour les lecteurs d'écran ; « Nouveau badge ! » si earned_now %>
-<%# ADR  : 0033 · UDR : 0007, 0023 %>
+<%# ADR  : 0033 · UDR : 0007, 0023, 0054 · les seuils des paliers en infobulle, juste après le nom %>
 <% name = badge_label(level) %>
 <div id="session_badge" role="group" aria-label="<%= level ? t(".label", level: name) : name %>"
      class="flex flex-col items-center gap-2 animate-slide-up">
@@ -8,7 +8,9 @@
         aria-hidden="true">
     <%= ui_icon level ? "trophy" : "lock-closed", variant: :solid, size: :xl %>
   </span>
-  <span class="font-display text-sm font-extrabold tracking-wide uppercase"><%= name %></span>
+  <div>
+    <span class="font-display text-sm font-extrabold tracking-wide uppercase"><%= name %></span><%= ui_info_tip t("shared.info_tips.badges"), label: t(".help") %>
+  </div>
   <% if earned_now %>
     <%= ui_badge t(".new"), tone: :brand, icon: "sparkles" %>
   <% end %>

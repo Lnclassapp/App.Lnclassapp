@@ -1,7 +1,8 @@
 <%# 🌐 UI · identity/second_factor_enrollments/backup_codes — les 10 codes de secours, montrés une seule fois %>
-<%# Rôle : rendu direct après l'activation (Turbo Stream ou HTML) ; jamais stocké dans le flash ni la session %>
-<%# ADR  : 0031 · UDR : 0005 %>
-<% content_for :title, t(".page_title") %>
+<%# Rôle : rendu direct après l'activation (hors cache, SecretResponse) ; télécharger, copier, imprimer au clic, puis « Je les ai gardés » %>
+<%# ADR  : 0031 · UDR : 0005, 0054 (§3.5, §3.7) %>
+<% page_title t(".page_title") %>
+<% file_content = [ t(".file.heading"), l(Date.current, format: :long), t(".file.once"), "", *@backup_codes ].join("\n") %>
 <main id="second-factor-enrollment" class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
   <div class="w-full max-w-md">
     <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "key", padding: :lg do %>
@@ -11,9 +12,26 @@
         <% end %>
       </ul>
       <p class="mt-4 text-sm text-mute"><%= t(".once") %></p>
-      <div class="mt-6">
-        <%= ui_button t(".done"), href: team_home_path, variant: :brand, full: true %>
+      <%# Rien ne part sans un clic : un téléchargement automatique peut être bloqué sans prévenir (iOS). Sans JavaScript,
+          les trois boutons restent cachés. %>
+      <div class="mt-4 flex flex-wrap gap-3 print:hidden" data-controller="download"
+           data-download-content-value="<%= file_content %>" data-download-filename-value="<%= t(".file.name") %>">
+        <%= ui_button t(".download"), variant: :secondary, size: :sm, icon: "arrow-down-tray", hidden: true,
+                                      data: { download_target: "button", action: "download#save" } %>
+        <%= ui_copy_button @backup_codes.join("\n"), label: t(".copy"), aria_label: t(".copy_label"),
+                                                     copied: t("shared.clipboard.copied_codes") %>
+        <%= ui_button t(".print"), variant: :secondary, size: :sm, icon: "printer", hidden: true,
+                                   data: { download_target: "button", action: "download#print" } %>
+        <template data-download-target="saved"><%= ui_toast t(".saved"), type: :success %></template>
       </div>
+      <%# La case n'a pas de `name` : rien n'est envoyé, le navigateur refuse seulement l'envoi tant qu'elle n'est pas cochée. %>
+      <form id="backup-codes-kept-form" action="<%= team_home_path %>" method="get" class="mt-6 space-y-4 print:hidden">
+        <label for="backup_codes_kept" class="flex min-h-tap cursor-pointer items-center gap-3 text-sm font-medium text-ink">
+          <input type="checkbox" id="backup_codes_kept" required class="<%= ComponentsHelper::FIELD_CHECKBOX %>">
+          <%= t(".kept") %>
+        </label>
+        <%= ui_button t(".continue"), type: :submit, variant: :brand, full: true %>
+      </form>
     <% end %>
   </div>
 </main>

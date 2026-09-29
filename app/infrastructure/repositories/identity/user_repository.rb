@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
 # Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur
-# ADR  : 0026, 0028, 0050, 0055
+# ADR  : 0026, 0028, 0050, 0055, 0065
 module Repositories
   module Identity
     class UserRepository
@@ -35,11 +35,17 @@ module Repositories
 
       def actor_for(user_id:)
         user = Orm::User.find(user_id)
-        school_id = Orm::TeacherSchool.where(teacher_id: user_id, primary: true).pick(:school_id)
-        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id:)
+        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id: school_id_of(user))
       end
 
       private
+
+      # L'école principale d'un enseignant ; le rattachement d'une direction (ADR-0065).
+      def school_id_of(user)
+        return user.school_staff&.school_id if user.role == "school_admin"
+
+        Orm::TeacherSchool.where(teacher_id: user.id, primary: true).pick(:school_id)
+      end
 
       def map(record)
         return if record.nil?

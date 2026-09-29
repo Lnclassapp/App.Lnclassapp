@@ -1,8 +1,8 @@
 <%# 🌐 UI · teams/schools/edit — modification d'un établissement, servie dans le frame « modal » %>
 <%# Rôle : hors frame, la même modale s'ouvre sur le shell ; échec re-rendu en 422 avec les erreurs et la saisie %>
-<%# ADR  : 0030, 0036 · UDR : 0006, 0036 %>
+<%# ADR  : 0030, 0036 · UDR : 0006, 0036, 0054 · l'onglet porte le titre de la modale tant qu'elle est ouverte %>
 <%= turbo_frame_tag "modal" do %>
-  <%= ui_modal title: t(".title"), id: "school-modal", size: :lg, open: true do |modal| %>
+  <%= ui_modal title: t(".title"), id: "school-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
     <% modal.footer do %>
       <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
       <%= ui_button t(".submit"), type: :submit, form: "school-form", icon: "check" %>

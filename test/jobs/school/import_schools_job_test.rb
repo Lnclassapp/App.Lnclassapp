@@ -22,7 +22,7 @@ class School::ImportSchoolsJobTest < ActiveJob::TestCase
     assert_equal [ "completed", 10, 10, 0, 0 ],
                  report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
     assert_equal({ "classrooms_created" => EXPECTED_CLASSROOMS }, report.details)
-    assert_equal 10, Orm::School.joins(:drena).where(drenas: { slug: "abidjan-2" }).count
+    assert_equal 10, Orm::School.joins(:drena).where(drenas: { slug: "drena-abidjan-2" }).count
     assert_equal EXPECTED_CLASSROOMS, Orm::Classroom.count
     notre_dame = Orm::School.find_by!(name: "Collège Notre Dame d'Afrique")
     assert_equal [ "CNDA", "private", "first", "active" ], [ notre_dame.sigle, notre_dame.school_type, notre_dame.cycle, notre_dame.status ]

@@ -36,7 +36,7 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
   end
 
   test "a mixed file ends « Terminé » with exact counts and every error at its JSON path" do
-    file = json_file(mixed(schools_document(count: 10, drena: "abidjan-2")).to_json)
+    file = json_file(mixed(schools_document(count: 10, drena: "drena-abidjan-2")).to_json)
 
     with_fake_import_job(existing: [ "Lycée Moderne 9" ]) do
       assert_no_page_reload do
@@ -68,7 +68,8 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
         within "turbo-frame#import_status" do
           assert_text "Rejeté"
           assert_selector "[role=alert]", text: "rejeté en bloc"
-          assert_selector "#import_errors li", text: /\Aformat\s+Le format du fichier ne correspond pas/
+          assert_selector "#import_errors li",
+                          text: /\Aformat\s+Ce fichier est un import « Fiches essentielles » \(format lnclass\.essentials\), pas un import « Établissements »/
         end
       end
     end

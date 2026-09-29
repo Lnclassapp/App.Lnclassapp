@@ -1,4 +1,4 @@
-# Inscription enseignant par code d'établissement, et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0057, UDR-0007, UDR-0024, UDR-0044
+# Inscription enseignant par code d'établissement, et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0057, UDR-0007, UDR-0024, UDR-0044, UDR-0054
 fr:
   activemodel:
     attributes:
@@ -45,7 +45,8 @@ fr:
   identity:
     teacher_registrations:
       new:
-        page_title: "Inscription enseignant · Lnclass"
+        page_title: "Inscription enseignant"
+        logo_home: "Lnclass, accueil"
         welcome: "Bienvenue sur Lnclass"
         welcome_hint: "Créez votre compte enseignant en une minute, avec votre numéro de téléphone et un PIN à 4 chiffres."
         title: "Créer un compte enseignant"
@@ -70,6 +71,8 @@ fr:
         school_and_subject: "Établissement et matière"
         school_code_placeholder: "K7M-4QZ"
         school_code_hint: "6 caractères, transmis par votre établissement."
+        # À valider par le porteur dans la PR (UDR-0054 §3.4).
+        school_code_info_tip: "Code de 6 caractères donné par votre établissement ou par l'équipe Lnclass. Sans code, inscrivez-vous avec le code national."
         other_code: "Ce n'est pas votre établissement ? Saisir un autre code"
         material_prompt: "Choisissez votre matière"
         security: "Sécurité"

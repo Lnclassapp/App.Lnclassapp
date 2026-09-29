@@ -16,9 +16,9 @@ module Queries
         create_school(drena: abidjan)
         2.times { create_classroom(school: lycee) }
 
-        assert_equal [ DrenasQuery::Row.new(public_id: abidjan.public_id, slug: "abidjan-1", name: "Abidjan 1",
+        assert_equal [ DrenasQuery::Row.new(public_id: abidjan.public_id, slug: "drena-abidjan-1", name: "Abidjan 1",
                                             schools_count: 2, classrooms_count: 2),
-                       DrenasQuery::Row.new(public_id: yamoussoukro.public_id, slug: "yamoussoukro", name: "Yamoussoukro",
+                       DrenasQuery::Row.new(public_id: yamoussoukro.public_id, slug: "drena-yamoussoukro", name: "Yamoussoukro",
                                             schools_count: 0, classrooms_count: 0) ],
                      @query.call
       end
@@ -28,7 +28,7 @@ module Queries
         create_classroom(school: create_school(drena:))
         create_drena(name: "Abidjan 2")
 
-        assert_equal DrenasQuery::Row.new(public_id: drena.public_id, slug: "abidjan-1", name: "Abidjan 1",
+        assert_equal DrenasQuery::Row.new(public_id: drena.public_id, slug: "drena-abidjan-1", name: "Abidjan 1",
                                           schools_count: 1, classrooms_count: 1),
                      @query.find(public_id: drena.public_id)
         assert_nil @query.find(public_id: "inconnu")

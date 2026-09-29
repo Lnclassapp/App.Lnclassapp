@@ -25,6 +25,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "drenas" => [ [ %w[name], nil ] ],
     "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ] ],
     "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ] ],
+    "school_staffs" => [ [ %w[user_id], nil ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
     "series" => [ [ %w[name], nil ] ],
     "level_series" => [ [ %w[level_id series_id], nil ] ],
@@ -68,7 +69,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "referrals" => { "source" => %w[link sponsor] },
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms],
+    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
                           "status" => %w[queued validating importing completed rejected failed] },
     "classroom_plan_entries" => { "school_type" => %w[public private] }
   }.freeze
@@ -162,6 +163,26 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     end
     request.update_columns(status: "rejected", decided_at: Time.current, decided_via: "team")
     assert_equal "rejected", request.reload.status
+  end
+
+  # ADR-0065 : un établissement par compte de direction ; une invitation de direction a une école, pas de fonction.
+  test "DS-03: a school admin is attached to one school only" do
+    school = create_school
+    admin = create_school_admin(school:)
+
+    assert_raises(ActiveRecord::RecordNotUnique) { Orm::SchoolStaff.create!(user: admin, school: create_school) }
+    assert_equal %w[created_at id invited_by_id school_id user_id], connection.columns("school_staffs").map(&:name).sort
+  end
+
+  test "DS-01: a school staff invitation needs a school, not a position" do
+    school = create_school
+
+    assert_nil create_invitation(kind: "school_staff", school:, position: nil).position
+    assert_raises(ActiveRecord::CheckViolation) do
+      Orm::Invitation.transaction(requires_new: true) do
+        Orm::Invitation.create!(kind: "school_staff", contact: "0700000009", token_digest: "x" * 64, expires_at: 1.day.from_now)
+      end
+    end
   end
 
   test "every exposed table has a 14 character public_id with a unique index" do

@@ -1,24 +1,27 @@
 <%# 🌐 UI · teams/account_lookups/show — débloquer un compte : recherche par numéro exact (ID-15, F-07) %>
-<%# Rôle : formulaire GET qui vise le frame « account_lookup » et avance l'URL ; seul le frame est renvoyé à ses requêtes %>
-<%# ADR  : 0031, 0032 · UDR : 0006, 0020 %>
-<% content_for :title, t(".page_title") %>
+<%# Rôle : formulaire GET qui vise le frame « account_lookup » ; part seul au numéro complet (search, mode digits) %>
+<%# ADR  : 0031, 0032 · UDR : 0006, 0020, 0054 · seul le frame est renvoyé à ses requêtes %>
+<% page_title t(".page_title") %>
 <% unless lookup_frame_request? %>
-  <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
-  <%= form_with url: teams_account_lookup_path, method: :get, id: "account-lookup-form", role: "search", "aria-label": t(".search_label"),
-                data: { turbo_frame: "account_lookup", turbo_action: "advance" },
+  <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"), back: { label: t(".back"), href: team_home_path } %>
+  <%= form_with url: teams_account_lookup_path, method: :get, id: "account-lookup-form",
+                html: { role: "search", "aria-label": t(".search_label") },
+                data: { turbo_frame: "account_lookup", turbo_action: "advance",
+                        controller: "search", search_digits_value: true, search_min_length_value: 0 },
                 class: "mb-6 rounded-card border border-line bg-white p-4 shadow-card" do %>
     <%= label_tag "account_lookup_contact", t(".contact"), class: "mb-1.5 block text-sm font-medium text-ink" %>
     <div class="flex flex-col gap-3 sm:flex-row">
       <%= telephone_field_tag :contact, @contact, id: "account_lookup_contact", required: true, maxlength: 20, inputmode: "tel",
                               autocomplete: "off", placeholder: t(".contact_placeholder"), "aria-describedby": "account_lookup_contact_hint",
+                              data: { autofocus_target: "field", action: "search#queue" },
                               class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap sm:flex-1", ComponentsHelper::FIELD_STATES[:valid]) %>
-      <%= ui_button t(".submit"), type: :submit, icon: "magnifying-glass" %>
+      <%= ui_button t(".submit"), type: :submit, icon: "magnifying-glass", data: { search_target: "button" } %>
     </div>
     <p id="account_lookup_contact_hint" class="mt-1.5 text-sm text-mute"><%= t(".contact_hint") %></p>
   <% end %>
 <% end %>
 
-<%= turbo_frame_tag "account_lookup", data: { turbo_action: "advance" } do %>
+<%= turbo_frame_tag "account_lookup", class: "block transition-opacity aria-busy:opacity-50", data: { turbo_action: "advance" } do %>
   <% if @account %>
     <%= render "result", account: @account %>
   <% elsif @contact.present? %>

@@ -39,7 +39,7 @@ module UseCases
       end
 
       def delete(public_id: "abj1abj1abj1ab", actor: TEAM, with_schools: false)
-        @drena = Entities::School::Drena.new(id: 12, public_id: "abj1abj1abj1ab", slug: "abidjan-1", name: "Abidjan 1")
+        @drena = Entities::School::Drena.new(id: 12, public_id: "abj1abj1abj1ab", slug: "drena-abidjan-1", name: "Abidjan 1")
         @drenas = FakeDrenas.new(@drena, with_schools:)
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new

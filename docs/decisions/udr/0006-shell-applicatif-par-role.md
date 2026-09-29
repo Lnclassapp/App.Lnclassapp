@@ -99,3 +99,21 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - **`team_dashboard_path` devient actif** : la route `GET /teams/dashboard` est dessinée (V4, `pilotage-equipe`). L'entrée « Pilotage » (icône `chart-bar`) de la navigation `team` mène à la page de l'UDR-0049 et porte `aria-current="page"` quand elle est ouverte.
 - La navigation `team` n'a plus aucune entrée inactive ; elle garde ses **5 destinations**, le maximum du §4. Aucune destination n'est ajoutée.
 - Preuve : `test/system/role_homes_test.rb` (l'équipe ouvre ses cinq destinations, aucune inactive) et `test/system/teams/dashboard_test.rb`.
+
+## Amendement du 2026-09-28 — navigation de la direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md), [UDR-0052](0052-espace-direction-simple.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0052 acceptée, cette section fait foi en cas d'écart.*
+
+- La navigation `school_admin` passe de quatre entrées inactives à **deux entrées actives** : « Travail des élèves » `school_admin_classrooms_path` (icône `chart-bar`), puis « Enseignants » `school_admin_teachers_path` (icône `user-group`). Accueil, Classes et Élèves disparaissent.
+- La direction n'a pas d'accueil propre : elle arrive sur « Travail des élèves ». Les sections d'accueil de la direction ne servent plus qu'à la page de démonstration du shell.
+- Preuve : `test/helpers/navigation_helper_test.rb` et `test/system/school_admin/student_work_test.rb`.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Titre du document** : `layouts/application` rend `document_title` (« Page · Espace · Lnclass », espace = rôle connecté, aucun pour une page publique). Chaque vue appelle `page_title` ; `content_for :title` disparaît (UDR-0054 §3.1).
+- **Retour** : une page imbriquée qui n'est pas une destination de la navigation déclare son retour par `ui_page_header(back:)` ou `ui_back_link` (UDR-0054 §3.2). Le logo des pages publiques mène à l'accueil public.
+- **Auto-focus** : `layouts/application` pose le contrôleur `autofocus` sur `<body>` ; après un 422, le focus va au premier champ en erreur (UDR-0054 §3.3).
+- **Toasts** : la région `#toasts` porte `print:hidden`.
+- **CRUD Hotwire** : la modale chargée dans le frame vise son premier champ, jamais la croix ; une confirmation vise « Annuler ».

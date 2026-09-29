@@ -101,7 +101,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
         click_on t("teams.drenas.new.submit")
       end
       assert_toast "DRENA « Abidjan 1 » créée."
-      assert_selector "#drenas tr", text: /Abidjan 1\s+abidjan-1/
+      assert_selector "#drenas tr", text: /Abidjan 1\s+drena-abidjan-1/
     end
 
     team_sets_the_classroom_plan
@@ -139,9 +139,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     click_on t("identity.sessions.new.submit")
 
     secret = find("#second-factor-secret", wait: SIGN_IN_WAIT).text.delete(" ")
+    # The code leaves by itself at the sixth digit; the codes go on once they are kept (UDR-0054 §3.6, §3.7).
     fill_in "second_factor[code]", with: ROTP::TOTP.new(secret).now
-    click_on t("identity.second_factor_enrollments.new.submit")
-    click_on t("identity.second_factor_enrollments.backup_codes.done"), wait: SIGN_IN_WAIT
+    check t("identity.second_factor_enrollments.backup_codes.kept"), wait: SIGN_IN_WAIT
+    click_on t("identity.second_factor_enrollments.backup_codes.continue")
 
     assert_selector "main#main", wait: SIGN_IN_WAIT
     assert_current_path team_home_path
@@ -151,7 +152,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # nothing else exists in the referential.
   def import_the_lycee
     file = json_file("ecoles", {
-      "format" => "lnclass.schools", "version" => Entities::Catalog::ImportKind::VERSION, "drena" => "abidjan-1",
+      "format" => "lnclass.schools", "version" => Entities::Catalog::ImportKind::VERSION, "drena" => "drena-abidjan-1",
       "schools" => [ { "name" => SCHOOL, "schoolsigle" => "LCA", "schoolstatus" => "active", "schooltype" => "public" } ]
     })
 

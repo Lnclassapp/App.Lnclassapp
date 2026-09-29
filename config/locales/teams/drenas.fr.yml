@@ -12,15 +12,18 @@ fr:
               blank: "Indiquez le nom de la DRENA."
               too_long: "Le nom compte %{count} caractères au plus."
               taken: "Une DRENA porte déjà ce nom."
+              invalid: "Le nom doit contenir au moins une lettre ou un chiffre latin."
   teams:
     drenas:
       index:
         page_title: "DRENA"
         title: "DRENA"
-        subtitle: "Les directions régionales de l'éducation nationale. Les établissements s'importent dans une DRENA, par son slug."
+        back: "Accueil"
+        subtitle: "Les directions régionales de l'éducation nationale. Les établissements s'importent dans une DRENA, par son slug drena-…"
         new: "Nouvelle DRENA"
+        import: "Importer des DRENA"
         empty_title: "Aucune DRENA pour l'instant"
-        empty_description: "Créez la première DRENA : ses établissements s'importeront ensuite par son slug."
+        empty_description: "Créez la première DRENA, ou importez-les toutes depuis un fichier JSON."
         columns:
           name: "Nom"
           slug: "Slug"
@@ -38,7 +41,7 @@ fr:
         confirm_delete: "Supprimer la DRENA"
       form:
         name_placeholder: "Ex. : Abidjan 1"
-        name_hint_new: "Le slug est tiré du nom à la création, puis ne change plus : c'est lui que citent les fichiers d'import."
+        name_hint_new: "Le slug est tiré du nom et préfixé par drena- à la création, puis ne change plus : c'est lui que citent les fichiers d'import."
         name_hint_edit_html: "Le slug <code class=\"rounded-sm bg-mist px-1.5 py-0.5 font-mono text-ink\">%{slug}</code> ne change pas : les fichiers d'import qui le citent restent valides."
       new:
         title: "Nouvelle DRENA"

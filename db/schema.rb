@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_29_200200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
@@ -96,6 +97,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.datetime "updated_at", null: false
     t.index ["archived_by_id"], name: "index_classroom_assignments_on_archived_by_id"
     t.index ["assignable_type", "assignable_id"], name: "idx_on_assignable_type_assignable_id_89cda988b0"
+    t.index ["assigned_at"], name: "index_classroom_assignments_on_assigned_at"
     t.index ["assigned_by_id"], name: "index_classroom_assignments_on_assigned_by_id"
     t.index ["classroom_id", "assignable_type", "assignable_id"], name: "index_classroom_assignments_one_active", unique: true, where: "((status)::text = 'active'::text)"
     t.index ["classroom_id"], name: "index_classroom_assignments_on_classroom_id"
@@ -240,10 +242,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.string "status", default: "started", null: false
     t.bigint "student_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["classroom_assignment_id", "student_id"], name: "index_exercise_sessions_handed_in", where: "(((status)::text = 'completed'::text) AND ((kind)::text = 'standard'::text))", include: ["score_percent"]
     t.index ["classroom_assignment_id"], name: "index_exercise_sessions_on_classroom_assignment_id"
+    t.index ["completed_at"], name: "index_exercise_sessions_completed_on_completed_at", where: "((status)::text = 'completed'::text)", include: ["student_id", "score_percent"]
     t.index ["exercise_id"], name: "index_exercise_sessions_on_exercise_id"
     t.index ["knowledge_gap_id"], name: "index_exercise_sessions_on_knowledge_gap_id"
     t.index ["public_id"], name: "index_exercise_sessions_on_public_id", unique: true
+    t.index ["started_at", "student_id"], name: "index_exercise_sessions_on_started_at_and_student_id"
     t.index ["student_id", "completed_at"], name: "index_exercise_sessions_on_student_id_and_completed_at"
     t.index ["student_id", "exercise_id"], name: "index_exercise_sessions_one_started", unique: true, where: "((status)::text = 'started'::text)"
     t.check_constraint "(kind::text = 'remediation'::text) = (knowledge_gap_id IS NOT NULL)", name: "exercise_sessions_remediation_iff_gap"
@@ -300,7 +305,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY ((ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying])::text[]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
     t.check_constraint "kind::text = 'classrooms'::text OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
-    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying]::text[])", name: "import_reports_kind_values"
+    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying]::text[])", name: "import_reports_kind_values"
     t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying, 'completed'::character varying, 'rejected'::character varying, 'failed'::character varying]::text[])", name: "import_reports_status_values"
   end
@@ -326,7 +331,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.index ["token_digest"], name: "index_invitations_on_token_digest", unique: true
     t.check_constraint "\"position\"::text = ANY (ARRAY['principal'::character varying, 'censor'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "invitations_position_values"
     t.check_constraint "contact::text ~ '^0[157][0-9]{8}$'::text", name: "invitations_contact_format"
-    t.check_constraint "kind::text <> 'school_staff'::text OR school_id IS NOT NULL AND \"position\" IS NOT NULL", name: "invitations_staff_has_school"
+    t.check_constraint "kind::text <> 'school_staff'::text OR school_id IS NOT NULL", name: "invitations_staff_has_school"
     t.check_constraint "kind::text <> 'team'::text OR team_role IS NOT NULL", name: "invitations_team_has_role"
     t.check_constraint "kind::text = ANY (ARRAY['team'::character varying, 'school_staff'::character varying]::text[])", name: "invitations_kind_values"
     t.check_constraint "team_role::text = ANY (ARRAY['admin'::character varying, 'content'::character varying, 'field'::character varying]::text[])", name: "invitations_team_role_values"
@@ -475,6 +480,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'approved'::character varying, 'rejected'::character varying]::text[])", name: "school_join_requests_status_values"
   end
 
+  create_table "school_staffs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "invited_by_id"
+    t.bigint "school_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["invited_by_id"], name: "index_school_staffs_on_invited_by_id"
+    t.index ["school_id"], name: "index_school_staffs_on_school_id"
+    t.index ["user_id"], name: "index_school_staffs_on_user_id", unique: true
+  end
+
   create_table "schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "cycle", default: "both", null: false
@@ -488,9 +503,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.string "sigle", limit: 20
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
+    t.index "translate(lower((name)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_name", using: :gin
+    t.index "translate(lower((sigle)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_sigle", using: :gin
     t.index ["drena_id", "name"], name: "index_schools_on_drena_id_and_name", unique: true
     t.index ["drena_id"], name: "index_schools_on_drena_id"
     t.index ["national_code"], name: "index_schools_on_national_code", unique: true, where: "(national_code IS NOT NULL)"
+    t.index ["national_code"], name: "index_schools_on_national_code_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["public_id"], name: "index_schools_on_public_id", unique: true
     t.index ["school_code"], name: "index_schools_on_school_code", unique: true
     t.check_constraint "cycle::text = ANY (ARRAY['first'::character varying, 'both'::character varying]::text[])", name: "schools_cycle_values"
@@ -745,7 +763,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
     t.string "role", null: false
     t.string "team_role"
     t.datetime "updated_at", null: false
+    t.index "translate(lower((((first_name)::text || ' '::text) || (last_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_full_name", using: :gin
+    t.index "translate(lower((((last_name)::text || ' '::text) || (first_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_reversed_name", using: :gin
     t.index ["contact"], name: "index_users_on_contact", unique: true, where: "(contact IS NOT NULL)"
+    t.index ["created_at", "id"], name: "index_users_on_created_at_and_id"
     t.index ["public_id"], name: "index_users_on_public_id", unique: true
     t.index ["role"], name: "index_users_on_role"
     t.check_constraint "(role::text = 'team'::text) = (team_role IS NOT NULL)", name: "users_team_role_iff_team"
@@ -808,6 +829,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_150200) do
   add_foreign_key "school_join_requests", "schools", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "decided_by_id", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "teacher_id", on_delete: :restrict
+  add_foreign_key "school_staffs", "schools", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", column: "invited_by_id", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", on_delete: :restrict
   add_foreign_key "schools", "drenas", on_delete: :restrict
   add_foreign_key "sessions", "users", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade

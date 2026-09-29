@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::DrenaRepositoryPort
-# Rôle : contrat des DRENA, créées à l'écran (aucun import de DRENA)
-# ADR  : 0034, 0036
+# Rôle : contrat des DRENA, créées à l'écran ou importées ; slug figé préfixé drena-
+# ADR  : 0034, 0036, 0066
 module Ports
   module School
     module DrenaRepositoryPort
@@ -34,9 +34,19 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #delete"
       end
 
-      # Résolution des imports d'écoles. → { "abidjan-1" => 12, … } (clé = slug)
+      # Résolution des imports d'écoles. → { "drena-abidjan-1" => 12, … } (clé = slug)
       def ids_by_slug
         raise NotImplementedError, "#{self.class} doit implémenter #ids_by_slug"
+      end
+
+      # Noms pris, tels qu'en base (unicité exacte de l'index). → Set[String]
+      def taken_names
+        raise NotImplementedError, "#{self.class} doit implémenter #taken_names"
+      end
+
+      # Import : lignes { public_id:, name:, slug: } calculées avant l'insertion, sans rappel ORM. → Integer (lignes écrites)
+      def insert_many(rows:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #insert_many"
       end
     end
   end

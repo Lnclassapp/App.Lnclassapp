@@ -1,17 +1,12 @@
 <%# 🌐 UI · teams/schools/_header — en-tête de la fiche d'un établissement, remplacé par les streams update et deactivate %>
-<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code d'établissement (copier, lien) ; menu ⋮ : modifier, régénérer le code, désactiver %>
-<%# ADR  : 0030, 0036, 0057, 0063 · UDR : 0006, 0036, 0042, 0044, 0050 · Stimulus : classroom--join-code-copy %>
+<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code d'établissement (copier, lien) ; menu ⋮ : inviter la direction, modifier, régénérer le code, désactiver %>
+<%# ADR  : 0030, 0036, 0057, 0063, 0065 · UDR : 0006, 0036, 0042, 0044, 0050, 0052, 0054 · Stimulus : clipboard (ui_copy_button) %>
 <% active = school.status != "inactive" %>
-<%# Seul un établissement actif reçoit une classe : ni désactivé, ni en brouillon (décision du porteur, 2026-09-27) %>
+<%# Seul un établissement actif reçoit une classe ou une direction : ni désactivé, ni en brouillon (porteur, 2026-09-27 ; ADR-0065) %>
 <% accepts_classrooms = school.status == "active" %>
 <% code = Entities::School::SchoolCode.display(school.school_code) %>
 <% link = school_code_signup_url(school.school_code) %>
 <div id="school_header" class="mb-8">
-  <nav aria-label="<%= t(".breadcrumb") %>" class="mb-4 text-sm">
-    <%= link_to schools_path, class: "inline-flex min-h-tap items-center gap-1.5 font-medium text-mute transition hover:text-ink" do %>
-      <%= ui_icon "chevron-left", variant: :mini, size: :sm %><%= t(".back") %>
-    <% end %>
-  </nav>
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
       <div class="flex min-w-0 items-start gap-4">
@@ -36,7 +31,10 @@
             <div class="flex gap-1"><dt class="sr-only"><%= t(".cycle") %></dt><dd><%= t("teams.schools.cycles.#{school.cycle}") %></dd></div>
             <div class="flex gap-1">
               <dt class="sr-only"><%= t(".status") %></dt>
-              <dd><%= ui_badge t("school_statuses.#{school.status}"), tone: school_status_tone(school.status), size: :sm, dot: true %></dd>
+              <dd class="flex flex-wrap items-center">
+                <%= ui_badge t("school_statuses.#{school.status}"), tone: school_status_tone(school.status), size: :sm, dot: true %>
+                <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".status") %>
+              </dd>
             </div>
           </dl>
         </div>
@@ -47,6 +45,10 @@
                         data: { turbo_frame: "modal" } %>
         <% end %>
         <%= ui_dropdown label: t(".actions", name: school.name), id: "school-header-actions", fixed: true do %>
+          <% if accepts_classrooms %>
+            <%= ui_dropdown_item t(".invite_staff"), href: new_school_staff_invitation_path(school.public_id), icon: "user-plus",
+                                                     frame: "modal" %>
+          <% end %>
           <%= ui_dropdown_item t(".edit"), href: edit_school_path(school.public_id), icon: "pencil-square", frame: "modal" %>
           <%= ui_dropdown_item t(".regenerate_code"), dialog: "regenerate-school-code", icon: "arrow-path" %>
           <% if active %>
@@ -79,20 +81,18 @@
     <div id="school_code" class="mt-5 border-t border-line pt-5">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div class="min-w-0">
-          <p id="school_code_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school_code") %></p>
+          <div class="flex flex-wrap items-center gap-x-1">
+            <p id="school_code_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school_code") %></p>
+            <%= ui_info_tip t(".school_code_tip"), label: t(".school_code") %>
+          </div>
           <span id="school_code_value" aria-labelledby="school_code_label"
                 class="font-mono text-2xl font-bold tracking-widest text-ink"><%= code %></span>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <% { code => [ ".copy_code", t(".copy_code_label", code:), "clipboard-document", ".code_copied" ],
-               link => [ ".copy_link", t(".copy_link_label"), "link", ".link_copied" ] }.each do |value, (label, aria_label, icon, copied)| %>
-            <span data-controller="classroom--join-code-copy" data-classroom--join-code-copy-code-value="<%= value %>">
-              <%= ui_button t(label), variant: :secondary, size: :sm, icon:, "aria-label": aria_label,
-                                      data: { action: "classroom--join-code-copy#copy" } %>
-              <template data-classroom--join-code-copy-target="copied"><%= ui_toast t(copied), type: :success %></template>
-              <template data-classroom--join-code-copy-target="failed"><%= ui_toast t(".copy_failed"), type: :warning %></template>
-            </span>
-          <% end %>
+          <%= ui_copy_button code, label: t(".copy_code"), aria_label: t(".copy_code_label", code:),
+                                   copied: t("shared.clipboard.copied_code") %>
+          <%= ui_copy_button link, label: t(".copy_link"), aria_label: t(".copy_link_label"), icon: "link",
+                                   copied: t("shared.clipboard.copied_link") %>
         </div>
       </div>
       <p class="mt-3 text-sm text-mute">

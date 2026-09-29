@@ -1,7 +1,7 @@
 require "test_helper"
 
-# SC-01, ADR-0036, UDR-0006: the team manages the DRENA — created on screen only, their frozen slug being the target of
-# the school imports; creation and edition in the modal frame, writes answered in Turbo Stream, an HTML fallback.
+# SC-01, ADR-0036, ADR-0066, UDR-0006: the team manages the DRENA — their frozen slug, prefixed drena-, being the target
+# of the school imports; creation and edition in the modal frame, writes answered in Turbo Stream, an HTML fallback.
 class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member
@@ -46,13 +46,13 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_select "#drenas tr", 2
     assert_select "#drenas tr:first-child#drena_#{abidjan.public_id}" do
       assert_select "td", text: "Abidjan 1"
-      assert_select "code", "abidjan-1"
+      assert_select "code", "drena-abidjan-1"
       assert_select "a[data-turbo-frame=modal][href='#{edit_drena_path(abidjan)}']"
       assert_select "dialog#delete-drena-#{abidjan.public_id} form[action='#{drena_path(abidjan)}'] input[name=_method][value=delete]",
                     count: 1, visible: :all
     end
     assert_select "#{row(abidjan)} td.tabular-nums", text: "1", count: 2
-    assert_select "#{row(yamoussoukro)} code", "yamoussoukro"
+    assert_select "#{row(yamoussoukro)} code", "drena-yamoussoukro"
     assert_select "th", text: /Slug\s+\(à utiliser dans les fichiers d'import\)/
     assert_select "#drenas_empty:empty"
   end
@@ -97,13 +97,13 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     drena = Orm::Drena.find_by!(name: "Abidjan 1")
     assert_response :success
     assert_equal "text/vnd.turbo-stream.html", response.media_type
-    assert_equal "abidjan-1", drena.slug
+    assert_equal "drena-abidjan-1", drena.slug
     assert_select "turbo-stream[action=append][target=toasts]", text: /DRENA « Abidjan 1 » créée/
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=update][target=drenas_empty]"
     assert_select "turbo-stream[action=update][target=drenas] template" do
       assert_select "tr", 2
-      assert_select "tr:first-child#drena_#{drena.public_id} code", "abidjan-1"
+      assert_select "tr:first-child#drena_#{drena.public_id} code", "drena-abidjan-1"
     end
     event = Orm::AuditEvent.sole
     assert_equal [ "school.changed", @member.id, "Drena", drena.id ], [ event.action, event.actor_id, event.subject_type, event.subject_id ]
@@ -134,6 +134,20 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Drena.count
   end
 
+  # DR-08 (ADR-0066): the slug would be a bare « drena ».
+  test "a name without any latin letter or digit reopens the modal in 422 with the error on the name, and nothing is created" do
+    sign_in_as @member
+
+    assert_no_difference -> { Orm::Drena.count } do
+      post drenas_path, params: { drena: { name: "???" } }, headers: { "Turbo-Frame" => "modal" }
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal dialog#drena-modal"
+    assert_select "input[name='drena[name]'][value='???'][aria-invalid=true]"
+    assert_select "#drena_name_error", "Le nom doit contenir au moins une lettre ou un chiffre latin."
+  end
+
   test "a request without the drena parameters is a bad request" do
     sign_in_as @member
 
@@ -161,7 +175,7 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#modal dialog#drena-modal"
     assert_select "form#drena-form[action='#{drena_path(drena)}'] input[name=_method][value=patch]"
     assert_select "input[name='drena[name]'][value='Abidjan 1']"
-    assert_select "#drena_name_hint code", "abidjan-1"
+    assert_select "#drena_name_hint code", "drena-abidjan-1"
     assert_select "button[type=submit][form=drena-form]", "Enregistrer"
   end
 
@@ -187,7 +201,7 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     patch drena_path(drena), params: { drena: { name: "Abidjan 1 Plateau" } }, as: :turbo_stream
 
     assert_response :success
-    assert_equal [ "Abidjan 1 Plateau", "abidjan-1" ], [ drena.reload.name, drena.slug ]
+    assert_equal [ "Abidjan 1 Plateau", "drena-abidjan-1" ], [ drena.reload.name, drena.slug ]
     assert_select "turbo-stream[action=append][target=toasts]", text: /DRENA « Abidjan 1 Plateau » modifiée/
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=update][target=drenas] template #{row(drena)}", text: /Abidjan 1 Plateau/

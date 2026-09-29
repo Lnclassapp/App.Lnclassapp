@@ -1,8 +1,8 @@
 <%# 🌐 UI · teams/series/new — création d'une série, servie dans le frame « modal » %>
 <%# Rôle : modale ouverte dès son arrivée ; un échec la re-rend en 422 avec ses erreurs et la saisie %>
-<%# ADR  : 0034 · UDR : 0006, 0033 %>
+<%# ADR  : 0034 · UDR : 0006, 0033, 0054 %>
 <%= turbo_frame_tag "modal" do %>
-  <%= ui_modal title: t(".title"), id: "series-modal", open: true do |modal| %>
+  <%= ui_modal title: t(".title"), document_title: page_title(t(".title")), id: "series-modal", open: true do |modal| %>
     <% modal.footer do %>
       <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
       <%= ui_button t(".submit"), type: :submit, form: "series-form" %>

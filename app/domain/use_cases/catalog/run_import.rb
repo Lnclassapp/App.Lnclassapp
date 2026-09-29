@@ -110,8 +110,16 @@ module UseCases
         UNREADABLE
       end
 
+      # Le format reçu, s'il est un texte, permet à l'écran de nommer l'import auquel le fichier appartient.
+      def format_mismatch(document, kind)
+        received = document["format"] if document.is_a?(Hash)
+        return error("format", "format_mismatch", expected: kind.format) unless received.is_a?(String)
+
+        error("format", "format_mismatch", expected: kind.format, received:)
+      end
+
       def envelope_errors(document, kind)
-        return [ error("format", "format_mismatch", expected: kind.format) ] unless document.is_a?(Hash) && document["format"] == kind.format
+        return [ format_mismatch(document, kind) ] unless document.is_a?(Hash) && document["format"] == kind.format
         return [ error("version", "version_unsupported", expected: kind.version) ] unless document["version"] == kind.version
 
         []

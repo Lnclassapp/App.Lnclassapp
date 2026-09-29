@@ -55,10 +55,20 @@ class Orm::HasFrozenSlugTest < ActiveSupport::TestCase
     assert_includes essential.errors.attribute_names, :course
   end
 
+  # ADR-0066: the DRENA slug is the domain rule, prefixed drena-, never the model name.
   test "a DRENA keeps its public_id in URLs, its slug is the import target" do
     drena = Orm::Drena.create!(name: "Abidjan 1")
 
-    assert_equal "abidjan-1", drena.slug
+    assert_equal "drena-abidjan-1", drena.slug
     assert_equal drena.public_id, drena.to_param
+    assert_equal "drena-abidjan-1-2", Orm::Drena.create!(name: "Abidjan-1").slug
+  end
+
+  test "a DRENA without any latin letter or digit gets no slug and is refused" do
+    drena = Orm::Drena.new(name: "???")
+
+    assert_not drena.valid?
+    assert_nil drena.slug
+    assert_includes drena.errors.attribute_names, :slug
   end
 end

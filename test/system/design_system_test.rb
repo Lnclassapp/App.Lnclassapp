@@ -337,7 +337,7 @@ class DesignSystemTest < ApplicationSystemTestCase
       assert_no_selector "nav.fixed.bottom-0"
       assert_selector "header", text: t("shared.roles.#{role}")
       assert_selector "main h1", text: t("design.shell.names.#{role}").split.first
-      assert_selector "aside a[aria-current=page]", text: t("shared.navigation.home")
+      assert_selector "aside a[aria-current=page]", text: t("shared.navigation.#{destinations.first.first}")
     end
 
     resize_to(390, 844) do
@@ -360,9 +360,233 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_equal "rgb(0, 160, 255)", css(find("#rejoindre > div"), "background-color")
   end
 
+  # --- Finitions (UDR-0054) ---------------------------------------------------
+
+  test "the page title is composed, and the back links sit above their title" do
+    assert_equal "#{t('design.index.page_title')} · Lnclass", page.title
+    within("[data-example=finish-title]") { assert_text "#{t('design.index.page_title')} · Lnclass" }
+    within("[data-example=finish-back]") do
+      assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href$='#finishes']", count: 2
+      assert_selector "nav[aria-label='#{t('components.back_link.label')}'] + div h1", text: t("design.index.finishes.back.title")
+    end
+    # The invalid samples of the page do not steal the focus of the style guide.
+    assert_equal "BODY", evaluate_script("document.activeElement.tagName")
+  end
+
+  # FU-29: a copy that the browser refuses says so, and tells how to copy by hand.
+  test "a copy button copies its value, then says so when the browser refuses" do
+    page.driver.browser.execute_cdp("Browser.grantPermissions", permissions: %w[clipboardReadWrite clipboardSanitizedWrite])
+    execute_script("addEventListener('clipboard:copied', (event) => window.copiedText = event.detail.text)")
+    within("[data-example=finish-copy]") { click_on t("design.index.finishes.copy.label") }
+
+    assert_toast t("shared.clipboard.copied_link")
+    assert_equal t("design.index.finishes.copy.value"), page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
+    assert_equal t("design.index.finishes.copy.value"), evaluate_script("window.copiedText")
+
+    execute_script("navigator.clipboard.writeText = () => Promise.reject(new Error('refusé'))")
+    within("[data-example=finish-copy]") { click_on t("design.index.finishes.copy.label") }
+
+    assert_selector "#toasts [role=alert][data-toast-type=error]", text: "La copie a échoué : sélectionnez le texte et copiez-le à la main."
+  end
+
+  test "the download controller saves a text file with a toast, and prints" do
+    execute_script(<<~JS)
+      URL.createObjectURL = (blob) => { window.savedBlob = blob; return "blob:design" }
+      URL.revokeObjectURL = (url) => { window.revoked = url }
+      HTMLAnchorElement.prototype.click = function () { window.savedAs = this.download; window.savedHref = this.href }
+      window.print = () => { window.printed = true }
+    JS
+    within("[data-example=finish-download]") { click_on t("design.index.finishes.download.save") }
+
+    assert_toast t("design.index.finishes.download.saved")
+    assert_equal "lnclass-codes-de-demonstration.txt", evaluate_script("window.savedAs")
+    assert_equal "text/plain;charset=utf-8", evaluate_script("window.savedBlob.type")
+    assert_equal t("design.index.finishes.download.content"), page.evaluate_async_script("window.savedBlob.text().then(arguments[0])")
+    assert_equal "blob:design", evaluate_script("window.revoked")
+
+    within("[data-example=finish-download]") { click_on t("design.index.finishes.download.print") }
+
+    assert evaluate_script("window.printed")
+  end
+
+  # FU-39: the hint announces the gesture, the status region announces the sending, and the form leaves once.
+  test "an autosubmit form leaves once at the sixth digit, never twice for the same value" do
+    count_submissions("design-autosubmit-form")
+    field = find_field("design_autosubmit_code")
+
+    assert_equal "design_autosubmit_code_hint", field["aria-describedby"]
+    assert_selector "#design_autosubmit_code_hint", text: "Le code est envoyé dès le 6ᵉ chiffre."
+    field.send_keys("12345")
+    sleep 0.4
+
+    assert_equal 0, submissions
+    field.send_keys("6")
+
+    assert_selector "turbo-frame#design-autosubmit", text: t("design.frame.autosubmit.received", code: "123456")
+    assert_selector "#design-autosubmit-status", text: "Envoi du code…", visible: :all
+    assert_equal 1, submissions
+
+    field.send_keys(:backspace, "6")
+    sleep 0.4
+
+    assert_equal 1, submissions
+    # A second submission while the first one runs is refused, whatever sends it.
+    execute_script(<<~JS)
+      const form = document.getElementById("design-autosubmit-form")
+      const input = document.getElementById("design_autosubmit_code")
+      input.value = "654321"
+      input.dispatchEvent(new Event("input", { bubbles: true }))
+      form.requestSubmit()
+    JS
+
+    assert_selector "turbo-frame#design-autosubmit", text: t("design.frame.autosubmit.received", code: "654321")
+    assert_equal 2, submissions
+  end
+
+  # FU-51: one character sends nothing; an empty field brings the whole list back; the URL is replaced, not stacked.
+  test "a search form waits for the typing to stop, replaces the URL and brings the list back" do
+    count_submissions("design-search-form")
+    items = t("design.frame.search.items")
+    history = evaluate_script("history.length")
+    field = find_field("design_search_q")
+
+    assert_no_selector "#design-search-form button[type=submit]"
+    field.send_keys("m")
+    sleep 0.6
+
+    assert_equal 0, submissions
+    field.send_keys("a")
+
+    assert_selector "turbo-frame#design-search [aria-live=polite]", text: t("design.frame.search.count", count: 1)
+    assert_selector "turbo-frame#design-search li", count: 1, text: "Mathématiques"
+    assert_equal 1, submissions
+    assert_match(/q=ma\b/, current_url)
+    assert_equal history, evaluate_script("history.length")
+
+    field.send_keys(:backspace, :backspace)
+
+    assert_selector "turbo-frame#design-search li", count: items.size
+    assert_equal 2, submissions
+
+    select t("design.frame.search.cycles.first"), from: "design_search_cycle"
+
+    assert_selector "turbo-frame#design-search li", count: items.count { it[:cycle] == "first" }
+  end
+
+  test "a modal targets its first field and names the tab while open; a confirmation targets Cancel" do
+    title = page.title
+    click_on t("design.index.hotwire.open")
+
+    assert_selector "dialog#design-crud-modal[open]"
+    assert_equal "sample_name", evaluate_script("document.activeElement.id")
+    assert_equal "#{t('design.modal.title')} · Lnclass", page.title
+
+    within("dialog#design-crud-modal") do
+      fill_in "sample_email", with: "awa@exemple.ci"
+      fill_in "sample_name", with: "   "
+      click_on t("design.modal.submit")
+
+      assert_selector "#sample_name[aria-invalid=true]"
+    end
+    assert_equal "sample_name", evaluate_script("document.activeElement.id")
+    assert_equal "#{t('design.modal.title')} · Lnclass", page.title
+
+    find("dialog#design-crud-modal").send_keys(:escape)
+
+    assert_no_selector "dialog#design-crud-modal", visible: :all
+    assert_equal title, page.title
+
+    click_on t("design.index.finishes.focus.open")
+
+    assert_selector "dialog#design-confirm[open]"
+    assert_equal t("design.index.finishes.focus.cancel"), active_text
+    assert_equal title, page.title
+  end
+
+  # The style guide itself is wider than a phone (long API lines of other sections): the tip is measured on its own.
+  test "an info tip opens in the flow, without scrolling the page sideways at 390 px" do
+    with_mobile_viewport do
+      width = evaluate_script("document.documentElement.scrollWidth")
+      within("[data-example=finish-info-tip]") do
+        summary = find("details summary")
+
+        assert_selector "summary .sr-only", text: t("components.info_tip.label", label: t("design.index.finishes.info_tip.label")),
+                                            visible: :all
+
+        assert_operator summary.evaluate_script("this.getBoundingClientRect().height"), :>=, 48
+        summary.click
+
+        panel = find("details[open] div", text: t("design.index.finishes.info_tip.text"))
+
+        assert_operator panel.evaluate_script("this.getBoundingClientRect().right"), :<=, evaluate_script("document.documentElement.clientWidth")
+        assert_equal "static", css(panel, "position")
+      end
+
+      assert_equal width, evaluate_script("document.documentElement.scrollWidth")
+    end
+  end
+
+  # Boîte d'un élément dans la page (et non dans la fenêtre) : indépendante du défilement que fait Capybara.
+  PAGE_BOX = "(r => [r.left + scrollX, r.top + scrollY, r.width, r.height].map(Math.round))(this.getBoundingClientRect())"
+
+  # UDR-0054 §3.4, amendement « survol » : la souris ouvre l'aide en bulle et la referme en partant ; un clic pendant le
+  # survol la garde ouverte, dans le flux, et le clic suivant la ferme.
+  test "an info tip opens on mouse hover, closes when the mouse leaves, and a click keeps it open" do
+    text = t("design.index.finishes.info_tip.text")
+
+    within("[data-example=finish-info-tip]") do
+      assert_no_text text
+      summary = find("details summary")
+      before = summary.evaluate_script(PAGE_BOX)
+      summary.hover
+
+      assert_selector("details[open]", text:)
+      # En bulle : le panneau flotte sous l'icône, rien ne bouge sous la souris.
+      assert_equal "fixed", css(find("details[open] div", text:), "position")
+      assert_equal before, summary.evaluate_script(PAGE_BOX)
+    end
+    first("h1").hover
+
+    within("[data-example=finish-info-tip]") do
+      assert_no_selector "details[open]"
+      summary = find("details summary")
+      summary.hover
+      assert_selector "details[open]"
+      summary.click
+    end
+    first("h1").hover
+
+    within("[data-example=finish-info-tip]") do
+      # Épinglée par le clic : de retour dans le flux (§3.4).
+      assert_equal "static", css(find("details[open] div", text:), "position")
+      find("details summary").click
+
+      assert_no_selector "details[open]"
+    end
+  end
+
+  # Page mode: a page that declares its field focuses it on arrival (here « Se connecter », UDR-0054 §3.3).
+  test "the page autofocus goes to the field the screen declares" do
+    visit new_session_path
+
+    assert_no_selector "[autofocus]", visible: :all
+    assert_equal "session_contact", evaluate_script("document.activeElement.id")
+  end
+
   private
 
   def t(key, **) = I18n.t(key, **)
+
+  # Every submission of the form, whatever sends it, counted by Turbo.
+  def count_submissions(form_id)
+    execute_script(<<~JS, form_id)
+      const id = arguments[0]
+      window.submissions = 0
+      document.addEventListener("turbo:submit-start", (event) => { if (event.target.id === id) window.submissions++ })
+    JS
+  end
+
+  def submissions = evaluate_script("window.submissions")
 
   # Valeur calculée par le navigateur, sous sa forme sérialisée CSS (`rgb(…)`), pas celle de WebDriver (`rgba(…)`).
   def css(element, property)

@@ -1,0 +1,88 @@
+<%# 🌐 UI · school_admin/classrooms/show — page d'une classe pour la direction (DS-09, DS-10, FU-10, FU-21, FU-49) %>
+<%# Rôle : les chiffres de la classe en trois tuiles, puis chaque élève présent (cherché pendant la frappe) : rendus / donnés, score %>
+<%# ADR  : 0065 · UDR : 0005, 0049, 0052, 0054 · aucun identifiant d'élève dans le HTML : les lignes sont numérotées %>
+<% classroom = @detail.classroom %>
+<% page_title classroom.name %>
+<% content_for :nav_key, "student_work" %>
+<% percent = lambda do |value|
+     next t("school_admin.classrooms.percent", value:) unless value.nil?
+
+     safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
+   end %>
+<%= ui_page_header title: classroom.name, subtitle: t(".subtitle", level: classroom.level_name, count: classroom.students_count),
+                   back: { label: t(".back"), href: school_admin_classrooms_path } %>
+
+<ul id="classroom_figures" class="mb-5 grid grid-cols-3 gap-3">
+  <% [ [ :assignments, classroom.assignments_count, nil ], [ :submission_rate, percent.call(classroom.submission_rate), :submission_rate ],
+       [ :average, percent.call(classroom.average_percent), :average ] ].each do |key, value, tip| %>
+    <li class="rounded-ln bg-mist px-3 py-4">
+      <span class="block font-display text-2xl font-extrabold tabular-nums"><%= value %></span>
+      <span class="block text-sm text-mute">
+        <%= t(".figures.#{key}") %>
+        <% if tip %>
+          <%= ui_info_tip t("school_admin.classrooms.tips.#{tip}"), label: t(".figures.#{key}") %>
+        <% end %>
+      </span>
+    </li>
+  <% end %>
+</ul>
+
+<%= ui_card id: "classroom_students" do %>
+  <% if @detail.students.empty? %>
+    <%= ui_empty_state title: t(".empty"), icon: "users" %>
+  <% else %>
+    <%= form_with scope: :student_work_search, url: school_admin_classroom_path(classroom.public_id), method: :get,
+                  id: "student-work-search", class: "mb-4 flex items-end gap-3",
+                  html: { role: "search", "aria-label": t(".search.label") },
+                  data: { turbo_frame: "student_work_students", controller: "search" } do |form| %>
+      <div class="min-w-0 flex-1">
+        <%= ui_field form, :q, as: :search, label: t(".search.label"), name: "q", value: @search, autocomplete: "off",
+                               data: { action: "search#queue" } %>
+      </div>
+      <%= ui_button t(".search.submit"), type: :submit, variant: :secondary, data: { search_target: "button" } %>
+      <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
+      <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
+    <% end %>
+
+    <%= turbo_frame_tag "student_work_students", class: "block transition-opacity aria-busy:opacity-50" do %>
+      <p aria-live="polite" class="mb-3 text-sm text-mute"><%= t(".search.count", count: @students.size) %></p>
+      <% if @students.empty? %>
+        <%= ui_empty_state title: t(".search.empty"), icon: "magnifying-glass" do %>
+          <%= ui_button t(".search.clear"), href: school_admin_classroom_path(classroom.public_id), variant: :secondary,
+                                            data: { turbo_frame: "_top" } %>
+        <% end %>
+      <% else %>
+        <div class="relative overflow-x-auto">
+          <table class="w-full min-w-xl text-left text-sm">
+            <caption class="sr-only"><%= t(".caption", classroom: classroom.name) %></caption>
+            <thead class="border-b border-line text-xs text-mute">
+              <tr>
+                <th scope="col" class="px-2 py-3 font-medium"><%= t(".columns.student") %></th>
+                <th scope="col" class="px-2 py-3 text-right align-top font-medium"><%= t(".columns.submitted") %></th>
+                <th scope="col" class="px-2 py-3 text-right align-top font-medium">
+                  <%= t(".columns.average") %>
+                  <%= ui_info_tip t("school_admin.classrooms.tips.student_average"), label: t(".columns.average") %>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-line">
+              <% @students.each_with_index do |student, index| %>
+                <tr id="student_<%= index %>">
+                  <th scope="row" class="px-2 py-3 font-medium text-ink"><%= student.display_name %></th>
+                  <td class="px-2 py-3 text-right tabular-nums">
+                    <%= t(".submitted", count: student.submitted_count, total: classroom.assignments_count) %>
+                  </td>
+                  <td class="px-2 py-3 text-right tabular-nums"><%= percent.call(student.average_percent) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3 text-xs text-mute">
+          <span aria-hidden="true">—</span> <%= t("school_admin.classrooms.legend.label") %>
+          <%= ui_info_tip t("school_admin.classrooms.tips.missing"), label: t("school_admin.classrooms.legend.label") %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

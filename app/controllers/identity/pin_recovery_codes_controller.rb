@@ -1,17 +1,17 @@
 # 🌐 DELIVERY · Identity::PinRecoveryCodesController
 # Rôle : l'enseignant ou l'équipe génère un code de récupération du PIN ; le code s'affiche une fois dans une modale, jamais dans un flash
-# ADR  : 0026, 0028, 0032, 0050 · UDR : 0006, 0020
+# ADR  : 0026, 0028, 0031, 0032, 0050 · UDR : 0006, 0020
 module Identity
   class PinRecoveryCodesController < AuthenticatedController
     allow_roles :team, :teacher
+    secret_response :create
     # Par compte émetteur, pas par adresse : une salle des professeurs partage souvent la même adresse IP.
     rate_limit to: 10, within: 1.minute, only: :create, by: -> { current_actor.user_id }, with: -> { render_too_many_requests }
 
-    # Succès : toast, la modale du code ; repli HTML : la page `show`. Le code ne doit rester dans aucun cache.
+    # Succès : toast, la modale du code ; repli HTML : la page `show`. Le code ne reste dans aucun cache (secret_response).
     def create
       render_result issue.call(actor: current_actor, target_public_id: params[:user_public_id]), success: lambda { |issued|
         @issued = issued
-        response.headers["Cache-Control"] = "no-store"
         respond_to do |format|
           format.turbo_stream
           format.html { render :show, status: :created }

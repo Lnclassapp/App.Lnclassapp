@@ -70,3 +70,11 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 *Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **« Modifier » passe dans le menu ⋮** « Actions pour <titre> » (`#exercise-actions-menu`), seule entrée, après le panneau de statut. Le nom accessible « Modifier l'exercice « … » » est remplacé par celui du bouton ⋮.
+
+## Amendement du 2026-09-29 — finitions d'interface
+
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- Retour : `ui_back_link` vers `course_essential_path`, libellé = nom de la fiche (au lieu de « Fiche essentielle : <nom> »).
+- Titre : « <titre de l'exercice> · <espace> · Lnclass ».
+- Badge et maîtrise de l'élève : suivis d'une infobulle des seuils (UDR-0054 §3.4).

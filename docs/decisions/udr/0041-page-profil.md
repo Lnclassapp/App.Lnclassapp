@@ -46,3 +46,9 @@ Une page unique, dans le shell du rôle, avec une carte « Mes informations » e
 
 - L'entrée « Mon profil » du menu du compte n'est plus jamais inactive ; le test des accueils de chaque rôle (`role_homes_test.rb`) l'attend active.
 - Aucune autre page ne modifie le compte de l'utilisateur ; l'équipe garde le déblocage (UDR-0020) pour les comptes des autres.
+
+## Amendement du 2026-09-28 — profil de la direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md). Statut : `Proposé`. Contrat : [UDR-0052](0052-espace-direction-simple.md) §3.*
+
+- Pour `school_admin`, le badge « En attente » disparaît ; la carte « Mes informations » affiche une ligne « Établissement » avec son nom, comme pour l'enseignant.
