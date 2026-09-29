@@ -12,6 +12,7 @@ fr:
       error_codes:
         json_invalid: "Le fichier n'est pas un JSON lisible."
         format_mismatch: "Le format du fichier ne correspond pas à ce type d'import (attendu : %{expected})."
+        format_of_other_kind: "Ce fichier est un import « %{received_kind} » (format %{received}), pas un import « %{expected_kind} » (format %{expected}) : téléversez-le depuis l'import « %{received_kind} »."
         version_unsupported: "Cette version du format n'est pas prise en charge (attendue : %{expected})."
         unknown_target: "La cible indiquée est introuvable."
         too_many_roots: "Le fichier contient %{count} éléments ; %{max} au plus."

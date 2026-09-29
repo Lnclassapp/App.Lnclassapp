@@ -22,6 +22,21 @@ module Teams
       assert_equal "Valeur non conforme au format attendu.", import_error_message(error("schema"))
     end
 
+    # A file of another import kind names that kind, so the team knows which button to use.
+    test "a file of another import kind says which kind it is and what this import expects" do
+      schools_in_drenas = error("format_mismatch", "expected" => "lnclass.drenas", "received" => "lnclass.schools")
+
+      assert_equal "Ce fichier est un import « Établissements » (format lnclass.schools), pas un import « DRENA » " \
+                   "(format lnclass.drenas) : téléversez-le depuis l'import « Établissements ».", import_error_message(schools_in_drenas)
+    end
+
+    test "an unknown or missing received format keeps the generic message" do
+      generic = "Le format du fichier ne correspond pas à ce type d'import (attendu : lnclass.drenas)."
+
+      assert_equal generic, import_error_message(error("format_mismatch", "expected" => "lnclass.drenas", "received" => "autre.chose"))
+      assert_equal generic, import_error_message(error("format_mismatch", "expected" => "lnclass.drenas"))
+    end
+
     test "any other code keeps its message and its parameters" do
       assert_equal "Valeur obligatoire manquante.", import_error_message(error("blank"))
       assert_equal "Le fichier contient 501 éléments ; 500 au plus.",
