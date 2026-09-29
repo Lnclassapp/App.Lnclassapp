@@ -1,0 +1,1247 @@
+{
+  "format": "lnclass.essentials",
+  "version": 1,
+  "course": "limites-et-continuite-4",
+  "essentials": [
+    {
+      "name": "Calculer une limite et lever une forme indéterminée",
+      "subtitle": "Limites en un point et à l'infini, règles de calcul et formes indéterminées",
+      "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Lire et comprendre l'écriture $\\lim_{x \\to a} f(x) = \\ell$, en un point et à l'infini.</li>\n<li>Calculer une limite avec les règles d'opérations (somme, produit, quotient).</li>\n<li>Reconnaître une forme indéterminée et la lever.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le thé qui refroidit (la limite).</strong> Ta maman pose un verre de thé bien chaud sur la table. La pièce est à 28 °C. Au début, le thé perd vite sa chaleur, puis de plus en plus lentement. Plus le temps passe, plus sa température se rapproche de 28 °C, aussi près qu'on veut.</p>\n<p><em>Le pont.</em> Le temps qui passe, c'est $x$ qui tend vers $+\\infty$, c'est-à-dire qui devient aussi grand qu'on veut. La température du thé, c'est $f(x)$. Les 28 °C de la pièce, c'est la <strong>limite</strong> $\\ell$. On écrit $\\lim_{x \\to +\\infty} f(x) = 28$.</p>\n<p><em>Où l'image s'arrête.</em> Le thé ne descend jamais sous 28 °C. Une fonction, elle, peut passer au-dessus et au-dessous de sa limite, ou même l'atteindre. Ce qui compte, c'est qu'elle finisse par rester aussi près qu'on veut de $\\ell$.</p>\n<p><strong>2. Le riz partagé (limite infinie en un point).</strong> Tu as 1 kg de riz et tu fais des tas de $x$ kg chacun. Le nombre de tas est $\\frac{1}{x}$. Si chaque tas devient minuscule, le nombre de tas devient énorme, plus grand que n'importe quel nombre.</p>\n<p><em>Le pont.</em> La taille d'un tas, c'est $x$ qui tend vers $0$ en restant positif : on note $x \\to 0^+$. Le nombre de tas, c'est $\\frac{1}{x}$, qui tend vers $+\\infty$. On écrit $\\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$.</p>\n<p><em>Où l'image s'arrête.</em> Dans la vraie vie, un tas ne peut pas être plus petit qu'un grain. En mathématiques, $x$ peut s'approcher de $0$ autant qu'on veut.</p>\n<p><strong>3. Le tir à la corde (forme indéterminée).</strong> Dans la cour, deux équipes tirent sur une corde. Si une équipe est infiniment forte et l'autre normale, la plus forte gagne à coup sûr. Mais si les deux équipes sont infiniment fortes, tu ne peux pas annoncer le gagnant sans regarder de plus près laquelle tire le plus fort.</p>\n<p><em>Le pont.</em> Dans $\\lim \\big(f(x) + g(x)\\big)$, avec $\\lim f = +\\infty$ et $\\lim g = -\\infty$, $f$ tire vers le haut et $g$ tire vers le bas. C'est la forme « $+\\infty - \\infty$ ». On dit qu'elle est <strong>indéterminée</strong> : les règles de calcul ne donnent pas la réponse. Pour la trouver, on transforme l'écriture pour voir quel terme tire le plus fort. Même idée pour $0 \\times \\infty$, $\\frac{\\infty}{\\infty}$ et $\\frac{0}{0}$ : deux forces opposées se battent.</p>\n<p><em>Où l'image s'arrête.</em> Une forme indéterminée ne veut pas dire « match nul », ni « pas de limite ». Selon la fonction, le résultat peut être un nombre, $+\\infty$, $-\\infty$, ou ne pas exister.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Limite.</strong> $\\lim_{x \\to a} f(x) = \\ell$ signifie : quand $x$ se rapproche de $a$, $f(x)$ se rapproche autant qu'on veut de $\\ell$. Ici, $a$ peut être un nombre, $+\\infty$ ou $-\\infty$, et $\\ell$ aussi.</p>\n<p><strong>Limites de référence.</strong> $\\lim_{x \\to +\\infty} \\frac{1}{x} = 0$ ; $\\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$ ; $\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty$ ; $\\lim_{x \\to +\\infty} \\sqrt{x} = +\\infty$ ; pour $n \\geq 1$, $\\lim_{x \\to +\\infty} x^n = +\\infty$, et $\\lim_{x \\to -\\infty} x^n = +\\infty$ si $n$ est pair, $-\\infty$ si $n$ est impair.</p>\n<p><strong>Les 4 formes indéterminées.</strong> $+\\infty - \\infty$ ; $0 \\times \\infty$ ; $\\frac{\\infty}{\\infty}$ ; $\\frac{0}{0}$. Les autres formes se calculent : par exemple $+\\infty + \\ell = +\\infty$ ; $\\ell \\times (+\\infty) = +\\infty$ si $\\ell > 0$ ; $\\frac{\\ell}{\\infty} = 0$ ; $\\frac{\\ell}{0}$ avec $\\ell \\neq 0$ donne $+\\infty$ ou $-\\infty$ selon le signe du dénominateur.</p>\n<p><strong>Lever une forme indéterminée.</strong></p>\n<ul>\n<li>En $+\\infty$ ou en $-\\infty$, un polynôme a la même limite que son terme de plus haut degré.</li>\n<li>En $+\\infty$ ou en $-\\infty$, une fonction rationnelle (un quotient de deux polynômes) a la même limite que le quotient de leurs termes de plus haut degré.</li>\n<li>Pour « $\\frac{0}{0}$ » en $a$, on factorise par $(x - a)$, puis on simplifie.</li>\n<li>Avec une racine carrée, on multiplie par l'expression conjuguée : celle de $\\sqrt{A} - B$ est $\\sqrt{A} + B$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Calculer $\\lim_{x \\to +\\infty} (x^2 - 3x)$.</strong></p>\n<ol>\n<li>$\\lim_{x \\to +\\infty} x^2 = +\\infty$ et $\\lim_{x \\to +\\infty} (-3x) = -\\infty$. C'est la forme « $+\\infty - \\infty$ » : elle est indéterminée.</li>\n<li>On met le terme le plus fort en facteur. Pour $x \\neq 0$ : $x^2 - 3x = x^2\\left(1 - \\frac{3}{x}\\right)$.</li>\n<li>$\\lim_{x \\to +\\infty} \\frac{3}{x} = 0$, donc $\\lim_{x \\to +\\infty} \\left(1 - \\frac{3}{x}\\right) = 1$.</li>\n<li>Produit : « $+\\infty \\times 1$ » donne $+\\infty$. Donc $\\lim_{x \\to +\\infty} (x^2 - 3x) = +\\infty$. C'est $x^2$ qui tire le plus fort.</li>\n</ol>\n<p><strong>Calculer $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.</strong></p>\n<ol>\n<li>En remplaçant $x$ par $2$, le numérateur vaut $0$ et le dénominateur vaut $0$ : forme « $\\frac{0}{0}$ ».</li>\n<li>On factorise le numérateur : $x^2 - 4 = (x - 2)(x + 2)$.</li>\n<li>Pour $x \\neq 2$, on simplifie : $\\frac{x^2 - 4}{x - 2} = x + 2$.</li>\n<li>$\\lim_{x \\to 2} (x + 2) = 4$. Donc $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = 4$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Écrire « $+\\infty - \\infty = 0$ » ou « $\\frac{\\infty}{\\infty} = 1$ ». C'est faux : ces formes ne donnent aucun résultat toutes seules. Par exemple, $\\lim_{x \\to +\\infty} \\frac{6x}{3x + 1} = 2$, et non $1$.</p>\n<p>Comment le repérer : dès que ton calcul direct donne une des 4 formes indéterminées, arrête-toi. Transforme d'abord l'écriture (factoriser, simplifier, multiplier par le conjugué), puis recalcule.</p>\n<h2>En une phrase</h2>\n<p>Une limite, c'est la valeur dont $f(x)$ s'approche ; si le calcul donne $\\infty - \\infty$, $0 \\times \\infty$, $\\frac{\\infty}{\\infty}$ ou $\\frac{0}{0}$, on ne conclut pas, on transforme l'écriture pour voir qui tire le plus fort.</p>",
+      "exercises": [
+        {
+          "title": "Comprendre — Lire une limite et reconnaître une forme indéterminée",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Que signifie l'écriture $\\lim_{x \\to +\\infty} f(x) = 3$ ?",
+              "question_type": "single_choice",
+              "explanation": "Une limite décrit ce dont $f(x)$ se rapproche quand $x$ devient très grand, comme le thé qui se rapproche de 28 °C. L'erreur tentante est « $f(x)$ est égal à $3$ » : $f(x)$ peut ne jamais valoir $3$, il s'en approche seulement autant qu'on veut. Et on ne calcule jamais $f(+\\infty)$, car $+\\infty$ n'est pas un nombre.",
+              "answers": [
+                {
+                  "content": "Quand $x$ devient de plus en plus grand, $f(x)$ se rapproche autant qu'on veut de $3$.",
+                  "correct": true
+                },
+                {
+                  "content": "Pour les grandes valeurs de $x$, $f(x)$ est égal à $3$.",
+                  "correct": false
+                },
+                {
+                  "content": "Quand $x$ se rapproche de $3$, $f(x)$ devient très grand.",
+                  "correct": false
+                },
+                {
+                  "content": "On remplace $x$ par $+\\infty$ et on trouve $f(+\\infty) = 3$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'image du thé qui refroidit, la température de la pièce (28 °C) joue le rôle de la limite $\\ell$.",
+              "question_type": "true_false",
+              "explanation": "Vrai. Le temps qui passe, c'est $x \\to +\\infty$ ; la température du thé, c'est $f(x)$ ; les 28 °C dont elle se rapproche, c'est la limite $\\ell$. Attention à ne pas confondre : la température du thé à un instant donné, c'est $f(x)$, pas $\\ell$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces formes, lesquelles sont des formes indéterminées ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Les 4 formes indéterminées sont $+\\infty - \\infty$, $0 \\times \\infty$, $\\frac{\\infty}{\\infty}$ et $\\frac{0}{0}$. Donc « $(+\\infty) + (-\\infty)$ » (c'est $+\\infty - \\infty$) et « $\\frac{0}{0}$ » sont indéterminées. Les autres se calculent : $(+\\infty) + (+\\infty) = +\\infty$ (les deux équipes tirent dans le même sens), $\\frac{1}{+\\infty} = 0$ et $3 \\times (+\\infty) = +\\infty$.",
+              "answers": [
+                {
+                  "content": "$(+\\infty) + (-\\infty)$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{0}{0}$",
+                  "correct": true
+                },
+                {
+                  "content": "$(+\\infty) + (+\\infty)$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{1}{+\\infty}$",
+                  "correct": false
+                },
+                {
+                  "content": "$3 \\times (+\\infty)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'image du tir à la corde, à quoi correspond une forme indéterminée comme « $+\\infty - \\infty$ » ?",
+              "question_type": "single_choice",
+              "explanation": "Une forme indéterminée, c'est deux forces infinies qui tirent en sens contraires : on ne sait pas qui gagne sans regarder de plus près. L'erreur tentante est de croire au « match nul » qui donnerait $0$ : selon la fonction, le résultat peut être un nombre quelconque, $+\\infty$ ou $-\\infty$. Une équipe infinie contre une équipe normale, c'est « $+\\infty + \\ell$ », qui vaut $+\\infty$ : ce n'est pas indéterminé.",
+              "answers": [
+                {
+                  "content": "Deux équipes infiniment fortes tirent en sens contraires : on ne sait pas qui gagne sans regarder de plus près.",
+                  "correct": true
+                },
+                {
+                  "content": "Une équipe infiniment forte tire contre une équipe normale : on ne sait pas qui gagne.",
+                  "correct": false
+                },
+                {
+                  "content": "Deux équipes infiniment fortes tirent dans le même sens : on ne sait pas où va la corde.",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux équipes sont aussi fortes l'une que l'autre, donc le résultat vaut toujours $0$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to 0^+} \\frac{1}{x}$ ? (La notation $x \\to 0^+$ veut dire que $x$ tend vers $0$ en restant positif.)",
+              "question_type": "single_choice",
+              "explanation": "Souviens-toi du riz partagé : plus les tas sont petits ($x$ proche de $0$, positif), plus il y a de tas. $\\frac{1}{x}$ devient plus grand que n'importe quel nombre, donc la limite est $+\\infty$. L'erreur tentante est $0$ : c'est la limite de $\\frac{1}{x}$ quand $x \\to +\\infty$, pas quand $x \\to 0^+$. Et $-\\infty$ est la limite quand $x \\to 0^-$ (valeurs négatives).",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$-\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La forme « $\\frac{+\\infty}{+\\infty}$ » est toujours égale à $1$.",
+              "question_type": "true_false",
+              "explanation": "Faux. C'est une forme indéterminée : le résultat dépend de la fonction. Par exemple, $\\lim_{x \\to +\\infty} \\frac{2x}{x} = 2$, alors que $\\lim_{x \\to +\\infty} \\frac{x^2}{x} = +\\infty$. Les deux équipes du tir à la corde sont infinies, mais l'une peut tirer plus fort que l'autre.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Appliquer — Calculer des limites et lever une indétermination",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Que vaut $\\lim_{x \\to +\\infty} (2x^3 - 5x^2 + 1)$ ?",
+              "question_type": "single_choice",
+              "explanation": "En $+\\infty$, un polynôme a la même limite que son terme de plus haut degré, ici $2x^3$, qui tend vers $+\\infty$. L'erreur tentante est de s'arrêter à la forme « $+\\infty - \\infty$ » : elle est indéterminée, mais on la lève justement avec cette règle (c'est $2x^3$ qui tire le plus fort).",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$-\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$2$",
+                  "correct": false
+                },
+                {
+                  "content": "C'est une forme indéterminée, on ne peut pas conclure.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{4x^2 - x}{2x^2 + 3}$ ?",
+              "question_type": "single_choice",
+              "explanation": "En $+\\infty$, une fonction rationnelle a la même limite que le quotient des termes de plus haut degré : $\\frac{4x^2}{2x^2} = 2$. La limite vaut donc $2$. L'erreur tentante est $1$, en croyant que « $\\frac{\\infty}{\\infty} = 1$ » : c'est faux, c'est une forme indéterminée.",
+              "answers": [
+                {
+                  "content": "$2$",
+                  "correct": true
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "$4$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$ ?",
+              "question_type": "single_choice",
+              "explanation": "En remplaçant $x$ par $3$, on obtient « $\\frac{0}{0}$ », une forme indéterminée. On factorise : $x^2 - 9 = (x - 3)(x + 3)$. Pour $x \\neq 3$, la fraction vaut $x + 3$, qui tend vers $6$. L'erreur tentante est de dire « on divise par $0$, donc pas de limite » : diviser par un nombre qui tend vers $0$ n'est pas diviser par $0$.",
+              "answers": [
+                {
+                  "content": "$6$",
+                  "correct": true
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$3$",
+                  "correct": false
+                },
+                {
+                  "content": "La limite n'existe pas, car on divise par $0$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to -\\infty} (x^3 + x^2)$ ?",
+              "question_type": "single_choice",
+              "explanation": "En $-\\infty$, on garde le terme de plus haut degré : $x^3$. Comme $3$ est impair, $\\lim_{x \\to -\\infty} x^3 = -\\infty$. La limite vaut donc $-\\infty$. L'erreur tentante est $+\\infty$, en oubliant qu'une puissance impaire d'un nombre négatif est négative.",
+              "answers": [
+                {
+                  "content": "$-\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = \\frac{1}{x - 2}$ pour $x \\neq 2$. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Quand $x \\to 2^+$, $x - 2$ tend vers $0$ en restant positif : $\\frac{1}{x-2} \\to +\\infty$. Quand $x \\to 2^-$, $x - 2$ tend vers $0$ en restant négatif : $\\frac{1}{x-2} \\to -\\infty$. Le piège est d'oublier le signe du dénominateur et de dire $+\\infty$ des deux côtés. En $+\\infty$, $\\frac{1}{x-2}$ tend vers $0$, pas vers $2$.",
+              "answers": [
+                {
+                  "content": "$\\lim_{x \\to 2^+} f(x) = +\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to 2^-} f(x) = -\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to 2^-} f(x) = +\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} f(x) = 2$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to 2^+} f(x) = 0$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to +\\infty} (\\sqrt{x} - x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "On a la forme « $+\\infty - \\infty$ ». On met $x$ en facteur : pour $x > 0$, $\\sqrt{x} - x = x\\left(\\frac{1}{\\sqrt{x}} - 1\\right)$. Or $\\frac{1}{\\sqrt{x}} \\to 0$, donc la parenthèse tend vers $-1$, et « $+\\infty \\times (-1)$ » donne $-\\infty$. Au tir à la corde, c'est $x$ qui tire plus fort que $\\sqrt{x}$. L'erreur tentante est $0$ (« $\\infty - \\infty = 0$ »).",
+              "answers": [
+                {
+                  "content": "$-\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "La limite n'existe pas, car c'est une forme indéterminée.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "S'évaluer — Étudier les limites de fonctions rationnelles",
+          "exercise_type": "evaluation",
+          "questions": [
+            {
+              "content": "On pose $f(x) = \\frac{2x^2 - x - 1}{x - 1}$ pour $x \\neq 1$. En remplaçant directement $x$ par $1$, qu'obtient-on ?",
+              "question_type": "single_choice",
+              "explanation": "Numérateur : $2 \\times 1^2 - 1 - 1 = 0$. Dénominateur : $1 - 1 = 0$. On obtient la forme « $\\frac{0}{0}$ », indéterminée : il faudra factoriser. L'erreur tentante est de conclure « $0$ » dès que le numérateur est nul : c'est vrai seulement si le dénominateur ne tend pas vers $0$.",
+              "answers": [
+                {
+                  "content": "La forme indéterminée « $\\frac{0}{0}$ »",
+                  "correct": true
+                },
+                {
+                  "content": "$0$, car le numérateur est nul",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$, car le dénominateur est nul",
+                  "correct": false
+                },
+                {
+                  "content": "« $\\frac{2}{0}$ », donc $+\\infty$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On pose $f(x) = \\frac{2x^2 - x - 1}{x - 1}$ pour $x \\neq 1$. Que vaut $\\lim_{x \\to 1} f(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "$1$ est racine de $2x^2 - x - 1$, donc on peut factoriser par $(x - 1)$ : $2x^2 - x - 1 = (x - 1)(2x + 1)$. Pour $x \\neq 1$, $f(x) = 2x + 1$, qui tend vers $3$. L'erreur tentante est de répondre $0$ ou $1$ en croyant que « $\\frac{0}{0}$ » a une valeur fixe : c'est une forme indéterminée.",
+              "answers": [
+                {
+                  "content": "$3$",
+                  "correct": true
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "$2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $g(x) = \\frac{x^2 + 1}{x + 2}$ pour $x \\neq -2$. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "En $+\\infty$ : $\\frac{x^2}{x} = x \\to +\\infty$. En $-2^+$ : le numérateur tend vers $5$ et $x + 2$ tend vers $0$ en restant positif, donc $g(x) \\to +\\infty$. En $-2^-$, $x + 2$ est négatif, donc $g(x) \\to -\\infty$ (et non $+\\infty$). En $-\\infty$ : $\\frac{x^2}{x} = x \\to -\\infty$. Le piège est « $\\frac{\\infty}{\\infty} = 1$ » : c'est faux.",
+              "answers": [
+                {
+                  "content": "$\\lim_{x \\to +\\infty} g(x) = +\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to -2^+} g(x) = +\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to -2^-} g(x) = +\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} g(x) = 1$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to -\\infty} g(x) = +\\infty$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + 1} - x\\right)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Forme « $+\\infty - \\infty$ ». On multiplie par l'expression conjuguée $\\sqrt{x^2 + 1} + x$ : $\\sqrt{x^2 + 1} - x = \\frac{(x^2 + 1) - x^2}{\\sqrt{x^2 + 1} + x} = \\frac{1}{\\sqrt{x^2 + 1} + x}$. Le dénominateur tend vers $+\\infty$, donc la limite vaut $0$. L'erreur tentante est $1$, en croyant que $\\sqrt{x^2 + 1}$ « ressemble » à $x + 1$ : en fait $\\sqrt{x^2 + 1}$ est très proche de $x$.",
+              "answers": [
+                {
+                  "content": "$0$",
+                  "correct": true
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "La limite n'existe pas, car c'est une forme indéterminée.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $h(x) = \\frac{x^3 - 2x}{1 - x^3}$ pour $x \\neq 1$. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "En $+\\infty$, le numérateur tend vers $+\\infty$ et le dénominateur vers $-\\infty$ : c'est une forme « $\\frac{\\infty}{\\infty}$ », indéterminée. On garde les termes de plus haut degré : $\\frac{x^3}{-x^3} = -1$, en $+\\infty$ comme en $-\\infty$. Les pièges : oublier le signe moins devant $x^3$ au dénominateur (on trouve alors $1$), ou croire que le degré 3 du numérateur impose $+\\infty$ alors que le dénominateur est aussi de degré 3.",
+              "answers": [
+                {
+                  "content": "En $+\\infty$, le calcul direct donne une forme indéterminée « $\\frac{\\infty}{\\infty}$ ».",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} h(x) = -1$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to -\\infty} h(x) = -1$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to -\\infty} h(x) = 1$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} h(x) = +\\infty$, car le numérateur est de degré 3.",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} h(x) = 1$, car « $\\frac{\\infty}{\\infty} = 1$ ».",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Le théorème des gendarmes et les limites par comparaison",
+      "subtitle": "Encadrer ou minorer une fonction pour trouver sa limite",
+      "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître quand une limite se calcule par encadrement ou par comparaison.</li>\n<li>Encadrer une fonction qui contient $\\sin x$ ou $\\cos x$.</li>\n<li>Calculer une limite avec le théorème des gendarmes ou un théorème de comparaison.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les deux policiers (le théorème des gendarmes).</strong> Deux policiers, P1 et P2, emmènent un prisonnier au commissariat en le tenant chacun par un bras. Le prisonnier est toujours entre les deux. Si les deux policiers arrivent au commissariat, le prisonnier y arrive forcément aussi : il ne peut pas aller ailleurs.</p>\n<p><em>Le pont.</em> P1 et P2 sont les fonctions $u$ et $v$. Le prisonnier est la fonction $f$. Le commissariat est la limite $\\ell$. « Tenir par le bras », c'est l'<strong>encadrement</strong> $u(x) \\le f(x) \\le v(x)$ : $f$ est coincée entre $u$ et $v$.</p>\n<p><em>Où l'image s'arrête.</em> Les deux policiers doivent aller <strong>au même endroit</strong>. Si P1 va au commissariat et P2 à l'hôpital, on ne peut rien dire du prisonnier. Si $u$ et $v$ ont des limites différentes, le théorème ne s'applique pas.</p>\n<p><strong>2. Les deux tirelires (la comparaison).</strong> Awa a toujours au moins autant d'argent que Koffi dans sa tirelire. Un jour, l'argent de Koffi dépasse 100 000 F, puis 1 million, puis n'importe quelle somme. Alors l'argent d'Awa dépasse lui aussi n'importe quelle somme.</p>\n<p><em>Le pont.</em> L'argent de Koffi, c'est $u(x)$. L'argent d'Awa, c'est $f(x)$. « Au moins autant », c'est $f(x) \\ge u(x)$ : on dit que $u$ <strong>minore</strong> $f$. « Dépasser n'importe quelle somme », c'est $\\lim u = +\\infty$. Conclusion : $\\lim f = +\\infty$.</p>\n<p><em>Où l'image s'arrête.</em> Ça ne marche que dans ce sens. Si c'est Awa (celle du dessus) qui devient infiniment riche, on ne sait rien de Koffi. Pour $-\\infty$, c'est l'inverse : il faut une fonction <strong>au-dessus</strong> de $f$ qui descend vers $-\\infty$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Théorème des gendarmes.</strong> Soit $\\ell$ un nombre réel. Si, pour $x$ assez grand, $u(x) \\le f(x) \\le v(x)$, et si $\\lim_{x \\to +\\infty} u(x) = \\lim_{x \\to +\\infty} v(x) = \\ell$, alors $\\lim_{x \\to +\\infty} f(x) = \\ell$.</p>\n<p><strong>Théorèmes de comparaison.</strong></p>\n<ul>\n<li>Si, pour $x$ assez grand, $f(x) \\ge u(x)$ et si $\\lim_{x \\to +\\infty} u(x) = +\\infty$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$.</li>\n<li>Si, pour $x$ assez grand, $f(x) \\le v(x)$ et si $\\lim_{x \\to +\\infty} v(x) = -\\infty$, alors $\\lim_{x \\to +\\infty} f(x) = -\\infty$.</li>\n</ul>\n<p>Ces théorèmes restent vrais en $-\\infty$ (pour $x$ assez petit) et en un réel $a$ (pour $x$ assez proche de $a$).</p>\n<p><strong>L'outil de base.</strong> Pour tout réel $x$ : $-1 \\le \\sin x \\le 1$ et $-1 \\le \\cos x \\le 1$.</p>\n<p><strong>Vocabulaire.</strong> Encadrer $f$ : la placer entre deux fonctions. Minorer $f$ : trouver une fonction plus petite qu'elle. Majorer $f$ : trouver une fonction plus grande qu'elle.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Calculer $\\lim_{x \\to +\\infty} \\frac{\\cos x}{x}$.</strong></p>\n<ol>\n<li>$\\cos x$ n'a pas de limite en $+\\infty$ : il oscille entre $-1$ et $1$. On ne peut donc pas utiliser la règle du quotient.</li>\n<li>Pour tout réel $x$ : $-1 \\le \\cos x \\le 1$.</li>\n<li>Pour $x > 0$, on divise par $x$, qui est positif, donc les inégalités ne changent pas de sens : $-\\frac{1}{x} \\le \\frac{\\cos x}{x} \\le \\frac{1}{x}$.</li>\n<li>$\\lim_{x \\to +\\infty} \\left(-\\frac{1}{x}\\right) = 0$ et $\\lim_{x \\to +\\infty} \\frac{1}{x} = 0$ : les deux policiers vont au même commissariat, $0$.</li>\n<li>D'après le théorème des gendarmes, $\\lim_{x \\to +\\infty} \\frac{\\cos x}{x} = 0$.</li>\n</ol>\n<p><strong>Calculer $\\lim_{x \\to +\\infty} (x^2 + \\sin x)$.</strong></p>\n<ol>\n<li>Pour tout réel $x$, $\\sin x \\ge -1$, donc $x^2 + \\sin x \\ge x^2 - 1$.</li>\n<li>$\\lim_{x \\to +\\infty} (x^2 - 1) = +\\infty$.</li>\n<li>D'après le théorème de comparaison, $\\lim_{x \\to +\\infty} (x^2 + \\sin x) = +\\infty$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Encadrer $f$ entre deux fonctions qui n'ont <strong>pas la même limite</strong>. Par exemple, pour $x \\ge 1$, $-1 \\le \\frac{\\cos x}{x} \\le 1$ est vrai, mais inutile : $-1$ et $1$ sont deux commissariats différents, on ne peut rien conclure.</p>\n<p>Comment le repérer : avant d'écrire « d'après le théorème des gendarmes », calcule les limites des deux fonctions qui encadrent. Si elles sont différentes, cherche un encadrement plus serré. Et si tu divises une inégalité par un nombre négatif, change le sens des inégalités.</p>\n<h2>En une phrase</h2>\n<p>Quand une fonction contient un $\\sin x$ ou un $\\cos x$ qui oscille, je la coince entre deux fonctions qui vont au même endroit (gendarmes), ou je la pousse par en dessous vers $+\\infty$ (comparaison).</p>",
+      "exercises": [
+        {
+          "title": "Comprendre — Reconnaître un encadrement et une comparaison",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Pour $x > 0$, on a $u(x) \\le f(x) \\le v(x)$, avec $\\lim_{x \\to +\\infty} u(x) = \\lim_{x \\to +\\infty} v(x) = 5$. Que peux-tu dire de $\\lim_{x \\to +\\infty} f(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Les deux « policiers » $u$ et $v$ vont vers $5$, et $f$ est toujours entre eux : le « prisonnier » $f$ va donc aussi vers $5$. C'est le théorème des gendarmes. L'erreur tentante est « on ne peut pas savoir » : c'est justement le cas où l'on peut conclure, car les deux limites sont égales.",
+              "answers": [
+                {
+                  "content": "Elle vaut $5$.",
+                  "correct": true
+                },
+                {
+                  "content": "On ne peut pas savoir.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est comprise entre $u(x)$ et $v(x)$, mais elle n'existe pas forcément.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle vaut $0$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'image des deux policiers, que représente le commissariat ?",
+              "question_type": "single_choice",
+              "explanation": "Le commissariat, c'est l'endroit où arrivent les deux policiers : la limite commune $\\ell$ de $u$ et $v$. Le prisonnier, c'est $f$. L'erreur tentante est de répondre « l'encadrement » : l'encadrement, c'est le fait de tenir le prisonnier par les bras, pas le lieu d'arrivée.",
+              "answers": [
+                {
+                  "content": "La limite commune $\\ell$ des fonctions $u$ et $v$",
+                  "correct": true
+                },
+                {
+                  "content": "La fonction $f$, qui est encadrée",
+                  "correct": false
+                },
+                {
+                  "content": "Les fonctions $u$ et $v$",
+                  "correct": false
+                },
+                {
+                  "content": "L'encadrement $u(x) \\le f(x) \\le v(x)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si $u(x) \\le f(x) \\le v(x)$ pour $x$ assez grand, avec $\\lim_{x \\to +\\infty} u(x) = 0$ et $\\lim_{x \\to +\\infty} v(x) = 2$, alors $\\lim_{x \\to +\\infty} f(x) = 1$.",
+              "question_type": "true_false",
+              "explanation": "Faux. Les deux policiers vont à deux endroits différents ($0$ et $2$) : on ne peut rien dire du prisonnier. $f$ peut n'avoir aucune limite, ou avoir n'importe quelle limite entre $0$ et $2$. Prendre la moyenne, $1$, n'a aucune justification.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si $f(x) \\ge x^2$ pour tout réel $x$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$.",
+              "question_type": "true_false",
+              "explanation": "Vrai. Comme dans l'image des tirelires, $f$ est toujours au-dessus de $x^2$, et $x^2$ tend vers $+\\infty$ en $+\\infty$. Donc $f$ est « poussée » vers $+\\infty$ : c'est le théorème de comparaison.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On sait que $f(x) \\le u(x)$ pour $x$ assez grand et que $\\lim_{x \\to +\\infty} u(x) = +\\infty$. Que peux-tu conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Ici, c'est la fonction du dessus, $u$, qui part vers $+\\infty$. Dans l'image des tirelires, c'est Awa qui devient infiniment riche : on ne sait rien de Koffi. On ne peut donc rien conclure sur $f$ (par exemple, $f(x) = 0$ convient). L'erreur tentante est $+\\infty$ : le théorème de comparaison demande une fonction en dessous de $f$ qui tend vers $+\\infty$.",
+              "answers": [
+                {
+                  "content": "On ne peut rien conclure sur la limite de $f$.",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} f(x) = +\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} f(x) = -\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} f(x) = 0$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour appliquer le théorème des gendarmes à $f$ en $+\\infty$, de quoi as-tu besoin ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Il faut deux « policiers » qui tiennent $f$ ($u(x) \\le f(x) \\le v(x)$ pour $x$ assez grand) et qui vont au même commissariat (même limite $\\ell$). Il n'est pas nécessaire que $f$ soit croissante, ni que $u$ et $v$ soient égales. Et on ne connaît pas la limite de $f$ à l'avance : c'est ce qu'on cherche.",
+              "answers": [
+                {
+                  "content": "Deux fonctions $u$ et $v$ telles que $u(x) \\le f(x) \\le v(x)$ pour $x$ assez grand",
+                  "correct": true
+                },
+                {
+                  "content": "Que $u$ et $v$ aient la même limite $\\ell$ en $+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "Que $f$ soit croissante",
+                  "correct": false
+                },
+                {
+                  "content": "Que $u$ et $v$ soient égales",
+                  "correct": false
+                },
+                {
+                  "content": "Connaître déjà la limite de $f$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Appliquer — Encadrer ou minorer une fonction",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Pour tout réel $x$, $-1 \\le \\sin x \\le 1$. Pour $x > 0$, qu'en déduis-tu ?",
+              "question_type": "single_choice",
+              "explanation": "On divise les trois membres par $x$, qui est positif : le sens des inégalités ne change pas. On obtient $-\\frac{1}{x} \\le \\frac{\\sin x}{x} \\le \\frac{1}{x}$. L'erreur tentante est d'inverser les inégalités, ce qu'on ne fait que si l'on divise par un nombre négatif.",
+              "answers": [
+                {
+                  "content": "$-\\frac{1}{x} \\le \\frac{\\sin x}{x} \\le \\frac{1}{x}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{1}{x} \\le \\frac{\\sin x}{x} \\le -\\frac{1}{x}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-x \\le \\frac{\\sin x}{x} \\le x$",
+                  "correct": false
+                },
+                {
+                  "content": "$-1 \\le \\frac{\\sin x}{x} \\le 1$, donc $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x} = 1$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Pour $x > 0$, $-\\frac{1}{x} \\le \\frac{\\sin x}{x} \\le \\frac{1}{x}$, et les deux policiers tendent vers $0$. D'après le théorème des gendarmes, la limite vaut $0$. L'erreur tentante est $1$ : c'est la limite de $\\frac{\\sin x}{x}$ quand $x \\to 0$, pas quand $x \\to +\\infty$. Et même si $\\sin x$ n'a pas de limite, le quotient en a une.",
+              "answers": [
+                {
+                  "content": "$0$",
+                  "correct": true
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'existe pas, car $\\sin x$ n'a pas de limite en $+\\infty$.",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to +\\infty} (x + \\cos x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Pour tout réel $x$, $\\cos x \\ge -1$, donc $x + \\cos x \\ge x - 1$. Or $\\lim_{x \\to +\\infty} (x - 1) = +\\infty$. Par comparaison, la limite vaut $+\\infty$. L'erreur tentante est « pas de limite, car $\\cos x$ n'en a pas » : $\\cos x$ reste coincé entre $-1$ et $1$, il ne peut pas empêcher $x$ de partir vers $+\\infty$.",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "Elle n'existe pas, car $\\cos x$ n'a pas de limite en $+\\infty$.",
+                  "correct": false
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$ seulement quand $\\cos x$ est positif",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to -\\infty} (2x + \\sin x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Pour tout réel $x$, $\\sin x \\le 1$, donc $2x + \\sin x \\le 2x + 1$. Or $\\lim_{x \\to -\\infty} (2x + 1) = -\\infty$. Une fonction au-dessus de $f$ descend vers $-\\infty$, donc $f$ aussi : la limite vaut $-\\infty$. L'erreur tentante est $+\\infty$, en oubliant que $x$ tend vers $-\\infty$.",
+              "answers": [
+                {
+                  "content": "$-\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'existe pas, car $\\sin x$ n'a pas de limite.",
+                  "correct": false
+                },
+                {
+                  "content": "$2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{2 + \\cos x}{x}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Pour tout réel $x$, $1 \\le 2 + \\cos x \\le 3$. Pour $x > 0$ : $\\frac{1}{x} \\le \\frac{2 + \\cos x}{x} \\le \\frac{3}{x}$. Les deux policiers, $\\frac{1}{x}$ et $\\frac{3}{x}$, tendent vers $0$ : la limite vaut $0$. L'erreur tentante est de répondre $2$ ou $3$ en regardant seulement le numérateur, sans voir que le dénominateur $x$ devient énorme.",
+              "answers": [
+                {
+                  "content": "$0$",
+                  "correct": true
+                },
+                {
+                  "content": "$2$",
+                  "correct": false
+                },
+                {
+                  "content": "$3$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'existe pas.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles inégalités sont vraies pour tout réel $x$ (et $x \\neq 0$ quand il y a un quotient) ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Pour tout réel $x$, $-1 \\le \\cos x \\le 1$ ; et en ajoutant $x$ à $-1 \\le \\sin x \\le 1$, on obtient $x - 1 \\le x + \\sin x \\le x + 1$. En revanche, $\\sin x$ peut être négatif (donc $0 \\le \\sin x$ est faux), $x + \\cos x \\ge x$ est faux quand $\\cos x < 0$, et $\\frac{\\sin x}{x} \\le \\frac{1}{x}$ est faux pour certains $x < 0$ (diviser par un négatif inverse l'inégalité).",
+              "answers": [
+                {
+                  "content": "$-1 \\le \\cos x \\le 1$",
+                  "correct": true
+                },
+                {
+                  "content": "$x - 1 \\le x + \\sin x \\le x + 1$",
+                  "correct": true
+                },
+                {
+                  "content": "$0 \\le \\sin x \\le 1$",
+                  "correct": false
+                },
+                {
+                  "content": "$x + \\cos x \\ge x$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{\\sin x}{x} \\le \\frac{1}{x}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "S'évaluer — Calculer une limite par comparaison",
+          "exercise_type": "evaluation",
+          "questions": [
+            {
+              "content": "Soit $f(x) = \\frac{3x + \\cos x}{x + 1}$ pour $x > -1$. Que vaut $\\lim_{x \\to +\\infty} f(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Pour tout $x$, $3x - 1 \\le 3x + \\cos x \\le 3x + 1$. Pour $x > -1$, $x + 1 > 0$, donc $\\frac{3x - 1}{x + 1} \\le f(x) \\le \\frac{3x + 1}{x + 1}$. Les deux fonctions qui encadrent tendent vers $\\frac{3x}{x} = 3$. D'après le théorème des gendarmes, la limite vaut $3$. L'erreur tentante est $1$ (« $\\frac{\\infty}{\\infty} = 1$ ») ou « pas de limite à cause de $\\cos x$ ».",
+              "answers": [
+                {
+                  "content": "$3$",
+                  "correct": true
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'existe pas, car $\\cos x$ n'a pas de limite en $+\\infty$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $g(x) = x^2(2 + \\sin x)$. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Comme $-1 \\le \\sin x \\le 1$, on a $1 \\le 2 + \\sin x \\le 3$. En multipliant par $x^2 \\ge 0$ : $g(x) \\ge x^2$, et $x^2 \\to +\\infty$, donc $\\lim_{x \\to +\\infty} g(x) = +\\infty$ par comparaison. L'erreur tentante est « $2 \\le 2 + \\sin x$ » : c'est faux quand $\\sin x < 0$, donc $g(x) \\ge 2x^2$ est faux aussi. Et le fait que $\\sin x$ oscille n'empêche pas $g$ d'avoir une limite.",
+              "answers": [
+                {
+                  "content": "Pour tout réel $x$, $1 \\le 2 + \\sin x \\le 3$.",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} g(x) = +\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "Pour tout réel $x$, $2 \\le 2 + \\sin x \\le 3$.",
+                  "correct": false
+                },
+                {
+                  "content": "Pour tout réel $x$, $g(x) \\ge 2x^2$.",
+                  "correct": false
+                },
+                {
+                  "content": "$g$ n'a pas de limite en $+\\infty$, car $\\sin x$ oscille.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour démontrer que $\\lim_{x \\to +\\infty} \\frac{\\cos x}{x^2 + 1} = 0$, quel encadrement faut-il écrire ?",
+              "question_type": "single_choice",
+              "explanation": "On part de $-1 \\le \\cos x \\le 1$ et on divise par $x^2 + 1 > 0$ : $-\\frac{1}{x^2 + 1} \\le \\frac{\\cos x}{x^2 + 1} \\le \\frac{1}{x^2 + 1}$. Les deux policiers tendent vers $0$. L'encadrement entre $-1$ et $1$ est vrai mais inutile : deux commissariats différents. Minorer par $0$ est faux, car $\\cos x$ peut être négatif.",
+              "answers": [
+                {
+                  "content": "$-\\frac{1}{x^2 + 1} \\le \\frac{\\cos x}{x^2 + 1} \\le \\frac{1}{x^2 + 1}$",
+                  "correct": true
+                },
+                {
+                  "content": "$0 \\le \\frac{\\cos x}{x^2 + 1} \\le \\frac{1}{x^2 + 1}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-1 \\le \\frac{\\cos x}{x^2 + 1} \\le 1$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{\\cos x}{x^2 + 1} \\le \\frac{1}{x^2 + 1}$, sans rien d'autre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si, pour tout $x > 0$, $|f(x) - 2| \\le \\frac{1}{x}$, alors $\\lim_{x \\to +\\infty} f(x) = 2$.",
+              "question_type": "true_false",
+              "explanation": "Vrai. $|f(x) - 2| \\le \\frac{1}{x}$ veut dire $2 - \\frac{1}{x} \\le f(x) \\le 2 + \\frac{1}{x}$. Les deux policiers, $2 - \\frac{1}{x}$ et $2 + \\frac{1}{x}$, tendent tous les deux vers $2$ : d'après le théorème des gendarmes, $\\lim_{x \\to +\\infty} f(x) = 2$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $h(x) = \\frac{x - \\sin x}{x}$ pour $x > 0$. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "De $-1 \\le -\\sin x \\le 1$, on tire $x - 1 \\le x - \\sin x \\le x + 1$, puis, en divisant par $x > 0$ : $\\frac{x - 1}{x} \\le h(x) \\le \\frac{x + 1}{x}$. Les deux fonctions qui encadrent tendent vers $1$, donc $\\lim_{x \\to +\\infty} h(x) = 1$. Le piège : utiliser $\\lim \\frac{\\sin x}{x} = 1$, qui n'est vrai qu'en $0$ ; en $+\\infty$, $\\frac{\\sin x}{x}$ tend vers $0$. L'encadrement inversé est faux, car on a divisé par un nombre positif.",
+              "answers": [
+                {
+                  "content": "Pour $x > 0$, $\\frac{x - 1}{x} \\le h(x) \\le \\frac{x + 1}{x}$.",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} \\frac{x - 1}{x} = \\lim_{x \\to +\\infty} \\frac{x + 1}{x} = 1$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} h(x) = 1$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to +\\infty} h(x) = 0$, car $\\lim \\frac{\\sin x}{x} = 1$.",
+                  "correct": false
+                },
+                {
+                  "content": "Pour $x > 0$, $\\frac{x + 1}{x} \\le h(x) \\le \\frac{x - 1}{x}$.",
+                  "correct": false
+                },
+                {
+                  "content": "$h$ n'a pas de limite en $+\\infty$, car $\\sin x$ n'en a pas.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Continuité, valeurs intermédiaires et bijection",
+      "subtitle": "Prouver qu'une équation a une solution unique, puis l'encadrer",
+      "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître une fonction continue sur un intervalle.</li>\n<li>Démontrer qu'une équation $f(x) = k$ a une solution unique sur un intervalle, puis encadrer cette solution.</li>\n<li>Déterminer l'intervalle image d'une bijection.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La balance du marché (la continuité).</strong> Au marché, la vendeuse verse du riz sur sa balance à aiguille. Plus elle verse, plus l'aiguille tourne, doucement, sans jamais sauter d'un chiffre à un autre. Le prix du gbaka, lui, peut sauter : 200 F jusqu'à 5 km, puis 300 F d'un coup juste après 5 km.</p>\n<p><em>Le pont.</em> La quantité de riz versée, c'est $x$. Le poids affiché, c'est $f(x)$. « L'aiguille ne saute pas », c'est la <strong>continuité</strong> : en chaque point $a$, $\\lim_{x \\to a} f(x) = f(a)$. Le prix du gbaka n'est pas continu en $5$ : juste après 5 km, il vaut 300 F, alors qu'à 5 km il vaut 200 F.</p>\n<p><em>Où l'image s'arrête.</em> On dit souvent « la courbe se trace sans lever le crayon ». Cela n'est vrai que sur un intervalle. La fonction $x \\mapsto \\frac{1}{x}$ est continue sur $]-\\infty ; 0[$ et sur $]0 ; +\\infty[$, même si sa courbe a deux morceaux : $0$ n'est pas dans son ensemble de définition.</p>\n<p><strong>2. La montée de la colline (valeurs intermédiaires et bijection).</strong> Tu montes à pied une colline, du pied, à 100 m d'altitude, jusqu'au sommet, à 300 m. Tu marches, tu ne te téléportes pas. Alors, à un moment, tu passes forcément à 200 m. Et si tu montes tout le temps, sans jamais redescendre, tu passes à 200 m une seule fois.</p>\n<p><em>Le pont.</em> Le temps, c'est $x$ dans $[a ; b]$. Ton altitude, c'est $f(x)$, qui est continue car tu ne sautes pas. 100 m et 300 m, ce sont $f(a)$ et $f(b)$. 200 m, c'est un nombre $k$ entre $f(a)$ et $f(b)$. Le moment où tu es à 200 m, c'est le nombre $c$ tel que $f(c) = k$. « Monter tout le temps », c'est être <strong>strictement croissante</strong> : alors $c$ est unique. Chaque altitude entre 100 et 300 m correspond à un seul moment : c'est une <strong>bijection</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Le théorème dit qu'il existe un moment $c$, mais il ne dit pas lequel : pour l'approcher, il faut calculer (encadrer $c$). Et si le chemin monte et descend, tu peux passer plusieurs fois à 200 m.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Continuité.</strong> $f$ est continue en $a$ si $\\lim_{x \\to a} f(x) = f(a)$. $f$ est continue sur un intervalle $I$ si elle est continue en chaque point de $I$.</p>\n<p><strong>Fonctions continues à connaître.</strong> Les polynômes, $\\sin$ et $\\cos$ sont continus sur $\\mathbb{R}$. Les fonctions rationnelles sont continues sur chaque intervalle de leur ensemble de définition. $x \\mapsto \\sqrt{x}$ est continue sur $[0 ; +\\infty[$. Sommes, produits, quotients (dénominateur non nul) et composées de fonctions continues sont continues.</p>\n<p><strong>Théorème des valeurs intermédiaires.</strong> Si $f$ est continue sur $[a ; b]$, alors, pour tout réel $k$ compris entre $f(a)$ et $f(b)$, l'équation $f(x) = k$ a <strong>au moins une</strong> solution dans $[a ; b]$.</p>\n<p><strong>Solution unique.</strong> Si $f$ est continue et <strong>strictement monotone</strong> (strictement croissante, ou strictement décroissante) sur $[a ; b]$, et si $k$ est compris entre $f(a)$ et $f(b)$, alors l'équation $f(x) = k$ a <strong>une unique</strong> solution dans $[a ; b]$. Cas fréquent : si $f(a) \\times f(b) < 0$, l'équation $f(x) = 0$ a une unique solution dans $]a ; b[$.</p>\n<p><strong>Bijection.</strong> Si $f$ est continue et strictement monotone sur un intervalle $I$, alors $f$ réalise une bijection de $I$ sur $J = f(I)$ : chaque $y$ de $J$ a exactement un antécédent $x$ dans $I$, c'est-à-dire un seul $x$ tel que $f(x) = y$.</p>\n<p><strong>Intervalle image $f(I)$</strong> (avec $\\lim_{a} f$ la limite de $f$ en $a$) :</p>\n<ul>\n<li>$f$ strictement croissante : $f([a ; b]) = [f(a) ; f(b)]$ ; $f([a ; +\\infty[) = [f(a) ; \\lim_{+\\infty} f[$ ; $f(]a ; b[) = ]\\lim_{a} f ; \\lim_{b} f[$.</li>\n<li>$f$ strictement décroissante : $f([a ; b]) = [f(b) ; f(a)]$ ; $f([a ; +\\infty[) = ]\\lim_{+\\infty} f ; f(a)]$ ; $f(]a ; b[) = ]\\lim_{b} f ; \\lim_{a} f[$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Montrer que l'équation $x^3 + x - 1 = 0$ a une unique solution $\\alpha$ dans $[0 ; 1]$, puis encadrer $\\alpha$.</strong> On pose $f(x) = x^3 + x - 1$.</p>\n<ol>\n<li><strong>Continuité.</strong> $f$ est un polynôme, donc elle est continue sur $[0 ; 1]$.</li>\n<li><strong>Stricte monotonie.</strong> $f'(x) = 3x^2 + 1 > 0$ pour tout $x$, donc $f$ est strictement croissante sur $[0 ; 1]$.</li>\n<li><strong>Valeurs aux bornes.</strong> $f(0) = -1$ et $f(1) = 1$. Donc $0$ est compris entre $f(0)$ et $f(1)$.</li>\n<li><strong>Conclusion.</strong> L'équation $f(x) = 0$ a une unique solution $\\alpha$ dans $]0 ; 1[$.</li>\n<li><strong>Encadrement d'amplitude $0{,}1$</strong> (l'amplitude est la longueur de l'intervalle). $f(0{,}6) = 0{,}216 + 0{,}6 - 1 = -0{,}184$ et $f(0{,}7) = 0{,}343 + 0{,}7 - 1 = 0{,}043$. Le signe change entre $0{,}6$ et $0{,}7$, donc $0{,}6 < \\alpha < 0{,}7$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Conclure « une <strong>unique</strong> solution » avec seulement la continuité. Le théorème des valeurs intermédiaires donne <strong>au moins</strong> une solution. Pour l'unicité, il faut en plus que $f$ soit strictement monotone sur tout l'intervalle. Souviens-toi : si le chemin monte puis descend, tu passes plusieurs fois à la même altitude.</p>\n<p>Comment le repérer : dans ta rédaction, vérifie que les trois arguments apparaissent : « $f$ est continue », « $f$ est strictement monotone », « $k$ est compris entre $f(a)$ et $f(b)$ ».</p>\n<h2>En une phrase</h2>\n<p>Une fonction continue ne saute pas : si elle part sous $k$ et arrive au-dessus, elle passe par $k$ ; et si en plus elle monte (ou descend) tout le temps, elle y passe une seule fois.</p>",
+      "exercises": [
+        {
+          "title": "Comprendre — Continuité et théorème des valeurs intermédiaires",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Une fonction $f$, définie en $a$, est continue en $a$ lorsque :",
+              "question_type": "single_choice",
+              "explanation": "La définition est $\\lim_{x \\to a} f(x) = f(a)$ : quand $x$ arrive en $a$, la valeur ne « saute » pas, comme l'aiguille de la balance. L'erreur tentante est « la limite en $a$ existe » : il faut en plus qu'elle soit égale à $f(a)$. Le prix du gbaka a une limite juste après 5 km (300 F), mais elle n'est pas égale au prix à 5 km (200 F).",
+              "answers": [
+                {
+                  "content": "$\\lim_{x \\to a} f(x) = f(a)$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\lim_{x \\to a} f(x)$ existe, quelle que soit sa valeur",
+                  "correct": false
+                },
+                {
+                  "content": "$f(a)$ existe",
+                  "correct": false
+                },
+                {
+                  "content": "$f$ est croissante autour de $a$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le prix du gbaka, qui vaut 200 F jusqu'à 5 km inclus puis 300 F au-delà, est une fonction continue en $5$.",
+              "question_type": "true_false",
+              "explanation": "Faux. À 5 km, le prix vaut 200 F. Mais dès que la distance dépasse 5 km, il vaut 300 F : la limite à droite de $5$ est $300$, qui n'est pas égale au prix en $5$. Le prix « saute », comme une aiguille qui passerait d'un coup de 200 à 300.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans l'image de la colline, que représente le nombre $c$ donné par le théorème des valeurs intermédiaires ?",
+              "question_type": "single_choice",
+              "explanation": "Le théorème donne un $c$ tel que $f(c) = k$. Ici, $f(x)$ est l'altitude et $k$ vaut 200 m, donc $c$ est le moment où tu passes à 200 m. L'erreur tentante est de répondre « l'altitude 200 m » : c'est $k$, la valeur atteinte, pas $c$, l'instant où elle est atteinte.",
+              "answers": [
+                {
+                  "content": "Le moment où tu passes à 200 m d'altitude",
+                  "correct": true
+                },
+                {
+                  "content": "L'altitude 200 m",
+                  "correct": false
+                },
+                {
+                  "content": "L'altitude du sommet",
+                  "correct": false
+                },
+                {
+                  "content": "La durée totale de la montée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces fonctions, lesquelles sont continues sur $\\mathbb{R}$ tout entier ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Les polynômes, comme $x^3 - 2x + 5$, et la fonction $\\sin$ sont continus sur $\\mathbb{R}$. La fonction $\\frac{1}{x}$ n'est pas définie en $0$, et $\\frac{x}{x - 1}$ n'est pas définie en $1$ : elles ne peuvent pas être continues sur $\\mathbb{R}$ tout entier (elles le sont sur chaque intervalle de leur ensemble de définition). $\\sqrt{x}$ n'est définie que sur $[0 ; +\\infty[$.",
+              "answers": [
+                {
+                  "content": "$x \\mapsto x^3 - 2x + 5$",
+                  "correct": true
+                },
+                {
+                  "content": "$x \\mapsto \\sin x$",
+                  "correct": true
+                },
+                {
+                  "content": "$x \\mapsto \\frac{1}{x}$",
+                  "correct": false
+                },
+                {
+                  "content": "$x \\mapsto \\sqrt{x}$",
+                  "correct": false
+                },
+                {
+                  "content": "$x \\mapsto \\frac{x}{x - 1}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si $f$ est continue sur $[a ; b]$ et si $f(a)$ et $f(b)$ sont de signes contraires, alors l'équation $f(x) = 0$ a une seule solution dans $[a ; b]$.",
+              "question_type": "true_false",
+              "explanation": "Faux. La continuité seule donne au moins une solution. Pour qu'elle soit unique, il faut en plus que $f$ soit strictement monotone sur $[a ; b]$. Souviens-toi du chemin qui monte et descend : tu peux passer plusieurs fois à la même altitude.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une fonction $f$ continue et strictement croissante sur $[a ; b]$ réalise une bijection de $[a ; b]$ sur :",
+              "question_type": "single_choice",
+              "explanation": "Comme $f$ monte tout le temps, sa plus petite valeur est $f(a)$ et sa plus grande est $f(b)$ : $f([a ; b]) = [f(a) ; f(b)]$. L'erreur tentante est $[f(b) ; f(a)]$, qui est le bon intervalle quand $f$ est strictement décroissante. Et $[a ; b]$ est l'intervalle de départ, pas l'intervalle image.",
+              "answers": [
+                {
+                  "content": "$[f(a) ; f(b)]$",
+                  "correct": true
+                },
+                {
+                  "content": "$[f(b) ; f(a)]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[a ; b]$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{R}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Appliquer — Démontrer qu'une équation a une solution",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Soit $f(x) = x^3 + 2x - 4$. Que valent $f(1)$ et $f(2)$ ?",
+              "question_type": "single_choice",
+              "explanation": "$f(1) = 1 + 2 - 4 = -1$ et $f(2) = 8 + 4 - 4 = 8$. Le changement de signe entre $1$ et $2$ annonce une solution de $f(x) = 0$ dans cet intervalle. Les erreurs tentantes : oublier le terme $2x$ (on trouve $f(2) = 4$), ou changer le signe de $-4$.",
+              "answers": [
+                {
+                  "content": "$f(1) = -1$ et $f(2) = 8$",
+                  "correct": true
+                },
+                {
+                  "content": "$f(1) = -1$ et $f(2) = 4$",
+                  "correct": false
+                },
+                {
+                  "content": "$f(1) = 7$ et $f(2) = 16$",
+                  "correct": false
+                },
+                {
+                  "content": "$f(1) = 1$ et $f(2) = 8$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = x^3 + 2x - 4$ sur $[1 ; 2]$, avec $f(1) = -1$ et $f(2) = 8$. Sachant que $f'(x) = 3x^2 + 2$, quelle est la conclusion correcte et la plus complète pour l'équation $f(x) = 0$ ?",
+              "question_type": "single_choice",
+              "explanation": "$f$ est continue (c'est un polynôme), strictement croissante ($f'(x) > 0$), et $0$ est compris entre $f(1) = -1$ et $f(2) = 8$. Donc l'équation a une unique solution $\\alpha$ dans $]1 ; 2[$. La réponse « au moins une solution, sans savoir combien » oublie la stricte monotonie, qui donne l'unicité. Et $f(1{,}5) = 2{,}375 \\neq 0$, donc $\\alpha \\neq 1{,}5$.",
+              "answers": [
+                {
+                  "content": "Elle a une unique solution $\\alpha$ dans $]1 ; 2[$, car $f$ est continue, strictement croissante, et $0$ est compris entre $f(1)$ et $f(2)$.",
+                  "correct": true
+                },
+                {
+                  "content": "Elle a au moins une solution, mais on ne peut pas savoir combien.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'a pas de solution dans $[1 ; 2]$, car $f(1) \\neq 0$ et $f(2) \\neq 0$.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a une unique solution, égale à $1{,}5$, le milieu de $[1 ; 2]$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = x^3 + 2x - 4$, continue et strictement croissante sur $[1 ; 2]$. L'équation $f(x) = 0$ a une unique solution $\\alpha$ dans $]1 ; 2[$. On calcule $f(1{,}1) = -0{,}469$ et $f(1{,}2) = 0{,}128$. Quel encadrement de $\\alpha$ en déduis-tu ?",
+              "question_type": "single_choice",
+              "explanation": "$f(1{,}1) < 0 < f(1{,}2)$ : le signe change entre $1{,}1$ et $1{,}2$. Comme $f$ est strictement croissante, $1{,}1 < \\alpha < 1{,}2$. L'erreur tentante est « $\\alpha = 1{,}2$, car $f(1{,}2)$ est proche de $0$ » : proche de $0$ ne veut pas dire égal à $0$.",
+              "answers": [
+                {
+                  "content": "$1{,}1 < \\alpha < 1{,}2$",
+                  "correct": true
+                },
+                {
+                  "content": "$1 < \\alpha < 1{,}1$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\alpha = 1{,}2$, car $f(1{,}2)$ est proche de $0$",
+                  "correct": false
+                },
+                {
+                  "content": "$1{,}2 < \\alpha < 2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $g(x) = -2x + 5$ sur $[0 ; 3]$. $g$ est continue et strictement décroissante. Quelle est l'image $g([0 ; 3])$ ?",
+              "question_type": "single_choice",
+              "explanation": "$g(0) = 5$ et $g(3) = -6 + 5 = -1$. Comme $g$ est strictement décroissante, $g([0 ; 3]) = [g(3) ; g(0)] = [-1 ; 5]$. L'erreur tentante est d'écrire $[5 ; -1]$ : un intervalle s'écrit toujours de la plus petite à la plus grande valeur. $[0 ; 3]$ est l'intervalle de départ, pas l'image.",
+              "answers": [
+                {
+                  "content": "$[-1 ; 5]$",
+                  "correct": true
+                },
+                {
+                  "content": "$[5 ; -1]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[0 ; 3]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[-6 ; 5]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $h(x) = x^2$ sur $[-2 ; 2]$, et l'équation $h(x) = 1$. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "$x^2 = 1$ donne $x = -1$ ou $x = 1$ : deux solutions dans $[-2 ; 2]$. $h$ décroît sur $[-2 ; 0]$ puis croît sur $[0 ; 2]$ : elle n'est pas strictement monotone, donc le théorème de la solution unique ne s'applique pas sur $[-2 ; 2]$, et $h$ n'y est pas une bijection. Le piège : croire que si $k$ n'est pas entre $h(a)$ et $h(b)$, il n'y a pas de solution. Le théorème des valeurs intermédiaires donne une condition suffisante, pas nécessaire.",
+              "answers": [
+                {
+                  "content": "L'équation a exactement deux solutions dans $[-2 ; 2]$ : $-1$ et $1$.",
+                  "correct": true
+                },
+                {
+                  "content": "$h$ n'est pas strictement monotone sur $[-2 ; 2]$, donc le théorème de la solution unique ne s'applique pas sur cet intervalle.",
+                  "correct": true
+                },
+                {
+                  "content": "L'équation n'a aucune solution, car $1$ n'est pas compris entre $h(-2) = 4$ et $h(2) = 4$.",
+                  "correct": false
+                },
+                {
+                  "content": "L'équation a une unique solution, car $h$ est continue.",
+                  "correct": false
+                },
+                {
+                  "content": "$h$ réalise une bijection de $[-2 ; 2]$ sur $[0 ; 4]$.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "S'évaluer — Bijection et résolution d'une équation",
+          "exercise_type": "evaluation",
+          "questions": [
+            {
+              "content": "On considère $f(x) = x^3 + 3x + 1$, définie sur $\\mathbb{R}$. Quel est le sens de variation de $f$ ?",
+              "question_type": "single_choice",
+              "explanation": "$f'(x) = 3x^2 + 3$. Comme $x^2 \\ge 0$, on a $3x^2 + 3 \\ge 3 > 0$ : $f$ est strictement croissante sur $\\mathbb{R}$. L'erreur tentante est de croire que $3x^2 + 3$ s'annule en $-1$ : l'équation $x^2 = -1$ n'a pas de solution réelle.",
+              "answers": [
+                {
+                  "content": "$f'(x) = 3x^2 + 3 > 0$, donc $f$ est strictement croissante sur $\\mathbb{R}$.",
+                  "correct": true
+                },
+                {
+                  "content": "$f'(x) = 3x^2 + 3$ s'annule en $x = -1$, donc $f$ change de sens de variation en $-1$.",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x) = 3x^2 + 3x$, donc $f$ n'est pas monotone sur $\\mathbb{R}$.",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x) = 3x^2 + 3 > 0$, donc $f$ est strictement décroissante sur $\\mathbb{R}$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = x^3 + 3x + 1$, continue et strictement croissante sur $\\mathbb{R}$, quel est l'intervalle image $f(\\mathbb{R})$ ?",
+              "question_type": "single_choice",
+              "explanation": "$f$ est continue et strictement croissante sur $\\mathbb{R} = ]-\\infty ; +\\infty[$. Donc $f(\\mathbb{R}) = ]\\lim_{-\\infty} f ; \\lim_{+\\infty} f[$. Or $\\lim_{x \\to -\\infty} f(x) = \\lim_{x \\to -\\infty} x^3 = -\\infty$ et $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Donc $f(\\mathbb{R}) = \\mathbb{R}$. L'erreur tentante est $[1 ; +\\infty[$, en partant de $f(0) = 1$ : mais $0$ n'est pas le début de l'intervalle $\\mathbb{R}$.",
+              "answers": [
+                {
+                  "content": "$\\mathbb{R}$",
+                  "correct": true
+                },
+                {
+                  "content": "$[1 ; +\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$]0 ; +\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[f(-1) ; f(0)]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = x^3 + 3x + 1$ sur $\\mathbb{R}$. On sait que $f$ est continue et strictement croissante sur $\\mathbb{R}$, avec $\\lim_{x \\to -\\infty} f(x) = -\\infty$ et $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "$f$ est continue et strictement croissante sur $\\mathbb{R}$, et $f(\\mathbb{R}) = \\mathbb{R}$ : c'est une bijection de $\\mathbb{R}$ sur $\\mathbb{R}$. Comme $0 \\in \\mathbb{R}$, l'équation $f(x) = 0$ a une unique solution $\\alpha$. $f(-1) = -1 - 3 + 1 = -3$ et $f(0) = 1$ : le signe change, donc $-1 < \\alpha < 0$. Le piège : croire qu'une équation de degré 3 a forcément trois solutions. Ici, $f$ monte tout le temps, elle ne passe par $0$ qu'une fois.",
+              "answers": [
+                {
+                  "content": "$f$ réalise une bijection de $\\mathbb{R}$ sur $\\mathbb{R}$.",
+                  "correct": true
+                },
+                {
+                  "content": "L'équation $f(x) = 0$ admet une unique solution $\\alpha$ dans $\\mathbb{R}$.",
+                  "correct": true
+                },
+                {
+                  "content": "$f(-1) = -3$ et $f(0) = 1$, donc $-1 < \\alpha < 0$.",
+                  "correct": true
+                },
+                {
+                  "content": "L'équation $f(x) = 0$ a trois solutions, car $f$ est de degré 3.",
+                  "correct": false
+                },
+                {
+                  "content": "$f(-1) = 3$ et $f(0) = 1$, donc $\\alpha$ n'est pas entre $-1$ et $0$.",
+                  "correct": false
+                },
+                {
+                  "content": "$\\alpha > 0$, car $f(0) = 1 > 0$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = x^3 + 3x + 1$, strictement croissante sur $\\mathbb{R}$. L'équation $f(x) = 0$ a une unique solution $\\alpha$, et $-1 < \\alpha < 0$. On donne $f(-0{,}4) = -0{,}264$ et $f(-0{,}3) = 0{,}073$. Quel encadrement d'amplitude $0{,}1$ de $\\alpha$ en déduis-tu ?",
+              "question_type": "single_choice",
+              "explanation": "$f(-0{,}4) < 0 < f(-0{,}3)$ et $f$ est strictement croissante, donc $-0{,}4 < \\alpha < -0{,}3$. L'erreur tentante est d'oublier le signe moins et d'écrire $0{,}3 < \\alpha < 0{,}4$ : on sait déjà que $\\alpha$ est négatif, puisque $-1 < \\alpha < 0$.",
+              "answers": [
+                {
+                  "content": "$-0{,}4 < \\alpha < -0{,}3$",
+                  "correct": true
+                },
+                {
+                  "content": "$0{,}3 < \\alpha < 0{,}4$",
+                  "correct": false
+                },
+                {
+                  "content": "$-0{,}3 < \\alpha < -0{,}2$",
+                  "correct": false
+                },
+                {
+                  "content": "$-0{,}5 < \\alpha < -0{,}4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $k(x) = x^2 - 4x + 3$. Sur quel intervalle $k$ réalise-t-elle une bijection sur $[-1 ; +\\infty[$ ?",
+              "question_type": "single_choice",
+              "explanation": "$k(x) = (x - 2)^2 - 1$ : $k$ est strictement décroissante sur $]-\\infty ; 2]$ et strictement croissante sur $[2 ; +\\infty[$. Sur $[2 ; +\\infty[$, $k$ est continue et strictement croissante, $k(2) = -1$ et $\\lim_{x \\to +\\infty} k(x) = +\\infty$ : l'image est $[-1 ; +\\infty[$. Sur $\\mathbb{R}$ ou sur $[0 ; +\\infty[$, $k$ n'est pas strictement monotone. L'intervalle $[1 ; 3]$ vient des racines $1$ et $3$, mais $k$ n'y est pas monotone non plus.",
+              "answers": [
+                {
+                  "content": "$[2 ; +\\infty[$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathbb{R}$",
+                  "correct": false
+                },
+                {
+                  "content": "$[0 ; +\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[1 ; 3]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "$f$ est continue et strictement décroissante sur $]0 ; +\\infty[$, avec $\\lim_{x \\to 0^+} f(x) = +\\infty$ et $\\lim_{x \\to +\\infty} f(x) = 2$. Alors l'équation $f(x) = 1$ admet une unique solution dans $]0 ; +\\infty[$.",
+              "question_type": "true_false",
+              "explanation": "Faux. $f$ est une bijection de $]0 ; +\\infty[$ sur $]2 ; +\\infty[$ (pour une fonction décroissante sur $]a ; b[$, l'image est $]\\lim_b f ; \\lim_a f[$). Or $1$ n'appartient pas à $]2 ; +\\infty[$ : l'équation $f(x) = 1$ n'a aucune solution. Le piège est de réciter « continue et strictement monotone, donc solution unique » sans vérifier que $k = 1$ est dans l'intervalle image.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
