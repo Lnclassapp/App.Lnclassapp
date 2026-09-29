@@ -120,3 +120,9 @@ Rôle distinct (agent de recette, sans secret ni accès équipe), sur `applnclas
 - **D3 (mineur)** : la CSP autorise `style-src-attr 'unsafe-inline'` ; à consigner dans un ADR si c'est voulu.
 
 **Pour cocher la porte** : un compte équipe de recette sur `Staging` (TOTP ou code de secours transmis hors dépôt), un code d'établissement ou un compte enseignant de recette, et l'accord du porteur pour créer un élève et un enseignant de recette et tester le verrouillage à 5 échecs.
+
+## Suites de la recette (2026-09-28)
+
+- **D1 et D2 corrigés et en production** le 2026-09-28 : chantier [`recette-v1-defauts`](../recette-v1-defauts/journal.md) (#81, puis #82 vers `Staging` et #83 vers `main`). Vérifié sur `Staging`, www.lnclass.com et lnclass.com : `POST /join` avec `ZZZ99` renvoie 422 et « Code de classe invalide. Vérifie le code auprès de ton professeur, puis saisis-le de nouveau. » ; `/nexistepas` renvoie la 404 « Page introuvable · Lnclass », en français.
+- **D3 clos sans nouvel ADR** : `style-src-attr 'unsafe-inline'` est une concession déjà consignée dans l'[ADR-0049](../../decisions/adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (« Coûts consentis ») et commentée dans `config/initializers/content_security_policy.rb` : KaTeX produit des attributs `style="…"`, qui n'exécutent aucun code. Les scripts restent sous nonce.
+- **Volet authentifié en attente** : le porteur ne peut pas fournir de compte de recette sur `Staging` le 2026-09-28. La recette authentifiée (compte équipe, verrouillage à 5 échecs, inscription élève par code, boucle complète) est mise en attente ; la porte V1 reste ouverte sur ce seul point. Le reste du programme continue.

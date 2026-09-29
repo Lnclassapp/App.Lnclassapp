@@ -41,7 +41,7 @@ class AddSchoolCodesMigrationRunTest < ActiveSupport::TestCase
   self.use_transactional_tests = false
 
   def migrate(direction)
-    ActiveRecord::Migration.suppress_messages { AddSchoolCodes.new.migrate(direction) }
+    changing_schema { ActiveRecord::Migration.suppress_messages { AddSchoolCodes.new.migrate(direction) } }
     Orm::School.reset_column_information
   end
 

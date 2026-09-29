@@ -56,20 +56,21 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | Chantier | Statut | En une phrase |
 |---|---|---|
 | [`amorcage-depot`](amorcage-depot/memo.md) | livré | V0 : les garde-fous avant tout code métier (#6) ; garde-fous 1 et 5 en écarts assumés |
-| [`boucle-pedagogique`](boucle-pedagogique/memo.md) | livré | V1 : équipe → contenu → enseignant → élève → résultat, en production depuis le 2026-09-27, clos le 2026-09-28 ; recette `Staging` par un rôle distinct en cours |
+| [`boucle-pedagogique`](boucle-pedagogique/memo.md) | livré | V1 : équipe → contenu → enseignant → élève → résultat, en production depuis le 2026-09-27, clos le 2026-09-28 ; recette `Staging` par un rôle distinct : volet public accepté, D1-D2 corrigés, volet authentifié **en attente** d'un compte de recette (porteur, 2026-09-28) |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | « Mon profil » pour tous : nom, numéro et PIN modifiables sous PIN actuel (ADR-0055, UDR-0041) |
 | [`generer-classes`](generer-classes/memo.md) | livré | Générer après coup les classes des établissements qui n'en ont aucune de l'année (ADR-0056, UDR-0043) |
 | [`photo-de-profil`](photo-de-profil/memo.md) | en production, durcissement livré (#65, #75) ; memo encore « en cours », à clore | Photo de profil pour tous : recadrée par le navigateur, vérifiée par le serveur, visible de soi, de ses enseignants et de l'équipe (ADR-0060, UDR-0047) |
 | [`classes-par-niveau`](classes-par-niveau/memo.md) | livré | Ajuster les classes d'un établissement niveau par niveau : ajouter la suivante, retirer la dernière si elle n'a jamais servi (ADR-0059, UDR-0046) |
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | « Déjà en cours » en toast d'information vers le rapport, badge « Génération en cours », ⋮ collé à droite des tableaux au téléphone (amendements UDR-0042, UDR-0043) |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | Barème des classes générées en base, modifiable par l'équipe à l'écran ; menu « Classes » des établissements (ADR-0058, UDR-0045) |
-| [`recette-v1-defauts`](recette-v1-defauts/memo.md) | livré (PR en revue) | Recette V1 : `/join` refuse en 422 un code sans classe, sous la limite de débit de `/c/` (amendement UDR-0009) ; pages d'erreur statiques en français |
+| [`recette-v1-defauts`](recette-v1-defauts/memo.md) | livré | Recette V1, en production le 2026-09-28 (#81, #83) : `/join` refuse en 422 un code sans classe, sous la limite de débit de `/c/` (amendement UDR-0009) ; pages d'erreur statiques en français |
 | [`afficher-pin`](afficher-pin/memo.md) | livré | Bouton œil dans les 13 champs de PIN (connexion, inscriptions, profil, PIN oublié), masqué par défaut et avant l'envoi (UDR-0051, amendement UDR-0005) |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | Actions de modification et de suppression des écrans de l'équipe dans un menu ⋮ (UDR-0042) |
 | [`cycles-en-radio`](cycles-en-radio/memo.md) | livré | Cycle d'un niveau et d'un établissement en boutons radio, 1er cycle par défaut (UDR-0005 ter) |
 | [`code-etablissement`](code-etablissement/memo.md) | livré | L'enseignant s'inscrit avec le code secret de son établissement (ADR-0057, UDR-0044) |
 | [`pilotage-equipe`](pilotage-equipe/memo.md) | livré | V4 : page Pilotage de l'équipe, indicateurs lus en direct, recherche d'un élève ou d'un enseignant (ADR-0062, UDR-0049) |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | Parrainage entre enseignants, démarrage à froid par le code national, page Croissance de l'équipe (ADR-0063, UDR-0050) |
+| [`tests-instables`](tests-instables/memo.md) | livré en PR, en attente de fusion | Q15 : trois tests instables reproduits puis corrigés à leur cause — requêtes préparées périmées après les tests de migration, menu ouvert sur l'aperçu de Turbo, attente de 2 s trop courte pour « Recommencer » |
 
 ## Backlog
 
