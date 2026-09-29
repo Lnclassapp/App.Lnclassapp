@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-09-29)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md) |
 | **ADR lié** | [ADR-0065](../adr/0065-espace-direction-simple-en-lecture-seule.md) · [ADR-0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md) |

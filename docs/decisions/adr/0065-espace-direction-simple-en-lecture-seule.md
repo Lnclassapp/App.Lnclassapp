@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-09-29)* |
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md) — critères DS-01 à DS-11 |
 | **Amende** | [ADR-0044](./0044-rattachement-de-la-direction-par-invitation.md) : fonctions, second facteur, inviteurs, départ · [ADR-0025](./0025-pin-a-4-chiffres-comme-secret-d-authentification.md), compensation 5, pour `school_admin` |
