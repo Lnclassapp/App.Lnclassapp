@@ -36,7 +36,7 @@ class Shared::CspTurboNavigationTest < ApplicationSystemTestCase
     assert_equal first_nonce, nonce, "le nonce change pendant la session"
     assert_equal "block", page.evaluate_script("getComputedStyle(document.querySelector('trix-editor')).display"),
                  "les styles de Trix n'ont pas été appliqués"
-    editor = find("trix-editor")
+    editor = find_rich_text_editor
     editor.click
     editor.send_keys("Transcription")
     assert_equal "Transcription", page.evaluate_script("document.querySelector('trix-editor').editor.getDocument().toString().trim()")

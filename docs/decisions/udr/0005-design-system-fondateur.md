@@ -122,3 +122,34 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 - Un nouveau composant n'existe qu'une fois appelable par `ComponentsHelper`, visible sur `/design` et couvert par le test système.
 - Les teintes de matière suivent `materials.category`. Une règle fondée sur le nom de la matière est interdite.
 - Interdit désormais : `dark:`, les couleurs `slate/gray/blue…` de Tailwind, `rounded-xl` et apparentés, `shadow-md` et apparentés, toute valeur entre crochets, tout `#hex` et tout `style=` dans les vues, toute police ou icône servie par un tiers.
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Menu déroulant** : l'API devient `ui_dropdown(label:, icon:, trigger:, align:, id:, fixed: false) { ui_dropdown_item(label, href:, icon:, method:, tone:, frame:, dialog:) }`. `frame:` ouvre le lien dans un Turbo Frame et ferme le menu ; `dialog:` rend un `<button role="menuitem">` qui ferme le menu, rend le focus au bouton et ouvre la `<dialog>` d'id donné en `showModal()` ; `fixed: true` place le menu en position fixe (`z-50`) pour qu'il échappe au défilement d'un tableau. Contrôleur `dropdown` : actions `dismiss`, `openDialog`, `place`.
+
+## Amendement du 2026-09-28 (bis)
+
+*Chantier [`docs/chantiers/finitions-generation-menu`](../../chantiers/finitions-generation-menu/memo.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Utilitaires maison** : s'ajoute `sticky-actions` (colonne d'actions d'un tableau collée au bord droit, fond `--color-white` ; `z-index: 50` tant que son menu est ouvert). Aucun nouveau token.
+- **Toasts du flash** : `flash_toast(key, value)` rend un message, ou `{ "message", "title" }` pour un titre propre à la situation ; les types restent ceux de `ui_toast`.
+
+## Amendement du 2026-09-28 (ter) — groupe de boutons radio
+
+*Chantier [`docs/chantiers/cycles-en-radio`](../../chantiers/cycles-en-radio/prd.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Nouveau composant** : `ui_radio_group(form, :attribut, choices:, label:, hint:, required: false, columns: 1|2|3)` (`components/_radio_group.html.erb`). `choices:` est une liste `[libellé, valeur]` ; la valeur de l'objet est cochée. Balisage : `fieldset#<id du champ>` → `legend` (libellé, astérisque si `required`) → grille `grid gap-2` (options empilées au téléphone, `sm:grid-cols-2` ou `sm:grid-cols-3` à partir de `sm`) → une `<label>` par option, qui contient le radio (`size-5 accent-brand`, contour de focus `brand`) et son texte → aide `#<id>_hint` et première erreur `#<id>_error` **sous le groupe**.
+- **Tokens** : option `min-h-tap rounded-ln border bg-white px-4`, bordure `line` au repos et `error` en erreur, survol `mist`, option cochée `has-checked:border-brand has-checked:bg-brand-soft`. Constantes `RADIO_OPTION`, `RADIO_STATES`, `RADIO_INPUT`, `RADIO_COLUMNS` du helper.
+- **Accessibilité** : chaque radio porte `aria-describedby` (aide puis erreur) et `aria-invalid="true"` en erreur, `required` si demandé ; le clavier est celui du navigateur (Tab entre sur l'option cochée, les flèches changent le choix). Une valeur `columns:` inconnue lève `ArgumentError`.
+- **Quand l'utiliser** : un choix unique parmi deux à six valeurs courtes, à saisir (pas un filtre). Une liste longue, ou un filtre avec une option « tous », reste un `ui_field as: :select`.
+- Visible sur `/design` (section « Champs de formulaire », au repos et en erreur), vérifié par `test/system/design_system_test.rb`.
+
+## Amendement du 2026-09-28 (quater) — afficher le code PIN
+
+*Chantier [`docs/chantiers/afficher-pin`](../../chantiers/afficher-pin/prd.md), [UDR-0051](0051-afficher-le-code-pin.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Champ** : l'API devient `ui_field(form, :attribut, as:, label:, hint:, required:, choices:, reveal: false, **input_html)`. `reveal: true` (refusé hors `as: :password`, `ArgumentError`) ajoute dans le champ, à droite, un bouton œil de 48 px, `hidden` tant que le contrôleur Stimulus `password-reveal` ne l'a pas montré : `eye` et « Afficher le code » quand le PIN est masqué, `eye-slash` et « Masquer le code » quand il est affiché (heroicons outline, taille `md`). Règles complètes dans l'UDR-0051.
+- **Contrôleur** : `password-reveal` (bascule `password` ↔ `text`, `aria-pressed`, libellé ; remasque au chargement, avant l'envoi et avant la mise en cache ; garde le bouton visible au morphing du 422).
+- Visible sur `/design` (champ mot de passe de la section « Champs de formulaire »), vérifié par `test/system/design_system_test.rb`.

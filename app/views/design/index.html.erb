@@ -154,7 +154,7 @@
   <%= design_section(id: "avatars", title: t(".sections.avatars"), api: "ui_avatar(name, src:, size:, tone:)") do %>
     <%= design_example(name: "avatar-variants", label: t(".avatars.variants")) do %>
       <div class="flex flex-wrap items-center gap-4">
-        <% %i[sm md lg].each do |size| %>
+        <% ComponentsHelper::AVATAR_SIZES.each_key do |size| %>
           <%= ui_avatar t(".avatars.name"), size: %>
         <% end %>
         <% ComponentsHelper::AVATAR_TONES.each_key do |tone| %>
@@ -198,15 +198,17 @@
   <% end %>
 
   <%# ---------- Champs ---------- %>
-  <%= design_section(id: "fields", title: t(".sections.fields"), api: "ui_field(form, :attribut, as:, label:, hint:, required:, choices:, **input_html)") do %>
+  <%= design_section(id: "fields", title: t(".sections.fields"), api: "ui_field(form, :attribut, as:, label:, hint:, required:, choices:, **input_html) · ui_radio_group(form, :attribut, choices:, label:, hint:, required:, columns: 1|2|3)") do %>
     <div class="grid gap-8 md:grid-cols-2">
       <%= design_example(name: "field-valid", label: t(".fields.valid")) do %>
         <%= form_with model: @sample, scope: :sample, url: design_path, method: :get, class: "space-y-5" do |form| %>
           <%= ui_field form, :name, label: t(".fields.name"), required: true, placeholder: t(".fields.name_placeholder") %>
           <%= ui_field form, :email, as: :email, label: t(".fields.email"), hint: t(".fields.email_hint") %>
-          <%= ui_field form, :password, as: :password, label: t(".fields.password") %>
+          <%= ui_field form, :password, as: :password, reveal: true, label: t(".fields.password") %>
           <%= ui_field form, :bio, as: :textarea, label: t(".fields.bio") %>
           <%= ui_field form, :level, as: :select, label: t(".fields.level"), choices: t(".fields.levels"), prompt: t(".fields.level_prompt") %>
+          <%= ui_radio_group form, :cycle, label: t(".fields.cycle"), required: true, hint: t(".fields.cycle_hint"),
+                                           choices: t(".fields.cycles").map { [ it[:label], it[:value] ] } %>
           <%= ui_field form, :terms, as: :checkbox, label: t(".fields.terms") %>
         <% end %>
       <% end %>
@@ -215,6 +217,8 @@
           <%= ui_field form, :name, label: t(".fields.name"), required: true %>
           <%= ui_field form, :email, as: :email, label: t(".fields.email"), hint: t(".fields.email_hint") %>
           <%= ui_field form, :level, as: :select, label: t(".fields.level"), choices: t(".fields.levels"), prompt: t(".fields.level_prompt") %>
+          <%= ui_radio_group form, :cycle, label: t(".fields.cycle"), required: true, columns: 1,
+                                           choices: t(".fields.cycles").map { [ it[:label], it[:value] ] } %>
           <%= ui_field form, :terms, as: :checkbox, label: t(".fields.terms"), required: true %>
           <%= ui_field form, :bio, label: t(".fields.disabled"), disabled: true %>
         <% end %>
@@ -239,7 +243,7 @@
   <% end %>
 
   <%# ---------- Menu déroulant ---------- %>
-  <%= design_section(id: "dropdown", title: t(".sections.dropdown"), api: "ui_dropdown(label:, icon:, trigger:, align:, id:) { ui_dropdown_item(label, href:, icon:, method:, tone:) }") do %>
+  <%= design_section(id: "dropdown", title: t(".sections.dropdown"), api: "ui_dropdown(label:, icon:, trigger:, align:, id:, fixed:) { ui_dropdown_item(label, href:, icon:, method:, tone:, frame:, dialog:) }") do %>
     <div class="flex flex-wrap items-start gap-6" data-example="dropdown">
       <%= ui_dropdown label: t(".dropdown.label"), id: "demo-menu", align: :start do %>
         <%= ui_dropdown_item t(".dropdown.edit"), href: design_path(anchor: "dropdown"), icon: "pencil-square" %>

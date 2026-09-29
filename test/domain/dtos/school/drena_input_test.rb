@@ -29,7 +29,7 @@ module Dtos
         assert too_long.errors.of_kind?(:name, :too_long)
       end
 
-      # DR-08 (ADR-0055) : sans lettre ni chiffre latin, le slug serait « drena » nu.
+      # DR-08 (ADR-0066) : sans lettre ni chiffre latin, le slug serait « drena » nu.
       test "refuse un nom sans lettre ni chiffre latin, avec le message de la locale" do
         [ "???", "π", "« — »" ].each do |name|
           input = DrenaInput.new(name:)

@@ -1,4 +1,4 @@
-# Niveaux du référentiel, écran de l'équipe (plan boucle-pedagogique, Lot R1) — ADR-0034, UDR-0007, UDR-0032
+# Niveaux du référentiel, écran de l'équipe (plan boucle-pedagogique, Lot R1) — ADR-0034, ADR-0058, UDR-0007, UDR-0032
 fr:
   activemodel:
     attributes:
@@ -22,9 +22,10 @@ fr:
       index:
         page_title: "Niveaux"
         title: "Niveaux"
-        subtitle: "Les niveaux scolaires, dans l'ordre de leur position. Leur code sert à la génération des classes et aux imports."
+        subtitle: "Les niveaux scolaires, dans l'ordre de leur position. Leur code sert aux imports."
         new: "Nouveau niveau"
-        generation_help: "Les classes sont générées pour les niveaux 6ème, 5ème, 4ème, 3ème, 2nde, 1ère et Tle (codes %{codes}). Un autre niveau reste utilisable, mais aucune classe n'y est générée."
+        generation_help: "Le nombre de classes générées pour chaque niveau, à l'import d'un établissement ou par la génération des classes manquantes, se règle dans le barème. Un niveau sans nombre au barème reste utilisable, mais aucune classe n'y est générée."
+        classroom_plan_link: "Ouvrir le barème des classes"
         empty_title: "Aucun niveau pour l'instant"
         empty_description: "Créez les niveaux de la 6ème à la Tle : les classes et les cours s'y rattachent."
         columns:
@@ -38,10 +39,10 @@ fr:
           actions: "Actions"
       level_row:
         no_series: "Aucune"
-        outside_generation: "Hors génération des classes"
-        outside_generation_hint: "Son code n'est pas reconnu : aucune classe n'est générée pour ce niveau."
+        outside_generation: "Hors barème"
+        outside_generation_hint: "Aucun nombre positif au barème des classes : aucune classe n'est générée pour ce niveau."
         edit: "Modifier"
-        edit_label: "Modifier le niveau %{name}"
+        actions: "Actions pour %{name}"
         delete: "Supprimer"
         delete_title: "Supprimer « %{name} » ?"
         delete_warning: "La suppression est définitive. Un niveau lié à une série, ou utilisé par une classe ou un cours, ne peut pas être supprimé."
@@ -50,8 +51,6 @@ fr:
       form:
         name_placeholder: "Ex. : 6ème, 2nde, Tle"
         position_hint: "Ordre d'affichage : 1 pour le premier niveau."
-        cycle_prompt: "Choisir un cycle"
-        recognized_names: "Noms reconnus par la génération des classes : 6ème, 5ème, 4ème, 3ème, 2nde, 1ère, Tle."
       new:
         title: "Nouveau niveau"
         name_hint: "20 caractères au plus. Le code du niveau est tiré du nom à la création, puis ne change plus."
@@ -61,7 +60,6 @@ fr:
         title: "Modifier le niveau"
         code: "Code :"
         code_frozen: "— il ne change pas, même si le niveau est renommé."
-        outside_generation: "Aucune classe n'est générée pour ce code."
         name_hint: "20 caractères au plus. Renommer le niveau ne change pas son code."
         submit: "Enregistrer"
         cancel: "Annuler"

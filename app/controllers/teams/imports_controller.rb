@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::ImportsController
 # Rôle : écran des imports de l'équipe : liste, téléversement en modale, suivi rechargé tant que l'import tourne
-# ADR  : 0026, 0039 · UDR : 0006
+# ADR  : 0026, 0039, 0056 · UDR : 0006, 0043
 module Teams
   class ImportsController < BaseController
     STATUS_FRAME = "import_status".freeze
@@ -8,10 +8,10 @@ module Teams
                      "rejected" => :error, "failed" => :error }.freeze
 
     before_action :require_known_kind, only: %i[new create]
-    helper_method :import_status_tone
+    helper_method :import_status_tone, :report_text
 
     def index
-      @kind = params[:kind].presence_in(Entities::Catalog::ImportKind::KINDS)
+      @kind = params[:kind].presence_in(Entities::Catalog::ImportKind::REPORT_KINDS)
       @imports = Queries::Catalog::ImportReportsQuery.new.call(kind: @kind)
     end
 
@@ -36,7 +36,7 @@ module Teams
       @import = report_row(params[:public_id])
       return render_not_found if @import.nil?
 
-      render_result Entities::Catalog::ImportKind.fetch(@import.kind).authorize(actor: current_actor), success: lambda { |_|
+      render_result Entities::Catalog::ImportKind.authorize_report(kind: @import.kind, actor: current_actor), success: lambda { |_|
         render partial: "status", locals: { import: @import } if turbo_frame_request_id == STATUS_FRAME
       }
     end
@@ -54,6 +54,11 @@ module Teams
     end
 
     def import_status_tone(status) = STATUS_TONES.fetch(status)
+
+    # Libellé du suivi propre au type de rapport (génération des classes, UDR-0043), sinon celui des imports.
+    def report_text(import, key, **)
+      t("teams.imports.status.by_kind.#{import.kind}.#{key}", **, default: t("teams.imports.status.#{key}", **))
+    end
 
     def report_row(public_id) = Queries::Catalog::ImportReportQuery.new.call(public_id:)
 

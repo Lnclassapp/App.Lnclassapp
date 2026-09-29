@@ -1,0 +1,45 @@
+<%# 🌐 UI · teams/schools/_join_requests — « Enseignants en attente » de la fiche (Queries::School::JoinRequestsQuery::TeamRow) %>
+<%# Rôle : inscrits sans code ; « Valider » rattache, « Refuser » après confirmation ; PATCH puis retour à la fiche (303) %>
+<%# ADR  : 0063 · UDR : 0036, 0050 %>
+<%# locals: (school:, requests:) -%>
+<section id="school_join_requests" aria-labelledby="school_join_requests_title" class="mb-8">
+  <h2 id="school_join_requests_title" class="font-display text-xl font-extrabold"><%= t(".title", count: requests.size) %></h2>
+  <p class="mt-1 mb-4 text-sm text-mute"><%= t(".hint") %></p>
+  <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+    <% requests.each do |request| %>
+      <li id="join_request_<%= request.public_id %>" class="space-y-3 px-4 py-3">
+        <div class="flex items-center gap-3">
+          <%= ui_avatar request.name, size: :sm, tone: :teacher %>
+          <div class="min-w-0 flex-1">
+            <p class="truncate text-sm font-medium"><%= request.name %></p>
+            <p class="text-xs text-mute tabular-nums"><%= request.contact.scan(/\d{1,2}/).join(" ") %></p>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 text-xs text-mute">
+          <% if request.material_name %>
+            <%= ui_subject_badge request.material_name, category: request.material_category, size: :sm %>
+          <% end %>
+          <span><%= t(".requested_on", date: l(request.created_at.to_date, format: :long)) %></span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <%= form_with url: school_join_request_path(school.public_id, request.public_id), method: :patch do %>
+            <%= hidden_field_tag :decision, "approve", id: nil %>
+            <%= ui_button t(".approve"), type: :submit, size: :sm, icon: "check", "aria-label": t(".approve_label", name: request.name) %>
+          <% end %>
+          <%= ui_modal title: t(".reject_title", name: request.name), id: "reject-join-request-#{request.public_id}", size: :sm,
+                       trigger: t(".reject"), trigger_icon: "x-mark" do |modal| %>
+            <% modal.footer do %>
+              <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+              <%= ui_button t(".confirm_reject"), type: :submit, variant: :danger, form: "reject-join-request-#{request.public_id}-form" %>
+            <% end %>
+            <%= form_with url: school_join_request_path(school.public_id, request.public_id), method: :patch,
+                          id: "reject-join-request-#{request.public_id}-form" do %>
+              <%= hidden_field_tag :decision, "reject", id: nil %>
+              <p class="text-sm text-mute"><%= t(".reject_warning") %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</section>

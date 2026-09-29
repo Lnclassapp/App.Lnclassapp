@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
-<%# Rôle : une ligne par élève présent (nom, numéro, dernier score) ; « Générer un code de récupération » (ID-15), dont le stream vient de B8 %>
-<%# ADR  : 0028, 0032 · UDR : 0007, 0020, 0027 %>
+<%# Rôle : une ligne par élève présent (nom, numéro, dernier score et lien vers son résultat) ; « Générer un code de récupération » (ID-15), dont le stream vient de B8 %>
+<%# ADR  : 0028, 0032, 0060 · UDR : 0007, 0020, 0027, 0047 %>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
   <h2 id="classroom_roster_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title", count: students.size) %></h2>
   <% if students.empty? %>
@@ -15,7 +15,7 @@
       <% students.each do |student| %>
         <li id="student_<%= student.public_id %>" class="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center">
           <div class="flex min-w-0 flex-1 items-center gap-3">
-            <%= ui_avatar student.display_name, size: :sm %>
+            <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>
             <div class="min-w-0">
               <p class="truncate text-sm font-medium"><%= student.display_name %></p>
               <% if student.contact %>
@@ -30,6 +30,9 @@
               <span class="block text-xs text-mute"><%= t(".last_score") %></span>
               <% if student.last_score_percent %>
                 <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
+                <%# Décision du porteur (2026-09-27) : le score mène au résultat détaillé (note, revue, propositions correctes) %>
+                <%= link_to t(".see_result"), exercise_session_result_path(student.last_session_public_id), data: { turbo_frame: "_top" },
+                            class: "block text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
               <% else %>
                 <span class="text-mute"><%= t(".no_score") %></span>
               <% end %>

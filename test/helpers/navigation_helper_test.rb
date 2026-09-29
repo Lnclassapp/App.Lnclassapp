@@ -8,11 +8,16 @@ class NavigationHelperTest < ActionView::TestCase
   def student_home_path = "/student"
   def profile_path = "/profile"
 
+  # A route not drawn yet, simulated: every destination of the shell is drawn since espace-direction-simple.
+  def without_route(name)
+    define_singleton_method(:respond_to?) { |candidate, include_all = false| candidate != name && super(candidate, include_all) }
+  end
+
   test "every role has its destinations, served to both navigations" do
     NavigationHelper::DESTINATIONS.each_key do |role|
       destinations = navigation_for(role.to_s)
 
-      assert_equal :home, destinations.first.key
+      assert_not_empty destinations
       assert_operator destinations.size, :<=, NavigationHelper::NAV_GRIDS.keys.max
       assert nav_grid_class(destinations.size)
     end
@@ -22,9 +27,24 @@ class NavigationHelperTest < ActionView::TestCase
   test "nav_path resolves a drawn route and leaves the others inactive" do
     courses = navigation_for(:student)[1]
     dashboard = navigation_for(:team).last
+    teachers = navigation_for(:school_admin).last
 
     assert_equal "/courses", nav_path(courses)
-    assert_nil nav_path(dashboard)
+    assert_equal "/teams/dashboard", nav_path(dashboard)
+    assert_equal "/school-admin/teachers", nav_path(teachers)
+    without_route(:school_admin_teachers_path)
+
+    assert_nil nav_path(teachers)
+  end
+
+  # DS-05 (UDR-0052, amendment of UDR-0006): the direction has exactly two destinations, both drawn, and no home
+  # of its own: « Travail des élèves » is its home.
+  test "the direction's navigation is « Travail des élèves » then « Enseignants »" do
+    assert_equal [ [ :student_work, "/school-admin/classrooms", "chart-bar" ], [ :teachers, "/school-admin/teachers", "user-group" ] ],
+                 navigation_for(:school_admin).map { [ it.key, nav_path(it), it.icon ] }
+    assert_equal [ "Travail des élèves", "Enseignants" ],
+                 navigation_for(:school_admin).map { I18n.t("shared.navigation.#{it.key}") }
+    assert_equal "/school-admin/classrooms", home_path_for(:school_admin)
   end
 
   test "a destination is active by its URL or by the key the view declares" do
@@ -57,15 +77,20 @@ class NavigationHelperTest < ActionView::TestCase
   end
 
   test "nav_link renders an idle, inactive bottom link when the route is missing" do
-    self.rendered = self.class.content_class.new(nav_link(navigation_for(:team).last, style: :bottom))
+    # Every destination is drawn since the direction's (espace-direction-simple): a missing route is simulated.
+    without_route(:school_admin_teachers_path)
+    teachers = navigation_for(:school_admin).find { it.key == :teachers }
+    self.rendered = self.class.content_class.new(nav_link(teachers, style: :bottom))
 
     assert_select "a:not([href])[aria-disabled=true]:not([aria-current]).opacity-50.text-2xs",
-                  text: /#{I18n.t("shared.navigation.dashboard")}/
-    assert_raises(KeyError) { nav_link(navigation_for(:team).last, style: :drawer) }
+                  text: /#{I18n.t("shared.navigation.teachers")}/
+    assert_raises(KeyError) { nav_link(teachers, style: :drawer) }
   end
 
   test "home_path_for falls back to the root when the home route is missing" do
     assert_equal "/student", home_path_for(:student)
+    without_route(:school_admin_classrooms_path)
+
     assert_equal root_path, home_path_for(:school_admin)
   end
 
@@ -76,6 +101,13 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal "/session", sign_out[:href]
     assert_equal :delete, sign_out[:method]
     assert_equal :danger, sign_out[:tone]
+  end
+
+  # « Mon profil » is drawn since the profil-utilisateur chantier; an account route not drawn yet keeps its entry inactive.
+  test "an account link whose route is not drawn has no href" do
+    without_route(:profile_path)
+
+    assert_nil account_links.first[:href]
   end
 
   test "home sections and accents exist for every role" do

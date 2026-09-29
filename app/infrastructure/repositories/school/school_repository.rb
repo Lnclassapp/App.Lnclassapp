@@ -1,21 +1,40 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
-# Rôle : traduit Orm::School ↔ Entities::School::School ; insertion en masse des imports, rattachement des enseignants
-# ADR  : 0030, 0036, 0039
+# Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
 module Repositories
   module School
     class SchoolRepository
       include Ports::School::SchoolRepositoryPort
 
       INSERTED_COLUMNS = %w[id public_id drena_id name school_type cycle].freeze
-      ATTRIBUTES = %i[drena_id name sigle school_type cycle status].freeze
+      ATTRIBUTES = %i[drena_id name sigle school_type cycle status national_code].freeze
+      NATIONAL_CODE_INDEX = "index_schools_on_national_code".freeze
+      GENERATION_STATUSES = %w[active draft].freeze
 
       def find_by_public_id(public_id:)
         record = Orm::School.find_by(public_id:)
         record && map_to_entity(record)
       end
 
+      def find_by_id(id:)
+        record = Orm::School.find_by(id:)
+        record && map_to_entity(record)
+      end
+
+      def find_by_school_code(school_code:)
+        record = Orm::School.find_by(school_code:)
+        record && map_to_entity(record)
+      end
+
+      def find_by_national_code(national_code:)
+        record = Orm::School.find_by(national_code:)
+        record && map_to_entity(record)
+      end
+
+      def taken_national_codes = Orm::School.where.not(national_code: nil).pluck(:national_code).to_set
+
       def create(school:)
-        persist(Orm::School.new(attributes_of(school)))
+        persist(Orm::School.new(**attributes_of(school), school_code: school.school_code))
       end
 
       def update(school:)
@@ -49,6 +68,25 @@ module Repositories
                    .map { |row| Inserted.new(**row.symbolize_keys) }
       end
 
+      def taken_school_codes = Orm::School.pluck(:school_code).to_set
+
+      # Savepoint : un code déjà pris (index unique) se traduit en :conflict sans casser la transaction du use case.
+      def replace_school_code(id:, school_code:, at:)
+        record = Orm::School.find(id)
+        Orm::School.transaction(requires_new: true) { record.update!(school_code:, school_code_rotated_at: at) }
+        ::Shared::Result.success(map_to_entity(record))
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict)
+      end
+
+      # NOT EXISTS sur l'index (school_id, school_year, name) des classes ; lecture par clé, sans OFFSET.
+      def without_classrooms(school_year:, after_id:, limit:)
+        classrooms = Orm::Classroom.where(school_year:).where("classrooms.school_id = schools.id")
+        Orm::School.where(status: GENERATION_STATUSES).where(id: (after_id + 1)..).where.not(classrooms.arel.exists)
+                   .order(:id).limit(limit).pluck(*INSERTED_COLUMNS)
+                   .map { |values| Inserted.new(**INSERTED_COLUMNS.map(&:to_sym).zip(values).to_h) }
+      end
+
       def attach_teacher(teacher_id:, school_id:, primary:, at:)
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::TeacherSchool.transaction(requires_new: true) do
@@ -67,25 +105,30 @@ module Repositories
 
       def attributes_of(school) = ATTRIBUTES.index_with { |attribute| school.public_send(attribute) }
 
+      # Une demande d'enseignant (même décidée) ou un parrainage le référencent aussi (ADR-0063) : l'historique reste.
       def referenced?(school_id, classroom_ids)
         Orm::TeacherSchool.exists?(school_id:) || Orm::Invitation.exists?(school_id:) ||
+          Orm::SchoolJoinRequest.exists?(school_id:) || Orm::Referral.exists?(school_id:) ||
           Orm::ClassroomStudent.exists?(classroom_id: classroom_ids) ||
           Orm::TeacherClassroom.exists?(classroom_id: classroom_ids) ||
           Orm::ClassroomAssignment.exists?(classroom_id: classroom_ids)
       end
 
-      # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
+      # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case. L'index nommé
+      # dit lequel : le code national (ADR-0063), sinon le nom dans la DRENA.
       def persist(record)
         Orm::School.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record))
-      rescue ActiveRecord::RecordNotUnique
-        ::Shared::Result.failure(:conflict, errors: { name: [ :taken ] })
+      rescue ActiveRecord::RecordNotUnique => e
+        attribute = e.message.include?(NATIONAL_CODE_INDEX) ? :national_code : :name
+        ::Shared::Result.failure(:conflict, errors: { attribute => [ :taken ] })
       end
 
       def map_to_entity(record)
         Entities::School::School.new(id: record.id, public_id: record.public_id, drena_id: record.drena_id,
                                      name: record.name, sigle: record.sigle, school_type: record.school_type,
-                                     cycle: record.cycle, status: record.status)
+                                     cycle: record.cycle, status: record.status, school_code: record.school_code,
+                                     national_code: record.national_code)
       end
     end
   end

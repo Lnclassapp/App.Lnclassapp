@@ -120,8 +120,8 @@ Et chacune des 3 851 écoles du fichier des établissements réécrit cite un sl
 
 ## 6. Décisions rattachées
 
-- ADR-0055 — Les DRENA s'importent, et leur slug est préfixé `drena-`. Il amende l'ADR-0034 et l'ADR-0039 (§9 « les DRENA ne s'importent pas », et l'amendement « quatre types d'import »).
-- UDR-0041 — Import des DRENA : bouton à côté de « Nouvelle DRENA », et aide du format dans la modale d'import. Elle complète l'UDR-0035 et l'UDR-0037.
+- ADR-0066 — Les DRENA s'importent, et leur slug est préfixé `drena-`. Il amende l'ADR-0034 et l'ADR-0039 (§9 « les DRENA ne s'importent pas », et l'amendement « quatre types d'import »).
+- UDR-0053 — Import des DRENA : bouton à côté de « Nouvelle DRENA », et aide du format dans la modale d'import. Elle complète l'UDR-0035 et l'UDR-0037.
 
 ## 7. Mesures
 

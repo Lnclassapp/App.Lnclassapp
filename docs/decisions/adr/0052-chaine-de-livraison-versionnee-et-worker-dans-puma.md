@@ -196,3 +196,21 @@ end
 
 - Un test vérifie que `config/puma.rb` charge `plugin :solid_queue` **sans condition** : une ligne `if ENV[...]` sur ce plugin fait échouer la CI.
 - **Premier déploiement de recette** : `/up` répond 200 en HTTPS ; un job mis en file depuis la console de recette apparaît comme terminé dans `/teams/jobs`, et un job qui lève une exception y apparaît en échec.
+
+## Amendement du 2026-09-27 — le seed d'identité tourne avant chaque déploiement
+
+*Constaté pendant la mise en recette de la V1. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le pré-déploiement devient `bin/rails db:prepare db:seed`.** `db:prepare` ne sème qu'une base qu'il crée ; or la base PostgreSQL de Railway existe déjà quand l'application se déploie la première fois. Sans `db:seed`, l'invitation d'amorçage du premier compte équipe (`db/seeds/identity.rb`, ADR-0034) n'était jamais émise, et personne ne pouvait se connecter.
+- En production, seul `db/seeds/identity.rb` tourne : il ne fait rien dès qu'un compte équipe existe, ou quand `TEAM_BOOTSTRAP_CONTACT` est absente. Le lien d'invitation s'affiche dans les logs du pré-déploiement ; tant qu'aucun compte équipe n'existe, chaque déploiement révoque l'invitation ouverte et en affiche une nouvelle, car Railway peut couper ces logs à l'arrêt du conteneur (constaté au premier déploiement de production, 2026-09-27).
+- **Réglages de service constatés à tort sur Railway** (corrigés le 2026-09-27, en recette et en production) : builder Railpack au lieu du `Dockerfile` (l'application démarrait sans `RAILS_ENV=production`), domaines pointés sur le port 3000 au lieu du port d'écoute de Thruster (`PORT=8080`).
+- Preuve : `test/config/railway_deployment_test.rb`.
+
+## Amendement du 2026-09-29 — un seul passage des seeds par déploiement
+
+*Constaté au premier déploiement du nouveau projet Railway (base neuve). L'amendement du 2026-09-27 reste valable ; en cas d'écart, cette section fait foi.*
+
+- **Correction d'une prémisse.** `db:prepare` ne sème pas seulement une base qu'il crée : il sème toute base qu'il **initialise**, c'est-à-dire toute base sans table `schema_migrations` (`ActiveRecord::Tasks::DatabaseTasks#prepare_all`, Rails 8.1). Sur la base PostgreSQL vide de Railway, `bin/rails db:prepare db:seed` chargeait le schéma, semait, puis `db:seed` semait une seconde fois dans le même processus : deux liens d'amorçage par déploiement, le premier déjà révoqué par le second, et l'avertissement `already initialized constant SEEDS`.
+- **En production, `db:prepare` ne sème plus** : `seeds: false` dans la configuration `production` de `config/database.yml`. Seul `db:seed` sème, une fois par déploiement, que la base soit neuve ou non. Développement et test inchangés : `db:prepare` sème toujours une base neuve (`bin/setup`).
+- **La commande de pré-déploiement ne change pas** : `bin/rails db:prepare db:seed`, dans `railway.json` comme dans le réglage du service. Le `db:prepare` de `bin/docker-entrypoint` ne sème pas non plus.
+- Preuve : `test/config/railway_deployment_test.rb` joue la commande de `railway.json` en production sur une base vide, deux fois : un seul lien par déploiement, un lien différent au second.

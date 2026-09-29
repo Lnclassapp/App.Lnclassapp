@@ -91,3 +91,19 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - En V1, seules `team_dashboard_path` et `profile_path` restent inactives.
 - **Entrée « Imports » (`teams_imports_path`, icône `arrow-up-tray`) ajoutée à la navigation `team`**, entre « Établissements » et « Pilotage », par l'étape e4 du Lot 0e (ADR-0039). La navigation `team` compte maintenant **5 destinations**, le maximum de la règle du §4 : toute destination de plus pour ce rôle exige une nouvelle UDR.
 - **Position de la région `#toasts`** : sur ordinateur (`sm` et plus), elle est **en bas à droite**. En haut, un toast recouvrait les actions de l'en-tête de page, comme « Ajouter » (constaté au lot S1). Sur téléphone, elle reste **en haut**, parce que la barre basse porte la navigation. Preuve : `test/system/design_system_test.rb`, « a toast never covers the page header on a desktop ».
+
+## Amendement du 2026-09-28 — « Pilotage » actif
+
+*Chantier [`docs/chantiers/pilotage-equipe`](../../chantiers/pilotage-equipe/prd.md), [UDR-0049](0049-page-pilotage-de-l-equipe.md), [ADR-0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md). Statut : accepté, décidé par le porteur le 2026-09-28. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **`team_dashboard_path` devient actif** : la route `GET /teams/dashboard` est dessinée (V4, `pilotage-equipe`). L'entrée « Pilotage » (icône `chart-bar`) de la navigation `team` mène à la page de l'UDR-0049 et porte `aria-current="page"` quand elle est ouverte.
+- La navigation `team` n'a plus aucune entrée inactive ; elle garde ses **5 destinations**, le maximum du §4. Aucune destination n'est ajoutée.
+- Preuve : `test/system/role_homes_test.rb` (l'équipe ouvre ses cinq destinations, aucune inactive) et `test/system/teams/dashboard_test.rb`.
+
+## Amendement du 2026-09-28 — navigation de la direction
+
+*Chantier [`docs/chantiers/espace-direction-simple`](../../chantiers/espace-direction-simple/prd.md), [UDR-0052](0052-espace-direction-simple.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0052 acceptée, cette section fait foi en cas d'écart.*
+
+- La navigation `school_admin` passe de quatre entrées inactives à **deux entrées actives** : « Travail des élèves » `school_admin_classrooms_path` (icône `chart-bar`), puis « Enseignants » `school_admin_teachers_path` (icône `user-group`). Accueil, Classes et Élèves disparaissent.
+- La direction n'a pas d'accueil propre : elle arrive sur « Travail des élèves ». Les sections d'accueil de la direction ne servent plus qu'à la page de démonstration du shell.
+- Preuve : `test/helpers/navigation_helper_test.rb` et `test/system/school_admin/student_work_test.rb`.

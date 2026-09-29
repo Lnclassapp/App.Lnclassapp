@@ -1,6 +1,6 @@
 require "test_helper"
 
-# SC-01, ADR-0036, ADR-0055, UDR-0006: the team manages the DRENA — their frozen slug, prefixed drena-, being the target
+# SC-01, ADR-0036, ADR-0066, UDR-0006: the team manages the DRENA — their frozen slug, prefixed drena-, being the target
 # of the school imports; creation and edition in the modal frame, writes answered in Turbo Stream, an HTML fallback.
 class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -134,7 +134,7 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Drena.count
   end
 
-  # DR-08 (ADR-0055): the slug would be a bare « drena ».
+  # DR-08 (ADR-0066): the slug would be a bare « drena ».
   test "a name without any latin letter or digit reopens the modal in 422 with the error on the name, and nothing is created" do
     sign_in_as @member
 

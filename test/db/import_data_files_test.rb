@@ -1,6 +1,6 @@
 require "test_helper"
 
-# DR-11 (ADR-0055): the delivered import files agree with each other. The 41 DRENA of drenas-2026.json,
+# DR-11 (ADR-0066): the delivered import files agree with each other. The 41 DRENA of drenas-2026.json,
 # keyed by Entities::School::Drena.slug_for, are exactly the DRENA cited by the 3 851 schools of
 # etablissements-2026.json, so importing the first then the second yields no unknown_drena error.
 class ImportDataFilesTest < ActiveSupport::TestCase

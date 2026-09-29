@@ -26,7 +26,7 @@ module Repositories
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
       end
 
-      # DR-01 (ADR-0055) : le formulaire donne le même slug que l'import, préfixé drena-.
+      # DR-01 (ADR-0066) : le formulaire donne le même slug que l'import, préfixé drena-.
       test "crée une DRENA avec son slug dérivé du nom, préfixé drena-" do
         result = @repository.create(drena: drena("Bouaké 1"))
 

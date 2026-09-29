@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Drena
 # Rôle : table drenas, directions régionales, cibles des imports d'établissements par leur slug figé drena-…
-# ADR  : 0029, 0034, 0055
+# ADR  : 0029, 0034, 0066
 module Orm
   class Drena < ApplicationRecord
     include HasPublicId

@@ -66,7 +66,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       find("button[aria-controls=course-actions-menu]").click
       click_on t("catalog.courses.role_actions.edit")
       within "turbo-frame#modal dialog[open]" do
-        editor = find("trix-editor")
+        editor = find_rich_text_editor
         editor.click
         page.execute_script("const editor = arguments[0].editor; editor.setSelectedRange(editor.getDocument().getLength() - 1)", editor)
         editor.send_keys(:enter)

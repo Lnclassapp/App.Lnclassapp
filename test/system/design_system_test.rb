@@ -72,6 +72,47 @@ class DesignSystemTest < ApplicationSystemTestCase
     end
   end
 
+  # UDR-0051: the eye button of a password field, shown by its controller, eye then eye-slash.
+  test "a password field with reveal shows then hides its value" do
+    within("[data-example=field-valid]") do
+      field = find_field("sample[password]")
+      field.fill_in with: "2468"
+      toggle = find("button[aria-controls=sample_password]")
+
+      assert_equal %w[48px 48px], [ css(toggle, "width"), css(toggle, "height") ]
+      assert_equal "Afficher le code", toggle["aria-label"]
+      toggle.assert_selector "span[data-icon=eye]", visible: true
+      toggle.click
+      assert_equal "text", field[:type]
+      assert_equal "true", toggle["aria-pressed"]
+      assert_equal "Masquer le code", toggle["aria-label"]
+      toggle.assert_selector "span[data-icon=eye-slash]", visible: true
+      toggle.click
+      assert_equal "password", field[:type]
+    end
+  end
+
+  test "a radio group is a fieldset of 48 px options, driven by the arrow keys, its error under the group" do
+    within("[data-example=field-valid] fieldset#sample_cycle") do
+      assert_selector "legend", text: t("design.index.fields.cycle")
+      assert_checked_field "sample_cycle_first"
+      assert_selector "input[type=radio][aria-describedby=sample_cycle_hint]", count: 2
+      option = find("label", text: t("design.index.fields.cycles").first[:label])
+      assert_operator option.native.rect.height, :>=, 48
+      assert_equal "rgb(229, 245, 255)", css(option, "background-color")
+
+      find_field("sample_cycle_first").send_keys(:right)
+      assert_checked_field "sample_cycle_second"
+      assert_selector "label:has(input:checked)", count: 1, text: t("design.index.fields.cycles").last[:label]
+    end
+    within("[data-example=field-invalid] fieldset#invalid_sample_cycle") do
+      assert_no_selector "input:checked"
+      assert_selector "input[aria-invalid=true][aria-describedby=invalid_sample_cycle_error]", count: 2
+      assert_selector "div.grid + #invalid_sample_cycle_error", text: t("design.index.sample.errors.cycle")
+      assert_equal "rgb(200, 50, 43)", css(first("label"), "border-top-color")
+    end
+  end
+
   test "the modal opens, closes by its button, by Escape and by the backdrop" do
     dialog = "dialog#demo-modal"
     click_on t("design.index.modal.open")
@@ -226,13 +267,19 @@ class DesignSystemTest < ApplicationSystemTestCase
     find("button[data-redirect]").click
 
     assert_selector "#toasts [data-toast-type=success]", text: /\d{2}:\d{2}:\d{2}/
-    assert_no_selector "#toasts [data-toast-type=success]", wait: 7
+    # The toast pauses while hovered (UDR-0006), and the pointer stays where the button was clicked: after the reload,
+    # the toast may land under it and never leave. The pointer moves away first; the wait covers the 5 s delay with
+    # room for a loaded run.
+    find("h1", match: :first).hover
+    assert_no_selector "#toasts [data-toast-type=success]", wait: 12
   end
 
   test "a CRUD form opens in the modal frame, keeps its errors in 422 and closes on success" do
     click_on t("design.index.hotwire.open")
     within("turbo-frame#modal") do
       assert_selector "dialog#design-crud-modal[open]"
+      # Servie ouverte dès le HTML (modales-sans-js), elle reste une vraie modale : focus piégé, fond, Échap.
+      assert page.evaluate_script("document.querySelector('dialog#design-crud-modal').matches(':modal')")
       fill_in "sample_name", with: "   " # passe la validation du navigateur, pas celle du serveur
       click_on t("design.modal.submit")
 
@@ -290,7 +337,7 @@ class DesignSystemTest < ApplicationSystemTestCase
       assert_no_selector "nav.fixed.bottom-0"
       assert_selector "header", text: t("shared.roles.#{role}")
       assert_selector "main h1", text: t("design.shell.names.#{role}").split.first
-      assert_selector "aside a[aria-current=page]", text: t("shared.navigation.home")
+      assert_selector "aside a[aria-current=page]", text: t("shared.navigation.#{destinations.first.first}")
     end
 
     resize_to(390, 844) do

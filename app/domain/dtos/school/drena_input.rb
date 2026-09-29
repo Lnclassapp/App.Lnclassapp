@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::School::DrenaInput
 # Rôle : forme du nom d'une DRENA saisi à l'écran : obligatoire, 80 caractères au plus, avec une lettre ou un chiffre latin
-# ADR  : 0026, 0034, 0055
+# ADR  : 0026, 0034, 0066
 module Dtos
   module School
     class DrenaInput

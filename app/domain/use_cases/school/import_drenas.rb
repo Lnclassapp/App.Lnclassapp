@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::School::ImportDrenas
 # Rôle : adaptateur d'import des DRENA : chaque ligne ne porte que son nom, le slug drena-… en est tiré et sert de clé de doublon
-# ADR  : 0039, 0055 · UDR : 0041
+# ADR  : 0039, 0066 · UDR : 0053
 module UseCases
   module School
     class ImportDrenas

@@ -237,3 +237,97 @@ Consigné en détail dans le [journal de la boucle pédagogique](../boucle-pedag
 - Protection des branches GitHub abandonnée (offre gratuite, HTTP 403) : le hook pre-commit et la discipline des PR la remplacent ; seul le porteur fait `Develop` → `main`.
 - Établissements créés **uniquement par import JSON**, classes générées à ce moment ; éditeur riche (Action Text + Trix) en V1, texte seulement, sans pièce jointe (amendements des ADR-0030 et ADR-0051).
 
+
+## 2026-09-28 — V1 en production, livraisons hors ordre, CI bloquée
+
+### Ce qui a été livré
+
+- **V1 en production** sur lnclass.com depuis le **2026-09-27** (PR #33 et #36 vers `main`). C'est la date de la V1 que ce journal attendait depuis le 2026-09-22. 94 features de V0-V1 sur 95 sont livrées ; CL-02 (modifier une classe) ne l'est pas. La détection et la résolution des lacunes (AS-14, AS-15, V5) sont parties avec la V1.
+- **Trois mises en production le 2026-09-28** (PR #45, #69 et #73 vers `main`) :
+
+| Chantier | Décisions | PR | Vague |
+|---|---|---|---|
+| [`profil-utilisateur`](../profil-utilisateur/memo.md) — « Mon profil » | ADR-0055, UDR-0041 | #37 | V2 (`mon-compte`, en partie) |
+| [`generer-classes`](../generer-classes/memo.md) — classes manquantes | ADR-0056, UDR-0043 | #43 | suite de V1 |
+| [`actions-en-menu`](../actions-en-menu/memo.md) — actions en menu ⋮ | UDR-0042 | #40 | suite de V1 |
+| [`cycles-en-radio`](../cycles-en-radio/memo.md) — cycles en boutons radio | UDR-0005 ter | #47 | suite de V1 |
+| [`code-etablissement`](../code-etablissement/memo.md) — code d'établissement pour l'inscription enseignant | ADR-0057, UDR-0044 | #49 | hors plan, rattaché à V1 |
+| [`classes-par-niveau`](../classes-par-niveau/memo.md) — « + / − » par niveau | ADR-0059, UDR-0046 | #48 | hors plan, rattaché à V1 |
+| [`bareme-classes`](../bareme-classes/memo.md) — barème des classes en base | ADR-0058, UDR-0045 | #52 | hors plan, rattaché à V1 |
+| [`photo-de-profil`](../photo-de-profil/memo.md) | ADR-0060, UDR-0047 | #50 | V2 (`mon-compte`, en partie) |
+| [`pilotage-equipe`](../pilotage-equipe/memo.md) | ADR-0062, UDR-0049 | #51 | V4, livré |
+| [`afficher-pin`](../afficher-pin/memo.md) — bouton œil du PIN | UDR-0051 | #60 | suite de V1 |
+| [`ci-rapide`](../ci-rapide/journal.md) — CI parallèle | ADR-0064 | #53 | outillage |
+| [`croissance-parrainage`](../croissance-parrainage/memo.md) — parrainage, démarrage à froid, page Croissance | ADR-0063, UDR-0050 | #71 | hors plan, rattaché à V4 ; livre aussi CL-05 (V3) |
+
+- [`feuille-de-route.md`](feuille-de-route.md) mise à jour : état d'avancement en tête, date de la V1 au §1, §5 (V0 à V6 et chantiers hors plan), §6 (mention « livrée »), §6.9 (colonne des livrées : 101), §8, §9.
+
+### En cours et en attente
+
+- **Durcissement de la photo** : PR #75, ouverte.
+- **`canal-whatsapp`** : cadré par une autre session (PR #70, non fusionnée). Il touche la V6.
+- **Backlog** : [`verification-whatsapp`](../verification-whatsapp/memo.md), grill interrompu à la question 2.
+
+### Ce qui a dérapé
+
+- **La CI GitHub est bloquée jusqu'au 2026-10-03** : limite de minutes atteinte. D'ici là, chaque fusion exige un `bin/ci` complet en local, et le déploiement de production est déclenché à la main sur Railway. Ajouté au §8 de la feuille de route.
+- **Des fusions faites depuis l'interface web ont cassé `Develop`** : #48 et #49, puis #50 et #52, réparées par #56 et #61.
+- **Livraison hors ordre** : la V2 et la V4 ont commencé avant la clôture de la V1. La recette `Staging` de la V1 par un rôle distinct n'est pas consignée, et le chantier `boucle-pedagogique` n'est pas clos.
+
+### Décisions du porteur
+
+| Sujet | Décision |
+|---|---|
+| Demandes en attente par établissement (`croissance-parrainage`) | **Limite de 5 gardée**, malgré le risque de saturation. Amendement de l'ADR-0063 |
+| Vérification du numéro par WhatsApp | **Mise au backlog** ([`verification-whatsapp`](../verification-whatsapp/memo.md)) |
+| Fusions depuis l'interface web | **À éviter. Option A** : seul l'agent fusionne, après CI verte (locale tant que GitHub est bloquée) |
+
+### Ce qui reste ouvert
+
+- Clore la V1 : consigner la recette `Staging` par un rôle distinct, passer les memos de `boucle-pedagogique` et d'`amorcage-depot` en `livré`, livrer ou écarter CL-02.
+- Fermer au §4 les contradictions C-05, C-13, C-32 et C-38, qui renvoient à F-09, acceptée le 2026-09-25.
+- ID-19 et ID-20 : livrées pour tous les rôles, à recetter côté direction avec la V2.
+- [`features-refonte.md`](../../features-refonte.md) régénérée depuis le §6.
+
+## 2026-09-28 — Clôture V1 et recadrage V2-V6
+
+Demande du porteur : « Avant de commencer d'autres chantiers, fais une mise à jour des versions, de V1 à V6. »
+
+### Clôture de la V1
+
+- **Chantiers clos.** [`boucle-pedagogique`](../boucle-pedagogique/journal.md#clôture) passe en `livré` (en production depuis le 2026-09-27, PR #33 et #36 vers `main`) ; sa clôture liste les PR, les amendements d'ADR et les UDR-0009 à 0040. [`amorcage-depot`](../amorcage-depot/journal.md#clôture) passe en `livré` (#6, 2026-09-25), avec ses écarts 1 et 5 assumés.
+- **Recette `Staging` par un rôle distinct : en cours (2026-09-28)**, menée par un autre agent. La case du §9 reste décochée jusqu'à son rapport.
+- **Contradictions fermées** : C-05, C-13, C-32 et C-38 (§4). F-09 (UDR-0005) les tranche : sections « Tokens » des UDR-0001 à 0003 remplacées, UDR-0004 non applicable, carte de cours unique et couleur de matière par catégorie (avec l'UDR-0013), aucun mode sombre. Pour C-38, l'ADR-0013 reçoit une précision datée : le thème sombre n'y était qu'un exemple d'état local.
+- **CL-02 (modifier une classe) passe en V3**, chantier `vie-de-la-classe` : aucun lot de la V1 ne la portait, et elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059. Les 94 features de V0-V1 sont livrées.
+- Une quatrième mise en production a eu lieu le 2026-09-28 (#77 puis #78 vers `main`) : elle embarque le durcissement de la photo (#75).
+
+### Recadrage des vagues V2 à V6
+
+- **§5 réécrit** : pour chaque vague, le reste réel rangé par chantier et par ID, les décisions acceptées et celles à prendre, les dépendances, la porte inchangée ou précisée. Nouvelles sections : ordre recommandé, tableau de collision V2/V4, dette suivie, questions à poser au porteur (Q1 à Q15).
+- **CA-23 (pages des séries) passe de V2 en V4**, `catalogue-complet` : page publique du catalogue, sœur de CA-17 et CA-21 ; en V2 elle aurait créé une collision avec la V4. Décision de l'architecte, que le porteur peut rouvrir.
+- **`mon-compte` n'est plus un chantier** : sa partie livrée est close, le profil de direction et la recette du PIN côté direction passent dans `espace-direction`.
+- **Rattachements** : `canal-whatsapp` (PR #70) à la V6, après `annonces` ; il pousse les annonces hors de l'application et amende l'ADR-0045 (et l'ADR-0032 pour le PIN). `verification-whatsapp` (backlog) à la V4 s'il reprend : il protège la file de `croissance-parrainage` et pose le port d'envoi commun.
+- **Ajouts à la V2** venus des chantiers hors plan : la direction valide les enseignants en attente (ADR-0063) et lit le code de son établissement (ADR-0057).
+- [`features-refonte.md`](../../features-refonte.md) aligné : sommaire V1 84, V2 30, V3 12, V4 12 ; total 213, 101 livrées. §6.9 recompté par script : V0-V1 94, V2-V4 54, V5-V6 15, écartées 50.
+
+### Ordre recommandé
+
+Avant tout chantier : recette de la V1, acceptation des décisions en production restées `Proposé` (ADR-0057, 0059, 0063, 0064 ; UDR-0044, 0046, 0050), `bugfix` des tests instables. Puis V2 (`espace-direction`, `annuaire-equipe`) avec `catalogue-complet` (V4) en parallèle ; V3 avec `sous-roles-equipe` (V4) et le lot AS-16 (V5) ; V5 ; V6 (`annonces`, puis `canal-whatsapp`).
+
+### Dette suivie
+
+- Tests instables : `JoinRequestConcurrencyTest` (« cached plan must not change result type »), `RoleHomesTest`, `session_result_test.rb`.
+- Photo de profil : limites documentées de l'ADR-0060 (octets libres dans les données compressées, navigateur sans canvas), acceptées.
+- Codes d'adhésion non libérés à l'archivage (V3) ; 3 900 codes d'établissement à transmettre à la main (ADR-0057).
+
+### Ce qui reste ouvert
+
+- Rapport de la recette `Staging` de la V1, puis la case du §9.
+- Réponses du porteur aux questions Q1 à Q15 (feuille de route, §5).
+- Memo de `photo-de-profil` encore « en cours » alors que le chantier est en production et durci.
+
+## 2026-09-28 — Décisions acceptées, vagues V2 à V6 au backlog
+
+- **Q4 répondue** : le porteur accepte telles quelles les décisions en production encore `Proposé` : ADR-0057, ADR-0059, ADR-0063, ADR-0064, UDR-0044, UDR-0046, UDR-0050 (défauts du 2026-09-28 compris).
+- **Vagues V2 à V6 mises au backlog** par le porteur : elles restent décrites au §5, mais aucune ne s'ouvre avant une décision datée ; elles figurent dans la table « Backlog » de [`chantiers/README.md`](../README.md#backlog).
+- **Défauts de la recette V1** : D1 (formulaire `/join` muet sur un code inconnu) et D2 (pages d'erreur statiques en anglais) sont corrigés dans le chantier `recette-v1-defauts` ; D3 (`style-src-attr 'unsafe-inline'`) reste à consigner.

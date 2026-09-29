@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 # AS-02, AS-39 — UDR-0021. L'élève ouvre un exercice publié : il voit sa progression et les questions sans aucune marque,
-# clique « Commencer l'exercice » et arrive sur la première question (Turbo Drive). L'équipe ouvre « Modifier » dans la
+# clique « Commencer l'exercice » et arrive sur la première question (Turbo Drive). L'équipe ouvre « Modifier » (menu ⋮) dans la
 # modale, sans rechargement de page ; l'enseignant voit les propositions correctes marquées.
 class Assessment::ExercisePageTest < ApplicationSystemTestCase
   # Les accueils (Lots A2, B6, D3) et la session (Lot C2) appartiennent à d'autres lots : tant qu'ils ne sont pas fusionnés,
@@ -84,7 +84,7 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
     visit exercise_path(@exercise.public_id)
 
     assert_no_page_reload do
-      click_on I18n.t("#{scope}.show.edit")
+      click_menu_action("#exercise_header", I18n.t("#{scope}.show.edit"))
 
       assert_selector "turbo-frame#modal dialog[open] #exercise-form"
     end

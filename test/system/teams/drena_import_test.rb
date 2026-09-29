@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# DR-10, UDR-0041: on the DRENA screen, « Importer des DRENA » sits next to « Nouvelle DRENA » and opens the import modal
+# DR-10, UDR-0053: on the DRENA screen, « Importer des DRENA » sits next to « Nouvelle DRENA » and opens the import modal
 # with the help of the format; the delivered file gives « Terminé », 41 imported, and a second upload 41 skipped —
 # without a page reload. The real job runs as soon as it is enqueued.
 class Teams::DrenaImportTest < ApplicationSystemTestCase

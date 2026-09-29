@@ -1,20 +1,36 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0038, 0039, 0052
+# ADR  : 0031, 0034, 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065
 get "teams", to: "teams/homes#show", as: :team_home # gelé
+# ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
+get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
 
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
 scope "teams", module: "teams" do
   resources :drenas, param: :public_id, except: :show
+  # ADR-0056 : génération des classes manquantes, suivie dans son rapport (teams/imports). Avant `schools` : chemin fixe.
+  post "schools/classroom-generations", to: "classroom_generations#create", as: :classroom_generations
   # Aucun formulaire de création : les établissements n'entrent que par import JSON (teams/imports, kind « schools »).
   resources :schools, param: :public_id, except: %i[new create] do
     member { patch :deactivate }
     resources :classrooms, only: %i[new create], controller: "school_classrooms"
+    # ADR-0057 : régénération du code d'établissement (PATCH seul ; le code se lit sur la fiche).
+    resource :code, only: :update, controller: "school_codes"
+    # ADR-0063 : valider ou refuser un enseignant inscrit sans code (decision=approve|reject).
+    resources :join_requests, only: :update, path: "join-requests", param: :public_id
+    # ADR-0059 : « + » et « − » du bloc « Classes par niveau » de la fiche.
+    resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
+    # ADR-0065 : inviter la direction depuis la fiche (modale de l'UDR-0052).
+    resources :staff_invitations, only: %i[new create], path: "staff-invitations"
   end
   resources :levels, param: :slug, except: :show
   resources :series, param: :slug, except: :show
   resources :level_series, only: %i[create destroy], path: "levels/:level_slug/series", param: :series_slug
   resources :materials, param: :slug, except: :show
+  # ADR-0058 : le barème des classes ; une ligne = un niveau du premier cycle, ou un couple niveau × série liée.
+  get "classroom-plan", to: "classroom_plans#show", as: :classroom_plan
+  get "classroom-plan/:level_slug(/:series_slug)/edit", to: "classroom_plans#edit", as: :edit_classroom_plan_line
+  patch "classroom-plan/:level_slug(/:series_slug)", to: "classroom_plans#update", as: :classroom_plan_line
 end
 
 namespace :teams do
@@ -32,6 +48,8 @@ namespace :teams do
   resources :imports, only: %i[index new create show], param: :public_id
   resources :invitations, only: %i[new create]
   resource :account_lookup, only: :show, path: "accounts"
+  # ADR-0063 : « Croissance », indicateurs du parrainage ; liée depuis l'accueil, sans entrée de navigation (UDR-0006).
+  resource :growth, only: :show, controller: "growth"
   post "members/:user_public_id/second-factor-reset", to: "second_factor_resets#create", as: :member_second_factor_reset
 
   # ADR-0052 : failed jobs are read and retried here, behind the team area authentication.

@@ -1,0 +1,75 @@
+<%# 🌐 UI · identity/profiles/_information — carte « Mes informations » (Queries::Identity::ProfileQuery::Row) %>
+<%# Rôle : nom, numéro groupé, informations du rôle, date d'inscription ; nom et numéro s'ouvrent dans le frame modal ; remplacée par profile_names/update %>
+<%# ADR  : 0055, 0060, 0065 · UDR : 0006, 0041, 0047, 0052 %>
+<%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
+  <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
+  <div class="mt-4 flex items-center gap-4">
+    <%= ui_avatar profile.display_name, src: account_photo_src(profile.public_id, profile.photo_version), size: :lg %>
+    <div class="min-w-0 flex-1">
+      <p class="truncate font-display text-lg leading-tight font-extrabold text-ink"><%= profile.display_name %></p>
+      <div class="mt-1.5 flex flex-wrap items-center gap-2">
+        <%= ui_role_badge profile.role %>
+        <% if profile.role == :team %>
+          <%= ui_badge t(".second_factor_active"), tone: :success, dot: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <dl class="mt-5 divide-y divide-line border-t border-line text-sm">
+    <div class="flex flex-wrap items-center justify-between gap-3 py-3">
+      <div class="min-w-0">
+        <dt class="text-mute"><%= t(".photo") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= t(profile.photo_version ? ".photo_present" : ".photo_absent") %></dd>
+      </div>
+      <%= ui_button t(profile.photo_version ? ".change_photo" : ".add_photo"), href: edit_profile_photo_path, variant: :secondary,
+                                                                               size: :sm, icon: "camera", data: { turbo_frame: "modal" } %>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-3 py-3">
+      <div class="min-w-0">
+        <dt class="text-mute"><%= t(".name") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= profile.display_name %></dd>
+      </div>
+      <%= ui_button t(".edit_name"), href: edit_profile_name_path, variant: :secondary, size: :sm, icon: "pencil-square",
+                                     "aria-label": t(".edit_name_label"), data: { turbo_frame: "modal" } %>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-3 py-3">
+      <div class="min-w-0">
+        <dt class="text-mute"><%= t(".contact") %></dt>
+        <dd class="mt-0.5 font-medium text-ink tabular-nums"><%= profile.grouped_contact %></dd>
+      </div>
+      <%= ui_button t(".change_contact"), href: edit_profile_contact_path, variant: :secondary, size: :sm, icon: "phone",
+                                          data: { turbo_frame: "modal" } %>
+    </div>
+    <% case profile.role %>
+    <% when :student %>
+      <div class="py-3">
+        <dt class="text-mute"><%= t(".classroom") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= profile.classroom_name || t(".no_classroom") %></dd>
+      </div>
+    <% when :teacher %>
+      <div class="py-3">
+        <dt class="text-mute"><%= t(".school") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= profile.school_name || t(".missing") %></dd>
+      </div>
+      <div class="py-3">
+        <dt class="text-mute"><%= t(".material") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= profile.material_name || t(".missing") %></dd>
+      </div>
+    <% when :school_admin %>
+      <div class="py-3">
+        <dt class="text-mute"><%= t(".school") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= profile.school_name || t(".missing") %></dd>
+      </div>
+    <% when :team %>
+      <div class="py-3">
+        <dt class="text-mute"><%= t(".team_role") %></dt>
+        <dd class="mt-0.5 font-medium text-ink"><%= t(".team_roles.#{profile.team_role}") %></dd>
+      </div>
+    <% end %>
+    <div class="py-3">
+      <dt class="text-mute"><%= t(".registered_on") %></dt>
+      <dd class="mt-0.5 font-medium text-ink"><%= l(profile.registered_on, format: :long) %></dd>
+    </div>
+  </dl>
+<% end %>

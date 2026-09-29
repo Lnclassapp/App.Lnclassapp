@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::DrenaRepositoryPort
 # Rôle : contrat des DRENA, créées à l'écran ou importées ; slug figé préfixé drena-
-# ADR  : 0034, 0036, 0055
+# ADR  : 0034, 0036, 0066
 module Ports
   module School
     module DrenaRepositoryPort

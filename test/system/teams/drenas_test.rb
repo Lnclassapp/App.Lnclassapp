@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# SC-01, ADR-0036, ADR-0055, UDR-0006: from an empty base, the team creates a DRENA in the modal (slug drena-…), renames
+# SC-01, ADR-0036, ADR-0066, UDR-0006: from an empty base, the team creates a DRENA in the modal (slug drena-…), renames
 # it without touching its slug, meets the 422 of a taken name and of a name without latin letter, and fails to delete
 # a DRENA that has schools — all without a page reload.
 class Teams::DrenasTest < ApplicationSystemTestCase
@@ -36,7 +36,7 @@ class Teams::DrenasTest < ApplicationSystemTestCase
       assert_selector "#drenas tr", count: 1, text: /Abidjan 1\s+drena-abidjan-1\s+0\s+0/
       assert_no_selector "#drenas_empty"
 
-      within("#drenas tr", text: "Abidjan 1") { click_on "Modifier" }
+      click_menu_action("#drenas tr", "Modifier", text: "Abidjan 1")
       within("turbo-frame#modal dialog[open]") { assert_selector "#drena_name_hint code", text: "drena-abidjan-1" }
       fill_drena_modal("Abidjan 1 Plateau", submit: "Enregistrer")
 
@@ -56,7 +56,7 @@ class Teams::DrenasTest < ApplicationSystemTestCase
       end
       assert_no_selector "turbo-frame#modal dialog[open]"
 
-      within("#drenas tr", text: "Abidjan 1 Plateau") { click_on "Supprimer" }
+      click_menu_action("#drenas tr", "Supprimer", text: "Abidjan 1 Plateau")
       within("dialog[open]") { click_on "Supprimer la DRENA" }
 
       assert_toast "DRENA « Abidjan 1 Plateau » supprimée."
@@ -72,7 +72,7 @@ class Teams::DrenasTest < ApplicationSystemTestCase
     visit drenas_path
 
     assert_no_page_reload do
-      within("#drena_#{drena.public_id}") { click_on "Supprimer" }
+      click_menu_action("#drena_#{drena.public_id}", "Supprimer")
       within("dialog[open]") { click_on "Supprimer la DRENA" }
 
       within "#toasts [role=alert]" do

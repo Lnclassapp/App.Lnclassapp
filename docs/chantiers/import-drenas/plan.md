@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Specs : [`prd.md`](prd.md) · Décisions : [ADR-0055](../../decisions/adr/0055-import-des-drena-et-slug-prefixe.md) · [UDR-0041](../../decisions/udr/0041-import-des-drena.md)
+> Specs : [`prd.md`](prd.md) · Décisions : [ADR-0066](../../decisions/adr/0066-import-des-drena-et-slug-prefixe.md) · [UDR-0053](../../decisions/udr/0053-import-des-drena.md)
 
 ## Graphe
 
@@ -31,7 +31,7 @@ Lot 0 — SOCLE (séquentiel) : règle du slug, 5e type d'import, port, migratio
                      `config/locales/shared/common.fr.yml` (`import_kinds.drenas`)
                      `config/locales/teams/imports.fr.yml` (`error_codes.taken`, `index.subtitle`)
                      `config/locales/teams/drenas.fr.yml` (`index.import`, `index.subtitle`, `index.empty_description`, `form.name_hint_new`, erreur « nom sans lettre latine »)
-                     `config/locales/teams/import_drenas.fr.yml` (textes de l'aide `_drenas`, UDR-0041 §3 — ajouté après le lancement de la vague 2)
+                     `config/locales/teams/import_drenas.fr.yml` (textes de l'aide `_drenas`, UDR-0053 §3 — ajouté après le lancement de la vague 2)
                      `app/domain/entities/catalog/import_error.rb` + `test/domain/entities/catalog/import_error_test.rb` (motif `taken` — remonté par le Lot B)
                      `db/seeds/data/imports/drenas-2026.json` (**déjà produit** : 41 DRENA, noms de `db/seeds/data/drenas.yml`)
                      `app/infrastructure/repositories/school/drena_repository.rb` (`taken_names`, `insert_many` — *remonté du Lot B, voir plus bas*)
@@ -51,7 +51,7 @@ Lot 0 — SOCLE (séquentiel) : règle du slug, 5e type d'import, port, migratio
 - **Couche**       : infrastructure + domaine (DTO) + ui (aide des écoles) + données de développement
 - **Fichiers**     : `app/infrastructure/orm/drena.rb` (`has_frozen_slug from: -> { Entities::School::Drena.slug_for(name) }`)
                      `app/domain/dtos/school/drena_input.rb` (nom sans lettre latine refusé)
-                     `app/views/teams/imports/kinds/_schools.html.erb` (exemple `drena-abidjan-1`, `drena-abidjan-2`, rien d'autre — UDR-0041 §3)
+                     `app/views/teams/imports/kinds/_schools.html.erb` (exemple `drena-abidjan-1`, `drena-abidjan-2`, rien d'autre — UDR-0053 §3)
                      `db/seeds/school.rb` (idempotence par `Entities::School::Drena.slug_for(name)`, `find_by!(slug: "drena-abidjan-2")`)
                      `test/domain/dtos/school/drena_input_test.rb`
                      `test/infrastructure/repositories/school/drena_repository_test.rb`
@@ -154,7 +154,7 @@ git worktree add ../lnclass-import-drenas-lot-b -b feature/import-drenas-lot-b f
 git worktree add ../lnclass-import-drenas-lot-c -b feature/import-drenas-lot-c feature/import-drenas
 ```
 
-Ordre dans chaque lot : test rouge → `app/domain/` → `app/infrastructure/` → `app/controllers/` / jobs → vues (UDR-0041). En-tête HITL de 3 lignes sur chaque fichier créé dans `app/`. Chemins absolus, `git -C <worktree>`. Interdiction de toucher un fichier hors de son champ `Fichiers`.
+Ordre dans chaque lot : test rouge → `app/domain/` → `app/infrastructure/` → `app/controllers/` / jobs → vues (UDR-0053). En-tête HITL de 3 lignes sur chaque fichier créé dans `app/`. Chemins absolus, `git -C <worktree>`. Interdiction de toucher un fichier hors de son champ `Fichiers`.
 
 Préalable d'environnement : le dépôt exige Ruby 3.4.9 (`.ruby-version`), alors que le conteneur actuel a Ruby 3.3.6 et ne peut pas lancer `bin/rails`. `bin/setup` (Ruby 3.4.9 et PostgreSQL) doit passer avant la vague 1, sinon aucun test rouge n'est possible.
 

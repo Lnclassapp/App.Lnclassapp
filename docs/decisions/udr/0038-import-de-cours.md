@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot I1 ; critères CA-08, TR-28 |
 | **ADR lié** | [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (tout naît en brouillon) · [ADR-0039](../adr/0039-format-d-import-du-contenu.md) (format, import partiel) · [UDR-0006](0006-shell-applicatif-par-role.md) §7 (CRUD Hotwire) · [UDR-0037](0037-import-des-etablissements.md) (aide d'un type d'import) · UDR-0007 (vocabulaire) |
@@ -64,4 +64,4 @@ Dans l'ancienne application, l'import de cours tenait en un champ de fichier en 
 
 - Les imports de fiches essentielles (I2) et d'exercices (I3) peuvent reprendre les étages « Fiche essentielle » à « Proposition » de cette aide.
 - Un alias ajouté à `COURSE_ALIASES` ou `EXERCISE_ALIASES` apparaît de lui-même dans l'aide.
-- Le libellé commun du type (`import_kinds.course_tree`, « Cours et chapitres ») vient du socle ; le vocabulaire de l'UDR-0007 ne connaît pas « chapitre » : à trancher par le porteur.
+- Le libellé commun du type (`import_kinds.course_tree`) est « Cours complets » (décision du porteur, 2026-09-27) : le vocabulaire de l'UDR-0007 ne connaît pas « chapitre ».

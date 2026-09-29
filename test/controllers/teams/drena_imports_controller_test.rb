@@ -1,6 +1,6 @@
 require "test_helper"
 
-# DR-07, DR-10, UDR-0041: the DRENA import is the team's — its button sits before « Nouvelle DRENA », its modal shows the
+# DR-07, DR-10, UDR-0053: the DRENA import is the team's — its button sits before « Nouvelle DRENA », its modal shows the
 # help of the format; a school staff member or a teacher can neither open it nor post a file of this kind.
 class Teams::DrenaImportsControllerTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper

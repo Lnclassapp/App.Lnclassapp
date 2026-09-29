@@ -1,6 +1,6 @@
 require "test_helper"
 
-# DR-02, DR-06, ADR-0055: the delivered file of the 41 DRENA is imported on an empty base, each with its slug drena-…;
+# DR-02, DR-06, ADR-0066: the delivered file of the 41 DRENA is imported on an empty base, each with its slug drena-…;
 # a file of another format, of another version or over 500 lines is rejected in bloc, and nothing is created.
 class School::ImportDrenasJobTest < ActiveJob::TestCase
   DELIVERED = Rails.root.join("db/seeds/data/imports/drenas-2026.json")

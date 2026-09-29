@@ -2,7 +2,7 @@ require "test_helper"
 
 module Repositories
   module School
-    # ADR-0055 : écritures en masse de l'import des DRENA, slug et public_id calculés par l'adaptateur.
+    # ADR-0066 : écritures en masse de l'import des DRENA, slug et public_id calculés par l'adaptateur.
     class DrenaRepositoryImportTest < ActiveSupport::TestCase
       setup { @repository = DrenaRepository.new }
 

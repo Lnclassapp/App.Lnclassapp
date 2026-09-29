@@ -127,7 +127,9 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
 
     assert_response :success
     assert_no_match(/correct/i, response.body.scan(/<turbo-frame id="question".*<\/turbo-frame>/m).join)
-    assert_select "#attempt-form input[value='#{correct_ids.first}']", 1
+    # La question affichée n'est pas forcément celle dont la base rend d'abord la bonne réponse : une seule des bonnes
+    # réponses de l'exercice est dans le formulaire, sans marque qui la distingue.
+    assert_equal 1, correct_ids.count { |id| css_select("#attempt-form input[value='#{id}']").any? }
     assert_select "#attempt-form [data-correct], #attempt-form .correct", 0
   end
 

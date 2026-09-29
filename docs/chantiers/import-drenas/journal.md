@@ -7,8 +7,8 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-09-29 | Le repository des DRENA (`taken_names`, `insert_many`) remonte du Lot B au Lot 0 | `test/architecture/port_contracts_test.rb` exige qu'un adaptateur implémente toute méthode de son port : déclarer le port sans l'implémenter rendrait le Lot 0 rouge | Non |
-| 2026-09-29 | L'import des écoles garde la comparaison après `parameterize` (ADR-0039) : « Drena-Abidjan-1 » résout, `abidjan-1` non | « Slug exact » voulait dire « sans préfixe ajouté », pas « sans normalisation » ; précisé dans l'ADR-0055 §4 | Oui (ADR-0055 §4) |
-| 2026-09-29 | Plafond du fichier de DRENA à 500 lignes, celui des établissements reste à 5 000 | Le porteur s'inquiétait d'une limite trop basse pour ses plus de 3 000 écoles : les 500 lignes ne concernent que les DRENA, et ses 3 851 écoles tiennent dans les 5 000 | Oui (ADR-0055 §4) |
+| 2026-09-29 | L'import des écoles garde la comparaison après `parameterize` (ADR-0039) : « Drena-Abidjan-1 » résout, `abidjan-1` non | « Slug exact » voulait dire « sans préfixe ajouté », pas « sans normalisation » ; précisé dans l'ADR-0066 §4 | Oui (ADR-0066 §4) |
+| 2026-09-29 | Plafond du fichier de DRENA à 500 lignes, celui des établissements reste à 5 000 | Le porteur s'inquiétait d'une limite trop basse pour ses plus de 3 000 écoles : les 500 lignes ne concernent que les DRENA, et ses 3 851 écoles tiennent dans les 5 000 | Oui (ADR-0066 §4) |
 
 ## Ce qui a dérapé
 
@@ -27,7 +27,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - Le conteneur de la session avait Ruby 3.3.6, alors que `.ruby-version` exige 3.4.9 : il a fallu l'installer avec `rbenv install`, et démarrer PostgreSQL avec son rôle `dev-rails`.
 - `test/infrastructure/queries/classroom/student_classroom_query_test.rb` échoue en local si la base est en collation `C.UTF-8` (tri « Écologie » / « Génétique ») : la CI utilise `en_US.utf8`. Sans lien avec le chantier.
 - `bin/rails db:migrate` sous PostgreSQL 16 réécrit toutes les contraintes `ANY (ARRAY[…])` de `db/schema.rb` dans un autre format : il faut garder seulement le vrai changement.
-- L'index des UDR (`docs/decisions/udr/README.md`) ne liste que 0001 à 0007, alors que les fichiers vont jusqu'à 0040.
+- `Develop` a avancé de 228 commits pendant le chantier : les numéros ADR-0055 et UDR-0041 et l'horodatage de migration `20260929100000` étaient déjà pris. Ils sont devenus ADR-0066, UDR-0053 et `20260929180000` au merge de `Develop`. Leçon : relever les numéros sur `origin/Develop` fraîchement récupéré, pas sur la copie locale.
 
 ## Dette laissée derrière
 
@@ -36,7 +36,6 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | `test/domain/use_cases/identity/register_teacher_test.rb` construit encore des DRENA factices aux slugs `abidjan-1`, `abidjan-2` | Le test ne dépend pas du format du slug et passe ; le réécrire élargirait le lot | aucun (cosmétique) |
-| Index des UDR incomplet (0008 à 0040 absentes) | Hors périmètre ; seule la ligne 0041 est ajoutée | à ouvrir |
 
 ## Clôture
 

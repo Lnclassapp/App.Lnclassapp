@@ -47,9 +47,10 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
 
   test "the list follows the positions, with each level's code, series and usage" do
     tle = create_level(name: "Tle", position: 7, cycle: "second")
-    create_level(name: "6ème", position: 1, cycle: "first")
+    sixth = create_level(name: "6ème", position: 1, cycle: "first")
     link_level_series(level: tle, series: create_series(name: "D"))
     create_classroom(level: tle)
+    Orm::ClassroomPlanEntry.create!(school_type: "public", level: sixth, count: 4)
     sign_in_as @member
 
     get levels_path
@@ -57,22 +58,23 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#levels tr", 2
     assert_select "#levels tr:first-child#level_6eme", text: /6ème\s+6eme\s+1\s+#{tl('cycles.first')}/
     assert_select "#level_tle", text: /#{tl('cycles.second')}\s+D\s+1\s+0/
-    assert_select "#level_tle a[data-turbo-frame=modal][href='#{edit_level_path('tle')}']", text: including(tl("level_row.edit"))
+    assert_select "#level_tle [role=menu] a[role=menuitem][data-turbo-frame=modal][href='#{edit_level_path('tle')}']", text: including(tl("level_row.edit"))
     assert_select "#level_tle dialog#delete-level-tle form#delete-level-tle-form[action='#{level_path('tle')}']" do
       assert_select "input[name=_method][value=delete]", 1
     end
     assert_select "#levels_empty", 0
   end
 
-  test "the list explains which levels get generated classrooms, and flags a level outside the plan" do
-    create_level(name: "6ème", position: 1, cycle: "first")
+  test "the list leads to the barème, and flags a level without any positive count in it (ADR-0058)" do
+    sixth = create_level(name: "6ème", position: 1, cycle: "first")
     create_level(name: "Sixième bis", position: 2, cycle: "first")
+    Orm::ClassroomPlanEntry.create!(school_type: "public", level: sixth, count: 4)
     sign_in_as @member
 
     get levels_path
 
-    codes = Queries::Catalog::LevelsQuery::GENERATED_SLUGS.to_sentence
-    assert_select "#levels-generation-help", text: including(tl("index.generation_help", codes:))
+    assert_select "#levels-generation-help", text: including(tl("index.generation_help"))
+    assert_select "#levels-generation-help a[href='#{classroom_plan_path}']", text: tl("index.classroom_plan_link")
     assert_select "#level_sixieme-bis [data-generation=outside]", text: including(tl("level_row.outside_generation")) do |badge|
       assert_equal tl("level_row.outside_generation_hint"), badge.first["title"]
     end
@@ -92,9 +94,16 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#modal dialog#level-modal form#level-form[action='#{levels_path}']" do
       assert_select "input[name='level[name]'][maxlength='20']"
       assert_select "#level_name_hint", text: including(tl("new.name_hint"))
-      assert_select "#level_name_hint", text: including(tl("form.recognized_names"))
       assert_select "input[name='level[position]'][value='2']"
-      assert_select "select[name='level[cycle]'] option[value=first]", text: tl("cycles.first")
+      assert_select "select[name='level[cycle]']", 0
+      assert_select "fieldset#level_cycle > legend", text: /#{Dtos::Catalog::LevelInput.human_attribute_name(:cycle)}/
+      assert_select "fieldset#level_cycle label.min-h-tap", 2
+      assert_select "label", text: tl("cycles.first") do
+        assert_select "input#level_cycle_first[type=radio][name='level[cycle]'][value=first][checked][required]"
+      end
+      assert_select "label", text: tl("cycles.second") do
+        assert_select "input#level_cycle_second[type=radio][value=second]:not([checked])"
+      end
     end
     assert_select "button[type=submit][form=level-form]", text: tl("new.submit")
   end
@@ -114,7 +123,10 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=replace][target=levels] tbody#levels tr", 2
     assert_select "turbo-stream[action=replace][target=levels] tr:first-child#level_6eme"
     assert_equal [ "taxonomy.changed", @member.id, "Level", level.id ],
-                 Orm::AuditEvent.pluck(:action, :actor_id, :subject_type, :subject_id).sole
+                 Orm::AuditEvent.where(action: "taxonomy.changed").pluck(:action, :actor_id, :subject_type, :subject_id).sole
+    # D1 (owner, 2026-09-28): 6ème gets its barème defaults, and the row no longer says « Hors barème ».
+    assert_equal({ "private" => 2, "public" => 4 }, Orm::ClassroomPlanEntry.where(level:).pluck(:school_type, :count).to_h)
+    assert_select "turbo-stream[action=replace][target=levels] #level_6eme [data-generation]", 0
   end
 
   test "an invalid form reopens in the modal (422), with its errors and the values typed" do
@@ -127,7 +139,9 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[name='level[name]'][value='#{'a' * 21}'][aria-invalid=true]"
       assert_select "input[name='level[position]'][value=sept][aria-invalid=true]"
       assert_select "#level_position_error", text: including(I18n.t("errors.messages.not_a_number"))
-      assert_select "#level_cycle_error"
+      assert_select "fieldset#level_cycle > #level_cycle_error", text: including(I18n.t("errors.messages.inclusion"))
+      assert_select "input[name='level[cycle]'][checked]", 0
+      assert_select "input[name='level[cycle]'][aria-invalid=true][aria-describedby=level_cycle_error]", 2
     end
     assert_equal 0, Orm::Level.count
   end
@@ -174,21 +188,11 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[name=_method][value=patch]"
       assert_select "input[name='level[name]'][value='6ème']"
       assert_select "input[name='level[position]'][value='1']"
-      assert_select "select[name='level[cycle]'] option[selected][value=first]"
+      assert_select "input#level_cycle_first[type=radio][checked]"
+      assert_select "input#level_cycle_second[type=radio]:not([checked])"
     end
     assert_select "#level-code", text: /6eme/
     assert_select "#level-code [data-generation]", 0
-  end
-
-  test "the edit modal warns when the frozen code is outside the generation of classrooms" do
-    create_level(name: "Sixième", position: 1, cycle: "first")
-    sign_in_as @member
-
-    get edit_level_path("sixieme"), headers: { "Turbo-Frame" => "modal" }
-
-    assert_select "#level-code [data-generation=outside]", text: including(tl("level_row.outside_generation"))
-    assert_select "#level-code", text: including(tl("edit.outside_generation"))
-    assert_select "#level_name_hint", text: including(tl("form.recognized_names"))
   end
 
   test "an unknown level has no edit form, and cannot be updated or deleted" do

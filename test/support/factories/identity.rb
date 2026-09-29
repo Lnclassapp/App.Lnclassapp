@@ -22,8 +22,16 @@ module Factories
     def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], **attributes)
       create_user(role: "teacher", **attributes).tap do |teacher|
         Orm::TeacherProfile.create!(user: teacher, material:, onboarding_completed_at: (Time.current if onboarded))
-        Orm::TeacherSchool.create!(teacher:, school:, primary: true)
+        # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
+        Orm::TeacherSchool.create!(teacher:, school:, primary: true) if school
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }
+      end
+    end
+
+    # ADR-0065: a direction account attached to its school, signing in by PIN alone.
+    def create_school_admin(school: create_school, invited_by: nil, **attributes)
+      create_user(role: "school_admin", **attributes).tap do |admin|
+        Orm::SchoolStaff.create!(user: admin, school:, invited_by:)
       end
     end
 

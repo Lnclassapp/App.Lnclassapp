@@ -26,7 +26,8 @@ class Orm::ModelsTest < ActiveSupport::TestCase
       level = Orm::Level.create!(name: "Tle", position: 7, cycle: "second")
       series = Orm::Series.create!(name: "D")
       Orm::LevelSeries.create!(level:, series:)
-      school = Orm::School.create!(drena: Orm::Drena.create!(name: "Abidjan 1"), name: "Lycée Classique", school_type: "mixed")
+      school = Orm::School.create!(drena: Orm::Drena.create!(name: "Abidjan 1"), name: "Lycée Classique", school_type: "mixed",
+                                   school_code: "k7m4qz")
       classroom = Orm::Classroom.create!(school:, level:, series:, name: "Tle D 1", school_year: "2026-2027", join_code: "abc23")
       course = Orm::Course.create!(name: "Nombres complexes", level:, series:, material:, author: team)
       essential = Orm::Essential.create!(course:, name: "Forme algébrique", position: 1, author: team)
@@ -43,7 +44,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
   end
 
   test "every V1 table has its Orm model with an explicit table name" do
-    assert_equal 30, MODELS.size
+    assert_equal 35, MODELS.size # + referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065)
     MODELS.each { |model| assert model.table_name.present? && model.table_exists?, model.name }
   end
 

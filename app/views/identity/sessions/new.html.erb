@@ -33,7 +33,7 @@
           <% end %>
           <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15,
                        placeholder: t(".contact_placeholder"), inputmode: "tel", autocomplete: "tel", autofocus: true %>
-          <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+          <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                        autocomplete: "current-password", hint: t(".pin_hint") %>
           <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
           <p class="text-center text-sm">

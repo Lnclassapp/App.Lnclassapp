@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot R3 ; CA-20, CA-22, CA-25, CA-26) |
 | **ADR lié** | [ADR-0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md) (référentiel créé par l'équipe) · [ADR-0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md) (slug figé) · [ADR-0036](../adr/0036-suppression-archivage-et-anonymisation.md) (suppression refusée) · UDR-0005, UDR-0006, UDR-0007 |
@@ -73,3 +73,9 @@ Pourquoi des radios-badges plutôt qu'un `select` suivi d'un aperçu dynamique :
 - Une matière ne peut plus exister sans catégorie : ni à l'écran (422), ni en base (`NOT NULL` + `CHECK`).
 - Aucune suppression en cascade : une matière utilisée se garde, l'équipe retire d'abord ses cours ou change la matière de ses enseignants.
 - Le libellé de la catégorie `other` vient de la locale commune (`materials.categories.other`, « Autres ») ; le plan écrivait « Autre ».
+
+## Amendement du 2026-09-28
+
+*Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#material-actions-<slug>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-material-<slug>"`, `:danger`). La modale est rendue sans `trigger:`, son formulaire est inchangé. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.

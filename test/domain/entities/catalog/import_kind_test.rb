@@ -3,7 +3,7 @@ require "test_helper"
 module Entities
   module Catalog
     class ImportKindTest < ActiveSupport::TestCase
-      test "cinq types fermés, dont les DRENA (ADR-0055)" do
+      test "cinq types fermés, dont les DRENA (ADR-0066)" do
         assert_equal %w[schools course_tree essentials exercises drenas], ImportKind::KINDS
         assert ImportKind.valid?("drenas")
         assert ImportKind.valid?(:schools)
@@ -38,6 +38,20 @@ module Entities
         assert_equal Policies::Catalog::ManageContentPolicy, ImportKind.fetch("exercises").policy
         assert ImportKind.fetch("course_tree").authorize(actor: team).success?
         assert_equal :forbidden, ImportKind.fetch("schools").authorize(actor: teacher).code
+      end
+
+      test "the generation of the missing classrooms is a report kind, not an import kind (ADR-0056)" do
+        team = Identity::Actor.new(user_id: 1, role: :team, team_role: "field")
+        teacher = Identity::Actor.new(user_id: 2, role: :teacher)
+
+        assert_equal "classrooms", ImportKind::CLASSROOM_GENERATION
+        assert_not ImportKind.valid?("classrooms")
+        assert_equal %w[schools course_tree essentials exercises drenas classrooms], ImportKind::REPORT_KINDS
+        assert ImportKind.authorize_report(kind: "classrooms", actor: team).success?
+        assert_equal :forbidden, ImportKind.authorize_report(kind: "classrooms", actor: teacher).code
+        assert_equal :forbidden, ImportKind.authorize_report(kind: :exercises, actor: teacher).code
+        assert ImportKind.authorize_report(kind: "exercises", actor: team).success?
+        assert_raises(KeyError) { ImportKind.authorize_report(kind: "regions", actor: team) }
       end
     end
   end

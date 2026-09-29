@@ -13,13 +13,36 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   def scope = "classroom.classrooms"
 
+  test "CP-08: « Partager sur WhatsApp » envoie le lien /c/<code> et le code, sans aucun nom d'élève (ADR-0063)" do
+    create_student(classroom: @classroom, first_name: "Zoé", last_name: "Unique")
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    message = I18n.t("#{scope}.header.share_message", classroom: "6ème 1", school: "Lycée Classique d'Abidjan",
+                                                       link: join_classroom_url("KFM37"), code: "KFM37")
+    assert_select "#classroom_header a#classroom_whatsapp_share[href='https://wa.me/?text=#{ERB::Util.url_encode(message)}']" \
+                  "[target=_blank][rel=noopener]", text: I18n.t("#{scope}.header.share_whatsapp")
+    assert_no_match(/Zoé|Unique/, message)
+    assert_includes message, "/c/KFM37"
+  end
+
+  test "CP-08: une classe sans code n'a rien à partager" do
+    @classroom.update!(join_code: nil)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_whatsapp_share", 0
+  end
+
   test "l'enseignant de la classe voit l'en-tête, le code en majuscules, les cours assignés et ses élèves" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_essential(course:)
     create_assignment(classroom: @classroom, assignable: course, by: @teacher)
     create_assignment(classroom: @classroom, assignable: create_course(name: "Brouillon", status: "draft"), by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", contact: "0102030405")
-    create_exercise_session(student: awa, status: "completed", score_percent: 85)
+    session = create_exercise_session(student: awa, status: "completed", score_percent: 85)
     create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
     sign_in_as @teacher
 
@@ -52,9 +75,12 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{awa.public_id}", text: /Awa Bamba/
     assert_select "#student_#{awa.public_id}", text: /01 02 03 04 05/
     assert_select "#student_#{awa.public_id}", text: /85 %/
+    assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']",
+                  text: I18n.t("#{scope}.roster.see_result")
     assert_select "#student_#{awa.public_id} form[method=post][action='#{account_pin_recovery_codes_path(awa.public_id)}'] " \
                   "button[type=submit]", text: I18n.t("#{scope}.roster.issue_code")
     assert_select "#classroom_roster", text: /#{I18n.t("#{scope}.roster.no_score")}/
+    assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
 
   test "non-régression CS#B8 : la page répond 200 avec un exercice et une fiche assignés" do

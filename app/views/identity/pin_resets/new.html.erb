@@ -14,11 +14,11 @@
         <% end %>
         <%= ui_field form, :contact, as: :tel, required: true, maxlength: 15, placeholder: t("identity.sessions.new.contact_placeholder"),
                      inputmode: "tel", autocomplete: "tel" %>
-        <%= ui_field form, :code, required: true, value: "", maxlength: 8, inputmode: "numeric", autocomplete: "one-time-code",
+        <%= ui_field form, :code, required: true, value: "", maxlength: 9, inputmode: "numeric", autocomplete: "one-time-code",
                      hint: t(".code_hint") %>
-        <%= ui_field form, :pin, as: :password, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
+        <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                      hint: t(".pin_hint") %>
-        <%= ui_field form, :pin_confirmation, as: :password, required: true, maxlength: 4, inputmode: "numeric",
+        <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                      autocomplete: "new-password" %>
         <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
         <p class="text-center text-sm">

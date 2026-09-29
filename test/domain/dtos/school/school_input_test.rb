@@ -15,8 +15,15 @@ module Dtos
 
         assert school.valid?
         assert_equal "drena-abidjan1", school.drena_public_id
-        assert_equal({ name: "Lycée Classique d'Abidjan", sigle: "LCA", school_type: "public", status: "active", cycle: "both" },
-                     school.to_h)
+        assert_equal({ name: "Lycée Classique d'Abidjan", sigle: "LCA", school_type: "public", status: "active", cycle: "both",
+                       national_code: nil }, school.to_h)
+      end
+
+      test "CP-10 : le code national est facultatif, 6 chiffres, espaces retirés (ADR-0063)" do
+        assert_equal "012345", input(national_code: " 012 345 ").to_h[:national_code]
+        assert_nil input(national_code: "  ").to_h[:national_code]
+        assert input(national_code: "  ").valid?
+        assert input(national_code: "12345").tap(&:validate).errors.of_kind?(:national_code, :invalid)
       end
 
       test "le sigle est facultatif : vide, il vaut nil" do

@@ -55,7 +55,7 @@ class Orm::HasFrozenSlugTest < ActiveSupport::TestCase
     assert_includes essential.errors.attribute_names, :course
   end
 
-  # ADR-0055: the DRENA slug is the domain rule, prefixed drena-, never the model name.
+  # ADR-0066: the DRENA slug is the domain rule, prefixed drena-, never the model name.
   test "a DRENA keeps its public_id in URLs, its slug is the import target" do
     drena = Orm::Drena.create!(name: "Abidjan 1")
 

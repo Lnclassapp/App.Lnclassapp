@@ -1,10 +1,11 @@
 // ⚡ FRONT · dropdown_controller — menu déroulant au motif WAI-ARIA « menu button »
-// Rôle : bascule, flèches / Début / Fin, Échap rend le focus au bouton, clic extérieur et Tab ferment
-// UDR  : 0005
+// Rôle : bascule, flèches / Début / Fin, Échap rend le focus au bouton, clic extérieur et Tab ferment ; ouvre une <dialog>
+// UDR  : 0005, 0042
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["button", "menu"]
+  static values = { fixed: Boolean }
 
   toggle() {
     this.menuTarget.hidden ? this.open() : this.close()
@@ -13,12 +14,50 @@ export default class extends Controller {
   open() {
     this.menuTarget.hidden = false
     this.buttonTarget.setAttribute("aria-expanded", "true")
-    this.items[0]?.focus()
+    this.place()
+    this.items[0]?.focus({ preventScroll: true })
   }
 
   close() {
     this.menuTarget.hidden = true
     this.buttonTarget.setAttribute("aria-expanded", "false")
+  }
+
+  // Ferme le menu et rend le focus au bouton : une modale ouverte ensuite le lui rendra à sa fermeture.
+  dismiss() {
+    this.close()
+    this.buttonTarget.focus()
+  }
+
+  // Entrée `dialog:` d'ui_dropdown_item (UDR-0042) : la confirmation d'une ligne s'ouvre en showModal().
+  openDialog({ params: { dialog } }) {
+    this.dismiss()
+    document.getElementById(dialog)?.showModal()
+  }
+
+  // Menu `fixed` (UDR-0042) : placé sous le bouton, ou au-dessus s'il manque de place en bas, jamais hors de l'écran.
+  // Un menu en position fixe échappe au défilement horizontal d'un tableau, qui rognerait un menu absolu.
+  place() {
+    if (!this.fixedValue || this.menuTarget.hidden) return
+
+    const gap = 8
+    const menu = this.menuTarget
+    const button = this.buttonTarget.getBoundingClientRect()
+    const { clientWidth, clientHeight } = document.documentElement
+    const width = menu.offsetWidth
+    const height = menu.offsetHeight
+    const alignEnd = menu.classList.contains("right-0")
+    const left = alignEnd ? button.right - width : button.left
+    const below = button.bottom + gap
+    const top = below + height > clientHeight && button.top - gap - height >= 0 ? button.top - gap - height : below
+
+    Object.assign(menu.style, {
+      position: "fixed",
+      margin: "0",
+      right: "auto",
+      top: `${top}px`,
+      left: `${Math.min(Math.max(gap, left), clientWidth - width - gap)}px`
+    })
   }
 
   outside(event) {

@@ -75,6 +75,7 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
   end
 
   test "with an empty referential, the help says to create it first" do
+    Orm::ClassroomPlanEntry.delete_all
     Orm::LevelSeries.delete_all
     Orm::Level.delete_all
 

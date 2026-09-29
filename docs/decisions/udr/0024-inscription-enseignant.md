@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot D1, critères ID-03, ID-08, SC-26, SC-27, TR-cadre-1 |
 | **ADR lié** | [ADR-0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md) (école principale) · [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) (nom et prénoms) · [ADR-0050](../adr/0050-authentification-et-session.md) (PIN, session, limite de débit) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) |
@@ -65,3 +65,12 @@ Un enseignant s'inscrit seul, depuis `/teacher-signup`. Il doit choisir son éta
 - Aucun sélecteur « école + niveau → classe » n'existe dans l'application (ID-08) : l'élève rejoint sa classe par son code (UDR-0009).
 - Le formulaire « Prepa BAC — Ressources Enseignants » (TR-17) n'est pas repris : l'inscription enseignant n'a qu'une entrée.
 - Tout autre écran qui aurait besoin des établissements d'une DRENA réutilise l'adresse `/drenas/:drena_public_id/schools`, en frame ou en JSON, plutôt qu'un nouveau point d'accès.
+
+## Amendement du 2026-09-28 — code d'établissement
+
+*Chantier [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md), [UDR-0044](0044-inscription-enseignant-par-code-d-etablissement.md), [ADR-0057](../adr/0057-code-d-etablissement.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- La rubrique « Établissement et matière » n'a plus de DRENA ni de liste d'établissements : un champ « Code d'établissement », puis la matière. Les §2.2 à §2.4 (frame `schools`, DRENA voyageant avec la liste, formulaire `GET` sans JavaScript) et les règles correspondantes du §3 ne s'appliquent plus à l'inscription.
+- `/e/<code>` ouvre la même page, l'établissement déjà trouvé (bandeau), limitée à 10 requêtes par minute ; un code refusé y répond 404.
+- `/drenas/:drena_public_id/schools` reste servi (frame et JSON, §4), sans consommateur dans l'inscription.
+

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# DR-03, DR-04, DR-05, ADR-0055: the DRENA adapter on the real engine and repository. Each line carries only its name;
+# DR-03, DR-04, DR-05, ADR-0066: the DRENA adapter on the real engine and repository. Each line carries only its name;
 # the slug drena-… is drawn from it, and is the duplicate key against the base and the lines above.
 module UseCases
   module School

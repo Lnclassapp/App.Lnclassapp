@@ -12,8 +12,9 @@ class UseCasePoliciesTest < ActiveSupport::TestCase
     "UseCases::Identity::ResetPinWithCode" => "PIN oublié : la personne n'est pas connectée",
     "UseCases::Identity::AcceptInvitation" => "invitation : le compte n'existe pas encore"
   }.freeze
-  # The adapter contract of the import engine is a module, not a use case.
-  CONTRACTS = %w[UseCases::Catalog::Importer].freeze
+  # Modules shared by use cases, not use cases: the adapter contract of the import engine, the session renewal of the
+  # profile (ADR-0055).
+  CONTRACTS = %w[UseCases::Catalog::Importer UseCases::Identity::SessionRenewal].freeze
   REGISTRY = [ "Entities::Catalog::ImportKind.fetch(", ".authorize(actor:" ].freeze
 
   def use_cases

@@ -1,0 +1,21 @@
+<%# 🌐 UI · teams/dashboards/show — pilotage de l'équipe (TR-10, TR-11, TR-12) %>
+<%# Rôle : périmètre, filtres GET, chiffres de la période et du moment, élèves par niveau, couverture par DRENA, inscrits, recherche %>
+<%# ADR  : 0049, 0062 · UDR : 0005, 0006, 0049 · aucune ligne de JavaScript, aucune bibliothèque de graphiques %>
+<% content_for :title, t(".page_title") %>
+<% content_for :nav_key, "dashboard" %>
+<% period_scope = t("teams.dashboards.period_scopes.#{@period.key}", year: @dashboard.school_year) %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+<p id="team_dashboard_scope" class="-mt-2 mb-5 text-sm font-medium text-ink">
+  <%= t(".scope", territory: @dashboard.drena&.name || t(".national"), period: period_scope) %>
+</p>
+
+<div class="grid grid-cols-1 gap-5">
+  <%= render "filters", period: @period, drena: @dashboard.drena, drenas: @drenas %>
+  <%= render "key_figures", dashboard: @dashboard, period_scope: %>
+  <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+    <%= render "levels", dashboard: @dashboard %>
+    <%= render "recent_signups", signups: @dashboard.recent_signups %>
+  </div>
+  <%= render "drenas", rows: @dashboard.drenas, period_scope: %>
+  <%= render "search", search: @search, period: @period, drena: @dashboard.drena %>
+</div>

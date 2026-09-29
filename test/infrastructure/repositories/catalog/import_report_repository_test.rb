@@ -37,16 +37,34 @@ module Repositories
         assert create_report(kind: "course_tree")
       end
 
+      test "the generation of the classrooms has a report without a file; a second one running gives :conflict (ADR-0056)" do
+        report = @repository.create(kind: "classrooms", checksum_sha256: nil, imported_by_id: @member.id, at: @at).value
+
+        assert_equal [ "classrooms", "queued" ], [ report.kind, report.status ]
+        assert_nil Orm::ImportReport.find(report.id).checksum_sha256
+        assert_equal :conflict, @repository.create(kind: "classrooms", checksum_sha256: nil, imported_by_id: @member.id, at: @at).code
+      end
+
       test "fail_stale passe failed les rapports commencés avant la limite, et eux seuls" do
-        stale = create_import_report(kind: "schools", status: "importing", started_at: @at - 31.minutes)
+        stale = create_import_report(kind: "schools", status: "importing", started_at: @at - 11.minutes)
         fresh = create_import_report(kind: "essentials", status: "validating", started_at: @at - 5.minutes)
         other = create_import_report(kind: "exercises", status: "importing", started_at: @at - 2.hours)
 
-        assert_equal 1, @repository.fail_stale(kind: "schools", before: @at - 30.minutes, at: @at)
+        assert_equal 1, @repository.fail_stale(kind: "schools", before: @at - 10.minutes, at: @at)
         assert_equal [ "failed", @at ], stale.reload.attributes.values_at("status", "finished_at")
         assert_equal "validating", fresh.reload.status
         assert_equal "importing", other.reload.status
         assert create_report
+      end
+
+      test "fail_stale passe aussi failed un rapport resté en file au-delà de la limite (job jamais pris)" do
+        never_claimed = create_import_report(kind: "schools", status: "queued", created_at: @at - 11.minutes)
+        waiting = create_import_report(kind: "essentials", status: "queued", created_at: @at - 5.minutes)
+
+        assert_equal 1, @repository.fail_stale(kind: "schools", before: @at - 10.minutes, at: @at)
+        assert_equal 0, @repository.fail_stale(kind: "essentials", before: @at - 10.minutes, at: @at)
+        assert_equal [ "failed", @at ], never_claimed.reload.attributes.values_at("status", "finished_at")
+        assert_equal "queued", waiting.reload.status
       end
 
       test "claim ne prend un rapport en file qu'une fois" do

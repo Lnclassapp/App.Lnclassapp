@@ -47,14 +47,14 @@ class Teams::MaterialsTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog"
       assert_selector "#material_svt #{tone_selector('science')}", text: "SVT"
 
-      within("#material_svt") { click_on I18n.t("teams.materials.material_row.edit") }
+      click_menu_action("#material_svt", I18n.t("teams.materials.material_row.edit"))
       within("turbo-frame#modal dialog[open]") { fill_in "material[name]", with: "Sciences de la vie" }
       submit_modal I18n.t("teams.materials.edit.submit")
 
       assert_toast I18n.t("teams.materials.update.done", name: "Sciences de la vie")
       assert_selector "#material_svt #{tone_selector('science')}", text: "Sciences de la vie"
 
-      within("#material_svt") { click_on I18n.t("teams.materials.material_row.edit") }
+      click_menu_action("#material_svt", I18n.t("teams.materials.material_row.edit"))
       within("turbo-frame#modal dialog[open]") { choose category_label("other") }
       submit_modal I18n.t("teams.materials.edit.submit")
 
@@ -81,13 +81,13 @@ class Teams::MaterialsTest < ApplicationSystemTestCase
     visit materials_path
 
     assert_no_page_reload do
-      within("#material_latin") { click_on I18n.t("teams.materials.material_row.delete") }
+      click_menu_action("#material_latin", I18n.t("teams.materials.material_row.delete"))
       within("#material_latin dialog[open]") { click_on I18n.t("teams.materials.material_row.confirm") }
 
       assert_toast I18n.t("teams.materials.destroy.done")
       assert_no_selector "#material_latin"
 
-      within("#material_francais") { click_on I18n.t("teams.materials.material_row.delete") }
+      click_menu_action("#material_francais", I18n.t("teams.materials.material_row.delete"))
       within("#material_francais dialog[open]") { click_on I18n.t("teams.materials.material_row.confirm") }
 
       assert_toast I18n.t("teams.materials.destroy.referenced")

@@ -18,6 +18,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     options.add_argument("--window-size=1400,1400")
   end
 
+  # The test adapter is shared by every test of the process: an import test that sets perform_enqueued_jobs would leave
+  # it on for the next one, which then sees an import « Terminé » instead of « En file d'attente ». Each test starts
+  # with jobs queued, not performed; a test that needs them performed sets it in its own setup, which runs after this one.
+  setup { ActiveJob::Base.queue_adapter.perform_enqueued_jobs = false }
+
   MOBILE_VIEWPORT = [ 390, 844 ].freeze
 
   # The same journey on a phone: the window shrinks for the block, then returns to its size.
@@ -28,5 +33,24 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     yield
   ensure
     window.resize_to(*original)
+  end
+
+  # UDR-0042: the actions of a row or of a header live in its ⋮ menu. Open the menu, then choose the item.
+  def click_menu_action(scope, label, **filters)
+    within(scope, **filters) do
+      find("button[aria-haspopup=menu]").click
+      within("[role=menu]") { click_on label }
+    end
+  end
+
+  # Trix is loaded on demand (ADR-0051, rich_text_editor_controller): <trix-editor> is in the page before its editor is
+  # attached. Keys sent in between are refused (element not interactable) or typed into a bare element that Trix then
+  # overwrites with its empty hidden input: the text is silently lost. Wait for the editor before touching it.
+  def find_rich_text_editor(selector = "trix-editor", **)
+    find(selector, **).tap do |editor|
+      page.document.synchronize do
+        raise Capybara::ExpectationNotMet, "Trix n'est pas encore branché sur #{selector}" unless page.evaluate_script("!!arguments[0].editor", editor)
+      end
+    end
   end
 end

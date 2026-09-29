@@ -17,7 +17,7 @@ module Entities
         assert_equal "drena-abidjan-un", Drena.new(name: "Abidjan 1", slug: "drena-abidjan-un").key
       end
 
-      # ADR-0055 : une seule règle, au formulaire comme à l'import.
+      # ADR-0066 : une seule règle, au formulaire comme à l'import.
       test "le slug est tiré du nom et préfixé par drena-" do
         assert_equal "drena-bouake-1", Drena.slug_for("Bouaké 1")
         assert_equal "drena-san-pedro", Drena.slug_for("  San-Pédro ")

@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/teacher_registrations/new — inscription enseignant, en deux colonnes (reprise de l'ancienne application) %>
-<%# Rôle : accueil à gauche sur grand écran, formulaire à droite ; échec re-rendu en 422 par Turbo, sans rechargement %>
-<%# ADR  : 0030, 0050 · UDR : 0005, 0024 %>
+<%# Rôle : accueil à gauche, formulaire à droite ; /e/<code> refusé en 404 (carte), débit dépassé en 429 ; échec re-rendu en 422 ; @pending : sans code %>
+<%# ADR  : 0030, 0050, 0057, 0063 · UDR : 0005, 0024, 0044, 0050 %>
 <% content_for :title, t(".page_title") %>
 <main class="grid min-h-dvh bg-paper md:grid-cols-2">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
@@ -18,18 +18,34 @@
     </div>
 
     <div class="w-full max-w-md">
-      <%= ui_card padding: :lg do %>
-        <div class="mb-8 text-center">
-          <h2 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h2>
-          <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
-        </div>
+      <% if @rate_limited %>
+        <%= ui_error_state title: t(".rate_limited_title"), message: t("errors.codes.rate_limited") %>
+      <% elsif @invalid_code %>
+        <%= ui_card padding: :lg do %>
+          <div id="invalid-school-code" class="flex flex-col items-center text-center">
+            <span class="grid size-14 place-items-center rounded-full bg-error-soft text-error"><%= ui_icon "exclamation-triangle", size: :lg %></span>
+            <h2 class="mt-4 font-display text-xl font-extrabold text-ink"><%= t(".invalid_code.title") %></h2>
+            <p class="mt-1 text-sm text-mute"><%= t(".invalid_code.description") %></p>
+            <div class="mt-6 w-full">
+              <%= ui_button t(".invalid_code.other_code"), href: new_teacher_registration_path, variant: :brand, full: true,
+                                                           icon: "arrow-path" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= ui_card padding: :lg do %>
+          <div class="mb-8 text-center">
+            <h2 class="font-display text-xl font-extrabold text-ink"><%= t(@pending ? ".pending_title" : ".title") %></h2>
+            <p class="mt-1 text-sm text-mute"><%= t(@pending ? ".pending_subtitle" : ".subtitle") %></p>
+          </div>
 
-        <%= render "form" %>
+          <%= render "identity/teacher_registrations/form" %>
 
-        <p class="mt-6 text-center text-sm text-mute">
-          <%= t(".have_account") %>
-          <%= link_to t(".sign_in"), new_session_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
-        </p>
+          <p class="mt-6 text-center text-sm text-mute">
+            <%= t(".have_account") %>
+            <%= link_to t(".sign_in"), new_session_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+          </p>
+        <% end %>
       <% end %>
     </div>
   </section>

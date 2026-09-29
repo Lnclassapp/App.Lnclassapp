@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Import des DRENA, version 1 (ADR-0055, UDR-0041)",
+  "title": "Import des DRENA, version 1 (ADR-0066, UDR-0053)",
   "description": "Enveloppe { format, version, drenas[] }. Chaque DRENA ne porte que son nom : le slug, préfixé drena-, en est tiré. La présence du nom et sa longueur sont vérifiées par l'adaptateur, pour que l'erreur soit notée à drenas[i].name.",
   "type": "object",
   "required": ["format", "version", "drenas"],

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::School::Drena
 # Rôle : direction régionale de l'éducation, créée à l'écran ou importée ; son slug figé, préfixé drena-, cible les imports d'écoles
-# ADR  : 0029, 0034, 0039, 0055
+# ADR  : 0029, 0034, 0039, 0066
 module Entities
   module School
     class Drena

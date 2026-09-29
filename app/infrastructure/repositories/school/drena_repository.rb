@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::DrenaRepository
 # Rôle : traduit Orm::Drena ↔ Entities::School::Drena ; slug figé à la création, cible des imports d'écoles ; écriture en masse de l'import
-# ADR  : 0029, 0034, 0036, 0055
+# ADR  : 0029, 0034, 0036, 0066
 module Repositories
   module School
     class DrenaRepository

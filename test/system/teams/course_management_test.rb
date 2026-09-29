@@ -47,7 +47,7 @@ class Teams::CourseManagementTest < ApplicationSystemTestCase
 
         fill_in "course[name]", with: "génétique et évolution"
         select "D", from: "course[series_slug]"
-        editor = find("trix-editor")
+        editor = find_rich_text_editor
         editor.click
         find("trix-toolbar [data-trix-attribute=bold]").click
         editor.send_keys("ADN")

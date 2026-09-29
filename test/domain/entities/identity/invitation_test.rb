@@ -26,10 +26,12 @@ module Entities
         assert_nil invitation.school_id
       end
 
-      test "une invitation de direction porte une école et une fonction" do
-        staff = invitation(kind: "school_staff", team_role: nil, school_id: 7, position: "censor")
+      # ADR-0065 : la fonction de l'ADR-0044 devient facultative ; la direction simple n'en a pas.
+      test "une invitation de direction porte une école, sans fonction" do
+        staff = invitation(kind: "school_staff", team_role: nil, school_id: 7)
 
-        assert_equal [ 7, "censor" ], [ staff.school_id, staff.position ]
+        assert_equal [ 7, nil ], [ staff.school_id, staff.position ]
+        assert_equal "censor", invitation(kind: "school_staff", team_role: nil, school_id: 7, position: "censor").position
         assert_equal %w[principal censor educator secretary], Invitation::POSITIONS
       end
 
@@ -37,7 +39,6 @@ module Entities
         assert_raises(ArgumentError) { invitation(team_role: nil) }
         assert_raises(ArgumentError) { invitation(team_role: "boss") }
         assert_raises(ArgumentError) { invitation(position: "janitor") }
-        assert_raises(ArgumentError) { invitation(kind: "school_staff", team_role: nil, school_id: 7) }
         assert_raises(ArgumentError) { invitation(kind: "school_staff", team_role: nil, position: "educator") }
       end
     end

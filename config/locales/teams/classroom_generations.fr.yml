@@ -1,0 +1,34 @@
+# Génération des classes manquantes (chantier generer-classes) — ADR-0056, UDR-0043
+fr:
+  teams:
+    classroom_generations:
+      create:
+        started: "Génération des classes lancée."
+        # Déjà en cours : état attendu, toast d'information (chantier finitions-generation-menu).
+        already_running_title: "Génération déjà en cours"
+        already_running: "Une seule génération des classes à la fois : voici l'avancement de celle qui tourne."
+    imports:
+      import_row:
+        no_file: "Voir le rapport"
+      show:
+        subtitle_without_file: "%{author} · %{date}"
+      status:
+        by_kind:
+          classrooms:
+            # Badge du statut (liste, rapport, accueil) ; les statuts absents gardent le libellé des imports.
+            statuses:
+              validating: "Recherche des établissements"
+              importing: "Génération en cours"
+            phases:
+              queued: "La génération attend son tour."
+              validating: "Recherche des établissements sans classe…"
+              importing: "Génération des classes en cours…"
+            processed:
+              one: "%{count} établissement traité"
+              other: "%{count} établissements traités"
+            counters:
+              imported: "Établissements dotés"
+              skipped: "Sans classe à générer"
+              errors: "En erreur"
+              total: "Établissements examinés"
+            failed: "La génération s'est arrêtée sur une erreur imprévue. Relancée, elle reprend les établissements encore sans classe."

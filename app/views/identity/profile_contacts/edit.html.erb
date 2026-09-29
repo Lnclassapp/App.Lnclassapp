@@ -1,0 +1,34 @@
+<%# 🌐 UI · identity/profile_contacts/edit — « Changer mon numéro », servie dans le frame « modal » (ouverte sur le shell sans frame) %>
+<%# Rôle : PIN actuel, nouveau numéro et confirmation ; 422 dans la modale, PIN vidé ; PIN faux et numéro pris en alerte %>
+<%# ADR  : 0050, 0055 · UDR : 0006, 0041 %>
+<% content_for :title, t(".title") %>
+<%# « PIN incorrect. » et le message neutre du numéro pris s'annoncent en alerte, pas sous un champ (UDR-0041). %>
+<% alerts = @form.errors[:base] %>
+<% { current_pin: :incorrect, contact: :taken }.each do |attribute, type| %>
+  <% alerts += @form.errors.where(attribute, type).map(&:message) %>
+  <% @form.errors.delete(attribute, type) %>
+<% end %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "contact-change-modal", size: :sm, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "contact-change-form", icon: "phone" %>
+    <% end %>
+    <p class="mb-5 text-sm text-mute"><%= t(".intro") %></p>
+    <%= form_with model: @form, scope: :contact_change, url: profile_contact_path, method: :patch, id: "contact-change-form",
+                  class: "space-y-5" do |form| %>
+      <% if alerts.any? %>
+        <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+          <p><%= alerts.to_sentence %></p>
+        </div>
+      <% end %>
+      <%= ui_field form, :current_pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                   autocomplete: "current-password", autofocus: true, hint: t(".current_pin_hint") %>
+      <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
+                   autocomplete: "tel", placeholder: t(".contact_placeholder") %>
+      <%= ui_field form, :contact_confirmation, as: :tel, required: true, value: @form.raw_contact_confirmation, maxlength: 15,
+                   inputmode: "tel", autocomplete: "off", placeholder: t(".contact_placeholder") %>
+    <% end %>
+  <% end %>
+<% end %>
