@@ -128,7 +128,7 @@ Un enseignant convaincu n'a aucun geste pour faire venir ses collègues ; il rec
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Copie du partage** : « Copier le lien » devient `ui_copy_button` (contrôleur `clipboard`) ; `identity--share` garde WhatsApp, SMS, le partage natif et le comptage, et compte la copie sur l'événement `clipboard:copied` (`recordCopy`). Le §4 « tout futur partage reprend `identity--share` » vaut pour les canaux ; la copie passe toujours par `clipboard`.
 - **Inviter un collègue** : retour « Classes » vers `teacher_classrooms_path`.

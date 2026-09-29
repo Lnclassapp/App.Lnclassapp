@@ -79,6 +79,6 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Focus des confirmations** : une `<dialog>` de confirmation ouverte depuis un menu ⋮ place le focus sur « Annuler » (premier bouton de fermeture de son pied), jamais sur la croix (UDR-0054 §3.3). À la fermeture, le focus revient au bouton ⋮ (inchangé).

@@ -374,8 +374,10 @@ Lot Z — CLÔTURE : gardes globales + passe complète (séquentiel)
 - **Couche**       : ui + gardes
 - **Fichiers**     : app/views/layouts/application.html.erb *(retrait du repli `content_for :title`)*
                      app/javascript/controllers/classroom/join_code_copy_controller.js *(supprimé)*
-                     test/views/Lnclass » dans une locale)*
+                     test/views/page_titles_test.rb *(nouveau : toute vue de page appelle `page_title`, ni `content_for :title` ni `autofocus`, aucun « · Lnclass » dans une locale)*
+                     test/system/finitions/narrow_screens_test.rb *(nouveau)*
                      docs/chantiers/finitions-ux/journal.md
+                     *Élargi le 2026-09-29 à la dette remontée par les lots (journal, entrée « Lot Z ») : contrôleurs `autofocus`, `dropdown`, `search` ; `teams/levels/_level_row` ; formulaires des quatre listes cherchées ; `teams/dashboards/_search`, `design/index`, `design_helper` ; `teams/imports/create.turbo_stream` ; `config/initializers/mission_control_jobs.rb` ; les tests système et de contrôleur que les envois automatiques et les lots avaient cassés ; UDR-0054 (amendement de clôture), notes d'amendement des 21 UDR, PRD FU-22.*
 - **Dépend de**    : Lots A, B, C1, C2, D1, D2, E, F, G, H
 - **Test associé** : test/views/page_titles_test.rb · test/system/finitions/narrow_screens_test.rb — FU-06, FU-11, FU-20, FU-53, FU-54
 - **Done quand**   : `bin/ci` passe en entier une fois ; plus aucune vue ne pose `content_for :title` ni `autofocus` ; `classroom--join-code-copy` n'existe plus et le budget JS est mesuré dans `journal.md`

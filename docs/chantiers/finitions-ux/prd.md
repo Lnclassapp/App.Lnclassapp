@@ -224,8 +224,8 @@ Et sans JavaScript, la même aide s'ouvre (élément details)
 
 # FU-22
 Étant donné un membre de l'équipe sur la liste des niveaux
-Alors le badge « hors génération » n'a pas d'attribut title
-Et il est suivi d'une aide « Aide : hors génération »
+Alors le badge « Hors barème » n'a pas d'attribut title
+Et il est suivi d'une aide « Aide : Hors barème »
 
 # FU-23
 Étant donné un écran de 390 px de large sur la page de pilotage
@@ -478,7 +478,7 @@ Et le contrôleur « classroom--join-code-copy » n'existe plus
 
 - **Aucun ADR** : l'authentification ne change pas (ADR-0050 et UDR-0019 §2.4 tenus : pas de session à l'acceptation, décision du porteur du 2026-09-29) ; la recherche n'ajoute ni index ni extension (UDR-0054 §2.12, mesure au §7).
 - [UDR-0054](../../decisions/udr/0054-finitions-d-interface.md) — finitions d'interface. `Accepté` (par le porteur le 2026-09-29 ; textes d'infobulles à valider dans la PR).
-- Amendements datés du 2026-09-29 (`Proposé`) : UDR-0005 (briques), 0006 (titre, retour, auto-focus, toasts à l'impression), 0009 (`/join`), 0011 (copie toujours interdite), 0013 (recherche du catalogue, retour de la page cours), 0015, 0021, 0023, 0028, 0029, 0030 (libellés de retour et titres), 0019 (copie, numéro pré-rempli sur « Se connecter », focus), 0020 (recherche pendant la frappe, copie toujours interdite), 0027 (contrôleur de copie, lien de classe, retour selon le rôle, recherche d'élève), 0032 (infobulle du badge), 0036 (recherche, retour filtré), 0042 (focus des confirmations), 0044 (contrôleur de copie), 0049 (DRENA au changement, infobulles), 0050 (copie du partage, retours, infobulles de Croissance), 0052 (retour, recherche, infobulles de la direction).
+- Amendements datés du 2026-09-29 (`Accepté` avec l'UDR-0054) : UDR-0005 (briques), 0006 (titre, retour, auto-focus, toasts à l'impression), 0009 (`/join`), 0011 (copie toujours interdite), 0013 (recherche du catalogue, retour de la page cours), 0015, 0021, 0023, 0028, 0029, 0030 (libellés de retour et titres), 0019 (copie, numéro pré-rempli sur « Se connecter », focus), 0020 (recherche pendant la frappe, copie toujours interdite), 0027 (contrôleur de copie, lien de classe, retour selon le rôle, recherche d'élève), 0032 (infobulle du badge), 0036 (recherche, retour filtré), 0042 (focus des confirmations), 0044 (contrôleur de copie), 0049 (DRENA au changement, infobulles), 0050 (copie du partage, retours, infobulles de Croissance), 0052 (retour, recherche, infobulles de la direction).
 
 ## 7. Mesures
 

@@ -86,7 +86,7 @@ Le libellé d'une destination se lit sous sa clé (`shared.navigation.<clé>`, p
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Retour** : le bouton `ghost` `arrow-left` « Travail des élèves » devient le lien de retour commun (`ui_page_header(back:)`, UDR-0054 §3.2).
 - **Chercher un élève** : la page d'une classe gagne `form#student-work-search` (GET, champ `q`, contrôleur `search`) et le frame `student_work_students` ; la recherche ne lit que les élèves de cette classe ; état vide « Aucun élève ne correspond ». Aucun identifiant d'élève n'entre dans le HTML (inchangé).

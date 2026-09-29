@@ -59,7 +59,7 @@ Un enseignant qui parcourt le catalogue trouve un cours et veut le proposer à s
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - Retour : `ui_back_link` vers `course_path`, libellé = nom du cours (au lieu de « Retour au cours »).
 - Titre : « Assigner à mes classes · Enseignant · Lnclass ».

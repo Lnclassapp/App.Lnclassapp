@@ -67,7 +67,7 @@ Le porteur a tranché le 2026-09-25 : **l'élève voit le code de sa classe**, e
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Le code reste sans bouton « Copier »** (décision du porteur du 2026-09-29) : c'est désormais une règle commune, « un code fait pour être dicté ne se copie pas » (UDR-0054 §2.7). Le §2.3 et le §3 sont confirmés.
 - Titre : « Ma classe · Élève · Lnclass ».

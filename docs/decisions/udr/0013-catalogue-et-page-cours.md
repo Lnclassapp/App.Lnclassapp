@@ -74,7 +74,7 @@ Le catalogue est la porte d'entrée de l'élève, de l'enseignant et de l'équip
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Catalogue** : le formulaire des filtres (`form#courses-filters`) gagne un champ `q` (`ui_field as: :search`, « Rechercher un cours ») sur le nom du cours, sans casse ni accents, et porte le contrôleur `search` : envoi 300 ms après la dernière frappe (URL remplacée), envoi au changement des listes niveau et matière ; « Filtrer » reste sans JavaScript. État vide « Aucun cours ne correspond », avec « Effacer la recherche ». Pas de pagination dans ce chantier.
 - **Page cours** : le fil d'Ariane complet (« Cours › Matière › Nom ») est remplacé par le lien de retour « Cours » (UDR-0054 §3.2).

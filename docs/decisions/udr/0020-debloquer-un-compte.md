@@ -86,7 +86,7 @@ Deux frictions sont à éviter :
 
 ## Amendement du 2026-09-29 — finitions d'interface
 
-*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'accepté ; une fois l'UDR-0054 acceptée, cette section fait foi en cas d'écart.*
+*Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Recherche pendant la frappe** : `form#account-lookup-form` porte le contrôleur `search` en mode `digits` : la recherche part seule dès que le numéro est complet (10 chiffres, ou 13 avec `225`, ou 15 avec `00225`), 300 ms après la dernière frappe, URL remplacée ; un numéro incomplet n'envoie rien. La recherche reste **exacte** (§2.1 inchangé) ; « Rechercher » reste sans JavaScript. Le champ reçoit le focus d'arrivée.
 - **Le code de récupération reste sans bouton « Copier »** (décision du porteur du 2026-09-29, UDR-0054 §2.7) : §4 confirmé.
