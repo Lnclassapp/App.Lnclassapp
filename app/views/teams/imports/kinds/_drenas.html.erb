@@ -1,0 +1,31 @@
+<%# 🌐 UI · teams/imports/kinds/_drenas — aide de l'import des DRENA, dans la modale de téléversement %>
+<%# Rôle : format lnclass.drenas, seule clé name, exemple minimal, règle du slug préfixé drena- %>
+<%# ADR  : 0039, 0055 · UDR : 0037, 0041 %>
+<section id="import-help-drenas" aria-labelledby="import-help-drenas-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
+  <h3 id="import-help-drenas-title" class="font-medium text-ink"><%= t(".title") %></h3>
+  <p class="text-mute"><%= t(".intro_html") %></p>
+
+  <dl class="space-y-2">
+    <div class="space-y-0.5">
+      <dt><code class="font-mono text-xs text-ink">name</code></dt>
+      <dd class="text-mute"><%= t(".keys.name") %></dd>
+    </div>
+  </dl>
+
+  <div class="space-y-1.5">
+    <h4 class="font-medium text-ink"><%= t(".example") %></h4>
+    <pre class="overflow-x-auto rounded-ln border border-line bg-white p-3 font-mono text-xs text-ink"><code>{
+  "format": "lnclass.drenas",
+  "version": 1,
+  "drenas": [
+    { "name": "Abidjan 1" },
+    { "name": "Bouaké 1" }
+  ]
+}</code></pre>
+  </div>
+
+  <div class="flex items-start gap-2 text-ink">
+    <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>
+    <p><%= t(".slug_rule_html") %></p>
+  </div>
+</section>
