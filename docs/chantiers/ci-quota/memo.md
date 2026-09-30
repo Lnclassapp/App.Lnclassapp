@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | cadrage |
+| **Statut** | décision |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/ci-quota` |
 | **Programme** | — |
@@ -78,7 +78,13 @@ L'offre gratuite d'une organisation GitHub donne **2 000 minutes par mois** sur 
 
 ## Hors périmètre
 
-- Le contenu des tests : aucun test n'est supprimé, désactivé ni affaibli ; la couverture reste 100 % lignes et branches sur la suite complète (ADR-0024).
+*Validé par le porteur le 2026-09-30 (grill, question 6).*
+
+- **Les tests** : aucun n'est supprimé, désactivé ni affaibli ; la couverture reste 100 % lignes et branches sur la suite complète (ADR-0024).
+- **La liste des étapes de `bin/ci`** (`config/ci.rb`) : seuls changent la machine qui exécute et le moment où la CI se déclenche.
+- **Les runners GitHub payants et le passage du dépôt en public** : écartés.
+- **L'entretien de la machine du porteur** (mises à jour d'Ubuntu, de Docker, de Chrome) : à sa charge. Le chantier fournit une procédure d'installation et une commande qui vérifie que le runner est prêt.
+- **Les déploiements Railway** : ils ne dépendent pas de la CI et ne changent pas.
 
 ## Ce que le grill a révélé
 
@@ -89,6 +95,7 @@ L'offre gratuite d'une organisation GitHub donne **2 000 minutes par mois** sur 
 | 3. Sur quelle machine tourne le runner ? | **Ubuntu 22.04.5 LTS, 64 bits, 4 cœurs, Docker installé.** | Le conteneur `postgres:17` du workflow tourne tel quel (les conteneurs de service n'existent que sur un runner Linux avec Docker). Chrome, Ruby 3.4 et Node s'installent par les mêmes actions qu'aujourd'hui, ou restent en cache sur la machine. **« Moins de 3 minutes » n'est pas acquis sur 4 cœurs** : `bin/ci` coûte ≈ 390 s de travail sur les 2 vCPU de GitHub, dont 137 s de perf d'import en un seul processus. Il faudra plusieurs runners en parallèle sur la même machine, et la valeur réelle ne se connaîtra qu'en mesurant sur elle (premier lot). |
 | 4. Que se passe-t-il quand la machine est éteinte ? | **La PR attend, jusqu'à 48 heures**, et un bouton manuel (« Run workflow ») lance la suite sur un runner GitHub en cas d'urgence. | GitHub **annule** tout job resté 24 h en file sans runner, et cette limite ne se règle pas ([docs GitHub](https://docs.github.com/en/actions/reference/runners/self-hosted-runners)). Les 48 h s'obtiennent côté machine : à son démarrage (puis à intervalle régulier), un service local **relance les runs annulés depuis moins de 48 h** dont la PR est encore ouverte et le commit inchangé. Au-delà de 48 h, un nouveau push ou le bouton manuel. Le bouton coûte ≈ 9 minutes facturées par clic (un seul job, pas la matrice de 14). Aucune bascule automatique vers GitHub : c'est elle qui a épuisé le quota. |
 | 5. Avec quels droits le runner tourne-t-il ? | **Un utilisateur Linux dédié, `github-runner`, sans `sudo`**, sans accès au dossier personnel du porteur, membre du groupe `docker`. | Un test (ou un agent) qui dérape ne lit pas les clés SSH, jetons et fichiers du porteur. Risque résiduel accepté : le groupe `docker` équivaut à root pour qui le détourne exprès ; il est nécessaire au conteneur PostgreSQL. Le runner ne sert que ce dépôt privé (jamais un dépôt public, où n'importe qui pourrait lui faire exécuter du code). Le runner s'installe en service systemd sous cet utilisateur ; le service de relance (question 4) aussi, avec un jeton GitHub limité à ce dépôt et aux droits `actions: write`. |
+| 6. Qu'est-ce que le chantier ne touche pas ? | La liste proposée, sans ajout ni retrait. | Section *Hors périmètre*. |
 
 ## Cas limites identifiés
 
