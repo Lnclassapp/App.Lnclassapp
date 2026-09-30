@@ -24,7 +24,7 @@ Le QR code affiché est celui du secret enregistré, tant que l'enrôlement n'es
 - `test/controllers/identity/second_factor_enrollments_controller_test.rb` — « a wrong code re-renders the same QR code in 422 ».
 - ADR-0031, parcours §1 : la page d'activation montre le QR code à lire, puis le premier code l'active.
 
-L'ADR-0031 ne décide nulle part qu'un secret non confirmé est remplacé à chaque visite. Le test d'infrastructure qui l'exige (`begin_enrollment replaces an unconfirmed secret`) fige l'implémentation, pas une décision.
+L'ADR-0031 ne décide nulle part qu'un secret non confirmé est remplacé à chaque visite. Deux traces le décrivent, sans le justifier : le commentaire du port (« Remplace un secret non confirmé. », socle `identity`, `94368383`) et le test d'infrastructure `begin_enrollment replaces an unconfirmed secret` (`7ae42d45`), écrits le même jour que l'implémentation. Ils la décrivent, ils ne tranchent rien. Ce chantier les aligne sur l'invariant du parcours ; la signature du port ne change pas.
 
 ## Reproduction
 

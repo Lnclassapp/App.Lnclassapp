@@ -11,6 +11,7 @@
 
 ## Ce qui a dérapé
 
+- Le cadrage affirmait qu'« aucun document » ne décrivait le remplacement du secret. C'était faux : le commentaire du port (`second_factor_repository_port.rb:15`, « Remplace un secret non confirmé. ») le décrivait. Vu à l'exécution, quand le correctif a rendu ce commentaire mensonger. Il datait du socle (`94368383`), sans ADR : description de l'implémentation, pas décision. Corrigé dans le même commit ; memo rectifié. Leçon : au cadrage d'un bugfix, lire le **port** de la méthode fautive, pas seulement l'ADR et les tests.
 - L'enquête est partie d'un « Code incorrect. » à la **vérification** sur Develop (compte déjà enrôlé). Ce chantier ne corrige pas ce cas : il supprime la cause la plus probable des entrées fantômes dans l'application d'authentification, qui y mènent.
 
 ## Ce qu'on a appris sur la codebase

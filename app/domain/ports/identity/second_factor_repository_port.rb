@@ -12,7 +12,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #state_for"
       end
 
-      # Remplace un secret non confirmé. → Enrollment
+      # Réutilise le secret non confirmé, sinon en tire un ; refuse si un secret est confirmé. → Enrollment
       def begin_enrollment(user_id:, label:)
         raise NotImplementedError, "#{self.class} doit implémenter #begin_enrollment"
       end
