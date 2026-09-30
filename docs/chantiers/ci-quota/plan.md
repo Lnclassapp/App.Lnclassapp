@@ -3,6 +3,8 @@
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 >
+> **État au 2026-09-30, 00 h 35 UTC** : les lots 0, A, B, C et D sont **écrits et poussés** ; aucun n'est `Done`, car leurs chiffres se mesurent sur le runner, que le porteur doit installer (lot 0). Voir le [journal](journal.md).
+>
 > **Cycle optimisation** : un lot = un levier = un chiffre. `Done quand` est toujours chiffré, mesuré avec [`script/ci/billed_minutes`](../../../script/ci/billed_minutes). Les lots sont rangés par gain/risque décroissant. **Le chantier s'arrête dès que les cibles du [memo](memo.md#écart-avec-la-demande) sont atteintes** ; un lot devenu inutile se ferme, il ne se joue pas « par principe ».
 >
 > Pas de PRD : en cycle optimisation, le memo (grill, questions 1 à 6) et l'[ADR-0068](../../decisions/adr/0068-ci-sur-runner-auto-heberge-et-promotions-par-preuve.md) font foi.
@@ -44,8 +46,9 @@ Tous les lots qui modifient `.github/workflows/ci.yml` (A, B, E) sont **en séri
 ## Lot A — Levier 1 : la matrice sur le runner auto-hébergé
 
 - **Couche**       : CI
-- **Fichiers**     : `.github/workflows/ci.yml` *(`changes`, `checks`, `tests` et `ci` sur `[ self-hosted, linux, lnclass ]` pour une PR de base `Develop` et un push sur `Develop` ; PostgreSQL publié sur un port choisi par Docker, `DATABASE_URL` passé à `bin/ci` ; `ci` publie l'artefact `ci-tree-<arbre>`, 30 jours)*
-                     `.github/actions/setup/action.yml` *(`libpq-dev` : ne plus tenter `sudo apt-get` sur le runner auto-hébergé, échouer clairement s'il manque)*
+- **Fichiers**     : `.github/workflows/ci.yml` *(`changes`, `checks`, `tests` et `ci` sur `[ self-hosted, linux, lnclass ]` pour une PR de base `Develop` et un push sur `Develop` ; PostgreSQL publié sur un port choisi par Docker, passé par `PGPORT` à `config/database.yml` ; `ci` publie l'artefact `ci-tree-<arbre>`, 30 jours)*
+                     `config/database.yml` *(`port` lu dans `PGPORT`, 5432 par défaut)*
+                     ~~`.github/actions/setup/action.yml`~~ *(inchangé : `install` pose `libpq-dev`, et le test `dpkg -s` de l'action passe sans `sudo`)*
                      `test/guards/ci_plan_test.rb` *(nouvelle garde : aucun job sur `ubuntu-latest` hors `proof` et `ci`)*
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/guards/ci_plan_test.rb` (groupe `lint`) ; bench `script/ci/billed_minutes` sur 3 runs.
@@ -137,7 +140,7 @@ Branches de lot : `perf/ci-quota-lot-<x>`, créées depuis `perf/ci-quota` une f
 | `docs/guide/README.md` | Lot 0 |
 | `.github/workflows/ci.yml` | Lot A → Lot B → Lot E *(en série, jamais en parallèle)* |
 | `test/guards/ci_plan_test.rb` | Lot A → Lot B *(en série)* |
-| `.github/actions/setup/action.yml` | Lot A |
+| `config/database.yml` | Lot A |
 | `script/ci/tested_tree` | Lot B |
 | `test/config/ci_tested_tree_test.rb` | Lot B |
 | `.github/workflows/ci-github.yml` | Lot C |

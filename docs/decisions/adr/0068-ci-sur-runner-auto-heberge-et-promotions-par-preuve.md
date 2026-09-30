@@ -61,7 +61,7 @@ Précisions qui font partie de la décision :
 4. **Une PR qui ne touche que des documents** reste verte sans lancer de vérification (ADR-0064 §4, précision 6). Le job qui le décide tourne sur le runner auto-hébergé.
 5. **Machine éteinte : la PR attend.** GitHub annule un job resté 24 heures en file ([docs GitHub](https://docs.github.com/en/actions/reference/runners/self-hosted-runners)). Un service de la machine relance, à son démarrage puis à intervalle régulier, les runs annulés depuis **moins de 48 heures** dont la PR est ouverte et le commit inchangé. **Aucune bascule automatique** vers un runner GitHub.
 6. **Isolation.** Le runner tourne en service systemd sous l'utilisateur `github-runner` : sans `sudo`, sans accès au dossier personnel du porteur, membre du groupe `docker` (nécessaire au conteneur PostgreSQL). Il sert **ce dépôt privé seulement**. Le service de relance utilise un jeton limité à ce dépôt, avec le seul droit `actions: write`.
-7. **Plusieurs jobs sur une même machine.** Chaque job publie PostgreSQL sur un port de l'hôte choisi par Docker (`ports: [ "5432" ]`) et passe `DATABASE_URL` à `bin/ci`. Deux jobs simultanés, ou le PostgreSQL de développement du porteur, ne se disputent jamais le port 5432. Le nombre d'instances du runner et le découpage des groupes sur la machine se fixent **à la mesure** (chantier, lot E).
+7. **Plusieurs jobs sur une même machine.** Chaque job publie PostgreSQL sur un port de l'hôte choisi par Docker (`ports: [ "5432" ]`) et le passe à Rails par `PGPORT`, que lit `config/database.yml`. Deux jobs simultanés, ou le PostgreSQL de développement du porteur, ne se disputent jamais le port 5432. Le nombre d'instances du runner et le découpage des groupes sur la machine se fixent **à la mesure** (chantier, lot E).
 
 ## 5. Conséquences
 
@@ -81,34 +81,48 @@ Précisions qui font partie de la décision :
 
 ## 6. Notes d'implémentation
 
-*À compléter avec le code réel au fil des lots du chantier. Le principe :*
+| Fichier | Rôle |
+|---|---|
+| `.github/workflows/ci.yml` | Job `proof` (preuve d'arbre), puis `changes`, `checks`, `tests` sur `[ self-hosted, linux, lnclass ]`, puis `ci` qui publie `ci-tree-<arbre>` |
+| `script/ci/tested_tree` | La preuve : arbre de `GITHUB_SHA` par l'API, artefact cherché par son nom ; tout doute répond `false` |
+| `.github/workflows/ci-github.yml` | Bouton de secours (`workflow_dispatch`) : un job `ci` sur GitHub, `bin/ci` complet |
+| `script/ci/runner/install`, `check` | Installation et vérification du runner sur la machine ([guide](../../guide/runner-auto-heberge.md)) |
+| `script/ci/runner/rerun_expired`, `install_rerun` | Relance des runs expirés, minuterie systemd |
+| `config/database.yml` | `port: <%= ENV.fetch("PGPORT", 5432) %>` |
+| `script/ci/billed_minutes` | Minutes facturées d'un run (les jobs auto-hébergés comptent 0) |
+
+Le choix du runner, dans `ci.yml`, tient dans une expression. Une promotion va sur GitHub, tout le reste sur la machine :
 
 ```yaml
-# .github/workflows/ci.yml : le job de preuve, sur GitHub, pour les promotions seulement
 proof:
-  if: >-
-    (github.event_name == 'pull_request' && github.base_ref != 'Develop') ||
-    (github.event_name == 'push' && github.ref_name != 'Develop')
-  runs-on: ubuntu-latest
-  permissions: { actions: read, contents: read }
-  outputs:
-    tested: ${{ steps.tree.outputs.tested }}
+  runs-on: ${{ fromJSON(((github.event_name == 'pull_request' && (github.base_ref == 'Staging' || github.base_ref == 'main')) || (github.event_name == 'push' && (github.ref_name == 'Staging' || github.ref_name == 'main'))) && '["ubuntu-latest"]' || '["self-hosted", "linux", "lnclass"]') }}
 ```
 
+Le job `ci` reprend cette expression, préfixée de `needs.proof.outputs.tested == 'true' &&` : il ne va sur GitHub que si la preuve suffit. Sinon il attend les jobs de la machine.
+
+PostgreSQL sur un port choisi par Docker, transmis à Rails :
+
 ```yaml
-# Un job de la matrice, sur la machine du porteur
-tests:
-  runs-on: [ self-hosted, linux, lnclass ]
-  services:
-    postgres:
-      image: postgres:17
-      ports: [ "5432" ]   # port de l'hôte choisi par Docker
+services:
+  postgres:
+    image: postgres:17
+    ports:
+      - 5432
+# …
+- name: Run bin/ci (${{ matrix.group }})
   env:
-    DATABASE_URL: postgres://dev-rails:dev-rails@localhost:${{ job.services.postgres.ports['5432'] }}/app_lnclassapp_test
+    PGPORT: ${{ job.services.postgres.ports['5432'] }}
+  run: bin/ci
 ```
+
+`DATABASE_URL` a été écarté : `bin/setup` prépare la base de l'environnement `development`, qui l'aurait prise pour la base de test.
+
+Seul un run qui a **joué** les vérifications publie la preuve de son arbre. Une PR qui ne touche que des documents est verte sans rien prouver.
 
 ## 7. Comment vérifier que la décision est respectée
 
 - `script/ci/billed_minutes <run-id>` compte les minutes facturées d'un run. Une PR de chantier doit afficher 0, une promotion 2 au plus.
-- Une garde de `test/guards/ci_plan_test.rb` (groupe `lint`) refusera un job de `ci.yml` qui tourne sur `ubuntu-latest` en dehors du job de preuve et de `ci`. Un nouveau job ne peut pas rouvrir la fuite de minutes sans casser la garde.
+- La garde `test_only_the_proof_and_the_verdict_of_a_promotion_run_on_a_github_runner` de `test/guards/ci_plan_test.rb` (groupe `lint`) refuse un job de `ci.yml` qui ne tourne pas sur `[ self-hosted, linux, lnclass ]`, en dehors de `proof` et `ci`, et vérifie que ces deux-là ne vont sur GitHub que pour une promotion. Un nouveau job ne peut pas rouvrir la fuite de minutes sans casser la garde.
+- `test/config/ci_tested_tree_test.rb` : un arbre inconnu, une preuve expirée ou une API en erreur répondent « non testé », jamais une erreur avalée.
+- `test/config/ci_rerun_expired_test.rb` : seul un run expiré faute de runner, de moins de 48 h, dont la PR n'a pas bougé, est relancé, et une seule fois.
 - La garde existante vérifie toujours que les jobs redonnent exactement la liste de `bin/ci`.
