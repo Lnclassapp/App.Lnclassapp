@@ -108,6 +108,63 @@ module Repositories
           @writer.write(author_id: @author.id, at: @at, courses: [ course("genetique", content: nil) ])
         end
       end
+
+      def question(content, position: 1, explanation: nil, question_type: "true_false", answers: self.answers)
+        Port::QuestionNode.new(position:, content:, explanation:, question_type:, answers:)
+      end
+
+      def exercise_with(questions, essential_id:)
+        Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id:, title: "Échappement", description: nil,
+                               exercise_type: "fixation", position: 9, questions:)
+      end
+
+      # ADR-0068 §5 : un caractère mal échappé au format texte de COPY corromprait une ligne.
+      test "questions et propositions écrites par COPY se relisent à l'identique, caractères spéciaux compris" do
+        fiche = create_essential
+        tricky = "tab\tici, ligne\nsuivante, retour\r\nchariot, barre \\ oblique, \\N, $\\frac{1}{2}$, « guillemets » \"doubles\" 'simples', 😀"
+        answers = [ Port::AnswerNode.new(position: 1, content: tricky, correct: true), Port::AnswerNode.new(position: 2, content: "\\", correct: false) ]
+        questions = [ question(tricky, explanation: nil, answers:), question("Deuxième", position: 2, explanation: "Pour\tla\nraison \\x") ]
+        at = Time.zone.parse("2026-09-25 10:00:00.123456789").in_time_zone("Pacific/Auckland")
+
+        counts = @writer.write(author_id: @author.id, at:, exercises: [ exercise_with(questions, essential_id: fiche.id) ])
+
+        assert_equal({ courses: 0, essentials: 0, exercises: 1, questions: 2, answers: 4 }, counts)
+        exercise = fiche.exercises.find_by!(position: 9)
+        written = exercise.questions.order(:position)
+        assert_equal [ [ 1, tricky, nil, "true_false" ], [ 2, "Deuxième", "Pour\tla\nraison \\x", "true_false" ] ],
+                     written.pluck(:position, :content, :explanation, :question_type)
+        assert_equal [ [ 1, tricky, true ], [ 2, "\\", false ] ], written.first.answers.order(:position).pluck(:position, :content, :correct)
+        assert_equal written.map(&:id).sort, written.map(&:id)
+        assert_equal [ exercise.created_at ], (written.pluck(:created_at, :updated_at).flatten + Orm::Answer.where(question: written).pluck(:created_at)).uniq
+        assert_equal Time.zone.parse("2026-09-25 10:00:00.123456"), exercise.created_at
+      end
+
+      # Un refus de la base pendant un COPY lève l'erreur qu'ActiveRecord aurait levée : le moteur rejoue alors le lot
+      # élément par élément, et le cours refusé n'est jamais écrit à moitié.
+      test "une contrainte refusée par COPY lève l'erreur d'ActiveRecord et n'écrit rien du cours" do
+        fiche = create_essential
+        refusals = {
+          ActiveRecord::RecordNotUnique => [ question("Q1"), question("Q1 bis") ],
+          ActiveRecord::CheckViolation => [ question("Q", question_type: "inconnu") ],
+          ActiveRecord::ValueTooLong => [ question("Q", answers: [ Port::AnswerNode.new(position: 1, content: "x" * 501, correct: true) ]) ]
+        }
+        refusals.each do |error, questions|
+          assert_raises(error) do
+            ActiveRecord::Base.transaction(requires_new: true) do
+              @writer.write(author_id: @author.id, at: @at, exercises: [ exercise_with(questions, essential_id: fiche.id) ])
+            end
+          end
+        end
+
+        bad = course("genetique", content: "<p>x</p>").then do |node|
+          node.with(essentials: [ node.essentials.first.with(exercises: [ exercise_with([ question("Q", question_type: "inconnu") ], essential_id: nil) ]) ])
+        end
+        assert_no_difference [ "Orm::Course.count", "Orm::Essential.count", "Orm::Exercise.count", "Orm::Question.count", "ActionText::RichText.count" ] do
+          assert Repositories::Shared::Transaction.new.attempt { @writer.write(author_id: @author.id, at: @at, courses: [ bad ]) }.failure?
+        end
+        assert Repositories::Shared::Transaction.new.attempt { @writer.write(author_id: @author.id, at: @at, courses: [ course("ecologie", content: nil) ]) }.success?
+        assert_equal 8, Orm::Question.joins(exercise: { essential: :course }).where(courses: { slug: "ecologie" }).count
+      end
     end
   end
 end
