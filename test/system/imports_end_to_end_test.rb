@@ -58,7 +58,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
 
   def upload(path)
     within "turbo-frame#modal dialog[open]" do
-      attach_file "import[io]", path
+      attach_file "import[files][]", path
       click_on "Lancer l'import"
     end
     using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }

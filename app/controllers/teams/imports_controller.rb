@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::ImportsController
 # Rôle : écran des imports de l'équipe : liste, téléversement en modale, suivi rechargé tant que l'import tourne
-# ADR  : 0026, 0039, 0056 · UDR : 0006, 0043
+# ADR  : 0026, 0039, 0056, 0068 · UDR : 0006, 0043, 0055
 module Teams
   class ImportsController < BaseController
     STATUS_FRAME = "import_status".freeze
@@ -47,10 +47,13 @@ module Teams
       render_not_found unless Entities::Catalog::ImportKind.valid?(params[:kind] || params.dig(:import, :kind))
     end
 
+    # import[files][] : 1 à N fichiers ; tout ce qui n'est pas un fichier téléversé est ignoré.
     def form_input
-      upload = params.dig(:import, :io)
-      upload = nil unless upload.is_a?(ActionDispatch::Http::UploadedFile)
-      Dtos::Catalog::ImportUploadInput.new(kind: params.dig(:import, :kind), filename: upload&.original_filename, io: upload)
+      uploads = Array.wrap(params.dig(:import, :files)).grep(ActionDispatch::Http::UploadedFile)
+      Dtos::Catalog::ImportUploadInput.new(
+        kind: params.dig(:import, :kind),
+        files: uploads.map { Dtos::Catalog::ImportUploadInput::Upload.new(io: it, filename: it.original_filename) }
+      )
     end
 
     def import_status_tone(status) = STATUS_TONES.fetch(status)

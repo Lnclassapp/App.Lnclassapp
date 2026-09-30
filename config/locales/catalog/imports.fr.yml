@@ -3,8 +3,6 @@ fr:
     attributes:
       dtos/catalog/import_upload_input:
         kind: "Type d'import"
-        filename: "Nom du fichier"
-        io: "Fichier"
         files: "Fichiers"
     errors:
       models:
@@ -12,14 +10,11 @@ fr:
           attributes:
             kind:
               already_running: "Un import de ce type est déjà en cours."
-            io:
-              too_large: "dépasse %{count} Mo"
-            filename:
-              invalid: "doit se terminer par .json"
-            # ADR-0068 : un envoi de plusieurs fichiers, contrôlé fichier par fichier puis en tout.
+            # ADR-0068 : un envoi de plusieurs fichiers, contrôlé fichier par fichier puis en tout. Phrases complètes :
+            # l'écran les affiche sans le nom de l'attribut.
             files:
               blank: "Choisissez au moins un fichier .json."
-              too_many: "dépassent %{count} fichiers"
-              too_large: "« %{filename} » dépasse %{count} Mo"
-              total_too_large: "dépassent %{count} Mo au total"
-              not_json: "« %{filename} » ne se termine pas par .json"
+              too_many: "Vous avez choisi %{value} fichiers : %{count} au plus."
+              not_json: "« %{filename} » n'est pas un fichier .json."
+              too_large: "« %{filename} » dépasse %{count} Mo."
+              total_too_large: "Les fichiers font %{value} Mo au total : %{count} Mo au plus."

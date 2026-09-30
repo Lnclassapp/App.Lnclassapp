@@ -22,7 +22,7 @@ Exemple de référence, le théorème des gendarmes : deux policiers tiennent un
 ## Utiliser le prompt
 
 1. Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression.
-2. Importer le JSON obtenu depuis **Imports → Cours complets**. **Un seul import** crée le cours, ses fiches essentielles et les exercices de chaque fiche, en brouillon.
+2. Importer le JSON obtenu depuis **Imports → Cours complets**. **Un seul import** crée le cours, ses fiches essentielles et les exercices de chaque fiche, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Un même cours présent dans deux fichiers de l'envoi n'est importé dans aucun des deux.
 3. Faire relire le contenu par un enseignant de la discipline, puis publier.
 4. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/` et ajouter une ligne au tableau ci-dessous.
 

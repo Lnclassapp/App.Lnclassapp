@@ -73,7 +73,7 @@ Les propositions et les questions, elles, paient le coût d'`insert_all` ligne p
 
 Une erreur porte le **nom d'affichage** de son fichier (`Entities::Catalog::ImportError#file`) dès que l'envoi compte plusieurs fichiers. Sinon ce nom vaut `nil`, et les chemins restent ceux d'aujourd'hui (`courses[1].material_name`). Deux fichiers du même nom s'affichent « cours.json » et « cours.json (2) », dans l'ordre d'envoi.
 
-**Rapport.** `import_reports.files` (`jsonb`, défaut `[]`) liste, dans l'ordre d'envoi, pour chaque fichier : `name` (nom d'affichage), `byte_size`, `checksum_sha256`, `status` (`read` ou `rejected`), `reason` (`{ code, params }` si refusé), `imported`, `skipped`, `errors`. Les compteurs globaux, `details` et `import_errors` ne changent pas de forme. Le port `ImportReportRepositoryPort#finish` reçoit `files:`.
+**Rapport.** `import_reports.files` (`jsonb`, défaut `[]`) liste, dans l'ordre d'envoi, pour chaque fichier : `name` (nom d'affichage), `byte_size`, `status` (`pending` à la création, puis `read` ou `rejected`), `reason` (`{ code, params }` si refusé), `imported`, `skipped`, `errors` (`Entities::Catalog::ImportFileReport`). Les noms sont posés **dès la création** du rapport (`ImportReportRepositoryPort#create(files:)`). L'historique et le suivi les lisent donc dans cette colonne, sans jointure sur les pièces jointes. Le bilan est écrit à la fin (`finish(files:)`). Une erreur de schéma sur la racine d'un fichier, ou une cible inconnue, refuse aussi ce seul fichier. Les compteurs globaux, `details` et `import_errors` ne changent pas de forme.
 
 **Écriture accélérée (`Repositories::Catalog::ContentTreeWriter`), sans changer une ligne écrite :**
 

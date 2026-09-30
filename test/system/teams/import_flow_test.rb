@@ -30,7 +30,7 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
     click_on "Nouvel import"
     within("#new-import-menu") { click_on "Établissements" }
     within "turbo-frame#modal dialog[open]" do
-      attach_file "import[io]", path
+      attach_file "import[files][]", path
       click_on "Lancer l'import"
     end
   end
@@ -82,13 +82,14 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
       upload(file.path)
 
       within "turbo-frame#modal dialog[open]" do
-        assert_selector "#import_io_error", text: "Fichier dépasse 20 Mo"
+        assert_selector "#import_io_error", text: /\A« trop-gros.*\.json » dépasse 20 Mo\.\z/
       end
     end
     assert_equal 0, Orm::ImportReport.count
   end
 
-  test "the tracking frame reloads itself while the import runs, then stops" do
+  # IM-12 (ADR-0068) : le suivi se recharge chaque seconde ; la fin se voit en moins de deux secondes.
+  test "the tracking frame reloads itself every second while the import runs, then stops" do
     report = create_import_report(status: "importing", processed_count: 100)
     visit teams_import_path(report.public_id)
 
@@ -96,7 +97,7 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
       assert_text "Import en cours"
       report.update!(status: "completed", total_count: 3, imported_count: 3, finished_at: Time.current)
 
-      using_wait_time(8) { assert_selector "turbo-frame#import_status", text: "Terminé" }
+      using_wait_time(2) { assert_selector "turbo-frame#import_status", text: "Terminé" }
       assert_selector "#import_counter_imported", text: "3"
     end
   end

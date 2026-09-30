@@ -11,7 +11,7 @@ module UseCases
       class FakeReports
         include Ports::Catalog::ImportReportRepositoryPort
 
-        attr_reader :reports, :stale_before
+        attr_reader :reports, :stale_before, :created_files
 
         def initialize(reports = [])
           @reports = reports
@@ -27,6 +27,7 @@ module UseCases
         def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [])
           return Shared::Result.failure(:conflict, errors: { kind: [ :already_running ] }) if @reports.any? { it.kind == kind && it.running? }
 
+          @created_files = files
           report = StartImportTest.report(id: @reports.size + 1, kind:, status: "queued", imported_by_id:, started_at: nil)
           @reports << report
           Shared::Result.success(report)
@@ -63,8 +64,9 @@ module UseCases
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
-      def start(actor: @team, content: %({"format":"lnclass.schools"}), kind: "schools", filename: "ecoles.json")
-        dto = Dtos::Catalog::ImportUploadInput.new(kind:, filename:, io: StringIO.new(content))
+      def start(actor: @team, content: %({"format":"lnclass.schools"}), kind: "schools", filename: "ecoles.json", files: nil)
+        files ||= [ Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(content), filename:) ]
+        dto = Dtos::Catalog::ImportUploadInput.new(kind:, files:)
         StartImport.new(reports: @reports, files: @files, queue: @queue, transaction: @transaction, clock: Clock.new(NOW))
                    .call(actor:, dto:)
       end
@@ -79,6 +81,17 @@ module UseCases
         assert_equal 1, @transaction.calls
       end
 
+      # ADR-0068 : chaque fichier est noté au rapport, avec son nom d'affichage et sa taille, puis stocké dans l'ordre d'envoi.
+      test "plusieurs fichiers : un rapport, leurs noms distincts et leurs tailles, stockés dans l'ordre d'envoi" do
+        files = [ [ "cours.json", "{}" ], [ "cours.json", "[1]" ] ].map do |filename, json|
+          Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(json), filename:)
+        end
+
+        assert start(kind: "course_tree", files:).success?
+        assert_equal [ [ "cours.json", 2, "pending" ], [ "cours.json (2)", 3, "pending" ] ], @reports.created_files.map { [ it.name, it.byte_size, it.status ] }
+        assert_equal [ 1, "{}", "cours.json", "[1]", "cours.json" ], @files.attached
+      end
+
       test "un acteur hors de l'équipe est refusé, sans rien créer" do
         teacher = Entities::Identity::Actor.new(user_id: 3, role: :teacher, school_id: 1)
 
@@ -91,7 +104,7 @@ module UseCases
         result = start(content: "x" * (Entities::Catalog::ImportKind::MAX_BYTES + 1))
 
         assert_equal :invalid, result.code
-        assert_equal [ "dépasse 20 Mo" ], result.errors[:io]
+        assert_equal [ "« ecoles.json » dépasse 20 Mo." ], result.errors[:files]
         assert_empty @reports.reports
         assert_nil @queue.enqueued
       end

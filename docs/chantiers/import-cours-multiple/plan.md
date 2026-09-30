@@ -75,7 +75,7 @@ Lot B ne touche aucun fichier du Lot 0. Il pourrait partir avant lui, mais il en
 - **Couche**       : ui
 - **Fichiers**     : `app/javascript/controllers/teams/import_status_controller.js` (`INTERVAL = 1000`)
 - **Dépend de**    : Lot 0 (base de branche seulement)
-- **Test associé** : `test/system/teams/import_status_refresh_test.rb` (IM-12 : le bilan d'un import terminé en arrière-plan apparaît en moins de 2 s, sans rechargement)
+- **Test associé** : `test/system/teams/import_flow_test.rb`, test « the tracking frame reloads itself every second » (IM-12 : le bilan d'un import terminé en arrière-plan apparaît en moins de 2 s, sans rechargement). Il reprend le test existant du rechargement, qui attendait 8 s
 - **Done quand**   : chiffré. Le bilan d'un import de 10 cours s'affiche moins de 3 s après le clic sur « Importer », Solid Queue démarré (IM-14)
 
 ---
