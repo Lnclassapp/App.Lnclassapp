@@ -1,0 +1,57 @@
+# Emergency only (ADR-0068): the owner's machine is off and a verdict cannot wait. Actions → « CI sur GitHub
+# (secours) » → Run workflow, on the branch to check. One GitHub job plays the whole bin/ci, as a developer does:
+# about 9 billed minutes, against 27 for the 14 jobs of ci.yml on GitHub. It never starts by itself.
+# Its job is named « ci », like the verdict of ci.yml, and publishes the same proof of its tree.
+name: CI sur GitHub (secours)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: dev-rails
+          POSTGRES_PASSWORD: dev-rails
+        ports:
+          - 5432
+        options: --health-cmd="pg_isready" --health-interval=1s --health-timeout=5s --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+
+      - name: Run bin/ci (every group)
+        env:
+          PGPORT: ${{ job.services.postgres.ports['5432'] }}
+        run: bin/ci
+
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
+      - id: tree
+        run: |
+          echo "sha=$(git rev-parse 'HEAD^{tree}')" >> "$GITHUB_OUTPUT"
+          : > "$RUNNER_TEMP/ci-tree"
+
+      - name: Publish the proof of the tested tree
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-tree-${{ steps.tree.outputs.sha }}
+          path: ${{ runner.temp }}/ci-tree
+          retention-days: 30
+          if-no-files-found: error
