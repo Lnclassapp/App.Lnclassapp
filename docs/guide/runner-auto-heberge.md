@@ -23,7 +23,7 @@ Le script est idempotent : le relancer avec un nouveau jeton répare et réenreg
 
 | Étape | Pourquoi |
 |---|---|
-| Paquets `libpq-dev`, `build-essential`, `libyaml-dev`, `libffi-dev`, Google Chrome, `gh`, `jq` | Ce que les images GitHub fournissent et que les jobs supposent |
+| Paquets `libpq-dev`, `build-essential`, `libyaml-dev`, `libffi-dev`, Google Chrome, `gh`, `jq`, `ruby` | Ce que les images GitHub fournissent et que les jobs supposent |
 | Utilisateur système `github-runner` (dossier `/opt/github-runner`), **sans `sudo`**, membre de `docker` | Le code des PR tourne sous cet utilisateur, jamais sous le tien (grill, question 5) |
 | `chmod o-rwx` sur les dossiers personnels (`/home/…`) | Un job ne lit pas tes clés SSH, jetons et fichiers |
 | `/opt/hostedtoolcache` appartenant à `github-runner` | `ruby/setup-ruby` n'installe ses Ruby précompilés que là |

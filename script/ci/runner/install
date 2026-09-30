@@ -8,7 +8,8 @@
 # It is passed to config.sh and never written to disk by this script.
 #
 # What it does, and nothing else:
-#   1. system packages the jobs need (libpq-dev, a C toolchain for native gems, Google Chrome, gh, jq);
+#   1. system packages the jobs need (libpq-dev, a C toolchain for native gems, Google Chrome, gh, jq, and the system
+#      Ruby that runs script/ci/tested_tree before any setup-ruby);
 #   2. a system user `github-runner`: no sudo, member of `docker` (service containers need it), home /opt/github-runner;
 #   3. the human homes closed to other users (chmod 750), so a job cannot read the owner's files;
 #   4. /opt/hostedtoolcache, where ruby/setup-ruby expects its prebuilt Rubies;
@@ -45,7 +46,7 @@ say "Paquets système"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
 apt-get install -y -qq --no-install-recommends \
-  build-essential ca-certificates curl git gnupg jq libffi-dev libpq-dev libyaml-dev pkg-config tar >/dev/null
+  build-essential ca-certificates curl git gnupg jq libffi-dev libpq-dev libyaml-dev pkg-config ruby tar >/dev/null
 
 if ! command -v google-chrome >/dev/null; then
   say "Google Chrome"

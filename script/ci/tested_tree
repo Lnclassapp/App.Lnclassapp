@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# Tells whether the content a CI run is about to test already got a green « ci » (ADR-0068, chantier ci-quota).
+# The proof is the tree of the commit, not the commit: a merge commit or a new message changes the commit, never
+# the files. A green « ci » publishes an empty artifact named ci-tree-<tree>; this script looks it up by name.
+#
+#   script/ci/tested_tree              # GITHUB_REPOSITORY, GITHUB_SHA; writes tested=true|false to GITHUB_OUTPUT
+#   script/ci/tested_tree <sha>        # the same, for any commit (gh must be logged in)
+#
+# Any doubt answers false: the full suite then runs. A doubt is never an error that stops the run.
+require "json"
+require "open3"
+
+class TestedTree
+  PREFIX = "ci-tree-"
+
+  # api: a callable taking a GitHub API path and returning the parsed JSON, or nil when the call failed.
+  def initialize(repository:, api:)
+    @repository = repository
+    @api = api
+  end
+
+  def tree(sha)
+    @api.call("repos/#{@repository}/commits/#{sha}")&.dig("commit", "tree", "sha")
+  end
+
+  def artifact_name(sha)
+    tree = tree(sha)
+    tree && "#{PREFIX}#{tree}"
+  end
+
+  def tested?(sha)
+    name = artifact_name(sha) or return false
+    artifacts = @api.call("repos/#{@repository}/actions/artifacts?name=#{name}&per_page=100")&.fetch("artifacts", nil)
+    return false unless artifacts.is_a?(Array)
+
+    artifacts.any? { |artifact| artifact["name"] == name && artifact["expired"] == false }
+  end
+end
+
+if $PROGRAM_NAME == __FILE__
+  gh = lambda do |path|
+    out, status = Open3.capture2("gh", "api", path, err: File::NULL)
+    status.success? ? JSON.parse(out) : nil
+  rescue JSON::ParserError
+    nil
+  end
+
+  sha = ARGV.first || ENV.fetch("GITHUB_SHA")
+  proof = TestedTree.new(repository: ENV.fetch("GITHUB_REPOSITORY", "Lnclassapp/App.Lnclassapp"), api: gh)
+  name = proof.artifact_name(sha)
+  tested = proof.tested?(sha)
+  puts "#{sha} → #{name || 'arbre illisible'} : #{tested ? 'déjà testé, la suite ne rejoue pas' : 'jamais testé, la suite tourne'}"
+
+  if (output = ENV["GITHUB_OUTPUT"])
+    File.write(output, "tested=#{tested}\nartifact=#{name}\n", mode: "a")
+  end
+end

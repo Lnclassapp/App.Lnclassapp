@@ -1,5 +1,5 @@
 # Pure Ruby, no Rails boot: bin/ci is one list of steps, and the GitHub jobs add up to exactly that list
-# (feuille-de-route §2, garde-fou n° 4; ADR-0064). A group missing from the workflow, played twice, or a test file
+# (feuille-de-route §2, garde-fou n° 4; ADR-0064). They run on the self-hosted runner (ADR-0068). A group missing from the workflow, played twice, or a test file
 # left out of every part fails here, in the lint group, before any test runs.
 require "minitest/autorun"
 require "yaml"
@@ -20,6 +20,11 @@ class CiPlanTest < Minitest::Test
   end
 
   def full_run = CI_PLAN.steps_for(nil)
+
+  def jobs = YAML.safe_load_file(WORKFLOW, aliases: true).fetch("jobs")
+
+  SELF_HOSTED = %w[self-hosted linux lnclass].freeze
+  PROMOTION_ON_GITHUB = /base_ref == 'Staging' \|\| github\.base_ref == 'main'.*ref_name == 'Staging' \|\| github\.ref_name == 'main'.*'\["ubuntu-latest"\]' \|\| '\["self-hosted", "linux", "lnclass"\]'/
 
   def without_part(title) = title.sub(%r{ \d+/\d+\z}, "")
 
@@ -58,6 +63,19 @@ class CiPlanTest < Minitest::Test
       assert_equal CI_PLAN.groups.fetch(group).files, split.flatten.sort, "« #{group} » : un fichier est absent ou joué deux fois"
       assert split.none?(&:empty?), "« #{group} » : une part vide ne teste rien"
     end
+  end
+
+  # ADR-0068 : the GitHub minutes ran out. A job of this workflow runs on the owner's machine; only the proof and the
+  # verdict « ci » of a promotion may run on GitHub, and only through that one expression. A new job on ubuntu-latest
+  # would reopen the leak: it fails here.
+  def test_only_the_proof_and_the_verdict_of_a_promotion_run_on_a_github_runner
+    jobs.except("proof", "ci").each do |name, job|
+      assert_equal SELF_HOSTED, job["runs-on"], "le job « #{name} » doit tourner sur le runner auto-hébergé (ADR-0068)"
+    end
+    jobs.slice("proof", "ci").each do |name, job|
+      assert_match PROMOTION_ON_GITHUB, job["runs-on"], "« #{name} » : GitHub pour une promotion seulement (ADR-0068)"
+    end
+    assert_match(/needs\.proof\.outputs\.tested == 'true' &&/, jobs.fetch("ci")["runs-on"], "« ci » : GitHub seulement si la preuve suffit")
   end
 
   def test_the_split_is_deterministic_and_puts_the_longest_file_alone
