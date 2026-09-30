@@ -5,7 +5,7 @@
   <h3 id="import_files_title" class="mb-2 text-sm font-medium"><%= t("teams.imports.status.files_title", count: import.files.size) %></h3>
   <ul class="divide-y divide-line rounded-ln border border-line">
     <% import.files.each do |file| %>
-      <li class="flex flex-col gap-1 px-4 py-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+      <li class="flex flex-col gap-1 px-4 py-2">
         <span class="min-w-0 truncate font-medium text-ink" title="<%= file.name %>"><%= file.name %></span>
         <% if file.status == "rejected" %>
           <span class="flex flex-wrap items-baseline gap-2">

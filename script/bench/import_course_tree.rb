@@ -104,7 +104,10 @@ module ImportCourseTreeBench
 
   def maxima = (CONTENT + %w[import_reports audit_events]).index_with { |table| max_id(table) }
 
-  def max_id(table) = ActiveRecord::Base.connection.select_value("SELECT COALESCE(MAX(id), 0) FROM #{table}")
+  # Les tables sont une liste fixe, jamais une saisie : Arel les cite, sans interpolation dans le SQL.
+  def arel_table(table) = Arel::Table.new(table)
+
+  def max_id(table) = ActiveRecord::Base.connection.select_value(arel_table(table).project(arel_table(table)[:id].maximum)).to_i
 
   def run(size, uploads)
     TIMES.clear
@@ -122,8 +125,10 @@ module ImportCourseTreeBench
     connection = ActiveRecord::Base.connection
     reports = Orm::ImportReport.where("id > ?", before.fetch("import_reports"))
     ActiveStorage::Attachment.where(record_type: Orm::ImportReport.name, record_id: reports.select(:id)).find_each(&:purge)
-    CONTENT.each { |table| connection.delete("DELETE FROM #{table} WHERE id > #{before.fetch(table)}") }
-    connection.delete("DELETE FROM audit_events WHERE id > #{before.fetch('audit_events')}")
+    (CONTENT + %w[audit_events]).each do |table|
+      delete = Arel::DeleteManager.new.from(arel_table(table)).where(arel_table(table)[:id].gt(before.fetch(table)))
+      connection.delete(delete)
+    end
     reports.delete_all
   end
 

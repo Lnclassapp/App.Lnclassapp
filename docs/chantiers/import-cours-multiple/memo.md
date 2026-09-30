@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `feature/import-cours-multiple` |
 | **Programme** | — |

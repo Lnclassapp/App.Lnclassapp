@@ -55,7 +55,7 @@ L'équipe met en ligne les leçons rédigées, à raison d'un fichier par leçon
 
 - Quand l'import est `completed` **ou** `rejected` et que `import.files` n'est pas vide, une section `section#import_files` (`aria-labelledby="import_files_title"`) est rendue après « Détails » et avant les erreurs. Elle contient :
   - `h3#import_files_title` (`mb-2 text-sm font-medium`) : `teams.imports.status.files_title`, soit « Fichiers (%{count}) » ;
-  - `ul` (`divide-y divide-line rounded-ln border border-line`) ; un `li` par fichier (`flex flex-col gap-1 px-4 py-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4`), avec :
+  - `ul` (`divide-y divide-line rounded-ln border border-line`) ; un `li` par fichier (`flex flex-col gap-1 px-4 py-2`). Le nom est toujours sur sa propre ligne, au-dessus de son détail. En ligne, un motif de refus long écrasait le nom dans la modale d'environ 512 px (constat du challenger, 2026-09-30). Le `li` contient :
     - le nom en `span.min-w-0.truncate.font-medium.text-ink`, et son `title` porte le nom complet ;
     - pour un fichier lu : « %{imported} importé(s) · %{skipped} ignoré(s) · %{errors} en erreur » (`text-sm text-mute tabular-nums`). Un compteur à zéro est affiché ;
     - pour un fichier refusé : `ui_badge t(".file_rejected"), tone: :error`, suivi du motif traduit par `import_error_message` sur l'erreur de ce fichier (`text-sm text-error`).

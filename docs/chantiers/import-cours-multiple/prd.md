@@ -149,8 +149,8 @@ Banc : `script/bench/import_course_tree.rb`, sur la base de développement, avec
 
 | Métrique | Avant (2026-09-29) | Cible | Après |
 |---|---|---|---|
-| Traitement de 200 cours | 16,5 s | — | |
-| Traitement de 500 cours | ≈ 40 s (extrapolé à 80 ms par cours) | ≤ 20 s | |
-| Écriture de 200 cours | 12,8 s | ≤ 5 s | |
-| Délai entre l'envoi et le bilan affiché, 10 cours | jusqu'à 4,5 s (1 s de prise en charge + 3 s de rafraîchissement + traitement) | < 3 s | |
-| Allers-retours dans la modale pour 10 fichiers | 10 | 1 | |
+| Traitement de 200 cours | 16,5 s | — | 7,4 s (challenger, médiane de 3) |
+| Traitement de 500 cours | 37,3 s (banc du Lot B, avant) | ≤ 20 s | 19,1 s et 19,0 s (challenger, deux lancements, médianes de 3) |
+| Écriture de 200 cours | 12,8 s | ≤ 5 s | 4,5 s |
+| Délai entre l'envoi et le bilan affiché, 10 cours | jusqu'à 4,5 s (1 s de prise en charge + 3 s de rafraîchissement + traitement) | < 3 s | 1,9 s (médiane de 7 envois, tous sous 3 s) ; 1,9 s pour les 4 leçons |
+| Allers-retours dans la modale pour 10 fichiers | 10 | 1 | 1 |

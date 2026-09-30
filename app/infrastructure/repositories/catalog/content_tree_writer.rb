@@ -57,7 +57,8 @@ module Repositories
       def reserve_ids(model, count)
         return [] if count.zero?
 
-        connection.select_values("SELECT nextval(#{connection.quote(model.sequence_name)}) FROM generate_series(1, #{count})").sort
+        sql = ActiveRecord::Base.sanitize_sql_array([ "SELECT nextval(?) FROM generate_series(1, ?)", model.sequence_name, count ])
+        connection.select_values(sql).sort
       end
 
       # COPY … FROM STDIN sur la connexion d'ActiveRecord, donc dans la transaction du lot : contraintes et index
