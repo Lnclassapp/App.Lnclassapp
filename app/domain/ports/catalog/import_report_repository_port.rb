@@ -1,12 +1,13 @@
 # 🧠 DOMAINE · Ports::Catalog::ImportReportRepositoryPort
 # Rôle : contrat des rapports d'import, un seul import en cours par type
-# ADR  : 0039, 0056
+# ADR  : 0039, 0056, 0068
 module Ports
   module Catalog
     module ImportReportRepositoryPort
-      # Rapport queued ; checksum_sha256 nil pour un rapport sans fichier (génération des classes, ADR-0056).
+      # Rapport queued ; checksum_sha256 nil pour un rapport sans fichier (génération des classes, ADR-0056) ;
+      # files : [Entities::Catalog::ImportFileReport] en attente, dans l'ordre d'envoi (ADR-0068).
       # → Result(Entities::Catalog::ImportReport) | failure(:conflict, errors: { kind: [:already_running] })
-      def create(kind:, checksum_sha256:, imported_by_id:, at:)
+      def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [])
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
@@ -37,8 +38,9 @@ module Ports
       end
 
       # status ∈ completed, rejected, failed ; counts : { total_count:, imported_count:, skipped_count:, error_count: } ;
-      # errors : [Entities::Catalog::ImportError], tronqué à ImportKind::MAX_ERRORS. → true
-      def finish(id:, status:, counts:, details:, errors:, at:)
+      # errors : [Entities::Catalog::ImportError], tronqué à ImportKind::MAX_ERRORS ;
+      # files : [Entities::Catalog::ImportFileReport] traités, ou nil pour garder ceux du rapport. → true
+      def finish(id:, status:, counts:, details:, errors:, at:, files: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #finish"
       end
     end

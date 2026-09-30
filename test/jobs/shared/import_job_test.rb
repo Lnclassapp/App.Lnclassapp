@@ -5,8 +5,8 @@ require "test_helper"
 class Shared::ImportJobTest < ActiveJob::TestCase
   def queued_report(document)
     create_import_report(kind: "schools").tap do |report|
-      Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, io: StringIO.new(document.to_json),
-                                                        filename: "ecoles.json")
+      Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json),
+                                                        filename: "ecoles.json") ])
     end
   end
 

@@ -158,3 +158,13 @@ Les fichiers de l'ancien (`.Business/content_pedagogics/DRENAS/`, `tle_d/`) serv
 - `import_reports.kind` accepte aussi **`classrooms`** : le rapport de la génération des classes manquantes. Ce n'est pas un type d'import (aucun format, aucun téléversement) : il n'est pas dans `ImportKind::ALL`, mais dans `ImportKind::REPORT_KINDS`.
 - Ce rapport n'a ni pièce jointe ni checksum : `checksum_sha256` devient nul, et la contrainte `import_reports_checksum_unless_generation` l'exige pour tout autre type.
 - Même cycle de vie que les imports : un seul en cours (index unique partiel), libéré après 10 minutes, suivi par `/teams/imports/:public_id`, journal `import.run`.
+
+## Amendement du 2026-09-30 — plusieurs fichiers de cours en un seul rapport, suivi rechargé chaque seconde
+
+*Chantier [`docs/chantiers/import-cours-multiple`](../../chantiers/import-cours-multiple/prd.md), [ADR-0068](./0068-import-de-plusieurs-fichiers-de-cours-et-ecriture-acceleree.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Un import de **cours complets** reçoit de 1 à 50 fichiers, 50 Mo au total, 20 Mo au plus par fichier. Ils forment **un seul rapport**. Les quatre autres types restent à un fichier.
+- Le « rejet en bloc » d'un JSON illisible, d'un autre format ou d'une autre version devient un **refus du fichier** : le rapport n'est `rejected` que si tous ses fichiers le sont. Pour un seul fichier, rien ne change. Le plafond de 500 cours vaut pour l'ensemble des fichiers.
+- Un cours présent dans deux fichiers d'un même envoi est en erreur dans chacun (`duplicate_in_files`). Un doublon avec la base, ou dans un même fichier, reste ignoré.
+- `import_reports.files` garde le bilan de chaque fichier. Les pièces jointes passent de `source` à `sources`.
+- Le suivi se recharge toutes les **1 s**, et non plus 3 s, toujours sans WebSocket.

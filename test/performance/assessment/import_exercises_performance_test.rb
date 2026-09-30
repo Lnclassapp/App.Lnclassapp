@@ -22,7 +22,7 @@ class Assessment::ImportExercisesPerformanceTest < ActiveSupport::TestCase
   test "10 000 exercises and their questions are imported in under two minutes" do
     report = create_import_report(kind: "exercises")
     document = exercises_document(essential: @essential.slug, exercises: EXERCISES, questions: 5, answers: 4)
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, filename: "exercices.json", io: StringIO.new(document.to_json))
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(filename: "exercices.json", io: StringIO.new(document.to_json)) ])
 
     started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     Assessment::ImportExercisesJob.perform_now(report.id)

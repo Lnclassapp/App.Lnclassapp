@@ -47,7 +47,7 @@ class Assessment::ImportExercisesTest < ApplicationSystemTestCase
         find("summary", text: "Proposition").click
         assert_selector "#import-help-keys code", text: "is_correct"
 
-        attach_file "import[io]", file.path
+        attach_file "import[files][]", file.path
         click_on "Lancer l'import"
       end
 

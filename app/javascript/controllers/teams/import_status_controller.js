@@ -1,10 +1,10 @@
 // ⚡ FRONT · teams/import_status_controller — suivi d'un import sans WebSocket
-// Rôle : recharge le frame « import_status » toutes les 3 s tant que l'import tourne ; s'arrête à la fin et à la déconnexion
-// ADR  : 0039 · UDR : 0006
+// Rôle : recharge le frame « import_status » toutes les secondes tant que l'import tourne ; s'arrête à la fin et à la déconnexion
+// ADR  : 0039, 0068 · UDR : 0006, 0055
 import { Controller } from "@hotwired/stimulus"
 
 const RUNNING = ["queued", "validating", "importing"]
-const INTERVAL = 3000
+const INTERVAL = 1000
 
 export default class extends Controller {
   static targets = ["state"]

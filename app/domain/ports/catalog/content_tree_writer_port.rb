@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039
+# ADR  : 0035, 0039, 0068
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -12,7 +12,7 @@ module Ports
       EssentialNode = Data.define(:slug, :course_id, :name, :subtitle, :content, :position, :exercises)
       CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials)
 
-      # Appelé dans une transaction ; insert_all par table, parents d'abord ; lève si la base refuse.
+      # Appelé dans une transaction ; une table après l'autre, parents d'abord (insert_all ou COPY, ADR-0068) ; lève si la base refuse.
       # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées)
       def write(author_id:, at:, courses: [], essentials: [], exercises: [])
         raise NotImplementedError, "#{self.class} doit implémenter #write"

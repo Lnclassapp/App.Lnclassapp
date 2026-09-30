@@ -12,7 +12,7 @@ class Teams::DrenaImportsControllerTest < ActionDispatch::IntegrationTest
   def upload = Rack::Test::UploadedFile.new(Rails.root.join("db/seeds/data/imports/drenas-2026.json"), "application/json")
 
   def post_import(as: :turbo_stream)
-    post teams_imports_path, params: { import: { kind: "drenas", io: upload } }, as:
+    post teams_imports_path, params: { import: { kind: "drenas", files: [ upload ] } }, as:
   end
 
   test "DR-07 a school staff member and a teacher are refused the DRENA import, and no report is created" do
