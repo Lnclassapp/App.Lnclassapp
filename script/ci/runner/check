@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Tells whether the self-hosted runner of Lnclass can take a job (ADR-0068). Exits 1 on the first missing piece
-# of the list, after printing all of them. Run it as the owner or as root, any time:
+# Tells whether the self-hosted runner of Lnclass can take a job (ADR-0068). Prints every piece of the list, then
+# exits 1 if one is missing. Run it as root (it reads /opt/github-runner, closed to other users):
 #
-#   script/ci/runner/check
+#   sudo script/ci/runner/check
 set -uo pipefail
 
 RUNNER_USER="github-runner"
@@ -12,37 +12,42 @@ failures=0
 
 ok() { echo "✅ $*"; }
 ko() { echo "❌ $*"; failures=$((failures + 1)); }
-as_runner() { if [ "$(id -un)" = "$RUNNER_USER" ]; then "$@"; else sudo -n -u "$RUNNER_USER" "$@"; fi; }
+check() { local label="$1"; shift; if "$@" >/dev/null 2>&1; then ok "$label"; else ko "$label"; fi; }
 
-id "$RUNNER_USER" >/dev/null 2>&1 && ok "utilisateur $RUNNER_USER" || ko "utilisateur $RUNNER_USER absent : lancer script/ci/runner/install"
-id -nG "$RUNNER_USER" 2>/dev/null | grep -qw sudo && ko "$RUNNER_USER est dans le groupe sudo" || ok "$RUNNER_USER sans sudo"
-id -nG "$RUNNER_USER" 2>/dev/null | grep -qw docker && ok "$RUNNER_USER dans le groupe docker" || ko "$RUNNER_USER hors du groupe docker"
+[ "$(id -u)" -eq 0 ] || { echo "❌ Lancer avec sudo : /opt/github-runner est fermé aux autres utilisateurs." >&2; exit 1; }
 
-if as_runner docker info >/dev/null 2>&1; then ok "Docker joignable par $RUNNER_USER"
-else ko "Docker injoignable par $RUNNER_USER (service arrêté, ou vérification à relancer avec sudo)"; fi
+check "utilisateur $RUNNER_USER" id "$RUNNER_USER"
+if id -nG "$RUNNER_USER" 2>/dev/null | grep -qw sudo; then ko "$RUNNER_USER est dans le groupe sudo"; else ok "$RUNNER_USER sans sudo"; fi
+if id -nG "$RUNNER_USER" 2>/dev/null | grep -qw docker; then ok "$RUNNER_USER dans le groupe docker"; else ko "$RUNNER_USER hors du groupe docker"; fi
+check "Docker joignable par $RUNNER_USER" sudo -u "$RUNNER_USER" docker info
 
-for tool in google-chrome gh jq git; do
-  command -v "$tool" >/dev/null && ok "$tool : $("$tool" --version 2>/dev/null | head -1)" || ko "$tool manquant"
+for tool in google-chrome gh jq git ruby; do
+  if command -v "$tool" >/dev/null; then ok "$tool : $("$tool" --version 2>/dev/null | head -1)"; else ko "$tool manquant"; fi
 done
-dpkg -s libpq-dev >/dev/null 2>&1 && ok "libpq-dev" || ko "libpq-dev manquant"
-[ -d "$TOOL_CACHE" ] && [ "$(stat -c %U "$TOOL_CACHE")" = "$RUNNER_USER" ] && ok "$TOOL_CACHE" || ko "$TOOL_CACHE absent ou pas à $RUNNER_USER"
+check "libpq-dev" dpkg -s libpq-dev
+if [ -d "$TOOL_CACHE" ] && [ "$(stat -c %U "$TOOL_CACHE")" = "$RUNNER_USER" ]; then ok "$TOOL_CACHE"; else ko "$TOOL_CACHE absent ou pas à $RUNNER_USER"; fi
 
 while IFS=: read -r name _ uid _ _ home _; do
   if [ "$uid" -ge 1000 ] && [ "$uid" -lt 60000 ] && [ -d "$home" ] && [ "$name" != "$RUNNER_USER" ]; then
-    [ $(( 0$(stat -c %a "$home") & 07 )) -eq 0 ] && ok "$home fermé aux autres utilisateurs" || ko "$home lisible par $RUNNER_USER"
+    if [ $(( 0$(stat -c %a "$home") & 07 )) -eq 0 ]; then ok "$home fermé aux autres utilisateurs"; else ko "$home lisible par $RUNNER_USER"; fi
   fi
 done < /etc/passwd
 
-instances=$(ls -d "$RUNNER_HOME"/runner-* 2>/dev/null | wc -l)
-if [ "$instances" -eq 0 ]; then ko "aucune instance du runner dans $RUNNER_HOME"; fi
+instances=0
 for dir in "$RUNNER_HOME"/runner-*; do
   [ -d "$dir" ] || continue
-  service=$(cat "$dir/.service" 2>/dev/null)
-  if [ -n "$service" ] && systemctl is-active --quiet "$service"; then ok "service $service actif"
-  else ko "service de $dir inactif : (cd $dir && sudo ./svc.sh start)"; fi
+  instances=$((instances + 1))
+  unit="lnclass-runner-${dir##*-}.service"
+  if systemctl is-active --quiet "$unit"; then ok "$unit actif"; else ko "$unit inactif : sudo systemctl restart $unit"; fi
+
+  # A service can be active while GitHub refuses the runner (token revoked, runner removed, version too old):
+  # only the runner's own log says it is connected and waiting for jobs.
+  log=$(find "$dir/_diag" -name 'Runner_*.log' -printf '%T@ %p\n' 2>/dev/null | sort -n | tail -1 | cut -d' ' -f2-)
+  if [ -n "$log" ] && grep -q "Listening for Jobs" "$log"; then ok "${dir##*/} connecté à GitHub, en attente de jobs"
+  else ko "${dir##*/} non connecté à GitHub (voir $dir/_diag) : relancer script/ci/runner/install"; fi
 done
+[ "$instances" -gt 0 ] || ko "aucune instance du runner dans $RUNNER_HOME : lancer script/ci/runner/install"
 
 echo "ℹ️  $(nproc) cœurs, $(free -g | awk '/^Mem:/ { print $2 }') Go de mémoire, $instances instance(s)"
-echo "ℹ️  « Idle » dans GitHub → dépôt → Settings → Actions → Runners confirme que GitHub voit le runner."
 
-[ "$failures" -eq 0 ] && echo "Le runner peut prendre un job." || { echo "$failures point(s) à corriger."; exit 1; }
+if [ "$failures" -eq 0 ]; then echo "Le runner peut prendre un job."; else echo "$failures point(s) à corriger."; exit 1; fi

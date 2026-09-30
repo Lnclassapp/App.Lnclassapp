@@ -41,7 +41,8 @@ if $PROGRAM_NAME == __FILE__
   gh = lambda do |path|
     out, status = Open3.capture2("gh", "api", path, err: File::NULL)
     status.success? ? JSON.parse(out) : nil
-  rescue JSON::ParserError
+  rescue JSON::ParserError, SystemCallError => error
+    warn "tested_tree : #{error.class} (#{error.message}), la suite tournera"
     nil
   end
 

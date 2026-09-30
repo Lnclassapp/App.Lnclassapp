@@ -28,7 +28,9 @@ env:
 jobs:
   # Has this exact tree already got a green « ci »? Then nothing below replays it (ADR-0068). On GitHub for a
   # promotion, on the self-hosted runner otherwise (a re-run, or a push on Develop that merges what its PR tested).
-  # Any doubt (unreadable commit, API error) answers no, and the suite runs.
+  # Any doubt (unreadable commit, API error) answers no, and the suite runs. The job itself fails only when it never
+  # ran: GitHub gives up after 24 hours without a runner. Nothing then waits another day for the machine: « ci »
+  # reports red at once, on GitHub, and the machine's rerun service (script/ci/runner/rerun_expired) starts it again.
   proof:
     runs-on: ${{ fromJSON(((github.event_name == 'pull_request' && (github.base_ref == 'Staging' || github.base_ref == 'main')) || (github.event_name == 'push' && (github.ref_name == 'Staging' || github.ref_name == 'main'))) && '["ubuntu-latest"]' || '["self-hosted", "linux", "lnclass"]') }}
     timeout-minutes: 5
@@ -50,7 +52,7 @@ jobs:
   # Any doubt (a push, an unreadable diff) runs everything.
   changes:
     needs: proof
-    if: ${{ !cancelled() && needs.proof.outputs.tested != 'true' }}
+    if: needs.proof.result == 'success' && needs.proof.outputs.tested != 'true'
     runs-on: [ self-hosted, linux, lnclass ]
     timeout-minutes: 5
     # Job permissions replace the workflow's: the private repository needs contents too (HTTP 403 without it).
@@ -66,7 +68,8 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
         run: |
           code=true
-          if [ -n "$PR" ] && files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[].filename') && [ -n "$files" ]; then
+          # A renamed file counts under both names: moving code into docs/ still removes code.
+          if [ -n "$PR" ] && files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)') && [ -n "$files" ]; then
             echo "$files"
             echo "$files" | grep -qvE '^docs/|\.md$' || code=false
           fi
@@ -123,11 +126,12 @@ jobs:
         image: postgres:17
         # Same credentials as config/database.yml, so no DATABASE_URL is needed. The host port is Docker's pick:
         # two jobs on one machine, or the owner's own PostgreSQL, never fight over 5432. PGPORT passes it on.
+        # Loopback only: on the owner's network, a superuser with a known password must not be reachable.
         env:
           POSTGRES_USER: dev-rails
           POSTGRES_PASSWORD: dev-rails
         ports:
-          - 5432
+          - "127.0.0.1::5432"
         # The job waits for the first healthy check: every second, not every ten.
         options: --health-cmd="pg_isready" --health-interval=1s --health-timeout=5s --health-retries=30
 
@@ -161,12 +165,13 @@ jobs:
   # The status the branches wait for keeps its name, « ci ». Green when the proof found the tree already tested,
   # or when every group passed, or when the pull request touches documentation alone. Anything else is red.
   # A green run that tested for real publishes the proof of its tree, ci-tree-<tree>, kept 30 days (ADR-0068).
-  # It runs on GitHub only for a promotion whose tree is proven: no job of the machine is then waited for.
+  # It runs on GitHub only for a promotion whose tree is proven, or when the proof never got a runner: no job of the
+  # machine is then waited for.
   ci:
     name: ci
     if: always()
     needs: [ proof, changes, checks, tests ]
-    runs-on: ${{ fromJSON(needs.proof.outputs.tested == 'true' && ((github.event_name == 'pull_request' && (github.base_ref == 'Staging' || github.base_ref == 'main')) || (github.event_name == 'push' && (github.ref_name == 'Staging' || github.ref_name == 'main'))) && '["ubuntu-latest"]' || '["self-hosted", "linux", "lnclass"]') }}
+    runs-on: ${{ fromJSON((needs.proof.result == 'failure' || (needs.proof.outputs.tested == 'true' && ((github.event_name == 'pull_request' && (github.base_ref == 'Staging' || github.base_ref == 'main')) || (github.event_name == 'push' && (github.ref_name == 'Staging' || github.ref_name == 'main'))))) && '["ubuntu-latest"]' || '["self-hosted", "linux", "lnclass"]') }}
     timeout-minutes: 5
     steps:
       - id: verdict
@@ -182,7 +187,7 @@ jobs:
           code=$(echo "$NEEDS" | jq -r '.changes.outputs.code // "true"')
           echo "$NEEDS" | jq -e --arg code "$code" '
             (.changes.result == "success") and
-            ([ del(.proof, .changes)[] | .result ] | all(. == "success" or ($code != "true" and . == "skipped")))' > /dev/null
+            ([ del(.proof, .changes)[] | .result ] | all(. == "success" or ($code == "false" and . == "skipped")))' > /dev/null
           # Only a run that played the checks proves its tree: a documentation-only pull request skipped them.
           echo "proof=$code" >> "$GITHUB_OUTPUT"
 

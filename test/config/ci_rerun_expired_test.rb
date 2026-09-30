@@ -66,7 +66,7 @@ class CiRerunExpiredTest < ActiveSupport::TestCase
     created = NOW - 25 * 3600
     runs = [ run_data(id: 1, created:, pulls: [ 7 ]), run_data(id: 2, created:, pulls: [ 8 ]), run_data(id: 3, created:, pulls: [ 9 ]) ]
     jobs = { 1 => [ expired_job(created) ], 2 => [ expired_job(created) ], 3 => [ expired_job(created) ] }
-    pulls = { 7 => { "state" => "closed", "head" => { "sha" => "abc" } }, 8 => open_pull("def"), 9 => nil }
+    pulls = { 7 => { "state" => "closed", "head" => { "sha" => "abc" } }, 8 => open_pull("def"), 9 => { "state" => "closed", "head" => { "sha" => "def" } } }
 
     assert_empty subject(runs:, jobs:, pulls:).candidates
   end
@@ -80,11 +80,24 @@ class CiRerunExpiredTest < ActiveSupport::TestCase
     assert_empty subject(runs:, jobs:, branches: { "feature/x" => { "commit" => { "sha" => "new" } } }).candidates
   end
 
-  test "an unreadable answer from GitHub re-runs nothing instead of raising" do
+  test "no expired run is an empty list, but an unreadable answer from GitHub is an error, never « nothing to do »" do
     created = NOW - 25 * 3600
     assert_empty subject(runs: [], jobs: {}).candidates
 
-    assert_empty subject(runs: [ run_data(id: 1, created:) ], jobs: { 1 => nil }, pulls: { 7 => open_pull }).candidates
+    [ subject(runs: nil, jobs: {}),
+      subject(runs: [ run_data(id: 1, created:) ], jobs: { 1 => nil }, pulls: { 7 => open_pull }),
+      subject(runs: [ run_data(id: 1, created:) ], jobs: { 1 => [ expired_job(created) ] }, pulls: { 7 => nil }) ].each do |unreadable|
+      assert_raises(RerunExpired::Unreadable) { unreadable.call }
+    end
+  end
+
+  test "a run that timed out waiting for the machine but then failed a real test is not re-run" do
+    created = NOW - 25 * 3600
+    red_after_wait = [ expired_job(created), red_job(created).merge("name" => "tests (unit)", "conclusion" => "failure") ]
+    verdict_only = [ expired_job(created), red_job(created).merge("name" => "ci", "conclusion" => "failure") ]
+
+    assert_empty subject(runs: [ run_data(id: 1, created:) ], jobs: { 1 => red_after_wait }, pulls: { 7 => open_pull }).candidates
+    assert_equal [ 1 ], subject(runs: [ run_data(id: 1, created:) ], jobs: { 1 => verdict_only }, pulls: { 7 => open_pull }).candidates.map { it["id"] }
   end
 
   test "a re-run GitHub refuses is reported, not hidden" do

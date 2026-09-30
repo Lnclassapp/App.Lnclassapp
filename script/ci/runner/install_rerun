@@ -6,27 +6,30 @@
 #
 # It asks for a GitHub token (fine-grained, repository Lnclassapp/App.Lnclassapp only, permissions « Actions: read and
 # write », « Pull requests: read », « Contents: read »). The token is read from the keyboard, never from the command
-# line, and kept in /etc/lnclass-ci-rerun.env, readable by root only; systemd hands it to the service.
-# The service runs as github-runner at boot, then every 15 minutes. Its log: journalctl -u lnclass-ci-rerun
+# line, checked against the GitHub API, and kept in /etc/lnclass-ci-rerun.env, readable by root only.
+# The service runs at boot, then every 15 minutes, as a throwaway systemd user (DynamicUser), not as github-runner:
+# the code of a job must not read the token from the service's process, nor replace its script, which lives in
+# /usr/local/lib/lnclass-ci, owned by root. Its log: journalctl -u lnclass-ci-rerun
 set -euo pipefail
 
-RUNNER_USER="github-runner"
-TARGET="/opt/github-runner/bin/rerun_expired"
+REPOSITORY="Lnclassapp/App.Lnclassapp"
+TARGET="/usr/local/lib/lnclass-ci/rerun_expired"
 ENV_FILE="/etc/lnclass-ci-rerun.env"
 
 [ "$(id -u)" -eq 0 ] || { echo "❌ Lancer avec sudo." >&2; exit 1; }
-id "$RUNNER_USER" >/dev/null 2>&1 || { echo "❌ Lancer d'abord script/ci/runner/install." >&2; exit 1; }
 command -v ruby >/dev/null && command -v gh >/dev/null || { echo "❌ ruby et gh manquants : script/ci/runner/install." >&2; exit 1; }
 
-# The owner's copy of the repository is closed to github-runner: the service runs its own copy of the script.
-install -D -o root -g "$RUNNER_USER" -m 755 "$(dirname "$0")/rerun_expired" "$TARGET"
+install -D -o root -g root -m 755 "$(dirname "$0")/rerun_expired" "$TARGET"
 
 if [ ! -s "$ENV_FILE" ] || [ "${1:-}" = "--new-token" ]; then
   read -rsp "Jeton GitHub (Actions en écriture, sur ce dépôt seulement) : " token; echo
   [ -n "$token" ] || { echo "❌ Jeton vide." >&2; exit 1; }
+  GH_TOKEN="$token" gh api "repos/$REPOSITORY/actions/runs?per_page=1" --silent \
+    || { echo "❌ Ce jeton ne lit pas les runs de $REPOSITORY : vérifier le dépôt et les permissions." >&2; exit 1; }
   umask 077
-  printf 'GH_TOKEN=%s\nGITHUB_REPOSITORY=Lnclassapp/App.Lnclassapp\n' "$token" > "$ENV_FILE"
+  printf 'GH_TOKEN=%s\nGITHUB_REPOSITORY=%s\n' "$token" "$REPOSITORY" > "$ENV_FILE"
 fi
+chown root:root "$ENV_FILE"
 chmod 600 "$ENV_FILE"
 
 cat > /etc/systemd/system/lnclass-ci-rerun.service <<UNIT
@@ -37,9 +40,16 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-User=$RUNNER_USER
+DynamicUser=yes
+StateDirectory=lnclass-ci-rerun
+Environment=HOME=/var/lib/lnclass-ci-rerun
 EnvironmentFile=$ENV_FILE
 ExecStart=/usr/bin/env ruby $TARGET
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectProc=invisible
 UNIT
 
 cat > /etc/systemd/system/lnclass-ci-rerun.timer <<UNIT
@@ -56,7 +66,14 @@ WantedBy=timers.target
 UNIT
 
 systemctl daemon-reload
-systemctl enable --now lnclass-ci-rerun.timer >/dev/null
-echo "✅ Relance installée. Premier passage :"
-systemctl start lnclass-ci-rerun.service || true
-journalctl -u lnclass-ci-rerun -n 5 --no-pager
+systemctl enable lnclass-ci-rerun.timer >/dev/null
+echo "== Premier passage"
+if systemctl start lnclass-ci-rerun.service; then
+  journalctl -u lnclass-ci-rerun -n 5 --no-pager
+  systemctl start lnclass-ci-rerun.timer
+  echo "✅ Relance installée : au démarrage, puis toutes les 15 minutes."
+else
+  journalctl -u lnclass-ci-rerun -n 20 --no-pager
+  echo "❌ Le premier passage a échoué : la minuterie n'est pas démarrée." >&2
+  exit 1
+fi

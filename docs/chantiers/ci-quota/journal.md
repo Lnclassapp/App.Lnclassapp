@@ -14,6 +14,9 @@
 | 2026-09-30 | **Les scripts de preuve et de relance tournent sur le Ruby du système** (Ubuntu 22.04 : Ruby 3.0), sans syntaxe plus récente. `install` pose le paquet `ruby`. | Le job `proof` doit répondre avant tout `setup-ruby` (il décide si la suite tourne), et le service de relance tourne hors de tout job. | — |
 | 2026-09-30 | **`.github/actions/setup/action.yml` inchangé**, contrairement au plan. | `install` pose `libpq-dev` : le test `dpkg -s` de l'action passe, et le `sudo apt-get` n'est jamais atteint. Pas de changement sans gain. | — |
 | 2026-09-30 | **Deux instances du runner par défaut** (`--instances 2`). | 4 cœurs, mémoire inconnue : chaque part système lance `nproc` navigateurs. Le nombre juste se fixe à la mesure (lot E). | — |
+| 2026-09-30 | **Relectures `security-reviewer` et `silent-failure-hunter` sur le diff : constats corrigés dans ce chantier.** PostgreSQL publié sur `127.0.0.1` seulement (il l'était sur toutes les interfaces de la machine) ; jeton d'enregistrement lu au clavier et passé par l'environnement ; empreinte SHA-256 du runner obligatoire ; root n'exécute plus `svc.sh` ni aucun fichier de `github-runner` (unités systemd `lnclass-runner-<n>` écrites par le script) ; service de relance sous `DynamicUser`, script à root, jeton vérifié avant installation ; `rerun_expired` sort en 1 sur une réponse illisible au lieu de « rien à relancer », et ne relance jamais un run qui contient un vrai test rouge ; `check` exige root et lit le journal du runner (« Listening for Jobs ») ; un fichier renommé compte sous ses deux noms pour la règle « documents seulement » ; verdict `ci` : `skipped` accepté seulement si `code == "false"`. | Chaque constat avait un scénario concret, vérifié par l'agent ou par la lecture du code. Trois nouvelles gardes : ports sur la boucle locale, `PGPORT` pour tout job avec base, runner de `ci`. | ADR-0068 §4.6, §4.7 |
+| 2026-09-30 | **La preuve qui n'a jamais eu de runner arrête le run** : `changes` ne tourne que si `proof` a réussi, et `ci` passe alors sur GitHub (1 minute) pour rendre un rouge immédiat. | Sinon `changes`, puis `ci`, attendaient chacun 24 h de plus : le run finissait à 72 h, hors de la fenêtre de relance de 48 h. `tested_tree` ne lève plus rien (même sans `gh`), donc un `proof` en échec veut dire « jamais exécuté ». | ADR-0068 §4.1 |
+| 2026-09-30 | **Non corrigé, laissé au porteur** : le groupe `docker` équivaut à root, et les PR de Dependabot tournent sur un runner non éphémère. | Les fermer demande Docker *rootless*, une machine virtuelle ou des runners éphémères : un choix d'infrastructure, pas un correctif. Le guide et l'ADR disent désormais honnêtement ce que l'isolation protège. | ADR-0068 §5 |
 
 ## Ce qui a dérapé
 
@@ -40,6 +43,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | Les chiffres « après » de chaque lot (3 runs, médiane) | Ils se mesurent sur le runner installé, sur la machine du porteur | ce chantier, dès le lot 0 fait |
 | Lot E : horloge < 3 min | Dépend de la mesure du lot A | ce chantier, fermé si A tient déjà < 3 min |
+| Isolation forte du runner (Docker *rootless*, VM ou runners éphémères) ; PR de Dependabot | Choix d'infrastructure du porteur (voir décisions ci-dessus) | à ouvrir si le porteur le décide |
+| Actions tierces épinglées par tag (`ruby/setup-ruby@v1`, `actions/setup-node@v4`), pas par SHA | Touche tous les workflows, hors du levier de ce chantier | à ouvrir |
+| La règle « documents seulement » accepte un `.md` n'importe où (`app/…/x.md`) | Antérieur au chantier (ADR-0064) | à ouvrir |
 | Le cache Bundler et `node_modules` sont retéléchargés à chaque job : `actions/checkout` nettoie l'espace de travail | À mesurer d'abord (lot E) ; un cache local sur la machine serait le levier suivant | ce chantier, lot E |
 
 ## Clôture

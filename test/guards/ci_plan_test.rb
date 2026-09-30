@@ -75,7 +75,33 @@ class CiPlanTest < Minitest::Test
     jobs.slice("proof", "ci").each do |name, job|
       assert_match PROMOTION_ON_GITHUB, job["runs-on"], "« #{name} » : GitHub pour une promotion seulement (ADR-0068)"
     end
-    assert_match(/needs\.proof\.outputs\.tested == 'true' &&/, jobs.fetch("ci")["runs-on"], "« ci » : GitHub seulement si la preuve suffit")
+    assert_match(/\(needs\.proof\.result == 'failure' \|\| \(needs\.proof\.outputs\.tested == 'true' &&/, jobs.fetch("ci")["runs-on"],
+                 "« ci » : GitHub seulement si la preuve suffit, ou si elle n'a jamais eu de runner")
+  end
+
+  # ADR-0068 : on the owner's machine, a job without its own PostgreSQL would fall back on port 5432, the owner's
+  # development server, with the same credentials. Every job that plays a group needing the database has its service
+  # container and passes its port to bin/ci.
+  def test_a_job_playing_a_database_group_brings_its_own_postgresql
+    jobs.each do |name, job|
+      selections = job.dig("env", "CI_GROUP").to_s.include?("matrix.group") ? job.dig("strategy", "matrix", "group") : [ job.dig("env", "CI_GROUP") ].compact
+      next unless selections.any? { |selection| CI_PLAN.steps_for(selection).first.command == "bin/setup --skip-server" }
+
+      assert job.dig("services", "postgres"), "« #{name} » : groupe avec base, sans conteneur PostgreSQL"
+      run = job.fetch("steps").find { it["run"] == "bin/ci" }
+      assert_match(/job\.services\.postgres\.ports\['5432'\]/, run.dig("env", "PGPORT").to_s, "« #{name} » : PGPORT manquant")
+    end
+  end
+
+  # ADR-0068 : the jobs run on the owner's machine, on his network. A service container (PostgreSQL, superuser with a
+  # known password) is published on the loopback only, never on every interface.
+  def test_service_containers_are_published_on_the_loopback_only
+    ports = Dir[File.join(File.dirname(WORKFLOW), "*.yml")].flat_map do |workflow|
+      YAML.safe_load_file(workflow, aliases: true).fetch("jobs").values.flat_map { (it["services"] || {}).values.flat_map { it["ports"] || [] } }
+    end
+
+    refute_empty ports
+    ports.each { assert_match(/\A127\.0\.0\.1:/, it.to_s, "port « #{it} » publié sur toutes les interfaces") }
   end
 
   def test_the_split_is_deterministic_and_puts_the_longest_file_alone
