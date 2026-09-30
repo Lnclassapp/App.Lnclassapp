@@ -77,6 +77,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`finitions-ux`](finitions-ux/memo.md) | planifié | Retour, auto-focus, infobulles, « Copier », envoi automatique, recherche dynamique et titre de page harmonisés par des briques communes ([audit](finitions-ux/audit.md)) ; le caching relève d'un chantier `optimize` séparé |
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré sur `fix/secrets-hors-cache`, sans PR | Codes de secours, clé TOTP, code de récupération du PIN et liens d'invitation hors de tout cache : `secret_response` pose `no-store` + `Pragma` et exempte la page du cache Turbo (amendement ADR-0031) |
 | [`cache-ecrans-lourds`](cache-ecrans-lourds/memo.md) | lots 1 à 4 sur `perf/cache-ecrans-lourds`, sans PR ; lot 5 après les lots UX | Budgets gravés (ADR-0067 : p95 < 300 ms pilotage, < 100 ms ailleurs, HTML < 150 Ko). Index et requêtes, sans cache ni vue modifiée : Travail des élèves 213 → 56 ms, pilotage 7 j 338 → 199 ms, recherche 264 → 38 ms (p50) ; pilotage « année » gardé 5 min (36 ms à chaud, 312 ms à froid en p95) ; `pg_trgm` activée (amendements ADR-0062) |
+| [`ci-quota`](ci-quota/memo.md) | planifié | Quota GitHub Actions épuisé (28 minutes par run, 40 runs par soirée) : runner auto-hébergé sur la machine du porteur, promotions validées par l'arbre déjà testé, ≤ 2 minutes facturées (ADR-0068) |
 
 ## Backlog
 

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/ci-quota` |
 | **Programme** | — |
