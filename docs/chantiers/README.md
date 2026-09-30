@@ -77,7 +77,6 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`finitions-ux`](finitions-ux/memo.md) | planifié | Retour, auto-focus, infobulles, « Copier », envoi automatique, recherche dynamique et titre de page harmonisés par des briques communes ([audit](finitions-ux/audit.md)) ; le caching relève d'un chantier `optimize` séparé |
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré sur `fix/secrets-hors-cache`, sans PR | Codes de secours, clé TOTP, code de récupération du PIN et liens d'invitation hors de tout cache : `secret_response` pose `no-store` + `Pragma` et exempte la page du cache Turbo (amendement ADR-0031) |
 | [`cache-ecrans-lourds`](cache-ecrans-lourds/memo.md) | lots 1 à 4 sur `perf/cache-ecrans-lourds`, sans PR ; lot 5 après les lots UX | Budgets gravés (ADR-0067 : p95 < 300 ms pilotage, < 100 ms ailleurs, HTML < 150 Ko). Index et requêtes, sans cache ni vue modifiée : Travail des élèves 213 → 56 ms, pilotage 7 j 338 → 199 ms, recherche 264 → 38 ms (p50) ; pilotage « année » gardé 5 min (36 ms à chaud, 312 ms à froid en p95) ; `pg_trgm` activée (amendements ADR-0062) |
-| [`ci-quota`](ci-quota/memo.md) | en cours, lots 0 à D écrits ; mesures après installation du runner | Quota GitHub Actions épuisé (28 minutes par run, 40 runs par soirée) : runner auto-hébergé sur la machine du porteur, promotions validées par l'arbre déjà testé, ≤ 2 minutes facturées (ADR-0069) |
 
 ## Backlog
 
@@ -94,6 +93,7 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
 | **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2. Rattaché à la V4 s'il reprend ([feuille de route §5](refonte-application/feuille-de-route.md#chantiers-hors-plan)) |
+| [`ci-quota`](ci-quota/memo.md) | **En attente** depuis le 2026-09-30, à la demande du porteur. Quota GitHub Actions épuisé : runner auto-hébergé et promotions par preuve d'arbre (ADR-0069, proposé). Lots 0 à D écrits sur `perf/ci-quota`, [PR #106](https://github.com/Lnclassapp/App.Lnclassapp/pull/106) en brouillon ; reprise : installer le runner sur la machine du porteur, puis mesurer. |
 
 ## Cycle de vie
 
