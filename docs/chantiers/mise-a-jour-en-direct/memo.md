@@ -39,7 +39,7 @@ Le multi-import (jusqu'à 50 fichiers de cours) et l'import des DRENA sont en pl
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| Que voit l'équipe quand l'import se termine, alors que le bilan est dans une modale par-dessus la liste ? | **Le bilan reste ouvert, la liste se met à jour derrière**, sans bouger le défilement ; l'équipe ferme la modale après lecture | Le rafraîchissement doit **préserver la modale et son bilan** : un rechargement ordinaire de la page les ferait disparaître. La modale doit rester en place pendant la mise à jour de la page, et l'état de fin du suivi n'est plus rechargé ensuite |
 
 ## Cas limites identifiés
 
