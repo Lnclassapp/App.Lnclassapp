@@ -73,12 +73,15 @@ module ImportCourseTreeBench
 
   def multiple_files? = Dtos::Catalog::ImportUploadInput.method_defined?(:files=)
 
-  # Un envoi dans la forme d'ImportUploadInput : une liste de fichiers, ou un fichier seul.
+  # Un envoi dans la forme d'ImportUploadInput : une liste d'ImportUploadInput::Upload, ou un fichier seul.
   def dto(uploads)
     uploads.each { it.io.rewind }
-    return Dtos::Catalog::ImportUploadInput.new(kind: "course_tree", files: uploads) if multiple_files?
+    unless multiple_files?
+      return Dtos::Catalog::ImportUploadInput.new(kind: "course_tree", io: uploads.sole.io, filename: uploads.sole.filename)
+    end
 
-    Dtos::Catalog::ImportUploadInput.new(kind: "course_tree", io: uploads.sole.io, filename: uploads.sole.filename)
+    Dtos::Catalog::ImportUploadInput.new(kind: "course_tree",
+                                         files: uploads.map { Dtos::Catalog::ImportUploadInput::Upload.new(io: it.io, filename: it.filename) })
   end
 
   def actor
