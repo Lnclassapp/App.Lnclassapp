@@ -44,7 +44,7 @@ class School::ImportSchoolsTest < ApplicationSystemTestCase
         find("summary", text: "Slug de la DRENA (1)").click
         assert_selector "#import-help-drenas code", exact_text: "drena-abidjan-2"
 
-        attach_file "import[io]", file.path
+        attach_file "import[files][]", file.path
         click_on "Lancer l'import"
       end
 

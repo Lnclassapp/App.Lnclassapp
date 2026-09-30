@@ -47,6 +47,11 @@ module ImportDocuments
     document
   end
 
+  # Un fichier d'envoi tel que le stockage l'attend (ADR-0068) : un io et son nom.
+  ImportUpload = Data.define(:io, :filename)
+
+  def import_upload(io:, filename:) = ImportUpload.new(io:, filename:)
+
   # Exemples réels de l'ancienne application, enveloppés (test/fixtures/files/imports/).
   def import_sample(name)
     JSON.parse(file_fixture("imports/#{name}.json").read)

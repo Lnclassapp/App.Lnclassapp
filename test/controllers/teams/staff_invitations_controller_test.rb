@@ -24,6 +24,19 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::Invitation.exists?
   end
 
+  # Revue de sécurité du 2026-09-29 : la règle passe avant la recherche de l'établissement. Un membre qui ne peut pas
+  # inviter reçoit le même 403 pour un établissement inconnu que pour un établissement connu : la réponse ne dit pas
+  # lequel existe.
+  test "DS-04: a member who cannot invite gets 403 for an unknown school too, never 404" do
+    sign_in_as create_team_member(team_role: "content")
+
+    get new_school_staff_invitation_path("inconnu"), headers: { "Turbo-Frame" => "modal" }
+    assert_response :forbidden
+    post school_staff_invitations_path("inconnu"), params: invitation_params, as: :turbo_stream
+    assert_response :forbidden
+    assert_not Orm::Invitation.exists?
+  end
+
   test "a visitor is sent to the sign-in" do
     get new_school_staff_invitation_path(@school.public_id)
 

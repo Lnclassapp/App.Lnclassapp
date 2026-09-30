@@ -41,7 +41,7 @@ module UseCases
       # The real engine, on a report in base and its file.
       def run_import(document, adapter: self.adapter, transaction: Repositories::Shared::Transaction.new, author: @author)
         report = create_import_report(kind: "essentials", imported_by: author)
-        Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, io: StringIO.new(document.to_json), filename: "fiches.json")
+        Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json), filename: "fiches.json") ])
         @result = UseCases::Catalog::RunImport.new(
           adapter:, reports: Repositories::Catalog::ImportReportRepository.new, files: Repositories::Catalog::ImportFileStore.new,
           schema: Repositories::Catalog::ImportSchemaValidator.new, users: Repositories::Identity::UserRepository.new,

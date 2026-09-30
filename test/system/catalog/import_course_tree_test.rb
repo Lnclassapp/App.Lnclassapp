@@ -50,7 +50,7 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
         assert_selector "#import-help-levels li", text: /6ème\s+sans série/
         assert_selector "#import-help-materials code", text: "Physique-Chimie"
 
-        attach_file "import[io]", file.path
+        attach_file "import[files][]", file.path
         click_on "Lancer l'import"
       end
 
@@ -72,6 +72,58 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
     end
     assert_equal [ "Cours 1", "Cours 2", "Cours 3", "Cours 6", "Cours 7" ], Orm::Course.order(:name).pluck(:name)
     assert_equal [ "draft" ], Orm::Course.where.not(name: "Cours 6").distinct.pluck(:status)
+  end
+
+  # IM-01, IM-11, IM-12 (ADR-0068, UDR-0055) : les 4 leçons de Tle D, choisies d'un coup, forment un seul import.
+  test "IM-01 the four Tle D lessons chosen at once: the summary, then one report with a line per file" do
+    lessons = Dir[Rails.root.join("docs/contenus/lecons-traitees/tle-d/*.json")].sort
+
+    open_in_modal(new_teams_import_path(kind: "course_tree"))
+
+    assert_no_page_reload do
+      within "turbo-frame#modal dialog[open]" do
+        attach_file "import[files][]", lessons
+        assert_selector "#import_files_count", text: /\A4 fichiers · \d+ Ko\z/
+        assert_selector "#import_files_list li", count: 4
+        assert_selector "#import_files_list li:first-child", text: "cinematique-du-point.json"
+        assert_selector "#import_files_error", visible: :hidden
+        click_on "Lancer l'import"
+      end
+
+      using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }
+      within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
+        assert_text "Terminé"
+        assert_selector "#import_counter_imported", text: "4"
+        assert_selector "#import_counter_errors", text: "0"
+        assert_text "Propositions créées : 786"
+        assert_selector "#import_files_title", text: "Fichiers (4)"
+        assert_selector "#import_files li", text: /limites-et-continuite\.json\s+1 importé · 0 ignoré · 0 en erreur/
+      end
+    end
+    assert_selector "#imports tr", text: "cinematique-du-point.json et 3 autres fichiers"
+    assert_equal 4, Orm::Course.count
+  end
+
+  # IM-11 : un dépassement se voit dès le choix, et l'envoi est désactivé.
+  test "IM-11 choosing 51 files shows the limit at once and disables the import button" do
+    dir = Dir.mktmpdir
+    paths = Array.new(51) { |index| File.join(dir, "cours-#{index}.json").tap { File.write(it, "{}") } }
+
+    open_in_modal(new_teams_import_path(kind: "course_tree"))
+
+    within "turbo-frame#modal dialog[open]" do
+      attach_file "import[files][]", paths
+      assert_selector "#import_files_error[role=alert]", text: "Vous avez choisi 51 fichiers : 50 au plus."
+      assert_selector "input#import_files[aria-invalid=true]"
+      assert_button "Lancer l'import", disabled: true
+
+      attach_file "import[files][]", paths.first(2)
+      assert_selector "#import_files_count", text: "2 fichiers · 1 Ko"
+      assert_selector "#import_files_error", visible: :hidden
+      assert_button "Lancer l'import", disabled: false
+    end
+  ensure
+    FileUtils.rm_rf(dir)
   end
 
   test "with an empty referential, the help says to create it first" do

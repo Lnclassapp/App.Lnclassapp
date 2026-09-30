@@ -1,0 +1,23 @@
+<%# 🌐 UI · teams/imports/_files — bilan de chaque fichier d'un import, dans l'ordre d'envoi %>
+<%# Rôle : nom, puis compteurs d'un fichier lu, ou « Refusé » et son motif ; rendu par _status à la fin de l'import %>
+<%# ADR  : 0068 · UDR : 0055 §3.2 %>
+<section id="import_files" aria-labelledby="import_files_title">
+  <h3 id="import_files_title" class="mb-2 text-sm font-medium"><%= t("teams.imports.status.files_title", count: import.files.size) %></h3>
+  <ul class="divide-y divide-line rounded-ln border border-line">
+    <% import.files.each do |file| %>
+      <li class="flex flex-col gap-1 px-4 py-2">
+        <span class="min-w-0 truncate font-medium text-ink" title="<%= file.name %>"><%= file.name %></span>
+        <% if file.status == "rejected" %>
+          <span class="flex flex-wrap items-baseline gap-2">
+            <%= ui_badge t("teams.imports.status.file_rejected"), tone: :error %>
+            <span class="text-sm text-error"><%= import_error_message(file.reason) if file.reason %></span>
+          </span>
+        <% else %>
+          <span class="text-sm text-mute tabular-nums">
+            <%= safe_join(%i[imported skipped errors].map { |counter| t("teams.imports.status.file_counts.#{counter}", count: file.public_send(counter).to_i) }, " · ") %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>

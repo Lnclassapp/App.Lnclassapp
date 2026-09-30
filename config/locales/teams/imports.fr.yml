@@ -31,6 +31,7 @@ fr:
         write_failed: "L'enregistrement de cet élément n'a pas abouti."
         taken: "Ce nom est déjà pris par une autre DRENA."
         no_latin_character: "Le nom doit contenir au moins une lettre ou un chiffre latin."
+        duplicate_in_files: "Ce cours est aussi dans %{other} : aucun des deux n'est importé."
       # Erreurs de schéma, par mot-clé json_schemer (Teams::ImportsHelper) ; les autres prennent error_codes.schema.
       schema_keywords:
         schema: "Clé inconnue : ce format ne la prévoit pas."
@@ -43,6 +44,10 @@ fr:
         object: "Valeur attendue : un objet."
         const: "Valeur inattendue pour cette clé."
         maxLength: "Valeur trop longue."
+      # Nom d'un import de plusieurs fichiers dans l'historique et l'en-tête du rapport (UDR-0055 §3.4).
+      files_label:
+        one: "%{first} et %{count} autre fichier"
+        other: "%{first} et %{count} autres fichiers"
       index:
         page_title: "Imports"
         title: "Imports"
@@ -72,6 +77,18 @@ fr:
           drenas: "Importer des DRENA"
         file: "Fichier JSON"
         limits: "Un fichier .json de %{megabytes} Mo au plus, avec %{roots} éléments au plus."
+        files: "Fichiers JSON"
+        limits_multiple: "Jusqu'à %{files} fichiers .json, %{total} Mo au total, %{megabytes} Mo au plus par fichier, %{roots} cours au plus en tout."
+        # Résumé de la sélection, écrit par le contrôleur teams--import-files (UDR-0055 §3.1).
+        files_summary:
+          one: "1 fichier · %{size}"
+          other: "%{count} fichiers · %{size}"
+          kilobytes: "%{size} Ko"
+          megabytes: "%{size} Mo"
+          too_many_files: "Vous avez choisi %{count} fichiers : %{max} au plus."
+          not_json: "« %{name} » n'est pas un fichier .json."
+          file_too_large: "« %{name} » dépasse %{max} Mo."
+          total_too_large: "Les fichiers font %{size} au total : %{max} Mo au plus."
         submit: "Lancer l'import"
         cancel: "Annuler"
       create:
@@ -107,6 +124,20 @@ fr:
         details:
           classrooms: "Classes générées"
         rejected: "Le fichier a été rejeté en bloc : rien n'a été écrit. Corrigez le motif ci-dessous, puis relancez l'import."
+        rejected_files: "Aucun fichier n'a pu être lu : rien n'a été écrit. Corrigez les motifs ci-dessous, puis relancez l'import."
+        # Bilan par fichier (UDR-0055 §3.2).
+        files_title: "Fichiers (%{count})"
+        file_rejected: "Refusé"
+        file_counts:
+          imported:
+            one: "%{count} importé"
+            other: "%{count} importés"
+          skipped:
+            one: "%{count} ignoré"
+            other: "%{count} ignorés"
+          errors:
+            one: "%{count} en erreur"
+            other: "%{count} en erreur"
         failed: "L'import s'est arrêté sur une erreur imprévue. Relancé, le fichier comptera en doublons ce qui a déjà été écrit."
       import_errors:
         title: "Erreurs"
