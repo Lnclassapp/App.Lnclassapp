@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Installs the service that re-runs the CI runs GitHub failed after 24 hours without a runner (ADR-0068): a pull
+# request then waits up to 48 hours for the owner's machine. Run once, as root, after script/ci/runner/install:
+#
+#   sudo script/ci/runner/install_rerun
+#
+# It asks for a GitHub token (fine-grained, repository Lnclassapp/App.Lnclassapp only, permissions « Actions: read and
+# write », « Pull requests: read », « Contents: read »). The token is read from the keyboard, never from the command
+# line, and kept in /etc/lnclass-ci-rerun.env, readable by root only; systemd hands it to the service.
+# The service runs as github-runner at boot, then every 15 minutes. Its log: journalctl -u lnclass-ci-rerun
+set -euo pipefail
+
+RUNNER_USER="github-runner"
+TARGET="/opt/github-runner/bin/rerun_expired"
+ENV_FILE="/etc/lnclass-ci-rerun.env"
+
+[ "$(id -u)" -eq 0 ] || { echo "❌ Lancer avec sudo." >&2; exit 1; }
+id "$RUNNER_USER" >/dev/null 2>&1 || { echo "❌ Lancer d'abord script/ci/runner/install." >&2; exit 1; }
+command -v ruby >/dev/null && command -v gh >/dev/null || { echo "❌ ruby et gh manquants : script/ci/runner/install." >&2; exit 1; }
+
+# The owner's copy of the repository is closed to github-runner: the service runs its own copy of the script.
+install -D -o root -g "$RUNNER_USER" -m 755 "$(dirname "$0")/rerun_expired" "$TARGET"
+
+if [ ! -s "$ENV_FILE" ] || [ "${1:-}" = "--new-token" ]; then
+  read -rsp "Jeton GitHub (Actions en écriture, sur ce dépôt seulement) : " token; echo
+  [ -n "$token" ] || { echo "❌ Jeton vide." >&2; exit 1; }
+  umask 077
+  printf 'GH_TOKEN=%s\nGITHUB_REPOSITORY=Lnclassapp/App.Lnclassapp\n' "$token" > "$ENV_FILE"
+fi
+chmod 600 "$ENV_FILE"
+
+cat > /etc/systemd/system/lnclass-ci-rerun.service <<UNIT
+[Unit]
+Description=Lnclass CI : relance des runs expirés faute de runner (ADR-0068)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=$RUNNER_USER
+EnvironmentFile=$ENV_FILE
+ExecStart=/usr/bin/env ruby $TARGET
+UNIT
+
+cat > /etc/systemd/system/lnclass-ci-rerun.timer <<UNIT
+[Unit]
+Description=Lnclass CI : relance des runs expirés, au démarrage puis toutes les 15 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+UNIT
+
+systemctl daemon-reload
+systemctl enable --now lnclass-ci-rerun.timer >/dev/null
+echo "✅ Relance installée. Premier passage :"
+systemctl start lnclass-ci-rerun.service || true
+journalctl -u lnclass-ci-rerun -n 5 --no-pager

@@ -18,6 +18,13 @@
    ```
 
 3. Vérifier le résultat : `script/ci/runner/check` doit finir par « Le runner peut prendre un job ». Sur GitHub, les instances `<machine>-lnclass-1`, `-2` apparaissent **Idle**.
+4. Installer la relance des runs expirés (une PR attend alors jusqu'à 48 h) :
+
+   ```bash
+   sudo script/ci/runner/install_rerun
+   ```
+
+   Le script demande un jeton GitHub *fine-grained* : dépôt `Lnclassapp/App.Lnclassapp` seulement, permissions **Actions : lecture et écriture**, **Pull requests : lecture**, **Contents : lecture**. Il le garde dans `/etc/lnclass-ci-rerun.env`, lisible par root seulement. Pour changer de jeton : `sudo script/ci/runner/install_rerun --new-token`.
 
 Le script est idempotent : le relancer avec un nouveau jeton répare et réenregistre les instances. Voici ce qu'il fait, et rien d'autre :
 
@@ -31,7 +38,7 @@ Le script est idempotent : le relancer avec un nouveau jeton répare et réenreg
 
 ## Au quotidien
 
-- **Machine éteinte** : les PR attendent leur verdict. GitHub annule un job resté 24 h en file ; le service de relance (chantier `ci-quota`, lot D) relance les runs annulés depuis moins de 48 h.
+- **Machine éteinte** : les PR attendent leur verdict. GitHub annule un job resté 24 h en file ; le service `lnclass-ci-rerun` relance une fois, au démarrage de la machine puis toutes les 15 minutes, les runs expirés depuis moins de 48 h dont la PR est ouverte et le commit inchangé. Journal : `journalctl -u lnclass-ci-rerun`.
 - **Urgence, machine indisponible** : *Actions → CI sur GitHub (secours) → Run workflow*, sur la branche de la PR. Un seul job, environ 9 minutes facturées.
 - **Coût d'un run** : `script/ci/billed_minutes <run-id>` (les jobs auto-hébergés comptent 0).
 
@@ -51,4 +58,10 @@ sudo ./svc.sh stop && sudo ./svc.sh uninstall
 sudo -u github-runner ./config.sh remove --token <jeton de suppression>
 ```
 
-Puis, une fois toutes les instances retirées : `sudo userdel -r github-runner && sudo rm -rf /opt/hostedtoolcache`.
+Puis, une fois toutes les instances retirées :
+
+```bash
+sudo systemctl disable --now lnclass-ci-rerun.timer
+sudo rm -f /etc/systemd/system/lnclass-ci-rerun.* /etc/lnclass-ci-rerun.env
+sudo userdel -r github-runner && sudo rm -rf /opt/hostedtoolcache
+```
