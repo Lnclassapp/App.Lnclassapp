@@ -78,7 +78,7 @@ Une erreur porte le **nom d'affichage** de son fichier (`Entities::Catalog::Impo
 **Écriture accélérée (`Repositories::Catalog::ContentTreeWriter`), sans changer une ligne écrite :**
 
 - Les contenus riches s'insèrent par un modèle d'écriture sans type Action Text sur `body` (`Orm::RichTextRow`, table `action_text_rich_texts`). Le corps stocké est la chaîne déjà assainie.
-- Les questions reçoivent des identifiants réservés d'avance (`nextval` sur leur séquence, en une requête). Questions et propositions s'écrivent ensuite par `COPY … FROM STDIN` dans la transaction du lot. Contraintes et index s'appliquent comme pour un `INSERT`.
+- Les exercices et les questions reçoivent des identifiants réservés d'avance (`nextval` sur leur séquence, en une requête). Exercices, questions et propositions s'écrivent ensuite par `COPY … FROM STDIN` dans la transaction du lot. Contraintes et index s'appliquent comme pour un `INSERT`. Une erreur de `COPY` est traduite dans les mêmes exceptions qu'`insert_all!` (`RecordNotUnique`, `CheckViolation`, `ValueTooLong`), pour que le moteur rejoue toujours le lot élément par élément. Les exercices ne figuraient pas dans le plan initial : ils ont été ajoutés au Lot B pour garder une marge sur une machine chargée.
 - RichTextSanitizer analyse le HTML une seule fois : élagage Loofah (`:prune`), puis le filtre de la liste blanche de Rails (`Rails::HTML::PermitScrubber`), sur le même fragment.
 
 **Suivi.** Le contrôleur Stimulus `teams--import-status` recharge le frame toutes les **1 s**, au lieu de 3 s, tant que l'import tourne. Il n'y a toujours ni WebSocket ni diffusion (ADR-0039 inchangé sur ce point).
@@ -99,6 +99,8 @@ Une erreur porte le **nom d'affichage** de son fichier (`Entities::Catalog::Impo
 - **Deux chemins d'écriture des contenus riches** : le modèle Action Text pour les formulaires, `Orm::RichTextRow` pour l'import. S'ils divergent, le corps stocké diffère. Le test IM-13 compare octet par octet.
 - **Un envoi de 50 Mo passe par Rails** avant d'aller au bucket, et non par un envoi direct du navigateur. C'est plus lent sur une connexion faible. La limite du proxy d'entrée de l'hébergeur n'est pas documentée : elle est vérifiée en recette, et abaissée si besoin.
 - **Rafraîchir toutes les secondes triple les requêtes de suivi** tant qu'un import tourne. Elles sont légères (une ligne, un partial), et elles s'arrêtent à la fin.
+- **La traduction des erreurs de `COPY` passe par une API privée d'ActiveRecord** (`connection.send(:translate_exception_class, …)`). Une montée de version de Rails peut la casser. Les tests des trois contraintes le verraient.
+- **Le nettoyage en une seule analyse n'est pas identique dans des cas extrêmes.** Sur tout le contenu réel, le résultat est identique octet pour octet. Mais un test sur 20 000 HTML aléatoires a trouvé 16 écarts : un saut de ligne en tête de `<pre>`, que l'ancienne seconde analyse supprimait ; et des `<h2>` imbriqués après le retrait d'une balise non permise. Le DOM rendu par le navigateur est le même, sauf pour un `<pre>` suivi de trois sauts de ligne ou plus.
 - **La règle `duplicate_in_files` ne vaut que d'un fichier à l'autre** : dans un même fichier, un doublon reste ignoré. C'est une asymétrie assumée, parce que deux fichiers sont sans doute deux versions d'une leçon.
 
 ## 6. Notes d'implémentation
