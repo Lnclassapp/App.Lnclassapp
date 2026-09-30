@@ -3,7 +3,9 @@
 # ADR  : 0026, 0028, 0031, 0038, 0065 · UDR : 0019, 0052
 module Teams
   class StaffInvitationsController < BaseController
-    before_action :authorize_invitation, only: :new
+    # La règle avant l'établissement : un membre qui ne peut pas inviter reçoit 403 que l'établissement existe ou non.
+    # Le use case la réapplique (ADR-0028).
+    before_action :authorize_invitation
     before_action :load_school
     secret_response :create
 
