@@ -184,7 +184,7 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
 
   test "an import whose file is not attached yet is named by its kind alone" do
     report = create_import_report(kind: "exercises", status: "queued")
-    report.source.attach(io: StringIO.new("{}"), filename: "exercices.json", content_type: "application/json")
+    report.update!(files: [ { "name" => "exercices.json", "byte_size" => 2, "status" => "pending" } ])
     other = create_import_report(kind: "schools", status: "queued")
     sign_in_as @member
 

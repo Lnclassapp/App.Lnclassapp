@@ -33,8 +33,9 @@ module UseCases
       private
 
       def store(actor, dto, now)
-        created = @reports.create(kind: dto.kind, checksum_sha256: dto.checksum_sha256, imported_by_id: actor.user_id, at: now)
-        @files.attach(report_id: created.value.id, io: dto.io, filename: dto.filename) if created.success?
+        files = [ Entities::Catalog::ImportFileReport.new(name: dto.filename, byte_size: dto.byte_size) ]
+        created = @reports.create(kind: dto.kind, checksum_sha256: dto.checksum_sha256, imported_by_id: actor.user_id, at: now, files:)
+        @files.attach(report_id: created.value.id, files: [ dto ]) if created.success?
         created
       end
     end

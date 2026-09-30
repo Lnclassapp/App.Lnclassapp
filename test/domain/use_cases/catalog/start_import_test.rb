@@ -24,7 +24,7 @@ module UseCases
           stale.size
         end
 
-        def create(kind:, checksum_sha256:, imported_by_id:, at:)
+        def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [])
           return Shared::Result.failure(:conflict, errors: { kind: [ :already_running ] }) if @reports.any? { it.kind == kind && it.running? }
 
           report = StartImportTest.report(id: @reports.size + 1, kind:, status: "queued", imported_by_id:, started_at: nil)
@@ -38,7 +38,7 @@ module UseCases
 
         attr_reader :attached
 
-        def attach(report_id:, io:, filename:) = (@attached = [ report_id, io.read, filename ]) && true
+        def attach(report_id:, files:) = (@attached = [ report_id, *files.flat_map { [ it.io.read, it.filename ] } ]) && true
       end
 
       class FakeQueue

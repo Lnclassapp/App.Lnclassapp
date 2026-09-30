@@ -11,7 +11,7 @@ module Queries
       test "liste les rapports du plus récent au plus ancien, avec le nom du fichier et l'auteur" do
         older = create_import_report(kind: "schools", status: "completed", imported_by: @author, created_at: 2.days.ago,
                                      total_count: 3, imported_count: 2, skipped_count: 1)
-        older.source.attach(io: StringIO.new("{}"), filename: "ecoles.json", content_type: "application/json")
+        older.update!(files: [ { "name" => "ecoles.json", "byte_size" => 2, "status" => "read" } ])
         newer = create_import_report(kind: "course_tree", imported_by: @author)
 
         rows = @query.call
@@ -21,6 +21,7 @@ module Queries
                      rows.last.to_h.values_at(:kind, :filename, :status, :total_count, :imported_count, :skipped_count,
                                               :error_count, :imported_by_name)
         assert_nil rows.first.filename
+        assert_equal [ 0, 1 ], rows.map(&:file_count)
         assert_instance_of ImportReportsQuery::Row, rows.first
       end
 

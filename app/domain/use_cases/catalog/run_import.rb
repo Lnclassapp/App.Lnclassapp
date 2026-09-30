@@ -74,7 +74,7 @@ module UseCases
         kind = Entities::Catalog::ImportKind.fetch(report.kind)
         return forbid(report) if kind.authorize(actor: @users.actor_for(user_id: report.imported_by_id)).failure?
 
-        document = parse(@files.read(report_id: report.id))
+        document = parse(@files.read(report_id: report.id).first.content)
         return reject(report, [ error(ROOT_PATH, "json_invalid") ]) if document.equal?(UNREADABLE)
 
         blocking = envelope_errors(document, kind)

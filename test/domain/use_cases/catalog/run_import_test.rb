@@ -37,7 +37,7 @@ module UseCases
           true
         end
 
-        def finish(id:, status:, counts:, details:, errors:, at:)
+        def finish(id:, status:, counts:, details:, errors:, at:, files: nil)
           @finished = { status:, counts:, details:, errors: }
           @report = @report.with(status:, **counts, details:, import_errors: errors, finished_at: at)
           true
@@ -56,7 +56,7 @@ module UseCases
 
         def read(report_id:)
           @reads += 1
-          @content
+          [ Entities::Catalog::ImportFile.new(name: "fichier.json", content: @content) ]
         end
       end
 
