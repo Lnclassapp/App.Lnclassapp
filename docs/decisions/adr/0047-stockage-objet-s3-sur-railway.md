@@ -110,3 +110,7 @@ Les variables `BUCKET_*` du service web référencent celles du bucket (`${{Buck
 - Bucket créé dès la V0, même si la V1 ne téléverse rien.
 - Mode proxy plutôt que des URL présignées.
 - Absence de sauvegarde des fichiers acceptée en V1.
+
+## Amendement du 2026-09-30 — plusieurs fichiers par rapport d'import
+
+*[ADR-0068](./0068-import-de-plusieurs-fichiers-de-cours-et-ecriture-acceleree.md). Un rapport d'import porte désormais ses fichiers en `has_many_attached :sources`, au lieu de `has_one_attached :source`. Ils sont stockés sur le même service, avec la même règle : des clés aléatoires, et le nom du client en métadonnée seulement.*
