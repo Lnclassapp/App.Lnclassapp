@@ -18,6 +18,22 @@ module Repositories
 
         assert_equal html, RichTextSanitizer.call(html)
         assert_nil RichTextSanitizer.call(nil)
+        assert_equal "", RichTextSanitizer.call("")
+      end
+
+      # ADR-0068 §4 : une seule analyse donne, octet pour octet, ce que donnaient l'élagage puis la liste blanche de
+      # Rails sur un HTML analysé une seconde fois.
+      test "une seule analyse rend exactement ce que rendaient les deux, sur les leçons de Tle D" do
+        two_passes = Rails::HTML5::SafeListSanitizer.new
+        contents = Rails.root.glob("docs/contenus/lecons-traitees/tle-d/*.json").flat_map do |file|
+          JSON.parse(file.read).fetch("courses").flat_map { |course| [ course["content"], *course["essentials"].pluck("content") ] }
+        end.compact
+        contents += [ %(<p>a &amp; b &lt; c &nbsp;é “q” 😀 $\\frac{1}{2}$</p>\n<pre>\ncode\tici</pre>), "<p>non fermé <b>gras", " " ]
+
+        assert_operator contents.size, :>=, 12
+        contents.each do |html|
+          assert_equal two_passes.sanitize(Loofah.html5_fragment(html).scrub!(:prune).to_s), RichTextSanitizer.call(html)
+        end
       end
     end
   end
