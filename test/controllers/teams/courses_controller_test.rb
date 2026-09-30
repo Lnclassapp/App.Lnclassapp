@@ -207,7 +207,11 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("transition.published", name: "Génétique"))
     assert_select "turbo-stream[action=replace][target=content_status_course_genetique]" do
       assert_select "#content_status_course_genetique", text: including(I18n.t("catalog.content_status.published"))
-      assert_select "form[action='#{archive_teams_course_path('genetique')}']"
+    end
+    # Les transitions sont des entrées du menu ⋮, remplacées avec le statut.
+    assert_select "turbo-stream[action=replace][target=content_transitions_course_genetique]" do
+      assert_select "a[role=menuitem][data-turbo-method=patch][href='#{archive_teams_course_path('genetique')}']"
+      assert_select "a[href='#{publish_teams_course_path('genetique')}']", 0
     end
     assert_equal [ [ "content.published", @member.id, course.id ] ], Orm::AuditEvent.pluck(:action, :actor_id, :subject_id)
   end
@@ -222,7 +226,7 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "archived", course.reload.status
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("transition.archived", name: "Génétique"))
-    assert_select "#content_status_course_genetique form[action='#{publish_teams_course_path('genetique')}']"
+    assert_select "#content_transitions_course_genetique a[data-turbo-method=patch][href='#{publish_teams_course_path('genetique')}']"
     assert essential.reload.persisted?
     assert_equal "active", assignment.reload.status
 
@@ -234,6 +238,7 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tc("transition.refused", name: "Génétique"))
     assert_select "turbo-stream[action=replace][target=content_status_course_genetique]"
+    assert_select "turbo-stream[action=replace][target=content_transitions_course_genetique]"
     assert_equal %w[content.archived content.published], Orm::AuditEvent.order(:id).pluck(:action)
   end
 

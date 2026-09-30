@@ -229,9 +229,11 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil essential.published_at
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("transition.published", name: "La méiose"))
     assert_select "turbo-stream[action=replace][target=content_status_essential_#{essential.slug}] " \
-                  "#content_status_essential_#{essential.slug}" do
-      assert_select "form[action='#{archive_teams_essential_path(essential.slug)}']", 1
-      assert_select "form[action='#{publish_teams_essential_path(essential.slug)}']", 0
+                  "#content_status_essential_#{essential.slug}", text: including(I18n.t("catalog.content_status.published"))
+    assert_select "turbo-stream[action=replace][target=content_transitions_essential_#{essential.slug}] " \
+                  "#content_transitions_essential_#{essential.slug}" do
+      assert_select "a[data-turbo-method=patch][href='#{archive_teams_essential_path(essential.slug)}']", 1
+      assert_select "a[href='#{publish_teams_essential_path(essential.slug)}']", 0
     end
     assert_equal [ "content.published", @member.id, "Essential", essential.id ],
                  Orm::AuditEvent.where(action: "content.published").pick(:action, :actor_id, :subject_type, :subject_id)
@@ -261,8 +263,8 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "archived", essential.reload.status
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("transition.archived", name: "La méiose"))
-    assert_select "turbo-stream[action=replace][target=content_status_essential_#{essential.slug}] " \
-                  "form[action='#{publish_teams_essential_path(essential.slug)}']", 1
+    assert_select "turbo-stream[action=replace][target=content_transitions_essential_#{essential.slug}] " \
+                  "a[data-turbo-method=patch][href='#{publish_teams_essential_path(essential.slug)}']", 1
     assert_equal [ 1, 1, 1 ], [ Orm::Exercise.count, Orm::ExerciseSession.count, Orm::ClassroomAssignment.count ]
     assert_equal 1, Orm::AuditEvent.where(action: "content.archived", subject_id: essential.id).count
   end

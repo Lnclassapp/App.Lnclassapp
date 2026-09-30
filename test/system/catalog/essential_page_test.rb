@@ -84,6 +84,7 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     assert_selector "#essential_exercises li", count: 2
 
     assert_no_page_reload do
+      find("button[aria-controls=essential-actions-menu]").click
       click_on I18n.t("#{scope}.show.new_exercise")
       within "turbo-frame#modal dialog[open]" do
         fill_in "exercise[title]", with: "Anomalies de la méiose"

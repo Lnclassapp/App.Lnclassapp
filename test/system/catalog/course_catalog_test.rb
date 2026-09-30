@@ -100,11 +100,13 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     end
 
     assert_no_page_reload do
-      within("#content_status_course_#{course.slug}") { click_on t("catalog.content_status.actions.publish") }
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish")
       assert_toast t("teams.courses.transition.published", name: "Mutations")
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
 
-      within("#content_status_course_#{course.slug}") { click_on t("catalog.content_status.actions.archive") }
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.archive")
       assert_toast t("teams.courses.transition.archived", name: "Mutations")
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.archived")
     end
