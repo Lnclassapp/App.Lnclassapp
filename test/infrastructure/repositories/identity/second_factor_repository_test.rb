@@ -32,7 +32,9 @@ module Repositories
         credential = Orm::TotpCredential.find_by!(user_id: @member.id)
         assert_equal enrollment.secret, credential.secret
         assert_not_equal enrollment.secret, credential.ciphertext_for(:secret)
-        assert_match %r{\Aotpauth://totp/Lnclass:0701020304\?secret=#{enrollment.secret}&issuer=Lnclass\z}, enrollment.provisioning_uri
+        # Outside Railway the test environment names the issuer: « Lnclass (test) », URL-encoded.
+        assert_match %r{\Aotpauth://totp/Lnclass%20%28test%29:0701020304\?secret=#{enrollment.secret}&issuer=Lnclass%20%28test%29\z},
+                     enrollment.provisioning_uri
         assert_equal Ports::Identity::SecondFactorRepositoryPort::State.new(confirmed: false, backup_codes_left: 0),
                      @repository.state_for(user_id: @member.id)
       end

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::SecondFactorRepository
 # Rôle : second facteur TOTP (rotp, secret chiffré) et codes de secours à usage unique
-# ADR  : 0031
+# ADR  : 0031 · émetteur « Lnclass » en production, nommé par l'environnement ailleurs (amendement du 2026-09-30)
 module Repositories
   module Identity
     class SecondFactorRepository
@@ -8,6 +8,14 @@ module Repositories
 
       ISSUER = "Lnclass".freeze
       INTERVAL = 30
+
+      # ADR-0031 (amendement du 2026-09-30) : « Lnclass » en production, « Lnclass (Develop) » ailleurs, pour que
+      # l'application d'authentification ne confonde pas deux environnements qui partagent un numéro.
+      # « : » sépare l'émetteur du libellé dans l'adresse otpauth : il est retiré du nom.
+      def self.issuer(environment = ENV["RAILWAY_ENVIRONMENT_NAME"].presence || Rails.env)
+        name = environment.to_s.delete(":")
+        name.casecmp?("production") ? ISSUER : "#{ISSUER} (#{name})"
+      end
 
       def state_for(user_id:)
         confirmed_at = Orm::TotpCredential.where(user_id:).pluck(:confirmed_at)
@@ -20,7 +28,7 @@ module Repositories
       # Un secret confirmé n'est jamais remplacé : l'index unique refuse la nouvelle ligne.
       def begin_enrollment(user_id:, label:)
         secret = unconfirmed_secret(user_id) || create_secret(user_id)
-        Enrollment.new(secret:, provisioning_uri: ROTP::TOTP.new(secret, issuer: ISSUER).provisioning_uri(label))
+        Enrollment.new(secret:, provisioning_uri: ROTP::TOTP.new(secret, issuer: self.class.issuer).provisioning_uri(label))
       end
 
       # Le pas n'est enregistré que s'il dépasse le dernier accepté : un code rejoué, même en parallèle, est refusé.
