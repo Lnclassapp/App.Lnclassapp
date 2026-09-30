@@ -1,13 +1,13 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039
+# ADR  : 0035, 0039, 0068
 module Repositories
   module Catalog
     class ContentTreeWriter
       include Ports::Catalog::ContentTreeWriterPort
 
       NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::Exercise" => %w[public_id],
-                       "Orm::Question" => %w[exercise_id position], "Orm::Answer" => [], "ActionText::RichText" => [] }.freeze
+                       "Orm::Question" => %w[exercise_id position], "Orm::Answer" => [], "Orm::RichTextRow" => [] }.freeze
 
       # Une table après l'autre, parents d'abord : les ids créés sont relus par clé naturelle (slug, public_id, position).
       def write(author_id:, at:, courses: [], essentials: [], exercises: [])
@@ -71,12 +71,14 @@ module Repositories
       end
 
       # Le contenu importé est assaini avant d'entrer dans le contenu riche ; un contenu vide ne crée pas de ligne.
+      # Le corps est écrit tel que l'assainisseur le rend, sans conversion par ActionText::Content (ADR-0068 §4) :
+      # seul le strip que cette conversion appliquait est gardé.
       def write_rich_texts(record_type, nodes, ids)
         rows = nodes.filter_map do |node|
           body = RichTextSanitizer.call(node.content.to_s)
-          { record_type:, record_id: ids.fetch(node.slug), name: "content", body: } if body.present?
+          { record_type:, record_id: ids.fetch(node.slug), name: "content", body: body.strip } if body.present?
         end
-        insert(ActionText::RichText, rows)
+        insert(Orm::RichTextRow, rows)
       end
     end
   end

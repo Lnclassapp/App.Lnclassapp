@@ -64,6 +64,21 @@ module Repositories
         assert_equal [ "Orm::Course", "Orm::Essential" ], ActionText::RichText.distinct.order(:record_type).pluck(:record_type)
       end
 
+      # ADR-0068 §4 : deux chemins d'écriture des contenus riches, Orm::RichTextRow pour l'import, le modèle Action Text
+      # pour les formulaires. Le corps stocké est le même, octet pour octet.
+      test "le corps écrit sans conversion est celui qu'Action Text aurait écrit" do
+        contents = [ "\n  <p>Espaces autour</p>\n\n", "<h2>Titre</h2>\n<ul>\n<li>un</li>\n</ul>\n", "<p>a &amp; b &nbsp;é 😀 $\\frac{1}{2}$</p>" ]
+
+        @writer.write(author_id: @author.id, at: @at, courses: contents.each_with_index.map { |html, index| course("c#{index}", content: html) })
+
+        contents.each_with_index do |html, index|
+          stored = ActionText::RichText.connection.select_value(
+            "SELECT body FROM action_text_rich_texts WHERE record_type = 'Orm::Course' AND record_id = #{Orm::Course.find_by!(slug: "c#{index}").id}"
+          )
+          assert_equal ActionText::Content.new(RichTextSanitizer.call(html)).to_html, stored
+        end
+      end
+
       test "écrit des fiches dans un cours existant, ou des exercices dans une fiche existante" do
         target = create_course
         fiche = create_essential(course: target, position: 1)
