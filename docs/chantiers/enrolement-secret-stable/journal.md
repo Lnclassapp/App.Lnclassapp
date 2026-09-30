@@ -34,17 +34,31 @@
 
 - Aucun lien de l'app ne pointe vers la page d'enrôlement (seulement des redirections, depuis `Authentication` et `SecondFactorsController`). Les doubles `GET` des logs viennent de rechargements, d'onglets multiples ou de redirections successives.
 
+## Preuve (phase 5)
+
+- **Test de reproduction** : rouge avant le correctif, pour la bonne raison — secrets différents (`second_factor_repository_test.rb`), `422` avec le premier QR (`second_factor_enrollments_controller_test.rb`), secret écrit en premier écrasé (test de course). Vert après.
+- **Portes locales** (la CI GitHub est à l'arrêt, quota épuisé, chantier `ci-quota`) : suite `identity` 670 runs verts ; suite unitaire complète 2557 runs, couverture 100 % lignes et branches ; rubocop, Brakeman, gardes verts.
+- **Challenger** (rôle distinct, application lancée en local, HTTP réel) — 6 scénarios, tous verts :
+  1. Reproduction : deux ouvertures → même secret ; le code du premier onglet active le second facteur (10 codes de secours, une ligne confirmée).
+  2. Symétrique : une ouverture, bon code → activé.
+  3. Mauvais code → `422` « Code incorrect. », même secret réaffiché, puis bon code → activé.
+  4. Réinitialisation puis réenrôlement → nouveau secret, qui fonctionne.
+  5. Compte déjà enrôlé → redirection, le secret confirmé n'est jamais affiché.
+  6. 8 ouvertures en parallèle → 8 × `200`, un seul secret, une ligne ; le chemin de course (insertion refusée puis relecture) s'est réellement exécuté.
+  Test de course plus dur au repository : 8 fils synchronisés, 40 tours, 70 insertions refusées, 0 erreur, 0 secret divergent, y compris dans une transaction englobante.
+
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| En 422, le QR réaffiché vient du secret **envoyé par le navigateur** (`submitted_enrollment`), pas de la base | Correct une fois la cause corrigée ; lire la base en 422 change le contrat du contrôleur | à ouvrir (`refactor`) |
+| En 422, le QR réaffiché vient du secret **envoyé par le navigateur** (`submitted_enrollment`), pas de la base | Correct une fois la cause corrigée ; la vérification se fait toujours contre la base, l'affichage seul est concerné ; lire la base en 422 change le contrat du contrôleur | à ouvrir (`refactor`) |
+| Un autre onglet confirme **entre** `leave_when_enrolled` et `begin_enrollment` → `RecordNotUnique` non rattrapée (500) | Fenêtre de quelques millisecondes, comportement identique avant le correctif, non déclenché en HTTP par le challenger | à ouvrir si observé |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
+| **Livré le** | *(à la fusion)* |
+| **PR** | [#108](https://github.com/Lnclassapp/App.Lnclassapp/pull/108), vers `Develop` |
 | **ADR produits** | — |
 | **UDR produits** | — |
