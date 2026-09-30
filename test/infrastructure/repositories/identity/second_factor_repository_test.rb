@@ -27,12 +27,32 @@ module Repositories
                      @repository.state_for(user_id: @member.id)
       end
 
-      test "begin_enrollment replaces an unconfirmed secret" do
+      # Chantier enrolement-secret-stable: reopening the page must not turn the QR code already shown into a wrong one.
+      test "begin_enrollment keeps the unconfirmed secret" do
         first = @repository.begin_enrollment(user_id: @member.id, label: "x")
         second = @repository.begin_enrollment(user_id: @member.id, label: "x")
 
-        assert_not_equal first.secret, second.secret
-        assert_equal [ second.secret ], Orm::TotpCredential.where(user_id: @member.id).map(&:secret)
+        assert_equal first, second
+        assert_equal [ first.secret ], Orm::TotpCredential.where(user_id: @member.id).map(&:secret)
+      end
+
+      test "two enrollments begun at once share the secret written first" do
+        written_first = Orm::TotpCredential.create!(user_id: @member.id, secret: ROTP::Base32.random)
+        lookups = 0
+        # The first lookup runs before the other request's insert: it misses the row, the insert then collides with it.
+        @repository.define_singleton_method(:unconfirmed_secret) { |user_id| super(user_id) unless (lookups += 1) == 1 }
+
+        enrollment = @repository.begin_enrollment(user_id: @member.id, label: "x")
+
+        assert_equal written_first.secret, enrollment.secret
+        assert_equal [ written_first.secret ], Orm::TotpCredential.where(user_id: @member.id).map(&:secret)
+      end
+
+      test "after a reset, the enrollment draws a new secret" do
+        before = @repository.begin_enrollment(user_id: @member.id, label: "x")
+        @repository.reset(user_id: @member.id)
+
+        assert_not_equal before.secret, @repository.begin_enrollment(user_id: @member.id, label: "x").secret
       end
 
       test "a confirmed secret is never replaced" do

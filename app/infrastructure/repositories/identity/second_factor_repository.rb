@@ -16,11 +16,10 @@ module Repositories
         State.new(confirmed: !confirmed_at.first.nil?, backup_codes_left: Orm::BackupCode.where(user_id:, used_at: nil).count)
       end
 
+      # Un secret non confirmé est réutilisé : rouvrir la page d'activation ne rend pas faux le QR code déjà affiché.
       # Un secret confirmé n'est jamais remplacé : l'index unique refuse la nouvelle ligne.
       def begin_enrollment(user_id:, label:)
-        secret = ROTP::Base32.random
-        Orm::TotpCredential.where(user_id:, confirmed_at: nil).delete_all
-        Orm::TotpCredential.create!(user_id:, secret:)
+        secret = unconfirmed_secret(user_id) || create_secret(user_id)
         Enrollment.new(secret:, provisioning_uri: ROTP::TOTP.new(secret, issuer: ISSUER).provisioning_uri(label))
       end
 
@@ -54,6 +53,18 @@ module Repositories
         Orm::BackupCode.where(user_id:).delete_all
         Orm::TotpCredential.where(user_id:).delete_all
         true
+      end
+
+      private
+
+      def unconfirmed_secret(user_id) = Orm::TotpCredential.find_by(user_id:, confirmed_at: nil)&.secret
+
+      # Deux affichages simultanés : le second relit le secret du premier. Le point de sauvegarde garde la transaction
+      # englobante utilisable après le refus de l'index ; seul un secret confirmé laisse l'erreur remonter.
+      def create_secret(user_id)
+        Orm::TotpCredential.transaction(requires_new: true) { Orm::TotpCredential.create!(user_id:, secret: ROTP::Base32.random) }.secret
+      rescue ActiveRecord::RecordNotUnique
+        unconfirmed_secret(user_id) || raise
       end
     end
   end
