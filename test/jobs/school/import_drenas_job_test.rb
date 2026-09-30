@@ -7,7 +7,7 @@ class School::ImportDrenasJobTest < ActiveJob::TestCase
 
   def import(document)
     report = create_import_report(kind: "drenas")
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, io: StringIO.new(document.to_json), filename: "drenas.json")
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json), filename: "drenas.json") ])
 
     School::ImportDrenasJob.perform_now(report.id)
 

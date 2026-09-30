@@ -11,7 +11,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
                           classroom_students classroom_assignments].freeze
 
   # Declared by has_one_attached and has_rich_text: they point to the framework, not to Orm::.
-  FRAMEWORK_ASSOCIATIONS = /\A(rich_text_\w+|\w+_attachment|\w+_blob)\z/
+  FRAMEWORK_ASSOCIATIONS = /\A(rich_text_\w+|\w+_attachments?|\w+_blobs?)\z/
 
   def user(role, contact, **attributes)
     Orm::User.create!(last_name: "Koné", first_name: "Awa", contact:, gender: "female", role:, pin: "1234", **attributes)
@@ -44,7 +44,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
   end
 
   test "every V1 table has its Orm model with an explicit table name" do
-    assert_equal 35, MODELS.size # + referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065)
+    assert_equal 36, MODELS.size # + referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065), rich_text_row (ADR-0068)
     MODELS.each { |model| assert model.table_name.present? && model.table_exists?, model.name }
   end
 
@@ -131,13 +131,14 @@ class Orm::ModelsTest < ActiveSupport::TestCase
     assert_equal graph[:school], invitation.school
   end
 
-  test "an import report keeps its source file on Active Storage" do
-    report = Orm::ImportReport.create!(kind: "schools", checksum_sha256: "e" * 64,
+  test "an import report keeps its source files on Active Storage (ADR-0068)" do
+    report = Orm::ImportReport.create!(kind: "course_tree", checksum_sha256: "e" * 64,
                                        imported_by: graph[:team])
-    report.source.attach(io: StringIO.new("{}"), filename: "ecoles.json", content_type: "application/json")
+    report.sources.attach([ { io: StringIO.new("{}"), filename: "a.json", content_type: "application/json" },
+                            { io: StringIO.new("[]"), filename: "b.json", content_type: "application/json" } ])
 
-    assert report.reload.source.attached?
-    assert_equal({ "status" => "queued", "import_errors" => [] }, report.attributes.slice("status", "import_errors"))
+    assert_equal %w[a.json b.json], report.reload.sources.map { it.filename.to_s }
+    assert_equal({ "status" => "queued", "import_errors" => [], "files" => [] }, report.attributes.slice("status", "import_errors", "files"))
   end
 
   test "a course and an essential keep their rich content, rendered in the design tokens" do

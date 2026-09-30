@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs the self-hosted GitHub Actions runner of Lnclass on the owner's Ubuntu machine (ADR-0068, chantier ci-quota).
+# Installs the self-hosted GitHub Actions runner of Lnclass on the owner's Ubuntu machine (ADR-0069, chantier ci-quota).
 # Run once, as root; running it again is harmless (it wipes and re-registers the instances):
 #
 #   sudo script/ci/runner/install [--instances 2]
@@ -40,7 +40,7 @@ say() { echo "== $*"; }
 
 [ "$(id -u)" -eq 0 ] || fail "Lancer avec sudo."
 [[ "$instances" =~ ^[1-9]$ ]] || fail "--instances doit être un nombre de 1 à 9."
-grep -q '^ID=ubuntu' /etc/os-release || fail "Ubuntu attendu (ADR-0068)."
+grep -q '^ID=ubuntu' /etc/os-release || fail "Ubuntu attendu (ADR-0069)."
 [ "$(uname -m)" = "x86_64" ] || fail "Machine x86_64 attendue."
 command -v docker >/dev/null || fail "Docker manquant : https://docs.docker.com/engine/install/ubuntu/"
 
@@ -125,7 +125,7 @@ for index in $(seq 1 "$instances"); do
 
   cat > "/etc/systemd/system/$unit" <<UNIT
 [Unit]
-Description=Lnclass : runner GitHub Actions auto-hébergé n° $index (ADR-0068)
+Description=Lnclass : runner GitHub Actions auto-hébergé n° $index (ADR-0069)
 After=network-online.target docker.service
 Wants=network-online.target
 

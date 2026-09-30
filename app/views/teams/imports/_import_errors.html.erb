@@ -1,12 +1,17 @@
 <%# 🌐 UI · teams/imports/_import_errors — erreurs localisées d'un import %>
 <%# Rôle : une ligne par erreur, chemin JSON et motif traduit ; au-delà de 1 000, le reste est annoncé %>
-<%# ADR  : 0039, 0066 · UDR : 0006, 0053 %>
+<%# ADR  : 0039, 0066, 0068 · UDR : 0006, 0053, 0055 · une erreur d'un envoi de plusieurs fichiers nomme son fichier %>
 <div>
   <h3 class="mb-2 text-sm font-medium"><%= t(".title") %></h3>
   <ul id="import_errors" class="divide-y divide-line rounded-ln border border-line">
     <% import.import_errors.each do |error| %>
       <li class="flex flex-col gap-1 px-4 py-2 sm:flex-row sm:items-baseline sm:gap-4">
-        <code class="shrink-0 font-mono text-xs text-ink"><%= error.path %></code>
+        <span class="flex shrink-0 flex-col">
+          <% if error.file %>
+            <span class="text-xs font-medium text-ink"><%= error.file %></span>
+          <% end %>
+          <code class="font-mono text-xs text-ink"><%= error.path %></code>
+        </span>
         <span class="text-sm text-mute"><%= import_error_message(error) %></span>
       </li>
     <% end %>

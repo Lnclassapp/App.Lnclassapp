@@ -21,8 +21,8 @@ class Catalog::ImportEssentialsPerformanceTest < ActiveSupport::TestCase
   test "2 000 essentials and their exercises are imported in one course in under two minutes" do
     course = create_course
     report = create_import_report(kind: "essentials")
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, filename: "fiches.json",
-                                                      io: StringIO.new(essentials_document(course: course.slug, essentials: ESSENTIALS).to_json))
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(filename: "fiches.json",
+                                                      io: StringIO.new(essentials_document(course: course.slug, essentials: ESSENTIALS).to_json)) ])
 
     started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     Catalog::ImportEssentialsJob.perform_now(report.id)

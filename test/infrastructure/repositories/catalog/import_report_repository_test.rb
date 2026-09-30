@@ -4,6 +4,7 @@ module Repositories
   module Catalog
     class ImportReportRepositoryTest < ActiveSupport::TestCase
       ImportError = Entities::Catalog::ImportError
+      FileReport = Entities::Catalog::ImportFileReport
 
       setup do
         @repository = ImportReportRepository.new
@@ -101,6 +102,38 @@ module Repositories
         assert_equal({ "classrooms" => 77 }, found.details)
         assert_equal errors, found.import_errors
         assert_not found.running?
+      end
+
+      # ADR-0068 : les fichiers de l'envoi sont notés à la création, puis leur bilan à la fin.
+      test "garde les fichiers de l'envoi, puis leur bilan et le fichier de chaque erreur" do
+        report = @repository.create(kind: "course_tree", checksum_sha256: "a" * 64, imported_by_id: @member.id, at: @at,
+                                    files: [ FileReport.new(name: "a.json", byte_size: 10), FileReport.new(name: "b.json", byte_size: 3) ]).value
+
+        assert_equal [ [ "a.json", 10, "pending" ], [ "b.json", 3, "pending" ] ], report.files.map { [ it.name, it.byte_size, it.status ] }
+
+        reason = ImportError.new(path: "$", code: "format_mismatch", params: { expected: "lnclass.course-tree", received: "lnclass.essentials" })
+        files = [ FileReport.new(name: "a.json", byte_size: 10, status: "read", imported: 2, skipped: 1, errors: 1),
+                  FileReport.new(name: "b.json", byte_size: 3, status: "rejected", reason:) ]
+        errors = [ ImportError.new(path: "courses[1].name", code: "blank", file: "a.json") ]
+        counts = { total_count: 4, imported_count: 2, skipped_count: 1, error_count: 1 }
+        @repository.finish(id: report.id, status: "completed", counts:, details: {}, errors:, at: @at, files:)
+
+        found = @repository.find(id: report.id)
+
+        assert_equal files, found.files
+        assert_equal errors, found.import_errors
+        assert_equal({ "path" => "courses[1].name", "code" => "blank", "params" => {}, "file" => "a.json" },
+                     Orm::ImportReport.find(report.id).import_errors.first)
+      end
+
+      test "finish sans fichiers garde ceux du rapport" do
+        report = @repository.create(kind: "course_tree", checksum_sha256: "a" * 64, imported_by_id: @member.id, at: @at,
+                                    files: [ Entities::Catalog::ImportFileReport.new(name: "a.json", byte_size: 10) ]).value
+
+        @repository.finish(id: report.id, status: "failed", counts: {}, details: {}, errors: [], at: @at)
+
+        assert_equal [ "a.json" ], @repository.find(id: report.id).files.map(&:name)
+        assert_equal [], create_report.files
       end
 
       test "finish tronque à 1 000 erreurs, error_count garde le vrai total" do

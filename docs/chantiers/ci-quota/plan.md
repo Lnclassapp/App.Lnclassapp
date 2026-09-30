@@ -7,7 +7,7 @@
 >
 > **Cycle optimisation** : un lot = un levier = un chiffre. `Done quand` est toujours chiffré, mesuré avec [`script/ci/billed_minutes`](../../../script/ci/billed_minutes). Les lots sont rangés par gain/risque décroissant. **Le chantier s'arrête dès que les cibles du [memo](memo.md#écart-avec-la-demande) sont atteintes** ; un lot devenu inutile se ferme, il ne se joue pas « par principe ».
 >
-> Pas de PRD : en cycle optimisation, le memo (grill, questions 1 à 6) et l'[ADR-0068](../../decisions/adr/0068-ci-sur-runner-auto-heberge-et-promotions-par-preuve.md) font foi.
+> Pas de PRD : en cycle optimisation, le memo (grill, questions 1 à 6) et l'[ADR-0069](../../decisions/adr/0069-ci-sur-runner-auto-heberge-et-promotions-par-preuve.md) font foi.
 
 ## Graphe
 
@@ -156,7 +156,7 @@ Lots parallèles de la vague 2 (A, C, D) : aucun fichier en commun.
 - [x] `memo.md` : métrique nommée, **valeur avant chiffrée**, volume de données précisé, cible chiffrée
 - [x] Protocole de mesure écrit et reproductible par quelqu'un d'autre
 - [x] Explorer coût rendu : où part réellement le temps (pas une hypothèse)
-- [x] ADR écrit si un contrat change (callbacks contournés, dénormalisation, cache, port modifié) — [ADR-0068](../../decisions/adr/0068-ci-sur-runner-auto-heberge-et-promotions-par-preuve.md)
+- [x] ADR écrit si un contrat change (callbacks contournés, dénormalisation, cache, port modifié) — [ADR-0069](../../decisions/adr/0069-ci-sur-runner-auto-heberge-et-promotions-par-preuve.md)
 - [ ] Bench versionné, produisant la valeur avant
 - [ ] Tests de non-régression fonctionnelle verts **avant** le premier levier
 - [ ] Un lot = un levier = un chiffre

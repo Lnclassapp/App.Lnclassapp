@@ -3,7 +3,7 @@
 # each job playing `CI_GROUP=<group>` (ADR-0064); test/guards/ci_plan_test.rb proves they add up to the whole list.
 # The job named « ci » gathers them: it is the one status a pull request waits for.
 #
-# The jobs run on the self-hosted runner of the owner's machine (ADR-0068, docs/guide/runner-auto-heberge.md): the
+# The jobs run on the self-hosted runner of the owner's machine (ADR-0069, docs/guide/runner-auto-heberge.md): the
 # GitHub minutes of a private repository ran out. Only a promotion (a pull request into Staging or main, a push on
 # them) runs on GitHub, and there it only proves that its tree already got a green « ci »: two minutes, not the suite.
 # Emergency, machine off: the workflow « CI sur GitHub (secours) » plays bin/ci in one GitHub job, by hand.
@@ -26,7 +26,7 @@ env:
   RUBOCOP_CACHE_ROOT: tmp/rubocop
 
 jobs:
-  # Has this exact tree already got a green « ci »? Then nothing below replays it (ADR-0068). On GitHub for a
+  # Has this exact tree already got a green « ci »? Then nothing below replays it (ADR-0069). On GitHub for a
   # promotion, on the self-hosted runner otherwise (a re-run, or a push on Develop that merges what its PR tested).
   # Any doubt (unreadable commit, API error) answers no, and the suite runs. The job itself fails only when it never
   # ran: GitHub gives up after 24 hours without a runner. Nothing then waits another day for the machine: « ci »
@@ -164,7 +164,7 @@ jobs:
 
   # The status the branches wait for keeps its name, « ci ». Green when the proof found the tree already tested,
   # or when every group passed, or when the pull request touches documentation alone. Anything else is red.
-  # A green run that tested for real publishes the proof of its tree, ci-tree-<tree>, kept 30 days (ADR-0068).
+  # A green run that tested for real publishes the proof of its tree, ci-tree-<tree>, kept 30 days (ADR-0069).
   # It runs on GitHub only for a promotion whose tree is proven, or when the proof never got a runner: no job of the
   # machine is then waited for.
   ci:

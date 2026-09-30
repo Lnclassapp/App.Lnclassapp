@@ -104,7 +104,7 @@ class Queries::Catalog::TeamHomeQueryTest < ActiveSupport::TestCase
                  "importing" => "course_tree", "validating" => "essentials" }
     reports = statuses.each_with_index.map do |(status, kind), index|
       report = create_import_report(status:, kind:, imported_by: member)
-      report.source.attach(io: StringIO.new("{}"), filename: "etablissements.json", content_type: "application/json") if index.zero?
+      report.update!(files: [ { "name" => "etablissements.json", "byte_size" => 2, "status" => "pending" } ]) if index.zero?
       updated(report, index.minutes.ago)
     end
 

@@ -29,7 +29,7 @@ db_config: &db_config
   username: dev-rails
   password: dev-rails
   host: localhost
-  # The CI publishes PostgreSQL on a port Docker picks, and passes it as PGPORT (ADR-0068).
+  # The CI publishes PostgreSQL on a port Docker picks, and passes it as PGPORT (ADR-0069).
   port: <%= ENV.fetch("PGPORT", 5432) %>
 
 development:

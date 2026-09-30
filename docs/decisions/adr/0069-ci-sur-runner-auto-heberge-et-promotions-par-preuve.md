@@ -1,4 +1,4 @@
-# ADR-0068 : La CI tourne sur un runner auto-hébergé ; une promotion prouve que son code a déjà été testé
+# ADR-0069 : La CI tourne sur un runner auto-hébergé ; une promotion prouve que son code a déjà été testé
 
 | | |
 |---|---|

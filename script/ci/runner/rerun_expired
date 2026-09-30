@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Re-runs the CI runs GitHub gave up on while the owner's machine was off (ADR-0068, chantier ci-quota).
+# Re-runs the CI runs GitHub gave up on while the owner's machine was off (ADR-0069, chantier ci-quota).
 # GitHub fails a job that waited 24 hours for a self-hosted runner. This script, started by a systemd timer on the
 # machine (script/ci/runner/install_rerun), re-runs such a run once, so that a pull request waits up to 48 hours.
 #

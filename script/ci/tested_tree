@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Tells whether the content a CI run is about to test already got a green « ci » (ADR-0068, chantier ci-quota).
+# Tells whether the content a CI run is about to test already got a green « ci » (ADR-0069, chantier ci-quota).
 # The proof is the tree of the commit, not the commit: a merge commit or a new message changes the commit, never
 # the files. A green « ci » publishes an empty artifact named ci-tree-<tree>; this script looks it up by name.
 #

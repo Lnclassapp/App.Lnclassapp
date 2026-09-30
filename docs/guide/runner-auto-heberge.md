@@ -1,6 +1,6 @@
 # Le runner auto-hébergé de la CI
 
-> Pourquoi il existe : [ADR-0068](../decisions/adr/0068-ci-sur-runner-auto-heberge-et-promotions-par-preuve.md). Le quota de minutes GitHub d'un dépôt privé gratuit ne tient pas la cadence des PR. Les jobs de `bin/ci` tournent donc sur la machine du porteur, et seules les promotions (`Staging`, `main`) consomment des minutes GitHub.
+> Pourquoi il existe : [ADR-0069](../decisions/adr/0069-ci-sur-runner-auto-heberge-et-promotions-par-preuve.md). Le quota de minutes GitHub d'un dépôt privé gratuit ne tient pas la cadence des PR. Les jobs de `bin/ci` tournent donc sur la machine du porteur, et seules les promotions (`Staging`, `main`) consomment des minutes GitHub.
 
 ## Ce qu'il faut
 

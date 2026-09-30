@@ -1,7 +1,7 @@
 require "test_helper"
 load Rails.root.join("script/ci/runner/rerun_expired").to_s unless defined?(RerunExpired)
 
-# ADR-0068 : a pull request waits up to 48 hours for the owner's machine. GitHub fails a job queued 24 hours;
+# ADR-0069 : a pull request waits up to 48 hours for the owner's machine. GitHub fails a job queued 24 hours;
 # the machine re-runs such a run once, if what it tested is still current. A red test is never re-run.
 class CiRerunExpiredTest < ActiveSupport::TestCase
   REPOSITORY = "Lnclassapp/App.Lnclassapp"

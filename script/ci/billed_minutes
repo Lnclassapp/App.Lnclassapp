@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # Counts the GitHub Actions minutes a CI run bills (chantier ci-quota): each job on a GitHub runner is billed by the
 # minute started, so a job of 5 s costs 1 minute and a job of 2 min 01 costs 3. A job on the self-hosted runner
-# (ADR-0068) costs nothing: it is listed, with its duration, and billed 0.
+# (ADR-0069) costs nothing: it is listed, with its duration, and billed 0.
 #
 #   script/ci/billed_minutes <run-id> [<run-id> …]          # reads the jobs with `gh api`
 #   script/ci/billed_minutes jobs.json [more.json …]         # or the saved answer of GET /actions/runs/<id>/jobs

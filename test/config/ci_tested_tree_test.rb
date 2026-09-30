@@ -1,7 +1,7 @@
 require "test_helper"
 load Rails.root.join("script/ci/tested_tree").to_s unless defined?(TestedTree)
 
-# ADR-0068 : a promotion does not replay the suite when the tree it promotes already got a green « ci ».
+# ADR-0069 : a promotion does not replay the suite when the tree it promotes already got a green « ci ».
 # Any doubt (unreadable commit, API error, expired proof) must answer false, so that the suite runs.
 class CiTestedTreeTest < ActiveSupport::TestCase
   REPOSITORY = "Lnclassapp/App.Lnclassapp"

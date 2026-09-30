@@ -1,5 +1,5 @@
 # Pure Ruby, no Rails boot: bin/ci is one list of steps, and the GitHub jobs add up to exactly that list
-# (feuille-de-route §2, garde-fou n° 4; ADR-0064). They run on the self-hosted runner (ADR-0068). A group missing from the workflow, played twice, or a test file
+# (feuille-de-route §2, garde-fou n° 4; ADR-0064). They run on the self-hosted runner (ADR-0069). A group missing from the workflow, played twice, or a test file
 # left out of every part fails here, in the lint group, before any test runs.
 require "minitest/autorun"
 require "yaml"
@@ -65,21 +65,21 @@ class CiPlanTest < Minitest::Test
     end
   end
 
-  # ADR-0068 : the GitHub minutes ran out. A job of this workflow runs on the owner's machine; only the proof and the
+  # ADR-0069 : the GitHub minutes ran out. A job of this workflow runs on the owner's machine; only the proof and the
   # verdict « ci » of a promotion may run on GitHub, and only through that one expression. A new job on ubuntu-latest
   # would reopen the leak: it fails here.
   def test_only_the_proof_and_the_verdict_of_a_promotion_run_on_a_github_runner
     jobs.except("proof", "ci").each do |name, job|
-      assert_equal SELF_HOSTED, job["runs-on"], "le job « #{name} » doit tourner sur le runner auto-hébergé (ADR-0068)"
+      assert_equal SELF_HOSTED, job["runs-on"], "le job « #{name} » doit tourner sur le runner auto-hébergé (ADR-0069)"
     end
     jobs.slice("proof", "ci").each do |name, job|
-      assert_match PROMOTION_ON_GITHUB, job["runs-on"], "« #{name} » : GitHub pour une promotion seulement (ADR-0068)"
+      assert_match PROMOTION_ON_GITHUB, job["runs-on"], "« #{name} » : GitHub pour une promotion seulement (ADR-0069)"
     end
     assert_match(/\(needs\.proof\.result == 'failure' \|\| \(needs\.proof\.outputs\.tested == 'true' &&/, jobs.fetch("ci")["runs-on"],
                  "« ci » : GitHub seulement si la preuve suffit, ou si elle n'a jamais eu de runner")
   end
 
-  # ADR-0068 : on the owner's machine, a job without its own PostgreSQL would fall back on port 5432, the owner's
+  # ADR-0069 : on the owner's machine, a job without its own PostgreSQL would fall back on port 5432, the owner's
   # development server, with the same credentials. Every job that plays a group needing the database has its service
   # container and passes its port to bin/ci.
   def test_a_job_playing_a_database_group_brings_its_own_postgresql
@@ -93,7 +93,7 @@ class CiPlanTest < Minitest::Test
     end
   end
 
-  # ADR-0068 : the jobs run on the owner's machine, on his network. A service container (PostgreSQL, superuser with a
+  # ADR-0069 : the jobs run on the owner's machine, on his network. A service container (PostgreSQL, superuser with a
   # known password) is published on the loopback only, never on every interface.
   def test_service_containers_are_published_on_the_loopback_only
     ports = Dir[File.join(File.dirname(WORKFLOW), "*.yml")].flat_map do |workflow|

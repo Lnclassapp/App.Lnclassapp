@@ -36,8 +36,8 @@ class Finitions::TeamContentTest < ApplicationSystemTestCase
       edit_teams_essential_path(@essential.slug) => [ "essential-modal", "Modifier la fiche essentielle", "essential_name" ],
       new_teams_essential_exercise_path(@essential.slug) => [ "exercise-modal", "Nouvel exercice", "exercise_title" ],
       edit_teams_exercise_path(@exercise.public_id) => [ "exercise-modal", "Modifier l'exercice", "exercise_title" ],
-      new_teams_import_path(kind: "drenas") => [ "import-upload-modal", "Importer des DRENA", "import_io" ],
-      new_teams_import_path(kind: "course_tree") => [ "import-upload-modal", "Importer des cours complets", "import_io" ]
+      new_teams_import_path(kind: "drenas") => [ "import-upload-modal", "Importer des DRENA", "import_files" ],
+      new_teams_import_path(kind: "course_tree") => [ "import-upload-modal", "Importer des cours complets", "import_files" ]
     }.each do |path, (id, title, field)|
       open_in_modal(path)
 

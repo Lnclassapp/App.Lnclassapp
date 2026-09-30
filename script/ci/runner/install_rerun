@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs the service that re-runs the CI runs GitHub failed after 24 hours without a runner (ADR-0068): a pull
+# Installs the service that re-runs the CI runs GitHub failed after 24 hours without a runner (ADR-0069): a pull
 # request then waits up to 48 hours for the owner's machine. Run once, as root, after script/ci/runner/install:
 #
 #   sudo script/ci/runner/install_rerun
@@ -34,7 +34,7 @@ chmod 600 "$ENV_FILE"
 
 cat > /etc/systemd/system/lnclass-ci-rerun.service <<UNIT
 [Unit]
-Description=Lnclass CI : relance des runs expirés faute de runner (ADR-0068)
+Description=Lnclass CI : relance des runs expirés faute de runner (ADR-0069)
 After=network-online.target
 Wants=network-online.target
 

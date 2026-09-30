@@ -162,7 +162,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       click_on t("teams.imports.index.new")
       within("#new-import-menu") { click_on t("import_kinds.schools") }
       within "turbo-frame#modal dialog[open]" do
-        attach_file "import[io]", file.path
+        attach_file "import[files][]", file.path
         click_on t("teams.imports.new.submit")
       end
 

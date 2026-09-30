@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/imports/kinds/_course_tree — aide de l'import des cours complets, dans la modale de téléversement %>
 <%# Rôle : clés acceptées à chaque étage de l'arbre, exemple minimal, noms de niveaux, séries et matières acceptés %>
-<%# ADR  : 0035, 0039 · UDR : 0038 %>
+<%# ADR  : 0035, 0039, 0068 · UDR : 0038, 0055 %>
 <% referential = Queries::Catalog::ReferentialOptionsQuery.new.call %>
 <% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
 <% tree = { "course" => UseCases::Catalog::ImportCourseTree::COURSE_ALIASES.merge(own.("content", "level_name", "series_name", "material_name", "essentials")),
@@ -11,6 +11,7 @@
 <section id="import-help-course_tree" aria-labelledby="import-help-course_tree-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
   <h3 id="import-help-course_tree-title" class="font-medium text-ink"><%= t(".title") %></h3>
   <p class="text-mute"><%= t(".intro_html") %></p>
+  <p id="import-help-multiple" class="text-mute"><%= t(".multiple", files: Entities::Catalog::ImportKind.fetch("course_tree").max_files) %></p>
 
   <div id="import-help-keys" class="space-y-2">
     <% tree.each_with_index do |(node, keys), index| %>
