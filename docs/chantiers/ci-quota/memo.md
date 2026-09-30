@@ -10,7 +10,10 @@
 
 > **En attente.** Le porteur a mis ce chantier au backlog le 2026-09-30. Les lots 0 à D sont écrits et poussés sur `perf/ci-quota` ([PR #106](https://github.com/Lnclassapp/App.Lnclassapp/pull/106), brouillon, non fusionnée). Aucune mesure « après » n'est prise : le runner n'est pas encore installé sur la machine du porteur.
 >
+> **CI GitHub désactivée** le 2026-09-30 à la demande du porteur : le workflow `CI` est désactivé dans *Actions* (réglage GitHub, aucun fichier modifié). D'ici là, `bin/ci` en local avant chaque fusion.
+>
 > **Reprise**, dans l'ordre :
+> 0. Réactiver le workflow : *Actions → CI → ⋯ → Enable workflow*, ou `gh workflow enable ci.yml --repo Lnclassapp/App.Lnclassapp`.
 > 1. Le porteur installe le runner : `sudo script/ci/runner/install`, puis `sudo script/ci/runner/check` doit être vert et les instances **Idle** dans *Settings → Actions → Runners* ([procédure](../../guide/runner-auto-heberge.md)).
 > 2. Si un ancien run de la PR reste « queued » (run 287, 36650665414), forcer son annulation : `gh api -X POST repos/Lnclassapp/App.Lnclassapp/actions/runs/36650665414/force-cancel`. Il bloque le groupe `concurrency` de la PR (voir le [journal](journal.md)).
 > 3. Si le runner est **Idle** mais qu'aucun job ne démarre, vérifier que le quota épuisé ne bloque pas aussi les runners auto-hébergés (*Settings → Billing* de l'organisation).
