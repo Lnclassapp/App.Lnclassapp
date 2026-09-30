@@ -58,7 +58,7 @@
 
 | | |
 |---|---|
-| **Livré le** | *(à la fusion)* |
+| **Livré le** | 2026-09-30 |
 | **PR** | [#108](https://github.com/Lnclassapp/App.Lnclassapp/pull/108), vers `Develop` |
 | **ADR produits** | — |
 | **UDR produits** | — |

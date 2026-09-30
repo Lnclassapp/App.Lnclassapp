@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours — correctif prouvé, PR #108 en revue |
+| **Statut** | livré — PR #108 fusionnée dans `Develop` le 2026-09-30 |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `fix/enrolement-secret-stable` |
 | **Programme** | — |
