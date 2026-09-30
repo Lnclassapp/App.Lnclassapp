@@ -79,6 +79,12 @@ class CiPlanTest < Minitest::Test
                  "« ci » : GitHub seulement si la preuve suffit, ou si elle n'a jamais eu de runner")
   end
 
+  # ADR-0069 : a job queued for the machine keeps its run alive. « ci » of a cancelled run must not queue, or it holds
+  # the concurrency group of the pull request and every newer run waits behind it (seen on PR #106, 2026-09-30).
+  def test_the_verdict_of_a_cancelled_run_does_not_queue_for_the_machine
+    assert_equal "${{ !cancelled() }}", jobs.fetch("ci")["if"]
+  end
+
   # ADR-0069 : on the owner's machine, a job without its own PostgreSQL would fall back on port 5432, the owner's
   # development server, with the same credentials. Every job that plays a group needing the database has its service
   # container and passes its port to bin/ci.

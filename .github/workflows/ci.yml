@@ -169,7 +169,9 @@ jobs:
   # machine is then waited for.
   ci:
     name: ci
-    if: always()
+    # Not always(): a cancelled run (a newer push to the pull request) would still queue « ci » on the machine, and
+    # that queued job would hold the concurrency group, so every newer run of the pull request would wait behind it.
+    if: ${{ !cancelled() }}
     needs: [ proof, changes, checks, tests ]
     runs-on: ${{ fromJSON((needs.proof.result == 'failure' || (needs.proof.outputs.tested == 'true' && ((github.event_name == 'pull_request' && (github.base_ref == 'Staging' || github.base_ref == 'main')) || (github.event_name == 'push' && (github.ref_name == 'Staging' || github.ref_name == 'main'))))) && '["ubuntu-latest"]' || '["self-hosted", "linux", "lnclass"]') }}
     timeout-minutes: 5

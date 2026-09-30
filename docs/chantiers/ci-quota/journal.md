@@ -23,6 +23,7 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - **Le quota a été épuisé par une décision chiffrée d'avance.** L'ADR-0064 et le plan de `ci-rapide` annonçaient « ≈ 2,5 × plus de minutes » et demandaient au porteur de surveiller le quota. Personne ne l'a surveillé, et le quota a tenu moins d'une journée. Une mise en garde écrite dans un plan ne protège de rien : il faut une garde qui échoue. C'est pourquoi `ci_plan_test.rb` refuse désormais un job sur `ubuntu-latest`.
+- **Un run annulé a bloqué tous les suivants pendant 8 heures.** Le job `ci` avait `if: always()` : dans un run annulé par un push plus récent, il se mettait quand même en file pour la machine. Tant que personne ne le prenait, le run restait « queued » et gardait le groupe `concurrency` de la PR : les runs suivants restaient « pending », sans aucun job, puis étaient annulés à leur tour. Correctif : `if: ${{ !cancelled() }}`, et une garde dans `ci_plan_test.rb`. Leçon : sur un runner qui peut être absent, un job `always()` n'est jamais gratuit.
 - **Aucune mesure « après » n'a pu être prise cette nuit.** Le script `install` crée un utilisateur et des services systemd : il ne s'exécute pas dans le conteneur de l'agent, qui l'a refusé à juste titre. Tout ce qui se mesure attend la machine du porteur.
 
 ## Ce qu'on a appris sur la codebase
