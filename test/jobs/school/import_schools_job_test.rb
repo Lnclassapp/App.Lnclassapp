@@ -13,8 +13,8 @@ class School::ImportSchoolsJobTest < ActiveJob::TestCase
 
   test "the real extract of the old application is written, schools and classrooms, and the report is completed" do
     report = create_import_report(kind: "schools")
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, io: StringIO.new(import_sample("schools_legacy_sample").to_json),
-                                                      filename: "schools_abidjan_2.json")
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(import_sample("schools_legacy_sample").to_json),
+                                                      filename: "schools_abidjan_2.json") ])
 
     School::ImportSchoolsJob.perform_now(report.id)
 

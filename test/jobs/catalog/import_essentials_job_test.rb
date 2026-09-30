@@ -10,7 +10,7 @@ class Catalog::ImportEssentialsJobTest < ActiveJob::TestCase
 
   def import(document)
     report = create_import_report(kind: "essentials", imported_by: @author)
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, io: StringIO.new(document.to_json), filename: "fiches.json")
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json), filename: "fiches.json") ])
 
     Catalog::ImportEssentialsJob.perform_now(report.id)
 

@@ -21,8 +21,8 @@ class Catalog::ImportCourseTreePerformanceTest < ActiveSupport::TestCase
 
   test "200 complete courses and their descendants are imported in under two minutes" do
     report = create_import_report(kind: "course_tree")
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, filename: "cours.json",
-                                                      io: StringIO.new(course_tree_document(courses: COURSES).to_json))
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(filename: "cours.json",
+                                                      io: StringIO.new(course_tree_document(courses: COURSES).to_json)) ])
 
     started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     Catalog::ImportCourseTreeJob.perform_now(report.id)

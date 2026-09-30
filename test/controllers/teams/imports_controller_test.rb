@@ -12,8 +12,9 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     Rack::Test::UploadedFile.new(StringIO.new(content), "application/json", original_filename: filename)
   end
 
-  def post_import(io: upload, kind: "schools", as: :turbo_stream)
-    post teams_imports_path, params: { import: { kind:, io: } }, as:
+  # files : un fichier ou une liste (import[files][]), ADR-0068.
+  def post_import(files: upload, kind: "schools", as: :turbo_stream)
+    post teams_imports_path, params: { import: { kind:, files: Array.wrap(files) } }, as:
   end
 
   test "a teacher receives 403 on every action" do
@@ -66,7 +67,8 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#modal", 1
     assert_select "nav", 0
     assert_select "turbo-frame#modal dialog#import-upload-modal"
-    assert_select "input[type=file][name='import[io]'][accept='.json,application/json']"
+    assert_select "input[type=file][name='import[files][]'][accept='.json,application/json']:not([multiple])"
+    assert_select "#import_files_summary", 0
     assert_select "input[type=hidden][name='import[kind]'][value=schools]"
     assert_select "#import_io_hint", text: /20 Mo au plus, avec 5 000 éléments au plus/
   end
@@ -96,24 +98,91 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @member
 
     assert_no_difference -> { Orm::ImportReport.count } do
-      post_import(io: upload("x" * (Entities::Catalog::ImportKind::MAX_BYTES + 1)), as: nil)
+      post_import(files: upload("x" * (Entities::Catalog::ImportKind::MAX_BYTES + 1)), as: nil)
     end
 
     assert_response :unprocessable_entity
-    assert_select "turbo-frame#modal #import_io_error", text: "Fichier dépasse 20 Mo"
+    assert_select "turbo-frame#modal #import_io_error", text: "« ecoles.json » dépasse 20 Mo."
     assert_select "input[type=file][aria-invalid=true]"
   end
 
   test "a file that is not JSON, or no file at all, is refused" do
     sign_in_as @member
 
-    post_import(io: upload(filename: "ecoles.csv"), as: nil)
+    post_import(files: upload(filename: "ecoles.csv"), as: nil)
     assert_response :unprocessable_entity
-    assert_select "#import_io_error", text: "Nom du fichier doit se terminer par .json"
+    assert_select "#import_io_error", text: "« ecoles.csv » n'est pas un fichier .json."
 
-    post_import(io: "pas un fichier", as: nil)
+    post_import(files: "pas un fichier", as: nil)
     assert_response :unprocessable_entity
-    assert_select "#import_io_error", text: /Fichier doit être rempli/
+    assert_select "#import_io_error", text: "Choisissez au moins un fichier .json."
+  end
+
+  # IM-09 : les autres types n'acceptent qu'un fichier, même par une requête forgée.
+  test "IM-09 two files for a single-file kind are refused, and nothing is created" do
+    sign_in_as @member
+
+    assert_no_difference -> { Orm::ImportReport.count } do
+      post_import(files: [ upload, upload(filename: "autres.json") ], as: nil)
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "#import_io_error", text: "Vous avez choisi 2 fichiers : 1 au plus."
+  end
+
+  # IM-07 : les limites d'un envoi de cours complets, vérifiées par le serveur.
+  test "IM-07 51 course files, or 50 MB and a byte in total, are refused without a report" do
+    sign_in_as @member
+    small = ->(index) { upload("{}", filename: "cours-#{index}.json") }
+
+    assert_no_difference -> { Orm::ImportReport.count } do
+      post_import(files: Array.new(51) { small.(it) }, kind: "course_tree", as: nil)
+      assert_select "#import_io_error", text: "Vous avez choisi 51 fichiers : 50 au plus."
+
+      full = [ 20, 20, 10 ].each_with_index.map { |megabytes, index| upload("x" * (megabytes * 1024 * 1024), filename: "#{index}.json") }
+      post_import(files: [ *full, upload("x", filename: "un-octet.json") ], kind: "course_tree", as: nil)
+      assert_select "#import_io_error", text: "Les fichiers font 50,0 Mo au total : 50 Mo au plus."
+    end
+    assert_response :unprocessable_entity
+  end
+
+  # IM-10 : l'autorisation ne change pas avec plusieurs fichiers.
+  test "IM-10 a teacher posting two course files is refused, and nothing is created" do
+    sign_in_as create_teacher
+
+    assert_no_difference -> { Orm::ImportReport.count } do
+      post_import(files: [ upload("{}", filename: "a.json"), upload("{}", filename: "b.json") ], kind: "course_tree", as: nil)
+    end
+    assert_response :forbidden
+  end
+
+  # IM-01 (envoi) : plusieurs fichiers de cours, un rapport, les noms dans l'ordre d'envoi, deux noms identiques distingués.
+  test "IM-01 several course files make one report, their names kept in upload order" do
+    sign_in_as @member
+
+    assert_enqueued_with(job: Catalog::ImportCourseTreeJob) do
+      post_import(files: [ upload("{}", filename: "cours.json"), upload("[]", filename: "a.json"), upload("{ }", filename: "cours.json") ],
+                  kind: "course_tree")
+    end
+
+    report = Orm::ImportReport.sole
+    assert_equal [ "cours.json", "a.json", "cours.json (2)" ], report.files.map { it["name"] }
+    assert_equal [ "{}", "[]", "{ }" ], report.sources.map(&:download)
+    assert_select "turbo-stream[action=prepend][target=imports] tr#import_#{report.public_id}", text: /cours\.json et 2 autres fichiers/
+  end
+
+  # UDR-0055 §3.1 : la modale des cours complets accepte plusieurs fichiers et prépare le résumé de la sélection.
+  test "the course upload form takes several files, with the limits of the kind and the selection summary" do
+    sign_in_as @member
+
+    get new_teams_import_path(kind: "course_tree"), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "form#import-upload-form[data-controller='teams--import-files'][data-teams--import-files-max-files-value='50']"
+    assert_select "form[data-teams--import-files-max-total-bytes-value='#{50 * 1024 * 1024}'][data-teams--import-files-one-text-value='1 fichier · %{size}']"
+    assert_select "input[type=file][multiple][name='import[files][]'][aria-describedby='import_io_hint import_files_summary']"
+    assert_select "#import_io_hint", text: "Jusqu'à 50 fichiers .json, 50 Mo au total, 20 Mo au plus par fichier, 500 cours au plus en tout."
+    assert_select "#import_files_summary[aria-live=polite] #import_files_error[role=alert][hidden]"
+    assert_select "#import-help-multiple", text: /jusqu'à 50 fichiers/
   end
 
   test "a second import of the same kind while one runs is refused with its reason" do
@@ -173,6 +242,43 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /Levels skipped : 2/
     assert_select "#import_errors li", 2
     assert_select "#import_errors li", text: /schools\[4\]\s*Clé obligatoire manquante\./
+  end
+
+  # IM-08, IM-12 (UDR-0055 §3.2, §3.3, §3.4) : le bilan par fichier, l'erreur qui nomme son fichier, le nom de l'import.
+  test "the tracking page of several files lists each file, and each error names its file" do
+    report = create_import_report(
+      kind: "course_tree", status: "completed", total_count: 3, imported_count: 2, error_count: 1, finished_at: Time.current,
+      import_errors: [ { "path" => "courses[0].essentials[1].name", "code" => "blank", "params" => {}, "file" => "b.json" } ],
+      files: [ { "name" => "a.json", "byte_size" => 9, "status" => "read", "imported" => 2, "skipped" => 0, "errors" => 0 },
+               { "name" => "b.json", "byte_size" => 9, "status" => "read", "imported" => 0, "skipped" => 0, "errors" => 1 },
+               { "name" => "c.json", "byte_size" => 9, "status" => "rejected", "reason" => { "code" => "json_invalid", "params" => {} },
+                 "imported" => 0, "skipped" => 0, "errors" => 0 } ]
+    )
+    sign_in_as @member
+
+    get teams_import_path(report.public_id)
+
+    assert_select "p", text: /a\.json et 2 autres fichiers/
+    assert_select "#import_files_title", "Fichiers (3)"
+    assert_select "#import_files li", 3
+    assert_select "#import_files li:nth-child(1)", text: /a\.json\s*2 importés · 0 ignoré · 0 en erreur/
+    assert_select "#import_files li:nth-child(3)", text: /c\.json\s*Refusé\s*Le fichier n'est pas un JSON lisible\./
+    assert_select "#import_errors li", text: /b\.json\s*courses\[0\]\.essentials\[1\]\.name\s*Valeur obligatoire manquante\./
+  end
+
+  test "a report whose files were all refused says so, and lists each file" do
+    report = create_import_report(
+      kind: "course_tree", status: "rejected", finished_at: Time.current,
+      import_errors: [ { "path" => "$", "code" => "json_invalid", "params" => {}, "file" => "a.json" },
+                       { "path" => "$", "code" => "json_invalid", "params" => {}, "file" => "b.json" } ],
+      files: %w[a.json b.json].map { { "name" => it, "byte_size" => 1, "status" => "rejected", "reason" => { "code" => "json_invalid", "params" => {} } } }
+    )
+    sign_in_as @member
+
+    get teams_import_path(report.public_id)
+
+    assert_select "[role=alert]", text: /Aucun fichier n'a pu être lu/
+    assert_select "#import_files li", 2
   end
 
   test "the tracking frame alone answers a request coming from the frame" do

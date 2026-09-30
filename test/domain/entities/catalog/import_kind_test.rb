@@ -30,6 +30,24 @@ module Entities
         assert_equal [ 20 * 1024 * 1024, 1_000, 100 ], [ ImportKind::MAX_BYTES, ImportKind::MAX_ERRORS, ImportKind::BATCH_SIZE ]
       end
 
+      # ADR-0068 : seuls les cours complets acceptent plusieurs fichiers.
+      test "plafonds de l'envoi : 50 fichiers et 50 Mo pour les cours complets, 1 fichier de 20 Mo ailleurs" do
+        course_tree = ImportKind.fetch("course_tree")
+
+        assert_equal [ 50, 50 * 1024 * 1024, true ], [ course_tree.max_files, course_tree.max_total_bytes, course_tree.multiple_files? ]
+        (ImportKind::KINDS - [ "course_tree" ]).each do |kind|
+          assert_equal [ 1, ImportKind::MAX_BYTES, false ], ImportKind.fetch(kind).then { [ it.max_files, it.max_total_bytes, it.multiple_files? ] }
+        end
+      end
+
+      test "un type à cible n'accepte qu'un fichier" do
+        schools = ImportKind.fetch("schools")
+
+        error = assert_raises(ArgumentError) { schools.with(max_files: 2) }
+        assert_match "cible", error.message
+        assert_equal 2, ImportKind.fetch("course_tree").with(max_files: 2).max_files
+      end
+
       test "chaque type applique sa policy" do
         team = Identity::Actor.new(user_id: 1, role: :team)
         teacher = Identity::Actor.new(user_id: 2, role: :teacher)

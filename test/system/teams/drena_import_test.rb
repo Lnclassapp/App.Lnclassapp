@@ -24,7 +24,7 @@ class Teams::DrenaImportTest < ApplicationSystemTestCase
 
   def upload_delivered_file
     within "turbo-frame#modal dialog[open]" do
-      attach_file "import[io]", DELIVERED
+      attach_file "import[files][]", DELIVERED
       click_on "Lancer l'import"
     end
     using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }

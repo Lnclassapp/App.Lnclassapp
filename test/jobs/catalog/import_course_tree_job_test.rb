@@ -10,7 +10,7 @@ class Catalog::ImportCourseTreeJobTest < ActiveJob::TestCase
 
   def import(document)
     report = create_import_report(kind: "course_tree", imported_by: @author)
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, io: StringIO.new(document.to_json), filename: "svt_tle_d.json")
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json), filename: "svt_tle_d.json") ])
 
     Catalog::ImportCourseTreeJob.perform_now(report.id)
 

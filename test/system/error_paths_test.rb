@@ -308,7 +308,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
     click_on t("teams.imports.index.new")
     within("#new-import-menu") { click_on t("import_kinds.#{kind}") }
     within("#import-upload-modal") do
-      attach_file "import[io]", import_file(kind, filename)
+      attach_file "import[files][]", import_file(kind, filename)
       click_on t("teams.imports.new.submit")
     end
   end

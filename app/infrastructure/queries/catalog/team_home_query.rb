@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::TeamHomeQuery
 # Rôle : accueil équipe (TR-09, CA-25) : compteurs, niveaux et leurs séries, total du barème, derniers cours, exercices et imports
-# ADR  : 0026, 0034, 0035, 0039, 0041, 0058 · UDR : 0018, 0045
+# ADR  : 0026, 0034, 0035, 0039, 0041, 0058, 0068 · UDR : 0018, 0045
 module Queries
   module Catalog
     class TeamHomeQuery
@@ -37,8 +37,8 @@ module Queries
       end
 
       def recent_imports
-        Orm::ImportReport.left_joins(source_attachment: :blob).order(updated_at: :desc, id: :desc).limit(RECENT)
-                         .pluck(:public_id, :kind, :status, "active_storage_blobs.filename", :updated_at)
+        Orm::ImportReport.order(updated_at: :desc, id: :desc).limit(RECENT)
+                         .pluck(:public_id, :kind, :status, ImportReportsQuery::FILENAME, :updated_at)
                          .map { |values| ImportRow.new(*values) }
       end
 

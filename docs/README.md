@@ -28,6 +28,7 @@ Lnclass est une plateforme éducative (LMS) en Rails 8, construite en **architec
 | [`decisions/udr/`](decisions/udr/) | UI/UX Decision Records — les choix d'interface, écrits pour être appliqués par un agent | Avant d'écrire une vue |
 | [`blueprints/`](blueprints/) | Patterns de code par couche : entity, port, use case, repository, query… | Au moment d'écrire le fichier |
 | [`chantiers/`](chantiers/) | **Le travail lui-même** : un dossier par chantier (memo, PRD, plan de lots, journal) | En permanence pendant un chantier |
+| [`contenus/`](contenus/) | Les contenus pédagogiques importables : progressions DPFC (cours), prompt de rédaction des fiches essentielles et des exercices, leçons déjà traitées | Avant d'importer des cours ou de rédiger une leçon |
 | [`design/`](design/) | Design system et bibliothèque de composants | En construction — voir [`design/README.md`](design/README.md) |
 | [`archives/`](archives/) | La v1 gelée et les documents historiques | Rarement, pour retrouver une intention passée |
 

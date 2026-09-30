@@ -1,9 +1,18 @@
-<%# 🌐 UI · teams/imports/new — téléversement d'un fichier d'import, servi dans le frame « modal » %>
-<%# Rôle : fichier .json, rappel des limites, aide du type si son lot la fournit ; échec re-rendu en 422 ; titre d'onglet par type %>
-<%# ADR  : 0039, 0047 · UDR : 0006, 0054 %>
+<%# 🌐 UI · teams/imports/new — téléversement d'un envoi d'import, servi dans le frame « modal » %>
+<%# Rôle : 1 fichier .json, ou jusqu'à N pour les cours complets avec le résumé de la sélection ; limites, aide du type ; 422 %>
+<%# ADR  : 0039, 0047, 0068 · UDR : 0006, 0054, 0055 · Stimulus : teams--import-files (sélection multiple seulement) %>
 <% definition = Entities::Catalog::ImportKind.fetch(@form.kind) %>
+<% multiple = definition.multiple_files? %>
 <% help = "teams/imports/kinds/#{@form.kind}" %>
-<% file_error = (@form.errors.full_messages_for(:io) + @form.errors.full_messages_for(:filename)).first %>
+<% file_error = @form.errors.messages_for(:files).first %>
+<% files_controller = if multiple
+     { controller: "teams--import-files", teams__import_files_max_files_value: definition.max_files,
+       teams__import_files_max_total_bytes_value: definition.max_total_bytes,
+       teams__import_files_max_file_bytes_value: Entities::Catalog::ImportKind::MAX_BYTES,
+       **import_files_summary_texts.transform_keys { "teams__import_files_#{it.underscore}_value" } }
+   else
+     {}
+   end %>
 <%= turbo_frame_tag "modal" do %>
   <%= ui_modal title: t(".title", kind: t("import_kinds.#{@form.kind}")), id: "import-upload-modal", open: true,
                document_title: page_title(t(".page_titles.#{@form.kind}")) do |modal| %>
@@ -11,7 +20,8 @@
       <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
       <%= ui_button t(".submit"), type: :submit, form: "import-upload-form", icon: "arrow-up-tray" %>
     <% end %>
-    <%= form_with model: @form, scope: :import, url: teams_imports_path, id: "import-upload-form", multipart: true, class: "space-y-5" do |form| %>
+    <%= form_with model: @form, scope: :import, url: teams_imports_path, id: "import-upload-form", multipart: true, class: "space-y-5",
+                  data: files_controller do |form| %>
       <%= form.hidden_field :kind %>
       <% if @form.errors[:kind].any? || @form.errors[:base].any? %>
         <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
@@ -20,16 +30,35 @@
         </div>
       <% end %>
       <div class="space-y-1.5">
-        <%= form.label :io, class: "block text-sm font-medium text-ink" do %>
-          <%= t(".file") %><span class="text-error" aria-hidden="true"> *</span>
+        <%= form.label :files, for: "import_files", class: "block text-sm font-medium text-ink" do %>
+          <%= t(multiple ? ".files" : ".file") %><span class="text-error" aria-hidden="true"> *</span>
         <% end %>
-        <%= form.file_field :io, accept: ".json,application/json", required: true,
-                            "aria-invalid": ("true" if file_error), "aria-describedby": [ "import_io_hint", ("import_io_error" if file_error) ].compact.join(" "),
+        <%= form.file_field :files, multiple:, id: "import_files", name: "import[files][]", accept: ".json,application/json",
+                            required: true, include_hidden: false,
+                            data: ({ teams__import_files_target: "input", action: "change->teams--import-files#refresh" } if multiple),
+                            "aria-invalid": ("true" if file_error),
+                            "aria-describedby": [ "import_io_hint", ("import_files_summary" if multiple), ("import_io_error" if file_error) ].compact.join(" "),
                             class: class_names("block w-full cursor-pointer rounded-ln border bg-white text-sm text-ink file:mr-4 file:min-h-tap file:cursor-pointer file:border-0 file:bg-mist file:px-4 file:font-medium",
                                                file_error ? "border-error" : "border-line") %>
         <p id="import_io_hint" class="text-sm text-mute">
-          <%= t(".limits", megabytes: Dtos::Catalog::ImportUploadInput::MAX_MEGABYTES, roots: number_with_delimiter(definition.max_roots)) %>
+          <% if multiple %>
+            <%= t(".limits_multiple", files: definition.max_files, total: definition.max_total_bytes / Dtos::Catalog::ImportUploadInput::MEGABYTE,
+                                      megabytes: Dtos::Catalog::ImportUploadInput::MAX_MEGABYTES, roots: number_with_delimiter(definition.max_roots)) %>
+          <% else %>
+            <%= t(".limits", megabytes: Dtos::Catalog::ImportUploadInput::MAX_MEGABYTES, roots: number_with_delimiter(definition.max_roots)) %>
+          <% end %>
         </p>
+        <% if multiple %>
+          <div id="import_files_summary" aria-live="polite" class="space-y-2 text-sm" data-teams--import-files-target="summary">
+            <p id="import_files_count" class="font-medium text-ink" data-teams--import-files-target="count"></p>
+            <ul id="import_files_list" hidden class="max-h-40 divide-y divide-line overflow-y-auto rounded-ln border border-line bg-white"
+                data-teams--import-files-target="list"></ul>
+            <p id="import_files_error" role="alert" hidden class="flex items-center gap-1.5 font-medium text-error"
+               data-teams--import-files-target="error">
+              <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><span data-teams--import-files-target="message"></span>
+            </p>
+          </div>
+        <% end %>
         <% if file_error %>
           <p id="import_io_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
             <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= file_error %>

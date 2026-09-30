@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/imports/_status — suivi d'un import, frame rechargé toutes les 3 s tant que l'import tourne %>
-<%# Rôle : phase et progression pendant l'import ; à la fin, compteurs, détails et erreurs ; rejet : son motif %>
-<%# ADR  : 0039, 0056 · UDR : 0006, 0043 · Stimulus : teams--import-status · libellés propres au type : report_text %>
+<%# 🌐 UI · teams/imports/_status — suivi d'un import, frame rechargé chaque seconde tant que l'import tourne %>
+<%# Rôle : phase et progression pendant l'import ; à la fin, compteurs, détails, bilan par fichier et erreurs ; rejet : son motif %>
+<%# ADR  : 0039, 0056, 0068 · UDR : 0006, 0043, 0055 · Stimulus : teams--import-status · libellés propres au type : report_text %>
 <%# Pas de src sur le frame : Turbo le chargerait dès son arrivée ; le contrôleur le pose au premier rechargement. %>
 <%= turbo_frame_tag "import_status",
                     data: { controller: "teams--import-status", teams__import_status_url_value: teams_import_path(import.public_id) } do %>
@@ -38,11 +38,17 @@
           </ul>
         </div>
       <% end %>
+      <% if import.files.any? %>
+        <%= render "teams/imports/files", import: %>
+      <% end %>
       <% if import.import_errors.any? %>
         <%= render "teams/imports/import_errors", import: %>
       <% end %>
     <% when "rejected" %>
-      <div role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".rejected") %></div>
+      <div role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(import.file_count > 1 ? ".rejected_files" : ".rejected") %></div>
+      <% if import.file_count > 1 %>
+        <%= render "teams/imports/files", import: %>
+      <% end %>
       <%= render "teams/imports/import_errors", import: %>
     <% when "failed" %>
       <div role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= report_text(import, "failed") %></div>
