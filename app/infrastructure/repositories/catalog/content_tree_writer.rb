@@ -6,16 +6,16 @@ module Repositories
     class ContentTreeWriter
       include Ports::Catalog::ContentTreeWriterPort
 
-      NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::Exercise" => %w[public_id],
-                       "Orm::RichTextRow" => [] }.freeze
+      NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::RichTextRow" => [] }.freeze
+      EXERCISE_COLUMNS = %w[id public_id essential_id title description exercise_type position author_id status created_at updated_at].freeze
       QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type created_at updated_at].freeze
       ANSWER_COLUMNS = %w[question_id position content correct created_at updated_at].freeze
       # Format texte de COPY : ces quatre caractères seraient lus comme séparateurs ou échappements.
       COPY_ESCAPES = { "\\" => "\\\\", "\t" => "\\t", "\n" => "\\n", "\r" => "\\r" }.freeze
       COPY_SPECIALS = /[\\\t\n\r]/
 
-      # Une table après l'autre, parents d'abord : les ids créés sont relus par clé naturelle (slug, public_id), ceux des
-      # questions sont réservés d'avance. Questions et propositions s'écrivent par COPY (ADR-0068 §4).
+      # Une table après l'autre, parents d'abord : les ids des cours et des fiches sont relus par slug, ceux des exercices et
+      # des questions sont réservés d'avance. Exercices, questions et propositions s'écrivent par COPY (ADR-0068 §4).
       def write(author_id:, at:, courses: [], essentials: [], exercises: [])
         @author_id = author_id
         @at = at
@@ -28,10 +28,11 @@ module Repositories
         write_rich_texts("Orm::Essential", essentials, essential_ids)
 
         exercises += essentials.flat_map { |essential| essential.exercises.map { |node| node.with(essential_id: essential_ids.fetch(essential.slug)) } }
-        exercise_ids = ids_by(insert(Orm::Exercise, exercises.map { |node| exercise_row(node) }), "public_id")
+        exercise_ids = reserve_ids(Orm::Exercise, exercises.size)
+        copy("exercises", EXERCISE_COLUMNS, exercises.zip(exercise_ids).map { |node, id| exercise_row(id, node) })
 
-        questions = exercises.flat_map { |exercise| exercise.questions.map { |node| [ exercise_ids.fetch(exercise.public_id), node ] } }
-        question_ids = reserve_question_ids(questions.size)
+        questions = exercises.zip(exercise_ids).flat_map { |exercise, exercise_id| exercise.questions.map { |node| [ exercise_id, node ] } }
+        question_ids = reserve_ids(Orm::Question, questions.size)
         copy("questions", QUESTION_COLUMNS, questions.zip(question_ids).map { |(exercise_id, node), id| question_row(id, exercise_id, node) })
         answers = questions.zip(question_ids).flat_map { |(_, question), id| question.answers.map { |node| answer_row(id, node) } }
         copy("answers", ANSWER_COLUMNS, answers)
@@ -52,11 +53,11 @@ module Repositories
 
       def ids_by(inserted, key) = inserted.to_h { |row| [ row.fetch(key), row.fetch("id") ] }
 
-      # Une requête pour tous les ids ; croissants, dans l'ordre des questions, comme l'aurait donné un INSERT.
-      def reserve_question_ids(count)
+      # Une requête pour tous les ids d'une table ; croissants, dans l'ordre des lignes, comme l'aurait donné un INSERT.
+      def reserve_ids(model, count)
         return [] if count.zero?
 
-        connection.select_values("SELECT nextval(#{connection.quote(Orm::Question.sequence_name)}) FROM generate_series(1, #{count})").sort
+        connection.select_values("SELECT nextval(#{connection.quote(model.sequence_name)}) FROM generate_series(1, #{count})").sort
       end
 
       # COPY … FROM STDIN sur la connexion d'ActiveRecord, donc dans la transaction du lot : contraintes et index
@@ -99,9 +100,10 @@ module Repositories
           author_id: @author_id, status: "draft" }
       end
 
-      def exercise_row(node)
-        { public_id: node.public_id, essential_id: node.essential_id, title: node.title, description: node.description,
-          exercise_type: node.exercise_type, position: node.position, author_id: @author_id, status: "draft" }
+      # Dans l'ordre d'EXERCISE_COLUMNS.
+      def exercise_row(id, node)
+        [ id, node.public_id, node.essential_id, node.title, node.description, node.exercise_type, node.position, @author_id, "draft",
+          @copy_at, @copy_at ]
       end
 
       # Dans l'ordre de QUESTION_COLUMNS.

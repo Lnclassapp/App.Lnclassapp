@@ -113,9 +113,8 @@ module Repositories
         Port::QuestionNode.new(position:, content:, explanation:, question_type:, answers:)
       end
 
-      def exercise_with(questions, essential_id:)
-        Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id:, title: "Échappement", description: nil,
-                               exercise_type: "fixation", position: 9, questions:)
+      def exercise_with(questions, essential_id:, description: nil, public_id: SecureRandom.base58(14), position: 9)
+        Port::ExerciseNode.new(public_id:, essential_id:, title: "Échappement", description:, exercise_type: "fixation", position:, questions:)
       end
 
       # ADR-0068 §5 : un caractère mal échappé au format texte de COPY corromprait une ligne.
@@ -126,10 +125,11 @@ module Repositories
         questions = [ question(tricky, explanation: nil, answers:), question("Deuxième", position: 2, explanation: "Pour\tla\nraison \\x") ]
         at = Time.zone.parse("2026-09-25 10:00:00.123456789").in_time_zone("Pacific/Auckland")
 
-        counts = @writer.write(author_id: @author.id, at:, exercises: [ exercise_with(questions, essential_id: fiche.id) ])
+        counts = @writer.write(author_id: @author.id, at:, exercises: [ exercise_with(questions, essential_id: fiche.id, description: tricky) ])
 
         assert_equal({ courses: 0, essentials: 0, exercises: 1, questions: 2, answers: 4 }, counts)
         exercise = fiche.exercises.find_by!(position: 9)
+        assert_equal [ "Échappement", tricky, "draft", @author.id ], [ exercise.title, exercise.description, exercise.status, exercise.author_id ]
         written = exercise.questions.order(:position)
         assert_equal [ [ 1, tricky, nil, "true_false" ], [ 2, "Deuxième", "Pour\tla\nraison \\x", "true_false" ] ],
                      written.pluck(:position, :content, :explanation, :question_type)
@@ -143,16 +143,18 @@ module Repositories
       # élément par élément, et le cours refusé n'est jamais écrit à moitié.
       test "une contrainte refusée par COPY lève l'erreur d'ActiveRecord et n'écrit rien du cours" do
         fiche = create_essential
-        refusals = {
-          ActiveRecord::RecordNotUnique => [ question("Q1"), question("Q1 bis") ],
-          ActiveRecord::CheckViolation => [ question("Q", question_type: "inconnu") ],
-          ActiveRecord::ValueTooLong => [ question("Q", answers: [ Port::AnswerNode.new(position: 1, content: "x" * 501, correct: true) ]) ]
-        }
-        refusals.each do |error, questions|
+        twin = SecureRandom.base58(14)
+        refusals = [
+          [ ActiveRecord::RecordNotUnique, [ exercise_with([], essential_id: fiche.id, public_id: twin),
+                                             exercise_with([], essential_id: fiche.id, public_id: twin, position: 10) ] ],
+          [ ActiveRecord::RecordNotUnique, [ exercise_with([ question("Q1"), question("Q1 bis") ], essential_id: fiche.id) ] ],
+          [ ActiveRecord::CheckViolation, [ exercise_with([ question("Q", question_type: "inconnu") ], essential_id: fiche.id) ] ],
+          [ ActiveRecord::ValueTooLong, [ exercise_with([ question("Q", answers: [ Port::AnswerNode.new(position: 1, content: "x" * 501, correct: true) ]) ],
+                                                        essential_id: fiche.id) ] ]
+        ]
+        refusals.each do |error, exercises|
           assert_raises(error) do
-            ActiveRecord::Base.transaction(requires_new: true) do
-              @writer.write(author_id: @author.id, at: @at, exercises: [ exercise_with(questions, essential_id: fiche.id) ])
-            end
+            ActiveRecord::Base.transaction(requires_new: true) { @writer.write(author_id: @author.id, at: @at, exercises:) }
           end
         end
 
