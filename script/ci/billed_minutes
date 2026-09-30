@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
-# Counts the GitHub Actions minutes a CI run bills (chantier ci-quota): each job is billed by the minute started,
-# so a job of 5 s costs 1 minute and a job of 2 min 01 costs 3.
+# Counts the GitHub Actions minutes a CI run bills (chantier ci-quota): each job on a GitHub runner is billed by the
+# minute started, so a job of 5 s costs 1 minute and a job of 2 min 01 costs 3. A job on the self-hosted runner
+# (ADR-0068) costs nothing: it is listed, with its duration, and billed 0.
 #
 #   script/ci/billed_minutes <run-id> [<run-id> …]          # reads the jobs with `gh api`
 #   script/ci/billed_minutes jobs.json [more.json …]         # or the saved answer of GET /actions/runs/<id>/jobs
@@ -33,7 +34,8 @@ runs = ARGV.map do |source|
   jobs = listed.filter_map do |job|
     duration = seconds(job["started_at"], job["completed_at"]) or next
     work = job["steps"].find { |step| step["name"].start_with?("Run bin/ci") }
-    { name: job["name"], duration:, billed: [ (duration / 60.0).ceil, 1 ].max,
+    hosted = job["runner_group_name"] == "GitHub Actions"
+    { name: job["name"], duration:, billed: hosted ? [ (duration / 60.0).ceil, 1 ].max : 0, hosted:,
       work: work && seconds(work["started_at"], work["completed_at"]) }
   end
   abort "❌ #{source}: no job ran." if jobs.empty?
@@ -44,7 +46,10 @@ runs = ARGV.map do |source|
 
   puts "Run #{source}: #{jobs.size} jobs · wall #{run[:wall]} s · jobs #{run[:duration]} s · " \
        "bin/ci #{run[:work]} s · billed #{run[:billed]} min"
-  jobs.each { |job| puts format("  %-28s %5d s  %2d min  bin/ci %s", job[:name], job[:duration], job[:billed], job[:work] || "-") }
+  jobs.each do |job|
+    puts format("  %-28s %-11s %5d s  %2d min  bin/ci %s", job[:name], job[:hosted] ? "GitHub" : "auto-hébergé",
+                job[:duration], job[:billed], job[:work] || "-")
+  end
   run
 end
 

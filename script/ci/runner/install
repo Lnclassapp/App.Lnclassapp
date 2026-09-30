@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+# Installs the self-hosted GitHub Actions runner of Lnclass on the owner's Ubuntu machine (ADR-0068, chantier ci-quota).
+# Run once, as root; running it again is harmless (it repairs and re-registers):
+#
+#   sudo script/ci/runner/install --token <registration token> [--instances 2]
+#
+# The token comes from GitHub: repository → Settings → Actions → Runners → New self-hosted runner (valid one hour).
+# It is passed to config.sh and never written to disk by this script.
+#
+# What it does, and nothing else:
+#   1. system packages the jobs need (libpq-dev, a C toolchain for native gems, Google Chrome, gh, jq);
+#   2. a system user `github-runner`: no sudo, member of `docker` (service containers need it), home /opt/github-runner;
+#   3. the human homes closed to other users (chmod 750), so a job cannot read the owner's files;
+#   4. /opt/hostedtoolcache, where ruby/setup-ruby expects its prebuilt Rubies;
+#   5. N runner instances (default 2), labels `self-hosted, linux, lnclass`, each a systemd service.
+set -euo pipefail
+
+REPOSITORY_URL="https://github.com/Lnclassapp/App.Lnclassapp"
+RUNNER_USER="github-runner"
+RUNNER_HOME="/opt/github-runner"
+TOOL_CACHE="/opt/hostedtoolcache"
+LABELS="lnclass"
+
+token=""
+instances=2
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --token) token="${2:-}"; shift 2 ;;
+    --instances) instances="${2:-}"; shift 2 ;;
+    *) echo "❌ Option inconnue : $1" >&2; exit 64 ;;
+  esac
+done
+
+fail() { echo "❌ $*" >&2; exit 1; }
+say() { echo "== $*"; }
+
+[ "$(id -u)" -eq 0 ] || fail "Lancer avec sudo."
+[ -n "$token" ] || fail "--token manquant : GitHub → dépôt → Settings → Actions → Runners → New self-hosted runner."
+[[ "$instances" =~ ^[1-9]$ ]] || fail "--instances doit être un nombre de 1 à 9."
+grep -q '^ID=ubuntu' /etc/os-release || fail "Ubuntu attendu (ADR-0068)."
+[ "$(uname -m)" = "x86_64" ] || fail "Machine x86_64 attendue."
+command -v docker >/dev/null || fail "Docker manquant : https://docs.docker.com/engine/install/ubuntu/"
+
+say "Paquets système"
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -qq
+apt-get install -y -qq --no-install-recommends \
+  build-essential ca-certificates curl git gnupg jq libffi-dev libpq-dev libyaml-dev pkg-config tar >/dev/null
+
+if ! command -v google-chrome >/dev/null; then
+  say "Google Chrome"
+  curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor --yes -o /usr/share/keyrings/google-chrome.gpg
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" \
+    > /etc/apt/sources.list.d/google-chrome.list
+  apt-get update -qq && apt-get install -y -qq google-chrome-stable >/dev/null
+fi
+
+if ! command -v gh >/dev/null; then
+  say "GitHub CLI"
+  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+    > /etc/apt/sources.list.d/github-cli.list
+  apt-get update -qq && apt-get install -y -qq gh >/dev/null
+fi
+
+say "Utilisateur $RUNNER_USER"
+id "$RUNNER_USER" >/dev/null 2>&1 || useradd --system --create-home --home-dir "$RUNNER_HOME" --shell /bin/bash "$RUNNER_USER"
+usermod -aG docker "$RUNNER_USER"
+gpasswd -d "$RUNNER_USER" sudo >/dev/null 2>&1 || true
+chmod 750 "$RUNNER_HOME"
+
+say "Dossiers personnels fermés aux autres utilisateurs"
+while IFS=: read -r name _ uid _ _ home _; do
+  if [ "$uid" -ge 1000 ] && [ "$uid" -lt 60000 ] && [ -d "$home" ] && [ "$name" != "$RUNNER_USER" ]; then
+    if [ $(( 0$(stat -c %a "$home") & 07 )) -ne 0 ]; then
+      chmod o-rwx "$home" && echo "   $home : accès des autres utilisateurs retiré"
+    fi
+  fi
+done < /etc/passwd
+
+install -d -o "$RUNNER_USER" -g "$RUNNER_USER" -m 755 "$TOOL_CACHE"
+
+say "Runner GitHub Actions"
+release=$(curl -fsSL https://api.github.com/repos/actions/runner/releases/latest)
+version=$(jq -r '.tag_name | ltrimstr("v")' <<<"$release")
+archive="actions-runner-linux-x64-${version}.tar.gz"
+digest=$(jq -r --arg name "$archive" '.assets[] | select(.name == $name) | .digest // empty' <<<"$release")
+cache="$RUNNER_HOME/$archive"
+[ -f "$cache" ] || curl -fsSL -o "$cache" "https://github.com/actions/runner/releases/download/v${version}/${archive}"
+if [ -n "$digest" ]; then
+  echo "${digest#sha256:}  $cache" | sha256sum --check --quiet || { rm -f "$cache"; fail "Empreinte SHA-256 de $archive incorrecte."; }
+fi
+chown "$RUNNER_USER:$RUNNER_USER" "$cache"
+
+for index in $(seq 1 "$instances"); do
+  dir="$RUNNER_HOME/runner-$index"
+  name="$(hostname)-lnclass-$index"
+  say "Instance $index ($name)"
+
+  if [ -f "$dir/.runner" ]; then
+    (cd "$dir" && ./svc.sh stop >/dev/null 2>&1 || true; ./svc.sh uninstall >/dev/null 2>&1 || true)
+  fi
+  install -d -o "$RUNNER_USER" -g "$RUNNER_USER" -m 750 "$dir"
+  sudo -u "$RUNNER_USER" tar -xzf "$cache" -C "$dir"
+  "$dir/bin/installdependencies.sh" >/dev/null
+
+  # The runner reads .env at start: setup-ruby's prebuilt Rubies only work from /opt/hostedtoolcache.
+  printf 'RUNNER_TOOL_CACHE=%s\nAGENT_TOOLSDIRECTORY=%s\nLANG=C.UTF-8\n' "$TOOL_CACHE" "$TOOL_CACHE" > "$dir/.env"
+  chown "$RUNNER_USER:$RUNNER_USER" "$dir/.env"
+
+  sudo -u "$RUNNER_USER" "$dir/config.sh" --unattended --replace \
+    --url "$REPOSITORY_URL" --token "$token" --name "$name" --labels "$LABELS" --work _work
+  (cd "$dir" && ./svc.sh install "$RUNNER_USER" >/dev/null && ./svc.sh start >/dev/null)
+done
+
+say "Vérification"
+"$(dirname "$0")/check"

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Tells whether the self-hosted runner of Lnclass can take a job (ADR-0068). Exits 1 on the first missing piece
+# of the list, after printing all of them. Run it as the owner or as root, any time:
+#
+#   script/ci/runner/check
+set -uo pipefail
+
+RUNNER_USER="github-runner"
+RUNNER_HOME="/opt/github-runner"
+TOOL_CACHE="/opt/hostedtoolcache"
+failures=0
+
+ok() { echo "✅ $*"; }
+ko() { echo "❌ $*"; failures=$((failures + 1)); }
+as_runner() { if [ "$(id -un)" = "$RUNNER_USER" ]; then "$@"; else sudo -n -u "$RUNNER_USER" "$@"; fi; }
+
+id "$RUNNER_USER" >/dev/null 2>&1 && ok "utilisateur $RUNNER_USER" || ko "utilisateur $RUNNER_USER absent : lancer script/ci/runner/install"
+id -nG "$RUNNER_USER" 2>/dev/null | grep -qw sudo && ko "$RUNNER_USER est dans le groupe sudo" || ok "$RUNNER_USER sans sudo"
+id -nG "$RUNNER_USER" 2>/dev/null | grep -qw docker && ok "$RUNNER_USER dans le groupe docker" || ko "$RUNNER_USER hors du groupe docker"
+
+if as_runner docker info >/dev/null 2>&1; then ok "Docker joignable par $RUNNER_USER"
+else ko "Docker injoignable par $RUNNER_USER (service arrêté, ou vérification à relancer avec sudo)"; fi
+
+for tool in google-chrome gh jq git; do
+  command -v "$tool" >/dev/null && ok "$tool : $("$tool" --version 2>/dev/null | head -1)" || ko "$tool manquant"
+done
+dpkg -s libpq-dev >/dev/null 2>&1 && ok "libpq-dev" || ko "libpq-dev manquant"
+[ -d "$TOOL_CACHE" ] && [ "$(stat -c %U "$TOOL_CACHE")" = "$RUNNER_USER" ] && ok "$TOOL_CACHE" || ko "$TOOL_CACHE absent ou pas à $RUNNER_USER"
+
+while IFS=: read -r name _ uid _ _ home _; do
+  if [ "$uid" -ge 1000 ] && [ "$uid" -lt 60000 ] && [ -d "$home" ] && [ "$name" != "$RUNNER_USER" ]; then
+    [ $(( 0$(stat -c %a "$home") & 07 )) -eq 0 ] && ok "$home fermé aux autres utilisateurs" || ko "$home lisible par $RUNNER_USER"
+  fi
+done < /etc/passwd
+
+instances=$(ls -d "$RUNNER_HOME"/runner-* 2>/dev/null | wc -l)
+if [ "$instances" -eq 0 ]; then ko "aucune instance du runner dans $RUNNER_HOME"; fi
+for dir in "$RUNNER_HOME"/runner-*; do
+  [ -d "$dir" ] || continue
+  service=$(cat "$dir/.service" 2>/dev/null)
+  if [ -n "$service" ] && systemctl is-active --quiet "$service"; then ok "service $service actif"
+  else ko "service de $dir inactif : (cd $dir && sudo ./svc.sh start)"; fi
+done
+
+echo "ℹ️  $(nproc) cœurs, $(free -g | awk '/^Mem:/ { print $2 }') Go de mémoire, $instances instance(s)"
+echo "ℹ️  « Idle » dans GitHub → dépôt → Settings → Actions → Runners confirme que GitHub voit le runner."
+
+[ "$failures" -eq 0 ] && echo "Le runner peut prendre un job." || { echo "$failures point(s) à corriger."; exit 1; }
