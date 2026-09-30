@@ -93,6 +93,8 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
 | **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2. Rattaché à la V4 s'il reprend ([feuille de route §5](refonte-application/feuille-de-route.md#chantiers-hors-plan)) |
+| [`app-android`](app-android/memo.md) | Deux apps Android en Hotwire Native, « Lnclass » (élèves) et « Lnclass Teacher » ; le site reste la référence, direction et équipe sur le web. Grill fait (15 questions) et [ADR-0070](../decisions/adr/0070-deux-apps-android-hotwire-native-le-site-reste-la-reference.md) proposé ; mis en attente par le porteur le 2026-09-30. À la reprise : PRD, UDR, plan, demande du numéro D-U-N-S |
+| `notifications-push` | Notifications poussées dans les deux apps : quatre événements, résumés quotidiens pour l'enseignant, heures calmes, textes sans donnée personnelle. Pas de dossier encore : ses règles sont les questions 5 à 11 du [grill d'`app-android`](app-android/memo.md#ce-que-le-grill-a-révélé). S'ouvre après `app-android` |
 
 ## Cycle de vie
 

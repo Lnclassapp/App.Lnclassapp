@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | décision — **en attente** (backlog, porteur, 2026-09-30) |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `ccr-9b7287af-3kx7cj` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
 | **Programme** | — *(hors plan de `refonte-application` ; la PWA reste en V4, `installation-pwa`)* |
@@ -21,11 +21,12 @@ L'installation depuis le navigateur (PWA) qui donnerait au moins l'icône n'est 
 - **Élève**, sur un téléphone Android, souvent d'entrée de gamme et en 3G/4G : de l'installation depuis le Play Store jusqu'à la session d'exercice.
 - **Enseignant**, sur un téléphone Android : suivi de ses classes et assignation du contenu.
 - **Direction d'établissement** : reste sur la web app responsive, sans application.
-- **Équipe** : reste sur le web *(hypothèse à confirmer au grill)*.
+- **Équipe** : reste sur le web ; voit l'usage des apps dans son pilotage.
+- **Direction d'établissement**, côté usage : voit combien d'élèves et d'enseignants de son établissement utilisent l'app.
 
 ## Pourquoi maintenant
 
-Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (décision du porteur, 2026-09-30). Le cadrer maintenant sert à fixer la stratégie mobile par écrit (Android d'abord, Hotwire Native, établissements sur le web, PWA et iOS plus tard) et à trancher tôt les décisions longues : compte Play Store, public mineur, paiement, version d'Android minimale.
+Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (décision du porteur, 2026-09-30). Le cadrer maintenant sert à fixer la stratégie mobile par écrit (Android d'abord, Hotwire Native, établissements sur le web, PWA et iOS plus tard) et à trancher tôt les décisions longues : compte Play Store, public mineur, paiement, version d'Android minimale. La décision est consignée dans l'[ADR-0070](../../decisions/adr/0070-deux-apps-android-hotwire-native-le-site-reste-la-reference.md) (proposé, en attente). PRD, UDR et plan s'écriront à la reprise.
 
 ## Hors périmètre
 
@@ -33,10 +34,12 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 
 - Une application iOS.
 - L'installation depuis le navigateur (PWA), qui reste au chantier `installation-pwa` de la V4.
-- Une application pour la direction d'établissement ou pour l'équipe.
+- Une application pour la direction d'établissement ou pour l'équipe, et des notifications pour elles : **chantier de suivi** (porteur, grill du 2026-09-30).
+- La notification de test envoyée par l'équipe : reportée au même chantier de suivi.
 - Le rôle Parent, écarté du plan le 2026-09-22.
 - Réécrire des écrans en natif : les écrans restent ceux du site.
 - Le paiement dans l'application.
+- Les notifications poussées et leur indicateur : chantier **`notifications-push`**, ouvert après celui-ci, qui reprend les réponses aux questions 5 à 11 du grill.
 
 ## Ce que le grill a révélé
 
@@ -44,12 +47,41 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| Une app pour élèves et enseignants, ou deux ? | **Deux apps** : « Lnclass » pour les élèves, « Lnclass Teacher » pour les enseignants, comme le plan de juin | Deux fiches Play Store, deux identifiants d'application, deux coques à publier et à tenir à jour. Il faut décider ce que fait chaque app quand un compte de l'autre rôle s'y connecte |
+| Un compte connecté dans l'app qui n'est pas la sienne (enseignant dans l'app élèves, élève dans l'app enseignants, direction ou équipe dans l'une ou l'autre) ? | **Refuser et rediriger** : message qui nomme la bonne app avec un lien vers sa fiche Play Store ; direction et équipe renvoyées vers le site | Le serveur doit savoir de quelle app vient la requête et en tenir compte à la connexion : c'est une règle d'identité nouvelle, pas seulement un affichage. Le refus n'intervient **qu'après** un PIN correct, sinon l'app révèle le rôle d'un numéro à n'importe qui |
+| L'inscription se fait-elle dans les apps, et où s'ouvre un lien de classe reçu sur WhatsApp ? | **Inscription dans chaque app pour son rôle ; les liens s'ouvrent dans l'app installée**, sinon dans le navigateur | Le site doit publier une déclaration d'association de domaine pour les deux apps, et chaque lien a une app propriétaire : lien ou code de classe → app élèves ; lien de parrainage entre enseignants et inscription par code d'établissement → app enseignants ; invitation de direction ou d'équipe → navigateur. Un lien ouvert dans la mauvaise app retombe sur la règle de la question 2 |
+| Un élève dont le téléphone est trop ancien pour l'app (le site accepte Android 6, ADR-0051) ? | **Le site reste le repli complet et la référence** ; l'app vise la version minimale de Hotwire Native | **Aucune fonction n'est réservée à l'app** : tout ce que l'app fait doit exister sur le site, en moins confortable. La version minimale exacte est à mesurer avant l'ADR ; le budget de poids de l'ADR-0051 continue de s'appliquer aux pages, qui sont les mêmes dans l'app |
+| Quelles fonctions natives dans la première version, alors que le site n'a pas de notifications ? | **Avec notifications poussées (FCM)**, en exception assumée à la règle précédente : un élève sur le site ne les reçoit pas | Le chantier traverse un second contexte (`communication`) : enregistrement de l'appareil de chaque compte, envoi par un service externe (Firebase, compte Google, clé secrète), désinscription. Il faut un ADR (nouvelle dépendance, nouvelle table, nouveau port) et un amendement de l'ADR-0045, qui exclut aujourd'hui toute notification hors de l'application. Le chantier `canal-whatsapp` et celui-ci doivent se répartir les messages. Le consentement d'élèves mineurs devient une question |
+| Quels événements notifient dans la première version ? | **Les quatre** : nouvelle assignation (élèves de la classe), élève qui rejoint la classe (enseignant), résultats d'exercice (enseignant), rappel d'exercice non terminé (élève) | Les déclencheurs vivent dans trois contextes (`classroom` pour l'assignation et l'adhésion, `assessment` pour la clôture de session, un job planifié pour les rappels) mais l'envoi reste dans `communication`. Deux événements peuvent exploser en volume (une classe de 80 élèves qui rejoint en septembre, 80 résultats d'un même exercice) : il faut une règle de regroupement. Le rappel exige une règle d'heure et de fréquence. Le périmètre de la première version grossit nettement |
+| Quelle règle de volume et d'horaire (80 élèves qui rejoignent ou terminent le même exercice) ? | **Résumés et horaires** : l'enseignant reçoit un résumé par classe et par jour ; l'élève reçoit l'assignation tout de suite et au plus un rappel par jour, entre 17 h et 20 h ; rien entre 21 h et 7 h (heure d'Abidjan) | Un envoi différé et groupé, donc un job quotidien et une file d'attente des événements à résumer. Une assignation faite à 22 h part à 7 h. Le rappel s'arrête dès que l'exercice est terminé ou que l'assignation est archivée. Pas d'écran de préférences : l'utilisateur coupe les notifications par les réglages Android |
+| Un téléphone partagé (deux frères, ou une mère enseignante et son fils) : à qui vont les notifications ? | **Au dernier compte connecté dans chaque app** : la déconnexion désinscrit l'appareil, la connexion suivante le réinscrit | L'inscription de l'appareil suit la session, pas le compte. Tout ce qui ferme une session doit aussi désinscrire l'appareil : déconnexion, changement de PIN ou de numéro qui ferme les autres sessions (ADR-0055), compte désactivé ou anonymisé. Un appareil que le service d'envoi déclare invalide est supprimé. La mère et le fils, chacun dans son app, ne se gênent pas |
+| Âge des élèves, et politique « Familles » du Play Store (public de moins de 13 ans) ? | **Les élèves ont 14 ans et plus** en Côte d'Ivoire (porteur) | L'app élèves se déclare pour un public de 13 ans et plus : la politique « Familles » ne s'applique pas. Les élèves restent en partie mineurs (14 à 17 ans) : politique de confidentialité et déclaration des données collectées (numéro, appareil pour les notifications) restent obligatoires sur la fiche |
+| Que montre une notification sur l'écran verrouillé d'un téléphone partagé ? | **Sobre** : ni nom d'élève ni note (« Nouvel exercice en Maths », « 34 résultats sur Fonctions — 2nde C ») ; le détail s'affiche dans l'app | Les textes de notification sont des gabarits fermés, traduits, sans donnée personnelle. Un test vérifie qu'aucun nom ni score n'entre dans le texte envoyé au service externe, qui n'en voit donc jamais |
+| La session expire après 30 jours d'inactivité (ADR-0050) : l'élève décroché ne reçoit plus de rappels ? | **L'appareil reste inscrit jusqu'à une déconnexion volontaire**, un changement de PIN ou de numéro, ou un compte désactivé ; toucher la notification ramène à la connexion si la session a expiré | Précise la question 8 : l'inscription de l'appareil suit la **connexion**, pas la durée de session. Durées de session de l'ADR-0050 inchangées. Il faut un plafond de rappels par assignation, sinon un élève parti reçoit un rappel par jour indéfiniment |
+| L'équipe et la direction, sans app, voient-elles quelque chose ? | **Oui, trois choses** : l'équipe voit dans son pilotage le nombre de comptes connectés par chaque app et de notifications envoyées, et peut s'envoyer une notification de test ; la direction voit combien d'élèves et d'enseignants de son établissement utilisent l'app. **Des notifications et des apps pour l'équipe et la direction : un autre chantier** | Chaque connexion doit retenir l'app d'où elle vient (même détection que la question 2), pour compter l'usage. Le pilotage de l'équipe (ADR-0062) et l'espace direction en lecture seule (ADR-0065) gagnent un indicateur : amendements et UDR à écrire. L'envoi de test exige un appareil inscrit pour un compte équipe, alors que l'équipe n'a pas d'app : tranché à la question suivante |
+| Vers quoi part la notification de test de l'équipe, qui n'a pas d'app et est refusée dans les deux ? | **Reportée** au chantier de suivi (apps et notifications de l'équipe) | L'équipe garde ses deux indicateurs (comptes par app, notifications envoyées) ; la vérification de l'envoi en recette se fait avec les comptes de recette élève et enseignant, sans écran dédié |
+| Le chantier (deux apps, liens, notifications, indicateurs) tient-il dans une seule PR ? | **Non : deux chantiers.** `app-android` : les deux apps, la connexion par app, l'inscription et les liens, les indicateurs d'usage. Puis `notifications-push` : le service d'envoi, les quatre événements, les résumés et les horaires | Les réponses aux questions 5 à 11 deviennent le point de départ du memo de `notifications-push`, qui aura son ADR (service externe, table des appareils) et l'amendement de l'ADR-0045. L'indicateur « notifications envoyées » de l'équipe part avec lui. `app-android` n'ajoute plus de service externe côté serveur |
+| Avec quel compte Google Play publier ? | **Un compte d'organisation** au nom de la société Lnclass | Il faut un numéro D-U-N-S, dont le délai d'obtention est variable : à demander dès la reprise du chantier, avant tout code. Nom d'éditeur « Lnclass » sur les deux fiches ; pas de test fermé imposé par Google, mais une recette sur téléphones réels reste exigée par ce chantier. Les clés de signature des deux apps appartiennent à ce compte |
 
 ## Cas limites identifiés
 
-- …
+- Un enseignant ou un élève qui se connecte dans l'app de l'autre rôle : refusé **après** un PIN correct, jamais avant, pour ne pas révéler le rôle d'un numéro.
+- Un compte direction ou équipe qui se connecte dans une app : refusé, renvoyé vers le site.
+- Un lien de classe ouvert alors que seule l'app enseignants est installée : il s'ouvre dans le navigateur, pas dans la mauvaise app.
+- Un lien reçu avant l'installation de l'app : il s'ouvre dans le navigateur, le parcours reste complet.
+- Un téléphone trop ancien pour l'app : l'élève reste sur le site, qui garde toutes les fonctions.
+- Un enseignant équipé d'un iPhone : il reste sur le site ; aucune app iOS dans ce chantier.
+- Un élève rattaché à plusieurs classes, un enseignant de plusieurs établissements : l'app montre exactement ce que montre le site, puisqu'elle affiche les mêmes pages ; aucune règle propre à l'app.
+- Une mise à jour d'écran côté site apparaît dans l'app sans nouvelle publication ; une modification de la coque (onglets, icône, liens déclarés) exige une nouvelle version sur le Play Store.
+- Une connexion dans l'app puis dans le navigateur du même téléphone : deux sessions distinctes, chacune comptée à son origine dans les indicateurs.
+- Un compte anonymisé ou désactivé alors qu'il est connecté dans l'app : la session tombe, l'app revient à la connexion.
 
 ## Questions encore ouvertes
 
-- …
+- Version minimale d'Android exigée par Hotwire Native Android et par la vue web système : à mesurer, puis à comparer au plancher de l'ADR-0051.
+- Délai d'obtention du numéro D-U-N-S et structure juridique qui porte le compte Google Play.
+- Comment le serveur reconnaît-il chaque app de façon fiable (l'en-tête d'identification se falsifie) ? Le refus de la question 2 n'est pas une barrière de sécurité, seulement un aiguillage : à écrire dans l'ADR.
+- Définition exacte d'un « utilisateur de l'app » pour les indicateurs (connecté au moins une fois, ou actif dans les 30 derniers jours).
+- Onglets natifs de chaque app : quelles destinations du shell de chaque rôle (UDR-0006) deviennent des onglets.
+- Nom, icône et couleurs des deux apps (le plan de juin proposait un fond bleu pour les élèves, blanc pour les enseignants).
+- Le paiement : aucune fonction payante dans l'app ; si un accès payant revient, la facturation de Google Play est à étudier avant.
