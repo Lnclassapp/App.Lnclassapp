@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré *(2026-09-30, PR #114 vers `Develop`)* |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `fix/totp-emetteur-par-environnement` |
 | **Programme** | — |
@@ -69,11 +69,11 @@ Lot unique, aucune migration, aucun fichier partagé : `plan.md` est retiré du 
 - [x] Test lancé et **rouge**, pour la bonne raison (message vérifié) *(3 échecs « Expected "Lnclass (Develop)", Actual "Lnclass" », aucune erreur ; le cas `production` déjà vert)*
 - [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme *(dépôt du second facteur, infrastructure ; commit `dc2bb8d4`)*
 - [x] Test au vert · suite du contexte borné au vert *(identity + intégration : 471 tests ; suite complète : 2 576 tests, 0 échec ; RuboCop et Brakeman sans remarque)*
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours *(challenger : émetteur « Lnclass » en `production` ; activation complète puis reconnexion avec un code valide, 303 vers `/teams`, en `Develop` et en `production`)*
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal *(aucune en base ; réactivation manuelle du porteur notée au journal)*
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application *(2026-09-30 : `Develop` → « Lnclass (Develop):0700000000 », `production` → « Lnclass:0700000000 » ; code faux → 422 « Code incorrect. », même QR code)*
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
 ## Contrat d'exécution
 
