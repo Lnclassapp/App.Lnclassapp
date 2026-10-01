@@ -16,7 +16,9 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
   setup do
     @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"))
     @student = create_student(classroom: @classroom, first_name: "Aya")
-    essential = create_essential(course: create_course(material: create_material(name: "SVT", category: "science")))
+    # UDR-0013, amendement du 2026-10-01 : le cours assigné est du niveau de la classe de l'élève.
+    essential = create_essential(course: create_course(material: create_material(name: "SVT", category: "science"),
+                                                       level: @classroom.level))
     @meiose = create_exercise(essential:, title: "La méiose")
     mitose = create_exercise(essential:, title: "La mitose")
     create_assignment(classroom: @classroom, assignable: essential)

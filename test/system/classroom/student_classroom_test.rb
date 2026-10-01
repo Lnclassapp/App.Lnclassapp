@@ -7,7 +7,9 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"),
                                   level: create_level(name: "Tle"), series: create_series(name: "D"))
     @student = create_student(classroom: @classroom, first_name: "Aya")
-    @course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"))
+    # UDR-0013, amendement du 2026-10-01 : le cours assigné est du niveau et de la série de la classe.
+    @course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"),
+                            level: @classroom.level, series: @classroom.series)
     create_essential(course: @course)
     create_assignment(classroom: @classroom, assignable: @course)
     create_assignment(classroom: @classroom, assignable: create_course(name: "Écologie"), status: "archived")
