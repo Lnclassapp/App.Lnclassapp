@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_30_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_01_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -732,6 +732,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_30_090000) do
     t.check_constraint "referral_token::text ~ '^[0-9a-f]{12}$'::text", name: "teacher_profiles_referral_token_format"
   end
 
+  create_table "teacher_school_departures", force: :cascade do |t|
+    t.datetime "detached_at", null: false
+    t.bigint "detached_by_id", null: false
+    t.datetime "reinstated_at"
+    t.bigint "reinstated_by_id"
+    t.bigint "school_id", null: false
+    t.bigint "teacher_id", null: false
+    t.index ["detached_by_id"], name: "index_teacher_school_departures_on_detached_by_id"
+    t.index ["reinstated_by_id"], name: "index_teacher_school_departures_on_reinstated_by_id"
+    t.index ["school_id", "detached_at"], name: "index_teacher_school_departures_on_school_id_and_detached_at"
+    t.index ["teacher_id", "school_id"], name: "index_teacher_school_departures_one_open", unique: true, where: "(reinstated_at IS NULL)"
+    t.check_constraint "(reinstated_at IS NULL) = (reinstated_by_id IS NULL)", name: "teacher_school_departures_reinstated_together"
+  end
+
   create_table "teacher_schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.boolean "primary", default: false, null: false
@@ -847,6 +861,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_30_090000) do
   add_foreign_key "teacher_classrooms", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_profiles", "materials", on_delete: :restrict
   add_foreign_key "teacher_profiles", "users", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "schools", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "detached_by_id", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "reinstated_by_id", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_schools", "schools", on_delete: :restrict
   add_foreign_key "teacher_schools", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "totp_credentials", "users", on_delete: :cascade

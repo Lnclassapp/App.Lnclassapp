@@ -21,6 +21,10 @@ module Entities
       test "le profil trace l'ajout, le changement et le retrait de la photo (ADR-0060)" do
         %w[profile.photo_changed profile.photo_removed].each { assert AuditAction.valid?(it), it }
       end
+
+      test "la direction trace le retrait et la réintégration d'un enseignant (ADR-0071)" do
+        %w[teacher.detached teacher.reinstated].each { assert AuditAction.valid?(it), it }
+      end
     end
   end
 end

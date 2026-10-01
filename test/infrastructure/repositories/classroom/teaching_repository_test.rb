@@ -27,6 +27,22 @@ module Repositories
         assert_equal [ second.id ], @repository.classroom_ids_for(teacher_id: @teacher.id)
         assert Orm::ClassroomAssignment.exists?(assignment.id)
       end
+
+      # ADR-0071 §4.5 : un enseignant retiré perd ses classes de cet établissement, et garde les autres.
+      test "withdraw_all_in_school retire les déclarations des classes de cet établissement seulement" do
+        school, other = create_school, create_school
+        first, second = create_classroom(school:), create_classroom(school:, school_year: "2025-2026")
+        elsewhere = create_classroom(school: other)
+        [ first, second, elsewhere ].each { |classroom| @repository.declare(teacher_id: @teacher.id, classroom_id: classroom.id, at: @at) }
+        colleague = create_teacher(classrooms: [ first ])
+        assignment = create_assignment(classroom: first, by: @teacher)
+
+        assert_equal 2, @repository.withdraw_all_in_school(teacher_id: @teacher.id, school_id: school.id)
+        assert_equal [ elsewhere.id ], @repository.classroom_ids_for(teacher_id: @teacher.id)
+        assert_equal [ first.id ], @repository.classroom_ids_for(teacher_id: colleague.id)
+        assert Orm::ClassroomAssignment.exists?(assignment.id)
+        assert_equal 0, @repository.withdraw_all_in_school(teacher_id: @teacher.id, school_id: school.id)
+      end
     end
   end
 end

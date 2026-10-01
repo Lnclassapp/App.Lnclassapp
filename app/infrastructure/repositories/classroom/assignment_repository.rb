@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
 # Rôle : assignations d'une classe ; résout la ressource (cours, fiche, exercice) par son type, sans association polymorphe
-# ADR  : 0035, 0048
+# ADR  : 0035, 0048, 0071
 module Repositories
   module Classroom
     class AssignmentRepository
@@ -41,6 +41,14 @@ module Repositories
         Orm::ClassroomAssignment.where(id:, status: "active")
                                 .update_all(status: "archived", archived_by_id:, archived_at: at, updated_at: at)
         true
+      end
+
+      # Un seul UPDATE (ADR-0071 §6) : statut, archived_at et archived_by_id ensemble, la contrainte
+      # classroom_assignments_archived_at_iff_archived tient.
+      def archive_all_by_teacher_in_school(teacher_id:, school_id:, archived_by_id:, at:)
+        Orm::ClassroomAssignment.where(assigned_by_id: teacher_id, status: "active",
+                                       classroom_id: Orm::Classroom.where(school_id:).select(:id))
+                                .update_all(status: "archived", archived_by_id:, archived_at: at, updated_at: at)
       end
 
       def resolve_assignable(type:, key:)
