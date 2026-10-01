@@ -4,6 +4,7 @@ module UseCases
   module Classroom
     # CN-02, CN-03, CN-04, CN-09, ADR-0059 : « + » du bloc « Classes par niveau » crée la classe suivante du couple
     # niveau/série, nommée comme au barème, avec les règles d'« Ajouter une classe », et la trace.
+    # GD-08, GD-11, GD-12, ADR-0071 §4.2 : la direction le fait aussi, sur son seul établissement actif.
     class AddLevelClassroomTest < ActiveSupport::TestCase
       Clock = Data.define(:now)
       NOW = Time.utc(2026, 9, 28, 10)
@@ -69,8 +70,8 @@ module UseCases
 
       setup do
         @classrooms = FakeClassrooms.new(names: [ "6ème 1", "6ème 2", "6ème 3", "6ème 4", "Tle D 1", "Tle D 3" ])
-        @schools = FakeSchools.new([ school("lycee"), school("ferme", status: "inactive"), school("brouillon", status: "draft"),
-                                     school("college", cycle: "first") ])
+        @schools = FakeSchools.new([ school("lycee"), school("ferme", status: "inactive", id: 6), school("brouillon", status: "draft", id: 8),
+                                     school("college", cycle: "first", id: 9), school("autre", id: 12) ])
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
         @taxonomy = FakeTaxonomy.new
@@ -79,7 +80,7 @@ module UseCases
 
       def add(actor: @team, school_public_id: "lycee", level_slug: "6eme", series_slug: nil)
         AddLevelClassroom.new(classrooms: @classrooms, schools: @schools, taxonomy: @taxonomy, audit_log: @audit,
-                              policy: Policies::Classroom::ManageClassroomPolicy.new, transaction: @transaction,
+                              policy: Policies::School::ManageSchoolStructurePolicy.new, transaction: @transaction,
                               clock: Clock.new(NOW))
                          .call(actor:, school_public_id:, level_slug:, series_slug:)
       end
@@ -149,11 +150,41 @@ module UseCases
         assert_equal :not_found, add(school_public_id: "inconnu").code
       end
 
-      test "hors de l'équipe : :forbidden, rien n'est lu ni écrit" do
-        teacher = Entities::Identity::Actor.new(user_id: 3, role: :teacher, school_id: 5)
+      test "un établissement inconnu reste :not_found, quel que soit l'acteur (la policy lit l'établissement)" do
+        assert_equal :not_found, add(actor: nil, school_public_id: "inconnu").code
+        assert_equal :not_found, add(actor: direction(of: 5), school_public_id: "inconnu").code
+      end
 
-        assert_equal :forbidden, add(actor: teacher).code
-        assert_equal :forbidden, add(actor: nil, school_public_id: "inconnu").code
+      test "ni élève, ni enseignant, ni visiteur, ni direction sans établissement : :forbidden, rien n'est écrit" do
+        [ Entities::Identity::Actor.new(user_id: 3, role: :teacher, school_id: 5), Entities::Identity::Actor.new(user_id: 4, role: :student),
+          direction(of: nil), nil ].each do |actor|
+          assert_equal :forbidden, add(actor:).code, actor.inspect
+        end
+        assert_empty @classrooms.created
+        assert_empty @audit.events
+      end
+
+      def direction(of:) = Entities::Identity::Actor.new(user_id: 11, role: :school_admin, school_id: of)
+
+      test "GD-08 : la direction de son établissement actif ajoute la « 6ème 5 », tracée à son nom" do
+        result = add(actor: direction(of: 5))
+
+        assert result.success?
+        assert_equal [ 5, "6ème 5" ], [ @classrooms.created.sole.school_id, result.value.name ]
+        assert_equal [ [ "school.changed", 11, 5, { change: "classroom_added", classroom_public_id: "cls0", name: "6ème 5" } ] ],
+                     @audit.events.map { it.values_at(:action, :actor_id, :subject_id, :metadata) }
+      end
+
+      test "GD-11 : la direction de A sur l'établissement B : :forbidden, rien n'est écrit ni tracé" do
+        assert_equal :forbidden, add(actor: direction(of: 5), school_public_id: "autre").code
+        assert_empty @classrooms.created
+        assert_empty @audit.events
+      end
+
+      test "GD-12 : la direction d'un établissement inactif ou en brouillon : :forbidden (et non le conflit de l'équipe)" do
+        assert_equal :forbidden, add(actor: direction(of: 6), school_public_id: "ferme").code
+        assert_equal :forbidden, add(actor: direction(of: 8), school_public_id: "brouillon").code
+        assert_equal :conflict, add(school_public_id: "ferme").code
         assert_empty @classrooms.created
         assert_empty @audit.events
       end

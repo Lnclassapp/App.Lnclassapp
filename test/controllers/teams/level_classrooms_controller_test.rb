@@ -2,6 +2,7 @@ require "test_helper"
 
 # CN-02 à CN-07, CN-09, ADR-0059, UDR-0046 : depuis le bloc « Classes par niveau » de la fiche, l'équipe ajoute la
 # classe suivante d'un niveau ou retire la dernière ; le bloc est remplacé en Turbo Stream et la fiche re-demandée.
+# GD-13 (ADR-0071 §4.2) : sous ManageSchoolStructurePolicy, l'équipe garde ses deux gestes, inactif compris pour « − ».
 class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member
@@ -149,5 +150,23 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     delete remove_path(Orm::Classroom.find_by!(name: "6ème 5"))
     assert_equal tc("destroy.done", name: "6ème 5"), flash[:notice]
+  end
+
+  test "GD-13 : l'équipe ajoute puis retire une classe ; « − » reste permis sur un établissement désactivé" do
+    sign_in_as @member
+
+    post add_path, params: { level: "6eme" }, as: :turbo_stream
+    assert_response :success
+    delete remove_path(Orm::Classroom.find_by!(school: @school, name: "6ème 5")), as: :turbo_stream
+    assert_response :success
+    assert_equal 4, Orm::Classroom.where(school: @school).count
+
+    @school.update!(status: "inactive")
+    delete remove_path(@sixths.last), as: :turbo_stream
+    assert_response :success
+    assert_not Orm::Classroom.exists?(@sixths.last.id)
+    post add_path, params: { level: "6eme" }, as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("errors.school_inactive"))
   end
 end
