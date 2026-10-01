@@ -4,10 +4,7 @@
 module UseCases
   module School
     class JoinSchoolWithCode
-      PENDING = "pending".freeze
-
-      # join_requests : lecteur de la demande de l'enseignant, `status_for(teacher_id:)` → objet à `status` | nil, de tout
-      # état (Queries::School::JoinRequestsQuery, ADR-0071 §4.5) ; seule une demande en attente va à la policy.
+      # join_requests : Ports::School::JoinRequestRepositoryPort ; seule une demande en attente va à la policy (ADR-0071 §4.5).
       def initialize(schools:, departures:, join_requests:, audit_log:, policy:, transaction:, clock:)
         @schools = schools
         @departures = departures
@@ -21,7 +18,8 @@ module UseCases
       # dto : Dtos::School::SchoolJoinInput.
       # → Result(Entities::School::School) | :forbidden | :invalid | :conflict (rattachement refusé par la base)
       def call(actor:, dto:)
-        allowed = @policy.call(actor:, pending_request: actor&.teacher? ? pending_request(actor) : nil)
+        pending_request = (@join_requests.pending_for(teacher_id: actor.user_id) if actor&.teacher?)
+        allowed = @policy.call(actor:, pending_request:)
         return allowed if allowed.failure?
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) unless dto.valid?
 
@@ -32,11 +30,6 @@ module UseCases
       end
 
       private
-
-      def pending_request(actor)
-        request = @join_requests.status_for(teacher_id: actor.user_id)
-        request if request&.status == PENDING
-      end
 
       # Code inconnu, établissement inactif ou en brouillon, établissement qui l'a retiré : la même erreur, rien n'est révélé.
       def joinable?(actor, school)

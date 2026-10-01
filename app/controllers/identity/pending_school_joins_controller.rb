@@ -36,7 +36,7 @@ module Identity
     def join
       UseCases::School::JoinSchoolWithCode.new(
         schools: Repositories::School::SchoolRepository.new, departures: Repositories::School::TeacherDepartureRepository.new,
-        join_requests: Queries::School::JoinRequestsQuery.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+        join_requests: Repositories::School::JoinRequestRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
         policy: Policies::School::JoinSchoolWithCodePolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
       )
     end

@@ -40,15 +40,17 @@ module UseCases
         end
       end
 
-      # The reader of the teacher's request (Queries::School::JoinRequestsQuery#status_for): a Status of any state.
+      # JoinRequestRepositoryPort#pending_for: the teacher's request only while it is pending, as the repository reads it.
       class FakeJoinRequests
+        include Ports::School::JoinRequestRepositoryPort
+
         attr_reader :asked
 
         def initialize(status) = @status = status
 
-        def status_for(teacher_id:)
+        def pending_for(teacher_id:)
           @asked = teacher_id
-          @status && Status.new(school_name: "Lycée Classique", status: @status)
+          Status.new(school_name: "Lycée Classique", status: @status) if @status == "pending"
         end
       end
 

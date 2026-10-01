@@ -107,8 +107,9 @@ Index unique partiel `(teacher_id, school_id) WHERE reinstated_at IS NULL` : un 
 | `Ports::School::SchoolRepositoryPort` | `detach_teacher(teacher_id:, school_id:)` (**nouveau**) | `Integer` (lignes `teacher_schools` supprimées) |
 | `Ports::Classroom::TeachingRepositoryPort` | `withdraw_all_in_school(teacher_id:, school_id:)` (**nouveau**) | `Integer` (déclarations supprimées) |
 | `Ports::Classroom::AssignmentRepositoryPort` | `archive_all_by_teacher_in_school(teacher_id:, school_id:, archived_by_id:, at:)` (**nouveau**) | `Integer` (devoirs archivés) |
+| `Ports::School::JoinRequestRepositoryPort` | `pending_for(teacher_id:)` (**nouveau**, ajouté après le Lot D, 2026-10-01) | `Entities::School::JoinRequest \| nil` (la demande de l'enseignant tant qu'elle est en attente) |
 
-Réutilisés sans changement : `UserRepositoryPort#find_by_public_id`, `SchoolRepositoryPort#find_by_id`, `#find_by_school_code`, `#attach_teacher`, `#primary_school_id_for`, `JoinRequestRepositoryPort` (lecture de la demande : `Queries::School::JoinRequestsQuery#status_for`, déjà lue par l'écran d'attente ; elle rend un `Status` de tout état, et l'appelant ne passe à `JoinSchoolWithCodePolicy` que celle dont le statut est `pending`).
+Réutilisés sans changement : `UserRepositoryPort#find_by_public_id`, `SchoolRepositoryPort#find_by_id`, `#find_by_school_code`, `#attach_teacher`, `#primary_school_id_for`, `Queries::School::JoinRequestsQuery#status_for` pour l'**affichage** de l'écran d'attente (une lecture) ; le use case lit la demande en attente par le port, jamais par une query.
 
 Entité nouvelle `Entities::School::TeacherDeparture` (`id, teacher_id, school_id, detached_by_id, detached_at, reinstated_by_id, reinstated_at`, `open?`). `Entities::Identity::AuditAction::ALL` gagne `teacher.detached` et `teacher.reinstated`.
 
