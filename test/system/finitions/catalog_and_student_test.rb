@@ -15,7 +15,8 @@ module Finitions
       create_course(name: "La cellule", level: @tle, material: @svt)
       @essential = create_essential(course: @course, name: "La méiose")
       @exercise = create_exercise(essential: @essential, title: "Méiose et ADN")
-      @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37")
+      # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est de Tle, le niveau des cours du catalogue.
+      @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", level: @tle)
       @student = create_student(classroom: @classroom, first_name: "Aya")
       create_assignment(classroom: @classroom, assignable: @essential)
     end

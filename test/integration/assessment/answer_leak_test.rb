@@ -29,7 +29,8 @@ class Assessment::AnswerLeakTest < ActionDispatch::IntegrationTest
         assert_includes html, "Explication de la question 1."
       end
 
-      html = show_exercise_as(create_student)
+      # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de l'exercice.
+      html = show_exercise_as(create_student_for(@exercise.essential.course))
 
       assert_includes html, "Méiose"
       assert_includes html, "Proposition 1"

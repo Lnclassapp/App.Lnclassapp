@@ -12,7 +12,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
                                 exercise_type: "evaluation")
     @exercise.questions.first.update!(explanation: "La méiose compte deux divisions.")
     @correct_ids = Orm::Answer.where(question: @exercise.questions, correct: true).pluck(:id)
-    @student = create_student
+    @student = create_student_for(course)
   end
 
   def scope = "assessment.exercises"

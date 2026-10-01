@@ -23,7 +23,7 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
   end
 
   setup do
-    course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"))
+    @course = course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"))
     @essential = create_essential(course:, name: "La méiose")
     @exercise = create_exercise(essential: @essential, title: "Méiose", description: "Deux divisions successives.")
   end
@@ -31,7 +31,8 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
   def scope = "assessment.exercises"
 
   test "l'élève voit sa progression et les questions sans marque, puis « Commencer » l'amène à la première question" do
-    student = create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
+    student = create_student_for(@course)
     create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 50)
     sign_in_as student
 
@@ -58,7 +59,8 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
   end
 
   test "sur un téléphone, la page de l'élève tient dans la largeur" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
+    sign_in_as create_student_for(@course)
 
     with_mobile_viewport do
       visit exercise_path(@exercise.public_id)

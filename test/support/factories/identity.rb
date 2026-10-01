@@ -19,6 +19,12 @@ module Factories
       end
     end
 
+    # UDR-0013, amendement du 2026-10-01 : un élève ne lit que les cours de son niveau. Élève d'une classe de l'année du
+    # niveau (et de la série) du cours donné, un Orm::Course.
+    def create_student_for(course, **attributes)
+      create_student(classroom: create_classroom(level: course.level, series: course.series), **attributes)
+    end
+
     def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], **attributes)
       create_user(role: "teacher", **attributes).tap do |teacher|
         Orm::TeacherProfile.create!(user: teacher, material:, onboarding_completed_at: (Time.current if onboarded))

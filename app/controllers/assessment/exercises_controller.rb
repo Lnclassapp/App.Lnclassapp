@@ -3,9 +3,12 @@
 # ADR  : 0026, 0028, 0054 · UDR : 0006, 0007, 0021 · sécurité n° 29
 module Assessment
   class ExercisesController < AuthenticatedController
+    include ReadsOwnLevel
+
     def show
       exercise = Repositories::Assessment::ExerciseRepository.new.find_by_public_id(public_id: params[:public_id])
       return render_not_found if exercise.nil?
+      return if refuse_out_of_level(exercise_public_id: exercise.public_id)
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: exercise),
                     success: ->(_) { load_page(exercise) }

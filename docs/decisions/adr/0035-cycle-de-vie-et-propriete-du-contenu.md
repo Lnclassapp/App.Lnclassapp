@@ -138,3 +138,17 @@ Le refus répond `:not_found`, pas `:forbidden` : on ne confirme pas l'existence
   - les tests des deux repositories ;
   - `test/controllers/teams/{courses,essentials}_controller_test.rb` : parcours en base, journal, 403, 404, 422, repli sans Turbo ;
   - `test/system/catalog/course_catalog_test.rb` : clic dans le menu, page fusionnée.
+
+## Amendement du 2026-10-01 (second) — la lecture de l'élève est limitée à son niveau
+
+*Décision du porteur du 2026-10-01 ([UDR-0013, amendement du 2026-10-01](../udr/0013-catalogue-et-page-cours.md#amendement-du-2026-10-01--lélève-ne-voit-que-son-niveau)). Elle s'ajoute à `ReadPublishedPolicy` ; elle ne la remplace pas.*
+
+- **Domaine** :
+  - `Entities::Catalog::LevelAudience` porte les paires (niveau, série) d'un élève. Sa méthode `covers?(level_id:, series_id:)` accepte le même niveau, avec une série vide ou égale.
+  - `Policies::Catalog::ReadOwnLevelPolicy` laisse passer tout rôle autre qu'élève. Pour un élève hors niveau, elle répond `:not_found`.
+- **Infrastructure** :
+  - `Queries::Catalog::StudentAudienceQuery` lit les classes actives de l'année, adhésions non quittées.
+  - `Queries::Catalog::CourseLevelQuery` donne le niveau du cours d'un contenu (par slug, id ou exercice).
+  - `CourseCatalogQuery(audience:)` applique la même règle en SQL : `level_id = niveau AND series_id IN (NULL, série)`, en OU entre les classes, et aucun cours sans classe.
+- **Delivery** : le concern `ReadsOwnLevel` (`refuse_out_of_level`) garde la page cours, la page fiche, la page exercice et `POST …/sessions`, après la recherche du contenu.
+- **Hors périmètre** : un contenu d'un autre niveau assigné par un enseignant à la classe de l'élève reste illisible. L'enseignant assigne le catalogue de la classe ; un cas réel ouvrira un chantier.

@@ -44,11 +44,13 @@
         <caption class="sr-only"><%= t(".caption") %></caption>
         <thead class="border-b border-line text-xs text-mute">
           <tr>
-            <% %i[school drena type cycle status classrooms teachers].each do |column| %>
+            <% %i[school school_code drena type cycle status classrooms teachers].each do |column| %>
               <th scope="col" class="px-4 py-3 font-medium">
                 <%= t(".columns.#{column}") %>
                 <%# UDR-0054 §3.4 : les statuts s'expliquent une fois, dans l'en-tête, pas sur chaque ligne. %>
                 <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".columns.status") if column == :status %>
+                <%# Même aide que la fiche (UDR-0054 §3.4, texte validé) : le code est secret, à ne pas confondre avec le code national. %>
+                <%= ui_info_tip t("teams.schools.header.school_code_tip"), label: t(".columns.school_code") if column == :school_code %>
               </th>
             <% end %>
             <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
