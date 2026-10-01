@@ -24,7 +24,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   def t(key, **) = I18n.t(key, **)
 
   test "a student filters the catalogue by subject without a page reload, then opens a course whose formula KaTeX renders" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle, le niveau des deux cours.
+    sign_in_as create_student_for(@course)
     visit courses_path
     assert_selector "#courses_list > li", count: 2
 
@@ -135,7 +136,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   end
 
   test "on a phone, the catalogue and the course page never scroll sideways" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
+    sign_in_as create_student_for(@course)
     with_mobile_viewport do
       [ courses_path, course_path(@course.slug) ].each do |path|
         visit path
