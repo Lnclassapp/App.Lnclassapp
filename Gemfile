@@ -22,7 +22,7 @@ gem "bcrypt", "~> 3.1.7"
 
 # TOTP second factor for the team, QR code rendered as inline SVG (ADR-0031)
 gem "rotp", "~> 6.3"
-gem "rqrcode", "~> 2.2"
+gem "rqrcode", "~> 3.2"
 
 # JSON Schema validation of bulk imports (ADR-0039)
 gem "json_schemer", "~> 2.3"
