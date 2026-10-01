@@ -51,3 +51,29 @@ Portes (agent, revérifiées par le porteur du chantier sur 248 tests ciblés et
 Écarts : trois tests existants modifiés au minimum (`school_admin_routes_test` : liste fermée des cinq écritures ; `student_work_test` : trois entrées ; `models_test` : 37 modèles) ; `db/schema.rb` complété à la main (le dump local PG16 réécrivait toutes les contraintes CHECK).
 
 Corrections de documents qui en découlent : GD-02 (une direction sans établissement reçoit 403, comme DS-11) ; déclaration des routes de l'UDR-0056 §3.0 (le `resource :school` imbriqué ne donnait pas les noms du tableau) ; clés `on_delete: :restrict` dans l'exemple de migration de l'ADR-0071 ; `JoinRequestsQuery#status_for` rend un `Status` de tout état (le Lot D ne passe à la policy qu'une demande `pending`) ; dossiers de worktree courts pour la vague 2.
+
+## Vague 2 — Lots A, B, C, D (2026-10-01)
+
+**Statut : fusionnés** dans `feature/gestion-etablissement-direction`. Après fusion, sur la branche du chantier : 2 744 tests, 0 échec, couverture 100 % (lignes 9 441, branches 2 350) ; 66 tests système (direction, identité, établissement, code) ; rubocop 0 offense ; Brakeman 0 alerte (`bundle exec brakeman`, voir plus bas).
+
+- **Lot A** (`c3002605`) — « Changer le lien » : `RegenerateSchoolCode` lit l'établissement puis applique `ManageSchoolStructurePolicy` ; modale sur établissement actif ; `:conflict` (aucun code libre après 5 tirages) → toast et 422, non prévu par l'ADR.
+- **Lot B** (`91aa6d07`) — « + » et « − » : même ordre dans `AddLevelClassroom` et `RemoveLevelClassroom` ; la direction d'un établissement inactif ou en brouillon reçoit 403 (policy) avant le conflit `school_inactive` / `school_draft` de l'équipe.
+- **Lot C** (`2f7c40a2`, `8820d368`) — retirer : `DetachTeacher` ; un retrait qui ne supprime aucune ligne `teacher_schools` vaut `:not_found` (double onglet, enseignant d'un autre établissement).
+- **Lot D** (`6de5d538`) — retirés, réintégrer, rejoindre par code ou par lien (GD-28) ; une demande `approved` n'affiche plus « en cours de validation ».
+
+## Ce qui a dérapé (vague 2)
+
+- **GD-12 à moitié rempli** par le Lot B : le partiel partagé gardait le « − » sur un établissement inactif (l'équipe en a encore le droit). Corrigé par le porteur du chantier, Lot 0 rouvert (`c4e8d640`, option `remove_when_inactive: false`).
+- **Une query d'infrastructure injectée dans un use case** par le Lot D (`JoinSchoolWithCode`), faute d'une méthode de port : l'ADR citait `JoinRequestsQuery` comme lecture réutilisée, sans dire qu'un use case ne la lit pas. Corrigé, Lot 0 rouvert (`26ea93d3`, `JoinRequestRepositoryPort#pending_for`). Leçon : dans l'ADR, toute lecture qu'un **use case** fait doit être un port.
+- **La commande Brakeman du brief était fausse** (`--no-ensure-latest` n'existe pas) ; `bin/brakeman` ajoute toujours `--ensure-latest`, qui refuse la 8.0.6 en local depuis la sortie de la 8.1.0. La CI GitHub, elle, passe.
+- **Une CI « rouge » sur `c4e8d640`** : exécution annulée par la poussée suivante (`tests: cancelled`), pas un échec.
+
+## Dette laissée derrière
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| Le sous-titre « N enseignants » n'est pas mis à jour après un retrait en Turbo Stream | L'UDR-0056 §3.3 ne le demande pas ; l'en-tête n'a pas d'identifiant | Prochaine retouche de l'UDR-0052 |
+| Les refus émis par `SchoolAdmin::BaseController` (autres rôles) gardent « Accès interdit. » (`errors.codes.*`), les gestes « Vous n'avez pas accès à cette action. » | Deux textes de refus dans le même espace | Idem |
+| `Teams::SchoolCodesController` : un `:conflict` (aucun code libre) rend `render nil` | Préexistant, hors périmètre | À ouvrir en bugfix si un jour observé |
+| `bin/brakeman` force `--ensure-latest` : rouge en local dès qu'une version sort | Outillage du dépôt | Mettre à jour la gem, ou retirer l'option du binstub |
+| Régénérer en masse les liens (équipe) | Demandé, sorti du chantier | `regeneration-codes-en-masse` (backlog) |
