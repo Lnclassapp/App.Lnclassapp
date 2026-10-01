@@ -138,3 +138,13 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - **Pas d'index** pour la recherche (UDR-0054 §2.12, mesure au PRD §7 du chantier).
 - **Infobulles** : statut (brouillon, actif, désactivé) et « Code d'établissement » (UDR-0054 §3.4).
 - Titres : « Établissements · Équipe · Lnclass », « <nom> · Équipe · Lnclass », « Modifier l'établissement · Équipe · Lnclass ».
+
+## Amendement du 2026-10-01 — le code d'établissement dans la liste
+
+*Demande du porteur du 2026-10-01 : afficher le code d'établissement dans le tableau de `/teams/schools`.*
+
+- **Où** : une colonne « Code d'établissement » suit « Établissement ». Le code y est groupé comme sur la fiche (`SchoolCode.display`, « ABCD-EFGH »), en police à chasse fixe.
+- **Aide** : l'en-tête de la colonne porte la même infobulle que la fiche (`teams.schools.header.school_code_tip`, texte validé). Le code est secret et ne se confond pas avec le code national.
+- **Pourquoi c'est sûr** : la liste n'est servie qu'à l'équipe, qui voit déjà le code sur chaque fiche (ADR-0057). Aucune donnée nouvelle n'est exposée.
+- **Pas de bouton « Copier » sur la ligne** : il reste sur la fiche, avec le lien d'inscription.
+- **Vérification** : `test/controllers/teams/schools_controller_test.rb` (colonne, aide, valeur groupée).
