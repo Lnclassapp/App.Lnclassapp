@@ -1,0 +1,18 @@
+# « Tout publier » d'un cours ou d'une fiche essentielle (publication en cascade) — ADR-0035, UDR-0042 (amendements du 2026-10-01)
+fr:
+  teams:
+    publish_cascade:
+      done:
+        course: "Tout est publié dans « %{name} » : %{essentials}, %{exercises}."
+        essential: "Tout est publié dans « %{name} » : %{exercises}."
+      essentials:
+        zero: "aucune nouvelle fiche essentielle"
+        one: "1 fiche essentielle publiée"
+        other: "%{count} fiches essentielles publiées"
+      exercises:
+        zero: "aucun nouvel exercice"
+        one: "1 exercice publié"
+        other: "%{count} exercices publiés"
+      skipped:
+        one: "1 exercice reste en brouillon : il n'a pas de question complète."
+        other: "%{count} exercices restent en brouillon : ils n'ont pas de question complète."

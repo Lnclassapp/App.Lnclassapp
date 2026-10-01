@@ -1,8 +1,10 @@
 # 🌐 DELIVERY · Teams::EssentialsController
-# Rôle : fiches essentielles d'un cours : création et modification en modale, publication et archivage en Turbo Stream
+# Rôle : fiches essentielles d'un cours : création et modification en modale, publication (seule ou avec ses exercices) et archivage
 # ADR  : 0026, 0028, 0035 · UDR : 0006, 0007, 0016
 module Teams
   class EssentialsController < BaseController
+    include PublishCascade
+
     before_action :set_course, only: %i[new create]
     before_action :set_essential, only: %i[edit update]
 
@@ -31,6 +33,8 @@ module Teams
     def archive = transition(archive_essential)
 
     private
+
+    def cascade_root = :essential
 
     def set_course
       @course = course_repository.find_by_slug(slug: params[:course_slug])

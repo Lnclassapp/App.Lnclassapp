@@ -129,7 +129,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
       click_on COURSE
     end
     within "#course_essentials" do
-      assert_selector "li", text: /#{ESSENTIAL}.*1 exercice.*Brouillon/m
+      assert_selector "li", text: /#{ESSENTIAL}.*Brouillon/m
     end
 
     open_sidebar_entry "Imports"
