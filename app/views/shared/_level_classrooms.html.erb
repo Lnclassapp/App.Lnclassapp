@@ -1,8 +1,10 @@
 <%# 🌐 UI · shared/_level_classrooms — bloc « Classes par niveau », partagé par la fiche de l'équipe et la page de la direction %>
 <%# Rôle : une ligne par niveau/série : nombre de classes de l'année, « − » (dernière classe, confirmée) et « + » (classe suivante) %>
-<%# ADR  : 0041, 0059, 0071 · UDR : 0006, 0046, 0056 · add_url : chemin du « + » ; remove_url : public_id → chemin du « − » %>
+<%# ADR  : 0041, 0059, 0071 · UDR : 0006, 0046, 0056 · add_url : chemin du « + » ; remove_url : public_id → chemin du « − » ; remove_when_inactive (vrai par défaut) : false pour la direction (GD-12) %>
 <% scope = "teams.level_classrooms.block" %>
 <% accepts_classrooms = block.school_status == "active" %>
+<%# L'équipe retire encore la dernière classe d'un établissement inactif (ADR-0059) ; la direction, aucun geste (ADR-0071). %>
+<% removable = accepts_classrooms || local_assigns.fetch(:remove_when_inactive, true) %>
 <section id="school_level_classrooms" aria-labelledby="school_level_classrooms_title" class="rounded-card border border-line bg-white shadow-card">
   <div class="px-4 pt-4 sm:px-5">
     <h3 id="school_level_classrooms_title" class="font-display text-lg font-extrabold"><%= t("#{scope}.title") %></h3>
@@ -22,7 +24,7 @@
         <li id="level_classrooms_<%= row.key %>" class="flex items-center justify-between gap-3 border-t border-line py-2">
           <span class="min-w-0 truncate font-medium"><%= row.label %></span>
           <div role="group" aria-label="<%= t("#{scope}.count", level: row.label, count: row.count) %>" class="flex shrink-0 items-center gap-1">
-            <% if row.last_classroom %>
+            <% if row.last_classroom && removable %>
               <%= ui_modal title: t("#{scope}.remove_title", name: row.last_classroom.name), id: "remove-classroom-#{row.key}", size: :sm,
                            trigger: remove_label, trigger_variant: :secondary, trigger_icon: "minus" do |modal| %>
                 <% modal.footer do %>
@@ -34,8 +36,10 @@
                   <p class="text-sm text-mute"><%= t("#{scope}.remove_warning") %></p>
                 <% end %>
               <% end %>
-            <% else %>
+            <% elsif removable %>
               <%= ui_button remove_label, variant: :secondary, icon: "minus", disabled: true %>
+            <% else %>
+              <span class="w-tap" aria-hidden="true"></span>
             <% end %>
             <span class="w-8 text-center font-display text-lg font-extrabold tabular-nums" aria-hidden="true"><%= row.count %></span>
             <% if accepts_classrooms && row.open %>

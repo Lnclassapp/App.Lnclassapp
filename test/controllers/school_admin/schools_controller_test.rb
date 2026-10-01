@@ -87,6 +87,20 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_level_classrooms_inactive"
   end
 
+  test "GD-12: an inactive school offers the direction neither « + » nor « − », even on a last unused classroom" do
+    referential = seed_referential
+    create_classroom(school: @school, level: referential[:levels]["6eme"], name: "6ème 1")
+    @school.update!(status: "inactive")
+    sign_in_as @admin
+
+    get school_admin_school_path
+
+    assert_select "#level_classrooms_6eme"
+    assert_select "#level_classrooms_6eme form", 0
+    assert_select "#level_classrooms_6eme dialog", 0
+    assert_select "#level_classrooms_6eme button", 0
+  end
+
   test "the page reads the direction's own school, never another" do
     other = create_school(name: "Lycée Classique d'Abidjan", school_code: "abc234")
     sign_in_as create_school_admin(school: other)

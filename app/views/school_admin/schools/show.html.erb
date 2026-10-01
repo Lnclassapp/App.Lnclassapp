@@ -14,5 +14,6 @@
   <% end %>
 
   <%= render "shared/level_classrooms", block: @level_classrooms, add_url: school_admin_level_classrooms_path,
-                                        remove_url: ->(public_id) { school_admin_level_classroom_path(public_id) } %>
+                                        remove_url: ->(public_id) { school_admin_level_classroom_path(public_id) },
+                                        remove_when_inactive: false %>
 </div>
