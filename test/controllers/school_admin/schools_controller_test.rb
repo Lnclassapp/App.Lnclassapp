@@ -54,8 +54,9 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
       assert_includes message, link
       assert_includes message, "Lycée Moderne de Bouaké"
     end
-    # Lot 0 reads the link: « Changer le lien » comes with Lot A.
-    assert_select "#school_link form", 0
+    # The only form of the card is « Changer le lien » (Lot A), behind its confirmation.
+    assert_select "#school_link form", 1
+    assert_select "#school_link dialog#change-school-link form#change-school-link-form", 1
   end
 
   test "the « Classes par niveau » block is the team's, its « + » and « − » aimed at the direction's routes" do

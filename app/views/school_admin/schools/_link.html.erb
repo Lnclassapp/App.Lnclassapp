@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/schools/_link — lien d'inscription des enseignants, cible du Turbo Stream de « Changer le lien » %>
-<%# Rôle : lien /e/<code> et code affichés, « Copier le lien », « Partager sur WhatsApp » ; en lecture (la modale vient au Lot A) %>
-<%# ADR  : 0057, 0071 · UDR : 0050, 0056 · Stimulus : clipboard (ui_copy_button) · WhatsApp : lien sortant %>
+<%# Rôle : lien /e/<code> et code, « Copier le lien », « Partager sur WhatsApp », « Changer le lien » confirmé (actif seulement) %>
+<%# ADR  : 0057, 0071 · UDR : 0050, 0056 · Stimulus : clipboard (ui_copy_button), modal · WhatsApp : lien sortant %>
 <% link = school_code_signup_url(school.school_code) %>
 <div id="school_link_block">
   <p class="flex flex-col gap-1">
@@ -17,5 +17,17 @@
     <%= ui_button t(".share_whatsapp"), href: whatsapp_share_url(t(".share_message", school: school.name, link:)), variant: :brand,
                                         size: :sm, icon: "chat-bubble-left-right", target: "_blank", rel: "noopener",
                                         id: "school_link_whatsapp" %>
+    <% if school.active? %>
+      <%= ui_modal id: "change-school-link", size: :sm, title: t(".change.title"), trigger: t(".change.trigger"),
+                   trigger_variant: :secondary, trigger_icon: "arrow-path" do |modal| %>
+        <% modal.footer do %>
+          <%= ui_button t(".change.cancel"), variant: :secondary, data: { action: "modal#close" } %>
+          <%= ui_button t(".change.confirm"), variant: :danger, type: :submit, form: "change-school-link-form" %>
+        <% end %>
+        <%= form_with url: school_admin_school_link_path, method: :patch, id: "change-school-link-form" do %>
+          <p class="text-sm text-mute"><%= t(".change.warning") %></p>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>
