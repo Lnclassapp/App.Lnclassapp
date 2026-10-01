@@ -89,6 +89,26 @@ module Queries
         ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
         count
       end
+
+      # UDR-0013, amendement du 2026-10-01 : l'audience d'un élève restreint le catalogue à son niveau.
+      test "avec l'audience d'un élève de Tle D : Tle D et Tle sans série ; ni Tle C, ni un autre niveau ; sans classe, rien" do
+        tle = create_level
+        d = create_series
+        c = create_series
+        own = create_course(name: "Génétique", level: tle, series: d)
+        common = create_course(name: "Philosophie", level: tle)
+        create_course(name: "Mécanique", level: tle, series: c)
+        create_course(name: "Seconde", level: create_level)
+        student = Entities::Identity::Actor.new(user_id: 1, role: :student)
+        query = CourseCatalogQuery.new
+
+        rows = query.call(actor: student, audience: Entities::Catalog::LevelAudience.new(pairs: [ [ tle.id, d.id ] ]))
+
+        assert_equal [ own.slug, common.slug ].sort, rows.map(&:slug).sort
+        assert_empty query.call(actor: student, audience: Entities::Catalog::LevelAudience.none)
+        # Sans audience (enseignant, direction), la requête ne restreint pas le niveau.
+        assert_includes query.call(actor: student).map(&:name), "Seconde"
+      end
     end
   end
 end

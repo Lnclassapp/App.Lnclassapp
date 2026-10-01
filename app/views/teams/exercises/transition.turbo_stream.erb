@@ -1,9 +1,10 @@
 <%# 🌐 UI · teams/exercises/transition — rendu par publish et archive %>
-<%# Rôle : succès → toast et panneau de statut remplacé ; refus (422) → toast d'erreur qui en donne la raison %>
+<%# Rôle : succès → toast, statut et entrées du menu ⋮ remplacés ; refus (422) → toast d'erreur qui en donne la raison %>
 <%# ADR  : 0035, 0036 · UDR : 0006, 0017 %>
 <% if @refusal %>
   <%= turbo_stream_toast @refusal, type: :error %>
 <% else %>
   <%= turbo_stream_toast t(".#{@exercise.status}", title: @exercise.title), type: :success %>
   <%= turbo_stream.replace "content_status_exercise_#{@exercise.public_id}", content_status_panel(record: @exercise) %>
+  <%= turbo_stream.replace "content_transitions_exercise_#{@exercise.public_id}", content_transition_items(record: @exercise) %>
 <% end %>

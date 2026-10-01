@@ -264,7 +264,7 @@ module ComponentsHelper
 
     # Un lien vers la page ouverte est marqué courant (« Mon profil », UDR-0041) ; une action (DELETE…) ne l'est jamais.
     link_to content, href, class: classes, role: "menuitem", tabindex: -1,
-                           data: { turbo_method: method, turbo_frame: frame, action: ("dropdown#dismiss" if frame) }.compact,
+                           data: { turbo_method: method, turbo_frame: frame, action: ("dropdown#dismiss" if frame || method) }.compact,
                            "aria-current": ("page" if method.nil? && current_page?(href))
   end
 

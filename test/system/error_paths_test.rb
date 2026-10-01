@@ -72,9 +72,10 @@ class ErrorPathsTest < ApplicationSystemTestCase
   # --- Réponse vide (AS-09) -----------------------------------------------------------------------------------
 
   test "a student who validates without choosing gets the error in the question card, then answers normally" do
-    classroom = create_classroom
-    student = create_student(classroom:)
     exercise = create_exercise(title: "Méiose")
+    # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours de l'exercice.
+    classroom = create_classroom(level: exercise.essential.course.level)
+    student = create_student(classroom:)
     create_assignment(classroom:, assignable: exercise)
 
     sign_in_as student

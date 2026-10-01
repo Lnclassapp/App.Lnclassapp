@@ -35,11 +35,11 @@ end
 
 namespace :teams do
   resources :courses, only: %i[new create edit update], param: :slug do
-    member { patch :publish; patch :archive }
+    member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
     resources :essentials, only: %i[new create], param: :slug
   end
   resources :essentials, only: %i[edit update], param: :slug do
-    member { patch :publish; patch :archive }
+    member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
     resources :exercises, only: %i[new create]
   end
   resources :exercises, only: %i[edit update], param: :public_id do

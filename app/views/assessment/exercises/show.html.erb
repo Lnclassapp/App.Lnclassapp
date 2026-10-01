@@ -1,5 +1,5 @@
 <%# 🌐 UI · assessment/exercises/show — page d'un exercice (AS-02), pour l'élève, l'enseignant et l'équipe %>
-<%# Rôle : en-tête ; progression et « Commencer » de l'élève ; statut et menu ⋮ « Modifier » (modale) de l'équipe ; aperçu des questions %>
+<%# Rôle : en-tête ; progression et « Commencer » de l'élève ; statut et menu ⋮ (modifier, publier, archiver) de l'équipe ; aperçu des questions %>
 <%# ADR  : 0028, 0054 · UDR : 0006, 0007, 0021, 0042, 0054 · aucun cache : le HTML dépend du rôle (sécurité n° 29) %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
@@ -25,6 +25,7 @@
           <%= content_status_panel(record: @status_record) %>
           <%= ui_dropdown label: t(".actions", name: exercise.title), id: "exercise-actions-menu", fixed: true do %>
             <%= ui_dropdown_item t(".edit"), href: edit_teams_exercise_path(exercise.public_id), icon: "pencil-square", frame: "modal" %>
+            <%= content_transition_items(record: @status_record) %>
           <% end %>
         </div>
       <% end %>

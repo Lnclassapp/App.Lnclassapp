@@ -44,7 +44,8 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
   end
 
   test "the student sees the content, his gold badge at 80 %, and « Commencer » opens the first question" do
-    student = create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de la fiche.
+    student = create_student_for(@course)
     best = create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 80)
     create_badge(student:, exercise: @exercise, level: "gold", session: best)
     sign_in_as student
@@ -65,7 +66,8 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
   end
 
   test "on a phone, the student's sheet fits the width" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de la fiche.
+    sign_in_as create_student_for(@course)
 
     with_mobile_viewport do
       visit page_path
@@ -84,6 +86,7 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     assert_selector "#essential_exercises li", count: 2
 
     assert_no_page_reload do
+      find("button[aria-controls=essential-actions-menu]").click
       click_on I18n.t("#{scope}.show.new_exercise")
       within "turbo-frame#modal dialog[open]" do
         fill_in "exercise[title]", with: "Anomalies de la méiose"

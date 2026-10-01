@@ -1,8 +1,10 @@
 # 🌐 DELIVERY · Teams::CoursesController
-# Rôle : l'équipe crée et modifie un cours en modale (éditeur riche), le publie et l'archive depuis son panneau de statut
+# Rôle : l'équipe crée et modifie un cours en modale (éditeur riche), le publie, l'archive ou publie tout son contenu (menu ⋮)
 # ADR  : 0026, 0035, 0037 · UDR : 0006, 0014
 module Teams
   class CoursesController < BaseController
+    include PublishCascade
+
     FIELDS = %i[name subtitle level_slug series_slug material_slug content].freeze
 
     before_action :load_options, only: %i[new create edit update]
@@ -40,6 +42,8 @@ module Teams
     def archive = transition(archive_course)
 
     private
+
+    def cascade_root = :course
 
     def respond_written(course, message)
       @course = course

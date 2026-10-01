@@ -90,7 +90,10 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     student = create_student(created_at: Period.parse("year", today: Date.current).since.in_time_zone + 1.hour)
 
     assert_equal 1, dashboard(period: "year").signups_count
-    assert_equal student.created_at > 30.days.ago ? 1 : 0, dashboard(period: "30d").signups_count
+    # La période « 30 j » part de minuit, 29 jours avant aujourd'hui, et non de l'heure d'il y a 30 jours : le 1er octobre,
+    # un compte du 1er septembre à 1 h en sort.
+    in_month = student.created_at >= Period.parse("30d", today: Date.current).since.in_time_zone
+    assert_equal in_month ? 1 : 0, dashboard(period: "30d").signups_count
   end
 
   test "school coverage reads active schools, active classrooms of the year, active teachers and placed students" do

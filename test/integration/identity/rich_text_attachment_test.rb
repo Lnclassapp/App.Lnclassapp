@@ -8,7 +8,8 @@ class Identity::RichTextAttachmentTest < ActionDispatch::IntegrationTest
     blob = ActiveStorage::Blob.create_and_upload!(io: file_fixture("photos/photo.png").open, filename: "schema-secret.png",
                                                   content_type: "image/png")
     course = create_course(content: %(<p>Voir :</p><action-text-attachment sgid="#{blob.attachable_sgid}"></action-text-attachment>))
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
+    sign_in_as create_student_for(course)
 
     get course_path(course.slug)
 

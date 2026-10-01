@@ -4,9 +4,10 @@ require "application_system_test_case"
 # it — the D5 toggle and toasts change in place, without a page reload.
 class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
   setup do
-    @classroom = create_classroom(name: "6ème 1")
-    @teacher = create_teacher(classrooms: [ @classroom ])
     @course = create_course(name: "Génétique")
+    # UDR-0013, amendement du 2026-10-01 : un contenu ne s'assigne qu'à une classe de son niveau.
+    @classroom = create_classroom(name: "6ème 1", level: @course.level)
+    @teacher = create_teacher(classrooms: [ @classroom ])
     @essential = create_essential(course: @course, name: "Méiose")
     @phases = create_exercise(essential: @essential, title: "Les phases")
     create_exercise(essential: @essential, title: "Le brassage")
