@@ -21,9 +21,12 @@ L'élève voyait tout le catalogue publié, tous niveaux confondus. Il pouvait a
 - **Filtre « Niveau »** : retiré du catalogue de l'élève.
 - **Autres rôles** : enseignant, direction et équipe sont inchangés.
 
-## Hors périmètre
+## Suite (même jour) : l'assignation hors niveau est refusée
 
-- Un contenu d'un autre niveau assigné par un enseignant à la classe de l'élève : il reste illisible pour l'élève. Ce cas n'est pas attendu.
+Décision du porteur : « Refuse l'assignation hors niveau ».
+
+- `AssignResource` refuse un contenu dont le cours n'est pas du niveau de la classe (`:conflict`, `other_level`), avec la règle de lecture de l'élève.
+- Le contenu résolu porte désormais `course_level`.
 
 ## Tests qui ont changé
 
