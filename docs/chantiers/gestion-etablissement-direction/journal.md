@@ -40,3 +40,14 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+
+## Lot 0 — Socle (2026-10-01)
+
+**Statut : fusionné** dans `feature/gestion-etablissement-direction` (commit `4990a645`). Table `teacher_school_departures`, entité, trois policies, port de départ et trois méthodes de port **avec leurs adaptateurs**, `OwnSchoolQuery`, routes de l'UDR-0056 §3.0, troisième destination, page « Établissement » en lecture, bloc « Classes par niveau » déplacé en `shared/_level_classrooms` (les tests de la fiche de l'équipe passent sans modification), fabrique `create_teacher_departure`.
+
+Portes (agent, revérifiées par le porteur du chantier sur 248 tests ciblés et un chargement du schéma dans une base vierge) : rubocop 0 offense ; 2 625 tests unitaires, couverture 100 % ; 291 tests système ; migrate / rollback / migrate. **Deux étapes de `bin/ci` rouges, étrangères au lot** : `bin/brakeman` (`--ensure-latest` refuse la 8.0.6 depuis la sortie de la 8.1.0 ; 0 alerte sans l'option) ; `heavy_screens_budget_test` « pilotage 7 j » (p95 339 ms pour 300 ms, déjà rouge à 324 ms sur le commit de base : lenteur de la machine locale).
+
+Écarts : trois tests existants modifiés au minimum (`school_admin_routes_test` : liste fermée des cinq écritures ; `student_work_test` : trois entrées ; `models_test` : 37 modèles) ; `db/schema.rb` complété à la main (le dump local PG16 réécrivait toutes les contraintes CHECK).
+
+Corrections de documents qui en découlent : GD-02 (une direction sans établissement reçoit 403, comme DS-11) ; déclaration des routes de l'UDR-0056 §3.0 (le `resource :school` imbriqué ne donnait pas les noms du tableau) ; clés `on_delete: :restrict` dans l'exemple de migration de l'ADR-0071 ; `JoinRequestsQuery#status_for` rend un `Status` de tout état (le Lot D ne passe à la policy qu'une demande `pending`) ; dossiers de worktree courts pour la vague 2.

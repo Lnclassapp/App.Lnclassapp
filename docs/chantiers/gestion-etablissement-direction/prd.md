@@ -70,7 +70,7 @@ Scénario: GD-02 — la page Établissement est réservée à la direction ratta
   Étant donné un élève, un enseignant et un membre de l'équipe, chacun connecté
   Quand chacun ouvre « Établissement » de l'espace direction
   Alors chacun reçoit 403
-  Et une direction sans établissement est renvoyée vers l'écran d'attente
+  Et une direction sans établissement reçoit 403, comme sur les pages existantes (ADR-0065, DS-11) ; elle arrive sur l'écran d'attente par son accueil
 ```
 
 ### 4.2 Lien d'inscription des enseignants — [Lot A]

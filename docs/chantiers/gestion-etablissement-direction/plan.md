@@ -231,8 +231,10 @@ Vague 2 : Lot A ‖ B ‖ C ‖ D       → 4 agents, worktrees isolés (après 
 Chaque lot parallèle part de la branche de chantier, Lot 0 fusionné :
 
 ```bash
-git worktree add ../lnclass-gestion-etablissement-direction-lot-a -b feature/gestion-etablissement-direction-lot-a feature/gestion-etablissement-direction
+git worktree add /home/user/gd-lot-a -b feature/gestion-etablissement-direction-lot-a feature/gestion-etablissement-direction
 ```
+
+**Dossier de worktree court** (`gd-lot-a`…) : `config/database.yml` dérive le nom des bases du dossier, et un nom long dépasse les 63 caractères de PostgreSQL, si bien que tous les lots retomberaient sur la même base tronquée (constat du Lot 0). Environnement : `corepack yarn` (le `yarn` global est la 1.22), chromedriver accordé au Chromium 141, `LANG=C.UTF-8`.
 
 Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son lot recopié en entier (4 champs), les liens vers `prd.md`, l'ADR-0071 et l'UDR-0056, l'ordre intra-lot (test rouge → domaine → infrastructure → delivery → UI), l'**interdiction de toucher un fichier hors de son champ `Fichiers`**. Fusion dans `feature/gestion-etablissement-direction` au fur et à mesure ; **une seule PR** vers `Develop`.
 

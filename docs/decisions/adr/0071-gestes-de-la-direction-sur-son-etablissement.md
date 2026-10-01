@@ -108,7 +108,7 @@ Index unique partiel `(teacher_id, school_id) WHERE reinstated_at IS NULL` : un 
 | `Ports::Classroom::TeachingRepositoryPort` | `withdraw_all_in_school(teacher_id:, school_id:)` (**nouveau**) | `Integer` (déclarations supprimées) |
 | `Ports::Classroom::AssignmentRepositoryPort` | `archive_all_by_teacher_in_school(teacher_id:, school_id:, archived_by_id:, at:)` (**nouveau**) | `Integer` (devoirs archivés) |
 
-Réutilisés sans changement : `UserRepositoryPort#find_by_public_id`, `SchoolRepositoryPort#find_by_id`, `#find_by_school_code`, `#attach_teacher`, `#primary_school_id_for`, `JoinRequestRepositoryPort` (lecture de la demande en attente : `Queries::School::JoinRequestsQuery#status_for`, déjà lue par l'écran d'attente).
+Réutilisés sans changement : `UserRepositoryPort#find_by_public_id`, `SchoolRepositoryPort#find_by_id`, `#find_by_school_code`, `#attach_teacher`, `#primary_school_id_for`, `JoinRequestRepositoryPort` (lecture de la demande : `Queries::School::JoinRequestsQuery#status_for`, déjà lue par l'écran d'attente ; elle rend un `Status` de tout état, et l'appelant ne passe à `JoinSchoolWithCodePolicy` que celle dont le statut est `pending`).
 
 Entité nouvelle `Entities::School::TeacherDeparture` (`id, teacher_id, school_id, detached_by_id, detached_at, reinstated_by_id, reinstated_at`, `open?`). `Entities::Identity::AuditAction::ALL` gagne `teacher.detached` et `teacher.reinstated`.
 
@@ -166,11 +166,11 @@ end
 ```ruby
 # db/migrate/…_create_teacher_school_departures.rb
 create_table :teacher_school_departures do |t|
-  t.references :teacher, null: false, foreign_key: { to_table: :users }
-  t.references :school, null: false, foreign_key: true
-  t.references :detached_by, null: false, foreign_key: { to_table: :users }
+  t.references :teacher, null: false, foreign_key: { to_table: :users, on_delete: :restrict }
+  t.references :school, null: false, foreign_key: { on_delete: :restrict }
+  t.references :detached_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }
   t.datetime :detached_at, null: false
-  t.references :reinstated_by, foreign_key: { to_table: :users }
+  t.references :reinstated_by, foreign_key: { to_table: :users, on_delete: :restrict }
   t.datetime :reinstated_at
 end
 add_check_constraint :teacher_school_departures, "(reinstated_at IS NULL) = (reinstated_by_id IS NULL)",
