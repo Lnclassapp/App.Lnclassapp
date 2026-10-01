@@ -1,0 +1,41 @@
+<%# 🌐 UI · school_admin/departed_teachers/index — « Enseignants retirés » de la direction (GD-21) %>
+<%# Rôle : une ligne par départ ouvert : nom, matière, date du retrait ; « Réintégrer » sur un établissement actif seulement %>
+<%# ADR  : 0071 · UDR : 0005, 0054, 0056 %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "teachers" %>
+<%= link_to t(".back"), school_admin_teachers_path, id: "back-to-teachers",
+            class: "mb-4 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+<%= ui_page_header title: t(".title"), subtitle: @overview.school_name %>
+
+<% if @overview.teachers.any? %>
+  <%= ui_card id: "departed_teachers", padding: :none do %>
+    <ul class="divide-y divide-line" aria-label="<%= t(".list_label") %>">
+      <% @overview.teachers.each do |teacher| %>
+        <li id="departed_teacher_<%= teacher.public_id %>" class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex min-w-0 flex-col gap-1">
+            <span class="font-medium text-ink"><%= teacher.name %></span>
+            <span>
+              <% if teacher.material_name %>
+                <%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %>
+              <% else %>
+                <span aria-hidden="true">—</span><span class="sr-only"><%= t(".missing") %></span>
+              <% end %>
+            </span>
+            <span class="text-sm text-mute"><%= t(".detached_on", date: l(teacher.detached_at.to_date, format: :long)) %></span>
+          </div>
+          <% if @overview.school_active %>
+            <%= form_with url: school_admin_teacher_reinstatement_path(teacher.public_id), method: :post,
+                          id: "reinstate-#{teacher.public_id}-form" do %>
+              <%= ui_button t(".reinstate"), type: :submit, variant: :secondary, size: :sm, icon: "arrow-uturn-left",
+                            "aria-label": t(".reinstate_label", name: teacher.name) %>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% else %>
+  <div id="departed_teachers">
+    <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description"), icon: "archive-box" %>
+  </div>
+<% end %>
