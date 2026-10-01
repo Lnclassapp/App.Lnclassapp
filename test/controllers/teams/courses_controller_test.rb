@@ -257,4 +257,64 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to course_path("genetique")
     assert_equal tc("transition.published", name: "Génétique"), flash[:notice]
   end
+
+  # ADR-0035, amendement du 2026-10-01 : « Tout publier » depuis le menu ⋮ du cours.
+  def cascade(key, **) = I18n.t("teams.publish_cascade.#{key}", **)
+
+  test "« Tout publier » publishes the course, its draft sheets and their complete draft exercises; the rest stays as it is" do
+    course = create_course(name: "Génétique", level: @tle, material: @svt, status: "draft")
+    meiose = create_essential(course:, name: "La méiose", status: "draft")
+    archived = create_essential(course:, status: "archived")
+    complete = create_exercise(essential: meiose, status: "draft")
+    incomplete = create_exercise(essential: meiose, status: "draft", questions: 0)
+    waiting = create_exercise(essential: archived, status: "draft")
+    sign_in_as @member
+
+    patch publish_all_teams_course_path(course.slug), as: :turbo_stream
+
+    assert_response :success
+    assert_equal %w[published published published draft archived draft],
+                 [ course, meiose, complete, incomplete, archived, waiting ].map { it.reload.status }
+    done = cascade("done.course", name: "Génétique", essentials: cascade("essentials", count: 1), exercises: cascade("exercises", count: 1))
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(done)
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(cascade("skipped", count: 1))
+    assert_select "turbo-stream[action=refresh]", 1
+    assert_equal [ [ "Course", course.id ], [ "Essential", meiose.id ], [ "Exercise", complete.id ] ],
+                 Orm::AuditEvent.where(action: "content.published").order(:id).pluck(:subject_type, :subject_id)
+  end
+
+  test "« Tout publier » on a course where all is published says so, and writes nothing" do
+    course = create_course(name: "Génétique", level: @tle, material: @svt)
+    create_exercise(essential: create_essential(course:))
+    sign_in_as @member
+
+    patch publish_all_teams_course_path(course.slug), as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts]",
+                  text: including(cascade("done.course", name: "Génétique", essentials: cascade("essentials", count: 0),
+                                                         exercises: cascade("exercises", count: 0)))
+    assert_select "turbo-stream[action=append][target=toasts]", 1
+    assert_not Orm::AuditEvent.exists?
+  end
+
+  test "« Tout publier »: a teacher is refused, an unknown course is not found, and without Turbo it leads back with the summary" do
+    course = create_course(name: "Génétique", level: @tle, material: @svt, status: "draft")
+    sign_in_as create_teacher
+
+    patch publish_all_teams_course_path(course.slug), as: :turbo_stream
+    assert_response :forbidden
+    assert_equal "draft", course.reload.status
+    sign_out
+
+    sign_in_as @member
+    patch publish_all_teams_course_path("inconnu"), as: :turbo_stream
+    assert_response :not_found
+
+    patch publish_all_teams_course_path(course.slug), headers: { "HTTP_REFERER" => course_path(course.slug) }
+    assert_redirected_to course_path(course.slug)
+    assert_equal cascade("done.course", name: "Génétique", essentials: cascade("essentials", count: 0),
+                                        exercises: cascade("exercises", count: 0)), flash[:notice]
+    assert_equal "published", course.reload.status
+  end
 end

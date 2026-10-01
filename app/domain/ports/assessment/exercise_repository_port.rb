@@ -44,6 +44,12 @@ module Ports
       def next_positions(essential_ids:)
         raise NotImplementedError, "#{self.class} doit implémenter #next_positions"
       end
+
+      # Publication en cascade : public_id des exercices brouillon sous les fiches publiées d'un cours (course_id:) ou
+      # sous une fiche (essential_id:), dans l'ordre des fiches puis des exercices. → [String]
+      def draft_public_ids(course_id: nil, essential_id: nil)
+        raise NotImplementedError, "#{self.class} doit implémenter #draft_public_ids"
+      end
     end
   end
 end

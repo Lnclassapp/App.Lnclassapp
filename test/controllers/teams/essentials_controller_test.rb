@@ -297,4 +297,40 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to courses_path
     assert_equal tl("transition.parent_not_published"), flash[:alert]
   end
+
+  # ADR-0035, amendement du 2026-10-01 : « Tout publier » depuis le menu ⋮ de la fiche.
+  def cascade(key, **) = I18n.t("teams.publish_cascade.#{key}", **)
+
+  test "« Tout publier » publishes the sheet and its complete draft exercises, not the other sheets of the course" do
+    essential = create_essential(course: @course, name: "La méiose", status: "draft")
+    other = create_essential(course: @course, status: "draft")
+    exercises = Array.new(2) { create_exercise(essential:, status: "draft") }
+    archived = create_exercise(essential:, status: "archived")
+    sign_in_as @member
+
+    patch publish_all_teams_essential_path(essential.slug), as: :turbo_stream
+
+    assert_response :success
+    assert_equal %w[published draft published published archived], [ essential, other, *exercises, archived ].map { it.reload.status }
+    assert_select "turbo-stream[action=append][target=toasts]",
+                  text: including(cascade("done.essential", name: "La méiose", exercises: cascade("exercises", count: 2)))
+    assert_select "turbo-stream[action=refresh]", 1
+  end
+
+  test "« Tout publier » on a sheet of a draft course is refused in 422 with the reason, and nothing changes" do
+    essential = create_essential(course: create_course(status: "draft"), status: "draft")
+    exercise = create_exercise(essential:, status: "draft")
+    sign_in_as @member
+
+    patch publish_all_teams_essential_path(essential.slug), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("transition.parent_not_published"))
+    assert_select "turbo-stream[action=refresh]", 0
+    assert_equal %w[draft draft], [ essential, exercise ].map { it.reload.status }
+
+    patch publish_all_teams_essential_path(essential.slug)
+    assert_redirected_to courses_path
+    assert_equal tl("transition.parent_not_published"), flash[:alert]
+  end
 end

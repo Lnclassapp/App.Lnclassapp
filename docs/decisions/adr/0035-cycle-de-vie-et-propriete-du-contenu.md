@@ -117,3 +117,24 @@ Le refus répond `:not_found`, pas `:forbidden` : on ne confirme pas l'existence
 
 - Aucun retour d'un contenu publié à l'état de brouillon.
 - En V1, tout membre de l'équipe modifie tout contenu.
+
+## Amendement du 2026-10-01 — « Tout publier » (publication en cascade)
+
+*Décision du porteur du 2026-10-01 (chantier [`epuration-contenus`](../../chantiers/epuration-contenus/memo.md)). Elle complète le §3 ; les transitions et leurs conditions restent celles du §3.*
+
+- **Quoi** : depuis le menu ⋮ d'un cours ou d'une fiche, « Tout publier » publie la racine si elle ne l'est pas, puis ses descendants brouillons :
+  - pour un cours : ses fiches brouillons, puis les exercices brouillons de ses fiches publiées ;
+  - pour une fiche : ses exercices brouillons.
+- **Comment** : `UseCases::Catalog::PublishCascade` n'ajoute aucune règle. Il enchaîne `PublishCourse`, `PublishEssential` et `PublishExercise`, dans une seule transaction. Chaque publication garde donc sa policy, sa transition (§3), son contrôle d'exercice publiable et son entrée `content.published` au journal.
+- **Ce qui ne bouge pas** :
+  - Un contenu **archivé** le reste : l'archivage est un choix, la cascade ne le défait pas.
+  - Un exercice sous une fiche archivée attend sa fiche.
+  - Un exercice **sans question complète** reste en brouillon. Il est compté, et le bilan le dit en toast d'avertissement.
+- **Refus** : « Tout publier » sur une fiche d'un cours non publié est refusé (`:conflict`, `parent_not_published`), en 422, et rien n'est écrit. Sur un cours, il n'y a pas de refus métier : un cours n'a pas de parent.
+- **Rendu** : un toast de bilan (fiches et exercices publiés, exercices restés en brouillon), puis la page est rafraîchie par morphing, puisque plusieurs statuts changent à l'écran.
+- **Lectures ajoutées** : `EssentialRepositoryPort#draft_slugs(course_id:)` et `ExerciseRepositoryPort#draft_public_ids(course_id:|essential_id:)`. Cette dernière ne retient que les exercices dont la fiche est publiée.
+- **Vérification** :
+  - `test/domain/use_cases/catalog/publish_cascade_test.rb` : ordre, comptes, refus, droits ;
+  - les tests des deux repositories ;
+  - `test/controllers/teams/{courses,essentials}_controller_test.rb` : parcours en base, journal, 403, 404, 422, repli sans Turbo ;
+  - `test/system/catalog/course_catalog_test.rb` : clic dans le menu, page fusionnée.

@@ -229,6 +229,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "#course-actions-menu" do
       assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_teams_course_path(@draft.slug)}']"
+      assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_course_path(@draft.slug)}']",
+                    text: I18n.t("catalog.content_status.actions.publish_all")
       assert_select modal_link(edit_teams_course_path(@draft.slug)), text: tl("role_actions.edit")
       assert_select modal_link(new_teams_course_essential_path(@draft.slug)), text: tl("role_actions.new_essential")
       assert_select modal_link(new_teams_import_path(kind: "essentials", course: @draft.slug)),

@@ -131,7 +131,9 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
                       text: I18n.t("#{scope}.show.import_exercises")
         assert_select "#content_transitions_essential_#{essential.slug} a[role=menuitem][data-turbo-method=patch]" \
                       "[href='#{publish_teams_essential_path(essential.slug)}']"
-        assert_select "[role=menuitem]", 4
+        assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_essential_path(essential.slug)}']",
+                      text: I18n.t("catalog.content_status.actions.publish_all")
+        assert_select "[role=menuitem]", 5
       end
     end
     assert_select "#essential_exercises li", 3

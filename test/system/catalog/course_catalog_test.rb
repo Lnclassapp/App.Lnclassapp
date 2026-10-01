@@ -114,6 +114,26 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     assert_empty page.evaluate_script("window.cspViolations")
   end
 
+  # ADR-0035, amendement du 2026-10-01 : « Tout publier » depuis le menu ⋮ ; la page fusionnée montre chaque statut publié.
+  test "the team publishes a draft course with its sheets and exercises from the ⋮ menu, without a page reload" do
+    course = create_course(name: "Mutations", status: "draft")
+    essential = create_essential(course:, name: "Les mutations", status: "draft")
+    create_exercise(essential:, status: "draft")
+    sign_in_as create_team_member
+    visit course_path(course.slug)
+
+    assert_no_page_reload do
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish_all")
+      assert_toast t("teams.publish_cascade.done.course", name: "Mutations",
+                                                          essentials: t("teams.publish_cascade.essentials", count: 1),
+                                                          exercises: t("teams.publish_cascade.exercises", count: 1))
+      assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
+      assert_selector "#essential_#{essential.slug}", text: t("catalog.content_status.published")
+    end
+    assert_equal %w[published published published], [ course, essential, essential.exercises.first ].map { it.reload.status }
+  end
+
   test "on a phone, the catalogue and the course page never scroll sideways" do
     sign_in_as create_student
     with_mobile_viewport do

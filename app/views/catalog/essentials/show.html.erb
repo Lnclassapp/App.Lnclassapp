@@ -31,6 +31,8 @@
             <%= ui_dropdown_item t(".import_exercises"), href: new_teams_import_path(kind: "exercises", essential: essential.slug),
                                  icon: "arrow-up-tray", frame: "modal" %>
             <%= content_transition_items(record: @status_record) %>
+            <%= ui_dropdown_item t("catalog.content_status.actions.publish_all"), href: publish_all_teams_essential_path(essential.slug),
+                                 method: :patch, icon: "check-badge" %>
           <% end %>
         </div>
       <% end %>
