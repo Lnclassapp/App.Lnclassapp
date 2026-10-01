@@ -60,22 +60,26 @@ module UseCases
       end
 
       setup do
-        @classroom = Entities::Classroom::Classroom.new(id: 3, public_id: "cls6e1", name: "6ème 1", teacher_ids: [ 7 ])
-        archived = Entities::Classroom::Classroom.new(id: 4, public_id: "clsold", name: "6ème 2", teacher_ids: [ 7 ], status: "archived")
+        # Niveau 6 (6ème), sans série : les contenus ci-dessous sont de ce niveau, sauf « tle-d » (UDR-0013, 2026-10-01).
+        @classroom = Entities::Classroom::Classroom.new(id: 3, public_id: "cls6e1", name: "6ème 1", teacher_ids: [ 7 ], level_id: 6)
+        archived = Entities::Classroom::Classroom.new(id: 4, public_id: "clsold", name: "6ème 2", teacher_ids: [ 7 ], status: "archived",
+                                                      level_id: 6)
         @classrooms = FakeClassrooms.new(@classroom, archived)
         @resources = {
           [ "Exercise", "ex-meiose" ] => resolved("Exercise", 30, "ex-meiose", "Méiose"),
           [ "Course", "genetique" ] => resolved("Course", 10, "genetique", "Génétique"),
           [ "Essential", "mitose" ] => resolved("Essential", 20, "mitose", "La mitose"),
           [ "Essential", "brouillon" ] => resolved("Essential", 21, "brouillon", "Brouillon", status: "draft"),
-          [ "Exercise", "ex-orphelin" ] => resolved("Exercise", 31, "ex-orphelin", "Orphelin", parents_published: false)
+          [ "Exercise", "ex-orphelin" ] => resolved("Exercise", 31, "ex-orphelin", "Orphelin", parents_published: false),
+          [ "Course", "tle-d" ] => resolved("Course", 11, "tle-d", "Génétique Tle D", course_level: { level_id: 13, series_id: 40 }),
+          [ "Exercise", "ex-6e-serie" ] => resolved("Exercise", 32, "ex-6e-serie", "Série", course_level: { level_id: 6, series_id: 40 })
         }
         @assignments = FakeAssignments.new(@resources)
         @teacher = Entities::Identity::Actor.new(user_id: 7, role: :teacher, school_id: 1)
       end
 
-      def resolved(type, id, key, name, status: "published", parents_published: true)
-        Resolved.new(assignable: Assignable.new(type:, id:, key:, name:), status:, parents_published:)
+      def resolved(type, id, key, name, status: "published", parents_published: true, course_level: { level_id: 6, series_id: nil })
+        Resolved.new(assignable: Assignable.new(type:, id:, key:, name:), status:, parents_published:, course_level:)
       end
 
       def assign(key, type: "Exercise", classroom: "cls6e1", actor: @teacher, assignments: @assignments)
@@ -135,6 +139,17 @@ module UseCases
       test "une ressource absente, non publiée ou dont un parent ne l'est pas est introuvable" do
         [ [ "Exercise", "inconnu" ], [ "Essential", "brouillon" ], [ "Exercise", "ex-orphelin" ] ].each do |type, key|
           assert_equal :not_found, assign(key, type:).code, key
+        end
+        assert_empty @assignments.rows
+      end
+
+      # UDR-0013, amendement du 2026-10-01 : l'élève ne lirait pas un contenu d'un autre niveau ; il ne s'assigne pas.
+      test "un contenu d'un autre niveau, ou d'une série que la classe n'a pas : :conflict (other_level), et rien n'est écrit" do
+        [ [ "tle-d", "Course" ], [ "ex-6e-serie", "Exercise" ] ].each do |key, type|
+          result = assign(key, type:)
+
+          assert_equal :conflict, result.code, key
+          assert_equal({ base: [ :other_level ] }, result.errors, key)
         end
         assert_empty @assignments.rows
       end

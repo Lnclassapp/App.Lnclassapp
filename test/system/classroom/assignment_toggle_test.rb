@@ -11,9 +11,10 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   end
 
   setup do
-    @classroom = create_classroom(name: "6ème 1")
-    @teacher = create_teacher(classrooms: [ @classroom ])
     @course = create_course(name: "Génétique", material: create_material(name: "SVT", category: "science"))
+    # UDR-0013, amendement du 2026-10-01 : un contenu ne s'assigne qu'à une classe de son niveau.
+    @classroom = create_classroom(name: "6ème 1", level: @course.level)
+    @teacher = create_teacher(classrooms: [ @classroom ])
     @meiose = create_essential(course: @course, name: "Méiose")
     create_essential(course: @course, name: "Mitose")
     sign_in_as @teacher

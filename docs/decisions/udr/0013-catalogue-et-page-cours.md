@@ -90,6 +90,7 @@ Le catalogue est la porte d'entrée de l'élève, de l'enseignant et de l'équip
 - **Sans classe de l'année** : le catalogue est vide et le dit (« Rejoins ta classe pour voir tes cours »).
 - **Catalogue de l'élève** : le filtre « Niveau » disparaît, puisqu'il n'en voit qu'un. Le sous-titre devient « Les cours de ton niveau, par matière. »
 - **Autres rôles** : l'enseignant, la direction et l'équipe lisent toujours tous les niveaux. L'enseignant en a besoin pour assigner.
+- **Assignation** *(décision du porteur, même jour)* : un contenu ne s'assigne qu'à une classe de son niveau, et de sa série si le cours en a une. Cela vaut pour le cours, la fiche et l'exercice. Sinon, `AssignResource` répond `:conflict` (`other_level`), en 422, avec un toast qui dit pourquoi, et rien n'est écrit. La règle est la même que pour la lecture (`LevelAudience`, avec la paire de la classe) : un élève ne reçoit jamais un contenu qu'il ne pourrait pas ouvrir. Les assignations hors niveau faites avant cette règle restent en base, mais l'élève ne peut pas les ouvrir.
 - **Vérification** :
   - `test/domain/entities/catalog/level_audience_test.rb` ;
   - `test/domain/policies/catalog/read_own_level_policy_test.rb` ;

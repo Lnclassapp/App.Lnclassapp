@@ -55,23 +55,24 @@ module Repositories
 
       def resolve_course(slug)
         record = Orm::Course.find_by(slug:)
-        record && resolved("Course", record, key: record.slug, name: record.name, parents: [])
+        record && resolved("Course", record, key: record.slug, name: record.name, parents: [], course: record)
       end
 
       def resolve_essential(slug)
         record = Orm::Essential.includes(:course).find_by(slug:)
-        record && resolved("Essential", record, key: record.slug, name: record.name, parents: [ record.course ])
+        record && resolved("Essential", record, key: record.slug, name: record.name, parents: [ record.course ], course: record.course)
       end
 
       def resolve_exercise(public_id)
         record = Orm::Exercise.includes(essential: :course).find_by(public_id:)
         record && resolved("Exercise", record, key: record.public_id, name: record.title,
-                                                parents: [ record.essential, record.essential.course ])
+                                                parents: [ record.essential, record.essential.course ], course: record.essential.course)
       end
 
-      def resolved(type, record, key:, name:, parents:)
+      def resolved(type, record, key:, name:, parents:, course:)
         ResolvedAssignable.new(assignable: Entities::Classroom::Assignable.new(type:, id: record.id, key:, name:),
-                               status: record.status, parents_published: parents.all? { |parent| parent.status == "published" })
+                               status: record.status, parents_published: parents.all? { |parent| parent.status == "published" },
+                               course_level: { level_id: course.level_id, series_id: course.series_id })
       end
 
       def assignable_of(type, id)

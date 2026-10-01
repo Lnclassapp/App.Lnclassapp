@@ -5,7 +5,8 @@ module Ports
   module Classroom
     module AssignmentRepositoryPort
       # Ressource résolue : Entities::Classroom::Assignable, son statut et celui de ses parents.
-      ResolvedAssignable = Data.define(:assignable, :status, :parents_published) do
+      # course_level : { level_id:, series_id: } du cours (le contenu lui-même, ou celui de sa fiche) ; UDR-0013, amendement du 2026-10-01.
+      ResolvedAssignable = Data.define(:assignable, :status, :parents_published, :course_level) do
         def readable? = status == "published" && parents_published
       end
 
