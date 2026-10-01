@@ -1,0 +1,11 @@
+<%# 🌐 UI · school_admin/teachers/destroy — retrait d'un enseignant par la direction (GD-14) %>
+<%# Rôle : toast (nombre de devoirs archivés), ligne retirée avec sa modale ; après la dernière, l'état vide remplace le tableau %>
+<%# ADR  : 0071 · UDR : 0006, 0056 %>
+<%= turbo_stream_toast @notice, type: :success %>
+<%= turbo_stream.remove "teacher_#{@detached.teacher.public_id}" %>
+<% if @last_removed %>
+  <%= turbo_stream.replace "school_teachers" do %>
+    <%= ui_empty_state title: t("school_admin.teachers.index.empty.title"), description: t("school_admin.teachers.index.empty.description"),
+                       icon: "user-group" %>
+  <% end %>
+<% end %>

@@ -1,4 +1,5 @@
 # « Enseignants » de la direction — DS-06, ADR-0065, UDR-0052 · titre de l'onglet : UDR-0054 §3.1
+# Retrait d'un enseignant — GD-14, ADR-0071, UDR-0056 §3.3 ; refus communs : school_admin.shared.errors
 fr:
   school_admin:
     teachers:
@@ -9,13 +10,26 @@ fr:
           zero: "%{school} · aucun enseignant"
           one: "%{school} · %{count} enseignant"
           other: "%{school} · %{count} enseignants"
+        departed: "Enseignants retirés"
         caption: "Enseignants de %{school}"
         columns:
           teacher: "Enseignant"
           material: "Matière"
           classrooms: "Classes"
+          actions: "Actions"
         no_classroom: "Aucune classe"
         missing: "non calculé"
+        actions: "Actions pour %{name}"
+        remove: "Retirer de l'établissement"
+        remove_title: "Retirer %{name} de l'établissement ?"
+        remove_body: "%{first_name} ne verra plus l'établissement ni ses classes. Ses devoirs encore actifs seront archivés : les élèves ne les verront plus à faire. Les classes, les élèves et leurs résultats restent. Vous pourrez le réintégrer depuis « Enseignants retirés »."
+        cancel: "Annuler"
+        confirm: "Retirer"
         empty:
           title: "Aucun enseignant pour l'instant"
           description: "Un enseignant apparaît ici dès qu'il a rejoint l'établissement."
+      destroy:
+        detached:
+          zero: "%{name} a été retiré(e) de l'établissement. Aucun devoir archivé."
+          one: "%{name} a été retiré(e) de l'établissement. 1 devoir archivé."
+          other: "%{name} a été retiré(e) de l'établissement. %{count} devoirs archivés."
