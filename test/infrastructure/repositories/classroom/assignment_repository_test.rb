@@ -80,6 +80,8 @@ module Repositories
 
           assert_equal [ type, record.id, key, name ], resolved.assignable.to_h.values_at(:type, :id, :key, :name), type
           assert resolved.readable?, type
+          # UDR-0013, amendement du 2026-10-01 : le niveau du cours, pour le cours comme pour sa fiche et ses exercices.
+          assert_equal({ level_id: @course.level_id, series_id: @course.series_id }, resolved.course_level, type)
         end
       end
 

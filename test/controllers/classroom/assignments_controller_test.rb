@@ -5,9 +5,10 @@ require "test_helper"
 # 204 and left the button unchanged, raised RecordNotUnique on reassignment and wrote a teacher profile id as the author.
 class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @classroom = create_classroom(name: "6ème 1")
-    @teacher = create_teacher(classrooms: [ @classroom ])
     @course = create_course(name: "Génétique")
+    # UDR-0013, amendement du 2026-10-01 : la classe est du niveau du cours, seul assignable.
+    @classroom = create_classroom(name: "6ème 1", level: @course.level)
+    @teacher = create_teacher(classrooms: [ @classroom ])
     @essential = create_essential(course: @course, name: "La méiose")
     @exercise = create_exercise(essential: @essential, title: "Méiose")
   end
@@ -192,5 +193,17 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     withdraw(Orm::ClassroomAssignment.sole)
     assert_redirected_to classroom_path(@classroom.public_id)
     assert_equal tl("refusals.already_archived"), flash[:alert]
+  end
+
+  # UDR-0013, amendement du 2026-10-01 : un contenu d'un autre niveau ne s'assigne pas ; le refus dit pourquoi.
+  test "a course of another level is refused in 422 with its reason, and nothing is written" do
+    other = create_course(name: "Mécanique")
+    sign_in_as @teacher
+
+    assign("Course", other.slug, as: :turbo_stream)
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("refusals.other_level"))
+    assert_not Orm::ClassroomAssignment.exists?
   end
 end
