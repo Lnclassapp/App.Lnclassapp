@@ -63,4 +63,23 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     get courses_path
     assert_select "#course_#{@other.slug}"
   end
+
+  # Revue de sécurité de la mise en production du 2026-10-01 : une session ouverte avant la règle, sur un exercice d'un
+  # autre niveau, ne se joue plus, ne reçoit plus de réponse et ne montre plus son résultat à son élève.
+  test "a session of another level, opened before the rule, can neither be played, answered nor read back by its student" do
+    started = create_exercise_session(student: @student, exercise: @other_exercise)
+    completed = create_exercise_session(student: @student, exercise: @other_exercise, status: "completed", score_percent: 50)
+    question = @other_exercise.questions.first
+    sign_in_as @student
+
+    get exercise_session_path(started.public_id)
+    assert_response :not_found
+    post exercise_session_attempts_path(started.public_id),
+         params: { attempt: { question_id: question.id, answer_ids: [ question.answers.first.id ] } },
+         as: :turbo_stream
+    assert_response :not_found
+    assert_not Orm::QuestionAttempt.exists?
+    get exercise_session_result_path(completed.public_id)
+    assert_response :not_found
+  end
 end

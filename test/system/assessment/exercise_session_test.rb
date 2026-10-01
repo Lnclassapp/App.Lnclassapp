@@ -14,8 +14,9 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
   SCOPE = "assessment.exercise_sessions".freeze
 
   setup do
-    @student = create_student(classroom: create_classroom)
     exercise = create_exercise(title: "Méiose", questions: 2)
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de l'exercice.
+    @student = create_student_for(exercise.essential.course)
     @first, @second = exercise.questions.order(:position).to_a
     @first.update!(content: "Combien de cellules donne la méiose ?", explanation: "Quatre cellules filles.")
     @second.update!(content: "La méiose réduit-elle le nombre de chromosomes ?")

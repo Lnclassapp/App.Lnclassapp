@@ -1,11 +1,17 @@
 # 🌐 DELIVERY · Assessment::QuestionAttemptsController
-# Rôle : l'élève répond à une question ; verdict et progression en Turbo Stream, erreur de saisie en 422 dans la carte
+# Rôle : l'élève répond à une question de son niveau ; verdict et progression en Turbo Stream, erreur de saisie en 422
 # ADR  : 0026, 0028, 0054 · UDR : 0006, 0007, 0022
 module Assessment
   class QuestionAttemptsController < AuthenticatedController
+    include ReadsOwnLevel
+
     allow_roles :student
 
+    # Sa propre session hors niveau (ouverte avant la règle de l'UDR-0013, 2026-10-01) ne reçoit plus de réponse : 404. La
+    # session d'un autre élève reste refusée par le use case (403), sans rien dire de son niveau.
     def create
+      return if own_session? && refuse_out_of_level(session_public_id: params[:public_id])
+
       @form = Dtos::Assessment::AttemptInput.new(session_public_id: params[:public_id],
                                                  **params.expect(attempt: [ :question_id, { answer_ids: [] } ]).to_h.symbolize_keys)
       result = submit_attempt.call(actor: current_actor, dto: @form)
@@ -16,6 +22,11 @@ module Assessment
     end
 
     private
+
+    def own_session?
+      Repositories::Assessment::ExerciseSessionRepository.new.find_by_public_id(public_id: params[:public_id])&.student_id ==
+        current_actor.user_id
+    end
 
     def render_verdict(submitted)
       @play = play(feedback_question_id: submitted.question_id)

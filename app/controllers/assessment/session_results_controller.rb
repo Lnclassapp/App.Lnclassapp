@@ -3,6 +3,8 @@
 # ADR  : 0026, 0028, 0033, 0054 · UDR : 0007, 0023 · lecture seule, aucun stream
 module Assessment
   class SessionResultsController < AuthenticatedController
+    include ReadsOwnLevel
+
     def show
       session = Repositories::Assessment::ExerciseSessionRepository.new.find_by_public_id(public_id: params[:public_id])
       return render_not_found if session.nil?
@@ -15,6 +17,10 @@ module Assessment
 
     # Session en cours : on la termine d'abord ; abandonnée, la page de la session mène à l'exercice.
     def load_result(session)
+      # Après ReadSessionPolicy : l'élève ne relit pas son résultat d'un exercice hors de son niveau (UDR-0013, 2026-10-01) ;
+      # l'enseignant et l'équipe, si.
+      return if refuse_out_of_level(exercise_id: session.exercise_id)
+
       return redirect_to exercise_session_path(session.public_id) unless session.completed?
 
       exercise = Repositories::Assessment::ExerciseRepository.new.find(id: session.exercise_id)
