@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::LevelClassroomsController
 # Rôle : « + » (classe suivante d'un niveau) et « − » (dernière classe, confirmée) du bloc « Classes par niveau » de la fiche
-# ADR  : 0028, 0036, 0041, 0059 · UDR : 0006, 0046
+# ADR  : 0028, 0036, 0041, 0059, 0071 · UDR : 0006, 0046
 module Teams
   class LevelClassroomsController < BaseController
     # Un refus garde son statut HTTP ; tout autre motif (conflit, saisie) est un 422.
@@ -44,7 +44,7 @@ module Teams
 
     def build(use_case, **dependencies)
       use_case.new(classrooms: Repositories::Classroom::ClassroomRepository.new, schools: Repositories::School::SchoolRepository.new,
-                   audit_log: Repositories::Identity::AuditLogRepository.new, policy: Policies::Classroom::ManageClassroomPolicy.new,
+                   audit_log: Repositories::Identity::AuditLogRepository.new, policy: Policies::School::ManageSchoolStructurePolicy.new,
                    transaction: Repositories::Shared::Transaction.new, clock: Time.zone, **dependencies)
     end
   end

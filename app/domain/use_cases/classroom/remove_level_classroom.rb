@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::RemoveLevelClassroom
 # Rôle : « − » du bloc « Classes par niveau » : supprime la dernière classe d'un niveau/série si elle n'a jamais servi, et la trace
-# ADR  : 0028, 0036, 0041, 0059 · UDR : 0046
+# ADR  : 0028, 0036, 0041, 0059, 0071 · UDR : 0046, 0056
 module UseCases
   module Classroom
     class RemoveLevelClassroom
@@ -13,15 +13,18 @@ module UseCases
         @clock = clock
       end
 
-      # classroom_public_id : la classe que la confirmation a nommée. Tout statut d'établissement (ADR-0059).
-      # → Result(Classroom supprimée) | :forbidden | :not_found (établissement, classe hors de lui ou de l'année)
+      # classroom_public_id : la classe que la confirmation a nommée. Tout statut d'établissement pour l'équipe (ADR-0059) ;
+      # la direction, son seul établissement actif (policy : ManageSchoolStructurePolicy, appelée une fois l'établissement lu).
+      # → Result(Classroom supprimée) | :not_found (établissement, classe hors de lui ou de l'année) | :forbidden
       #   | :conflict (errors: { base: [:not_last | :has_students | :has_teachers | :has_assignments] })
       def call(actor:, school_public_id:, classroom_public_id:)
-        allowed = @policy.call(actor:)
+        school = @schools.find_by_public_id(public_id: school_public_id)
+        return Shared::Result.failure(:not_found) if school.nil?
+
+        allowed = @policy.call(actor:, school:)
         return allowed if allowed.failure?
 
-        school = @schools.find_by_public_id(public_id: school_public_id)
-        classroom = school && @classrooms.find_by_public_id(public_id: classroom_public_id)
+        classroom = @classrooms.find_by_public_id(public_id: classroom_public_id)
         return Shared::Result.failure(:not_found) unless in_current_year?(classroom, school)
         return Shared::Result.failure(:conflict, errors: { base: [ :not_last ] }) unless last?(classroom)
 
