@@ -33,6 +33,41 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "a[href='#{new_session_path}']"
   end
 
+  test "GD-28: a signed-in teacher without a school who opens a code link lands on the waiting screen, code pre-filled" do
+    teacher = create_teacher(school: nil)
+    sign_in_as teacher
+
+    get school_code_signup_path("K7M-4qz")
+
+    assert_redirected_to pending_account_path(school_code: "K7M-4qz")
+    assert_response :see_other
+    follow_redirect!
+    assert_select "input#school_join_school_code[value='K7M-4QZ']"
+    assert_empty Orm::TeacherSchool.where(teacher:), "rien n'est rejoint sans le clic"
+  end
+
+  test "GD-28: a teacher whose request is pending, opening a code link, is sent home as before (the waiting screen, no code)" do
+    teacher = create_teacher(school: nil)
+    create_join_request(teacher:)
+    sign_in_as teacher
+
+    get school_code_signup_path("k7m4qz")
+
+    assert_redirected_to pending_account_path
+  end
+
+  test "GD-28: a direction or a student opening a code link is sent to its home, unchanged" do
+    [ create_school_admin, create_student ].each do |user|
+      sign_in_as user
+
+      get school_code_signup_path("k7m4qz")
+
+      assert_response :redirect, user.role
+      assert_not_includes response.location, "school_code", user.role
+      sign_out
+    end
+  end
+
   test "a signed-in person who opens the sign-up page or a code link is sent home" do
     sign_in_as create_teacher
 
