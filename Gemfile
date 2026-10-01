@@ -87,4 +87,4 @@ end
 
 # json 3.x n'accepte plus de hash positionnel dans JSON.parse, ce qui casse
 # ActiveSupport::JSON.decode (lecture des cookies de session) en Rails 8.1
-gem "json", "~> 2.21"
+gem "json", "~> 3.0"
