@@ -5,8 +5,9 @@ module SchoolAdmin
   class TeachersController < BaseController
     def index
       @overview = teachers_query.call(school_id: current_actor.school_id)
-      # Les gestes ne s'affichent que sur un établissement actif ; le serveur refuse de toute façon (UDR-0056 §2.6).
-      @manageable = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id)&.active?
+      # Gestes affichés sur un établissement actif seulement, le serveur refuse de toute façon (UDR-0056 §2.6) ; BaseController
+      # a déjà refusé une direction sans établissement.
+      @manageable = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id).active?
     end
 
     def destroy
