@@ -31,6 +31,19 @@ class SchoolAdmin::TeachersTest < ApplicationSystemTestCase
     end
   end
 
+  # Challenge empirique (2026-10-01) : le tableau défile dans sa carte, mais le menu ⋮ reste visible sans le faire glisser.
+  test "GD-14: on a 390 px phone, each row's ⋮ menu is on screen without scrolling the table" do
+    with_mobile_viewport do
+      sign_in_as @admin
+      assert_selector "main#main", wait: SIGN_IN_WAIT
+      visit school_admin_teachers_path
+
+      button = find("#teacher_#{@teacher.public_id} [aria-haspopup]")
+      right = page.evaluate_script("arguments[0].getBoundingClientRect().right", button)
+      assert_operator right, :<=, page.evaluate_script("window.innerWidth")
+    end
+  end
+
   private
 
   def assert_withdrawal

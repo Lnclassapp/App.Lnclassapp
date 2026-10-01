@@ -18,7 +18,8 @@
             <% %i[teacher material classrooms].each do |column| %>
               <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
             <% end %>
-            <th scope="col" class="px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+            <%# Au téléphone, la colonne d'actions reste collée au bord droit de la carte : le ⋮ est visible sans faire défiler le tableau. %>
+            <th scope="col" class="sticky right-0 bg-white px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-line">
@@ -37,7 +38,7 @@
               <% else %>
                 <td class="px-4 py-3 text-mute"><%= t(".no_classroom") %></td>
               <% end %>
-              <td class="px-4 py-3 text-right">
+              <td class="sticky right-0 bg-white px-4 py-3 text-right">
                 <% if @manageable %>
                   <% id = "remove-teacher-#{teacher.public_id}" %>
                   <div class="flex justify-end">

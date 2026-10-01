@@ -77,3 +77,14 @@ Corrections de documents qui en découlent : GD-02 (une direction sans établiss
 | `Teams::SchoolCodesController` : un `:conflict` (aucun code libre) rend `render nil` | Préexistant, hors périmètre | À ouvrir en bugfix si un jour observé |
 | `bin/brakeman` force `--ensure-latest` : rouge en local dès qu'une version sort | Outillage du dépôt | Mettre à jour la gem, ou retirer l'option du binstub |
 | Régénérer en masse les liens (équipe) | Demandé, sorti du chantier | `regeneration-codes-en-masse` (backlog) |
+
+## Challenge empirique (phase 5, 2026-10-01)
+
+Rôle distinct des auteurs, application lancée (`bin/rails server`), Playwright + Chromium en 390×844 tactile et en 1280×900, sur `f7755609`. **Les 7 points sont OK** : lien (copier, WhatsApp, changer ; ancien `/e/` en 404 « Code d'établissement invalide ») ; « + » et « − » (refus 422 au motif sur une classe qui a un élève) ; retrait (3 devoirs actifs de A archivés par la direction, le devoir de B reste actif, sessions et classes intactes, enseignant connecté renvoyé vers l'écran d'attente) ; retour (code de A refusé, lien de B pré-rempli puis rejoint, 429 au 11ᵉ essai) ; réintégration ; refus forgés (404 inter-établissements, 403 établissement inactif et équipe, rien d'écrit) ; aucune erreur 500, aucune clé manquante, aucun défilement horizontal de page.
+
+Anomalies :
+- **Moyenne, corrigée** : à 390 px, le menu ⋮ de « Enseignants » était hors écran (tableau défilant dans sa carte, bouton à x = 533). Colonne d'actions collée au bord droit (`sticky right-0`), avec un test système qui mesure la position du bouton (rouge à 581 px avant la correction).
+- Mineure, sans correction : « Copier le lien », « Partager sur WhatsApp », « Enseignants retirés », « Réintégrer » font 40 px **visibles** (`size: :sm`, prescrit par l'UDR) ; leur cible tactile est de 48 px (`after:-inset-1` du gabarit `sm`).
+- Mineure, **à trancher par le porteur** : la modale du « − » et le refus disent « archivez-la plutôt », texte de l'équipe, alors que la direction ne peut pas archiver une classe.
+- Mineure, **à trancher par le porteur** : toast de réintégration au masculin (« Il doit redéclarer ses classes ») ; date « 1 octobre » au lieu de « 1er octobre ».
+- Non exécuté : limite de débit sur le lien `/e/` lui-même (couverte par les tests existants), deux onglets simultanés (simulé par un second `DELETE`), états `aria-busy`, gestes de l'équipe à l'écran (GD-05, GD-13 couverts par les tests).
