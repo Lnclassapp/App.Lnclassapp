@@ -16,21 +16,11 @@ module Queries
         scope = Orm::Course.joins(:level, :material).left_joins(:series)
         # La règle de ReadPublishedPolicy : l'équipe lit tout, les autres ne lisent que le publié.
         scope = scope.where(status: "published") unless actor.team?
-        scope = for_audience(scope, audience) if audience
+        scope = scope.merge(AudienceFilter.courses(audience)) if audience
         scope = scope.where(levels: { slug: level }) if level.present?
         scope = scope.where(materials: { slug: material }) if material.present?
         scope = Queries::Shared::TextSearch.apply(scope, search, columns: [ "courses.name" ])
         scope.order("materials.name", "levels.position", "courses.name", "courses.id").pluck(*COLUMNS).map { Row.new(*it) }
-      end
-
-      private
-
-      # Un cours du niveau d'une classe, sans série ou de la série de cette classe ; aucune classe : aucun cours.
-      def for_audience(scope, audience)
-        return scope.none if audience.empty?
-
-        audience.pairs.map { |level_id, series_id| Orm::Course.where(level_id:, series_id: [ nil, series_id ].uniq) }
-                .reduce(:or).then { scope.merge(it) }
       end
     end
   end
