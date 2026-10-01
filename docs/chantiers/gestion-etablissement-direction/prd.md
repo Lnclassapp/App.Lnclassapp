@@ -21,7 +21,7 @@ La direction d'un établissement lit aujourd'hui ses enseignants et le travail d
 | **Direction d'un établissement inactif ou en brouillon** | Lire ses pages actuelles et le lien (en lecture) | Tout geste : « Changer le lien », « + », « − », retirer, réintégrer |
 | **Équipe** (`team`) | Inchangée : « + », « − », régénérer le code depuis la fiche | Retirer ou réintégrer un enseignant (grill 9) |
 | **Enseignant** rattaché | Inchangé | Accéder à l'espace direction |
-| **Enseignant sans établissement** (retiré, ou demande approuvée puis retiré), sans demande en attente | Saisir le code d'un établissement actif depuis l'écran d'attente et le rejoindre | Rejoindre l'établissement qui l'a retiré, tant qu'il n'est pas réintégré |
+| **Enseignant sans établissement** (retiré, ou demande approuvée puis retiré), sans demande en attente | Rejoindre un établissement actif **par son code** (saisi sur l'écran d'attente) **ou par son lien d'invitation** (porteur, 2026-10-01) | Rejoindre l'établissement qui l'a retiré, tant qu'il n'est pas réintégré |
 | **Élève**, **Parent** | — (rien ne change) | Accéder à l'espace direction |
 
 **Règles d'autorisation** : `Policies::School::ManageSchoolStructurePolicy` (équipe sur tout établissement, ou direction de **cet** établissement s'il est actif) pour « + », « − » et le changement de lien ; `Policies::School::ManageSchoolTeachersPolicy` (direction de **cet** établissement actif, jamais l'équipe) pour retirer et réintégrer ; `Policies::School::JoinSchoolWithCodePolicy` (enseignant sans établissement ni demande en attente). `ManageSchoolPolicy` et `ManageClassroomPolicy` ne changent pas. Détail : [ADR-0071](../../decisions/adr/0071-gestes-de-la-direction-sur-son-etablissement.md).
@@ -56,7 +56,7 @@ La direction d'un établissement lit aujourd'hui ses enseignants et le travail d
 
 ## 4. Critères d'acceptation
 
-« La direction de A » : un compte `school_admin` rattaché à l'établissement actif A ; B est un autre établissement actif. **Chaque geste a son test de refus inter-établissements** (GD-06, GD-11, GD-16, GD-20) et son **refus sur établissement inactif** (GD-07, GD-12, GD-17). 27 critères.
+« La direction de A » : un compte `school_admin` rattaché à l'établissement actif A ; B est un autre établissement actif. **Chaque geste a son test de refus inter-établissements** (GD-06, GD-11, GD-16, GD-20) et son **refus sur établissement inactif** (GD-07, GD-12, GD-17). 28 critères.
 
 ### 4.1 Accès et navigation — [Lot 0]
 
@@ -241,6 +241,15 @@ Scénario: GD-27 — réintégré, il retrouve l'accès par le lien comme les au
   Étant donné un enseignant retiré de A puis réintégré, puis retiré de nouveau
   Quand il saisit le code de A
   Alors il lit « Code d'établissement invalide »
+
+Scénario: GD-28 — il rejoint un autre établissement par le lien d'invitation
+  Étant donné un enseignant retiré de A, connecté
+  Quand il ouvre le lien « /e/<code de B> »
+  Alors il arrive sur l'écran d'attente, le champ « Code d'établissement » rempli avec le code de B
+  Et il n'est rattaché à aucun établissement tant qu'il n'a pas cliqué « Rejoindre l'établissement »
+  Quand il clique « Rejoindre l'établissement »
+  Alors il est rattaché à B
+  Et le lien de A, ouvert de la même façon puis confirmé, lui répond « Code d'établissement invalide »
 ```
 
 ## 5. Modélisation préliminaire

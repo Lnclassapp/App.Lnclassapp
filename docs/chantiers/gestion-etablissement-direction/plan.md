@@ -2,11 +2,11 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Entrées : [`prd.md`](prd.md) (27 critères GD-01 à GD-27), [ADR-0071](../../decisions/adr/0071-gestes-de-la-direction-sur-son-etablissement.md), [UDR-0056](../../decisions/udr/0056-gestes-de-la-direction.md).
+> Entrées : [`prd.md`](prd.md) (28 critères GD-01 à GD-28), [ADR-0071](../../decisions/adr/0071-gestes-de-la-direction-sur-son-etablissement.md), [UDR-0056](../../decisions/udr/0056-gestes-de-la-direction.md).
 
 ## Préalables au Lot 0
 
-- [ ] ADR-0071 et UDR-0056 passés de `Proposé` à `Accepté` par le porteur ([`programme.md` §2](../../workflows/programme.md)), points à confirmer de l'ADR-0071 §9 tranchés ou acceptés tels quels.
+- [x] ADR-0071 et UDR-0056 passés de `Proposé` à `Accepté` par le porteur le 2026-10-01 ; points à confirmer de l'ADR-0071 §9 tranchés le même jour (le lien d'invitation ajouté au retour par code : GD-28, Lot D).
 
 ## Graphe
 
@@ -157,6 +157,7 @@ Le bouton « Enseignants retirés » de l'en-tête (UDR-0056 §3.3) mène à la 
                      app/controllers/school_admin/teacher_reinstatements_controller.rb
                      app/controllers/identity/pending_school_joins_controller.rb
                      app/controllers/identity/pending_accounts_controller.rb
+                     app/controllers/identity/teacher_registrations_controller.rb
                      app/views/school_admin/departed_teachers/index.html.erb
                      app/views/school_admin/teacher_reinstatements/create.turbo_stream.erb
                      app/views/identity/pending_accounts/show.html.erb
@@ -172,7 +173,8 @@ Le bouton « Enseignants retirés » de l'en-tête (UDR-0056 §3.3) mène à la 
                      test/controllers/school_admin/departed_teachers_controller_test.rb (GD-21 : liste, état vide, 403 aux autres rôles)
                      test/controllers/school_admin/teacher_reinstatements_controller_test.rb (GD-19, GD-20 : 404 enseignant de B, 403 inactif)
                      test/controllers/identity/pending_school_joins_controller_test.rb (GD-23, GD-24, GD-25 : 429, GD-26 : 403)
-                     test/controllers/identity/pending_accounts_controller_test.rb (GD-22 : formulaire pour l'enseignant sans établissement ; absent pour une demande en attente)
+                     test/controllers/identity/pending_accounts_controller_test.rb (GD-22 : formulaire pour l'enseignant sans établissement ; absent pour une demande en attente ; GD-28 : code pré-rempli)
+                     test/controllers/identity/teacher_registrations_controller_test.rb (GD-28 : `/e/<code>` ouvert par un enseignant connecté sans établissement → écran d'attente pré-rempli ; autres comptes connectés → leur accueil, inchangé)
                      test/system/school_admin/departed_teachers_test.rb (GD-19 puis GD-23, à 390 px ; les départs sont créés par la fabrique du Lot 0)
 - **Done quand**   : la direction voit ses enseignants retirés et en réintègre un ; un enseignant retiré saisit le code d'un autre établissement depuis l'écran d'attente et arrive sur le choix de ses classes ; le code de l'établissement qui l'a retiré est refusé avec le message d'un code invalide
 
@@ -188,9 +190,9 @@ D ne dépend pas de C dans les fichiers : ses tests créent les départs par la 
 | A | GD-04, GD-05, GD-06, GD-07 |
 | B | GD-08, GD-09, GD-10, GD-11, GD-12, GD-13 |
 | C | GD-14, GD-15, GD-16, GD-17, GD-18 |
-| D | GD-19, GD-20, GD-21, GD-22, GD-23, GD-24, GD-25, GD-26, GD-27 |
+| D | GD-19, GD-20, GD-21, GD-22, GD-23, GD-24, GD-25, GD-26, GD-27, GD-28 |
 
-Aucun critère orphelin : GD-01 à GD-27, chacun rattaché à un lot et à au moins un fichier de test.
+Aucun critère orphelin : GD-01 à GD-28, chacun rattaché à un lot et à au moins un fichier de test.
 
 ---
 
@@ -256,7 +258,7 @@ Ordre de fusion conseillé (démonstration, pas fichiers) : A et B, puis C, puis
 
 Portes propres à ce chantier :
 
-- [ ] ADR-0071 et UDR-0056 `Accepté` (préalables)
+- [x] ADR-0071 et UDR-0056 `Accepté` (préalables, 2026-10-01)
 - [ ] Chaque geste a son test de refus inter-établissements et son refus sur établissement inactif (PRD §4)
 - [ ] Les tests existants de la fiche de l'équipe (« + », « − », code) passent sans modification après le déplacement du partiel
 

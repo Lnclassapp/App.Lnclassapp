@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-10-01)* |
 | **Date** | 2026-10-01 |
 | **Chantier** | [`docs/chantiers/gestion-etablissement-direction`](../../chantiers/gestion-etablissement-direction/prd.md) — critères GD-01 à GD-27 |
 | **ADR lié** | [ADR-0071](../adr/0071-gestes-de-la-direction-sur-son-etablissement.md) · [ADR-0065](../adr/0065-espace-direction-simple-en-lecture-seule.md) · [ADR-0057](../adr/0057-code-d-etablissement.md) · [ADR-0059](../adr/0059-ajuster-les-classes-d-un-niveau.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0042](0042-actions-de-ligne-dans-un-menu.md) · [UDR-0054](0054-finitions-d-interface.md) |
@@ -119,6 +119,7 @@ Dans `identity/pending_accounts/show`, pour un `teacher` **sans établissement**
 
 - `ui_empty_state(icon: "building-library", title: "Vous n'êtes rattaché à aucun établissement", description: "Saisissez le code de votre établissement pour le rejoindre. Il vous a été transmis par sa direction.")` ; une demande `rejected` garde au-dessus son message existant.
 - Sous l'état vide : `form_with model: @school_join, scope: :school_join, url: pending_school_join_path, id: "school-join-form"` : `ui_field f, :school_code` au gabarit de l'inscription enseignant (UDR-0044 : libellé « Code d'établissement », `placeholder` « K7M-4QZ », aide « 6 caractères, transmis par votre établissement. », `autocomplete="off"`, `autocapitalize="characters"`, classes `font-mono tracking-wider uppercase`), puis `ui_button "Rejoindre l'établissement", type: :submit, variant: :brand, full: true` ; puis « Se déconnecter » (inchangé).
+- **Par le lien d'invitation** (porteur, 2026-10-01) : `GET /e/<code>` ouvert par un enseignant **connecté**, sans établissement et sans demande `pending`, répond 303 vers `pending_account_path(school_code: <code>)` ; l'écran d'attente pré-remplit `school_join[school_code]` avec ce code (affiché `K7M-4QZ`) et ne rejoint **rien** sans le clic « Rejoindre l'établissement ». Un code invalide arrive pré-rempli lui aussi et reçoit l'erreur à l'envoi. Tout autre compte connecté qui ouvre le lien garde le comportement actuel (son accueil). Le lien compte dans la limite de débit existante de `/e/<code>` (`school_code`, 10 par minute et par adresse).
 - `POST /account/pending/school` → `JoinSchoolWithCode`. Succès : 303 vers `teacher_classrooms_path`, `notice` « Bienvenue à <établissement>. Sélectionnez vos classes. » ; erreur : 422, écran re-rendu, saisie gardée, erreur sous le champ « Code d'établissement invalide. Vérifiez-le auprès de votre établissement. » ; **10 par minute et par adresse** ; au-delà, 429, `ui_error_state(title: "Trop de tentatives", message: "Réessayez dans une minute.")` à la place du formulaire ; demande en attente → 403.
 
 **États** : vide (le formulaire) ; chargement : `aria-busy` du formulaire ; erreur : sous le champ (422), `ui_error_state` (429) ; succès : redirection.

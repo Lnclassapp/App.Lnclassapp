@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-10-01)* |
 | **Date** | 2026-10-01 |
 | **Chantier** | [`docs/chantiers/gestion-etablissement-direction`](../../chantiers/gestion-etablissement-direction/prd.md) — critères GD-01 à GD-27 |
 | **Amende** | [ADR-0065](./0065-espace-direction-simple-en-lecture-seule.md) (la direction n'est plus en lecture seule), [ADR-0057](./0057-code-d-etablissement.md) (la direction régénère le code), [ADR-0059](./0059-ajuster-les-classes-d-un-niveau.md) (la direction a « + » et « − »), [ADR-0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md) (un enseignant quitte et rejoint un établissement) |
@@ -204,8 +204,8 @@ Contrôleurs de la direction : héritent de `SchoolAdmin::BaseController` (ADR-0
 
 ## 9. Points à confirmer par le porteur
 
-Décisions prises par délégation (grill du 2026-10-01), amendables :
+Tranchés par le porteur le 2026-10-01 :
 
-- La réintégration ne rend **ni les classes ni les devoirs archivés**.
-- Un enseignant dont la demande a été **refusée** peut rejoindre un établissement par code.
-- L'enseignant retiré n'est **pas prévenu** et reste en session jusqu'à sa requête suivante.
+- La réintégration ne rend **ni les classes ni les devoirs archivés** : **confirmé** (« oui pour la réintégration »).
+- L'enseignant retiré n'est **pas prévenu** avant le retrait, et reste en session jusqu'à sa requête suivante : **confirmé** (« pas de prévention avant le retrait »).
+- Un enseignant sans établissement (retiré, ou dont la demande a été refusée) rejoint un autre établissement **par le code ou par le lien d'invitation** : **confirmé et élargi au lien** (« il peut rejoindre un autre établissement soit avec le code, soit avec le lien d'invitation »). Le lien `/e/<code>`, ouvert par un enseignant connecté sans établissement, mène à l'écran d'attente avec le code déjà rempli ; il confirme par « Rejoindre l'établissement » (même use case `JoinSchoolWithCode`, mêmes refus). Amende `Identity::TeacherRegistrationsController#with_code`, qui renvoyait tout compte connecté vers son accueil.
