@@ -8,7 +8,7 @@ module ReadsOwnLevel
 
   # content_key : course_slug:, course_id: ou exercise_public_id:. → true si la réponse 404 est rendue (élève hors niveau).
   def refuse_out_of_level(**content_key)
-    return false unless current_actor&.student?
+    return false unless current_actor.student? # AuthenticatedController : l'acteur est toujours là
 
     course_level = Queries::Catalog::CourseLevelQuery.new.call(**content_key)
     allowed = course_level &&
