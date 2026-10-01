@@ -63,7 +63,7 @@ jobs:
 
       - name: Rubocop cache
         if: matrix.group == 'lint'
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: tmp/rubocop
           key: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-${{ github.sha }}
