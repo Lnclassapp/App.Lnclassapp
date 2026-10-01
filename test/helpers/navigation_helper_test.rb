@@ -27,7 +27,7 @@ class NavigationHelperTest < ActionView::TestCase
   test "nav_path resolves a drawn route and leaves the others inactive" do
     courses = navigation_for(:student)[1]
     dashboard = navigation_for(:team).last
-    teachers = navigation_for(:school_admin).last
+    teachers = navigation_for(:school_admin).find { it.key == :teachers }
 
     assert_equal "/courses", nav_path(courses)
     assert_equal "/teams/dashboard", nav_path(dashboard)
@@ -37,12 +37,13 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil nav_path(teachers)
   end
 
-  # DS-05 (UDR-0052, amendment of UDR-0006): the direction has exactly two destinations, both drawn, and no home
-  # of its own: « Travail des élèves » is its home.
-  test "the direction's navigation is « Travail des élèves » then « Enseignants »" do
-    assert_equal [ [ :student_work, "/school-admin/classrooms", "chart-bar" ], [ :teachers, "/school-admin/teachers", "user-group" ] ],
+  # DS-05 (UDR-0052, amendment of UDR-0006), GD-01 (UDR-0056 §3.1): the direction has exactly three destinations, all
+  # drawn, and no home of its own: « Travail des élèves » is its home.
+  test "the direction's navigation is « Travail des élèves », « Enseignants » then « Établissement »" do
+    assert_equal [ [ :student_work, "/school-admin/classrooms", "chart-bar" ], [ :teachers, "/school-admin/teachers", "user-group" ],
+                   [ :school, "/school-admin/school", "building-library" ] ],
                  navigation_for(:school_admin).map { [ it.key, nav_path(it), it.icon ] }
-    assert_equal [ "Travail des élèves", "Enseignants" ],
+    assert_equal [ "Travail des élèves", "Enseignants", "Établissement" ],
                  navigation_for(:school_admin).map { I18n.t("shared.navigation.#{it.key}") }
     assert_equal "/school-admin/classrooms", home_path_for(:school_admin)
   end

@@ -1,9 +1,10 @@
 <%# 🌐 UI · teams/level_classrooms/update — réponse de « + » et « − » du bloc « Classes par niveau » %>
 <%# Rôle : toast (succès ou motif du refus), bloc remplacé par morphing ; après un succès, fiche re-demandée et fusionnée %>
-<%# ADR  : 0059 · UDR : 0006, 0046 %>
+<%# ADR  : 0059 · UDR : 0006, 0046, 0056 %>
 <%= turbo_stream_toast @notice || @alert, type: @notice ? :success : :error %>
 <%= turbo_stream.replace "school_level_classrooms", method: :morph do %>
-  <%= render "teams/schools/level_classrooms", block: @block %>
+  <%= render "shared/level_classrooms", block: @block, add_url: school_level_classrooms_path(@block.school_public_id),
+                                        remove_url: ->(public_id) { school_level_classroom_path(@block.school_public_id, public_id) } %>
 <% end %>
 <% if @notice %>
   <%= turbo_stream.refresh(request_id: nil) %>

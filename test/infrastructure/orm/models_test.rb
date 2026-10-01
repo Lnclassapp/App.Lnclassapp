@@ -44,7 +44,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
   end
 
   test "every V1 table has its Orm model with an explicit table name" do
-    assert_equal 36, MODELS.size # + referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065), rich_text_row (ADR-0068)
+    assert_equal 37, MODELS.size # + referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065), rich_text_row (ADR-0068), teacher_school_departures (ADR-0071)
     MODELS.each { |model| assert model.table_name.present? && model.table_exists?, model.name }
   end
 

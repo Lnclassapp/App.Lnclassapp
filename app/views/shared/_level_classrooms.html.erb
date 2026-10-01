@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/schools/_level_classrooms — bloc « Classes par niveau » de la fiche, remplacé par les streams de level_classrooms %>
+<%# 🌐 UI · shared/_level_classrooms — bloc « Classes par niveau », partagé par la fiche de l'équipe et la page de la direction %>
 <%# Rôle : une ligne par niveau/série : nombre de classes de l'année, « − » (dernière classe, confirmée) et « + » (classe suivante) %>
-<%# ADR  : 0041, 0059 · UDR : 0006, 0046 %>
+<%# ADR  : 0041, 0059, 0071 · UDR : 0006, 0046, 0056 · add_url : chemin du « + » ; remove_url : public_id → chemin du « − » %>
 <% scope = "teams.level_classrooms.block" %>
 <% accepts_classrooms = block.school_status == "active" %>
 <section id="school_level_classrooms" aria-labelledby="school_level_classrooms_title" class="rounded-card border border-line bg-white shadow-card">
@@ -29,7 +29,7 @@
                   <%= ui_button t("#{scope}.cancel"), variant: :secondary, data: { action: "modal#close" } %>
                   <%= ui_button t("#{scope}.confirm_remove"), type: :submit, variant: :danger, form: "remove-classroom-#{row.key}-form" %>
                 <% end %>
-                <%= form_with url: school_level_classroom_path(block.school_public_id, row.last_classroom.public_id), method: :delete,
+                <%= form_with url: remove_url.call(row.last_classroom.public_id), method: :delete,
                               id: "remove-classroom-#{row.key}-form" do %>
                   <p class="text-sm text-mute"><%= t("#{scope}.remove_warning") %></p>
                 <% end %>
@@ -39,7 +39,7 @@
             <% end %>
             <span class="w-8 text-center font-display text-lg font-extrabold tabular-nums" aria-hidden="true"><%= row.count %></span>
             <% if accepts_classrooms && row.open %>
-              <%= form_with url: school_level_classrooms_path(block.school_public_id), method: :post do %>
+              <%= form_with url: add_url, method: :post do %>
                 <%= hidden_field_tag :level, row.level_slug, id: nil %>
                 <%= hidden_field_tag :series, row.series_slug, id: nil %>
                 <%= ui_button tag.span(t("#{scope}.add", level: row.label), class: "sr-only"), type: :submit, variant: :secondary, icon: "plus" %>
