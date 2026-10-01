@@ -1,22 +1,26 @@
 # 🌐 DELIVERY · Catalog::CoursesController
-# Rôle : catalogue filtré et cherché par nom (frame « courses », `q`) et page d'un cours, pour tous les rôles connectés ; non publié : 404 hors équipe
+# Rôle : catalogue filtré et cherché par nom (frame « courses », `q`) et page d'un cours ; non publié : 404 hors équipe ; élève : son niveau seul
 # ADR  : 0026, 0028, 0035 · UDR : 0006, 0013, 0054
 module Catalog
   class CoursesController < AuthenticatedController
+    include ReadsOwnLevel
+
     LIST_FRAME = "courses".freeze
     FILTERS = %i[level material q].freeze
 
-    helper_method :list_frame_request?, :filter_options
+    helper_method :list_frame_request?, :filter_options, :student_audience
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
       @courses = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, level: @filters[:level],
-                                                               material: @filters[:material], search: @filters[:q])
+                                                               material: @filters[:material], search: @filters[:q],
+                                                               audience: (student_audience if current_actor.student?))
     end
 
     def show
       @detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:slug], actor: current_actor)
       return render_not_found if @detail.nil?
+      return if refuse_out_of_level(course_slug: params[:slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
                     success: ->(_) { load_status_record }

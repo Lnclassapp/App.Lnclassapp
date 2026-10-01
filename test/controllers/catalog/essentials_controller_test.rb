@@ -6,9 +6,10 @@ require "test_helper"
 # a draft sheet, or a sheet of a draft course, answers 404. The old page showed a fake « Conforme au programme » banner.
 class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @classroom = create_classroom
     @course = create_course(name: "Génétique et évolution", level: create_level(name: "Tle"), series: create_series(name: "D"),
                             material: create_material(name: "SVT", category: "science"))
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle D, le niveau du cours.
+    @classroom = create_classroom(level: @course.level, series: @course.series)
     @essential = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions",
                                   content: "<p>Le <strong>brassage</strong> génétique : $2^n$ combinaisons.</p>")
     @exercise = create_exercise(essential: @essential, title: "Méiose et ADN", description: "Deux divisions successives.",

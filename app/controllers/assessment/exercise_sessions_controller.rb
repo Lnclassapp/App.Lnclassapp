@@ -1,12 +1,16 @@
 # 🌐 DELIVERY · Assessment::ExerciseSessionsController
-# Rôle : l'élève démarre, reprend ou recommence un exercice, puis joue sa session ; une session terminée mène au résultat
+# Rôle : l'élève démarre (exercice de son niveau), reprend ou recommence un exercice, puis joue sa session ; terminée → résultat
 # ADR  : 0026, 0028, 0043, 0048, 0054 · UDR : 0022
 module Assessment
   class ExerciseSessionsController < AuthenticatedController
+    include ReadsOwnLevel
+
     allow_roles :student
 
     # « Commencer », « Reprendre » ou « Recommencer » (restart=true) : change de page, sans stream.
     def create
+      return if refuse_out_of_level(exercise_public_id: params[:exercise_public_id])
+
       result = start_session.call(actor: current_actor, exercise_public_id: params[:exercise_public_id],
                                   restart: params[:restart] == "true")
       render_result result, success: ->(session) { redirect_to exercise_session_path(session.public_id), status: :see_other }

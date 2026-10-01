@@ -5,9 +5,11 @@ require "test_helper"
 # prochaine question, sans aucune correction.
 class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @classroom = create_classroom
-    @student = create_student(classroom: @classroom)
     @exercise = create_exercise(title: "Méiose", questions: 2)
+    course = @exercise.essential.course
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de l'exercice.
+    @classroom = create_classroom(level: course.level, series: course.series)
+    @student = create_student(classroom: @classroom)
   end
 
   def scope = "assessment.exercise_sessions"
