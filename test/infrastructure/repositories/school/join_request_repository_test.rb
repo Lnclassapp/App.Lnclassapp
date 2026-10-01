@@ -56,6 +56,15 @@ module Repositories
         assert_equal "pending", request.reload.status
       end
 
+      test "pending_for reads the teacher's pending request only (ADR-0071 §4.5)" do
+        created = @repository.create(teacher_id: @teacher.id, school_id: @school.id, at: NOW, max_pending: 5).value
+
+        assert_equal created, @repository.pending_for(teacher_id: @teacher.id)
+        @repository.reject(id: created.id, decided_by_id: @team.id, at: NOW)
+        assert_nil @repository.pending_for(teacher_id: @teacher.id)
+        assert_nil @repository.pending_for(teacher_id: create_teacher(school: nil).id)
+      end
+
       test "reject decides the request without attaching anyone, once" do
         request = create_join_request(school: @school, teacher: @teacher)
 

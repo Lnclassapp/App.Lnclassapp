@@ -45,7 +45,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_badges" => [ [ %w[student_id exercise_id], nil ] ],
     "knowledge_gaps" => [ [ %w[student_id essential_id], "status='pending'" ] ],
     "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ] ],
-    "classroom_plan_entries" => [ [ %w[school_type level_id series_id], "series_idISNOTNULL" ], [ %w[school_type level_id], "series_idISNULL" ] ]
+    "classroom_plan_entries" => [ [ %w[school_type level_id series_id], "series_idISNOTNULL" ], [ %w[school_type level_id], "series_idISNULL" ] ],
+    "teacher_school_departures" => [ [ %w[teacher_id school_id], "reinstated_atISNULL" ] ]
   }.freeze
 
   # table => { column => allowed values } for every string enumeration.
@@ -183,6 +184,47 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
         Orm::Invitation.create!(kind: "school_staff", contact: "0700000009", token_digest: "x" * 64, expires_at: 1.day.from_now)
       end
     end
+  end
+
+  # ADR-0071 §4.4 : un retrait d'enseignant reste ouvert jusqu'à sa réintégration ; un seul ouvert par couple.
+  test "GD: a teacher has one open departure per school, reinstated by someone at some time, both or neither" do
+    school = create_school
+    teacher = create_teacher(school: nil)
+    admin = create_school_admin(school:)
+    departure = create_teacher_departure(teacher:, school:, detached_by: admin)
+
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { create_teacher_departure(teacher:, school:, detached_by: admin) }
+    end
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { departure.update_columns(reinstated_at: Time.current) }
+    end
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { departure.update_columns(reinstated_by_id: admin.id) }
+    end
+    departure.update_columns(reinstated_at: Time.current, reinstated_by_id: admin.id)
+    create_teacher_departure(teacher:, school:, detached_by: admin)
+    create_teacher_departure(teacher:, school: create_school, detached_by: admin)
+
+    assert_equal 3, Orm::TeacherSchoolDeparture.where(teacher:).count
+    assert_includes connection.indexes("teacher_school_departures").map(&:columns), %w[school_id detached_at]
+  end
+
+  test "GD: a departure keeps its teacher, its school and the people who acted on it (RESTRICT)" do
+    expected = { "teacher_id" => "users", "school_id" => "schools", "detached_by_id" => "users", "reinstated_by_id" => "users" }
+    foreign_keys = connection.foreign_keys("teacher_school_departures")
+
+    assert_equal expected, foreign_keys.to_h { [ it.column, it.to_table ] }
+    assert(foreign_keys.all? { it.on_delete == :restrict })
+    assert_equal %w[detached_at detached_by_id school_id teacher_id],
+                 connection.columns("teacher_school_departures").reject(&:null).map(&:name).without("id").sort
+
+    # Nothing else references these two rows: only the departure holds them.
+    school = create_school
+    teacher = create_user(role: "teacher")
+    create_teacher_departure(teacher:, school:, detached_by: create_user(role: "school_admin"))
+    assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::User.where(id: teacher.id).delete_all } }
+    assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::School.where(id: school.id).delete_all } }
   end
 
   test "every exposed table has a 14 character public_id with a unique index" do

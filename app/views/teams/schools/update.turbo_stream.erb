@@ -1,7 +1,9 @@
 <%# 🌐 UI · teams/schools/update — succès de la modification %>
 <%# Rôle : toast, ligne de la liste, en-tête et bloc « Classes par niveau » de la fiche remplacés (chacun ignoré s'il n'est pas sur la page) ; la modale se ferme sur l'envoi réussi %>
-<%# ADR  : 0030 · UDR : 0006, 0036, 0046 %>
+<%# ADR  : 0030 · UDR : 0006, 0036, 0046, 0056 %>
 <%= turbo_stream_toast t(".done", name: @school.name), type: :success %>
 <%= turbo_stream.replace "school_#{@school.public_id}", partial: "school_row", locals: { school: @school } %>
 <%= turbo_stream.replace "school_header", partial: "header", locals: { school: @school } %>
-<%= turbo_stream.replace "school_level_classrooms", partial: "level_classrooms", locals: { block: @level_classrooms } %>
+<%= turbo_stream.replace "school_level_classrooms", partial: "shared/level_classrooms",
+                                                   locals: { block: @level_classrooms, add_url: school_level_classrooms_path(@school.public_id),
+                                                             remove_url: ->(public_id) { school_level_classroom_path(@school.public_id, public_id) } } %>
