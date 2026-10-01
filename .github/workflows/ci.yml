@@ -113,7 +113,7 @@ jobs:
         run: bin/ci
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure() && startsWith(matrix.group, 'system')
         with:
           name: screenshots-${{ strategy.job-index }}
@@ -121,7 +121,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Keep the coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always() && startsWith(matrix.group, 'unit')
         with:
           name: coverage
