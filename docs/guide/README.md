@@ -16,6 +16,8 @@
 | 5 | [`glossaire.md`](glossaire.md) | Le langage omniprésent : un concept = un seul mot | Dès qu'un terme métier apparaît |
 | 6 | [`configuration.md`](configuration.md) | Secrets et variables d'environnement : ce qui doit exister, où, et ce qui casse si ça manque | Avant le premier déploiement |
 
+**Pour l'équipe terrain** : [`onboarding-etablissement.md`](onboarding-etablissement.md) — faire entrer un établissement, sa direction et ses enseignants (parcours utilisateur, pas technique).
+
 Puis, **avant d'écrire la moindre ligne de code** : [`../workflows/README.md`](../workflows/README.md). Le guide dit *comment c'est fait*, le workflow dit *comment on fait*.
 
 **Si tu es un agent IA** : [`conventions.md`](conventions.md) → [`../workflows/README.md`](../workflows/README.md) → le [blueprint](../blueprints/) de la couche que tu touches. Les autres fichiers sont du contexte, ces trois-là sont des contrats.
