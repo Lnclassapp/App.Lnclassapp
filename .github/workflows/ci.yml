@@ -58,7 +58,7 @@ jobs:
     env:
       CI_GROUP: ${{ matrix.group }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
 
       - name: Rubocop cache
@@ -104,7 +104,7 @@ jobs:
         options: --health-cmd="pg_isready" --health-interval=1s --health-timeout=5s --health-retries=30
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
 
       # Google Chrome and its driver are preinstalled on ubuntu-latest: the
