@@ -36,13 +36,23 @@ class SchoolAdmin::DepartedTeachersControllerTest < ActionDispatch::IntegrationT
     assert_select "li#departed_teacher_#{awa.public_id}" do
       assert_select ".font-medium", text: "Awa Koné"
       assert_select "*", text: /Mathématiques/
-      assert_select ".text-mute", text: t("detached_on", date: I18n.l(Date.new(2026, 9, 28), format: :long))
+      assert_select ".text-mute", text: "Retiré le 28 septembre 2026"
       assert_select "form#reinstate-#{awa.public_id}-form[action='#{school_admin_teacher_reinstatement_path(awa.public_id)}'][method=post]" do
         assert_select "button[type=submit][aria-label=?]", t("reinstate_label", name: "Awa Koné"), text: /#{t('reinstate')}/
       end
     end
     assert_not_includes response.body, "Ailleurs"
     assert_not_includes response.body, "DeB"
+  end
+
+  # Le premier du mois s'écrit « 1er » (porteur, 2026-10-01).
+  test "un retrait du premier du mois s'écrit « 1er »" do
+    awa = departed(first_name: "Awa", last_name: "Koné", detached_at: Time.zone.local(2026, 10, 1, 10))
+    sign_in_as @admin
+
+    get school_admin_departed_teachers_path
+
+    assert_select "li#departed_teacher_#{awa.public_id} .text-mute", text: "Retiré le 1er octobre 2026"
   end
 
   test "un enseignant sans matière : un tiret, « non calculé » pour le lecteur d'écran" do

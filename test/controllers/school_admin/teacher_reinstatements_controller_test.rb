@@ -59,6 +59,8 @@ class SchoolAdmin::TeacherReinstatementsControllerTest < ActionDispatch::Integra
     assert_redirected_to school_admin_departed_teachers_path
     assert_response :see_other
     assert_equal t("done", name: "Awa Koné"), flash[:notice]
+    # Tournure neutre, quel que soit le genre du compte (porteur, 2026-10-01).
+    assert_equal "Awa Koné est de nouveau dans l'établissement et doit redéclarer ses classes.", flash[:notice]
   end
 
   test "GD-20 : un enseignant retiré de B : 404, toast « Introuvable. », rien n'est écrit" do

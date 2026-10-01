@@ -21,7 +21,9 @@
                 <span aria-hidden="true">—</span><span class="sr-only"><%= t(".missing") %></span>
               <% end %>
             </span>
-            <span class="text-sm text-mute"><%= t(".detached_on", date: l(teacher.detached_at.to_date, format: :long)) %></span>
+            <%# Le premier du mois s'écrit « 1er » (porteur, 2026-10-01). %>
+            <% date = teacher.detached_at.to_date %>
+            <span class="text-sm text-mute"><%= t(".detached_on", date: date.day == 1 ? "1er #{l(date, format: "%B %Y")}" : l(date, format: :long)) %></span>
           </div>
           <% if @overview.school_active %>
             <%= form_with url: school_admin_teacher_reinstatement_path(teacher.public_id), method: :post,

@@ -88,3 +88,10 @@ Anomalies :
 - Mineure, **à trancher par le porteur** : la modale du « − » et le refus disent « archivez-la plutôt », texte de l'équipe, alors que la direction ne peut pas archiver une classe.
 - Mineure, **à trancher par le porteur** : toast de réintégration au masculin (« Il doit redéclarer ses classes ») ; date « 1 octobre » au lieu de « 1er octobre ».
 - Non exécuté : limite de débit sur le lien `/e/` lui-même (couverte par les tests existants), deux onglets simultanés (simulé par un second `DELETE`), états `aria-busy`, gestes de l'équipe à l'écran (GD-05, GD-13 couverts par les tests).
+
+## Textes tranchés par le porteur (2026-10-01)
+
+- **« − » refusé** : « archivez-la plutôt » renvoyait à un geste qui n'existe pas (personne n'archive une classe avant `vie-de-la-classe`, ADR-0041) ; les trois refus deviennent « … : elle ne peut plus être retirée. » et la confirmation « Seule une classe qui n'a jamais servi peut être retirée. ». Vaut pour l'équipe et la direction (UDR-0046 amendée).
+- **Réintégration** : tournure neutre, « <nom> est de nouveau dans l'établissement et doit redéclarer ses classes. » (UDR-0056 §3.4).
+- **Date** : « Retiré le 1er octobre 2026 » le premier du mois (UDR-0056 §3.4).
+- **PR #126** passée de brouillon à prête pour relecture, vers `Develop`.

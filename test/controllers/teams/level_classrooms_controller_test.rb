@@ -108,7 +108,7 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
                  Orm::AuditEvent.sole.metadata)
   end
 
-  test "CN-06 : une classe qui a un élève est refusée : 422, « archivez-la plutôt », rien n'est supprimé" do
+  test "CN-06 : une classe qui a un élève est refusée : 422, « ne peut plus être retirée », rien n'est supprimé" do
     create_student(classroom: @sixths.last)
     sign_in_as @member
 
@@ -116,6 +116,8 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("errors.has_students"))
+    # Personne ne peut archiver une classe aujourd'hui (ADR-0041, V3) : le refus ne renvoie vers aucun geste absent (porteur, 2026-10-01).
+    assert_equal "Cette classe a des élèves : elle ne peut plus être retirée.", tc("errors.has_students")
     assert_select "turbo-stream[action=replace] template #level_classrooms_6eme [role=group][aria-label=?]",
                   tc("block.count", level: "6ème", count: 4)
     assert Orm::Classroom.exists?(@sixths.last.id)
