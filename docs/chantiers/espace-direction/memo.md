@@ -74,7 +74,7 @@ La V1 est close et en production. La V2 est la vague suivante du programme ; le 
 - **Matricule déjà pris à l'inscription** : refusé sans dire à qui il appartient ; l'élève est invité à vérifier son matricule ou à contacter l'équipe. **Seul l'élève corrige son matricule**, depuis son profil, sous son PIN actuel (relecture du 2026-09-28) ; un matricule usurpé se libère par l'anonymisation (`annuaire-equipe`).
 - **Enseignant retiré par erreur** : le Proviseur ou le Censeur le réintègre depuis « Enseignants retirés » ; il retrouve l'établissement, pas ses classes (il s'y redéclare) : décision déléguée, amendable.
 - **Première direction d'un établissement** : l'équipe l'invite (ADR-0044), avec le même lien d'invitation à usage unique que pour les comptes de l'équipe, à transmettre hors de Lnclass.
-- **Invitations du personnel** : le Proviseur et le Censeur invitent (grill 8). Seul un Proviseur invite un Proviseur, et il n'y a qu'un Proviseur actif par établissement (ADR-0044).
+- **Invitations du personnel** : le Proviseur et le Censeur invitent (grill 8). Seule l'équipe invite un Proviseur : il n'y a qu'un Proviseur actif par établissement (ADR-0044), qui ne peut donc pas en inviter un second (challenge 1, point 8 ; ADR-0066 §4.3).
 - **Départ du Proviseur** : seule l'équipe le retire ou le remplace ; un Proviseur ne se retire pas lui-même. Un établissement sans Proviseur reste géré par son Censeur, ou par l'équipe.
 - **Membre du personnel retiré** : ses sessions sont fermées ; son compte ne voit plus que son profil (ADR-0044).
 - **Second facteur** : obligatoire pour toute la direction, comme pour l'équipe (ADR-0044, ADR-0031). Sa perte est réinitialisée par l'équipe.
