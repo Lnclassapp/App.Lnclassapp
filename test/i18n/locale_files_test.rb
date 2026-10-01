@@ -4,6 +4,12 @@ require "test_helper"
 class LocaleFilesTest < ActiveSupport::TestCase
   FILES = Rails.root.glob("config/locales/**/*.fr.yml").freeze
   FORBIDDEN = /(?<![[:alpha:]])(habilet|notions? clés?|leçon|quiz|essai|platine|médaille|trophée)/i
+  # UDR-0007, amendement du 2026-09-30 : le titre de la liste des fiches d'un cours, décidé par le porteur. « leçon » y
+  # désigne le cours parent, pas la fiche ; seule cette valeur exacte, sous ces clés, est admise.
+  ALLOWED = {
+    "fr.catalog.courses.show.essentials_title" => "Essentielles de la leçon",
+    "fr.classroom.classroom_courses.show.essentials_title" => "Essentielles de la leçon"
+  }.freeze
 
   test "the French locale files exist" do
     assert_operator FILES.size, :>=, 6
@@ -38,7 +44,9 @@ class LocaleFilesTest < ActiveSupport::TestCase
 
   test "no term forbidden by UDR-0007" do
     offences = FILES.flat_map do |path|
-      leaves(YAML.load_file(path), values: true).filter_map { |key, value| "#{relative(path)} #{key}" if value.to_s.match?(FORBIDDEN) }
+      leaves(YAML.load_file(path), values: true).filter_map do |key, value|
+        "#{relative(path)} #{key}" if value.to_s.match?(FORBIDDEN) && ALLOWED[key] != value
+      end
     end
 
     assert_empty offences
@@ -49,6 +57,12 @@ class LocaleFilesTest < ActiveSupport::TestCase
       assert_match FORBIDDEN, term
     end
     assert_no_match FORBIDDEN, "Fiche essentielle"
+  end
+
+  test "the UDR-0007 exception is the list title alone, with its exact wording" do
+    assert(ALLOWED.values.all? { it.match?(FORBIDDEN) })
+    assert_equal [ "Essentielles de la leçon" ], ALLOWED.values.uniq
+    ALLOWED.each { |key, value| assert_equal value, I18n.t(key.delete_prefix("fr."), locale: :fr) }
   end
 
   private

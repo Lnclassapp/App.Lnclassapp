@@ -229,9 +229,11 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil essential.published_at
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("transition.published", name: "La méiose"))
     assert_select "turbo-stream[action=replace][target=content_status_essential_#{essential.slug}] " \
-                  "#content_status_essential_#{essential.slug}" do
-      assert_select "form[action='#{archive_teams_essential_path(essential.slug)}']", 1
-      assert_select "form[action='#{publish_teams_essential_path(essential.slug)}']", 0
+                  "#content_status_essential_#{essential.slug}", text: including(I18n.t("catalog.content_status.published"))
+    assert_select "turbo-stream[action=replace][target=content_transitions_essential_#{essential.slug}] " \
+                  "#content_transitions_essential_#{essential.slug}" do
+      assert_select "a[data-turbo-method=patch][href='#{archive_teams_essential_path(essential.slug)}']", 1
+      assert_select "a[href='#{publish_teams_essential_path(essential.slug)}']", 0
     end
     assert_equal [ "content.published", @member.id, "Essential", essential.id ],
                  Orm::AuditEvent.where(action: "content.published").pick(:action, :actor_id, :subject_type, :subject_id)
@@ -261,8 +263,8 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "archived", essential.reload.status
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("transition.archived", name: "La méiose"))
-    assert_select "turbo-stream[action=replace][target=content_status_essential_#{essential.slug}] " \
-                  "form[action='#{publish_teams_essential_path(essential.slug)}']", 1
+    assert_select "turbo-stream[action=replace][target=content_transitions_essential_#{essential.slug}] " \
+                  "a[data-turbo-method=patch][href='#{publish_teams_essential_path(essential.slug)}']", 1
     assert_equal [ 1, 1, 1 ], [ Orm::Exercise.count, Orm::ExerciseSession.count, Orm::ClassroomAssignment.count ]
     assert_equal 1, Orm::AuditEvent.where(action: "content.archived", subject_id: essential.id).count
   end
@@ -292,6 +294,42 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_equal tl("transition.archived", name: "La méiose"), flash[:notice]
 
     patch publish_teams_essential_path(blocked.slug)
+    assert_redirected_to courses_path
+    assert_equal tl("transition.parent_not_published"), flash[:alert]
+  end
+
+  # ADR-0035, amendement du 2026-10-01 : « Tout publier » depuis le menu ⋮ de la fiche.
+  def cascade(key, **) = I18n.t("teams.publish_cascade.#{key}", **)
+
+  test "« Tout publier » publishes the sheet and its complete draft exercises, not the other sheets of the course" do
+    essential = create_essential(course: @course, name: "La méiose", status: "draft")
+    other = create_essential(course: @course, status: "draft")
+    exercises = Array.new(2) { create_exercise(essential:, status: "draft") }
+    archived = create_exercise(essential:, status: "archived")
+    sign_in_as @member
+
+    patch publish_all_teams_essential_path(essential.slug), as: :turbo_stream
+
+    assert_response :success
+    assert_equal %w[published draft published published archived], [ essential, other, *exercises, archived ].map { it.reload.status }
+    assert_select "turbo-stream[action=append][target=toasts]",
+                  text: including(cascade("done.essential", name: "La méiose", exercises: cascade("exercises", count: 2)))
+    assert_select "turbo-stream[action=refresh]", 1
+  end
+
+  test "« Tout publier » on a sheet of a draft course is refused in 422 with the reason, and nothing changes" do
+    essential = create_essential(course: create_course(status: "draft"), status: "draft")
+    exercise = create_exercise(essential:, status: "draft")
+    sign_in_as @member
+
+    patch publish_all_teams_essential_path(essential.slug), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("transition.parent_not_published"))
+    assert_select "turbo-stream[action=refresh]", 0
+    assert_equal %w[draft draft], [ essential, exercise ].map { it.reload.status }
+
+    patch publish_all_teams_essential_path(essential.slug)
     assert_redirected_to courses_path
     assert_equal tl("transition.parent_not_published"), flash[:alert]
   end

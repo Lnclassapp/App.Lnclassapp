@@ -82,3 +82,17 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 *Chantier [`docs/chantiers/finitions-ux`](../../chantiers/finitions-ux/prd.md), [UDR-0054](0054-finitions-d-interface.md). Statut : `Accepté` (avec l'UDR-0054, par le porteur le 2026-09-29). Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Focus des confirmations** : une `<dialog>` de confirmation ouverte depuis un menu ⋮ place le focus sur « Annuler » (premier bouton de fermeture de son pied), jamais sur la croix (UDR-0054 §3.3). À la fermeture, le focus revient au bouton ⋮ (inchangé).
+
+## Amendement du 2026-09-30 — épuration des en-têtes de contenu
+
+*Décision du porteur du 2026-09-30. Elle vaut pour les en-têtes des pages cours ([UDR-0013](0013-catalogue-et-page-cours.md)), fiche essentielle ([UDR-0015](0015-page-fiche-essentielle.md)) et exercice ([UDR-0021](0021-page-exercice.md)), vues par l'équipe. Elle fait foi en cas d'écart avec ces UDR.*
+
+- **Statut seul visible** : l'en-tête ne montre plus que le badge de statut (« Publié », « Brouillon », « Archivé »). `content_status_panel` rend ce badge seul, toujours sous l'id `content_status_<type>_<clé>` que les streams remplacent.
+- **Tout le reste dans le menu ⋮** :
+  - Les transitions « Publier » et « Archiver » sont des entrées du menu : `content_transition_items`, liens `PATCH` (`data-turbo-method`). Elles sont groupées dans un conteneur sans boîte, `div.contents[role=none]#content_transitions_<type>_<clé>`, que les streams `transition` remplacent avec le badge.
+  - Sur la fiche essentielle, « Nouvel exercice » et « Importer des exercices » quittent aussi l'en-tête pour le menu, en modales, à côté de « Modifier ».
+  - Une entrée à méthode (`method:`) ferme le menu au clic (`dropdown#dismiss`), comme une entrée à frame.
+- **Vocabulaire** : la liste des fiches d'un cours s'intitule « Essentielles de la leçon », dans le catalogue comme dans la page d'un cours d'une classe. Le nombre d'exercices de chaque fiche n'y est plus affiché.
+- **Vérification** : `test/helpers/catalog/content_status_helper_test.rb`, les tests de contrôleur des trois pages et des transitions, et les tests système `catalog/course_catalog_test.rb`, `catalog/essential_page_test.rb` et `boucle_pedagogique_test.rb`, qui ouvrent le menu ⋮ avant de publier, d'archiver ou de créer un exercice.
+- **« Tout publier »** *(ajout du 2026-10-01)* : le menu ⋮ d'un cours et celui d'une fiche portent aussi « Tout publier » (`PATCH …/publish-all`, icône `check-badge`), après « Publier » ou « Archiver ». Il publie le contenu et ses descendants brouillons ([ADR-0035, amendement du 2026-10-01](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md#amendement-du-2026-10-01--tout-publier-publication-en-cascade)). Un exercice n'a pas de descendant : son menu ne le porte pas.
+

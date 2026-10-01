@@ -38,6 +38,11 @@ module Ports
       def taken_slugs
         raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"
       end
+
+      # Publication en cascade : slugs des fiches brouillon du cours, dans l'ordre du cours. → [String]
+      def draft_slugs(course_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #draft_slugs"
+      end
     end
   end
 end

@@ -61,6 +61,12 @@ module Repositories
         scope.pluck(:essential_id, :title).to_set { |essential_id, title| [ essential_id, Entities::Shared::NaturalKey.normalize(title) ] }
       end
 
+      def draft_public_ids(course_id: nil, essential_id: nil)
+        scope = Orm::Exercise.joins(:essential).where(status: "draft", essentials: { status: "published" })
+        scope = course_id ? scope.where(essentials: { course_id: }) : scope.where(essential_id:)
+        scope.order("essentials.position", "essentials.id", :position, :id).pluck(:public_id)
+      end
+
       def next_positions(essential_ids:)
         maximums = Orm::Exercise.where(essential_id: essential_ids).group(:essential_id).maximum(:position)
         essential_ids.index_with { |essential_id| maximums.fetch(essential_id, 0) + 1 }

@@ -98,7 +98,10 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#content_status_exercise_#{exercise.public_id}", text: /Brouillon/
-    assert_select "#content_status_exercise_#{exercise.public_id} form[action='#{publish_teams_exercise_path(exercise.public_id)}']"
+    # Épuration des en-têtes (2026-09-30) : le statut seul dans l'en-tête, la transition dans le menu ⋮.
+    assert_select "#content_status_exercise_#{exercise.public_id} form", 0
+    assert_select "[role=menu] #content_transitions_exercise_#{exercise.public_id} a[role=menuitem][data-turbo-method=patch]" \
+                  "[href='#{publish_teams_exercise_path(exercise.public_id)}']"
     # UDR-0042: « Modifier » lives in the ⋮ menu of the exercise, even alone.
     assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: exercise.title)
     assert_select "[role=menu] a[role=menuitem][href='#{edit_teams_exercise_path(exercise.public_id)}'][data-turbo-frame=modal]",

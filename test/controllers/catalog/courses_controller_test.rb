@@ -191,7 +191,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_essentials li", 1
     assert_select "#course_essentials a[href='#{course_essential_path(@course.slug, meiose.slug)}']", text: "La méiose"
     assert_select "#course_essentials", text: including("Deux divisions")
-    assert_select "#course_essentials", text: including(tl("essential_row.exercises", count: 1))
+    # Épuration (2026-09-30) : « Essentielles de la leçon », sans le nombre d'exercices de chaque fiche.
+    assert_select "#course_essentials_title", text: "Essentielles de la leçon"
+    assert_select "#course_essentials", text: /exercice/, count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "#course-actions-menu", 0
@@ -223,9 +225,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#content_status_course_#{@draft.slug}", text: including(status_label(:draft)) do
-      assert_select "form[action='#{publish_teams_course_path(@draft.slug)}']"
+      assert_select "form, a", 0
     end
     assert_select "#course-actions-menu" do
+      assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_teams_course_path(@draft.slug)}']"
+      assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_course_path(@draft.slug)}']",
+                    text: I18n.t("catalog.content_status.actions.publish_all")
       assert_select modal_link(edit_teams_course_path(@draft.slug)), text: tl("role_actions.edit")
       assert_select modal_link(new_teams_course_essential_path(@draft.slug)), text: tl("role_actions.new_essential")
       assert_select modal_link(new_teams_import_path(kind: "essentials", course: @draft.slug)),
