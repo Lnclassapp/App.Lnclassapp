@@ -8,7 +8,7 @@ module UseCases
     class AnonymizeUserTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 10, 2, 10)
       Clock = Data.define(:now)
-      TEAM = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "field")
+      TEAM = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "admin")
       STUDENT = Entities::Identity::User.new(id: 8, public_id: "stu8", role: "student", first_name: "Awa", last_name: "Koné",
                                              contact: "0100000008", gender: "female")
       GONE = Entities::Identity::User.new(id: 9, public_id: "stu9", role: "student", first_name: "Compte", last_name: "supprimé",
@@ -51,6 +51,14 @@ module UseCases
         def destroy_all_for(user_id:) = (@destroyed_for ||= []) << user_id
       end
 
+      class FakeLoginAttempts
+        include Ports::Identity::LoginAttemptRepositoryPort
+
+        attr_reader :destroyed_for
+
+        def destroy_all_for(user_id:, contact:) = (@destroyed_for ||= []) << [ user_id, contact ]
+      end
+
       class FakeMemberships
         include Ports::Classroom::MembershipRepositoryPort
 
@@ -64,12 +72,13 @@ module UseCases
         @sessions = FakeSessions.new
         @second_factors = FakeSecondFactors.new
         @pin_recoveries = FakePinRecoveries.new
+        @login_attempts = FakeLoginAttempts.new
         @memberships = FakeMemberships.new
         @photos = FakeProfilePhotoStore.new(8 => Ports::Identity::ProfilePhotoStorePort::StoredPhoto.new(content_type: "image/png", data: "x"))
         @audit = FakeAuditLog.new
         @transaction = FakeTransaction.new
         AnonymizeUser.new(users: @users, sessions: @sessions, second_factors: @second_factors, pin_recoveries: @pin_recoveries,
-                          memberships: @memberships, photos: @photos, audit_log: @audit, transaction: @transaction,
+                          login_attempts: @login_attempts, memberships: @memberships, photos: @photos, audit_log: @audit, transaction: @transaction,
                           policy: Policies::Identity::DeleteUserPolicy.new, clock: Clock.new(NOW))
                      .call(actor:, target_public_id: target, dto: Dtos::Identity::DeletionRequestInput.new(requested_on:))
       end
@@ -77,6 +86,7 @@ module UseCases
       def assert_nothing_written
         assert_nil @users.anonymized
         assert_nil @sessions.destroyed_for
+        assert_nil @login_attempts.destroyed_for
         assert_nil @memberships.left
         assert_empty @photos.writes
         assert_empty @audit.events
@@ -93,6 +103,7 @@ module UseCases
         assert_equal [ 8 ], @sessions.destroyed_for
         assert_equal [ 8 ], @second_factors.resets
         assert_equal [ 8 ], @pin_recoveries.destroyed_for
+        assert_equal [ [ 8, "0100000008" ] ], @login_attempts.destroyed_for
         assert_equal [ [ 8, NOW ] ], @memberships.left
         assert_equal [ [ :remove, 8 ] ], @photos.writes
         assert_equal 1, @transaction.calls
@@ -112,7 +123,9 @@ module UseCases
 
       test "a student, a teacher, a school management and a visitor are refused, without writing" do
         [ Entities::Identity::Actor.new(user_id: 8, role: :student), Entities::Identity::Actor.new(user_id: 10, role: :teacher),
-          Entities::Identity::Actor.new(user_id: 12, role: :school_admin, school_id: 3), nil ].each do |actor|
+          Entities::Identity::Actor.new(user_id: 12, role: :school_admin, school_id: 3), nil,
+          Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content"),
+          Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "field") ].each do |actor|
           assert_equal :forbidden, anonymize(actor:).code
           assert_nothing_written
         end

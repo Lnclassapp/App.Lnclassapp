@@ -1,16 +1,18 @@
 require "test_helper"
 
 # ADR-0036 §4, lot R of fonctions-espace-eleve: a student or a parent asks the support to delete the account; a team member
-# handles it from the account lookup, in a modal, with the date of the request. The account is anonymized, never deleted:
+# admin (ADR-0038) handles it from the account lookup, in a modal, with the date of the request. The account is anonymized, never deleted:
 # its results stay, without its name.
 class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @actor = create_team_member(team_role: "field")
+    @actor = create_team_member(team_role: "admin")
     @student = create_student(classroom: create_classroom(name: "3ème 4"), contact: "0511223344", first_name: "Awa",
                               last_name: "Koné")
     @session = create_exercise_session(student: @student, status: "completed", score_percent: 80)
     create_login_session(user: @student)
     create_pin_recovery_code(user: @student)
+    Orm::LoginAttempt.create!(contact: "0511223344", user_id: @student.id, succeeded: false, kind: "pin",
+                              ip_address: "198.51.100.7", created_at: 1.day.ago)
   end
 
   def request_deletion(user = @student, requested_on: Date.current.iso8601, **options)
@@ -46,6 +48,7 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
     assert_not @student.authenticate_pin("2468")
     assert_not Orm::Session.exists?(user_id: @student.id)
     assert_not Orm::PinRecoveryCode.exists?(user_id: @student.id)
+    assert_not Orm::LoginAttempt.where(user_id: @student.id).or(Orm::LoginAttempt.where(contact: "0511223344")).exists?
     assert_not_nil Orm::ClassroomStudent.find_by!(student: @student).left_at
     assert Orm::ExerciseSession.exists?(@session.id)
     event = Orm::AuditEvent.find_by!(action: "user.anonymized")
@@ -92,6 +95,34 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_nil @student.reload.anonymized_at
+  end
+
+  # ADR-0038 : seul `admin` anonymise ; content et field n'ont pas le geste, ni dans la recherche.
+  test "a team member content or field is refused in 403, and the lookup does not offer the deletion" do
+    %w[content field].each do |team_role|
+      sign_in_as create_team_member(team_role:)
+      get new_teams_account_deletion_path(@student.public_id)
+      assert_response :forbidden
+      request_deletion
+      assert_response :forbidden
+      get teams_account_lookup_path(contact: @student.contact), headers: { "Turbo-Frame" => "account_lookup" }
+      assert_select "#account-lookup-result"
+      assert_select "a[href='#{new_teams_account_deletion_path(@student.public_id)}']", 0
+      sign_out
+    end
+
+    assert_nil @student.reload.anonymized_at
+  end
+
+  # Le numéro libéré peut être repris : il ne doit pas hériter des échecs ni du verrou de l'ancien titulaire.
+  test "the freed number inherits no failed attempt" do
+    4.times { Orm::LoginAttempt.create!(contact: "0511223344", user_id: nil, succeeded: false, kind: "pin", created_at: 1.hour.ago) }
+    sign_in_as @actor
+
+    request_deletion as: :turbo_stream
+
+    failures = Repositories::Identity::LoginAttemptRepository.new.consecutive_failures(contact: "0511223344", kind: "pin")
+    assert_equal 0, failures.count
   end
 
   test "a teacher, a team member, an account already deleted or unknown has no request to handle here: 404" do

@@ -12,12 +12,13 @@ module UseCases
 
       Anonymized = Data.define(:user, :requested_on)
 
-      def initialize(users:, sessions:, second_factors:, pin_recoveries:, memberships:, photos:, audit_log:, transaction:,
-                     policy:, clock:)
+      def initialize(users:, sessions:, second_factors:, pin_recoveries:, login_attempts:, memberships:, photos:, audit_log:,
+                     transaction:, policy:, clock:)
         @users = users
         @sessions = sessions
         @second_factors = second_factors
         @pin_recoveries = pin_recoveries
+        @login_attempts = login_attempts
         @memberships = memberships
         @photos = photos
         @audit_log = audit_log
@@ -51,10 +52,12 @@ module UseCases
         Shared::Result.failure(:invalid, errors: IN_FUTURE) if dto.requested_on > today
       end
 
-      # Sessions, tentatives, badges, lacunes et adhésions restent : ce sont l'archive de l'établissement (ADR-0036 §4).
+      # Sessions d'exercice, badges, lacunes et adhésions restent : ce sont l'archive de l'établissement (ADR-0036 §4). Les
+      # tentatives de connexion, qui portent le numéro et l'IP, partent avec lui (le numéro est lu avant d'être effacé).
       # La photo est effacée dans la transaction : un échec plus loin laisse le compte intact, et la demande se rejoue.
       def anonymize(actor, target, requested_on, now)
         @photos.remove(user_id: target.id)
+        @login_attempts.destroy_all_for(user_id: target.id, contact: target.contact)
         @users.anonymize(user_id: target.id, first_name: FIRST_NAME, last_name: LAST_NAME, at: now)
         @sessions.destroy_all_for(user_id: target.id)
         @second_factors.reset(user_id: target.id)

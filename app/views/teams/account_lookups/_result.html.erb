@@ -63,7 +63,8 @@
         <% end %>
       <% end %>
       <%# ADR-0036 §4 : sur demande de l'élève ou de son parent au support ; la modale demande la date de la demande. %>
-      <% if account.role == :student %>
+      <%# ADR-0038 : l'équipe `admin` seule anonymise. %>
+      <% if account.role == :student && local_assigns[:can_delete] %>
         <%= ui_button t(".delete_account"), href: new_teams_account_deletion_path(account.public_id), variant: :secondary,
                       icon: "trash", data: { turbo_frame: "modal" } %>
       <% end %>

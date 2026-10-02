@@ -117,4 +117,13 @@ class Classroom::SessionDaysControllerTest < ActionDispatch::IntegrationTest
     assert_equal tl("update.saved"), flash[:notice]
     assert_equal [ 3 ], session_days
   end
+
+  test "a malformed form answers 400 and writes nothing" do
+    sign_in_as @teacher
+
+    patch classroom_session_days_path(@classroom.public_id), params: { session_days: "x" }
+
+    assert_response :bad_request
+    assert_empty session_days
+  end
 end

@@ -3,8 +3,8 @@
 # ADR  : 0026, 0028, 0036 (§4) · UDR : 0006, 0020, 0054
 module Teams
   class AccountDeletionsController < BaseController
-    # La règle avant le compte : `allow_roles :team` du parent refuse en 403 qui n'est pas de l'équipe, comme la policy
-    # (cible nil), que le compte existe ou non ; le use case la rejoue à l'envoi.
+    # La règle avant le compte : un membre qui n'est pas `admin` reçoit 403, que le compte existe ou non (ADR-0038).
+    before_action { render_forbidden if policy.call(actor: current_actor).failure? }
     before_action :load_account
 
     def new
@@ -40,6 +40,7 @@ module Teams
         users:, sessions: Repositories::Identity::SessionRepository.new,
         second_factors: Repositories::Identity::SecondFactorRepository.new,
         pin_recoveries: Repositories::Identity::PinRecoveryRepository.new,
+        login_attempts: Repositories::Identity::LoginAttemptRepository.new,
         memberships: Repositories::Classroom::MembershipRepository.new, photos: Repositories::Identity::ProfilePhotoStore.new,
         audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,
         policy:, clock: Time.zone

@@ -19,7 +19,7 @@ module Classroom
 
     def update
       @form = Dtos::Classroom::SessionDaysInput.new(
-        weekdays: params.fetch(:session_days, {}).permit(weekdays: [])[:weekdays], classroom_public_id: params[:classroom_public_id]
+        weekdays: params.expect(session_days: [ weekdays: [] ])[:weekdays], classroom_public_id: params[:classroom_public_id]
       )
       @classroom = classrooms.find_by_public_id(public_id: params[:classroom_public_id])
       render_result set_session_days.call(actor: current_actor, dto: @form), form: :edit, success: lambda { |saved|

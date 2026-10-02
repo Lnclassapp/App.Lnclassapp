@@ -2,7 +2,7 @@ require "test_helper"
 
 module Policies
   module Identity
-    # ADR-0028, ADR-0036 §4: the team alone deletes (anonymizes) an account on request; in this version, a student account.
+    # ADR-0028, ADR-0036 §4, ADR-0038: the team admin alone deletes (anonymizes) an account on request; in this version, a student account.
     class DeleteUserPolicyTest < ActiveSupport::TestCase
       TEAM = Entities::Identity::Actor.new(user_id: 1, role: :team, team_role: "admin")
 
@@ -14,6 +14,15 @@ module Policies
           assert_equal :forbidden, DeleteUserPolicy.new.call(actor: Entities::Identity::Actor.new(user_id: 1, role:)).code
         end
         assert_equal :forbidden, DeleteUserPolicy.new.call(actor: nil).code
+      end
+
+      # ADR-0038 : « Anonymiser un compte » est réservé à `admin` ; le geste est irréversible.
+      test "un membre de l'équipe content ou field est refusé" do
+        %w[content field].each do |team_role|
+          actor = Entities::Identity::Actor.new(user_id: 1, role: :team, team_role:)
+          assert_equal :forbidden, DeleteUserPolicy.new.call(actor:).code, team_role
+          assert_equal :forbidden, DeleteUserPolicy.new.call(actor:, target: user("student")).code, team_role
+        end
       end
 
       test "un compte élève seulement : enseignant, direction et équipe sont refusés" do
