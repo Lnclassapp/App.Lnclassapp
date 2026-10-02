@@ -18,12 +18,9 @@ Ce que l'on sait : l'interface compte environ 230 vues, construites écran par �
 
 ## Pour qui
 
-- **Élève**, souvent sur un Android d'entrée de gamme.
-- **Enseignant**.
-- **Direction d'établissement**.
-- **Équipe**.
+- **Élève**, souvent sur un Android d'entrée de gamme. C'est le seul public de ce chantier (grill, Q1).
 
-*Première version : l'ordre de priorité entre ces publics se tranche au grill.*
+L'enseignant, la direction et l'équipe sont traités dans un chantier suivant, qui appliquera la règle de sobriété fixée ici.
 
 ## Pourquoi maintenant
 
@@ -34,6 +31,7 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 *Première version, à durcir pendant le grill.*
 
 - Toute nouvelle fonctionnalité métier.
+- Les écrans de l'enseignant, de la direction et de l'équipe : chantier suivant (grill, Q1).
 - Les apps Android (chantier `app-android`) et la PWA (`installation-pwa`).
 - Les finitions déjà livrées par `finitions-ux` (retour, auto-focus, infobulles, « Copier », recherche, titres).
 
@@ -43,7 +41,7 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| Q1 — Quels publics ce chantier couvre-t-il ? Tout épurer d'un coup, 4 publics et environ 230 écrans, est le moyen le plus sûr de ne rien finir. | **L'élève seulement.** La maquette V2 de l'accueil élève, validée par le porteur le 2026-10-02, sert d'écran de référence. | Le périmètre se réduit aux écrans de l'élève. Enseignant, direction et équipe passent hors périmètre, dans un chantier suivant qui reprendra la règle. |
 
 ## Cas limites identifiés
 
