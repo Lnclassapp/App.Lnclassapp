@@ -1,0 +1,34 @@
+<%# 🌐 UI · shared/_help_sheet — carte d'aide « Besoin d'aide ? » : questions fréquentes, WhatsApp, appel %>
+<%# Rôle : feuille basse sous lg, modale centrée au-dessus (ui_modal placement: :sheet) ; lignes de SupportHelper %>
+<%# UDR  : 0061 (§3.2 à §3.8), 0057, 0054 · ADR : 0049 · sans JS, le déclencheur mène à /aide ; focus : 1re ligne %>
+<%= ui_modal id: "help-sheet", title: t(".title"), size: :sm, placement: :sheet,
+             trigger: t(".trigger"), trigger_href: help_path, trigger_variant: :ghost, trigger_size: :sm,
+             trigger_icon: "question-mark-circle" do %>
+  <ul class="-my-2 divide-y divide-line">
+    <% support_contacts.each_with_index do |contact, index| %>
+      <% id = "help-sheet-#{contact.key}" %>
+      <li>
+        <%# Nom accessible : le titre ; la ligne grise (horaires, délai) en description. %>
+        <%= link_to contact.href, id:, target: ("_blank" if contact.external), rel: ("noopener noreferrer" if contact.external),
+                    "aria-labelledby": "#{id}-title", "aria-describedby": ("#{id}-hint" if contact.hint),
+                    data: ({ autofocus_target: "fallback" } if index.zero?),
+                    class: "flex min-h-18 items-center gap-4 rounded-ln px-1 py-3 active:bg-mist
+                            focus-visible:outline-2 focus-visible:outline-brand" do %>
+          <span class="grid size-11 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-strong">
+            <%= ui_icon contact.icon %>
+          </span>
+          <span class="min-w-0 flex-1">
+            <span id="<%= id %>-title" class="block font-medium text-ink">
+              <%= t(".#{contact.key}.title") %>
+              <% if contact.external %><span class="sr-only"><%= t(".#{contact.key}.external") %></span><% end %>
+            </span>
+            <% if contact.hint %>
+              <span id="<%= id %>-hint" class="block truncate text-sm text-mute"><%= contact.hint %></span>
+            <% end %>
+          </span>
+          <%= ui_icon "chevron-right", variant: :mini, class: "text-mute" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

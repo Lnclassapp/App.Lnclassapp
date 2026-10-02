@@ -1,0 +1,8 @@
+<%# 🌐 UI · teams/deletion_requests/create — demande de suppression enregistrée %>
+<%# Rôle : toast ; la modale se ferme ; le bloc de la fiche du compte dit « Demande reçue le … » %>
+<%# ADR  : 0036 (amendement 2) · UDR : 0020, 0054 %>
+<%= turbo_stream_toast t(".done", name: @account.display_name), type: :success %>
+<%= turbo_stream.update "modal", "" %>
+<%= turbo_stream.replace Teams::DeletionRequestsController::BLOCK_FRAME do %>
+  <%= render "account_block", account: @account, request: @request %>
+<% end %>

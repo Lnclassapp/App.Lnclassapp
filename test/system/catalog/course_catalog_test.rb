@@ -147,6 +147,59 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     end
   end
 
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : le catalogue filtré par matière et la page cours, vus par l'élève à
+  # 390 × 844, passent la règle de sobriété ; la matière filtrée et le niveau quittent les cartes.
+  test "on a phone, the student's catalogue filtered by subject and the course page pass the sobriety rule" do
+    %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
+    sign_in_as create_student_for(@course)
+
+    with_mobile_viewport do
+      visit courses_path(material: @svt.slug)
+      assert_selector "#courses_list > li", count: 1
+      assert_single_primary_action
+      assert_blocks_above_fold "#main > div > *", max: 5
+      within("#courses_list") do
+        assert_no_text "SVT"
+        assert_no_text "Tle"
+      end
+      assert_selector "#main details summary", visible: :all,
+                                               text: t("components.info_tip.label", label: t("catalog.courses.index.student_scope_label"))
+
+      visit course_path(@course.slug)
+      assert_single_primary_action
+      assert_blocks_above_fold "#main > div > *", max: 5
+      assert_list_capped "#course_essentials ul"
+      assert_no_text "Hérédité"
+      assert_no_page_reload { click_on t("components.reveal.more") }
+      assert_selector "#course_essentials li", text: "Hérédité"
+
+      # The whole row is the link: a tap anywhere on it opens the sheet.
+      find("#course_essentials li", text: "Mitose").click
+      assert_selector "#essential_header h1", text: "Mitose"
+    end
+  end
+
+  # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
+  # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
+  test "on a phone, the teacher's filtered catalogue and course page are unchanged, without « Assigner à mes classes »" do
+    %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
+    sign_in_as create_teacher
+
+    with_mobile_viewport do
+      visit courses_path(material: @svt.slug)
+      within("#course_#{@course.slug}") do
+        assert_text "SVT"
+        assert_text "Tle"
+      end
+
+      visit course_path(@course.slug)
+      assert_selector "#course_essentials li", count: 4
+      assert_no_button t("components.reveal.more")
+      assert_no_link "Assigner à mes classes"
+      assert_no_button "Assigner à mes classes"
+    end
+  end
+
   private
 
   def resource_loaded?(name) = page.evaluate_script("performance.getEntriesByType('resource').some((entry) => entry.name.includes(arguments[0]))", name)

@@ -1,4 +1,5 @@
-# Assignation d'une ressource à une classe : bascule et streams (plan boucle-pedagogique, Lot D5) — ADR-0048, UDR-0007, UDR-0028
+# Assignation d'un exercice à une classe : bascule, modale des jours de séance et streams (plan boucle-pedagogique, Lot D5 ;
+# fonctions-espace-eleve, Lot C) — ADR-0048, ADR-0072, UDR-0007, UDR-0028, UDR-0062 §3.4
 fr:
   classroom:
     assignments:
@@ -8,8 +9,30 @@ fr:
         assigned: "Assigné"
         archive: "Retirer"
         archive_label: "Retirer « %{name} » de la classe"
+      new:
+        title: "Quels jours voyez-vous la %{classroom} ?"
+        context: "%{name} sera à rendre pour la séance suivante."
+        legend: "Jours de séance"
+        weekdays_blank: "Cochez au moins un jour, ou choisissez « Plus tard »."
+        later: "Plus tard"
+        submit: "Assigner"
+        short:
+          "1": "Lun."
+          "2": "Mar."
+          "3": "Mer."
+          "4": "Jeu."
+          "5": "Ven."
+          "6": "Sam."
+        long:
+          "1": "Lundi"
+          "2": "Mardi"
+          "3": "Mercredi"
+          "4": "Jeudi"
+          "5": "Vendredi"
+          "6": "Samedi"
       create:
         done: "%{name} ajouté à %{classroom}."
+        done_due: "%{name} ajouté à %{classroom}, à rendre %{date}."
       archive:
         done: "%{name} retiré de %{classroom}."
       refusals:
