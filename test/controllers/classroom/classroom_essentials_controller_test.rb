@@ -48,6 +48,9 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
 
   # ADR-0072, UDR-0029 (amendée le 2026-10-02) : la bascule de la fiche et son role="group" disparaissent de l'en-tête.
   test "the header of the sheet has no toggle nor group, only the exercises carry one" do
+    # Jours renseignés : les bascules sont des formulaires (sans eux, des liens vers la modale des jours, UDR-0062 §3.4).
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1 ],
+                                                                at: Time.current)
     sign_in_as @teacher
 
     get page_path
@@ -116,5 +119,48 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
       get classroom_essential_path(@classroom.public_id, @course.slug, slug)
       assert_response :not_found
     end
+  end
+
+  # UDR-0062 §3.4 : sans jours de séance, « Assigner » est un lien vers la modale des jours, dans le frame « modal ».
+  test "a teacher without session days: « Assigner » links to the days modal; with days, it posts directly" do
+    sign_in_as @teacher
+
+    get page_path
+
+    assert_select toggle_id("Exercise", @phases.public_id) do
+      assert_select "a[href='#{new_classroom_assignment_path(@classroom.public_id, assignable_key: @phases.public_id)}'][data-turbo-frame=modal]",
+                    text: including(toggle(:assign))
+      assert_select "form", 0
+    end
+
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1, 4 ],
+                                                                at: Time.current)
+    get page_path
+
+    assert_select toggle_id("Exercise", @phases.public_id) do
+      assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']"
+      assert_select "a[data-turbo-frame=modal]", 0
+    end
+  end
+
+  test "the team never gets the days modal" do
+    sign_in_as create_team_member
+
+    get page_path
+
+    assert_select "a[href^='#{new_classroom_assignment_path(@classroom.public_id)}']", 0
+    assert_select "#{toggle_id('Exercise', @phases.public_id)} form[action='#{classroom_assignments_path(@classroom.public_id)}']"
+  end
+
+  test "an assigned exercise shows its due date for the teacher, only when it has one" do
+    create_assignment(classroom: @classroom, assignable: @phases, by: @teacher, due_on: Date.new(2026, 10, 8),
+                      assigned_at: Time.zone.local(2026, 10, 5, 10))
+    create_assignment(classroom: @classroom, assignable: @brassage, by: @teacher)
+    sign_in_as @teacher
+
+    get page_path
+
+    assert_select toggle_id("Exercise", @phases.public_id), text: including("Pour jeu. 8 oct.")
+    assert_select toggle_id("Exercise", @brassage.public_id), text: including("Sans date limite"), count: 0
   end
 end

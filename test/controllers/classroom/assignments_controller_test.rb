@@ -21,6 +21,15 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     post classroom_assignments_path(classroom.public_id), params: { assignment: { assignable_type: type, assignable_key: key } }, **
   end
 
+  # La modale des jours envoie toujours le champ caché vide, puis les cases cochées ; « Plus tard » ajoute later.
+  def assign_with_days(weekdays, key: @exercise.public_id, later: false, **)
+    params = { assignment: { assignable_type: "Exercise", assignable_key: key, weekdays: [ "", *weekdays ] } }
+    params[:later] = "1" if later
+    post classroom_assignments_path(@classroom.public_id), params:, **
+  end
+
+  def session_days(teacher = @teacher) = Orm::ClassroomSessionDay.where(teacher_id: teacher.id).order(:weekday).pluck(:weekday)
+
   def withdraw(assignment, classroom: @classroom, **)
     patch archive_assignment_path(assignment.public_id), params: { classroom_public_id: classroom.public_id }, **
   end
@@ -214,5 +223,156 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("refusals.other_level"))
     assert_not Orm::ClassroomAssignment.exists?
+  end
+
+  # UDR-0062 §3.4 : la modale « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal », lisible sans JavaScript.
+  test "the days modal names the classroom and the exercise, with six weekdays, « Plus tard » and « Assigner »" do
+    sign_in_as @teacher
+
+    get new_classroom_assignment_path(@classroom.public_id, assignable_key: @exercise.public_id)
+
+    assert_response :success
+    assert_select "turbo-frame#modal dialog[open]" do
+      assert_select "h2", text: tl("new.title", classroom: "6ème 1")
+      assert_select "p", text: including(tl("new.context", name: "Méiose"))
+      assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}'][method=post]" do
+        assert_select "input[type=hidden][name='assignment[assignable_type]'][value=Exercise]"
+        assert_select "input[type=hidden][name='assignment[assignable_key]'][value='#{@exercise.public_id}']"
+        assert_select "fieldset legend", text: tl("new.legend")
+        assert_select "input[type=checkbox][name='assignment[weekdays][]']", 6
+        assert_equal %w[1 2 3 4 5 6], css_select("input[type=checkbox]").map { it["value"] }
+        assert_equal [ "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam." ], css_select("fieldset label span[aria-hidden]").map(&:text)
+      end
+    end
+    assert_select "button[type=submit][name=later]", text: tl("new.later")
+    assert_select "button[type=submit]:not([name])", text: including(tl("new.submit"))
+  end
+
+  test "the days modal: 404 for an unknown or unpublished exercise, 403 for the team, another teacher or an archived classroom" do
+    draft = create_exercise(essential: @essential, status: "draft")
+    sign_in_as @teacher
+    [ draft.public_id, "inconnu" ].each do |key|
+      get new_classroom_assignment_path(@classroom.public_id, assignable_key: key)
+      assert_response :not_found
+    end
+    sign_out
+
+    archived = create_classroom(status: "archived", level: @course.level)
+    [ [ create_team_member, @classroom ], [ create_teacher, @classroom ], [ create_teacher(classrooms: [ archived ]), archived ] ].each do |user, classroom|
+      sign_in_as user
+      get new_classroom_assignment_path(classroom.public_id, assignable_key: @exercise.public_id)
+      assert_response :forbidden
+      sign_out
+    end
+  end
+
+  test "Monday 5 October, Monday and Thursday checked: days saved, due Thursday 8, toast with the date, page refreshed" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    sign_in_as @teacher
+
+    assign_with_days(%w[1 4], as: :turbo_stream)
+
+    assert_response :success
+    assignment = Orm::ClassroomAssignment.sole
+    assert_equal Date.new(2026, 10, 8), assignment.due_on
+    assert_equal [ 1, 4 ], session_days
+    assert_select "turbo-stream[action=append][target=toasts]",
+                  text: including(tl("create.done_due", name: "Méiose", classroom: "6ème 1", date: "jeudi 8 oct."))
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template",
+                  text: including("Pour jeu. 8 oct.")
+    assert_select "turbo-stream[action=refresh]"
+  end
+
+  test "once the days are known, one click assigns with the due date; no refresh" do
+    travel_to Time.zone.local(2026, 10, 8, 10)
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id,
+                                                                weekdays: [ 1, 4 ], at: Time.current)
+    sign_in_as @teacher
+
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+
+    assert_response :success
+    assert_equal Date.new(2026, 10, 12), Orm::ClassroomAssignment.sole.due_on
+    assert_select "turbo-stream[action=refresh]", 0
+  end
+
+  test "« Plus tard »: assigned without due date, no day written, the toast has no date" do
+    sign_in_as @teacher
+
+    assign_with_days(%w[1 4], later: true, as: :turbo_stream)
+
+    assert_response :success
+    assert_nil Orm::ClassroomAssignment.sole.due_on
+    assert_empty session_days
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done", name: "Méiose", classroom: "6ème 1"))
+    assert_select "turbo-stream[action=refresh]", 0
+  end
+
+  test "« Assigner » without any day: 422, the modal again with its error on the fieldset, nothing written" do
+    sign_in_as @teacher
+
+    assign_with_days([], as: :turbo_stream)
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal dialog[open]"
+    assert_select "fieldset[aria-invalid=true][aria-describedby=assignment_weekdays_error]"
+    assert_select "#assignment_weekdays_error", text: including(tl("new.weekdays_blank"))
+    assert_equal 0, Orm::ClassroomAssignment.count
+    assert_empty session_days
+  end
+
+  test "the days modal answered for an unknown exercise or classroom: 404, nothing written" do
+    sign_in_as @teacher
+
+    assign_with_days([], key: "inconnu", as: :turbo_stream)
+    assert_response :not_found
+
+    get new_classroom_assignment_path("inconnue", assignable_key: @exercise.public_id)
+    assert_response :not_found
+    assert_equal 0, Orm::ClassroomAssignment.count
+  end
+
+  test "the team assigns without due date; days sent by the team: forbidden, nothing written" do
+    sign_in_as create_team_member
+
+    assign_with_days(%w[1 4], as: :turbo_stream)
+    assert_response :forbidden
+    assert_equal 0, Orm::ClassroomAssignment.count
+    assert_equal 0, Orm::ClassroomSessionDay.count
+
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+    assert_response :success
+    assert_nil Orm::ClassroomAssignment.sole.due_on
+  end
+
+  test "two teachers: the due date follows the author's days" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    colleague = create_teacher(classrooms: [ @classroom ])
+    repository = Repositories::Classroom::SessionDaysRepository.new
+    repository.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1, 4 ], at: Time.current)
+    repository.replace(teacher_id: colleague.id, classroom_id: @classroom.id, weekdays: [ 2 ], at: Time.current)
+    sign_in_as colleague
+
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+
+    assert_equal Date.new(2026, 10, 6), Orm::ClassroomAssignment.sole.due_on
+  end
+
+  test "without JavaScript, the days form leads back to the page the modal was opened from" do
+    origin = classroom_essential_url(@classroom.public_id, @course.slug, @essential.slug)
+    sign_in_as @teacher
+
+    get new_classroom_assignment_path(@classroom.public_id, assignable_key: @exercise.public_id), headers: { "HTTP_REFERER" => origin }
+    assert_select "input[type=hidden][name=return_to][value='#{origin}']"
+
+    post classroom_assignments_path(@classroom.public_id),
+         params: { assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id, weekdays: [ "", "2" ] }, return_to: origin }
+    assert_redirected_to origin
+    assert_equal [ 2 ], session_days
+
+    post classroom_assignments_path(@classroom.public_id),
+         params: { assignment: { assignable_type: "Exercise", assignable_key: create_exercise(essential: @essential).public_id },
+                   return_to: "https://ailleurs.example/piege" }
+    assert_redirected_to classroom_path(@classroom.public_id)
   end
 end

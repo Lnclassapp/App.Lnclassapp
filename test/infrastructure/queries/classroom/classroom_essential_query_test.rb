@@ -14,8 +14,8 @@ module Queries
         @second = create_exercise(essential: @essential, title: "Le brassage", questions: 1)
       end
 
-      def query(essential_slug: @essential.slug, course_slug: @course.slug, classroom_public_id: @classroom.public_id)
-        ClassroomEssentialQuery.new.call(classroom_public_id:, course_slug:, essential_slug:)
+      def query(essential_slug: @essential.slug, course_slug: @course.slug, classroom_public_id: @classroom.public_id, teacher_id: nil)
+        ClassroomEssentialQuery.new.call(classroom_public_id:, course_slug:, essential_slug:, teacher_id:)
       end
 
       test "la classe, le cours, la fiche et ses exercices publiés dans l'ordre, sans assignation ni résultat" do
@@ -44,6 +44,28 @@ module Queries
         row = query
 
         assert_equal [ first_assignment.public_id, nil ], row.exercises.map(&:assignment_public_id)
+      end
+
+      # ADR-0072 §4.3 : l'échéance figée de l'assignation active, nil sans jours ou sans assignation.
+      test "l'échéance de l'assignation active de chaque exercice" do
+        create_assignment(classroom: @classroom, assignable: @first, due_on: Time.zone.today + 3)
+        create_assignment(classroom: @classroom, assignable: @second, status: "archived", due_on: Time.zone.today + 1)
+
+        assert_equal [ Time.zone.today + 3, nil ], query.exercises.map(&:due_on)
+      end
+
+      # UDR-0062 §3.4 : la modale des jours s'ouvre pour l'enseignant de la classe qui ne les a pas renseignés ;
+      # jamais pour l'équipe ni pour un acteur sans teacher_id, jamais une fois ses jours connus.
+      test "needs_session_days : vrai pour l'enseignant de la classe sans jours, faux sinon" do
+        teacher = create_teacher(classrooms: [ @classroom ])
+        colleague = create_teacher(classrooms: [ @classroom ])
+        Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: colleague.id, classroom_id: @classroom.id,
+                                                                    weekdays: [ 2 ], at: Time.current)
+
+        assert query(teacher_id: teacher.id).needs_session_days
+        assert_not query(teacher_id: colleague.id).needs_session_days
+        assert_not query(teacher_id: create_teacher.id).needs_session_days
+        assert_not query.needs_session_days
       end
 
       test "la réussite de la classe : part de ses élèves présents dont le meilleur score atteint le seuil, par exercice" do
