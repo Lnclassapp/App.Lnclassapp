@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -382,6 +382,31 @@ module ComponentsHelper
                               data: { clipboard_target: "button", action: "clipboard#copy" })
     render "components/copy_button", text:, button:, copied: ui_toast(copied, type: :success),
            failed: ui_toast(failed, type: :error)
+  end
+
+  # UDR-0057 R3 : une liste montre au plus REVEAL_LIMIT lignes, puis « Voir plus » révèle les suivantes, déjà rendues.
+  REVEAL_LIMIT = 3
+
+  # Attributs du conteneur de la liste (contrôleur `reveal`) : `tag.div(data: ui_reveal_data) { … }`.
+  def ui_reveal_data(step: 0)
+    { controller: "reveal", reveal_step_value: step, reveal_one_value: t("components.reveal.announce_one"),
+      reveal_other_value: t("components.reveal.announce_other") }
+  end
+
+  # Attributs d'une ligne : masquée à partir de la (REVEAL_LIMIT + 1)e, révélée par « Voir plus ».
+  def ui_reveal_item(index)
+    { hidden: index >= REVEAL_LIMIT, data: { reveal_target: "item" } }
+  end
+
+  # « Voir plus » et sa région d'annonce, seulement s'il y a plus de REVEAL_LIMIT lignes.
+  def ui_reveal_more(total, label: t("components.reveal.more"))
+    return if total <= REVEAL_LIMIT
+
+    safe_join([
+      ui_button(label, variant: :ghost, size: :sm, full: true, icon_end: "chevron-down",
+                       data: { reveal_target: "button", action: "reveal#more" }),
+      tag.p(class: "sr-only", role: "status", "aria-live": "polite", data: { reveal_target: "status" })
+    ])
   end
 
   private
