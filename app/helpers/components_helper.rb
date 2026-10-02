@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0056 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -238,12 +238,15 @@ module ComponentsHelper
 
   # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
   # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
-  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
-               document_title: nil, &block)
+  # `trigger_size:` et `trigger_full:` vont tels quels à `ui_button` : une entrée de rôle de la page d'accueil est un
+  # déclencheur `lg` pleine largeur (UDR-0056).
+  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, trigger_size: :md,
+               trigger_full: false, open: false, document_title: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
-    render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
-           trigger_icon:, open:, body:, slots:, document_title:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
+    render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:, trigger_icon:,
+           trigger_size:, trigger_full:, open:, body:, slots:, document_title:,
+           size_class: option!(MODAL_SIZES, size, "ui_modal size")
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).

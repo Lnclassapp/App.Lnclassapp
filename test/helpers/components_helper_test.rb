@@ -290,6 +290,19 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#later[open]", 0
   end
 
+  # UDR-0056 (RH-13) : une entrée de rôle est un déclencheur `lg` pleine largeur ; sans option, celui d'aujourd'hui.
+  test "ui_modal sizes and stretches its trigger on demand, and keeps the default trigger otherwise" do
+    show ui_modal(title: "Élève", id: "entry", trigger: "Je suis élève", trigger_variant: :primary, trigger_size: :lg,
+                  trigger_full: true) +
+         ui_modal(title: "Plus tard", id: "plain", trigger: "Ouvrir")
+
+    assert_select "button[aria-controls=entry][aria-haspopup=dialog].bg-ink.min-h-14.w-full", text: "Je suis élève"
+    assert_select "button[aria-controls=plain].min-h-tap:not(.w-full)", text: "Ouvrir"
+    # Levée par ui_button pendant le rendu du partial : ActionView l'enveloppe, la cause reste l'ArgumentError.
+    error = assert_raises(ActionView::Template::Error) { ui_modal(title: "Taille", trigger: "Ouvrir", trigger_size: :xl) }
+    assert_kind_of ArgumentError, error.cause
+  end
+
   test "ui_dropdown renders a menu button and its items" do
     html = ui_dropdown(label: "Actions", align: :start) do
       ui_dropdown_item("Modifier", href: "/edit", icon: "pencil") +

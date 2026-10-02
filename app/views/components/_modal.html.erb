@@ -1,13 +1,13 @@
 <%# 🌐 UI · components/_modal — <dialog> native, déclencheur facultatif, appelée par ui_modal %>
 <%# Rôle : piège du focus, Échap et fond cliquable fournis par le navigateur ; feuille basse sur mobile %>
-<%# UDR  : 0005, 0006, 0054 · Stimulus : modal, autofocus · se charge aussi dans le frame « modal » du layout %>
+<%# UDR  : 0005, 0006, 0054, 0056 · Stimulus : modal, autofocus · se charge aussi dans le frame « modal » du layout %>
 <%# Servie ouverte (open: true), la <dialog> porte `open` dès le HTML : lisible sans JavaScript, que le contrôleur
     rouvre en vraie modale. UDR-0054 : `document_title` nomme l'onglet tant qu'elle est ouverte ; à l'ouverture, le
     contrôleur autofocus vise le premier champ, sinon le bouton de fermeture du pied (jamais la croix). %>
 <%= tag.div data: { controller: "modal", modal_open_value: open, modal_document_title_value: document_title,
                     action: "turbo:before-cache@document->modal#close" } do %>
   <% if trigger %>
-    <%= ui_button trigger, variant: trigger_variant, icon: trigger_icon,
+    <%= ui_button trigger, variant: trigger_variant, icon: trigger_icon, size: trigger_size, full: trigger_full,
           data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": id %>
   <% end %>
   <dialog id="<%= id %>" <%= "open" if open %> aria-labelledby="<%= id %>-title" data-modal-target="dialog" data-action="click->modal#backdrop close->modal#closed turbo:submit-end->modal#submitEnd modal:opened->autofocus#focus"
