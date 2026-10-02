@@ -32,6 +32,7 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 
 - Toute nouvelle fonctionnalité métier.
 - Les écrans de l'enseignant, de la direction et de l'équipe : chantier suivant (grill, Q1).
+- Les échéances et les retards, la durée des exercices, le paiement et l'abonnement, les annonces, la lecture audio : chantiers séparés, lancés après celui-ci (grill, Q8).
 - Les apps Android (chantier `app-android`) et la PWA (`installation-pwa`).
 - Les finitions déjà livrées par `finitions-ux` (retour, auto-focus, infobulles, « Copier », recherche, titres).
 
@@ -48,6 +49,7 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 | Q5 — La grille tient en 8 cases (6 matières, Paiement, Inviter). Un élève de Terminale a 9 à 11 matières : la grille déborde ? | **Non : Lnclass ne couvre que 6 matières.** Maths, Physique-Chimie, SVT, Français, Histoire-Géographie, et EDHC (1er cycle) ou Philosophie (2nd cycle). Les autres matières ne seront pas proposées. | La grille est fixe : 6 matières, Paiement, Inviter. Pas de case « Toutes », pas de tri dynamique, pas de débordement. Seule variation : EDHC devient Philosophie selon le cycle de l'élève. |
 | Q6 — La carte du haut « Prochain exercice » suppose un exercice à faire. Qu'affiche-t-elle s'il n'y en a aucun (rien d'assigné, ou tout est fini) ? | **Elle présente la classe avec un message d'encouragement.** Le porteur pense qu'une carte existe déjà pour cet état. Il ajoute : sur tablette et ordinateur, la grille peut aligner 6 éléments par rangée. | La carte du haut a au moins deux états, « Prochain exercice » et « Ma classe + encouragement », à reprendre de la planche d'états existante. La disposition tablette et ordinateur entre dans le chantier : la grille passe de 4 à 6 éléments par rangée sur les grands écrans. |
 | Q7 — L'élève a une douzaine d'écrans (accueil, ma classe, matière et cours, fiche essentielle, exercice, session, résultat, profil, inviter, rejoindre une classe, connexion). Lesquels entrent dans ce chantier ? | **Tous les écrans élève.** Le porteur partagera ensuite les maquettes des écrans déjà disponibles. | Le chantier couvre tout le parcours élève, livré par lots, l'accueil en premier puisqu'il fixe la référence. Les maquettes du porteur entrent dans la décision d'interface ; un écran sans maquette suit la règle seule. |
+| Q8 — Plusieurs éléments de la maquette V2 reposent sur des fonctions qui n'existent pas encore (échéances et retards, durée d'un exercice, paiement et abonnement, annonces, lecture audio). Le memo exclut toute nouvelle fonctionnalité. Qu'en fait-on ? | **Interface seule.** Le chantier n'épure que ce qui existe déjà. | Ces éléments n'apparaissent pas encore : ni échéance ni signal de retard, ni durée, ni case Paiement, ni annonces, ni audio. Chacun devient un chantier séparé, lancé ensuite. Tant que le paiement n'existe pas, la grille compte 7 cases (6 matières, Inviter). « À faire ensuite » reste trié par date d'assignation, la plus récente d'abord. La barre de la carte du haut compte les exercices faits sur les exercices assignés, sans notion de semaine. |
 
 ## Cas limites identifiés
 
@@ -57,5 +59,5 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 
 - Écrans partagés avec les autres rôles (connexion, récupération du PIN, rejoindre une classe) : épurés pour tout le monde dans ce chantier, ou laissés au chantier suivant ?
 - Maquettes des écrans disponibles : à recevoir du porteur avant la décision d'interface.
-- Grille sur grand écran : avec 8 éléments et 6 par rangée, Paiement et Inviter tombent seuls sur une deuxième rangée. Les sortir de la grille sur grand écran, ou garder 6 + 2 ?
+- Grille sur grand écran : avec 7 éléments (6 matières et Inviter, tant que le paiement n'existe pas) et 6 par rangée, Inviter tombe seul sur une deuxième rangée. Le sortir de la grille sur grand écran, ou l'accepter ?
 - Un niveau ou une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : case masquée, ou grille à 7 cases ?
