@@ -216,22 +216,18 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
 - **Test associé** : `test/controllers/communication/pages/sales_terms_test.rb`
 - **Done quand**   : avec la page simulée en ligne, `/conditions-vente` montre les CGV complétées avec l'offre ; elle reste hors de `ONLINE` (lot Z).
 
-### Lot R — Conservation : anonymisation 30 jours après le départ
+### Lot R — Conservation : archive de l'élève parti, suppression sur demande sous 30 jours
 
-- **Couche**       : domaine + infrastructure (son propre socle, contexte `identity`)
-- **Fichiers**     :
-  - `docs/decisions/adr/0036-suppression-archivage-et-anonymisation.md` (amendement accepté, « départ » défini)
-  - `app/domain/use_cases/identity/anonymize_user.rb`, `app/domain/policies/identity/auto_anonymize_policy.rb`
-  - `app/domain/ports/identity/user_repository_port.rb` (`departed_before`, `anonymize`), `app/infrastructure/repositories/identity/user_repository.rb`
-  - `app/domain/entities/identity/audit_action.rb` (`user.anonymized`)
-  - `app/jobs/identity/anonymize_departed_users_job.rb`, `config/recurring.yml`
-  - si la définition du « départ » demande une colonne : `db/migrate/…`, `db/schema.rb` *(passation, après le merge du Lot A)*
-- **Dépend de**    : la définition du « départ » et des données « sensibles » (memo, questions ouvertes) ; amendement de l'ADR-0036 accepté
-- **Test associé** :
-  - `test/domain/use_cases/identity/anonymize_user_test.rb` (données sensibles effacées, usage conservé ; refus enseignant, élève, direction)
-  - `test/jobs/identity/anonymize_departed_users_job_test.rb` (31 jours → anonymisé ; 29 jours → intact ; second passage sans effet)
-  - `test/config/recurring_test.rb`
-- **Done quand**   : un compte parti depuis plus de 30 jours est anonymisé chaque nuit (nom « Compte supprimé », numéro et photo effacés, connexions fermées) ; ses sessions et badges restent, et la réussite de sa classe ne change pas.
+*Redéfini le 2026-10-02 (porteur) : **pas d'anonymisation automatique**. Les données restent une archive, consultable par l'élève et par l'établissement quitté ; la suppression d'un compte se fait sur demande, sous 30 jours.*
+
+- **Couche**       : domaine + infrastructure + ui (contexte `identity`, et l'écran de l'élève sans classe)
+- **Fichiers**     : à détailler à son lancement. Pistes :
+  - l'élève sans classe active consulte son historique (aujourd'hui, il est renvoyé vers l'écran de sortie : à vérifier) ;
+  - `app/domain/use_cases/identity/anonymize_user.rb` (ADR-0036 §4), déclenché par l'**équipe** sur demande de suppression, avec la date de la demande et un journal `user.deletion_requested` / `user.anonymized` ;
+  - un rappel à l'équipe des demandes de plus de 25 jours non traitées.
+- **Dépend de**    : Lot A (si une migration est nécessaire) ; validation des juristes sur le sort des résultats après suppression
+- **Test associé** : élève parti qui revoit son historique ; établissement qui garde les résultats obtenus chez lui ; demande de suppression traitée (refus élève, enseignant, direction) ; journal
+- **Done quand**   : un élève qui a quitté sa classe se connecte et revoit son historique ; l'établissement voit les résultats de ses anciens élèves ; l'équipe traite une demande de suppression et la trace
 
 ### Lot Z — Mise en ligne (séquentiel, avant le déploiement)
 

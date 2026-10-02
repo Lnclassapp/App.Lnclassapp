@@ -64,7 +64,8 @@ Source : [docs.wave.com/business](https://docs.wave.com/business#api-reference),
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| Q1 — Qui paie ? | **L'élève ou son parent**, par Wave (porteur, 2026-10-02) | Un abonnement par compte élève ; `restrict_payer_mobile` ne peut pas imposer le numéro de l'élève (le parent paie parfois) |
+| Q2 — Quelle durée ? | **L'année scolaire** (porteur, 2026-10-02) | Un paiement par année scolaire (septembre à juillet, ADR-0041) ; pas de renouvellement mensuel. Reste à trancher : prix, ce qui est gratuit, paiement en cours d'année (plein tarif ou prorata), remboursement |
 
 ## Cas limites identifiés
 
