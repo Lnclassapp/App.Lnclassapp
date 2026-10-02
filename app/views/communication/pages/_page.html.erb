@@ -1,8 +1,7 @@
 <%# 🌐 UI · communication/pages/_page — gabarit commun des pages publiques, motif de /aide : logo, retour, un seul h1 %>
-<%# Rôle : lit communication.pages.<page> (page_title, title, updated_on facultatif, sections.<id>) ; sommaire au-delà de 5 sections %>
+<%# Rôle : lit communication.pages.<page> (title, updated_on facultatif, sections.<id>) ; la page appelle page_title elle-même (garde FU-06) ; sommaire au-delà de 5 sections %>
 <%# UDR  : 0063 (§3.2, §3.6, §3.7), 0061, 0060, 0054 · appel : render "communication/pages/page", page: :mission %>
 <% scope = "communication.pages.#{page}" %>
-<% page_title t("#{scope}.page_title") %>
 <% sections = t("#{scope}.sections") %>
 <main class="flex min-h-dvh flex-col items-center bg-paper px-gutter py-10">
   <div class="w-full max-w-prose">

@@ -30,8 +30,8 @@ class Communication::PagesControllerTest < ActionDispatch::IntegrationTest
     @view_paths = CONTROLLER.view_paths
     I18n.backend.store_translations(:fr, communication: { pages: { lot0b_short: SHORT_PAGE, lot0b_long: LONG_PAGE } })
     CONTROLLER.prepend_view_path(ActionView::FixtureResolver.new(
-      "communication/pages/mission.html.erb" => '<%= render "communication/pages/page", page: :lot0b_short %>',
-      "communication/pages/terms.html.erb" => '<%= render "communication/pages/page", page: :lot0b_long %>'
+      "communication/pages/mission.html.erb" => '<% page_title t("communication.pages.lot0b_short.page_title") %><%= render "communication/pages/page", page: :lot0b_short %>',
+      "communication/pages/terms.html.erb" => '<% page_title t("communication.pages.lot0b_long.page_title") %><%= render "communication/pages/page", page: :lot0b_long %>'
     ))
   end
 
