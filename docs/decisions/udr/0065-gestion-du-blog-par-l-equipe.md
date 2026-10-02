@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-02 : délégation, « crée un système de blog et puis c'est tout »)* |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/blog`](../../chantiers/blog/prd.md) — chemin nominal A ; critères BL-07, BL-08, BL-09, BL-12, BL-13, BL-15, BL-17, BL-18 |
 | **ADR lié** | ADR-0073 *(en cours d'écriture : images d'article JPEG/PNG/WebP vérifiées par le serveur, envoyées par un endpoint de l'équipe, plafonds chiffrés)* · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (cycle de vie) · [ADR-0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md) (sous-rôles) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (CSP stricte, aucun tiers) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Trix à la demande, budget JS) · [ADR-0060](../adr/0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md) (réduction dans le navigateur) |

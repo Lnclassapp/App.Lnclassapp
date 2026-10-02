@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-02 |
 | **Branche** | `feature/blog` |
 | **Programme** | — *(hors plan de `refonte-application` ; rattaché à la V6, Communication : grill 12)* |

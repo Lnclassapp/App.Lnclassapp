@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-02 : délégation, « crée un système de blog et puis c'est tout »)* |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/blog`](../../chantiers/blog/memo.md) — grill 3, 5, 6, 7, 9 ; [PRD](../../chantiers/blog/prd.md) §3 (parcours B, chemins alternatifs), §4 (BL-01 à BL-06, BL-10, BL-11, BL-14, BL-18 à BL-21) |
 | **ADR lié** | ADR-0073 *(en cours d'écriture : blog public, images publiques, référencement)* · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun tiers, CSP) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget JS et CSS) · [ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md) (100 ms, 150 Ko) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) (gabarit des pages publiques, **modèle suivi**) · [UDR-0061](0061-carte-d-aide-et-faq.md) (carte d'aide) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (logo des pages publiques) · [UDR-0059](0059-homepage-telephone-et-tablette.md), [UDR-0012](0012-landing-et-modales-de-role.md) (homepage) · [UDR-0057](0057-ecrans-eleve-epures.md) (R1 à R6) · [UDR-0054](0054-finitions-d-interface.md) (titre, retour) · [UDR-0013](0013-catalogue-et-page-cours.md), [UDR-0015](0015-page-fiche-essentielle.md) (rendu Action Text `.trix-content`) · [UDR-0062](0062-echeances.md) (dates) · [UDR-0005](0005-design-system-fondateur.md), [UDR-0006](0006-shell-applicatif-par-role.md), [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) |
