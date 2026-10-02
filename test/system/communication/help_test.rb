@@ -1,12 +1,13 @@
 require "application_system_test_case"
 
-# UDR-0061 (FAQ) : depuis son accueil, l'élève ouvre « Besoin d'aide ? », déplie une question et lit sa réponse, sans JS
-# ni rechargement ; à 390 px, la page tient la règle de sobriété (UDR-0057) et ne défile pas en largeur.
+# UDR-0061 (FAQ) : depuis son accueil, l'élève ouvre « Besoin d'aide ? », puis « Questions fréquentes » dans la carte d'aide,
+# déplie une question et lit sa réponse, sans JS ni rechargement ; à 390 px, la page tient la règle de sobriété (UDR-0057) et ne défile pas en largeur.
 class Communication::HelpTest < ApplicationSystemTestCase
   test "from the student home, « Besoin d'aide ? » opens the FAQ and a question unfolds its answer" do
     sign_in_as create_student(classroom: create_classroom)
 
     click_on "Besoin d'aide ?"
+    within("dialog#help-sheet") { click_on "Questions fréquentes" }
     assert_current_path help_path
     assert_selector "h1", text: "Questions fréquentes"
 
