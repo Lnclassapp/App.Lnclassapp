@@ -1,0 +1,84 @@
+# Memo — Abonnement payé par Mobile Money (Wave)
+
+| | |
+|---|---|
+| **Type de cycle** | feature |
+| **Statut** | cadrage — grill non commencé |
+| **Ouvert le** | 2026-10-02 |
+| **Branche** | `ccr-93a43a40-3h3ty4` *(branche de session, partagée avec `fonctions-espace-eleve` ; une branche `feature/abonnement-mobile-money` au premier code)* |
+| **Programme** | — *(né du grill de `fonctions-espace-eleve`, Q1 et Q2)* |
+
+---
+
+## Le problème
+
+La maquette V2 de l'accueil élève montre une case « Paiement » et une annonce « Ton abonnement se termine dans 7 jours, renouvelle-le par Mobile Money ». Lnclass n'a aujourd'hui ni abonnement, ni paiement, ni moyen de savoir qui a payé.
+
+Le paiement avait été **retiré du plan le 2026-09-22** (F-24, paywall « Prépa BAC », [feuille de route](../refonte-application/feuille-de-route.md)). Le porteur l'y remet le 2026-10-02 (grill de `fonctions-espace-eleve`, Q1), dans un chantier à part (Q2).
+
+## Pour qui
+
+- **Élève** : voir quand son abonnement se termine, le renouveler en payant avec Wave depuis son téléphone.
+- **Équipe** : voir qui a payé, suivre les paiements et rembourser si besoin.
+- *Parent, établissement : à trancher au grill (qui paie ?).*
+
+## Pourquoi maintenant
+
+*À confirmer au grill* : le modèle économique de Lnclass dépend de l'abonnement ; la V2 de l'accueil élève le montre déjà.
+
+## Ce que l'API Wave permet (doc lue le 2026-10-02)
+
+Source : [docs.wave.com/business](https://docs.wave.com/business#api-reference), pages [Checkout](https://docs.wave.com/checkout) et [Webhooks](https://docs.wave.com/webhook), fournies par le porteur après son échange avec Wave.
+
+| Sujet | Ce que dit la doc | Conséquence pour Lnclass |
+|---|---|---|
+| Encaisser | **Checkout API** : `POST /v1/checkout/sessions` avec `amount` (chaîne), `currency` `XOF`, `success_url`, `error_url` (HTTPS) ; optionnels `client_reference` (≤ 255 car.) et `restrict_payer_mobile` (E.164) | Un paiement = une session ; `client_reference` porte notre identifiant de paiement ; `restrict_payer_mobile` peut imposer le numéro de l'élève (ou du parent) |
+| Parcours | La réponse donne `wave_launch_url` : l'ouvrir dans le navigateur (pas de webview) ; la session expire **30 min** après sa création (`when_expires`) | Un bouton « Payer avec Wave » redirige ; au-delà de 30 min, on recrée une session |
+| États | `checkout_status` : `open`, `complete`, `expired` ; `payment_status` : `processing`, `cancelled`, `succeeded` ; `transaction_id` visible dans l'app Wave de l'élève | Le `transaction_id` sert de reçu et de preuve en cas de litige |
+| Confirmer | **Webhooks** recommandés plutôt que l'interrogation : `checkout.session.completed`, `checkout.session.payment_failed` | Le retour sur `success_url` **ne prouve rien** : seul le webhook (ou une lecture de la session) active l'abonnement |
+| Sécurité des webhooks | En-tête `Wave-Signature: t=<horodatage>,v1=<signature>` ; HMAC-SHA256 de `horodatage + corps brut` avec un secret `wave_sn_WHS_…` ; plusieurs `v1` pendant une rotation ; rejeu à refuser par l'horodatage | Vérifier la signature sur le corps brut, avant tout traitement ; secret dans les credentials, jamais dans le dépôt |
+| Livraison | « Au moins une fois », jusqu'à **3 jours** de reprises, **désordre et doublons possibles** ; répondre `2xx` en moins de **5 s** | Traitement idempotent par l'`id` de l'événement ; réponse immédiate, travail dans un job |
+| Authentification | `Authorization: Bearer wave_sn_prod_…` ; signature des requêtes sortantes possible (`Wave-Signature`, secret `wave_sn_AKS_…`) | Clé API à droits minimaux (portail Wave Business) |
+| Rembourser, annuler | `POST /v1/checkout/sessions/:id/refund` ; `POST /v1/checkout/sessions/:id/expire` | L'équipe peut rembourser depuis Lnclass, ou depuis le portail Wave |
+| Retrouver | `GET /v1/checkout/sessions/:id`, par `transaction_id`, ou `search` par `client_reference` | Rattrapage possible si un webhook se perd |
+| Erreurs | JSON `code`, `message`, `details` ; `429` en cas de limite de débit | Reprise avec attente sur 429 et erreurs réseau |
+| Configuration | Portail Wave Business → Developers → Webhooks : URL HTTPS, stratégie « Signing Secret », événements choisis ; liste d'IP d'envoi de Wave | Le pare-feu ou le proxy de Railway ne doit pas filtrer ces IP |
+
+**Ce que la doc ne propose pas** :
+
+- **aucun prélèvement récurrent** : chaque renouvellement est un nouveau paiement, déclenché par l'élève ;
+- **aucun bac à sable** mentionné : à demander à Wave (Fatoumata Makadi, agent Wave du porteur) ;
+- **aucun en-tête d'idempotence** à la création d'une session : c'est à nous d'éviter deux sessions pour le même renouvellement.
+
+## Hors périmètre
+
+*Première version, à durcir pendant le grill.*
+
+- Tout autre moyen de paiement que Wave (Orange Money, MTN MoMo, carte), tant que le grill n'en décide pas autrement.
+- Le prélèvement automatique : Wave ne le propose pas.
+- Les gains des enseignants et l'offre « Prépa BAC » de F-24 : ils restent retirés du plan.
+
+## Ce que le grill a révélé
+
+> Rempli après la session de questions adverses. Un memo qui sort du grill inchangé signifie que le grill a été mal fait.
+
+| Question posée | Réponse | Conséquence sur le chantier |
+|---|---|---|
+| | | |
+
+## Cas limites identifiés
+
+- L'élève paie, ferme l'application avant le retour : le webhook active quand même l'abonnement.
+- Le webhook arrive deux fois, ou après un `payment_failed` : traitement idempotent, l'état final suit le dernier état connu de la session.
+- L'élève ouvre deux sessions et paie les deux : un remboursement, ou une prolongation double ?
+- Le webhook n'arrive jamais : un job de rattrapage relit les sessions encore `open` ou `processing`.
+
+## Questions encore ouvertes
+
+- **Qui paie** : l'élève, son parent, ou l'établissement pour toute une classe ?
+- **Quoi** : prix, durée (mois, trimestre, année scolaire), et ce que l'abonnement débloque. Qu'est-ce qui reste gratuit ?
+- **À l'expiration** : que perd l'élève, et a-t-il un délai de grâce ?
+- **Numéro du payeur** : imposer celui du compte (`restrict_payer_mobile`), ou laisser payer depuis n'importe quel Wave ?
+- **Bac à sable Wave** et clés de test : à obtenir avant le premier lot de code.
+- **Reçu** : `transaction_id` seul, ou un reçu Lnclass ?
+- **ADR** : nouveau contexte borné `billing`, port de paiement, table des paiements et des événements reçus.
