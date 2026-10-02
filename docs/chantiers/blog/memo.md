@@ -60,7 +60,8 @@ Exclus par les règles en vigueur :
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| 1. La rentrée presse : pourquoi construire le blog dans Lnclass plutôt qu'avec un outil existant (WordPress, Ghost), en ligne en un jour ? | Dans Lnclass, à l'adresse lnclass.com/blog : Google crédite le site principal ; même design, mêmes comptes d'équipe protégés par le second facteur, aucun tiers. | Le coût est accepté : l'éditeur, les images et le référencement sont à construire. Pour tenir la rentrée, la V1 est **minimale** : toute fonction qui n'est pas indispensable au premier article part en suite. Ni sous-domaine, ni outil externe. |
+| 2. Un article est la vitrine publique de Lnclass : dans l'équipe, qui peut le publier ? | Les sous-rôles Administration et Contenu écrivent et publient ; le Terrain ne peut ni écrire ni publier. | Première règle qui distingue les sous-rôles de l'équipe : la matrice des droits de l'équipe (ADR-0038) gagne une ligne « blog », décidée ici pour le blog seul (la question générale des sous-rôles reste ouverte pour la V4). Un membre du Terrain reçoit un refus et ne voit pas l'entrée de gestion du blog ; il lit et partage les articles comme tout le monde. |
 
 ## Cas limites identifiés
 
