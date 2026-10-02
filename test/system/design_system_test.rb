@@ -357,7 +357,7 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_selector "h1", text: t("homepage.index.hero.title")
     assert_equal "fr", find("html")["lang"]
     assert_no_selector "link[href*='fonts.googleapis']", visible: :all
-    assert_equal "rgb(0, 160, 255)", css(find("#rejoindre > div"), "background-color")
+    assert_equal "rgb(0, 160, 255)", css(find("#hero"), "background-color")
   end
 
   # --- Finitions (UDR-0054) ---------------------------------------------------

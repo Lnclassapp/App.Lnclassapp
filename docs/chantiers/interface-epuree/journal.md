@@ -7,6 +7,9 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-02 | Lot 0 : « Voir plus » rend toutes les lignes côté serveur et masque les suivantes (`hidden`), sans requête | Liste courte (≤ 10 sessions) ; une requête par clic coûterait plus cher sur un réseau lent que 7 lignes de HTML | non (UDR-0057) |
+| 2026-10-02 | Porte des lots C à F : amendements des UDR 0009, 0011, 0013, 0015, 0021, 0022, 0023, 0041 et UDR-0060 acceptés par le porteur | Validation en un passage, sur résumé écran par écran | non (UDR amendées) |
+| 2026-10-02 | Les retraits des lots C et D ne valent que pour l'élève, même les simples répétitions vues par l'enseignant et l'équipe | Grill Q1 : chantier élève seulement, hors écrans d'entrée | non (notes de décision dans 0013, 0015, 0021, 0023) |
+| 2026-10-02 | « Meilleur score » % devient « Meilleure note » /20 sur la page exercice | Une seule forme de la note dans le parcours élève (R6) | non (UDR-0021) |
 
 ## Ce qui a dérapé
 

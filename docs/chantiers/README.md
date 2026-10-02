@@ -80,6 +80,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`cache-ecrans-lourds`](cache-ecrans-lourds/memo.md) | lots 1 à 4 sur `perf/cache-ecrans-lourds`, sans PR ; lot 5 après les lots UX | Budgets gravés (ADR-0067 : p95 < 300 ms pilotage, < 100 ms ailleurs, HTML < 150 Ko). Index et requêtes, sans cache ni vue modifiée : Travail des élèves 213 → 56 ms, pilotage 7 j 338 → 199 ms, recherche 264 → 38 ms (p50) ; pilotage « année » gardé 5 min (36 ms à chaud, 312 ms à froid en p95) ; `pg_trgm` activée (amendements ADR-0062) |
 | [`epuration-contenus`](epuration-contenus/memo.md) | livré sur `fix/epuration-entetes-contenus` | En-têtes cours, fiche et exercice épurés (statut seul, actions dans le menu ⋮), « Essentielles de la leçon », et « Tout publier » en cascade (amendements UDR-0042, UDR-0007, ADR-0035) |
 | [`catalogue-niveau-eleve`](catalogue-niveau-eleve/memo.md) | livré sur `fix/catalogue-eleve-son-niveau` | L'élève ne voit, n'ouvre et ne commence que les cours de son niveau (et de sa série, ou communs) ; 404 ailleurs (amendements UDR-0013, ADR-0035) |
+| [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | cadrage, grill non commencé | Les six fonctions de la maquette V2 de l'accueil élève retirées d'`interface-epuree` (Q8) : échéances et retards, durée d'un exercice, paiement et abonnement, annonces signées, lecture audio, aide |
 
 ## Backlog
 
@@ -97,6 +98,7 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
 | **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2. Rattaché à la V4 s'il reprend ([feuille de route §5](refonte-application/feuille-de-route.md#chantiers-hors-plan)) |
+| [`ci-quota`](ci-quota/memo.md) | **En cours**, repris le 2026-10-02 : runner auto-hébergé abandonné ; CI en un job sur les PR prêtes, preuve d'arbre pour les promotions, Dependabot vers `Develop` (ADR-0069)
 
 ## Cycle de vie
 

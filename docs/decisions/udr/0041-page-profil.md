@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *amendée le 2026-10-02 (proposé) par le chantier `interface-epuree`* |
+| **Statut** | Accepté — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-27 |
 | **Chantier** | [`docs/chantiers/profil-utilisateur`](../../chantiers/profil-utilisateur/prd.md) — critères PR-01 à PR-07 |
 | **ADR lié** | [ADR-0055](../adr/0055-profil-modification-de-soi-et-revocation-des-sessions.md) · [ADR-0025](../adr/0025-pin-a-4-chiffres-comme-secret-d-authentification.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) |
@@ -53,7 +53,9 @@ Une page unique, dans le shell du rôle, avec une carte « Mes informations » e
 
 - Pour `school_admin`, le badge « En attente » disparaît ; la carte « Mes informations » affiche une ligne « Établissement » avec son nom, comme pour l'enseignant.
 
-## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Proposé
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
+
+> **Décision du porteur (2026-10-02)** : amendement accepté.
 
 *Chantier [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/memo.md) — grill Q3, Q4 ; [plan](../../chantiers/interface-epuree/plan.md), Lot F. Règle : [UDR-0057](0057-ecrans-eleve-epures.md). Photo : [UDR-0047](0047-photo-de-profil.md). Cet amendement ne vise que le profil **tel que l'élève le voit** (`profile.role == :student`, `current_actor.student?`). Une fois accepté, il fait foi pour l'élève en cas d'écart avec le texte ci-dessus.*
 
