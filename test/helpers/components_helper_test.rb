@@ -609,6 +609,32 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_match "Raté.", Nokogiri::HTML5.fragment(rendered).css("template").last.inner_html
   end
 
+  # --- « Voir plus » (UDR-0057 R3) ---------------------------------------------
+
+  test "ui_reveal_data wires the reveal controller with both announcements" do
+    data = ui_reveal_data(step: 2)
+
+    assert_equal "reveal", data[:controller]
+    assert_equal 2, data[:reveal_step_value]
+    assert_equal "1 ligne de plus affichée.", data[:reveal_one_value]
+    assert_equal "{count} lignes de plus affichées.", data[:reveal_other_value]
+  end
+
+  test "ui_reveal_item hides the lines after the third and targets them all" do
+    assert_equal({ hidden: false, data: { reveal_target: "item" } }, ui_reveal_item(2))
+    assert_equal({ hidden: true, data: { reveal_target: "item" } }, ui_reveal_item(3))
+  end
+
+  test "ui_reveal_more renders a full-width ghost button and a polite status, only beyond three lines" do
+    assert_nil ui_reveal_more(3)
+
+    show ui_reveal_more(4)
+
+    assert_select "button.w-full[data-reveal-target=button][data-action='reveal#more']", text: "Voir plus"
+    assert_select "button.bg-ink", 0
+    assert_select "p.sr-only[role=status][aria-live=polite][data-reveal-target=status]"
+  end
+
   test "ui_modal hands its document title to the modal controller and its dialog to the autofocus controller" do
     html = ui_modal(title: "Nouveau niveau", id: "level", document_title: "Nouveau niveau · Équipe · Lnclass") do |modal|
       modal.footer { "Pied" }
