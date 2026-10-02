@@ -18,7 +18,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
   def row_of(classroom, school: @school) = overview(school:).classrooms.find { it.public_id == classroom.public_id }
 
   def classroom(name: "2nde C 1", level: @seconde, school: @school, **) = create_classroom(school:, level:, name:, **)
-  def assignment(classroom, **) = create_assignment(classroom:, assignable: create_course, by: @teacher, **)
+  def assignment(classroom, **) = create_assignment(classroom:, assignable: create_exercise, by: @teacher, **)
 
   # A submitted assignment: a completed standard session tied to it (ADR-0065 §4).
   def submit(student, assignment, score, **)

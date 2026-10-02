@@ -62,7 +62,7 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
 
     remove_sixth
 
-    assert_toast "Cette classe a des élèves : archivez-la plutôt."
+    assert_toast "Cette classe a des élèves : elle ne peut plus être retirée."
     assert_no_selector "dialog[open]"
     within("#level_classrooms_6eme") { assert_selector sixth_count(4) }
     assert Orm::Classroom.exists?(@sixths.last.id)
@@ -72,7 +72,11 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
   # Un toast d'erreur reste jusqu'à sa fermeture et peut couvrir l'en-tête (au téléphone surtout) : on le ferme par son
   # vrai bouton, comme le ferait l'équipe, et on attend qu'il ait quitté la page.
   def dismiss_toasts
-    all("#toasts button[data-action='toast#dismiss']").each(&:click)
+    all("#toasts button[data-action='toast#dismiss']").each do |button|
+      button.click
+    rescue Selenium::WebDriver::Error::StaleElementReferenceError
+      nil # un toast de succès s'est fermé seul entre la recherche et le clic : il a déjà quitté la page
+    end
     assert_no_selector "#toasts [data-controller=toast]"
   end
 

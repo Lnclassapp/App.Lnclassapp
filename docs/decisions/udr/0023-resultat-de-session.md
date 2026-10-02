@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot C3, critères AS-11 (affichage), AS-12, AS-13, AS-39 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadSessionPolicy`, `RevealAnswersPolicy`, `StartSessionPolicy`) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0022](0022-session-d-exercice.md) |
@@ -72,3 +72,45 @@
 - Retour : `ui_back_link` vers `course_essential_path`, libellé = nom de la fiche (au lieu de « Fiche essentielle : <nom> »).
 - Titre : « Résultat de <titre de l'exercice> · <espace> · Lnclass ».
 - Badge : suivi d'une infobulle des seuils (UDR-0054 §3.4).
+
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
+
+> **Décision du porteur (2026-10-02)** : amendement accepté. Les retraits ne valent **que pour l'élève** : l'enseignant et l'équipe gardent ces écrans inchangés, y compris pour les simples répétitions. Toute ligne du tableau ci-dessous qui vise un autre rôle est caduque.
+
+*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot C, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Accepté` (porteur, 2026-10-02). Le Lot C ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et l'amendement précédent.*
+
+**Contexte.** L'UDR-0057 impose six règles (R1 à R6) à chaque écran élève. L'audit du 2026-10-02 relève un même résultat dit trois fois (note, score, questions justes), une aide permanente qui répète les cartes et une liste sans limite.
+
+**Changements pour l'élève**
+
+| Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
+|---|---|---|---|---|
+| « Score » du `dl` de `#session_result` | « 85 % » | Retiré **pour l'élève propriétaire** (`@owner`). Clés `score` et `score_value` gardées : l'enseignant et l'équipe les lisent | R6 | La note sur 20 dit le même résultat (`Grading.grade_on_20` = score ÷ 5). C'est la forme unique de la note dans le parcours (UDR-0058 §3.3) |
+| « Questions justes » du `dl` | « 9 sur 10 » | Retiré **pour l'élève propriétaire**. Clés `correct` et `correct_value` gardées : l'enseignant et l'équipe les lisent | R6 | Même résultat que la note (`Grading.score_percent`). Le verdict de chaque question reste dans la correction, juste en dessous |
+| `dl` du résumé | 4 termes, 2 colonnes puis 4 dès `sm` | Élève propriétaire : 2 termes, « Note » puis « Maîtrise », en `grid-cols-2` à toutes les tailles. Enseignant et équipe : 4 termes, inchangés | — | — |
+| Aide `review_hint_student` sous « Correction question par question » | « Pour chaque question : ton choix, le verdict et l'explication. » | Retirée pour l'élève propriétaire, sans infobulle. Le `h2` reste seul. La clé reste pour un lecteur sans correction (enseignant d'un exercice archivé : `RevealAnswersPolicy` refuse), dont l'écran ne change pas | R4, R6 | Chaque carte affiche déjà « Ton choix », le verdict et l'explication : la phrase les énumère |
+| Liste `ol` de `#session_review` (élève propriétaire) | Toutes les questions | 3 cartes visibles, les suivantes rendues mais masquées (`hidden`), puis « Voir plus » | R3 | Les cartes suivantes sont déjà dans la page. « Voir plus » les révèle par 3, sans requête, dans l'ordre des questions |
+
+**« Voir plus » de la correction (élève propriétaire seulement)**
+- Même motif que l'[UDR-0021](0021-page-exercice.md), amendement du 2026-10-02, avec `@owner` comme condition.
+- Si `@owner` : `section#session_review` porte `data-controller="reveal"` et `data-reveal-step-value="3"`. `_question_review` reçoit déjà `owner:` : son `li` porte `data-reveal-target="item"`, et `hidden` à partir de la quatrième question.
+- Après l'`ol`, s'il y a plus de 3 questions : `ui_button` « Voir plus » (`ghost`, `full: true`, `data-reveal-target="button"`), puis `p.sr-only[aria-live=polite][data-reveal-target=status]` (contrat du Lot 0).
+- `data-controller="math"` reste sur l'`ol` : KaTeX rend aussi les cartes masquées.
+
+**Contrôle R1 à R6 (vue de l'élève propriétaire)**
+- **R1** — Conforme aujourd'hui. « Recommencer » (`brand`) est la seule action principale ; « Revoir l'exercice » est `secondary`. Sans faute, il n'y a pas de « Recommencer ». « Voir plus » est `ghost`.
+- **R2** — Conforme aujourd'hui. Trois blocs : lien retour, `#session_result`, `#session_review`.
+- **R3** — Change : 3 cartes de correction, puis « Voir plus ».
+- **R4** — Change : `review_hint_student` disparaît. Badge et maîtrise gardent leur infobulle des seuils.
+- **R5** — Conforme aujourd'hui. Accent `brand` (« Recommencer », « Nouveau badge ! »). `success` et `error` signalent le verdict. Le ton du médaillon code le palier, qui est écrit en toutes lettres (UDR-0007). Les confettis sont un calque décoratif de 3 s, `aria-hidden`, sans information : ils gardent leurs couleurs.
+- **R6** — Change : la note n'a plus qu'une forme, sur 20. Restent distincts, et donc affichés : le titre (« Félicitations ! » ou « Courage ! », seuil de réussite), le palier du badge et la maîtrise (seuils de l'ADR-0033). Le verdict de chaque carte garde texte, icône et couleur (accessibilité).
+
+**Inchangé pour l'enseignant et l'équipe** (décision du porteur, 2026-10-02 : rien ne change pour eux, même une simple répétition)
+- « Session de Prénom Nom » à la place de l'encouragement.
+- `dl` à 4 termes : « Note », « Score », « Maîtrise », « Questions justes ».
+- Aide `review_hint_reveal` visible, correction complète (« Proposition correcte », « Choix de l'élève »), sans « Voir plus ».
+
+**Vérification**
+- `test/system/assessment/session_result_test.rb` : pour l'élève, le `dl` a « Note » et « Maîtrise » seulement ; l'élève voit 3 cartes puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'équipe voit les 4 termes, toutes les cartes et `review_hint_reveal`.
+- `test/controllers/assessment/session_results_controller_test.rb` : l'élève n'a plus « Score » ni « Questions justes » ; l'enseignant les garde.
+- `test/system/boucle_pedagogique_test.rb` (ligne 350, `review_hint_reveal`) reste vert.

@@ -78,12 +78,12 @@ Une seule page, une seule chaîne : les trois lots sont séquentiels. Un seul ag
 - [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé` *(mené sans le porteur : hypothèses marquées)*
 - [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md` *(sans objet : aucun)*
-- [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0056 ; amendements UDR-0012 et UDR-0005)*
+- [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0064 ; amendements UDR-0012 et UDR-0005)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle *(aucun port ; lots séquentiels sur la même branche)*
 - [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord *(RH-01 à RH-13 ; voir le journal pour la nature du premier rouge)*
 - [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur *(challenger du 2026-10-02 : huit critères rejoués, tous PASS, deux chemins d'erreur ; rapport dans le journal)*
-- [x] Pureté domaine · rubocop · tests · brakeman : au vert *(lancés en local le 2026-10-02, tous verts, puis relancés après les corrections du challenger ; la CI de la PR fait foi)*
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert *(lancés en local le 2026-10-02, tous verts, relancés après les corrections du challenger puis après la fusion avec `Develop` : 3 075 tests unitaires, 49 tests système, rubocop, brakeman ; la CI de la PR fait foi)*
 - [x] PR unique vers `Develop`, référençant chantier + ADR + UDR *([#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145))*
 - [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

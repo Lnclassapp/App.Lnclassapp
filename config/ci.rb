@@ -2,9 +2,9 @@
 # One list of steps, one place: bin/ci and the GitHub workflow never diverge (feuille-de-route §2, garde-fou n° 4).
 # Order: cheapest and most fundamental first.
 #
-# The steps are grouped (ADR-0064). Locally, bin/ci plays every group, in this order, as it always did.
-# On GitHub, each job plays `CI_GROUP=<group>[,<group>…]`, or one part of a sharded group (`system:2/4`), and the
-# jobs run side by side. test/guards/ci_plan_test.rb proves that the jobs of the workflow add up to this whole list.
+# The steps are grouped (ADR-0064). bin/ci plays every group, in this order, locally and in the one GitHub job
+# (ADR-0069: one job, the minutes are counted per job). `CI_GROUP=<group>[,<group>…]` or a part of a sharded group
+# (`system:2/4`) still plays a subset by hand.
 require_relative "../script/ci/plan"
 
 # The Yarn audit is network-bound (2 min 40 s measured locally) and its result only moves with the JS dependencies.
@@ -62,7 +62,10 @@ CI_PLAN = CiPlan.define do
   end
 
   # ADR-0039 : bulk imports under 2 minutes. Skipped by `bin/rails test` without PERF.
-  sharded "perf", files: CiPlan.files("test/performance/**/*_test.rb") do |files, part|
+  # ADR-0067 : the screen budgets (*_budget_test.rb) seed 312 000 sessions, ≈ 2 min 30 : they run before each
+  # recette and in the chantiers that touch those screens, never in bin/ci.
+  perf_files = CiPlan.files("test/performance/**/*_test.rb") - CiPlan.files("test/performance/**/*_budget_test.rb")
+  sharded "perf", files: perf_files do |files, part|
     step [ "Tests: Import performance", part ].compact.join(" "), "env PERF=1 COVERAGE=0 bin/rails test #{files.join(' ')} -v"
   end
 

@@ -1,6 +1,6 @@
 <%# 🌐 UI · homepage/_role_modal — entrée « Je suis élève » ou « Je suis enseignant » et sa modale de rôle %>
 <%# Rôle : un déclencheur de 56 px pleine largeur ouvre une <dialog> native (Stimulus modal) : se connecter, ou la porte du rôle %>
-<%# UDR  : 0056, 0012 (§2), 0054 (§3.1) · TR-01 %>
+<%# UDR  : 0064, 0012 (§2), 0054 (§3.1) · TR-01 %>
 <% sign_up_path = { student: new_join_code_path, teacher: new_teacher_registration_path }.fetch(role) %>
 <%= ui_modal title: t(".#{role}.title"), id: "role-modal-#{role}-#{placement}", size: :sm,
       trigger: t(".#{role}.trigger"), trigger_variant: variant, trigger_size: :lg, trigger_full: true,

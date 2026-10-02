@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0056 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -96,6 +96,8 @@ module ComponentsHelper
   RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
+  # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet motion-reduce:animate-none" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = {
     default: "text-ink hover:bg-mist focus:bg-mist",
@@ -238,15 +240,17 @@ module ComponentsHelper
 
   # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
   # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
-  # `trigger_size:` et `trigger_full:` vont tels quels à `ui_button` : une entrée de rôle de la page d'accueil est un
-  # déclencheur `lg` pleine largeur (UDR-0056).
-  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, trigger_size: :md,
-               trigger_full: false, open: false, document_title: nil, &block)
+  # `trigger_href:` fait du déclencheur un lien, suivi sans JavaScript, que le contrôleur `modal` intercepte (UDR-0061).
+  # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:center` (défaut) ne change rien.
+  # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
+  def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
+               document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, placement: :center, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
-    render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:, trigger_icon:,
-           trigger_size:, trigger_full:, open:, body:, slots:, document_title:,
-           size_class: option!(MODAL_SIZES, size, "ui_modal size")
+    render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
+           trigger_icon:, trigger_href:, trigger_size:, trigger_full:, open:, body:, slots:, document_title:,
+           size_class: option!(MODAL_SIZES, size, "ui_modal size"),
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
@@ -385,6 +389,31 @@ module ComponentsHelper
                               data: { clipboard_target: "button", action: "clipboard#copy" })
     render "components/copy_button", text:, button:, copied: ui_toast(copied, type: :success),
            failed: ui_toast(failed, type: :error)
+  end
+
+  # UDR-0057 R3 : une liste montre au plus REVEAL_LIMIT lignes, puis « Voir plus » révèle les suivantes, déjà rendues.
+  REVEAL_LIMIT = 3
+
+  # Attributs du conteneur de la liste (contrôleur `reveal`) : `tag.div(data: ui_reveal_data) { … }`.
+  def ui_reveal_data(step: 0)
+    { controller: "reveal", reveal_step_value: step, reveal_one_value: t("components.reveal.announce_one"),
+      reveal_other_value: t("components.reveal.announce_other") }
+  end
+
+  # Attributs d'une ligne : masquée à partir de la (REVEAL_LIMIT + 1)e, révélée par « Voir plus ».
+  def ui_reveal_item(index)
+    { hidden: index >= REVEAL_LIMIT, data: { reveal_target: "item" } }
+  end
+
+  # « Voir plus » et sa région d'annonce, seulement s'il y a plus de REVEAL_LIMIT lignes.
+  def ui_reveal_more(total, label: t("components.reveal.more"))
+    return if total <= REVEAL_LIMIT
+
+    safe_join([
+      ui_button(label, variant: :ghost, size: :sm, full: true, icon_end: "chevron-down",
+                       data: { reveal_target: "button", action: "reveal#more" }),
+      tag.p(class: "sr-only", role: "status", "aria-live": "polite", data: { reveal_target: "status" })
+    ])
   end
 
   private

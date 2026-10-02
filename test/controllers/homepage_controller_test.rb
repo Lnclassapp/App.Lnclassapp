@@ -1,9 +1,13 @@
 require "test_helper"
 
-# UDR-0056 (RH-01 à RH-10) and UDR-0012 (TR-01, TR-03): the public home, one screen and one decision; the two role
+# UDR-0064 (RH-01 à RH-10) and UDR-0012 (TR-01, TR-03): the public home, one screen and one decision; the two role
 # entries and their modals; every link leads somewhere real and no button is left without an action.
+# UDR-0059 §2.2 : the two entries are offered once, in the hero (no join section, no « Commencer »).
+# UDR-0063 §3.4 : the footer's second list carries the public pages that are online.
+# UDR-0062 §4 : the teacher is promised exercises to assign, never courses.
 class HomepageControllerTest < ActionDispatch::IntegrationTest
-  SUBJECTS = [ "Mathématiques", "Physique-Chimie", "SVT", "Français", "Anglais", "Histoire-Géographie", "Philosophie" ].freeze
+  # UDR-0058 §3 : the subjects of the student grid, EDHC (1st cycle) and Philosophie (2nd cycle) both listed.
+  SUBJECTS = [ "Mathématiques", "Physique-Chimie", "SVT", "Français", "Histoire-Géographie", "EDHC", "Philosophie" ].freeze
   INFORMAL = /\b(tu|tes|ton|toi)\b/i
 
   test "the homepage is served at the root" do
@@ -32,6 +36,16 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "button[aria-haspopup='dialog']", text: "Je suis enseignant"
   end
 
+  test "RH-09: the two entries are offered once, in the hero, without the join section nor « Commencer »" do
+    get root_url
+
+    assert_select "section#rejoindre", 0
+    assert_select "a, button", text: "Commencer", count: 0
+    assert_select "dialog[id^='role-modal-']", 2
+    assert_select "#hero dialog#role-modal-student-hero", 1
+    assert_select "#hero dialog#role-modal-teacher-hero", 1
+  end
+
   test "the student modal offers to sign in or to join a class" do
     get root_url
 
@@ -54,7 +68,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "[data-controller=modal][data-modal-document-title-value='Tu es élève ? · Lnclass'] dialog#role-modal-student-hero"
-    assert_select "[data-controller=modal][data-modal-document-title-value='Vous êtes enseignant ? · Lnclass'] dialog#role-modal-teacher-join"
+    assert_select "[data-controller=modal][data-modal-document-title-value='Vous êtes enseignant ? · Lnclass'] dialog#role-modal-teacher-hero"
     assert_select "title", text: "Accueil · Lnclass"
   end
 
@@ -69,7 +83,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_not Rails.root.join("app/assets/images/homepage/student.png").exist?, "le PNG de 1,3 Mo doit disparaître"
   end
 
-  test "RH-05: the seven subjects of the referential, in the tone of their category, and nothing more" do
+  test "RH-05: the subjects of the student grid, in the tone of their category, and nothing more" do
     get root_url
 
     badges = css_select("#matieres > div > span")
@@ -104,14 +118,6 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_no_match INFORMAL, css_select("dialog#role-modal-teacher-hero").first.text
   end
 
-  test "RH-09: the final call repeats the two entries, and the page carries four role modals in all" do
-    get root_url
-
-    assert_select "#rejoindre dialog#role-modal-student-join"
-    assert_select "#rejoindre dialog#role-modal-teacher-join"
-    assert_select "dialog[id^='role-modal-']", 4
-  end
-
   test "every link is recognized by the router or targets a section of the page" do
     get root_url
 
@@ -133,6 +139,52 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     css_select("button").each do |button|
       assert(button["data-action"].present? || button["type"] == "submit", "bouton sans action : #{button.text.squish}")
     end
+  end
+
+  # UDR-0063 §3.4 : la seconde liste du pied de page ne montre que les pages en ligne ; absente si aucune ne l'est.
+  test "the footer offers no public page while none is online" do
+    online = Communication::PagesController.method(:online?)
+    Communication::PagesController.define_singleton_method(:online?) { |*| false }
+
+    get root_url
+
+    assert_select "footer #public_pages", 0
+    %w[/mission /confidentialite /conditions-utilisation /conditions-vente].each do |path|
+      assert_select "a[href='#{path}']", 0
+    end
+  ensure
+    Communication::PagesController.define_singleton_method(:online?, online)
+  end
+
+  # Lot Z, décision du porteur du 2026-10-02 : les quatre pages sont en ligne.
+  test "the footer links the four public pages, in the order of PAGES" do
+    get root_url
+
+    assert_select "footer #public_pages li a", 4 do |links|
+      assert_equal [ mission_path, privacy_path, terms_path, sales_terms_path ], links.map { it["href"] }
+    end
+  end
+
+  test "the footer lists the online public pages, and those only, in a second list" do
+    online = Communication::PagesController.method(:online?)
+    Communication::PagesController.define_singleton_method(:online?) { |page| %i[mission terms].include?(page.to_sym) }
+
+    get root_url
+
+    assert_select "footer ul#public_pages.text-sm li a", 2
+    assert_select "footer #public_pages a[href='#{mission_path}']", "Notre mission"
+    assert_select "footer #public_pages a[href='#{terms_path}']", "Conditions d'utilisation"
+    assert_select "a[href='#{privacy_path}'], a[href='#{sales_terms_path}']", 0
+  ensure
+    Communication::PagesController.define_singleton_method(:online?, online)
+  end
+
+  # UDR-0062 §4 : l'enseignant n'assigne plus que des exercices ; la landing ne promet plus de cours assignés.
+  test "the teacher is promised to assign exercises, not courses" do
+    get root_url
+
+    assert_match(/assignez-leur des exercices/i, response.body)
+    assert_no_match(/des cours et des exercices|assigner du contenu|Assigne du contenu/, response.body)
   end
 
   test "the school space of the former landing is not offered (TR-03, V2), and no price either" do

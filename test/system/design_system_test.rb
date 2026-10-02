@@ -137,7 +137,7 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_no_selector "#{dialog}[open]"
   end
 
-  # UDR-0056 : le déclencheur d'une entrée de rôle fait 56 px de haut et toute la largeur de sa cellule.
+  # UDR-0064 : le déclencheur d'une entrée de rôle fait 56 px de haut et toute la largeur de sa cellule.
   test "a modal trigger can be large and full width, and still opens its dialog" do
     trigger = find("button[aria-controls=demo-modal-entry]")
 
@@ -374,7 +374,7 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_selector "h1", text: t("homepage.index.hero.title")
     assert_equal "fr", find("html")["lang"]
     assert_no_selector "link[href*='fonts.googleapis']", visible: :all
-    assert_equal "rgb(0, 160, 255)", css(find("#rejoindre > div"), "background-color")
+    assert_equal "rgb(0, 160, 255)", css(find("#hero"), "background-color")
   end
 
   # --- Finitions (UDR-0054) ---------------------------------------------------

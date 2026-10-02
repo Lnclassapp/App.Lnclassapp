@@ -1,10 +1,11 @@
 <%# 🌐 UI · homepage/index — page d'accueil publique : un écran, une décision %>
 <%# Rôle : le héros porte les deux entrées de rôle (modales, TR-01) ; la page descend du général au particulier et ne promet que la V1 %>
-<%# UDR  : 0056, 0012 (§2), 0054 · ADR : 0049, 0051 %>
+<%# UDR  : 0064, 0059 (famille ordinateur : entrées dans le héros seulement), 0063 (§3.4, pied), 0012 (§2), 0054 · ADR : 0049, 0051 %>
 <% page_title t(".page_title") %>
-<%# Les sept matières du référentiel, dans son ordre et avec sa catégorie (ADR-0034, db/seeds/catalog.rb) ; la teinte vient de la catégorie. %>
+<%# Les matières que Lnclass propose, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3), EDHC au 1er cycle et Philosophie au 2nd ;
+    la teinte vient de la catégorie du référentiel (ADR-0034). %>
 <% subjects = [ [ "Mathématiques", :science ], [ "Physique-Chimie", :science ], [ "SVT", :science ], [ "Français", :literature ],
-                [ "Anglais", :literature ], [ "Histoire-Géographie", :literature ], [ "Philosophie", :literature ] ] %>
+                [ "Histoire-Géographie", :literature ], [ "EDHC", :literature ], [ "Philosophie", :literature ] ] %>
 <% features = { exercises: "clipboard-document-check", curriculum: "academic-cap", badges: "trophy", light: "device-phone-mobile" } %>
 
 <div class="min-h-screen bg-paper">
@@ -106,7 +107,7 @@
       </div>
     </section>
 
-    <%# ---------- Enseignants : vouvoyés, les trois gestes de la V1, un seul bouton ---------- %>
+    <%# ---------- Enseignants : vouvoyés, les trois gestes de la V1, un seul bouton. Les deux entrées ne sont pas répétées en bas (UDR-0059 §2.2) ---------- %>
     <section id="enseignants" aria-labelledby="enseignants-title" class="scroll-mt-20 bg-brand-soft py-16 md:py-24">
       <div class="mx-auto max-w-page px-gutter">
         <div class="max-w-2xl">
@@ -128,21 +129,6 @@
       </div>
     </section>
 
-    <%# ---------- Appel final : la décision, répétée une fois pour qui a tout lu ---------- %>
-    <section id="rejoindre" aria-labelledby="rejoindre-title" class="scroll-mt-20 px-gutter py-16 md:py-24">
-      <div class="relative mx-auto max-w-page overflow-hidden rounded-sheet bg-brand px-6 py-12 sm:px-12 md:py-16">
-        <%= image_tag "logo/lnclass.jpeg", alt: "", width: 320, height: 320, "aria-hidden": "true",
-              class: "pointer-events-none absolute -right-16 -bottom-20 hidden w-80 opacity-90 mix-blend-multiply md:block md:w-104" %>
-        <div class="relative max-w-xl">
-          <h2 id="rejoindre-title" class="font-display text-3xl font-extrabold tracking-tight sm:text-5xl"><%= t(".join.title") %></h2>
-          <p class="mt-4 text-lg text-ink/90"><%= t(".join.lead") %></p>
-          <div class="mt-8 grid gap-3 sm:max-w-md sm:grid-cols-2">
-            <%= render "role_modal", role: :student, placement: :join, variant: :primary %>
-            <%= render "role_modal", role: :teacher, placement: :join, variant: :secondary %>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <%# ---------- Pied de page ---------- %>
@@ -159,5 +145,16 @@
         <li><%= link_to t(".footer.sign_in"), new_session_path, class: "inline-flex min-h-tap items-center hover:text-ink" %></li>
       </ul>
     </div>
+    <%# UDR-0063 §3.4 : seconde liste, les pages publiques en ligne seulement ; absente tant qu'aucune ne l'est %>
+    <% if (public_links = public_page_links).any? %>
+      <div class="mx-auto max-w-page px-gutter pb-8">
+        <ul id="public_pages" aria-label="<%= t(".footer.public_pages") %>"
+            class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-mute sm:justify-end">
+          <% public_links.each do |label, href| %>
+            <li><%= link_to label, href, class: "inline-flex min-h-tap items-center hover:text-ink" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </footer>
 </div>

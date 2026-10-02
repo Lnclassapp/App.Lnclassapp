@@ -166,7 +166,7 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 
 ## Amendement du 2026-10-02 — taille et largeur du déclencheur d'une modale
 
-*Chantier [`docs/chantiers/refonte-homepage`](../../chantiers/refonte-homepage/prd.md), [UDR-0056](0056-page-d-accueil-un-ecran-une-decision.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/refonte-homepage`](../../chantiers/refonte-homepage/prd.md), [UDR-0064](0064-page-d-accueil-un-ecran-une-decision.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
-- **Modale** : l'API devient `ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, trigger_size: :md, trigger_full: false, open:, document_title:)`. `trigger_size:` (`:sm` | `:md` | `:lg`) et `trigger_full:` sont passés tels quels à `ui_button` pour le déclencheur : une taille inconnue lève l'`ArgumentError` de `ui_button`. Sans ces options, le déclencheur est celui d'aujourd'hui (`md`, largeur naturelle). Aucun nouveau token.
+- **Modale** : l'API devient `ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, trigger_href:, trigger_size: :md, trigger_full: false, placement:, open:, document_title:)`. `trigger_href:`, `trigger_size:` (`:sm` | `:md` | `:lg`) et `placement:` viennent de l'UDR-0061 ; seul `trigger_full:` est ajouté ici. `trigger_size:` et `trigger_full:` sont passés tels quels à `ui_button` pour le déclencheur : une taille inconnue lève l'`ArgumentError` de `ui_button`. Sans ces options, le déclencheur est celui d'aujourd'hui (`md`, largeur naturelle). Aucun nouveau token.
 - Visible sur `/design` (section « Modale », troisième exemple : déclencheur `brand`, `lg`, pleine largeur), vérifié par `test/system/design_system_test.rb` et `test/helpers/components_helper_test.rb`.

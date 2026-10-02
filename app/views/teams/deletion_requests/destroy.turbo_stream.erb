@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/deletion_requests/destroy — demande de suppression annulée (l'élève ou son parent s'est rétracté) %>
+<%# Rôle : toast ; le bloc de la fiche du compte propose de nouveau « Enregistrer une demande de suppression » %>
+<%# ADR  : 0036 (amendement 2) · UDR : 0020, 0054 %>
+<%= turbo_stream_toast t(".done", name: @account.display_name), type: :success %>
+<%= turbo_stream.replace Teams::DeletionRequestsController::BLOCK_FRAME do %>
+  <%= render "account_block", account: @account, request: nil %>
+<% end %>

@@ -71,10 +71,10 @@ Alors la photo du héros est servie depuis homepage/student.webp, en 960 × 640,
 Et le fichier pèse au plus 100 Ko
 Et homepage/student.png n'existe plus dans le dépôt
 
-# RH-05 — Les matières du référentiel, rien de plus
+# RH-05 — Les matières de la grille élève, rien de plus
 Étant donné la page /
-Alors la bande des matières liste, dans cet ordre, Mathématiques, Physique-Chimie, SVT, Français, Anglais,
-  Histoire-Géographie, Philosophie
+Alors la bande des matières liste, dans cet ordre, Mathématiques, Physique-Chimie, SVT, Français,
+  Histoire-Géographie, EDHC, Philosophie (la grille de l'accueil élève, UDR-0058 §3)
 Et les trois premières portent la teinte « science », les quatre suivantes la teinte « literature »
 Et la page ne contient pas « et plus encore »
 
@@ -93,9 +93,12 @@ Et la carte des badges liste, dans cet ordre, Bronze, Argent, Or, Diamant
 Alors la section « enseignants » porte trois promesses et un lien « Créer mon compte enseignant » vers /teacher-signup
 Et son texte ne contient ni « tu », ni « tes », ni « ton », ni « toi »
 
-# RH-09 — L'appel final répète les deux entrées
+# RH-09 — Les deux entrées ne sont offertes qu'une fois (UDR-0059 §2.2)
 Étant donné la page /
-Alors la section « rejoindre » porte les modales « role-modal-student-join » et « role-modal-teacher-join »
+Alors il n'y a ni section « rejoindre » ni bouton « Commencer »
+Et la page porte exactement deux modales de rôle, « role-modal-student-hero » et « role-modal-teacher-hero »
+Et le pied de page liste les pages publiques en ligne, et elles seules (UDR-0063 §3.4)
+Et l'enseignant se voit promettre des exercices à assigner, jamais des cours (UDR-0062 §4)
 
 # RH-10 — Aucun lien sans route, aucun bouton sans action (TR-01, TR-03)
 Étant donné la page /
@@ -126,13 +129,14 @@ Et sans ces options, il garde 48 px et sa largeur naturelle
 | Domaine | — |
 | Infrastructure | — |
 | Delivery | `HomepageController` inchangé ; `homepage/index` et `homepage/_role_modal` réécrites |
-| UI | `components/_modal` et `ComponentsHelper#ui_modal` (options `trigger_size:`, `trigger_full:`) ; exemple sur `/design` ; locale `homepage/index.fr.yml` ; photo `homepage/student.webp` |
+| UI | `components/_modal` et `ComponentsHelper#ui_modal` (option `trigger_full:` ; `trigger_size:` existe depuis l'UDR-0061) ; exemple sur `/design` ; locale `homepage/index.fr.yml` ; photo `homepage/student.webp` |
 
 ## 6. Décisions rattachées
 
-- [UDR-0056](../../decisions/udr/0056-page-d-accueil-un-ecran-une-decision.md) — page d'accueil publique : un écran, une décision. Remplace la §3 « Structure » de l'UDR-0012 ; ses décisions 1 à 5 restent.
-- [UDR-0012](../../decisions/udr/0012-landing-et-modales-de-role.md), amendement du 2026-10-02 — renvoi vers l'UDR-0056.
-- [UDR-0005](../../decisions/udr/0005-design-system-fondateur.md), amendement du 2026-10-02 — options `trigger_size:` et `trigger_full:` de `ui_modal`.
+- [UDR-0064](../../decisions/udr/0064-page-d-accueil-un-ecran-une-decision.md) — page d'accueil publique : un écran, une décision. Remplace la §3 « Structure » de l'UDR-0012 ; ses décisions 1 à 5 restent. Numérotée 0056 à l'ouverture du chantier, renumérotée à la fusion avec `Develop`, qui avait pris 0056 à 0063 entre-temps.
+- Décisions livrées en parallèle sur `Develop` le 2026-10-02 et respectées par cette page : [UDR-0059](../../decisions/udr/0059-homepage-telephone-et-tablette.md) §2.2 (les entrées ne sont pas répétées en bas ; cette page est sa famille ordinateur, rendue à toutes les largeurs jusqu'au lot M2 d'`interface-epuree`), [UDR-0058](../../decisions/udr/0058-accueil-eleve.md) §3 (les matières de la grille élève), [UDR-0062](../../decisions/udr/0062-echeances.md) §4 (l'enseignant n'assigne que des exercices), [UDR-0063](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md) §3.4 (pages publiques au pied).
+- [UDR-0012](../../decisions/udr/0012-landing-et-modales-de-role.md), amendement du 2026-10-02 — renvoi vers l'UDR-0064.
+- [UDR-0005](../../decisions/udr/0005-design-system-fondateur.md), amendement du 2026-10-02 — option `trigger_full:` de `ui_modal` (`trigger_size:` est arrivée par l'UDR-0061 pendant le chantier).
 - Pas d'ADR : aucun port, aucune table, aucune dépendance, aucun contrat ne bouge. La CSP stricte (ADR-0049) est respectée : aucun script ni style en ligne.
 
 ## 7. Mesures
@@ -140,7 +144,7 @@ Et sans ces options, il garde 48 px et sa largeur naturelle
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
 | Poids de la photo du héros | 1 307 Ko (PNG 1248 × 832) | ≤ 100 Ko | **21,5 Ko** (WebP 960 × 640) |
-| Poids du HTML de `/` (ADR-0067 : < 150 Ko) | — *(non mesuré avant)* | < 150 Ko | 42,8 Ko (6,7 Ko gzip), 4 `<dialog>` |
+| Poids du HTML de `/` (ADR-0067 : < 150 Ko) | — *(non mesuré avant)* | < 150 Ko | 34,3 Ko (6,5 Ko gzip), 2 `<dialog>` *(après la fusion avec `Develop` : sans l'appel final, avec les pages publiques au pied)* |
 | CSS compilée, gzip (ADR-0051 : ≤ 30 Ko) | 7,4 Ko (2026-09-25) | ≤ 30 Ko | 12,8 Ko |
 | Bas du second bouton d'entrée, à 360 × 640 px | sous la fenêtre (en-tête 64 px + navigation, héros, photo avant les entrées) | ≤ 640 px | **514 px** (premier bouton : 446 px), mesurés dans Chromium 141 |
 

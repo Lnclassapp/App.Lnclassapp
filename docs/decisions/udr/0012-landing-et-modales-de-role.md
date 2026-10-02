@@ -2,11 +2,13 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendé par l'UDR-0059 le 2026-10-02* |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot A4, critères TR-01, TR-03 |
 | **ADR lié** | [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (quatre badges) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (polices servies par l'application) · [UDR-0005](0005-design-system-fondateur.md) (tokens, `ui_modal`) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) · [UDR-0009](0009-rejoindre-une-classe.md) (porte de l'élève) |
 | **Remplacé par** | — |
+
+> ℹ️ **Amendée par l'[UDR-0059](0059-homepage-telephone-et-tablette.md)** (acceptée le 2026-10-02) : cette UDR ne gouverne plus que la landing **à partir de 1 024 px**, sans la section « Rejoindre ».
 
 ---
 
@@ -66,10 +68,10 @@ La première landing de la refonte, elle, portait l'identité visuelle (UDR-0005
 - La landing ne promet que ce que la V1 livre ; les rôles et fonctionnalités d'une vague future y entrent avec leur vague.
 - Les contrôleurs `homepage-student-modal` et `homepage-teacher-modal` de l'ancienne application ne sont pas repris : le contrôleur `modal` du socle suffit.
 
-## Amendement du 2026-10-02 — structure remplacée par l'UDR-0056
+## Amendement du 2026-10-02 — structure remplacée par l'UDR-0064
 
-*Chantier [`docs/chantiers/refonte-homepage`](../../chantiers/refonte-homepage/prd.md), [UDR-0056](0056-page-d-accueil-un-ecran-une-decision.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/refonte-homepage`](../../chantiers/refonte-homepage/prd.md), [UDR-0064](0064-page-d-accueil-un-ecran-une-decision.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
-- La **§3 « Structure »** (en-tête à ancres, « Commencer », section « Pour qui ? », fonctionnalités sur fond `ink`, « et plus encore ») est **remplacée** par la §3 de l'UDR-0056 : un en-tête réduit au logo et à « Se connecter », un héros qui tient dans le premier écran d'un téléphone, les sept matières du référentiel, trois étapes, quatre promesses, une section « Enseignants » vouvoyée, l'appel final, le pied.
+- La **§3 « Structure »** (en-tête à ancres, « Commencer », section « Pour qui ? », fonctionnalités sur fond `ink`, « et plus encore ») est **remplacée** par la §3 de l'UDR-0064 : un en-tête réduit au logo et à « Se connecter », un héros qui tient dans le premier écran d'un téléphone, les matières de la grille élève (UDR-0058), trois étapes, quatre promesses, une section « Enseignants » vouvoyée, le pied avec les pages publiques en ligne (UDR-0063). Les deux entrées ne sont pas répétées en bas de page, comme l'UDR-0059 §2.2 le demande déjà. L'UDR-0064 décrit la famille ordinateur de l'UDR-0059 et s'affiche à toutes les largeurs jusqu'au lot M2 d'`interface-epuree`.
 - Les **décisions 1 à 5 du §2** (deux entrées et seulement deux, une modale chacune, la porte de l'élève, la porte de l'enseignant, aucun lien sans route) **restent** et sont vérifiées par les mêmes tests. La décision 6 reste pour le contenu (la V1, le slogan, les quatre badges) ; sa « structure de l'ancienne page » n'est plus reprise.
 - `_role_modal` : le déclencheur passe en `lg`, pleine largeur (`trigger_size:`, `trigger_full:`), et la modale nomme l'onglet par son titre (`document_title:`, UDR-0054 §3.1).
