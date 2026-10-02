@@ -25,7 +25,7 @@ Règles d'autorisation (domaine) :
 ### Chemin nominal A — l'équipe publie un article
 
 1. Un membre Administration ou Contenu ouvre l'accueil équipe et touche le raccourci « Blog » : la liste de gestion montre tous les articles (brouillons, publiés, archivés), leur état, leur date et leur nombre de lectures.
-2. « Nouvel article » ouvre la modale d'édition : titre, résumé (une à deux phrases, sert à la liste et à l'aperçu partagé), image de couverture et son texte de remplacement (facultatives), texte (éditeur avec mise en forme et images), signature (« L'équipe Lnclass » par défaut, ou son nom). Un rappel sous l'éditeur dit la règle : aucun élève nommé ni montré ; un enseignant ou un établissement seulement avec son accord.
+2. « Nouvel article » ouvre la modale d'édition : titre, résumé (une à deux phrases, sert à la liste et à l'aperçu partagé), image de couverture et son texte de remplacement (facultatives), texte (éditeur avec mise en forme et images), signature (« L'équipe Lnclass » par défaut, ou son nom).
 3. Les images sont réduites par le navigateur avant l'envoi, puis vérifiées par le serveur. Enregistrer crée un **brouillon**.
 4. « Aperçu » ouvre l'article tel que le verra un visiteur, avec un bandeau « Brouillon ».
 5. « Publier » (menu ⋮) met l'article en ligne immédiatement : il apparaît en tête de la liste publique, dans le plan du site, et le lien « Blog » apparaît au pied de la page d'accueil et de la carte d'aide s'il était le premier.
