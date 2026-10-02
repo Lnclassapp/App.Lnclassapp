@@ -71,7 +71,7 @@ Source : [docs.wave.com/business](https://docs.wave.com/business#api-reference),
 | Q5 — Abonnement en cours d'année ? | **Plein tarif**, valable jusqu'à la fin de l'année scolaire | Pas de prorata ; l'échéance de l'abonnement est la fin de l'année scolaire en cours (ADR-0041) |
 | Q6 — Remboursement ? | **Sous 7 jours** après le paiement, par Wave, sur demande | `POST /v1/checkout/sessions/:id/refund` ; au-delà de 7 jours, pas de remboursement ; geste de l'équipe, journalisé |
 | Q7 — Durée de l'essai ? | **30 jours** à partir de la création du compte | Champ ou calcul « fin d'essai » par compte élève ; rappel avant la fin (annonce « Ton essai se termine dans N jours ») |
-| Q8 — Après l'essai, sans abonnement ? | L'élève garde **son compte et son historique** (archive), mais **ne peut plus commencer d'exercice** tant qu'il ne s'est pas abonné | Garde d'accès au démarrage d'une session (`StartExerciseSession`) : un nouveau refus « abonnement requis » ; les exercices assignés sont concernés aussi. ADR à écrire (contexte `billing`, port de paiement, garde d'accès) |
+| Q8 — Après l'essai, sans abonnement ? | L'élève garde **son compte et son historique** (archive). Il **voit tous les exercices, assignés compris**, mais **ne peut pas démarrer de session** : il est **invité à s'abonner** (précision du porteur, 2026-10-02) | Garde d'accès au démarrage d'une session (`StartExerciseSession`) : un nouveau refus « abonnement requis » ; les exercices assignés sont concernés aussi. Les listes, fiches et pages d'exercice restent visibles ; le bouton « Commencer » mène à l'invitation à s'abonner. ADR à écrire (contexte `billing`, port de paiement, garde d'accès) |
 
 ## Cas limites identifiés
 
