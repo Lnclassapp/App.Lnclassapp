@@ -1,6 +1,7 @@
 require "test_helper"
 
 # TR-01 and TR-03: the landing offers the two role entries, and every link it carries leads somewhere real.
+# UDR-0059 §2.2 : the two entries are offered once, in the hero; the join section and « Commencer » are gone.
 class HomepageControllerTest < ActionDispatch::IntegrationTest
   test "the homepage is served at the root" do
     get root_url
@@ -13,6 +14,16 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "button[aria-haspopup='dialog']", text: "Je suis élève"
     assert_select "button[aria-haspopup='dialog']", text: "Je suis enseignant"
+  end
+
+  test "the two entries are offered once, in the hero, without the join section nor « Commencer »" do
+    get root_url
+
+    assert_select "section#rejoindre", 0
+    assert_select "a, button", text: "Commencer", count: 0
+    assert_select "dialog[id^='role-modal-']", 2
+    assert_select "#hero dialog#role-modal-student-hero", 1
+    assert_select "#hero dialog#role-modal-teacher-hero", 1
   end
 
   test "the student modal offers to sign in or to join a class" do
