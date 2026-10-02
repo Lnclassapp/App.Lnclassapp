@@ -1,12 +1,12 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomEssentialQuery
 # Rôle : une fiche publiée vue depuis une classe (CL-12, AS-20) : ses exercices publiés, leur assignation et la réussite de la classe
-# ADR  : 0026, 0035, 0048 · UDR : 0029
+# ADR  : 0026, 0035, 0048, 0072 · UDR : 0029, 0062
 module Queries
   module Classroom
     class ClassroomEssentialQuery
       Row = Data.define(:classroom_public_id, :classroom_name, :course_slug, :course_name, :essential, :exercises)
-      # assignment_public_id : l'assignation active à cette classe, ou nil.
-      EssentialRow = Data.define(:slug, :name, :subtitle, :assignment_public_id)
+      # ADR-0072 §4.1 : la fiche ne s'assigne plus ; seuls ses exercices portent une assignation.
+      EssentialRow = Data.define(:slug, :name, :subtitle)
       # Décision du porteur (2026-09-27) : la réussite est la part des élèves en réussite, pas une moyenne de scores.
       # completed_students_count : élèves présents qui ont terminé au moins une session ;
       # passed_students_count : parmi eux, ceux dont le meilleur score atteint PASS_THRESHOLD ;
@@ -27,21 +27,17 @@ module Queries
         return if essential_id.nil?
 
         exercises = Orm::Exercise.where(essential_id:, status: "published").order(:position, :id).pluck(:id, :public_id, :title)
-        active = active_assignments(classroom_id, essential_id, exercises.map(&:first))
+        active = active_assignments(classroom_id, exercises.map(&:first))
         Row.new(classroom_public_id:, classroom_name:, course_slug:, course_name:,
-                essential: EssentialRow.new(slug:, name:, subtitle:, assignment_public_id: active[[ "Essential", essential_id ]]),
-                exercises: exercise_rows(classroom_id, exercises, active))
+                essential: EssentialRow.new(slug:, name:, subtitle:), exercises: exercise_rows(classroom_id, exercises, active))
       end
 
       private
 
-      # { [type, id] => public_id } ; le type est lu avec l'identifiant : une fiche n'est jamais prise pour un exercice.
-      def active_assignments(classroom_id, essential_id, exercise_ids)
-        scope = Orm::ClassroomAssignment.where(classroom_id:, status: "active")
-        scope.where(assignable_type: "Essential", assignable_id: essential_id)
-             .or(scope.where(assignable_type: "Exercise", assignable_id: exercise_ids))
-             .pluck(:assignable_type, :assignable_id, :public_id)
-             .to_h { |type, id, public_id| [ [ type, id ], public_id ] }
+      # { exercise_id => public_id } de l'assignation active de chaque exercice à cette classe.
+      def active_assignments(classroom_id, exercise_ids)
+        Orm::ClassroomAssignment.where(classroom_id:, status: "active", assignable_type: "Exercise", assignable_id: exercise_ids)
+                                .pluck(:assignable_id, :public_id).to_h
       end
 
       def exercise_rows(classroom_id, exercises, active)
@@ -49,7 +45,7 @@ module Queries
         questions = Orm::Question.where(exercise_id: ids).group(:exercise_id).count
         results = results(classroom_id, ids)
         exercises.map do |id, public_id, title|
-          ExerciseRow.new(public_id:, title:, questions_count: questions.fetch(id, 0), assignment_public_id: active[[ "Exercise", id ]],
+          ExerciseRow.new(public_id:, title:, questions_count: questions.fetch(id, 0), assignment_public_id: active[id],
                           **success(results.fetch(id, [])))
         end
       end

@@ -4,7 +4,7 @@ module Entities
   module Classroom
     class AssignmentTest < ActiveSupport::TestCase
       def build(status, **attributes)
-        Assignment.new(id: 1, public_id: "p", classroom_id: 2, assignable: Assignable.new(type: "Course", id: 1, key: "svt"),
+        Assignment.new(id: 1, public_id: "p", classroom_id: 2, assignable: Assignable.new(type: "Exercise", id: 1, key: "Xy12ab"),
                        status:, assigned_by_id: 3, assigned_at: Time.current, archived_at: nil, **attributes)
       end
 

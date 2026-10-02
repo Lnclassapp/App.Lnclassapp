@@ -3,7 +3,8 @@ require "test_helper"
 # CA-01, CA-04, CA-10, CA-26, CA-27, TR-41 — UDR-0013. Le catalogue et la page d'un cours, pour tous les rôles connectés.
 # L'ancienne application ignorait les filtres, laissait lire un brouillon par URL directe, colorait la matière d'après
 # son nom, et n'affichait jamais « Assigner à mes classes ». Ici : filtres par slug, 404 hors équipe pour tout cours non
-# publié, couleur tirée de la catégorie, points d'entrée de l'équipe en modale, lien d'assignation pour l'enseignant.
+# publié, couleur tirée de la catégorie, points d'entrée de l'équipe en modale. ADR-0072, UDR-0013 (amendée le
+# 2026-10-02) : un cours ne s'assigne plus ; l'enseignant lit la page sans action, et l'ancien écran répond 404.
 class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @tle = create_level(name: "Tle", position: 7)
@@ -22,6 +23,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   def including(text) = /#{Regexp.escape(text)}/
   def modal_link(href) = "a[href='#{href}'][data-turbo-frame=modal]"
   def status_label(status) = I18n.t("catalog.content_status.#{status}")
+  # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
+  def assignments_href(slug) = "/courses/#{slug}/assignments"
 
   test "a visitor is sent to the sign-in" do
     get courses_path
@@ -241,7 +244,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "#course-actions-menu", 0
-    assert_select "a[href='#{course_assignments_path(@course.slug)}']", 0
+    assert_select "a[href='#{assignments_href(@course.slug)}']", 0
   end
 
   # UDR-0013, amendement du 2026-10-02 (UDR-0057) : 3 fiches, puis « Voir plus » ; chaque ligne est un lien étiré.
@@ -320,19 +323,37 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
                     text: tl("role_actions.import_essentials")
     end
     assert_select "#course_essentials li", text: /Fiche en brouillon.*#{Regexp.escape(status_label(:draft))}/m
-    assert_select "a[href='#{course_assignments_path(@draft.slug)}']", 0
+    assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
   end
 
-  test "the teacher sees « Assigner à mes classes », and no team action (CA-27)" do
+  test "the teacher reads the course without any action: no « Assigner à mes classes », no team action (ADR-0072)" do
     sign_in_as create_teacher
 
     get course_path(@course.slug)
 
     assert_response :success
-    assert_select "#course_header a[href='#{course_assignments_path(@course.slug)}']", text: tl("role_actions.assign")
+    assert_select "a[href='#{assignments_href(@course.slug)}']", 0
+    assert_select "#course_header a, #course_header button", text: /Assigner/, count: 0
+    assert_no_match(/Assigner/, response.body)
     assert_select "#course-actions-menu", 0
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "a[href='#{edit_teams_course_path(@course.slug)}']", 0
+  end
+
+  test "the former « Assigner un cours » screen answers 404, for every role (UDR-0030, deprecated)" do
+    get assignments_href(@course.slug)
+    assert_response :not_found
+
+    [ create_teacher, create_team_member, create_student_for(@course) ].each do |user|
+      sign_in_as user
+
+      get assignments_href(@course.slug)
+
+      assert_response :not_found
+      assert_no_match "Génétique et évolution", response.body
+      sign_out
+    end
+    assert_not Rails.application.routes.url_helpers.respond_to?(:course_assignments_path)
   end
 
   test "a school staff member reads the catalogue and a published course, without any action" do
@@ -344,7 +365,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get course_path(@course.slug)
     assert_response :success
     assert_select "#course-actions-menu", 0
-    assert_select "a[href='#{course_assignments_path(@course.slug)}']", 0
+    assert_select "a[href='#{assignments_href(@course.slug)}']", 0
   end
 
   test "a course without essential sheet nor content shows the empty state and no content section" do

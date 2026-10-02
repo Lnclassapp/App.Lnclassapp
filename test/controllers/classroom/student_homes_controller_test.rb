@@ -19,6 +19,11 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   def tl(key, **) = I18n.t("classroom.student_homes.#{key}", **)
   def including(text) = /#{Regexp.escape(text)}/
 
+  # ADR-0072 §4.1: each exercise is assigned on its own; assigned at the same instant, they follow their order in the sheet.
+  def assign_together(*exercises, at: 1.hour.ago)
+    exercises.each { create_assignment(classroom: @classroom, assignable: it, assigned_at: at) }
+  end
+
   test "the student sees their classroom, its code in capitals, and no classmate by name" do
     create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yapo")
     sign_in_as @student
@@ -41,7 +46,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   test "each assigned exercise with its title, its subject and one button, the first one primary" do
     started = create_exercise(essential: @essential, title: "Méiose, les étapes")
     fresh = create_exercise(essential: @essential, title: "Méiose, le bilan")
-    create_assignment(classroom: @classroom, assignable: @essential)
+    assign_together(started, fresh)
     best = create_exercise_session(student: @student, exercise: started, status: "completed", score_percent: 80)
     create_badge(student: @student, exercise: started, level: "gold", session: best)
     session = create_exercise_session(student: @student, exercise: started)
@@ -81,8 +86,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
   # UDR-0057 R3: 3 lines, the next ones rendered hidden, then « Voir plus », without a request.
   test "the exercises show 3 lines, then « Voir plus » over the hidden ones" do
-    4.times { |index| create_exercise(essential: @essential, title: "Exercice #{index + 1}") }
-    create_assignment(classroom: @classroom, assignable: @essential)
+    assign_together(*Array.new(4) { |index| create_exercise(essential: @essential, title: "Exercice #{index + 1}") })
     sign_in_as @student
 
     get student_home_path
@@ -96,8 +100,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "3 exercises or fewer: no « Voir plus »" do
-    3.times { create_exercise(essential: @essential) }
-    create_assignment(classroom: @classroom, assignable: @essential)
+    assign_together(*Array.new(3) { create_exercise(essential: @essential) })
     sign_in_as @student
 
     get student_home_path
