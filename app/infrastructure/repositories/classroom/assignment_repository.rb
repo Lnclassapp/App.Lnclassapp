@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
-# Rôle : assignations d'une classe ; résout la ressource (cours, fiche, exercice) par son type, sans association polymorphe
-# ADR  : 0035, 0048, 0071
+# Rôle : assignations d'une classe et leur échéance ; résout la ressource par son type, sans association polymorphe
+# ADR  : 0035, 0048, 0071, 0072
 module Repositories
   module Classroom
     class AssignmentRepository
@@ -28,7 +28,7 @@ module Repositories
         record = Orm::ClassroomAssignment.new(
           public_id: assignment.public_id, classroom_id: assignment.classroom_id,
           assignable_type: assignment.assignable.type, assignable_id: assignment.assignable.id, status: "active",
-          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at
+          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at, due_on: assignment.due_on
         )
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ClassroomAssignment.transaction(requires_new: true) { record.save! }
@@ -92,7 +92,8 @@ module Repositories
       def map_to_entity(record, assignable)
         Entities::Classroom::Assignment.new(
           id: record.id, public_id: record.public_id, classroom_id: record.classroom_id, assignable:, status: record.status,
-          assigned_by_id: record.assigned_by_id, assigned_at: record.assigned_at, archived_at: record.archived_at
+          assigned_by_id: record.assigned_by_id, assigned_at: record.assigned_at, archived_at: record.archived_at,
+          due_on: record.due_on
         )
       end
     end

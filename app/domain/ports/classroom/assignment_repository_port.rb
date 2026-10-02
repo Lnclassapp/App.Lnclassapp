@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::AssignmentRepositoryPort
 # Rôle : contrat des assignations d'une classe, et résolution polymorphe de la ressource assignée
-# ADR  : 0035, 0048, 0071
+# ADR  : 0035, 0048, 0071, 0072
 module Ports
   module Classroom
     module AssignmentRepositoryPort
@@ -20,7 +20,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
-      # Toujours une nouvelle ligne ; l'index partiel actif refuse un doublon.
+      # Toujours une nouvelle ligne, échéance (due_on) comprise ; l'index partiel actif refuse un doublon.
       # → Result(Assignment) | failure(:conflict, errors: { base: [:already_assigned] })
       def create(assignment:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
@@ -37,7 +37,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #archive_all_by_teacher_in_school"
       end
 
-      # type ∈ Assignable::TYPES ; key = slug (Course, Essential) ou public_id (Exercise). → ResolvedAssignable | nil
+      # type = "Exercise", seul type assignable (ADR-0072 §4.1) ; key = public_id de l'exercice. → ResolvedAssignable | nil
+      # Course et Essential (clé = slug) se résolvent encore tant que Assignable::TYPES les contient.
       def resolve_assignable(type:, key:)
         raise NotImplementedError, "#{self.class} doit implémenter #resolve_assignable"
       end
