@@ -53,12 +53,13 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
 - **Couche**       : ui (contrats partagés) + tests de garde
 - **Fichiers**     :
   - `app/javascript/controllers/reveal_controller.js`
-  - `config/locales/shared/components.fr.yml` : « Voir plus », « %{count} lignes de plus affichées »
-  - `test/support/sobriety_assertions.rb` : `assert_single_primary_action`, `assert_blocks_above_fold(max: 5)`, `assert_list_capped(max: 3)`
-  - `test/test_helper.rb`, `test/application_system_test_case.rb` : chargement des assertions
+  - `app/helpers/components_helper.rb` : `REVEAL_LIMIT`, `ui_reveal_data`, `ui_reveal_item(index)`, `ui_reveal_more(total)`
+  - `config/locales/shared/components.fr.yml` : « Voir plus », « 1 ligne de plus affichée. », « {count} lignes de plus affichées. »
+  - `app/views/design/index.html.erb`, `config/locales/design/index.fr.yml` : démonstration « Voir plus »
+  - `test/support/sobriety_assertions.rb` : `assert_single_primary_action`, `assert_blocks_above_fold(selector, max: 5)`, `assert_list_capped(list, max: 3)` (chargé seul par `test_helper`)
   - `docs/chantiers/interface-epuree/prd.md` §7 : colonne « Avant » mesurée
 - **Dépend de**    : —
-- **Test associé** : `test/system/shared/reveal_test.rb` · `test/design/design_tokens_test.rb` (inchangé, doit rester vert)
+- **Test associé** : `test/system/shared/reveal_test.rb` · `test/helpers/components_helper_test.rb` · `test/design/design_tokens_test.rb` (inchangé, doit rester vert)
 - **Done quand**   : sur la page de démonstration du design, « Voir plus » révèle 3 lignes de plus et l'annonce ; toutes les autres pages sont inchangées (suite système verte).
 
 ### Lot A — Accueil élève épuré
@@ -268,7 +269,8 @@ Branche de chantier : `feature/interface-epuree`. Branches de lot : `feature/int
 |---|---|
 | `app/javascript/controllers/reveal_controller.js` | Lot 0 |
 | `config/locales/shared/components.fr.yml` | Lot 0 |
-| `test/support/sobriety_assertions.rb`, `test/test_helper.rb`, `test/application_system_test_case.rb` | Lot 0 |
+| `test/support/sobriety_assertions.rb`, `app/helpers/components_helper.rb`, `test/helpers/components_helper_test.rb` | Lot 0 |
+| `app/views/design/index.html.erb`, `config/locales/design/index.fr.yml` | Lot 0 |
 | `app/assets/stylesheets/application.tailwind.css` | Lot M0 |
 | `app/assets/stylesheets/components/student_home.css` | Lot M0 (création), puis M1 |
 | `app/assets/stylesheets/components/entry_screen.css` | Lot M0 (création), puis M2 |
