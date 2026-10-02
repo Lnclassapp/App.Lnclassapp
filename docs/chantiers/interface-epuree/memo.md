@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — UDR-0057, 0058 et 0059 proposées le 2026-10-02, en attente d'acceptation du porteur |
+| **Statut** | planifié — UDR-0057, 0058, 0059 acceptées le 2026-10-02 ; PRD et plan écrits le même jour ; lots non lancés |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `feature/interface-epuree` |
 | **Programme** | — *(hors plan de `refonte-application` ; précède le chantier `app-android`, ADR-0070)* |
