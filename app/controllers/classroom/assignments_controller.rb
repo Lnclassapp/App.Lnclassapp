@@ -78,6 +78,7 @@ module Classroom
       @assignment = outcome.assignment
       @classroom = outcome.classroom
       @message = toggle_message
+      @needs_session_days = needs_session_days? if action_name == "archive"
       respond_to do |format|
         format.turbo_stream { render action_name }
         format.html { redirect_to back_location, notice: @message, status: :see_other }
@@ -90,6 +91,12 @@ module Classroom
       return t(".done", **names) unless action_name == "create" && @assignment.due_on
 
       t(".done_due", **names, date: l(@assignment.due_on, format: :due_long))
+    end
+
+    # Retirée, la bascule redevient « Assigner » : la modale des jours tant que l'enseignant de la classe ne les a pas donnés.
+    def needs_session_days?
+      Policies::Classroom::SetSessionDaysPolicy.new.call(actor: current_actor, classroom: @classroom).success? &&
+        Repositories::Classroom::SessionDaysRepository.new.for(teacher_id: current_actor.user_id, classroom_id: @classroom.id).none?
     end
 
     def render_refusal(result)

@@ -58,11 +58,27 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "archived", @teacher.id ], assignment.reload.values_at(:status, :archived_by_id)
     assert_not_nil assignment.archived_at
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("archive.done", name: "Méiose", classroom: "6ème 1"))
+    # Sans jours de séance, « Assigner » rouvre la modale des jours (UDR-0062 §3.4), sans attendre un rechargement.
     assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}'] template" do
+      assert_select "a[href='#{new_classroom_assignment_path(@classroom.public_id, assignable_key: key)}'][data-turbo-frame=modal]"
+      assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']", 0
+    end
+  end
+
+  test "withdrawn by a teacher who gave their session days, the toggle assigns again in one click" do
+    Orm::ClassroomSessionDay.create!(teacher_id: @teacher.id, classroom_id: @classroom.id, weekday: 1)
+    assignment = create_assignment(classroom: @classroom, assignable: @exercise, by: @teacher)
+    sign_in_as @teacher
+
+    withdraw(assignment, as: :turbo_stream)
+
+    assert_response :success
+    assert_select "turbo-stream[action=replace][target='#{toggle_id("Exercise", @exercise.public_id)}'] template" do
       assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']" do
-        assert_select "input[name='assignment[assignable_type]'][value=#{type}]"
-        assert_select "input[name='assignment[assignable_key]'][value='#{key}']"
+        assert_select "input[name='assignment[assignable_type]'][value=Exercise]"
+        assert_select "input[name='assignment[assignable_key]'][value='#{@exercise.public_id}']"
       end
+      assert_select "a[data-turbo-frame=modal]", 0
     end
   end
 

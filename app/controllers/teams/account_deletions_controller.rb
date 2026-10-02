@@ -3,8 +3,8 @@
 # ADR  : 0026, 0028, 0036 (§4) · UDR : 0006, 0020, 0054
 module Teams
   class AccountDeletionsController < BaseController
-    # La règle avant le compte : un membre qui ne peut pas traiter la demande reçoit 403, que le compte existe ou non.
-    before_action { render_forbidden if policy.call(actor: current_actor).failure? }
+    # La règle avant le compte : `allow_roles :team` du parent refuse en 403 qui n'est pas de l'équipe, comme la policy
+    # (cible nil), que le compte existe ou non ; le use case la rejoue à l'envoi.
     before_action :load_account
 
     def new
