@@ -299,11 +299,11 @@ Doublons vérifiés mécaniquement (commande de la skill `plan-lots`) : ce sont 
 - [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
 - [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md` *(sans objet : aucun, PRD §6)*
-- [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(0057, 0058, 0059 faites ; amendements et UDR-0060 aux lots C à F)*
+- [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(0057 à 0060 ; amendements 0009, 0011, 0013, 0015, 0021, 0022, 0023, 0041 acceptés le 2026-10-02)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
 - [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
