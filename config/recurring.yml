@@ -18,3 +18,8 @@ production:
     class: Shared::PurgeUnattachedBlobsJob
     queue: default
     schedule: every day at 3am
+  # ADR-0073 §4.4 : article images uploaded then never saved (modal closed) are deleted after 48 h, file purged.
+  purge_orphan_article_images:
+    class: Communication::PurgeOrphanArticleImagesJob
+    queue: default
+    schedule: every day at 3:30am
