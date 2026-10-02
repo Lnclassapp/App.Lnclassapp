@@ -61,7 +61,8 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
       assert_toast "Jours de séance enregistrés."
       assert_no_selector "turbo-frame#modal dialog[open]"
 
-      within(toggle) { click_on "Assigner" }
+      # Le refresh par morphing remplace le bouton par le lien de la modale : cliquer avant, c'est assigner sans date.
+      within(toggle) { find_link("Assigner").click }
       assert_selector "turbo-frame#modal dialog[open]", text: "Quels jours voyez-vous la 6ème 1 ?"
     end
     assert_equal 0, Orm::ClassroomSessionDay.count
