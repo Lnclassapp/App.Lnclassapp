@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterPendingTeacher
-# Rôle : inscrit un enseignant sans code (code national ou école de sa DRENA) : compte sans école, demande en attente, session
-# ADR  : 0026, 0028, 0030, 0050, 0063 · UDR : 0024, 0050
+# Rôle : inscrit un enseignant sans code (code national ou école de sa DRENA) : compte, demande validée aussitôt (pause), session
+# ADR  : 0026, 0028, 0030, 0050, 0063, 0073 · UDR : 0024, 0050
 module UseCases
   module Identity
     class RegisterPendingTeacher
@@ -65,8 +65,11 @@ module UseCases
           user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id))
           # Plafond compté et tenu sous verrou par le repository (B2), après le compte : « trop de demandes » ne se lit
           # qu'au bout d'un formulaire entièrement valide.
-          written(@join_requests.create(teacher_id: user.id, school_id: school.id, at: now,
-                                        max_pending: Entities::School::JoinRequest::MAX_PENDING_PER_SCHOOL))
+          request = written(@join_requests.create(teacher_id: user.id, school_id: school.id, at: now,
+                                                  max_pending: Entities::School::JoinRequest::MAX_PENDING_PER_SCHOOL))
+          # Validation en pause (chantier validation-enseignants-en-pause) : la demande est validée aussitôt et l'enseignant
+          # rattaché ; elle reste la trace d'une inscription sans code, pour la future certification.
+          written(@join_requests.approve(id: request.id, decided_by_id: nil, via: Entities::School::JoinRequest::AUTO, at: now))
           Shared::Result.success(Registered.new(user:, token: open_session(user, ip, user_agent, now)))
         end
       end
