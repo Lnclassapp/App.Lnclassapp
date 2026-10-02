@@ -1,0 +1,25 @@
+# Données publiques du support, affichées dans la carte d'aide (UDR-0061 §3.4), lues par config.x.support.
+# Numéros : chiffres seuls, indicatif 225 compris, sans « + » (test/config/support_config_test.rb). Une clé vide
+# supprime sa ligne de la carte ; la ligne FAQ est toujours là. Jamais dans les credentials : ces numéros sont publics.
+# Un changement passe par une PR, comme la FAQ (Q14). Valeurs fournies par le porteur ; une valeur absente reste vide,
+# jamais inventée.
+shared: &support
+  # Porteur, 2026-10-02 : WhatsApp et appel au +225 05 84 25 80 85, de 8h à 20h.
+  whatsapp: "2250584258085"
+  phone: "2250584258085"
+  hours: "8h à 20h"
+  # Délai de réponse WhatsApp : non fourni par le porteur, donc vide.
+  whatsapp_reply: ""
+
+development:
+  <<: *support
+
+production:
+  <<: *support
+
+# Valeurs fixes et fictives : chaque ligne de la carte est rendue en test.
+test:
+  whatsapp: "2250700000000"
+  phone: "2250700000001"
+  hours: "Lun.–ven., 08:00–18:00"
+  whatsapp_reply: "Réponse en moins d'une heure"
