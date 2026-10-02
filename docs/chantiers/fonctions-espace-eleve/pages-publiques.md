@@ -243,7 +243,7 @@ Lnclass peut modifier ces conditions. La date de mise à jour figure en tête de
 
 > **Offre fixée le 2026-10-02** par le grill du chantier [`abonnement-mobile-money`](../abonnement-mobile-money/memo.md) (Q1 à Q8, porteur). Le texte ci-dessous est complet ; il reste à faire valider par les juristes, qui complètent les marques ‹ › (lot P4 ; mise en ligne au lot Z).
 >
-> **Vocabulaire** : la locale n'admet pas le mot « essai » (UDR-0007, test `test/i18n/locale_files_test.rb`) ; l'essai gratuit du grill (Q4, Q7) s'écrit « les 30 premiers jours, gratuits » ou « pendant 14 jours, vous avez accès à tout Lnclass ».
+> **Vocabulaire** (porteur, 2026-10-02) : la locale n'admet pas le mot « essai » (UDR-0007, test `test/i18n/locale_files_test.rb`) ; l'essai gratuit du grill (Q4, Q7) s'écrit **« période gratuite »**, partout (CGV, bandeaux de rappel, écrans). Le blocage commence **après le 30e jour**.
 
 **`h1` — Conditions générales de vente**
 « Mis à jour le ‹ date de validation : à compléter par les juristes › »
@@ -260,9 +260,9 @@ Il coûte **16 000 F CFA pour l'année scolaire**. ‹ Prix toutes taxes compris
 
 Le prix est le même à tout moment de l'année : un abonnement pris en cours d'année est payé **au plein tarif, sans prorata**, et vaut jusqu'à la fin de l'année scolaire en cours.
 
-### 3. Les 30 premiers jours, gratuits
+### 3. La période gratuite
 
-Les **30 premiers jours sont gratuits**, sans abonnement. Ils sont comptés à partir de la création de votre compte élève, et ne sont accordés qu'une fois par compte :
+La **période gratuite dure 30 jours**, sans abonnement. Elle compte à partir de la création de votre compte élève, et n'est accordée qu'une fois par compte :
 
 - pendant **14 jours**, vous avez accès à tout Lnclass ;
 - du **15e au 30e jour**, vous gardez l'accès à tout Lnclass, et des messages vous invitent à prendre un abonnement ;
