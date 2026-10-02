@@ -42,6 +42,15 @@ Lot 4 — Accélérer : tests système instables sous 2 CPU, puis tests système
 
 - **Done quand**   : `script/ci/billed_minutes` sur **3 PR de chantier** (médiane ≤ 15 minutes), **3 promotions** (≤ 1 minute chacune, preuve trouvée), **1 PR de documents** (1 minute) ; colonne *Après* du memo remplie. Chemin d'erreur : une promotion dont l'arbre n'a jamais été testé rejoue la suite.
 
+## Lot 5 — Preuves des sessions cloud (ADR-0069 §8, décidé le 2026-10-02)
+
+- **Couche**       : CI
+- **Fichiers**     : `script/ci/prove` *(joue `bin/ci`, publie `arbres/<arbre>` sur `ci/preuves`)*, `test/config/ci_prove_test.rb`
+                     `.github/workflows/ci.yml` *(tirage 1 sur 5 fixé par PR, `Staging` toujours rejoué)*, `test/guards/ci_plan_test.rb`
+                     **appliqué par le porteur** : `script/ci/tested_tree` *(lit `ci/preuves`)*, `LOCAL_PROOF` dans le workflow, leurs tests
+- **Prérequis porteur** : appliquer le patch ; créer le secret `CI_DRAW_SALT` (*Settings → Secrets and variables → Actions*, une valeur aléatoire longue)
+- **Done quand**   : une PR prouvée et non tirée coûte ≤ 1 minute ; une PR tirée rejoue la suite ; une promotion vers `Staging` rejoue la suite ; une release vers `main` trouve la preuve GitHub de `Staging`
+
 ## Lot 4 — Accélérer (à ouvrir selon le lot 3)
 
 - Les 2 tests système rouges sous 2 CPU (mesure locale du 2026-10-02) et l'échec du run 326 : chantier [`tests-instables`](../tests-instables/memo.md) à rouvrir.

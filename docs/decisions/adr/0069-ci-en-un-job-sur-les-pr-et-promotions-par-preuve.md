@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* |
+| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8* |
 | **Date** | 2026-10-02 *(première version proposée le 2026-09-30 : runner auto-hébergé)* |
 | **Chantier** | `docs/chantiers/ci-quota` |
 | **Remplace** | — *(amende l'[ADR-0064](./0064-ci-parallele-par-groupes-de-bin-ci.md) : la matrice de 14 jobs, §4 précision 6 et §5 « plus de minutes facturées »)* |
@@ -85,3 +85,26 @@ Précisions qui font partie de la décision :
   - un Dependabot qui ne vise pas `Develop` ou ne groupe pas ses mises à jour.
 - `test/config/ci_tested_tree_test.rb` : un arbre inconnu, une preuve expirée ou une API en erreur répondent « non testé ».
 - `script/ci/billed_minutes <run-id>` : ≈ 13 minutes pour une PR de chantier, 1 pour une promotion prouvée ou une PR de documents.
+
+---
+
+## 8. Amendement du 2026-10-02 : les preuves des sessions Claude cloud
+
+**Décision du porteur.** Une PR vers `Develop` peut être prouvée par une session Claude cloud, sans que GitHub rejoue la suite : la session joue `bin/ci` en entier, puis `script/ci/prove` publie le fichier `arbres/<arbre>` sur la branche `ci/preuves`. Le job `ci` le lit et passe au vert en ≈ 1 minute.
+
+**Ce que la preuve garantit, et ce qu'elle ne garantit pas.** Elle est **déclarative** : la session est pilotée par l'agent dont on vérifie le travail, et rien n'empêche techniquement d'écrire une preuve sans avoir joué la suite. Ce choix de confiance a été pris par le porteur lui-même, après un refus de l'outil de l'agent qui l'a classé « contournement de la CI ». Le code qui fait accepter la preuve (`script/ci/tested_tree`, `LOCAL_PROOF` dans le workflow) est appliqué par le porteur, pas par l'agent.
+
+**Les contrôles qui l'encadrent :**
+
+| Contrôle | Où | Ce qu'il garantit |
+|---|---|---|
+| **Tirage 1 PR sur 5** | PR vers `Develop` | GitHub rejoue la suite quelle que soit la preuve. Le tirage est fixé par PR (empreinte du secret `CI_DRAW_SALT` et du numéro de PR) : un nouveau push ne retire pas au sort, et personne ne peut le prévoir. Sans le secret, toutes les PR vers `Develop` rejouent la suite. |
+| **Suite complète à chaque promotion vers `Staging`** | PR vers `Staging` | Les PR fusionnées depuis la promotion précédente sont toutes dans cet arbre : **aucun code non vérifié par GitHub n'arrive sur `Staging`**, ni donc en production. |
+| **Preuve GitHub seulement vers `main`** | PR vers `main` | `LOCAL_PROOF` est faux : seule la preuve publiée par le run complet de `Staging` (même arbre) compte. |
+| **Preuve détaillée** | `ci/preuves` | Commit, base, date, machine, session et résumé de `bin/ci` : un audit reste possible après coup. |
+
+**Alarme.** Une PR tirée au sort, rouge alors que sa session l'avait prouvée verte, invalide les preuves de cet environnement : on enquête avant d'en accepter d'autres.
+
+**Coût attendu.** Une PR de chantier ≈ 1 minute, ou 14 si tirée (≈ 4 en moyenne) ; une promotion vers `Staging` 14 ; une release vers `main` ≈ 1.
+
+**Vérification.** `test/config/ci_prove_test.rb` (vrais dépôts git : une preuve publiée par run vert ; rien sur un arbre sale, une base absente, un run rouge, un HEAD qui bouge), `test/config/ci_tested_tree_test.rb` et `test/guards/ci_plan_test.rb` (tirage avant la preuve, `Staging` toujours rejoué, preuve cloud pour `Develop` seulement).
