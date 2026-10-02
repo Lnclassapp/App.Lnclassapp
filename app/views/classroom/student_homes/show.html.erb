@@ -1,9 +1,12 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
 <%# Rôle : « Bonjour » seul, puis les sections de HOME_SECTIONS[:student] (à faire, ma classe, cours) et l'activité, différée %>
-<%# ADR  : 0033, 0043 · UDR : 0006, 0057, 0058 §3.3 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# ADR  : 0033, 0043 · UDR : 0006, 0057, 0058 §3.3, 0061 (« Besoin d'aide ? ») · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <% exercises = @home.assigned_exercises %>
-<%= ui_page_header title: t(".greeting", name: shell_user.first_name) %>
+<%= ui_page_header title: t(".greeting", name: shell_user.first_name) do %>
+  <%# UDR-0061 : entrée provisoire vers la FAQ ; la carte d'aide (FAQ, WhatsApp, appel) la remplacera. %>
+  <%= ui_button t(".help"), href: help_path, variant: :ghost, size: :sm, icon: "question-mark-circle" %>
+<% end %>
 
 <div id="student_home" class="grid gap-5">
   <% home_sections_for(:student).each do |key, icon| %>

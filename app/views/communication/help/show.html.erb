@@ -1,0 +1,35 @@
+<%# 🌐 UI · communication/help/show — « Questions fréquentes », motif des écrans d'entrée : logo, retour, un seul h1 %>
+<%# Rôle : une question par <details> natif, réponse repliée, sans JS ; les seuils viennent du domaine (Grading) %>
+<%# UDR  : 0061 (FAQ), 0057 (R3 non appliquée : la liste est l'objet de la page, ses titres sont courts), 0060, 0054 %>
+<% page_title t(".page_title") %>
+<% grading = Entities::Assessment::Grading %>
+<% thresholds = { pass: grading::PASS_THRESHOLD, mastery: grading::MASTERY_THRESHOLD, gold: grading::GOLD_THRESHOLD,
+                  perfect: grading::PERFECT_THRESHOLD, remediation: grading::REMEDIATION_THRESHOLD,
+                  example_grade: grading.grade_on_20(80) } %>
+<main class="flex min-h-dvh flex-col items-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-xl">
+    <div class="mb-6 text-center">
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+      <% end %>
+    </div>
+    <%= ui_back_link t(".back"), href: root_path %>
+    <%= ui_card title: t(".title"), heading: :h1, padding: :lg do %>
+      <ul id="help_questions" class="-my-2 divide-y divide-line">
+        <% Communication::HelpController::QUESTIONS.each do |key| %>
+          <li>
+            <details id="help_question_<%= key %>" class="group">
+              <summary class="summary-plain flex min-h-tap cursor-pointer items-center justify-between gap-3 py-3 font-medium
+                              focus-visible:outline-2 focus-visible:outline-brand">
+                <%= t(".questions.#{key}.question") %>
+                <%= ui_icon "chevron-down", size: :sm, class: "text-mute transition group-open:rotate-180" %>
+              </summary>
+              <p class="pb-4 text-sm text-mute"><%= t(".questions.#{key}.answer", **thresholds) %></p>
+            </details>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</main>
