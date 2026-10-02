@@ -108,6 +108,13 @@ class Classroom::SessionDaysControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
+  test "a visitor opening the modal is sent to the sign-in page, and nothing is written" do
+    get edit_classroom_session_days_path(@classroom.public_id)
+
+    assert_redirected_to new_session_path
+    assert_empty session_days
+  end
+
   test "without Turbo, saving leads back to the classroom page with a flash" do
     sign_in_as @teacher
 

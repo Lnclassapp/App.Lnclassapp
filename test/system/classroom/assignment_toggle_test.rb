@@ -72,8 +72,9 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
         assert_text "Pour jeu. 8 oct."
       end
 
-      # Les autres « Assigner » de la page n'ouvrent plus la modale (page rafraîchie par morphing).
-      within(toggle("Exercise", @bilan.public_id)) { click_on "Assigner" }
+      # Les autres « Assigner » de la page n'ouvrent plus la modale (page rafraîchie par morphing) : le refresh remplace
+      # le lien de la modale par le bouton du formulaire ; cliquer avant, c'est rouvrir la modale.
+      within(toggle("Exercise", @bilan.public_id)) { find_button("Assigner").click }
       assert_toast "Le bilan ajouté à 6ème 1, à rendre jeudi 8 oct."
       assert_no_selector DAYS_MODAL
 

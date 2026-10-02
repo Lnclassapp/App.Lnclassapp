@@ -96,6 +96,23 @@ module Queries
         end
       end
 
+      # UDR-0062 §3.2, charte §8: being started is not a sort key; neither is being assigned more recently, before the date.
+      test "a started exercise due the 12th does not pass an exercise not started due the 8th" do
+        travel_to Time.zone.local(2026, 10, 6, 10) do
+          started = create_exercise(essential: @essential, title: "Dû le 12, commencé")
+          sooner = create_exercise(essential: @essential, title: "Dû le 8, non commencé")
+          create_assignment(classroom: @classroom, assignable: started, assigned_at: 1.hour.ago, due_on: Date.new(2026, 10, 12))
+          create_assignment(classroom: @classroom, assignable: sooner, assigned_at: 4.days.ago, due_on: Date.new(2026, 10, 8))
+          session = create_exercise_session(student: @student, exercise: started)
+
+          exercises = home.assigned_exercises
+
+          assert_equal [ "Dû le 8, non commencé", "Dû le 12, commencé" ], exercises.map(&:title)
+          assert_equal [ nil, session.public_id ], exercises.map(&:started_session_public_id)
+          assert_equal [ 0, 0 ], exercises.map(&:completed_count)
+        end
+      end
+
       test "on the same due date, or without one, the most recently assigned first" do
         travel_to Time.zone.local(2026, 10, 6, 10) do
           due_on = Date.new(2026, 10, 8)
