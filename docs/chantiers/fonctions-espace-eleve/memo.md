@@ -3,9 +3,9 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — grill non commencé |
+| **Statut** | cadrage — grill en cours (2026-10-02) |
 | **Ouvert le** | 2026-10-02 |
-| **Branche** | `ccr-93a43a40-3h3ty4` *(branche de session ; à renommer `feature/fonctions-espace-eleve` si le porteur le souhaite)* |
+| **Branche** | `ccr-93a43a40-3h3ty4` *(repartie de `Develop` le 2026-10-02, après la fusion d'`interface-epuree` phase 1)* |
 | **Programme** | — *(né du grill d'`interface-epuree`, Q8 ; probablement à découper en plusieurs chantiers au grill)* |
 
 ---
@@ -58,7 +58,14 @@ L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| Q1 — Le paiement, retiré du plan le 2026-09-22, revient-il ? | **Oui**, un vrai abonnement payé par Mobile Money | Revient sur la décision du 2026-09-22 (à tracer). Nouveau contexte métier (abonnement, opérateur, reçus) : un ADR est obligatoire, et le chantier dépasse un seul cycle |
+| Q2 — Le paiement dans ce chantier ou à part ? | **À part** : un chantier `abonnement-mobile-money`, avec son ADR | Ce chantier traite cinq fonctions (échéances, durée, annonces, audio, aide). La case « Paiement » et l'annonce d'abonnement restent masquées ici et passent au nouveau chantier |
+| Q3 — Les annonces (et l'audio) ici, ou à part ? Rien n'est construit ; l'ADR-0045 ne prévoit que l'équipe comme autrice | **À part** : un chantier `annonces`, qui étend l'ADR-0045 à la direction et aux enseignants, avec la lecture audio | Ce chantier se réduit à **trois fonctions** : échéances, durée, aide. Le carrousel d'annonces et le bouton d'écoute restent masqués ici |
+| Q4 — Où mène « Besoin d'aide ? » ? | Une **fenêtre** sur ordinateur, une **carte qui monte du bas** (25 % de la hauteur) sur téléphone, avec trois options : **FAQ**, **WhatsApp**, **contact direct**. Le porteur fournira un exemple de la carte | Trois cibles à construire ou à fournir : une page FAQ (contenu à écrire), un numéro WhatsApp du support, un contact direct (à préciser à la réception de l'exemple). Une UDR pour la carte d'aide ; motif « bottom sheet » nouveau sur téléphone |
+| Q5 — Après la date limite, l'exercice ? | **Toujours faisable, marqué « En retard »** (point ambre sur la matière) ; l'enseignant voit qu'il a été rendu après la date | Aucune fermeture automatique, aucun job de clôture lié à l'échéance. L'échéance est une donnée d'affichage et de tri ; « rendu en retard » se calcule en comparant la date de la session terminée à l'échéance |
+| Q6 — Sur quoi fixer une échéance ? Obligatoire ? | **L'enseignant n'assigne qu'un exercice**, « pour la séance prochaine », pas pour une date choisie. **Cours et fiches ne sont plus assignables** : retirer leurs boutons d'assignation. L'échéance se **déduit de l'emploi du temps** de l'enseignant pour la classe, demandé lors des premières assignations. Échéance facultative | Change le domaine : `Entities::Classroom::Assignable::TYPES` passe à `Exercise` seul (ADR à écrire, UDR des écrans cours et fiche à amender). Nouveau : un emploi du temps enseignant × classe (jours et heures de séance), une échéance calculée = la prochaine séance après l'assignation. À trancher : le sort des assignations de cours et de fiches déjà en base |
+| Q7 — Que deviennent les assignations de cours et de fiches déjà faites ? | **Il n'y en a pas pour le moment** (porteur) | Pas de conversion de données. La migration qui restreint `assignable_type` à `Exercise` vérifie quand même la base au déploiement et échoue s'il en trouve, plutôt que de les perdre |
+| Q8 — Quel emploi du temps demande-t-on ? | **Les jours de la semaine** où l'enseignant voit la classe (ex. lundi et jeudi), cochés lors des premières assignations, modifiables ensuite | Nouvelle donnée : jours de séance par enseignant × classe (pas d'heures). Échéance = le prochain de ces jours strictement après l'assignation ; sans jours renseignés, pas d'échéance. À trancher : vacances et jours fériés |
 
 ## Cas limites identifiés
 
