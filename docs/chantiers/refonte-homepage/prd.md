@@ -140,7 +140,7 @@ Et sans ces options, il garde 48 px et sa largeur naturelle
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
 | Poids de la photo du héros | 1 307 Ko (PNG 1248 × 832) | ≤ 100 Ko | **21,5 Ko** (WebP 960 × 640) |
-| Poids du HTML de `/` (ADR-0067 : < 150 Ko) | — *(non mesuré avant)* | < 150 Ko | 42,7 Ko (6,6 Ko gzip), 4 `<dialog>` |
+| Poids du HTML de `/` (ADR-0067 : < 150 Ko) | — *(non mesuré avant)* | < 150 Ko | 42,8 Ko (6,7 Ko gzip), 4 `<dialog>` |
 | CSS compilée, gzip (ADR-0051 : ≤ 30 Ko) | 7,4 Ko (2026-09-25) | ≤ 30 Ko | 12,8 Ko |
 | Bas du second bouton d'entrée, à 360 × 640 px | sous la fenêtre (en-tête 64 px + navigation, héros, photo avant les entrées) | ≤ 640 px | **514 px** (premier bouton : 446 px), mesurés dans Chromium 141 |
 

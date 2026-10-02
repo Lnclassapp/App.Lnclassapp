@@ -83,7 +83,7 @@ Une seule page, une seule chaîne : les trois lots sont séquentiels. Un seul ag
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle *(aucun port ; lots séquentiels sur la même branche)*
 - [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord *(RH-01 à RH-13 ; voir le journal pour la nature du premier rouge)*
 - [x] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert *(voir le journal : lancés en local le 2026-10-02 ; la CI de la PR fait foi)*
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur *(challenger du 2026-10-02 : huit critères rejoués, tous PASS, deux chemins d'erreur ; rapport dans le journal)*
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert *(lancés en local le 2026-10-02, tous verts, puis relancés après les corrections du challenger ; la CI de la PR fait foi)*
 - [x] PR unique vers `Develop`, référençant chantier + ADR + UDR *([#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145))*
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

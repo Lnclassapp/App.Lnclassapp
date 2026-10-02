@@ -11,6 +11,7 @@
 | 2026-10-02 | Les matières sont écrites dans la vue, pas lues en base | La page reste sans requête ; le référentiel de production est créé à l'écran par l'équipe et peut différer : une ligne de locale à changer, pas une query | Non — memo (hypothèse à confirmer) |
 | 2026-10-02 | Deux options de `ui_modal` (`trigger_size:`, `trigger_full:`) plutôt qu'un bouton écrit à la main dans la vue | Le déclencheur doit vivre dans le périmètre du contrôleur `modal` ; un bouton hors du composant ne pourrait pas ouvrir la `<dialog>` | Non — amendement UDR-0005 |
 | 2026-10-02 | L'enseignant est vouvoyé sur la page, l'élève tutoyé | C'est le ton de l'application (`teacher_homes`, `teacher_registrations`) ; la page actuelle tutoyait l'enseignant | Non — UDR-0056 |
+| 2026-10-02 | Le logo décoratif de l'appel final est masqué au téléphone plutôt que retiré partout | Le challenger l'a mesuré sous les deux boutons à 360 et 390 px ; sur grand écran il reste hors des boutons. La grille de design du fondateur refuse le filigrane sur l'accueil élève : le garder sur la page publique, même seulement sur grand écran, reste à trancher par le porteur | Non — UDR-0056 |
 
 ## Ce qui a dérapé
 
@@ -32,11 +33,43 @@
 | Un garde-fou de poids sur `app/assets/images` (aucune image servie à l'ouverture d'une page au-delà de 100 Ko, par exemple) | Relève de l'ADR-0051, qui ne couvre que JS et CSS : un amendement d'ADR, pas une ligne de ce chantier | à ouvrir (`optimize`) |
 | Mode sombre de la page publique | Exclu de la V1 par l'UDR-0005 ; la grille de design synchronisée le prévoit : contradiction à trancher par le porteur | — |
 
+## Rapport du challenger (2026-10-02)
+
+Rôle distinct de l'auteur : un agent en lecture seule, qui **exécute** sans relire (tests, Chromium 141 piloté par Playwright 1.56, serveur de développement, HEAD `787c0d5`). Ses scripts, journaux et captures sont restés dans son espace de travail ; le verdict et les preuves sont repris ici.
+
+| Critère du PRD rejoué | Verdict | Preuve |
+|---|---|---|
+| Tests unitaires et de vues (contrôleur, redirection, composants, titres, tokens) | PASS | 108 runs, 666 assertions, 0 échec |
+| Tests système de la page | PASS | 4 runs, 19 assertions, 0 échec |
+| Parcours nominal élève à 360 × 640 (RH-01, RH-02, RH-03) | PASS | entrées à 446 et 514 px pour 640 ; modale ouverte sans aucune requête, onglet « Tu es élève ? · Lnclass » ; « Rejoindre ma classe » atteint `/join` par Turbo, sans rechargement |
+| Parcours nominal enseignant à 390 × 844 | PASS | section « Enseignants » atteinte, « Créer mon compte enseignant » (306 × 56 px) mène à l'inscription enseignant |
+| Chemin d'erreur : JavaScript coupé | PASS | les deux entrées restent inertes sans quitter la page ; « Se connecter », le bouton enseignant et les ancres du pied restent des liens vivants |
+| Chemin d'erreur : largeur 360 et 390, modale ouverte | PASS | aucun défilement horizontal ; la modale tient dans l'écran (296 px de haut à 390 × 844) |
+| Poids (RH-04) | PASS | HTML 42,7 Ko (6,6 Ko gzip), WebP de 21 966 octets en 960 × 640 servi `image/webp`, PNG absent du disque, de l'index et de HEAD |
+| Contenu (RH-01, RH-05, RH-07, RH-08, RH-10) | PASS | un seul `h1`, sept matières dans l'ordre et les teintes attendues, interdits absents, zéro tutoiement dans la section « Enseignants », badges Bronze · Argent · Or · Diamant |
+
+**Ses cinq remarques de design, et ce qui en a été fait dans la même PR :**
+
+1. *L'appel final est collé à la bande « Enseignants » (0 px mesuré à 360, 390 et 1 440).* Corrigé : la section passe de `pb-16` à `py-16 md:py-24` ; 64 px de papier (96 sur grand écran) séparent la bande claire de la carte bleue.
+2. *Au téléphone, le logo décoratif de l'appel final passe sous les deux boutons* (carré bleu foncé à bords nets derrière « Je suis élève » et « Je suis enseignant », chevauchement mesuré à 360 et 390). Corrigé : masqué sous `md` ; sur grand écran il reste à droite, hors des boutons.
+3. *Bande des matières au téléphone : libellé seul sur son rang, puis des rangs irréguliers alignés à gauche.* Corrigé : au téléphone, le titre est centré sur sa ligne et les pastilles sont centrées (deux, trois, deux) ; dès `sm`, titre et pastilles s'alignent à gauche sur une ligne, comme avant.
+4. *La pastille « Programme officiel, de la 6e à la Terminale » fait 316 px pour une colonne de 320 px à 360.* Gardée telle quelle : vérifiée à 320 px, elle passe sur deux lignes dans sa capsule, reste lisible, et les deux entrées restent dans le premier écran (bas à 466 et 534 px pour 568).
+5. *La carte « Badge Or obtenu » frôle la bande des matières (20 px) ; le titre « Léger, sur tous les téléphones » tient sur deux lignes au téléphone.* Le premier point est corrigé (`pb-14` au téléphone : 36 px). Le second est accepté : un titre de carte qui passe à la ligne n'est ni tronqué ni ambigu.
+
+**Anomalies qu'il a relevées :**
+
+- La capture `accueil-modale-eleve--mobile.png` du dépôt avait été prise **pendant** l'animation d'ouverture (opacité 0,79 à 68 ms, 1 à 325 ms) : la feuille y était translucide. Le script de capture attend désormais la fin des animations de la modale (`getAnimations`) ; la capture a été refaite à opacité 1.
+- Une violation CSP dans la console sur toutes les pages (`style-src`) : elle vient du script de la barre de debug du mode développement, pas de la page ; la barre de progression Turbo porte bien son nonce. Rien à faire.
+
+**Ce que l'auteur a trouvé en revérifiant plus bas que lui :** à 320 px de large (Android d'entrée de gamme en 480 × 854), le bouton « Créer mon compte enseignant » (306 px) débordait de sa colonne de 280 px et faisait défiler la page en largeur de 6 px. Corrigé : pleine largeur au téléphone, bornée à `max-w-xs` à partir de `sm`.
+
+**Re-vérification après corrections :** 104 tests unitaires et 10 tests système (page d'accueil, écrans étroits) verts ; mesures Playwright à 320, 360, 390 et 1 440 px : aucun défilement horizontal, logo masqué sous `md`, 64 px avant l'appel final, 36 px entre la carte du badge et la bande, entrées du héros inchangées (446 et 514 px pour 640). L'UDR-0056 est mise à jour dans le même commit ; ses tests n'ont pas eu à changer.
+
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-02, en PR brouillon vers `Develop` (phase 5 : rapport du challenger ci-dessous ; acceptation de l'UDR-0056 et des hypothèses du memo par le porteur en revue) |
+| **Livré le** | 2026-10-02, en PR brouillon vers `Develop` (phase 5 : challenger passé le jour même, ses remarques corrigées dans la même PR, rapport ci-dessus ; acceptation de l'UDR-0056 et des hypothèses du memo par le porteur en revue) |
 | **PR** | [#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145) |
 | **ADR produits** | aucun |
 | **UDR produits** | UDR-0056 ; amendements UDR-0012, UDR-0005 |
