@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — grill terminé le 2026-10-02 ; maquettes pour téléphone et tablette, écran actuel épuré pour l'ordinateur (Q11, Q12) |
+| **Statut** | décision — UDR-0057, 0058 et 0059 proposées le 2026-10-02, en attente d'acceptation du porteur |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `feature/interface-epuree` |
 | **Programme** | — *(hors plan de `refonte-application` ; précède le chantier `app-android`, ADR-0070)* |
@@ -79,7 +79,7 @@ Les maquettes montrent la cible complète. Ce qui repose sur une fonction absent
 
 ## Questions encore ouvertes
 
-- Seuil entre les maquettes (téléphone, tablette) et l'écran actuel (ordinateur) : 1 024 px proposé, à confirmer dans la décision d'interface.
-- Sur tablette, la maquette téléphone occupe-t-elle toute la largeur, ou une colonne centrée ? À trancher dans la décision d'interface.
-- Message d'encouragement de la carte « Ma classe » : texte unique, ou plusieurs textes selon la situation (rien d'assigné, ou tout est fait) ?
-- Un niveau ou une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : case masquée, ou grille à 7 cases ?
+- Badge de la homepage : « même sans internet » est retiré tant que le hors connexion n'existe pas (UDR-0059). À confirmer par le porteur.
+- Photo de la homepage : générée par IA, livrée comme image provisoire ; une vraie photo, avec autorisation, avant toute communication publique.
+- Bouton « Besoin d'aide ? » : aucune page d'aide n'existe, il n'est pas affiché (UDR-0058). Fonction à ajouter à `fonctions-espace-eleve`.
+- Une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : l'UDR-0058 masque seulement une matière absente du référentiel ; la case d'une matière non enseignée dans la série reste affichée et mène à un catalogue vide.

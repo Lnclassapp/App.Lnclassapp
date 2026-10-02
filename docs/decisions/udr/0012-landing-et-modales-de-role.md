@@ -8,6 +8,8 @@
 | **ADR lié** | [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (quatre badges) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (polices servies par l'application) · [UDR-0005](0005-design-system-fondateur.md) (tokens, `ui_modal`) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) · [UDR-0009](0009-rejoindre-une-classe.md) (porte de l'élève) |
 | **Remplacé par** | — |
 
+> ℹ️ **Amendée par l'[UDR-0059](0059-homepage-telephone-et-tablette.md)** (proposée le 2026-10-02) : à son acceptation, cette UDR ne gouverne plus que la landing **à partir de 1 024 px**, sans la section « Rejoindre ».
+
 ---
 
 ## 1. Contexte
