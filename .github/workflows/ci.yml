@@ -62,6 +62,7 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
           SALT: ${{ secrets.CI_DRAW_SALT }}
         run: |
+          echo "CI_DRAW_SALT : $([ -n "$SALT" ] && echo présent || echo absent)"
           full=false
           if [ "$BASE" = "Staging" ] || { [ "$BASE" = "Develop" ] && [ -z "$SALT" ]; }; then
             full=true
