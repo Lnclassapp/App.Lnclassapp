@@ -14,6 +14,10 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - **Branche partie d'un `Develop` périmé.** Dans le conteneur, la référence `origin/Develop` avait 181 commits de retard (`c6d7977` au lieu de `8354045`, PR #142) : `git status` disait « à jour ». Repéré par l'exploration de la documentation (UDR-0056 à 0063 et ADR-0069 à 0072 absents de l'arbre), rattrapé par un merge avant toute écriture de fond. Parade : `git fetch origin Develop` avant de brancher.
+- **Lot 0 interrompu par un redémarrage du conteneur** après la sous-étape 0.1 : le travail de 0.2 a été sauvé dans un commit de point de sauvegarde (`1e479240`), puis relu et vérifié par mutation (30 mutants tués) à la reprise. Parade : committer et pousser après chaque élément vert.
+- **Migration renommée** `20261003120000_create_articles.rb` (le plan disait `20261004090000`) : Rails refuse une migration datée de plus d'un jour dans le futur.
+- **Assainisseur de l'ADR-0073 §6 inopérant tel qu'écrit** : le `:prune` de Loofah supprime `<action-text-attachment>` avant le filtre. Corrigé par `ArticlePrune`, qui n'épargne que la pièce jointe d'image d'article ; en mode article, `<img>` sort de la liste blanche (BL-16). Le mode des cours, fiches et imports est inchangé.
+- **Tests système non joués en local** au Lot 0 (pas de Chrome dans le conteneur au départ) : la CI les joue.
 
 ## Ce qu'on a appris sur la codebase
 
