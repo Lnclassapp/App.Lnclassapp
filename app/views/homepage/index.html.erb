@@ -1,6 +1,6 @@
 <%# 🌐 UI · homepage/index — landing publique de Lnclass %>
 <%# Rôle : présente le contenu V1 et oriente chaque rôle par sa modale (TR-01) ; source de l'identité visuelle %>
-<%# UDR  : 0012, 0005, 0054 · ADR : 0049 (polices servies par l'application, plus de Google Fonts) %>
+<%# UDR  : 0012, 0059, 0005, 0054 · ADR : 0049 · entrées dans le héros seulement (UDR-0059 : ni « Rejoindre » ni « Commencer ») %>
 <% page_title t(".page_title") %>
 
 <div class="min-h-screen bg-paper font-sans text-ink antialiased">
@@ -20,7 +20,6 @@
 
       <div class="flex items-center gap-2">
         <%= ui_button t(".nav.sign_in"), href: new_session_path, variant: :ghost, size: :sm, class: "max-sm:hidden" %>
-        <%= ui_button t(".nav.start"), href: "#rejoindre", size: :sm %>
       </div>
     </nav>
   </header>
@@ -140,22 +139,6 @@
             </li>
           <% end %>
         </ol>
-      </div>
-    </section>
-
-    <%# ---------- Appel à l'action ---------- %>
-    <section id="rejoindre" class="scroll-mt-20 px-5 pb-20 md:pb-28">
-      <div class="relative mx-auto max-w-6xl overflow-hidden rounded-sheet bg-brand px-6 py-14 sm:px-12 md:py-20">
-        <%= image_tag "logo/lnclass.jpeg", alt: "",
-              class: "pointer-events-none absolute -right-16 -bottom-20 w-80 opacity-90 mix-blend-multiply md:w-104" %>
-        <div class="relative max-w-xl">
-          <h2 class="font-display text-3xl font-extrabold tracking-tight sm:text-5xl"><%= t(".join.title") %></h2>
-          <p class="mt-4 text-lg text-ink/80"><%= t(".join.lead") %></p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <%= render "role_modal", role: :student, placement: :join, variant: :primary %>
-            <%= render "role_modal", role: :teacher, placement: :join, variant: :secondary %>
-          </div>
-        </div>
       </div>
     </section>
   </main>
