@@ -107,6 +107,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
   - `test/system/assessment/exercise_page_test.rb`
   - `test/system/assessment/exercise_session_test.rb`
   - `test/system/assessment/session_result_test.rb`
+  - `test/controllers/assessment/exercise_sessions_controller_test.rb` (ajouté par l'amendement : ligne de contexte et « Meilleure note »)
 - **Done quand**   :
   - la page de l'exercice reprend badge, meilleur score, maîtrise et sessions, retirés de l'accueil (Q4) ;
   - les trois écrans passent les assertions de la règle à 390 px ;
@@ -136,7 +137,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
   - `app/views/classroom/join_codes/new.html.erb`
   - `config/locales/classroom/` : `student_classrooms.fr.yml`, `joins.fr.yml`
 - **Dépend de**    : Lot 0 ; **porte** : amendements acceptés par le porteur
-- **Test associé** : `test/system/classroom/student_classroom_test.rb` · `test/system/classroom/join_test.rb`
+- **Test associé** : `test/system/classroom/student_classroom_test.rb` · `test/system/classroom/join_test.rb` · `test/controllers/classroom/student_classrooms_controller_test.rb` (ajouté par l'amendement)
 - **Done quand**   : « Ma classe » et le parcours « rejoindre une classe » passent la règle à 390 px, sans liste nominative (UDR-0011).
 
 ### Lot F — Profil élève, connexion, récupération du PIN
@@ -144,6 +145,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
 - **Couche**       : docs + ui
 - **Fichiers**     :
   - `docs/decisions/udr/0060-connexion-et-recuperation-du-pin.md` (nouvelle : aucune UDR ne couvre ces deux écrans)
+  - `docs/decisions/udr/0041-page-profil.md` (amendement : profil vu par l'élève)
   - `app/views/identity/profiles/` : `show.html.erb`, `_information.html.erb`
   - `app/views/identity/sessions/new.html.erb`
   - `app/views/identity/pin_resets/new.html.erb`
@@ -153,6 +155,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
   - `test/system/identity/profile_test.rb`
   - `test/system/identity/sign_in_test.rb`
   - `test/controllers/identity/sessions_controller_test.rb`
+  - `test/controllers/identity/pin_resets_controller_test.rb`, `test/controllers/identity/profiles_controller_test.rb`, `test/integration/identity/profile_photo_display_test.rb` (ajoutés par les amendements)
 - **Done quand**   :
   - la connexion et la récupération du PIN, épurées pour **tous les rôles** (grill Q9), passent la règle à 390 px ;
   - le profil de l'élève passe la règle ;
@@ -281,6 +284,7 @@ Branche de chantier : `feature/interface-epuree`. Branches de lot : `feature/int
 | `test/system/classroom/student_home_test.rb`, `test/controllers/classroom/student_homes_controller_test.rb` | Lot A, puis M1 |
 | `test/system/homepage_test.rb`, `test/controllers/homepage_controller_test.rb` | Lot B, puis M2 |
 | `test/system/role_homes_test.rb` | Lot A |
+| Tests de contrôleur et d'intégration ajoutés par les amendements C, E, F | le lot de l'écran (aucun partagé) |
 | `config/locales/<contexte>/<écran>.fr.yml` des lots C à F | le lot de l'écran (un fichier par écran, aucun partagé) |
 | `docs/decisions/udr/README.md` | orchestrateur, à la fusion de chaque lot |
 | `docs/chantiers/interface-epuree/journal.md` | orchestrateur |
