@@ -68,13 +68,27 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # UDR-0063 §3.4 : la seconde liste du pied de page ne montre que les pages en ligne ; vide tant que ONLINE l'est.
+  # UDR-0063 §3.4 : la seconde liste du pied de page ne montre que les pages en ligne ; absente si aucune ne l'est.
   test "the footer offers no public page while none is online" do
+    online = Communication::PagesController.method(:online?)
+    Communication::PagesController.define_singleton_method(:online?) { |*| false }
+
     get root_url
 
     assert_select "footer #public_pages", 0
     %w[/mission /confidentialite /conditions-utilisation /conditions-vente].each do |path|
       assert_select "a[href='#{path}']", 0
+    end
+  ensure
+    Communication::PagesController.define_singleton_method(:online?, online)
+  end
+
+  # Lot Z, décision du porteur du 2026-10-02 : les quatre pages sont en ligne.
+  test "the footer links the four public pages, in the order of PAGES" do
+    get root_url
+
+    assert_select "footer #public_pages li a", 4 do |links|
+      assert_equal [ mission_path, privacy_path, terms_path, sales_terms_path ], links.map { it["href"] }
     end
   end
 

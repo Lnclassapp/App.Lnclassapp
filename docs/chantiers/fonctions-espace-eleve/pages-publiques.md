@@ -27,6 +27,8 @@
 > 14. La licence d'usage du contenu et l'usage acceptable (CGU §4, §5) ; la suspension d'un compte (CGU §7).
 > 15. Les CGV entières, avec l'offre fixée par le porteur (2026-10-02, grill du chantier `abonnement-mobile-money`) : prix sans prorata, 30 premiers jours gratuits (14 jours d'accès complet, puis du 15e au 30e jour des rappels pour s'abonner), exercices visibles mais aucun à commencer sans abonnement, remboursement sous 7 jours, numéro de transaction Wave comme reçu.
 >
+> **En ligne depuis le 2026-10-02**, avant cette relecture (décision du porteur, UDR-0063, amendement) : les mentions « ‹ … › » sont visibles sur les pages jusqu'à leur mise à jour.
+>
 > **Avant la sortie, côté produit** (pas les juristes) : les lots R, R2 et R3 livrés (archive consultable par l'élève parti, suppression sur demande sous 30 jours, résultats effacés, demandes rappelées). Numéros et horaires du support : fournis le 2026-10-02.
 
 ## Sommaire

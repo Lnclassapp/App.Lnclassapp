@@ -324,17 +324,16 @@ Alors son pied de page porte un lien vers chaque page publique en ligne, et vers
 Étant donné la page /aide
 Alors elle renvoie à la protection des données et aux conditions d'utilisation, une fois en ligne
 
-Étant donné une page en ligne (dans Communication::PagesController::ONLINE)
+# Suspendu le 2026-10-02 (porteur : pages en ligne avant les juristes, mentions gardées) ; repris à sa mise à jour
+Étant donné une page en ligne (dans Communication::PagesController::ONLINE), une fois ses textes mis à jour par le porteur
 Alors son fichier config/locales/communication/pages/<page>.fr.yml ne contient ni « ‹ », ni « à compléter », ni « à fournir », ni « TODO », ni « XXX »
 
-Étant donné une page que les juristes n'ont pas validée (absente de ONLINE)
+Étant donné une page absente de ONLINE
 Alors son adresse répond 404 et aucun lien n'y mène
 
-Étant donné les conditions de vente
-Alors elles ne sont pas en ligne tant que le chantier abonnement-mobile-money n'a pas fixé l'offre
-
-Étant donné la politique de protection des données
-Alors elle n'est pas en ligne tant que la suppression sur demande (lot R) n'est pas livrée
+# Amendé le 2026-10-02 (porteur) : les quatre pages sont en ligne, avant la relecture des juristes
+Étant donné Mission, Protection des données, CGU et CGV
+Alors elles sont dans ONLINE et le pied de page de la homepage les lie toutes les quatre, dans cet ordre
 
 # Conservation (lot R, réécrit le 2026-10-02 : archive, suppression sur demande)
 Étant donné un élève qui a quitté sa classe
@@ -417,12 +416,12 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 | Numéro d'appel, numéro WhatsApp, horaires et délai de réponse du **support** (carte d'aide) | **fourni** (porteur) : WhatsApp et appel au **+225 05 84 25 80 85**, de **8 h à 20 h**, sans délai de réponse annoncé ; posé dans `config/support.yml` (lot B) | rien |
 | Élève arrivé dans la classe après l'échéance : en retard dès son arrivée, ou échéance comptée depuis son arrivée (`classroom_students.joined_at`) | **ouvert** — tant qu'il n'est pas tranché, les lots D et E n'écrivent aucun cas particulier (la règle générale s'applique) | rien ; un amendement de l'ADR-0072 s'il faut un cas particulier |
 | Liste nominative : nommer aussi les élèves « pas encore faits » après l'échéance ? | **ouvert** (le grill ne nomme que les retardataires) | rien (on s'en tient aux rendus en retard) |
-| RCCM de Lnclass Côte d'Ivoire SARL ; déclaration ou autorisation ARTCI | **à compléter par les juristes** (le porteur ne les fournira pas) | lot Z (mise en ligne de Protection des données, CGU, CGV) |
+| RCCM de Lnclass Côte d'Ivoire SARL ; déclaration ou autorisation ARTCI | **à compléter par les juristes** (le porteur ne les fournira pas) | rien : les pages sont en ligne depuis le 2026-10-02 avec leurs mentions ; mise à jour par le porteur |
 | « Départ » et données « sensibles » | **fermé** : sans anonymisation automatique, le « départ » ne déclenche rien ; la suppression sur demande efface nom, numéro, PIN, photo, connexions, codes et tentatives de connexion | rien |
 | Sessions et badges d'un compte supprimé | **fermé** : rattachés au compte anonymisé ; les listes nominatives (suivi, « Anciens élèves », « Travail des élèves ») l'excluent | rien |
 | Réussite de la classe (UDR-0029) avec un compte supprimé : le compter encore ? | **fermé** (porteur) : non, l'élève sort de toutes les statistiques ; ses résultats sont effacés (ADR-0036, amendement (2)) | lot R2 |
 | Rappel des demandes de suppression qui approchent des 30 jours | **fermé** (porteur) : oui ; demandes enregistrées à leur réception, carte sur l'accueil de l'équipe, en ambre à partir du 25e jour (ADR-0036, amendement (2)) | lot R3 |
 | Purges de l'ADR-0036 §6 (tentatives de connexion à 90 jours, codes périmés à 30 jours) non programmées | **constat** : la suppression sur demande efface déjà les tentatives du compte ; la purge à 90 jours reste à programmer avant la mise en ligne | lot Z (page Protection des données) |
-| Région d'hébergement et transferts, âge minimum et accord des parents, bases légales, responsabilité, droit applicable et tribunaux | **à compléter par les juristes** ([`pages-publiques.md`](pages-publiques.md), encadré « Relecture juridique ») | lot Z (Protection des données, CGU) |
+| Région d'hébergement et transferts, âge minimum et accord des parents, bases légales, responsabilité, droit applicable et tribunaux | **à compléter par les juristes** ([`pages-publiques.md`](pages-publiques.md), encadré « Relecture juridique ») | rien : en ligne avec leurs mentions (UDR-0063, amendement du 2026-10-02) |
 | Acceptation des CGU à l'inscription (case à cocher) | **ouvert** | rien dans ce chantier (sinon un chantier sur l'inscription) |
 | Offre, prix, durée, remboursement, réclamation | **ouvert**, chantier `abonnement-mobile-money` | lot P4 (CGV) |
