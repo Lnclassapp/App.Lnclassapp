@@ -22,12 +22,12 @@
 >
 > **À valider** :
 > 11. Le cadre cité (**loi n° 2013-450 du 19 juin 2013**, ARTCI) et la liste des droits (Protection des données §2, §9).
-> 12. La règle de conservation donnée par le porteur (révisée le 2026-10-02) — **pas d'anonymisation** ; données gardées comme **archive**, consultables par l'élève et par l'établissement quitté ; **suppression sur demande, sous 30 jours** — et sa formulation (lot R).
+> 12. La règle de conservation donnée par le porteur (révisée le 2026-10-02) — **pas d'anonymisation automatique** ; données gardées comme **archive**, consultables par l'élève et par l'établissement quitté ; **suppression sur demande, sous 30 jours**, qui efface aussi les résultats (révisé le même jour, ADR-0036, amendement (2)) — et sa formulation (lots R et R2).
 > 13. L'acceptation des CGU (aujourd'hui, aucune case à cocher à l'inscription) et la procédure de modification des conditions (CGU §1, §12).
 > 14. La licence d'usage du contenu et l'usage acceptable (CGU §4, §5) ; la suspension d'un compte (CGU §7).
 > 15. Les CGV entières, avec l'offre fixée par le porteur (2026-10-02, grill du chantier `abonnement-mobile-money`) : prix sans prorata, 30 premiers jours gratuits (14 jours d'accès complet, puis du 15e au 30e jour des rappels pour s'abonner), exercices visibles mais aucun à commencer sans abonnement, remboursement sous 7 jours, numéro de transaction Wave comme reçu.
 >
-> **Avant la sortie, côté produit** (pas les juristes) : le lot R livré (archive consultable par l'élève parti, suppression sur demande sous 30 jours). Numéros et horaires du support : fournis le 2026-10-02.
+> **Avant la sortie, côté produit** (pas les juristes) : les lots R, R2 et R3 livrés (archive consultable par l'élève parti, suppression sur demande sous 30 jours, résultats effacés, demandes rappelées). Numéros et horaires du support : fournis le 2026-10-02.
 
 ## Sommaire
 
@@ -342,6 +342,6 @@ Les présentes conditions sont soumises au **droit ivoirien**. En cas de litige,
 | Retrait d'un enseignant, exercices archivés | ADR-0071 |
 | Exercice faisable après l'échéance, « en retard » | ADR-0072 ; UDR-0062 |
 | Fichiers non rattachés effacés après 48 h | `config/recurring.yml` ; ADR-0047 |
-| Anonymisation : nom remplacé, numéro effacé, connexions fermées, résultats gardés | ADR-0036 §4 et son amendement proposé (lot R) — **non construite au 2026-10-02** |
+| Suppression sur demande : nom remplacé, numéro, PIN, photo, connexions, tentatives de connexion et résultats effacés ; demande traitée dans les 30 jours, rappelée à l'équipe à partir du 25e jour | ADR-0036 §4 et son amendement (2) ; lots R, R2, R3 |
 | Paiement Wave, sans prélèvement automatique ; abonnement activé par la confirmation de Wave ; numéro de transaction comme reçu ; remboursement par Wave | memo `abonnement-mobile-money`, « Ce que l'API Wave permet » |
 | Payeur, durée, prix, plein tarif sans prorata, 30 premiers jours gratuits (14 jours d'accès complet, rappels du 15e au 30e jour) une fois par compte, exercices visibles mais aucun à commencer sans abonnement, remboursement sous 7 jours | porteur, 2026-10-02 ; memo `abonnement-mobile-money`, « Ce que le grill a révélé », Q1 à Q8 (Q7 et Q8 révisés le même jour) ; année scolaire de septembre à juillet : ADR-0041 |
