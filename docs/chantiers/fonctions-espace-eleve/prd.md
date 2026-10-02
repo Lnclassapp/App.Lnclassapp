@@ -3,10 +3,12 @@
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 >
 > **Statut : accepté le 2026-10-02** (porteur : « lance les lots ») ; découpé dans [`plan.md`](plan.md). Décisions : l'[ADR-0072](../../decisions/adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) et les UDR [0061](../../decisions/udr/0061-carte-d-aide-et-faq.md), [0062](../../decisions/udr/0062-echeances.md) et [0063](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md). La FAQ (`/aide`) est déjà construite (commit `189d7f92`, construction directe demandée par le porteur). Les points marqués **« à fournir »** ou **« ouvert »** (§8) bloquent le lot qui en dépend, pas les autres.
+>
+> **Amendé le 2026-10-02** (fin des lots, avant la preuve) : la conservation est redéfinie par le porteur (« pas d'anonymisation, les données doivent être accessibles par l'établissement et les élèves comme archive ») ; les critères « Conservation », « Pages publiques » et « Carte d'aide » sont réécrits en conséquence, et les points ouverts du lot R sont fermés (§8).
 
 ## 1. Contexte
 
-La maquette V2 de l'accueil élève montre six fonctions absentes ; après le grill, ce chantier en garde deux, **les échéances** et **l'aide** (le paiement part dans `abonnement-mobile-money`, les annonces dans `annonces`, la durée est abandonnée). L'enseignant n'assigne plus qu'un exercice, pour la séance suivante, déduite de ses jours de séance dans la classe ; l'élève voit sa date limite et l'enseignant voit qui a rendu en retard (ADR-0072, UDR-0062). Un élève bloqué trouve une FAQ et une carte d'aide (UDR-0061), et quatre pages publiques disent ce qu'est Lnclass, ce qu'elle fait des données et ses conditions (UDR-0063), au nom de **Lnclass Côte d'Ivoire SARL**. Les données personnelles sensibles sont anonymisées 30 jours après le départ (lot R, ADR-0036 amendé).
+La maquette V2 de l'accueil élève montre six fonctions absentes ; après le grill, ce chantier en garde deux, **les échéances** et **l'aide** (le paiement part dans `abonnement-mobile-money`, les annonces dans `annonces`, la durée est abandonnée). L'enseignant n'assigne plus qu'un exercice, pour la séance suivante, déduite de ses jours de séance dans la classe ; l'élève voit sa date limite et l'enseignant voit qui a rendu en retard (ADR-0072, UDR-0062). Un élève bloqué trouve une FAQ et une carte d'aide (UDR-0061), et quatre pages publiques disent ce qu'est Lnclass, ce qu'elle fait des données et ses conditions (UDR-0063), au nom de **Lnclass Côte d'Ivoire SARL**. Les données restent consultables comme archive par l'élève et par l'établissement qu'il a quitté ; un compte n'est supprimé (anonymisé) que sur demande, traitée par l'équipe dans les 30 jours (lot R).
 
 ## 2. Acteurs et permissions
 
@@ -28,7 +30,7 @@ La maquette V2 de l'accueil élève montre six fonctions absentes ; après le gr
 
 **Entité juridique** : **Lnclass Côte d'Ivoire SARL**, éditeur du service et responsable du traitement des données (porteur, 2026-10-02, Q16). Adresse : **Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph**. Contact : **+225 05 44 32 00 20 et +225 05 84 25 80 85**. RCCM, point ARTCI et clauses de droit : **à compléter par les juristes**, qui valident les quatre pages publiques **avant la sortie de l'application** (le porteur ne les fournira pas).
 
-**Conservation** (porteur, 2026-10-02) : les données personnelles sensibles sont anonymisées par défaut **30 jours après le départ** ; les informations d'usage de l'application (sessions, réponses, badges, lacunes, assignations) sont conservées pour la progression et le suivi par les enseignants et l'établissement. Le « départ » et les données « sensibles » restent à définir (§8). Anonymiser : `Identity::AnonymizeUser`, automatique par un job quotidien (lot R) ; à la main par l'équipe (`DeleteUserPolicy`).
+**Conservation** (porteur, 2026-10-02, réécrit après le lot R) : **aucune anonymisation automatique**. Les données restent comme **archive**, consultable par l'élève (« Mon historique », `/students/archive`) et par l'établissement qu'il a quitté (« Anciens élèves », `/school-admin/students/departed`). Un compte n'est supprimé que **sur demande** de l'élève ou de son parent, reçue par le support et traitée par l'équipe **dans les 30 jours** : `Identity::AnonymizeUser`, réservé à l'équipe `admin` (`DeleteUserPolicy`, matrice de l'ADR-0038). Sont effacés : nom, numéro, PIN, photo, connexions, codes de récupération et tentatives de connexion (numéro et IP) ; les résultats restent, sans le nom.
 
 ## 3. Parcours utilisateur
 
@@ -302,7 +304,7 @@ Et la ligne « Questions fréquentes » reste
 
 Étant donné la carte ouverte
 Alors elle n'a aucun bouton de variante primary ni brand
-Et aucune vue ni locale ne contient un numéro de support
+Et les numéros de la carte viennent de config/support.yml, jamais d'une vue
 
 # Pages publiques (UDR-0063)
 Étant donné un visiteur anonyme
@@ -313,7 +315,7 @@ Et elle a un seul h1, une h2 par section et le lien « Accueil » vers la homepa
 Étant donné la politique de protection des données en ligne
 Alors elle a un sommaire dont chaque lien mène à une h2
 Et elle nomme « Lnclass Côte d'Ivoire SARL », à Tiassalé, comme responsable du traitement, joignable au +225 05 44 32 00 20 et +225 05 84 25 80 85
-Et elle annonce l'anonymisation 30 jours après le départ
+Et elle annonce la suppression sur demande, traitée dans les 30 jours, et l'archive consultable par l'élève et l'établissement
 Et elle cite la loi n° 2013-450 comme cadre, sans affirmer de conformité
 
 Étant donné la homepage
@@ -332,26 +334,34 @@ Alors son adresse répond 404 et aucun lien n'y mène
 Alors elles ne sont pas en ligne tant que le chantier abonnement-mobile-money n'a pas fixé l'offre
 
 Étant donné la politique de protection des données
-Alors elle n'est pas en ligne tant que l'anonymisation automatique (lot R) n'est pas livrée
+Alors elle n'est pas en ligne tant que la suppression sur demande (lot R) n'est pas livrée
 
-# Conservation (lot R, ADR-0036 amendé — définition du « départ » à trancher)
-Étant donné un élève parti depuis 31 jours, au sens retenu pour « départ »
-Quand le job quotidien d'anonymisation passe
-Alors son nom devient « Compte supprimé », son numéro et sa photo sont effacés, ses connexions sont fermées
-Et ses sessions, réponses, badges et fiches à revoir restent, rattachés au compte anonymisé
-Et la réussite de sa classe (UDR-0029) et le travail des élèves de la direction ne changent pas
+# Conservation (lot R, réécrit le 2026-10-02 : archive, suppression sur demande)
+Étant donné un élève qui a quitté sa classe
+Quand il ouvre « Mon historique »
+Alors il retrouve ses sessions, ses notes et ses badges
 
-Étant donné un élève parti depuis 29 jours
-Quand le job passe
-Alors son compte est intact
+Étant donné la direction d'un établissement qu'un élève a quitté
+Quand elle ouvre « Anciens élèves »
+Alors elle voit son nom et ses résultats dans les classes de l'établissement, sans contact ni identifiant
 
-Étant donné un compte déjà anonymisé
-Quand le job repasse
-Alors rien ne change et aucune ligne de journal n'est ajoutée
+Étant donné une demande de suppression reçue le 28 septembre par le support
+Quand l'équipe admin la traite depuis la fiche du compte, avec la date de la demande
+Alors son nom devient « Compte supprimé », son numéro, son PIN et sa photo sont effacés, ses connexions sont fermées
+Et ses tentatives de connexion, et celles faites avec son numéro, sont supprimées
+Et ses sessions, réponses et badges restent, sans son nom
+Et le journal garde l'auteur et la date de la demande, rien des données effacées
 
-Étant donné un enseignant, un élève ou la direction
-Quand il demande l'anonymisation d'un autre compte
-Alors il reçoit :forbidden
+Étant donné une date de demande absente ou future
+Alors la modale répond 422 et rien ne change
+
+Étant donné un membre de l'équipe content ou field, un enseignant, un élève ou la direction
+Quand il demande la suppression d'un compte
+Alors il reçoit 403, et la fiche du compte ne lui propose pas le geste
+
+Étant donné un compte déjà supprimé, un enseignant ou un membre de l'équipe
+Quand l'équipe veut le supprimer ici
+Alors elle reçoit 404 (en V1, seul un compte élève se supprime sur demande)
 
 # Garde-fous
 Étant donné le code de app/
@@ -383,7 +393,7 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 - [UDR-0061](../../decisions/udr/0061-carte-d-aide-et-faq.md) — Carte d'aide et FAQ (acceptée)
 - [UDR-0062](../../decisions/udr/0062-echeances.md) — Échéances (Accepté ; amende UDR-0011, 0013, 0015, 0027, 0028, 0029, déprécie 0030)
 - [UDR-0063](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md) — Pages publiques : Mission, Protection des données, CGU, CGV (Accepté ; amende UDR-0061 §3.1, 0012)
-- [ADR-0036, amendement du 2026-10-02](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md#amendement-du-2026-10-02--anonymisation-automatique-30-jours-après-le-départ--statut--proposé) — anonymisation automatique 30 jours après le départ (**Proposé** : « départ » à trancher)
+- [ADR-0036](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md) — son amendement « anonymisation automatique 30 jours après le départ » a été **retiré** (porteur : archive, suppression sur demande) ; le lot R applique le §4 tel quel, réservé à `admin` (ADR-0038)
 - Brouillons des textes publics : [`pages-publiques.md`](pages-publiques.md)
 - **Signalé, non modifié ici** : l'UDR-0058 annonce le retour de la durée d'un exercice, abandonnée (Q9) ; son amendement de phase 2 d'`interface-epuree` la retire et reprend l'UDR-0062 §3.3 (carte du haut, point ambre) et l'icône d'aide de l'UDR-0061.
 
@@ -404,14 +414,15 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 
 | Point | État | Bloque |
 |---|---|---|
-| Numéro d'appel, numéro WhatsApp, horaires et délai de réponse du **support** (carte d'aide). Les numéros de contact de l'entité (+225 05 44 32 00 20 et +225 05 84 25 80 85) servent-ils aussi au support ? | **à fournir** (porteur) | les lignes WhatsApp et appel de la carte (lot B livre la carte avec la seule ligne FAQ si rien n'est fourni ; valeurs à poser au lot Z) |
+| Numéro d'appel, numéro WhatsApp, horaires et délai de réponse du **support** (carte d'aide) | **fourni** (porteur) : WhatsApp et appel au **+225 05 84 25 80 85**, de **8 h à 20 h**, sans délai de réponse annoncé ; posé dans `config/support.yml` (lot B) | rien |
 | Élève arrivé dans la classe après l'échéance : en retard dès son arrivée, ou échéance comptée depuis son arrivée (`classroom_students.joined_at`) | **ouvert** — tant qu'il n'est pas tranché, les lots D et E n'écrivent aucun cas particulier (la règle générale s'applique) | rien ; un amendement de l'ADR-0072 s'il faut un cas particulier |
 | Liste nominative : nommer aussi les élèves « pas encore faits » après l'échéance ? | **ouvert** (le grill ne nomme que les retardataires) | rien (on s'en tient aux rendus en retard) |
 | RCCM de Lnclass Côte d'Ivoire SARL ; déclaration ou autorisation ARTCI | **à compléter par les juristes** (le porteur ne les fournira pas) | lot Z (mise en ligne de Protection des données, CGU, CGV) |
-| **« Départ »** : compte fermé à la demande, élève sorti de toute classe, fin d'année scolaire sans réinscription, enseignant retiré ? | **ouvert** | lot R, donc la mise en ligne de Protection des données |
-| **Données « sensibles »** : nom, numéro, photo, genre, adresses IP, numéro saisi dans les tentatives de connexion ? | **ouvert** | lot R |
-| Sessions et badges d'un compte anonymisé : rattachés au compte anonymisé (proposition, qui garde les statistiques de la classe), ou détachés ? | **ouvert** | lot R |
-| Purges de l'ADR-0036 §6 (tentatives de connexion à 90 jours, codes périmés à 30 jours) non programmées | **constat** : ajoutées au lot R si possible, sinon signalées au journal ; la politique ne les cite pas avant | page Protection des données |
+| « Départ » et données « sensibles » | **fermé** : sans anonymisation automatique, le « départ » ne déclenche rien ; la suppression sur demande efface nom, numéro, PIN, photo, connexions, codes et tentatives de connexion | rien |
+| Sessions et badges d'un compte supprimé | **fermé** : rattachés au compte anonymisé ; les listes nominatives (suivi, « Anciens élèves », « Travail des élèves ») l'excluent | rien |
+| Réussite de la classe (UDR-0029) avec un compte supprimé : le compter encore ? | **ouvert**, à trancher avec les juristes (aujourd'hui exclu des listes nominatives) | rien |
+| Rappel des demandes de suppression qui approchent des 30 jours (liste des demandes en attente) | **ouvert** : la date de la demande est saisie au traitement, aucune demande n'est enregistrée avant | rien ; un lot si le porteur le veut |
+| Purges de l'ADR-0036 §6 (tentatives de connexion à 90 jours, codes périmés à 30 jours) non programmées | **constat** : la suppression sur demande efface déjà les tentatives du compte ; la purge à 90 jours reste à programmer avant la mise en ligne | lot Z (page Protection des données) |
 | Région d'hébergement et transferts, âge minimum et accord des parents, bases légales, responsabilité, droit applicable et tribunaux | **à compléter par les juristes** ([`pages-publiques.md`](pages-publiques.md), encadré « Relecture juridique ») | lot Z (Protection des données, CGU) |
 | Acceptation des CGU à l'inscription (case à cocher) | **ouvert** | rien dans ce chantier (sinon un chantier sur l'inscription) |
 | Offre, prix, durée, remboursement, réclamation | **ouvert**, chantier `abonnement-mobile-money` | lot P4 (CGV) |
