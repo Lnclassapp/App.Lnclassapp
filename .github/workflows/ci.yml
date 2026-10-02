@@ -77,6 +77,8 @@ jobs:
         if: steps.draw.outputs.full != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          # ADR-0069 §8 : the proof of a cloud session counts for a pull request into Develop only.
+          LOCAL_PROOF: ${{ github.base_ref == 'Develop' }}
         run: script/ci/tested_tree
 
       # Documentation alone: nothing to check. Any doubt (an unreadable diff) runs everything.

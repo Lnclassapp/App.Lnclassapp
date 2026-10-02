@@ -65,6 +65,13 @@ class CiPlanTest < Minitest::Test
     assert_equal "${{ secrets.CI_DRAW_SALT }}", steps[draw].dig("env", "SALT")
   end
 
+  # ADR-0069 §8 : a cloud session's proof counts for a pull request into Develop only; never for main.
+  def test_a_cloud_proof_counts_for_develop_only
+    proof = jobs.dig("ci", "steps").find { it["id"] == "proof" }
+
+    assert_equal "${{ github.base_ref == 'Develop' }}", proof.dig("env", "LOCAL_PROOF")
+  end
+
   # ADR-0067 : the screen budgets seed 312 000 sessions; they run before each recette, never in bin/ci.
   def test_the_screen_budgets_stay_out_of_bin_ci
     played = full_run.map(&:command).join(" ")
