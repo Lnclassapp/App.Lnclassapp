@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — **en pause** (porteur, 2026-09-30 : reprise après ses tests ; grill non commencé) |
+| **Statut** | cadrage — grill en cours (repris le 2026-10-02, après une pause du porteur le 2026-09-30) |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `feature/interface-epuree` |
 | **Programme** | — *(hors plan de `refonte-application` ; précède le chantier `app-android`, ADR-0070)* |
