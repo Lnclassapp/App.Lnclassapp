@@ -11,18 +11,21 @@
 > **À compléter** (le porteur ne les fournira pas) :
 > 1. Le **numéro RCCM** de Lnclass Côte d'Ivoire SARL (Protection des données §1, CGU §1, CGV §1).
 > 2. La **déclaration ou l'autorisation auprès de l'ARTCI** et sa référence (Protection des données §2).
-> 3. Le **droit applicable et les tribunaux compétents** (CGU §11, CGV §8) ; la rédaction proposée retient le droit ivoirien.
-> 4. La **responsabilité** de Lnclass : disponibilité, limites, force majeure (CGU §9).
+> 3. Le **droit applicable et les tribunaux compétents** (CGU §11, CGV §10) ; la rédaction proposée retient le droit ivoirien.
+> 4. La **responsabilité** de Lnclass : disponibilité, limites, force majeure (CGU §9, CGV §9).
 > 5. L'**âge minimum** et l'**accord des parents** pour un élève mineur (Protection des données §10, CGU §10).
 > 6. Les **bases légales** de chaque finalité (Protection des données §4).
 > 7. Les **transferts** de données hors de Côte d'Ivoire, selon la région d'hébergement (Protection des données §6).
+> 8. La **TVA** : le prix de 16 000 F CFA est-il toutes taxes comprises ou hors TVA (CGV §2).
+> 9. Le **droit de rétractation légal** applicable en Côte d'Ivoire, son délai, et son articulation avec le remboursement sous 7 jours (CGV §7).
+> 10. Les **réclamations** : délai de réponse, procédure et **médiation** (CGV §8).
 >
 > **À valider** :
-> 8. Le cadre cité (**loi n° 2013-450 du 19 juin 2013**, ARTCI) et la liste des droits (Protection des données §2, §9).
-> 9. La règle de conservation donnée par le porteur (révisée le 2026-10-02) — **pas d'anonymisation** ; données gardées comme **archive**, consultables par l'élève et par l'établissement quitté ; **suppression sur demande, sous 30 jours** — et sa formulation (lot R).
-> 10. L'acceptation des CGU (aujourd'hui, aucune case à cocher à l'inscription) et la procédure de modification des conditions (CGU §1, §12).
-> 11. La licence d'usage du contenu et l'usage acceptable (CGU §4, §5) ; la suspension d'un compte (CGU §7).
-> 12. Les CGV entières, une fois l'offre fixée par le chantier `abonnement-mobile-money` (rétractation, remboursement, réclamation).
+> 11. Le cadre cité (**loi n° 2013-450 du 19 juin 2013**, ARTCI) et la liste des droits (Protection des données §2, §9).
+> 12. La règle de conservation donnée par le porteur (révisée le 2026-10-02) — **pas d'anonymisation** ; données gardées comme **archive**, consultables par l'élève et par l'établissement quitté ; **suppression sur demande, sous 30 jours** — et sa formulation (lot R).
+> 13. L'acceptation des CGU (aujourd'hui, aucune case à cocher à l'inscription) et la procédure de modification des conditions (CGU §1, §12).
+> 14. La licence d'usage du contenu et l'usage acceptable (CGU §4, §5) ; la suspension d'un compte (CGU §7).
+> 15. Les CGV entières, avec l'offre fixée par le porteur (2026-10-02, grill du chantier `abonnement-mobile-money`) : prix sans prorata, 30 premiers jours gratuits (14 jours d'accès complet, puis du 15e au 30e jour des rappels pour s'abonner), exercices visibles mais aucun à commencer sans abonnement, remboursement sous 7 jours, numéro de transaction Wave comme reçu.
 >
 > **Avant la sortie, côté produit** (pas les juristes) : le lot R livré (archive consultable par l'élève parti, suppression sur demande sous 30 jours). Numéros et horaires du support : fournis le 2026-10-02.
 
@@ -238,42 +241,70 @@ Lnclass peut modifier ces conditions. La date de mise à jour figure en tête de
 
 ## 4. Conditions générales de vente — `/conditions-vente`
 
-> **Le lot P4 (CGV) dépend du chantier [`abonnement-mobile-money`](../abonnement-mobile-money/memo.md)**, dont le grill n'est pas fait. Le texte ci-dessous est complet pour tout ce qui est établi ; l'offre, la durée et le remboursement se remplissent avec ce chantier, puis passent aux juristes.
+> **Offre fixée le 2026-10-02** par le grill du chantier [`abonnement-mobile-money`](../abonnement-mobile-money/memo.md) (Q1 à Q8, porteur). Le texte ci-dessous est complet ; il reste à faire valider par les juristes, qui complètent les marques ‹ › (lot P4 ; mise en ligne au lot Z).
+>
+> **Vocabulaire** : la locale n'admet pas le mot « essai » (UDR-0007, test `test/i18n/locale_files_test.rb`) ; l'essai gratuit du grill (Q4, Q7) s'écrit « les 30 premiers jours, gratuits » ou « pendant 14 jours, vous avez accès à tout Lnclass ».
 
 **`h1` — Conditions générales de vente**
 « Mis à jour le ‹ date de validation : à compléter par les juristes › »
 
 ### 1. Vendeur
 
-**Lnclass Côte d'Ivoire SARL**, Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph, Côte d'Ivoire — RCCM ‹ numéro : à compléter par les juristes › — contact : **+225 05 44 32 00 20** et **+225 05 84 25 80 85**.
+L'abonnement à Lnclass est vendu par **Lnclass Côte d'Ivoire SARL**, Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph, Côte d'Ivoire — RCCM ‹ numéro : à compléter par les juristes › — contact : **+225 05 44 32 00 20** et **+225 05 84 25 80 85**.
 
 ### 2. L'offre et le prix
 
-‹ Contenu de l'abonnement, ce qui reste gratuit, qui paie (élève, parent, établissement), prix en francs CFA (XOF) : à fixer par le chantier `abonnement-mobile-money`, puis à valider par les juristes ›
+L'abonnement est attaché à un compte élève. Il est payé **par l'élève ou par son parent**.
 
-### 3. Le paiement
+Il coûte **16 000 F CFA pour l'année scolaire**. ‹ Prix toutes taxes comprises ou hors TVA : à compléter par les juristes ›
 
-Le paiement se fait avec **Wave**, depuis l'application Wave. L'abonnement est activé quand Wave confirme le paiement à Lnclass, pas au retour sur l'application. Le numéro de transaction Wave sert de preuve du paiement.
+Le prix est le même à tout moment de l'année : un abonnement pris en cours d'année est payé **au plein tarif, sans prorata**, et vaut jusqu'à la fin de l'année scolaire en cours.
 
-### 4. Durée et renouvellement
+### 3. Les 30 premiers jours, gratuits
 
-‹ Durée de l'abonnement : à fixer par le chantier `abonnement-mobile-money` ›. **Il n'y a aucun prélèvement automatique** : chaque renouvellement est un nouveau paiement, fait par vous.
+Les **30 premiers jours sont gratuits**, sans abonnement. Ils sont comptés à partir de la création de votre compte élève, et ne sont accordés qu'une fois par compte :
 
-### 5. Fin de l'abonnement
+- pendant **14 jours**, vous avez accès à tout Lnclass ;
+- du **15e au 30e jour**, vous gardez l'accès à tout Lnclass, et des messages vous invitent à prendre un abonnement ;
+- **après le 30e jour**, il vous faut un abonnement pour commencer un exercice (article 6).
 
-‹ Ce qui reste accessible à la fin de l'abonnement, délai de grâce : à fixer par le chantier `abonnement-mobile-money` ›
+### 4. Le paiement
 
-### 6. Rétractation et remboursement
+Le paiement se fait avec **Wave**, depuis l'application Wave de l'élève ou de son parent.
 
-‹ Délai, conditions et mode de remboursement : à fixer par le chantier `abonnement-mobile-money`, puis à compléter par les juristes ›
+L'abonnement est activé quand Wave confirme le paiement à Lnclass, pas au retour sur l'application. **Le numéro de transaction Wave sert de reçu** : gardez-le.
 
-### 7. Réclamation
+### 5. Durée et renouvellement
 
-Pour toute réclamation : **+225 05 44 32 00 20** ou **+225 05 84 25 80 85**. ‹ Délai de réponse et médiation : à compléter par les juristes ›
+L'abonnement vaut pour **une année scolaire, de septembre à juillet**. Il prend fin avec l'année scolaire en cours, quelle que soit la date du paiement.
 
-### 8. Droit applicable
+**Il n'y a aucun prélèvement automatique** : Wave ne le permet pas. L'abonnement n'est donc pas renouvelé tout seul ; pour l'année suivante, vous le renouvelez vous-même par un nouveau paiement.
 
-Les [conditions générales d'utilisation](#3-conditions-générales-dutilisation--conditions-utilisation) s'appliquent, notamment leur article 11.
+### 6. Sans abonnement
+
+Après le 30e jour sans abonnement, ou quand votre abonnement prend fin avec l'année scolaire, vous **gardez votre compte et l'historique de votre travail** : vous pouvez toujours vous connecter et le consulter.
+
+Vous **voyez tous les exercices**, y compris ceux que votre enseignant vous donne, mais vous **ne pouvez pas en commencer** : Lnclass vous invite alors à prendre un abonnement.
+
+### 7. Rétractation et remboursement
+
+Vous pouvez demander le remboursement de votre abonnement **dans les 7 jours qui suivent le paiement**, au **+225 05 44 32 00 20** ou au **+225 05 84 25 80 85**, en donnant le numéro de transaction Wave. Le remboursement est fait par Wave.
+
+Après ces 7 jours, l'abonnement n'est pas remboursé.
+
+‹ Droit de rétractation prévu par la loi ivoirienne, son délai et son articulation avec ce remboursement : à compléter par les juristes ›
+
+### 8. Réclamation
+
+Pour toute réclamation : **+225 05 44 32 00 20** ou **+225 05 84 25 80 85**. Pour un paiement, donnez le numéro de transaction Wave. ‹ Délai de réponse, procédure de réclamation et médiation : à compléter par les juristes ›
+
+### 9. Responsabilité
+
+‹ Responsabilité de Lnclass envers l'acheteur, indisponibilité du service, force majeure : à compléter par les juristes ›
+
+### 10. Droit applicable et litiges
+
+Les présentes conditions sont soumises au **droit ivoirien**. En cas de litige, les parties recherchent d'abord une solution amiable. ‹ Tribunaux compétents et confirmation du droit applicable : à compléter par les juristes ›
 
 ---
 
@@ -289,7 +320,8 @@ Les [conditions générales d'utilisation](#3-conditions-générales-dutilisatio
 | Déclaration ou autorisation ARTCI | à compléter | juristes |
 | Droit applicable, tribunaux, responsabilité, âge minimum et accord des parents, bases légales, transferts | à compléter | juristes |
 | Définition du « départ », données « sensibles » | à arrêter | porteur, avant le lot R |
-| Offre, prix, durée, remboursement | à fixer | chantier `abonnement-mobile-money` |
+| Offre | Abonnement par compte élève, payé par l'élève ou son parent, par Wave ; **16 000 F CFA** l'année scolaire (septembre à juillet), plein tarif sans prorata ; sans renouvellement automatique ; 30 premiers jours gratuits, comptés depuis la création du compte (14 jours d'accès complet, puis du 15e au 30e jour accès complet avec des rappels) ; sans abonnement, compte, historique et exercices visibles, aucun exercice à commencer, invitation à s'abonner ; remboursement par Wave sur demande sous 7 jours ; numéro de transaction Wave comme reçu | porteur, 2026-10-02 (grill `abonnement-mobile-money`, Q1 à Q8) |
+| TVA, droit de rétractation légal, réclamation et médiation | à compléter | juristes |
 | Numéros et horaires du **support** (carte d'aide) | à fournir | porteur |
 
 ## 6. Sources des faits
@@ -311,4 +343,5 @@ Les [conditions générales d'utilisation](#3-conditions-générales-dutilisatio
 | Exercice faisable après l'échéance, « en retard » | ADR-0072 ; UDR-0062 |
 | Fichiers non rattachés effacés après 48 h | `config/recurring.yml` ; ADR-0047 |
 | Anonymisation : nom remplacé, numéro effacé, connexions fermées, résultats gardés | ADR-0036 §4 et son amendement proposé (lot R) — **non construite au 2026-10-02** |
-| Paiement Wave, sans prélèvement automatique | memo `abonnement-mobile-money`, « Ce que l'API Wave permet » |
+| Paiement Wave, sans prélèvement automatique ; abonnement activé par la confirmation de Wave ; numéro de transaction comme reçu ; remboursement par Wave | memo `abonnement-mobile-money`, « Ce que l'API Wave permet » |
+| Payeur, durée, prix, plein tarif sans prorata, 30 premiers jours gratuits (14 jours d'accès complet, rappels du 15e au 30e jour) une fois par compte, exercices visibles mais aucun à commencer sans abonnement, remboursement sous 7 jours | porteur, 2026-10-02 ; memo `abonnement-mobile-money`, « Ce que le grill a révélé », Q1 à Q8 (Q7 et Q8 révisés le même jour) ; année scolaire de septembre à juillet : ADR-0041 |
