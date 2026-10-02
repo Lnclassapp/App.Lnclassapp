@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_01_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_03_090100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -92,6 +92,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_090000) do
     t.bigint "assigned_by_id", null: false
     t.bigint "classroom_id", null: false
     t.datetime "created_at", null: false
+    t.date "due_on"
     t.string "public_id", limit: 14, null: false
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
@@ -104,6 +105,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_090000) do
     t.index ["public_id"], name: "index_classroom_assignments_on_public_id", unique: true
     t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "classroom_assignments_archived_at_iff_archived"
     t.check_constraint "assignable_type::text = ANY (ARRAY['Course'::character varying, 'Essential'::character varying, 'Exercise'::character varying]::text[])", name: "classroom_assignments_type_values"
+    t.check_constraint "due_on IS NULL OR (due_on - ((assigned_at AT TIME ZONE 'UTC'::text) AT TIME ZONE 'Africa/Abidjan'::text)::date) >= 1 AND (due_on - ((assigned_at AT TIME ZONE 'UTC'::text) AT TIME ZONE 'Africa/Abidjan'::text)::date) <= 7", name: "classroom_assignments_due_on_within_a_week"
     t.check_constraint "status::text = ANY (ARRAY['active'::character varying, 'archived'::character varying]::text[])", name: "classroom_assignments_status_values"
   end
 
@@ -119,6 +121,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_090000) do
     t.index ["series_id"], name: "index_classroom_plan_entries_on_series_id"
     t.check_constraint "count >= 0 AND count <= 30", name: "classroom_plan_entries_count_range"
     t.check_constraint "school_type::text = ANY (ARRAY['public'::character varying, 'private'::character varying]::text[])", name: "classroom_plan_entries_school_type_values"
+  end
+
+  create_table "classroom_session_days", force: :cascade do |t|
+    t.bigint "classroom_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "teacher_id", null: false
+    t.integer "weekday", limit: 2, null: false
+    t.index ["classroom_id"], name: "index_classroom_session_days_on_classroom_id"
+    t.index ["teacher_id", "classroom_id", "weekday"], name: "index_classroom_session_days_unique", unique: true
+    t.check_constraint "weekday >= 1 AND weekday <= 6", name: "classroom_session_days_weekday_range"
   end
 
   create_table "classroom_students", force: :cascade do |t|
@@ -801,6 +813,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_090000) do
   add_foreign_key "classroom_assignments", "users", column: "assigned_by_id", on_delete: :restrict
   add_foreign_key "classroom_plan_entries", "levels", on_delete: :restrict
   add_foreign_key "classroom_plan_entries", "series", on_delete: :restrict
+  add_foreign_key "classroom_session_days", "teacher_classrooms", column: ["teacher_id", "classroom_id"], primary_key: ["teacher_id", "classroom_id"], on_delete: :restrict
+  add_foreign_key "classroom_session_days", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "classroom_students", "classrooms", on_delete: :restrict
   add_foreign_key "classroom_students", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "classrooms", "levels", on_delete: :restrict

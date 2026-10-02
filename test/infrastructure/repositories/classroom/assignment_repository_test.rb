@@ -22,9 +22,9 @@ module Repositories
           "Exercise" => [ @exercise, @exercise.public_id, "Quiz mitose" ] }
       end
 
-      def assignment_of(assignable)
+      def assignment_of(assignable, due_on: nil)
         Entities::Classroom::Assignment.new(id: nil, public_id: nil, classroom_id: @classroom.id, assignable:, status: "active",
-                                            assigned_by_id: @teacher.id, assigned_at: @at, archived_at: nil)
+                                            assigned_by_id: @teacher.id, assigned_at: @at, archived_at: nil, due_on:)
       end
 
       test "assigne chaque type de ressource, puis la relit active et par public_id" do
@@ -42,6 +42,25 @@ module Repositories
           assert found.active?, type
           assert_equal [ @teacher.id, @at ], [ found.assigned_by_id, found.assigned_at ], type
         end
+      end
+
+      # ADR-0072 §4.3 : l'échéance est écrite une fois, à la création, et relue telle quelle ; nulle sans jours de séance.
+      test "écrit l'échéance à la création et la relit, active et par public_id ; sans échéance, elle reste nulle" do
+        exercise = Assignable.new(type: "Exercise", id: @exercise.id, key: @exercise.public_id, name: "Quiz mitose")
+        due_on = Date.new(2026, 10, 1)
+
+        created = @repository.create(assignment: assignment_of(exercise, due_on:)).value
+
+        assert_equal due_on, created.due_on
+        assert_equal due_on, @repository.active_for(classroom_id: @classroom.id, assignable: exercise).due_on
+        assert_equal due_on, @repository.find_by_public_id(public_id: created.public_id).due_on
+        assert_equal due_on, Orm::ClassroomAssignment.find(created.id).due_on
+
+        course = Assignable.new(type: "Course", id: @course.id, key: @course.slug)
+        undated = @repository.create(assignment: assignment_of(course)).value
+
+        assert_nil undated.due_on
+        assert_nil @repository.find_by_public_id(public_id: undated.public_id).due_on
       end
 
       test "une ressource déjà assignée et active donne :conflict ; archivée, elle se réassigne en nouvelle ligne" do
