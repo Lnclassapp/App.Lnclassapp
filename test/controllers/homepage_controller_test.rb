@@ -2,6 +2,7 @@ require "test_helper"
 
 # TR-01 and TR-03: the landing offers the two role entries, and every link it carries leads somewhere real.
 # UDR-0059 §2.2 : the two entries are offered once, in the hero; the join section and « Commencer » are gone.
+# UDR-0063 §3.4 : the footer's second list carries the public pages that are online.
 class HomepageControllerTest < ActionDispatch::IntegrationTest
   test "the homepage is served at the root" do
     get root_url
@@ -65,6 +66,38 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     css_select("button").each do |button|
       assert(button["data-action"].present? || button["type"] == "submit", "bouton sans action : #{button.text.squish}")
     end
+  end
+
+  # UDR-0063 §3.4 : la seconde liste du pied de page ne montre que les pages en ligne ; vide tant que ONLINE l'est.
+  test "the footer offers no public page while none is online" do
+    get root_url
+
+    assert_select "footer #public_pages", 0
+    %w[/mission /confidentialite /conditions-utilisation /conditions-vente].each do |path|
+      assert_select "a[href='#{path}']", 0
+    end
+  end
+
+  test "the footer lists the online public pages, and those only, in a second list" do
+    online = Communication::PagesController.method(:online?)
+    Communication::PagesController.define_singleton_method(:online?) { |page| %i[mission terms].include?(page.to_sym) }
+
+    get root_url
+
+    assert_select "footer ul#public_pages.text-sm li a", 2
+    assert_select "footer #public_pages a[href='#{mission_path}']", "Notre mission"
+    assert_select "footer #public_pages a[href='#{terms_path}']", "Conditions d'utilisation"
+    assert_select "a[href='#{privacy_path}'], a[href='#{sales_terms_path}']", 0
+  ensure
+    Communication::PagesController.define_singleton_method(:online?, online)
+  end
+
+  # UDR-0062 §4 : l'enseignant n'assigne plus que des exercices ; la landing ne promet plus de cours assignés.
+  test "the teacher is promised to assign exercises, not courses" do
+    get root_url
+
+    assert_match "assigne-leur des exercices", response.body
+    assert_no_match(/des cours et des exercices|assigner du contenu|Assigne du contenu/, response.body)
   end
 
   test "the school space of the former landing is not offered (TR-03, V2)" do
