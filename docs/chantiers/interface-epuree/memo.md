@@ -68,5 +68,4 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 
 - Maquettes des écrans disponibles : à recevoir du porteur avant la décision d'interface.
 - Message d'encouragement de la carte « Ma classe » : texte unique, ou plusieurs textes selon la situation (rien d'assigné, ou tout est fait) ?
-- Grille sur grand écran : avec 7 éléments (6 matières et Inviter, tant que le paiement n'existe pas) et 6 par rangée, Inviter tombe seul sur une deuxième rangée. Le sortir de la grille sur grand écran, ou l'accepter ?
 - Un niveau ou une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : case masquée, ou grille à 7 cases ?
