@@ -37,7 +37,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # UDR-0058 §3.3: a line keeps its title, its subject and one button; badge, best score, mastery and sessions live on
-  # the exercise page. The first button of the list is the primary one, the next ones are secondary (UDR-0057 R1).
+  # the exercise page, which the title opens (UDR-0057 §2.4). The first button of the list is the primary one, the next ones are secondary (UDR-0057 R1).
   test "each assigned exercise with its title, its subject and one button, the first one primary" do
     started = create_exercise(essential: @essential, title: "Méiose, les étapes")
     fresh = create_exercise(essential: @essential, title: "Méiose, le bilan")
@@ -51,14 +51,14 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#student_home_exercises li", 2
     assert_select "#student_home_exercises li:first-child" do
-      assert_select "*", text: "Méiose, les étapes"
+      assert_select "a[href='#{exercise_path(started.public_id)}']", text: "Méiose, les étapes"
       assert_select "*", text: "SVT"
-      assert_select "a, button", 1
+      assert_select "a, button", 2
       assert_select "a.#{PRIMARY}[href='#{exercise_session_path(session.public_id)}']", text: including(tl("assigned_exercise.resume"))
     end
     assert_select "#student_home_exercises li:last-child" do
-      assert_select "*", text: "Méiose, le bilan"
-      assert_select "a, button", 1
+      assert_select "a[href='#{exercise_path(fresh.public_id)}']", text: "Méiose, le bilan"
+      assert_select "a, button", 2
       assert_select "form[action='#{exercise_sessions_path(fresh.public_id)}'][method=post] button.#{SECONDARY}",
                     text: including(tl("assigned_exercise.start"))
     end

@@ -79,7 +79,10 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
         all("li").each do |line|
           within(line) do
             assert_text "SVT"
-            assert_selector "a, button", count: 1
+            # UDR-0057 §2.4: the title leads to the exercise page, one tap away; the button stays beside it.
+            assert_selector "a[href^='/exercises/']", count: 1
+            assert_selector "a[href^='/sessions/'], button", count: 1
+            assert_no_selector "a a, a button"
           end
         end
         assert_selector "li:first-child :is(#{SobrietyAssertions::PRIMARY_ACTION})", text: tl("assigned_exercise.start")
@@ -88,6 +91,16 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       end
       assert_single_primary_action
     end
+  end
+
+  # UDR-0057 §2.4: the badge, the best score and the mastery left the line for the exercise page, one tap away.
+  test "the title of a line opens the exercise page" do
+    sign_in_as @student
+
+    within(row("La méiose")) { click_link "La méiose" }
+
+    assert_current_path exercise_path(@meiose.public_id)
+    assert_selector "h1", text: "La méiose"
   end
 
   # PRD §4, « Règle de sobriété (UDR-0057) » at 390 × 844, then « Voir plus » reveals the 4th line without a reload.
@@ -114,6 +127,8 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
 
       within("#student_home_exercises") do
         assert_no_text "L'ADN"
+        # Back up from the activity, the button would stop under the sticky header of the shell: centred, it is clickable.
+        scroll_to find_button(more), align: :center
         assert_no_page_reload { click_on more }
         assert_text "L'ADN"
         assert_selector "li", count: 4

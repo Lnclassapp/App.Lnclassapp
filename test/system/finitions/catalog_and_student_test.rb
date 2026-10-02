@@ -100,16 +100,14 @@ module Finitions
       assert_title "Cours · Élève · Lnclass"
     end
 
-    test "FU-02 : l'accueil élève s'appelle « Accueil · Élève · Lnclass » ; badges et maîtrise s'y expliquent" do
+    # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
+    test "FU-02 : l'accueil élève s'appelle « Accueil · Élève · Lnclass », sans aide affichée en permanence" do
       completed_session
       sign_in_as @student
 
       assert_current_path student_home_path
       assert_title "Accueil · Élève · Lnclass"
-      within "#student_home_exercises" do
-        assert_info_tip t("classroom.student_homes.show.badges_help"), t("shared.info_tips.badges")
-        assert_info_tip t("classroom.student_homes.show.mastery_help"), t("shared.info_tips.mastery")
-      end
+      within("#student_home_exercises") { assert_no_selector "#student_home_help" }
     end
 
     test "FU-27 : « Ma classe » montre le code de la classe sans bouton « Copier »" do
