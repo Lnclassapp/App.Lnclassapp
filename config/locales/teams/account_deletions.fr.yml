@@ -1,0 +1,30 @@
+# Suppression d'un compte élève sur demande, traitée par l'équipe sous 30 jours (fonctions-espace-eleve, lot R)
+# ADR-0036 §4 : le compte est anonymisé, jamais supprimé ; ses résultats restent, sans son nom
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/deletion_request_input:
+        requested_on: "Date de la demande"
+    errors:
+      models:
+        dtos/identity/deletion_request_input:
+          attributes:
+            requested_on:
+              blank: "Saisissez la date à laquelle la demande a été reçue."
+              in_future: "La date de la demande ne peut pas être dans le futur."
+            base:
+              already_anonymized: "Ce compte est déjà supprimé."
+  teams:
+    account_deletions:
+      new:
+        title: "Supprimer le compte de %{name} ?"
+        erased: "Seulement sur demande de l'élève ou de son parent, reçue par le support. Le nom, le numéro, le PIN et la photo sont effacés, et l'élève ne peut plus se connecter. C'est définitif."
+        kept: "Ses exercices, notes et badges restent dans les chiffres de ses classes, sans son nom."
+        requested_on_hint: "Une demande se traite dans les 30 jours qui suivent sa réception."
+        cancel: "Annuler"
+        submit: "Supprimer le compte"
+      create:
+        done: "Compte de %{name} supprimé."
+        title: "Compte supprimé"
+        description: "Demande du %{requested_on}, traitée aujourd'hui. Le compte ne peut plus se connecter."
+        notice: "Compte supprimé."

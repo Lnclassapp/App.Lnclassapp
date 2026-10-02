@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/account_lookups/_result — le compte trouvé (Queries::Identity::AccountLookupQuery::Row) et ses actions %>
-<%# Rôle : identité, rôle, classe ; « Générer un code de récupération » (stream : modale du code) et, pour un autre membre de l'équipe, la réinitialisation confirmée %>
-<%# ADR  : 0031, 0032, 0060 · UDR : 0006, 0020, 0047 · remplacé par teams/second_factor_resets/create.turbo_stream %>
+<%# Rôle : identité, rôle, classe ; code de récupération (modale du code), réinitialisation du second facteur d'un membre, suppression d'un élève sur demande %>
+<%# ADR  : 0031, 0032, 0036, 0060 · UDR : 0006, 0020, 0047 · remplacé par teams/second_factor_resets et account_deletions/create %>
 <%= ui_card id: "account-lookup-result", "aria-live": "polite" do %>
   <div class="flex items-center gap-4">
     <%= ui_avatar account.display_name, src: account_photo_src(account.public_id, account.photo_version), size: :lg %>
@@ -61,6 +61,11 @@
           <% end %>
           <p class="text-sm text-mute"><%= t(".reset_body") %></p>
         <% end %>
+      <% end %>
+      <%# ADR-0036 §4 : sur demande de l'élève ou de son parent au support ; la modale demande la date de la demande. %>
+      <% if account.role == :student %>
+        <%= ui_button t(".delete_account"), href: new_teams_account_deletion_path(account.public_id), variant: :secondary,
+                      icon: "trash", data: { turbo_frame: "modal" } %>
       <% end %>
     </div>
   <% end %>
