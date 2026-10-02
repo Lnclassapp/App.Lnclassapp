@@ -10,8 +10,9 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
   RESTART_WAIT = 10
 
   setup do
-    @student = create_student(classroom: create_classroom)
     @exercise = create_exercise(title: "Méiose", questions: 10)
+    # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours de l'exercice.
+    @student = create_student_for(@exercise.essential.course)
     sign_in_as @student
     assert_current_path student_home_path
   end

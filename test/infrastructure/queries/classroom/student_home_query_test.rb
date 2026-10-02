@@ -11,7 +11,8 @@ module Queries
         @classroom = create_classroom(school: @school, level: create_level(name: "Tle"), name: "Tle D 1", join_code: "kfm37")
         @student = create_student(classroom: @classroom)
         @svt = create_material(name: "SVT", category: "science")
-        @course = create_course(material: @svt, name: "Génétique")
+        # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours.
+        @course = create_course(material: @svt, name: "Génétique", level: @classroom.level)
         @essential = create_essential(course: @course, name: "La méiose")
       end
 
@@ -40,8 +41,30 @@ module Queries
         assert_nil home(left)
       end
 
+      # UDR-0013, amendement du 2026-10-01 : l'accueil ne liste que ce que l'élève peut ouvrir. Une assignation, une session
+      # terminée ou une lacune hors de son niveau, antérieures à la règle, n'y apparaissent plus.
+      test "an exercise, a completed session and a sheet to review of another level are left out" do
+        other_course = create_course(level: create_level)
+        other_essential = create_essential(course: other_course)
+        other = create_exercise(essential: other_essential, title: "Autre niveau")
+        own = create_exercise(essential: @essential, title: "Mon niveau")
+        [ other, own ].each { create_assignment(classroom: @classroom, assignable: it) }
+        create_exercise_session(student: @student, exercise: other, status: "completed", score_percent: 80)
+        create_exercise_session(student: @student, exercise: own, status: "completed", score_percent: 60)
+        create_gap(student: @student, essential: other_essential)
+        create_gap(student: @student, essential: @essential)
+
+        row = home
+
+        assert_equal [ "Mon niveau" ], titles(row)
+        # create_gap ouvre aussi une session terminée, sur un exercice de sa fiche : seule celle d'un autre niveau disparaît.
+        assert_includes row.recent_sessions.map(&:exercise_title), "Mon niveau"
+        assert_not_includes row.recent_sessions.map(&:exercise_title), "Autre niveau"
+        assert_equal [ @essential.slug ], row.pending_gaps.map(&:essential_slug)
+      end
+
       test "exercises assigned directly, by their sheet or by their course, each once" do
-        direct = create_exercise(essential: create_essential(course: create_course), title: "Direct")
+        direct = create_exercise(essential: create_essential(course: create_course(level: @classroom.level)), title: "Direct")
         by_sheet = create_exercise(essential: @essential, title: "Par la fiche")
         by_course = create_exercise(essential: create_essential(course: @course), title: "Par le cours")
         create_assignment(classroom: @classroom, assignable: @course, assigned_at: 3.days.ago)

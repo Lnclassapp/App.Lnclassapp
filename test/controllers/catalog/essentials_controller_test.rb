@@ -6,9 +6,10 @@ require "test_helper"
 # a draft sheet, or a sheet of a draft course, answers 404. The old page showed a fake « Conforme au programme » banner.
 class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @classroom = create_classroom
     @course = create_course(name: "Génétique et évolution", level: create_level(name: "Tle"), series: create_series(name: "D"),
                             material: create_material(name: "SVT", category: "science"))
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle D, le niveau du cours.
+    @classroom = create_classroom(level: @course.level, series: @course.series)
     @essential = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions",
                                   content: "<p>Le <strong>brassage</strong> génétique : $2^n$ combinaisons.</p>")
     @exercise = create_exercise(essential: @essential, title: "Méiose et ADN", description: "Deux divisions successives.",
@@ -116,17 +117,25 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#content_status_essential_#{essential.slug}", text: /Brouillon/
-    assert_select "#content_status_essential_#{essential.slug} form[action='#{publish_teams_essential_path(essential.slug)}']"
+    assert_select "#content_status_essential_#{essential.slug} form, #content_status_essential_#{essential.slug} a", 0
     assert_select "#essential_team_actions" do
-      # UDR-0042: « Modifier » lives in the ⋮ menu of the sheet, even alone; creating and importing stay buttons.
+      # Épuration des en-têtes (2026-09-30) : seul le statut reste visible ; modifier, créer, importer et publier sont dans
+      # le menu ⋮ (UDR-0042).
       assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: essential.name)
-      assert_select "[role=menu] a[role=menuitem][data-turbo-frame=modal][href='#{edit_teams_essential_path(essential.slug)}']",
-                    text: I18n.t("#{scope}.show.edit")
-      assert_select "[role=menu] [role=menuitem]", 1
-      assert_select "a[data-turbo-frame=modal][href='#{new_teams_essential_exercise_path(essential.slug)}']",
-                    text: I18n.t("#{scope}.show.new_exercise")
-      assert_select "a[data-turbo-frame=modal][href='#{new_teams_import_path(kind: "exercises", essential: essential.slug)}']",
-                    text: I18n.t("#{scope}.show.import_exercises")
+      assert_select "[role=menu]" do
+        assert_select "a[role=menuitem][data-turbo-frame=modal][href='#{edit_teams_essential_path(essential.slug)}']",
+                      text: I18n.t("#{scope}.show.edit")
+        assert_select "a[role=menuitem][data-turbo-frame=modal][href='#{new_teams_essential_exercise_path(essential.slug)}']",
+                      text: I18n.t("#{scope}.show.new_exercise")
+        assert_select "a[role=menuitem][data-turbo-frame=modal]" \
+                      "[href='#{new_teams_import_path(kind: "exercises", essential: essential.slug)}']",
+                      text: I18n.t("#{scope}.show.import_exercises")
+        assert_select "#content_transitions_essential_#{essential.slug} a[role=menuitem][data-turbo-method=patch]" \
+                      "[href='#{publish_teams_essential_path(essential.slug)}']"
+        assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_essential_path(essential.slug)}']",
+                      text: I18n.t("catalog.content_status.actions.publish_all")
+        assert_select "[role=menuitem]", 5
+      end
     end
     assert_select "#essential_exercises li", 3
     assert_select "#essential_exercises", text: /Brouillon — visible uniquement par l'équipe/

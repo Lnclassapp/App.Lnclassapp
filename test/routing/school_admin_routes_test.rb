@@ -24,13 +24,21 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
     assert_equal({ controller: "school_admin/teachers", action: "index" }, first_match("/school-admin/teachers"))
   end
 
-  test "no route under /school-admin accepts anything but GET" do
+  # ADR-0071, UDR-0056 §3.0 (gestion-etablissement-direction, Lot 0) amends DS-11: the direction's three gestures are
+  # its only writes, a closed list; its reading pages still accept GET alone.
+  WRITES = [ [ "DELETE", "/school-admin/teachers/:public_id(.:format)" ],
+             [ "POST", "/school-admin/teachers/:public_id/reinstatement(.:format)" ],
+             [ "PATCH", "/school-admin/school/link(.:format)" ],
+             [ "POST", "/school-admin/school/level-classrooms(.:format)" ],
+             [ "DELETE", "/school-admin/school/level-classrooms/:public_id(.:format)" ] ].freeze
+
+  test "under /school-admin, only the direction's gestures accept anything but GET" do
     routes = Rails.application.routes.routes.select { it.path.spec.to_s.start_with?("/school-admin") }
 
     assert_not_empty routes
-    routes.each { |route| assert_equal "GET", route.verb, route.path.spec.to_s }
+    assert_equal WRITES.sort, routes.reject { it.verb == "GET" }.map { [ it.verb, it.path.spec.to_s ] }.sort
     %w[POST PATCH PUT DELETE].each do |method|
-      %w[/school-admin/classrooms /school-admin/classrooms/abcdefghijkmno /school-admin/teachers].each do |path|
+      %w[/school-admin/classrooms /school-admin/classrooms/abcdefghijkmno /school-admin/teachers /school-admin/school].each do |path|
         assert_nil first_match(path, method:), "#{method} #{path}"
       end
     end

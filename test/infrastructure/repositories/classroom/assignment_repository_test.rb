@@ -80,6 +80,8 @@ module Repositories
 
           assert_equal [ type, record.id, key, name ], resolved.assignable.to_h.values_at(:type, :id, :key, :name), type
           assert resolved.readable?, type
+          # UDR-0013, amendement du 2026-10-01 : le niveau du cours, pour le cours comme pour sa fiche et ses exercices.
+          assert_equal({ level_id: @course.level_id, series_id: @course.series_id }, resolved.course_level, type)
         end
       end
 
@@ -97,6 +99,31 @@ module Repositories
       test "une clé inconnue ou un type hors liste ne résout rien" do
         %w[Course Essential Exercise].each { |type| assert_nil @repository.resolve_assignable(type:, key: "inconnue") }
         assert_nil @repository.resolve_assignable(type: "Classroom", key: @classroom.public_id)
+      end
+
+      # ADR-0071 §4.5, §6 : un retrait archive les devoirs actifs que l'enseignant a donnés dans cet établissement, rien d'autre.
+      test "archive_all_by_teacher_in_school archive les devoirs actifs de l'enseignant dans cet établissement seulement" do
+        school = @classroom.school
+        other_classroom = create_classroom(school:)
+        mine = [ create_assignment(classroom: @classroom, assignable: @course, by: @teacher),
+                 create_assignment(classroom: other_classroom, assignable: @exercise, by: @teacher) ]
+        already = create_assignment(classroom: @classroom, assignable: @essential, by: @teacher, status: "archived")
+        colleague = create_assignment(classroom: @classroom, assignable: @exercise, by: create_teacher(school:))
+        elsewhere = create_assignment(classroom: create_classroom, assignable: @course, by: @teacher)
+        actor = create_school_admin(school:)
+        archived_at = already.reload.archived_at
+
+        assert_equal 2, @repository.archive_all_by_teacher_in_school(teacher_id: @teacher.id, school_id: school.id,
+                                                                     archived_by_id: actor.id, at: @at)
+        mine.each do |record|
+          record.reload
+          assert_equal [ "archived", @at, actor.id ], [ record.status, record.archived_at, record.archived_by_id ]
+        end
+        assert_equal [ archived_at, @teacher.id ], [ already.reload.archived_at, already.archived_by_id ]
+        assert_equal "active", colleague.reload.status
+        assert_equal "active", elsewhere.reload.status
+        assert_equal 0, @repository.archive_all_by_teacher_in_school(teacher_id: @teacher.id, school_id: school.id,
+                                                                     archived_by_id: actor.id, at: @at)
       end
     end
   end

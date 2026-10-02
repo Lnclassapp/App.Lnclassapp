@@ -210,7 +210,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     course = Orm::Course.find_by!(name: COURSE)
 
     assert_no_page_reload do
-      within("#content_status_course_#{course.slug}") { click_on t("catalog.content_status.actions.publish") }
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish")
       assert_toast t("teams.courses.transition.published", name: COURSE)
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
 
@@ -231,10 +232,12 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     essential = Orm::Essential.find_by!(name: ESSENTIAL)
 
     assert_no_page_reload do
-      within("#content_status_essential_#{essential.slug}") { click_on t("catalog.content_status.actions.publish") }
+      find("button[aria-controls=essential-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish")
       assert_toast t("teams.essentials.transition.published", name: ESSENTIAL)
       assert_selector "#content_status_essential_#{essential.slug}", text: t("catalog.content_status.published")
 
+      find("button[aria-controls=essential-actions-menu]").click
       click_on t("catalog.essentials.show.new_exercise")
       within "turbo-frame#modal dialog[open]" do
         fill_in "exercise[title]", with: EXERCISE
@@ -251,7 +254,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     find("#essential_exercise_#{exercise.public_id} a", text: EXERCISE).click
     assert_selector "#exercise_header h1", text: EXERCISE
     assert_no_page_reload do
-      within("#content_status_exercise_#{exercise.public_id}") { click_on t("catalog.content_status.actions.publish") }
+      find("button[aria-controls=exercise-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish")
       assert_toast t("teams.exercises.transition.published", title: EXERCISE)
       assert_selector "#content_status_exercise_#{exercise.public_id}", text: t("catalog.content_status.published")
     end

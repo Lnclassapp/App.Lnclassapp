@@ -4,10 +4,11 @@ require "application_system_test_case"
 # their classrooms — each toggle and toast changes in place, without a page reload. The old footer was never rendered.
 class Classroom::CourseAssignmentsTest < ApplicationSystemTestCase
   setup do
-    @first = create_classroom(name: "Tle D 1")
-    @second = create_classroom(name: "Tle D 2")
-    @teacher = create_teacher(classrooms: [ @first, @second ])
     @course = create_course(name: "Génétique", material: create_material(name: "SVT", category: "science"))
+    # UDR-0013, amendement du 2026-10-01 : un contenu ne s'assigne qu'à une classe de son niveau.
+    @first = create_classroom(name: "Tle D 1", level: @course.level)
+    @second = create_classroom(name: "Tle D 2", level: @course.level)
+    @teacher = create_teacher(classrooms: [ @first, @second ])
     sign_in_as @teacher
     assert_current_path teacher_home_path
   end

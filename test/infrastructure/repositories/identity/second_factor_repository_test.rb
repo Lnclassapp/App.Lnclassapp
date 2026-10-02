@@ -11,6 +11,16 @@ module Repositories
 
       def code_at(secret, time) = ROTP::TOTP.new(secret).at(time)
 
+      # Decoded issuer parameter and label of the QR code, with RAILWAY_ENVIRONMENT_NAME set as given, then restored.
+      def issuer_and_label_in(railway_environment:)
+        previous = ENV.fetch("RAILWAY_ENVIRONMENT_NAME", nil)
+        ENV["RAILWAY_ENVIRONMENT_NAME"] = railway_environment
+        uri = URI(@repository.begin_enrollment(user_id: @member.id, label: "0701020304").provisioning_uri)
+        [ URI.decode_www_form(uri.query).to_h.fetch("issuer"), URI.decode_uri_component(uri.path.delete_prefix("/")) ]
+      ensure
+        ENV["RAILWAY_ENVIRONMENT_NAME"] = previous
+      end
+
       test "without a secret there is no state and no code is accepted" do
         assert_nil @repository.state_for(user_id: @member.id)
         assert_nil @repository.verify_code(user_id: @member.id, code: "123456", now: @now)
@@ -22,9 +32,40 @@ module Repositories
         credential = Orm::TotpCredential.find_by!(user_id: @member.id)
         assert_equal enrollment.secret, credential.secret
         assert_not_equal enrollment.secret, credential.ciphertext_for(:secret)
-        assert_match %r{\Aotpauth://totp/Lnclass:0701020304\?secret=#{enrollment.secret}&issuer=Lnclass\z}, enrollment.provisioning_uri
+        # Outside Railway the test environment names the issuer: « Lnclass (test) », URL-encoded.
+        assert_match %r{\Aotpauth://totp/Lnclass%20%28test%29:0701020304\?secret=#{enrollment.secret}&issuer=Lnclass%20%28test%29\z},
+                     enrollment.provisioning_uri
         assert_equal Ports::Identity::SecondFactorRepositoryPort::State.new(confirmed: false, backup_codes_left: 0),
                      @repository.state_for(user_id: @member.id)
+      end
+
+      # Chantier totp-emetteur-par-environnement: one number enrolled in production and in Develop gave two QR codes
+      # with the same issuer and label, so the authenticator app replaced one entry with the other.
+      test "outside production the issuer names the Railway environment" do
+        issuer, label = issuer_and_label_in(railway_environment: "Develop")
+
+        assert_equal "Lnclass (Develop)", issuer
+        assert_equal "Lnclass (Develop):0701020304", label
+      end
+
+      test "in the Railway production environment the issuer stays Lnclass" do
+        issuer, label = issuer_and_label_in(railway_environment: "production")
+
+        assert_equal "Lnclass", issuer
+        assert_equal "Lnclass:0701020304", label
+      end
+
+      test "without a Railway environment the Rails environment names the issuer" do
+        issuer, = issuer_and_label_in(railway_environment: nil)
+
+        assert_equal "Lnclass (test)", issuer
+      end
+
+      test "a colon in the environment name cannot split the issuer from the label" do
+        issuer, label = issuer_and_label_in(railway_environment: "pr:42")
+
+        assert_equal "Lnclass (pr42)", issuer
+        assert_equal "Lnclass (pr42):0701020304", label
       end
 
       # Chantier enrolement-secret-stable: reopening the page must not turn the QR code already shown into a wrong one.

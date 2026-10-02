@@ -77,6 +77,12 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_#{school.public_id} a[data-turbo-frame=_top][href='#{school_path(school.public_id)}']",
                   text: "Lycée Classique d'Abidjan"
     assert_select "#school_#{school.public_id}", text: /LCA/
+    # Demande du porteur (2026-10-01) : le code d'établissement est dans le tableau, groupé comme sur la fiche, avec son aide.
+    assert_select "thead th", text: /#{I18n.t('teams.schools.index.columns.school_code')}/
+    assert_select "thead details summary .sr-only", text: I18n.t("components.info_tip.label",
+                                                                 label: I18n.t("teams.schools.index.columns.school_code"))
+    assert_select "#school_#{school.public_id} td.font-mono",
+                  text: Entities::School::SchoolCode.display(Orm::School.find(school.id).school_code)
     assert_select "#school_#{school.public_id}", text: /Abidjan 1/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('school_types.mixed')}/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('teams.schools.cycles.first')}/
@@ -241,7 +247,21 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 5)
 
     get schools_path
-    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5"
+    assert_select "#school_#{school.public_id} td:nth-child(7)", text: "5" # « Classes », après le code d'établissement
+  end
+
+  # UDR-0056 §3.2: the block moved to shared/_level_classrooms, shared with the direction; the team's page is unchanged.
+  test "UDR-0056: the school page renders the shared « Classes par niveau » block, aimed at the team's routes" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+    partials = []
+    callback = ->(*, payload) { partials << payload[:identifier].delete_prefix("#{Rails.root}/app/views/") }
+
+    ActiveSupport::Notifications.subscribed(callback, "render_partial.action_view") { get school_path(school.public_id) }
+
+    assert_includes partials, "shared/_level_classrooms.html.erb"
+    assert_not_includes partials, "teams/schools/_level_classrooms.html.erb"
+    assert_select "#school_classrooms #school_level_classrooms"
   end
 
   test "UDR-0046: a draft school's block keeps « − » but offers no « + », and says why" do

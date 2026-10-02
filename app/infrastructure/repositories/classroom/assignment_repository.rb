@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
 # Rôle : assignations d'une classe ; résout la ressource (cours, fiche, exercice) par son type, sans association polymorphe
-# ADR  : 0035, 0048
+# ADR  : 0035, 0048, 0071
 module Repositories
   module Classroom
     class AssignmentRepository
@@ -43,6 +43,14 @@ module Repositories
         true
       end
 
+      # Un seul UPDATE (ADR-0071 §6) : statut, archived_at et archived_by_id ensemble, la contrainte
+      # classroom_assignments_archived_at_iff_archived tient.
+      def archive_all_by_teacher_in_school(teacher_id:, school_id:, archived_by_id:, at:)
+        Orm::ClassroomAssignment.where(assigned_by_id: teacher_id, status: "active",
+                                       classroom_id: Orm::Classroom.where(school_id:).select(:id))
+                                .update_all(status: "archived", archived_by_id:, archived_at: at, updated_at: at)
+      end
+
       def resolve_assignable(type:, key:)
         case type
         when "Course" then resolve_course(key)
@@ -55,23 +63,24 @@ module Repositories
 
       def resolve_course(slug)
         record = Orm::Course.find_by(slug:)
-        record && resolved("Course", record, key: record.slug, name: record.name, parents: [])
+        record && resolved("Course", record, key: record.slug, name: record.name, parents: [], course: record)
       end
 
       def resolve_essential(slug)
         record = Orm::Essential.includes(:course).find_by(slug:)
-        record && resolved("Essential", record, key: record.slug, name: record.name, parents: [ record.course ])
+        record && resolved("Essential", record, key: record.slug, name: record.name, parents: [ record.course ], course: record.course)
       end
 
       def resolve_exercise(public_id)
         record = Orm::Exercise.includes(essential: :course).find_by(public_id:)
         record && resolved("Exercise", record, key: record.public_id, name: record.title,
-                                                parents: [ record.essential, record.essential.course ])
+                                                parents: [ record.essential, record.essential.course ], course: record.essential.course)
       end
 
-      def resolved(type, record, key:, name:, parents:)
+      def resolved(type, record, key:, name:, parents:, course:)
         ResolvedAssignable.new(assignable: Entities::Classroom::Assignable.new(type:, id: record.id, key:, name:),
-                               status: record.status, parents_published: parents.all? { |parent| parent.status == "published" })
+                               status: record.status, parents_published: parents.all? { |parent| parent.status == "published" },
+                               course_level: { level_id: course.level_id, series_id: course.series_id })
       end
 
       def assignable_of(type, id)

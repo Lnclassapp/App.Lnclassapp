@@ -79,3 +79,21 @@ Le catalogue est la porte d'entrée de l'élève, de l'enseignant et de l'équip
 - **Catalogue** : le formulaire des filtres (`form#courses-filters`) gagne un champ `q` (`ui_field as: :search`, « Rechercher un cours ») sur le nom du cours, sans casse ni accents, et porte le contrôleur `search` : envoi 300 ms après la dernière frappe (URL remplacée), envoi au changement des listes niveau et matière ; « Filtrer » reste sans JavaScript. État vide « Aucun cours ne correspond », avec « Effacer la recherche ». Pas de pagination dans ce chantier.
 - **Page cours** : le fil d'Ariane complet (« Cours › Matière › Nom ») est remplacé par le lien de retour « Cours » (UDR-0054 §3.2).
 - Titres par `page_title` : « Cours · <espace> · Lnclass », « <nom du cours> · <espace> · Lnclass ».
+
+## Amendement du 2026-10-01 — l'élève ne voit que son niveau
+
+*Décision du porteur du 2026-10-01 : « un élève de la TleD ne peut voir que les cours de la TleD uniquement ». Elle remplace, pour l'élève, la règle 2 du §2 (« publié seulement ») : l'élève ne voit que le publié **de son niveau**. Chantier [`catalogue-niveau-eleve`](../../chantiers/catalogue-niveau-eleve/memo.md).*
+
+- **Niveau de l'élève** : le niveau (et la série) de ses classes **actives de l'année scolaire en cours**, dont il n'est pas sorti (`left_at` vide).
+- **Cours lisibles** : ceux du niveau d'une de ces classes, **sans série** (communs à toutes les séries du niveau) ou **de la série de cette classe**. Un élève de Tle D lit la Tle D et la Tle sans série, jamais la Tle C ni un autre niveau.
+- **Partout** : la règle vaut pour le catalogue, la page d'un cours, d'une fiche, d'un exercice, et le démarrage d'une session. Hors niveau, la réponse est **404**, comme pour un brouillon, sans rien confirmer.
+- **Sessions et accueil** *(revue de sécurité de la mise en production, même jour)* : une session ouverte avant la règle, sur un exercice hors niveau, ne se joue plus. Elle ne reçoit plus de réponse et ne montre plus son résultat à son élève (404). Ce contrôle passe après celui du propriétaire : la session d'un autre élève reste un 403. L'accueil de l'élève ne liste plus les exercices assignés, les sessions terminées ni les fiches à revoir hors de son niveau (`Queries::Catalog::AudienceFilter`, la même règle en SQL que le catalogue).
+- **Sans classe de l'année** : le catalogue est vide et le dit (« Rejoins ta classe pour voir tes cours »).
+- **Catalogue de l'élève** : le filtre « Niveau » disparaît, puisqu'il n'en voit qu'un. Le sous-titre devient « Les cours de ton niveau, par matière. »
+- **Autres rôles** : l'enseignant, la direction et l'équipe lisent toujours tous les niveaux. L'enseignant en a besoin pour assigner.
+- **Assignation** *(décision du porteur, même jour)* : un contenu ne s'assigne qu'à une classe de son niveau, et de sa série si le cours en a une. Cela vaut pour le cours, la fiche et l'exercice. Sinon, `AssignResource` répond `:conflict` (`other_level`), en 422, avec un toast qui dit pourquoi, et rien n'est écrit. La règle est la même que pour la lecture (`LevelAudience`, avec la paire de la classe) : un élève ne reçoit jamais un contenu qu'il ne pourrait pas ouvrir. Les assignations hors niveau faites avant cette règle restent en base, mais l'élève ne peut pas les ouvrir.
+- **Vérification** :
+  - `test/domain/entities/catalog/level_audience_test.rb` ;
+  - `test/domain/policies/catalog/read_own_level_policy_test.rb` ;
+  - les tests de `StudentAudienceQuery`, `CourseLevelQuery` et `CourseCatalogQuery` ;
+  - `test/controllers/catalog/student_level_test.rb` (les cinq portes).

@@ -37,7 +37,8 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     end
     assert_select toggle_id("Essential", @mitose.slug), text: including(toggle(:assign))
     assert_select "a[href='#{classroom_essential_path(@classroom.public_id, @course.slug, @meiose.slug)}']", text: "La méiose"
-    assert_select "#classroom_course_essentials", text: including(tl("exercises", count: 1))
+    assert_select "#classroom_course_essentials_title", text: "Essentielles de la leçon"
+    assert_select "#classroom_course_essentials", text: /exercice/, count: 0
   end
 
   test "an assigned course shows « Assigné »" do

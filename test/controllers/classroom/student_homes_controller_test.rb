@@ -7,7 +7,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"),
                                   level: create_level(name: "Tle"))
     @student = create_student(classroom: @classroom, first_name: "Aya", last_name: "Kouassi")
-    @course = create_course(name: "Génétique", material: create_material(name: "SVT", category: "science"))
+    # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours.
+    @course = create_course(name: "Génétique", material: create_material(name: "SVT", category: "science"), level: @classroom.level)
     @essential = create_essential(course: @course, name: "La méiose")
   end
 
