@@ -1,6 +1,6 @@
 <%# 🌐 UI · homepage/index — landing publique de Lnclass %>
 <%# Rôle : présente le contenu V1 et oriente chaque rôle par sa modale (TR-01) ; source de l'identité visuelle %>
-<%# UDR  : 0012, 0059, 0005, 0054, 0063 (pied de page) · ADR : 0049 · entrées dans le héros seulement (UDR-0059) %>
+<%# UDR  : 0012, 0059, 0005, 0054, 0063, 0064 (pied de page) · ADR : 0049 · entrées dans le héros seulement (UDR-0059) %>
 <% page_title t(".page_title") %>
 
 <div class="min-h-screen bg-paper font-sans text-ink antialiased">
@@ -157,8 +157,9 @@
         <li><a href="#comment" class="hover:text-ink"><%= t(".nav.how") %></a></li>
       </ul>
     </div>
-    <%# UDR-0063 §3.4 : seconde liste, les pages publiques en ligne seulement ; absente tant qu'aucune ne l'est %>
-    <% if (public_links = public_page_links).any? %>
+    <%# UDR-0063 §3.4, UDR-0064 §3.5 : seconde liste, « Plus sur Lnclass » : « Blog » dès un article publié, puis les pages
+        publiques en ligne seulement ; absente tant qu'aucun lien n'existe %>
+    <% if (public_links = [ blog_link, *public_page_links ].compact).any? %>
       <div class="mx-auto max-w-6xl px-5 pb-8">
         <ul id="public_pages" aria-label="<%= t(".footer.public_pages") %>"
             class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink/60 sm:justify-end">
