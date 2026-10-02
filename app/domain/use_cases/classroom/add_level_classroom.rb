@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::AddLevelClassroom
 # Rôle : « + » du bloc « Classes par niveau » : crée la classe suivante d'un niveau/série, nommée comme au barème, et la trace
-# ADR  : 0028, 0030, 0041, 0059 · UDR : 0046
+# ADR  : 0028, 0030, 0041, 0059, 0071 · UDR : 0046, 0056
 module UseCases
   module Classroom
     class AddLevelClassroom
@@ -17,15 +17,15 @@ module UseCases
         @clock = clock
       end
 
-      # series_slug nil pour un niveau sans série.
-      # → Result(Classroom) | :forbidden | :not_found | :invalid (niveau, série, nom trop long)
+      # series_slug nil pour un niveau sans série. policy : ManageSchoolStructurePolicy, appelée une fois l'établissement lu.
+      # → Result(Classroom) | :not_found | :forbidden | :invalid (niveau, série, nom trop long)
       #   | :conflict (errors: { base: [:school_inactive | :school_draft | :name_taken] })
       def call(actor:, school_public_id:, level_slug:, series_slug:)
-        allowed = @policy.call(actor:)
-        return allowed if allowed.failure?
-
         school = @schools.find_by_public_id(public_id: school_public_id)
         return Shared::Result.failure(:not_found) if school.nil?
+
+        allowed = @policy.call(actor:, school:)
+        return allowed if allowed.failure?
         return conflict(:school_inactive) if school.status == "inactive"
         # Comme « Ajouter une classe » (décision du porteur, 2026-09-27) : un brouillon est activé d'abord.
         return conflict(:school_draft) if school.status == "draft"

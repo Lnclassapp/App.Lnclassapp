@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::Classroom::AssignResource
-# Rôle : l'enseignant de la classe, ou l'équipe, assigne un contenu publié ; chaque assignation est une nouvelle ligne
+# Rôle : l'enseignant de la classe, ou l'équipe, assigne un contenu publié du niveau de la classe ; une ligne par assignation
 # ADR  : 0026, 0028, 0035, 0048
 module UseCases
   module Classroom
@@ -16,7 +16,7 @@ module UseCases
 
       # dto : Dtos::Classroom::AssignmentInput.
       # → Result(Assigned) | :not_found (classe, ou ressource absente ou non lisible) | :forbidden | :invalid
-      #   | :conflict (base: already_assigned)
+      #   | :conflict (base: already_assigned | other_level)
       def call(actor:, dto:)
         classroom = @classrooms.find_by_public_id(public_id: dto.classroom_public_id)
         return Shared::Result.failure(:not_found) if classroom.nil?
@@ -28,11 +28,17 @@ module UseCases
         # Un contenu non publié, ou dont un parent ne l'est plus, ne s'assigne pas (ADR-0035).
         resolved = @assignments.resolve_assignable(type: dto.assignable_type, key: dto.assignable_key)
         return Shared::Result.failure(:not_found) if resolved.nil? || !resolved.readable?
+        # UDR-0013, amendement du 2026-10-01 : la règle de lecture de l'élève ; un contenu d'un autre niveau ne s'assigne pas.
+        return Shared::Result.failure(:conflict, errors: { base: [ :other_level ] }) unless same_level?(classroom, resolved)
 
         create(actor, classroom, resolved.assignable)
       end
 
       private
+
+      def same_level?(classroom, resolved)
+        Entities::Catalog::LevelAudience.new(pairs: [ [ classroom.level_id, classroom.series_id ] ]).covers?(**resolved.course_level)
+      end
 
       # L'index partiel actif tranche une concurrence perdue : le repository la traduit aussi en :conflict.
       def create(actor, classroom, assignable)

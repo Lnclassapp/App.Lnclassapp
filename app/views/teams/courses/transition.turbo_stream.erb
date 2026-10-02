@@ -1,5 +1,5 @@
 <%# 🌐 UI · teams/courses/transition — publication ou archivage d'un cours, rendu par publish et archive %>
-<%# Rôle : toast et panneau de statut remplacé ; refus (422) : toast d'erreur et panneau re-rendu dans son état relu %>
+<%# Rôle : toast et statut et entrées du menu ⋮ remplacés ; refus (422) : toast d'erreur, statut et menu re-rendus dans son état relu %>
 <%# ADR  : 0035 · UDR : 0006, 0014 %>
 <% if @refused %>
   <%= turbo_stream_toast t(".refused", name: @course.name), type: :error %>
@@ -9,3 +9,4 @@
 <%= turbo_stream.replace "content_status_course_#{@course.slug}" do %>
   <%= content_status_panel(record: @course) %>
 <% end %>
+<%= turbo_stream.replace "content_transitions_course_#{@course.slug}", content_transition_items(record: @course) %>

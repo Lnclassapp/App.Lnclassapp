@@ -3,9 +3,12 @@
 # ADR  : 0026, 0028, 0035 · UDR : 0006, 0007, 0015
 module Catalog
   class EssentialsController < AuthenticatedController
+    include ReadsOwnLevel
+
     def show
       essential = Repositories::Catalog::EssentialRepository.new.find_by_slug(slug: params[:slug])
       return render_not_found if essential.nil?
+      return if refuse_out_of_level(course_id: essential.course_id)
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: essential),
                     success: ->(_) { load_page(essential) }

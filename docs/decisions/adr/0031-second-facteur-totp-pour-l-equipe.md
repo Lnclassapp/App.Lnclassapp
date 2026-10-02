@@ -130,3 +130,18 @@ end
 3. **Liste close** : `test/controllers/concerns/secret_response_test.rb` énumère les actions à secret ; un écran à secret non marqué, ou une marque hors liste, fait échouer la suite. Tout nouvel écran qui affiche un secret à usage unique s'y ajoute.
 
 Actions marquées au 2026-09-29 : `Identity::SecondFactorEnrollmentsController#new/#create`, `Identity::PinRecoveryCodesController#create`, `Teams::InvitationsController#create`, `Teams::StaffInvitationsController#create`.
+
+---
+
+## Amendement du 2026-09-30 — l'émetteur du QR code nomme l'environnement
+
+**Constat** (chantier [`totp-emetteur-par-environnement`](../../chantiers/totp-emetteur-par-environnement/memo.md)). Le QR code portait partout l'émetteur fixe « Lnclass » et le numéro du compte comme libellé. Un même numéro activé en production puis en `Develop` donnait donc deux entrées au même nom, avec deux secrets. L'application d'authentification remplaçait la première par la seconde, et la production répondait « Code incorrect. ». Les secrets, eux, restaient propres à chaque environnement.
+
+**Décision** (porteur, 2026-09-30).
+
+1. **L'émetteur est « Lnclass » en production** et **« Lnclass (<environnement>) » ailleurs**, par exemple « Lnclass (Develop) » ou « Lnclass (Staging) ». Le libellé du compte reste le numéro.
+2. **Le nom de l'environnement** vient de `RAILWAY_ENVIRONMENT_NAME`, fourni par Railway à chaque déploiement. Hors Railway (poste de développement, CI, tests), il vient de l'environnement Rails. Un nom `production`, quelle que soit sa casse, donne « Lnclass ».
+3. **Un « : » dans le nom est retiré** : c'est le séparateur entre l'émetteur et le libellé dans l'adresse `otpauth://`.
+4. **Les activations déjà faites gardent leur entrée.** Un membre dont l'entrée a été remplacée fait réinitialiser son second facteur par un autre membre de l'équipe (§4), puis le réactive.
+
+Vérifié par `test/infrastructure/repositories/identity/second_factor_repository_test.rb` (émetteur en `Develop`, en `production`, sans variable Railway, avec un « : »).

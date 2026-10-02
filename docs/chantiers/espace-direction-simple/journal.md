@@ -135,3 +135,11 @@ Fait :
 - Après connexion, la direction arrive encore sur l'écran d'attente : son accueil « Travail des élèves » est au Lot C. Le test système de DS-03 ne vérifie donc pas la page d'arrivée, seulement l'absence de second facteur et le profil.
 
 Portes, lancées une fois : `bin/rubocop` 0 offense (1000 fichiers) ; `CI=1 PARALLEL_WORKERS=2 bin/rails test` 2367 tests, 0 échec, 0 erreur, 7 skips préexistants (`PERF=1`), couverture 100 % lignes (8552/8552) et branches (2095/2095) ; `COVERAGE=0 bin/rails test:system` 196 tests, **3 échecs et 2 erreurs de délai** (`boucle_pedagogique_test`, `teams/essential_management_test`, `identity/cold_start_test`, `error_paths_test`, `school/classrooms_by_level_test`) sous une charge de 21 à 26 (trois lots en parallèle sur la machine), aucun dans un fichier touché par le lot ; relancés seuls pour diagnostic, ces 5 fichiers passent (27 tests, 0 échec) ; `bin/brakeman -q --no-pager` 0 alerte.
+
+## 2026-09-30 — Après la mise en production : la règle d'invitation avant l'établissement
+
+- **Constat** (revue de sécurité du passage Staging → main, gravité basse) : sur `create`, `Teams::StaffInvitationsController` cherchait l'établissement avant d'appliquer `InviteSchoolStaffPolicy`, qui n'était vérifiée que dans le use case.
+- **Conséquence** : un membre de l'équipe qui ne peut pas inviter (ni `admin`, ni `field`) recevait 404 pour un `public_id` inconnu et 403 pour un établissement existant. La réponse disait donc lequel existe. L'impact était nul en pratique, puisque ce membre lit déjà la liste des établissements.
+- **Correction** : le `before_action :authorize_invitation` s'applique à `new` **et** à `create`, avant `load_school`. Le use case réapplique la règle (ADR-0028).
+- **Test** : un membre `content` reçoit 403, et non 404, pour un établissement inconnu, sur `new` comme sur `create`. Écrit d'abord, il a échoué sur `create` (404) avant le correctif.
+- **Deuxième point de la revue** (entropie du jeton d'invitation) : vérifié, rien à corriger. `SecureRandom.base58(32)` donne environ 187 bits. Seule l'empreinte HMAC est gardée en base, le lien sert une seule fois, et les essais sont limités à 5 par minute.

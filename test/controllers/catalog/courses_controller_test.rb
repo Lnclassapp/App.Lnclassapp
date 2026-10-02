@@ -34,7 +34,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # ── Catalogue ──────────────────────────────────────────────────────────────
 
   test "a student sees the published courses only, as cards, without team actions nor status" do
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
 
     get courses_path
 
@@ -71,7 +71,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "the filters list the levels and materials, and keep the chosen ones" do
-    sign_in_as create_student
+    # Le filtre par niveau et la recherche dans tous les niveaux : un enseignant (l'élève ne voit que son niveau).
+    sign_in_as create_teacher
 
     get courses_path(material: @svt.slug)
 
@@ -85,7 +86,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "the filters form searches while typing: a « q » search field, lists sent on change, « Filtrer » kept without JS (FU-47)" do
-    sign_in_as create_student
+    # Le filtre par niveau et la recherche dans tous les niveaux : un enseignant (l'élève ne voit que son niveau).
+    sign_in_as create_teacher
 
     get courses_path(q: "généti")
 
@@ -104,7 +106,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test "the search ignores case and accents, and combines with the filters (FU-47)" do
     create_course(name: "Mathématiques 3e", level: @seconde, material: @philo)
-    sign_in_as create_student
+    # Le filtre par niveau et la recherche dans tous les niveaux : un enseignant (l'élève ne voit que son niveau).
+    sign_in_as create_teacher
 
     get courses_path(q: "MATHEMATIQUES"), headers: { "Turbo-Frame" => "courses" }
     assert_select "#courses_list > li", 1
@@ -115,7 +118,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "no course matching the search offers « Effacer la recherche » (FU-47)" do
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
 
     get courses_path(q: "zzz"), headers: { "Turbo-Frame" => "courses" }
 
@@ -125,7 +128,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "a request from the courses frame receives the frame only, filtered" do
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
 
     get courses_path(level: @tle.slug, material: @philo.slug), headers: { "Turbo-Frame" => "courses" }
 
@@ -138,7 +141,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "no course matching the filters shows a way to clear them; an empty catalogue says so" do
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
 
     get courses_path(level: @seconde.slug)
 
@@ -153,7 +156,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test "the colour and icon of a subject come from its category, never from its name (CA-26)" do
     create_course(name: "Analyse", level: @tle, material: create_material(name: "Mathématiques", category: "literature"))
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
 
     get courses_path
 
@@ -171,7 +174,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions")
     create_exercise(essential: meiose)
     create_essential(course: @course, name: "Fiche en brouillon", status: "draft")
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
 
     get course_path(@course.slug)
 
@@ -191,7 +194,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_essentials li", 1
     assert_select "#course_essentials a[href='#{course_essential_path(@course.slug, meiose.slug)}']", text: "La méiose"
     assert_select "#course_essentials", text: including("Deux divisions")
-    assert_select "#course_essentials", text: including(tl("essential_row.exercises", count: 1))
+    # Épuration (2026-09-30) : « Essentielles de la leçon », sans le nombre d'exercices de chaque fiche.
+    assert_select "#course_essentials_title", text: "Essentielles de la leçon"
+    assert_select "#course_essentials", text: /exercice/, count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "#course-actions-menu", 0
@@ -199,7 +204,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "a draft or archived course, or an unknown slug, answers 404 outside the team (CA-04)" do
-    [ create_student, create_teacher ].each do |user|
+    [ create_student_for(@course), create_teacher ].each do |user|
       sign_in_as user
       [ @draft, @archived ].each do |course|
         get course_path(course.slug)
@@ -210,7 +215,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       sign_out
     end
 
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
     get course_path("inconnu")
     assert_response :not_found
   end
@@ -223,9 +228,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#content_status_course_#{@draft.slug}", text: including(status_label(:draft)) do
-      assert_select "form[action='#{publish_teams_course_path(@draft.slug)}']"
+      assert_select "form, a", 0
     end
     assert_select "#course-actions-menu" do
+      assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_teams_course_path(@draft.slug)}']"
+      assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_course_path(@draft.slug)}']",
+                    text: I18n.t("catalog.content_status.actions.publish_all")
       assert_select modal_link(edit_teams_course_path(@draft.slug)), text: tl("role_actions.edit")
       assert_select modal_link(new_teams_course_essential_path(@draft.slug)), text: tl("role_actions.new_essential")
       assert_select modal_link(new_teams_import_path(kind: "essentials", course: @draft.slug)),
@@ -261,7 +269,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test "a course without essential sheet nor content shows the empty state and no content section" do
     bare = create_course(name: "Cours vide", content: nil)
-    sign_in_as create_student
+    sign_in_as create_student_for(bare)
 
     get course_path(bare.slug)
 
@@ -273,7 +281,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     Orm::Course.find(@course.id).update!(
       content: "<p onclick=\"alert(1)\">Texte <strong>gras</strong></p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
     )
-    sign_in_as create_student
+    sign_in_as create_student_for(@course)
 
     get course_path(@course.slug)
 

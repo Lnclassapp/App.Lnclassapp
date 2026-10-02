@@ -1,9 +1,11 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
-<%# Rôle : recherche par nom pendant la frappe et filtres niveau et matière qui visent le frame « courses », seul renvoyé à ses requêtes ; équipe : création et import en modale %>
+<%# Rôle : recherche par nom et filtres (niveau sauf pour l'élève, matière) qui visent le frame « courses » ; élève : son niveau seul ; équipe : création et import %>
 <%# ADR  : 0028, 0035 · UDR : 0006, 0013, 0054 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "courses" %>
 <% team = current_actor.team? %>
+<%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
+<% student = current_actor.student? %>
 <% unless list_frame_request? %>
   <% if team %>
     <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
@@ -12,14 +14,14 @@
       <%= ui_button t(".new_course"), href: new_teams_course_path, icon: "plus", data: { turbo_frame: "modal" } %>
     <% end %>
   <% else %>
-    <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+    <%= ui_page_header title: t(".title"), subtitle: t(student ? ".student_subtitle" : ".subtitle") %>
   <% end %>
 
   <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
   <% selects = {
-       level: [ [ t(".filters.all_levels"), "" ], *filter_options.levels.map { [ it.name, it.slug ] } ],
+       level: ([ [ t(".filters.all_levels"), "" ], *filter_options.levels.map { [ it.name, it.slug ] } ] unless student),
        material: [ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ]
-     } %>
+     }.compact %>
   <%# Recherche pendant la frappe (UDR-0054 §3.9) : le champ reste hors du frame ; « Filtrer » sert sans JavaScript. %>
   <%= form_with url: courses_path, method: :get, id: "courses-filters", html: { role: "search", "aria-label": t(".filters.label") },
                 data: { turbo_frame: "courses", turbo_action: "advance", controller: "search" },
@@ -60,6 +62,8 @@
         <%= ui_empty_state title: t(".no_match_title"), description: t(".no_match_description"), icon: "magnifying-glass" do %>
           <%= ui_button t(".clear_search"), href: courses_path, variant: :secondary, icon: "x-mark" %>
         <% end %>
+      <% elsif student && student_audience.empty? %>
+        <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
       <% else %>
         <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
       <% end %>

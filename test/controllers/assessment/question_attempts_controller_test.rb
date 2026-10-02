@@ -8,8 +8,9 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
   ERRORS = "activemodel.errors.models.dtos/assessment/attempt_input.attributes".freeze
 
   setup do
-    @student = create_student(classroom: create_classroom)
     @exercise = create_exercise(title: "Méiose", questions: 2)
+    # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours.
+    @student = create_student_for(@exercise.essential.course)
     @first, @second = @exercise.questions.order(:position).to_a
     @first.update!(explanation: "La méiose donne quatre cellules.")
     @session = create_exercise_session(student: @student, exercise: @exercise)

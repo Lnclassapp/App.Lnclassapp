@@ -8,9 +8,10 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   GRADING = Entities::Assessment::Grading
 
   setup do
-    @classroom = create_classroom
-    @student = create_student(classroom: @classroom, first_name: "Mariam", last_name: "Traoré")
     @essential = create_essential(name: "Division cellulaire")
+    # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours.
+    @classroom = create_classroom(level: @essential.course.level)
+    @student = create_student(classroom: @classroom, first_name: "Mariam", last_name: "Traoré")
     @exercise = create_exercise(essential: @essential, title: "Méiose", questions: 2)
     @first, @second = @exercise.questions.order(:position).to_a
     @first.update!(content: "Combien de cellules donne la méiose ?", explanation: "Quatre cellules filles.")

@@ -45,6 +45,10 @@ module Repositories
         Orm::Essential.where(course_id:).maximum(:position).to_i + 1
       end
 
+      def draft_slugs(course_id:)
+        Orm::Essential.where(course_id:, status: "draft").order(:position, :id).pluck(:slug)
+      end
+
       def taken_slugs
         Orm::Essential.pluck(:slug).to_set
       end

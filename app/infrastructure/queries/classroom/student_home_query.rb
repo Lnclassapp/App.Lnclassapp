@@ -1,5 +1,5 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
-# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe principale, exercices assignés publiés et progression, activité, lacunes
+# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, exercices assignés publiés de son niveau, progression, activité, lacunes
 # ADR  : 0026, 0033, 0035, 0043, 0048 · UDR : 0010
 module Queries
   module Classroom
@@ -33,7 +33,8 @@ module Queries
 
       # Lue seule par le frame différé de l'activité récente.
       def recent_sessions(student_id:)
-        Orm::ExerciseSession.joins(:exercise).where(student_id:, status: "completed")
+        Orm::ExerciseSession.joins(exercise: { essential: :course }).where(student_id:, status: "completed")
+                            .merge(own_level(student_id))
                             .order(completed_at: :desc, id: :desc).limit(RECENT_SESSIONS)
                             .pluck(:public_id, "exercises.title", :score_percent, :completed_at)
                             .map { |public_id, exercise_title, score_percent, completed_at| SessionRow.new(public_id:, exercise_title:, score_percent:, completed_at:) }
@@ -41,12 +42,18 @@ module Queries
 
       private
 
+      # UDR-0013, amendement du 2026-10-01 : l'accueil ne liste que des contenus que l'élève peut ouvrir, de son niveau.
+      # Une assignation, une session ou une lacune antérieure à la règle et hors niveau n'y apparaît plus.
+      def own_level(student_id)
+        @own_level ||= Queries::Catalog::AudienceFilter.courses(Queries::Catalog::StudentAudienceQuery.new.call(student_id:))
+      end
+
       # Le plus récemment assigné d'abord ; un exercice atteint par plusieurs assignations n'apparaît qu'une fois.
       def assigned_exercises(classroom_id, student_id)
         assigned_at = Orm::ClassroomAssignment.where(classroom_id:, status: "active")
                                               .pluck(:assignable_type, :assignable_id, :assigned_at)
                                               .to_h { |type, id, at| [ [ type, id ], at ] }
-        rows = published_exercises(assigned_at.keys).pluck(*EXERCISE_COLUMNS).sort_by do |id, *, essential_id, course_id, essential_position, position|
+        rows = published_exercises(assigned_at.keys).merge(own_level(student_id)).pluck(*EXERCISE_COLUMNS).sort_by do |id, *, essential_id, course_id, essential_position, position|
           latest = [ [ "Exercise", id ], [ "Essential", essential_id ], [ "Course", course_id ] ].filter_map { assigned_at[it] }.max
           [ -latest.to_f, course_id, essential_position, position ]
         end
@@ -80,6 +87,7 @@ module Queries
       def pending_gaps(student_id)
         Orm::KnowledgeGap.joins(essential: :course)
                          .where(student_id:, status: "pending", essentials: { status: "published" }, courses: { status: "published" })
+                         .merge(own_level(student_id))
                          .order(created_at: :desc, id: :desc).pluck("essentials.name", "essentials.slug", "courses.slug")
                          .map { |essential_name, essential_slug, course_slug| GapRow.new(essential_name:, essential_slug:, course_slug:) }
       end

@@ -24,7 +24,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   def t(key, **) = I18n.t(key, **)
 
   test "a student filters the catalogue by subject without a page reload, then opens a course whose formula KaTeX renders" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle, le niveau des deux cours.
+    sign_in_as create_student_for(@course)
     visit courses_path
     assert_selector "#courses_list > li", count: 2
 
@@ -100,11 +101,13 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     end
 
     assert_no_page_reload do
-      within("#content_status_course_#{course.slug}") { click_on t("catalog.content_status.actions.publish") }
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish")
       assert_toast t("teams.courses.transition.published", name: "Mutations")
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
 
-      within("#content_status_course_#{course.slug}") { click_on t("catalog.content_status.actions.archive") }
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.archive")
       assert_toast t("teams.courses.transition.archived", name: "Mutations")
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.archived")
     end
@@ -112,8 +115,29 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     assert_empty page.evaluate_script("window.cspViolations")
   end
 
+  # ADR-0035, amendement du 2026-10-01 : « Tout publier » depuis le menu ⋮ ; la page fusionnée montre chaque statut publié.
+  test "the team publishes a draft course with its sheets and exercises from the ⋮ menu, without a page reload" do
+    course = create_course(name: "Mutations", status: "draft")
+    essential = create_essential(course:, name: "Les mutations", status: "draft")
+    create_exercise(essential:, status: "draft")
+    sign_in_as create_team_member
+    visit course_path(course.slug)
+
+    assert_no_page_reload do
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish_all")
+      assert_toast t("teams.publish_cascade.done.course", name: "Mutations",
+                                                          essentials: t("teams.publish_cascade.essentials", count: 1),
+                                                          exercises: t("teams.publish_cascade.exercises", count: 1))
+      assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
+      assert_selector "#essential_#{essential.slug}", text: t("catalog.content_status.published")
+    end
+    assert_equal %w[published published published], [ course, essential, essential.exercises.first ].map { it.reload.status }
+  end
+
   test "on a phone, the catalogue and the course page never scroll sideways" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
+    sign_in_as create_student_for(@course)
     with_mobile_viewport do
       [ courses_path, course_path(@course.slug) ].each do |path|
         visit path
