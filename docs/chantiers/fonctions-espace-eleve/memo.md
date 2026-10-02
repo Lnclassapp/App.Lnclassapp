@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — grill fait sur les échéances (Q1 à Q12) ; l'aide attend l'exemple de carte du porteur |
+| **Statut** | décision — grill clos (Q1 à Q14, 2026-10-02) |
 | **Ouvert le** | 2026-10-02 |
 | **Branche** | `ccr-93a43a40-3h3ty4` *(repartie de `Develop` le 2026-10-02, après la fusion d'`interface-epuree` phase 1)* |
 | **Programme** | — *(né du grill d'`interface-epuree`, Q8 ; probablement à découper en plusieurs chantiers au grill)* |
@@ -73,6 +73,8 @@ L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent
 | Q10 — Vacances et jours fériés ? | **On ignore** : l'échéance tombe le prochain jour de séance, même en vacances | Aucun calendrier scolaire à saisir. Un exercice peut paraître « en retard » pendant les vacances ; sans conséquence, puisque rien ne se ferme (Q5) |
 | Q11 — L'enseignant peut-il passer la question des jours ? | **Oui**, « Plus tard » : l'exercice est assigné sans échéance, et la question revient à la prochaine assignation à cette classe | Une assignation n'est jamais bloquée. Le formulaire d'assignation porte une étape facultative « jours de séance » tant que l'enseignant n'a pas renseigné ses jours pour la classe ; les jours restent modifiables ensuite (page de la classe) |
 | Q12 — Où l'enseignant voit-il les retards ? | **Sur l'exercice assigné**, dans le suivi de la classe : « 18 faits, dont 3 en retard · 7 pas encore faits », **avec la liste nominative des retardataires** | Le suivi d'une assignation gagne deux comptes et une liste d'élèves en retard, visible du seul enseignant de la classe (et de l'équipe), jamais d'un élève (UDR-0011). Policy et test de refus à prévoir |
+| Q13 — À quoi ressemble la carte d'aide ? | **Exemple fourni par le porteur** (capture d'une application de banque mobile, non versionnée : elle montre sa photo). Carte « Contactez-nous » qui monte du bas : poignée, croix de fermeture, fond assombri ; une ligne par option = icône dans un rond teinté, titre, ligne grise (horaires, délai de réponse), chevron. Options Lnclass : **FAQ**, **WhatsApp** (« Chatter avec le support »), **contact direct = appel téléphonique** au service client | UDR de la carte d'aide (bottom sheet sous `lg`, modale au-dessus, comme Q4). Données à fournir par le porteur : numéro d'appel, numéro WhatsApp, horaires du support. Liens `tel:` et `https://wa.me/<numéro>` ; aucun appel sortant ni dépendance côté serveur |
+| Q14 — Qui écrit et tient la FAQ ? | **Écrite dans l'application** : une première FAQ de 8 à 10 questions rédigée à partir des écrans existants, relue par le porteur ; toute modification passe par une PR | Page statique, textes dans les locales (`t(".key")`), aucune table ni écran d'administration. La FAQ doit suivre les écrans : elle entre dans la définition de « fini » des chantiers qui changent un parcours élève |
 
 ## Cas limites identifiés
 
@@ -87,6 +89,6 @@ L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent
 
 ## Questions encore ouvertes
 
-- **Carte d'aide** : l'exemple du porteur est attendu. Il dira ce que fait « contact direct » (appel, e-mail, formulaire ?), le numéro WhatsApp du support, et qui écrit et tient la FAQ.
+- **Carte d'aide** : numéro d'appel, numéro WhatsApp et horaires du support, à fournir par le porteur .
 - **Élève arrivé après l'échéance** : voir les cas limites.
 - **Écrans touchés par le retrait de l'assignation de cours et de fiches** : page cours, fiche, `_role_actions` ; UDR-0013 et 0015 à amender.
