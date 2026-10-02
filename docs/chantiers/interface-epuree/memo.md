@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — grill terminé le 2026-10-02 ; maquettes téléphone reçues le même jour, déclinaisons grands écrans à valider |
+| **Statut** | décision — grill terminé le 2026-10-02 ; maquettes téléphone reçues le même jour ; grands écrans : l'existant, épuré (Q11) |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `feature/interface-epuree` |
 | **Programme** | — *(hors plan de `refonte-application` ; précède le chantier `app-android`, ADR-0070)* |
@@ -40,10 +40,10 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 
 Dans [`maquettes/`](maquettes/) :
 
-| Écran | Téléphone (validé par le porteur, 2026-10-02) | Tablette et ordinateur (proposé, à valider) |
+| Écran | Téléphone (maquette du porteur, 2026-10-02) | Tablette et ordinateur |
 |---|---|---|
-| Homepage | `homepage-telephone.html` | `homepage-multi-ecrans.html` |
-| Accueil élève | `accueil-eleve-telephone.html` | `accueil-eleve-multi-ecrans.html` |
+| Homepage | `homepage-telephone.html` | l'écran actuel de l'application, épuré selon la règle (Q11) |
+| Accueil élève | `accueil-eleve-telephone.html` | l'écran actuel de l'application, épuré selon la règle (Q11) |
 
 Les maquettes montrent la cible complète. Ce qui repose sur une fonction absente (échéances, durée, paiement, annonces, audio) n'est pas construit dans ce chantier (Q8) : il attend `fonctions-espace-eleve`.
 
@@ -63,6 +63,7 @@ Les maquettes montrent la cible complète. Ce qui repose sur une fonction absent
 | Q8 — Plusieurs éléments de la maquette V2 reposent sur des fonctions qui n'existent pas encore (échéances et retards, durée d'un exercice, paiement et abonnement, annonces, lecture audio). Le memo exclut toute nouvelle fonctionnalité. Qu'en fait-on ? | **Interface seule.** Le chantier n'épure que ce qui existe déjà. | Ces éléments n'apparaissent pas encore : ni échéance ni signal de retard, ni durée, ni case Paiement, ni annonces, ni audio. Ils sont regroupés dans le chantier `fonctions-espace-eleve`, ouvert le 2026-10-02 à la demande du porteur. Tant que le paiement n'existe pas, la grille compte 7 cases (6 matières, Inviter). « À faire ensuite » reste trié par date d'assignation, la plus récente d'abord. La barre de la carte du haut compte les exercices faits sur les exercices assignés, sans notion de semaine. |
 | Q9 — Trois écrans de l'élève sont aussi vus par les autres rôles : l'écran de bienvenue, la connexion et la récupération du PIN. Les épurer change aussi ce que voient l'enseignant, la direction et l'équipe. Que fait-on ? | **Épurés pour tous les rôles**, dans ce chantier. | Exception assumée à Q1 : ces trois écrans communs suivent la règle pour tout le monde. L'écran de bienvenue a déjà sa maquette, validée par le porteur. On évite deux styles côte à côte sur le parcours d'entrée. |
 | Q10 — Sur grand écran, la grille aligne 6 éléments par rangée. Avec 7 cases (6 matières et Inviter), Inviter tombe seul sur une deuxième rangée. Que fait-on ? | **On accepte 6 + 1.** | Pas de cas particulier : la grille garde 6 colonnes sur grand écran et 4 sur téléphone, quel que soit le nombre de cases. Quand le paiement arrivera (`fonctions-espace-eleve`), la deuxième rangée aura 2 cases. |
+| Q11 — Déclinaisons grand écran des maquettes téléphone proposées le 2026-10-02 : les retient-on ? | **Non.** Les versions grand écran actuelles de l'application sont bonnes : on les garde et on les épure seulement. Sur téléphone, ce sont les maquettes du porteur qui s'appliquent. | Deux mises en page selon la largeur : sous le seuil téléphone, la maquette du porteur ; au-dessus, la mise en page actuelle, épurée selon la règle (Q2, Q3, Q4), sans nouvelle maquette. Les propositions de Q6 et Q10 sur la grille à 6 colonnes en grand écran tombent. Le seuil exact se fixe dans la décision d'interface. |
 
 ## Cas limites identifiés
 
@@ -73,10 +74,10 @@ Les maquettes montrent la cible complète. Ce qui repose sur une fonction absent
 - **Élève du 2nd cycle** : la case EDHC devient Philosophie (Q5).
 - **Nom d'établissement trop long** dans l'en-tête : il passe à sa forme courte (sigle) plutôt que de déborder ou d'être coupé au milieu.
 - **Exercice archivé ou retiré** alors qu'il figurait dans « À faire » : il disparaît de la liste, comme aujourd'hui.
-- **Petit téléphone (360 px) et grand écran** : grille de 4 colonnes sur téléphone, 6 sur tablette et ordinateur, une dernière rangée incomplète acceptée (Q6, Q10).
+- **Petit téléphone (360 px)** : grille de 4 colonnes, une dernière rangée incomplète acceptée (Q10). Sur tablette et ordinateur, la mise en page actuelle s'applique, épurée (Q11).
 
 ## Questions encore ouvertes
 
-- Déclinaisons tablette et ordinateur de la homepage et de l'accueil élève, proposées le 2026-10-02 dans `maquettes/` : à valider par le porteur avant la décision d'interface.
+- Seuil entre la mise en page téléphone et la mise en page grand écran : 768 px proposé, à confirmer dans la décision d'interface.
 - Message d'encouragement de la carte « Ma classe » : texte unique, ou plusieurs textes selon la situation (rien d'assigné, ou tout est fait) ?
 - Un niveau ou une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : case masquée, ou grille à 7 cases ?
