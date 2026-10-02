@@ -52,12 +52,13 @@ class Communication::PagesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "no page is online yet: the list is closed, frozen and empty" do
-    assert_empty CONTROLLER::ONLINE
+  # Lot Z, décision du porteur du 2026-10-02 : les quatre pages sont en ligne, avant la relecture des juristes.
+  test "the four pages are online: the list is closed, frozen and names only pages of PAGES" do
+    assert_equal %i[mission privacy terms sales_terms], CONTROLLER::ONLINE
     assert_predicate CONTROLLER::ONLINE, :frozen?
     assert_equal %i[mission privacy terms sales_terms], CONTROLLER::PAGES
     assert_empty CONTROLLER::ONLINE - CONTROLLER::PAGES, "ONLINE ne nomme que des pages de PAGES"
-    CONTROLLER::PAGES.each { assert_not CONTROLLER.online?(it) }
+    CONTROLLER::PAGES.each { assert CONTROLLER.online?(it) }
   end
 
   test "online? reads ONLINE, by symbol or by name" do
@@ -74,6 +75,8 @@ class Communication::PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "every page out of ONLINE answers 404, to a visitor as to a signed-in student" do
+    simulate_online
+
     PATHS.each_value do |path|
       get path
 
@@ -148,6 +151,7 @@ class Communication::PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "/aide carries « Vos données » only when one of its pages is online" do
+    simulate_online
     get help_path
 
     assert_select "#help_your_data", 0

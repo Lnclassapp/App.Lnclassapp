@@ -264,6 +264,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
 - **Dépend de**    : P1, P2, P3 (et P4 pour les CGV) ; **Lot R** pour la page « Protection des données » ; **validation des juristes** pour chaque page ; numéros du support fournis par le porteur
 - **Test associé** : `test/i18n/public_pages_test.rb` (aucune marque « ‹ », « à compléter », « à fournir » ni « à fixer » dans une page de `ONLINE`) · `test/controllers/communication/pages_controller_test.rb`
 - **Done quand**   : **une page n'entre dans `ONLINE` qu'après la validation des juristes**, sa date de mise à jour posée et ses marques retirées ; la page « Protection des données » n'y entre qu'avec le lot R livré ; les CGV, qu'avec l'offre d'`abonnement-mobile-money` ; le pied de page de la homepage, `/aide` et la carte d'aide montrent exactement les pages en ligne.
+- **Fait le 2026-10-02, autrement** (porteur : « envoie-les en ligne, je mettrai à jour après », « garde ces mentions ») : les quatre pages sont dans `ONLINE` avant la relecture des juristes, mentions « ‹ … › » visibles, CGV comprises ; `test/i18n/public_pages_test.rb` reporté à la mise à jour des textes ; les tests des pages lisent la vraie liste au lieu de la simuler ([UDR-0063, amendement](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md)).
 
 ---
 

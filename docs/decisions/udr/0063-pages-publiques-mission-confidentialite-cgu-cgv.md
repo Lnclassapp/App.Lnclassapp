@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-02 : « lance les lots ») |
+| **Statut** | Accepté (porteur, 2026-10-02 : « lance les lots ») — *amendé le 2026-10-02 : les quatre pages en ligne avant la relecture des juristes, mentions visibles (§2.4 suspendu)* |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q15, Q16 (ajouts du porteur) ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) ; brouillons des textes : [`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun traceur, CSP) · [UDR-0061](0061-carte-d-aide-et-faq.md) (motif de `/aide`, carte d'aide) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (écrans d'entrée) · [UDR-0059](0059-homepage-telephone-et-tablette.md), [UDR-0012](0012-landing-et-modales-de-role.md) (homepage) · [UDR-0057](0057-ecrans-eleve-epures.md) (R1 à R6) |
@@ -101,3 +101,15 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 - La politique de protection des données doit suivre le code : un chantier qui ajoute une donnée personnelle, un destinataire ou un sous-traitant met la page à jour dans sa PR, comme la FAQ (Q14).
 - Le cadre ivoirien (loi n° 2013-450 relative à la protection des données à caractère personnel, autorité : ARTCI) est cité comme cadre applicable ; aucune page n'affirme une conformité, une déclaration ou une autorisation que le porteur n'a pas fournie.
 - Interdit désormais : publier un texte juridique sans validation des juristes ; afficher une marque « à compléter ».
+
+## Amendement du 2026-10-02 — les quatre pages en ligne avant la relecture des juristes · Statut : Accepté (porteur)
+
+*Lot Z du chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/plan.md), après le merge de la PR #140.*
+
+Le porteur met les quatre pages en ligne tout de suite : « envoie-les en ligne, je mettrai à jour après », puis « garde ces mentions ».
+
+- **§2.4 suspendu** : `ONLINE` contient `mission`, `privacy`, `terms` et `sales_terms` avant la validation des juristes. Les marques « ‹ … : à compléter par les juristes › » **restent visibles** sur les pages, telles que rédigées (11 dans Protection des données, 8 dans les CGU, 6 dans les CGV, aucune dans Mission).
+- **CGV en ligne avant l'offre** : la page décrit l'abonnement (16 000 F CFA, période gratuite, Wave, remboursement sous 7 jours) que l'application ne vend pas encore (chantier `abonnement-mobile-money`). Choix du porteur.
+- **Garde de §3.3 reportée** : `test/i18n/public_pages_test.rb` (aucune marque dans une page en ligne) n'est pas écrit, il échouerait. Il le sera quand le porteur aura mis les textes à jour avec les juristes ; jusque-là, rien n'empêche une marque d'être publiée.
+- **Inchangé** : une page retirée de `ONLINE` répond de nouveau 404 et perd ses liens ; le pied de page de la homepage et `/aide` montrent exactement les pages en ligne.
+- **À faire par le porteur** : la relecture des juristes ([`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md), encadré « Relecture juridique »), puis la mise à jour des locales `config/locales/communication/pages/<page>.fr.yml` et de leur date de mise à jour.

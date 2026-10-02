@@ -13,6 +13,8 @@ class PublicPagesHelperTest < ActionView::TestCase
   end
 
   test "no link while no page is online" do
+    simulate_online
+
     assert_empty public_page_links
     assert_empty public_page_links(%i[privacy terms])
   end

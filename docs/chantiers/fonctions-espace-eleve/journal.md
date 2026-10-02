@@ -12,6 +12,8 @@
 | 2026-10-02 | Lot R redéfini : pas d'anonymisation automatique ; archive pour l'élève et l'établissement ; suppression sur demande dans les 30 jours | Porteur | Amendement de l'ADR-0036 retiré ; PRD amendé |
 | 2026-10-02 | Suppression d'un compte réservée à l'équipe `admin` ; elle efface aussi les tentatives de connexion du compte et de son numéro | Relecture sécurité : matrice de l'ADR-0038 ; le numéro et l'IP restaient, et un numéro repris héritait du verrou | ADR-0038 appliqué, pas amendé |
 | 2026-10-02 | Bloc « Cours » trié par matière puis nom | `courses` n'a pas de position de programme | non |
+| 2026-10-02 | Résultats d'un compte supprimé effacés ; demandes de suppression enregistrées et rappelées dès le 25e jour (lots R2, R3) | Porteur : « retire l'élève des stats », « oui, une notification » | ADR-0036, amendement (2) |
+| 2026-10-02 | Les quatre pages publiques en ligne avant la relecture des juristes, mentions « ‹ … › » visibles, CGV comprises (lot Z) | Porteur : « envoie-les en ligne, je mettrai à jour après », « garde ces mentions » | UDR-0063, amendement |
 
 ## Ce qui a dérapé
 
