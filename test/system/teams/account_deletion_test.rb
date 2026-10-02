@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # Lot R of fonctions-espace-eleve (ADR-0036 §4): a student asked the support to delete the account; a team member looks
 # up the number, opens « Supprimer le compte », gives the date of the request and confirms, without a page reload. The
-# account is anonymized and its results stay.
+# account is anonymized and its results are erased (ADR-0036, amendment (2), lot R2).
 class Teams::AccountDeletionTest < ApplicationSystemTestCase
   unless Object.const_defined?("Teams::HomesController")
     Teams.const_set(:HomesController, Class.new(Teams::BaseController) {
@@ -41,6 +41,6 @@ class Teams::AccountDeletionTest < ApplicationSystemTestCase
     @student.reload
     assert_equal [ "Compte", "supprimé", nil ], [ @student.first_name, @student.last_name, @student.contact ]
     assert_equal({ "requested_on" => (Date.current - 5).iso8601 }, Orm::AuditEvent.find_by!(action: "user.anonymized").metadata)
-    assert Orm::ExerciseSession.exists?(@session.id)
+    assert_not Orm::ExerciseSession.exists?(@session.id)
   end
 end

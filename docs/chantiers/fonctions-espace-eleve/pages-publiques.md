@@ -143,8 +143,8 @@ Si vous écrivez au support par **WhatsApp** ou si vous l'appelez, l'échange pa
 ### 8. Combien de temps nous les gardons
 
 - **Vos données sont conservées comme archive**, sans limite de durée, tant que vous ne demandez pas leur suppression. Après votre départ d'une classe ou d'un établissement, l'archive reste consultable par vous, depuis votre compte, et par l'établissement que vous avez quitté, pour les résultats obtenus chez lui.
-- **Vous pouvez demander la suppression de votre compte** au support : elle est faite dans les 30 jours qui suivent votre demande. ‹ Ce que deviennent les résultats déjà consultés par l'établissement après une suppression : à valider par les juristes ›
-- **Les informations d'usage de l'application sont conservées**, sans votre nom : exercices faits, réponses, notes, badges et fiches à revoir. Elles servent à la progression et au suivi par les enseignants et l'établissement ; les statistiques d'une classe restent justes après le départ d'un élève.
+- **Vous pouvez demander la suppression de votre compte** au support : elle est faite dans les 30 jours qui suivent votre demande. Votre nom, votre numéro, votre PIN et votre photo sont effacés, **et vos résultats aussi** : exercices faits, réponses, notes, badges et fiches à revoir. Vous n'apparaissez plus dans aucun chiffre de vos classes ni de l'établissement. *(Porteur, 2026-10-02 : « retire l'élève des stats » ; [ADR-0036, amendement (2)](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md), lot R2.)*
+- **Les informations d'usage de l'application sont conservées tant que le compte existe** : exercices faits, réponses, notes, badges et fiches à revoir. Elles servent à la progression et au suivi par les enseignants et l'établissement ; les statistiques d'une classe restent justes après le départ d'un élève, qui n'est pas une suppression.
 - Les classes sont archivées en fin d'année scolaire, pas supprimées.
 - Les fichiers envoyés mais jamais utilisés sont effacés après 48 heures.
 

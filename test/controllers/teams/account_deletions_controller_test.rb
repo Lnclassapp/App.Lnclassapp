@@ -1,14 +1,18 @@
 require "test_helper"
 
 # ADR-0036 §4, lot R of fonctions-espace-eleve: a student or a parent asks the support to delete the account; a team member
-# admin (ADR-0038) handles it from the account lookup, in a modal, with the date of the request. The account is anonymized, never deleted:
-# its results stay, without its name.
+# admin (ADR-0038) handles it from the account lookup, in a modal, with the date of the request. The account is anonymized, never deleted;
+# its results are erased with it (ADR-0036, amendment (2), lot R2).
 class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @actor = create_team_member(team_role: "admin")
     @student = create_student(classroom: create_classroom(name: "3ème 4"), contact: "0511223344", first_name: "Awa",
                               last_name: "Koné")
     @session = create_exercise_session(student: @student, status: "completed", score_percent: 80)
+    create_attempt(session: @session)
+    create_badge(student: @student, exercise: @session.exercise, session: @session)
+    create_gap(student: @student)
+    @others_session = create_exercise_session(exercise: @session.exercise, status: "completed")
     create_login_session(user: @student)
     create_pin_recovery_code(user: @student)
     Orm::LoginAttempt.create!(contact: "0511223344", user_id: @student.id, succeeded: false, kind: "pin",
@@ -28,7 +32,7 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#modal dialog#account-deletion-modal[open]" do
       assert_select "h2", "Supprimer le compte de Awa Koné ?"
       assert_select "p", text: /Le nom, le numéro, le PIN et la photo sont effacés/
-      assert_select "p", text: /restent dans les chiffres de ses classes, sans son nom/
+      assert_select "p", text: /notes, badges et lacunes sont effacés aussi : l'élève sort des chiffres de ses classes/
       assert_select "form#account-deletion-form[action='#{teams_account_deletion_path(@student.public_id)}'][method=post]" do
         assert_select "input[type=date][name='account_deletion[requested_on]'][required][max='#{Date.current.iso8601}']"
       end
@@ -36,7 +40,7 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "the account is anonymized: toast, the result replaced, signed out, the results kept, the request in the journal" do
+  test "the account is anonymized: toast, the result replaced, signed out, the results erased, the request in the journal" do
     sign_in_as @actor
 
     request_deletion requested_on: 3.days.ago.to_date.iso8601, as: :turbo_stream
@@ -50,7 +54,11 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::PinRecoveryCode.exists?(user_id: @student.id)
     assert_not Orm::LoginAttempt.where(user_id: @student.id).or(Orm::LoginAttempt.where(contact: "0511223344")).exists?
     assert_not_nil Orm::ClassroomStudent.find_by!(student: @student).left_at
-    assert Orm::ExerciseSession.exists?(@session.id)
+    assert_not Orm::ExerciseSession.exists?(student_id: @student.id)
+    assert_not Orm::QuestionAttempt.exists?(exercise_session_id: @session.id)
+    assert_not Orm::ExerciseBadge.exists?(student_id: @student.id)
+    assert_not Orm::KnowledgeGap.exists?(student_id: @student.id)
+    assert Orm::ExerciseSession.exists?(@others_session.id)
     event = Orm::AuditEvent.find_by!(action: "user.anonymized")
     assert_equal [ @actor.id, "User", @student.id, { "requested_on" => 3.days.ago.to_date.iso8601 } ],
                  [ event.actor_id, event.subject_type, event.subject_id, event.metadata ]

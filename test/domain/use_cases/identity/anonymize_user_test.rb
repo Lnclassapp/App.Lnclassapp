@@ -4,7 +4,8 @@ module UseCases
   module Identity
     # ADR-0036 §4, lot R of fonctions-espace-eleve: a student or a parent asks the support to delete the account; the team
     # handles the request within 30 days by anonymizing it, in one transaction, with the date of the request in the journal.
-    # Sessions, badges and gaps are kept (the archive of the school); nothing is physically deleted.
+    # ADR-0036, amendment (2), lot R2: its sessions, attempts, badges and gaps are erased in the same transaction; the account
+    # itself stays, anonymized.
     class AnonymizeUserTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 10, 2, 10)
       Clock = Data.define(:now)
@@ -67,6 +68,29 @@ module UseCases
         def leave_all(student_id:, at:) = (@left ||= []) << [ student_id, at ]
       end
 
+      # Knows whether the transaction is open, to prove that the erasure happens inside it.
+      class TrackingTransaction < FakeTransaction
+        def open? = @open == true
+
+        def call
+          super do
+            @open = true
+            yield
+          end
+        ensure
+          @open = false
+        end
+      end
+
+      class FakeLearningData
+        include Ports::Assessment::LearningDataEraserPort
+
+        attr_reader :erased_for
+
+        def initialize(transaction) = @transaction = transaction
+        def erase_for(student_id:) = (@erased_for ||= []) << [ student_id, @transaction.open? ]
+      end
+
       def anonymize(actor: TEAM, target: STUDENT.public_id, requested_on: "2026-09-20")
         @users = FakeUsers.new
         @sessions = FakeSessions.new
@@ -76,9 +100,11 @@ module UseCases
         @memberships = FakeMemberships.new
         @photos = FakeProfilePhotoStore.new(8 => Ports::Identity::ProfilePhotoStorePort::StoredPhoto.new(content_type: "image/png", data: "x"))
         @audit = FakeAuditLog.new
-        @transaction = FakeTransaction.new
+        @transaction = TrackingTransaction.new
+        @learning_data = FakeLearningData.new(@transaction)
         AnonymizeUser.new(users: @users, sessions: @sessions, second_factors: @second_factors, pin_recoveries: @pin_recoveries,
-                          login_attempts: @login_attempts, memberships: @memberships, photos: @photos, audit_log: @audit, transaction: @transaction,
+                          login_attempts: @login_attempts, memberships: @memberships, photos: @photos, audit_log: @audit,
+                          learning_data: @learning_data, transaction: @transaction,
                           policy: Policies::Identity::DeleteUserPolicy.new, clock: Clock.new(NOW))
                      .call(actor:, target_public_id: target, dto: Dtos::Identity::DeletionRequestInput.new(requested_on:))
       end
@@ -88,6 +114,7 @@ module UseCases
         assert_nil @sessions.destroyed_for
         assert_nil @login_attempts.destroyed_for
         assert_nil @memberships.left
+        assert_nil @learning_data.erased_for
         assert_empty @photos.writes
         assert_empty @audit.events
         assert_equal 0, @transaction.calls
@@ -107,6 +134,13 @@ module UseCases
         assert_equal [ [ 8, NOW ] ], @memberships.left
         assert_equal [ [ :remove, 8 ] ], @photos.writes
         assert_equal 1, @transaction.calls
+      end
+
+      test "its sessions, attempts, badges and gaps are erased inside the transaction: it leaves every statistic" do
+        assert anonymize.success?
+
+        assert_equal [ [ 8, true ] ], @learning_data.erased_for
+        assert_not @transaction.open?
       end
 
       test "the journal keeps the team member and the date of the request, never the erased data" do

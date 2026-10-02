@@ -68,6 +68,16 @@ class Communication::PrivacyPageTest < ActionDispatch::IntegrationTest
     assert_select "section[aria-labelledby='finalites'] li", count: 6
   end
 
+  # ADR-0036, amendment (2), lot R2: a deleted account takes its results with it and leaves every statistic.
+  test "§8 says that a deletion erases the results too, and the question to the lawyers is settled" do
+    online { get privacy_path }
+
+    conservation = "section[aria-labelledby='conservation']"
+    assert_select "#{conservation} li", text: /30 jours.*vos résultats aussi : exercices faits, réponses, notes, badges et fiches à revoir/m
+    assert_select "#{conservation} li", text: /n'apparaissez plus dans aucun chiffre de vos classes ni de l'établissement/
+    assert_select "#{conservation} li", text: /‹/, count: 0
+  end
+
   private
 
   def sections = I18n.t("communication.pages.privacy.sections", locale: :fr)

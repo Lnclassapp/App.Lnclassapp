@@ -88,6 +88,39 @@ module Queries
                      row.exercises.map { [ it.success_percent, it.passed_students_count, it.completed_students_count ] }
       end
 
+      # ADR-0036, amendement (2), lot R2 : la suppression réelle, par le use case câblé comme le contrôleur de l'équipe.
+      def delete_account(student)
+        team = create_team_member(team_role: "admin")
+        UseCases::Identity::AnonymizeUser.new(
+          users: Repositories::Identity::UserRepository.new, sessions: Repositories::Identity::SessionRepository.new,
+          second_factors: Repositories::Identity::SecondFactorRepository.new,
+          pin_recoveries: Repositories::Identity::PinRecoveryRepository.new,
+          login_attempts: Repositories::Identity::LoginAttemptRepository.new,
+          memberships: Repositories::Classroom::MembershipRepository.new, photos: Repositories::Identity::ProfilePhotoStore.new,
+          audit_log: Repositories::Identity::AuditLogRepository.new, learning_data: Repositories::Assessment::LearningDataEraser.new,
+          transaction: Repositories::Shared::Transaction.new, policy: Policies::Identity::DeleteUserPolicy.new, clock: Time.zone
+        ).call(actor: Entities::Identity::Actor.new(user_id: team.id, role: :team, team_role: "admin"),
+               target_public_id: student.public_id, dto: Dtos::Identity::DeletionRequestInput.new(requested_on: Date.current.iso8601))
+      end
+
+      def success = query.exercises.first.to_h.values_at(:success_percent, :passed_students_count, :completed_students_count)
+
+      test "la réussite de la classe avant et après la suppression d'un compte élève : il n'y compte plus" do
+        alice = create_student(classroom: @classroom)
+        bruno = create_student(classroom: @classroom)
+        awa = create_student(classroom: @classroom)
+        create_exercise_session(student: alice, exercise: @first, status: "completed", score_percent: 80)
+        create_exercise_session(student: bruno, exercise: @first, status: "completed", score_percent: 30)
+        create_badge(student: awa, exercise: @first, session: create_exercise_session(student: awa, exercise: @first,
+                                                                                    status: "completed", score_percent: 100))
+
+        assert_equal [ 67, 2, 3 ], success
+        assert delete_account(awa).success?
+
+        assert_equal [ 50, 1, 2 ], success
+        assert_not Orm::ExerciseSession.exists?(student_id: awa.id)
+      end
+
       test "une fiche sans exercice publié" do
         essential = create_essential(course: @course)
 
