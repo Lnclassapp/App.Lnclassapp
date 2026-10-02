@@ -42,6 +42,7 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Q1 — Quels publics ce chantier couvre-t-il ? Tout épurer d'un coup, 4 publics et environ 230 écrans, est le moyen le plus sûr de ne rien finir. | **L'élève seulement.** La maquette V2 de l'accueil élève, validée par le porteur le 2026-10-02, sert d'écran de référence. | Le périmètre se réduit aux écrans de l'élève. Enseignant, direction et équipe passent hors périmètre, dans un chantier suivant qui reprendra la règle. |
+| Q2 — Comment sait-on qu'un écran élève est « assez épuré » ? Sans règle mesurable, chaque écran est épuré à l'œil et le chantier ne finit jamais. | **Une règle chiffrée.** Par écran : une seule action principale ; au plus 5 blocs visibles avant de faire défiler ; au plus 3 lignes par liste, puis « Voir plus » ; aucun texte d'aide affiché en permanence ; une seule couleur d'accent, hors signal d'urgence. | La règle devient une décision d'interface commune aux écrans élève, et chaque point devient un critère vérifiable par un test. Un écran est « fini » quand il respecte les cinq points. |
 
 ## Cas limites identifiés
 
