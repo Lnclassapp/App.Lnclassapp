@@ -1,9 +1,11 @@
-<%# 🌐 UI · school_admin/teachers/index — « Enseignants » de la direction (DS-06) %>
-<%# Rôle : une ligne par enseignant : nom, matière, classes de l'année ; lecture seule, ni identifiant ni numéro %>
-<%# ADR  : 0065 · UDR : 0005, 0052, 0054 %>
+<%# 🌐 UI · school_admin/teachers/index — « Enseignants » de la direction (DS-06, GD-14) %>
+<%# Rôle : une ligne par enseignant : nom, matière, classes de l'année ; établissement actif : menu ⋮ « Retirer », confirmé en modale %>
+<%# ADR  : 0065, 0071 · UDR : 0005, 0042, 0052, 0054, 0056 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "teachers" %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, count: @overview.teachers.size) %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, count: @overview.teachers.size) do %>
+  <%= ui_button t(".departed"), href: school_admin_departed_teachers_path, variant: :secondary, size: :sm, icon: "archive-box" %>
+<% end %>
 
 <% if @overview.teachers.any? %>
   <%= ui_card id: "school_teachers", padding: :none, class: "overflow-hidden" do %>
@@ -16,11 +18,13 @@
             <% %i[teacher material classrooms].each do |column| %>
               <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
             <% end %>
+            <%# Au téléphone, la colonne d'actions reste collée au bord droit de la carte : le ⋮ est visible sans faire défiler le tableau. %>
+            <th scope="col" class="sticky right-0 bg-white px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-line">
-          <% @overview.teachers.each_with_index do |teacher, index| %>
-            <tr id="teacher_<%= index %>">
+          <% @overview.teachers.each do |teacher| %>
+            <tr id="teacher_<%= teacher.public_id %>">
               <th scope="row" class="px-4 py-3 font-medium text-ink"><%= teacher.name %></th>
               <td class="px-4 py-3">
                 <% if teacher.material_name %>
@@ -34,6 +38,24 @@
               <% else %>
                 <td class="px-4 py-3 text-mute"><%= t(".no_classroom") %></td>
               <% end %>
+              <td class="sticky right-0 bg-white px-4 py-3 text-right">
+                <% if @manageable %>
+                  <% id = "remove-teacher-#{teacher.public_id}" %>
+                  <div class="flex justify-end">
+                    <%= ui_dropdown label: t(".actions", name: teacher.name), id: "teacher-actions-#{teacher.public_id}", fixed: true do %>
+                      <%= ui_dropdown_item t(".remove"), dialog: id, icon: "user-minus", tone: :danger %>
+                    <% end %>
+                  </div>
+                  <%= ui_modal id:, size: :sm, title: t(".remove_title", name: teacher.name) do |modal| %>
+                    <% modal.footer do %>
+                      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+                      <%= ui_button t(".confirm"), type: :submit, variant: :danger, icon: "user-minus", form: "#{id}-form" %>
+                    <% end %>
+                    <p class="text-left text-sm text-mute"><%= t(".remove_body", first_name: teacher.first_name) %></p>
+                    <%= form_with url: school_admin_teacher_path(teacher.public_id), method: :delete, id: "#{id}-form" do %><% end %>
+                  <% end %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

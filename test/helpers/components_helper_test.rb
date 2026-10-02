@@ -290,6 +290,33 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#later[open]", 0
   end
 
+  # UDR-0061 §3.3 : `placement: :sheet` fait de la modale une feuille basse sous lg, avec sa poignée ; le défaut
+  # (`:center`) rend exactement le même HTML qu'avant l'option.
+  test "ui_modal placed as a sheet carries the sheet class and a decorative handle" do
+    show ui_modal(title: "Contacte-nous", id: "help-sheet", size: :sm, placement: :sheet) { "Corps" }
+
+    assert_select "dialog#help-sheet.dialog-sheet.sm\\:max-w-sm.motion-reduce\\:animate-none"
+    assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
+  end
+
+  test "ui_modal keeps its centred rendering by default, and refuses an unknown placement" do
+    default = ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir") { "Corps" }
+
+    assert_equal default, ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir", placement: :center) { "Corps" }
+    show default
+    assert_select ".dialog-sheet, .sheet-handle, .motion-reduce\\:animate-none", 0
+    assert_raises(ArgumentError) { ui_modal(title: "Info", placement: :side) }
+  end
+
+  # UDR-0061 §3.2 : sans JavaScript, le déclencheur reste un lien vers la page de repli ; le contrôleur l'intercepte.
+  test "ui_modal trigger with a fallback href is a link that opens the dialog" do
+    show ui_modal(title: "Contacte-nous", id: "help-sheet", trigger: "Besoin d'aide ?", trigger_href: "/aide",
+                  trigger_variant: :ghost, trigger_size: :sm)
+
+    assert_select "a[href='/aide'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=help-sheet]",
+                  text: "Besoin d'aide ?"
+  end
+
   test "ui_dropdown renders a menu button and its items" do
     html = ui_dropdown(label: "Actions", align: :start) do
       ui_dropdown_item("Modifier", href: "/edit", icon: "pencil") +
@@ -607,6 +634,32 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[hidden].min-h-tap:not([aria-label])", text: "Copier"
     assert_equal icon_paths(ui_icon("clipboard-document", size: :md)), icon_paths(css_select("button").first)
     assert_match "Raté.", Nokogiri::HTML5.fragment(rendered).css("template").last.inner_html
+  end
+
+  # --- « Voir plus » (UDR-0057 R3) ---------------------------------------------
+
+  test "ui_reveal_data wires the reveal controller with both announcements" do
+    data = ui_reveal_data(step: 2)
+
+    assert_equal "reveal", data[:controller]
+    assert_equal 2, data[:reveal_step_value]
+    assert_equal "1 ligne de plus affichée.", data[:reveal_one_value]
+    assert_equal "{count} lignes de plus affichées.", data[:reveal_other_value]
+  end
+
+  test "ui_reveal_item hides the lines after the third and targets them all" do
+    assert_equal({ hidden: false, data: { reveal_target: "item" } }, ui_reveal_item(2))
+    assert_equal({ hidden: true, data: { reveal_target: "item" } }, ui_reveal_item(3))
+  end
+
+  test "ui_reveal_more renders a full-width ghost button and a polite status, only beyond three lines" do
+    assert_nil ui_reveal_more(3)
+
+    show ui_reveal_more(4)
+
+    assert_select "button.w-full[data-reveal-target=button][data-action='reveal#more']", text: "Voir plus"
+    assert_select "button.bg-ink", 0
+    assert_select "p.sr-only[role=status][aria-live=polite][data-reveal-target=status]"
   end
 
   test "ui_modal hands its document title to the modal controller and its dialog to the autofocus controller" do

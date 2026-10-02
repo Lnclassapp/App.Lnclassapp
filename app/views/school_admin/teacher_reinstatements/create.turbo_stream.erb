@@ -1,0 +1,13 @@
+<%# 🌐 UI · school_admin/teacher_reinstatements/create — réintégration faite (GD-19) %>
+<%# Rôle : la ligne part de « Enseignants retirés », toast ; la liste devenue vide est remplacée par l'état vide de la page %>
+<%# ADR  : 0071 · UDR : 0056 (§3.4) %>
+<%= turbo_stream.remove "departed_teacher_#{@teacher.public_id}" %>
+<%= turbo_stream_toast @notice, type: :success %>
+<% if @overview.teachers.empty? %>
+  <%= turbo_stream.replace "departed_teachers" do %>
+    <div id="departed_teachers">
+      <%= ui_empty_state title: t("school_admin.departed_teachers.index.empty.title"),
+                         description: t("school_admin.departed_teachers.index.empty.description"), icon: "archive-box" %>
+    </div>
+  <% end %>
+<% end %>

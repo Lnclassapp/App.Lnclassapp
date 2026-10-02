@@ -50,7 +50,7 @@ module Finitions
       sign_in_as @teacher
 
       assert_pages_fit [ teacher_home_path, classroom_path(@classroom.public_id), teacher_invite_path, teacher_classrooms_path,
-                         courses_path, course_path(@course.slug), course_assignments_path(@course.slug) ]
+                         courses_path, course_path(@course.slug), classroom_course_path(@classroom.public_id, @course.slug) ]
     end
 
     test "FU-53: the school admin screens fit at 390 px, info tips open" do

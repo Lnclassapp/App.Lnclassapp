@@ -107,7 +107,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_teacher(school:, classrooms: [ other ])
     stranger = create_student(classroom: other, last_name: "Yao", first_name: "Clarisse")
     course = create_course(name: "Génétique")
-    create_assignment(classroom: other, assignable: course)
+    create_assignment(classroom: other, assignable: create_exercise(essential: create_essential(course:)))
     session = create_exercise_session(student: stranger, status: "completed")
 
     sign_in_as teacher

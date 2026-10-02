@@ -7,9 +7,9 @@ fr:
       destroy:
         done: "Classe « %{name} » retirée."
       errors:
-        has_students: "Cette classe a des élèves : archivez-la plutôt."
-        has_teachers: "Un enseignant a déclaré cette classe : archivez-la plutôt."
-        has_assignments: "Cette classe a des cours assignés : archivez-la plutôt."
+        has_students: "Cette classe a des élèves : elle ne peut plus être retirée."
+        has_teachers: "Un enseignant a déclaré cette classe : elle ne peut plus être retirée."
+        has_assignments: "Cette classe a des cours assignés : elle ne peut plus être retirée."
         not_last: "Cette classe n'est plus la dernière de son niveau : rechargez la fiche."
         not_found: "Cette classe n'existe plus : elle a sans doute déjà été retirée."
         forbidden: "Vous n'avez pas accès à cette action."
@@ -30,6 +30,6 @@ fr:
         add: "Ajouter une classe de %{level}"
         remove: "Retirer une classe de %{level}"
         remove_title: "Retirer la classe « %{name} » ?"
-        remove_warning: "Elle sera supprimée définitivement. Une classe qui a déjà eu un élève, un enseignant ou un cours assigné ne peut pas l'être : archivez-la plutôt."
+        remove_warning: "Elle sera supprimée définitivement. Seule une classe qui n'a jamais servi peut être retirée."
         cancel: "Annuler"
         confirm_remove: "Retirer la classe"

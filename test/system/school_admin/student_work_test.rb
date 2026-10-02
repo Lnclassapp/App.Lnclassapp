@@ -49,7 +49,7 @@ class SchoolAdmin::StudentWorkTest < ApplicationSystemTestCase
     assert_selector "main#main", wait: SIGN_IN_WAIT
     assert_current_path school_admin_classrooms_path
     within(nav) do
-      assert_selector "a[href]", count: 2
+      assert_selector "a[href]", count: 3 # « Établissement » since gestion-etablissement-direction (UDR-0056 §3.1)
       assert_selector "a[aria-current=page][href='#{school_admin_classrooms_path}']", text: tn(:student_work)
       assert_selector "a[href='#{school_admin_teachers_path}']", text: tn(:teachers)
     end

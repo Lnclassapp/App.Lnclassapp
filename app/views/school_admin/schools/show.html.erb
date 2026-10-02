@@ -1,0 +1,19 @@
+<%# 🌐 UI · school_admin/schools/show — « Établissement » de la direction (GD-01, GD-03) %>
+<%# Rôle : nom et type ; lien d'inscription des enseignants (copier, WhatsApp) ; bloc « Classes par niveau » partagé avec l'équipe %>
+<%# ADR  : 0057, 0059, 0071 · UDR : 0005, 0046, 0052, 0054, 0056 · un établissement non actif se lit, sans geste %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "school" %>
+<%= ui_page_header title: @school.name, subtitle: t("school_types.#{@school.school_type}") %>
+<% unless @school.active? %>
+  <p id="school_inactive_notice" class="-mt-2 mb-6 text-sm text-warning"><%= t(".inactive") %></p>
+<% end %>
+
+<div class="space-y-8">
+  <%= ui_card id: "school_link", title: t(".link_title"), subtitle: t(".link_subtitle"), padding: :md do %>
+    <%= render "link", school: @school %>
+  <% end %>
+
+  <%= render "shared/level_classrooms", block: @level_classrooms, add_url: school_admin_level_classrooms_path,
+                                        remove_url: ->(public_id) { school_admin_level_classroom_path(public_id) },
+                                        remove_when_inactive: false %>
+</div>

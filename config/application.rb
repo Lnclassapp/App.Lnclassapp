@@ -58,5 +58,8 @@ module AppLnclassapp
     # ADR-0052 : Mission Control Jobs is protected by the team area authentication.
     config.mission_control.jobs.base_controller_class = "Teams::BaseController"
     config.mission_control.jobs.http_basic_auth_enabled = false
+
+    # UDR-0061 §3.4 : numéros et horaires du support (carte d'aide), publics, dans config/support.yml.
+    config.x.support = config_for(:support)
   end
 end

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Accepté — *amendé le 2026-10-02 par l'[ADR-0072](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) : seul `Exercise` s'assigne ; colonne `due_on`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-26**, bloque la V1 (Lot D) |
 | **Remplace** | [ADR-0016](./0016-conservation-historique-assignations.md) §2 (statuts, réactivation, `teacher_id` de session) · [ADR-0007](./0007-hierarchie-pedagogique-et-assignations-polymorphes.md) §5 (statuts et types assignables) |

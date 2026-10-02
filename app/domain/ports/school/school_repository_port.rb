@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071
 module Ports
   module School
     module SchoolRepositoryPort
@@ -86,6 +86,12 @@ module Ports
       # → Integer | nil
       def primary_school_id_for(teacher_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #primary_school_id_for"
+      end
+
+      # Retrait par la direction (ADR-0071) : supprime le rattachement à cet établissement, jamais à un autre.
+      # → Integer (lignes teacher_schools supprimées)
+      def detach_teacher(teacher_id:, school_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #detach_teacher"
       end
     end
   end
