@@ -15,7 +15,8 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- 2026-10-02 : la PR #113 a été fusionnée dans `Develop` avec le Lot 0, le Lot B et toute la documentation (amendements acceptés), avant les lots A, C, D, E et F. La phase 1 se termine dans une seconde PR, sur la même branche repartie de `Develop`. Dorénavant : ne passer la PR du chantier « prête » qu'une fois tous les lots de la phase fusionnés.
+- 2026-10-02 : `bin/rails db:prepare` en environnement de test, dans un nouveau worktree, a chargé les seeds ; les tests échouaient sur l'unicité de `levels.name`. Créer la base d'un worktree avec `RAILS_ENV=test bin/rails db:test:prepare`.
 
 ## Ce qu'on a appris sur la codebase
 
