@@ -47,6 +47,7 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 | Q4 — Une ligne d'exercice montre titre, matière, badge, meilleur score, maîtrise, nombre de sessions et une action. Rien n'est répété, mais c'est surchargé. Que deviennent badge, maîtrise et sessions ? | **Ils passent dans l'écran de détail** (l'exercice ou la matière). | Une ligne de liste ne garde que ce qui sert à choisir : titre, matière, échéance ou note, et une action au plus. Le reste est montré un tap plus loin : aucune information n'est supprimée de l'interface élève. |
 | Q5 — La grille tient en 8 cases (6 matières, Paiement, Inviter). Un élève de Terminale a 9 à 11 matières : la grille déborde ? | **Non : Lnclass ne couvre que 6 matières.** Maths, Physique-Chimie, SVT, Français, Histoire-Géographie, et EDHC (1er cycle) ou Philosophie (2nd cycle). Les autres matières ne seront pas proposées. | La grille est fixe : 6 matières, Paiement, Inviter. Pas de case « Toutes », pas de tri dynamique, pas de débordement. Seule variation : EDHC devient Philosophie selon le cycle de l'élève. |
 | Q6 — La carte du haut « Prochain exercice » suppose un exercice à faire. Qu'affiche-t-elle s'il n'y en a aucun (rien d'assigné, ou tout est fini) ? | **Elle présente la classe avec un message d'encouragement.** Le porteur pense qu'une carte existe déjà pour cet état. Il ajoute : sur tablette et ordinateur, la grille peut aligner 6 éléments par rangée. | La carte du haut a au moins deux états, « Prochain exercice » et « Ma classe + encouragement », à reprendre de la planche d'états existante. La disposition tablette et ordinateur entre dans le chantier : la grille passe de 4 à 6 éléments par rangée sur les grands écrans. |
+| Q7 — L'élève a une douzaine d'écrans (accueil, ma classe, matière et cours, fiche essentielle, exercice, session, résultat, profil, inviter, rejoindre une classe, connexion). Lesquels entrent dans ce chantier ? | **Tous les écrans élève.** Le porteur partagera ensuite les maquettes des écrans déjà disponibles. | Le chantier couvre tout le parcours élève, livré par lots, l'accueil en premier puisqu'il fixe la référence. Les maquettes du porteur entrent dans la décision d'interface ; un écran sans maquette suit la règle seule. |
 
 ## Cas limites identifiés
 
@@ -54,5 +55,7 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 
 ## Questions encore ouvertes
 
+- Écrans partagés avec les autres rôles (connexion, récupération du PIN, rejoindre une classe) : épurés pour tout le monde dans ce chantier, ou laissés au chantier suivant ?
+- Maquettes des écrans disponibles : à recevoir du porteur avant la décision d'interface.
 - Grille sur grand écran : avec 8 éléments et 6 par rangée, Paiement et Inviter tombent seuls sur une deuxième rangée. Les sortir de la grille sur grand écran, ou garder 6 + 2 ?
 - Un niveau ou une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : case masquée, ou grille à 7 cases ?
