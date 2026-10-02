@@ -25,7 +25,7 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 1. **Quatre pages publiques et statiques, sur le motif de `/aide`** (UDR-0061 §3.1) : layout `application` sans shell, logo, retour « Accueil », un seul `h1`, textes dans les locales. Lisibles sans compte, par un parent comme par un élève.
 2. **Des adresses en français**, comme `/aide` : `/mission`, `/confidentialite`, `/conditions-utilisation`, `/conditions-vente`.
 3. **Aucun fait inventé.** Les brouillons ([`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md)) ne disent que ce que le code, le schéma et les ADR établissent. Ce qui relève du porteur ou d'un juriste est marqué « à fournir ».
-4. **Une page n'est mise en ligne que complète** : sa route n'est dessinée et son lien n'apparaît qu'une fois son texte validé et ses données « à fournir » remplies. Aucun « à fournir » n'est jamais visible en production.
+4. **Une page n'est mise en ligne que complète** : tant que son texte n'est pas validé et que ses données « à fournir » ne sont pas remplies, elle répond 404 et aucun lien n'y mène. Aucun « à fournir » n'est jamais visible en production.
 5. **Les CGV attendent l'offre.** Elles ne sont qu'un squelette tant que le chantier `abonnement-mobile-money` n'a pas fait son grill : leur lot dépend de ce chantier.
 
 ## 3. Règles d'implémentation
@@ -44,7 +44,7 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 | `GET /conditions-vente` | `communication/pages#sales_terms` | `sales_terms_path` |
 
 - `Communication::PagesController`, `allow_unauthenticated_access`, quatre actions sans logique : ni table, ni query, ni use case.
-- Chaque route n'est ajoutée que par le lot qui met sa page en ligne (§2.4).
+- **Mise en ligne** : la constante `Communication::PagesController::ONLINE` (liste fermée de symboles, vide au départ) dit quelles pages sont en ligne. Une action dont la page n'y est pas répond 404 (`raise ActionController::RoutingError`). Le pied de page de la homepage, `/aide` et la carte d'aide lisent la même liste (`PublicPagesHelper#public_page_links`). Ajouter une page à `ONLINE` est le dernier geste, après validation du porteur (§2.4).
 
 ### 3.2 Mise en page commune — `communication/pages/_page.html.erb`
 
@@ -58,12 +58,12 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
   - les sections : `section[aria-labelledby]` > `h2` (`id` stable en kebab-case, ex. `#donnees-collectees`), puis des paragraphes et des listes.
 - `page_title` : « Notre mission · Lnclass », « Protection des données · Lnclass », « Conditions d'utilisation · Lnclass », « Conditions de vente · Lnclass ».
 
-### 3.3 Textes — `config/locales/communication/pages.fr.yml`
+### 3.3 Textes — `config/locales/communication/pages/<page>.fr.yml`
 
-- Une clé par page (`mission`, `privacy`, `terms`, `sales_terms`) ; chaque section : `title` et `paragraphs` (tableau) ou `items` (liste).
+- Un fichier par page (`mission`, `privacy`, `terms`, `sales_terms`), pour que chaque page s'écrive sans toucher aux autres ; chaque section : `title` et `paragraphs` (tableau) ou `items` (liste).
 - Ton : **vouvoiement** sur ces quatre pages. Elles s'adressent aussi aux parents, aux enseignants et aux établissements, et les CGU et la politique engagent l'entité ; l'espace élève garde le tutoiement.
 - Les textes partent des brouillons validés de [`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md). Un fait nouveau dans une page passe par une PR qui cite sa source (ADR, schéma, code).
-- Test de garde : `test/i18n/public_pages_test.rb` échoue si `pages.fr.yml` contient « à fournir », « TODO », « XXX » ou « [ » suivi d'une majuscule.
+- Test de garde : `test/i18n/public_pages_test.rb` échoue si le fichier d'une page de `ONLINE` contient « à fournir », « TODO », « XXX » ou « [ » suivi d'une majuscule.
 
 ### 3.4 Points d'entrée
 
@@ -74,7 +74,7 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 
 ### 3.5 États obligatoires
 
-- Page statique : ni vide, ni chargement, ni erreur propres. Une page non encore en ligne n'a pas de route (404 du routeur).
+- Page statique : ni vide, ni chargement, ni erreur propres. Une page absente de `ONLINE` répond 404.
 
 ### 3.6 Accessibilité
 
@@ -96,7 +96,7 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 
 ## 4. Conséquences
 
-- Quatre lots indépendants les uns des autres ; chacun ne touche que sa route, sa locale et sa vue, plus une ligne de pied de page (fichier partagé, au Lot 0 du plan).
+- Quatre lots indépendants les uns des autres : chacun ne touche que sa locale et sa vue. Routes, contrôleur, gabarit commun, `ONLINE` et pied de page sont des fichiers partagés, au Lot 0 du plan ; la mise en ligne (ajout à `ONLINE`) est un geste séquentiel final.
 - **Le lot CGV dépend du chantier `abonnement-mobile-money`** (offre, prix, durée, remboursement) ; il ne peut pas être mis en ligne avant lui.
 - La politique de protection des données doit suivre le code : un chantier qui ajoute une donnée personnelle, un destinataire ou un sous-traitant met la page à jour dans sa PR, comme la FAQ (Q14).
 - Le cadre ivoirien (loi n° 2013-450 relative à la protection des données à caractère personnel, autorité : ARTCI) est cité comme cadre applicable ; aucune page n'affirme une conformité, une déclaration ou une autorisation que le porteur n'a pas fournie.

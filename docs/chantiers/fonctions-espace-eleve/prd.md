@@ -90,7 +90,7 @@ La maquette V2 de l'accueil élève montre six fonctions absentes ; après le gr
 | Déploiement avec une assignation de cours ou de fiche en base | La migration s'arrête avec le nombre de lignes ; rien n'est modifié (Q7) |
 | Numéro WhatsApp ou d'appel non configuré | Sa ligne n'apparaît pas dans la carte ; la FAQ y reste |
 | Navigateur sans JavaScript | « Besoin d'aide ? » mène à `/aide` ; « Assigner » mène à la page du formulaire des jours |
-| Page publique dont une donnée est « à fournir » | Pas en ligne : pas de route, pas de lien |
+| Page publique dont une donnée est « à fournir » | Pas en ligne : 404, aucun lien |
 
 ## 4. Critères d'acceptation
 
@@ -319,11 +319,11 @@ Alors son pied de page porte un lien vers chaque page publique en ligne, et vers
 Étant donné la page /aide
 Alors elle renvoie à la protection des données et aux conditions d'utilisation, une fois en ligne
 
-Étant donné le fichier config/locales/communication/pages.fr.yml
-Alors il ne contient ni « à fournir », ni « TODO », ni « XXX »
+Étant donné une page en ligne (dans Communication::PagesController::ONLINE)
+Alors son fichier config/locales/communication/pages/<page>.fr.yml ne contient ni « à fournir », ni « TODO », ni « XXX »
 
-Étant donné une page dont le texte n'est pas validé
-Alors sa route n'existe pas (404) et aucun lien n'y mène
+Étant donné une page dont le texte n'est pas validé (absente de ONLINE)
+Alors son adresse répond 404 et aucun lien n'y mène
 
 Étant donné les conditions de vente
 Alors elles ne sont pas en ligne tant que le chantier abonnement-mobile-money n'a pas fixé l'offre
@@ -344,8 +344,8 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 |---|---|
 | **Domaine** | `Entities::Classroom::Assignable::TYPES = %w[Exercise]` ; `Entities::Classroom::Assignment` gagne `due_on` ; `Entities::Classroom::SessionDays` (valeur, `#next_after`) ; `Ports::Classroom::SessionDaysRepositoryPort` (`for`, `replace`) ; `Ports::Classroom::AssignmentRepositoryPort` (`create` écrit `due_on`, `resolve_assignable` réduit à `Exercise`) ; `Dtos::Classroom::AssignmentInput` gagne `weekdays` ; `Dtos::Classroom::SessionDaysInput` ; `UseCases::Classroom::AssignResource` (jours, échéance, transaction) ; `UseCases::Classroom::SetSessionDays` ; `Policies::Classroom::SetSessionDaysPolicy`, `Policies::Classroom::FollowAssignmentPolicy` |
 | **Infrastructure** | Migrations : restriction de `assignable_type` (garde Q7), `classroom_assignments.due_on` et sa contrainte, table `classroom_session_days` (clé composite vers `teacher_classrooms`) ; `Orm::ClassroomSessionDay` ; `Repositories::Classroom::SessionDaysRepository` ; `AssignmentRepository` réduit ; `TeachingRepository#withdraw` et `#withdraw_all_in_school` retirent les jours ; queries `StudentHomeQuery` (`due_on`, ordre, `late_material_slugs`), `ClassroomOverviewQuery` (exercices assignés et comptes, cours de la classe), `AssignmentFollowUpQuery` (nouvelle), `ClassroomCourseQuery`, `ClassroomEssentialQuery`, `EssentialDetailQuery` (sans `Course`/`Essential`) ; suppression de `CourseAssignmentTargetsQuery` ; `config/support.yml` lu par `config_for` |
-| **Delivery** | `Classroom::AssignmentsController#new` (modale des jours) et `#create` (jours, « Plus tard ») ; `Classroom::SessionDaysController#edit`, `#update` ; `Classroom::AssignmentFollowUpsController#show` ; suppression de `Classroom::CourseAssignmentsController` ; `Communication::HelpController#show` (fait) ; `Communication::PagesController` (`mission`, `privacy`, `terms`, `sales_terms`) ; routes dans `config/routes/classroom.rb` et `config/routes/communication.rb` |
-| **UI** | `DueDateHelper` ; formats `date.formats.due_short` et `due_long` ; `classroom/assignments/_toggle` (`needs_session_days:`, date), `new` ; `classroom/session_days/edit` ; `classroom/classrooms/_session_days`, `_assigned_exercises`, `_courses` ; `classroom/assignment_follow_ups/show` ; `classroom/student_homes/_assigned_exercise` ; retrait des bascules de `classroom_courses/show`, `classroom_essentials/show`, de `catalog/courses/_role_actions`, de `classroom/course_assignments/` et de la carte « Cours assignés » de `student_classrooms/show` ; `ui_modal placement: :sheet`, classe `.dialog-sheet` ; `shared/_help_sheet` et `SupportHelper` ; `communication/help/show` (fait) ; `communication/pages/_page` et ses quatre vues ; pied de page de la homepage ; textes de la homepage (« des exercices ») ; locales `classroom/*.fr.yml`, `shared/help_sheet.fr.yml`, `communication/pages.fr.yml` ; contrôleurs Stimulus `modal` (retour du focus) et `autofocus` (`data-autofocus-first`) |
+| **Delivery** | `Classroom::AssignmentsController#new` (modale des jours) et `#create` (jours, « Plus tard ») ; `Classroom::SessionDaysController#edit`, `#update` ; `Classroom::AssignmentFollowUpsController#show` ; suppression de `Classroom::CourseAssignmentsController` ; `Communication::HelpController#show` (fait) ; `Communication::PagesController` (`mission`, `privacy`, `terms`, `sales_terms`, liste `ONLINE`) ; routes dans `config/routes/classroom.rb` et `config/routes/communication.rb` |
+| **UI** | `DueDateHelper` ; formats `date.formats.due_short` et `due_long` ; `classroom/assignments/_toggle` (`needs_session_days:`, date), `new` ; `classroom/session_days/edit` ; `classroom/classrooms/_session_days`, `_assigned_exercises`, `_courses` ; `classroom/assignment_follow_ups/show` ; `classroom/student_homes/_assigned_exercise` ; retrait des bascules de `classroom_courses/show`, `classroom_essentials/show`, de `catalog/courses/_role_actions`, de `classroom/course_assignments/` et de la carte « Cours assignés » de `student_classrooms/show` ; `ui_modal placement: :sheet`, classe `.dialog-sheet` ; `shared/_help_sheet` et `SupportHelper` ; `communication/help/show` (fait) ; `communication/pages/_page` et ses quatre vues ; `PublicPagesHelper` ; pied de page de la homepage ; textes de la homepage (« des exercices ») ; locales `classroom/*.fr.yml`, `shared/help_sheet.fr.yml`, `communication/pages/<page>.fr.yml` ; contrôleurs Stimulus `modal` (retour du focus) et `autofocus` (`data-autofocus-first`) |
 
 **Aucune table** pour l'aide et les pages publiques. **Une table** (`classroom_session_days`) et **une colonne** (`due_on`) pour les échéances.
 
