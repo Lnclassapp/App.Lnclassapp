@@ -1,110 +1,79 @@
-# Pure Ruby, no Rails boot: bin/ci is one list of steps, and the GitHub jobs add up to exactly that list
-# (feuille-de-route §2, garde-fou n° 4; ADR-0064). They run on the self-hosted runner (ADR-0069). A group missing from the workflow, played twice, or a test file
-# left out of every part fails here, in the lint group, before any test runs.
+# Pure Ruby, no Rails boot: bin/ci is one list of steps, played whole by the one job of the GitHub workflow
+# (feuille-de-route §2, garde-fou n° 4; ADR-0064, ADR-0069). The rules that keep the GitHub minutes within the quota
+# fail here, in the lint group, before any test runs.
 require "minitest/autorun"
 require "yaml"
 load File.expand_path("../../config/ci.rb", __dir__) unless defined?(CI_PLAN)
 
 class CiPlanTest < Minitest::Test
-  WORKFLOW = File.expand_path("../../.github/workflows/ci.yml", __dir__)
+  GITHUB = File.expand_path("../../.github", __dir__)
+  WORKFLOW = File.join(GITHUB, "workflows/ci.yml")
 
-  # Every CI_GROUP a job of the workflow plays: the literal value, or each entry of its `matrix.group`.
-  def workflow_selections
-    YAML.safe_load_file(WORKFLOW, aliases: true).fetch("jobs").values.flat_map do |job|
-      value = job.dig("env", "CI_GROUP")
-      next [] unless value
-      next job.dig("strategy", "matrix", "group") if value.include?("matrix.group")
+  def workflow = YAML.safe_load_file(WORKFLOW, aliases: true)
 
-      [ value ]
-    end
-  end
+  def jobs = workflow.fetch("jobs")
+
+  # YAML reads the key `on` as true.
+  def triggers = workflow.fetch(true)
 
   def full_run = CI_PLAN.steps_for(nil)
 
-  def jobs = YAML.safe_load_file(WORKFLOW, aliases: true).fetch("jobs")
+  # ADR-0069 : each job pays its start and its rounding to the minute. One job, « ci », plays the whole bin/ci:
+  # no group left out, none played twice, nothing split across jobs.
+  def test_one_job_named_ci_plays_the_whole_bin_ci
+    assert_equal [ "ci" ], jobs.keys
+    job = jobs.fetch("ci")
+    assert_equal "ci", job["name"]
+    assert_equal 1, job.fetch("steps").count { it["run"] == "bin/ci" }, "« ci » lance bin/ci une fois"
+    assert_nil job.dig("env", "CI_GROUP"), "« ci » joue tout bin/ci, pas un groupe"
+    assert_nil job["strategy"], "pas de matrice : un seul job"
+  end
 
-  SELF_HOSTED = %w[self-hosted linux lnclass].freeze
-  PROMOTION_ON_GITHUB = /base_ref == 'Staging' \|\| github\.base_ref == 'main'.*ref_name == 'Staging' \|\| github\.ref_name == 'main'.*'\["ubuntu-latest"\]' \|\| '\["self-hosted", "linux", "lnclass"\]'/
+  # ADR-0069 : 45 % of the runs were pushes that merged a tree their pull request had already tested.
+  # Pull requests only, and a draft waits until it is ready for review.
+  def test_the_workflow_runs_on_ready_pull_requests_only
+    assert_equal [ "pull_request" ], triggers.keys
+    assert_includes triggers.dig("pull_request", "types"), "ready_for_review"
+    assert_equal "${{ !github.event.pull_request.draft }}", jobs.dig("ci", "if")
+  end
 
-  def without_part(title) = title.sub(%r{ \d+/\d+\z}, "")
+  # ADR-0069 : a tree that already got a green « ci » is not replayed; only a run that played the checks proves it.
+  def test_a_tested_tree_is_not_replayed_and_a_played_run_publishes_its_proof
+    steps = jobs.dig("ci", "steps")
+    proof = steps.index { it["id"] == "proof" }
+    suite = steps.index { it["run"] == "bin/ci" }
 
-  def test_the_workflow_jobs_add_up_to_the_steps_of_a_local_bin_ci
-    played = workflow_selections.flat_map { CI_PLAN.steps_for(it).drop(1) }
-    expected = full_run.drop(1)
+    assert proof && proof < suite, "la preuve d'arbre passe avant la suite"
+    assert_equal "script/ci/tested_tree", steps[proof]["run"]
+    assert_equal "steps.proof.outputs.tested != 'true'", steps.find { it["id"] == "changes" }["if"]
+    publish = steps.find { it.dig("with", "name").to_s.start_with?("ci-tree-") }
+    assert_equal "steps.changes.outputs.code == 'true'", publish["if"]
+  end
 
-    assert_equal expected.map(&:group).uniq.sort, played.map(&:group).uniq.sort, "un groupe de config/ci.rb n'est joué par aucun job"
-    expected.map(&:group).uniq.each do |group|
-      whole = expected.select { it.group == group }.map(&:title)
-      parts = played.select { it.group == group }.map { without_part(it.title) }.uniq
+  # ADR-0067 : the screen budgets seed 312 000 sessions; they run before each recette, never in bin/ci.
+  def test_the_screen_budgets_stay_out_of_bin_ci
+    played = full_run.map(&:command).join(" ")
 
-      assert_equal whole, parts, "le groupe « #{group} » n'est pas joué tel quel par le workflow"
+    refute_empty CiPlan.files("test/performance/**/*_budget_test.rb")
+    CiPlan.files("test/performance/**/*_budget_test.rb").each { refute_includes played, it }
+    assert_includes played, "test/performance/catalog/import_course_tree_performance_test.rb"
+  end
+
+  # ADR-0069 : Dependabot follows the road of any change, Develop then the promotions, one grouped pull request
+  # per ecosystem (17 of the 43 runs of 2026-10-01 were its eight pull requests and their merges on main).
+  def test_dependabot_targets_develop_with_one_grouped_pull_request
+    updates = YAML.safe_load_file(File.join(GITHUB, "dependabot.yml")).fetch("updates")
+
+    refute_empty updates
+    updates.each do |update|
+      assert_equal "Develop", update["target-branch"], update["package-ecosystem"]
+      assert_equal [ [ "*" ] ], update.fetch("groups", {}).values.map { it["patterns"] }, update["package-ecosystem"]
     end
   end
 
-  def test_each_group_is_played_by_exactly_one_job_or_by_all_its_parts_once
-    picks = workflow_selections.flat_map { it.split(",") }.map { it.strip.split(":") }
-    picks.group_by(&:first).each do |group, entries|
-      if entries.size == 1 && entries.first.size == 1
-        pass
-      else
-        counts = entries.map { it.fetch(1) { flunk "« #{group} » joué entier et en parts" } }
-        total = counts.first.split("/").last.to_i
-
-        assert_equal (1..total).map { "#{it}/#{total}" }, counts.sort_by(&:to_i), "parts de « #{group} » incomplètes ou en double"
-      end
-    end
-  end
-
-  def test_the_parts_of_a_sharded_group_hold_every_file_once
-    workflow_selections.flat_map { it.split(",") }.map(&:strip).grep(%r{:\d+/\d+\z}).group_by { it.split(":").first }.each do |group, tokens|
-      parts = tokens.first[%r{/(\d+)\z}, 1].to_i
-      split = CI_PLAN.split(group, parts)
-
-      assert_equal CI_PLAN.groups.fetch(group).files, split.flatten.sort, "« #{group} » : un fichier est absent ou joué deux fois"
-      assert split.none?(&:empty?), "« #{group} » : une part vide ne teste rien"
-    end
-  end
-
-  # ADR-0069 : the GitHub minutes ran out. A job of this workflow runs on the owner's machine; only the proof and the
-  # verdict « ci » of a promotion may run on GitHub, and only through that one expression. A new job on ubuntu-latest
-  # would reopen the leak: it fails here.
-  def test_only_the_proof_and_the_verdict_of_a_promotion_run_on_a_github_runner
-    jobs.except("proof", "ci").each do |name, job|
-      assert_equal SELF_HOSTED, job["runs-on"], "le job « #{name} » doit tourner sur le runner auto-hébergé (ADR-0069)"
-    end
-    jobs.slice("proof", "ci").each do |name, job|
-      assert_match PROMOTION_ON_GITHUB, job["runs-on"], "« #{name} » : GitHub pour une promotion seulement (ADR-0069)"
-    end
-    assert_match(/\(needs\.proof\.result == 'failure' \|\| \(needs\.proof\.outputs\.tested == 'true' &&/, jobs.fetch("ci")["runs-on"],
-                 "« ci » : GitHub seulement si la preuve suffit, ou si elle n'a jamais eu de runner")
-  end
-
-  # ADR-0069 : a job queued for the machine keeps its run alive. « ci » of a cancelled run must not queue, or it holds
-  # the concurrency group of the pull request and every newer run waits behind it (seen on PR #106, 2026-09-30).
-  def test_the_verdict_of_a_cancelled_run_does_not_queue_for_the_machine
-    assert_equal "${{ !cancelled() }}", jobs.fetch("ci")["if"]
-  end
-
-  # ADR-0069 : on the owner's machine, a job without its own PostgreSQL would fall back on port 5432, the owner's
-  # development server, with the same credentials. Every job that plays a group needing the database has its service
-  # container and passes its port to bin/ci.
-  def test_a_job_playing_a_database_group_brings_its_own_postgresql
-    jobs.each do |name, job|
-      selections = job.dig("env", "CI_GROUP").to_s.include?("matrix.group") ? job.dig("strategy", "matrix", "group") : [ job.dig("env", "CI_GROUP") ].compact
-      next unless selections.any? { |selection| CI_PLAN.steps_for(selection).first.command == "bin/setup --skip-server" }
-
-      assert job.dig("services", "postgres"), "« #{name} » : groupe avec base, sans conteneur PostgreSQL"
-      run = job.fetch("steps").find { it["run"] == "bin/ci" }
-      assert_match(/job\.services\.postgres\.ports\['5432'\]/, run.dig("env", "PGPORT").to_s, "« #{name} » : PGPORT manquant")
-    end
-  end
-
-  # ADR-0069 : the jobs run on the owner's machine, on his network. A service container (PostgreSQL, superuser with a
-  # known password) is published on the loopback only, never on every interface.
+  # A service container (PostgreSQL, superuser with a known password) is published on the loopback only.
   def test_service_containers_are_published_on_the_loopback_only
-    ports = Dir[File.join(File.dirname(WORKFLOW), "*.yml")].flat_map do |workflow|
-      YAML.safe_load_file(workflow, aliases: true).fetch("jobs").values.flat_map { (it["services"] || {}).values.flat_map { it["ports"] || [] } }
-    end
+    ports = jobs.values.flat_map { (it["services"] || {}).values.flat_map { it["ports"] || [] } }
 
     refute_empty ports
     ports.each { assert_match(/\A127\.0\.0\.1:/, it.to_s, "port « #{it} » publié sur toutes les interfaces") }

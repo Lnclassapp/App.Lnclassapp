@@ -3,23 +3,72 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — **en attente** depuis le 2026-09-30, à la demande du porteur |
+| **Statut** | en cours — repris le 2026-10-02 : **runner auto-hébergé abandonné**, la CI reste sur GitHub |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/ci-quota` |
 | **Programme** | — |
 
-> **En attente.** Le porteur a mis ce chantier au backlog le 2026-09-30. Les lots 0 à D sont écrits et poussés sur `perf/ci-quota` ([PR #106](https://github.com/Lnclassapp/App.Lnclassapp/pull/106), brouillon, non fusionnée). Aucune mesure « après » n'est prise : le runner n'est pas encore installé sur la machine du porteur.
->
-> **CI GitHub désactivée** le 2026-09-30 à la demande du porteur : le workflow `CI` est désactivé dans *Actions* (réglage GitHub, aucun fichier modifié). D'ici là, `bin/ci` en local avant chaque fusion.
->
-> **Reprise**, dans l'ordre :
-> 0. Réactiver le workflow : *Actions → CI → ⋯ → Enable workflow*, ou `gh workflow enable ci.yml --repo Lnclassapp/App.Lnclassapp`.
-> 1. Le porteur installe le runner : `sudo script/ci/runner/install`, puis `sudo script/ci/runner/check` doit être vert et les instances **Idle** dans *Settings → Actions → Runners* ([procédure](../../guide/runner-auto-heberge.md)).
-> 2. Si un ancien run de la PR reste « queued » (run 287, 36650665414), forcer son annulation : `gh api -X POST repos/Lnclassapp/App.Lnclassapp/actions/runs/36650665414/force-cancel`. Il bloque le groupe `concurrency` de la PR (voir le [journal](journal.md)).
-> 3. Si le runner est **Idle** mais qu'aucun job ne démarre, vérifier que le quota épuisé ne bloque pas aussi les runners auto-hébergés (*Settings → Billing* de l'organisation).
-> 4. Fusionner `Develop` dans `perf/ci-quota` (vérifier que le numéro ADR-0069 est toujours libre), puis mesurer : 3 runs de PR de chantier, 3 runs de promotion, avec `script/ci/billed_minutes`.
+> **Recadrage du 2026-10-02.** Le porteur abandonne le runner auto-hébergé (lots 0, A, C, D, E de la première version du plan) : « supprimons l'installation du runner en local, nous allons optimiser l'exécution des tests, et les running sur GitHub ». La méthode imposée est l'algorithme en cinq étapes : questionner les exigences, supprimer, simplifier, accélérer, automatiser, dans cet ordre. Nouvelle mesure ci-dessous ; décisions dans l'[ADR-0069](../../decisions/adr/0069-ci-en-un-job-sur-les-pr-et-promotions-par-preuve.md) réécrit ; lots dans le [plan](plan.md).
+
+## Mesure avant (2026-10-02)
+
+Le quota est remis à zéro le 2026-10-01 vers 00 h UTC (dernier refus : run 316, 2026-09-30 23 h 38 ; premier succès : run 317, 00 h 24). Méthode : horodatages des jobs (API `list_workflow_jobs`), `ceil` par job.
+
+**Un run complet coûte 33 minutes facturées** (run 355, PR de chantier ; run 366, push sur `main`), pour 4 min 15 d'horloge :
+
+| Bloc | Jobs | Minutes facturées | Travail utile (`bin/ci`, run 355) |
+|---|---:|---:|---:|
+| Système (299 tests) | 6 | 18 | 671 s |
+| Performance + seeds | 3 | 8 | 275 s, dont ≈ 150 s pour le seul budget d'écrans (ADR-0067 l'exclut de la CI) |
+| Unitaires (2 738 tests, couverture 100 %) | 1 | 3 | 131 s |
+| Lint, sécurité et assets, `changes`, `ci` | 4 | 4 | 26 s |
+
+**Les 50 runs du 2026-10-01 au 2026-10-02 9 h** (runs 317 à 366) : 43 complets, 4 « documents seulement » (2 minutes), 3 annulés. **≈ 1 500 minutes consommées** sur 2 000.
+
+| Origine | Runs complets | Minutes | Part |
+|---|---:|---:|---:|
+| PR de chantier (code nouveau) | 9 | 297 | 21 % |
+| Push de fusion sur `Develop` (5), PR de promotion (6), push sur `Staging` (4) et sur `main` (2) | 17 | 561 | 40 % |
+| Dependabot : 8 PR ouvertes d'un coup sur `main`, 2 rebases, 7 fusions sur `main` | 17 | 561 | 40 % |
+
+**Tests par étape, d'une feature à `main`** (avant ce chantier) :
+
+| # | Étape | Où | Tests |
+|---|---|---|---:|
+| 1 | Chaque commit | hook pre-commit | 0 à ≈ 700 (les tests des fichiers touchés, jamais le système) |
+| 2 | Avant fusion | local, règle « option A » | ≈ 3 040 (unitaires et système complets) |
+| 3 | Chaque push sur la PR | GitHub | 3 063 × N |
+| 4 à 8 | Push `Develop`, PR et push `Staging`, PR et push `main` | GitHub | 3 063 × 5, **le même arbre** que l'étape 3 |
+
+Une feature poussée une fois sur sa PR : ≈ 21 400 exécutions de tests et 198 minutes facturées.
+
+**Mesures locales, 2 CPU** (comme un runner GitHub) : unitaires 86 s, système 424 s (**1 échec et 1 erreur**, verts sur 4 CPU : instables sous charge, comme le run 326, part `system:3/6`, rouge entre deux runs verts du même arbre), performance 233 s dont 156 s pour le budget d'écrans.
+
+### Les cinq étapes appliquées
+
+| Étape | Ce qui a été fait | Effet attendu sur la journée du 2026-10-01 |
+|---|---|---|
+| 1. Questionner | « Toute la suite à chaque push sur chaque branche » venait de l'ADR-0064 ; « Dependabot sur `main` » de sa configuration par défaut ; « le budget d'écrans en CI » d'un glob trop large, contre l'ADR-0067. Aucune n'était une exigence du porteur. | — |
+| 2. Supprimer | Runner auto-hébergé (scripts, guide, service de relance, bouton de secours) ; CI sur les pushes ; CI sur les brouillons ; rejeu d'un arbre déjà vert ; budget d'écrans dans `bin/ci` ; Dependabot sur `main` | 17 runs de fusion et de promotion → 6 à ≈ 1 min ; 17 runs Dependabot → ≈ 2 par semaine |
+| 3. Simplifier | 14 jobs → **1** | Le démarrage et l'arrondi payés une fois : ≈ 13 minutes par run au lieu de 33 |
+| 4. Accélérer | Rien de plus dans ce lot : la suite reste celle de `bin/ci`. Levier suivant noté : redescendre au niveau contrôleur une partie des 299 tests système | — |
+| 5. Automatiser | Gardes dans `test/guards/ci_plan_test.rb`, rouges sur l'ancien workflow (5 échecs), vertes sur le nouveau | — |
+
+**Projection : ≈ 150 minutes au lieu de ≈ 1 500 pour la même journée.** À mesurer sur de vrais runs : voir le [plan](plan.md).
+
+### Décisions du porteur (2026-10-02)
+
+| Question | Réponse |
+|---|---|
+| Runner auto-hébergé ? | Abandonné. |
+| Désactiver la CI en attendant la fusion ? | Oui, par le porteur (*Actions → CI → Disable workflow*) : l'agent n'a pas d'outil pour le faire. |
+| Dependabot ? | Vers `Develop`, une PR groupée par écosystème ; les 8 mises à jour déjà sur `main` reviennent dans `Develop` par une PR séparée. |
+| Un job ou deux ? | Un. |
+| CI sur les brouillons ? | Non : seulement sur les PR prêtes. |
 
 ---
+
+## Historique : première version (2026-09-29 et 2026-09-30, runner auto-hébergé, abandonnée)
 
 ## Le problème
 

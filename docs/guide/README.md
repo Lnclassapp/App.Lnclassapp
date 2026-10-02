@@ -45,7 +45,6 @@ Puis, **avant d'écrire la moindre ligne de code** : [`../workflows/README.md`](
 | Savoir ce qui bloquera ma PR | [`conventions.md` §7](conventions.md#7-ce-qui-bloque) |
 | Comprendre un mot métier | [`glossaire.md`](glossaire.md) |
 | Configurer un secret, une variable d'environnement, un déploiement | [`configuration.md`](configuration.md) |
-| Installer ou réparer le runner auto-hébergé de la CI | [`runner-auto-heberge.md`](runner-auto-heberge.md) |
 | Démarrer un travail (`/feature`, `/bugfix`, `/refactor`, `/optimize`, `/hotfix`) | [`../workflows/README.md`](../workflows/README.md) |
 | Comprendre pourquoi un choix technique a été fait | [`../decisions/adr/`](../decisions/adr/) |
 | Savoir à quoi doit ressembler une vue | [`../decisions/udr/`](../decisions/udr/) et [`../design/README.md`](../design/README.md) |

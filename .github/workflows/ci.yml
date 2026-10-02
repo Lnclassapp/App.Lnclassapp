@@ -1,23 +1,23 @@
 # GitHub runs bin/ci, exactly like a developer does locally: the steps live in config/ci.rb only
-# (feuille-de-route §2, garde-fou n° 4). The jobs below split them into groups that run side by side,
-# each job playing `CI_GROUP=<group>` (ADR-0064); test/guards/ci_plan_test.rb proves they add up to the whole list.
-# The job named « ci » gathers them: it is the one status a pull request waits for.
+# (feuille-de-route §2, garde-fou n° 4). One job, named « ci »: the one status a pull request waits for (ADR-0069).
 #
-# The jobs run on the self-hosted runner of the owner's machine (ADR-0069, docs/guide/runner-auto-heberge.md): the
-# GitHub minutes of a private repository ran out. Only a promotion (a pull request into Staging or main, a push on
-# them) runs on GitHub, and there it only proves that its tree already got a green « ci »: two minutes, not the suite.
-# Emergency, machine off: the workflow « CI sur GitHub (secours) » plays bin/ci in one GitHub job, by hand.
+# The GitHub minutes of a private repository are counted per job, rounded up to the minute. Hence (ADR-0069):
+#   - pull requests only: a push on Develop, Staging or main merges a tree its pull request already tested;
+#   - a draft pull request waits: the run starts when it is marked ready for review;
+#   - a tree that already got a green « ci » is not replayed (a promotion, a re-run): about one minute;
+#   - a pull request that touches documentation alone is green without playing the checks;
+#   - otherwise the whole bin/ci, in this one job.
+# test/guards/ci_plan_test.rb holds these rules.
 name: CI
 
 on:
   pull_request:
-  push:
-    branches: [ Develop, Staging, main ]
+    types: [ opened, synchronize, reopened, ready_for_review ]
 
-# A new push to a pull request cancels the run it makes obsolete. Pushes to the long branches always finish.
+# A new push to a pull request cancels the run it makes obsolete.
 concurrency:
-  group: ci-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -26,185 +26,97 @@ env:
   RUBOCOP_CACHE_ROOT: tmp/rubocop
 
 jobs:
-  # Has this exact tree already got a green « ci »? Then nothing below replays it (ADR-0069). On GitHub for a
-  # promotion, on the self-hosted runner otherwise (a re-run, or a push on Develop that merges what its PR tested).
-  # Any doubt (unreadable commit, API error) answers no, and the suite runs. The job itself fails only when it never
-  # ran: GitHub gives up after 24 hours without a runner. Nothing then waits another day for the machine: « ci »
-  # reports red at once, on GitHub, and the machine's rerun service (script/ci/runner/rerun_expired) starts it again.
-  proof:
-    runs-on: ${{ fromJSON(((github.event_name == 'pull_request' && (github.base_ref == 'Staging' || github.base_ref == 'main')) || (github.event_name == 'push' && (github.ref_name == 'Staging' || github.ref_name == 'main'))) && '["ubuntu-latest"]' || '["self-hosted", "linux", "lnclass"]') }}
-    timeout-minutes: 5
+  ci:
+    name: ci
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Job permissions replace the workflow's: the private repository needs contents too (HTTP 403 without it).
     permissions:
       actions: read
       contents: read
-    outputs:
-      tested: ${{ steps.tree.outputs.tested }}
+      pull-requests: read
+
+    services:
+      postgres:
+        image: postgres:17
+        # Same credentials and port as config/database.yml. Loopback only.
+        env:
+          POSTGRES_USER: dev-rails
+          POSTGRES_PASSWORD: dev-rails
+        ports:
+          - "127.0.0.1:5432:5432"
+        # The job waits for the first healthy check: every second, not every ten.
+        options: --health-cmd="pg_isready" --health-interval=1s --health-timeout=5s --health-retries=30
+
     steps:
-      - uses: actions/checkout@v6
-        with:
-          sparse-checkout: script/ci
-      - id: tree
+      - uses: actions/checkout@v7
+
+      # Has this exact tree already got a green « ci »? Any doubt (unreadable commit, API error) answers no.
+      - id: proof
         env:
           GH_TOKEN: ${{ github.token }}
         run: script/ci/tested_tree
 
-  # A pull request that touches only documentation skips the checks below, and « ci » still reports green.
-  # Any doubt (a push, an unreadable diff) runs everything.
-  changes:
-    needs: proof
-    if: needs.proof.result == 'success' && needs.proof.outputs.tested != 'true'
-    runs-on: [ self-hosted, linux, lnclass ]
-    timeout-minutes: 5
-    # Job permissions replace the workflow's: the private repository needs contents too (HTTP 403 without it).
-    permissions:
-      contents: read
-      pull-requests: read
-    outputs:
-      code: ${{ steps.diff.outputs.code }}
-    steps:
-      - id: diff
+      # Documentation alone: nothing to check. Any doubt (an unreadable diff) runs everything.
+      # A renamed file counts under both names: moving code into docs/ still removes code.
+      - id: changes
+        if: steps.proof.outputs.tested != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
         run: |
           code=true
-          # A renamed file counts under both names: moving code into docs/ still removes code.
-          if [ -n "$PR" ] && files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)') && [ -n "$files" ]; then
+          if files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)') && [ -n "$files" ]; then
             echo "$files"
             echo "$files" | grep -qvE '^docs/|\.md$' || code=false
           fi
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
 
-  # No database: the static groups.
-  checks:
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
-    runs-on: [ self-hosted, linux, lnclass ]
-    timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        group: [ "lint", "security,assets" ]
-    env:
-      CI_GROUP: ${{ matrix.group }}
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup
+      - if: steps.changes.outputs.code == 'true'
+        uses: ./.github/actions/setup
 
       - name: Rubocop cache
-        if: matrix.group == 'lint'
-        uses: actions/cache@v4
+        if: steps.changes.outputs.code == 'true'
+        uses: actions/cache@v6
         with:
           path: tmp/rubocop
           key: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-${{ github.sha }}
           restore-keys: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-
 
-      - name: Run bin/ci (${{ matrix.group }})
-        run: bin/ci
-
-  # PostgreSQL: the unit suite with its 100 % threshold, the system tests in a real Chrome, the import budgets.
-  tests:
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
-    runs-on: [ self-hosted, linux, lnclass ]
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        # The unit suite is never split: SimpleCov measures the whole suite (ADR-0024, configuration.md §4.1).
-        # Six system parts and three import parts, balanced on script/ci/test_timings.yml, end with the unit job:
-        # a part costs about a minute of runner before its first test, more parts buy nothing (chantier ci-rapide).
-        # The seeds ride with the shortest import part: the unit job is the longest one, it keeps the suite only.
-        group: [ "unit",
-                 "system:1/6", "system:2/6", "system:3/6", "system:4/6", "system:5/6", "system:6/6",
-                 "perf:1/3,seeds", "perf:2/3", "perf:3/3" ]
-    env:
-      CI_GROUP: ${{ matrix.group }}
-
-    services:
-      postgres:
-        image: postgres:17
-        # Same credentials as config/database.yml, so no DATABASE_URL is needed. The host port is Docker's pick:
-        # two jobs on one machine, or the owner's own PostgreSQL, never fight over 5432. PGPORT passes it on.
-        # Loopback only: on the owner's network, a superuser with a known password must not be reachable.
-        env:
-          POSTGRES_USER: dev-rails
-          POSTGRES_PASSWORD: dev-rails
-        ports:
-          - "127.0.0.1::5432"
-        # The job waits for the first healthy check: every second, not every ten.
-        options: --health-cmd="pg_isready" --health-interval=1s --health-timeout=5s --health-retries=30
-
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup
-
       # Google Chrome and its driver are preinstalled on ubuntu-latest: the
       # system tests run in a real headless browser, never under rack_test.
-      - name: Run bin/ci (${{ matrix.group }})
-        env:
-          PGPORT: ${{ job.services.postgres.ports['5432'] }}
+      - name: Run bin/ci
+        if: steps.changes.outputs.code == 'true'
         run: bin/ci
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure() && startsWith(matrix.group, 'system')
+        uses: actions/upload-artifact@v7
+        if: failure() && steps.changes.outputs.code == 'true'
         with:
-          name: screenshots-${{ strategy.job-index }}
+          name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
       - name: Keep the coverage report
-        uses: actions/upload-artifact@v4
-        if: always() && startsWith(matrix.group, 'unit')
+        uses: actions/upload-artifact@v7
+        if: always() && steps.changes.outputs.code == 'true'
         with:
           name: coverage
           path: ${{ github.workspace }}/coverage
           if-no-files-found: ignore
 
-  # The status the branches wait for keeps its name, « ci ». Green when the proof found the tree already tested,
-  # or when every group passed, or when the pull request touches documentation alone. Anything else is red.
-  # A green run that tested for real publishes the proof of its tree, ci-tree-<tree>, kept 30 days (ADR-0069).
-  # It runs on GitHub only for a promotion whose tree is proven, or when the proof never got a runner: no job of the
-  # machine is then waited for.
-  ci:
-    name: ci
-    # Not always(): a cancelled run (a newer push to the pull request) would still queue « ci » on the machine, and
-    # that queued job would hold the concurrency group, so every newer run of the pull request would wait behind it.
-    if: ${{ !cancelled() }}
-    needs: [ proof, changes, checks, tests ]
-    runs-on: ${{ fromJSON((needs.proof.result == 'failure' || (needs.proof.outputs.tested == 'true' && ((github.event_name == 'pull_request' && (github.base_ref == 'Staging' || github.base_ref == 'main')) || (github.event_name == 'push' && (github.ref_name == 'Staging' || github.ref_name == 'main'))))) && '["ubuntu-latest"]' || '["self-hosted", "linux", "lnclass"]') }}
-    timeout-minutes: 5
-    steps:
-      - id: verdict
-        env:
-          NEEDS: ${{ toJSON(needs) }}
-        run: |
-          echo "$NEEDS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"'
-          if echo "$NEEDS" | jq -e '.proof.result == "success" and .proof.outputs.tested == "true"' > /dev/null; then
-            echo "Tree already tested: nothing replayed."
-            echo "proof=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          code=$(echo "$NEEDS" | jq -r '.changes.outputs.code // "true"')
-          echo "$NEEDS" | jq -e --arg code "$code" '
-            (.changes.result == "success") and
-            ([ del(.proof, .changes)[] | .result ] | all(. == "success" or ($code == "false" and . == "skipped")))' > /dev/null
-          # Only a run that played the checks proves its tree: a documentation-only pull request skipped them.
-          echo "proof=$code" >> "$GITHUB_OUTPUT"
-
+      # Only a run that played the checks proves its tree, ci-tree-<tree>, kept 30 days: a later promotion of the
+      # same files is then green in about a minute. A documentation-only pull request proves nothing.
       - id: tree
-        if: steps.verdict.outputs.proof == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
+        if: steps.changes.outputs.code == 'true'
         run: |
-          tree=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA" --jq .commit.tree.sha)
-          echo "sha=$tree" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse 'HEAD^{tree}')" >> "$GITHUB_OUTPUT"
           : > "$RUNNER_TEMP/ci-tree"
 
       - name: Publish the proof of the tested tree
-        if: steps.verdict.outputs.proof == 'true'
-        uses: actions/upload-artifact@v4
+        if: steps.changes.outputs.code == 'true'
+        uses: actions/upload-artifact@v7
         with:
           name: ci-tree-${{ steps.tree.outputs.sha }}
           path: ${{ runner.temp }}/ci-tree

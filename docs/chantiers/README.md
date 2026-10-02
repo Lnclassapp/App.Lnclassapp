@@ -97,7 +97,7 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
 | **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2. Rattaché à la V4 s'il reprend ([feuille de route §5](refonte-application/feuille-de-route.md#chantiers-hors-plan)) |
-| [`ci-quota`](ci-quota/memo.md) | **En attente** depuis le 2026-09-30, à la demande du porteur. Quota GitHub Actions épuisé : runner auto-hébergé et promotions par preuve d'arbre (ADR-0069, proposé). Lots 0 à D écrits sur `perf/ci-quota`, [PR #106](https://github.com/Lnclassapp/App.Lnclassapp/pull/106) en brouillon ; reprise : installer le runner sur la machine du porteur, puis mesurer. |
+| [`ci-quota`](ci-quota/memo.md) | **En cours**, repris le 2026-10-02 : runner auto-hébergé abandonné ; CI en un job sur les PR prêtes, preuve d'arbre pour les promotions, Dependabot vers `Develop` (ADR-0069)
 
 ## Cycle de vie
 
