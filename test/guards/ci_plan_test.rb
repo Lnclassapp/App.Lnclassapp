@@ -50,6 +50,28 @@ class CiPlanTest < Minitest::Test
     assert_equal "steps.changes.outputs.code == 'true'", publish["if"]
   end
 
+  # ADR-0069 §8 : the draw runs before the proof and can skip it: a promotion into Staging always replays the suite,
+  # and one pull request into Develop in five, drawn with a secret nobody running the pull request can read.
+  def test_the_draw_comes_first_and_staging_always_replays_the_suite
+    steps = jobs.dig("ci", "steps")
+    draw = steps.index { it["id"] == "draw" }
+    proof = steps.index { it["id"] == "proof" }
+
+    assert draw && draw < proof, "le tirage passe avant la preuve"
+    assert_equal "steps.draw.outputs.full != 'true'", steps[proof]["if"]
+    script = steps[draw]["run"]
+    assert_match(/"\$BASE" = "Staging" \]/, script, "une promotion vers Staging rejoue toujours la suite")
+    assert_match(/% 5 \)\) -eq 0/, script, "une PR sur cinq")
+    assert_equal "${{ secrets.CI_DRAW_SALT }}", steps[draw].dig("env", "SALT")
+  end
+
+  # ADR-0069 §8 : a cloud session's proof counts for a pull request into Develop only; never for main.
+  def test_a_cloud_proof_counts_for_develop_only
+    proof = jobs.dig("ci", "steps").find { it["id"] == "proof" }
+
+    assert_equal "${{ github.base_ref == 'Develop' }}", proof.dig("env", "LOCAL_PROOF")
+  end
+
   # ADR-0067 : the screen budgets seed 312 000 sessions; they run before each recette, never in bin/ci.
   def test_the_screen_budgets_stay_out_of_bin_ci
     played = full_run.map(&:command).join(" ")

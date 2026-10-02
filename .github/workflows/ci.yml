@@ -52,10 +52,33 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # ADR-0069 §8 : a promotion into Staging always replays the whole suite, and GitHub draws one pull request into
+      # Develop in five that replays it whatever its proof says. The draw is fixed per pull request (a new push does not
+      # draw again) and nobody can foresee it: it hashes the repository secret CI_DRAW_SALT with the pull request number.
+      # Without the secret (not set yet, or a Dependabot pull request), every pull request into Develop replays it.
+      - id: draw
+        env:
+          BASE: ${{ github.base_ref }}
+          PR: ${{ github.event.pull_request.number }}
+          SALT: ${{ secrets.CI_DRAW_SALT }}
+        run: |
+          echo "CI_DRAW_SALT : $([ -n "$SALT" ] && echo présent || echo absent)"
+          full=false
+          if [ "$BASE" = "Staging" ] || { [ "$BASE" = "Develop" ] && [ -z "$SALT" ]; }; then
+            full=true
+          elif [ "$BASE" = "Develop" ]; then
+            hash=$(printf '%s:%s' "$SALT" "$PR" | sha256sum | cut -c1-8)
+            [ $(( 16#$hash % 5 )) -eq 0 ] && full=true
+          fi
+          echo "full=$full" | tee -a "$GITHUB_OUTPUT"
+
       # Has this exact tree already got a green « ci »? Any doubt (unreadable commit, API error) answers no.
       - id: proof
+        if: steps.draw.outputs.full != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          # ADR-0069 §8 : the proof of a cloud session counts for a pull request into Develop only.
+          LOCAL_PROOF: ${{ github.base_ref == 'Develop' }}
         run: script/ci/tested_tree
 
       # Documentation alone: nothing to check. Any doubt (an unreadable diff) runs everything.
