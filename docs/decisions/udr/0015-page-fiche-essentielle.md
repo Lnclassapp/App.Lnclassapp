@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B3, critères CA-10, CA-11, AS-37 ; CA-29 (bandeau retiré) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, tout exercice publié se démarre) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (lacune) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [ADR-0053](../adr/0053-validation-collaborative-requalifiee.md) (aucun label de conformité) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0016](0016-formulaire-fiche-essentielle.md) (modale « Modifier ») · [UDR-0017](0017-formulaire-exercice.md) (modale « Nouvel exercice ») · [UDR-0021](0021-page-exercice.md) (page d'un exercice) |
@@ -164,3 +164,13 @@ Ce qui ne change pas pour l'élève : le retour (nom du cours), le titre, le sou
 - `test/controllers/catalog/essentials_controller_test.rb` : la fiche de l'élève ne montre plus ni badge ni meilleur score ; chaque ligne porte son type, et « Assigné par ton enseignant » quand il le faut ; la règle de la lacune reste dans `#essential_gap`, dans l'infobulle.
 - `test/system/catalog/essential_page_test.rb` : le badge Or à 80 % se vérifie sur la page de l'exercice, après un tap sur la ligne. À 390 × 844, sur une fiche à 4 exercices : `assert_single_primary_action`, `assert_blocks_above_fold(max: 5)` et `assert_list_capped(max: 3)` sur `#essential_exercises`, puis « Voir plus » montre le 4e.
 - Les tests de l'équipe (`test/system/teams/essential_management_test.rb`) restent verts sans changement.
+
+## Amendement du 2026-10-02 — une fiche ne s'assigne plus · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md), grill Q6 et Q7 ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; [UDR-0062](0062-echeances.md) §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Aucun bouton à retirer de cette page.** La fiche du catalogue ne porte pas d'assignation (§2.7 : « L'assignation se fait depuis la classe ») ; la bascule d'une fiche est sur la fiche dans la classe (UDR-0029), qui la perd.
+- **§2.5, « Assigné par ton enseignant »** : un exercice porte l'étiquette s'il est assigné **directement** à la classe principale active de l'élève. « Par sa fiche ou par son cours » disparaît : ces assignations n'existent plus. `Queries::Catalog::EssentialDetailQuery` ne lit plus que les assignations `Exercise`.
+- L'échéance n'est **pas** répétée sur cette page : elle est sur l'accueil (UDR-0062 §3.2, R6).
+- **§2.7** : inchangé pour l'enseignant (« Voir l'exercice », sans action) ; il assigne depuis la fiche dans la classe, avec l'étape des jours de séance (UDR-0062 §3.4).
+- **Vérification** : `test/controllers/catalog/essentials_controller_test.rb` — l'étiquette « Assigné par ton enseignant » apparaît pour un exercice assigné à la classe, et pour lui seul.

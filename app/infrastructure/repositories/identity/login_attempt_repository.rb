@@ -29,6 +29,13 @@ module Repositories
       def clear_failures(contact:)
         Orm::LoginAttempt.where(contact: contact.to_s.first(CONTACT_LIMIT), succeeded: false).delete_all
       end
+
+      # Le numéro libéré ne doit pas léguer ses échecs, ni son verrou, à qui le reprendra.
+      def destroy_all_for(user_id:, contact:)
+        attempts = Orm::LoginAttempt.where(user_id:)
+        attempts = attempts.or(Orm::LoginAttempt.where(contact: contact.to_s.first(CONTACT_LIMIT))) if contact.present?
+        attempts.delete_all
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 /* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
    Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
-   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051 */
+   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051, 0061 */
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
@@ -235,6 +235,36 @@
 /* Bande défilante sans barre visible (onglets sur mobile) : le geste suffit, la barre mangerait la hauteur. */
 @utility scrollbar-none {
   scrollbar-width: none;
+}
+
+/* UDR-0061 §3.3 — poignée d'une feuille basse (36 × 4 px), décorative : elle signale la feuille, rien de plus. */
+@utility sheet-handle {
+  display: block;
+  width: 2.25rem;
+  height: 0.25rem;
+  margin-inline: auto;
+  border-radius: 9999px;
+  background-color: var(--color-line);
+}
+
+/* UDR-0061 §3.3 — `ui_modal placement: :sheet` : sous lg, une feuille ancrée en bas, pleine largeur, coins hauts
+   arrondis, 25 % de la hauteur au moins, 90 % au plus avec défilement interne ; à partir de lg, la modale centrée `sm`
+   de ses utilitaires. Hors couche, exprès : une règle hors couche l'emporte sur les utilitaires de la <dialog>
+   (`m-auto`, `sm:max-w-sm`, `p-0`, `rounded-sheet`) quel que soit l'ordre de génération. `max-width` plutôt qu'une
+   plage de media query, et `vh` avant `dvh` : lisible par les navigateurs de l'ADR-0051. */
+@media (max-width: 63.99rem) {
+  dialog.dialog-sheet {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    min-height: 25vh;
+    min-height: 25dvh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 /* ADR-0051 — bandeau « navigateur ancien » : CSS simple, hors utilitaires, pour rester lisible là où

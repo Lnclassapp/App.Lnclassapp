@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_role_actions — actions de la page d'un cours selon le rôle %>
-<%# Rôle : équipe → badge de statut (B2) et menu ⋮ (modifier, nouvelle fiche, import en modales ; publier, archiver, tout publier) ; enseignant → assigner (CA-27) %>
-<%# ADR  : 0028, 0035 · UDR : 0006, 0013, 0014, 0042 %>
+<%# Rôle : équipe → badge de statut (B2) et menu ⋮ (modifier, nouvelle fiche, import en modales ; publier, archiver, tout publier) ; rien pour les autres rôles %>
+<%# ADR  : 0028, 0035, 0072 · UDR : 0006, 0013 (un cours ne s'assigne plus), 0014, 0042, 0062 %>
 <% if status_record %>
   <div class="flex flex-wrap items-center gap-2 lg:shrink-0 lg:justify-end">
     <%= content_status_panel(record: status_record) %>
@@ -14,9 +14,5 @@
       <%= ui_dropdown_item t("catalog.content_status.actions.publish_all"), href: publish_all_teams_course_path(course.slug),
                            method: :patch, icon: "check-badge" %>
     <% end %>
-  </div>
-<% elsif current_actor.teacher? %>
-  <div class="lg:shrink-0">
-    <%= ui_button t(".assign"), href: course_assignments_path(course.slug), variant: :secondary, icon: "user-group" %>
   </div>
 <% end %>

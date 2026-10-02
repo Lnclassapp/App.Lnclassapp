@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B1, critères CA-01, CA-04, CA-10, CA-26, CA-27 (point d'entrée), TR-41 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (KaTeX et Trix à la demande) · [UDR-0001](0001-design-visuel-du-catalogue-pedagogique.md) (carte-vitrine) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0014](0014-formulaire-cours.md) (modale du cours, panneau de statut) |
@@ -189,3 +189,13 @@ Ce qui ne change pas pour l'élève :
 - `test/controllers/catalog/student_level_test.rb` : le catalogue de l'élève n'a plus de sous-titre et porte l'infobulle ; ses cartes n'ont pas de badge de niveau.
 - `test/system/catalog/course_catalog_test.rb`, à 390 × 844, pour l'élève : sur `courses_path(material: <slug>)`, `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)`, et aucune carte ne porte le badge de matière ; sur la page d'un cours à 4 fiches, `assert_list_capped(max: 3)` sur `#course_essentials`, puis « Voir plus » montre la 4e.
 - `test/controllers/catalog/courses_controller_test.rb` : l'enseignant et l'équipe voient le badge de niveau, le badge de matière sous filtre, la liste complète et `_role_actions` inchangé.
+
+## Amendement du 2026-10-02 — un cours ne s'assigne plus · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md), grill Q6 et Q7 ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; [UDR-0062](0062-echeances.md) §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **§2.5 et `_role_actions`** : l'enseignant n'a plus « Assigner à mes classes ». `_role_actions` ne rend rien pour lui : il lit le cours, ses fiches et leurs exercices, sans action dans l'en-tête. Le panneau de statut et le menu ⋮ de l'équipe ne changent pas.
+- La route `course_assignments` et son écran disparaissent (UDR-0030, dépréciée).
+- **Amendement du 2026-10-01, puce « Assignation »** : la règle de niveau vaut désormais pour le seul exercice ; « Cela vaut pour le cours, la fiche et l'exercice » se lit « Elle vaut pour l'exercice ».
+- **Amendement du 2026-10-01, puce « Autres rôles »** : l'enseignant lit toujours tous les niveaux ; il assigne depuis sa classe (UDR-0062 §3.4), plus depuis le catalogue.
+- **Vérification** : `test/controllers/catalog/courses_controller_test.rb` — sur la page d'un cours, un enseignant ne voit aucun lien vers `course_assignments_path`, ni aucun bouton « Assigner » ; l'équipe garde `#course-actions-menu`.

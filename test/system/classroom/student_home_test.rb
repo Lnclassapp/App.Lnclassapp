@@ -28,7 +28,9 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
     @essential = create_essential(course: @course)
     @meiose = create_exercise(essential: @essential, title: "La méiose")
     mitose = create_exercise(essential: @essential, title: "La mitose")
-    create_assignment(classroom: @classroom, assignable: @essential)
+    # ADR-0072 §4.1 : chaque exercice s'assigne seul ; assignés au même instant, ils suivent l'ordre de la fiche.
+    @assigned_at = 1.hour.ago
+    [ @meiose, mitose ].each { assign(it) }
     session = create_exercise_session(student: @student, exercise: mitose, status: "completed", score_percent: 80)
     create_badge(student: @student, exercise: mitose, level: "gold", session:)
   end
@@ -37,11 +39,13 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
   def tl(key, **) = I18n.t("classroom.student_homes.#{key}", **)
   def more = I18n.t("components.reveal.more")
   def with_desktop_viewport(&) = with_mobile_viewport(DESKTOP_VIEWPORT, &)
+  def assign(exercise) = create_assignment(classroom: @classroom, assignable: exercise, assigned_at: @assigned_at)
 
-  # Four exercises in the list, in the order of the sheet: La méiose, La mitose, Les chromosomes, L'ADN.
+  # Four exercises in the list: La méiose, Les chromosomes, L'ADN in the order of the sheet, then La mitose, completed
+  # (UDR-0062 §3.2: a completed exercise goes to the end of the list).
   def assign_four_exercises
-    create_exercise(essential: @essential, title: "Les chromosomes")
-    create_exercise(essential: @essential, title: "L'ADN")
+    assign(create_exercise(essential: @essential, title: "Les chromosomes"))
+    assign(create_exercise(essential: @essential, title: "L'ADN"))
   end
 
   test "the student sees their assigned exercises, then « Commencer » leads to the session" do
@@ -93,6 +97,42 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
     end
   end
 
+  # PRD « Accueil élève », UDR-0062 §3.1 and §3.2: the most urgent exercise heads the list, with the only primary button
+  # and « À rendre demain » in amber; the completed one goes last, without a date.
+  test "the exercise due tomorrow heads the list, its date in amber, with the only primary button" do
+    tomorrow = create_exercise(essential: @essential, title: "Les chromosomes")
+    create_assignment(classroom: @classroom, assignable: tomorrow, assigned_at: @assigned_at, due_on: Date.current + 1)
+    sign_in_as @student
+
+    within("#student_home_exercises") do
+      assert_selector "li", count: 3
+      within("li:first-child") do
+        assert_link "Les chromosomes"
+        assert_selector "span.bg-warning-soft.text-warning", text: "À rendre demain"
+        assert_selector ":is(#{SobrietyAssertions::PRIMARY_ACTION})", text: tl("assigned_exercise.start")
+      end
+      within("li:last-child") do
+        assert_link "La mitose"
+        assert_no_text "À rendre"
+      end
+    end
+    assert_single_primary_action
+  end
+
+  # ADR-0072 §4.4: nothing closes once the date has passed; the late exercise says so and still starts.
+  test "a late exercise says « En retard · prévu hier » and still starts" do
+    late = create_exercise(essential: @essential, title: "L'ADN")
+    create_assignment(classroom: @classroom, assignable: late, assigned_at: 3.days.ago, due_on: Date.yesterday)
+    sign_in_as @student
+
+    within(row("L'ADN")) { assert_selector "span.bg-warning-soft", text: "En retard · prévu hier" }
+
+    assert_no_page_reload do
+      within(row("L'ADN")) { click_on tl("assigned_exercise.start") }
+      assert_current_path %r{\A/sessions/[^/]+\z}
+    end
+  end
+
   # UDR-0057 §2.4: the badge, the best score and the mastery left the line for the exercise page, one tap away.
   test "the title of a line opens the exercise page" do
     sign_in_as @student
@@ -126,11 +166,11 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       end
 
       within("#student_home_exercises") do
-        assert_no_text "L'ADN"
+        assert_no_text "La mitose"
         # Back up from the activity, the button would stop under the sticky header of the shell: centred, it is clickable.
         scroll_to find_button(more), align: :center
         assert_no_page_reload { click_on more }
-        assert_text "L'ADN"
+        assert_text "La mitose"
         assert_selector "li", count: 4
         assert_no_button more
       end

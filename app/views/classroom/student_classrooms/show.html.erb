@@ -1,8 +1,7 @@
 <%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève (CL-22, CL-10 volet élève) %>
-<%# Rôle : la classe et son code (aide en infobulle), puis 3 cours assignés et « Voir plus » ; lecture seule, jamais la liste nominative %>
-<%# ADR  : 0028, 0048 · UDR : 0006, 0007, 0011 (amendée le 2026-10-02), 0054, 0057 · code à dicter : jamais de « Copier » %>
+<%# Rôle : la classe et son code (aide en infobulle) ; lecture seule, jamais la liste nominative ; plus de « Cours assignés » %>
+<%# ADR  : 0028, 0048, 0072 · UDR : 0006, 0007, 0011 (amendée deux fois le 2026-10-02), 0054, 0057, 0062 · code à dicter : jamais de « Copier » %>
 <% page_title t(".page_title") %>
-<% courses = @classroom.courses %>
 <%= ui_page_header title: t(".title") %>
 
 <div class="grid gap-5">
@@ -42,21 +41,5 @@
         <p class="rounded-card bg-mist p-4 text-sm text-mute sm:shrink-0"><%= t(".no_join_code") %></p>
       <% end %>
     </div>
-  <% end %>
-
-  <%= ui_card title: t(".courses_title"), icon: "book-open", id: "student_classroom_courses" do |card| %>
-    <% if courses.empty? %>
-      <%= ui_empty_state title: t(".courses_empty"), description: t(".courses_empty_description"), icon: "book-open" %>
-    <% else %>
-      <% card.actions do %>
-        <%= ui_badge t(".courses_count", count: courses.size), tone: :brand, size: :sm %>
-      <% end %>
-      <%= tag.div(class: "space-y-3", data: ui_reveal_data) do %>
-        <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
-          <%= render partial: "assigned_course", collection: courses, as: :course %>
-        </ul>
-        <%= ui_reveal_more courses.size %>
-      <% end %>
-    <% end %>
   <% end %>
 </div>
