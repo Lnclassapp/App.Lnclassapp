@@ -43,6 +43,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
   # UDR-0058 §3.3: a line keeps its title, its subject and one button; badge, best score, mastery and sessions live on
   # the exercise page, which the title opens (UDR-0057 §2.4). The first button of the list is the primary one, the next ones are secondary (UDR-0057 R1).
+  # UDR-0062 §3.2: the exercise already completed once goes after the one not completed yet.
   test "each assigned exercise with its title, its subject and one button, the first one primary" do
     started = create_exercise(essential: @essential, title: "Méiose, les étapes")
     fresh = create_exercise(essential: @essential, title: "Méiose, le bilan")
@@ -56,21 +57,74 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#student_home_exercises li", 2
     assert_select "#student_home_exercises li:first-child" do
-      assert_select "a[href='#{exercise_path(started.public_id)}']", text: "Méiose, les étapes"
+      assert_select "a[href='#{exercise_path(fresh.public_id)}']", text: "Méiose, le bilan"
       assert_select "*", text: "SVT"
       assert_select "a, button", 2
-      assert_select "a.#{PRIMARY}[href='#{exercise_session_path(session.public_id)}']", text: including(tl("assigned_exercise.resume"))
+      assert_select "form[action='#{exercise_sessions_path(fresh.public_id)}'][method=post] button.#{PRIMARY}",
+                    text: including(tl("assigned_exercise.start"))
     end
     assert_select "#student_home_exercises li:last-child" do
-      assert_select "a[href='#{exercise_path(fresh.public_id)}']", text: "Méiose, le bilan"
+      assert_select "a[href='#{exercise_path(started.public_id)}']", text: "Méiose, les étapes"
       assert_select "a, button", 2
-      assert_select "form[action='#{exercise_sessions_path(fresh.public_id)}'][method=post] button.#{SECONDARY}",
-                    text: including(tl("assigned_exercise.start"))
+      assert_select "a.#{SECONDARY}[href='#{exercise_session_path(session.public_id)}']", text: including(tl("assigned_exercise.resume"))
     end
     assert_select "#student_home_exercises", text: including(I18n.t("assessment.badges.levels.gold")), count: 0
     assert_select "#student_home_exercises", text: including("80 %"), count: 0
     assert_select "#student_home_exercises", text: including(I18n.t("assessment.badges.mastery.acquired")), count: 0
     assert_select "#student_home_exercises", text: including("session"), count: 0
+  end
+
+  # PRD « Accueil élève », UDR-0062 §3.1 and §3.2: the due date is a label under the title, beside the subject, amber only
+  # today, tomorrow and once passed; a late exercise can still be started.
+  test "the due date under the title, amber only when it is today, tomorrow or passed" do
+    exercise = create_exercise(essential: @essential, title: "Méiose — QCM")
+    create_assignment(classroom: @classroom, assignable: exercise, assigned_at: Time.zone.local(2026, 10, 2, 9),
+                      due_on: Date.new(2026, 10, 8))
+
+    { 5 => [ "À rendre jeudi", :neutral ], 7 => [ "À rendre demain", :warning ], 8 => [ "À rendre aujourd'hui", :warning ],
+      9 => [ "En retard · prévu hier", :warning ], 12 => [ "En retard · prévu jeudi 8 oct.", :warning ] }.each do |day, (label, tone)|
+      travel_to Time.zone.local(2026, 10, day, 10) do
+        sign_in_as @student
+
+        get student_home_path
+
+        assert_select "#student_home_exercises li:first-child div.flex-wrap", 1 do
+          assert_select "span", text: "SVT"
+          assert_select "span.#{ComponentsHelper::BADGE_TONES.fetch(tone)[:chip].tr(' ', '.')}", text: label
+        end
+        assert_select "#student_home_exercises li:first-child form[action='#{exercise_sessions_path(exercise.public_id)}'] button.#{PRIMARY}",
+                      text: including(tl("assigned_exercise.start"))
+        sign_out
+      end
+    end
+  end
+
+  # PRD « Accueil élève »: due the 8th, due the 12th, then without a due date; the completed one last and without a date.
+  test "the most urgent exercise first, with the only primary button; a completed one last, without a date" do
+    travel_to Time.zone.local(2026, 10, 6, 10) do
+      undated = create_exercise(essential: @essential, title: "Sans échéance")
+      later = create_exercise(essential: @essential, title: "Dû le 12")
+      sooner = create_exercise(essential: @essential, title: "Dû le 8")
+      done = create_exercise(essential: @essential, title: "Terminé")
+      create_assignment(classroom: @classroom, assignable: undated, assigned_at: 1.day.ago)
+      create_assignment(classroom: @classroom, assignable: later, assigned_at: 1.hour.ago, due_on: Date.new(2026, 10, 12))
+      create_assignment(classroom: @classroom, assignable: sooner, assigned_at: 4.days.ago, due_on: Date.new(2026, 10, 8))
+      create_assignment(classroom: @classroom, assignable: done, assigned_at: 3.days.ago, due_on: Date.new(2026, 10, 5))
+      session = create_exercise_session(student: @student, exercise: sooner)
+      create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 70)
+      sign_in_as @student
+
+      get student_home_path
+
+      assert_equal [ "Dû le 8", "Dû le 12", "Sans échéance", "Terminé" ],
+                   css_select("#student_home_exercises li a[href^='/exercises/']").map { it.text.squish }
+      assert_select "#student_home_exercises .#{PRIMARY}", 1
+      assert_select "#student_home_exercises li:first-child a.#{PRIMARY}[href='#{exercise_session_path(session.public_id)}']"
+      assert_select "#student_home_exercises li:nth-child(1)", text: including("À rendre jeudi")
+      assert_select "#student_home_exercises li:nth-child(2)", text: including("À rendre lundi")
+      assert_select "#student_home_exercises li:nth-child(3)", text: /À rendre|En retard/, count: 0
+      assert_select "#student_home_exercises li:last-child", text: /À rendre|En retard/, count: 0
+    end
   end
 
   # UDR-0058 §3.3, R4: the badges and mastery are explained on the exercise page, not under « À faire ».

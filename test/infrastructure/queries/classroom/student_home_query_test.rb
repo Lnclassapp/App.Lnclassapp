@@ -78,6 +78,72 @@ module Queries
         assert_equal [ "SVT", "science" ], row.assigned_exercises.last.to_h.values_at(:material_name, :material_category)
       end
 
+      # UDR-0062 §3.2, PRD « Accueil élève » : the list of « À faire » sorts by due date, the exercises without one after.
+      test "the order of « À faire »: due the 8th, due the 12th, then without a due date, a started exercise in its place" do
+        travel_to Time.zone.local(2026, 10, 6, 10) do
+          undated = create_exercise(essential: @essential, title: "Sans échéance")
+          later = create_exercise(essential: @essential, title: "Dû le 12")
+          sooner = create_exercise(essential: @essential, title: "Dû le 8, commencé")
+          create_assignment(classroom: @classroom, assignable: undated, assigned_at: 1.day.ago)
+          create_assignment(classroom: @classroom, assignable: later, assigned_at: 1.hour.ago, due_on: Date.new(2026, 10, 12))
+          create_assignment(classroom: @classroom, assignable: sooner, assigned_at: 4.days.ago, due_on: Date.new(2026, 10, 8))
+          create_exercise_session(student: @student, exercise: sooner)
+
+          exercises = home.assigned_exercises
+
+          assert_equal [ "Dû le 8, commencé", "Dû le 12", "Sans échéance" ], exercises.map(&:title)
+          assert_equal [ Date.new(2026, 10, 8), Date.new(2026, 10, 12), nil ], exercises.map(&:due_on)
+        end
+      end
+
+      test "on the same due date, or without one, the most recently assigned first" do
+        travel_to Time.zone.local(2026, 10, 6, 10) do
+          due_on = Date.new(2026, 10, 8)
+          { "Dû, ancien" => [ 3.days.ago, due_on ], "Dû, récent" => [ 1.day.ago, due_on ],
+            "Sans, ancien" => [ 3.days.ago, nil ], "Sans, récent" => [ 1.day.ago, nil ] }.each do |title, (assigned_at, due)|
+            create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title:), assigned_at:, due_on: due)
+          end
+
+          assert_equal [ "Dû, récent", "Dû, ancien", "Sans, récent", "Sans, ancien" ], titles
+        end
+      end
+
+      # UDR-0062 §3.2 : un exercice terminé passe en fin de liste ; la vue n'en dit plus la date (due_badge, done:).
+      test "a completed exercise goes after the ones not completed, even when it was due first" do
+        travel_to Time.zone.local(2026, 10, 6, 10) do
+          done = create_exercise(essential: @essential, title: "Terminé, dû hier")
+          undated = create_exercise(essential: @essential, title: "Sans échéance")
+          create_assignment(classroom: @classroom, assignable: done, assigned_at: 3.days.ago, due_on: Date.new(2026, 10, 5))
+          create_assignment(classroom: @classroom, assignable: undated, assigned_at: 4.days.ago)
+          create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 70)
+
+          exercises = home.assigned_exercises
+
+          assert_equal [ "Sans échéance", "Terminé, dû hier" ], exercises.map(&:title)
+          assert_equal [ 0, 1 ], exercises.map(&:completed_count)
+        end
+      end
+
+      # UDR-0062 §3.3, ADR-0072 §4.4 : en retard pour l'élève = non terminé et échéance passée ; jamais sans échéance.
+      test "the subjects with an exercise late for the student, for the phone family" do
+        travel_to Time.zone.local(2026, 10, 9, 10) do
+          maths, french, history = [ %w[Maths science], %w[Français literature], %w[Histoire literature] ].map do |name, category|
+            create_material(name:, category:)
+          end
+          late, done_late, due_today = [ maths, french, history ].map do |material|
+            create_exercise(essential: create_essential(course: create_course(material:, level: @classroom.level)))
+          end
+          [ late, done_late ].each do |exercise|
+            create_assignment(classroom: @classroom, assignable: exercise, assigned_at: 5.days.ago, due_on: Date.new(2026, 10, 8))
+          end
+          create_assignment(classroom: @classroom, assignable: due_today, assigned_at: 1.day.ago, due_on: Date.new(2026, 10, 9))
+          create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential), assigned_at: 9.days.ago)
+          create_exercise_session(student: @student, exercise: done_late, status: "completed", score_percent: 90)
+
+          assert_equal [ maths.slug ], home.late_material_slugs
+        end
+      end
+
       test "a withdrawn assignment, an archived or draft exercise, or an unpublished parent: absent" do
         create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title: "Brouillon", status: "draft"))
         create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title: "Archivé", status: "archived"))
@@ -103,7 +169,7 @@ module Queries
       test "the progress of the student: best score, completed sessions, badge and the session to resume" do
         exercise = create_exercise(essential: @essential)
         untouched = create_exercise(essential: @essential)
-        # Assignés au même instant : l'ordre suit la position dans la fiche.
+        # Assignés au même instant ; le terminé passe après celui qui ne l'est pas (UDR-0062 §3.2).
         at = 1.hour.ago
         [ exercise, untouched ].each { create_assignment(classroom: @classroom, assignable: it, assigned_at: at) }
         create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 40)
@@ -113,7 +179,7 @@ module Queries
         create_badge(student: @student, exercise:, level: "gold", session: best)
         create_exercise_session(exercise:, status: "completed", score_percent: 100)
 
-        progress, fresh = home.assigned_exercises
+        fresh, progress = home.assigned_exercises
 
         assert_equal [ 80, 2, "gold", started.public_id ],
                      progress.to_h.values_at(:best_score_percent, :completed_count, :badge_level, :started_session_public_id)
@@ -154,7 +220,7 @@ module Queries
       test "an empty home" do
         row = home
 
-        assert_equal [ [], [], [] ], row.to_h.values_at(:assigned_exercises, :recent_sessions, :pending_gaps)
+        assert_equal [ [], [], [], [] ], row.to_h.values_at(:assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs)
       end
     end
   end

@@ -29,6 +29,15 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
     assert_select "#help_question_grade", text: /16\/20/
   end
 
+  # UDR-0061 §4, UDR-0062 §4: the due dates lot adds « Que veut dire « En retard » ? » (PRD « FAQ »).
+  test "the FAQ explains « En retard »: the due date passed, the exercise stays open" do
+    get help_path
+
+    assert_includes Communication::HelpController::QUESTIONS, :late
+    assert_select "#help_question_late > summary", text: "Que veut dire « En retard » ?"
+    assert_select "#help_question_late p", text: /date limite.*toujours le faire/
+  end
+
   test "a signed-in student reads the same page" do
     sign_in_as create_student(classroom: create_classroom)
 
