@@ -1,0 +1,54 @@
+<%# 🌐 UI · communication/pages/_page — gabarit commun des pages publiques, motif de /aide : logo, retour, un seul h1 %>
+<%# Rôle : lit communication.pages.<page> (page_title, title, updated_on facultatif, sections.<id>) ; sommaire au-delà de 5 sections %>
+<%# UDR  : 0063 (§3.2, §3.6, §3.7), 0061, 0060, 0054 · appel : render "communication/pages/page", page: :mission %>
+<% scope = "communication.pages.#{page}" %>
+<% page_title t("#{scope}.page_title") %>
+<% sections = t("#{scope}.sections") %>
+<main class="flex min-h-dvh flex-col items-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-prose">
+    <div class="mb-6 text-center">
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+      <% end %>
+    </div>
+    <%= ui_back_link t(".back"), href: root_path %>
+    <%= ui_card title: t("#{scope}.title"), heading: :h1, padding: :lg do %>
+      <div class="space-y-6 text-base leading-relaxed">
+        <% if I18n.exists?("#{scope}.updated_on") %>
+          <p class="-mt-2 text-sm text-mute"><%= t(".updated_on", date: t("#{scope}.updated_on")) %></p>
+        <% end %>
+
+        <%# UDR-0063 §3.2 : le sommaire n'apparaît qu'au-delà de cinq sections ; cibles de 48 px (§3.6). %>
+        <% if sections.size > 5 %>
+          <nav aria-label="<%= t(".toc") %>">
+            <ol class="list-decimal pl-6">
+              <% sections.each do |id, section| %>
+                <li>
+                  <a href="#<%= id %>" class="inline-flex min-h-tap items-center text-brand-strong underline underline-offset-2
+                                             hover:text-ink focus-visible:outline-2 focus-visible:outline-brand"><%= section[:title] %></a>
+                </li>
+              <% end %>
+            </ol>
+          </nav>
+        <% end %>
+
+        <% sections.each do |id, section| %>
+          <section aria-labelledby="<%= id %>" class="space-y-3">
+            <h2 id="<%= id %>" class="font-display text-base leading-tight font-extrabold"><%= section[:title] %></h2>
+            <% Array(section[:paragraphs]).each do |paragraph| %>
+              <p><%= paragraph %></p>
+            <% end %>
+            <% if section[:items].present? %>
+              <ul class="list-disc space-y-1 pl-6">
+                <% section[:items].each do |item| %>
+                  <li><%= item %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </section>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</main>
