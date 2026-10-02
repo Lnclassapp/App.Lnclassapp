@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — grill non commencé |
+| **Statut** | cadrage — grill en cours (Q1 à Q8, 2026-10-02) |
 | **Ouvert le** | 2026-10-02 |
 | **Branche** | `ccr-93a43a40-3h3ty4` *(branche de session, partagée avec `fonctions-espace-eleve` ; une branche `feature/abonnement-mobile-money` au premier code)* |
 | **Programme** | — *(né du grill de `fonctions-espace-eleve`, Q1 et Q2)* |
@@ -66,6 +66,12 @@ Source : [docs.wave.com/business](https://docs.wave.com/business#api-reference),
 |---|---|---|
 | Q1 — Qui paie ? | **L'élève ou son parent**, par Wave (porteur, 2026-10-02) | Un abonnement par compte élève ; `restrict_payer_mobile` ne peut pas imposer le numéro de l'élève (le parent paie parfois) |
 | Q2 — Quelle durée ? | **L'année scolaire** (porteur, 2026-10-02) | Un paiement par année scolaire (septembre à juillet, ADR-0041) ; pas de renouvellement mensuel. Reste à trancher : prix, ce qui est gratuit, paiement en cours d'année (plein tarif ou prorata), remboursement |
+| Q3 — Quel prix ? | **16 000 F CFA** pour l'année scolaire (porteur, 2026-10-02) | `amount: "16000"`, `currency: "XOF"` à la création de la session Wave |
+| Q4 — Qu'est-ce qui est gratuit ? | **Une période d'essai** : tout est ouvert pendant la découverte, puis il faut s'abonner | Durée de l'essai à fixer ; l'essai démarre à la création du compte (à confirmer) ; un compte ne bénéficie de l'essai qu'une fois |
+| Q5 — Abonnement en cours d'année ? | **Plein tarif**, valable jusqu'à la fin de l'année scolaire | Pas de prorata ; l'échéance de l'abonnement est la fin de l'année scolaire en cours (ADR-0041) |
+| Q6 — Remboursement ? | **Sous 7 jours** après le paiement, par Wave, sur demande | `POST /v1/checkout/sessions/:id/refund` ; au-delà de 7 jours, pas de remboursement ; geste de l'équipe, journalisé |
+| Q7 — Durée de l'essai ? | **30 jours** à partir de la création du compte | Champ ou calcul « fin d'essai » par compte élève ; rappel avant la fin (annonce « Ton essai se termine dans N jours ») |
+| Q8 — Après l'essai, sans abonnement ? | L'élève garde **son compte et son historique** (archive), mais **ne peut plus commencer d'exercice** tant qu'il ne s'est pas abonné | Garde d'accès au démarrage d'une session (`StartExerciseSession`) : un nouveau refus « abonnement requis » ; les exercices assignés sont concernés aussi. ADR à écrire (contexte `billing`, port de paiement, garde d'accès) |
 
 ## Cas limites identifiés
 
