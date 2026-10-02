@@ -1,15 +1,13 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
-# Rôle : assignations d'une classe et leur échéance ; résout la ressource par son type, sans association polymorphe
+# Rôle : assignations d'une classe et leur échéance ; résout l'exercice assigné, seul type assignable, sans association polymorphe
 # ADR  : 0035, 0048, 0071, 0072
 module Repositories
   module Classroom
     class AssignmentRepository
       include Ports::Classroom::AssignmentRepositoryPort
 
-      # type → [modèle, colonne de clé, colonne de nom]
+      # type → [modèle, colonne de clé, colonne de nom] ; seul l'exercice s'assigne (ADR-0072 §4.1).
       RESOURCES = {
-        "Course" => [ "Orm::Course", :slug, :name ],
-        "Essential" => [ "Orm::Essential", :slug, :name ],
         "Exercise" => [ "Orm::Exercise", :public_id, :title ]
       }.freeze
 
@@ -51,25 +49,12 @@ module Repositories
                                 .update_all(status: "archived", archived_by_id:, archived_at: at, updated_at: at)
       end
 
+      # Un autre type que l'exercice ne se résout pas : nil.
       def resolve_assignable(type:, key:)
-        case type
-        when "Course" then resolve_course(key)
-        when "Essential" then resolve_essential(key)
-        when "Exercise" then resolve_exercise(key)
-        end
+        resolve_exercise(key) if type == "Exercise"
       end
 
       private
-
-      def resolve_course(slug)
-        record = Orm::Course.find_by(slug:)
-        record && resolved("Course", record, key: record.slug, name: record.name, parents: [], course: record)
-      end
-
-      def resolve_essential(slug)
-        record = Orm::Essential.includes(:course).find_by(slug:)
-        record && resolved("Essential", record, key: record.slug, name: record.name, parents: [ record.course ], course: record.course)
-      end
 
       def resolve_exercise(public_id)
         record = Orm::Exercise.includes(essential: :course).find_by(public_id:)

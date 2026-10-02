@@ -1,7 +1,7 @@
 require "test_helper"
 
-# CL-16, CL-17, CL-20, AS-18, AS-19, ADR-0048, UDR-0028: the teacher of a classroom assigns a course, an essential sheet
-# or an exercise, and withdraws it. Every answer is a Turbo Stream that replaces the toggle — the old application answered
+# CL-16, CL-17, CL-20, AS-18, AS-19, ADR-0048, UDR-0028: the teacher of a classroom assigns an exercise — the only
+# assignable resource since ADR-0072 §4.1 — and withdraws it. Every answer is a Turbo Stream that replaces the toggle — the old application answered
 # 204 and left the button unchanged, raised RecordNotUnique on reassignment and wrote a teacher profile id as the author.
 class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -17,11 +17,6 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   def including(text) = /#{Regexp.escape(text)}/
   def toggle_id(type, key, classroom: @classroom) = "assignment_#{classroom.public_id}_#{type}_#{key}"
 
-  def resources
-    { "Course" => [ @course, @course.slug, "Génétique" ], "Essential" => [ @essential, @essential.slug, "La méiose" ],
-      "Exercise" => [ @exercise, @exercise.public_id, "Méiose" ] }
-  end
-
   def assign(type, key, classroom: @classroom, **)
     post classroom_assignments_path(classroom.public_id), params: { assignment: { assignable_type: type, assignable_key: key } }, **
   end
@@ -30,36 +25,50 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     patch archive_assignment_path(assignment.public_id), params: { classroom_public_id: classroom.public_id }, **
   end
 
-  test "each of the three resource types is assigned then withdrawn, in Turbo Streams that replace the toggle" do
+  test "an exercise is assigned then withdrawn, in Turbo Streams that replace the toggle" do
     sign_in_as @teacher
+    type = "Exercise"
+    key = @exercise.public_id
 
-    resources.each do |type, (record, key, name)|
-      assign(type, key, as: :turbo_stream)
+    assign(type, key, as: :turbo_stream)
 
-      assert_response :success
-      assert_equal "text/vnd.turbo-stream.html", response.media_type
-      assignment = Orm::ClassroomAssignment.find_by!(assignable_type: type, assignable_id: record.id)
-      assert_equal [ @classroom.id, "active", @teacher.id ], [ assignment.classroom_id, assignment.status, assignment.assigned_by_id ]
-      assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done", name:, classroom: "6ème 1"))
-      assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}']" do
-        assert_select "template ##{toggle_id(type, key)}", text: including(tl("toggle.assigned"))
-        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=classroom_public_id][value='#{@classroom.public_id}']"
-      end
+    assert_response :success
+    assert_equal "text/vnd.turbo-stream.html", response.media_type
+    assignment = Orm::ClassroomAssignment.find_by!(assignable_type: type, assignable_id: @exercise.id)
+    assert_equal [ @classroom.id, "active", @teacher.id ], [ assignment.classroom_id, assignment.status, assignment.assigned_by_id ]
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done", name: "Méiose", classroom: "6ème 1"))
+    assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}']" do
+      assert_select "template ##{toggle_id(type, key)}", text: including(tl("toggle.assigned"))
+      assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=classroom_public_id][value='#{@classroom.public_id}']"
+    end
 
-      withdraw(assignment, as: :turbo_stream)
+    withdraw(assignment, as: :turbo_stream)
 
-      assert_response :success
-      assert_equal "text/vnd.turbo-stream.html", response.media_type
-      assert_equal [ "archived", @teacher.id ], assignment.reload.values_at(:status, :archived_by_id)
-      assert_not_nil assignment.archived_at
-      assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("archive.done", name:, classroom: "6ème 1"))
-      assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}'] template" do
-        assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']" do
-          assert_select "input[name='assignment[assignable_type]'][value=#{type}]"
-          assert_select "input[name='assignment[assignable_key]'][value='#{key}']"
-        end
+    assert_response :success
+    assert_equal "text/vnd.turbo-stream.html", response.media_type
+    assert_equal [ "archived", @teacher.id ], assignment.reload.values_at(:status, :archived_by_id)
+    assert_not_nil assignment.archived_at
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("archive.done", name: "Méiose", classroom: "6ème 1"))
+    assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}'] template" do
+      assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']" do
+        assert_select "input[name='assignment[assignable_type]'][value=#{type}]"
+        assert_select "input[name='assignment[assignable_key]'][value='#{key}']"
       end
     end
+  end
+
+  # ADR-0072 §4.1 : un cours ou une fiche ne s'assigne plus ; le type est refusé en place, comme un type inconnu.
+  test "a course or an essential sheet is refused in place (422, invalid) and nothing is written" do
+    sign_in_as @teacher
+
+    [ [ "Course", @course.slug ], [ "Essential", @essential.slug ] ].each do |type, key|
+      assign(type, key, as: :turbo_stream)
+
+      assert_response :unprocessable_entity, type
+      assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("refusals.invalid"))
+      assert_select "turbo-stream[action=replace]", 0
+    end
+    assert_equal 0, Orm::ClassroomAssignment.count
   end
 
   test "posting the same assignment again says it is already assigned (422) and writes nothing" do
@@ -111,8 +120,8 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     draft = create_exercise(essential: @essential, status: "draft")
     sign_in_as @teacher
 
-    [ [ "Exercise", draft.public_id ], [ "Course", "inconnu" ] ].each do |type, key|
-      assign(type, key, as: :turbo_stream)
+    [ draft.public_id, "inconnu" ].each do |key|
+      assign("Exercise", key, as: :turbo_stream)
 
       assert_response :not_found
       assert_equal "text/vnd.turbo-stream.html", response.media_type
@@ -122,10 +131,10 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "another teacher's classroom: 403 on both actions, and nothing is written" do
     other = create_classroom
-    foreign = create_assignment(classroom: other, assignable: @course)
+    foreign = create_assignment(classroom: other, assignable: @exercise)
     sign_in_as @teacher
 
-    assign("Course", @course.slug, classroom: other, as: :turbo_stream)
+    assign("Exercise", @exercise.public_id, classroom: other, as: :turbo_stream)
     assert_response :forbidden
     withdraw(foreign, classroom: other, as: :turbo_stream)
     assert_response :forbidden
@@ -134,7 +143,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "an assignment of another classroom cannot be withdrawn through one's own classroom (404)" do
-    foreign = create_assignment(classroom: create_classroom, assignable: @course)
+    foreign = create_assignment(classroom: create_classroom, assignable: @exercise)
     sign_in_as @teacher
 
     withdraw(foreign, as: :turbo_stream)
@@ -148,7 +157,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     teacher = create_teacher(classrooms: [ archived ])
     sign_in_as teacher
 
-    assign("Course", @course.slug, classroom: archived, as: :turbo_stream)
+    assign("Exercise", @exercise.public_id, classroom: archived, as: :turbo_stream)
 
     assert_response :forbidden
     assert_equal 0, Orm::ClassroomAssignment.count
@@ -156,39 +165,39 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "a student receives 403 and writes nothing; the team may assign" do
     sign_in_as create_student(classroom: @classroom)
-    assign("Course", @course.slug, as: :turbo_stream)
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
     assert_response :forbidden
     assert_equal 0, Orm::ClassroomAssignment.count
     sign_out
 
     member = create_team_member
     sign_in_as member
-    assign("Course", @course.slug, as: :turbo_stream)
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
     assert_response :success
     assert_equal [ member.id ], Orm::ClassroomAssignment.pluck(:assigned_by_id)
   end
 
   test "a visitor is sent to the sign-in page" do
-    assign("Course", @course.slug)
+    assign("Exercise", @exercise.public_id)
 
     assert_redirected_to new_session_path
   end
 
   test "without Turbo, every answer leads back to where the button was, with a flash" do
-    origin = classroom_course_url(@classroom.public_id, @course.slug)
+    origin = classroom_essential_url(@classroom.public_id, @course.slug, @essential.slug)
     sign_in_as @teacher
 
-    assign("Course", @course.slug, headers: { "HTTP_REFERER" => origin })
+    assign("Exercise", @exercise.public_id, headers: { "HTTP_REFERER" => origin })
     assert_redirected_to origin
-    assert_equal tl("create.done", name: "Génétique", classroom: "6ème 1"), flash[:notice]
+    assert_equal tl("create.done", name: "Méiose", classroom: "6ème 1"), flash[:notice]
 
-    assign("Course", @course.slug, headers: { "HTTP_REFERER" => origin })
+    assign("Exercise", @exercise.public_id, headers: { "HTTP_REFERER" => origin })
     assert_redirected_to origin
     assert_equal tl("refusals.already_assigned"), flash[:alert]
 
     withdraw(Orm::ClassroomAssignment.sole)
     assert_redirected_to classroom_path(@classroom.public_id)
-    assert_equal tl("archive.done", name: "Génétique", classroom: "6ème 1"), flash[:notice]
+    assert_equal tl("archive.done", name: "Méiose", classroom: "6ème 1"), flash[:notice]
 
     withdraw(Orm::ClassroomAssignment.sole)
     assert_redirected_to classroom_path(@classroom.public_id)
@@ -196,11 +205,11 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # UDR-0013, amendement du 2026-10-01 : un contenu d'un autre niveau ne s'assigne pas ; le refus dit pourquoi.
-  test "a course of another level is refused in 422 with its reason, and nothing is written" do
-    other = create_course(name: "Mécanique")
+  test "an exercise of another level is refused in 422 with its reason, and nothing is written" do
+    other = create_exercise(essential: create_essential(course: create_course(name: "Mécanique")))
     sign_in_as @teacher
 
-    assign("Course", other.slug, as: :turbo_stream)
+    assign("Exercise", other.public_id, as: :turbo_stream)
 
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("refusals.other_level"))

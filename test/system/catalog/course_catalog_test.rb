@@ -179,8 +179,9 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     end
   end
 
-  # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève.
-  test "on a phone, the teacher's filtered catalogue and course page are unchanged" do
+  # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
+  # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
+  test "on a phone, the teacher's filtered catalogue and course page are unchanged, without « Assigner à mes classes »" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_teacher
 
@@ -194,7 +195,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       visit course_path(@course.slug)
       assert_selector "#course_essentials li", count: 4
       assert_no_button t("components.reveal.more")
-      assert_link t("catalog.courses.role_actions.assign")
+      assert_no_link "Assigner à mes classes"
+      assert_no_button "Assigner à mes classes"
     end
   end
 

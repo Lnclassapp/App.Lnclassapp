@@ -1,7 +1,8 @@
 require "test_helper"
 
-# CL-10 (plan boucle-pedagogique, Lot D4) : le corps de la page d'une classe. Les cours assignés, actifs et publiés ; la liste
-# des élèves seulement quand ReadClassroomPolicy l'accorde. Une classe avec un exercice assigné ne casse plus (CS#B8).
+# CL-10 (plan boucle-pedagogique, Lot D4) : le corps de la page d'une classe. La liste des élèves seulement quand
+# ReadClassroomPolicy l'accorde. Une classe avec un exercice assigné ne casse plus (CS#B8). ADR-0072 §4.6 : « Cours
+# assignés » ne se lit plus, un cours ne s'assignant plus.
 module Queries
   module Classroom
     class ClassroomOverviewQueryTest < ActiveSupport::TestCase
@@ -11,34 +12,17 @@ module Queries
 
       def overview(show_roster: true) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:)
 
-      test "les cours assignés sont les actifs et publiés, avec leurs libellés et leurs fiches publiées, par nom" do
-        genetics = create_course(name: "Génétique", subtitle: "De l'ADN aux caractères", level: create_level(name: "Tle"),
-                                 series: create_series(name: "D"), material: create_material(name: "SVT", category: "science"))
-        create_essential(course: genetics)
-        create_essential(course: genetics)
-        create_essential(course: genetics, status: "draft")
-        algebra = create_course(name: "Algèbre")
-        create_assignment(classroom: @classroom, assignable: genetics)
-        create_assignment(classroom: @classroom, assignable: algebra)
-        create_assignment(classroom: @classroom, assignable: create_course(name: "Retiré"), status: "archived")
-        create_assignment(classroom: @classroom, assignable: create_course(name: "Archivé", status: "archived"))
-        create_assignment(classroom: create_classroom, assignable: create_course(name: "Autre classe"))
-
-        courses = overview.courses
-
-        assert_equal [ "Algèbre", "Génétique" ], courses.map(&:name)
-        assert_equal [ genetics.slug, "Génétique", "De l'ADN aux caractères", "Tle", "D", "SVT", "science", 2 ],
-                     courses.last.to_h.values_at(:slug, :name, :subtitle, :level_name, :series_name, :material_name,
-                                                 :material_category, :essentials_count)
-        assert_equal [ nil, 0 ], courses.first.to_h.values_at(:series_name, :essentials_count)
+      test "« Cours assignés » ne se lit plus : l'aperçu ne porte que les élèves" do
+        assert_equal [ :students ], ClassroomOverviewQuery::Overview.members
+        assert_not ClassroomOverviewQuery.const_defined?(:CourseRow, false)
       end
 
-      test "une fiche ou un exercice assigné n'est pas un cours, et ne casse rien (CS#B8)" do
-        exercise = create_exercise
-        create_assignment(classroom: @classroom, assignable: exercise)
-        create_assignment(classroom: @classroom, assignable: exercise.essential)
+      test "un exercice assigné ne casse rien (CS#B8)" do
+        create_assignment(classroom: @classroom, assignable: create_exercise)
+        student = create_student(classroom: @classroom)
 
-        assert_empty overview.courses
+        assert_equal [ student.public_id ], overview.students.map(&:public_id)
+        assert_nil overview(show_roster: false).students
       end
 
       test "la liste nomme les élèves présents, avec leur numéro et leur dernier score" do
@@ -101,11 +85,14 @@ module Queries
         assert_nil ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: false, search: "awa").students
       end
 
-      test "la recherche ne touche pas aux cours assignés" do
-        create_assignment(classroom: @classroom, assignable: create_course(name: "Algèbre"))
+      test "la recherche ne filtre que les élèves, un exercice assigné n'y change rien" do
+        create_assignment(classroom: @classroom, assignable: create_exercise(title: "Algèbre"))
+        create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
 
-        assert_equal [ "Algèbre" ],
-                     ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: true, search: "zzz").courses.map(&:name)
+        result = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: true, search: "algèbre")
+
+        assert_equal [ :students ], result.to_h.keys
+        assert_empty result.students
       end
 
       test "une classe inconnue n'a pas de page" do

@@ -63,7 +63,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "essentials" => { "status" => %w[draft published archived] },
     "exercises" => { "status" => %w[draft published archived], "exercise_type" => %w[fixation evaluation] },
     "questions" => { "question_type" => %w[true_false single_choice multiple_correct_2 multiple_correct_3] },
-    "classroom_assignments" => { "status" => %w[active archived], "assignable_type" => %w[Course Essential Exercise] },
+    "classroom_assignments" => { "status" => %w[active archived], "assignable_type" => %w[Exercise] }, # ADR-0072 §4.1
     "exercise_sessions" => { "status" => %w[started completed abandoned], "kind" => %w[standard remediation] },
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },

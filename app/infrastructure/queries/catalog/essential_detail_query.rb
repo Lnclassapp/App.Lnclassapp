@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::EssentialDetailQuery
 # Rôle : une fiche essentielle, son cours et ses exercices ; pour un élève, sa progression, ses assignations et sa lacune
-# ADR  : 0026, 0028, 0033, 0035, 0043, 0048 · UDR : 0015
+# ADR  : 0026, 0028, 0033, 0035, 0043, 0048, 0072 · UDR : 0015
 module Queries
   module Catalog
     class EssentialDetailQuery
@@ -14,7 +14,7 @@ module Queries
                                 :assigned_to_my_classroom, :badge_level, :best_score_percent, :started_session_public_id)
       GapRow = Data.define(:public_id, :opened_at)
 
-      HEADER_COLUMNS = %w[essentials.id essentials.slug essentials.name essentials.subtitle essentials.status courses.id
+      HEADER_COLUMNS = %w[essentials.id essentials.slug essentials.name essentials.subtitle essentials.status
                           courses.slug courses.name courses.status levels.name series.name materials.name
                           materials.category].freeze
       EXERCISE_COLUMNS = %i[id public_id title description exercise_type status].freeze
@@ -28,9 +28,8 @@ module Queries
                         .where(slug:, courses: { slug: course_slug }).pick(*HEADER_COLUMNS)
         return if essential_id.nil?
 
-        course_id, *course = values.drop(4)
-        Row.new(essential: essential_row(essential_id, values.take(4)), course: CourseRow.new(*course),
-                exercises: exercises(essential_id, course_id, student_id, include_unpublished),
+        Row.new(essential: essential_row(essential_id, values.take(4)), course: CourseRow.new(*values.drop(4)),
+                exercises: exercises(essential_id, student_id, include_unpublished),
                 pending_gap: pending_gap(essential_id, student_id))
       end
 
@@ -41,14 +40,14 @@ module Queries
         EssentialRow.new(*values, content)
       end
 
-      def exercises(essential_id, course_id, student_id, include_unpublished)
+      def exercises(essential_id, student_id, include_unpublished)
         scope = Orm::Exercise.where(essential_id:).order(:position, :id)
         scope = scope.where(status: "published") unless include_unpublished
         rows = scope.pluck(*EXERCISE_COLUMNS)
         ids = rows.map(&:first)
         questions = Orm::Question.where(exercise_id: ids).group(:exercise_id).count
         progress = student_id ? progress(ids, student_id) : {}
-        assigned = student_id ? assigned_ids(ids, essential_id, course_id, student_id) : Set.new
+        assigned = student_id ? assigned_ids(ids, student_id) : Set.new
         rows.map do |id, *values|
           ExerciseRow.new(*values, questions.fetch(id, 0), assigned.include?(id), *progress.fetch(id, NO_PROGRESS))
         end
@@ -63,19 +62,14 @@ module Queries
         ids.to_h { |id| [ id, [ badges[id], best[id], started[id] ] ] }
       end
 
-      # Assigné à la classe principale active de l'élève, directement, par sa fiche ou par son cours (ADR-0048).
-      def assigned_ids(ids, essential_id, course_id, student_id)
+      # Assigné directement à la classe principale active de l'élève (ADR-0048) ; ADR-0072 §4.1 : seul un exercice
+      # s'assigne, il ne l'est plus par sa fiche ni par son cours.
+      def assigned_ids(ids, student_id)
         classrooms = Orm::ClassroomStudent.joins(:classroom)
                                           .where(student_id:, primary: true, left_at: nil, classrooms: { status: "active" })
                                           .select(:classroom_id)
-        scope = Orm::ClassroomAssignment.where(classroom_id: classrooms, status: "active")
-        keys = scope.where(assignable_type: "Exercise", assignable_id: ids)
-                    .or(scope.where(assignable_type: "Essential", assignable_id: essential_id))
-                    .or(scope.where(assignable_type: "Course", assignable_id: course_id))
-                    .pluck(:assignable_type, :assignable_id)
-        return ids.to_set if keys.any? { |type, _| type != "Exercise" }
-
-        keys.to_set { |_, id| id }
+        Orm::ClassroomAssignment.where(classroom_id: classrooms, status: "active", assignable_type: "Exercise", assignable_id: ids)
+                                .pluck(:assignable_id).to_set
       end
 
       # Une seule lacune en attente par élève et par fiche, garantie en base (ADR-0043).

@@ -1,22 +1,17 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
-# Rôle : corps de la page d'une classe (CL-10) : cours assignés actifs et publiés ; élèves présents, seulement si show_roster, filtrés par nom (search:)
-# ADR  : 0026, 0028, 0048, 0060 · UDR : 0027, 0047, 0054
+# Rôle : corps de la page d'une classe (CL-10) : élèves présents, seulement si show_roster, filtrés par nom (search:)
+# ADR  : 0026, 0028, 0048, 0060, 0072 · UDR : 0027, 0047, 0054, 0062
 module Queries
   module Classroom
     class ClassroomOverviewQuery
       # students : nil sans show_roster (ReadClassroomPolicy) — la liste nominative n'est alors même pas lue.
-      Overview = Data.define(:courses, :students)
-      CourseRow = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category,
-                              :essentials_count)
+      # ADR-0072 §4.6 : « Cours assignés » ne se lit plus, un cours ne s'assignant plus.
+      Overview = Data.define(:students)
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
       # photo_version : nil sans photo (ADR-0060).
       StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version)
 
-      COURSE_COLUMNS = %w[courses.id courses.slug courses.name courses.subtitle levels.name series.name materials.name
-                          materials.category].freeze
       STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact].freeze
-      # Tri alphabétique français, indépendant de la collation de la base (en C, « É » passerait après « Z »).
-      COURSE_ORDER = Arel.sql('courses.name COLLATE "fr-x-icu"')
       # « Awa Bamba » se trouve par « awa », « bamba » ou « awa bamba » (UDR-0054 §3.9).
       STUDENT_NAME = "concat_ws(' ', users.first_name, users.last_name)".freeze
 
@@ -26,23 +21,10 @@ module Queries
         id = Orm::Classroom.where(public_id:).pick(:id)
         return if id.nil?
 
-        Overview.new(courses: courses(id), students: (students(id, search) if show_roster))
+        Overview.new(students: (students(id, search) if show_roster))
       end
 
       private
-
-      # Seules les lignes Course comptent : une fiche ou un exercice assigné ne se précharge pas ici (CS#B8).
-      def courses(classroom_id)
-        assigned = Orm::ClassroomAssignment.where(classroom_id:, assignable_type: "Course", status: "active").select(:assignable_id)
-        rows = Orm::Course.joins(:level, :material).left_joins(:series).where(id: assigned, status: "published")
-                          .order(COURSE_ORDER).pluck(*COURSE_COLUMNS)
-        essentials = Orm::Essential.where(course_id: rows.map(&:first), status: "published").group(:course_id).count
-
-        rows.map do |id, slug, name, subtitle, level_name, series_name, material_name, material_category|
-          CourseRow.new(slug:, name:, subtitle:, level_name:, series_name:, material_name:, material_category:,
-                        essentials_count: essentials.fetch(id, 0))
-        end
-      end
 
       def students(classroom_id, search)
         scope = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)

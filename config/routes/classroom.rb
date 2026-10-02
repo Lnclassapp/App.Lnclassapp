@@ -25,4 +25,3 @@ get "classrooms/:classroom_public_id/assignments/:public_id", to: "classroom/ass
 get "classrooms/:classroom_public_id/session_days/edit", to: "classroom/session_days#edit", as: :edit_classroom_session_days
 patch "classrooms/:classroom_public_id/session_days", to: "classroom/session_days#update", as: :classroom_session_days
 patch "assignments/:public_id/archive", to: "classroom/assignments#archive", as: :archive_assignment
-get "courses/:course_slug/assignments", to: "classroom/course_assignments#index", as: :course_assignments

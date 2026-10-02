@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_03_090100) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_03_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -104,7 +104,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_090100) do
     t.index ["classroom_id"], name: "index_classroom_assignments_on_classroom_id"
     t.index ["public_id"], name: "index_classroom_assignments_on_public_id", unique: true
     t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "classroom_assignments_archived_at_iff_archived"
-    t.check_constraint "assignable_type::text = ANY (ARRAY['Course'::character varying, 'Essential'::character varying, 'Exercise'::character varying]::text[])", name: "classroom_assignments_type_values"
+    t.check_constraint "assignable_type::text = 'Exercise'::text", name: "classroom_assignments_type_values"
     t.check_constraint "due_on IS NULL OR (due_on - ((assigned_at AT TIME ZONE 'UTC'::text) AT TIME ZONE 'Africa/Abidjan'::text)::date) >= 1 AND (due_on - ((assigned_at AT TIME ZONE 'UTC'::text) AT TIME ZONE 'Africa/Abidjan'::text)::date) <= 7", name: "classroom_assignments_due_on_within_a_week"
     t.check_constraint "status::text = ANY (ARRAY['active'::character varying, 'archived'::character varying]::text[])", name: "classroom_assignments_status_values"
   end

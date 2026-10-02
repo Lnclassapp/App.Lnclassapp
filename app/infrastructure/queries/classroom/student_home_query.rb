@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, exercices assignés publiés de son niveau, progression, activité, lacunes
-# ADR  : 0026, 0033, 0035, 0043, 0048 · UDR : 0010
+# ADR  : 0026, 0033, 0035, 0043, 0048, 0072 · UDR : 0010
 module Queries
   module Classroom
     class StudentHomeQuery
@@ -48,25 +48,21 @@ module Queries
         @own_level ||= Queries::Catalog::AudienceFilter.courses(Queries::Catalog::StudentAudienceQuery.new.call(student_id:))
       end
 
-      # Le plus récemment assigné d'abord ; un exercice atteint par plusieurs assignations n'apparaît qu'une fois.
+      # Le plus récemment assigné d'abord. ADR-0072 §4.1 : seul un exercice s'assigne ; il ne se lit plus par sa fiche
+      # ni par son cours. L'index actif unique garantit une seule ligne par exercice.
       def assigned_exercises(classroom_id, student_id)
-        assigned_at = Orm::ClassroomAssignment.where(classroom_id:, status: "active")
-                                              .pluck(:assignable_type, :assignable_id, :assigned_at)
-                                              .to_h { |type, id, at| [ [ type, id ], at ] }
-        rows = published_exercises(assigned_at.keys).merge(own_level(student_id)).pluck(*EXERCISE_COLUMNS).sort_by do |id, *, essential_id, course_id, essential_position, position|
-          latest = [ [ "Exercise", id ], [ "Essential", essential_id ], [ "Course", course_id ] ].filter_map { assigned_at[it] }.max
-          [ -latest.to_f, course_id, essential_position, position ]
+        assigned_at = Orm::ClassroomAssignment.where(classroom_id:, status: "active", assignable_type: "Exercise")
+                                              .pluck(:assignable_id, :assigned_at).to_h
+        rows = published_exercises(assigned_at.keys).merge(own_level(student_id)).pluck(*EXERCISE_COLUMNS).sort_by do |id, *, course_id, essential_position, position|
+          [ -assigned_at.fetch(id).to_f, course_id, essential_position, position ]
         end
         exercise_rows(rows, student_id)
       end
 
       # Un exercice publié dont la fiche et le cours le sont aussi (ADR-0035).
-      def published_exercises(keys)
-        ids = ->(type) { keys.filter_map { |key_type, id| id if key_type == type } }
-        scope = Orm::Exercise.joins(essential: { course: :material })
-                             .where(status: "published", essentials: { status: "published" }, courses: { status: "published" })
-        scope.where(id: ids.call("Exercise")).or(scope.where(essential_id: ids.call("Essential")))
-             .or(scope.where(essentials: { course_id: ids.call("Course") }))
+      def published_exercises(ids)
+        Orm::Exercise.joins(essential: { course: :material })
+                     .where(id: ids, status: "published", essentials: { status: "published" }, courses: { status: "published" })
       end
 
       def exercise_rows(rows, student_id)

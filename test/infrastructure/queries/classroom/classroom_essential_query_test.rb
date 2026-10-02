@@ -2,8 +2,9 @@ require "test_helper"
 
 module Queries
   module Classroom
-    # CL-12, AS-20 : l'ancien écran levait PG::UndefinedColumn (exercise_id) dès que la fiche avait un exercice. Ici, les
-    # assignations se lisent par (type, id), seule la ligne active compte, et aucun exercice non publié n'est proposé.
+    # CL-12, AS-20 : l'ancien écran levait PG::UndefinedColumn (exercise_id) dès que la fiche avait un exercice. Ici, seules
+    # les assignations actives d'exercice se lisent (ADR-0072 §4.1 : la fiche ne s'assigne plus), et aucun exercice non
+    # publié n'est proposé.
     class ClassroomEssentialQueryTest < ActiveSupport::TestCase
       setup do
         @classroom = create_classroom(name: "Tle D 1")
@@ -25,25 +26,23 @@ module Queries
 
         assert_equal [ @classroom.public_id, "Tle D 1" ], [ row.classroom_public_id, row.classroom_name ]
         assert_equal [ @course.slug, "Génétique et évolution" ], [ row.course_slug, row.course_name ]
-        assert_equal [ @essential.slug, "La méiose", "Deux divisions", nil ],
-                     row.essential.to_h.values_at(:slug, :name, :subtitle, :assignment_public_id)
+        assert_equal [ @essential.slug, "La méiose", "Deux divisions" ], row.essential.to_h.values_at(:slug, :name, :subtitle)
+        assert_not_includes ClassroomEssentialQuery::EssentialRow.members, :assignment_public_id
         assert_equal [ [ @first.public_id, "Les phases", 3, nil, nil, 0, 0 ], [ @second.public_id, "Le brassage", 1, nil, nil, 0, 0 ] ],
                      row.exercises.map { it.to_h.values_at(:public_id, :title, :questions_count, :assignment_public_id,
                                                            :success_percent, :passed_students_count, :completed_students_count) }
       end
 
-      test "l'assignation active de la fiche et de chaque exercice, jamais une ligne archivée ni celle d'une autre classe" do
-        essential_assignment = create_assignment(classroom: @classroom, assignable: @essential)
+      test "l'assignation active de chaque exercice, jamais une ligne archivée ni celle d'une autre classe" do
         create_assignment(classroom: @classroom, assignable: @first, status: "archived")
         first_assignment = create_assignment(classroom: @classroom, assignable: @first)
         create_assignment(classroom: @classroom, assignable: @second, status: "archived")
         create_assignment(classroom: create_classroom, assignable: @second)
-        # Une fiche qui porterait le même identifiant qu'un exercice ne le fait pas passer pour assigné.
-        create_assignment(classroom: @classroom, assignable: Orm::Essential.new(id: @second.id))
+        # L'exercice d'une autre fiche, assigné à la classe, ne fait pas passer ceux-ci pour assignés.
+        create_assignment(classroom: @classroom, assignable: create_exercise)
 
         row = query
 
-        assert_equal essential_assignment.public_id, row.essential.assignment_public_id
         assert_equal [ first_assignment.public_id, nil ], row.exercises.map(&:assignment_public_id)
       end
 

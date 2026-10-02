@@ -300,18 +300,19 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     code = find("#classroom_join_code").text
     assert_equal classroom.join_code.upcase, code
 
+    # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
     navigate_to courses_path
     find("#courses_list a", text: COURSE).click
-    click_on t("catalog.courses.role_actions.assign")
-    course = Orm::Course.find_by!(name: COURSE)
-    assert_no_page_reload do
-      within("[id='assignment_#{classroom.public_id}_Course_#{course.slug}']") { click_on "Assigner" }
-      assert_toast "#{COURSE} ajouté à Tle D 1."
-    end
+    assert_selector "#course_header h1", text: COURSE
+    assert_no_button "Assigner"
+    assert_no_link "Assigner"
 
-    navigate_to teacher_home_path
-    find("li[id='classroom_#{classroom.public_id}'] a").click
-    find("#assigned_courses a", text: COURSE).click
+    # « Cours assignés » a quitté la page de la classe (UDR-0027, amendée le 2026-10-02) ; le bloc « Cours » qui rouvre ce
+    # chemin arrive avec le Lot E de fonctions-espace-eleve (UDR-0062 §3.4). D'ici là, le cours dans la classe s'ouvre
+    # par son adresse.
+    course = Orm::Course.find_by!(name: COURSE)
+    visit classroom_course_path(classroom.public_id, course.slug)
+    assert_no_button "Assigner"
     find("#classroom_course_essentials a", text: ESSENTIAL).click
     assert_selector "h1", text: ESSENTIAL
     exercise = Orm::Exercise.find_by!(title: EXERCISE)

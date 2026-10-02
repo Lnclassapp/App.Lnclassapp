@@ -67,11 +67,10 @@ module UseCases
         @classrooms = FakeClassrooms.new(@classroom, archived)
         @resources = {
           [ "Exercise", "ex-meiose" ] => resolved("Exercise", 30, "ex-meiose", "Méiose"),
-          [ "Course", "genetique" ] => resolved("Course", 10, "genetique", "Génétique"),
-          [ "Essential", "mitose" ] => resolved("Essential", 20, "mitose", "La mitose"),
-          [ "Essential", "brouillon" ] => resolved("Essential", 21, "brouillon", "Brouillon", status: "draft"),
+          [ "Exercise", "ex-mitose" ] => resolved("Exercise", 20, "ex-mitose", "La mitose"),
+          [ "Exercise", "ex-brouillon" ] => resolved("Exercise", 21, "ex-brouillon", "Brouillon", status: "draft"),
           [ "Exercise", "ex-orphelin" ] => resolved("Exercise", 31, "ex-orphelin", "Orphelin", parents_published: false),
-          [ "Course", "tle-d" ] => resolved("Course", 11, "tle-d", "Génétique Tle D", course_level: { level_id: 13, series_id: 40 }),
+          [ "Exercise", "ex-tle-d" ] => resolved("Exercise", 11, "ex-tle-d", "Génétique Tle D", course_level: { level_id: 13, series_id: 40 }),
           [ "Exercise", "ex-6e-serie" ] => resolved("Exercise", 32, "ex-6e-serie", "Série", course_level: { level_id: 6, series_id: 40 })
         }
         @assignments = FakeAssignments.new(@resources)
@@ -102,12 +101,22 @@ module UseCases
         assert_equal 1, @assignments.rows.size
       end
 
-      test "assigne aussi un cours et une fiche essentielle, et l'équipe peut assigner" do
+      test "l'équipe peut assigner un exercice" do
         team = Entities::Identity::Actor.new(user_id: 99, role: :team, team_role: "content")
 
-        assert_equal "Course", assign("genetique", type: "Course").value.assignment.assignable.type
-        assert_equal [ "Essential", 99 ], assign("mitose", type: "Essential", actor: team).value.assignment
-                                                                                         .then { [ it.assignable.type, it.assigned_by_id ] }
+        assert_equal [ "Exercise", 99 ], assign("ex-mitose", actor: team).value.assignment
+                                                                         .then { [ it.assignable.type, it.assigned_by_id ] }
+      end
+
+      # ADR-0072 §4.1 : seul un exercice s'assigne ; le DTO refuse le type avant toute lecture de la ressource.
+      test "un cours ou une fiche : :invalid sur le type, et rien n'est écrit" do
+        [ [ "Course", "genetique" ], [ "Essential", "mitose" ] ].each do |type, key|
+          result = assign(key, type:)
+
+          assert_equal :invalid, result.code, type
+          assert result.errors.key?(:assignable_type), type
+        end
+        assert_empty @assignments.rows
       end
 
       test "déjà actif : :conflict (« Déjà assigné à cette classe ») et rien n'est écrit" do
@@ -137,16 +146,16 @@ module UseCases
       end
 
       test "une ressource absente, non publiée ou dont un parent ne l'est pas est introuvable" do
-        [ [ "Exercise", "inconnu" ], [ "Essential", "brouillon" ], [ "Exercise", "ex-orphelin" ] ].each do |type, key|
-          assert_equal :not_found, assign(key, type:).code, key
+        %w[inconnu ex-brouillon ex-orphelin].each do |key|
+          assert_equal :not_found, assign(key).code, key
         end
         assert_empty @assignments.rows
       end
 
       # UDR-0013, amendement du 2026-10-01 : l'élève ne lirait pas un contenu d'un autre niveau ; il ne s'assigne pas.
       test "un contenu d'un autre niveau, ou d'une série que la classe n'a pas : :conflict (other_level), et rien n'est écrit" do
-        [ [ "tle-d", "Course" ], [ "ex-6e-serie", "Exercise" ] ].each do |key, type|
-          result = assign(key, type:)
+        %w[ex-tle-d ex-6e-serie].each do |key|
+          result = assign(key)
 
           assert_equal :conflict, result.code, key
           assert_equal({ base: [ :other_level ] }, result.errors, key)

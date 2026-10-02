@@ -1,8 +1,8 @@
 require "test_helper"
 
 # CL-10, CL-04 (affichage), ID-15 (émission par l'enseignant) — UDR-0027. La page d'une classe, pour l'enseignant qui y
-# enseigne et pour l'équipe : en-tête et code en majuscules, cours assignés, liste des élèves avec le bouton du code de
-# récupération. Un élève reçoit 403 : il voit le code de sa classe sur ses propres pages, jamais la liste nominative.
+# enseigne et pour l'équipe : en-tête et code en majuscules, liste des élèves avec le bouton du code de récupération.
+# ADR-0072, UDR-0027 (amendée le 2026-10-02) : « Cours assignés » est retiré, un cours ne s'assignant plus. Un élève reçoit 403 : il voit le code de sa classe sur ses propres pages, jamais la liste nominative.
 # Finitions (UDR-0054, FU-02, FU-07, FU-08, FU-26, FU-48) : titre, retour selon le rôle, copie par le contrôleur unique,
 # « Chercher un élève » dans le frame de la liste.
 class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
@@ -38,11 +38,9 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_whatsapp_share", 0
   end
 
-  test "l'enseignant de la classe voit l'en-tête, le code en majuscules, les cours assignés et ses élèves" do
+  test "l'enseignant de la classe voit l'en-tête, le code en majuscules et ses élèves, sans « Cours assignés »" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
-    create_essential(course:)
-    create_assignment(classroom: @classroom, assignable: course, by: @teacher)
-    create_assignment(classroom: @classroom, assignable: create_course(name: "Brouillon", status: "draft"), by: @teacher)
+    create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", contact: "0102030405")
     session = create_exercise_session(student: awa, status: "completed", score_percent: 85)
     create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
@@ -76,11 +74,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/kfm37/, response.body)
     assert_select "#classroom_headcount", text: I18n.t("#{scope}.header.headcount", count: 2, max: 60)
 
-    assert_select "#assigned_courses li", 1
-    assert_select "#assigned_courses a[href='#{classroom_course_path(@classroom.public_id, course.slug)}']", text: /Nombres entiers/
-    assert_select "#assigned_courses", text: /Mathématiques/
-    assert_select "#assigned_courses", text: /#{I18n.t("#{scope}.assigned_courses.essentials", count: 1)}/
-    assert_select "#assigned_courses", text: /Brouillon/, count: 0
+    assert_select "#assigned_courses", 0
+    assert_no_match(/Cours assignés|Nombres entiers/, response.body)
 
     assert_select "#classroom_roster form#classroom-roster-search[method=get][action='#{classroom_path(@classroom.public_id)}']" \
                   "[role=search][data-controller=search][data-turbo-frame=classroom_roster_list]" \
@@ -105,16 +100,15 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
 
-  test "non-régression CS#B8 : la page répond 200 avec un exercice et une fiche assignés" do
-    exercise = create_exercise
-    create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-    create_assignment(classroom: @classroom, assignable: exercise.essential, by: @teacher)
+  test "non-régression CS#B8 : la page répond 200 avec un exercice assigné" do
+    create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
     assert_response :success
-    assert_select "#assigned_courses_empty", text: /#{I18n.t("#{scope}.assigned_courses.empty_title")}/
+    assert_select "#assigned_courses, #assigned_courses_empty", 0
+    assert_no_match(/Aucun cours assigné/, response.body)
   end
 
   test "l'équipe ouvre toute classe, avec la liste des élèves, et revient à la fiche de l'établissement (FU-07)" do
@@ -173,7 +167,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.no_join_code")}/
     assert_select "[data-controller=clipboard]", 0
-    assert_select "#assigned_courses_empty", 1
+    assert_select "#assigned_courses_empty", 0
     assert_select "#classroom_roster_empty", text: /#{I18n.t("#{scope}.roster.empty_title")}/
     assert_select "#classroom-roster-search", 0
     assert_select "#classroom_roster_list", 0

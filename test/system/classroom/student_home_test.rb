@@ -28,7 +28,9 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
     @essential = create_essential(course: @course)
     @meiose = create_exercise(essential: @essential, title: "La méiose")
     mitose = create_exercise(essential: @essential, title: "La mitose")
-    create_assignment(classroom: @classroom, assignable: @essential)
+    # ADR-0072 §4.1 : chaque exercice s'assigne seul ; assignés au même instant, ils suivent l'ordre de la fiche.
+    @assigned_at = 1.hour.ago
+    [ @meiose, mitose ].each { assign(it) }
     session = create_exercise_session(student: @student, exercise: mitose, status: "completed", score_percent: 80)
     create_badge(student: @student, exercise: mitose, level: "gold", session:)
   end
@@ -37,11 +39,12 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
   def tl(key, **) = I18n.t("classroom.student_homes.#{key}", **)
   def more = I18n.t("components.reveal.more")
   def with_desktop_viewport(&) = with_mobile_viewport(DESKTOP_VIEWPORT, &)
+  def assign(exercise) = create_assignment(classroom: @classroom, assignable: exercise, assigned_at: @assigned_at)
 
   # Four exercises in the list, in the order of the sheet: La méiose, La mitose, Les chromosomes, L'ADN.
   def assign_four_exercises
-    create_exercise(essential: @essential, title: "Les chromosomes")
-    create_exercise(essential: @essential, title: "L'ADN")
+    assign(create_exercise(essential: @essential, title: "Les chromosomes"))
+    assign(create_exercise(essential: @essential, title: "L'ADN"))
   end
 
   test "the student sees their assigned exercises, then « Commencer » leads to the session" do

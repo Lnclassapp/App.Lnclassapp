@@ -2,7 +2,8 @@ require "application_system_test_case"
 
 # CL-10, CL-04 — UDR-0027. L'enseignant ouvre sa classe : il voit le code en majuscules, le copie (toast « Code copié. »,
 # presse-papiers en majuscules, contrôleur clipboard depuis UDR-0054) sans rechargement de page, et voit la liste de ses élèves. Le bouton du code de
-# récupération vise la route de B8 ; son parcours complet est rejoué au Lot E.
+# récupération vise la route de B8 ; son parcours complet est rejoué au Lot E. ADR-0072, UDR-0027 (amendée le
+# 2026-10-02) : « Cours assignés » a disparu de la page.
 class Classroom::ClassroomPageTest < ApplicationSystemTestCase
   # L'accueil enseignant appartient au Lot D3 : tant qu'il n'est pas fusionné, un remplaçant répond là où la connexion
   # arrive, comme dans test/system/teams/schools_test.rb. Un contrôleur fusionné se charge seul, le remplaçant s'efface.
@@ -16,8 +17,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
                                   join_code: "kfm37", max_students: 60)
     @teacher = create_teacher(school:, classrooms: [ @classroom ])
     @course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"))
-    create_assignment(classroom: @classroom, assignable: @course, by: @teacher)
-    create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: @course)), by: @teacher)
     @awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
     @koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
     create_exercise_session(student: @awa, status: "completed", score_percent: 100)
@@ -35,8 +35,9 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert_selector "#classroom_join_code", exact_text: "KFM37"
       assert_selector "#classroom_headcount", text: I18n.t("#{scope}.header.headcount", count: 2, max: 60)
     end
-    assert_selector "#assigned_courses li", count: 1
-    assert_selector "#assigned_courses", text: "Génétique et évolution"
+    assert_no_selector "#assigned_courses"
+    assert_no_text "Cours assignés"
+    assert_no_text "Génétique et évolution"
     assert_selector "#classroom_roster li", count: 2
     assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
     assert_selector "#student_#{@awa.public_id}", text: "100 %"

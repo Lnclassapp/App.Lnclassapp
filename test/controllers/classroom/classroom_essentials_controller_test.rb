@@ -1,8 +1,9 @@
 require "test_helper"
 
 # CL-12, AS-20, UDR-0029: the teacher opens an essential sheet from their classroom and sees its published exercises,
-# each one « Assigné » or « Assigner », with the classroom's success rate. The old screen raised PG::UndefinedColumn as
-# soon as the sheet had an exercise.
+# each one « Assigné » or « Assigner », with the classroom's success rate. Since ADR-0072 the sheet itself is no longer
+# assigned (UDR-0029, amended 2026-10-02): its header has no toggle. The old screen raised PG::UndefinedColumn as soon as
+# the sheet had an exercise.
 class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"))
@@ -32,7 +33,7 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     assert_select "h1", text: "La méiose"
     assert_select "a[href='#{classroom_course_path(@classroom.public_id, @course.slug)}']", text: including("Génétique et évolution")
     assert_select "*", text: including(tl("context", classroom: "Tle D 1", school: "Lycée Classique"))
-    assert_select toggle_id("Essential", @essential.slug), text: including(toggle(:assign))
+    assert_select "[id^='assignment_#{@classroom.public_id}_Essential']", 0
     assert_select "#classroom_essential_exercises li", 2
     assert_select "#classroom_essential_exercises li", text: /Brouillon/, count: 0
     assert_select toggle_id("Exercise", @phases.public_id) do
@@ -45,13 +46,17 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     assert_select "#classroom_essential_exercises", text: including(tl("no_result"))
   end
 
-  test "an assigned sheet shows « Assigné » in its header" do
-    create_assignment(classroom: @classroom, assignable: @essential, by: @teacher)
+  # ADR-0072, UDR-0029 (amendée le 2026-10-02) : la bascule de la fiche et son role="group" disparaissent de l'en-tête.
+  test "the header of the sheet has no toggle nor group, only the exercises carry one" do
     sign_in_as @teacher
 
     get page_path
 
-    assert_select toggle_id("Essential", @essential.slug), text: including(toggle(:assigned))
+    assert_response :success
+    assert_select "[role=group]", 0
+    assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}'] input[name='assignment[assignable_type]']" do |inputs|
+      assert_equal [ "Exercise" ], inputs.map { it["value"] }.uniq
+    end
   end
 
   test "a sheet without published exercise shows the empty state" do
@@ -68,7 +73,6 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     archived = create_classroom(status: "archived")
     teacher = create_teacher(classrooms: [ archived ])
     create_assignment(classroom: archived, assignable: @phases, by: teacher)
-    create_assignment(classroom: archived, assignable: @essential, by: teacher)
     sign_in_as teacher
 
     get page_path(archived)
@@ -77,7 +81,7 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     assert_select "p", text: including(tl("archived_notice"))
     assert_select "form[action*=assignments]", 0
     assert_select "#classroom_essential_exercises", text: including(toggle(:assigned))
-    assert_select "[role=group]", text: including(toggle(:assigned))
+    assert_select "[role=group]", 0
     assert_select "#classroom_essential_exercises", text: including(tl("hint")), count: 0
   end
 

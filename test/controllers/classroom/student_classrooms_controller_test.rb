@@ -1,9 +1,9 @@
 require "test_helper"
 
 # CL-22, CL-10 (volet élève) — UDR-0011. « Ma classe » : la classe principale de l'élève, le code de la classe en
-# majuscules, les cours assignés actifs et publiés. Jamais la liste nominative : aucun nom de camarade dans la page.
-# Amendement du 2026-10-02 (UDR-0057) : ni sous-titre ni aide permanente, une ligne de cours « nom, matière », 3 lignes
-# puis « Voir plus », aucune action principale.
+# majuscules. Jamais la liste nominative : aucun nom de camarade dans la page. Amendement du 2026-10-02 (UDR-0057) : ni
+# sous-titre ni aide permanente, aucune action principale. Amendement du 2026-10-02 (ADR-0072) : la carte « Cours
+# assignés » est retirée, un cours ne s'assignant plus.
 class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTest
   # SobrietyAssertions::PRIMARY_ACTION, read here by assert_select: the browser assertions are for system tests.
   PRIMARY_ACTION = SobrietyAssertions::PRIMARY_ACTION.split(", ").map { "#main #{it}" }.join(", ").freeze
@@ -43,58 +43,31 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "a[href='#{student_classroom_path}'][aria-current=page]"
   end
 
-  test "each assigned course: its name, its subject and a link to the course, nothing else" do
-    course = create_course(name: "Génétique", subtitle: "Du gène au caractère", level: @classroom.level,
-                           series: @classroom.series, material: create_material(name: "SVT", category: "science"))
-    create_essential(course:)
-    create_assignment(classroom: @classroom, assignable: course)
-    create_assignment(classroom: @classroom, assignable: create_course(name: "Retiré"), status: "archived")
-    create_assignment(classroom: @classroom, assignable: create_course(name: "Archivé", status: "archived"))
+  # UDR-0011, amendement du 2026-10-02 (ADR-0072) : la carte resterait toujours vide ; elle est retirée.
+  test "no « Cours assignés » card, even with an assigned exercise: the classroom card alone" do
+    course = create_course(name: "Génétique", level: @classroom.level, series: @classroom.series)
+    create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)))
     sign_in_as @student
 
     get student_classroom_path
 
+    assert_response :success
     assert_select "#student_classroom_header", text: including("Tle · D")
-    assert_select "#student_classroom_courses" do
-      assert_select "*", text: tl("show.courses_count", count: 1)
-      assert_select "li", 1
-      assert_select "li#course_#{course.slug}" do
-        assert_select "a[href='#{course_path(course.slug)}']", text: including("Génétique")
-        assert_select "a p.truncate", text: "Génétique"
-        assert_select "*", text: "SVT"
-      end
-      assert_select "li", text: including("Du gène au caractère"), count: 0
-      assert_select "li", text: including("Tle · D"), count: 0
-      assert_select "li", text: including("fiche essentielle"), count: 0
-      assert_select "button", 0
-    end
-    assert_no_match "Les cours que tes enseignants ont assignés", response.body
-    assert_no_match "Retiré", response.body
-    assert_no_match "Archivé", response.body
+    assert_select "#student_classroom_courses", 0
+    assert_no_match(/Cours assignés|Aucun cours assigné|Génétique/, response.body)
+    assert_select "#main a[href='#{course_path(course.slug)}']", 0
   end
 
-  test "UDR-0057: four assigned courses, three shown, the fourth behind « Voir plus », and no primary action" do
-    %w[Algèbre Biologie Chimie Dynamique].each do |name|
-      create_assignment(classroom: @classroom, assignable: create_course(name:, level: @classroom.level, series: @classroom.series))
-    end
+  test "UDR-0057: no primary action, and nothing to reveal" do
     sign_in_as @student
 
     get student_classroom_path
 
     assert_select PRIMARY_ACTION, 0
-    assert_select "#student_classroom_courses" do
-      assert_select "*", text: tl("show.courses_count", count: 4)
-      assert_select "[data-controller=reveal]" do
-        assert_select "li", 4
-        assert_select "li:not([hidden])", 3
-        assert_select "li[hidden][data-reveal-target=item]", text: including("Dynamique")
-        assert_select "button[data-reveal-target=button][data-action='reveal#more']", text: I18n.t("components.reveal.more")
-        assert_select "[data-reveal-target=status][aria-live=polite]"
-      end
-    end
+    assert_select "#main [data-controller=reveal]", 0
   end
 
-  test "a classroom without series or code, without course: the level alone and the empty states" do
+  test "a classroom without series or code: the level alone and the empty state of the code" do
     classroom = create_classroom(level: create_level(name: "6ème"), join_code: nil)
     sign_in_as create_student(classroom:)
 
@@ -104,9 +77,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_classroom_header", text: including(" · "), count: 0
     assert_select "#student_classroom_header", text: including(tl("show.no_join_code"))
     assert_select "#student_classroom_join_code", 0
-    assert_select "#student_classroom_courses", text: including(tl("show.courses_empty"))
-    assert_select "#student_classroom_courses li", 0
-    assert_select "#student_classroom_courses button", 0
+    assert_select "#student_classroom_courses", 0
   end
 
   test "CL-10: the student receives 403 on the teacher page of their own classroom" do

@@ -2,9 +2,9 @@ require "test_helper"
 
 module Queries
   module Classroom
-    # CL-23, TR-04, AS-36: the student home reads the primary classroom only, and lists the exercises assigned to it,
-    # directly or through their sheet or course, when they and their parents are published. The old feed raised
-    # NameError as soon as the student had a classroom.
+    # CL-23, TR-04, AS-36: the student home reads the primary classroom only, and lists the exercises assigned to it when
+    # they and their parents are published (ADR-0072 §4.1: an exercise is assigned directly, never through its sheet or
+    # course). The old feed raised NameError as soon as the student had a classroom.
     class StudentHomeQueryTest < ActiveSupport::TestCase
       setup do
         @school = create_school(name: "Lycée Classique")
@@ -63,33 +63,31 @@ module Queries
         assert_equal [ @essential.slug ], row.pending_gaps.map(&:essential_slug)
       end
 
-      test "exercises assigned directly, by their sheet or by their course, each once" do
+      test "the exercises assigned directly, the most recently assigned first; their sheet and course assign nothing else" do
         direct = create_exercise(essential: create_essential(course: create_course(level: @classroom.level)), title: "Direct")
-        by_sheet = create_exercise(essential: @essential, title: "Par la fiche")
-        by_course = create_exercise(essential: create_essential(course: @course), title: "Par le cours")
-        create_assignment(classroom: @classroom, assignable: @course, assigned_at: 3.days.ago)
-        create_assignment(classroom: @classroom, assignable: @essential, assigned_at: 2.days.ago)
+        older = create_exercise(essential: @essential, title: "Plus ancien")
+        create_exercise(essential: @essential, title: "Même fiche, non assigné")
+        create_exercise(essential: create_essential(course: @course), title: "Même cours, non assigné")
+        create_assignment(classroom: @classroom, assignable: older, assigned_at: 2.days.ago)
         create_assignment(classroom: @classroom, assignable: direct, assigned_at: 1.day.ago)
 
         row = home
 
-        assert_equal [ "Direct", "Par la fiche", "Par le cours" ], titles(row)
-        assert_equal [ direct.public_id, by_sheet.public_id, by_course.public_id ], row.assigned_exercises.map(&:public_id)
+        assert_equal [ "Direct", "Plus ancien" ], titles(row)
+        assert_equal [ direct.public_id, older.public_id ], row.assigned_exercises.map(&:public_id)
         assert_equal [ "SVT", "science" ], row.assigned_exercises.last.to_h.values_at(:material_name, :material_category)
       end
 
       test "a withdrawn assignment, an archived or draft exercise, or an unpublished parent: absent" do
-        create_exercise(essential: @essential, title: "Brouillon", status: "draft")
-        create_exercise(essential: @essential, title: "Archivé", status: "archived")
-        create_assignment(classroom: @classroom, assignable: @essential)
-        withdrawn = create_exercise(title: "Retiré")
+        create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title: "Brouillon", status: "draft"))
+        create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title: "Archivé", status: "archived"))
+        withdrawn = create_exercise(essential: @essential, title: "Retiré")
         create_assignment(classroom: @classroom, assignable: withdrawn, status: "archived")
         draft_sheet = create_essential(course: @course, status: "draft")
-        create_exercise(essential: draft_sheet, title: "Fiche brouillon")
-        create_assignment(classroom: @classroom, assignable: draft_sheet)
-        archived_course = create_course(status: "archived")
-        create_exercise(essential: create_essential(course: archived_course), title: "Cours archivé")
-        create_assignment(classroom: @classroom, assignable: archived_course)
+        create_assignment(classroom: @classroom, assignable: create_exercise(essential: draft_sheet, title: "Fiche brouillon"))
+        archived_course = create_course(status: "archived", level: @classroom.level)
+        create_assignment(classroom: @classroom,
+                          assignable: create_exercise(essential: create_essential(course: archived_course), title: "Cours archivé"))
 
         assert_empty titles
       end
@@ -105,7 +103,9 @@ module Queries
       test "the progress of the student: best score, completed sessions, badge and the session to resume" do
         exercise = create_exercise(essential: @essential)
         untouched = create_exercise(essential: @essential)
-        create_assignment(classroom: @classroom, assignable: @essential)
+        # Assignés au même instant : l'ordre suit la position dans la fiche.
+        at = 1.hour.ago
+        [ exercise, untouched ].each { create_assignment(classroom: @classroom, assignable: it, assigned_at: at) }
         create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 40)
         best = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 80)
         create_exercise_session(student: @student, exercise:, status: "abandoned")
