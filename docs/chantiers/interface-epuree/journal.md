@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-10-02 | Lot 0 : « Voir plus » rend toutes les lignes côté serveur et masque les suivantes (`hidden`), sans requête | Liste courte (≤ 10 sessions) ; une requête par clic coûterait plus cher sur un réseau lent que 7 lignes de HTML | non (UDR-0057) |
 
 ## Ce qui a dérapé
 
@@ -18,7 +18,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Mesure « avant » (Lot 0) : à 390 × 844, l'accueil élève commence 7 blocs avant le pli, dont le bloc d'aide, et montre 4 boutons principaux.
+- La photo de la homepage (`homepage/student.png`) pèse 1,3 Mo et se charge aussi sur téléphone : la remplacer par une image ≤ 150 Ko est le plus gros gain de poids du chantier (Lot B / M2).
 
 ## Dette laissée derrière
 

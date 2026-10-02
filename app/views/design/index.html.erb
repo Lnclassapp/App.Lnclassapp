@@ -423,6 +423,18 @@
         <% end %>
       <% end %>
 
+      <%= design_example(name: "finish-reveal", label: t(".finishes.reveal.example")) do %>
+        <% rows = t(".finishes.reveal.rows") %>
+        <%= tag.div(id: "design-reveal", class: "max-w-form", data: ui_reveal_data) do %>
+          <ul class="divide-y divide-line">
+            <% rows.each_with_index do |row, index| %>
+              <%= tag.li(row, class: "py-2 text-sm", **ui_reveal_item(index)) %>
+            <% end %>
+          </ul>
+          <%= ui_reveal_more rows.size %>
+        <% end %>
+      <% end %>
+
       <%= design_example(name: "finish-focus", label: t(".finishes.focus.example")) do %>
         <p class="mb-3 text-sm text-mute"><%= t(".finishes.focus.intro") %></p>
         <%= ui_modal title: t(".finishes.focus.title"), id: "design-confirm", size: :sm, trigger: t(".finishes.focus.open"),
