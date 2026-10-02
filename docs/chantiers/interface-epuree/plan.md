@@ -107,7 +107,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
   - `test/system/assessment/exercise_page_test.rb`
   - `test/system/assessment/exercise_session_test.rb`
   - `test/system/assessment/session_result_test.rb`
-  - `test/controllers/assessment/exercise_sessions_controller_test.rb` (ajouté par l'amendement : ligne de contexte et « Meilleure note »)
+  - `test/controllers/assessment/exercises_controller_test.rb` (ajouté par l'amendement : ligne de contexte et « Meilleure note »), `test/controllers/assessment/exercise_sessions_controller_test.rb`, `test/controllers/assessment/session_results_controller_test.rb`
 - **Done quand**   :
   - la page de l'exercice reprend badge, meilleur score, maîtrise et sessions, retirés de l'accueil (Q4) ;
   - les trois écrans passent les assertions de la règle à 390 px ;
@@ -122,7 +122,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
   - `app/views/catalog/essentials/` : `show.html.erb`, `_exercise_progress.html.erb`
   - `config/locales/catalog/` : `courses.fr.yml`, `essentials.fr.yml`
 - **Dépend de**    : Lot 0 ; **porte** : amendements acceptés par le porteur
-- **Test associé** : `test/system/catalog/course_catalog_test.rb` · `test/system/catalog/essential_page_test.rb`
+- **Test associé** : `test/system/catalog/course_catalog_test.rb` · `test/system/catalog/essential_page_test.rb` · `test/controllers/catalog/` (`courses_controller_test.rb`, `essentials_controller_test.rb`, `student_level_test.rb`, nommés par la vérification des amendements)
 - **Done quand**   :
   - pour l'élève, le catalogue (dont le filtre par matière), la page cours et la fiche passent la règle à 390 px ;
   - les actions de l'enseignant et de l'équipe (`_role_actions`) sont inchangées.

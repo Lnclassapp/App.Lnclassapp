@@ -130,7 +130,8 @@ module Finitions
       assert_current_path course_path(@course.slug)
 
       visit course_essential_path(@course.slug, @essential.slug)
-      within("#essential_exercises") { assert_info_tip t("catalog.essentials.show.badges_help"), t("shared.info_tips.badges") }
+      # UDR-0015, amendement du 2026-10-02 : l'aide « Badges » quitte la fiche ; elle reste sur la page de l'exercice.
+      assert_no_selector "#essential_badges_help"
 
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"

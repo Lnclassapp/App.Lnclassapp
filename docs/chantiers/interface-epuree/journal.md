@@ -22,6 +22,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
+- Les tests `test/system/finitions/*` vérifient les textes d'aide écran par écran : tout retrait d'aide (R4) les touche, alors qu'aucun plan de lot ne les listait (Lots A et D).
+- Sous la charge de 5 lots en parallèle (load 15 à 38), des tests système échouent au hasard : clic intercepté par l'en-tête ou la barre basse fixes du shell après un défilement, morphing attendu trop tard. Chaque fichier relancé seul passe. La preuve finale (`bin/ci`) se joue machine calme.
 - Mesure « avant » (Lot 0) : à 390 × 844, l'accueil élève commence 7 blocs avant le pli, dont le bloc d'aide, et montre 4 boutons principaux.
 - La photo de la homepage (`homepage/student.png`) pèse 1,3 Mo et se charge aussi sur téléphone : la remplacer par une image ≤ 150 Ko est le plus gros gain de poids du chantier (Lot B / M2).
 
