@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::AccountDeletionsController
-# Rôle : l'équipe traite la demande de suppression d'un compte élève, en modale depuis sa fiche : date de la demande, puis anonymisation
-# ADR  : 0026, 0028, 0036 (§4) · UDR : 0006, 0020, 0054
+# Rôle : l'équipe traite la demande de suppression d'un compte élève, en modale depuis sa fiche : date, anonymisation, résultats effacés
+# ADR  : 0026, 0028, 0036 (§4, amendement 2) · UDR : 0006, 0020, 0054
 module Teams
   class AccountDeletionsController < BaseController
     # La règle avant le compte : un membre qui n'est pas `admin` reçoit 403, que le compte existe ou non (ADR-0038).
@@ -42,7 +42,8 @@ module Teams
         pin_recoveries: Repositories::Identity::PinRecoveryRepository.new,
         login_attempts: Repositories::Identity::LoginAttemptRepository.new,
         memberships: Repositories::Classroom::MembershipRepository.new, photos: Repositories::Identity::ProfilePhotoStore.new,
-        audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,
+        audit_log: Repositories::Identity::AuditLogRepository.new, learning_data: Repositories::Assessment::LearningDataEraser.new,
+        transaction: Repositories::Shared::Transaction.new,
         policy:, clock: Time.zone
       )
     end

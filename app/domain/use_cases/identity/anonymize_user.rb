@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::AnonymizeUser
-# Rôle : l'équipe traite une demande de suppression : compte anonymisé en une transaction, résultats gardés, demande datée au journal
-# ADR  : 0026, 0028, 0036 (§4), 0037, 0040, 0060
+# Rôle : l'équipe traite une demande de suppression : compte anonymisé et résultats effacés en une transaction, demande datée au journal
+# ADR  : 0026, 0028, 0036 (§4, amendement 2), 0037, 0040, 0060
 module UseCases
   module Identity
     class AnonymizeUser
@@ -13,7 +13,7 @@ module UseCases
       Anonymized = Data.define(:user, :requested_on)
 
       def initialize(users:, sessions:, second_factors:, pin_recoveries:, login_attempts:, memberships:, photos:, audit_log:,
-                     transaction:, policy:, clock:)
+                     learning_data:, transaction:, policy:, clock:)
         @users = users
         @sessions = sessions
         @second_factors = second_factors
@@ -22,6 +22,7 @@ module UseCases
         @memberships = memberships
         @photos = photos
         @audit_log = audit_log
+        @learning_data = learning_data
         @transaction = transaction
         @policy = policy
         @clock = clock
@@ -52,8 +53,9 @@ module UseCases
         Shared::Result.failure(:invalid, errors: IN_FUTURE) if dto.requested_on > today
       end
 
-      # Sessions d'exercice, badges, lacunes et adhésions restent : ce sont l'archive de l'établissement (ADR-0036 §4). Les
-      # tentatives de connexion, qui portent le numéro et l'IP, partent avec lui (le numéro est lu avant d'être effacé).
+      # Les adhésions restent, closes : l'archive de l'établissement (ADR-0036 §4). Ses sessions d'exercice, réponses, badges
+      # et lacunes sont effacés : il ne compte plus dans aucune statistique (amendement 2). Les tentatives de connexion, qui
+      # portent le numéro et l'IP, partent avec lui (le numéro est lu avant d'être effacé).
       # La photo est effacée dans la transaction : un échec plus loin laisse le compte intact, et la demande se rejoue.
       def anonymize(actor, target, requested_on, now)
         @photos.remove(user_id: target.id)
@@ -63,6 +65,7 @@ module UseCases
         @second_factors.reset(user_id: target.id)
         @pin_recoveries.destroy_all_for(user_id: target.id)
         @memberships.leave_all(student_id: target.id, at: now)
+        @learning_data.erase_for(student_id: target.id)
         @audit_log.record(action: "user.anonymized", actor_id: actor.user_id, at: now, subject_type: "User", subject_id: target.id,
                           metadata: { requested_on: requested_on.iso8601 })
         Shared::Result.success(Anonymized.new(user: target, requested_on:))
