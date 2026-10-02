@@ -9,7 +9,8 @@
 ## Graphe
 
 ```
-Vague 1   Lot 0 — SOCLE : migrations additives (due_on, jours de séance), entités, ports, DTO, policies,
+Vague 1   Lot 0a — SOCLE DES ÉCHÉANCES ‖ Lot 0b — SOCLE DES PAGES ‖ Lot B — CARTE D'AIDE (révisé le 2026-10-02)
+          0a : migrations additives (due_on, jours de séance), entités, ports, DTO, policies,
           DueDateHelper, routes, gabarit des pages publiques et liste ONLINE (vide), pied de page
   ↓
 Vague 2   ├─► Lot A  — Retrait de l'assignation de cours et de fiches (type Exercise seul)   ┐
@@ -34,13 +35,13 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
 
 **Écart avec la demande « A, B, C, D, E, P1, P2, P3 en parallèle »** : le Lot A ne peut pas tourner en même temps que C, D et E. Restreindre `assignable_type` à `Exercise` (contrainte en base) casse toute assignation de cours créée par les tests : la fabrique `create_assignment` assigne un cours par défaut, et 49 fichiers de test en dépendent, dont ceux que C, D et E possèdent (`assign_resource_test`, `student_home_query_test`, `classroom_overview_query_test`…). A doit donc être mergé avant la vague 3. La seule autre option était de mettre le Lot A dans le Lot 0, qui serait devenu un lot de plus de 70 fichiers.
 
-**Contrats gelés au Lot 0.** `Entities::Classroom::SessionDays` (`#next_after`), `Entities::Classroom::Assignment#due_on`, `Ports::Classroom::SessionDaysRepositoryPort` (`for`, `replace`), `Dtos::Classroom::AssignmentInput#weekdays`, `Dtos::Classroom::SessionDaysInput`, `Policies::Classroom::SetSessionDaysPolicy`, `Policies::Classroom::FollowAssignmentPolicy`, `DueDateHelper#due_badge` et `#due_for_teacher`, les noms des routes, `Communication::PagesController.online?(page)` et `PublicPagesHelper#public_page_links`. Un lot qui a besoin de changer un contrat **s'arrête** et remonte : le Lot 0 rouvre.
+**Contrats gelés aux Lots 0a et 0b.** `Entities::Classroom::SessionDays` (`#next_after`), `Entities::Classroom::Assignment#due_on`, `Ports::Classroom::SessionDaysRepositoryPort` (`for`, `replace`), `Dtos::Classroom::AssignmentInput#weekdays`, `Dtos::Classroom::SessionDaysInput`, `Policies::Classroom::SetSessionDaysPolicy`, `Policies::Classroom::FollowAssignmentPolicy`, `DueDateHelper#due_badge` et `#due_for_teacher`, les noms des routes, `Communication::PagesController.online?(page)` et `PublicPagesHelper#public_page_links`. Un lot qui a besoin de changer un contrat **s'arrête** et remonte : le Lot 0 rouvre.
 
 **Exception assumée** : le Lot R porte son propre petit socle (port `identity`, et une migration si la définition du « départ » en demande une). Aucun autre lot ne touche le contexte `identity`, et R démarre à une date inconnue, bien après le Lot 0.
 
 ---
 
-## Lot 0 — Socle
+## Lot 0a — Socle des échéances
 
 - **Couche**       : infrastructure + domaine (contrats) + delivery (routes, gabarit) + ui (fichiers partagés)
 - **Fichiers**     :
@@ -53,10 +54,6 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `app/domain/policies/classroom/set_session_days_policy.rb`, `app/domain/policies/classroom/follow_assignment_policy.rb`
   - `app/helpers/due_date_helper.rb`, `config/locales/shared/due_dates.fr.yml` (formats `due_short`, `due_long`, libellés de l'UDR-0062 §3.1)
   - `config/routes/classroom.rb` (ajouts : `new_classroom_assignment`, `edit_classroom_session_days`, `classroom_session_days`, `classroom_assignment` du suivi)
-  - `config/routes/communication.rb` (`mission`, `privacy`, `terms`, `sales_terms`)
-  - `app/controllers/communication/pages_controller.rb` (`ONLINE = [].freeze`, `.online?`, 404 hors de la liste), `app/views/communication/pages/_page.html.erb`, `app/helpers/public_pages_helper.rb`, `config/locales/communication/public_pages.fr.yml`
-  - `app/views/homepage/index.html.erb` (seconde liste du pied de page, par `public_page_links`), `config/locales/homepage/index.fr.yml` (« des cours et des exercices » → « des exercices », UDR-0062 §4)
-  - `app/views/communication/help/show.html.erb` (ligne « Vos données », UDR-0063 §3.4)
   - `docs/guide/glossaire.md` *(déjà fait le 2026-10-02)*
   - tests listés ci-dessous
 - **Dépend de**    : —
@@ -67,9 +64,25 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `test/infrastructure/repositories/classroom/session_days_repository_test.rb`, `test/infrastructure/repositories/classroom/assignment_repository_test.rb` (`due_on` écrit et relu)
   - `test/db/classroom_assignments_constraints_test.rb` (`due_on` le jour même ou à + 8 refusé ; jour 7 refusé ; jour sans déclaration refusé)
   - `test/helpers/due_date_helper_test.rb` (les sept cas de l'UDR-0062 §3.1)
-  - `test/controllers/communication/pages_controller_test.rb` (404 hors de `ONLINE`, 200 avec `online?` simulé), `test/helpers/public_pages_helper_test.rb`
   - `test/architecture/port_contracts_test.rb` (inchangé, doit rester vert)
-- **Done quand**   : la suite complète est verte sans changement visible pour un utilisateur ; `bin/rails runner "puts Entities::Classroom::SessionDays.new(weekdays: [1, 4]).next_after(Date.new(2026, 10, 5))"` affiche `2026-10-08` ; `/mission` répond 404.
+- **Done quand**   : la suite complète est verte sans changement visible pour un utilisateur ; `bin/rails runner "puts Entities::Classroom::SessionDays.new(weekdays: [1, 4]).next_after(Date.new(2026, 10, 5))"` affiche `2026-10-08` .
+
+---
+
+## Lot 0b — Socle des pages publiques
+
+*Découpé du Lot 0 le 2026-10-02, à la demande du porteur (« lancer certains lots en parallèle ») : ses fichiers sont tous dans le contexte `communication` et la homepage, disjoints du Lot 0a.*
+
+- **Couche**       : delivery (routes, contrôleur) + ui (gabarit, pied de page)
+- **Fichiers**     :
+  - `config/routes/communication.rb` (`mission`, `privacy`, `terms`, `sales_terms`)
+  - `app/controllers/communication/pages_controller.rb` (`ONLINE = [].freeze`, `.online?`, 404 hors de la liste), `app/views/communication/pages/_page.html.erb`, `app/helpers/public_pages_helper.rb`, `config/locales/communication/public_pages.fr.yml`
+  - `app/views/homepage/index.html.erb` (seconde liste du pied de page, par `public_page_links`), `config/locales/homepage/index.fr.yml` (« des cours et des exercices » → « des exercices », UDR-0062 §4)
+  - `app/views/communication/help/show.html.erb` (ligne « Vos données », UDR-0063 §3.4)
+  - `test/controllers/communication/pages_controller_test.rb`, `test/helpers/public_pages_helper_test.rb`, `test/controllers/homepage_controller_test.rb` (seconde liste du pied de page, rendue vide tant que `ONLINE` est vide)
+- **Dépend de**    : —
+- **Test associé** : `test/controllers/communication/pages_controller_test.rb` (404 hors de `ONLINE`, 200 avec `online?` simulé) · `test/helpers/public_pages_helper_test.rb` · `test/controllers/homepage_controller_test.rb` · `test/controllers/communication/help_controller_test.rb` (inchangé, doit rester vert)
+- **Done quand**   : la suite est verte sans changement visible ; `/mission`, `/confidentialite`, `/conditions-utilisation` et `/conditions-vente` répondent 404 ; avec une page simulée en ligne, le gabarit rend logo, retour « Accueil » et un seul `h1`.
 
 ---
 
@@ -90,7 +103,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `test/support/factories/classroom.rb` (`create_assignment` assigne un exercice par défaut)
   - tests à adapter (ils créent une assignation de cours ou de fiche) : `test/controllers/assessment/exercise_sessions_controller_test.rb`, `test/controllers/catalog/essentials_controller_test.rb`, `test/controllers/classroom/assignments_controller_test.rb`, `test/controllers/classroom/classroom_courses_controller_test.rb`, `test/controllers/classroom/classroom_essentials_controller_test.rb`, `test/controllers/classroom/classrooms_controller_test.rb`, `test/controllers/classroom/student_classrooms_controller_test.rb`, `test/controllers/classroom/student_homes_controller_test.rb`, `test/controllers/classroom/teacher_homes_controller_test.rb`, `test/controllers/classroom/teachings_controller_test.rb`, `test/controllers/school_admin/classrooms_controller_test.rb`, `test/controllers/school_admin/teacher_reinstatements_controller_test.rb`, `test/controllers/school_admin/teachers_controller_test.rb`, `test/controllers/teams/courses_controller_test.rb`, `test/controllers/teams/essentials_controller_test.rb`, `test/domain/dtos/classroom/assignment_input_test.rb`, `test/domain/entities/classroom/assignable_test.rb`, `test/domain/ports/classroom/assignment_repository_port_test.rb`, `test/domain/use_cases/catalog/archive_course_test.rb`, `test/domain/use_cases/classroom/assign_resource_test.rb`, `test/infrastructure/queries/catalog/essential_detail_query_test.rb`, `test/infrastructure/queries/classroom/classroom_course_query_test.rb`, `test/infrastructure/queries/classroom/classroom_essential_query_test.rb`, `test/infrastructure/queries/classroom/classroom_overview_query_test.rb`, `test/infrastructure/queries/classroom/student_classroom_query_test.rb`, `test/infrastructure/queries/classroom/student_home_query_test.rb`, `test/infrastructure/queries/classroom/teacher_home_query_test.rb`, `test/infrastructure/queries/school/student_work_query_test.rb`, `test/infrastructure/queries/school/team_dashboard_query_test.rb`, `test/infrastructure/repositories/classroom/assignment_repository_test.rb`, `test/infrastructure/repositories/classroom/classroom_repository_test.rb`, `test/infrastructure/repositories/classroom/teaching_repository_test.rb`, `test/infrastructure/repositories/school/school_repository_test.rb`, `test/integration/catalog/course_lifecycle_test.rb`, `test/support/factories_test.rb`, `test/system/classroom/assignment_toggle_test.rb`, `test/system/classroom/classroom_page_test.rb`, `test/system/classroom/student_classroom_test.rb`, `test/system/classroom/student_home_test.rb`, `test/system/classroom/teacher_home_test.rb`, `test/system/error_paths_test.rb`, `test/system/finitions/catalog_and_student_test.rb`, `test/system/role_homes_test.rb`, `test/system/school_admin/student_work_test.rb`, `test/system/school_admin/teachers_test.rb`
   - supprimés : `test/controllers/classroom/course_assignments_controller_test.rb`, `test/infrastructure/queries/classroom/course_assignment_targets_query_test.rb`, `test/system/classroom/course_assignments_test.rb`
-- **Dépend de**    : Lot 0
+- **Dépend de**    : Lot 0a
 - **Test associé** :
   - `test/architecture/assignable_types_test.rb` (aucun `"Course"` ni `"Essential"` passé comme type assignable dans `app/`)
   - `test/db/restrict_classroom_assignments_to_exercises_test.rb` (une ligne `Course` fait échouer `#up` et reste intacte)
@@ -107,7 +120,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `app/helpers/components_helper.rb` (`ui_modal placement:`), `app/views/components/_modal.html.erb`, `app/assets/stylesheets/application.tailwind.css` (`.dialog-sheet`, `.sheet-handle`)
   - `app/javascript/controllers/modal_controller.js` (retour du focus), `app/javascript/controllers/autofocus_controller.js` (`data-autofocus-first`)
   - `app/views/classroom/student_homes/show.html.erb` (le lien devient le déclencheur de la carte, repli vers `/aide`)
-- **Dépend de**    : Lot 0 (`public_page_links` au pied de la carte)
+- **Dépend de**    : — (FAQ déjà livrée). La carte ne porte pas encore les liens des pages publiques : le Lot Z les ajoute au pied de la carte, avec leur mise en ligne
 - **Test associé** :
   - `test/system/communication/help_sheet_test.rb` (390 px : feuille en bas, ≥ 25 %, focus sur « Questions fréquentes », Échap et retour du focus ; 1 280 px : modale centrée ; sans JavaScript : `/aide`)
   - `test/helpers/support_helper_test.rb` (ligne absente sans numéro ; `wa.me` et `tel:`), `test/config/support_config_test.rb`, `test/helpers/components_helper_test.rb` (`placement: :sheet`)
@@ -117,7 +130,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
 
 - **Couche**       : ui
 - **Fichiers**     : `app/views/communication/pages/mission.html.erb` · `config/locales/communication/pages/mission.fr.yml`
-- **Dépend de**    : Lot 0
+- **Dépend de**    : Lot 0b
 - **Test associé** : `test/controllers/communication/pages/mission_test.rb` (avec `online?` simulé : 200 sans connexion, un `h1`, une `h2` par section, « Accueil » vers `root_path`)
 - **Done quand**   : avec la page simulée en ligne, `/mission` montre le texte de [`pages-publiques.md`](pages-publiques.md) §1, validé par le porteur ; sans simulation, elle répond toujours 404.
 
@@ -125,7 +138,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
 
 - **Couche**       : ui
 - **Fichiers**     : `app/views/communication/pages/privacy.html.erb` · `config/locales/communication/pages/privacy.fr.yml`
-- **Dépend de**    : Lot 0
+- **Dépend de**    : Lot 0b
 - **Test associé** : `test/controllers/communication/pages/privacy_test.rb` (sommaire, ancres des `h2`, « Lnclass Côte d'Ivoire SARL », Tiassalé, les deux numéros, loi n° 2013-450)
 - **Done quand**   : avec la page simulée en ligne, `/confidentialite` montre le texte de [`pages-publiques.md`](pages-publiques.md) §2, sommaire compris, marques « ‹ … : à compléter par les juristes › » encore présentes ; elle reste hors de `ONLINE` (lot Z).
 
@@ -133,7 +146,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
 
 - **Couche**       : ui
 - **Fichiers**     : `app/views/communication/pages/terms.html.erb` · `config/locales/communication/pages/terms.fr.yml`
-- **Dépend de**    : Lot 0
+- **Dépend de**    : Lot 0b
 - **Test associé** : `test/controllers/communication/pages/terms_test.rb`
 - **Done quand**   : avec la page simulée en ligne, `/conditions-utilisation` montre le texte de [`pages-publiques.md`](pages-publiques.md) §3, sommaire compris ; elle reste hors de `ONLINE` (lot Z).
 
@@ -151,7 +164,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `app/controllers/classroom/assignments_controller.rb` (`new`, `create` avec jours et « Plus tard »), `app/controllers/classroom/session_days_controller.rb` (`edit`, `update` → `turbo_stream.refresh`), `app/controllers/classroom/classroom_essentials_controller.rb`
   - `app/views/classroom/assignments/_toggle.html.erb`, `app/views/classroom/assignments/new.html.erb`, `app/views/classroom/assignments/create.turbo_stream.erb`, `app/views/classroom/session_days/edit.html.erb`, `app/views/classroom/classroom_essentials/show.html.erb` *(passation)*
   - `config/locales/classroom/assignments.fr.yml`, `config/locales/classroom/session_days.fr.yml`, `config/locales/classroom/classroom_essentials.fr.yml` *(passation)*
-- **Dépend de**    : Lot 0, Lot A
+- **Dépend de**    : Lot 0a, Lot A
 - **Test associé** :
   - `test/domain/use_cases/classroom/assign_resource_test.rb` (lundi → jeudi, jeudi → lundi, + 7, dimanche → lundi, 23 h 30 à Abidjan, « Plus tard », équipe `:forbidden` sur les jours)
   - `test/domain/use_cases/classroom/set_session_days_test.rb` (les échéances existantes ne bougent pas ; tout décocher = non renseigné)
@@ -167,7 +180,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `app/infrastructure/queries/classroom/student_home_query.rb` *(passation après A)* : `due_on`, ordre de l'UDR-0062 §3.2, `late_material_slugs`
   - `app/views/classroom/student_homes/_assigned_exercise.html.erb`, `config/locales/classroom/student_homes.fr.yml`
   - `app/controllers/communication/help_controller.rb` (question `late` dans `QUESTIONS`), `config/locales/communication/help.fr.yml` (« Que veut dire « En retard » ? »)
-- **Dépend de**    : Lot 0, Lot A
+- **Dépend de**    : Lot 0a, Lot A
 - **Test associé** :
   - `test/infrastructure/queries/classroom/student_home_query_test.rb` (ordre : dû le 8, dû le 12, sans échéance ; terminé en fin de liste, sans date)
   - `test/controllers/classroom/student_homes_controller_test.rb` (« À rendre demain » en `warning`, « À rendre jeudi » en `neutral`, « En retard · prévu hier »)
@@ -183,7 +196,7 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `app/controllers/classroom/classrooms_controller.rb`, `app/controllers/classroom/assignment_follow_ups_controller.rb`
   - `app/views/classroom/classrooms/show.html.erb` *(passation)*, `app/views/classroom/classrooms/_session_days.html.erb`, `app/views/classroom/classrooms/_assigned_exercises.html.erb`, `app/views/classroom/classrooms/_courses.html.erb`, `app/views/classroom/assignment_follow_ups/show.html.erb`
   - `config/locales/classroom/classrooms.fr.yml` *(passation)*, `config/locales/classroom/assignment_follow_ups.fr.yml`
-- **Dépend de**    : Lot 0, Lot A
+- **Dépend de**    : Lot 0a, Lot A
 - **Test associé** :
   - `test/infrastructure/queries/classroom/assignment_follow_up_query_test.rb` (jour de l'échéance = à l'heure ; lendemain = en retard ; refait = reste en retard ; remédiation ne compte pas ; élève parti ignoré ; archivée absente ; nombre de requêtes fixe)
   - `test/infrastructure/queries/classroom/classroom_overview_query_test.rb`
@@ -233,8 +246,8 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
 ## Dispatch
 
 ```
-Vague 1 : Lot 0                                   → 1 agent, séquentiel
-Vague 2 : Lot A ‖ Lot B ‖ Lot P1 ‖ Lot P2 ‖ Lot P3 → 5 agents, worktrees isolés
+Vague 1 : Lot 0a ‖ Lot 0b ‖ Lot B                 → 3 agents, worktrees isolés (révisé le 2026-10-02)
+Vague 2 : Lot A (après 0a) ‖ Lot P1 ‖ Lot P2 ‖ Lot P3 (après 0b) → 4 agents
 Vague 3 : Lot C ‖ Lot D ‖ Lot E                   → 3 agents (après le merge de A)
 Libres  : Lot P4 (après abonnement-mobile-money), Lot R (après la définition du « départ ») → 1 agent chacun, à leur date
 Final   : Lot Z                                   → 1 agent, séquentiel, avant le déploiement
@@ -272,11 +285,11 @@ Aucun critère orphelin.
 
 | Fichier | Lot propriétaire |
 |---|---|
-| `db/schema.rb` | Lot 0, puis A, puis R (si migration) |
-| `config/routes/classroom.rb` | Lot 0 (ajouts), puis A (retrait de `course_assignments`) |
-| `config/routes/communication.rb` | Lot 0 |
-| `app/infrastructure/repositories/classroom/assignment_repository.rb`, `test/infrastructure/repositories/classroom/assignment_repository_test.rb` | Lot 0 (`due_on`), puis A |
-| `app/domain/entities/classroom/assignment.rb`, `test/domain/entities/classroom/assignment_test.rb` | Lot 0 |
+| `db/schema.rb` | Lot 0a, puis A, puis R (si migration) |
+| `config/routes/classroom.rb` | Lot 0a (ajouts), puis A (retrait de `course_assignments`) |
+| `config/routes/communication.rb` | Lot 0b |
+| `app/infrastructure/repositories/classroom/assignment_repository.rb`, `test/infrastructure/repositories/classroom/assignment_repository_test.rb` | Lot 0a (`due_on`), puis A |
+| `app/domain/entities/classroom/assignment.rb`, `test/domain/entities/classroom/assignment_test.rb` | Lot 0a |
 | `app/infrastructure/queries/classroom/classroom_essential_query.rb`, son test, `app/views/classroom/classroom_essentials/show.html.erb`, `config/locales/classroom/classroom_essentials.fr.yml`, `test/controllers/classroom/classroom_essentials_controller_test.rb` | A, puis C |
 | `test/domain/use_cases/classroom/assign_resource_test.rb`, `test/controllers/classroom/assignments_controller_test.rb`, `test/system/classroom/assignment_toggle_test.rb`, `test/infrastructure/repositories/classroom/teaching_repository_test.rb` | A, puis C |
 | `app/infrastructure/queries/classroom/student_home_query.rb`, son test, `test/controllers/classroom/student_homes_controller_test.rb`, `test/system/classroom/student_home_test.rb` | A, puis D |
@@ -284,10 +297,10 @@ Aucun critère orphelin.
 | `app/views/classroom/student_homes/show.html.erb` | B (D ne touche que `_assigned_exercise`) |
 | `config/locales/classroom/student_homes.fr.yml` | D |
 | `app/controllers/communication/help_controller.rb`, `config/locales/communication/help.fr.yml`, `test/controllers/communication/help_controller_test.rb` | D |
-| `app/views/communication/help/show.html.erb` | Lot 0 |
-| `app/controllers/communication/pages_controller.rb`, `test/controllers/communication/pages_controller_test.rb` | Lot 0, puis Z |
+| `app/views/communication/help/show.html.erb` | Lot 0b |
+| `app/controllers/communication/pages_controller.rb`, `test/controllers/communication/pages_controller_test.rb` | Lot 0b, puis Z |
 | `app/views/communication/pages/<page>.html.erb`, `config/locales/communication/pages/<page>.fr.yml` | P1 à P4, un fichier chacun |
-| `app/views/homepage/index.html.erb`, `config/locales/homepage/index.fr.yml` | Lot 0 |
+| `app/views/homepage/index.html.erb`, `config/locales/homepage/index.fr.yml`, `test/controllers/homepage_controller_test.rb` | Lot 0b |
 | `app/helpers/components_helper.rb`, `app/views/components/_modal.html.erb`, `app/assets/stylesheets/application.tailwind.css`, `app/javascript/controllers/modal_controller.js`, `app/javascript/controllers/autofocus_controller.js`, `config/application.rb` | B |
 | `config/support.yml` | B (création), puis Z (valeurs) |
 | `config/recurring.yml` | R |
@@ -305,7 +318,7 @@ Aucun critère orphelin.
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md` *(ADR-0072 accepté ; amendement de l'ADR-0036 proposé, pour le lot R)*
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(0061, 0062, 0063 ; amendements 0011, 0013, 0015, 0027, 0028, 0029 ; 0030 dépréciée)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [ ] Lots 0a et 0b mergés et ports gelés avant les lots qui en dépendent
 - [ ] Lot A mergé avant la vague 3
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
