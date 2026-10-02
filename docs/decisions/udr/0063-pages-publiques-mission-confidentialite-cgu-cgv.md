@@ -18,15 +18,15 @@ Lnclass est en production sur lnclass.com depuis le 2026-09-27. Elle enregistre 
 Le porteur a ajouté au chantier, le 2026-10-02 :
 
 - **Q15** : deux pages, « Notre mission » et « Politique de protection des données » ;
-- **Q16** : les conditions générales d'utilisation (CGU) et de vente (CGV). L'entité juridique est **« Lnclass Côte d'Ivoire SARL »**, qui est aussi le responsable du traitement ; contact : +225 05 44 32 00 20 et +225 05 84 25 80 85 ; son adresse et son RCCM restent à fournir. La conservation est fixée à **30 jours après le départ**, données sensibles anonymisées par défaut : la page « Protection des données » n'entre dans `ONLINE` qu'après le lot R (anonymisation automatique, amendement proposé de l'ADR-0036).
+- **Q16** : les conditions générales d'utilisation (CGU) et de vente (CGV). L'entité juridique est **« Lnclass Côte d'Ivoire SARL »**, qui est aussi le responsable du traitement ; contact : +225 05 44 32 00 20 et +225 05 84 25 80 85 ; adresse : Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph ; le RCCM, le point ARTCI et les clauses de droit sont **complétés par les juristes**, qui valident les quatre pages avant la sortie de l'application. La conservation est fixée à **30 jours après le départ**, données sensibles anonymisées par défaut : la page « Protection des données » n'entre dans `ONLINE` qu'après le lot R (anonymisation automatique, amendement proposé de l'ADR-0036).
 
 ## 2. Décision
 
 1. **Quatre pages publiques et statiques, sur le motif de `/aide`** (UDR-0061 §3.1) : layout `application` sans shell, logo, retour « Accueil », un seul `h1`, textes dans les locales. Lisibles sans compte, par un parent comme par un élève.
 2. **Des adresses en français**, comme `/aide` : `/mission`, `/confidentialite`, `/conditions-utilisation`, `/conditions-vente`.
-3. **Aucun fait inventé.** Les brouillons ([`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md)) ne disent que ce que le code, le schéma et les ADR établissent. Ce qui relève du porteur ou d'un juriste est marqué « à fournir ».
-4. **Une page n'est mise en ligne que complète** : tant que son texte n'est pas validé et que ses données « à fournir » ne sont pas remplies, elle répond 404 et aucun lien n'y mène. Aucun « à fournir » n'est jamais visible en production.
-5. **Les CGV attendent l'offre.** Elles ne sont qu'un squelette tant que le chantier `abonnement-mobile-money` n'a pas fait son grill : leur lot dépend de ce chantier.
+3. **Aucun fait inventé.** Les textes ([`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md)) sont rédigés comme des documents complets ; ils ne disent que ce que le code, le schéma, les ADR et le porteur établissent. Ce que seuls les juristes peuvent écrire (RCCM, ARTCI, droit applicable, tribunaux, responsabilité, âge minimum et accord des parents) est marqué « ‹ … : à compléter par les juristes › ».
+4. **Une page n'est mise en ligne qu'après la validation des juristes**, avant la sortie de l'application : jusque-là, elle répond 404 et aucun lien n'y mène. Aucune marque « à compléter » n'est jamais visible en production. La politique de protection des données attend en plus le lot R (anonymisation automatique à 30 jours).
+5. **Les CGV attendent l'offre.** Leur texte est écrit pour tout ce qui est établi (vendeur, paiement Wave, aucun prélèvement automatique, réclamation) ; l'offre, la durée et le remboursement attendent le grill du chantier `abonnement-mobile-money` : leur lot (P4) dépend de ce chantier.
 
 ## 3. Règles d'implémentation
 
@@ -63,7 +63,7 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 - Un fichier par page (`mission`, `privacy`, `terms`, `sales_terms`), pour que chaque page s'écrive sans toucher aux autres ; chaque section : `title` et `paragraphs` (tableau) ou `items` (liste).
 - Ton : **vouvoiement** sur ces quatre pages. Elles s'adressent aussi aux parents, aux enseignants et aux établissements, et les CGU et la politique engagent l'entité ; l'espace élève garde le tutoiement.
 - Les textes partent des brouillons validés de [`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md). Un fait nouveau dans une page passe par une PR qui cite sa source (ADR, schéma, code).
-- Test de garde : `test/i18n/public_pages_test.rb` échoue si le fichier d'une page de `ONLINE` contient « à fournir », « TODO », « XXX » ou « [ » suivi d'une majuscule.
+- Test de garde : `test/i18n/public_pages_test.rb` échoue si le fichier d'une page de `ONLINE` contient « ‹ », « à compléter », « à fournir », « à fixer », « TODO », « XXX » ou « [ » suivi d'une majuscule.
 
 ### 3.4 Points d'entrée
 
@@ -100,4 +100,4 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 - **Le lot CGV dépend du chantier `abonnement-mobile-money`** (offre, prix, durée, remboursement) ; il ne peut pas être mis en ligne avant lui.
 - La politique de protection des données doit suivre le code : un chantier qui ajoute une donnée personnelle, un destinataire ou un sous-traitant met la page à jour dans sa PR, comme la FAQ (Q14).
 - Le cadre ivoirien (loi n° 2013-450 relative à la protection des données à caractère personnel, autorité : ARTCI) est cité comme cadre applicable ; aucune page n'affirme une conformité, une déclaration ou une autorisation que le porteur n'a pas fournie.
-- Interdit désormais : publier un texte juridique sans relecture du porteur ; afficher une donnée « à fournir ».
+- Interdit désormais : publier un texte juridique sans validation des juristes ; afficher une marque « à compléter ».

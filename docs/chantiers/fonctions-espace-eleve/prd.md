@@ -26,7 +26,7 @@ La maquette V2 de l'accueil élève montre six fonctions absentes ; après le gr
 - `Policies::Classroom::FollowAssignmentPolicy` (nouvelle) : équipe ou enseignant de la classe, classe active ou archivée.
 - Pages `/aide`, `/mission`, `/confidentialite`, `/conditions-utilisation`, `/conditions-vente` : `allow_unauthenticated_access`, aucune policy.
 
-**Entité juridique** : **Lnclass Côte d'Ivoire SARL**, éditeur du service et responsable du traitement des données (porteur, 2026-10-02, Q16). Contact : **+225 05 44 32 00 20 et +225 05 84 25 80 85**. Adresse du siège, RCCM et point ARTCI : à fournir.
+**Entité juridique** : **Lnclass Côte d'Ivoire SARL**, éditeur du service et responsable du traitement des données (porteur, 2026-10-02, Q16). Adresse : **Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph**. Contact : **+225 05 44 32 00 20 et +225 05 84 25 80 85**. RCCM, point ARTCI et clauses de droit : **à compléter par les juristes**, qui valident les quatre pages publiques **avant la sortie de l'application** (le porteur ne les fournira pas).
 
 **Conservation** (porteur, 2026-10-02) : les données personnelles sensibles sont anonymisées par défaut **30 jours après le départ** ; les informations d'usage de l'application (sessions, réponses, badges, lacunes, assignations) sont conservées pour la progression et le suivi par les enseignants et l'établissement. Le « départ » et les données « sensibles » restent à définir (§8). Anonymiser : `Identity::AnonymizeUser`, automatique par un job quotidien (lot R) ; à la main par l'équipe (`DeleteUserPolicy`).
 
@@ -312,7 +312,7 @@ Et elle a un seul h1, une h2 par section et le lien « Accueil » vers la homepa
 
 Étant donné la politique de protection des données en ligne
 Alors elle a un sommaire dont chaque lien mène à une h2
-Et elle nomme « Lnclass Côte d'Ivoire SARL » comme responsable du traitement, joignable au +225 05 44 32 00 20 et +225 05 84 25 80 85
+Et elle nomme « Lnclass Côte d'Ivoire SARL », à Tiassalé, comme responsable du traitement, joignable au +225 05 44 32 00 20 et +225 05 84 25 80 85
 Et elle annonce l'anonymisation 30 jours après le départ
 Et elle cite la loi n° 2013-450 comme cadre, sans affirmer de conformité
 
@@ -323,9 +323,9 @@ Alors son pied de page porte un lien vers chaque page publique en ligne, et vers
 Alors elle renvoie à la protection des données et aux conditions d'utilisation, une fois en ligne
 
 Étant donné une page en ligne (dans Communication::PagesController::ONLINE)
-Alors son fichier config/locales/communication/pages/<page>.fr.yml ne contient ni « à fournir », ni « TODO », ni « XXX »
+Alors son fichier config/locales/communication/pages/<page>.fr.yml ne contient ni « ‹ », ni « à compléter », ni « à fournir », ni « TODO », ni « XXX »
 
-Étant donné une page dont le texte n'est pas validé (absente de ONLINE)
+Étant donné une page que les juristes n'ont pas validée (absente de ONLINE)
 Alors son adresse répond 404 et aucun lien n'y mène
 
 Étant donné les conditions de vente
@@ -407,11 +407,11 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 | Numéro d'appel, numéro WhatsApp, horaires et délai de réponse du **support** (carte d'aide). Les numéros de contact de l'entité (+225 05 44 32 00 20 et +225 05 84 25 80 85) servent-ils aussi au support ? | **à fournir** (porteur) | les lignes WhatsApp et appel de la carte (lot B livre la carte avec la seule ligne FAQ si rien n'est fourni ; valeurs à poser au lot Z) |
 | Élève arrivé dans la classe après l'échéance : en retard dès son arrivée, ou échéance comptée depuis son arrivée (`classroom_students.joined_at`) | **ouvert** — tant qu'il n'est pas tranché, les lots D et E n'écrivent aucun cas particulier (la règle générale s'applique) | rien ; un amendement de l'ADR-0072 s'il faut un cas particulier |
 | Liste nominative : nommer aussi les élèves « pas encore faits » après l'échéance ? | **ouvert** (le grill ne nomme que les retardataires) | rien (on s'en tient aux rendus en retard) |
-| Adresse du siège et RCCM de Lnclass Côte d'Ivoire SARL ; déclaration ou autorisation ARTCI | **à fournir** (porteur, plus tard) | lot Z (mise en ligne de Protection des données, CGU, CGV) |
+| RCCM de Lnclass Côte d'Ivoire SARL ; déclaration ou autorisation ARTCI | **à compléter par les juristes** (le porteur ne les fournira pas) | lot Z (mise en ligne de Protection des données, CGU, CGV) |
 | **« Départ »** : compte fermé à la demande, élève sorti de toute classe, fin d'année scolaire sans réinscription, enseignant retiré ? | **ouvert** | lot R, donc la mise en ligne de Protection des données |
 | **Données « sensibles »** : nom, numéro, photo, genre, adresses IP, numéro saisi dans les tentatives de connexion ? | **ouvert** | lot R |
 | Sessions et badges d'un compte anonymisé : rattachés au compte anonymisé (proposition, qui garde les statistiques de la classe), ou détachés ? | **ouvert** | lot R |
 | Purges de l'ADR-0036 §6 (tentatives de connexion à 90 jours, codes périmés à 30 jours) non programmées | **constat** : ajoutées au lot R si possible, sinon signalées au journal ; la politique ne les cite pas avant | page Protection des données |
-| Région d'hébergement, âge minimum et accord des parents, bases légales, responsabilité, droit applicable et tribunaux | **à fournir** / juriste ([`pages-publiques.md`](pages-publiques.md) §5) | lot Z (Protection des données, CGU) |
+| Région d'hébergement et transferts, âge minimum et accord des parents, bases légales, responsabilité, droit applicable et tribunaux | **à compléter par les juristes** ([`pages-publiques.md`](pages-publiques.md), encadré « Relecture juridique ») | lot Z (Protection des données, CGU) |
 | Acceptation des CGU à l'inscription (case à cocher) | **ouvert** | rien dans ce chantier (sinon un chantier sur l'inscription) |
 | Offre, prix, durée, remboursement, réclamation | **ouvert**, chantier `abonnement-mobile-money` | lot P4 (CGV) |
