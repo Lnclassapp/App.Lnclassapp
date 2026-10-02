@@ -75,3 +75,10 @@ L'enseignant ouvre une de ses classes pour **relever le code** à transmettre au
 - **Chercher un élève** : si la liste n'est pas vide, `_roster` commence par `form#classroom-roster-search` (GET `classroom_path`, `role="search"`, champ `q` « Chercher un élève », contrôleur `search`) ; la liste est dans `turbo_frame_tag "classroom_roster_list"` avec un compteur `aria-live` ; état vide « Aucun élève ne correspond », avec « Effacer la recherche ». La recherche ne lit que les élèves de la classe, sous la même policy. Le formulaire « Générer un code de récupération », désormais dans ce frame, porte `data-turbo-frame="_top"` (sa réponse reste le Turbo Stream de la modale du code).
 - **Infobulles** : effectif (le plafond), « Dernier score » (UDR-0054 §3.4).
 - Titre : « <nom de la classe> · <espace> · Lnclass ».
+
+## Amendement du 2026-10-02 — exercices assignés, jours de séance, cours · Statut : Proposé
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fera foi en cas d'écart une fois acceptée.*
+
+- **« Cours assignés » est remplacé** par trois blocs, dans cet ordre, entre l'en-tête et la liste des élèves : « Jours de séance » (enseignant de la classe seulement), « Exercices assignés » (avec « 18 faits, dont 3 en retard · 7 pas encore faits », chaque ligne menant au suivi de l'exercice), et « Cours » (proposition à valider : les cours publiés du niveau, de la matière de l'enseignant, seul chemin vers les exercices).
+- L'état vide « Aucun cours assigné » disparaît, remplacé par « Aucun exercice assigné ».

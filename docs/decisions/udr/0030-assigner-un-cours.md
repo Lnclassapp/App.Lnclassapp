@@ -63,3 +63,10 @@ Un enseignant qui parcourt le catalogue trouve un cours et veut le proposer à s
 
 - Retour : `ui_back_link` vers `course_path`, libellé = nom du cours (au lieu de « Retour au cours »).
 - Titre : « Assigner à mes classes · Enseignant · Lnclass ».
+
+## Amendement du 2026-10-02 — dépréciation · Statut : Proposé
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fera foi en cas d'écart une fois acceptée.*
+
+- **Tout l'écran disparaît** : un cours ne s'assigne plus. La route `course_assignments`, `Classroom::CourseAssignmentsController`, `Queries::Classroom::CourseAssignmentTargetsQuery`, la vue et ses locales sont supprimées ; « Assigner à mes classes » quitte la page du cours (UDR-0013, amendement du 2026-10-02).
+- À l'acceptation, cette UDR passe au statut « Déprécié ».

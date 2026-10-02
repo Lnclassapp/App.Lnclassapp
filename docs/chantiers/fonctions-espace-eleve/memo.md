@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — grill clos (Q1 à Q14, 2026-10-02) |
+| **Statut** | décision — ADR-0072, UDR-0061, 0062, 0063 proposées ; FAQ construite (UDR-0061 §3.1 acceptée) ; [PRD](prd.md) proposé (2026-10-02) |
 | **Ouvert le** | 2026-10-02 |
 | **Branche** | `ccr-93a43a40-3h3ty4` *(repartie de `Develop` le 2026-10-02, après la fusion d'`interface-epuree` phase 1)* |
 | **Programme** | — *(né du grill d'`interface-epuree`, Q8 ; probablement à découper en plusieurs chantiers au grill)* |
@@ -36,7 +36,7 @@ Le chantier `interface-epuree` a décidé (grill, Q8) de n'épurer que l'existan
 
 L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent, la carte du haut ne peut pas dire « à rendre demain », la grille n'a pas de case Paiement et il n'y a pas d'annonces. Ce chantier rend la V2 complète.
 
-**Après le grill (2026-10-02)** : le chantier ne garde que **deux fonctions**, les échéances et l'aide. Le paiement part dans `abonnement-mobile-money` (Q2), les annonces et l'audio dans un chantier `annonces` (Q3), la durée est abandonnée (Q9).
+**Après le grill (2026-10-02)** : le chantier ne garde que **deux fonctions**, les échéances et l'aide. Le paiement part dans `abonnement-mobile-money` (Q2), les annonces et l'audio dans un chantier `annonces` (Q3), la durée est abandonnée (Q9). Le porteur y ajoute ensuite **quatre pages publiques** : Notre mission, Protection des données (Q15), CGU et CGV (Q16).
 
 ## Hors périmètre
 
@@ -75,6 +75,8 @@ L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent
 | Q12 — Où l'enseignant voit-il les retards ? | **Sur l'exercice assigné**, dans le suivi de la classe : « 18 faits, dont 3 en retard · 7 pas encore faits », **avec la liste nominative des retardataires** | Le suivi d'une assignation gagne deux comptes et une liste d'élèves en retard, visible du seul enseignant de la classe (et de l'équipe), jamais d'un élève (UDR-0011). Policy et test de refus à prévoir |
 | Q13 — À quoi ressemble la carte d'aide ? | **Exemple fourni par le porteur** (capture d'une application de banque mobile, non versionnée : elle montre sa photo). Carte « Contactez-nous » qui monte du bas : poignée, croix de fermeture, fond assombri ; une ligne par option = icône dans un rond teinté, titre, ligne grise (horaires, délai de réponse), chevron. Options Lnclass : **FAQ**, **WhatsApp** (« Chatter avec le support »), **contact direct = appel téléphonique** au service client | UDR de la carte d'aide (bottom sheet sous `lg`, modale au-dessus, comme Q4). Données à fournir par le porteur : numéro d'appel, numéro WhatsApp, horaires du support. Liens `tel:` et `https://wa.me/<numéro>` ; aucun appel sortant ni dépendance côté serveur |
 | Q14 — Qui écrit et tient la FAQ ? | **Écrite dans l'application** : une première FAQ de 8 à 10 questions rédigée à partir des écrans existants, relue par le porteur ; toute modification passe par une PR | Page statique, textes dans les locales (`t(".key")`), aucune table ni écran d'administration. La FAQ doit suivre les écrans : elle entre dans la définition de « fini » des chantiers qui changent un parcours élève |
+| Q15 — Ajout du porteur (2026-10-02) : pages Mission et Protection des données | **Deux pages publiques** : « Notre mission » et « Politique de protection des données », à découper en lots | Pages statiques du contexte `communication`, sur le motif de `/aide` (UDR-0063). La mission part de la landing ; la politique part d'un inventaire factuel des données traitées ([`pages-publiques.md`](pages-publiques.md)) ; ce qui relève du porteur ou d'un juriste reste « à fournir ». Aucune table |
+| Q16 — Ajout du porteur (2026-10-02) : CGU et CGV | **Conditions générales d'utilisation et de vente**, au nom de **« Lnclass Côte d'Ivoire »**, aussi responsable du traitement des données | Deux pages publiques de plus (UDR-0063). CGU : brouillon factuel (comptes, PIN, code de classe, contenu, usage, suspension) ; CGV : squelette sans chiffre, **dont le lot dépend du chantier `abonnement-mobile-money`**. Adresse, RCCM et contact de l'entité : à fournir |
 
 ## Cas limites identifiés
 
@@ -89,6 +91,10 @@ L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent
 
 ## Questions encore ouvertes
 
-- **Carte d'aide** : numéro d'appel, numéro WhatsApp et horaires du support, à fournir par le porteur .
+- **Carte d'aide** : numéro d'appel, numéro WhatsApp, horaires et délai de réponse du support, à fournir par le porteur.
 - **Élève arrivé après l'échéance** : voir les cas limites.
-- **Écrans touchés par le retrait de l'assignation de cours et de fiches** : page cours, fiche, `_role_actions` ; UDR-0013 et 0015 à amender.
+- **Écrans touchés par le retrait de l'assignation de cours et de fiches** : traités par l'UDR-0062 §3.6 ; le code en montre plus que le grill (page classe, cours et fiche dans la classe, « Assigner un cours », « Ma classe ») : UDR-0011, 0013, 0015, 0027, 0028, 0029 amendées, 0030 dépréciée (proposé).
+- **Chemin de l'enseignant vers les exercices** : il passait par les cours assignés de la classe. Proposition (UDR-0062 §3.4) : un bloc « Cours » sur la page de la classe. À valider.
+- **Données légales à fournir** (pages publiques, [`pages-publiques.md`](pages-publiques.md) §5) : adresse du siège, RCCM, forme juridique et contact de Lnclass Côte d'Ivoire ; contact pour exercer ses droits ; déclaration ou autorisation ARTCI (loi n° 2013-450) ; durées de conservation ; région d'hébergement ; âge minimum et accord des parents ; et, pour un juriste, bases légales, responsabilité, droit applicable et tribunaux.
+- **CGV** : offre, prix, durée, remboursement et réclamation, à fixer par `abonnement-mobile-money`.
+- **Choix faits au PRD sans réponse du grill**, à valider : voir [PRD §8](prd.md#8-points-ouverts) et ADR-0072 §9.

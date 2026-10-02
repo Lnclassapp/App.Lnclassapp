@@ -146,3 +146,10 @@ Cet amendement applique à « Ma classe » la règle de sobriété de l'UDR-0057
 
 - `test/controllers/classroom/student_classrooms_controller_test.rb` : la ligne d'un cours ne montre plus son sous-titre, son niveau ni ses fiches. L'en-tête montre toujours « Tle · D ». La page n'a plus de sous-titre d'en-tête. `assert_single_primary_action` et `assert_list_capped(max: 3)` passent avec 4 cours assignés.
 - `test/system/classroom/student_classroom_test.rb` : à 390 px, `assert_blocks_above_fold(max: 5)` passe. « Voir plus » révèle le 4ᵉ cours et l'annonce. L'infobulle du code s'ouvre au toucher. Ouvrir un cours reste une navigation Turbo.
+
+## Amendement du 2026-10-02 — plus de cours assignés · Statut : Proposé
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fera foi en cas d'écart une fois acceptée.*
+
+- **La carte « Cours assignés » est retirée** (proposition du rédacteur, à valider par le porteur) : un cours ne s'assigne plus, elle resterait vide. « Ma classe » garde la carte de la classe ; les cours restent au catalogue, filtré sur le niveau de l'élève.
+- Toujours aucune liste nominative, aucun retard d'un autre élève (§2, Q12 du chantier).
