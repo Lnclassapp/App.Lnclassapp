@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+# Tells whether the content a CI run is about to test already got a green « ci » (ADR-0069, chantier ci-quota).
+# The proof is the tree of the commit, not the commit: a merge commit or a new message changes the commit, never
+# the files. Two proofs count:
+#   - a green « ci » on GitHub publishes an empty artifact named ci-tree-<tree>, looked up by name;
+#   - a green bin/ci in a Claude cloud session, published by script/ci/prove as the file arbres/<tree> of the branch
+#     ci/preuves. It counts only when LOCAL_PROOF=true: the workflow allows it for a pull request into Develop only
+#     (ADR-0069 §8, decided by the owner on 2026-10-02).
+#
+#   script/ci/tested_tree              # GITHUB_REPOSITORY, GITHUB_SHA; writes tested=true|false to GITHUB_OUTPUT
+#   script/ci/tested_tree <sha>        # the same, for any commit (gh must be logged in)
+#
+# Any doubt answers false: the full suite then runs. A doubt is never an error that stops the run.
+require "json"
+require "open3"
+
+class TestedTree
+  PREFIX = "ci-tree-"
+  PROOF_BRANCH = "ci/preuves"
+
+  # api: a callable taking a GitHub API path and returning the parsed JSON, or nil when the call failed.
+  def initialize(repository:, api:, local_proof: false)
+    @repository = repository
+    @api = api
+    @local_proof = local_proof
+  end
+
+  def tree(sha)
+    @api.call("repos/#{@repository}/commits/#{sha}")&.dig("commit", "tree", "sha")
+  end
+
+  def artifact_name(sha)
+    tree = tree(sha)
+    tree && "#{PREFIX}#{tree}"
+  end
+
+  def tested?(sha)
+    tree = tree(sha) or return false
+
+    tested_on_github?(tree) || (@local_proof && proven_in_the_cloud?(tree))
+  end
+
+  private
+
+  def tested_on_github?(tree)
+    name = "#{PREFIX}#{tree}"
+    artifacts = @api.call("repos/#{@repository}/actions/artifacts?name=#{name}&per_page=100")&.fetch("artifacts", nil)
+    return false unless artifacts.is_a?(Array)
+
+    artifacts.any? { |artifact| artifact["name"] == name && artifact["expired"] == false }
+  end
+
+  # The file exists on ci/preuves: the contents API answers it; a 404 (no proof, no branch) fails the call.
+  def proven_in_the_cloud?(tree)
+    file = @api.call("repos/#{@repository}/contents/arbres/#{tree}?ref=#{PROOF_BRANCH}")
+    file.is_a?(Hash) && file["type"] == "file"
+  end
+end
+
+if $PROGRAM_NAME == __FILE__
+  gh = lambda do |path|
+    out, status = Open3.capture2("gh", "api", path, err: File::NULL)
+    status.success? ? JSON.parse(out) : nil
+  rescue JSON::ParserError, SystemCallError => error
+    warn "tested_tree : #{error.class} (#{error.message}), la suite tournera"
+    nil
+  end
+
+  sha = ARGV.first || ENV.fetch("GITHUB_SHA")
+  proof = TestedTree.new(repository: ENV.fetch("GITHUB_REPOSITORY", "Lnclassapp/App.Lnclassapp"), api: gh,
+                         local_proof: ENV["LOCAL_PROOF"] == "true")
+  name = proof.artifact_name(sha)
+  tested = proof.tested?(sha)
+  puts "#{sha} → #{name || 'arbre illisible'} : #{tested ? 'déjà testé, la suite ne rejoue pas' : 'jamais testé, la suite tourne'}"
+
+  if (output = ENV["GITHUB_OUTPUT"])
+    File.write(output, "tested=#{tested}\nartifact=#{name}\n", mode: "a")
+  end
+end

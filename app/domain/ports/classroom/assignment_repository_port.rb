@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::AssignmentRepositoryPort
 # Rôle : contrat des assignations d'une classe, et résolution polymorphe de la ressource assignée
-# ADR  : 0035, 0048
+# ADR  : 0035, 0048, 0071
 module Ports
   module Classroom
     module AssignmentRepositoryPort
@@ -29,6 +29,12 @@ module Ports
       # → true
       def archive(id:, archived_by_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #archive"
+      end
+
+      # Retrait par la direction (ADR-0071) : archive, en une écriture, les assignations actives données par l'enseignant
+      # (assigned_by_id) dans les classes de cet établissement ; les autres ne bougent pas. → Integer (devoirs archivés)
+      def archive_all_by_teacher_in_school(teacher_id:, school_id:, archived_by_id:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #archive_all_by_teacher_in_school"
       end
 
       # type ∈ Assignable::TYPES ; key = slug (Course, Essential) ou public_id (Exercise). → ResolvedAssignable | nil

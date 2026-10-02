@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B1, critères CA-01, CA-04, CA-10, CA-26, CA-27 (point d'entrée), TR-41 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (KaTeX et Trix à la demande) · [UDR-0001](0001-design-visuel-du-catalogue-pedagogique.md) (carte-vitrine) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0014](0014-formulaire-cours.md) (modale du cours, panneau de statut) |
@@ -97,3 +97,95 @@ Le catalogue est la porte d'entrée de l'élève, de l'enseignant et de l'équip
   - `test/domain/policies/catalog/read_own_level_policy_test.rb` ;
   - les tests de `StudentAudienceQuery`, `CourseLevelQuery` et `CourseCatalogQuery` ;
   - `test/controllers/catalog/student_level_test.rb` (les cinq portes).
+
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
+
+> **Décision du porteur (2026-10-02)** : amendement accepté. Les retraits ne valent **que pour l'élève** : l'enseignant et l'équipe gardent ces écrans inchangés, y compris pour les simples répétitions. Toute ligne du tableau ci-dessous qui vise un autre rôle est caduque.
+
+*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot D, règle de l'[UDR-0057](0057-ecrans-eleve-epures.md). Le texte ci-dessus et les amendements précédents restent en vigueur. Une fois acceptée, cette section fait foi en cas d'écart.*
+
+L'élève arrive au catalogue par la navigation, et bientôt par les cases de matière de l'accueil (`courses_path(material: <slug>)`, [UDR-0058](0058-accueil-eleve.md) §3.2). Cet amendement applique la règle de sobriété au catalogue et à la page d'un cours, tels que l'élève les voit. Ces deux écrans n'ont pas de maquette : ils gardent une seule mise en page, épurée à toutes les tailles (UDR-0057 §3).
+
+### Changements pour l'élève
+
+**Catalogue** (`catalog/courses/index`, `_course_card`)
+
+| Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
+|---|---|---|---|---|
+| Sous-titre de l'en-tête | « Les cours de ton niveau, par matière. », affiché en permanence | `ui_page_header title: t(".title")`, sans sous-titre. Dans le bloc de l'en-tête : `ui_info_tip t(".student_scope"), label: t(".student_scope_label")` | R4 | Dans l'infobulle : « Tu vois seulement les cours de ton niveau. » (`student_scope`). Son nom : « Quels cours ? » (`student_scope_label`). |
+| Badge « niveau série » de chaque carte | « Tle D » ou « Tle » sur chaque carte | Non rendu pour l'élève | R6 | L'élève ne voit que son niveau : le badge redit la même chose sur chaque carte. Le niveau reste dans l'en-tête de la page du cours et de la fiche. |
+| Badge de matière de chaque carte, quand le filtre « Matière » est actif | Sur chaque carte | Non rendu, pour tous les rôles (répétition simple) | R6 | La liste « Matière » du formulaire dit la matière, une fois. Sans filtre de matière, le badge reste sur chaque carte. |
+| Rangée des badges de la carte (`div.mb-4`) | Toujours rendue | Rendue seulement si elle porte au moins un badge | R6 (conséquence) | — |
+| Description de l'état « aucun résultat » | « Essayez un autre nom, un autre niveau ou une autre matière. » | Élève : « Essaie un autre nom ou une autre matière. » (`student_no_match_description`) | Clarté du filtre par matière (UDR-0058 §3.2) | L'élève n'a pas de filtre de niveau. Le texte le tutoie, comme ses autres textes. Une case de matière sans cours mène donc à un état vide juste. |
+
+**Page d'un cours** (`catalog/courses/show`, `_essential_row`)
+
+| Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
+|---|---|---|---|---|
+| Liste `#course_essentials` | Toutes les fiches | Les 3 premières lignes, puis « Voir plus » | R3 | Les lignes suivantes sont rendues, en `hidden`. « Voir plus » les révèle sans requête. |
+| Ligne `_essential_row` | Seul le nom est un lien. La ligne s'empile au téléphone. | La ligne entière est le lien (lien étiré vers `course_essential_path`). Nom tronqué, sous-titre tronqué, chevron à droite. État pressé `active:bg-mist`. | Règle « Listes » de l'UDR-0057 | Rien n'est retiré. |
+
+La pastille de matière de la règle « Listes » n'est pas rendue dans `_essential_row`. Toutes les fiches d'un cours ont la matière du cours, déjà dite par le badge de l'en-tête (R6).
+
+Ce qui ne change pas pour l'élève :
+- catalogue : la recherche, la liste « Matière », « Filtrer » (caché par le contrôleur `search`), « Effacer », le compteur `#courses_total`, le titre et le sous-titre de chaque carte, le pied « Ouvrir le cours », les états vides ;
+- page cours : le retour « Cours », l'en-tête (titre, sous-titre, badges de matière et de niveau), le contenu sous KaTeX, le titre de la liste et son état vide.
+
+**La grille du catalogue n'est pas plafonnée à 3 (exception à R3).** La grille est l'objet même de la page. Elle est déjà réduite trois fois : au niveau de l'élève, à la matière choisie, au nom cherché. Depuis une case de l'accueil, l'élève ne voit que les cours d'une matière. Un « Voir plus » cacherait des cours sans rien alléger.
+
+### Contrôle de la règle
+
+| Règle | Catalogue (élève) | Page cours (élève) |
+|---|---|---|
+| R1 — une action principale | Avec JavaScript, aucune : « Filtrer » est caché. Sans JavaScript, « Filtrer » (`primary`) est la seule. « Effacer » est `ghost` ; « Effacer la recherche » est `secondary`. | Aucune : `_role_actions` ne rend rien pour l'élève. |
+| R2 — 5 blocs au plus avant le défilement | 3 : en-tête, formulaire `#courses-filters`, frame `courses`. | 3 : retour, `#course_header`, conteneur du contenu et des fiches. |
+| R3 — 3 lignes, puis « Voir plus » | Exception justifiée ci-dessus : la grille est l'objet de la page. | Respectée : `#course_essentials` montre 3 lignes, puis « Voir plus ». |
+| R4 — aucun texte d'aide permanent | Respectée : le sous-titre passe dans l'infobulle. Les états vides gardent leur phrase, obligatoire (UDR-0057, « États obligatoires »). | Respectée : aucun texte d'aide. Le sous-titre du cours est du contenu, pas une aide. |
+| R5 — un seul accent | Respectée. La teinte de `ui_subject_badge` code la matière par sa catégorie ; elle n'est pas un accent. Aucune couleur n'est ajoutée. | Respectée, pour la même raison. |
+| R6 — une information une fois | Respectée : le niveau quitte les cartes ; la matière filtrée quitte les cartes. | Respectée : le cours est nommé une fois (`h1`), sa matière et son niveau une fois (badges de l'en-tête). Le retour dit « Cours », pas le nom du cours. |
+
+### Règles d'implémentation
+
+**`catalog/courses/index`**
+- Élève : `ui_page_header title: t(".title") do` → `ui_info_tip t(".student_scope"), label: t(".student_scope_label")`. Les autres rôles gardent leur en-tête.
+- Les cartes reçoivent `locals: { show_status: team, show_level: !student, show_material: @filters[:material].blank? }`.
+- État « aucun résultat » : `description: t(student ? ".student_no_match_description" : ".no_match_description")`.
+
+**`_course_card`**
+- Locals : `show_status:`, `show_level:`, `show_material:`.
+- `ui_subject_badge` seulement si `show_material` ; le badge « niveau série » seulement si `show_level`.
+- La rangée des badges n'est rendue que si l'un des deux l'est. Le reste de la carte ne change pas.
+
+**`catalog/courses/show`**
+- `student = current_actor.student?`.
+- La liste est rendue par `@detail.essentials.each_with_index`. Chaque ligne reçoit `student:` et `folded: student && index >= 3`.
+- Une ligne `folded` porte `hidden` et la cible du contrôleur `reveal`, selon le contrat du Lot 0.
+- Après le `ul`, si l'élève a plus de 3 fiches : « Voir plus » du Lot 0 (`ui_button`, `ghost`, pleine largeur, contrôleur `reveal`, région `aria-live="polite"`, textes de `shared.components`).
+- Enseignant et équipe : la liste reste complète, sans « Voir plus ».
+
+**`_essential_row`**
+- Locals : `essential:`, `course_slug:`, `show_status:`, `student: false`, `folded: false`.
+- Élève : `li#essential_<slug>.relative.flex.items-center.gap-3.px-4.py-4.active:bg-mist.sm:px-5`. Le lien du nom porte `after:absolute after:inset-0` (motif de `classroom/classrooms/_assigned_courses`). Nom et sous-titre `truncate`. À droite, `ui_icon "chevron-right", variant: :mini`, en `text-mute`, `aria-hidden`.
+- Enseignant et équipe : la ligne actuelle, inchangée.
+
+**`config/locales/catalog/courses.fr.yml`**
+- Retirer `index.student_subtitle`.
+- Ajouter `index.student_scope` : « Tu vois seulement les cours de ton niveau. »
+- Ajouter `index.student_scope_label` : « Quels cours ? »
+- Ajouter `index.student_no_match_description` : « Essaie un autre nom ou une autre matière. »
+
+**Tokens** : tokens du `@theme` seulement (UDR-0005). Aucune couleur en dur, aucune valeur entre crochets, aucun `dark:`.
+
+### Inchangé pour l'enseignant et l'équipe
+
+- `_role_actions` : le panneau de statut, le menu ⋮ de l'équipe et « Assigner à mes classes » de l'enseignant.
+- L'en-tête du catalogue de l'équipe : « Importer des cours » et « Nouveau cours ». Le sous-titre « Les cours du programme, par matière et par niveau. ».
+- Le filtre « Niveau », le badge « niveau série » de chaque carte, le badge de statut des cartes et des fiches.
+- La liste complète des fiches d'un cours, sans « Voir plus », et la forme actuelle de `_essential_row`.
+- Seul changement commun à tous les rôles, parce que c'est une simple répétition : le badge de matière quitte les cartes quand le filtre « Matière » est actif.
+
+### Vérification
+
+- `test/controllers/catalog/student_level_test.rb` : le catalogue de l'élève n'a plus de sous-titre et porte l'infobulle ; ses cartes n'ont pas de badge de niveau.
+- `test/system/catalog/course_catalog_test.rb`, à 390 × 844, pour l'élève : sur `courses_path(material: <slug>)`, `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)`, et aucune carte ne porte le badge de matière ; sur la page d'un cours à 4 fiches, `assert_list_capped(max: 3)` sur `#course_essentials`, puis « Voir plus » montre la 4e.
+- `test/controllers/catalog/courses_controller_test.rb` : l'enseignant et l'équipe voient le badge de niveau, la liste complète et `_role_actions` inchangé.

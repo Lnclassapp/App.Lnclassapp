@@ -11,6 +11,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
   # The import job writes the school and its classrooms before the request returns: seconds, on a loaded machine.
   IMPORT_WAIT = 20
+  # The first modal of the run renders the course form and its rich text editor on a cold server: more than the
+  # 2 s Capybara waits by default under the loaded suite (2 vCPU in CI, run 37017565081 of 2026-10-02).
+  MODAL_WAIT = 10
   TEAM_CONTACT = "0100000001".freeze
   TEACHER_CONTACT = "0501020304".freeze
   STUDENT_CONTACT = "0701020304".freeze
@@ -192,7 +195,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     navigate_to team_home_path
     assert_no_page_reload do
       within("#team_home_shortcuts") { click_on t("teams.homes.shortcuts.new_course") }
-      within "turbo-frame#modal dialog[open]" do
+      within "turbo-frame#modal dialog[open]", wait: MODAL_WAIT do
         fill_in "course[name]", with: COURSE
         select "Tle", from: "course[level_slug]"
         select "D", from: "course[series_slug]"

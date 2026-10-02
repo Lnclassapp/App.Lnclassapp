@@ -2,6 +2,7 @@ require "test_helper"
 
 # CN-02 à CN-07, CN-09, ADR-0059, UDR-0046 : depuis le bloc « Classes par niveau » de la fiche, l'équipe ajoute la
 # classe suivante d'un niveau ou retire la dernière ; le bloc est remplacé en Turbo Stream et la fiche re-demandée.
+# GD-13 (ADR-0071 §4.2) : sous ManageSchoolStructurePolicy, l'équipe garde ses deux gestes, inactif compris pour « − ».
 class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member
@@ -107,7 +108,7 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
                  Orm::AuditEvent.sole.metadata)
   end
 
-  test "CN-06 : une classe qui a un élève est refusée : 422, « archivez-la plutôt », rien n'est supprimé" do
+  test "CN-06 : une classe qui a un élève est refusée : 422, « ne peut plus être retirée », rien n'est supprimé" do
     create_student(classroom: @sixths.last)
     sign_in_as @member
 
@@ -115,6 +116,8 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("errors.has_students"))
+    # Personne ne peut archiver une classe aujourd'hui (ADR-0041, V3) : le refus ne renvoie vers aucun geste absent (porteur, 2026-10-01).
+    assert_equal "Cette classe a des élèves : elle ne peut plus être retirée.", tc("errors.has_students")
     assert_select "turbo-stream[action=replace] template #level_classrooms_6eme [role=group][aria-label=?]",
                   tc("block.count", level: "6ème", count: 4)
     assert Orm::Classroom.exists?(@sixths.last.id)
@@ -149,5 +152,23 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     delete remove_path(Orm::Classroom.find_by!(name: "6ème 5"))
     assert_equal tc("destroy.done", name: "6ème 5"), flash[:notice]
+  end
+
+  test "GD-13 : l'équipe ajoute puis retire une classe ; « − » reste permis sur un établissement désactivé" do
+    sign_in_as @member
+
+    post add_path, params: { level: "6eme" }, as: :turbo_stream
+    assert_response :success
+    delete remove_path(Orm::Classroom.find_by!(school: @school, name: "6ème 5")), as: :turbo_stream
+    assert_response :success
+    assert_equal 4, Orm::Classroom.where(school: @school).count
+
+    @school.update!(status: "inactive")
+    delete remove_path(@sixths.last), as: :turbo_stream
+    assert_response :success
+    assert_not Orm::Classroom.exists?(@sixths.last.id)
+    post add_path, params: { level: "6eme" }, as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("errors.school_inactive"))
   end
 end

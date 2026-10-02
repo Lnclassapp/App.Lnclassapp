@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
 # Rôle : inscription enseignant publique, par code saisi ou lien /e/<code>?ref= (limité en débit, parrain noté) ; succès : session
-# ADR  : 0026, 0028, 0030, 0050, 0057, 0063 · UDR : 0024, 0044, 0050
+# ADR  : 0026, 0028, 0030, 0050, 0057, 0063, 0071 · UDR : 0024, 0044, 0050, 0056
 module Identity
   class TeacherRegistrationsController < ApplicationController
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_code material_slug ref].freeze
@@ -19,8 +19,10 @@ module Identity
     end
 
     # /e/<code> : le même formulaire, l'établissement déjà trouvé ; un code refusé répond 404 sans dire pourquoi. Le jeton
-    # du parrain (?ref=, ADR-0063) voyage dans un champ caché, sans cookie ni session.
+    # du parrain (?ref=, ADR-0063) voyage dans un champ caché, sans cookie ni session. Un enseignant connecté qui peut
+    # rejoindre un établissement (ADR-0071 §9) arrive sur l'écran d'attente, le code rempli : rien sans son clic.
     def with_code
+      return redirect_to pending_account_path(school_code: params[:code]), status: :see_other if may_join_by_code?
       return redirect_to_home if authenticated?
 
       @form = Dtos::Identity::TeacherRegistrationInput.new(school_code: params[:code], ref: params[:ref])
@@ -49,6 +51,13 @@ module Identity
 
     def form_input
       Dtos::Identity::TeacherRegistrationInput.new(**params.expect(teacher_registration: FIELDS).to_h.symbolize_keys)
+    end
+
+    # Le même test que l'écran d'attente : enseignant sans établissement ni demande en attente ; la policy tranche à l'envoi.
+    def may_join_by_code?
+      return false unless current_actor&.teacher? && current_actor.school_id.nil?
+
+      Queries::School::JoinRequestsQuery.new.status_for(teacher_id: current_actor.user_id)&.status != "pending"
     end
 
     def preview_of(code) = Queries::School::SchoolCodePreviewQuery.new.call(code:)

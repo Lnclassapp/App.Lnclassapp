@@ -62,7 +62,7 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
 
     remove_sixth
 
-    assert_toast "Cette classe a des élèves : archivez-la plutôt."
+    assert_toast "Cette classe a des élèves : elle ne peut plus être retirée."
     assert_no_selector "dialog[open]"
     within("#level_classrooms_6eme") { assert_selector sixth_count(4) }
     assert Orm::Classroom.exists?(@sixths.last.id)

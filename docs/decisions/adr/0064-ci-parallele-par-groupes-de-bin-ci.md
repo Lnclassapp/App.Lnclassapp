@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* — *amendé par l'[ADR-0069](./0069-ci-en-un-job-sur-les-pr-et-promotions-par-preuve.md) (accepté le 2026-10-02) : un seul job sur les PR prêtes, promotions par preuve d'arbre* |
 | **Date** | 2026-09-28 |
 | **Chantier** | `docs/chantiers/ci-rapide` |
 | **Remplace** | — |
