@@ -1,5 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::AnonymizeUser
-# Rôle : l'équipe traite une demande de suppression : compte anonymisé et résultats effacés en une transaction, demande datée au journal
+# Rôle : l'équipe traite une demande de suppression : compte anonymisé, résultats effacés et demande close en une transaction,
+#        demande datée au journal
 # ADR  : 0026, 0028, 0036 (§4, amendement 2), 0037, 0040, 0060
 module UseCases
   module Identity
@@ -13,7 +14,7 @@ module UseCases
       Anonymized = Data.define(:user, :requested_on)
 
       def initialize(users:, sessions:, second_factors:, pin_recoveries:, login_attempts:, memberships:, photos:, audit_log:,
-                     learning_data:, transaction:, policy:, clock:)
+                     learning_data:, transaction:, policy:, clock:, deletion_requests:)
         @users = users
         @sessions = sessions
         @second_factors = second_factors
@@ -26,6 +27,7 @@ module UseCases
         @transaction = transaction
         @policy = policy
         @clock = clock
+        @deletion_requests = deletion_requests
       end
 
       # dto : Dtos::Identity::DeletionRequestInput.
@@ -66,6 +68,9 @@ module UseCases
         @pin_recoveries.destroy_all_for(user_id: target.id)
         @memberships.leave_all(student_id: target.id, at: now)
         @learning_data.erase_for(student_id: target.id)
+        # ADR-0036, amendement 2 : la demande enregistrée à sa réception, s'il y en a une, est traitée avec le compte.
+        @deletion_requests.close(user_id: target.id, status: Entities::Identity::DeletionRequest::PROCESSED,
+                                 closed_by_id: actor.user_id, at: now)
         @audit_log.record(action: "user.anonymized", actor_id: actor.user_id, at: now, subject_type: "User", subject_id: target.id,
                           metadata: { requested_on: requested_on.iso8601 })
         Shared::Result.success(Anonymized.new(user: target, requested_on:))

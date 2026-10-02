@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_03_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "account_deletion_requests", force: :cascade do |t|
+    t.datetime "closed_at"
+    t.bigint "closed_by_id"
+    t.datetime "created_at", null: false
+    t.bigint "recorded_by_id", null: false
+    t.date "requested_on", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["closed_by_id"], name: "index_account_deletion_requests_on_closed_by_id"
+    t.index ["recorded_by_id"], name: "index_account_deletion_requests_on_recorded_by_id"
+    t.index ["status", "requested_on"], name: "index_account_deletion_requests_on_status_and_requested_on"
+    t.index ["user_id"], name: "index_account_deletion_requests_on_user_id"
+    t.index ["user_id"], name: "index_account_deletion_requests_one_pending", unique: true, where: "((status)::text = 'pending'::text)"
+    t.check_constraint "(closed_at IS NULL) = (closed_by_id IS NULL)", name: "account_deletion_requests_closed_together"
+    t.check_constraint "(status::text = 'pending'::text) = (closed_at IS NULL)", name: "account_deletion_requests_closed_iff_not_pending"
+    t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'processed'::character varying, 'cancelled'::character varying]::text[])", name: "account_deletion_requests_status_values"
+  end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
@@ -803,6 +822,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100000) do
     t.check_constraint "team_role::text = ANY (ARRAY['admin'::character varying, 'content'::character varying, 'field'::character varying]::text[])", name: "users_team_role_values"
   end
 
+  add_foreign_key "account_deletion_requests", "users", column: "closed_by_id", on_delete: :restrict
+  add_foreign_key "account_deletion_requests", "users", column: "recorded_by_id", on_delete: :restrict
+  add_foreign_key "account_deletion_requests", "users", on_delete: :restrict
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions", on_delete: :restrict

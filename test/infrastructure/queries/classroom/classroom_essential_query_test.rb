@@ -98,7 +98,8 @@ module Queries
           login_attempts: Repositories::Identity::LoginAttemptRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, photos: Repositories::Identity::ProfilePhotoStore.new,
           audit_log: Repositories::Identity::AuditLogRepository.new, learning_data: Repositories::Assessment::LearningDataEraser.new,
-          transaction: Repositories::Shared::Transaction.new, policy: Policies::Identity::DeleteUserPolicy.new, clock: Time.zone
+          transaction: Repositories::Shared::Transaction.new, policy: Policies::Identity::DeleteUserPolicy.new, clock: Time.zone,
+          deletion_requests: Repositories::Identity::DeletionRequestRepository.new
         ).call(actor: Entities::Identity::Actor.new(user_id: team.id, role: :team, team_role: "admin"),
                target_public_id: student.public_id, dto: Dtos::Identity::DeletionRequestInput.new(requested_on: Date.current.iso8601))
       end

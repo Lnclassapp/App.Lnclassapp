@@ -1,0 +1,20 @@
+<%# 🌐 UI · teams/deletion_requests/_account_block — la demande de suppression dans la fiche d'un compte élève (admin) %>
+<%# Rôle : sans demande, « Enregistrer une demande de suppression » (modale) ; en attente, « Demande reçue le … » et « Annuler la demande » %>
+<%# ADR  : 0036 (amendement 2), 0038 · UDR : 0020, 0057 · servi dans le frame de teams/account_lookups/_result %>
+<%# locals: (account:, request:) -%>
+<%= turbo_frame_tag Teams::DeletionRequestsController::BLOCK_FRAME, class: "block" do %>
+  <% if request %>
+    <div id="account-deletion-request-pending" class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="min-w-0">
+        <p class="font-medium text-ink"><%= t(".received", date: l(request.requested_on, format: :due_short)) %></p>
+        <div class="mt-1.5"><%= render "teams/deletion_requests/due", due_on: request.due_on, stage: request.stage(Time.zone.today) %></div>
+      </div>
+      <%= form_with url: teams_deletion_request_path(account.public_id), method: :delete, id: "deletion-request-cancel-form" do %>
+        <%= ui_button t(".cancel"), type: :submit, variant: :ghost, size: :sm, icon: "x-mark", full: true %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= ui_button t(".record"), href: new_teams_deletion_request_path(account.public_id), variant: :secondary,
+                  icon: "inbox-arrow-down", data: { turbo_frame: "modal" } %>
+  <% end %>
+<% end %>

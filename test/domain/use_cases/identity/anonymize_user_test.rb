@@ -68,7 +68,7 @@ module UseCases
         def leave_all(student_id:, at:) = (@left ||= []) << [ student_id, at ]
       end
 
-      # Knows whether the transaction is open, to prove that the erasure happens inside it.
+      # Knows whether the transaction is open, to prove that the erasure and the closing happen inside it.
       class TrackingTransaction < FakeTransaction
         def open? = @open == true
 
@@ -91,7 +91,25 @@ module UseCases
         def erase_for(student_id:) = (@erased_for ||= []) << [ student_id, @transaction.open? ]
       end
 
-      def anonymize(actor: TEAM, target: STUDENT.public_id, requested_on: "2026-09-20")
+      # ADR-0036, amendment (2): the pending request of the account, if any, is closed as processed, inside the transaction.
+      class FakeDeletionRequests
+        include Ports::Identity::DeletionRequestRepositoryPort
+
+        attr_reader :closed
+
+        def initialize(transaction:, pending: nil)
+          @transaction = transaction
+          @pending = pending
+          @closed = []
+        end
+
+        def close(user_id:, status:, closed_by_id:, at:)
+          @closed << { user_id:, status:, closed_by_id:, at:, in_transaction: @transaction.open? }
+          @pending&.with(status:)
+        end
+      end
+
+      def anonymize(actor: TEAM, target: STUDENT.public_id, requested_on: "2026-09-20", pending: nil)
         @users = FakeUsers.new
         @sessions = FakeSessions.new
         @second_factors = FakeSecondFactors.new
@@ -102,10 +120,11 @@ module UseCases
         @audit = FakeAuditLog.new
         @transaction = TrackingTransaction.new
         @learning_data = FakeLearningData.new(@transaction)
+        @deletion_requests = FakeDeletionRequests.new(transaction: @transaction, pending:)
         AnonymizeUser.new(users: @users, sessions: @sessions, second_factors: @second_factors, pin_recoveries: @pin_recoveries,
                           login_attempts: @login_attempts, memberships: @memberships, photos: @photos, audit_log: @audit,
                           learning_data: @learning_data, transaction: @transaction,
-                          policy: Policies::Identity::DeleteUserPolicy.new, clock: Clock.new(NOW))
+                          policy: Policies::Identity::DeleteUserPolicy.new, clock: Clock.new(NOW), deletion_requests: @deletion_requests)
                      .call(actor:, target_public_id: target, dto: Dtos::Identity::DeletionRequestInput.new(requested_on:))
       end
 
@@ -117,6 +136,7 @@ module UseCases
         assert_nil @learning_data.erased_for
         assert_empty @photos.writes
         assert_empty @audit.events
+        assert_empty @deletion_requests.closed
         assert_equal 0, @transaction.calls
       end
 
@@ -149,6 +169,19 @@ module UseCases
         assert_equal [ { action: "user.anonymized", actor_id: 7, at: NOW, subject_type: "User", subject_id: 8,
                          metadata: { requested_on: "2026-09-20" } } ], @audit.events
         assert_no_match(/Awa|Koné|0100000008/, @audit.events.inspect)
+      end
+
+      test "the pending request of the account is processed, inside the transaction, by the team member" do
+        pending = Entities::Identity::DeletionRequest.new(id: 3, user_id: 8, requested_on: Date.new(2026, 9, 20), status: "pending")
+
+        assert anonymize(pending:).success?
+        assert_equal [ { user_id: 8, status: "processed", closed_by_id: 7, at: NOW, in_transaction: true } ], @deletion_requests.closed
+      end
+
+      test "an account deleted without a recorded request is still deleted" do
+        assert anonymize.success?
+        assert_equal [ "processed" ], @deletion_requests.closed.pluck(:status)
+        assert_equal 1, @audit.events.size
       end
 
       test "a request received today is handled" do
