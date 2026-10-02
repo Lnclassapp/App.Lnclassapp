@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — grill en cours (repris le 2026-10-02, après une pause du porteur le 2026-09-30) |
+| **Statut** | décision — grill terminé le 2026-10-02 ; la décision d'interface attend les maquettes des écrans disponibles, promises par le porteur |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `feature/interface-epuree` |
 | **Programme** | — *(hors plan de `refonte-application` ; précède le chantier `app-android`, ADR-0070)* |
@@ -51,13 +51,22 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 | Q7 — L'élève a une douzaine d'écrans (accueil, ma classe, matière et cours, fiche essentielle, exercice, session, résultat, profil, inviter, rejoindre une classe, connexion). Lesquels entrent dans ce chantier ? | **Tous les écrans élève.** Le porteur partagera ensuite les maquettes des écrans déjà disponibles. | Le chantier couvre tout le parcours élève, livré par lots, l'accueil en premier puisqu'il fixe la référence. Les maquettes du porteur entrent dans la décision d'interface ; un écran sans maquette suit la règle seule. |
 | Q8 — Plusieurs éléments de la maquette V2 reposent sur des fonctions qui n'existent pas encore (échéances et retards, durée d'un exercice, paiement et abonnement, annonces, lecture audio). Le memo exclut toute nouvelle fonctionnalité. Qu'en fait-on ? | **Interface seule.** Le chantier n'épure que ce qui existe déjà. | Ces éléments n'apparaissent pas encore : ni échéance ni signal de retard, ni durée, ni case Paiement, ni annonces, ni audio. Ils sont regroupés dans le chantier `fonctions-espace-eleve`, ouvert le 2026-10-02 à la demande du porteur. Tant que le paiement n'existe pas, la grille compte 7 cases (6 matières, Inviter). « À faire ensuite » reste trié par date d'assignation, la plus récente d'abord. La barre de la carte du haut compte les exercices faits sur les exercices assignés, sans notion de semaine. |
 | Q9 — Trois écrans de l'élève sont aussi vus par les autres rôles : l'écran de bienvenue, la connexion et la récupération du PIN. Les épurer change aussi ce que voient l'enseignant, la direction et l'équipe. Que fait-on ? | **Épurés pour tous les rôles**, dans ce chantier. | Exception assumée à Q1 : ces trois écrans communs suivent la règle pour tout le monde. L'écran de bienvenue a déjà sa maquette, validée par le porteur. On évite deux styles côte à côte sur le parcours d'entrée. |
+| Q10 — Sur grand écran, la grille aligne 6 éléments par rangée. Avec 7 cases (6 matières et Inviter), Inviter tombe seul sur une deuxième rangée. Que fait-on ? | **On accepte 6 + 1.** | Pas de cas particulier : la grille garde 6 colonnes sur grand écran et 4 sur téléphone, quel que soit le nombre de cases. Quand le paiement arrivera (`fonctions-espace-eleve`), la deuxième rangée aura 2 cases. |
 
 ## Cas limites identifiés
 
-- …
+- **Rien à faire** (élève nouveau sans exercice assigné, ou tout est fait) : la carte du haut présente la classe avec un message d'encouragement (Q6).
+- **Élève sans classe active** : comportement actuel conservé, un seul saut vers l'écran de sortie, sans boucle.
+- **Listes longues** (beaucoup d'exercices à faire, historique fourni) : 3 lignes, puis « Voir plus » (règle, Q2).
+- **Listes vides** : un état vide qui dit quoi attendre, jamais une section blanche.
+- **Élève du 2nd cycle** : la case EDHC devient Philosophie (Q5).
+- **Nom d'établissement trop long** dans l'en-tête : il passe à sa forme courte (sigle) plutôt que de déborder ou d'être coupé au milieu.
+- **Exercice archivé ou retiré** alors qu'il figurait dans « À faire » : il disparaît de la liste, comme aujourd'hui.
+- **Petit téléphone (360 px) et grand écran** : grille de 4 colonnes sur téléphone, 6 sur tablette et ordinateur, une dernière rangée incomplète acceptée (Q6, Q10).
 
 ## Questions encore ouvertes
 
 - Maquettes des écrans disponibles : à recevoir du porteur avant la décision d'interface.
+- Message d'encouragement de la carte « Ma classe » : texte unique, ou plusieurs textes selon la situation (rien d'assigné, ou tout est fait) ?
 - Grille sur grand écran : avec 7 éléments (6 matières et Inviter, tant que le paiement n'existe pas) et 6 par rangée, Inviter tombe seul sur une deuxième rangée. Le sortir de la grille sur grand écran, ou l'accepter ?
 - Un niveau ou une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : case masquée, ou grille à 7 cases ?
