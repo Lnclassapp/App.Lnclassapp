@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié — UDR-0057, 0058, 0059 acceptées le 2026-10-02 ; PRD et plan écrits le même jour ; lots non lancés |
+| **Statut** | planifié — plan revu le 2026-10-02 en deux phases (épurer l'existant, puis ajouter la version mobile) ; lots non lancés |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `feature/interface-epuree` |
 | **Programme** | — *(hors plan de `refonte-application` ; précède le chantier `app-android`, ADR-0070)* |
@@ -66,6 +66,7 @@ Les maquettes montrent la cible complète. Ce qui repose sur une fonction absent
 | Q11 — Déclinaisons grand écran des maquettes téléphone proposées le 2026-10-02 : les retient-on ? | **Non.** Les versions grand écran actuelles de l'application sont bonnes : on les garde et on les épure seulement. Sur téléphone, ce sont les maquettes du porteur qui s'appliquent. | Deux mises en page selon la largeur : sous le seuil téléphone, la maquette du porteur ; au-dessus, la mise en page actuelle, épurée selon la règle (Q2, Q3, Q4), sans nouvelle maquette. Les propositions de Q6 et Q10 sur la grille à 6 colonnes en grand écran tombent. Le seuil exact se fixe dans la décision d'interface. |
 | Q12 — Précision de Q11 : où passe la limite entre la maquette et l'écran actuel ? | **La tablette prend les mêmes écrans que le téléphone.** L'ordinateur et les écrans plus larges gardent la version actuelle. | Deux familles d'écrans : téléphone et tablette suivent les maquettes du porteur ; ordinateur et plus large gardent la mise en page actuelle, épurée selon la règle. Le seuil se place entre la tablette et l'ordinateur : 1 024 px proposé. |
 | Q13 — Trois points tranchés à la relecture des UDR : le badge « même sans internet », la photo générée par IA, le bouton d'aide absent. | **Le badge garde « même sans internet »** (la PWA arrive). **La photo va en production.** **Le bouton d'aide attend** une page d'aide, ajoutée à `fonctions-espace-eleve`. | UDR-0059 corrigée en conséquence. UDR-0057, 0058 et 0059 acceptées par le porteur le 2026-10-02. |
+| Q14 — Dans quel ordre livrer : maquettes et épuration ensemble, ou l'une après l'autre ? | **On épure d'abord la base de code actuelle, puis on ajoute la version mobile** avec ces derniers changements. | Le plan passe en deux phases. Phase 1 : l'épuration des écrans actuels (UDR-0058 §3.3, landing sans « Rejoindre », lots C à F), appliquée à toutes les tailles d'écran. Phase 2 : la famille téléphone et tablette de l'accueil élève et de la homepage, posée sur la base épurée. Les UDR ne changent pas. |
 
 ## Cas limites identifiés
 
