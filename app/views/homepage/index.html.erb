@@ -23,7 +23,7 @@
   <main>
     <%# ---------- Héros : la décision, visible sans défiler ---------- %>
     <section id="hero" aria-labelledby="hero-title" class="bg-brand">
-      <div class="mx-auto grid max-w-page items-center gap-10 px-gutter py-10 md:grid-cols-2 md:gap-16 md:py-20">
+      <div class="mx-auto grid max-w-page items-center gap-10 px-gutter py-10 pb-14 md:grid-cols-2 md:gap-16 md:py-20">
         <div>
           <p class="inline-flex items-center gap-2 rounded-full bg-ink/10 px-3 py-1 text-sm font-medium">
             <span class="size-2 rounded-full bg-ink" aria-hidden="true"></span>
@@ -55,8 +55,8 @@
 
     <%# ---------- Matières : les sept du référentiel, sans « et plus encore » ---------- %>
     <section id="matieres" aria-labelledby="matieres-title" class="border-b border-ink/10 bg-white">
-      <div class="mx-auto flex max-w-page flex-wrap items-center gap-2 px-gutter py-5">
-        <h2 id="matieres-title" class="mr-2 text-sm font-medium text-mute"><%= t(".subjects.label") %></h2>
+      <div class="mx-auto flex max-w-page flex-wrap items-center justify-center gap-2 px-gutter py-5 sm:justify-start">
+        <h2 id="matieres-title" class="w-full text-center text-sm font-medium text-mute sm:mr-2 sm:w-auto sm:text-left"><%= t(".subjects.label") %></h2>
         <% subjects.each do |name, category| %>
           <%= ui_subject_badge name, category: %>
         <% end %>
@@ -121,18 +121,18 @@
               </li>
             <% end %>
           </ul>
-          <div class="mt-8">
-            <%= ui_button t(".teachers.cta"), href: new_teacher_registration_path, size: :lg, icon_end: "arrow-right" %>
+          <div class="mt-8 sm:max-w-xs">
+            <%= ui_button t(".teachers.cta"), href: new_teacher_registration_path, size: :lg, full: true, icon_end: "arrow-right" %>
           </div>
         </div>
       </div>
     </section>
 
     <%# ---------- Appel final : la décision, répétée une fois pour qui a tout lu ---------- %>
-    <section id="rejoindre" aria-labelledby="rejoindre-title" class="scroll-mt-20 px-gutter pb-16 md:pb-24">
+    <section id="rejoindre" aria-labelledby="rejoindre-title" class="scroll-mt-20 px-gutter py-16 md:py-24">
       <div class="relative mx-auto max-w-page overflow-hidden rounded-sheet bg-brand px-6 py-12 sm:px-12 md:py-16">
         <%= image_tag "logo/lnclass.jpeg", alt: "", width: 320, height: 320, "aria-hidden": "true",
-              class: "pointer-events-none absolute -right-16 -bottom-20 w-80 opacity-90 mix-blend-multiply md:w-104" %>
+              class: "pointer-events-none absolute -right-16 -bottom-20 hidden w-80 opacity-90 mix-blend-multiply md:block md:w-104" %>
         <div class="relative max-w-xl">
           <h2 id="rejoindre-title" class="font-display text-3xl font-extrabold tracking-tight sm:text-5xl"><%= t(".join.title") %></h2>
           <p class="mt-4 text-lg text-ink/90"><%= t(".join.lead") %></p>

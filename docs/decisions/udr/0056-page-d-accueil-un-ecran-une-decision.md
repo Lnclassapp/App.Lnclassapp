@@ -44,7 +44,7 @@ div.min-h-screen.bg-paper
 │     └─ ui_button t(".nav.sign_in"), href: new_session_path, variant: :secondary, size: :sm, icon: "arrow-right-end-on-rectangle"
 ├─ main
 │  ├─ section#hero[aria-labelledby=hero-title].bg-brand
-│  │  └─ div.mx-auto.grid.max-w-page.items-center.gap-10.px-gutter.py-10.md:grid-cols-2.md:gap-16.md:py-20
+│  │  └─ div.mx-auto.grid.max-w-page.items-center.gap-10.px-gutter.py-10.pb-14.md:grid-cols-2.md:gap-16.md:py-20
 │  │     ├─ div
 │  │     │  ├─ p.inline-flex.items-center.gap-2.rounded-full.bg-ink/10.px-3.py-1.text-sm.font-medium   (span.size-2.rounded-full.bg-ink[aria-hidden] + t(".hero.eyebrow"))
 │  │     │  ├─ h1#hero-title.mt-5.font-display.text-4xl.leading-display.font-extrabold.tracking-tight.text-balance.sm:text-5xl.lg:text-6xl   t(".hero.title")
@@ -58,8 +58,8 @@ div.min-h-screen.bg-paper
 │  │           ├─ span.grid.size-11.place-items-center.rounded-ln.bg-gold/20   (ui_icon "trophy", size: :lg)
 │  │           └─ span.text-sm.leading-tight   (strong.block.font-bold t(".hero.card_title") + span.text-mute t(".hero.card_meta"))
 │  ├─ section#matieres[aria-labelledby=matieres-title].border-b.border-ink/10.bg-white
-│  │  └─ div.mx-auto.flex.max-w-page.flex-wrap.items-center.gap-2.px-gutter.py-5
-│  │     ├─ h2#matieres-title.mr-2.text-sm.font-medium.text-mute   t(".subjects.label")
+│  │  └─ div.mx-auto.flex.max-w-page.flex-wrap.items-center.justify-center.gap-2.px-gutter.py-5.sm:justify-start
+│  │     ├─ h2#matieres-title.w-full.text-center.text-sm.font-medium.text-mute.sm:mr-2.sm:w-auto.sm:text-left   t(".subjects.label")
 │  │     └─ ui_subject_badge name, category:   × 7, dans l'ordre et avec la catégorie du référentiel (voir Contenu)
 │  ├─ section#comment[aria-labelledby=comment-title].scroll-mt-20.py-16.md:py-24
 │  │  └─ div.mx-auto.max-w-page.px-gutter
@@ -82,10 +82,10 @@ div.min-h-screen.bg-paper
 │  │     ├─ p eyebrow t(".teachers.eyebrow") · h2#enseignants-title t(".teachers.title") · p.mt-4.text-lg.text-mute t(".teachers.lead")
 │  │     ├─ ul.mt-6.space-y-3
 │  │     │  └─ li.flex.items-start.gap-3   × 3 (classrooms · assign · follow) : ui_icon "check-circle", class: "mt-0.5 text-brand-strong" + span
-│  │     └─ div.mt-8 : ui_button t(".teachers.cta"), href: new_teacher_registration_path, size: :lg, icon_end: "arrow-right"
-│  └─ section#rejoindre[aria-labelledby=rejoindre-title].scroll-mt-20.px-gutter.pb-16.md:pb-24
+│  │     └─ div.mt-8.sm:max-w-xs : ui_button t(".teachers.cta"), href: new_teacher_registration_path, size: :lg, full: true, icon_end: "arrow-right"
+│  └─ section#rejoindre[aria-labelledby=rejoindre-title].scroll-mt-20.px-gutter.py-16.md:py-24
 │     └─ div.relative.mx-auto.max-w-page.overflow-hidden.rounded-sheet.bg-brand.px-6.py-12.sm:px-12.md:py-16
-│        ├─ image_tag "logo/lnclass.jpeg", alt: "", width: 320, height: 320, aria-hidden   .pointer-events-none.absolute.-right-16.-bottom-20.w-80.opacity-90.mix-blend-multiply.md:w-104
+│        ├─ image_tag "logo/lnclass.jpeg", alt: "", width: 320, height: 320, aria-hidden   .pointer-events-none.absolute.-right-16.-bottom-20.hidden.w-80.opacity-90.mix-blend-multiply.md:block.md:w-104   (visible à partir de `md` seulement)
 │        └─ div.relative.max-w-xl
 │           ├─ h2#rejoindre-title.font-display.text-3xl.font-extrabold.tracking-tight.sm:text-5xl   t(".join.title")
 │           ├─ p.mt-4.text-lg.text-ink/90   t(".join.lead")
@@ -109,7 +109,7 @@ div.min-h-screen.bg-paper
 - Couleurs : `brand` (héros, appel final, disques des étapes ; le texte posé dessus est `ink`, `ink/90` pour le chapeau), `brand-soft` (section « Enseignants », tuiles d'icône des cartes), `brand-strong` (sur-titres, coches, texte des badges de Sciences), `paper` (fond de page, en-tête), `white` (cartes, bande des matières, section des promesses, carte du badge), `ink` et ses opacités `ink/10` (filets, pastille), `mute` (textes secondaires, pied), `line` (bordure des cartes), `gold/20` (tuile du trophée). Aucun `teacher`, `team`, `school`, `success`, `warning` ni `error` en surface ; `warning` et `info` seulement par `ui_badge` pour Bronze et Diamant.
 - Typographie : `font-display font-extrabold` pour h1, h2, h3, les numéros et le nom « Lnclass » ; h1 `text-4xl sm:text-5xl lg:text-6xl leading-display tracking-tight text-balance` ; h2 `text-3xl sm:text-4xl` (`sm:text-5xl` dans l'appel final) ; h3 `text-xl` ; sur-titres `text-sm font-bold tracking-widest uppercase` ; chapeaux `text-lg` (celui du héros `text-base sm:text-lg`, pour que la décision tienne dans le premier écran d'un téléphone) ; pied `text-sm`.
 - Rayons et ombres : `rounded-card` (cartes, photo, carte du badge), `rounded-sheet` (appel final), `rounded-full` (pastille, disques, boutons), `rounded-ln` (tuile du trophée), `rounded-sm` (logos) ; `shadow-card` (cartes des étapes), `shadow-pop` (photo, carte du badge).
-- Espacements : sections `py-16 md:py-24`, héros `py-10 md:py-20`, bande des matières `py-5`, pied `py-8` ; gouttière `px-gutter` ; largeur `max-w-page` ; grilles `gap-5`, entrées `gap-3`. Ancres `scroll-mt-20` (l'en-tête mesure `h-bar`).
+- Espacements : sections `py-16 md:py-24` (l'appel final compris : 64 px de papier le séparent de la bande « Enseignants »), héros `py-10 pb-14 md:py-20` (la carte du badge déborde de 20 px sous la photo ; 36 px la séparent de la bande des matières), bande des matières `py-5`, pied `py-8` ; gouttière `px-gutter` ; largeur `max-w-page` ; grilles `gap-5`, entrées `gap-3`. Ancres `scroll-mt-20` (l'en-tête mesure `h-bar`).
 
 **Comportement**
 - Modales : contrôleur `modal` du socle, par `ui_modal` ; le déclencheur porte `data-action="modal#open"`, `aria-haspopup="dialog"`, `aria-controls` ; la `<dialog>` native fournit le piège du focus, Échap et le fond cliquable ; la modale se ferme avant la mise en cache Turbo ; suivre un lien de la modale est une navigation Turbo (UDR-0012). Le titre de l'onglet est celui de la modale tant qu'elle est ouverte, puis « Accueil · Lnclass ».
@@ -124,8 +124,9 @@ div.min-h-screen.bg-paper
 - Un seul `h1` ; chaque section est nommée par `aria-labelledby` vers son `h2` ; la bande des matières a son `h2` (petit, `text-mute`) ; les étapes sont un `ol`, les promesses enseignant un `ul`.
 - Cibles ≥ 48 px : entrées et bouton enseignant `lg` (56 px), « Se connecter » `sm` (40 px, zone de 48 px par le pseudo-élément), logo `min-h-tap`, liens du pied `min-h-tap`. Focus visible par les composants et `focus-visible:outline-brand` sur le logo.
 - Contrastes : `ink` sur `brand` 5,38 ; `ink/90` sur `brand` ≥ 4,5 ; `brand-strong` sur `brand-soft` 4,75 ; `mute` sur `brand-soft` 6,1 ; `mute` sur `white` et `paper` ≥ 6.
-- Images : la photo a un `alt` qui décrit la scène ; logos décoratifs `alt=""`, le logo de l'appel final `aria-hidden="true"` ; toute image déclare `width` et `height`.
-- À 390 px et 360 px : aucun défilement horizontal ; les deux entrées du héros sont visibles sans défiler à 360 × 640.
+- Images : la photo a un `alt` qui décrit la scène ; logos décoratifs `alt=""`, le logo de l'appel final `aria-hidden="true"` et masqué sous `md` (au téléphone, il passait sous les deux entrées) ; toute image déclare `width` et `height`.
+- À 390 px, 360 px et 320 px : aucun défilement horizontal (le bouton enseignant est pleine largeur au téléphone, borné à `max-w-xs` au-delà) ; les deux entrées du héros sont visibles sans défiler à 360 × 640 ; à 320 px la pastille du héros passe sur deux lignes et les entrées restent dans le premier écran.
+- Au téléphone, la bande des matières centre son titre et ses pastilles (deux, trois, deux) ; à partir de `sm`, titre et pastilles s'alignent à gauche sur une ligne.
 
 **Poids**
 - `app/assets/images/homepage/student.webp` : 960 × 640, ≤ 100 Ko (22 Ko mesurés). Le PNG de 1,3 Mo est supprimé.
