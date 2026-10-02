@@ -4,7 +4,7 @@
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 > Décisions : [UDR-0057](../../decisions/udr/0057-ecrans-eleve-epures.md) (règle, deux familles) · [UDR-0058](../../decisions/udr/0058-accueil-eleve.md) (accueil élève) · [UDR-0059](../../decisions/udr/0059-homepage-telephone-et-tablette.md) (homepage). Aucun ADR (PRD §6).
 >
-> **Revu le 2026-10-02 (porteur, grill Q14)** : on épure d'abord la base de code actuelle, à toutes les tailles d'écran. On ajoute ensuite la version mobile des maquettes, sur cette base épurée. Les UDR ne changent pas : seul l'ordre de livraison change.
+> **Revu le 2026-10-02 (porteur, grill Q14 et Q15)** : 1. épurer la base de code actuelle, à toutes les tailles d'écran ; 2. ajouter les fonctions manquantes (chantier [`fonctions-espace-eleve`](../fonctions-espace-eleve/memo.md)) ; 3. ajouter la version mobile des maquettes, complète. Les UDR ne changent pas avant l'étape 3 : seul l'ordre de livraison change.
 
 ## Graphe
 
@@ -22,7 +22,9 @@ Lot 0 — Socle d'épuration : « Voir plus » (Stimulus reveal), assertions de 
   ↓
   Challenger de la phase 1 : l'existant épuré, sans régression
 
-PHASE 2 — AJOUTER LA VERSION MOBILE (maquettes, sous 1 024 px)
+(entre les deux : chantier fonctions-espace-eleve — échéances, annonces, paiement, audio, aide)
+
+PHASE 2 — AJOUTER LA VERSION MOBILE (maquettes, sous 1 024 px), après fonctions-espace-eleve
 
 Lot M0 — Socle mobile : tokens, shell sans chrome mobile, Stimulus fit-text, symboles des matières, logo
   ↓
@@ -159,7 +161,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
 
 ## PHASE 2 — Ajouter la version mobile
 
-Démarre quand la phase 1 est prouvée par son challenger.
+Démarre quand la phase 1 est prouvée par son challenger **et** que `fonctions-espace-eleve` est livré. Avant M0, les UDR-0058 et 0059 sont amendées pour réintégrer ce qu'elles masquent (échéances, annonces, Paiement, audio, aide), et les lots M1 et M2 sont révisés en conséquence.
 
 ### Lot M0 — Socle mobile
 
@@ -172,7 +174,7 @@ Démarre quand la phase 1 est prouvée par son challenger.
   - `app/javascript/controllers/fit_text_controller.js` (valeurs `full`, `short`)
   - `app/views/shared/_subject_symbols.html.erb` : symboles `i-maths`, `i-physique-chimie`, `i-svt`, `i-francais`, `i-histoire-geographie`, `i-edhc`, `i-philosophie`, `i-invite`
   - `app/assets/images/logo/lnclass-mark.png` : baobab détouré, extrait de la maquette
-- **Dépend de**    : phase 1 prouvée
+- **Dépend de**    : phase 1 prouvée ; `fonctions-espace-eleve` livré
 - **Test associé** :
   - `test/system/shared/fit_text_test.rb`
   - `test/helpers/navigation_helper_test.rb` (chrome mobile)
