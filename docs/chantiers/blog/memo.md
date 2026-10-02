@@ -6,7 +6,7 @@
 | **Statut** | décision |
 | **Ouvert le** | 2026-10-02 |
 | **Branche** | `feature/blog` |
-| **Programme** | — *(hors plan de `refonte-application` ; rattaché à la V6, Communication, par défaut : grill 12)* |
+| **Programme** | — *(hors plan de `refonte-application` ; rattaché à la V6, Communication : grill 12)* |
 
 ---
 
@@ -100,7 +100,7 @@ Exclus par les règles en vigueur :
 ## Questions encore ouvertes
 
 1. ~~Grill 4~~ : tranché par le porteur le 2026-10-02, aucune règle sur le sujet d'un article.
-2. **Grill 12 (défaut)** : contexte de la communication et rattachement à la V6. À confirmer par le porteur.
+2. ~~Grill 12~~ : le porteur délègue (2026-10-02 : « crée un système de blog et puis c'est tout ») ; le défaut est retenu, contexte de la communication, rattachement à la V6.
 3. Hôte canonique des adresses partagées et indexées : `lnclass.com` ou `www.lnclass.com` (les deux servent aujourd'hui l'application). Défaut proposé : `lnclass.com`.
 4. Poids maximal d'une image et nombre d'images par article : chiffres à fixer dans l'ADR, au plus près de la photo de profil (1 Mo, 1024 px) et des annonces (2 Mo).
 5. Mesurer plus tard les inscriptions venues d'un article (hors V1, grill 8).

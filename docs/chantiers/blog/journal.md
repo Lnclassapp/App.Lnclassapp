@@ -7,6 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-02 | Ouvrir le chantier `blog`, hors plan de `refonte-application` : un blog public de Lnclass, écrit par l'équipe, lisible sans compte. Quatre objectifs : se faire connaître, rassurer et convaincre, aider à réussir, annoncer les nouveautés. Hors périmètre : commentaires, abonnement, publication programmée | Demande du porteur (« créer le blog de Lnclass ») ; la rentrée et le démarchage en cours | Non — le rattachement à une vague est tranché au grill |
+| 2026-10-02 | Fin des questions : le porteur délègue les choix restants (« arrête de me poser des questions… crée un système de blog et puis c'est tout »). Grill 12 retenu par défaut ; hôte canonique `lnclass.com` par défaut ; le passage de la phase 3 à la phase 4 se fait sans nouvelle validation | Consigne explicite du porteur | Non |
 
 ## Ce qui a dérapé
 
