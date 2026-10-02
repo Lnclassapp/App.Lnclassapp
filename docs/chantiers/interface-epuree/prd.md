@@ -168,10 +168,12 @@ Alors aucune ne contient de #hex, d'attribut style, de valeur entre crochets ni 
 
 ## 7. Mesures
 
+> Colonne « Avant » mesurée au Lot 0, le 2026-10-02, sur `feature/interface-epuree` : Chrome à 390 px de large, élève de 3ème B, 5 exercices assignés dont 1 terminé.
+
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
 | Informations par ligne d'exercice (accueil élève) | 7 et un bouton | 3 (titre, matière, une donnée) | |
-| Boutons principaux sur l'accueil élève | autant que d'exercices | 1 | |
-| Blocs de premier niveau avant défilement, accueil élève à 390 × 844 | à mesurer au Lot 0 | ≤ 5 | |
-| Poids HTML de l'accueil élève (ADR-0067 : < 150 Ko) | à mesurer au Lot 0 | < 150 Ko | |
-| Poids de la homepage sur téléphone, photo comprise (ADR-0051) | à mesurer au Lot 0 | photo ≤ 150 Ko | |
+| Boutons principaux sur l'accueil élève | autant que d'exercices (4 visibles avec 5 exercices, dont 1 terminé) | 1 | |
+| Blocs de premier niveau avant défilement, accueil élève à 390 × 844 | 7 (en-tête, titre « À faire », aide, 4 lignes d'exercice) | ≤ 5 | |
+| Poids HTML de l'accueil élève (ADR-0067 : < 150 Ko) | 39 Ko (5 exercices, historique chargé) | < 150 Ko | |
+| Poids de la homepage sur téléphone, photo comprise (ADR-0051) | photo `homepage/student.png` : 1 307 Ko, chargée aussi sur téléphone | photo ≤ 150 Ko | |
