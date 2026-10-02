@@ -61,5 +61,10 @@ module AppLnclassapp
 
     # UDR-0061 §3.4 : numéros et horaires du support (carte d'aide), publics, dans config/support.yml.
     config.x.support = config_for(:support)
+
+    # ADR-0073 §4.6 : hôte des adresses partagées et indexées du blog (canonical, og:*, plan du site, robots.txt).
+    # lnclass.com et www.lnclass.com servent tous deux l'application : la variable tranche, sans code. CANONICAL_HOST
+    # doit figurer dans APP_HOSTS (docs/guide/configuration.md).
+    config.x.canonical_host = ENV["CANONICAL_HOST"].presence || "lnclass.com"
   end
 end

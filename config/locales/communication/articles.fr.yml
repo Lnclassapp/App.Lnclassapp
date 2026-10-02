@@ -1,0 +1,44 @@
+# Blog public (UDR-0064 §3.6) — ADR-0073. Vouvoiement, comme les pages publiques ; « article », jamais « annonce ».
+# Les textes des articles viennent de la base, pas d'ici.
+fr:
+  date:
+    formats:
+      # Communication::ArticlesHelper#article_date : « 5 octobre 2026 ».
+      article_published: "%-d %B %Y"
+  communication:
+    articles:
+      masthead:
+        logo_home: "Lnclass, accueil"
+      index:
+        page_title: "Blog"
+        page_title_paged: "Blog, page %{page}"
+        title: "Blog"
+        back: "Accueil"
+        og_title: "Le blog de Lnclass"
+        description: "Conseils de révision, préparation du BEPC et du BAC, nouveautés : les articles de l'équipe Lnclass."
+        empty:
+          title: "Aucun article pour le moment"
+          description: "Revenez bientôt : les premiers articles arrivent."
+          action: "Découvrir Lnclass"
+      article_card:
+        published_on: "Publié le %{date}"
+      show:
+        back: "Blog"
+        team_signature: "L'équipe Lnclass"
+        published_on: "Publié le %{date}"
+        # Bandeau de l'aperçu de l'équipe (brouillon, archivé), après le badge d'état de l'UDR-0065.
+        status:
+          draft_hint: "Visible par l'équipe seulement."
+          archived_hint: "Retiré du blog : les visiteurs ne le voient plus."
+        next_label: "Suite de la lecture"
+        discover: "Découvrir Lnclass"
+        all_articles: "Tous les articles"
+      # Article archivé : 410.
+      gone:
+        page_title: "Article indisponible"
+        title: "Cet article n'est plus disponible"
+        description: "Il a été retiré du blog de Lnclass."
+        all_articles: "Tous les articles"
+      # Balises de tête (communication/articles/_head) : image de partage par défaut, sans couverture.
+      head:
+        default_image_alt: "Logo de Lnclass"

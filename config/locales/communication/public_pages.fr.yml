@@ -3,8 +3,10 @@
 #   communication.pages.<page>.{page_title, title, updated_on (facultatif), sections.<id-kebab>.{title, paragraphs, items}}
 fr:
   public_pages:
-    # Pied de page de la homepage, /aide, carte d'aide (PublicPagesHelper#public_page_links).
+    # Pied de page de la homepage, /aide, carte d'aide (PublicPagesHelper#public_page_links) ; « Blog » par
+    # PublicPagesHelper#blog_link, seulement s'il a un article publié (UDR-0064 §3.5).
     links:
+      blog: "Blog"
       mission: "Notre mission"
       privacy: "Protection des données"
       terms: "Conditions d'utilisation"
