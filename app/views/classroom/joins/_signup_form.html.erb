@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/joins/_signup_form — inscription de l'élève : identité, contact, sécurité (reprise de l'ancienne application) %>
 <%# Rôle : aucun champ de rôle ni de classe (le code suffit) ; PIN obligatoire et confirmé ; échec re-rendu en 422 par Turbo %>
-<%# ADR  : 0037, 0040, 0050 · UDR : 0009 %>
+<%# ADR  : 0037, 0040, 0050 · UDR : 0009 (amendée le 2026-10-02 : aides du numéro et du PIN en infobulle), 0057 %>
 <%= form_with model: @form, scope: :join, url: join_classroom_path(@code), method: :post, id: "join-form", class: "mt-6 space-y-6" do |form| %>
   <% if @form.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
@@ -37,14 +37,19 @@
 
   <fieldset class="space-y-4">
     <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".contact") %></legend>
-    <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
-                 autocomplete: "tel", placeholder: t(".contact_placeholder"), hint: t(".contact_hint") %>
+    <div>
+      <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
+                   autocomplete: "tel", placeholder: t(".contact_placeholder") %>
+      <%= ui_info_tip t(".contact_info_tip"), label: Dtos::Classroom::JoinWithCodeInput.human_attribute_name(:contact) %>
+    </div>
   </fieldset>
 
   <fieldset class="space-y-4">
     <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
-    <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
-                 hint: t(".pin_hint") %>
+    <div>
+      <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password" %>
+      <%= ui_info_tip t(".pin_info_tip"), label: Dtos::Classroom::JoinWithCodeInput.human_attribute_name(:pin) %>
+    </div>
     <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                  autocomplete: "new-password" %>
   </fieldset>
