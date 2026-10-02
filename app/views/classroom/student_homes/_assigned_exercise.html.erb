@@ -1,6 +1,6 @@
-<%# 🌐 UI · classroom/student_homes/_assigned_exercise — un exercice assigné : titre (lien vers l'exercice), matière, un bouton %>
-<%# Rôle : « Commencer » (POST) ou « Reprendre » (session en cours), principal sur la 1re ligne seulement, masqué après la 3e %>
-<%# ADR  : 0054 · UDR : 0057 §2.4, 0058 §3.3 · badge, score, maîtrise et sessions : sur la page de l'exercice, à un tap %>
+<%# 🌐 UI · classroom/student_homes/_assigned_exercise — un exercice assigné : titre (lien), matière, échéance, un bouton %>
+<%# Rôle : « Commencer » (POST) ou « Reprendre » (session en cours), principal sur la 1re ligne (la plus urgente) seulement %>
+<%# ADR  : 0054, 0072 · UDR : 0057 §2.4, 0058 §3.3, 0062 §3.2 (échéance par due_badge, aucune une fois terminé) %>
 <%# locals: (exercise:, index:) -%>
 <% variant = index.zero? ? :primary : :secondary %>
 <%= tag.li class: "flex items-center gap-3 px-5 py-3 sm:gap-4 sm:px-6", **ui_reveal_item(index) do %>
@@ -9,7 +9,10 @@
       <%= link_to exercise.title, exercise_path(exercise.public_id),
                   class: "rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
     </p>
-    <%= ui_subject_badge exercise.material_name, category: exercise.material_category, size: :sm %>
+    <div class="flex flex-wrap items-center gap-2">
+      <%= ui_subject_badge exercise.material_name, category: exercise.material_category, size: :sm %>
+      <%= due_badge exercise.due_on, done: exercise.completed_count.positive?, size: :sm %>
+    </div>
   </div>
   <div class="shrink-0">
     <% if exercise.started_session_public_id %>
