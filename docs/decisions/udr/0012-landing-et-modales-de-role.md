@@ -65,3 +65,11 @@ La première landing de la refonte, elle, portait l'identité visuelle (UDR-0005
 - Toute nouvelle entrée de rôle (parent, établissement) passe par une nouvelle modale **et** une route existante ; le test des liens refuse sinon.
 - La landing ne promet que ce que la V1 livre ; les rôles et fonctionnalités d'une vague future y entrent avec leur vague.
 - Les contrôleurs `homepage-student-modal` et `homepage-teacher-modal` de l'ancienne application ne sont pas repris : le contrôleur `modal` du socle suffit.
+
+## Amendement du 2026-10-02 — structure remplacée par l'UDR-0056
+
+*Chantier [`docs/chantiers/refonte-homepage`](../../chantiers/refonte-homepage/prd.md), [UDR-0056](0056-page-d-accueil-un-ecran-une-decision.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- La **§3 « Structure »** (en-tête à ancres, « Commencer », section « Pour qui ? », fonctionnalités sur fond `ink`, « et plus encore ») est **remplacée** par la §3 de l'UDR-0056 : un en-tête réduit au logo et à « Se connecter », un héros qui tient dans le premier écran d'un téléphone, les sept matières du référentiel, trois étapes, quatre promesses, une section « Enseignants » vouvoyée, l'appel final, le pied.
+- Les **décisions 1 à 5 du §2** (deux entrées et seulement deux, une modale chacune, la porte de l'élève, la porte de l'enseignant, aucun lien sans route) **restent** et sont vérifiées par les mêmes tests. La décision 6 reste pour le contenu (la V1, le slogan, les quatre badges) ; sa « structure de l'ancienne page » n'est plus reprise.
+- `_role_modal` : le déclencheur passe en `lg`, pleine largeur (`trigger_size:`, `trigger_full:`), et la modale nomme l'onglet par son titre (`document_title:`, UDR-0054 §3.1).

@@ -163,3 +163,10 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 - **Contrôleurs** : `clipboard`, `autofocus`, `autosubmit`, `search`, `download` s'ajoutent ; `modal` émet `modal:opened` après `showModal()` et gère le titre de l'onglet ; `classroom--join-code-copy` est supprimé.
 - **Utilitaire maison** : s'ajoute `summary-plain` (résumé de `<details>` sans marqueur). Aucun nouveau token.
 - Interdits ajoutés au §4 : l'attribut `autofocus` dans une vue, `title=` comme seule aide.
+
+## Amendement du 2026-10-02 — taille et largeur du déclencheur d'une modale
+
+*Chantier [`docs/chantiers/refonte-homepage`](../../chantiers/refonte-homepage/prd.md), [UDR-0056](0056-page-d-accueil-un-ecran-une-decision.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Modale** : l'API devient `ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, trigger_size: :md, trigger_full: false, open:, document_title:)`. `trigger_size:` (`:sm` | `:md` | `:lg`) et `trigger_full:` sont passés tels quels à `ui_button` pour le déclencheur : une taille inconnue lève l'`ArgumentError` de `ui_button`. Sans ces options, le déclencheur est celui d'aujourd'hui (`md`, largeur naturelle). Aucun nouveau token.
+- Visible sur `/design` (section « Modale », troisième exemple : déclencheur `brand`, `lg`, pleine largeur), vérifié par `test/system/design_system_test.rb` et `test/helpers/components_helper_test.rb`.
