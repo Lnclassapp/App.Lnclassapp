@@ -318,6 +318,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
+      # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4); « Plus tard » assigns without a due date.
+      within("turbo-frame#modal dialog[open]") { click_on "Plus tard" }
       assert_toast "#{EXERCISE} ajouté à Tle D 1."
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { assert_text "Assigné" }
     end
