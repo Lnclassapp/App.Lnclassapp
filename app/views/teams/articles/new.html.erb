@@ -1,0 +1,17 @@
+<%# 🌐 UI · teams/articles/new — nouvel article, servi dans le frame « modal » (UDR-0065 §3.3) %>
+<%# Rôle : modale large ouverte dès son arrivée ; l'article naît en brouillon, signé de l'équipe par défaut ; échec re-rendu en 422 %>
+<%# ADR  : 0035, 0073 · UDR : 0006, 0014, 0054, 0065 %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "article-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "article-form", id: "article-submit" %>
+    <% end %>
+    <p class="mb-5 flex flex-wrap items-center gap-2 text-sm text-mute">
+      <%= article_status_badge("draft") %> <%= t(".draft_notice") %>
+    </p>
+    <%# L'auteur d'un nouvel article est le membre connecté : son nom est le choix « signé de son nom ». %>
+    <%= render "form", input: @form, url: teams_articles_path, method: :post, upload_url: teams_article_images_path,
+                       author_name: shell_user.name %>
+  <% end %>
+<% end %>

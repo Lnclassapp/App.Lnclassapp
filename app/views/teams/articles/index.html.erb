@@ -1,0 +1,41 @@
+<%# 🌐 UI · teams/articles/index — liste de gestion du blog (UDR-0065 §3.2) %>
+<%# Rôle : tous les articles, du plus récemment modifié : état, date, lectures « sans dédoublonnage », menu ⋮ ; « Nouvel article » en modale %>
+<%# ADR  : 0035, 0073 · UDR : 0006, 0042, 0054, 0065 · pagination en visite Turbo Drive, aucun frame autour de la liste %>
+<% page_title t(".page_title") %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle"), back: { label: t(".back"), href: team_home_path } do %>
+  <%= ui_button t(".new_article"), href: new_teams_article_path, icon: "plus", data: { turbo_frame: "modal" }, id: "teams_articles_new" %>
+<% end %>
+
+<p id="teams_articles_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
+<% if @page.rows.any? %>
+  <%# relative : les libellés sr-only de la dernière colonne restent pris dans le défilement du tableau, pas dans celui de la page. %>
+  <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
+    <table class="w-full min-w-3xl text-left text-sm">
+      <caption class="sr-only"><%= t(".caption") %></caption>
+      <thead class="border-b border-line text-xs text-mute">
+        <tr>
+          <% %i[article status date].each do |column| %>
+            <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
+          <% end %>
+          <%# UDR-0054 §4 : la limite du compteur est du texte visible, l'infobulle ne fait que la détailler. %>
+          <th scope="col" class="px-4 py-3 font-medium">
+            <%= t(".columns.reads") %>
+            <span class="block text-2xs font-normal"><%= t(".columns.reads_note") %></span>
+            <%= ui_info_tip t(".reads_tip"), label: t(".columns.reads") %>
+          </th>
+          <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+        </tr>
+      </thead>
+      <tbody id="teams_articles_list" class="divide-y divide-line">
+        <%= render partial: "article_row", collection: @page.rows, as: :article %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div id="teams_articles_empty">
+    <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "newspaper" do %>
+      <%= ui_button t(".new_article"), href: new_teams_article_path, icon: "plus", data: { turbo_frame: "modal" } %>
+    <% end %>
+  </div>
+<% end %>
+<div class="mt-5"><%= ui_pagination page: @page.page, pages: @page.pages %></div>
