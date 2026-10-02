@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — grill terminé le 2026-10-02 ; la décision d'interface attend les maquettes des écrans disponibles, promises par le porteur |
+| **Statut** | décision — grill terminé le 2026-10-02 ; maquettes téléphone reçues le même jour, déclinaisons grands écrans à valider |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `feature/interface-epuree` |
 | **Programme** | — *(hors plan de `refonte-application` ; précède le chantier `app-android`, ADR-0070)* |
@@ -36,6 +36,17 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 - Les apps Android (chantier `app-android`) et la PWA (`installation-pwa`).
 - Les finitions déjà livrées par `finitions-ux` (retour, auto-focus, infobulles, « Copier », recherche, titres).
 
+## Maquettes de référence
+
+Dans [`maquettes/`](maquettes/) :
+
+| Écran | Téléphone (validé par le porteur, 2026-10-02) | Tablette et ordinateur (proposé, à valider) |
+|---|---|---|
+| Homepage | `homepage-telephone.html` | `homepage-multi-ecrans.html` |
+| Accueil élève | `accueil-eleve-telephone.html` | `accueil-eleve-multi-ecrans.html` |
+
+Les maquettes montrent la cible complète. Ce qui repose sur une fonction absente (échéances, durée, paiement, annonces, audio) n'est pas construit dans ce chantier (Q8) : il attend `fonctions-espace-eleve`.
+
 ## Ce que le grill a révélé
 
 > Rempli au fil du grill, une question à la fois.
@@ -66,6 +77,6 @@ Les apps Android (ADR-0070, en attente) afficheront les pages du site telles que
 
 ## Questions encore ouvertes
 
-- Maquettes des écrans disponibles : à recevoir du porteur avant la décision d'interface.
+- Déclinaisons tablette et ordinateur de la homepage et de l'accueil élève, proposées le 2026-10-02 dans `maquettes/` : à valider par le porteur avant la décision d'interface.
 - Message d'encouragement de la carte « Ma classe » : texte unique, ou plusieurs textes selon la situation (rien d'assigné, ou tout est fait) ?
 - Un niveau ou une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : case masquée, ou grille à 7 cases ?
