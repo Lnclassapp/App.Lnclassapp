@@ -36,7 +36,7 @@
 
 | | |
 |---|---|
-| **Livré le** | *(en cours)* |
-| **PR** | |
+| **Livré le** | 2026-10-02, en PR brouillon vers `Develop` (phase 5 : rapport du challenger ci-dessous ; acceptation de l'UDR-0056 et des hypothèses du memo par le porteur en revue) |
+| **PR** | [#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145) |
 | **ADR produits** | aucun |
 | **UDR produits** | UDR-0056 ; amendements UDR-0012, UDR-0005 |

@@ -85,5 +85,5 @@ Une seule page, une seule chaîne : les trois lots sont séquentiels. Un seul ag
 - [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert *(voir le journal : lancés en local le 2026-10-02 ; la CI de la PR fait foi)*
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR *([#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145))*
 - [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
