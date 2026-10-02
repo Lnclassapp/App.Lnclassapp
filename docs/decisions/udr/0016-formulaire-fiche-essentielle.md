@@ -6,6 +6,7 @@
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot B4 ; CA-12, CA-13, CA-14) |
 | **ADR lié** | [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (cycle de vie) · [ADR-0047](../adr/0047-stockage-objet-s3-sur-railway.md) et [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucune pièce jointe, CSP stricte) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Trix hors du bundle commun) · UDR-0006 (CRUD Hotwire) · UDR-0007 (vocabulaire) |
+| **Amendé par** | [UDR-0065](0065-gestion-du-blog-par-l-equipe.md) : éditeur riche, images admises pour le blog seul |
 | **Remplacé par** | — |
 
 ---
@@ -83,3 +84,10 @@ Pourquoi une modale plutôt qu'une page : la fiche se lit dans le contexte de so
 - Interdits désormais : la suppression d'une fiche, une pièce jointe ou une image dans son contenu, un changement de statut depuis le formulaire, et les mots « Habileté » et « Leçon » (UDR-0007).
 - Le formulaire cours (UDR-0014, lot B2) suit la même forme d'éditeur.
 - Preuve : `test/system/teams/essential_management_test.rb` crée une fiche (nom déjà pris puis corrigé, gras et liste saisis dans Trix), la rouvre avec son contenu et la renomme, le tout sous `assert_no_page_reload` et sans violation de CSP. Il vérifie aussi qu'un fichier inséré dans l'éditeur est refusé et que la page ne défile pas sur le côté à 390 px.
+
+## Amendement du 2026-10-02 — éditeur du blog (blog)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Statut : accepté (porteur, 2026-10-02 : délégation). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- La règle « l'éditeur refuse tout fichier » devient : **l'éditeur refuse tout fichier, sauf s'il est posé avec la valeur Stimulus `attachments` vraie**, ce que seul le formulaire d'article du blog fait ([UDR-0065](0065-gestion-du-blog-par-l-equipe.md) §3.4.4, §3.7).
+- **Ce formulaire ne change pas** : `teams/essentials/_form` ne pose pas `attachments`, un fichier déposé ou collé y est toujours refusé, et `Repositories::Shared::RichTextSanitizer` retire toujours toute pièce jointe d'une fiche (BL-15).

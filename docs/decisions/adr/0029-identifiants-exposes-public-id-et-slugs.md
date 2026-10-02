@@ -8,6 +8,7 @@
 | **Complète** | [ADR-0017](./0017-remplacement-nanoid-par-secure-random.md) |
 | **Remplace** | [ADR-0018](./0018-remediation-just-in-time-et-historique-lacunes.md) : clé `has_nanoid(:id)` des lacunes |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0073](./0073-blog-public-articles-images-et-referencement.md) : §4 (`articles` à `public_id` et à slug, `article_images` à `public_id`) |
 
 ---
 
@@ -106,3 +107,11 @@ Fichier : `app/infrastructure/orm/has_public_id.rb`. La macro trompeuse `has_nan
 ## 9. Points à confirmer par le porteur
 
 - Les exercices prennent un `public_id`, pas un slug : on n'y accède que connecté.
+
+## Amendement du 2026-10-02 — blog public (ADR-0073)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Les slugs ne sont plus réservés au catalogue** : `articles.slug` (`string(140)`, unique, figé à la création depuis le titre, `-2`, `-3` en cas de collision, jamais réutilisé) donne l'adresse publique `/blog/:slug`. Une collision concurrente (`RecordNotUnique`) recalcule le slug et réessaie une fois (`Repositories::Communication::ArticleRepository`).
+- **`public_id`** : `articles` (adresses de l'équipe, `/teams/blog/:public_id`) et `article_images` (adresse de l'image, `/blog/images/:public_id`).
+- `test/db/schema_constraints_test.rb` compte `articles` dans `PUBLIC_ID_TABLES` et `SLUG_TABLES`, `article_images` dans `PUBLIC_ID_TABLES`.

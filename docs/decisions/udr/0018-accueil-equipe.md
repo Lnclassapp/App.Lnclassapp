@@ -6,6 +6,7 @@
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B6, critères TR-09, CA-25 ; TR-10 hors périmètre (V4) |
 | **ADR lié** | [ADR-0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md) (référentiel créé à l'écran) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts du contenu) · [ADR-0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md) (invitation par un admin) · [ADR-0039](../adr/0039-format-d-import-du-contenu.md) (imports) · [ADR-0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) (année scolaire) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) (shell, sections d'accueil) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |
+| **Amendé par** | [UDR-0065](0065-gestion-du-blog-par-l-equipe.md) : raccourci « Blog » |
 | **Remplacé par** | — |
 
 ---
@@ -83,3 +84,10 @@ L'équipe a besoin de voir l'état de la plateforme d'un coup d'œil, et d'attei
 ## Amendement du 2026-09-28 — raccourci « Croissance » (UDR-0050)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* Les raccourcis gagnent « Croissance » (`secondary`, icône `arrow-trending-up`, vers `teams_growth_path`), après « Importer ». C'est le seul accès à `/teams/growth` : la navigation équipe reste à 5 destinations (UDR-0006).
+
+## Amendement du 2026-10-02 — raccourci « Blog » (blog)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Statut : accepté (porteur, 2026-10-02 : délégation). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Les raccourcis gagnent **« Blog »** (`secondary`, icône `newspaper`, vers `teams_articles_path`, id `team_home_blog_shortcut`), entre « Croissance » et « Inviter un membre », **réservé aux sous-rôles `admin` et `content`** ([UDR-0065](0065-gestion-du-blog-par-l-equipe.md) §3.1). La vue ne teste pas le rôle : `Teams::HomesController#show` calcule `@can_manage_blog` par `Policies::Communication::ManageArticlesPolicy`, comme `@can_invite`.
+- C'est le seul accès à `/teams/blog` depuis l'interface : la navigation de l'équipe reste à 5 destinations (UDR-0006). Texte : `teams.homes.shortcuts.blog` « Blog ».

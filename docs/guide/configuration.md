@@ -46,6 +46,7 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 | Variable | Rôle |
 |---|---|
 | `APP_HOSTS` | Domaines personnalisés autorisés, séparés par des virgules |
+| `CANONICAL_HOST` | Hôte des adresses partagées et indexées du blog : lien `canonical`, `og:url`, `og:image`, `/sitemap.xml` et ligne `Sitemap:` de `/robots.txt` (`config.x.canonical_host`, ADR-0073 §4.6). `lnclass.com` par défaut ; `www.lnclass.com` pour l'autre choix. **Doit aussi figurer dans `APP_HOSTS`**, sinon les adresses partagées répondent 403. En changer après indexation demande une nouvelle indexation |
 | `BUCKET_REGION` | Région du bucket, `auto` par défaut |
 | `BUCKET_FORCE_PATH_STYLE` | `true` si le bucket Railway annonce des URL en *path-style* |
 

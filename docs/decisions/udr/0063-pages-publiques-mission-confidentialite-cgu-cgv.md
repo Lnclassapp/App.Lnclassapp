@@ -7,6 +7,7 @@
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q15, Q16 (ajouts du porteur) ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) ; brouillons des textes : [`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun traceur, CSP) · [UDR-0061](0061-carte-d-aide-et-faq.md) (motif de `/aide`, carte d'aide) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (écrans d'entrée) · [UDR-0059](0059-homepage-telephone-et-tablette.md), [UDR-0012](0012-landing-et-modales-de-role.md) (homepage) · [UDR-0057](0057-ecrans-eleve-epures.md) (R1 à R6) |
 | **Amende** | UDR-0061 §3.1 (la FAQ renvoie à la protection des données et aux CGU) · UDR-0012 (pied de page de la homepage) |
+| **Amendé par** | [UDR-0064](0064-blog-public-liste-article-et-partage.md) : §3.1 (`blog_link`) et §3.4 (pied de page de la homepage) |
 | **Remplacé par** | — |
 
 ---
@@ -113,3 +114,11 @@ Le porteur met les quatre pages en ligne tout de suite : « envoie-les en ligne,
 - **Garde de §3.3 reportée** : `test/i18n/public_pages_test.rb` (aucune marque dans une page en ligne) n'est pas écrit, il échouerait. Il le sera quand le porteur aura mis les textes à jour avec les juristes ; jusque-là, rien n'empêche une marque d'être publiée.
 - **Inchangé** : une page retirée de `ONLINE` répond de nouveau 404 et perd ses liens ; le pied de page de la homepage et `/aide` montrent exactement les pages en ligne.
 - **À faire par le porteur** : la relecture des juristes ([`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md), encadré « Relecture juridique »), puis la mise à jour des locales `config/locales/communication/pages/<page>.fr.yml` et de leur date de mise à jour.
+
+## Amendement du 2026-10-02 — lien « Blog » (blog)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Statut : accepté (porteur, 2026-10-02 : délégation). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **§3.1** : `PublicPagesHelper` gagne `blog_link` → `[ t("public_pages.links.blog"), blog_path ]` si le blog a au moins un article publié, sinon `nil` (une requête `EXISTS` par rendu) ; `public_page_links` ne change pas ([UDR-0064](0064-blog-public-liste-article-et-partage.md) §3.5).
+- **§3.4 (pied de page de la homepage)** : la seconde liste devient `[ blog_link, *public_page_links ].compact` : « Blog · Notre mission · Protection des données · Conditions d'utilisation · Conditions de vente ». Son `aria-label` (`homepage.index.footer.public_pages`) passe de « Informations légales » à **« Plus sur Lnclass »** : la liste porte la mission et le blog, pas seulement des informations légales.
+- La ligne « Vos données » de `/aide` ne change pas.

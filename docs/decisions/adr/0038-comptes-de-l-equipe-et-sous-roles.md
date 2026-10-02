@@ -7,6 +7,7 @@
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-16**, bloque la V1 (minimal) et la V4 |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0073](./0073-blog-public-articles-images-et-referencement.md) : §4 (matrice : ligne « Blog », appliquée dès maintenant) |
 
 ---
 
@@ -118,3 +119,15 @@ add_check_constraint :users, "(role = 'team') = (team_role IS NOT NULL)", name: 
 - Trois sous-rôles (`admin`, `content`, `field`) et la matrice ci-dessus.
 - Pas de sous-rôle « gestionnaire DRENA ».
 - Une invitation expire au bout de 72 heures.
+
+## Amendement du 2026-10-02 — blog public (ADR-0073)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **La matrice du §4 gagne une ligne, appliquée dès maintenant pour le blog seul** (la question générale des sous-rôles reste à la V4) :
+
+| Action | `admin` | `content` | `field` |
+|---|---|---|---|
+| Blog : écrire, publier, archiver, remettre en ligne un article ; envoyer ses images ; lire ses lectures | ✅ | ✅ | |
+
+- Règle : `Policies::Communication::ManageArticlesPolicy` (succès si `actor&.team?` et `team_role` ∈ `admin`, `content` ; sinon `:forbidden`). Le Terrain lit le blog comme un visiteur.
