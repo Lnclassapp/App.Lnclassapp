@@ -1,0 +1,161 @@
+# Gestion du blog par l'équipe (UDR-0065 §3.8) — ADR-0073. Vouvoiement ; « article », « brouillon », « publié »,
+# « archivé », « remettre en ligne », « texte de remplacement », « couverture » ; jamais « post », « billet », « alt ».
+fr:
+  activemodel:
+    attributes:
+      dtos/communication/article_input:
+        title: "Titre"
+        excerpt: "Résumé"
+        body: "Texte"
+        cover_public_id: "Image de couverture"
+        cover_alt: "Texte de remplacement de la couverture"
+        signature: "Signature"
+        image_alts: "Textes de remplacement"
+      dtos/communication/article_image_input:
+        file: "Image"
+    errors:
+      models:
+        # Messages de la saisie, et de la règle de complétude de Entities::Communication::Article, qui les lit ici
+        # (publication, enregistrement d'un article publié : UDR-0065 §3.3, §3.5).
+        dtos/communication/article_input:
+          # Erreurs posées sur « image_alts.<public_id> » : une image du texte n'a pas de clé d'attribut propre.
+          image_alt_blank: "Saisissez le texte de remplacement de l'image %{number} : il est obligatoire pour publier."
+          too_long: "Le texte de remplacement dépasse %{count} caractères."
+          attributes:
+            title:
+              blank: "Indiquez le titre de l'article."
+              too_long: "Le titre dépasse %{count} caractères."
+            excerpt:
+              blank: "Écrivez le résumé : il est obligatoire pour publier."
+              too_long: "Le résumé dépasse %{count} caractères."
+            body:
+              blank: "Écrivez le texte de l'article : il est obligatoire pour publier."
+              too_long: "Le texte dépasse %{count} caractères : raccourcissez-le."
+              too_many_images: "Un article compte au plus %{count} images dans son texte : retirez-en une."
+            cover_public_id:
+              invalid: "Cette image de couverture n'est plus disponible : choisissez-la de nouveau."
+            cover_alt:
+              blank: "Décrivez la couverture : son texte de remplacement est obligatoire pour publier."
+              too_long: "Le texte de remplacement dépasse %{count} caractères."
+            signature:
+              inclusion: "Choisissez une signature."
+            status:
+              inclusion: "Cet état d'article n'existe pas."
+        # Mêmes raisons côté serveur et côté navigateur (UDR-0065 §3.4.3, form.image_messages).
+        dtos/communication/article_image_input:
+          attributes:
+            file:
+              blank: "Choisissez une image."
+              content_type: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."
+              too_heavy: "L'image dépasse %{count} Mo, même allégée."
+              too_large: "L'image dépasse %{count} pixels de côté."
+              unreadable: "Ce fichier n'est pas une image lisible."
+              too_many: "L'article a déjà %{count} images dans son texte."
+  teams:
+    articles:
+      index:
+        page_title: "Blog"
+        title: "Blog"
+        subtitle: "Les articles publics de Lnclass, du brouillon à l'archive."
+        back: "Accueil"
+        new_article: "Nouvel article"
+        total:
+          one: "%{count} article"
+          other: "%{count} articles"
+        caption: "Articles du blog, du plus récemment modifié au plus ancien"
+        columns:
+          article: "Article"
+          status: "État"
+          date: "Date"
+          reads: "Lectures"
+          reads_note: "sans dédoublonnage"
+          actions: "Actions"
+        reads_tip: "Ouvertures de l'article publié, hors équipe, aperçus et robots déclarés. Sans cookie, un lecteur qui revient compte deux fois."
+        empty_title: "Aucun article pour l'instant"
+        empty_description: "Écrivez le premier : il reste en brouillon jusqu'à sa publication."
+      article_row:
+        actions: "Actions pour « %{title} »"
+        written_by: "Écrit par %{author}"
+        signed_team: "signé « L'équipe Lnclass »"
+        signed_author: "signé de son nom"
+        published_on: "Publié le %{date}"
+        archived_on: "Archivé le %{date}"
+        updated_on: "Modifié le %{date}"
+        never_published: "Jamais publié"
+      # Badge d'état (Communication::ArticleStatusHelper), le même dans la liste, la modale et le bandeau d'aperçu.
+      status:
+        draft: "Brouillon"
+        published: "Publié"
+        archived: "Archivé"
+      # Entrées du menu ⋮ d'une ligne (Communication::ArticleStatusHelper#article_menu_items).
+      menu:
+        edit: "Modifier"
+        preview: "Aperçu"
+        view: "Voir l'article"
+        publish: "Publier"
+        archive: "Archiver"
+        republish: "Remettre en ligne"
+      new:
+        title: "Nouvel article"
+        draft_notice: "L'article est créé en brouillon ; il se publie ensuite depuis le menu ⋮ de la liste."
+        submit: "Créer le brouillon"
+        cancel: "Annuler"
+      edit_modal:
+        title: "Modifier l'article"
+        status_notice: "L'état se change depuis le menu ⋮ de la liste, jamais dans ce formulaire."
+        published_notice: "Cet article est en ligne : vos modifications seront visibles dès l'enregistrement."
+        submit: "Enregistrer"
+        cancel: "Annuler"
+        refused_title: "Publication impossible"
+        refused_body: "L'article reste dans son état. Complétez ce qui est signalé, enregistrez, puis publiez depuis le menu ⋮."
+      form:
+        title_placeholder: "Ex. : Réviser le BEPC en 4 semaines"
+        title_hint_new: "%{max} caractères au plus. L'adresse de l'article en est tirée une fois pour toutes."
+        title_hint_edit: "%{max} caractères au plus. L'adresse reste %{path}, même si le titre change."
+        excerpt_hint: "Une à deux phrases, %{max} caractères au plus : elles s'affichent dans la liste du blog et dans l'aperçu partagé."
+        excerpt_count: "%{count} / %{max}"
+        excerpt_near: "Il reste %{count} caractères."
+        excerpt_full: "Limite atteinte : %{max} caractères."
+        cover_legend: "Image de couverture (facultative)"
+        cover_placeholder: "Aucune couverture : le partage utilisera l'image par défaut de Lnclass."
+        cover_file_label: "Choisir une image"
+        cover_hint: "JPEG, PNG ou WebP, allégée avant l'envoi : %{max_side} pixels de côté et %{max_bytes} au plus."
+        cover_remove: "Retirer la couverture"
+        cover_alt_hint: "Décrivez ce que montre l'image, pour qui ne la voit pas. Obligatoire pour publier avec une couverture."
+        body_placeholder: "Écrivez l'article…"
+        body_hint: "Glissez, collez ou insérez jusqu'à %{max_count} images, de %{max_bytes} chacune au plus après allègement."
+        insert_image: "Insérer une image"
+        images_title: "Images du texte"
+        images_intro: "Décrivez chaque image pour qui ne la voit pas : ce texte est obligatoire pour publier."
+        image_alt_label: "Texte de remplacement de l'image"
+        image_alt_hint: "Ce que montre l'image, en une phrase."
+        image_alt_missing: "À compléter"
+        signature_label: "Signature"
+        signature_team: "L'équipe Lnclass"
+        signature_author: "%{name}"
+        signature_hint: "Si le compte de l'auteur est désactivé, l'article sera signé « L'équipe Lnclass »."
+        # Messages du navigateur (éditeur, couverture) ; %{name}, %{reason} et %{number} sont remplacés par le contrôleur
+        # Stimulus, %{max_bytes} et %{max_count} par Communication::ArticleFormHelper (UDR-0065 §3.4.3, §3.4.4).
+        image_messages:
+          refused: "« %{name} » n'a pas été ajoutée. %{reason}"
+          format: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."
+          too_heavy: "L'image dépasse %{max_bytes}, même allégée."
+          too_many: "L'article a déjà %{max_count} images dans son texte."
+          web_image: "Une image copiée d'une autre page web n'est pas acceptée : enregistrez-la, puis insérez-la."
+          forbidden: "Vous ne pouvez pas ajouter d'image à un article."
+          failed: "L'envoi a échoué. Vérifiez votre connexion, puis réessayez."
+          uploading: "Envoi de l'image en cours…"
+          uploaded: "Image %{number} ajoutée. Saisissez son texte de remplacement sous l'éditeur."
+          waiting: "Envoi des images en cours : l'article s'enregistrera ensuite."
+      create:
+        created: "Article « %{title} » créé (brouillon)."
+      update:
+        updated: "Article « %{title} » enregistré."
+        updated_live: "« %{title} » est enregistré : vos modifications sont en ligne."
+      transition:
+        published: "« %{title} » est publié : il est en ligne sur le blog."
+        republished: "« %{title} » est de nouveau en ligne, à la même adresse."
+        archived: "« %{title} » est archivé : son lien affiche « Cet article n'est plus disponible ». Vous pouvez le remettre en ligne."
+        conflict: "« %{title} » a déjà changé d'état : la ligne montre son état actuel."
+      publish:
+        refused_fallback: "Publication impossible : complétez l'article."
