@@ -232,10 +232,30 @@ AVANT LE DÉPLOIEMENT (porte de sortie)
   - `test/domain/use_cases/identity/anonymize_user_test.rb`, `test/domain/policies/identity/delete_user_policy_test.rb`, `test/controllers/teams/account_deletions_controller_test.rb`, `test/system/teams/account_deletion_test.rb` (refus élève, enseignant, direction ; date de la demande obligatoire, jamais future ; journal `user.anonymized` avec `requested_on`, sans donnée effacée) · `test/infrastructure/repositories/identity/user_repository_test.rb`, `test/infrastructure/repositories/identity/pin_recovery_repository_test.rb`, `test/infrastructure/repositories/classroom/membership_repository_test.rb`
 - **Done quand**   : un élève qui a quitté sa classe se connecte et revoit son historique ; l'établissement voit les résultats de ses anciens élèves ; l'équipe traite une demande de suppression et la trace
 - **Écarts au plan** :
-  - une seule action au journal, `user.anonymized`, qui porte la date de la demande (`metadata.requested_on`) : l'équipe saisit la demande au moment de la traiter. Pas de `user.deletion_requested` séparé, donc **pas de rappel des demandes de plus de 25 jours** : il demande d'enregistrer la demande à sa réception (une liste « Demandes en attente »), à décider ;
+  - une seule action au journal, `user.anonymized`, qui porte la date de la demande (`metadata.requested_on`) : l'équipe saisit la demande au moment de la traiter. Le rappel des demandes est décidé ensuite par le porteur : **lot R3** ;
   - l'élève ne rouvre pas le détail d'un résultat depuis son historique : la page de résultat refuse un exercice hors de son niveau (UDR-0013, amendement du 2026-10-01) ; l'historique montre titre, matière, date et note ;
   - « Anciens élèves » : un résultat obtenu chez l'établissement = un devoir rendu dans une de ses classes (comme « Travail des élèves ») ; un compte anonymisé n'y apparaît plus, en attendant l'avis des juristes ; liste plafonnée aux 200 départs les plus récents, avec recherche par nom ;
   - les purges du §6 de l'ADR-0036 (tentatives de connexion, codes périmés) ne sont pas programmées par ce lot.
+
+### Lot R2 — Un compte supprimé sort des statistiques
+
+*Ajouté le 2026-10-02 (porteur : « retire l'élève des stats ») ; [ADR-0036, amendement (2)](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md).*
+
+- **Couche**       : domaine + infrastructure + ui (contextes `identity`, `assessment`)
+- **Fichiers**     : `app/domain/use_cases/identity/anonymize_user.rb` (dépendance `learning_data:`) · nouveau port `app/domain/ports/assessment/learning_data_eraser_port.rb` et son adaptateur `app/infrastructure/repositories/assessment/learning_data_eraser.rb` (`erase_for(student_id:)`) · `app/controllers/teams/account_deletions_controller.rb` (câblage `learning_data:` seulement) · `config/locales/teams/account_deletions.fr.yml` (« kept » devient « effacés ») · `config/locales/communication/pages/privacy.fr.yml` (§8) et `docs/chantiers/fonctions-espace-eleve/pages-publiques.md` (§2.8) · toute query d'agrégat qui compterait encore un compte anonymisé (audit, correctif ciblé)
+- **Dépend de**    : Lot R
+- **Test associé** : `test/domain/use_cases/identity/anonymize_user_test.rb` · `test/infrastructure/repositories/assessment/learning_data_eraser_test.rb` (base réelle : sessions, réponses, badges, lacunes de l'élève effacés ; ceux d'un autre élève intacts ; lacune résolue par la session d'un autre) · `test/controllers/teams/account_deletions_controller_test.rb` · un test de la réussite de la classe (UDR-0029) avant et après une suppression · `test/controllers/communication/pages/privacy_test.rb`
+- **Done quand**   : après une suppression, l'élève n'apparaît dans aucun chiffre (classe, suivi, établissement, équipe) et la modale le dit
+
+### Lot R3 — Demandes de suppression enregistrées et rappelées
+
+*Ajouté le 2026-10-02 (porteur : « oui, une notification pour le rappel de suppression ») ; [ADR-0036, amendement (2)](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md).*
+
+- **Couche**       : base + domaine + infrastructure + delivery + ui (contexte `identity`, espace équipe)
+- **Fichiers**     : migration `account_deletion_requests` (état `pending`/`processed`/`cancelled`, index unique partiel sur le compte `WHERE status = 'pending'`, clés `restrict`) · `db/schema.rb` · `test/infrastructure/orm/models_test.rb` (nombre de modèles) · entité, port, repository, DTO et use cases `RecordDeletionRequest`, `CancelDeletionRequest` · `app/domain/use_cases/identity/anonymize_user.rb` (dépendance `deletion_requests:`, la demande en attente passe en `processed` dans la transaction) · `app/domain/entities/identity/audit_action.rb` (`user.deletion_requested`, `user.deletion_request_cancelled`) · query des demandes en attente · `Teams::DeletionRequestsController` (liste, enregistrer, annuler) et ses vues · `app/controllers/teams/account_deletions_controller.rb` et `app/views/teams/account_deletions/new.html.erb` (date pré-remplie depuis la demande) · `app/views/teams/account_lookups/_result.html.erb` (« Enregistrer une demande » ou « Demande reçue le … ») · la carte de l'accueil de l'équipe (`teams/homes`) · `config/routes/teams.rb` · leurs locales
+- **Dépend de**    : Lot R ; R2 en parallèle (seuls `anonymize_user.rb`, son test et le câblage du contrôleur se recoupent : chacun n'y ajoute que sa dépendance, l'orchestrateur fusionne)
+- **Test associé** : use cases et policies (refus `content`, `field`, autres rôles ; une seule demande en attente ; date absente ou future refusée) · repository et query sur base réelle · contrôleurs · `test/system/teams/deletion_requests_test.rb` (enregistrer, voir la carte, traiter, 390 px) · carte en ambre au 25e jour, « En retard » au 31e
+- **Done quand**   : une demande reçue est visible jusqu'à son traitement, et l'équipe `admin` voit sur son accueil les demandes qui approchent des 30 jours
 
 ### Lot Z — Mise en ligne (séquentiel, avant le déploiement)
 

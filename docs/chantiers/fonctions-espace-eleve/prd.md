@@ -30,7 +30,7 @@ La maquette V2 de l'accueil élève montre six fonctions absentes ; après le gr
 
 **Entité juridique** : **Lnclass Côte d'Ivoire SARL**, éditeur du service et responsable du traitement des données (porteur, 2026-10-02, Q16). Adresse : **Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph**. Contact : **+225 05 44 32 00 20 et +225 05 84 25 80 85**. RCCM, point ARTCI et clauses de droit : **à compléter par les juristes**, qui valident les quatre pages publiques **avant la sortie de l'application** (le porteur ne les fournira pas).
 
-**Conservation** (porteur, 2026-10-02, réécrit après le lot R) : **aucune anonymisation automatique**. Les données restent comme **archive**, consultable par l'élève (« Mon historique », `/students/archive`) et par l'établissement qu'il a quitté (« Anciens élèves », `/school-admin/students/departed`). Un compte n'est supprimé que **sur demande** de l'élève ou de son parent, reçue par le support et traitée par l'équipe **dans les 30 jours** : `Identity::AnonymizeUser`, réservé à l'équipe `admin` (`DeleteUserPolicy`, matrice de l'ADR-0038). Sont effacés : nom, numéro, PIN, photo, connexions, codes de récupération et tentatives de connexion (numéro et IP) ; les résultats restent, sans le nom.
+**Conservation** (porteur, 2026-10-02, réécrit après le lot R) : **aucune anonymisation automatique**. Les données restent comme **archive**, consultable par l'élève (« Mon historique », `/students/archive`) et par l'établissement qu'il a quitté (« Anciens élèves », `/school-admin/students/departed`). Un compte n'est supprimé que **sur demande** de l'élève ou de son parent, reçue par le support et traitée par l'équipe **dans les 30 jours** : `Identity::AnonymizeUser`, réservé à l'équipe `admin` (`DeleteUserPolicy`, matrice de l'ADR-0038). Sont effacés : nom, numéro, PIN, photo, connexions, codes de récupération et tentatives de connexion (numéro et IP) ; ses résultats sont effacés aussi : il sort de toutes les statistiques (ADR-0036, amendement (2)). Une demande s'enregistre à sa réception et l'accueil de l'équipe la rappelle à partir du 25e jour.
 
 ## 3. Parcours utilisateur
 
@@ -349,7 +349,7 @@ Alors elle voit son nom et ses résultats dans les classes de l'établissement, 
 Quand l'équipe admin la traite depuis la fiche du compte, avec la date de la demande
 Alors son nom devient « Compte supprimé », son numéro, son PIN et sa photo sont effacés, ses connexions sont fermées
 Et ses tentatives de connexion, et celles faites avec son numéro, sont supprimées
-Et ses sessions, réponses et badges restent, sans son nom
+Et ses sessions, réponses, badges et lacunes sont effacés : il ne compte plus dans aucune statistique
 Et le journal garde l'auteur et la date de la demande, rien des données effacées
 
 Étant donné une date de demande absente ou future
@@ -420,8 +420,8 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 | RCCM de Lnclass Côte d'Ivoire SARL ; déclaration ou autorisation ARTCI | **à compléter par les juristes** (le porteur ne les fournira pas) | lot Z (mise en ligne de Protection des données, CGU, CGV) |
 | « Départ » et données « sensibles » | **fermé** : sans anonymisation automatique, le « départ » ne déclenche rien ; la suppression sur demande efface nom, numéro, PIN, photo, connexions, codes et tentatives de connexion | rien |
 | Sessions et badges d'un compte supprimé | **fermé** : rattachés au compte anonymisé ; les listes nominatives (suivi, « Anciens élèves », « Travail des élèves ») l'excluent | rien |
-| Réussite de la classe (UDR-0029) avec un compte supprimé : le compter encore ? | **ouvert**, à trancher avec les juristes (aujourd'hui exclu des listes nominatives) | rien |
-| Rappel des demandes de suppression qui approchent des 30 jours (liste des demandes en attente) | **ouvert** : la date de la demande est saisie au traitement, aucune demande n'est enregistrée avant | rien ; un lot si le porteur le veut |
+| Réussite de la classe (UDR-0029) avec un compte supprimé : le compter encore ? | **fermé** (porteur) : non, l'élève sort de toutes les statistiques ; ses résultats sont effacés (ADR-0036, amendement (2)) | lot R2 |
+| Rappel des demandes de suppression qui approchent des 30 jours | **fermé** (porteur) : oui ; demandes enregistrées à leur réception, carte sur l'accueil de l'équipe, en ambre à partir du 25e jour (ADR-0036, amendement (2)) | lot R3 |
 | Purges de l'ADR-0036 §6 (tentatives de connexion à 90 jours, codes périmés à 30 jours) non programmées | **constat** : la suppression sur demande efface déjà les tentatives du compte ; la purge à 90 jours reste à programmer avant la mise en ligne | lot Z (page Protection des données) |
 | Région d'hébergement et transferts, âge minimum et accord des parents, bases légales, responsabilité, droit applicable et tribunaux | **à compléter par les juristes** ([`pages-publiques.md`](pages-publiques.md), encadré « Relecture juridique ») | lot Z (Protection des données, CGU) |
 | Acceptation des CGU à l'inscription (case à cocher) | **ouvert** | rien dans ce chantier (sinon un chantier sur l'inscription) |
