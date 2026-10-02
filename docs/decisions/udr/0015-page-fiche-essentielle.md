@@ -97,7 +97,7 @@ Aujourd'hui, chaque ligne d'exercice montre jusqu'à huit éléments, et chaque 
 
 | Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
 |---|---|---|---|---|
-| Surtitre de l'en-tête | « Fiche essentielle · <cours> » | « Fiche essentielle », pour tous les rôles (répétition simple) | R6 | Le lien de retour nomme déjà le cours (`ui_back_link course.name`). |
+| Surtitre de l'en-tête | « Fiche essentielle · <cours> » | « Fiche essentielle », pour l'élève seulement (décision du porteur du 2026-10-02) | R6 | Le lien de retour nomme déjà le cours (`ui_back_link course.name`). |
 | Encart `#essential_gap` | Titre, date, puis la règle pour lever la lacune, en toutes lettres | Titre suivi de `ui_info_tip t(".gap_body", threshold: …), label: t(".gap_title")`, puis la date | R4 | Dans l'infobulle, texte inchangé. |
 | Aide « Badges » (`#essential_badges_help`) | Au-dessus de la liste, avec son infobulle | Retirée | R4 | Les badges quittent les lignes. Leur explication reste sur la page de l'exercice : infobulles « Badge » et « Maîtrise » de `#student_progress`. |
 | Liste `#essential_exercises` | Tous les exercices | Les 3 premières lignes, puis « Voir plus » | R3 | Les lignes suivantes sont rendues, en `hidden`. « Voir plus » les révèle sans requête. |
@@ -129,7 +129,7 @@ Ce qui ne change pas pour l'élève : le retour (nom du cours), le titre, le sou
 ### Règles d'implémentation
 
 **`catalog/essentials/show`**
-- Surtitre : `t(".eyebrow")`, sans interpolation, pour tous les rôles.
+- Surtitre : élève, `t(".student_eyebrow")`, sans interpolation ; enseignant et équipe, `t(".eyebrow", course:)`, inchangé.
 - `#essential_gap` : `h2#essential_gap_title` puis, sur la même ligne, `ui_info_tip t(".gap_body", threshold: Entities::Assessment::Grading::REMEDIATION_THRESHOLD), label: t(".gap_title")`. Puis `t(".gap_since", …)`. Le paragraphe `gap_body` visible disparaît. L'icône `light-bulb`, `bg-warning-soft` et la date restent.
 - `#essential_badges_help` est retiré.
 - La liste est rendue par `exercises.each_with_index`. Chaque ligne reçoit `primary: @student && index.zero?` et `folded: @student && index >= 3`.
@@ -146,7 +146,7 @@ Ce qui ne change pas pour l'élève : le retour (nom du cours), le titre, le sou
 - Enseignant et équipe : la ligne actuelle, inchangée.
 
 **`config/locales/catalog/essentials.fr.yml`**
-- `show.eyebrow` : « Fiche essentielle ».
+- Ajouter `show.student_eyebrow` : « Fiche essentielle ». `show.eyebrow` (« Fiche essentielle · %{course} ») reste : l'enseignant et l'équipe le lisent.
 - Retirer `show.badges_help`, `exercise_progress.badge`, `exercise_progress.best_score` et `exercise_progress.not_started`, devenus inutilisés. `exercise_progress.questions` reste : l'enseignant et l'équipe le lisent.
 
 **Tokens** : tokens du `@theme` seulement (UDR-0005). Aucune couleur en dur, aucune valeur entre crochets, aucun `dark:`.
@@ -157,7 +157,7 @@ Ce qui ne change pas pour l'élève : le retour (nom du cours), le titre, le sou
 - La ligne d'exercice de l'enseignant et de l'équipe : titre, description, type, « N questions », statut, « Voir l'exercice » (`secondary`).
 - La liste complète des exercices, sans « Voir plus ».
 - Les états vides de l'équipe.
-- Seul changement commun à tous les rôles, parce que c'est une simple répétition : le surtitre ne redit plus le nom du cours.
+- Le surtitre « Fiche essentielle · <cours> » (décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève).
 
 ### Vérification
 

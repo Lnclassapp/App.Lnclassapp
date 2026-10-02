@@ -37,4 +37,37 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
       assert_selector "h1", text: "Génétique et évolution"
     end
   end
+
+  # UDR-0011, amendement du 2026-10-02 (UDR-0057) : à 390 px, au plus 5 blocs avant le pli, aucune action principale,
+  # 3 cours puis « Voir plus » ; l'aide du code est une infobulle qui s'ouvre au toucher.
+  test "at 390 px, Ma classe passes the sobriety rule, reveals the fourth course and opens the code help" do
+    %w[Algèbre Biologie Chimie].each do |name|
+      create_assignment(classroom: @classroom, assignable: create_course(name:, level: @classroom.level, series: @classroom.series))
+    end
+    sign_in_as @student
+
+    with_mobile_viewport do
+      visit student_classroom_path
+
+      assert_blocks_above_fold "#main > div > div:not(.grid), #main > div > .grid > *", max: 5
+      assert_single_primary_action
+      within("#student_classroom_courses") do
+        assert_list_capped "ul"
+        assert_no_text "Génétique et évolution"
+
+        assert_no_page_reload { click_on I18n.t("components.reveal.more") }
+
+        assert_text "Génétique et évolution"
+        assert_selector "li", count: 4
+        assert_no_button I18n.t("components.reveal.more")
+        assert_selector "[role=status]", text: I18n.t("components.reveal.announce_one"), visible: :all
+      end
+
+      within("#student_classroom_header") do
+        assert_no_text tl("show.join_code_info_tip")
+        find("summary", text: I18n.t("components.info_tip.label", label: tl("show.join_code")), visible: :all).click
+        assert_text tl("show.join_code_info_tip")
+      end
+    end
+  end
 end

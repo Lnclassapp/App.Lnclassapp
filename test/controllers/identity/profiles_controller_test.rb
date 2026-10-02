@@ -33,10 +33,62 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
       assert_modal_link edit_profile_contact_path, /Changer mon numéro/
     end
     assert_select "#profile_security" do
-      assert_select "p", text: /Votre PIN protège votre compte/
+      assert_select "details", text: /Votre PIN protège votre compte/
       assert_modal_link edit_profile_pin_path, /Changer mon PIN/
     end
     assert_select "dt", text: "Établissement", count: 0
+  end
+
+  # UDR-0041, amendment of 2026-10-02: the student's profile says each thing once, with no permanent help text.
+  test "UDR-0041: the student's profile has no subtitle, no identity block, its photo row shows the avatar" do
+    sign_in_as create_student(first_name: "Aya", last_name: "Koné", classroom: create_classroom)
+
+    get profile_path
+
+    assert_select "#main h1", count: 1
+    assert_select "#main h1", "Mon profil"
+    assert_select "#main p", text: "Ce que Lnclass sait de vous, et ce que vous pouvez changer.", count: 0
+    assert_select "#profile_information" do |card|
+      assert_equal 1, card.text.scan("Aya Koné").size
+      assert_select "p.truncate", 0
+      assert_select "*", text: "Élève", count: 0
+      assert_select "dl.mt-5.divide-y.divide-line.border-t.border-line.text-sm"
+      assert_select "dd span[aria-hidden=true] [role=img][aria-label='Aya Koné']", text: "AK"
+      assert_select "dd span.sr-only", "Aucune photo : vos initiales s'affichent."
+      assert_select "a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Ajouter une photo/
+    end
+    assert_select "#profile_security" do
+      assert_select "div.flex.flex-wrap.items-center > h2#profile_security_title", "Mon PIN"
+      assert_select "details summary .sr-only", "Aide : Mon PIN"
+      assert_select "details div", "Votre PIN protège votre compte. Changez-le si vous pensez qu'une autre personne le connaît."
+      assert_select "p", text: /Votre PIN protège votre compte/, count: 0
+    end
+  end
+
+  # UDR-0041, amendment of 2026-10-02: the other roles keep the current profile until their own clean-up.
+  test "UDR-0041: a teacher, a school admin and a team member keep the subtitle, the identity block and the PIN text" do
+    {
+      create_teacher(first_name: "Yao", last_name: "Kouassi") => "Enseignant",
+      create_school_admin(first_name: "Adjoua", last_name: "Bamba") => "Direction",
+      create_team_member(first_name: "Koffi", last_name: "Diallo") => "Équipe"
+    }.each do |user, role|
+      sign_in_as user
+
+      get profile_path
+
+      name = "#{user.first_name} #{user.last_name}"
+      assert_select "#main p", text: "Ce que Lnclass sait de vous, et ce que vous pouvez changer."
+      assert_select "#profile_information" do
+        assert_select "p.truncate", name
+        assert_select "span", text: role
+        assert_select "dd:not(.sr-only)", "Aucune photo : vos initiales s'affichent."
+        assert_select "dd span.sr-only", 0
+      end
+      assert_select "#profile_security > h2#profile_security_title", "Mon PIN"
+      assert_select "#profile_security p", text: /Votre PIN protège votre compte/
+      assert_select "#profile_security details", 0
+      sign_out
+    end
   end
 
   test "the page takes no identifier: it always shows the account of the session" do

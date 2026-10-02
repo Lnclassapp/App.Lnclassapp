@@ -85,10 +85,10 @@
 
 | Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
 |---|---|---|---|---|
-| « Score » du `dl` de `#session_result` | « 85 % » | Retiré. Clés `score` et `score_value` supprimées | R6 | La note sur 20 dit le même résultat (`Grading.grade_on_20` = score ÷ 5). C'est la forme unique de la note dans le parcours (UDR-0058 §3.3) |
-| « Questions justes » du `dl` | « 9 sur 10 » | Retiré. Clés `correct` et `correct_value` supprimées | R6 | Même résultat que la note (`Grading.score_percent`). Le verdict de chaque question reste dans la correction, juste en dessous |
-| `dl` du résumé | 4 termes, 2 colonnes puis 4 dès `sm` | 2 termes, « Note » puis « Maîtrise », en `grid-cols-2` à toutes les tailles | — | — |
-| Aide `review_hint_student` sous « Correction question par question » | « Pour chaque question : ton choix, le verdict et l'explication. » | Retirée, sans infobulle. Clé supprimée. Le `h2` reste seul | R4, R6 | Chaque carte affiche déjà « Ton choix », le verdict et l'explication : la phrase les énumère |
+| « Score » du `dl` de `#session_result` | « 85 % » | Retiré **pour l'élève propriétaire** (`@owner`). Clés `score` et `score_value` gardées : l'enseignant et l'équipe les lisent | R6 | La note sur 20 dit le même résultat (`Grading.grade_on_20` = score ÷ 5). C'est la forme unique de la note dans le parcours (UDR-0058 §3.3) |
+| « Questions justes » du `dl` | « 9 sur 10 » | Retiré **pour l'élève propriétaire**. Clés `correct` et `correct_value` gardées : l'enseignant et l'équipe les lisent | R6 | Même résultat que la note (`Grading.score_percent`). Le verdict de chaque question reste dans la correction, juste en dessous |
+| `dl` du résumé | 4 termes, 2 colonnes puis 4 dès `sm` | Élève propriétaire : 2 termes, « Note » puis « Maîtrise », en `grid-cols-2` à toutes les tailles. Enseignant et équipe : 4 termes, inchangés | — | — |
+| Aide `review_hint_student` sous « Correction question par question » | « Pour chaque question : ton choix, le verdict et l'explication. » | Retirée pour l'élève propriétaire, sans infobulle. Le `h2` reste seul. La clé reste pour un lecteur sans correction (enseignant d'un exercice archivé : `RevealAnswersPolicy` refuse), dont l'écran ne change pas | R4, R6 | Chaque carte affiche déjà « Ton choix », le verdict et l'explication : la phrase les énumère |
 | Liste `ol` de `#session_review` (élève propriétaire) | Toutes les questions | 3 cartes visibles, les suivantes rendues mais masquées (`hidden`), puis « Voir plus » | R3 | Les cartes suivantes sont déjà dans la page. « Voir plus » les révèle par 3, sans requête, dans l'ordre des questions |
 
 **« Voir plus » de la correction (élève propriétaire seulement)**
@@ -105,11 +105,12 @@
 - **R5** — Conforme aujourd'hui. Accent `brand` (« Recommencer », « Nouveau badge ! »). `success` et `error` signalent le verdict. Le ton du médaillon code le palier, qui est écrit en toutes lettres (UDR-0007). Les confettis sont un calque décoratif de 3 s, `aria-hidden`, sans information : ils gardent leurs couleurs.
 - **R6** — Change : la note n'a plus qu'une forme, sur 20. Restent distincts, et donc affichés : le titre (« Félicitations ! » ou « Courage ! », seuil de réussite), le palier du badge et la maîtrise (seuils de l'ADR-0033). Le verdict de chaque carte garde texte, icône et couleur (accessibilité).
 
-**Inchangé pour l'enseignant et l'équipe**
+**Inchangé pour l'enseignant et l'équipe** (décision du porteur, 2026-10-02 : rien ne change pour eux, même une simple répétition)
 - « Session de Prénom Nom » à la place de l'encouragement.
+- `dl` à 4 termes : « Note », « Score », « Maîtrise », « Questions justes ».
 - Aide `review_hint_reveal` visible, correction complète (« Proposition correcte », « Choix de l'élève »), sans « Voir plus ».
-- Seuls « Score » et « Questions justes » disparaissent pour eux aussi : ce sont de simples répétitions de la note (R6).
 
 **Vérification**
-- `test/system/assessment/session_result_test.rb` : le `dl` a « Note » et « Maîtrise » seulement ; l'élève voit 3 cartes puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'enseignant voit toutes les cartes et `review_hint_reveal`.
+- `test/system/assessment/session_result_test.rb` : pour l'élève, le `dl` a « Note » et « Maîtrise » seulement ; l'élève voit 3 cartes puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'équipe voit les 4 termes, toutes les cartes et `review_hint_reveal`.
+- `test/controllers/assessment/session_results_controller_test.rb` : l'élève n'a plus « Score » ni « Questions justes » ; l'enseignant les garde.
 - `test/system/boucle_pedagogique_test.rb` (ligne 350, `review_hint_reveal`) reste vert.
