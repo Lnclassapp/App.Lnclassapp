@@ -34,7 +34,7 @@ Règles d'autorisation inchangées : `RegisterTeacherPolicy` à l'inscription, p
 | Plus de 5 envois par minute depuis une adresse | Inchangé : 429 |
 | Établissement qui a encore 5 demandes en attente d'avant la pause | Inchangé : « Trop de demandes… » (ne se produit plus après la migration) |
 | Validation refusée par la base pendant l'inscription | L'inscription entière est annulée : ni compte, ni demande, ni session |
-| Demande en attente au déploiement | Validée « automatiquement », l'enseignant rattaché à l'établissement, sauf s'il a déjà une école principale |
+| Demande en attente au déploiement | Validée « automatiquement », l'enseignant rattaché à l'établissement, sauf s'il a déjà une école principale. Reste en attente si le compte est anonymisé, l'établissement inactif ou l'enseignant retiré de cet établissement |
 | Demande refusée avant la pause | Reste refusée |
 
 ## 4. Critères d'acceptation
@@ -65,6 +65,12 @@ Quand la base est mise à jour
 Alors la première est validée « automatiquement » et son enseignant rattaché
 Et la deuxième reste refusée, sans rattachement
 Et la troisième est validée, l'école principale de son enseignant ne change pas
+```
+
+```gherkin
+Étant donné une demande en attente d'un compte anonymisé, une vers un établissement inactif, et une d'un enseignant retiré de l'établissement
+Quand la base est mise à jour
+Alors les trois restent en attente et personne n'est rattaché
 ```
 
 ```gherkin

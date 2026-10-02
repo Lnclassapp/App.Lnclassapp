@@ -13,6 +13,8 @@
 
 - Une première question de cadrage, fermée par le porteur : il voulait la règle appliquée, pas un questionnaire. Les choix restants sont écrits dans le memo, réversibles.
 
+- La première migration validait toute demande en attente : un compte anonymisé ou un établissement inactif aurait été rattaché, et `ON CONFLICT DO NOTHING` pouvait valider une demande sans rattacher personne. Relevé par la relecture de sécurité ; la migration ne valide plus que ce qu'une inscription d'aujourd'hui aurait permis, et échoue sur l'état incohérent.
+
 ## Ce qu'on a appris sur la codebase
 
 - `JoinRequestRepository#approve` rattache déjà l'enseignant dans le même point de sauvegarde : la pause tient en un appel de plus dans le use case.
@@ -22,4 +24,5 @@
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Certification des enseignants, DRENA par DRENA, par collègues et directions | Période et règles à fixer par le porteur | `certification-enseignants` (à ouvrir) |
+| Événement d'audit pour la validation `auto` | La trace tient dans la demande (`decided_via`, `decided_at`) ; à ajouter si la direction veut voir « qui a rejoint » | Certification |
 | Régénérer les codes secrets des établissements où des enseignants sont entrés sans code | Le code ne protège rien pendant la pause | À la reprise de la validation |

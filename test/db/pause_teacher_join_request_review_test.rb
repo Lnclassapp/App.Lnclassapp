@@ -3,7 +3,7 @@ require Rails.root.join("db/migrate/20261003120000_pause_teacher_join_request_re
 
 # ADR-0073: validation is paused. The migration approves the requests still pending, through "auto" and by no one, and
 # attaches their teachers to their school; refused requests and teachers who already have a primary school stay as they
-# are. Each test runs in the rolled back transaction of the test: PostgreSQL rolls the constraint changes back with it.
+# are, and so do requests no sign-up could make today (anonymized account, school not active, open withdrawal). Each test runs in the rolled back transaction of the test: PostgreSQL rolls the constraint changes back with it.
 class PauseTeacherJoinRequestReviewTest < ActiveSupport::TestCase
   def connection = ActiveRecord::Base.connection
 
@@ -35,6 +35,30 @@ class PauseTeacherJoinRequestReviewTest < ActiveSupport::TestCase
     assert_equal "approved", already.reload.status
     assert_equal 1, Orm::TeacherSchool.where(teacher: attached).count, "son école principale reste la seule"
     assert_match(/'auto'/, via_constraint)
+  end
+
+  test "an anonymized account, a school not active, an open withdrawal: the request stays pending, no one is attached" do
+    anonymized = create_join_request(school: @school, teacher: create_teacher(school: nil, anonymized_at: Time.current))
+    closed = create_join_request(school: create_school(status: "inactive"))
+    withdrawn = create_join_request(school: @school)
+    create_teacher_departure(teacher: Orm::User.find(withdrawn.teacher_id), school: @school, detached_by: create_team_member)
+
+    migrate(:up)
+
+    [ anonymized, closed, withdrawn ].each do |request|
+      assert_equal "pending", request.reload.status
+      assert_equal 0, Orm::TeacherSchool.where(teacher_id: request.teacher_id).count
+    end
+  end
+
+  test "a teacher already linked to the school without being attached makes up fail, and nothing is approved" do
+    awa = create_teacher(school: nil)
+    request = create_join_request(school: @school, teacher: awa)
+    Orm::TeacherSchool.create!(teacher: awa, school: @school, primary: false)
+
+    assert_raises(ActiveRecord::RecordNotUnique) { connection.transaction(requires_new: true) { migrate(:up) } }
+
+    assert_equal "pending", request.reload.status
   end
 
   test "down brings the former ways back" do

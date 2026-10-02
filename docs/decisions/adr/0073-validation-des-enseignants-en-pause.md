@@ -36,7 +36,8 @@ Personne ne valide encore : l'équipe n'a pas atteint les établissements, et pe
 
 - `Entities::School::JoinRequest::AUTO = "auto"` ; la contrainte `school_join_requests_decided_via_values` accepte `team`, `sponsor`, `auto`.
 - Un refus de la validation (`:conflict`) annule toute l'inscription.
-- La migration `20261003120000_pause_teacher_join_request_review` valide les demandes encore `pending` par la même voie et rattache leurs enseignants (sauf école principale existante) ; les demandes refusées restent refusées. Son `down` rétablit la contrainte et échoue s'il existe une demande `auto`.
+- La migration `20261003120000_pause_teacher_join_request_review` valide par la même voie les demandes encore `pending` qu'une inscription d'aujourd'hui aurait pu faire (compte non anonymisé, établissement actif, aucun retrait ouvert de cet établissement, ADR-0071), et rattache leurs enseignants (sauf école principale existante) ; les autres restent `pending`, les refusées restent refusées. Un enseignant déjà lié à l'établissement sans y être rattaché la fait échouer, plutôt que de valider une demande qui ne rattache personne. Son `down` rétablit la contrainte et échoue s'il existe une demande `auto`.
+- La validation `auto` n'écrit pas d'événement d'audit : la trace est `decided_via = 'auto'` et `decided_at` sur la demande.
 - Inchangés : le plafond de 5 demandes en attente, la limite de débit, la validation par l'équipe et par un garant (pour une demande d'avant la pause), l'écran d'attente (comptes refusés), la mesure de croissance (une demande validée compte comme une inscription).
 
 ## 5. Conséquences
@@ -63,7 +64,7 @@ written(@join_requests.approve(id: request.id, decided_by_id: nil, via: Entities
 
 - `test/domain/use_cases/identity/register_pending_teacher_test.rb` : la demande est validée par `auto` sans décideur ; un refus de validation annule l'inscription.
 - `test/controllers/identity/pending_teacher_registrations_controller_test.rb` : rattachement, voie `auto`, redirection vers la sélection des classes.
-- `test/db/pause_teacher_join_request_review_test.rb` : demandes en attente validées et rattachées ; refusées intactes ; école principale existante gardée.
+- `test/db/pause_teacher_join_request_review_test.rb` : demandes en attente validées et rattachées ; refusées intactes ; école principale existante gardée ; compte anonymisé, établissement inactif et retrait ouvert laissés en attente ; lien non principal → échec.
 - `test/system/identity/cold_start_test.rb` : l'enseignant atteint le catalogue sans écran d'attente.
 
 ## 8. Remplace, complète, amende
