@@ -2,13 +2,15 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Déprécié (2026-10-02, [UDR-0062](0062-echeances.md), [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md)) — *auparavant : Accepté (2026-09-27, porteur)* |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot D7, critère CA-27 |
 | **ADR lié** | [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (active/archived) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (seul un contenu publié s'assigne) · [UDR-0028](0028-cours-dans-la-classe-et-bascule-d-assignation.md) (bascule d'assignation) · [UDR-0006](0006-shell-applicatif-par-role.md) §7 (CRUD Hotwire) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |
-| **Remplacé par** | — |
+| **Remplacé par** | — *(dépréciée sans remplaçante : un cours ne s'assigne plus)* |
 
 ---
+
+> ⚠️ **Dépréciée le 2026-10-02.** Un cours ne s'assigne plus ([ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md)) : cet écran, sa route et sa query sont supprimés ([UDR-0062](0062-echeances.md) §3.6). Ne pas l'appliquer.
 
 ## 1. Contexte
 
@@ -64,9 +66,9 @@ Un enseignant qui parcourt le catalogue trouve un cours et veut le proposer à s
 - Retour : `ui_back_link` vers `course_path`, libellé = nom du cours (au lieu de « Retour au cours »).
 - Titre : « Assigner à mes classes · Enseignant · Lnclass ».
 
-## Amendement du 2026-10-02 — dépréciation · Statut : Proposé
+## Amendement du 2026-10-02 — dépréciation · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
 
-*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fera foi en cas d'écart une fois acceptée.*
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
 - **Tout l'écran disparaît** : un cours ne s'assigne plus. La route `course_assignments`, `Classroom::CourseAssignmentsController`, `Queries::Classroom::CourseAssignmentTargetsQuery`, la vue et ses locales sont supprimées ; « Assigner à mes classes » quitte la page du cours (UDR-0013, amendement du 2026-10-02).
-- À l'acceptation, cette UDR passe au statut « Déprécié ».
+- Cette UDR passe au statut « Déprécié » (2026-10-02).

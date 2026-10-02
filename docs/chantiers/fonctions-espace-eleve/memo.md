@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — ADR-0072, UDR-0061, 0062, 0063 proposées ; FAQ construite (UDR-0061 §3.1 acceptée) ; [PRD](prd.md) proposé (2026-10-02) |
+| **Statut** | planifié — décisions acceptées le 2026-10-02 (porteur : « lance les lots ») ; [PRD](prd.md) et [plan](plan.md) ; FAQ livrée (commit `2bd842f2`) |
 | **Ouvert le** | 2026-10-02 |
 | **Branche** | `ccr-93a43a40-3h3ty4` *(repartie de `Develop` le 2026-10-02, après la fusion d'`interface-epuree` phase 1)* |
 | **Programme** | — *(né du grill d'`interface-epuree`, Q8 ; probablement à découper en plusieurs chantiers au grill)* |
@@ -77,6 +77,8 @@ L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent
 | Q14 — Qui écrit et tient la FAQ ? | **Écrite dans l'application** : une première FAQ de 8 à 10 questions rédigée à partir des écrans existants, relue par le porteur ; toute modification passe par une PR | Page statique, textes dans les locales (`t(".key")`), aucune table ni écran d'administration. La FAQ doit suivre les écrans : elle entre dans la définition de « fini » des chantiers qui changent un parcours élève |
 | Q15 — Ajout du porteur (2026-10-02) : pages Mission et Protection des données | **Deux pages publiques** : « Notre mission » et « Politique de protection des données », à découper en lots | Pages statiques du contexte `communication`, sur le motif de `/aide` (UDR-0063). La mission part de la landing ; la politique part d'un inventaire factuel des données traitées ([`pages-publiques.md`](pages-publiques.md)) ; ce qui relève du porteur ou d'un juriste reste « à fournir ». Aucune table |
 | Q16 — Ajout du porteur (2026-10-02) : CGU et CGV | **Conditions générales d'utilisation et de vente**, au nom de **« Lnclass Côte d'Ivoire »**, aussi responsable du traitement des données | Deux pages publiques de plus (UDR-0063). CGU : brouillon factuel (comptes, PIN, code de classe, contenu, usage, suspension) ; CGV : squelette sans chiffre, **dont le lot dépend du chantier `abonnement-mobile-money`**. Adresse, RCCM et contact de l'entité : à fournir |
+| Q17 — Les 11 choix faits sans réponse du grill (ADR-0072 §9, UDR-0061, UDR-0062, UDR-0063) ? | **Acceptés tels que rédigés** (porteur, 2026-10-02 : « lance les lots ») : session terminée le jour de l'échéance = à l'heure ; ambre aujourd'hui et demain ; dimanche exclu ; l'équipe assigne sans échéance et n'écrit pas les jours d'un enseignant ; tout décocher = non renseigné ; retirer sa déclaration efface ses jours ; « fait » = session standard rattachée à l'assignation ; exercice terminé sans date, en fin de liste ; la direction ne voit pas les retards ; ronds de la carte d'aide tous `brand-soft` ; pages publiques au vouvoiement | Plus de question bloquante sur les échéances ; les lots C, D, E codent ces règles |
+| Q18 — Chemin de l'enseignant vers les exercices, sans cours assignés ? | **Bloc « Cours » sur la page de la classe** (UDR-0062 §3.4) : retenu par l'orchestrateur, qui applique la recommandation ; le porteur n'a pas répondu et a demandé de lancer. **Révisable par le porteur** | Lot E le construit ; la carte « Cours assignés » de « Ma classe » est retirée (amendement de l'UDR-0011 accepté) |
 
 ## Cas limites identifiés
 
@@ -91,10 +93,15 @@ L'accueil élève épuré sera livré sans ces fonctions. Tant qu'elles manquent
 
 ## Questions encore ouvertes
 
-- **Carte d'aide** : numéro d'appel, numéro WhatsApp, horaires et délai de réponse du support, à fournir par le porteur.
-- **Élève arrivé après l'échéance** : voir les cas limites.
-- **Écrans touchés par le retrait de l'assignation de cours et de fiches** : traités par l'UDR-0062 §3.6 ; le code en montre plus que le grill (page classe, cours et fiche dans la classe, « Assigner un cours », « Ma classe ») : UDR-0011, 0013, 0015, 0027, 0028, 0029 amendées, 0030 dépréciée (proposé).
-- **Chemin de l'enseignant vers les exercices** : il passait par les cours assignés de la classe. Proposition (UDR-0062 §3.4) : un bloc « Cours » sur la page de la classe. À valider.
-- **Données légales à fournir** (pages publiques, [`pages-publiques.md`](pages-publiques.md) §5) : adresse du siège, RCCM, forme juridique et contact de Lnclass Côte d'Ivoire ; contact pour exercer ses droits ; déclaration ou autorisation ARTCI (loi n° 2013-450) ; durées de conservation ; région d'hébergement ; âge minimum et accord des parents ; et, pour un juriste, bases légales, responsabilité, droit applicable et tribunaux.
+*Mises à jour le 2026-10-02 (« lance les lots »). Détail et lots bloqués : [PRD §8](prd.md#8-points-ouverts).*
+
+- **Carte d'aide** : numéro d'appel, numéro WhatsApp, horaires et délai de réponse du support, à fournir par le porteur. Les numéros de contact de l'entité servent-ils aussi au support ?
+- **Élève arrivé après l'échéance** : voir les cas limites. Tant qu'il n'est pas tranché, la règle générale s'applique (aucun cas particulier codé).
+- **Liste nominative** : nommer aussi les élèves « pas encore faits » après l'échéance ? (par défaut, non)
+- **Conservation (lot R)** : que veut dire **« départ »** (compte fermé à la demande, élève sorti de toute classe, fin d'année scolaire sans réinscription, enseignant retiré) ? Quelles données sont **« sensibles »** (nom, numéro, photo, genre, adresses IP) ? Les sessions et badges restent-ils rattachés au compte anonymisé (proposition, qui garde les statistiques de la classe) ?
+- **Constat** : l'anonymisation (`Identity::AnonymizeUser`, ADR-0036) n'est pas construite et aucune purge n'est programmée. La politique ne peut promettre « 30 jours » qu'après le lot R, livré **avant le déploiement**.
+- **Relecture juridique** (avant la sortie de l'application) : RCCM, déclaration ou autorisation ARTCI, droit applicable et tribunaux, responsabilité, âge minimum et accord des parents, bases légales, région d'hébergement. Le porteur ne les fournira pas : **les juristes les complètent** ([`pages-publiques.md`](pages-publiques.md), encadré « Relecture juridique »).
 - **CGV** : offre, prix, durée, remboursement et réclamation, à fixer par `abonnement-mobile-money`.
-- **Choix faits au PRD sans réponse du grill**, à valider : voir [PRD §8](prd.md#8-points-ouverts) et ADR-0072 §9.
+- **Acceptation des CGU à l'inscription** (case à cocher) : hors de ce chantier.
+
+**Données légales fournies par le porteur (2026-10-02)** : entité **Lnclass Côte d'Ivoire SARL**, responsable du traitement ; adresse « Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph » ; contact **+225 05 44 32 00 20** et **+225 05 84 25 80 85** ; conservation **30 jours après le départ**, données personnelles sensibles **anonymisées par défaut**, informations d'usage **conservées** pour la progression et le suivi par les enseignants et l'établissement.

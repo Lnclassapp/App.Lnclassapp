@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot D4, critères CL-10, CL-04 (affichage), ID-15 (bouton de l'enseignant), TR-cadre-4 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadClassroomPolicy`, fait `show_roster`) · [ADR-0032](../adr/0032-recuperation-assistee-du-pin.md) (code de récupération) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · UDR-0020 du Lot B8 (modale du code) |
@@ -76,9 +76,9 @@ L'enseignant ouvre une de ses classes pour **relever le code** à transmettre au
 - **Infobulles** : effectif (le plafond), « Dernier score » (UDR-0054 §3.4).
 - Titre : « <nom de la classe> · <espace> · Lnclass ».
 
-## Amendement du 2026-10-02 — exercices assignés, jours de séance, cours · Statut : Proposé
+## Amendement du 2026-10-02 — exercices assignés, jours de séance, cours · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
 
-*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fera foi en cas d'écart une fois acceptée.*
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
 
-- **« Cours assignés » est remplacé** par trois blocs, dans cet ordre, entre l'en-tête et la liste des élèves : « Jours de séance » (enseignant de la classe seulement), « Exercices assignés » (avec « 18 faits, dont 3 en retard · 7 pas encore faits », chaque ligne menant au suivi de l'exercice), et « Cours » (proposition à valider : les cours publiés du niveau, de la matière de l'enseignant, seul chemin vers les exercices).
+- **« Cours assignés » est remplacé** par trois blocs, dans cet ordre, entre l'en-tête et la liste des élèves : « Jours de séance » (enseignant de la classe seulement), « Exercices assignés » (avec « 18 faits, dont 3 en retard · 7 pas encore faits », chaque ligne menant au suivi de l'exercice), et « Cours » (les cours publiés du niveau, de la matière de l'enseignant, seul chemin vers les exercices ; memo, Q18, révisable par le porteur).
 - L'état vide « Aucun cours assigné » disparaît, remplacé par « Aucun exercice assigné ».

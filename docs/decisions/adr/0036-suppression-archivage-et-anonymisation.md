@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Accepté — *amendement proposé le 2026-10-02 : anonymisation automatique 30 jours après le départ (lot R de `fonctions-espace-eleve`)* |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-14**, bloque la V1 (Lot B) et la V2 |
 | **Complète** | [ADR-0005](./0005-decouplage-audit-admin-et-integrite-donnees.md) · [ADR-0016](./0016-conservation-historique-assignations.md) |
@@ -111,3 +111,43 @@ production:
 ## 9. Points à confirmer par le porteur
 
 - L'anonymisation garde les résultats pseudonymes : ce n'est pas un effacement total.
+
+## Amendement du 2026-10-02 — anonymisation automatique 30 jours après le départ · Statut : Proposé
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/plan.md), lot R ; règle de conservation donnée par le porteur le 2026-10-02 pour la page « Protection des données » ([UDR-0063](../udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md)). **Proposé** : la définition du « départ » reste à trancher (questions ci-dessous). Le texte ci-dessus reste en vigueur tant que cet amendement n'est pas accepté.*
+
+### Constat
+
+Le porteur fixe la conservation : **30 jours après le départ**, les **données personnelles sensibles sont anonymisées par défaut** ; les **informations d'usage** (sessions, réponses, badges, lacunes, assignations) **restent**, pour la progression et le suivi par les enseignants et l'établissement.
+
+Le §4 ci-dessus prévoit l'anonymisation, mais seulement à la main, par l'équipe (`Identity::AnonymizeUser`, `DeleteUserPolicy`). Au 2026-10-02 :
+
+- **`Identity::AnonymizeUser` n'existe pas** (aucun use case dans `app/domain/use_cases/identity/`) ; seule la colonne `users.anonymized_at` et la lecture `User#anonymized?` existent ;
+- **aucune purge du §6 n'est programmée** : `config/recurring.yml` ne contient que la purge des fichiers non rattachés (ADR-0047) ; `PurgeLoginAttemptsJob` et `PurgeExpiredCredentialsJob` n'existent pas.
+
+La politique de protection des données ne peut donc pas promettre « 30 jours » tant que ce qui suit n'est pas livré.
+
+### Décision proposée
+
+> **Nous anonymisons automatiquement un compte 30 jours après son départ, par un job quotidien, avec le même use case que l'anonymisation faite par l'équipe ; les données d'usage restent rattachées au compte anonymisé.**
+
+- **`UseCases::Identity::AnonymizeUser`** : la transaction du §4 (nom « Compte supprimé », `contact` nul, PIN aléatoire, `anonymized_at`, sessions, second facteur, codes et invitations supprimés, adhésions terminées), **plus la photo de profil effacée** (ADR-0060, `ProfilePhotoStorePort#remove`). Deux appelants : l'équipe (`DeleteUserPolicy`, inchangée) et le système (acteur `nil`, policy `Identity::AutoAnonymizePolicy` qui n'autorise que l'appel du job). Journal : `user.anonymized`, avec `metadata.reason` = `team` ou `retention`.
+- **`Identity::AnonymizeDepartedUsersJob`**, dans `config/recurring.yml` (`every day at 3:30am`) : il lit les comptes non anonymisés dont le départ date de plus de 30 jours (`Ports::Identity::UserRepositoryPort#departed_before(at:)`, par lots de 500) et appelle `AnonymizeUser` pour chacun. Idempotent : un compte déjà anonymisé est ignoré.
+- **Ce qui reste** : sessions, réponses, badges, lacunes, assignations, journal d'audit (sans donnée effacée). Ils restent rattachés au compte anonymisé : les statistiques de la classe et du pilotage ne changent pas (§5, « les statistiques d'un exercice restent exactes »).
+- **Hors de cet amendement** : les purges des tentatives de connexion (90 jours) et des codes périmés (30 jours) du §6 restent à programmer ; le lot R les ajoute s'il en a le temps, sinon elles sont signalées dans le journal du chantier.
+
+### Questions à trancher avant d'accepter
+
+1. **Qu'est-ce qu'un « départ » ?** Trois lectures possibles, non exclusives :
+   - un compte **fermé à la demande** (de l'utilisateur, d'un parent, de l'établissement) ;
+   - un élève **sorti de toute classe** (toutes ses adhésions ont un `left_at`) ; mais un élève qui change de classe passe par cet état un instant ;
+   - une **fin d'année scolaire sans réinscription** (classe archivée, ADR-0041, sans nouvelle adhésion à la rentrée) ;
+   - et, pour un enseignant : retiré de son établissement (ADR-0071) ? sans classe déclarée ?
+2. **Quelles données sont « sensibles » ?** Nom et prénom(s), numéro, photo, genre ? L'adresse IP des sessions, des tentatives et du journal ? Le numéro saisi dans `login_attempts.contact` ?
+3. **Sessions et badges** : rattachés au compte anonymisé (proposition, qui garde les statistiques), ou détachés ?
+
+### Vérification prévue
+
+- `test/domain/use_cases/identity/anonymize_user_test.rb` : chaque donnée sensible est effacée, chaque donnée d'usage reste ; refus pour un enseignant, un élève, la direction.
+- `test/jobs/identity/anonymize_departed_users_job_test.rb` : un compte parti depuis 31 jours est anonymisé, un compte parti depuis 29 jours ne l'est pas, un second passage ne change rien.
+- `test/config/recurring_test.rb` : le job est programmé en production.

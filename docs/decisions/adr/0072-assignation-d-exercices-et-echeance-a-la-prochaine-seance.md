@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-02 : « lance les lots ») |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q5 à Q8, Q10 à Q12 ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) |
 | **Amende** | [ADR-0048](./0048-statuts-d-assignation-active-et-archived.md) §4 « Types » (trois types assignables → un seul) et table `classroom_assignments` (colonne `due_on`) · [ADR-0071](./0071-gestes-de-la-direction-sur-son-etablissement.md) §4.5 (`withdraw_all_in_school` retire aussi les jours de séance) |
@@ -178,13 +178,13 @@ Toutes les dates se comparent en **date locale d'Abidjan**.
 ### 🔴 Coûts consentis
 
 - **Un déploiement bloqué** si la base contredit Q7. C'est voulu ; il faudra alors un ADR qui décide du sort de ces lignes.
-- **Les écrans enseignant perdent leur chemin vers les exercices.** Aujourd'hui, l'enseignant atteint un exercice par les cours **assignés** de sa classe (UDR-0027 → 0028 → 0029). Sans cours assignés, ce chemin est vide. L'UDR-0062 §3.4 propose un bloc « Cours » sur la page de la classe ; c'est une question ouverte pour le porteur.
+- **Les écrans enseignant perdent leur chemin vers les exercices.** Aujourd'hui, l'enseignant atteint un exercice par les cours **assignés** de sa classe (UDR-0027 → 0028 → 0029). Sans cours assignés, ce chemin est vide. Il est rouvert par un bloc « Cours » sur la page de la classe (UDR-0062 §3.4 ; memo, Q18, révisable par le porteur).
 - **Un élève qui a fait l'exercice avant qu'il soit assigné** (depuis le catalogue) reste « pas encore fait » pour l'enseignant : sa session n'est rattachée à aucune assignation (ADR-0048, inchangé). Pour lui-même, l'exercice est terminé.
 - **Retirer sa déclaration d'une classe efface ses jours de séance** : redéclarer la classe repose la question. `TeachingRepository` ne « touche plus à rien d'autre ».
 - **Pas d'échéance quand l'équipe assigne** : elle n'a pas de jours.
 - **Vacances ignorées** : un exercice assigné avant les congés paraît en retard pendant les congés (Q10). Sans effet, puisque rien ne se ferme.
 - **Un calcul en lecture** : `MIN(completed_at)` par élève sur l'index partiel `index_exercise_sessions_handed_in`, qui n'inclut pas `completed_at`. Si le budget de l'ADR-0067 (< 100 ms) n'est pas tenu au volume de la feuille de route, ajouter `completed_at` à l'`INCLUDE` de cet index, sans autre ADR.
-- **Le glossaire** (`ClassroomAssignment` : « Types assignables : Course, Essential, Exercise ») est à corriger à l'acceptation, avec les termes « jours de séance », « échéance » et « rendu en retard ».
+- **Le glossaire** est corrigé à l'acceptation (2026-10-02) : `ClassroomAssignment` n'a plus qu'un type, et « jours de séance », « échéance » et « rendu en retard » y entrent.
 
 ## 6. Notes d'implémentation
 
@@ -330,11 +330,11 @@ late = first_done.select { |_, done_on| due_on && done_on > due_on }
 
 - **Amende l'ADR-0048** : §4 « Types » (seul `Exercise`) et la table `classroom_assignments` (colonne `due_on`, contrainte de type). Le reste (statuts, nouvelle ligne à la réassignation, rattachement des sessions) est inchangé.
 - **Amende l'ADR-0071** §4.5 : `withdraw_all_in_school` retire aussi les jours de séance.
-- **Interfaces** : [UDR-0062](../udr/0062-echeances.md) (échéances, jours de séance, suivi) ; amendements proposés des UDR-0011, 0013, 0015, 0027, 0028, 0029 et 0030 (retrait de l'assignation de cours et de fiches).
+- **Interfaces** : [UDR-0062](../udr/0062-echeances.md) (échéances, jours de séance, suivi) ; amendements acceptés des UDR-0011, 0013, 0015, 0027, 0028, 0029, et dépréciation de l'UDR-0030 (retrait de l'assignation de cours et de fiches).
 
-## 9. Points à confirmer par le porteur
+## 9. Choix faits sans réponse du grill
 
-Choix faits ici faute de réponse du grill :
+Acceptés tels quels par le porteur le 2026-10-02 (« lance les lots » ; memo, Q17) :
 
 1. **Limite de l'échéance** : une session terminée le jour de l'échéance est à l'heure ; le retard commence le lendemain.
 2. **Ambre** : « moins de 24 h » lu en jours, soit échéance aujourd'hui ou demain (la maquette montre « À rendre demain » en ambre).

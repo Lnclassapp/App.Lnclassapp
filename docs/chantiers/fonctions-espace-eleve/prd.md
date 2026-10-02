@@ -2,11 +2,11 @@
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 >
-> **Statut : proposé le 2026-10-02**, avec l'[ADR-0072](../../decisions/adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) et les UDR [0061](../../decisions/udr/0061-carte-d-aide-et-faq.md), [0062](../../decisions/udr/0062-echeances.md) et [0063](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md). La FAQ (`/aide`) est déjà construite (commit `189d7f92`, construction directe demandée par le porteur). Les points marqués **« à fournir »** ou **« ouvert »** (§8) bloquent le lot qui en dépend, pas les autres.
+> **Statut : accepté le 2026-10-02** (porteur : « lance les lots ») ; découpé dans [`plan.md`](plan.md). Décisions : l'[ADR-0072](../../decisions/adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) et les UDR [0061](../../decisions/udr/0061-carte-d-aide-et-faq.md), [0062](../../decisions/udr/0062-echeances.md) et [0063](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md). La FAQ (`/aide`) est déjà construite (commit `189d7f92`, construction directe demandée par le porteur). Les points marqués **« à fournir »** ou **« ouvert »** (§8) bloquent le lot qui en dépend, pas les autres.
 
 ## 1. Contexte
 
-La maquette V2 de l'accueil élève montre six fonctions absentes ; après le grill, ce chantier en garde deux, **les échéances** et **l'aide** (le paiement part dans `abonnement-mobile-money`, les annonces dans `annonces`, la durée est abandonnée). L'enseignant n'assigne plus qu'un exercice, pour la séance suivante, déduite de ses jours de séance dans la classe ; l'élève voit sa date limite et l'enseignant voit qui a rendu en retard (ADR-0072, UDR-0062). Un élève bloqué trouve une FAQ et une carte d'aide (UDR-0061), et quatre pages publiques disent ce qu'est Lnclass, ce qu'elle fait des données et ses conditions (UDR-0063), au nom de **Lnclass Côte d'Ivoire**.
+La maquette V2 de l'accueil élève montre six fonctions absentes ; après le grill, ce chantier en garde deux, **les échéances** et **l'aide** (le paiement part dans `abonnement-mobile-money`, les annonces dans `annonces`, la durée est abandonnée). L'enseignant n'assigne plus qu'un exercice, pour la séance suivante, déduite de ses jours de séance dans la classe ; l'élève voit sa date limite et l'enseignant voit qui a rendu en retard (ADR-0072, UDR-0062). Un élève bloqué trouve une FAQ et une carte d'aide (UDR-0061), et quatre pages publiques disent ce qu'est Lnclass, ce qu'elle fait des données et ses conditions (UDR-0063), au nom de **Lnclass Côte d'Ivoire SARL**. Les données personnelles sensibles sont anonymisées 30 jours après le départ (lot R, ADR-0036 amendé).
 
 ## 2. Acteurs et permissions
 
@@ -26,7 +26,9 @@ La maquette V2 de l'accueil élève montre six fonctions absentes ; après le gr
 - `Policies::Classroom::FollowAssignmentPolicy` (nouvelle) : équipe ou enseignant de la classe, classe active ou archivée.
 - Pages `/aide`, `/mission`, `/confidentialite`, `/conditions-utilisation`, `/conditions-vente` : `allow_unauthenticated_access`, aucune policy.
 
-**Entité juridique** : **Lnclass Côte d'Ivoire**, éditeur du service et responsable du traitement des données (porteur, 2026-10-02, Q16). Adresse, RCCM et contact : à fournir.
+**Entité juridique** : **Lnclass Côte d'Ivoire SARL**, éditeur du service et responsable du traitement des données (porteur, 2026-10-02, Q16). Contact : **+225 05 44 32 00 20 et +225 05 84 25 80 85**. Adresse du siège, RCCM et point ARTCI : à fournir.
+
+**Conservation** (porteur, 2026-10-02) : les données personnelles sensibles sont anonymisées par défaut **30 jours après le départ** ; les informations d'usage de l'application (sessions, réponses, badges, lacunes, assignations) sont conservées pour la progression et le suivi par les enseignants et l'établissement. Le « départ » et les données « sensibles » restent à définir (§8). Anonymiser : `Identity::AnonymizeUser`, automatique par un job quotidien (lot R) ; à la main par l'équipe (`DeleteUserPolicy`).
 
 ## 3. Parcours utilisateur
 
@@ -310,7 +312,8 @@ Et elle a un seul h1, une h2 par section et le lien « Accueil » vers la homepa
 
 Étant donné la politique de protection des données en ligne
 Alors elle a un sommaire dont chaque lien mène à une h2
-Et elle nomme « Lnclass Côte d'Ivoire » comme responsable du traitement
+Et elle nomme « Lnclass Côte d'Ivoire SARL » comme responsable du traitement, joignable au +225 05 44 32 00 20 et +225 05 84 25 80 85
+Et elle annonce l'anonymisation 30 jours après le départ
 Et elle cite la loi n° 2013-450 comme cadre, sans affirmer de conformité
 
 Étant donné la homepage
@@ -328,6 +331,28 @@ Alors son adresse répond 404 et aucun lien n'y mène
 Étant donné les conditions de vente
 Alors elles ne sont pas en ligne tant que le chantier abonnement-mobile-money n'a pas fixé l'offre
 
+Étant donné la politique de protection des données
+Alors elle n'est pas en ligne tant que l'anonymisation automatique (lot R) n'est pas livrée
+
+# Conservation (lot R, ADR-0036 amendé — définition du « départ » à trancher)
+Étant donné un élève parti depuis 31 jours, au sens retenu pour « départ »
+Quand le job quotidien d'anonymisation passe
+Alors son nom devient « Compte supprimé », son numéro et sa photo sont effacés, ses connexions sont fermées
+Et ses sessions, réponses, badges et fiches à revoir restent, rattachés au compte anonymisé
+Et la réussite de sa classe (UDR-0029) et le travail des élèves de la direction ne changent pas
+
+Étant donné un élève parti depuis 29 jours
+Quand le job passe
+Alors son compte est intact
+
+Étant donné un compte déjà anonymisé
+Quand le job repasse
+Alors rien ne change et aucune ligne de journal n'est ajoutée
+
+Étant donné un enseignant, un élève ou la direction
+Quand il demande l'anonymisation d'un autre compte
+Alors il reçoit :forbidden
+
 # Garde-fous
 Étant donné le code de app/
 Alors aucun fichier ne passe « Course » ou « Essential » comme type assignable
@@ -342,19 +367,23 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 
 | Couche | Éléments prévus |
 |---|---|
+| **Domaine (conservation, lot R)** | `UseCases::Identity::AnonymizeUser` ; `Policies::Identity::AutoAnonymizePolicy` ; `Ports::Identity::UserRepositoryPort#departed_before`, `#anonymize` ; `Entities::Identity::AuditAction` gagne `user.anonymized` |
 | **Domaine** | `Entities::Classroom::Assignable::TYPES = %w[Exercise]` ; `Entities::Classroom::Assignment` gagne `due_on` ; `Entities::Classroom::SessionDays` (valeur, `#next_after`) ; `Ports::Classroom::SessionDaysRepositoryPort` (`for`, `replace`) ; `Ports::Classroom::AssignmentRepositoryPort` (`create` écrit `due_on`, `resolve_assignable` réduit à `Exercise`) ; `Dtos::Classroom::AssignmentInput` gagne `weekdays` ; `Dtos::Classroom::SessionDaysInput` ; `UseCases::Classroom::AssignResource` (jours, échéance, transaction) ; `UseCases::Classroom::SetSessionDays` ; `Policies::Classroom::SetSessionDaysPolicy`, `Policies::Classroom::FollowAssignmentPolicy` |
 | **Infrastructure** | Migrations : restriction de `assignable_type` (garde Q7), `classroom_assignments.due_on` et sa contrainte, table `classroom_session_days` (clé composite vers `teacher_classrooms`) ; `Orm::ClassroomSessionDay` ; `Repositories::Classroom::SessionDaysRepository` ; `AssignmentRepository` réduit ; `TeachingRepository#withdraw` et `#withdraw_all_in_school` retirent les jours ; queries `StudentHomeQuery` (`due_on`, ordre, `late_material_slugs`), `ClassroomOverviewQuery` (exercices assignés et comptes, cours de la classe), `AssignmentFollowUpQuery` (nouvelle), `ClassroomCourseQuery`, `ClassroomEssentialQuery`, `EssentialDetailQuery` (sans `Course`/`Essential`) ; suppression de `CourseAssignmentTargetsQuery` ; `config/support.yml` lu par `config_for` |
 | **Delivery** | `Classroom::AssignmentsController#new` (modale des jours) et `#create` (jours, « Plus tard ») ; `Classroom::SessionDaysController#edit`, `#update` ; `Classroom::AssignmentFollowUpsController#show` ; suppression de `Classroom::CourseAssignmentsController` ; `Communication::HelpController#show` (fait) ; `Communication::PagesController` (`mission`, `privacy`, `terms`, `sales_terms`, liste `ONLINE`) ; routes dans `config/routes/classroom.rb` et `config/routes/communication.rb` |
 | **UI** | `DueDateHelper` ; formats `date.formats.due_short` et `due_long` ; `classroom/assignments/_toggle` (`needs_session_days:`, date), `new` ; `classroom/session_days/edit` ; `classroom/classrooms/_session_days`, `_assigned_exercises`, `_courses` ; `classroom/assignment_follow_ups/show` ; `classroom/student_homes/_assigned_exercise` ; retrait des bascules de `classroom_courses/show`, `classroom_essentials/show`, de `catalog/courses/_role_actions`, de `classroom/course_assignments/` et de la carte « Cours assignés » de `student_classrooms/show` ; `ui_modal placement: :sheet`, classe `.dialog-sheet` ; `shared/_help_sheet` et `SupportHelper` ; `communication/help/show` (fait) ; `communication/pages/_page` et ses quatre vues ; `PublicPagesHelper` ; pied de page de la homepage ; textes de la homepage (« des exercices ») ; locales `classroom/*.fr.yml`, `shared/help_sheet.fr.yml`, `communication/pages/<page>.fr.yml` ; contrôleurs Stimulus `modal` (retour du focus) et `autofocus` (`data-autofocus-first`) |
 
+**Infrastructure (lot R)** : `Identity::AnonymizeDepartedUsersJob` dans `config/recurring.yml` ; aucune table.
+
 **Aucune table** pour l'aide et les pages publiques. **Une table** (`classroom_session_days`) et **une colonne** (`due_on`) pour les échéances.
 
 ## 6. Décisions rattachées
 
-- [ADR-0072](../../decisions/adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) — Seul un exercice s'assigne ; échéance = prochaine séance, figée à l'assignation (Proposé ; amende ADR-0048, 0071)
-- [UDR-0061](../../decisions/udr/0061-carte-d-aide-et-faq.md) — Carte d'aide et FAQ (FAQ acceptée, carte proposée)
-- [UDR-0062](../../decisions/udr/0062-echeances.md) — Échéances (Proposé ; amende UDR-0011, 0013, 0015, 0027, 0028, 0029, déprécie 0030)
-- [UDR-0063](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md) — Pages publiques : Mission, Protection des données, CGU, CGV (Proposé ; amende UDR-0061 §3.1, 0012)
+- [ADR-0072](../../decisions/adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) — Seul un exercice s'assigne ; échéance = prochaine séance, figée à l'assignation (Accepté ; amende ADR-0048, 0071)
+- [UDR-0061](../../decisions/udr/0061-carte-d-aide-et-faq.md) — Carte d'aide et FAQ (acceptée)
+- [UDR-0062](../../decisions/udr/0062-echeances.md) — Échéances (Accepté ; amende UDR-0011, 0013, 0015, 0027, 0028, 0029, déprécie 0030)
+- [UDR-0063](../../decisions/udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md) — Pages publiques : Mission, Protection des données, CGU, CGV (Accepté ; amende UDR-0061 §3.1, 0012)
+- [ADR-0036, amendement du 2026-10-02](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md#amendement-du-2026-10-02--anonymisation-automatique-30-jours-après-le-départ--statut--proposé) — anonymisation automatique 30 jours après le départ (**Proposé** : « départ » à trancher)
 - Brouillons des textes publics : [`pages-publiques.md`](pages-publiques.md)
 - **Signalé, non modifié ici** : l'UDR-0058 annonce le retour de la durée d'un exercice, abandonnée (Q9) ; son amendement de phase 2 d'`interface-epuree` la retire et reprend l'UDR-0062 §3.3 (carte du haut, point ambre) et l'icône d'aide de l'UDR-0061.
 
@@ -371,16 +400,18 @@ Et l'ambre (warning) n'y sert qu'aux échéances
 
 ## 8. Points ouverts
 
+*Mis à jour le 2026-10-02 après « lance les lots ». Les choix faits sans grill (ADR-0072 §9) sont acceptés (memo, Q17) ; le bloc « Cours » de la page de la classe est retenu (memo, Q18, révisable par le porteur) ; la carte « Cours assignés » de « Ma classe » est retirée (amendement de l'UDR-0011 accepté).*
+
 | Point | État | Bloque |
 |---|---|---|
-| Numéro d'appel, numéro WhatsApp, horaires et délai de réponse du support | **à fournir** (porteur) | la mise en ligne des lignes WhatsApp et appel (la carte peut sortir avec la FAQ seule) |
-| Élève arrivé dans la classe après l'échéance : en retard dès son arrivée (règle générale, aucune donnée de plus), ou échéance comptée depuis son arrivée (`classroom_students.joined_at`) | **ouvert** | le lot des échéances (affichage élève, comptes du suivi) |
-| Chemin de l'enseignant vers les exercices sans cours assignés : bloc « Cours » sur la page de la classe (cours publiés du niveau, de sa matière) — proposition de l'UDR-0062 §3.4 | **ouvert** (à valider) | le lot des échéances |
-| Carte « Cours assignés » de « Ma classe » (élève) : retirée — proposition de l'UDR-0062 §3.6 | **ouvert** (à valider) | le lot des échéances |
-| Liste nominative : nommer aussi les élèves « pas encore faits » après l'échéance ? | **ouvert** (le grill ne nomme que les retardataires) | rien (sinon on s'en tient aux rendus en retard) |
-| Choix faits sans réponse du grill, à valider : limite de l'échéance (fin du jour), ambre aujourd'hui et demain, dimanche exclu, équipe sans échéance, tout décocher = non renseigné, jours effacés au retrait de la déclaration, exercice terminé rangé en fin de liste sans date (ADR-0072 §9, UDR-0062) | **à valider** | le lot des échéances |
-| Adresse, RCCM, forme juridique et contact de Lnclass Côte d'Ivoire | **à fournir** | pages Protection des données, CGU, CGV |
-| Déclaration ou autorisation ARTCI, durées de conservation, région d'hébergement, âge minimum et accord des parents, bases légales, responsabilité, droit applicable | **à fournir** / juriste ([`pages-publiques.md`](pages-publiques.md) §5) | pages Protection des données et CGU |
-| Purges prévues par l'ADR-0036 (tentatives de connexion, codes périmés) non programmées ; anonymisation d'un compte non construite | **constat** : à construire ou à retirer de la politique | page Protection des données |
+| Numéro d'appel, numéro WhatsApp, horaires et délai de réponse du **support** (carte d'aide). Les numéros de contact de l'entité (+225 05 44 32 00 20 et +225 05 84 25 80 85) servent-ils aussi au support ? | **à fournir** (porteur) | les lignes WhatsApp et appel de la carte (lot B livre la carte avec la seule ligne FAQ si rien n'est fourni ; valeurs à poser au lot Z) |
+| Élève arrivé dans la classe après l'échéance : en retard dès son arrivée, ou échéance comptée depuis son arrivée (`classroom_students.joined_at`) | **ouvert** — tant qu'il n'est pas tranché, les lots D et E n'écrivent aucun cas particulier (la règle générale s'applique) | rien ; un amendement de l'ADR-0072 s'il faut un cas particulier |
+| Liste nominative : nommer aussi les élèves « pas encore faits » après l'échéance ? | **ouvert** (le grill ne nomme que les retardataires) | rien (on s'en tient aux rendus en retard) |
+| Adresse du siège et RCCM de Lnclass Côte d'Ivoire SARL ; déclaration ou autorisation ARTCI | **à fournir** (porteur, plus tard) | lot Z (mise en ligne de Protection des données, CGU, CGV) |
+| **« Départ »** : compte fermé à la demande, élève sorti de toute classe, fin d'année scolaire sans réinscription, enseignant retiré ? | **ouvert** | lot R, donc la mise en ligne de Protection des données |
+| **Données « sensibles »** : nom, numéro, photo, genre, adresses IP, numéro saisi dans les tentatives de connexion ? | **ouvert** | lot R |
+| Sessions et badges d'un compte anonymisé : rattachés au compte anonymisé (proposition, qui garde les statistiques de la classe), ou détachés ? | **ouvert** | lot R |
+| Purges de l'ADR-0036 §6 (tentatives de connexion à 90 jours, codes périmés à 30 jours) non programmées | **constat** : ajoutées au lot R si possible, sinon signalées au journal ; la politique ne les cite pas avant | page Protection des données |
+| Région d'hébergement, âge minimum et accord des parents, bases légales, responsabilité, droit applicable et tribunaux | **à fournir** / juriste ([`pages-publiques.md`](pages-publiques.md) §5) | lot Z (Protection des données, CGU) |
 | Acceptation des CGU à l'inscription (case à cocher) | **ouvert** | rien dans ce chantier (sinon un chantier sur l'inscription) |
-| Offre, prix, durée, remboursement, réclamation | **ouvert**, chantier `abonnement-mobile-money` | page CGV |
+| Offre, prix, durée, remboursement, réclamation | **ouvert**, chantier `abonnement-mobile-money` | lot P4 (CGV) |

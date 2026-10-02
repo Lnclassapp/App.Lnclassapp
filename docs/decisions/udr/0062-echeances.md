@@ -2,11 +2,11 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-02 : « lance les lots ») |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q5 à Q8, Q10 à Q12 ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) |
 | **ADR lié** | [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (exercice seul, jours de séance, `due_on`, retard lu) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) · [UDR-0057](0057-ecrans-eleve-epures.md) (R1 à R6) · [UDR-0058](0058-accueil-eleve.md) §3.3 (accueil élève actuel) · [UDR-0027](0027-page-classe.md), [UDR-0028](0028-cours-dans-la-classe-et-bascule-d-assignation.md), [UDR-0029](0029-fiche-essentielle-dans-la-classe.md) (écrans enseignant) · [UDR-0011](0011-ma-classe.md) (aucune liste nominative pour l'élève) |
-| **Amende** *(proposé)* | UDR-0011, 0013, 0015, 0027, 0028, 0029 ; dépréciation de l'UDR-0030 (§3.6) |
+| **Amende** | UDR-0011, 0013, 0015, 0027, 0028, 0029 ; déprécie l'UDR-0030 (§3.6) — acceptés le 2026-10-02 |
 | **Remplacé par** | — |
 
 ---
@@ -19,7 +19,7 @@
 
 L'ADR-0072 fixe la donnée : les jours de séance de l'enseignant dans la classe, une échéance figée à l'assignation (`due_on`, le prochain jour de séance), et un retard lu, jamais stocké. Cette UDR fixe les trois surfaces : l'assignation et la page de la classe chez l'enseignant, l'accueil chez l'élève, le suivi d'un exercice assigné.
 
-Un effet de bord de l'ADR-0072 touche la navigation de l'enseignant. Il atteint aujourd'hui un exercice par les **cours assignés** de sa classe (page classe → cours dans la classe → fiche dans la classe → bascule de l'exercice). Sans cours assignables, ce chemin est vide. Le §3.4 propose de le rouvrir ; c'est une question ouverte pour le porteur.
+Un effet de bord de l'ADR-0072 touche la navigation de l'enseignant. Il atteint aujourd'hui un exercice par les **cours assignés** de sa classe (page classe → cours dans la classe → fiche dans la classe → bascule de l'exercice). Sans cours assignables, ce chemin est vide. Le §3.4 le rouvre par un bloc « Cours » (memo, Q18, révisable par le porteur).
 
 ## 2. Décision
 
@@ -112,7 +112,7 @@ Elles entreront dans l'amendement de l'UDR-0058 §3.2 ; elles ne sont pas codée
 - Une ligne (`li#assignment_<public_id>`, lien étiré vers la page de suivi) : titre de l'exercice, `ui_subject_badge`, `due_for_teacher(due_on)` ; dessous, `text-sm` : « 18 faits, dont 3 en retard · 7 pas encore faits ». « dont N en retard » n'apparaît que si N > 0 et que l'exercice a une échéance. Chevron à droite.
 - Vide : `ui_empty_state` « Aucun exercice assigné », « Ouvrez un cours ci-dessous pour assigner un exercice à cette classe. », icône `clipboard-document-list`.
 
-**Page de la classe — bloc « Cours »** (`classroom/classrooms/_courses`, `#classroom_courses`) — **proposition du rédacteur, à valider par le porteur** (question ouverte) :
+**Page de la classe — bloc « Cours »** (`classroom/classrooms/_courses`, `#classroom_courses`) — **retenu le 2026-10-02 par l'orchestrateur, sur recommandation, révisable par le porteur** (memo, Q18) :
 - Les cours **publiés** du niveau et de la série de la classe, de la matière de l'enseignant (`teacher_profiles.material_id`) ; l'équipe voit toutes les matières.
 - Une ligne par cours, lien vers `classroom_course_path` (UDR-0028), triée par position du programme puis par nom.
 - C'est le seul chemin vers les exercices depuis la classe une fois les cours non assignables.
@@ -139,7 +139,7 @@ Route `GET /classrooms/:classroom_public_id/assignments/:public_id`, `Classroom:
 | Fiche dans la classe (UDR-0029) | La bascule de la fiche et son `role="group"` | Les exercices, leur réussite et leur bascule, avec l'étape des jours (§3.4) |
 | Assigner un cours (UDR-0030) | **Tout l'écran** : route `course_assignments`, `CourseAssignmentsController`, `CourseAssignmentTargetsQuery`, vue et locales | — (UDR dépréciée) |
 | Page classe (UDR-0027) | « Cours assignés » | En-tête, élèves ; s'ajoutent « Jours de séance », « Exercices assignés » et « Cours » (§3.4) |
-| Ma classe, élève (UDR-0011) | La carte « Cours assignés », toujours vide désormais — **proposition, à valider** | La carte de la classe ; les cours restent au catalogue (« Voir mes cours ») |
+| Ma classe, élève (UDR-0011) | La carte « Cours assignés », toujours vide désormais (amendement accepté) | La carte de la classe ; les cours restent au catalogue (« Voir mes cours ») |
 
 ### 3.7 Tokens
 
@@ -175,7 +175,7 @@ Route `GET /classrooms/:classroom_public_id/assignments/:public_id`, `Classroom:
 
 ## 4. Conséquences
 
-- **L'enseignant n'assigne plus que des exercices.** Ses écrans perdent leurs bascules de cours et de fiches ; l'UDR-0030 est dépréciée (proposé).
+- **L'enseignant n'assigne plus que des exercices.** Ses écrans perdent leurs bascules de cours et de fiches ; l'UDR-0030 est dépréciée.
 - **La page de la classe change de rôle** : du « ce que j'ai assigné » au « qui a fait quoi », avec la liste nominative réservée à l'enseignant de la classe et à l'équipe.
 - **L'accueil élève se trie par urgence.** Le premier exercice est le plus pressé, terminé ou non commencé.
 - **La FAQ gagne une question** « Que veut dire « En retard » ? » dans le lot des échéances (Q14, UDR-0061 §3.1).

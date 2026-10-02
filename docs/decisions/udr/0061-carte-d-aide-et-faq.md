@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | **FAQ (§3.1)** : Accepté (porteur, 2026-10-02, construction directe) · **Carte d'aide (§3.2 à §3.7)** : Proposé |
+| **Statut** | **FAQ (§3.1)** : Accepté (porteur, 2026-10-02, construction directe) · **Carte d'aide (§3.2 à §3.8)** : Accepté (porteur, 2026-10-02 : « lance les lots ») |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q4, Q13, Q14 ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script tiers, CSP stricte) · [UDR-0057](0057-ecrans-eleve-epures.md) (règle R1 à R6, deux familles) · [UDR-0058](0058-accueil-eleve.md) (accueil élève) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (motif des écrans d'entrée) · [UDR-0054](0054-finitions-d-interface.md) (retour, titre, focus) · [UDR-0005](0005-design-system-fondateur.md) (tokens, `ui_modal`) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) (pages publiques liées depuis `/aide`) |
@@ -20,7 +20,7 @@ Le porteur a tranché au grill :
 - **Q13** : l'exemple fourni (capture d'une application de banque mobile, non versionnée parce qu'elle montre la photo du porteur) est une carte « Contactez-nous » : poignée, croix de fermeture, fond assombri ; une ligne par option, avec une icône dans un rond teinté, un titre, une ligne grise (horaires, délai de réponse) et un chevron. Le contact direct est un **appel téléphonique** au service client.
 - **Q14** : la FAQ est **écrite dans l'application** : une page statique, textes dans les locales, relue par le porteur ; toute modification passe par une PR.
 
-Le 2026-10-02, le porteur a demandé que la **FAQ soit construite tout de suite**, avant le reste du chantier. Elle est codée (commit `189d7f92`, intégré par le coordinateur). Cette UDR décrit donc la FAQ telle qu'elle est construite (§3.1, acceptée), et la carte d'aide à construire (§3.2 et suivants, proposée).
+Le 2026-10-02, le porteur a demandé que la **FAQ soit construite tout de suite**, avant le reste du chantier. Elle est codée (commit `189d7f92`, intégré par le coordinateur). Cette UDR décrit donc la FAQ telle qu'elle est construite (§3.1, acceptée), et la carte d'aide à construire (§3.2 et suivants, acceptée le même jour).
 
 ## 2. Décision
 
@@ -150,7 +150,7 @@ Les trois ronds ont la **même teinte**. L'exemple du porteur teinte chaque rond
 
 - `ui_modal` gagne `placement: :sheet`. Les autres modales ne changent pas ; une autre feuille basse (par exemple « Inviter », UDR-0058) pourra la reprendre.
 - La FAQ suit les écrans (Q14) : le lot des échéances (UDR-0062) ajoute une question « Que veut dire « En retard » ? ».
-- **Amendement proposé par l'UDR-0063 (§3.4)** : sous ses questions, `/aide` renvoie à la protection des données et aux conditions d'utilisation, dès que ces pages sont en ligne. Le reste du §3.1 est inchangé.
+- **Amendement de l'UDR-0063 (§3.4), accepté le 2026-10-02** : sous ses questions, `/aide` renvoie à la protection des données et aux conditions d'utilisation, dès que ces pages sont en ligne. Le reste du §3.1 est inchangé.
 - L'UDR-0058 §3.2 (bandeau téléphone, « Aucun bouton d'aide tant qu'aucune page d'aide n'existe ») est à amender en phase 2 d'`interface-epuree` : l'icône d'aide y revient.
 - Aucun service tiers, aucun cookie, aucune donnée envoyée : la carte ne fait qu'afficher des liens.
 - Interdit désormais : écrire un numéro de support dans une vue ou une locale ; un widget de discussion chargé depuis un tiers.

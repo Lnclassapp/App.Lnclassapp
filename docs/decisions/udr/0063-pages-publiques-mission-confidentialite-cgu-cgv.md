@@ -2,11 +2,11 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-02 : « lance les lots ») |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q15, Q16 (ajouts du porteur) ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) ; brouillons des textes : [`pages-publiques.md`](../../chantiers/fonctions-espace-eleve/pages-publiques.md) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun traceur, CSP) · [UDR-0061](0061-carte-d-aide-et-faq.md) (motif de `/aide`, carte d'aide) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (écrans d'entrée) · [UDR-0059](0059-homepage-telephone-et-tablette.md), [UDR-0012](0012-landing-et-modales-de-role.md) (homepage) · [UDR-0057](0057-ecrans-eleve-epures.md) (R1 à R6) |
-| **Amende** *(proposé)* | UDR-0061 §3.1 (la FAQ renvoie à la protection des données et aux CGU) · UDR-0012 (pied de page de la homepage) |
+| **Amende** | UDR-0061 §3.1 (la FAQ renvoie à la protection des données et aux CGU) · UDR-0012 (pied de page de la homepage) |
 | **Remplacé par** | — |
 
 ---
@@ -18,7 +18,7 @@ Lnclass est en production sur lnclass.com depuis le 2026-09-27. Elle enregistre 
 Le porteur a ajouté au chantier, le 2026-10-02 :
 
 - **Q15** : deux pages, « Notre mission » et « Politique de protection des données » ;
-- **Q16** : les conditions générales d'utilisation (CGU) et de vente (CGV). L'entité juridique est **« Lnclass Côte d'Ivoire »**, qui est aussi le responsable du traitement ; son adresse, son RCCM et son contact restent à fournir.
+- **Q16** : les conditions générales d'utilisation (CGU) et de vente (CGV). L'entité juridique est **« Lnclass Côte d'Ivoire SARL »**, qui est aussi le responsable du traitement ; contact : +225 05 44 32 00 20 et +225 05 84 25 80 85 ; son adresse et son RCCM restent à fournir. La conservation est fixée à **30 jours après le départ**, données sensibles anonymisées par défaut : la page « Protection des données » n'entre dans `ONLINE` qu'après le lot R (anonymisation automatique, amendement proposé de l'ADR-0036).
 
 ## 2. Décision
 
@@ -68,7 +68,7 @@ Le porteur a ajouté au chantier, le 2026-10-02 :
 ### 3.4 Points d'entrée
 
 - **Pied de page de la homepage** (`app/views/homepage/index.html.erb`, famille ordinateur ; la famille téléphone de l'UDR-0059 le reprend en phase 2 d'`interface-epuree`) : une seconde liste de liens `text-sm`, « Notre mission · Protection des données · Conditions d'utilisation · Conditions de vente », chacun présent seulement si sa page est en ligne.
-- **Page `/aide`** (amendement proposé de l'UDR-0061 §3.1) : sous la liste des questions, une ligne `text-sm text-mute` « Vos données : <Protection des données> · <Conditions d'utilisation> ».
+- **Page `/aide`** (amendement de l'UDR-0061 §3.1) : sous la liste des questions, une ligne `text-sm text-mute` « Vos données : <Protection des données> · <Conditions d'utilisation> ».
 - **Carte d'aide** (UDR-0061 §3.3) : son pied porte « Notre mission · Confidentialité · Conditions d'utilisation ».
 - Aucun lien depuis le shell connecté : ces pages ne sont pas une destination de navigation (UDR-0006).
 
