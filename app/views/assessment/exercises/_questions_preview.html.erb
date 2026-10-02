@@ -1,14 +1,10 @@
 <%# 🌐 UI · assessment/exercises/_questions_preview — aperçu des questions d'un exercice (AS-39) %>
-<%# Rôle : énoncés et propositions ; correction seulement si reveal ; pour l'élève, 3 questions puis « Voir plus » et l'aide en infobulle %>
-<%# ADR  : 0028, 0054 · UDR : 0007, 0021, 0057 · aucun `cache` ici : sa clé ignorerait le rôle (sécurité n° 29) · Stimulus : math, reveal %>
-<%= tag.section id: "exercise_questions", "aria-labelledby": "exercise_questions_title", data: (ui_reveal_data(step: 3) if student) do %>
+<%# Rôle : énoncés et propositions ; marque « Proposition correcte », explication et identifiants seulement si reveal %>
+<%# ADR  : 0028, 0054 · UDR : 0007, 0021 · aucun `cache` ici : sa clé ignorerait le rôle (sécurité n° 29) · Stimulus : math %>
+<section id="exercise_questions" aria-labelledby="exercise_questions_title">
   <div class="mb-4">
-    <h2 id="exercise_questions_title" class="font-display text-xl font-extrabold">
-      <%= t(".title") %><% if student %><%= ui_info_tip t(".student_hint"), label: t(".title") %><% end %>
-    </h2>
-    <% unless student %>
-      <p class="mt-1 text-sm text-mute"><%= reveal ? t(".reveal_hint") : t(".student_hint") %></p>
-    <% end %>
+    <h2 id="exercise_questions_title" class="font-display text-xl font-extrabold"><%= t(".title") %></h2>
+    <p class="mt-1 text-sm text-mute"><%= reveal ? t(".reveal_hint") : t(".student_hint") %></p>
   </div>
   <% if questions.empty? %>
     <div id="exercise_questions_empty">
@@ -16,8 +12,8 @@
     </div>
   <% else %>
     <ol class="space-y-4" data-controller="math">
-      <% questions.each_with_index do |question, index| %>
-        <li class="question rounded-card border border-line bg-white p-4 shadow-card sm:p-5" <%= tag.attributes(ui_reveal_item(index)) if student %>>
+      <% questions.each do |question| %>
+        <li class="question rounded-card border border-line bg-white p-4 shadow-card sm:p-5">
           <div class="flex gap-3">
             <span class="grid size-8 shrink-0 place-items-center rounded-ln bg-brand-soft text-sm font-bold text-brand-strong tabular-nums"
                   aria-hidden="true"><%= question.position %></span>
@@ -57,8 +53,5 @@
         </li>
       <% end %>
     </ol>
-    <% if student && questions.size > ComponentsHelper::REVEAL_LIMIT %>
-      <div class="mt-4"><%= ui_reveal_more questions.size %></div>
-    <% end %>
   <% end %>
-<% end %>
+</section>

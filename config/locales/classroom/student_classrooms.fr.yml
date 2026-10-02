@@ -1,13 +1,26 @@
-# Ma classe, élève (plan boucle-pedagogique, Lot A3, CL-22, CL-10 volet élève) — UDR-0007, UDR-0011 (amendée le 2026-10-02, interface-epuree Lot E, puis fonctions-espace-eleve : « Cours assignés » retiré)
+# Ma classe, élève (plan boucle-pedagogique, Lot A3, CL-22, CL-10 volet élève) — UDR-0007, UDR-0011
 fr:
   classroom:
     student_classrooms:
       show:
         page_title: "Ma classe"
         title: "Ma classe"
+        subtitle: "%{school} · %{classroom}"
         level: "Niveau"
         school: "Établissement"
         school_year: "Année scolaire"
         join_code: "Code de la classe"
-        join_code_info_tip: "Tes camarades rejoignent la classe avec ce code."
+        join_code_hint: "Tes camarades rejoignent la classe avec ce code."
         no_join_code: "Aucun code pour cette classe"
+        courses_title: "Cours assignés"
+        courses_subtitle: "Les cours que tes enseignants ont assignés à ta classe"
+        courses_count:
+          one: "1 cours"
+          other: "%{count} cours"
+        courses_empty: "Aucun cours assigné pour l'instant"
+        courses_empty_description: "Les cours que tes enseignants assignent à ta classe apparaîtront ici."
+      assigned_course:
+        essentials:
+          zero: "Aucune fiche essentielle"
+          one: "1 fiche essentielle"
+          other: "%{count} fiches essentielles"

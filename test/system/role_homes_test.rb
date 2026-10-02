@@ -3,8 +3,7 @@ require "application_system_test_case"
 # TR-04, TR-05, TR-09, TR-10 (chantier queries-constantes-orm-disparues, plan Lot E): for every role, a real sign-in, the home
 # without error, then every destination of the shell opened by its real link, and the real « Se déconnecter ». A
 # destination whose route is not drawn in V1 renders as an inactive entry (NavigationHelper): it is checked as inactive,
-# never followed. The data holds assignments: on an empty base, the old feeds passed green by mistake. Since ADR-0072
-# an exercise is the only assignable kind: two exercises of the sheet are assigned.
+# never followed. The data holds one assignment of each kind: on an empty base, the old feeds passed green by mistake.
 class RoleHomesTest < ApplicationSystemTestCase
   setup do
     svt = create_material(name: "SVT", category: "science")
@@ -17,9 +16,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     course = create_course(name: "Génétique et évolution", level: tle, material: svt)
     essential = create_essential(course:, name: "La méiose")
     exercise = create_exercise(essential:, title: "Exercice sur la méiose")
-    [ exercise, create_exercise(essential:, title: "Bilan de la méiose") ].each do |assignable|
-      create_assignment(classroom: @classroom, assignable:, by: @teacher)
-    end
+    [ course, essential, exercise ].each { |assignable| create_assignment(classroom: @classroom, assignable:, by: @teacher) }
     session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 80)
     create_badge(student: @student, exercise:, level: "gold", session:)
     create_course(name: "Brouillon de l'équipe", level: tle, material: svt, status: "draft")

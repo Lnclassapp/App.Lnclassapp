@@ -2,8 +2,8 @@ require "test_helper"
 
 module Queries
   module Classroom
-    # CL-11 : l'ancien écran levait NameError dès que le cours avait une fiche. ADR-0072 §4.1 : ni le cours ni ses fiches
-    # ne s'assignent plus ; la query ne lit aucune assignation.
+    # CL-11 : l'ancien écran levait NameError dès que le cours avait une fiche, et NoMethodError dès qu'une fiche était
+    # assignée. Ici, les assignations se lisent par (type, id) et seule la ligne active compte.
     class ClassroomCourseQueryTest < ActiveSupport::TestCase
       setup do
         @classroom = create_classroom(name: "Tle D 1")
@@ -22,11 +22,11 @@ module Queries
         row = query
 
         assert_equal [ @classroom.public_id, "Tle D 1" ], [ row.classroom_public_id, row.classroom_name ]
-        assert_equal [ @course.slug, "Génétique et évolution", "Du gène à l'espèce", "Tle", "D", "SVT", "science" ],
+        assert_equal [ @course.slug, "Génétique et évolution", "Du gène à l'espèce", "Tle", "D", "SVT", "science", nil ],
                      row.course.to_h.values_at(:slug, :name, :subtitle, :level_name, :series_name, :material_name,
-                                               :material_category)
-        assert_equal [ [ @meiose.slug, "La méiose", "Deux divisions" ], [ @mitose.slug, "La mitose", nil ] ],
-                     row.essentials.map { it.to_h.values_at(:slug, :name, :subtitle) }
+                                               :material_category, :assignment_public_id)
+        assert_equal [ [ @meiose.slug, "La méiose", "Deux divisions", nil ], [ @mitose.slug, "La mitose", nil, nil ] ],
+                     row.essentials.map { it.to_h.values_at(:slug, :name, :subtitle, :assignment_public_id) }
       end
 
       test "chaque fiche compte ses exercices publiés" do
@@ -37,17 +37,19 @@ module Queries
         assert_equal [ 2, 0 ], query.essentials.map(&:exercises_count)
       end
 
-      # ADR-0072 §4.1 : le cours et la fiche n'ont plus d'assignation à montrer ; un exercice assigné ne les rend pas « assignés ».
-      test "aucune assignation n'est lue : un exercice assigné ne fait passer ni le cours ni sa fiche pour assignés" do
-        create_assignment(classroom: @classroom, assignable: create_exercise(essential: @meiose))
-        # Un exercice qui porterait le même identifiant qu'une fiche ne change rien non plus.
+      test "l'assignation active du cours et de chaque fiche, jamais une ligne archivée ni celle d'une autre classe" do
+        create_assignment(classroom: @classroom, assignable: @course, status: "archived")
+        course_assignment = create_assignment(classroom: @classroom, assignable: @course)
+        create_assignment(classroom: @classroom, assignable: @mitose, status: "archived")
+        meiose_assignment = create_assignment(classroom: @classroom, assignable: @meiose)
+        create_assignment(classroom: create_classroom, assignable: @mitose)
+        # Un exercice qui porterait le même identifiant qu'une fiche ne la fait pas passer pour assignée.
         create_assignment(classroom: @classroom, assignable: Orm::Exercise.new(id: @mitose.id))
 
         row = query
 
-        assert_not_includes ClassroomCourseQuery::CourseRow.members, :assignment_public_id
-        assert_not_includes ClassroomCourseQuery::EssentialRow.members, :assignment_public_id
-        assert_equal [ 1, 0 ], row.essentials.map(&:exercises_count)
+        assert_equal course_assignment.public_id, row.course.assignment_public_id
+        assert_equal [ meiose_assignment.public_id, nil ], row.essentials.map(&:assignment_public_id)
       end
 
       test "un cours sans série ni fiche publiée" do

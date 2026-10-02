@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Identity::GrowthMetricsQuery
 # Rôle : indicateurs de croissance d'une période (partages, inscriptions, conversion, k, cycle, parrains, élèves, classement) en 4 requêtes
-# ADR  : 0006, 0036 (amendement 2), 0049, 0063 · UDR : 0050
+# ADR  : 0006, 0049, 0063 · UDR : 0050
 module Queries
   module Identity
     class GrowthMetricsQuery
@@ -21,8 +21,7 @@ module Queries
       VALIDATED = "NOT EXISTS (SELECT 1 FROM school_join_requests j WHERE j.teacher_id = u.id AND j.status <> 'approved')".freeze
       COHORT = "u.role = 'teacher' AND u.created_at >= :from AND u.created_at < :to AND #{VALIDATED}".freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
-      # Une seule lecture pour tous les compteurs : des sous-requêtes scalaires, chacune sur son index. Un compte supprimé sur
-      # demande ne compte plus parmi les élèves arrivés, son adhésion close restant en base (ADR-0036, amendement 2).
+      # Une seule lecture pour tous les compteurs : des sous-requêtes scalaires, chacune sur son index.
       COUNTERS = <<~SQL.squish.freeze
         SELECT
           (SELECT COUNT(*) FROM referral_shares WHERE #{IN_PERIOD}) AS shares,
@@ -34,8 +33,7 @@ module Queries
           (SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY EXTRACT(EPOCH FROM (e.created_at - p.created_at)) / 86400.0)
              FROM referrals r JOIN users p ON p.id = r.referrer_id JOIN users e ON e.id = r.referee_id
             WHERE r.created_at >= :from AND r.created_at < :to) AS viral_cycle_days,
-          (SELECT COUNT(DISTINCT cs.student_id) FROM classroom_students cs JOIN users u ON u.id = cs.student_id
-            WHERE cs.joined_at >= :from AND cs.joined_at < :to AND u.anonymized_at IS NULL) AS students_joined,
+          (SELECT COUNT(DISTINCT student_id) FROM classroom_students WHERE joined_at >= :from AND joined_at < :to) AS students_joined,
           (SELECT COUNT(DISTINCT teacher_id) FROM teacher_schools WHERE "primary") AS active_teachers,
           (SELECT COUNT(*) FROM school_join_requests WHERE status = 'pending') AS pending_count
       SQL

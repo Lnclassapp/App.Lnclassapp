@@ -93,7 +93,7 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 
 | Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
 |---|---|---|---|---|
-| Ligne de contexte de `#exercise_header` (`p#exercise_context`) | « <cours> · Fiche essentielle : <fiche> » | **Élève seulement** : « <cours> » seul, la vue rend `course.name`. La clé `show.context` (« %{course} · Fiche essentielle : %{essential} ») reste celle de l'enseignant et de l'équipe | R6 | Le nom de la fiche reste dans le lien retour (`ui_back_link`), juste au-dessus de la carte |
+| Ligne de contexte de `#exercise_header` (`show.context`) | « <cours> · Fiche essentielle : <fiche> » | « <cours> » seul. Clé : `context: "%{course}"`, sans le paramètre `essential` | R6 | Le nom de la fiche reste dans le lien retour (`ui_back_link`), juste au-dessus de la carte |
 | « Meilleur score » de `_student_progress` | « 85 % » | Libellé « Meilleure note », valeur `grade_label(progress.best_score_percent)` (« 17/20 »). Clés : `best_score: "Meilleure note"` ; `score` supprimée | R6 (une seule forme de la note dans le parcours, UDR-0058 §3.3) | Même valeur, sous la forme du résultat de session et de l'accueil |
 | « Meilleur score » sans session terminée | « Aucune session terminée » | « — » en `text-mute`. Clé : `no_score: "—"` | R6 | « Sessions » dit déjà « Aucune terminée », dans le même bloc |
 | Phrase `restart_hint` de `_student_progress` | Paragraphe permanent sous les boutons, quand une session est en cours | Paragraphe retiré. Même texte dans `ui_info_tip t(".restart_hint"), label: t(".restart")`, juste après le bouton « Recommencer », dans le même conteneur d'actions | R4 | Dans l'infobulle « Aide : Recommencer » |
@@ -115,13 +115,12 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 - **R5** — Conforme aujourd'hui. L'accent est `brand` (badge du type). La couleur du badge de matière suit la pastille de matière (UDR-0058 §3.4). Le ton du badge de palier code le palier, et le nomme en texte (UDR-0007).
 - **R6** — Change : la fiche n'est plus nommée deux fois. « Aucune session terminée » n'est plus dit deux fois. La note a une seule forme, sur 20.
 
-**Inchangé pour l'enseignant, l'équipe et la direction** (décision du porteur, 2026-10-02 : rien ne change pour eux, même une simple répétition)
+**Inchangé pour l'enseignant, l'équipe et la direction**
 - Panneau de statut, menu ⋮ « Modifier », publier, archiver (équipe).
-- Ligne de contexte complète : « <cours> · Fiche essentielle : <fiche> ».
-- Aide de l'aperçu en paragraphe : `reveal_hint` (enseignant, équipe), `student_hint` pour un lecteur sans correction ni progression. Aperçu complet, sans « Voir plus ».
+- Aide `reveal_hint` visible, aperçu corrigé complet, sans « Voir plus » (enseignant, équipe).
 - Pas de bloc « Ta progression ».
-- La condition « élève » de la vue est `@progress.present?` (`StartSessionPolicy`), passée à `_questions_preview` par la locale `student`.
+- Seule la ligne de contexte change pour eux : c'est une simple répétition du lien retour (R6).
 
 **Vérification**
-- `test/system/assessment/exercise_page_test.rb` : badge, meilleure note, maîtrise et sessions visibles pour l'élève (Q4) ; contexte « <cours> » seul ; 3 questions puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'enseignant voit le contexte complet, toutes les questions, `reveal_hint` et aucun « Voir plus ».
-- `test/controllers/assessment/exercises_controller_test.rb` : l'assertion sur `student_hint` vise désormais le panneau de l'infobulle ; ligne de contexte (élève : le cours seul ; enseignant et équipe : complète) et « Meilleure note » en /20.
+- `test/system/assessment/exercise_page_test.rb` : badge, meilleure note, maîtrise et sessions visibles pour l'élève (Q4) ; 3 questions puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'enseignant voit toutes les questions, `reveal_hint` et aucun « Voir plus ».
+- `test/controllers/assessment/exercises_controller_test.rb` : l'assertion sur `student_hint` vise désormais le panneau de l'infobulle.

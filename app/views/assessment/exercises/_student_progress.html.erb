@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/_student_progress — progression de l'élève sur l'exercice, et son bouton de session %>
-<%# Rôle : meilleure note sur 20, maîtrise, badge, sessions terminées ; « Commencer l'exercice », ou « Reprendre » et « Recommencer » %>
-<%# ADR  : 0033, 0054 · UDR : 0007, 0021, 0054, 0057 · « Commencer » change de page (Turbo Drive) ; seuils et « Recommencer » en infobulle %>
+<%# Rôle : meilleur score, maîtrise, badge, sessions terminées ; « Commencer l'exercice », ou « Reprendre » et « Recommencer » %>
+<%# ADR  : 0033, 0054 · UDR : 0007, 0021, 0054 · « Commencer » change de page (Turbo Drive), aucun stream ; seuils en infobulle %>
 <section id="student_progress" aria-labelledby="student_progress_title">
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -11,9 +11,9 @@
             <dt class="text-xs font-medium text-mute"><%= t(".best_score") %></dt>
             <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums">
               <% if progress.best_score_percent %>
-                <%= grade_label(progress.best_score_percent) %>
+                <%= t(".score", score: progress.best_score_percent) %>
               <% else %>
-                <span class="text-mute"><%= t(".no_score") %></span>
+                <span class="text-base font-medium text-mute"><%= t(".no_score") %></span>
               <% end %>
             </dd>
           </div>
@@ -42,13 +42,10 @@
       <div class="flex flex-col gap-3 sm:flex-row lg:shrink-0">
         <% if progress.started_session_public_id %>
           <%= ui_button t(".resume"), href: exercise_session_path(progress.started_session_public_id), icon: "play" %>
-          <div class="flex items-center gap-1">
-            <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "restart-exercise-form", class: "contents" do %>
-              <%= hidden_field_tag :restart, true, id: nil %>
-              <%= ui_button t(".restart"), type: :submit, variant: :secondary, icon: "arrow-path", class: "flex-1 sm:flex-none" %>
-            <% end %>
-            <%= ui_info_tip t(".restart_hint"), label: t(".restart") %>
-          </div>
+          <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "restart-exercise-form", class: "contents" do %>
+            <%= hidden_field_tag :restart, true, id: nil %>
+            <%= ui_button t(".restart"), type: :submit, variant: :secondary, icon: "arrow-path" %>
+          <% end %>
         <% else %>
           <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "start-exercise-form", class: "contents" do %>
             <%= ui_button t(".start"), type: :submit, icon: "play" %>
@@ -56,5 +53,8 @@
         <% end %>
       </div>
     </div>
+    <% if progress.started_session_public_id %>
+      <p class="mt-4 text-sm text-mute"><%= t(".restart_hint") %></p>
+    <% end %>
   <% end %>
 </section>

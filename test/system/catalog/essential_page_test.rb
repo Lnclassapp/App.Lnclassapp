@@ -43,7 +43,7 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     end
   end
 
-  test "the student sees the content, his gold badge at 80 % one tap away, and « Commencer » opens the first question" do
+  test "the student sees the content, his gold badge at 80 %, and « Commencer » opens the first question" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de la fiche.
     student = create_student_for(@course)
     best = create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 80)
@@ -55,33 +55,19 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     assert_selector "#essential_header h1", text: "La méiose"
     assert_rich_content
     assert_no_text "Brouillon caché"
-    # UDR-0015, amendement du 2026-10-02 : le badge et le score quittent la ligne ; la ligne entière mène à l'exercice.
-    within("#essential_exercise_#{@exercise.public_id}") { assert_no_text "16/20" }
-    find("#essential_exercise_#{@exercise.public_id}").click
-    assert_current_path exercise_path(@exercise.public_id)
-    # UDR-0021, amendement du 2026-10-02 : la meilleure note se lit sur 20, forme unique de la note de l'élève.
-    within "#student_progress" do
-      assert_text "16/20"
-      assert_text(/\bOr\b/)
+    within "#essential_exercise_#{@exercise.public_id}" do
+      assert_text I18n.t("#{scope}.exercise_progress.badge", level: "Or")
+      assert_text I18n.t("#{scope}.exercise_progress.best_score", score: 80)
+      click_on I18n.t("#{scope}.exercise_progress.start")
     end
-
-    visit page_path
-    within("#essential_exercise_#{@exercise.public_id}") { click_on I18n.t("#{scope}.exercise_progress.start") }
 
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_text "Question 1"
   end
 
-  # UDR-0015, amendement du 2026-10-02 (UDR-0057) : à 390 × 844, une action principale, 5 blocs au plus avant le pli,
-  # 3 exercices puis « Voir plus ».
-  test "on a phone, the student's sheet fits the width and passes the sobriety rule" do
+  test "on a phone, the student's sheet fits the width" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de la fiche.
-    student = create_student_for(@course)
-    resumed = create_exercise(essential: @essential, title: "Anomalies", position: 3)
-    create_exercise_session(student:, exercise: resumed)
-    create_exercise(essential: @essential, title: "Brassage", position: 4)
-    create_exercise(essential: @essential, title: "Caryotype", position: 5)
-    sign_in_as student
+    sign_in_as create_student_for(@course)
 
     with_mobile_viewport do
       visit page_path
@@ -89,13 +75,6 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
       assert_selector "#essential_exercises button", text: I18n.t("#{scope}.exercise_progress.start")
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
-      assert_single_primary_action
-      assert_blocks_above_fold "#main > div > *", max: 5
-      assert_list_capped "#essential_exercises ul"
-      assert_no_text "Caryotype"
-      assert_no_page_reload { click_on I18n.t("components.reveal.more") }
-      assert_selector "#essential_exercises li", text: "Caryotype"
-      assert_single_primary_action
     end
   end
 

@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
-<%# Rôle : recherche par nom et filtres (niveau sauf pour l'élève, matière) qui visent le frame « courses » ; élève : son niveau seul, épuré ; équipe : création et import %>
-<%# ADR  : 0028, 0035 · UDR : 0006, 0013, 0054, 0057 · grille non plafonnée à 3 (exception à R3, UDR-0013 amendement du 2026-10-02) %>
+<%# Rôle : recherche par nom et filtres (niveau sauf pour l'élève, matière) qui visent le frame « courses » ; élève : son niveau seul ; équipe : création et import %>
+<%# ADR  : 0028, 0035 · UDR : 0006, 0013, 0054 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "courses" %>
 <% team = current_actor.team? %>
@@ -13,13 +13,8 @@
                                   data: { turbo_frame: "modal" } %>
       <%= ui_button t(".new_course"), href: new_teams_course_path, icon: "plus", data: { turbo_frame: "modal" } %>
     <% end %>
-  <% elsif student %>
-    <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R4) : la portée du catalogue passe du sous-titre à l'infobulle. %>
-    <%= ui_page_header title: t(".title") do %>
-      <%= ui_info_tip t(".student_scope"), label: t(".student_scope_label") %>
-    <% end %>
   <% else %>
-    <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+    <%= ui_page_header title: t(".title"), subtitle: t(student ? ".student_subtitle" : ".subtitle") %>
   <% end %>
 
   <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
@@ -59,15 +54,12 @@
   <p id="courses_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @courses.size) %></p>
   <% if @courses.any? %>
     <ul id="courses_list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-      <%# Élève seulement (UDR-0057 R6) : son niveau est unique, et la matière filtrée est déjà dite par la liste « Matière ». %>
-      <%= render partial: "course_card", collection: @courses, as: :course,
-                 locals: { show_status: team, show_level: !student, show_material: !(student && @filters[:material].present?) } %>
+      <%= render partial: "course_card", collection: @courses, as: :course, locals: { show_status: team } %>
     </ul>
   <% else %>
     <div id="courses_empty">
       <% if @filters.values.any?(&:present?) %>
-        <%= ui_empty_state title: t(".no_match_title"), description: t(student ? ".student_no_match_description" : ".no_match_description"),
-                           icon: "magnifying-glass" do %>
+        <%= ui_empty_state title: t(".no_match_title"), description: t(".no_match_description"), icon: "magnifying-glass" do %>
           <%= ui_button t(".clear_search"), href: courses_path, variant: :secondary, icon: "x-mark" %>
         <% end %>
       <% elsif student && student_audience.empty? %>

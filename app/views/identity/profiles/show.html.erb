@@ -1,8 +1,8 @@
-<%# 🌐 UI · identity/profiles/show — « Mon profil », dans le shell du rôle ; épuré pour l'élève seul (UDR-0041, 2026-10-02) %>
-<%# Rôle : retour « Accueil », « Mes informations », badge Ambassadeur (enseignant), carte du PIN ; changements dans le frame modal %>
-<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050, 0054, 0057 %>
+<%# 🌐 UI · identity/profiles/show — « Mon profil », dans le shell du rôle %>
+<%# Rôle : retour « Accueil » du rôle, « Mes informations », badge Ambassadeur (enseignant), carte du PIN ; chaque changement s'ouvre dans le frame modal %>
+<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050, 0054 %>
 <% page_title t(".page_title") %>
-<%= ui_page_header title: t(".title"), subtitle: (t(".subtitle") unless current_actor.student?),
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
                    back: { label: t(".back"), href: home_path_for(current_actor.role) } %>
 
 <div class="grid max-w-2xl gap-6">
@@ -18,15 +18,8 @@
   <% end %>
 
   <%= ui_card id: "profile_security", "aria-labelledby": "profile_security_title" do %>
-    <% if current_actor.student? %>
-      <div class="flex flex-wrap items-center gap-x-1">
-        <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
-        <%= ui_info_tip t(".security_body"), label: t(".security_title") %>
-      </div>
-    <% else %>
     <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
     <p class="mt-2 text-sm text-mute"><%= t(".security_body") %></p>
-    <% end %>
     <div class="mt-4">
       <%= ui_button t(".change_pin"), href: edit_profile_pin_path, icon: "key", data: { turbo_frame: "modal" } %>
     </div>

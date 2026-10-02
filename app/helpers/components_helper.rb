@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -96,8 +96,6 @@ module ComponentsHelper
   RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
-  # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet motion-reduce:animate-none" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = {
     default: "text-ink hover:bg-mist focus:bg-mist",
@@ -240,16 +238,12 @@ module ComponentsHelper
 
   # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
   # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
-  # `trigger_href:` fait du déclencheur un lien, suivi sans JavaScript, que le contrôleur `modal` intercepte (UDR-0061).
-  # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:center` (défaut) ne change rien.
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
-               document_title: nil, trigger_href: nil, trigger_size: :md, placement: :center, &block)
+               document_title: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
-           trigger_icon:, trigger_href:, trigger_size:, open:, body:, slots:, document_title:,
-           size_class: option!(MODAL_SIZES, size, "ui_modal size"),
-           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet
+           trigger_icon:, open:, body:, slots:, document_title:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).

@@ -11,7 +11,6 @@ module Teams
       render_result Policies::Identity::ReadUserPolicy.new.call(actor: current_actor), success: lambda { |_|
         @contact = params[:contact].to_s.strip
         @account = lookup.call(contact: @contact, viewer_id: current_actor.user_id) if @contact.present?
-        @can_delete = Policies::Identity::DeleteUserPolicy.new.call(actor: current_actor).success?
       }
     end
 

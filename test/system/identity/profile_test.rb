@@ -46,12 +46,7 @@ class Identity::ProfileTest < ApplicationSystemTestCase
 
       assert_toast "Votre nom est enregistré."
       assert_no_selector "turbo-frame#modal dialog[open]"
-      within "#profile_information" do
-        assert_text "Aya Marie Koné"
-        # UDR-0041, amendment of 2026-10-02: the card the Turbo Stream sends back is the pared-down one too.
-        assert_no_selector "p.truncate"
-        assert_no_text "Élève"
-      end
+      within("#profile_information") { assert_text "Aya Marie Koné" }
     end
     assert Orm::AuditEvent.exists?(action: "profile.name_changed", actor_id: @student.id)
 
@@ -61,48 +56,13 @@ class Identity::ProfileTest < ApplicationSystemTestCase
     within("#student_#{@student.public_id}") { assert_text "Aya Marie Koné" }
   end
 
-  # UDR-0041, amendment of 2026-10-02: R1 to R6 on the student's profile, on a phone.
-  test "at 390 px, the student's profile shows three blocks, one primary action, its PIN help on demand" do
-    sign_in_as @student
-
-    with_mobile_viewport do
-      visit profile_path
-
-      assert_selector "h1", text: "Mon profil", count: 1
-      assert_no_text "Ce que Lnclass sait de vous"
-      assert_single_primary_action scope: "#main"
-      assert_blocks_above_fold "#main > div > *", max: 3
-      within "#profile_information" do
-        assert_text "Aya Koné", count: 1
-        assert_no_text "Élève"
-        # The sentence is left to screen readers: a 1 px box, the avatar shows the initials instead.
-        phrase = find("dd span.sr-only", text: "Aucune photo : vos initiales s'affichent.")
-        assert_operator page.evaluate_script("arguments[0].getBoundingClientRect().width", phrase), :<=, 1
-        assert_selector "dd span[aria-hidden=true] [role=img]", text: "AK"
-        assert_link "Ajouter une photo"
-      end
-      within "#profile_security" do
-        assert_no_text "Votre PIN protège votre compte."
-        find("details summary", text: "Aide : Mon PIN").click
-        assert_text "Votre PIN protège votre compte. Changez-le si vous pensez qu'une autre personne le connaît."
-        assert_link "Changer mon PIN"
-      end
-    end
-  end
-
   test "a teacher reads their school and subject, a team member their role and active second factor" do
     sign_in_as @teacher
     open_profile
-    # UDR-0041, amendment of 2026-10-02: the teacher's profile is unchanged.
-    assert_text "Ce que Lnclass sait de vous, et ce que vous pouvez changer."
     within "#profile_information" do
-      assert_selector "p.truncate", text: "Yao"
-      assert_text "Enseignant"
-      assert_text "Aucune photo : vos initiales s'affichent."
       assert_text "Lycée Classique d'Abidjan"
       assert_text "SVT"
     end
-    within("#profile_security") { assert_text "Votre PIN protège votre compte." }
     sign_out
 
     sign_in_as create_team_member(team_role: "content")

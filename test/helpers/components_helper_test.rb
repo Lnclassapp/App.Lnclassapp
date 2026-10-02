@@ -290,33 +290,6 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#later[open]", 0
   end
 
-  # UDR-0061 §3.3 : `placement: :sheet` fait de la modale une feuille basse sous lg, avec sa poignée ; le défaut
-  # (`:center`) rend exactement le même HTML qu'avant l'option.
-  test "ui_modal placed as a sheet carries the sheet class and a decorative handle" do
-    show ui_modal(title: "Contacte-nous", id: "help-sheet", size: :sm, placement: :sheet) { "Corps" }
-
-    assert_select "dialog#help-sheet.dialog-sheet.sm\\:max-w-sm.motion-reduce\\:animate-none"
-    assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
-  end
-
-  test "ui_modal keeps its centred rendering by default, and refuses an unknown placement" do
-    default = ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir") { "Corps" }
-
-    assert_equal default, ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir", placement: :center) { "Corps" }
-    show default
-    assert_select ".dialog-sheet, .sheet-handle, .motion-reduce\\:animate-none", 0
-    assert_raises(ArgumentError) { ui_modal(title: "Info", placement: :side) }
-  end
-
-  # UDR-0061 §3.2 : sans JavaScript, le déclencheur reste un lien vers la page de repli ; le contrôleur l'intercepte.
-  test "ui_modal trigger with a fallback href is a link that opens the dialog" do
-    show ui_modal(title: "Contacte-nous", id: "help-sheet", trigger: "Besoin d'aide ?", trigger_href: "/aide",
-                  trigger_variant: :ghost, trigger_size: :sm)
-
-    assert_select "a[href='/aide'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=help-sheet]",
-                  text: "Besoin d'aide ?"
-  end
-
   test "ui_dropdown renders a menu button and its items" do
     html = ui_dropdown(label: "Actions", align: :start) do
       ui_dropdown_item("Modifier", href: "/edit", icon: "pencil") +

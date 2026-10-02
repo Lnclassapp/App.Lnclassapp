@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::UserRepositoryPort
-# Rôle : contrat de lecture des comptes et de leur PIN (bcrypt côté repository) ; anonymisation d'un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055
+# Rôle : contrat de lecture des comptes et de leur PIN (bcrypt côté repository)
+# ADR  : 0026, 0028, 0050, 0055
 module Ports
   module Identity
     module UserRepositoryPort
@@ -37,12 +37,6 @@ module Ports
       # → Shared::Result : success | :conflict (errors { contact: [:taken] }) si le numéro appartient à un autre compte
       def update_contact(user_id:, contact:)
         raise NotImplementedError, "#{self.class} doit implémenter #update_contact"
-      end
-
-      # ADR-0036 §4 : nom remplacé, contact nul, PIN remplacé par un secret aléatoire tiré ici et jamais rendu, anonymized_at
-      # posé. → true
-      def anonymize(user_id:, first_name:, last_name:, at:)
-        raise NotImplementedError, "#{self.class} doit implémenter #anonymize"
       end
 
       # → Entities::Identity::Actor ; school_id = école principale de l'enseignant, sinon nil

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AS-11, AS-12, AS-13, AS-39 (UDR-0023) : le résultat d'une session terminée — note sur 20 (score en plus hors élève), maîtrise, badge,
+# AS-11, AS-12, AS-13, AS-39 (UDR-0023) : le résultat d'une session terminée — note sur 20, score, maîtrise, badge,
 # « Félicitations ! » et confettis dès le seuil de réussite, « Courage ! » en dessous, « Recommencer » sous 100.
 # L'élève propriétaire y voit ses choix, le verdict et l'explication, jamais les propositions correctes (décision du
 # porteur, 881a623) ; l'enseignant d'une classe active de l'élève et l'équipe voient la correction complète.
@@ -34,7 +34,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   def show(session = @session) = get(exercise_session_result_path(session.public_id))
 
-  test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Félicitations ! » et les confettis, sans score redit" do
+  test "l'élève voit sa note, son score, sa maîtrise, son badge, « Félicitations ! » et les confettis" do
     sign_in_as @student
 
     show
@@ -44,12 +44,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
     assert_select "[data-controller='assessment--confetti']", 1
     assert_select "#session_result", text: /10\/20/
-    # UDR-0023, amendement du 2026-10-02 : la note sur 20 seule dit le résultat de l'élève — ni score, ni questions justes (R6).
-    assert_select "#session_result dl dt", 2
-    assert_select "#session_result dl dt", text: I18n.t("#{scope}.show.grade")
-    assert_select "#session_result dl dt", text: /#{I18n.t("#{scope}.show.mastery")}/
-    assert_select "#session_result dd", text: /#{GRADING::PASS_THRESHOLD} %/, count: 0
-    assert_select "#session_result dt", text: I18n.t("#{scope}.show.correct"), count: 0
+    assert_select "#session_result", text: /#{GRADING::PASS_THRESHOLD} %/
     assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.fragile")}/
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
@@ -74,11 +69,6 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match right(@first).content, response.body
     assert_no_match(/#{I18n.t("#{scope}.question_review.correct")}|data-correct/, response.body)
     assert_select "#question_review_#{@first.id} li", 1
-    # La correction se lit sans phrase d'aide (R4), 3 cartes puis « Voir plus » (R3) : 2 cartes ici, aucun bouton.
-    assert_select "#session_review p", text: I18n.t("#{scope}.show.review_hint_student"), count: 0
-    assert_select "#session_review[data-controller=reveal][data-reveal-step-value='3']"
-    assert_select "#session_review li[id^=question_review_][data-reveal-target=item]", 2
-    assert_select "#session_review [data-reveal-target=button]", 0
   end
 
   test "l'enseignant d'une classe active de l'élève voit la correction complète, propositions correctes marquées" do
@@ -89,12 +79,6 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#session_result", text: /Mariam Traoré/
-    # Décision du porteur (2026-10-02) : l'enseignant garde le résultat inchangé — note, score, maîtrise, questions justes.
-    assert_select "#session_result dl dt", 4
-    assert_select "#session_result dd", text: "#{GRADING::PASS_THRESHOLD} %"
-    assert_select "#session_result", text: /#{I18n.t("#{scope}.show.correct_value", count: 1, total: 2)}/
-    assert_select "#session_review p", text: I18n.t("#{scope}.show.review_hint_reveal")
-    assert_select "#session_review [data-reveal-target]", 0
     assert_select "#question_review_#{@first.id} li", 4
     assert_select "#question_review_#{@first.id} li[data-correct]", text: /#{right(@first).content}/, count: 1
     assert_select "#question_review_#{@first.id} li[data-selected]", text: /#{wrong(@first).content}/, count: 1

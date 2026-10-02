@@ -1,7 +1,6 @@
 <%# 🌐 UI · classroom/assignments/archive — ressource retirée, ou refus en place (déjà retirée : 422) %>
-<%# Rôle : succès : toast « X retiré de la classe » et bascule remplacée par « Assigner » (la modale des jours s'ils manquent) ; %>
-<%#        refus : toast d'erreur seul %>
-<%# ADR  : 0048, 0072 · UDR : 0006, 0028, 0062 (§3.4) %>
+<%# Rôle : succès : toast « X retiré de la classe » et bascule remplacée par « Assigner » ; refus : toast d'erreur seul %>
+<%# ADR  : 0048 · UDR : 0006, 0028 %>
 <% if @refusal %>
   <%= turbo_stream_toast @refusal, type: :error, title: t("classroom.assignments.refusals.title") %>
 <% else %>
@@ -11,5 +10,5 @@
                            partial: "classroom/assignments/toggle",
                            locals: { classroom_public_id: @classroom.public_id, assignable_type: assignable.type,
                                      assignable_key: assignable.key, assignable_name: assignable.name,
-                                     assignment_public_id: nil, needs_session_days: @needs_session_days } %>
+                                     assignment_public_id: nil } %>
 <% end %>

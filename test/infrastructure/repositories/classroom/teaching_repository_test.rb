@@ -43,48 +43,6 @@ module Repositories
         assert Orm::ClassroomAssignment.exists?(assignment.id)
         assert_equal 0, @repository.withdraw_all_in_school(teacher_id: @teacher.id, school_id: school.id)
       end
-
-      # ADR-0072 §4.2 : la clé composite RESTRICT refuserait le retrait ; les jours partent d'abord, et eux seuls.
-      test "withdraw retire d'abord les jours de séance de l'enseignant dans cette classe, et ceux-là seuls" do
-        first, second = create_classroom, create_classroom
-        [ first, second ].each { |classroom| @repository.declare(teacher_id: @teacher.id, classroom_id: classroom.id, at: @at) }
-        colleague = create_teacher(classrooms: [ first ])
-        assignment = create_assignment(classroom: first, by: @teacher, due_on: Time.zone.today + 1)
-        set_days(@teacher, first, [ 1, 4 ])
-        set_days(@teacher, second, [ 2 ])
-        set_days(colleague, first, [ 3 ])
-
-        assert @repository.withdraw(teacher_id: @teacher.id, classroom_id: first.id)
-        assert_equal [ second.id ], @repository.classroom_ids_for(teacher_id: @teacher.id)
-        assert_equal [ [ @teacher.id, second.id, 2 ], [ colleague.id, first.id, 3 ] ], session_days
-        assert_equal Time.zone.today + 1, Orm::ClassroomAssignment.find(assignment.id).due_on
-      end
-
-      # ADR-0072 §4.3 : l'échéance est figée à l'assignation ; retirer les jours ne la recalcule pas.
-      test "withdraw_all_in_school retire les jours de séance des classes de cet établissement, et ceux-là seuls ; l'échéance reste" do
-        school, other = create_school, create_school
-        first, second = create_classroom(school:), create_classroom(school:, school_year: "2025-2026")
-        elsewhere = create_classroom(school: other)
-        [ first, second, elsewhere ].each { |classroom| @repository.declare(teacher_id: @teacher.id, classroom_id: classroom.id, at: @at) }
-        colleague = create_teacher(classrooms: [ first ])
-        assignment = create_assignment(classroom: first, by: @teacher, due_on: Time.zone.today + 1)
-        [ first, second, elsewhere ].each { |classroom| set_days(@teacher, classroom, [ 1 ]) }
-        set_days(colleague, first, [ 5 ])
-
-        assert_equal 2, @repository.withdraw_all_in_school(teacher_id: @teacher.id, school_id: school.id)
-        assert_equal [ [ @teacher.id, elsewhere.id, 1 ], [ colleague.id, first.id, 5 ] ], session_days
-        assert_equal Time.zone.today + 1, Orm::ClassroomAssignment.find(assignment.id).due_on
-      end
-
-      private
-
-      def set_days(teacher, classroom, weekdays)
-        SessionDaysRepository.new.replace(teacher_id: teacher.id, classroom_id: classroom.id, weekdays:, at: @at)
-      end
-
-      def session_days
-        Orm::ClassroomSessionDay.order(:teacher_id, :classroom_id, :weekday).pluck(:teacher_id, :classroom_id, :weekday)
-      end
     end
   end
 end

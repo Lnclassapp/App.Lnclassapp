@@ -80,8 +80,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`cache-ecrans-lourds`](cache-ecrans-lourds/memo.md) | lots 1 à 4 sur `perf/cache-ecrans-lourds`, sans PR ; lot 5 après les lots UX | Budgets gravés (ADR-0067 : p95 < 300 ms pilotage, < 100 ms ailleurs, HTML < 150 Ko). Index et requêtes, sans cache ni vue modifiée : Travail des élèves 213 → 56 ms, pilotage 7 j 338 → 199 ms, recherche 264 → 38 ms (p50) ; pilotage « année » gardé 5 min (36 ms à chaud, 312 ms à froid en p95) ; `pg_trgm` activée (amendements ADR-0062) |
 | [`epuration-contenus`](epuration-contenus/memo.md) | livré sur `fix/epuration-entetes-contenus` | En-têtes cours, fiche et exercice épurés (statut seul, actions dans le menu ⋮), « Essentielles de la leçon », et « Tout publier » en cascade (amendements UDR-0042, UDR-0007, ADR-0035) |
 | [`catalogue-niveau-eleve`](catalogue-niveau-eleve/memo.md) | livré sur `fix/catalogue-eleve-son-niveau` | L'élève ne voit, n'ouvre et ne commence que les cours de son niveau (et de sa série, ou communs) ; 404 ailleurs (amendements UDR-0013, ADR-0035) |
-| [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | décision, grill clos (Q1 à Q14) | Échéances (prochaine séance, d'après les jours de l'enseignant ; assignation d'exercices seulement) et aide (FAQ, WhatsApp, appel). Paiement et annonces sortis dans leurs propres chantiers, durée abandonnée |
-| [`abonnement-mobile-money`](abonnement-mobile-money/memo.md) | cadrage, grill non commencé | Abonnement élève payé par Wave (Checkout API, webhooks signés) ; le paiement revient au plan le 2026-10-02 (grill de `fonctions-espace-eleve`, Q1) |
+| [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | cadrage, grill non commencé | Les six fonctions de la maquette V2 de l'accueil élève retirées d'`interface-epuree` (Q8) : échéances et retards, durée d'un exercice, paiement et abonnement, annonces signées, lecture audio, aide |
 
 ## Backlog
 

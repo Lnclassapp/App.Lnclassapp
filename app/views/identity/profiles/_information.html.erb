@@ -1,11 +1,8 @@
 <%# 🌐 UI · identity/profiles/_information — carte « Mes informations » (Queries::Identity::ProfileQuery::Row) %>
-<%# Rôle : photo, nom, numéro, rôle, inscription ; remplacée par profile_names/update ; élève : sans bloc d'identité, avatar en ligne « Photo » %>
-<%# ADR  : 0055, 0060, 0065 · UDR : 0006, 0041 (amendement du 2026-10-02, lu sur profile.role), 0047, 0052, 0057 %>
+<%# Rôle : nom, numéro groupé, informations du rôle, date d'inscription ; nom et numéro s'ouvrent dans le frame modal ; remplacée par profile_names/update %>
+<%# ADR  : 0055, 0060, 0065 · UDR : 0006, 0041, 0047, 0052 %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
   <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
-  <% student = profile.role == :student %>
-  <%# Les autres rôles gardent leur rendu octet pour octet : leurs branches gardent leur indentation d'origine. %>
-  <% unless student %>
   <div class="mt-4 flex items-center gap-4">
     <%= ui_avatar profile.display_name, src: account_photo_src(profile.public_id, profile.photo_version), size: :lg %>
     <div class="min-w-0 flex-1">
@@ -18,20 +15,12 @@
       </div>
     </div>
   </div>
-  <% end %>
 
   <dl class="mt-5 divide-y divide-line border-t border-line text-sm">
     <div class="flex flex-wrap items-center justify-between gap-3 py-3">
       <div class="min-w-0">
         <dt class="text-mute"><%= t(".photo") %></dt>
-        <% if student %>
-          <dd class="mt-1.5">
-            <span aria-hidden="true"><%= ui_avatar profile.display_name, src: account_photo_src(profile.public_id, profile.photo_version), size: :lg %></span>
-            <span class="sr-only"><%= t(profile.photo_version ? ".photo_present" : ".photo_absent") %></span>
-          </dd>
-        <% else %>
         <dd class="mt-0.5 font-medium text-ink"><%= t(profile.photo_version ? ".photo_present" : ".photo_absent") %></dd>
-        <% end %>
       </div>
       <%= ui_button t(profile.photo_version ? ".change_photo" : ".add_photo"), href: edit_profile_photo_path, variant: :secondary,
                                                                                size: :sm, icon: "camera", data: { turbo_frame: "modal" } %>

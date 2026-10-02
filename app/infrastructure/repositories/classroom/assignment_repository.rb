@@ -1,13 +1,15 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
-# Rôle : assignations d'une classe et leur échéance ; résout l'exercice assigné, seul type assignable, sans association polymorphe
-# ADR  : 0035, 0048, 0071, 0072
+# Rôle : assignations d'une classe ; résout la ressource (cours, fiche, exercice) par son type, sans association polymorphe
+# ADR  : 0035, 0048, 0071
 module Repositories
   module Classroom
     class AssignmentRepository
       include Ports::Classroom::AssignmentRepositoryPort
 
-      # type → [modèle, colonne de clé, colonne de nom] ; seul l'exercice s'assigne (ADR-0072 §4.1).
+      # type → [modèle, colonne de clé, colonne de nom]
       RESOURCES = {
+        "Course" => [ "Orm::Course", :slug, :name ],
+        "Essential" => [ "Orm::Essential", :slug, :name ],
         "Exercise" => [ "Orm::Exercise", :public_id, :title ]
       }.freeze
 
@@ -26,7 +28,7 @@ module Repositories
         record = Orm::ClassroomAssignment.new(
           public_id: assignment.public_id, classroom_id: assignment.classroom_id,
           assignable_type: assignment.assignable.type, assignable_id: assignment.assignable.id, status: "active",
-          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at, due_on: assignment.due_on
+          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at
         )
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ClassroomAssignment.transaction(requires_new: true) { record.save! }
@@ -49,12 +51,25 @@ module Repositories
                                 .update_all(status: "archived", archived_by_id:, archived_at: at, updated_at: at)
       end
 
-      # Un autre type que l'exercice ne se résout pas : nil.
       def resolve_assignable(type:, key:)
-        resolve_exercise(key) if type == "Exercise"
+        case type
+        when "Course" then resolve_course(key)
+        when "Essential" then resolve_essential(key)
+        when "Exercise" then resolve_exercise(key)
+        end
       end
 
       private
+
+      def resolve_course(slug)
+        record = Orm::Course.find_by(slug:)
+        record && resolved("Course", record, key: record.slug, name: record.name, parents: [], course: record)
+      end
+
+      def resolve_essential(slug)
+        record = Orm::Essential.includes(:course).find_by(slug:)
+        record && resolved("Essential", record, key: record.slug, name: record.name, parents: [ record.course ], course: record.course)
+      end
 
       def resolve_exercise(public_id)
         record = Orm::Exercise.includes(essential: :course).find_by(public_id:)
@@ -77,8 +92,7 @@ module Repositories
       def map_to_entity(record, assignable)
         Entities::Classroom::Assignment.new(
           id: record.id, public_id: record.public_id, classroom_id: record.classroom_id, assignable:, status: record.status,
-          assigned_by_id: record.assigned_by_id, assigned_at: record.assigned_at, archived_at: record.archived_at,
-          due_on: record.due_on
+          assigned_by_id: record.assigned_by_id, assigned_at: record.assigned_at, archived_at: record.archived_at
         )
       end
     end
