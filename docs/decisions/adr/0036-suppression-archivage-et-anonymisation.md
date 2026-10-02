@@ -112,7 +112,9 @@ production:
 
 - L'anonymisation garde les résultats pseudonymes : ce n'est pas un effacement total.
 
-## Amendement du 2026-10-02 — anonymisation automatique 30 jours après le départ · Statut : Proposé
+## Amendement du 2026-10-02 — anonymisation automatique 30 jours après le départ · Statut : Retiré (porteur, 2026-10-02)
+
+> **Retiré le jour même par le porteur** : « pas d'anonymisation, les données doivent être accessibles par l'établissement et l'élève comme archive ». Les 30 jours s'appliquent à la **suppression sur demande** : une demande de suppression de compte est traitée dans les 30 jours. Aucun job d'anonymisation automatique. La règle « anonymiser, jamais supprimer » du §4 reste la manière technique de traiter une demande de suppression, sous réserve de la validation des juristes (`pages-publiques.md`, relecture). Le texte ci-dessous est conservé pour mémoire.
 
 *Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/plan.md), lot R ; règle de conservation donnée par le porteur le 2026-10-02 pour la page « Protection des données » ([UDR-0063](../udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md)). **Proposé** : la définition du « départ » reste à trancher (questions ci-dessous). Le texte ci-dessus reste en vigueur tant que cet amendement n'est pas accepté.*
 

@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/help/show — « Questions fréquentes », motif des écrans d'entrée : logo, retour, un seul h1 %>
 <%# Rôle : une question par <details> natif, réponse repliée, sans JS ; les seuils viennent du domaine (Grading) %>
-<%# UDR  : 0061 (FAQ), 0057 (R3 non appliquée : la liste est l'objet de la page, ses titres sont courts), 0060, 0054 %>
+<%# UDR  : 0061 (FAQ), 0063 (§3.4 « Vos données »), 0057 (R3 non appliquée : la liste est l'objet de la page), 0060, 0054 %>
 <% page_title t(".page_title") %>
 <% grading = Entities::Assessment::Grading %>
 <% thresholds = { pass: grading::PASS_THRESHOLD, mastery: grading::MASTERY_THRESHOLD, gold: grading::GOLD_THRESHOLD,
@@ -30,6 +30,13 @@
           </li>
         <% end %>
       </ul>
+      <%# UDR-0063 §3.4 : la ligne n'apparaît qu'avec une de ses pages en ligne ; libellé dans public_pages.fr.yml %>
+      <% if (data_links = public_page_links(%i[privacy terms])).any? %>
+        <p id="help_your_data" class="mt-4 border-t border-line pt-4 text-sm text-mute">
+          <%= t(".your_data") %>
+          <%= safe_join(data_links.map { |label, href| link_to(label, href, class: "underline underline-offset-2 hover:text-ink") }, " · ") %>
+        </p>
+      <% end %>
     <% end %>
   </div>
 </main>

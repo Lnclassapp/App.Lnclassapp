@@ -19,12 +19,12 @@
 >
 > **À valider** :
 > 8. Le cadre cité (**loi n° 2013-450 du 19 juin 2013**, ARTCI) et la liste des droits (Protection des données §2, §9).
-> 9. La règle de conservation donnée par le porteur — **30 jours après le départ**, données sensibles anonymisées, données d'usage conservées — et sa formulation, une fois le « départ » défini (lot R, [amendement proposé de l'ADR-0036](../../decisions/adr/0036-suppression-archivage-et-anonymisation.md)).
+> 9. La règle de conservation donnée par le porteur (révisée le 2026-10-02) — **pas d'anonymisation** ; données gardées comme **archive**, consultables par l'élève et par l'établissement quitté ; **suppression sur demande, sous 30 jours** — et sa formulation (lot R).
 > 10. L'acceptation des CGU (aujourd'hui, aucune case à cocher à l'inscription) et la procédure de modification des conditions (CGU §1, §12).
 > 11. La licence d'usage du contenu et l'usage acceptable (CGU §4, §5) ; la suspension d'un compte (CGU §7).
 > 12. Les CGV entières, une fois l'offre fixée par le chantier `abonnement-mobile-money` (rétractation, remboursement, réclamation).
 >
-> **Avant la sortie, côté produit** (pas les juristes) : le lot R livré (anonymisation automatique), la définition du « départ », les numéros et horaires du support (carte d'aide).
+> **Avant la sortie, côté produit** (pas les juristes) : le lot R livré (archive consultable par l'élève parti, suppression sur demande sous 30 jours). Numéros et horaires du support : fournis le 2026-10-02.
 
 ## Sommaire
 
@@ -139,7 +139,8 @@ Si vous écrivez au support par **WhatsApp** ou si vous l'appelez, l'échange pa
 
 ### 8. Combien de temps nous les gardons
 
-- **Vos données personnelles sensibles sont anonymisées par défaut 30 jours après votre départ** ‹ définition du « départ » et liste des données sensibles : à arrêter avant la sortie (lot R), puis à valider par les juristes ›. Anonymiser veut dire : votre nom est remplacé par « Compte supprimé », votre numéro et votre photo sont effacés, vos connexions sont fermées, et plus personne ne peut vous reconnaître.
+- **Vos données sont conservées comme archive**, sans limite de durée, tant que vous ne demandez pas leur suppression. Après votre départ d'une classe ou d'un établissement, l'archive reste consultable par vous, depuis votre compte, et par l'établissement que vous avez quitté, pour les résultats obtenus chez lui.
+- **Vous pouvez demander la suppression de votre compte** au support : elle est faite dans les 30 jours qui suivent votre demande. ‹ Ce que deviennent les résultats déjà consultés par l'établissement après une suppression : à valider par les juristes ›
 - **Les informations d'usage de l'application sont conservées**, sans votre nom : exercices faits, réponses, notes, badges et fiches à revoir. Elles servent à la progression et au suivi par les enseignants et l'établissement ; les statistiques d'une classe restent justes après le départ d'un élève.
 - Les classes sont archivées en fin d'année scolaire, pas supprimées.
 - Les fichiers envoyés mais jamais utilisés sont effacés après 48 heures.
@@ -150,7 +151,7 @@ Vous pouvez demander l'accès à vos données, leur rectification, vous opposer 
 
 Pour exercer vos droits : **+225 05 44 32 00 20** ou **+225 05 84 25 80 85**.
 
-Sans attendre, vous pouvez vous-même modifier votre nom, votre numéro, votre PIN et votre photo depuis votre profil. La suppression d'un compte se demande au support : il est alors anonymisé.
+Sans attendre, vous pouvez vous-même modifier votre nom, votre numéro, votre PIN et votre photo depuis votre profil. La suppression d'un compte se demande au support : elle est faite dans les 30 jours.
 
 ### 10. Les élèves mineurs
 
@@ -283,7 +284,7 @@ Les [conditions générales d'utilisation](#3-conditions-générales-dutilisatio
 | Entité, responsable du traitement | **Lnclass Côte d'Ivoire SARL** | porteur, 2026-10-02 |
 | Adresse | Tiassalé, au feu du marché, vers la Pharmacie Saint-Joseph | porteur, 2026-10-02 |
 | Contact | +225 05 44 32 00 20 · +225 05 84 25 80 85 | porteur, 2026-10-02 |
-| Conservation | 30 jours après le départ ; données sensibles anonymisées par défaut ; informations d'usage conservées | porteur, 2026-10-02 ; construite par le lot R |
+| Conservation | Pas d'anonymisation ; archive consultable par l'élève et l'établissement quitté ; suppression sur demande sous 30 jours | porteur, 2026-10-02 (révisé le même jour) ; construite par le lot R |
 | RCCM | à compléter | juristes |
 | Déclaration ou autorisation ARTCI | à compléter | juristes |
 | Droit applicable, tribunaux, responsabilité, âge minimum et accord des parents, bases légales, transferts | à compléter | juristes |
