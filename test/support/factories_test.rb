@@ -7,7 +7,8 @@ class FactoriesTest < ActiveSupport::TestCase
     %i[create_user create_student create_teacher create_team_member create_invitation create_pin_recovery_code
        create_backup_code create_login_session create_login_attempt create_audit_event create_drena create_school
        create_classroom create_assignment create_level create_series link_level_series create_material create_course
-       create_essential create_import_report create_exercise create_exercise_session create_attempt create_badge create_gap].each do |factory|
+       create_essential create_import_report create_exercise create_exercise_session create_attempt create_badge create_gap
+       create_article create_article_image].each do |factory|
       record = factory == :create_user ? create_user(role: "student") : public_send(factory)
 
       assert record.persisted?, factory
@@ -42,6 +43,27 @@ class FactoriesTest < ActiveSupport::TestCase
     assert_equal secret_digest("87654321"), code.code_digest
     assert create_user(role: "teacher").authenticate_pin("2468")
     assert_equal [ "principal", nil ], [ invitation.position, invitation.team_role ]
+  end
+
+  # ADR-0073 : the blog factories write what the application writes; their images are checked and stored by the adapter.
+  test "an article cites its images, attached to it with its cover; an image is stored without article by default" do
+    cover = create_article_image(alt: nil)
+    images = [ create_article_image(fixture: "photos/photo.png"), create_article_image(fixture: "photos/photo_lossy.webp") ]
+    article = create_article(body: article_body_with(*images, text: "Bonjour"), cover:)
+    orphan = create_article_image(alt: "Un tableau", created_at: 3.days.ago)
+
+    assert_equal [ "published", "team", "La couverture de l'article", cover ], [ article.status, article.signature, article.cover_alt, article.cover_image ]
+    assert_equal [ cover, *images ].map(&:id).sort, article.images.pluck(:id).sort
+    assert_equal images, article.body.body.attachables
+    assert_equal "Bonjour", article.body.to_plain_text.lines.first.strip
+    assert_equal [ "image/jpeg", "image/png", "image/webp" ], [ cover, *images ].map(&:content_type)
+    assert_equal [ 64, 48 ], [ cover.width, cover.height ]
+    assert_equal [ nil, "Un tableau" ], [ orphan.article_id, orphan.alt ]
+    assert_in_delta 3.days.ago, orphan.created_at, 1.minute
+    assert orphan.file.attached?
+    assert_equal [ nil, nil ], create_article(status: "draft").then { [ it.published_at, it.archived_at ] }
+    assert create_article(status: "archived").archived_at
+    assert_raises(ArgumentError) { create_article_image(fixture: "article_images/animation.gif") }
   end
 
   test "archived rows carry their archive date" do
