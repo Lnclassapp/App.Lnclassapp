@@ -56,11 +56,12 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     assert_rich_content
     assert_no_text "Brouillon caché"
     # UDR-0015, amendement du 2026-10-02 : le badge et le score quittent la ligne ; la ligne entière mène à l'exercice.
-    within("#essential_exercise_#{@exercise.public_id}") { assert_no_text "80 %" }
+    within("#essential_exercise_#{@exercise.public_id}") { assert_no_text "16/20" }
     find("#essential_exercise_#{@exercise.public_id}").click
     assert_current_path exercise_path(@exercise.public_id)
+    # UDR-0021, amendement du 2026-10-02 : la meilleure note se lit sur 20, forme unique de la note de l'élève.
     within "#student_progress" do
-      assert_text "80 %"
+      assert_text "16/20"
       assert_text(/\bOr\b/)
     end
 
