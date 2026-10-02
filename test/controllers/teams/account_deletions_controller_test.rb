@@ -108,6 +108,7 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
       get teams_account_lookup_path(contact: @student.contact), headers: { "Turbo-Frame" => "account_lookup" }
       assert_select "#account-lookup-result"
       assert_select "a[href='#{new_teams_account_deletion_path(@student.public_id)}']", 0
+      assert_select "turbo-frame##{Teams::DeletionRequestsController::BLOCK_FRAME}", 0
       sign_out
     end
 
@@ -155,10 +156,49 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
 
     get teams_account_lookup_path(contact: @student.contact), headers: { "Turbo-Frame" => "account_lookup" }
     assert_select "a[href='#{new_teams_account_deletion_path(@student.public_id)}'][data-turbo-frame=modal]", "Supprimer le compte"
+    # ADR-0036, amendement (2) : la demande enregistrée, ou le geste pour l'enregistrer, se charge dans son frame.
+    assert_select "turbo-frame##{Teams::DeletionRequestsController::BLOCK_FRAME}[src='#{teams_deletion_request_path(@student.public_id)}']"
 
     teacher = create_teacher
     get teams_account_lookup_path(contact: teacher.contact), headers: { "Turbo-Frame" => "account_lookup" }
     assert_select "#account-lookup-result"
     assert_select "a[href='#{new_teams_account_deletion_path(teacher.public_id)}']", 0
+    assert_select "turbo-frame##{Teams::DeletionRequestsController::BLOCK_FRAME}", 0
+  end
+
+  # ADR-0036, amendement (2) : la demande enregistrée à sa réception donne sa date à la modale, et passe en « traitée ».
+  test "a recorded request gives its date to the modal, and is processed with the account" do
+    recorder = create_team_member
+    request = Orm::AccountDeletionRequest.create!(user: @student, requested_on: 6.days.ago.to_date, recorded_by: recorder)
+    sign_in_as @actor
+
+    get new_teams_account_deletion_path(@student.public_id), headers: { "Turbo-Frame" => "modal" }
+    assert_select "input[type=date][name='account_deletion[requested_on]'][value='#{6.days.ago.to_date.iso8601}']"
+
+    request_deletion requested_on: 6.days.ago.to_date.iso8601, as: :turbo_stream
+
+    assert_response :success
+    request.reload
+    assert_equal [ "processed", @actor.id ], [ request.status, request.closed_by_id ]
+    assert_not_nil request.closed_at
+    assert_equal({ "requested_on" => 6.days.ago.to_date.iso8601 }, Orm::AuditEvent.find_by!(action: "user.anonymized").metadata)
+  end
+
+  test "without a recorded request, the modal leaves the date empty" do
+    sign_in_as @actor
+
+    get new_teams_account_deletion_path(@student.public_id), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "input[type=date][name='account_deletion[requested_on]']:not([value])"
+  end
+
+  test "a refused deletion leaves the recorded request pending" do
+    Orm::AccountDeletionRequest.create!(user: @student, requested_on: Date.current, recorded_by: @actor)
+    sign_in_as @actor
+
+    request_deletion requested_on: Date.tomorrow.iso8601, headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :unprocessable_entity
+    assert_equal [ "pending" ], Orm::AccountDeletionRequest.pluck(:status)
   end
 end

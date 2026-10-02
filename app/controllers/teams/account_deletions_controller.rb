@@ -1,14 +1,15 @@
 # 🌐 DELIVERY · Teams::AccountDeletionsController
-# Rôle : l'équipe traite la demande de suppression d'un compte élève, en modale depuis sa fiche : date de la demande, puis anonymisation
-# ADR  : 0026, 0028, 0036 (§4) · UDR : 0006, 0020, 0054
+# Rôle : l'équipe traite la demande de suppression d'un élève, en modale depuis sa fiche : date (reprise si enregistrée), puis anonymisation
+# ADR  : 0026, 0028, 0036 (§4, amendement 2) · UDR : 0006, 0020, 0054
 module Teams
   class AccountDeletionsController < BaseController
     # La règle avant le compte : un membre qui n'est pas `admin` reçoit 403, que le compte existe ou non (ADR-0038).
     before_action { render_forbidden if policy.call(actor: current_actor).failure? }
     before_action :load_account
 
+    # ADR-0036, amendement 2 : la date de la demande enregistrée à sa réception, s'il y en a une, est reprise.
     def new
-      @form = Dtos::Identity::DeletionRequestInput.new
+      @form = Dtos::Identity::DeletionRequestInput.new(requested_on: deletion_requests.pending_for(user_id: @account.id)&.requested_on)
     end
 
     # Succès : toast, modale refermée, la fiche remplacée par « Compte supprimé » ; repli HTML : retour à la recherche.
@@ -34,6 +35,7 @@ module Teams
 
     def users = (@users ||= Repositories::Identity::UserRepository.new)
     def policy = Policies::Identity::DeleteUserPolicy.new
+    def deletion_requests = (@deletion_requests ||= Repositories::Identity::DeletionRequestRepository.new)
 
     def anonymize
       UseCases::Identity::AnonymizeUser.new(
@@ -43,7 +45,7 @@ module Teams
         login_attempts: Repositories::Identity::LoginAttemptRepository.new,
         memberships: Repositories::Classroom::MembershipRepository.new, photos: Repositories::Identity::ProfilePhotoStore.new,
         audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,
-        policy:, clock: Time.zone
+        policy:, clock: Time.zone, deletion_requests:
       )
     end
   end
