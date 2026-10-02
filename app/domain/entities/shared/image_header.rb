@@ -1,8 +1,8 @@
-# 🧠 DOMAINE · Entities::Identity::ImageHeader
+# 🧠 DOMAINE · Entities::Shared::ImageHeader
 # Rôle : lit une image JPEG, PNG ou WebP entière sans bibliothèque (format réel, dimensions, métadonnées) et retire ses métadonnées
 # ADR  : 0060
 module Entities
-  module Identity
+  module Shared
     # Fail closed : un fichier n'est une image que si tout son flux est bien formé — le JPEG jusqu'à son premier EOI, le
     # PNG jusqu'à IEND avec des CRC justes, le WebP dans sa longueur RIFF — et si chaque partie gardée a exactement la
     # forme de sa norme (retour du challenger de la PR #65 : aucun octet libre dans une partie gardée). Sinon read rend

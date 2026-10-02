@@ -3,7 +3,7 @@ require "test_helper"
 # ADR-0060: the real format, the size and the shooting metadata of an image are read from its bytes, and the metadata
 # removed, without any image library. Fixtures are encoded by real encoders (Pillow, libwebp), never hand-written.
 module Entities
-  module Identity
+  module Shared
     class ImageHeaderTest < ActiveSupport::TestCase
       def facts(name) = ImageHeader.read(file_fixture("photos/#{name}").binread)
 

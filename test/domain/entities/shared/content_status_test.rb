@@ -1,7 +1,7 @@
 require "test_helper"
 
 module Entities
-  module Catalog
+  module Shared
     class ContentStatusTest < ActiveSupport::TestCase
       def transition(from, to, parent_published: true) = ContentStatus.transition(from:, to:, parent_published:)
 

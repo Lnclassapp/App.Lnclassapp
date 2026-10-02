@@ -1,7 +1,7 @@
 require "test_helper"
 
 module Repositories
-  module Catalog
+  module Shared
     class RichTextSanitizerTest < ActiveSupport::TestCase
       test "retire scripts, styles, iframes, attributs on*, liens javascript: et pièces jointes" do
         dirty = %(<p onclick="x()">A<script>alert(1)</script></p><style>p{}</style><iframe src="https://x.test"></iframe>) +

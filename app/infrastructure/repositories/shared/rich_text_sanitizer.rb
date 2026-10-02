@@ -1,8 +1,8 @@
-# 🔌 INFRA · Repositories::Catalog::RichTextSanitizer
+# 🔌 INFRA · Repositories::Shared::RichTextSanitizer
 # Rôle : assainit tout HTML écrit dans un contenu riche, importé ou saisi (liste blanche de Rails, sans pièce jointe)
 # ADR  : 0039, 0049, 0068 · UDR : 0014
 module Repositories
-  module Catalog
+  module Shared
     # Retire <script>, <style>, <iframe>, les attributs on*, les liens javascript: et les <action-text-attachment> :
     # la V1 n'accepte aucune pièce jointe, et Trix n'est pas un garde-fou pour une requête forgée.
     module RichTextSanitizer

@@ -1,8 +1,8 @@
-# 🧠 DOMAINE · Entities::Catalog::ContentStatus
+# 🧠 DOMAINE · Entities::Shared::ContentStatus
 # Rôle : cycle de vie commun des cours, fiches et exercices ; le retour au brouillon est interdit
 # ADR  : 0035
 module Entities
-  module Catalog
+  module Shared
     module ContentStatus
       VALUES = %w[draft published archived].freeze
       TRANSITIONS = { "draft" => %w[published], "published" => %w[archived], "archived" => %w[published] }.freeze

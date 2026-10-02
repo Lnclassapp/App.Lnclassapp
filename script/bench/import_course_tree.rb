@@ -58,7 +58,7 @@ module ImportCourseTreeBench
       def validate_root(...) = ImportCourseTreeBench.timed(:business) { super }
       def write(...) = ImportCourseTreeBench.timed(:write) { super }
     end)
-    Repositories::Catalog::RichTextSanitizer.singleton_class.prepend(Module.new { def call(...) = ImportCourseTreeBench.timed(:sanitize) { super } })
+    Repositories::Shared::RichTextSanitizer.singleton_class.prepend(Module.new { def call(...) = ImportCourseTreeBench.timed(:sanitize) { super } })
   end
 
   # → [Upload], un fichier lnclass.course-tree par tranche de FILE_COURSES cours.
