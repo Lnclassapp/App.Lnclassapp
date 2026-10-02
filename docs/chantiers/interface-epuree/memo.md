@@ -65,6 +65,7 @@ Les maquettes montrent la cible complète. Ce qui repose sur une fonction absent
 | Q10 — Sur grand écran, la grille aligne 6 éléments par rangée. Avec 7 cases (6 matières et Inviter), Inviter tombe seul sur une deuxième rangée. Que fait-on ? | **On accepte 6 + 1.** | Pas de cas particulier : la grille garde 6 colonnes sur grand écran et 4 sur téléphone, quel que soit le nombre de cases. Quand le paiement arrivera (`fonctions-espace-eleve`), la deuxième rangée aura 2 cases. |
 | Q11 — Déclinaisons grand écran des maquettes téléphone proposées le 2026-10-02 : les retient-on ? | **Non.** Les versions grand écran actuelles de l'application sont bonnes : on les garde et on les épure seulement. Sur téléphone, ce sont les maquettes du porteur qui s'appliquent. | Deux mises en page selon la largeur : sous le seuil téléphone, la maquette du porteur ; au-dessus, la mise en page actuelle, épurée selon la règle (Q2, Q3, Q4), sans nouvelle maquette. Les propositions de Q6 et Q10 sur la grille à 6 colonnes en grand écran tombent. Le seuil exact se fixe dans la décision d'interface. |
 | Q12 — Précision de Q11 : où passe la limite entre la maquette et l'écran actuel ? | **La tablette prend les mêmes écrans que le téléphone.** L'ordinateur et les écrans plus larges gardent la version actuelle. | Deux familles d'écrans : téléphone et tablette suivent les maquettes du porteur ; ordinateur et plus large gardent la mise en page actuelle, épurée selon la règle. Le seuil se place entre la tablette et l'ordinateur : 1 024 px proposé. |
+| Q13 — Trois points tranchés à la relecture des UDR : le badge « même sans internet », la photo générée par IA, le bouton d'aide absent. | **Le badge garde « même sans internet »** (la PWA arrive). **La photo va en production.** **Le bouton d'aide attend** une page d'aide, ajoutée à `fonctions-espace-eleve`. | UDR-0059 corrigée en conséquence. UDR-0057, 0058 et 0059 acceptées par le porteur le 2026-10-02. |
 
 ## Cas limites identifiés
 
@@ -79,7 +80,4 @@ Les maquettes montrent la cible complète. Ce qui repose sur une fonction absent
 
 ## Questions encore ouvertes
 
-- Badge de la homepage : « même sans internet » est retiré tant que le hors connexion n'existe pas (UDR-0059). À confirmer par le porteur.
-- Photo de la homepage : générée par IA, livrée comme image provisoire ; une vraie photo, avec autorisation, avant toute communication publique.
-- Bouton « Besoin d'aide ? » : aucune page d'aide n'existe, il n'est pas affiché (UDR-0058). Fonction à ajouter à `fonctions-espace-eleve`.
 - Une série où l'une des 6 matières n'est pas enseignée (exemple à vérifier : SVT dans certaines séries du 2nd cycle) : l'UDR-0058 masque seulement une matière absente du référentiel ; la case d'une matière non enseignée dans la série reste affichée et mène à un catalogue vide.

@@ -2,13 +2,13 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé (2026-10-02) |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot A2, critères CL-23, TR-04, AS-36, TR-02 |
 | **ADR lié** | [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise, note) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (lacunes) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [UDR-0006](0006-shell-applicatif-par-role.md) (shell, sections d'accueil) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |
-| **Remplacé par** | [UDR-0058](0058-accueil-eleve.md) *(proposée le 2026-10-02, effective à son acceptation)* |
+| **Remplacé par** | [UDR-0058](0058-accueil-eleve.md) |
 
-> ⚠️ **Remplacée par l'[UDR-0058](0058-accueil-eleve.md)** (proposée le 2026-10-02, chantier `interface-epuree`). Elle reste en vigueur jusqu'à l'acceptation de l'UDR-0058.
+> ⚠️ **Remplacée par l'[UDR-0058](0058-accueil-eleve.md)** (acceptée le 2026-10-02, chantier `interface-epuree`).
 
 ---
 

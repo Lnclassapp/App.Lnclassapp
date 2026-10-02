@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-02, porteur) |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/memo.md) — grill Q4 à Q12 ; maquette [`accueil-eleve-telephone.html`](../../chantiers/interface-epuree/maquettes/accueil-eleve-telephone.html) |
 | **ADR lié** | [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (note, badges) · [ADR-0040](../adr/0040-classe-principale-unique-de-l-eleve.md) (une classe) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (fiches à revoir) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [UDR-0057](0057-ecrans-eleve-epures.md) (règle et deux familles) · [UDR-0006](0006-shell-applicatif-par-role.md) (shell) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-02, porteur) |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/memo.md) — grill Q1 à Q12 |
 | **ADR lié** | [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget de poids) · [UDR-0005](0005-design-system-fondateur.md) (tokens, aucune valeur arbitraire, pas de mode sombre) · [UDR-0006](0006-shell-applicatif-par-role.md) (shell) · [UDR-0054](0054-finitions-d-interface.md) (finitions) · [UDR-0058](0058-accueil-eleve.md) · [UDR-0059](0059-homepage-telephone-et-tablette.md) |
@@ -26,7 +26,7 @@ L'élève est le public le plus nombreux. Il utilise souvent un Android d'entré
    Le seuil est le palier `lg` du shell (UDR-0006), où la barre latérale remplace déjà la barre basse : une seule frontière dans toute l'application.
 3. **Sur tablette, la maquette téléphone reste une colonne centrée de 36 rem au plus** (576 px), sur le fond `paper`. Étirée sur 1 000 px, une ligne de liste deviendrait illisible et les cartes perdraient leurs proportions.
 4. **Épurer ne supprime aucune fonction** (grill Q4). Une information retirée d'une liste passe dans l'écran de détail, à un tap. Seul ce qui est **répété** disparaît.
-5. **Ce qui repose sur une fonction absente n'est pas affiché** (grill Q8) : échéances, retards, durée d'un exercice, paiement, annonces, lecture audio, application mobile, hors connexion. Chaque élément revient avec sa fonction, par le chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md), jamais sous forme de bouton factice.
+5. **Ce qui repose sur une fonction absente n'est pas affiché** (grill Q8) : échéances, retards, durée d'un exercice, paiement, annonces, lecture audio, application mobile, aide. Exception décidée par le porteur le 2026-10-02 : la promesse « même sans internet » du badge de la homepage reste, la PWA arrivant (UDR-0059). Chaque élément revient avec sa fonction, par le chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md), jamais sous forme de bouton factice.
 
 ## 3. Règles d'implémentation
 
