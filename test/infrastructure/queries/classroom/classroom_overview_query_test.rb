@@ -2,7 +2,8 @@ require "test_helper"
 
 # CL-10 (plan boucle-pedagogique, Lot D4) : le corps de la page d'une classe. La liste des élèves seulement quand
 # ReadClassroomPolicy l'accorde. Une classe avec un exercice assigné ne casse plus (CS#B8). ADR-0072 §4.6 : « Cours
-# assignés » ne se lit plus, un cours ne s'assignant plus.
+# assignés » ne se lit plus, un cours ne s'assignant plus. Lot E de fonctions-espace-eleve (UDR-0062 §3.4) : les jours
+# de séance de l'enseignant, les exercices assignés et leurs trois comptes, les cours du niveau de la classe.
 module Queries
   module Classroom
     class ClassroomOverviewQueryTest < ActiveSupport::TestCase
@@ -10,11 +11,95 @@ module Queries
         @classroom = create_classroom
       end
 
-      def overview(show_roster: true) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:)
+      def overview(show_roster: true, **) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:, **)
 
-      test "« Cours assignés » ne se lit plus : l'aperçu ne porte que les élèves" do
-        assert_equal [ :students ], ClassroomOverviewQuery::Overview.members
-        assert_not ClassroomOverviewQuery.const_defined?(:CourseRow, false)
+      test "l'aperçu porte les élèves, les jours de séance, les exercices assignés et les cours" do
+        assert_equal %i[students session_days assignments courses], ClassroomOverviewQuery::Overview.members
+      end
+
+      test "jours de séance : ceux de l'enseignant pour cette classe, triés ; vides s'il n'en a pas ; nil pour l'équipe" do
+        teacher = create_teacher(classrooms: [ @classroom ])
+        colleague = create_teacher(classrooms: [ @classroom ])
+        other = create_classroom
+        Orm::TeacherClassroom.create!(teacher:, classroom: other)
+        [ 4, 1 ].each { Orm::ClassroomSessionDay.create!(teacher:, classroom: @classroom, weekday: it) }
+        Orm::ClassroomSessionDay.create!(teacher: colleague, classroom: @classroom, weekday: 2)
+        Orm::ClassroomSessionDay.create!(teacher:, classroom: other, weekday: 6)
+
+        assert_equal [ 1, 4 ], overview(teacher_id: teacher.id).session_days
+        assert_equal [], overview(teacher_id: create_teacher(classrooms: [ @classroom ]).id).session_days
+        assert_nil overview.session_days
+      end
+
+      test "exercices assignés : actifs seulement, par échéance puis du plus récent au plus ancien, sans échéance à la fin" do
+        svt = create_material(name: "SVT", category: "science")
+        essential = create_essential(course: create_course(material: svt))
+        exercise = ->(title) { create_exercise(essential:, title:) }
+        travel_to(Time.zone.local(2026, 10, 5, 9)) do
+          create_assignment(classroom: @classroom, assignable: exercise.("Sans date, ancien"))
+          create_assignment(classroom: @classroom, assignable: exercise.("Pour le 12"), due_on: Date.new(2026, 10, 12))
+        end
+        travel_to(Time.zone.local(2026, 10, 6, 9)) do
+          create_assignment(classroom: @classroom, assignable: exercise.("Sans date, récent"))
+          create_assignment(classroom: @classroom, assignable: exercise.("Pour le 8"), due_on: Date.new(2026, 10, 8))
+          create_assignment(classroom: @classroom, assignable: exercise.("Retiré"), status: "archived")
+        end
+        create_assignment(classroom: create_classroom, assignable: exercise.("Autre classe"))
+
+        rows = overview.assignments
+
+        assert_equal [ "Pour le 8", "Pour le 12", "Sans date, récent", "Sans date, ancien" ], rows.map(&:exercise_title)
+        assert_equal [ "SVT", "science", Date.new(2026, 10, 8) ], rows.first.to_h.values_at(:material_name, :material_category, :due_on)
+        assert_equal Orm::ClassroomAssignment.find_by!(due_on: Date.new(2026, 10, 8)).public_id, rows.first.public_id
+        assert_nil rows.last.due_on
+      end
+
+      test "les trois comptes d'un exercice assigné, lus seulement sous FollowAssignmentPolicy (show_follow_up)" do
+        exercise = create_exercise
+        assignment = travel_to(Time.zone.local(2026, 10, 5, 9)) do
+          create_assignment(classroom: @classroom, assignable: exercise, due_on: Date.new(2026, 10, 8))
+        end
+        create_assignment(classroom: @classroom, assignable: create_exercise(essential: exercise.essential))
+        handed = ->(student, day) do
+          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment,
+                                  completed_at: Time.zone.local(2026, 10, day, 10))
+        end
+        2.times { handed.(create_student(classroom: @classroom), 8) }
+        handed.(create_student(classroom: @classroom), 9)
+        create_student(classroom: @classroom)
+
+        due, undated = overview(show_follow_up: true).assignments
+
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 3, late: 1, pending: 1), due.counts
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 0, late: 0, pending: 4), undated.counts
+        assert_equal [ nil, nil ], overview.assignments.map(&:counts)
+      end
+
+      test "cours : publiés, du niveau de la classe, sans série ou de sa série, de la matière de l'enseignant ; toutes pour l'équipe" do
+        tle = create_level(name: "Tle")
+        d = create_series(name: "D")
+        @classroom = create_classroom(level: tle, series: d)
+        svt = create_material(name: "SVT", category: "science")
+        maths = create_material(name: "Mathématiques", category: "science")
+        teacher = create_teacher(material: svt, classrooms: [ @classroom ])
+        genetics = create_course(level: tle, series: d, material: svt, name: "Génétique", subtitle: "Hérédité")
+        create_essential(course: genetics)
+        create_essential(course: genetics)
+        create_essential(course: genetics, status: "draft")
+        create_course(level: tle, material: svt, name: "Botanique")
+        create_course(level: tle, material: maths, name: "Fonctions")
+        create_course(level: tle, series: create_series(name: "C"), material: svt, name: "Série C")
+        create_course(level: create_level(name: "1ère"), material: svt, name: "Autre niveau")
+        create_course(level: tle, series: d, material: svt, name: "Brouillon", status: "draft")
+
+        courses = overview(teacher_id: teacher.id).courses
+
+        assert_equal %w[Botanique Génétique], courses.map(&:name)
+        assert_equal ClassroomOverviewQuery::CourseRow.new(slug: genetics.slug, name: "Génétique", subtitle: "Hérédité", level_name: "Tle",
+                                                           series_name: "D", material_name: "SVT", material_category: "science",
+                                                           essentials_count: 2), courses.last
+        assert_equal 0, courses.first.essentials_count
+        assert_equal %w[Fonctions Botanique Génétique], overview.courses.map(&:name)
       end
 
       test "un exercice assigné ne casse rien (CS#B8)" do
@@ -91,8 +176,8 @@ module Queries
 
         result = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: true, search: "algèbre")
 
-        assert_equal [ :students ], result.to_h.keys
         assert_empty result.students
+        assert_equal [ "Algèbre" ], result.assignments.map(&:exercise_title)
       end
 
       test "une classe inconnue n'a pas de page" do
