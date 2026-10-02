@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (proposé) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot C3, critères AS-11 (affichage), AS-12, AS-13, AS-39 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadSessionPolicy`, `RevealAnswersPolicy`, `StartSessionPolicy`) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0022](0022-session-d-exercice.md) |
@@ -73,9 +73,11 @@
 - Titre : « Résultat de <titre de l'exercice> · <espace> · Lnclass ».
 - Badge : suivi d'une infobulle des seuils (UDR-0054 §3.4).
 
-## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Proposé
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
 
-*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot C, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Proposé`. Le Lot C ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et l'amendement précédent.*
+> **Décision du porteur (2026-10-02)** : amendement accepté. Les retraits ne valent **que pour l'élève** : l'enseignant et l'équipe gardent ces écrans inchangés, y compris pour les simples répétitions. Toute ligne du tableau ci-dessous qui vise un autre rôle est caduque.
+
+*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot C, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Accepté` (porteur, 2026-10-02). Le Lot C ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et l'amendement précédent.*
 
 **Contexte.** L'UDR-0057 impose six règles (R1 à R6) à chaque écran élève. L'audit du 2026-10-02 relève un même résultat dit trois fois (note, score, questions justes), une aide permanente qui répète les cartes et une liste sans limite.
 

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-02, porteur) |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/memo.md) — grill Q3, Q4, Q8, Q9, Q11, Q12 ; [plan](../../chantiers/interface-epuree/plan.md), Lot F |
 | **ADR lié** | [ADR-0050](../adr/0050-authentification-et-session.md) (connexion, verrouillage) · [ADR-0032](../adr/0032-recuperation-assistee-du-pin.md) (code de récupération) · [ADR-0031](../adr/0031-second-facteur-totp-pour-l-equipe.md) (second facteur de l'équipe) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (CSP stricte) · [UDR-0057](0057-ecrans-eleve-epures.md) (règle R1 à R6) · [UDR-0005](0005-design-system-fondateur.md) (tokens, composants) · [UDR-0051](0051-afficher-le-code-pin.md) (bouton œil) · [UDR-0054](0054-finitions-d-interface.md) (logo, retour, focus, infobulle) · [UDR-0059](0059-homepage-telephone-et-tablette.md) (écran de bienvenue) |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (proposé) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B3, critères CA-10, CA-11, AS-37 ; CA-29 (bandeau retiré) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, tout exercice publié se démarre) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (lacune) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [ADR-0053](../adr/0053-validation-collaborative-requalifiee.md) (aucun label de conformité) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0016](0016-formulaire-fiche-essentielle.md) (modale « Modifier ») · [UDR-0017](0017-formulaire-exercice.md) (modale « Nouvel exercice ») · [UDR-0021](0021-page-exercice.md) (page d'un exercice) |
@@ -85,7 +85,9 @@ La fiche essentielle est la page que l'élève ouvre pour réviser, puis pour s'
 - Titre : « <nom de la fiche> · <espace> · Lnclass » (au lieu de « Fiche essentielle : <nom> »).
 - Badges de progression : suivis d'une infobulle des seuils (UDR-0054 §3.4).
 
-## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Proposé
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
+
+> **Décision du porteur (2026-10-02)** : amendement accepté. Les retraits ne valent **que pour l'élève** : l'enseignant et l'équipe gardent ces écrans inchangés, y compris pour les simples répétitions. Toute ligne du tableau ci-dessous qui vise un autre rôle est caduque.
 
 *Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot D, règle de l'[UDR-0057](0057-ecrans-eleve-epures.md). Le texte ci-dessus et les amendements précédents restent en vigueur. Une fois acceptée, cette section fait foi en cas d'écart.*
 

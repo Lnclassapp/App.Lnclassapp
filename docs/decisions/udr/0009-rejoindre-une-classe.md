@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (proposé) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot A1, critères ID-01, ID-02, ID-07, CL-06, CL-07, CL-08, TR-cadre-1, sécurité n° 5 |
 | **ADR lié** | [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) (nom et prénoms) · [ADR-0040](../adr/0040-classe-principale-unique-de-l-eleve.md) (classe principale) · [ADR-0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) (code, plafond, débit) · [ADR-0050](../adr/0050-authentification-et-session.md) (PIN, session) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0024](0024-inscription-enseignant.md) |
@@ -84,9 +84,11 @@ Chantier [`recette-v1-defauts`](../../chantiers/recette-v1-defauts/memo.md) (D1)
 - **Pages publiques** : le logo est un lien vers l'accueil public (« Lnclass, accueil »).
 - Titres : « Rejoindre une classe · Lnclass », « Rejoindre ma classe · Lnclass » par `page_title`.
 
-## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Proposé
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
 
-*Chantier [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/plan.md), Lot E, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Proposé`. Le Lot E ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et avec les amendements du 2026-09-28 et du 2026-09-29.*
+> **Décision du porteur (2026-10-02)** : amendement accepté.
+
+*Chantier [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/plan.md), Lot E, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Accepté` (porteur, 2026-10-02). Le Lot E ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et avec les amendements du 2026-09-28 et du 2026-09-29.*
 
 Cet amendement applique la règle de sobriété de l'UDR-0057 aux deux écrans du parcours, `/join` et `/c/<code>`, où six textes d'aide restent affichés en permanence.
 

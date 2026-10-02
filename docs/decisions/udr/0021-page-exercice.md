@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (proposé) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot C1, critères AS-02, AS-39, TR-cadre-3 ; sécurité n° 29 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, `RevealAnswersPolicy`, `StartSessionPolicy`) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (démarrer, reprendre, recommencer) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0017](0017-formulaire-exercice.md) (modale « Modifier ») |
@@ -79,9 +79,11 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 - Titre : « <titre de l'exercice> · <espace> · Lnclass ».
 - Badge et maîtrise de l'élève : suivis d'une infobulle des seuils (UDR-0054 §3.4).
 
-## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Proposé
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
 
-*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot C, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Proposé`. Le Lot C ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et les amendements précédents.*
+> **Décision du porteur (2026-10-02)** : amendement accepté. Les retraits ne valent **que pour l'élève** : l'enseignant et l'équipe gardent ces écrans inchangés, y compris pour les simples répétitions. Toute ligne du tableau ci-dessous qui vise un autre rôle est caduque. « Meilleure note » en /20 accepté : la note n'a qu'une forme dans le parcours élève.
+
+*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot C, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Accepté` (porteur, 2026-10-02). Le Lot C ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et les amendements précédents.*
 
 **Contexte.** L'UDR-0057 impose six règles (R1 à R6) à chaque écran élève. Cette page est l'écran de détail de l'exercice : elle reçoit ce que l'accueil retire de ses lignes (UDR-0058 §3.3, grill Q4). L'audit de la vue élève, le 2026-10-02, relève deux textes d'aide permanents, deux répétitions, deux formes de la note dans le parcours et une liste sans limite.
 

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (proposé) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot A3, critères CL-22, CL-10 (volet élève) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadClassroomPolicy`, fait `show_roster`) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (cours publiés) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [UDR-0006](0006-shell-applicatif-par-role.md) (shell, entrée « Ma classe ») · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) · [UDR-0010](0010-accueil-eleve.md) (carte « Ma classe » de l'accueil) · [UDR-0027](0027-page-classe.md) (page classe de l'enseignant) |
@@ -72,9 +72,11 @@ Le porteur a tranché le 2026-09-25 : **l'élève voit le code de sa classe**, e
 - **Le code reste sans bouton « Copier »** (décision du porteur du 2026-09-29) : c'est désormais une règle commune, « un code fait pour être dicté ne se copie pas » (UDR-0054 §2.7). Le §2.3 et le §3 sont confirmés.
 - Titre : « Ma classe · Élève · Lnclass ».
 
-## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Proposé
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
 
-*Chantier [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/plan.md), Lot E, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Proposé`. Le Lot E ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et avec l'amendement du 2026-09-29.*
+> **Décision du porteur (2026-10-02)** : amendement accepté.
+
+*Chantier [`docs/chantiers/interface-epuree`](../../chantiers/interface-epuree/plan.md), Lot E, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Accepté` (porteur, 2026-10-02). Le Lot E ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et avec l'amendement du 2026-09-29.*
 
 Cet amendement applique à « Ma classe » la règle de sobriété de l'UDR-0057 : la classe y est dite deux fois, deux aides restent affichées en permanence, et chaque ligne de cours porte six informations.
 

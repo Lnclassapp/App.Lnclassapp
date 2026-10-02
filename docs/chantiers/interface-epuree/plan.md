@@ -90,7 +90,7 @@ Un lot qui a besoin de changer un contrat **s'arrête** et remonte : son socle r
   - `app/views/homepage/index.html.erb` (retrait de `section#rejoindre` et du lien d'en-tête « Commencer »)
   - `config/locales/homepage/index.fr.yml`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/controllers/homepage_controller_test.rb` · `test/system/homepage_test.rb` (dont le test existant des liens)
+- **Test associé** : `test/controllers/homepage_controller_test.rb` · `test/system/homepage_test.rb` (dont le test existant des liens) · `test/system/design_system_test.rb` (le test de la landing visait `#rejoindre` : il vise le héros, même token `brand`)
 - **Done quand**   : à toutes les tailles, la landing n'a plus ni « Rejoindre » ni « Commencer », et les deux modales de rôle s'ouvrent depuis le héros.
 
 ### Lot C — Exercice, session, résultat
@@ -284,6 +284,7 @@ Branche de chantier : `feature/interface-epuree`. Branches de lot : `feature/int
 | `test/system/classroom/student_home_test.rb`, `test/controllers/classroom/student_homes_controller_test.rb` | Lot A, puis M1 |
 | `test/system/homepage_test.rb`, `test/controllers/homepage_controller_test.rb` | Lot B, puis M2 |
 | `test/system/role_homes_test.rb` | Lot A |
+| `test/system/design_system_test.rb` | Lot B |
 | Tests de contrôleur et d'intégration ajoutés par les amendements C, E, F | le lot de l'écran (aucun partagé) |
 | `config/locales/<contexte>/<écran>.fr.yml` des lots C à F | le lot de l'écran (un fichier par écran, aucun partagé) |
 | `docs/decisions/udr/README.md` | orchestrateur, à la fusion de chaque lot |
