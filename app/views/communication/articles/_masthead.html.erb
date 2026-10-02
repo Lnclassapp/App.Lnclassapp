@@ -1,0 +1,10 @@
+<%# 🌐 UI · communication/articles/_masthead — en-tête commun du blog public : logo vers l'accueil, puis le retour %>
+<%# Rôle : locals back_label:, back_href: ; sans retour si back_label est nil (page 410 : une page d'erreur n'a pas de retour) %>
+<%# UDR  : 0064 (§3.2), 0060 (logo), 0054 (§3.2) %>
+<div class="mb-6 text-center">
+  <%= link_to root_path, "aria-label": t(".logo_home"),
+                         class: "mx-auto flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+  <% end %>
+</div>
+<%= ui_back_link back_label, href: back_href if back_label %>

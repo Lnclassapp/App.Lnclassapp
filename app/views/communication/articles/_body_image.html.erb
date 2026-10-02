@@ -1,0 +1,11 @@
+<%# 🌐 UI · communication/articles/_body_image — image du texte d'un article, rendue par Action Text (to_attachable_partial_path) %>
+<%# Rôle : local article_image (la pièce jointe, qui délègue à Orm::ArticleImage) ; servie par Lnclass, dimensions posées, à la demande %>
+<%# UDR  : 0064 (§3.3), 0065 (§3.4 : légende visible, facultative) · ADR : 0073 (§4.4) %>
+<% image = article_image %>
+<figure>
+  <%= image_tag article_image_src(image), alt: image.alt, width: image.width, height: image.height, loading: :lazy,
+                                          decoding: :async, class: "bg-mist" %>
+  <% if (caption = image.try(:caption)).present? %>
+    <figcaption class="mt-2 text-center text-sm text-mute"><%= caption %></figcaption>
+  <% end %>
+</figure>
