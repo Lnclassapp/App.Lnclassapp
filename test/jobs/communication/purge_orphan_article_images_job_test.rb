@@ -28,4 +28,26 @@ class Communication::PurgeOrphanArticleImagesJobTest < ActiveJob::TestCase
 
     assert Orm::ArticleImage.exists?(cover.id)
   end
+
+  test "le nombre d'images supprimées est journalisé, zéro compris" do
+    2.times { create_article_image(created_at: 49.hours.ago) }
+
+    logs = [ capture_log { Communication::PurgeOrphanArticleImagesJob.perform_now },
+             capture_log { Communication::PurgeOrphanArticleImagesJob.perform_now } ]
+
+    assert_includes logs.first, "[Communication::PurgeOrphanArticleImagesJob] 2 orphan article image(s) deleted"
+    assert_includes logs.last, "[Communication::PurgeOrphanArticleImagesJob] 0 orphan article image(s) deleted"
+  end
+
+  private
+
+  def capture_log
+    io = StringIO.new
+    logger = ActiveSupport::Logger.new(io)
+    Rails.logger.broadcast_to(logger)
+    yield
+    io.string
+  ensure
+    Rails.logger.stop_broadcasting_to(logger)
+  end
 end
