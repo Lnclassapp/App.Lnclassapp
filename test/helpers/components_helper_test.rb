@@ -290,6 +290,19 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#later[open]", 0
   end
 
+  # UDR-0064 (RH-13) : une entrée de rôle est un déclencheur `lg` pleine largeur ; sans option, celui d'aujourd'hui.
+  test "ui_modal sizes and stretches its trigger on demand, and keeps the default trigger otherwise" do
+    show ui_modal(title: "Élève", id: "entry", trigger: "Je suis élève", trigger_variant: :primary, trigger_size: :lg,
+                  trigger_full: true) +
+         ui_modal(title: "Plus tard", id: "plain", trigger: "Ouvrir")
+
+    assert_select "button[aria-controls=entry][aria-haspopup=dialog].bg-ink.min-h-14.w-full", text: "Je suis élève"
+    assert_select "button[aria-controls=plain].min-h-tap:not(.w-full)", text: "Ouvrir"
+    # Levée par ui_button pendant le rendu du partial : ActionView l'enveloppe, la cause reste l'ArgumentError.
+    error = assert_raises(ActionView::Template::Error) { ui_modal(title: "Taille", trigger: "Ouvrir", trigger_size: :xl) }
+    assert_kind_of ArgumentError, error.cause
+  end
+
   # UDR-0061 §3.3 : `placement: :sheet` fait de la modale une feuille basse sous lg, avec sa poignée ; le défaut
   # (`:center`) rend exactement le même HTML qu'avant l'option.
   test "ui_modal placed as a sheet carries the sheet class and a decorative handle" do
