@@ -49,7 +49,7 @@ Chaque critère devient un test. Les tests existants TR-01 (modales, liens, bout
 ```gherkin
 # RH-01 — Un écran, une décision
 Étant donné un visiteur sur /
-Alors il voit un seul h1, « Avec Lnclass, tu comprends chap chap ! »
+Alors il voit un seul h1, « Lnclass, tu comprends chap chap ! » (le slogan de l'application, décision du porteur du 2026-10-03)
 Et l'en-tête porte exactement deux liens : le logo (« Lnclass, accueil », vers /) et « Se connecter » (vers /login)
 Et la section « hero » porte les deux entrées « Je suis élève » et « Je suis enseignant »
 

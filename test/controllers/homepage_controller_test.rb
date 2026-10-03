@@ -20,7 +20,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "h1", 1
-    assert_select "h1", text: "Avec Lnclass, tu comprends chap chap !"
+    assert_select "h1", text: "Lnclass, tu comprends chap chap !"
     assert_select "header a", 2
     assert_select "header a[aria-label='Lnclass, accueil'][href='#{root_path}']"
     assert_select "header a[href='#{new_session_path}']", text: "Se connecter"

@@ -40,10 +40,10 @@ La V1 est en production depuis le 2026-09-27. La page d'accueil est la porte d'e
 - **Aucune nouvelle entrée de rôle** : ni parent, ni établissement (UDR-0012, TR-03 : V2). Les deux modales de rôle gardent leur contenu et leurs identifiants.
 - **Aucune donnée dynamique** (nombre d'élèves, d'établissements, de cours) : la page reste sans requête.
 - **Aucun tarif, abonnement ni paiement** : la page n'en parle pas (le test de la landing refuse « FCFA »).
-- **Pas de mode sombre** : exclu de la V1 par l'UDR-0005, même si la grille de design synchronisée dans Claude Code le prévoit. Cette contradiction se tranche par le porteur, hors de ce chantier (voir les questions ouvertes).
+- **Pas de mode sombre dans ce chantier** : le porteur l'a demandé le 2026-10-03 pour toute l'application ; il vit dans son propre chantier, `mode-sombre`, qui passe par les tokens (voir les questions ouvertes).
 - **Les pages publiques voisines** (connexion, `/join`, inscription enseignant, PIN oublié) ne changent pas.
 - **Aucune nouvelle photo ni illustration** : la photo existante est réencodée, les logos sont réutilisés.
-- **Le texte du slogan** : « Avec Lnclass, tu comprends chap chap ! » et « Plante la graine aujourd'hui. » sont repris tels quels.
+- **Le texte du slogan** : « Avec Lnclass, tu comprends chap chap ! » et « Plante la graine aujourd'hui. » sont repris tels quels *(le porteur a ensuite fixé le slogan à « Lnclass, tu comprends chap chap ! », le 2026-10-03)*.
 
 ## Ce que le grill a révélé
 
@@ -72,6 +72,8 @@ La V1 est en production depuis le 2026-09-27. La page d'accueil est la porte d'e
 
 ## Questions encore ouvertes
 
-- Le slogan est repris tel quel : le porteur voulait-il aussi changer le texte ? (Sur téléphone, sa maquette dit « Forcément, tu comprends chap chap » ; elle arrive avec l'écran d'entrée du lot M2.)
-- Les matières annoncées sont celles de la grille de l'accueil élève (sans Anglais, avec EDHC et Philosophie) : la production proposera-t-elle l'Anglais, présent dans le référentiel de développement ?
-- Mode sombre : la grille de design synchronisée le prévoit, l'UDR-0005 l'exclut en V1. À trancher par le porteur, hors de ce chantier.
+*Toutes tranchées par le porteur le 2026-10-03 :*
+
+- ~~Le slogan~~ → **« Lnclass, tu comprends chap chap ! »**, partout dans l'application : page d'accueil, et l'écran d'entrée du téléphone (amendement de l'UDR-0059) à la place de « Forcément, tu comprends chap chap ».
+- ~~L'Anglais~~ → **retiré** : Lnclass ne le propose pas. Il sort aussi du référentiel de développement et de test (amendement de l'ADR-0034).
+- ~~Le mode sombre~~ → **ajouté**, pour toute l'application, par son propre chantier (`mode-sombre`) : il touche les tokens du design system, pas seulement cette page.

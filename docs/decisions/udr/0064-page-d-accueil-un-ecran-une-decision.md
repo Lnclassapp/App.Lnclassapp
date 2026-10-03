@@ -26,7 +26,7 @@ Le visiteur de `/` est le plus souvent un élève sur un Android d'entrée de ga
 5. **Une seule couleur d'identité, le bleu**, sur le papier et le blanc du design system. Aucune surface orange (`teacher`), violette (`team`) ni noire (`bg-ink`) : l'or (`gold/20`) n'apparaît que sur la tuile du badge Or, qui en parle.
 6. **La page ne promet que ce que la V1 livre** : les matières de la grille de l'accueil élève (UDR-0058 §3 ; EDHC au 1er cycle, Philosophie au 2nd) sans « et plus encore », les quatre badges de l'ADR-0033, les trois gestes de l'enseignant (déclarer ses classes, assigner des exercices, suivre les scores ; jamais de cours assignés, UDR-0062 §4). Ni tarif, ni parent, ni établissement.
 7. **La photo reste, à 22 Ko.** Le même cadrage, en WebP 960 × 640, avec ses dimensions déclarées et un test qui refuse plus de 100 Ko. Les logos sont ceux de l'application, réutilisés ; aucune nouvelle illustration.
-8. **Pas de mode sombre**, comme toute la V1 (UDR-0005).
+8. **Le mode sombre suit celui de l'application** (porteur, 2026-10-03) : il passe par les tokens du design system, chantier `mode-sombre` ; cette page n'écrit aucune classe `dark:`.
 
 **Pourquoi des boutons de 56 px pleine largeur plutôt que les 48 px d'aujourd'hui ?** Au téléphone, le pouce vise un bouton large sans regarder ; deux boutons empilés sur toute la largeur se lisent comme une alternative, pas comme deux liens. Sur un écran large, ils se placent côte à côte, à largeur égale, dans une grille à deux colonnes.
 
@@ -98,9 +98,10 @@ div.min-h-screen.bg-paper
 - **`ui_modal`** : `trigger_size:` (UDR-0061 ; `:sm` | `:md` | `:lg`, défaut `:md`) et `trigger_full:` (UDR-0005, amendement du 2026-10-02 ; défaut `false`) sont passés tels quels à `ui_button` pour le déclencheur. Le conteneur du contrôleur `modal` est un bloc : dans une grille, la cellule le fait occuper toute la largeur, et `trigger_full: true` y étire le bouton.
 
 **Contenu**
-- Les matières, dans la vue, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3) et avec la catégorie du référentiel (ADR-0034) : Mathématiques, Physique-Chimie, SVT (`science`) ; Français, Histoire-Géographie, EDHC, Philosophie (`literature` ; jamais `other`, dont la teinte `team` est interdite ici). Nom complet, jamais le sigle. L'Anglais du référentiel de développement n'est pas annoncé : la grille élève ne l'offre pas. Si la grille change (`StudentHomeHelper::SUBJECT_TILES`), cette liste la suit.
+- Les matières, dans la vue, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3) et avec la catégorie du référentiel (ADR-0034) : Mathématiques, Physique-Chimie, SVT (`science`) ; Français, Histoire-Géographie, EDHC, Philosophie (`literature` ; jamais `other`, dont la teinte `team` est interdite ici). Nom complet, jamais le sigle. Lnclass ne propose pas l'Anglais (porteur, 2026-10-03 ; retiré aussi du référentiel, amendement de l'ADR-0034). Si la grille change (`StudentHomeHelper::SUBJECT_TILES`), cette liste la suit.
 - Les badges, dans cet ordre et avec ces tons (ADR-0033, `Assessment::BadgesHelper::BADGE_LEVEL_TONES`) : Bronze `warning`, Argent `neutral`, Or `gold`, Diamant `info`, libellés `t("badges.<level>")`.
 - Ton : tutoiement pour tout ce qui s'adresse à l'élève (héros, étapes, promesses), vouvoiement dans la section « Enseignants » et dans la modale enseignant ; phrases courtes ; jamais de tarif.
+- Le `h1` est le slogan de l'application, « Lnclass, tu comprends chap chap ! » (porteur, 2026-10-03 ; le même sous 1 024 px, amendement de l'UDR-0059).
 - L'année du pied de page est `Date.current.year`.
 
 **Tokens**

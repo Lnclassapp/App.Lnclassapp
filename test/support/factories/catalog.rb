@@ -5,12 +5,12 @@ module Factories
   module Catalog
     ActiveSupport::TestCase.include(self)
 
-    # The development seed referential (ADR-0034): 7 levels, 5 series, 10 pairs, 7 materials.
+    # The development seed referential (ADR-0034): 7 levels, 5 series, 10 pairs, 6 materials (Anglais removed by the owner, 2026-10-03).
     LEVELS = [ [ "6ème", "first" ], [ "5ème", "first" ], [ "4ème", "first" ], [ "3ème", "first" ],
                [ "2nde", "second" ], [ "1ère", "second" ], [ "Tle", "second" ] ].freeze
     SERIES_BY_LEVEL = { "2nde" => %w[A C], "1ère" => %w[A1 A2 C D], "Tle" => %w[A1 A2 C D] }.freeze
     MATERIALS = [ [ "Mathématiques", "Maths", "science" ], [ "Physique-Chimie", "PC", "science" ], [ "SVT", "SVT", "science" ],
-                  [ "Français", "Français", "literature" ], [ "Anglais", "Anglais", "literature" ],
+                  [ "Français", "Français", "literature" ],
                   [ "Histoire-Géographie", "HG", "literature" ], [ "Philosophie", "Philo", "literature" ] ].freeze
 
     def create_level(name: nil, position: nil, cycle: "second")

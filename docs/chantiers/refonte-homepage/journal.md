@@ -90,3 +90,13 @@ Neuf fichiers en conflit, tous résolus en gardant les deux côtés : composant 
 | **PR** | [#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145) |
 | **ADR produits** | aucun |
 | **UDR produits** | UDR-0064 (numérotée 0056 jusqu'à la fusion) ; amendements UDR-0012, UDR-0005 |
+
+## Décisions du porteur en revue (2026-10-03)
+
+| Question laissée ouverte | Réponse du porteur | Ce qui a été fait |
+|---|---|---|
+| L'Anglais, au référentiel de développement mais absent de la grille élève | « retire Anglais » | Déjà absent de la page. Retiré aussi du référentiel de développement et de test (seeds, fabrique, quatre tests qui comptaient sept matières) ; amendement de l'ADR-0034 |
+| Le slogan, « Avec Lnclass… » sur ordinateur et « Forcément… » sur la maquette téléphone | « Lnclass tu comprends chap chap ! », rectifié sur l'app | `h1` de la page : « Lnclass, tu comprends chap chap ! » (virgule ajoutée, à retirer si le porteur la refuse) ; amendement de l'UDR-0059 pour l'écran d'entrée du lot M2 ; aucune autre occurrence dans l'application |
+| Le mode sombre, prévu par la grille de design, exclu par l'UDR-0005 | « ajoute le mode sombre » | Il touche toute l'application, pas cette page : ouvert comme chantier distinct, `mode-sombre`, avec sa propre PR. Cette page n'a rien à changer, elle n'emploie que des tokens |
+
+La branche a de nouveau absorbé `Develop` (13 commits de CI, sans conflit), dont la garde « 15 s de tests système par chantier » : cette PR ajoute environ une seconde (0,36 s pour RH-03, 0,63 s pour le déclencheur large du design system).
