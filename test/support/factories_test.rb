@@ -70,12 +70,13 @@ class FactoriesTest < ActiveSupport::TestCase
     assert create_gap(status: "remediated").resolved_at
   end
 
-  test "the seed referential gives 7 levels, 5 series, 10 pairs and 7 materials" do
+  test "the seed referential gives 7 levels, 5 series, 10 pairs and 6 materials, without Anglais" do
     referential = seed_referential
 
     assert_equal %w[6eme 5eme 4eme 3eme 2nde 1ere tle], referential[:levels].keys
     assert_equal %w[a c a1 a2 d], referential[:series].keys
-    assert_equal [ 7, 5, 10, 7 ], [ Orm::Level.count, Orm::Series.count, Orm::LevelSeries.count, Orm::Material.count ]
+    assert_nil Orm::Material.find_by(name: "Anglais"), "Lnclass ne propose pas l'Anglais (porteur, 2026-10-03)"
+    assert_equal [ 7, 5, 10, 6 ], [ Orm::Level.count, Orm::Series.count, Orm::LevelSeries.count, Orm::Material.count ]
     assert_equal %w[a c], referential[:levels]["2nde"].series.map(&:slug).sort
     assert_equal 28, Orm::ClassroomPlanEntry.count
   end

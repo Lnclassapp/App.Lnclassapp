@@ -19,7 +19,7 @@ module Repositories
 
         assert_equal [ "6ème", "5ème", "4ème", "3ème", "2nde", "1ère", "Tle" ], @repository.levels.map(&:name)
         assert_equal %w[A A1 A2 C D], @repository.series.map(&:name)
-        assert_equal "Anglais", @repository.materials.first.name
+        assert_equal "Français", @repository.materials.first.name
         assert_equal "literature", @repository.materials.first.category
         assert_instance_of Entities::Catalog::Series, @repository.series.first
       end

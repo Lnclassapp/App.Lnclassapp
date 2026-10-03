@@ -67,3 +67,12 @@ La première landing de la refonte, elle, portait l'identité visuelle (UDR-0005
 - Toute nouvelle entrée de rôle (parent, établissement) passe par une nouvelle modale **et** une route existante ; le test des liens refuse sinon.
 - La landing ne promet que ce que la V1 livre ; les rôles et fonctionnalités d'une vague future y entrent avec leur vague.
 - Les contrôleurs `homepage-student-modal` et `homepage-teacher-modal` de l'ancienne application ne sont pas repris : le contrôleur `modal` du socle suffit.
+
+## Amendement du 2026-10-02 — structure remplacée par l'UDR-0064
+
+*Chantier [`docs/chantiers/refonte-homepage`](../../chantiers/refonte-homepage/prd.md), [UDR-0064](0064-page-d-accueil-un-ecran-une-decision.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- La **§3 « Structure »** (en-tête à ancres, « Commencer », section « Pour qui ? », fonctionnalités sur fond `ink`, « et plus encore ») est **remplacée** par la §3 de l'UDR-0064 : un en-tête réduit au logo et à « Se connecter », un héros qui tient dans le premier écran d'un téléphone, les matières de la grille élève (UDR-0058), trois étapes, quatre promesses, une section « Enseignants » vouvoyée, le pied avec les pages publiques en ligne (UDR-0063). Les deux entrées ne sont pas répétées en bas de page, comme l'UDR-0059 §2.2 le demande déjà. L'UDR-0064 décrit la famille ordinateur de l'UDR-0059 et s'affiche à toutes les largeurs jusqu'au lot M2 d'`interface-epuree`.
+- Les **décisions 1 à 5 du §2** (deux entrées et seulement deux, une modale chacune, la porte de l'élève, la porte de l'enseignant, aucun lien sans route) **restent** et sont vérifiées par les mêmes tests. La décision 6 reste pour le contenu (la V1, le slogan, les quatre badges) ; sa « structure de l'ancienne page » n'est plus reprise.
+- `_role_modal` : le déclencheur passe en `lg`, pleine largeur (`trigger_size:`, `trigger_full:`), et la modale nomme l'onglet par son titre (`document_title:`, UDR-0054 §3.1).
+- Décision 6 : le slogan devient « Lnclass, tu comprends chap chap ! » (porteur, 2026-10-03).

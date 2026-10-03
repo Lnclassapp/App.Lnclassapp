@@ -3,6 +3,7 @@ require Rails.root.join("db/migrate/20260928150000_create_referrals").to_s
 require Rails.root.join("db/migrate/20260928150100_add_national_code_to_schools").to_s
 require Rails.root.join("db/migrate/20260928150200_create_school_join_requests").to_s
 require Rails.root.join("db/migrate/20260929200200_add_trigram_search_indexes").to_s
+require Rails.root.join("db/migrate/20261003120000_pause_teacher_join_request_review").to_s
 
 # ADR-0063 (CP-01, CP-09): the growth tables arrive on a live database. Existing teachers each receive their own referral
 # token; existing schools keep every column they had and receive no national code. Down then up, twice, outside any
@@ -11,9 +12,10 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
   self.use_transactional_tests = false
 
   MIGRATIONS = [ CreateReferrals, AddNationalCodeToSchools, CreateSchoolJoinRequests ].freeze
-  # Later migrations whose indexes fall with a column dropped above: replayed after « up » (idempotent), so that the
-  # test database ends exactly as the schema describes it (the trigram index of schools.national_code, ADR-0067).
-  LATER = [ AddTrigramSearchIndexes ].freeze
+  # Later migrations whose indexes or constraints fall with a column or table dropped above: replayed after « up »
+  # (idempotent), so that the test database ends exactly as the schema describes it (the trigram index of
+  # schools.national_code, ADR-0067; the "auto" way of school_join_requests, ADR-0073).
+  LATER = [ AddTrigramSearchIndexes, PauseTeacherJoinRequestReview ].freeze
 
   def migrate(direction)
     order = direction == :down ? MIGRATIONS.reverse : MIGRATIONS + LATER

@@ -230,7 +230,7 @@
   <% end %>
 
   <%# ---------- Modale ---------- %>
-  <%= design_section(id: "modal", title: t(".sections.modal"), api: "ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, open:) { |modal| modal.footer { … } }") do %>
+  <%= design_section(id: "modal", title: t(".sections.modal"), api: "ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, trigger_size:, trigger_full:, open:, document_title:) { |modal| modal.footer { … } }") do %>
     <div class="flex flex-wrap gap-3" data-example="modal">
       <%= ui_modal title: t(".modal.title"), id: "demo-modal", trigger: t(".modal.open"), trigger_icon: "sparkles" do |modal| %>
         <% modal.footer do %>
@@ -242,6 +242,13 @@
       <%= ui_modal title: t(".modal.small_title"), id: "demo-modal-small", size: :sm, trigger: t(".modal.open_small"), trigger_variant: :ghost do %>
         <p class="text-mute"><%= t(".modal.body") %></p>
       <% end %>
+      <%# UDR-0064 : déclencheur `lg` pleine largeur, celui d'une entrée de rôle de la page d'accueil %>
+      <div class="w-full sm:w-72">
+        <%= ui_modal title: t(".modal.entry_title"), id: "demo-modal-entry", size: :sm, trigger: t(".modal.open_entry"),
+              trigger_variant: :brand, trigger_size: :lg, trigger_full: true do %>
+          <p class="text-mute"><%= t(".modal.body") %></p>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
