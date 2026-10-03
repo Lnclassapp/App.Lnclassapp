@@ -5,6 +5,7 @@ require "test_helper"
 # UDR-0059 §2.2 : the two entries are offered once, in the hero (no join section, no « Commencer »).
 # UDR-0063 §3.4 : the footer's second list carries the public pages that are online.
 # UDR-0062 §4 : the teacher is promised exercises to assign, never courses.
+# UDR-0066 §3.5 : « Blog » leads that list, « Plus sur Lnclass », once an article is published (BL-06).
 class HomepageControllerTest < ActionDispatch::IntegrationTest
   # UDR-0058 §3 : the subjects of the student grid, EDHC (1st cycle) and Philosophie (2nd cycle) both listed.
   SUBJECTS = [ "Mathématiques", "Physique-Chimie", "SVT", "Français", "Histoire-Géographie", "EDHC", "Philosophie" ].freeze
@@ -175,6 +176,42 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "footer #public_pages a[href='#{mission_path}']", "Notre mission"
     assert_select "footer #public_pages a[href='#{terms_path}']", "Conditions d'utilisation"
     assert_select "a[href='#{privacy_path}'], a[href='#{sales_terms_path}']", 0
+  ensure
+    Communication::PagesController.define_singleton_method(:online?, online)
+  end
+
+  test "BL-06: no « Blog » link in the footer while no article is published" do
+    author = create_team_member(team_role: "content", second_factor: false)
+    create_article(author:, status: "draft")
+    create_article(author:, status: "archived")
+
+    get root_url
+
+    assert_select "footer ul#public_pages[aria-label='Plus sur Lnclass'] li a", 4
+    assert_select "a[href='#{blog_path}']", 0
+  end
+
+  test "BL-06: once an article is published, « Blog » leads the « Plus sur Lnclass » list" do
+    create_article
+
+    get root_url
+
+    assert_select "footer ul#public_pages[aria-label='Plus sur Lnclass'] li a", 5 do |links|
+      assert_equal [ blog_path, mission_path, privacy_path, terms_path, sales_terms_path ], links.map { it["href"] }
+      assert_equal "Blog", links.first.text
+    end
+    assert_select "a[href='#{blog_path}']", 1
+  end
+
+  test "with no public page online, a published article alone makes the second list" do
+    online = Communication::PagesController.method(:online?)
+    Communication::PagesController.define_singleton_method(:online?) { |*| false }
+    create_article
+
+    get root_url
+
+    assert_select "footer #public_pages li a", 1
+    assert_select "footer #public_pages a[href='#{blog_path}']", "Blog"
   ensure
     Communication::PagesController.define_singleton_method(:online?, online)
   end

@@ -1,6 +1,6 @@
 <%# 🌐 UI · homepage/index — page d'accueil publique : un écran, une décision %>
 <%# Rôle : le héros porte les deux entrées de rôle (modales, TR-01) ; la page descend du général au particulier et ne promet que la V1 %>
-<%# UDR  : 0064, 0059 (famille ordinateur : entrées dans le héros seulement), 0063 (§3.4, pied), 0012 (§2), 0054 · ADR : 0049, 0051 %>
+<%# UDR  : 0064, 0059 (famille ordinateur : entrées dans le héros seulement), 0063 (§3.4, pied), 0066 (§3.5, lien « Blog »), 0012 (§2), 0054 · ADR : 0049, 0051 %>
 <% page_title t(".page_title") %>
 <%# Les matières que Lnclass propose, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3), EDHC au 1er cycle et Philosophie au 2nd ;
     la teinte vient de la catégorie du référentiel (ADR-0034). %>
@@ -145,8 +145,9 @@
         <li><%= link_to t(".footer.sign_in"), new_session_path, class: "inline-flex min-h-tap items-center hover:text-ink" %></li>
       </ul>
     </div>
-    <%# UDR-0063 §3.4 : seconde liste, les pages publiques en ligne seulement ; absente tant qu'aucune ne l'est %>
-    <% if (public_links = public_page_links).any? %>
+    <%# UDR-0063 §3.4, UDR-0066 §3.5 : seconde liste, « Plus sur Lnclass » : « Blog » dès un article publié, puis les pages
+        publiques en ligne seulement ; absente tant qu'aucun lien n'existe %>
+    <% if (public_links = [ blog_link, *public_page_links ].compact).any? %>
       <div class="mx-auto max-w-page px-gutter pb-8">
         <ul id="public_pages" aria-label="<%= t(".footer.public_pages") %>"
             class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-mute sm:justify-end">

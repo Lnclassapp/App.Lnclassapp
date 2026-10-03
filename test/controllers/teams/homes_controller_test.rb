@@ -130,8 +130,35 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
 
     get team_home_path
 
-    assert_select "#team_home_shortcuts a", 5
+    assert_select "#team_home_shortcuts a", 6
     assert_select "a[href='#{new_teams_invitation_path}']", 0
+  end
+
+  test "BL-08 (UDR-0067 §3.1): the « Blog » shortcut, after « Croissance » and before the invitation, for admin and content" do
+    sign_in_as @member
+
+    get team_home_path
+
+    shortcuts = css_select("#team_home_shortcuts a").pluck("href")
+    assert_equal shortcuts.index(teams_growth_path) + 1, shortcuts.index(teams_articles_path)
+    assert_equal shortcuts.index(teams_articles_path) + 1, shortcuts.index(new_teams_invitation_path)
+    assert_select "a#team_home_blog_shortcut[href='#{teams_articles_path}']:not([data-turbo-frame])", text: including(tl("shortcuts.blog"))
+    sign_out
+
+    sign_in_as create_team_member(team_role: "content")
+    get team_home_path
+    assert_select "a#team_home_blog_shortcut[href='#{teams_articles_path}']"
+  end
+
+  test "BL-08: a field member does not see the « Blog » shortcut" do
+    sign_in_as create_team_member(team_role: "field")
+
+    get team_home_path
+
+    assert_response :success
+    assert_select "#team_home_shortcuts"
+    assert_select "#team_home_blog_shortcut", 0
+    assert_select "a[href='#{teams_articles_path}']", 0
   end
 
   test "the recent content is a lazy frame, which receives only its partial" do

@@ -115,6 +115,9 @@ Une seule table `classroom_assignments` remplace les anciennes `classroom_course
 | Terme | Définition |
 |---|---|
 | **Message** | Annonce diffusée par l'équipe (nationale ou pour une école) ou par une direction (pour son école). **`audience`** : `all`, `students`, `teachers`, `school_admins` ; pas d'audience `teams`, l'équipe voit tout. **`status`** : `draft`, `scheduled`, `published`, `archived` ; un job publie les annonces programmées. L'audience est filtrée à la lecture, y compris par l'URL ([ADR-0045](../decisions/adr/0045-annonces-publication-programmee-et-audience.md)). `Entities::Communication::Message` |
+| **Article** | Texte public du **blog** (`/blog`), écrit par l'équipe Administration et Contenu, lisible sans compte, partageable et indexé. Texte riche illustré, adressé par un **slug figé** (`/blog/:slug`) ; cycle des contenus `draft` → `published` → `archived` → `published` (`ContentStatus`), « remettre en ligne » garde la date d'origine ; un archivé répond 410 ; jamais supprimé. Signé « L'équipe Lnclass » ou du nom de son auteur. Compteur de lectures brut, sans dédoublonnage, vu de l'équipe seule ([ADR-0074](../decisions/adr/0074-blog-public-articles-images-et-referencement.md)). `Entities::Communication::Article` |
+| **Image d'article** | Couverture ou image du texte d'un article : JPEG, PNG ou WebP fixe, 1 Mo et 1600 px de côté au plus, sans métadonnées, 10 dans le texte au plus. Son **texte de remplacement** (jamais « alt » à l'écran) est exigé pour publier. Servie par Lnclass à `/blog/images/:public_id`. `Entities::Communication::ArticleImage` |
+| ❌ **Article ≠ annonce** | Un **article** est public, sans audience ni établissement, ni programmation, adressé par slug. Une **annonce** (`Message`) est connectée, ciblée par audience et établissement, en texte simple, programmable, adressée par `public_id`. Deux tables, deux jeux de use cases ; aucun ne lit l'autre. À l'écran, jamais « post » ni « billet ». |
 
 ---
 
@@ -148,7 +151,7 @@ Où la macro est appelée : `Orm::Level`, `Orm::Series`, `Orm::Material`, `Orm::
 
 ### `slug`
 
-Identifiant lisible dérivé d'un nom, **réservé au catalogue** : niveaux, séries, matières, cours et fiches essentielles. Dérivé par `parameterize`, suffixé `-2`, `-3`… en cas de collision, puis **figé à la création** : renommer ne casse aucun lien. `friendly_id` n'est pas repris ([ADR-0029](../decisions/adr/0029-identifiants-exposes-public-id-et-slugs.md)). Un compte n'a jamais de slug ([ADR-0037](../decisions/adr/0037-nom-et-prenoms-en-deux-champs.md)) ; une session ou un badge prend un `public_id`.
+Identifiant lisible dérivé d'un nom, **réservé au catalogue et au blog** : niveaux, séries, matières, cours, fiches essentielles et articles du blog (adresse publique `/blog/:slug`, [ADR-0074](../decisions/adr/0074-blog-public-articles-images-et-referencement.md)). Dérivé par `parameterize`, suffixé `-2`, `-3`… en cas de collision, puis **figé à la création** : renommer ne casse aucun lien. `friendly_id` n'est pas repris ([ADR-0029](../decisions/adr/0029-identifiants-exposes-public-id-et-slugs.md)). Un compte n'a jamais de slug ([ADR-0037](../decisions/adr/0037-nom-et-prenoms-en-deux-champs.md)) ; une session ou un badge prend un `public_id`.
 
 L'ancien dépôt mêle `friendly_id` (y compris sur `Orm::User`) et des slugs aléatoires de 21 caractères sur les sessions et les badges : ne les reproduis pas.
 
