@@ -91,3 +91,9 @@ L'équipe a besoin de voir l'état de la plateforme d'un coup d'œil, et d'attei
 
 - Les raccourcis gagnent **« Blog »** (`secondary`, icône `newspaper`, vers `teams_articles_path`, id `team_home_blog_shortcut`), entre « Croissance » et « Inviter un membre », **réservé aux sous-rôles `admin` et `content`** ([UDR-0067](0067-gestion-du-blog-par-l-equipe.md) §3.1). La vue ne teste pas le rôle : `Teams::HomesController#show` calcule `@can_manage_blog` par `Policies::Communication::ManageArticlesPolicy`, comme `@can_invite`.
 - C'est le seul accès à `/teams/blog` depuis l'interface : la navigation de l'équipe reste à 5 destinations (UDR-0006). Texte : `teams.homes.shortcuts.blog` « Blog ».
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0068](0068-configuration-et-pilotage-par-etablissement.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Le Référentiel quitte l'accueil** pour sa page `/teams/referential` (UDR-0068 §3.4), atteinte par la carte « Configuration » de la barre latérale ou le menu « Plus ». L'accueil garde ses raccourcis, « Régions éducatives » et « Activité récente ».

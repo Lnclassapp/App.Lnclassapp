@@ -125,3 +125,9 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 **Vérification**
 - `test/system/assessment/exercise_page_test.rb` : badge, meilleure note, maîtrise et sessions visibles pour l'élève (Q4) ; contexte « <cours> » seul ; 3 questions puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'enseignant voit le contexte complet, toutes les questions, `reveal_hint` et aucun « Voir plus ».
 - `test/controllers/assessment/exercises_controller_test.rb` : l'assertion sur `student_hint` vise désormais le panneau de l'infobulle ; ligne de contexte (élève : le cours seul ; enseignant et équipe : complète) et « Meilleure note » en /20.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Enseignant** : après l'en-tête d'un exercice publié, la carte « Assigner à mes classes » (`#exercise_assign`) porte une bascule par classe de l'enseignant au niveau et à la série du cours (UDR-0069 §3.8).

@@ -199,3 +199,10 @@ Ce qui ne change pas pour l'élève :
 - **Amendement du 2026-10-01, puce « Assignation »** : la règle de niveau vaut désormais pour le seul exercice ; « Cela vaut pour le cours, la fiche et l'exercice » se lit « Elle vaut pour l'exercice ».
 - **Amendement du 2026-10-01, puce « Autres rôles »** : l'enseignant lit toujours tous les niveaux ; il assigne depuis sa classe (UDR-0062 §3.4), plus depuis le catalogue.
 - **Vérification** : `test/controllers/catalog/courses_controller_test.rb` — sur la page d'un cours, un enseignant ne voit aucun lien vers `course_assignments_path`, ni aucun bouton « Assigner » ; l'équipe garde `#course-actions-menu`.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Filtre « Série »** (UDR-0069 §3.4) pour l'enseignant et l'équipe : avec un niveau, il garde les cours sans série et ceux de la série choisie (la règle de l'élève). `FILTERS = %i[level series material q]`.
+- **Puce « Autres rôles » de l'amendement du 2026-10-01** : l'enseignant assigne depuis sa classe **et** depuis le catalogue (fiche essentielle, page d'un exercice), aux seules classes de son niveau (UDR-0069 §3.8). La page d'un cours n'a toujours aucun bouton d'assignation.
