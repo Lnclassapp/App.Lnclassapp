@@ -202,6 +202,21 @@ class Teams::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]:not([request-id])"
   end
 
+  test "BL-07: an admin member creates a draft and a content member updates it; each gesture audited under its own actor" do
+    sign_in_as @admin
+    post teams_articles_path, params: article_params, as: :turbo_stream
+    assert_response :success
+    article = Orm::Article.sole
+
+    sign_in_as @content
+    patch teams_article_path(article.public_id), params: article_params(title: "Titre corrigé"), as: :turbo_stream
+    assert_response :success
+
+    assert_equal [ @admin.id, "Titre corrigé" ], [ article.reload.author_id, article.title ]
+    assert_equal [ [ @admin.id, "Article", article.id ] ], audited("article.created")
+    assert_equal [ [ @content.id, "Article", article.id ] ], audited("article.updated")
+  end
+
   test "an invalid entry reopens the modal in 422, typed values, text and images kept" do
     image = create_article_image
     sign_in_as @content
