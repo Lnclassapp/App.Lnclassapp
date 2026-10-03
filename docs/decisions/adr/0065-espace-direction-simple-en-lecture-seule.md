@@ -8,7 +8,7 @@
 | **Amende** | [ADR-0044](./0044-rattachement-de-la-direction-par-invitation.md) : fonctions, second facteur, inviteurs, départ · [ADR-0025](./0025-pin-a-4-chiffres-comme-secret-d-authentification.md), compensation 5, pour `school_admin` |
 | **Complète** | [ADR-0062](./0062-indicateurs-de-pilotage-lus-en-direct.md) (définitions et lecture en direct) |
 | **Remplace** | — |
-| **Remplacé par** | — *(amendé par [ADR-0069](./0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) le 2026-10-03, statut `Proposé` : la direction écrit des annonces, hors de `/school-admin` ; §2, §4)* |
+| **Remplacé par** | — *(amendé par [ADR-0069](./0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) le 2026-10-03, accepté le même jour : la direction écrit des annonces, hors de `/school-admin` ; §2, §4)* |
 
 ---
 

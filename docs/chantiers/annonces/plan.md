@@ -4,7 +4,7 @@
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 > Entrées : [memo](memo.md) · [PRD](prd.md) · [ADR-0069](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) (amende l'[ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md)) · [UDR-0056](../../decisions/udr/0056-annonces.md).
 
-**Condition d'entrée du Lot 0** (programme `refonte-application`, [`programme.md` §2](../../workflows/programme.md#2-décider--prdmd-cadre--adrudr-de-fondation)) : l'**ADR-0069** et l'**UDR-0056** sont `Accepté` par le porteur. Une décision « Proposé » ne débloque rien.
+**Condition d'entrée du Lot 0** (programme `refonte-application`, [`programme.md` §2](../../workflows/programme.md#2-décider--prdmd-cadre--adrudr-de-fondation)) : l'**ADR-0069** et l'**UDR-0056** sont `Accepté` par le porteur. Une décision « Proposé » ne débloque rien. **Tenue : acceptées le 2026-10-03.**
 
 ## Graphe
 
@@ -200,12 +200,12 @@ Critères orphelins : **aucun**. AN-01 à AN-23 sont tous rattachés (voir « Do
 
 ## Portes de sortie
 
-- [ ] `memo.md` complet, section `Hors périmètre` non vide
-- [ ] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
-- [ ] `prd.md` : critères d'acceptation en Gherkin, tous testables
-- [ ] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
-- [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
-- [ ] `plan.md` : 4 champs par lot, tableau de collision rempli
+- [x] `memo.md` complet, section `Hors périmètre` non vide
+- [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
+- [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
+- [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
+- [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
+- [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
@@ -216,7 +216,7 @@ Critères orphelins : **aucun**. AN-01 à AN-23 sont tous rattachés (voir « Do
 
 Propres à ce chantier :
 
-- [ ] ADR-0069 et UDR-0056 `Accepté` **avant** le Lot 0 (programme, décisions de fondation)
+- [x] ADR-0069 et UDR-0056 `Accepté` **avant** le Lot 0 (programme, décisions de fondation)
 - [ ] Registre des contradictions de la feuille de route mis à jour (PRD cadre ↔ ADR-0045, design system §10 ↔ ADR-0045, ADR-0065 ↔ ce chantier) ; fiche V6 précisée (« riches » = image et audio)
 - [ ] Budget de l'accueil élève (ADR-0067) tenu avec le carrousel : nombre de requêtes constant, mesuré
 

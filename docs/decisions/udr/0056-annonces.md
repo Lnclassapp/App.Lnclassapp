@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-10-03)* |
 | **Date** | 2026-10-03 |
 | **Chantier** | [`docs/chantiers/annonces`](../../chantiers/annonces/prd.md) |
 | **ADR lié** | [ADR-0045](../adr/0045-annonces-publication-programmee-et-audience.md) · [ADR-0069](../adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) |

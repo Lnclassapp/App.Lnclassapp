@@ -224,8 +224,8 @@ Détail et code : [ADR-0069 §6](../../decisions/adr/0069-annonces-trois-auteurs
 ## 6. Décisions rattachées
 
 - [ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md) — annonces : job de publication, audience filtrée, rejets en base, pièces jointes validées *(accepté)*.
-- [ADR-0069](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) — amende l'ADR-0045 (enseignant auteur, classes ciblées, date de fin, officiel, illustration, texte court sans page de détail, retrait, rejets effacés à la modification) et l'ADR-0065 (la direction écrit des annonces, hors de `/school-admin`). **À accepter avant le Lot 0.**
-- [UDR-0056](../../decisions/udr/0056-annonces.md) — carrousel de l'accueil élève, page « Annonces », formulaire d'annonce, navigation ; amende l'UDR-0006 (navigation) et l'UDR-0052 (espace direction) ; écart assumé avec le design system Lnclass §10 (audio). **À accepter avant le Lot 0.**
+- [ADR-0069](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) — amende l'ADR-0045 (enseignant auteur, classes ciblées, date de fin, officiel, illustration, texte court sans page de détail, retrait, rejets effacés à la modification) et l'ADR-0065 (la direction écrit des annonces, hors de `/school-admin`). **Accepté le 2026-10-03.**
+- [UDR-0056](../../decisions/udr/0056-annonces.md) — carrousel de l'accueil élève, page « Annonces », formulaire d'annonce, navigation ; amende l'UDR-0006 (navigation) et l'UDR-0052 (espace direction) ; écart assumé avec le design system Lnclass §10 (audio). **Accepté le 2026-10-03.**
 
 ## 7. Mesures
 

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(par le porteur le 2026-10-03)* |
 | **Date** | 2026-10-03 |
 | **Chantier** | [`docs/chantiers/annonces`](../../chantiers/annonces/prd.md) — critères AN-01 à AN-23 · programme `refonte-application`, vague V6a |
 | **Amende** | [ADR-0045](./0045-annonces-publication-programmee-et-audience.md) §4 (table, droits, lecture, pièces jointes) et §7 · [ADR-0065](./0065-espace-direction-simple-en-lecture-seule.md) §2 (moteur 2) et §4 (la direction n'écrit rien) |
