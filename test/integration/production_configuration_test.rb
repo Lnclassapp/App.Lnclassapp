@@ -59,6 +59,15 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     assert_equal [ "localhost" ], hosts
   end
 
+  test "a canonical host that production does not serve is warned about at boot, once; a served one is not" do
+    warning = "CANONICAL_HOST lnclass.com is not in config.hosts"
+    _, unserved = EnvironmentProbe.run_with_output("production", "true", env: RAILWAY)
+    _, served = EnvironmentProbe.run_with_output("production", "true", env: RAILWAY.merge("CANONICAL_HOST" => "www.lnclass.app"))
+
+    assert_equal 1, unserved.scan(warning).size, unserved
+    assert_no_match(/is not in config\.hosts/, served)
+  end
+
   test "jobs go to Solid Queue" do
     assert_equal "solid_queue", production["queue_adapter"]
   end
