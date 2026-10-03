@@ -266,4 +266,32 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       sign_out
     end
   end
+
+  # UDR-0066 §3.5 (amendement de l'UDR-0061 §3.3): the footer of the help sheet, « Plus sur Lnclass », carries « Blog »
+  # from the first published article (BL-06), a plain link to /blog, which a signed-in student reads without redirect
+  # (BL-20, test/integration/communication/articles_test.rb). The sheet itself opens in test/system/communication/help_sheet_test.rb.
+  def help_sheet_footer_links
+    css_select("dialog#help-sheet nav#help_sheet_links[aria-label='#{I18n.t('shared.help_sheet.footer.label')}'] li a")
+      .map { [ it.text.squish, it["href"] ] }
+  end
+
+  test "BL-06: without a published article, the footer of the help sheet offers the mission and the legal pages, no « Blog »" do
+    create_article(author: create_team_member(team_role: "content", second_factor: false), status: "draft")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal [ [ "Notre mission", mission_path ], [ "Protection des données", privacy_path ],
+                   [ "Conditions d'utilisation", terms_path ] ], help_sheet_footer_links
+  end
+
+  test "BL-06, BL-20: once an article is published, « Blog » leads the footer of the help sheet and links to the list" do
+    create_article(title: "Réviser le BEPC en 4 semaines")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal [ [ "Blog", blog_path ], [ "Notre mission", mission_path ], [ "Protection des données", privacy_path ],
+                   [ "Conditions d'utilisation", terms_path ] ], help_sheet_footer_links
+  end
 end
