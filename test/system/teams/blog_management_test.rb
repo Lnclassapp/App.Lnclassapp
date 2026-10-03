@@ -1,16 +1,32 @@
 require "application_system_test_case"
 
-# UDR-0067 §3.10, ADR-0074 §7 — the team writes the blog in the browser, end to end (chantier blog, nominal path A):
-# a Contenu member opens « Blog » from the team home, writes a draft with a cover and two images in its text (shrunk in
-# the browser, sent to the team endpoint while Trix shows its progress bar), leaves one text alternative empty, sees the
-# publication refused on that image (BL-13), completes it, publishes (BL-07), reads the public page with its images
-# served by Lnclass (BL-14), archives, puts it back online, and a visitor meets « Cet article n'est plus disponible ».
-# Error paths: a GIF, a fake .jpg, an image too heavy even shrunk and an image pasted from a web page are refused with
-# their reason (BL-12). The course editor still refuses any image (BL-15). Everything under the strict CSP.
+# UDR-0067 §3.10, ADR-0074 §7 — the team writes the blog in the browser, end to end, in one journey that signs in once
+# (ADR-0069 §9, budget of the system suite). First, the course editor still refuses any image (BL-15). Nominal path A: a
+# Contenu member opens « Blog » from the team home, writes a draft with a cover (taken off, then chosen again) and two
+# images in its text (shrunk in the browser, sent to the team endpoint while Trix shows its progress bar), leaves one text
+# alternative empty, sees the publication refused on that image (BL-13), takes an image out of the text and brings it
+# back, completes it, publishes (BL-07), reads the public page with its images served by Lnclass (BL-14) and archives,
+# under the strict CSP. Then, on a phone, the list and the modal never scroll sideways (C1); in that modal, a GIF, a fake
+# .jpg, an image too heavy even shrunk and an image pasted from a web page are refused with their reason (BL-12), and an
+# upload that never answers, fails while « Créer le brouillon » waits, or meets an expired session frees the editor and
+# the cover. Last, a visitor on a phone meets « Cet article n'est plus disponible », and titles of one word wider than
+# the screen wrap on the public pages (C1).
+#
+# Only what needs a browser is here. The rest is proven without one: what the server renders and refuses in
+# test/controllers/teams/articles_controller_test.rb (the edit modal and its images, BL-13 in 422, publish, archive and
+# republish morphed and audited, a save without cover deletes it), the endpoint's answers in
+# test/controllers/teams/article_images_controller_test.rb (BL-12 in 422, 401 on an expired session), the public page in
+# test/controllers/communication/articles_controller_test.rb (BL-14: src, alt, lazy) and
+# test/integration/communication/articles_test.rb (BL-05: 410; BL-11: put back online at the same address).
 class Teams::BlogManagementTest < ApplicationSystemTestCase
-  # Shrinking a 4000 px photo, then sending it, under a loaded full suite.
+  # Shrinking a photo, then sending it, under a loaded full suite.
   UPLOAD_WAIT = 20
   IMAGE = Entities::Communication::ArticleImage
+  # C1: titles that carry one word wider than a phone, measured at 360 and 390 px. An address pasted in a title is a single
+  # « word » of 50 characters, wider than a card of 360 px.
+  LONG_TITLE = "Anticonstitutionnellement : le mot le plus long du français".freeze
+  URL_TITLE = "Inscriptions sur lnclass.com/eleves/inscription-rentree-2026".freeze
+  PHONES = [ [ 360, 780 ], MOBILE_VIEWPORT ].freeze
 
   setup do
     @member = create_team_member(team_role: "content", first_name: "Awa", last_name: "Koné")
@@ -28,12 +44,44 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
   def fixture(path) = file_fixture(path).to_s
   def editor = find_rich_text_editor("trix-editor#article_body")
 
-  test "a draft with a cover and two shrunk images, refused then published, read in public, archived, then gone" do
+  test "path A: a draft with a cover and two shrunk images, refused then published, read in public, archived; every refusal; then gone" do
+    # Two published articles whose titles carry one word wider than a phone (C1).
+    long_article = create_article(author: @member, title: LONG_TITLE, cover: create_article_image)
+    url_article = create_article(author: @member, title: URL_TITLE, published_at: 1.day.ago)
+    stored = Orm::ArticleImage.count
+
+    # 1. BL-15, from the team home, before any upload of the blog: the course editor still refuses any image, no button, a
+    # dropped photo never reaches the server.
+    create_course(name: "Génétique et évolution")
+    open_in_modal(new_teams_course_path)
+    within "turbo-frame#modal dialog[open]" do
+      course_editor = find_rich_text_editor
+      course_editor.click
+      course_editor.send_keys("ADN")
+      drop_generated_image(name: "schema.jpg", width: 160, height: 120)
+      assert_no_selector "trix-editor figure, trix-editor [data-trix-attachment]"
+      assert_no_text tf("insert_image")
+      assert_text "ADN"
+      find("button[aria-label='#{t('components.modal.close')}']").click
+    end
+    assert_no_selector "turbo-frame#modal dialog[open]"
+    assert_equal stored, Orm::ArticleImage.count
+    assert page.evaluate_script("!performance.getEntriesByType('resource').some((entry) => /\\/teams\\/blog\\/images/.test(entry.name))")
+
     assert_no_page_reload do
-      # 1. The shortcut, the empty list, the draft with its cover and two images of the text.
+      # 2. The shortcut leads to the list. On a phone, at 360 then 390 px, the titles of one wide word never make it scroll
+      # sideways and the ⋮ menu is visible at once; neither does the modal, whose « Insérer une image » shows once Trix is
+      # ready (C1). Back on a computer, the draft with its cover and two images of the text.
       within("#team_home_shortcuts") { click_on t("teams.homes.shortcuts.blog") }
-      assert_selector "#teams_articles_empty", text: t("teams.articles.index.empty_title")
-      click_on "teams_articles_new"
+      with_mobile_viewport(PHONES.first) do
+        assert_selector "tr#article_#{long_article.public_id}", text: LONG_TITLE
+        assert find("button[aria-controls=article-actions-#{long_article.public_id}]").visible?
+        assert_no_horizontal_scroll "main", "tr#article_#{url_article.public_id} td:first-child", sizes: PHONES
+        click_on "teams_articles_new"
+        within("turbo-frame#modal dialog[open]") { editor }
+        assert_selector "#article_insert_image"
+        assert_no_horizontal_scroll
+      end
 
       within "turbo-frame#modal dialog[open]" do
         fill_in "article[title]", with: "Réviser le BEPC en quatre semaines"
@@ -42,20 +90,22 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         attach_file "article_cover_file", fixture("photos/photo.jpg")
         assert_selector "#article_cover_preview[src^='/blog/images/']", wait: UPLOAD_WAIT
         assert_no_selector "#article_cover_placeholder"
-        assert_selector "#article_cover_remove"
         assert_equal "", find("#article_cover_file").value, "le fichier ne part jamais avec le formulaire"
-        fill_in "article[cover_alt]", with: "Une élève révise à sa table"
-
+        # « Retirer la couverture » empties the field the form sends (a save without it deletes the cover: controller test).
+        click_on tf("cover_remove")
+        assert_selector "#article_cover_placeholder"
+        assert_no_selector "#article_cover_preview"
+        assert_no_selector "#article_cover_remove"
+        assert_equal "", find("#article_cover_public_id", visible: :hidden).value
+        assert page.evaluate_script("document.activeElement.id === 'article_cover_file'")
+        # The cover chosen again is sent while the first image of the text is shrunk and sent.
+        attach_file "article_cover_file", fixture("photos/photo.jpg")
         editor.click
         editor.send_keys("Première semaine : les fractions.")
-        # The endpoint holds the upload until the test releases it: while it is in flight, Trix shows its progress bar on
-        # the attachment and the editor is busy, however loaded the machine (a throttled network made this a race).
-        hold_uploads do |release|
-          drop_generated_image(name: "tableau.jpg", width: 4000, height: 3000)
-          assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
-          assert_selector "#article_editor[aria-busy=true]"
-          release.call
-        end
+        drop_generated_image(name: "tableau.jpg", width: 2000, height: 1500)
+        assert_selector "#article_cover_preview[src^='/blog/images/']", wait: UPLOAD_WAIT
+        assert_selector "#article_cover_remove"
+        fill_in "article[cover_alt]", with: "Une élève révise à sa table"
         image1 = assert_image_row(1)
         assert_selector "#article_body_upload_status", text: image_message("uploaded", number: 1), visible: :all
         within("##{image1}") { assert_text tf("image_alt_missing") }
@@ -64,14 +114,17 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         within("##{image1}") { assert_no_text tf("image_alt_missing") }
 
         editor.send_keys([ :control, :end ], "Deuxième semaine : la géométrie.")
-        # « Créer le brouillon » during an upload waits for it, then the article leaves with both images.
+        # The endpoint holds the upload until the test releases it: while it is in flight, Trix shows its progress bar on
+        # the attachment and the editor is busy, however loaded the machine (a throttled network made this a race).
+        # « Créer le brouillon » during the upload waits for it, then the article leaves with both images.
         hold_uploads do |release|
           attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
           assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
+          assert_selector "#article_editor[aria-busy=true]"
           mark_host_page
           click_on t("teams.articles.new.submit")
           assert_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
-          assert_equal 0, Orm::Article.count, "« Créer le brouillon » attend l'envoi en cours"
+          assert_not Orm::Article.exists?(title: "Réviser le BEPC en quatre semaines"), "« Créer le brouillon » attend l'envoi en cours"
           release.call
         end
       end
@@ -79,205 +132,30 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog[open]"
       assert_no_selector "main[data-before-refresh]"
 
-      article = Orm::Article.sole
+      article = Orm::Article.find_by!(title: "Réviser le BEPC en quatre semaines")
       images = article.body.body.attachables.grep(Orm::ArticleImage)
-      assert_equal [ [ 1600, 1200 ], [ 640, 480 ] ], images.map { [ it.width, it.height ] }, "la photo de 4000 px est réduite à 1600"
+      assert_equal [ [ 1600, 1200 ], [ 640, 480 ] ], images.map { [ it.width, it.height ] }, "la photo de 2000 px est réduite à 1600"
       assert_equal [ "Le tableau des fractions de la première semaine", nil ], images.map(&:alt)
       assert_equal [ 64, 48, "Une élève révise à sa table" ], [ article.cover_image.width, article.cover_image.height, article.cover_alt ]
       row = "tr#article_#{article.public_id}"
       assert_selector "#teams_articles_list tr:first-child#article_#{article.public_id}", text: t("teams.articles.status.draft")
 
-      # 2. Publication refused on image 2 (BL-13), completed, saved, published (BL-07).
+      # 3. Publication refused on image 2 (BL-13). In the modal, an image taken out of the text hides its row, undo brings
+      # it back; the missing alternative is completed, Enter returns to the text; saved, then published (BL-07).
       click_menu_action row, t("teams.articles.menu.publish")
       within "turbo-frame#modal dialog[open]" do
         assert_selector "#article_publish_refused", text: t("teams.articles.edit_modal.refused_title")
+        first_row = "#article_image_#{images.first.public_id}"
+        second_row = "#article_image_#{images.second.public_id}"
         missing = "article_image_alts_#{images.second.public_id}"
         image_alt_blank = t("activemodel.errors.models.dtos/communication/article_input.image_alt_blank", number: 2)
         assert_selector "##{missing}_error", text: image_alt_blank
         assert_selector "##{missing}[aria-invalid=true]"
-        assert_selector "trix-editor figure img[src='/blog/images/#{images.first.public_id}']"
-        fill_in missing, with: "La figure de géométrie de la deuxième semaine"
-        mark_host_page
-        click_on t("teams.articles.edit_modal.submit")
-      end
-      assert_toast t("teams.articles.update.updated", title: article.title)
-      assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_no_selector "main[data-before-refresh]"
-      assert_selector row, text: t("teams.articles.status.draft")
-
-      click_menu_action row, t("teams.articles.menu.publish")
-      assert_toast t("teams.articles.transition.published", title: article.title)
-      assert_selector row, text: t("teams.articles.status.published")
-      assert_equal "published", article.reload.status
-
-      # 3. The public page shows the cover and both images, served by Lnclass (BL-14); archive, put back online.
-      click_menu_action row, t("teams.articles.menu.view")
-      assert_current_path blog_article_path(article.slug)
-      assert_selector "h1", text: article.title
-      [ article.cover_image, *images ].each do |image|
-        assert_selector "img[src='/blog/images/#{image.public_id}'][alt]"
-        assert image_loaded?("/blog/images/#{image.public_id}"), "l'image #{image.public_id} n'est pas servie"
-      end
-      assert_selector "img[alt='La figure de géométrie de la deuxième semaine'][loading=lazy]"
-      page.go_back
-      assert_current_path teams_articles_path
-
-      click_menu_action row, t("teams.articles.menu.archive")
-      assert_toast t("teams.articles.transition.archived", title: article.title)
-      assert_selector row, text: t("teams.articles.status.archived")
-      click_menu_action row, t("teams.articles.menu.republish")
-      assert_toast t("teams.articles.transition.republished", title: article.title)
-      assert_selector row, text: t("teams.articles.status.published")
-      click_menu_action row, t("teams.articles.menu.archive")
-      assert_selector row, text: t("teams.articles.status.archived")
-    end
-    assert_empty page.evaluate_script("window.cspViolations")
-
-    # A visitor follows the shared link of the archived article.
-    sign_out
-    visit blog_article_path(Orm::Article.sole.slug)
-    assert_selector "#article_gone h1", text: t("communication.articles.gone.title")
-    assert_no_text "Réviser le BEPC"
-  end
-
-  test "a GIF, a fake .jpg, an image too heavy even shrunk and an image from a web page are refused with their reason" do
-    visit teams_articles_path
-    assert_no_page_reload do
-      click_on "teams_articles_new"
-      within "turbo-frame#modal dialog[open]" do
-        editor.click
-        # Trix's own attach button speaks French too, like the rest of its toolbar.
-        assert_selector "trix-toolbar [data-trix-action=attachFiles][title='Insérer une image']", visible: :all
-        assert_no_selector "trix-toolbar [title='Attach Files']", visible: :all
-        editor.send_keys("Un texte.")
-
-        attach_file(fixture("article_images/animation.gif")) { click_on tf("insert_image") }
-        assert_selector "#article_body_upload_errors", text: refused("animation.gif", image_message("format"))
-        attach_file(fixture("article_images/fake.jpg")) { click_on tf("insert_image") }
-        unreadable = t("activemodel.errors.models.dtos/communication/article_image_input.attributes.file.unreadable")
-        assert_selector "#article_body_upload_errors", text: refused("fake.jpg", unreadable), wait: UPLOAD_WAIT
-        assert_no_selector "#article_body_upload_errors", text: "animation.gif"
-
-        drop_generated_image(name: "bruit.png", width: 1600, height: 1600, noise: true)
-        assert_selector "#article_body_upload_errors", text: refused("bruit.png", image_message("too_heavy")), wait: UPLOAD_WAIT
-
-        paste_html_into_editor(%(<p>Vu ailleurs</p><img src="https://images.example.com/photo.jpg" width="20" height="20">))
-        assert_selector "#article_body_upload_errors", text: refused("photo.jpg", image_message("web_image"))
-
-        assert_no_selector "trix-editor figure"
-        assert_selector "#article_images", visible: :hidden
-
-        attach_file "article_cover_file", fixture("article_images/animation.gif")
-        assert_selector "#article_cover_upload_error", text: refused("animation.gif", image_message("format"))
-        assert_selector "#article_cover_file[aria-invalid=true]"
-        assert_includes find("#article_cover_file")["aria-describedby"], "article_cover_upload_error"
-        assert_selector "#article_cover_placeholder"
-        assert_equal "", find("#article_cover_public_id", visible: :hidden).value
-      end
-    end
-    assert_equal 0, Orm::ArticleImage.count, "rien n'est stocké (BL-12)"
-  end
-
-  test "« Créer le brouillon » during an upload that fails keeps the modal: nothing is saved, the refusal takes the focus" do
-    visit teams_articles_path
-    assert_no_page_reload do
-      click_on "teams_articles_new"
-      within "turbo-frame#modal dialog[open]" do
-        fill_in "article[title]", with: "Un envoi qui échoue"
-        editor.click
-        editor.send_keys("Un texte.")
-
-        # An image of the text: its upload answers 500 while « Créer le brouillon » waits for it.
-        hold_uploads do |release|
-          attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
-          assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
-          click_on t("teams.articles.new.submit")
-          assert_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
-          release.call(500)
-        end
-        assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("failed")), wait: UPLOAD_WAIT
-        assert_selector "#article_body_upload_errors", text: image_message("not_saved")
-        assert_no_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
-        assert page.evaluate_script("document.activeElement.id === 'article_body_upload_errors'"), "le refus prend le focus"
-        assert_no_selector "trix-editor figure"
-
-        # The cover: same rule.
-        hold_uploads do |release|
-          attach_file "article_cover_file", fixture("photos/photo.jpg")
-          assert_selector "#article_cover[aria-busy=true]"
-          click_on t("teams.articles.new.submit")
-          assert_selector "#article_cover_status", text: image_message("waiting")
-          release.call(500)
-        end
-        assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("failed")), wait: UPLOAD_WAIT
-        assert_selector "#article_cover_upload_error", text: image_message("not_saved")
-        assert page.evaluate_script("document.activeElement.id === 'article_cover_upload_error'"), "le refus prend le focus"
-        assert_selector "#article_cover_placeholder"
-      end
-      assert_selector "turbo-frame#modal dialog[open]"
-    end
-    assert_equal 0, Orm::Article.count, "rien n'est enregistré sans l'image"
-  end
-
-  test "an upload that never answers gives up after its delay: the editor and the cover are free again" do
-    visit teams_articles_path
-    assert_no_page_reload do
-      click_on "teams_articles_new"
-      within "turbo-frame#modal dialog[open]" do
-        editor.click
-        # 60 s in production; one second here, through the value the controllers read.
-        page.execute_script(<<~JS)
-          document.querySelector("#article_editor").setAttribute("data-rich-text-editor-upload-timeout-value", "1000")
-          document.querySelector("#article_cover").setAttribute("data-communication--cover-picker-upload-timeout-value", "1000")
-        JS
-
-        hold_uploads do
-          attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
-          assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("failed")), wait: UPLOAD_WAIT
-          assert_no_selector "trix-editor figure"
-          assert_no_selector "#article_editor[aria-busy]"
-
-          attach_file "article_cover_file", fixture("photos/photo.jpg")
-          assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("failed")), wait: UPLOAD_WAIT
-          assert_no_selector "#article_cover[aria-busy]"
-        end
-      end
-    end
-  end
-
-  test "a session that expires while writing: the upload says so instead of blaming the connection" do
-    visit teams_articles_path
-    assert_no_page_reload do
-      click_on "teams_articles_new"
-      within "turbo-frame#modal dialog[open]" do
-        editor.click
-        Orm::Session.delete_all
-
-        attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
-        assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("expired")), wait: UPLOAD_WAIT
-        attach_file "article_cover_file", fixture("photos/photo.jpg")
-        assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("expired")), wait: UPLOAD_WAIT
-      end
-    end
-    assert_equal 0, Orm::ArticleImage.count
-  end
-
-  test "editing: an image taken out of the text hides its row, undo brings it back, Enter returns to the text, the cover clears" do
-    first = create_article_image(alt: "Le premier schéma")
-    second = create_article_image(fixture: "photos/photo.png")
-    article = create_article(author: @member, status: "draft", cover: create_article_image, body: article_body_with(first, second))
-    first_row = "#article_image_#{first.public_id}"
-    second_row = "#article_image_#{second.public_id}"
-    visit teams_articles_path
-
-    assert_no_page_reload do
-      click_menu_action "tr#article_#{article.public_id}", t("teams.articles.menu.edit")
-      within "turbo-frame#modal dialog[open]" do
         editor
-        assert_selector "#article_cover_preview[src='/blog/images/#{article.cover_image.public_id}']"
+        assert_selector "trix-editor figure img[src='/blog/images/#{images.first.public_id}']"
+        assert_no_selector "trix-editor figure .attachment__size, trix-editor figure .attachment__name"
         assert_selector "#article_images_title", text: "#{tf('images_title')} (2)"
         within(second_row) { assert_text "#{tf('image_alt_label')} 2" }
-        assert_no_selector "trix-editor figure .attachment__size, trix-editor figure .attachment__name"
 
         select_first_image
         page.driver.browser.action.send_keys(:backspace).perform
@@ -291,8 +169,8 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         assert_not find("#{first_row} input").disabled?
         within(second_row) { assert_text "#{tf('image_alt_label')} 2" }
 
-        alt = find("#article_image_alts_#{second.public_id}")
-        alt.fill_in(with: "Le second schéma")
+        alt = find("##{missing}")
+        alt.fill_in(with: "La figure de géométrie de la deuxième semaine")
         within(second_row) { assert_no_text tf("image_alt_missing") }
         alt.send_keys(:enter)
         assert page.evaluate_script("document.activeElement.matches('trix-editor#article_body')"), "Entrée ramène au texte"
@@ -301,58 +179,152 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         click_on t("teams.articles.edit_modal.submit")
       end
       assert_toast t("teams.articles.update.updated", title: article.title)
-      assert_no_selector "main[data-before-refresh]"
-
-      # « Retirer la couverture » empties the field the form sends; saving leaves the article without cover.
-      click_menu_action "tr#article_#{article.public_id}", t("teams.articles.menu.edit")
-      within "turbo-frame#modal dialog[open]" do
-        click_on tf("cover_remove")
-        assert_selector "#article_cover_placeholder"
-        assert_no_selector "#article_cover_preview"
-        assert_no_selector "#article_cover_remove"
-        assert_equal "", find("#article_cover_public_id", visible: :hidden).value
-        assert page.evaluate_script("document.activeElement.id === 'article_cover_file'")
-        click_on t("teams.articles.edit_modal.submit")
-      end
-      assert_toast t("teams.articles.update.updated", title: article.title)
       assert_no_selector "turbo-frame#modal dialog[open]"
+      assert_no_selector "main[data-before-refresh]"
+      assert_selector row, text: t("teams.articles.status.draft")
+      assert_equal images, article.reload.body.body.attachables.grep(Orm::ArticleImage), "l'image retirée puis remise reste dans le texte"
+      assert_equal [ "Le tableau des fractions de la première semaine", "La figure de géométrie de la deuxième semaine" ],
+                   images.map { it.reload.alt }
+
+      click_menu_action row, t("teams.articles.menu.publish")
+      assert_toast t("teams.articles.transition.published", title: article.title)
+      assert_selector row, text: t("teams.articles.status.published")
+      assert_equal "published", article.reload.status
+
+      # 4. The public page shows the cover and both images, served by Lnclass (BL-14); then the article is archived.
+      click_menu_action row, t("teams.articles.menu.view")
+      assert_current_path blog_article_path(article.slug)
+      assert_selector "h1", text: article.title
+      [ article.cover_image, *images ].each do |image|
+        assert_selector "img[src='/blog/images/#{image.public_id}'][alt]"
+        assert image_loaded?("/blog/images/#{image.public_id}"), "l'image #{image.public_id} n'est pas servie"
+      end
+      page.go_back
+      assert_current_path teams_articles_path
+
+      click_menu_action row, t("teams.articles.menu.archive")
+      assert_toast t("teams.articles.transition.archived", title: article.title)
+      assert_selector row, text: t("teams.articles.status.archived")
     end
-    assert_nil article.reload.cover_image
+    assert_empty page.evaluate_script("window.cspViolations")
 
-    article.reload
-    assert_equal [ first, second ], article.body.body.attachables.grep(Orm::ArticleImage)
-    assert_equal [ "Le premier schéma", "Le second schéma" ], [ first.reload.alt, second.reload.alt ]
-  end
-
-  test "the course editor still refuses any image: no button, a dropped photo never reaches the server (BL-15)" do
-    create_course(name: "Génétique et évolution")
-    visit teams_imports_path
-    open_in_modal(new_teams_course_path)
-    within "turbo-frame#modal dialog[open]" do
-      editor = find_rich_text_editor
-      editor.click
-      editor.send_keys("ADN")
-      drop_generated_image(name: "schema.jpg", width: 800, height: 600)
-      assert_no_selector "trix-editor figure, trix-editor [data-trix-attachment]"
-      assert_no_text tf("insert_image")
-      assert_text "ADN"
-    end
-    assert_equal 0, Orm::ArticleImage.count
-    assert page.evaluate_script("!performance.getEntriesByType('resource').some((entry) => /\\/teams\\/blog\\/images/.test(entry.name))")
-  end
-
-  test "on a phone, the list and the modal never scroll sideways and the ⋮ menu is visible at once" do
-    article = create_article(author: @member, title: "Un article", cover: create_article_image)
-    with_mobile_viewport do
-      visit teams_articles_path
-      assert_selector "button[aria-controls=article-actions-#{article.public_id}]"
-      assert find("button[aria-controls=article-actions-#{article.public_id}]").visible?
-      assert_no_horizontal_scroll
-
+    # 5. A new article: every refused upload says why, and none is stored.
+    stored = Orm::ArticleImage.count
+    assert_no_page_reload do
       click_on "teams_articles_new"
-      within("turbo-frame#modal dialog[open]") { find_rich_text_editor("trix-editor#article_body") }
-      assert_selector "#article_insert_image"
-      assert_no_horizontal_scroll
+      within "turbo-frame#modal dialog[open]" do
+        fill_in "article[title]", with: "Un envoi qui échoue"
+        editor.click
+        # Trix's own attach button speaks French too, like the rest of its toolbar.
+        assert_selector "trix-toolbar [data-trix-action=attachFiles][title='Insérer une image']", visible: :all
+        assert_no_selector "trix-toolbar [title='Attach Files']", visible: :all
+        editor.send_keys("Un texte.")
+
+        # BL-12: a GIF (refused by the browser), a fake .jpg (by the server), noise too heavy even shrunk, an image from
+        # a web page; the cover refuses a GIF too, its field invalid.
+        attach_file(fixture("article_images/animation.gif")) { click_on tf("insert_image") }
+        assert_selector "#article_body_upload_errors", text: refused("animation.gif", image_message("format"))
+        attach_file(fixture("article_images/fake.jpg")) { click_on tf("insert_image") }
+        unreadable = t("activemodel.errors.models.dtos/communication/article_image_input.attributes.file.unreadable")
+        assert_selector "#article_body_upload_errors", text: refused("fake.jpg", unreadable), wait: UPLOAD_WAIT
+        assert_no_selector "#article_body_upload_errors", text: "animation.gif"
+
+        drop_generated_image(name: "bruit.jpg", width: 1400, height: 1400, noise: true)
+        assert_selector "#article_body_upload_errors", text: refused("bruit.jpg", image_message("too_heavy")), wait: UPLOAD_WAIT
+
+        paste_html_into_editor(%(<p>Vu ailleurs</p><img src="https://images.example.com/photo.jpg" width="20" height="20">))
+        assert_selector "#article_body_upload_errors", text: refused("photo.jpg", image_message("web_image"))
+
+        assert_no_selector "trix-editor figure"
+        assert_selector "#article_images", visible: :hidden
+
+        attach_file "article_cover_file", fixture("article_images/animation.gif")
+        assert_selector "#article_cover_upload_error", text: refused("animation.gif", image_message("format"))
+        assert_selector "#article_cover_file[aria-invalid=true]"
+        assert_includes find("#article_cover_file")["aria-describedby"], "article_cover_upload_error"
+        assert_selector "#article_cover_placeholder"
+        assert_equal "", find("#article_cover_public_id", visible: :hidden).value
+        assert_equal stored, Orm::ArticleImage.count, "rien n'est stocké (BL-12)"
+
+        # An upload that never answers gives up after its delay (60 s in production; 300 ms here, through the value the
+        # controllers read): the editor and the cover are free again.
+        page.execute_script(<<~JS)
+          document.querySelector("#article_editor").setAttribute("data-rich-text-editor-upload-timeout-value", "300")
+          document.querySelector("#article_cover").setAttribute("data-communication--cover-picker-upload-timeout-value", "300")
+        JS
+        hold_uploads do
+          attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
+          attach_file "article_cover_file", fixture("photos/photo.jpg")
+          assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("failed")), wait: UPLOAD_WAIT
+          assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("failed")), wait: UPLOAD_WAIT
+          assert_no_selector "trix-editor figure"
+          assert_no_selector "#article_editor[aria-busy]"
+          assert_no_selector "#article_cover[aria-busy]"
+        end
+        # Back to the delay of production for what follows.
+        page.execute_script(<<~JS)
+          document.querySelector("#article_editor").removeAttribute("data-rich-text-editor-upload-timeout-value")
+          document.querySelector("#article_cover").removeAttribute("data-communication--cover-picker-upload-timeout-value")
+        JS
+
+        # « Créer le brouillon » during an upload that fails (500) keeps the modal: nothing is saved, the refusal takes
+        # the focus. The image of the text first, then the cover: same rule. The files differ from the ones above, so that
+        # each refusal waited for is its own.
+        hold_uploads do |release|
+          attach_file(fixture("photos/photo.jpg")) { click_on tf("insert_image") }
+          assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
+          click_on t("teams.articles.new.submit")
+          assert_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
+          release.call(500)
+        end
+        assert_selector "#article_body_upload_errors", text: refused("photo.jpg", image_message("failed")), wait: UPLOAD_WAIT
+        assert_selector "#article_body_upload_errors", text: image_message("not_saved")
+        assert_no_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
+        assert page.evaluate_script("document.activeElement.id === 'article_body_upload_errors'"), "le refus prend le focus"
+        assert_no_selector "trix-editor figure"
+
+        hold_uploads do |release|
+          attach_file "article_cover_file", fixture("photos/portrait.jpg")
+          assert_selector "#article_cover[aria-busy=true]"
+          click_on t("teams.articles.new.submit")
+          assert_selector "#article_cover_status", text: image_message("waiting")
+          release.call(500)
+        end
+        assert_selector "#article_cover_upload_error", text: refused("portrait.jpg", image_message("failed")), wait: UPLOAD_WAIT
+        assert_selector "#article_cover_upload_error", text: image_message("not_saved")
+        assert page.evaluate_script("document.activeElement.id === 'article_cover_upload_error'"), "le refus prend le focus"
+        assert_selector "#article_cover_placeholder"
+        assert_equal 3, Orm::Article.count, "rien n'est enregistré sans l'image"
+
+        # The session expires while writing: the upload says so instead of blaming the connection (the text and the cover
+        # at once: each has its own controller and its own message).
+        Orm::Session.delete_all
+        attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
+        attach_file "article_cover_file", fixture("photos/photo.jpg")
+        assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("expired")), wait: UPLOAD_WAIT
+        assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("expired")), wait: UPLOAD_WAIT
+      end
+      assert_selector "turbo-frame#modal dialog[open]"
+    end
+    assert_equal stored, Orm::ArticleImage.count, "aucun envoi refusé n'est stocké"
+
+    # 6. A visitor (no session), on a phone, follows the shared link of the article archived in 4: « Cet article n'est plus
+    # disponible ». A title of one word wider than the screen wraps on the article page and the cards of /blog, and the
+    # 410 page does not scroll sideways either (C1, UDR-0066 §3): each page loaded once, measured at 360 then 390 px.
+    page.reset!
+    with_mobile_viewport do
+      visit blog_article_path(Orm::Article.find_by!(title: "Réviser le BEPC en quatre semaines").slug)
+      assert_selector "#article_gone h1", text: t("communication.articles.gone.title")
+      assert_no_text "Réviser le BEPC"
+      assert_no_horizontal_scroll "#article_gone h1", sizes: PHONES
+
+      [ long_article, url_article ].each do |article|
+        visit blog_article_path(article.slug)
+        assert_selector "h1#article_title", text: article.title
+        assert_no_horizontal_scroll "h1#article_title", sizes: PHONES
+      end
+      visit blog_path
+      assert_no_horizontal_scroll "#blog_article_#{long_article.slug} h2", "#blog_article_#{url_article.slug} h2", sizes: PHONES
     end
   end
 
@@ -369,8 +341,22 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
   # HTML. A menu opened before the morph is done would be closed by it.
   def mark_host_page = page.execute_script("document.querySelector('main').dataset.beforeRefresh = 'true'")
 
-  def assert_no_horizontal_scroll
-    assert page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth"), "la page défile sur le côté"
+  # At each size (the window's own by default; the current one first, to resize once less), the page never scrolls
+  # sideways and each element named does not overflow its own box: the page is loaded once, the window resized under it.
+  def assert_no_horizontal_scroll(*selectors, sizes: [ nil ])
+    selectors.each { assert_selector it }
+    current = page.current_window.size
+    sizes.sort_by { it == current ? 0 : 1 }.each do |size|
+      page.current_window.resize_to(*size) if size && size != current
+      current = size || current
+      widths = page.evaluate_script(<<~JS, selectors)
+        [ window.innerWidth, [ document.documentElement, ...arguments[0].map((selector) => document.querySelector(selector)) ]
+          .map((element) => [ element.scrollWidth, element.clientWidth ]) ]
+      JS
+      at, ((page_scroll, page_width), *boxes) = widths
+      assert_operator page_scroll, :<=, page_width, "#{current_path} défile sur le côté à #{at} px"
+      selectors.zip(boxes) { |selector, (scroll, width)| assert_operator scroll, :<=, width, "#{selector} déborde de sa boîte à #{at} px" }
+    end
   end
 
   # The row of the panel « Images du texte » numbered n, waited for until the upload is done; its id.
@@ -446,7 +432,7 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
           editor.dispatchEvent(new DragEvent(type, { dataTransfer: transfer, bubbles: true, cancelable: true }))
         }
         done()
-      }, noise ? "image/png" : "image/jpeg", 0.92)
+      }, "image/jpeg", 0.92)
     JS
   end
 
