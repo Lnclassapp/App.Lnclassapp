@@ -24,15 +24,17 @@ module Repositories
       end
 
       # La première publication pose published_at, une remise en ligne le garde (BL-11) ; l'archivage pose archived_at.
+      # Seulement depuis un état de départ admis : un geste concurrent qui l'a déjà fait laisse 0 ligne, et false.
       def transition(id:, to:, at:)
-        scope = Orm::Article.where(id:)
-        case to
-        when "published"
-          scope.update_all([ "status = 'published', published_at = COALESCE(published_at, ?), archived_at = NULL, updated_at = ?", at, at ])
-        when "archived" then scope.update_all(status: "archived", archived_at: at, updated_at: at)
-        else raise ArgumentError, "transition impossible vers #{to.inspect}"
-        end
-        true
+        scope = Orm::Article.where(id:, status: departures(to))
+        changed =
+          case to
+          when "published"
+            scope.update_all([ "status = 'published', published_at = COALESCE(published_at, ?), archived_at = NULL, updated_at = ?", at, at ])
+          when "archived" then scope.update_all(status: "archived", archived_at: at, updated_at: at)
+          else raise ArgumentError, "transition impossible vers #{to.inspect}"
+          end
+        changed == 1
       end
 
       # Une requête, sans transaction ni verrou ; updated_at intact, donc le lastmod du plan du site aussi (ADR-0073 §4.7).
@@ -73,6 +75,8 @@ module Repositories
         record.slug = nil
         persist(record, retried: true)
       end
+
+      def departures(to) = Entities::Shared::ContentStatus::TRANSITIONS.filter_map { |from, targets| from if targets.include?(to) }
 
       def admissible(record) = Orm::ArticleImage.where(article_id: [ nil, record.id ].uniq)
 

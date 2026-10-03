@@ -19,15 +19,23 @@ module UseCases
           @transitions = []
         end
 
-        def find_by_public_id(public_id:) = @articles.find { it.public_id == public_id }&.dup
+        def find_by_public_id(public_id:) = (@read_before || @articles).find { it.public_id == public_id }&.dup
 
+        # Like the adapter: only from a departure state admitted for to; false otherwise (a concurrent gesture did it).
         def transition(id:, to:, at:)
+          article = live(id)
+          return false unless Entities::Shared::ContentStatus::TRANSITIONS.fetch(article.status).include?(to)
+
           @transitions << [ id, to, at ]
-          article = @articles.find { it.id == id }
           article.status = to
           article.archived_at = at
           true
         end
+
+        def live(id) = @articles.find { it.id == id }
+
+        # From now on, every gesture reads the articles as they are now: as if all had read before any wrote.
+        def read_before_writes! = @read_before = @articles.map(&:dup)
       end
 
       class FakeAuditLog
@@ -52,9 +60,9 @@ module UseCases
         @content = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
-      def archive(public_id, actor: @content)
+      def archive(public_id, actor: @content, now: NOW)
         ArchiveArticle.new(articles: @articles, audit_log: @audit_log, transaction: @transaction,
-                           policy: Policies::Communication::ManageArticlesPolicy.new, clock: Clock.new(NOW))
+                           policy: Policies::Communication::ManageArticlesPolicy.new, clock: Clock.new(now))
                       .call(actor:, public_id:)
       end
 
@@ -78,6 +86,19 @@ module UseCases
         end
         assert_empty @articles.transitions
         assert_empty @audit_log.entries
+      end
+
+      test "deux archivages simultanés : le second, qui a lu l'article publié, reçoit :conflict ; archived_at et le journal gardent le premier" do
+        @articles.read_before_writes!
+
+        first = archive("art00000000002")
+        second = archive("art00000000002", now: NOW + 60)
+
+        assert first.success?
+        assert_equal :conflict, second.code
+        assert_equal({ base: [ :transition_not_allowed ] }, second.errors)
+        assert_equal NOW, @articles.live(2).archived_at
+        assert_equal [ "article.archived" ], @audit_log.entries.map { it[:action] }
       end
 
       test "BL-08 : hors de l'équipe admin ou content : :forbidden ; un article inconnu : :not_found" do

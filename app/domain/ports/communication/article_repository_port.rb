@@ -26,7 +26,9 @@ module Ports
       end
 
       # to : "published" (published_at = COALESCE(published_at, at), archived_at = NULL) ou "archived" (archived_at = at).
-      # La transition est déjà admise par Entities::Communication::Article::TRANSITIONS. → true
+      # La transition est déjà admise par Entities::Communication::Article::TRANSITIONS pour l'état lu ; elle ne s'écrit
+      # que si l'article est encore dans un état de départ admis pour to. → true si l'article a changé d'état ; false
+      # sinon (un geste concurrent l'a déjà fait : rien n'est réécrit)
       def transition(id:, to:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #transition"
       end

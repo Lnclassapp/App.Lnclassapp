@@ -22,16 +22,22 @@ module UseCases
           @transitions = []
         end
 
-        def find_by_public_id(public_id:) = @articles.find { it.public_id == public_id }&.dup
+        def find_by_public_id(public_id:) = (@read_before || @articles).find { it.public_id == public_id }&.dup
 
+        # Like the adapter: only from a departure state admitted for to; false otherwise (a concurrent gesture did it).
         def transition(id:, to:, at:)
-          @transitions << [ id, to, at ]
           article = @articles.find { it.id == id }
+          return false unless Entities::Shared::ContentStatus::TRANSITIONS.fetch(article.status).include?(to)
+
+          @transitions << [ id, to, at ]
           article.status = to
           article.published_at ||= at
           article.archived_at = nil
           true
         end
+
+        # From now on, every gesture reads the articles as they are now: as if all had read before any wrote.
+        def read_before_writes! = @read_before = @articles.map(&:dup)
       end
 
       class FakeAuditLog
@@ -129,6 +135,18 @@ module UseCases
         assert_equal :forbidden, publish("inconnu", actor: nil).code
         assert_equal :not_found, publish("inconnu").code
         assert_empty @articles.transitions
+      end
+
+      test "deux publications simultanées : la seconde, qui a lu le brouillon, reçoit :conflict ; un seul geste au journal" do
+        @articles.read_before_writes!
+
+        assert publish("art00000000001").success?
+        second = publish("art00000000001")
+
+        assert_equal :conflict, second.code
+        assert_equal({ base: [ :transition_not_allowed ] }, second.errors)
+        assert_equal [ [ 1, "published", NOW ] ], @articles.transitions
+        assert_equal [ "article.published" ], @audit_log.entries.map { it[:action] }
       end
     end
   end

@@ -204,6 +204,18 @@ module Repositories
         assert_raises(ArgumentError) { @repository.transition(id: article.id, to: "draft", at: @at) }
       end
 
+      test "une transition déjà faite par un geste concurrent : false, rien n'est réécrit" do
+        article = create
+
+        assert @repository.transition(id: article.id, to: "published", at: @at)
+        assert_not @repository.transition(id: article.id, to: "published", at: @at + 1.hour)
+        assert @repository.transition(id: article.id, to: "archived", at: @at + 1.day)
+        assert_not @repository.transition(id: article.id, to: "archived", at: @at + 2.days)
+
+        found = Orm::Article.find(article.id)
+        assert_equal [ "archived", @at, @at + 1.day, @at + 1.day ], [ found.status, found.published_at, found.archived_at, found.updated_at ]
+      end
+
       test "BL-17 : une lecture est un seul UPDATE, sans effet sur updated_at ; un brouillon ou un archivé n'est pas compté" do
         published = create_article(updated_at: 2.days.ago)
         draft = create_article(status: "draft")
