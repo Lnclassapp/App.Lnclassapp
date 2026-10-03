@@ -29,6 +29,7 @@
 | 2026-10-03 | **Budget de croissance de la suite système : 15 s par chantier**, gardé par `test/guards/system_budget_test.rb` (l'agent proposait 20 s). Seuls les fichiers touchés comptent ; un test retiré rend ses secondes ; un fichier sans durée est refusé. | 299 → 338 tests système en un jour : sans garde, le plafond cède par simple croissance. | ADR-0069 §9 |
 | 2026-10-03 | **Les durées des 82 fichiers système sont enregistrées depuis le journal GitHub du run 472** (37 n'en avaient pas) ; `script/ci/record_timings` reconnaît les classes déclarées dans un `module` et élague les fichiers disparus. | Un fichier sans durée ne pèserait rien dans le budget. | — |
 | 2026-10-03 | **Chantier [`selection-par-carte-de-couverture`](../selection-par-carte-de-couverture/memo.md) ouvert**, hors de ce chantier. | Un lot = un levier ; la sélection est un levier à part, avec son propre risque de faux verts. | — |
+| 2026-10-03 | **Accord du porteur sur les cinq étapes appliquées ; la suite système se joue en trois parts** (« parallélise les tests de plus de 2 minutes » : c'est la seule étape qui les dépasse). Quatre jobs jouent `bin/ci`. | Horloge ≈ 7 min 30 → ≈ 3 min 30 pour ≈ 4 minutes facturées de plus par run complet ; les durées fraîches du run 472 donnent trois parts à 271 s. | ADR-0069 §9 |
 
 ## Ce qui a dérapé
 
