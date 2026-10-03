@@ -17,6 +17,13 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # Choix du porteur du 2026-10-03 : le chapeau du héros dit les trois gestes de l'élève.
+  test "the hero lead says what the student does: revise, practise with the correction, prepare the tests" do
+    get root_url
+
+    assert_select "#hero h1 + p", "Révise l'essentiel du cours, fais tes exercices avec la correction et prépare tes interros avec tes enseignants."
+  end
+
   test "RH-01: one h1, a header reduced to the logo link and « Se connecter », the two entries in the hero" do
     get root_url
 
