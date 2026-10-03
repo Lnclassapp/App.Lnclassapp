@@ -310,6 +310,21 @@ class Teams::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]"
   end
 
+  test "removing the cover and an image of the text in one save deletes both, without a 500" do
+    cover = create_article_image
+    image = create_article_image(alt: "Un schéma")
+    article = create_article(author: @content, status: "draft", cover:, cover_alt: "Des élèves en classe",
+                             body: article_body_with(image))
+    sign_in_as @content
+
+    patch teams_article_path(article.public_id), params: article_params(title: article.title, cover_public_id: ""), as: :turbo_stream
+
+    assert_response :success
+    assert_nil article.reload.cover_image
+    assert_not Orm::ArticleImage.exists?(cover.id)
+    assert_not Orm::ArticleImage.exists?(image.id)
+  end
+
   test "an update of a published article says it is online; emptying its excerpt is refused in 422" do
     article = create_article(author: @content, status: "published", title: "En ligne")
     sign_in_as @content

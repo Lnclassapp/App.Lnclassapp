@@ -57,7 +57,7 @@ module Repositories
           persist(record)
           cited = cited_ids(body)
           attach(record, cited, cover, dto.image_alts, at)
-          Orm::ArticleImage.where(id: previous - cited - [ cover&.id ]).with_attached_file.each(&:destroy!)
+          Orm::ArticleImage.where(id: previous - cited - [ cover&.id ]).each(&:destroy!)
         end
         ::Shared::Result.success(map_to_entity(record))
       end

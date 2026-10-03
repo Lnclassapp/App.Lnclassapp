@@ -214,7 +214,7 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
       assert_toast t("teams.articles.update.updated", title: article.title)
       assert_no_selector "main[data-before-refresh]"
 
-      # « Retirer la couverture » empties the field the form sends; the modal is closed without saving.
+      # « Retirer la couverture » empties the field the form sends; saving leaves the article without cover.
       click_menu_action "tr#article_#{article.public_id}", t("teams.articles.menu.edit")
       within "turbo-frame#modal dialog[open]" do
         click_on tf("cover_remove")
@@ -223,10 +223,12 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         assert_no_selector "#article_cover_remove"
         assert_equal "", find("#article_cover_public_id", visible: :hidden).value
         assert page.evaluate_script("document.activeElement.id === 'article_cover_file'")
-        click_on t("teams.articles.edit_modal.cancel")
+        click_on t("teams.articles.edit_modal.submit")
       end
+      assert_toast t("teams.articles.update.updated", title: article.title)
       assert_no_selector "turbo-frame#modal dialog[open]"
     end
+    assert_nil article.reload.cover_image
 
     article.reload
     assert_equal [ first, second ], article.body.body.attachables.grep(Orm::ArticleImage)
