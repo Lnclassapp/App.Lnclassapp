@@ -119,7 +119,7 @@ Le fichier est `has_one_attached :file`, créé `analyzed: true` comme la photo 
 - **Texte de remplacement** : colonne `article_images.alt`, saisi dans le panneau « Images du texte » (`article[image_alts][<public_id>]`) ; `cover_alt` pour la couverture. Action Text ne garde pas d'`alt` dans le contenu : le texte vit avec l'image. La légende Trix reste permise, visible et facultative.
 - **Rattachement et purge des orphelines** : enregistrer un article (création ou modification) rattache à lui, dans la transaction, la couverture et les images que cite son texte ; les images qui lui étaient rattachées et qu'il ne cite plus sont supprimées, fichier purgé après validation (`purge_later`, ADR-0047). Une image envoyée et jamais rattachée (modale fermée) est purgée par `Communication::PurgeOrphanArticleImagesJob` (`config/recurring.yml`, chaque jour) après 48 h. Une image citée par le texte enregistré, ou couverture, n'est jamais purgée.
 - **Service public par Lnclass** : `GET /blog/images/:public_id` (`blog_image_path`), seul chemin d'une image, couverture comprise ; `Communication::ArticleImagesController#show`, use case `ReadArticleImage` sous `ReadArticlePolicy`. **L'adresse est versionnée par construction** : une ligne ne change jamais de fichier, une nouvelle couverture est une nouvelle ligne, donc une nouvelle adresse. Helper `Communication::ArticlesHelper#article_image_src(image)` → `blog_image_path(image.public_id)` (UDR-0064 §2).
-  - Image rattachée à un article **publié** : `Cache-Control: public, max-age=31536000, immutable`, lisible sans session (BL-14).
+  - Image rattachée à un article **publié** : `Cache-Control: public, max-age=31536000, immutable`, lisible sans session (BL-14). *Amendement du 2026-10-03 :* `ETag` = `public_id` ; un navigateur qui renvoie cet ETag reçoit **304 sans lecture du bucket**. Le port sépare `find` (format et état de l'article, une requête, sans fichier) de `download` ; le fichier n'est lu qu'après la règle de lecture, jamais pour une image refusée.
   - Image d'un brouillon, ou pas encore rattachée : servie à qui gère le blog en `Cache-Control: private, no-store` (éditeur, panneau, aperçu) ; 404 pour tout autre. Image d'un archivé : 404 pour qui ne gère pas.
 - **Rendu d'une image du texte** : `Orm::ArticleImage#to_attachable_partial_path` → `"communication/articles/body_image"`. Action Text passe le modèle sous le local `article_image` ; le partiel le nomme `image` et lit les champs de l'`Image` de l'UDR-0064 (`public_id`, `alt`, `width`, `height`), que la ligne porte telle quelle. `loading="lazy"`, `decoding="async"`, dimensions posées. `active_storage/blobs/_blob.html.erb` ne change pas.
 
@@ -175,6 +175,10 @@ Le HTML est d'abord canonisé par `ActionText::Content` (les `figure[data-trix-a
 - **Une lecture écrit en base** : un `GET` n'est plus sans effet, et un article très lu concentre les mises à jour sur une ligne.
 - **`:expired` prend un second sens** (contenu retiré, 410), traduit par un seul contrôleur ; un futur contrôleur de lecture qui le passerait à `render_result` renverrait vers la connexion.
 - **Trois déplacements** (`ContentStatus`, `ImageHeader`, `RichTextSanitizer`) touchent des fichiers livrés du catalogue, de l'évaluation et de l'identité : un commit de pur renommage, au Lot 0.
+- *Amendement du 2026-10-03 (revue de sécurité, phase 5) :*
+  - **L'image d'un article archivé peut rester dans les caches jusqu'à un an.** Servie `public, immutable` tant que l'article était publié, elle reste lisible dans le cache du navigateur et de tout relais qui l'a gardée, même après l'archivage (le serveur répond 404, mais n'est plus interrogé). Retirer une image vraiment, c'est la retirer du texte avant que l'article ne soit lu, ou accepter ce délai.
+  - **Le compteur peut être gonflé** : aucun plafond par lecteur, ni dédoublonnage, ni limite de débit ; un script qui se présente comme un navigateur ajoute une lecture par requête. Le chiffre est un ordre de grandeur pour l'équipe, jamais une mesure opposable.
+  - **La purge supprime aussi** l'image envoyée dans une modale restée ouverte plus de 48 h sans enregistrement : enregistrer ensuite perd cette image en silence (sa ligne n'existe plus, l'assainisseur retire sa pièce jointe), et le fichier supprimé du bucket ne se récupère pas. Il faut la renvoyer.
 - **Changer d'hôte canonique** après indexation demande une variable et une nouvelle indexation ; les anciens aperçus partagés gardent l'ancien hôte.
 
 ## 6. Notes d'implémentation
@@ -303,9 +307,11 @@ end
 
 ```ruby
 # app/controllers/communication/article_images_controller.rb (extrait) — après ReadArticleImage
-def send_image(image)
-  response.headers["Cache-Control"] = image.public ? "public, max-age=31536000, immutable" : "private, no-store"
-  send_data image.data, type: image.content_type, disposition: :inline, filename: "image"
+def serve(image)
+  response.headers["Cache-Control"] = image.public ? "max-age=31536000, public, immutable" : "private, no-store"
+  return if image.public && !stale?(etag: params[:public_id]) # 304, le bucket n'est pas lu (amendement du 2026-10-03)
+
+  send_data image.data.call, type: image.content_type, disposition: :inline, filename: "image"
 end
 ```
 
