@@ -1,4 +1,4 @@
-# ADR-0069 : La politique de cache se règle sur les allers-retours jusqu'au serveur, pas sur le temps serveur
+# ADR-0075 : La politique de cache se règle sur les allers-retours jusqu'au serveur, pas sur le temps serveur
 
 | | |
 |---|---|
