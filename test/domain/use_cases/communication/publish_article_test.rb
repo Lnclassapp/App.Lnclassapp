@@ -66,7 +66,9 @@ module UseCases
                               images: [ ArticleImage.new(public_id: "img00000000001", alt: "Une salle"),
                                         ArticleImage.new(public_id: "img00000000002") ]),
           article(4, "archived", published_at: FIRST_PUBLISHED, archived_at: Time.utc(2026, 10, 8)),
-          article(5, "published", published_at: FIRST_PUBLISHED)
+          article(5, "published", published_at: FIRST_PUBLISHED),
+          article(6, "draft", cover: ArticleImage.new(public_id: "cov00000000006"), cover_alt: " "),
+          article(7, "draft", images: Array.new(ArticleImage::MAX_PER_ARTICLE + 1) { ArticleImage.new(public_id: "img7#{it}", alt: "Image") })
         ])
         @audit_log = FakeAuditLog.new
         @transaction = FakeTransaction.new
@@ -109,6 +111,24 @@ module UseCases
         assert_equal [ "Saisissez le texte de remplacement de l'image 2 : il est obligatoire pour publier." ],
                      result.errors[:"image_alts.img00000000002"]
         assert_empty @articles.transitions
+      end
+
+      test "BL-13 : une couverture sans texte de remplacement → :invalid nommant cover_alt ; il reste brouillon, rien au journal" do
+        result = publish("art00000000006")
+
+        assert_equal :invalid, result.code
+        assert_equal({ cover_alt: [ "Décrivez la couverture : son texte de remplacement est obligatoire pour publier." ] }, result.errors)
+        assert_empty @articles.transitions
+        assert_empty @audit_log.entries
+      end
+
+      test "plus de 10 images dans le texte → :invalid nommant le texte ; il reste brouillon" do
+        result = publish("art00000000007")
+
+        assert_equal :invalid, result.code
+        assert_equal({ body: [ "Un article compte au plus 10 images dans son texte : retirez-en une." ] }, result.errors)
+        assert_empty @articles.transitions
+        assert_empty @audit_log.entries
       end
 
       test "BL-11 : un article archivé remis en ligne garde sa date de publication ; le journal dit republished" do

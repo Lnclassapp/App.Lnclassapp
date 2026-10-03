@@ -483,6 +483,20 @@ class Teams::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "draft", article.reload.status
   end
 
+  test "BL-13: a cover without alternative text refuses the publication in 422, the message under the cover's field" do
+    cover = create_article_image
+    article = create_article(author: @content, status: "draft", cover:, cover_alt: nil)
+    sign_in_as @admin
+
+    patch publish_teams_article_path(article.public_id), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "#article_publish_refused li", text: error(:cover_alt, :blank)
+    assert_select "#article_cover_alt_error", text: error(:cover_alt, :blank)
+    assert_select "#article_cover_alt[aria-invalid=true][aria-describedby~=article_cover_alt_error]"
+    assert_equal "draft", article.reload.status
+  end
+
   test "without Turbo, a refused publication redirects to the edit modal with its alert" do
     article = create_article(author: @content, status: "draft", excerpt: nil)
     sign_in_as @content
