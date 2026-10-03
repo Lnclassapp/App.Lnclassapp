@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature (interface : une vue, sa locale, deux options d'un composant ; aucun changement de domaine, de route ni de contrôleur) |
-| **Statut** | en cours — livré en PR [#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145), en attente du porteur |
+| **Statut** | livré ([#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145), fusionnée le 2026-10-03) |
 | **Ouvert le** | 2026-10-02 |
 | **Branche** | `feature/refonte-homepage` |
 | **Programme** | — |
