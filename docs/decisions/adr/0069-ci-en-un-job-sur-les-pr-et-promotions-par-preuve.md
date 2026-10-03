@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8 ; amendé les 2026-10-02 et 2026-10-03 : dix minutes par feature, deux jobs, budget de croissance, §9* |
+| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8 ; amendé les 2026-10-02 et 2026-10-03 : dix minutes par feature, deux jobs, budget de croissance, §9* — *amendé le 2026-10-03 au soir : 20 s pour le blog* |
 | **Date** | 2026-10-02 *(première version proposée le 2026-09-30 : runner auto-hébergé)* |
 | **Chantier** | `docs/chantiers/ci-quota` |
 | **Remplace** | — *(amende l'[ADR-0064](./0064-ci-parallele-par-groupes-de-bin-ci.md) : la matrice de 14 jobs, §4 précision 6 et §5 « plus de minutes facturées »)* |
@@ -128,3 +128,13 @@ Précisions qui font partie de la décision :
 **Coût attendu, révisé.** Une PR de chantier prouvée ≈ 2 minutes, ou ≈ 17 si tirée (≈ 5 en moyenne) ; une promotion vers `Staging` ≈ 17 ; une release vers `main` ≈ 2.
 
 **Vérification.** `test/guards/ci_plan_test.rb` : `plan`, `unit`, `system` (seule matrice : ses trois parts, chaque fichier système dans une part et une seule) et `ci` ; `unit` et `system` jouent chaque groupe de `bin/ci` une fois, `perf` en run complet seulement ; la preuve n'est publiée que par `ci`, quand les deux jobs sont verts ; un brouillon n'a pas de verdict ; PostgreSQL de l'image avant `bin/ci` dans chaque job, aucun conteneur de service. `test/guards/system_budget_test.rb` : budget 15 s, seuls les fichiers touchés comptent, un test retiré rend ses secondes, un fichier sans durée est refusé.
+
+## Amendement du 2026-10-03 (soir) — 20 s pour le blog
+
+**Décision du porteur.** « Relève le budget à 20 s pour le blog. » Le budget reste de **15 s par chantier** ; le blog a une dérogation de **20 s**. Elle est écrite dans `SystemBudget::GRANTS` (`script/ci/system_budget.rb`) : une PR dont tous les fichiers système qui grandissent sont ceux du blog (`test/system/communication/blog_reading_test.rb`, `test/system/teams/blog_management_test.rb`) a 20 s ; toute autre PR, même si elle touche aussi ces fichiers, garde 15 s.
+
+**Pourquoi maintenant.** Le blog (PR #144) a été fusionné sans durée enregistrée pour ses deux fichiers système : la garde refusait toute PR, `Develop` compris (« durée non enregistrée »).
+
+**Mesure.** Durées relevées dans le journal GitHub du run 497 (PR #144, parts système 2/3 et 3/3), comme le §9 le prévoit : lecture du blog **4,8 s**, gestion du blog **29,0 s**, soit **33,8 s**. Le blog dépasse donc aussi la dérogation de 20 s. La garde ne compte que les fichiers qu'une PR touche : enregistrer ces durées, sans toucher aux tests, la remet au vert, mais ne réduit pas la suite. Pour revenir sous 20 s, une partie des sept tests de gestion (29,0 s, dont 7,3 s pour le parcours brouillon → publié → archivé) redescendrait au niveau contrôleur ; c'est au porteur d'en décider.
+
+**Vérification.** `test/guards/system_budget_test.rb` : 20 s pour le blog seul, 15 s dès qu'un autre fichier grandit avec lui, 20,1 s refusées.
