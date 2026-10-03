@@ -15,13 +15,19 @@ module Communication
     PRIVATE_CACHE = "private, no-store"
 
     def show
-      render_result read.call(actor: current_actor, public_id: params[:public_id]), success: lambda { |image|
-        response.headers["Cache-Control"] = image.public ? PUBLIC_CACHE : PRIVATE_CACHE
-        send_data image.data, type: image.content_type, disposition: :inline, filename: "image"
-      }
+      render_result read.call(actor: current_actor, public_id: params[:public_id]), success: ->(image) { serve(image) }
     end
 
     private
+
+    # Image publiée : ETag = public_id (une adresse ne change jamais de fichier) ; un navigateur qui l'a déjà reçoit 304
+    # sans que le bucket soit lu. Une image privée n'est gardée nulle part : elle est toujours relue.
+    def serve(image)
+      response.headers["Cache-Control"] = image.public ? PUBLIC_CACHE : PRIVATE_CACHE
+      return if image.public && !stale?(etag: params[:public_id])
+
+      send_data image.data.call, type: image.content_type, disposition: :inline, filename: "image"
+    end
 
     def read
       UseCases::Communication::ReadArticleImage.new(images: Repositories::Communication::ArticleImageStore.new,

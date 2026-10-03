@@ -31,16 +31,29 @@ module Repositories
         assert stored?(image.file.blob)
       end
 
-      test "read rend les octets, le format et l'état de l'article ; nil pour une image inconnue" do
+      test "find rend le format et l'état de l'article en une requête, sans lire le fichier ; nil pour une image inconnue" do
         orphan = @store.store(data: @webp, content_type: "image/webp", width: 64, height: 48)
         draft = create_article_image(article: create_article(status: "draft"), fixture: "photos/photo.png")
         archived = create_article_image(article: create_article(status: "archived"))
+        downloads = 0
+        counter = ->(*) { downloads += 1 }
 
-        assert_equal Port::ServedImage.new(content_type: "image/webp", data: @webp, article_status: nil), @store.read(public_id: orphan.public_id)
-        assert_equal Port::ServedImage.new(content_type: "image/png", data: file_fixture("photos/photo.png").binread, article_status: "draft"),
-                     @store.read(public_id: draft.public_id)
-        assert_equal [ "image/jpeg", "archived" ], @store.read(public_id: archived.public_id).then { [ it.content_type, it.article_status ] }
-        assert_nil @store.read(public_id: "inconnu0000000")
+        ActiveSupport::Notifications.subscribed(counter, "service_download.active_storage") do
+          assert_equal Port::ImageState.new(content_type: "image/webp", article_status: nil), @store.find(public_id: orphan.public_id)
+          assert_equal Port::ImageState.new(content_type: "image/png", article_status: "draft"), @store.find(public_id: draft.public_id)
+          assert_queries_count(1) { assert_equal "archived", @store.find(public_id: archived.public_id).article_status }
+          assert_nil @store.find(public_id: "inconnu0000000")
+        end
+        assert_equal 0, downloads
+      end
+
+      test "download rend les octets du fichier ; nil pour une image inconnue" do
+        orphan = @store.store(data: @webp, content_type: "image/webp", width: 64, height: 48)
+        draft = create_article_image(article: create_article(status: "draft"), fixture: "photos/photo.png")
+
+        assert_equal @webp, @store.download(public_id: orphan.public_id)
+        assert_equal file_fixture("photos/photo.png").binread, @store.download(public_id: draft.public_id)
+        assert_nil @store.download(public_id: "inconnu0000000")
       end
 
       test "purge_orphans supprime les images jamais rattachées envoyées avant la limite, et leur fichier" do

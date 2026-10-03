@@ -17,11 +17,19 @@ module Repositories
         StoredImage.new(public_id: image.public_id, sgid: image.attachable_sgid, width:, height:)
       end
 
-      # L'état de l'article se lit dans la même requête que la ligne.
-      def read(public_id:)
-        image = Orm::ArticleImage.left_joins(:article).select("article_images.*", "articles.status AS article_status")
+      # L'état de l'article se lit dans la même requête que la ligne ; le fichier, jamais.
+      def find(public_id:)
+        image = Orm::ArticleImage.left_joins(:article).select("article_images.content_type", "articles.status AS article_status")
                                  .find_by(public_id:)
-        image && ServedImage.new(content_type: image.content_type, data: image.file.download, article_status: image.article_status)
+        image && ImageState.new(content_type: image.content_type, article_status: image.article_status)
+      end
+
+      # Le blob se trouve en une requête, puis le service est lu.
+      def download(public_id:)
+        ActiveStorage::Blob.joins(:attachments)
+                           .find_by(active_storage_attachments: { name: "file", record_type: Orm::ArticleImage.name,
+                                                                  record_id: Orm::ArticleImage.where(public_id:).select(:id) })
+                           &.download
       end
 
       # Une couverture n'est jamais purgée, même détachée. Le fichier part après validation (purge_later, ADR-0047).

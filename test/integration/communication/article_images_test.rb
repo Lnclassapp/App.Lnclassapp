@@ -77,6 +77,42 @@ class Communication::ArticleImagesTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "un navigateur qui a déjà l'image d'un article publié reçoit 304, sans que le bucket soit lu" do
+    get blog_image_path(@cover.public_id)
+    etag = response.headers["ETag"]
+    assert etag.present?
+
+    downloads = count_downloads { get blog_image_path(@cover.public_id), headers: { "If-None-Match" => etag } }
+
+    assert_response :not_modified
+    assert_equal 0, downloads
+    assert_empty response.body
+    assert_equal [ PUBLIC_CACHE, etag ], response.headers.values_at("Cache-Control", "ETag")
+    assert_nil response.headers["Set-Cookie"]
+  end
+
+  test "une autre image, ou un ETag périmé, est relue et servie en entier" do
+    get blog_image_path(@cover.public_id)
+    etag = response.headers["ETag"]
+
+    downloads = count_downloads { get blog_image_path(@body_images.first.public_id), headers: { "If-None-Match" => etag } }
+
+    assert_served @body_images.first, cache: PUBLIC_CACHE
+    assert_equal 1, downloads
+  end
+
+  test "l'image d'un brouillon, d'un archivé ou non rattachée n'est jamais lue dans le bucket pour qui ne la voit pas, ETag ou non" do
+    hidden_images.each_value do |image|
+      downloads = count_downloads do
+        get blog_image_path(image.public_id)
+        get blog_image_path(image.public_id), headers: { "If-None-Match" => "*" }
+      end
+
+      assert_response :not_found
+      assert_equal 0, downloads, image.public_id
+    end
+  end
+
   test "une adresse inconnue répond 404 à tous" do
     get blog_image_path("inconnue")
     assert_response :not_found
@@ -101,6 +137,13 @@ class Communication::ArticleImagesTest < ActionDispatch::IntegrationTest
   end
 
   private
+
+  def count_downloads(&)
+    downloads = 0
+    counter = ->(*) { downloads += 1 }
+    ActiveSupport::Notifications.subscribed(counter, "service_download.active_storage", &)
+    downloads
+  end
 
   def hidden_images
     draft = create_article_image
