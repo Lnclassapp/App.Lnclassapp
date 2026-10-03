@@ -23,7 +23,7 @@
     <%= render "communication/articles/masthead", back_label: t(".back"), back_href: back_href(blog_path, from: blog_path) %>
     <article aria-labelledby="article_title">
       <header class="mb-6">
-        <h1 id="article_title" class="font-display text-3xl leading-tight font-extrabold text-balance"><%= @article.title %></h1>
+        <h1 id="article_title" class="font-display text-3xl leading-tight font-extrabold text-balance break-words hyphens-auto"><%= @article.title %></h1>
         <p id="article_byline" class="mt-3 text-sm text-mute">
           <%= @article.author_name || t(".team_signature") %>
           <% if @article.published_on %>

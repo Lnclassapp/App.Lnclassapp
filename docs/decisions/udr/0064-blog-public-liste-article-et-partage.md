@@ -99,7 +99,7 @@ L'élève connecté n'a qu'une entrée, le pied de sa carte « Besoin d'aide ? �
   - `eager` est vrai pour la première carte de la page seulement.
   - Sans couverture : aucune image, aucun espace réservé.
 - `div.p-5` :
-  - `h2.font-display.text-lg.leading-tight.font-extrabold` > `link_to article.title, blog_article_path(article.slug)`, classes `text-ink after:absolute after:inset-0 after:rounded-card focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-brand` (lien étiré : toute la carte est la cible) ;
+  - `h2.font-display.text-lg.leading-tight.font-extrabold.break-words.hyphens-auto` *(classes de coupure ajoutées le 2026-10-03 : un mot ou une adresse plus large que la carte revient à la ligne)* > `link_to article.title, blog_article_path(article.slug)`, classes `text-ink after:absolute after:inset-0 after:rounded-card focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-brand` (lien étiré : toute la carte est la cible) ;
   - `p.mt-2.text-sm.text-mute` : le résumé, en entier (200 caractères au plus) ;
   - `p.mt-3.text-xs.text-mute` > `time[datetime=<published_on ISO 8601>]` : « Publié le 5 octobre 2026 » (`t(".published_on", date: article_date(article.published_on))`).
 - Ni signature, ni compteur de lectures, ni badge dans la carte.
@@ -116,7 +116,7 @@ De haut en bas, dans le conteneur commun :
 2. `render "communication/articles/masthead", back_label: t(".back"), back_href: back_href(blog_path, from: blog_path)`. Le libellé est « Blog ». Si le lecteur vient de `/blog?page=3`, le retour y ramène (UDR-0054 §3.2).
 3. `article[aria-labelledby="article_title"]` :
    - `header.mb-6` :
-     - `h1#article_title.font-display.text-3xl.leading-tight.font-extrabold.text-balance` : `@article.title` ;
+     - `h1#article_title.font-display.text-3xl.leading-tight.font-extrabold.text-balance.break-words.hyphens-auto` : `@article.title` *(amendement du 2026-10-03 : « Anticonstitutionnellement » faisait défiler la page à 390 et 360 px ; le mot se coupe, avec trait d'union là où le navigateur sait couper le français, `lang="fr"` étant posé sur `<html>`)* ;
      - `p#article_byline.mt-3.text-sm.text-mute` : la signature (`@article.author_name`, sinon `t(".team_signature")`, « L'équipe Lnclass ») ; si `published_on` : `span[aria-hidden="true"]` « · » puis `time[datetime]` « Publié le 5 octobre 2026 ». Un brouillon n'a pas de date.
    - **Couverture**, si `@article.cover` : `figure.mb-8` > `image_tag article_image_src(cover), alt: cover.alt, width: cover.width, height: cover.height, loading: :eager, fetchpriority: "high", decoding: :async, class: "h-auto w-full rounded-card bg-mist"`. L'`alt` n'est jamais vide : la publication le refuse (BL-13, ADR-0073).
    - **Texte** : `div#article_body.break-words` > `<%= @article.body %>`. Action Text l'enveloppe dans `layouts/action_text/contents/_content` (`div.trix-content`, inchangé), dont les règles de `application.tailwind.css` donnent la typographie : 16 px, interligne `leading-relaxed`, liens `text-brand-strong underline`, `h2` en `font-display text-xl`, images `h-auto max-w-full rounded-ln`.
