@@ -2,13 +2,13 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Entrées : [`memo.md`](memo.md), [`prd.md`](prd.md) (21 critères BL-01 à BL-21), [ADR-0073](../../decisions/adr/0073-blog-public-articles-images-et-referencement.md), [UDR-0064](../../decisions/udr/0064-blog-public-liste-article-et-partage.md), [UDR-0065](../../decisions/udr/0065-gestion-du-blog-par-l-equipe.md).
+> Entrées : [`memo.md`](memo.md), [`prd.md`](prd.md) (21 critères BL-01 à BL-21), [ADR-0074](../../decisions/adr/0074-blog-public-articles-images-et-referencement.md), [UDR-0066](../../decisions/udr/0066-blog-public-liste-article-et-partage.md), [UDR-0067](../../decisions/udr/0067-gestion-du-blog-par-l-equipe.md).
 > Contrat des use cases : `call` → `Shared::Result` (ADR-0026), policy injectée (`policy:`, ADR-0028), comme le code voisin (`UseCases::Catalog::PublishCourse`). `docs/blueprints/use_case.md` et `conventions.md` §8 sont périmés : ne pas les suivre.
 > Couverture : 100 % des lignes et des branches (CI, ADR-0024). Chaque fichier `.rb` créé a son test **dans le même lot**.
 
 ## Préalables au Lot 0
 
-- [x] ADR-0073, UDR-0064 et UDR-0065 `Accepté` (porteur, 2026-10-02, délégation ; passage de la phase 3 à la phase 4 sans nouvelle validation, `journal.md`).
+- [x] ADR-0074, UDR-0066 et UDR-0067 `Accepté` (porteur, 2026-10-02, délégation ; passage de la phase 3 à la phase 4 sans nouvelle validation, `journal.md`).
 - [ ] `git fetch origin Develop` puis fusion dans `feature/blog` si `Develop` a avancé (leçon du `journal.md` : référence `origin/Develop` périmée de 181 commits).
 - [x] ImageMagick (`/usr/bin/convert`) présent dans le conteneur : l'image par défaut de partage se fabrique à partir du logo de l'équipe, sans le redessiner.
 
@@ -31,24 +31,24 @@ Lot 0 — SOCLE (séquentiel, sur feature/blog)
 
 **Écart à la proposition de découpage, justifié par les fichiers :**
 
-1. **Le Lot C « publier / archiver / remettre en ligne » est fusionné dans le Lot A.** Les routes gelées par l'ADR-0073 §6 et l'UDR-0065 §3.0 mettent `publish` et `archive` dans `Teams::ArticlesController`, qui porte aussi `index`, `new`, `create`, `edit`, `update`. La publication refusée rouvre `_edit_modal` et re-rend `_article_row` (UDR-0065 §3.5) : C toucherait le contrôleur, la ligne et la modale de A. Un contrôleur ne se coupe pas en deux lots ; un C séquentiel après A listerait les mêmes fichiers. A devient le chemin nominal A du PRD, entier.
-2. **Les images sont coupées en deux lots : B (serveur) et F (navigateur).** Le JavaScript de l'éditeur, de la couverture et du panneau des textes de remplacement (UDR-0065 §3.4) se branche sur le balisage du formulaire de A ; il n'est démontrable qu'une fois A fusionné, et son test système passe par l'aperçu public de D. B garde tout ce qui se prouve sans navigateur : l'endpoint d'envoi, le service public `/blog/images/:public_id` et la purge des orphelines.
+1. **Le Lot C « publier / archiver / remettre en ligne » est fusionné dans le Lot A.** Les routes gelées par l'ADR-0074 §6 et l'UDR-0067 §3.0 mettent `publish` et `archive` dans `Teams::ArticlesController`, qui porte aussi `index`, `new`, `create`, `edit`, `update`. La publication refusée rouvre `_edit_modal` et re-rend `_article_row` (UDR-0067 §3.5) : C toucherait le contrôleur, la ligne et la modale de A. Un contrôleur ne se coupe pas en deux lots ; un C séquentiel après A listerait les mêmes fichiers. A devient le chemin nominal A du PRD, entier.
+2. **Les images sont coupées en deux lots : B (serveur) et F (navigateur).** Le JavaScript de l'éditeur, de la couverture et du panneau des textes de remplacement (UDR-0067 §3.4) se branche sur le balisage du formulaire de A ; il n'est démontrable qu'une fois A fusionné, et son test système passe par l'aperçu public de D. B garde tout ce qui se prouve sans navigateur : l'endpoint d'envoi, le service public `/blog/images/:public_id` et la purge des orphelines.
 3. **Les deux adaptateurs (`ArticleRepository`, `ArticleImageStore`) sont au Lot 0, avec leurs ports.** `test/architecture/port_contracts_test.rb` exige exactement un adaptateur par port à tout instant : un port gelé sans adaptateur casse `bin/ci` dès le Lot 0 (leçon du plan `gestion-etablissement-direction`, règle gelée 4). Et `ArticleRepository` est lu par A (écrire, transitions), B (images citées d'un article) et D (`increment_reads`) : un seul fichier, trois lots.
-4. **Le Lot 0 dépasse « une poignée de fichiers ».** C'est voulu et borné : l'ADR-0073 §5 impose les trois déplacements « en un commit de pur renommage, au Lot 0 » (≈ 30 fichiers à une ligne chacun), et chaque autre fichier y est parce qu'au moins deux lots le lisent ou parce que `port_contracts_test` l'exige. Aucun use case, aucun contrôleur, aucune vue n'y est.
+4. **Le Lot 0 dépasse « une poignée de fichiers ».** C'est voulu et borné : l'ADR-0074 §5 impose les trois déplacements « en un commit de pur renommage, au Lot 0 » (≈ 30 fichiers à une ligne chacun), et chaque autre fichier y est parce qu'au moins deux lots le lisent ou parce que `port_contracts_test` l'exige. Aucun use case, aucun contrôleur, aucune vue n'y est.
 
 **Règles gelées.**
 
 1. Les lots A, B, D, E, F **implémentent** les contrats du Lot 0 ; aucun ne change un port, un adaptateur, une entité, une policy, un DTO, une route, une locale, un helper partagé ou une fabrique. Un lot qui en a besoin **s'arrête** : le Lot 0 rouvre.
 2. Aucun lot vertical n'ajoute de fabrique dans `test/support/factories/` : ses aides de test vivent dans son fichier de test.
 3. Aucun lot vertical n'écrit dans `docs/` : il remonte ses notes au porteur du chantier, qui tient `journal.md`.
-4. Toutes les locales sont au Lot 0 (`conventions.md` §6, règle 1) : leurs clés et leurs textes sont fixés par l'UDR-0064 §3.6 et l'UDR-0065 §3.8. Une clé manquante arrête le lot.
+4. Toutes les locales sont au Lot 0 (`conventions.md` §6, règle 1) : leurs clés et leurs textes sont fixés par l'UDR-0066 §3.6 et l'UDR-0067 §3.8. Une clé manquante arrête le lot.
 
 ---
 
 ## Lot 0 — Socle
 
 - **Couche**       : domaine (entités, policies, DTO, ports — contrats gelés) + infrastructure (migration, `Orm::`, adaptateurs, assainisseur) + delivery (routes, helpers partagés) + config + locales + docs
-- **Fichiers**     : *Étape 0.1 — renommages purs, un commit `refactor(shared)`, aucune ligne de logique changée (ADR-0073 §4.2, §4.4, §4.5, §5)*
+- **Fichiers**     : *Étape 0.1 — renommages purs, un commit `refactor(shared)`, aucune ligne de logique changée (ADR-0074 §4.2, §4.4, §4.5, §5)*
                      app/domain/entities/catalog/content_status.rb *(supprimé : déplacé dans shared)*
                      app/domain/entities/shared/content_status.rb
                      app/domain/entities/catalog/course.rb
@@ -102,8 +102,8 @@ Lot 0 — SOCLE (séquentiel, sur feature/blog)
                      config/routes/communication.rb
                      config/routes/teams.rb
                      config/application.rb
-                     config/locales/communication/articles.fr.yml *(nouveau, UDR-0064 §3.6)*
-                     config/locales/teams/articles.fr.yml *(nouveau, UDR-0065 §3.8)*
+                     config/locales/communication/articles.fr.yml *(nouveau, UDR-0066 §3.6)*
+                     config/locales/teams/articles.fr.yml *(nouveau, UDR-0067 §3.8)*
                      config/locales/teams/homes.fr.yml
                      config/locales/shared/components.fr.yml
                      config/locales/communication/public_pages.fr.yml
@@ -116,8 +116,8 @@ Lot 0 — SOCLE (séquentiel, sur feature/blog)
                      test/fixtures/files/article_images/fake.jpg
                      docs/guide/glossaire.md *(article ≠ annonce)*
                      docs/guide/configuration.md *(`CANONICAL_HOST`, à inscrire aussi dans `APP_HOSTS`)*
-                     docs/decisions/adr/0027-contextes-bornes-et-arborescence.md · 0029-identifiants-exposes-public-id-et-slugs.md · 0038-comptes-de-l-equipe-et-sous-roles.md · 0047-stockage-objet-s3-sur-railway.md · 0051-navigateurs-supportes-et-budget-de-poids.md · README.md *(mentions « amendé par 0073 »)*
-                     docs/decisions/udr/0014-formulaire-cours.md · 0016-formulaire-fiche-essentielle.md · 0018-accueil-equipe.md · 0061-carte-d-aide-et-faq.md · 0063-pages-publiques-mission-confidentialite-cgu-cgv.md · README.md *(sections « Amendement » que l'UDR-0064 et l'UDR-0065 demandent au chantier)*
+                     docs/decisions/adr/0027-contextes-bornes-et-arborescence.md · 0029-identifiants-exposes-public-id-et-slugs.md · 0038-comptes-de-l-equipe-et-sous-roles.md · 0047-stockage-objet-s3-sur-railway.md · 0051-navigateurs-supportes-et-budget-de-poids.md · README.md *(mentions « amendé par 0074 »)*
+                     docs/decisions/udr/0014-formulaire-cours.md · 0016-formulaire-fiche-essentielle.md · 0018-accueil-equipe.md · 0061-carte-d-aide-et-faq.md · 0063-pages-publiques-mission-confidentialite-cgu-cgv.md · README.md *(sections « Amendement » que l'UDR-0066 et l'UDR-0067 demandent au chantier)*
 - **Dépend de**    : — (préalables ci-dessus)
 - **Test associé** : test/domain/entities/shared/content_status_test.rb *(déplacé, assertions inchangées)*
                      test/domain/entities/shared/image_header_test.rb *(déplacé, assertions inchangées)*
@@ -137,17 +137,17 @@ Lot 0 — SOCLE (séquentiel, sur feature/blog)
                      test/infrastructure/repositories/communication/article_image_store_test.rb *(stockage `analyzed: true`, lecture, purge des orphelines de plus de 48 h)*
                      test/helpers/communication/articles_helper_test.rb *(`article_image_src`, `canonical_url` sur `config.x.canonical_host` = `lnclass.com` par défaut, `article_date` → « 5 octobre 2026 » — BL-03)*
                      test/helpers/communication/article_status_helper_test.rb *(badge et entrées du menu ⋮ par état, 100 % des branches)*
-                     test/routing/blog_routes_test.rb *(nouveau : les noms des routes de l'ADR-0073 §6 et de l'UDR-0065 §3.0 ; `/teams/blog/images` et `/teams/blog/new` ne sont pas capturés par `:public_id`, `/blog/images/x` pas par `:slug`)*
+                     test/routing/blog_routes_test.rb *(nouveau : les noms des routes de l'ADR-0074 §6 et de l'UDR-0067 §3.0 ; `/teams/blog/images` et `/teams/blog/new` ne sont pas capturés par `:public_id`, `/blog/images/x` pas par `:slug`)*
                      test/support/factories_test.rb *(`create_article`, `create_article_image` écrivent une ligne valide avec leurs défauts)*
 - **Done quand**   : `bin/rails db:migrate`, `db:rollback`, `db:migrate` passent ; `bin/rails routes -g blog` montre `blog`, `blog_article`, `blog_image`, `sitemap`, `robots`, `teams_articles`, `new_teams_article`, `edit_teams_article`, `teams_article`, `publish_teams_article`, `archive_teams_article`, `teams_article_images` ; dans `bin/rails console`, `Repositories::Communication::ArticleRepository` crée un brouillon dont le slug suit le titre, et deux titres identiques donnent `-2` ; un cours, une fiche, un exercice se publient et une photo de profil s'envoie exactement comme avant (tests existants verts sans changement d'assertion) ; `bin/ci` au vert
 
 **Contrats gelés par le Lot 0** (signatures proposées par le plan, figées par le Lot 0 ; elles font foi pour A, B, D, E, F) :
 
-- `Entities::Communication::Article` : `TITLE_MAX` (120), `EXCERPT_MAX` (200), `BODY_MAX` (100 000), `SIGNATURES` (`team`, `author`), `TRANSITIONS` (= `Entities::Shared::ContentStatus::TRANSITIONS`), et la règle de complétude qui rend les erreurs nommées par champ (`title`, `excerpt`, `body`, `cover_alt`, `:"image_alts.<public_id>"`), lue par la publication et par l'enregistrement d'un article publié (ADR-0073 §4.2).
+- `Entities::Communication::Article` : `TITLE_MAX` (120), `EXCERPT_MAX` (200), `BODY_MAX` (100 000), `SIGNATURES` (`team`, `author`), `TRANSITIONS` (= `Entities::Shared::ContentStatus::TRANSITIONS`), et la règle de complétude qui rend les erreurs nommées par champ (`title`, `excerpt`, `body`, `cover_alt`, `:"image_alts.<public_id>"`), lue par la publication et par l'enregistrement d'un article publié (ADR-0074 §4.2).
 - `Entities::Communication::ArticleImage` : `CONTENT_TYPES`, `MAX_BYTES`, `MAX_MEGABYTES`, `MAX_SIDE`, `MAX_PER_ARTICLE`, `ALT_MAX`. `Entities::Communication::ArticleRead.countable?` (motif des robots, en-têtes de préchargement).
-- `Ports::Communication::ArticleRepositoryPort` : `find_by_public_id(public_id:)` → `Article` (avec sa couverture et ses images citées, dans l'ordre du texte) ou `nil` ; `create(dto:, author_id:, at:)` ; `update(id:, dto:, at:)` (assainit, rattache, purge, dans la transaction) ; `transition(id:, to:, at:)` (`published_at = COALESCE`, `archived_at`) ; `increment_reads(article_id:)` → Boolean (ADR-0073 §6).
+- `Ports::Communication::ArticleRepositoryPort` : `find_by_public_id(public_id:)` → `Article` (avec sa couverture et ses images citées, dans l'ordre du texte) ou `nil` ; `create(dto:, author_id:, at:)` ; `update(id:, dto:, at:)` (assainit, rattache, purge, dans la transaction) ; `transition(id:, to:, at:)` (`published_at = COALESCE`, `archived_at`) ; `increment_reads(article_id:)` → Boolean (ADR-0074 §6).
 - `Ports::Communication::ArticleImageStorePort` : `store(data:, content_type:, width:, height:)` → `StoredImage(public_id, sgid, width, height)` ; `read(public_id:)` → `ServedImage(content_type, data, article_status)` (`article_status` `nil` si non rattachée) ou `nil` ; *(2026-10-03, correction S1 : remplacé par `find(public_id:)` → `ImageState(content_type, article_status)` ou `nil`, sans lire le fichier, et `download(public_id:)` → octets ; le fichier n'est lu qu'après la règle de lecture et jamais pour un 304)* ; `purge_orphans(before:)` → nombre purgé.
-- `Dtos::Communication::ArticleInput` (avec `images`, liste ordonnée de `public_id`, `sgid`, `url`, `alt` ; UDR-0065 §3.0) et `Dtos::Communication::ArticleImageInput` (calqué sur `ProfilePhotoInput`, lit `Entities::Shared::ImageHeader`).
+- `Dtos::Communication::ArticleInput` (avec `images`, liste ordonnée de `public_id`, `sgid`, `url`, `alt` ; UDR-0067 §3.0) et `Dtos::Communication::ArticleImageInput` (calqué sur `ProfilePhotoInput`, lit `Entities::Shared::ImageHeader`).
 - Helpers : `Communication::ArticlesHelper#article_image_src(image)`, `#canonical_url(path)`, `#article_date(date)` ; `Communication::ArticleStatusHelper#article_status_badge(status)`, `#article_menu_items(article:)`.
 - Fabriques : `create_article(author:, status:, title:, excerpt:, body:, signature:, cover:, published_at:, archived_at:)`, `create_article_image(article:, alt:, fixture:, created_at:)`, `article_body_with(*images, text:)` (HTML Action Text qui cite les images par `sgid`). Elles passent par `Orm::` et l'adaptateur des images, comme `attach_photo`.
 - `Orm::ArticleImage#to_attachable_partial_path` vise un partiel livré par D : aucun test du Lot 0 ne rend `body.to_s` (rendu public) ; seul le rendu de l'éditeur (`to_trix_html`) y est vérifié.
@@ -184,7 +184,7 @@ Routes dessinées avant leurs contrôleurs : jusqu'à la fusion de A, B, D, E, e
                      app/javascript/controllers/communication/character_count_controller.js
 - **Dépend de**    : Lot 0
 - **Test associé** : test/domain/use_cases/communication/create_article_test.rb *(brouillon créé, `article.created` au journal ; refus → rien d'écrit — BL-07, BL-08)*
-                     test/domain/use_cases/communication/update_article_test.rb *(`article.updated` ; un article publié dont on vide le résumé → `:invalid` — ADR-0073 §4.2)*
+                     test/domain/use_cases/communication/update_article_test.rb *(`article.updated` ; un article publié dont on vide le résumé → `:invalid` — ADR-0074 §4.2)*
                      test/domain/use_cases/communication/publish_article_test.rb *(sans résumé → `:invalid` nommant `excerpt`, reste brouillon — BL-09 ; image sans texte de remplacement → `image_alts.<public_id>` — BL-13 ; remise en ligne garde `published_at` — BL-11 ; `article.published` avec `metadata.republished` — BL-07)*
                      test/domain/use_cases/communication/archive_article_test.rb *(`article.archived` ; transition interdite → `:conflict`)*
                      test/infrastructure/queries/communication/team_articles_query_test.rb *(tous les états, tri par dernière modification, 20 par page, `reads_count` — BL-17)*
@@ -194,11 +194,11 @@ Routes dessinées avant leurs contrôleurs : jusqu'à la fusion de A, B, D, E, e
                      test/helpers/communication/article_form_helper_test.rb *(`article_editor_data`, 100 % des branches)*
 - **Done quand**   : un membre Contenu touche « Blog » sur l'accueil équipe, ouvre `/teams/blog` vide, crée dans la modale un brouillon (titre, résumé, texte, signature) qui apparaît en tête de liste avec le badge « Brouillon » ; « Publier » au menu ⋮ sans résumé rouvre la modale en 422 avec « Écrivez le résumé » sous le champ ; complété et enregistré, il publie (toast, ligne « Publié »), archive, remet en ligne à la même date ; chaque geste est au journal d'audit ; un membre Terrain ne voit pas le raccourci et reçoit 403 sur `/teams/blog`
 
-Ordre intra-lot : tests rouges → use cases → queries → contrôleurs → vues (UDR-0065 §3.1 à §3.5, §3.8 pour les ids) → `communication--character-count`.
+Ordre intra-lot : tests rouges → use cases → queries → contrôleurs → vues (UDR-0067 §3.1 à §3.5, §3.8 pour les ids) → `communication--character-count`.
 
-`_form.html.erb` pose **tout** le balisage de l'UDR-0065 §3.3 et §3.4 (fieldset de couverture, `#article_editor` avec `article_editor_data`, panneau « Images du texte », gabarit `rowTemplate`, cibles et actions Stimulus nommées) : c'est le contrat que lit le Lot F, qui n'a pas le droit de toucher ce fichier. Tant que F n'est pas fusionné, la couverture ne se choisit pas et l'éditeur refuse toujours les fichiers (comportement actuel du contrôleur `rich-text-editor`) ; les images des tests de A viennent des fabriques du Lot 0. Tant que D et B ne sont pas fusionnés, « Aperçu » et les vignettes répondent par une erreur de chargement.
+`_form.html.erb` pose **tout** le balisage de l'UDR-0067 §3.3 et §3.4 (fieldset de couverture, `#article_editor` avec `article_editor_data`, panneau « Images du texte », gabarit `rowTemplate`, cibles et actions Stimulus nommées) : c'est le contrat que lit le Lot F, qui n'a pas le droit de toucher ce fichier. Tant que F n'est pas fusionné, la couverture ne se choisit pas et l'éditeur refuse toujours les fichiers (comportement actuel du contrôleur `rich-text-editor`) ; les images des tests de A viennent des fabriques du Lot 0. Tant que D et B ne sont pas fusionnés, « Aperçu » et les vignettes répondent par une erreur de chargement.
 
-`TeamArticlesQuery` lit le **nom réel** de l'auteur (UDR-0065 §3.2, `written_by` : « un auteur anonymisé garde son nom ici ») et pas la constante de repli de signature de D : écart avec l'ADR-0073 §4.8, voir « Écarts relevés ».
+`TeamArticlesQuery` lit le **nom réel** de l'auteur (UDR-0067 §3.2, `written_by` : « un auteur anonymisé garde son nom ici ») et pas la constante de repli de signature de D : écart avec l'ADR-0074 §4.8, voir « Écarts relevés ».
 
 ---
 
@@ -220,7 +220,7 @@ Ordre intra-lot : tests rouges → use cases → queries → contrôleurs → vu
                      test/integration/identity/active_storage_routes_test.rb *(inchangé, reste vert : aucune route Active Storage dessinée)*
 - **Done quand**   : connecté en Contenu, un `POST /teams/blog/images` multipart d'un JPEG répond 201 avec son `url`, et cette adresse sert l'image (cache `private, no-store`) ; un GIF, un faux `.jpg`, une image de 1 Mo + 1 octet répondent 422 avec leur raison et laissent la table et le bucket vides ; un membre Terrain reçoit 403 ; l'image d'un article publié se lit sans session, en cache public immuable, celle d'un brouillon répond 404 à un visiteur ; la tâche planifiée de production lance la purge chaque jour et `test/jobs/recurring_tasks_test.rb` reste vert
 
-Ordre intra-lot : tests rouges → use cases → contrôleurs (`Teams::ArticleImagesController` sous `Teams::BaseController` ; `Communication::ArticleImagesController` `allow_unauthenticated_access`, `send_data` de l'ADR-0073 §6) → job → tâche planifiée. Aucune vue, aucun JavaScript.
+Ordre intra-lot : tests rouges → use cases → contrôleurs (`Teams::ArticleImagesController` sous `Teams::BaseController` ; `Communication::ArticleImagesController` `allow_unauthenticated_access`, `send_data` de l'ADR-0074 §6) → job → tâche planifiée. Aucune vue, aucun JavaScript.
 
 ---
 
@@ -250,15 +250,15 @@ Ordre intra-lot : tests rouges → use cases → contrôleurs (`Teams::ArticleIm
                      test/infrastructure/queries/communication/article_signature_test.rb *(signé `team` : jamais de nom ; signé `author` d'un compte anonymisé : `NULL` — BL-18)*
                      test/infrastructure/queries/communication/published_articles_query_test.rb *(publiés seulement, `published_on` puis `id` décroissants, 10 par page, `any?` en une requête `EXISTS` — BL-01, BL-05, BL-06)*
                      test/infrastructure/queries/communication/article_detail_query_test.rb *(une requête pour l'article, sa signature et sa couverture ; `author_name` tranché par la query — BL-18)*
-                     test/controllers/communication/articles_controller_test.rb *(UDR-0064 §3.8 : BL-01 tri et pagination, 11 articles = 2 pages et `rel="next"` ; BL-02 200 sans shell, un seul `h1` même avec un `<h1>` saisi ; BL-03 les 12 balises du §3.4, avec couverture puis avec `blog/partage.png`, absolues sur `https://lnclass.com` ; BL-06 état vide ; BL-14 chaque `img` vise lnclass.com avec `width`, `height`, `alt`, `loading="lazy"` dans le texte ; BL-16 rien de `<script>`, `onerror`, `javascript:` à l'affichage ; BL-18 ; BL-21 HTML < 150 Ko pour 1 500 mots et 5 images, aucun `script` propre, aucun `data-controller`, aucune adresse `/rails/active_storage`)*
-                     test/integration/communication/articles_test.rb *(ADR-0073 §7 : BL-04 404 sans le titre pour visiteur, élève, enseignant, direction, Terrain ; BL-05 410 « Cet article n'est plus disponible », lien vers `/blog`, `noindex`, jamais de renvoi vers la connexion ; BL-11 un article remis en ligne répond 200 à la même adresse, daté d'origine ; BL-17 visiteur, élève, équipe, robot → compteur à 2, aperçu de brouillon sans effet ; BL-20 élève connecté : 200 sur `/blog`, aucune redirection)*
+                     test/controllers/communication/articles_controller_test.rb *(UDR-0066 §3.8 : BL-01 tri et pagination, 11 articles = 2 pages et `rel="next"` ; BL-02 200 sans shell, un seul `h1` même avec un `<h1>` saisi ; BL-03 les 12 balises du §3.4, avec couverture puis avec `blog/partage.png`, absolues sur `https://lnclass.com` ; BL-06 état vide ; BL-14 chaque `img` vise lnclass.com avec `width`, `height`, `alt`, `loading="lazy"` dans le texte ; BL-16 rien de `<script>`, `onerror`, `javascript:` à l'affichage ; BL-18 ; BL-21 HTML < 150 Ko pour 1 500 mots et 5 images, aucun `script` propre, aucun `data-controller`, aucune adresse `/rails/active_storage`)*
+                     test/integration/communication/articles_test.rb *(ADR-0074 §7 : BL-04 404 sans le titre pour visiteur, élève, enseignant, direction, Terrain ; BL-05 410 « Cet article n'est plus disponible », lien vers `/blog`, `noindex`, jamais de renvoi vers la connexion ; BL-11 un article remis en ligne répond 200 à la même adresse, daté d'origine ; BL-17 visiteur, élève, équipe, robot → compteur à 2, aperçu de brouillon sans effet ; BL-20 élève connecté : 200 sur `/blog`, aucune redirection)*
                      test/helpers/public_pages_helper_test.rb *(`blog_link` : `nil` sans article, la paire avec ; une requête par rendu — BL-06)*
                      test/controllers/homepage_controller_test.rb *(« Blog » absent puis présent au pied, en tête de « Plus sur Lnclass » — BL-06)*
                      test/system/communication/help_sheet_test.rb *(pied de la carte d'aide : « Blog » absent puis présent, Mission, Protection des données, Conditions d'utilisation — BL-06, BL-20)*
                      test/views/no_third_party_resources_test.rb *(inchangé, couvre les nouvelles vues — BL-21)*
 - **Done quand**   : sans compte, `/blog` montre « Aucun article pour le moment » et aucun lien « Blog » n'est au pied de la homepage ni de la carte d'aide ; un article publié (fabrique) apparaît en carte paginée par 10 et le lien « Blog » apparaît aux deux pieds ; `/blog/<slug>` montre le logo, « Blog », un seul `h1`, la signature (« L'équipe Lnclass » pour un auteur anonymisé), « Publié le 5 octobre 2026 », le texte et ses images en `loading="lazy"`, puis « Découvrir Lnclass » et « Tous les articles » ; la source porte les balises `og:*` sur `https://lnclass.com` ; un brouillon répond 404 à un élève et s'affiche avec le bandeau « Brouillon » et `noindex` pour un membre Contenu ; un archivé répond 410 ; deux lectures (visiteur, élève) font passer le compteur à 2, l'équipe et un `curl` ne comptent pas
 
-Ordre intra-lot : tests rouges → `RecordArticleRead` → queries (`ArticleSignature::AUTHOR_NAME`, puis les deux queries ; la structure `Image` de l'UDR-0064 §3.1 vit dans `ArticleDetailQuery` et sert aussi à `PublishedArticlesQuery`) → contrôleur (jamais `render_result` : `:expired` → `render :gone, status: :gone`, ADR-0073 §6) → vues (UDR-0064 §3.2 à §3.4) → `blog_link` et ses deux pieds (§3.5) → initialiseur Action Text (`loading`, `decoding`, `fetchpriority`).
+Ordre intra-lot : tests rouges → `RecordArticleRead` → queries (`ArticleSignature::AUTHOR_NAME`, puis les deux queries ; la structure `Image` de l'UDR-0066 §3.1 vit dans `ArticleDetailQuery` et sert aussi à `PublishedArticlesQuery`) → contrôleur (jamais `render_result` : `:expired` → `render :gone, status: :gone`, ADR-0074 §6) → vues (UDR-0066 §3.2 à §3.4) → `blog_link` et ses deux pieds (§3.5) → initialiseur Action Text (`loading`, `decoding`, `fetchpriority`).
 
 Les images servies par le Lot B : tant que B n'est pas fusionné, leurs adresses sont justes dans le HTML mais ne répondent pas ; les tests de D n'ouvrent pas les images.
 
@@ -271,7 +271,7 @@ Les images servies par le Lot B : tant que B n'est pas fusionné, leurs adresses
                      app/controllers/communication/sitemaps_controller.rb
                      app/views/communication/sitemaps/show.xml.builder
                      app/views/communication/sitemaps/robots.text.erb
-                     public/robots.txt *(supprimé, ADR-0073 §4.6)*
+                     public/robots.txt *(supprimé, ADR-0074 §4.6)*
 - **Dépend de**    : Lot 0
 - **Test associé** : test/infrastructure/queries/communication/sitemap_query_test.rb *(publiés seulement, avec `updated_at` ; ni brouillon ni archivé — BL-05, BL-19)*
                      test/integration/communication/sitemaps_test.rb *(BL-19 : accueil, `/aide`, chaque page de `Communication::PagesController::ONLINE`, `/blog`, chaque article publié avec `lastmod`, adresses absolues sur l'hôte canonique, `Cache-Control: public, max-age=3600` ; `/robots.txt` contient `Sitemap: https://lnclass.com/sitemap.xml`, `max-age=86400` ; `public/robots.txt` et `public/sitemap.xml` n'existent pas)*
@@ -282,12 +282,12 @@ Les images servies par le Lot B : tant que B n'est pas fusionné, leurs adresses
 ## Lot F — L'éditeur du blog insère des images
 
 - **Couche**       : ui (Stimulus, module JavaScript à la demande) + test système de bout en bout
-- **Fichiers**     : app/javascript/controllers/rich_text_editor_controller.js *(mode images sur la valeur `attachments`, UDR-0065 §3.4.3 et §3.7 ; en-tête HITL et commentaire `V1 accepts no attachment` mis à jour)*
+- **Fichiers**     : app/javascript/controllers/rich_text_editor_controller.js *(mode images sur la valeur `attachments`, UDR-0067 §3.4.3 et §3.7 ; en-tête HITL et commentaire `V1 accepts no attachment` mis à jour)*
                      app/javascript/controllers/communication/cover_picker_controller.js
                      app/javascript/controllers/communication/image_alts_controller.js
                      app/javascript/lib/image_upload.js *(chargé par `import()` seulement)*
 - **Dépend de**    : Lot A (balisage du formulaire), Lot B (endpoint d'envoi et service des images), Lot D (aperçu public)
-- **Test associé** : test/system/teams/blog_management_test.rb *(UDR-0065 §3.10, Chrome, `assert_no_page_reload`, sans violation de CSP : 1. raccourci, liste vide, brouillon avec couverture et deux images du texte réduites et envoyées, texte de remplacement laissé vide, ligne en tête ; 2. publier → modale 422 sur l'image 2 (BL-13), compléter, publier, toast, ligne « Publié » (BL-07) ; 3. archiver, remettre en ligne, l'aperçu mène à la page publique qui montre l'image (BL-14) ; 4. GIF, faux `.jpg`, image trop lourde refusés avec leur raison (BL-12), image collée d'une page web retirée ; 5. à 390 px pas de défilement horizontal, ⋮ visible ; 6. l'éditeur d'un cours refuse toujours un fichier déposé (BL-15))*
+- **Test associé** : test/system/teams/blog_management_test.rb *(UDR-0067 §3.10, Chrome, `assert_no_page_reload`, sans violation de CSP : 1. raccourci, liste vide, brouillon avec couverture et deux images du texte réduites et envoyées, texte de remplacement laissé vide, ligne en tête ; 2. publier → modale 422 sur l'image 2 (BL-13), compléter, publier, toast, ligne « Publié » (BL-07) ; 3. archiver, remettre en ligne, l'aperçu mène à la page publique qui montre l'image (BL-14) ; 4. GIF, faux `.jpg`, image trop lourde refusés avec leur raison (BL-12), image collée d'une page web retirée ; 5. à 390 px pas de défilement horizontal, ⋮ visible ; 6. l'éditeur d'un cours refuse toujours un fichier déposé (BL-15))*
                      test/system/teams/course_management_test.rb *(inchangé, reste vert — BL-15)*
                      test/system/teams/essential_management_test.rb *(inchangé, reste vert — BL-15)*
                      test/architecture/lazy_libraries_test.rb *(inchangé, reste vert : aucun import statique de `trix` ni du module d'images)*
@@ -325,7 +325,7 @@ Chemins absolus des worktrees : `/home/user/lnclass-blog-lot-a`, `-b`, `-d`, `-e
 
 - le chemin **absolu** de son worktree, et `git -C <worktree>` pour toute commande git : le répertoire courant est réinitialisé entre deux appels shell ;
 - son lot recopié en entier (Couche, Fichiers, Dépend de, Test associé, Done quand, et le paragraphe qui le suit) ;
-- les liens vers [`prd.md`](prd.md), [ADR-0073](../../decisions/adr/0073-blog-public-articles-images-et-referencement.md), et l'UDR qui régit ses vues : UDR-0065 pour A et F, UDR-0064 pour D et E ;
+- les liens vers [`prd.md`](prd.md), [ADR-0074](../../decisions/adr/0074-blog-public-articles-images-et-referencement.md), et l'UDR qui régit ses vues : UDR-0067 pour A et F, UDR-0066 pour D et E ;
 - l'ordre intra-lot : test rouge → domaine → infrastructure → delivery → UI ; en-tête HITL sur chaque fichier créé dans `app/` ;
 - **interdiction de toucher un fichier qui n'est pas dans son champ `Fichiers`.** S'il en a besoin, il s'arrête et remonte : soit le fichier appartient au Lot 0 (qui rouvre), soit le plan est faux.
 
@@ -348,9 +348,9 @@ Fusion dans `feature/blog` au fur et à mesure, `bin/ci` vert après chaque fusi
 |---|---|---|
 | `db/migrate/20261004090000_create_articles.rb`, `db/schema.rb`, `test/db/schema_constraints_test.rb` | Lot 0 | Seule migration du chantier ; toutes les tables lues par A, B, D, E |
 | `app/infrastructure/orm/article.rb`, `app/infrastructure/orm/article_image.rb` | Lot 0 | Lus par les deux adaptateurs, les queries de A, D, E et le rendu Action Text de D |
-| `app/domain/entities/shared/content_status.rb` (+ 12 appelants) | Lot 0 | Déplacement imposé par l'ADR-0073 §4.2, lu par A (`TRANSITIONS`) et par le catalogue et l'évaluation |
-| `app/domain/entities/shared/image_header.rb` (+ appelants de l'identité) | Lot 0 | Déplacement imposé par l'ADR-0073 §4.4, lu par le DTO des images (B) et la photo de profil |
-| `app/infrastructure/repositories/shared/rich_text_sanitizer.rb` (+ appelants du catalogue) | Lot 0 | Déplacement imposé par l'ADR-0073 §4.5, étendu `image_ids:` pour l'adaptateur des articles |
+| `app/domain/entities/shared/content_status.rb` (+ 12 appelants) | Lot 0 | Déplacement imposé par l'ADR-0074 §4.2, lu par A (`TRANSITIONS`) et par le catalogue et l'évaluation |
+| `app/domain/entities/shared/image_header.rb` (+ appelants de l'identité) | Lot 0 | Déplacement imposé par l'ADR-0074 §4.4, lu par le DTO des images (B) et la photo de profil |
+| `app/infrastructure/repositories/shared/rich_text_sanitizer.rb` (+ appelants du catalogue) | Lot 0 | Déplacement imposé par l'ADR-0074 §4.5, étendu `image_ids:` pour l'adaptateur des articles |
 | `app/domain/entities/communication/*.rb` (article, article_image, article_read) | Lot 0 | Contrats lus par A, B, D, F (constantes des plafonds lues par la vue de A et le JavaScript de F) |
 | `app/domain/entities/identity/audit_action.rb` | Lot 0 | Liste fermée lue par `AuditLogRepository` ; écrite par les quatre use cases de A |
 | `app/domain/policies/communication/*.rb` | Lot 0 | `ManageArticlesPolicy` lue par A et B ; `ReadArticlePolicy` par B et D |
@@ -358,11 +358,11 @@ Fusion dans `feature/blog` au fur et à mesure, `bin/ci` vert après chaque fusi
 | `app/domain/ports/communication/*.rb` **et** `app/infrastructure/repositories/communication/*.rb` | Lot 0 | `port_contracts_test` : un adaptateur par port à tout instant ; `ArticleRepository` lu par A, B, D |
 | `app/helpers/communication/articles_helper.rb` | Lot 0 | `article_image_src` lu par A (vignettes), D (pages) ; `canonical_url` par D et E |
 | `app/helpers/communication/article_status_helper.rb` | Lot 0 | `article_status_badge` lu par A (liste, modale) et D (bandeau d'aperçu) |
-| `config/routes/communication.rb`, `config/routes/teams.rb` | Lot 0 | Routes de A, B, D, E, contrat de l'UDR-0065 §3.0 |
+| `config/routes/communication.rb`, `config/routes/teams.rb` | Lot 0 | Routes de A, B, D, E, contrat de l'UDR-0067 §3.0 |
 | `config/application.rb` | Lot 0 | `config.x.canonical_host`, lu par D et E |
 | `config/locales/communication/articles.fr.yml`, `config/locales/teams/articles.fr.yml` | Lot 0 | Lus par les helpers du Lot 0, par A, B, D et F (messages d'envoi) |
 | `config/locales/teams/homes.fr.yml`, `config/locales/shared/components.fr.yml`, `config/locales/communication/public_pages.fr.yml`, `config/locales/shared/help_sheet.fr.yml`, `config/locales/homepage/index.fr.yml` | Lot 0 | `conventions.md` §6 : les locales appartiennent au Lot 0 ; textes fixés par les UDR |
-| `app/assets/images/blog/partage.png` | Lot 0 | Image par défaut de `og:image` (D), fichier d'équipe décidé par l'UDR-0064 §3.4 |
+| `app/assets/images/blog/partage.png` | Lot 0 | Image par défaut de `og:image` (D), fichier d'équipe décidé par l'UDR-0066 §3.4 |
 | `test/support/factories/communication.rb`, `test/support/factories_test.rb` | Lot 0 | Fabriques lues par A, B, D, E, F |
 | `test/fixtures/files/article_images/*` | Lot 0 | Lus par le test du DTO (Lot 0) et par B |
 | `test/infrastructure/orm/models_test.rb` | Lot 0 | Tables V1 et leurs modèles |
@@ -465,11 +465,11 @@ Sortie de la commande de détection, exécutée par l'architecte le 2026-10-02 s
 
 ## Écarts relevés entre les décisions et le code (à consigner au `journal.md`)
 
-1. **Horodatage de la migration.** L'ADR-0073 §6 cite `db/migrate/20261002120000_create_articles.rb` (« extrait »). `Develop` porte déjà des migrations jusqu'à `20261003110000` : une migration plus ancienne que la dernière jouée serait déroutante. Le plan la nomme `20261004090000_create_articles.rb` ; le contenu suit l'ADR à la lettre.
-2. **Nom de l'auteur dans la liste de gestion.** L'ADR-0073 §4.8 range `TeamArticlesQuery` parmi les queries qui appliquent le repli de signature ; l'UDR-0065 §3.2 dit que la liste garde le nom réel (« Écrit par … »), et un article signé `team` n'aurait sinon aucun nom à afficher. L'UDR fait foi pour la vue : A lit le nom réel, seules les queries publiques de D appliquent `ArticleSignature::AUTHOR_NAME`.
-3. **Nom inventé par le plan** : `Queries::Communication::ArticleFormImagesQuery` (A). L'UDR-0065 §3.0 exige que le contrôleur reconstruise `images` (`public_id`, `sgid`, `url`, `alt`) depuis le `body` et `image_alts` ; le `sgid` vient d'`Orm::`, donc d'une query, pas du contrôleur. Aucune décision ne la nomme.
-4. **Deux fichiers de test pour la lecture publique.** L'UDR-0064 §3.8 nomme `test/controllers/communication/articles_controller_test.rb`, l'ADR-0073 §7 `test/integration/communication/articles_test.rb`. Les deux sont gardés dans D, sans doublon : rendu dans le premier, parcours HTTP (statuts, compteur, redirections) dans le second.
-5. **Lecture de l'aperçu par le test système de l'UDR-0065 §3.10.** Ce test couvre aussi la gestion du Lot A : il est porté par F, dernier lot, parce qu'il exige le JavaScript de F, l'endpoint de B et la page publique de D.
+1. **Horodatage de la migration.** L'ADR-0074 §6 cite `db/migrate/20261002120000_create_articles.rb` (« extrait »). `Develop` porte déjà des migrations jusqu'à `20261003110000` : une migration plus ancienne que la dernière jouée serait déroutante. Le plan la nomme `20261004090000_create_articles.rb` ; le contenu suit l'ADR à la lettre.
+2. **Nom de l'auteur dans la liste de gestion.** L'ADR-0074 §4.8 range `TeamArticlesQuery` parmi les queries qui appliquent le repli de signature ; l'UDR-0067 §3.2 dit que la liste garde le nom réel (« Écrit par … »), et un article signé `team` n'aurait sinon aucun nom à afficher. L'UDR fait foi pour la vue : A lit le nom réel, seules les queries publiques de D appliquent `ArticleSignature::AUTHOR_NAME`.
+3. **Nom inventé par le plan** : `Queries::Communication::ArticleFormImagesQuery` (A). L'UDR-0067 §3.0 exige que le contrôleur reconstruise `images` (`public_id`, `sgid`, `url`, `alt`) depuis le `body` et `image_alts` ; le `sgid` vient d'`Orm::`, donc d'une query, pas du contrôleur. Aucune décision ne la nomme.
+4. **Deux fichiers de test pour la lecture publique.** L'UDR-0066 §3.8 nomme `test/controllers/communication/articles_controller_test.rb`, l'ADR-0074 §7 `test/integration/communication/articles_test.rb`. Les deux sont gardés dans D, sans doublon : rendu dans le premier, parcours HTTP (statuts, compteur, redirections) dans le second.
+5. **Lecture de l'aperçu par le test système de l'UDR-0067 §3.10.** Ce test couvre aussi la gestion du Lot A : il est porté par F, dernier lot, parce qu'il exige le JavaScript de F, l'endpoint de B et la page publique de D.
 
 ---
 

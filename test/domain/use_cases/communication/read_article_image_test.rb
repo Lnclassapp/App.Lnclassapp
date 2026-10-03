@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4, BL-14 : l'image d'un article publié se lit par tous, en cache public ; celle d'un brouillon, d'un archivé
+# ADR-0074 §4.4, BL-14 : l'image d'un article publié se lit par tous, en cache public ; celle d'un brouillon, d'un archivé
 # ou pas encore rattachée ne se lit que par qui gère le blog, en cache privé ; pour tout autre, elle est introuvable.
 module UseCases
   module Communication

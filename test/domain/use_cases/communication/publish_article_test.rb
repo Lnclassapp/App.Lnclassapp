@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.2 : publier exige un article complet (BL-09, BL-13) ; une remise en ligne garde la date de la première
+# ADR-0074 §4.2 : publier exige un article complet (BL-09, BL-13) ; une remise en ligne garde la date de la première
 # publication (BL-11) ; le geste est au journal, la remise en ligne dite (BL-07).
 module UseCases
   module Communication

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::ArticlesController
 # Rôle : l'équipe admin et content gère le blog : liste, rédaction en modale, publication, archivage, remise en ligne (menu ⋮)
-# ADR  : 0026, 0028, 0035, 0073 · UDR : 0006, 0042, 0065
+# ADR  : 0026, 0028, 0035, 0074 · UDR : 0006, 0042, 0067
 module Teams
   class ArticlesController < BaseController
     FIELDS = [ :title, :excerpt, :body, :signature, :cover_public_id, :cover_alt, { image_alts: {} } ].freeze
@@ -41,7 +41,7 @@ module Teams
       }
     end
 
-    # Publier ou remettre en ligne. Un article incomplet rouvre la modale de modification en 422 (UDR-0065 §3.5).
+    # Publier ou remettre en ligne. Un article incomplet rouvre la modale de modification en 422 (UDR-0067 §3.5).
     def publish
       before = team_articles.find(public_id: params[:public_id])
       result = publish_article.call(actor: current_actor, public_id: params[:public_id])
@@ -110,7 +110,7 @@ module Teams
       )
     end
 
-    # La saisie, avec les images du texte reconstruites depuis le texte envoyé et image_alts (UDR-0065 §3.0).
+    # La saisie, avec les images du texte reconstruites depuis le texte envoyé et image_alts (UDR-0067 §3.0).
     def form_input(article_public_id: nil)
       Dtos::Communication::ArticleInput.new(params.expect(article: FIELDS).to_h.symbolize_keys).tap do |form|
         form.images = form_images.call(body: form.body, image_alts: form.image_alts, article_public_id:)

@@ -2,7 +2,7 @@ require "test_helper"
 
 module Queries
   module Communication
-    # UDR-0064 §3.1 : la liste publique du blog. Publiés seulement (BL-05), du plus récent au plus ancien, dix par page
+    # UDR-0066 §3.1 : la liste publique du blog. Publiés seulement (BL-05), du plus récent au plus ancien, dix par page
     # (BL-01) ; any? dit, en une requête, si le lien « Blog » existe (BL-06).
     class PublishedArticlesQueryTest < ActiveSupport::TestCase
       Image = ArticleDetailQuery::Image

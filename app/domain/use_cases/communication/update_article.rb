@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::UpdateArticle
 # Rôle : l'équipe modifie un article dans son état ; un article publié n'est jamais rendu incomplet ; geste au journal
-# ADR  : 0026, 0028, 0029, 0035, 0073 · UDR : 0065
+# ADR  : 0026, 0028, 0029, 0035, 0074 · UDR : 0067
 module UseCases
   module Communication
     class UpdateArticle
@@ -22,7 +22,7 @@ module UseCases
         return Shared::Result.failure(:not_found) if current.nil?
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) unless dto.valid?
 
-        # ADR-0073 §4.2 : un article en ligne ne perd jamais son résumé ni un texte de remplacement par une modification.
+        # ADR-0074 §4.2 : un article en ligne ne perd jamais son résumé ni un texte de remplacement par une modification.
         if current.published?
           errors = dto.to_article(status: current.status).publication_errors
           return Shared::Result.failure(:invalid, errors:) if errors.any?

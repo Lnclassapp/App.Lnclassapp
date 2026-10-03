@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PublishedArticlesQuery
 # Rôle : liste publique du blog, publiés seulement, du plus récent au plus ancien, dix par page ; le blog a-t-il un article ?
-# ADR  : 0026, 0073 · UDR : 0064 (§3.1, §3.5)
+# ADR  : 0026, 0074 · UDR : 0066 (§3.1, §3.5)
 module Queries
   module Communication
     class PublishedArticlesQuery

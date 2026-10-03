@@ -1,5 +1,5 @@
-<%# 🌐 UI · teams/articles/publish_refused — publication d'un article incomplet refusée, en 422 (UDR-0065 §3.5) %>
+<%# 🌐 UI · teams/articles/publish_refused — publication d'un article incomplet refusée, en 422 (UDR-0067 §3.5) %>
 <%# Rôle : la modale de modification s'ouvre d'elle-même, chaque manque sous son champ ; ligne relue dans son état ; pas de toast %>
-<%# ADR  : 0035, 0073 · UDR : 0054, 0065 %>
+<%# ADR  : 0035, 0074 · UDR : 0054, 0067 %>
 <%= turbo_stream.update "modal", partial: "teams/articles/edit_modal", locals: { article: @article, form: @form, refused: true } %>
 <%= turbo_stream.replace "article_#{@article.public_id}", method: :morph, partial: "teams/articles/article_row", locals: { article: @article } %>

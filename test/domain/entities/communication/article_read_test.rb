@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.7, BL-17 : un robot qui se déclare et un préchargement ne sont jamais une lecture.
+# ADR-0074 §4.7, BL-17 : un robot qui se déclare et un préchargement ne sont jamais une lecture.
 module Entities
   module Communication
     class ArticleReadTest < ActiveSupport::TestCase

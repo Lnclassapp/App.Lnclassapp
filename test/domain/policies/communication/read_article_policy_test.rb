@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.2, BL-04, BL-05 : un article publié se lit par tous ; un brouillon est introuvable et un archivé retiré pour
+# ADR-0074 §4.2, BL-04, BL-05 : un article publié se lit par tous ; un brouillon est introuvable et un archivé retiré pour
 # qui ne gère pas le blog ; qui le gère lit tout état (aperçu).
 module Policies
   module Communication

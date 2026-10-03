@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Communication::ReadArticlePolicy
 # Rôle : publié → tous ; qui gère → tout état ; archivé → :expired (410) ; brouillon → :not_found (introuvable)
-# ADR  : 0028, 0035, 0073
+# ADR  : 0028, 0035, 0074
 module Policies
   module Communication
     class ReadArticlePolicy

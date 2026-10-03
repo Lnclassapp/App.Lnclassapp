@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::ArticleRepository
 # Rôle : traduit Orm::Article, son texte Action Text et ses images ↔ Entities::Communication::Article ; slug figé, lectures comptées
-# ADR  : 0029, 0035, 0047, 0073
+# ADR  : 0029, 0035, 0047, 0074
 module Repositories
   module Communication
     class ArticleRepository
@@ -48,7 +48,7 @@ module Repositories
         changed == 1
       end
 
-      # Une requête, sans transaction ni verrou ; updated_at intact, donc le lastmod du plan du site aussi (ADR-0073 §4.7).
+      # Une requête, sans transaction ni verrou ; updated_at intact, donc le lastmod du plan du site aussi (ADR-0074 §4.7).
       def increment_reads(article_id:)
         Orm::Article.where(id: article_id, status: "published").update_all("reads_count = reads_count + 1") == 1
       end

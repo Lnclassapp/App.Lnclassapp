@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::ArticleImageStore
 # Rôle : images d'article en lignes article_images et fichiers sur le service Active Storage (bucket) : envoyer, servir, purger
-# ADR  : 0047, 0060, 0073
+# ADR  : 0047, 0060, 0074
 module Repositories
   module Communication
     class ArticleImageStore

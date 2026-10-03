@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0064 §3.1, ADR-0073 §4.4, §4.6 : l'adresse d'une image d'article, les adresses absolues sur l'hôte canonique
+# UDR-0066 §3.1, ADR-0074 §4.4, §4.6 : l'adresse d'une image d'article, les adresses absolues sur l'hôte canonique
 # (jamais request.host : lnclass.com et www.lnclass.com servent tous deux l'application), la date d'un article.
 module Communication
   class ArticlesHelperTest < ActionView::TestCase

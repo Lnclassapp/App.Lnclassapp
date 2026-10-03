@@ -3,7 +3,7 @@ require "application_system_test_case"
 # UDR-0061 §3.2 à §3.8 (PRD §4, « Carte d'aide ») : « Besoin d'aide ? » ouvre une feuille ancrée en bas sur téléphone et
 # une modale centrée sur ordinateur, avec la FAQ, WhatsApp et l'appel ; le focus va sur la première ligne et revient
 # sur le bouton à la fermeture. Sans JavaScript, le bouton reste un lien vers /aide. Données du support : celles du
-# test (config/support.yml). UDR-0064 §3.5 (amendement de l'UDR-0061 §3.3) : le pied de la carte, « Plus sur Lnclass »,
+# test (config/support.yml). UDR-0066 §3.5 (amendement de l'UDR-0061 §3.3) : le pied de la carte, « Plus sur Lnclass »,
 # porte « Blog » dès le premier article publié (BL-06), qui mène l'élève à la liste sans détour (BL-20).
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::ArticleDetailQuery
 # Rôle : un article du blog par son slug, tous états : signature tranchée, couverture et texte, en une requête
-# ADR  : 0026, 0073 (§4.7, §4.8) · UDR : 0064 (§3.1)
+# ADR  : 0026, 0074 (§4.7, §4.8) · UDR : 0066 (§3.1)
 module Queries
   module Communication
     class ArticleDetailQuery

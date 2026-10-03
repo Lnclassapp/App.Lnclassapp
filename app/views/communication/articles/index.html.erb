@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/articles/index — liste publique du blog, dix articles par page, sans shell %>
 <%# Rôle : en-tête commun, h1 « Blog », cartes ou état vide, pagination ; balises de partage de la liste %>
-<%# UDR  : 0064 (§3.2, §3.4, §3.6) · ADR : 0073 %>
+<%# UDR  : 0066 (§3.2, §3.4, §3.6) · ADR : 0074 %>
 <% paged = @page.page > 1 %>
 <% page_title(paged ? t(".page_title_paged", page: @page.page) : t(".page_title")) %>
 <% content_for :head do %>

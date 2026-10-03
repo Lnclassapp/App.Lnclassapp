@@ -1,7 +1,7 @@
 require "test_helper"
 
 # UDR-0063 §3.1, §3.4 : le pied de page de la homepage, /aide et la carte d'aide lisent la même liste ; un lien
-# n'apparaît que si sa page est en ligne. UDR-0064 §3.5 : le lien « Blog » n'existe qu'à partir du premier article
+# n'apparaît que si sa page est en ligne. UDR-0066 §3.5 : le lien « Blog » n'existe qu'à partir du premier article
 # publié (BL-06), au prix d'une requête par rendu.
 class PublicPagesHelperTest < ActionView::TestCase
   CONTROLLER = Communication::PagesController

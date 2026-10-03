@@ -1,13 +1,13 @@
 # 🌐 UI · Communication::ArticleFormHelper — éditeur du blog dans la modale de l'équipe
 # Rôle : données de #article_editor (mode images, plafonds, messages) lues par rich-text-editor ; texte au format de Trix
-# ADR  : 0051, 0073 · UDR : 0065
+# ADR  : 0051, 0074 · UDR : 0067
 module Communication
   module ArticleFormHelper
     IMAGE = Entities::Communication::ArticleImage
-    # Jetons remplacés ici ; %{name}, %{reason} et %{number} le sont par le navigateur (UDR-0065 §3.4.3).
+    # Jetons remplacés ici ; %{name}, %{reason} et %{number} le sont par le navigateur (UDR-0067 §3.4.3).
     SERVER_TOKENS = /%\{(max_bytes|max_count)\}/
 
-    # → le hash data de #article_editor (UDR-0065 §3.4.4). Les plafonds viennent de ArticleImage, jamais d'un chiffre écrit.
+    # → le hash data de #article_editor (UDR-0067 §3.4.4). Les plafonds viennent de ArticleImage, jamais d'un chiffre écrit.
     def article_editor_data(upload_url:)
       {
         "rich-text-editor-lang-value" => t("components.rich_text_editor.lang").to_json,

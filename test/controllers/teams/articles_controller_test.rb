@@ -1,6 +1,6 @@
 require "test_helper"
 
-# PRD blog, chemin nominal A (UDR-0065, ADR-0073): the team members admin and content manage the blog — list, modal to
+# PRD blog, chemin nominal A (UDR-0067, ADR-0074): the team members admin and content manage the blog — list, modal to
 # write a draft, publish, archive and republish from the ⋮ menu, each gesture audited (BL-07); everyone else receives
 # 403 and nothing changes (BL-08); publishing an incomplete article reopens the modal in 422 naming what is missing
 # (BL-09, BL-13); the list shows the reads « sans dédoublonnage » (BL-17).

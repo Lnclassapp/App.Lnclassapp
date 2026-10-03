@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.1, §4.2 : un article suit le cycle des contenus ; publier, ou enregistrer un article déjà publié, exige un
+# ADR-0074 §4.1, §4.2 : un article suit le cycle des contenus ; publier, ou enregistrer un article déjà publié, exige un
 # article complet, et chaque manque est nommé par son champ (BL-09, BL-13).
 module Entities
   module Communication

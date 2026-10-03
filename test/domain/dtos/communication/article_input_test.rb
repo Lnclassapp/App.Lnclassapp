@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.1, UDR-0065 §3.0, §3.3 : la saisie d'un article dans la modale de l'équipe ; ses plafonds, sa signature, et
+# ADR-0074 §4.1, UDR-0067 §3.0, §3.3 : la saisie d'un article dans la modale de l'équipe ; ses plafonds, sa signature, et
 # les images du texte que la modale montre, gardées d'un re-rendu 422 à l'autre.
 module Dtos
   module Communication

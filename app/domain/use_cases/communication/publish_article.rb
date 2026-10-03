@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::PublishArticle
 # Rôle : l'équipe publie un brouillon complet, ou remet en ligne un article archivé à sa date d'origine ; geste au journal
-# ADR  : 0026, 0028, 0035, 0073 · UDR : 0065
+# ADR  : 0026, 0028, 0035, 0074 · UDR : 0067
 module UseCases
   module Communication
     class PublishArticle

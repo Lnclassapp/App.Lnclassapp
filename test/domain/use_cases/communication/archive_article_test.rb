@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.2 : l'équipe archive un article publié (son lien répondra 410) ; le geste est au journal (BL-07). Une
+# ADR-0074 §4.2 : l'équipe archive un article publié (son lien répondra 410) ; le geste est au journal (BL-07). Une
 # transition déjà faite ou interdite est un :conflict.
 module UseCases
   module Communication

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::ArticleImage
 # Rôle : image d'un article (couverture ou texte), vérifiée, sans métadonnées ; pièce jointe Action Text par sgid
-# ADR  : 0029, 0060, 0073
+# ADR  : 0029, 0060, 0074
 module Orm
   class ArticleImage < ApplicationRecord
     include HasPublicId

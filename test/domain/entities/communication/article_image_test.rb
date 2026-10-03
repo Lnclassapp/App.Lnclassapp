@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4 : les plafonds d'une image d'article, lus par les vues, le JavaScript et le serveur.
+# ADR-0074 §4.4 : les plafonds d'une image d'article, lus par les vues, le JavaScript et le serveur.
 module Entities
   module Communication
     class ArticleImageTest < ActiveSupport::TestCase

@@ -7,7 +7,7 @@
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-16**, bloque la V1 (minimal) et la V4 |
 | **Remplace** | — |
 | **Remplacé par** | — |
-| **Amendé par** | [ADR-0073](./0073-blog-public-articles-images-et-referencement.md) : §4 (matrice : ligne « Blog », appliquée dès maintenant) |
+| **Amendé par** | [ADR-0074](./0074-blog-public-articles-images-et-referencement.md) : §4 (matrice : ligne « Blog », appliquée dès maintenant) |
 
 ---
 
@@ -120,7 +120,7 @@ add_check_constraint :users, "(role = 'team') = (team_role IS NOT NULL)", name: 
 - Pas de sous-rôle « gestionnaire DRENA ».
 - Une invitation expire au bout de 72 heures.
 
-## Amendement du 2026-10-02 — blog public (ADR-0073)
+## Amendement du 2026-10-02 — blog public (ADR-0074)
 
 *Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 

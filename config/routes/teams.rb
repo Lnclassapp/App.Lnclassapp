@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0073 · UDR : 0065
+# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074 · UDR : 0067
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -33,7 +33,7 @@ scope "teams", module: "teams" do
   patch "classroom-plan/:level_slug(/:series_slug)", to: "classroom_plans#update", as: :classroom_plan_line
 end
 
-# ADR-0073 §6, UDR-0065 §3.0 : la gestion du blog, adressée par public_id. Les images avant les articles : chemin fixe.
+# ADR-0074 §6, UDR-0067 §3.0 : la gestion du blog, adressée par public_id. Les images avant les articles : chemin fixe.
 scope "teams/blog", as: :teams do
   post "images", to: "teams/article_images#create", as: :article_images
   resources :articles, path: "", controller: "teams/articles", param: :public_id, only: %i[index new create edit update] do

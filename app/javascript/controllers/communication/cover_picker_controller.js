@@ -1,6 +1,6 @@
 // ⚡ FRONT · communication/cover_picker_controller — couverture d'un article : réduite, envoyée à l'endpoint de l'équipe, montrée
 // Rôle : lib/image_upload à la demande ; pose cover_public_id, jamais le fichier dans le formulaire ; refus nommé ; l'enregistrement attend
-// ADR  : 0049, 0051, 0060, 0073 · UDR : 0065 (§3.4.1, §3.4.3)
+// ADR  : 0049, 0051, 0060, 0074 · UDR : 0067 (§3.4.1, §3.4.3)
 import { Controller } from "@hotwired/stimulus"
 
 const fill = (template, values) => template.replace(/%\{(\w+)\}/g, (token, key) => values[key] ?? token)

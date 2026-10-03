@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::ArticleFormImagesQuery
 # Rôle : images du texte d'un article pour la modale (ordre du texte, sgid, adresse, texte de remplacement), couverture
-# ADR  : 0073 · UDR : 0065
+# ADR  : 0074 · UDR : 0067
 module Queries
   module Communication
     class ArticleFormImagesQuery

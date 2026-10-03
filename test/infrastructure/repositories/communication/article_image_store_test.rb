@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4 : une image d'article est une ligne d'article_images et son fichier sur le service Active Storage (le
+# ADR-0074 §4.4 : une image d'article est une ligne d'article_images et son fichier sur le service Active Storage (le
 # bucket en production), né analysé ; elle se lit avec l'état de son article ; une orpheline de plus de 48 h est purgée.
 module Repositories
   module Communication

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0065 §3.2 : le badge d'état d'un article (liste de gestion, modale, bandeau d'aperçu de l'UDR-0064) et les entrées
+# UDR-0067 §3.2 : le badge d'état d'un article (liste de gestion, modale, bandeau d'aperçu de l'UDR-0066) et les entrées
 # du menu ⋮ d'une ligne : Modifier, Aperçu ou Voir l'article, puis la transition permise par l'état.
 module Communication
   class ArticleStatusHelperTest < ActionView::TestCase

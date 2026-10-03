@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/articles/_image_alt_row — une image du texte et son texte de remplacement (UDR-0065 §3.4.2) %>
+<%# 🌐 UI · teams/articles/_image_alt_row — une image du texte et son texte de remplacement (UDR-0067 §3.4.2) %>
 <%# Rôle : vignette, champ article[image_alts][<public_id>], badge « À compléter » ; rendue aussi en gabarit (jetons __…__) %>
-<%# ADR  : 0073 · UDR : 0065 · Stimulus : communication--image-alts (mark, backToEditor) %>
+<%# ADR  : 0074 · UDR : 0067 · Stimulus : communication--image-alts (mark, backToEditor) %>
 <%# locals: (form:, image:, number:, error:) -%>
 <% field_id = "article_image_alts_#{image.public_id}" %>
 <%= tag.li id: "article_image_#{image.public_id}", class: "flex flex-col gap-3 sm:flex-row sm:items-start",

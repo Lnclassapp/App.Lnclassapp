@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Article
 # Rôle : table articles, articles du blog (brouillon, publié, archivé) : public_id pour l'équipe, slug figé pour le public
-# ADR  : 0029, 0035, 0073
+# ADR  : 0029, 0035, 0074
 module Orm
   class Article < ApplicationRecord
     include HasPublicId

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::CreateArticle
 # Rôle : l'équipe admin ou content crée un article du blog en brouillon, dont elle est l'autrice ; geste au journal
-# ADR  : 0026, 0028, 0035, 0073 · UDR : 0065
+# ADR  : 0026, 0028, 0035, 0074 · UDR : 0067
 module UseCases
   module Communication
     class CreateArticle

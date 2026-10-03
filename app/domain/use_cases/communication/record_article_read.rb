@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::RecordArticleRead
 # Rôle : compte la lecture d'un article publié, ni par l'équipe, ni par un robot, ni par un préchargement ; une panne du stockage ne lève pas
-# ADR  : 0026, 0028, 0049, 0073 (§4.7)
+# ADR  : 0026, 0028, 0049, 0074 (§4.7)
 module UseCases
   module Communication
     class RecordArticleRead
@@ -25,7 +25,7 @@ module UseCases
 
         Shared::Result.success(@articles.increment_reads(article_id: article.id))
       rescue *@recoverable => error
-        # Une panne du stockage ne bloque jamais la page (ADR-0073 §4.7) : elle est signalée, la lecture n'est pas comptée.
+        # Une panne du stockage ne bloque jamais la page (ADR-0074 §4.7) : elle est signalée, la lecture n'est pas comptée.
         @reporter.report(error, handled: true, context: { article_id: article.id })
         Shared::Result.success(false)
       end

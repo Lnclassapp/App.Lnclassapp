@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# UDR-0065 §3.10, ADR-0073 §7 — the team writes the blog in the browser, end to end (chantier blog, nominal path A):
+# UDR-0067 §3.10, ADR-0074 §7 — the team writes the blog in the browser, end to end (chantier blog, nominal path A):
 # a Contenu member opens « Blog » from the team home, writes a draft with a cover and two images in its text (shrunk in
 # the browser, sent to the team endpoint while Trix shows its progress bar), leaves one text alternative empty, sees the
 # publication refused on that image (BL-13), completes it, publishes (BL-07), reads the public page with its images

@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/articles/_article_card — carte d'un article dans la liste /blog : lien étiré sur le titre %>
 <%# Rôle : locals article: (PublishedArticlesQuery::Row), eager: (vrai pour la première carte de la page) ; ni signature, ni lectures, ni badge %>
-<%# UDR  : 0064 (§2.3, §3.2), 0057 (lien étiré) %>
+<%# UDR  : 0066 (§2.3, §3.2), 0057 (lien étiré) %>
 <%= ui_card padding: :none, id: "blog_article_#{article.slug}",
             class: "relative overflow-hidden transition hover:border-brand/40 hover:shadow-lift active:bg-mist motion-reduce:transition-none" do %>
   <% if article.cover %>

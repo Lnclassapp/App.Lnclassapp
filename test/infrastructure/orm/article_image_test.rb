@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.1, §4.4 : une image d'article est une pièce jointe Action Text par sgid ; le texte la cite, l'éditeur
+# ADR-0074 §4.1, §4.4 : une image d'article est une pièce jointe Action Text par sgid ; le texte la cite, l'éditeur
 # (to_trix_html, modale de l'équipe) la montre par son adresse, la page publique la rend par un partiel du Lot D.
 module Orm
   class ArticleImageTest < ActiveSupport::TestCase

@@ -1,7 +1,7 @@
 require "test_helper"
 
 # config/initializers/error_reporting.rb — Rails.error had no subscriber: an error reported as handled (rescued so that
-# the page goes on, like the blog's read counter, ADR-0073 §4.7) vanished in production. It is now logged. An unhandled
+# the page goes on, like the blog's read counter, ADR-0074 §4.7) vanished in production. It is now logged. An unhandled
 # error is already logged by Rails (ActionDispatch::DebugExceptions, Active Job), so it is not logged a second time.
 class ErrorReportingTest < ActiveSupport::TestCase
   def logged

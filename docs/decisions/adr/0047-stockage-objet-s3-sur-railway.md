@@ -8,7 +8,7 @@
 | **Complète** | [ADR-0010](./0010-stack-ops-solid-suite-postgresql-railway.md) (hébergement Railway) |
 | **Remplace** | — |
 | **Remplacé par** | — |
-| **Amendé par** | [ADR-0073](./0073-blog-public-articles-images-et-referencement.md) : §4 (fichiers publics : images des articles publiés) |
+| **Amendé par** | [ADR-0074](./0074-blog-public-articles-images-et-referencement.md) : §4 (fichiers publics : images des articles publiés) |
 
 ---
 
@@ -116,7 +116,7 @@ Les variables `BUCKET_*` du service web référencent celles du bucket (`${{Buck
 
 *[ADR-0068](./0068-import-de-plusieurs-fichiers-de-cours-et-ecriture-acceleree.md). Un rapport d'import porte désormais ses fichiers en `has_many_attached :sources`, au lieu de `has_one_attached :source`. Ils sont stockés sur le même service, avec la même règle : des clés aléatoires, et le nom du client en métadonnée seulement.*
 
-## Amendement du 2026-10-02 — blog public (ADR-0073)
+## Amendement du 2026-10-02 — blog public (ADR-0074)
 
 *Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 

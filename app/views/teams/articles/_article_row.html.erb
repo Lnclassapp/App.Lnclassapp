@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/articles/_article_row — un article de la liste de gestion du blog (UDR-0065 §3.2) %>
+<%# 🌐 UI · teams/articles/_article_row — un article de la liste de gestion du blog (UDR-0067 §3.2) %>
 <%# Rôle : titre, auteur réel et signature, badge d'état, date selon l'état, lectures ; menu ⋮ (Modifier, Aperçu, transition) %>
-<%# ADR  : 0035, 0073 · UDR : 0042, 0065 · remplacée par morphing (transition, publication refusée) : même id, focus du ⋮ gardé %>
+<%# ADR  : 0035, 0074 · UDR : 0042, 0067 · remplacée par morphing (transition, publication refusée) : même id, focus du ⋮ gardé %>
 <%# locals: (article:) -%>
 <% date_key, date = { "published" => [ "published_on", article.published_at ], "archived" => [ "archived_on", article.archived_at ],
                       "draft" => [ "updated_on", article.updated_at ] }.fetch(article.status) %>

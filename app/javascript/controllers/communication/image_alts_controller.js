@@ -1,6 +1,6 @@
 // ⚡ FRONT · communication/image_alts_controller — panneau « Images du texte » : une ligne par image, dans l'ordre du texte
 // Rôle : ligne ajoutée à l'envoi d'une image, cachée quand elle quitte le texte, renumérotée ; badge « À compléter » ; Entrée → éditeur
-// ADR  : 0073 · UDR : 0065 (§3.4.2) · écoute les événements rich-text-editor:uploaded|attached|removed et trix-change
+// ADR  : 0074 · UDR : 0067 (§3.4.2) · écoute les événements rich-text-editor:uploaded|attached|removed et trix-change
 import { Controller } from "@hotwired/stimulus"
 
 const TOKENS = /__(PUBLIC_ID|SGID|URL|NUMBER)__/g

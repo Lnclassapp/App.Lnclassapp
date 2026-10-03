@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4, BL-08, BL-12 : l'équipe Administration et Contenu envoie une image d'article ; le serveur croit les octets,
+# ADR-0074 §4.4, BL-08, BL-12 : l'équipe Administration et Contenu envoie une image d'article ; le serveur croit les octets,
 # refuse avec sa raison ce qui n'est pas une petite image JPEG, PNG ou WebP fixe, et n'écrit alors rien ; avec un article,
 # il refuse la onzième image de son texte.
 module UseCases

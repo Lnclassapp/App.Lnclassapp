@@ -1,11 +1,11 @@
-# UDR-0064 : Blog public — liste `/blog`, page d'un article, article retiré, aperçu partagé et liens « Blog »
+# UDR-0066 : Blog public — liste `/blog`, page d'un article, article retiré, aperçu partagé et liens « Blog »
 
 | | |
 |---|---|
 | **Statut** | Accepté *(porteur, 2026-10-02 : délégation, « crée un système de blog et puis c'est tout »)* |
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/blog`](../../chantiers/blog/memo.md) — grill 3, 5, 6, 7, 9 ; [PRD](../../chantiers/blog/prd.md) §3 (parcours B, chemins alternatifs), §4 (BL-01 à BL-06, BL-10, BL-11, BL-14, BL-18 à BL-21) |
-| **ADR lié** | ADR-0073 *(en cours d'écriture : blog public, images publiques, référencement)* · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun tiers, CSP) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget JS et CSS) · [ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md) (100 ms, 150 Ko) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) (gabarit des pages publiques, **modèle suivi**) · [UDR-0061](0061-carte-d-aide-et-faq.md) (carte d'aide) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (logo des pages publiques) · [UDR-0059](0059-homepage-telephone-et-tablette.md), [UDR-0012](0012-landing-et-modales-de-role.md) (homepage) · [UDR-0057](0057-ecrans-eleve-epures.md) (R1 à R6) · [UDR-0054](0054-finitions-d-interface.md) (titre, retour) · [UDR-0013](0013-catalogue-et-page-cours.md), [UDR-0015](0015-page-fiche-essentielle.md) (rendu Action Text `.trix-content`) · [UDR-0062](0062-echeances.md) (dates) · [UDR-0005](0005-design-system-fondateur.md), [UDR-0006](0006-shell-applicatif-par-role.md), [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) |
+| **ADR lié** | ADR-0074 *(en cours d'écriture : blog public, images publiques, référencement)* · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun tiers, CSP) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (budget JS et CSS) · [ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md) (100 ms, 150 Ko) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) (gabarit des pages publiques, **modèle suivi**) · [UDR-0061](0061-carte-d-aide-et-faq.md) (carte d'aide) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (logo des pages publiques) · [UDR-0059](0059-homepage-telephone-et-tablette.md), [UDR-0012](0012-landing-et-modales-de-role.md) (homepage) · [UDR-0057](0057-ecrans-eleve-epures.md) (R1 à R6) · [UDR-0054](0054-finitions-d-interface.md) (titre, retour) · [UDR-0013](0013-catalogue-et-page-cours.md), [UDR-0015](0015-page-fiche-essentielle.md) (rendu Action Text `.trix-content`) · [UDR-0062](0062-echeances.md) (dates) · [UDR-0005](0005-design-system-fondateur.md), [UDR-0006](0006-shell-applicatif-par-role.md), [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) |
 | **Amende** | [UDR-0061](0061-carte-d-aide-et-faq.md) §3.3 (point 3, pied de la carte : ligne « Blog », liens tirés de `PublicPagesHelper`) et §3.5 (les clés `footer.mission`, `footer.privacy`, `footer.terms` ne sont pas créées ; une clé `footer.label`) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) §3.1 (`PublicPagesHelper` gagne `blog_link`) et §3.4 (pied de page de la homepage : « Blog » en tête de la seconde liste, renommée « Plus sur Lnclass » ; pied de la carte d'aide) |
 | **Remplacé par** | — |
 
@@ -60,22 +60,22 @@ L'élève connecté n'a qu'une entrée, le pied de sa carte « Besoin d'aide ? �
     - `:not_found` (brouillon, pour qui ne gère pas le blog) : `render_not_found` ;
     - `:expired` (archivé, pour qui ne gère pas le blog) : `render :gone, status: :gone`.
   - **Interdit** : passer ce résultat à `render_result`. `RendersResult` traduit `:expired` en renvoi vers la connexion.
-  - Compter la lecture (`RecordArticleRead`, ADR-0073) ne change rien au rendu. Un échec du compteur ne bloque jamais la page.
+  - Compter la lecture (`RecordArticleRead`, ADR-0074) ne change rien au rendu. Un échec du compteur ne bloque jamais la page.
 
-**Données lues par les vues** (lecture CQRS ; noms figés ici, contenu calculé par l'infrastructure de l'ADR-0073) :
+**Données lues par les vues** (lecture CQRS ; noms figés ici, contenu calculé par l'infrastructure de l'ADR-0074) :
 
 | Lecture | Champs | Remarque |
 |---|---|---|
 | `PublishedArticlesQuery#call(page:)` → `Page(rows:, page:, pages:)` | `rows` : tableau de `Row` ; `PER_PAGE = 10` | Publiés seulement, `published_on` décroissant puis `id` décroissant |
 | `PublishedArticlesQuery#any?` → booléen | — | Une requête `EXISTS` sur les publiés ; lue par `blog_link` (§3.5) |
 | `PublishedArticlesQuery::Row` | `slug`, `title`, `excerpt`, `published_on` (`Date`), `cover` (`Image` ou `nil`) | — |
-| `ArticleDetailQuery::Detail` | `slug`, `title`, `excerpt`, `status` (`"draft"`, `"published"`, `"archived"`), `published_on` (`Date` ou `nil`), `author_name` (`String` ou `nil`), `cover` (`Image` ou `nil`), `body` (le texte riche Action Text) | `author_name` vaut `nil` si l'article est signé « L'équipe Lnclass », **ou** si le compte de l'auteur est anonymisé (BL-18 ; « désactivé » retiré le 2026-10-03 : cet état n'existe pas, ADR-0073 §4.8) : c'est la query qui tranche, jamais la vue |
+| `ArticleDetailQuery::Detail` | `slug`, `title`, `excerpt`, `status` (`"draft"`, `"published"`, `"archived"`), `published_on` (`Date` ou `nil`), `author_name` (`String` ou `nil`), `cover` (`Image` ou `nil`), `body` (le texte riche Action Text) | `author_name` vaut `nil` si l'article est signé « L'équipe Lnclass », **ou** si le compte de l'auteur est anonymisé (BL-18 ; « désactivé » retiré le 2026-10-03 : cet état n'existe pas, ADR-0074 §4.8) : c'est la query qui tranche, jamais la vue |
 | `Image` | `public_id`, `alt`, `width`, `height` | Dimensions en pixels de l'image servie |
 
 **Helpers** — `app/helpers/communication/articles_helper.rb`, module `Communication::ArticlesHelper` :
 
-- `article_image_src(image)` → chemin public de l'image (route fixée par l'ADR-0073, servie par lnclass.com, lisible sans session, BL-14).
-- `canonical_url(path)` → `"https://#{Rails.configuration.x.canonical_host}#{path}"`. `canonical_host` est fixé par l'ADR-0073, `lnclass.com` par défaut (memo, question 3). Toutes les adresses absolues des §3.4 passent par lui, jamais par `request.host` : `lnclass.com` et `www.lnclass.com` servent tous deux l'application.
+- `article_image_src(image)` → chemin public de l'image (route fixée par l'ADR-0074, servie par lnclass.com, lisible sans session, BL-14).
+- `canonical_url(path)` → `"https://#{Rails.configuration.x.canonical_host}#{path}"`. `canonical_host` est fixé par l'ADR-0074, `lnclass.com` par défaut (memo, question 3). Toutes les adresses absolues des §3.4 passent par lui, jamais par `request.host` : `lnclass.com` et `www.lnclass.com` servent tous deux l'application.
 - `article_date(date)` → `l(date, format: :article_published)`, soit « 5 octobre 2026 ». Aucune vue ne formate une date d'article elle-même.
 
 ### 3.2 Mise en page commune et liste — `communication/articles/index.html.erb`
@@ -109,7 +109,7 @@ L'élève connecté n'a qu'une entrée, le pied de sa carte « Besoin d'aide ? �
 De haut en bas, dans le conteneur commun :
 
 1. **Bandeau d'état** (équipe seulement : `@article.status` ≠ `"published"`). `p#article_status_banner.mb-6.flex.flex-wrap.items-center.gap-2.rounded-ln.bg-mist.px-4.py-3.text-sm.text-ink` :
-   - d'abord `article_status_badge(@article.status)`, le helper de l'UDR-0065 (`Communication::ArticleStatusHelper`), qui affiche « Brouillon » ou « Archivé » ;
+   - d'abord `article_status_badge(@article.status)`, le helper de l'UDR-0067 (`Communication::ArticleStatusHelper`), qui affiche « Brouillon » ou « Archivé » ;
    - puis `t(".status.#{@article.status}_hint")` : « Visible par l'équipe seulement. » pour un brouillon, « Retiré du blog : les visiteurs ne le voient plus. » pour un article archivé.
    
    Ce sont le même badge et les mêmes tons que dans la liste de gestion et au catalogue (ADR-0035) : un état a une seule apparence dans toute l'application. Le fond du bandeau reste neutre (`bg-mist`).
@@ -118,16 +118,16 @@ De haut en bas, dans le conteneur commun :
    - `header.mb-6` :
      - `h1#article_title.font-display.text-3xl.leading-tight.font-extrabold.text-balance.break-words.hyphens-auto` : `@article.title` *(amendement du 2026-10-03 : « Anticonstitutionnellement » faisait défiler la page à 390 et 360 px ; le mot se coupe, avec trait d'union là où le navigateur sait couper le français, `lang="fr"` étant posé sur `<html>`)* ;
      - `p#article_byline.mt-3.text-sm.text-mute` : la signature (`@article.author_name`, sinon `t(".team_signature")`, « L'équipe Lnclass ») ; si `published_on` : `span[aria-hidden="true"]` « · » puis `time[datetime]` « Publié le 5 octobre 2026 ». Un brouillon n'a pas de date.
-   - **Couverture**, si `@article.cover` : `figure.mb-8` > `image_tag article_image_src(cover), alt: cover.alt, width: cover.width, height: cover.height, loading: :eager, fetchpriority: "high", decoding: :async, class: "h-auto w-full rounded-card bg-mist"`. L'`alt` n'est jamais vide : la publication le refuse (BL-13, ADR-0073).
+   - **Couverture**, si `@article.cover` : `figure.mb-8` > `image_tag article_image_src(cover), alt: cover.alt, width: cover.width, height: cover.height, loading: :eager, fetchpriority: "high", decoding: :async, class: "h-auto w-full rounded-card bg-mist"`. L'`alt` n'est jamais vide : la publication le refuse (BL-13, ADR-0074).
    - **Texte** : `div#article_body.break-words` > `<%= @article.body %>`. Action Text l'enveloppe dans `layouts/action_text/contents/_content` (`div.trix-content`, inchangé), dont les règles de `application.tailwind.css` donnent la typographie : 16 px, interligne `leading-relaxed`, liens `text-brand-strong underline`, `h2` en `font-display text-xl`, images `h-auto max-w-full rounded-ln`.
-     - **Aucun `h1` dans le texte.** Le bouton « Titre » de Trix produit un `<h1>`. L'assainisseur des articles (ADR-0073) le réécrit en `<h2>` à l'écriture. La vue ne rétrograde rien, et le test de BL-02 compte un seul `h1`.
-     - **Images du texte** : une seule vue, `communication/articles/_body_image.html.erb`. La pièce jointe d'image d'un article (choix de l'ADR-0073) la désigne par `to_attachable_partial_path` → `"communication/articles/body_image"`, avec un local `image:` (`Image`). Balisage : `figure` > `image_tag article_image_src(image), alt: image.alt, width: image.width, height: image.height, loading: :lazy, decoding: :async, class: "bg-mist"`. `active_storage/blobs/_blob.html.erb` ne change pas : les cours et les fiches restent sans image (BL-15).
+     - **Aucun `h1` dans le texte.** Le bouton « Titre » de Trix produit un `<h1>`. L'assainisseur des articles (ADR-0074) le réécrit en `<h2>` à l'écriture. La vue ne rétrograde rien, et le test de BL-02 compte un seul `h1`.
+     - **Images du texte** : une seule vue, `communication/articles/_body_image.html.erb`. La pièce jointe d'image d'un article (choix de l'ADR-0074) la désigne par `to_attachable_partial_path` → `"communication/articles/body_image"`, avec un local `image:` (`Image`). Balisage : `figure` > `image_tag article_image_src(image), alt: image.alt, width: image.width, height: image.height, loading: :lazy, decoding: :async, class: "bg-mist"`. `active_storage/blobs/_blob.html.erb` ne change pas : les cours et les fiches restent sans image (BL-15).
      - Pas de `data-controller="math"`.
 4. **Suite de la lecture** — `nav#article_next.mt-10.flex.flex-col.gap-3.border-t.border-line.pt-6.sm:flex-row`, `aria-label` « Suite de la lecture » :
    - `ui_button t(".discover"), href: root_path, variant: :primary, full: true, class: "sm:w-auto"` : « Découvrir Lnclass ». Un connecté y est renvoyé vers son accueil, comme depuis toute page publique.
    - `ui_button t(".all_articles"), href: blog_path, variant: :secondary, full: true, class: "sm:w-auto"` : « Tous les articles ».
 
-La page n'affiche **pas** le résumé (il sert à la liste et à l'aperçu, R6), ni le nombre de lectures (équipe seulement, UDR-0065).
+La page n'affiche **pas** le résumé (il sert à la liste et à l'aperçu, R6), ni le nombre de lectures (équipe seulement, UDR-0067).
 
 **Article archivé — `communication/articles/gone.html.erb`** (statut 410) :
 - `render "communication/articles/masthead", back_label: nil, back_href: nil` : logo seul. Une page d'erreur n'a pas de retour (UDR-0054).
@@ -188,7 +188,7 @@ La page n'affiche **pas** le résumé (il sert à la liste et à l'aperçu, R6),
 **`PublicPagesHelper#blog_link`** (`app/helpers/public_pages_helper.rb`, amendement de l'UDR-0063 §3.1) :
 
 ```ruby
-# → [libellé, chemin] du blog s'il a au moins un article publié, sinon nil (UDR-0064 §3.5). Une requête par rendu.
+# → [libellé, chemin] du blog s'il a au moins un article publié, sinon nil (UDR-0066 §3.5). Une requête par rendu.
 def blog_link
   return @blog_link if defined?(@blog_link)
 
@@ -228,7 +228,7 @@ end
 - Les libellés sont ceux de `public_pages.links` : une page a un seul nom dans toute l'application. Les clés `shared.help_sheet.footer.mission`, `.privacy` et `.terms` de l'UDR-0061 §3.5 ne sont pas créées, et « Confidentialité » devient « Protection des données ».
 - Le focus d'ouverture reste sur la première ligne (« Questions fréquentes »).
 
-**Aucun autre point d'entrée.** Ne changent pas : `NavigationHelper::DESTINATIONS`, l'en-tête, la barre latérale, la barre basse et le menu du compte de l'espace connecté, ni les accueils enseignant, direction et équipe (grill 3, UDR-0006). Le raccourci « Blog » de l'accueil équipe appartient à l'UDR-0065.
+**Aucun autre point d'entrée.** Ne changent pas : `NavigationHelper::DESTINATIONS`, l'en-tête, la barre latérale, la barre basse et le menu du compte de l'espace connecté, ni les accueils enseignant, direction et équipe (grill 3, UDR-0006). Le raccourci « Blog » de l'accueil équipe appartient à l'UDR-0067.
 
 ### 3.6 Textes, tokens, comportement, états, accessibilité, budgets
 
@@ -288,7 +288,7 @@ Les textes des articles ne sont pas dans les locales : ils viennent de la base. 
 - **Turbo** :
   - Turbo Drive seulement : ni `turbo_frame_tag`, ni Turbo Stream, ni morph propre. La pagination est une navigation de page entière (liens `?page=N`), qui marche aussi sans JavaScript.
   - Le frame `modal` et la région `#toasts` du layout restent vides.
-  - `data-turbo-prefetch="false"` sur `ol#blog_articles` : Turbo 8 précharge un lien au survol, et ce préchargement serait compté comme une lecture (BL-17). Le compteur de l'ADR-0073 ignore aussi toute requête qui porte `X-Sec-Purpose: prefetch` ou `Purpose: prefetch`.
+  - `data-turbo-prefetch="false"` sur `ol#blog_articles` : Turbo 8 précharge un lien au survol, et ce préchargement serait compté comme une lecture (BL-17). Le compteur de l'ADR-0074 ignore aussi toute requête qui porte `X-Sec-Purpose: prefetch` ou `Purpose: prefetch`.
 - **Stimulus** : aucun contrôleur. `autofocus` (posé par le layout) n'a rien à viser : aucun champ.
 - Les liens du texte gardent la cible écrite par l'auteur, assainie (BL-16) ; aucun `target` n'est ajouté.
 
@@ -342,7 +342,7 @@ Les textes des articles ne sont pas dans les locales : ils viennent de la base. 
 | R2 — 5 blocs avant défilement | Logo, retour, `h1`, liste : 4. | Logo, retour, en-tête (`h1` + signature), couverture, début du texte : 5. Le bandeau de l'équipe en fait 6 : il ne s'affiche qu'à l'équipe, sur un aperçu. | Logo, encadré : 2. |
 | R3 — 3 lignes puis « Voir plus » | Ne s'applique pas, comme au catalogue (UDR-0013) et à la FAQ (UDR-0061) : la liste est l'objet de la page. La pagination par 10 tient le budget HTML et donne une adresse par page (§2.2). | Ne s'applique pas : un article se lit en entier, comme une fiche (UDR-0015). | — |
 | R4 — pas d'aide permanente | Aucune introduction affichée : le `h1` suffit, la description vit dans la balise `meta`. | Aucune. Le bandeau dit un état, pas une explication. | La phrase dit un fait, pas un mode d'emploi. |
-| R5 — une couleur d'accent | `brand` : survol et focus de carte. | `brand` : liens et focus. Le badge du bandeau (équipe seulement) est un signal sémantique d'état, celui de l'UDR-0065 ; le fond du bandeau est neutre. | Aucune couleur d'accent hors focus. |
+| R5 — une couleur d'accent | `brand` : survol et focus de carte. | `brand` : liens et focus. Le badge du bandeau (équipe seulement) est un signal sémantique d'état, celui de l'UDR-0067 ; le fond du bandeau est neutre. | Aucune couleur d'accent hors focus. |
 | R6 — rien de répété | Ni signature ni lectures dans la carte ; la couverture a un `alt` vide parce que le titre dit déjà tout. | Le résumé n'est pas affiché (liste et aperçu seulement) ; la date est dite une fois. | — |
 
 **Points d'entrée** : la carte d'aide garde ses trois lignes (R3) ; son pied est une ligne discrète `text-sm text-mute`, sans couleur d'accent (R5). Le pied de page de la homepage gagne un lien dans une liste existante.
@@ -364,7 +364,7 @@ Les textes des articles ne sont pas dans les locales : ils viennent de la base. 
 | `blog_link` : `nil` sans article, la paire avec ; une seule requête par rendu | `test/helpers/public_pages_helper_test.rb` | §3.5 |
 | Titres d'onglet | `test/views/page_titles_test.rb` (inchangé : chaque vue appelle `page_title`) | §3.4 |
 
-Chaque nouveau fichier de `app/` porte l'en-tête HITL de trois lignes. Exemple : `<%# 🌐 UI · communication/articles/show — page publique d'un article %>`, puis `Rôle`, puis `UDR : 0064 · ADR : 0073`.
+Chaque nouveau fichier de `app/` porte l'en-tête HITL de trois lignes. Exemple : `<%# 🌐 UI · communication/articles/show — page publique d'un article %>`, puis `Rôle`, puis `UDR : 0064 · ADR : 0074`.
 
 ## 4. Conséquences
 
@@ -380,7 +380,7 @@ Chaque nouveau fichier de `app/` porte l'en-tête HITL de trois lignes. Exemple 
   - trois locales existantes (§3.6).
   
   Ces fichiers sont touchés par un seul lot du plan, ou par le Lot 0.
-- **Dépend de l'ADR-0073** :
+- **Dépend de l'ADR-0074** :
   - route et en-têtes de cache des images publiques (`article_image_src`) ;
   - pièce jointe d'image et son `to_attachable_partial_path` ;
   - réécriture des `<h1>` du texte ;
@@ -396,6 +396,6 @@ Chaque nouveau fichier de `app/` porte l'en-tête HITL de trois lignes. Exemple 
   - une image d'article sans `width`, `height` et `alt` ;
   - une date d'article formatée hors de `article_date` ;
   - `ui_card(href:)` pour une carte qui contient un texte long.
-- **Gestion du blog** (raccourci de l'accueil équipe, liste de gestion, modale d'édition, aperçu, menu ⋮) : [UDR-0065](0065-gestion-du-blog-par-l-equipe.md). Elle fournit `article_status_badge`, repris par le bandeau du §3.3. Elle ouvre l'aperçu sur `blog_article_path`, qui porte le bandeau du §3.3.
+- **Gestion du blog** (raccourci de l'accueil équipe, liste de gestion, modale d'édition, aperçu, menu ⋮) : [UDR-0067](0067-gestion-du-blog-par-l-equipe.md). Elle fournit `article_status_badge`, repris par le bandeau du §3.3. Elle ouvre l'aperçu sur `blog_article_path`, qui porte le bandeau du §3.3.
 - **Famille téléphone de la homepage** (phase 2 d'`interface-epuree`, UDR-0059) : elle reprend le pied de page avec le lien « Blog » dans la même liste.
 - **Plus tard, hors V1** : rubriques, recherche (memo, grill 6) et données structurées. Chacun passe par un amendement de cette UDR.

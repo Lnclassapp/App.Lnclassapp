@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/articles/_head — balises de l'aperçu partagé et du référencement, rendues dans content_for :head %>
 <%# Rôle : locals title:, description:, canonical: (absolue), type: ("website" | "article"), image: (Image | nil), published_on: (Date | nil) %>
-<%# UDR  : 0064 (§3.4) · ADR : 0073 (§4.6) — jeu fermé, dans cet ordre, sur l'hôte canonique ; jamais request.host %>
+<%# UDR  : 0066 (§3.4) · ADR : 0074 (§4.6) — jeu fermé, dans cet ordre, sur l'hôte canonique ; jamais request.host %>
 <%= tag.meta(name: "description", content: description) %>
 <%= tag.link(rel: "canonical", href: canonical) %>
 <%= tag.meta(property: "og:site_name", content: PageTitleHelper::PRODUCT) %>

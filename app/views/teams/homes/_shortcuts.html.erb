@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/homes/_shortcuts — raccourcis de l'accueil équipe (TR-09) %>
 <%# Rôle : « Nouveau cours » et « Inviter un membre » (admin) ouvrent la modale ; les autres, dont « Croissance » et « Blog » (admin, content), mènent à leur écran %>
-<%# ADR  : 0038, 0039, 0063, 0073 · UDR : 0006, 0018, 0050, 0065 %>
+<%# ADR  : 0038, 0039, 0063, 0074 · UDR : 0006, 0018, 0050, 0067 %>
 <%# locals: (can_invite:, can_manage_blog:) -%>
 <nav id="team_home_shortcuts" aria-label="<%= t(".label") %>" class="mb-5 flex flex-wrap gap-3">
   <%= ui_button t(".new_course"), href: new_teams_course_path, icon: "plus", data: { turbo_frame: "modal" } %>

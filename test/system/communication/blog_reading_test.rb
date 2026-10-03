@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# UDR-0064 §3 (lecture au téléphone, colonne de 390 px) : un titre d'article qui porte un mot plus large que l'écran
+# UDR-0066 §3 (lecture au téléphone, colonne de 390 px) : un titre d'article qui porte un mot plus large que l'écran
 # (« Anticonstitutionnellement ») revient à la ligne au lieu de faire défiler la page sur le côté, sur la page de
 # l'article, dans les cartes de /blog, sur la page « n'est plus disponible » et dans la liste de gestion de l'équipe.
 class Communication::BlogReadingTest < ApplicationSystemTestCase

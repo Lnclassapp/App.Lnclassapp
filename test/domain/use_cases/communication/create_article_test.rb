@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.2, §4.3 : l'équipe admin ou content crée un article en brouillon, dont elle est l'autrice ; le geste est
+# ADR-0074 §4.2, §4.3 : l'équipe admin ou content crée un article en brouillon, dont elle est l'autrice ; le geste est
 # au journal (BL-07). Hors de ces sous-rôles, rien n'est écrit (BL-08).
 module UseCases
   module Communication

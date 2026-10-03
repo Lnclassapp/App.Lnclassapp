@@ -1,10 +1,10 @@
 // ⚡ FRONT · rich_text_editor_controller — éditeur riche (Trix) des cours, des fiches et du blog
 // Rôle : charge Trix à la demande, hors du bundle commun ; refuse tout fichier ; images pour le blog seul, sur valeur `attachments`
-// ADR  : 0047, 0049, 0051, 0073 · UDR : 0014, 0016, 0065 · usage : stylesheet_link_tag("trix") ; data-rich-text-editor-lang-value + rich_textarea
+// ADR  : 0047, 0049, 0051, 0074 · UDR : 0014, 0016, 0067 · usage : stylesheet_link_tag("trix") ; data-rich-text-editor-lang-value + rich_textarea
 import { Controller } from "@hotwired/stimulus"
 
 // Without the attachments value (courses, sheets) the editor accepts no attachment: nothing reaches the bucket from it,
-// there is no direct upload and @rails/actiontext is not loaded. The blog turns images on (UDR-0065 §3.7): they are
+// there is no direct upload and @rails/actiontext is not loaded. The blog turns images on (UDR-0067 §3.7): they are
 // shrunk by lib/image_upload, sent one by one to the team endpoint, never to Active Storage. The toolbar's file button
 // stays hidden by CSS for everyone.
 const refuseFile = (event) => event.preventDefault()

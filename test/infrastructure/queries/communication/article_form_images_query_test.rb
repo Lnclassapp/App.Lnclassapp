@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0065 §3.0, §3.4.2 : le panneau « Images du texte » de la modale montre les images que cite le texte, dans son
+# UDR-0067 §3.0, §3.4.2 : le panneau « Images du texte » de la modale montre les images que cite le texte, dans son
 # ordre, chacune avec son sgid, son adresse et son texte de remplacement, reconstruites depuis le texte envoyé et
 # image_alts : un re-rendu 422 garde les images et leurs textes.
 module Queries

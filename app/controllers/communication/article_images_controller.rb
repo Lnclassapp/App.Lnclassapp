@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::ArticleImagesController
 # Rôle : sert une image d'article, seul chemin d'une image du blog : cache public immuable si l'article est publié, sinon privé
-# ADR  : 0047, 0049, 0073 · UDR : 0064, 0065
+# ADR  : 0047, 0049, 0074 · UDR : 0066, 0067
 module Communication
   class ArticleImagesController < ApplicationController
     allow_unauthenticated_access
@@ -8,7 +8,7 @@ module Communication
     # en porter, sans quoi un relais pourrait servir le même cookie à tous ses lecteurs.
     before_action { request.session_options[:skip] = true }
 
-    # L'adresse est versionnée par construction : une ligne ne change jamais de fichier (ADR-0073 §4.4). Directives de
+    # L'adresse est versionnée par construction : une ligne ne change jamais de fichier (ADR-0074 §4.4). Directives de
     # l'ADR, dans l'ordre où Rails les écrit.
     PUBLIC_CACHE = "max-age=31536000, public, immutable"
     # Brouillon, archivé ou image pas encore rattachée, lus par qui gère le blog : ni navigateur ni relais ne gardent l'octet.

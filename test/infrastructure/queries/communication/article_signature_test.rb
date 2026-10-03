@@ -2,7 +2,7 @@ require "test_helper"
 
 module Queries
   module Communication
-    # ADR-0073 §4.8, BL-18 : la signature d'un article public. Le nom de l'auteur n'est lu que pour un article signé de
+    # ADR-0074 §4.8, BL-18 : la signature d'un article public. Le nom de l'auteur n'est lu que pour un article signé de
     # son nom, et tant que son compte n'est pas anonymisé ; NULL s'affiche « L'équipe Lnclass ».
     class ArticleSignatureTest < ActiveSupport::TestCase
       def author_name(article)

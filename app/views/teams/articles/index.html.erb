@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/articles/index — liste de gestion du blog (UDR-0065 §3.2) %>
+<%# 🌐 UI · teams/articles/index — liste de gestion du blog (UDR-0067 §3.2) %>
 <%# Rôle : tous les articles, du plus récemment modifié : état, date, lectures « sans dédoublonnage », menu ⋮ ; « Nouvel article » en modale %>
-<%# ADR  : 0035, 0073 · UDR : 0006, 0042, 0054, 0065 · pagination en visite Turbo Drive, aucun frame autour de la liste %>
+<%# ADR  : 0035, 0074 · UDR : 0006, 0042, 0054, 0067 · pagination en visite Turbo Drive, aucun frame autour de la liste %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"), back: { label: t(".back"), href: team_home_path } do %>
   <%= ui_button t(".new_article"), href: new_teams_article_path, icon: "plus", data: { turbo_frame: "modal" }, id: "teams_articles_new" %>

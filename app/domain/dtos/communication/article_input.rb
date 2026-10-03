@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Communication::ArticleInput
 # Rôle : saisie d'un article dans la modale de l'équipe : titre, résumé, texte HTML, signature, couverture, textes de remplacement
-# ADR  : 0026, 0073 · UDR : 0065
+# ADR  : 0026, 0074 · UDR : 0067
 module Dtos
   module Communication
     class ArticleInput
@@ -9,7 +9,7 @@ module Dtos
 
       ARTICLE = Entities::Communication::Article
       IMAGE = Entities::Communication::ArticleImage
-      # Une image du texte telle que la modale la montre (UDR-0065 §3.0), reconstruite par le contrôleur depuis le texte
+      # Une image du texte telle que la modale la montre (UDR-0067 §3.0), reconstruite par le contrôleur depuis le texte
       # envoyé et image_alts : un re-rendu 422 garde les images et leurs textes.
       Image = Data.define(:public_id, :sgid, :url, :alt)
 
@@ -41,7 +41,7 @@ module Dtos
       def image_alts = @image_alts.to_h.to_h { |public_id, alt| [ public_id.to_s, alt.to_s.squish.presence ] }
       def images = @images || []
 
-      # L'article tel qu'il serait enregistré, pour la règle de complétude de la publication (ADR-0073 §4.2) : la
+      # L'article tel qu'il serait enregistré, pour la règle de complétude de la publication (ADR-0074 §4.2) : la
       # couverture désignée, et les images du texte avec le texte de remplacement saisi pour chacune.
       def to_article(status:)
         ARTICLE.new(title:, excerpt:, body:, signature:, status:, cover_alt:,

@@ -1,7 +1,7 @@
 require "test_helper"
 
 module Communication
-  # BL-19, BL-05 (ADR-0073 §4.6): /sitemap.xml and /robots.txt are served by routes, with absolute addresses on the
+  # BL-19, BL-05 (ADR-0074 §4.6): /sitemap.xml and /robots.txt are served by routes, with absolute addresses on the
   # canonical host (config.x.canonical_host, never request.host) and a short cache — public/ is cached for a year.
   class SitemapsTest < ActionDispatch::IntegrationTest
     PAGES = Communication::PagesController
@@ -33,7 +33,7 @@ module Communication
 
       assert_response :success
       assert_equal "application/xml", response.media_type
-      # Rails writes the directives of « public, max-age=3600 » (ADR-0073 §4.6) in its own order.
+      # Rails writes the directives of « public, max-age=3600 » (ADR-0074 §4.6) in its own order.
       assert_equal "max-age=3600, public", response.headers["Cache-Control"]
       assert_equal [ [ "https://lnclass.com/", nil ],
                      [ "https://lnclass.com/aide", nil ],
@@ -125,7 +125,7 @@ module Communication
 
     test "neither public/robots.txt nor public/sitemap.xml exist: they would shadow the routes with a one-year cache" do
       %w[robots.txt sitemap.xml].each do |file|
-        assert_not Rails.public_path.join(file).exist?, "public/#{file} est servi avant la route : supprime-le (ADR-0073 §4.6)"
+        assert_not Rails.public_path.join(file).exist?, "public/#{file} est servi avant la route : supprime-le (ADR-0074 §4.6)"
       end
       assert_equal "/robots.txt", robots_path
       assert_equal "/sitemap.xml", sitemap_path

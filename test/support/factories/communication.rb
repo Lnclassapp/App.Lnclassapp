@@ -1,4 +1,4 @@
-# Blog articles and their images (ADR-0073), written as the application writes them: Orm:: for the article, the image
+# Blog articles and their images (ADR-0074), written as the application writes them: Orm:: for the article, the image
 # store adapter for the file, as attach_photo does. Shared by the lots A, B, D, E and F of the blog chantier.
 module Factories
   module Communication

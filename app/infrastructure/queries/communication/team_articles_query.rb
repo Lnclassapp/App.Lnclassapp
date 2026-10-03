@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::TeamArticlesQuery
 # Rôle : liste de gestion du blog : tous les articles, du plus récemment modifié, 20 par page, auteur réel et lectures
-# ADR  : 0026, 0073 · UDR : 0065
+# ADR  : 0026, 0074 · UDR : 0067
 module Queries
   module Communication
     class TeamArticlesQuery
@@ -9,7 +9,7 @@ module Queries
                         :updated_at, :reads_count)
       Page = Data.define(:rows, :total_count, :page, :pages)
 
-      # UDR-0065 §3.2 : l'équipe lit le nom réel de l'auteur, quelle que soit la signature ; seules les pages publiques
+      # UDR-0067 §3.2 : l'équipe lit le nom réel de l'auteur, quelle que soit la signature ; seules les pages publiques
       # appliquent le repli « L'équipe Lnclass » (BL-18).
       COLUMNS = [
         "articles.public_id", "articles.slug", "articles.title", "articles.status", "articles.signature",

@@ -1,4 +1,4 @@
-# Gestion du blog par l'équipe (UDR-0065 §3.8) — ADR-0073. Vouvoiement ; « article », « brouillon », « publié »,
+# Gestion du blog par l'équipe (UDR-0067 §3.8) — ADR-0074. Vouvoiement ; « article », « brouillon », « publié »,
 # « archivé », « remettre en ligne », « texte de remplacement », « couverture » ; jamais « post », « billet », « alt ».
 fr:
   activemodel:
@@ -16,7 +16,7 @@ fr:
     errors:
       models:
         # Messages de la saisie, et de la règle de complétude de Entities::Communication::Article, qui les lit ici
-        # (publication, enregistrement d'un article publié : UDR-0065 §3.3, §3.5).
+        # (publication, enregistrement d'un article publié : UDR-0067 §3.3, §3.5).
         dtos/communication/article_input:
           # Erreurs posées sur « image_alts.<public_id> » : une image du texte n'a pas de clé d'attribut propre.
           image_alt_blank: "Saisissez le texte de remplacement de l'image %{number} : il est obligatoire pour publier."
@@ -42,7 +42,7 @@ fr:
               inclusion: "Choisissez une signature."
             status:
               inclusion: "Cet état d'article n'existe pas."
-        # Mêmes raisons côté serveur et côté navigateur (UDR-0065 §3.4.3, form.image_messages).
+        # Mêmes raisons côté serveur et côté navigateur (UDR-0067 §3.4.3, form.image_messages).
         dtos/communication/article_image_input:
           attributes:
             file:
@@ -136,7 +136,7 @@ fr:
         signature_author: "%{name}"
         signature_hint: "Si le compte de l'auteur est anonymisé, l'article sera signé « L'équipe Lnclass »."
         # Messages du navigateur (éditeur, couverture) ; %{name}, %{reason} et %{number} sont remplacés par le contrôleur
-        # Stimulus, %{max_bytes} et %{max_count} par Communication::ArticleFormHelper (UDR-0065 §3.4.3, §3.4.4).
+        # Stimulus, %{max_bytes} et %{max_count} par Communication::ArticleFormHelper (UDR-0067 §3.4.3, §3.4.4).
         image_messages:
           refused: "« %{name} » n'a pas été ajoutée. %{reason}"
           format: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."

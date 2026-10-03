@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4, BL-12 : le serveur croit les octets, pas le nom ni le type annoncé ; il refuse ce qui n'est pas une image
+# ADR-0074 §4.4, BL-12 : le serveur croit les octets, pas le nom ni le type annoncé ; il refuse ce qui n'est pas une image
 # JPEG, PNG ou WebP fixe d'1 Mo et de 1600 px de côté au plus, avec sa raison, et retire les métadonnées de ce qu'il garde.
 module Dtos
   module Communication

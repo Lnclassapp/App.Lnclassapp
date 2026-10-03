@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.2 : l'équipe modifie un article dans son état ; un article publié n'est jamais rendu incomplet par une
+# ADR-0074 §4.2 : l'équipe modifie un article dans son état ; un article publié n'est jamais rendu incomplet par une
 # modification (mêmes règles que la publication). Le geste est au journal (BL-07).
 module UseCases
   module Communication
@@ -82,7 +82,7 @@ module UseCases
         assert_equal 1, @articles.updates.size
       end
 
-      test "ADR-0073 §4.2 : un article publié dont on vide le résumé → :invalid nommant excerpt ; rien n'est écrit" do
+      test "ADR-0074 §4.2 : un article publié dont on vide le résumé → :invalid nommant excerpt ; rien n'est écrit" do
         result = update("art00000000002", excerpt: "  ")
 
         assert_equal :invalid, result.code

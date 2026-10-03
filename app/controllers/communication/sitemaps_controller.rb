@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::SitemapsController — /sitemap.xml et /robots.txt, servis par des routes
 # Rôle : plan du site (accueil, /aide, pages en ligne, /blog, articles publiés) et robots.txt sur l'hôte canonique, cache court
-# ADR  : 0073 (§4.6 : public/robots.txt supprimé, public/ est en cache d'un an) · PRD blog : BL-05, BL-19
+# ADR  : 0074 (§4.6 : public/robots.txt supprimé, public/ est en cache d'un an) · PRD blog : BL-05, BL-19
 module Communication
   class SitemapsController < ApplicationController
     allow_unauthenticated_access

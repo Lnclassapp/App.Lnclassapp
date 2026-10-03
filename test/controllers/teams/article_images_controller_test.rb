@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4, UDR-0065 §3.4.3, BL-08, BL-12 : l'éditeur du blog envoie une image en multipart ; 201 avec exactement
+# ADR-0074 §4.4, UDR-0067 §3.4.3, BL-08, BL-12 : l'éditeur du blog envoie une image en multipart ; 201 avec exactement
 # public_id, sgid, url, width, height ; 422 { error } en français ; 403 { error: "forbidden" } pour qui ne gère pas le blog.
 # Un refus ne laisse rien : ni ligne article_images, ni blob dans le bucket.
 class Teams::ArticleImagesControllerTest < ActionDispatch::IntegrationTest

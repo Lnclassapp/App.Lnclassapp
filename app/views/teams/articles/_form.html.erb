@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/articles/_form — titre, résumé, couverture, texte et ses images, signature d'un article, partagé par new et edit %>
-<%# Rôle : tout le balisage de l'UDR-0065 §3.3-§3.4 ; rich-text-editor (mode images), cover-picker et image-alts le lisent sans le toucher %>
-<%# ADR  : 0051, 0073 · UDR : 0014, 0054, 0065 · Stimulus : rich-text-editor, communication--{character-count,cover-picker,image-alts} %>
+<%# Rôle : tout le balisage de l'UDR-0067 §3.3-§3.4 ; rich-text-editor (mode images), cover-picker et image-alts le lisent sans le toucher %>
+<%# ADR  : 0051, 0074 · UDR : 0014, 0054, 0067 · Stimulus : rich-text-editor, communication--{character-count,cover-picker,image-alts} %>
 <%# locals: (input:, url:, method:, upload_url:, author_name:, slug: nil) -%>
 <% article_caps = Entities::Communication::Article %>
 <% image_caps = Entities::Communication::ArticleImage %>
@@ -90,7 +90,7 @@
     </div>
     <input id="article_image_files" type="file" multiple hidden accept="<%= accept %>"
            data-rich-text-editor-target="fileInput" data-action="change->rich-text-editor#insertPicked">
-    <%# Aucun envoi par Active Storage : les images passent par l'endpoint de l'équipe (ADR-0073 §4.4). %>
+    <%# Aucun envoi par Active Storage : les images passent par l'endpoint de l'équipe (ADR-0074 §4.4). %>
     <%= form.rich_textarea :body, id: "article_body", value: article_editor_body(input.body), placeholder: t(".body_placeholder"),
                                   data: rich_text_without_uploads, "aria-invalid": ("true" if body_error),
                                   "aria-describedby": [ "article_body_hint", ("article_body_error" if body_error) ].compact.join(" "),

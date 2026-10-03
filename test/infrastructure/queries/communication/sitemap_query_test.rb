@@ -2,7 +2,7 @@ require "test_helper"
 
 module Queries
   module Communication
-    # BL-19, BL-05 (ADR-0073 §4.6): the sitemap lists published articles only, each with the date it last changed.
+    # BL-19, BL-05 (ADR-0074 §4.6): the sitemap lists published articles only, each with the date it last changed.
     class SitemapQueryTest < ActiveSupport::TestCase
       setup { @query = SitemapQuery.new }
 

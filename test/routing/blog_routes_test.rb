@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §6, UDR-0064 §3.1, UDR-0065 §3.0 : les routes du blog sont le contrat des lots A, B, D et E. Elles sont
+# ADR-0074 §6, UDR-0066 §3.1, UDR-0067 §3.0 : les routes du blog sont le contrat des lots A, B, D et E. Elles sont
 # dessinées avant leurs contrôleurs : on reconnaît une route sans charger son contrôleur.
 class BlogRoutesTest < ActionDispatch::IntegrationTest
   def helpers = Rails.application.routes.url_helpers

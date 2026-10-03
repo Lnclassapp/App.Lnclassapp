@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.1 à §4.7 : l'adaptateur des articles. Le slug naît du titre et ne bouge plus (BL-10) ; enregistrer assainit
+# ADR-0074 §4.1 à §4.7 : l'adaptateur des articles. Le slug naît du titre et ne bouge plus (BL-10) ; enregistrer assainit
 # le texte (BL-16), rattache la couverture et les images citées, supprime celles qui ne le sont plus ; une remise en ligne
 # garde sa date (BL-11) ; une lecture est un seul UPDATE, sans effet sur un brouillon ni sur updated_at (BL-17).
 module Repositories

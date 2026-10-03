@@ -5,7 +5,7 @@ require "test_helper"
 # UDR-0059 §2.2 : the two entries are offered once, in the hero (no join section, no « Commencer »).
 # UDR-0063 §3.4 : the footer's second list carries the public pages that are online.
 # UDR-0062 §4 : the teacher is promised exercises to assign, never courses.
-# UDR-0064 §3.5 : « Blog » leads that list, « Plus sur Lnclass », once an article is published (BL-06).
+# UDR-0066 §3.5 : « Blog » leads that list, « Plus sur Lnclass », once an article is published (BL-06).
 class HomepageControllerTest < ActionDispatch::IntegrationTest
   # UDR-0058 §3 : the subjects of the student grid, EDHC (1st cycle) and Philosophie (2nd cycle) both listed.
   SUBJECTS = [ "Mathématiques", "Physique-Chimie", "SVT", "Français", "Histoire-Géographie", "EDHC", "Philosophie" ].freeze

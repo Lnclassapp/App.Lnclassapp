@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0065 §3.4.4 : les données de l'éditeur du blog (#article_editor), lues par le contrôleur rich-text-editor en mode
+# UDR-0067 §3.4.4 : les données de l'éditeur du blog (#article_editor), lues par le contrôleur rich-text-editor en mode
 # images : plafonds lus dans Entities::Communication::ArticleImage, jamais recopiés ; messages rédigés par le serveur.
 module Communication
   class ArticleFormHelperTest < ActionView::TestCase

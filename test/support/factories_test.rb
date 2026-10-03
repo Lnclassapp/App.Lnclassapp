@@ -45,7 +45,7 @@ class FactoriesTest < ActiveSupport::TestCase
     assert_equal [ "principal", nil ], [ invitation.position, invitation.team_role ]
   end
 
-  # ADR-0073 : the blog factories write what the application writes; their images are checked and stored by the adapter.
+  # ADR-0074 : the blog factories write what the application writes; their images are checked and stored by the adapter.
   test "an article cites its images, attached to it with its cover; an image is stored without article by default" do
     cover = create_article_image(alt: nil)
     images = [ create_article_image(fixture: "photos/photo.png"), create_article_image(fixture: "photos/photo_lossy.webp") ]

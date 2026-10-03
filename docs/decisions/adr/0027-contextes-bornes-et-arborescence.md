@@ -7,7 +7,7 @@
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-02**, bloque la V1 |
 | **Remplace** | [ADR-0023](./0023-modelisation-de-l-organisation-scolaire.md) · [ADR-0014](./0014-standardisation-namespaces-et-validation-frontiere.md) §2.2 |
 | **Remplacé par** | — |
-| **Amendé par** | [ADR-0073](./0073-blog-public-articles-images-et-referencement.md) : §4 (`communication` porte aussi `articles` et `article_images`) |
+| **Amendé par** | [ADR-0074](./0074-blog-public-articles-images-et-referencement.md) : §4 (`communication` porte aussi `articles` et `article_images`) |
 
 ---
 
@@ -123,10 +123,10 @@ Fichier : `app/domain/ports/assessment/knowledge_gap_repository_port.rb` (C-49 :
 - **Erratum — emplacement de `TransactionPort`.** L'arborescence du §4 le range dans `app/domain/shared/`, sous `Shared::`. Il vit dans **`app/domain/ports/shared/transaction_port.rb`**, sous le nom **`Ports::Shared::TransactionPort`**, comme le nomme l'ADR-0026 : c'est un port, rangé avec les autres ports. Son adaptateur est `Repositories::Shared::Transaction`.
 - `app/domain/shared/` ne contient que `Shared::Result`.
 
-## Amendement du 2026-10-02 — blog public (ADR-0073)
+## Amendement du 2026-10-02 — blog public (ADR-0074)
 
 *Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
-- **`communication` porte quatre tables** : `messages` et `message_dismissals` (annonces, V6), et désormais `articles` et `article_images` (blog public, ADR-0073 §4.1). Leurs classes : `Orm::Article`, `Orm::ArticleImage`, `Entities::Communication::Article`, `ArticleImage`, `ArticleRead`, ports `Ports::Communication::ArticleRepositoryPort` et `ArticleImageStorePort`.
+- **`communication` porte quatre tables** : `messages` et `message_dismissals` (annonces, V6), et désormais `articles` et `article_images` (blog public, ADR-0074 §4.1). Leurs classes : `Orm::Article`, `Orm::ArticleImage`, `Entities::Communication::Article`, `ArticleImage`, `ArticleRead`, ports `Ports::Communication::ArticleRepositoryPort` et `ArticleImageStorePort`.
 - **Article et annonce ne se confondent pas** : deux tables, deux jeux de use cases ; aucun ne lit l'autre.
 - **`shared` gagne deux entités et un assainisseur**, déplacés sans changer leur logique : `Entities::Shared::ContentStatus` (de `catalog`), `Entities::Shared::ImageHeader` (d'`identity`) et `Repositories::Shared::RichTextSanitizer` (de `catalog`). `communication` ne dépend ainsi d'aucune entité du catalogue ni de l'identité, et `assessment` ne dépend plus de `Catalog::ContentStatus`.

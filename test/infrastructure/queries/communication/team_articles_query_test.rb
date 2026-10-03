@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0065 §3.0, §3.2 : la liste de gestion du blog montre tous les articles, du plus récemment modifié au plus ancien,
+# UDR-0067 §3.0, §3.2 : la liste de gestion du blog montre tous les articles, du plus récemment modifié au plus ancien,
 # 20 par page, avec le nom réel de l'auteur et le nombre de lectures (BL-17).
 module Queries
   module Communication

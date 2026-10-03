@@ -1,4 +1,4 @@
-# ADR-0073 §4.1 : the public blog in `communication`. An article has a public_id (team addresses) and a frozen slug
+# ADR-0074 §4.1 : the public blog in `communication`. An article has a public_id (team addresses) and a frozen slug
 # (public address), the content life cycle of ADR-0035 and a reads counter written by one UPDATE (not indexed, so the
 # update stays HOT). Its images are rows of article_images, checked files without metadata (ADR-0060), NULL article
 # between upload and the first save that cites them. Nothing is ever deleted through a foreign key (RESTRICT); the two

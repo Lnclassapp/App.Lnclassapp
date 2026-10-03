@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::SitemapQuery
 # Rôle : articles publiés du plan du site (slug, updated_at pour lastmod), jamais un brouillon ni un archivé
-# ADR  : 0073 (§4.6) · PRD blog : BL-05, BL-19
+# ADR  : 0074 (§4.6) · PRD blog : BL-05, BL-19
 module Queries
   module Communication
     class SitemapQuery

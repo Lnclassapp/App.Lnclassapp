@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::ArchiveArticle
 # Rôle : l'équipe archive un article publié : son adresse répond 410, il se remet en ligne ; geste au journal
-# ADR  : 0026, 0028, 0035, 0073 · UDR : 0065
+# ADR  : 0026, 0028, 0035, 0074 · UDR : 0067
 module UseCases
   module Communication
     class ArchiveArticle

@@ -2,7 +2,7 @@ require "test_helper"
 
 module Queries
   module Communication
-    # UDR-0064 §3.1, ADR-0073 §4.7 et §4.8 : la page d'un article lit l'article, sa signature, sa couverture et son texte
+    # UDR-0066 §3.1, ADR-0074 §4.7 et §4.8 : la page d'un article lit l'article, sa signature, sa couverture et son texte
     # en une requête, quel que soit son état (la règle de lecture est en aval) ; la query tranche la signature (BL-18).
     class ArticleDetailQueryTest < ActiveSupport::TestCase
       setup do

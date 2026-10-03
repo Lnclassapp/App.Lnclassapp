@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::ArticlesController — blog public : liste /blog et page d'un article, sans shell
 # Rôle : lit les queries, applique ReadArticlePolicy (404 brouillon, 410 archivé, jamais render_result), compte la lecture
-# ADR  : 0049, 0073 (§4.2, §4.7, §4.8) · UDR : 0064 (§3.1)
+# ADR  : 0049, 0074 (§4.2, §4.7, §4.8) · UDR : 0066 (§3.1)
 module Communication
   class ArticlesController < ApplicationController
     allow_unauthenticated_access
@@ -11,11 +11,11 @@ module Communication
     def index
       page = params[:page].to_s[PAGE]&.to_i || 1
       @page = Queries::Communication::PublishedArticlesQuery.new.call(page:)
-      # Pas de page vide indexable (UDR-0064 §3.1).
+      # Pas de page vide indexable (UDR-0066 §3.1).
       render_not_found if @page.page > @page.pages
     end
 
-    # RendersResult traduirait :expired en renvoi vers la connexion : l'archivé est rendu ici, en 410 (ADR-0073 §4.2).
+    # RendersResult traduirait :expired en renvoi vers la connexion : l'archivé est rendu ici, en 410 (ADR-0074 §4.2).
     def show
       @article = Queries::Communication::ArticleDetailQuery.new.call(slug: params[:slug]) or return render_not_found
       read = Policies::Communication::ReadArticlePolicy.new.call(actor: current_actor, article: @article)
@@ -27,7 +27,7 @@ module Communication
 
     private
 
-    # Le rendu ne dépend pas du compteur, et une panne de la base ne bloque jamais la page (ADR-0073 §4.7) : elle est
+    # Le rendu ne dépend pas du compteur, et une panne de la base ne bloque jamais la page (ADR-0074 §4.7) : elle est
     # journalisée (config/initializers/error_reporting.rb). Toute autre erreur est un bogue : elle remonte.
     def record_read
       UseCases::Communication::RecordArticleRead.new(

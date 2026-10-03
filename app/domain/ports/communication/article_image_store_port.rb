@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::ArticleImageStorePort
 # Rôle : contrat du stockage des images d'article (service Active Storage, bucket en production) : envoyer, servir, purger
-# ADR  : 0047, 0060, 0073
+# ADR  : 0047, 0060, 0074
 module Ports
   module Communication
     module ArticleImageStorePort

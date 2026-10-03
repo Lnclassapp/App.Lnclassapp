@@ -6,7 +6,7 @@
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/) (Lot B2 ; CA-05, CA-06, CA-07) |
 | **ADR lié** | [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (cycle de vie, pas de retour au brouillon) · [ADR-0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md) (slug figé) · [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (CSP stricte) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (Trix hors du bundle commun) · UDR-0006 (CRUD Hotwire) · UDR-0007 (vocabulaire) |
-| **Amendé par** | [UDR-0065](0065-gestion-du-blog-par-l-equipe.md) : éditeur riche, images admises pour le blog seul |
+| **Amendé par** | [UDR-0067](0067-gestion-du-blog-par-l-equipe.md) : éditeur riche, images admises pour le blog seul |
 | **Remplacé par** | — |
 
 ---
@@ -89,6 +89,6 @@ L'équipe saisit les cours du catalogue : nom, sous-titre, niveau, série, mati�
 
 *Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Statut : accepté (porteur, 2026-10-02 : délégation). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
-- La règle « l'éditeur refuse tout fichier » devient : **l'éditeur refuse tout fichier, sauf s'il est posé avec la valeur Stimulus `attachments` vraie**, ce que seul le formulaire d'article du blog fait ([UDR-0065](0065-gestion-du-blog-par-l-equipe.md) §3.4.4, §3.7).
-- **Ce formulaire ne change pas** : `teams/courses/_form` ne pose pas `attachments`, un fichier déposé ou collé y est toujours refusé, et `Repositories::Shared::RichTextSanitizer` (déplacé de `catalog` vers `shared`, [ADR-0073](../adr/0073-blog-public-articles-images-et-referencement.md) §4.5) retire toujours toute pièce jointe d'un cours (BL-15).
+- La règle « l'éditeur refuse tout fichier » devient : **l'éditeur refuse tout fichier, sauf s'il est posé avec la valeur Stimulus `attachments` vraie**, ce que seul le formulaire d'article du blog fait ([UDR-0067](0067-gestion-du-blog-par-l-equipe.md) §3.4.4, §3.7).
+- **Ce formulaire ne change pas** : `teams/courses/_form` ne pose pas `attachments`, un fichier déposé ou collé y est toujours refusé, et `Repositories::Shared::RichTextSanitizer` (déplacé de `catalog` vers `shared`, [ADR-0074](../adr/0074-blog-public-articles-images-et-referencement.md) §4.5) retire toujours toute pièce jointe d'un cours (BL-15).
 - Ouvrir les images à un autre contenu exige une nouvelle UDR et un ADR.

@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/image_upload — prépare une image d'article dans le navigateur, puis l'envoie à l'endpoint de l'équipe
 // Rôle : chargé par import() seulement (éditeur du blog, couverture) : plus grand côté borné, WebP 0,82 (JPEG à défaut), sans métadonnées
-// ADR  : 0051, 0060, 0073 · UDR : 0065 (§3.4.3) · mêmes règles de réduction que identity/photo_picker_controller.js
+// ADR  : 0051, 0060, 0074 · UDR : 0067 (§3.4.3) · mêmes règles de réduction que identity/photo_picker_controller.js
 
 const QUALITY = 0.82
 // An upload that never answers (a stalled connection) is given up: the editor and « Enregistrer » are free again.
@@ -22,7 +22,7 @@ export class Refusal extends Error {
   }
 }
 
-// Type announced by the browser, then the article's image count (the editor only), shrink, then weight (UDR-0065 §3.4.3).
+// Type announced by the browser, then the article's image count (the editor only), shrink, then weight (UDR-0067 §3.4.3).
 // An image the browser cannot decode, or that decodes into nothing, leaves as it is: the server decides (BL-12).
 export async function prepareImage(file, { accept, maxSide, maxBytes, full = false }) {
   if (!accept.includes(file.type)) throw new Refusal("format")

@@ -1,6 +1,6 @@
 # 🔌 INFRASTRUCTURE · Communication::PurgeOrphanArticleImagesJob
 # Rôle : supprime chaque jour les images d'article envoyées puis jamais enregistrées depuis plus de 48 h, fichier compris
-# ADR  : 0047, 0073
+# ADR  : 0047, 0074
 module Communication
   class PurgeOrphanArticleImagesJob < ApplicationJob
     # Le délai des fichiers jamais rattachés (Shared::PurgeUnattachedBlobsJob) : une modale peut rester ouverte longtemps.

@@ -1,6 +1,6 @@
 # 🌐 UI · Communication::ArticleStatusHelper — état d'un article du blog et entrées de son menu ⋮
 # Rôle : badge d'état (liste de gestion, modale, bandeau d'aperçu) ; Modifier, Aperçu, puis la transition permise par l'état
-# ADR  : 0035, 0073 · UDR : 0042, 0064, 0065
+# ADR  : 0035, 0074 · UDR : 0042, 0066, 0067
 module Communication
   module ArticleStatusHelper
     # Les mêmes tons que le catalogue : un état a une seule apparence dans toute l'application.

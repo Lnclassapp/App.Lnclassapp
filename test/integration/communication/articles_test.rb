@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.2, §4.7, §4.8 et §7 : le parcours HTTP du blog public. Un brouillon est introuvable (404) pour qui ne gère
+# ADR-0074 §4.2, §4.7, §4.8 et §7 : le parcours HTTP du blog public. Un brouillon est introuvable (404) pour qui ne gère
 # pas le blog, un archivé répond 410 sans jamais renvoyer vers la connexion, un article remis en ligne garde son
 # adresse et sa date ; la lecture est comptée pour un visiteur et un élève, jamais pour l'équipe, un robot, un
 # préchargement ni un aperçu ; une personne connectée lit le blog sans être renvoyée vers son accueil.

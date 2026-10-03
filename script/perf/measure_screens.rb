@@ -12,7 +12,7 @@
 # aux écrans nommés. PERF_COLD=1 vide le cache (Rails.cache) avant chaque requête, hors du temps mesuré : la mesure à
 # froid du pilotage « année », dont les chiffres sont gardés 5 minutes (ADR-0062, amendement du 2026-09-29). La requête passe par toute la pile Rack (Integration::Session), sans réseau ni navigateur.
 # Aucune donnée n'est écrite, sauf les sessions de connexion des quatre comptes de mesure et le compteur de lectures de
-# l'article mesuré : la lecture d'un visiteur compte, et son UPDATE entre dans le budget (ADR-0073 §4.7). Le blog
+# l'article mesuré : la lecture d'un visiteur compte, et son UPDATE entre dans le budget (ADR-0074 §4.7). Le blog
 # (/blog, /blog?page=2, /blog/:slug) est lu sans compte, par la session `visitor` : sous 100 ms p95 et 150 Ko (ADR-0067).
 require "json"
 require "zlib"

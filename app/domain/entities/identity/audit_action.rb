@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Identity::AuditAction
 # Rôle : liste fermée des actions écrites dans le journal d'audit
-# ADR  : 0031, 0032, 0035, 0036 (amendement 2), 0038, 0050, 0055, 0058, 0071, 0073
+# ADR  : 0031, 0032, 0035, 0036 (amendement 2), 0038, 0050, 0055, 0058, 0071, 0074
 module Entities
   module Identity
     module AuditAction

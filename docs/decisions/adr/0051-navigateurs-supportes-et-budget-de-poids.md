@@ -8,7 +8,7 @@
 | **Complète** | [ADR-0009](./0009-stack-frontend-vanilla-css-tailwind-hotwire.md) (public cible : Android d'entrée de gamme en 3G/4G, JavaScript minimal) |
 | **Remplace** | — |
 | **Remplacé par** | — |
-| **Amendé par** | [ADR-0073](./0073-blog-public-articles-images-et-referencement.md) : amendement du 2026-09-25 (Action Text et pièces jointes hors cours et fiches) |
+| **Amendé par** | [ADR-0074](./0074-blog-public-articles-images-et-referencement.md) : amendement du 2026-09-25 (Action Text et pièces jointes hors cours et fiches) |
 
 ---
 
@@ -202,7 +202,7 @@ Aucune page ne renvoie plus `406` pour cause de navigateur : si `public/406-unsu
 - **Pièces jointes** : aucune dans l'éditeur en V1, **décision du porteur** : c'est un éditeur de texte uniquement. Le contrôleur `rich_text_editor` annule l'événement `trix-file-accept` et masque le bouton de fichier ; aucun `direct_upload` n'est branché, ce qui évite d'ouvrir `connect-src` vers le bucket (ADR-0047, ADR-0049).
 - Rien ne change pour le plancher des navigateurs, les plafonds du budget ou leur contrôle en CI.
 
-## Amendement du 2026-10-02 — blog public (ADR-0073)
+## Amendement du 2026-10-02 — blog public (ADR-0074)
 
 *Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 

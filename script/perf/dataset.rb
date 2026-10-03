@@ -1,6 +1,6 @@
 # Jeu de données de mesure du chantier cache-ecrans-lourds, à l'échelle de la feuille de route (ADR-0039 §7) : 500
 # établissements et leurs ~34 000 classes, 4 000 enseignants, 40 000 élèves, 200 cours complets, leurs devoirs et
-# ~300 000 sessions d'exercice sur 60 jours, sur une base qui porte le référentiel de db/seeds ; et le blog (ADR-0073) :
+# ~300 000 sessions d'exercice sur 60 jours, sur une base qui porte le référentiel de db/seeds ; et le blog (ADR-0074) :
 # 30 articles publiés de 1 500 mots, chacun avec sa couverture et cinq images dans le texte, plus deux brouillons et un
 # archivé.
 #
@@ -347,7 +347,7 @@ module PerfDataset
     log "150 demandes en attente, #{Orm::Referral.count} parrainages, #{Orm::ReferralShare.count} partages"
   end
 
-  # Le blog public (ADR-0073, UDR-0064) : ARTICLES publiés, puis deux brouillons et un archivé, signés par l'auteur des
+  # Le blog public (ADR-0074, UDR-0066) : ARTICLES publiés, puis deux brouillons et un archivé, signés par l'auteur des
   # cours. Les lignes d'article_images n'ont pas de fichier : la page d'un article ne lit que leurs colonnes, seule la
   # route des images (hors mesure) lirait le bucket. Le texte cite ses cinq images par sgid, comme Action Text l'enregistre.
   def seed_blog

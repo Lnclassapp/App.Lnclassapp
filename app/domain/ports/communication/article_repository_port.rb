@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::ArticleRepositoryPort
 # Rôle : contrat de persistance des articles du blog : écrire, changer d'état, compter une lecture
-# ADR  : 0026, 0029, 0035, 0073
+# ADR  : 0026, 0029, 0035, 0074
 module Ports
   module Communication
     module ArticleRepositoryPort

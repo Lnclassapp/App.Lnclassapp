@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Communication
-    # ADR-0073 §4.7, BL-17 : une lecture est comptée pour un article publié, ouvert par un visiteur ou un compte hors
+    # ADR-0074 §4.7, BL-17 : une lecture est comptée pour un article publié, ouvert par un visiteur ou un compte hors
     # de l'équipe, qui n'est ni un robot qui se déclare ni un préchargement. Un échec du compteur ne lève jamais.
     class RecordArticleReadTest < ActiveSupport::TestCase
       Article = Data.define(:id, :status)

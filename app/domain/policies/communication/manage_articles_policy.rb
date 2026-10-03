@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Communication::ManageArticlesPolicy
 # Rôle : gérer le blog : l'équipe `admin` et `content` seules (matrice de l'ADR-0038, ligne « Blog »)
-# ADR  : 0028, 0038, 0073
+# ADR  : 0028, 0038, 0074
 module Policies
   module Communication
     class ManageArticlesPolicy

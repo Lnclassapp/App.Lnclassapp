@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0064 §3.2 à §3.4, §3.6 et §3.8 : le rendu du blog public. La liste paginée par dix et son état vide, la page d'un
+# UDR-0066 §3.2 à §3.4, §3.6 et §3.8 : le rendu du blog public. La liste paginée par dix et son état vide, la page d'un
 # article (un seul h1, signature, date, couverture, texte et ses images), les balises de tête de l'aperçu partagé sur
 # l'hôte canonique, et les budgets de la lecture (HTML, aucun script, aucun tiers). Les statuts (404, 410), le compteur
 # et la lecture connectée sont dans test/integration/communication/articles_test.rb.

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4 : une image envoyée puis jamais enregistrée (modale fermée) est supprimée après 48 h, son fichier purgé
+# ADR-0074 §4.4 : une image envoyée puis jamais enregistrée (modale fermée) est supprimée après 48 h, son fichier purgé
 # après validation ; une image citée par un article, ou sa couverture, ne l'est jamais.
 class Communication::PurgeOrphanArticleImagesJobTest < ActiveJob::TestCase
   test "une image non rattachée est gardée à 47 h, supprimée à 49 h, son fichier purgé ; une image rattachée, jamais" do

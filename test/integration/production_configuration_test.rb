@@ -33,7 +33,7 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     assert production["assume_ssl"]
     assert production["force_ssl"]
 
-    # A static public page: the probe's database is never connected, and the homepage now reads it (« Blog » link, UDR-0064).
+    # A static public page: the probe's database is never connected, and the homepage now reads it (« Blog » link, UDR-0066).
     status, hsts = production["http_page"]
     assert_equal 200, status, "derrière le proxy Railway, une requête est traitée comme HTTPS"
     assert_match(/max-age=\d+/, hsts)

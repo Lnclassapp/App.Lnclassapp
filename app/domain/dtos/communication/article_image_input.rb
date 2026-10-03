@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Communication::ArticleImageInput
 # Rôle : l'image d'article envoyée : format lu dans les octets (JPEG, PNG, WebP fixe), 1 Mo et 1600 px au plus ; octets gardés sans métadonnées
-# ADR  : 0060, 0073 · UDR : 0065
+# ADR  : 0060, 0074 · UDR : 0067
 module Dtos
   module Communication
     # Calqué sur Dtos::Identity::ProfilePhotoInput, avec les plafonds de Entities::Communication::ArticleImage.

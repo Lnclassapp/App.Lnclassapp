@@ -6,7 +6,7 @@
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q4, Q13, Q14 ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script tiers, CSP stricte) · [UDR-0057](0057-ecrans-eleve-epures.md) (règle R1 à R6, deux familles) · [UDR-0058](0058-accueil-eleve.md) (accueil élève) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (motif des écrans d'entrée) · [UDR-0054](0054-finitions-d-interface.md) (retour, titre, focus) · [UDR-0005](0005-design-system-fondateur.md) (tokens, `ui_modal`) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) (pages publiques liées depuis `/aide`) |
-| **Amendé par** | [UDR-0064](0064-blog-public-liste-article-et-partage.md) : §3.3 point 3 et §3.5 (pied de la carte d'aide) |
+| **Amendé par** | [UDR-0066](0066-blog-public-liste-article-et-partage.md) : §3.3 point 3 et §3.5 (pied de la carte d'aide) |
 | **Remplacé par** | — |
 
 ---
@@ -160,6 +160,6 @@ Les trois ronds ont la **même teinte**. L'exemple du porteur teinte chaque rond
 
 *Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Statut : accepté (porteur, 2026-10-02 : délégation). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
-- **§3.3, point 3 (pied de la carte, jamais construit jusqu'ici)** : sous la liste des contacts, `nav#help_sheet_links` (`aria-label` `shared.help_sheet.footer.label`, « Plus sur Lnclass ») liste `[ blog_link, *public_page_links(%i[mission privacy terms]) ].compact` : « Blog » (seulement s'il a un article publié), « Notre mission », « Protection des données », « Conditions d'utilisation » ([UDR-0064](0064-blog-public-liste-article-et-partage.md) §3.5).
+- **§3.3, point 3 (pied de la carte, jamais construit jusqu'ici)** : sous la liste des contacts, `nav#help_sheet_links` (`aria-label` `shared.help_sheet.footer.label`, « Plus sur Lnclass ») liste `[ blog_link, *public_page_links(%i[mission privacy terms]) ].compact` : « Blog » (seulement s'il a un article publié), « Notre mission », « Protection des données », « Conditions d'utilisation » ([UDR-0066](0066-blog-public-liste-article-et-partage.md) §3.5).
 - **§3.5** : les clés `shared.help_sheet.footer.mission`, `.privacy` et `.terms` **ne sont pas créées** ; les libellés sont ceux de `public_pages.links` (une page a un seul nom dans l'application) ; « Confidentialité » devient « Protection des données ». Seule `shared.help_sheet.footer.label` est ajoutée.
 - Le focus d'ouverture reste sur « Questions fréquentes ».

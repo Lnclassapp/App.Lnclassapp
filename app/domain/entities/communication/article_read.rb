@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::ArticleRead
 # Rôle : dit si l'ouverture d'un article est une lecture : ni robot qui se déclare, ni préchargement, ni aperçu
-# ADR  : 0049, 0073
+# ADR  : 0049, 0074
 module Entities
   module Communication
     module ArticleRead

@@ -73,7 +73,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
                           "status" => %w[queued validating importing completed rejected failed] },
     "classroom_plan_entries" => { "school_type" => %w[public private] },
-    "articles" => { "status" => %w[draft published archived], "signature" => %w[team author] }, # ADR-0073 §4.1
+    "articles" => { "status" => %w[draft published archived], "signature" => %w[team author] }, # ADR-0074 §4.1
     "article_images" => { "content_type" => %w[image/jpeg image/png image/webp] }
   }.freeze
 
@@ -229,7 +229,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::School.where(id: school.id).delete_all } }
   end
 
-  # ADR-0073 §4.1 : un article, ses images ; la base refuse ce que le domaine refuse déjà.
+  # ADR-0074 §4.1 : un article, ses images ; la base refuse ce que le domaine refuse déjà.
   test "BL: the database refuses an article or an image the blog must never hold" do
     author = create_team_member(team_role: "content", second_factor: false)
     article = lambda do |**columns|

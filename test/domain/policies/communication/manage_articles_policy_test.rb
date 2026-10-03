@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.3, BL-07, BL-08 : le blog est géré par l'équipe Administration et Contenu, et par personne d'autre.
+# ADR-0074 §4.3, BL-07, BL-08 : le blog est géré par l'équipe Administration et Contenu, et par personne d'autre.
 module Policies
   module Communication
     class ManageArticlesPolicyTest < ActiveSupport::TestCase

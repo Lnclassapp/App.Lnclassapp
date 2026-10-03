@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::Article
 # Rôle : un article du blog : plafonds, signature, cycle des contenus, et règle de complétude de sa publication
-# ADR  : 0035, 0073 · UDR : 0065
+# ADR  : 0035, 0074 · UDR : 0067
 module Entities
   module Communication
     class Article
@@ -28,7 +28,7 @@ module Entities
       validates :status, inclusion: { in: Entities::Shared::ContentStatus::VALUES }
       validate :complete_for_publication, on: :publication
 
-      # Ses messages sont ceux que l'équipe lit dans la modale (UDR-0065 §3.5) : une seule source, les clés de la saisie.
+      # Ses messages sont ceux que l'équipe lit dans la modale (UDR-0067 §3.5) : une seule source, les clés de la saisie.
       def self.lookup_ancestors = [ Dtos::Communication::ArticleInput ]
 
       def images = @images || []
@@ -37,7 +37,7 @@ module Entities
       def published? = status == "published"
       def archived? = status == "archived"
 
-      # Lue par la publication et par l'enregistrement d'un article publié (ADR-0073 §4.2). → {} si l'article est
+      # Lue par la publication et par l'enregistrement d'un article publié (ADR-0074 §4.2). → {} si l'article est
       # publiable tel quel ; sinon Hash{champ => [message]}, champs dans l'ordre du formulaire : title, excerpt,
       # cover_alt, body, :"image_alts.<public_id>" (numérotée dans l'ordre du texte).
       def publication_errors

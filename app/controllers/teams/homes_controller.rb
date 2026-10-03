@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::HomesController
 # Rôle : accueil équipe (TR-09, CA-25) : compteurs, référentiel, raccourcis, demandes de suppression ; le contenu récent différé
-# ADR  : 0026, 0028, 0036 (amendement 2), 0038, 0073 · UDR : 0006, 0018, 0065
+# ADR  : 0026, 0028, 0036 (amendement 2), 0038, 0074 · UDR : 0006, 0018, 0067
 module Teams
   class HomesController < BaseController
     RECENT_CONTENT_FRAME = "team_home_recent_content".freeze
@@ -14,7 +14,7 @@ module Teams
       @home = query.call
       # « Inviter un membre » ne s'affiche qu'à qui la policy de l'invitation laisse passer : un admin (ADR-0038).
       @can_invite = Policies::Identity::InviteTeamPolicy.new.call(actor: current_actor).success?
-      # UDR-0065 §3.1 : « Blog » pour qui gère le blog (admin, content) ; la vue reçoit le booléen, jamais le rôle.
+      # UDR-0067 §3.1 : « Blog » pour qui gère le blog (admin, content) ; la vue reçoit le booléen, jamais le rôle.
       @can_manage_blog = Policies::Communication::ManageArticlesPolicy.new.call(actor: current_actor).success?
       # ADR-0036, amendement 2 : le rappel des demandes de suppression, lu à l'affichage, pour qui peut les traiter (admin).
       @deletion_requests = deletion_requests_query.summary if Policies::Identity::DeleteUserPolicy.new.call(actor: current_actor).success?

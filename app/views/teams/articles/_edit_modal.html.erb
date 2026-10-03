@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/articles/_edit_modal — modale de modification d'un article (edit, update en 422, publication refusée) %>
 <%# Rôle : alerte « Publication impossible » et ses manques en tête si refused ; état de l'article ; formulaire ; jamais de « Publier » %>
-<%# ADR  : 0035, 0073 · UDR : 0006, 0014, 0054, 0065 (§3.3, §3.5) %>
+<%# ADR  : 0035, 0074 · UDR : 0006, 0014, 0054, 0067 (§3.3, §3.5) %>
 <%# locals: (article:, form:, refused:) -%>
 <%= ui_modal title: t(".title"), id: "article-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
   <% modal.footer do %>

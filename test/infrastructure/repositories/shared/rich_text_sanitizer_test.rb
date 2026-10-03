@@ -12,7 +12,7 @@ module Repositories
         assert_equal "<p>A</p><a>lien</a>", clean
       end
 
-      # ADR-0073 §4.5, BL-15 : sans image_ids (cours, fiches, imports), rien ne change : toute pièce jointe part, un h1 reste.
+      # ADR-0074 §4.5, BL-15 : sans image_ids (cours, fiches, imports), rien ne change : toute pièce jointe part, un h1 reste.
       test "BL-15 : sans image_ids, une image d'article citée part comme toute pièce jointe, et un h1 reste un h1" do
         image = article_image
 
@@ -43,7 +43,7 @@ module Repositories
         end
       end
 
-      # ADR-0073 §4.5 : en mode article, seule une image admise reste, avec les seuls attributs d'une pièce jointe.
+      # ADR-0074 §4.5 : en mode article, seule une image admise reste, avec les seuls attributs d'une pièce jointe.
       test "BL-02 : avec image_ids, une image admise reste sans url ni href, et un h1 devient un h2" do
         image = article_image
         html = %(<h1>Partie 1</h1><div>Texte</div>) + attachment(image, url: "https://ailleurs.test/x.png", href: "https://x.test",
@@ -81,7 +81,7 @@ module Repositories
         assert_nil RichTextSanitizer.call(nil, image_ids: Set[])
       end
 
-      # ADR-0073 §7 : les cours, les fiches et les imports n'admettent jamais d'image ; seul l'adaptateur des articles le fait.
+      # ADR-0074 §7 : les cours, les fiches et les imports n'admettent jamais d'image ; seul l'adaptateur des articles le fait.
       test "seul l'adaptateur des articles passe image_ids" do
         callers = Rails.root.glob("{app,lib}/**/*.rb").select { it.read.match?(/RichTextSanitizer\.call\([^)]*image_ids:/m) }
 

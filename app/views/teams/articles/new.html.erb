@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/articles/new — nouvel article, servi dans le frame « modal » (UDR-0065 §3.3) %>
+<%# 🌐 UI · teams/articles/new — nouvel article, servi dans le frame « modal » (UDR-0067 §3.3) %>
 <%# Rôle : modale large ouverte dès son arrivée ; l'article naît en brouillon, signé de l'équipe par défaut ; échec re-rendu en 422 %>
-<%# ADR  : 0035, 0073 · UDR : 0006, 0014, 0054, 0065 %>
+<%# ADR  : 0035, 0074 · UDR : 0006, 0014, 0054, 0067 %>
 <%= turbo_frame_tag "modal" do %>
   <%= ui_modal title: t(".title"), id: "article-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
     <% modal.footer do %>

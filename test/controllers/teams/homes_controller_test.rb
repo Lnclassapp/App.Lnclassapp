@@ -134,7 +134,7 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{new_teams_invitation_path}']", 0
   end
 
-  test "BL-08 (UDR-0065 §3.1): the « Blog » shortcut, after « Croissance » and before the invitation, for admin and content" do
+  test "BL-08 (UDR-0067 §3.1): the « Blog » shortcut, after « Croissance » and before the invitation, for admin and content" do
     sign_in_as @member
 
     get team_home_path

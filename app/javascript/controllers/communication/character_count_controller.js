@@ -1,10 +1,10 @@
-// ⚡ FRONT · communication/character_count_controller — compteur de caractères du résumé d'un article (UDR-0065 §3.3)
+// ⚡ FRONT · communication/character_count_controller — compteur de caractères du résumé d'un article (UDR-0067 §3.3)
 // Rôle : « 42 / 200 », ambre à 20 restants, rouge à la limite ; l'annonce ne change qu'au franchissement d'un seuil
-// UDR  : 0065 · sans JavaScript : le chiffre rendu par le serveur reste, maxlength borne la saisie
+// UDR  : 0067 · sans JavaScript : le chiffre rendu par le serveur reste, maxlength borne la saisie
 import { Controller } from "@hotwired/stimulus"
 
 const NEAR = 20
-// Classes de la palette écrites en entier pour que Tailwind les compile (UDR-0065 §3.9).
+// Classes de la palette écrites en entier pour que Tailwind les compile (UDR-0067 §3.9).
 const TONES = { calm: "text-mute", near: "text-warning", full: "text-error" }
 
 export default class extends Controller {

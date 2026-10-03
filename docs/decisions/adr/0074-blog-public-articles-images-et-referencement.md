@@ -1,10 +1,10 @@
-# ADR-0073 : Le blog public vit dans `communication` ; ses articles ont une adresse lisible figée, des images vérifiées et servies par Lnclass, un compteur de lectures tenu par le serveur et un plan du site
+# ADR-0074 : Le blog public vit dans `communication` ; ses articles ont une adresse lisible figée, des images vérifiées et servies par Lnclass, un compteur de lectures tenu par le serveur et un plan du site
 
 | | |
 |---|---|
 | **Statut** | Accepté *(porteur, 2026-10-02 : délégation, « crée un système de blog et puis c'est tout »)* |
 | **Date** | 2026-10-02 |
-| **Chantier** | [`docs/chantiers/blog`](../../chantiers/blog/memo.md) — grill 1 à 12 ; [PRD](../../chantiers/blog/prd.md) §2, §4 (BL-01 à BL-21), §5 ; interfaces : [UDR-0064](../udr/0064-blog-public-liste-article-et-partage.md), [UDR-0065](../udr/0065-gestion-du-blog-par-l-equipe.md) |
+| **Chantier** | [`docs/chantiers/blog`](../../chantiers/blog/memo.md) — grill 1 à 12 ; [PRD](../../chantiers/blog/prd.md) §2, §4 (BL-01 à BL-21), §5 ; interfaces : [UDR-0066](../udr/0066-blog-public-liste-article-et-partage.md), [UDR-0067](../udr/0067-gestion-du-blog-par-l-equipe.md) |
 | **Amende** | [ADR-0027](./0027-contextes-bornes-et-arborescence.md) §4 (tables de `communication`) · [ADR-0029](./0029-identifiants-exposes-public-id-et-slugs.md) §4 (tables à `public_id` et à slug) · [ADR-0038](./0038-comptes-de-l-equipe-et-sous-roles.md) §4 (matrice, ligne « Blog », appliquée dès maintenant) · [ADR-0047](./0047-stockage-objet-s3-sur-railway.md) §4 (fichiers publics) · [ADR-0051](./0051-navigateurs-supportes-et-budget-de-poids.md), amendement du 2026-09-25 (Action Text et pièces jointes hors cours et fiches) |
 | **Complète** | [ADR-0026](./0026-contrat-result-entites-et-dto.md) et [ADR-0028](./0028-policies-de-domaine-par-use-case.md) (`:expired` en lecture) · [ADR-0035](./0035-cycle-de-vie-et-propriete-du-contenu.md) (même cycle, `ContentStatus` partagé) · [ADR-0049](./0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (compteur serveur) · [ADR-0060](./0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md) et [ADR-0068](./0068-import-de-plusieurs-fichiers-de-cours-et-ecriture-acceleree.md) (`ImageHeader` et `RichTextSanitizer` partagés, inchangés pour leurs usages actuels) · [ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md) (deux écrans budgétés) |
 | **Remplace** | — |
@@ -44,7 +44,7 @@ Enfin, la page publique doit tenir sur un téléphone d'entrée de gamme en 3G (
 | D — libvips et variantes (plusieurs tailles, `srcset`) | Image adaptée à chaque écran | Dépendance native que la construction Docker a déjà refusée (ADR-0060) ; un envoi de 3 à 8 Mo sur réseau lent ; le navigateur réduit déjà la photo de profil |
 | E — Compteur dédoublonné par cookie (ou par empreinte IP + agent) | Lecteurs uniques plutôt que lectures | Un traceur, donc un bandeau de consentement (ADR-0049) ; une IP est une donnée personnelle, interdite de mesure |
 | F — Compteur par job (`perform_later` à chaque lecture) | Rien d'écrit dans la requête | Une ligne Solid Queue par lecture coûte plus qu'un `UPDATE` d'une ligne ; le chiffre arrive en retard |
-| G — Texte de remplacement dans la légende Trix | Aucune table ni panneau : il voyage dans le HTML | La légende est un texte visible, distinct du texte de remplacement (UDR-0065 §3.4.2) ; on perdrait l'une ou l'autre |
+| G — Texte de remplacement dans la légende Trix | Aucune table ni panneau : il voyage dans le HTML | La légende est un texte visible, distinct du texte de remplacement (UDR-0067 §3.4.2) ; on perdrait l'une ou l'autre |
 | **H — Articles dans `communication`, Trix ouvert aux images pour le blog seul, envoi par un endpoint de l'équipe, image = pièce jointe `sgid` vers une ligne `article_images`, service par un contrôleur Lnclass, compteur `UPDATE` atomique, plan du site par route** | Réutilise les mécanismes existants ; ne touche ni la CSP ni les cours | **Retenue** — voir coûts consentis |
 
 ## 4. Décision
@@ -78,18 +78,18 @@ Index : `public_id` et `slug` uniques ; `(published_at DESC, id DESC) WHERE stat
 | `alt` | `string(150) NULL` : texte de remplacement d'une image du texte, exigé à la publication |
 | `content_type`, `byte_size`, `width`, `height` | `CHECK IN ('image/jpeg','image/png','image/webp')`, `byte_size BETWEEN 1 AND 1048576`, côtés `BETWEEN 1 AND 1600` |
 
-Le fichier est `has_one_attached :file`, créé `analyzed: true` comme la photo (aucun `AnalyzeJob` ne cherche libvips). La couverture est une ligne de `article_images` comme les autres : elle s'envoie par le même endpoint avant l'enregistrement du formulaire (UDR-0065 §2.6), se vérifie, se sert et se purge par le même chemin.
+Le fichier est `has_one_attached :file`, créé `analyzed: true` comme la photo (aucun `AnalyzeJob` ne cherche libvips). La couverture est une ligne de `article_images` comme les autres : elle s'envoie par le même endpoint avant l'enregistrement du formulaire (UDR-0067 §2.6), se vérifie, se sert et se purge par le même chemin.
 
 **Article et annonce ne se confondent pas.** L'article est public, sans audience, sans établissement, sans rejet ni programmation, en texte riche illustré, adressé par slug ; un archivé répond 410. L'annonce (ADR-0045) est connectée, ciblée par audience et établissement, en texte simple, programmable, adressée par `public_id`. Deux tables, deux jeux de use cases ; aucun ne lit l'autre.
 
 ### 4.2 Cycle de vie (complète ADR-0035)
 
-- **Même table de transitions que les contenus, sans parent.** `Entities::Catalog::ContentStatus` est **déplacé** en `Entities::Shared::ContentStatus`, sans changer une ligne de sa logique ; les 13 fichiers qui le citent (catalogue, évaluation, aide de statut, tests) changent de nom. On généralise au lieu de réutiliser tel quel : `communication` ne dépend pas d'une entité du catalogue (ADR-0027 : on ne connaît d'un autre contexte que les entités de ses ports), et la dépendance d'`assessment` envers `Catalog::ContentStatus` disparaît du même coup. Un article appelle `transition(…, parent_published: true)`, comme un cours ; `Entities::Communication::Article::TRANSITIONS` (lu par l'UDR-0065) est `Entities::Shared::ContentStatus::TRANSITIONS`.
+- **Même table de transitions que les contenus, sans parent.** `Entities::Catalog::ContentStatus` est **déplacé** en `Entities::Shared::ContentStatus`, sans changer une ligne de sa logique ; les 13 fichiers qui le citent (catalogue, évaluation, aide de statut, tests) changent de nom. On généralise au lieu de réutiliser tel quel : `communication` ne dépend pas d'une entité du catalogue (ADR-0027 : on ne connaît d'un autre contexte que les entités de ses ports), et la dépendance d'`assessment` envers `Catalog::ContentStatus` disparaît du même coup. Un article appelle `transition(…, parent_published: true)`, comme un cours ; `Entities::Communication::Article::TRANSITIONS` (lu par l'UDR-0067) est `Entities::Shared::ContentStatus::TRANSITIONS`.
 - `published_at = COALESCE(published_at, now)` : une remise en ligne garde la date d'origine (BL-11) ; `archived_at` est remis à `NULL`.
 - **Publier exige un article complet** : titre, résumé, texte non vide, texte de remplacement de la couverture et de chaque image du texte, au plus 10 images dans le texte. Sinon `:invalid` (422), `errors` nomme le champ (`title`, `excerpt`, `body`, `cover_alt`, `:"image_alts.<public_id>"`), le brouillon est gardé (BL-09, BL-13).
 - **Enregistrer un article déjà publié exige la même chose** : `UpdateArticle` applique à un article `published` les règles de la publication. Un article en ligne ne perd jamais son résumé ni un texte de remplacement par une modification.
 - **Journal** : `article.created`, `article.updated`, `article.published` (`metadata.republished`), `article.archived`, ajoutés à `Entities::Identity::AuditAction::ALL`. Création et modification sont tracées en plus de la publication : BL-07 l'exige, et l'auteur réel d'un texte public signé « L'équipe Lnclass » n'est lisible que là.
-- **Lecture** (`Policies::Communication::ReadArticlePolicy`, sur la `Detail` de la query) : publié → succès pour tous, `actor: nil` compris ; tout état → succès pour qui gère le blog (aperçu, bandeau, `noindex`) ; archivé → `:expired` ; brouillon → `:not_found`, comme une adresse inconnue (BL-04). **Ce résultat ne passe pas par `render_result`**, qui renvoie `:expired` vers la connexion : `Communication::ArticlesController#show` rend lui-même `gone` en **410** pour `:expired` et `render_not_found` pour `:not_found` (UDR-0064 §2). `RendersResult` n'est pas modifié ; aucun code d'erreur n'est ajouté à l'ADR-0026.
+- **Lecture** (`Policies::Communication::ReadArticlePolicy`, sur la `Detail` de la query) : publié → succès pour tous, `actor: nil` compris ; tout état → succès pour qui gère le blog (aperçu, bandeau, `noindex`) ; archivé → `:expired` ; brouillon → `:not_found`, comme une adresse inconnue (BL-04). **Ce résultat ne passe pas par `render_result`**, qui renvoie `:expired` vers la connexion : `Communication::ArticlesController#show` rend lui-même `gone` en **410** pour `:expired` et `render_not_found` pour `:not_found` (UDR-0066 §2). `RendersResult` n'est pas modifié ; aucun code d'erreur n'est ajouté à l'ADR-0026.
 
 ### 4.3 Qui gère (amende ADR-0038)
 
@@ -101,7 +101,7 @@ Le fichier est `has_one_attached :file`, créé `analyzed: true` comme la photo 
 
 ### 4.4 Images (amende ADR-0047 et ADR-0051, complète ADR-0060)
 
-**Plafonds** — constantes de `Entities::Communication::ArticleImage`, lues par les vues et le JavaScript (UDR-0065 §2) :
+**Plafonds** — constantes de `Entities::Communication::ArticleImage`, lues par les vues et le JavaScript (UDR-0067 §2) :
 
 | Constante | Valeur | Pourquoi |
 |---|---|---|
@@ -115,34 +115,34 @@ Le fichier est `has_one_attached :file`, créé `analyzed: true` comme la photo 
 - **Vérification serveur**, sans bibliothèque (`Dtos::Communication::ArticleImageInput`, calqué sur `ProfilePhotoInput`) : poids vérifié avant toute lecture ; format lu dans les octets ; côtés bornés ; métadonnées retirées par `ImageHeader.strip`, puis relues absentes (fail closed). Sinon l'image est refusée avec sa raison et rien n'est stocké (BL-12).
 - **`ImageHeader` sert deux contextes sans couplage** : il est **déplacé** de `Entities::Identity::ImageHeader` en `Entities::Shared::ImageHeader` (`app/domain/entities/shared/`, à côté de `NaturalKey`), code et tests inchangés. Il ne sait rien d'un compte ni d'un article ; chaque contexte garde ses plafonds (`Identity::ProfilePhoto`, `Communication::ArticleImage`).
 - **Envoi** : `POST /teams/blog/images` → `teams_article_images_path(article: public_id)`, paramètre `article` absent à la création (`Teams::ArticleImagesController`, `UploadArticleImage` sous `ManageArticlesPolicy`). Multipart `article_image[file]`, jeton CSRF, même origine : `connect-src 'self'` suffit. Réponses : **201** `{ public_id, sgid, url, width, height }` ; **422** `{ error }` (message français rédigé par le serveur) ; **403** `{ error: "forbidden" }` ; **401** `{ error: "unauthenticated" }` à une requête JSON sans session (amendement du 2026-10-03 : la session expirée pendant la rédaction se dit, au lieu d'un renvoi vers la connexion lu comme une panne réseau). L'image est créée sans article (`article_id NULL`). Avec `article`, le serveur refuse au-delà de `MAX_PER_ARTICLE` images déjà citées ; sans, la limite est tenue par l'éditeur, puis par l'enregistrement. Pas de `direct_upload`, routes Active Storage toujours non dessinées, `@rails/actiontext` toujours non chargé.
-- **Trix pour le blog seul** : `rich_text_editor_controller.js` passe en mode images sur la valeur `attachments` (UDR-0065 §3.4.3). Absente, cours et fiches gardent le comportement d'aujourd'hui, à l'identique. À la réponse 201, l'éditeur pose `sgid`, `url`, `width`, `height` sur la pièce jointe ; Action Text l'enregistre `<action-text-attachment sgid="…" content-type width height caption>`, et la résout vers `Orm::ArticleImage`, qui inclut `ActionText::Attachable`.
+- **Trix pour le blog seul** : `rich_text_editor_controller.js` passe en mode images sur la valeur `attachments` (UDR-0067 §3.4.3). Absente, cours et fiches gardent le comportement d'aujourd'hui, à l'identique. À la réponse 201, l'éditeur pose `sgid`, `url`, `width`, `height` sur la pièce jointe ; Action Text l'enregistre `<action-text-attachment sgid="…" content-type width height caption>`, et la résout vers `Orm::ArticleImage`, qui inclut `ActionText::Attachable`.
 - **Texte de remplacement** : colonne `article_images.alt`, saisi dans le panneau « Images du texte » (`article[image_alts][<public_id>]`) ; `cover_alt` pour la couverture. Action Text ne garde pas d'`alt` dans le contenu : le texte vit avec l'image. La légende Trix reste permise, visible et facultative.
 - **Rattachement et purge des orphelines** : enregistrer un article (création ou modification) rattache à lui, dans la transaction, la couverture et les images que cite son texte ; les images qui lui étaient rattachées et qu'il ne cite plus sont supprimées, fichier purgé après validation (`purge_later`, ADR-0047). Une image envoyée et jamais rattachée (modale fermée) est purgée par `Communication::PurgeOrphanArticleImagesJob` (`config/recurring.yml`, chaque jour) après 48 h. Une image citée par le texte enregistré, ou couverture, n'est jamais purgée.
-- **Service public par Lnclass** : `GET /blog/images/:public_id` (`blog_image_path`), seul chemin d'une image, couverture comprise ; `Communication::ArticleImagesController#show`, use case `ReadArticleImage` sous `ReadArticlePolicy`. **L'adresse est versionnée par construction** : une ligne ne change jamais de fichier, une nouvelle couverture est une nouvelle ligne, donc une nouvelle adresse. Helper `Communication::ArticlesHelper#article_image_src(image)` → `blog_image_path(image.public_id)` (UDR-0064 §2).
+- **Service public par Lnclass** : `GET /blog/images/:public_id` (`blog_image_path`), seul chemin d'une image, couverture comprise ; `Communication::ArticleImagesController#show`, use case `ReadArticleImage` sous `ReadArticlePolicy`. **L'adresse est versionnée par construction** : une ligne ne change jamais de fichier, une nouvelle couverture est une nouvelle ligne, donc une nouvelle adresse. Helper `Communication::ArticlesHelper#article_image_src(image)` → `blog_image_path(image.public_id)` (UDR-0066 §2).
   - Image rattachée à un article **publié** : `Cache-Control: public, max-age=31536000, immutable`, lisible sans session (BL-14). *Amendement du 2026-10-03 :* `ETag` = `public_id` ; un navigateur qui renvoie cet ETag reçoit **304 sans lecture du bucket**. Le port sépare `find` (format et état de l'article, une requête, sans fichier) de `download` ; le fichier n'est lu qu'après la règle de lecture, jamais pour une image refusée.
   - Image d'un brouillon, ou pas encore rattachée : servie à qui gère le blog en `Cache-Control: private, no-store` (éditeur, panneau, aperçu) ; 404 pour tout autre. Image d'un archivé : 404 pour qui ne gère pas.
-- **Rendu d'une image du texte** : `Orm::ArticleImage#to_attachable_partial_path` → `"communication/articles/body_image"`. Action Text passe le modèle sous le local `article_image` ; le partiel le nomme `image` et lit les champs de l'`Image` de l'UDR-0064 (`public_id`, `alt`, `width`, `height`), que la ligne porte telle quelle. `loading="lazy"`, `decoding="async"`, dimensions posées. `active_storage/blobs/_blob.html.erb` ne change pas.
+- **Rendu d'une image du texte** : `Orm::ArticleImage#to_attachable_partial_path` → `"communication/articles/body_image"`. Action Text passe le modèle sous le local `article_image` ; le partiel le nomme `image` et lit les champs de l'`Image` de l'UDR-0066 (`public_id`, `alt`, `width`, `height`), que la ligne porte telle quelle. `loading="lazy"`, `decoding="async"`, dimensions posées. `active_storage/blobs/_blob.html.erb` ne change pas.
 
 ### 4.5 Assainissement (amende ADR-0051, complète ADR-0068)
 
 `Repositories::Catalog::RichTextSanitizer` est **déplacé** en `Repositories::Shared::RichTextSanitizer`, analyse unique inchangée (ADR-0068). Il prend un argument `image_ids:` : `nil` par défaut (cours, fiches, imports) retire, comme aujourd'hui, toute pièce jointe ; seul `Repositories::Communication::ArticleRepository` passe l'ensemble des identifiants admis (images de cet article, et images pas encore rattachées). En mode article :
 
 - une pièce jointe n'est gardée que si son `sgid` se lit (`SignedGlobalID.parse(sgid, for: "attachable")`, sans requête) comme un `Orm::ArticleImage` de cet ensemble ; `url`, `href` et tout attribut hors liste partent, une image collée depuis un autre site aussi ;
-- **`<h1>` est réécrit en `<h2>`** : le bouton « Titre » de Trix produit un `h1`, et la page garde un seul `h1`, le titre (BL-02, UDR-0064 §3.3).
+- **`<h1>` est réécrit en `<h2>`** : le bouton « Titre » de Trix produit un `h1`, et la page garde un seul `h1`, le titre (BL-02, UDR-0066 §3.3).
 
 Le HTML est d'abord canonisé par `ActionText::Content` (les `figure[data-trix-attachment]` deviennent des `<action-text-attachment>`), puis assaini, puis écrit. Action Text réassainit au rendu ; sa liste d'attributs gagne `loading`, `decoding` et `fetchpriority`, sans quoi `loading="lazy"` serait retiré (BL-21).
 
 ### 4.6 Référencement
 
 - **Hôte canonique** : `config.x.canonical_host = ENV["CANONICAL_HOST"].presence || "lnclass.com"`. `Communication::ArticlesHelper#canonical_url(path)` → `"https://#{canonical_host}#{path}"`, jamais `request.host`. Il sert au lien `canonical`, à `og:url`, à `og:image` (BL-03), au plan du site et à la ligne `Sitemap:`. `CANONICAL_HOST` doit figurer dans `APP_HOSTS`. La question du porteur (`lnclass.com` ou `www`) se tranche par une variable, sans code. Aucune redirection entre les deux hôtes : le lien `canonical` suffit aux robots.
-- **Balises** posées par `communication/articles/_head` dans `content_for :head` (déjà rendu par `layouts/application.html.erb`), par `tag.meta` et `tag.link` ; liste et ordre fixés par l'UDR-0064 §3.4. Sans couverture, `og:image` vise `app/assets/images/blog/partage.png` (1200 × 630, 150 Ko au plus), en adresse absolue sur l'hôte canonique.
+- **Balises** posées par `communication/articles/_head` dans `content_for :head` (déjà rendu par `layouts/application.html.erb`), par `tag.meta` et `tag.link` ; liste et ordre fixés par l'UDR-0066 §3.4. Sans couverture, `og:image` vise `app/assets/images/blog/partage.png` (1200 × 630, 150 Ko au plus), en adresse absolue sur l'hôte canonique.
 - **`/sitemap.xml`** par `Communication::SitemapsController#show` (`Queries::Communication::SitemapQuery`) : page d'accueil, `/aide`, les pages de `Communication::PagesController::ONLINE`, `/blog`, chaque article publié avec `lastmod` = `updated_at`. `Cache-Control: public, max-age=3600`. Ni brouillon ni archivé (BL-19).
 - **`/robots.txt`** par le même contrôleur (`#robots`) : `public/robots.txt` est **supprimé**, car `public/` est servi en cache d'un an et la ligne `Sitemap: https://<hôte canonique>/sitemap.xml` doit suivre `CANONICAL_HOST`. `Cache-Control: public, max-age=86400`. Aucun `public/sitemap.xml`.
 
 ### 4.7 Compteur de lectures (complète ADR-0049 et ADR-0067)
 
 - `RecordArticleRead` (policy `ReadArticlePolicy`) compte une lecture si l'article est publié, la requête est un `GET` HTML, l'acteur n'est pas `team` (aperçu compris), et `Entities::Communication::ArticleRead.countable?` l'admet. Elle **refuse** :
-  - un **préchargement** : en-tête `Sec-Purpose`, `X-Sec-Purpose` ou `Purpose` contenant `prefetch` (Turbo 8 précharge un lien au survol ; la liste pose aussi `data-turbo-prefetch="false"`, UDR-0064) ; *amendement du 2026-10-03 :* ou un **aperçu**, `X-Purpose: preview` (Safari), le motif étant `prefetch|preview` sur les quatre en-têtes ;
+  - un **préchargement** : en-tête `Sec-Purpose`, `X-Sec-Purpose` ou `Purpose` contenant `prefetch` (Turbo 8 précharge un lien au survol ; la liste pose aussi `data-turbo-prefetch="false"`, UDR-0066) ; *amendement du 2026-10-03 :* ou un **aperçu**, `X-Purpose: preview` (Safari), le motif étant `prefetch|preview` sur les quatre en-têtes ;
   - un **robot qui se déclare** : agent vide, ou motif `bot(?:[/\-;)]|\z)|\bbot\b|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|curl|wget|python|headless` (le robot d'aperçu de WhatsApp compris). *Amendement du 2026-10-03 : « bot » ne compte que suivi d'un séparateur ou seul, pour ne plus écarter les téléphones CUBOT (« CUBOT X30 Build/… »).*
   Sinon succès sans écriture. Un échec du compteur ne bloque jamais la page.
 - **Une requête SQL**, sans transaction ni verrou applicatif : `UPDATE articles SET reads_count = reads_count + 1 WHERE id = $1 AND status = 'published'`. `updated_at` n'est pas touché (le `lastmod` du plan du site ne bouge pas) ; la colonne n'est pas indexée, la mise à jour reste HOT.
@@ -197,7 +197,7 @@ add_foreign_key :articles, :article_images, column: :cover_image_id, on_delete: 
 ```ruby
 # 🔌 INFRA · Orm::ArticleImage
 # Rôle : image d'un article (couverture ou texte), vérifiée, sans métadonnées ; pièce jointe Action Text par sgid
-# ADR  : 0029, 0060, 0073
+# ADR  : 0029, 0060, 0074
 module Orm
   class ArticleImage < ApplicationRecord
     include HasPublicId
@@ -216,7 +216,7 @@ end
 ```ruby
 # 🧠 DOMAINE · Policies::Communication::ManageArticlesPolicy
 # Rôle : gérer le blog : l'équipe `admin` et `content` seules (matrice de l'ADR-0038, ligne « Blog »)
-# ADR  : 0028, 0038, 0073
+# ADR  : 0028, 0038, 0074
 module Policies
   module Communication
     class ManageArticlesPolicy
@@ -235,7 +235,7 @@ end
 ```ruby
 # 🧠 DOMAINE · Policies::Communication::ReadArticlePolicy
 # Rôle : publié → tous ; qui gère → tout état ; archivé → :expired (410) ; brouillon → :not_found (introuvable)
-# ADR  : 0028, 0035, 0073
+# ADR  : 0028, 0035, 0074
 module Policies
   module Communication
     class ReadArticlePolicy
@@ -298,7 +298,7 @@ end
 ```
 
 ```ruby
-# config/initializers/action_text.rb — ADR-0073 : sans eux, l'assainissement au rendu retire loading="lazy", decoding et fetchpriority.
+# config/initializers/action_text.rb — ADR-0074 : sans eux, l'assainissement au rendu retire loading="lazy", decoding et fetchpriority.
 Rails.application.config.after_initialize do
   ActionText::ContentHelper.allowed_attributes = Rails::HTML5::SafeListSanitizer.allowed_attributes.to_a +
                                                  ActionText::Attachment::ATTRIBUTES + %w[loading decoding fetchpriority]
@@ -323,7 +323,7 @@ end
 ```
 
 ```ruby
-# config/application.rb — ADR-0073 : hôte des adresses partagées et indexées (canonical, og:*, plan du site, robots.txt)
+# config/application.rb — ADR-0074 : hôte des adresses partagées et indexées (canonical, og:*, plan du site, robots.txt)
 config.x.canonical_host = ENV["CANONICAL_HOST"].presence || "lnclass.com"
 ```
 
@@ -335,7 +335,7 @@ get "blog/:slug", to: "communication/articles#show", as: :blog_article
 get "sitemap.xml", to: "communication/sitemaps#show", defaults: { format: :xml }, as: :sitemap
 get "robots.txt", to: "communication/sitemaps#robots", defaults: { format: :text }, as: :robots
 
-# config/routes/teams.rb (extrait) — noms de l'UDR-0065 §2
+# config/routes/teams.rb (extrait) — noms de l'UDR-0067 §2
 scope "teams/blog", as: :teams do # images avant les articles : chemin fixe
   post "images", to: "teams/article_images#create", as: :article_images
   resources :articles, path: "", controller: "teams/articles", param: :public_id, only: %i[index new create edit update] do

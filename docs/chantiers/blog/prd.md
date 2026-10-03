@@ -17,7 +17,7 @@ Lnclass n'a aucun contenu public en dehors de sa page d'accueil et de ses pages 
 
 Règles d'autorisation (domaine) :
 
-- `Policies::Communication::ManageArticlesPolicy` — succès si `actor&.team?` **et** `actor.team_role` ∈ `admin`, `content` ; sinon `:forbidden`. Première policy qui distingue les sous-rôles pour un contenu : amendement de la matrice de l'ADR-0038 (ligne « Blog »), voir ADR-0073.
+- `Policies::Communication::ManageArticlesPolicy` — succès si `actor&.team?` **et** `actor.team_role` ∈ `admin`, `content` ; sinon `:forbidden`. Première policy qui distingue les sous-rôles pour un contenu : amendement de la matrice de l'ADR-0038 (ligne « Blog »), voir ADR-0074.
 - `Policies::Communication::ReadArticlePolicy` — article publié : succès pour tous, `actor: nil` compris ; archivé : `:expired` pour qui ne gère pas le blog ; brouillon : `:not_found` pour qui ne gère pas le blog ; succès pour qui le gère, quel que soit l'état.
 
 ## 3. Parcours utilisateur
@@ -53,7 +53,7 @@ Règles d'autorisation (domaine) :
 | Trop d'images dans un article | Refus de l'image en trop |
 | Membre du Terrain, enseignant, direction, élève sur une adresse de gestion | 403, sans effet |
 | Visiteur sur une adresse de gestion | Renvoyé à la connexion, comme pour tout écran de l'équipe |
-| Auteur anonymisé (départ de Lnclass) | Ses articles restent en ligne ; ceux signés de son nom s'affichent signés « L'équipe Lnclass ». *(Modifié le 2026-10-03 : « désactivé » retiré, cet état de compte n'existe pas ; seule l'anonymisation fait repli, ADR-0073 §4.8.)* |
+| Auteur anonymisé (départ de Lnclass) | Ses articles restent en ligne ; ceux signés de son nom s'affichent signés « L'équipe Lnclass ». *(Modifié le 2026-10-03 : « désactivé » retiré, cet état de compte n'existe pas ; seule l'anonymisation fait repli, ADR-0074 §4.8.)* |
 | Personne connectée qui ouvre `/blog` ou un article | Même page qu'un visiteur, sans l'espace connecté ; aucune redirection |
 | Lecture par l'équipe, en aperçu, d'un brouillon ou d'un archivé, ou par un robot qui se déclare | Non comptée |
 | Une même personne relit l'article | Comptée deux fois (pas de cookie) : limite affichée dans la gestion (« lectures, sans dédoublonnage ») |
@@ -165,7 +165,7 @@ Et l'équipe lit ce nombre dans la gestion du blog
 # BL-18 — signature
 Étant donné un article signé du nom de son auteur
 Quand le compte de l'auteur est anonymisé
-# (Modifié le 2026-10-03 : « désactivé » retiré, cet état de compte n'existe pas ; ADR-0073 §4.8.)
+# (Modifié le 2026-10-03 : « désactivé » retiré, cet état de compte n'existe pas ; ADR-0074 §4.8.)
 Alors l'article s'affiche signé « L'équipe Lnclass »
 Et un article signé « L'équipe Lnclass » ne montre jamais le nom de son auteur
 
@@ -197,13 +197,13 @@ Contexte borné : **`communication`** (défaut du grill 12, à confirmer). Contr
 | Delivery | Routes publiques `/blog`, `/blog/:slug`, `/sitemap.xml`, adresse publique des images ; routes équipe `/teams/blog` (+ `new`, `edit`, `publish`, `archive`, envoi d'image) ; `Communication::ArticlesController` (`allow_unauthenticated_access`), `Communication::SitemapsController`, `Teams::ArticlesController`, `Teams::ArticleImagesController` |
 | UI | Liste publique, page d'article, page « n'est plus disponible », état vide ; liste de gestion, modale d'édition (Trix avec images, pour le blog seul), aperçu ; lien « Blog » au pied de la page d'accueil et de la carte d'aide ; raccourci « Blog » de l'accueil équipe ; balises de partage et de référencement via `content_for :head` |
 
-> **Écarts tranchés par l'ADR-0073 (2026-10-02)**, qui fait foi sur cette section : la couverture n'est pas une pièce jointe propre à l'article mais une ligne de la table `article_images` désignée par `articles.cover_image_id` (l'image s'envoie avant l'enregistrement du formulaire) ; une table `article_images` (`article_id`, `alt`, dimensions) porte toutes les images d'un article ; use case `ReadArticleImage` en plus ; quatre actions d'audit (`article.created`, `article.updated`, `article.published`, `article.archived`) ; `ContentStatus`, `ImageHeader` et `RichTextSanitizer` passent dans `shared` sans changement de comportement ; `/robots.txt` devient une route. Le repli de signature porte sur l'anonymisation (`users.anonymized_at`), seul état de départ qui existe dans le code.
+> **Écarts tranchés par l'ADR-0074 (2026-10-02)**, qui fait foi sur cette section : la couverture n'est pas une pièce jointe propre à l'article mais une ligne de la table `article_images` désignée par `articles.cover_image_id` (l'image s'envoie avant l'enregistrement du formulaire) ; une table `article_images` (`article_id`, `alt`, dimensions) porte toutes les images d'un article ; use case `ReadArticleImage` en plus ; quatre actions d'audit (`article.created`, `article.updated`, `article.published`, `article.archived`) ; `ContentStatus`, `ImageHeader` et `RichTextSanitizer` passent dans `shared` sans changement de comportement ; `/robots.txt` devient une route. Le repli de signature porte sur l'anonymisation (`users.anonymized_at`), seul état de départ qui existe dans le code.
 
 ## 6. Décisions rattachées
 
-- **ADR-0073** — Blog public : articles dans `communication`, adresse lisible figée, images publiques servies par Lnclass, éditeur ouvert aux images pour le blog seul, compteur de lectures côté serveur, plan du site. Amende les ADR-0027 (tables du contexte), 0029 (adresses lisibles), 0038 (matrice de l'équipe, ligne « Blog »), 0047 (fichiers publics), 0051 (Action Text hors cours et fiches).
-- **UDR-0064** — Blog public : liste, article, article retiré, état vide, balises de partage ; liens « Blog » de la page d'accueil et de la carte d'aide (amende UDR-0061 et UDR-0063 §3.4).
-- **UDR-0065** — Gestion du blog par l'équipe : raccourci de l'accueil équipe, liste de gestion, modale d'édition avec images, aperçu, menu ⋮.
+- **ADR-0074** — Blog public : articles dans `communication`, adresse lisible figée, images publiques servies par Lnclass, éditeur ouvert aux images pour le blog seul, compteur de lectures côté serveur, plan du site. Amende les ADR-0027 (tables du contexte), 0029 (adresses lisibles), 0038 (matrice de l'équipe, ligne « Blog »), 0047 (fichiers publics), 0051 (Action Text hors cours et fiches).
+- **UDR-0066** — Blog public : liste, article, article retiré, état vide, balises de partage ; liens « Blog » de la page d'accueil et de la carte d'aide (amende UDR-0061 et UDR-0063 §3.4).
+- **UDR-0067** — Gestion du blog par l'équipe : raccourci de l'accueil équipe, liste de gestion, modale d'édition avec images, aperçu, menu ⋮.
 
 ## 7. Mesures
 
@@ -213,7 +213,7 @@ Contexte borné : **`communication`** (défaut du grill 12, à confirmer). Contr
 | p95 serveur `/blog` et `/blog/:slug` (ADR-0067) | — | < 100 ms | |
 | Poids HTML d'un article de 1 500 mots (ADR-0067) | — | < 150 Ko | |
 | JavaScript ajouté aux pages de lecture | 43,0 Ko gzip (point d'entrée commun) | ~~0 Ko~~ ≤ budget ADR-0051 (60 Ko gzip) ; Trix seulement en gestion, chargé à la demande *(cible modifiée le 2026-10-03, voir sous le tableau)* | +2,6 Ko gzip : 45,6 Ko (mesuré le 2026-10-03, `bin/check-asset-budget`) ; Trix et `image_upload` hors du point d'entrée |
-| Poids d'une image d'article servie | — | ≤ plafond de l'ADR-0073 | |
+| Poids d'une image d'article servie | — | ≤ plafond de l'ADR-0074 | |
 | Lectures par article, 30 jours après publication | — | suivi, sans cible en V1 | |
 
 > **Modification du 2026-10-03 (phase 5, challenge C4)** — la cible « 0 Ko de JavaScript ajouté aux pages de lecture » n'est pas tenue. Aucune page de lecture n'utilise de contrôleur du blog, mais tous les contrôleurs Stimulus sont enregistrés depuis le point d'entrée commun (`controllers/index.js`, ADR-0051) : `communication--cover-picker`, `communication--image-alts`, `communication--character-count` et la partie images de `rich-text-editor` y entrent, soit **+2,6 Ko gzip** (43,0 → 45,6 Ko, point d'entrée de la base `f3494b80` recompilé et comparé ; le challenger en mesurait +3,9 par somme des modules). Le budget de l'ADR-0051 (60 Ko) est tenu. Les déplacer derrière un `import()` demande un enregistrement paresseux des contrôleurs (observer le DOM, cadres Turbo et flux compris) pour toutes les pages : un mécanisme nouveau, ni simple ni sûr dans cette passe de corrections. Cible ramenée au budget de l'ADR-0051 ; l'enregistrement paresseux des contrôleurs de gestion est un chantier de suivi (`optimize`).

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0073 §4.4, BL-14 : /blog/images/:public_id est le seul chemin d'une image du blog. L'image d'un article publié se lit
+# ADR-0074 §4.4, BL-14 : /blog/images/:public_id est le seul chemin d'une image du blog. L'image d'un article publié se lit
 # sans session, en cache public immuable, sans cookie ; celle d'un brouillon, d'un archivé ou pas encore rattachée se lit
 # par qui gère le blog en « private, no-store », et répond 404 à tout autre. La CSP reste celle de toute réponse (ADR-0049).
 class Communication::ArticleImagesTest < ActionDispatch::IntegrationTest

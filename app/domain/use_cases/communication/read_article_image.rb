@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::ReadArticleImage
 # Rôle : lire les octets d'une image d'article sous la règle de lecture de son article ; publique si l'article est publié
-# ADR  : 0026, 0028, 0073 · UDR : 0064, 0065
+# ADR  : 0026, 0028, 0074 · UDR : 0066, 0067
 module UseCases
   module Communication
     class ReadArticleImage
@@ -20,7 +20,7 @@ module UseCases
       def call(actor:, public_id:)
         image = @images.find(public_id:)
         return Shared::Result.failure(:not_found) if image.nil?
-        # Une image n'a pas de page « retirée » : un archivé est introuvable, comme un brouillon (ADR-0073 §4.4).
+        # Une image n'a pas de page « retirée » : un archivé est introuvable, comme un brouillon (ADR-0074 §4.4).
         return Shared::Result.failure(:not_found) if @policy.call(actor:, article: ArticleState.new(status: image.article_status)).failure?
 
         Shared::Result.success(Image.new(content_type: image.content_type, public: image.article_status == "published",

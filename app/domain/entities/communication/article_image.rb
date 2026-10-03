@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::ArticleImage
 # Rôle : une image d'article (couverture ou image du texte) et ses plafonds, lus par les vues, le JavaScript et le serveur
-# ADR  : 0060, 0073 · UDR : 0065
+# ADR  : 0060, 0074 · UDR : 0067
 module Entities
   module Communication
     # alt : texte de remplacement d'une image du texte ; celui de la couverture est porté par l'article (cover_alt).
