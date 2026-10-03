@@ -552,7 +552,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_120000) do
     t.index ["school_id", "status"], name: "index_school_join_requests_on_school_id_and_status"
     t.index ["teacher_id"], name: "index_school_join_requests_on_teacher_id", unique: true
     t.check_constraint "(status::text = 'pending'::text) = (decided_at IS NULL)", name: "school_join_requests_decided_iff_not_pending"
-    t.check_constraint "decided_via::text = ANY (ARRAY['team'::character varying, 'sponsor'::character varying]::text[])", name: "school_join_requests_decided_via_values"
+    t.check_constraint "decided_via::text = ANY (ARRAY['team'::character varying, 'sponsor'::character varying, 'auto'::character varying]::text[])", name: "school_join_requests_decided_via_values"
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'approved'::character varying, 'rejected'::character varying]::text[])", name: "school_join_requests_status_values"
   end
 

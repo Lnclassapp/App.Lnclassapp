@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::JoinRequestRepositoryPort
 # Rôle : contrat des demandes d'enseignants inscrits sans code : création, plafond, décision qui rattache l'enseignant
-# ADR  : 0063, 0071
+# ADR  : 0063, 0071, 0073
 module Ports
   module School
     module JoinRequestRepositoryPort
@@ -22,7 +22,7 @@ module Ports
       end
 
       # Décide une demande encore en attente et rattache l'enseignant (école principale), en une écriture.
-      # via : "team" | "sponsor". → Result | failure(:conflict, errors: { base: [:already_decided] })
+      # via : "team" | "sponsor" | "auto" (sans décideur : decided_by_id nil, ADR-0073). → Result | failure(:conflict, errors: { base: [:already_decided] })
       def approve(id:, decided_by_id:, via:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #approve"
       end

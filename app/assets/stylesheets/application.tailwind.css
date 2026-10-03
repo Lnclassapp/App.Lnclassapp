@@ -1,6 +1,6 @@
 /* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
    Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
-   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051, 0061 */
+   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051, 0061, 0065 (mode sombre) */
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
@@ -274,4 +274,49 @@
   color: #262626;
   padding: 0.5rem 1rem;
   text-align: center;
+}
+
+/* UDR-0065 — Mode sombre, par les tokens : le téléphone en thème sombre reçoit la même interface, couleurs redéfinies.
+   Aucune classe `dark:` dans les vues ; chaque utilitaire lit la variable du token, et ce bloc en change la valeur.
+   La règle d'inversion : le texte (`ink`, `mute`) devient clair, les surfaces (`white`, `paper`, `mist`) sombres ; un fond
+   qui porte un texte blanc (`team`, `school`, `error`, `success`, `warning`) devient clair, un fond qui porte un texte
+   `ink` (`brand`, `teacher`, `gold`) devient profond. Écran seulement : une page imprimée reste claire (codes de secours).
+   Hors couche, exprès : l'emporte sur `@layer theme`. test/design/dark_mode_test.rb vérifie chaque token et chaque
+   contraste. */
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --color-white: #171c24;
+    --color-ink: #eef1f5;
+    --color-mute: #a3acb9;
+    --color-line: #2c3542;
+    --color-mist: #222a35;
+    --color-paper: #0f1218;
+
+    --color-brand: #0070b3;
+    --color-brand-soft: #132c42;
+    --color-brand-strong: #7fd0ff;
+
+    --color-teacher: #9a5000;
+    --color-school: #a9c4ee;
+    --color-team: #c3a4ff;
+    --color-gold: #8c5c00;
+
+    --color-success: #6fd69a;
+    --color-success-soft: #133a26;
+    --color-warning: #ffbf73;
+    --color-warning-soft: #3a2a10;
+    --color-error: #ff9a90;
+    --color-error-soft: #3d1c1c;
+
+    --shadow-card: 0 2px 8px rgb(0 0 0 / 0.3);
+    --shadow-lift: 0 12px 24px rgb(0 0 0 / 0.4);
+    --shadow-pop: 0 20px 40px -8px rgb(0 0 0 / 0.6);
+  }
+
+  /* `backdrop:bg-ink/50` deviendrait un voile clair : le fond d'une modale reste un voile sombre. */
+  dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+  }
 }

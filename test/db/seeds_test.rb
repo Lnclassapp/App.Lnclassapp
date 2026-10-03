@@ -35,7 +35,8 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal %w[6eme 5eme 4eme 3eme 2nde 1ere tle], Orm::Level.order(:position).pluck(:slug)
     assert_equal 10, Orm::LevelSeries.count
     assert_equal 28, Orm::ClassroomPlanEntry.count
-    assert_equal %w[literature literature literature literature science science science], Orm::Material.order(:category).pluck(:category)
+    assert_equal %w[literature literature literature science science science], Orm::Material.order(:category).pluck(:category)
+    assert_not Orm::Material.exists?(name: "Anglais"), "Lnclass ne propose pas l'Anglais (ADR-0034, amendement du 2026-10-03)"
     assert_equal({ "Lycée Moderne de Treichville" => 77, "Lycée privé Les Lauriers" => 38, "Lycée mixte La Réussite" => 38,
                    "Collège Moderne de Marcory" => 28 },
                  Orm::School.joins(:classrooms).group(:name).count)

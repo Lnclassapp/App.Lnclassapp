@@ -1,170 +1,158 @@
-<%# 🌐 UI · homepage/index — landing publique de Lnclass %>
-<%# Rôle : présente le contenu V1 et oriente chaque rôle par sa modale (TR-01) ; source de l'identité visuelle %>
-<%# UDR  : 0012, 0059, 0005, 0054, 0063, 0064 (pied de page) · ADR : 0049 · entrées dans le héros seulement (UDR-0059) %>
+<%# 🌐 UI · homepage/index — page d'accueil publique : un écran, une décision %>
+<%# Rôle : le héros porte les deux entrées de rôle (modales, TR-01) ; la page descend du général au particulier et ne promet que la V1 %>
+<%# UDR  : 0064, 0059 (famille ordinateur : entrées dans le héros seulement), 0063 (§3.4, pied), 0066 (§3.5, lien « Blog »), 0012 (§2), 0054 · ADR : 0049, 0051 %>
 <% page_title t(".page_title") %>
+<%# Les matières que Lnclass propose, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3), EDHC au 1er cycle et Philosophie au 2nd ;
+    la teinte vient de la catégorie du référentiel (ADR-0034). %>
+<% subjects = [ [ "Mathématiques", :science ], [ "Physique-Chimie", :science ], [ "SVT", :science ], [ "Français", :literature ],
+                [ "Histoire-Géographie", :literature ], [ "EDHC", :literature ], [ "Philosophie", :literature ] ] %>
+<% features = { exercises: "clipboard-document-check", curriculum: "academic-cap", badges: "trophy", light: "device-phone-mobile" } %>
 
-<div class="min-h-screen bg-paper font-sans text-ink antialiased">
-  <%# ---------- En-tête ---------- %>
+<div class="min-h-screen bg-paper">
+  <%# ---------- En-tête : le logo et « Se connecter », rien d'autre ---------- %>
   <header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
-    <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-      <%= link_to root_path, class: "flex items-center gap-2.5" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-9 rounded-sm" %>
+    <nav aria-label="<%= t(".nav.label") %>" class="mx-auto flex h-bar max-w-page items-center justify-between gap-4 px-gutter">
+      <%= link_to root_path, "aria-label": t(".nav.home"),
+            class: "flex min-h-tap items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", width: 36, height: 36, class: "size-9 rounded-sm" %>
         <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
       <% end %>
-
-      <ul class="hidden items-center gap-8 text-sm font-medium text-ink/70 md:flex">
-        <li><a href="#pour-qui" class="hover:text-ink"><%= t(".nav.audience") %></a></li>
-        <li><a href="#fonctionnalites" class="hover:text-ink"><%= t(".nav.features") %></a></li>
-        <li><a href="#comment" class="hover:text-ink"><%= t(".nav.how") %></a></li>
-      </ul>
-
-      <div class="flex items-center gap-2">
-        <%= ui_button t(".nav.sign_in"), href: new_session_path, variant: :ghost, size: :sm, class: "max-sm:hidden" %>
-      </div>
+      <%= ui_button t(".nav.sign_in"), href: new_session_path, variant: :secondary, size: :sm, icon: "arrow-right-end-on-rectangle" %>
     </nav>
   </header>
 
   <main>
-    <%# ---------- Héros ---------- %>
-    <section id="hero" class="relative overflow-hidden bg-brand">
-      <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-2 md:py-24">
+    <%# ---------- Héros : la décision, visible sans défiler ---------- %>
+    <section id="hero" aria-labelledby="hero-title" class="bg-brand">
+      <div class="mx-auto grid max-w-page items-center gap-10 px-gutter py-10 pb-14 md:grid-cols-2 md:gap-16 md:py-20">
         <div>
-          <p class="mb-5 inline-flex items-center gap-2 rounded-full bg-ink/10 px-3 py-1 text-sm font-medium">
-            <span class="size-2 rounded-full bg-ink"></span>
+          <p class="inline-flex items-center gap-2 rounded-full bg-ink/10 px-3 py-1 text-sm font-medium">
+            <span class="size-2 rounded-full bg-ink" aria-hidden="true"></span>
             <%= t(".hero.eyebrow") %>
           </p>
-          <h1 class="font-display text-4xl leading-display font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+          <h1 id="hero-title" class="mt-5 font-display text-4xl leading-display font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
             <%= t(".hero.title") %>
           </h1>
-          <p class="mt-6 max-w-lg text-lg text-ink/80"><%= t(".hero.lead") %></p>
-          <div class="mt-8 flex flex-wrap gap-3">
+          <p class="mt-5 max-w-lg text-base text-ink/90 sm:text-lg"><%= t(".hero.lead") %></p>
+          <div class="mt-8 grid gap-3 sm:max-w-md sm:grid-cols-2">
             <%= render "role_modal", role: :student, placement: :hero, variant: :primary %>
             <%= render "role_modal", role: :teacher, placement: :hero, variant: :secondary %>
           </div>
         </div>
 
-        <div class="relative">
-          <div class="absolute -inset-3 translate-x-4 translate-y-4 rounded-card bg-ink" aria-hidden="true"></div>
-          <%= image_tag "homepage/student.png", alt: t(".hero.image_alt"),
-                class: "relative aspect-4/3 w-full rounded-card object-cover object-hero" %>
-          <div class="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-card bg-white p-3 pr-5 shadow-pop sm:-left-8">
+        <figure class="relative mx-auto w-full max-w-lg md:max-w-none">
+          <%= image_tag "homepage/student.webp", alt: t(".hero.image_alt"), width: 960, height: 640, decoding: "async",
+                class: "aspect-3/2 w-full rounded-card object-cover object-hero shadow-pop" %>
+          <figcaption class="absolute -bottom-5 left-4 flex items-center gap-3 rounded-card bg-white p-3 pr-5 shadow-pop">
             <span class="grid size-11 place-items-center rounded-ln bg-gold/20"><%= ui_icon "trophy", size: :lg %></span>
-            <div class="text-sm leading-tight">
-              <p class="font-bold"><%= t(".hero.card_title") %></p>
-              <p class="text-ink/60"><%= t(".hero.card_meta") %></p>
-            </div>
-          </div>
-        </div>
+            <span class="text-sm leading-tight">
+              <strong class="block font-bold"><%= t(".hero.card_title") %></strong>
+              <span class="text-mute"><%= t(".hero.card_meta") %></span>
+            </span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-    <%# ---------- Matières ---------- %>
-    <section aria-label="<%= t(".subjects.label") %>" class="border-b border-ink/10 bg-white">
-      <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-5 py-5">
-        <p class="mr-2 text-sm font-medium text-ink/70"><%= t(".subjects.label") %></p>
-        <% [ [ "Maths", :science ], [ "PC", :science ], [ "SVT", :science ], [ "H-G", :other ],
-             [ "Français", :literature ], [ "Philo", :literature ] ].each do |name, category| %>
+    <%# ---------- Matières : les sept du référentiel, sans « et plus encore » ---------- %>
+    <section id="matieres" aria-labelledby="matieres-title" class="border-b border-ink/10 bg-white">
+      <div class="mx-auto flex max-w-page flex-wrap items-center justify-center gap-2 px-gutter py-5 sm:justify-start">
+        <h2 id="matieres-title" class="w-full text-center text-sm font-medium text-mute sm:mr-2 sm:w-auto sm:text-left"><%= t(".subjects.label") %></h2>
+        <% subjects.each do |name, category| %>
           <%= ui_subject_badge name, category: %>
         <% end %>
-        <span class="ml-1 text-sm text-ink/60"><%= t(".subjects.more") %></span>
       </div>
     </section>
 
-    <%# ---------- Pour qui ---------- %>
-    <section id="pour-qui" class="scroll-mt-20 py-20 md:py-28">
-      <div class="mx-auto max-w-6xl px-5">
-        <div class="max-w-2xl">
-          <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".audience.eyebrow") %></p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".audience.title") %></h2>
-          <p class="mt-4 text-lg text-ink/70"><%= t(".audience.lead") %></p>
-        </div>
-
-        <% roles = [
-          { key: :students, logo: "logo/student.jpg", accent: "bg-brand" },
-          { key: :teachers, logo: "logo/teacher.jpg", accent: "bg-teacher" }
-        ] %>
-
-        <div class="mt-12 grid gap-5 sm:grid-cols-2">
-          <% roles.each do |role| %>
-            <article class="group relative overflow-hidden rounded-card border border-ink/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-pop">
-              <div class="absolute inset-x-0 top-0 h-1.5 <%= role[:accent] %>"></div>
-              <%= image_tag role[:logo], alt: "", class: "size-16 rounded-card" %>
-              <h3 class="mt-5 font-display text-xl font-extrabold"><%= t(".audience.roles.#{role[:key]}.title") %></h3>
-              <p class="mt-2 text-ink/70"><%= t(".audience.roles.#{role[:key]}.text") %></p>
-            </article>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ---------- Fonctionnalités ---------- %>
-    <section id="fonctionnalites" class="scroll-mt-20 bg-ink py-20 text-white md:py-28">
-      <div class="mx-auto max-w-6xl px-5">
-        <div class="grid gap-12 md:grid-cols-5 md:gap-16">
-          <div class="md:col-span-2">
-            <p class="text-sm font-bold tracking-widest text-brand uppercase"><%= t(".features.eyebrow") %></p>
-            <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".features.title") %></h2>
-            <p class="mt-4 text-lg text-white/70"><%= t(".features.lead") %></p>
-          </div>
-
-          <dl class="grid gap-px overflow-hidden rounded-card bg-white/10 sm:grid-cols-2 md:col-span-3">
-            <% %i[exercises curriculum badges teachers].each_with_index do |feature, i| %>
-              <div class="bg-ink p-6">
-                <dt class="flex items-baseline gap-3">
-                  <span class="font-display text-sm font-extrabold text-brand"><%= format("%02d", i + 1) %></span>
-                  <span class="font-display text-lg font-extrabold"><%= t(".features.items.#{feature}.title") %></span>
-                </dt>
-                <dd class="mt-2 text-white/65"><%= t(".features.items.#{feature}.text") %></dd>
-              </div>
-            <% end %>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <%# ---------- Comment ça marche ---------- %>
-    <section id="comment" class="scroll-mt-20 py-20 md:py-28">
-      <div class="mx-auto max-w-6xl px-5">
-        <div class="mx-auto max-w-2xl text-center">
-          <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".how.eyebrow") %></p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".how.title") %></h2>
-        </div>
-
-        <ol class="mt-14 grid gap-8 md:grid-cols-3">
+    <%# ---------- Comment ça marche : trois étapes, du code de classe aux badges ---------- %>
+    <section id="comment" aria-labelledby="comment-title" class="scroll-mt-20 py-16 md:py-24">
+      <div class="mx-auto max-w-page px-gutter">
+        <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".how.eyebrow") %></p>
+        <h2 id="comment-title" class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".how.title") %></h2>
+        <ol class="mt-10 grid gap-5 md:grid-cols-3">
           <% %i[code join learn].each_with_index do |step, i| %>
-            <li class="relative rounded-card bg-brand-soft p-6">
-              <span class="grid size-12 place-items-center rounded-full bg-ink font-display text-lg font-extrabold text-white"><%= i + 1 %></span>
+            <li class="rounded-card border border-line bg-white p-6 shadow-card">
+              <span class="grid size-12 place-items-center rounded-full bg-brand font-display text-lg font-extrabold" aria-hidden="true"><%= i + 1 %></span>
               <h3 class="mt-5 font-display text-xl font-extrabold"><%= t(".how.steps.#{step}.title") %></h3>
-              <p class="mt-2 text-ink/70"><%= t(".how.steps.#{step}.text") %></p>
+              <p class="mt-2 text-mute"><%= t(".how.steps.#{step}.text") %></p>
             </li>
           <% end %>
         </ol>
       </div>
     </section>
+
+    <%# ---------- Fonctionnalités : quatre promesses, la V1 et rien de plus ---------- %>
+    <section id="fonctionnalites" aria-labelledby="fonctionnalites-title" class="scroll-mt-20 border-y border-ink/10 bg-white py-16 md:py-24">
+      <div class="mx-auto max-w-page px-gutter">
+        <div class="max-w-2xl">
+          <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".features.eyebrow") %></p>
+          <h2 id="fonctionnalites-title" class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".features.title") %></h2>
+          <p class="mt-4 text-lg text-mute"><%= t(".features.lead") %></p>
+        </div>
+        <div class="mt-10 grid gap-5 sm:grid-cols-2">
+          <% features.each do |item, icon| %>
+            <%= ui_card title: t(".features.items.#{item}.title"), icon:, heading: :h3 do %>
+              <p class="text-mute"><%= t(".features.items.#{item}.text") %></p>
+              <% if item == :badges %>
+                <%# Les quatre paliers de l'ADR-0033, dans l'ordre et les tons de l'application %>
+                <div data-badges class="mt-4 flex flex-wrap gap-2">
+                  <% Assessment::BadgesHelper::BADGE_LEVEL_TONES.each do |level, tone| %>
+                    <%= ui_badge t("badges.#{level}"), tone: %>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ---------- Enseignants : vouvoyés, les trois gestes de la V1, un seul bouton. Les deux entrées ne sont pas répétées en bas (UDR-0059 §2.2) ---------- %>
+    <section id="enseignants" aria-labelledby="enseignants-title" class="scroll-mt-20 bg-brand-soft py-16 md:py-24">
+      <div class="mx-auto max-w-page px-gutter">
+        <div class="max-w-2xl">
+          <p class="text-sm font-bold tracking-widest text-brand-strong uppercase"><%= t(".teachers.eyebrow") %></p>
+          <h2 id="enseignants-title" class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl"><%= t(".teachers.title") %></h2>
+          <p class="mt-4 text-lg text-mute"><%= t(".teachers.lead") %></p>
+          <ul class="mt-6 space-y-3">
+            <% %i[classrooms assign follow].each do |item| %>
+              <li class="flex items-start gap-3">
+                <%= ui_icon "check-circle", class: "mt-0.5 text-brand-strong" %>
+                <span><%= t(".teachers.items.#{item}") %></span>
+              </li>
+            <% end %>
+          </ul>
+          <div class="mt-8 sm:max-w-xs">
+            <%= ui_button t(".teachers.cta"), href: new_teacher_registration_path, size: :lg, full: true, icon_end: "arrow-right" %>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <%# ---------- Pied de page ---------- %>
   <footer class="border-t border-ink/10">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-ink/60 sm:flex-row">
-      <div class="flex items-center gap-2">
-        <%= image_tag "lnclass/lnclass.png", alt: "", class: "size-6 rounded-sm" %>
+    <div class="mx-auto flex max-w-page flex-col items-center justify-between gap-4 px-gutter py-8 text-sm text-mute sm:flex-row">
+      <p class="flex items-center gap-2">
+        <%= image_tag "lnclass/lnclass.png", alt: "", width: 24, height: 24, class: "size-6 rounded-sm" %>
         <span class="font-display font-extrabold text-ink">Lnclass</span>
-        <span>© <%= Date.current.year %></span>
-      </div>
-      <ul class="flex gap-6">
-        <li><a href="#pour-qui" class="hover:text-ink"><%= t(".nav.audience") %></a></li>
-        <li><a href="#fonctionnalites" class="hover:text-ink"><%= t(".nav.features") %></a></li>
-        <li><a href="#comment" class="hover:text-ink"><%= t(".nav.how") %></a></li>
+        <span><%= t(".footer.copyright", year: Date.current.year) %></span>
+      </p>
+      <ul class="flex flex-wrap justify-center gap-6">
+        <li><a href="#comment" class="inline-flex min-h-tap items-center hover:text-ink"><%= t(".footer.how") %></a></li>
+        <li><a href="#enseignants" class="inline-flex min-h-tap items-center hover:text-ink"><%= t(".footer.teachers") %></a></li>
+        <li><%= link_to t(".footer.sign_in"), new_session_path, class: "inline-flex min-h-tap items-center hover:text-ink" %></li>
       </ul>
     </div>
-    <%# UDR-0063 §3.4, UDR-0064 §3.5 : seconde liste, « Plus sur Lnclass » : « Blog » dès un article publié, puis les pages
+    <%# UDR-0063 §3.4, UDR-0066 §3.5 : seconde liste, « Plus sur Lnclass » : « Blog » dès un article publié, puis les pages
         publiques en ligne seulement ; absente tant qu'aucun lien n'existe %>
     <% if (public_links = [ blog_link, *public_page_links ].compact).any? %>
-      <div class="mx-auto max-w-6xl px-5 pb-8">
+      <div class="mx-auto max-w-page px-gutter pb-8">
         <ul id="public_pages" aria-label="<%= t(".footer.public_pages") %>"
-            class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink/60 sm:justify-end">
+            class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-mute sm:justify-end">
           <% public_links.each do |label, href| %>
-            <li><%= link_to label, href, class: "hover:text-ink" %></li>
+            <li><%= link_to label, href, class: "inline-flex min-h-tap items-center hover:text-ink" %></li>
           <% end %>
         </ul>
       </div>

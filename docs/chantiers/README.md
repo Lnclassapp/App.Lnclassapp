@@ -82,6 +82,8 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`catalogue-niveau-eleve`](catalogue-niveau-eleve/memo.md) | livré sur `fix/catalogue-eleve-son-niveau` | L'élève ne voit, n'ouvre et ne commence que les cours de son niveau (et de sa série, ou communs) ; 404 ailleurs (amendements UDR-0013, ADR-0035) |
 | [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | décision, grill clos (Q1 à Q14) | Échéances (prochaine séance, d'après les jours de l'enseignant ; assignation d'exercices seulement) et aide (FAQ, WhatsApp, appel). Paiement et annonces sortis dans leurs propres chantiers, durée abandonnée |
 | [`abonnement-mobile-money`](abonnement-mobile-money/memo.md) | cadrage, grill non commencé | Abonnement élève payé par Wave (Checkout API, webhooks signés) ; le paiement revient au plan le 2026-10-02 (grill de `fonctions-espace-eleve`, Q1) |
+| [`refonte-homepage`](refonte-homepage/memo.md) | livré ([#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145)) | Page d'accueil publique refaite autour d'une seule décision, élève ou enseignant, visible sans défiler au téléphone ; photo de 1,3 Mo → 22 Ko ; enseignants vouvoyés ; les matières de la grille élève ; alignée sur les UDR-0059, 0062 et 0063 livrées en parallèle (UDR-0064, amendements UDR-0012 et UDR-0005) |
+| [`mode-sombre`](mode-sombre/memo.md) | livré ([#152](https://github.com/Lnclassapp/App.Lnclassapp/pull/152)) | Le téléphone en thème sombre reçoit toute l'application en sombre, par la valeur des tokens, sans toucher aux écrans ; impression claire (décision du porteur du 2026-10-03, UDR-0065, amendement UDR-0005) |
 
 ## Backlog
 
@@ -99,7 +101,8 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | **V5 — Remédiation** | 2 features : AS-16 (remédiation ciblée), AS-17 (suivi par l'enseignant) |
 | **V6 — Communication** | 10 features : `annonces`, puis `canal-whatsapp` ([PR #70](https://github.com/Lnclassapp/App.Lnclassapp/pull/70)) ; Q11 à Q14 ouvertes |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | Prouver le numéro par un code WhatsApp (hook n8n) à l'inscription sans code ; grill interrompu à la question 2. Rattaché à la V4 s'il reprend ([feuille de route §5](refonte-application/feuille-de-route.md#chantiers-hors-plan)) |
-| [`ci-quota`](ci-quota/memo.md) | **En cours**, repris le 2026-10-02 : runner auto-hébergé abandonné ; CI en un job sur les PR prêtes, preuve d'arbre pour les promotions, Dependabot vers `Develop` (ADR-0069)
+| [`ci-quota`](ci-quota/memo.md) | **En cours**, lots 1, 5 et 6 livrés (#106, #136, #148) : CI sur les PR prêtes, preuve d'arbre et preuves cloud, tirage 1 sur 5, Dependabot vers `Develop` ; depuis le 2026-10-03, deux jobs `unit` ∥ `system` et budget de croissance 15 s par chantier (ADR-0069 §9) |
+| [`selection-par-carte-de-couverture`](selection-par-carte-de-couverture/memo.md) | **Cadrage**, ouvert le 2026-10-03 (décision du porteur, `ci-quota`) : ne jouer que les tests système que les fichiers touchés concernent, à partir de la carte de couverture ; mesure avant prise, grill à tenir avec le porteur |
 
 ## Cycle de vie
 
