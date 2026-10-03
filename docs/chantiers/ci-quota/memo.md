@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — lots 1, 5 et 6 livrés ; lot 7 (deux jobs) et lot 8 (budget de croissance) en PR le 2026-10-03 ; **dix minutes par feature** est l'exigence depuis le 2026-10-02 |
+| **Statut** | en cours — lots 1, 5, 6, 7, 8 et 9 livrés (#106, #136, #148, #149, #150) ; **dix minutes par feature** tenues : 4 min 30 d'horloge au run 479 ; reste la mesure sur 3 runs et le chantier `selection-par-carte-de-couverture` |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/ci-quota` |
 | **Programme** | — |
@@ -78,7 +78,7 @@ Méthode inchangée : horodatages des jobs, `ceil` par job ([`script/ci/billed_m
 | 407 · PR #136 | un job, conteneur PostgreSQL, suite complète | 8 min 09 | système 5 min 55 · unitaires 1 min 09 · perf 45 s · conteneur 23 s | 8 min 45 | **9** |
 | [472](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37079379025) · PR #148 | un job, PostgreSQL de l'image, sans perf | 8 min 52 | système **7 min 04** · unitaires 1 min 18 · PostgreSQL 6 s · setup 14 s | 9 min 27 | **10** |
 | [476](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37081849136) · PR #149, lot 7 | `plan` + `unit` ∥ `system` + `ci` | système **9 min 32**, unitaires 2 min 12 | `plan` 9 s · `unit` 2 min 43 · `system` 9 min 56 · `ci` 5 s ; runner lent (1,35× le run 472 sur les mêmes 338 tests) | **10 min 16** d'horloge | **15** |
-| PR du lot 9 | `plan` + `unit` ∥ `system` 1/3, 2/3, 3/3 + `ci` | *à mesurer sur son run* | estimé : horloge ≈ 3 min 30 | | estimé 17 |
+| [479](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37082709855) · PR #150, lot 9, **tirée au sort** (perf jouée) | `plan` + `unit` ∥ `system` 1/3, 2/3, 3/3 + `ci` | `unit` 3 min 08 (avec perf) · parts système 2 min 56, 3 min 15, 3 min 46 | `plan` 8 s · `unit` 3 min 32 · parts 3 min 21, 3 min 42, 4 min 08 · `ci` 6 s | **4 min 30** d'horloge | **19** |
 
 Le run 476 confirme la variance : le job `system` seul dépasse les dix minutes sur un runner lent. Un seul job système ne tient pas le plafond ; d'où le lot 9.
 

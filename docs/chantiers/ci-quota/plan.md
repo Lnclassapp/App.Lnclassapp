@@ -93,7 +93,7 @@ Chantier selection-par-carte-de-couverture (ouvert le 2026-10-03, hors de ce cha
 - **Fichiers**     : `.github/workflows/ci.yml` *(matrice `part: [1, 2, 3]` du job `system`, `CI_GROUP=system:k/3`, captures par part)*, `config/ci.rb` *(en-tête)*, `test/guards/ci_plan_test.rb`
 - **Dépend de**    : Lot 7
 - **Test associé** : `test/guards/ci_plan_test.rb` (seule matrice : les parts de `system` ; chaque fichier système dans une part et une seule)
-- **Done quand**   : le run de la PR est vert ; **horloge du run ≤ 4 min** (≈ 7 min 30 avec un seul job système), ≈ 17 minutes facturées. Si une part dépasse 4 min, passer à quatre parts (même coût facturé).
+- **Done quand**   : le run de la PR est vert ; **horloge du run ≤ 4 min**, ≈ 17 minutes facturées. **Mesuré** (run 479, PR tirée au sort donc avec perf) : horloge 4 min 30, parts système 3 min 21 à 4 min 08, 19 minutes facturées. La part 3/3 (3 min 46 de `bin/ci`) est la plus lourde : à rééquilibrer en réenregistrant les durées depuis ce run, puis quatre parts si elle dépasse encore 4 min.
 
 ## Lot 4 — Accélérer (à ouvrir selon le lot 3)
 

@@ -31,6 +31,7 @@
 | 2026-10-03 | **Chantier [`selection-par-carte-de-couverture`](../selection-par-carte-de-couverture/memo.md) ouvert**, hors de ce chantier. | Un lot = un levier ; la sélection est un levier à part, avec son propre risque de faux verts. | — |
 | 2026-10-03 | **Accord du porteur sur les cinq étapes appliquées ; la suite système se joue en trois parts** (« parallélise les tests de plus de 2 minutes » : c'est la seule étape qui les dépasse). Quatre jobs jouent `bin/ci`. | Horloge ≈ 7 min 30 → ≈ 3 min 30 pour ≈ 4 minutes facturées de plus par run complet ; les durées fraîches du run 472 donnent trois parts à 271 s. | ADR-0069 §9 |
 | 2026-10-03 | **Mesure des deux jobs (run 476, #149 fusionnée)** : `unit` 2 min 43, `system` 9 min 56 (`bin/ci` 9 min 32 pour 338 tests, 7 min 04 au run 472 : runner 1,35× plus lent), horloge 10 min 16, 15 minutes facturées. | Confirme que le job système seul ne tient pas dix minutes sur un runner lent ; le lot 9 (trois parts) est nécessaire, pas optionnel. | ADR-0069 §9 |
+| 2026-10-03 | **Mesure des quatre jobs (run 479, #150 fusionnée, PR tirée au sort)** : horloge **4 min 30** (10 min 16 au run 476), parts système 3 min 21 / 3 min 42 / 4 min 08, `unit` 3 min 32 avec perf, 19 minutes facturées. L'exigence de dix minutes est tenue avec marge, même sur un runner lent. | Un levier, un chiffre : deux jobs ne suffisaient pas, trois parts oui. Les durées enregistrées sur le run 472 ont donné des parts équilibrées à 20 % près. | ADR-0069 §9 |
 
 ## Ce qui a dérapé
 
