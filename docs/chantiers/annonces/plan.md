@@ -54,6 +54,7 @@ Pourquoi D existe : `test/system/role_homes_test.rb` compte les entrées de navi
                      `app/helpers/communication/illustrations_helper.rb` (`announcement_illustration`)
                      `app/views/communication/messages/illustrations/_info.html.erb` … `_holidays.html.erb` *(8 partiels, UDR-0056 §3.3)*
                      `app/views/communication/shared/_tabs.html.erb`
+                     `app/views/design/index.html.erb` (vitrine des huit illustrations)
                      `test/support/factories/communication.rb` (`create_message`, `dismiss_message`)
 - **Dépend de**    : — *(ADR-0069 et UDR-0056 acceptés)*
 - **Test associé** : `test/domain/entities/communication/message_test.rb` · `test/domain/entities/communication/audio_header_test.rb` (mp3 ID3, mp3 sans ID3, m4a, wav et PDF refusés)
@@ -183,6 +184,7 @@ Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son
 | `app/helpers/components_helper.rb`, `_toast`, `_checkbox_group` | Lot 0 | `ui_toast(action:)` sert B, `ui_checkbox_group` sert A : remontés au Lot 0 |
 | illustrations et `illustrations_helper.rb` | Lot 0 | formulaire (A) et carte (B) |
 | `communication/shared/_tabs.html.erb` | Lot 0 | pages de A, B, C |
+| `app/views/design/index.html.erb` | Lot 0 | vitrine des illustrations ; ajouté au plan au lancement du Lot 0 |
 | `message_repository.rb`, `attachment_store.rb` (+ ports) | Lot 0 | A écrit, B et C lisent |
 | `app/domain/entities/identity/audit_action.rb` | Lot 0 | `message.published` (A), `message.withdrawn` (C) |
 | `test/support/factories/communication.rb` | Lot 0 | données de test de tous les lots |
