@@ -208,6 +208,27 @@ module Repositories
         assert_equal [ own.public_id, orphan.public_id ], updated.images.map(&:public_id)
       end
 
+      test "une image prise par un autre article entre l'assainissement et le rattachement : :conflict, rien n'est écrit" do
+        image = create_article_image
+        other = create_article
+        sanitizer = Repositories::Shared::RichTextSanitizer
+        original = sanitizer.method(:call)
+        sanitizer.define_singleton_method(:call) do |html, **options|
+          image.update_columns(article_id: other.id)
+          original.call(html, **options)
+        end
+
+        result = @repository.create(dto: input(body: article_body_with(image), image_alts: { image.public_id => "Carte" }),
+                                    author_id: @author.id, at: @at)
+
+        assert_equal [ :conflict, { base: [ :write_failed ] } ], [ result.code, result.errors ]
+        # La prise simulée passe par la même connexion : l'annulation l'emporte avec le reste. Rien n'est à l'article neuf.
+        assert_equal [ nil, nil ], [ image.reload.article_id, image.alt ]
+        assert_equal [ other.id ], Orm::Article.ids
+      ensure
+        sanitizer.define_singleton_method(:call, original)
+      end
+
       test "un texte de remplacement absent de la saisie est gardé, vidé il s'efface ; une image citée deux fois compte une fois" do
         first, second = Array.new(2) { create_article_image }
         article = create(body: article_body_with(first, second, first),

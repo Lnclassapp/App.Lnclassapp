@@ -9,14 +9,16 @@ module Repositories
       ATTACHMENT = Repositories::Shared::RichTextSanitizer::ATTACHMENT
       IMAGE_MODEL = "Orm::ArticleImage"
       SLUG_INDEX = "index_articles_on_slug"
-      # Deux collisions de slug concurrentes de suite : le geste se refait, il trouvera un slug libre.
-      SLUG_TAKEN = ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
+      # Deux collisions de slug concurrentes de suite, ou une image prise entre-temps par un autre article : le geste se
+      # refait (il trouvera un slug libre ; l'image prise ne sera plus admise).
+      WRITE_FAILED = ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
       # Une pièce jointe dont le sgid ne se vérifie pas (altéré, ou signé par une autre clé) : l'assainir la retirerait,
       # et l'image qu'elle désignait serait détruite comme n'étant plus citée. Le texte est refusé, rien n'est écrit.
       UNREADABLE = ::Shared::Result.failure(:invalid, errors: { body: [ :image_unreadable ] })
 
-      # Levée par persist, rattrapée par save hors de la transaction : rien n'est écrit.
+      # Levées dans la transaction, rattrapées par save hors d'elle : rien n'est écrit.
       class SlugTaken < StandardError; end
+      class ImageTaken < StandardError; end
 
       def find_by_public_id(public_id:)
         # Un seul article : pas de chargement anticipé, que Bullet signalerait inutile sans couverture.
@@ -75,8 +77,8 @@ module Repositories
           Orm::ArticleImage.where(id: previous - cited - [ cover&.id ]).each(&:destroy!)
         end
         ::Shared::Result.success(map_to_entity(record))
-      rescue SlugTaken
-        SLUG_TAKEN
+      rescue SlugTaken, ImageTaken
+        WRITE_FAILED
       end
 
       # ADR-0029 : deux créations simultanées peuvent lire le même slug libre ; l'index unique refuse la seconde, dont
@@ -117,13 +119,15 @@ module Repositories
         end.uniq
       end
 
+      # Les images citées et la couverture sont prises en une requête, seulement si elles sont encore à personne ou à cet
+      # article : un article concurrent qui en a pris une depuis leur lecture fait lever ImageTaken (rien n'est écrit).
       # Un texte de remplacement absent de la saisie garde sa valeur ; vidé, il s'efface.
       def attach(record, cited, cover, alts, at)
-        Orm::ArticleImage.where(id: cited).find_each do |image|
-          alt = alts.key?(image.public_id) ? alts[image.public_id] : image.alt
-          image.update_columns(article_id: record.id, alt:, updated_at: at)
-        end
-        cover&.update_columns(article_id: record.id, updated_at: at)
+        ids = (cited + [ cover&.id ]).compact.uniq
+        raise ImageTaken unless admissible(record).where(id: ids).update_all(article_id: record.id, updated_at: at) == ids.size
+
+        Orm::ArticleImage.where(id: cited, public_id: alts.keys).find_each { it.update_columns(alt: alts[it.public_id]) }
+        cover&.reload # l'entité rendue lit la couverture déjà chargée
       end
 
       def map_to_entity(record)

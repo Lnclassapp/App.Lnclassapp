@@ -15,7 +15,8 @@ module Ports
       # rattachées à l'article, avec leurs textes de remplacement (dto.image_alts).
       # → Result(Article) | failure(:invalid, errors: { cover_public_id: [:invalid] }) (couverture inconnue ou d'un autre article)
       #   | failure(:invalid, errors: { body: [:image_unreadable] }) (pièce jointe au sgid illisible : rien n'est écrit)
-      #   | failure(:conflict, errors: { base: [:write_failed] }) (slug pris deux fois de suite par des créations simultanées)
+      #   | failure(:conflict, errors: { base: [:write_failed] }) (slug pris deux fois de suite par des créations simultanées,
+      #     ou image prise entre-temps par un autre article : rien n'est écrit)
       def create(dto:, author_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
