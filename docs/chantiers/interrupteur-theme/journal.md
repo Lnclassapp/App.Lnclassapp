@@ -25,5 +25,6 @@
 | | |
 |---|---|
 | **Livré le** | 2026-10-03, en PR brouillon vers `Develop` |
+| **PR** | [#155](https://github.com/Lnclassapp/App.Lnclassapp/pull/155) |
 | **ADR produits** | aucun |
 | **UDR produits** | amendement de l'UDR-0065 |
