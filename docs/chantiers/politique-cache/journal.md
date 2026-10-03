@@ -101,15 +101,34 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 | 2026-10-03 | Compter les requêtes en série par parcours, en local | Le compte ne dépend ni de la machine ni du lieu : c'est la seule métrique que le challenger retrouve à l'identique partout | non |
 | 2026-10-03 | Aucun cache serveur dans ce chantier | Le serveur pèse moins de 5 % de l'attente | ADR-0069 (proposé) |
 | 2026-10-03 | Scripts dans `script/perf/`, comme ceux de `cache-ecrans-lourds` | Ils ne doivent jamais tourner dans la suite, et `measure_network.rb` doit se lancer avec Ruby seul, depuis n'importe quel poste | non |
+| 2026-10-03 | `count_round_trips.rb` lit le balisage réel (`data-turbo` du formulaire de connexion, lien ou formulaire de déconnexion) | Le banc doit suivre un changement de balisage sans être réécrit | non |
+| 2026-10-03 | **Porteur** : lots A et B refusés, on garde les UDR-0010, 0018 et l'ADR-0049 | Les décisions d'interface (frame différé) et de sécurité (rechargement à chaque nouvelle session) priment sur un aller-retour | ADR-0069 §4.2 : le compte d'aujourd'hui devient un plafond |
+| 2026-10-03 | **Porteur** : région étudiée, Develop et Staging d'abord ; Early Hints et Tiered Cache activés par lui | Seuls leviers restants, tous deux hors du dépôt | ADR-0069 §4.3 |
+| 2026-10-03 | Lot C fermé | Sa clause de fermeture s'applique : WebKit n'est pas installable dans le conteneur, et Chromium ne revalide pas les sous-ressources | non |
+
+## Leviers abandonnés, et pourquoi
+
+| Levier | Gain mesuré ou calculé | Pourquoi il est abandonné |
+|---|---|---|
+| Cache serveur (Solid Cache, fragments, ETag) pour la latence | ≤ 9 ms sur 360 ms d'attente | Le calcul n'est pas le goulot. Un 304 paie le même aller-retour, et le HTML est propre à chaque session |
+| Cache du HTML chez Cloudflare | un aller-retour par page publique | Il servirait le jeton CSRF, le nonce et le cookie d'une session à une autre personne |
+| Préchargement au toucher | 0 à 50 ms par clic | Borné par la durée d'un appui moins les 100 ms de Turbo ; chaque défilement sur un lien coûterait des données mobiles |
+| A — activité récente rendue avec la page | −1 requête en série sur les accueils élève et équipe (≈ −250 ms au point de mesure) | Refusé par le porteur : l'UDR-0010 et l'UDR-0018 gardent le frame différé |
+| B — connexion et déconnexion hors Turbo | −1 requête en série et un rendu de moins par connexion | Refusé par le porteur : l'ADR-0049 garde le rechargement à chaque nouvelle session |
+| C — `immutable` | un aller-retour vers Cloudflare au rechargement, sous Safari et Firefox seulement | Non mesurable dans le conteneur (pas de WebKit) |
+| Supprimer la redirection de `/` pour une personne connectée | −1 requête à chaque ouverture | Change l'adresse de l'accueil : c'est une `feature` |
 
 ## Ce qui a dérapé
 
 - `bin/rails runner` en environnement de développement plantait dès la deuxième requête de `Integration::Session` (`ActiveSupport::ExecutionContext.to_h` vaut `nil` dans les tags de requête SQL). Contourné en mode production, comme `measure_screens.rb`. C'est d'ailleurs plus fidèle : pas de Debugbar, gabarits compilés.
 - Ruby 3.4.9 absent du conteneur (seuls 3.1 à 3.3 sont installés). Compilé par `rbenv install`, environ 10 minutes.
 
+- **Un changement de région a été préparé sur Develop pendant le chantier** : patch non appliqué, créé le 2026-10-03 à 20:36 UTC, qui déplace **l'application seule** en `europe-west4-drams3a`. Repéré parce que `describe-environment` de Railway montre la configuration **avec** les changements en attente. Vérification : le `x-runtime` de Develop restait à 3–15 ms, donc rien n'avait bougé. Le patch n'a pas été touché ; le porteur est prévenu de ne pas l'appliquer sans PostgreSQL (plan, lot R).
+
 ## Ce qu'on a appris sur la codebase
 
 - La production, Staging et Develop tournent tous en `asia-southeast1` (Singapour), un réplica chacun, PostgreSQL au même endroit. Cloudflare proxifie `lnclass.com`, `app-develop.lnclass.com` et `app-staging.lnclass.com`.
+- `describe-environment` de Railway affiche la configuration avec les changements **en attente** : une région qui y apparaît n'est pas forcément appliquée. `get-staged-changes` fait la différence.
 - Les métriques de Railway (`http-response-time`, `totalDuration` des journaux HTTP) excluent le trajet entre l'edge et la région. Une latence vécue de 250 à 360 ms y apparaît comme 10 à 28 ms.
 - Sur 7 jours, 84 % des réponses de production sont des 4xx (9 147 sur 10 893). Dans les journaux consultés, ce sont des robots qui cherchent `wp-admin`, `.env` ou `phpinfo.php` ; elles coûtent quelques ms chacune. Non analysé plus avant : sans effet sur ce chantier.
 

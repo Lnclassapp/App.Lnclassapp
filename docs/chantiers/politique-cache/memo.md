@@ -3,11 +3,26 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | cadrage — mesure « avant » prise, leviers proposés, en attente du porteur |
+| **Statut** | décision — porteur, 2026-10-03 : lots A et B refusés, C fermé ; D et R en cours (porteur) ; mesure depuis Abidjan attendue |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `perf/politique-cache` |
 
 ---
+
+## Décisions du porteur (2026-10-03)
+
+Réponse du porteur aux six questions du cadrage : « 1, 2, 5 et 6 oui ; 2 et 4 non, garder ». Le « 2 » apparaît deux fois. On le lit comme **3 et 4 non** : ce sont les deux questions qui proposaient de modifier une décision existante, et « garder » ne s'applique qu'à elles.
+
+| Question | Réponse | Conséquence |
+|---|---|---|
+| 1. Mesure depuis Abidjan | oui, le porteur la lance | le lot R a bientôt son « avant » |
+| 2. Étudier la région `europe-west4`, Develop et Staging d'abord | oui | étude dans le [plan](plan.md) (lot R), aucune migration avant la mesure d'Abidjan |
+| 3. Amender l'UDR-0010 et l'UDR-0018 (activité récente rendue avec la page) | **non, garder** | **lot A fermé** : les accueils élève et équipe gardent leur frame différé |
+| 4. Amender l'ADR-0049 (connexion hors Turbo) | **non, garder** | **lot B fermé** : le rechargement forcé à la connexion et à la déconnexion reste |
+| 5. Early Hints et Tiered Cache chez Cloudflare | oui, le porteur les active | lot D mesuré une fois les réglages actifs |
+| 6. Pousser la branche, PR brouillon vers `Develop` | oui | fait |
+
+Sans les lots A et B, **aucun levier de code ne reste** : le compte de requêtes en série devient un plafond à ne pas dépasser (ADR-0069 §4.2), et le gain viendra de la périphérie (D) et de la région (R). Le lot C, qui dépendait de B, est fermé (voir le [plan](plan.md)).
 
 ## Le problème
 
@@ -66,11 +81,11 @@ Classés par ratio gain/risque, **un lot = un levier = un chiffre** ([plan](plan
 
 | Lot | Levier | Gain attendu | Risque, décision requise |
 |---|---|---|---|
-| **A** | **Activité récente rendue avec la page** (accueil élève et accueil équipe) au lieu d'un frame différé (`loading: :lazy`). | −1 requête en série sur ces deux accueils, la page la plus ouverte de l'élève et de l'équipe, soit ≈ −250 ms pour la carte. Côté serveur, au plus le coût actuel de la requête du frame : 7 à 19 ms (élève), 10 ms (équipe), mesurés en local | Faible côté code, mais l'[UDR-0010](../../decisions/udr/0010-accueil-eleve.md) et l'[UDR-0018](../../decisions/udr/0018-accueil-equipe.md) prescrivent le frame différé : **amendement des deux UDR**, donc accord du porteur. Au téléphone, la carte est sous la ligne de flottaison : le gain ne se voit qu'au défilement |
-| **B** | **Connexion, inscription et déconnexion sans rechargement forcé.** Le formulaire est soumis par le navigateur (`data-turbo="false"`) au lieu de Turbo. Le document qui arrive porte donc déjà la CSP de la nouvelle session, et le `turbo-visit-control: reload` devient inutile sur ces parcours. | −1 requête en série par connexion, inscription et déconnexion, soit ≈ −250 ms et un rendu de moins. Parcours rare : la session est permanente (`cookies.signed.permanent`), on se connecte peu | Moyen. Le mécanisme vient de l'[ADR-0049](../../decisions/adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (amendement du 2026-09-26) : **amendement de l'ADR-0049**. Un PIN refusé (422) se ré-affiche alors en page complète au lieu d'un rendu Turbo. Les tests CSP existants servent de non-régression. La déconnexion est aujourd'hui un lien `data-turbo-method="delete"`, qui ne marche qu'avec Turbo : elle devient un petit formulaire (`button_to`) |
+| ~~**A**~~ *fermé (porteur)* | **Activité récente rendue avec la page** (accueil élève et accueil équipe) au lieu d'un frame différé (`loading: :lazy`). | −1 requête en série sur ces deux accueils, la page la plus ouverte de l'élève et de l'équipe, soit ≈ −250 ms pour la carte. Côté serveur, au plus le coût actuel de la requête du frame : 7 à 19 ms (élève), 10 ms (équipe), mesurés en local | Faible côté code, mais l'[UDR-0010](../../decisions/udr/0010-accueil-eleve.md) et l'[UDR-0018](../../decisions/udr/0018-accueil-equipe.md) prescrivent le frame différé : **amendement des deux UDR**, donc accord du porteur. Au téléphone, la carte est sous la ligne de flottaison : le gain ne se voit qu'au défilement |
+| ~~**B**~~ *fermé (porteur)* | **Connexion, inscription et déconnexion sans rechargement forcé.** Le formulaire est soumis par le navigateur (`data-turbo="false"`) au lieu de Turbo. Le document qui arrive porte donc déjà la CSP de la nouvelle session, et le `turbo-visit-control: reload` devient inutile sur ces parcours. | −1 requête en série par connexion, inscription et déconnexion, soit ≈ −250 ms et un rendu de moins. Parcours rare : la session est permanente (`cookies.signed.permanent`), on se connecte peu | Moyen. Le mécanisme vient de l'[ADR-0049](../../decisions/adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (amendement du 2026-09-26) : **amendement de l'ADR-0049**. Un PIN refusé (422) se ré-affiche alors en page complète au lieu d'un rendu Turbo. Les tests CSP existants servent de non-régression. La déconnexion est aujourd'hui un lien `data-turbo-method="delete"`, qui ne marche qu'avec Turbo : elle devient un petit formulaire (`button_to`) |
 | **D** | **Cloudflare** : activer *Early Hints* (le navigateur charge CSS, JS et police depuis Cloudflare pendant qu'il attend le HTML) et *Tiered Cache* (un PoP froid demande d'abord à un PoP de Cloudflare, pas à Singapour). | Première visite : le chargement des assets (390 à 500 ms entre le premier octet et `DOMContentLoaded`) se fait pendant l'attente du HTML | Faible : ce sont deux réglages du tableau de bord Cloudflare, sans code. **Action du porteur** (aucun accès à la zone Cloudflare depuis le dépôt). Le `Link: preload` qu'Early Hints réutilise est déjà envoyé par Rails |
 | **R** | **Rapprocher l'application et sa base des utilisateurs** : région Railway `europe-west4` (Amsterdam), qui est la plus proche de la Côte d'Ivoire à vol d'oiseau, au lieu de `asia-southeast1` (Singapour). | Sur **toutes** les requêtes. L'ampleur dépend de la mesure depuis Abidjan (question 1) | **Élevé, hors code** : migration du volume PostgreSQL avec interruption, à planifier. **Décision du porteur**, et l'ADR-0069 la consigne. On ne déplace jamais l'application sans sa base : chaque page fait 4 à 25 requêtes SQL, et une seule traversée Europe–Asie par requête coûterait plus que tout le reste |
-| C | `immutable` sur les assets digérés : `public, max-age=31536000, immutable`. | Safari et Firefox ne revalident plus les assets quand la page est rechargée, notamment au rechargement forcé de la connexion | Très faible, une ligne. Le gain n'est **pas mesurable ici** (seul Chromium est installé, et il ne revalide pas les sous-ressources) et il disparaît presque si le lot B supprime le rechargement. **À fermer** si la mesure n'est pas faisable |
+| ~~C~~ *fermé* | `immutable` sur les assets digérés : `public, max-age=31536000, immutable`. | Safari et Firefox ne revalident plus les assets quand la page est rechargée, notamment au rechargement forcé de la connexion | Très faible, une ligne. Le gain n'est **pas mesurable ici** (seul Chromium est installé, et il ne revalide pas les sous-ressources) et il disparaît presque si le lot B supprime le rechargement. **À fermer** si la mesure n'est pas faisable |
 
 Leviers **écartés par la mesure** :
 
@@ -107,8 +122,8 @@ Leviers **écartés par la mesure** :
 
 ## Questions encore ouvertes
 
-1. **Mesure depuis Abidjan** : pouvez-vous lancer `ruby script/perf/measure_network.rb` (Ruby seul, sans compte) trois fois depuis un poste en Côte d'Ivoire, idéalement sur le réseau mobile des élèves ? Sans ce chiffre, le lot R n'a pas de « avant » et ne s'ouvre pas.
-2. **Région** : d'accord pour étudier le passage de la production (application **et** PostgreSQL) en `europe-west4`, avec une fenêtre de maintenance ? Staging et Develop d'abord, pour mesurer le gain sans risque ?
-3. **Lot A** : d'accord pour amender l'UDR-0010 et l'UDR-0018 (activité récente rendue avec la page) ?
-4. **Lot B** : d'accord pour amender l'ADR-0049 ? Le formulaire de connexion serait soumis hors Turbo, et un PIN refusé recharge alors la page avec son message d'erreur.
-5. **Lot D** : pouvez-vous activer *Early Hints* et *Tiered Cache* dans la zone Cloudflare `lnclass.com` ? Le dépôt n'y a pas accès.
+*Questions du cadrage, posées le 2026-10-03 ; réponses en tête de ce memo.*
+
+1. **Mesure depuis Abidjan** : `ruby script/perf/measure_network.rb` et `ruby script/perf/measure_network.rb https://app-develop.lnclass.com`, trois fois chacun, depuis un poste en Côte d'Ivoire (sans compte, Ruby 3.4). À prendre **avant** tout changement de région de Develop, sinon Develop n'aura plus de « avant ».
+2. **Changement en attente sur Develop** : un changement non appliqué (créé le 2026-10-03 à 20:36 UTC) déplace **l'application seule** en `europe-west4`. PostgreSQL et le bucket resteraient à Singapour : chaque requête SQL traverserait alors l'Europe et l'Asie, et Develop serait beaucoup plus lent qu'aujourd'hui. **À ne pas appliquer tel quel** : la base doit bouger dans le même changement (plan, lot R).
+3. **Cloudflare** : prévenir quand *Early Hints* et *Tiered Cache* sont actifs, pour la mesure « après » du lot D.

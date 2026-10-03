@@ -2,24 +2,23 @@
 
 > Cycle : [optimisation](../../workflows/optimisation.md) — **un lot = un levier = un chiffre**, lots classés par ratio gain/risque, arrêt dès la cible atteinte ; un lot devenu inutile se **ferme**.
 > Format des lots : [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot). Mesure « avant » et leviers : [memo](memo.md). Politique proposée : [ADR-0069](../../decisions/adr/0069-politique-de-cache-reglee-sur-les-allers-retours.md).
-> **Rien n'est lancé** tant que le porteur n'a pas répondu aux questions du memo : A attend l'accord sur les UDR-0010 et 0018, B l'accord sur l'ADR-0049, R la mesure depuis Abidjan.
+> **Décisions du porteur du 2026-10-03** ([memo](memo.md#décisions-du-porteur-2026-10-03)) : A et B refusés (« garder » les UDR-0010, 0018 et l'ADR-0049), donc **fermés** ; C fermé avec B ; D activé par le porteur ; R étudié, Develop et Staging d'abord, après la mesure depuis Abidjan. **Aucun lot de code ne reste.**
 
 ## Graphe
 
 ```
 Lot 0 — Bench et décision (fait en cadrage : 3 scripts, mesure « avant », ADR-0069 proposé)
   ↓
-  ├─► Lot A — Activité récente rendue avec la page (UDR-0010, UDR-0018)   ┐ code, en parallèle
-  └─► Lot B — Connexion et déconnexion hors Turbo (ADR-0049)              ┘ (fichiers disjoints)
-        ↓
-      Lot C — `immutable` sur les assets (à fermer si non mesurable)
-
-  ⋯ hors dépôt, à tout moment, par le porteur :
-  Lot D — Cloudflare : Early Hints + Tiered Cache
-  Lot R — Région : application + PostgreSQL en europe-west4  (attend la mesure depuis Abidjan)
+  ├─✗ Lot A — Activité récente rendue avec la page   FERMÉ (porteur : garder UDR-0010, UDR-0018)
+  ├─✗ Lot B — Connexion et déconnexion hors Turbo     FERMÉ (porteur : garder ADR-0049)
+  │     ✗ Lot C — `immutable` sur les assets           FERMÉ (non mesurable ici, dépendait de B)
+  │
+  ├─► Lot D — Cloudflare : Early Hints + Tiered Cache  (porteur, tableau de bord Cloudflare)
+  └─► Lot R — Région europe-west4 : application ET PostgreSQL ensemble
+        mesure Abidjan « avant » → Develop → mesure → Staging → mesure → production
 ```
 
-Ordre par gain/risque : **A** (la page la plus ouverte par l'élève et par l'équipe, risque faible) → **B** (parcours rare, car la session est permanente ; risque moyen) → **D** (sans code) → **R** (le seul levier sur toutes les pages, mais une migration de base) → **C** (marginal).
+Ordre par gain/risque au cadrage : A → B → D → R → C. Après les décisions du porteur, il reste **D** (sans code, premières visites) puis **R** (le seul levier sur toutes les pages, mais une migration de base).
 
 ## Contrat d'exécution de chaque lot
 
@@ -28,7 +27,7 @@ Ordre par gain/risque : **A** (la page la plus ouverte par l'élève et par l'é
 3. **Un seul levier**, puis le bench relancé (**3 exécutions, médiane**), avec le chiffre noté dans le memo.
 4. **Gain nul ou marginal → le pas est annulé**, et le journal dit pourquoi. Une complexité ajoutée sans gain mesuré se retire.
 
-La connexion d'un élève dépend des deux lots A et B. Chaque lot est mesuré sur ses propres parcours ; la connexion d'un élève est mesurée une fois A et B fusionnés (4 → 2).
+Les lots A et B étant fermés, `count_round_trips.rb` sert de **plafond** : aucun parcours ne doit dépasser ses requêtes en série d'aujourd'hui (ADR-0069 §4.2). Les lots D et R se mesurent avec `measure_browser.cjs` et `measure_network.rb`.
 
 > **Le chantier ne se clôt pas sans mesure après** : même machine, même volume, même méthode, au moins 3 exécutions, médiane, tests fonctionnels verts. **Sans chiffre après, la PR est rejetée.**
 
@@ -48,7 +47,10 @@ La connexion d'un élève dépend des deux lots A et B. Chaque lot est mesuré s
 
 ---
 
-## Lot A — Activité récente rendue avec la page
+## Lot A — Activité récente rendue avec la page — *fermé*
+
+> **Fermé le 2026-10-03 par le porteur** : l'UDR-0010 et l'UDR-0018 sont gardées, avec leur frame différé. Fiche conservée pour mémoire.
+
 
 - **Couche**       : delivery + ui
 - **Fichiers**     : `app/controllers/classroom/student_homes_controller.rb`
@@ -62,7 +64,10 @@ La connexion d'un élève dépend des deux lots A et B. Chaque lot est mesuré s
 - **Test associé** : `student_homes_controller_test.rb` et `homes_controller_test.rb` (la page contient l'activité, sans `turbo-frame[src]`) ; `test/system/role_homes_test.rb` inchangé et vert
 - **Done quand**   : `count_round_trips.rb` donne **« Clic vers l'accueil élève » 2 → 1**, **« Clic vers l'accueil équipe » 2 → 1** et **« Ouverture de lnclass.com » 3 → 2**, sur 3 exécutions. Le p95 serveur de `/students` et `/teams` reste **< 100 ms** (ADR-0067), mesuré avec `measure_screens.rb` (`PERF_ONLY=student_home,teams_home`) au volume de `script/perf/dataset.rb`
 
-## Lot B — Connexion, inscription et déconnexion hors Turbo
+## Lot B — Connexion, inscription et déconnexion hors Turbo — *fermé*
+
+> **Fermé le 2026-10-03 par le porteur** : l'ADR-0049 est gardé, avec le rechargement du document à chaque nouvelle session. Fiche conservée pour mémoire.
+
 
 - **Couche**       : ui + delivery
 - **Fichiers**     : `app/views/identity/sessions/new.html.erb`
@@ -78,7 +83,10 @@ La connexion d'un élève dépend des deux lots A et B. Chaque lot est mesuré s
 - **Test associé** : `content_security_policy_test.rb` (nouveau cas : connexion et déconnexion hors Turbo, nouveau nonce dans le document d'arrivée, sans `turbo-visit-control`) ; `test/system/shared/csp_turbo_navigation_test.rb` inchangé et vert ; un PIN refusé ré-affiche le formulaire avec son message (422)
 - **Done quand**   : `count_round_trips.rb` donne **« Connexion enseignant » 3 → 2**, **« Déconnexion » 3 → 2** et **« Connexion élève » 4 → 3** (puis **2** une fois A fusionné), sur 3 exécutions, aucune violation de CSP. Le rechargement forcé reste pour les renouvellements de session depuis une modale (ADR-0055), qui ne sont pas touchés
 
-## Lot C — `immutable` sur les assets digérés
+## Lot C — `immutable` sur les assets digérés — *fermé*
+
+> **Fermé le 2026-10-03.** Sa clause de fermeture s'applique : WebKit n'est pas installable dans le conteneur de mesure (`playwright install` y est proscrit), et Chromium ne revalide pas les sous-ressources au rechargement. Le gain, un aller-retour vers Cloudflare au rechargement de connexion sous Safari, n'est donc pas mesurable. Il se rouvre si quelqu'un mesure les revalidations sur un iPhone (inspecteur web de Safari).
+
 
 - **Couche**       : infrastructure (configuration)
 - **Fichiers**     : `config/environments/production.rb`
@@ -98,9 +106,26 @@ La connexion d'un élève dépend des deux lots A et B. Chaque lot est mesuré s
 
 - **Couche**       : infrastructure Railway (environnements Develop, Staging, puis production)
 - **Fichiers**     : aucun dans le dépôt ; `docs/decisions/adr/0069-…` §4.3 passe à « Accepté » avec la région retenue et la mesure qui la justifie
-- **Dépend de**    : la mesure « avant » depuis Abidjan (question 1) ; la décision du porteur et une fenêtre de maintenance (question 2). Ordre : Develop, puis Staging, mesurés, puis production
-- **Test associé** : `measure_network.rb` et `measure_browser.cjs` lancés depuis la Côte d'Ivoire, avant et après, 3 fois chacun ; `bin/rails test` vert sur l'environnement migré ; `/up` en 200
-- **Done quand**   : depuis Abidjan, **le surcoût d'une requête jusqu'au serveur passe sous 150 ms** et le **chargement d'une page déjà visitée sous 500 ms** (`load`, médiane), mesurés sur Staging puis sur la production, sans perte de données (comptes de lignes identiques avant et après la migration)
+- **Dépend de**    : la mesure « avant » depuis Abidjan, sur l'environnement concerné ; une fenêtre de maintenance. Ordre : Develop, puis Staging, mesurés, puis production
+- **Test associé** : `measure_network.rb` et `measure_browser.cjs` lancés depuis la Côte d'Ivoire, avant et après, 3 fois chacun ; `/up` en 200 ; comptes de lignes par table identiques avant et après
+- **Done quand**   : depuis Abidjan, **le surcoût d'une requête jusqu'au serveur passe sous 150 ms** et le **chargement d'une page déjà visitée sous 500 ms** (`load`, médiane), mesurés sur Staging puis sur la production. Le `x-runtime` de `/` et de `/login` reste sous 10 ms, ce qui prouve que l'application et la base sont dans la même région. Aucune perte de données
+
+### Étude (porteur : « oui », 2026-10-03)
+
+**État au 2026-10-03.** Dans les trois environnements, tout est en `asia-southeast1-eqsg3a` : l'application (1 réplica), PostgreSQL 18 (1 réplica, volume `postgres-volume` de 5 000 Mo provisionnés) et le bucket Railway d'Active Storage (région `sin`).
+
+**Ce que dit Railway** ([docs, « Regions »](https://docs.railway.com/deployments/regions#impact-of-region-changes)) : changer la région d'un service **sans volume** se fait sans interruption. Un service **avec volume** voit ses données migrées, et il est **interrompu pendant toute la migration**, dont la durée dépend de la taille du volume.
+
+**⚠️ Changement en attente sur Develop.** Un changement non appliqué (patch créé le 2026-10-03 à 20:36 UTC) déplace **l'application seule** vers `europe-west4-drams3a`. Appliqué tel quel, il laisserait PostgreSQL à Singapour : chaque requête SQL traverserait l'Europe et l'Asie, sur des pages qui en font 4 à 25. Develop deviendrait bien plus lent qu'aujourd'hui. **La base doit être dans le même changement.**
+
+**Déroulé proposé, environnement par environnement** (Develop, puis Staging, puis production) :
+
+1. **Avant** : `measure_network.rb` et `measure_browser.cjs` depuis Abidjan sur l'environnement (3 fois). Relever le nombre de lignes de chaque table (`SELECT relname, n_live_tup FROM pg_stat_user_tables` après `ANALYZE`, ou `count(*)` sur les tables métier).
+2. **Sauvegarde** : un `pg_dump` de la base. Facultatif sur Develop, **obligatoire en production**.
+3. **Un seul changement** : PostgreSQL **et** l'application en `europe-west4-drams3a`, appliqués ensemble pendant la fenêtre. Interruption attendue pendant la migration du volume.
+4. **Vérification** : `/up` en 200, nombre de lignes identique, connexion d'un compte de test. Le `x-runtime` des pages publiques reste sous 10 ms.
+5. **Après** : les mêmes mesures depuis Abidjan, 3 fois, comparées à l'étape 1. Si le gain n'y est pas, on revient à Singapour : c'est le même changement en sens inverse, avec la même interruption.
+6. **Bucket** : il reste à Singapour dans un premier temps. Il ne sert qu'aux photos de profil (servies par l'application, gardées par le navigateur, ADR-0060) et aux fichiers d'import (lus par un job). On mesure `GET /accounts/:id/photo` après la migration. Un bucket européen, avec copie des objets, ne se fait que si cette mesure le demande (chantier à part, ADR-0047).
 
 ---
 
@@ -108,17 +133,12 @@ La connexion d'un élève dépend des deux lots A et B. Chaque lot est mesuré s
 
 ```
 Vague 1 : Lot 0                 → fait (cadrage)
-Vague 2 : Lot A ‖ Lot B         → 2 agents, worktrees isolés, dès les accords du porteur
-          Lot D, Lot R          → le porteur, hors dépôt, sans attendre la vague 2
-Vague 3 : Lot C                 → 1 agent, après B (ou fermé)
+Vague 2 : Lot D ‖ Lot R         → le porteur (Cloudflare ; Railway), hors dépôt ;
+                                  mesures « après » rejouées ici dès qu'un réglage ou une région change
+Lots A, B, C                    → fermés, aucun agent de code
 ```
 
-```bash
-git worktree add ../lnclass-politique-cache-lot-a -b perf/politique-cache-lot-a perf/politique-cache
-git worktree add ../lnclass-politique-cache-lot-b -b perf/politique-cache-lot-b perf/politique-cache
-```
-
-Chaque agent travaille avec des chemins **absolus** (`git -C <worktree>`), ne touche **aucun fichier hors de son champ `Fichiers`** et remonte s'il en a besoin. Une seule PR pour le chantier, vers `Develop`.
+Aucun agent de code n'est lancé : les seuls lots ouverts sont hors du dépôt. Une seule PR pour le chantier, vers `Develop` : documentation, scripts de mesure et ADR-0069.
 
 ## Vérification de collision
 

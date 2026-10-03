@@ -38,7 +38,7 @@ Un cache serveur ne retire que les 2 à 9 ms du calcul. Ce qui coûte, c'est cha
 |---|---|---|
 | A — Cache serveur généralisé : fragments, Solid Cache, `fresh_when` / ETag | C'est ce que « politique de cache » évoque d'abord, et les outils sont en place (Solid Cache) | Le calcul pèse 2 à 9 ms sur 360. Un 304 paie quand même l'aller-retour. Le nonce et le jeton CSRF rendent chaque HTML propre à une session. Le gain serait inférieur au bruit de la mesure |
 | B — Cache du HTML chez Cloudflare, au moins pour les pages publiques | Il supprimerait l'aller-retour des visiteurs de `/` et `/login` | Ces pages posent le cookie de session et portent le jeton CSRF et le nonce de la session : un cache partagé les donnerait à une autre personne. Contraire au moteur 2 |
-| **C — Un budget de requêtes en série par parcours, le cache réservé à ce qui ne dépend pas de la personne (assets), et un serveur rapproché des utilisateurs** | Il agit sur le coût réel : chaque requête en série retirée vaut un aller-retour, et rapprocher la région réduit tous les allers-retours | **Retenue** |
+| **C — Un plafond de requêtes en série par parcours, le cache réservé à ce qui ne dépend pas de la personne (assets), et un serveur rapproché des utilisateurs** | Il agit sur le coût réel : chaque requête en série retirée vaut un aller-retour, et rapprocher la région réduit tous les allers-retours | **Retenue** |
 | D — Statu quo | Rien à faire | La lenteur constatée par le porteur reste entière, et invisible dans Railway |
 
 ## 4. Décision
@@ -49,27 +49,31 @@ Un cache serveur ne retire que les 2 à 9 ms du calcul. Ce qui coûte, c'est cha
 
 | Couche | Ce qu'elle garde | Ce qu'elle ne garde jamais |
 |---|---|---|
-| **Navigateur** | Les assets digérés et les fichiers de `public/` : `public, max-age=31536000` (un an), plus `immutable` si le lot C le justifie par une mesure | Le HTML : `private, max-age=0, must-revalidate` (le défaut de Rails). Les écrans secrets : `no-store` (ADR-0031) |
+| **Navigateur** | Les assets digérés et les fichiers de `public/` : `public, max-age=31536000` (un an). Pas d'`immutable` : son gain (Safari et Firefox au rechargement) n'a pas pu être mesuré, lot C fermé | Le HTML : `private, max-age=0, must-revalidate` (le défaut de Rails). Les écrans secrets : `no-store` (ADR-0031) |
 | **Cloudflare** | Les mêmes assets, en périphérie. *Early Hints* et *Tiered Cache* activés dans la zone (lot D, action du porteur) | Le HTML, même public (option B refusée) : `cf-cache-status: DYNAMIC` |
 | **Turbo** | Les 10 dernières pages vues, en aperçu, et le préchargement au survol (Turbo 8, réglages par défaut, conservés) | Les pages `secret_response` (ADR-0031). Pas de préchargement au toucher |
 | **Serveur** (Solid Cache) | Les seuls agrégats qui dépassent leur budget de l'ADR-0067 malgré index et requêtes réécrites (aujourd'hui : le pilotage « année », 5 minutes) | Aucun fragment ni ETag destiné à gagner de la latence |
 
-### 4.2 Budget de requêtes en série
+### 4.2 Plafond de requêtes en série
 
-| Parcours | Budget | Aujourd'hui |
-|---|--:|--:|
-| Un clic vers une page (navigation Turbo) | **1** | 1 ou 2 |
-| Une connexion, une inscription, une déconnexion (formulaire → page complète) | **2** | 3 ou 4 |
-| L'ouverture de `lnclass.com` par une personne connectée | 2 (la redirection vers l'accueil reste) | 3 |
+Le porteur garde, le 2026-10-03, le frame différé des accueils élève et équipe (UDR-0010, UDR-0018) et le rechargement du document à chaque nouvelle session (ADR-0049). Le compte d'aujourd'hui devient donc un **plafond** : aucun parcours ne le dépasse.
 
-- Un frame différé (`loading: :lazy`) ajoute une requête en série. Il n'est justifié que si son contenu coûte, côté serveur, plus qu'un aller-retour, ou s'il est hors de l'écran à l'arrivée sur la page.
-- Le budget se vérifie avec `script/perf/count_round_trips.rb`. Un écran qui le dépasse ouvre un chantier `optimize`.
+| Parcours | Plafond |
+|---|--:|
+| Clic vers une page (navigation Turbo), sauf les accueils élève et équipe | **1** |
+| Clic vers l'accueil élève ou équipe (frame différé de l'activité récente) | **2** |
+| Connexion d'un enseignant, déconnexion (rechargement de l'ADR-0049) | **3** |
+| Connexion d'un élève (rechargement et frame différé) | **4** |
+| Ouverture de `lnclass.com` par une personne connectée (redirection, accueil, frame) | **3** |
+
+- Un nouveau frame différé (`loading: :lazy`) ajoute une requête en série. Il n'est justifié que si son contenu coûte, côté serveur, plus qu'un aller-retour, ou s'il est hors de l'écran à l'arrivée sur la page.
+- Le plafond se vérifie avec `script/perf/count_round_trips.rb`. Un parcours qui le dépasse ouvre un chantier `optimize`.
 
 ### 4.3 Région
 
 > **L'application et sa base vivent ensemble dans la région Railway la plus proche des utilisateurs.** Le choix se fait sur une mesure prise depuis la Côte d'Ivoire (`script/perf/measure_network.rb`). À vol d'oiseau, la candidate est `europe-west4` (Amsterdam).
 
-Le déplacement de la production attend cette mesure et la décision du porteur. On ne déplace jamais l'application sans sa base : chaque page fait 4 à 25 requêtes SQL, et une traversée Europe–Asie par requête SQL coûterait plus que tout le reste.
+Le porteur a accepté l'étude le 2026-10-03, Develop et Staging d'abord. Le déplacement de chaque environnement attend sa mesure « avant » depuis Abidjan. On ne déplace jamais l'application sans sa base : chaque page fait 4 à 25 requêtes SQL, et une traversée Europe–Asie par requête SQL coûterait plus que tout le reste.
 
 ## 5. Conséquences
 
@@ -82,9 +86,9 @@ Le déplacement de la production attend cette mesure et la décision du porteur.
 ### 🔴 Coûts consentis
 
 - **Le gain principal n'est pas dans le code.** Rapprocher la région demande une migration de PostgreSQL avec interruption, et le chiffre qui la justifie doit venir d'Abidjan. Tant qu'il manque, chaque aller-retour reste de l'ordre de 250 ms ou plus.
-- **Moins de requêtes en série, c'est moins de Turbo à certains endroits.** Un formulaire de connexion soumis hors Turbo affiche un PIN refusé en page complète (amendement de l'ADR-0049 à écrire avec le lot B). Une activité récente rendue avec la page ajoute 7 à 19 ms au calcul de l'accueil (amendement des UDR-0010 et 0018 avec le lot A).
+- **Le plafond garde deux requêtes en série évitables.** La connexion recharge le document (ADR-0049) et les accueils élève et équipe différent leur activité récente (UDR-0010, UDR-0018). Les supprimer ferait gagner un aller-retour à chacun de ces parcours ; le porteur a choisi de garder ces décisions.
 - **Deux réglages vivent hors du dépôt**, dans le tableau de bord Cloudflare (*Early Hints*, *Tiered Cache*). Rien ne les vérifie automatiquement ; le script navigateur les met en évidence (première visite).
-- **Le budget de requêtes n'est pas vérifié en CI**, comme les budgets de l'ADR-0067 : il se rejoue avant la recette et dans tout chantier qui touche un parcours.
+- **Le plafond de requêtes n'est pas vérifié en CI**, comme les budgets de l'ADR-0067 : il se rejoue avant la recette et dans tout chantier qui touche un parcours.
 - Le point de mesure de référence (conteneur cloud, PoP de Chicago) n'est pas celui des utilisateurs. Les chiffres en millisecondes valent pour ce point ; seul le compte de requêtes vaut partout.
 
 ## 6. Notes d'implémentation
@@ -107,7 +111,7 @@ RAILS_ENV=production … bin/rails runner script/perf/count_round_trips.rb   # r
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `script/perf/count_round_trips.rb` : aucun parcours au-dessus de son budget (§4.2).
+- `script/perf/count_round_trips.rb` : aucun parcours au-dessus de son plafond (§4.2).
 - `curl -sI https://lnclass.com/` : HTML en `private, max-age=0` et `cf-cache-status: DYNAMIC` ; `curl -sI` d'un asset digéré : `public, max-age=31536000`, puis `HIT` au second appel.
 - `script/perf/measure_network.rb` lancé depuis la Côte d'Ivoire, avant et après tout changement de région.
 - Toute PR qui ajoute un `Rails.cache.fetch`, un cache de fragment ou un `fresh_when` cite l'écran et le budget de l'ADR-0067 qu'il fait tenir.
