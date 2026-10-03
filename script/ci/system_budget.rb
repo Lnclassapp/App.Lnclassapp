@@ -13,6 +13,11 @@ require_relative "plan"
 
 class SystemBudget
   BUDGET = 15.0
+  # Dérogations du porteur (ADR-0069 §9, amendement du 2026-10-03) : un chantier, ses fichiers système, son budget.
+  # Une PR dont tous les fichiers qui grandissent sont ceux d'une dérogation a ce budget-là ; toute autre, BUDGET.
+  GRANTS = {
+    "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] }
+  }.freeze
   GLOB = "test/system/**/*_test.rb"
   BASE = "origin/Develop"
 
@@ -35,7 +40,13 @@ class SystemBudget
   # Seconds added to the suite by the touched files (negative when tests leave).
   def growth = touched.sum { |file| timings.fetch(file, 0.0) - base_timings.fetch(file, 0.0) }.round(1)
 
-  def within_budget? = growth <= BUDGET
+  def budget
+    growing = touched.select { |file| timings.fetch(file, 0.0) > base_timings.fetch(file, 0.0) }
+    grant = GRANTS.each_value.find { |candidate| growing.any? && (growing - candidate[:files]).empty? }
+    grant ? grant[:budget] : BUDGET
+  end
+
+  def within_budget? = growth <= budget
 
   def record_command(files) = "bin/rails test #{files.join(' ')} -v 2>&1 | script/ci/record_timings"
 
