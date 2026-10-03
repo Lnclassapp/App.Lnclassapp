@@ -10,8 +10,6 @@ require "application_system_test_case"
 class Teams::BlogManagementTest < ApplicationSystemTestCase
   # Shrinking a 4000 px photo, then sending it, under a loaded full suite.
   UPLOAD_WAIT = 20
-  # Bytes per second offered to an upload while the test watches the progress bar and the held « Enregistrer ».
-  SLOW_UPLOAD = 8_000
   IMAGE = Entities::Communication::ArticleImage
 
   setup do
@@ -50,11 +48,13 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
 
         editor.click
         editor.send_keys("Première semaine : les fractions.")
-        with_slow_upload do
+        # The endpoint holds the upload until the test releases it: while it is in flight, Trix shows its progress bar on
+        # the attachment and the editor is busy, however loaded the machine (a throttled network made this a race).
+        hold_uploads do |release|
           drop_generated_image(name: "tableau.jpg", width: 4000, height: 3000)
-          # The upload goes slowly: Trix shows its progress bar on the attachment, the editor is busy.
           assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
           assert_selector "#article_editor[aria-busy=true]"
+          release.call
         end
         image1 = assert_image_row(1)
         assert_selector "#article_body_upload_status", text: image_message("uploaded", number: 1), visible: :all
@@ -65,12 +65,14 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
 
         editor.send_keys([ :control, :end ], "Deuxième semaine : la géométrie.")
         # « Créer le brouillon » during an upload waits for it, then the article leaves with both images.
-        with_slow_upload do
+        hold_uploads do |release|
           attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
           assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
           mark_host_page
           click_on t("teams.articles.new.submit")
           assert_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
+          assert_equal 0, Orm::Article.count, "« Créer le brouillon » attend l'envoi en cours"
+          release.call
         end
       end
       assert_toast t("teams.articles.create.created", title: "Réviser le BEPC en quatre semaines")
@@ -396,27 +398,20 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
   # The team endpoint holds every upload of the block until the test releases it: release.call lets the upload through,
   # release.call(500) answers that status instead. The state seen while an upload is under way is then certain, instead
   # of raced against a slowed network. Whatever is still held at the end of the block is let go.
+  # The original action is kept in a local, not under an alias: a request let through just before the block ends still
+  # finds it once the action is restored.
   def hold_uploads
     gate = Thread::Queue.new
     endpoint = Teams::ArticleImagesController
-    endpoint.alias_method :create_unheld, :create
+    original = endpoint.instance_method(:create)
     endpoint.define_method(:create) do
       answer = gate.pop
-      answer == :pass ? create_unheld : head(answer || :service_unavailable)
+      answer == :pass ? original.bind_call(self) : head(answer || :service_unavailable)
     end
     yield ->(status = :pass) { gate << status }
   ensure
     gate.close
-    endpoint.alias_method :create, :create_unheld
-    endpoint.remove_method :create_unheld
-  end
-
-  # Chrome throttles the uploads of the block: the progress bar and the held submit can be seen.
-  def with_slow_upload
-    page.driver.browser.network_conditions = { offline: false, latency: 0, download_throughput: -1, upload_throughput: SLOW_UPLOAD }
-    yield
-  ensure
-    page.driver.browser.network_conditions = { offline: false, latency: 0, download_throughput: -1, upload_throughput: -1 }
+    endpoint.define_method(:create, original)
   end
 
   # A real drop, as the browser sends it, of an image drawn in the page: a gradient photo, or noise that no encoder
