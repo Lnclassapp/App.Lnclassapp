@@ -24,6 +24,13 @@
 | 2026-10-02 | **Preuves des sessions cloud, avec tirage 1 sur 5 vers `Develop` et suite complète vers `Staging`.** Le porteur proposait un tirage à chaque étape (Develop, Staging, main) : 0,8³ ≈ 51 % des PR fautives seraient passées, et à `Staging` on ne teste plus des PR mais un arbre qui les contient toutes. Un run complet par promotion vérifie 100 % des PR qu'elle porte. | Calcul présenté au porteur, qui a validé. | ADR-0069 §8 |
 | 2026-10-02 | **L'outil de l'agent a refusé de modifier `tested_tree` pour accepter la preuve cloud** (« contournement de la CI »). Le porteur applique ce changement lui-même, à partir d'un patch ; l'agent n'a fait que ce qui restreint la CI. | Une preuve déclarative est un choix de confiance : il revient au porteur. | ADR-0069 §8 |
 | 2026-10-02 | **Le tirage est fixé par PR** (empreinte d'un secret et du numéro de PR), pas refait à chaque run. | Sinon un push vide relancerait le tirage jusqu'à ne plus être tiré. | ADR-0069 §8 |
+| 2026-10-02 | **Dix minutes d'horloge par feature** devient l'exigence (porteur). Appliqué par l'algorithme : perf d'import hors des runs non tirés, PostgreSQL de l'image au lieu du conteneur (PR #148). | Run 407 : 8 min 09 de `bin/ci` ; la perf (45 s) est « avant la recette » (ADR-0039), le conteneur coûtait 23 s. | ADR-0069 §9 |
+| 2026-10-03 | **Deux jobs côte à côte, `unit` et `system`, encadrés par `plan` et `ci`.** Le porteur l'avait écarté le 2026-10-02 (option C) et l'a retenu le 2026-10-03, pour tenir dix minutes sur un runner lent. | Run 472 : 10 minutes facturées sans marge, système 7 min 04 ; variance 1,5× entre runners. Coût : ≈ + 100 minutes par mois. | ADR-0069 §9 |
+| 2026-10-03 | **Budget de croissance de la suite système : 15 s par chantier**, gardé par `test/guards/system_budget_test.rb` (l'agent proposait 20 s). Seuls les fichiers touchés comptent ; un test retiré rend ses secondes ; un fichier sans durée est refusé. | 299 → 338 tests système en un jour : sans garde, le plafond cède par simple croissance. | ADR-0069 §9 |
+| 2026-10-03 | **Les durées des 82 fichiers système sont enregistrées depuis le journal GitHub du run 472** (37 n'en avaient pas) ; `script/ci/record_timings` reconnaît les classes déclarées dans un `module` et élague les fichiers disparus. | Un fichier sans durée ne pèserait rien dans le budget. | — |
+| 2026-10-03 | **Chantier [`selection-par-carte-de-couverture`](../selection-par-carte-de-couverture/memo.md) ouvert**, hors de ce chantier. | Un lot = un levier ; la sélection est un levier à part, avec son propre risque de faux verts. | — |
+| 2026-10-03 | **Accord du porteur sur les cinq étapes appliquées ; la suite système se joue en trois parts** (« parallélise les tests de plus de 2 minutes » : c'est la seule étape qui les dépasse). Quatre jobs jouent `bin/ci`. | Horloge ≈ 7 min 30 → ≈ 3 min 30 pour ≈ 4 minutes facturées de plus par run complet ; les durées fraîches du run 472 donnent trois parts à 271 s. | ADR-0069 §9 |
+| 2026-10-03 | **Mesure des deux jobs (run 476, #149 fusionnée)** : `unit` 2 min 43, `system` 9 min 56 (`bin/ci` 9 min 32 pour 338 tests, 7 min 04 au run 472 : runner 1,35× plus lent), horloge 10 min 16, 15 minutes facturées. | Confirme que le job système seul ne tient pas dix minutes sur un runner lent ; le lot 9 (trois parts) est nécessaire, pas optionnel. | ADR-0069 §9 |
 
 ## Ce qui a dérapé
 
@@ -46,6 +53,11 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - **Un runner auto-hébergé doit avoir une locale UTF-8.** Sous `LANG` vide (US-ASCII), la garde de pureté du domaine lève `invalid byte sequence in US-ASCII` en lisant les fichiers accentués. Les images GitHub fixent `LANG=C.UTF-8` ; `install` l'écrit dans le `.env` de chaque instance.
 - **GitHub échoue un job resté 24 h sans runner**, sans réglage possible : d'où le service de relance (lot D) pour tenir 48 h.
 - **`ruby/setup-ruby` n'installe ses Ruby précompilés que dans `/opt/hostedtoolcache`** : `install` crée ce dossier et le déclare dans `RUNNER_TOOL_CACHE`.
+- **Une garde qui lit git se prouve dans un clone à profondeur 1**, comme celui de GitHub : `origin/Develop` n'y existe pas, `merge-base` échoue, et `Open3.capture2` renvoie un objet statut toujours vrai. La première version de `system_budget.rb` acceptait 20 s de croissance dans ce clone ; vue avant la fusion en rejouant quatre scénarios dans un clone superficiel du dépôt.
+- **Les runners GitHub varient de 1,5× d'un run à l'autre** (2026-10-02 : 8 min 09 contre 12 min 40 pour la même suite ; 5 min 55 contre 7 min 04 pour les mêmes 338 tests système). Une mesure d'horloge se lit sur plusieurs runs, et un plafond se tient avec de la marge.
+- **Un re-run GitHub ne voit pas les artefacts de sa tentative précédente** : la preuve d'arbre d'un run relancé ne se trouve pas, la suite rejoue.
+- **`test/system/identity/teacher_signup_test.rb` pèse 68 s sur le run 472**, dont un seul test à 30,9 s (FU-19, aide du code établissement) : premier candidat pour `tests-instables` ou la sélection par carte de couverture.
+- **`script/ci/record_timings` ne reconnaissait pas une classe déclarée dans un `module`** (`module Finitions` / `class X`) : cinq fichiers n'avaient jamais eu de durée.
 - **L'API de facturation par run ne répond rien d'utile** : `GET /actions/runs/<id>/timing` renvoie `total_ms: 0` pour tous les runs de ce dépôt. Seuls les horodatages des jobs permettent de compter.
 
 ## Dette laissée derrière
@@ -54,6 +66,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
+| La mesure « après » du lot 7 (deux jobs) sur 3 runs | Elle se prend sur les runs des prochaines PR complètes | ce chantier, journal |
 | Les chiffres « après » de chaque lot (3 runs, médiane) | Ils se mesurent sur le runner installé, sur la machine du porteur | ce chantier, dès le lot 0 fait |
 | Lot E : horloge < 3 min | Dépend de la mesure du lot A | ce chantier, fermé si A tient déjà < 3 min |
 | Isolation forte du runner (Docker *rootless*, VM ou runners éphémères) ; PR de Dependabot | Choix d'infrastructure du porteur (voir décisions ci-dessus) | à ouvrir si le porteur le décide |

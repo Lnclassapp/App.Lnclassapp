@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8* |
+| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8 ; amendé les 2026-10-02 et 2026-10-03 : dix minutes par feature, deux jobs, budget de croissance, §9* |
 | **Date** | 2026-10-02 *(première version proposée le 2026-09-30 : runner auto-hébergé)* |
 | **Chantier** | `docs/chantiers/ci-quota` |
 | **Remplace** | — *(amende l'[ADR-0064](./0064-ci-parallele-par-groupes-de-bin-ci.md) : la matrice de 14 jobs, §4 précision 6 et §5 « plus de minutes facturées »)* |
@@ -33,7 +33,7 @@ La première version de cet ADR (2026-09-30) déplaçait les jobs sur un runner 
 |---|---|---|
 | A — Runner auto-hébergé (première version de cet ADR) | 0 minute facturée sur les PR de chantier | Écartée par le porteur le 2026-10-02 : une machine à installer, entretenir et sécuriser, une CI qui s'arrête quand elle s'éteint |
 | B — Garder 14 jobs, supprimer seulement les runs en double | Horloge de 4 min conservée | 33 minutes par run de chantier : le quota tient ≈ 60 runs par mois |
-| C — Deux jobs (« unitaires et reste », « système ») | Horloge ≈ 9 min | ≈ 15 minutes par run au lieu de ≈ 13 : écartée par le porteur |
+| C — Deux jobs (« unitaires et reste », « système ») | Horloge ≈ 9 min | ≈ 15 minutes par run au lieu de ≈ 13 : écartée par le porteur le 2026-10-02, **retenue le 2026-10-03** (§9 : dix minutes d'horloge sur n'importe quel runner) |
 | **D — Un seul job, sur les PR prêtes seulement, preuve d'arbre, Dependabot par `Develop`** ✅ | ≈ 13 minutes par run de chantier, ≈ 1 par promotion, rien sur les pushes | Retenue |
 
 ## 4. Décision
@@ -46,7 +46,7 @@ Précisions qui font partie de la décision :
 2. **Un brouillon attend.** Le job ne démarre pas sur une PR en brouillon. Il démarre quand elle passe « prête » (`ready_for_review`), puis à chaque push. Un nouveau push annule le run qu'il rend obsolète (`concurrency`).
 3. **La preuve est l'arbre, pas le commit.** Le job lit l'arbre du commit testé (pour une PR, le commit de fusion que GitHub teste) et cherche l'artefact `ci-tree-<arbre>` (`script/ci/tested_tree`). S'il existe et n'a pas expiré, le job est vert sans rien rejouer. Sinon il joue `bin/ci`, et s'il est vert, il publie cet artefact, conservé 30 jours. Tout doute (API en erreur, arbre illisible) répond « non testé » : la suite tourne.
 4. **Documents seulement.** Une PR qui ne touche que `docs/` ou des `.md` est verte sans vérification, et ne publie aucune preuve.
-5. **Un seul job.** Le démarrage (checkout, Ruby, Node, PostgreSQL, compilation des assets) se paie une fois, et l'arrondi à la minute une fois. Les groupes et les parts de `config/ci.rb` restent, pour jouer un sous-ensemble à la main (`CI_GROUP`).
+5. **Un seul job.** Le démarrage (checkout, Ruby, Node, PostgreSQL, compilation des assets) se paie une fois, et l'arrondi à la minute une fois. Les groupes et les parts de `config/ci.rb` restent, pour jouer un sous-ensemble à la main (`CI_GROUP`). *Amendé le 2026-10-03 (§9) : deux jobs côte à côte, `unit` et `system`.*
 6. **Les budgets d'écrans restent hors de `bin/ci`** (ADR-0067) : `test/performance/**/*_budget_test.rb` est exclu du groupe `perf`.
 7. **Dependabot suit le chemin de tout changement** : `target-branch: Develop`, une PR groupée par écosystème (`bundler`, `github-actions`), au plus deux ouvertes.
 
@@ -108,3 +108,23 @@ Précisions qui font partie de la décision :
 **Coût attendu.** Une PR de chantier ≈ 1 minute, ou 14 si tirée (≈ 4 en moyenne) ; une promotion vers `Staging` 14 ; une release vers `main` ≈ 1.
 
 **Vérification.** `test/config/ci_prove_test.rb` (vrais dépôts git : une preuve publiée par run vert ; rien sur un arbre sale, une base absente, un run rouge, un HEAD qui bouge), `test/config/ci_tested_tree_test.rb` et `test/guards/ci_plan_test.rb` (tirage avant la preuve, `Staging` toujours rejoué, preuve cloud pour `Develop` seulement).
+
+---
+
+## 9. Amendement des 2026-10-02 et 2026-10-03 : dix minutes par feature, sur n'importe quel runner
+
+**Exigence du porteur (2026-10-02).** « 10 min max pour les runners est acceptable par feature. » L'horloge d'un run complet, pas seulement les minutes facturées.
+
+**Mesure.** Run 407 (PR #136, un job) : `bin/ci` 8 min 09, dont système 5 min 55, unitaires 1 min 09, performance d'import 45 s, conteneur PostgreSQL 23 s. Run 472 (PR #148, même suite sans la performance, PostgreSQL de l'image) : `bin/ci` 8 min 52, dont système **7 min 04** pour les mêmes 338 tests, job de 9 min 27, **10 minutes facturées, sans marge**. Deux faits commandent la suite : **les runners varient de 1,5×** d'un run à l'autre (8 min 09 contre 12 min 40 pour la même suite, 2026-10-02), et **la suite système fait 70 % du temps et a grandi de 13 % en un jour** (299 → 338 tests le 2026-10-02).
+
+**Décisions, dans l'ordre de l'algorithme** (questionner, supprimer, simplifier, accélérer, automatiser) :
+
+1. **Supprimer (2026-10-02, PR #148).** Les tests de performance d'import (ADR-0039 : « avant la recette ») ne tournent que dans les **runs complets** : promotion vers `Staging`, PR tirée au sort. Un run qui rejoue la suite sans être tiré joue tout le reste. Le groupe `perf` reste dans `bin/ci` en local.
+2. **Supprimer (2026-10-02, PR #148).** Le conteneur `postgres:17` (23 s à tirer et démarrer) est remplacé par le **PostgreSQL de l'image** `ubuntu-latest`, déjà installé : 6 s, mêmes identifiants, boucle locale seulement.
+3. **Simplifier et accélérer (2026-10-03).** `bin/ci` se joue en **deux jobs côte à côte** : `unit` (lint, sécurité, unitaires avec couverture 100 %, seeds, assets, et `perf` en run complet) et `system` (les tests système seuls). Deux jobs courts les encadrent : `plan` (tirage, preuve d'arbre, règle « documents seulement », quelques secondes) et `ci`, **le verdict que les branches attendent**, qui publie la preuve `ci-tree-<arbre>` seulement quand les deux jobs sont verts. Remplace la précision 5 du §4 et renverse l'option C du §3. Coût consenti : un run complet ≈ 13 minutes facturées au lieu de 10 (`plan` 1, `unit` ≈ 3, `system` ≈ 8, `ci` 1), une PR prouvée ou de documents ≈ 2 au lieu de 1, soit ≈ 100 minutes de plus par mois. Horloge : celle du job `system`, ≈ 7 min 30 sur le runner du run 472, **≈ 11 min sur un runner 1,5× plus lent** : les dix minutes tiennent alors par le budget (point 4) et par le chantier de sélection (point 5). **Levier pris le même jour** (accord du porteur sur les cinq étapes, puis « parallélise les tests de plus de 2 minutes ») : le groupe `system`, seule étape de plus de deux minutes, se joue en **trois parts** équilibrées sur les durées enregistrées (`system:k/3`, matrice ; 271 s enregistrées chacune), soit **quatre jobs qui jouent `bin/ci`**. Mesure des deux jobs (run 476, PR #149) : `unit` 2 min 43, `system` **9 min 56** sur un runner lent, 10 min 16 d'horloge, 15 minutes facturées : un seul job système ne tient pas dix minutes. Impact estimé des trois parts : ≈ 17 minutes facturées par run complet (15 mesurées avec deux jobs, 10 avec un), horloge ≈ 3 min 30 (≈ 5 min sur un runner 1,5× plus lent), une PR prouvée inchangée à ≈ 2 ; ≈ + 80 minutes par mois pour ≈ 20 runs complets. Quatre parts coûteraient autant (arrondi) pour ≈ 2 min 40 d'horloge : à prendre si la mesure du lot 9 le justifie. Une part rouge n'annule pas les autres (`fail-fast: false`) : toutes les captures d'échec arrivent d'un coup.
+4. **Automatiser (2026-10-03).** **Budget de croissance de la suite système : 15 secondes par chantier** (décision du porteur ; l'agent proposait 20 s). La durée de référence est celle de `script/ci/test_timings.yml` (secondes par fichier, sommées depuis la sortie `-v` ; réenregistrées depuis le journal GitHub du run complet, à chaque promotion : `script/ci/record_timings`). La garde `test/guards/system_budget_test.rb` (groupe `lint`, pre-commit) refuse une PR dont les fichiers système ajoutés, modifiés ou retirés font grandir la suite de plus de 15 s par rapport à `origin/Develop`, et refuse tout fichier système sans durée enregistrée (il ne pèserait rien). Dépasser le budget est une décision du porteur : relever `SystemBudget::BUDGET` dans `script/ci/system_budget.rb`, avec un amendement ici. Les 82 fichiers système ont leur durée depuis le run 472 (37 n'en avaient pas).
+5. **Chantier ouvert (2026-10-03)** : [`selection-par-carte-de-couverture`](../../chantiers/selection-par-carte-de-couverture/memo.md), pour ne jouer que les tests système que les fichiers touchés concernent, là où la suite complète n'est pas exigée par le §8.
+
+**Coût attendu, révisé.** Une PR de chantier prouvée ≈ 2 minutes, ou ≈ 17 si tirée (≈ 5 en moyenne) ; une promotion vers `Staging` ≈ 17 ; une release vers `main` ≈ 2.
+
+**Vérification.** `test/guards/ci_plan_test.rb` : `plan`, `unit`, `system` (seule matrice : ses trois parts, chaque fichier système dans une part et une seule) et `ci` ; `unit` et `system` jouent chaque groupe de `bin/ci` une fois, `perf` en run complet seulement ; la preuve n'est publiée que par `ci`, quand les deux jobs sont verts ; un brouillon n'a pas de verdict ; PostgreSQL de l'image avant `bin/ci` dans chaque job, aucun conteneur de service. `test/guards/system_budget_test.rb` : budget 15 s, seuls les fichiers touchés comptent, un test retiré rend ses secondes, un fichier sans durée est refusé.
