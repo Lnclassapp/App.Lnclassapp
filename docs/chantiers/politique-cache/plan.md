@@ -45,6 +45,17 @@ Les lots A et B étant fermés, `count_round_trips.rb` sert de **plafond** : auc
 - **Test associé** : les trois scripts, lancés 3 fois chacun (journal, « Protocole ») ; `bin/rubocop script/perf`
 - **Done quand**   : le tableau « Mesure avant » du memo est rempli de valeurs mesurées, la ligne d'Abidjan exceptée (question 1, bloquante pour R seul)
 
+### Activation (documentation Cloudflare, lue le 2026-10-03)
+
+Le dépôt n'a aucun accès à la zone `lnclass.com` : le connecteur Cloudflare de la session ne couvre que la plateforme développeur (Workers, D1, KV, R2). Deux bascules, dans le tableau de bord de la zone :
+
+1. **Early Hints** : **Speed** › **Settings**, onglet **Content Optimization**, *Early Hints* sur **On** ([doc](https://developers.cloudflare.com/cache/advanced-configuration/early-hints/)). Gratuit.
+2. **Tiered Cache** : **Caching** › **Tiered Cache**, activer, topologie **Smart Tiered Cache** ([doc](https://developers.cloudflare.com/cache/how-to/tiered-cache/)). Gratuit. L'indication de région cloud ne s'applique pas : elle ne vise qu'AWS, GCP, Azure et Oracle.
+
+Ce que Cloudflare exige pour émettre un `103`, et que nos pages remplissent : une adresse sans extension, une réponse 200, 301 ou 302, et des en-têtes `Link` en `rel=preload` (Rails les envoie déjà pour la feuille de style, le script et la police). Les indications sont gardées par adresse, sans la chaîne de requête. Elles ne contiennent que des adresses d'assets publics : aucune donnée de session. Le `103` n'est émis qu'en HTTP/2 et HTTP/3, et seuls les navigateurs Chromium (Chrome 94 et plus) s'en servent.
+
+Vérification après activation : `curl -sv --http2 https://lnclass.com/login 2>&1 | grep '< HTTP'` doit montrer `HTTP/2 103` avant `HTTP/2 200`, à partir de la deuxième requête sur une adresse. Le proxy du conteneur de mesure peut masquer le `103` : dans ce cas, on vérifie dans l'onglet Réseau de Chrome.
+
 ---
 
 ## Lot A — Activité récente rendue avec la page — *fermé*
