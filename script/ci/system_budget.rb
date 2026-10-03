@@ -46,10 +46,10 @@ class SystemBudget
       out, status = Open3.capture2("git", *args, chdir: root, err: File::NULL)
       [ out, status.success? ]
     end
+    branch = BASE.delete_prefix("origin/")
     _, found = git.call("rev-parse", "--verify", "--quiet", "#{BASE}^{commit}")
     unless found
       # An explicit refspec: a single-branch checkout would otherwise leave the fetched branch in FETCH_HEAD only.
-      branch = BASE.delete_prefix("origin/")
       git.call("fetch", "--quiet", "--depth=1", "origin", "+refs/heads/#{branch}:refs/remotes/#{BASE}")
       _, found = git.call("rev-parse", "--verify", "--quiet", "#{BASE}^{commit}")
     end
@@ -59,9 +59,11 @@ class SystemBudget
     merge_base, known = git.call("merge-base", BASE, "HEAD")
     since = known ? merge_base.strip : BASE
     diff, _ = git.call("diff", "--name-only", since, "--", "test/system")
+    # A test written but not yet added counts too: the author sees the growth before staging it.
+    untracked, _ = git.call("ls-files", "--others", "--exclude-standard", "--", "test/system")
 
     new(files: CiPlan.files(GLOB), timings: CiPlan.timings,
         base_timings: present ? YAML.safe_load(base_yaml) || {} : {},
-        touched: diff.lines.map(&:strip).grep(/_test\.rb\z/))
+        touched: (diff.lines + untracked.lines).map(&:strip).grep(/_test\.rb\z/).uniq)
   end
 end
