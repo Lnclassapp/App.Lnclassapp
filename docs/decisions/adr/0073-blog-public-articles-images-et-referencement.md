@@ -142,7 +142,7 @@ Le HTML est d'abord canonisé par `ActionText::Content` (les `figure[data-trix-a
 ### 4.7 Compteur de lectures (complète ADR-0049 et ADR-0067)
 
 - `RecordArticleRead` (policy `ReadArticlePolicy`) compte une lecture si l'article est publié, la requête est un `GET` HTML, l'acteur n'est pas `team` (aperçu compris), et `Entities::Communication::ArticleRead.countable?` l'admet. Elle **refuse** :
-  - un **préchargement** : en-tête `Sec-Purpose`, `X-Sec-Purpose` ou `Purpose` contenant `prefetch` (Turbo 8 précharge un lien au survol ; la liste pose aussi `data-turbo-prefetch="false"`, UDR-0064) ;
+  - un **préchargement** : en-tête `Sec-Purpose`, `X-Sec-Purpose` ou `Purpose` contenant `prefetch` (Turbo 8 précharge un lien au survol ; la liste pose aussi `data-turbo-prefetch="false"`, UDR-0064) ; *amendement du 2026-10-03 :* ou un **aperçu**, `X-Purpose: preview` (Safari), le motif étant `prefetch|preview` sur les quatre en-têtes ;
   - un **robot qui se déclare** : agent vide, ou motif `bot(?:[/\-;)]|\z)|\bbot\b|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|curl|wget|python|headless` (le robot d'aperçu de WhatsApp compris). *Amendement du 2026-10-03 : « bot » ne compte que suivi d'un séparateur ou seul, pour ne plus écarter les téléphones CUBOT (« CUBOT X30 Build/… »).*
   Sinon succès sans écriture. Un échec du compteur ne bloque jamais la page.
 - **Une requête SQL**, sans transaction ni verrou applicatif : `UPDATE articles SET reads_count = reads_count + 1 WHERE id = $1 AND status = 'published'`. `updated_at` n'est pas touché (le `lastmod` du plan du site ne bouge pas) ; la colonne n'est pas indexée, la mise à jour reste HOT.

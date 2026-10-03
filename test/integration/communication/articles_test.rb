@@ -165,10 +165,11 @@ class Communication::ArticlesTest < ActionDispatch::IntegrationTest
     assert_equal 4, reads(article)
   end
 
-  test "BL-17: neither a prefetch, a HEAD request nor another format counts" do
+  test "BL-17: neither a prefetch, a preview (X-Purpose: preview), a HEAD request nor another format counts" do
     article = create_article(author: @author)
 
     %w[Sec-Purpose X-Sec-Purpose Purpose].each { read(article, headers: { it => "prefetch" }) }
+    read(article, headers: { "X-Purpose" => "preview" })
     head blog_article_path(article.slug), headers: { "User-Agent" => PHONE }
     get blog_article_path(article.slug, format: :json), headers: { "User-Agent" => PHONE }
 

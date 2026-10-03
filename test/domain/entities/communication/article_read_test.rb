@@ -42,10 +42,10 @@ module Entities
         assert countable?("Mozilla/5.0 (Linux; Android 12; CUBOT KINGKONG 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36")
       end
 
-      test "un préchargement, annoncé par l'un des trois en-têtes, n'est pas une lecture" do
-        assert_equal %w[Sec-Purpose X-Sec-Purpose Purpose], ArticleRead::PURPOSE_HEADERS
+      test "un préchargement ou un aperçu, annoncé par l'un des quatre en-têtes, n'est pas une lecture" do
+        assert_equal %w[Sec-Purpose X-Sec-Purpose Purpose X-Purpose], ArticleRead::PURPOSE_HEADERS
         [ { "Sec-Purpose" => "prefetch" }, { "Sec-Purpose" => "prefetch;prerender" }, { "X-Sec-Purpose" => "prefetch" },
-          { "Purpose" => "Prefetch" } ].each do |headers|
+          { "Purpose" => "Prefetch" }, { "X-Purpose" => "preview" }, { "X-Purpose" => "Preview" } ].each do |headers|
           assert_not countable?(BROWSER, headers), headers.inspect
         end
       end
