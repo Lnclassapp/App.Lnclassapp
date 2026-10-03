@@ -82,7 +82,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`catalogue-niveau-eleve`](catalogue-niveau-eleve/memo.md) | livré sur `fix/catalogue-eleve-son-niveau` | L'élève ne voit, n'ouvre et ne commence que les cours de son niveau (et de sa série, ou communs) ; 404 ailleurs (amendements UDR-0013, ADR-0035) |
 | [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | décision, grill clos (Q1 à Q14) | Échéances (prochaine séance, d'après les jours de l'enseignant ; assignation d'exercices seulement) et aide (FAQ, WhatsApp, appel). Paiement et annonces sortis dans leurs propres chantiers, durée abandonnée |
 | [`abonnement-mobile-money`](abonnement-mobile-money/memo.md) | cadrage, grill non commencé | Abonnement élève payé par Wave (Checkout API, webhooks signés) ; le paiement revient au plan le 2026-10-02 (grill de `fonctions-espace-eleve`, Q1) |
-| [`mode-sombre`](mode-sombre/memo.md) | en PR | Le téléphone en thème sombre reçoit toute l'application en sombre, par la valeur des tokens, sans toucher aux écrans ; impression claire (décision du porteur du 2026-10-03, UDR-0065, amendement UDR-0005) |
+| [`mode-sombre`](mode-sombre/memo.md) | en PR ([#152](https://github.com/Lnclassapp/App.Lnclassapp/pull/152)) | Le téléphone en thème sombre reçoit toute l'application en sombre, par la valeur des tokens, sans toucher aux écrans ; impression claire (décision du porteur du 2026-10-03, UDR-0065, amendement UDR-0005) |
 
 ## Backlog
 

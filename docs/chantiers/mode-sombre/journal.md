@@ -33,6 +33,6 @@
 | | |
 |---|---|
 | **Livré le** | 2026-10-03, en PR brouillon vers `Develop` |
-| **PR** | *(voir l'index des chantiers)* |
+| **PR** | [#152](https://github.com/Lnclassapp/App.Lnclassapp/pull/152) |
 | **ADR produits** | aucun |
 | **UDR produits** | UDR-0065 ; amendement UDR-0005 |
