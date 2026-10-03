@@ -85,6 +85,8 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`refonte-homepage`](refonte-homepage/memo.md) | livré ([#145](https://github.com/Lnclassapp/App.Lnclassapp/pull/145)) | Page d'accueil publique refaite autour d'une seule décision, élève ou enseignant, visible sans défiler au téléphone ; photo de 1,3 Mo → 22 Ko ; enseignants vouvoyés ; les matières de la grille élève ; alignée sur les UDR-0059, 0062 et 0063 livrées en parallèle (UDR-0064, amendements UDR-0012 et UDR-0005) |
 | [`mode-sombre`](mode-sombre/memo.md) | livré ([#152](https://github.com/Lnclassapp/App.Lnclassapp/pull/152)) | Le téléphone en thème sombre reçoit toute l'application en sombre, par la valeur des tokens, sans toucher aux écrans ; impression claire (décision du porteur du 2026-10-03, UDR-0065, amendement UDR-0005) |
 | [`interrupteur-theme`](interrupteur-theme/memo.md) | en PR ([#155](https://github.com/Lnclassapp/App.Lnclassapp/pull/155)) | Interrupteur clair / sombre, à côté de l'avatar sur grand écran et dans « Mon profil » au téléphone ; choix retenu sur l'appareil par un cookie, rendu par le serveur (amendement UDR-0065) |
+| [`retrait-debugbar`](retrait-debugbar/memo.md) | livré sur `fix/retrait-debugbar`, sans PR | Gem `debugbar` retirée (porteur, 2026-10-03) : après l'envoi d'une image, son middleware faisait répondre `500` à toutes les requêtes de développement jusqu'au redémarrage ; Action Cable revient au défaut de Rails |
+
 
 ## Backlog
 

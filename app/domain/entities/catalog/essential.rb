@@ -16,7 +16,7 @@ module Entities
       validates :name, presence: true, length: { maximum: NAME_MAX }
       validates :subtitle, length: { maximum: SUBTITLE_MAX }
       validates :course_id, presence: true
-      validates :status, inclusion: { in: ContentStatus::VALUES }
+      validates :status, inclusion: { in: Entities::Shared::ContentStatus::VALUES }
 
       def name=(value)
         @name = value&.squish

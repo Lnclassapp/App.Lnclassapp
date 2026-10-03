@@ -21,7 +21,7 @@ module UseCases
         return Shared::Result.failure(:not_found) if course.nil?
 
         # Un cours n'a pas de parent : sa chaîne est publiée dès qu'il l'est.
-        transition = Entities::Catalog::ContentStatus.transition(from: course.status, to: "published", parent_published: true)
+        transition = Entities::Shared::ContentStatus.transition(from: course.status, to: "published", parent_published: true)
         return transition if transition.failure?
 
         @transaction.call do

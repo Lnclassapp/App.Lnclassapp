@@ -20,7 +20,7 @@ module UseCases
         essential = @essentials.find_by_slug(slug:)
         return Shared::Result.failure(:not_found) if essential.nil?
 
-        allowed_transition = Entities::Catalog::ContentStatus.transition(from: essential.status, to: "published",
+        allowed_transition = Entities::Shared::ContentStatus.transition(from: essential.status, to: "published",
                                                                          parent_published: essential.course_published?)
         return allowed_transition if allowed_transition.failure?
 

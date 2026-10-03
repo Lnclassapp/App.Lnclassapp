@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_03_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_03_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -80,6 +80,50 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_120000) do
     t.bigint "question_id", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id", "position"], name: "index_answers_on_question_id_and_position", unique: true
+  end
+
+  create_table "article_images", force: :cascade do |t|
+    t.string "alt", limit: 150
+    t.bigint "article_id"
+    t.integer "byte_size", null: false
+    t.string "content_type", null: false
+    t.datetime "created_at", null: false
+    t.integer "height", null: false
+    t.string "public_id", limit: 14, null: false
+    t.datetime "updated_at", null: false
+    t.integer "width", null: false
+    t.index ["article_id"], name: "index_article_images_on_article_id"
+    t.index ["public_id"], name: "index_article_images_on_public_id", unique: true
+    t.check_constraint "byte_size >= 1 AND byte_size <= 1048576", name: "article_images_byte_size"
+    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "article_images_content_type_values"
+    t.check_constraint "width >= 1 AND width <= 1600 AND height >= 1 AND height <= 1600", name: "article_images_sides"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.datetime "archived_at"
+    t.bigint "author_id", null: false
+    t.string "cover_alt", limit: 150
+    t.bigint "cover_image_id"
+    t.datetime "created_at", null: false
+    t.string "excerpt", limit: 200
+    t.string "public_id", limit: 14, null: false
+    t.datetime "published_at"
+    t.integer "reads_count", default: 0, null: false
+    t.string "signature", default: "team", null: false
+    t.string "slug", limit: 140, null: false
+    t.string "status", default: "draft", null: false
+    t.string "title", limit: 120, null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["public_id"], name: "index_articles_on_public_id", unique: true
+    t.index ["published_at", "id"], name: "index_articles_published", order: :desc, where: "((status)::text = 'published'::text)"
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
+    t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "articles_archived_at"
+    t.check_constraint "char_length(btrim(title::text)) >= 1", name: "articles_title_present"
+    t.check_constraint "reads_count >= 0", name: "articles_reads_count_positive"
+    t.check_constraint "signature::text = ANY (ARRAY['team'::character varying, 'author'::character varying]::text[])", name: "articles_signature_values"
+    t.check_constraint "status::text = 'draft'::text OR published_at IS NOT NULL AND btrim(excerpt::text) <> ''::text", name: "articles_published_complete"
+    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'published'::character varying, 'archived'::character varying]::text[])", name: "articles_status_values"
   end
 
   create_table "audit_events", force: :cascade do |t|
@@ -828,6 +872,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_120000) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions", on_delete: :restrict
+  add_foreign_key "article_images", "articles", on_delete: :restrict
+  add_foreign_key "articles", "article_images", column: "cover_image_id", on_delete: :restrict
+  add_foreign_key "articles", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "audit_events", "users", column: "actor_id", on_delete: :restrict
   add_foreign_key "backup_codes", "users", on_delete: :cascade
   add_foreign_key "classroom_assignments", "classrooms", on_delete: :restrict

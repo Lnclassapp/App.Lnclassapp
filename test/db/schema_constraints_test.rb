@@ -8,8 +8,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   JOIN_CODE_LENGTH = defined?(Entities::Classroom::JoinCode::LENGTH) ? Entities::Classroom::JoinCode::LENGTH : 5
 
   PUBLIC_ID_TABLES = %w[users drenas schools classrooms classroom_assignments exercises exercise_sessions
-                        knowledge_gaps import_reports school_join_requests].freeze
-  SLUG_TABLES = %w[drenas levels series materials courses essentials].freeze
+                        knowledge_gaps import_reports school_join_requests articles article_images].freeze
+  SLUG_TABLES = %w[drenas levels series materials courses essentials articles].freeze
 
   # table => [[columns], where] for every unique index beyond public_id and slug. The
   # condition is compared without casts, parentheses nor spaces: PostgreSQL rewrites it.
@@ -72,7 +72,9 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
                           "status" => %w[queued validating importing completed rejected failed] },
-    "classroom_plan_entries" => { "school_type" => %w[public private] }
+    "classroom_plan_entries" => { "school_type" => %w[public private] },
+    "articles" => { "status" => %w[draft published archived], "signature" => %w[team author] }, # ADR-0074 §4.1
+    "article_images" => { "content_type" => %w[image/jpeg image/png image/webp] }
   }.freeze
 
   # ADR-0036 : the closed list of cascades, from a parent to its technical rows.
@@ -225,6 +227,56 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     create_teacher_departure(teacher:, school:, detached_by: create_user(role: "school_admin"))
     assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::User.where(id: teacher.id).delete_all } }
     assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::School.where(id: school.id).delete_all } }
+  end
+
+  # ADR-0074 §4.1 : un article, ses images ; la base refuse ce que le domaine refuse déjà.
+  test "BL: the database refuses an article or an image the blog must never hold" do
+    author = create_team_member(team_role: "content", second_factor: false)
+    article = lambda do |**columns|
+      Orm::Article.insert!({ public_id: SecureRandom.base58(14), slug: "a-#{SecureRandom.hex(4)}", title: "Réviser",
+                             author_id: author.id, created_at: Time.current, updated_at: Time.current, **columns })
+    end
+    image = lambda do |**columns|
+      Orm::ArticleImage.insert!({ public_id: SecureRandom.base58(14), content_type: "image/jpeg", byte_size: 1000,
+                                  width: 1600, height: 900, created_at: Time.current, updated_at: Time.current, **columns })
+    end
+    article.call
+    image.call
+    article.call(status: "published", excerpt: "Un plan.", published_at: Time.current)
+    article.call(status: "archived", excerpt: "Un plan.", published_at: Time.current, archived_at: Time.current)
+    image.call(byte_size: 1_048_576, width: 1, height: 1)
+
+    {
+      "a status in French" => -> { article.call(status: "publié") },
+      "an unknown signature" => -> { article.call(signature: "x") },
+      "a blank title" => -> { article.call(title: "  ") },
+      "a published article without excerpt" => -> { article.call(status: "published", excerpt: " ", published_at: Time.current) },
+      "a published article without date" => -> { article.call(status: "published", excerpt: "Un plan.") },
+      "an archived article without archived_at" => -> { article.call(status: "archived", excerpt: "Un plan.", published_at: Time.current) },
+      "an archive date on a draft" => -> { article.call(archived_at: Time.current) },
+      "a negative reads count" => -> { article.call(reads_count: -1) },
+      "an image of 1601 px" => -> { image.call(width: 1601) },
+      "an image of 0 px" => -> { image.call(height: 0) },
+      "a GIF" => -> { image.call(content_type: "image/gif") },
+      "an empty file" => -> { image.call(byte_size: 0) },
+      "1 MB and 1 byte" => -> { image.call(byte_size: 1_048_577) }
+    }.each do |label, insert|
+      assert_raises(ActiveRecord::CheckViolation, label) { connection.transaction(requires_new: true) { insert.call } }
+    end
+  end
+
+  test "BL: an article and its images keep their author, their article and their cover (RESTRICT)" do
+    assert_equal({ "author_id" => "users", "cover_image_id" => "article_images" },
+                 connection.foreign_keys("articles").to_h { [ it.column, it.to_table ] })
+    assert_equal({ "article_id" => "articles" }, connection.foreign_keys("article_images").to_h { [ it.column, it.to_table ] })
+    assert((connection.foreign_keys("articles") + connection.foreign_keys("article_images")).all? { it.on_delete == :restrict })
+    assert_equal({ "slug" => 140, "title" => 120, "excerpt" => 200, "cover_alt" => 150 },
+                 connection.columns("articles").select { it.limit && it.type == :string }.to_h { [ it.name, it.limit ] }.except("public_id"))
+    assert_equal 150, connection.columns("article_images").find { it.name == "alt" }.limit
+    assert_equal [ [ %w[published_at id], "status='published'" ] ],
+                 connection.indexes("articles").reject(&:unique).filter_map { [ it.columns, it.where&.gsub(/::[\w ]+|[()"\s]/, "") ] if it.where }
+    assert_includes connection.indexes("articles").map(&:columns), %w[author_id]
+    assert_not connection.indexes("articles").any? { it.columns.include?("reads_count") }
   end
 
   test "every exposed table has a 14 character public_id with a unique index" do

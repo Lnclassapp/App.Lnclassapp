@@ -50,7 +50,7 @@ module Repositories
       private
 
       def editable_attributes(course)
-        { name: course.name, subtitle: course.subtitle, content: RichTextSanitizer.call(course.content) }
+        { name: course.name, subtitle: course.subtitle, content: Repositories::Shared::RichTextSanitizer.call(course.content) }
       end
 
       # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
