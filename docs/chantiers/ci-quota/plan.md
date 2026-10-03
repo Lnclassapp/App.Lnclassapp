@@ -23,6 +23,8 @@ Lot 7 — Simplifier et accélérer : deux jobs côte à côte, unit et system, 
   ↓
 Lot 8 — Automatiser : budget de croissance de la suite système, 15 s par chantier, 82 fichiers avec leur durée
   ↓
+Lot 9 — Accélérer : la suite système en trois parts équilibrées (quatre jobs jouent bin/ci), horloge ≈ 3 min 30
+  ↓
 Chantier selection-par-carte-de-couverture (ouvert le 2026-10-03, hors de ce chantier)
 ```
 
@@ -75,7 +77,7 @@ Chantier selection-par-carte-de-couverture (ouvert le 2026-10-03, hors de ce cha
 - **Fichiers**     : `.github/workflows/ci.yml` *(jobs `plan`, `unit`, `system`, `ci`)*, `config/ci.rb` *(en-tête)*, `test/guards/ci_plan_test.rb`
 - **Dépend de**    : Lot 6
 - **Test associé** : `test/guards/ci_plan_test.rb` (quatre jobs, les deux jobs font `bin/ci`, preuve par `ci` seulement, brouillon sans verdict)
-- **Done quand**   : le run de la PR de ce lot est vert ; **horloge du job `system` ≤ 10 min**, ≈ 13 minutes facturées pour un run complet, ≈ 2 pour une PR prouvée. Chiffres dans le [journal](journal.md).
+- **Done quand**   : le run de la PR de ce lot est vert. **Mesuré** (run 476) : `unit` 2 min 43, `system` 9 min 56 sur un runner lent, horloge 10 min 16, 15 minutes facturées. Le plafond n'est pas tenu par ce seul lot : lot 9.
 
 ## Lot 8 — Automatiser : budget de croissance de la suite système
 
@@ -84,6 +86,14 @@ Chantier selection-par-carte-de-couverture (ouvert le 2026-10-03, hors de ce cha
 - **Dépend de**    : —
 - **Test associé** : `test/guards/system_budget_test.rb`
 - **Done quand**   : un fichier système sans durée est refusé ; un chantier qui ajoute plus de 15 s de durée enregistrée est refusé ; ce chantier passe (0 s ajoutée).
+
+## Lot 9 — Accélérer : la suite système en trois parts
+
+- **Couche**       : CI
+- **Fichiers**     : `.github/workflows/ci.yml` *(matrice `part: [1, 2, 3]` du job `system`, `CI_GROUP=system:k/3`, captures par part)*, `config/ci.rb` *(en-tête)*, `test/guards/ci_plan_test.rb`
+- **Dépend de**    : Lot 7
+- **Test associé** : `test/guards/ci_plan_test.rb` (seule matrice : les parts de `system` ; chaque fichier système dans une part et une seule)
+- **Done quand**   : le run de la PR est vert ; **horloge du run ≤ 4 min** (≈ 7 min 30 avec un seul job système), ≈ 17 minutes facturées. Si une part dépasse 4 min, passer à quatre parts (même coût facturé).
 
 ## Lot 4 — Accélérer (à ouvrir selon le lot 3)
 

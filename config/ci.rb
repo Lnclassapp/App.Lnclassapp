@@ -3,8 +3,8 @@
 # Order: cheapest and most fundamental first.
 #
 # The steps are grouped (ADR-0064). bin/ci plays every group, in this order, locally; GitHub plays them in two
-# jobs side by side, « unit » (every group but system) and « system » (ADR-0069 §9: the minutes are counted per
-# job, the clock stays under ten minutes). `CI_GROUP=<group>[,<group>…]` or a part of a sharded group
+# kinds of jobs side by side, « unit » (every group but system) and three parts of « system » (ADR-0069 §9: the
+# minutes are counted per job, the clock stays under ten minutes). `CI_GROUP=<group>[,<group>…]` or a part of a sharded group
 # (`system:2/4`) plays a subset.
 require_relative "../script/ci/plan"
 

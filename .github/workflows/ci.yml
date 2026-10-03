@@ -6,8 +6,9 @@
 #   - a draft pull request waits: the run starts when it is marked ready for review;
 #   - a tree that already got a green « ci » is not replayed (a promotion, a re-run): about two minutes;
 #   - a pull request that touches documentation alone is green without playing the checks;
-#   - otherwise the whole bin/ci, in two jobs side by side (ADR-0069 §9: ten minutes of clock at most on any runner):
-#     « unit » plays every group but the system tests, « system » plays the system tests alone.
+#   - otherwise the whole bin/ci, in four jobs side by side (ADR-0069 §9: ten minutes of clock at most on any runner):
+#     « unit » plays every group but the system tests, « system » plays the system tests in three parts of
+#     similar duration (script/ci/test_timings.yml), the only step longer than two minutes.
 # « plan » decides (a few seconds) and « ci » gives the verdict and publishes the proof of the tested tree.
 # test/guards/ci_plan_test.rb holds these rules.
 name: CI
@@ -146,13 +147,18 @@ jobs:
           path: ${{ github.workspace }}/coverage
           if-no-files-found: ignore
 
-  # The system tests alone, the longest group: 7 of the 9 minutes bin/ci takes on a runner.
+  # The system tests alone, the longest group (7 of the 9 minutes bin/ci takes on a runner), in three parts of
+  # similar recorded duration: about 3 minutes of clock each. A red part does not cancel the others.
   system:
-    name: system
+    name: system ${{ matrix.part }}/3
     needs: plan
     if: needs.plan.outputs.code == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [ 1, 2, 3 ]
     permissions:
       contents: read
 
@@ -172,19 +178,19 @@ jobs:
       # system tests run in a real headless browser, never under rack_test.
       - name: Run bin/ci
         env:
-          CI_GROUP: system
+          CI_GROUP: system:${{ matrix.part }}/3
         run: bin/ci
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v7
         if: failure()
         with:
-          name: screenshots
+          name: screenshots-${{ matrix.part }}
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
   # The verdict the branches wait for. Green when nothing had to be replayed (a proven tree, documentation alone),
-  # or when both jobs are green: only then does the run prove its tree, ci-tree-<tree>, kept 30 days, so that a
+  # or when every test job is green (« system » stands for its three parts): only then does the run prove its tree, ci-tree-<tree>, kept 30 days, so that a
   # later promotion of the same files is green in about two minutes. A draft (« plan » skipped) gets no verdict.
   ci:
     name: ci

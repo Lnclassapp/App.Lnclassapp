@@ -8,8 +8,9 @@ load File.expand_path("../../config/ci.rb", __dir__) unless defined?(CI_PLAN)
 class CiPlanTest < Minitest::Test
   GITHUB = File.expand_path("../../.github", __dir__)
   WORKFLOW = File.join(GITHUB, "workflows/ci.yml")
-  # ADR-0069 §9 : the two jobs that play bin/ci, side by side.
+  # ADR-0069 §9 : the jobs that play bin/ci, side by side; « system » is a matrix of SYSTEM_PARTS parts.
   TEST_JOBS = %w[unit system].freeze
+  SYSTEM_PARTS = 3
 
   def workflow = YAML.safe_load_file(WORKFLOW, aliases: true)
 
@@ -27,13 +28,14 @@ class CiPlanTest < Minitest::Test
   # The titles bin/ci plays for a selection, Setup left out.
   def titles(selection) = CI_PLAN.steps_for(selection).drop(1).map(&:title)
 
-  # ADR-0069 §9 : four jobs, no matrix. « plan » decides, « unit » and « system » play bin/ci side by side (a run
-  # stays under ten minutes of clock on any runner), « ci » is the one status the branches wait for.
-  def test_plan_decides_two_jobs_play_bin_ci_and_ci_gives_the_verdict
+  # ADR-0069 §9 : « plan » decides, « unit » and the parts of « system » play bin/ci side by side (a run stays
+  # under ten minutes of clock on any runner), « ci » is the one status the branches wait for. The only matrix is
+  # the parts of « system ».
+  def test_plan_decides_the_test_jobs_play_bin_ci_and_ci_gives_the_verdict
     assert_equal %w[plan unit system ci], jobs.keys
     jobs.each do |name, job|
-      assert_equal name, job["name"]
-      assert_nil job["strategy"], "pas de matrice : #{name}"
+      assert_equal name, job["name"].to_s.split.first, "le job « #{name} » porte son nom"
+      assert_nil job["strategy"], "pas de matrice : #{name}" unless name == "system"
     end
     TEST_JOBS.each do |name|
       assert_equal "plan", jobs.dig(name, "needs")
@@ -48,7 +50,10 @@ class CiPlanTest < Minitest::Test
   # checked again at the promotion.
   def test_the_two_jobs_add_up_to_bin_ci_and_a_partial_run_leaves_out_the_performance_tests_only
     assert_equal "${{ needs.plan.outputs.unit }}", bin_ci("unit").dig("env", "CI_GROUP")
-    assert_equal "system", bin_ci("system").dig("env", "CI_GROUP")
+    assert_equal (1..SYSTEM_PARTS).to_a, jobs.dig("system", "strategy", "matrix", "part")
+    assert_equal "system:${{ matrix.part }}/#{SYSTEM_PARTS}", bin_ci("system").dig("env", "CI_GROUP")
+    split = CI_PLAN.split("system", SYSTEM_PARTS)
+    assert_equal CiPlan.files("test/system/**/*_test.rb").sort, split.flatten.sort, "chaque fichier système dans une part, une seule"
     full = draw_script[/&& unit="([a-z,]+)"/, 1]
     partial = draw_script[/\|\| unit="([a-z,]+)"/, 1]
     assert full && partial, "le tirage écrit les groupes de « unit » pour un run complet et pour un run partiel"
