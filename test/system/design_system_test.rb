@@ -153,6 +153,23 @@ end
     assert_no_selector "#{dialog}[open]"
   end
 
+  # UDR-0064 : le déclencheur d'une entrée de rôle fait 56 px de haut et toute la largeur de sa cellule.
+  test "a modal trigger can be large and full width, and still opens its dialog" do
+    trigger = find("button[aria-controls=demo-modal-entry]")
+
+    assert_equal 56, trigger.style("height")["height"].to_f.round
+    assert page.evaluate_script(<<~JS, trigger), "le déclencheur large ne prend pas toute la largeur"
+      Math.round(arguments[0].getBoundingClientRect().width) === Math.round(arguments[0].closest("div.w-full").getBoundingClientRect().width)
+    JS
+
+    trigger.click
+
+    assert_selector "dialog#demo-modal-entry[open]"
+    find("dialog#demo-modal-entry[open]").send_keys(:escape)
+
+    assert_no_selector "dialog#demo-modal-entry[open]"
+  end
+
   test "the dropdown follows the menu button pattern" do
     button = find("button[aria-controls=demo-menu]")
     button.click

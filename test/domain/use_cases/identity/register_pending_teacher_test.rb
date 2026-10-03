@@ -3,7 +3,8 @@ require "test_helper"
 module UseCases
   module Identity
     # CP-11, CP-14 (ADR-0063): a teacher whose school has no code for them signs up by its national code (or by the school
-    # chosen in its DRENA): the account is created without any school, with a pending request, and signed in — nothing more.
+    # chosen in its DRENA). ADR-0073: while validation is paused, the request is approved at once — the teacher is attached
+    # to the school and signed in, in one transaction.
     class RegisterPendingTeacherTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 9, 28, 12)
       KEY = "k" * 32
@@ -59,10 +60,11 @@ module UseCases
       class FakeJoinRequests
         include Ports::School::JoinRequestRepositoryPort
 
-        def initialize(journal, pending: {}, refuse: false)
+        def initialize(journal, pending: {}, refuse: false, decided: false)
           @journal = journal
           @pending = pending
           @refuse = refuse
+          @decided = decided
         end
 
         # Le plafond est tenu par le repository, sous verrou (B2) : le faux le reproduit à partir de `pending`.
@@ -73,6 +75,13 @@ module UseCases
           @journal << [ :join_request, teacher_id, school_id, at ]
           Shared::Result.success(Entities::School::JoinRequest.new(id: 5, public_id: "req-5", teacher_id:, school_id:,
                                                                    status: "pending", teacher_name: "Awa Koné"))
+        end
+
+        def approve(id:, decided_by_id:, via:, at:)
+          return Shared::Result.failure(:conflict, errors: { base: [ :already_decided ] }) if @decided
+
+          @journal << [ :approved, id, decided_by_id, via, at ]
+          Shared::Result.success
         end
       end
 
@@ -103,32 +112,39 @@ module UseCases
         )
       end
 
-      def register(actor: nil, taken: [], pending: {}, refuse: false, **attributes)
+      def register(actor: nil, taken: [], pending: {}, refuse: false, decided: false, **attributes)
         dto = Dtos::Identity::PendingTeacherRegistrationInput.new(
           last_name: "Koné", first_name: "Awa", gender: "female", contact: "0501020304", pin: "4821", pin_confirmation: "4821",
           material_slug: "svt", **attributes
         )
         RegisterPendingTeacher.new(
-          registrations: FakeRegistrations.new(@journal, taken:), schools: @schools, join_requests: FakeJoinRequests.new(@journal, pending:, refuse:),
+          registrations: FakeRegistrations.new(@journal, taken:), schools: @schools, join_requests: FakeJoinRequests.new(@journal, pending:, refuse:, decided:),
           taxonomy: FakeTaxonomy.new, sessions: FakeSessions.new(@journal), policy: Policies::Identity::RegisterTeacherPolicy.new,
           transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW)
         ).call(actor:, dto:, ip: "1.2.3.4", user_agent: "Chrome")
       end
 
-      test "CP-11: by the national code, a teacher without school, a pending request, a session — in one transaction" do
+      test "ADR-0073: by the national code, an account, a request approved at once with no decider, a session — in one transaction" do
         result = register(national_code: "012 345")
 
         assert result.success?
         token = result.value.token
-        assert_equal [ [ :user, "0501020304", "teacher", 5, "4821" ], [ :join_request, 41, 31, NOW ],
+        assert_equal [ [ :user, "0501020304", "teacher", 5, "4821" ], [ :join_request, 41, 31, NOW ], [ :approved, 5, nil, "auto", NOW ],
                        [ :session, 41, Entities::Identity::SecretDigest.hmac(token, key: KEY), "1.2.3.4", "Chrome", NOW ] ], @journal
-        assert_not(@journal.any? { it.first == :teacher_school }, "aucun rattachement avant la validation")
         assert_equal 1, @transaction.calls
+      end
+
+      test "ADR-0073: an approval refused by the base rolls the whole registration back" do
+        result = register(national_code: "012345", decided: true)
+
+        assert_equal [ :conflict, { base: [ :already_decided ] } ], [ result.code, result.errors ]
+        assert_empty @journal
       end
 
       test "CP-11: by the school chosen in its DRENA" do
         assert register(school_public_id: "sch-lca", drena_public_id: "drn-1").success?
         assert_includes @journal, [ :join_request, 41, 31, NOW ]
+        assert_includes @journal, [ :approved, 5, nil, "auto", NOW ]
       end
 
       test "unknown national code, inactive or draft school: the same error on the field, nothing is written" do

@@ -1,7 +1,8 @@
 require "test_helper"
 
 # CP-11, CP-14 (ADR-0063, UDR-0050): « Mon établissement n'a pas encore de code Lnclass ». The school is designated by its
-# national code, or chosen in the list of its DRENA (UDR-0024); the account is created waiting for a validation.
+# national code, or chosen in the list of its DRENA (UDR-0024). ADR-0073: while validation is paused, the teacher is attached
+# at once and lands where a teacher signed up by code lands.
 class Identity::PendingTeacherRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/identity/pending_teacher_registration_input.attributes".freeze
   PAGE = "identity.teacher_registrations.new".freeze
@@ -43,25 +44,26 @@ class Identity::PendingTeacherRegistrationsControllerTest < ActionDispatch::Inte
     assert_select "turbo-frame#schools select[name='teacher_registration[school_public_id]'] option[value='#{@school.public_id}']"
   end
 
-  test "CP-11: by the national code, the account is created without school, waiting, signed in" do
+  test "ADR-0073: by the national code, the teacher is attached at once, signed in, and sent to pick their classes" do
     post pending_teacher_registrations_path, params: { teacher_registration: registration_params(national_code: "012 345") }
 
-    assert_redirected_to pending_account_path
-    assert_equal I18n.t("identity.pending_teacher_registrations.create.done"), flash[:notice]
+    assert_redirected_to teacher_classrooms_path
+    assert_equal I18n.t("identity.pending_teacher_registrations.create.welcome"), flash[:notice]
     teacher = Orm::User.find_by!(contact: "0501020304")
-    assert_equal [ "teacher", 0 ], [ teacher.role, Orm::TeacherSchool.where(teacher:).count ]
-    assert_equal [ [ @school.id, "pending" ] ], Orm::SchoolJoinRequest.where(teacher:).pluck(:school_id, :status)
+    assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher:).pluck(:school_id, :primary)
+    assert_equal [ [ @school.id, "approved", "auto", nil ] ],
+                 Orm::SchoolJoinRequest.where(teacher:).pluck(:school_id, :status, :decided_via, :decided_by_id)
     assert cookies[:session_token].present?
     follow_redirect!
-    assert_select "#pending_account", text: /Lycée Classique d'Abidjan/
+    assert_response :success
   end
 
   test "CP-11: by the school chosen in its DRENA" do
     post pending_teacher_registrations_path,
          params: { teacher_registration: registration_params(drena_public_id: @drena.public_id, school_public_id: @school.public_id) }
 
-    assert_redirected_to pending_account_path
-    assert_equal [ @school.id ], Orm::SchoolJoinRequest.pluck(:school_id)
+    assert_redirected_to teacher_classrooms_path
+    assert_equal [ [ @school.id, "approved" ] ], Orm::SchoolJoinRequest.pluck(:school_id, :status)
   end
 
   test "an unknown national code, or none at all, comes back in 422 with its message; the list keeps its DRENA" do
@@ -77,6 +79,7 @@ class Identity::PendingTeacherRegistrationsControllerTest < ActionDispatch::Inte
     assert_equal 0, Orm::User.count
   end
 
+  # Plus aucune demande ne reste en attente pendant la pause ; le plafond tient toujours pour celles d'avant (ADR-0073).
   test "CP-14: a school with 5 pending requests refuses a sixth, with a named message" do
     5.times { create_join_request(school: @school) }
 

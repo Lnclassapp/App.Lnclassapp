@@ -78,3 +78,10 @@ Sur téléphone, la landing de l'UDR-0012 empile six sections : héros, matière
 - L'UDR-0012 ne gouverne plus que la landing à partir de 1 024 px. Sur téléphone et tablette, les sections de présentation disparaissent : un élève sur téléphone n'a pas besoin qu'on lui présente Lnclass pour entrer.
 - **L'invitation aux applications** sera rendue quand les applications Android seront publiées. C'est un amendement de cette UDR, porté par le chantier `app-android`.
 - La connexion et la récupération du PIN, autres écrans d'entrée partagés (grill Q9), sont épurées par leur propre lot, selon la règle de l'UDR-0057. Elles n'ont pas de maquette.
+
+## Amendement du 2026-10-03 — le slogan
+
+*Décision du porteur (revue de la PR de [`refonte-homepage`](../../chantiers/refonte-homepage/memo.md)). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Le slogan de l'application est **« Lnclass, tu comprends chap chap ! »**, partout. Dans l'écran d'entrée (§3, 3.), le `h1` devient « Lnclass, tu comprends » (26 px) puis « chap chap ! » (40 px, `brand`), souligné du même trait ondulé `gold`. « Forcément, tu comprends chap chap » de la maquette n'est plus la consigne.
+- La famille ordinateur (UDR-0064) porte le même slogan en un seul `h1`.
