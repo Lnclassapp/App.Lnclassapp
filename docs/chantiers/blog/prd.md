@@ -212,6 +212,8 @@ Contexte borné : **`communication`** (défaut du grill 12, à confirmer). Contr
 | Pages publiques de contenu indexables | 0 | ≥ 5 articles à la sortie (porteur) | |
 | p95 serveur `/blog` et `/blog/:slug` (ADR-0067) | — | < 100 ms | |
 | Poids HTML d'un article de 1 500 mots (ADR-0067) | — | < 150 Ko | |
-| JavaScript ajouté aux pages de lecture | — | 0 Ko (Trix seulement en gestion, chargé à la demande) | |
+| JavaScript ajouté aux pages de lecture | 43,0 Ko gzip (point d'entrée commun) | ~~0 Ko~~ ≤ budget ADR-0051 (60 Ko gzip) ; Trix seulement en gestion, chargé à la demande *(cible modifiée le 2026-10-03, voir sous le tableau)* | +2,6 Ko gzip : 45,6 Ko (mesuré le 2026-10-03, `bin/check-asset-budget`) ; Trix et `image_upload` hors du point d'entrée |
 | Poids d'une image d'article servie | — | ≤ plafond de l'ADR-0073 | |
 | Lectures par article, 30 jours après publication | — | suivi, sans cible en V1 | |
+
+> **Modification du 2026-10-03 (phase 5, challenge C4)** — la cible « 0 Ko de JavaScript ajouté aux pages de lecture » n'est pas tenue. Aucune page de lecture n'utilise de contrôleur du blog, mais tous les contrôleurs Stimulus sont enregistrés depuis le point d'entrée commun (`controllers/index.js`, ADR-0051) : `communication--cover-picker`, `communication--image-alts`, `communication--character-count` et la partie images de `rich-text-editor` y entrent, soit **+2,6 Ko gzip** (43,0 → 45,6 Ko, point d'entrée de la base `f3494b80` recompilé et comparé ; le challenger en mesurait +3,9 par somme des modules). Le budget de l'ADR-0051 (60 Ko) est tenu. Les déplacer derrière un `import()` demande un enregistrement paresseux des contrôleurs (observer le DOM, cadres Turbo et flux compris) pour toutes les pages : un mécanisme nouveau, ni simple ni sûr dans cette passe de corrections. Cible ramenée au budget de l'ADR-0051 ; l'enregistrement paresseux des contrôleurs de gestion est un chantier de suivi (`optimize`).
