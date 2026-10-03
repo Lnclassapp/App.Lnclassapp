@@ -3,6 +3,8 @@
 // ADR  : 0051, 0060, 0073 · UDR : 0065 (§3.4.3) · mêmes règles de réduction que identity/photo_picker_controller.js
 
 const QUALITY = 0.82
+// An upload that never answers (a stalled connection) is given up: the editor and « Enregistrer » are free again.
+export const UPLOAD_TIMEOUT = 60_000
 
 // The image decodes, but into nothing (0 × 0, or no visible pixel: a WebP cut down to its header, for instance).
 export class EmptyImage extends Error {}
@@ -46,10 +48,12 @@ export async function shrinkImage(file, { maxSide }) {
 }
 
 // XMLHttpRequest: the only way to follow the progress of an upload. 201 { public_id, sgid, url, width, height }.
-export function uploadImage(file, { url, onProgress = () => {} }) {
+// A network error, no answer within timeout (ms) or an aborted request is a failure.
+export function uploadImage(file, { url, onProgress = () => {}, timeout = UPLOAD_TIMEOUT }) {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest()
     request.open("POST", url)
+    request.timeout = timeout
     request.responseType = "json"
     request.setRequestHeader("Accept", "application/json")
     request.setRequestHeader("X-CSRF-Token", document.querySelector("meta[name=csrf-token]")?.content || "")
@@ -62,7 +66,7 @@ export function uploadImage(file, { url, onProgress = () => {} }) {
       else if (request.status === 422 && body.error) reject(new Refusal("server", body.error))
       else reject(new Refusal(request.status === 403 ? "forbidden" : "failed"))
     })
-    request.addEventListener("error", () => reject(new Refusal("failed")))
+    for (const type of ["error", "timeout", "abort"]) request.addEventListener(type, () => reject(new Refusal("failed")))
     const data = new FormData()
     data.append("article_image[file]", file)
     request.send(data)

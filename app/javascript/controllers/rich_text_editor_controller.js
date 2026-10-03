@@ -34,7 +34,9 @@ export default class extends Controller {
     maxBytes: Number,
     maxSide: Number,
     maxCount: Number,
-    messages: Object
+    messages: Object,
+    // Delay before an upload that never answers is given up, in ms; absent, lib/image_upload's (60 s).
+    uploadTimeout: Number
   }
 
   async connect() {
@@ -155,7 +157,8 @@ export default class extends Controller {
       const { uploadImage } = await this.module()
       const sent = this.queue.then(() => {
         this.statusTarget.textContent = this.messagesValue.uploading
-        return uploadImage(file, { url: this.uploadUrlValue, onProgress: (percent) => attachment.setUploadProgress(percent) })
+        return uploadImage(file, { url: this.uploadUrlValue, timeout: this.uploadTimeoutValue || undefined,
+                                   onProgress: (percent) => attachment.setUploadProgress(percent) })
       })
       this.queue = sent.catch(() => {})
       const image = await sent

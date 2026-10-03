@@ -214,6 +214,32 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
     assert_equal 0, Orm::Article.count, "rien n'est enregistré sans l'image"
   end
 
+  test "an upload that never answers gives up after its delay: the editor and the cover are free again" do
+    visit teams_articles_path
+    assert_no_page_reload do
+      click_on "teams_articles_new"
+      within "turbo-frame#modal dialog[open]" do
+        editor.click
+        # 60 s in production; one second here, through the value the controllers read.
+        page.execute_script(<<~JS)
+          document.querySelector("#article_editor").setAttribute("data-rich-text-editor-upload-timeout-value", "1000")
+          document.querySelector("#article_cover").setAttribute("data-communication--cover-picker-upload-timeout-value", "1000")
+        JS
+
+        hold_uploads do
+          attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
+          assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("failed")), wait: UPLOAD_WAIT
+          assert_no_selector "trix-editor figure"
+          assert_no_selector "#article_editor[aria-busy]"
+
+          attach_file "article_cover_file", fixture("photos/photo.jpg")
+          assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("failed")), wait: UPLOAD_WAIT
+          assert_no_selector "#article_cover[aria-busy]"
+        end
+      end
+    end
+  end
+
   test "editing: an image taken out of the text hides its row, undo brings it back, Enter returns to the text, the cover clears" do
     first = create_article_image(alt: "Le premier schéma")
     second = create_article_image(fixture: "photos/photo.png")

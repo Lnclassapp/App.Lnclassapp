@@ -7,7 +7,8 @@ const fill = (template, values) => template.replace(/%\{(\w+)\}/g, (token, key) 
 
 export default class extends Controller {
   static targets = ["input", "preview", "placeholder", "remove", "status", "spinner", "error", "id"]
-  static values = { uploadUrl: String, maxSide: Number, maxBytes: Number, accept: Array, messages: Object }
+  // uploadTimeout: delay before an upload that never answers is given up, in ms; absent, lib/image_upload's (60 s).
+  static values = { uploadUrl: String, maxSide: Number, maxBytes: Number, accept: Array, messages: Object, uploadTimeout: Number }
 
   connect() {
     this.form = this.element.closest("form")
@@ -56,7 +57,7 @@ export default class extends Controller {
     try {
       const { prepareImage, uploadImage } = await import("../../lib/image_upload")
       const ready = await prepareImage(file, { accept: this.acceptValue, maxSide: this.maxSideValue, maxBytes: this.maxBytesValue })
-      const image = await uploadImage(ready, { url: this.uploadUrlValue })
+      const image = await uploadImage(ready, { url: this.uploadUrlValue, timeout: this.uploadTimeoutValue || undefined })
       this.idTarget.value = image.public_id
       this.previewTarget.src = image.url
       this.show(true)
