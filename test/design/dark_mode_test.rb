@@ -5,6 +5,7 @@ require "test_helper"
 class DarkModeTest < ActiveSupport::TestCase
   STYLESHEET = Rails.root.join("app/assets/stylesheets/application.tailwind.css").read
   DARK_MEDIA = "@media screen and (prefers-color-scheme: dark)"
+  CHOSEN_MEDIA = "@media screen {\n  :root[data-theme=\"dark\"]"
 
   # Paires des composants (ComponentsHelper : boutons, badges, toasts ; pages : texte sur surfaces), [texte, fond, minimum].
   TEXT_PAIRS = [
@@ -18,11 +19,21 @@ class DarkModeTest < ActiveSupport::TestCase
 
   def light = @light ||= tokens(STYLESHEET[/@theme \{(.*?)\n\}/m, 1])
   def dark = @dark ||= tokens(dark_block)
+  def chosen_dark = tokens(chosen_block)
 
   test "the dark block applies to the screen only, so a printed page stays light" do
     assert_includes STYLESHEET, DARK_MEDIA
     assert_equal 1, STYLESHEET.scan("prefers-color-scheme").size, "un seul bloc sombre"
     assert_match(/color-scheme: dark;/, dark_block)
+    assert_includes dark_block, ":root:not([data-theme=\"light\"]) {", "un choix « clair » l'emporte sur un téléphone sombre"
+  end
+
+  # Amendement du 2026-10-03 : l'interrupteur pose data-theme="dark" ; ce bloc-là porte exactement les mêmes valeurs.
+  test "the block chosen by the switch carries exactly the values of the system block" do
+    assert_includes STYLESHEET, CHOSEN_MEDIA
+    assert_equal dark, chosen_dark
+    assert_equal dark_block[/  :root[^\n]*\{\n(.*?)\n  \}/m, 1], chosen_block[/  :root[^\n]*\{\n(.*?)\n  \}/m, 1], "ombres et color-scheme compris"
+    assert_match(/:root\[data-theme="dark"\] dialog::backdrop \{\s*background-color: rgb\(0 0 0/, chosen_block)
   end
 
   test "every literal colour of the theme has its dark value, and nothing else is redefined" do
@@ -49,13 +60,21 @@ class DarkModeTest < ActiveSupport::TestCase
   end
 
   test "the layout tells the browser both schemes, before the stylesheet arrives" do
-    assert_includes Rails.root.join("app/views/layouts/application.html.erb").read, '<meta name="color-scheme" content="light dark">'
+    layout = Rails.root.join("app/views/layouts/application.html.erb").read
+
+    assert_includes layout, '<meta name="color-scheme" content="<%= color_scheme_content %>">'
+    assert_includes layout, "tag.attributes(data: { theme: theme_preference })"
   end
 
   private
 
   def dark_block
     start = STYLESHEET.index(DARK_MEDIA) or flunk "bloc #{DARK_MEDIA} absent"
+    STYLESHEET[start...(STYLESHEET.index(CHOSEN_MEDIA) || STYLESHEET.size)]
+  end
+
+  def chosen_block
+    start = STYLESHEET.index(CHOSEN_MEDIA) or flunk "bloc du choix sombre absent"
     STYLESHEET[start..]
   end
 

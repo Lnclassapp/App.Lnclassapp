@@ -72,3 +72,22 @@ Un téléphone en thème sombre reçoit des pages claires. La grille de design d
 - Un nouveau couple texte/fond dans un composant doit respecter la règle d'inversion (§2.3) ; s'il ne la suit pas, il entre dans la liste des paires du test.
 - Interdit désormais : une couleur littérale dans la feuille hors des tokens et du bloc sombre, un voile ou une ombre teintés d'encre en sombre.
 - Les captures de référence sont dans `docs/design/captures/mode-sombre/`.
+
+## Amendement du 2026-10-03 — l'interrupteur clair / sombre
+
+*Chantier [`docs/chantiers/interrupteur-theme`](../../chantiers/interrupteur-theme/prd.md). Demande du porteur du 2026-10-03. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi. La §2.1 (« pas d'interrupteur ») est levée.*
+
+**Décision** — Un compte connecté choisit clair ou sombre ; le choix vaut pour toutes les pages de cet appareil, publiques comprises. Sans choix, l'application suit le téléphone.
+
+**Emplacements**
+- Écrans larges (`lg` et plus) : dans l'en-tête du shell, entre la pastille de rôle et l'avatar, un bouton icône `size-tap` (lune en clair, soleil en sombre), `role="switch"`, `aria-checked`, `aria-label` « Mode sombre ». Caché sous `lg`.
+- Téléphone et tablette (sous `lg`) : dans « Mon profil », après la carte du PIN, une carte « Apparence » (`#profile_theme`) : libellé « Mode sombre », indication `text-sm text-mute` « Retenu sur cet appareil. », interrupteur `role="switch"` sur toute la ligne (`min-h-tap`), piste `h-7 w-12` `bg-mute` puis `bg-brand` coché, pastille `size-5 bg-white` qui glisse de `translate-x-5`. Cachée à partir de `lg`.
+- Partial unique `shared/_theme_switch` (`variant: :icon | :card`). Les deux interrupteurs sont cachés (`hidden`) tant que le contrôleur `theme` n'a pas démarré.
+
+**Comportement** — Le contrôleur `theme` pose `data-theme` (« light » ou « dark ») sur `<html>`, met la meta `color-scheme` à la même valeur, écrit le cookie `theme` (un an, `SameSite=Lax`, `Secure` en HTTPS) et prévient l'autre interrupteur de la page (`theme:changed`). Aucun rechargement. Le serveur relit le cookie (`ThemeHelper`, « light » ou « dark » seulement) et rend `data-theme` et la meta dès le HTML.
+
+**Feuille** — Le bloc du téléphone devient `:root:not([data-theme="light"])` ; un second bloc `@media screen { :root[data-theme="dark"] }` porte exactement les mêmes valeurs. Impression toujours claire.
+
+**Vérification** — `test/helpers/theme_helper_test.rb`, `test/controllers/theme_preference_test.rb` (IT-01, IT-02), `test/system/identity/profile_test.rb` (IT-03), `test/design/dark_mode_test.rb` (IT-04 : identité des deux blocs).
+
+**Conséquence** — La page « Protection des données » mentionne ce second cookie (IT-05).
