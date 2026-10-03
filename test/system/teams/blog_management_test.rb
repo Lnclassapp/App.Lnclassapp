@@ -173,6 +173,66 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
     assert_equal 0, Orm::ArticleImage.count, "rien n'est stocké (BL-12)"
   end
 
+  test "editing: an image taken out of the text hides its row, undo brings it back, Enter returns to the text, the cover clears" do
+    first = create_article_image(alt: "Le premier schéma")
+    second = create_article_image(fixture: "photos/photo.png")
+    article = create_article(author: @member, status: "draft", cover: create_article_image, body: article_body_with(first, second))
+    first_row = "#article_image_#{first.public_id}"
+    second_row = "#article_image_#{second.public_id}"
+    visit teams_articles_path
+
+    assert_no_page_reload do
+      click_menu_action "tr#article_#{article.public_id}", t("teams.articles.menu.edit")
+      within "turbo-frame#modal dialog[open]" do
+        editor
+        assert_selector "#article_cover_preview[src='/blog/images/#{article.cover_image.public_id}']"
+        assert_selector "#article_images_title", text: "#{tf('images_title')} (2)"
+        within(second_row) { assert_text "#{tf('image_alt_label')} 2" }
+        assert_no_selector "trix-editor figure .attachment__size, trix-editor figure .attachment__name"
+
+        select_first_image
+        page.driver.browser.action.send_keys(:backspace).perform
+        assert_selector first_row, visible: :hidden
+        assert find("#{first_row} input", visible: :hidden).disabled?
+        assert_selector "#article_images_title", text: "#{tf('images_title')} (1)"
+        within(second_row) { assert_text "#{tf('image_alt_label')} 1" }
+
+        editor.send_keys([ :control, "z" ])
+        assert_selector first_row
+        assert_not find("#{first_row} input").disabled?
+        within(second_row) { assert_text "#{tf('image_alt_label')} 2" }
+
+        alt = find("#article_image_alts_#{second.public_id}")
+        alt.fill_in(with: "Le second schéma")
+        within(second_row) { assert_no_text tf("image_alt_missing") }
+        alt.send_keys(:enter)
+        assert page.evaluate_script("document.activeElement.matches('trix-editor#article_body')"), "Entrée ramène au texte"
+
+        mark_host_page
+        click_on t("teams.articles.edit_modal.submit")
+      end
+      assert_toast t("teams.articles.update.updated", title: article.title)
+      assert_no_selector "main[data-before-refresh]"
+
+      # « Retirer la couverture » empties the field the form sends; the modal is closed without saving.
+      click_menu_action "tr#article_#{article.public_id}", t("teams.articles.menu.edit")
+      within "turbo-frame#modal dialog[open]" do
+        click_on tf("cover_remove")
+        assert_selector "#article_cover_placeholder"
+        assert_no_selector "#article_cover_preview"
+        assert_no_selector "#article_cover_remove"
+        assert_equal "", find("#article_cover_public_id", visible: :hidden).value
+        assert page.evaluate_script("document.activeElement.id === 'article_cover_file'")
+        click_on t("teams.articles.edit_modal.cancel")
+      end
+      assert_no_selector "turbo-frame#modal dialog[open]"
+    end
+
+    article.reload
+    assert_equal [ first, second ], article.body.body.attachables.grep(Orm::ArticleImage)
+    assert_equal [ "Le premier schéma", "Le second schéma" ], [ first.reload.alt, second.reload.alt ]
+  end
+
   test "the course editor still refuses any image: no button, a dropped photo never reaches the server (BL-15)" do
     create_course(name: "Génétique et évolution")
     visit teams_imports_path
@@ -225,6 +285,16 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
   # The row of the panel « Images du texte » numbered n, waited for until the upload is done; its id.
   def assert_image_row(number)
     find("#article_images_list li:not([hidden])", text: "#{tf('image_alt_label')} #{number}", wait: UPLOAD_WAIT)[:id]
+  end
+
+  # The cursor on the first image of the text, as a click on it would put it.
+  def select_first_image
+    page.execute_script(<<~JS)
+      const element = document.querySelector("trix-editor")
+      const document_ = element.editor.getDocument()
+      element.focus()
+      element.editor.setSelectedRange(document_.getRangeOfAttachment(document_.getAttachments()[0]))
+    JS
   end
 
   # The address of the page answers with an image (a lazy image of the page itself may not be loaded yet).

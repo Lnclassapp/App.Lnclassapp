@@ -47,7 +47,11 @@ export default class extends Controller {
 
     const { default: Trix } = await import("trix")
     translate(Trix.config.lang, this.langValue, this.element)
-    if (this.images) this.pickButtonTarget.hidden = false
+    if (!this.images) return
+
+    // Under an image, only its caption: neither the file name nor its size in English units (« 23.4 KB »).
+    Trix.config.attachments.preview.caption = { name: false, size: false }
+    this.pickButtonTarget.hidden = false
   }
 
   disconnect() {
