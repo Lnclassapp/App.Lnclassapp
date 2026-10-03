@@ -338,6 +338,24 @@ class Teams::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]"
   end
 
+  test "BL-10: a published article whose title is corrected keeps its address, which still answers 200; a third same title gets -3" do
+    sign_in_as @content
+    2.times { post teams_articles_path, params: article_params(title: "Réviser le BEPC") }
+    article = Orm::Article.find_by!(slug: "reviser-le-bepc")
+    article.update_columns(status: "published", published_at: 1.day.ago)
+
+    patch teams_article_path(article.public_id), params: article_params(title: "Réviser le BEPC en 6 semaines"), as: :turbo_stream
+    post teams_articles_path, params: article_params(title: "Réviser le BEPC")
+
+    assert_equal "reviser-le-bepc", article.reload.slug
+    assert_equal %w[reviser-le-bepc reviser-le-bepc-2 reviser-le-bepc-3], Orm::Article.order(:id).pluck(:slug)
+    get blog_article_path("reviser-le-bepc")
+    assert_response :ok
+    assert_select "h1", text: "Réviser le BEPC en 6 semaines"
+    get blog_article_path("reviser-le-bepc-en-6-semaines")
+    assert_response :not_found
+  end
+
   test "removing the cover and an image of the text in one save deletes both, without a 500" do
     cover = create_article_image
     image = create_article_image(alt: "Un schéma")
