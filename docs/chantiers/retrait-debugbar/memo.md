@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré sur `fix/retrait-debugbar`, PR à ouvrir par le porteur |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `fix/retrait-debugbar` |
 | **Programme** | — |
