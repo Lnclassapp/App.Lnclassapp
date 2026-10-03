@@ -208,6 +208,16 @@ module Repositories
         assert_equal [ own.public_id, orphan.public_id ], updated.images.map(&:public_id)
       end
 
+      test "une pièce jointe sans sgid (contenu HTML de Trix, ou forgée) n'est pas une image illisible : elle part, l'article s'enregistre" do
+        image = create_article_image
+        body = %(<action-text-attachment content-type="text/html" content="&lt;hr&gt;"></action-text-attachment>) + article_body_with(image)
+
+        article = create(body:)
+
+        assert_equal [ image.id ], cited_ids(article)
+        assert_no_match "text/html", Orm::Article.find(article.id).body.body.to_html
+      end
+
       test "une image prise par un autre article entre l'assainissement et le rattachement : :conflict, rien n'est écrit" do
         image = create_article_image
         other = create_article
