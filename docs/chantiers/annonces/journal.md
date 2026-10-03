@@ -1,0 +1,53 @@
+# Journal — Annonces ciblées, programmables et écartables
+
+> Rempli **pendant** le chantier, pas reconstitué à la fin. C'est ici que se capitalise ce qui ne rentre ni dans un ADR ni dans un commit.
+
+## Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-10-03 | La V6 sort du backlog : le chantier `annonces` s'ouvre | Demande du porteur (« nous allons mettre en place la feature d'annonce ») | — (feuille de route à dater) |
+| 2026-10-03 | Trois auteurs : équipe, direction (officielle), enseignant (ses classes) | Grill + maquette de l'accueil élève validée par le porteur | ADR-0069 |
+| 2026-10-03 | Date de fin obligatoire (30 j par défaut, 90 j au plus), filtrée à la lecture | « L'auteur seul gère » laissait des annonces orphelines en ligne | ADR-0069 |
+| 2026-10-03 | Retrait par l'équipe et par la direction, distinct de l'archivage | Contenu déplacé destiné à des mineurs | ADR-0069 |
+| 2026-10-03 | Texte de 140 caractères, sans page de détail ; l'audio porte les détails | Choix du porteur | ADR-0069, UDR-0056 |
+| 2026-10-03 | Audio = fichier téléversé, pas de synthèse vocale | Choix du porteur, contre le design system §10 | UDR-0056 (écart assumé) |
+| 2026-10-03 | Un Lot D d'intégration porte les entrées de navigation | `role_homes_test` compte et suit chaque entrée : une entrée sans page casse tous les worktrees | — (plan) |
+
+## Ce qui a dérapé
+
+Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
+
+- **Cadrage, 2026-10-03** : le premier jet du memo suivait l'ADR-0045 à la lettre. La maquette du porteur, apportée en cours de grill, en contredisait sept points (auteurs, audio, image, officiel, signature, ordre, page de détail). Leçon : demander la maquette **avant** le grill, pas pendant.
+- **Cadrage** : le plan écrivait « DS-11 amendé » alors que les routes d'annonces vivent sous `/announcements` ; DS-11 tient tel quel. Corrigé avant le commit.
+
+## Ce qu'on a appris sur la codebase
+
+Découvertes sur du code existant, pièges, dépendances non documentées.
+
+- `Entities::Identity::Actor` ne porte pas l'établissement d'un élève (`school_id: nil`) ni sa classe : la lecture doit les résoudre (classe principale active → établissement).
+- Marcel, cité par l'ADR-0045, n'est appelé nulle part : les types de fichiers se lisent dans les octets (`Entities::Identity::ImageHeader`, ADR-0060).
+- `ui_toast` n'a pas d'emplacement d'action, et aucun motif « Annuler » n'existe : il naît au Lot 0.
+- `NAV_GRIDS` s'arrête à 5 colonnes ; l'équipe en a déjà 5.
+- `test/architecture/port_contracts_test.rb` exige un adaptateur dès qu'un port existe : un port ne peut pas être gelé seul au Lot 0.
+- Le contrôleur `Stimulus` s'enregistre par motif de fichier (`controllers/index.js`) : aucun manifeste partagé.
+
+## Dette laissée derrière
+
+Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| Enregistrer sa voix depuis le navigateur (webm/opus) | Hors périmètre ; formats non autorisés par l'ADR-0045 | à ouvrir si les auteurs le demandent |
+| Texte alternatif de l'image téléversée | Hors périmètre ; une image porteuse d'information est inaccessible | à ouvrir si les auteurs mettent l'information dans l'image |
+| Fonctions précises de la direction dans la signature | Pas de donnée en base | `espace-direction` (backlog) |
+| Signalement d'une annonce déplacée | La modération est réactive | à ouvrir après les premiers retours |
+
+## Clôture
+
+| | |
+|---|---|
+| **Livré le** | AAAA-MM-JJ |
+| **PR** | |
+| **ADR produits** | |
+| **UDR produits** | |

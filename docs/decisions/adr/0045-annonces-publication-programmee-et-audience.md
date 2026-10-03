@@ -6,7 +6,7 @@
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-23**, bloque la V6 |
 | **Remplace** | — |
-| **Remplacé par** | — |
+| **Remplacé par** | — *(amendé par [ADR-0069](./0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) le 2026-10-03, statut `Proposé` : §4 et §7)* |
 
 ---
 
