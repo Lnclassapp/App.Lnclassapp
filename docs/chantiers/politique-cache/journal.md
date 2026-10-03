@@ -145,6 +145,6 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 | | |
 |---|---|
 | **Livré le** | — |
-| **PR** | — |
+| **PR** | [#160](https://github.com/Lnclassapp/App.Lnclassapp/pull/160) (brouillon) |
 | **ADR produits** | [ADR-0075](../../decisions/adr/0075-politique-de-cache-reglee-sur-les-allers-retours.md) (proposé) |
 | **UDR produits** | — |
