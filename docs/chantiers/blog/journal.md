@@ -19,13 +19,21 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Migration renommée** `20261003120000_create_articles.rb` (le plan disait `20261004090000`) : Rails refuse une migration datée de plus d'un jour dans le futur.
 - **Assainisseur de l'ADR-0073 §6 inopérant tel qu'écrit** : le `:prune` de Loofah supprime `<action-text-attachment>` avant le filtre. Corrigé par `ArticlePrune`, qui n'épargne que la pièce jointe d'image d'article ; en mode article, `<img>` sort de la liste blanche (BL-16). Le mode des cours, fiches et imports est inchangé.
 - **Tests système non joués en local** au Lot 0 (pas de Chrome dans le conteneur au départ) : la CI les joue.
+- **Phase 5, revues : des échecs silencieux livrés verts** (corrections F1 à F11, 2026-10-03). `Rails.error` n'avait aucun abonné (le compteur « signalait » ses pannes à personne) ; `transition` rendait toujours `true` (deux archivages simultanés écrivaient deux fois) ; une collision de slug sur un article déjà enregistré était réessayée ; un `sgid` illisible faisait détruire les images citées ; `attach` rattachait une image prise entre-temps par un autre article ; `params.dig` sur une chaîne répondait 500. Chaque correction a son test vu rouge. Parade : pour chaque `rescue` et chaque écriture conditionnelle, écrire le test du cas qui échoue, pas seulement du cas nominal.
+- **Transaction de l'adaptateur jointe à celle du use case.** En corrigeant F8, l'échec rattrapé dans `ArticleRepository#save` laissait l'article écrit : en production la transaction de l'adaptateur rejoint celle du use case (`Repositories::Shared::Transaction#call`), et une exception rattrapée à l'intérieur ne l'annule pas. Les tests de l'adaptateur ne le voyaient pas : la transaction de test n'est pas joignable, celle de l'adaptateur y devient un point de sauvegarde. Corrigé par `requires_new: true` (`703b8475`), testé dans `Transaction#call`. Parade : tester un rattrapage d'échec d'écriture à l'intérieur de la transaction du use case.
+- **Lecture du bucket avant la règle de lecture** : `/blog/images/:public_id` téléchargeait le fichier avant de savoir si le lecteur avait le droit de le voir (image de brouillon demandée par un visiteur), et `Rack::ConditionalGet` ne répondait 304 qu'après le téléchargement. Corrigé (S1, `1ea47d78`) : `find` sans fichier, règle de lecture, puis 304 par `ETag` ou téléchargement.
+- **Test système instable sous charge** (R1) : l'état « en attente » d'un envoi s'observait sous un réseau ralenti ; sous charge l'envoi finissait avant l'assertion. Remplacé par un envoi retenu par le test (`hold_uploads`), dont l'alias pouvait lui-même manquer à une requête libérée juste avant la fin du bloc : l'action d'origine est gardée dans une variable. Cinq passages verts de suite sous charge (suite complète dans un autre worktree, charge 7 à 22 sur 4 cœurs).
+- **Challenge produit** : un titre au mot long (« Anticonstitutionnellement ») faisait défiler la page à 390 et 360 px (C1) ; le bouton de fichier de Trix restait titré « Attach Files » (C3) ; `X-Purpose: preview` était compté (C2). Aucun test ne mesurait un titre réel au téléphone.
+- **Reprise après une erreur d'API** au milieu de F7 : le test rouge non committé a été retrouvé dans l'arbre de travail et repris tel quel.
 
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
 - **Docs périmées, à ne pas suivre** (relevées par l'exploration du 2026-10-02) : `docs/guide/conventions.md` §7 (cliquet de couverture à 45 % : il désigne l'ancien dépôt, la CI impose ici 100 %, ADR-0024) et §8 (`OpenStruct` : abandonné, le contrat réel est `call` + `Shared::Result`, ADR-0026) ; `docs/blueprints/use_case.md` (même écart) ; `docs/workflows/feature.md` (« les ports `communication` existent déjà » : faux ici) ; `docs/guide/architecture.md` (cite un contrôleur de messages qui n'existe pas) ; `docs/guide/glossaire.md`, entrée SchoolStaff (fonction et second facteur, retirés par l'ADR-0065).
-- Le contexte `communication` porte déjà des pages publiques statiques sans table (`/aide`, UDR-0061 ; `/mission` et les trois pages juridiques, UDR-0063). Aucune table `communication` n'existe : les annonces (ADR-0045) ne sont pas codées.
+- **Une transaction ActiveRecord ouverte dans un adaptateur rejoint celle du use case** : un échec rattrapé à l'intérieur n'annule rien. Pour qu'un adaptateur annule ses propres écritures, `requires_new: true` (point de sauvegarde). Les tests transactionnels masquent l'écart (transaction de test non joignable).
+- **`Rack::ConditionalGet` répond 304 après l'action** : il ne fait rien économiser à une action qui lit un fichier. Pour éviter la lecture, `stale?`/`fresh_when` dans l'action, avant le téléchargement.
+- - Le contexte `communication` porte déjà des pages publiques statiques sans table (`/aide`, UDR-0061 ; `/mission` et les trois pages juridiques, UDR-0063). Aucune table `communication` n'existe : les annonces (ADR-0045) ne sont pas codées.
 
 ## Dette laissée derrière
 
@@ -33,7 +41,15 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| En développement, après l'envoi d'une image (blog **ou** photo de profil existante), toutes les requêtes répondent 500 (`JSON::GeneratorError "\xD0" from ASCII-8BIT to UTF-8`, gem debugbar) jusqu'au redémarrage du serveur | Préexistant, développement seulement (la production ne charge pas debugbar) ; hors du blog (challenge C5) | `bugfix` proposé : `debugbar-televersement-binaire` |
+| L'image d'un article archivé reste dans les caches (navigateur, relais) jusqu'à un an : `public, immutable` | Conséquence de l'adresse versionnée sans CDN ; coût consenti (ADR-0073 §5, amendement du 2026-10-03) | Aucun en V1 |
+| Le compteur de lectures peut être gonflé : ni plafond, ni dédoublonnage, ni limite de débit | Chiffre indicatif pour l'équipe, sans cookie ni IP par choix (ADR-0073 §4.7, §5) | Aucun en V1 ; à rouvrir si le chiffre sert à décider |
+| La purge des orphelines supprime aussi l'image d'une modale restée ouverte plus de 48 h : l'enregistrement la perd en silence | Délai aligné sur les fichiers jamais rattachés (ADR-0047) ; coût consenti (ADR-0073 §5) | Aucun en V1 |
+| JavaScript des pages de lecture : +2,6 Ko gzip (contrôleurs de gestion du blog dans le point d'entrée commun), budget ADR-0051 tenu | Enregistrement paresseux des contrôleurs : mécanisme nouveau pour toutes les pages (PRD §7 modifié, challenge C4) | `optimize` proposé : `controleurs-de-gestion-a-la-demande` |
+| `og:image` en WebP : les aperçus WhatsApp et Facebook n'ont pas été vérifiés sur un vrai partage | Pas de compte de test ni de partage réel depuis le conteneur (challenge C6) | Vérification manuelle au premier article publié ; si l'aperçu manque, variante JPEG de la couverture |
+| Une requête SQL par image du texte au rendu (Action Text résout chaque `sgid`) : N+1 borné à 10 | Déjà consenti par l'ADR-0073 §5, dans le budget de 100 ms (challenge C6) | Aucun en V1 |
+| Le cookie de session est posé pour un visiteur sur les pages HTML du blog | Préexistant : nonce CSP de toute page (ADR-0049) ; les images publiques n'en posent pas (challenge C6) | Aucun ; à traiter avec la CSP si besoin |
+| Une image prise par un autre article pendant un enregistrement rend « L'enregistrement n'a pas abouti. Réessayez. » ; au nouvel essai, l'image prise disparaît du texte sans message dédié | Course rare (deux modales sur la même image orpheline) ; F8 garantit seulement qu'aucune écriture partielle ne passe | Aucun en V1 |
 
 ## Clôture
 
