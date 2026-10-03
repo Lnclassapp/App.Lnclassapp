@@ -84,6 +84,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`abonnement-mobile-money`](abonnement-mobile-money/memo.md) | cadrage, grill non commencé | Abonnement élève payé par Wave (Checkout API, webhooks signés) ; le paiement revient au plan le 2026-10-02 (grill de `fonctions-espace-eleve`, Q1) |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré sur `fix/retrait-debugbar`, sans PR | Gem `debugbar` retirée (porteur, 2026-10-03) : après l'envoi d'une image, son middleware faisait répondre `500` à toutes les requêtes de développement jusqu'au redémarrage ; Action Cable revient au défaut de Rails |
 
+
 ## Backlog
 
 Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 2026-09-28 (la V2 en sort le jour même dans sa version simple, [`espace-direction-simple`](espace-direction-simple/memo.md)) : aucune n'est ouverte avant une décision datée du porteur ; leur périmètre, leurs chantiers et leurs questions sont au [§5 de la feuille de route](refonte-application/feuille-de-route.md#5-les-vagues). Pour un chantier, le memo dit où reprendre.
