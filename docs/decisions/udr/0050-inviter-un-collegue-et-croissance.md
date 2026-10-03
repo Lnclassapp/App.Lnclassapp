@@ -133,3 +133,10 @@ Un enseignant convaincu n'a aucun geste pour faire venir ses collègues ; il rec
 - **Copie du partage** : « Copier le lien » devient `ui_copy_button` (contrôleur `clipboard`) ; `identity--share` garde WhatsApp, SMS, le partage natif et le comptage, et compte la copie sur l'événement `clipboard:copied` (`recordCopy`). Le §4 « tout futur partage reprend `identity--share` » vaut pour les canaux ; la copie passe toujours par `clipboard`.
 - **Inviter un collègue** : retour « Classes » vers `teacher_classrooms_path`.
 - **Croissance** : retour « Accueil » ; infobulles « k enseignant », « Conversion par partage », « Cycle viral médian », « Élèves arrivés par enseignant actif » (UDR-0054 §3.4). Titre « Croissance · Équipe · Lnclass » (le suffixe écrit dans la locale disparaît).
+
+## Amendement du 2026-10-02 — validation en pause
+
+*Chantier [`docs/chantiers/validation-enseignants-en-pause`](../../chantiers/validation-enseignants-en-pause/prd.md), [ADR-0073](../adr/0073-validation-des-enseignants-en-pause.md). Statut : `Accepté` (porteur, 2026-10-02). Cette section fait foi en cas d'écart.*
+
+- **Inscription sans code** : sous-titre « Choisissez votre établissement : votre compte est ouvert tout de suite. ». Succès : session ouverte, redirection 303 vers `teacher_classrooms_path` avec le toast « Bienvenue ! Sélectionnez vos classes pour commencer. » (plus d'écran d'attente).
+- **Écran d'attente**, **collègues en attente** et **Enseignants en attente** de la fiche : inchangés ; ils ne servent plus qu'aux demandes d'avant la pause et aux comptes refusés.
