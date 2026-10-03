@@ -42,13 +42,18 @@ class SystemBudget
   # Reads the repository: the base is origin/Develop, fetched when the checkout does not have it (GitHub checks
   # out one commit). The change compared is the work tree, so an uncommitted test counts before its commit.
   def self.from_git(root: CiPlan::ROOT)
-    git = ->(*args) { Open3.capture2("git", *args, chdir: root, err: File::NULL) }
+    git = lambda do |*args|
+      out, status = Open3.capture2("git", *args, chdir: root, err: File::NULL)
+      [ out, status.success? ]
+    end
     _, found = git.call("rev-parse", "--verify", "--quiet", "#{BASE}^{commit}")
     unless found
-      git.call("fetch", "--quiet", "--depth=1", "origin", BASE.delete_prefix("origin/"))
+      # An explicit refspec: a single-branch checkout would otherwise leave the fetched branch in FETCH_HEAD only.
+      branch = BASE.delete_prefix("origin/")
+      git.call("fetch", "--quiet", "--depth=1", "origin", "+refs/heads/#{branch}:refs/remotes/#{BASE}")
       _, found = git.call("rev-parse", "--verify", "--quiet", "#{BASE}^{commit}")
     end
-    raise BaseUnavailable, "#{BASE} introuvable : git fetch origin Develop" unless found
+    raise BaseUnavailable, "#{BASE} introuvable : git fetch origin #{branch}" unless found
 
     base_yaml, present = git.call("show", "#{BASE}:#{CiPlan::TIMINGS.delete_prefix("#{CiPlan::ROOT}/")}")
     merge_base, known = git.call("merge-base", BASE, "HEAD")
