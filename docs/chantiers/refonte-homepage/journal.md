@@ -100,3 +100,7 @@ Neuf fichiers en conflit, tous résolus en gardant les deux côtés : composant 
 | Le mode sombre, prévu par la grille de design, exclu par l'UDR-0005 | « ajoute le mode sombre » | Il touche toute l'application, pas cette page : ouvert comme chantier distinct, `mode-sombre`, avec sa propre PR. Cette page n'a rien à changer, elle n'emploie que des tokens |
 
 La branche a de nouveau absorbé `Develop` (13 commits de CI, sans conflit), dont la garde « 15 s de tests système par chantier » : cette PR ajoute environ une seconde (0,36 s pour RH-03, 0,63 s pour le déclencheur large du design system).
+
+## Chapeau du héros (2026-10-03)
+
+Le porteur a comparé trois chapeaux et retenu la proposition de l'agent : « Révise l'essentiel du cours, fais tes exercices avec la correction et prépare tes interros avec tes enseignants. » Elle garde les verbes et la correction de sa deuxième proposition, et la brièveté de la troisième ; « l'essentiel du cours » renvoie aux fiches essentielles, « interros » parle aux élèves. Les badges restent présentés plus bas (quatre promesses). À 360 × 640, les deux entrées restent dans le premier écran (test RH-03).
