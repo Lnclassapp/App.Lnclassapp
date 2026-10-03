@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Teams::ArticleImagesController
-# Rôle : l'éditeur du blog envoie une image d'article ; 201 { public_id, sgid, url, width, height }, 422 { error }, 403 en JSON
+# Rôle : l'éditeur du blog envoie une image d'article ; 201 { public_id, sgid, url, width, height }, 422 { error }, 403 et 401 en JSON
 # ADR  : 0026, 0028, 0060, 0073 · UDR : 0065
 module Teams
   class ArticleImagesController < BaseController
@@ -17,6 +17,15 @@ module Teams
     end
 
     private
+
+    # Session expirée pendant la rédaction : l'envoi de l'éditeur (JSON) reçoit 401 { error }, qu'il traduit en « session
+    # expirée ». Redirigé vers la connexion, XMLHttpRequest suivrait le renvoi et lirait une page HTML : une panne réseau.
+    # Une requête HTML garde le renvoi vers la connexion de tout écran de l'équipe.
+    def require_authentication
+      return super if authenticated? || !request.format.json?
+
+      render json: { error: "unauthenticated" }, status: :unauthorized
+    end
 
     # Seul un vrai fichier téléversé compte ; une chaîne dans le paramètre vaut une absence de fichier.
     def uploaded_file

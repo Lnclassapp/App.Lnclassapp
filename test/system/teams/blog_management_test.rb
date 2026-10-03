@@ -240,6 +240,23 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
     end
   end
 
+  test "a session that expires while writing: the upload says so instead of blaming the connection" do
+    visit teams_articles_path
+    assert_no_page_reload do
+      click_on "teams_articles_new"
+      within "turbo-frame#modal dialog[open]" do
+        editor.click
+        Orm::Session.delete_all
+
+        attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
+        assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("expired")), wait: UPLOAD_WAIT
+        attach_file "article_cover_file", fixture("photos/photo.jpg")
+        assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("expired")), wait: UPLOAD_WAIT
+      end
+    end
+    assert_equal 0, Orm::ArticleImage.count
+  end
+
   test "editing: an image taken out of the text hides its row, undo brings it back, Enter returns to the text, the cover clears" do
     first = create_article_image(alt: "Le premier schéma")
     second = create_article_image(fixture: "photos/photo.png")

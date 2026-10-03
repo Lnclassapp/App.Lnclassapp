@@ -9,7 +9,10 @@ export const UPLOAD_TIMEOUT = 60_000
 // The image decodes, but into nothing (0 × 0, or no visible pixel: a WebP cut down to its header, for instance).
 export class EmptyImage extends Error {}
 
-// A named refusal: reason is a key of the form's image_messages (format, too_many, too_heavy, forbidden, failed), or
+// 401: the session expired while writing; 403: the account may not manage the blog. Any other answer is a failure.
+const STATUS_REASONS = { 401: "expired", 403: "forbidden" }
+
+// A named refusal: reason is a key of the form's image_messages (format, too_many, too_heavy, forbidden, expired, failed), or
 // "server", whose French text, written by the server (422 { error }), is in detail.
 export class Refusal extends Error {
   constructor(reason, detail = "") {
@@ -64,7 +67,7 @@ export function uploadImage(file, { url, onProgress = () => {}, timeout = UPLOAD
       const body = request.response || {}
       if (request.status === 201) resolve(body)
       else if (request.status === 422 && body.error) reject(new Refusal("server", body.error))
-      else reject(new Refusal(request.status === 403 ? "forbidden" : "failed"))
+      else reject(new Refusal(STATUS_REASONS[request.status] || "failed"))
     })
     for (const type of ["error", "timeout", "abort"]) request.addEventListener(type, () => reject(new Refusal("failed")))
     const data = new FormData()

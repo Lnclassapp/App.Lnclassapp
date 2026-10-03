@@ -77,8 +77,15 @@ class Teams::ArticleImagesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "un visiteur est renvoyé à la connexion, rien n'est stocké" do
+  test "session expirée pendant la rédaction : l'envoi de l'éditeur (JSON) reçoit 401 { error }, rien n'est stocké" do
     assert_nothing_stored { upload(jpeg) }
+
+    assert_response :unauthorized
+    assert_equal({ "error" => "unauthenticated" }, json)
+  end
+
+  test "un visiteur sans JSON est renvoyé à la connexion, comme sur tout écran de l'équipe" do
+    assert_nothing_stored { post teams_article_images_path, params: { article_image: { file: jpeg } } }
 
     assert_redirected_to new_session_path
   end
