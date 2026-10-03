@@ -65,6 +65,17 @@ class Teams::ArticleImagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, ActiveStorage::Blob.count
   end
 
+  test "un paramètre article_image qui n'est pas un objet (chaîne, liste) : 422 « Choisissez une image. », jamais un 500" do
+    sign_in_as @member
+
+    [ { article_image: "texte" }, { article_image: [ "a", "b" ] }, {} ].each do |params|
+      assert_nothing_stored { post teams_article_images_path, params:, headers: JSON_ACCEPT }
+
+      assert_response :unprocessable_entity
+      assert_equal({ "error" => "Choisissez une image." }, json)
+    end
+  end
+
   test "BL-08 : le Terrain, l'enseignant, la direction et l'élève reçoivent 403 { error: \"forbidden\" }, rien n'est stocké" do
     [ create_team_member(team_role: "field"), create_teacher, create_school_admin, create_student ].each do |someone|
       sign_in_as someone

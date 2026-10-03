@@ -27,9 +27,10 @@ module Teams
       render json: { error: "unauthenticated" }, status: :unauthorized
     end
 
-    # Seul un vrai fichier téléversé compte ; une chaîne dans le paramètre vaut une absence de fichier.
+    # Seul un vrai fichier téléversé compte ; une chaîne, à la place du fichier ou de article_image, vaut une absence.
     def uploaded_file
-      file = params.dig(:article_image, :file)
+      image = params[:article_image]
+      file = image[:file] if image.is_a?(ActionController::Parameters)
       file if file.is_a?(ActionDispatch::Http::UploadedFile)
     end
 
