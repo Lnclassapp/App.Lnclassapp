@@ -218,8 +218,11 @@ module Repositories
           original.call(html, **options)
         end
 
-        result = @repository.create(dto: input(body: article_body_with(image), image_alts: { image.public_id => "Carte" }),
-                                    author_id: @author.id, at: @at)
+        # Dans la transaction du use case (Repositories::Shared::Transaction#call), comme en production.
+        result = Repositories::Shared::Transaction.new.call do
+          @repository.create(dto: input(body: article_body_with(image), image_alts: { image.public_id => "Carte" }),
+                             author_id: @author.id, at: @at)
+        end
 
         assert_equal [ :conflict, { base: [ :write_failed ] } ], [ result.code, result.errors ]
         # La prise simulée passe par la même connexion : l'annulation l'emporte avec le reste. Rien n'est à l'article neuf.

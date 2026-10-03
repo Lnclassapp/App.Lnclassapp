@@ -66,7 +66,8 @@ module Repositories
         cover = dto.cover_public_id && admissible(record).find_by(public_id: dto.cover_public_id)
         return ::Shared::Result.failure(:invalid, errors: { cover_public_id: [ :invalid ] }) if dto.cover_public_id && cover.nil?
 
-        Orm::Article.transaction do
+        # requires_new : dans la transaction du use case, un échec rattrapé ici n'annule que ce point de sauvegarde.
+        Orm::Article.transaction(requires_new: true) do
           previous = record.images.ids
           body = sanitized_body(canonical, record)
           record.assign_attributes(title: dto.title, excerpt: dto.excerpt, signature: dto.signature, cover_image: cover,
