@@ -154,6 +154,17 @@ class Communication::ArticlesTest < ActionDispatch::IntegrationTest
     assert_equal 2, reads(article)
   end
 
+  test "PRD §3: the same person who reads the article again is counted twice, visitor or signed in (no deduplication)" do
+    article = create_article(author: @author)
+
+    2.times { read(article) }
+    assert_equal 2, reads(article)
+
+    sign_in_as create_student(classroom: create_classroom)
+    2.times { read(article) }
+    assert_equal 4, reads(article)
+  end
+
   test "BL-17: neither a prefetch, a HEAD request nor another format counts" do
     article = create_article(author: @author)
 
