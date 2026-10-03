@@ -163,3 +163,10 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 - **Contrôleurs** : `clipboard`, `autofocus`, `autosubmit`, `search`, `download` s'ajoutent ; `modal` émet `modal:opened` après `showModal()` et gère le titre de l'onglet ; `classroom--join-code-copy` est supprimé.
 - **Utilitaire maison** : s'ajoute `summary-plain` (résumé de `<details>` sans marqueur). Aucun nouveau token.
 - Interdits ajoutés au §4 : l'attribut `autofocus` dans une vue, `title=` comme seule aide.
+
+## Amendement du 2026-10-03 — mode sombre par les tokens
+
+*Chantier [`docs/chantiers/mode-sombre`](../../chantiers/mode-sombre/prd.md), [UDR-0065](0065-mode-sombre-par-les-tokens.md). Décision du porteur du 2026-10-03. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- La **décision 4** (« Pas de mode sombre en V1 ») est **levée** : l'application suit le thème sombre du téléphone, en redéfinissant la valeur des tokens (UDR-0065).
+- L'interdiction de la variante `dark:` **reste** : le mode sombre ne passe que par les tokens, jamais par une classe dans une vue.
