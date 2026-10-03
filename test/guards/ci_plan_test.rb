@@ -25,8 +25,21 @@ class CiPlanTest < Minitest::Test
     job = jobs.fetch("ci")
     assert_equal "ci", job["name"]
     assert_equal 1, job.fetch("steps").count { it["run"] == "bin/ci" }, "« ci » lance bin/ci une fois"
-    assert_nil job.dig("env", "CI_GROUP"), "« ci » joue tout bin/ci, pas un groupe"
     assert_nil job["strategy"], "pas de matrice : un seul job"
+  end
+
+  # ADR-0069 §9 : a full run (promotion, drawn pull request) plays every group; any other run that replays the suite
+  # leaves out the import performance tests only (ADR-0039), checked again at the promotion.
+  def test_a_run_that_is_not_full_leaves_out_the_performance_tests_only
+    steps = jobs.dig("ci", "steps")
+    assert_equal "${{ steps.draw.outputs.group }}", steps.find { it["run"] == "bin/ci" }.dig("env", "CI_GROUP")
+
+    script = steps.find { it["id"] == "draw" }["run"]
+    assert_match(/\[ "\$full" = true \] && group="" \|\| group="([a-z,]+)"/, script)
+    partial = script[/\|\| group="([a-z,]+)"/, 1]
+    assert_equal CI_PLAN.groups.keys - [ "perf" ], partial.split(","), "le run partiel joue tout sauf « perf »"
+    perf = CI_PLAN.steps_for("perf").drop(1).map(&:title)
+    assert_equal full_run.drop(1).map(&:title) - perf, CI_PLAN.steps_for(partial).drop(1).map(&:title)
   end
 
   # ADR-0069 : 45 % of the runs were pushes that merged a tree their pull request had already tested.
@@ -93,12 +106,16 @@ class CiPlanTest < Minitest::Test
     end
   end
 
-  # A service container (PostgreSQL, superuser with a known password) is published on the loopback only.
-  def test_service_containers_are_published_on_the_loopback_only
-    ports = jobs.values.flat_map { (it["services"] || {}).values.flat_map { it["ports"] || [] } }
+  # ADR-0069 §9 : the PostgreSQL of the runner image, started before bin/ci; no service container to pull and start.
+  def test_postgresql_comes_from_the_image_and_starts_before_bin_ci
+    job = jobs.fetch("ci")
+    steps = job.fetch("steps")
+    postgres = steps.index { it["name"] == "PostgreSQL of the image" }
 
-    refute_empty ports
-    ports.each { assert_match(/\A127\.0\.0\.1:/, it.to_s, "port « #{it} » publié sur toutes les interfaces") }
+    assert_nil job["services"], "aucun conteneur de service"
+    assert postgres && postgres < steps.index { it["run"] == "bin/ci" }, "PostgreSQL démarre avant bin/ci"
+    assert_match(/systemctl start postgresql/, steps[postgres]["run"])
+    assert_match(/pg_isready -h 127\.0\.0\.1/, steps[postgres]["run"])
   end
 
   def test_the_split_is_deterministic_and_puts_the_longest_file_alone
