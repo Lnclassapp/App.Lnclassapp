@@ -238,6 +238,19 @@ class Teams::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Article.count
   end
 
+  test "a text citing an attachment whose sgid does not verify is a 422 under the text; its images stay attached" do
+    image = create_article_image
+    article = create_article(author: @content, status: "draft", body: article_body_with(image))
+    sign_in_as @content
+    tampered = %(<action-text-attachment sgid="#{image.attachable_sgid}x" content-type="image/jpeg"></action-text-attachment>)
+
+    patch teams_article_path(article.public_id), params: article_params(body: tampered)
+
+    assert_response :unprocessable_entity
+    assert_select "#article_body_error", text: error(:body, :image_unreadable)
+    assert_equal article.id, image.reload.article_id
+  end
+
   test "a slug taken twice by simultaneous creations is a 422 in the modal, never a 500; nothing is written" do
     create_article(title: "Réviser le BEPC en 4 semaines")
     sign_in_as @content

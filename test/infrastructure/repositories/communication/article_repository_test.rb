@@ -102,12 +102,32 @@ module Repositories
         foreign = create_article_image(article: create_article)
         user = %(<action-text-attachment sgid="#{@author.to_sgid(expires_in: nil, for: 'attachable')}"></action-text-attachment>)
         body = %(<h1>Semaine 1</h1><div onclick="x()">Texte<script>alert(1)</script></div><a href="javascript:x()">lien</a>) +
-               %(<action-text-attachment sgid="faux"></action-text-attachment>#{user}) + article_body_with(foreign, text: "fin")
+               user + article_body_with(foreign, text: "fin")
 
         article = create(body:)
 
         assert_equal %(<h2>Semaine 1</h2><div>Texte</div><a>lien</a><div>fin</div>), article.body
         assert_equal [], article.images
+      end
+
+      test "une pièce jointe dont le sgid ne se vérifie pas : :invalid sur le texte, aucune image n'est détruite ni rattachée" do
+        first = create_article_image
+        second = create_article_image
+        article = create(body: article_body_with(first, second))
+        tampered = article_body_with(first) + %(<action-text-attachment sgid="#{second.attachable_sgid}x" content-type="image/jpeg">) +
+                   "</action-text-attachment>"
+
+        [ -> { @repository.update(id: article.id, dto: input(body: tampered), at: @at + 1.day) },
+          -> { @repository.create(dto: input(body: %(<action-text-attachment sgid="faux"></action-text-attachment>)), author_id: @author.id, at: @at) } ]
+          .each do |save|
+          result = save.call
+
+          assert_equal :invalid, result.code
+          assert_equal({ body: [ :image_unreadable ] }, result.errors)
+        end
+        assert_equal [ article.id, article.id ], [ first.reload.article_id, second.reload.article_id ]
+        assert_equal [ first.id, second.id ], cited_ids(article)
+        assert_equal 1, Orm::Article.count
       end
 
       test "créer rattache la couverture et les images citées, avec leurs textes de remplacement, dans l'ordre du texte" do

@@ -11,6 +11,9 @@ module Repositories
       SLUG_INDEX = "index_articles_on_slug"
       # Deux collisions de slug concurrentes de suite : le geste se refait, il trouvera un slug libre.
       SLUG_TAKEN = ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
+      # Une pièce jointe dont le sgid ne se vérifie pas (altéré, ou signé par une autre clé) : l'assainir la retirerait,
+      # et l'image qu'elle désignait serait détruite comme n'étant plus citée. Le texte est refusé, rien n'est écrit.
+      UNREADABLE = ::Shared::Result.failure(:invalid, errors: { body: [ :image_unreadable ] })
 
       # Levée par persist, rattrapée par save hors de la transaction : rien n'est écrit.
       class SlugTaken < StandardError; end
@@ -50,16 +53,20 @@ module Repositories
 
       private
 
-      # Dans une transaction : le texte est canonisé (figures de Trix → pièces jointes) puis assaini avec les seules
-      # images admises (celles de l'article et celles qui ne sont encore à personne), l'article écrit, la couverture et
-      # les images citées rattachées, celles qu'il ne cite plus supprimées (fichier purgé après validation).
+      # Le texte est canonisé (figures de Trix → pièces jointes) et refusé s'il cite un sgid illisible. Puis, dans une
+      # transaction, il est assaini avec les seules images admises (celles de l'article et celles qui ne sont encore à
+      # personne), l'article écrit, la couverture et les images citées rattachées, celles qu'il ne cite plus supprimées
+      # (fichier purgé après validation).
       def save(record, dto:, at:)
+        canonical = ActionText::Content.new(dto.body).to_html
+        return UNREADABLE if unreadable?(canonical)
+
         cover = dto.cover_public_id && admissible(record).find_by(public_id: dto.cover_public_id)
         return ::Shared::Result.failure(:invalid, errors: { cover_public_id: [ :invalid ] }) if dto.cover_public_id && cover.nil?
 
         Orm::Article.transaction do
           previous = record.images.ids
-          body = sanitized_body(dto.body, record)
+          body = sanitized_body(canonical, record)
           record.assign_attributes(title: dto.title, excerpt: dto.excerpt, signature: dto.signature, cover_image: cover,
                                    cover_alt: dto.cover_alt, body:, updated_at: at)
           persist(record)
@@ -91,10 +98,15 @@ module Repositories
 
       def admissible(record) = Orm::ArticleImage.where(article_id: [ nil, record.id ].uniq)
 
-      def sanitized_body(html, record)
-        canonical = ActionText::Content.new(html).to_html
+      def sanitized_body(canonical, record)
         admitted = admissible(record).where(id: cited_ids(canonical)).ids.to_set
         Repositories::Shared::RichTextSanitizer.call(canonical, image_ids: admitted)
+      end
+
+      def unreadable?(html)
+        Nokogiri::HTML5.fragment(html).css(ATTACHMENT).any? do |node|
+          node["sgid"].present? && SignedGlobalID.parse(node["sgid"], for: ActionText::Attachable::LOCATOR_NAME).nil?
+        end
       end
 
       # Les images que cite le texte, dans son ordre, lues dans les sgid sans requête.

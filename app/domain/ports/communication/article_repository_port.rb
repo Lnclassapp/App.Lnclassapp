@@ -14,6 +14,7 @@ module Ports
       # ArticleInput valide. Dans la transaction : le texte est assaini, la couverture et les images qu'il cite sont
       # rattachées à l'article, avec leurs textes de remplacement (dto.image_alts).
       # → Result(Article) | failure(:invalid, errors: { cover_public_id: [:invalid] }) (couverture inconnue ou d'un autre article)
+      #   | failure(:invalid, errors: { body: [:image_unreadable] }) (pièce jointe au sgid illisible : rien n'est écrit)
       #   | failure(:conflict, errors: { base: [:write_failed] }) (slug pris deux fois de suite par des créations simultanées)
       def create(dto:, author_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
@@ -21,7 +22,7 @@ module Ports
 
       # Titre, résumé, texte, signature, couverture et textes de remplacement ; slug et état inchangés. Comme create, et
       # les images rattachées que l'article ne cite plus (ni texte ni couverture) sont supprimées, leur fichier purgé
-      # après validation. → Result(Article) | failure(:invalid, errors: { cover_public_id: [:invalid] })
+      # après validation. → Result(Article) | les mêmes échecs :invalid que create (un sgid illisible ne détruit aucune image).
       def update(id:, dto:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end
