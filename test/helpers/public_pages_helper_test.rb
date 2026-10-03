@@ -1,7 +1,8 @@
 require "test_helper"
 
 # UDR-0063 §3.1, §3.4 : le pied de page de la homepage, /aide et la carte d'aide lisent la même liste ; un lien
-# n'apparaît que si sa page est en ligne.
+# n'apparaît que si sa page est en ligne. UDR-0064 §3.5 : le lien « Blog » n'existe qu'à partir du premier article
+# publié (BL-06), au prix d'une requête par rendu.
 class PublicPagesHelperTest < ActionView::TestCase
   CONTROLLER = Communication::PagesController
 
@@ -40,5 +41,23 @@ class PublicPagesHelperTest < ActionView::TestCase
 
   test "an unknown page is refused" do
     assert_raises(ArgumentError) { public_page_links(%i[legal]) }
+  end
+
+  test "BL-06: no « Blog » link while no article is published, drafts and archived articles included" do
+    author = create_team_member(team_role: "content", second_factor: false)
+    create_article(author:, status: "draft")
+    create_article(author:, status: "archived")
+
+    assert_nil blog_link
+  end
+
+  test "BL-06: the « Blog » link appears with the first published article" do
+    create_article
+
+    assert_equal [ "Blog", "/blog" ], blog_link
+  end
+
+  test "blog_link costs one query a render, whatever the number of footers that read it" do
+    assert_queries_count(1) { 2.times { assert_nil blog_link } }
   end
 end

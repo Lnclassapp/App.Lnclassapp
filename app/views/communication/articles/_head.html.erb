@@ -1,0 +1,23 @@
+<%# 🌐 UI · communication/articles/_head — balises de l'aperçu partagé et du référencement, rendues dans content_for :head %>
+<%# Rôle : locals title:, description:, canonical: (absolue), type: ("website" | "article"), image: (Image | nil), published_on: (Date | nil) %>
+<%# UDR  : 0064 (§3.4) · ADR : 0073 (§4.6) — jeu fermé, dans cet ordre, sur l'hôte canonique ; jamais request.host %>
+<%= tag.meta(name: "description", content: description) %>
+<%= tag.link(rel: "canonical", href: canonical) %>
+<%= tag.meta(property: "og:site_name", content: PageTitleHelper::PRODUCT) %>
+<%= tag.meta(property: "og:locale", content: "fr_FR") %>
+<%= tag.meta(property: "og:type", content: type) %>
+<%= tag.meta(property: "og:title", content: title) %>
+<%= tag.meta(property: "og:description", content: description) %>
+<%= tag.meta(property: "og:url", content: canonical) %>
+<% if image %>
+  <%= tag.meta(property: "og:image", content: canonical_url(article_image_src(image))) %>
+  <%= tag.meta(property: "og:image:width", content: image.width) %>
+  <%= tag.meta(property: "og:image:height", content: image.height) %>
+  <%= tag.meta(property: "og:image:alt", content: image.alt) %>
+<% else %>
+  <%= tag.meta(property: "og:image", content: image_url("blog/partage.png", host: "https://#{Rails.configuration.x.canonical_host}")) %>
+  <%= tag.meta(property: "og:image:width", content: 1200) %>
+  <%= tag.meta(property: "og:image:height", content: 630) %>
+  <%= tag.meta(property: "og:image:alt", content: t(".default_image_alt")) %>
+<% end %>
+<%= tag.meta(property: "article:published_time", content: published_on.iso8601) if type == "article" %>

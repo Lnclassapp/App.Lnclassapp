@@ -10,7 +10,7 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     {
       "assume_ssl" => app.config.assume_ssl,
       "force_ssl" => app.config.force_ssl,
-      "http_root" => call.("http://lnclass.up.railway.app/").then { |r| [ r.status, r.headers["strict-transport-security"].to_s ] },
+      "http_page" => call.("http://lnclass.up.railway.app/mission").then { |r| [ r.status, r.headers["strict-transport-security"].to_s ] },
       "redirect_excludes" => %w[/up /].map { |path| app.config.ssl_options.dig(:redirect, :exclude).call(ActionDispatch::Request.new(Rack::MockRequest.env_for(path))) },
       "http_up" => call.("http://healthcheck.railway.app/up").status,
       "unknown_host" => call.("https://evil.example.org/").status,
@@ -33,7 +33,8 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     assert production["assume_ssl"]
     assert production["force_ssl"]
 
-    status, hsts = production["http_root"]
+    # A static public page: the probe's database is never connected, and the homepage now reads it (« Blog » link, UDR-0064).
+    status, hsts = production["http_page"]
     assert_equal 200, status, "derrière le proxy Railway, une requête est traitée comme HTTPS"
     assert_match(/max-age=\d+/, hsts)
   end

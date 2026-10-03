@@ -3,7 +3,8 @@ require "application_system_test_case"
 # UDR-0061 §3.2 à §3.8 (PRD §4, « Carte d'aide ») : « Besoin d'aide ? » ouvre une feuille ancrée en bas sur téléphone et
 # une modale centrée sur ordinateur, avec la FAQ, WhatsApp et l'appel ; le focus va sur la première ligne et revient
 # sur le bouton à la fermeture. Sans JavaScript, le bouton reste un lien vers /aide. Données du support : celles du
-# test (config/support.yml).
+# test (config/support.yml). UDR-0064 §3.5 (amendement de l'UDR-0061 §3.3) : le pied de la carte, « Plus sur Lnclass »,
+# porte « Blog » dès le premier article publié (BL-06), qui mène l'élève à la liste sans détour (BL-20).
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   TRIGGER = "[aria-controls=help-sheet]".freeze
@@ -118,7 +119,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
       open_sheet
 
       within(sheet) { assert_no_selector SobrietyAssertions::PRIMARY_ACTION }
-      assert_list_capped "#help-sheet ul"
+      assert_list_capped "#help-sheet ul.divide-y"
       assert_equal 3, sheet.all("ul > li .bg-brand-soft.text-brand-strong").size
     end
   end
@@ -130,5 +131,31 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
 
     click_on tr("trigger")
     assert_current_path help_path
+  end
+
+  def footer_links = within(sheet) { all("nav#help_sheet_links[aria-label='#{tr('footer.label')}'] li a").map(&:text) }
+
+  test "BL-06: without a published article, the footer of the sheet offers the mission and the legal pages, no « Blog »" do
+    create_article(author: create_team_member(team_role: "content", second_factor: false), status: "draft")
+    visit student_home_path
+    open_sheet
+
+    assert_equal [ "Notre mission", "Protection des données", "Conditions d'utilisation" ], footer_links
+    within(sheet) { assert_no_link "Blog" }
+  end
+
+  test "BL-06, BL-20: once an article is published, « Blog » leads the footer and opens the list, without redirect" do
+    create_article(title: "Réviser le BEPC en 4 semaines")
+    visit student_home_path
+    open_sheet
+
+    assert_equal [ "Blog", "Notre mission", "Protection des données", "Conditions d'utilisation" ], footer_links
+    assert_match(/\A#{Regexp.escape(tr('faq.title'))}/, focused_text)
+
+    within(sheet) { click_on "Blog" }
+
+    assert_current_path blog_path
+    assert_selector "h1", text: "Blog"
+    assert_link "Réviser le BEPC en 4 semaines"
   end
 end
