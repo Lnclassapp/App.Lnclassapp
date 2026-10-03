@@ -31,7 +31,6 @@
     <%= preload_link_tag "dm-sans-latin-wght-normal.woff2", as: "font", type: "font/woff2", crossorigin: "anonymous" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-    <%= debugbar_head if defined?(Debugbar) %>
   </head>
 
   <%# UDR-0054 §3.3 : auto-focus de page (premier champ en erreur, sinon le champ que l'écran déclare) %>
@@ -42,6 +41,5 @@
     <%# UDR-0006 : cible des modales CRUD (lien data-turbo-frame="modal"), vidée à la fermeture %>
     <%= turbo_frame_tag "modal" %>
     <%= content_for?(:body) ? yield(:body) : yield %>
-    <%= debugbar_body(nonce: content_security_policy_nonce) if defined?(Debugbar) %>
   </body>
 </html>
