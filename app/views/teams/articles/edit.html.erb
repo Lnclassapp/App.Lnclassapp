@@ -1,0 +1,8 @@
+<%# 🌐 UI · teams/articles/edit — modification d'un article, servie dans le frame « modal » (UDR-0065 §3.3) %>
+<%# Rôle : la modale de modification, partagée avec la publication refusée ; l'état se lit mais ne se change pas ici ; échec en 422 %>
+<%# ADR  : 0029, 0035, 0073 · UDR : 0006, 0014, 0054, 0065 %>
+<%# Le titre de l'onglet est posé ici aussi : la page se nomme elle-même (UDR-0054 §3.1), le partiel le reprend. %>
+<% page_title t("teams.articles.edit_modal.title") %>
+<%= turbo_frame_tag "modal" do %>
+  <%= render "edit_modal", article: @article, form: @form, refused: false %>
+<% end %>

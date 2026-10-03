@@ -1,0 +1,26 @@
+<%# 🌐 UI · teams/articles/_image_alt_row — une image du texte et son texte de remplacement (UDR-0065 §3.4.2) %>
+<%# Rôle : vignette, champ article[image_alts][<public_id>], badge « À compléter » ; rendue aussi en gabarit (jetons __…__) %>
+<%# ADR  : 0073 · UDR : 0065 · Stimulus : communication--image-alts (mark, backToEditor) %>
+<%# locals: (form:, image:, number:, error:) -%>
+<% field_id = "article_image_alts_#{image.public_id}" %>
+<%= tag.li id: "article_image_#{image.public_id}", class: "flex flex-col gap-3 sm:flex-row sm:items-start",
+           data: { sgid: image.sgid, "communication--image-alts-target": "row" } do %>
+  <%= tag.img src: image.url, alt: "", loading: "lazy", class: "size-16 shrink-0 rounded-sm bg-mist object-cover" %>
+  <div class="min-w-0 flex-1 space-y-1.5">
+    <label for="<%= field_id %>" class="block text-sm font-medium text-ink">
+      <%= t("teams.articles.form.image_alt_label") %> <span data-number><%= number %></span>
+    </label>
+    <%= tag.span ui_badge(t("teams.articles.form.image_alt_missing"), tone: :warning, size: :sm), hidden: image.alt.present?,
+                 data: { "communication--image-alts-target": "missing" } %>
+    <%= tag.input type: "text", id: field_id, name: "#{form.object_name}[image_alts][#{image.public_id}]", value: image.alt,
+                  maxlength: Entities::Communication::ArticleImage::ALT_MAX, autocomplete: "off", class: field_classes(:text, error, nil),
+                  "aria-invalid": ("true" if error), "aria-describedby": [ "#{field_id}_hint", ("#{field_id}_error" if error) ].compact.join(" "),
+                  data: { action: "input->communication--image-alts#mark keydown.enter->communication--image-alts#backToEditor" } %>
+    <p id="<%= field_id %>_hint" class="text-sm text-mute"><%= t("teams.articles.form.image_alt_hint") %></p>
+    <% if error %>
+      <p id="<%= field_id %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
