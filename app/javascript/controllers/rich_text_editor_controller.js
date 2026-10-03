@@ -108,8 +108,10 @@ export default class extends Controller {
     this.track(this.prepare(files))
   }
 
+  // → true if every file went into the text, false if one was refused.
   async prepare(files) {
     const { prepareImage } = await this.module().catch(() => ({}))
+    let inserted = true
     for (const file of files) {
       try {
         if (!prepareImage) throw new Error("image_upload")
@@ -119,9 +121,11 @@ export default class extends Controller {
         this.names.set(ready, file.name)
         this.editor.insertFile(ready)
       } catch (error) {
+        inserted = false
         this.refuse(file.name, error)
       }
     }
+    return inserted
   }
 
   // With a sgid, an image of the article (load, undo); with a file, an image to send; neither, an image pasted from a
@@ -143,6 +147,7 @@ export default class extends Controller {
   }
 
   // One upload at a time; Trix draws its progress bar from setUploadProgress. A refused or failed image leaves the text.
+  // → true if the image is sent (or was taken out of the text meanwhile), false if it was refused or failed.
   async upload(attachment) {
     const { file } = attachment
     const name = this.names.get(file) || file.name
@@ -155,14 +160,16 @@ export default class extends Controller {
       this.queue = sent.catch(() => {})
       const image = await sent
       // Removed from the text during its upload: the image stays unattached, and the server purges it.
-      if (!this.inText(attachment)) return
+      if (!this.inText(attachment)) return true
 
       attachment.setAttributes({ sgid: image.sgid, url: image.url, width: image.width, height: image.height })
       this.dispatch("uploaded", { detail: { publicId: image.public_id, sgid: image.sgid, url: image.url } })
+      return true
     } catch (error) {
       if (this.inText(attachment)) attachment.remove()
       this.statusTarget.textContent = ""
       this.refuse(name, error)
+      return false
     }
   }
 
@@ -172,8 +179,12 @@ export default class extends Controller {
 
   refuse(name, { reason, detail } = {}) {
     const messages = this.messagesValue
+    this.showError(fill(messages.refused, { name, reason: detail || messages[reason] || messages.failed }))
+  }
+
+  showError(text) {
     const line = this.errorTemplateTarget.content.firstElementChild.cloneNode(true)
-    line.querySelector("span").textContent = fill(messages.refused, { name, reason: detail || messages[reason] || messages.failed })
+    line.querySelector("span").textContent = text
     this.errorsTarget.append(line)
     this.errorsTarget.hidden = false
   }
@@ -188,7 +199,9 @@ export default class extends Controller {
     })
   }
 
-  // « Enregistrer » during an upload: the article is saved once every upload is over, sent or refused.
+  // « Enregistrer » during an upload: the article is saved once every upload is sent. One refused or failed, and the
+  // article would leave without its image, the refusal hidden by the closing modal: it is not saved, the modal stays
+  // open, says so, and the refusals take the focus.
   hold = (event) => {
     if (this.pending.size === 0) return
 
@@ -196,7 +209,13 @@ export default class extends Controller {
     event.stopImmediatePropagation()
     this.statusTarget.textContent = this.messagesValue.waiting
     const { submitter } = event
-    Promise.allSettled([...this.pending]).then(() => this.form.requestSubmit(submitter))
+    Promise.all([...this.pending]).then((sent) => {
+      if (sent.every(Boolean)) return this.form.requestSubmit(submitter)
+
+      this.statusTarget.textContent = ""
+      this.showError(this.messagesValue.not_saved)
+      this.errorsTarget.focus()
+    })
   }
 
   module() {

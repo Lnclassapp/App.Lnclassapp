@@ -27,7 +27,7 @@ module Communication
     test "les messages : plafonds interpolés par le serveur (« 1 Mo », 10), jetons du navigateur laissés intacts" do
       messages = JSON.parse(article_editor_data(upload_url: "/teams/blog/images")["rich-text-editor-messages-value"])
 
-      assert_equal %w[refused format too_heavy too_many web_image forbidden failed uploading uploaded waiting], messages.keys
+      assert_equal %w[refused format too_heavy too_many web_image forbidden failed uploading uploaded waiting not_saved], messages.keys
       assert_equal "L'image dépasse 1 Mo, même allégée.", messages["too_heavy"]
       assert_equal "L'article a déjà 10 images dans son texte.", messages["too_many"]
       assert_equal "« %{name} » n'a pas été ajoutée. %{reason}", messages["refused"]

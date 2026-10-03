@@ -70,7 +70,7 @@
     <% end %>
     <p id="article_cover_status" class="flex items-center gap-2 text-sm text-mute" aria-live="polite" data-communication--cover-picker-target="status"></p>
     <template data-communication--cover-picker-target="spinner"><%= ui_spinner(size: :sm) %></template>
-    <p id="article_cover_upload_error" class="flex items-center gap-1.5 text-sm font-medium text-error" role="alert" hidden
+    <p id="article_cover_upload_error" class="flex items-center gap-1.5 text-sm font-medium text-error" role="alert" tabindex="-1" hidden
        data-communication--cover-picker-target="error"><%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><span></span></p>
     <%= form.hidden_field :cover_public_id, id: "article_cover_public_id", data: { "communication--cover-picker-target": "id" } %>
     <%= ui_field form, :cover_alt, maxlength: image_caps::ALT_MAX, autocomplete: "off", hint: t(".cover_alt_hint"),
@@ -96,7 +96,7 @@
                                   "aria-describedby": [ "article_body_hint", ("article_body_error" if body_error) ].compact.join(" "),
                                   class: class_names("trix-content block min-h-48 w-full rounded-ln border bg-white px-4 py-3 text-base text-ink",
                                                      body_error ? "border-error" : "border-line") %>
-    <div id="article_body_upload_errors" class="space-y-1" role="alert" hidden data-rich-text-editor-target="errors"></div>
+    <div id="article_body_upload_errors" class="space-y-1" role="alert" tabindex="-1" hidden data-rich-text-editor-target="errors"></div>
     <template data-rich-text-editor-target="errorTemplate">
       <p class="flex items-center gap-1.5 text-sm font-medium text-error"><%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><span></span></p>
     </template>

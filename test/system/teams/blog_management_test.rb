@@ -173,6 +173,47 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
     assert_equal 0, Orm::ArticleImage.count, "rien n'est stocké (BL-12)"
   end
 
+  test "« Créer le brouillon » during an upload that fails keeps the modal: nothing is saved, the refusal takes the focus" do
+    visit teams_articles_path
+    assert_no_page_reload do
+      click_on "teams_articles_new"
+      within "turbo-frame#modal dialog[open]" do
+        fill_in "article[title]", with: "Un envoi qui échoue"
+        editor.click
+        editor.send_keys("Un texte.")
+
+        # An image of the text: its upload answers 500 while « Créer le brouillon » waits for it.
+        hold_uploads do |release|
+          attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
+          assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
+          click_on t("teams.articles.new.submit")
+          assert_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
+          release.call(500)
+        end
+        assert_selector "#article_body_upload_errors", text: refused("portrait.jpg", image_message("failed")), wait: UPLOAD_WAIT
+        assert_selector "#article_body_upload_errors", text: image_message("not_saved")
+        assert_no_selector "#article_body_upload_status", text: image_message("waiting"), visible: :all
+        assert page.evaluate_script("document.activeElement.id === 'article_body_upload_errors'"), "le refus prend le focus"
+        assert_no_selector "trix-editor figure"
+
+        # The cover: same rule.
+        hold_uploads do |release|
+          attach_file "article_cover_file", fixture("photos/photo.jpg")
+          assert_selector "#article_cover[aria-busy=true]"
+          click_on t("teams.articles.new.submit")
+          assert_selector "#article_cover_status", text: image_message("waiting")
+          release.call(500)
+        end
+        assert_selector "#article_cover_upload_error", text: refused("photo.jpg", image_message("failed")), wait: UPLOAD_WAIT
+        assert_selector "#article_cover_upload_error", text: image_message("not_saved")
+        assert page.evaluate_script("document.activeElement.id === 'article_cover_upload_error'"), "le refus prend le focus"
+        assert_selector "#article_cover_placeholder"
+      end
+      assert_selector "turbo-frame#modal dialog[open]"
+    end
+    assert_equal 0, Orm::Article.count, "rien n'est enregistré sans l'image"
+  end
+
   test "editing: an image taken out of the text hides its row, undo brings it back, Enter returns to the text, the cover clears" do
     first = create_article_image(alt: "Le premier schéma")
     second = create_article_image(fixture: "photos/photo.png")
@@ -307,6 +348,24 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
       image.src = src
       image.decode().then(() => done(image.naturalWidth > 0), () => done(false))
     JS
+  end
+
+  # The team endpoint holds every upload of the block until the test releases it: release.call lets the upload through,
+  # release.call(500) answers that status instead. The state seen while an upload is under way is then certain, instead
+  # of raced against a slowed network. Whatever is still held at the end of the block is let go.
+  def hold_uploads
+    gate = Thread::Queue.new
+    endpoint = Teams::ArticleImagesController
+    endpoint.alias_method :create_unheld, :create
+    endpoint.define_method(:create) do
+      answer = gate.pop
+      answer == :pass ? create_unheld : head(answer || :service_unavailable)
+    end
+    yield ->(status = :pass) { gate << status }
+  ensure
+    gate.close
+    endpoint.alias_method :create, :create_unheld
+    endpoint.remove_method :create_unheld
   end
 
   # Chrome throttles the uploads of the block: the progress bar and the held submit can be seen.

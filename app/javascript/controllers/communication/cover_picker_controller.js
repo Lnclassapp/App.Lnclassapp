@@ -18,7 +18,8 @@ export default class extends Controller {
     this.form?.removeEventListener("submit", this.hold)
   }
 
-  // « Enregistrer » during the upload: the article is saved once the cover is sent or refused.
+  // « Enregistrer » during the upload: the article is saved once the cover is sent. Refused or failed, the article is not
+  // saved (it would leave without the cover, the refusal hidden by the closing modal): the refusal says so and takes the focus.
   hold = (event) => {
     if (!this.pending) return
 
@@ -26,7 +27,12 @@ export default class extends Controller {
     event.stopImmediatePropagation()
     this.showStatus(this.messagesValue.waiting)
     const { submitter } = event
-    this.pending.then(() => this.form.requestSubmit(submitter))
+    this.pending.then((sent) => {
+      if (sent) return this.form.requestSubmit(submitter)
+
+      this.showError(`${this.errorTarget.querySelector("span").textContent} ${this.messagesValue.not_saved}`)
+      this.errorTarget.focus()
+    })
   }
 
   pick() {
@@ -44,7 +50,7 @@ export default class extends Controller {
     })
   }
 
-  // The previous cover stays in place on a refusal.
+  // The previous cover stays in place on a refusal. → true if the cover is sent, false if it was refused or failed.
   async send(file) {
     const messages = this.messagesValue
     try {
@@ -54,8 +60,10 @@ export default class extends Controller {
       this.idTarget.value = image.public_id
       this.previewTarget.src = image.url
       this.show(true)
+      return true
     } catch ({ reason, detail }) {
       this.showError(fill(messages.refused, { name: file.name, reason: detail || messages[reason] || messages.failed }))
+      return false
     }
   }
 
