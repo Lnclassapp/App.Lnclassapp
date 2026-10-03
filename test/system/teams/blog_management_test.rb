@@ -146,6 +146,9 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
       click_on "teams_articles_new"
       within "turbo-frame#modal dialog[open]" do
         editor.click
+        # Trix's own attach button speaks French too, like the rest of its toolbar.
+        assert_selector "trix-toolbar [data-trix-action=attachFiles][title='Insérer une image']", visible: :all
+        assert_no_selector "trix-toolbar [title='Attach Files']", visible: :all
         editor.send_keys("Un texte.")
 
         attach_file(fixture("article_images/animation.gif")) { click_on tf("insert_image") }

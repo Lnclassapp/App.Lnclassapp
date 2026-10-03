@@ -21,7 +21,7 @@ module Communication
                    data.values_at("rich-text-editor-max-bytes-value", "rich-text-editor-max-side-value",
                                   "rich-text-editor-max-count-value")
       lang = JSON.parse(data["rich-text-editor-lang-value"])
-      assert_equal [ "Gras", "Ajoutez une légende…" ], lang.values_at("bold", "captionPlaceholder")
+      assert_equal [ "Gras", "Ajoutez une légende…", "Insérer une image" ], lang.values_at("bold", "captionPlaceholder", "attachFiles")
     end
 
     test "les messages : plafonds interpolés par le serveur (« 1 Mo », 10), jetons du navigateur laissés intacts" do
