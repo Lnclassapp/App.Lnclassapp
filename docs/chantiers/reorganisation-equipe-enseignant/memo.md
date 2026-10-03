@@ -5,7 +5,7 @@
 | **Type de cycle** | feature |
 | **Statut** | cadrage |
 | **Ouvert le** | 2026-10-03 |
-| **Branche** | `feature/reorganisation-equipe-enseignant` |
+| **Branche** | `Develop` (directement, décision du porteur le 2026-10-03) |
 | **Programme** | — |
 
 ---
