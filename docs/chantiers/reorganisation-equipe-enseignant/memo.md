@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `Develop` (directement, décision du porteur le 2026-10-03) |
 | **Programme** | — |
