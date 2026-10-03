@@ -30,7 +30,7 @@ Retours du porteur sur les interfaces livrées (V1 à V4) : les écrans existent
 ## Hors périmètre
 
 - Toute nouvelle donnée de configuration : le référentiel change de place, pas de contenu.
-- **Les espaces élève, parent et direction** : rien ne change pour eux. L'élève continue de voir toutes les assignations actives de sa classe, y compris celles marquées « Hors niveau » côté enseignant. La direction ne voit ni la carte Parrainage ni le pilotage.
+- **Les espaces élève, parent et direction** : rien ne change pour eux. La direction ne voit ni la carte Parrainage ni le pilotage.
 - La refonte du catalogue lui-même : on ajoute seulement un filtre par série à ses filtres existants.
 - **Le contrôle de la matière** à l'assignation : un enseignant peut toujours assigner un exercice d'une autre matière à sa classe ; la règle de niveau et de série, déjà en place, ne change pas.
 - **L'assignation de cours ou de fiches** : seul l'exercice s'assigne (décision du 2026-10-02), ce chantier n'y touche pas.
@@ -57,6 +57,8 @@ Retours du porteur sur les interfaces livrées (V1 à V4) : les écrans existent
 | G10 — Une grosse DRENA compte des centaines d'établissements, souvent sans classe sur Lnclass. Que montre « Par établissement » ? | Tous, paginés. | Tous les établissements **actifs** de la DRENA, triés par nombre d'élèves puis par nom, 25 par page ; un établissement sans activité s'affiche à 0 (la couverture qui reste à gagner). La pagination garde la période et la DRENA dans l'URL. Limite assumée : le champ de recherche du tableau ne filtre que la page affichée (voir `Questions encore ouvertes`). |
 | G11 — Section Cours sans classe déclarée, ou pour un niveau sans cours publié dans la matière : que voit l'enseignant ? | Bulle + message. | Sans classe : aucune bulle de niveau, le message « Déclarez vos classes pour retrouver ici les cours de vos niveaux », la bulle « Inviter » et un lien « Voir tout le catalogue ». Niveau sans cours : la bulle reste (aucune lecture de plus sur l'accueil) ; le catalogue filtré affiche son état vide en nommant la matière, le niveau et la série. |
 | G12 — Que deviennent les assignations hors niveau déjà actives quand la règle arrive (elle vaut aussi pour l'équipe) ? | Signalées. | **Prémisse corrigée** : la règle existe depuis le 2026-10-01 ; les assignations hors niveau d'avant restent en base et l'élève ne peut déjà plus les ouvrir. Le chantier les **signale** à l'enseignant : la liste des exercices assignés de la page de la classe marque chacune « Hors niveau », avec l'explication « Vos élèves ne peuvent pas l'ouvrir », pour qu'il l'archive. Rien n'est archivé d'office. |
+| G12 révisée (porteur, après le plan) — « Reviens sur la question : aucun cours ne doit être assigné hors de son niveau. » Archiver ou signaler les assignations hors niveau existantes ? | « Aucune assignation actuelle. » | Il n'y a rien à archiver ni à signaler : le signal « Hors niveau » de la page de la classe **sort du chantier**. L'invariant devient une règle : **aucune assignation active hors niveau**, jamais. |
+| G13 — Que faire quand l'équipe change le niveau ou la série d'un cours dont un exercice est assigné ? | Refuser le changement. | La modification d'un cours refuse un niveau ou une série qui sortirait une classe assignée de son niveau ; élargir (Tle D → Tle sans série) reste permis ; nom, contenu et matière restent modifiables. Règle métier dans le contexte `catalog`, lecture des assignations par un port : **décision technique écrite** (port étendu, contrat de la modification d'un cours). |
 
 ## Cas limites identifiés
 
@@ -70,7 +72,9 @@ Retours du porteur sur les interfaces livrées (V1 à V4) : les écrans existent
 - **Plusieurs classes au bon niveau** (3ème 1 et 3ème 2) : une bascule par classe, nommée par la classe.
 - **Première assignation dans une classe sans jours de séance** : la modale « Quels jours voyez-vous la <classe> ? » s'ouvre, comme depuis la classe.
 - **Assignation hors niveau envoyée à la main** : déjà refusée par le serveur, rien n'est écrit.
-- **Assignation hors niveau existante** : gardée, marquée « Hors niveau » sur la page de la classe (G12).
+- **Assignation hors niveau existante** : aucune, selon le porteur (G12 révisée) ; aucune reprise de données.
+- **Niveau d'un cours assigné modifié par l'équipe** : refusé s'il sort une classe assignée de son niveau, avec un message sous le champ (G13) ; élargir vers « sans série » passe ; changer la matière passe.
+- **Assignation créée pendant qu'on modifie le cours** : course improbable, acceptée sans verrou (décision technique, coûts consentis).
 - **Équipe** : elle ne voit pas les bascules du catalogue (elle n'a pas de classes) ; elle garde son menu de gestion.
 - **Exercice, fiche ou cours non publié** : pas de bascule (seul un contenu publié s'assigne, règle existante).
 - **Enseignant d'un établissement inactif ou en brouillon** : pas de carte Parrainage, pas de bulle « Inviter », pas de bloc d'invitation (règle d'invitation existante).

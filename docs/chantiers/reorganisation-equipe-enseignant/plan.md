@@ -17,17 +17,18 @@ Lot 0 — SOCLE (séquentiel) : navigation à deux listes, menu « Plus », cart
   │                                                                      RE-16 à RE-18, RE-20, RE-28) │  fichiers disjoints
   ├─► Lot E  Carte « Parrainage » de la barre latérale                  (RE-18, RE-19)   │
   ├─► Lot F  Assigner depuis le catalogue                               (RE-21 à RE-26)  │
-  └─► Lot G  Assignations « Hors niveau »                               (RE-27)          ┘
+  └─► Lot G  Le niveau d'un cours assigné ne change pas (ADR-0075)    (RE-27)          ┘
 ```
 
-**Aucun lot ne crée ni ne modifie de port, d'entité, de use case ou de migration** (PRD §5) : le Lot 0 gèle donc des contrats d'interface (helpers, composants, routes, locales partagées, emplacements de la barre latérale), pas des ports.
+**Un seul contrat de domaine bouge** : la méthode `assigned_classroom_levels(id:)` de `Ports::Catalog::CourseRepositoryPort` (ADR-0075), gelée au Lot 0, implémentée au Lot G. Aucune entité, aucune migration. Le reste du Lot 0 gèle des contrats d'interface (helpers, composants, routes, locales partagées, emplacements de la barre latérale).
 
 ---
 
 ## Lot 0 — Socle
 
-- **Couche**       : delivery + ui (contrats partagés : navigation, composant, tokens, route)
-- **Fichiers**     : `config/routes/teams.rb` *(route `teams_referential`, UDR-0068 §3.4)*
+- **Couche**       : domaine (port) + delivery + ui (contrats partagés : navigation, composant, tokens, route)
+- **Fichiers**     : `app/domain/ports/catalog/course_repository_port.rb` *(`assigned_classroom_levels(id:)`, contrat gelé, ADR-0075)*
+                     `config/routes/teams.rb` *(route `teams_referential`, UDR-0068 §3.4)*
                      `config/locales/shared/navigation.fr.yml`
                      `app/helpers/navigation_helper.rb` *(DESTINATIONS team, SECONDARY_DESTINATIONS, secondary_navigation_for, more_active?, HOME_SECTIONS team et teacher, SIDEBAR_FRAMES)*
                      `app/views/shared/navigation/_sidebar.html.erb` *(2e carte « Configuration », frame `sidebar_referral` de l'enseignant)*
@@ -159,17 +160,18 @@ Lot 0 — SOCLE (séquentiel) : navigation à deux listes, menu « Plus », cart
 
 ---
 
-## Lot G — Assignations « Hors niveau » sur la page de la classe
+## Lot G — Le niveau d'un cours assigné ne change pas
 
-- **Couche**       : infrastructure + ui
-- **Fichiers**     : `app/infrastructure/queries/classroom/classroom_overview_query.rb`
-                     `app/views/classroom/classrooms/_assigned_exercises.html.erb`
-                     `config/locales/classroom/classrooms.fr.yml`
-                     `test/infrastructure/queries/classroom/classroom_overview_query_test.rb`
-                     `test/controllers/classroom/classrooms_controller_test.rb`
+- **Couche**       : domaine + infrastructure + ui (message du formulaire)
+- **Fichiers**     : `app/domain/use_cases/catalog/update_course.rb`
+                     `app/infrastructure/repositories/catalog/course_repository.rb`
+                     `config/locales/teams/courses.fr.yml`
+                     `test/domain/use_cases/catalog/update_course_test.rb`
+                     `test/infrastructure/repositories/catalog/course_repository_test.rb`
+                     `test/controllers/teams/courses_controller_test.rb`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/infrastructure/queries/classroom/classroom_overview_query_test.rb` (`out_of_level` : autre niveau, autre série, cours sans série → faux) · `test/controllers/classroom/classrooms_controller_test.rb` (RE-27 : « Hors niveau » et « Vos élèves ne peuvent pas l'ouvrir. » sur la seule ligne concernée)
-- **Done quand**   : sur la page de sa Tle D 1, l'enseignant voit « Hors niveau · Vos élèves ne peuvent pas l'ouvrir. » sur l'exercice de 3ème assigné avant la règle, et sur lui seul
+- **Test associé** : `test/domain/use_cases/catalog/update_course_test.rb` (RE-27 : niveau changé avec une classe assignée → `:conflict`, rien d'écrit ; élargissement Tle D → Tle sans série permis ; restriction refusée seulement s'il reste une classe hors série ; nom seul permis) · `test/infrastructure/repositories/catalog/course_repository_test.rb` (`assigned_classroom_levels` : actives seulement, une entrée par classe, autres cours ignorés, une requête) · `test/controllers/teams/courses_controller_test.rb` (422, message sous « Niveau », cours inchangé en base)
+- **Done quand**   : dans la modale de modification d'un cours de Tle D assigné à une Tle D 1, l'équipe qui choisit « 3ème » lit « Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer. » et le cours ne change pas ; passer à « Tle » sans série, ou renommer, est enregistré
 
 ---
 
@@ -183,7 +185,7 @@ Lot 0 — SOCLE (séquentiel) : navigation à deux listes, menu « Plus », cart
 | RE-07, RE-08, RE-09, RE-10 | B | RE-19 | E |
 | RE-11, RE-12, RE-13 | D | RE-20 | D |
 | RE-14 | C | RE-21 à RE-26 | F |
-| | | RE-27 | G |
+| | | RE-27 | G (ADR-0075) |
 | | | RE-28 | D |
 
 Aucun critère orphelin.
@@ -217,10 +219,11 @@ Vague 2 : Lot A ‖ Lot B ‖ Lot C ‖ Lot D ‖ Lot E ‖ Lot F ‖ Lot G   �
 | `app/assets/stylesheets/application.tailwind.css` | Lot 0 |
 | `app/assets/images/subjects/*.svg` | Lot 0 |
 | `test/support/factories/` | Lot 0 |
+| `app/domain/ports/catalog/course_repository_port.rb` | Lot 0 (contrat gelé, implémenté au Lot G) |
 | `app/views/classroom/assignments/_toggle.html.erb` et ses deux streams | Lot F (seul lot qui les touche) |
 | `app/javascript/controllers/table_filter_controller.js` | Lot B (enregistré par motif : aucun manifeste partagé) |
 | `test/system/role_homes_test.rb` | Lot A |
-| `config/locales/*` : un fichier par écran, chacun à un seul lot (teams/referentials, teams/homes → A ; teams/dashboards → B ; catalog/courses → C ; classroom/teacher_homes → D ; identity/referrals → E ; catalog/essentials, assessment/exercises, classroom/assignments → F ; classroom/classrooms → G) | — |
+| `config/locales/*` : un fichier par écran, chacun à un seul lot (teams/referentials, teams/homes → A ; teams/dashboards → B ; catalog/courses → C ; classroom/teacher_homes → D ; identity/referrals → E ; catalog/essentials, assessment/exercises, classroom/assignments → F ; teams/courses → G) | — |
 
 ## Portes de sortie
 
@@ -240,4 +243,4 @@ Vague 2 : Lot A ‖ Lot B ‖ Lot C ‖ Lot D ‖ Lot E ‖ Lot F ‖ Lot G   �
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >
-> Pour ce chantier : parcours nominal équipe (carte « Configuration » → Référentiel ; pilotage → « abidj » → Abidjan 1 → page 2) et enseignant (bulle « Tle D » → fiche → « Assigner » → modale des jours → « Assigné ») ; chemins d'erreur : POST d'assignation hors niveau (422), élève sur `/teams/referential` (403), recherche de DRENA sans résultat ; à 390 px et à 1280 px, en clair et en sombre ; budget `PERF=1` du pilotage filtré.
+> Pour ce chantier : parcours nominal équipe (carte « Configuration » → Référentiel ; pilotage → « abidj » → Abidjan 1 → page 2) et enseignant (bulle « Tle D » → fiche → « Assigner » → modale des jours → « Assigné ») ; chemins d'erreur : POST d'assignation hors niveau (422), changement de niveau d'un cours assigné (422, cours inchangé), élève sur `/teams/referential` (403), recherche de DRENA sans résultat ; à 390 px et à 1280 px, en clair et en sombre ; budget `PERF=1` du pilotage filtré.

@@ -1,20 +1,20 @@
-# UDR-0069 : Espace enseignant — accueil réordonné, cours par niveau enseigné, carte Parrainage, assignation depuis le catalogue, assignations hors niveau signalées
+# UDR-0069 : Espace enseignant — accueil réordonné, cours par niveau enseigné, carte Parrainage, assignation depuis le catalogue ; niveau d'un cours assigné
 
 | | |
 |---|---|
 | **Statut** | Proposé |
 | **Date** | 2026-10-03 |
-| **Chantier** | [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md) — critères RE-11 à RE-28 |
-| **ADR lié** | [ADR-0063](../adr/0063-parrainage-demarrage-a-froid-et-mesure-du-k-factor.md) (lien et partages, inchangés) · [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul l'exercice s'assigne, échéance) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (amendement du 2026-10-01 : règle de niveau) · amende [UDR-0006](0006-shell-applicatif-par-role.md), [UDR-0013](0013-catalogue-et-page-cours.md), [UDR-0015](0015-page-fiche-essentielle.md), [UDR-0021](0021-page-exercice.md), [UDR-0026](0026-accueil-enseignant.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md), [UDR-0050](0050-inviter-un-collegue-et-croissance.md), [UDR-0062](0062-echeances.md) · composants [UDR-0005](0005-design-system-fondateur.md), [UDR-0065](0065-mode-sombre-par-les-tokens.md) (tokens sombres) · charte `lnclass-design-system` §9, §13 (bulles et illustrations) |
+| **Chantier** | [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md) — critères RE-11 à RE-28 (RE-27 : niveau d'un cours assigné) |
+| **ADR lié** | [ADR-0075](../adr/0075-niveau-d-un-cours-assigne-fige.md) (niveau d'un cours assigné) · [ADR-0063](../adr/0063-parrainage-demarrage-a-froid-et-mesure-du-k-factor.md) (lien et partages, inchangés) · [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul l'exercice s'assigne, échéance) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (amendement du 2026-10-01 : règle de niveau) · amende [UDR-0006](0006-shell-applicatif-par-role.md), [UDR-0013](0013-catalogue-et-page-cours.md), [UDR-0014](0014-formulaire-cours.md), [UDR-0015](0015-page-fiche-essentielle.md), [UDR-0021](0021-page-exercice.md), [UDR-0026](0026-accueil-enseignant.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md), [UDR-0050](0050-inviter-un-collegue-et-croissance.md), [UDR-0062](0062-echeances.md) · composants [UDR-0005](0005-design-system-fondateur.md), [UDR-0065](0065-mode-sombre-par-les-tokens.md) (tokens sombres) · charte `lnclass-design-system` §9, §13 (bulles et illustrations) |
 | **Remplacé par** | — |
 
 ---
 
 ## 1. Contexte
 
-L'accueil enseignant met « Cours » en dernier, sous la forme d'un lien vers le catalogue complet que l'enseignant doit filtrer lui-même. « Modifier mes classes » occupe le pied de « Mes classes ». L'invitation des collègues est un bloc en bas de l'accueil. Depuis le 2026-10-02, un exercice ne s'assigne que depuis la page d'une classe : l'enseignant qui trouve un exercice dans le catalogue doit repartir de sa classe pour l'assigner. Enfin, des assignations faites avant la règle de niveau du 2026-10-01 restent actives alors que les élèves ne peuvent plus les ouvrir, sans que l'enseignant le sache.
+L'accueil enseignant met « Cours » en dernier, sous la forme d'un lien vers le catalogue complet que l'enseignant doit filtrer lui-même. « Modifier mes classes » occupe le pied de « Mes classes ». L'invitation des collègues est un bloc en bas de l'accueil. Depuis le 2026-10-02, un exercice ne s'assigne que depuis la page d'une classe : l'enseignant qui trouve un exercice dans le catalogue doit repartir de sa classe pour l'assigner. Enfin, l'équipe peut changer le niveau d'un cours déjà assigné : ses exercices se retrouveraient assignés hors niveau, dans des classes dont les élèves ne peuvent plus les ouvrir.
 
-Le porteur a tranché (memo, G1 à G12) : sections « Mes classes », « Cours », « Activités » ; « Modifier mes classes » dans un menu ; « Cours » en bulles, une par couple niveau-série enseigné, à l'illustration de la matière (modèle de l'accueil élève) ; « Inviter » dans la grille, sans « Versement » ; une carte « Parrainage » dans la barre latérale sur grand écran, le bloc restant sur téléphone ; l'assignation depuis le catalogue, aux seules classes du bon niveau ; les assignations hors niveau signalées.
+Le porteur a tranché (memo, G1 à G13) : sections « Mes classes », « Cours », « Activités » ; « Modifier mes classes » dans un menu ; « Cours » en bulles, une par couple niveau-série enseigné, à l'illustration de la matière (modèle de l'accueil élève) ; « Inviter » dans la grille, sans « Versement » ; une carte « Parrainage » dans la barre latérale sur grand écran, le bloc restant sur téléphone ; l'assignation depuis le catalogue, aux seules classes du bon niveau ; **aucune assignation hors niveau**, jamais (G12 révisée : il n'en existe aucune aujourd'hui ; G13 : le niveau d'un cours assigné ne change pas s'il sortait une classe de son niveau).
 
 ## 2. Décision
 
@@ -25,7 +25,7 @@ Le porteur a tranché (memo, G1 à G12) : sections « Mes classes », « Cours �
 5. **Illustrations** : les 7 matières du modèle, choisies par le slug figé de la matière ; une illustration générique pour toutes les autres. Des fichiers SVG servis par Propshaft (`image_tag`), pas de sprite en ligne : rien à analyser dans chaque page, mise en cache par le navigateur, CSP inchangée.
 6. **Parrainage** : sur grand écran, une carte compacte dans la barre latérale, chargée **en différé** (frame Turbo `loading: lazy`) : la barre latérale est masquée sous `lg`, donc le frame n'est jamais demandé sur téléphone, et aucune page enseignant ne paie la lecture du parrainage avant d'être affichée. Sur téléphone, le bloc « Inviter un collègue » de l'accueil reste ; il est masqué à partir de `lg`.
 7. **Assigner depuis le catalogue** : sur la fiche essentielle et sur la page d'un exercice, l'enseignant voit une bascule (UDR-0028, UDR-0062 §3.4) **par classe à lui du niveau et de la série du cours**. La bascule, la modale des jours et les streams sont ceux de la classe, réutilisés tels quels. Aucune règle nouvelle : le refus serveur `other_level` existe.
-8. **Hors niveau** : la liste « Exercices assignés » de la page d'une classe marque l'assignation dont le cours n'est pas du niveau (ou de la série) de la classe. Rien n'est archivé d'office.
+8. **Le niveau d'un cours assigné** : le formulaire d'un cours refuse un niveau ou une série qui sortirait une classe assignée de son niveau, avec un message sous « Niveau » (ADR-0075). Aucun signal « hors niveau » ailleurs : le cas ne peut plus se produire.
 
 ## 3. Règles d'implémentation
 
@@ -136,11 +136,10 @@ Le porteur a tranché (memo, G1 à G12) : sections « Mes classes », « Cours �
 
 **Bascule** (`classroom/assignments/_toggle`) : nouveau local `classroom_name: nil`. S'il est donné, les `aria-label` deviennent « Assigner « %{name} » à %{classroom} » et « Retirer « %{name} » de %{classroom} » (`assign_to_label`, `archive_from_label`) ; sinon ceux d'aujourd'hui. `create.turbo_stream` et `archive.turbo_stream` passent `classroom_name: @classroom.name`. Identifiant, streams, modale des jours, `return_to` et rafraîchissement par morphing : **inchangés** (UDR-0062 §3.4) ; ils fonctionnent sur toute page qui porte la bascule.
 
-### 3.9 Assignations hors niveau (`classroom/classrooms/_assigned_exercises`)
+### 3.9 Formulaire d'un cours — niveau d'un cours assigné (`teams/courses/_form`)
 
-- `Queries::Classroom::ClassroomOverviewQuery::AssignmentRow` gagne `out_of_level` : vrai quand le cours de l'exercice n'est pas du niveau de la classe, ou a une série différente de celle de la classe (la règle d'`Entities::Catalog::LevelAudience`, en SQL dans la même requête).
-- Dans la ligne, après la pastille de matière et l'échéance : si `out_of_level`, `ui_badge t(".out_of_level"), tone: :error, size: :sm, icon: "no-symbol"` et `p.text-sm.text-mute` « Vos élèves ne peuvent pas l'ouvrir. ». Locale `out_of_level` = « Hors niveau ».
-- Visible de l'enseignant de la classe et de l'équipe ; l'élève ne voit pas cette page.
+- Aucun changement de balisage : le refus `:conflict` d'`UpdateCourse` (`errors: { level_slug: [:assigned_elsewhere] }`, ADR-0075) passe par le chemin existant `render_result … form: :edit` : 422, la modale se rouvre, `ui_field :level_slug` affiche l'erreur (`aria-invalid`, `aria-describedby`), les valeurs saisies sont gardées (UDR-0006, CRUD Hotwire ; UDR-0014).
+- Message, à côté de `taken` dans `config/locales/teams/courses.fr.yml` : « Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer. »
 
 **Tokens** : ceux de l'UDR-0005 et les sept teintes du §3.3 ; aucun attribut `style`, aucune valeur arbitraire, aucune couleur littérale dans une vue.
 
@@ -153,7 +152,7 @@ Le porteur a tranché (memo, G1 à G12) : sections « Mes classes », « Cours �
 **États obligatoires**
 - Accueil : sans classe (§3.3) ; « Activités » : « Bientôt » ; Parrainage : squelette pendant le chargement du frame, frame vide si l'invitation est fermée.
 - Catalogue : aucune classe au bon niveau → phrase du §3.8 ; refus `other_level` (POST forcé) → toast d'erreur existant, 422.
-- Page de la classe : aucune assignation → état vide existant ; « Hors niveau » seulement sur les lignes concernées.
+- Formulaire d'un cours : refus de niveau → 422, erreur sous « Niveau », modale rouverte.
 - Erreur serveur : page d'erreur commune ; un frame de parrainage en erreur garde son squelette (aucune information sensible n'en dépend).
 
 **Accessibilité**
@@ -169,4 +168,4 @@ Le porteur a tranché (memo, G1 à G12) : sections « Mes classes », « Cours �
 - Toute matière nouvelle a une bulle (générique) sans code ; une illustration dédiée s'ajoute par un fichier et une ligne de `SUBJECT_ILLUSTRATIONS`.
 - L'enseignant assigne un exercice depuis sa classe **ou** depuis le catalogue ; la règle de niveau reste unique, côté serveur.
 - Le lien de parrainage vers d'autres établissements (référence de l'enseignant) reste hors périmètre (G2).
-- Interdit : une bascule d'assignation pour l'équipe au catalogue, une bascule vers une classe d'un autre niveau, un sprite SVG en ligne dans le shell, un identifiant HTML partagé entre la carte Parrainage et le bloc d'invitation.
+- Interdit : une assignation active hors niveau, par quelque chemin que ce soit ; une bascule d'assignation pour l'équipe au catalogue, une bascule vers une classe d'un autre niveau, un sprite SVG en ligne dans le shell, un identifiant HTML partagé entre la carte Parrainage et le bloc d'invitation.

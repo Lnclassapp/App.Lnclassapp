@@ -4,18 +4,18 @@
 
 ## 1. Contexte
 
-Le porteur réorganise deux espaces livrés (memo, grill G1 à G12). **Équipe** : la configuration (Référentiel, Imports) quitte le quotidien pour une 2e carte de la barre latérale et un menu « Plus » sur téléphone ; le pilotage gagne une recherche de DRENA et, au clic sur une DRENA, les chiffres de chacun de ses établissements. **Enseignant** : l'accueil passe à « Mes classes » (menu ⋮), « Cours » (une bulle par niveau enseigné, à l'illustration de sa matière, plus « Inviter »), « Activités » ; le parrainage devient une carte de la barre latérale ; un exercice s'assigne de nouveau depuis le catalogue, aux seules classes de l'enseignant du niveau du cours, et la page d'une classe signale les assignations hors niveau.
+Le porteur réorganise deux espaces livrés (memo, grill G1 à G13). **Équipe** : la configuration (Référentiel, Imports) quitte le quotidien pour une 2e carte de la barre latérale et un menu « Plus » sur téléphone ; le pilotage gagne une recherche de DRENA et, au clic sur une DRENA, les chiffres de chacun de ses établissements. **Enseignant** : l'accueil passe à « Mes classes » (menu ⋮), « Cours » (une bulle par niveau enseigné, à l'illustration de sa matière, plus « Inviter »), « Activités » ; le parrainage devient une carte de la barre latérale ; un exercice s'assigne de nouveau depuis le catalogue, aux seules classes de l'enseignant du niveau du cours. Aucune assignation ne peut être hors niveau : l'équipe ne peut plus changer le niveau d'un cours si une classe assignée en sortait.
 
 ## 2. Acteurs et permissions
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| Équipe (tout sous-rôle) | voir la 2e carte « Configuration » et le menu « Plus » ; ouvrir la page Référentiel ; filtrer le pilotage par DRENA en cliquant son nom ; lire « Par établissement » | voir les bascules d'assignation du catalogue (elle n'a pas de classes) |
+| Équipe (tout sous-rôle) | voir la 2e carte « Configuration » et le menu « Plus » ; ouvrir la page Référentiel ; filtrer le pilotage par DRENA en cliquant son nom ; lire « Par établissement » ; modifier le nom, le contenu et la matière d'un cours assigné, et élargir sa série | voir les bascules d'assignation du catalogue (elle n'a pas de classes) ; changer le niveau ou la série d'un cours si une classe où l'un de ses exercices est assigné n'en serait plus couverte |
 | Enseignant d'un établissement **actif** | voir la section Cours par niveau, la bulle « Inviter », la carte Parrainage (grand écran) et le bloc d'invitation (téléphone) ; assigner un exercice publié depuis le catalogue à **ses** classes du niveau du cours | assigner à une classe d'un autre niveau ou d'une autre série (refus serveur, existant) ; assigner à une classe dont il n'est pas l'enseignant ; ouvrir la page Référentiel ou le pilotage (403) |
 | Enseignant d'un établissement inactif ou en brouillon | voir la section Cours par niveau | voir « Inviter », la carte Parrainage ou le bloc d'invitation (absents, 403 sur la page d'invitation, règle existante) |
 | Élève, parent, direction | — (rien ne change) | ouvrir la page Référentiel ou le pilotage (403, règle existante) |
 
-Règles d'autorisation, toutes existantes : `Policies::School::ReadIndicatorsPolicy` (pilotage, dont « Par établissement »), le garde de rôle `team` de `Teams::BaseController` (page Référentiel, comme l'accueil équipe), `Policies::Identity::InviteColleaguePolicy` (bulle « Inviter », carte et bloc d'invitation), `Policies::Classroom::AssignPolicy` et la règle de niveau d'`UseCases::Classroom::AssignResource` (`:conflict`, `other_level`). **Aucune policy n'est créée ni modifiée.**
+Règles d'autorisation, toutes existantes : `Policies::School::ReadIndicatorsPolicy` (pilotage, dont « Par établissement »), le garde de rôle `team` de `Teams::BaseController` (page Référentiel, comme l'accueil équipe), `Policies::Identity::InviteColleaguePolicy` (bulle « Inviter », carte et bloc d'invitation), `Policies::Classroom::AssignPolicy` et la règle de niveau d'`UseCases::Classroom::AssignResource` (`:conflict`, `other_level`), `Policies::Catalog::ManageContentPolicy` (modifier un cours). **Aucune policy n'est créée ni modifiée** ; la nouvelle règle de l'[ADR-0075](../../decisions/adr/0075-niveau-d-un-cours-assigne-fige.md) vit dans `UseCases::Catalog::UpdateCourse`.
 
 ## 3. Parcours utilisateur
 
@@ -35,7 +35,6 @@ Règles d'autorisation, toutes existantes : `Policies::School::ReadIndicatorsPol
 4. Il ouvre un cours, une fiche : chaque exercice publié porte une bascule « Assigner · Tle D 1 » (une par classe de Tle D qu'il a). Il touche « Assigner » : la modale des jours s'ouvre la première fois, puis l'exercice est assigné, avec son échéance.
 5. Sur la page d'un exercice, le bloc « Assigner à mes classes » porte les mêmes bascules.
 6. Sur ordinateur, la barre latérale montre sous ses destinations la carte « Parrainage » : compteur, badge Ambassadeur s'il y a lieu, lien, « WhatsApp » et « Copier le lien ». Sur téléphone, le bloc « Inviter un collègue » reste en bas de l'accueil.
-7. Sur la page de sa Tle D 1, un exercice de 3ème assigné avant la règle porte la mention « Hors niveau · Vos élèves ne peuvent pas l'ouvrir ».
 
 ### Chemins alternatifs et erreurs
 
@@ -55,6 +54,8 @@ Règles d'autorisation, toutes existantes : `Policies::School::ReadIndicatorsPol
 | Page « Par établissement » hors bornes (`school_page=99`) | Dernière page ; valeur invalide (texte, tableau, octet nul) → page 1 |
 | Recherche d'établissement sans correspondance | « Aucun établissement ne correspond. » et un lien « Effacer » |
 | Élève, enseignant ou direction sur `/teams/referential` | 403 |
+| L'équipe passe de « Tle » à « 3ème » un cours dont un exercice est assigné à une Tle D | 422 ; sous « Niveau » : « Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer. » ; rien n'est écrit |
+| L'équipe passe de « Tle D » à « Tle » (sans série) un cours assigné à une Tle D | Permis : la classe reste couverte |
 
 ## 4. Critères d'acceptation
 
@@ -219,11 +220,13 @@ Quand il ouvre une fiche ou un exercice du catalogue
 Alors aucune bascule d'assignation n'apparaît
 Et son menu ⋮ de gestion est inchangé
 
-# RE-27 — assignation hors niveau signalée
-Étant donné une classe Tle D 1 avec une assignation active d'un exercice de 3ème, faite avant la règle de niveau
-Quand son enseignant ouvre la page de la classe
-Alors la ligne de cet exercice porte « Hors niveau » et « Vos élèves ne peuvent pas l'ouvrir. »
-Et les assignations du bon niveau ne portent pas cette mention
+# RE-27 — le niveau d'un cours assigné ne sort aucune classe de son niveau
+Étant donné un cours de Tle D dont un exercice est assigné (actif) à la classe Tle D 1
+Quand l'équipe change son niveau pour « 3ème », ou sa série pour « C »
+Alors la réponse est 422 avec, sous « Niveau », « Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer. »
+Et le cours garde son niveau et sa série
+Et quand elle passe sa série à « aucune » (Tle sans série), ou ne change que son nom, la modification est enregistrée
+Et une fois l'assignation retirée, le changement de niveau passe
 
 # RE-28 — aucun montant, aucun « Versement »
 Étant donné un enseignant
@@ -235,16 +238,17 @@ Alors la page ne contient ni « Versement », ni « Prepa », ni « FCFA »
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | **Rien de nouveau.** La règle de niveau existe (`Entities::Catalog::LevelAudience`, `UseCases::Classroom::AssignResource` → `other_level`). Aucune entité, aucun port, aucun use case créé ou modifié. |
-| Infrastructure | `Queries::Classroom::TeacherHomeQuery` : `material_slug` et `course_levels` (couples niveau/série distincts des classes actives de l'année, triés par position du niveau puis nom de série) · `Queries::Catalog::CourseCatalogQuery` : paramètre `series:` (slug, appliqué avec le niveau : série vide ou cette série) · nouvelle `Queries::School::DrenaSchoolsQuery` (établissements actifs d'une DRENA et leurs quatre chiffres, mêmes définitions que la ligne DRENA, paginés par 25, recherche par nom) · nouvelle `Queries::Classroom::CatalogAssignmentTargetsQuery` (classes de l'enseignant au niveau et à la série d'un cours, jours de séance renseignés ou non, et l'état d'assignation de chaque exercice dans chaque classe) · `Queries::Classroom::ClassroomOverviewQuery` : `out_of_level` par assignation active |
+| Domaine | La règle de niveau existe (`Entities::Catalog::LevelAudience`, `UseCases::Classroom::AssignResource` → `other_level`). **Seul ajout** (ADR-0075) : `Ports::Catalog::CourseRepositoryPort#assigned_classroom_levels(id:)` et le refus `:conflict` (`level_slug: [:assigned_elsewhere]`) d'`UseCases::Catalog::UpdateCourse`. Aucune entité, aucune migration. |
+| Infrastructure | `Queries::Classroom::TeacherHomeQuery` : `material_slug` et `course_levels` (couples niveau/série distincts des classes actives de l'année, triés par position du niveau puis nom de série) · `Queries::Catalog::CourseCatalogQuery` : paramètre `series:` (slug, appliqué avec le niveau : série vide ou cette série) · nouvelle `Queries::School::DrenaSchoolsQuery` (établissements actifs d'une DRENA et leurs quatre chiffres, mêmes définitions que la ligne DRENA, paginés par 25, recherche par nom) · nouvelle `Queries::Classroom::CatalogAssignmentTargetsQuery` (classes de l'enseignant au niveau et à la série d'un cours, jours de séance renseignés ou non, et l'état d'assignation de chaque exercice dans chaque classe) · `Repositories::Catalog::CourseRepository#assigned_classroom_levels` (une requête, index existant) |
 | Delivery | Route `GET /teams/referential` → `Teams::ReferentialsController#show` · `Catalog::CoursesController::FILTERS` + `series` · `Teams::DashboardsController` : `school_page`, `school_q` sous filtre DRENA · `Identity::ReferralsController#show` : réponse au frame `sidebar_referral` · `Catalog::EssentialsController` et `Assessment::ExercisesController` : cibles d'assignation pour l'enseignant |
-| UI | `NavigationHelper` (`SECONDARY_DESTINATIONS`, `HOME_SECTIONS`), `shared/navigation/_sidebar`, `_bottom_bar`, `_more_menu` · `teams/homes/show`, `teams/referentials/show` (reprend `_referential`) · `teams/dashboards/_drenas`, `_schools` · `classroom/teacher_homes/show`, `_course_levels` · `identity/referrals/_sidebar_card` · `catalog/essentials/_exercise_progress`, `assessment/exercises/show` · `classroom/assignments/_targets` · `classroom/classrooms/_assigned_exercises` · illustrations `app/assets/images/subjects/*.svg` · tokens `--color-tint-*` · `ui_dropdown` gagne `placement: :above` · contrôleur Stimulus `table-filter` |
+| UI | `NavigationHelper` (`SECONDARY_DESTINATIONS`, `HOME_SECTIONS`), `shared/navigation/_sidebar`, `_bottom_bar`, `_more_menu` · `teams/homes/show`, `teams/referentials/show` (reprend `_referential`) · `teams/dashboards/_drenas`, `_schools` · `classroom/teacher_homes/show`, `_course_levels` · `identity/referrals/_sidebar_card` · `catalog/essentials/_exercise_progress`, `assessment/exercises/show` · `classroom/assignments/_targets` · message `assigned_elsewhere` du formulaire d'un cours (`config/locales/teams/courses.fr.yml`) · illustrations `app/assets/images/subjects/*.svg` · tokens `--color-tint-*` · `ui_dropdown` gagne `placement: :above` · contrôleur Stimulus `table-filter` |
 
 ## 6. Décisions rattachées
 
-- **ADR : aucun nouveau.** Le chantier n'ajoute ni port, ni table, ni dépendance, ni contrat, ni stratégie de persistance : il ajoute des lectures (CQRS, ADR-0026) et réutilise la règle de niveau existante. Il **amende l'[ADR-0062](../../decisions/adr/0062-indicateurs-de-pilotage-lus-en-direct.md)** (la lecture « Par établissement », mêmes définitions que « Par DRENA », sans cache, sous le budget de l'ADR-0067), comme le veut l'UDR-0049 §4 pour tout indicateur ajouté.
+- **[ADR-0075](../../decisions/adr/0075-niveau-d-un-cours-assigne-fige.md)** — le niveau et la série d'un cours ne changent pas s'ils sortiraient une assignation active de son niveau (port étendu, contrat de `UpdateCourse`). Aucune table, aucune dépendance.
+- Le reste du chantier ajoute des lectures (CQRS, ADR-0026) et réutilise la règle de niveau existante. Il **amende l'[ADR-0062](../../decisions/adr/0062-indicateurs-de-pilotage-lus-en-direct.md)** (la lecture « Par établissement », mêmes définitions que « Par DRENA », sans cache, sous le budget de l'ADR-0067), comme le veut l'UDR-0049 §4 pour tout indicateur ajouté.
 - **[UDR-0068](../../decisions/udr/0068-configuration-et-pilotage-par-etablissement.md)** — espace équipe : 2e carte « Configuration », menu « Plus », page Référentiel, recherche de DRENA, « Par établissement ». Amende les UDR-0006, 0018, 0049.
-- **[UDR-0069](../../decisions/udr/0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md)** — espace enseignant : accueil réordonné, Cours par niveau, carte Parrainage, assignation depuis le catalogue, « Hors niveau ». Amende les UDR-0006, 0013, 0015, 0021, 0026, 0042, 0050, 0062.
+- **[UDR-0069](../../decisions/udr/0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md)** — espace enseignant : accueil réordonné, Cours par niveau, carte Parrainage, assignation depuis le catalogue ; message du formulaire d'un cours assigné. Amende les UDR-0006, 0013, 0014, 0015, 0021, 0026, 0042, 0050, 0062.
 
 ## 7. Mesures
 

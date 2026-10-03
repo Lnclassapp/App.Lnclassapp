@@ -188,4 +188,3 @@ Route `GET /classrooms/:classroom_public_id/assignments/:public_id`, `Classroom:
 *Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **La bascule sert aussi au catalogue** (UDR-0069 §3.8) : fiche essentielle et page d'un exercice, une bascule par classe du bon niveau ; nouveau local `classroom_name:` qui nomme la classe dans les `aria-label`. Modale des jours, streams et rafraîchissement inchangés.
-- **« Exercices assignés »** : une assignation dont le cours n'est pas du niveau ou de la série de la classe porte « Hors niveau » et « Vos élèves ne peuvent pas l'ouvrir. » (UDR-0069 §3.9).
