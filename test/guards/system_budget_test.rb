@@ -14,7 +14,7 @@ class SystemBudgetTest < Minitest::Test
 
     assert_empty subject.missing, "durée non enregistrée (script/ci/test_timings.yml) : #{subject.record_command(subject.missing)}"
     assert subject.within_budget?, "la suite système grandit de #{subject.growth} s avec #{subject.touched.join(', ')} ; " \
-                                   "budget #{SystemBudget::BUDGET} s par chantier (ADR-0069 §9) : des tests redescendent " \
+                                   "budget #{subject.budget} s pour ce chantier (ADR-0069 §9) : des tests redescendent " \
                                    "au niveau contrôleur, ou le porteur relève le budget"
   end
 
@@ -39,5 +39,19 @@ class SystemBudgetTest < Minitest::Test
     assert_equal %w[new], subject.missing
     assert_equal 0.0, subject.growth
     assert_equal "bin/rails test new -v 2>&1 | script/ci/record_timings", subject.record_command(subject.missing)
+  end
+  # Amendement du 2026-10-03 : le porteur accorde 20 s au blog ; ses deux fichiers seuls ont ce budget, pas un chantier qui
+  # les touche avec d'autres.
+  def test_the_blog_has_twenty_seconds_and_no_other_change_borrows_them
+    blog = SystemBudget::GRANTS.fetch("blog")[:files]
+    reading, management = blog
+
+    assert_equal 20.0, SystemBudget::GRANTS.fetch("blog")[:budget]
+    assert budget(timings: { reading => 2.7, management => 15.5 }, touched: blog).within_budget?, "18,2 s pour le blog"
+    refute budget(timings: { reading => 4.6, management => 15.5 }, touched: blog).within_budget?, "20,1 s : au-delà"
+    mixed = budget(timings: { reading => 2.7, management => 15.5, "other" => 0.5 }, touched: blog + %w[other])
+
+    assert_equal 15.0, mixed.budget
+    refute mixed.within_budget?
   end
 end
