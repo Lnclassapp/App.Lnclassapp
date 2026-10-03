@@ -23,7 +23,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     "variable CSS arbitraire `-(--…)`" => /-\(--[\w-]+\)/,
     "couleur hexadécimale" => /(?<![\w-])#(?:\h{8}|\h{6}|\h{3,4})\b/,
     "attribut `style`" => /\bstyle\s*[=:]\s*["'{]/,
-    "variante `dark:` (pas de mode sombre en V1)" => /(?<![\w-])dark:/,
+    "variante `dark:` (le mode sombre passe par les tokens, UDR-0065)" => /(?<![\w-])dark:/,
     "couleur de la palette par défaut" =>
       /(?<![\w-])(?:#{COLOR_UTILITIES.join('|')})-(?:#{DEFAULT_PALETTE.join('|')})(?:-\d+)?(?![\w-])/,
     "rayon hors tokens" => /(?<![\w-])rounded(?:-[trblse]{1,2})?-(?:xs|md|lg|xl|2xl|3xl|4xl)(?![\w-])/,

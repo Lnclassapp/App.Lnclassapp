@@ -21,6 +21,22 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert page.evaluate_script("document.fonts.check('16px \"DM Sans\"')")
   end
 
+# UDR-0065 : un téléphone en thème sombre reçoit les mêmes pages, couleurs redéfinies par les tokens ; une page
+# imprimée reste claire. Le navigateur réévalue les media queries sans recharger la page.
+test "in a dark system theme the tokens turn dark, and a printed page stays light" do
+  emulate_media(features: [ { name: "prefers-color-scheme", value: "dark" } ])
+
+  assert_equal "rgb(15, 18, 24)", css(find("body"), "background-color")
+  assert_equal "rgb(238, 241, 245)", css(find("body"), "color")
+  assert_equal "rgb(0, 112, 179)", css(find("[data-token='brand'] div"), "background-color")
+
+  emulate_media(media: "print", features: [ { name: "prefers-color-scheme", value: "dark" } ])
+
+  assert_equal TOKENS.fetch("paper"), css(find("body"), "background-color")
+ensure
+  emulate_media
+end
+
   test "icons render in every variant and size, labelled when asked" do
     within("[data-example=icon-variants]") { assert_selector "svg[aria-hidden=true]", count: 3 }
     within("[data-example=icon-sizes]") do
@@ -604,6 +620,10 @@ class DesignSystemTest < ApplicationSystemTestCase
   end
 
   def submissions = evaluate_script("window.submissions")
+
+  def emulate_media(media: "", features: [])
+    page.driver.browser.execute_cdp("Emulation.setEmulatedMedia", media:, features:)
+  end
 
   # Valeur calculée par le navigateur, sous sa forme sérialisée CSS (`rgb(…)`), pas celle de WebDriver (`rgba(…)`).
   def css(element, property)
