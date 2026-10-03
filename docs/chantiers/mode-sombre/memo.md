@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours — livré en PR, en attente du porteur |
+| **Statut** | livré ([#152](https://github.com/Lnclassapp/App.Lnclassapp/pull/152), fusionnée le 2026-10-03) |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `feature/mode-sombre` |
 | **Programme** | — |
