@@ -10,8 +10,16 @@ require "yaml"
 require_relative "plan"
 
 root = CiPlan::ROOT
+# A class nested in `module Finitions` prints as Finitions::X: both spellings point to the file.
 classes = CiPlan.files("test/**/*_test.rb").each_with_object({}) do |file, map|
-  File.foreach(File.join(root, file)) { |line| map[$1] = file if line =~ /^\s*class\s+([\w:]+)\s*</ }
+  modules = []
+  File.foreach(File.join(root, file)) do |line|
+    modules << $1 if line =~ /^\s*module\s+([\w:]+)\s*$/
+    next unless line =~ /^\s*class\s+([\w:]+)\s*</
+
+    map[$1] = file
+    map[[ *modules, $1 ].join("::")] = file
+  end
 end
 
 # A test that prints (the [PERF] lines) splits its verbose line in two: « Class#test = », its output, then « 1.23 s = . ».
@@ -28,9 +36,11 @@ ARGF.each_line do |line|
 end
 abort "Aucune durée lue : lancez les tests avec -v (TESTOPTS=-v)." if durations.empty?
 
-timings = CiPlan.timings.merge(durations.transform_values { it.round(1) })
+# A file that left the repository leaves the timings with it.
+timings = CiPlan.timings.merge(durations.transform_values { it.round(1) }).select { |file, _| File.exist?(File.join(root, file)) }
 File.write(CiPlan::TIMINGS, <<~YAML + timings.sort.to_h.to_yaml.delete_prefix("---\n"))
   # Seconds per test file, summed from `-v` runs. Written by script/ci/record_timings, read by script/ci/plan.rb
-  # to balance the parts of a sharded group. Stale values only unbalance the parts; they never skip a test.
+  # to balance the parts of a sharded group, and by script/ci/system_budget.rb: a chantier adds at most 15 s to
+  # test/system (ADR-0069 §9). Stale values only unbalance the parts; they never skip a test.
 YAML
 puts "#{durations.size} fichiers mis à jour dans #{CiPlan::TIMINGS.delete_prefix("#{root}/")}"

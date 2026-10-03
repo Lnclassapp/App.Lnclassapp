@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — repris le 2026-10-02 : **runner auto-hébergé abandonné**, la CI reste sur GitHub |
+| **Statut** | en cours — lots 1, 5, 6, 7, 8 et 9 livrés (#106, #136, #148, #149, #150) ; **dix minutes par feature** tenues : 4 min 30 d'horloge au run 479 ; reste la mesure sur 3 runs et le chantier `selection-par-carte-de-couverture` |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/ci-quota` |
 | **Programme** | — |
@@ -65,6 +65,34 @@ Une feature poussée une fois sur sa PR : ≈ 21 400 exécutions de tests et 198
 | Dependabot ? | Vers `Develop`, une PR groupée par écosystème ; les 8 mises à jour déjà sur `main` reviennent dans `Develop` par une PR séparée. |
 | Un job ou deux ? | Un. |
 | CI sur les brouillons ? | Non : seulement sur les PR prêtes. |
+
+---
+
+## Mesure après (2026-10-02 et 2026-10-03)
+
+Méthode inchangée : horodatages des jobs, `ceil` par job ([`script/ci/billed_minutes`](../../../script/ci/billed_minutes)). **Exigence ajoutée par le porteur le 2026-10-02 : 10 minutes d'horloge au plus par feature**, sur les runners GitHub.
+
+| Run | Configuration | `bin/ci` | Détail | Job | Facturé |
+|---|---|---:|---|---:|---:|
+| 406 · PR prouvée par une session cloud | un job, preuve `ci/preuves` | — | rien rejoué | 39 s | **1** |
+| 407 · PR #136 | un job, conteneur PostgreSQL, suite complète | 8 min 09 | système 5 min 55 · unitaires 1 min 09 · perf 45 s · conteneur 23 s | 8 min 45 | **9** |
+| [472](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37079379025) · PR #148 | un job, PostgreSQL de l'image, sans perf | 8 min 52 | système **7 min 04** · unitaires 1 min 18 · PostgreSQL 6 s · setup 14 s | 9 min 27 | **10** |
+| [476](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37081849136) · PR #149, lot 7 | `plan` + `unit` ∥ `system` + `ci` | système **9 min 32**, unitaires 2 min 12 | `plan` 9 s · `unit` 2 min 43 · `system` 9 min 56 · `ci` 5 s ; runner lent (1,35× le run 472 sur les mêmes 338 tests) | **10 min 16** d'horloge | **15** |
+| [479](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37082709855) · PR #150, lot 9, **tirée au sort** (perf jouée) | `plan` + `unit` ∥ `system` 1/3, 2/3, 3/3 + `ci` | `unit` 3 min 08 (avec perf) · parts système 2 min 56, 3 min 15, 3 min 46 | `plan` 8 s · `unit` 3 min 32 · parts 3 min 21, 3 min 42, 4 min 08 · `ci` 6 s | **4 min 30** d'horloge | **19** |
+
+Le run 476 confirme la variance : le job `system` seul dépasse les dix minutes sur un runner lent. Un seul job système ne tient pas le plafond ; d'où le lot 9.
+
+Ce que les deux runs complets disent : les deux suppressions du lot 6 ont retiré ≈ 1 minute de travail, mais **le runner du run 472 était plus lent** (+ 1 min 09 sur les mêmes 338 tests système). Dix minutes tiennent sur ce run, **sans marge** ; avec la variance de 1,5× observée entre runners, un run malchanceux dépasse tant que la suite système reste à 7 minutes dans un seul job. La suite système a grandi de 299 à 338 tests en une journée (#113, #126, #135).
+
+### Décisions du porteur (2026-10-03)
+
+| Question | Réponse |
+|---|---|
+| Deux jobs (`unit` ∥ `system`) pour tenir ≤ 10 min sur un runner lent, ≈ + 100 minutes par mois ? | **Oui.** Lot 7, [ADR-0069 §9](../../decisions/adr/0069-ci-en-un-job-sur-les-pr-et-promotions-par-preuve.md#9-amendement-des-2026-10-02-et-2026-10-03--dix-minutes-par-feature-sur-nimporte-quel-runner). |
+| Chantier « sélection par carte de couverture » (ne jouer que les tests système concernés par les fichiers touchés) ? | **Ouvert** : [`selection-par-carte-de-couverture`](../selection-par-carte-de-couverture/memo.md). |
+| Budget de croissance de la suite système, avec garde ? | **15 secondes par chantier** (l'agent proposait 20). Lot 8 : `test/guards/system_budget_test.rb`. |
+| Les cinq étapes de l'algorithme telles qu'appliquées ? | **Accord du porteur** (deuxième message du 2026-10-03). |
+| « Quatre jobs ? Puis parallélise les tests de plus de 2 minutes. » | Seule étape de plus de 2 minutes : les tests système. Lot 9 : trois parts `system:k/3` (271 s enregistrées chacune), soit quatre jobs qui jouent `bin/ci`. Impact estimé : ≈ 17 minutes facturées par run complet au lieu de 13, horloge ≈ 3 min 30 au lieu de ≈ 7 min 30 ; PR prouvée inchangée (≈ 2). |
 
 ---
 
