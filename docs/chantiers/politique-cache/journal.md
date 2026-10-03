@@ -125,6 +125,20 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 
 - **Un changement de région a été préparé sur Develop pendant le chantier** : patch non appliqué, créé le 2026-10-03 à 20:36 UTC, qui déplace **l'application seule** en `europe-west4-drams3a`. Repéré parce que `describe-environment` de Railway montre la configuration **avec** les changements en attente. Vérification : le `x-runtime` de Develop restait à 3–15 ms, donc rien n'avait bougé. Le patch n'a pas été touché ; le porteur est prévenu de ne pas l'appliquer sans PostgreSQL (plan, lot R).
 
+- **Le 2026-10-03 à 21:40 UTC, le changement a été appliqué sur Develop : l'application est à Amsterdam, PostgreSQL et le bucket sont restés à Singapour.** Le déploiement est en ligne à 21:43:56 (vu par le saut du `x-runtime`). Mesures du jour même :
+
+  | Mesure (Develop) | Avant, Singapour | Après, application seule à Amsterdam |
+  |---|--:|--:|
+  | Trajet jusqu'au serveur, hors serveur (vu de Chicago, `measure_network.rb`, médiane de 3) | 245 ms | **130 ms** |
+  | `x-runtime` de `/login` (aucune requête SQL) | 6 à 12 ms | 3 à 10 ms |
+  | `x-runtime` de `/` (**une** requête SQL : `PublishedArticlesQuery#any?`) | 9 à 15 ms | **175 ms** |
+  | Durée Railway de `/teams` (pages connectées, journaux HTTP) | p50 77 ms, p95 142 ms | **1 229 à 10 064 ms** |
+  | Durée Railway de `/teams/schools` | p50 125 ms, p95 301 ms | **1 305 à 4 639 ms** |
+  | Durée Railway de `/courses` | p50 42 ms, p95 65 ms | **1 365 à 6 772 ms** |
+  | Durée Railway de `/teams/schools/:id` | — | **2 601 à 5 005 ms** |
+
+  Lecture : la région paie sur le trajet (−115 ms par requête, vu de Chicago), mais **chaque requête SQL coûte désormais ~170 ms** (un aller-retour Amsterdam–Singapour). Une page connectée en fait 4 à 25 : elle passe de quelques dizaines de millisecondes à plusieurs secondes. C'est le cas que le plan (lot R) interdisait. Deux sorties : remettre l'application à Singapour (sans interruption, le service n'a pas de volume), ou déplacer PostgreSQL à Amsterdam (interruption pendant la migration du volume). Décision au porteur.
+
 ## Ce qu'on a appris sur la codebase
 
 - La production, Staging et Develop tournent tous en `asia-southeast1` (Singapour), un réplica chacun, PostgreSQL au même endroit. Cloudflare proxifie `lnclass.com`, `app-develop.lnclass.com` et `app-staging.lnclass.com`.
