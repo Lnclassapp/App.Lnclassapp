@@ -8,6 +8,8 @@ module UseCases
       Article = Data.define(:id, :status)
       Actor = Entities::Identity::Actor
       PHONE = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Mobile Safari/537.36".freeze
+      # The storage failure the delivery layer declares recoverable (ActiveRecord::ActiveRecordError in production).
+      Unavailable = Class.new(StandardError)
 
       class FakeArticles
         include Ports::Communication::ArticleRepositoryPort
@@ -41,8 +43,8 @@ module UseCases
       end
 
       def record(article: @published, actor: nil, user_agent: PHONE, headers: {}, articles: @articles)
-        RecordArticleRead.new(articles:, policy: Policies::Communication::ReadArticlePolicy.new, reporter: @reporter)
-                         .call(actor:, article:, user_agent:, headers:)
+        RecordArticleRead.new(articles:, policy: Policies::Communication::ReadArticlePolicy.new, reporter: @reporter,
+                              recoverable: Unavailable).call(actor:, article:, user_agent:, headers:)
       end
 
       test "a visitor's read of a published article is counted, once" do
@@ -109,14 +111,21 @@ module UseCases
         assert_not record(articles:).value
       end
 
-      test "a failure of the counter never raises: the page is read, the error is reported as handled" do
-        error = RuntimeError.new("base indisponible")
+      test "a storage failure of the counter never raises: the page is read, the error is reported as handled, with the article" do
+        error = Unavailable.new("base indisponible")
 
         result = record(articles: FakeArticles.new(failure: error))
 
         assert result.success?
         assert_not result.value
-        assert_equal [ [ error, { handled: true } ] ], @reporter.reports
+        assert_equal [ [ error, { handled: true, context: { article_id: 42 } } ] ], @reporter.reports
+      end
+
+      test "any other error is a bug, not a storage failure: it is neither swallowed nor reported" do
+        error = NoMethodError.new("undefined method for nil")
+
+        assert_raises(NoMethodError) { record(articles: FakeArticles.new(failure: error)) }
+        assert_empty @reporter.reports
       end
     end
   end

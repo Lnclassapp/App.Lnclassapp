@@ -27,11 +27,12 @@ module Communication
 
     private
 
-    # Le rendu ne dépend pas du compteur, et un échec du compteur ne bloque jamais la page (ADR-0073 §4.7).
+    # Le rendu ne dépend pas du compteur, et une panne de la base ne bloque jamais la page (ADR-0073 §4.7) : elle est
+    # journalisée (config/initializers/error_reporting.rb). Toute autre erreur est un bogue : elle remonte.
     def record_read
       UseCases::Communication::RecordArticleRead.new(
         articles: Repositories::Communication::ArticleRepository.new, policy: Policies::Communication::ReadArticlePolicy.new,
-        reporter: Rails.error
+        reporter: Rails.error, recoverable: ActiveRecord::ActiveRecordError
       ).call(actor: current_actor, article: @article, user_agent: request.user_agent, headers: request.headers)
     end
   end

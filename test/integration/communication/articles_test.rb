@@ -190,10 +190,24 @@ class Communication::ArticlesTest < ActionDispatch::IntegrationTest
     repository.alias_method :original_increment_reads, :increment_reads
     repository.define_method(:increment_reads) { |article_id:| raise ActiveRecord::ConnectionTimeoutError, "pool épuisé" }
 
-    read(article)
+    report = assert_error_reported(ActiveRecord::ConnectionTimeoutError) { read(article) }
 
     assert_response :success
     assert_select "h1#article_title", article.title
+    assert report.handled
+    assert_equal article.id, report.context[:article_id]
+  ensure
+    repository.alias_method :increment_reads, :original_increment_reads
+    repository.remove_method :original_increment_reads
+  end
+
+  test "an error of the counter that is not a database failure is not hidden: the page fails, Rails reports it" do
+    article = create_article(author: @author)
+    repository = Repositories::Communication::ArticleRepository
+    repository.alias_method :original_increment_reads, :increment_reads
+    repository.define_method(:increment_reads) { |article_id:| raise ArgumentError, "bogue" }
+
+    assert_raises(ArgumentError) { read(article) }
   ensure
     repository.alias_method :increment_reads, :original_increment_reads
     repository.remove_method :original_increment_reads
