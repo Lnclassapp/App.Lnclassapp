@@ -4,8 +4,10 @@
 module Entities
   module Communication
     module ArticleRead
-      # Un agent vide, ou qui se déclare robot (l'aperçu de WhatsApp et de Facebook compris).
-      ROBOTS = /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|curl|wget|python|headless/i
+      # Un agent vide, ou qui se déclare robot (l'aperçu de WhatsApp et de Facebook compris). « bot » compte suivi d'un
+      # séparateur (Googlebot/2.1, AdsBot-Google, bingbot;) ou seul, jamais dans un nom de modèle : un téléphone CUBOT X30
+      # est un lecteur.
+      ROBOTS = %r{bot(?:[/\-;)]|\z)|\bbot\b|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|curl|wget|python|headless}i
       # Turbo 8 précharge un lien au survol ; les navigateurs l'annoncent par l'un de ces en-têtes.
       PURPOSE_HEADERS = %w[Sec-Purpose X-Sec-Purpose Purpose].freeze
       PREFETCH = /prefetch/i

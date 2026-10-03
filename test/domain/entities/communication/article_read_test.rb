@@ -21,6 +21,27 @@ module Entities
         end
       end
 
+      test "les robots courants se déclarent par « bot » suivi d'un séparateur ; aucun n'est une lecture" do
+        [ "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+          "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)", "Mozilla/5.0 (compatible; AhrefsBot/7.0)",
+          "DuckDuckBot-Https/1.1; (+https://duckduckgo.com/duckduckbot)", "AdsBot-Google (+http://www.google.com/adsbot.html)",
+          "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)", "Twitterbot/1.0",
+          "Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15 (Applebot/0.1)",
+          "Mozilla/5.0 (compatible; Some bot here)" ].each do |user_agent|
+          assert_not countable?(user_agent), user_agent
+        end
+      end
+
+      test "« crawl » suffit à déclarer un robot, sans « bot » ni « spider »" do
+        assert_not countable?("Mozilla/5.0 (compatible; SiteCrawler/1.0)")
+      end
+
+      test "un téléphone dont le modèle contient « bot » (CUBOT) est une lecture" do
+        assert countable?("Mozilla/5.0 (Linux; Android 10; CUBOT X30 Build/QP1A.190711.020) AppleWebKit/537.36 " \
+                          "(KHTML, like Gecko) Chrome/120.0.6099.230 Mobile Safari/537.36")
+        assert countable?("Mozilla/5.0 (Linux; Android 12; CUBOT KINGKONG 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36")
+      end
+
       test "un préchargement, annoncé par l'un des trois en-têtes, n'est pas une lecture" do
         assert_equal %w[Sec-Purpose X-Sec-Purpose Purpose], ArticleRead::PURPOSE_HEADERS
         [ { "Sec-Purpose" => "prefetch" }, { "Sec-Purpose" => "prefetch;prerender" }, { "X-Sec-Purpose" => "prefetch" },

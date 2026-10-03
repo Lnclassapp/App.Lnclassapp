@@ -48,6 +48,11 @@ module Entities
         assert_equal [ "Écrivez le texte de l'article : il est obligatoire pour publier." ], errors[:body]
       end
 
+      test "une espace insécable littérale (U+00A0), comme son entité, ne fait pas un texte" do
+        assert_match Article::SPACES, "\u00A0"
+        assert_equal [ :body ], article(body: "<div>\u00A0\u00A0</div>").publication_errors.keys
+      end
+
       test "un titre vide est nommé aussi, dans l'ordre du formulaire" do
         assert_equal %i[title excerpt], article(title: "", excerpt: nil).publication_errors.keys
       end

@@ -143,7 +143,7 @@ Le HTML est d'abord canonisé par `ActionText::Content` (les `figure[data-trix-a
 
 - `RecordArticleRead` (policy `ReadArticlePolicy`) compte une lecture si l'article est publié, la requête est un `GET` HTML, l'acteur n'est pas `team` (aperçu compris), et `Entities::Communication::ArticleRead.countable?` l'admet. Elle **refuse** :
   - un **préchargement** : en-tête `Sec-Purpose`, `X-Sec-Purpose` ou `Purpose` contenant `prefetch` (Turbo 8 précharge un lien au survol ; la liste pose aussi `data-turbo-prefetch="false"`, UDR-0064) ;
-  - un **robot qui se déclare** : agent vide, ou motif `bot|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|curl|wget|python|headless` (le robot d'aperçu de WhatsApp compris).
+  - un **robot qui se déclare** : agent vide, ou motif `bot(?:[/\-;)]|\z)|\bbot\b|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|curl|wget|python|headless` (le robot d'aperçu de WhatsApp compris). *Amendement du 2026-10-03 : « bot » ne compte que suivi d'un séparateur ou seul, pour ne plus écarter les téléphones CUBOT (« CUBOT X30 Build/… »).*
   Sinon succès sans écriture. Un échec du compteur ne bloque jamais la page.
 - **Une requête SQL**, sans transaction ni verrou applicatif : `UPDATE articles SET reads_count = reads_count + 1 WHERE id = $1 AND status = 'published'`. `updated_at` n'est pas touché (le `lastmod` du plan du site ne bouge pas) ; la colonne n'est pas indexée, la mise à jour reste HOT.
 - **Rien d'autre n'est lu ni gardé** : ni cookie, ni adresse IP, ni agent, ni lien avec une inscription. Le cookie de session que pose déjà toute page (nonce CSP, ADR-0049) n'est pas lu. Le chiffre est brut, affiché « lectures, sans dédoublonnage », visible de l'équipe seule.
