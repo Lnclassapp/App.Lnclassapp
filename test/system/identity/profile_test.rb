@@ -12,6 +12,29 @@ class Identity::ProfileTest < ApplicationSystemTestCase
                               created_at: Time.zone.local(2026, 9, 1, 10))
   end
 
+# UDR-0065, amendement du 2026-10-03 : sur grand écran, l'interrupteur à côté de l'avatar passe la page en sombre sans
+# la recharger, et le choix tient au chargement suivant (cookie) ; un second clic revient au clair.
+test "the switch next to the avatar turns the page dark at once, and the choice survives a reload" do
+  sign_in_as @student
+  background = -> { page.evaluate_script("getComputedStyle(document.body).backgroundColor") }
+  switch = -> { find("header button[role=switch]") }
+
+  assert_equal "rgb(250, 248, 244)", background.call
+  switch.call.click
+
+  assert_selector "html[data-theme=dark]"
+  assert_equal "rgb(15, 18, 24)", background.call
+  assert_equal "true", switch.call["aria-checked"]
+
+  visit current_path
+
+  assert_equal "rgb(15, 18, 24)", background.call
+  switch.call.click
+
+  assert_selector "html[data-theme=light]"
+  assert_equal "rgb(250, 248, 244)", background.call
+end
+
   def open_profile
     find("button[aria-controls='account-menu']").click
     find("#account-menu a[role=menuitem]", text: I18n.t("shared.navigation.profile")).click
