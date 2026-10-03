@@ -8,6 +8,12 @@ module Repositories
 
       ATTACHMENT = Repositories::Shared::RichTextSanitizer::ATTACHMENT
       IMAGE_MODEL = "Orm::ArticleImage"
+      SLUG_INDEX = "index_articles_on_slug"
+      # Deux collisions de slug concurrentes de suite : le geste se refait, il trouvera un slug libre.
+      SLUG_TAKEN = ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
+
+      # Levée par persist, rattrapée par save hors de la transaction : rien n'est écrit.
+      class SlugTaken < StandardError; end
 
       def find_by_public_id(public_id:)
         # Un seul article : pas de chargement anticipé, que Bullet signalerait inutile sans couverture.
@@ -62,15 +68,20 @@ module Repositories
           Orm::ArticleImage.where(id: previous - cited - [ cover&.id ]).each(&:destroy!)
         end
         ::Shared::Result.success(map_to_entity(record))
+      rescue SlugTaken
+        SLUG_TAKEN
       end
 
       # ADR-0029 : deux créations simultanées peuvent lire le même slug libre ; l'index unique refuse la seconde, dont
-      # le slug est recalculé une fois. Savepoint : l'échec ne casse pas la transaction englobante. Le texte enregistré
-      # ne touche pas l'article : updated_at reste l'heure du geste (at).
+      # le slug est recalculé une fois ; une seconde collision lève SlugTaken (:conflict, jamais un 500). Toute autre
+      # violation (public_id), ou une collision sur un article déjà enregistré (slug figé), remonte telle quelle.
+      # Savepoint : l'échec ne casse pas la transaction englobante. Le texte enregistré ne touche pas l'article :
+      # updated_at reste l'heure du geste (at).
       def persist(record, retried: false)
         Orm::Article.transaction(requires_new: true) { Orm::Article.no_touching { record.save! } }
-      rescue ActiveRecord::RecordNotUnique
-        raise if retried
+      rescue ActiveRecord::RecordNotUnique => error
+        raise unless error.message.include?(SLUG_INDEX) && record.new_record?
+        raise SlugTaken if retried
 
         record.slug = nil
         persist(record, retried: true)

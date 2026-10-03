@@ -238,6 +238,21 @@ class Teams::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Article.count
   end
 
+  test "a slug taken twice by simultaneous creations is a 422 in the modal, never a 500; nothing is written" do
+    create_article(title: "Réviser le BEPC en 4 semaines")
+    sign_in_as @content
+    Orm::Article.define_singleton_method(:exists?) { |*, **| false }
+
+    assert_no_difference([ -> { Orm::Article.count }, -> { Orm::AuditEvent.count } ]) do
+      post teams_articles_path, params: article_params
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "#article_base_error", text: I18n.t("activemodel.errors.messages.write_failed")
+  ensure
+    Orm::Article.singleton_class.remove_method(:exists?)
+  end
+
   test "without Turbo, a creation redirects to the list with its notice" do
     sign_in_as @admin
 

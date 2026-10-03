@@ -14,6 +14,7 @@ module Ports
       # ArticleInput valide. Dans la transaction : le texte est assaini, la couverture et les images qu'il cite sont
       # rattachées à l'article, avec leurs textes de remplacement (dto.image_alts).
       # → Result(Article) | failure(:invalid, errors: { cover_public_id: [:invalid] }) (couverture inconnue ou d'un autre article)
+      #   | failure(:conflict, errors: { base: [:write_failed] }) (slug pris deux fois de suite par des créations simultanées)
       def create(dto:, author_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end

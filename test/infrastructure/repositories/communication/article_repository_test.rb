@@ -58,11 +58,44 @@ module Repositories
         assert_equal 2, Orm::Article.count
       end
 
-      test "une seconde collision n'est pas masquée" do
+      test "une seconde collision de slug concurrente rend :conflict (base: write_failed), jamais un 500 ; rien n'est écrit" do
         create
 
-        assert_raises(ActiveRecord::RecordNotUnique) { with_exists(->(*, **) { false }) { create } }
+        result = with_exists(->(*, **) { false }) { @repository.create(dto: input, author_id: @author.id, at: @at) }
+
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :write_failed ] }, result.errors)
         assert_equal 1, Orm::Article.count
+      end
+
+      test "la violation d'un autre index unique (public_id) n'est pas une collision de slug : elle remonte, sans nouvel essai" do
+        taken = create.public_id
+        lookups = 0
+        SecureRandom.singleton_class.alias_method :original_base58, :base58
+        SecureRandom.define_singleton_method(:base58) { |*| taken }
+
+        error = assert_raises(ActiveRecord::RecordNotUnique) do
+          with_exists(->(*args, **options) { (lookups += 1) && Orm::Article.where(*args, **options).any? }) { create }
+        end
+
+        assert_includes error.message, "index_articles_on_public_id"
+        assert_equal 2, lookups, "un seul calcul du slug (-2), pas de second essai"
+        assert_equal 1, Orm::Article.count
+      ensure
+        SecureRandom.singleton_class.alias_method :base58, :original_base58
+        SecureRandom.singleton_class.remove_method :original_base58
+      end
+
+      test "une collision de slug sur un article déjà enregistré n'est pas réessayée : le slug figé n'est jamais recalculé" do
+        first = create
+        second = create
+        Orm::Article.define_singleton_method(:find) { |id| super(id).tap { it.slug = first.slug } }
+
+        error = assert_raises(ActiveRecord::RecordNotUnique) { @repository.update(id: second.id, dto: input(title: "Autre"), at: @at) }
+
+        assert_includes error.message, "index_articles_on_slug"
+      ensure
+        Orm::Article.singleton_class.remove_method(:find)
       end
 
       test "BL-16 : le texte est assaini à l'écriture ; un h1 devient un h2 ; une image d'un autre article part" do
