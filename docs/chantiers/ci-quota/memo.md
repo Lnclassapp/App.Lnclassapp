@@ -77,8 +77,10 @@ Méthode inchangée : horodatages des jobs, `ceil` par job ([`script/ci/billed_m
 | 406 · PR prouvée par une session cloud | un job, preuve `ci/preuves` | — | rien rejoué | 39 s | **1** |
 | 407 · PR #136 | un job, conteneur PostgreSQL, suite complète | 8 min 09 | système 5 min 55 · unitaires 1 min 09 · perf 45 s · conteneur 23 s | 8 min 45 | **9** |
 | [472](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37079379025) · PR #148 | un job, PostgreSQL de l'image, sans perf | 8 min 52 | système **7 min 04** · unitaires 1 min 18 · PostgreSQL 6 s · setup 14 s | 9 min 27 | **10** |
-| PR du lot 7 (#149) | `plan` + `unit` ∥ `system` + `ci` | *à mesurer sur son run* | | | |
+| [476](https://github.com/Lnclassapp/App.Lnclassapp/actions/runs/37081849136) · PR #149, lot 7 | `plan` + `unit` ∥ `system` + `ci` | système **9 min 32**, unitaires 2 min 12 | `plan` 9 s · `unit` 2 min 43 · `system` 9 min 56 · `ci` 5 s ; runner lent (1,35× le run 472 sur les mêmes 338 tests) | **10 min 16** d'horloge | **15** |
 | PR du lot 9 | `plan` + `unit` ∥ `system` 1/3, 2/3, 3/3 + `ci` | *à mesurer sur son run* | estimé : horloge ≈ 3 min 30 | | estimé 17 |
+
+Le run 476 confirme la variance : le job `system` seul dépasse les dix minutes sur un runner lent. Un seul job système ne tient pas le plafond ; d'où le lot 9.
 
 Ce que les deux runs complets disent : les deux suppressions du lot 6 ont retiré ≈ 1 minute de travail, mais **le runner du run 472 était plus lent** (+ 1 min 09 sur les mêmes 338 tests système). Dix minutes tiennent sur ce run, **sans marge** ; avec la variance de 1,5× observée entre runners, un run malchanceux dépasse tant que la suite système reste à 7 minutes dans un seul job. La suite système a grandi de 299 à 338 tests en une journée (#113, #126, #135).
 

@@ -77,7 +77,7 @@ Chantier selection-par-carte-de-couverture (ouvert le 2026-10-03, hors de ce cha
 - **Fichiers**     : `.github/workflows/ci.yml` *(jobs `plan`, `unit`, `system`, `ci`)*, `config/ci.rb` *(en-tête)*, `test/guards/ci_plan_test.rb`
 - **Dépend de**    : Lot 6
 - **Test associé** : `test/guards/ci_plan_test.rb` (quatre jobs, les deux jobs font `bin/ci`, preuve par `ci` seulement, brouillon sans verdict)
-- **Done quand**   : le run de la PR de ce lot est vert ; **horloge du job `system` ≤ 10 min**, ≈ 13 minutes facturées pour un run complet, ≈ 2 pour une PR prouvée. Chiffres dans le [journal](journal.md).
+- **Done quand**   : le run de la PR de ce lot est vert. **Mesuré** (run 476) : `unit` 2 min 43, `system` 9 min 56 sur un runner lent, horloge 10 min 16, 15 minutes facturées. Le plafond n'est pas tenu par ce seul lot : lot 9.
 
 ## Lot 8 — Automatiser : budget de croissance de la suite système
 
