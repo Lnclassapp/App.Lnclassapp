@@ -1,9 +1,8 @@
 <%# 🌐 UI · catalog/courses/show — page d'un cours (CA-04, CA-10), pour tous les rôles connectés %>
-<%# Rôle : retour « Cours » (UDR-0054 §3.2), badges, actions du rôle, contenu riche sous KaTeX, fiches essentielles (élève : 3 puis « Voir plus ») ; morphing (B2, B4) %>
-<%# ADR  : 0028, 0035, 0051 · UDR : 0006, 0007, 0013, 0054, 0057 %>
+<%# Rôle : retour « Cours » (le fil complet a disparu, UDR-0054 §3.2), badges, actions du rôle, contenu riche assaini sous KaTeX, fiches essentielles ; rafraîchie par morphing (B2, B4) %>
+<%# ADR  : 0028, 0035, 0051 · UDR : 0006, 0007, 0013, 0054 %>
 <% course = @detail.course %>
 <% team = !@status_record.nil? %>
-<% student = current_actor.student? %>
 <% page_title t(".page_title", name: course.name) %>
 <% content_for :nav_key, "courses" %>
 <%= ui_back_link t(".back"), href: courses_path %>
@@ -47,16 +46,10 @@
     <% if @detail.essentials.empty? %>
       <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "document-text" %>
     <% else %>
-      <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R3) : l'élève voit 3 fiches, puis « Voir plus » ; les autres rôles, la liste complète. %>
-      <%= tag.div(class: "space-y-3", data: (ui_reveal_data if student)) do %>
-        <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
-          <% @detail.essentials.each_with_index do |essential, index| %>
-            <%= render "essential_row", essential:, course_slug: course.slug, show_status: team, student:,
-                                        folded: student && index >= ComponentsHelper::REVEAL_LIMIT %>
-          <% end %>
-        </ul>
-        <%= ui_reveal_more @detail.essentials.size if student %>
-      <% end %>
+      <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+        <%= render partial: "essential_row", collection: @detail.essentials, as: :essential,
+                   locals: { course_slug: course.slug, show_status: team } %>
+      </ul>
     <% end %>
   </section>
 </div>

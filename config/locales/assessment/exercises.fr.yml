@@ -1,10 +1,9 @@
-# Page d'un exercice (plan boucle-pedagogique, Lot C1) — ADR-0033, ADR-0054, UDR-0007, UDR-0021 (épurée pour l'élève, UDR-0057)
+# Page d'un exercice (plan boucle-pedagogique, Lot C1) — ADR-0033, ADR-0054, UDR-0007, UDR-0021
 fr:
   assessment:
     exercises:
       show:
         page_title: "%{title}"
-        # Enseignant et équipe seulement : l'élève lit le cours seul, la fiche est dans le lien retour (UDR-0021, 2026-10-02).
         context: "%{course} · Fiche essentielle : %{essential}"
         exercise_types:
           fixation: "Fixation"
@@ -17,8 +16,9 @@ fr:
         actions: "Actions pour %{name}"
       student_progress:
         title: "Ta progression"
-        best_score: "Meilleure note"
-        no_score: "—"
+        best_score: "Meilleur score"
+        score: "%{score} %"
+        no_score: "Aucune session terminée"
         mastery: "Maîtrise"
         no_mastery: "—"
         badge: "Badge"

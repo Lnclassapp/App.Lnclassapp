@@ -1,7 +1,11 @@
-<%# 🌐 UI · assessment/exercise_sessions/_progress_bar — avancée de la session, en barre seule %>
-<%# Rôle : remplacée par le stream de chaque réponse (id progress_bar) ; barre native, sans style en ligne ; le nombre est dans la carte %>
-<%# ADR  : 0033, 0054 · UDR : 0022, 0057 · « Question n sur T » dit l'avancement une fois (R6), la barre le montre %>
-<div id="progress_bar">
+<%# 🌐 UI · assessment/exercise_sessions/_progress_bar — questions répondues sur le total de la session %>
+<%# Rôle : remplacée par le stream de chaque réponse (id progress_bar) ; barre native, sans style en ligne %>
+<%# ADR  : 0033, 0054 · UDR : 0022 %>
+<div id="progress_bar" class="space-y-2">
+  <div class="flex items-center justify-between gap-3 text-sm">
+    <span class="font-medium text-ink"><%= t(".answered", count: play.answered_count, total: play.question_count) %></span>
+    <span class="text-mute"><%= t(".percent", percent: play.progress_percent) %></span>
+  </div>
   <progress value="<%= play.progress_percent %>" max="100" aria-label="<%= t(".label") %>"
             class="block h-2 w-full overflow-hidden rounded-full accent-brand"><%= t(".percent", percent: play.progress_percent) %></progress>
 </div>

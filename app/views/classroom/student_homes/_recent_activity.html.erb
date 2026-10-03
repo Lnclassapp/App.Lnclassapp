@@ -1,29 +1,32 @@
 <%# 🌐 UI · classroom/student_homes/_recent_activity — contenu du frame différé de l'activité récente %>
-<%# Rôle : les 10 dernières sessions terminées, note sur 20 dans la pastille, titre, « il y a … » ; 3 lignes puis « Voir plus » %>
-<%# ADR  : 0033 · UDR : 0006, 0057, 0058 §3.3 (une seule forme de la note) %>
+<%# Rôle : les 10 dernières sessions terminées, avec score et note sur 20, chacune vers son résultat %>
+<%# ADR  : 0033 · UDR : 0006, 0010 %>
 <%# locals: (sessions:) -%>
 <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, target: "_top" do %>
   <% if sessions.empty? %>
     <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "bolt" %>
   <% else %>
-    <%= tag.div data: ui_reveal_data do %>
-      <ul class="space-y-2">
-        <% sessions.each_with_index do |session, index| %>
-          <%= tag.li(**ui_reveal_item(index)) do %>
-            <%= link_to exercise_session_result_path(session.public_id),
-                        class: "group flex min-h-tap items-center gap-3 rounded-ln px-3 py-2 transition hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
-              <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-ln text-xs font-bold",
-                                           session.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? "bg-success-soft text-success" : "bg-warning-soft text-warning") %>"><%= grade_label(session.score_percent) %></span>
-              <span class="min-w-0 flex-1">
-                <span class="block truncate text-sm font-medium text-ink"><%= session.exercise_title %></span>
-                <span class="mt-0.5 block text-xs text-mute"><%= t(".completed", time: time_ago_in_words(session.completed_at)) %></span>
+    <ul class="space-y-2">
+      <% sessions.each do |session| %>
+        <li>
+          <%= link_to exercise_session_result_path(session.public_id),
+                      class: "group flex min-h-tap items-center gap-3 rounded-ln px-3 py-2 transition hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
+            <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-ln text-xs font-bold",
+                                         session.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? "bg-success-soft text-success" : "bg-warning-soft text-warning") %>">
+              <%= t(".score", score: session.score_percent) %>
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate text-sm font-medium text-ink"><%= session.exercise_title %></span>
+              <span class="mt-0.5 flex flex-wrap gap-x-2 text-xs text-mute">
+                <span><%= grade_label(session.score_percent) %></span>
+                <span><%= mastery_label(session.score_percent) %></span>
+                <span><%= t(".completed", time: time_ago_in_words(session.completed_at)) %></span>
               </span>
-              <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
-            <% end %>
+            </span>
+            <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
           <% end %>
-        <% end %>
-      </ul>
-      <%= ui_reveal_more sessions.size %>
-    <% end %>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
 <% end %>

@@ -33,33 +33,6 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
     with_mobile_viewport { play_the_session }
   end
 
-  # UDR-0022, amendement du 2026-10-02 (UDR-0057) : à 390 × 844, une seule action principale et au plus 5 blocs avant
-  # le pli, sur la question comme sur son verdict ; la consigne n'est donnée que pour plusieurs réponses (R4, R6).
-  test "à 390 px, la session suit la règle de sobriété ; « Coche N propositions. » seulement pour plusieurs réponses" do
-    @second.update!(question_type: "multiple_correct_2")
-
-    with_mobile_viewport do
-      visit exercise_session_path(@session.public_id)
-
-      within("#question-card") { assert_no_selector "fieldset > p" }
-      assert_single_primary_action
-      assert_blocks_above_fold "#main .max-w-2xl > *"
-
-      choose wrong_answer(@first).content
-      click_on I18n.t("#{SCOPE}.question_card.submit")
-      within("#feedback-card") { assert_text I18n.t("#{SCOPE}.feedback_card.encouragement.error") }
-      assert_single_primary_action
-      assert_blocks_above_fold "#main .max-w-2xl > *"
-
-      click_on I18n.t("#{SCOPE}.feedback_card.next")
-      within("#question-card") do
-        assert_selector "fieldset > p", exact_text: I18n.t("#{SCOPE}.question_card.hint", count: 2)
-        assert_no_text "Plusieurs propositions correctes"
-      end
-      assert_single_primary_action
-    end
-  end
-
   private
 
   def play_the_session
@@ -77,7 +50,7 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
         assert_text "Quatre cellules filles."
         assert_no_text(/correcte/i)
       end
-      assert_selector "#progress_bar progress[value='50']"
+      assert_selector "#progress_bar", text: I18n.t("#{SCOPE}.progress_bar.answered", count: 1, total: 2)
 
       click_on I18n.t("#{SCOPE}.feedback_card.next")
       assert_selector "#question-card", text: "La méiose réduit-elle le nombre de chromosomes ?"

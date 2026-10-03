@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté — *amendé le 2026-10-02 : suppression sur demande, demandes enregistrées et rappelées, résultats effacés (lot R de `fonctions-espace-eleve`) ; l'amendement « anonymisation automatique » du même jour est retiré* |
+| **Statut** | Accepté |
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-14**, bloque la V1 (Lot B) et la V2 |
 | **Complète** | [ADR-0005](./0005-decouplage-audit-admin-et-integrite-donnees.md) · [ADR-0016](./0016-conservation-historique-assignations.md) |
@@ -111,69 +111,3 @@ production:
 ## 9. Points à confirmer par le porteur
 
 - L'anonymisation garde les résultats pseudonymes : ce n'est pas un effacement total.
-
-## Amendement du 2026-10-02 — anonymisation automatique 30 jours après le départ · Statut : Retiré (porteur, 2026-10-02)
-
-> **Retiré le jour même par le porteur** : « pas d'anonymisation, les données doivent être accessibles par l'établissement et l'élève comme archive ». Les 30 jours s'appliquent à la **suppression sur demande** : une demande de suppression de compte est traitée dans les 30 jours. Aucun job d'anonymisation automatique. La règle « anonymiser, jamais supprimer » du §4 reste la manière technique de traiter une demande de suppression, sous réserve de la validation des juristes (`pages-publiques.md`, relecture). Le texte ci-dessous est conservé pour mémoire.
-
-*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/plan.md), lot R ; règle de conservation donnée par le porteur le 2026-10-02 pour la page « Protection des données » ([UDR-0063](../udr/0063-pages-publiques-mission-confidentialite-cgu-cgv.md)). **Proposé** : la définition du « départ » reste à trancher (questions ci-dessous). Le texte ci-dessus reste en vigueur tant que cet amendement n'est pas accepté.*
-
-### Constat
-
-Le porteur fixe la conservation : **30 jours après le départ**, les **données personnelles sensibles sont anonymisées par défaut** ; les **informations d'usage** (sessions, réponses, badges, lacunes, assignations) **restent**, pour la progression et le suivi par les enseignants et l'établissement.
-
-Le §4 ci-dessus prévoit l'anonymisation, mais seulement à la main, par l'équipe (`Identity::AnonymizeUser`, `DeleteUserPolicy`). Au 2026-10-02 :
-
-- **`Identity::AnonymizeUser` n'existe pas** (aucun use case dans `app/domain/use_cases/identity/`) ; seule la colonne `users.anonymized_at` et la lecture `User#anonymized?` existent ;
-- **aucune purge du §6 n'est programmée** : `config/recurring.yml` ne contient que la purge des fichiers non rattachés (ADR-0047) ; `PurgeLoginAttemptsJob` et `PurgeExpiredCredentialsJob` n'existent pas.
-
-La politique de protection des données ne peut donc pas promettre « 30 jours » tant que ce qui suit n'est pas livré.
-
-### Décision proposée
-
-> **Nous anonymisons automatiquement un compte 30 jours après son départ, par un job quotidien, avec le même use case que l'anonymisation faite par l'équipe ; les données d'usage restent rattachées au compte anonymisé.**
-
-- **`UseCases::Identity::AnonymizeUser`** : la transaction du §4 (nom « Compte supprimé », `contact` nul, PIN aléatoire, `anonymized_at`, sessions, second facteur, codes et invitations supprimés, adhésions terminées), **plus la photo de profil effacée** (ADR-0060, `ProfilePhotoStorePort#remove`). Deux appelants : l'équipe (`DeleteUserPolicy`, inchangée) et le système (acteur `nil`, policy `Identity::AutoAnonymizePolicy` qui n'autorise que l'appel du job). Journal : `user.anonymized`, avec `metadata.reason` = `team` ou `retention`.
-- **`Identity::AnonymizeDepartedUsersJob`**, dans `config/recurring.yml` (`every day at 3:30am`) : il lit les comptes non anonymisés dont le départ date de plus de 30 jours (`Ports::Identity::UserRepositoryPort#departed_before(at:)`, par lots de 500) et appelle `AnonymizeUser` pour chacun. Idempotent : un compte déjà anonymisé est ignoré.
-- **Ce qui reste** : sessions, réponses, badges, lacunes, assignations, journal d'audit (sans donnée effacée). Ils restent rattachés au compte anonymisé : les statistiques de la classe et du pilotage ne changent pas (§5, « les statistiques d'un exercice restent exactes »).
-- **Hors de cet amendement** : les purges des tentatives de connexion (90 jours) et des codes périmés (30 jours) du §6 restent à programmer ; le lot R les ajoute s'il en a le temps, sinon elles sont signalées dans le journal du chantier.
-
-### Questions à trancher avant d'accepter
-
-1. **Qu'est-ce qu'un « départ » ?** Trois lectures possibles, non exclusives :
-   - un compte **fermé à la demande** (de l'utilisateur, d'un parent, de l'établissement) ;
-   - un élève **sorti de toute classe** (toutes ses adhésions ont un `left_at`) ; mais un élève qui change de classe passe par cet état un instant ;
-   - une **fin d'année scolaire sans réinscription** (classe archivée, ADR-0041, sans nouvelle adhésion à la rentrée) ;
-   - et, pour un enseignant : retiré de son établissement (ADR-0071) ? sans classe déclarée ?
-2. **Quelles données sont « sensibles » ?** Nom et prénom(s), numéro, photo, genre ? L'adresse IP des sessions, des tentatives et du journal ? Le numéro saisi dans `login_attempts.contact` ?
-3. **Sessions et badges** : rattachés au compte anonymisé (proposition, qui garde les statistiques), ou détachés ?
-
-### Vérification prévue
-
-- `test/domain/use_cases/identity/anonymize_user_test.rb` : chaque donnée sensible est effacée, chaque donnée d'usage reste ; refus pour un enseignant, un élève, la direction.
-- `test/jobs/identity/anonymize_departed_users_job_test.rb` : un compte parti depuis 31 jours est anonymisé, un compte parti depuis 29 jours ne l'est pas, un second passage ne change rien.
-- `test/config/recurring_test.rb` : le job est programmé en production.
-
-## Amendement du 2026-10-02 (2) — suppression sur demande : demandes enregistrées, rappel avant 30 jours, résultats effacés · Statut : Accepté (porteur, 2026-10-02)
-
-*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/plan.md), lots R2 et R3. Réponses du porteur aux deux questions laissées ouvertes par le lot R : « retire l'élève des stats » et « oui, une notification pour le rappel de suppression ».*
-
-### Ce qui change dans le §4
-
-1. **Les résultats d'un compte supprimé sont effacés** (lot R2). « Sessions, tentatives, badges et lacunes sont conservés » ne vaut plus pour un compte supprimé sur demande : `Identity::AnonymizeUser` efface aussi, dans la même transaction, ses sessions d'exercice, leurs réponses (`question_attempts`), ses badges et ses lacunes. Il ne compte plus dans aucune statistique : réussite de la classe (UDR-0029), suivi d'un exercice, « Travail des élèves », pilotage de l'équipe. La règle « aucune cascade » reste : l'effacement est explicite, ligne par ligne, dans un port dédié, jamais par `on_delete: :cascade` ni `dependent:`. Le compte lui-même reste anonymisé (« Compte supprimé »), pas supprimé, pour les auteurs et le journal.
-2. **Une demande de suppression s'enregistre à sa réception** (lot R3). Table `account_deletion_requests` : le compte, la date de réception (`requested_on`), l'auteur, l'état (`pending`, `processed`, `cancelled`) et sa date ; une seule demande `pending` par compte. L'équipe `admin` (ADR-0038) l'enregistre depuis la fiche du compte, l'annule si l'élève ou son parent se rétracte, ou la traite : la modale de suppression reprend alors la date enregistrée, et l'anonymisation passe la demande en `processed` dans sa transaction. Une suppression sans demande enregistrée reste possible (la date est saisie dans la modale, comme au lot R). Journal : `user.deletion_requested`, `user.deletion_request_cancelled`, puis `user.anonymized`.
-3. **Rappel** (lot R3). Échéance = date de réception + 30 jours. L'accueil de l'équipe montre à l'`admin` une carte « Demandes de suppression » : le nombre en attente et la plus proche échéance ; **en ambre** quand il reste 5 jours ou moins (à partir du 25e jour), « En retard » au-delà de 30 jours. Elle mène à la liste des demandes en attente, triée par échéance. Le rappel est lu à l'affichage, sans job. Aucun courriel : l'application n'a pas d'envoi configuré (`config.action_mailer` sans SMTP) ; un rappel par courriel ou WhatsApp serait un autre chantier.
-
-### Conséquences
-
-- 🟢 Un compte supprimé ne laisse plus de trace nominative ni statistique ; la promesse de la page « Protection des données » devient simple.
-- 🟢 Une demande ne peut plus être oubliée : elle est visible dès sa réception et le délai de 30 jours est rappelé.
-- 🔴 Les statistiques passées d'une classe changent après une suppression (un élève de moins). Accepté par le porteur.
-- 🔴 Une table et trois écrans de plus pour l'équipe.
-
-### Vérification
-
-- `test/domain/use_cases/identity/anonymize_user_test.rb` : l'effacement des résultats et la clôture de la demande sont appelés dans la transaction ; rien n'est écrit en cas de refus.
-- Un test de repository sur base réelle : les sessions, réponses, badges et lacunes de l'élève sont effacés, ceux d'un autre élève restent ; une lacune résolue par une session d'un autre élève ne bloque pas l'effacement.
-- Un test de la réussite de la classe (UDR-0029) avant et après une suppression.
-- Les tests des demandes : enregistrer, annuler, traiter ; une seule en attente par compte ; date future refusée ; refus pour `content`, `field` et tout autre rôle ; la carte en ambre au 25e jour, « En retard » au 31e.

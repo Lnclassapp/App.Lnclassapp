@@ -113,8 +113,7 @@ module Queries
         assert_equal [ [ :gold, 85, nil ], [ nil, nil, started.public_id ], [ nil, nil, nil ] ], facts
       end
 
-      # ADR-0072 §4.1, UDR-0015 (amendée le 2026-10-02) : « par sa fiche ou par son cours » disparaît.
-      test "assigned to my classroom: directly and by an active assignment only, never through another exercise" do
+      test "assigned to my classroom: directly, by its sheet or by its course, active assignments only" do
         direct = create_exercise(essential: @essential, title: "Direct", position: 1)
         archived = create_exercise(essential: @essential, title: "Archivée", position: 2)
         elsewhere = create_exercise(essential: @essential, title: "Autre classe", position: 3)
@@ -122,13 +121,20 @@ module Queries
         create_assignment(classroom: @classroom, assignable: direct)
         create_assignment(classroom: @classroom, assignable: archived, status: "archived")
         create_assignment(classroom: create_classroom, assignable: elsewhere)
-        # Un exercice d'une autre fiche du même cours, assigné à la classe, n'étiquette pas ceux-ci.
-        create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: @course)))
+        create_assignment(classroom: @classroom, assignable: create_essential(course: @course))
+        create_assignment(classroom: @classroom, assignable: create_course)
 
         assigned = ->(row) { row.exercises.to_h { [ it.title, it.assigned_to_my_classroom ] } }
 
         assert_equal({ "Direct" => true, "Archivée" => false, "Autre classe" => false, "Libre" => false },
                      assigned.call(detail(student_id: @student.id)))
+
+        by_essential = create_assignment(classroom: @classroom, assignable: @essential)
+        assert_equal [ true ], assigned.call(detail(student_id: @student.id)).values.uniq
+
+        by_essential.update!(status: "archived", archived_at: Time.current, archived_by: by_essential.assigned_by)
+        create_assignment(classroom: @classroom, assignable: @course)
+        assert_equal [ true ], assigned.call(detail(student_id: @student.id)).values.uniq
       end
 
       test "only the student's active primary classroom counts" do

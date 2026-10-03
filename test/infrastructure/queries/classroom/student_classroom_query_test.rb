@@ -2,8 +2,8 @@ require "test_helper"
 
 module Queries
   module Classroom
-    # CL-22 (CS#B13): « Ma classe » reads the primary classroom only. ADR-0072, UDR-0011 (amended 2026-10-02): a course is
-    # no longer assigned, so « Ma classe » lists no course at all.
+    # CL-22 (CS#B13): « Ma classe » reads the primary classroom only, and lists the courses assigned to it that are still
+    # active and published, with their published sheets. The old screen kept showing the courses a teacher had withdrawn.
     class StudentClassroomQueryTest < ActiveSupport::TestCase
       setup do
         @classroom = create_classroom(school: create_school(name: "Lycée Classique"), level: create_level(name: "Tle"),
@@ -13,6 +13,7 @@ module Queries
       end
 
       def classroom(student = @student) = StudentClassroomQuery.new.call(student_id: student.id)
+      def names(row = classroom) = row.courses.map(&:name)
 
       test "the header of the primary classroom, and no roster" do
         create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yapo")
@@ -21,7 +22,7 @@ module Queries
 
         assert_equal [ @classroom.public_id, "Tle D 1", "Tle", "D", "Lycée Classique", "2026-2027" ],
                      row.to_h.values_at(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year)
-        assert_equal %i[public_id classroom_name level_name series_name school_name school_year], row.to_h.keys
+        assert_equal %i[public_id classroom_name level_name series_name school_name school_year courses], row.to_h.keys
         assert_no_match "Yapo", row.inspect
       end
 
@@ -42,22 +43,38 @@ module Queries
         assert_nil classroom(secondary)
       end
 
-      test "no assigned courses any more: an assigned exercise, active or withdrawn, adds nothing to the row" do
-        create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: create_course(material: @svt))))
-        create_assignment(classroom: @classroom, assignable: create_exercise, status: "archived")
+      test "the assigned courses, by name, with their subject and their published sheets" do
+        genetique = create_course(name: "Génétique", subtitle: "Du gène au caractère", material: @svt)
+        2.times { create_essential(course: genetique) }
+        create_essential(course: genetique, status: "draft")
+        create_assignment(classroom: @classroom, assignable: genetique)
+        create_assignment(classroom: @classroom, assignable: create_course(name: "Écologie"))
 
         row = classroom
 
-        assert_not_includes StudentClassroomQuery::Row.members, :courses
-        assert_equal @classroom.public_id, row.public_id
+        assert_equal [ "Écologie", "Génétique" ], names(row)
+        assert_equal [ genetique.slug, "Du gène au caractère", "SVT", "science", 2 ],
+                     row.courses.last.to_h.values_at(:slug, :subtitle, :material_name, :material_category, :essentials_count)
+        assert_equal 0, row.courses.first.essentials_count
+      end
+
+      test "non-regression CS#B13: a withdrawn, archived or draft course is absent, and so is a sheet or an exercise" do
+        create_assignment(classroom: @classroom, assignable: create_course(name: "Retiré"), status: "archived")
+        create_assignment(classroom: @classroom, assignable: create_course(name: "Archivé", status: "archived"))
+        create_assignment(classroom: @classroom, assignable: create_course(name: "Brouillon", status: "draft"))
+        create_assignment(classroom: @classroom, assignable: create_essential)
+        create_assignment(classroom: @classroom, assignable: create_exercise)
+
+        assert_empty names
       end
 
       test "the primary classroom only" do
         other = create_classroom
         Orm::ClassroomStudent.create!(classroom: other, student: @student, primary: false, joined_at: Time.current)
-        create_assignment(classroom: other)
+        create_assignment(classroom: other, assignable: create_course(name: "Autre classe"))
 
         assert_equal @classroom.public_id, classroom.public_id
+        assert_empty names
       end
     end
   end

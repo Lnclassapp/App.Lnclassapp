@@ -45,26 +45,22 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_exercises", text: /#{I18n.t("#{scope}.show.exercises_count", count: 2)}/
     assert_no_match(/Brouillon caché|Archive cachée/, response.body)
 
-    # UDR-0015, amendement du 2026-10-02 (UDR-0057) : surtitre sans le cours, que le retour nomme déjà ; plus d'aide « Badges ».
-    assert_select "#essential_header p", text: I18n.t("#{scope}.show.student_eyebrow")
-    assert_select "#essential_badges_help", 0
-    # Une ligne = un lien étiré, le titre, « Type · Assigné par ton enseignant », une seule action à droite.
     assert_select row_of(@exercise) do
-      assert_select "a.truncate.after\\:absolute.after\\:inset-0[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
-      assert_select "p.text-mute", text: I18n.t("#{scope}.exercise_progress.exercise_types.fixation")
-      assert_select "*", text: /Deux divisions successives|Badge|Meilleur score|Acquis|question/, count: 0
-      assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}'] button.bg-ink",
+      assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
+      assert_select "*", text: /Deux divisions successives\./
+      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.badge", level: "Or")}/
+      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.best_score", score: 85)}/
+      assert_select "*", text: /Acquis/
+      assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}'] button",
                     text: I18n.t("#{scope}.exercise_progress.start")
+      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.assigned")}/, count: 0
     end
     assert_select row_of(doing) do
-      assert_select "p.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.fixation")} · " \
-                                         "#{I18n.t("#{scope}.exercise_progress.assigned")}"
-      assert_select "a.border-line[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.exercise_progress.resume")
+      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.assigned")}/
+      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.not_started")}/
+      assert_select "a[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.exercise_progress.resume")
       assert_select "form", 0
     end
-    # R1 : seule la première ligne garde « primary » ; aucun « brand ».
-    assert_select "#essential_exercises .bg-ink", 1
-    assert_select "#essential_exercises .bg-brand", 0
 
     assert_select "#essential_team_actions", 0
     assert_select "#content_status_essential_#{@essential.slug}", 0
@@ -90,27 +86,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#essential_gap", text: /#{I18n.t("#{scope}.show.gap_title")}/
     assert_select "#essential_gap", text: /12 septembre 2026/
-    # UDR-0015, amendement du 2026-10-02 : la règle pour lever la lacune passe dans l'infobulle du titre.
-    assert_select "#essential_gap details", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/
-    assert_select "#essential_gap > div > p", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/, count: 0
-  end
-
-  test "beyond 3 exercises, the student sees 3 rows then « Voir plus », the others rendered hidden" do
-    titles = %w[Anomalies Brassage Caryotype]
-    titles.each_with_index { |title, index| create_exercise(essential: @essential, title:, position: index + 2) }
-    sign_in_as @student
-
-    get page_path
-
-    assert_select "#essential_exercises [data-controller=reveal]" do
-      assert_select "li", 4
-      assert_select "li[data-reveal-target=item]", 4
-      assert_select "li[hidden]", 1
-      assert_select "li[hidden]", text: /Caryotype/
-      assert_select "button[data-action='reveal#more']", text: I18n.t("components.reveal.more")
-    end
-    assert_select "#essential_exercises .bg-ink", 1
-    assert_select "#{row_of(@exercise)} .bg-ink", 1
+    assert_select "#essential_gap", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/
   end
 
   test "the teacher reads the published exercises, without progress, session button nor team menu" do
@@ -120,20 +96,13 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     get page_path
 
     assert_response :success
-    # Décision du porteur du 2026-10-02 : la ligne de l'enseignant et le surtitre restent inchangés.
-    assert_select "#essential_header p", text: I18n.t("#{scope}.show.eyebrow", course: "Génétique et évolution")
     assert_select row_of(@exercise) do
-      assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
-      assert_select "a.border-line[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
-      assert_select "*", text: /Deux divisions successives\./
-      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.exercise_types.fixation")}/
-      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.questions", count: 2)}/
+      assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
       assert_select "form", 0
-      assert_select "*", text: /Meilleur score|Pas encore de session/, count: 0
+      assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.not_started")}/, count: 0
     end
     assert_no_match(/Brouillon caché/, response.body)
     assert_select "#essential_team_actions", 0
-    assert_select "#essential_exercises .bg-ink, #essential_exercises .bg-brand", 0
   end
 
   test "the team opens a draft sheet of a draft course: status panel, menu in the modal, every exercise with its status" do
@@ -168,9 +137,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
         assert_select "[role=menuitem]", 5
       end
     end
-    assert_select "#essential_header p", text: I18n.t("#{scope}.show.eyebrow", course: course.name)
     assert_select "#essential_exercises li", 3
-    assert_select "#essential_exercises li[hidden]", 0
     assert_select "#essential_exercises", text: /Brouillon — visible uniquement par l'équipe/
     assert_select "#essential_exercises", text: /Archivé/
     assert_select "#essential_subtitle", 0

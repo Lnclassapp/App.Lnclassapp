@@ -58,19 +58,6 @@ module Repositories
         assert_equal 0, @repository.consecutive_failures(contact: "0101020304", kind: "second_factor").count
         assert_equal 1, Orm::LoginAttempt.count
       end
-
-      # ADR-0036 §4 : la suppression d'un compte efface ses tentatives et celles faites avec son numéro, pas celles des autres.
-      test "destroy_all_for removes the attempts of the account and of its number, and nothing else" do
-        user_id = create_student.id
-        @repository.record(contact: "0101020304", user_id:, ip: "10.0.0.1", succeeded: true, kind: "pin", at: @now)
-        @repository.record(contact: "0909090909", user_id:, ip: "10.0.0.2", succeeded: false, kind: "pin", at: @now)
-        attempt(false, 5)
-        attempt(false, 5, contact: "0505050505")
-
-        assert_equal 3, @repository.destroy_all_for(user_id:, contact: "0101020304")
-        assert_equal [ "0505050505" ], Orm::LoginAttempt.pluck(:contact)
-        assert_equal 0, @repository.destroy_all_for(user_id: user_id + 1, contact: nil)
-      end
     end
   end
 end

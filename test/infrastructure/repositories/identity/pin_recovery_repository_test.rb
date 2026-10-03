@@ -55,16 +55,6 @@ module Repositories
         assert @repository.consume(id:, at: @now)
         assert_nil @repository.active_for(user_id: @student.id)
       end
-
-      test "destroy_all_for removes every code of the account, active or not, and no other account's" do
-        issue("a" * 64)
-        issue("b" * 64)
-        other = create_pin_recovery_code(issued_by: @teacher)
-
-        assert_equal 2, @repository.destroy_all_for(user_id: @student.id)
-        assert_not Orm::PinRecoveryCode.exists?(user_id: @student.id)
-        assert Orm::PinRecoveryCode.exists?(other.id)
-      end
     end
   end
 end

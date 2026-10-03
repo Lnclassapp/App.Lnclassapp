@@ -1,10 +1,8 @@
 # 🌐 DELIVERY · routes de l'espace direction ; tout contrôleur hérite de SchoolAdmin::BaseController
 # Rôle : lectures de la direction sur son seul établissement, et ses trois gestes (lien, classes d'un niveau, enseignants)
-# ADR  : 0036, 0065, 0071 · UDR : 0052, 0056 · l'établissement vient toujours du compte, jamais d'un paramètre
+# ADR  : 0065, 0071 · UDR : 0052, 0056 · l'établissement vient toujours du compte, jamais d'un paramètre
 scope "school-admin", module: "school_admin", as: "school_admin" do
   resources :classrooms, only: %i[index show], param: :public_id
-  # ADR-0036, lot R de fonctions-espace-eleve : l'établissement quitté garde les résultats obtenus chez lui.
-  get "students/departed", to: "departed_students#index", as: :departed_students
   # Avant `resources :teachers` : « departed » n'est pas un public_id.
   get "teachers/departed", to: "departed_teachers#index", as: :departed_teachers
   resources :teachers, only: %i[index destroy], param: :public_id

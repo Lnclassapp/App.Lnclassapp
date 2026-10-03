@@ -28,9 +28,9 @@ module Queries
         2.times { create_student(classroom: @classroom) }
         gone = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+        create_assignment(classroom: @classroom, assignable: create_course, by: @teacher)
         create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
-        create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
-        create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, status: "archived")
+        create_assignment(classroom: @classroom, assignable: create_course, by: @teacher, status: "archived")
 
         assert_equal({ public_id: @classroom.public_id, name: "Tle D 1", level_name: "Tle", active_students_count: 2,
                        active_assignments_count: 2, average_score_percent: nil }, card.to_h)

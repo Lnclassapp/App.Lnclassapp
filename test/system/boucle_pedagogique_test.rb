@@ -300,26 +300,23 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     code = find("#classroom_join_code").text
     assert_equal classroom.join_code.upcase, code
 
-    # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
     navigate_to courses_path
     find("#courses_list a", text: COURSE).click
-    assert_selector "#course_header h1", text: COURSE
-    assert_no_button "Assigner"
-    assert_no_link "Assigner"
+    click_on t("catalog.courses.role_actions.assign")
+    course = Orm::Course.find_by!(name: COURSE)
+    assert_no_page_reload do
+      within("[id='assignment_#{classroom.public_id}_Course_#{course.slug}']") { click_on "Assigner" }
+      assert_toast "#{COURSE} ajouté à Tle D 1."
+    end
 
-    # The « Cours » block of the classroom page leads to the course in the classroom (UDR-0062 §3.4, memo Q18).
     navigate_to teacher_home_path
     find("li[id='classroom_#{classroom.public_id}'] a").click
-    within("#classroom_courses") { click_on COURSE }
-    assert_current_path classroom_course_path(classroom.public_id, Orm::Course.find_by!(name: COURSE).slug)
-    assert_no_button "Assigner"
+    find("#assigned_courses a", text: COURSE).click
     find("#classroom_course_essentials a", text: ESSENTIAL).click
     assert_selector "h1", text: ESSENTIAL
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
-      # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4); « Plus tard » assigns without a due date.
-      within("turbo-frame#modal dialog[open]") { click_on "Plus tard" }
       assert_toast "#{EXERCISE} ajouté à Tle D 1."
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { assert_text "Assigné" }
     end
@@ -347,9 +344,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog[open]"
     end
 
-    # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27). The blocks of
-    # Lot E push the roster to the foot of the page, under the toast of the code just issued: it leaves after 5 s.
-    assert_no_selector "[data-controller=toast]", wait: 10
+    # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27).
     within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.see_result") }
     assert_current_path exercise_session_result_path(session.public_id)
     assert_text t("assessment.session_results.show.student", name: "Aya Kouassi")

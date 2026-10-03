@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
+| **Statut** | Accepté (2026-09-27, porteur) |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot D6, critères CL-12, AS-20 |
 | **ADR lié** | [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (active/archived) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (seul un contenu publié s'assigne) · [UDR-0028](0028-cours-dans-la-classe-et-bascule-d-assignation.md) (bascule d'assignation) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |
@@ -59,11 +59,3 @@ Depuis le cours dans sa classe (UDR-0028), l'enseignant ouvre une fiche essentie
 
 - Retour : `ui_back_link` vers `classroom_course_path`, libellé = nom du cours (au lieu de « Retour à <cours> »).
 - Titre : « <nom de la fiche> · Enseignant · Lnclass ».
-
-## Amendement du 2026-10-02 — la fiche ne s'assigne plus, l'exercice a une date limite · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
-
-*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
-
-- **La bascule de la fiche** et son `role="group"` disparaissent de l'en-tête.
-- **La bascule de chaque exercice** reste, avec l'étape « Quels jours voyez-vous la <classe> ? » tant que l'enseignant n'a pas renseigné ses jours, et la date limite une fois assigné (« Assigné · Pour jeu. 8 oct. · Retirer »).
-- La réussite de la classe (§2.2) est inchangée.

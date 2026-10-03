@@ -254,9 +254,8 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
   test "archiving keeps the exercises, their sessions and the assignments: nothing cascades" do
     essential = create_essential(course: @course, name: "La méiose")
-    exercise = create_exercise(essential:)
-    create_exercise_session(exercise:)
-    create_assignment(assignable: exercise)
+    create_exercise_session(exercise: create_exercise(essential:))
+    create_assignment(assignable: essential)
     sign_in_as @member
 
     patch archive_teams_essential_path(essential.slug), as: :turbo_stream

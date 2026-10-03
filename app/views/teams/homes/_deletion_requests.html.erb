@@ -1,8 +1,0 @@
-<%# 🌐 UI · teams/homes/_deletion_requests — rappel des demandes de suppression sur l'accueil de l'équipe (admin seul) %>
-<%# Rôle : nombre en attente et plus proche échéance, ambre à partir du 25e jour ; la carte entière mène à la liste %>
-<%# ADR  : 0036 (amendement 2), 0038 · UDR : 0018, 0057, 0062 · absente sans demande en attente %>
-<%# locals: (summary:) -%>
-<%= ui_card title: t(".title"), icon: "trash", href: teams_deletion_requests_path, id: "team_home_deletion_requests", class: "mb-5" do %>
-  <p class="text-sm text-ink"><%= t(".pending", count: summary.count) %></p>
-  <div class="mt-2"><%= render "teams/deletion_requests/due", due_on: summary.due_on, stage: summary.stage(Time.zone.today) %></div>
-<% end %>

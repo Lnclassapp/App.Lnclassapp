@@ -1,4 +1,4 @@
-# Session d'exercice (AS-07 à AS-11) — Lot C2, UDR-0022 (épurée, UDR-0057) ; vocabulaire de l'UDR-0007
+# Session d'exercice (AS-07 à AS-11) — Lot C2, UDR-0022 ; vocabulaire de l'UDR-0007
 fr:
   activemodel:
     attributes:
@@ -21,12 +21,17 @@ fr:
         quit: "Quitter la session"
         abandoned: "Cette session a été remplacée par une nouvelle. Reprends l'exercice depuis sa page."
       progress_bar:
+        answered:
+          one: "%{count} question répondue sur %{total}"
+          other: "%{count} questions répondues sur %{total}"
         percent: "%{percent} %"
         label: "Progression de la session"
       question_card:
         number: "Question %{number} sur %{total}"
-        # Plusieurs réponses seulement : les boutons radio portent déjà la consigne d'une réponse unique (UDR-0022, 2026-10-02).
-        hint: "Coche %{count} propositions."
+        multiple: "Plusieurs propositions correctes"
+        hint:
+          one: "Choisis une proposition."
+          other: "Coche %{count} propositions."
         submit: "Valider"
       feedback_card:
         verdict:
@@ -34,7 +39,7 @@ fr:
           error: "Mauvaise réponse"
         encouragement:
           success: "Bravo, continue comme ça !"
-          error: "Ce n'est pas grave, continue."
+          error: "Ce n'est pas grave : lis l'explication, puis continue."
         number: "Question %{number} sur %{total}"
         selected: "Ton choix"
         explanation: "Explication"

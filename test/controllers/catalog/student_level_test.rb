@@ -27,11 +27,7 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{@other.slug}", 0
     assert_select "select[name=level]", 0
     assert_select "select[name=material]"
-    # UDR-0013, amendement du 2026-10-02 (UDR-0057) : plus de sous-titre ; la portée du catalogue passe dans l'infobulle, et
-    # le badge de niveau quitte les cartes.
-    assert_select "#main details", text: /#{Regexp.escape(tl("student_scope"))}/
-    assert_no_match(/#{Regexp.escape(tl("subtitle"))}|Les cours de ton niveau, par matière/, response.body)
-    assert_select "#courses_list", text: /Tle/, count: 0
+    assert_match tl("student_subtitle"), response.body
   end
 
   test "a course, a sheet and an exercise of another level answer 404 to the student, and no session starts" do

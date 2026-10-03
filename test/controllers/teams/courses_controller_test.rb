@@ -219,7 +219,7 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
   test "a published course is archived, then published again; a second publication is refused in 422" do
     course = create_course(name: "Génétique", level: @tle, material: @svt)
     essential = create_essential(course:)
-    assignment = create_assignment(assignable: create_exercise(essential:))
+    assignment = create_assignment(assignable: course)
     sign_in_as @member
 
     patch archive_teams_course_path(course.slug), as: :turbo_stream

@@ -1,13 +1,8 @@
 require "test_helper"
 
 # CL-22, CL-10 (volet élève) — UDR-0011. « Ma classe » : la classe principale de l'élève, le code de la classe en
-# majuscules. Jamais la liste nominative : aucun nom de camarade dans la page. Amendement du 2026-10-02 (UDR-0057) : ni
-# sous-titre ni aide permanente, aucune action principale. Amendement du 2026-10-02 (ADR-0072) : la carte « Cours
-# assignés » est retirée, un cours ne s'assignant plus.
+# majuscules, les cours assignés actifs et publiés. Jamais la liste nominative : aucun nom de camarade dans la page.
 class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTest
-  # SobrietyAssertions::PRIMARY_ACTION, read here by assert_select: the browser assertions are for system tests.
-  PRIMARY_ACTION = SobrietyAssertions::PRIMARY_ACTION.split(", ").map { "#main #{it}" }.join(", ").freeze
-
   setup do
     @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"),
                                   level: create_level(name: "Tle"), series: create_series(name: "D"), school_year: "2026-2027")
@@ -26,16 +21,12 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_response :success
     assert_select "title", text: including(tl("show.page_title"))
     assert_select "h1", text: tl("show.title")
-    assert_select "h1 + p", 0
     assert_select "#student_classroom_header" do
       assert_select "h2", text: "Tle D 1"
       assert_select "*", text: "Tle · D"
       assert_select "*", text: "Lycée Classique"
       assert_select "*", text: "2026-2027"
-      assert_select "#student_classroom_join_code[aria-labelledby=student_classroom_join_code_label]", text: "KFM37"
-      assert_select "#student_classroom_join_code_label", text: tl("show.join_code")
-      assert_select "details summary", text: I18n.t("components.info_tip.label", label: tl("show.join_code"))
-      assert_select "details div", text: tl("show.join_code_info_tip")
+      assert_select "#student_classroom_join_code", text: "KFM37"
     end
     assert_no_match "kfm37", response.body
     assert_no_match "Yapo", response.body
@@ -43,31 +34,32 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "a[href='#{student_classroom_path}'][aria-current=page]"
   end
 
-  # UDR-0011, amendement du 2026-10-02 (ADR-0072) : la carte resterait toujours vide ; elle est retirée.
-  test "no « Cours assignés » card, even with an assigned exercise: the classroom card alone" do
-    course = create_course(name: "Génétique", level: @classroom.level, series: @classroom.series)
-    create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)))
+  test "each assigned course with its subject, its published sheets, and a link to the course" do
+    course = create_course(name: "Génétique", subtitle: "Du gène au caractère",
+                           material: create_material(name: "SVT", category: "science"))
+    create_essential(course:)
+    create_assignment(classroom: @classroom, assignable: course)
+    create_assignment(classroom: @classroom, assignable: create_course(name: "Retiré"), status: "archived")
+    create_assignment(classroom: @classroom, assignable: create_course(name: "Archivé", status: "archived"))
     sign_in_as @student
 
     get student_classroom_path
 
-    assert_response :success
-    assert_select "#student_classroom_header", text: including("Tle · D")
-    assert_select "#student_classroom_courses", 0
-    assert_no_match(/Cours assignés|Aucun cours assigné|Génétique/, response.body)
-    assert_select "#main a[href='#{course_path(course.slug)}']", 0
+    assert_select "#student_classroom_courses" do
+      assert_select "*", text: tl("show.courses_count", count: 1)
+      assert_select "li", 1
+      assert_select "li#course_#{course.slug}" do
+        assert_select "a[href='#{course_path(course.slug)}']", text: including("Génétique")
+        assert_select "*", text: "Du gène au caractère"
+        assert_select "*", text: "SVT"
+        assert_select "*", text: including(tl("assigned_course.essentials", count: 1))
+      end
+    end
+    assert_no_match "Retiré", response.body
+    assert_no_match "Archivé", response.body
   end
 
-  test "UDR-0057: no primary action, and nothing to reveal" do
-    sign_in_as @student
-
-    get student_classroom_path
-
-    assert_select PRIMARY_ACTION, 0
-    assert_select "#main [data-controller=reveal]", 0
-  end
-
-  test "a classroom without series or code: the level alone and the empty state of the code" do
+  test "a classroom without series or code, without course: the level alone and the empty states" do
     classroom = create_classroom(level: create_level(name: "6ème"), join_code: nil)
     sign_in_as create_student(classroom:)
 
@@ -77,7 +69,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_classroom_header", text: including(" · "), count: 0
     assert_select "#student_classroom_header", text: including(tl("show.no_join_code"))
     assert_select "#student_classroom_join_code", 0
-    assert_select "#student_classroom_courses", 0
+    assert_select "#student_classroom_courses", text: including(tl("show.courses_empty"))
+    assert_select "#student_classroom_courses li", 0
   end
 
   test "CL-10: the student receives 403 on the teacher page of their own classroom" do

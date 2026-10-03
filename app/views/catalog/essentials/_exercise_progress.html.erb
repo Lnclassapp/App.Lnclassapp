@@ -1,53 +1,53 @@
-<%# 🌐 UI · catalog/essentials/_exercise_progress — un exercice de la fiche, selon le rôle %>
-<%# Rôle : élève → lien étiré, « Type · Assigné par ton enseignant », « Commencer » ou « Reprendre » ; autres → type, questions, statut (équipe) %>
-<%# ADR  : 0028, 0033, 0054 · UDR : 0007, 0015, 0057 · tout exercice publié se démarre, assigné ou non %>
-<%# locals: (exercise:, student:, team:, primary: false, folded: false) -%>
-<% if student %>
-  <%# UDR-0015, amendement du 2026-10-02 : badge, score et maîtrise sont sur la page de l'exercice, à un tap. %>
-  <%= tag.li id: "essential_exercise_#{exercise.public_id}", class: "relative flex items-center gap-3 px-5 py-4 active:bg-mist sm:px-6",
-             hidden: folded, data: { reveal_target: "item" } do %>
-    <div class="min-w-0 flex-1">
-      <%= link_to exercise.title, exercise_path(exercise.public_id),
-                  class: "block truncate font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
-      <p class="mt-0.5 text-sm text-mute">
-        <%= safe_join([ t(".exercise_types.#{exercise.exercise_type}"), (t(".assigned") if exercise.assigned_to_my_classroom) ].compact, " · ") %>
+<%# 🌐 UI · catalog/essentials/_exercise_progress — un exercice de la fiche, et la progression de l'élève %>
+<%# Rôle : type, questions, statut (équipe) ; élève : « Assigné par ton enseignant », badge, meilleur score, « Commencer » ou « Reprendre » %>
+<%# ADR  : 0028, 0033, 0054 · UDR : 0007, 0015 · tout exercice publié se démarre, assigné ou non %>
+<%# locals: (exercise:, student:, team:) -%>
+<li id="essential_exercise_<%= exercise.public_id %>" class="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:gap-4 sm:px-6">
+  <div class="min-w-0 flex-1 space-y-1.5">
+    <%= link_to exercise.title, exercise_path(exercise.public_id),
+                class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% if exercise.description.present? %>
+      <p class="line-clamp-2 text-sm text-mute"><%= exercise.description %></p>
+    <% end %>
+    <div class="flex flex-wrap items-center gap-2">
+      <% if student && exercise.assigned_to_my_classroom %>
+        <%= ui_badge t(".assigned"), tone: :teacher, size: :sm, icon: "user-group" %>
+      <% end %>
+      <%= ui_badge t(".exercise_types.#{exercise.exercise_type}"), tone: :brand, size: :sm %>
+      <%= ui_badge t(".questions", count: exercise.questions_count), size: :sm, icon: "question-mark-circle" %>
+      <% if team %>
+        <%= content_status_badge(exercise.status) %>
+      <% end %>
+    </div>
+    <% if student %>
+      <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-mute">
+        <% if exercise.badge_level %>
+          <%= ui_badge t(".badge", level: badge_label(exercise.badge_level)), tone: badge_tone(exercise.badge_level), size: :sm,
+                       icon: "trophy" %>
+        <% end %>
+        <% if exercise.best_score_percent %>
+          <span><%= t(".best_score", score: exercise.best_score_percent) %></span>
+          <span class="font-medium text-ink"><%= mastery_label(exercise.best_score_percent) %></span>
+        <% else %>
+          <span><%= t(".not_started") %></span>
+        <% end %>
       </p>
-    </div>
-    <%# Au-dessus du lien étiré ; seule la première ligne de la liste est « primary » (R1). %>
-    <div class="relative shrink-0">
-      <% variant = primary ? :primary : :secondary %>
-      <% if exercise.started_session_public_id %>
-        <%= ui_button t(".resume"), href: exercise_session_path(exercise.started_session_public_id), variant:, size: :sm,
-                      icon: "arrow-path", "aria-label": t(".resume_label", title: exercise.title) %>
-      <% else %>
-        <%= button_to exercise_sessions_path(exercise.public_id), form_class: "contents",
-                      class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm],
-                                         ComponentsHelper::BUTTON_VARIANTS[variant]),
-                      "aria-label": t(".start_label", title: exercise.title) do %>
-          <%= ui_icon "play", size: :sm %><%= t(".start") %>
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
-<% else %>
-  <li id="essential_exercise_<%= exercise.public_id %>" class="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:gap-4 sm:px-6">
-    <div class="min-w-0 flex-1 space-y-1.5">
-      <%= link_to exercise.title, exercise_path(exercise.public_id),
-                  class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-      <% if exercise.description.present? %>
-        <p class="line-clamp-2 text-sm text-mute"><%= exercise.description %></p>
-      <% end %>
-      <div class="flex flex-wrap items-center gap-2">
-        <%= ui_badge t(".exercise_types.#{exercise.exercise_type}"), tone: :brand, size: :sm %>
-        <%= ui_badge t(".questions", count: exercise.questions_count), size: :sm, icon: "question-mark-circle" %>
-        <% if team %>
-          <%= content_status_badge(exercise.status) %>
-        <% end %>
-      </div>
-    </div>
-    <div class="shrink-0 sm:self-center">
+    <% end %>
+  </div>
+  <div class="shrink-0 sm:self-center">
+    <% if !student %>
       <%= ui_button t(".open"), href: exercise_path(exercise.public_id), variant: :secondary, size: :sm, icon_end: "arrow-right",
                     "aria-label": t(".open_label", title: exercise.title) %>
-    </div>
-  </li>
-<% end %>
+    <% elsif exercise.started_session_public_id %>
+      <%= ui_button t(".resume"), href: exercise_session_path(exercise.started_session_public_id), variant: :brand, size: :sm,
+                    icon: "arrow-path", "aria-label": t(".resume_label", title: exercise.title) %>
+    <% else %>
+      <%= button_to exercise_sessions_path(exercise.public_id), form_class: "contents",
+                    class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm],
+                                       ComponentsHelper::BUTTON_VARIANTS[:primary]),
+                    "aria-label": t(".start_label", title: exercise.title) do %>
+        <%= ui_icon "play", size: :sm %><%= t(".start") %>
+      <% end %>
+    <% end %>
+  </div>
+</li>

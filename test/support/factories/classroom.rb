@@ -1,4 +1,4 @@
-# Classrooms and their assignments (ADR-0040, ADR-0041, ADR-0048, ADR-0072).
+# Classrooms and their assignments (ADR-0040, ADR-0041, ADR-0048).
 module Factories
   module Classroom
     ActiveSupport::TestCase.include(self)
@@ -14,8 +14,8 @@ module Factories
                              archived_at: (Time.current if status == "archived"), **attributes)
     end
 
-    # assignable: an Orm::Exercise, the only assignable resource (ADR-0072 §4.1).
-    def create_assignment(classroom: create_classroom, assignable: create_exercise, by: create_teacher, status: "active",
+    # assignable: an Orm::Course, Orm::Essential or Orm::Exercise.
+    def create_assignment(classroom: create_classroom, assignable: create_course, by: create_teacher, status: "active",
                           **attributes)
       Orm::ClassroomAssignment.create!(classroom:, assignable_type: assignable.class.name.demodulize, assignable_id: assignable.id,
                                        assigned_by: by, assigned_at: Time.current, status:,

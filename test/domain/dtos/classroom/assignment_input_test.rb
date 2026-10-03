@@ -3,16 +3,17 @@ require "test_helper"
 module Dtos
   module Classroom
     class AssignmentInputTest < ActiveSupport::TestCase
-      test "accepte un exercice, clé débarrassée de ses espaces" do
-        input = AssignmentInput.new(classroom_public_id: "cls123", assignable_type: "Exercise", assignable_key: " Xy12ab ")
+      test "accepte chacun des trois types assignables, clé débarrassée de ses espaces" do
+        Entities::Classroom::Assignable::TYPES.each do |assignable_type|
+          input = AssignmentInput.new(classroom_public_id: "cls123", assignable_type:, assignable_key: " genetique ")
 
-        assert input.valid?
-        assert_equal "Xy12ab", input.assignable_key
+          assert input.valid?, assignable_type
+          assert_equal "genetique", input.assignable_key
+        end
       end
 
-      # ADR-0072 §4.1 : un cours ou une fiche ne s'assigne plus.
-      test "refuse un type hors Assignable::TYPES : cours, fiche, et l'ancien ExamSubject (ADR-0048)" do
-        [ nil, "", "Course", "Essential", "ExamSubject", "course", "Orm::Course" ].each do |assignable_type|
+      test "refuse un type hors Assignable::TYPES, dont l'ancien ExamSubject (ADR-0048)" do
+        [ nil, "", "ExamSubject", "course", "Orm::Course" ].each do |assignable_type|
           input = AssignmentInput.new(classroom_public_id: "cls123", assignable_type:, assignable_key: "genetique")
 
           assert_not input.valid?, assignable_type.inspect
@@ -21,7 +22,7 @@ module Dtos
       end
 
       test "exige la classe et la clé de la ressource" do
-        input = AssignmentInput.new(assignable_type: "Exercise", assignable_key: "   ")
+        input = AssignmentInput.new(assignable_type: "Course", assignable_key: "   ")
 
         assert_not input.valid?
         assert input.errors.of_kind?(:classroom_public_id, :blank)

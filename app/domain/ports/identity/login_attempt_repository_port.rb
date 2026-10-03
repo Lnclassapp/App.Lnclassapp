@@ -21,12 +21,6 @@ module Ports
       def clear_failures(contact:)
         raise NotImplementedError, "#{self.class} doit implémenter #clear_failures"
       end
-
-      # Suppression d'un compte (ADR-0036 §4) : ses tentatives, et celles faites avec son numéro, gardent numéro et IP.
-      # → Integer (lignes supprimées)
-      def destroy_all_for(user_id:, contact:)
-        raise NotImplementedError, "#{self.class} doit implémenter #destroy_all_for"
-      end
     end
   end
 end

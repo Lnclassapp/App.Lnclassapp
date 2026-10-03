@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-10-01)* — *amendé le 2026-10-02 par l'[ADR-0072](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) : le retrait efface aussi les jours de séance* |
+| **Statut** | Accepté *(par le porteur le 2026-10-01)* |
 | **Date** | 2026-10-01 |
 | **Chantier** | [`docs/chantiers/gestion-etablissement-direction`](../../chantiers/gestion-etablissement-direction/prd.md) — critères GD-01 à GD-27 |
 | **Amende** | [ADR-0065](./0065-espace-direction-simple-en-lecture-seule.md) (la direction n'est plus en lecture seule), [ADR-0057](./0057-code-d-etablissement.md) (la direction régénère le code), [ADR-0059](./0059-ajuster-les-classes-d-un-niveau.md) (la direction a « + » et « − »), [ADR-0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md) (un enseignant quitte et rejoint un établissement) |

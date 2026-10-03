@@ -6,7 +6,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     get new_session_path
 
     assert_response :success
-    assert_select "h1", text: "Connexion"
+    assert_select "h2", text: "Connexion"
     assert_select "input[type=tel][name='session[contact]'][maxlength='15'][placeholder='07 00 00 00 00']"
     assert_select "input[type=password][name='session[pin]'][inputmode=numeric]"
     assert_select "a[href='#{new_identity_pin_reset_path}']", text: "PIN oublié ?"
@@ -21,31 +21,6 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='session[pin]'][autocomplete=current-password]:not([data-autofocus-target])"
     assert_select "details summary .sr-only", "Aide : PIN"
     assert_select "details", text: /Code secret de 4 chiffres, choisi à l'inscription/
-  end
-
-  # UDR-0060 §3.2, §3.4: one title, one form, one action, the same for every role.
-  test "UDR-0060: the sign-in page says each thing once, with the card title as its only h1" do
-    get new_session_path
-
-    assert_select "h1", count: 1
-    assert_select "h1", text: "Connexion"
-    assert_select "h2", text: "Connexion", count: 0
-    assert_select "p", text: "Heureux de vous revoir"
-    assert_no_match "Élève · Enseignant · Équipe", response.body
-    assert_no_match "Connectez-vous avec votre numéro", response.body
-    assert_select "#session_pin_hint", 0
-    assert_select "details div", text: "Code secret de 4 chiffres, choisi à l'inscription."
-    assert_equal 1, response.body.scan("4 chiffres").size
-    assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "PIN oublié ?"
-  end
-
-  test "UDR-0060 §3.2: the two columns start at lg; below, the welcome column is hidden" do
-    get new_session_path
-
-    assert_select "main.grid[class~='lg:grid-cols-2']"
-    assert_select "main > section.hidden.bg-brand-soft[class~='lg:flex']"
-    assert_select "main > section > div.text-center[class~='lg:hidden']"
-    assert_select "main [class*='md:']", 0
   end
 
   test "a signed-in person who opens the sign-in page is sent home, the kept number dropped" do
@@ -106,38 +81,6 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", text: "Numéro ou PIN incorrect."
     assert_select "input[name='session[contact]'][value=?]", " 01 #{student.contact[2..]}"
     assert_select "input[name='session[pin]']:not([value])"
-  end
-
-  # UDR-0060 §3.8: the pared-down page keeps the generic message; it never says whether a number exists.
-  test "UDR-0060 §3.8: an unknown number and a wrong PIN read the same message, and the PIN never comes back" do
-    student = create_student
-
-    post session_path, params: { session: { contact: student.contact, pin: "1357" } }
-    wrong_pin = css_select("[role=alert]").map { it.text.squish }
-    assert_select "input[name='session[pin]'][type=password]:not([value])"
-
-    post session_path, params: { session: { contact: "0799999999", pin: "1357" } }
-    unknown_number = css_select("[role=alert]").map { it.text.squish }
-
-    assert_response :unprocessable_entity
-    assert_equal [ "Numéro ou PIN incorrect." ], wrong_pin
-    assert_equal wrong_pin, unknown_number
-    assert_select "input[name='session[pin]'][type=password]:not([value])"
-    assert_select "input[value='1357']", 0
-  end
-
-  test "a teacher and a school admin sign in as before, each to their home" do
-    post session_path, params: { session: { contact: create_teacher.contact, pin: "2468" } }
-
-    assert_redirected_to teacher_home_path
-    assert_equal "Connexion réussie", flash[:notice]
-
-    delete session_path
-    post session_path, params: { session: { contact: create_school_admin.contact, pin: "2468" } }
-
-    assert_redirected_to school_admin_classrooms_path
-    assert_response :see_other
-    assert_equal "Connexion réussie", flash[:notice]
   end
 
   test "a malformed PIN is shown under its field" do
