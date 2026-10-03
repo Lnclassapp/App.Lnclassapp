@@ -198,7 +198,7 @@ Ordre intra-lot : tests rouges → use cases → queries → contrôleurs → vu
 
 `_form.html.erb` pose **tout** le balisage de l'UDR-0065 §3.3 et §3.4 (fieldset de couverture, `#article_editor` avec `article_editor_data`, panneau « Images du texte », gabarit `rowTemplate`, cibles et actions Stimulus nommées) : c'est le contrat que lit le Lot F, qui n'a pas le droit de toucher ce fichier. Tant que F n'est pas fusionné, la couverture ne se choisit pas et l'éditeur refuse toujours les fichiers (comportement actuel du contrôleur `rich-text-editor`) ; les images des tests de A viennent des fabriques du Lot 0. Tant que D et B ne sont pas fusionnés, « Aperçu » et les vignettes répondent par une erreur de chargement.
 
-`TeamArticlesQuery` lit le **nom réel** de l'auteur (UDR-0065 §3.2, `written_by` : « un auteur désactivé ou anonymisé garde son nom ici ») et pas la constante de repli de signature de D : écart avec l'ADR-0073 §4.8, voir « Écarts relevés ».
+`TeamArticlesQuery` lit le **nom réel** de l'auteur (UDR-0065 §3.2, `written_by` : « un auteur anonymisé garde son nom ici ») et pas la constante de repli de signature de D : écart avec l'ADR-0073 §4.8, voir « Écarts relevés ».
 
 ---
 

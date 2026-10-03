@@ -53,7 +53,7 @@ Règles d'autorisation (domaine) :
 | Trop d'images dans un article | Refus de l'image en trop |
 | Membre du Terrain, enseignant, direction, élève sur une adresse de gestion | 403, sans effet |
 | Visiteur sur une adresse de gestion | Renvoyé à la connexion, comme pour tout écran de l'équipe |
-| Auteur désactivé ou anonymisé | Ses articles restent en ligne ; ceux signés de son nom s'affichent signés « L'équipe Lnclass » |
+| Auteur anonymisé (départ de Lnclass) | Ses articles restent en ligne ; ceux signés de son nom s'affichent signés « L'équipe Lnclass ». *(Modifié le 2026-10-03 : « désactivé » retiré, cet état de compte n'existe pas ; seule l'anonymisation fait repli, ADR-0073 §4.8.)* |
 | Personne connectée qui ouvre `/blog` ou un article | Même page qu'un visiteur, sans l'espace connecté ; aucune redirection |
 | Lecture par l'équipe, en aperçu, d'un brouillon ou d'un archivé, ou par un robot qui se déclare | Non comptée |
 | Une même personne relit l'article | Comptée deux fois (pas de cookie) : limite affichée dans la gestion (« lectures, sans dédoublonnage ») |
@@ -164,7 +164,8 @@ Et l'équipe lit ce nombre dans la gestion du blog
 
 # BL-18 — signature
 Étant donné un article signé du nom de son auteur
-Quand le compte de l'auteur est désactivé ou anonymisé
+Quand le compte de l'auteur est anonymisé
+# (Modifié le 2026-10-03 : « désactivé » retiré, cet état de compte n'existe pas ; ADR-0073 §4.8.)
 Alors l'article s'affiche signé « L'équipe Lnclass »
 Et un article signé « L'équipe Lnclass » ne montre jamais le nom de son auteur
 

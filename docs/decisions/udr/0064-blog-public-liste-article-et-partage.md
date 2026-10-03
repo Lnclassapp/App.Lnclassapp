@@ -69,7 +69,7 @@ L'élève connecté n'a qu'une entrée, le pied de sa carte « Besoin d'aide ? �
 | `PublishedArticlesQuery#call(page:)` → `Page(rows:, page:, pages:)` | `rows` : tableau de `Row` ; `PER_PAGE = 10` | Publiés seulement, `published_on` décroissant puis `id` décroissant |
 | `PublishedArticlesQuery#any?` → booléen | — | Une requête `EXISTS` sur les publiés ; lue par `blog_link` (§3.5) |
 | `PublishedArticlesQuery::Row` | `slug`, `title`, `excerpt`, `published_on` (`Date`), `cover` (`Image` ou `nil`) | — |
-| `ArticleDetailQuery::Detail` | `slug`, `title`, `excerpt`, `status` (`"draft"`, `"published"`, `"archived"`), `published_on` (`Date` ou `nil`), `author_name` (`String` ou `nil`), `cover` (`Image` ou `nil`), `body` (le texte riche Action Text) | `author_name` vaut `nil` si l'article est signé « L'équipe Lnclass », **ou** si le compte de l'auteur est désactivé ou anonymisé (BL-18) : c'est la query qui tranche, jamais la vue |
+| `ArticleDetailQuery::Detail` | `slug`, `title`, `excerpt`, `status` (`"draft"`, `"published"`, `"archived"`), `published_on` (`Date` ou `nil`), `author_name` (`String` ou `nil`), `cover` (`Image` ou `nil`), `body` (le texte riche Action Text) | `author_name` vaut `nil` si l'article est signé « L'équipe Lnclass », **ou** si le compte de l'auteur est anonymisé (BL-18 ; « désactivé » retiré le 2026-10-03 : cet état n'existe pas, ADR-0073 §4.8) : c'est la query qui tranche, jamais la vue |
 | `Image` | `public_id`, `alt`, `width`, `height` | Dimensions en pixels de l'image servie |
 
 **Helpers** — `app/helpers/communication/articles_helper.rb`, module `Communication::ArticlesHelper` :
@@ -358,7 +358,7 @@ Les textes des articles ne sont pas dans les locales : ils viennent de la base. 
 | BL-05 — archivé en 410, « Cet article n'est plus disponible », lien vers `/blog`, `noindex` ; absent de la liste | idem | §3.3 |
 | BL-06 — état vide ; « Blog » absent puis présent au pied de la homepage et de la carte d'aide | idem, `test/controllers/homepage_controller_test.rb`, `test/system/communication/help_sheet_test.rb` | §3.5 |
 | BL-14 — chaque `img` de la page vise lnclass.com, avec `width`, `height`, `alt` ; `loading="lazy"` dans le texte | `articles_controller_test.rb` | §3.3 |
-| BL-18 — « L'équipe Lnclass » pour un auteur désactivé | idem | §3.1 |
+| BL-18 — « L'équipe Lnclass » pour un auteur anonymisé | idem | §3.1 |
 | BL-20 — élève connecté : 200 sur `/blog`, aucun renvoi | idem | §3.1 |
 | BL-21 — HTML < 150 Ko (1 500 mots, 5 images) ; aucun `script` propre à la page, aucun `data-controller` | idem, `test/views/no_third_party_resources_test.rb` | §3.6 |
 | `blog_link` : `nil` sans article, la paire avec ; une seule requête par rendu | `test/helpers/public_pages_helper_test.rb` | §3.5 |
