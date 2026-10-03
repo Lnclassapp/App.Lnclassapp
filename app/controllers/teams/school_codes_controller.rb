@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolCodesController
 # Rôle : régénère le code d'établissement depuis la fiche : toast avec le nouveau code, en-tête remplacé ; repli HTML vers la fiche
-# ADR  : 0026, 0028, 0057 · UDR : 0036, 0042, 0044
+# ADR  : 0026, 0028, 0057, 0071 · UDR : 0036, 0042, 0044
 module Teams
   class SchoolCodesController < BaseController
     helper_method :school_status_tone
@@ -24,7 +24,7 @@ module Teams
     def regenerate
       UseCases::School::RegenerateSchoolCode.new(
         schools: Repositories::School::SchoolRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-        policy: Policies::School::ManageSchoolPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        policy: Policies::School::ManageSchoolStructurePolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
       )
     end
   end

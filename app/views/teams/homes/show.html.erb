@@ -1,10 +1,11 @@
 <%# 🌐 UI · teams/homes/show — accueil équipe (TR-09, CA-25) %>
-<%# Rôle : raccourcis, puis les sections de HOME_SECTIONS[:team] (régions, référentiel, activité récente différée) %>
-<%# ADR  : 0034, 0038, 0041 · UDR : 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass ») %>
+<%# Rôle : raccourcis, rappel des demandes de suppression (admin), puis les sections de HOME_SECTIONS[:team] %>
+<%# ADR  : 0034, 0036 (amendement 2), 0038, 0041 · UDR : 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass »), 0067 %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle") %>
 
-<%= render "shortcuts", can_invite: @can_invite %>
+<%= render "shortcuts", can_invite: @can_invite, can_manage_blog: @can_manage_blog %>
+<%= render "deletion_requests", summary: @deletion_requests if @deletion_requests %>
 
 <div class="grid gap-5">
   <% home_sections_for(:team).each do |key, icon| %>

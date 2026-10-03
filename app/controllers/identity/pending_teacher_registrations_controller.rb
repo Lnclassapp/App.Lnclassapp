@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::PendingTeacherRegistrationsController
-# Rôle : inscription enseignant sans code (code national, ou DRENA → établissement) ; compte en attente, session ; limité en débit
-# ADR  : 0026, 0028, 0030, 0050, 0063 · UDR : 0024, 0050
+# Rôle : inscription enseignant sans code (code national, ou DRENA → établissement) ; rattaché aussitôt, session ; limité en débit
+# ADR  : 0026, 0028, 0030, 0050, 0063, 0073 · UDR : 0024, 0050
 module Identity
   class PendingTeacherRegistrationsController < ApplicationController
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation national_code drena_public_id school_public_id
@@ -25,7 +25,7 @@ module Identity
       result = register.call(actor: current_actor, dto: @form, ip: request.remote_ip, user_agent: request.user_agent)
       render_result result, form: :new, success: lambda { |registered|
         start_session(registered.token)
-        redirect_to pending_account_path, notice: t(".done"), status: :see_other
+        redirect_to teacher_classrooms_path, notice: t(".welcome"), status: :see_other
       }
     end
 

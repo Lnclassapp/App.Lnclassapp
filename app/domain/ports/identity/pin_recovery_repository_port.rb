@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::PinRecoveryRepositoryPort
 # Rôle : contrat des codes de récupération du PIN, un seul actif par compte
-# ADR  : 0032
+# ADR  : 0032, 0036
 module Ports
   module Identity
     module PinRecoveryRepositoryPort
@@ -22,6 +22,11 @@ module Ports
       # Pose used_at. → true
       def consume(id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #consume"
+      end
+
+      # Supprime tous les codes du compte, actifs ou non (anonymisation, ADR-0036 §4). → Integer (codes supprimés)
+      def destroy_all_for(user_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #destroy_all_for"
       end
     end
   end

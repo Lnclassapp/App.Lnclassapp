@@ -8,6 +8,7 @@
 | **Complète** | [ADR-0009](./0009-stack-frontend-vanilla-css-tailwind-hotwire.md) (public cible : Android d'entrée de gamme en 3G/4G, JavaScript minimal) |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0074](./0074-blog-public-articles-images-et-referencement.md) : amendement du 2026-09-25 (Action Text et pièces jointes hors cours et fiches) |
 
 ---
 
@@ -200,3 +201,12 @@ Aucune page ne renvoie plus `406` pour cause de navigateur : si `public/406-unsu
 - **Sécurité** : Trix lit le nonce de `csp_meta_tag` et fonctionne sous la CSP stricte de l'ADR-0049, ce qu'un test système prouve. Le contenu est assaini **au rendu** par Action Text. Le HTML écrit par les imports JSON (`course_tree`, `essentials`, ADR-0039) est **assaini avant écriture**, avec la même liste blanche, et un test vérifie qu'un `<script>`, un attribut `on*` ou un lien `javascript:` n'arrive pas en base.
 - **Pièces jointes** : aucune dans l'éditeur en V1, **décision du porteur** : c'est un éditeur de texte uniquement. Le contrôleur `rich_text_editor` annule l'événement `trix-file-accept` et masque le bouton de fichier ; aucun `direct_upload` n'est branché, ce qui évite d'ouvrir `connect-src` vers le bucket (ADR-0047, ADR-0049).
 - Rien ne change pour le plancher des navigateurs, les plafonds du budget ou leur contrôle en CI.
+
+## Amendement du 2026-10-02 — blog public (ADR-0074)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Périmètre d'Action Text** : cours, fiches essentielles, et **articles du blog** (`Orm::Article`, `has_rich_text :body`).
+- **Pièces jointes** : toujours aucune pour les cours et les fiches. L'éditeur s'ouvre aux images **pour le blog seul**, sur la valeur Stimulus `attachments` du contrôleur `rich-text-editor` ; envoi par un endpoint de l'équipe (`POST /teams/blog/images`), jamais par `direct_upload` ; `@rails/actiontext` reste non chargé et les routes Active Storage non dessinées.
+- **Assainissement** : `Repositories::Shared::RichTextSanitizer` prend `image_ids:` ; sans lui (cours, fiches, imports), toute pièce jointe part comme avant ; seul l'adaptateur des articles le passe.
+- **Budget** : le module de réduction des images (`app/javascript/lib/image_upload.js`) est chargé à la demande, comme Trix ; le bundle commun reste sous 60 Ko gzip. Les pages publiques du blog n'ajoutent aucun JavaScript.

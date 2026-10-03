@@ -1,0 +1,132 @@
+<%# 🌐 UI · teams/articles/_form — titre, résumé, couverture, texte et ses images, signature d'un article, partagé par new et edit %>
+<%# Rôle : tout le balisage de l'UDR-0067 §3.3-§3.4 ; rich-text-editor (mode images), cover-picker et image-alts le lisent sans le toucher %>
+<%# ADR  : 0051, 0074 · UDR : 0014, 0054, 0067 · Stimulus : rich-text-editor, communication--{character-count,cover-picker,image-alts} %>
+<%# locals: (input:, url:, method:, upload_url:, author_name:, slug: nil) -%>
+<% article_caps = Entities::Communication::Article %>
+<% image_caps = Entities::Communication::ArticleImage %>
+<% accept = image_caps::CONTENT_TYPES.join(",") %>
+<% max_bytes = number_to_human_size(image_caps::MAX_BYTES) %>
+<% editor = article_editor_data(upload_url:) %>
+<% cover_error = input.errors[:cover_public_id].first %>
+<% body_error = input.errors[:body].first %>
+<%# Servi dans le frame « modal », le formulaire n'a pas de <head> : la feuille de l'éditeur est liée ici. %>
+<%= stylesheet_link_tag "trix" %>
+<%= form_with model: input, scope: :article, url:, method:, id: "article-form", class: "space-y-6" do |form| %>
+  <% if input.errors[:base].any? %>
+    <div id="article_base_error" role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= input.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+
+  <%# L'adresse est tirée du titre à la création, puis figée (BL-10). %>
+  <%= ui_field form, :title, required: true, maxlength: article_caps::TITLE_MAX, autocomplete: "off", autofocus: true,
+                             placeholder: t(".title_placeholder"),
+                             hint: (slug ? t(".title_hint_edit", max: article_caps::TITLE_MAX, path: blog_article_path(slug)) : t(".title_hint_new", max: article_caps::TITLE_MAX)) %>
+
+  <%= tag.div data: { controller: "communication--character-count", "communication--character-count-max-value": article_caps::EXCERPT_MAX,
+                      "communication--character-count-near-value": t(".excerpt_near"),
+                      "communication--character-count-full-value": t(".excerpt_full", max: article_caps::EXCERPT_MAX) } do %>
+    <%= ui_field form, :excerpt, as: :textarea, rows: 3, maxlength: article_caps::EXCERPT_MAX, hint: t(".excerpt_hint", max: article_caps::EXCERPT_MAX),
+                                 data: { "communication--character-count-target": "input", action: "input->communication--character-count#update" } %>
+    <p id="article_excerpt_count" class="text-right text-xs tabular-nums text-mute" aria-hidden="true"
+       data-communication--character-count-target="count"><%= t(".excerpt_count", count: input.excerpt.to_s.length, max: article_caps::EXCERPT_MAX) %></p>
+    <span class="sr-only" aria-live="polite" data-communication--character-count-target="status"></span>
+  <% end %>
+
+  <%# Couverture (§3.4.1) : le fichier part par l'endpoint de l'équipe avant l'enregistrement, jamais avec le formulaire. %>
+  <%= tag.fieldset id: "article_cover", class: "space-y-3",
+                   data: { controller: "communication--cover-picker", "communication--cover-picker-upload-url-value": upload_url,
+                           "communication--cover-picker-max-side-value": image_caps::MAX_SIDE,
+                           "communication--cover-picker-max-bytes-value": image_caps::MAX_BYTES,
+                           "communication--cover-picker-accept-value": image_caps::CONTENT_TYPES.to_json,
+                           "communication--cover-picker-messages-value": editor["rich-text-editor-messages-value"] } do %>
+    <legend class="text-sm font-medium text-ink"><%= t(".cover_legend") %></legend>
+    <div class="overflow-hidden rounded-ln border border-line bg-mist">
+      <%# Décorative : le texte de remplacement de la couverture se saisit juste en dessous. %>
+      <%= tag.img id: "article_cover_preview", class: "aspect-video w-full object-cover", alt: "", src: input.cover_url,
+                  hidden: input.cover_url.nil?, data: { "communication--cover-picker-target": "preview" } %>
+      <%= tag.div id: "article_cover_placeholder", class: "flex aspect-video flex-col items-center justify-center gap-2 text-sm text-mute",
+                  hidden: input.cover_url.present?, data: { "communication--cover-picker-target": "placeholder" } do %>
+        <%= ui_icon "photo", size: :lg %>
+        <span><%= t(".cover_placeholder") %></span>
+      <% end %>
+    </div>
+    <div class="flex flex-wrap items-center gap-3">
+      <label for="article_cover_file" class="block text-sm font-medium text-ink"><%= t(".cover_file_label") %></label>
+      <%= tag.input type: "file", id: "article_cover_file", accept:, "aria-invalid": ("true" if cover_error),
+                    "aria-describedby": [ "article_cover_file_hint", ("article_cover_public_id_error" if cover_error) ].compact.join(" "),
+                    data: { "communication--cover-picker-target": "input", action: "change->communication--cover-picker#pick" },
+                    class: class_names("block w-full cursor-pointer rounded-ln border bg-white text-sm text-ink file:mr-4 file:min-h-tap file:cursor-pointer file:border-0 file:bg-mist file:px-4 file:font-medium",
+                                       cover_error ? "border-error" : "border-line") %>
+      <%= ui_button t(".cover_remove"), variant: :secondary, size: :sm, icon: "trash", id: "article_cover_remove", hidden: input.cover_url.nil?,
+                                        data: { "communication--cover-picker-target": "remove", action: "communication--cover-picker#clear" } %>
+    </div>
+    <p id="article_cover_file_hint" class="text-sm text-mute"><%= t(".cover_hint", max_side: image_caps::MAX_SIDE, max_bytes:) %></p>
+    <% if cover_error %>
+      <p id="article_cover_public_id_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= cover_error %>
+      </p>
+    <% end %>
+    <p id="article_cover_status" class="flex items-center gap-2 text-sm text-mute" aria-live="polite" data-communication--cover-picker-target="status"></p>
+    <template data-communication--cover-picker-target="spinner"><%= ui_spinner(size: :sm) %></template>
+    <p id="article_cover_upload_error" class="flex items-center gap-1.5 text-sm font-medium text-error" role="alert" tabindex="-1" hidden
+       data-communication--cover-picker-target="error"><%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><span></span></p>
+    <%= form.hidden_field :cover_public_id, id: "article_cover_public_id", data: { "communication--cover-picker-target": "id" } %>
+    <%= ui_field form, :cover_alt, maxlength: image_caps::ALT_MAX, autocomplete: "off", hint: t(".cover_alt_hint"),
+                                   data: { "communication--cover-picker-target": "alt" } %>
+  <% end %>
+
+  <%# Texte (§3.4.2). Le bouton et le champ de fichiers sont dans #article_editor : une cible Stimulus hors de l'élément du
+      contrôleur ne serait pas trouvée. Le bouton reste caché tant que rich-text-editor n'est pas connecté en mode images. %>
+  <%= tag.div id: "article_editor", class: "space-y-2",
+              data: { controller: "rich-text-editor communication--image-alts", **editor,
+                      action: "rich-text-editor:uploaded->communication--image-alts#add rich-text-editor:attached->communication--image-alts#restore " \
+                              "rich-text-editor:removed->communication--image-alts#remove trix-change->communication--image-alts#renumber" } do %>
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <%= form.label :body, id: "article_body_label", class: "block text-sm font-medium text-ink" %>
+      <%= ui_button t(".insert_image"), variant: :secondary, size: :sm, icon: "photo", id: "article_insert_image", hidden: true,
+                                        data: { "rich-text-editor-target": "pickButton", action: "rich-text-editor#pickImages" } %>
+    </div>
+    <input id="article_image_files" type="file" multiple hidden accept="<%= accept %>"
+           data-rich-text-editor-target="fileInput" data-action="change->rich-text-editor#insertPicked">
+    <%# Aucun envoi par Active Storage : les images passent par l'endpoint de l'équipe (ADR-0074 §4.4). %>
+    <%= form.rich_textarea :body, id: "article_body", value: article_editor_body(input.body), placeholder: t(".body_placeholder"),
+                                  data: rich_text_without_uploads, "aria-invalid": ("true" if body_error),
+                                  "aria-describedby": [ "article_body_hint", ("article_body_error" if body_error) ].compact.join(" "),
+                                  class: class_names("trix-content block min-h-48 w-full rounded-ln border bg-white px-4 py-3 text-base text-ink",
+                                                     body_error ? "border-error" : "border-line") %>
+    <div id="article_body_upload_errors" class="space-y-1" role="alert" tabindex="-1" hidden data-rich-text-editor-target="errors"></div>
+    <template data-rich-text-editor-target="errorTemplate">
+      <p class="flex items-center gap-1.5 text-sm font-medium text-error"><%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><span></span></p>
+    </template>
+    <p id="article_body_upload_status" class="sr-only" aria-live="polite" data-rich-text-editor-target="status"></p>
+    <p id="article_body_hint" class="text-sm text-mute"><%= t(".body_hint", max_count: image_caps::MAX_PER_ARTICLE, max_bytes:) %></p>
+    <% if body_error %>
+      <p id="article_body_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= body_error %>
+      </p>
+    <% end %>
+
+    <%# Panneau « Images du texte » : une ligne par image, dans l'ordre du texte ; le gabarit sert aux images ajoutées. %>
+    <%= tag.section id: "article_images", class: "space-y-3 rounded-ln border border-line bg-paper p-4", hidden: input.images.empty?,
+                    "aria-labelledby": "article_images_title", data: { "communication--image-alts-target": "panel" } do %>
+      <h3 id="article_images_title" class="text-sm font-semibold text-ink">
+        <%= t(".images_title") %> <span data-communication--image-alts-target="total">(<%= input.images.size %>)</span>
+      </h3>
+      <p class="text-sm text-mute"><%= t(".images_intro") %></p>
+      <ul id="article_images_list" class="space-y-3" data-communication--image-alts-target="list">
+        <% input.images.each.with_index(1) do |image, number| %>
+          <%= render "teams/articles/image_alt_row", form:, image:, number:, error: input.errors[:"image_alts.#{image.public_id}"].first %>
+        <% end %>
+      </ul>
+      <template data-communication--image-alts-target="rowTemplate">
+        <%= render "teams/articles/image_alt_row", form:, number: "__NUMBER__", error: nil,
+                   image: Dtos::Communication::ArticleInput::Image.new(public_id: "__PUBLIC_ID__", sgid: "__SGID__", url: "__URL__", alt: nil) %>
+      </template>
+    <% end %>
+  <% end %>
+
+  <%= ui_radio_group form, :signature, choices: [ [ t(".signature_team"), "team" ], [ t(".signature_author", name: author_name), "author" ] ],
+                                       label: t(".signature_label"), hint: t(".signature_hint"), required: true, columns: 2 %>
+<% end %>

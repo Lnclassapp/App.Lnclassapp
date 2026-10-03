@@ -1,6 +1,6 @@
 /* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
    Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
-   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051 */
+   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051, 0061, 0065 (mode sombre) */
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
@@ -237,6 +237,36 @@
   scrollbar-width: none;
 }
 
+/* UDR-0061 §3.3 — poignée d'une feuille basse (36 × 4 px), décorative : elle signale la feuille, rien de plus. */
+@utility sheet-handle {
+  display: block;
+  width: 2.25rem;
+  height: 0.25rem;
+  margin-inline: auto;
+  border-radius: 9999px;
+  background-color: var(--color-line);
+}
+
+/* UDR-0061 §3.3 — `ui_modal placement: :sheet` : sous lg, une feuille ancrée en bas, pleine largeur, coins hauts
+   arrondis, 25 % de la hauteur au moins, 90 % au plus avec défilement interne ; à partir de lg, la modale centrée `sm`
+   de ses utilitaires. Hors couche, exprès : une règle hors couche l'emporte sur les utilitaires de la <dialog>
+   (`m-auto`, `sm:max-w-sm`, `p-0`, `rounded-sheet`) quel que soit l'ordre de génération. `max-width` plutôt qu'une
+   plage de media query, et `vh` avant `dvh` : lisible par les navigateurs de l'ADR-0051. */
+@media (max-width: 63.99rem) {
+  dialog.dialog-sheet {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    min-height: 25vh;
+    min-height: 25dvh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* ADR-0051 — bandeau « navigateur ancien » : CSS simple, hors utilitaires, pour rester lisible là où
    les fonctions récentes de Tailwind v4 (couches, oklch, :where) ne sont pas comprises. */
 .outdated-browser {
@@ -244,4 +274,88 @@
   color: #262626;
   padding: 0.5rem 1rem;
   text-align: center;
+}
+
+/* UDR-0065 — Mode sombre, par les tokens : le téléphone en thème sombre reçoit la même interface, couleurs redéfinies.
+   Aucune classe `dark:` dans les vues ; chaque utilitaire lit la variable du token, et ces blocs en changent la valeur.
+   La règle d'inversion : le texte (`ink`, `mute`) devient clair, les surfaces (`white`, `paper`, `mist`) sombres ; un fond
+   qui porte un texte blanc (`team`, `school`, `error`, `success`, `warning`) devient clair, un fond qui porte un texte
+   `ink` (`brand`, `teacher`, `gold`) devient profond. Écran seulement : une page imprimée reste claire (codes de secours).
+   Amendement du 2026-10-03 — l'interrupteur pose `data-theme` sur <html> : `dark` l'emporte sur un téléphone clair,
+   `light` sur un téléphone sombre ; sans choix, le réglage du téléphone. Les deux blocs portent les mêmes valeurs.
+   Hors couche, exprès : l'emporte sur `@layer theme`. test/design/dark_mode_test.rb vérifie chaque token, chaque
+   contraste et l'identité des deux blocs. */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-white: #171c24;
+    --color-ink: #eef1f5;
+    --color-mute: #a3acb9;
+    --color-line: #2c3542;
+    --color-mist: #222a35;
+    --color-paper: #0f1218;
+
+    --color-brand: #0070b3;
+    --color-brand-soft: #132c42;
+    --color-brand-strong: #7fd0ff;
+
+    --color-teacher: #9a5000;
+    --color-school: #a9c4ee;
+    --color-team: #c3a4ff;
+    --color-gold: #8c5c00;
+
+    --color-success: #6fd69a;
+    --color-success-soft: #133a26;
+    --color-warning: #ffbf73;
+    --color-warning-soft: #3a2a10;
+    --color-error: #ff9a90;
+    --color-error-soft: #3d1c1c;
+
+    --shadow-card: 0 2px 8px rgb(0 0 0 / 0.3);
+    --shadow-lift: 0 12px 24px rgb(0 0 0 / 0.4);
+    --shadow-pop: 0 20px 40px -8px rgb(0 0 0 / 0.6);
+  }
+
+  /* `backdrop:bg-ink/50` deviendrait un voile clair : le fond d'une modale reste un voile sombre. */
+  :root:not([data-theme="light"]) dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+  }
+}
+
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --color-white: #171c24;
+    --color-ink: #eef1f5;
+    --color-mute: #a3acb9;
+    --color-line: #2c3542;
+    --color-mist: #222a35;
+    --color-paper: #0f1218;
+
+    --color-brand: #0070b3;
+    --color-brand-soft: #132c42;
+    --color-brand-strong: #7fd0ff;
+
+    --color-teacher: #9a5000;
+    --color-school: #a9c4ee;
+    --color-team: #c3a4ff;
+    --color-gold: #8c5c00;
+
+    --color-success: #6fd69a;
+    --color-success-soft: #133a26;
+    --color-warning: #ffbf73;
+    --color-warning-soft: #3a2a10;
+    --color-error: #ff9a90;
+    --color-error-soft: #3d1c1c;
+
+    --shadow-card: 0 2px 8px rgb(0 0 0 / 0.3);
+    --shadow-lift: 0 12px 24px rgb(0 0 0 / 0.4);
+    --shadow-pop: 0 20px 40px -8px rgb(0 0 0 / 0.6);
+  }
+
+  :root[data-theme="dark"] dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+  }
 }

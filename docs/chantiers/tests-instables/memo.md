@@ -51,6 +51,7 @@ Aucune des trois causes n'est dans `app/` : le code de production est hors de ca
 | 1 | `test/support/schema_change_helper.rb` (nouveau) ; les deux tests de migration | `changing_schema { … }` : tout DDL d'un test passe par ce bloc, qui vide ensuite le cache de requêtes préparées de **toutes** les connexions du pool |
 | 2 | `test/system/role_homes_test.rb` | `back_home_by_logo` attend en plus `html:not([aria-busy])` : Turbo lève `aria-busy` à la fin de la visite, après la page reçue |
 | 3 | `test/system/assessment/session_result_test.rb` | `assert_current_path … wait: RESTART_WAIT` (10 s) après « Recommencer » |
+| 4 | `test/system/boucle_pedagogique_test.rb` | `within "turbo-frame#modal dialog[open]", wait: MODAL_WAIT` (10 s) à la première modale du parcours : rouge en CI le 2026-10-02 (run 37017565081, promotion vers `Staging`), reproduit avec une latence de 2,5 s, vert avec l'attente |
 | 2, 3 | `test/support/slow_network_helper.rb` (nouveau) | `on_a_slow_network { … }` : latence Chrome de 1 s par requête, pour les tests de reproduction |
 
 ## Pour qui

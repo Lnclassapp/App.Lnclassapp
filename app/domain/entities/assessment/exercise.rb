@@ -17,7 +17,7 @@ module Entities
       validates :title, presence: true, length: { maximum: TITLE_MAX }
       validates :essential_id, presence: true
       validates :exercise_type, inclusion: { in: TYPES }
-      validates :status, inclusion: { in: Catalog::ContentStatus::VALUES }
+      validates :status, inclusion: { in: Entities::Shared::ContentStatus::VALUES }
 
       def title=(value)
         @title = value&.squish

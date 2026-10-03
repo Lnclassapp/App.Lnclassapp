@@ -30,7 +30,7 @@ module Catalog
     # conteneur sans boîte que les streams remplacent avec le panneau.
     def content_transition_items(record:)
       type, key = content_address(record)
-      items = Entities::Catalog::ContentStatus::TRANSITIONS.fetch(record.status).map do |target|
+      items = Entities::Shared::ContentStatus::TRANSITIONS.fetch(record.status).map do |target|
         action = TRANSITION_ACTIONS.fetch(target)
         ui_dropdown_item t("catalog.content_status.actions.#{action}"), href: public_send("#{action}_teams_#{type}_path", key),
                                                                         method: :patch, icon: TRANSITION_ICONS.fetch(action)

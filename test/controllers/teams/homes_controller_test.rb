@@ -130,8 +130,35 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
 
     get team_home_path
 
-    assert_select "#team_home_shortcuts a", 5
+    assert_select "#team_home_shortcuts a", 6
     assert_select "a[href='#{new_teams_invitation_path}']", 0
+  end
+
+  test "BL-08 (UDR-0067 §3.1): the « Blog » shortcut, after « Croissance » and before the invitation, for admin and content" do
+    sign_in_as @member
+
+    get team_home_path
+
+    shortcuts = css_select("#team_home_shortcuts a").pluck("href")
+    assert_equal shortcuts.index(teams_growth_path) + 1, shortcuts.index(teams_articles_path)
+    assert_equal shortcuts.index(teams_articles_path) + 1, shortcuts.index(new_teams_invitation_path)
+    assert_select "a#team_home_blog_shortcut[href='#{teams_articles_path}']:not([data-turbo-frame])", text: including(tl("shortcuts.blog"))
+    sign_out
+
+    sign_in_as create_team_member(team_role: "content")
+    get team_home_path
+    assert_select "a#team_home_blog_shortcut[href='#{teams_articles_path}']"
+  end
+
+  test "BL-08: a field member does not see the « Blog » shortcut" do
+    sign_in_as create_team_member(team_role: "field")
+
+    get team_home_path
+
+    assert_response :success
+    assert_select "#team_home_shortcuts"
+    assert_select "#team_home_blog_shortcut", 0
+    assert_select "a[href='#{teams_articles_path}']", 0
   end
 
   test "the recent content is a lazy frame, which receives only its partial" do
@@ -213,5 +240,64 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#team_home_recent_courses", text: including(tl("recent_content.courses_empty"))
     assert_select "#team_home_recent_exercises", text: including(tl("recent_content.exercises_empty"))
     assert_select "#team_home_recent_imports", text: including(tl("recent_content.imports_empty"))
+  end
+
+  # ADR-0036, amendement (2) : le rappel des demandes de suppression, pour l'admin seul ; ambre au 25e jour, en retard au 31e.
+  def deletion_request(requested_on, status: "pending")
+    closed = { closed_at: Time.current, closed_by: @member } unless status == "pending"
+    Orm::AccountDeletionRequest.create!(user: create_student, requested_on:, recorded_by: @member, status:, **closed.to_h)
+  end
+
+  test "without pending deletion request, no card" do
+    deletion_request(Date.current - 40, status: "processed")
+    sign_in_as @member
+
+    get team_home_path
+
+    assert_select "#team_home_deletion_requests", 0
+  end
+
+  test "the admin sees the number of pending deletion requests and the nearest due date, leading to the list" do
+    travel_to Time.zone.local(2026, 10, 2, 10) do
+      deletion_request(Date.new(2026, 9, 20))
+      deletion_request(Date.new(2026, 9, 10))
+      deletion_request(Date.new(2026, 8, 1), status: "cancelled")
+      sign_in_as @member
+
+      get team_home_path
+
+      assert_select "a#team_home_deletion_requests[href='#{teams_deletion_requests_path}']" do
+        assert_select "h2", tl("deletion_requests.title")
+        assert_select "p", tl("deletion_requests.pending", count: 2)
+        assert_select "span:not(.bg-warning-soft)", I18n.t("teams.deletion_requests.due.before", date: I18n.l(Date.new(2026, 10, 10), format: :due_short))
+      end
+    end
+  end
+
+  test "the card turns amber on the 25th day, and says « En retard » on the 31st" do
+    deletion_request(Date.new(2026, 9, 1))
+    sign_in_as @member
+    due = I18n.l(Date.new(2026, 10, 1), format: :due_short)
+
+    { 24 => [ "before", 0 ], 25 => [ "before", 1 ], 31 => [ "late", 1 ] }.each do |day, (key, amber)|
+      travel_to Time.zone.local(2026, 9, 1, 10) + day.days do
+        get team_home_path
+
+        assert_select "#team_home_deletion_requests span", I18n.t("teams.deletion_requests.due.#{key}", date: due)
+        assert_select "#team_home_deletion_requests span.bg-warning-soft", amber
+      end
+    end
+  end
+
+  test "a team member content or field sees no deletion card" do
+    deletion_request(Date.current - 26)
+
+    %w[content field].each do |team_role|
+      sign_in_as create_team_member(team_role:)
+      get team_home_path
+      assert_response :success
+      assert_select "#team_home_deletion_requests", 0
+      sign_out
+    end
   end
 end

@@ -187,6 +187,8 @@ fr:
         open: "Ouvrir la modale"
         small_title: "Petite modale"
         open_small: "Ouvrir la petite modale"
+        entry_title: "Déclencheur large"
+        open_entry: "Je suis élève"
         cancel: "Annuler"
         confirm: "Confirmer"
       dropdown:
@@ -237,7 +239,7 @@ fr:
         preview: "Voir le shell et l'accueil"
       # UDR-0054 — les briques des finitions, telles que les écrans les emploient
       finishes:
-        api: "page_title(page) · document_title · ui_back_link(label, href:) · ui_page_header(back: { label:, href: }) · ui_info_tip(text, label:) · ui_copy_button(text, label:, copied:, failed:, aria_label:, variant:, size:, icon:) · ui_modal(document_title:) · ui_field(autofocus: true) · Stimulus autofocus, clipboard, autosubmit, search, download"
+        api: "page_title(page) · document_title · ui_back_link(label, href:) · ui_page_header(back: { label:, href: }) · ui_info_tip(text, label:) · ui_copy_button(text, label:, copied:, failed:, aria_label:, variant:, size:, icon:) · ui_modal(document_title:) · ui_field(autofocus: true) · Stimulus autofocus, clipboard, autosubmit, search, download · ui_reveal_data, ui_reveal_item(index), ui_reveal_more(total), Stimulus reveal"
         intro: "Titre de l'onglet, retour, auto-focus, infobulle, copie, envoi automatique et recherche pendant la frappe : une brique par finition, écrite une fois."
         title:
           label: "Titre de l'onglet (page_title)"
@@ -265,6 +267,15 @@ fr:
             Chaque code ne sert qu'une fois.
             abcd-1234
             efgh-5678
+        reveal:
+          example: "Voir plus (contrôleur reveal, UDR-0057 R3)"
+          rows:
+            - "Le théorème de Thalès"
+            - "Les puissances"
+            - "La cellule"
+            - "Le passé simple"
+            - "Les atomes et les ions"
+            - "La colonisation"
         autosubmit:
           example: "Envoi automatique (contrôleur autosubmit, motif 6 chiffres)"
           code: "Code à 6 chiffres"

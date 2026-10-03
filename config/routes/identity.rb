@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte identity
 # Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil
-# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063
+# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0071
 get "login", to: "identity/sessions#new", as: :new_session
 resource :session, only: %i[create destroy], controller: "identity/sessions" # session_path, gelé : DELETE = « Se déconnecter »
 namespace :identity do
@@ -9,6 +9,8 @@ namespace :identity do
   resource :pin_reset, only: %i[new create], path: "pin-reset"
 end
 get "account/pending", to: "identity/pending_accounts#show", as: :pending_account
+# ADR-0071 : un enseignant sans établissement (retiré, demande refusée) rejoint un établissement par son code.
+post "account/pending/school", to: "identity/pending_school_joins#create", as: :pending_school_join
 get "teacher-signup", to: "identity/teacher_registrations#new", as: :new_teacher_registration
 post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher_registrations
 # ADR-0063 : « Mon établissement n'a pas encore de code Lnclass » : code national ou DRENA → établissement, compte en attente.

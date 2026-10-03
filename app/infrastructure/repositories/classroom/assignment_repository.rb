@@ -1,15 +1,13 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
-# Rôle : assignations d'une classe ; résout la ressource (cours, fiche, exercice) par son type, sans association polymorphe
-# ADR  : 0035, 0048
+# Rôle : assignations d'une classe et leur échéance ; résout l'exercice assigné, seul type assignable, sans association polymorphe
+# ADR  : 0035, 0048, 0071, 0072
 module Repositories
   module Classroom
     class AssignmentRepository
       include Ports::Classroom::AssignmentRepositoryPort
 
-      # type → [modèle, colonne de clé, colonne de nom]
+      # type → [modèle, colonne de clé, colonne de nom] ; seul l'exercice s'assigne (ADR-0072 §4.1).
       RESOURCES = {
-        "Course" => [ "Orm::Course", :slug, :name ],
-        "Essential" => [ "Orm::Essential", :slug, :name ],
         "Exercise" => [ "Orm::Exercise", :public_id, :title ]
       }.freeze
 
@@ -28,7 +26,7 @@ module Repositories
         record = Orm::ClassroomAssignment.new(
           public_id: assignment.public_id, classroom_id: assignment.classroom_id,
           assignable_type: assignment.assignable.type, assignable_id: assignment.assignable.id, status: "active",
-          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at
+          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at, due_on: assignment.due_on
         )
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ClassroomAssignment.transaction(requires_new: true) { record.save! }
@@ -43,35 +41,31 @@ module Repositories
         true
       end
 
+      # Un seul UPDATE (ADR-0071 §6) : statut, archived_at et archived_by_id ensemble, la contrainte
+      # classroom_assignments_archived_at_iff_archived tient.
+      def archive_all_by_teacher_in_school(teacher_id:, school_id:, archived_by_id:, at:)
+        Orm::ClassroomAssignment.where(assigned_by_id: teacher_id, status: "active",
+                                       classroom_id: Orm::Classroom.where(school_id:).select(:id))
+                                .update_all(status: "archived", archived_by_id:, archived_at: at, updated_at: at)
+      end
+
+      # Un autre type que l'exercice ne se résout pas : nil.
       def resolve_assignable(type:, key:)
-        case type
-        when "Course" then resolve_course(key)
-        when "Essential" then resolve_essential(key)
-        when "Exercise" then resolve_exercise(key)
-        end
+        resolve_exercise(key) if type == "Exercise"
       end
 
       private
 
-      def resolve_course(slug)
-        record = Orm::Course.find_by(slug:)
-        record && resolved("Course", record, key: record.slug, name: record.name, parents: [])
-      end
-
-      def resolve_essential(slug)
-        record = Orm::Essential.includes(:course).find_by(slug:)
-        record && resolved("Essential", record, key: record.slug, name: record.name, parents: [ record.course ])
-      end
-
       def resolve_exercise(public_id)
         record = Orm::Exercise.includes(essential: :course).find_by(public_id:)
         record && resolved("Exercise", record, key: record.public_id, name: record.title,
-                                                parents: [ record.essential, record.essential.course ])
+                                                parents: [ record.essential, record.essential.course ], course: record.essential.course)
       end
 
-      def resolved(type, record, key:, name:, parents:)
+      def resolved(type, record, key:, name:, parents:, course:)
         ResolvedAssignable.new(assignable: Entities::Classroom::Assignable.new(type:, id: record.id, key:, name:),
-                               status: record.status, parents_published: parents.all? { |parent| parent.status == "published" })
+                               status: record.status, parents_published: parents.all? { |parent| parent.status == "published" },
+                               course_level: { level_id: course.level_id, series_id: course.series_id })
       end
 
       def assignable_of(type, id)
@@ -83,7 +77,8 @@ module Repositories
       def map_to_entity(record, assignable)
         Entities::Classroom::Assignment.new(
           id: record.id, public_id: record.public_id, classroom_id: record.classroom_id, assignable:, status: record.status,
-          assigned_by_id: record.assigned_by_id, assigned_at: record.assigned_at, archived_at: record.archived_at
+          assigned_by_id: record.assigned_by_id, assigned_at: record.assigned_at, archived_at: record.archived_at,
+          due_on: record.due_on
         )
       end
     end

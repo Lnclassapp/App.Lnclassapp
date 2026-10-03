@@ -1,7 +1,8 @@
 require "test_helper"
 
 # CE-07, CE-08 (ADR-0057, UDR-0044): the team regenerates a school's code from its page; the old code stops working at
-# once, the teachers already attached stay; outside the team, nothing changes.
+# once, the teachers already attached stay; outside the team, nothing changes. GD-05 (ADR-0071 §4.2): with the policy
+# shared with the direction, the team's gesture is unchanged.
 class Teams::SchoolCodesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
@@ -50,6 +51,25 @@ class Teams::SchoolCodesControllerTest < ActionDispatch::IntegrationTest
 
   test "CE-08: outside the team, the regeneration is refused and the code does not change" do
     sign_in_as @teacher
+
+    patch school_code_path(@school.public_id), as: :turbo_stream
+
+    assert_response :forbidden
+    assert_equal "k7m4qz", new_code
+  end
+
+  test "GD-05: the team still regenerates from the school's page, an inactive school's included" do
+    @school.update!(status: "inactive")
+    sign_in_as create_team_member
+
+    patch school_code_path(@school.public_id), as: :turbo_stream
+
+    assert_response :success
+    assert_not_equal "k7m4qz", new_code
+  end
+
+  test "GD-05: the team's route stays the team's: the school's own direction is refused, its code unchanged" do
+    sign_in_as create_school_admin(school: @school)
 
     patch school_code_path(@school.public_id), as: :turbo_stream
 

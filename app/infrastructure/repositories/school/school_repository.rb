@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
 # Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071
 module Repositories
   module School
     class SchoolRepository
@@ -100,6 +100,8 @@ module Repositories
       def primary_school_id_for(teacher_id:)
         Orm::TeacherSchool.where(teacher_id:, primary: true).pick(:school_id)
       end
+
+      def detach_teacher(teacher_id:, school_id:) = Orm::TeacherSchool.where(teacher_id:, school_id:).delete_all
 
       private
 

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot C2, critères AS-07 à AS-11, sécurité n° 30 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`StartSessionPolicy`, `SubmitAttemptPolicy`, `ReadSessionPolicy`, `RevealAnswersPolicy`) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) |
@@ -63,3 +63,36 @@ L'élève fait un exercice question par question. Dans l'ancienne application :
 - **Écart avec le plan et l'AS-10** : l'AS-10 du PRD et le plan (C2, `last_feedback`) prévoyaient d'afficher les propositions correctes de la question tentée, et l'amendement de l'ADR-0028 l'autorisait. La décision plus récente du porteur (`6772b58`) l'interdit ; le team-lead a validé la carte ci-dessus le 2026-09-25 et corrige le PRD et le plan au socle. Si le porteur rouvre ce point, seules la query (`last_feedback`) et `_feedback_card` changent.
 - L'explication reste affichée : la décision du porteur porte sur les bonnes réponses seulement, et l'explication est un contenu pédagogique rédigé par l'équipe. Le team-lead pose la question au porteur ; s'il veut la retirer, ce sera une petite suite (`_feedback_card` seulement).
 - Un test du contrôleur le prouve : ni la carte ni la réponse Turbo Stream ne contiennent le texte d'une proposition juste non choisie (choix unique, et deux propositions correctes dont une seule trouvée).
+
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
+
+> **Décision du porteur (2026-10-02)** : amendement accepté.
+
+*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot C, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Accepté` (porteur, 2026-10-02). Le Lot C ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus.*
+
+**Contexte.** L'UDR-0057 impose six règles (R1 à R6) à chaque écran élève. Cet écran n'est ouvert qu'à l'élève (`allow_roles :student`). L'audit du 2026-10-02 relève un avancement dit trois fois, un nombre de propositions dit deux fois et deux consignes inutiles.
+
+**Changements pour l'élève**
+
+| Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
+|---|---|---|---|---|
+| Ligne de texte de `_progress_bar` | « N questions répondues sur T » à gauche, « P % » à droite, au-dessus de la barre | Ligne retirée. `div#progress_bar` ne contient plus que le `<progress>` (`value`, `max="100"`, `aria-label` « Progression de la session », contenu de repli « P % »). Clé `progress_bar.answered` supprimée | R6 | Le bandeau de la carte dit « Question n sur T ». La barre montre l'avancée. Les lecteurs d'écran lisent la valeur du `<progress>` |
+| Badge `info` « Plusieurs propositions correctes » du bandeau de `_question_card` | À côté de « Question n sur T » | Retiré. Clé `question_card.multiple` supprimée | R6 | La consigne « Coche N propositions. », sous l'énoncé, le dit déjà, avec le nombre |
+| Consigne `hint` d'une question à une seule réponse (Vrai/Faux, choix unique) | « Choisis une proposition. » sous l'énoncé | Non rendue. La consigne n'est rendue que si `question.multiple?`. Clé : `hint: "Coche %{count} propositions."` ; `hint.one` supprimée | R4 | Les boutons radio ne laissent cocher qu'une proposition : le champ porte la consigne |
+| Consigne `hint` d'une question à plusieurs réponses | « Coche N propositions. » | Inchangée | — (R4 ne s'applique pas) | C'est la règle de correction (§2.3, ADR-0054), pas une aide : sans elle, l'élève ne peut pas répondre juste |
+| Encouragement `feedback_card.encouragement.error` | « Ce n'est pas grave : lis l'explication, puis continue. » | « Ce n'est pas grave, continue. » | R4 | L'encadré « Explication » est juste en dessous, quand il existe. La phrase ne renvoie plus à un encadré parfois absent |
+
+**Contrôle R1 à R6**
+- **R1** — Conforme aujourd'hui. Carte de question : « Valider » (`primary`) seul. Verdict : « Question suivante » (`primary`) ou « Voir mon résultat » (`brand`), jamais les deux. « Quitter la session » est le lien retour.
+- **R2** — Conforme aujourd'hui. Trois blocs : lien retour, `header` (titre et barre), frame `question`.
+- **R3** — Conforme aujourd'hui, sans objet. Les propositions sont les choix d'un champ de formulaire : elles restent toutes visibles, car en masquer une changerait la question. « Ton choix » liste 1 à 3 propositions.
+- **R4** — Change : la consigne « Choisis une proposition. » disparaît, l'encouragement d'erreur ne donne plus de consigne. « Coche N propositions. » reste (règle de correction).
+- **R5** — Conforme aujourd'hui. Accent `brand` (sélection, radios, cases, « Voir mon résultat »). `info` (explication) est la nuance `brand-strong` / `brand-soft` (UDR-0005). `success` et `error` signalent le verdict.
+- **R6** — Change : l'avancement n'est dit qu'une fois (« Question n sur T »), le nombre de propositions aussi. Le verdict garde texte, icône et couleur : c'est une raison d'accessibilité (§3, « Accessibilité »).
+
+**Inchangé pour l'enseignant et l'équipe**
+- Rien ne change pour eux : cet écran leur est fermé (`allow_roles :student`). Le stream `question_attempts/create` remplace toujours `question` et `progress_bar`.
+
+**Vérification**
+- `test/system/assessment/exercise_session_test.rb` : la ligne 53 lit désormais la valeur du `<progress>` ; une question à choix unique n'a pas de consigne ; une question à plusieurs réponses a « Coche N propositions. » et aucun badge « Plusieurs propositions correctes » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px.
+- `test/controllers/assessment/exercise_sessions_controller_test.rb` : la ligne 33 lit la valeur du `<progress>`, plus le texte « N questions répondues sur T ».
