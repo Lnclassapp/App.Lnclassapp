@@ -1,7 +1,7 @@
 require "test_helper"
 
 # ADR-0079 §4.1 et §4.5 : la lecture socle de la compréhension d'un exercice assigné. Seules comptent les sessions faites
-# (standard, terminées) rattachées à l'assignation, d'élèves présents ; le premier essai et le meilleur, le plus récent
+# (terminées, standard ou de remédiation) rattachées à l'assignation, d'élèves présents ; le premier essai et le meilleur, le plus récent
 # à égalité, sont désignés pour les taux par question.
 module Queries
   module Assessment
@@ -48,15 +48,28 @@ module Queries
         assert_equal [ [ 70, 70 ], before.id, after.id ], rows.fetch(twin.id).to_h.values_at(:scores, :first_session_id, :best_session_id)
       end
 
-      test "a remediation session, a session of another assignment or a started one does not count" do
+      # ADR-0079 §4.1 : une session de remédiation sur l'exercice assigné, c'est faire cet exercice ; elle compte.
+      test "a remediation session on the assignment counts; a session of another assignment, without one or started does not" do
         student = create_student(classroom: @classroom)
-        hand_in(student, 100, at: Time.zone.local(2026, 10, 9, 10), gap: create_gap(student:, essential: @exercise.essential))
+        remediation = hand_in(student, 100, at: Time.zone.local(2026, 10, 9, 10), gap: create_gap(student:, essential: @exercise.essential))
         other_classroom = create_assignment(classroom: create_classroom(school: @school), assignable: @exercise)
         hand_in(student, 100, at: Time.zone.local(2026, 10, 9, 10), assignment: other_classroom)
         create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 100)
         create_exercise_session(student:, exercise: @exercise, classroom_assignment: @assignment)
 
-        assert_equal({}, scores)
+        assert_equal({ @assignment.id => [ AssignmentScores::StudentScores.new(student_id: student.id, scores: [ 100 ],
+                                                             first_session_id: remediation.id, best_session_id: remediation.id) ] },
+                     scores)
+      end
+
+      test "25 % in a standard session, then 75 % in remediation: both are read, the remediation is the best attempt" do
+        student = create_student(classroom: @classroom)
+        first = hand_in(student, 25, at: Time.zone.local(2026, 10, 7, 10))
+        remediation = hand_in(student, 75, at: Time.zone.local(2026, 10, 8, 10), gap: create_gap(student:, essential: @exercise.essential))
+
+        assert_equal [ AssignmentScores::StudentScores.new(student_id: student.id, scores: [ 25, 75 ], first_session_id: first.id,
+                                                           best_session_id: remediation.id) ],
+                     scores.fetch(@assignment.id)
       end
 
       test "a student who left or whose account was anonymized does not count" do

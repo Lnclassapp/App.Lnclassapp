@@ -69,7 +69,8 @@ class CiPlanTest < Minitest::Test
   def test_the_workflow_runs_on_ready_pull_requests_only
     assert_equal [ "pull_request" ], triggers.keys
     assert_includes triggers.dig("pull_request", "types"), "ready_for_review"
-    assert_equal "${{ !github.event.pull_request.draft }}", jobs.dig("plan", "if")
+    # Amendment of 2026-10-04: and only while the repository variable CI_ENABLED is « true » (the owner's switch).
+    assert_equal "${{ !github.event.pull_request.draft && vars.CI_ENABLED == 'true' }}", jobs.dig("plan", "if")
     TEST_JOBS.each { |name| assert_equal "needs.plan.outputs.code == 'true'", jobs.dig(name, "if"), name }
     assert_equal "${{ !cancelled() && needs.plan.result != 'skipped' }}", jobs.dig("ci", "if")
   end

@@ -1,5 +1,5 @@
 # 🔌 INFRA · Queries::Classroom::AssignmentFollowUpQuery
-# Rôle : suivi d'un exercice assigné : faits, dont en retard, pas encore faits ; rendus en retard et pas encore faits nommés
+# Rôle : suivi d'un exercice assigné : faits (remédiation comprise), dont en retard, pas encore faits ; retards et restants nommés
 # ADR  : 0026, 0048, 0072, 0079 · UDR : 0062, 0072 · appelée après FollowAssignmentPolicy seulement : elle nomme des élèves
 module Queries
   module Classroom
@@ -34,8 +34,9 @@ module Queries
       end
 
       # { assignment_id => Counts } pour des assignations d'une même classe : deux requêtes, quel que soit leur nombre.
-      # Fait : un élève présent avec une session standard terminée rattachée à l'assignation (ADR-0048) ; en retard : la date
-      # locale de la première est postérieure à due_on (le jour même est à l'heure) ; sans échéance, jamais en retard.
+      # Fait : un élève présent avec une session terminée rattachée à l'assignation (ADR-0048), standard ou de remédiation
+      # (ADR-0079 §4.1) ; en retard : la date locale de la première, quel que soit son kind, est postérieure à due_on (le
+      # jour même est à l'heure) ; sans échéance, jamais en retard.
       def self.counts(classroom_id:, assignment_ids:)
         return {} if assignment_ids.empty?
 
@@ -57,11 +58,13 @@ module Queries
         Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil, users: { anonymized_at: nil })
       end
 
-      # Une ligne par élève présent et assignation : la date locale de sa première session rendue (done_on).
+      # Une ligne par élève présent et assignation : la date locale de sa première session rendue (done_on), standard ou de
+      # remédiation : une remédiation sur l'exercice assigné, c'est faire cet exercice (ADR-0079 §4.1).
+      # Index : index_exercise_sessions_on_classroom_assignment_id (le partiel handed_in ne couvre que kind = 'standard').
       def self.first_done(classroom_id, assignment_ids)
         local_date = "((exercise_sessions.completed_at AT TIME ZONE 'UTC') AT TIME ZONE " \
                      "#{Orm::ExerciseSession.connection.quote(Time.zone.tzinfo.name)})::date"
-        Orm::ExerciseSession.where(classroom_assignment_id: assignment_ids, status: "completed", kind: "standard",
+        Orm::ExerciseSession.where(classroom_assignment_id: assignment_ids, status: "completed",
                                    student_id: present_students(classroom_id).select(:student_id))
                             .group(:classroom_assignment_id, :student_id)
                             .select("exercise_sessions.classroom_assignment_id AS assignment_id", :student_id,

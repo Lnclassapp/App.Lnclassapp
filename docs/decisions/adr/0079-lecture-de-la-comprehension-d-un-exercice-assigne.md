@@ -54,12 +54,20 @@ Quatre questions n'avaient pas de réponse :
 ### 4.1 Ce qui compte
 
 - **Unité** : une assignation active (un exercice assigné à une classe). Pas l'exercice seul.
-- **Sessions** : la définition de « fait » de l'ADR-0048 et de l'ADR-0072 §4.4, inchangée :
-  - `standard` et `completed` ;
+- **Sessions** : la définition de « fait » de l'ADR-0048 et de l'ADR-0072 §4.4, élargie à la remédiation :
+  - `completed`, **quel que soit son `kind`** (`standard` ou `remediation`) ;
   - rattachées à l'assignation (`classroom_assignment_id`) ;
   - d'un élève présent : adhésion non quittée, compte non anonymisé.
 
-  Une session de remédiation, une session lancée depuis une autre classe ou hors assignation, une session commencée : ne comptent pas.
+  **Une session de remédiation sur l'exercice assigné, c'est faire cet exercice.** `StartExerciseSession` ouvre une session `remediation` dès que l'élève a une lacune en attente sur la fiche (ADR-0043), pour **tous** les exercices de la fiche, et la rattache à l'assignation. Ne compter que `standard` cachait le travail de l'élève à l'enseignant :
+  - un élève qui rate à 25 % puis réussit à 75 % en remédiation restait « En difficulté », à une seule session, sans signe de progrès ;
+  - un élève dont la lacune venait d'un autre exercice de la fiche faisait l'exercice assigné en remédiation automatique et restait « pas encore fait » : la page de suivi demandait à l'enseignant de le relancer, à tort.
+
+  Les scores (première, meilleure et dernière session, taux par question) et les comptes faits, en retard et pas encore faits incluent donc la remédiation. Le « rendu en retard » se lit sur la première session faite, quel que soit son `kind`.
+
+  Une session lancée depuis une autre classe ou hors assignation (remédiation comprise), une session commencée : ne comptent pas.
+
+  *Complément du 2026-10-04 : la première version de ce paragraphe excluait la remédiation. Le défaut a été trouvé en navigateur réel pendant le chantier ; l'orchestrateur a tranché par mandat du porteur.*
 - **Effectif** : les élèves présents. Le « 18/25 » du cercle est le même nombre que le « 18 faits » de la page.
 
 ### 4.2 Catégorie d'un élève
@@ -136,6 +144,7 @@ Décision du porteur (2026-10-04) : pour qu'il aide chaque élève à progresser
 - Un élève qui a obtenu un badge plus haut hors de cette assignation apparaît ici à son palier de l'assignation. Le badge affiché sur ses propres pages peut différer.
 - La marge de 10 points et le seuil de 5 élèves sont des premières valeurs, à revoir après usage. Chacun a une seule définition.
 - Un exercice fait avant d'être assigné, ou depuis la fiche hors assignation, ne compte pas : l'enseignant ne voit que le travail donné à sa classe.
+- **Les pages de la direction comptent encore « fait » sans la remédiation.** `Queries::School::StudentWorkQuery` et `Queries::School::DepartedStudentsQuery` filtrent toujours `kind = 'standard'` : leur correction demande un nouvel index (l'index partiel `index_exercise_sessions_handed_in` ne couvre que `standard`). Elle part dans le chantier de correction `remediation-comptee-faite`. D'ici là, un élève qui n'a fait l'exercice assigné qu'en remédiation est « fait » pour l'enseignant et pas pour la direction.
 
 ## 6. Notes d'implémentation
 
@@ -190,7 +199,7 @@ end
   - égalités Acquis/Fragile et En difficulté/Acquis ;
   - ordre des signes pour le tri des élèves ;
   - 4 et 5 élèves.
-- Tests des queries `Queries::Assessment::*` : une session de remédiation, une session d'une autre classe, une session commencée, un élève parti et un élève anonymisé ne comptent pas. Un élève qui recommence ne fait pas dépasser 100 % au taux d'une question. À égalité de meilleur score, la session la plus récente compte. Le taux au premier essai lit la première session, et il est absent sans élève à deux essais. Une question à 49 % est « À reprendre en classe », à 50 % elle ne l'est pas.
+- Tests des queries `Queries::Assessment::*` et `Queries::Classroom::AssignmentFollowUpQuery` : une session de remédiation rattachée à l'assignation compte (25 % puis 75 % en remédiation donnent un meilleur score de 75, « Acquis », « en progrès », et des taux lus sur la remédiation ; un élève dont la seule session est une remédiation est fait, en retard après l'échéance, absent des « pas encore faits ») ; une session d'une autre classe, une session hors assignation, une session commencée, un élève parti et un élève anonymisé ne comptent pas. Un élève qui recommence ne fait pas dépasser 100 % au taux d'une question. À égalité de meilleur score, la session la plus récente compte. Le taux au premier essai lit la première session, et il est absent sans élève à deux essais. Une question à 49 % est « À reprendre en classe », à 50 % elle ne l'est pas.
 - Test de contrôleur : élève de la classe, enseignant d'une autre classe et direction reçoivent 403 sur la page de suivi.
 - Budget : `script/perf/measure_screens.rb` sur la page classe et la page de suivi (ADR-0067).
 - `grep -rn "Rails.cache" app/infrastructure/queries/assessment` ne renvoie rien.

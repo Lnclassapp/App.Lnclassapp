@@ -1,7 +1,7 @@
 require "test_helper"
 
 # Lot E of fonctions-espace-eleve (ADR-0072 §4.4, UDR-0062 §3.5): the follow-up of an assigned exercise. « Fait » is a
-# completed standard session attached to the assignment (ADR-0048); « rendu en retard » compares the local date of the
+# completed session attached to the assignment (ADR-0048), standard or remediation (ADR-0079 §4.1); « rendu en retard » compares the local date of the
 # FIRST one with due_on, the due day itself being on time. Read, never written.
 module Queries
   module Classroom
@@ -63,13 +63,38 @@ module Queries
         assert_equal [ [ "Koffi Yao", Date.new(2026, 10, 9) ] ], row.late_students.map { [ it.display_name, it.done_on ] }
       end
 
-      test "a remediation session, a started one or one of another assignment does not count: still « pas encore fait »" do
+      test "a started session or a completed one outside the assignment does not count: still « pas encore fait »" do
         student = create_student(classroom: @classroom)
-        hand_in(student, at: Time.zone.local(2026, 10, 9, 10), gap: create_gap(student:, essential: @exercise.essential))
         create_exercise_session(student:, exercise: @exercise, classroom_assignment: @assignment)
         create_exercise_session(student:, exercise: @exercise, status: "completed", completed_at: Time.zone.local(2026, 10, 9, 10))
 
         assert_equal AssignmentFollowUpQuery::Counts.new(done: 0, late: 0, pending: 1), follow_up.counts
+        assert_empty follow_up.late_students
+      end
+
+      # ADR-0079 §4.1 : une session de remédiation sur l'exercice assigné, c'est faire cet exercice. Une lacune ouverte par
+      # un autre exercice de la fiche fait de la session de l'exercice assigné une remédiation (ADR-0043) : elle compte.
+      test "a remediation session is doing the exercise: alone on the assignment, it is done, late after the due date" do
+        late = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+        on_time = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+        create_student(classroom: @classroom, first_name: "Jean", last_name: "Kouassi")
+        hand_in(late, at: Time.zone.local(2026, 10, 9, 10), gap: create_gap(student: late, essential: @exercise.essential))
+        hand_in(on_time, at: Time.zone.local(2026, 10, 8, 10), gap: create_gap(student: on_time, essential: @exercise.essential))
+
+        row = follow_up
+
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 2, late: 1, pending: 1), row.counts
+        assert_equal [ AssignmentFollowUpQuery::LateStudent.new(display_name: "Koffi Yao", done_on: Date.new(2026, 10, 9)) ],
+                     row.late_students
+        assert_equal [ AssignmentFollowUpQuery::PendingStudent.new(display_name: "Jean Kouassi") ], row.pending_students
+      end
+
+      test "the first done session decides, whatever its kind: a remediation on time, then a standard one late, is on time" do
+        student = create_student(classroom: @classroom)
+        hand_in(student, at: Time.zone.local(2026, 10, 7, 10), gap: create_gap(student:, essential: @exercise.essential))
+        hand_in(student, at: Time.zone.local(2026, 10, 10, 10))
+
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 1, late: 0, pending: 0), follow_up.counts
         assert_empty follow_up.late_students
       end
 

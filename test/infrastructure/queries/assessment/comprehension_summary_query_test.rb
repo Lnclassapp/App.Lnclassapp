@@ -64,7 +64,8 @@ module Queries
         assert_equal({}, summaries([]))
       end
 
-      test "another classroom, another assignment, a remediation, a started session, a student gone or anonymized do not count" do
+      # ADR-0079 §4.1 : une session de remédiation sur l'exercice assigné, c'est faire cet exercice ; elle compte.
+      test "a remediation counts; another classroom, another assignment, a started session, a student gone or anonymized do not" do
         student = create_student(classroom: @classroom)
         hand_in(student, 100, gap: create_gap(student:, essential: @exercise.essential))
         hand_in(student, 100, assignment: create_assignment(classroom: create_classroom(school: @school), assignable: @exercise))
@@ -78,7 +79,16 @@ module Queries
         anonymized.update_columns(anonymized_at: Time.current)
         hand_in(create_student(classroom: @classroom), 55)
 
-        assert_equal ComprehensionSummaryQuery::Summary.new(category: nil, badge_counts: NO_BADGE.merge(bronze: 1)), summary
+        assert_equal ComprehensionSummaryQuery::Summary.new(category: nil, badge_counts: NO_BADGE.merge(bronze: 1, diamond: 1)), summary
+      end
+
+      test "25 % in a standard session, then 75 % in remediation: his best score is 75, the circle reads « Acquis »" do
+        student = create_student(classroom: @classroom)
+        hand_in(student, 25, completed_at: 2.days.ago)
+        hand_in(student, 75, completed_at: 1.day.ago, gap: create_gap(student:, essential: @exercise.essential))
+        [ 80, 80, 30, 30 ].each { hand_in(create_student(classroom: @classroom), it) }
+
+        assert_equal ComprehensionSummaryQuery::Summary.new(category: :acquired, badge_counts: NO_BADGE.merge(silver: 1, gold: 2)), summary
       end
 
       test "a student of two classrooms: his session on the assignment of the other classroom counts there, not here" do

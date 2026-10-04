@@ -347,6 +347,21 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_operator response.body.index("pending_students_title"), :>, response.body.index("late_students_title")
   end
 
+  # ADR-0079 §4.1: a lacune opened by another exercise of the fiche makes the assigned exercise a remediation; it is done.
+  test "a student whose only session on the assignment is a remediation is done, not « pas encore fait »" do
+    remediated = create_student(classroom: @classroom, first_name: "Ali", last_name: "Remédié")
+    create_exercise_session(student: remediated, exercise: @exercise, status: "completed", classroom_assignment: @assignment,
+                            completed_at: Time.zone.local(2026, 10, 7, 10), gap: create_gap(student: remediated, essential: @exercise.essential))
+    sign_in_as @teacher
+
+    get follow_up_path
+
+    assert_select "dl#follow_up_counts dd", text: "4"
+    assert_select "#pending_students li", 1
+    assert_select "#pending_students li", text: "Zoé Pas-Encore"
+    assert_select "#pending_students", text: /Remédié/, count: 0
+  end
+
   test "everybody did it: no « Pas encore faits » section, the counts and the late ones unchanged" do
     hand_in(@pending, Time.zone.local(2026, 10, 7, 10))
     sign_in_as @teacher

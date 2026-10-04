@@ -55,7 +55,8 @@ module Queries
         assert_equal({ progress: 1, flat: 2, decline: 1 }, result.trend_counts)
       end
 
-      test "done and present are those of the follow-up: remediation, another classroom, started, left and anonymized do not count" do
+      # ADR-0079 §4.1 : une session de remédiation sur l'exercice assigné, c'est faire cet exercice ; elle compte.
+      test "done and present are those of the follow-up: a remediation counts; another classroom, started, left and anonymized do not" do
         present = student(scores: [ 80 ])
         hand_in(present, 100, gap: create_gap(student: present, essential: @exercise.essential))
         hand_in(present, 100, assignment: create_assignment(classroom: create_classroom(school: @school), assignable: @exercise))
@@ -70,7 +71,19 @@ module Queries
 
         assert_equal [ counts.done, counts.done + counts.pending ], [ result.done, result.present ]
         assert_equal [ 1, 1 ], [ result.done, result.present ]
-        assert_equal [ [ 80, nil ] ], result.students.map { [ it.best, it.trend ] }
+        assert_equal [ [ 100, :progress ] ], result.students.map { [ it.best, it.trend ] }
+      end
+
+      test "25 % in a standard session, then 75 % in remediation: « Acquis », a progress, the rates read on the remediation" do
+        learner = student("Awa", "Remediee", scores: [ 25 ], answers: [ { 1 => false, 2 => false, 3 => true } ])
+        hand_in(learner, 75, answers: { 1 => true, 2 => true, 3 => false }, gap: create_gap(student: learner, essential: @exercise.essential))
+
+        result = detail
+
+        assert_equal [ 1, :acquired, { struggling: 0, fragile: 0, acquired: 1 } ], result.to_h.values_at(:done, :selected, :category_counts)
+        assert_equal({ progress: 1, flat: 0, decline: 0 }, result.trend_counts)
+        assert_equal [ [ "Awa Remediee", 75, :progress ] ], result.students.map { [ it.display_name, it.best, it.trend ] }
+        assert_equal [ [ 100, 0 ], [ 100, 0 ], [ 0, 100 ] ], result.questions.map { [ it.rate, it.first_rate ] }
       end
 
       test "nobody did it: nothing to read, « En difficulté » selected, no student" do
