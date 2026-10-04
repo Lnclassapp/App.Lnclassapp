@@ -21,6 +21,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - **Branche ouverte sur un `Develop` local périmé de 394 commits** (clone du conteneur figé au 2026-10-01). Le premier cadrage s'appuyait sur un code disparu : page classe sans « Exercices assignés », pas d'échéance, pas de page de suivi. Découvert au moment de numéroter l'ADR. Rebasé sur `origin/Develop`, puis memo corrigé. **À refaire autrement : `git fetch origin Develop` avant `git switch -c`, toujours.**
 - Les captures envoyées comme « états » étaient celles de la jauge de contexte de Claude Code, pas des maquettes : l'UDR propose une mise en page sans maquette du porteur.
+- La CI ne tourne pas sur une PR en brouillon (ADR-0069) : les « verts » de la PR n'ont rien prouvé tant qu'elle était en brouillon. Preuve locale (`COVERAGE=0 bin/rails test`, suite complète) à chaque lot, puis PR passée en « prête » une fois les lots mergés pour obtenir le verdict de la CI.
 - L'exploration déléguée à un agent a été perdue lors d'un redémarrage du conteneur ; refaite à la main.
 
 ## Ce qu'on a appris sur la codebase
