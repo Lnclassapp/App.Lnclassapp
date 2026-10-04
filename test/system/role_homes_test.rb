@@ -56,8 +56,8 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_signs_out
   end
 
-  # The school admin's journey (sign-in, « Travail des élèves », « Enseignants ») is the system test of espace-direction-simple
-  # Lot C (test/system/school_admin/student_work_test.rb): its pages are not drawn before it.
+  # The school admin's journey (sign-in, « Accueil », a level, a classroom) is the system test of accueil-direction Lot E
+  # (test/system/school_admin/direction_home_test.rb).
 
   test "on a phone, the student opens every destination from the bottom bar" do
     sign_in_as @student
