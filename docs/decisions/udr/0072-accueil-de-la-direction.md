@@ -58,7 +58,7 @@ La direction arrive sur « Travail des élèves », un tableau d'une ligne par c
 ### 3.3 Carte « Établissement » (`school_admin/classrooms/_school_card`)
 
 - `ui_card id: "direction_home_school", title: home.school_name, subtitle: t(".subtitle", type: t("school_types.#{home.school_type}"), year: home.school_year), icon: "building-library"`.
-- **Chiffres** : `ul#direction_home_figures.grid.grid-cols-3.gap-3` de trois `li.rounded-ln.bg-mist.px-3.py-3` (motif des tuiles de l'UDR-0049) : nombre en `block font-display text-2xl font-extrabold tabular-nums`, libellé en `block text-sm text-mute` (« classes » / « élèves » / « enseignants », pluriels i18n `one`/`other`).
+- **Chiffres** : `ul#direction_home_figures.grid.grid-cols-3.gap-2.sm:gap-3` de trois `li.min-w-0.rounded-ln.bg-mist.px-2.py-3.sm:px-3` (motif des tuiles de l'UDR-0049) : nombre en `block font-display text-xl font-extrabold tabular-nums sm:text-2xl`, libellé en `block text-xs text-mute sm:text-sm` (« classes » / « élèves » / « enseignants », pluriels i18n `one`/`other`). *Resserré sous `sm` après la phase 5 (constat R1) : à 360 px, « enseignants » en 14 px sortait de sa tuile.*
 - **Alertes** : sous les chiffres, `h3.mt-5.mb-2.text-xs.font-semibold.tracking-wider.text-mute.uppercase` « À surveiller », puis `ul#direction_home_alerts.space-y-2` ; un `li#alert_<kind>.flex.items-start.gap-3.text-sm.text-ink` par alerte :
   - `span.grid.size-8.shrink-0.place-items-center.rounded-full.bg-warning-soft.text-warning` avec `ui_icon "exclamation-triangle", variant: :mini, size: :sm` (décoratif) ;
   - `span.min-w-0.flex-1` : la phrase (ci-dessous), puis, si l'alerte a un lien, `link_to` en `block min-h-tap inline-flex items-center font-medium text-brand-strong` avec la flèche `arrow-right` mini.
@@ -133,17 +133,19 @@ Dans `@theme` et dans les **deux** blocs sombres de `app/assets/stylesheets/appl
 | Token | Clair | Sombre |
 |---|---|---|
 | `--color-signal-green` | `#1f9d55` | `#6fd69a` |
-| `--color-signal-yellow` | `#f2b705` | `#ffd34d` |
+| `--color-signal-yellow` | `#b88700` | `#ffd34d` |
 | `--color-signal-red` | `#d93a3a` | `#ff8a80` |
 
 Ces trois tokens ne servent **qu'aux pastilles et à leur légende** de l'espace direction. Ils ne remplacent ni `success`, ni `warning`, ni `error`.
 
+Chaque pastille garde **au moins 3:1** sur le blanc de son anneau, dans les deux modes (`test/design/dark_mode_test.rb`). *Le jaune clair `#f2b705` d'origine n'avait que 1,82 : remplacé par `#b88700` après la phase 5 (constat O5 du challenger).*
+
 ### 3.8 Page d'un niveau (`school_admin/levels/show`)
 
 - Route `GET /school-admin/levels/:slug` → `SchoolAdmin::LevelsController#show`, `school_admin_level_path(slug)`.
-- Lecture : `Queries::School::StudentWorkQuery#level(school_id: current_actor.school_id, slug: params[:slug])` → `LevelOverview(level_name, level_slug, classrooms)` (mêmes `ClassroomRow`, classes actives de l'année de ce niveau, triées par nom) ou `nil` (slug inconnu, ou aucune classe active de l'établissement dans ce niveau) → `render_not_found`.
+- Lecture : `Queries::School::StudentWorkQuery#level(school_id: current_actor.school_id, slug: params[:slug])` → `LevelOverview(level_name, level_slug, students_count, classrooms)` (`students_count` : élèves présents **distincts** du niveau, comme l'accueil — constat O1 de la phase 5) (mêmes `ClassroomRow`, classes actives de l'année de ce niveau, triées par nom) ou `nil` (slug inconnu, ou aucune classe active de l'établissement dans ce niveau) → `render_not_found`.
 - `page_title level.level_name` ; `content_for :nav_key, "home"`.
-- `ui_page_header title: level.level_name, subtitle: t(".subtitle", classrooms: <n classes>, students: <n élèves>), back: { label: t(".back"), href: school_admin_classrooms_path }` → « 3ème », « 4 classes · 172 élèves », retour « Accueil ».
+- `ui_page_header title: level.level_name, subtitle: t(".subtitle", classrooms: <n classes>, students: <n élèves>), back: { label: t(".back"), href: school_admin_classrooms_path }` → « 3ème », « 4 classes · 172 élèves » (`level.students_count`), retour « Accueil ».
 - `ul#level_classrooms.grid.gap-4.sm:grid-cols-2.xl:grid-cols-3` d'un `render "classroom_card"` par classe, puis la légende (§3.12) si au moins une classe a une pastille.
 - `_classroom_card` : `li#classroom_<public_id>` contenant **un seul lien** vers `school_admin_classroom_path(public_id)` couvrant la carte, `group flex h-full flex-col gap-4 rounded-ln border border-line bg-white p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand` :
   - ligne d'en-tête `div.flex.items-center.gap-3` : le rond `span.relative.grid.size-15.shrink-0.place-items-center.rounded-full` + `illustration.tint`, avec `image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy"` et, si signal, la pastille de §3.5 ; puis `div.min-w-0` : nom `p.truncate.font-display.text-lg.font-extrabold.text-ink`, et `span.sr-only` `t("school_admin.signals.#{signal}.label")` si signal (« Signal vert : 70 % des devoirs rendus ou plus », « Signal jaune : de 40 à 69 % des devoirs rendus », « Signal rouge : moins de 40 % des devoirs rendus ») ;
@@ -168,7 +170,7 @@ Ces trois tokens ne servent **qu'aux pastilles et à leur légende** de l'espace
 ### 3.11 Activité récente
 
 - Sur l'accueil : `ui_card id: "direction_home_activity", title: « Activité récente », subtitle: « Les 30 derniers jours dans votre établissement », icon: "bolt"` ; corps : `turbo_frame_tag "direction_home_activity_feed", src: school_admin_activity_path, loading: :lazy, target: "_top"` contenant `ui_loading_state variant: :skeleton`.
-- Route `GET /school-admin/activity` → `SchoolAdmin::ActivitiesController#show`, qui ne rend **que** le partial `school_admin/activities/_activity` (`layout: false`), dans le même `turbo_frame_tag "direction_home_activity_feed"`.
+- Route `GET /school-admin/activity` → `SchoolAdmin::ActivitiesController#show`, qui ne rend **que** le partial `school_admin/activities/_activity` (`layout: false`), dans le même `turbo_frame_tag "direction_home_activity_feed"`. En HTML seulement : tout autre format reçoit **406** sans lire la base (constat D1 de la phase 5).
 - Lecture : `Queries::School::SchoolActivityQuery#call(school_id: current_actor.school_id, now: Time.current)` → au plus 10 `Event(kind, at, teacher_gender, teacher_last_name, teacher_anonymized, student_first_name, student_last_initial, exercise_title, classroom_name, classroom_public_id)`, du plus récent au plus ancien, sur `(now - 30 jours)..now` :
   - `assignment` : `classroom_assignments.assigned_at`, classe active de l'année de l'établissement ; auteur `assigned_by` ;
   - `student_joined` : `classroom_students.joined_at`, même périmètre de classes, élève non anonymisé ;

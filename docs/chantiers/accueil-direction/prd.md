@@ -228,6 +228,7 @@ Et la page n'a qu'un titre h1
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de l'accueil (hors frame différé), quel que soit le nombre de classes | 5 (tableau) | nombre fixe, ≤ 12, identique pour 3 et 30 classes | |
-| Requêtes SQL de la page d'un niveau | — | nombre fixe, ≤ 6 | |
-| Requêtes SQL du frame d'activité | — | nombre fixe, ≤ 4 | |
+| Requêtes SQL de l'accueil (hors frame différé), quel que soit le nombre de classes | 5 (tableau) | nombre fixe, ≤ 12, identique pour 3 et 30 classes | **11** pour 3, 12 et 30 classes (10 accueil + 1 bandeau d'arrivée) ; + 3 d'authentification et 2 de navigation, communes à toute page — challenger, phase 5 |
+| Requêtes SQL de la page d'un niveau | — | nombre fixe, ≤ 6 | **4** au challenger ; **5** depuis le décompte des élèves distincts (O1) — test de comptage constant |
+| Requêtes SQL du frame d'activité | — | nombre fixe, ≤ 4 | **3**, de 0 à 10 événements — challenger, phase 5 |
+| Temps serveur de l'accueil (`test/performance/school/heavy_screens_budget_test.rb`) | — | budget « Accueil » | **non mesuré** : le jeu de données `script/perf/dataset.rb` est cassé depuis la contrainte `classroom_assignments_type_values` (antérieure au chantier) — voir journal, dette |
