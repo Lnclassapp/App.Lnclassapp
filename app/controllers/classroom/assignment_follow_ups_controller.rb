@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::AssignmentFollowUpsController
-# Rôle : suivi d'un exercice assigné (UDR-0062 §3.5) : comptes et rendus en retard nommés, pour l'enseignant de la classe et l'équipe
-# ADR  : 0026, 0072 · UDR : 0062 · FollowAssignmentPolicy avant toute lecture : élève, autre enseignant, direction → 403
+# Rôle : suivi d'un exercice assigné (UDR-0062 §3.5, UDR-0072 §3.5) : comptes, compréhension, rendus en retard et pas encore faits
+# ADR  : 0026, 0072, 0079 · UDR : 0062, 0072 · FollowAssignmentPolicy avant toute lecture : élève, autre enseignant, direction → 403
 module Classroom
   class AssignmentFollowUpsController < AuthenticatedController
     allow_roles :teacher, :team
@@ -19,7 +19,16 @@ module Classroom
     def load_follow_up
       @follow_up = Queries::Classroom::AssignmentFollowUpQuery.new.call(classroom_public_id: @classroom.public_id,
                                                                         public_id: params[:public_id])
-      render_not_found if @follow_up.nil?
+      return render_not_found if @follow_up.nil?
+
+      @comprehension = Queries::Assessment::ComprehensionDetailQuery.new.call(classroom_public_id: @classroom.public_id,
+                                                                              assignment_public_id: @follow_up.public_id,
+                                                                              category: requested_category)
+    end
+
+    # Liste blanche : une catégorie inconnue est ignorée (UDR-0072 §3.6), jamais de to_sym sur une entrée libre.
+    def requested_category
+      Entities::Assessment::Comprehension::CATEGORIES.find { |category| category.name == params[:category] }
     end
   end
 end
