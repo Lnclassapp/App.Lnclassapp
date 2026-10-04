@@ -194,6 +194,54 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_equal tc("update.updated", name: "Génétique bis"), flash[:notice]
   end
 
+  # ADR-0075, RE-27: a Tle D course whose exercise is assigned to a Tle D 1 keeps a level that covers this classroom.
+  def assigned_course
+    course = create_course(name: "Génétique", level: @tle, series: @d, material: @svt)
+    assignment = create_assignment(classroom: create_classroom(name: "Tle D 1", level: @tle, series: @d),
+                                   assignable: create_exercise(essential: create_essential(course:)))
+    [ course, assignment ]
+  end
+
+  test "RE-27: moving an assigned course out of its classroom's level or series is refused in 422, under « Niveau »" do
+    create_level(name: "3ème", position: 4, cycle: "first")
+    link_level_series(level: @tle, series: @c)
+    course, = assigned_course
+    sign_in_as @member
+
+    [ { level_slug: "3eme", series_slug: "" }, { series_slug: "c" } ].each do |taxonomy|
+      patch teams_course_path(course.slug), params: course_params(name: "Génétique", **taxonomy)
+
+      assert_response :unprocessable_entity
+      assert_select "turbo-frame#modal form#course-form" do
+        assert_select "label[for=course_level_slug]", text: including(I18n.t("activemodel.attributes.dtos/catalog/course_input.level_slug"))
+        assert_select "select#course_level_slug[aria-invalid=true][aria-describedby~=course_level_slug_error]"
+        assert_select "#course_level_slug_error", text: error(:level_slug, :assigned_elsewhere)
+        assert_select "select[name='course[level_slug]'] option[selected][value=?]", taxonomy.fetch(:level_slug, "tle")
+      end
+    end
+    assert_equal [ "Génétique", @tle.id, @d.id ], course.reload.attributes.values_at("name", "level_id", "series_id")
+  end
+
+  test "RE-27: an assigned course widens to « Tle » without series and is renamed; once unassigned, its level changes" do
+    third = create_level(name: "3ème", position: 4, cycle: "first")
+    course, assignment = assigned_course
+    sign_in_as @member
+
+    patch teams_course_path(course.slug), params: course_params(name: "Génétique", series_slug: ""), as: :turbo_stream
+    assert_response :success
+    assert_equal [ @tle.id, nil ], course.reload.attributes.values_at("level_id", "series_id")
+
+    patch teams_course_path(course.slug), params: course_params(name: "Génétique humaine", series_slug: ""), as: :turbo_stream
+    assert_response :success
+    assert_equal "Génétique humaine", course.reload.name
+
+    assignment.update!(status: "archived", archived_at: Time.current)
+    patch teams_course_path(course.slug), params: course_params(name: "Génétique humaine", level_slug: "3eme", series_slug: ""),
+                                          as: :turbo_stream
+    assert_response :success
+    assert_equal [ third.id, nil ], course.reload.attributes.values_at("level_id", "series_id")
+  end
+
   test "publishing a draft replaces its status panel, sets its publication date and writes the audit trail" do
     course = create_course(name: "Génétique", level: @tle, material: @svt, status: "draft")
     sign_in_as @member
