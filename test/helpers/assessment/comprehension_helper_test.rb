@@ -38,7 +38,7 @@ module Assessment
       assert_equal "Compréhension", t("#{scope}.section.title")
       assert_equal "Question 1 : 50 % de réussite", t("#{scope}.section.question_label", number: 1, rate: "50 %")
       assert_equal "8 en progrès · 7 sans évolution · 1 en baisse",
-                   t("#{scope}.trends_summary.sentence", **%i[progress flat decline].zip([ 8, 7, 1 ]).to_h { |key, count| [ key, t("#{scope}.trends_summary.#{key}", count:) ] })
+                   t("#{scope}.trends_summary.sentence_html", **%i[progress flat decline].zip([ 8, 7, 1 ]).to_h { |key, count| [ key, t("#{scope}.trends_summary.#{key}", count:) ] })
       assert_equal [ "Pas encore fait · 1", "Pas encore faits · 7" ], [ 1, 7 ].map { t("#{scope}.pending.title", count: it) }
       %w[categories_label questions_title students_title question_number no_attempt first_rate first_rate_label to_revisit
          to_revisit_label].each { assert I18n.exists?("#{scope}.section.#{it}", :fr), it }

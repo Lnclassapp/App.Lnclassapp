@@ -25,8 +25,8 @@
                                         tag.span(t("assessment.comprehension.trends_summary.#{group}", count: trends.fetch(group)),
                                                  class: "tabular-nums") ], " ") ]
                  end %>
-              <%# La phrase vient de la locale (« · » seul) et chaque groupe est un SafeBuffer déjà échappé. %>
-              <%= t("assessment.comprehension.trends_summary.sentence", **groups).html_safe %>
+              <%# Clé _html : Rails échappe toute interpolation qui n'est pas déjà sûre ; chaque groupe est un SafeBuffer. %>
+              <%= t("assessment.comprehension.trends_summary.sentence_html", **groups) %>
             <% end %>
           </p>
         </div>

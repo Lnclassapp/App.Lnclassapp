@@ -215,7 +215,7 @@ Décision du porteur (2026-10-04, ADR-0079 §4.8). Dans `app/views/classroom/ass
   - `to_revisit` : « À reprendre en classe » ;
   - `to_revisit_label` : « , à reprendre en classe ».
 - `trends_summary` (imbriqué : une clé YAML ne peut être à la fois une phrase et un groupe de pluriels) :
-  - `sentence` : « %{progress} · %{flat} · %{decline} » ;
+  - `sentence_html` : « %{progress} · %{flat} · %{decline} » (clé `_html` : Rails échappe toute interpolation non sûre, aucun `html_safe` dans la vue) ;
   - `progress` : `one`/`other` « %{count} en progrès » ;
   - `flat` : `one`/`other` « %{count} sans évolution » ;
   - `decline` : `one`/`other` « %{count} en baisse ».
