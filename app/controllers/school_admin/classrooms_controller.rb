@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolAdmin::ClassroomsController
 # Rôle : accueil de la direction (établissement, niveaux, bandeau d'arrivée) et page d'une classe, en lecture ; 404 hors établissement
-# ADR  : 0006, 0065, 0077 · UDR : 0052, 0054, 0070, 0072 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
+# ADR  : 0006, 0065, 0077, 0078 · UDR : 0052, 0054, 0070, 0071, 0072 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
 module SchoolAdmin
   class ClassroomsController < BaseController
     def index
@@ -9,6 +9,7 @@ module SchoolAdmin
       @arrivals = Queries::School::SchoolStaffQuery.new.recent_arrivals(
         school_id: current_actor.school_id, since: Entities::School::Staff::NEWCOMER_DAYS.days.ago, except_user_id: current_actor.user_id
       )
+      @announcements = announcements
     end
 
     def show
@@ -22,6 +23,12 @@ module SchoolAdmin
     private
 
     def query = Queries::School::StudentWorkQuery.new
+
+    # UDR-0072 §3.10 : le carrousel de l'élève, par la règle de lecture des annonces (ADR-0078 §4.3), lu en direct.
+    def announcements
+      reader = Queries::Communication::ReadableMessages.new.reader_for(actor: current_actor)
+      Queries::Communication::InboxQuery.new.carousel(reader:, now: Time.current)
+    end
 
     # Même traitement que la recherche serveur (sans casse ni accents), appliqué aux élèves de la classe déjà lus :
     # la requête de la direction n'est pas modifiée.

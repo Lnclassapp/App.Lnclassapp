@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/classrooms/index — accueil de la direction (AD-02 à AD-08, ID-10) %>
-<%# Rôle : « Bonjour », bandeau d'arrivée des directions, puis « Établissement », « Niveaux » et « Activité récente » (frame différé) %>
-<%# ADR  : 0065, 0077 · UDR : 0052, 0070 (§3.3), 0072 (§3.2, §3.11) · lecture seule : les sections ne portent que des liens %>
+<%# Rôle : « Bonjour », bandeau d'arrivée, puis « Établissement », « Niveaux », « Annonces » (sans croix) et « Activité récente » (différée) %>
+<%# ADR  : 0065, 0077, 0078 · UDR : 0052, 0070 (§3.3), 0071, 0072 (§3.2, §3.10, §3.11) · lecture seule : les sections ne portent que des liens %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "home" %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name) %>
@@ -18,6 +18,10 @@
 <div class="grid gap-5">
   <%= render "school_card", home: @home %>
   <%= render "levels", home: @home %>
+  <%# UDR-0072 §3.10 : en lecture seule, sans croix (décision du porteur du 2026-10-04) ; absent sans annonce lisible. %>
+  <% if @announcements.any_readable? %>
+    <%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %>
+  <% end %>
   <%= ui_card id: "direction_home_activity", title: t(".activity.title"), subtitle: t(".activity.subtitle"), icon: "bolt" do %>
     <%# UDR-0072 §3.11 : chargée après la page, par SchoolAdmin::ActivitiesController ; ses liens ouvrent la page entière. %>
     <%= turbo_frame_tag "direction_home_activity_feed", src: school_admin_activity_path, loading: :lazy, target: "_top" do %>
