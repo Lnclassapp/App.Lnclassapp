@@ -119,4 +119,17 @@ class Teams::ReferentialsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "#team_referential_structure", text: including(tl("summary.levels_empty"))
   end
+
+  # UDR-0068 §3.4, constat d'intégration : chaque écran du référentiel ramène à sa page, plus à l'accueil.
+  test "each referential screen leads back to the referential page" do
+    sign_in_as @member
+
+    [ drenas_path, levels_path, series_index_path, materials_path, classroom_plan_path ].each do |path|
+      get path
+
+      assert_response :success
+      assert_select "a[href='#{teams_referential_path}']", text: /Référentiel/, minimum: 1
+      assert_select "main a[href='#{team_home_path}']", { count: 0 }, "#{path} ne ramène plus à l'accueil"
+    end
+  end
 end
