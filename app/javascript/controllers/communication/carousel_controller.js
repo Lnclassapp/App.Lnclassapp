@@ -16,13 +16,15 @@ export default class extends Controller {
     if (!this.hasTrackTarget || this.dotTargets.length < 2) return
 
     this.pagerTarget.classList.replace("hidden", "flex")
-    this.update = this.update.bind(this)
-    this.trackTarget.addEventListener("scroll", this.update, { passive: true })
+    // La bande et l'écouteur sont gardés : toutes les cartes masquées, la bande n'existe plus au débranchement.
+    this.track = this.trackTarget
+    this.listener = () => this.update()
+    this.track.addEventListener("scroll", this.listener, { passive: true })
     this.update()
   }
 
   disconnect() {
-    if (this.update) this.trackTarget.removeEventListener("scroll", this.update)
+    this.track?.removeEventListener("scroll", this.listener)
   }
 
   // La carte active est celle dont le bord gauche est le plus près de celui de la bande ; au bout, la dernière.
