@@ -3,7 +3,7 @@
 # ADR  : 0028, 0071, 0077 (§4.2, §4.3) · UDR : 0006, 0070 (§3.0, §3.5) · :staff_member_public_id est celui du compte restauré
 module Teams
   class SchoolStaffRestorationsController < BaseController
-    include SchoolsController::SchoolStaffBlock
+    include SchoolStaffBlock
 
     before_action :load_target
 
