@@ -55,7 +55,7 @@ Libellé `shared.navigation.announcements` : « Annonces ». Toute page de ce ch
 
 `HOME_SECTIONS[:student]` devient `[[:todo, …], [:announcements, "megaphone"], [:classroom, …], [:courses, …]]`.
 
-### 3.2 La carte — `communication/messages/_card.html.erb` — Lot 0
+### 3.2 La carte — `communication/messages/_card.html.erb` — Lot B
 
 Locaux : `card:` (objet de lecture `Queries::Communication::MessageCard`, ADR-0069 §6), `context:` (`:carousel`, `:list` ou `:moderation`), `dismissible:` (vrai seulement dans le carrousel et la liste de l'élève, et jamais pour une annonce officielle).
 
@@ -84,7 +84,7 @@ article#announcement_<public_id>  aria-labelledby="announcement_<public_id>_titl
                           "aria-label": "Masquer l'annonce « <titre> »"   → ui_icon "x-mark", size: :sm
 ```
 
-- **Signature** (`Communication::MessagesHelper#announcement_signature`, Lot 0) : équipe → « Lnclass » ; enseignant → « M. Kouassi · SVT » (civilité tirée du genre : `male` « M. », `female` « Mme » ; nom de famille ; nom de la matière) ; direction → « Mme Kamaté · Direction ». Auteur anonymisé → la fonction seule (« SVT », « Direction »).
+- **Signature** (`Communication::MessagesHelper#announcement_signature`, Lot B) : équipe → « Lnclass » ; enseignant → « M. Kouassi · SVT » (civilité tirée du genre : `male` « M. », `female` « Mme » ; nom de famille ; nom de la matière) ; direction → « Mme Kamaté · Direction ». Auteur anonymisé → la fonction seule (« SVT », « Direction »).
 - La carte n'est **jamais** un lien.
 - `context: :moderation` ajoute sous la carte (hors de l'`article`) la ligne du §3.7.
 
@@ -105,7 +105,7 @@ Une illustration = un partiel `communication/messages/illustrations/_<clé>.html
 | `celebration` | coupe `fill-gold` ; pied `fill-teacher` ; trois éclats `fill-brand` |
 | `holidays` | soleil `fill-gold` ; deux vagues `fill-brand` et `fill-brand-strong` |
 
-### 3.4 Audio — contrôleur Stimulus `communication--audio` — Lot 0
+### 3.4 Audio — contrôleur Stimulus `communication--audio` — Lot B
 
 Rendu seulement si l'annonce a un fichier audio :
 
@@ -257,3 +257,12 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
 - Interdit : une page de détail d'annonce, un lien sur une carte, un fichier d'annonce servi par une URL signée, une annonce rendue en HTML de l'auteur, la synthèse vocale du texte.
 - L'image n'a pas de texte alternatif saisi : une annonce dont l'information est dans l'image seule est inaccessible. Un champ « description de l'image » est la suite naturelle si les auteurs s'en servent ainsi.
 - Le jour où l'accueil élève de la maquette (carte « Prochain exercice », grille des matières) est construit, son UDR reprend le carrousel tel quel et peut le déplacer après la grille, comme dans la maquette.
+
+## Amendement du 2026-10-04 — toast avec action et onglets, constatés au Lot 0
+
+*Chantier [`annonces`](../../chantiers/annonces/journal.md), Lot 0. Cette section fait foi en cas d'écart avec le §3.*
+
+- **§3.6** : le bouton d'action du toast ne porte pas `data-action="toast#dismiss"`. Le toast se ferme sur `turbo:submit-start` de son formulaire (`form: { data: { action: "turbo:submit-start->toast#dismiss" } }`) : retiré au clic, le formulaire quitterait la page avant d'être envoyé. Turbo rend la réponse même quand le formulaire n'est plus dans la page.
+- **§3.7, onglets** : l'onglet courant **remplace** `border-transparent text-mute` par `border-brand text-ink` (au lieu de les ajouter, ce qui laissait deux classes en conflit), et chaque onglet porte le contour de focus visible de l'UDR-0005 (`focus-visible:outline-2 focus-visible:outline-brand`).
+- **§3.8, `ui_checkbox_group`** : `required:` marque le groupe (astérisque) sans rendre chaque case obligatoire ; un champ caché vide envoie le tableau même sans case cochée, pour que l'erreur « Choisis au moins une de tes classes. » vienne du serveur.
+- Les titres des §3.2 (carte) et §3.4 (audio) disaient « Lot 0 » : ils sont au **Lot B**, comme le plan. Corrigé ci-dessus.

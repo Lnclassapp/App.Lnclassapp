@@ -19,6 +19,9 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - **Cadrage, 2026-10-03** : le premier jet du memo suivait l'ADR-0045 à la lettre. La maquette du porteur, apportée en cours de grill, en contredisait sept points (auteurs, audio, image, officiel, signature, ordre, page de détail). Leçon : demander la maquette **avant** le grill, pas pendant.
+- **Lot 0, 2026-10-04** : la contrainte `status = 'draft' OR ends_at IS NOT NULL` de l'ADR-0069 interdisait d'archiver un brouillon. Vue à la relecture du Lot 0, avant le merge ; corrigée en « date de fin exigée des annonces en ligne » (amendement de l'ADR-0069). Leçon : écrire, pour chaque `CHECK`, la transition de statut qui pourrait la violer.
+- **Lot 0** : l'UDR-0056 titrait « Lot 0 » la carte et l'audio que le plan donnait au Lot B ; l'agent a suivi le plan. Deux documents écrits le même jour se contredisaient déjà : relire l'UDR contre le plan avant de lancer.
+- **Environnement** : Ruby 3.4.9, PostgreSQL, Yarn 4 (Corepack) et un chromedriver accordé au Chromium (141) manquaient à la session ; `LANG=C.UTF-8` est nécessaire au garde de pureté.
 - **Cadrage** : le plan écrivait « DS-11 amendé » alors que les routes d'annonces vivent sous `/announcements` ; DS-11 tient tel quel. Corrigé avant le commit.
 
 ## Ce qu'on a appris sur la codebase

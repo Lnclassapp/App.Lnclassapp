@@ -80,7 +80,8 @@ Le point 3 rouvre aussi l'ADR-0065 : l'espace direction était « en lecture seu
 
 Contraintes (en plus de celle de l'ADR-0045 sur `published_at`) :
 
-- `CHECK (status = 'draft' OR ends_at IS NOT NULL)` ;
+- `CHECK (status NOT IN ('scheduled','published') OR ends_at IS NOT NULL)` : la date de fin est exigée des annonces en ligne (un brouillon archivé n'en a pas) ;
+- `CHECK (btrim(title) <> '')` et `CHECK (btrim(body) <> '')` : ni titre ni texte vides (AN-20) ;
 - `CHECK (ends_at IS NULL OR published_at IS NULL OR (ends_at > published_at AND ends_at <= published_at + interval '90 days'))` ;
 - `CHECK ((status = 'withdrawn') = (withdrawn_at IS NOT NULL AND withdrawn_by_id IS NOT NULL))` ;
 - `CHECK (audience <> 'classrooms' OR school_id IS NOT NULL)`.
@@ -270,3 +271,11 @@ publish_scheduled_messages:
 - Longueurs : titre **60**, texte **140** caractères.
 - L'équipe voit **toutes** les annonces des enseignants (pour pouvoir retirer), y compris celles qu'aucun signalement n'a désignées.
 - Un retrait ne prévient pas l'auteur autrement que par le statut « Retirée » dans « Mes annonces ».
+
+## Amendement du 2026-10-04 — contraintes précisées au Lot 0
+
+*Chantier [`annonces`](../../chantiers/annonces/journal.md), Lot 0. Le §4.1 ci-dessus est corrigé en conséquence.*
+
+- La contrainte « date de fin » visait `status = 'draft' OR ends_at IS NOT NULL` : elle interdisait d'archiver un brouillon, qui n'a pas de date de fin. Elle devient `status NOT IN ('scheduled','published') OR ends_at IS NOT NULL` (`messages_ends_at_when_live`). Une annonce archivée ou retirée après sa mise en ligne garde sa date de fin.
+- Deux contraintes s'ajoutent : `messages_title_present` et `messages_body_present` (`btrim(...) <> ''`), pour qu'un titre ou un texte vide soit refusé par la base aussi (AN-20).
+- `AttachmentStorePort#read` accepte une plage ouverte (`500..`) ou négative (`-500..`) ; une plage hors du fichier lit le fichier entier. C'est ce que fait HTTP pour une plage non satisfiable sans erreur.
