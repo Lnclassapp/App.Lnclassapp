@@ -1,0 +1,43 @@
+<%# 🌐 UI · communication/authored_messages/_row — une annonce de « Mes annonces » (Queries::Communication::AuthoredMessagesQuery::Row) %>
+<%# Rôle : vignette, titre, « destinataires · dates », statut ; menu Modifier / Archiver (confirmation) tant qu'elle n'est ni terminée, ni archivée, ni retirée %>
+<%# ADR  : 0078 · UDR : 0005, 0042, 0071 (§3.7) · Stimulus : dropdown, modal %>
+<% tones = { "draft" => :neutral, "scheduled" => :info, "published" => :success, "ended" => :neutral, "archived" => :neutral,
+             "withdrawn" => :error } %>
+<% place = row.school_name || t("communication.scopes.national") %>
+<% recipients = row.audience == "classrooms" ? row.classroom_names.join(", ") : t(".recipients", place:, audience: t("communication.audiences.#{row.audience}")) %>
+<% dates = case row.status
+           when "draft" then t("communication.statuses.draft")
+           when "scheduled" then t(".dates.scheduled", date: announcement_date(row.at, time: true))
+           when "published" then t(".dates.published", date: announcement_date(row.at), last_day: announcement_date(row.last_day))
+           else t(".dates.#{row.status}", date: announcement_date(row.at))
+           end %>
+<li id="my_announcement_<%= row.public_id %>" class="flex items-center gap-3 px-5 py-3 sm:px-6">
+  <span class="grid size-10 shrink-0 place-items-center overflow-hidden rounded-full bg-brand-soft">
+    <% if row.image %>
+      <%= image_tag announcement_file_path(row.public_id, kind: "image"), alt: "", loading: "lazy", decoding: "async",
+                    class: "size-full object-cover" %>
+    <% else %>
+      <%= announcement_illustration row.illustration, class: "size-7" %>
+    <% end %>
+  </span>
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-medium text-ink"><%= row.title %></p>
+    <p class="truncate text-sm text-mute"><%= t(".line", recipients:, dates:) %></p>
+  </div>
+  <%= ui_badge t("communication.statuses.#{row.status}"), tone: tones.fetch(row.status) %>
+  <% if row.manageable? %>
+    <%= ui_dropdown label: t(".actions", title: row.title), id: "my-announcement-actions-#{row.public_id}" do %>
+      <%= ui_dropdown_item t(".edit"), href: edit_announcement_path(row.public_id), icon: "pencil-square" %>
+      <%= ui_dropdown_item t(".archive"), dialog: "archive-#{row.public_id}", icon: "archive-box", tone: :danger %>
+    <% end %>
+    <%= ui_modal id: "archive-#{row.public_id}", title: t(".archive_title") do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".cancel"), variant: :ghost, data: { action: "modal#close" } %>
+        <%= form_with url: announcement_archive_path(row.public_id), method: :post, class: "contents" do %>
+          <%= ui_button t(".archive"), type: :submit, variant: :danger %>
+        <% end %>
+      <% end %>
+      <p class="text-sm text-mute"><%= t(".archive_text") %></p>
+    <% end %>
+  <% end %>
+</li>

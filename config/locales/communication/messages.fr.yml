@@ -1,0 +1,63 @@
+# Annonces — libellés partagés par les lots A, B et C (ADR-0078, UDR-0071) ; chaque page a ensuite son propre fichier
+fr:
+  communication:
+    # UDR-0071 §3.3, dans l'ordre de Entities::Communication::Message::ILLUSTRATIONS
+    illustrations:
+      info: "Information"
+      calendar: "Date"
+      homework: "Devoirs"
+      sheets: "Fiches"
+      exam: "Examen"
+      meeting: "Réunion"
+      celebration: "Félicitations"
+      holidays: "Congés"
+    # « Terminée » n'est pas un statut stocké : une annonce publiée dont la date de fin est passée (ADR-0078 §4.1)
+    statuses:
+      draft: "Brouillon"
+      scheduled: "Programmée"
+      published: "Publiée"
+      archived: "Archivée"
+      withdrawn: "Retirée"
+      ended: "Terminée"
+    audiences:
+      all: "Tous"
+      students: "Élèves"
+      teachers: "Enseignants"
+      school_admins: "Directions"
+      classrooms: "Classes"
+    scopes:
+      national: "Tout le pays"
+    # UDR-0071 §3.2 : « Lnclass », « M. Kouassi · SVT », « Mme Kamaté · Direction »
+    signature:
+      team: "Lnclass"
+      school_admin: "Direction"
+      male: "M."
+      female: "Mme"
+    # UDR-0071 §3.7 : onglets par URL de la page « Annonces »
+    tabs:
+      label: "Annonces"
+      received: "Reçues"
+      mine: "Mes annonces"
+      school: "Enseignants"
+      all: "Toutes"
+    # UDR-0071 §3.2 : la carte
+    card:
+      official: ", annonce officielle"
+      edited: "Modifiée"
+      dismissed: "Masquée"
+      restore: "Réafficher"
+      dismiss: "Masquer l'annonce « %{title} »"
+    # UDR-0071 §3.4 : le bouton ▶, par état (data-communication--audio-labels-value)
+    audio:
+      labels:
+        new: "Écouter le message"
+        playing: "Arrêter la lecture"
+        played: "Réécouter le message"
+      unavailable: "Audio indisponible sur ce téléphone."
+      fallback: "Écouter"
+    # UDR-0071 §3.6 et États obligatoires : le toast du masquage
+    dismissal:
+      title: "Annonce masquée"
+      message: "Elle reste dans « Toutes les annonces »."
+      undo: "Annuler"
+      refused: "Cette annonce ne peut pas être masquée."

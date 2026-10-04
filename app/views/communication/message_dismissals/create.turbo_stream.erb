@@ -1,0 +1,13 @@
+<%# 🌐 UI · communication/message_dismissals/create — réponse au masquage (UDR-0071 §3.5, §3.6, §3.7) %>
+<%# Rôle : la carte devient « Masquée » (liste), puis le carrousel est recalculé (accueil) ; toast « Annonce masquée » avec « Annuler » %>
+<%# ADR  : 0078 · UDR : 0071 · un remplacement sans cible dans la page ne fait rien : chaque page ne reçoit que le sien %>
+<%# La carte d'abord : sur l'accueil, celle du carrousel est aussitôt emportée par le carrousel recalculé, qui ne l'a plus. %>
+<% if @card %>
+  <%= turbo_stream.replace "announcement_#{@card.public_id}", partial: "communication/messages/card",
+                           locals: { card: @card, context: :list, dismissible: !@card.official? } %>
+<% end %>
+<%= turbo_stream.replace "student_home_announcements", partial: "communication/messages/carousel",
+                         locals: { carousel: @carousel, refocus: true } %>
+<%= turbo_stream_toast t("communication.dismissal.message"), type: :info, title: t("communication.dismissal.title"),
+                       action: { label: t("communication.dismissal.undo"), href: announcement_dismissal_path(params[:public_id]),
+                                 method: :delete } %>
