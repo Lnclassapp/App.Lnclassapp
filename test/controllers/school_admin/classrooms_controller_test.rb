@@ -250,4 +250,56 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#student-work-search", count: 0
     assert_select "#classroom_students", text: /#{tc('show.empty')}/
   end
+
+  # ID-10 (ADR-0077 §4.4, UDR-0070 §3.3): the arrival banner above « Travail des élèves ».
+  def arrival(name, date, via) = tc("index.arrivals.line", name:, date:, via: tc("index.arrivals.via.#{via}"))
+  def day(time) = I18n.l(time.to_date, format: :long).sub(/\A1 /, "1er ")
+
+  test "ID-10: Kofi (10 days) reads the arrivals of Aya (2 days) and of the invited admin above #student_work; Aya not hers" do
+    kofi = create_school_admin(school: @school, first_name: "Kofi", last_name: "Yao", joined_via: "code", joined_at: 10.days.ago)
+    aya = create_school_admin(school: @school, first_name: "Aya", last_name: "Koné", joined_via: "code", joined_at: 2.days.ago)
+    create_school_admin(school: @school, first_name: "Gone", last_name: "Archivé", joined_via: "code", joined_at: 1.day.ago,
+                        archived_at: 1.hour.ago)
+    create_school_admin(school: create_school, first_name: "Zadi", last_name: "Ailleurs", joined_via: "code", joined_at: 1.day.ago)
+
+    sign_in_as kofi
+    get school_admin_classrooms_path
+
+    assert_response :success
+    assert_select "#staff_arrivals[role=status].mb-6.rounded-ln.bg-school\\/10.px-4.py-3.text-sm.text-ink + #student_work"
+    assert_select "#staff_arrivals p", 2
+    assert_select "#staff_arrivals p:nth-of-type(1)", text: arrival("#{@admin.first_name} #{@admin.last_name}", day(Time.current), :invitation)
+    assert_select "#staff_arrivals p:nth-of-type(2)", text: arrival("Aya Koné", day(2.days.ago), :code)
+    assert_select "#staff_arrivals button, #staff_arrivals a", 0
+    [ "Archivé", "Ailleurs" ].each { assert_not_includes response.body, it }
+    sign_out
+
+    sign_in_as aya
+    get school_admin_classrooms_path
+
+    assert_select "#staff_arrivals p", 1
+    assert_select "#staff_arrivals", text: /Aya Koné|Kofi Yao/, count: 0
+  end
+
+  test "ID-10: an arrival on the first of the month reads « 1er »" do
+    travel_to Time.zone.local(2026, 10, 4, 9) do
+      create_school_admin(school: @school, first_name: "Aya", last_name: "Koné", joined_via: "code", joined_at: Time.zone.local(2026, 10, 1, 8))
+
+      sign_in_as @admin
+      get school_admin_classrooms_path
+
+      assert_select "#staff_arrivals p", text: arrival("Aya Koné", "1er octobre 2026", :code)
+    end
+  end
+
+  test "ID-10: no arrival within 7 days, no banner" do
+    Orm::SchoolStaff.where(user_id: @admin.id).update_all(created_at: 8.days.ago)
+    create_school_admin(school: @school, joined_via: "code", joined_at: 8.days.ago)
+
+    sign_in_as @admin
+    get school_admin_classrooms_path
+
+    assert_response :success
+    assert_select "#staff_arrivals", 0
+  end
 end
