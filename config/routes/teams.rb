@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074 · UDR : 0067
+# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077 · UDR : 0067, 0070
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -22,6 +22,10 @@ scope "teams", module: "teams" do
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
     # ADR-0065 : inviter la direction depuis la fiche (modale de l'UDR-0052).
     resources :staff_invitations, only: %i[new create], path: "staff-invitations"
+    # ADR-0077 : retirer une direction, la restaurer avant sa suppression (public_id du compte).
+    resources :staff_members, only: :destroy, path: "staff", param: :public_id, controller: "school_staff_members" do
+      resource :restoration, only: :create, controller: "school_staff_restorations"
+    end
   end
   resources :levels, param: :slug, except: :show
   resources :series, param: :slug, except: :show

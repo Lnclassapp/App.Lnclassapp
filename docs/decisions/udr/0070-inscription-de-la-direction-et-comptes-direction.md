@@ -101,7 +101,7 @@ Partial partagé `shared/_school_staff.html.erb`, locals `staff:` (lignes active
 - Succès : la ligne quitte ce bloc et entre dans `#school_staff` (`turbo_stream.append`), avec le toast « %{name} est de nouveau dans la direction. »
 - 409 : toast « Les 3 places de direction par le code sont prises : retirez d'abord un compte. »
 
-**Sur l'accueil de l'équipe** (`teams/homes/show`, pour `admin` et `field`) : `ui_card id: "team_home_archived_staff", title: "Directions retirées", subtitle: "À vérifier avant leur suppression"`, après le rappel des demandes de suppression. Les 5 plus récentes : « %{name} · %{school} · retiré le %{date} », lien vers la fiche ; « Voir les N autres » si plus. Aucune ligne → la carte n'est pas rendue.
+**Sur l'accueil de l'équipe** (`teams/homes/show`, pour `admin` et `field`) : `ui_card id: "team_home_archived_staff", title: "Directions retirées", subtitle: "À vérifier avant leur suppression"`, après le rappel des demandes de suppression. Les 5 plus récentes : « %{name} · %{school} · retiré le %{date} », lien vers la fiche ; au-delà, une ligne `text-sm text-mute` « Et N autres, sur les fiches de leurs établissements. » (aucune page ne liste toutes les directions retirées). Aucune ligne → la carte n'est pas rendue.
 
 ### 3.6 Accessibilité
 

@@ -6,13 +6,17 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-10-04 | Porteur, Q12 : « Les directions invitées par l'équipe ne comptent pas » dans le plafond. Le même message disait d'abord « oui toutes comptent » ; la dernière consigne a été retenue | Seules les arrivées par le code ouvrent un risque | Oui, ADR-0077 §4 |
+| 2026-10-04 | Lot 0 : « Voir les N autres » de l'accueil de l'équipe devient « Et N autres, sur les fiches de leurs établissements. » | Aucune page ne liste toutes les directions retirées : le lien n'aurait mené nulle part | UDR-0070 §3.5, PRD ID-21 amendés |
+| 2026-10-04 | Lot 0 : les places « 2 / 3 » sont un `<p id="school_staff_places">` dans la carte, pas le sous-titre de `ui_card` | Une cible stable pour le Turbo Stream du retrait | Non (détail de l'UDR §3.4) |
+| 2026-10-04 | Lot 0 : la route de restauration prend `:staff_member_public_id` (ressource imbriquée), pas `:public_id` | Convention Rails des ressources imbriquées ; le nom de route est celui de l'UDR | Non |
 
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Lot 0 : `db:migrate` en local réécrit les `CHECK … = ANY (ARRAY[…])` de tout `db/schema.rb`, car la version locale de PostgreSQL écrit ces contraintes dans un autre format. N'ont été gardées que les lignes de `school_staffs`, la version et la clé étrangère `archived_by_id` ; le schéma rechargé en test passe.
+- Lot 0 : `test/routing/school_admin_routes_test.rb` fige la liste des écritures sous `/school-admin` ; la route de retrait l'y ajoute.
 
 ## Ce qu'on a appris sur la codebase
 

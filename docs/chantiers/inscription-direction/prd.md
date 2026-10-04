@@ -183,7 +183,7 @@ Mais une direction invitée archivée se restaure dans la même situation
 # ID-21
 Étant donné 6 directions archivées, de deux établissements
 Quand un membre admin ou field ouvre l'accueil de l'équipe
-Alors la carte « Directions retirées » montre les 5 plus récentes avec le lien vers leur fiche, et « Voir les 1 autres »
+Alors la carte « Directions retirées » montre les 5 plus récentes avec le lien vers leur fiche, et « Et 1 autre, sur la fiche de son établissement. »
 Et un membre content ne voit pas la carte, ni « Restaurer » sur la fiche, et un POST forgé de restauration répond 403
 ```
 

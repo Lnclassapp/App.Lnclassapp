@@ -33,12 +33,11 @@ Lot 0 — SOCLE (séquentiel) : migration, entité Staff, port étendu + adaptat
   - `config/routes/identity.rb`, `config/routes/school_admin.rb`, `config/routes/teams.rb` (routes de l'UDR-0070 §3.0, vers des contrôleurs encore absents)
   - locales `fr` de tout le chantier, textes de l'UDR-0070 :
     - `config/locales/identity/school_staff_registrations.fr.yml`
-    - `config/locales/school_admin/staff_members.fr.yml`
-    - `config/locales/teams/school_staff_members.fr.yml`
+    - `config/locales/teams/school_staff.fr.yml`
     - `config/locales/shared/school_staff.fr.yml`
     - clés ajoutées dans `config/locales/homepage/index.fr.yml`, `config/locales/school_admin/classrooms.fr.yml`, `config/locales/teams/homes.fr.yml`
   - `app/views/shared/_school_staff.html.erb` (bloc « Direction », UDR-0070 §3.4, utilisé par B et C)
-  - `test/factories` : `create_school_staff(school:, joined_via:, archived_at:, created_at:)` dans `test/support/factories/school.rb`
+  - fabrique : `create_school_admin(joined_via:, joined_at:, archived_at:, archived_by:)` dans `test/support/factories/identity.rb`
 - **Dépend de**    : —
 - **Test associé** :
   - `test/domain/entities/school/staff_test.rb`
@@ -183,7 +182,7 @@ Brief de chaque agent :
 | `app/domain/ports/school/staff_repository_port.rb`, `app/infrastructure/repositories/school/staff_repository.rb` | Lot 0 |
 | `app/infrastructure/queries/school/school_staff_query.rb` | Lot 0 |
 | `app/views/shared/_school_staff.html.erb` | Lot 0 |
-| `test/support/factories/school.rb` | Lot 0 |
+| `test/support/factories/identity.rb` | Lot 0 |
 | `app/views/homepage/index.html.erb` | Lot A |
 | `app/views/school_admin/schools/show.html.erb`, `app/views/school_admin/classrooms/index.html.erb` | Lot B |
 | `app/domain/use_cases/school/archive_school_staff.rb`, `app/domain/policies/school/remove_school_staff_policy.rb` | Lot B (lus par C, jamais modifiés) |

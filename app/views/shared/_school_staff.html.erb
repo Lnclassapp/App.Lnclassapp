@@ -1,0 +1,45 @@
+<%# 🌐 UI · shared/_school_staff — bloc « Direction » de l'établissement, pour la direction et pour l'équipe %>
+<%# Rôle : comptes direction actifs, arrivée (code ou invitation), places « par le code » ; ⋮ « Retirer » si removable.(ligne) %>
+<%# ADR  : 0077 · UDR : 0042, 0070 (§3.4) · locals : staff, by_code_count, viewer_id, remove_url (lambda public_id), removable, newcomer %>
+<% fmt = ->(time) { date = time.to_date; date.day == 1 ? "1er #{l(date, format: "%B %Y")}" : l(date, format: :long) } %>
+<%= ui_card id: "school_staff", title: t("shared.school_staff.title"), padding: :md do %>
+  <p id="school_staff_places" class="-mt-2 mb-2 text-sm text-mute">
+    <%= t("shared.school_staff.subtitle", used: by_code_count, cap: Entities::School::Staff::CODE_CAP) %>
+  </p>
+  <% if staff.empty? %>
+    <%= ui_empty_state title: t("shared.school_staff.empty"), icon: "user-group" %>
+  <% else %>
+    <ul id="school_staff_list" class="divide-y divide-line">
+      <% staff.each do |row| %>
+        <% dialog = "remove-staff-#{row.public_id}" %>
+        <li id="school_staff_<%= row.public_id %>" class="flex min-h-tap items-center justify-between gap-3 py-3">
+          <div class="min-w-0">
+            <p class="truncate font-medium text-ink">
+              <%= row.name %><% if row.user_id == viewer_id %> <span class="font-normal text-mute"><%= t("shared.school_staff.you") %></span><% end %>
+            </p>
+            <p class="text-xs text-mute"><%= t("shared.school_staff.joined.#{row.joined_via}", date: fmt.(row.joined_at)) %></p>
+          </div>
+          <% if remove_url && removable.(row) %>
+            <%= ui_dropdown label: t("shared.school_staff.actions", name: row.name), id: "staff-actions-#{row.public_id}", fixed: true do %>
+              <%= ui_dropdown_item t("shared.school_staff.remove"), dialog:, icon: "user-minus", tone: :danger %>
+            <% end %>
+            <%= ui_modal id: dialog, size: :sm, title: t("shared.school_staff.confirm.title", name: row.name) do |modal| %>
+              <% modal.footer do %>
+                <%= ui_button t("shared.school_staff.confirm.cancel"), variant: :secondary, data: { action: "modal#close" } %>
+                <%= ui_button t("shared.school_staff.confirm.submit"), type: :submit, variant: :danger, icon: "user-minus",
+                                                                      form: "#{dialog}-form" %>
+              <% end %>
+              <p class="text-left text-sm text-mute"><%= t("shared.school_staff.confirm.body") %></p>
+              <%= form_with url: remove_url.(row.public_id), method: :delete, id: "#{dialog}-form" do %><% end %>
+            <% end %>
+          <% else %>
+            <span class="w-tap" aria-hidden="true"></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if newcomer %>
+    <p id="school_staff_newcomer" class="mt-3 text-xs text-mute"><%= t("shared.school_staff.newcomer") %></p>
+  <% end %>
+<% end %>
