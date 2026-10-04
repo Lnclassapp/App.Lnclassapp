@@ -11,7 +11,7 @@
   </header>
 
   <nav aria-label="<%= t(".toc") %>" class="mt-8 flex flex-wrap gap-2">
-    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination finishes shell].each do |anchor| %>
+    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination finishes announcement_illustrations shell].each do |anchor| %>
       <%= link_to t(".sections.#{anchor}"), "##{anchor}", class: "rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium hover:bg-mist" %>
     <% end %>
   </nav>
@@ -448,6 +448,20 @@
         <% end %>
       <% end %>
     </div>
+  <% end %>
+
+  <%# ---------- Illustrations des annonces (UDR-0056 §3.3) ---------- %>
+  <%= design_section(id: "announcement_illustrations", title: t(".sections.announcement_illustrations"),
+                     api: 'announcement_illustration(:info, class: "size-16") · Entities::Communication::Message::ILLUSTRATIONS') do %>
+    <ul class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <% Entities::Communication::Message::ILLUSTRATIONS.each do |key| %>
+        <li data-illustration="<%= key %>" class="flex flex-col items-center gap-2 rounded-ln bg-brand-soft p-4 text-school">
+          <%= announcement_illustration key, class: "size-16" %>
+          <p class="text-sm font-medium"><%= t("communication.illustrations.#{key}") %></p>
+          <p class="font-mono text-2xs text-school/80"><%= key %></p>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
 
   <%# ---------- Shell ---------- %>
