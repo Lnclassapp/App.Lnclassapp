@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Communication
-    # ADR-0069 §4.4: a file of a message is read only after the reading rule (or as its author, the team, the moderating
+    # ADR-0078 §4.4: a file of a message is read only after the reading rule (or as its author, the team, the moderating
     # direction), byte range included; any refusal or missing file is not_found. Without database: the ports are faked.
     class ReadMessageFileTest < ActiveSupport::TestCase
       StoredFile = Ports::Communication::AttachmentStorePort::StoredFile

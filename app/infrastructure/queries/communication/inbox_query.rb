@@ -1,10 +1,10 @@
 # 🔌 INFRA · Queries::Communication::InboxQuery
 # Rôle : cartes d'annonces lisibles — carrousel de l'accueil élève, liste « Reçues » paginée — en un nombre fixe de requêtes
-# ADR  : 0067, 0069 · UDR : 0056 (§3.2, §3.5, §3.7)
+# ADR  : 0067, 0078 · UDR : 0071 (§3.2, §3.5, §3.7)
 module Queries
   module Communication
     class InboxQuery
-      # La carte (UDR-0056 §3.2), objet de lecture partagé par le carrousel, la liste et la modération (Lot C).
+      # La carte (UDR-0071 §3.2), objet de lecture partagé par le carrousel, la liste et la modération (Lot C).
       # author_role : :team, :school_admin ou :teacher ; gender, last_name, material_name (enseignant) : la signature ;
       # anonymized : l'auteur a été anonymisé (ADR-0036), la signature ne garde que sa fonction.
       MessageCard = Data.define(:public_id, :title, :body, :illustration, :author_role, :gender, :last_name, :material_name,
@@ -24,7 +24,7 @@ module Queries
 
       CAROUSEL_SIZE = 5
       PAGE_SIZE = 20
-      # ADR-0069 §4.3 : la direction, puis les enseignants, puis l'équipe.
+      # ADR-0078 §4.3 : la direction, puis les enseignants, puis l'équipe.
       AUTHOR_ORDER = Arel.sql("CASE users.role WHEN 'school_admin' THEN 0 WHEN 'teacher' THEN 1 ELSE 2 END")
       COLUMNS = [ "messages.id", "messages.public_id", "messages.title", "messages.body", "messages.illustration",
                   "messages.edited_at", "users.role", "users.gender", "users.last_name", "users.anonymized_at", "materials.name" ].freeze

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::ReadMessageFile
 # Rôle : lire l'image ou l'audio d'une annonce après la règle de lecture, par plage d'octets ; tout refus est not_found
-# ADR  : 0028, 0047, 0069 (§4.4)
+# ADR  : 0028, 0047, 0078 (§4.4)
 module UseCases
   module Communication
     class ReadMessageFile

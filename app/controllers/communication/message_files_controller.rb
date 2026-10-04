@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::MessageFilesController
 # Rôle : sert l'image ou l'audio d'une annonce après la règle de lecture, en cache privé no-store, par plage (206) ; sinon 404
-# ADR  : 0047, 0069 (§4.4) · UDR : 0056 (§3.2, §3.4)
+# ADR  : 0047, 0078 (§4.4) · UDR : 0071 (§3.2, §3.4)
 module Communication
   class MessageFilesController < AuthenticatedController
     # Une seule plage d'octets : « bytes=500-999 », « bytes=500- » (jusqu'à la fin), « bytes=-500 » (les 500 derniers).
@@ -13,7 +13,7 @@ module Communication
 
     private
 
-    # Jamais d'URL Active Storage partageable : l'application sert les octets, et aucun cache ne les garde (ADR-0069 §4.4).
+    # Jamais d'URL Active Storage partageable : l'application sert les octets, et aucun cache ne les garde (ADR-0078 §4.4).
     def serve(file)
       response.headers["Cache-Control"] = "private, no-store"
       response.headers["Accept-Ranges"] = "bytes"

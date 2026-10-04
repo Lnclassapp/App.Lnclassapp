@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AN-09, AN-08, AN-19 (ADR-0069 §4.4): without a detail page, the files are the only addressable surface of a message.
+# AN-09, AN-08, AN-19 (ADR-0078 §4.4): without a detail page, the files are the only addressable surface of a message.
 # The application serves them after the reading rule, in private no-store cache, by byte range for the audio; any
 # refusal is a 404, and a visitor is sent to « Se connecter ».
 module Communication
@@ -101,7 +101,7 @@ module Communication
       assert_response :not_found
     end
 
-    test "ADR-0069 §4.4 — a byte range is answered by 206, with its Content-Range" do
+    test "ADR-0078 §4.4 — a byte range is answered by 206, with its Content-Range" do
       sign_in_as @awa
 
       { "bytes=0-3" => [ 0, 3 ], "bytes=250-" => [ 250, 258 ], "bytes=-4" => [ 255, 258 ] }.each do |range, (first, last)|

@@ -1,9 +1,9 @@
 # 🧠 DOMAINE · Ports::Communication::ReadableMessagesPort
 # Rôle : contrat de la règle de lecture des annonces, vue par le domaine : le lecteur d'un acteur, une annonce lisible ou non
-# ADR  : 0040, 0069
+# ADR  : 0040, 0078
 module Ports
   module Communication
-    # Propre au Lot B (un seul consommateur) : son adaptateur est la seule définition SQL de la règle (ADR-0069 §4.3, §6).
+    # Propre au Lot B (un seul consommateur) : son adaptateur est la seule définition SQL de la règle (ADR-0078 §4.3, §6).
     module ReadableMessagesPort
       # actor : Entities::Identity::Actor. L'élève est lu par sa classe principale active et l'établissement de celle-ci ;
       # l'enseignant et la direction, par actor.school_id. → Entities::Communication::Reader

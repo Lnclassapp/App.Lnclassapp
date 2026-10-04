@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::ReadableMessages
 # Rôle : LA règle de lecture des annonces, seule définition en SQL ; la liste, le carrousel et les fichiers en partent
-# ADR  : 0040, 0045, 0069 · adaptateur de Ports::Communication::ReadableMessagesPort
+# ADR  : 0040, 0045, 0078 · adaptateur de Ports::Communication::ReadableMessagesPort
 module Queries
   module Communication
     class ReadableMessages
@@ -10,7 +10,7 @@ module Queries
       # rôle (fichiers, modération), pas par cette règle.
       ROLE_AUDIENCES = { student: "students", teacher: "teachers", school_admin: "school_admins" }.freeze
 
-      # ADR-0069 §4.3 : publiée, published_at <= now < ends_at, et une audience qui couvre le lecteur — par rôle (« all »
+      # ADR-0078 §4.3 : publiée, published_at <= now < ends_at, et une audience qui couvre le lecteur — par rôle (« all »
       # ou son rôle ; nationale ou de son établissement), ou par classes (élève dont la classe principale active est
       # ciblée). Sans établissement, le lecteur ne lit que les annonces nationales. → relation Orm::Message
       def scope(reader:, now:)

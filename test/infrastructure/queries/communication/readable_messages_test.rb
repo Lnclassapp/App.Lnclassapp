@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0069 §4.3 and §7: the reading rule of the announcements, defined once in SQL (the list, the carousel and the files
+# ADR-0078 §4.3 and §7: the reading rule of the announcements, defined once in SQL (the list, the carousel and the files
 # start from it) and tested one condition per test. A message is read when it is published, its publication has come and
 # its end has not, and its audience covers the reader: by role (« all » or the role of the reader, nationwide or for the
 # reader's school), or by classrooms (a student whose primary active classroom is targeted).

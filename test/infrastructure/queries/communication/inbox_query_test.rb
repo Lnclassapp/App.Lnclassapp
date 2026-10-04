@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0069 §4.3, UDR-0056 §3.5 and §3.7: the cards of the student's carousel (direction, teachers, team; newest first in
+# ADR-0078 §4.3, UDR-0071 §3.5 and §3.7: the cards of the student's carousel (direction, teachers, team; newest first in
 # each group; five at most; the dismissed ones left out) and of the « Reçues » list (every readable message, newest first,
 # twenty per page, the dismissed ones marked). Both start from the single reading rule, in a constant number of queries.
 module Queries

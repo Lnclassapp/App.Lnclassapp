@@ -2,7 +2,7 @@ require "test_helper"
 
 module Policies
   module Communication
-    # ADR-0069 §4.4 and §6: the image or the audio of a message is served to its readers (the reading rule), to its author,
+    # ADR-0078 §4.4 and §6: the image or the audio of a message is served to its readers (the reading rule), to its author,
     # to the team, and to the direction that may withdraw it; anyone else learns nothing of it (not_found). Without database.
     class ReadFilePolicyTest < ActiveSupport::TestCase
       SCHOOL = 7
