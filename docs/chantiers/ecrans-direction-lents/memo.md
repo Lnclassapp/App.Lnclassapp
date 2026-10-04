@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | cadrage |
+| **Statut** | exécution : lot 1 (« Anciens élèves ») livré, ÷ 65 en p95 mais hors budget au protocole (136 ms) ; lots 2 et 3 à jouer ; challenger à passer |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `perf/ecrans-direction-lents` |
 | **Programme** | `refonte-application` — dette relevée par `remediation-comptee-faite` et `rapports-exercices` |
@@ -29,6 +29,21 @@ Mesures du 2026-10-04 (chantier `remediation-comptee-faite`) :
 | HTML « Enseignants » | idem | **441,1 Ko** | < 150 Ko | idem |
 
 D'après l'`EXPLAIN` de `remediation-comptee-faite`, le temps de « Anciens élèves » est dans la **requête de la liste** (`JOIN LATERAL` et `NOT EXISTS`), pas dans celle des totaux (6,4 ms). Pour « Travail des élèves », la lecture des sessions coûte environ 9 ms ; le reste est dans l'agrégat et le tri.
+
+## Mesures (Avant / Cible / Après)
+
+Lot 1 du [plan](plan.md), 2026-10-04. Base `app_lnclassapp_perf_direction`, copie du jeu de l'ADR-0067 où **303 élèves (7,2 %) ont quitté l'établissement mesuré**, dont 152 vers un autre établissement ; le jeu d'origine n'en avait aucun ([plan § Protocole](plan.md#protocole)). Mode production, `measure_screens.rb`, 3 chauffes, 30 mesures × 3 exécutions, médiane. Pour la mesure avant : 10 mesures × 3, vu leur durée.
+
+| Métrique | Avant | Cible | Après | |
+|---|---|---|---|---|
+| p95 « Anciens élèves » | **8 821,2 ms** | < 100 ms | **136,1 ms** | ❌ au protocole ; **78,0 ms** une fois la page chaude (après 60 requêtes) |
+| p50 « Anciens élèves » | 8 276,1 ms | — | **57,7 ms** | |
+| SQL « Anciens élèves » (p50) | 8 175,2 ms | — | **23,7 ms** | liste : 17 454 → 13,0 ms sous `EXPLAIN` |
+| Requêtes · HTML | 8 · 110,4 Ko | ≤ 150 Ko | 8 · 110,4 Ko | ✅ inchangés |
+| p95 « Travail des élèves » | 229,0 ms (série *après*, écran non touché) | < 100 ms | — | lot 2 |
+| HTML « Enseignants » | 441,1 Ko (non touché) | < 150 Ko | — | lot 3 |
+
+Le SQL a cessé d'être le coût. Le p95 restant vient de la compilation YJIT et du GC : avec seulement 3 chauffes, ils tombent dans les 30 mesures du protocole. Voir [plan § Où part le temps restant](plan.md#où-part-le-temps-restant-p95-non-atteint).
 
 ## Pour qui
 
