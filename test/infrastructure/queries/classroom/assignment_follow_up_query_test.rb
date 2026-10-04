@@ -95,6 +95,31 @@ module Queries
                      follow_up.late_students.map { [ it.display_name, it.done_on ] }
       end
 
+      test "the students not done yet are named by last name, then first name; one with only a started session among them" do
+        [ %w[Zoé Bamba], %w[Awa Bamba], %w[Koffi Achi] ].each { |first_name, last_name| create_student(classroom: @classroom, first_name:, last_name:) }
+        started = create_student(classroom: @classroom, first_name: "Jean", last_name: "Kouassi")
+        create_exercise_session(student: started, exercise: @exercise, classroom_assignment: @assignment)
+        hand_in(create_student(classroom: @classroom, first_name: "Fait", last_name: "Déjà"), at: Time.zone.local(2026, 10, 7, 10))
+
+        row = follow_up
+
+        assert_equal [ AssignmentFollowUpQuery::PendingStudent.new(display_name: "Koffi Achi"), AssignmentFollowUpQuery::PendingStudent.new(display_name: "Awa Bamba"),
+                       AssignmentFollowUpQuery::PendingStudent.new(display_name: "Zoé Bamba"), AssignmentFollowUpQuery::PendingStudent.new(display_name: "Jean Kouassi") ],
+                     row.pending_students
+        assert_equal row.counts.pending, row.pending_students.size
+      end
+
+      test "a student who left, an anonymized one or one of another classroom is not « pas encore fait »; all done, nobody waits" do
+        Orm::ClassroomStudent.where(student: create_student(classroom: @classroom, last_name: "Parti")).update_all(left_at: Time.current)
+        create_student(classroom: @classroom, last_name: "Anonyme").update_columns(anonymized_at: Time.current)
+        create_student(classroom: create_classroom(school: @school), last_name: "Ailleurs")
+        hand_in(create_student(classroom: @classroom, last_name: "Fait"), at: Time.zone.local(2026, 10, 7, 10))
+        other = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential))
+
+        assert_empty follow_up.pending_students
+        assert_equal [ "Fait" ], follow_up(other).pending_students.map { it.display_name.split.last }
+      end
+
       test "without a due date, nothing is late: done and pending only" do
         assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential))
         hand_in(create_student(classroom: @classroom), assignment:, at: 1.day.from_now)

@@ -1,0 +1,117 @@
+<%# 🌐 UI · assessment/comprehension/_section — section « Compréhension » du suivi d'un exercice assigné, enseignant et équipe %>
+<%# Rôle : grand cercle, synthèse des signes, catégories en liens d'un Turbo Frame (?category=), puis questions et élèves de la catégorie %>
+<%# ADR  : 0079 · UDR : 0072 (§3.5, §3.6, §3.8) · sans JavaScript, un lien de catégorie recharge la page entière %>
+<%# locals: (comprehension:, classroom:, assignment_public_id:) -%>
+<% percent = ->(rate) { number_to_percentage(rate, precision: 0, format: "%n\u00A0%") } %>
+<section id="comprehension" aria-labelledby="comprehension_title" class="mb-8">
+  <h2 id="comprehension_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <%= turbo_frame_tag "comprehension_frame", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
+    <% if comprehension.done.zero? %>
+      <%= ui_empty_state title: t("assessment.comprehension.empty.title"), description: t("assessment.comprehension.empty.description"),
+                         icon: "chart-pie" %>
+    <% else %>
+      <%= ui_card padding: :md do %>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <%= render "assessment/comprehension/circle", category: comprehension.category, done: comprehension.done,
+                                                        present: comprehension.present, size: :lg %>
+          <p id="comprehension_trends" class="text-sm">
+            <% trends = comprehension.trend_counts %>
+            <% if trends.values.sum.zero? %>
+              <%= t("assessment.comprehension.no_trend") %>
+            <% else %>
+              <%# Chaque groupe précédé de l'icône de son signe ; « sans évolution » prend celle de stable et stagne. %>
+              <% groups = { progress: :progress, flat: :stable, decline: :decline }.to_h do |group, trend|
+                   [ group, safe_join([ ui_icon(trend_icon(trend), variant: :mini, size: :sm, class: "inline align-text-bottom"),
+                                        tag.span(t("assessment.comprehension.trends_summary.#{group}", count: trends.fetch(group)),
+                                                 class: "tabular-nums") ], " ") ]
+                 end %>
+              <%# La phrase vient de la locale (« · » seul) et chaque groupe est un SafeBuffer déjà échappé. %>
+              <%= t("assessment.comprehension.trends_summary.sentence", **groups).html_safe %>
+            <% end %>
+          </p>
+        </div>
+        <% unless comprehension.readable %>
+          <p class="mt-4 text-sm text-mute"><%= t("assessment.comprehension.unreliable") %></p>
+        <% end %>
+      <% end %>
+
+      <%# @container : le libellé passe en text-xs quand la grille fait moins de 20 rem, soit un écran sous 360 px environ (§3.8). %>
+      <nav aria-label="<%= t(".categories_label") %>" class="@container mt-6 grid grid-cols-3 gap-2">
+        <% Entities::Assessment::Comprehension::CATEGORIES.each do |category| %>
+          <% current = category == comprehension.selected %>
+          <%= link_to classroom_assignment_path(classroom.public_id, assignment_public_id, category:),
+                      "aria-current": ("true" if current),
+                      class: "block rounded-ln focus-visible:outline-2 focus-visible:outline-brand" do %>
+            <div class="<%= class_names("flex min-h-12 flex-col items-center gap-1 rounded-ln border px-2 py-3 text-center",
+                                        current ? [ comprehension_soft_class(category), "border-transparent" ] : "bg-white border-line hover:bg-mist") %>">
+              <span class="<%= class_names("size-3 rounded-full", comprehension_dot_class(category)) %>" aria-hidden="true"></span>
+              <span class="text-xs font-medium text-ink @xs:text-sm"><%= comprehension_label(category) %></span>
+              <span class="font-display text-2xl font-extrabold text-ink tabular-nums"><%= comprehension.category_counts.fetch(category) %></span>
+            </div>
+          <% end %>
+        <% end %>
+      </nav>
+
+      <div id="comprehension_panel" class="mt-6 space-y-8">
+        <% if comprehension.students.empty? %>
+          <%= ui_empty_state title: t("assessment.comprehension.empty_category"), icon: "user-group" %>
+        <% else %>
+          <section aria-labelledby="comprehension_questions_title">
+            <h3 id="comprehension_questions_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".questions_title") %></h3>
+            <ol class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+              <% comprehension.questions.each do |question| %>
+                <% rate = question.rate.nil? ? t(".no_attempt") : percent.(question.rate) %>
+                <% first_rate = percent.(question.first_rate) if question.first_rate && question.first_rate != question.rate %>
+                <% label = safe_join([ t(".question_label", number: question.number, rate:),
+                                       (t(".first_rate_label", rate: first_rate) if first_rate),
+                                       (t(".to_revisit_label") if question.to_revisit) ].compact) %>
+                <li class="flex items-center gap-3 px-4 py-3 sm:px-5" aria-label="<%= label %>">
+                  <span class="w-8 shrink-0 font-display font-extrabold text-mute tabular-nums"><%= t(".question_number", number: question.number) %></span>
+                  <div class="min-w-0 flex-1 space-y-1">
+                    <p class="line-clamp-2 text-sm text-ink"><%= strip_tags(question.content) %></p>
+                    <% if question.to_revisit %>
+                      <%= ui_badge t(".to_revisit"), tone: :brand, size: :sm, icon: "arrow-path" %>
+                    <% end %>
+                  </div>
+                  <div class="w-28 shrink-0 space-y-1 text-right">
+                    <% unless question.rate.nil? %>
+                      <%# Pas d'attribut style (UDR-0005) : la largeur du remplissage est l'attribut width d'un svg vide. %>
+                      <span class="block h-2 overflow-hidden rounded-full bg-mist" aria-hidden="true">
+                        <svg width="<%= question.rate %>%" focusable="false"
+                             class="<%= class_names("h-full rounded-full", comprehension_dot_class(Entities::Assessment::Grading.mastery_for(question.rate))) %>"></svg>
+                      </span>
+                    <% end %>
+                    <span class="block text-sm text-ink tabular-nums"><%= rate %></span>
+                    <% if first_rate %>
+                      <span class="block text-xs text-mute tabular-nums"><%= t(".first_rate", rate: first_rate) %></span>
+                    <% end %>
+                  </div>
+                </li>
+              <% end %>
+            </ol>
+          </section>
+
+          <section aria-labelledby="comprehension_students_title">
+            <h3 id="comprehension_students_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".students_title") %></h3>
+            <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+              <% comprehension.students.each do |student| %>
+                <li class="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
+                  <span class="min-w-0 truncate font-medium"><%= student.display_name %></span>
+                  <span class="flex shrink-0 items-center gap-3 text-sm">
+                    <span class="tabular-nums"><%= percent.(student.best) %></span>
+                    <span class="flex items-center gap-1 text-mute">
+                      <% if (icon = trend_icon(student.trend)) %>
+                        <%= ui_icon icon, variant: :mini, size: :sm %>
+                      <% end %>
+                      <%= trend_label(student.trend) %>
+                    </span>
+                  </span>
+                </li>
+              <% end %>
+            </ul>
+          </section>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</section>
