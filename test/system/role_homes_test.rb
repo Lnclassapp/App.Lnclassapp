@@ -46,12 +46,13 @@ class RoleHomesTest < ApplicationSystemTestCase
   end
 
   # TR-10 (UDR-0049, amendment of UDR-0006 of 2026-09-28): « Pilotage » is drawn, no team destination is inactive.
+  # RE-01 (UDR-0068 §3.2): Imports has left the destinations for the « Configuration » card, opened by
+  # test/system/teams/configuration_navigation_test.rb.
   test "the team member reaches their home, then every destination of their navigation, the dashboard included" do
     sign_in_as create_team_member(first_name: "Awa")
 
     assert_home team_home_path, greeting: I18n.t("teams.homes.show.greeting", name: "Awa")
-    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, imports: teams_imports_path,
-                                dashboard: team_dashboard_path }
+    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, dashboard: team_dashboard_path }
     assert_signs_out
   end
 
@@ -95,9 +96,12 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_selector "h1", text: greeting if greeting
   end
 
+  # The first card of the sidebar: the destinations of the role. The team has a second one, « Configuration » (UDR-0068).
+  MAIN_SIDEBAR_NAV = "aside nav:not(#sidebar_secondary)".freeze
+
   # Each active destination is a real link, clicked from the navigation; the page it opens marks it current. An inactive
   # one has no href and aria-disabled. The logo, from the last page, leads back home.
-  def assert_navigation(active: {}, inactive: [], nav: "aside nav")
+  def assert_navigation(active: {}, inactive: [], nav: MAIN_SIDEBAR_NAV)
     within(nav) do
       assert_selector "a[href]", count: active.size
       assert_selector "a[aria-disabled='true']:not([href])", count: inactive.size

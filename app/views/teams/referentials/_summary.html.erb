@@ -1,11 +1,11 @@
-<%# 🌐 UI · teams/homes/_referential — section « Référentiel » de l'accueil équipe (CA-25) %>
+<%# 🌐 UI · teams/referentials/_summary — tuiles et structure scolaire de la page « Référentiel » (CA-25, RE-03) %>
 <%# Rôle : compteurs des DRENA, niveaux, séries, matières et total du barème, chacun vers son écran de gestion ; niveaux et leurs séries %>
-<%# ADR  : 0034, 0058 · UDR : 0018, 0045 %>
-<%# locals: (home:, icon:) -%>
+<%# ADR  : 0034, 0058 · UDR : 0018, 0045, 0068 (§3.4 : reprend teams/homes/_referential, deux cartes, sans titre pour les tuiles) %>
+<%# locals: (home:) -%>
 <% figures = [ [ :drenas, home.drenas_count, drenas_path, "map-pin" ], [ :levels, home.levels.size, levels_path, "squares-2x2" ],
                [ :series, home.series_count, series_index_path, "rectangle-stack" ], [ :materials, home.materials_count, materials_path, "book-open" ],
                [ :classroom_plan, home.classroom_plan_total, classroom_plan_path, "calculator" ] ] %>
-<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon:, id: "team_home_referential" do %>
+<%= ui_card id: "team_referential" do %>
   <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
     <% figures.each do |figure, count, path, figure_icon| %>
       <li>
@@ -19,8 +19,9 @@
       </li>
     <% end %>
   </ul>
+<% end %>
 
-  <h3 class="mt-6 mb-3 font-display text-base font-extrabold"><%= t(".structure_title") %></h3>
+<%= ui_card title: t(".structure_title"), icon: "squares-2x2", id: "team_referential_structure", class: "mt-5" do %>
   <% if home.levels.empty? %>
     <p class="text-sm text-mute"><%= t(".levels_empty") %></p>
   <% else %>
