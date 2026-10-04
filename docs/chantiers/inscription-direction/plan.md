@@ -27,6 +27,7 @@ Lot 0 — SOCLE (séquentiel) : migration, entité Staff, port étendu + adaptat
   - `db/migrate/20261004090000_add_joining_and_archiving_to_school_staffs.rb`, `db/schema.rb`
   - `app/domain/entities/school/staff.rb`
   - `app/domain/ports/school/staff_repository_port.rb`
+  - `app/domain/entities/identity/audit_action.rb` (les 4 actions `school_staff.*`, ajoutées après le départ de la vague 2)
   - `app/infrastructure/repositories/school/staff_repository.rb` (les 7 méthodes de l'ADR-0077 §4.2)
   - `app/infrastructure/orm/school_staff.rb`
   - `app/infrastructure/queries/school/school_staff_query.rb`

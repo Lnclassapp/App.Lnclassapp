@@ -16,6 +16,7 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - Lot 0 : `db:migrate` en local réécrit les `CHECK … = ANY (ARRAY[…])` de tout `db/schema.rb`, car la version locale de PostgreSQL écrit ces contraintes dans un autre format. N'ont été gardées que les lignes de `school_staffs`, la version et la clé étrangère `archived_by_id` ; le schéma rechargé en test passe.
+- Lot 0 rouvert juste après le départ de la vague 2 : `Entities::Identity::AuditAction::ALL` est une liste fermée, et les lots A, B et D écrivent des actions `school_staff.*`. Les 4 actions y ont été ajoutées et chaque lot a mergé la branche de chantier. Pour les prochains plans : vérifier la liste d'audit au Lot 0.
 - Lot 0 : `test/routing/school_admin_routes_test.rb` fige la liste des écritures sous `/school-admin` ; la route de retrait l'y ajoute.
 
 ## Ce qu'on a appris sur la codebase
