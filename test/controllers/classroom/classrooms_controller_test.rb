@@ -8,6 +8,9 @@ require "test_helper"
 # Finitions (UDR-0054, FU-02, FU-07, FU-08, FU-26, FU-48) : titre, retour selon le rôle, copie par le contrôleur unique,
 # « Chercher un élève » dans le frame de la liste.
 class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
+  # Le pied d'un exercice assigné (UDR-0072 §3.4) : badges à gauche, cercle à droite.
+  FOOTER = "div.mt-3.flex.items-center.justify-between.border-t.border-line.pt-3".freeze
+
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan")
     @classroom = create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1", join_code: "kfm37",
@@ -188,6 +191,120 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#assignment_#{on_time.public_id} p", text: "0 fait · 2 pas encore faits"
     assert_no_match(/en retard/, response.body)
     assert_select "section#classroom_session_days", 0
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER}", text: /Pas encore lisible · 1\/2/
+    assert_select "#assignment_#{on_time.public_id} #{FOOTER}", text: /Pas encore lisible · 0\/2/
+  end
+
+  # rapports-exercices, Lot A (ADR-0079, UDR-0072 §3.4) : au bord bas de chaque exercice assigné, les badges de la classe
+  # à gauche et le cercle de la catégorie dominante à droite, sous FollowAssignmentPolicy comme les comptes.
+  def hand_in(assignment, score_percent, student: create_student(classroom: @classroom), **attributes)
+    create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
+                            score_percent:, classroom_assignment: assignment, **attributes)
+  end
+
+  def assert_badges(assignment, counts)
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER} ul[aria-label='Badges de la classe'] li", 4 do |items|
+      assert_equal counts, items.map { it.at_css(".sr-only").text }
+    end
+  end
+
+  test "PRD : 6 faits à 100, 85, 72, 65, 40 et 30 sur 25 élèves donnent un badge par palier et le cercle « Acquis · 6/25 »" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise(title: "La méiose"), by: @teacher)
+    hand_in(assignment, 100)
+    hand_in(assignment, 85, student: hand_in(assignment, 40, completed_at: 1.day.ago).student)
+    [ 72, 65, 40, 30 ].each { hand_in(assignment, it) }
+    19.times { create_student(classroom: @classroom) }
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_badges assignment, [ "1 Bronze", "1 Argent", "1 Or", "1 Diamant" ]
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER} > :last-child" do
+      assert_select "span.bg-success.rounded-full[aria-hidden='true']", 1
+      assert_select "span.text-ink", text: "Acquis · 6/25"
+    end
+    assert_select "#assignment_#{assignment.public_id} p", text: "6 faits · 19 pas encore faits"
+    assert_select "#assignment_#{assignment.public_id} a", 1
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER} a, #assignment_#{assignment.public_id} #{FOOTER} button", 0
+  end
+
+  test "PRD : sous 5 faits, le cercle est gris, « Pas encore lisible · 4/25 », et un palier vide est atténué, jamais omis" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    4.times { hand_in(assignment, 90) }
+    21.times { create_student(classroom: @classroom) }
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_badges assignment, [ "0 Bronze", "0 Argent", "4 Or", "0 Diamant" ]
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER}" do
+      assert_select "span.bg-line.rounded-full", 1
+      assert_select "span.text-ink", text: "Pas encore lisible · 4/25"
+      assert_select "li:first-child span.text-line", text: "0"
+    end
+    assert_select "#assignment_#{assignment.public_id} p", text: "4 faits · 21 pas encore faits"
+  end
+
+  test "PRD : une autre classe, une remédiation, une session commencée, un élève parti ou anonymisé ne comptent pas" do
+    exercise = create_exercise
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    present = create_student(classroom: @classroom)
+    hand_in(assignment, 50, student: present)
+    other = create_student(classroom: @classroom)
+    hand_in(create_assignment(classroom: create_classroom(school: @school), assignable: exercise), 100, student: other)
+    hand_in(create_assignment(classroom: @classroom, assignable: create_exercise(essential: exercise.essential)), 100, student: other)
+    create_exercise_session(student: other, exercise:, status: "completed", score_percent: 100,
+                            gap: create_gap(student: other, essential: exercise.essential))
+    create_exercise_session(student: other, exercise:, classroom_assignment: assignment)
+    gone = hand_in(assignment, 100).student
+    Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+    hand_in(assignment, 100).student.update_columns(anonymized_at: Time.current)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_badges assignment, [ "1 Bronze", "0 Argent", "0 Or", "0 Diamant" ]
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER} span.text-ink", text: "Pas encore lisible · 1/2"
+    assert_select "#assignment_#{assignment.public_id} p", text: "1 fait · 1 pas encore fait"
+  end
+
+  test "sans les comptes (hors FollowAssignmentPolicy), la ligne n'a ni pied, ni badges, ni cercle" do
+    row = Queries::Classroom::ClassroomOverviewQuery::AssignmentRow.new(
+      public_id: "a1", exercise_title: "La méiose", material_name: "SVT", material_category: "science", due_on: nil,
+      counts: nil, comprehension: nil
+    )
+
+    html = ApplicationController.render(partial: "classroom/classrooms/assigned_exercises",
+                                        locals: { classroom: @classroom, assignments: [ row ] })
+
+    assert_includes html, "La méiose"
+    assert_no_match(/border-t|Badges de la classe|Pas encore lisible/, html)
+  end
+
+  test "le nombre de requêtes de la page ne dépend pas du nombre d'exercices assignés" do
+    exercise = create_exercise
+    students = Array.new(3) { create_student(classroom: @classroom) }
+    first = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    students.each { hand_in(first, 80, student: it) }
+    sign_in_as @teacher
+    get classroom_path(@classroom.public_id)
+
+    one = count_queries { get classroom_path(@classroom.public_id) }
+    2.times do
+      assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: exercise.essential), by: @teacher)
+      students.each { hand_in(assignment, 60, student: it) }
+    end
+    three = count_queries { get classroom_path(@classroom.public_id) }
+
+    assert_select "#assigned_exercises #{FOOTER}", 3
+    assert_equal one, three
+  end
+
+  def count_queries(&)
+    count = 0
+    counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
+    count
   end
 
   test "aucun exercice assigné : l'état vide renvoie aux cours" do
@@ -330,12 +447,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do
     student = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
     create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+    hand_in(create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher), 90, student:)
     sign_in_as student
 
     get classroom_path(@classroom.public_id)
 
     assert_response :forbidden
-    assert_no_match(/kfm37|Koffi|Yao/i, response.body)
+    assert_no_match(/kfm37|Koffi|Yao|Badges de la classe|Pas encore lisible/i, response.body)
   end
 
   test "une classe inconnue répond 404" do
