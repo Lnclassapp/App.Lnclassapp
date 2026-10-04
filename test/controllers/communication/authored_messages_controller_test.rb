@@ -314,7 +314,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_equal [ 0, 0 ], [ Orm::Message.count, ActiveStorage::Attachment.count ]
   end
 
-  test "AN-18 — a PNG of 500 KB and an MP3 are stored with the announcement" do
+  test "AN-18 — a PNG and an MP3 are stored with the announcement (the 2 MB and 10 MB limits: message_input_test)" do
     sign_in_as @kamate
 
     publish(audience: "students", image: upload(file_fixture("photos/photo.png").binread, "affiche.png", "image/png"),
@@ -433,6 +433,14 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_equal "Annonce modifiée.", flash[:notice]
     assert_equal [ "Chapitre 4 en ligne.", NOW, Time.zone.local(2026, 10, 31) ], message.reload.values_at(:body, :edited_at, :ends_at)
     assert_not Orm::MessageDismissal.exists?(message_id: message.id)
+
+    sign_out
+    sign_in_as @awa
+    get student_home_path
+    assert_select "#student_home_announcements #announcement_#{message.public_id}" do
+      assert_select "p", text: "Chapitre 4 en ligne."
+      assert_select "*", text: I18n.t("communication.card.edited")
+    end
   end
 
   test "a draft modified and published is published now" do

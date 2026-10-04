@@ -84,6 +84,16 @@ module Communication
       assert_select "turbo-stream[target=toasts] template p", tc("dismissal.refused")
     end
 
+    test "AN-13 — a forged « Annuler » on an official message is refused too: the row stays" do
+      dismiss_message(message: @devoirs, user: @awa)
+      sign_in_as @awa
+
+      delete path(@devoirs), as: :turbo_stream
+
+      assert_response :forbidden
+      assert dismissed?(@devoirs)
+    end
+
     test "a message the student does not read is refused, without writing anything" do
       other = create_message(author: create_team_member(second_factor: false), audience: "teachers")
       sign_in_as @awa

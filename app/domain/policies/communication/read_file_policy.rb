@@ -9,7 +9,8 @@ module Policies
       def call(actor:, message:, readable:, author_role:)
         return Shared::Result.failure(:not_found) if actor.nil?
         return Shared::Result.success if readable || message.author_id == actor.user_id || actor.team?
-        return Shared::Result.success if message.moderatable_by?(actor, author_role:)
+        # La direction modératrice tant qu'elle peut retirer (ADR-0078 §6) : archivée ou retirée, plus rien (AN-19).
+        return Shared::Result.success if message.moderatable_by?(actor, author_role:) && !message.frozen?
 
         Shared::Result.failure(:not_found)
       end

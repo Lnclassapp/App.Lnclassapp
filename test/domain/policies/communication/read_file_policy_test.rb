@@ -34,6 +34,13 @@ module Policies
 
       test "the direction receives the files of a teacher of its school, the one it may withdraw" do
         assert call(actor(:school_admin)).success?
+        assert call(actor(:school_admin), announcement(status: "scheduled")).success?
+      end
+
+      test "AN-19 — archived or withdrawn, a teacher's message is no longer the direction's to read: not_found" do
+        %w[archived withdrawn].each do |status|
+          assert_equal :not_found, call(actor(:school_admin), announcement(status:)).code, status
+        end
       end
 
       test "AN-09 — a student outside the audience, or once it is unreadable, gets not_found" do

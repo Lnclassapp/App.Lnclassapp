@@ -109,6 +109,23 @@ module Queries
         assert_not reads?(create_student, message)
       end
 
+      test "AN-02 — school: a message for the students of a school is read neither by its teachers nor by its direction" do
+        message = announce("Concours de maths", school: @lauriers)
+
+        assert_not reads?(create_teacher(school: @lauriers), message)
+        assert_not reads?(create_school_admin(school: @lauriers), message)
+      end
+
+      test "school: a message for the teachers or the directions of a school is not read in another school" do
+        teachers = announce("Conseil de classe", audience: "teachers", school: @lauriers)
+        directions = announce("Réunion des directions", audience: "school_admins", school: @lauriers)
+
+        assert reads?(create_teacher(school: @lauriers), teachers)
+        assert_not reads?(create_teacher(school: @bouake), teachers)
+        assert reads?(create_school_admin(school: @lauriers), directions)
+        assert_not reads?(create_school_admin(school: @bouake), directions)
+      end
+
       test "national: a message without school is read in every school, and by a reader without school" do
         message = announce("Rentrée numérique", school: nil)
 

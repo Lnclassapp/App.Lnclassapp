@@ -90,6 +90,15 @@ module Communication
       assert_not_served create_school_admin
     end
 
+    test "AN-19 — once archived or withdrawn, the direction of the school no longer receives the files of its teacher's message" do
+      direction = create_school_admin(school: @school)
+      @message.update_columns(status: "archived")
+      assert_not_served direction
+
+      @message.update_columns(status: "withdrawn", withdrawn_at: Time.current, withdrawn_by_id: direction.id)
+      assert_not_served direction
+    end
+
     test "a message without this file, or an unknown message: 404" do
       without = create_message(author: @kouassi, audience: "classrooms", classrooms: [ @troisieme_b ])
       sign_in_as @awa

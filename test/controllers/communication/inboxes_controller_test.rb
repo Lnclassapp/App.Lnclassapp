@@ -157,11 +157,12 @@ module Communication
     test "AN-08, AN-19 — an ended or an archived message is not listed" do
       fiches(published_at: 31.days.ago, ends_at: 1.minute.ago)
       devoirs(status: "archived")
+      create_message(author: @fatou, title: "Rentrée numérique", audience: "all")
       sign_in_as @awa
 
       get announcements_path
 
-      assert_select "article", 0
+      assert_equal [ "Rentrée numérique" ], css_select("ul#announcements article h3").map(&:text)
     end
 
     test "AN-11 — no readable message: « Aucune annonce pour le moment. », for the student" do
@@ -199,6 +200,16 @@ module Communication
       assert_select "nav#announcement-tabs a", 3
       assert_select "article", 0
       assert_select "p", text: tl("empty.description.adult")
+    end
+
+    test "AN-03 — the direction reads in « Reçues » what is for the directions of its school, and nothing of another school" do
+      create_message(author: @fatou, title: "Réunion des directions", audience: "school_admins", school: @lauriers)
+      create_message(author: @fatou, title: "Réunion à Bouaké", audience: "school_admins", school: create_school)
+      sign_in_as @kamate
+
+      get announcements_path
+
+      assert_equal [ "Réunion des directions" ], css_select("ul#announcements article h3").map(&:text)
     end
 
     test "twenty cards per page, then the pagination" do

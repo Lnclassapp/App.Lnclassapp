@@ -47,6 +47,7 @@ module Policies
       test "AN-04 — the direction is refused another school, the national scope and the audience « Tous »" do
         assert_equal :forbidden, call(direction, school_id: BOUAKE).code
         assert_equal :forbidden, call(direction, scope: "national", school_id: nil).code
+        assert_equal :forbidden, call(direction, scope: "national").code
         assert_equal :forbidden, call(direction, audience: "all").code
       end
 
@@ -77,6 +78,8 @@ module Policies
         assert_equal :forbidden, call(teacher, audience: "classrooms", school_id: BOUAKE, classroom_ids: [ 3 ],
                                                teachable_classroom_ids: [ 3 ]).code
         assert_equal :forbidden, call(teacher, scope: "national", school_id: nil, audience: "classrooms", classroom_ids: [ 3 ],
+                                               teachable_classroom_ids: [ 3 ]).code
+        assert_equal :forbidden, call(teacher, scope: "national", audience: "classrooms", classroom_ids: [ 3 ],
                                                teachable_classroom_ids: [ 3 ]).code
         assert_equal :forbidden, call(teacher(school_id: nil), school_id: nil, audience: "classrooms", classroom_ids: [ 3 ],
                                                                 teachable_classroom_ids: [ 3 ]).code

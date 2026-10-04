@@ -75,6 +75,11 @@ module UseCases
         assert_empty @dismissals.restored
       end
 
+      test "AN-13 — an official message (a direction's) is never restored by a forged request: nothing is removed" do
+        assert_equal :forbidden, use_case(author_role: :school_admin).call(actor: @awa, public_id: "msg").code
+        assert_empty @dismissals.restored
+      end
+
       test "an unknown message: not_found" do
         assert_equal :not_found, use_case.call(actor: @awa, public_id: "inconnu").code
         assert_empty @dismissals.restored
