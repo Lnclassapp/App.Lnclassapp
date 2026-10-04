@@ -21,7 +21,7 @@ module Communication
     test "AN-10 — a section titled for screen readers, one card per item of the band, in the given order" do
       carousel([ card("d", "Devoirs communs", author_role: :school_admin), card("f", "Nouvelles fiches"), card("r", "Rentrée", author_role: :team) ])
 
-      assert_select "section#student_home_announcements.rounded-card.bg-mist.p-2\\.5[aria-labelledby=student_home_announcements_title]" \
+      assert_select "section#student_home_announcements.min-w-0.rounded-card.bg-mist.p-2\\.5[aria-labelledby=student_home_announcements_title]" \
                     "[data-controller='communication--carousel']" do
         assert_select "h2#student_home_announcements_title.sr-only[tabindex='-1']", I18n.t("shared.home.sections.announcements.title")
         assert_select "ul.scrollbar-none.flex.snap-x.snap-mandatory.gap-2.overflow-x-auto[data-communication--carousel-target=track]" do

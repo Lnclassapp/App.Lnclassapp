@@ -2,8 +2,9 @@
 <%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage) ; défilement natif %>
 <%# ADR  : 0078 · UDR : 0005, 0071 · Stimulus : communication--carousel (points, focus) %>
 <% refocus = local_assigns.fetch(:refocus, false) %>
+<%# min-w-0 : dans la grille de l'accueil, la section prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
 <%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",
-                class: "rounded-card bg-mist p-2.5",
+                class: "min-w-0 rounded-card bg-mist p-2.5",
                 data: { controller: "communication--carousel", communication__carousel_refocus_value: (true if refocus) } do %>
   <h2 id="student_home_announcements_title" class="sr-only" tabindex="-1"><%= t("shared.home.sections.announcements.title") %></h2>
   <%# Toutes masquées : ni bande ni points, le lien reste. %>

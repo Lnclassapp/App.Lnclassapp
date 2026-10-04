@@ -1,9 +1,9 @@
 require "application_system_test_case"
 
-# AN-12, AN-13, AN-18 (UDR-0071 §3.2, §3.4, §3.6, §3.7), in a real browser: on « Toutes les annonces », Awa hides a message
-# with its cross, « Annuler » gives it back; a hidden message is marked « Masquée » and « Réafficher » gives it back; ▶ exists
-# only on a message with an audio, plays it, and says when the phone cannot. The carousel of the student home is plugged in
-# after the merge of Develop (new student home, UDR-0058): its partial is tested alone (test/views/communication/carousel_test.rb).
+# AN-10, AN-12, AN-13, AN-18 (UDR-0071 §3.2, §3.4 to §3.7), in a real browser. On her home, Awa sees the carousel (direction,
+# teachers, team), hides a card with its cross and « Annuler » gives it back; on « Toutes les annonces », a hidden message is
+# marked « Masquée » and « Réafficher » gives it back; ▶ exists only on a message with an audio, plays it, and says when the
+# phone cannot. At least one journey on a phone.
 class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
   setup do
     lauriers = create_school(name: "Collège Les Lauriers")
@@ -35,6 +35,60 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
   def tc(key, **) = I18n.t("communication.#{key}", **)
   def cross(message) = %(button[aria-label="#{tc('card.dismiss', title: message.title)}"])
   def dismissed?(message) = Orm::MessageDismissal.exists?(message:, user: @awa)
+
+  def carousel_titles = all("#student_home_announcements li article h3").map(&:text)
+  def dot_classes = all("[data-communication--carousel-target=dot]", visible: :all).map { it[:class] }
+
+  test "AN-10 — on her home, the carousel after « À faire »: the direction, the teacher, the team, then « Toutes les annonces »" do
+    sign_in_as @awa
+
+    assert_current_path student_home_path
+    assert_equal [ "Devoirs communs", "Nouvelles fiches", "Rentrée numérique" ], carousel_titles
+    within("#student_home_announcements") do
+      assert_selector "[data-communication--carousel-target=pager].flex", visible: :visible
+      click_on tc("inboxes.carousel.all")
+    end
+    assert_current_path announcements_path
+    assert_equal [ "Nouvelles fiches", "Rentrée numérique", "Devoirs communs" ], all("#announcements article h3").map(&:text)
+  end
+
+  test "AN-12 — on her home, the cross takes the card out of the carousel, the focus goes to the band, « Annuler » brings it back" do
+    sign_in_as @awa
+
+    assert_no_page_reload do
+      within("#student_home_announcements") { find(cross(@fiches)).click }
+
+      assert_toast tc("dismissal.title")
+      assert_equal [ "Devoirs communs", "Rentrée numérique" ], carousel_titles
+      assert_equal "student_home_announcements_title", page.evaluate_script("document.activeElement.id")
+      assert dismissed?(@fiches)
+
+      within("#toasts") { click_on tc("dismissal.undo") }
+
+      assert_selector "#student_home_announcements #{cross(@fiches)}"
+      assert_equal [ "Devoirs communs", "Nouvelles fiches", "Rentrée numérique" ], carousel_titles
+    end
+    assert_not dismissed?(@fiches)
+  end
+
+  test "AN-10, AN-12 — on a phone, the band scrolls by itself, its dots follow the visible card; hidden, a card leaves it" do
+    sign_in_as @awa
+
+    with_mobile_viewport do
+      visit student_home_path
+
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+      assert_match(/\bw-4\b/, dot_classes.first)
+      page.execute_script("document.querySelector('[data-communication--carousel-target=track]').scrollLeft = 10000")
+      assert_selector "[data-communication--carousel-target=dot]:last-child.w-4.bg-brand-strong"
+      assert_match(/\bw-1\.5\b/, dot_classes.first)
+
+      within("#student_home_announcements") { find(cross(@rentree)).click }
+      assert_toast tc("dismissal.title")
+      assert_equal [ "Devoirs communs", "Nouvelles fiches" ], carousel_titles
+    end
+  end
 
   test "AN-12 — Awa hides « Nouvelles fiches » with its cross, then « Annuler » gives it back, without reloading the page" do
     sign_in_as @awa
