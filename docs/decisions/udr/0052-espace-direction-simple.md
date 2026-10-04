@@ -93,3 +93,11 @@ Le libellé d'une destination se lit sous sa clé (`shared.navigation.<clé>`, p
 - **Infobulles** : « Taux de rendu », « Moyenne », « Score moyen » et la légende de « — », sur la liste et sur la page d'une classe (UDR-0054 §3.4).
 - Titres : « Travail des élèves · Direction · Lnclass », « <nom de la classe> · Direction · Lnclass » (au lieu du nom brut).
 - Ces règles s'appliquent aux pages de cette UDR, en production depuis la V2 simple.
+
+## Amendement du 2026-10-04 — accueil de la direction
+
+*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md), [UDR-0072](0072-accueil-de-la-direction.md). Statut : `Proposé`. Le texte ci-dessus reste tel qu'il a été accepté ; une fois l'UDR-0072 acceptée, elle fait foi pour la page d'arrivée de la direction.*
+
+- §2.1 « Deux destinations, pas d'accueil » et §2.2 « Des tableaux, pas des cartes » cèdent : `/school-admin/classrooms` devient l'**Accueil** de la direction (carte « Établissement », bulles « Niveaux », annonces, activité récente), et une page par niveau montre ses classes en cartes à pastille.
+- La destination « Travail des élèves » (clé `student_work`) devient « Accueil » (clé `home`, icône `home`), même adresse.
+- La page d'une classe garde son tableau d'élèves ; son retour mène à la page de son niveau.
