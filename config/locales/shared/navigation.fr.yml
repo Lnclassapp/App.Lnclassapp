@@ -1,4 +1,4 @@
-# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056
+# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068
 fr:
   layouts:
     shell:
@@ -16,6 +16,7 @@ fr:
       classrooms: "Classes"
       schools: "Établissements"
       imports: "Imports"
+      referential: "Référentiel"
       dashboard: "Pilotage"
       teachers: "Enseignants"
       student_work: "Travail des élèves"
@@ -26,8 +27,13 @@ fr:
         account: "Mon compte"
       sidebar:
         label: "Navigation principale"
+        # UDR-0068 §3.1 : titre de la 2e carte, par rôle ayant une liste secondaire.
+        secondary_label:
+          team: "Configuration"
       bottom_bar:
         label: "Navigation principale"
+        more: "Plus"
+        more_label: "Plus de destinations : %{entries}"
     home:
       skeleton:
         greeting: "Bonjour, %{name}"

@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -125,6 +125,20 @@ module ComponentsHelper
     other: { tone: :team, icon: "academic-cap" }
   }.freeze
   SUBJECT_FALLBACK = { tone: :neutral, icon: "book-open" }.freeze
+  # UDR-0069 §3.3 : la bulle d'une matière porte l'illustration du modèle de l'accueil élève, choisie par le slug figé de la
+  # matière (exception à CA-26, décidée par le porteur : ce sont les seules matières illustrées) ; toute autre → générique.
+  Illustration = Data.define(:path, :tint)
+  SUBJECT_ILLUSTRATIONS = {
+    %w[mathematiques maths] => %w[maths bg-tint-indigo],
+    %w[physique-chimie pc] => %w[physique-chimie bg-tint-lilac],
+    %w[svt sciences-de-la-vie-et-de-la-terre] => %w[svt bg-tint-green],
+    %w[francais] => %w[francais bg-tint-yellow],
+    %w[histoire-geographie histoire-geo hg] => %w[histoire-geographie bg-tint-lavender],
+    %w[edhc] => %w[edhc bg-tint-pink],
+    %w[philosophie philo] => %w[philosophie bg-tint-pink],
+    %w[invite] => %w[inviter bg-tint-red]
+  }.flat_map { |slugs, (file, tint)| slugs.map { [ it, Illustration.new(path: "subjects/#{file}.svg", tint:) ] } }.to_h.freeze
+  SUBJECT_ILLUSTRATION_FALLBACK = Illustration.new(path: "subjects/generique.svg", tint: "bg-mist")
 
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
@@ -295,6 +309,16 @@ module ComponentsHelper
   end
 
   # Une catégorie inconnue ou absente donne la teinte neutre : le badge reste lisible, sans couleur inventée.
+  # slug : slug figé d'une matière, ou :invite pour l'action « Inviter ». → Illustration(path, tint)
+  def subject_illustration(slug)
+    SUBJECT_ILLUSTRATIONS.fetch(slug.to_s, SUBJECT_ILLUSTRATION_FALLBACK)
+  end
+
+  # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
+  def ui_subject_bubble(label:, href:, illustration:, sr_suffix: nil, id: nil)
+    render "components/subject_bubble", label:, href:, illustration:, sr_suffix:, id:
+  end
+
   def ui_subject_badge(label, category:, size: :md)
     config = SUBJECT_CATEGORIES.fetch(category.to_s.to_sym, SUBJECT_FALLBACK)
     ui_badge(label, tone: config[:tone], size:, icon: config[:icon])
