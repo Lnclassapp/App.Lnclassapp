@@ -1,10 +1,10 @@
 # 🌐 DELIVERY · SchoolAdmin::ClassroomsController
-# Rôle : « Travail des élèves » (accueil de la direction, bandeau d'arrivée) et page d'une classe, en lecture ; 404 hors établissement
-# ADR  : 0006, 0065, 0077 · UDR : 0052, 0054, 0070 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
+# Rôle : accueil de la direction (établissement, niveaux, bandeau d'arrivée) et page d'une classe, en lecture ; 404 hors établissement
+# ADR  : 0006, 0065, 0077 · UDR : 0052, 0054, 0070, 0072 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
 module SchoolAdmin
   class ClassroomsController < BaseController
     def index
-      @overview = query.classrooms(school_id: current_actor.school_id)
+      @home = Queries::School::DirectionHomeQuery.new.call(school_id: current_actor.school_id)
       # UDR-0070 §3.3 : les directions arrivées depuis moins de 7 jours, sauf soi.
       @arrivals = Queries::School::SchoolStaffQuery.new.recent_arrivals(
         school_id: current_actor.school_id, since: Entities::School::Staff::NEWCOMER_DAYS.days.ago, except_user_id: current_actor.user_id
