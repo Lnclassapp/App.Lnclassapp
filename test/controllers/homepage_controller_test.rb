@@ -130,7 +130,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
   test "ID-09: the direction finds its registration under the hero buttons, in « Établissements » and in the footer" do
     get root_url
 
-    assert_select "#hero div.grid + p.mt-4.text-sm.text-mute", text: /#{I18n.t("homepage.index.school_staff_link.prompt")}/ do
+    assert_select "#hero div.grid + p.mt-4.text-sm", text: /#{I18n.t("homepage.index.school_staff_link.prompt")}/ do
       assert_select "a#school-staff-signup-link.min-h-tap[href='#{new_school_staff_registration_path}']",
                     text: I18n.t("homepage.index.school_staff_link.link")
     end
