@@ -177,6 +177,14 @@ module Queries
         assert_equal [ :progress, 6, 18, 18 ], grades(progress_of(current))
       end
 
+      test "progrès : nil sur le résultat d'une session de remédiation, même après des sessions standard" do
+        @session.update!(score_percent: 30)
+        history(90)
+        remediation = history(50, gap: create_gap(student: @student, essential: @essential)).last
+
+        assert_nil progress_of(remediation)
+      end
+
       test "progrès : les sessions de deux assignations de deux classes forment un seul historique" do
         first, second = Array.new(2) { create_assignment(classroom: create_classroom, assignable: @exercise) }
         @session.update!(score_percent: 30, classroom_assignment: first)

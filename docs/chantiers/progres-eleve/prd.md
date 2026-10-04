@@ -34,6 +34,7 @@ Règle d'autorisation : `Policies::Assessment::ReadSessionPolicy`, **inchangée*
 | Cette session est 10 points ou plus sous son meilleur essai | « Ton meilleur résultat reste 18/20. Relis la correction, tu peux le retrouver. » |
 | Ancien résultat rouvert | Le progrès se lit jusqu'à cette session incluse |
 | Enseignant ou équipe sur le résultat d'un élève | Aucune phrase |
+| Résultat d'une session de remédiation | Aucune phrase (UDR-0073 §3) |
 
 ## 4. Critères d'acceptation
 

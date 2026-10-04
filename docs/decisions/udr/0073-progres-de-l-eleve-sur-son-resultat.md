@@ -30,6 +30,7 @@ L'élève qui recommence un exercice lit sa nouvelle note, mais personne ne lui 
 **Données** — `SessionResultQuery::Row#progress` : `Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade)`, ou `nil`.
 - Historique : les sessions de l'élève sur l'exercice, `kind = 'standard'`, `status = 'completed'`, dont `(completed_at, id)` est inférieur ou égal à celui de la session affichée, triées par `(completed_at, id)`.
 - Moins de deux sessions : `nil`.
+- La session affichée est une session de **remédiation** : `nil`. Elle n'est pas dans l'historique, et « aujourd'hui » serait la note d'une autre session (décision du Lot A, à revoir avec la V5).
 - `trend = Comprehension.trend_for(scores)` ; `first_grade`, `best_grade`, `current_grade` = `Grading.grade_on_20` du premier, du plus haut et du dernier score (la session affichée).
 
 **Structure** — partiel `app/views/assessment/session_results/_progress.html.erb`, `locals: (progress:)`, rendu dans `show.html.erb` **dans la carte, entre la `dl` des notes et les boutons**, seulement si `@owner && result.progress` :

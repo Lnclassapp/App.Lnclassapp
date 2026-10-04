@@ -20,12 +20,12 @@ module Queries
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id users.first_name
                            users.last_name exercise_sessions.score_percent exercise_sessions.correct_count
                            exercise_sessions.question_count exercises.id exercises.public_id exercises.title essentials.slug
-                           essentials.name courses.slug exercise_sessions.completed_at].freeze
+                           essentials.name courses.slug exercise_sessions.completed_at exercise_sessions.kind].freeze
 
       # reveal : décidé en amont par RevealAnswersPolicy. → Row | nil
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
-          exercise_public_id, title, essential_slug, essential_name, course_slug, completed_at =
+          exercise_public_id, title, essential_slug, essential_name, course_slug, completed_at, kind =
           Orm::ExerciseSession.joins(:student, exercise: { essential: :course }).where(public_id:).pick(*SESSION_COLUMNS)
         return if id.nil?
 
@@ -34,7 +34,7 @@ module Queries
                 essential: EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:),
                 correct_count:, question_count:, **grading(score_percent),
                 earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id),
-                progress: progress(id, student_id, exercise_id, completed_at), review: review(id, exercise_id, reveal))
+                progress: (progress(id, student_id, exercise_id, completed_at) if kind == "standard"), review: review(id, exercise_id, reveal))
       end
 
       # Fait teaches_student de ReadSessionPolicy : l'élève est encore inscrit dans une classe active de l'enseignant.
@@ -54,7 +54,8 @@ module Queries
       end
 
       # Historique de l'élève sur l'exercice, toutes classes et assignations confondues : ses sessions standard terminées
-      # jusqu'à celle-ci incluse, dans l'ordre (completed_at, id). Une seule requête.
+      # jusqu'à celle-ci incluse, dans l'ordre (completed_at, id). Une seule requête. Pas lue pour une session de
+      # remédiation : elle n'est pas dans l'historique, et « aujourd'hui » serait la note d'une autre session.
       def progress(session_id, student_id, exercise_id, completed_at)
         scores = Orm::ExerciseSession.where(student_id:, exercise_id:, kind: "standard", status: "completed")
                                      .where("(exercise_sessions.completed_at, exercise_sessions.id) <= (?, ?)", completed_at, session_id)
