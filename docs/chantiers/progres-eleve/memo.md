@@ -31,7 +31,6 @@ La mission de Lnclass est d'aider chaque acteur du système éducatif à progres
 - La lecture de classe vue par l'enseignant : chantier `rapports-exercices`.
 - Le progrès sur l'**accueil élève**, sur la **fiche** ou dans l'**historique** : un seul endroit d'abord (charte §1, « dire chaque chose une seule fois »), le résultat de session. À rouvrir après usage.
 - Une **courbe** ou un **graphique** des essais.
-- Les sessions de **remédiation** (V5) : elles comptent quand la remédiation existera.
 - Le progrès d'un élève **comparé à sa classe** : jamais ; l'élève ne se mesure qu'à lui-même.
 
 ## Ce que le grill a révélé
@@ -43,7 +42,7 @@ La mission de Lnclass est d'aider chaque acteur du système éducatif à progres
 | Faut-il montrer à l'élève son propre signe de progrès ? | **Oui, dans un chantier à part** (porteur, 2026-10-04, pendant `rapports-exercices`). | Ouverture de ce chantier. Les règles du signe viennent de l'ADR-0079 ; l'élève ne voit jamais celui d'un camarade. |
 | Le porteur délègue toutes les décisions (2026-10-04) : « tes décisions doivent servir et aider à améliorer les users ». | Les lignes suivantes sont des décisions prises sous cette délégation, chacune au service du progrès de l'élève. | Aucune question au porteur dans ce chantier. |
 | Où l'élève voit-il son progrès ? | **Sur la page de résultat de la session**, dans la carte, sous la note. C'est l'instant où il vient de recommencer ; ailleurs, l'information se répéterait (charte §1). | Une seule vue modifiée (UDR-0023), amendée par une UDR nouvelle. |
-| Quelles sessions forment son historique ? | **Toutes ses sessions standard terminées sur cet exercice**, quelle que soit la classe ou l'assignation, **jusqu'à celle qu'il regarde** (incluse). C'est son progrès à lui, pas celui d'un devoir. Rouvrir un ancien résultat montre le progrès d'alors. | Différent de la lecture enseignant (sessions d'une assignation) : deux acteurs, deux questions. Les règles du signe restent celles de l'ADR-0079 (premier, meilleur, dernier = la session regardée, marge 10 points). |
+| Quelles sessions forment son historique ? | **Toutes ses sessions terminées sur cet exercice, standard et remédiation**, quelle que soit la classe ou l'assignation, **jusqu'à celle qu'il regarde** (incluse). C'est son progrès à lui, pas celui d'un devoir. Rouvrir un ancien résultat montre le progrès d'alors. La remédiation compte (2026-10-04, défaut D1 du challenger) : sous 50 %, chaque session suivante de la fiche en est une (ADR-0043), et c'est en elle que l'élève qui rate puis réussit progresse. | Différent de la lecture enseignant (sessions d'une assignation) : deux acteurs, deux questions. Les règles du signe restent celles de l'ADR-0079 (premier, meilleur, dernier = la session regardée, marge 10 points). |
 | Comment dire « en baisse » ou « stagne » à un élève de 11 ans ? | **Jamais ces mots.** La charte (§5) interdit la sanction. Chaque cas dit **où il en est et quoi faire ensuite** : progrès → « Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui. » ; stable → « Tu confirmes ta maîtrise : 16/20. » ; stagne → « Tu restes autour de 12/20. Relis la correction ci-dessous avant de recommencer. » ; baisse → « Ton meilleur résultat reste 18/20. Relis la correction, tu peux le retrouver. » | Libellés en tutoiement. La seule couleur est le vert « réussi » du progrès, jamais de rouge ni d'ambre. La correction, déjà sous la carte, devient le geste proposé. |
 | En pourcentage ou sur 20 ? | **Sur 20**, la seule forme de note que l'élève lit (UDR-0023, 2026-10-02). Le calcul reste en pourcentage (ADR-0079). | `Grading.grade_on_20` pour chaque nombre affiché. |
 | « Essai » ou « session » ? | **« Session »** : l'UDR-0007 (acceptée) interdit « Essai » à l'écran, et `locale_files_test` le vérifie. | « à ta première session » dans la phrase de progrès. |
@@ -56,7 +55,7 @@ La mission de Lnclass est d'aider chaque acteur du système éducatif à progres
 - **Ancien résultat rouvert** : le progrès est calculé jusqu'à cette session, pas jusqu'à la dernière.
 - **Session commencée ou abandonnée** entre deux essais : ne compte pas.
 - **Élève dans deux classes** : une seule histoire par exercice, toutes classes confondues.
-- **Session de remédiation** : ne compte pas (hors périmètre).
+- **Session de remédiation** sur l'exercice : compte, et son résultat porte la phrase (2026-10-04, défaut D1 du challenger).
 
 ## Questions encore ouvertes
 

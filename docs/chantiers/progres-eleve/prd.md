@@ -34,7 +34,7 @@ Règle d'autorisation : `Policies::Assessment::ReadSessionPolicy`, **inchangée*
 | Cette session est 10 points ou plus sous son meilleur essai | « Ton meilleur résultat reste 18/20. Relis la correction, tu peux le retrouver. » |
 | Ancien résultat rouvert | Le progrès se lit jusqu'à cette session incluse |
 | Enseignant ou équipe sur le résultat d'un élève | Aucune phrase |
-| Résultat d'une session de remédiation | Aucune phrase (UDR-0073 §3) |
+| Résultat d'une session de remédiation | La phrase s'affiche aussi : la remédiation compte dans l'historique (UDR-0073 §3) |
 
 ## 4. Critères d'acceptation
 
@@ -69,8 +69,14 @@ Scénario: ancien résultat
   Alors il lit « Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui. »
 
 Scénario: sessions qui ne comptent pas
-  Étant donné une session commencée, une session abandonnée et une session de remédiation sur l'exercice
+  Étant donné une session commencée et une session abandonnée sur l'exercice
   Alors aucune ne compte dans l'historique
+
+Scénario: un élève qui rate puis réussit en remédiation lit « Tu progresses »
+  Étant donné une session standard à 25 %, qui ouvre une lacune sur la fiche
+  Et une session de remédiation à 75 % sur le même exercice
+  Quand il ouvre le résultat de la remédiation
+  Alors il lit « Tu progresses : 5/20 à ta première session, 15/20 aujourd'hui. »
 
 Scénario: une seule histoire toutes classes confondues
   Étant donné un élève qui a fait l'exercice depuis deux assignations de deux classes
@@ -96,6 +102,6 @@ Scénario: pas de couleur de sanction
 
 ## 6. Décisions rattachées
 
-- **Pas d'ADR** : aucun port, aucune table, aucune dépendance. Les règles du signe sont celles de l'ADR-0079 ; la seule décision nouvelle (l'historique de l'élève = toutes ses sessions standard terminées sur l'exercice, jusqu'à la session regardée) est une règle de lecture écrite ici et dans l'UDR-0073.
+- **Pas d'ADR** : aucun port, aucune table, aucune dépendance. Les règles du signe sont celles de l'ADR-0079 ; la seule décision nouvelle (l'historique de l'élève = toutes ses sessions terminées sur l'exercice, standard et remédiation, jusqu'à la session regardée) est une règle de lecture écrite ici et dans l'UDR-0073.
 - [UDR-0073](../../decisions/udr/0073-progres-de-l-eleve-sur-son-resultat.md) — phrase de progrès sur le résultat de session ; amende l'UDR-0023.
 - Dépend de : [ADR-0079](../../decisions/adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md), livré avec `rapports-exercices`.

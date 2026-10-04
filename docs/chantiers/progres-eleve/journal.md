@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-10-04 | L'historique de l'élève compte ses sessions terminées `standard` **et** `remediation` sur l'exercice, et la phrase s'affiche aussi sur le résultat d'une remédiation. Remplace la garde de `f30e60b4`. Le test système garde un seul parcours dans l'interface ; le reste passe aux fabriques et au niveau contrôleur (budget 12 s). | Défauts D1 et D2 du challenger : sous 50 %, chaque session suivante de la fiche est une remédiation (ADR-0043), donc l'élève qui rate puis réussit ne lisait jamais « Tu progresses », et ses meilleures notes s'effaçaient. Une remédiation sur un exercice, c'est faire cet exercice (orchestrateur, mandat délégué par le porteur). | Non : UDR-0073 §3 amendée |
 
 ## Ce qui a dérapé
 

@@ -28,9 +28,9 @@ L'élève qui recommence un exercice lit sa nouvelle note, mais personne ne lui 
 > Contrat d'exécution. Un agent l'applique littéralement.
 
 **Données** — `SessionResultQuery::Row#progress` : `Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade)`, ou `nil`.
-- Historique : les sessions de l'élève sur l'exercice, `kind = 'standard'`, `status = 'completed'`, dont `(completed_at, id)` est inférieur ou égal à celui de la session affichée, triées par `(completed_at, id)`.
+- Historique : les sessions de l'élève sur l'exercice, `status = 'completed'`, **`standard` et `remediation`**, dont `(completed_at, id)` est inférieur ou égal à celui de la session affichée, triées par `(completed_at, id)`.
 - Moins de deux sessions : `nil`.
-- La session affichée est une session de **remédiation** : `nil`. Elle n'est pas dans l'historique, et « aujourd'hui » serait la note d'une autre session (décision du Lot A, à revoir avec la V5).
+- La session affichée est une session de **remédiation** : la phrase s'affiche aussi, avec les mêmes règles. Une remédiation sur un exercice, c'est faire cet exercice. Sous 50 %, une lacune s'ouvre et chaque session suivante de la fiche est une remédiation (ADR-0043) : l'élève qui rate puis réussit ne la fait qu'en remédiation, et c'est ce progrès-là que la mission veut montrer. Les exclure taisait sa phrase et effaçait ses meilleures notes (défauts D1 et D2 du challenger, 2026-10-04 ; remplace la décision du Lot A, qui rendait `nil`).
 - `trend = Comprehension.trend_for(scores)` ; `first_grade`, `best_grade`, `current_grade` = `Grading.grade_on_20` du premier, du plus haut et du dernier score (la session affichée).
 
 **Structure** — partiel `app/views/assessment/session_results/_progress.html.erb`, `locals: (progress:)`, rendu dans `show.html.erb` **dans la carte, entre la `dl` des notes et les boutons**, seulement si `@owner && result.progress` :
