@@ -99,11 +99,11 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 |---|---|---|---|
 | 2026-10-03 | Mesurer côté client, en production, sans compte | Railway ne voit pas le trajet ; les pages publiques suffisent à mesurer le trajet, qui ne dépend pas de la page | non |
 | 2026-10-03 | Compter les requêtes en série par parcours, en local | Le compte ne dépend ni de la machine ni du lieu : c'est la seule métrique que le challenger retrouve à l'identique partout | non |
-| 2026-10-03 | Aucun cache serveur dans ce chantier | Le serveur pèse moins de 5 % de l'attente | ADR-0075 (proposé) |
+| 2026-10-03 | Aucun cache serveur dans ce chantier | Le serveur pèse moins de 5 % de l'attente | ADR-0076 (proposé) |
 | 2026-10-03 | Scripts dans `script/perf/`, comme ceux de `cache-ecrans-lourds` | Ils ne doivent jamais tourner dans la suite, et `measure_network.rb` doit se lancer avec Ruby seul, depuis n'importe quel poste | non |
 | 2026-10-03 | `count_round_trips.rb` lit le balisage réel (`data-turbo` du formulaire de connexion, lien ou formulaire de déconnexion) | Le banc doit suivre un changement de balisage sans être réécrit | non |
-| 2026-10-03 | **Porteur** : lots A et B refusés, on garde les UDR-0010, 0018 et l'ADR-0049 | Les décisions d'interface (frame différé) et de sécurité (rechargement à chaque nouvelle session) priment sur un aller-retour | ADR-0075 §4.2 : le compte d'aujourd'hui devient un plafond |
-| 2026-10-03 | **Porteur** : région étudiée, Develop et Staging d'abord ; Early Hints et Tiered Cache activés par lui | Seuls leviers restants, tous deux hors du dépôt | ADR-0075 §4.3 |
+| 2026-10-03 | **Porteur** : lots A et B refusés, on garde les UDR-0010, 0018 et l'ADR-0049 | Les décisions d'interface (frame différé) et de sécurité (rechargement à chaque nouvelle session) priment sur un aller-retour | ADR-0076 §4.2 : le compte d'aujourd'hui devient un plafond |
+| 2026-10-03 | **Porteur** : région étudiée, Develop et Staging d'abord ; Early Hints et Tiered Cache activés par lui | Seuls leviers restants, tous deux hors du dépôt | ADR-0076 §4.3 |
 | 2026-10-03 | Lot C fermé | Sa clause de fermeture s'applique : WebKit n'est pas installable dans le conteneur, et Chromium ne revalide pas les sous-ressources | non |
 
 ## Leviers abandonnés, et pourquoi
@@ -160,5 +160,5 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 |---|---|
 | **Livré le** | — |
 | **PR** | [#160](https://github.com/Lnclassapp/App.Lnclassapp/pull/160) (brouillon) |
-| **ADR produits** | [ADR-0075](../../decisions/adr/0075-politique-de-cache-reglee-sur-les-allers-retours.md) (proposé) |
+| **ADR produits** | [ADR-0076](../../decisions/adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md) (proposé) |
 | **UDR produits** | — |

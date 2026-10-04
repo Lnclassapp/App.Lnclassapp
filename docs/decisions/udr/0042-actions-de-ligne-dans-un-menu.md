@@ -96,3 +96,8 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 - **Vérification** : `test/helpers/catalog/content_status_helper_test.rb`, les tests de contrôleur des trois pages et des transitions, et les tests système `catalog/course_catalog_test.rb`, `catalog/essential_page_test.rb` et `boucle_pedagogique_test.rb`, qui ouvrent le menu ⋮ avant de publier, d'archiver ou de créer un exercice.
 - **« Tout publier »** *(ajout du 2026-10-01)* : le menu ⋮ d'un cours et celui d'une fiche portent aussi « Tout publier » (`PATCH …/publish-all`, icône `check-badge`), après « Publier » ou « Archiver ». Il publie le contenu et ses descendants brouillons ([ADR-0035, amendement du 2026-10-01](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md#amendement-du-2026-10-01--tout-publier-publication-en-cascade)). Un exercice n'a pas de descendant : son menu ne le porte pas.
 
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Exception** : « Modifier mes classes » de l'accueil enseignant, lien de navigation que le §2 gardait hors des menus, entre dans le menu ⋮ « Actions sur mes classes » à la demande du porteur (UDR-0069 §3.2).

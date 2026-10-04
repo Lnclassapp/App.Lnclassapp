@@ -174,3 +174,9 @@ Ce qui ne change pas pour l'élève : le retour (nom du cours), le titre, le sou
 - L'échéance n'est **pas** répétée sur cette page : elle est sur l'accueil (UDR-0062 §3.2, R6).
 - **§2.7** : inchangé pour l'enseignant (« Voir l'exercice », sans action) ; il assigne depuis la fiche dans la classe, avec l'étape des jours de séance (UDR-0062 §3.4).
 - **Vérification** : `test/controllers/catalog/essentials_controller_test.rb` — l'étiquette « Assigné par ton enseignant » apparaît pour un exercice assigné à la classe, et pour lui seul.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Enseignant** : sous chaque exercice publié, une bascule d'assignation par classe de l'enseignant au niveau et à la série du cours ; sans telle classe, la phrase « Aucune de vos classes n'est en <niveau série>. » au-dessus des exercices (UDR-0069 §3.8). Équipe et élève : inchangés.

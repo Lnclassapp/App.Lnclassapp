@@ -1,13 +1,13 @@
 # Plan d'exécution — Politique de cache : moins d'allers-retours jusqu'au serveur
 
 > Cycle : [optimisation](../../workflows/optimisation.md) — **un lot = un levier = un chiffre**, lots classés par ratio gain/risque, arrêt dès la cible atteinte ; un lot devenu inutile se **ferme**.
-> Format des lots : [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot). Mesure « avant » et leviers : [memo](memo.md). Politique proposée : [ADR-0075](../../decisions/adr/0075-politique-de-cache-reglee-sur-les-allers-retours.md).
+> Format des lots : [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot). Mesure « avant » et leviers : [memo](memo.md). Politique proposée : [ADR-0076](../../decisions/adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md).
 > **Décisions du porteur du 2026-10-03** ([memo](memo.md#décisions-du-porteur-2026-10-03)) : A et B refusés (« garder » les UDR-0010, 0018 et l'ADR-0049), donc **fermés** ; C fermé avec B ; D activé par le porteur ; R étudié, Develop et Staging d'abord, après la mesure depuis Abidjan. **Aucun lot de code ne reste.**
 
 ## Graphe
 
 ```
-Lot 0 — Bench et décision (fait en cadrage : 3 scripts, mesure « avant », ADR-0075 proposé)
+Lot 0 — Bench et décision (fait en cadrage : 3 scripts, mesure « avant », ADR-0076 proposé)
   ↓
   ├─✗ Lot A — Activité récente rendue avec la page   FERMÉ (porteur : garder UDR-0010, UDR-0018)
   ├─✗ Lot B — Connexion et déconnexion hors Turbo     FERMÉ (porteur : garder ADR-0049)
@@ -27,7 +27,7 @@ Ordre par gain/risque au cadrage : A → B → D → R → C. Après les décisi
 3. **Un seul levier**, puis le bench relancé (**3 exécutions, médiane**), avec le chiffre noté dans le memo.
 4. **Gain nul ou marginal → le pas est annulé**, et le journal dit pourquoi. Une complexité ajoutée sans gain mesuré se retire.
 
-Les lots A et B étant fermés, `count_round_trips.rb` sert de **plafond** : aucun parcours ne doit dépasser ses requêtes en série d'aujourd'hui (ADR-0075 §4.2). Les lots D et R se mesurent avec `measure_browser.cjs` et `measure_network.rb`.
+Les lots A et B étant fermés, `count_round_trips.rb` sert de **plafond** : aucun parcours ne doit dépasser ses requêtes en série d'aujourd'hui (ADR-0076 §4.2). Les lots D et R se mesurent avec `measure_browser.cjs` et `measure_network.rb`.
 
 > **Le chantier ne se clôt pas sans mesure après** : même machine, même volume, même méthode, au moins 3 exécutions, médiane, tests fonctionnels verts. **Sans chiffre après, la PR est rejetée.**
 
@@ -40,7 +40,7 @@ Les lots A et B étant fermés, `count_round_trips.rb` sert de **plafond** : auc
                      `script/perf/measure_browser.cjs`
                      `script/perf/count_round_trips.rb`
                      `docs/chantiers/politique-cache/memo.md` · `journal.md` · `plan.md`
-                     `docs/decisions/adr/0075-politique-de-cache-reglee-sur-les-allers-retours.md` · `docs/decisions/adr/README.md`
+                     `docs/decisions/adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md` · `docs/decisions/adr/README.md`
 - **Dépend de**    : —
 - **Test associé** : les trois scripts, lancés 3 fois chacun (journal, « Protocole ») ; `bin/rubocop script/perf`
 - **Done quand**   : le tableau « Mesure avant » du memo est rempli de valeurs mesurées, la ligne d'Abidjan exceptée (question 1, bloquante pour R seul)
@@ -116,7 +116,7 @@ Vérification après activation : `curl -sv --http2 https://lnclass.com/login 2>
 ## Lot R — Région : application et PostgreSQL en `europe-west4` *(décision du porteur, hors code)*
 
 - **Couche**       : infrastructure Railway (environnements Develop, Staging, puis production)
-- **Fichiers**     : aucun dans le dépôt ; `docs/decisions/adr/0075-…` §4.3 passe à « Accepté » avec la région retenue et la mesure qui la justifie
+- **Fichiers**     : aucun dans le dépôt ; `docs/decisions/adr/0076-…` §4.3 passe à « Accepté » avec la région retenue et la mesure qui la justifie
 - **Dépend de**    : la mesure « avant » depuis Abidjan, sur l'environnement concerné ; une fenêtre de maintenance. Ordre : Develop, puis Staging, mesurés, puis production
 - **Test associé** : `measure_network.rb` et `measure_browser.cjs` lancés depuis la Côte d'Ivoire, avant et après, 3 fois chacun ; `/up` en 200 ; comptes de lignes par table identiques avant et après
 - **Done quand**   : depuis Abidjan, **le surcoût d'une requête jusqu'au serveur passe sous 150 ms** et le **chargement d'une page déjà visitée sous 500 ms** (`load`, médiane), mesurés sur Staging puis sur la production. Le `x-runtime` de `/` et de `/login` reste sous 10 ms, ce qui prouve que l'application et la base sont dans la même région. Aucune perte de données
@@ -149,7 +149,7 @@ Vague 2 : Lot D ‖ Lot R         → le porteur (Cloudflare ; Railway), hors d�
 Lots A, B, C                    → fermés, aucun agent de code
 ```
 
-Aucun agent de code n'est lancé : les seuls lots ouverts sont hors du dépôt. Une seule PR pour le chantier, vers `Develop` : documentation, scripts de mesure et ADR-0075.
+Aucun agent de code n'est lancé : les seuls lots ouverts sont hors du dépôt. Une seule PR pour le chantier, vers `Develop` : documentation, scripts de mesure et ADR-0076.
 
 ## Vérification de collision
 
@@ -159,7 +159,7 @@ Doublons vérifiés mécaniquement (`awk … | sort | uniq -d` : aucune sortie).
 |---|---|
 | `script/perf/*` | Lot 0 |
 | `docs/chantiers/politique-cache/*` | Lot 0 (l'orchestrateur reporte les chiffres des lots) |
-| `docs/decisions/adr/0075-…` · `docs/decisions/adr/README.md` | Lot 0 |
+| `docs/decisions/adr/0076-…` · `docs/decisions/adr/README.md` | Lot 0 |
 | `docs/decisions/udr/0010-…` · `docs/decisions/udr/0018-…` | Lot A |
 | `docs/decisions/adr/0049-…` | Lot B |
 | `app/helpers/navigation_helper.rb` · `app/helpers/components_helper.rb` | Lot B |
@@ -172,7 +172,7 @@ Aucun lot ne touche `config/routes.rb`, `config/locales/*.yml` ni `app/views/lay
 - [x] `memo.md` : métrique nommée, **valeur avant chiffrée**, volume de données précisé, cible chiffrée *(sauf la ligne d'Abidjan : bloque le lot R seul)*
 - [x] Protocole de mesure écrit et reproductible par quelqu'un d'autre
 - [x] Explorer coût rendu : où part réellement le temps (pas une hypothèse)
-- [ ] ADR écrit si un contrat change (callbacks contournés, dénormalisation, cache, port modifié) *(ADR-0075 proposé ; amendements de l'ADR-0049 et des UDR-0010 et 0018 avec leurs lots)*
+- [ ] ADR écrit si un contrat change (callbacks contournés, dénormalisation, cache, port modifié) *(ADR-0076 proposé ; amendements de l'ADR-0049 et des UDR-0010 et 0018 avec leurs lots)*
 - [x] Bench versionné, produisant la valeur avant
 - [ ] Tests de non-régression fonctionnelle verts **avant** le premier levier
 - [ ] Un lot = un levier = un chiffre

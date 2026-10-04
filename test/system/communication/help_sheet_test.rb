@@ -4,7 +4,9 @@ require "application_system_test_case"
 # une modale centrée sur ordinateur, avec la FAQ, WhatsApp et l'appel ; le focus va sur la première ligne et revient
 # sur le bouton à la fermeture. Sans JavaScript, le bouton reste un lien vers /aide. Données du support : celles du
 # test (config/support.yml). UDR-0066 §3.5 (amendement de l'UDR-0061 §3.3) : le pied de la carte, « Plus sur Lnclass »,
-# porte « Blog » dès le premier article publié (BL-06), qui mène l'élève à la liste sans détour (BL-20).
+# porte « Blog » dès le premier article publié (BL-06) ; le focus va toujours sur la première ligne. Le contenu du pied
+# se prouve sans navigateur (test/controllers/classroom/student_homes_controller_test.rb), la lecture de /blog sans
+# détour aussi (BL-20, test/integration/communication/articles_test.rb).
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   TRIGGER = "[aria-controls=help-sheet]".freeze
@@ -62,11 +64,13 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     end
   end
 
-  test "on a phone, the focus lands on « Questions fréquentes », Escape closes and gives the focus back" do
+  test "on a phone, the focus lands on « Questions fréquentes », even with « Blog » in the footer; Escape gives it back" do
+    create_article
     with_mobile_viewport do
       visit student_home_path
       open_sheet
 
+      within(sheet) { assert_link "Blog" }
       assert_match(/\A#{Regexp.escape(tr('faq.title'))}/, focused_text)
 
       sheet.send_keys(:escape)
@@ -131,31 +135,5 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
 
     click_on tr("trigger")
     assert_current_path help_path
-  end
-
-  def footer_links = within(sheet) { all("nav#help_sheet_links[aria-label='#{tr('footer.label')}'] li a").map(&:text) }
-
-  test "BL-06: without a published article, the footer of the sheet offers the mission and the legal pages, no « Blog »" do
-    create_article(author: create_team_member(team_role: "content", second_factor: false), status: "draft")
-    visit student_home_path
-    open_sheet
-
-    assert_equal [ "Notre mission", "Protection des données", "Conditions d'utilisation" ], footer_links
-    within(sheet) { assert_no_link "Blog" }
-  end
-
-  test "BL-06, BL-20: once an article is published, « Blog » leads the footer and opens the list, without redirect" do
-    create_article(title: "Réviser le BEPC en 4 semaines")
-    visit student_home_path
-    open_sheet
-
-    assert_equal [ "Blog", "Notre mission", "Protection des données", "Conditions d'utilisation" ], footer_links
-    assert_match(/\A#{Regexp.escape(tr('faq.title'))}/, focused_text)
-
-    within(sheet) { click_on "Blog" }
-
-    assert_current_path blog_path
-    assert_selector "h1", text: "Blog"
-    assert_link "Réviser le BEPC en 4 semaines"
   end
 end

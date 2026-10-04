@@ -140,3 +140,10 @@ Un enseignant convaincu n'a aucun geste pour faire venir ses collègues ; il rec
 
 - **Inscription sans code** : sous-titre « Choisissez votre établissement : votre compte est ouvert tout de suite. ». Succès : session ouverte, redirection 303 vers `teacher_classrooms_path` avec le toast « Bienvenue ! Sélectionnez vos classes pour commencer. » (plus d'écran d'attente).
 - **Écran d'attente**, **collègues en attente** et **Enseignants en attente** de la fiche : inchangés ; ils ne servent plus qu'aux demandes d'avant la pause et aux comptes refusés.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Grand écran** : le bloc « Inviter un collègue » de l'accueil est masqué à partir de `lg` ; la barre latérale porte la carte compacte « Parrainage » (`#sidebar_referral_card`), chargée par le frame différé `sidebar_referral` sur `GET /teachers/invite` (UDR-0069 §3.6). Mêmes lien, compteur, badge et partages comptés.
+- **Téléphone** : le bloc reste en bas de l'accueil, et la bulle « Inviter » de la section « Cours » mène à la page « Inviter un collègue ».

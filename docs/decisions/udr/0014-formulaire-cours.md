@@ -92,3 +92,10 @@ L'équipe saisit les cours du catalogue : nom, sous-titre, niveau, série, mati�
 - La règle « l'éditeur refuse tout fichier » devient : **l'éditeur refuse tout fichier, sauf s'il est posé avec la valeur Stimulus `attachments` vraie**, ce que seul le formulaire d'article du blog fait ([UDR-0067](0067-gestion-du-blog-par-l-equipe.md) §3.4.4, §3.7).
 - **Ce formulaire ne change pas** : `teams/courses/_form` ne pose pas `attachments`, un fichier déposé ou collé y est toujours refusé, et `Repositories::Shared::RichTextSanitizer` (déplacé de `catalog` vers `shared`, [ADR-0074](../adr/0074-blog-public-articles-images-et-referencement.md) §4.5) retire toujours toute pièce jointe d'un cours (BL-15).
 - Ouvrir les images à un autre contenu exige une nouvelle UDR et un ADR.
+
+## Amendement du 2026-10-03 — niveau d'un cours assigné
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md) §3.9, [ADR-0075](../adr/0075-niveau-d-un-cours-assigne-fige.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Modification refusée** : un niveau ou une série qui sortirait de son niveau une classe où un exercice du cours est assigné → 422, la modale se rouvre, sous « Niveau » : « Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer. ». Élargir à « sans série », changer le nom, le contenu ou la matière restent permis.
+

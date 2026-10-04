@@ -71,3 +71,12 @@ L'enseignant a besoin de savoir, d'un coup d'œil, où en sont ses classes et d'
 ## Amendement du 2026-09-28 — inviter et confirmer (UDR-0050)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* Après les sections du shell, l'accueil rend « Collègues en attente » (si l'établissement en a) puis « Inviter un collègue », pour un enseignant d'un établissement actif seulement. Contrat : UDR-0050 §3.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Ordre** : « Mes classes », « Cours », « Activités » ; « Activité de vos classes » devient « Activités » (UDR-0069 §3.1).
+- **« Modifier mes classes »** passe du pied de la carte à son menu ⋮ « Actions sur mes classes » (§3.2).
+- **« Cours »** n'est plus un lien vers le catalogue : une bulle par couple niveau-série enseigné, à l'illustration de la matière, puis « Inviter », et « Voir tout le catalogue » en pied (§3.3, §3.5).
+- **« Inviter un collègue »** n'est plus rendu qu'en dessous de `lg` ; la carte « Parrainage » de la barre latérale le remplace sur grand écran (§3.6, §3.7). Aucun montant, toujours (« Versement » retiré, G1).
