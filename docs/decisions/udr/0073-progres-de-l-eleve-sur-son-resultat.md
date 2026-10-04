@@ -18,7 +18,7 @@ L'élève qui recommence un exercice lit sa nouvelle note, mais personne ne lui 
 ## 2. Décision
 
 1. **Un seul endroit : la carte du résultat**, sous la note, à l'instant où il vient de recommencer (charte §1 : dire chaque chose une seule fois).
-2. **Une phrase, pas un signe.** Un élève de 11 ans comprend « Tu progresses : 6/20 au premier essai, 18/20 aujourd'hui » ; il ne déchiffre pas une flèche.
+2. **Une phrase, pas un signe.** Un élève de 11 ans comprend « Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui » ; il ne déchiffre pas une flèche.
 3. **Jamais « stagne » ni « baisse ».** La charte (§5) interdit la sanction. Chaque phrase dit où il en est et **renvoie à la correction**, placée juste en dessous : c'est elle qui fait progresser.
 4. **Sur 20**, seule forme de note lue par l'élève (UDR-0023, 2026-10-02).
 5. **Pour l'élève seul** : l'enseignant a la page de suivi (UDR-0072).
@@ -41,7 +41,7 @@ p#session_progress .mt-6.flex.items-start.justify-center.gap-2.text-sm.text-ink.
 
 | `trend` | Icône | Couleur de l'icône | Phrase (`assessment.session_results.progress.*`) |
 |---|---|---|---|
-| `:progress` | `arrow-trending-up` | `text-success` | `progress` : « Tu progresses : %{first}/20 au premier essai, %{current}/20 aujourd'hui. » |
+| `:progress` | `arrow-trending-up` | `text-success` | `progress` : « Tu progresses : %{first}/20 à ta première session, %{current}/20 aujourd'hui. » |
 | `:stable` | `check-circle` | `text-success` | `stable` : « Tu confirmes ta maîtrise : %{current}/20. » |
 | `:stagnant` | `book-open` | `text-mute` | `stagnant` : « Tu restes autour de %{current}/20. Relis la correction ci-dessous avant de recommencer. » |
 | `:decline` | `book-open` | `text-mute` | `decline` : « Ton meilleur résultat reste %{best}/20. Relis la correction, tu peux le retrouver. » |

@@ -21,7 +21,7 @@ Règle d'autorisation : `Policies::Assessment::ReadSessionPolicy`, **inchangée*
 
 1. L'élève termine un exercice qu'il a déjà fait une fois.
 2. La page de résultat affiche, dans la carte, sous la note sur 20, une phrase de progrès :
-   - « Tu progresses : 6/20 au premier essai, 18/20 aujourd'hui. »
+   - « Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui. »
 3. Sous la carte, la correction reste à sa place. Les phrases « stagne » et « baisse » y renvoient.
 
 ### Chemins alternatifs
@@ -46,7 +46,7 @@ Scénario: aucune phrase au premier essai
 Scénario: progrès
   Étant donné un élève dont les sessions terminées valent 30 % puis 90 %
   Quand il ouvre le résultat de la seconde
-  Alors il lit « Tu progresses : 6/20 au premier essai, 18/20 aujourd'hui. »
+  Alors il lit « Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui. »
 
 Scénario: stagne sans le mot
   Étant donné des sessions à 60 % puis 60 %
@@ -65,7 +65,7 @@ Scénario: meilleur résultat à retrouver
 Scénario: ancien résultat
   Étant donné des sessions à 30 %, 90 % puis 40 %
   Quand il ouvre le résultat de la deuxième
-  Alors il lit « Tu progresses : 6/20 au premier essai, 18/20 aujourd'hui. »
+  Alors il lit « Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui. »
 
 Scénario: sessions qui ne comptent pas
   Étant donné une session commencée, une session abandonnée et une session de remédiation sur l'exercice
