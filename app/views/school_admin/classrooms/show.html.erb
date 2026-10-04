@@ -1,16 +1,17 @@
 <%# 🌐 UI · school_admin/classrooms/show — page d'une classe pour la direction (DS-09, DS-10, FU-10, FU-21, FU-49) %>
 <%# Rôle : les chiffres de la classe en trois tuiles, puis chaque élève présent (cherché pendant la frappe) : rendus / donnés, score %>
-<%# ADR  : 0065 · UDR : 0005, 0049, 0052, 0054 · aucun identifiant d'élève dans le HTML : les lignes sont numérotées %>
+<%# ADR  : 0065 · UDR : 0005, 0049, 0052, 0054, 0072 · aucun identifiant d'élève dans le HTML : les lignes sont numérotées %>
 <% classroom = @detail.classroom %>
 <% page_title classroom.name %>
-<% content_for :nav_key, "student_work" %>
+<% content_for :nav_key, "home" %>
 <% percent = lambda do |value|
      next t("school_admin.classrooms.percent", value:) unless value.nil?
 
      safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
    end %>
+<%# UDR-0072 §3.9 : le retour mène à la page du niveau de la classe, à son nom. %>
 <%= ui_page_header title: classroom.name, subtitle: t(".subtitle", level: classroom.level_name, count: classroom.students_count),
-                   back: { label: t(".back"), href: school_admin_classrooms_path } %>
+                   back: { label: classroom.level_name, href: school_admin_level_path(classroom.level_slug) } %>
 
 <ul id="classroom_figures" class="mb-5 grid grid-cols-3 gap-3">
   <% [ [ :assignments, classroom.assignments_count, nil ], [ :submission_rate, percent.call(classroom.submission_rate), :submission_rate ],

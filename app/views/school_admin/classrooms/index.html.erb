@@ -2,7 +2,7 @@
 <%# Rôle : une ligne par classe de l'année ; le tableau défile dans sa carte sur téléphone, jamais la page ; aucun bouton %>
 <%# ADR  : 0036, 0065 · UDR : 0005, 0052, 0054 · « — » (aria-hidden) + « non calculé » (sr-only) ; aides natives (<details>) ; lien « Anciens élèves » (lot R) %>
 <% page_title t(".page_title") %>
-<% content_for :nav_key, "student_work" %>
+<% content_for :nav_key, "home" %>
 <% percent = lambda do |value|
      next t("school_admin.classrooms.percent", value:) unless value.nil?
 
