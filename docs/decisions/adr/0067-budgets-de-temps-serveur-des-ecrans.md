@@ -50,7 +50,7 @@ Un écran qui dépasse son budget ouvre un chantier `optimize`. L'ordre des levi
 
 **Leviers appliqués par ce chantier** (aucun contrat changé, aucune vue modifiée) :
 
-1. `exercise_sessions (classroom_assignment_id, student_id) INCLUDE (score_percent) WHERE status = 'completed' AND kind = 'standard'`, et `StudentWorkQuery#totals_by` qui part des adhésions présentes des classes (mêmes définitions, ADR-0065 §4).
+1. `exercise_sessions (classroom_assignment_id, student_id) INCLUDE (score_percent) WHERE status = 'completed' AND kind = 'standard'`, et `StudentWorkQuery#totals_by` qui part des adhésions présentes des classes (mêmes définitions, ADR-0065 §4). *Remplacé le 2026-10-04 par le même index sans condition sur `kind` : voir la note en fin d'ADR.*
 2. Les index de période annoncés par l'ADR-0062 : `exercise_sessions (started_at, student_id)`, `exercise_sessions (completed_at) INCLUDE (student_id, score_percent) WHERE status = 'completed'`, `users (created_at, id)`, `classroom_assignments (assigned_at)` ; puis une seule lecture groupée des élèves placés du pilotage au lieu de quatre (mêmes définitions).
 3. L'extension `pg_trgm` et cinq index GIN trigrammes sur les expressions de recherche (amendement de l'ADR-0062).
 4. En dernier recours, pour la seule vue « année » du pilotage : ses agrégats gardés 5 minutes dans Solid Cache (second amendement de l'ADR-0062, décision du porteur).
@@ -99,3 +99,12 @@ RAILS_ENV=production … bin/rails runner script/perf/measure_screens.rb   # PER
 - `script/perf/measure_screens.rb` : p95 et Ko de chaque écran ; le tableau « après » du chantier qui touche un écran budgété est comparé à ce tableau-ci.
 - `test/infrastructure/queries/trigram_search_indexes_test.rb` (dans la CI) : les expressions des recherches restent servies par leurs index trigrammes.
 - Rien ne vérifie automatiquement le budget HTML : il se lit dans la colonne « Ko » du script.
+
+## Note du 2026-10-04 — levier 1 : l'index des sessions rendues compte la remédiation
+
+*Chantier de correction [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/plan.md). La décision (budgets, méthode, ordre des leviers) est inchangée.*
+
+- Une session de remédiation rattachée à un devoir est désormais « rendue » pour la direction ([ADR-0072, complément du 2026-10-04 (ter)](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md)). L'index du levier 1 est remplacé, **sous le même nom** `index_exercise_sessions_handed_in` : `exercise_sessions (classroom_assignment_id, student_id) INCLUDE (score_percent) WHERE status = 'completed'`. Migration `20261004190000_count_remediation_in_handed_in_index` : construit `CONCURRENTLY` sous un nom provisoire, ancien index retiré `CONCURRENTLY`, puis renommé ; aucune étape ne bloque les écritures.
+- `StudentWorkQuery#totals_by` et `DepartedStudentsQuery#totals` le lisent en *Index Only Scan* (0 *heap fetch*), sans parcours séquentiel de `exercise_sessions`. `AssignmentFollowUpQuery`, qui filtre encore `kind = 'standard'` sur `Develop`, reste servie par lui : sa condition implique celle de l'index.
+- Mesuré sur une copie du jeu de référence (312 283 sessions) où les 14 698 sessions terminées qu'ADR-0043 aurait ouvertes en remédiation le sont (le jeu de `script/perf/dataset.rb` n'en sème aucune). Médiane de 3 exécutions de `measure_screens.rb`, avant → après : « Travail des élèves » p95 230 → 244 ms ; page d'une classe p95 53 → 58 ms ; requêtes et Ko inchangés (11 et 71,4 Ko ; 9 et 42,5 Ko). La requête des totaux, en A/B alterné sur les mêmes données : p50 74,3 → 76,3 ms. Détail et protocole : [`plan.md` du chantier](../../chantiers/remediation-comptee-faite/plan.md#mesures).
+- **Écarts constatés, antérieurs à ce chantier** : « Travail des élèves » est **hors budget** (p95 230 ms avant toute modification, budget 100 ms), « Enseignants » de la direction pèse 441 Ko de HTML (budget 150 Ko), et « Anciens élèves », jamais mesurée jusqu'ici, prend **8,7 s** (la requête de la liste, pas celle des totaux). Ils sont notés au journal du chantier pour un chantier `optimize`.

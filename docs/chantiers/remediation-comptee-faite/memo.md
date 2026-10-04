@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | exécuté (2026-10-04) — lot 0 commité sur `fix/remediation-comptee-faite`, non poussé ; reste le challenger ([plan](plan.md#portes-de-sortie)) |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `fix/remediation-comptee-faite` |
 | **Programme** | `refonte-application` — suite de [`rapports-exercices`](../rapports-exercices/journal.md) |
@@ -41,6 +41,8 @@ Cause : `Queries::School::StudentWorkQuery` (ligne 21) et `Queries::School::Depa
 |---|---|---|
 | Une session de remédiation sur un exercice, est-ce l'avoir fait ? | **Oui** : décision de l'orchestrateur, sous le mandat délégué du porteur (2026-10-04), pour les deux chantiers. L'élève a bien fait l'exercice, et c'est même là qu'il progresse. | « Fait » = session `completed`, rattachée à l'assignation, d'un élève présent, quel que soit son `kind`. Amendement de l'ADR-0072 §4.4 côté direction. |
 | Pourquoi un chantier à part ? | L'index partiel `index_exercise_sessions_handed_in` (`WHERE kind = 'standard'`, ADR-0067 levier 1) tient le budget de 100 ms des pages de la direction. Retirer le filtre sans le remplacer fait sortir ces pages de leur budget. | Une migration remplace l'index (sans `kind`), puis on mesure avant et après au volume de l'ADR-0067. |
+| Le jeu de mesure de l'ADR-0067 contient-il des remédiations ? | **Non** (appris à l'exécution) : `script/perf/dataset.rb` sème toutes ses sessions `standard`, alors qu'il ouvre 86 944 lacunes en attente. | Sur la copie de mesure, les 14 698 sessions qu'ADR-0043 aurait ouvertes en remédiation le deviennent avant la mesure « avant » ([plan § Mesures](plan.md#mesures)). Le jeu lui-même est une dette ([journal](journal.md#dette-laissée-derrière)). |
+| Remplacer l'index fait-il sortir les pages de leur budget ? | **Non** : +2 ms en p50 sur la requête des totaux (A/B alterné), *Index Only Scan* sans *heap fetch*. Mais « Travail des élèves » était **déjà** hors budget (230 ms p95), et « Anciens élèves » prend 8,7 s. | Écarts antérieurs, hors périmètre : notés au journal pour un chantier `optimize`. |
 
 ## Cas limites identifiés
 

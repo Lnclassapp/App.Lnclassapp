@@ -344,3 +344,12 @@ Acceptés tels quels par le porteur le 2026-10-02 (« lance les lots » ; memo, 
 6. **Retirer sa déclaration** d'une classe efface ses jours de séance.
 7. **« Fait »** = session rendue rattachée à l'assignation (définition de l'ADR-0048).
 8. **Direction** : elle ne voit ni les retards ni la liste nominative.
+
+## Complément du 2026-10-04 (ter) — la remédiation compte comme « rendu » côté direction
+
+*Chantier de correction [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/memo.md), décision de l'orchestrateur par mandat du porteur (2026-10-04). Le texte ci-dessus reste tel qu'accepté. Pendant côté enseignant : ADR-0079 §4.1 et complément (bis) de cet ADR, livrés par le chantier `rapports-exercices` ([PR #164](https://github.com/Lnclassapp/App.Lnclassapp/pull/164)).*
+
+- §1 point 1 et §4.4 : **pour la direction comme pour l'enseignant, « rendu » et « fait » incluent la remédiation.** Un devoir est rendu s'il existe une session `completed`, rattachée à l'assignation (`classroom_assignment_id`), d'un élève présent, **quel que soit son `kind`** (`standard` ou `remediation`). Les moyennes (de l'élève, de la classe, des anciens élèves) incluent ces sessions.
+- **Pourquoi** : `StartExerciseSession#new_session` ouvre une session `remediation` sur **tout** exercice d'une fiche dès que l'élève y a une lacune en attente (ADR-0043), et la rattache à l'assignation. Un élève qui rate l'exercice X à 25 % puis fait l'exercice assigné Y à 80 % le fait donc en remédiation : ne compter que `standard` le montrait « pas encore rendu » à la direction, faussait le taux de rendu de sa classe et écartait son 80 % de la moyenne. Ce sont précisément les élèves en difficulté, ceux que la direction doit voir.
+- Lu par `Queries::School::StudentWorkQuery` (« Travail des élèves », page d'une classe) et `Queries::School::DepartedStudentsQuery` (« Anciens élèves »). Une remédiation **hors** assignation, une session commencée ou abandonnée ne comptent toujours pas.
+- L'index partiel `index_exercise_sessions_handed_in` perd sa condition sur `kind` (même nom, même clé, même `INCLUDE`) : voir la note du 2026-10-04 de l'[ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md).

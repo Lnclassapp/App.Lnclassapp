@@ -139,3 +139,10 @@ end
 - `test/domain/policies/school/read_own_school_policy_test.rb` : refus pour `teacher`, `student`, `team` et une direction sans établissement.
 - `test/infrastructure/queries/school/student_work_query_test.rb` et `school_teachers_query_test.rb` : un test par ligne du tableau §4, données d'un autre établissement absentes, nombre de requêtes constant.
 - `test/controllers/school_admin/classrooms_controller_test.rb` et `teachers_controller_test.rb` : chaque page refusée aux autres rôles ; la classe d'un autre établissement donne 404. `test/routing/school_admin_routes_test.rb` : aucune route d'écriture sous `/school-admin`.
+
+## Complément du 2026-10-04 — un devoir rendu en remédiation est rendu
+
+*Chantier de correction [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/memo.md), décision de l'orchestrateur par mandat du porteur. Le texte ci-dessus reste tel qu'accepté.*
+
+- §4, ligne « Devoir rendu » : **au moins une session `completed`, rattachée au devoir (`classroom_assignment_id`), quel que soit son `kind`** (`standard` ou `remediation`). La phrase « Les sessions de remédiation (ADR-0043) ne comptent pas » est retirée : le score moyen d'un élève et la moyenne d'une classe lisent aussi les sessions de remédiation rattachées à un devoir de la classe.
+- Raison et portée : [ADR-0072, complément du 2026-10-04 (ter)](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md#complément-du-2026-10-04-ter--la-remédiation-compte-comme--rendu--côté-direction). Les autres définitions du tableau sont inchangées.
