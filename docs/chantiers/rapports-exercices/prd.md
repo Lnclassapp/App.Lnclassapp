@@ -109,12 +109,23 @@ Scénario: cercle gris sous 5 élèves
   Quand l'enseignant ouvre la page de la classe
   Alors le cercle est gris, sans catégorie, avec « 4/25 »
 
-Scénario: seules les sessions de l'assignation comptent
+Scénario: seules les sessions de l'assignation comptent, la remédiation comprise
   Étant donné un élève présent qui a terminé l'exercice depuis une autre classe à 100
-  Et une session de remédiation à 100 sur l'exercice
+  Et une session de remédiation à 100 sur l'exercice, hors de l'assignation
   Et une session commencée non terminée
   Quand l'enseignant ouvre la page de la classe
   Alors aucune de ces sessions ne compte dans le cercle ni dans les badges
+  Mais un autre élève qui a fait l'exercice assigné à 100 en remédiation, rattachée à l'assignation, compte
+  Et il est compté « fait », avec son badge Diamant (une remédiation sur l'exercice assigné, c'est le faire, ADR-0079 §4.1)
+
+Scénario: une remédiation est un progrès
+  Étant donné un élève qui fait l'exercice assigné à 25 %
+  Et qui le refait à 75 % en remédiation, rattachée à l'assignation
+  Quand l'enseignant ouvre la page de suivi
+  Alors son meilleur score est 75, il est « Acquis » et « en progrès », avec deux sessions
+  Et les taux par question de « Acquis » se lisent sur sa session de remédiation
+  Et un élève dont la seule session sur l'assignation est une remédiation est compté « fait », jamais « pas encore fait »
+  Et il est « rendu en retard » si cette session est terminée après l'échéance
 
 Scénario: élèves partis ou anonymisés exclus
   Étant donné un élève qui a fait l'exercice puis a quitté la classe
