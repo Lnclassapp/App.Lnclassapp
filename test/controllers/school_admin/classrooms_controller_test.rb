@@ -145,12 +145,15 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#alert_without_teacher", text: /5 classes sans enseignant : 2nde C 1, 2nde C 2, 2nde C 3 et 2 autres/
     assert_select "#alert_without_students", text: /5 classes sans élève : 2nde C 1, 2nde C 2, 2nde C 3 et 2 autres/
 
+    # L'accueil est gardé 5 minutes (AD-23) : chaque nouvelle lecture ici part d'un cache vide.
     Orm::Classroom.where(name: names.last(2)).destroy_all
+    Rails.cache.clear
     get school_admin_classrooms_path
 
     assert_select "#alert_without_teacher", text: /3 classes sans enseignant : 2nde C 1, 2nde C 2 et 2nde C 3/
 
     Orm::Classroom.where(name: "2nde C 2").destroy_all
+    Rails.cache.clear
     get school_admin_classrooms_path
 
     assert_select "#alert_without_teacher", text: /2 classes sans enseignant : 2nde C 1 et 2nde C 3/

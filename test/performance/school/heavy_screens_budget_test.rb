@@ -48,6 +48,7 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
       "pilotage filtré année" => [ PILOTAGE_MS, -> { filtered_dashboard("year", today, largest) } ],
       "recherche « kou »" => [ SCREEN_MS, -> { Queries::Identity::AccountSearchQuery.new.call(term: "kou") } ],
       # UDR-0072 §3.2 : l'accueil de la direction (carte « Établissement » et « Niveaux ») remplace « Travail des élèves ».
+      # Gardé 5 minutes (ADR-0065, amendement du 2026-10-04) : le budget porte sur l'entrée chaude, comme le pilotage année.
       "Accueil" => [ SCREEN_MS, -> { Queries::School::DirectionHomeQuery.new.call(school_id: @focus) } ]
     }
 
@@ -63,6 +64,9 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
                 "pilotage année", cold)
     cold_filtered = p95_ms { filtered_dashboard("year", today, largest, cache: ActiveSupport::Cache::NullStore.new) }
     puts format("\n[PERF] %-20s p95 %6.1f ms (à froid ; noté, non budgété)", "pilotage filtré année", cold_filtered)
+    cold_home = p95_ms { Queries::School::DirectionHomeQuery.new(cache: ActiveSupport::Cache::NullStore.new).call(school_id: @focus) }
+    puts format("\n[PERF] %-20s p95 %6.1f ms (à froid, une lecture toutes les 5 minutes par établissement ; noté, non budgété)",
+                "Accueil", cold_home)
     measured.each { |name, (budget, p95)| assert_operator p95, :<, budget, name }
   end
 

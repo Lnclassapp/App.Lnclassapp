@@ -16,7 +16,8 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
     @exercise = create_exercise
   end
 
-  def home(school: @school) = Query.new.call(school_id: school.id)
+  # Les définitions se lisent en direct ; le cache de 5 minutes a ses propres tests, plus bas (AD-23).
+  def home(school: @school, cache: ActiveSupport::Cache::NullStore.new) = Query.new(cache:).call(school_id: school.id)
 
   def classroom(name, level: @third, school: @school, taught: true, **)
     create_classroom(school:, level:, name:, **).tap do |klass|
@@ -172,6 +173,46 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
 
     assert_equal small, count_queries { home }
     assert_operator small, :<=, 12
+  end
+
+  # AD-23 (ADR-0065, amendement du 2026-10-04 ; budget de l'ADR-0067) : l'accueil garde ses chiffres, ses alertes et ses
+  # bulles 5 minutes par établissement et par année scolaire, comme le pilotage de l'équipe garde son année.
+  test "AD-23: the home gives the same figures cold, warm and without a cache" do
+    fill(classroom("3ème 1"), students: 2, assignments: 1, handed: [ 1 ])
+    cache = ActiveSupport::Cache::MemoryStore.new
+    live = home
+
+    assert_equal live, home(cache:), "cold entry"
+    assert_equal live, home(cache:), "warm entry"
+  end
+
+  test "AD-23: a second read within 5 minutes runs no query; the figures are late at 4 min 59 s, fresh at 5 min 01 s" do
+    fill(classroom("3ème 1"), students: 2, assignments: 1, handed: [ 1 ])
+    cache = ActiveSupport::Cache::MemoryStore.new
+    read_at = Time.current
+    home(cache:)
+
+    assert_equal 0, count_queries { home(cache:) }
+
+    fill(classroom("3ème 2"), students: 1, assignments: 0)
+    travel_to(read_at + 4.minutes + 59.seconds) { assert_equal 1, home(cache:).figures.classrooms }
+    travel_to(read_at + 5.minutes + 1.second) { assert_equal 2, home(cache:).figures.classrooms }
+  end
+
+  test "AD-23: two schools never share an entry" do
+    other = create_school(name: "Lycée Classique d'Abidjan")
+    classroom("3ème 1")
+    cache = ActiveSupport::Cache::MemoryStore.new
+
+    assert_equal "Lycée Moderne de Cocody", home(cache:).school_name
+    assert_equal [ "Lycée Classique d'Abidjan", 0 ], home(school: other, cache:).then { [ it.school_name, it.figures.classrooms ] }
+  end
+
+  test "AD-23: by default, the home reads through Rails.cache" do
+    classroom("3ème 1")
+    Query.new.call(school_id: @school.id)
+
+    assert_equal 0, count_queries { Query.new.call(school_id: @school.id) }
   end
 
   private
