@@ -61,8 +61,16 @@ module UseCases
       class FakePhotos
         include Ports::Identity::ProfilePhotoStorePort
 
-        def initialize(journal) = @journal = journal
-        def remove(user_id:) = @journal << [ :photo_removed, user_id ]
+        def initialize(journal, failing: nil)
+          @journal = journal
+          @failing = failing
+        end
+
+        def remove(user_id:)
+          raise IOError, "stockage indisponible" if user_id == @failing
+
+          @journal << [ :photo_removed, user_id ]
+        end
       end
 
       class FakeLoginAttempts
@@ -98,12 +106,12 @@ module UseCases
                                     joined_at: archived_at - 86_400, archived_at:, archived_by_id: 5)
       end
 
-      def purge(staffs:, actor: nil)
+      def purge(staffs:, actor: nil, failing_photo: nil)
         @journal = Journal.new
         @staffs = FakeStaffs.new(staffs, @journal)
         @transaction = FakeTransaction.new
         PurgeArchivedStaff.new(staffs: @staffs, users: FakeUsers.new(@journal), sessions: FakeSessions.new(@journal),
-                               photos: FakePhotos.new(@journal), login_attempts: FakeLoginAttempts.new(@journal),
+                               photos: FakePhotos.new(@journal, failing: failing_photo), login_attempts: FakeLoginAttempts.new(@journal),
                                second_factors: FakeSecondFactors.new(@journal),
                                pin_recoveries: FakePinRecoveries.new(@journal), audit_log: FakeAudit.new(@journal),
                                transaction: @transaction, policy: Policies::School::PurgeArchivedStaffPolicy.new,
@@ -127,16 +135,23 @@ module UseCases
         result = purge(staffs: [ staff(11, AT - 60), staff(12, AT - 86_400), staff(13, AT + 86_400) ])
 
         assert result.success?
-        assert_equal 2, result.value
+        assert_equal PurgeArchivedStaff::Purged.new(deleted: 2, failed: []), result.value
         assert_equal AT, @staffs.asked_at
         assert_equal 2, @transaction.calls
         assert_equal erasure_of(11) + erasure_of(12), @journal.calls
       end
 
+      test "un compte en échec n'arrête pas les suivants : il est rendu dans failed, les autres sont supprimés" do
+        result = purge(staffs: [ staff(11, AT - 60), staff(12, AT - 120) ], failing_photo: 11)
+
+        assert_equal PurgeArchivedStaff::Purged.new(deleted: 1, failed: [ 11 ]), result.value
+        assert_equal erasure_of(12), @journal.calls
+      end
+
       test "sans compte échu, rien n'est écrit et le nombre est zéro" do
         result = purge(staffs: [ staff(13, AT + 60) ])
 
-        assert_equal 0, result.value
+        assert_equal PurgeArchivedStaff::Purged.new(deleted: 0, failed: []), result.value
         assert_empty @journal.calls
         assert_equal 0, @transaction.calls
       end

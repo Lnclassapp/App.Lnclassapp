@@ -5,6 +5,9 @@
 module UseCases
   module School
     class PurgeArchivedStaff
+      # deleted : comptes supprimés ; failed : user_id des comptes en échec, rejoués la nuit suivante (aucune donnée personnelle).
+      Purged = Data.define(:deleted, :failed)
+
       def initialize(staffs:, users:, sessions:, photos:, login_attempts:, second_factors:, pin_recoveries:, audit_log:,
                      transaction:, policy:, clock:)
         @staffs = staffs
@@ -20,18 +23,26 @@ module UseCases
         @clock = clock
       end
 
-      # at : l'échéance, archivés strictement avant (now - RETENTION_DAYS). → success(nombre supprimé) | :forbidden
+      # at : l'échéance, archivés strictement avant (now - RETENTION_DAYS). → success(Purged) | :forbidden
+      # Un compte en échec n'arrête pas les suivants : sa transaction est annulée, il reste archivé et repasse le lendemain.
       def call(at:, actor: nil)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
 
         now = @clock.now
         due = @staffs.archived_before(at:)
-        due.each { |staff| @transaction.call { purge(staff, now) } }
-        Shared::Result.success(due.size)
+        failed = due.filter_map { |staff| staff.user_id unless purged?(staff, now) }
+        Shared::Result.success(Purged.new(deleted: due.size - failed.size, failed:))
       end
 
       private
+
+      def purged?(staff, now)
+        @transaction.call { purge(staff, now) }
+        true
+      rescue StandardError
+        false
+      end
 
       # L'ordre d'AnonymizeUser, sans adhésions ni données d'apprentissage, propres aux élèves (ADR-0077 §4.3 amendé). Le nom
       # de l'ADR-0036 §4 : « Compte supprimé ». Les tentatives de connexion portent le numéro, lu avant d'être effacé.

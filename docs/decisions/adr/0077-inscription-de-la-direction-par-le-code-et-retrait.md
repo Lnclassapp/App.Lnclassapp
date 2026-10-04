@@ -112,7 +112,7 @@ Le plafond vit dans le domaine : `Entities::School::Staff::CODE_CAP = 3`, `NEWCO
 
 - Une direction entre seule, depuis la page d'accueil, avec un code qu'elle a déjà.
 - Un code qui fuit ouvre au plus 3 comptes, et un imposteur récent ne peut rien retirer.
-- Un retrait abusif se répare pendant 30 jours ; ensuite, aucune donnée personnelle ne reste.
+- Un retrait abusif se répare pendant 30 jours ; ensuite, le compte est effacé comme un compte élève supprimé (ADR-0036 §4).
 - `school_staffs` sait enfin d'où vient chaque direction et si elle est encore là.
 
 ### 🔴 Coûts consentis
@@ -122,6 +122,7 @@ Le plafond vit dans le domaine : `Entities::School::Staff::CODE_CAP = 3`, `NEWCO
 - Les 3 places peuvent être prises par des imposteurs : la vraie direction passe alors par l'équipe (invitation, hors plafond).
 - La connexion d'un compte archivé reçoit le même refus qu'un mauvais PIN : le compte n'est pas révélé, mais la vraie direction retirée ne comprend pas tout de suite pourquoi.
 - Un nouveau verrou de ligne sur `schools` à chaque inscription par le code.
+- Comme pour un élève supprimé, deux traces gardent le numéro ou l'IP après la suppression : la ligne `invitations` d'une direction invitée (`contact`), et l'`ip_address` des événements d'audit du compte. Leur effacement vaut pour toute suppression de compte, pas pour ce seul chantier : il est reporté (journal, dette).
 - `DeleteUserPolicy` reste limitée aux comptes élèves : la suppression d'un compte direction ne passe que par la tâche à J+30.
 
 ## 6. Notes d'implémentation

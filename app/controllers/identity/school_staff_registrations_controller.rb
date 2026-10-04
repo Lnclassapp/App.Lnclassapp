@@ -6,7 +6,7 @@ module Identity
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_code].freeze
 
     allow_unauthenticated_access
-    rate_limit to: 10, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many }
+    rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many }
 
     def new
       return redirect_to_home if authenticated?

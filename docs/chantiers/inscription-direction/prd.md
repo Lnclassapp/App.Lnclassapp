@@ -46,7 +46,7 @@ La direction d'un établissement n'entre aujourd'hui que par une invitation de l
 | Code de classe | 422, message « code de classe » |
 | 3 directions actives par le code | 422, « Votre établissement a déjà 3 comptes direction créés avec son code. Contactez l'équipe Lnclass. » ; aucun compte créé |
 | Numéro déjà lié à un compte | 422, « Ce numéro a déjà un compte Lnclass. Utilisez un autre numéro. » |
-| Plus de 10 envois par minute | 429, « Trop de tentatives » |
+| Plus de 5 envois par minute | 429, « Trop de tentatives » |
 | Direction connectée qui ouvre la page d'inscription | Redirection vers son accueil |
 | Une direction tente de se retirer (requête forgée) | 403 ; rien n'est écrit |
 | Une direction de moins de 7 jours retire (requête forgée) | 403 ; rien n'est écrit |
@@ -97,8 +97,8 @@ Quand un visiteur s'inscrit avec ce numéro et le code de A
 Alors la page répond 422 avec « Ce numéro a déjà un compte Lnclass. Utilisez un autre numéro. »
 
 # ID-07
-Quand une même IP envoie 11 inscriptions en une minute
-Alors la 11ᵉ reçoit 429 « Trop de tentatives »
+Quand une même IP envoie 6 inscriptions en une minute
+Alors la 6ᵉ reçoit 429 « Trop de tentatives »
 
 # ID-08
 Étant donné qu'une invitation de direction est acceptée
