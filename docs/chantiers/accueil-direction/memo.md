@@ -19,7 +19,7 @@ Rien n'y dit à la direction ce qui demande son attention (une classe sans ensei
 Le porteur demande (2026-10-04) que la page principale de la direction s'organise en quatre sections :
 
 1. **Établissement** : une carte qui réunit les alertes et les informations sur les classes ;
-2. **Niveaux** : tous les niveaux de l'établissement, chacun avec son icône et son nom, sur le même principe que la section cours de l'enseignant : un niveau mène aux seules classes de ce niveau ;
+2. **Niveaux** : tous les niveaux de l'établissement, chacun avec son icône et son nom, sur le même principe que la section « Cours » de l'accueil enseignant (une bulle par niveau) : un niveau mène aux seules classes de ce niveau ;
 3. **Annonces** ;
 4. **Activité récente**.
 
@@ -43,6 +43,7 @@ Le porteur demande (2026-10-04) que la page principale de la direction s'organis
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
+| Q1. Les annonces n'existent pas sur `Develop` : ce chantier les construit-il ? | **Non** : un chantier `annonces` est en cours sur sa propre branche (porteur, 2026-10-04). | Ce chantier **ne construit rien** des annonces : il les **affiche** sur l'accueil de la direction, en lisant ce que le chantier `annonces` fournit. **Dépendance** : la section ne peut se coder qu'après le merge d'`annonces` dans `Develop`. Écart à trancher : `annonces` a décidé que le carrousel reste propre à l'accueil élève et que la direction lit ses annonces sur une page « Annonces » de sa navigation ; une section sur l'accueil de la direction est un **ajout** à l'UDR-0071, pas une contradiction. Fichier partagé probable : `navigation_helper` (le Lot D d'`annonces` y ajoute « Annonces »). |
 
 ## Cas limites identifiés
 
