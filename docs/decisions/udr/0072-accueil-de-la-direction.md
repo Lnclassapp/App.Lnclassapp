@@ -183,7 +183,7 @@ Ces trois tokens ne servent **qu'aux pastilles et à leur légende** de l'espace
       - `student_joined` : « %{student} a rejoint %{classroom} » ; `student` = prénom + initiale du nom et point (« Awa K. ») ;
       - `teacher_joined` : « %{teacher} a rejoint l'établissement » (sans lien) ;
     - `time.shrink-0.text-xs.text-mute.tabular-nums` `datetime` ISO, texte « 10:42 ».
-  - Erreur du frame (réponse non 2xx) : l'état d'erreur commun de Turbo (`ui_error_state`) dans le frame ; le reste de la page reste affiché.
+  - Erreur du frame : une panne de la base (`ActiveRecord::ActiveRecordError`) est journalisée (`Rails.error.report`, comme le compteur de lecture des articles, ADR-0074 §4.7) et le contrôleur répond **503** avec le même frame portant `ui_error_state`, dont « Réessayer » recharge l'accueil ; le reste de la page reste affiché. Toute autre erreur remonte. *(Précisé au Lot C : sans JavaScript nouveau, seule la réponse peut porter cet état.)*
 
 ### 3.12 Légende du signal (`school_admin/shared/_signal_legend`)
 

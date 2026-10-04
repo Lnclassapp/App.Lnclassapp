@@ -9,6 +9,8 @@
 | 2026-10-04 | Grill mené à partir de Q5 en **décisions par défaut** de l'agent, sans aller-retour | Consigne du porteur : « prendre des décisions, c'est autonome ; pose-moi la question si et seulement si tu doutes » | Non |
 | 2026-10-04 | Le Lot 0 est exécuté par l'orchestrateur lui-même, sur la branche de chantier | Lot séquentiel et court ; aucun gain à un worktree pour un seul agent | Non |
 | 2026-10-04 | Le Lot D n'a plus de test système ; AD-15 se prouve au niveau contrôleur | `script/ci/test_timings.yml` (budget système de 15 s par chantier) aurait été touché par D et E en parallèle : collision trouvée au Lot 0, le fichier reste au seul Lot E | Non |
+| 2026-10-04 | Lot C : une panne de la base dans le frame d'activité répond 503 avec `ui_error_state`, journalisée | L'UDR exigeait un état d'erreur dans le frame ; sans JavaScript, seule la réponse peut le porter. Motif existant : compteur des articles (ADR-0074 §4.7). UDR-0072 §3.11 précisée | Non |
+| 2026-10-04 | Lot C : un enseignant retiré mais non anonymisé garde son nom sur ses devoirs passés | Écart memo ↔ UDR relevé par l'exécutant ; l'UDR l'emporte (fait daté, seul l'anonymisé est masqué). Memo corrigé | Non |
 | 2026-10-04 | Lot B : le nombre de la moyenne est mis en valeur comme celui du taux (`font-medium text-ink`) ; UDR-0072 §3.8 précisée | Lecture de l'exécutant (« même rendu » pour les deux lignes), retenue : deux chiffres voisins, un seul style | Non |
 | 2026-10-04 | Lot B : le test rouge et le code sont dans le même commit | Le pre-commit refuse un test rouge ; le rouge d'abord est prouvé par le rapport de l'exécutant (9 erreurs `MissingController` avant le code), pas par l'historique | Non |
 | 2026-10-04 | La pastille de la bulle n'ajoute `relative` au rond que si elle est présente | UDR-0072 §3.5 : sans signal, la bulle reste strictement celle de l'UDR-0069 (accueil enseignant inchangé) | Non |
@@ -37,7 +39,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Un frame différé en échec réseau (ou 500 hors de son contrôleur) affiche le « Content missing » de Turbo, sur l'accueil de la direction comme sur celui de l'élève | Corriger demande un écouteur `turbo:frame-missing` commun (JavaScript), hors du périmètre de l'UDR-0072 | à ouvrir : état d'erreur commun des frames différés |
 
 ## Clôture
 

@@ -81,7 +81,7 @@ L'espace direction simple est en production depuis la V2 et s'est enrichi (page 
 - **Aucune annonce lisible** : pas de section « Annonces » (règle du carrousel).
 - **Toutes les annonces masquées** : la section garde son lien « Toutes les annonces », sans bande (règle du carrousel).
 - **Aucune activité en 30 jours** : « Rien de nouveau ces 30 derniers jours ».
-- **Enseignant anonymisé ou parti** : ses devoirs passés restent dans l'activité, signés de sa fonction seule (« Un enseignant a donné … »).
+- **Enseignant anonymisé** : ses devoirs passés restent dans l'activité, signés de sa fonction seule (« Un enseignant a donné … »). **Enseignant retiré mais non anonymisé** : ses devoirs passés restent signés de son nom (« M. Kouassi ») — c'est un fait daté, et l'UDR-0072 §3.11 ne masque que l'anonymisé *(précisé au Lot C)*.
 - **Élève anonymisé** : son arrivée disparaît de l'activité.
 - **Plus de 3 classes dans une alerte** : trois noms puis « et N autres ».
 
