@@ -22,6 +22,14 @@ fr:
         activity_title: "Activité récente"
         activity_subtitle: "Les derniers cours, exercices et imports, tous statuts confondus"
       # ADR-0036, amendement 2 : le rappel des demandes de suppression, pour l'admin seul.
+      # UDR-0070 §3.5 : directions retirées, à vérifier avant leur suppression (admin, field).
+      archived_staff:
+        title: "Directions retirées"
+        subtitle: "À vérifier avant leur suppression"
+        line: "%{name} · %{school} · retiré le %{date}"
+        more:
+          one: "Et 1 autre, sur la fiche de son établissement."
+          other: "Et %{count} autres, sur les fiches de leurs établissements."
       deletion_requests:
         title: "Demandes de suppression"
         pending:

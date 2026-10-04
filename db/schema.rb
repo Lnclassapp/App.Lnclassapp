@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_03_130000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_04_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -557,13 +557,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_130000) do
   end
 
   create_table "school_staffs", force: :cascade do |t|
+    t.datetime "archived_at"
+    t.bigint "archived_by_id"
     t.datetime "created_at", null: false
     t.bigint "invited_by_id"
+    t.string "joined_via", default: "invitation", null: false
     t.bigint "school_id", null: false
     t.bigint "user_id", null: false
+    t.index ["archived_at"], name: "index_school_staffs_on_archived_at", where: "(archived_at IS NOT NULL)"
+    t.index ["archived_by_id"], name: "index_school_staffs_on_archived_by_id"
     t.index ["invited_by_id"], name: "index_school_staffs_on_invited_by_id"
+    t.index ["school_id", "joined_via"], name: "index_school_staffs_on_school_id_and_joined_via", where: "(archived_at IS NULL)"
     t.index ["school_id"], name: "index_school_staffs_on_school_id"
     t.index ["user_id"], name: "index_school_staffs_on_user_id", unique: true
+    t.check_constraint "(archived_at IS NULL) = (archived_by_id IS NULL)", name: "school_staffs_archived_together"
+    t.check_constraint "joined_via::text = ANY (ARRAY['invitation'::character varying, 'code'::character varying]::text[])", name: "school_staffs_joined_via_values"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -928,6 +936,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_130000) do
   add_foreign_key "school_join_requests", "users", column: "decided_by_id", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "school_staffs", "schools", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", column: "archived_by_id", on_delete: :restrict
   add_foreign_key "school_staffs", "users", column: "invited_by_id", on_delete: :restrict
   add_foreign_key "school_staffs", "users", on_delete: :restrict
   add_foreign_key "schools", "drenas", on_delete: :restrict

@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/classrooms/index — « Travail des élèves », accueil de la direction (DS-05, DS-07, DS-10, FU-21) %>
-<%# Rôle : une ligne par classe de l'année ; le tableau défile dans sa carte sur téléphone, jamais la page ; aucun bouton %>
-<%# ADR  : 0036, 0065 · UDR : 0005, 0052, 0054 · « — » (aria-hidden) + « non calculé » (sr-only) ; aides natives (<details>) ; lien « Anciens élèves » (lot R) %>
+<%# Rôle : bandeau d'arrivée des directions (ID-10) ; une ligne par classe de l'année, le tableau défile dans sa carte ; aucun bouton %>
+<%# ADR  : 0036, 0065, 0077 · UDR : 0005, 0052, 0054, 0070 · « — » (aria-hidden) + « non calculé » (sr-only) ; aides natives (<details>) ; lien « Anciens élèves » (lot R) %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "student_work" %>
 <% percent = lambda do |value|
@@ -10,6 +10,16 @@
    end %>
 <% tips = { submission_rate: :submission_rate, average: :average } %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, year: @overview.school_year) %>
+
+<% if @arrivals.any? %>
+  <%# Le premier du mois s'écrit « 1er » (UDR-0056, comme departed_teachers/index). %>
+  <% fmt = ->(time) { date = time.to_date; date.day == 1 ? "1er #{l(date, format: "%B %Y")}" : l(date, format: :long) } %>
+  <div id="staff_arrivals" role="status" class="mb-6 rounded-ln bg-school/10 px-4 py-3 text-sm text-ink">
+    <% @arrivals.each do |arrival| %>
+      <p><%= t(".arrivals.line", name: arrival.name, date: fmt.(arrival.joined_at), via: t(".arrivals.via.#{arrival.joined_via}")) %></p>
+    <% end %>
+  </div>
+<% end %>
 
 <%= ui_card id: "student_work" do %>
   <% if @overview.classrooms.empty? %>

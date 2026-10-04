@@ -18,6 +18,12 @@ fr:
         title: "Travail des élèves"
         subtitle: "%{school} · Année %{year}"
         caption: "Travail des élèves par classe"
+        # UDR-0070 §3.3 : bandeau d'arrivée d'une autre direction, 7 jours.
+        arrivals:
+          line: "%{name} a rejoint la direction le %{date} (%{via})."
+          via:
+            code: "avec le code de l'établissement"
+            invitation: "sur invitation de l'équipe"
         columns:
           classroom: "Classe"
           students: "Élèves"
