@@ -142,7 +142,7 @@ Pourquoi D existe : `test/system/role_homes_test.rb` compte les entrées de navi
 ## Lot D — Navigation et parcours de bout en bout
 
 - **Couche**       : delivery + ui + tests système
-- **Fichiers**     : `app/helpers/navigation_helper.rb` (`DESTINATIONS` des trois rôles adultes, `NAV_GRIDS` à 6)
+- **Fichiers**     : `app/helpers/navigation_helper.rb` (`DESTINATIONS` des trois rôles adultes ; `NAV_GRIDS` inchangé depuis l'UDR-0068 : l'équipe passe à 5 entrées)
                      `test/helpers/navigation_helper_test.rb`
                      `test/system/role_homes_test.rb` · `test/system/design_system_test.rb`
                      `test/system/communication/announcements_journey_test.rb`
