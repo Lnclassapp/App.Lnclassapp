@@ -1,0 +1,21 @@
+<%# 🌐 UI · communication/authored_messages/index — « Mes annonces » de l'équipe, d'une direction ou d'un enseignant %>
+<%# Rôle : onglets par URL, une ligne par annonce (vignette, titre, destinataires · dates, statut, menu), 20 par page ; état vide avec action %>
+<%# ADR  : 0078 · UDR : 0005, 0071 (§3.7) %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "announcements" %>
+<%= ui_page_header title: t("communication.tabs.label") do %>
+  <%= ui_button t(".new"), href: new_announcement_path, icon: "plus", variant: :primary %>
+<% end %>
+<%= render "communication/shared/tabs", current: :mine, role: current_actor.role %>
+
+<% if @page.rows.any? %>
+  <%= ui_card id: "my_announcements" do %>
+    <ul class="-mx-5 divide-y divide-line sm:-mx-6">
+      <%= render partial: "row", collection: @page.rows, as: :row %>
+    </ul>
+  <% end %>
+  <%= ui_pagination page: @page.page, pages: @page.pages %>
+<% else %>
+  <%= ui_empty_state title: t(".empty"), icon: "megaphone",
+                     action: { label: t(".new"), href: new_announcement_path, icon: "plus" } %>
+<% end %>

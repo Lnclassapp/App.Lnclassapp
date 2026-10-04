@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069 · ADR : 0009, 0049, 0067
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071 · ADR : 0009, 0049, 0067
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -253,17 +253,19 @@ module ComponentsHelper
   # Groupe de boutons radio : `fieldset` et `legend`, une option de 48 px par choix `[libellé, valeur]`, la valeur
   # de l'objet cochée. L'aide et la première erreur, sous le groupe, sont reliées à chaque option.
   def ui_radio_group(form, method, choices:, label: nil, hint: nil, required: false, columns: 2)
-    grid = RADIO_COLUMNS.fetch(columns) do
-      raise ArgumentError, "ui_radio_group columns : « #{columns} » inconnu (#{RADIO_COLUMNS.keys.join(', ')})"
-    end
-    id = form.field_id(method)
-    error = field_errors(form.object, method).first
-    described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact.join(" ").presence
-    input_html = { required:, class: RADIO_INPUT, "aria-invalid": ("true" if error), "aria-describedby": described_by }
+    group = choice_group("ui_radio_group", form, method, label:, hint:, columns:)
+    render "components/radio_group", **group.except(:aria), choices:, required:,
+           input_html: { required:, class: RADIO_INPUT, **group[:aria] }
+  end
 
-    render "components/radio_group", form:, method:, choices:, id:, hint:, error:, required:, grid:, input_html:,
-           option_class: class_names(RADIO_OPTION, RADIO_STATES[error ? :invalid : :valid]),
-           label: label || field_label(form.object, method)
+  # Groupe de cases à cocher (UDR-0071 §3.8), pendant de `ui_radio_group` : mêmes `fieldset`, options et aide ; les
+  # valeurs de l'objet (un tableau) sont cochées. Un champ caché vide envoie le tableau même sans case cochée.
+  # `required:` ne pose que l'astérisque : `required` sur chaque case exigerait de toutes les cocher ; le serveur
+  # refuse un groupe vide.
+  def ui_checkbox_group(form, method, choices:, label: nil, hint: nil, required: false, columns: 2)
+    group = choice_group("ui_checkbox_group", form, method, label:, hint:, columns:)
+    render "components/checkbox_group", **group.except(:aria), choices:, required:,
+           input_html: { multiple: true, class: FIELD_CHECKBOX, **group[:aria] }
   end
 
   # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
@@ -352,9 +354,10 @@ module ComponentsHelper
 
   # Le message est rendu côté serveur, dans le HTML du toast : il survit au Turbo Stream comme à la redirection.
   # `persistent: true` garde le toast jusqu'à sa fermeture ; une erreur l'est toujours.
-  def ui_toast(message, type: :info, title: nil, persistent: false)
+  # `action: { label:, href:, method: }` (UDR-0071 §3.6) ajoute un bouton entre le texte et la croix (« Annuler »).
+  def ui_toast(message, type: :info, title: nil, persistent: false, action: nil)
     config = option!(TOAST_TYPES, type, "ui_toast type")
-    render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay]
+    render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay], action:
   end
 
   # Un flash est un message, ou { "message", "title" } quand le titre du type ne dit pas la situation. Toute autre valeur
@@ -369,8 +372,8 @@ module ComponentsHelper
     FLASH_TYPES.fetch(key) { TOAST_TYPES.key?(key) ? key : :info }
   end
 
-  def turbo_stream_toast(message, type: :info, title: nil)
-    turbo_stream.append("toasts", ui_toast(message, type:, title:))
+  def turbo_stream_toast(message, type: :info, title: nil, action: nil)
+    turbo_stream.append("toasts", ui_toast(message, type:, title:, action:))
   end
 
   def ui_empty_state(title:, description: nil, icon: "inbox", action: nil, &block)
@@ -458,6 +461,21 @@ module ComponentsHelper
 
   def option!(table, key, component)
     table.fetch(key.to_sym) { raise ArgumentError, "#{component} : « #{key} » inconnu (#{table.keys.join(', ')})" }
+  end
+
+  # Ce que partagent les groupes de radios et de cases : grille, id, aide, première erreur, libellé, classe d'option,
+  # et les attributs ARIA de chaque contrôle.
+  def choice_group(component, form, method, label:, hint:, columns:)
+    grid = RADIO_COLUMNS.fetch(columns) do
+      raise ArgumentError, "#{component} columns : « #{columns} » inconnu (#{RADIO_COLUMNS.keys.join(', ')})"
+    end
+    id = form.field_id(method)
+    error = field_errors(form.object, method).first
+    described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact.join(" ").presence
+
+    { form:, method:, id:, hint:, error:, grid:, label: label || field_label(form.object, method),
+      option_class: class_names(RADIO_OPTION, RADIO_STATES[error ? :invalid : :valid]),
+      aria: { "aria-invalid": ("true" if error), "aria-describedby": described_by } }
   end
 
   # Ferme le menu, rend le focus au bouton ⋮ puis ouvre la <dialog> : à sa fermeture, le focus revient au bouton.

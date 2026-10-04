@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
-<%# Rôle : « Bonjour » seul, puis les sections de HOME_SECTIONS[:student] (à faire, ma classe, cours) et l'activité, différée %>
-<%# ADR  : 0033, 0043 · UDR : 0006, 0057, 0058 §3.3, 0061 (carte d'aide) · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# Rôle : « Bonjour » seul, puis les sections de HOME_SECTIONS[:student] (à faire, annonces, ma classe, cours) et l'activité, différée %>
+<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0057, 0058 §3.3, 0061 (carte d'aide), 0071 §3.5 (annonces) · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <% exercises = @home.assigned_exercises %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name) do %>
@@ -30,6 +30,11 @@
       <% end %>
       <% if @home.pending_gaps.any? %>
         <%= render "pending_gaps", gaps: @home.pending_gaps %>
+      <% end %>
+    <% elsif key == :announcements %>
+      <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises (toutes masquées : le lien seul). %>
+      <% if @announcements.any_readable? %>
+        <%= render "communication/messages/carousel", carousel: @announcements %>
       <% end %>
     <% elsif key == :classroom %>
       <%= render "classroom_card", home: @home, icon: %>

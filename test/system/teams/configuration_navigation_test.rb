@@ -3,6 +3,7 @@ require "application_system_test_case"
 # RE-01, RE-02, RE-03 (UDR-0068 §3.2 to §3.4): the team's configuration — Référentiel, Imports — leaves the daily
 # destinations. On a wide screen it is the second card of the sidebar, « Configuration »; on a 390 px phone, the fifth
 # case of the bottom bar, « Plus », opens upwards a menu of the same entries, and is current on each of their pages.
+# AN-22 (chantier annonces, owner's decision of 2026-10-04): « Annonces » closes the same list, followed by role_homes_test.
 # The links of the tiles, the aria-current of each page and the 403 are checked at the controller level
 # (test/controllers/teams/referentials_controller_test.rb, teams/imports_controller_test.rb): the system suite has a budget.
 class Teams::ConfigurationNavigationTest < ApplicationSystemTestCase
@@ -31,7 +32,7 @@ class Teams::ConfigurationNavigationTest < ApplicationSystemTestCase
     end
     # Shown in capitals by CSS: the title is read as written, the name of the second navigation.
     assert_equal tn("sidebar.secondary_label.team"), evaluate_script("document.getElementById('sidebar_secondary_title').textContent").squish
-    assert_equal [ tn(:referential), tn(:imports) ], labels("nav#sidebar_secondary", "a")
+    assert_equal [ tn(:referential), tn(:imports), tn(:announcements) ], labels("nav#sidebar_secondary", "a")
 
     within("nav#sidebar_secondary") { click_link tn(:referential) }
 
@@ -60,7 +61,7 @@ class Teams::ConfigurationNavigationTest < ApplicationSystemTestCase
       # Opened, the menu holds the focus on its first entry (dropdown controller, UDR-0068 « États obligatoires »).
       assert_equal tn(:referential), evaluate_script("document.activeElement.textContent").squish
       within("#bottom_bar_more_menu[role=menu]") do
-        assert_equal [ tn(:referential), tn(:imports) ], all("a[role=menuitem]").map { it.text.squish }
+        assert_equal [ tn(:referential), tn(:imports), tn(:announcements) ], all("a[role=menuitem]").map { it.text.squish }
         click_link tn(:imports)
       end
 

@@ -1,6 +1,6 @@
 <%# 🌐 UI · components/_toast — notification, appelée par ui_toast et turbo_stream_toast %>
 <%# Rôle : message rendu côté serveur ; l'erreur reste affichée jusqu'à fermeture (role="alert") %>
-<%# UDR  : 0006 · Stimulus : toast %>
+<%# UDR  : 0006, 0071 · Stimulus : toast ; action facultative (« Annuler ») entre le texte et la croix %>
 <%# Toast permanent (id unique) : un turbo_stream.refresh fusionne la page par morphing et retirerait le toast
     ajouté par le même stream. Il part toujours seul, par toast#dismiss. %>
 <%= tag.div id: "toast-#{SecureRandom.hex(4)}", role: (type == :error ? "alert" : nil), data: { turbo_permanent: true, controller: "toast", toast_delay_value: delay, toast_type: type,
@@ -12,6 +12,13 @@
     <p class="font-semibold text-ink"><%= title || t(".titles.#{type}") %></p>
     <p class="mt-0.5 text-sm text-mute"><%= message %></p>
   </div>
+  <% if action %>
+    <%# UDR-0071 §3.6. Le toast part au départ de la requête : retiré au clic, le formulaire quitterait la page avant
+        d'être envoyé. Turbo rend la réponse même quand le formulaire n'est plus dans la page. %>
+    <%= button_to action.fetch(:label), action.fetch(:href), method: action.fetch(:method, :post),
+                  form: { data: { action: "turbo:submit-start->toast#dismiss" } }, data: { turbo_stream: true },
+                  class: "min-h-tap shrink-0 rounded-ln px-3 text-sm font-bold text-brand-strong hover:bg-brand-soft" %>
+  <% end %>
   <button type="button" data-action="toast#dismiss" aria-label="<%= t(".dismiss") %>"
           class="-my-2 grid size-tap shrink-0 cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand">
     <%= ui_icon "x-mark" %>

@@ -1,0 +1,104 @@
+# « Mes annonces » et le formulaire d'annonce (chantier annonces, Lot A) — ADR-0078, UDR-0071 §3.7 et §3.8
+fr:
+  activemodel:
+    attributes:
+      dtos/communication/message_input:
+        title: "Titre"
+        body: "Texte"
+        scope: "Portée"
+        audience: "Destinataires"
+        classroom_public_ids: "Classes"
+        illustration: "Illustration"
+        image: "Image (facultative)"
+        audio: "Audio (facultatif)"
+        remove_image: "Retirer l'image"
+        remove_audio: "Retirer l'audio"
+        published_at: "Publier le"
+        visible_until: "Visible jusqu'au"
+    errors:
+      models:
+        dtos/communication/message_input:
+          attributes:
+            title:
+              blank: "Saisissez un titre."
+              too_long: "Le titre compte %{count} caractères au plus."
+            body:
+              blank: "Saisissez le texte de l'annonce."
+              too_long: "Le texte compte %{count} caractères au plus."
+            illustration:
+              inclusion: "Choisissez une illustration de la bibliothèque."
+            # UDR-0071 §3.8 : le type est lu dans le contenu, le poids vérifié avant toute lecture
+            image:
+              unsupported: "Ce fichier n'est pas accepté."
+              too_large: "Ce fichier est trop lourd (%{count} Mo au plus)."
+              too_wide: "L'image mesure %{count} pixels de côté au plus."
+            audio:
+              unsupported: "Ce fichier n'est pas accepté."
+              too_large: "Ce fichier est trop lourd (%{count} Mo au plus)."
+            published_at:
+              invalid: "Saisissez une date valide."
+              past: "Choisissez une date à venir, ou laissez vide pour publier dès l'envoi."
+            visible_until:
+              invalid: "Saisissez une date valide."
+              before_publication: "Choisissez un jour qui suit la publication."
+              too_late: "L'annonce reste visible 90 jours au plus."
+            # PRD §3 : aucune classe cochée (enseignant)
+            classroom_public_ids:
+              no_classroom: "Choisis au moins une de tes classes."
+  communication:
+    authored_messages:
+      # Design system §12 : « 5 oct. », « 1ᵉʳ nov. », « 5 oct. à 10:00 »
+      formats:
+        day: "%-d %b"
+        first_day: "1ᵉʳ %b"
+        time: "%H:%M"
+        day_and_time: "%{day} à %{time}"
+      # Fiche d'un établissement (équipe), menu ⋮ : UDR-0071 §3.8
+      school_entry: "Publier une annonce"
+      frozen: "Cette annonce est archivée ou retirée : elle ne peut plus être modifiée."
+      saved:
+        published: "Annonce publiée."
+        scheduled: "Annonce programmée pour le %{date}."
+        draft: "Brouillon enregistré."
+        edited: "Annonce modifiée."
+      index:
+        page_title: "Mes annonces · Annonces"
+        new: "Nouvelle annonce"
+        empty: "Vous n'avez encore publié aucune annonce."
+      row:
+        actions: "Actions pour « %{title} »"
+        edit: "Modifier"
+        archive: "Archiver"
+        archive_title: "Archiver cette annonce ?"
+        archive_text: "Elle disparaîtra pour tous ses destinataires et ne pourra plus être publiée."
+        cancel: "Annuler"
+        recipients: "%{place} · %{audience}"
+        line: "%{recipients} · %{dates}"
+        dates:
+          scheduled: "Programmée le %{date}"
+          published: "Publiée le %{date} · jusqu'au %{last_day}"
+          ended: "Terminée le %{date}"
+          archived: "Archivée le %{date}"
+          withdrawn: "Retirée le %{date}"
+      new:
+        page_title: "Nouvelle annonce · Annonces"
+        title: "Nouvelle annonce"
+      edit:
+        page_title: "Modifier l'annonce · Annonces"
+        title: "Modifier l'annonce"
+      form:
+        published_notice: "Cette annonce est publiée : la modifier la fera réapparaître chez les élèves qui l'avaient masquée."
+        one_school: "Pour un seul établissement, partez de sa fiche."
+        for_school: "Pour %{school}"
+        reselect: "Après une erreur, choisissez de nouveau vos fichiers."
+        hints:
+          title: "60 caractères au plus."
+          body: "140 caractères au plus. Les détails peuvent aller dans l'audio."
+          classrooms: "Les élèves de ces classes la verront."
+          image: "PNG, JPEG ou WebP, 2 Mo au plus. Elle remplace l'illustration."
+          audio: "MP3 ou M4A, 10 Mo au plus."
+          published_at: "Laissez vide pour publier dès l'envoi."
+          visible_until: "30 jours par défaut, 90 au plus."
+        cancel: "Annuler"
+        save_draft: "Enregistrer le brouillon"
+        publish: "Publier"
