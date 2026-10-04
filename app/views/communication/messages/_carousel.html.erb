@@ -1,0 +1,32 @@
+<%# 🌐 UI · communication/messages/_carousel — les annonces de l'accueil élève, en bande défilante (UDR-0071 §3.5) %>
+<%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage) ; défilement natif %>
+<%# ADR  : 0078 · UDR : 0005, 0071 · Stimulus : communication--carousel (points, focus) %>
+<% refocus = local_assigns.fetch(:refocus, false) %>
+<%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",
+                class: "rounded-card bg-mist p-2.5",
+                data: { controller: "communication--carousel", communication__carousel_refocus_value: (true if refocus) } do %>
+  <h2 id="student_home_announcements_title" class="sr-only" tabindex="-1"><%= t("shared.home.sections.announcements.title") %></h2>
+  <%# Toutes masquées : ni bande ni points, le lien reste. %>
+  <% if carousel.cards.any? %>
+    <ul class="scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto motion-safe:scroll-smooth"
+        data-communication--carousel-target="track">
+      <% carousel.cards.each do |card| %>
+        <li class="shrink-0 basis-11/12 snap-start sm:basis-1/2">
+          <%= render "communication/messages/card", card:, context: :carousel, dismissible: !card.official? %>
+        </li>
+      <% end %>
+    </ul>
+    <div class="hidden justify-center gap-1.5 pt-2" aria-hidden="true" data-communication--carousel-target="pager">
+      <% carousel.cards.each_index do |index| %>
+        <%# Les deux états sont écrits en entier : Tailwind ne compile que ce qu'il lit (le contrôleur les échange). %>
+        <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+              data-communication--carousel-target="dot"></span>
+      <% end %>
+    </div>
+  <% end %>
+  <p class="flex justify-end">
+    <%= link_to announcements_path, class: "inline-flex min-h-tap items-center gap-1 px-2 text-sm font-medium text-brand-strong" do %>
+      <%= t("communication.inboxes.carousel.all") %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
+    <% end %>
+  </p>
+<% end %>
