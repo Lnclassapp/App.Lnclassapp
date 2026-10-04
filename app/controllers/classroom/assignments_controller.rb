@@ -85,12 +85,12 @@ module Classroom
       end
     end
 
-    # UDR-0062 §3.4 : le toast d'une assignation datée dit l'échéance, au format long des échéances (`due_long`).
+    # UDR-0062 §3.4 : le toast d'une assignation datée finit sur l'échéance, formatée par DueDateHelper (un seul point).
     def toggle_message
       names = { name: @assignment.assignable.name, classroom: @classroom.name }
       return t(".done", **names) unless action_name == "create" && @assignment.due_on
 
-      t(".done_due", **names, date: l(@assignment.due_on, format: :due_long))
+      t(".done_due", **names, date: helpers.due_closing(@assignment.due_on))
     end
 
     # Retirée, la bascule redevient « Assigner » : la modale des jours tant que l'enseignant de la classe ne les a pas donnés.
