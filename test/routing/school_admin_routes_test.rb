@@ -9,7 +9,7 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
   def first_match(path, method: "GET")
     Rails.application.routes.routes
     request = ActionDispatch::Request.new(Rack::MockRequest.env_for(path, method:))
-    Rails.application.routes.router.recognize(request) { |_route, params| return params.slice(:controller, :action, :public_id) }
+    Rails.application.routes.router.recognize(request) { |_route, params| return params.slice(:controller, :action, :public_id, :slug) }
     nil
   end
 
@@ -29,8 +29,7 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
     assert_equal "/school-admin/levels/3eme", helpers.school_admin_level_path("3eme")
     assert_equal "/school-admin/activity", helpers.school_admin_activity_path
 
-    assert_equal({ controller: "school_admin/levels", action: "show" }, first_match("/school-admin/levels/3eme"))
-    assert_equal "3eme", Rails.application.routes.recognize_path("/school-admin/levels/3eme")[:slug]
+    assert_equal({ controller: "school_admin/levels", action: "show", slug: "3eme" }, first_match("/school-admin/levels/3eme"))
     assert_equal({ controller: "school_admin/activities", action: "show" }, first_match("/school-admin/activity"))
     %w[POST PATCH PUT DELETE].each do |method|
       %w[/school-admin/levels/3eme /school-admin/activity].each { assert_nil first_match(it, method:), "#{method} #{it}" }
