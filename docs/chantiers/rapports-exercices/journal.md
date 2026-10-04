@@ -38,7 +38,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| **Page classe hors budget** (ADR-0067) : déjà 143,7 ms et 197,5 Ko avant ce chantier ; 211,7 Ko après lui (D3 corrigé : trophée en `<symbol>`). La liste des élèves pèse 147,7 Ko à elle seule | Le dépassement précède ce chantier ; le réduire touche la liste des élèves (UDR-0027, UDR-0054), hors périmètre. L'ADR-0067 impose un chantier `optimize` | `optimize page-classe-legere` (à ouvrir) |
+| **`script/perf/dataset.rb` cassé** (D4) : il assigne encore des `Essential` et des `Course`, que la contrainte `classroom_assignments_type_values` refuse depuis l'ADR-0072, et ne sème aucune `question_attempts` | Hors périmètre ; mesure faite ici avec une enveloppe jetable (journal, rapport du challenger) | `optimize page-classe-legere` : réparer le jeu avant de mesurer |
+| À 320 px, la page classe défile en largeur à cause des boutons de la liste des élèves | Préexistant, hors du pied ajouté ici | `optimize page-classe-legere` ou `finitions-ux` |
 
 ## Rapport du challenger
 

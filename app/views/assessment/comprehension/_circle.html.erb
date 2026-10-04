@@ -3,7 +3,8 @@
 <%# ADR  : 0079 · UDR : 0072 (§3.3, §3.8) · size: :sm (page classe) ou :lg (section du suivi) %>
 <%# locals: (category:, done:, present:, size: :sm) -%>
 <% ratio = t("assessment.comprehension.done_ratio", done:, present:) %>
-<span class="inline-flex flex-wrap items-center gap-2">
+<%# Petit format : jamais coupé ni tronqué (le libellé rend la couleur lisible) ; c'est le pied qui passe à la ligne (Lot C, D2). %>
+<span class="<%= class_names("inline-flex items-center gap-2", size == :lg ? "flex-wrap" : "shrink-0") %>">
   <span class="<%= class_names("shrink-0 rounded-full", comprehension_dot_class(category), { sm: "size-4", lg: "size-14" }.fetch(size)) %>" aria-hidden="true"></span>
   <% if size == :lg %>
     <span class="flex flex-col">
@@ -11,6 +12,6 @@
       <span class="text-sm text-mute tabular-nums"><%= ratio %></span>
     </span>
   <% else %>
-    <span class="text-sm text-ink"><%= comprehension_label(category) %> · <span class="tabular-nums"><%= ratio %></span></span>
+    <span class="whitespace-nowrap text-sm text-ink"><%= comprehension_label(category) %> · <span class="tabular-nums"><%= ratio %></span></span>
   <% end %>
 </span>

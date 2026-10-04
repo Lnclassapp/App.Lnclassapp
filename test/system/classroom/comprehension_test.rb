@@ -118,6 +118,17 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
       within "#assignment_#{@assignment.public_id}" do
         assert_text "Acquis · 10/13"
         assert_selector "ul[aria-label='Badges de la classe'] li", count: 4
+        # UDR-0072 §3.4 : le cercle ne se coupe jamais ; s'il manque de place, il passe sous les badges, à droite.
+        footer = find("ul[aria-label='Badges de la classe']").find(:xpath, "..")
+        layout = page.evaluate_script(<<~JS, footer.native)
+          (() => {
+            const footer = arguments[0], label = footer.lastElementChild.querySelector(".whitespace-nowrap")
+            const f = footer.getBoundingClientRect(), l = label.getBoundingClientRect()
+            return { labelHeight: l.height, labelRight: f.right - l.right }
+          })()
+        JS
+        assert_operator layout["labelHeight"], :<, 24, "le libellé du cercle passe sur plusieurs lignes"
+        assert_operator layout["labelRight"], :<, 1, "le cercle n'est pas au bord droit du pied"
       end
       assert_no_horizontal_scroll "la page de la classe"
 

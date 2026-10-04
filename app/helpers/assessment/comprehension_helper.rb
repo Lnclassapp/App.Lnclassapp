@@ -9,6 +9,10 @@ module Assessment
                     stable: "arrow-long-right", stagnant: "arrow-long-right" }.freeze
     # Les tons de BadgesHelper::BADGE_LEVEL_TONES, appliqués à l'icône seule ; un palier à 0 s'atténue (UDR-0072 §3.3).
     BADGE_ICON_CLASSES = { bronze: "text-warning", silver: "text-mute", gold: "text-gold", diamond: "text-info" }.freeze
+    # Le trophée des paliers, défini une fois par page puis repris par <use> : 28 trophées en ligne pesaient 26,7 Ko sur
+    # la page classe (Lot C, D3 ; budget de l'ADR-0067).
+    TROPHY_SYMBOL_ID = "comprehension-trophy"
+    TROPHY_PATH = File.read(Rails.root.join("vendor/heroicons/20/solid/trophy.svg"))[%r{<path .*?/>}m].freeze
 
     # category : :struggling, :fragile, :acquired, ou nil (moins de 5 faits : pas encore lisible).
     def comprehension_dot_class(category)
@@ -34,6 +38,17 @@ module Assessment
 
     def comprehension_badge_class(level, count)
       count.zero? ? "text-line" : BADGE_ICON_CLASSES.fetch(level)
+    end
+
+    # Le premier appel d'une page émet aussi le <symbol> ; les suivants ne font que le reprendre.
+    def comprehension_trophy(css_class)
+      icon = tag.svg(tag.use(href: "##{TROPHY_SYMBOL_ID}"), viewBox: "0 0 20 20", fill: "currentColor",
+                     class: class_names("size-4 shrink-0", css_class), "aria-hidden": "true", focusable: "false")
+      return icon if @comprehension_trophy_defined
+
+      @comprehension_trophy_defined = true
+      symbol = tag.symbol(TROPHY_PATH.html_safe, id: TROPHY_SYMBOL_ID, viewBox: "0 0 20 20") # rubocop:disable Rails/OutputSafety -- fichier vendu, jamais une saisie
+      safe_join([ tag.svg(symbol, class: "absolute size-0 overflow-hidden", "aria-hidden": "true", focusable: "false"), icon ])
     end
   end
 end

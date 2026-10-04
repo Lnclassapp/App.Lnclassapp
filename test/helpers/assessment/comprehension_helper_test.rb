@@ -68,7 +68,7 @@ module Assessment
     test "the badge counts: always the four tiers in order, a zero faded, each tier told to screen readers" do
       render partial: "assessment/comprehension/badge_counts", locals: { counts: { bronze: 0, silver: 1, gold: 2, diamond: 3 } }
 
-      assert_dom "ul.flex.items-center.gap-3[aria-label=?]", "Badges de la classe" do
+      assert_dom "ul.flex.items-center.gap-2[aria-label=?]", "Badges de la classe" do
         assert_dom "li", count: 4
         assert_equal [ "0 Bronze", "1 Argent", "2 Or", "3 Diamant" ], css_select("li span.sr-only").map(&:text)
         assert_dom "li:nth-child(1) svg.text-line[aria-hidden=true]"
@@ -78,6 +78,24 @@ module Assessment
         assert_dom "li:nth-child(4) svg.text-info"
         assert_dom "li:nth-child(4) span.text-sm.tabular-nums.text-ink", text: "3"
       end
+    end
+
+    test "the trophy is defined once per page, then reused: a <symbol>, and one <use> per tier" do
+      counts = { bronze: 1, silver: 0, gold: 0, diamond: 2 }
+      2.times { render partial: "assessment/comprehension/badge_counts", locals: { counts: } }
+
+      assert_dom "symbol#comprehension-trophy[viewBox='0 0 20 20'] path", count: 1
+      assert_dom "svg use[href='#comprehension-trophy']", count: 8
+      assert_dom "svg.absolute.size-0[aria-hidden=true] symbol", count: 1
+    end
+
+    test "the small circle never breaks nor truncates: the label makes the colour readable" do
+      render partial: "assessment/comprehension/circle", locals: { category: nil, done: 4, present: 25 }
+
+      assert_dom "span.inline-flex.shrink-0:not(.flex-wrap)" do
+        assert_dom "span.whitespace-nowrap.text-sm.text-ink", text: "Pas encore lisible · 4/25"
+      end
+      assert_dom ".truncate", count: 0
     end
   end
 end

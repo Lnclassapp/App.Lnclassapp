@@ -87,7 +87,7 @@ Une catégorie ou un signe inconnu lève `KeyError` : jamais de gris silencieux.
 **`_badge_counts.html.erb`** — `locals: (counts:)` (`{ bronze:, silver:, gold:, diamond: }`, entiers)
 - `ul.flex.items-center.gap-3`, `aria-label` = « Badges de la classe ».
 - Une `li` par palier, **toujours les quatre**, dans l'ordre Bronze, Argent, Or, Diamant :
-  - `ui_icon "trophy", variant: :mini, size: :sm`, `aria-hidden` ;
+  - le trophée par `comprehension_trophy(classe)` : le premier appel d'une page émet un `<symbol id="comprehension-trophy">` (trophée mini de Heroicons), chaque palier le reprend par `<svg><use href="#comprehension-trophy"/></svg>`, `aria-hidden`. Amendement du Lot C (D3) : 28 trophées en ligne pesaient 26,7 Ko sur la page classe ;
   - le nombre en `text-sm tabular-nums` ;
   - un `span.sr-only` qui dit le palier : « 3 Bronze ».
 - Couleur de l'icône : `text-warning` pour le Bronze, `text-mute` pour l'Argent, `text-gold` pour l'Or, `text-info` pour le Diamant. Ce sont les tons existants de `BadgesHelper::BADGE_LEVEL_TONES`, appliqués à l'icône seule.
@@ -104,7 +104,7 @@ Fichier `app/views/classroom/classrooms/_assigned_exercises.html.erb`. **Seuleme
   - **droite**, isolé par le `justify-between` : `render "assessment/comprehension/circle", category: assignment.comprehension.category, done: counts.done, present: counts.done + counts.pending`.
 - Le pied est dans la zone du lien étiré : toute la ligne mène à la page de suivi, sans second lien. Le pied ne contient aucun élément interactif.
 - Le `div` du pied porte `class="relative"` seulement s'il doit passer au-dessus du lien. Ce n'est pas le cas ici.
-- Sur téléphone, le pied reste sur une ligne : badges à gauche, cercle à droite. Sous 360 px, le ratio peut passer sous la pastille (`flex-wrap` sur le partiel `_circle`).
+- **Le cercle ne se coupe ni ne se tronque jamais** : son libellé rend la couleur lisible (daltonisme). Le pied est `flex-wrap` (`gap-x-3 gap-y-2`) et le cercle est enveloppé d'un `span.ml-auto` : sur un écran assez large, une ligne ; sur un téléphone étroit (390 px et moins avec « Pas encore lisible »), le cercle passe **sous** les badges, toujours au bord droit. Amendement du Lot C (D2) : à 390 px, un pied d'une seule ligne coupait le libellé sur 3 à 4 lignes.
 - **Équipe** : identique.
 - **Sans `counts`** : ni pied, ni badges, ni cercle.
 

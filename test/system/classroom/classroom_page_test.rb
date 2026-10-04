@@ -116,8 +116,10 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert_selector "li", count: 1
       assert_text "Koffi Yao"
       assert_text "Fait le ven. 9 oct."
+      assert_no_text "Awa Bamba"
     end
-    assert_no_text "Awa Bamba"
+    # ADR-0079 §4.8 : Awa n'a pas encore fait l'exercice ; elle est nommée pour être relancée, jamais parmi les retards.
+    within("#pending_students") { assert_text "Awa Bamba" }
 
     click_on "Tle D 1"
     within("#classroom_courses") { click_on "La cellule" }

@@ -214,6 +214,6 @@ Scénario: budget de l'écran
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| p95 serveur, page classe (jeu ADR-0067) | à mesurer au Lot 0 | < 100 ms | **153,4 ms, 231,6 Ko : hors budget** (p50 99,2 ms ; 20 requêtes). Déjà hors budget avant le Lot A sur le même jeu : 143,7 ms, 197,5 Ko. Le pied ajoute 34,1 Ko, dont 26,7 Ko pour les 28 trophées SVG en ligne. Voir le [journal](journal.md#rapport-du-challenger) |
+| p95 serveur, page classe (jeu ADR-0067) | à mesurer au Lot 0 | < 100 ms | **153,4 ms, 231,6 Ko : hors budget** (p50 99,2 ms ; 20 requêtes). Déjà hors budget avant le Lot A sur le même jeu : 143,7 ms, 197,5 Ko. Le pied ajoute 34,1 Ko, dont 26,7 Ko pour les 28 trophées SVG en ligne. Voir le [journal](journal.md#rapport-du-challenger). **Après correction de D3** (trophée défini une fois par page, `<symbol>` et `<use>`) : **211,7 Ko**, soit +14,2 Ko au lieu de +34,1 Ko sur l'avant-chantier ; p95 183,8 ms sur une seule exécution de 30 requêtes, machine chargée (p50 113,7 ms ; 20 requêtes). Le dépassement de fond (liste des élèves : 147,7 Ko) précède ce chantier et part en chantier `optimize` (journal, dette) |
 | p95 serveur, page de suivi | à mesurer au Lot 0 | < 100 ms | **78,9 ms, 39,0 Ko** (p50 53,5 ms ; 18 requêtes). Cadre d'une catégorie : 48,8 ms, 25,4 Ko. Avant les lots A et B, même jeu : 62,8 ms, 17,3 Ko |
 | Requêtes SQL, page classe à 10 exercices assignés | à mesurer | même nombre qu'à 1 exercice | **20 à 10 exercices, 20 à 1** (test d'intégration) ; 20 en production avec les 7 exercices de la classe mesurée |
