@@ -1,7 +1,7 @@
 # 🔌 INFRA · Queries::School::DepartedStudentsQuery
 # Rôle : « Anciens élèves » de la direction : les élèves passés par ses classes, absents de ses classes de l'année, et leurs
 #        résultats obtenus chez elle (devoirs rendus de ses classes, score moyen)
-# ADR  : 0036, 0040, 0041, 0065 · UDR : 0052 · deux requêtes, quel que soit le volume ; compte anonymisé exclu (ADR-0036 §4)
+# ADR  : 0036, 0040, 0041, 0065, 0072 · UDR : 0052 · deux requêtes ; rendu : standard ou remédiation ; anonymisé exclu (ADR-0036 §4)
 module Queries
   module School
     class DepartedStudentsQuery
@@ -53,10 +53,11 @@ module Queries
                  .where(NOT_PRESENT, school_id:, school_year:)
       end
 
-      # Les devoirs rendus dans les classes de l'établissement : sessions terminées, standard, d'une de ses assignations.
+      # Les devoirs rendus dans les classes de l'établissement : sessions terminées d'une de ses assignations, remédiation
+      # comprise (ADR-0072 §4.4, complément ter), comme « Travail des élèves ».
       def totals(school_id, student_ids)
         Orm::ExerciseSession.joins(classroom_assignment: :classroom)
-                            .where(student_id: student_ids, status: "completed", kind: "standard", classrooms: { school_id: })
+                            .where(student_id: student_ids, status: "completed", classrooms: { school_id: })
                             .group(:student_id).pluck(*TOTALS)
                             .to_h { |id, submitted, score_sum, sessions| [ id, [ submitted, (score_sum.to_f / sessions).round ] ] }
       end

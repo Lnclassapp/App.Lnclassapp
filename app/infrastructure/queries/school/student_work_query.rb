@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::StudentWorkQuery
 # Rôle : « Travail des élèves » de la direction (DS-07 à DS-10) : chiffres de chaque classe de l'année, puis de ses élèves
-# ADR  : 0006, 0062, 0065 · UDR : 0052 · un nombre fixe de requêtes groupées, quel que soit le volume
+# ADR  : 0006, 0043, 0062, 0065, 0067, 0072 · UDR : 0052 · rendu : standard ou remédiation ; requêtes en nombre fixe
 module Queries
   module School
     class StudentWorkQuery
@@ -15,10 +15,11 @@ module Queries
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name levels.name].freeze
       # Un élève présent : adhésion non quittée, compte non anonymisé (ADR-0065 §4).
       PRESENT = "JOIN classroom_students ON classroom_students.student_id = users.id AND classroom_students.left_at IS NULL"
-      # Un devoir rendu : au moins une session terminée, standard, rattachée à un devoir de la classe. Une ligne par
-      # (classe, devoir, élève), lue sur l'index partiel des sessions rendues (index_exercise_sessions_handed_in).
+      # Un devoir rendu : au moins une session terminée, rattachée à un devoir de la classe, quel que soit son kind : une
+      # remédiation sur l'exercice assigné, c'est l'avoir fait (ADR-0072 §4.4, complément ter). Une ligne par (classe,
+      # devoir, élève), lue sur l'index partiel des sessions rendues (index_exercise_sessions_handed_in).
       HANDED_IN = "JOIN exercise_sessions ON exercise_sessions.classroom_assignment_id = classroom_assignments.id " \
-                  "AND exercise_sessions.status = 'completed' AND exercise_sessions.kind = 'standard'"
+                  "AND exercise_sessions.status = 'completed'"
       HANDED_IN_COLUMNS = [ "classroom_assignments.classroom_id", "exercise_sessions.student_id",
                             "SUM(exercise_sessions.score_percent) AS score_sum", "COUNT(*) AS sessions" ].freeze
       # Par clé (classe ou élève) : devoirs rendus distincts, élèves ayant rendu, somme et nombre des scores.
@@ -65,8 +66,8 @@ module Queries
 
       def present_students = Orm::User.joins(PRESENT).where(anonymized_at: nil)
 
-      # { clé => Totals } en une requête ; les sessions de remédiation (ADR-0043) ne comptent pas. Une session rendue compte
-      # si son élève est présent dans la classe du devoir : on part des adhésions présentes des classes, jamais des sessions.
+      # { clé => Totals } en une requête ; les sessions de remédiation (ADR-0043) comptent. Une session rendue compte si son
+      # élève est présent dans la classe du devoir : on part des adhésions présentes des classes, jamais des sessions.
       def totals_by(key, classroom_ids)
         handed = Orm::ClassroomAssignment.joins(HANDED_IN).where(classroom_id: classroom_ids)
                                          .group("classroom_assignments.classroom_id", "exercise_sessions.classroom_assignment_id",
