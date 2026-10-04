@@ -366,7 +366,8 @@ end
     NavigationHelper::DESTINATIONS.each do |role, destinations|
       visit design_shell_path(role)
 
-      assert_selector "aside nav a", count: destinations.size
+      # UDR-0068 §3.1 : l'équipe a une 2e carte (Référentiel, Imports) dans la barre latérale.
+      assert_selector "aside nav a", count: destinations.size + NavigationHelper::SECONDARY_DESTINATIONS.fetch(role, []).size
       assert_no_selector "nav.fixed.bottom-0"
       assert_selector "header", text: t("shared.roles.#{role}")
       assert_selector "main h1", text: t("design.shell.names.#{role}").split.first
