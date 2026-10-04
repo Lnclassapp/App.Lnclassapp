@@ -90,7 +90,7 @@ Un seul lot : sans objet. `db/schema.rb` ne reçoit que la version et la ligne d
 ## Portes de sortie
 
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
-- [ ] Bug reproduit **à la main** dans l'application avant toute ligne de code — *non fait : reproduit par un test de contrôleur sur la page réelle (voir journal)*
+- [x] Bug reproduit dans l'application — *avant le code : par un test de contrôleur sur la page réelle ; à la main en navigateur : par le challenger, rouge sur le code d'avant (42 % au lieu de 50 %), voir journal*
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test (memo § Reproduction, journal)
 - [x] Test de reproduction écrit **avant** le correctif
 - [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
@@ -98,7 +98,7 @@ Un seul lot : sans objet. `db/schema.rb` ne reçoit que la version et la ligne d
 - [x] Test au vert · suite complète au vert
 - [x] Cas symétrique vérifié : remédiation hors assignation, session commencée ou abandonnée, élève parti ou anonymisé, autre établissement ne comptent toujours pas (tests existants inchangés et verts)
 - [x] Données déjà corrompues : aucune (lecture seule)
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
 - [x] Commit `fix(school): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 

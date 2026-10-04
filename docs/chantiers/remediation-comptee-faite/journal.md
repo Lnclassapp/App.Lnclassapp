@@ -37,18 +37,16 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | « Anciens élèves » de la direction : **8,7 s** p50 au volume de l'ADR-0067, dans la requête de la liste (`JOIN LATERAL` de la dernière classe sur tous les élèves, `NOT EXISTS` de présence), pas dans les totaux | Hors périmètre (requête que ce chantier ne touche pas) ; l'écran n'était pas dans `measure_screens.rb` | `optimize` à ouvrir — **priorité haute** |
 | « Travail des élèves » hors budget : 230 ms p95 **avant** ce chantier (budget 100 ms, que l'ADR-0067 donnait tenu) ; SQL ≈ 100 ms | Antérieur au correctif, qui n'y ajoute que ≈ 2 ms | `optimize` à ouvrir (agrégat élève × devoir, jointure `users`), à remesurer sur machine peu chargée |
-| « Enseignants » de la direction : 441 Ko de HTML (budget 150 Ko), 122 ms p95 | Écran non touché | `optimize` à ouvrir |
+| « Enseignants » de la direction : 441 Ko de HTML (budget 150 Ko), 122 ms p95 | Écran non touché | [`ecrans-direction-lents`](../ecrans-direction-lents/memo.md) (#170) |
 | `script/perf/dataset.rb` ne sème aucune session de remédiation | Hors périmètre ; la copie de mesure a été corrigée à la main (requête dans [plan § Protocole](plan.md#protocole)) | À reprendre dans le prochain chantier qui touche le jeu de mesure |
 | Glossaire, « Rendu en retard » : « (standard, rattachée à l'assignation) » | Définition côté enseignant, corrigée par `rapports-exercices` | `rapports-exercices` |
 | Conflit attendu à la fusion avec `feature/rapports-exercices` : les deux branches ajoutent un complément en fin d'ADR-0072 (bis, puis ter) | Les deux chantiers sont ouverts en parallèle depuis `Develop` | Résolution à la fusion : garder les deux, dans l'ordre |
 
-## Dette laissée derrière
 
-Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
+## Réponse aux remarques du challenger
 
-| Quoi | Pourquoi reporté | Chantier de suivi |
-|---|---|---|
-| | | |
+- **Score tronqué, pas arrondi** (1/3 donne 33, 2/3 donne 66) : c'est voulu. L'ADR-0033 fixe `score_percent = (correct_count * 100) / question_count` en division entière, pour que le Diamant exige toutes les réponses justes. Les moyennes de la direction arrondissent, elles, un agrégat (ADR-0065). Rien à changer.
+- **Section « Dette » en double** : retirée.
 
 ## Rapport du challenger
 
