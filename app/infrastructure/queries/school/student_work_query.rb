@@ -10,9 +10,10 @@ module Queries
       ClassroomRow = Data.define(:public_id, :name, :level_name, :level_slug, :students_count, :assignments_count,
                                  :submitted_count, :submission_rate, :average_percent)
       StudentRow = Data.define(:display_name, :submitted_count, :average_percent)
-      Overview = Data.define(:school_name, :school_year, :classrooms)
+      # students_count : élèves présents distincts de l'établissement ; un élève de deux classes compte une fois (UDR-0072).
+      Overview = Data.define(:school_name, :school_year, :students_count, :classrooms)
       Detail = Data.define(:classroom, :students)
-      # students_count : élèves présents distincts du niveau ; un élève de deux classes du niveau compte une fois (phase 5, O1).
+      # students_count : élèves présents distincts du niveau, même règle (phase 5, O1).
       LevelOverview = Data.define(:level_name, :level_slug, :students_count, :classrooms)
 
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name levels.name levels.slug].freeze
@@ -37,8 +38,9 @@ module Queries
       # → Overview
       def classrooms(school_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
         rows = active_classrooms(school_id, school_year).order("levels.position", "classrooms.name").pluck(*CLASSROOM_COLUMNS)
+        students_count, classrooms = classroom_rows(rows)
 
-        Overview.new(school_name: Orm::School.where(id: school_id).pick(:name), school_year:, classrooms: classroom_rows(rows))
+        Overview.new(school_name: Orm::School.where(id: school_id).pick(:name), school_year:, students_count:, classrooms:)
       end
 
       # La page d'un niveau (UDR-0072 §3.8) : ses classes actives de l'année dans cet établissement, par nom. → LevelOverview
@@ -48,10 +50,8 @@ module Queries
                                                         .pluck(*CLASSROOM_COLUMNS)
         return if rows.empty?
 
-        ids = rows.map(&:first)
-        LevelOverview.new(level_name: rows.first[3], level_slug: rows.first[4],
-                          students_count: present_students.where(classroom_students: { classroom_id: ids }).distinct.count(:id),
-                          classrooms: classroom_rows(rows))
+        students_count, classrooms = classroom_rows(rows)
+        LevelOverview.new(level_name: rows.first[3], level_slug: rows.first[4], students_count:, classrooms:)
       end
 
       # → Detail | nil : nil pour une classe inconnue, archivée, d'une autre année ou d'un autre établissement.
@@ -70,13 +70,23 @@ module Queries
 
       private
 
-      # Les lignes de classes lues, avec leurs effectifs, devoirs et totaux : trois requêtes, quel que soit le nombre.
+      # Les lignes de classes lues, avec leurs effectifs, devoirs et totaux, et le nombre d'élèves distincts de ces classes :
+      # trois requêtes, quel que soit le nombre. → [élèves distincts, [ClassroomRow]]
       def classroom_rows(rows)
         ids = rows.map(&:first)
-        students = present_students.where(classroom_students: { classroom_id: ids }).group("classroom_students.classroom_id").count
+        students = present_counts(ids)
         assignments = Orm::ClassroomAssignment.where(classroom_id: ids).group(:classroom_id).count
         totals = totals_by("classroom_students.classroom_id", ids)
-        rows.map { |row| classroom_row(row, students.fetch(row.first, 0), assignments.fetch(row.first, 0), totals) }
+        [ students.fetch(nil, 0), rows.map { |row| classroom_row(row, students.fetch(row.first, 0), assignments.fetch(row.first, 0), totals) } ]
+      end
+
+      # { classroom_id => élèves présents, nil => élèves présents distincts de toutes ces classes } en une lecture : la ligne
+      # du groupe vide (`()`) compte chaque élève une fois, même présent dans deux classes (budget ADR-0067). Sans classe,
+      # Rails ne lit rien : le total vaut alors 0.
+      def present_counts(ids)
+        present_students.where(classroom_students: { classroom_id: ids })
+                        .group(Arel.sql("GROUPING SETS ((classroom_students.classroom_id), ())"))
+                        .pluck(Arel.sql("classroom_students.classroom_id"), Arel.sql("COUNT(DISTINCT users.id)")).to_h
       end
 
       def active_classrooms(school_id, school_year)

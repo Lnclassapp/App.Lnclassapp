@@ -64,6 +64,24 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     assert_equal [ kept.public_id ], board.classrooms.map(&:public_id)
   end
 
+  # UDR-0072 §3.2, budget ADR-0067 : l'accueil lit le nombre d'élèves distincts de l'établissement dans la même requête que
+  # l'effectif de chaque classe (GROUPING SETS), sans requête de plus.
+  test "the overview counts each present student of the school once, whatever the number of their classrooms" do
+    first, second = classroom, classroom(name: "2nde C 2")
+    both = create_student(classroom: first)
+    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    create_student(classroom: second)
+    create_student(classroom: second, anonymized_at: Time.current)
+    gone = create_student(classroom: first)
+    Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+
+    board = overview
+
+    assert_equal [ 1, 2 ], board.classrooms.map(&:students_count)
+    assert_equal 2, board.students_count
+    assert_equal 0, Query.new.classrooms(school_id: create_school.id).students_count
+  end
+
   test "classrooms are sorted by level position, then by name" do
     classroom(name: "Tle D 2", level: @terminale)
     classroom(name: "2nde C 2")

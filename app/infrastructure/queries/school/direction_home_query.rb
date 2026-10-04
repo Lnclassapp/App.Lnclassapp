@@ -18,7 +18,7 @@ module Queries
         active = status == "active"
 
         Home.new(school_name: overview.school_name, school_type:, school_active: active, school_year:,
-                 figures: Figures.new(classrooms: public_ids.size, students: students_count(public_ids), teachers: teachers.size),
+                 figures: Figures.new(classrooms: public_ids.size, students: overview.students_count, teachers: teachers.size),
                  alerts: Entities::School::DirectionAlerts.call(
                    school_active: active, classrooms: facts(overview.classrooms, teachers_by_classroom(public_ids)),
                    teachers_without_classroom: teachers.count { it.classroom_names.empty? }
@@ -27,13 +27,6 @@ module Queries
       end
 
       private
-
-      # Un élève présent dans deux classes compte une fois (ADR-0065 §4 : adhésion non quittée, compte non anonymisé).
-      def students_count(public_ids)
-        Orm::User.joins(StudentWorkQuery::PRESENT)
-                 .where(anonymized_at: nil, classroom_students: { classroom_id: Orm::Classroom.where(public_id: public_ids).select(:id) })
-                 .distinct.count(:id)
-      end
 
       # { public_id => enseignants déclarés } ; un compte anonymisé n'enseigne plus (il n'est pas sur la page « Enseignants »).
       def teachers_by_classroom(public_ids)
