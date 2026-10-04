@@ -45,7 +45,7 @@ module Queries
       def page(reader:, now:, page:)
         readable = @readable.scope(reader:, now:)
         pages = [ (readable.count / PAGE_SIZE.to_f).ceil, 1 ].max
-        number = page.to_i.clamp(1, pages)
+        number = page.to_s.to_i.clamp(1, pages)
         rows = readable.order(published_at: :desc, id: :desc).offset((number - 1) * PAGE_SIZE).limit(PAGE_SIZE)
         Page.new(cards: cards(rows, dismissed_by: reader.user_id), page: number, pages:)
       end

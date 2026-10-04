@@ -14,6 +14,12 @@ module UseCases
         def due_for_publication(now:) = @stale
       end
 
+      # Reads the announcement, then lets another request change it before the use case writes (ADR-0078 §4.2).
+      class Racing < SimpleDelegator
+        def initialize(repository, &race) = super(repository).tap { @race = race }
+        def find_by_public_id(public_id:) = __getobj__.find_by_public_id(public_id:).tap { @race.call }
+      end
+
       setup do
         @kamate = create_school_admin(last_name: "Kamaté")
         @morning = create_message(author: @kamate, title: "Réunion de 10 h", status: "scheduled", published_at: Time.zone.local(2026, 10, 1, 10))
@@ -40,6 +46,16 @@ module UseCases
 
         assert_equal 0, publish.value
         assert_equal 1, Orm::AuditEvent.where(action: "message.published").count
+      end
+
+      test "archived between its reading and its writing, the announcement stays archived, unjournaled" do
+        racing = Racing.new(Repositories::Communication::MessageRepository.new) do
+          Orm::Message.where(id: @morning.id).update_all(status: "archived")
+        end
+
+        assert_equal 0, publish(racing).value
+        assert_equal "archived", @morning.reload.status
+        assert_not Orm::AuditEvent.exists?(action: "message.published")
       end
 
       test "an announcement changed since the list was read is left as it is" do

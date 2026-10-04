@@ -88,11 +88,54 @@ module Dtos
         assert_equal({ audio: [ "Ce fichier est trop lourd (10 Mo au plus)." ] }, errors(audio: Unread.new(size: 12 * MEGABYTE)))
       end
 
+      # A real PNG brought to exactly `size` bytes by a comment chunk (tEXt) before IEND: a metadata the upload drops.
+      def png_of(size)
+        bytes = file_fixture("photos/photo.png").binread
+        iend = bytes.rindex("IEND".b) - 4
+        text = "Comment\x00".b + ("a".b * (size - bytes.bytesize - 12 - 8))
+        chunk = [ text.bytesize ].pack("N") + "tEXt".b + text + [ Zlib.crc32("tEXt#{text}".b) ].pack("N")
+        bytes.byteslice(0, iend) + chunk + bytes.byteslice(iend..)
+      end
+
       test "the limits are inclusive: 2 MB of PNG and 10 MB of MP3 pass" do
-        png = "\x89PNG\r\n\x1A\n".b + ("\x00".b * ((2 * MEGABYTE) - 8))
+        png = png_of(2 * MEGABYTE)
         mp3 = MP3 + ("\x00".b * ((10 * MEGABYTE) - MP3.bytesize))
 
         assert checked(image: StringIO.new(png), audio: StringIO.new(mp3)).errors.empty?
+      end
+
+      test "ADR-0060 — the image is kept without its metadata (Exif, GPS, XMP): JPEG, PNG and WebP" do
+        %w[photo_exif.jpg photo_exif.png photo_exif.webp hostile/gps.png hostile/gps.webp].each do |name|
+          dto = checked(image: photo(name))
+          kept = dto.upload(:image).io.read
+
+          assert dto.errors.empty?, name
+          assert_equal false, Entities::Shared::ImageHeader.read(kept).metadata, name
+          assert_operator kept.bytesize, :<, file_fixture("photos/#{name}").size, name
+        end
+      end
+
+      test "ADR-0060 — an image only its first bytes make look like one is refused, and so is a truncated one" do
+        assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: StringIO.new("\xFF\xD8".b + "<html><script>alert(1)</script>")))
+        assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: photo("hostile/truncated.webp")))
+      end
+
+      # A real PNG of width × 1 pixels, gray: a few hundred bytes for any width.
+      def png_wide(width)
+        chunk = ->(type, data) { [ data.bytesize ].pack("N") + type.b + data + [ Zlib.crc32(type.b + data) ].pack("N") }
+        "\x89PNG\r\n\x1A\n".b + chunk.("IHDR", [ width, 1, 8, 0, 0, 0, 0 ].pack("NNCCCCC")) +
+          chunk.("IDAT", Zlib::Deflate.deflate("\x00".b * (width + 1))) + chunk.("IEND", "".b)
+      end
+
+      test "an image of more than 4096 pixels of side is refused, whatever its weight; 4096 passes" do
+        assert_equal({ image: [ "L'image mesure 4096 pixels de côté au plus." ] }, errors(image: StringIO.new(png_wide(4097))))
+        assert checked(image: StringIO.new(png_wide(4096))).errors.empty?
+      end
+
+      test "a date of more than four digits of year is unreadable, a draft's too: 422, never an error of the database" do
+        assert_equal [ "Saisissez une date valide." ], errors(published_at: "99999-01-01T00:00")[:published_at]
+        assert_equal [ "Saisissez une date valide." ], errors(visible_until: "99999-01-20")[:visible_until]
+        assert_equal [ "Saisissez une date valide." ], errors(commit: "draft", published_at: "99999999-01-01T00:00")[:published_at]
       end
 
       test "without a file, there is nothing to upload" do

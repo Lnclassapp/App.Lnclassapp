@@ -27,7 +27,9 @@ module UseCases
           message = @messages.find_by_public_id(public_id: due.public_id)
           next false unless message.status == "scheduled" && message.published_at <= now
 
-          @messages.update(message: message.with(status: "published"))
+          # Archivée ou retirée entre cette lecture et l'écriture : rien n'est écrit, ni journalisé.
+          next false unless @messages.update(message: message.with(status: "published"))
+
           @audit_log.record(action: "message.published", actor_id: message.author_id, at: now, subject_type: "Message",
                             subject_id: message.id)
           true

@@ -288,3 +288,14 @@ publish_scheduled_messages:
 - Les migrations du chantier passent après celles de `Develop` (`20261004100000` à `20261004100200`) : les versions `20261003100000`, puis `20261004090000` (inscription de la direction), étaient prises.
 - L'[ADR-0071](./0071-gestes-de-la-direction-sur-son-etablissement.md) avait déjà sorti la direction de la lecture seule : les §4.6, §7 et §8 sont corrigés en conséquence.
 - Le contexte `communication` porte aussi le blog (ADR-0074) : les noms de ce chantier (`Message`, `Reader`, `AudioHeader`, `messages`, `message_classrooms`, `message_dismissals`) n'entrent en collision avec aucun nom du blog.
+
+## Amendement du 2026-10-04 — constats de la phase 5 (revue de sécurité, analyse des tests)
+
+*Chantier [`annonces`](../../chantiers/annonces/journal.md). Statut inchangé (`Accepté`). Cette section fait foi en cas d'écart avec les §4.2, §4.4 et §6.*
+
+- **Une annonce figée n'est jamais réécrite.** `MessageRepositoryPort#update` verrouille la ligne (`SELECT … FOR UPDATE`), la relit, et ne l'écrit pas si elle est déjà archivée ou retirée : il rend `nil`. `UpdateMessage`, `ArchiveMessage` et `WithdrawMessage` répondent alors `:conflict`, et `PublishScheduledMessages` passe l'annonce, sans rien journaliser. Sans cela, une modification lue avant un retrait remettait l'annonce en ligne.
+- **`ReadFilePolicy`, la direction** : seulement sur une annonce programmée ou publiée d'un enseignant de son établissement, ce que sa liste « Enseignants » montre ; ni brouillon, ni annonce archivée ou retirée (AN-19).
+- **L'image jointe suit l'ADR-0060**, comme l'image d'un article : lue en entier (2 Mo au plus, vérifiés avant), refusée si `ImageHeader.read` ne la lit pas, gardée par `ImageHeader.strip` (ni Exif, ni GPS, ni XMP) puis relue sans métadonnées ; son plus grand côté est de 4096 px (`Message::IMAGE_MAX_SIDE`, une photo de téléphone de 4032 px passe).
+- **Dates** : une année de plus de 4 chiffres est une date illisible (422), brouillon compris ; elle ne va plus jusqu'à la base.
+- **Laissé tel quel** : l'audio n'est reconnu que par ses premiers octets (`ID3`, `ftyp`) ; le type servi vient de nos constantes et `X-Content-Type-Options: nosniff` est actif, un faux audio n'est donc jamais interprété.
+

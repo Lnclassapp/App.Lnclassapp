@@ -10,6 +10,12 @@ module UseCases
       Clock = Data.define(:now)
       MP3 = ("ID3".b + ("\x00".b * 64)).freeze
 
+      # Reads the announcement, then lets another request change it before the use case writes (ADR-0078 §4.2).
+      class Racing < SimpleDelegator
+        def initialize(repository, &race) = super(repository).tap { @race = race }
+        def find_by_public_id(public_id:) = __getobj__.find_by_public_id(public_id:).tap { @race.call }
+      end
+
       setup do
         @lauriers = create_school(name: "Collège Les Lauriers")
         @b3 = create_classroom(school: @lauriers, name: "3ème B")
@@ -24,9 +30,9 @@ module UseCases
 
       def actor(user) = Repositories::Identity::UserRepository.new.actor_for(user_id: user.id)
 
-      def use_case
+      def use_case(messages: Repositories::Communication::MessageRepository.new)
         UpdateMessage.new(
-          messages: Repositories::Communication::MessageRepository.new, attachments: Repositories::Communication::AttachmentStore.new,
+          messages:, attachments: Repositories::Communication::AttachmentStore.new,
           schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new,
           teachings: Repositories::Classroom::TeachingRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
           transaction: Repositories::Shared::Transaction.new, policy: Policies::Communication::ManageOwnPolicy.new,
@@ -34,11 +40,23 @@ module UseCases
         )
       end
 
-      def update(user, message = @fiches, **attributes)
+      def update(user, message = @fiches, messages: Repositories::Communication::MessageRepository.new, **attributes)
         dto = Dtos::Communication::MessageInput.new(title: message.title, body: "Les fiches du chapitre 4 sont en ligne.",
                                                     illustration: "sheets", classroom_public_ids: [ @b3.public_id ],
                                                     commit: "publish", **attributes)
-        use_case.call(actor: actor(user), public_id: message.public_id, dto:)
+        use_case(messages:).call(actor: actor(user), public_id: message.public_id, dto:)
+      end
+
+      test "ADR-0078 §4.2 — withdrawn while its author was saving it, the announcement stays withdrawn: conflict" do
+        dismiss_message(message: @fiches, user: @awa)
+        team = create_team_member(second_factor: false)
+        racing = Racing.new(Repositories::Communication::MessageRepository.new) do
+          Orm::Message.where(id: @fiches.id).update_all(status: "withdrawn", withdrawn_at: NOW, withdrawn_by_id: team.id)
+        end
+
+        assert_equal :conflict, update(@kouassi, messages: racing).code
+        assert_equal [ "withdrawn", "Ils commencent lundi.", nil ], @fiches.reload.values_at(:status, :body, :edited_at)
+        assert Orm::MessageDismissal.exists?(message: @fiches, user: @awa)
       end
 
       def published_events = Orm::AuditEvent.where(action: "message.published")

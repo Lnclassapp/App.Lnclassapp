@@ -316,3 +316,10 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
 - L'enseignant et la direction ont « Annonces » en dernier dans `DESTINATIONS` (4 entrées chacun).
 - Sur « Toutes » et « Nouvelle annonce », la 2ᵉ carte et le bouton « Plus » sont marqués courants (`nav_key`), mais l'entrée du menu « Plus » ne l'est que sur « Mes annonces » : `ui_dropdown_item` lit `current_page?`, pas `nav_key`.
 
+## Amendement du 2026-10-04 — formulaire, constaté à la phase 5
+
+*Chantier [`annonces`](../../chantiers/annonces/journal.md). Complète le §3.8.*
+
+- Une image de plus de 4096 px de côté est refusée sous le champ « Image » : « L'image mesure 4096 pixels de côté au plus. » (ADR-0078, amendement de la phase 5).
+- Une image que seuls ses premiers octets font ressembler à une image, ou tronquée, reçoit « Ce fichier n'est pas accepté. ».
+

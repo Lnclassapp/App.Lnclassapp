@@ -16,7 +16,9 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
-      # Réécrit la ligne d'id message.id, sauf son auteur et son public_id, et remplace ses classes ciblées. → Message
+      # Réécrit la ligne d'id message.id, sauf son auteur et son public_id, et remplace ses classes ciblées. Une ligne
+      # déjà figée en base (archivée ou retirée) n'est jamais réécrite, même par une écriture lue avant son gel
+      # (ADR-0078 §4.2). → Message | nil (déjà figée : rien n'est écrit)
       def update(message:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end

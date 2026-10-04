@@ -29,6 +29,9 @@ module UseCases
       # Le retrait et son journal ensemble : l'acteur est le modérateur, l'auteur reste nommé (ADR-0078 §4.5, sans motif).
       def withdraw(actor, message, now)
         withdrawn = @messages.update(message: message.with(status: "withdrawn", withdrawn_at: now, withdrawn_by_id: actor.user_id))
+        # Archivée par son auteur depuis la lecture : rien n'est écrit, ni journalisé.
+        return Shared::Result.failure(:conflict) if withdrawn.nil?
+
         @audit_log.record(action: "message.withdrawn", actor_id: actor.user_id, at: now, subject_type: "Message",
                           subject_id: message.id, metadata: { author_id: message.author_id })
         Shared::Result.success(withdrawn)

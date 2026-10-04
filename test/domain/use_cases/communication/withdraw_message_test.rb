@@ -16,6 +16,12 @@ module UseCases
         def record(**) = raise(ArgumentError, "journal indisponible")
       end
 
+      # Reads the announcement, then lets another request change it before the use case writes (ADR-0078 §4.2).
+      class Racing < SimpleDelegator
+        def initialize(repository, &race) = super(repository).tap { @race = race }
+        def find_by_public_id(public_id:) = __getobj__.find_by_public_id(public_id:).tap { @race.call }
+      end
+
       setup do
         @lauriers = create_school(name: "Collège Les Lauriers")
         @bouake = create_school(name: "Lycée de Bouaké")
@@ -28,8 +34,9 @@ module UseCases
 
       def actor(user) = Repositories::Identity::UserRepository.new.actor_for(user_id: user.id)
 
-      def withdraw(user, message = @fiches, audit_log: Repositories::Identity::AuditLogRepository.new)
-        WithdrawMessage.new(messages: Repositories::Communication::MessageRepository.new, audit_log:,
+      def withdraw(user, message = @fiches, audit_log: Repositories::Identity::AuditLogRepository.new,
+                   messages: Repositories::Communication::MessageRepository.new)
+        WithdrawMessage.new(messages:, audit_log:,
                             transaction: Repositories::Shared::Transaction.new, policy: Policies::Communication::WithdrawPolicy.new,
                             clock: Clock.new(NOW))
                        .call(actor: user && actor(user), public_id: message.public_id)
@@ -94,6 +101,16 @@ module UseCases
         assert_equal @fatou.id, @fiches.reload.withdrawn_by_id
         assert_equal "archived", archived.reload.status
         assert_equal 1, withdrawn_events.count
+      end
+
+      test "archived by its author while the team was withdrawing it: conflict, neither withdrawn nor journaled" do
+        racing = Racing.new(Repositories::Communication::MessageRepository.new) do
+          Orm::Message.where(id: @fiches.id).update_all(status: "archived")
+        end
+
+        assert_equal :conflict, withdraw(@fatou, messages: racing).code
+        assert_equal [ "archived", nil ], @fiches.reload.values_at(:status, :withdrawn_by_id)
+        assert_empty withdrawn_events
       end
 
       test "an unknown announcement is not_found" do

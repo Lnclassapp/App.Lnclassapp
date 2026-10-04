@@ -9,14 +9,16 @@ module UseCases
         @policy = policy
       end
 
-      # → success(Message) | :not_found (inconnue, ou d'un autre auteur) | :conflict (déjà archivée ou retirée)
+      # → success(Message) | :not_found (inconnue, ou d'un autre auteur) | :conflict (archivée ou retirée, même depuis la lecture)
       def call(actor:, public_id:)
         message = @messages.find_by_public_id(public_id:)
         allowed = @policy.call(actor:, message:)
         return allowed if allowed.failure?
 
-        # Une seule écriture : la date de fin d'une annonce déjà en ligne est gardée, un brouillon n'en a pas.
-        Shared::Result.success(@messages.update(message: message.with(status: "archived")))
+        # Une seule écriture : la date de fin d'une annonce déjà en ligne est gardée, un brouillon n'en a pas. Retirée
+        # depuis la lecture : rien n'est écrit.
+        archived = @messages.update(message: message.with(status: "archived"))
+        archived ? Shared::Result.success(archived) : Shared::Result.failure(:conflict)
       end
     end
   end

@@ -50,6 +50,9 @@ module UseCases
           classroom_ids: targets.classroom_ids, illustration: dto.illustration, status: dto.status,
           published_at: dto.publication_time, ends_at: dto.ends_at, edited_at: (now if live)
         ))
+        # Archivée ou retirée depuis la lecture : rien n'est écrit.
+        return Shared::Result.failure(:conflict) if saved.nil?
+
         @messages.clear_dismissals(message_id: message.id) if live
         store_files(message.id, dto)
         journal_publication(saved, now) if !live && saved.status == "published"

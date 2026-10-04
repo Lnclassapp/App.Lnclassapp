@@ -324,6 +324,15 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_equal [ "image/png", "audio/mpeg" ], [ created.image.content_type, created.audio.content_type ]
   end
 
+  test "ADR-0060 — a phone photo is stored without its Exif (GPS, device): what a student downloads carries none" do
+    sign_in_as @kamate
+
+    publish(audience: "students", image: upload(file_fixture("photos/photo_exif.jpg").binread, "photo.jpg", "image/jpeg"))
+
+    assert_redirected_to my_announcements_path
+    assert_equal false, Entities::Shared::ImageHeader.read(created.image.download).metadata
+  end
+
   test "an invalid form is shown again in 422, each error under its field, the values kept" do
     sign_in_as @kamate
 

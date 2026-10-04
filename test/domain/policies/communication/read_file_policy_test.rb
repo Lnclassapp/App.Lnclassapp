@@ -37,8 +37,8 @@ module Policies
         assert call(actor(:school_admin), announcement(status: "scheduled")).success?
       end
 
-      test "AN-19 — archived or withdrawn, a teacher's message is no longer the direction's to read: not_found" do
-        %w[archived withdrawn].each do |status|
+      test "AN-19 — a draft, archived or withdrawn message of a teacher is not the direction's to read: not_found" do
+        %w[draft archived withdrawn].each do |status|
           assert_equal :not_found, call(actor(:school_admin), announcement(status:)).code, status
         end
       end

@@ -5,6 +5,12 @@ module UseCases
     # AN-15, AN-19, ADR-0078 §4.2: its author archives a draft, a scheduled or a published announcement; it then
     # disappears for everyone else and is frozen. Anyone else, the team and the direction included, gets not_found.
     class ArchiveMessageTest < ActiveSupport::TestCase
+      # Reads the announcement, then lets another request change it before the use case writes (ADR-0078 §4.2).
+      class Racing < SimpleDelegator
+        def initialize(repository, &race) = super(repository).tap { @race = race }
+        def find_by_public_id(public_id:) = __getobj__.find_by_public_id(public_id:).tap { @race.call }
+      end
+
       setup do
         @lauriers = create_school(name: "Collège Les Lauriers")
         @kamate = create_school_admin(school: @lauriers, last_name: "Kamaté")
@@ -12,10 +18,20 @@ module UseCases
 
       def actor(user) = Repositories::Identity::UserRepository.new.actor_for(user_id: user.id)
 
-      def archive(user, message)
-        ArchiveMessage.new(messages: Repositories::Communication::MessageRepository.new,
-                           policy: Policies::Communication::ManageOwnPolicy.new)
+      def archive(user, message, messages: Repositories::Communication::MessageRepository.new)
+        ArchiveMessage.new(messages:, policy: Policies::Communication::ManageOwnPolicy.new)
                       .call(actor: actor(user), public_id: message.public_id)
+      end
+
+      test "ADR-0078 §4.2 — withdrawn while its author was archiving it, it stays withdrawn: conflict" do
+        message = create_message(author: @kamate)
+        team = create_team_member(second_factor: false)
+        racing = Racing.new(Repositories::Communication::MessageRepository.new) do
+          Orm::Message.where(id: message.id).update_all(status: "withdrawn", withdrawn_at: Time.current, withdrawn_by_id: team.id)
+        end
+
+        assert_equal :conflict, archive(@kamate, message, messages: racing).code
+        assert_equal [ "withdrawn", team.id ], message.reload.values_at(:status, :withdrawn_by_id)
       end
 
       test "AN-19 — its author archives a published, a scheduled and a draft announcement" do

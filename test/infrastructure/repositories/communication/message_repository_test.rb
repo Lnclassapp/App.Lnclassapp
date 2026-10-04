@@ -81,6 +81,17 @@ module Repositories
         assert_equal [ @teacher.id, created.public_id ], [ stored.author_id, stored.public_id ]
       end
 
+      test "ADR-0078 §4.2 — update never rewrites a row frozen since it was read: nil, nothing written" do
+        created = @repository.create(message: draft)
+        team = create_team_member(second_factor: false)
+        Orm::Message.where(id: created.id).update_all(status: "withdrawn", withdrawn_at: NOW, withdrawn_by_id: team.id)
+
+        assert_nil @repository.update(message: created.with(title: "Remise en ligne", classroom_ids: [ @classrooms[2].id ]))
+        assert_nil @repository.update(message: created.with(status: "archived"))
+        stored = @repository.find_by_public_id(public_id: created.public_id)
+        assert_equal [ "withdrawn", "Nouvelles fiches", created.classroom_ids ], [ stored.status, stored.title, stored.classroom_ids ]
+      end
+
       test "update to an audience by role leaves no classroom behind" do
         created = @repository.create(message: draft)
 

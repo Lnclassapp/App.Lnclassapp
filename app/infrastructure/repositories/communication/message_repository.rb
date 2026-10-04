@@ -22,9 +22,12 @@ module Repositories
         end
       end
 
+      # La ligne est verrouillée puis relue : une écriture lue avant un archivage ou un retrait ne la rend pas vivante.
       def update(message:)
         Orm::Message.transaction do
-          record = Orm::Message.find(message.id)
+          record = Orm::Message.lock.find(message.id)
+          next if entity(record, []).frozen?
+
           record.update!(message.to_h.slice(*WRITTEN))
           Orm::MessageClassroom.where(message_id: record.id).delete_all
           entity(record, target(record.id, message.classroom_ids))

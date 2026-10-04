@@ -7,6 +7,9 @@ module Dtos
       include ActiveModel::Model
 
       MESSAGE = Entities::Communication::Message
+      IMAGE_HEADER = Entities::Shared::ImageHeader
+      # Une année de plus de 4 chiffres dépasse ce que la base garde : la date est illisible.
+      LAST_YEAR = 9999
       # Une pièce jointe vérifiée, telle que Ports::Communication::AttachmentStorePort#attach la reçoit.
       Upload = Data.define(:io, :content_type, :filename)
       # Par fichier : poids maximal, lecteur du format dans les premiers octets, puis type et nom par format (ADR-0045 §4).
@@ -34,6 +37,7 @@ module Dtos
       validates :body, presence: true, length: { maximum: MESSAGE::BODY_MAX }
       validates :illustration, inclusion: { in: MESSAGE::ILLUSTRATIONS }
       validate :files_are_accepted
+      validate :image_is_clean
       validate :dates_hold
 
       # Le formulaire d'une nouvelle annonce : la première illustration, visible 30 jours ; l'équipe venue de la fiche d'un
@@ -97,14 +101,14 @@ module Dtos
         last_day ? (last_day + 1).in_time_zone : publication_time + MESSAGE::DEFAULT_DURATION
       end
 
-      # → Upload | nil, après une validation réussie ; le fichier est rendu depuis son début.
+      # → Upload | nil, après une validation réussie ; l'audio est rendu depuis son début, l'image sans ses métadonnées.
       def upload(kind)
         file = public_send(kind)
         return if file.nil?
 
         content_type, filename = FILES.dig(kind, :formats).fetch(format_of(kind))
         file.rewind
-        Upload.new(io: file, content_type:, filename:)
+        Upload.new(io: kind == :image ? StringIO.new(image_data) : file, content_type:, filename:)
       end
 
       private
@@ -123,6 +127,27 @@ module Dtos
           errors.add(kind, :unsupported) if format_of(kind).nil?
         end
       end
+
+      # ADR-0060, comme l'image d'un article : l'image est lue en entier (2 Mo au plus, déjà vérifiés), gardée sans Exif, GPS
+      # ni XMP, et relue sans métadonnées ; ses côtés sont bornés, l'accueil élève la décode sur un téléphone modeste.
+      def image_is_clean
+        return if image.nil? || errors.include?(:image)
+
+        facts = IMAGE_HEADER.read(image_bytes)
+        clean = IMAGE_HEADER.read(image_data)
+        return errors.add(:image, :unsupported) unless facts && clean && clean.metadata == false
+
+        errors.add(:image, :too_wide, count: MESSAGE::IMAGE_MAX_SIDE) if [ facts.width, facts.height ].max > MESSAGE::IMAGE_MAX_SIDE
+      end
+
+      def image_bytes
+        @image_bytes ||= begin
+          image.rewind
+          image.read.b
+        end
+      end
+
+      def image_data = @image_data ||= IMAGE_HEADER.strip(image_bytes)
 
       def format_of(kind)
         (@formats ||= {}).fetch(kind) do
@@ -153,17 +178,19 @@ module Dtos
 
       # → Time, nil (vide) ou :invalid
       def read_time(value)
-        value.blank? ? nil : Time.zone.iso8601(value.to_s)
+        value.blank? ? nil : within_years(Time.zone.iso8601(value.to_s))
       rescue ArgumentError
         :invalid
       end
 
       # → Date, nil (vide) ou :invalid
       def read_date(value)
-        value.blank? ? nil : Date.iso8601(value.to_s)
+        value.blank? ? nil : within_years(Date.iso8601(value.to_s))
       rescue ArgumentError
         :invalid
       end
+
+      def within_years(value) = value.year > LAST_YEAR ? :invalid : value
     end
   end
 end

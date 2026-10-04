@@ -212,6 +212,18 @@ module Communication
       assert_equal [ "Réunion des directions" ], css_select("ul#announcements article h3").map(&:text)
     end
 
+    test "a forged page (page[]=2, page[a]=1) shows the first page, never an error" do
+      create_message(author: @fatou, title: "Rentrée numérique", audience: "all")
+      sign_in_as @awa
+
+      [ "?page[]=2", "?page[a]=1" ].each do |query|
+        get "#{announcements_path}#{query}"
+
+        assert_response :success, query
+        assert_select "ul#announcements article h3", "Rentrée numérique"
+      end
+    end
+
     test "twenty cards per page, then the pagination" do
       21.times { |index| create_message(author: @fatou, title: "Annonce #{index}", audience: "all", published_at: (index + 1).minutes.ago) }
       sign_in_as @awa

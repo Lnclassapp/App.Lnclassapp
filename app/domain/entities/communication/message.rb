@@ -36,6 +36,8 @@ module Entities
     Message::ILLUSTRATIONS = %w[info calendar homework sheets exam meeting celebration holidays].freeze # UDR-0071 §3.3
     Message::TITLE_MAX = 60
     Message::BODY_MAX = 140
+    # Le plus grand côté d'une image jointe, en pixels : une photo de téléphone (4032 px) passe (ADR-0060).
+    Message::IMAGE_MAX_SIDE = 4096
     Message::DEFAULT_DURATION = 30.days
     Message::MAX_DURATION = 90.days
   end
