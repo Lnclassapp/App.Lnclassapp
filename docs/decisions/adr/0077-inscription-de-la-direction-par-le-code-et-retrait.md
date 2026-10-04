@@ -76,7 +76,7 @@ def delete(user_id:)                     # → true
 
 `Entities::School::Staff` est créée (Ruby pur) : `user_id`, `user_public_id`, `school_id`, `joined_via`, `joined_at`, `archived_at`, `archived_by_id`, `#archived?`, `#newcomer?(now)` (`joined_at > now - 7 jours`), `#deletion_due_on` (`archived_at + 30 jours`).
 
-`Ports::Identity::RegistrationRepositoryPort` et `UserRepositoryPort` ne changent pas de signature. L'adaptateur `UserRepository#authenticate` exclut un `school_admin` dont la ligne `school_staffs` est archivée. `#actor_for` donne `school_id: nil` à un compte archivé, ce qui le mène à l'écran d'attente si une session survivait.
+`Ports::Identity::RegistrationRepositoryPort` gagne `create_school_admin(user:, pin:)` → `Result(User) | failure(:conflict, errors: { contact: [:taken] })`, sur le modèle de `create_student` : la direction inscrite par le code n'a pas d'invitation à marquer, et détourner `create_from_invitation(invitation_id: nil)` aurait faussé son contrat (Lot 0 rouvert, 2026-10-04). `UserRepositoryPort` ne change pas de signature. L'adaptateur `UserRepository#authenticate` exclut un `school_admin` dont la ligne `school_staffs` est archivée. `#actor_for` donne `school_id: nil` à un compte archivé, ce qui le mène à l'écran d'attente si une session survivait.
 
 ### 4.3 Use cases et policies
 

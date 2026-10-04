@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::RegistrationRepository
-# Rôle : crée les comptes (élève, enseignant, invité) ; un numéro déjà pris devient :conflict
-# ADR  : 0026, 0030, 0038, 0050
+# Rôle : crée les comptes (élève, enseignant, direction, invité) ; un numéro déjà pris devient :conflict
+# ADR  : 0026, 0030, 0038, 0050, 0077
 module Repositories
   module Identity
     class RegistrationRepository
@@ -16,6 +16,10 @@ module Repositories
         create(user, pin, role: "teacher") do |record|
           Orm::TeacherProfile.create!(user_id: record.id, material_id:)
         end
+      end
+
+      def create_school_admin(user:, pin:)
+        create(user, pin, role: "school_admin")
       end
 
       def create_from_invitation(user:, pin:, invitation_id:, at:)
