@@ -33,6 +33,24 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { ui_icon("home", variant: :duotone) }
   end
 
+  test "ui_icon_sprite draws each icon of its block once, in a <symbol> after the block, taken back by <use>" do
+    show(ui_icon_sprite { safe_join([ ui_icon("home"), ui_icon("home", size: :lg), ui_icon("home", variant: :mini, label: "Accueil") ]) })
+
+    assert_select "svg.size-5[aria-hidden=true][focusable=false][fill=none][stroke=currentColor] use[href='#icon-24-outline-home']"
+    assert_select "svg.size-6[viewBox='0 0 24 24'][stroke-width='1.5'] use[href='#icon-24-outline-home']"
+    assert_select "svg[role=img][aria-label=Accueil][fill=currentColor] use[href='#icon-20-solid-home']"
+    assert_select "svg.absolute.size-0[aria-hidden=true]:last-child" do
+      assert_select "symbol", 2
+      assert_select "symbol#icon-20-solid-home[viewBox='0 0 20 20']"
+    end
+    assert_equal icon_paths(ui_icon("home")), css_select("symbol#icon-24-outline-home[viewBox='0 0 24 24'] path").map { it["d"] }
+    assert_select "svg[xmlns], svg[data-slot]", 0
+    assert_select "svg > path", 0
+
+    show ui_icon("home")
+    assert_select "svg.size-5 > path", true, "après le bloc, l'icône est de nouveau en ligne"
+  end
+
   test "ui_spinner spins at the requested size" do
     show ui_spinner(size: :lg)
 
