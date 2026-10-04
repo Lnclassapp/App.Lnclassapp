@@ -1,0 +1,9 @@
+<%# 🌐 UI · teams/school_staff_restorations/create — l'équipe restaure une direction retirée (ID-19) %>
+<%# Rôle : toast, ligne retirée de « Directions retirées », bloc « Direction » entier re-rendu (ligne, places et menus à jour) %>
+<%# ADR  : 0077 · UDR : 0006, 0070 (§3.4, §3.5) · un replace de #school_staff plutôt qu'un append : l'ordre et le vide restent justes %>
+<%= turbo_stream_toast @notice, type: :success %>
+<%= turbo_stream.remove "school_archived_staff_#{@restored.staff.user_public_id}" %>
+<%= turbo_stream.replace "school_staff", partial: "shared/school_staff",
+                                         locals: { staff: @staff, by_code_count: @by_code_count, viewer_id: nil,
+                                                   remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) },
+                                                   removable: @removable, newcomer: false } %>
