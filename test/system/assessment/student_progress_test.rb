@@ -1,14 +1,13 @@
 require "application_system_test_case"
 
-# Chantier progres-eleve, phase 5 — challenger empirique (PRD §3 et §4, UDR-0073), dans un navigateur réel.
-# 1. Le parcours du PRD, tout dans l'interface : l'élève fait l'exercice avec peu de bonnes réponses (1 sur 3), le
-#    recommence avec toutes (3 sur 3), et lit « Tu progresses ». Rouge tant que le défaut D1 du rapport du challenger
-#    (journal.md) n'est pas tranché : sous 50 %, une lacune s'ouvre, et la session suivante est une remédiation, que
-#    l'UDR-0073 §3 exclut de l'historique ; la phrase ne vient jamais.
-# 2. Un parcours sans lacune : une première session à 10/20, puis une session faite dans l'interface (2 sur 3) ;
-#    « Tu progresses », puis, après une session ratée, « Ton meilleur résultat reste » ; le deuxième résultat rouvert dit
-#    encore « Tu progresses », lisible en mode sombre et sans défilement horizontal au téléphone. Rien au premier essai
-#    d'un autre exercice, rien pour l'enseignant de la classe ; jamais « stagne », « baisse » ni « essai ».
+# Chantier progres-eleve (PRD §3 et §4, UDR-0073), dans un navigateur réel. Un seul test, au plus 12 s (ADR-0069 §9).
+# Le parcours du PRD, seul joué dans l'interface : l'élève fait l'exercice avec peu de bonnes réponses (1 sur 3), sans
+# phrase à sa première session ; il le recommence avec toutes (3 sur 3) et lit « Tu progresses ». Sous 50 %, une lacune
+# s'ouvre et la seconde session est une remédiation (ADR-0043) : elle compte dans son historique (UDR-0073 §3, défaut D1
+# du challenger). La phrase est lisible en mode sombre, sans défilement horizontal au téléphone.
+# La suite, préparée par la fabrique, ne vérifie que l'affichage : après une session ratée, « Ton meilleur résultat
+# reste ». Jamais « stagne », « baisse » ni « essai ». Les autres cas (résultat rouvert, enseignant de la classe, D2 du
+# challenger) sont prouvés au niveau du contrôleur et de la query.
 class Assessment::StudentProgressTest < ApplicationSystemTestCase
   RESULTS = "assessment.session_results".freeze
   SESSIONS = "assessment.exercise_sessions".freeze
@@ -20,16 +19,13 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
   # « Recommencer » : le POST puis la page de la session, sous une suite chargée (session_result_test.rb).
   RESTART_WAIT = 10
 
-  setup do
+  test "peu de bonnes réponses, puis toutes en remédiation : « Tu progresses » ; puis le meilleur résultat rappelé" do
     course = create_course
-    @classroom = create_classroom(level: course.level, series: course.series)
-    @student = create_student(classroom: @classroom)
+    classroom = create_classroom(level: course.level, series: course.series)
+    @student = create_student(classroom:)
     @exercise = create_exercise(essential: create_essential(course:), title: "Méiose", questions: QUESTIONS)
     sign_in_as @student
-    assert_current_path student_home_path
-  end
 
-  test "le parcours du PRD dans l'interface : peu de bonnes réponses, puis toutes ; l'élève lit « Tu progresses »" do
     visit exercise_path(@exercise.public_id)
     click_on I18n.t("assessment.exercises.student_progress.start")
     play(correct: 1)
@@ -37,40 +33,15 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
     assert_no_progress_sentence
 
     click_on I18n.t("#{RESULTS}.show.restart")
-    play(correct: 3)
+    second = play(correct: 3)
     assert_text "20/20"
     assert_progress_sentence I18n.t("#{RESULTS}.progress.progress", first: 7, current: 20)
-  end
-
-  test "sans lacune : « Tu progresses », puis « Ton meilleur résultat reste » ; rien ailleurs ni pour l'enseignant" do
-    teacher = create_teacher(classrooms: [ @classroom ])
-    completed(@exercise, 50)
-
-    visit exercise_path(@exercise.public_id)
-    click_on I18n.t("assessment.exercises.student_progress.start")
-    second = play(correct: 2)
-    assert_text "13/20"
-    assert_progress_sentence I18n.t("#{RESULTS}.progress.progress", first: 10, current: 13)
-
-    visit exercise_session_result_path(completed(@exercise, 25).public_id)
-    assert_progress_sentence I18n.t("#{RESULTS}.progress.decline", best: 13)
-
-    visit exercise_session_result_path(second)
-    assert_progress_sentence I18n.t("#{RESULTS}.progress.progress", first: 10, current: 13)
+    assert_equal "remediation", Orm::ExerciseSession.find_by!(public_id: second).kind
     assert_readable_in_dark_mode
     assert_fits_a_phone
 
-    other = create_exercise(essential: @exercise.essential, title: "Mitose", questions: QUESTIONS)
-    visit exercise_session_result_path(completed(other, 75).public_id)
-    assert_text "15/20"
-    assert_no_progress_sentence
-
-    sign_out
-    sign_in_as teacher
-    visit exercise_session_result_path(second)
-    assert_text I18n.t("#{RESULTS}.show.student", name: "#{@student.first_name} #{@student.last_name}")
-    assert_text "13/20"
-    assert_no_progress_sentence
+    visit exercise_session_result_path(completed(@exercise, 25).public_id)
+    assert_progress_sentence I18n.t("#{RESULTS}.progress.decline", best: 20)
   end
 
   private
