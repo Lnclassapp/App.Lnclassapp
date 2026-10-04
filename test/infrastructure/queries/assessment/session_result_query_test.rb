@@ -5,6 +5,7 @@ module Queries
     # AS-11, AS-12, AS-39 (ADR-0033, ADR-0054) : le résultat d'une session terminée — score, note sur 20, maîtrise, palier
     # de badge, « Nouveau badge ! » — et sa correction question par question. Sans reveal, seules les propositions
     # cochées sont lues, et jamais la colonne answers.correct ; avec reveal, toutes, propositions correctes marquées.
+    # UDR-0073 : le progrès de l'élève sur l'exercice, lu sur ses sessions standard terminées jusqu'à celle-ci (ADR-0079 §4.3).
     class SessionResultQueryTest < ActiveSupport::TestCase
       setup do
         @student = create_student(first_name: "Awa", last_name: "Koné")
@@ -20,6 +21,17 @@ module Queries
       end
 
       def result(reveal: false, session: @session) = SessionResultQuery.new.call(public_id: session.public_id, reveal:)
+
+      # Chaque session est terminée une minute après la précédente : l'ordre de completed_at est celui de création.
+      def history(*scores, student: @student, **attributes)
+        scores.map do |score_percent|
+          travel 1.minute
+          create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:, **attributes)
+        end
+      end
+
+      def progress_of(session) = result(session:).progress
+      def grades(progress) = [ progress.trend, progress.first_grade, progress.best_grade, progress.current_grade ]
 
       test "session inconnue : nil" do
         assert_nil SessionResultQuery.new.call(public_id: "inconnue", reveal: true)
@@ -106,6 +118,85 @@ module Queries
         classroom.update!(status: "active", archived_at: nil)
         Orm::ClassroomStudent.where(student: @student).update_all(left_at: Time.current)
         assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id)
+      end
+
+      test "progrès : nil à la première session de l'élève sur l'exercice" do
+        assert_nil progress_of(@session)
+      end
+
+      test "progrès : 30 puis 90 donnent :progress, 6/20 la première fois, 18/20 aujourd'hui" do
+        @session.update!(score_percent: 30)
+        current = history(90).last
+
+        progress = progress_of(current)
+        assert_instance_of SessionResultQuery::Progress, progress
+        assert_equal [ :progress, 6, 18, 18 ], grades(progress)
+      end
+
+      test "progrès : sans écart de 10 points, :stagnant sous la maîtrise et :stable au-dessus" do
+        @session.update!(score_percent: 60)
+        assert_equal [ :stagnant, 12, 12, 12 ], grades(progress_of(history(60).last))
+
+        @session.update!(score_percent: 80)
+        Orm::ExerciseSession.where.not(id: @session.id).delete_all
+        assert_equal [ :stable, 16, 16, 16 ], grades(progress_of(history(80).last))
+      end
+
+      test "progrès : 30, 90 puis 40 — :decline sur la troisième, :progress sur la deuxième rouverte" do
+        @session.update!(score_percent: 30)
+        second, third = history(90, 40)
+
+        assert_equal [ :decline, 6, 18, 8 ], grades(progress_of(third))
+        assert_equal [ :progress, 6, 18, 18 ], grades(progress_of(second))
+        assert_nil progress_of(@session)
+      end
+
+      test "progrès : à completed_at égal, l'id départage, et la session suivante ne compte pas" do
+        @session.update!(score_percent: 30)
+        later = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 90)
+        later.update!(completed_at: @session.completed_at)
+
+        assert_nil progress_of(@session)
+        assert_equal [ :progress, 6, 18, 18 ], grades(progress_of(later))
+      end
+
+      test "progrès : ni session commencée, ni abandonnée, ni remédiation, ni autre élève, ni autre exercice" do
+        @session.update!(score_percent: 30)
+        travel 1.minute
+        create_exercise_session(student: @student, exercise: @exercise, status: "abandoned", score_percent: 0,
+                                completed_at: Time.current)
+        create_exercise_session(student: @student, exercise: @exercise, status: "started")
+        gap = create_gap(student: @student, essential: @essential)
+        history(0, gap:)
+        history(0, student: create_student)
+        travel 1.minute
+        create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), status: "completed",
+                                score_percent: 0)
+        current = history(90).last
+
+        assert_equal [ :progress, 6, 18, 18 ], grades(progress_of(current))
+      end
+
+      test "progrès : les sessions de deux assignations de deux classes forment un seul historique" do
+        first, second = Array.new(2) { create_assignment(classroom: create_classroom, assignable: @exercise) }
+        @session.update!(score_percent: 30, classroom_assignment: first)
+        current = history(90, classroom_assignment: second).last
+
+        assert_equal [ :progress, 6, 18, 18 ], grades(progress_of(current))
+      end
+
+      test "progrès : une seule requête de plus sur exercise_sessions, quel que soit le nombre de sessions" do
+        latest = history(30, 60, 90, 40, 70).last
+        [ @first, @second ].each { create_attempt(session: latest, question: it) }
+        counts = [ @session, latest ].map do |session|
+          statements = []
+          callback = ->(*, payload) { statements << payload[:sql] unless payload[:name] == "SCHEMA" }
+          ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { result(session:) }
+          [ statements.size, statements.count { it.include?('FROM "exercise_sessions"') } ]
+        end
+
+        assert_equal counts.first, counts.last
+        assert_equal 2, counts.first.last
       end
     end
   end

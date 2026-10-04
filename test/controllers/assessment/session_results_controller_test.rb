@@ -4,6 +4,7 @@ require "test_helper"
 # « Félicitations ! » et confettis dès le seuil de réussite, « Courage ! » en dessous, « Recommencer » sous 100.
 # L'élève propriétaire y voit ses choix, le verdict et l'explication, jamais les propositions correctes (décision du
 # porteur, 881a623) ; l'enseignant d'une classe active de l'élève et l'équipe voient la correction complète.
+# UDR-0073 : à partir de sa deuxième session, l'élève lit sous sa note une phrase de progrès, jamais de sanction.
 class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   GRADING = Entities::Assessment::Grading
 
@@ -33,6 +34,17 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def show(session = @session) = get(exercise_session_result_path(session.public_id))
+
+  # Sessions terminées une minute après la précédente, à la suite de @session (rescorée au premier score).
+  def sessions(first, *scores)
+    @session.update!(score_percent: first)
+    scores.map do |score_percent|
+      travel 1.minute
+      complete(score_percent:)
+    end
+  end
+
+  def progress(key, **) = I18n.t("#{scope}.progress.#{key}", **)
 
   test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Félicitations ! » et les confettis, sans score redit" do
     sign_in_as @student
@@ -164,5 +176,91 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/
     assert_select "#session_result", text: /20\/20/
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
+  end
+
+  test "progrès : aucune phrase à la première session" do
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_progress", 0
+  end
+
+  test "progrès : 30 puis 90, l'élève lit qu'il progresse, icône verte, entre la note et les boutons" do
+    current = sessions(30, 90).last
+    sign_in_as @student
+
+    show current
+
+    expected = "Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui."
+    assert_equal expected, progress(:progress, first: 6, current: 18)
+    assert_select "#session_result dl + p#session_progress + div form#restart-exercise-form"
+    assert_select "p#session_progress.text-sm.text-ink", text: expected
+    assert_select "#session_progress svg.text-success[aria-hidden=true]", 1
+  end
+
+  test "progrès : 60 puis 60, il reste autour de 12/20 et relit la correction, sans « stagne » ni « baisse »" do
+    current = sessions(60, 60).last
+    sign_in_as @student
+
+    show current
+
+    expected = "Tu restes autour de 12/20. Relis la correction ci-dessous avant de recommencer."
+    assert_equal expected, progress(:stagnant, current: 12)
+    assert_select "#session_progress", text: expected
+    assert_select "#session_progress svg.text-mute", 1
+    assert_no_match(/stagne|baisse/i, response.body)
+  end
+
+  test "progrès : 80 puis 80, il confirme sa maîtrise" do
+    current = sessions(80, 80).last
+    sign_in_as @student
+
+    show current
+
+    expected = "Tu confirmes ta maîtrise : 16/20."
+    assert_equal expected, progress(:stable, current: 16)
+    assert_select "#session_progress", text: expected
+    assert_select "#session_progress svg.text-success", 1
+  end
+
+  test "progrès : 30, 90 puis 40, la troisième rappelle son meilleur résultat, la deuxième rouverte son progrès" do
+    second, third = sessions(30, 90, 40)
+    sign_in_as @student
+
+    show third
+
+    expected = "Ton meilleur résultat reste 18/20. Relis la correction, tu peux le retrouver."
+    assert_equal expected, progress(:decline, best: 18)
+    assert_select "#session_progress", text: expected
+    assert_select "#session_progress svg.text-mute", 1
+    assert_no_match(/stagne|baisse/i, response.body)
+
+    show second
+
+    assert_select "#session_progress", text: progress(:progress, first: 6, current: 18)
+  end
+
+  test "progrès : aucune couleur de sanction dans la phrase, quel que soit le cas" do
+    sign_in_as @student
+
+    sessions(30, 90, 40).each do |session|
+      show session
+
+      assert_select "#session_progress" do
+        assert_select "[class*=error], [class*=warning], [class*=struggling], [class*=fragile]", 0
+      end
+    end
+    assert_select "#session_progress[class*=error], #session_progress[class*=warning]", 0
+  end
+
+  test "progrès : l'enseignant de la classe ne voit aucune phrase sur la deuxième session de l'élève" do
+    current = sessions(30, 90).last
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show current
+
+    assert_response :success
+    assert_select "#session_progress", 0
   end
 end
