@@ -1,8 +1,10 @@
 # 🌐 DELIVERY · Teams::SchoolsController
-# Rôle : liste nationale filtrée, fiche (et enseignants en attente), modification en modale, désactivation, suppression refusée
-# ADR  : 0026, 0030, 0036, 0059, 0063 · UDR : 0006, 0036, 0046, 0050 · aucune création : un établissement n'entre que par l'import
+# Rôle : liste nationale filtrée, fiche (enseignants en attente, « Direction », « Directions retirées »), modale, désactivation
+# ADR  : 0026, 0030, 0036, 0059, 0063, 0077 · UDR : 0006, 0036, 0046, 0050, 0070 · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
+    include SchoolStaffBlock
+
     LIST_FRAME = "schools".freeze
     FILTERS = %i[drena school_type cycle status search].freeze
     STATUS_TONES = { "active" => :success, "draft" => :warning, "inactive" => :neutral }.freeze
@@ -21,6 +23,7 @@ module Teams
 
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
       @join_requests = Queries::School::JoinRequestsQuery.new.for_school(school_public_id: @school.public_id)
+      load_school_staff(Repositories::School::SchoolRepository.new.find_by_public_id(public_id: @school.public_id))
     end
 
     def edit

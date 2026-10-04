@@ -7,7 +7,7 @@
 | **Chantier** | [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md) |
 | **ADR lié** | [ADR-0065](../adr/0065-espace-direction-simple-en-lecture-seule.md) (définitions du travail des élèves, inchangées) · [ADR-0078](../adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) *(chantier `annonces`, amendé par la décision D-A1 du porteur)* |
 | **Amende** | [UDR-0052](0052-espace-direction-simple.md) §2.1, §2.2, §3 « Page Travail des élèves » · [UDR-0006](0006-shell-applicatif-par-role.md) (navigation `school_admin`) · [UDR-0056](0056-gestes-de-la-direction.md) §3.1 (première destination) |
-| **S'appuie sur** | [UDR-0005](0005-design-system-fondateur.md) (tokens) · [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md) §3.3 (bulles, illustrations) · [UDR-0071](0071-annonces.md) §3.5 (carrousel) · [UDR-0054](0054-finitions-d-interface.md) (retour, infobulles) |
+| **S'appuie sur** | [UDR-0070](0070-inscription-de-la-direction-et-comptes-direction.md) §3.3 (bandeau d'arrivée, conservé) · [UDR-0005](0005-design-system-fondateur.md) (tokens) · [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md) §3.3 (bulles, illustrations) · [UDR-0071](0071-annonces.md) §3.5 (carrousel) · [UDR-0054](0054-finitions-d-interface.md) (retour, infobulles) |
 | **Remplacé par** | — |
 
 ---
@@ -43,6 +43,7 @@ La direction arrive sur « Travail des élèves », un tableau d'une ligne par c
 
 - `page_title t(".page_title")` → « Accueil » (titre complet « Accueil · Direction · Lnclass », mécanique existante).
 - `ui_page_header title: t(".greeting", name: shell_user.first_name)` → « Bonjour, Fatou », sans sous-titre (le nom de l'établissement est dans la carte : dit une fois).
+- Sous l'en-tête, **inchangé**, le bandeau d'arrivée des directions `#staff_arrivals` de l'UDR-0070 §3.3 (`@arrivals`, directions arrivées depuis moins de 7 jours ; rendu, locale `index.arrivals.*` et tests repris tels quels). *Constat au merge de `Develop` du 2026-10-04 : le bandeau est arrivé avec le chantier `inscription-direction` pendant ce chantier.*
 - Puis `div.grid.gap-5`, dans l'ordre :
   1. `render "school_card", home: @home` (§3.3) ;
   2. `render "levels", home: @home` (§3.4) ;

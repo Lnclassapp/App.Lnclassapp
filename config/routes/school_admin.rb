@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace direction ; tout contrôleur hérite de SchoolAdmin::BaseController
 # Rôle : lectures de la direction sur son seul établissement, et ses trois gestes (lien, classes d'un niveau, enseignants)
-# ADR  : 0036, 0065, 0071 · UDR : 0052, 0056, 0072 · l'établissement vient toujours du compte, jamais d'un paramètre
+# ADR  : 0036, 0065, 0071, 0077 · UDR : 0052, 0056, 0070, 0072 · l'établissement vient toujours du compte, jamais d'un paramètre
 scope "school-admin", module: "school_admin", as: "school_admin" do
   resources :classrooms, only: %i[index show], param: :public_id
   # UDR-0072 §3.8, §3.11 : la page d'un niveau, par son slug figé ; l'activité récente, frame différé de l'accueil.
@@ -18,5 +18,7 @@ scope "school-admin", module: "school_admin", as: "school_admin" do
   # Sous /school-admin/school, sans le préfixe de nom « school_ » (UDR-0056 §3.0 : school_admin_level_classrooms_path).
   scope "school" do
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
+    # ADR-0077 : retirer une autre direction de l'établissement (public_id du compte).
+    resources :staff_members, only: :destroy, path: "staff", param: :public_id
   end
 end

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Identity::AuditAction
 # Rôle : liste fermée des actions écrites dans le journal d'audit
-# ADR  : 0031, 0032, 0035, 0036 (amendement 2), 0038, 0050, 0055, 0058, 0071, 0074
+# ADR  : 0031, 0032, 0035, 0036 (amendement 2), 0038, 0050, 0055, 0058, 0071, 0074, 0077
 module Entities
   module Identity
     module AuditAction
@@ -13,6 +13,7 @@ module Entities
         teacher.detached teacher.reinstated
         user.anonymized user.deletion_requested user.deletion_request_cancelled
         article.created article.updated article.published article.archived
+        school_staff.registered school_staff.archived school_staff.restored school_staff.deleted
       ].freeze
 
       def self.valid?(action) = ALL.include?(action)

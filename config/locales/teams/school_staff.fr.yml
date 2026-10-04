@@ -1,0 +1,15 @@
+# Directions retirées et restauration par l'équipe (chantier inscription-direction, Lot C) — ADR-0077, UDR-0070 §3.5 ;
+# le bloc « Direction » et le retrait sont ceux de shared.school_staff
+fr:
+  teams:
+    schools:
+      archived_staff:
+        title: "Directions retirées"
+        line: "Retiré le %{date} par %{author}"
+        due: "Supprimé le %{date}"
+        restore: "Restaurer"
+        restore_label: "Restaurer %{name}"
+    school_staff_restorations:
+      create:
+        done: "%{name} est de nouveau dans la direction."
+        cap_reached: "Les 3 places de direction par le code sont prises : retirez d'abord un compte."

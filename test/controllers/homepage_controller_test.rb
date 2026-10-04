@@ -126,6 +126,28 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_no_match INFORMAL, css_select("dialog#role-modal-teacher-hero").first.text
   end
 
+  # UDR-0070 §3.2 (ID-09): three entries lead the direction to its registration, the hero gaining only a text link.
+  test "ID-09: the direction finds its registration under the hero buttons, in « Établissements » and in the footer" do
+    get root_url
+
+    assert_select "#hero div.grid + p.mt-4.text-sm", text: /#{I18n.t("homepage.index.school_staff_link.prompt")}/ do
+      assert_select "a#school-staff-signup-link.min-h-tap[href='#{new_school_staff_registration_path}']",
+                    text: I18n.t("homepage.index.school_staff_link.link")
+    end
+    assert_select "section#enseignants + section#etablissements[aria-labelledby='etablissements-title'].scroll-mt-20" do
+      assert_select "h2#etablissements-title", text: I18n.t("homepage.index.schools.title")
+      assert_select "p", text: I18n.t("homepage.index.schools.eyebrow")
+      assert_select "p", text: I18n.t("homepage.index.schools.lead")
+      assert_select "ul > li", 3
+      assert_select "ul > li", text: I18n.t("homepage.index.schools.items.student_work")
+      assert_select "a[href='#{new_school_staff_registration_path}']", text: I18n.t("homepage.index.schools.cta")
+    end
+    assert_no_match INFORMAL, css_select("#etablissements").first.text
+    assert_equal [ "#comment", "#enseignants", "#etablissements", new_session_path ],
+                 css_select("footer ul:not(#public_pages) li a").map { it["href"] }
+    assert_select "footer a[href='#etablissements']", text: I18n.t("homepage.index.footer.schools")
+  end
+
   test "every link is recognized by the router or targets a section of the page" do
     get root_url
 

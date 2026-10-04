@@ -266,4 +266,52 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
       sign_out
     end
   end
+
+  test "ID-21 (UDR-0070 §3.5): 6 removed directions of two schools: the 5 most recent, each leading to its school, then « Et 1 autre »" do
+    travel_to Time.zone.local(2026, 10, 4, 10) do
+      bouake = create_school(name: "Lycée Moderne de Bouaké")
+      korhogo = create_school(name: "Collège de Korhogo")
+      removed = 6.times.map do |index|
+        create_school_admin(school: index.even? ? bouake : korhogo, first_name: "Direction#{index}", last_name: "Koné",
+                            archived_at: (index + 1).days.ago)
+      end
+      deletion_request(Date.current - 3)
+      sign_in_as @member
+
+      get team_home_path
+
+      assert_select "#team_home_archived_staff" do
+        assert_select "h2", tl("archived_staff.title")
+        assert_select "*", text: tl("archived_staff.subtitle")
+        assert_select "li", 5
+        assert_select "li a[href='#{school_path(bouake.public_id)}']",
+                      text: tl("archived_staff.line", name: "Direction0 Koné", school: "Lycée Moderne de Bouaké", date: "3 octobre 2026")
+        assert_select "li a[href='#{school_path(korhogo.public_id)}']", text: /Direction1 Koné · Collège de Korhogo/
+        assert_select "li", text: /#{removed.last.first_name}/, count: 0
+        assert_select "p#team_home_archived_staff_more", tl("archived_staff.more", count: 1)
+      end
+      assert_operator response.body.index("team_home_deletion_requests"), :<, response.body.index("team_home_archived_staff")
+    end
+  end
+
+  test "ID-21: a field member sees the removed directions; a content member does not; without any, no card" do
+    create_school_admin(archived_at: 1.day.ago)
+
+    sign_in_as create_team_member(team_role: "field")
+    get team_home_path
+    assert_select "#team_home_archived_staff li", 1
+    assert_select "#team_home_archived_staff_more", 0
+    sign_out
+
+    sign_in_as create_team_member(team_role: "content")
+    get team_home_path
+    assert_response :success
+    assert_select "#team_home_archived_staff", 0
+    sign_out
+
+    Orm::SchoolStaff.update_all(archived_at: nil, archived_by_id: nil)
+    sign_in_as @member
+    get team_home_path
+    assert_select "#team_home_archived_staff", 0
+  end
 end

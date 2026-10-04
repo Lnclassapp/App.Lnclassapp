@@ -13,16 +13,16 @@ class FinitionsTeamReferentialTest < ApplicationSystemTestCase
   def active_id = evaluate_script("document.activeElement.id")
   def active_text = evaluate_script("document.activeElement.textContent").squish
 
-  # FU-10: the back link « Accueil » is the first link of the main content, above the title.
-  test "the referential screens lead back to the team home, above their title" do
+  # FU-10, amended by UDR-0068 (« Retour des écrans du référentiel »): the back link « Référentiel » is the first link of the main content, above the title.
+  test "the referential screens lead back to the referential page, above their title" do
     { levels_path => "Niveaux", series_index_path => "Séries", materials_path => "Matières", drenas_path => "DRENA",
       classroom_plan_path => "Barème des classes" }.each do |path, name|
       visit path
 
       assert_title title(name)
       first_link = find("main#main a", match: :first)
-      assert_equal "Accueil", first_link.text, "retour de #{name}"
-      assert_equal team_home_path, URI(first_link[:href]).path
+      assert_equal "Référentiel", first_link.text, "retour de #{name}"
+      assert_equal teams_referential_path, URI(first_link[:href]).path
       assert_selector "main nav[aria-label=Retour] + div h1", text: name
     end
   end
