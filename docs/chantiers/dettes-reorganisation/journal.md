@@ -13,7 +13,11 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- **Budget du pilotage sur 7 jours, mesuré à la limite sur ce conteneur.** Le premier `PERF=1` sur le jeu réparé (lot B, avant le lot D) a donné le pilotage national 7 jours à 294,8 ms p95 et la page filtrée à 302,8 ms, contre ≈ 190 ms et 179 ms sur les machines des chantiers `cache-ecrans-lourds` et `reorganisation-equipe-enseignant`.
+  - Le code du pilotage national n'a pas changé : c'est la machine, neuve et bruitée.
+  - Sur cinq séries du même script (`bench_dashboard.rb`, base de développement semée par `seed_dataset.rb`), le national 7 jours varie de 294 à 403 ms en p95, de 252 à 295 ms en p50.
+  - La comparaison du lot D se lit donc en **p50, avant / après sur le même jeu, en alternance** (voir ci-dessous), pas contre le seuil absolu.
+- **Le seuil du test de budget ne tranche pas ici.** Une même série peut passer ou casser à quelques millisecondes près. Le test garde son seuil ; la mesure qui fait foi pour ce chantier est l'A/B.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -55,6 +59,27 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Cause** : les deux lectures d'une même page ne datent pas du même instant. La query du tableau de bord garde l'année en cache sous filtre DRENA, alors que la page y ajoute une lecture en direct qui doit lui être égale (RE-08).
 - **Trou de test** : le test RE-08 (`test/infrastructure/queries/school/drena_schools_query_test.rb:107`) lit la ligne DRENA avec un `NullStore` (ligne 20). Il compare deux lectures en direct et ne voit jamais le cache. Le test de reproduction utilise le cache réel (`:memory_store` en test) et change les données entre deux lectures.
 
+### Mesure du lot D — avant / après, même jeu, même machine
+
+`bin/rails runner bench_dashboard.rb` sur la base de développement semée par `script/perf/seed_dataset.rb` (312 065 sessions, 55 260 devoirs). Lecture comme le contrôleur : les chiffres, puis la page d'établissements de la plus grande DRENA. 25 lectures après 3 d'échauffement, séries alternées `git stash`.
+
+| Lecture | Avant (p50, 3 séries) | Après (p50, 3 séries) |
+|---|---|---|
+| Pilotage national 7 jours (code inchangé, témoin) | 252 – 263 ms | 276 – 295 ms |
+| Page filtrée 7 jours | 234 – 241 ms | 225 – 248 ms |
+| Page filtrée « année », entrée chaude | 115 – 130 ms | **24 – 27 ms** |
+| Page filtrée « année », à froid | 373 – 379 ms | 352 – 381 ms |
+
+- La page filtrée 7 jours ne coûte pas plus : une requête de lignes de plus dans les chiffres, mais ni recherche de la DRENA, ni total, ni page en SQL.
+- La page filtrée « année » gagne un facteur 5 à chaud : le tableau, lu en direct avant, entre dans l'entrée de cache.
+
+`PERF=1 test/performance/school/heavy_screens_budget_test.rb`, après le lot D (p95, budget 300 ms) :
+- pilotage filtré 7 jours de la plus grande DRENA : **237,9 ms** ;
+- pilotage filtré « année », entrée chaude : **22,6 ms** ;
+- à froid, noté et non budgété : 447,5 ms en national, 507,3 ms filtré.
+
+Le test échoue sur le pilotage **national** 7 jours, à 397,8 ms : son code n'a pas changé, et il mesurait 294,8 ms une heure plus tôt sur le même conteneur (voir « Ce qui a dérapé »).
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
@@ -62,6 +87,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Les bases de développement déjà semées gardent leurs deux énoncés en `<p>` | Les seeds sont idempotents par nom ; ces données ne sortent jamais du poste du développeur | `bin/rails db:reset` |
+| La fabrique de test `create_exercise` écrit ses énoncés en `<p>Question n</p>` | Données de test seulement ; six assertions comparent cette chaîne telle quelle. Les corriger ne change rien à l'application | Finitions, avec les tests qui la citent |
+| Le budget `PERF=1` du pilotage sur 7 jours est à la limite sur ce conteneur, même pour le national inchangé | Machine plus lente et bruitée ; aucun écart dû au chantier (A/B) | Rejouer `PERF=1` sur la machine de recette ; en cas de dépassement, chantier `optimize` (ADR-0062) |
 
 ## Clôture
 

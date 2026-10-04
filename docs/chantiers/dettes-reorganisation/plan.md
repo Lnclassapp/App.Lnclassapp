@@ -132,12 +132,12 @@ Un seul exécutant, en série A → B → C → D : les lots sont petits, et C e
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit **à la main** dans l'application avant toute ligne de code (1 : texte du toast ; 2 : test de budget ; 3 : base de développement ; 4 : constat du challenger d'origine)
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test (`journal.md`)
-- [ ] Test de reproduction écrit **avant** le correctif (A, B, C, D)
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié) (A, B, C, D)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Test de reproduction écrit **avant** le correctif (A, B, C, D)
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié) : A « oct.. » au lieu de « oct. » ; B `PG::CheckViolation` sur une ligne `Essential` ; C `<p>La membrane plasmique…</p>` et `<p>Question 1…</p>` ; D « 1 élève » en haut pour 3 dans le tableau
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme (A : `DueDateHelper` ; B, C : le script et les seeds qui écrivent ; D : les deux queries, une seule lecture)
+- [x] Test au vert · suite du contexte borné au vert (suite complète : 3 586 tests, 0 échec, couverture 100 % lignes et branches ; 63 tests système du pilotage, de la classe, des exercices et des accueils)
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours (A : « jeudi 6 mai. » ; C : contenu du cours en texte riche ; D : 7 et 30 jours en direct, vue nationale en cache, RE-07 à RE-10)
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (bug 3, bases de développement)
 - [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
