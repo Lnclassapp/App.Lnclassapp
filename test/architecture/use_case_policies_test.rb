@@ -10,7 +10,8 @@ class UseCasePoliciesTest < ActiveSupport::TestCase
   EXEMPT = {
     "UseCases::Identity::Authenticate" => "connexion : l'acteur n'existe pas encore",
     "UseCases::Identity::ResetPinWithCode" => "PIN oublié : la personne n'est pas connectée",
-    "UseCases::Identity::AcceptInvitation" => "invitation : le compte n'existe pas encore"
+    "UseCases::Identity::AcceptInvitation" => "invitation : le compte n'existe pas encore",
+    "UseCases::Communication::PublishScheduledMessages" => "job sans acteur : droit vérifié à la programmation, exposition bornée par la date de fin, retrait possible (ADR-0078 §6)"
   }.freeze
   # Modules shared by use cases, not use cases: the adapter contract of the import engine, the session renewal of the
   # profile (ADR-0055).

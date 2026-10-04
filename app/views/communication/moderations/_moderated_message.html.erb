@@ -1,0 +1,27 @@
+<%# 🌐 UI · communication/moderations/_moderated_message — une annonce à modérer (Queries::Communication::ModerationQuery::Row) %>
+<%# Rôle : la carte (context: :moderation), puis « <établissement> · <dates> » et « Retirer » derrière une confirmation %>
+<%# ADR  : 0078 · UDR : 0005, 0042, 0071 (§3.2, §3.7) · Stimulus : modal %>
+<% card = row.card %>
+<% place = row.school_name || t("communication.scopes.national") %>
+<% dates = if row.status == "scheduled"
+             t(".dates.scheduled", date: announcement_date(row.at, time: true))
+           else
+             t(".dates.published", date: announcement_date(row.at), last_day: announcement_date(row.last_day))
+           end %>
+<li id="moderated_announcement_<%= card.public_id %>">
+  <%= render "communication/messages/card", card:, context: :moderation, dismissible: false %>
+  <div class="flex items-center justify-between gap-3 pt-2">
+    <p class="text-sm text-mute"><%= t(".line", place:, dates:) %></p>
+    <%= ui_modal id: "withdraw-#{card.public_id}", title: t(".withdraw_title"), trigger: t(".withdraw"), trigger_variant: :secondary,
+                 trigger_icon: "no-symbol" do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".cancel"), variant: :ghost, data: { action: "modal#close" } %>
+        <%= button_to t(".withdraw"), announcement_withdrawal_path(card.public_id), method: :post, form: { class: "contents" },
+                      data: { turbo_stream: true },
+                      class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:md],
+                                         ComponentsHelper::BUTTON_VARIANTS[:danger]) %>
+      <% end %>
+      <p class="text-sm text-mute"><%= t(".withdraw_text") %></p>
+    <% end %>
+  </div>
+</li>

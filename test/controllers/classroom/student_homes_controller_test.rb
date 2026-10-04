@@ -294,4 +294,87 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ [ "Blog", blog_path ], [ "Notre mission", mission_path ], [ "Protection des données", privacy_path ],
                    [ "Conditions d'utilisation", terms_path ] ], help_sheet_footer_links
   end
+
+  # UDR-0071 §3.5 (Lot B of the annonces chantier, ADR-0078 §4.3): the announcements of the student, second section of the
+  # home, after « À faire »: the direction, then the teachers, then the team, five at most, the dismissed ones left out.
+  def announce(author, title, at: 1.hour.ago, **)
+    create_message(author:, title:, published_at: at, **)
+  end
+
+  def announcement_titles = css_select("#student_home_announcements li article h3").map(&:text)
+
+  def count_queries(&)
+    count = 0
+    counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
+    count
+  end
+
+  test "AN-10 — the carousel after « À faire »: the direction, the teachers newest first, the team; five cards, then the link" do
+    teacher = create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+    team = create_team_member(second_factor: false)
+    announce(create_school_admin(school: @classroom.school), "Devoirs communs", at: 5.hours.ago, school: @classroom.school)
+    [ [ "Fiches 1", 3 ], [ "Fiches 3", 1 ], [ "Fiches 2", 2 ] ].each do |title, hours|
+      announce(teacher, title, at: hours.hours.ago, audience: "classrooms", classrooms: [ @classroom ])
+    end
+    announce(team, "Rentrée ancienne", at: 4.hours.ago, audience: "all")
+    announce(team, "Rentrée numérique", at: 30.minutes.ago, audience: "all")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal %w[student_home_exercises student_home_announcements student_home_classroom],
+                 css_select("#student_home > [id]").map { it["id"] }.first(3)
+    assert_equal [ "Devoirs communs", "Fiches 3", "Fiches 2", "Fiches 1", "Rentrée numérique" ], announcement_titles
+  end
+
+  test "AN-22 — the carousel of the student leads to « Toutes les annonces »" do
+    announce(create_team_member(second_factor: false), "Rentrée numérique", audience: "all")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#student_home_announcements a[href=?]", announcements_path, text: I18n.t("communication.inboxes.carousel.all")
+  end
+
+  test "AN-11 — no announcement for the student: no announcements band at all" do
+    announce(create_team_member(second_factor: false), "Pour les enseignants", audience: "teachers")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#student_home_announcements", 0
+  end
+
+  test "AN-12 — a dismissed announcement is out of the carousel, on any device; all dismissed, the link alone stays" do
+    team = create_team_member(second_factor: false)
+    dismissed = announce(team, "Rentrée numérique", audience: "all")
+    announce(team, "Concours", audience: "all", at: 2.hours.ago)
+    dismiss_message(message: dismissed, user: @student)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal [ "Concours" ], announcement_titles
+
+    dismiss_message(message: Orm::Message.find_by!(title: "Concours"), user: @student)
+    get student_home_path
+
+    assert_select "#student_home_announcements" do
+      assert_select "ul", 0
+      assert_select "a[href=?]", announcements_path
+    end
+  end
+
+  test "ADR-0067 — the home costs the same number of queries with one announcement or with six" do
+    team = create_team_member(second_factor: false)
+    sign_in_as @student
+    announce(team, "Annonce 0", audience: "all")
+    get student_home_path
+    one = count_queries { get student_home_path }
+    5.times { |index| announce(team, "Annonce #{index + 1}", audience: "all") }
+
+    assert_equal one, count_queries { get student_home_path }
+    assert_equal 5, announcement_titles.size
+  end
 end
