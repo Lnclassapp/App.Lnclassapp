@@ -3,15 +3,15 @@ require "application_system_test_case"
 # AN-22 and the nominal journey of the PRD (§3), in a real browser, end to end, then its error path on the same announcement.
 # On his phone, M. Kouassi opens « Annonces » from his bottom bar and publishes « Nouvelles fiches » for 3ème B and 3ème C with
 # an mp3. On hers, Awa finds the announcement of Mme Kamaté first (official badge, no cross), then M. Kouassi's card with ▶
-# on his mp3; she hides it with its cross and « Toutes les annonces » shows it « Masquée ». Fatou withdraws it from
-# « Toutes », behind its confirmation: the line leaves the list.
+# on his mp3; she hides it with its cross and « Toutes les annonces » shows it « Masquée ». Fatou opens « Annonces » from the
+# second card of her sidebar (the team's secondary list), then « Toutes », and withdraws it behind its confirmation: the line
+# leaves the list.
 #
 # One journey, one sign-in per step: the chantier has 15 s of system suite (ADR-0069 §9). What another test already plays
-# stays there: in the browser, ▶ playing an audio and « Annuler » after a hide (AN-12, AN-13, student_announcements_test),
-# the team's « Annonces » link (AN-22, role_homes_test); at controller level, the direction's form (AN-03,
-# authored_messages_controller_test), the 404 of the audio for a student of 3ème A (AN-09, message_files_controller_test),
-# and, once withdrawn, Awa reading it no more, its audio in 404 and « Retirée » without actions for M. Kouassi (AN-16,
-# message_withdrawals_controller_test).
+# stays there: in the browser, ▶ playing an audio and « Annuler » after a hide (AN-12, AN-13, student_announcements_test);
+# at controller level, the direction's form (AN-03, authored_messages_controller_test), the 404 of the audio for a student
+# of 3ème A (AN-09, message_files_controller_test), and, once withdrawn, Awa reading it no more, its audio in 404 and
+# « Retirée » without actions for M. Kouassi (AN-16, message_withdrawals_controller_test).
 class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
   AUDIO = "announcements/nouvelles-fiches.mp3".freeze
   BOTTOM_BAR = "nav.fixed.bottom-0".freeze
@@ -47,7 +47,10 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
     end
 
     sign_in_as create_team_member(first_name: "Fatou")
-    visit moderated_announcements_path
+    within("nav#sidebar_secondary") { click_link tn(:announcements) }
+
+    assert_current_path my_announcements_path
+    within("#announcement-tabs") { click_link tc("tabs.all") }
     within("#moderated_announcement_#{fiches.public_id}") do
       click_on tc("moderations.moderated_message.withdraw")
       within("dialog[open]") { click_on tc("moderations.moderated_message.withdraw") }

@@ -13,8 +13,8 @@ module NavigationHelper
 
   # Une seule liste par rôle, servie à la barre latérale ET à la barre basse : le mobile voit tout ce que voit le bureau.
   # Les noms de route sont le contrat du Lot 0 de la V1 ; une route pas encore dessinée rend l'entrée inactive.
-  # UDR-0071 §3.1 : « Annonces » en dernier pour les trois rôles adultes ; l'équipe arrive sur « Mes annonces » ; l'élève n'en a
-  # pas (son carrousel mène à « Toutes les annonces »).
+  # UDR-0071 §3.1 : « Annonces » en dernier pour l'enseignant et la direction ; l'élève n'en a pas (son carrousel mène à
+  # « Toutes les annonces ») ; celle de l'équipe est dans sa liste secondaire.
   DESTINATIONS = {
     student: [ [ :home, :student_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
                [ :classroom, :student_classroom_path, "academic-cap" ] ],
@@ -22,15 +22,17 @@ module NavigationHelper
                [ :courses, :courses_path, "book-open" ], [ :announcements, :announcements_path, "megaphone" ] ],
     # UDR-0068 §3.1 : Imports passe dans la liste secondaire (2e carte, menu « Plus »).
     team: [ [ :home, :team_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
-            [ :schools, :schools_path, "building-library" ], [ :dashboard, :team_dashboard_path, "chart-bar" ],
-            [ :announcements, :my_announcements_path, "megaphone" ] ],
+            [ :schools, :schools_path, "building-library" ], [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
     # UDR-0052, UDR-0056 §3.1 : sans accueil ; « Travail des élèves » est l'accueil de la direction.
     school_admin: [ [ :student_work, :school_admin_classrooms_path, "chart-bar" ], [ :teachers, :school_admin_teachers_path, "user-group" ],
                     [ :school, :school_admin_school_path, "building-library" ], [ :announcements, :announcements_path, "megaphone" ] ]
   }.freeze
   # UDR-0068 §3.1 : la configuration de l'équipe, 2e carte de la barre latérale et menu « Plus » de la barre basse.
+  # Décision du porteur (chantier annonces, 2026-10-04) : « Annonces » y vient en dernier, sur « Mes annonces » ; la barre
+  # basse de l'équipe garde ses 5 cases.
   SECONDARY_DESTINATIONS = {
-    team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ] ]
+    team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
+            [ :announcements, :my_announcements_path, "megaphone" ] ]
   }.freeze
   # UDR-0069 §3.6 : frames différés posés sous les cartes de la barre latérale, par rôle : [id du frame, route de la source].
   SIDEBAR_FRAMES = { teacher: [ [ "sidebar_referral", :teacher_invite_path ] ] }.freeze
@@ -59,9 +61,7 @@ module NavigationHelper
     sidebar: { active: "text-brand-strong", idle: "" },
     bottom: { active: "rounded-full bg-brand-soft px-4 py-0.5 text-brand-strong", idle: "px-4 py-0.5" }
   }.freeze
-  # UDR-0071 §3.1 et §4 : la barre basse de l'équipe a 6 cases (5 destinations, puis « Plus ») ; une 7e imposera de regrouper.
-  NAV_GRIDS = { 1 => "grid-cols-1", 2 => "grid-cols-2", 3 => "grid-cols-3", 4 => "grid-cols-4", 5 => "grid-cols-5",
-                6 => "grid-cols-6" }.freeze
+  NAV_GRIDS = { 1 => "grid-cols-1", 2 => "grid-cols-2", 3 => "grid-cols-3", 4 => "grid-cols-4", 5 => "grid-cols-5" }.freeze
 
   def navigation_for(role)
     DESTINATIONS.fetch(role.to_sym).map { |key, route, icon| Destination.new(key:, route:, icon:) }

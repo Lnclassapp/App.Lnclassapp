@@ -5,7 +5,8 @@ require "application_system_test_case"
 # destination whose route is not drawn in V1 renders as an inactive entry (NavigationHelper): it is checked as inactive,
 # never followed. The data holds assignments: on an empty base, the old feeds passed green by mistake. Since ADR-0072
 # an exercise is the only assignable kind: two exercises of the sheet are assigned.
-# AN-22 (chantier annonces, UDR-0071 §3.1): « Annonces » closes the navigation of the three adult roles; the student has none.
+# AN-22 (chantier annonces, UDR-0071 §3.1): « Annonces » closes the navigation of the teacher and of the direction, and the
+# secondary list of the team; the student has none.
 class RoleHomesTest < ApplicationSystemTestCase
   setup do
     svt = create_material(name: "SVT", category: "science")
@@ -52,14 +53,29 @@ class RoleHomesTest < ApplicationSystemTestCase
   # TR-10 (UDR-0049, amendment of UDR-0006 of 2026-09-28): « Pilotage » is drawn, no team destination is inactive.
   # RE-01 (UDR-0068 §3.2): Imports has left the destinations for the « Configuration » card, opened by
   # test/system/teams/configuration_navigation_test.rb.
-  # AN-22: « Annonces » leads the team to « Mes annonces ». The bottom bars of the team and of the direction are checked by
-  # test/system/design_system_test.rb, the teacher's followed by test/system/communication/announcements_journey_test.rb.
-  test "AN-22 — the team member reaches their home, then every destination of their navigation, the dashboard and « Annonces » included" do
+  # AN-22 (UDR-0071 §3.1, owner's decision of 2026-10-04): the team's « Annonces » is the last entry of its secondary list,
+  # on « Mes annonces »: the second card of the sidebar on a desktop, the « Plus » menu on a phone; current on its page.
+  test "AN-22 — the team member reaches their home, then every destination of their navigation, « Annonces » by its second card and « Plus »" do
     sign_in_as create_team_member(first_name: "Awa")
 
     assert_home team_home_path, greeting: I18n.t("teams.homes.show.greeting", name: "Awa")
-    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, dashboard: team_dashboard_path,
-                                announcements: my_announcements_path }
+    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, dashboard: team_dashboard_path }
+    within("nav#sidebar_secondary") do
+      assert_equal %i[referential imports announcements].map { tn(it) }, all("a").map { it.text.squish }
+      click_link tn(:announcements)
+    end
+
+    assert_current_path my_announcements_path
+    within("nav#sidebar_secondary") { assert_selector "a[aria-current=page][href='#{my_announcements_path}']", text: tn(:announcements) }
+    back_home_by_logo(team_home_path)
+    with_mobile_viewport do
+      find("button#bottom_bar_more").click
+      within("#bottom_bar_more_menu[role=menu]") { click_link tn(:announcements) }
+
+      assert_current_path my_announcements_path
+      assert_selector "button#bottom_bar_more[aria-current=page]"
+      assert_selector "#bottom_bar_more_menu a[aria-current=page][href='#{my_announcements_path}']", visible: :all
+    end
     assert_signs_out
   end
 

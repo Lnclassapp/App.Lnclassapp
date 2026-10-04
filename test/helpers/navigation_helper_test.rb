@@ -18,42 +18,54 @@ class NavigationHelperTest < ActionView::TestCase
       destinations = navigation_for(role.to_s)
 
       assert_not_empty destinations
-      # UDR-0068 §3.1 : « Plus » prend une case de la barre basse ; UDR-0071 §3.1 et §4 : 6 cases au plus (équipe).
+      # UDR-0068 §3.1 : « Plus » prend une case de la barre basse ; 5 cases au plus.
       assert_operator bottom_bar_size(role), :<=, NavigationHelper::NAV_GRIDS.keys.max
       assert nav_grid_class(bottom_bar_size(role))
     end
     assert_raises(KeyError) { navigation_for(:parent) }
   end
 
-  # AN-22 (UDR-0071 §3.1) : « Annonces », en dernier, pour les trois rôles adultes ; l'équipe arrive sur « Mes annonces ».
-  test "AN-22 — « Annonces » closes the navigation of the teacher, the direction and the team, never the student's" do
-    { teacher: "/announcements", school_admin: "/announcements", team: "/announcements/mine" }.each do |role, path|
+  # AN-22 (UDR-0071 §3.1) : « Annonces », en dernier, pour l'enseignant et la direction ; pour l'équipe, en dernier de sa liste
+  # secondaire (décision du porteur), sur « Mes annonces » ; jamais pour l'élève.
+  test "AN-22 — « Annonces » closes the navigation of the teacher and the direction, the team's secondary list, never the student's" do
+    { teacher: "/announcements", school_admin: "/announcements" }.each do |role, path|
       announcements = navigation_for(role).last
 
       assert_equal [ :announcements, path, "megaphone" ], [ announcements.key, nav_path(announcements), announcements.icon ], role
     end
+    team = secondary_navigation_for(:team).last
+
+    assert_equal [ :announcements, "/announcements/mine", "megaphone" ], [ team.key, nav_path(team), team.icon ]
+    assert_not_includes navigation_for(:team).map(&:key), :announcements
     assert_equal "Annonces", I18n.t("shared.navigation.announcements")
     assert_not_includes navigation_for(:student).map(&:key), :announcements
-    assert_equal [ 4, 4, 6, 3 ], %i[teacher school_admin team student].map { bottom_bar_size(it) }
-    assert_equal "grid-cols-6", nav_grid_class(bottom_bar_size(:team))
+    assert_equal [ 4, 4, 5, 3 ], %i[teacher school_admin team student].map { bottom_bar_size(it) }
   end
 
-  test "AN-22 — « Annonces » is active on every tab of the page, by the key its views declare" do
+  # Toute page d'annonces déclare `content_for :nav_key, "announcements"` : l'entrée est active sur chaque onglet, et le
+  # « Plus » de l'équipe avec elle.
+  test "AN-22 — « Annonces » is active on every tab of the page, by the key its views declare, « Plus » with it for the team" do
     request.path = "/announcements/moderation"
+
+    assert_not more_active?(:team)
+
     content_for :nav_key, "announcements"
-    home, *, announcements = navigation_for(:team)
+    referential, *, announcements = secondary_navigation_for(:team)
 
     assert nav_active?(announcements)
-    assert_not nav_active?(home)
+    assert nav_active?(navigation_for(:teacher).last)
+    assert_not nav_active?(referential)
+    assert more_active?(:team)
   end
 
   # RE-01, RE-02 (UDR-0068 §3.1) : le quotidien d'un côté, la configuration de l'autre.
   test "the team has its daily destinations and a secondary list for configuration" do
-    assert_equal %i[home courses schools dashboard announcements], navigation_for(:team).map(&:key)
-    assert_equal [ [ :referential, "/teams/referential", "squares-2x2" ], [ :imports, teams_imports_path, "arrow-up-tray" ] ],
+    assert_equal %i[home courses schools dashboard], navigation_for(:team).map(&:key)
+    assert_equal [ [ :referential, "/teams/referential", "squares-2x2" ], [ :imports, teams_imports_path, "arrow-up-tray" ],
+                   [ :announcements, "/announcements/mine", "megaphone" ] ],
                  secondary_navigation_for(:team).map { [ it.key, nav_path(it), it.icon ] }
-    assert_equal 6, bottom_bar_size(:team)
-    assert_equal [ "Référentiel", "Imports" ], secondary_navigation_for(:team).map { I18n.t("shared.navigation.#{it.key}") }
+    assert_equal 5, bottom_bar_size(:team)
+    assert_equal [ "Référentiel", "Imports", "Annonces" ], secondary_navigation_for(:team).map { I18n.t("shared.navigation.#{it.key}") }
     assert_equal "Configuration", I18n.t("shared.navigation.sidebar.secondary_label.team")
   end
 
@@ -82,7 +94,7 @@ class NavigationHelperTest < ActionView::TestCase
 
   test "nav_path resolves a drawn route and leaves the others inactive" do
     courses = navigation_for(:student)[1]
-    dashboard = navigation_for(:team).find { it.key == :dashboard }
+    dashboard = navigation_for(:team).last
     teachers = navigation_for(:school_admin).find { it.key == :teachers }
 
     assert_equal "/courses", nav_path(courses)

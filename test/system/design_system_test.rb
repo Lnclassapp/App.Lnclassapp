@@ -363,8 +363,8 @@ end
   end
 
   # The first card of the sidebar holds the destinations; the team has a second one, « Configuration » (UDR-0068).
-  # AN-22 (UDR-0071 §3.1): « Annonces » closes the destinations of the adult roles, in the bottom bar too: 6 cells for the
-  # team (« Plus » last), 4 for the direction. The teacher's bottom bar is followed in communication/announcements_journey_test.
+  # AN-22 (UDR-0071 §3.1): in the bottom bar, « Annonces » is the 4th case of the direction, and the last entry of the team's
+  # « Plus » menu (5 cases). The teacher's bottom bar is followed in communication/announcements_journey_test.
   test "the shell of every role: sidebar on desktop, bottom bar on mobile" do
     NavigationHelper::DESTINATIONS.each do |role, destinations|
       visit design_shell_path(role)
@@ -385,14 +385,16 @@ end
 
       assert_selector "#account-menu [role=menuitem]", text: t("shared.navigation.sign_out")
 
-      { team: [ 6, my_announcements_path ], school_admin: [ 4, announcements_path ] }.each do |role, (cells, path)|
-        visit design_shell_path(role)
+      within("nav.fixed.bottom-0 ul.grid-cols-5") do
+        assert_selector ":scope > li", count: 5
+        assert_selector "#bottom_bar_more_menu a[role=menuitem]:last-child[href='#{my_announcements_path}']",
+                        text: t("shared.navigation.announcements"), visible: :all
+      end
+      visit design_shell_path(:school_admin)
 
-        within("nav.fixed.bottom-0 ul.grid-cols-#{cells}") do
-          assert_selector ":scope > li", count: cells
-          assert_selector "li:nth-child(#{NavigationHelper::DESTINATIONS[role].size}) a[href='#{path}']",
-                          text: t("shared.navigation.announcements")
-        end
+      within("nav.fixed.bottom-0 ul.grid-cols-4") do
+        assert_selector ":scope > li", count: 4
+        assert_selector "li:last-child a[href='#{announcements_path}']", text: t("shared.navigation.announcements")
       end
     end
   end
