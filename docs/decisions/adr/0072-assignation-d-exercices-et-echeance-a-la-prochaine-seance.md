@@ -344,3 +344,9 @@ Acceptés tels quels par le porteur le 2026-10-02 (« lance les lots » ; memo, 
 6. **Retirer sa déclaration** d'une classe efface ses jours de séance.
 7. **« Fait »** = session rendue rattachée à l'assignation (définition de l'ADR-0048).
 8. **Direction** : elle ne voit ni les retards ni la liste nominative.
+
+## Complément du 2026-10-04 — élèves pas encore faits nommés
+
+*Par l'[ADR-0079](0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) §4.8 (chantier `rapports-exercices`), décision du porteur. Le texte ci-dessus reste tel qu'accepté.*
+
+- §4.5 : la page de suivi nomme aussi les élèves présents **qui n'ont pas encore fait** l'exercice, sous la même `FollowAssignmentPolicy`. La question laissée ouverte par le grill de ce chantier est tranchée : l'enseignant doit savoir qui relancer.

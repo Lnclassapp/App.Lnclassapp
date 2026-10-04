@@ -4,7 +4,7 @@
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 > Entrées : [memo](memo.md) · [PRD](prd.md) · [UDR-0073](../../decisions/udr/0073-progres-de-l-eleve-sur-son-resultat.md) · [ADR-0079](../../decisions/adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md)
 
-**Préalable** : `Entities::Assessment::Comprehension` (Lot 0 de `rapports-exercices`, [Lnclassapp/App.Lnclassapp#164](https://github.com/Lnclassapp/App.Lnclassapp/pull/164)) est dans `Develop`. Avant le Lot A, `feature/progres-eleve` intègre `Develop` (merge).
+**Préalable** : `Entities::Assessment::Comprehension` (Lot 0 de `rapports-exercices`, [Lnclassapp/App.Lnclassapp#164](https://github.com/Lnclassapp/App.Lnclassapp/pull/164)). Décision du 2026-10-04 : pour ne pas attendre la fusion de #164, `feature/progres-eleve` **intègre `feature/rapports-exercices`** (merge, sans réécriture). Tant que #164 n'est pas dans `Develop`, la PR de ce chantier montre aussi ses changements ; ce merge devient vide dès sa fusion. **Cette PR ne se fusionne qu'après #164.**
 
 ## Graphe
 
