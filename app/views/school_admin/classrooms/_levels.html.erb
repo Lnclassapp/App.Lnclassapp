@@ -1,0 +1,29 @@
+<%# 🌐 UI · school_admin/classrooms/_levels — section « Niveaux » de l'accueil de la direction (AD-06 à AD-08, AD-22) %>
+<%# Rôle : une bulle illustrée par niveau ayant une classe active, vers la page du niveau, avec la pastille de son taux de rendu %>
+<%# UDR  : 0069 (§3.3, bulles), 0072 (§3.4, §3.5, §3.12) · la pastille est aria-hidden : sr_suffix dit classes, taux et signal %>
+<%# locals: (home:) -%>
+<%= ui_card id: "direction_home_levels", title: t(".title"), subtitle: t(".subtitle"), icon: "squares-2x2" do %>
+  <% if home.levels.empty? %>
+    <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description"), icon: "squares-2x2" do %>
+      <%= ui_button t(".empty.action"), href: school_admin_school_path, variant: :secondary, size: :sm %>
+    <% end %>
+  <% else %>
+    <% signals = home.levels.to_h { [ it.slug, Entities::School::WorkSignal.for(it.submission_rate) ] } %>
+    <nav id="direction_home_level_bubbles" aria-label="<%= t(".label") %>">
+      <ul class="grid grid-cols-4 gap-y-4 sm:grid-cols-7">
+        <% home.levels.each do |level| %>
+          <% signal = signals.fetch(level.slug) %>
+          <% sr = [ t(".sr_level", count: level.classrooms_count) ] %>
+          <% sr += [ t(".sr_rate", rate: level.submission_rate), t("school_admin.signals.#{signal}.sr") ] if signal %>
+          <li>
+            <%= ui_subject_bubble label: level.name, href: school_admin_level_path(level.slug), illustration: level_illustration(level.slug),
+                                  signal:, sr_suffix: sr.join, id: "level_#{level.slug}" %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+    <% if signals.values.any? %>
+      <%= render "school_admin/shared/signal_legend" %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,56 @@
+<%# 🌐 UI · school_admin/classrooms/_school_card — carte « Établissement » de l'accueil de la direction (AD-02 à AD-05) %>
+<%# Rôle : nom, type et année ; trois chiffres ; une ligne par alerte, vers l'endroit où l'on agit, ou « Rien à signaler » %>
+<%# UDR  : 0049 (tuiles), 0072 (§3.3) · l'ordre et le contenu des alertes viennent du domaine (Entities::School::DirectionAlerts) %>
+<%# locals: (home:) -%>
+<% link_class = "flex w-fit min-h-tap items-center gap-1 font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" %>
+<% footer_link_class = "inline-flex min-h-tap items-center gap-1 text-sm font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" %>
+<%# Le geste de chaque alerte, quand il existe : [libellé, adresse]. %>
+<% links = { inactive: [ t(".links.school"), school_admin_school_path ],
+             without_teacher: [ t(".links.invite"), school_admin_school_path(anchor: "school_link") ],
+             teachers_without_classroom: [ t(".links.teachers"), school_admin_teachers_path ] } %>
+<%= ui_card id: "direction_home_school", title: home.school_name, icon: "building-library",
+            subtitle: t(".subtitle", type: t("school_types.#{home.school_type}"), year: home.school_year) do |card| %>
+  <ul id="direction_home_figures" class="grid grid-cols-3 gap-3">
+    <% home.figures.to_h.each do |key, count| %>
+      <li class="rounded-ln bg-mist px-3 py-3">
+        <span class="block font-display text-2xl font-extrabold tabular-nums"><%= count %></span>
+        <span class="block text-sm text-mute"><%= t(".figures.#{key}", count:) %></span>
+      </li>
+    <% end %>
+  </ul>
+
+  <h3 class="mt-5 mb-2 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".alerts_title") %></h3>
+  <% if home.alerts.empty? %>
+    <p id="direction_home_all_clear" class="flex items-center gap-2 text-sm text-success">
+      <%= ui_icon "check-circle", variant: :mini, size: :sm %><%= t(".all_clear") %>
+    </p>
+  <% else %>
+    <ul id="direction_home_alerts" class="space-y-2">
+      <% home.alerts.each do |alert| %>
+        <%# Trois noms au plus, puis « et N autres » ; sinon une phrase : « a, b et c ». %>
+        <% names = alert.others.zero? ? alert.names.to_sentence : t(".alerts.names_more", names: alert.names.join(", "), count: alert.others) %>
+        <li id="alert_<%= alert.kind %>" class="flex items-start gap-3 text-sm text-ink">
+          <span class="grid size-8 shrink-0 place-items-center rounded-full bg-warning-soft text-warning">
+            <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm %>
+          </span>
+          <span class="min-w-0 flex-1">
+            <%= t(".alerts.#{alert.kind}", count: alert.count, names:) %>
+            <% if links.key?(alert.kind) %>
+              <% label, href = links.fetch(alert.kind) %>
+              <%= link_to href, class: link_class do %>
+                <%= label %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
+              <% end %>
+            <% end %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% card.footer do %>
+    <div class="flex flex-wrap gap-x-4">
+      <%= link_to t(".links.school"), school_admin_school_path, class: footer_link_class %>
+      <%= link_to t(".links.departed"), school_admin_departed_students_path, id: "departed-students-link", class: footer_link_class %>
+    </div>
+  <% end %>
+<% end %>

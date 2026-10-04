@@ -34,7 +34,7 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
   end
 
   # Every budget is played in one test: the dataset is seeded once.
-  test "the dashboard, filtered or not, its search and « Travail des élèves » read within their budgets" do
+  test "the dashboard, filtered or not, its search and the direction's home read within their budgets" do
     today = Date.current
     # La plus grande DRENA : la première ligne du tableau « Par DRENA », triée par élèves.
     largest = dashboard("7d", today).drenas.first.public_id
@@ -45,11 +45,12 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
       # UDR-0068 §3.6, ADR-0062 (amendement du 2026-10-03) : la page filtrée lit ses chiffres puis « Par établissement ».
       "pilotage filtré, plus grande DRENA" => [ PILOTAGE_MS, -> { filtered_dashboard("7d", today, largest) } ],
       "recherche « kou »" => [ SCREEN_MS, -> { Queries::Identity::AccountSearchQuery.new.call(term: "kou") } ],
-      "Travail des élèves" => [ SCREEN_MS, -> { Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus) } ]
+      # UDR-0072 §3.2 : l'accueil de la direction (carte « Établissement » et « Niveaux ») remplace « Travail des élèves ».
+      "Accueil" => [ SCREEN_MS, -> { Queries::School::DirectionHomeQuery.new.call(school_id: @focus) } ]
     }
 
     assert_operator Queries::Identity::AccountSearchQuery.new.call(term: "kou").total_count, :>, 1_000, "the worst case is measured"
-    assert_equal 77, Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus).classrooms.size
+    assert_equal 77, Queries::School::DirectionHomeQuery.new.call(school_id: @focus).figures.classrooms
     assert_operator filtered_dashboard("7d", today, largest).total, :>, 1, "the establishments of the largest DRENA are read"
 
     measured = budgets.transform_values { |budget, read| [ budget, p95_ms(&read) ] }
