@@ -23,7 +23,7 @@ La direction arrive sur « Travail des élèves », un tableau d'une ligne par c
 3. **Les niveaux sont des bulles**, comme les cours de l'enseignant (UDR-0069) : une bulle par niveau qui a des classes, avec une **illustration propre au niveau**. Une bulle mène à la page du niveau.
 4. **La page d'un niveau montre des cartes de classe**, pas un tableau : chaque carte porte l'illustration du niveau, ses chiffres, et mène à la page de la classe. L'UDR-0052 avait choisi le tableau pour comparer ; ici, la comparaison passe par **la pastille**.
 5. **Une pastille rouge, jaune ou verte** sur le rond de chaque classe et de chaque niveau, comme une notification : le **taux de rendu** à seuils fixes (≥ 70 % vert, 40 à 69 % jaune, < 40 % rouge), absente quand le taux n'est pas calculé. La couleur n'est jamais seule : le taux est écrit sur la carte, dit dans le nom accessible de la bulle, et expliqué par une légende.
-6. **« Annonces » est le carrousel de l'élève, à l'identique** (UDR-0071 §3.5), et toutes ses cartes sont masquables (décision D-A1 du porteur).
+6. **« Annonces » est le carrousel de l'élève** (UDR-0071 §3.5), **en lecture seule : sans croix** (décision du porteur du 2026-10-04 ; D-A1, qui rendait tout masquable, n'a pas été appliquée par le chantier `annonces`).
 7. **« Activité récente » se charge en différé**, comme celle de l'élève : la page s'affiche sans l'attendre.
 8. **« Travail des élèves » devient « Accueil »** dans la navigation, à la même adresse.
 
@@ -164,9 +164,10 @@ Chaque pastille garde **au moins 3:1** sur le blanc de son anneau, dans les deux
 
 ### 3.10 Annonces
 
-- `SchoolAdmin::ClassroomsController#index` : `@announcements = Queries::Communication::InboxQuery.new.carousel(reader:, now: Time.current)` avec `reader = Queries::Communication::ReadableMessages.new.reader_for(actor: current_actor)` (motif de `Classroom::StudentHomesController`, chantier `annonces`).
-- Vue : `render "communication/messages/carousel", carousel: @announcements` **tel quel**, entre « Niveaux » et « Activité récente », seulement si `@announcements.any_readable?`. Identifiant, croix, toast « Annuler », Turbo Stream de masquage : ceux de l'UDR-0071 §3.5, sans copie ni variante. Après D-A1, toute carte porte la croix.
-- **Prérequis** : chantier `annonces` mergé dans `Develop` avec D-A1 (masquage ouvert à tout lecteur, dont `school_admin`). Sans lui, cette section n'est pas codée.
+- `SchoolAdmin::ClassroomsController#index` : `@announcements = Queries::Communication::InboxQuery.new.carousel(reader:, now: Time.current)` avec `reader = Queries::Communication::ReadableMessages.new.reader_for(actor: current_actor)` (motif de `Classroom::StudentHomesController`, chantier `annonces`). Lu en direct, jamais gardé (ADR-0065, amendement du 2026-10-04).
+- Vue : `render "communication/messages/carousel", carousel: @announcements, dismissible: false`, entre « Niveaux » et « Activité récente », seulement si `@announcements.any_readable?`. Cinq cartes au plus, ordre et lien « Toutes les annonces » de l'UDR-0071 §3.5.
+- **Aucune croix** sur aucune carte : le carrousel de la direction est en lecture seule (décision du porteur du 2026-10-04, après le merge du chantier `annonces` sans la décision D-A1). Le local `dismissible:` du carrousel (vrai par défaut, l'accueil élève ne change pas) est ajouté pour cela ; une demande de masquage forgée par une direction reste refusée par la règle d'`annonces` (403, ADR-0078 §4.2, inchangée).
+- La décision D-A1 (l'équipe seule rédige, toute annonce se masque) reste à appliquer par un chantier à part ; s'il ouvre le masquage à la direction, ce local passe à `true` ici.
 
 ### 3.11 Activité récente
 

@@ -106,11 +106,12 @@ Lot 0 — SOCLE (séquentiel)
 - **Couche**       : delivery + ui *(tout le reste appartient au chantier `annonces`)*
 - **Fichiers**     : `app/controllers/school_admin/classrooms_controller.rb` *(`@announcements`, UDR-0072 §3.10)*
                      `app/views/school_admin/classrooms/index.html.erb` *(rendu du carrousel entre « Niveaux » et « Activité récente »)*
+                     `app/views/communication/messages/_carousel.html.erb` *(local `dismissible:`, vrai par défaut)*
                      `test/controllers/school_admin/home_announcements_test.rb`
-- **Dépend de**    : Lot A **et** le chantier `annonces` mergé dans `Develop` avec la décision D-A1 (masquage ouvert à `school_admin`). Première étape du lot : merger `Develop` dans `feature/accueil-direction`.
-- **Test associé** : `test/controllers/school_admin/home_announcements_test.rb` *(AD-14 : nationale et de l'établissement visibles, autre établissement absente, croix sur chaque carte ; AD-16 : pas de section sans annonce lisible ; AD-15 : le masquage par la direction répond un Turbo Stream qui remplace `#student_home_announcements`, présent sur son accueil, et « Annuler » rétablit la carte)*
+- **Dépend de**    : Lot A **et** le chantier `annonces` mergé dans `Develop` (fait le 2026-10-04, PR #162, **sans** D-A1 : décision D-A2 du porteur, carrousel sans croix). Première étape du lot : merger `Develop` dans `feature/accueil-direction` (fait).
+- **Test associé** : `test/controllers/school_admin/home_announcements_test.rb` *(AD-14 : nationale et de l'établissement visibles, autre établissement absente, entre « Niveaux » et « Activité récente », aucune croix ; AD-15 : un masquage forgé par la direction est refusé (403), rien n'est enregistré ; AD-16 : pas de section sans annonce lisible)*
                      *Pas de test système : le geste est déjà joué en système par le chantier `annonces`, et `script/ci/test_timings.yml` (budget de 15 s par chantier, ADR-0069 §9) appartient au Lot E.*
-- **Done quand**   : sur son accueil, la direction lit le carrousel des annonces de l'équipe, en masque une et l'annule depuis le toast. **AD-14 à AD-16**.
+- **Done quand**   : sur son accueil, la direction lit le carrousel des annonces qui lui sont destinées, sans croix. **AD-14 à AD-16**.
 
 ---
 
@@ -213,12 +214,12 @@ Aucun critère orphelin.
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0072)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord *(sauf AD-14 à AD-16 : Lot D, bloqué)*
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [x] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR *(Lnclassapp/App.Lnclassapp#167)*
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >

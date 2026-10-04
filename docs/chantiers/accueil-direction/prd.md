@@ -10,7 +10,7 @@ La direction arrive aujourd'hui sur un tableau unique « Travail des élèves »
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| Direction (SchoolStaff, `school_admin`) rattachée | Lire l'accueil, la page de chacun de ses niveaux, l'activité récente de son établissement ; masquer une annonce de son carrousel et annuler (règle du chantier `annonces`, après D-A1) | Lire un autre établissement ; écrire quoi que ce soit de nouveau depuis ces pages ; rédiger une annonce |
+| Direction (SchoolStaff, `school_admin`) rattachée | Lire l'accueil, la page de chacun de ses niveaux, l'activité récente de son établissement, et le carrousel des annonces qu'elle lit (sans les masquer) | Lire un autre établissement ; écrire quoi que ce soit de nouveau depuis ces pages ; rédiger une annonce |
 | Équipe (Team) | — | Ouvrir les pages de la direction : 403 (inchangé) |
 | Enseignant, Élève | — | Ouvrir les pages de la direction : 403 (inchangé) |
 | Parent | — | N'existe pas dans l'application |
@@ -26,7 +26,7 @@ Règle d'autorisation : `Policies::School::ReadOwnSchoolPolicy` dans `SchoolAdmi
 3. La section « Niveaux » montre sept bulles, de la 6ème à la Tle, chacune avec son illustration ; la bulle « 3ème » porte une pastille jaune.
 4. Elle touche « 3ème » : la page « 3ème » affiche une carte par classe de 3ème, avec l'illustration du niveau, une pastille par classe, l'effectif, les devoirs donnés, le taux de rendu et la moyenne. La « 3ème 2 » a une pastille rouge (« Taux de rendu : 31 % »).
 5. Elle ouvre la « 3ème 2 » : la page de la classe (inchangée) liste ses élèves ; son retour mène à « 3ème ».
-6. Revenue à l'accueil, elle lit le carrousel « Annonces » (annonces de l'équipe Lnclass), en masque une, puis l'« Annule » depuis le toast.
+6. Revenue à l'accueil, elle lit le carrousel « Annonces » (annonces de l'équipe Lnclass et des directions de son établissement), sans croix ; « Toutes les annonces » mène à la page « Annonces ».
 7. Plus bas, « Activité récente » se charge : « Aujourd'hui · 10:42 — M. Kouassi a donné « Les fractions » à 3ème 2 », « Hier · 16:05 — Awa K. a rejoint 6ème 1 ».
 
 ### Chemins alternatifs et erreurs
@@ -152,14 +152,13 @@ Alors elle arrive sur la page « 3ème »
 Étant donné deux annonces de l'équipe publiées, l'une nationale, l'autre pour l'établissement de la direction,
   et une annonce pour un autre établissement
 Quand la direction ouvre l'accueil
-Alors le carrousel « Annonces » affiche les deux premières, et pas la troisième
-Et chaque carte porte une croix « Masquer »
+Alors le carrousel « Annonces », entre « Niveaux » et « Activité récente », affiche les deux premières, et pas la troisième
+Et aucune carte ne porte de croix « Masquer »
 
 # AD-15
 Étant donné une annonce affichée dans le carrousel de la direction
-Quand elle la masque
-Alors la carte quitte le carrousel et un toast propose « Annuler »
-Et « Annuler » la fait revenir
+Quand une demande de masquage est forgée par la direction
+Alors elle est refusée (403) et rien n'est enregistré
 
 # AD-16
 Étant donné qu'aucune annonce n'est lisible par la direction
@@ -235,7 +234,7 @@ Et la page n'a qu'un titre h1
 - **ADR-0065, amendement du 2026-10-04** — l'accueil de la direction est gardé 5 minutes (AD-23), sur la mesure du budget de l'ADR-0067.
 - **UDR-0072** — Accueil de la direction : établissement, niveaux, annonces, activité. Amende l'UDR-0052 (§2.1 « pas d'accueil », §2.2 « des tableaux, pas des cartes ») et l'UDR-0006 (navigation `school_admin`).
 - **Pas de nouvel ADR** : aucun port, aucune table, aucune dépendance, aucun contrat de use case ne bouge ; le chantier n'ajoute que des lectures (queries) et deux règles de domaine pures. La seule stratégie de persistance nouvelle (le cache de l'accueil) amende l'ADR-0065. L'ADR-0065 (définitions du travail des élèves) est appliqué tel quel ; la seule écriture touchée (masquer une annonce) appartient au chantier `annonces` et à son ADR-0078.
-- **Dépendance externe** : chantier `annonces` (branche `feature/annonces`), mergé dans `Develop` **avec la décision D-A1** du porteur (l'équipe seule rédige ; toute annonce est masquable par tout lecteur). Seul le Lot D en dépend.
+- **Dépendance externe** : chantier `annonces`, mergé dans `Develop` le 2026-10-04 (PR #162) **sans** la décision D-A1. Décision du porteur du même jour : le carrousel de la direction est en lecture seule, sans croix ; D-A1 relève d'un chantier à part.
 
 ## 7. Mesures
 
