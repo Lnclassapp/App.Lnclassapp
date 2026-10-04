@@ -9,6 +9,8 @@
 | 2026-10-04 | Grill mené à partir de Q5 en **décisions par défaut** de l'agent, sans aller-retour | Consigne du porteur : « prendre des décisions, c'est autonome ; pose-moi la question si et seulement si tu doutes » | Non |
 | 2026-10-04 | Le Lot 0 est exécuté par l'orchestrateur lui-même, sur la branche de chantier | Lot séquentiel et court ; aucun gain à un worktree pour un seul agent | Non |
 | 2026-10-04 | Le Lot D n'a plus de test système ; AD-15 se prouve au niveau contrôleur | `script/ci/test_timings.yml` (budget système de 15 s par chantier) aurait été touché par D et E en parallèle : collision trouvée au Lot 0, le fichier reste au seul Lot E | Non |
+| 2026-10-04 | Lot B : le nombre de la moyenne est mis en valeur comme celui du taux (`font-medium text-ink`) ; UDR-0072 §3.8 précisée | Lecture de l'exécutant (« même rendu » pour les deux lignes), retenue : deux chiffres voisins, un seul style | Non |
+| 2026-10-04 | Lot B : le test rouge et le code sont dans le même commit | Le pre-commit refuse un test rouge ; le rouge d'abord est prouvé par le rapport de l'exécutant (9 erreurs `MissingController` avant le code), pas par l'historique | Non |
 | 2026-10-04 | La pastille de la bulle n'ajoute `relative` au rond que si elle est présente | UDR-0072 §3.5 : sans signal, la bulle reste strictement celle de l'UDR-0069 (accueil enseignant inchangé) | Non |
 
 ## Ce qui a dérapé

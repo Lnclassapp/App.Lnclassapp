@@ -151,7 +151,7 @@ Ces trois tokens ne servent **qu'aux pastilles et à leur légende** de l'espace
     - `users` : « 1 élève » / « %{count} élèves » / « Aucun élève » ;
     - `clipboard-document-list` : « 1 devoir donné » / « %{count} devoirs donnés » / « Aucun devoir donné » ;
     - `chart-bar` : « Taux de rendu : %{rate} % » (`span.font-medium.text-ink` pour le nombre) ou « Taux de rendu : — » (`—` `aria-hidden` + `sr-only` « non calculé ») ;
-    - `academic-cap` : « Moyenne : %{value} % » ou « Moyenne : — » (même rendu de « — ») ;
+    - `academic-cap` : « Moyenne : %{value} % » (`span.font-medium.text-ink` pour le nombre, comme le taux) ou « Moyenne : — » (même rendu de « — ») ;
   - `span.mt-auto.inline-flex.items-center.gap-1.5.text-sm.font-medium.text-brand-strong` « Ouvrir la classe » + `arrow-right` mini (`transition group-hover:translate-x-0.5`).
 - Le taux et la moyenne suivent les définitions et le seuil de 5 élèves de l'ADR-0065 (inchangés).
 
