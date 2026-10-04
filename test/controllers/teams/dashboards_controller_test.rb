@@ -297,6 +297,29 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # UDR-0068 rule 8, ADR-0062 amended on 2026-10-04: on the year view, the figures at the top and the establishments are
+  # one read, kept in the same cache entry (the real cache of the test environment). A student of two classrooms counts once.
+  test "RE-08 on the year view: right after a change, the establishments still add up to the figures of the page" do
+    abidjan = create_drena(name: "Abidjan 1")
+    school = create_school(drena: abidjan)
+    classroom = create_classroom(school:)
+    create_student(classroom:)
+    sign_in_as @member
+    get team_dashboard_path(period: "year", drena: abidjan.public_id)
+    create_student(classroom:).tap do |twice|
+      Orm::ClassroomStudent.create!(classroom: create_classroom(school:), student: twice, primary: false, joined_at: Time.current)
+    end
+    create_student(classroom: create_classroom(school: create_school(drena: abidjan)))
+
+    get team_dashboard_path(period: "year", drena: abidjan.public_id)
+
+    students = css_select("#team_dashboard_schools tbody tr").sum { it.css("td")[2].text.to_i }
+    classrooms = css_select("#team_dashboard_schools tbody tr").sum { it.css("td")[0].text.to_i }
+    assert_predicate students, :positive?
+    assert_select "#figure_students", text: figure("students", students)
+    assert_select "#figure_classrooms", text: figure("classrooms", classrooms)
+  end
+
   test "the establishment search form keeps the period and the DRENA" do
     abidjan = create_drena(name: "Abidjan 1")
     create_school(drena: abidjan)

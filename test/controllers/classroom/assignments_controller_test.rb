@@ -28,6 +28,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     post classroom_assignments_path(@classroom.public_id), params:, **
   end
 
+  # Le message du toast, mot pour mot (UDR-0062 §3.4) : une inclusion laisserait passer « oct.. ».
+  def toast_message = css_select("turbo-stream[action=append][target=toasts] template p").last.text.squish
+
   def session_days(teacher = @teacher) = Orm::ClassroomSessionDay.where(teacher_id: teacher.id).order(:weekday).pluck(:weekday)
 
   def withdraw(assignment, classroom: @classroom, **)
@@ -332,11 +335,21 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assignment = Orm::ClassroomAssignment.sole
     assert_equal Date.new(2026, 10, 8), assignment.due_on
     assert_equal [ 1, 4 ], session_days
-    assert_select "turbo-stream[action=append][target=toasts]",
-                  text: including(tl("create.done_due", name: "Méiose", classroom: "6ème 1", date: "jeudi 8 oct."))
+    assert_equal "Méiose ajouté à 6ème 1, à rendre jeudi 8 oct.", toast_message
     assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template",
                   text: including("Pour jeu. 8 oct.")
     assert_select "turbo-stream[action=refresh]"
+  end
+
+  # Le point abréviatif du mois tient lieu de point final ; un mois écrit en entier garde le sien.
+  test "a due month written in full keeps its full stop: « à rendre jeudi 6 mai. »" do
+    travel_to Time.zone.local(2027, 5, 3, 10)
+    sign_in_as @teacher
+
+    assign_with_days(%w[1 4], as: :turbo_stream)
+
+    assert_response :success
+    assert_equal "Méiose ajouté à 6ème 1, à rendre jeudi 6 mai.", toast_message
   end
 
   test "once the days are known, one click assigns with the due date; no refresh" do

@@ -23,6 +23,7 @@ module PerfDataset
   ARTICLES = Integer(ENV.fetch("PERF_ARTICLES", 30))
   ARTICLE_IMAGES = 5
   FOCUS_CLASS_SIZE = 55
+  ASSIGNMENTS = 10
   BATCH = 5_000
   PIN = "2468".freeze
   # Contacts du jeu, hors de ceux de db/seeds/development.rb (…00000001).
@@ -207,11 +208,12 @@ module PerfDataset
     insert(ActionText::RichText, record_ids.map { { record_type:, record_id: it, name: "content", body:, created_at: now, updated_at: now } })
   end
 
+  # Énoncé et explication en texte brut (UDR-0017), comme à la saisie.
   def seed_questions(exercise_ids)
     question_ids = insert(Orm::Question, exercise_ids.flat_map do |exercise_id|
       (1..5).map do |position|
         { exercise_id:, position:, question_type: position == 1 ? "true_false" : "single_choice", created_at: now, updated_at: now,
-          content: "<p>Question #{position} : que vaut $x$ si $2x + 3 = 7$ ?</p>", explanation: "<p>On isole $x$.</p>" }
+          content: "Question #{position} : que vaut $x$ si $2x + 3 = 7$ ?", explanation: "On isole $x$." }
       end
     end, returning: %w[id])
     insert(Orm::Answer, answers_for(question_ids))
@@ -237,8 +239,8 @@ module PerfDataset
     end
   end
 
-  # 10 devoirs par classe peuplée (7 exercices, 2 fiches, 1 cours), 10 % archivés, sur 60 jours.
-  # → { classroom_id => [ [ assignment_id, [ exercise_id… ] ]… ] }
+  # 10 devoirs d'exercice par classe peuplée (ADR-0072 : seul l'exercice s'assigne), 10 % archivés, sur 60 jours.
+  # → { classroom_id => [ [ assignment_id, [ exercise_id ] ]… ] }
   def seed_assignments(classroom_ids, teachers, catalog)
     team = Orm::User.find_by!(contact: "0700000000").id
     by_classroom = teachers.values.flatten(1).each_with_object({}) { |(id, taught), map| taught.each { map[it] ||= id } }
@@ -247,26 +249,20 @@ module PerfDataset
       courses = catalog[[ level_id, series_id ]]
       next if courses.blank?
 
-      essentials = courses.flat_map { |course| course[:essentials].to_a }
-      targets = Array.new(7) { [ "Exercise", pick(pick(essentials).last) ] }.uniq +
-                essentials.sample(2, random: RNG).map { |essential_id, exercise_ids| [ "Essential", essential_id, exercise_ids ] } +
-                [ pick(courses).then { [ "Course", it[:course], it[:essentials].values.flatten ] } ]
-      [ id, targets.uniq { it.first(2) } ]
+      [ id, courses.flat_map { |course| course[:essentials].values.flatten }.sample(ASSIGNMENTS, random: RNG) ]
     end
-    rows = plans.flat_map do |classroom_id, targets|
-      targets.map do |type, assignable_id, *|
+    rows = plans.flat_map do |classroom_id, exercise_ids|
+      exercise_ids.map do |assignable_id|
         assigned_at = days_ago(60)
         archived = RNG.rand < 0.1
-        { public_id:, classroom_id:, assignable_type: type, assignable_id:, assigned_at:, assigned_by_id: by_classroom.fetch(classroom_id, team),
-          status: archived ? "archived" : "active", archived_at: (now if archived), archived_by_id: (team if archived),
-          created_at: assigned_at, updated_at: assigned_at }
+        { public_id:, classroom_id:, assignable_type: "Exercise", assignable_id:, assigned_at:,
+          assigned_by_id: by_classroom.fetch(classroom_id, team), status: archived ? "archived" : "active",
+          archived_at: (now if archived), archived_by_id: (team if archived), created_at: assigned_at, updated_at: assigned_at }
       end
     end
     ids = insert(Orm::ClassroomAssignment, rows, returning: %w[id]).each
     log "#{rows.size} devoirs dans #{plans.size} classes"
-    plans.to_h do |classroom_id, targets|
-      [ classroom_id, targets.map { |type, assignable_id, exercise_ids| [ ids.next, type == "Exercise" ? [ assignable_id ] : exercise_ids ] } ]
-    end
+    plans.to_h { |classroom_id, exercise_ids| [ classroom_id, exercise_ids.map { [ ids.next, [ it ] ] } ] }
   end
 
   # Chaque élève fait 6 exercices de ses devoirs, 1 ou 2 fois : 85 % terminés, 10 % en cours, 5 % abandonnés.
