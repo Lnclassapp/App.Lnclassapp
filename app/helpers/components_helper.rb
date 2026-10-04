@@ -175,7 +175,7 @@ module ComponentsHelper
   def ui_icon_sprite(&block)
     @icon_sprite = {}
     content = capture(&block)
-    symbols = @icon_sprite.map { |id, (view_box, paths)| tag.symbol(paths.html_safe, id:, viewBox: view_box) } # rubocop:disable Rails/OutputSafety -- fichier vendu, jamais une saisie
+    symbols = @icon_sprite.map { |id, (root, paths)| %(<symbol id="#{id}" #{root}>#{paths}</symbol>).html_safe } # rubocop:disable Rails/OutputSafety -- fichier vendu, jamais une saisie
     safe_join([ content, tag.svg(safe_join(symbols), class: "absolute size-0 overflow-hidden", "aria-hidden": "true", focusable: "false") ])
   ensure
     @icon_sprite = nil
@@ -467,15 +467,16 @@ module ComponentsHelper
                         data: { action: "dropdown#openDialog", dropdown_dialog_param: dialog })
   end
 
-  # Mêmes attributs racine (viewBox, fill, stroke) que l'icône en ligne : le tracé du <symbol> en hérite par <use>.
+  # Les attributs racine du fichier (viewBox, fill, stroke, stroke-width) sont écrits une fois, sur le <symbol> : son
+  # instance dans <use> les porte, et son tracé en hérite ; `currentColor` y prend la couleur du <svg> (ADR-0067, levier 3c).
   def sprite_icon(set, name, classes, a11y)
     root, paths = ICON_CACHE[[ set, name, :sprite ]] ||= begin
       attributes, inner = heroicon_source(set, name).match(%r{\A<svg ([^>]*)>\s*(.*?)\s*</svg>\z}m).captures
       [ attributes.gsub(/\s*(?:xmlns|aria-hidden|data-slot)="[^"]*"/, "").strip, inner ]
     end
     id = "icon-#{set.tr('/', '-')}-#{name}"
-    @icon_sprite[id] ||= [ root[/viewBox="([^"]*)"/, 1], paths ]
-    %(<svg class="#{ERB::Util.html_escape(classes)}" #{a11y} focusable="false" #{root}><use href="##{id}"></use></svg>).html_safe # rubocop:disable Rails/OutputSafety -- classes échappées, attributs du fichier vendu
+    @icon_sprite[id] ||= [ root, paths ]
+    %(<svg class="#{ERB::Util.html_escape(classes)}" #{a11y} focusable="false"><use href="##{id}"></use></svg>).html_safe # rubocop:disable Rails/OutputSafety -- classes échappées, identifiant du fichier vendu
   end
 
   def heroicon_source(set, name)

@@ -135,10 +135,17 @@ class SchoolAdmin::TeachersControllerTest < ActionDispatch::IntegrationTest
     { root: svg.to_h.slice("viewBox", "fill", "stroke", "stroke-width"), paths: svg.css("path").map(&:to_h) }
   end
 
+  ROOT_ATTRIBUTES = %w[viewBox fill stroke stroke-width].freeze
+
+  # Lever 3c: a root attribute may be written on the <svg>, on the <symbol> its <use> takes back, or on both with the same
+  # value; the drawing is the union of the two, compared with the vendored file.
   def drawn_icon(svg)
     use = svg.at_css("use")
     source = use ? document_root_element.at_css("symbol#{use['href']}") : svg
-    { root: svg.to_h.slice("viewBox", "fill", "stroke", "stroke-width"), paths: source.css("path").map(&:to_h), class: svg["class"] }
+    own = svg.to_h.slice(*ROOT_ATTRIBUTES)
+    taken = use ? source.to_h.slice(*ROOT_ATTRIBUTES) : {}
+    (own.keys & taken.keys).each { assert_equal own[it], taken[it], "#{it} contradictoire : #{use['href']}" }
+    { root: own.merge(taken), paths: source.css("path").map(&:to_h), class: svg["class"] }
   end
 
   def td(key, **) = I18n.t("school_admin.teachers.destroy.#{key}", **)
