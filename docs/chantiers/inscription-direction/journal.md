@@ -9,6 +9,7 @@
 | 2026-10-04 | Porteur, Q12 : « Les directions invitées par l'équipe ne comptent pas » dans le plafond. Le même message disait d'abord « oui toutes comptent » ; la dernière consigne a été retenue | Seules les arrivées par le code ouvrent un risque | Oui, ADR-0077 §4 |
 | 2026-10-04 | Lot 0 : « Voir les N autres » de l'accueil de l'équipe devient « Et N autres, sur les fiches de leurs établissements. » | Aucune page ne liste toutes les directions retirées : le lien n'aurait mené nulle part | UDR-0070 §3.5, PRD ID-21 amendés |
 | 2026-10-04 | Lot 0 : les places « 2 / 3 » sont un `<p id="school_staff_places">` dans la carte, pas le sous-titre de `ui_card` | Une cible stable pour le Turbo Stream du retrait | Non (détail de l'UDR §3.4) |
+| 2026-10-04 | Merge du Lot A : le lien discret du haut de page passe de `text-mute` à `text-ink/90` | `text-mute` sur `bg-brand` donne ≈ 2,4:1 en thème clair et ≈ 2,3:1 en sombre, sous le seuil WCAG AA de 4,5:1 | UDR-0070 §3.2 amendée |
 | 2026-10-04 | Lot 0 : la route de restauration prend `:staff_member_public_id` (ressource imbriquée), pas `:public_id` | Convention Rails des ressources imbriquées ; le nom de route est celui de l'UDR | Non |
 
 ## Ce qui a dérapé

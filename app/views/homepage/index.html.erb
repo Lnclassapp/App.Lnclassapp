@@ -39,7 +39,8 @@
             <%= render "role_modal", role: :teacher, placement: :hero, variant: :secondary %>
           </div>
           <%# UDR-0070 §3.2 : la direction n'a qu'un lien texte dans le héros, sous les deux entrées. %>
-          <p class="mt-4 text-sm text-mute">
+          <%# text-ink/90 comme le chapeau : text-mute sur bg-brand tombe sous 4,5:1, dans les deux thèmes. %>
+          <p class="mt-4 text-sm text-ink/90">
             <%= t(".school_staff_link.prompt") %>
             <%= link_to t(".school_staff_link.link"), new_school_staff_registration_path, id: "school-staff-signup-link",
                   class: "inline-flex min-h-tap items-center font-medium text-ink underline underline-offset-4 hover:text-brand-strong" %>

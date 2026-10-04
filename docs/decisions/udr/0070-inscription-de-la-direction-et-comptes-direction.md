@@ -65,7 +65,7 @@ Puis `ui_button` « Créer mon compte » (`full: true`), et « Vous avez déjà 
 
 ### 3.2 Page d'accueil — `homepage/index`
 
-- **Lien discret** : sous les deux `render "role_modal"` du haut de page, `<p class="mt-4 text-sm text-mute">` « Vous êtes la direction d'un établissement ? » suivi de `link_to` « Créer votre compte », vers `new_school_staff_registration_path`, `id: "school-staff-signup-link"`, `class: "inline-flex min-h-tap items-center font-medium text-ink underline underline-offset-4 hover:text-brand-strong"`.
+- **Lien discret** : sous les deux `render "role_modal"` du haut de page, `<p class="mt-4 text-sm text-ink/90">` (comme le chapeau du haut de page : `text-mute` sur `bg-brand` n'atteint pas 4,5:1) « Vous êtes la direction d'un établissement ? » suivi de `link_to` « Créer votre compte », vers `new_school_staff_registration_path`, `id: "school-staff-signup-link"`, `class: "inline-flex min-h-tap items-center font-medium text-ink underline underline-offset-4 hover:text-brand-strong"`.
 - **Section** `<section id="etablissements" aria-labelledby="etablissements-title" class="scroll-mt-20 border-t border-ink/10 bg-white py-16 md:py-24">`, **après** `#enseignants`, même structure qu'elle :
   - eyebrow « Établissements » ;
   - titre « Suivez le travail de tout votre établissement » ;
