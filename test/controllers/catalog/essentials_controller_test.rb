@@ -136,6 +136,83 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_exercises .bg-ink, #essential_exercises .bg-brand", 0
   end
 
+  # RE-21, RE-23 — UDR-0069 §3.8 : sous chaque exercice publié, une bascule par classe de l'enseignant du niveau et de la
+  # série du cours, triées par nom ; la bascule de la classe (UDR-0062 §3.4), dont les libellés nomment la classe.
+  test "the teacher gets one toggle per classroom of the course's level and series under each published exercise" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    brassage = create_exercise(essential: @essential, title: "Brassage", position: 2)
+    create_exercise(essential: @essential, title: "Brouillon caché", status: "draft", position: 3)
+    school = create_school
+    tle_d1, tle_d2 = [ "Tle D 1", "Tle D 2" ].map { |name| create_classroom(school:, level: @course.level, series: @course.series, name:) }
+    tle_c1 = create_classroom(school:, level: @course.level, series: create_series(name: "C"), name: "Tle C 1")
+    teacher = create_teacher(school:, classrooms: [ tle_d2, tle_c1, tle_d1 ])
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: teacher.id, classroom_id: tle_d1.id,
+                                                                weekdays: [ 1, 4 ], at: Time.current)
+    assignment = create_assignment(classroom: tle_d1, assignable: @exercise, by: teacher, due_on: Date.new(2026, 10, 8))
+    sign_in_as teacher
+
+    get page_path
+
+    assert_response :success
+    assert_select "#assign_targets_none", 0
+    assert_select "#essential_exercises [id^='assignment_']", 4
+    assert_select "[id^='assignment_#{tle_c1.public_id}_']", 0
+    assert_no_match(/Brouillon caché/, response.body)
+    assert_select row_of(@exercise) do
+      assert_select "ul[aria-label=?]", I18n.t("#{scope}.exercise_progress.assign_targets", title: "Méiose et ADN") do |list|
+        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li > span").map { it.text.strip }
+      end
+      assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{@exercise.public_id}" do
+        assert_select "*", text: /Assigné/
+        assert_select "*", text: /Pour jeu\. 8 oct\./
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button[aria-label=?]",
+                      "Retirer « Méiose et ADN » de Tle D 1"
+      end
+      # Tle D 2 : pas encore de jours, « Assigner » ouvre la modale des jours.
+      assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id} a[data-turbo-frame=modal][href=?][aria-label=?]",
+                    new_classroom_assignment_path(tle_d2.public_id, assignable_key: @exercise.public_id),
+                    "Assigner « Méiose et ADN » à Tle D 2"
+      assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
+    end
+    # Tle D 1 : jours connus, « Assigner » assigne en un clic.
+    assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{brassage.public_id} " \
+                  "form[action='#{classroom_assignments_path(tle_d1.public_id)}'] button[aria-label=?]",
+                  "Assigner « Brassage » à Tle D 1"
+  end
+
+  # RE-24 — UDR-0069 §3.8 : aucune classe au niveau du cours, aucune bascule ; une phrase le dit au-dessus des exercices.
+  test "a teacher without any classroom of the course's level reads « Aucune de vos classes n'est en 3ème. »" do
+    course = create_course(level: create_level(name: "3ème"), name: "Nombres et calculs")
+    essential = create_essential(course:)
+    create_exercise(essential:)
+    sign_in_as create_teacher(classrooms: [ create_classroom(level: @course.level, series: @course.series, name: "Tle D 1") ])
+
+    get page_path(essential)
+
+    assert_response :success
+    assert_select "#essential_exercises #assign_targets_none", text: "Aucune de vos classes n'est en 3ème."
+    assert_select "[id^='assignment_']", 0
+    assert_select "#essential_exercises ul[aria-label]", 0
+  end
+
+  # RE-26 — UDR-0069 §3.8 : l'équipe n'a pas de classe ; ni bascule ni phrase pour elle, ni pour l'élève. Son menu ⋮ reste.
+  test "the team and the student see no assignment toggle on a published sheet" do
+    create_teacher(classrooms: [ create_classroom(level: @course.level, series: @course.series) ])
+    menu = "#essential_team_actions button[aria-haspopup=menu]"
+
+    [ [ create_team_member, 1 ], [ @student, 0 ] ].each do |user, menus|
+      sign_in_as user
+      get page_path
+
+      assert_response :success
+      assert_select "[id^='assignment_']", 0
+      assert_select "#assign_targets_none", 0
+      assert_select "#essential_exercises ul[aria-label]", 0
+      assert_select menu, menus
+      sign_out
+    end
+  end
+
   test "the team opens a draft sheet of a draft course: status panel, menu in the modal, every exercise with its status" do
     course = create_course(status: "draft")
     essential = create_essential(course:, name: "Anomalies de la méiose", status: "draft", subtitle: nil)

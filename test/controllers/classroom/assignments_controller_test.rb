@@ -241,6 +241,46 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::ClassroomAssignment.exists?
   end
 
+  # RE-25 — UDR-0069 §3.8 : le catalogue ne propose que les classes du niveau et de la série du cours ; un POST forgé vers
+  # une autre classe de l'enseignant est refusé par la règle existante, en place, et rien n'est écrit.
+  test "a forged POST of a Tle D exercise to the teacher's 3ème 1 or Tle C 1: 422 other_level, nothing written" do
+    tle = create_level(name: "Tle")
+    tle_d = create_exercise(essential: create_essential(course: create_course(level: tle, series: create_series(name: "D"))))
+    third = create_classroom(name: "3ème 1", level: create_level(name: "3ème"))
+    tle_c = create_classroom(name: "Tle C 1", level: tle, series: create_series(name: "C"))
+    sign_in_as create_teacher(classrooms: [ third, tle_c ])
+
+    [ third, tle_c ].each do |classroom|
+      assign("Exercise", tle_d.public_id, classroom:, as: :turbo_stream)
+
+      assert_response :unprocessable_entity, classroom.name
+      assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("refusals.other_level"))
+      assert_select "turbo-stream[action=replace]", 0
+    end
+    assert_not Orm::ClassroomAssignment.exists?
+  end
+
+  # UDR-0069 §3.8 : sur une page qui porte les bascules de plusieurs classes, chaque libellé nomme la classe.
+  test "the streams' toggles name the classroom in their aria-labels" do
+    Orm::ClassroomSessionDay.create!(teacher_id: @teacher.id, classroom_id: @classroom.id, weekday: 1)
+    sign_in_as @teacher
+
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+
+    assignment = Orm::ClassroomAssignment.sole
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template " \
+                  "form[action='#{archive_assignment_path(assignment.public_id)}'] button[aria-label=?]",
+                  tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
+
+    withdraw(assignment, as: :turbo_stream)
+
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template " \
+                  "form[action='#{classroom_assignments_path(@classroom.public_id)}'] button[aria-label=?]",
+                  tl("toggle.assign_to_label", name: "Méiose", classroom: "6ème 1")
+    assert_equal "Assigner « Méiose » à 6ème 1", tl("toggle.assign_to_label", name: "Méiose", classroom: "6ème 1")
+    assert_equal "Retirer « Méiose » de 6ème 1", tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
+  end
+
   # UDR-0062 §3.4 : la modale « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal », lisible sans JavaScript.
   test "the days modal names the classroom and the exercise, with six weekdays, « Plus tard » and « Assigner »" do
     sign_in_as @teacher
