@@ -1,6 +1,6 @@
 <%# 🌐 UI · design/index — guide de style vivant de Lnclass (dev et test uniquement) %>
 <%# Rôle : chaque token, chaque composant dans chaque variante et chaque état ; vérifié par test/system/design_system_test.rb %>
-<%# UDR  : 0005, 0006, 0054 %>
+<%# UDR  : 0005, 0006, 0054, 0056 %>
 <% page_title t(".page_title") %>
 
 <div class="mx-auto max-w-page px-gutter py-10 lg:px-8">
@@ -11,7 +11,7 @@
   </header>
 
   <nav aria-label="<%= t(".toc") %>" class="mt-8 flex flex-wrap gap-2">
-    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination finishes shell].each do |anchor| %>
+    <% %w[colors typography shape icons buttons badges avatars cards fields modal dropdown tabs notifications hotwire states pagination finishes announcement_illustrations shell].each do |anchor| %>
       <%= link_to t(".sections.#{anchor}"), "##{anchor}", class: "rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium hover:bg-mist" %>
     <% end %>
   </nav>
@@ -198,7 +198,7 @@
   <% end %>
 
   <%# ---------- Champs ---------- %>
-  <%= design_section(id: "fields", title: t(".sections.fields"), api: "ui_field(form, :attribut, as:, label:, hint:, required:, choices:, **input_html) · ui_radio_group(form, :attribut, choices:, label:, hint:, required:, columns: 1|2|3)") do %>
+  <%= design_section(id: "fields", title: t(".sections.fields"), api: "ui_field(form, :attribut, as:, label:, hint:, required:, choices:, **input_html) · ui_radio_group(form, :attribut, choices:, label:, hint:, required:, columns: 1|2|3) · ui_checkbox_group(form, :attribut, choices:, label:, hint:, required:, columns: 1|2|3)") do %>
     <div class="grid gap-8 md:grid-cols-2">
       <%= design_example(name: "field-valid", label: t(".fields.valid")) do %>
         <%= form_with model: @sample, scope: :sample, url: design_path, method: :get, class: "space-y-5" do |form| %>
@@ -226,6 +226,13 @@
         <% end %>
       <% end %>
       </div>
+      <%= design_example(name: "field-checkbox-group", label: t(".fields.checkbox_group")) do %>
+        <%= form_with scope: :design_announcement, url: design_path, method: :get do |form| %>
+          <%= ui_checkbox_group form, :classrooms, label: t(".fields.classrooms"), required: true, columns: 3,
+                                                   hint: t(".fields.classrooms_hint"),
+                                                   choices: t(".fields.classroom_choices").map { [ it[:label], it[:value] ] } %>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 
@@ -273,12 +280,18 @@
   <% end %>
 
   <%# ---------- Toasts ---------- %>
-  <%= design_section(id: "notifications", title: t(".sections.notifications"), api: "ui_toast(message, type:, title:, persistent:) · turbo_stream_toast(message, type:) · flash[:notice|:alert|:success|:error|:warning|:info]") do %>
+  <%= design_section(id: "notifications", title: t(".sections.notifications"), api: "ui_toast(message, type:, title:, persistent:, action: { label:, href:, method: }) · turbo_stream_toast(message, type:, action:) · flash[:notice|:alert|:success|:error|:warning|:info]") do %>
     <%= design_example(name: "toast-types", label: t(".toasts.types")) do %>
       <div class="grid gap-3 md:grid-cols-2">
         <% ComponentsHelper::TOAST_TYPES.each_key do |type| %>
           <%= ui_toast t(".toasts.messages.#{type}"), type:, persistent: true %>
         <% end %>
+      </div>
+    <% end %>
+    <%= design_example(name: "toast-action", label: t(".toasts.action.label")) do %>
+      <div class="grid gap-3 md:grid-cols-2">
+        <%= ui_toast t(".toasts.action.message"), type: :info, title: t(".toasts.action.title"), persistent: true,
+                     action: { label: t(".toasts.action.undo"), href: design_path(anchor: "notifications"), method: :get } %>
       </div>
     <% end %>
     <%= design_example(name: "toast-live", label: t(".toasts.live")) do %>
@@ -435,6 +448,20 @@
         <% end %>
       <% end %>
     </div>
+  <% end %>
+
+  <%# ---------- Illustrations des annonces (UDR-0056 §3.3) ---------- %>
+  <%= design_section(id: "announcement_illustrations", title: t(".sections.announcement_illustrations"),
+                     api: 'announcement_illustration(:info, class: "size-16") · Entities::Communication::Message::ILLUSTRATIONS') do %>
+    <ul class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <% Entities::Communication::Message::ILLUSTRATIONS.each do |key| %>
+        <li data-illustration="<%= key %>" class="flex flex-col items-center gap-2 rounded-ln bg-brand-soft p-4 text-school">
+          <%= announcement_illustration key, class: "size-16" %>
+          <p class="text-sm font-medium"><%= t("communication.illustrations.#{key}") %></p>
+          <p class="font-mono text-2xs text-school/80"><%= key %></p>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
 
   <%# ---------- Shell ---------- %>

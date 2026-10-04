@@ -21,6 +21,11 @@ module Entities
       test "le profil trace l'ajout, le changement et le retrait de la photo (ADR-0060)" do
         %w[profile.photo_changed profile.photo_removed].each { assert AuditAction.valid?(it), it }
       end
+
+      test "les annonces tracent leur publication et leur retrait (ADR-0045, ADR-0069)" do
+        %w[message.published message.withdrawn].each { assert AuditAction.valid?(it), it }
+        assert_not AuditAction.valid?("message.archived")
+      end
     end
   end
 end

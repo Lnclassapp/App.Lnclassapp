@@ -76,6 +76,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
   # ADR-0036 : the closed list of cascades, from a parent to its technical rows.
   CASCADES = %w[sessions login_attempts totp_credentials backup_codes pin_recovery_codes].freeze
+  # ADR-0069 §4.1 : the targeted classrooms and the dismissals of an announcement go with it.
+  MESSAGE_CASCADES = %w[message_classrooms message_dismissals].freeze
   FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
 
   def connection = ActiveRecord::Base.connection
@@ -231,7 +233,9 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   test "every foreign key restricts deletion, except the closed list of cascades" do
     application_tables.each do |table|
       connection.foreign_keys(table).each do |foreign_key|
-        expected = CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id" ? :cascade : :restrict
+        cascade = (CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id") ||
+                  (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages")
+        expected = cascade ? :cascade : :restrict
 
         assert_equal expected, foreign_key.on_delete, "#{table}.#{foreign_key.column}"
       end
