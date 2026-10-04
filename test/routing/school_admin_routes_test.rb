@@ -30,7 +30,9 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
              [ "POST", "/school-admin/teachers/:public_id/reinstatement(.:format)" ],
              [ "PATCH", "/school-admin/school/link(.:format)" ],
              [ "POST", "/school-admin/school/level-classrooms(.:format)" ],
-             [ "DELETE", "/school-admin/school/level-classrooms/:public_id(.:format)" ] ].freeze
+             [ "DELETE", "/school-admin/school/level-classrooms/:public_id(.:format)" ],
+             # ADR-0077 : retirer une autre direction.
+             [ "DELETE", "/school-admin/school/staff/:public_id(.:format)" ] ].freeze
 
   test "under /school-admin, only the direction's gestures accept anything but GET" do
     routes = Rails.application.routes.routes.select { it.path.spec.to_s.start_with?("/school-admin") }

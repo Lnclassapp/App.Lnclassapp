@@ -53,6 +53,9 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       # Les jours de Tle D 1 sont connus : la page rafraîchie par morphing, son « Assigner » suivant assigne en un clic.
       within(toggle(@tle_d1, @bilan)) { find_button("Assigner").click }
       assert_toast "Le bilan ajouté à Tle D 1, à rendre jeudi 8 oct."
+      # Constat du challenger : la page vient d'être rafraîchie par morphing (le « Assigner » du bilan est devenu un bouton) ;
+      # l'interrupteur clair / sombre de l'en-tête doit rester visible.
+      assert_selector "header [role=switch][aria-label='#{I18n.t("shared.theme_switch.label")}']", visible: true, wait: 1
       assert_no_selector DAYS_MODAL
       # Tle D 2 n'a pas encore ses jours : sa bascule ouvre toujours la modale.
       within(toggle(@tle_d2, @bilan)) { click_on "Assigner" }

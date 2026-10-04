@@ -1,0 +1,19 @@
+<%# 🌐 UI · teams/homes/_archived_staff — « Directions retirées » de l'accueil de l'équipe (admin et field) %>
+<%# Rôle : les 5 plus récentes, chacune menant à la fiche de son établissement ; au-delà, combien restent sur les fiches %>
+<%# ADR  : 0077 · UDR : 0018, 0070 (§3.5) · absente sans direction retirée %>
+<%# locals: (rows:) -%>
+<% shown = rows.first(Teams::HomesController::ARCHIVED_STAFF_SHOWN) %>
+<% fmt = ->(time) { date = time.to_date; date.day == 1 ? "1er #{l(date, format: "%B %Y")}" : l(date, format: :long) } %>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "user-minus", id: "team_home_archived_staff", class: "mb-5" do %>
+  <ul class="divide-y divide-line">
+    <% shown.each do |row| %>
+      <li>
+        <%= link_to t(".line", name: row.name, school: row.school_name, date: fmt.(row.archived_at)), school_path(row.school_public_id),
+                    class: "flex min-h-tap items-center text-sm text-ink underline-offset-2 hover:underline" %>
+      </li>
+    <% end %>
+  </ul>
+  <% if rows.size > shown.size %>
+    <p id="team_home_archived_staff_more" class="mt-2 text-sm text-mute"><%= t(".more", count: rows.size - shown.size) %></p>
+  <% end %>
+<% end %>

@@ -23,6 +23,11 @@ production:
     class: Communication::PurgeOrphanArticleImagesJob
     queue: default
     schedule: every day at 3:30am
+  # ADR-0077 §4.5 : school staff accounts archived for 30 days are anonymized, their attachment deleted.
+  purge_archived_staff:
+    class: School::PurgeArchivedStaffJob
+    queue: default
+    schedule: every day at 4am
   # ADR-0045, ADR-0078 : scheduled announcements are published within 5 minutes of their time.
   publish_scheduled_messages:
     class: Communication::PublishScheduledMessagesJob

@@ -637,4 +637,57 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "Modifier l'établissement · Équipe · Lnclass"
     assert_select "[data-modal-document-title-value=\"Modifier l'établissement · Équipe · Lnclass\"] dialog#school-modal"
   end
+
+  test "ID-18 (UDR-0070 §3.4, §3.5): « Direction » heads the teachers' section, then « Directions retirées », with « Restaurer »" do
+    school = create_school(drena: @drena)
+    kofi = create_school_admin(school:, first_name: "Kofi", last_name: "Yao", joined_via: "code", joined_at: 1.day.ago)
+    author = create_team_member(team_role: "field", second_factor: false, first_name: "Awa", last_name: "Bamba")
+    aya = create_school_admin(school:, first_name: "Aya", last_name: "Koné", joined_via: "code", archived_at: Time.zone.local(2026, 9, 1, 10),
+                              archived_by: author)
+    create_teacher(school:, first_name: "Moussa", last_name: "Traoré")
+    sign_in_as create_team_member(team_role: "field")
+
+    get school_path(school.public_id)
+
+    assert_select "#school_teachers > div:first-child #school_staff" do
+      assert_select "p#school_staff_places", text: I18n.t("shared.school_staff.subtitle", used: 1, cap: 3)
+      assert_select "li", 1
+      assert_select "li#school_staff_#{kofi.public_id} button[aria-haspopup=menu]"
+      assert_select "form[action='#{school_staff_member_path(school.public_id, kofi.public_id)}']"
+    end
+    assert_select "#school_staff + #school_archived_staff" do
+      assert_select "h2", text: I18n.t("teams.schools.archived_staff.title")
+      assert_select "li#school_archived_staff_#{aya.public_id}", text: /Aya Koné/ do
+        assert_select "p", text: /Retiré le 1er septembre 2026 par Awa Bamba\s+· Supprimé le 1er octobre 2026/
+        assert_select "form[action='#{school_staff_member_restoration_path(school.public_id, aya.public_id)}'] button",
+                      text: I18n.t("teams.schools.archived_staff.restore")
+      end
+    end
+    assert_select "#school_teachers li", text: /Moussa Traoré/
+  end
+
+  test "ID-21: a content member sees « Direction » without ⋮ menu, and « Directions retirées » without « Restaurer »" do
+    school = create_school(drena: @drena)
+    kofi = create_school_admin(school:, joined_at: 30.days.ago)
+    create_school_admin(school:, archived_at: 1.day.ago)
+    sign_in_as create_team_member(team_role: "content")
+
+    get school_path(school.public_id)
+
+    assert_select "li#school_staff_#{kofi.public_id}"
+    assert_select "#school_staff button[aria-haspopup=menu]", 0
+    assert_select "#school_archived_staff li", 1
+    assert_select "#school_archived_staff form", 0
+  end
+
+  test "UDR-0070 §3.5: without removed direction, no « Directions retirées » card, only the empty target of the stream" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "#school_staff", text: /#{I18n.t('shared.school_staff.empty')}/
+    assert_select "div#school_archived_staff:empty"
+    assert_select "#school_teachers h2", text: I18n.t("teams.schools.archived_staff.title"), count: 0
+  end
 end

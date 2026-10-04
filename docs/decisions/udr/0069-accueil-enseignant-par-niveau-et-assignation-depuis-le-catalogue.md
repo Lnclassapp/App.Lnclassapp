@@ -59,7 +59,7 @@ Le porteur a tranché (memo, G1 à G13) : sections « Mes classes », « Cours �
 **Composant `ui_subject_bubble(label:, href:, illustration:, sr_suffix: nil, id: nil)`** — `components/_subject_bubble.html.erb` :
 - `a` (`id`, `href`) classes `group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-sm leading-tight font-medium text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand` ;
 - `span.grid.size-15.place-items-center.rounded-full.transition.group-active:scale-95` + `illustration.tint` ; dedans `image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy"` ;
-- `span` libellé (`break-words`), puis `span.sr-only` `sr_suffix` si donné.
+- `span` libellé (`break-words`), puis `span.sr-only` `sr_suffix` si donné, **sur la même ligne** (un retour entre les deux lirait « Tle D , cours de … »).
 
 **Illustrations** — `ComponentsHelper::SUBJECT_ILLUSTRATIONS` et `subject_illustration(slug)` → `Illustration(path, tint)` :
 

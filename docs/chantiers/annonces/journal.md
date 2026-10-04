@@ -13,6 +13,7 @@
 | 2026-10-03 | Texte de 140 caractères, sans page de détail ; l'audio porte les détails | Choix du porteur | ADR-0078, UDR-0071 |
 | 2026-10-03 | Audio = fichier téléversé, pas de synthèse vocale | Choix du porteur, contre le design system §10 | UDR-0071 (écart assumé) |
 | 2026-10-03 | Un Lot D d'intégration porte les entrées de navigation | `role_homes_test` compte et suit chaque entrée : une entrée sans page casse tous les worktrees | — (plan) |
+| 2026-10-04 | Chez l'équipe, « Annonces » va dans la liste secondaire (2ᵉ carte, « Plus ») | Une 6ᵉ case dépassait le plafond de l'UDR-0068 et faisait chevaucher les libellés à 360 px ; choix du porteur | UDR-0071 (amendement Lot D) |
 
 ## Ce qui a dérapé
 
@@ -30,6 +31,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - **Lot B, 2026-10-04** : le garde `test/guards/system_budget_test.rb` de `Develop` exige la durée de chaque test système dans `script/ci/test_timings.yml` (fichier partagé) et borne le temps système du chantier (15 s) ; durée enregistrée au merge (5,4 s). Le Lot D devra tenir dans le reste. Le carrousel faisait défiler la page en largeur sur téléphone (`min-w-0` manquant), vu par le test système et non par les tests de vue.
 - **Lot C, 2026-10-04** : le brief demandait `allow_roles :school_admin, :team` sur le retrait (enseignant → 403), contre AN-17 et l'ADR-0078 §4.2 (404) ; l'agent a suivi l'ADR. L'UDR donnait le même id au frame et à la liste (amendée). Leçon : un brief se relit contre les critères du PRD, pas seulement contre le plan.
+- **Lot D, 2026-10-04** : l'amendement de l'UDR comptait les destinations de l'équipe sans la case « Plus » (6 cases, pas 5) ; le porteur a placé « Annonces » dans la liste secondaire. À l'intégration de `Develop`, sa migration `20261004090000` (inscription de la direction) avait la version de `create_messages` : migrations renumérotées `20261004100000` à `100200`. Le test du tableau de bord semblait cassé par la fusion : les assets JavaScript n'avaient pas été recompilés (`yarn build`) après l'arrivée de `table_filter_controller.js`. Le budget système se mesure par paires sur une même machine (`PARALLEL_WORKERS=1`) : la valeur de `role_homes_test` de `Develop` (10,6 s) venait d'une autre machine que la nôtre (15,9 s pour le même fichier) ; la vérification du menu « Plus » de l'équipe, en double, a quitté le test du shell. Total du chantier : 14,2 s sur 15.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -54,6 +56,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Signalement d'une annonce déplacée | La modération est réactive | à ouvrir après les premiers retours |
 | `announcement_date` et ses formats copiés de « Mes annonces » dans `ModerationsController` | Lots A et C parallèles, fichiers disjoints | helper commun au prochain passage dans `communication` |
 | « Retirer » sans nom accessible propre à chaque annonce | `ui_modal` ne prend pas d'`aria-label` de déclencheur | chantier de composants |
+| Entrée « Annonces » du menu « Plus » non marquée courante hors de « Mes annonces » | `ui_dropdown_item` lit `current_page?`, pas `nav_key` | chantier de composants |
+| `script/perf/dataset.rb` ne sème plus le jeu complet (il assigne des `Essential`, refusés depuis l'ADR-0072) : l'accueil élève a été mesuré sur un jeu partiel | Hors périmètre | à ouvrir (outil de mesure) |
 
 ## Clôture
 

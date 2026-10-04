@@ -362,14 +362,14 @@ end
     assert_selector "[data-example=pagination-5] button[disabled]", text: t("components.pagination.next")
   end
 
-  # The first card of the sidebar holds the destinations; the team has a second one, « Configuration » (UDR-0068).
-  # AN-22 (UDR-0071 §3.1): in the bottom bar, « Annonces » is the 4th case of the direction, and the last entry of the team's
-  # « Plus » menu (5 cases). The teacher's bottom bar is followed in communication/announcements_journey_test.
+  # AN-22 (UDR-0071 §3.1): in the bottom bar, « Annonces » is the 4th and last case of the direction. The teacher's bottom
+  # bar is followed in communication/announcements_journey_test, the team's « Plus » menu in role_homes_test.
   test "the shell of every role: sidebar on desktop, bottom bar on mobile" do
     NavigationHelper::DESTINATIONS.each do |role, destinations|
       visit design_shell_path(role)
 
-      assert_selector "aside nav:not(#sidebar_secondary) a", count: destinations.size
+      # UDR-0068 §3.1 : l'équipe a une 2e carte (Référentiel, Imports) dans la barre latérale.
+      assert_selector "aside nav a", count: destinations.size + NavigationHelper::SECONDARY_DESTINATIONS.fetch(role, []).size
       assert_no_selector "nav.fixed.bottom-0"
       assert_selector "header", text: t("shared.roles.#{role}")
       assert_selector "main h1", text: t("design.shell.names.#{role}").split.first
@@ -384,12 +384,6 @@ end
       find("button[aria-controls=account-menu]").click
 
       assert_selector "#account-menu [role=menuitem]", text: t("shared.navigation.sign_out")
-
-      within("nav.fixed.bottom-0 ul.grid-cols-5") do
-        assert_selector ":scope > li", count: 5
-        assert_selector "#bottom_bar_more_menu a[role=menuitem]:last-child[href='#{my_announcements_path}']",
-                        text: t("shared.navigation.announcements"), visible: :all
-      end
       visit design_shell_path(:school_admin)
 
       within("nav.fixed.bottom-0 ul.grid-cols-4") do

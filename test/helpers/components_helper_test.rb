@@ -545,6 +545,13 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "a[href='/teachers/invite'] span.sr-only", 0
   end
 
+  # Constat du challenger : le nom accessible se lit « Tle D, cours de … », sans espace avant la virgule.
+  test "ui_subject_bubble reads its label and spoken suffix without a stray space" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses", illustration: subject_illustration("svt"), sr_suffix: ", cours de SVT")
+
+    assert_equal "Tle D, cours de SVT", css_select("a").first.text.gsub(/\s+/, " ").strip
+  end
+
   test "ui_avatar shows initials on a stable tone" do
     show ui_avatar("Awa Marie Koné", size: :lg)
 

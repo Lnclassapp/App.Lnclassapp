@@ -2,7 +2,7 @@
 <%# Rôle : tableau #drenas par nom, slug à citer dans les imports, compteurs ; « Importer des DRENA » et « Nouvelle DRENA » ouvrent la modale %>
 <%# ADR  : 0029, 0034, 0066 · UDR : 0006, 0035, 0053, 0054, 0068 %>
 <% page_title t(".page_title") %>
-<% content_for :nav_key, "schools" %>
+<% content_for :nav_key, "referential" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
                    back: { label: t(".back"), href: teams_referential_path } do %>
   <%# Les deux boutons restent sur une ligne dès sm (UDR-0053) : ce bloc ne se replie pas et le sous-titre cède la place.

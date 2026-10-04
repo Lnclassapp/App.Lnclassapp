@@ -227,19 +227,19 @@ Vague 2 : Lot A ‖ Lot B ‖ Lot C ‖ Lot D ‖ Lot E ‖ Lot F ‖ Lot G   �
 
 ## Portes de sortie
 
-- [ ] `memo.md` complet, section `Hors périmètre` non vide
-- [ ] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
-- [ ] `prd.md` : critères d'acceptation en Gherkin, tous testables
-- [ ] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
-- [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
-- [ ] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR *(remplacée, par décision du porteur, par une poussée directe sur `Develop` une fois toutes les autres portes vertes)*
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `memo.md` complet, section `Hors périmètre` non vide
+- [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
+- [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
+- [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
+- [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
+- [x] `plan.md` : 4 champs par lot, tableau de collision rempli
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] ~~PR unique vers `Develop`~~, référençant chantier + ADR + UDR *(remplacée, par décision du porteur, par une poussée directe sur `Develop` une fois toutes les autres portes vertes)*
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >

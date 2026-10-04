@@ -285,6 +285,6 @@ publish_scheduled_messages:
 *Chantier [`annonces`](../../chantiers/annonces/journal.md). Statut inchangé (`Accepté`).*
 
 - Cet ADR a été écrit et accepté sous le numéro **0069**, déjà pris sur `Develop` par l'ADR « CI en un job ». Il devient l'**ADR-0078** (les numéros 0069 à 0077 sont utilisés sur `Develop` ou sur d'autres branches). Son UDR, écrite sous le numéro 0056 (pris par « Gestes de la direction »), devient l'**UDR-0071**.
-- Les migrations du chantier passent après celles de `Develop` (`20261004090000` à `20261004090200`) : la version `20261003100000` était prise.
+- Les migrations du chantier passent après celles de `Develop` (`20261004100000` à `20261004100200`) : les versions `20261003100000`, puis `20261004090000` (inscription de la direction), étaient prises.
 - L'[ADR-0071](./0071-gestes-de-la-direction-sur-son-etablissement.md) avait déjà sorti la direction de la lecture seule : les §4.6, §7 et §8 sont corrigés en conséquence.
 - Le contexte `communication` porte aussi le blog (ADR-0074) : les noms de ce chantier (`Message`, `Reader`, `AudioHeader`, `messages`, `message_classrooms`, `message_dismissals`) n'entrent en collision avec aucun nom du blog.

@@ -48,7 +48,7 @@ L'élève lit au téléphone, souvent sur un Android d'entrée de gamme, avec un
 |---|---|
 | `teacher` | `:announcements_path` |
 | `school_admin` | `:announcements_path` |
-| `team` | `:my_announcements_path` (6ᵉ entrée : `NAV_GRIDS` gagne `6 => "grid-cols-6"`) |
+| `team` | `:my_announcements_path`, dernière entrée de `SECONDARY_DESTINATIONS` (amendement du Lot D) |
 | `student` | aucune entrée |
 
 Libellé `shared.navigation.announcements` : « Annonces ». Toute page de ce chantier déclare `content_for :nav_key, "announcements"`.
@@ -306,4 +306,13 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
 - Un retrait sur une annonce déjà archivée ou retirée répond 404, avec le toast d'erreur commun « Page introuvable. ».
 - La page « Enseignants » / « Toutes » est fermée à l'enseignant et à l'élève (403). Le **retrait**, lui, laisse entrer l'enseignant pour lui répondre 404 (ADR-0078 §4.2, AN-17) ; l'élève reçoit 403.
 - Retirer la dernière ligne d'une page n'affiche l'état vide qu'au rechargement.
+
+## Amendement du 2026-10-04 — navigation de l'équipe, constatée au Lot D
+
+*Chantier [`annonces`](../../chantiers/annonces/journal.md), Lot D. Décision du porteur. Cette section fait foi en cas d'écart avec le §3.1, le §4 et l'amendement « renumérotation ».*
+
+- L'amendement « renumérotation » comptait 5 entrées pour l'équipe en oubliant la case « Plus » : la barre du bas en aurait eu 6, contre le plafond de 5 de l'[UDR-0068](0068-configuration-et-pilotage-par-etablissement.md), et à 360 px les libellés se chevauchaient.
+- **Chez l'équipe, « Annonces » est la dernière entrée de `SECONDARY_DESTINATIONS`** (après Référentiel et Imports) : 2ᵉ carte de la barre latérale sur ordinateur, menu « Plus » sur téléphone, vers « Mes annonces ». `DESTINATIONS[:team]` et `NAV_GRIDS` ne changent pas ; la barre du bas de l'équipe garde 5 cases.
+- L'enseignant et la direction ont « Annonces » en dernier dans `DESTINATIONS` (4 entrées chacun).
+- Sur « Toutes » et « Nouvelle annonce », la 2ᵉ carte et le bouton « Plus » sont marqués courants (`nav_key`), mais l'entrée du menu « Plus » ne l'est que sur « Mes annonces » : `ui_dropdown_item` lit `current_page?`, pas `nav_key`.
 

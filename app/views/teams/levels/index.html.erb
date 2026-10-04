@@ -2,6 +2,7 @@
 <%# Rôle : aide qui renvoie au barème des classes ; tableau #levels par position ; « Nouveau niveau » ouvre la modale de création dans le frame « modal » %>
 <%# ADR  : 0029, 0034, 0058 · UDR : 0006, 0032, 0045, 0054, 0068 %>
 <% page_title t(".page_title") %>
+<% content_for :nav_key, "referential" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
                    back: { label: t(".back"), href: teams_referential_path } do %>
   <%= ui_button t(".new"), href: new_level_path, icon: "plus", data: { turbo_frame: "modal" } %>

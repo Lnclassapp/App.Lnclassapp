@@ -2,6 +2,7 @@
 <%# Rôle : tableau par nom, badge de la catégorie sur chaque ligne ; création, modification et suppression sans rechargement %>
 <%# ADR  : 0034 · UDR : 0006, 0034, 0054, 0068 %>
 <% page_title t(".page_title") %>
+<% content_for :nav_key, "referential" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
                    back: { label: t(".back"), href: teams_referential_path } do %>
   <%= ui_button t(".new"), href: new_material_path, icon: "plus", data: { turbo_frame: "modal" } %>

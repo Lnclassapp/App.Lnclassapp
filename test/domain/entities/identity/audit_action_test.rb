@@ -31,6 +31,10 @@ module Entities
         %w[teacher.detached teacher.reinstated].each { assert AuditAction.valid?(it), it }
       end
 
+      test "un compte direction trace son inscription par le code, son retrait, sa restauration et sa suppression (ADR-0077)" do
+        %w[school_staff.registered school_staff.archived school_staff.restored school_staff.deleted].each { assert AuditAction.valid?(it), it }
+      end
+
       test "le blog trace la création, la modification, la publication et l'archivage d'un article (ADR-0074, BL-07)" do
         %w[article.created article.updated article.published article.archived].each { assert AuditAction.valid?(it), it }
       end
