@@ -11,6 +11,7 @@
 | 2026-10-04 | L'index `classroom_students (student_id)` est joué en premier (ADR-0062 : index d'abord), mesuré, puis **annulé** | Il divise le temps par 12 (725 ms en p95), mais la réécriture qui suit ne l'utilise plus ; A/B : SQL p50 24,0 ms avec, 26,0 ms sans, dans le bruit | Non |
 | 2026-10-04 | Réécriture de la liste : un pré-agrégat des adhésions de l'établissement (`array_agg … ORDER BY` + `HAVING NOT bool_or`) plutôt que `DISTINCT ON` | Mesurée la plus rapide des trois formes (9,8 ms contre 11,1 et 19,1 ms), et sans anti-jointure exposée à une erreur d'estimation | Non (réécriture locale) |
 | 2026-10-04 | La requête des totaux n'est pas touchée | #169 (`fix/remediation-comptee-faite`) en modifie la ligne `kind` ; la réécrire ici créerait un conflit. Gain possible : quelques ms | Non |
+| 2026-10-04 | Lot 3, levier 3b : la confirmation « Retirer » d'« Enseignants » n'est plus copiée dans chaque ligne. Elle se charge à la demande dans le frame `modal` (`GET teachers/:public_id/removal`) et rend une page complète sans JavaScript. La policy du retrait passe avant toute lecture : 403, puis 404 comme le `DELETE`, y compris pour la direction d'un autre établissement. Les lignes et le menu perdent leur indentation | 60 modales faisaient 198 Ko et environ 72 ms de vue, pour une seule ouverte. Résultat : 368,5 → 152,5 Ko, vue 63,5 → 30,1 ms ; la confirmation pèse 3,6 Ko, avec un p95 de 30 ms. Le budget de 150 Ko n'est pas atteint (2,5 Ko de trop) : le levier 3c est proposé | Non : [UDR-0056](../../decisions/udr/0056-gestes-de-la-direction.md) et [UDR-0042](../../decisions/udr/0042-actions-de-ligne-dans-un-menu.md), amendements du 2026-10-04 |
 
 ## Ce qui a dérapé
 
@@ -40,7 +41,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | p95 de « Anciens élèves » à 136 ms au protocole (cible 100 ms) | Le SQL est réglé (24 ms). Le reste vient de la compilation YJIT et du GC (rendu de 200 lignes), pas d'un levier SQL. Pistes : les totaux par élève (7 ms, après la fusion de #169), le rendu des lignes, ou une chauffe du protocole plus longue que le seuil de YJIT | Décision du porteur : levier de rendu, ou amendement de l'ADR-0067 sur la chauffe |
 | Les totaux (`#totals`) parcourent les 754 devoirs de l'établissement et filtrent les 200 élèves ensuite (7 ms) | Lignes modifiées par #169 ; un levier à la fois | Après la fusion de #169 |
 | `measure_screens.rb` ne signale pas un `PERF_ONLY` qui ne correspond à aucun écran | Hors périmètre | Prochain chantier qui touche le script |
-| Lots 2 (« Travail des élèves », 229 ms p95) et 3 (« Enseignants », 441 Ko) | Ce lot ne joue que le premier levier | Ce chantier |
+| Lot 2 (« Travail des élèves », 229 ms p95) ; Lot 3 (« Enseignants ») à 152,5 Ko, pour un budget de 150 Ko | Un levier à la fois : 3c (attributs racine des icônes sur le `<symbol>`, environ −11 Ko estimés) reste à jouer | Ce chantier |
 
 ## Recouvrements avec #169 (`fix/remediation-comptee-faite`)
 

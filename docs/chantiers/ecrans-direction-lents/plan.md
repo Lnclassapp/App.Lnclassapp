@@ -13,7 +13,7 @@ Lot 1a — « Anciens élèves » : index classroom_students (student_id)       
 Lot 1b — « Anciens élèves » : liste lue dans les adhésions de l'établissement   ✅ gardé
   ⋯
 Lot 2 — « Travail des élèves » : agrégat élève × devoir                   à jouer
-Lot 3 — « Enseignants » : poids du HTML (441 Ko)                          à jouer
+Lot 3 — « Enseignants » : poids du HTML (441 → 152,5 Ko)                 leviers 1 et 3b ✅ · 150 Ko non atteint
 Lot D — script/perf/dataset.rb : semer anciens élèves et remédiations     dette, lot à part
 ```
 
@@ -154,13 +154,49 @@ Exécutions de la série *après* : p50 57,7 / 59,6 / 53,4 ms ; p95 136,1 / 182,
 - **Test associé** : `test/infrastructure/queries/school/student_work_query_test.rb`
 - **Done quand**   : p95 de `/school-admin/classrooms` < 100 ms, contre 229,0 ms (série *après* de ce chantier), mêmes chiffres affichés
 
-## Lot 3 — « Enseignants » : poids du HTML (à jouer)
+## Lot 3 — « Enseignants » : poids du HTML
 
-- **Couche**       : ui (sans changer ce qui est affiché)
-- **Fichiers**     : `app/views/school_admin/teachers/…`
+- **Couche**       : ui (sans changer ce qui est affiché), et une route `GET` de lecture pour le levier 3b
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/controllers/school_admin/teachers_controller_test.rb`, `test/system/school_admin/`
-- **Done quand**   : HTML de `/school-admin/teachers` < 150 Ko, contre 441,1 Ko
+- **Done quand**   : HTML de `/school-admin/teachers` < 150 Ko, contre 441,1 Ko. **Non atteint : 152,5 Ko** après les leviers 1 et 3b ; voir « Reste » ci-dessous.
+
+Mesure : base `app_lnclassapp_perf_direction_lot_c` (60 enseignants dans l'établissement mesuré), mode production, `PERF_ONLY=admin_teachers`, protocole de l'ADR-0067 (3 chauffes, 30 × 3, médiane). Une ligne pesait 6,0 Ko après le levier 1 : la modale de confirmation 3,3 Ko (198 Ko pour la page), le menu ⋮ 1,9 Ko (114 Ko), l'indentation environ 0,46 Ko (27 Ko). Sur 103 ms, la vue en prenait environ 72.
+
+### Levier 1 — icônes dessinées une fois (`<symbol>` + `<use>`) ✅ commit `cbf1bddb`
+
+- **Fichiers** : `app/helpers/components_helper.rb` (`ui_icon_sprite`), `app/views/school_admin/teachers/index.html.erb`, `test/helpers/components_helper_test.rb`
+- Chaque ligne dessinait cinq heroicons en entier. Ils sont maintenant dessinés une fois pour la page, et chaque ligne les reprend par `<use>`, avec les mêmes attributs racine et la même classe. Les captures sont identiques au pixel près, en clair comme en sombre.
+
+| « Enseignants » | Ko | Ko gzip | p95 |
+|---|---|---|---|
+| Avant | 441,1 | 17,3 | 149,5 ms |
+| Après le levier 1 | **368,5** | 15,2 | 132,1 ms (machine partagée, dans le bruit) |
+
+### Levier 3b — confirmation « Retirer » chargée à la demande ✅ commit `299fac0e`
+
+- **Fichiers** : `config/routes/school_admin.rb` (`GET teachers/:public_id/removal`), `app/controllers/school_admin/teachers_controller.rb` (`#removal`), `app/infrastructure/queries/school/school_teachers_query.rb` (`#teacher`), `app/views/school_admin/teachers/removal.html.erb` (nouvelle), `app/views/school_admin/teachers/index.html.erb`, `app/views/components/_dropdown.html.erb` (indentation seule), `config/locales/school_admin/teachers.fr.yml`, `script/perf/measure_screens.rb` (écrans `admin_teacher_removal` et `admin_teacher_removal_page`)
+- La confirmation n'est plus copiée dans chaque ligne. L'entrée « Retirer de l'établissement » du menu ⋮ est un lien `data-turbo-frame="modal"` : la même `<dialog>` arrive par une requête dans le cadre partagé du layout. Sans JavaScript, la même adresse rend une page complète. L'action applique la policy de `DetachTeacher` avant toute lecture. Contrat : [UDR-0056, amendement du 2026-10-04](../../decisions/udr/0056-gestes-de-la-direction.md#amendement-du-2026-10-04--confirmation-du-retrait-chargée-à-la-demande).
+- L'indentation des lignes du tableau disparaît : gabarit des lignes sans retrait, puis celui du menu (`components/_dropdown`), qui se répète à chaque ligne. Entre ces éléments, aucun espace ne se voit.
+
+Série appariée « avant » et « après », sur la même machine, à deux minutes d'écart, charge ≈ 1,5 :
+
+| « Enseignants » (30 × 3, médiane) | Ko | Ko gzip | p50 | p95 | Vue p50 | Allocations | Requêtes |
+|---|---|---|---|---|---|---|---|
+| Avant (levier 1 seul) | 368,5 | 15,2 | 91,7 ms | 118,5 ms | 63,5 ms | 71 731 | 9 |
+| Confirmation à la demande + lignes sans retrait (série séparée, plus tôt dans la journée) | 156,0 | 10,1 | 60,2 ms | 94,7 ms | 31,2 ms | 32 046 | 9 |
+| **Après** : + menu sans retrait | **152,5** | **10,0** | **62,6 ms** | **121,2 ms** | **30,1 ms** | **32 037** | 9 |
+
+Exécutions *après* : p50 63,7 / 62,6 / 55,8 ms ; p95 121,2 / 108,7 / 160,2 ms. Sur toutes les séries *après* du jour (9 exécutions), la médiane est de 64,5 ms en p50 et de 121,2 ms en p95 ; sur les 6 exécutions *avant*, de 103,5 ms et de 140,2 ms. La vue est divisée par deux et les allocations par 2,2. Le p95, lui, reste dans le bruit de la machine partagée : sa queue vient de la compilation YJIT, comme au lot 1b (§ « Où part le temps restant »).
+
+| Confirmation (nouvelle) | Ko | Ko gzip | p50 | p95 | Requêtes |
+|---|---|---|---|---|---|
+| Dans le frame `modal` (`admin_teacher_removal`) | **3,6** | 1,4 | 18,4 ms | **30,3 ms** | 5 |
+| Page complète, sans JavaScript (`admin_teacher_removal_page`) | 17,2 | 4,3 | 20,8 ms | 41,0 ms | 7 |
+
+**Reste : 2,5 Ko au-delà du budget.** Une ligne pèse maintenant 2,3 Ko, dont 1,75 Ko pour le menu ⋮ ; le haut et le bas de la page (shell, en-tête, `<symbol>`) font 19 Ko. Prochain levier, à jouer seul :
+- **3c — attributs racine des icônes portés par le `<symbol>`** : `viewBox`, `fill`, `stroke` et `stroke-width` ne seraient plus répétés sur chaque `<svg><use>`. Trois icônes par ligne, environ 180 octets par ligne. **Estimation : −11 Ko, soit environ 141,5 Ko**, calculée sur le HTML rendu et non mesurée. Le levier touche `ui_icon_sprite` (levier 1) et son test de caractérisation.
+- Autre piste, plus large : les cinq écouteurs `@window` de chaque menu fixe (`data-action`, environ 200 octets par ligne). Soixante menus réagissent à chaque défilement. Ce levier touche `dropdown_controller.js`, partagé par toute l'application.
 
 ## Lot D — Jeu de mesure (dette, lot à part)
 
@@ -198,7 +234,7 @@ Exécutions de la série *après* : p50 57,7 / 59,6 / 53,4 ms ; p95 136,1 / 182,
 - [x] Pureté domaine · rubocop · tests · brakeman : au vert (voir § Vérifications)
 - [x] `journal.md` : leviers abandonnés et pourquoi
 - [ ] **Cible p95 < 100 ms** de « Anciens élèves » : non atteinte au protocole (136 ms), atteinte à chaud (78 ms) ; voir « Où part le temps restant »
-- [ ] Lots 2 et 3
+- [ ] Lot 2 ; Lot 3 : 152,5 Ko, budget de 150 Ko non atteint (levier 3c proposé)
 
 ## Vérifications
 

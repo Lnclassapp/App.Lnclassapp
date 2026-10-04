@@ -41,7 +41,7 @@ Lot 1 du [plan](plan.md), 2026-10-04. Base `app_lnclassapp_perf_direction`, copi
 | SQL « Anciens élèves » (p50) | 8 175,2 ms | — | **23,7 ms** | liste : 17 454 → 13,0 ms sous `EXPLAIN` |
 | Requêtes · HTML | 8 · 110,4 Ko | ≤ 150 Ko | 8 · 110,4 Ko | ✅ inchangés |
 | p95 « Travail des élèves » | 229,0 ms (série *après*, écran non touché) | < 100 ms | — | lot 2 |
-| HTML « Enseignants » | 441,1 Ko (non touché) | < 150 Ko | — | lot 3 |
+| HTML « Enseignants » | 441,1 Ko | < 150 Ko | **152,5 Ko** (leviers 1 et 3b) | ❌ de 2,5 Ko ; levier 3c proposé ([plan](plan.md)) |
 
 Le SQL a cessé d'être le coût. Le p95 restant vient de la compilation YJIT et du GC : avec seulement 3 chauffes, ils tombent dans les 30 mesures du protocole. Voir [plan § Où part le temps restant](plan.md#où-part-le-temps-restant-p95-non-atteint).
 
