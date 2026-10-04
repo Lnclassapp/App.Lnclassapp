@@ -10,6 +10,7 @@
 | 2026-10-04 | La statistique est celle d'un **exercice assigné**, sur les sessions de l'assignation, et non celle d'un exercice sur toutes les sessions | Le « 18/25 » doit être le « 18 faits » de la même page (ADR-0048, ADR-0072) | ADR-0079 §4.1 |
 | 2026-10-04 | Le détail va dans la **page de suivi** existante, sous `FollowAssignmentPolicy` : ni écran, ni route, ni policy nouveaux | La page nomme déjà des élèves sous la bonne policy | UDR-0072 §2 |
 | 2026-10-04 | Badges déduits du meilleur score de l'assignation, pas de la table des badges | Couleur et badge ne se contredisent jamais | ADR-0079 §4.2 |
+| 2026-10-04 | **Autonomie totale** accordée par le porteur : décisions prises sans question, au service du progrès des utilisateurs | Consigne du porteur | — |
 | 2026-10-04 | Relecture par la mission (« aider chaque acteur à progresser ») : taux au premier essai par question, « À reprendre en classe » sous 50 %, élèves en baisse ou qui stagnent en tête | Chaque lecture doit appeler un geste de l'enseignant | ADR-0079 §2, §4.5, §4.7 |
 | 2026-10-04 | Rouge et jaune deviennent des tokens propres à la compréhension (`struggling`, `fragile`), distincts de l'ambre d'urgence | La charte (§5) réserve l'ambre à l'urgence, et la même ligne affiche une échéance en retard en ambre | UDR-0072 §3.1 |
 
