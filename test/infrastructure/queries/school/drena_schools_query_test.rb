@@ -2,6 +2,7 @@ require "test_helper"
 
 # RE-07 to RE-10 (UDR-0068 §3.6, ADR-0062 amended on 2026-10-03): the schools of a DRENA, each with the figures of the
 # DRENA row of the dashboard. The listed schools add up to that row: an inactive school still counted is listed too.
+# Since the amendment of 2026-10-04, the rows are read by TeamDashboardQuery with its figures; #page searches and pages them.
 class Queries::School::DrenaSchoolsQueryTest < ActiveSupport::TestCase
   Period = Entities::School::ReportingPeriod
   Query = Queries::School::DrenaSchoolsQuery
@@ -11,25 +12,30 @@ class Queries::School::DrenaSchoolsQueryTest < ActiveSupport::TestCase
     @level = create_level
   end
 
-  def schools(drena: @abidjan, period: "7d", search: nil, page: 1)
-    Query.new.call(drena_public_id: drena.respond_to?(:public_id) ? drena.public_id : drena,
-                   period: Period.parse(period, today: Date.current), search:, page:)
+  def dashboard(drena: @abidjan, period: "7d", cache: ActiveSupport::Cache::NullStore.new)
+    Queries::School::TeamDashboardQuery.new(cache:).call(period: Period.parse(period, today: Date.current),
+                                                         drena_public_id: drena.respond_to?(:public_id) ? drena.public_id : drena)
   end
 
-  def drena_row(drena: @abidjan, period: "7d")
-    Queries::School::TeamDashboardQuery.new(cache: ActiveSupport::Cache::NullStore.new)
-                                       .call(period: Period.parse(period, today: Date.current), drena_public_id: drena.public_id)
-                                       .drenas.sole
+  # The page as the controller reads it: the figures and the rows, then a page of them.
+  def schools(drena: @abidjan, period: "7d", search: nil, page: 1, cache: ActiveSupport::Cache::NullStore.new)
+    board = dashboard(drena:, period:, cache:)
+    Query.new.page(drena: board.drena, rows: board.school_rows, search:, page:) if board.drena
   end
+
+  def drena_row(drena: @abidjan, period: "7d") = dashboard(drena:, period:).drenas.sole
 
   def figures(row) = row.to_h.values_at(:classrooms_count, :teachers_count, :students_count, :active_students_count)
 
   def placed_student(classroom, **) = create_student(classroom:, **)
 
-  test "an unknown or blank DRENA reads nothing" do
-    assert_nil schools(drena: "inconnue")
-    assert_nil schools(drena: "")
-    assert_nil schools(drena: nil)
+  test "an unknown or blank DRENA reads nothing: the national view has no school rows" do
+    create_school(drena: @abidjan)
+
+    [ "inconnue", "", nil ].each do |drena|
+      assert_nil schools(drena:), drena.inspect
+      assert_nil dashboard(drena:).school_rows, drena.inspect
+    end
   end
 
   test "a DRENA without any school gives an empty first page" do
@@ -131,6 +137,27 @@ class Queries::School::DrenaSchoolsQueryTest < ActiveSupport::TestCase
     assert_equal [ 3, 2, 4, 2 ], figures(drena_row(period: "7d"))
   end
 
+  # ADR-0062, amended on 2026-10-04: on the year view, the rows are kept in the cache entry of the figures; a change is
+  # seen by both at the same time, never by one of them alone.
+  test "RE-08 on the year view, with the cache: the rows are kept with the figures, and refreshed with them" do
+    travel_to Time.zone.local(2026, 10, 15, 12) do
+      cache = ActiveSupport::Cache::MemoryStore.new
+      school = create_school(drena: @abidjan)
+      classroom = create_classroom(school:, level: @level)
+      placed_student(classroom)
+      dashboard(period: "year", cache:)
+      placed_student(classroom)
+
+      travel 5.minutes - 1.second
+      kept = schools(period: "year", cache:)
+      assert_equal [ 1, 1 ], [ kept.rows.sole.students_count, dashboard(period: "year", cache:).accounts.students ]
+
+      travel 2.seconds
+      fresh = schools(period: "year", cache:)
+      assert_equal [ 2, 2 ], [ fresh.rows.sole.students_count, dashboard(period: "year", cache:).accounts.students ]
+    end
+  end
+
   test "RE-09: 25 schools a page, sorted by students then name, a school without classroom included with zeros" do
     big = create_school(drena: @abidjan, name: "Lycée 30")
     classroom = create_classroom(school: big, level: @level)
@@ -186,14 +213,18 @@ class Queries::School::DrenaSchoolsQueryTest < ActiveSupport::TestCase
     assert_empty schools(search: "_").rows
   end
 
-  test "the number of queries does not grow with the schools of the DRENA" do
+  test "the number of queries does not grow with the schools of the DRENA: one for the rows, one for a search" do
     seed_schools(2)
-    small = count_queries { schools }
+    since = Period.parse("7d", today: Date.current).since.in_time_zone
+    read = -> { Query.new.rows(drena_id: @abidjan.id, year: Entities::Classroom::SchoolYear.current(Date.current), since:) }
+    small = count_queries(&read)
     seed_schools(30)
+    rows = read.call
+    drena = Query::Drena.new(public_id: @abidjan.public_id, name: @abidjan.name)
 
-    assert_equal small, count_queries { schools }
-    assert_equal small, count_queries { schools(search: "lycée", page: 2) }
-    assert_equal 3, small, "the DRENA, the total, then the page"
+    assert_equal [ 1, 1 ], [ small, count_queries(&read) ]
+    assert_equal 0, count_queries { Query.new.page(drena:, rows:, page: 2) }
+    assert_equal 1, count_queries { Query.new.page(drena:, rows:, search: "lycée", page: 2) }
   end
 
   private

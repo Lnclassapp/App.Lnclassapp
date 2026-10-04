@@ -371,7 +371,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
     assert_equal small, count_queries { dashboard(drena: nil) }
     assert_equal filtered_small, count_queries { dashboard(drena: Orm::Drena.first.public_id) }
-    assert_equal [ 16, 18 ], [ small, filtered_small ], "national, then under a DRENA filter (ADR-0062, ADR-0067)"
+    assert_equal [ 16, 19 ], [ small, filtered_small ], "national, then under a DRENA filter with its school rows (ADR-0062)"
   end
 
   private
