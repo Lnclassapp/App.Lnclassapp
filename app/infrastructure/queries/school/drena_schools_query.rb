@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::DrenaSchoolsQuery
 # Rôle : pilotage sous filtre DRENA (RE-07 à RE-10) : ses établissements et leurs classes, enseignants, élèves et élèves actifs
-# ADR  : 0062, 0067 · UDR : 0068 · définitions de la ligne DRENA (TeamDashboardQuery), 3 requêtes quel que soit le volume, aucun cache
+# ADR  : 0062, 0067 · UDR : 0068 · définitions de la ligne DRENA, lues avec les chiffres de TeamDashboardQuery (même cache)
 module Queries
   module School
     class DrenaSchoolsQuery
@@ -20,27 +20,37 @@ module Queries
       LISTED = "schools.status = 'active' OR classroom_counts.school_id IS NOT NULL " \
                "OR teacher_counts.school_id IS NOT NULL".freeze
 
-      # period : Entities::School::ReportingPeriod ; page : texte de l'URL, une page invalide vaut 1, trop grande la dernière.
-      # → Page | nil pour une DRENA inconnue
-      def call(drena_public_id:, period:, search: nil, page: 1, today: Date.current)
-        return if drena_public_id.blank?
+      # Toutes les lignes de la DRENA, triées, en une requête : TeamDashboardQuery les lit avec ses chiffres, dans la même
+      # entrée de cache en vue « année » (ADR-0062, amendement du 2026-10-04). since : début de la période.
+      # → Array<SchoolRow>
+      def rows(drena_id:, year:, since:)
+        @drena_id = drena_id
+        @year = year
+        @since = since
+        listed.joins(left_join(students_by_school, "student_counts")).order(ORDER).pluck(*COLUMNS).map { SchoolRow.new(*it) }
+      end
 
-        id, public_id, name = Orm::Drena.where(public_id: drena_public_id.to_s).pick(:id, :public_id, :name)
-        return unless id
-
-        @drena_id = id
-        @year = Entities::Classroom::SchoolYear.current(today)
-        @since = period.since.in_time_zone
-        scope = Queries::Shared::TextSearch.apply(listed, search, columns: [ "schools.name" ])
-        total = scope.count
-        pages = [ total.fdiv(PER_PAGE).ceil, 1 ].max
+      # drena : la DRENA de la page (public_id, name) ; rows : ses lignes (#rows) ; search, page : textes de l'URL. Une page
+      # invalide vaut 1, trop grande la dernière. Aucune requête sans recherche. → Page
+      def page(drena:, rows:, search: nil, page: 1)
+        rows = matching(rows, search)
+        pages = [ rows.size.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages) # to_s : school_page[]=2 donne un tableau
-        rows = scope.joins(left_join(students_by_school, "student_counts")).order(ORDER)
-                    .offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck(*COLUMNS)
-        Page.new(drena: Drena.new(public_id:, name:), rows: rows.map { SchoolRow.new(*it) }, page:, pages:, total:)
+        Page.new(drena: Drena.new(public_id: drena.public_id, name: drena.name), rows: rows.slice((page - 1) * PER_PAGE, PER_PAGE),
+                 page:, pages:, total: rows.size)
       end
 
       private
+
+      # La recherche garde sa définition (TextSearch sur le nom, en SQL, une requête) ; elle filtre les lignes lues, dans
+      # leur ordre : un établissement créé ou renommé depuis apparaît avec les chiffres suivants.
+      def matching(rows, search)
+        return rows if Queries::Shared::TextSearch.normalize(search).empty?
+
+        found = Queries::Shared::TextSearch.apply(Orm::School.where(public_id: rows.map(&:public_id)), search, columns: [ "schools.name" ])
+                                           .pluck(:public_id).to_set
+        rows.select { found.include?(it.public_id) }
+      end
 
       def listed
         Orm::School.where(drena_id: @drena_id)

@@ -42,8 +42,10 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
       "pilotage 7 j" => [ PILOTAGE_MS, -> { dashboard("7d", today) } ],
       # Chiffres de l'année gardés 5 minutes (ADR-0062, amendement du 2026-09-29) : le budget porte sur l'entrée chaude.
       "pilotage année" => [ PILOTAGE_MS, -> { dashboard("year", today) } ],
-      # UDR-0068 §3.6, ADR-0062 (amendement du 2026-10-03) : la page filtrée lit ses chiffres puis « Par établissement ».
+      # UDR-0068 §3.6, ADR-0062 (amendements du 2026-10-03 et du 2026-10-04) : la page filtrée lit ses chiffres et ses
+      # établissements en une lecture, gardée 5 minutes en vue « année » (entrée chaude).
       "pilotage filtré, plus grande DRENA" => [ PILOTAGE_MS, -> { filtered_dashboard("7d", today, largest) } ],
+      "pilotage filtré année" => [ PILOTAGE_MS, -> { filtered_dashboard("year", today, largest) } ],
       "recherche « kou »" => [ SCREEN_MS, -> { Queries::Identity::AccountSearchQuery.new.call(term: "kou") } ],
       "Travail des élèves" => [ SCREEN_MS, -> { Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus) } ]
     }
@@ -58,6 +60,8 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
     cold = p95_ms { dashboard("year", today, cache: ActiveSupport::Cache::NullStore.new) }
     puts format("\n[PERF] %-20s p95 %6.1f ms (à froid, une lecture toutes les 5 minutes au plus ; noté, non budgété)",
                 "pilotage année", cold)
+    cold_filtered = p95_ms { filtered_dashboard("year", today, largest, cache: ActiveSupport::Cache::NullStore.new) }
+    puts format("\n[PERF] %-20s p95 %6.1f ms (à froid ; noté, non budgété)", "pilotage filtré année", cold_filtered)
     measured.each { |name, (budget, p95)| assert_operator p95, :<, budget, name }
   end
 
@@ -67,11 +71,11 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
     Queries::School::TeamDashboardQuery.new(cache:).call(period: Entities::School::ReportingPeriod.parse(key, today:), today:)
   end
 
-  # Les deux lectures de la page sous filtre DRENA, dans l'ordre du contrôleur.
-  def filtered_dashboard(key, today, drena)
+  # La page sous filtre DRENA, comme le contrôleur la lit : les chiffres et les lignes d'établissements, puis une page.
+  def filtered_dashboard(key, today, drena, cache: Rails.cache)
     period = Entities::School::ReportingPeriod.parse(key, today:)
-    Queries::School::TeamDashboardQuery.new.call(period:, drena_public_id: drena, today:)
-    Queries::School::DrenaSchoolsQuery.new.call(drena_public_id: drena, period:, today:)
+    board = Queries::School::TeamDashboardQuery.new(cache:).call(period:, drena_public_id: drena, today:)
+    Queries::School::DrenaSchoolsQuery.new.page(drena: board.drena, rows: board.school_rows)
   end
 
   def p95_ms(&read)

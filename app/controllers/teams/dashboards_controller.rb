@@ -25,10 +25,11 @@ module Teams
       read_schools if @dashboard.drena
     end
 
-    # UDR-0068 §3.6 : sous filtre DRENA, « Par établissement » remplace « Par DRENA », paginé et cherché côté serveur.
+    # UDR-0068 §3.6 : sous filtre DRENA, « Par établissement » remplace « Par DRENA », paginé et cherché côté serveur. Ses
+    # lignes viennent de la lecture des chiffres (ADR-0062, amendement du 2026-10-04) : la somme égale toujours le haut.
     def read_schools
       @school_search = text_param(:school_q)
-      @schools = Queries::School::DrenaSchoolsQuery.new.call(drena_public_id: text_param(:drena), period: @period,
+      @schools = Queries::School::DrenaSchoolsQuery.new.page(drena: @dashboard.drena, rows: @dashboard.school_rows,
                                                              search: @school_search, page: text_param(:school_page))
     end
 

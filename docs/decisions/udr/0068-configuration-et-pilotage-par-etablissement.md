@@ -87,13 +87,14 @@ La barre latérale de l'équipe mêle le quotidien (Accueil, Cours, Établisseme
   - recherche : `Queries::Shared::TextSearch` sur `schools.name` ;
   - tri `students_count DESC, schools.name, schools.id`, `PER_PAGE = 25` ;
   - **un nombre fixe de requêtes** (le total, puis une page aux chiffres calculés par sous-requêtes ou agrégats groupés), jamais une par établissement ; aucun cache (7 et 30 jours lus en direct ; l'année non plus : la page d'établissements n'entre pas dans le cache de l'ADR-0062).
+  - *Amendé le 2026-10-04 (ADR-0062, chantier `dettes-reorganisation`) : les lignes de tous les établissements de la DRENA se lisent avec les chiffres de la page, dans la même entrée de cache en vue « année » ; la recherche (même `TextSearch`, en SQL) et les pages de 25 se font sur ces lignes. Les chiffres du haut et le tableau datent toujours du même instant (règle 8).*
 
 **Tokens** : ceux de l'UDR-0005 seulement ; aucune valeur arbitraire, aucun attribut `style`.
 
 **Comportement**
 - Barre latérale, page Référentiel, liens de DRENA, recherche et pages d'établissements : navigations Turbo de la page entière. Aucun Turbo Stream, aucun toast.
 - `table-filter` n'appelle jamais le serveur.
-- Le cache des chiffres de l'année (ADR-0062) ne change pas ; `CACHE_VERSION` reste 1.
+- Le cache des chiffres de l'année (ADR-0062) ne change pas ; `CACHE_VERSION` reste 1. *Amendé le 2026-10-04 : sous filtre DRENA, l'entrée porte aussi les lignes d'établissements ; `CACHE_VERSION` 2.*
 
 **États obligatoires**
 - Menu « Plus » : fermé par défaut ; ouvert, focus sur la première entrée (contrôleur `dropdown`).
