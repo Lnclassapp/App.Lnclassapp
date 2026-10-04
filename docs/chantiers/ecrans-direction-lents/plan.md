@@ -146,7 +146,10 @@ Exécutions de la série *après* : p50 57,7 / 59,6 / 53,4 ms ; p95 136,1 / 182,
 
 ---
 
-## Lot 2 — « Travail des élèves » (à jouer)
+## Lot 2 — « Travail des élèves » : déplacé
+
+> **Déplacé le 2026-10-04 vers le chantier de suivi `travail-eleves-budget`.** Il réécrit `StudentWorkQuery`, que #169 (`remediation-comptee-faite`) modifie aussi, et il ne peut partir qu'après cette fusion. Le garder ici bloquerait des gains déjà prouvés par le challenger (lots 1 et 3). Ce qui suit reste comme cadrage du chantier de suivi.
+
 
 - **Couche**       : infrastructure
 - **Fichiers**     : `app/infrastructure/queries/school/student_work_query.rb` · son test
@@ -252,7 +255,7 @@ Exécutions *après* : p95 109,4 / 158,3 / 111,1 ms ; une seconde série donne 1
 - [x] Pureté domaine · rubocop · tests · brakeman : au vert (voir § Vérifications)
 - [x] `journal.md` : leviers abandonnés et pourquoi
 - [ ] **Cible p95 < 100 ms** de « Anciens élèves » : non atteinte au protocole (136 ms), atteinte à chaud (78 ms) ; voir « Où part le temps restant »
-- [ ] Lot 2 (Lot 3 : ✅ 141,7 Ko)
+- [x] Lot 3 : ✅ 141,7 Ko (Lot 2 déplacé vers `travail-eleves-budget`)
 
 ## Vérifications
 

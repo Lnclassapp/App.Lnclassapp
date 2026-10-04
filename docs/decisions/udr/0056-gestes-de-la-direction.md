@@ -150,7 +150,7 @@ Dans `identity/pending_accounts/show`, pour un `teacher` **sans établissement**
 
 **Accessibilité** : à l'ouverture, le focus va sur « Annuler » (UDR-0054 §3.3). À la fermeture, il revient au ⋮. « Annuler », Échap ou le fond ferment la boîte et vident le frame, et l'entrée du menu la recharge.
 
-**Seule différence visible** : quand le titre de la confirmation passe sur deux lignes (au téléphone), il est aligné à gauche, comme toute modale de l'application. Jusqu'ici, il héritait de l'alignement à droite de la cellule d'actions (`text-right`), que le texte compensait déjà par `text-left`.
+**Seule différence visible** : quand le titre de la confirmation passe sur deux lignes, il est aligné à gauche. C'est le cas au téléphone, et aussi au bureau, car la modale `sm` fait passer le titre à la ligne même avec un nom court (constat du challenger), comme toute modale de l'application. Jusqu'ici, il héritait de l'alignement à droite de la cellule d'actions (`text-right`), que le texte compensait déjà par `text-left`.
 
 **Chiffres** (60 enseignants, base `app_lnclassapp_perf_direction_lot_c`, protocole de l'ADR-0067, 30 × 3, médiane) :
 - « Enseignants » : HTML **368,5 → 152,5 Ko** (gzip 15,2 → 10,0 Ko) ; vue p50 63,5 → 30,1 ms ; p50 91,7 → 62,6 ms ; p95 118,5 → 121,2 ms (bruit : la queue du p95 vient de la compilation YJIT, voir le plan du chantier) ; allocations 71 731 → 32 037 ;

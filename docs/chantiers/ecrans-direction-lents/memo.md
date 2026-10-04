@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | exécution : lot 1 (« Anciens élèves ») livré, ÷ 65 en p95 mais hors budget au protocole (136 ms) ; lots 2 et 3 à jouer ; challenger à passer |
+| **Statut** | livré (lots 1 et 3, challenger passé) ; lot 2 déplacé vers `travail-eleves-budget` |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `perf/ecrans-direction-lents` |
 | **Programme** | `refonte-application` — dette relevée par `remediation-comptee-faite` et `rapports-exercices` |
@@ -39,8 +39,8 @@ Lot 1 du [plan](plan.md), 2026-10-04. Base `app_lnclassapp_perf_direction`, copi
 | p95 « Anciens élèves » | **8 821,2 ms** | < 100 ms | **136,1 ms** | ❌ au protocole ; **78,0 ms** une fois la page chaude (après 60 requêtes) |
 | p50 « Anciens élèves » | 8 276,1 ms | — | **57,7 ms** | |
 | SQL « Anciens élèves » (p50) | 8 175,2 ms | — | **23,7 ms** | liste : 17 454 → 13,0 ms sous `EXPLAIN` |
-| Requêtes · HTML | 8 · 110,4 Ko | ≤ 150 Ko | 8 · 110,4 Ko | ✅ inchangés |
-| p95 « Travail des élèves » | 229,0 ms (série *après*, écran non touché) | < 100 ms | — | lot 2 |
+| Requêtes · HTML | 8 · 110,4 Ko | ≤ 150 Ko | 8 · 110,3 Ko | ✅ inchangés (−64 octets : indentation du menu « Mon compte », levier 3b) |
+| p95 « Travail des élèves » | 229,0 ms (série *après*, écran non touché) | < 100 ms | — | **déplacé** vers le chantier de suivi `travail-eleves-budget` |
 | HTML « Enseignants » | 441,1 Ko | < 150 Ko | **141,7 Ko** (leviers 1, 3b et 3c) | ✅ ([plan](plan.md)) |
 
 Le SQL a cessé d'être le coût. Le p95 restant vient de la compilation YJIT et du GC : avec seulement 3 chauffes, ils tombent dans les 30 mesures du protocole. Voir [plan § Où part le temps restant](plan.md#où-part-le-temps-restant-p95-non-atteint).

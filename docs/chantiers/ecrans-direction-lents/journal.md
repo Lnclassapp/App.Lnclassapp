@@ -14,6 +14,13 @@
 | 2026-10-04 | Lot 3, levier 3b : la confirmation « Retirer » d'« Enseignants » n'est plus copiée dans chaque ligne. Elle se charge à la demande dans le frame `modal` (`GET teachers/:public_id/removal`) et rend une page complète sans JavaScript. La policy du retrait passe avant toute lecture : 403, puis 404 comme le `DELETE`, y compris pour la direction d'un autre établissement. Les lignes et le menu perdent leur indentation | 60 modales faisaient 198 Ko et environ 72 ms de vue, pour une seule ouverte. Résultat : 368,5 → 152,5 Ko, vue 63,5 → 30,1 ms ; la confirmation pèse 3,6 Ko, avec un p95 de 30 ms. Le budget de 150 Ko n'est pas atteint (2,5 Ko de trop) : le levier 3c est proposé | Non : [UDR-0056](../../decisions/udr/0056-gestes-de-la-direction.md) et [UDR-0042](../../decisions/udr/0042-actions-de-ligne-dans-un-menu.md), amendements du 2026-10-04 |
 | 2026-10-04 | Lot 3, levier 3c : dans `ui_icon_sprite`, les attributs racine des icônes (`viewBox`, `fill`, `stroke`, `stroke-width`) passent du `<svg><use>` au `<symbol>`, gardé | Les 2,5 Ko de trop après 3b : 152,5 → **141,7 Ko**, sous le budget de 150 Ko. Les captures sont identiques à l'octet, en clair et en sombre, survol compris (`currentColor` hérité par `<use>`). Le temps ne bouge pas (p50 59,5 → 58,8 ms) | Non |
 
+## Clôture par l'orchestrateur (2026-10-04)
+
+- **Le challenger a retrouvé les gains annoncés** (voir son rapport plus bas) : « Anciens élèves » de 8,7 s à environ 60 ms en p50, avec 172 comparaisons ancienne / nouvelle requête sans différence ; « Enseignants » de 441,1 à 141,7 Ko, à l'octet.
+- **Budget de « Anciens élèves »** : au protocole de l'ADR-0067, le p95 reste à la limite (de 68 à 136 ms selon l'ordre des séries), à cause de la chauffe YJIT. Le protocole n'est pas modifié pour faire passer le chiffre ; la porte reste non cochée, et la question de la chauffe appartient au porteur (ADR-0067).
+- **Lot 2 déplacé** vers `travail-eleves-budget` : il dépend de la fusion de #169.
+- **Menu ⋮ masqué** : corrigé à part, par le chantier de correction `menu-enseignants-masque` (#171). À la fusion avec cette PR, garder `sticky-actions` (voir le journal de #171).
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
