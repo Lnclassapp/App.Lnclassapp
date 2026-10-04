@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | en cours *(correctif commité le 2026-10-04, PR vers `Develop` à ouvrir)* |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `fix/menu-enseignants-masque` |
 | **Programme** | — |
