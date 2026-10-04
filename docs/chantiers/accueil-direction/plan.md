@@ -17,7 +17,7 @@ Lot 0 — SOCLE (séquentiel)
         ↓ (A, B, C mergés)
         Lot E « Parcours de bout en bout »
         ↓ (A mergé + chantier `annonces` mergé dans Develop avec D-A1)
-        Lot D « Annonces sur l'accueil »   — peut tourner en même temps que E
+        Lot D « Annonces sur l'accueil »   — peut tourner en même temps que E (fichiers disjoints)
 ```
 
 **Pourquoi D attend une dépendance externe** : le carrousel, la règle de lecture et le masquage appartiennent au chantier `annonces` (branche `feature/annonces`, non mergée au 2026-10-04). D-A1 (« toute annonce est masquable, l'équipe seule rédige ») doit y être reportée avant : sinon la croix de la direction répondrait 403. D commence par merger `Develop` dans `feature/accueil-direction`.
@@ -107,10 +107,9 @@ Lot 0 — SOCLE (séquentiel)
 - **Fichiers**     : `app/controllers/school_admin/classrooms_controller.rb` *(`@announcements`, UDR-0072 §3.10)*
                      `app/views/school_admin/classrooms/index.html.erb` *(rendu du carrousel entre « Niveaux » et « Activité récente »)*
                      `test/controllers/school_admin/home_announcements_test.rb`
-                     `test/system/school_admin/home_announcements_test.rb`
 - **Dépend de**    : Lot A **et** le chantier `annonces` mergé dans `Develop` avec la décision D-A1 (masquage ouvert à `school_admin`). Première étape du lot : merger `Develop` dans `feature/accueil-direction`.
-- **Test associé** : `test/controllers/school_admin/home_announcements_test.rb` *(AD-14 : nationale et de l'établissement visibles, autre établissement absente, croix sur chaque carte ; AD-16 : pas de section sans annonce lisible)*
-                     `test/system/school_admin/home_announcements_test.rb` *(AD-15 : masquer, toast, « Annuler »)*
+- **Test associé** : `test/controllers/school_admin/home_announcements_test.rb` *(AD-14 : nationale et de l'établissement visibles, autre établissement absente, croix sur chaque carte ; AD-16 : pas de section sans annonce lisible ; AD-15 : le masquage par la direction répond un Turbo Stream qui remplace `#student_home_announcements`, présent sur son accueil, et « Annuler » rétablit la carte)*
+                     *Pas de test système : le geste est déjà joué en système par le chantier `annonces`, et `script/ci/test_timings.yml` (budget de 15 s par chantier, ADR-0069 §9) appartient au Lot E.*
 - **Done quand**   : sur son accueil, la direction lit le carrousel des annonces de l'équipe, en masque une et l'annule depuis le toast. **AD-14 à AD-16**.
 
 ---
@@ -121,6 +120,7 @@ Lot 0 — SOCLE (séquentiel)
 - **Fichiers**     : `test/system/school_admin/direction_home_test.rb` *(remplace `test/system/school_admin/student_work_test.rb`, supprimé)*
                      `test/system/finitions/school_admin_test.rb` · `test/system/finitions/public_pages_test.rb` · `test/system/finitions/narrow_screens_test.rb`
                      `test/system/school_admin/departed_students_test.rb` · `test/system/role_homes_test.rb` *(commentaires et attentes de l'ancienne page)*
+                     `script/ci/test_timings.yml` *(durées enregistrées des fichiers système touchés ; la suite grandit de 15 s au plus — `test/guards/system_budget_test.rb`)*
 - **Dépend de**    : Lot A, Lot B, Lot C
 - **Test associé** : `test/system/school_admin/direction_home_test.rb` — parcours nominal du PRD §3 (connexion → carte « Établissement » et ses alertes → bulle « 3ème » → carte « 3ème 2 » rouge → page de la classe → retour « 3ème » → activité chargée) et un chemin d'erreur (adresse d'un niveau sans classe → 404) ; en bureau et à 375 px sans défilement horizontal (**AD-20**, **AD-21**, **AD-22**)
 - **Done quand**   : le parcours nominal et le chemin d'erreur passent en test système, au bureau et au téléphone, et plus aucun test ne cherche « Travail des élèves ».
@@ -188,7 +188,7 @@ Aucun critère orphelin.
 | `app/views/school_admin/classrooms/show.html.erb` | Lot 0 | retour vers le niveau ; B ne la touche pas |
 | `config/locales/school_admin/classrooms.fr.yml` | Lot A | B et C ont chacun leur fichier de locale |
 | `test/performance/school/heavy_screens_budget_test.rb` | Lot A | |
-| tests système de la direction | Lot E (D : son propre fichier) | |
+| tests système de la direction, `script/ci/test_timings.yml` | Lot E | D n'écrit aucun test système (budget de 15 s, ADR-0069 §9) |
 
 ## Portes de sortie
 
