@@ -147,6 +147,24 @@ class SchoolAdmin::ActivitiesControllerTest < ActionDispatch::IntegrationTest
     Queries::School::SchoolActivityQuery.singleton_class.remove_method(:new)
   end
 
+  # Constat du challenger (phase 5, D1) : demandée en JSON ou en XML, l'activité levait MissingTemplate (500). Comme les pages
+  # voisines, elle refuse un format qu'elle ne sait pas rendre, sans lire la base.
+  test "the activity refuses any format but HTML with 406, without reading" do
+    sign_in_as @admin
+    reads = 0
+    counter = ->(*, payload) { reads += 1 if payload[:sql].include?("classroom_assignments") }
+
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") do
+      get school_admin_activity_path(format: :json)
+      assert_response :not_acceptable
+      get school_admin_activity_path, headers: { "Accept" => "application/json" }
+      assert_response :not_acceptable
+      get school_admin_activity_path(format: :xml)
+      assert_response :not_acceptable
+    end
+    assert_equal 0, reads
+  end
+
   test "AD-12: the team, a teacher, a student and a detached school admin receive 403" do
     [ create_team_member, @kouassi, create_student(classroom: @sixieme_1), create_user(role: "school_admin") ].each do |outsider|
       sign_in_as outsider

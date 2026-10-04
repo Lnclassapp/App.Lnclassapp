@@ -7,7 +7,7 @@
 <% signals = @level.classrooms.map { Entities::School::WorkSignal.for(it.submission_rate) } %>
 <%= ui_page_header title: @level.level_name,
                    subtitle: t(".subtitle", classrooms: t(".classrooms", count: @level.classrooms.size),
-                                            students: t(".students", count: @level.classrooms.sum(&:students_count))),
+                                            students: t(".students", count: @level.students_count)),
                    back: { label: t(".back"), href: school_admin_classrooms_path } %>
 
 <ul id="level_classrooms" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

@@ -3,10 +3,17 @@
 # ADR  : 0065 · UDR : 0072 §3.11 · l'établissement est celui du compte, jamais un paramètre ; 403 par BaseController
 module SchoolAdmin
   class ActivitiesController < BaseController
-    # Demandée par le frame paresseux de l'accueil, elle ne rend que ce frame. Une panne de la base n'emporte pas
-    # l'accueil : le frame montre l'état d'erreur commun, et la panne est journalisée (config/initializers/error_reporting.rb).
-    # Toute autre erreur est un bogue : elle remonte.
+    # Demandée par le frame paresseux de l'accueil, elle ne rend que ce frame, en HTML seulement : un autre format reçoit 406
+    # sans lire la base, comme les pages voisines (constat du challenger, D1).
     def show
+      respond_to { |format| format.html { render_activity } }
+    end
+
+    private
+
+    # Une panne de la base n'emporte pas l'accueil : le frame montre l'état d'erreur commun, et la panne est journalisée
+    # (config/initializers/error_reporting.rb). Toute autre erreur est un bogue : elle remonte.
+    def render_activity
       events = Queries::School::SchoolActivityQuery.new.call(school_id: current_actor.school_id, now: Time.current)
       render partial: "activity", locals: { events: }
     rescue ActiveRecord::ActiveRecordError => error

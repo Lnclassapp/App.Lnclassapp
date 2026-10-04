@@ -44,6 +44,26 @@ class SchoolAdmin::DirectionHomeTest < ApplicationSystemTestCase
     end
   end
 
+  # Constat du challenger (phase 5, R1) : à 360 px — le plus petit Android courant —, « enseignants » sortait de sa tuile.
+  test "AD-21: on a 360 px phone, each figure's label stays inside its tile" do
+    with_mobile_viewport([ 360, 740 ]) do
+      sign_in_as @admin
+      assert_selector "#direction_home_figures li", count: 3, wait: SIGN_IN_WAIT
+
+      overflows = page.evaluate_script(<<~JS)
+        [...document.querySelectorAll("#direction_home_figures li")].map((tile) => {
+          const box = tile.getBoundingClientRect();
+          return [...tile.querySelectorAll("span")].some((label) => {
+            const inner = label.getBoundingClientRect();
+            return label.scrollWidth > label.clientWidth || inner.right > box.right + 0.5 || inner.left < box.left - 0.5;
+          });
+        })
+      JS
+      assert_equal [ false, false, false ], overflows
+      assert_no_horizontal_scroll
+    end
+  end
+
   private
 
   def assert_journey(nav:)

@@ -10,11 +10,12 @@
              teachers_without_classroom: [ t(".links.teachers"), school_admin_teachers_path ] } %>
 <%= ui_card id: "direction_home_school", title: home.school_name, icon: "building-library",
             subtitle: t(".subtitle", type: t("school_types.#{home.school_type}"), year: home.school_year) do |card| %>
-  <ul id="direction_home_figures" class="grid grid-cols-3 gap-3">
+  <%# Resserrées sous sm : à 360 px, « enseignants » en 14 px sortait de sa tuile (constat du challenger, R1). %>
+  <ul id="direction_home_figures" class="grid grid-cols-3 gap-2 sm:gap-3">
     <% home.figures.to_h.each do |key, count| %>
-      <li class="rounded-ln bg-mist px-3 py-3">
-        <span class="block font-display text-2xl font-extrabold tabular-nums"><%= count %></span>
-        <span class="block text-sm text-mute"><%= t(".figures.#{key}", count:) %></span>
+      <li class="min-w-0 rounded-ln bg-mist px-2 py-3 sm:px-3">
+        <span class="block font-display text-xl font-extrabold tabular-nums sm:text-2xl"><%= count %></span>
+        <span class="block text-xs text-mute sm:text-sm"><%= t(".figures.#{key}", count:) %></span>
       </li>
     <% end %>
   </ul>

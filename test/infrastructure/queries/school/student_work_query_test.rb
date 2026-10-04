@@ -230,7 +230,25 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
 
     level = Query.new.level(school_id: @school.id, slug: "2nde")
 
-    assert_equal Query::LevelOverview.new(level_name: "2nde", level_slug: "2nde", classrooms: [ row_of(second), row_of(klass) ]), level
+    assert_equal Query::LevelOverview.new(level_name: "2nde", level_slug: "2nde", students_count: 4,
+                                          classrooms: [ row_of(second), row_of(klass) ]), level
+  end
+
+  # Constat du challenger (phase 5, O1) : la page d'un niveau annonçait 23 élèves quand l'accueil en comptait 22. Un élève
+  # présent dans deux classes du niveau compte dans chacune, et une seule fois dans le niveau, comme dans l'établissement.
+  test "AD-09: a student present in two classrooms of the level counts once in the level" do
+    first, second = classroom, classroom(name: "2nde A 2")
+    both = create_student(classroom: first)
+    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    create_student(classroom: second)
+    gone = create_student(classroom: second)
+    Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+    create_student(classroom: second, anonymized_at: Time.current)
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde")
+
+    assert_equal [ 2, 1 ], level.classrooms.map(&:students_count)
+    assert_equal 2, level.students_count
   end
 
   test "AD-10: another school's, archived or past classrooms of the level never show" do

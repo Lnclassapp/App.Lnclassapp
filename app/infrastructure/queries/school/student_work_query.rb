@@ -12,7 +12,8 @@ module Queries
       StudentRow = Data.define(:display_name, :submitted_count, :average_percent)
       Overview = Data.define(:school_name, :school_year, :classrooms)
       Detail = Data.define(:classroom, :students)
-      LevelOverview = Data.define(:level_name, :level_slug, :classrooms)
+      # students_count : élèves présents distincts du niveau ; un élève de deux classes du niveau compte une fois (phase 5, O1).
+      LevelOverview = Data.define(:level_name, :level_slug, :students_count, :classrooms)
 
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name levels.name levels.slug].freeze
       # Un élève présent : adhésion non quittée, compte non anonymisé (ADR-0065 §4).
@@ -47,7 +48,10 @@ module Queries
                                                         .pluck(*CLASSROOM_COLUMNS)
         return if rows.empty?
 
-        LevelOverview.new(level_name: rows.first[3], level_slug: rows.first[4], classrooms: classroom_rows(rows))
+        ids = rows.map(&:first)
+        LevelOverview.new(level_name: rows.first[3], level_slug: rows.first[4],
+                          students_count: present_students.where(classroom_students: { classroom_id: ids }).distinct.count(:id),
+                          classrooms: classroom_rows(rows))
       end
 
       # → Detail | nil : nil pour une classe inconnue, archivée, d'une autre année ou d'un autre établissement.

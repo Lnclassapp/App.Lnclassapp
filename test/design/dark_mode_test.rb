@@ -16,6 +16,9 @@ class DarkModeTest < ActiveSupport::TestCase
   ].map { [ *it, 4.5 ] }.freeze
   # Le contour de focus (`outline-brand`) se voit sur les surfaces sombres. En clair, il est à 2,7 : constat hors chantier.
   DARK_ONLY_PAIRS = [ [ "brand", "paper", 3.0 ], [ "brand", "white", 3.0 ] ].freeze
+  # UDR-0072 §3.7 : les pastilles de la direction se lisent sur leur anneau, de la couleur de la carte (3:1, élément graphique).
+  # Constat du challenger (phase 5, O5) : le jaune #f2b705 n'y avait que 1,82.
+  SIGNAL_PAIRS = %w[signal-green signal-yellow signal-red].map { [ it, "white", 3.0 ] }.freeze
 
   def light = @light ||= tokens(STYLESHEET[/@theme \{(.*?)\n\}/m, 1])
   def dark = @dark ||= tokens(dark_block)
@@ -49,7 +52,8 @@ class DarkModeTest < ActiveSupport::TestCase
   end
 
   test "every text and background pair of the components stays readable, in light and in dark" do
-    failures = { "clair" => [ light, TEXT_PAIRS ], "sombre" => [ dark, TEXT_PAIRS + DARK_ONLY_PAIRS ] }.flat_map do |mode, (palette, pairs)|
+    failures = { "clair" => [ light, TEXT_PAIRS + SIGNAL_PAIRS ],
+                 "sombre" => [ dark, TEXT_PAIRS + DARK_ONLY_PAIRS + SIGNAL_PAIRS ] }.flat_map do |mode, (palette, pairs)|
       pairs.filter_map do |text, background, minimum|
         ratio = contrast(palette.fetch(text), palette.fetch(background))
         "#{mode} : #{text} sur #{background} = #{ratio.round(2)} (< #{minimum})" if ratio < minimum
