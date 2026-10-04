@@ -1,6 +1,7 @@
 # 🌐 DELIVERY · Assessment::ExercisesController
-# Rôle : page d'un exercice (AS-02) ; propositions correctes pour l'équipe et l'enseignant, jamais pour l'élève (AS-39)
-# ADR  : 0026, 0028, 0054 · UDR : 0006, 0007, 0021 · sécurité n° 29
+# Rôle : page d'un exercice (AS-02) ; propositions correctes pour l'équipe et l'enseignant, jamais pour l'élève (AS-39) ;
+#        bascules d'assignation de l'enseignant vers ses classes du niveau du cours (RE-22)
+# ADR  : 0026, 0028, 0054, 0072 · UDR : 0006, 0007, 0021, 0069 · sécurité n° 29
 module Assessment
   class ExercisesController < AuthenticatedController
     include ReadsOwnLevel
@@ -23,6 +24,13 @@ module Assessment
       @detail = Queries::Assessment::ExerciseDetailQuery.new.call(public_id: exercise.public_id, reveal: @reveal)
       @status_record = exercise if Policies::Catalog::ManageContentPolicy.new.call(actor: current_actor).success?
       @progress = progress(exercise) if Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
+      @targets = assignment_targets if current_actor.teacher? && exercise.published?
+    end
+
+    # UDR-0069 §3.8 : l'enseignant seul, pour un exercice publié ; l'équipe n'a pas de classe, l'élève n'assigne pas.
+    def assignment_targets
+      Queries::Classroom::CatalogAssignmentTargetsQuery.new.call(teacher_id: current_actor.user_id, course_slug: @detail.course.slug,
+                                                                 exercise_public_ids: [ @detail.exercise.public_id ])
     end
 
     def progress(exercise)
