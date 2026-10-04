@@ -296,3 +296,14 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
 - Les textes du masquage sont ceux de `communication.dismissal.*` (Lot 0) ; aucune locale `message_dismissals.fr.yml`.
 - Le titre d'onglet suit le helper de titre : « Reçues · Annonces · Enseignant · Lnclass ».
 - L'équipe n'est l'audience d'aucune annonce dans la règle de lecture : elle lit les fichiers au titre de sa policy (`ReadFilePolicy`), et sa page « Reçues » la renvoie à « Mes annonces ».
+
+## Amendement du 2026-10-04 — modération, constatée au Lot C
+
+*Chantier [`annonces`](../../chantiers/annonces/journal.md), Lot C. Cette section fait foi en cas d'écart avec le §3.7.*
+
+- Le §3.7 donnait l'id `moderated_announcements` au frame **et** à la liste : le frame le garde, la liste devient `ul#moderated_announcements_list` (comme `schools` / `schools_list`).
+- Pendant un filtre ou un changement de page, Turbo pose `aria-busy` sur le frame (`class: "group block"`) : le squelette (`ui_loading_state variant: :skeleton`) s'affiche par `group-aria-busy:block` et la liste se masque.
+- Un retrait sur une annonce déjà archivée ou retirée répond 404, avec le toast d'erreur commun « Page introuvable. ».
+- La page « Enseignants » / « Toutes » est fermée à l'enseignant et à l'élève (403). Le **retrait**, lui, laisse entrer l'enseignant pour lui répondre 404 (ADR-0078 §4.2, AN-17) ; l'élève reçoit 403.
+- Retirer la dernière ligne d'une page n'affiche l'état vide qu'au rechargement.
+

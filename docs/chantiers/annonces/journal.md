@@ -29,6 +29,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Lot A, 2026-10-04** : l'UDR prévoyait `ui_field … as: :file` et `as: :datetime_local`, que le composant ne connaît pas ; contourné par `type:` (amendement de l'UDR-0071). Leçon : vérifier chaque `as:` d'une UDR contre `FIELD_BUILDERS` avant de la figer. Pendant le merge, `ImageHeader` avait migré de `identity` à `shared` sur `Develop` : corrigé au merge.
 
 - **Lot B, 2026-10-04** : le garde `test/guards/system_budget_test.rb` de `Develop` exige la durée de chaque test système dans `script/ci/test_timings.yml` (fichier partagé) et borne le temps système du chantier (15 s) ; durée enregistrée au merge (5,4 s). Le Lot D devra tenir dans le reste. Le carrousel faisait défiler la page en largeur sur téléphone (`min-w-0` manquant), vu par le test système et non par les tests de vue.
+- **Lot C, 2026-10-04** : le brief demandait `allow_roles :school_admin, :team` sur le retrait (enseignant → 403), contre AN-17 et l'ADR-0078 §4.2 (404) ; l'agent a suivi l'ADR. L'UDR donnait le même id au frame et à la liste (amendée). Leçon : un brief se relit contre les critères du PRD, pas seulement contre le plan.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -51,6 +52,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Texte alternatif de l'image téléversée | Hors périmètre ; une image porteuse d'information est inaccessible | à ouvrir si les auteurs mettent l'information dans l'image |
 | Fonctions précises de la direction dans la signature | Pas de donnée en base | `espace-direction` (backlog) |
 | Signalement d'une annonce déplacée | La modération est réactive | à ouvrir après les premiers retours |
+| `announcement_date` et ses formats copiés de « Mes annonces » dans `ModerationsController` | Lots A et C parallèles, fichiers disjoints | helper commun au prochain passage dans `communication` |
+| « Retirer » sans nom accessible propre à chaque annonce | `ui_modal` ne prend pas d'`aria-label` de déclencheur | chantier de composants |
 
 ## Clôture
 
