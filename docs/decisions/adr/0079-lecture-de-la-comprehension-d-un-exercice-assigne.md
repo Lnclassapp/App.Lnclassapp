@@ -101,7 +101,7 @@ Les sessions faites de l'élève sont prises dans l'ordre de `completed_at` : `f
 - Pour chaque question de l'exercice, dans l'ordre de `position`, le taux est la part arrondie des tentatives justes (`correct`) parmi les tentatives de ces sessions sur cette question.
 - Pas de tentative : « — ».
 - Le dénominateur compte des tentatives, une au plus par session et par question (index unique) : le taux **ne peut pas dépasser 100 %**.
-- **Progrès par question** : le même taux, lu sur le **premier essai** (première session faite) de chaque élève de la catégorie. Il n'est donné que si au moins un élève de la catégorie a deux essais ou plus ; sinon il serait égal au premier.
+- **Progrès par question** : le même taux, lu sur le **premier essai** (première session faite) de chaque élève de la catégorie. Il n'est donné que si au moins un élève de la catégorie a deux essais ou plus ; sinon il serait égal au premier. Dans une catégorie qui mêle des élèves à une session et des élèves à plusieurs, il se lit sur la première session de **chaque** élève de la catégorie, y compris ceux qui n'en ont qu'une : leur première session est bien leur première, et « 1re session » dit ainsi où était toute la catégorie au départ (décision de l'orchestrateur, 2026-10-04).
 - **Question à reprendre** : une question dont le taux au meilleur essai est **sous `PASS_THRESHOLD` (50)** est marquée « À reprendre en classe ». C'est l'« alerte révision » de l'ancien rapport, avec un seuil nommé.
 
 ### 4.7 Ordre des élèves d'une catégorie
