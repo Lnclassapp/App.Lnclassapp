@@ -209,7 +209,7 @@ Critères orphelins : **aucun**. AN-01 à AN-23 sont tous rattachés (voir « Do
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
