@@ -28,6 +28,15 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#design-search-form[role=search][aria-label='#{I18n.t("design.index.finishes.search.label")}']"
   end
 
+  # UDR-0056 §3.6 and §3.8: the components the announcements bring are shown with the others.
+  test "the style guide shows a toast with its action and a checkbox group" do
+    get design_path
+
+    assert_select "[data-example=toast-action] [data-controller=toast] form[data-action='turbo:submit-start->toast#dismiss'] button",
+                  text: I18n.t("design.index.toasts.action.undo")
+    assert_select "[data-example=field-checkbox-group] fieldset#design_announcement_classrooms input[type=checkbox]", 3
+  end
+
   test "refuses an unknown role" do
     assert_raises(ActionController::UrlGenerationError) { design_shell_path(role: "admin") }
   end

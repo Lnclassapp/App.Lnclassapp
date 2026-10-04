@@ -169,6 +169,17 @@ fr:
             value: "second"
         terms: "J'accepte les conditions d'utilisation"
         disabled: "Champ désactivé"
+        # UDR-0056 §3.8 : pendant de ui_radio_group, plusieurs choix
+        checkbox_group: "Cases à cocher (plusieurs choix)"
+        classrooms: "Classes"
+        classrooms_hint: "Les élèves de ces classes la verront."
+        classroom_choices:
+          - label: "3ème A"
+            value: "a"
+          - label: "3ème B"
+            value: "b"
+          - label: "3ème C"
+            value: "c"
       sample:
         errors:
           name: "Le nom complet est obligatoire"
@@ -218,6 +229,12 @@ fr:
           warning: "Alerte par Turbo Stream"
           error: "Erreur par Turbo Stream"
         redirect: "Succès après redirection (flash)"
+        # UDR-0056 §3.6 : un bouton entre le texte et la croix
+        action:
+          label: "Avec une action"
+          title: "Annonce masquée"
+          message: "Elle reste dans « Toutes les annonces »."
+          undo: "Annuler"
       states:
         empty_action: "Vide, avec action"
         empty_block: "Vide, actions libres"
