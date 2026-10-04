@@ -50,6 +50,31 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | | | |
 
+## Rapport du challenger
+
+Rejeu empirique du memo dans l'application (2026-10-04), en navigateur (Chrome sans tête), sans relire le code : `test/system/school_admin/remediation_handed_in_test.rb`. Le parcours de l'élève et la lecture de la direction passent par l'interface ; le reste de la classe est posé par les fabriques.
+
+| Étape | Résultat | Preuve |
+|---|---|---|
+| 1. Données du memo : 3ème B (classe principale, active), X et Y de la même fiche, assignés | OK | Fabriques ; 4 camarades rendent X à 60 % (la moyenne de classe ne s'affiche qu'à partir de 5 élèves ayant rendu) |
+| 2. L'élève, dans l'interface : X raté, puis Y démarré, puis réussi | OK | « Commencer l'exercice », puis les questions une à une. X : 1 / 3, soit 33 %, session `standard` rattachée à l'assignation de X, puis lacune `pending` dont la source est cette session. Y démarre en `remediation`, `knowledge_gap_id` = cette lacune, rattachée à l'assignation de Y (lu en base). Y : 2 / 2, soit 100 % |
+| 3. La direction : « Travail des élèves », puis 3ème B | OK | Ligne 3ème B : 6 élèves, 2 devoirs, **50 %** (6 / 12), **62 %** ((33 + 100 + 4 × 60) / 6 = 62,2). Page de la classe : tuiles 2 · 50 % · 62 % ; Aya **2 / 2**, **67 %** ((33 + 100) / 2 = 66,5) |
+| 4a. Remédiation commencée, non terminée | OK | Moussa (lacune sur la fiche, Y démarré en remédiation sur l'assignation) : 0 / 2, « — » ; il ne change pas le taux (7 / 12 donnerait 58 %) |
+| 4b. Élève d'une autre classe | OK | Koffi (3ème A) : sa remédiation à 100 % sur l'assignation de Y de **sa** classe donne la ligne 3ème A (1, 1, 100 %, « — ») ; une session parasite qu'il porte sur l'assignation de la 3ème B ne bouge pas la 3ème B et son nom n'y apparaît pas |
+| 5. Rouge sur le code d'avant | OK | Condition `exercise_sessions.kind = 'standard'` remise à la main dans `HANDED_IN`, puis le fichier restauré par `git checkout` : échec ligne 71, `Expected: ["6", "2", "50 %", "62 %"]`, `Actual: ["6", "2", "42 %", "55 %"]` (5 / 12, 273 / 5). La partie élève passe, seule la lecture de la direction casse : le bug du memo, pour la bonne raison |
+| 6. Budget système | OK | 9,3 s enregistrées (`script/ci/test_timings.yml`, bannière Puma retirée du log), entre 8,6 et 9,4 s sur 4 exécutions ; `COVERAGE=0 bin/rails test test/guards` : 25 runs, 0 échec |
+
+**Écart avec le memo, voulu** : le memo joue X à 25 % (4 questions) et Y à 80 % (5 questions). Ces 9 questions faisaient peser le test entre 10,4 et 10,9 s, au-delà du budget de 10 s. Avec 3 et 2 questions (33 % et 100 %), le scénario reste le même : X raté sous 50 %, lacune, Y en remédiation, réussi.
+
+**Défauts trouvés** : aucun dans le correctif. Deux observations, sans correction de code applicatif :
+
+- Le score d'une session est **tronqué**, pas arrondi : 1 / 3 donne 33, et 2 / 3 donne **66** (attendu 67 au premier jet). Les moyennes de la direction arrondissent au demi supérieur (66,5 donne 67 ; 52,5 donne 53 dans le test de contrôleur). C'est antérieur au chantier et hors périmètre. À confirmer avec le porteur : la troncature est-elle voulue ?
+- Ce journal contient **deux sections « Dette laissée derrière »**. La seconde est le gabarit vide : elle est à retirer à la clôture.
+
+**Non rejoué en navigateur** : « Anciens élèves » (`DepartedStudentsQuery`). Le memo le cite dans le symptôme, mais l'étape 4 de sa reproduction ne passe que par « Travail des élèves ». Il reste couvert par `DepartedStudentsQueryTest`.
+
+La porte « Bug reproduit à la main dans l'application » n'avait pas été franchie avant le correctif (voir *Ce qui a dérapé*). Elle l'est maintenant après coup, par ce rejeu rouge sur le code d'avant.
+
 ## Clôture
 
 | | |
