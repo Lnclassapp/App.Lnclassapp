@@ -50,7 +50,7 @@ class Catalog::CourseLifecycleTest < ActiveSupport::TestCase
     assert_not_nil first_publication
 
     essential = create_essential(course: Orm::Course.find(read.id))
-    assignment = create_assignment(assignable: essential.course)
+    assignment = create_assignment(assignable: create_exercise(essential:))
     archived = use_case(UseCases::Catalog::ArchiveCourse).call(actor: @actor, slug: read.slug).value
     assert_equal "archived", archived.status
     assert_not_nil archived.archived_at

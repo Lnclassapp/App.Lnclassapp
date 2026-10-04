@@ -20,7 +20,7 @@ module UseCases
         course = @courses.find_by_slug(slug:)
         return Shared::Result.failure(:not_found) if course.nil?
 
-        transition = Entities::Catalog::ContentStatus.transition(from: course.status, to: "archived", parent_published: true)
+        transition = Entities::Shared::ContentStatus.transition(from: course.status, to: "archived", parent_published: true)
         return transition if transition.failure?
 
         # Seul le statut du cours change : la visibilité de sa descendance suit la chaîne des parents (ADR-0035).

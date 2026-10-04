@@ -20,7 +20,7 @@ module UseCases
         exercise = @exercises.find_by_public_id(public_id:)
         return Shared::Result.failure(:not_found) if exercise.nil?
 
-        transition = Entities::Catalog::ContentStatus.transition(from: exercise.status, to: "archived",
+        transition = Entities::Shared::ContentStatus.transition(from: exercise.status, to: "archived",
                                                                  parent_published: exercise.parents_published)
         return transition if transition.failure?
 

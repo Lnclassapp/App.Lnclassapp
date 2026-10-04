@@ -40,6 +40,19 @@ module Repositories
         assert_equal @at, Orm::ClassroomStudent.find_by(student: @student).left_at
         assert @repository.add_primary(classroom_id: create_classroom.id, student_id: @student.id, at: @at).success?
       end
+
+      test "leave_all closes every open membership of the student, keeps the closed ones and the rows" do
+        old = create_classroom(status: "archived")
+        Orm::ClassroomStudent.create!(classroom: old, student: @student, primary: true, joined_at: @at - 1.year, left_at: @at - 1.day)
+        current = create_classroom
+        @repository.add_primary(classroom_id: current.id, student_id: @student.id, at: @at)
+        other = create_student(classroom: current)
+
+        assert @repository.leave_all(student_id: @student.id, at: @at)
+
+        assert_equal [ @at - 1.day, @at ], Orm::ClassroomStudent.where(student: @student).order(:joined_at).pluck(:left_at)
+        assert_nil Orm::ClassroomStudent.find_by(student: other).left_at
+      end
     end
   end
 end

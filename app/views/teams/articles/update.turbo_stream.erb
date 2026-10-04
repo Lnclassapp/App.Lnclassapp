@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/articles/update — succès de la modification d'un article (UDR-0067 §3.3) %>
+<%# Rôle : toast (« en ligne » pour un article publié) ; modale vidée ; liste re-demandée et fusionnée par morphing %>
+<%# ADR  : 0035, 0074 · UDR : 0006, 0067 %>
+<%= turbo_stream_toast t(@article.published? ? ".updated_live" : ".updated", title: @article.title), type: :success %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.refresh(request_id: nil) %>

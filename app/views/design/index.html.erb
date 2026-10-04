@@ -1,6 +1,6 @@
 <%# 🌐 UI · design/index — guide de style vivant de Lnclass (dev et test uniquement) %>
 <%# Rôle : chaque token, chaque composant dans chaque variante et chaque état ; vérifié par test/system/design_system_test.rb %>
-<%# UDR  : 0005, 0006, 0054, 0056 %>
+<%# UDR  : 0005, 0006, 0054, 0071 %>
 <% page_title t(".page_title") %>
 
 <div class="mx-auto max-w-page px-gutter py-10 lg:px-8">
@@ -237,7 +237,7 @@
   <% end %>
 
   <%# ---------- Modale ---------- %>
-  <%= design_section(id: "modal", title: t(".sections.modal"), api: "ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, open:) { |modal| modal.footer { … } }") do %>
+  <%= design_section(id: "modal", title: t(".sections.modal"), api: "ui_modal(title:, id:, size:, trigger:, trigger_variant:, trigger_icon:, trigger_size:, trigger_full:, open:, document_title:) { |modal| modal.footer { … } }") do %>
     <div class="flex flex-wrap gap-3" data-example="modal">
       <%= ui_modal title: t(".modal.title"), id: "demo-modal", trigger: t(".modal.open"), trigger_icon: "sparkles" do |modal| %>
         <% modal.footer do %>
@@ -249,6 +249,13 @@
       <%= ui_modal title: t(".modal.small_title"), id: "demo-modal-small", size: :sm, trigger: t(".modal.open_small"), trigger_variant: :ghost do %>
         <p class="text-mute"><%= t(".modal.body") %></p>
       <% end %>
+      <%# UDR-0064 : déclencheur `lg` pleine largeur, celui d'une entrée de rôle de la page d'accueil %>
+      <div class="w-full sm:w-72">
+        <%= ui_modal title: t(".modal.entry_title"), id: "demo-modal-entry", size: :sm, trigger: t(".modal.open_entry"),
+              trigger_variant: :brand, trigger_size: :lg, trigger_full: true do %>
+          <p class="text-mute"><%= t(".modal.body") %></p>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
@@ -436,6 +443,18 @@
         <% end %>
       <% end %>
 
+      <%= design_example(name: "finish-reveal", label: t(".finishes.reveal.example")) do %>
+        <% rows = t(".finishes.reveal.rows") %>
+        <%= tag.div(id: "design-reveal", class: "max-w-form", data: ui_reveal_data) do %>
+          <ul class="divide-y divide-line">
+            <% rows.each_with_index do |row, index| %>
+              <%= tag.li(row, class: "py-2 text-sm", **ui_reveal_item(index)) %>
+            <% end %>
+          </ul>
+          <%= ui_reveal_more rows.size %>
+        <% end %>
+      <% end %>
+
       <%= design_example(name: "finish-focus", label: t(".finishes.focus.example")) do %>
         <p class="mb-3 text-sm text-mute"><%= t(".finishes.focus.intro") %></p>
         <%= ui_modal title: t(".finishes.focus.title"), id: "design-confirm", size: :sm, trigger: t(".finishes.focus.open"),
@@ -450,7 +469,7 @@
     </div>
   <% end %>
 
-  <%# ---------- Illustrations des annonces (UDR-0056 §3.3) ---------- %>
+  <%# ---------- Illustrations des annonces (UDR-0071 §3.3) ---------- %>
   <%= design_section(id: "announcement_illustrations", title: t(".sections.announcement_illustrations"),
                      api: 'announcement_illustration(:info, class: "size-16") · Entities::Communication::Message::ILLUSTRATIONS') do %>
     <ul class="grid grid-cols-2 gap-4 sm:grid-cols-4">

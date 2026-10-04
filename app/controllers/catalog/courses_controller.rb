@@ -1,19 +1,21 @@
 # 🌐 DELIVERY · Catalog::CoursesController
-# Rôle : catalogue filtré et cherché par nom (frame « courses », `q`) et page d'un cours ; non publié : 404 hors équipe ; élève : son niveau seul
-# ADR  : 0026, 0028, 0035 · UDR : 0006, 0013, 0054
+# Rôle : catalogue filtré (niveau, série, matière) et cherché par nom (frame « courses », `q`) et page d'un cours ; non publié : 404 hors équipe ; élève : son niveau seul
+# ADR  : 0026, 0028, 0035 · UDR : 0006, 0013, 0054, 0069
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
 
     LIST_FRAME = "courses".freeze
-    FILTERS = %i[level material q].freeze
+    FILTERS = %i[level series material q].freeze
 
     helper_method :list_frame_request?, :filter_options, :student_audience
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
+      # La série ne fait que restreindre : l'élève garde la règle de son niveau (audience).
       @courses = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, level: @filters[:level],
-                                                               material: @filters[:material], search: @filters[:q],
+                                                               series: @filters[:series], material: @filters[:material],
+                                                               search: @filters[:q],
                                                                audience: (student_audience if current_actor.student?))
     end
 

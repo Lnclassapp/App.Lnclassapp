@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::AudioHeader
 # Rôle : lit le format d'un fichier audio dans ses premiers octets, sans bibliothèque : MP3 ou M4A, sinon nil
-# ADR  : 0045, 0069
+# ADR  : 0045, 0078
 module Entities
   module Communication
     module AudioHeader

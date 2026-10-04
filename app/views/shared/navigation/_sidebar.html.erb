@@ -1,6 +1,7 @@
 <%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
-<%# Rôle : carte de profil puis la liste des destinations du rôle — la même que la barre basse %>
-<%# UDR  : 0006 %>
+<%# Rôle : carte de profil, destinations du rôle (les mêmes que la barre basse), 2e carte « Configuration » et frames différés du rôle %>
+<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6) %>
+<% secondary = secondary_navigation_for(user.role) %>
 <aside class="fixed top-bar bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
   <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
     <%= ui_avatar user.name, src: user.avatar_url %>
@@ -16,4 +17,20 @@
       <% end %>
     </ul>
   </nav>
+  <% if secondary.any? %>
+    <nav id="sidebar_secondary" aria-labelledby="sidebar_secondary_title" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">
+      <p id="sidebar_secondary_title" class="px-4 pt-2 pb-1 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".secondary_label.#{user.role}") %></p>
+      <ul class="space-y-1">
+        <% secondary.each do |destination| %>
+          <li><%= nav_link destination, style: :sidebar %></li>
+        <% end %>
+      </ul>
+    </nav>
+  <% end %>
+  <%# Différé : la barre latérale est masquée sous lg, le frame n'y est donc jamais demandé (UDR-0069 §3.6). %>
+  <% sidebar_frames_for(user.role).each do |id, src| %>
+    <%= turbo_frame_tag id, src:, loading: :lazy, target: "_top", class: "mt-4 block" do %>
+      <%= ui_loading_state variant: :skeleton %>
+    <% end %>
+  <% end %>
 </aside>

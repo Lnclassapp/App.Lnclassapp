@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Classroom::Assignable
-# Rôle : ressource assignable à une classe : cours, fiche ou exercice (clé = slug ou public_id)
-# ADR  : 0048
+# Rôle : ressource assignable à une classe : un exercice seul (clé = public_id)
+# ADR  : 0048, 0072
 module Entities
   module Classroom
     Assignable = Data.define(:type, :id, :key, :name) do
@@ -10,6 +10,7 @@ module Entities
         super
       end
     end
-    Assignable::TYPES = %w[Course Essential Exercise].freeze
+    # ADR-0072 §4.1 : cours et fiches ne s'assignent plus.
+    Assignable::TYPES = %w[Exercise].freeze
   end
 end

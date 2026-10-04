@@ -9,7 +9,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
   end
 
   def stored = Orm::User.find(@student.id).photo
-  def stored_facts = Entities::Identity::ImageHeader.read(stored.download)
+  def stored_facts = Entities::Shared::ImageHeader.read(stored.download)
 
   def open_photo_modal
     visit profile_path
@@ -59,7 +59,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       assert_photo_loaded "#profile_information img[alt='Aya Koné']"
       assert_photo_loaded "header button[aria-controls=account-menu] img[alt='Aya Koné']"
     end
-    assert_equal Entities::Identity::ImageHeader::Facts.new(format: :webp, width: 480, height: 480, metadata: false), stored_facts
+    assert_equal Entities::Shared::ImageHeader::Facts.new(format: :webp, width: 480, height: 480, metadata: false), stored_facts
     assert Orm::AuditEvent.exists?(action: "profile.photo_changed", actor_id: @student.id)
     screenshot("2-profil-avec-photo")
     find("button[aria-controls='account-menu']").click

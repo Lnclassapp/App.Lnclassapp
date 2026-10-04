@@ -250,6 +250,20 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_#{school.public_id} td:nth-child(7)", text: "5" # « Classes », après le code d'établissement
   end
 
+  # UDR-0056 §3.2: the block moved to shared/_level_classrooms, shared with the direction; the team's page is unchanged.
+  test "UDR-0056: the school page renders the shared « Classes par niveau » block, aimed at the team's routes" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+    partials = []
+    callback = ->(*, payload) { partials << payload[:identifier].delete_prefix("#{Rails.root}/app/views/") }
+
+    ActiveSupport::Notifications.subscribed(callback, "render_partial.action_view") { get school_path(school.public_id) }
+
+    assert_includes partials, "shared/_level_classrooms.html.erb"
+    assert_not_includes partials, "teams/schools/_level_classrooms.html.erb"
+    assert_select "#school_classrooms #school_level_classrooms"
+  end
+
   test "UDR-0046: a draft school's block keeps « − » but offers no « + », and says why" do
     referential = seed_referential
     draft = create_school(status: "draft")

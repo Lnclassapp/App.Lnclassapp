@@ -8,6 +8,7 @@
 | **Complète** | [ADR-0010](./0010-stack-ops-solid-suite-postgresql-railway.md) (hébergement Railway) |
 | **Remplace** | — |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0074](./0074-blog-public-articles-images-et-referencement.md) : §4 (fichiers publics : images des articles publiés) |
 
 ---
 
@@ -114,3 +115,11 @@ Les variables `BUCKET_*` du service web référencent celles du bucket (`${{Buck
 ## Amendement du 2026-09-30 — plusieurs fichiers par rapport d'import
 
 *[ADR-0068](./0068-import-de-plusieurs-fichiers-de-cours-et-ecriture-acceleree.md). Un rapport d'import porte désormais ses fichiers en `has_many_attached :sources`, au lieu de `has_one_attached :source`. Ils sont stockés sur le même service, avec la même règle : des clés aléatoires, et le nom du client en métadonnée seulement.*
+
+## Amendement du 2026-10-02 — blog public (ADR-0074)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Un fichier peut être public** : l'image d'un article publié (`article_images`, `has_one_attached :file`) est servie sans session par `GET /blog/images/:public_id`, en `Cache-Control: public, max-age=31536000, immutable`. Elle passe toujours par l'application (contrôleur Lnclass, jamais une route Active Storage) : le bucket reste privé et la CSP inchangée.
+- Une image de brouillon, ou pas encore rattachée, n'est servie qu'à l'équipe qui gère le blog, en `private, no-store` ; 404 pour tout autre.
+- Les images jamais rattachées sont purgées après 48 h ; une image retirée du texte est supprimée à l'enregistrement, son fichier purgé après validation (`purge_later`).

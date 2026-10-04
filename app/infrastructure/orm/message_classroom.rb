@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::MessageClassroom
 # Rôle : table message_classrooms, une classe ciblée par une annonce d'enseignant ; unique par annonce
-# ADR  : 0069
+# ADR  : 0078
 module Orm
   class MessageClassroom < ApplicationRecord
     self.table_name = "message_classrooms"

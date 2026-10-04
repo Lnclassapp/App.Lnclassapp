@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::MessageRepository
 # Rôle : annonces et leurs classes ciblées, écrites ensemble ; rejets effacés ; annonces programmées dont l'heure est venue
-# ADR  : 0029, 0045, 0069
+# ADR  : 0029, 0045, 0078
 module Repositories
   module Communication
     class MessageRepository

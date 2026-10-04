@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Communication
-    # ADR-0069 §6 : le lecteur porte ce que l'Actor n'a pas — l'établissement et la classe principale active d'un élève.
+    # ADR-0078 §6 : le lecteur porte ce que l'Actor n'a pas — l'établissement et la classe principale active d'un élève.
     class ReaderTest < ActiveSupport::TestCase
       test "porte le compte, le rôle, l'établissement et la classe principale" do
         reader = Reader.new(user_id: 1, role: :student, school_id: 3, classroom_id: 11)

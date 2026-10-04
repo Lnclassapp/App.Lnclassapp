@@ -3,7 +3,8 @@ require "application_system_test_case"
 # TR-04, TR-05, TR-09, TR-10 (chantier queries-constantes-orm-disparues, plan Lot E): for every role, a real sign-in, the home
 # without error, then every destination of the shell opened by its real link, and the real « Se déconnecter ». A
 # destination whose route is not drawn in V1 renders as an inactive entry (NavigationHelper): it is checked as inactive,
-# never followed. The data holds one assignment of each kind: on an empty base, the old feeds passed green by mistake.
+# never followed. The data holds assignments: on an empty base, the old feeds passed green by mistake. Since ADR-0072
+# an exercise is the only assignable kind: two exercises of the sheet are assigned.
 class RoleHomesTest < ApplicationSystemTestCase
   setup do
     svt = create_material(name: "SVT", category: "science")
@@ -16,7 +17,9 @@ class RoleHomesTest < ApplicationSystemTestCase
     course = create_course(name: "Génétique et évolution", level: tle, material: svt)
     essential = create_essential(course:, name: "La méiose")
     exercise = create_exercise(essential:, title: "Exercice sur la méiose")
-    [ course, essential, exercise ].each { |assignable| create_assignment(classroom: @classroom, assignable:, by: @teacher) }
+    [ exercise, create_exercise(essential:, title: "Bilan de la méiose") ].each do |assignable|
+      create_assignment(classroom: @classroom, assignable:, by: @teacher)
+    end
     session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 80)
     create_badge(student: @student, exercise:, level: "gold", session:)
     create_course(name: "Brouillon de l'équipe", level: tle, material: svt, status: "draft")
@@ -43,12 +46,13 @@ class RoleHomesTest < ApplicationSystemTestCase
   end
 
   # TR-10 (UDR-0049, amendment of UDR-0006 of 2026-09-28): « Pilotage » is drawn, no team destination is inactive.
+  # RE-01 (UDR-0068 §3.2): Imports has left the destinations for the « Configuration » card, opened by
+  # test/system/teams/configuration_navigation_test.rb.
   test "the team member reaches their home, then every destination of their navigation, the dashboard included" do
     sign_in_as create_team_member(first_name: "Awa")
 
     assert_home team_home_path, greeting: I18n.t("teams.homes.show.greeting", name: "Awa")
-    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, imports: teams_imports_path,
-                                dashboard: team_dashboard_path }
+    assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, dashboard: team_dashboard_path }
     assert_signs_out
   end
 
@@ -92,9 +96,12 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_selector "h1", text: greeting if greeting
   end
 
+  # The first card of the sidebar: the destinations of the role. The team has a second one, « Configuration » (UDR-0068).
+  MAIN_SIDEBAR_NAV = "aside nav:not(#sidebar_secondary)".freeze
+
   # Each active destination is a real link, clicked from the navigation; the page it opens marks it current. An inactive
   # one has no href and aria-disabled. The logo, from the last page, leads back home.
-  def assert_navigation(active: {}, inactive: [], nav: "aside nav")
+  def assert_navigation(active: {}, inactive: [], nav: MAIN_SIDEBAR_NAV)
     within(nav) do
       assert_selector "a[href]", count: active.size
       assert_selector "a[aria-disabled='true']:not([href])", count: inactive.size

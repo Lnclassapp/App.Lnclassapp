@@ -7,11 +7,11 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-03 | La V6 sort du backlog : le chantier `annonces` s'ouvre | Demande du porteur (« nous allons mettre en place la feature d'annonce ») | — (feuille de route à dater) |
-| 2026-10-03 | Trois auteurs : équipe, direction (officielle), enseignant (ses classes) | Grill + maquette de l'accueil élève validée par le porteur | ADR-0069 |
-| 2026-10-03 | Date de fin obligatoire (30 j par défaut, 90 j au plus), filtrée à la lecture | « L'auteur seul gère » laissait des annonces orphelines en ligne | ADR-0069 |
-| 2026-10-03 | Retrait par l'équipe et par la direction, distinct de l'archivage | Contenu déplacé destiné à des mineurs | ADR-0069 |
-| 2026-10-03 | Texte de 140 caractères, sans page de détail ; l'audio porte les détails | Choix du porteur | ADR-0069, UDR-0056 |
-| 2026-10-03 | Audio = fichier téléversé, pas de synthèse vocale | Choix du porteur, contre le design system §10 | UDR-0056 (écart assumé) |
+| 2026-10-03 | Trois auteurs : équipe, direction (officielle), enseignant (ses classes) | Grill + maquette de l'accueil élève validée par le porteur | ADR-0078 |
+| 2026-10-03 | Date de fin obligatoire (30 j par défaut, 90 j au plus), filtrée à la lecture | « L'auteur seul gère » laissait des annonces orphelines en ligne | ADR-0078 |
+| 2026-10-03 | Retrait par l'équipe et par la direction, distinct de l'archivage | Contenu déplacé destiné à des mineurs | ADR-0078 |
+| 2026-10-03 | Texte de 140 caractères, sans page de détail ; l'audio porte les détails | Choix du porteur | ADR-0078, UDR-0071 |
+| 2026-10-03 | Audio = fichier téléversé, pas de synthèse vocale | Choix du porteur, contre le design system §10 | UDR-0071 (écart assumé) |
 | 2026-10-03 | Un Lot D d'intégration porte les entrées de navigation | `role_homes_test` compte et suit chaque entrée : une entrée sans page casse tous les worktrees | — (plan) |
 
 ## Ce qui a dérapé
@@ -19,10 +19,12 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - **Cadrage, 2026-10-03** : le premier jet du memo suivait l'ADR-0045 à la lettre. La maquette du porteur, apportée en cours de grill, en contredisait sept points (auteurs, audio, image, officiel, signature, ordre, page de détail). Leçon : demander la maquette **avant** le grill, pas pendant.
-- **Lot 0, 2026-10-04** : la contrainte `status = 'draft' OR ends_at IS NOT NULL` de l'ADR-0069 interdisait d'archiver un brouillon. Vue à la relecture du Lot 0, avant le merge ; corrigée en « date de fin exigée des annonces en ligne » (amendement de l'ADR-0069). Leçon : écrire, pour chaque `CHECK`, la transition de statut qui pourrait la violer.
-- **Lot 0** : l'UDR-0056 titrait « Lot 0 » la carte et l'audio que le plan donnait au Lot B ; l'agent a suivi le plan. Deux documents écrits le même jour se contredisaient déjà : relire l'UDR contre le plan avant de lancer.
+- **Lot 0, 2026-10-04** : la contrainte `status = 'draft' OR ends_at IS NOT NULL` de l'ADR-0078 interdisait d'archiver un brouillon. Vue à la relecture du Lot 0, avant le merge ; corrigée en « date de fin exigée des annonces en ligne » (amendement de l'ADR-0078). Leçon : écrire, pour chaque `CHECK`, la transition de statut qui pourrait la violer.
+- **Lot 0** : l'UDR-0071 titrait « Lot 0 » la carte et l'audio que le plan donnait au Lot B ; l'agent a suivi le plan. Deux documents écrits le même jour se contredisaient déjà : relire l'UDR contre le plan avant de lancer.
 - **Environnement** : Ruby 3.4.9, PostgreSQL, Yarn 4 (Corepack) et un chromedriver accordé au Chromium (141) manquaient à la session ; `LANG=C.UTF-8` est nécessaire au garde de pureté.
 - **Cadrage** : le plan écrivait « DS-11 amendé » alors que les routes d'annonces vivent sous `/announcements` ; DS-11 tient tel quel. Corrigé avant le commit.
+
+- **Merge de `Develop`, 2026-10-04** : pendant le cadrage, `Develop` a pris les numéros ADR-0069 et UDR-0056, la version de migration `20261003100000`, et ouvert le contexte `communication` (blog, ADR-0074) ; l'ADR-0071 avait déjà levé la lecture seule de la direction. Renumérotation en ADR-0078 et UDR-0071, migrations décalées au `20261004…`, fabriques et routes fusionnées. Leçon : avant de numéroter une décision, regarder `origin/Develop` **et** les branches ouvertes (`git ls-tree` sur `origin/*`), pas seulement le dépôt local.
 
 ## Ce qu'on a appris sur la codebase
 

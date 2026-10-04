@@ -7,7 +7,7 @@ module Dtos
       include ActiveModel::Model
 
       PHOTO = Entities::Identity::ProfilePhoto
-      HEADER = Entities::Identity::ImageHeader
+      HEADER = Entities::Shared::ImageHeader
 
       # photo : tout objet qui répond à read, rewind et size (fichier téléversé, StringIO), ou nil.
       attr_accessor :photo

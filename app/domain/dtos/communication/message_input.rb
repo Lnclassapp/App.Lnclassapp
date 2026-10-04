@@ -12,7 +12,7 @@ module Dtos
       # Par fichier : poids maximal, lecteur du format dans les premiers octets, puis type et nom par format (ADR-0045 §4).
       # Le nom envoyé n'est jamais gardé : il est choisi ici, d'après le contenu.
       FILES = {
-        image: { megabytes: 2, header: Entities::Identity::ImageHeader,
+        image: { megabytes: 2, header: Entities::Shared::ImageHeader,
                  formats: { png: %w[image/png image.png], jpeg: %w[image/jpeg image.jpg], webp: %w[image/webp image.webp] } },
         audio: { megabytes: 10, header: Entities::Communication::AudioHeader,
                  formats: { mpeg: %w[audio/mpeg audio.mp3], mp4: %w[audio/mp4 audio.m4a] } }

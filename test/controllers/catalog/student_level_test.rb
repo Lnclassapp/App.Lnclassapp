@@ -27,7 +27,11 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{@other.slug}", 0
     assert_select "select[name=level]", 0
     assert_select "select[name=material]"
-    assert_match tl("student_subtitle"), response.body
+    # UDR-0013, amendement du 2026-10-02 (UDR-0057) : plus de sous-titre ; la portée du catalogue passe dans l'infobulle, et
+    # le badge de niveau quitte les cartes.
+    assert_select "#main details", text: /#{Regexp.escape(tl("student_scope"))}/
+    assert_no_match(/#{Regexp.escape(tl("subtitle"))}|Les cours de ton niveau, par matière/, response.body)
+    assert_select "#courses_list", text: /Tle/, count: 0
   end
 
   test "a course, a sheet and an exercise of another level answer 404 to the student, and no session starts" do
@@ -62,5 +66,24 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     assert_response :success
     get courses_path
     assert_select "#course_#{@other.slug}"
+  end
+
+  # Revue de sécurité de la mise en production du 2026-10-01 : une session ouverte avant la règle, sur un exercice d'un
+  # autre niveau, ne se joue plus, ne reçoit plus de réponse et ne montre plus son résultat à son élève.
+  test "a session of another level, opened before the rule, can neither be played, answered nor read back by its student" do
+    started = create_exercise_session(student: @student, exercise: @other_exercise)
+    completed = create_exercise_session(student: @student, exercise: @other_exercise, status: "completed", score_percent: 50)
+    question = @other_exercise.questions.first
+    sign_in_as @student
+
+    get exercise_session_path(started.public_id)
+    assert_response :not_found
+    post exercise_session_attempts_path(started.public_id),
+         params: { attempt: { question_id: question.id, answer_ids: [ question.answers.first.id ] } },
+         as: :turbo_stream
+    assert_response :not_found
+    assert_not Orm::QuestionAttempt.exists?
+    get exercise_session_result_path(completed.public_id)
+    assert_response :not_found
   end
 end

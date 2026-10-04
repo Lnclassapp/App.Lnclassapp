@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_04_090200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "account_deletion_requests", force: :cascade do |t|
+    t.datetime "closed_at"
+    t.bigint "closed_by_id"
+    t.datetime "created_at", null: false
+    t.bigint "recorded_by_id", null: false
+    t.date "requested_on", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["closed_by_id"], name: "index_account_deletion_requests_on_closed_by_id"
+    t.index ["recorded_by_id"], name: "index_account_deletion_requests_on_recorded_by_id"
+    t.index ["status", "requested_on"], name: "index_account_deletion_requests_on_status_and_requested_on"
+    t.index ["user_id"], name: "index_account_deletion_requests_on_user_id"
+    t.index ["user_id"], name: "index_account_deletion_requests_one_pending", unique: true, where: "((status)::text = 'pending'::text)"
+    t.check_constraint "(closed_at IS NULL) = (closed_by_id IS NULL)", name: "account_deletion_requests_closed_together"
+    t.check_constraint "(status::text = 'pending'::text) = (closed_at IS NULL)", name: "account_deletion_requests_closed_iff_not_pending"
+    t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'processed'::character varying, 'cancelled'::character varying]::text[])", name: "account_deletion_requests_status_values"
+  end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
@@ -63,6 +82,50 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.index ["question_id", "position"], name: "index_answers_on_question_id_and_position", unique: true
   end
 
+  create_table "article_images", force: :cascade do |t|
+    t.string "alt", limit: 150
+    t.bigint "article_id"
+    t.integer "byte_size", null: false
+    t.string "content_type", null: false
+    t.datetime "created_at", null: false
+    t.integer "height", null: false
+    t.string "public_id", limit: 14, null: false
+    t.datetime "updated_at", null: false
+    t.integer "width", null: false
+    t.index ["article_id"], name: "index_article_images_on_article_id"
+    t.index ["public_id"], name: "index_article_images_on_public_id", unique: true
+    t.check_constraint "byte_size >= 1 AND byte_size <= 1048576", name: "article_images_byte_size"
+    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "article_images_content_type_values"
+    t.check_constraint "width >= 1 AND width <= 1600 AND height >= 1 AND height <= 1600", name: "article_images_sides"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.datetime "archived_at"
+    t.bigint "author_id", null: false
+    t.string "cover_alt", limit: 150
+    t.bigint "cover_image_id"
+    t.datetime "created_at", null: false
+    t.string "excerpt", limit: 200
+    t.string "public_id", limit: 14, null: false
+    t.datetime "published_at"
+    t.integer "reads_count", default: 0, null: false
+    t.string "signature", default: "team", null: false
+    t.string "slug", limit: 140, null: false
+    t.string "status", default: "draft", null: false
+    t.string "title", limit: 120, null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["public_id"], name: "index_articles_on_public_id", unique: true
+    t.index ["published_at", "id"], name: "index_articles_published", order: :desc, where: "((status)::text = 'published'::text)"
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
+    t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "articles_archived_at"
+    t.check_constraint "char_length(btrim(title::text)) >= 1", name: "articles_title_present"
+    t.check_constraint "reads_count >= 0", name: "articles_reads_count_positive"
+    t.check_constraint "signature::text = ANY (ARRAY['team'::character varying, 'author'::character varying]::text[])", name: "articles_signature_values"
+    t.check_constraint "status::text = 'draft'::text OR published_at IS NOT NULL AND btrim(excerpt::text) <> ''::text", name: "articles_published_complete"
+    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'published'::character varying, 'archived'::character varying]::text[])", name: "articles_status_values"
+  end
+
   create_table "audit_events", force: :cascade do |t|
     t.string "action", limit: 60, null: false
     t.bigint "actor_id"
@@ -92,6 +155,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.bigint "assigned_by_id", null: false
     t.bigint "classroom_id", null: false
     t.datetime "created_at", null: false
+    t.date "due_on"
     t.string "public_id", limit: 14, null: false
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
@@ -103,7 +167,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.index ["classroom_id"], name: "index_classroom_assignments_on_classroom_id"
     t.index ["public_id"], name: "index_classroom_assignments_on_public_id", unique: true
     t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "classroom_assignments_archived_at_iff_archived"
-    t.check_constraint "assignable_type::text = ANY (ARRAY['Course'::character varying, 'Essential'::character varying, 'Exercise'::character varying]::text[])", name: "classroom_assignments_type_values"
+    t.check_constraint "assignable_type::text = 'Exercise'::text", name: "classroom_assignments_type_values"
+    t.check_constraint "due_on IS NULL OR (due_on - ((assigned_at AT TIME ZONE 'UTC'::text) AT TIME ZONE 'Africa/Abidjan'::text)::date) >= 1 AND (due_on - ((assigned_at AT TIME ZONE 'UTC'::text) AT TIME ZONE 'Africa/Abidjan'::text)::date) <= 7", name: "classroom_assignments_due_on_within_a_week"
     t.check_constraint "status::text = ANY (ARRAY['active'::character varying, 'archived'::character varying]::text[])", name: "classroom_assignments_status_values"
   end
 
@@ -119,6 +184,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.index ["series_id"], name: "index_classroom_plan_entries_on_series_id"
     t.check_constraint "count >= 0 AND count <= 30", name: "classroom_plan_entries_count_range"
     t.check_constraint "school_type::text = ANY (ARRAY['public'::character varying, 'private'::character varying]::text[])", name: "classroom_plan_entries_school_type_values"
+  end
+
+  create_table "classroom_session_days", force: :cascade do |t|
+    t.bigint "classroom_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "teacher_id", null: false
+    t.integer "weekday", limit: 2, null: false
+    t.index ["classroom_id"], name: "index_classroom_session_days_on_classroom_id"
+    t.index ["teacher_id", "classroom_id", "weekday"], name: "index_classroom_session_days_unique", unique: true
+    t.check_constraint "weekday >= 1 AND weekday <= 6", name: "classroom_session_days_weekday_range"
   end
 
   create_table "classroom_students", force: :cascade do |t|
@@ -524,7 +599,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.index ["school_id", "status"], name: "index_school_join_requests_on_school_id_and_status"
     t.index ["teacher_id"], name: "index_school_join_requests_on_teacher_id", unique: true
     t.check_constraint "(status::text = 'pending'::text) = (decided_at IS NULL)", name: "school_join_requests_decided_iff_not_pending"
-    t.check_constraint "decided_via::text = ANY (ARRAY['team'::character varying, 'sponsor'::character varying]::text[])", name: "school_join_requests_decided_via_values"
+    t.check_constraint "decided_via::text = ANY (ARRAY['team'::character varying, 'sponsor'::character varying, 'auto'::character varying]::text[])", name: "school_join_requests_decided_via_values"
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'approved'::character varying, 'rejected'::character varying]::text[])", name: "school_join_requests_status_values"
   end
 
@@ -779,6 +854,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.check_constraint "referral_token::text ~ '^[0-9a-f]{12}$'::text", name: "teacher_profiles_referral_token_format"
   end
 
+  create_table "teacher_school_departures", force: :cascade do |t|
+    t.datetime "detached_at", null: false
+    t.bigint "detached_by_id", null: false
+    t.datetime "reinstated_at"
+    t.bigint "reinstated_by_id"
+    t.bigint "school_id", null: false
+    t.bigint "teacher_id", null: false
+    t.index ["detached_by_id"], name: "index_teacher_school_departures_on_detached_by_id"
+    t.index ["reinstated_by_id"], name: "index_teacher_school_departures_on_reinstated_by_id"
+    t.index ["school_id", "detached_at"], name: "index_teacher_school_departures_on_school_id_and_detached_at"
+    t.index ["teacher_id", "school_id"], name: "index_teacher_school_departures_one_open", unique: true, where: "(reinstated_at IS NULL)"
+    t.check_constraint "(reinstated_at IS NULL) = (reinstated_by_id IS NULL)", name: "teacher_school_departures_reinstated_together"
+  end
+
   create_table "teacher_schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.boolean "primary", default: false, null: false
@@ -824,9 +913,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.check_constraint "team_role::text = ANY (ARRAY['admin'::character varying, 'content'::character varying, 'field'::character varying]::text[])", name: "users_team_role_values"
   end
 
+  add_foreign_key "account_deletion_requests", "users", column: "closed_by_id", on_delete: :restrict
+  add_foreign_key "account_deletion_requests", "users", column: "recorded_by_id", on_delete: :restrict
+  add_foreign_key "account_deletion_requests", "users", on_delete: :restrict
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions", on_delete: :restrict
+  add_foreign_key "article_images", "articles", on_delete: :restrict
+  add_foreign_key "articles", "article_images", column: "cover_image_id", on_delete: :restrict
+  add_foreign_key "articles", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "audit_events", "users", column: "actor_id", on_delete: :restrict
   add_foreign_key "backup_codes", "users", on_delete: :cascade
   add_foreign_key "classroom_assignments", "classrooms", on_delete: :restrict
@@ -834,6 +929,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
   add_foreign_key "classroom_assignments", "users", column: "assigned_by_id", on_delete: :restrict
   add_foreign_key "classroom_plan_entries", "levels", on_delete: :restrict
   add_foreign_key "classroom_plan_entries", "series", on_delete: :restrict
+  add_foreign_key "classroom_session_days", "teacher_classrooms", column: ["teacher_id", "classroom_id"], primary_key: ["teacher_id", "classroom_id"], on_delete: :restrict
+  add_foreign_key "classroom_session_days", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "classroom_students", "classrooms", on_delete: :restrict
   add_foreign_key "classroom_students", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "classrooms", "levels", on_delete: :restrict
@@ -901,6 +998,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
   add_foreign_key "teacher_classrooms", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_profiles", "materials", on_delete: :restrict
   add_foreign_key "teacher_profiles", "users", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "schools", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "detached_by_id", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "reinstated_by_id", on_delete: :restrict
+  add_foreign_key "teacher_school_departures", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_schools", "schools", on_delete: :restrict
   add_foreign_key "teacher_schools", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "totp_credentials", "users", on_delete: :cascade
