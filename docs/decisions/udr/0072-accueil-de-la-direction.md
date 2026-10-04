@@ -54,6 +54,7 @@ La direction arrive sur « Travail des élèves », un tableau d'une ligne par c
   - `alerts` : `[Entities::School::DirectionAlerts::Alert(kind, names, others, count)]`, produit par `Entities::School::DirectionAlerts.call(school_active:, classrooms:, teachers_without_classroom:)` où `classrooms` = `[ClassroomFacts(name, students_count, teachers_count, submission_rate)]` triées comme les classes (niveau, puis nom). Ordre et règles en §3.3.
   - `levels` : `[LevelBubble(slug, name, classrooms_count, submission_rate)]`, niveaux ayant au moins une classe active de l'année, triés par `levels.position` ; `submission_rate` = `round(Σ devoirs rendus × 100 / Σ (élèves × devoirs))` sur les classes du niveau, `nil` si le dénominateur vaut 0. Les sommes partent de `StudentWorkQuery::ClassroomRow#submitted_count`, `students_count`, `assignments_count`.
   - Un nombre fixe de requêtes, quel que soit le nombre de classes (≤ 12, test de comptage).
+  - **Gardé 5 minutes** par établissement et par année scolaire (ADR-0065, amendement du 2026-10-04, AD-23) : les chiffres, les alertes et les pastilles peuvent avoir jusqu'à 5 minutes de retard. Aucune mention à l'écran. Le bandeau d'arrivée et l'activité restent en direct.
 
 ### 3.3 Carte « Établissement » (`school_admin/classrooms/_school_card`)
 

@@ -139,3 +139,26 @@ end
 - `test/domain/policies/school/read_own_school_policy_test.rb` : refus pour `teacher`, `student`, `team` et une direction sans établissement.
 - `test/infrastructure/queries/school/student_work_query_test.rb` et `school_teachers_query_test.rb` : un test par ligne du tableau §4, données d'un autre établissement absentes, nombre de requêtes constant.
 - `test/controllers/school_admin/classrooms_controller_test.rb` et `teachers_controller_test.rb` : chaque page refusée aux autres rôles ; la classe d'un autre établissement donne 404. `test/routing/school_admin_routes_test.rb` : aucune route d'écriture sous `/school-admin`.
+
+## Amendement du 2026-10-04 — l'accueil de la direction est gardé 5 minutes
+
+*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md) (critère AD-23), décision du porteur du 2026-10-04, prise sur la mesure. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi pour l'accueil de la direction.*
+
+**Pourquoi.** L'accueil de la direction ([UDR-0072](../udr/0072-accueil-de-la-direction.md)) relit le travail des élèves de toutes les classes, puis les enseignants, les alertes et le taux de chaque niveau. Au volume de la feuille de route (`script/perf/dataset.rb`), il mesure **138 à 152 ms en p95** pour un budget de **100 ms** ([ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md)) ; l'ancienne page « Travail des élèves » en prenait 92,6 sur la même machine. L'essentiel du coût est la lecture des devoirs rendus, que l'ancienne page faisait déjà et qui frôle seule le budget. Le moteur 3 (« lues en direct ») cède pour cet écran, comme il a cédé pour la vue « année » du pilotage ([ADR-0062](./0062-indicateurs-de-pilotage-lus-en-direct.md), amendement du 2026-09-29).
+
+**Décision.** `Queries::School::DirectionHomeQuery` garde son résultat dans `Rails.cache` (Solid Cache en production) **5 minutes** (`expires_in: 5.minutes`).
+
+| | |
+|---|---|
+| **Ce qui est gardé** | Le nom, le type, le statut et l'année de l'établissement ; ses trois chiffres ; ses alertes (avec les noms de classes qu'elles citent) ; le taux de chaque niveau. Aucune donnée d'élève ni d'enseignant nommé. |
+| **Ce qui ne l'est jamais** | Le bandeau d'arrivée des directions (UDR-0070 §3.3, des noms), l'activité récente (frame différé), la page d'un niveau et la page d'une classe : lus en direct à chaque page. |
+| **Clé** | `direction_home/v<CACHE_VERSION>/<id de l'établissement>/<année scolaire>`. L'établissement vient du compte (jamais de l'URL) ; rien ne dépend de l'acteur : les directions d'un même établissement lisent la même entrée. `CACHE_VERSION` change avec une définition (§4) ou la forme du résultat. |
+| **Durée** | 5 minutes, puis la page suivante relit la base. |
+| **Invalidation** | **Aucune invalidation fine**, pour la même raison que le pilotage : les chiffres dépendent de devoirs, de sessions, d'adhésions, de déclarations de classes et du statut de l'établissement, écrits par de nombreux use cases. L'expiration suffit. |
+
+**Coût consenti.** Les chiffres, les alertes et les pastilles de l'accueil peuvent avoir **jusqu'à 5 minutes de retard** : une classe qu'un enseignant vient de déclarer reste « sans enseignant » jusqu'à la lecture suivante après expiration, un devoir rendu ne change la pastille qu'après. La page d'un niveau, ouverte depuis une bulle, est lue en direct : ses chiffres peuvent être plus frais que ceux de la bulle. La première page après expiration paie le calcul complet (**123 ms** à froid au 2026-10-04) : le budget de l'ADR-0067 s'applique à l'entrée chaude, le froid est mesuré et noté.
+
+**Vérification.**
+
+- `test/infrastructure/queries/school/direction_home_query_test.rb` : mêmes chiffres à froid, à chaud et sans cache (`NullStore`) ; une seconde lecture dans les 5 minutes ne lance aucune requête ; en retard à 4 min 59 s, à jour à 5 min 01 s ; deux établissements n'ont jamais la même entrée ; par défaut, la lecture passe par `Rails.cache`.
+- `PERF=1 test/performance/school/heavy_screens_budget_test.rb` : p95 de l'accueil à chaud sous 100 ms ; le froid est affiché.

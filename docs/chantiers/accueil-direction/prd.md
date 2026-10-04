@@ -190,6 +190,18 @@ Quand la direction ouvre l'activité
 Alors elle lit « Rien de nouveau ces 30 derniers jours »
 ```
 
+### Temps de lecture (ADR-0065, amendement du 2026-10-04)
+
+```gherkin
+# AD-23
+Étant donné l'accueil d'un établissement lu une première fois
+Quand la direction, ou une autre direction du même établissement, l'ouvre de nouveau dans les 5 minutes
+Alors ses chiffres, ses alertes et ses pastilles sont relus sans requête
+Et une classe déclarée entre-temps n'y apparaît qu'après 5 minutes
+Et un autre établissement ne lit jamais cette entrée
+Et le bandeau d'arrivée, l'activité, la page d'un niveau et celle d'une classe restent lus en direct
+```
+
 ### Navigation et accessibilité
 
 ```gherkin
@@ -220,8 +232,9 @@ Et la page n'a qu'un titre h1
 
 ## 6. Décisions rattachées
 
+- **ADR-0065, amendement du 2026-10-04** — l'accueil de la direction est gardé 5 minutes (AD-23), sur la mesure du budget de l'ADR-0067.
 - **UDR-0072** — Accueil de la direction : établissement, niveaux, annonces, activité. Amende l'UDR-0052 (§2.1 « pas d'accueil », §2.2 « des tableaux, pas des cartes ») et l'UDR-0006 (navigation `school_admin`).
-- **Pas d'ADR** : aucun port, aucune table, aucune dépendance, aucun contrat de use case ne bouge ; le chantier n'ajoute que des lectures (queries) et deux règles de domaine pures. L'ADR-0065 (définitions du travail des élèves) est appliqué tel quel ; la seule écriture touchée (masquer une annonce) appartient au chantier `annonces` et à son ADR-0078.
+- **Pas de nouvel ADR** : aucun port, aucune table, aucune dépendance, aucun contrat de use case ne bouge ; le chantier n'ajoute que des lectures (queries) et deux règles de domaine pures. La seule stratégie de persistance nouvelle (le cache de l'accueil) amende l'ADR-0065. L'ADR-0065 (définitions du travail des élèves) est appliqué tel quel ; la seule écriture touchée (masquer une annonce) appartient au chantier `annonces` et à son ADR-0078.
 - **Dépendance externe** : chantier `annonces` (branche `feature/annonces`), mergé dans `Develop` **avec la décision D-A1** du porteur (l'équipe seule rédige ; toute annonce est masquable par tout lecteur). Seul le Lot D en dépend.
 
 ## 7. Mesures
@@ -231,4 +244,4 @@ Et la page n'a qu'un titre h1
 | Requêtes SQL de l'accueil (hors frame différé), quel que soit le nombre de classes | 5 (tableau) | nombre fixe, ≤ 12, identique pour 3 et 30 classes | **11** pour 3, 12 et 30 classes (10 accueil + 1 bandeau d'arrivée) ; + 3 d'authentification et 2 de navigation, communes à toute page — challenger, phase 5 |
 | Requêtes SQL de la page d'un niveau | — | nombre fixe, ≤ 6 | **4** au challenger ; **5** depuis le décompte des élèves distincts (O1) — test de comptage constant |
 | Requêtes SQL du frame d'activité | — | nombre fixe, ≤ 4 | **3**, de 0 à 10 événements — challenger, phase 5 |
-| Temps serveur de l'accueil (`test/performance/school/heavy_screens_budget_test.rb`, p95 des queries, ADR-0067) | « Travail des élèves » : 92,6 ms sur `Develop`, même machine | < 100 ms | **138 à 152 ms : budget dépassé**. Mesure alternée sur 40 lectures : ancienne page 89,6 ms en médiane (107,9 en p95), accueil 110,8 ms (145,5 en p95). L'accueil ajoute ≈ 21 ms (requêtes des enseignants ≈ 10 ms) à une lecture qui frôle déjà le budget seule. **Décision du porteur attendue** (voir journal) |
+| Temps serveur de l'accueil (`test/performance/school/heavy_screens_budget_test.rb`, p95 des queries, ADR-0067) | « Travail des élèves » : 92,6 ms sur `Develop`, même machine | < 100 ms | Sans cache : 138 à 152 ms (mesure alternée : ancienne page 89,6 ms en médiane, accueil 110,8 ms). **Décision du porteur : 5 minutes de cache** (ADR-0065, amendement du 2026-10-04) → **0,1 ms à chaud** (cache mémoire du test ; une lecture Solid Cache en production), **123 ms à froid**, une fois toutes les 5 minutes par établissement |

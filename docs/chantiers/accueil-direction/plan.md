@@ -129,6 +129,19 @@ Lot 0 — SOCLE (séquentiel)
 
 ---
 
+## Lot F — Accueil gardé 5 minutes *(ajouté après la phase 5, décision du porteur du 2026-10-04)*
+
+- **Couche**       : infrastructure *(+ amendement de l'ADR-0065)*
+- **Fichiers**     : `app/infrastructure/queries/school/direction_home_query.rb` *(cache de 5 minutes, `CACHE_VERSION`)*
+                     `test/performance/school/heavy_screens_budget_test.rb` *(budget à chaud, froid affiché)*
+                     `test/controllers/school_admin/classrooms_controller_test.rb` *(cache vidé entre deux lectures d'un même test)*
+                     `docs/decisions/adr/0065-espace-direction-simple-en-lecture-seule.md` · `docs/decisions/adr/README.md`
+- **Dépend de**    : Lots A à E, et la mesure du budget (ADR-0067) faite sur le jeu de données réparé de `Develop`
+- **Test associé** : `test/infrastructure/queries/school/direction_home_query_test.rb` *(AD-23 : froid = chaud = sans cache ; aucune requête dans les 5 minutes ; en retard à 4 min 59 s, à jour à 5 min 01 s ; deux établissements, deux entrées ; `Rails.cache` par défaut)*
+- **Done quand**   : `PERF=1 test/performance/school/heavy_screens_budget_test.rb` passe, l'accueil sous 100 ms à chaud ; le froid est affiché. **AD-23**.
+
+---
+
 ## Dispatch
 
 ```
@@ -161,6 +174,7 @@ Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son
 | AD-20 | 0 (navigation), E (système) |
 | AD-21 | E |
 | AD-22 | A, B, E |
+| AD-23 | F |
 
 Aucun critère orphelin.
 
