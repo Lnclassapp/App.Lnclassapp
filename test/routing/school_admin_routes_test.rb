@@ -24,6 +24,19 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
     assert_equal({ controller: "school_admin/teachers", action: "index" }, first_match("/school-admin/teachers"))
   end
 
+  # AD-09, AD-17 (UDR-0072 §3.8, §3.11): the page of a level, by its frozen slug, and the deferred activity of the home.
+  test "the page of a level and the activity of the home are drawn, GET only" do
+    assert_equal "/school-admin/levels/3eme", helpers.school_admin_level_path("3eme")
+    assert_equal "/school-admin/activity", helpers.school_admin_activity_path
+
+    assert_equal({ controller: "school_admin/levels", action: "show" }, first_match("/school-admin/levels/3eme"))
+    assert_equal "3eme", Rails.application.routes.recognize_path("/school-admin/levels/3eme")[:slug]
+    assert_equal({ controller: "school_admin/activities", action: "show" }, first_match("/school-admin/activity"))
+    %w[POST PATCH PUT DELETE].each do |method|
+      %w[/school-admin/levels/3eme /school-admin/activity].each { assert_nil first_match(it, method:), "#{method} #{it}" }
+    end
+  end
+
   # ADR-0071, UDR-0056 §3.0 (gestion-etablissement-direction, Lot 0) amends DS-11: the direction's three gestures are
   # its only writes, a closed list; its reading pages still accept GET alone.
   WRITES = [ [ "DELETE", "/school-admin/teachers/:public_id(.:format)" ],

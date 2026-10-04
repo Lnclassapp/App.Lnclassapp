@@ -47,8 +47,9 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
 
     row = row_of(klass)
 
-    assert_equal Query::ClassroomRow.new(public_id: klass.public_id, name: "2nde C 1", level_name: "2nde", students_count: 4,
-                                         assignments_count: 2, submission_rate: 38, average_percent: nil), row
+    assert_equal Query::ClassroomRow.new(public_id: klass.public_id, name: "2nde C 1", level_name: "2nde", level_slug: "2nde",
+                                         students_count: 4, assignments_count: 2, submitted_count: 3, submission_rate: 38,
+                                         average_percent: nil), row
   end
 
   test "the overview names the school and the school year, and keeps only the active classrooms of the year" do
@@ -80,7 +81,8 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     unfollowed = classroom(name: "2nde C 3")
     assignment(unfollowed)
 
-    assert_equal [ 0, 0, nil, nil ], row_of(empty).to_h.values_at(:students_count, :assignments_count, :submission_rate, :average_percent)
+    assert_equal [ 0, 0, 0, nil, nil ],
+                 row_of(empty).to_h.values_at(:students_count, :assignments_count, :submitted_count, :submission_rate, :average_percent)
     assert_equal [ 1, 0, nil ], row_of(lonely).to_h.values_at(:students_count, :assignments_count, :submission_rate)
     assert_equal [ 0, 1, nil ], row_of(unfollowed).to_h.values_at(:students_count, :assignments_count, :submission_rate)
   end
@@ -219,6 +221,36 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     assert_nil detail(classroom(name: "2nde C 3", school_year: "2020-2021"))
   end
 
+  # AD-09, AD-10 (UDR-0072 §3.8): a level's page reads the active classrooms of the year of that level, in this school
+  # only, with the same rows as the home page.
+  test "AD-09: a level lists its active classrooms of the year, sorted by name, with the same rows" do
+    klass, = seconde_c1
+    second = classroom(name: "2nde A 2")
+    classroom(name: "Tle D 1", level: @terminale)
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde")
+
+    assert_equal Query::LevelOverview.new(level_name: "2nde", level_slug: "2nde", classrooms: [ row_of(second), row_of(klass) ]), level
+  end
+
+  test "AD-10: another school's, archived or past classrooms of the level never show" do
+    kept = classroom
+    classroom(name: "2nde C 2", status: "archived")
+    classroom(name: "2nde C 3", school_year: "2020-2021")
+    classroom(name: "2nde C 4", school: create_school(name: "Lycée Classique d'Abidjan"))
+
+    assert_equal [ kept.public_id ], Query.new.level(school_id: @school.id, slug: "2nde").classrooms.map(&:public_id)
+  end
+
+  test "AD-11: an unknown level, or a level without an active classroom of the school this year, has no page" do
+    classroom(name: "Tle D 1", level: @terminale, school: create_school(name: "Lycée Classique d'Abidjan"))
+    classroom(name: "Tle D 2", level: @terminale, status: "archived")
+
+    assert_nil Query.new.level(school_id: @school.id, slug: "7eme")
+    assert_nil Query.new.level(school_id: @school.id, slug: "tle")
+    assert_nil Query.new.level(school_id: @school.id, slug: nil)
+  end
+
   test "the number of queries does not follow the volume" do
     build = lambda do |count|
       count.times do |index|
@@ -230,10 +262,12 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     build.call(1)
     small = count_queries { overview }
     small_detail = count_queries { detail(Orm::Classroom.first) }
+    small_level = count_queries { Query.new.level(school_id: @school.id, slug: "2nde") }
     build.call(3)
 
     assert_equal small, count_queries { overview }
     assert_equal small_detail, count_queries { detail(Orm::Classroom.last) }
+    assert_equal small_level, count_queries { Query.new.level(school_id: @school.id, slug: "2nde") }
   end
 
   private

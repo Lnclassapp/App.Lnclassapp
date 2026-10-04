@@ -63,7 +63,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", count: 1, text: tc("index.title")
     assert_select "p", text: tc("index.subtitle", school: "Lycée Moderne de Bouaké",
                                                   year: Entities::Classroom::SchoolYear.current(Date.current))
-    assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.student_work")
+    assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.home")
     assert_select "#student_work table caption.sr-only", text: tc("index.caption")
     assert_select "#student_work th[scope=col]", count: 5
     assert_select "tr#classroom_#{@classroom.public_id}" do
@@ -103,11 +103,11 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get school_admin_classroom_path(@classroom.public_id)
 
     assert_response :success
-    assert_select "main nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), school_admin_classrooms_path,
-                  text: tc("show.back")
+    assert_select "main nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), school_admin_level_path("2nde"),
+                  text: "2nde"
     assert_select "h1", count: 1, text: "2nde C 1"
     assert_select "p", text: tc("show.subtitle", level: "2nde", count: 2)
-    assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.student_work")
+    assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.home")
     assert_select "ul#classroom_figures li", count: 3
     assert_select "ul#classroom_figures li", text: /2\s+#{tc('show.figures.assignments')}/
     assert_select "ul#classroom_figures li", text: /25 %\s+#{tc('show.figures.submission_rate')}/
@@ -139,13 +139,15 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_students", text: /#{tc('show.empty')}/
   end
 
-  test "FU-10, FU-11: the classroom page returns to « Travail des élèves » by the common back link, never an arrow button" do
+  # AD-13 (UDR-0072 §3.9): the back link of a classroom leads to the page of its level, named after it.
+  test "AD-13, FU-10, FU-11: the classroom page returns to its level by the common back link, never an arrow button" do
     sign_in_as @admin
 
     get school_admin_classroom_path(@classroom.public_id)
 
     assert_select "main a", minimum: 1 do |links|
-      assert_equal school_admin_classrooms_path, links.first["href"]
+      assert_equal school_admin_level_path("2nde"), links.first["href"]
+      assert_equal "2nde", links.first.text.strip
     end
     assert_select "main nav[aria-label=?] + div h1", I18n.t("components.back_link.label"), text: "2nde C 1"
     assert_no_match(/arrow-left/, response.body)

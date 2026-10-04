@@ -17,7 +17,7 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "aside nav a[href]", 3
     assert_select "aside nav a[aria-disabled]", 0
-    assert_select "aside nav a[href='#{school_admin_classrooms_path}']", text: tn(:student_work)
+    assert_select "aside nav a[href='#{school_admin_classrooms_path}']", text: tn(:home)
     assert_select "aside nav a[href='#{school_admin_teachers_path}']", text: tn(:teachers)
     assert_select "aside nav a[href='#{school_admin_school_path}']", text: tn(:school)
 

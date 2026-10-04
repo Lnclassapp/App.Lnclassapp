@@ -71,15 +71,23 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil nav_path(teachers)
   end
 
-  # DS-05 (UDR-0052, amendment of UDR-0006), GD-01 (UDR-0056 §3.1): the direction has exactly three destinations, all
-  # drawn, and no home of its own: « Travail des élèves » is its home.
-  test "the direction's navigation is « Travail des élèves », « Enseignants » then « Établissement »" do
-    assert_equal [ [ :student_work, "/school-admin/classrooms", "chart-bar" ], [ :teachers, "/school-admin/teachers", "user-group" ],
+  # DS-05 (UDR-0052, amendment of UDR-0006), GD-01 (UDR-0056 §3.1), AD-20 (UDR-0072 §3.1): the direction has exactly three
+  # destinations, all drawn; its home is « Accueil », at the address of the former « Travail des élèves ».
+  test "AD-20: the direction's navigation is « Accueil », « Enseignants » then « Établissement »" do
+    assert_equal [ [ :home, "/school-admin/classrooms", "home" ], [ :teachers, "/school-admin/teachers", "user-group" ],
                    [ :school, "/school-admin/school", "building-library" ] ],
                  navigation_for(:school_admin).map { [ it.key, nav_path(it), it.icon ] }
-    assert_equal [ "Travail des élèves", "Enseignants", "Établissement" ],
+    assert_equal [ "Accueil", "Enseignants", "Établissement" ],
                  navigation_for(:school_admin).map { I18n.t("shared.navigation.#{it.key}") }
     assert_equal "/school-admin/classrooms", home_path_for(:school_admin)
+    assert_not I18n.exists?("shared.navigation.student_work"), "no role keeps « Travail des élèves »"
+  end
+
+  test "AD-20: « Accueil » of the direction is active on a level's page and on a classroom's page, by the key they declare" do
+    request.path = "/school-admin/levels/3eme"
+    content_for :nav_key, "home"
+
+    assert nav_active?(navigation_for(:school_admin).first)
   end
 
   test "a destination is active by its URL or by the key the view declares" do

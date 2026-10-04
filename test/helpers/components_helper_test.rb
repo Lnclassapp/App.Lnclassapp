@@ -506,6 +506,24 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_equal "Tle D, cours de SVT", css_select("a").first.text.gsub(/\s+/, " ").strip
   end
 
+  # AD-07, AD-09 (UDR-0072 §3.5): the direction's bubbles carry a decorative dot of the work signal; without a signal the
+  # bubble stays the one of UDR-0069.
+  test "ui_subject_bubble puts a decorative signal dot on its disc, in the colour of the signal" do
+    %i[green yellow red].each do |signal|
+      show ui_subject_bubble(label: "3ème", href: "/school-admin/levels/3eme", illustration: subject_illustration(nil), signal:)
+
+      assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-signal-#{signal}[aria-hidden=true]",
+                    count: 1
+    end
+  end
+
+  test "ui_subject_bubble without a signal has no dot, and refuses an unknown signal" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses", illustration: subject_illustration("svt"))
+
+    assert_select "span[class*='bg-signal-']", 0
+    assert_raises(ArgumentError) { ui_subject_bubble(label: "3ème", href: "/", illustration: subject_illustration(nil), signal: :blue) }
+  end
+
   test "ui_avatar shows initials on a stable tone" do
     show ui_avatar("Awa Marie Koné", size: :lg)
 
