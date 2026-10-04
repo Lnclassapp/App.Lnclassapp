@@ -70,8 +70,11 @@ Fichier `app/helpers/assessment/comprehension_helper.rb`. Aucune vue ne choisit 
 | `comprehension_dot_class(category)` | `:struggling` → `bg-struggling` · `:fragile` → `bg-fragile` · `:acquired` → `bg-success` · `nil` → `bg-line` |
 | `comprehension_soft_class(category)` | `bg-struggling-soft` · `bg-fragile-soft` · `bg-success-soft` · `bg-mist` |
 | `comprehension_label(category)` | `t("assessment.comprehension.categories.#{category}")` : « En difficulté », « Fragile », « Acquis » ; `nil` → « Pas encore lisible » |
-| `trend_icon(trend)` | `:progress` → `arrow-trending-up` · `:decline` → `arrow-trending-down` · `:stable` et `:stagnant` → `arrow-long-right` |
-| `trend_label(trend)` | « En progrès » · « En baisse » · « Stable » · « Stagne » ; `nil` → « 1 essai » |
+| `trend_icon(trend)` | `:progress` → `arrow-trending-up` · `:decline` → `arrow-trending-down` · `:stable` et `:stagnant` → `arrow-long-right` · `nil` → `nil` (pas d'icône) |
+| `trend_label(trend)` | « En progrès » · « En baisse » · « Stable » · « Stagne » ; `nil` → « 1 session » |
+| `comprehension_badge_class(level, count)` | teinte de l'icône d'un palier (§3.3) ; `text-line` si `count` vaut 0 |
+
+Une catégorie ou un signe inconnu lève `KeyError` : jamais de gris silencieux.
 
 ### 3.3 Partiels partagés (Lot 0) — `app/views/assessment/comprehension/`
 
@@ -88,7 +91,7 @@ Fichier `app/helpers/assessment/comprehension_helper.rb`. Aucune vue ne choisit 
   - le nombre en `text-sm tabular-nums` ;
   - un `span.sr-only` qui dit le palier : « 3 Bronze ».
 - Couleur de l'icône : `text-warning` pour le Bronze, `text-mute` pour l'Argent, `text-gold` pour l'Or, `text-info` pour le Diamant. Ce sont les tons existants de `BadgesHelper::BADGE_LEVEL_TONES`, appliqués à l'icône seule.
-- Un palier à 0 : icône et nombre en `text-line`, `sr-only` « 0 Bronze ». Le Bronze n'est jamais omis (défaut AS-25 de l'ancienne application).
+- Un palier à 0 : icône et nombre en `text-line`, `sr-only` « 0 Bronze ». Le nombre visible est `aria-hidden` : le `sr-only` le dit déjà. Le Bronze n'est jamais omis (défaut AS-25 de l'ancienne application).
 
 ### 3.4 Page classe — bord bas d'un exercice assigné (Lot A, amende UDR-0062 §3.4)
 
@@ -150,9 +153,9 @@ section#comprehension [aria-labelledby=comprehension_title] .mb-8
 - l'énoncé en texte brut, `min-w-0 flex-1 line-clamp-2 text-sm text-ink` ;
 - à droite, `w-28 shrink-0`, une barre `h-2 rounded-full bg-mist` dont le remplissage a pour largeur le taux et pour couleur `comprehension_dot_class(Grading.mastery_for(taux))`, puis le taux « 50 % » en `text-sm tabular-nums text-ink` ;
 - sans tentative : « — » et pas de barre.
-- **Progrès** : si `first_rate` est présent et différent du taux, sous le taux à droite, `text-xs text-mute tabular-nums` : « 1er essai : 20 % ».
+- **Progrès** : si `first_rate` est présent et différent du taux, sous le taux à droite, `text-xs text-mute tabular-nums` : « 1re session : 20 % ».
 - **À reprendre** : si `to_revisit`, sous l'énoncé, `ui_badge t(".to_revisit"), tone: :brand, size: :sm, icon: "arrow-path"` : « À reprendre en classe ». Le bleu de la marque dit l'action, jamais l'ambre de l'urgence.
-- La barre est `aria-hidden`. Le taux écrit suffit : l'`aria-label` de la `li` est « Question 1 : 50 % de réussite », complété par « , 20 % au premier essai » et « , à reprendre en classe » quand c'est le cas.
+- La barre est `aria-hidden`. Le taux écrit suffit : l'`aria-label` de la `li` est « Question 1 : 50 % de réussite », complété par « , 20 % à la première session » et « , à reprendre en classe » quand c'est le cas.
 
 **Élèves** (`ul`, même carte) — une `li` par élève de la catégorie, **dans l'ordre fourni par la query** (ADR-0079 §4.7 : en baisse, stagne, un seul essai, stable, en progrès, puis par nom), `flex items-center justify-between gap-3 px-4 py-3 sm:px-5` :
 - gauche : le nom, `min-w-0 truncate font-medium` ;
@@ -195,7 +198,7 @@ Décision du porteur (2026-10-04, ADR-0079 §4.8). Dans `app/views/classroom/ass
   - `decline` : « En baisse » ;
   - `stable` : « Stable » ;
   - `stagnant` : « Stagne » ;
-  - `single` : « 1 essai ».
+  - `single` : « 1 session » (vocabulaire de l'UDR-0007 : « essai » est interdit à l'écran).
 - `done_ratio` : « %{done}/%{present} ».
 - `badges_label` : « Badges de la classe ».
 - `badge_count` : « %{count} %{level} ».
@@ -207,15 +210,16 @@ Décision du porteur (2026-10-04, ADR-0079 §4.8). Dans `app/views/classroom/ass
   - `question_label` : « Question %{number} : %{rate} de réussite » ;
   - `question_number` : « Q%{number} » ;
   - `no_attempt` : « — » ;
-  - `first_rate` : « 1er essai : %{rate} » ;
-  - `first_rate_label` : « , %{rate} au premier essai » ;
+  - `first_rate` : « 1re session : %{rate} » ;
+  - `first_rate_label` : « , %{rate} à la première session » ;
   - `to_revisit` : « À reprendre en classe » ;
   - `to_revisit_label` : « , à reprendre en classe ».
-- `trends_summary` : « %{progress} · %{flat} · %{decline} », avec les pluriels :
-  - `progress` : « %{count} en progrès » ;
-  - `flat` : « %{count} sans évolution » ;
-  - `decline` : « %{count} en baisse ».
-- `no_trend` : « Pas encore de progrès à lire : chaque élève n'a fait qu'un essai. »
+- `trends_summary` (imbriqué : une clé YAML ne peut être à la fois une phrase et un groupe de pluriels) :
+  - `sentence` : « %{progress} · %{flat} · %{decline} » ;
+  - `progress` : `one`/`other` « %{count} en progrès » ;
+  - `flat` : `one`/`other` « %{count} sans évolution » ;
+  - `decline` : `one`/`other` « %{count} en baisse ».
+- `no_trend` : « Pas encore de progrès à lire : chaque élève n'a fait qu'une session. »
 - `unreliable` : « Moins de 5 élèves ont fait l'exercice : la tendance n'est pas encore fiable. »
 - `empty` :
   - `title` : « Personne n'a encore fait cet exercice. » ;

@@ -40,7 +40,7 @@ L'enseignant assigne un exercice à sa classe et voit combien d'élèves l'ont f
 | Classe sans élève présent | Cercle gris « 0/0 », section en état vide |
 | Catégorie sans élève choisie | État vide de la catégorie : « Aucun élève dans cette catégorie. » |
 | Paramètre de catégorie inconnu | Ignoré : la catégorie dominante (ou « En difficulté » si personne) est choisie |
-| Élève avec un seul essai | Pas de signe ; « 1 essai » à la place |
+| Élève avec une seule session | Pas de signe ; « 1 session » à la place |
 | Question sans réponse parmi les élèves de la catégorie | « — » au lieu d'un taux |
 | Classe archivée | Tout reste lisible, rien ne change (lecture seule) |
 | Tous les élèves ont fait l'exercice | La section « Pas encore faits » est absente |
@@ -148,7 +148,7 @@ Scénario: progrès par question et question à reprendre
   Étant donné deux élèves « Fragile » qui ont raté la question 2 au premier essai et réussi au meilleur
   Et la question 3 réussie par aucun des deux au meilleur essai
   Quand l'enseignant choisit la catégorie « Fragile »
-  Alors la question 2 affiche 100 % et « 1er essai : 0 % »
+  Alors la question 2 affiche 100 % et « 1re session : 0 % »
   Et la question 3 affiche 0 % et « À reprendre en classe »
   Et une question à 50 % n'est pas « À reprendre en classe »
   Et sans élève à deux essais, aucun taux au premier essai n'est affiché
