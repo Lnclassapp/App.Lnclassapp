@@ -138,3 +138,13 @@ Précisions qui font partie de la décision :
 **Mesure.** Durées relevées dans le journal GitHub du run 497 (PR #144, parts système 2/3 et 3/3), comme le §9 le prévoit : lecture du blog **4,8 s**, gestion du blog **29,0 s**, soit **33,8 s**. Le blog dépasse donc aussi la dérogation de 20 s. La garde ne compte que les fichiers qu'une PR touche : enregistrer ces durées, sans toucher aux tests, la remet au vert, mais ne réduit pas la suite. Pour revenir sous 20 s, une partie des sept tests de gestion (29,0 s, dont 7,3 s pour le parcours brouillon → publié → archivé) redescendrait au niveau contrôleur ; c'est au porteur d'en décider.
 
 **Vérification.** `test/guards/system_budget_test.rb` : 20 s pour le blog seul, 15 s dès qu'un autre fichier grandit avec lui, 20,1 s refusées.
+
+## Amendement du 2026-10-04 — interrupteur de la CI
+
+*Décision du porteur, 2026-10-04, chantier [`annonces`](../../chantiers/annonces/journal.md) (PR #162).*
+
+- **Constat** : à partir de 16:47 UTC le 2026-10-04, GitHub n'attribue plus de runner aux jobs du dépôt (`runner_id: 0`, aucun pas exécuté, aucun log), à chaque tentative ; « plan » puis « ci » échouent en 3 s. La cause est du côté du compte GitHub (minutes ou limite de dépenses Actions, ou incident), pas du code.
+- **Décision** : la CI est **coupée** jusqu'à nouvel ordre. Le job « plan » ne tourne que si la **variable de dépôt `CI_ENABLED` vaut `true`** (*Settings → Secrets and variables → Actions → Variables*). Absente, « plan » est sauté, et tout ce qui le suit avec, comme pour un brouillon : ni runner, ni échec.
+- **Pendant la coupure**, la preuve d'une PR est `bin/ci` joué en local (ou au moins `bin/rails test`, les tests système du chantier, rubocop, brakeman), écrite dans la PR ; le garde du budget système et les autres gardes restent joués par le pre-commit.
+- **Réactiver** : créer la variable `CI_ENABLED=true` ; aucun changement de code. Retirer l'interrupteur du workflow (et de `test/guards/ci_plan_test.rb`) quand la cause est réglée.
+
