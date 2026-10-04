@@ -3,9 +3,7 @@
 <%# ADR  : 0077 · UDR : 0042, 0070 (§3.4) · locals : staff, by_code_count, viewer_id, remove_url (lambda public_id), removable, newcomer %>
 <% fmt = ->(time) { date = time.to_date; date.day == 1 ? "1er #{l(date, format: "%B %Y")}" : l(date, format: :long) } %>
 <%= ui_card id: "school_staff", title: t("shared.school_staff.title"), padding: :md do %>
-  <p id="school_staff_places" class="-mt-2 mb-2 text-sm text-mute">
-    <%= t("shared.school_staff.subtitle", used: by_code_count, cap: Entities::School::Staff::CODE_CAP) %>
-  </p>
+  <%= render "shared/school_staff_places", by_code_count: %>
   <% if staff.empty? %>
     <%= ui_empty_state title: t("shared.school_staff.empty"), icon: "user-group" %>
   <% else %>

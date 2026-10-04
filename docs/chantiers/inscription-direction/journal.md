@@ -10,6 +10,7 @@
 | 2026-10-04 | Lot 0 : « Voir les N autres » de l'accueil de l'équipe devient « Et N autres, sur les fiches de leurs établissements. » | Aucune page ne liste toutes les directions retirées : le lien n'aurait mené nulle part | UDR-0070 §3.5, PRD ID-21 amendés |
 | 2026-10-04 | Lot 0 : les places « 2 / 3 » sont un `<p id="school_staff_places">` dans la carte, pas le sous-titre de `ui_card` | Une cible stable pour le Turbo Stream du retrait | Non (détail de l'UDR §3.4) |
 | 2026-10-04 | Merge du Lot A : le lien discret du haut de page passe de `text-mute` à `text-ink/90` | `text-mute` sur `bg-brand` donne ≈ 2,4:1 en thème clair et ≈ 2,3:1 en sombre, sous le seuil WCAG AA de 4,5:1 | UDR-0070 §3.2 amendée |
+| 2026-10-04 | Merge du Lot B : la ligne des places devient `shared/_school_staff_places`, rendue par le bloc et par les Turbo Streams | Le Lot B avait recopié la balise dans son Turbo Stream ; le Lot C en aura besoin aussi | Non |
 | 2026-10-04 | Lot 0 : la route de restauration prend `:staff_member_public_id` (ressource imbriquée), pas `:public_id` | Convention Rails des ressources imbriquées ; le nom de route est celui de l'UDR | Non |
 
 ## Ce qui a dérapé
@@ -25,7 +26,10 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- `Entities::Identity::AuditAction::ALL` est une liste fermée : le repository d'audit lève `ArgumentError` sur toute action absente. À vérifier dans chaque Lot 0 qui ajoute une trace.
+- `test/guards/system_budget_test.rb` exige la durée de chaque test système dans `script/ci/test_timings.yml`, avec un budget de 15 s par chantier (ADR-0069 §9). Ici : A 2,7 s, B 6,0 s, donc C doit tenir en 6 s environ. Le fichier est partagé : chaque lot n'y ajoute que sa ligne, dans un commit à part.
+- `script/ci/record_timings` ne lit pas la première ligne d'un test système lancé seul : la bannière « Capybara starting Puma... » la coupe (Lot B).
+- `RAILS_ENV=test bin/rails db:prepare` dans un worktree neuf charge les seeds dans la base de test, ce qui casse les tests d'unicité. Il faut lancer `db:schema:load` (lots A et B).
 
 ## Dette laissée derrière
 
@@ -33,7 +37,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| `test/infrastructure/queries/identity/account_search_query_test.rb:42` est instable : un numéro tiré par la fabrique peut contenir « 0304 » | Sans lien avec le chantier ; vert au passage suivant | à ouvrir (`bugfix`) |
+| `script/ci/record_timings` perd la première ligne quand la bannière Puma la coupe | Contournement possible (retirer la bannière avant l'enregistrement) | à ouvrir |
 
 ## Clôture
 
