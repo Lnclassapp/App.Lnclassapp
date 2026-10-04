@@ -6,6 +6,7 @@ module UseCases
   module School
     class PurgeArchivedStaff
       # deleted : comptes supprimés ; failed : user_id des comptes en échec, rejoués la nuit suivante (aucune donnée personnelle).
+      # Un compte restauré entre la lecture de la liste et son tour n'est ni supprimé ni en échec : il est sauté.
       Purged = Data.define(:deleted, :failed)
 
       def initialize(staffs:, users:, sessions:, photos:, login_attempts:, second_factors:, pin_recoveries:, audit_log:,
@@ -30,18 +31,23 @@ module UseCases
         return allowed if allowed.failure?
 
         now = @clock.now
-        due = @staffs.archived_before(at:)
-        failed = due.filter_map { |staff| staff.user_id unless purged?(staff, now) }
-        Shared::Result.success(Purged.new(deleted: due.size - failed.size, failed:))
+        outcomes = @staffs.archived_before(at:).map { |staff| [ staff.user_id, outcome(staff, at, now) ] }
+        Shared::Result.success(Purged.new(deleted: outcomes.count { it.last == :deleted },
+                                          failed: outcomes.filter_map { |user_id, result| user_id if result == :failed }))
       end
 
       private
 
-      def purged?(staff, now)
-        @transaction.call { purge(staff, now) }
-        true
+      # Revue de sécurité du Lot C, constat 1 : sous le verrou de l'établissement, le rattachement est relu avant tout effacement.
+      def outcome(staff, at, now)
+        @transaction.call do
+          next :skipped unless @staffs.claim_for_purge(user_id: staff.user_id, before: at)
+
+          purge(staff, now)
+          :deleted
+        end
       rescue StandardError
-        false
+        :failed
       end
 
       # L'ordre d'AnonymizeUser, sans adhésions ni données d'apprentissage, propres aux élèves (ADR-0077 §4.3 amendé). Le nom

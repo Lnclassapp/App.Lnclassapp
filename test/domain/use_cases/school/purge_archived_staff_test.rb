@@ -24,10 +24,13 @@ module UseCases
 
         attr_reader :asked_at
 
-        def initialize(staffs, journal)
+        def initialize(staffs, journal, restored: [])
           @staffs = staffs
           @journal = journal
+          @restored = restored
         end
+
+        def claim_for_purge(user_id:, before:) = @restored.exclude?(user_id) && @staffs.any? { it.user_id == user_id && it.archived_at < before }
 
         def archived_before(at:)
           @asked_at = at
@@ -106,9 +109,9 @@ module UseCases
                                     joined_at: archived_at - 86_400, archived_at:, archived_by_id: 5)
       end
 
-      def purge(staffs:, actor: nil, failing_photo: nil)
+      def purge(staffs:, actor: nil, failing_photo: nil, restored: [])
         @journal = Journal.new
-        @staffs = FakeStaffs.new(staffs, @journal)
+        @staffs = FakeStaffs.new(staffs, @journal, restored:)
         @transaction = FakeTransaction.new
         PurgeArchivedStaff.new(staffs: @staffs, users: FakeUsers.new(@journal), sessions: FakeSessions.new(@journal),
                                photos: FakePhotos.new(@journal, failing: failing_photo), login_attempts: FakeLoginAttempts.new(@journal),
@@ -145,6 +148,13 @@ module UseCases
         result = purge(staffs: [ staff(11, AT - 60), staff(12, AT - 120) ], failing_photo: 11)
 
         assert_equal PurgeArchivedStaff::Purged.new(deleted: 1, failed: [ 11 ]), result.value
+        assert_equal erasure_of(12), @journal.calls
+      end
+
+      test "un compte restauré entre la liste et son tour est sauté : rien n'est effacé, il n'est pas en échec" do
+        result = purge(staffs: [ staff(11, AT - 60), staff(12, AT - 120) ], restored: [ 11 ])
+
+        assert_equal PurgeArchivedStaff::Purged.new(deleted: 1, failed: []), result.value
         assert_equal erasure_of(12), @journal.calls
       end
 

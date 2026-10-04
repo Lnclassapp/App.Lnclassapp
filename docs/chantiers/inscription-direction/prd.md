@@ -204,7 +204,7 @@ Et la tâche est déclarée dans config/recurring.yml (production)
 |---|---|
 | Domaine | Entité `Entities::School::Staff` (`CODE_CAP`, `NEWCOMER_DAYS`, `RETENTION_DAYS`) ; port `StaffRepositoryPort` étendu ; use cases `Identity::RegisterSchoolStaff`, `School::ArchiveSchoolStaff`, `School::RestoreSchoolStaff`, `School::PurgeArchivedStaff` ; leurs quatre policies ; DTO `Dtos::Identity::SchoolStaffRegistrationInput` |
 | Infrastructure | Migration `school_staffs` (`joined_via`, `archived_at`, `archived_by_id`, contraintes, index partiel) ; `StaffRepository` ; `UserRepository#authenticate` et `#actor_for` qui excluent l'archivé ; `Queries::School::SchoolStaffQuery` ; `School::PurgeArchivedStaffJob` et `config/recurring.yml` |
-| Delivery | `Identity::SchoolStaffRegistrationsController` (débit 10/min) ; `SchoolAdmin::StaffMembersController#destroy` ; `Teams::SchoolStaffMembersController#destroy` ; `Teams::SchoolStaffRestorationsController#create` ; routes de l'UDR-0070 §3.0 |
+| Delivery | `Identity::SchoolStaffRegistrationsController` (débit 5/min) ; `SchoolAdmin::StaffMembersController#destroy` ; `Teams::SchoolStaffMembersController#destroy` ; `Teams::SchoolStaffRestorationsController#create` ; routes de l'UDR-0070 §3.0 |
 | UI | `identity/school_staff_registrations/new` ; `homepage/index` (lien, section, pied de page) ; `shared/_school_staff` ; bandeau dans `school_admin/classrooms/index` ; `teams/schools/_archived_staff` ; carte de `teams/homes/show` ; locales `fr` |
 
 ## 6. Décisions rattachées

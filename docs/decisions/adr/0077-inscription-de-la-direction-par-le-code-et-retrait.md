@@ -71,6 +71,9 @@ def archive(user_id:, by_id:, at:)       # → true | false (déjà archivé : a
 # Restaure si le compte est encore archivé et, pour une arrivée par le code, si le plafond le permet (même verrou).
 def restore(user_id:, cap:)              # → :restored | :not_archived | :cap_reached
 def archived_before(at:)                 # → [Entities::School::Staff] archivés avant `at` (tâche de suppression)
+# Dans la transaction de la suppression : verrouille l'établissement, relit le rattachement ; une restauration validée
+# entre-temps sort le compte de la suppression (revue de sécurité du Lot C). → true | false
+def claim_for_purge(user_id:, before:)
 def delete(user_id:)                     # → true
 ```
 

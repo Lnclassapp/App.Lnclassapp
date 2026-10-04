@@ -105,5 +105,25 @@ class Teams::SchoolStaffRestorationsControllerTest < ActionDispatch::Integration
     sign_in_as @kofi
     restore @aya, as: :turbo_stream
     assert_response :forbidden
+
+    [ create_student, create_teacher(school: @school) ].each do |user|
+      sign_in_as user
+      restore @aya, as: :turbo_stream
+      assert_response :forbidden
+    end
+    assert_not_nil staff_of(@aya).archived_at
+    assert_not Orm::AuditEvent.exists?(action: "school_staff.restored")
+  end
+
+  # Revue de sécurité du Lot C, constat 4 : un membre dont le second facteur n'est pas vérifié n'atteint jamais la restauration.
+  test "a team member whose second factor is not verified is sent to it, and nothing is restored" do
+    member = create_team_member(team_role: "admin")
+    post session_path, params: { session: { contact: member.contact, pin: "2468" } }
+
+    restore @aya
+
+    assert_redirected_to new_identity_second_factor_path
+    assert_not_nil staff_of(@aya).archived_at
+    assert_not Orm::AuditEvent.exists?(action: "school_staff.restored")
   end
 end

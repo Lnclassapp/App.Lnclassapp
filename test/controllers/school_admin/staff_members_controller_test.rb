@@ -120,4 +120,16 @@ class SchoolAdmin::StaffMembersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_nothing_written
   end
+  # B4 : une session ouverte avant l'archivage (que le retrait aurait dû fermer) ne donne plus rien de l'établissement.
+  test "a surviving session of an archived direction reaches nothing of the school, and writes nothing" do
+    sign_in_as @kofi
+    staff_of(@kofi).update_columns(archived_at: Time.current, archived_by_id: create_team_member(second_factor: false).id)
+
+    get school_admin_classrooms_path
+    assert_response :forbidden
+    delete school_admin_staff_member_path(@aya.public_id), as: :turbo_stream
+    assert_response :forbidden
+    assert_nil staff_of(@aya).archived_at
+    assert_not Orm::AuditEvent.exists?(action: "school_staff.archived")
+  end
 end

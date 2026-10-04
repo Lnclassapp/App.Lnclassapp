@@ -182,8 +182,10 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   test "ID-08: school_staffs joined_via and archiving are constrained" do
     admin = create_school_admin
     staff = Orm::SchoolStaff.find_by!(user: admin)
+    bare = create_user(role: "school_admin")
+    connection.execute("INSERT INTO school_staffs (user_id, school_id, created_at) VALUES (#{bare.id}, #{staff.school_id}, now())")
 
-    assert_equal "invitation", staff.joined_via
+    assert_equal "invitation", Orm::SchoolStaff.find_by!(user: bare).joined_via
     assert_raises(ActiveRecord::CheckViolation) do
       connection.transaction(requires_new: true) { staff.update_columns(joined_via: "self") }
     end

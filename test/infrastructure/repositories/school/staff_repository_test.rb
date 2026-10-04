@@ -88,6 +88,24 @@ module Repositories
         assert_equal :restored, @repository.restore(user_id: by_code.id, cap: 3)
       end
 
+      test "claim_for_purge is true only for an account still archived before the deadline" do
+        due = create_school_admin(school: @school, archived_at: @at - 120)
+        late = create_school_admin(school: @school, archived_at: @at)
+        active = create_school_admin(school: @school)
+
+        assert @repository.claim_for_purge(user_id: due.id, before: @at)
+        assert_not @repository.claim_for_purge(user_id: late.id, before: @at)
+        assert_not @repository.claim_for_purge(user_id: active.id, before: @at)
+        assert_not @repository.claim_for_purge(user_id: create_teacher.id, before: @at)
+      end
+
+      test "restore of a deleted attachment is :not_archived" do
+        gone = create_school_admin(school: @school, archived_at: @at)
+        Orm::SchoolStaff.where(user_id: gone.id).delete_all
+
+        assert_equal :not_archived, @repository.restore(user_id: gone.id, cap: 3)
+      end
+
       test "archived_before lists the accounts archived strictly before, oldest first; delete removes the attachment" do
         old = create_school_admin(school: @school, archived_at: @at - 120)
         older = create_school_admin(school: @school, archived_at: @at - 240)

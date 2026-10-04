@@ -35,7 +35,9 @@ class Teams::SchoolStaffMembersControllerTest < ActionDispatch::IntegrationTest
       assert_select "turbo-stream[action=replace][target=school_archived_staff] template #school_archived_staff" do
         assert_select "li#school_archived_staff_#{@kofi.public_id}", text: /Kofi Yao/ do
           assert_select "*", text: /Retiré le .+ par Awa Bamba/
-          assert_select "*", text: /Supprimé le .+#{30.days.from_now.year}/
+          due = 30.days.from_now.to_date
+          due_text = due.day == 1 ? "1er #{I18n.l(due, format: '%B %Y')}" : I18n.l(due, format: :long)
+          assert_select "*", text: /Supprimé le #{Regexp.escape(due_text)}/
           assert_select "button[type=submit]", text: I18n.t("teams.schools.archived_staff.restore")
         end
       end
@@ -106,5 +108,32 @@ class Teams::SchoolStaffMembersControllerTest < ActionDispatch::IntegrationTest
     remove @kofi, as: :turbo_stream
     assert_response :forbidden
     assert_nothing_written
+
+    [ create_student, create_teacher(school: @school) ].each do |user|
+      sign_in_as user
+      remove @kofi, as: :turbo_stream
+      assert_response :forbidden
+    end
+    assert_nothing_written
+  end
+
+  # Revue de sécurité du Lot C, constat 4 : un membre dont le second facteur n'est pas vérifié n'atteint jamais le retrait.
+  test "a team member whose second factor is not verified is sent to it, and nothing is written" do
+    post session_path, params: { session: { contact: @field.contact, pin: "2468" } }
+
+    remove @kofi
+
+    assert_redirected_to new_identity_second_factor_path
+    assert_nothing_written
+  end
+
+  test "an admin removes a direction too, even from an inactive school" do
+    @school.update!(status: "inactive")
+    sign_in_as create_team_member(team_role: "admin")
+
+    remove @aya, as: :turbo_stream
+
+    assert_response :success
+    assert_not_nil staff_of(@aya).archived_at
   end
 end

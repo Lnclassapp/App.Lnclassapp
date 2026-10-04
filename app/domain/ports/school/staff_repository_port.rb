@@ -41,6 +41,12 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #archived_before"
       end
 
+      # Dans la transaction de la suppression à J+30 : verrouille l'établissement et relit le rattachement. Une restauration
+      # validée entre-temps le sort de la suppression. → true (toujours archivé avant `before`) | false
+      def claim_for_purge(user_id:, before:)
+        raise NotImplementedError, "#{self.class} doit implémenter #claim_for_purge"
+      end
+
       # Supprime le rattachement (tâche de suppression à J+30). → true
       def delete(user_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #delete"

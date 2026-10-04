@@ -39,17 +39,29 @@ module Repositories
         end
       end
 
+      # La ligne est relue sous le verrou : une purge ou une autre restauration validée entre-temps donne :not_archived,
+      # jamais un second :restored (revue de sécurité du Lot C, constat 2).
       def restore(user_id:, cap:)
         Orm::SchoolStaff.transaction do
-          staff = Orm::SchoolStaff.find_by(user_id:)
-          next :not_archived if staff.nil? || staff.archived_at.nil?
+          school_id = Orm::SchoolStaff.where(user_id:).pick(:school_id)
+          next :not_archived if school_id.nil?
 
-          lock_school(staff.school_id)
-          next :cap_reached if staff.joined_via == CODE && by_code_count(staff.school_id) >= cap
+          lock_school(school_id)
+          joined_via = Orm::SchoolStaff.where(user_id:).where.not(archived_at: nil).pick(:joined_via)
+          next :not_archived if joined_via.nil?
+          next :cap_reached if joined_via == CODE && by_code_count(school_id) >= cap
 
-          staff.update!(archived_at: nil, archived_by_id: nil)
+          Orm::SchoolStaff.where(user_id:).where.not(archived_at: nil).update_all(archived_at: nil, archived_by_id: nil)
           :restored
         end
+      end
+
+      def claim_for_purge(user_id:, before:)
+        school_id = Orm::SchoolStaff.where(user_id:).pick(:school_id)
+        return false if school_id.nil?
+
+        lock_school(school_id)
+        Orm::SchoolStaff.where(user_id:, archived_at: ...before).exists?
       end
 
       def archived_before(at:) = rows(Orm::SchoolStaff.where(archived_at: ...at).order(:archived_at, :id))
