@@ -26,6 +26,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - **Merge de `Develop`, 2026-10-04** : pendant le cadrage, `Develop` a pris les numéros ADR-0069 et UDR-0056, la version de migration `20261003100000`, et ouvert le contexte `communication` (blog, ADR-0074) ; l'ADR-0071 avait déjà levé la lecture seule de la direction. Renumérotation en ADR-0078 et UDR-0071, migrations décalées au `20261004…`, fabriques et routes fusionnées. Leçon : avant de numéroter une décision, regarder `origin/Develop` **et** les branches ouvertes (`git ls-tree` sur `origin/*`), pas seulement le dépôt local.
 
+- **Lot A, 2026-10-04** : l'UDR prévoyait `ui_field … as: :file` et `as: :datetime_local`, que le composant ne connaît pas ; contourné par `type:` (amendement de l'UDR-0071). Leçon : vérifier chaque `as:` d'une UDR contre `FIELD_BUILDERS` avant de la figer. Pendant le merge, `ImageHeader` avait migré de `identity` à `shared` sur `Develop` : corrigé au merge.
+
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
