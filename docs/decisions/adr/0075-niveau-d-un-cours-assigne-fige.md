@@ -55,7 +55,7 @@ Depuis le 2026-10-01, un exercice ne s'assigne qu'à une classe du niveau de son
 
 ### 🔴 Coûts consentis
 
-- **Une lecture de plus** à chaque modification d'un cours, servie par l'index existant `classroom_assignments (assignable_type, assignable_id)` : aucune migration.
+- **Une lecture de plus** à chaque changement de niveau ou de série d'un cours (aucune pour un simple renommage), servie par l'index existant `classroom_assignments (assignable_type, assignable_id)` : aucune migration.
 - **Le port du catalogue lit des tables du contexte `classroom`** (assignations, classes) : comme `DeleteLevel` lit déjà les classes qui portent un niveau, c'est une lecture d'intégrité, pas une écriture croisée.
 - **Course rare** : une assignation créée entre la lecture et l'écriture du cours passe. Ni verrou ni contrainte en base : le porteur juge le cas improbable (l'équipe modifie, l'enseignant assigne, au même instant) ; il resterait visible et réparable par un retrait.
 - L'équipe doit demander aux enseignants de retirer leurs assignations avant de corriger le niveau d'un cours assigné.
