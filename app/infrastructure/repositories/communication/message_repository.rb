@@ -1,0 +1,70 @@
+# 🔌 INFRA · Repositories::Communication::MessageRepository
+# Rôle : annonces et leurs classes ciblées, écrites ensemble ; rejets effacés ; annonces programmées dont l'heure est venue
+# ADR  : 0029, 0045, 0069
+module Repositories
+  module Communication
+    class MessageRepository
+      include Ports::Communication::MessageRepositoryPort
+
+      # Ce qu'une écriture pose sur la ligne ; l'auteur et le public_id ne changent qu'à la création.
+      WRITTEN = %i[title body audience school_id illustration status published_at ends_at edited_at withdrawn_at
+                   withdrawn_by_id].freeze
+
+      def find_by_public_id(public_id:)
+        record = Orm::Message.find_by(public_id:)
+        record && entity(record, classroom_ids_of([ record.id ]).fetch(record.id, []))
+      end
+
+      def create(message:)
+        Orm::Message.transaction do
+          record = Orm::Message.create!(**message.to_h.slice(*WRITTEN), author_id: message.author_id, public_id: message.public_id)
+          entity(record, target(record.id, message.classroom_ids))
+        end
+      end
+
+      def update(message:)
+        Orm::Message.transaction do
+          record = Orm::Message.find(message.id)
+          record.update!(message.to_h.slice(*WRITTEN))
+          Orm::MessageClassroom.where(message_id: record.id).delete_all
+          entity(record, target(record.id, message.classroom_ids))
+        end
+      end
+
+      def clear_dismissals(message_id:) = Orm::MessageDismissal.where(message_id:).delete_all
+
+      # Deux requêtes, quel que soit le nombre d'annonces : les lignes, puis toutes leurs classes.
+      def due_for_publication(now:)
+        records = Orm::Message.where(status: "scheduled", published_at: ..now).order(:published_at, :id).to_a
+        classroom_ids = classroom_ids_of(records.map(&:id))
+        records.map { entity(it, classroom_ids.fetch(it.id, [])) }
+      end
+
+      def author_role(message:) = Orm::User.where(id: message.author_id).pick(:role).to_sym
+
+      private
+
+      # Écrit les classes ciblées, une fois chacune. → leurs ids triés
+      def target(message_id, classroom_ids)
+        ids = classroom_ids.uniq.sort
+        Orm::MessageClassroom.insert_all!(ids.map { { message_id:, classroom_id: it } }) if ids.any?
+        ids
+      end
+
+      # → { message_id => [classroom_id triés] }
+      def classroom_ids_of(message_ids)
+        Orm::MessageClassroom.where(message_id: message_ids).order(:classroom_id).pluck(:message_id, :classroom_id)
+                             .group_by(&:first).transform_values { it.map(&:last) }
+      end
+
+      def entity(record, classroom_ids)
+        Entities::Communication::Message.new(
+          id: record.id, public_id: record.public_id, author_id: record.author_id, title: record.title, body: record.body,
+          audience: record.audience, school_id: record.school_id, classroom_ids:, illustration: record.illustration,
+          status: record.status, published_at: record.published_at, ends_at: record.ends_at, edited_at: record.edited_at,
+          withdrawn_at: record.withdrawn_at, withdrawn_by_id: record.withdrawn_by_id
+        )
+      end
+    end
+  end
+end
