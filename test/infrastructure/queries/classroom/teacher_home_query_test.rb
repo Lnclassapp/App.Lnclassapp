@@ -85,6 +85,55 @@ module Queries
       test "no declared classroom: an empty list" do
         assert_empty home(create_teacher(school: @school)).classrooms
       end
+
+      # RE-13 (UDR-0069 §3.3): the « Cours » bubbles of the home, one per level and series taught.
+      def levels(row = home) = row.course_levels.map { [ it.level_slug, it.series_slug, it.label ] }
+
+      test "the subject slug, which picks the drawing of the bubbles" do
+        assert_equal @svt.slug, home.material_slug
+      end
+
+      test "course levels: one per distinct level and series, sorted by level, no series first, then by series name" do
+        third = create_level(name: "3ème", position: 4)
+        first = create_level(name: "1ère", position: 6)
+        d, a, c = %w[D A C].map { create_series(name: it) }
+        [ [ @tle, d, "Tle D 2" ], [ @tle, a, "Tle A 1" ], [ @tle, nil, "Tle 1" ], [ first, c, "1ère C 1" ],
+          [ third, nil, "3ème 2" ], [ third, nil, "3ème 1" ], [ @tle, d, "Tle D 3" ] ].each do |level, series, name|
+          Orm::TeacherClassroom.create!(teacher: @teacher, classroom: create_classroom(school: @school, level:, series:, name:))
+        end
+
+        assert_equal [ [ third.slug, nil, "3ème" ], [ first.slug, c.slug, "1ère C" ], [ @tle.slug, nil, "Tle" ],
+                       [ @tle.slug, a.slug, "Tle A" ], [ @tle.slug, d.slug, "Tle D" ] ], levels
+      end
+
+      test "course levels: neither archived classrooms, nor another school year, nor undeclared classrooms" do
+        archived = create_classroom(school: @school, level: create_level(name: "4ème", position: 3), name: "4ème 1",
+                                    status: "archived")
+        last_year = create_classroom(school: @school, level: create_level(name: "5ème", position: 2), name: "5ème 1",
+                                     school_year: "2000-2001")
+        [ archived, last_year ].each { Orm::TeacherClassroom.create!(teacher: @teacher, classroom: it) }
+        create_teacher(school: @school, classrooms: [ create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1") ])
+
+        assert_equal [ [ @tle.slug, nil, "Tle" ] ], levels
+      end
+
+      test "course levels: none without a declared classroom" do
+        assert_empty home(create_teacher(school: @school)).course_levels
+      end
+
+      # Six reads before the bubbles (profile, school, classrooms, members, assignments, scores): one more at most.
+      test "course levels cost at most one more query, whatever the number of levels" do
+        4.times do |index|
+          level = create_level(name: "Niveau #{index}", position: index + 1)
+          Orm::TeacherClassroom.create!(teacher: @teacher, classroom: create_classroom(school: @school, level:, series: create_series))
+        end
+        queries = 0
+        counter = ->(*, payload) { queries += 1 unless payload[:name] == "SCHEMA" }
+
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { assert_equal 5, home.course_levels.size }
+
+        assert_operator queries, :<=, 7
+      end
     end
   end
 end
