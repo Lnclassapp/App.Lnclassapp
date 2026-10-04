@@ -76,7 +76,7 @@ def delete(user_id:)                     # → true
 
 `Entities::School::Staff` est créée (Ruby pur) : `user_id`, `user_public_id`, `school_id`, `joined_via`, `joined_at`, `archived_at`, `archived_by_id`, `#archived?`, `#newcomer?(now)` (`joined_at > now - 7 jours`), `#deletion_due_on` (`archived_at + 30 jours`).
 
-`Ports::Identity::RegistrationRepositoryPort` et `UserRepositoryPort` ne changent pas de signature. L'adaptateur `UserRepository#authenticate` exclut un `school_admin` dont la ligne `school_staffs` est archivée. `#actor_for` donne `school_id: nil` à un compte archivé, ce qui le mène à l'écran d'attente si une session survivait.
+`Ports::Identity::RegistrationRepositoryPort` gagne `create_school_admin(user:, pin:)` → `Result(User) | failure(:conflict, errors: { contact: [:taken] })`, sur le modèle de `create_student` : la direction inscrite par le code n'a pas d'invitation à marquer, et détourner `create_from_invitation(invitation_id: nil)` aurait faussé son contrat (Lot 0 rouvert, 2026-10-04). `UserRepositoryPort` ne change pas de signature. L'adaptateur `UserRepository#authenticate` exclut un `school_admin` dont la ligne `school_staffs` est archivée. `#actor_for` donne `school_id: nil` à un compte archivé, ce qui le mène à l'écran d'attente si une session survivait.
 
 ### 4.3 Use cases et policies
 
@@ -85,7 +85,7 @@ def delete(user_id:)                     # → true
 | `UseCases::Identity::RegisterSchoolStaff` | `Policies::Identity::RegisterSchoolStaffPolicy` (aucun acteur connecté) | Crée le compte `school_admin` (nom, prénoms, genre, numéro, PIN), puis `attach_by_code` ; un refus du plafond annule la création dans la transaction ; ouvre la session ; journal `school_staff.registered` |
 | `UseCases::School::ArchiveSchoolStaff` | `Policies::School::RemoveSchoolStaffPolicy(actor:, school:, target:, actor_staff:, now:)` | Archive, ferme toutes les sessions de la cible (`destroy_all_for`), journal `school_staff.archived` |
 | `UseCases::School::RestoreSchoolStaff` | `Policies::School::RestoreSchoolStaffPolicy(actor:)` (équipe `admin`, `field`) | `restore(cap: 3)` ; journal `school_staff.restored` |
-| `UseCases::School::PurgeArchivedStaff` | `Policies::School::PurgeArchivedStaffPolicy` (le système seul, acteur `nil` accepté) | Pour chaque archivé depuis plus de 30 jours : `anonymize` (ADR-0036 §4, nom « Compte supprimé »), `destroy_all_for`, `delete` du rattachement ; journal `school_staff.deleted` |
+| `UseCases::School::PurgeArchivedStaff` | `Policies::School::PurgeArchivedStaffPolicy` (le système seul, acteur `nil` accepté) | Pour chaque archivé depuis plus de 30 jours, les mêmes effacements qu'`AnonymizeUser` pour un compte sans classe (ADR-0036 §4) : nom « Compte supprimé » et numéro effacé, sessions, second facteur, codes de récupération du PIN, tentatives de connexion et photo ; puis `delete` du rattachement. Journal `school_staff.deleted` |
 
 `RemoveSchoolStaffPolicy` accepte :
 - l'équipe `admin` ou `field`, pour toute cible ;
