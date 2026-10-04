@@ -101,6 +101,34 @@ class SchoolAdmin::TeachersControllerTest < ActionDispatch::IntegrationTest
     @teacher
   end
 
+  # Characterization (chantier ecrans-direction-lents, lot C): each icon of a row draws its heroicon, with the root attributes,
+  # size and class of the vendored file, whether written inline or taken from a <symbol> of the page by <use>.
+  test "chaque icône d'une ligne dessine son heroicon : matière, ⋮, « Retirer », croix et bouton de la modale" do
+    teacher = create_teacher(school: @school, first_name: "Awa", last_name: "Koné", material: create_material(category: "literature"),
+                             classrooms: [ create_classroom(school: @school, name: "6ème 1") ])
+
+    sign_in_as @admin
+    get school_admin_teachers_path
+
+    svgs = css_select("tr#teacher_#{teacher.public_id} svg")
+    expected = [ [ "20/solid", "book-open", "shrink-0 size-4" ], [ "24/outline", "ellipsis-vertical", "shrink-0 size-5" ],
+                 [ "24/outline", "user-minus", "shrink-0 size-5 opacity-70" ], [ "24/outline", "x-mark", "shrink-0 size-5" ],
+                 [ "24/outline", "user-minus", "shrink-0 size-5" ] ]
+    assert_equal expected.map { |set, name, css| heroicon(set, name).merge(class: css) }, svgs.map { drawn_icon(it) }
+    assert(svgs.all? { it["aria-hidden"] == "true" && it["focusable"] == "false" && it["role"].nil? })
+  end
+
+  def heroicon(set, name)
+    svg = Nokogiri::HTML5.fragment(Rails.root.join("vendor/heroicons/#{set}/#{name}.svg").read).at_css("svg")
+    { root: svg.to_h.slice("viewBox", "fill", "stroke", "stroke-width"), paths: svg.css("path").map(&:to_h) }
+  end
+
+  def drawn_icon(svg)
+    use = svg.at_css("use")
+    source = use ? document_root_element.at_css("symbol#{use['href']}") : svg
+    { root: svg.to_h.slice("viewBox", "fill", "stroke", "stroke-width"), paths: source.css("path").map(&:to_h), class: svg["class"] }
+  end
+
   def td(key, **) = I18n.t("school_admin.teachers.destroy.#{key}", **)
   def refusal(code) = I18n.t("school_admin.shared.errors.#{code}")
 

@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/teachers/index — « Enseignants » de la direction (DS-06, GD-14) %>
 <%# Rôle : une ligne par enseignant : nom, matière, classes de l'année ; établissement actif : menu ⋮ « Retirer », confirmé en modale %>
-<%# ADR  : 0065, 0071 · UDR : 0005, 0042, 0052, 0054, 0056 %>
+<%# ADR  : 0065, 0067, 0071 · UDR : 0005, 0042, 0052, 0054, 0056 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "teachers" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, count: @overview.teachers.size) do %>
@@ -8,6 +8,8 @@
 <% end %>
 
 <% if @overview.teachers.any? %>
+  <%# Une ligne porte cinq icônes (matière, ⋮, menu, modale) : dessinées une fois pour la page, reprises par <use> (ADR-0067). %>
+  <%= ui_icon_sprite do %>
   <%= ui_card id: "school_teachers", padding: :none, class: "overflow-hidden" do %>
     <%# Au téléphone, le tableau défile dans sa carte, jamais la page. %>
     <div class="relative overflow-x-auto">
@@ -61,6 +63,7 @@
         </tbody>
       </table>
     </div>
+  <% end %>
   <% end %>
 <% else %>
   <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description"), icon: "user-group" %>

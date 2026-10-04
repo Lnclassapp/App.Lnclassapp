@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069 · ADR : 0009, 0049, 0067
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -159,12 +159,26 @@ module ComponentsHelper
 
   # Icône heroicons vendorée (vendor/heroicons, MIT). Décorative par défaut ; `label:` la rend lisible.
   def ui_icon(name, variant: :outline, size: :md, label: nil, **html)
-    svg = heroicon_source(option!(ICON_SETS, variant, "ui_icon variant"), name.to_s)
+    set = option!(ICON_SETS, variant, "ui_icon variant")
+    svg = heroicon_source(set, name.to_s)
     classes = class_names("shrink-0", option!(ICON_SIZES, size, "ui_icon size"), html[:class])
     a11y = label ? %(role="img" aria-label="#{ERB::Util.html_escape(label)}") : %(aria-hidden="true")
+    return sprite_icon(set, name.to_s, classes, a11y) if @icon_sprite
+
     svg.sub(' aria-hidden="true"', "")
        .sub("<svg ", %(<svg class="#{ERB::Util.html_escape(classes)}" #{a11y} focusable="false" ))
        .html_safe
+  end
+
+  # Liste longue (ADR-0067) : dans le bloc, chaque ui_icon reprend par <use> un <symbol> émis une seule fois, après le
+  # bloc, hors de ses lignes : un Turbo Stream qui retire une ligne n'emporte pas le dessin des autres.
+  def ui_icon_sprite(&block)
+    @icon_sprite = {}
+    content = capture(&block)
+    symbols = @icon_sprite.map { |id, (view_box, paths)| tag.symbol(paths.html_safe, id:, viewBox: view_box) } # rubocop:disable Rails/OutputSafety -- fichier vendu, jamais une saisie
+    safe_join([ content, tag.svg(safe_join(symbols), class: "absolute size-0 overflow-hidden", "aria-hidden": "true", focusable: "false") ])
+  ensure
+    @icon_sprite = nil
   end
 
   def ui_spinner(size: :md)
@@ -451,6 +465,17 @@ module ComponentsHelper
     tag.button(content, type: "button", class: class_names(classes, "cursor-pointer text-left"), role: "menuitem",
                         tabindex: -1, "aria-haspopup": "dialog", "aria-controls": dialog,
                         data: { action: "dropdown#openDialog", dropdown_dialog_param: dialog })
+  end
+
+  # Mêmes attributs racine (viewBox, fill, stroke) que l'icône en ligne : le tracé du <symbol> en hérite par <use>.
+  def sprite_icon(set, name, classes, a11y)
+    root, paths = ICON_CACHE[[ set, name, :sprite ]] ||= begin
+      attributes, inner = heroicon_source(set, name).match(%r{\A<svg ([^>]*)>\s*(.*?)\s*</svg>\z}m).captures
+      [ attributes.gsub(/\s*(?:xmlns|aria-hidden|data-slot)="[^"]*"/, "").strip, inner ]
+    end
+    id = "icon-#{set.tr('/', '-')}-#{name}"
+    @icon_sprite[id] ||= [ root[/viewBox="([^"]*)"/, 1], paths ]
+    %(<svg class="#{ERB::Util.html_escape(classes)}" #{a11y} focusable="false" #{root}><use href="##{id}"></use></svg>).html_safe # rubocop:disable Rails/OutputSafety -- classes échappées, attributs du fichier vendu
   end
 
   def heroicon_source(set, name)
