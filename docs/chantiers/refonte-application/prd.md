@@ -41,8 +41,9 @@ Règle qui gouverne tout le tableau : **chaque use case déclare sa policy, chaq
 | Créer un compte `team` | — | — | ✅ *invitation* | — | `Identity::InviteTeamPolicy` |
 | Supprimer ou anonymiser un compte | — | — | ✅ | — | `Identity::DeleteUserPolicy` |
 | Modifier son propre profil / son PIN | ✅ | ✅ | ✅ | ✅ | `Identity::UpdateSelfPolicy` — **PIN actuel exigé** |
-| Publier une annonce | — | — | ✅ | — | `Communication::PublishPolicy` |
-| Lire une annonce | ✅ *son audience, publiée* | ✅ *idem* | ✅ | ✅ *idem* | `Communication::ReadPolicy` |
+| Publier une annonce | — | ✅ *à ses classes (2026-10-04, ADR-0078)* | ✅ | ✅ *pour son école, officielle (2026-10-04, ADR-0078)* | `Communication::PublishPolicy` |
+| Retirer l'annonce d'un autre auteur | — | — | ✅ | ✅ *d'un enseignant de son école (2026-10-04, ADR-0078)* | `Communication::WithdrawPolicy` |
+| Lire une annonce | ✅ *son audience, publiée, non terminée* | ✅ *idem* | ✅ | ✅ *idem* | règle de lecture unique `Queries::Communication::ReadableMessages` *(ADR-0078 §4.3)* |
 
 Les noms de policies sont indicatifs ; leur forme exacte est fixée par la décision F-04.
 

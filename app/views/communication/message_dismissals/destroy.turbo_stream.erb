@@ -1,0 +1,10 @@
+<%# 🌐 UI · communication/message_dismissals/destroy — réponse à « Annuler » et à « Réafficher » (UDR-0071 §3.5, §3.7) %>
+<%# Rôle : la carte redevient visible (liste, avec sa croix), puis le carrousel est recalculé (accueil) ; aucun nouveau toast %>
+<%# ADR  : 0078 · UDR : 0071 · un remplacement sans cible dans la page ne fait rien : chaque page ne reçoit que le sien %>
+<%# La carte d'abord : sur l'accueil, elle n'est pas dans le carrousel (masquée) ; le carrousel recalculé la rend. %>
+<% if @card %>
+  <%= turbo_stream.replace "announcement_#{@card.public_id}", partial: "communication/messages/card",
+                           locals: { card: @card, context: :list, dismissible: !@card.official? } %>
+<% end %>
+<%= turbo_stream.replace "student_home_announcements", partial: "communication/messages/carousel",
+                         locals: { carousel: @carousel, refocus: true } %>

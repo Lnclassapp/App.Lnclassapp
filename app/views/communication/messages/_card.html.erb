@@ -1,0 +1,81 @@
+<%# 🌐 UI · communication/messages/_card — une annonce : signature, titre, texte, illustration ou image, audio (UDR-0071 §3.2, §3.4) %>
+<%# Rôle : locaux card: (InboxQuery::MessageCard), context: (:carousel, :list, :moderation), dismissible: (croix) ; jamais un lien %>
+<%# ADR  : 0078 · UDR : 0005, 0071 %>
+<% dom_id = "announcement_#{card.public_id}" %>
+<%= tag.article id: dom_id, "aria-labelledby": "#{dom_id}_title",
+                class: "relative flex min-h-40 gap-2 rounded-ln bg-brand-soft py-3 pr-2 pl-4 text-school" do %>
+  <div class="flex min-w-0 flex-1 flex-col justify-center gap-1">
+    <p class="flex min-w-0 items-center gap-1.5 text-xs font-bold text-school/80">
+      <% if card.author_role == :team %>
+        <%= image_tag "lnclass/icon.svg", alt: "", class: "size-5 shrink-0 rounded-sm" %>
+        <span><%= announcement_signature(card) %></span>
+      <% else %>
+        <%= ui_icon "user", variant: :mini, size: :sm %>
+        <span class="truncate"><%= announcement_signature(card) %></span>
+        <% if card.official? %>
+          <%# Le caractère officiel n'est pas porté par la seule couleur (UDR-0071, Accessibilité). %>
+          <%= ui_icon "check-badge", variant: :solid, size: :sm, class: "text-brand-strong" %>
+          <span class="sr-only"><%= t("communication.card.official") %></span>
+        <% end %>
+      <% end %>
+    </p>
+    <h3 id="<%= dom_id %>_title" class="text-base leading-snug font-bold"><%= card.title %></h3>
+    <%# Texte simple de l'auteur, toujours échappé (AN-20) : jamais raw ni html_safe. %>
+    <p class="text-sm"><%= card.body %></p>
+    <% restorable = context == :list && card.dismissed? %>
+    <% if card.edited? || restorable %>
+      <div class="flex flex-wrap items-center gap-2">
+        <% if card.edited? %>
+          <%= ui_badge t("communication.card.edited"), tone: :neutral, size: :sm %>
+        <% end %>
+        <% if restorable %>
+          <%= ui_badge t("communication.card.dismissed"), tone: :neutral, size: :sm %>
+          <%= button_to t("communication.card.restore"), announcement_dismissal_path(card.public_id), method: :delete,
+                        data: { turbo_stream: true },
+                        class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm],
+                                           ComponentsHelper::BUTTON_VARIANTS[:secondary]) %>
+        <% end %>
+      </div>
+    <% end %>
+    <%# Message d'échec de l'audio (UDR-0071 §3.4), annoncé ; vide par défaut. %>
+    <p class="text-xs text-school/80" aria-live="polite" data-communication--audio-target="status"></p>
+  </div>
+  <div class="flex w-24 shrink-0 flex-col items-center justify-end gap-1.5">
+    <% if card.image? %>
+      <%# L'image téléversée remplace l'illustration ; décorative, son contenu est redit par le texte ou l'audio. %>
+      <%= image_tag announcement_file_path(card.public_id, kind: "image"), alt: "", loading: "lazy", decoding: "async",
+                    class: "size-16 rounded-ln object-cover" %>
+    <% else %>
+      <%= announcement_illustration card.illustration, class: "size-16" %>
+    <% end %>
+    <% if card.audio? %>
+      <%# Rien n'est téléchargé avant l'appui sur ▶ (preload="none"). %>
+      <%= tag.div data: { controller: "communication--audio",
+                          communication__audio_labels_value: t("communication.audio.labels").to_json,
+                          communication__audio_unavailable_value: t("communication.audio.unavailable"),
+                          communication__audio_key_value: card.public_id } do %>
+        <button type="button" data-state="new" aria-label="<%= t("communication.audio.labels.new") %>"
+                data-action="communication--audio#toggle" data-communication--audio-target="button"
+                class="grid size-tap cursor-pointer place-items-center rounded-full text-school focus-visible:outline-2 focus-visible:outline-brand">
+          <span class="grid size-8 place-items-center rounded-full border-2 border-white">
+            <%= ui_icon "play", variant: :solid, size: :sm %>
+            <%= ui_icon "pause", variant: :solid, size: :sm, class: "hidden" %>
+          </span>
+        </button>
+        <audio preload="none" src="<%= announcement_file_path(card.public_id, kind: "audio") %>"
+               data-communication--audio-target="player"></audio>
+        <noscript>
+          <%= link_to t("communication.audio.fallback"), announcement_file_path(card.public_id, kind: "audio"),
+                      class: "text-xs font-bold underline" %>
+        </noscript>
+      <% end %>
+    <% end %>
+  </div>
+  <% if dismissible && !card.dismissed? %>
+    <%= button_to announcement_dismissal_path(card.public_id), method: :post, form: { class: "absolute top-0 right-0" },
+                  data: { turbo_stream: true }, "aria-label": t("communication.card.dismiss", title: card.title),
+                  class: "grid size-tap cursor-pointer place-items-center rounded-tr-ln rounded-bl-card text-school hover:bg-school/5 focus-visible:outline-2 focus-visible:outline-brand" do %>
+      <%= ui_icon "x-mark", size: :sm %>
+    <% end %>
+  <% end %>
+<% end %>

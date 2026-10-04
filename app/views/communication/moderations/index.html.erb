@@ -1,0 +1,41 @@
+<%# 🌐 UI · communication/moderations/index — « Enseignants » (direction) et « Toutes » (équipe) de la page « Annonces » %>
+<%# Rôle : les annonces en cours qu'on peut retirer, en cartes, 20 par page ; l'équipe les filtre par établissement (frame) %>
+<%# ADR  : 0078 · UDR : 0005, 0054 (§3.9), 0071 (§3.7) · Stimulus : search, modal %>
+<% role = current_actor.team? ? "team" : "school_admin" %>
+<% page_title t(".page_title.#{role}") %>
+<% content_for :nav_key, "announcements" %>
+<%= ui_page_header title: t(".title") %>
+<%= render "communication/shared/tabs", role: current_actor.role, current: :moderation %>
+
+<% if current_actor.team? %>
+  <%# Recherche pendant la frappe (UDR-0054 §3.9) : le champ reste hors du frame ; « Filtrer » sert sans JavaScript. %>
+  <%= form_with url: moderated_announcements_path, method: :get, id: "moderation-filter",
+                html: { role: "search", "aria-label": t(".filter.label") },
+                data: { controller: "search", turbo_frame: "moderated_announcements", turbo_action: "advance" },
+                class: "mb-5 flex flex-col gap-3 sm:flex-row sm:items-end" do |form| %>
+    <div class="min-w-0 sm:flex-1">
+      <%= ui_field form, :q, as: :search, label: t(".filter.school"), hint: t(".filter.hint"), name: "q", value: @search,
+                             autocomplete: "off", data: { action: "search#queue" } %>
+    </div>
+    <%= ui_button t(".filter.submit"), type: :submit, variant: :secondary, icon: "magnifying-glass",
+                                       data: { search_target: "button" } %>
+    <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
+    <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
+  <% end %>
+<% end %>
+
+<%# Le frame porte l'id de l'UDR ; la liste prend le suffixe _list (comme schools et courses) : deux id égaux dans une page
+    se contrediraient. Pendant un filtre ou une page, Turbo pose aria-busy sur le frame : le squelette remplace la liste. %>
+<%= turbo_frame_tag "moderated_announcements", class: "group block", data: { turbo_action: "advance" } do %>
+  <div class="hidden group-aria-busy:block"><%= ui_loading_state variant: :skeleton %></div>
+  <div class="space-y-5 group-aria-busy:hidden">
+    <% if @page.rows.empty? %>
+      <%= ui_empty_state title: t(".empty.#{@search.present? ? 'search' : role}"), icon: "megaphone" %>
+    <% else %>
+      <ul id="moderated_announcements_list" class="grid gap-3 sm:grid-cols-2">
+        <%= render partial: "moderated_message", collection: @page.rows, as: :row %>
+      </ul>
+      <%= ui_pagination page: @page.page, pages: @page.pages %>
+    <% end %>
+  </div>
+<% end %>
