@@ -66,9 +66,6 @@ group :development, :test do
 
   # Detect N+1 queries and unused eager loading [https://github.com/flyerhzm/bullet]
   gem "bullet"
-
-  # Debug toolbar for requests, queries and logs [https://github.com/julienbourdeau/debugbar]
-  gem "debugbar"
 end
 
 group :development do

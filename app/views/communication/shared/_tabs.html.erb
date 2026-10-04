@@ -1,6 +1,6 @@
-<%# 🌐 UI · communication/shared/_tabs — onglets par URL de la page « Annonces », un onglet = une route (UDR-0056 §3.7) %>
+<%# 🌐 UI · communication/shared/_tabs — onglets par URL de la page « Annonces », un onglet = une route (UDR-0071 §3.7) %>
 <%# Rôle : locaux current: (:received, :mine, :moderation) et role: ; onglets du rôle, aria-current sur le courant ; rien pour l'élève %>
-<%# ADR  : 0069 · UDR : 0005, 0056 %>
+<%# ADR  : 0078 · UDR : 0005, 0071 %>
 <% role = role.to_sym %>
 <% current = current.to_sym %>
 <% keys = { teacher: %i[received mine], school_admin: %i[received mine moderation], team: %i[mine moderation] }.fetch(role, []) %>

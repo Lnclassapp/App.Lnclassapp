@@ -84,3 +84,10 @@ L'entrée « Pilotage » de la navigation équipe est grisée depuis la V1. L'é
 - **Infobulles** : « Réussite moyenne » (et son « — »), « Élèves actifs » et « Établissements actifs » du tableau par DRENA (UDR-0054 §3.4).
 - La recherche d'un compte du pilotage **n'est pas** dynamique (décision du porteur, 2026-09-29).
 - Titre : « Pilotage · Équipe · Lnclass ».
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0068](0068-configuration-et-pilotage-par-etablissement.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Chercher une DRENA** (UDR-0068 §3.5) : un champ en tête du tableau « Par DRENA » filtre ses lignes dans le navigateur (contrôleur `table-filter`) ; masqué sans JavaScript. La recherche de comptes ne bouge pas.
+- **Une DRENA cliquable** : son nom mène au pilotage filtré sur elle, période gardée. Sous filtre, « Par DRENA » laisse place à « Par établissement » (UDR-0068 §3.6), paginé par 25 et cherché côté serveur (`school_q`, `school_page`, mêmes règles de paramètres invalides que le §« Amendement du 2026-09-28 »).

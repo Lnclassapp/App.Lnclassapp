@@ -6,11 +6,12 @@ module Ports
       Resolved = AssignmentRepositoryPort::ResolvedAssignable
 
       test "une ressource est lisible si elle et ses parents sont publiés" do
-        assignable = Entities::Classroom::Assignable.new(type: "Essential", id: 1, key: "mitose")
+        assignable = Entities::Classroom::Assignable.new(type: "Exercise", id: 1, key: "Xy12ab")
+        course_level = { level_id: 6, series_id: nil }
 
-        assert Resolved.new(assignable:, status: "published", parents_published: true).readable?
-        assert_not Resolved.new(assignable:, status: "published", parents_published: false).readable?
-        assert_not Resolved.new(assignable:, status: "draft", parents_published: true).readable?
+        assert Resolved.new(assignable:, status: "published", parents_published: true, course_level:).readable?
+        assert_not Resolved.new(assignable:, status: "published", parents_published: false, course_level:).readable?
+        assert_not Resolved.new(assignable:, status: "draft", parents_published: true, course_level:).readable?
       end
     end
   end

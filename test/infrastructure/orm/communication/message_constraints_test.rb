@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0069 §4.1 (amends ADR-0045 §4): the three tables of the announcements and every rule the database holds by itself.
+# ADR-0078 §4.1 (amends ADR-0045 §4): the three tables of the announcements and every rule the database holds by itself.
 # Each CHECK refuses a faulty row; dismissals and targeted classrooms are unique per pair; the files hang on the message.
 class Orm::MessageConstraintsTest < ActiveSupport::TestCase
   CHECKS = %w[messages_audience_values messages_status_values messages_illustration_values messages_title_present
@@ -61,7 +61,7 @@ class Orm::MessageConstraintsTest < ActiveSupport::TestCase
     assert write(status: "draft", published_at: nil, ends_at: nil).persisted?
   end
 
-  # ADR-0069, amendment of 2026-10-04: a draft archived before going live has no end date, and must stay archivable.
+  # ADR-0078, amendment of 2026-10-04: a draft archived before going live has no end date, and must stay archivable.
   test "a scheduled or published message has an end date; a draft, even archived, may have none" do
     assert_refused(ends_at: nil)
     assert_refused(status: "scheduled", ends_at: nil)

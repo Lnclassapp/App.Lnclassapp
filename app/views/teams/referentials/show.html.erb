@@ -1,0 +1,8 @@
+<%# 🌐 UI · teams/referentials/show — page « Référentiel » de l'équipe (RE-03), atteinte par la carte « Configuration » et le menu « Plus » %>
+<%# Rôle : en-tête de page, puis les tuiles et la structure scolaire (_summary) ; entrée « Référentiel » courante (nav_key) %>
+<%# ADR  : 0034, 0058 · UDR : 0018, 0054 (« Référentiel · Équipe · Lnclass »), 0068 (§3.4) %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "referential" %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+
+<%= render "teams/referentials/summary", home: @home %>

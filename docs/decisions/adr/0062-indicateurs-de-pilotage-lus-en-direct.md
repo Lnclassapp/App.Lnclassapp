@@ -171,3 +171,13 @@ Lectures groupées : un `GROUP BY` par dimension (rôle, niveau, DRENA) ; la cou
 - `PERF=1 test/performance/school/heavy_screens_budget_test.rb` : p95 de la vue « année » à chaud sous 300 ms ; le froid est affiché.
 - `script/perf/measure_screens.rb` et `PERF_COLD=1` : la page à chaud et à froid.
 
+## Amendement du 2026-10-03 — lecture « Par établissement » d'une DRENA
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0068](../udr/0068-configuration-et-pilotage-par-etablissement.md) §3.6. Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Nouvelle lecture** `Queries::School::DrenaSchoolsQuery`, servie par le pilotage sous filtre DRENA : les établissements de la DRENA et, pour chacun, classes, enseignants, élèves et élèves actifs.
+- **Mêmes définitions** que `TeamDashboardQuery#drena_rows`, établissement par établissement : classes actives de l'année scolaire ; enseignants rattachés à titre principal, non anonymisés ; élèves placés (classe principale, non quittée, active, de l'année) ; élèves placés ayant commencé une session dans la période. Une définition qui change, change pour les deux lectures.
+- **Liste** : les établissements actifs, plus tout établissement non actif qui compte encore une classe, un enseignant ou un élève, pour que **la somme des établissements égale la ligne de la DRENA** (critère RE-08, testé).
+- **Nombre de requêtes fixe** (le total, puis une page de 25 aux chiffres calculés par agrégats groupés ou sous-requêtes), quel que soit le nombre d'établissements ; tri par élèves décroissants, nom, id ; recherche par `Queries::Shared::TextSearch` sur le nom.
+- **Aucun cache** : la page d'établissements n'entre pas dans le cache des chiffres de l'année (second amendement du 2026-09-29) ; `CACHE_VERSION` reste 1. Budget : celui du pilotage (ADR-0067, < 300 ms p95), mesuré sur la plus grande DRENA du jeu de mesure ; un dépassement ouvre un chantier `optimize` (index d'abord).
+

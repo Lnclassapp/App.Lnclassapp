@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::AttachmentStore
 # Rôle : image et audio d'une annonce en pièces jointes, sur le service Active Storage (bucket) ; lecture par plage d'octets
-# ADR  : 0045, 0047, 0069
+# ADR  : 0045, 0047, 0078
 module Repositories
   module Communication
     class AttachmentStore

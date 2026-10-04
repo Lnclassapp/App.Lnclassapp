@@ -1,0 +1,23 @@
+<%# 🌐 UI · communication/articles/_article_card — carte d'un article dans la liste /blog : lien étiré sur le titre %>
+<%# Rôle : locals article: (PublishedArticlesQuery::Row), eager: (vrai pour la première carte de la page) ; ni signature, ni lectures, ni badge %>
+<%# UDR  : 0066 (§2.3, §3.2), 0057 (lien étiré) %>
+<%= ui_card padding: :none, id: "blog_article_#{article.slug}",
+            class: "relative overflow-hidden transition hover:border-brand/40 hover:shadow-lift active:bg-mist motion-reduce:transition-none" do %>
+  <% if article.cover %>
+    <%# alt vide : le titre du lien dit déjà tout (R6) ; le texte de remplacement est lu sur la page de l'article. %>
+    <%= image_tag article_image_src(article.cover), alt: "", width: article.cover.width, height: article.cover.height,
+                                                    loading: (eager ? :eager : :lazy), decoding: :async,
+                                                    class: "aspect-video w-full bg-mist object-cover" %>
+  <% end %>
+  <div class="p-5">
+    <h2 class="font-display text-lg leading-tight font-extrabold break-words hyphens-auto">
+      <%= link_to article.title, blog_article_path(article.slug),
+                  class: "text-ink after:absolute after:inset-0 after:rounded-card focus-visible:outline-none
+                          focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-brand" %>
+    </h2>
+    <p class="mt-2 text-sm text-mute"><%= article.excerpt %></p>
+    <p class="mt-3 text-xs text-mute">
+      <time datetime="<%= article.published_on.iso8601 %>"><%= t(".published_on", date: article_date(article.published_on)) %></time>
+    </p>
+  </div>
+<% end %>

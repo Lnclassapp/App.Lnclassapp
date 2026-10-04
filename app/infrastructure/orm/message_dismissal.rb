@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::MessageDismissal
 # Rôle : table message_dismissals, une annonce masquée par un élève, sur tous ses appareils ; unique par compte
-# ADR  : 0045, 0069
+# ADR  : 0045, 0078
 module Orm
   class MessageDismissal < ApplicationRecord
     self.table_name = "message_dismissals"

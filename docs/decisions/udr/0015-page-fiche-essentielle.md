@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B3, critères CA-10, CA-11, AS-37 ; CA-29 (bandeau retiré) |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, tout exercice publié se démarre) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (lacune) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [ADR-0053](../adr/0053-validation-collaborative-requalifiee.md) (aucun label de conformité) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0016](0016-formulaire-fiche-essentielle.md) (modale « Modifier ») · [UDR-0017](0017-formulaire-exercice.md) (modale « Nouvel exercice ») · [UDR-0021](0021-page-exercice.md) (page d'un exercice) |
@@ -84,3 +84,99 @@ La fiche essentielle est la page que l'élève ouvre pour réviser, puis pour s'
 - Retour : `ui_back_link` vers `course_path`, libellé = nom du cours (au lieu de « Cours : <nom> »).
 - Titre : « <nom de la fiche> · <espace> · Lnclass » (au lieu de « Fiche essentielle : <nom> »).
 - Badges de progression : suivis d'une infobulle des seuils (UDR-0054 §3.4).
+
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
+
+> **Décision du porteur (2026-10-02)** : amendement accepté. Les retraits ne valent **que pour l'élève** : l'enseignant et l'équipe gardent ces écrans inchangés, y compris pour les simples répétitions. Toute ligne du tableau ci-dessous qui vise un autre rôle est caduque.
+
+*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot D, règle de l'[UDR-0057](0057-ecrans-eleve-epures.md). Le texte ci-dessus et les amendements précédents restent en vigueur. Une fois acceptée, cette section fait foi en cas d'écart.*
+
+Aujourd'hui, chaque ligne d'exercice montre jusqu'à huit éléments, et chaque ligne a son bouton `primary` ou `brand`. Cet amendement applique la règle de sobriété à la fiche, telle que l'élève la voit. La fiche n'a pas de maquette : elle garde une seule mise en page, épurée à toutes les tailles (UDR-0057 §3). Le détail retiré des lignes est déjà sur la page de l'exercice (UDR-0021, `#student_progress`), à un tap.
+
+### Changements pour l'élève
+
+| Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
+|---|---|---|---|---|
+| Surtitre de l'en-tête | « Fiche essentielle · <cours> » | « Fiche essentielle », pour l'élève seulement (décision du porteur du 2026-10-02) | R6 | Le lien de retour nomme déjà le cours (`ui_back_link course.name`). |
+| Encart `#essential_gap` | Titre, date, puis la règle pour lever la lacune, en toutes lettres | Titre suivi de `ui_info_tip t(".gap_body", threshold: …), label: t(".gap_title")`, puis la date | R4 | Dans l'infobulle, texte inchangé. |
+| Aide « Badges » (`#essential_badges_help`) | Au-dessus de la liste, avec son infobulle | Retirée | R4 | Les badges quittent les lignes. Leur explication reste sur la page de l'exercice : infobulles « Badge » et « Maîtrise » de `#student_progress`. |
+| Liste `#essential_exercises` | Tous les exercices | Les 3 premières lignes, puis « Voir plus » | R3 | Les lignes suivantes sont rendues, en `hidden`. « Voir plus » les révèle sans requête. |
+| Bouton de chaque ligne | « Commencer » `primary` ou « Reprendre » `brand`, sur chaque ligne | `primary` sur la première ligne seulement, `secondary` ensuite. « Reprendre » n'est plus `brand`. | R1 | Même motif que l'accueil sur ordinateur (UDR-0058 §3.3). Libellés, icônes et noms accessibles inchangés. |
+| Description de l'exercice | 2 lignes sous le titre | Retirée de la ligne | Q4 | Page de l'exercice, `#exercise_description`. |
+| Type (« Fixation », « Évaluation ») | `ui_badge` `brand` | Texte du sous-texte de la ligne | Q4, R5 | Reste dans la ligne : il sert à choisir. Aussi dans l'en-tête de la page de l'exercice. |
+| « Assigné par ton enseignant » | `ui_badge` ton `teacher`, icône `user-group` | Texte du sous-texte : « Fixation · Assigné par ton enseignant » | Q4, R5 | Reste dans la ligne : il sert à choisir. La page de l'exercice ne le montre pas. |
+| « N questions » | `ui_badge` sur chaque ligne | Retiré de la ligne | Q4 | Page de l'exercice, badges de l'en-tête. |
+| Badge de l'élève (« Badge Or ») | Ligne de progression | Retiré de la ligne | Q4 | `#student_progress` : « Badge ». |
+| Meilleur score et maîtrise | « Meilleur score : 85 % » et « Acquis » | Retirés de la ligne | Q4 | `#student_progress` : « Meilleur score » et « Maîtrise ». |
+| « Pas encore de session terminée » | Ligne de progression | Retiré de la ligne | Q4 | `#student_progress` : « Aucune session terminée ». |
+| Forme de la ligne | Seul le titre est un lien. La ligne s'empile au téléphone. | La ligne entière est le lien (lien étiré vers `exercise_path`). Elle reste horizontale à toutes les tailles : titre et sous-texte à gauche, le bouton à droite. État pressé `active:bg-mist`. | Règle « Listes » de l'UDR-0057 | Le détail (score, badge, maîtrise, sessions) est à un tap. |
+
+La colonne de droite porte une seule donnée : l'action. La ligne ne dit pas « Commencé » : le bouton « Reprendre » le dit déjà (R6). La pastille de matière de la règle « Listes » n'est pas rendue : tous les exercices de la fiche ont la matière du cours, déjà dite par le badge de l'en-tête (R6).
+
+Ce qui ne change pas pour l'élève : le retour (nom du cours), le titre, le sous-titre, les badges de matière et de niveau, le contenu sous KaTeX, le titre « Exercices » et son compteur, la date de l'encart, les états vides.
+
+### Contrôle de la règle
+
+| Règle | Fiche essentielle (élève) |
+|---|---|
+| R1 — une action principale | Respectée : le bouton de la première ligne est le seul `primary`. Aucun `brand`. Sans exercice, aucune action principale. |
+| R2 — 5 blocs au plus avant le défilement | 2 : `#essential_header` (retour compris), puis le conteneur de l'encart et des exercices. |
+| R3 — 3 lignes, puis « Voir plus » | Respectée : `#essential_exercises` montre 3 lignes, puis « Voir plus ». |
+| R4 — aucun texte d'aide permanent | Respectée : la règle de la lacune passe dans une infobulle ; l'aide « Badges » est retirée. Les états vides gardent leur phrase, obligatoire (UDR-0057, « États obligatoires »). |
+| R5 — un seul accent | Respectée : le ton `teacher`, le badge de type `brand` et les tons des badges de progression quittent les lignes. Restent le badge de matière (codage par catégorie), le `warning` de l'encart (signal) et le compteur `brand`. |
+| R6 — une information une fois | Respectée : le cours est nommé une fois (le retour), la matière une fois (l'en-tête). L'état d'un exercice est dit une fois, par le libellé du bouton. |
+
+### Règles d'implémentation
+
+**`catalog/essentials/show`**
+- Surtitre : élève, `t(".student_eyebrow")`, sans interpolation ; enseignant et équipe, `t(".eyebrow", course:)`, inchangé.
+- `#essential_gap` : `h2#essential_gap_title` puis, sur la même ligne, `ui_info_tip t(".gap_body", threshold: Entities::Assessment::Grading::REMEDIATION_THRESHOLD), label: t(".gap_title")`. Puis `t(".gap_since", …)`. Le paragraphe `gap_body` visible disparaît. L'icône `light-bulb`, `bg-warning-soft` et la date restent.
+- `#essential_badges_help` est retiré.
+- La liste est rendue par `exercises.each_with_index`. Chaque ligne reçoit `primary: @student && index.zero?` et `folded: @student && index >= 3`.
+- Une ligne `folded` porte `hidden` et la cible du contrôleur `reveal`, selon le contrat du Lot 0.
+- Après le `ul`, si l'élève a plus de 3 exercices : « Voir plus » du Lot 0 (`ui_button`, `ghost`, pleine largeur, contrôleur `reveal`, région `aria-live="polite"`, textes de `shared.components`).
+- Enseignant et équipe : la liste reste complète, sans « Voir plus ».
+
+**`_exercise_progress`**
+- Locals stricts : `(exercise:, student:, team:, primary: false, folded: false)`.
+- Élève : `li#essential_exercise_<public_id>.relative.flex.items-center.gap-3.px-5.py-4.active:bg-mist.sm:px-6`.
+  - À gauche, `div.min-w-0.flex-1` : le titre en lien vers `exercise_path`, `truncate`, avec `after:absolute after:inset-0` (motif de `classroom/classrooms/_assigned_courses`) ; dessous, le sous-texte `p.text-sm.text-mute` : `t(".exercise_types.<type>")`, puis `· t(".assigned")` si `exercise.assigned_to_my_classroom`.
+  - À droite, `div.relative.shrink-0` (au-dessus du lien étiré) : « Reprendre » (`ui_button`, `href:` la session, icône `arrow-path`) ou « Commencer » (`button_to` POST `exercise_sessions_path`, icône `play`). Variante `primary` si `primary`, sinon `secondary`, taille `sm` dans les deux cas.
+  - Pas de description, de badge, de « N questions », de score, de maîtrise ni de « Pas encore de session terminée ».
+- Enseignant et équipe : la ligne actuelle, inchangée.
+
+**`config/locales/catalog/essentials.fr.yml`**
+- Ajouter `show.student_eyebrow` : « Fiche essentielle ». `show.eyebrow` (« Fiche essentielle · %{course} ») reste : l'enseignant et l'équipe le lisent.
+- Retirer `show.badges_help`, `exercise_progress.badge`, `exercise_progress.best_score` et `exercise_progress.not_started`, devenus inutilisés. `exercise_progress.questions` reste : l'enseignant et l'équipe le lisent.
+
+**Tokens** : tokens du `@theme` seulement (UDR-0005). Aucune couleur en dur, aucune valeur entre crochets, aucun `dark:`.
+
+### Inchangé pour l'enseignant et l'équipe
+
+- `#essential_team_actions` : le panneau de statut et le menu ⋮ (« Modifier », « Nouvel exercice », « Importer des exercices », transitions, « Tout publier »).
+- La ligne d'exercice de l'enseignant et de l'équipe : titre, description, type, « N questions », statut, « Voir l'exercice » (`secondary`).
+- La liste complète des exercices, sans « Voir plus ».
+- Les états vides de l'équipe.
+- Le surtitre « Fiche essentielle · <cours> » (décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève).
+
+### Vérification
+
+- `test/controllers/catalog/essentials_controller_test.rb` : la fiche de l'élève ne montre plus ni badge ni meilleur score ; chaque ligne porte son type, et « Assigné par ton enseignant » quand il le faut ; la règle de la lacune reste dans `#essential_gap`, dans l'infobulle.
+- `test/system/catalog/essential_page_test.rb` : le badge Or à 80 % se vérifie sur la page de l'exercice, après un tap sur la ligne. À 390 × 844, sur une fiche à 4 exercices : `assert_single_primary_action`, `assert_blocks_above_fold(max: 5)` et `assert_list_capped(max: 3)` sur `#essential_exercises`, puis « Voir plus » montre le 4e.
+- Les tests de l'équipe (`test/system/teams/essential_management_test.rb`) restent verts sans changement.
+
+## Amendement du 2026-10-02 — une fiche ne s'assigne plus · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md), grill Q6 et Q7 ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; [UDR-0062](0062-echeances.md) §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **Aucun bouton à retirer de cette page.** La fiche du catalogue ne porte pas d'assignation (§2.7 : « L'assignation se fait depuis la classe ») ; la bascule d'une fiche est sur la fiche dans la classe (UDR-0029), qui la perd.
+- **§2.5, « Assigné par ton enseignant »** : un exercice porte l'étiquette s'il est assigné **directement** à la classe principale active de l'élève. « Par sa fiche ou par son cours » disparaît : ces assignations n'existent plus. `Queries::Catalog::EssentialDetailQuery` ne lit plus que les assignations `Exercise`.
+- L'échéance n'est **pas** répétée sur cette page : elle est sur l'accueil (UDR-0062 §3.2, R6).
+- **§2.7** : inchangé pour l'enseignant (« Voir l'exercice », sans action) ; il assigne depuis la fiche dans la classe, avec l'étape des jours de séance (UDR-0062 §3.4).
+- **Vérification** : `test/controllers/catalog/essentials_controller_test.rb` — l'étiquette « Assigné par ton enseignant » apparaît pour un exercice assigné à la classe, et pour lui seul.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Enseignant** : sous chaque exercice publié, une bascule d'assignation par classe de l'enseignant au niveau et à la série du cours ; sans telle classe, la phrase « Aucune de vos classes n'est en <niveau série>. » au-dessus des exercices (UDR-0069 §3.8). Équipe et élève : inchangés.

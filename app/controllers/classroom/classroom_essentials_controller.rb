@@ -1,6 +1,7 @@
 # 🌐 DELIVERY · Classroom::ClassroomEssentialsController
-# Rôle : une fiche essentielle vue depuis une classe (CL-12, AS-20) : ses exercices publiés, chacun avec sa bascule d'assignation
-# ADR  : 0026, 0028, 0048 · UDR : 0006, 0028, 0029
+# Rôle : une fiche essentielle vue depuis une classe (CL-12, AS-20) : ses exercices publiés, chacun avec sa bascule d'assignation ;
+#        l'enseignant sans jours de séance y ouvre la modale des jours
+# ADR  : 0026, 0028, 0048, 0072 · UDR : 0006, 0028, 0029, 0062
 module Classroom
   class ClassroomEssentialsController < AuthenticatedController
     # Comme la page de la classe (D4) : l'élève lit ses exercices sur ses propres pages.
@@ -19,7 +20,8 @@ module Classroom
     def load_essential
       @essential = Queries::Classroom::ClassroomEssentialQuery.new.call(classroom_public_id: @classroom.public_id,
                                                                         course_slug: params[:course_slug],
-                                                                        essential_slug: params[:essential_slug])
+                                                                        essential_slug: params[:essential_slug],
+                                                                        teacher_id: (current_actor.user_id if current_actor.teacher?))
       render_not_found if @essential.nil?
     end
   end

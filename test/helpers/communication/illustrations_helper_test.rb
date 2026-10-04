@@ -1,7 +1,7 @@
 require "test_helper"
 
 module Communication
-  # UDR-0056 §3.3 : la bibliothèque fermée des huit illustrations d'annonce. Chacune est un SVG décoratif de 64 unités,
+  # UDR-0071 §3.3 : la bibliothèque fermée des huit illustrations d'annonce. Chacune est un SVG décoratif de 64 unités,
   # en aplats, dont les couleurs ne viennent que des tokens (UDR-0005), sans personnage ni texte.
   class IllustrationsHelperTest < ActionView::TestCase
     KEYS = Entities::Communication::Message::ILLUSTRATIONS

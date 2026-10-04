@@ -22,7 +22,7 @@ module UseCases
         return Shared::Result.failure(:not_found) if exercise.nil?
 
         # parents_published : la fiche essentielle et son cours, toute la chaîne que l'élève doit pouvoir lire.
-        transition = Entities::Catalog::ContentStatus.transition(from: exercise.status, to: "published",
+        transition = Entities::Shared::ContentStatus.transition(from: exercise.status, to: "published",
                                                                  parent_published: exercise.parents_published)
         return transition if transition.failure?
         return Shared::Result.failure(:conflict, errors: { base: [ :not_publishable ] }) unless exercise.publishable?

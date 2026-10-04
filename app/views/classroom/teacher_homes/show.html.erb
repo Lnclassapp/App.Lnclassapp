@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
-<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes, activité, cours), collègues en attente, « Inviter un collègue » %>
-<%# ADR  : 0026, 0048, 0063 · UDR : 0006, 0007, 0026, 0050, 0054 · titre « Accueil · Enseignant · Lnclass » %>
+<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes et leur menu ⋮, cours par niveau, activités), collègues en attente, invitation sur téléphone %>
+<%# ADR  : 0026, 0048, 0063 · UDR : 0006, 0007, 0026, 0050, 0054, 0069 · titre « Accueil · Enseignant · Lnclass » %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle", school: @home.school_name) do %>
   <%= ui_subject_badge @home.material_name, category: @home.material_category %>
@@ -10,6 +10,11 @@
   <% home_sections_for(:teacher).each do |key, icon| %>
     <% if key == :classrooms %>
       <%= ui_card title: t(".classrooms_title"), subtitle: t(".classrooms_subtitle"), icon:, id: "teacher_home_classrooms" do |card| %>
+        <% card.actions do %>
+          <%= ui_dropdown label: t(".classrooms_menu"), id: "teacher-classrooms-menu" do %>
+            <%= ui_dropdown_item t(".edit_classrooms"), href: teacher_classrooms_path, icon: "pencil-square" %>
+          <% end %>
+        <% end %>
         <% if @home.classrooms.empty? %>
           <%= ui_empty_state title: t(".classrooms_empty"), description: t(".classrooms_empty_description"), icon: %>
         <% else %>
@@ -17,19 +22,18 @@
             <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom %>
           </ul>
         <% end %>
+      <% end %>
+    <% elsif key == :courses %>
+      <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle", material: @home.material_name), icon:,
+                  id: "teacher_home_courses" do |card| %>
+        <%= render "course_levels", home: @home, invite: @invite %>
         <% card.footer do %>
-          <%= ui_button t(".edit_classrooms"), href: teacher_classrooms_path, variant: :secondary, size: :sm, icon: "pencil-square" %>
+          <%= ui_button t(".all_courses"), href: courses_path, variant: :ghost, size: :sm, icon_end: "arrow-right" %>
         <% end %>
       <% end %>
     <% elsif key == :activity %>
       <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon:, id: "teacher_home_activity" do %>
         <%= ui_empty_state title: t(".activity_soon"), description: t(".activity_soon_description"), icon: %>
-      <% end %>
-    <% elsif key == :courses %>
-      <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle"), icon:, href: courses_path, id: "teacher_home_courses" do %>
-        <span class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
-          <%= t(".courses_action") %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
-        </span>
       <% end %>
     <% end %>
   <% end %>
@@ -37,6 +41,7 @@
     <%= render "classroom/teacher_homes/pending_colleagues", pending: @pending_colleagues %>
   <% end %>
   <% if @invite %>
-    <%= render "identity/referrals/invite", invite: @invite %>
+    <%# Sur grand écran, la carte « Parrainage » de la barre latérale le remplace (UDR-0069 §3.6, §3.7). %>
+    <div class="lg:hidden"><%= render "identity/referrals/invite", invite: @invite %></div>
   <% end %>
 </div>

@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/articles/create — succès de la création d'un article (UDR-0067 §3.3) %>
+<%# Rôle : toast ; modale vidée ; liste re-demandée et fusionnée par morphing, le nouveau brouillon en tête %>
+<%# ADR  : 0035, 0074 · UDR : 0006, 0067 %>
+<%= turbo_stream_toast t(".created", title: @article.title), type: :success %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.refresh(request_id: nil) %>

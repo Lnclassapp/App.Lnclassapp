@@ -48,6 +48,7 @@ Puis, **avant d'écrire la moindre ligne de code** : [`../workflows/README.md`](
 | Démarrer un travail (`/feature`, `/bugfix`, `/refactor`, `/optimize`, `/hotfix`) | [`../workflows/README.md`](../workflows/README.md) |
 | Comprendre pourquoi un choix technique a été fait | [`../decisions/adr/`](../decisions/adr/) |
 | Savoir à quoi doit ressembler une vue | [`../decisions/udr/`](../decisions/udr/) et [`../design/README.md`](../design/README.md) |
+| Faire entrer la direction d'un établissement (invitation, inscription, connexion, espace direction) | [`onboarding-direction.md`](onboarding-direction.md) |
 | Retrouver une intention passée, une doc v1 | [`../archives/`](../archives/) — **jamais comme référence courante** |
 
 ---

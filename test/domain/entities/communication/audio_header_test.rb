@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Communication
-    # ADR-0069 §6 (ADR-0045 §4) : le format d'un audio se lit dans ses premiers octets, sans bibliothèque ; seuls MP3 et
+    # ADR-0078 §6 (ADR-0045 §4) : le format d'un audio se lit dans ses premiers octets, sans bibliothèque ; seuls MP3 et
     # M4A passent, quelle que soit l'extension annoncée.
     class AudioHeaderTest < ActiveSupport::TestCase
       def bytes(*values, tail: "") = values.pack("C*") + tail.b

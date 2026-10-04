@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/join_codes/new — « Rejoindre une classe » : un seul champ, le code donné par le professeur %>
-<%# Rôle : le code, saisi n'importe comment, mène à /c/<code> s'il y ouvre un aperçu ; sinon erreur re-rendue en 422 (429 au-delà du débit) par Turbo %>
-<%# ADR  : 0041 · UDR : 0005, 0009, 0054 (§3.2 logo, §3.3 focus sur le code, §3.6 envoi au 5ᵉ caractère valide) %>
+<%# Rôle : le code (format en infobulle), saisi n'importe comment, mène à /c/<code> s'il y ouvre un aperçu ; sinon 422 (429 au-delà du débit) %>
+<%# ADR  : 0041 · UDR : 0005, 0009 (amendée le 2026-10-02), 0054 (§3.2 logo, §3.3 focus, §3.6 envoi au 5ᵉ caractère valide), 0057 %>
 <% page_title t(".page_title") %>
 <main class="flex min-h-dvh flex-col items-center justify-center bg-paper px-gutter py-10">
   <div class="w-full max-w-sm">
@@ -11,19 +11,19 @@
       <% end %>
     </div>
     <%= ui_card padding: :lg do %>
-      <div class="mb-6 text-center">
-        <h1 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h1>
-        <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
-      </div>
+      <h1 class="mb-6 text-center font-display text-xl font-extrabold text-ink"><%= t(".title") %></h1>
 
       <%# Motif du code d'adhésion (3 lettres sans I ni O, puis 2 chiffres de 2 à 9) ; « Continuer » reste sans JavaScript. %>
       <%= form_with model: @entry, scope: :join, url: join_codes_path, method: :post, id: "join-code-form", class: "space-y-5",
                     data: { controller: "autosubmit", autosubmit_pattern_value: "^[a-hj-np-zA-HJ-NP-Z]{3}[2-9]{2}$",
                             autosubmit_message_value: t("shared.autosubmit.sending") } do |form| %>
-        <%= ui_field form, :code, label: t(".code_label"), required: true, maxlength: 12, autocomplete: "off",
-                     autocapitalize: "characters", spellcheck: false, autofocus: true, placeholder: t(".code_placeholder"),
-                     hint: "#{t('.code_hint')} #{t('shared.autosubmit.hint_join')}", data: { autosubmit_target: "input" },
-                     class: "text-center font-display tracking-widest uppercase" %>
+        <div>
+          <%= ui_field form, :code, label: t(".code_label"), required: true, maxlength: 12, autocomplete: "off",
+                       autocapitalize: "characters", spellcheck: false, autofocus: true, placeholder: t(".code_placeholder"),
+                       hint: t("shared.autosubmit.hint_join"), data: { autosubmit_target: "input" },
+                       class: "text-center font-display tracking-widest uppercase" %>
+          <%= ui_info_tip t(".code_info_tip"), label: t(".code_label") %>
+        </div>
         <p class="sr-only" aria-live="polite" data-autosubmit-target="status"></p>
         <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, icon_end: "arrow-right" %>
       <% end %>

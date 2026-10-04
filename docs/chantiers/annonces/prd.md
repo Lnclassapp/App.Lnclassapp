@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-Lnclass n'a aucun moyen de faire passer une information à ses utilisateurs ([memo](memo.md)). Ce chantier donne la parole à trois auteurs (l'équipe, la direction, l'enseignant), chacun pour une audience bornée, sous la forme de cartes courtes et signées que l'élève lit sur son accueil et que les adultes lisent dans une page « Annonces ». Il applique l'[ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md), amendé par l'[ADR-0069](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) pour ce que le grill a changé.
+Lnclass n'a aucun moyen de faire passer une information à ses utilisateurs ([memo](memo.md)). Ce chantier donne la parole à trois auteurs (l'équipe, la direction, l'enseignant), chacun pour une audience bornée, sous la forme de cartes courtes et signées que l'élève lit sur son accueil et que les adultes lisent dans une page « Annonces ». Il applique l'[ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md), amendé par l'[ADR-0078](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) pour ce que le grill a changé.
 
 ## 2. Acteurs et permissions
 
@@ -18,7 +18,7 @@ Lnclass n'a aucun moyen de faire passer une information à ses utilisateurs ([me
 
 **Annonce officielle** : toute annonce dont l'auteur est une direction. Elle porte un badge vérifié et ne peut pas être masquée.
 
-**Règles d'autorisation** (ADR-0069 §6) : `Policies::Communication::PublishPolicy` (rédiger, et pour qui), `Policies::Communication::ManageOwnPolicy` (modifier, programmer, archiver : l'auteur seul), `Policies::Communication::WithdrawPolicy` (retirer), `Policies::Communication::ReadFilePolicy` (servir l'image ou l'audio d'une annonce), `Policies::Communication::DismissPolicy` (masquer). La lecture des listes n'a pas de policy à part : elle passe par la **seule** définition SQL de la règle ci-dessous (`Queries::Communication::ReadableMessages`), que `ReadFilePolicy` consulte aussi.
+**Règles d'autorisation** (ADR-0078 §6) : `Policies::Communication::PublishPolicy` (rédiger, et pour qui), `Policies::Communication::ManageOwnPolicy` (modifier, programmer, archiver : l'auteur seul), `Policies::Communication::WithdrawPolicy` (retirer), `Policies::Communication::ReadFilePolicy` (servir l'image ou l'audio d'une annonce), `Policies::Communication::DismissPolicy` (masquer). La lecture des listes n'a pas de policy à part : elle passe par la **seule** définition SQL de la règle ci-dessous (`Queries::Communication::ReadableMessages`), que `ReadFilePolicy` consulte aussi.
 
 ### Règle de lecture (la seule, partagée par la query, la policy et le service des fichiers)
 
@@ -205,27 +205,27 @@ Et un visiteur qui demande une page d'annonces est renvoyé vers « Se connecter
 # AN-23 — Lot 0 (routes) et Lot A
 Étant donné une direction connectée
 Alors les routes d'écriture des annonces lui sont ouvertes
-Et toute route sous /school-admin reste en GET seulement (DS-11, inchangé)
+Et aucune route d'annonce ne vit sous /school-admin
 ```
 
 Chaque critère a son test ; la règle de lecture du §2 a en plus un test de query par condition, et chaque policy un test de refus par acteur.
 
 ## 5. Modélisation préliminaire
 
-Détail et code : [ADR-0069 §6](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md#6-notes-dimplémentation). Contexte borné : **`communication`** (créé par ce chantier).
+Détail et code : [ADR-0078 §6](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md#6-notes-dimplémentation). Contexte borné : **`communication`** (créé par ce chantier).
 
 | Couche | Éléments prévus |
 |---|---|
 | Domaine | `Entities::Communication::Message`, `Reader`, `AudioHeader` ; `Dtos::Communication::MessageInput` ; ports `MessageRepositoryPort`, `DismissalRepositoryPort`, `AttachmentStorePort`, `ReadableMessagesPort` ; policies `PublishPolicy`, `ManageOwnPolicy`, `WithdrawPolicy`, `DismissPolicy`, `ReadFilePolicy` ; use cases `CreateMessage`, `UpdateMessage`, `ArchiveMessage`, `WithdrawMessage`, `DismissMessage`, `RestoreMessage`, `ReadMessageFile`, `PublishScheduledMessages` ; `AuditAction::ALL` + `message.published`, `message.withdrawn` |
 | Infrastructure | migrations `messages`, `message_classrooms`, `message_dismissals` ; `Orm::Message`, `Orm::MessageClassroom`, `Orm::MessageDismissal` ; `Repositories::Communication::MessageRepository`, `DismissalRepository`, `AttachmentStore` ; `Queries::Communication::ReadableMessages` (la règle de lecture), `InboxQuery`, `AuthoredMessagesQuery`, `ModerationQuery` ; job `Communication::PublishScheduledMessagesJob` et `config/recurring.yml` |
 | Delivery | `config/routes/communication.rb` ; `Communication::InboxesController`, `AuthoredMessagesController`, `MessageArchivesController`, `MessageDismissalsController`, `MessageFilesController`, `ModerationsController`, `MessageWithdrawalsController` ; `Classroom::StudentHomesController` (carrousel) |
-| UI | UDR-0056 : `communication/messages/_card`, `_carousel`, illustrations, `communication/shared/_tabs`, pages « Reçues », « Mes annonces », « Enseignants » / « Toutes », formulaire ; contrôleurs Stimulus `communication--audio`, `communication--carousel` ; `ui_toast(action:)`, `ui_checkbox_group` ; entrées de navigation |
+| UI | UDR-0071 : `communication/messages/_card`, `_carousel`, illustrations, `communication/shared/_tabs`, pages « Reçues », « Mes annonces », « Enseignants » / « Toutes », formulaire ; contrôleurs Stimulus `communication--audio`, `communication--carousel` ; `ui_toast(action:)`, `ui_checkbox_group` ; entrées de navigation |
 
 ## 6. Décisions rattachées
 
 - [ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md) — annonces : job de publication, audience filtrée, rejets en base, pièces jointes validées *(accepté)*.
-- [ADR-0069](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) — amende l'ADR-0045 (enseignant auteur, classes ciblées, date de fin, officiel, illustration, texte court sans page de détail, retrait, rejets effacés à la modification) et l'ADR-0065 (la direction écrit des annonces, hors de `/school-admin`). **Accepté le 2026-10-03.**
-- [UDR-0056](../../decisions/udr/0056-annonces.md) — carrousel de l'accueil élève, page « Annonces », formulaire d'annonce, navigation ; amende l'UDR-0006 (navigation) et l'UDR-0052 (espace direction) ; écart assumé avec le design system Lnclass §10 (audio). **Accepté le 2026-10-03.**
+- [ADR-0078](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) — amende l'ADR-0045 (enseignant auteur, classes ciblées, date de fin, officiel, illustration, texte court sans page de détail, retrait, rejets effacés à la modification) et l'ADR-0065 (la direction écrit des annonces, hors de `/school-admin`). **Accepté le 2026-10-03.**
+- [UDR-0071](../../decisions/udr/0071-annonces.md) — carrousel de l'accueil élève, page « Annonces », formulaire d'annonce, navigation ; amende l'UDR-0006 (navigation) et l'UDR-0052 (espace direction) ; écart assumé avec le design system Lnclass §10 (audio). **Accepté le 2026-10-03.**
 
 ## 7. Mesures
 

@@ -75,7 +75,7 @@ module Repositories
           stored = ActionText::RichText.connection.select_value(
             "SELECT body FROM action_text_rich_texts WHERE record_type = 'Orm::Course' AND record_id = #{Orm::Course.find_by!(slug: "c#{index}").id}"
           )
-          assert_equal ActionText::Content.new(RichTextSanitizer.call(html)).to_html, stored
+          assert_equal ActionText::Content.new(Repositories::Shared::RichTextSanitizer.call(html)).to_html, stored
         end
       end
 

@@ -1,0 +1,27 @@
+# Socle des pages publiques (UDR-0063) : libellés des liens, gabarit commun, ligne « Vos données » de /aide.
+# Les textes de chaque page vivent dans config/locales/communication/pages/<page>.fr.yml (un fichier par page) :
+#   communication.pages.<page>.{page_title, title, updated_on (facultatif), sections.<id-kebab>.{title, paragraphs, items}}
+fr:
+  public_pages:
+    # Pied de page de la homepage, /aide, carte d'aide (PublicPagesHelper#public_page_links) ; « Blog » par
+    # PublicPagesHelper#blog_link, seulement s'il a un article publié (UDR-0066 §3.5).
+    links:
+      blog: "Blog"
+      mission: "Notre mission"
+      privacy: "Protection des données"
+      terms: "Conditions d'utilisation"
+      sales_terms: "Conditions de vente"
+  communication:
+    pages:
+      # Gabarit communication/pages/_page (lookup paresseux du partial).
+      page:
+        logo_home: "Lnclass, accueil"
+        # Lien de retour : le nom de la page d'arrivée (UDR-0054 §3.2) ; connecté, l'accueil public renvoie à son accueil.
+        back: "Accueil"
+        toc: "Sommaire"
+        updated_on: "Mis à jour le %{date}"
+    help:
+      show:
+        # Ligne « Vos données » sous les questions de /aide (UDR-0063 §3.4, amendement de l'UDR-0061 §3.1) ; ici et
+        # non dans help.fr.yml parce qu'elle appartient au socle des pages publiques.
+        your_data: "Vos données :"

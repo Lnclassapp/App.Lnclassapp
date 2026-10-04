@@ -44,7 +44,8 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
       assert_text I18n.t("#{scope}.show.questions", count: 2)
     end
     within "#student_progress" do
-      assert_text "50 %"
+      assert_text "10/20"
+      assert_no_text "50 %"
       assert_text "Fragile"
       assert_text I18n.t("#{scope}.student_progress.completed", count: 1)
     end
@@ -71,6 +72,47 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
     end
   end
 
+  # UDR-0021, amendement du 2026-10-02 (UDR-0057) : ce que l'accueil retire de ses lignes vit ici (Q4), et la page suit
+  # la règle de sobriété à 390 × 844 (R1, R2, R3).
+  test "à 390 px, l'élève voit badge, meilleure note, maîtrise et sessions, une seule action principale, 3 questions puis « Voir plus »" do
+    exercise = create_exercise(essential: @essential, title: "Mitose", questions: 7)
+    student = create_student_for(@course)
+    best = create_exercise_session(student:, exercise:, status: "completed", score_percent: 85)
+    create_badge(student:, exercise:, level: "gold", session: best)
+    create_exercise_session(student:, exercise:)
+    sign_in_as student
+
+    with_mobile_viewport do
+      visit exercise_path(exercise.public_id)
+
+      assert_selector "#exercise_context", exact_text: "Génétique et évolution"
+      within "#student_progress" do
+        assert_text I18n.t("#{scope}.student_progress.best_score")
+        assert_text "17/20"
+        assert_text "Acquis"
+        assert_text I18n.t("#{scope}.student_progress.badge_level", level: "Or")
+        assert_text I18n.t("#{scope}.student_progress.completed", count: 1)
+        assert_link I18n.t("#{scope}.student_progress.resume")
+        assert_button I18n.t("#{scope}.student_progress.restart")
+        assert_no_text I18n.t("#{scope}.student_progress.restart_hint")
+      end
+      assert_no_text I18n.t("#{scope}.questions_preview.student_hint")
+      assert_single_primary_action
+      assert_blocks_above_fold "#exercise_header > *, #main > div > div.space-y-10 > *"
+      assert_list_capped "#exercise_questions ol", items: "li.question"
+
+      within "#exercise_questions" do
+        assert_no_page_reload { click_on I18n.t("components.reveal.more") }
+        assert_selector "li.question", count: 6
+        click_on I18n.t("components.reveal.more")
+        assert_selector "li.question", count: 7
+        assert_no_button I18n.t("components.reveal.more")
+      end
+      assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
+             "la page déborde en largeur"
+    end
+  end
+
   test "l'enseignant voit les propositions correctes marquées" do
     sign_in_as create_teacher
 
@@ -78,6 +120,19 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
 
     assert_selector "#exercise_questions [data-correct]", count: 2, text: I18n.t("#{scope}.questions_preview.correct")
     assert_no_selector "#student_progress"
+  end
+
+  test "l'enseignant voit l'écran inchangé : contexte complet, aide affichée, toutes les questions, sans « Voir plus »" do
+    exercise = create_exercise(essential: @essential, title: "Mitose", questions: 5)
+    sign_in_as create_teacher
+
+    visit exercise_path(exercise.public_id)
+
+    assert_selector "#exercise_context", exact_text: I18n.t("#{scope}.show.context", course: "Génétique et évolution",
+                                                                                      essential: "La méiose")
+    assert_selector "#exercise_questions p", text: I18n.t("#{scope}.questions_preview.reveal_hint")
+    assert_selector "#exercise_questions li.question", count: 5
+    assert_no_button I18n.t("components.reveal.more")
   end
 
   test "l'équipe ouvre « Modifier » dans la modale, sans rechargement de page" do

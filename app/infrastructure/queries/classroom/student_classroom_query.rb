@@ -1,11 +1,11 @@
 # 🔌 INFRA · Queries::Classroom::StudentClassroomQuery
-# Rôle : « Ma classe » (CL-22) : la classe principale active de l'élève et ses cours assignés actifs et publiés, sans élèves
-# ADR  : 0026, 0035, 0048 · UDR : 0011 · le code de la classe vient de ClassroomHeaderQuery, sous ReadClassroomPolicy
+# Rôle : « Ma classe » (CL-22) : la classe principale active de l'élève, sans élèves ni cours (un cours ne s'assigne plus)
+# ADR  : 0026, 0035, 0048, 0072 · UDR : 0011 · le code de la classe vient de ClassroomHeaderQuery, sous ReadClassroomPolicy
 module Queries
   module Classroom
     class StudentClassroomQuery
-      # courses : les CourseRow de ClassroomOverviewQuery, lus sans show_roster — la liste nominative n'est jamais lue.
-      Row = Data.define(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year, :courses)
+      # Ni liste nominative ni cours assignés (UDR-0011, amendement du 2026-10-02 de fonctions-espace-eleve).
+      Row = Data.define(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year)
 
       COLUMNS = [ "classrooms.public_id", "classrooms.name", "levels.name", "series.name", "schools.name",
                   "classrooms.school_year" ].freeze
@@ -17,8 +17,7 @@ module Queries
           Orm::Classroom.joins(:level, :school).left_joins(:series).where(id: primary, status: "active").pick(*COLUMNS)
         return if public_id.nil?
 
-        Row.new(public_id:, classroom_name:, level_name:, series_name:, school_name:, school_year:,
-                courses: ClassroomOverviewQuery.new.call(public_id:, show_roster: false).courses)
+        Row.new(public_id:, classroom_name:, level_name:, series_name:, school_name:, school_year:)
       end
     end
   end

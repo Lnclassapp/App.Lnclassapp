@@ -58,5 +58,13 @@ module AppLnclassapp
     # ADR-0052 : Mission Control Jobs is protected by the team area authentication.
     config.mission_control.jobs.base_controller_class = "Teams::BaseController"
     config.mission_control.jobs.http_basic_auth_enabled = false
+
+    # UDR-0061 §3.4 : numéros et horaires du support (carte d'aide), publics, dans config/support.yml.
+    config.x.support = config_for(:support)
+
+    # ADR-0074 §4.6 : hôte des adresses partagées et indexées du blog (canonical, og:*, plan du site, robots.txt).
+    # lnclass.com et www.lnclass.com servent tous deux l'application : la variable tranche, sans code. CANONICAL_HOST
+    # doit figurer dans APP_HOSTS (docs/guide/configuration.md).
+    config.x.canonical_host = ENV["CANONICAL_HOST"].presence || "lnclass.com"
   end
 end

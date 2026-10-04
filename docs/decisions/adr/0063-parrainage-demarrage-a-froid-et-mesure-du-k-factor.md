@@ -168,3 +168,9 @@ Import `lnclass.schools` v1 : clé facultative `national_code` (chaîne ou nombr
 
 - **La limite de 5 demandes en attente par établissement est gardée.** Le risque est connu : les codes nationaux sont publics et le numéro n'est pas vérifié, donc un tiers peut occuper les 5 places d'un établissement (5 par minute et par IP au rythme de la limite de débit).
 - **Parade prévue, hors de ce chantier** : vérifier le numéro par WhatsApp via un hook n8n avant qu'une demande n'entre dans la file. Elle fera l'objet de son propre chantier et de son ADR.
+
+## Amendement du 2026-10-02 — validation en pause (ADR-0073)
+
+*Le texte ci-dessus reste ; en cas d'écart, cette section fait foi.*
+
+- Une inscription sans code crée la demande **et la valide aussitôt** (`decided_via: "auto"`, sans décideur) : l'enseignant est rattaché et arrive sur la sélection de ses classes. Les demandes encore en attente ont été validées de la même façon au déploiement. Voir l'[ADR-0073](0073-validation-des-enseignants-en-pause.md).

@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0056 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071 · ADR : 0009, 0049
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -96,6 +96,8 @@ module ComponentsHelper
   RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
+  # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet motion-reduce:animate-none" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = {
     default: "text-ink hover:bg-mist focus:bg-mist",
@@ -123,6 +125,20 @@ module ComponentsHelper
     other: { tone: :team, icon: "academic-cap" }
   }.freeze
   SUBJECT_FALLBACK = { tone: :neutral, icon: "book-open" }.freeze
+  # UDR-0069 §3.3 : la bulle d'une matière porte l'illustration du modèle de l'accueil élève, choisie par le slug figé de la
+  # matière (exception à CA-26, décidée par le porteur : ce sont les seules matières illustrées) ; toute autre → générique.
+  Illustration = Data.define(:path, :tint)
+  SUBJECT_ILLUSTRATIONS = {
+    %w[mathematiques maths] => %w[maths bg-tint-indigo],
+    %w[physique-chimie pc] => %w[physique-chimie bg-tint-lilac],
+    %w[svt sciences-de-la-vie-et-de-la-terre] => %w[svt bg-tint-green],
+    %w[francais] => %w[francais bg-tint-yellow],
+    %w[histoire-geographie histoire-geo hg] => %w[histoire-geographie bg-tint-lavender],
+    %w[edhc] => %w[edhc bg-tint-pink],
+    %w[philosophie philo] => %w[philosophie bg-tint-pink],
+    %w[invite] => %w[inviter bg-tint-red]
+  }.flat_map { |slugs, (file, tint)| slugs.map { [ it, Illustration.new(path: "subjects/#{file}.svg", tint:) ] } }.to_h.freeze
+  SUBJECT_ILLUSTRATION_FALLBACK = Illustration.new(path: "subjects/generique.svg", tint: "bg-mist")
 
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
@@ -228,7 +244,7 @@ module ComponentsHelper
            input_html: { required:, class: RADIO_INPUT, **group[:aria] }
   end
 
-  # Groupe de cases à cocher (UDR-0056 §3.8), pendant de `ui_radio_group` : mêmes `fieldset`, options et aide ; les
+  # Groupe de cases à cocher (UDR-0071 §3.8), pendant de `ui_radio_group` : mêmes `fieldset`, options et aide ; les
   # valeurs de l'objet (un tableau) sont cochées. Un champ caché vide envoie le tableau même sans case cochée.
   # `required:` ne pose que l'astérisque : `required` sur chaque case exigerait de toutes les cocher ; le serveur
   # refuse un groupe vide.
@@ -240,12 +256,17 @@ module ComponentsHelper
 
   # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
   # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
+  # `trigger_href:` fait du déclencheur un lien, suivi sans JavaScript, que le contrôleur `modal` intercepte (UDR-0061).
+  # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:center` (défaut) ne change rien.
+  # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
-               document_title: nil, &block)
+               document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, placement: :center, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
-           trigger_icon:, open:, body:, slots:, document_title:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
+           trigger_icon:, trigger_href:, trigger_size:, trigger_full:, open:, body:, slots:, document_title:,
+           size_class: option!(MODAL_SIZES, size, "ui_modal size"),
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
@@ -290,6 +311,16 @@ module ComponentsHelper
   end
 
   # Une catégorie inconnue ou absente donne la teinte neutre : le badge reste lisible, sans couleur inventée.
+  # slug : slug figé d'une matière, ou :invite pour l'action « Inviter ». → Illustration(path, tint)
+  def subject_illustration(slug)
+    SUBJECT_ILLUSTRATIONS.fetch(slug.to_s, SUBJECT_ILLUSTRATION_FALLBACK)
+  end
+
+  # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
+  def ui_subject_bubble(label:, href:, illustration:, sr_suffix: nil, id: nil)
+    render "components/subject_bubble", label:, href:, illustration:, sr_suffix:, id:
+  end
+
   def ui_subject_badge(label, category:, size: :md)
     config = SUBJECT_CATEGORIES.fetch(category.to_s.to_sym, SUBJECT_FALLBACK)
     ui_badge(label, tone: config[:tone], size:, icon: config[:icon])
@@ -309,7 +340,7 @@ module ComponentsHelper
 
   # Le message est rendu côté serveur, dans le HTML du toast : il survit au Turbo Stream comme à la redirection.
   # `persistent: true` garde le toast jusqu'à sa fermeture ; une erreur l'est toujours.
-  # `action: { label:, href:, method: }` (UDR-0056 §3.6) ajoute un bouton entre le texte et la croix (« Annuler »).
+  # `action: { label:, href:, method: }` (UDR-0071 §3.6) ajoute un bouton entre le texte et la croix (« Annuler »).
   def ui_toast(message, type: :info, title: nil, persistent: false, action: nil)
     config = option!(TOAST_TYPES, type, "ui_toast type")
     render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay], action:
@@ -385,6 +416,31 @@ module ComponentsHelper
                               data: { clipboard_target: "button", action: "clipboard#copy" })
     render "components/copy_button", text:, button:, copied: ui_toast(copied, type: :success),
            failed: ui_toast(failed, type: :error)
+  end
+
+  # UDR-0057 R3 : une liste montre au plus REVEAL_LIMIT lignes, puis « Voir plus » révèle les suivantes, déjà rendues.
+  REVEAL_LIMIT = 3
+
+  # Attributs du conteneur de la liste (contrôleur `reveal`) : `tag.div(data: ui_reveal_data) { … }`.
+  def ui_reveal_data(step: 0)
+    { controller: "reveal", reveal_step_value: step, reveal_one_value: t("components.reveal.announce_one"),
+      reveal_other_value: t("components.reveal.announce_other") }
+  end
+
+  # Attributs d'une ligne : masquée à partir de la (REVEAL_LIMIT + 1)e, révélée par « Voir plus ».
+  def ui_reveal_item(index)
+    { hidden: index >= REVEAL_LIMIT, data: { reveal_target: "item" } }
+  end
+
+  # « Voir plus » et sa région d'annonce, seulement s'il y a plus de REVEAL_LIMIT lignes.
+  def ui_reveal_more(total, label: t("components.reveal.more"))
+    return if total <= REVEAL_LIMIT
+
+    safe_join([
+      ui_button(label, variant: :ghost, size: :sm, full: true, icon_end: "chevron-down",
+                       data: { reveal_target: "button", action: "reveal#more" }),
+      tag.p(class: "sr-only", role: "status", "aria-live": "polite", data: { reveal_target: "status" })
+    ])
   end
 
   private

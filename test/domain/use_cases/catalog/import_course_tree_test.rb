@@ -146,7 +146,7 @@ module UseCases
         assert_nil item.plan
 
         assert_equal [ [ "courses[0].series_name", "series_not_allowed" ] ], error_pairs(validate(course(level_name: "3ème")))
-        assert_equal [ 7, 5, 7 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count ]
+        assert_equal [ 7, 5, 6 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count ]
       end
 
       test "two essentials of one course with the same name: the second is in error at its path" do
