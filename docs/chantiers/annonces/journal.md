@@ -28,6 +28,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - **Lot A, 2026-10-04** : l'UDR prévoyait `ui_field … as: :file` et `as: :datetime_local`, que le composant ne connaît pas ; contourné par `type:` (amendement de l'UDR-0071). Leçon : vérifier chaque `as:` d'une UDR contre `FIELD_BUILDERS` avant de la figer. Pendant le merge, `ImageHeader` avait migré de `identity` à `shared` sur `Develop` : corrigé au merge.
 
+- **Lot B, 2026-10-04** : le garde `test/guards/system_budget_test.rb` de `Develop` exige la durée de chaque test système dans `script/ci/test_timings.yml` (fichier partagé) et borne le temps système du chantier (15 s) ; durée enregistrée au merge (5,4 s). Le Lot D devra tenir dans le reste. Le carrousel faisait défiler la page en largeur sur téléphone (`min-w-0` manquant), vu par le test système et non par les tests de vue.
+
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.

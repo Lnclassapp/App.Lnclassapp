@@ -195,6 +195,7 @@ Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son
 | `app/views/communication/messages/_card.html.erb`, `inbox_query.rb` (`MessageCard`) | Lot B | lus par C, qui attend B |
 | `test/system/role_homes_test.rb`, `design_system_test.rb`, `navigation_helper_test.rb` | Lot D | |
 | `db/schema.rb` | Lot 0 | aucune migration hors du Lot 0 |
+| `script/ci/test_timings.yml` | orchestrateur, au merge de chaque lot | garde `system_budget_test` de `Develop` : la durée de chaque test système y est enregistrée par `script/ci/record_timings` ; aucun lot ne l'écrit |
 | `test/infrastructure/orm/models_test.rb`, `test/db/schema_constraints_test.rb`, `test/controllers/design_controller_test.rb`, `config/locales/design/index.fr.yml` | Lot 0 | hors du champ initial, touchés par le Lot 0 (compte des modèles, cascade, vitrine) ; aucun autre lot ne les touche |
 
 Critères orphelins : **aucun**. AN-01 à AN-23 sont tous rattachés (voir « Done quand »).

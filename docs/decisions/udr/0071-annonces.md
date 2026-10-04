@@ -284,3 +284,15 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
 - La confirmation d'archivage est un `form_with` dont le bouton est un `ui_button` `danger` (au lieu d'un `button_to`) : même requête `POST`, styles du design system.
 - « Archivée le … » est datée par la dernière mise à jour de l'annonce : la table n'a pas de date d'archivage, et l'archivage est la dernière écriture d'une annonce figée.
 - Une direction ou l'équipe qui n'envoie aucune audience (requête forgée : le groupe est obligatoire dans le formulaire) reçoit 403 ; un enseignant sans classe cochée reçoit 422 « Choisis au moins une de tes classes. ».
+
+## Amendement du 2026-10-04 — lecture, carrousel et masquage, constatés au Lot B
+
+*Chantier [`annonces`](../../chantiers/annonces/journal.md), Lot B. Cette section fait foi en cas d'écart avec les §3.2 à §3.7.*
+
+- La section du carrousel porte aussi `min-w-0` : sans lui, dans la grille de l'accueil, la page défilait en largeur sur téléphone (vu par le test système).
+- La zone de statut de l'audio est dans l'`article`, hors de l'élément du contrôleur `communication--audio` : le contrôleur la retrouve par l'`article` de la carte.
+- La croix et ▶ portent le contour de focus visible de l'UDR-0005.
+- La réponse à un masquage (et à « Annuler », « Réafficher ») remplace à la fois `#announcement_<public_id>` et `#student_home_announcements` : un remplacement sans cible dans la page ne fait rien, la même réponse sert l'accueil et la liste.
+- Les textes du masquage sont ceux de `communication.dismissal.*` (Lot 0) ; aucune locale `message_dismissals.fr.yml`.
+- Le titre d'onglet suit le helper de titre : « Reçues · Annonces · Enseignant · Lnclass ».
+- L'équipe n'est l'audience d'aucune annonce dans la règle de lecture : elle lit les fichiers au titre de sa policy (`ReadFilePolicy`), et sa page « Reçues » la renvoie à « Mes annonces ».
