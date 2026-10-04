@@ -1,0 +1,85 @@
+<%# 🌐 UI · communication/authored_messages/_form — le formulaire d'annonce, page entière (nouvelle ou modifiée) %>
+<%# Rôle : titre, texte, destinataires du rôle, illustration, image, audio, dates ; brouillon ou publier ; erreurs en 422 sous les champs %>
+<%# ADR  : 0045, 0078 · UDR : 0005, 0071 (§3.8) · locaux : form:, message: (nil pour une nouvelle), url:, method: %>
+<% published = message&.status == "published" %>
+<% reselect = form.errors.any? ? " #{t('.reselect')}" : "" %>
+<%= form_with model: form, scope: :announcement, url:, method:, multipart: true, id: "announcement-form", class: "grid max-w-form gap-5" do |f| %>
+  <% if published %>
+    <div class="rounded-ln bg-info-soft p-4 text-sm text-info"><%= t(".published_notice") %></div>
+  <% end %>
+
+  <%= ui_field f, :title, required: true, maxlength: Entities::Communication::Message::TITLE_MAX, hint: t(".hints.title") %>
+  <%= ui_field f, :body, as: :textarea, rows: 3, required: true, maxlength: Entities::Communication::Message::BODY_MAX,
+                         hint: t(".hints.body") %>
+
+  <% case current_actor.role %>
+  <% when :team %>
+    <% school = form_school %>
+    <% if school %>
+      <%= f.hidden_field :school_public_id %>
+      <%= ui_radio_group f, :scope, choices: [ [ t("communication.scopes.national"), "national" ], [ school.name, "school" ] ], required: true %>
+    <% else %>
+      <%= f.hidden_field :scope, value: "national" %>
+      <p class="text-sm text-mute"><%= t(".one_school") %></p>
+    <% end %>
+    <%= ui_radio_group f, :audience, choices: %w[all students teachers school_admins].map { [ t("communication.audiences.#{it}"), it ] },
+                                     columns: 2, required: true %>
+  <% when :school_admin %>
+    <p class="text-sm text-mute"><%= t(".for_school", school: form_school&.name) %></p>
+    <%= ui_radio_group f, :audience, choices: %w[students teachers school_admins].map { [ t("communication.audiences.#{it}"), it ] },
+                                     required: true %>
+  <% else %>
+    <%= ui_checkbox_group f, :classroom_public_ids, choices: classroom_choices, label: t("communication.audiences.classrooms"),
+                                                    hint: t(".hints.classrooms"), required: true %>
+  <% end %>
+
+  <fieldset>
+    <legend class="mb-1.5 block text-sm font-medium text-ink"><%= Dtos::Communication::MessageInput.human_attribute_name(:illustration) %></legend>
+    <div class="grid grid-cols-4 gap-2">
+      <% Entities::Communication::Message::ILLUSTRATIONS.each do |key| %>
+        <label class="flex min-h-tap cursor-pointer flex-col items-center gap-1 rounded-ln border border-line bg-white p-2 text-xs font-medium has-checked:border-brand has-checked:bg-brand-soft has-focus-visible:outline-2 has-focus-visible:outline-brand">
+          <%= f.radio_button :illustration, key, class: "peer sr-only" %>
+          <%= announcement_illustration key, class: "size-12" %>
+          <span><%= t("communication.illustrations.#{key}") %></span>
+        </label>
+      <% end %>
+    </div>
+    <% if (error = form.errors[:illustration].first) %>
+      <p class="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+      </p>
+    <% end %>
+  </fieldset>
+
+  <%# ui_field ne connaît pas as: :file : le type passe au contrôle, comme tout attribut ; jamais de valeur sur un fichier. %>
+  <%= ui_field f, :image, type: "file", value: nil, accept: "image/png,image/jpeg,image/webp", hint: t(".hints.image") + reselect,
+                          class: "cursor-pointer py-2.5 file:mr-3 file:cursor-pointer file:border-0 file:bg-transparent file:font-medium file:text-brand-strong" %>
+  <% if message && edited.image %>
+    <div class="flex items-center gap-3">
+      <%= image_tag announcement_file_path(message.public_id, kind: "image"), alt: "", class: "size-16 rounded-ln object-cover" %>
+      <%= ui_field f, :remove_image, as: :checkbox %>
+    </div>
+  <% end %>
+
+  <%= ui_field f, :audio, type: "file", value: nil, accept: "audio/mpeg,audio/mp4,.mp3,.m4a", hint: t(".hints.audio") + reselect,
+                          class: "cursor-pointer py-2.5 file:mr-3 file:cursor-pointer file:border-0 file:bg-transparent file:font-medium file:text-brand-strong" %>
+  <% if message && edited.audio %>
+    <div class="grid gap-3">
+      <audio controls preload="none" src="<%= announcement_file_path(message.public_id, kind: "audio") %>" class="w-full"></audio>
+      <%= ui_field f, :remove_audio, as: :checkbox %>
+    </div>
+  <% end %>
+
+  <% unless published %>
+    <%= ui_field f, :published_at, type: "datetime-local", hint: t(".hints.published_at") %>
+  <% end %>
+  <%= ui_field f, :visible_until, as: :date, required: true, hint: t(".hints.visible_until") %>
+
+  <div class="flex flex-wrap justify-end gap-3">
+    <%= ui_button t(".cancel"), variant: :ghost, href: my_announcements_path %>
+    <% unless published %>
+      <%= ui_button t(".save_draft"), type: :submit, variant: :secondary, name: "commit", value: "draft" %>
+    <% end %>
+    <%= ui_button t(".publish"), type: :submit, variant: :primary, name: "commit", value: "publish" %>
+  </div>
+<% end %>

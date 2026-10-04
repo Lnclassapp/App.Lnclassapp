@@ -9,6 +9,7 @@ class ComponentsHelperTest < ActionView::TestCase
     attribute :level, :string
     attribute :terms, :boolean
     attribute :pin, :string
+    attribute :classrooms
   end
 
   # --- Icônes -----------------------------------------------------------------
@@ -258,6 +259,51 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "fieldset div.grid:not([class*=grid-cols]) > label", 1
     assert_raises(ArgumentError) { view.fields(:user) { |form| ui_radio_group(form, :level, columns: 4, choices: []) } }
+  end
+
+  # --- Groupe de cases à cocher (UDR-0071 §3.8) -------------------------------
+
+  test "ui_checkbox_group renders a legend, one 48 px option per choice and checks the object's values" do
+    show view.fields(:announcement, model: Record.new(classrooms: %w[b2 c3])) { |form|
+      ui_checkbox_group(form, :classrooms, label: "Classes", required: true,
+                                           choices: [ [ "3ème A", "a1" ], [ "3ème B", "b2" ], [ "3ème C", "c3" ] ])
+    }
+
+    assert_select "fieldset#announcement_classrooms > legend", text: /Classes\s*\*/
+    assert_select "fieldset > input[type=hidden][name='announcement[classrooms][]'][value='']:not([id])", 1
+    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line", 3
+    assert_select "label", text: "3ème A" do
+      assert_select "input#announcement_classrooms_a1[type=checkbox][name='announcement[classrooms][]'][value=a1]:not([checked])"
+    end
+    assert_select "input[type=checkbox][checked]", 2
+    assert_select "input#announcement_classrooms_c3.size-5.accent-brand[checked]"
+    assert_select "input[type=checkbox][name='announcement[classrooms][]']", 3
+    assert_select "input[type=hidden][name='announcement[classrooms][]']", 1
+    assert_select "input[required], input[aria-invalid], input[aria-describedby], p", 0
+  end
+
+  test "ui_checkbox_group wires its hint and first error to every option, never makes each box required" do
+    record = Record.new
+    record.errors.add(:classrooms, "Choisis au moins une de tes classes.")
+    record.errors.add(:classrooms, "Second")
+    show view.fields(:announcement, model: record) { |form|
+      ui_checkbox_group(form, :classrooms, hint: "Aide", columns: 3, choices: [ %w[A a], %w[B b] ])
+    }
+
+    assert_select "legend", text: "Classrooms"
+    assert_select "legend span", 0
+    assert_select "div.sm\\:grid-cols-3 > label.border-error", 2
+    assert_select "input[type=checkbox]:not([required]):not([checked])[aria-invalid=true][aria-describedby='announcement_classrooms_hint announcement_classrooms_error']", 2
+    assert_select "fieldset > p#announcement_classrooms_hint + p#announcement_classrooms_error", text: "Choisis au moins une de tes classes."
+  end
+
+  test "ui_checkbox_group works without a model, stacks on one column and refuses an unknown column count" do
+    show view.fields(:announcement) { |form| ui_checkbox_group(form, :classrooms, columns: 1, choices: [ %w[A a] ]) }
+
+    assert_select "legend", text: "Classrooms"
+    assert_select "fieldset div.grid:not([class*=grid-cols]) > label > input:not([checked])", 1
+    error = assert_raises(ArgumentError) { view.fields(:announcement) { |form| ui_checkbox_group(form, :classrooms, columns: 4, choices: []) } }
+    assert_match "ui_checkbox_group", error.message
   end
 
   # --- Modale, menu, onglets --------------------------------------------------
@@ -580,6 +626,36 @@ class ComponentsHelperTest < ActionView::TestCase
       assert_select "p.text-mute", text: "Une seule à la fois."
     end
     assert_nil flash_toast(:reload_document, true)
+  end
+
+  # UDR-0071 §3.6 : « Annuler » dans le toast. Le toast part au départ de la requête (turbo:submit-start), pas au clic :
+  # retiré au clic, le formulaire ne serait plus dans la page et le navigateur ne l'enverrait pas.
+  test "ui_toast with an action renders its button between the text and the close button" do
+    show ui_toast("Elle reste dans « Toutes les annonces ».", type: :info, title: "Annonce masquée",
+                  action: { label: "Annuler", href: "/announcements/abcdefghijkmno/dismissal", method: :delete })
+
+    assert_select "div[data-controller=toast][data-toast-type=info][data-toast-delay-value='5000']" do
+      assert_select "div.flex-1 + form[action='/announcements/abcdefghijkmno/dismissal'][method=post] + button[data-action='toast#dismiss']"
+      assert_select "form[data-action='turbo:submit-start->toast#dismiss'] input[type=hidden][name=_method][value=delete]"
+      assert_select "form button[type=submit][data-turbo-stream=true]", text: "Annuler" do |buttons|
+        assert_equal "min-h-tap shrink-0 rounded-ln px-3 text-sm font-bold text-brand-strong hover:bg-brand-soft", buttons.first["class"]
+      end
+    end
+    assert_select "p", text: "Annonce masquée"
+  end
+
+  test "ui_toast without action renders no form, and an action defaults to POST" do
+    show ui_toast("Fait") + ui_toast("Rétabli", action: { label: "Refaire", href: "/redo" })
+
+    assert_select "form", 1
+    assert_select "form[action='/redo'][method=post]:not(:has(input[name=_method]))"
+  end
+
+  test "turbo_stream_toast carries the action of its toast" do
+    show view.turbo_stream_toast("Masquée", action: { label: "Annuler", href: "/undo", method: :delete })
+
+    assert_includes rendered, "turbo:submit-start-&gt;toast#dismiss"
+    assert_includes rendered, "Annuler"
   end
 
   test "turbo_stream_toast appends the rendered toast to the stack" do

@@ -5,6 +5,8 @@ require "application_system_test_case"
 # destination whose route is not drawn in V1 renders as an inactive entry (NavigationHelper): it is checked as inactive,
 # never followed. The data holds assignments: on an empty base, the old feeds passed green by mistake. Since ADR-0072
 # an exercise is the only assignable kind: two exercises of the sheet are assigned.
+# AN-22 (chantier annonces, UDR-0071 §3.1): « Annonces » closes the navigation of the teacher and of the direction, and the
+# secondary list of the team; the student has none.
 class RoleHomesTest < ApplicationSystemTestCase
   setup do
     svt = create_material(name: "SVT", category: "science")
@@ -14,6 +16,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     @classroom = create_classroom(school:, level: tle, name: "Tle D 1", join_code: "kfm37")
     @teacher = create_teacher(school:, material: svt, classrooms: [ @classroom ], first_name: "Yao")
     @student = create_student(classroom: @classroom, first_name: "Aya")
+    @school_admin = create_school_admin(school:, first_name: "Mariam")
     course = create_course(name: "Génétique et évolution", level: tle, material: svt)
     essential = create_essential(course:, name: "La méiose")
     exercise = create_exercise(essential:, title: "Exercice sur la méiose")
@@ -28,36 +31,68 @@ class RoleHomesTest < ApplicationSystemTestCase
 
   def tn(key) = I18n.t("shared.navigation.#{key}")
 
-  test "the student reaches their home, then every destination of their navigation" do
+  test "AN-22 — the student reaches their home, then every destination of their navigation, « Annonces » not among them" do
     sign_in_as @student
 
     assert_home student_home_path, greeting: I18n.t("classroom.student_homes.show.greeting", name: "Aya")
     assert_text "KFM37"
+    within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
     assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path }
     assert_signs_out
   end
 
-  test "the teacher reaches their home, then every destination of their navigation" do
+  test "AN-22 — the teacher reaches their home, then every destination of their navigation, « Annonces » last" do
     sign_in_as @teacher
 
     assert_home teacher_home_path, greeting: I18n.t("classroom.teacher_homes.show.greeting", name: "Yao")
-    assert_navigation active: { home: teacher_home_path, classrooms: teacher_classrooms_path, courses: courses_path }
+    assert_navigation active: { home: teacher_home_path, classrooms: teacher_classrooms_path, courses: courses_path,
+                                announcements: announcements_path }
     assert_signs_out
   end
 
   # TR-10 (UDR-0049, amendment of UDR-0006 of 2026-09-28): « Pilotage » is drawn, no team destination is inactive.
   # RE-01 (UDR-0068 §3.2): Imports has left the destinations for the « Configuration » card, opened by
   # test/system/teams/configuration_navigation_test.rb.
-  test "the team member reaches their home, then every destination of their navigation, the dashboard included" do
+  # AN-22 (UDR-0071 §3.1, owner's decision of 2026-10-04): the team's « Annonces » is the last entry of its secondary list,
+  # on « Mes annonces »: the second card of the sidebar on a desktop, the « Plus » menu on a phone; current on its page.
+  test "AN-22 — the team member reaches their home, then every destination of their navigation, « Annonces » by its second card and « Plus »" do
     sign_in_as create_team_member(first_name: "Awa")
 
     assert_home team_home_path, greeting: I18n.t("teams.homes.show.greeting", name: "Awa")
     assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, dashboard: team_dashboard_path }
+    within("nav#sidebar_secondary") do
+      assert_equal %i[referential imports announcements].map { tn(it) }, all("a").map { it.text.squish }
+      click_link tn(:announcements)
+    end
+
+    assert_current_path my_announcements_path
+    within("nav#sidebar_secondary") { assert_selector "a[aria-current=page][href='#{my_announcements_path}']", text: tn(:announcements) }
+    back_home_by_logo(team_home_path)
+    with_mobile_viewport do
+      find("button#bottom_bar_more").click
+      within("#bottom_bar_more_menu[role=menu]") { click_link tn(:announcements) }
+
+      assert_current_path my_announcements_path
+      assert_selector "button#bottom_bar_more[aria-current=page]"
+      assert_selector "#bottom_bar_more_menu a[aria-current=page][href='#{my_announcements_path}']", visible: :all
+    end
     assert_signs_out
   end
 
   # The school admin's journey (sign-in, « Accueil », a level, a classroom) is the system test of accueil-direction Lot E
-  # (test/system/school_admin/direction_home_test.rb).
+  # (test/system/school_admin/direction_home_test.rb); here, its navigation in order, and « Annonces », last, by its real link.
+  test "AN-22 — the direction reaches « Annonces », last of its navigation" do
+    sign_in_as @school_admin
+
+    assert_home school_admin_classrooms_path
+    within(MAIN_SIDEBAR_NAV) do
+      assert_equal %i[home teachers school announcements].map { tn(it) }, all("a[href]").map(&:text)
+      click_link tn(:announcements)
+    end
+
+    assert_current_path announcements_path
+    within(MAIN_SIDEBAR_NAV) { assert_selector "a[aria-current='page'][href='#{announcements_path}']", text: tn(:announcements) }
+  end
 
   test "on a phone, the student opens every destination from the bottom bar" do
     sign_in_as @student

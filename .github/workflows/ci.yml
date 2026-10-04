@@ -30,9 +30,12 @@ env:
 
 jobs:
   # What this run plays: the draw, the proof of the tree, the documentation-only rule. No toolchain, a few seconds.
+  # ADR-0069, amendment of 2026-10-04: the CI is switched off until the repository variable CI_ENABLED is « true »
+  # (Settings → Secrets and variables → Actions → Variables). Off, « plan » is skipped and so is everything after,
+  # as for a draft: no runner, no failure. The proof is then bin/ci run locally.
   plan:
     name: plan
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && vars.CI_ENABLED == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     # Job permissions replace the workflow's: the private repository needs contents too (HTTP 403 without it).
