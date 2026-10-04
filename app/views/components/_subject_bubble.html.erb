@@ -6,6 +6,6 @@
   <span class="<%= class_names("grid size-15 place-items-center rounded-full transition group-active:scale-95", illustration.tint) %>">
     <%= image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy" %>
   </span>
-  <span class="break-words"><%= label %></span>
-  <% if sr_suffix %><span class="sr-only"><%= sr_suffix %></span><% end %>
+  <%# Sur une ligne : un retour entre les deux spans lirait « Tle D , cours de … ». %>
+  <span class="break-words"><%= label %></span><%= tag.span(sr_suffix, class: "sr-only") if sr_suffix %>
 <% end %>

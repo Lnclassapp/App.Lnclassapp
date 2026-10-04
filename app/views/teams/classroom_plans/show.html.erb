@@ -2,6 +2,7 @@
 <%# Rôle : garde-fou (classes existantes inchangées), lignes non définies, totaux par établissement, tableau #classroom_plan_lines ; « Modifier » au menu ⋮ %>
 <%# ADR  : 0030, 0058 · UDR : 0006, 0042, 0045, 0054, 0068 %>
 <% page_title t(".page_title") %>
+<% content_for :nav_key, "referential" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
                    back: { label: t(".back"), href: teams_referential_path } %>
 

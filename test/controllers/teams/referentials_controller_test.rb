@@ -130,6 +130,9 @@ class Teams::ReferentialsControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_select "a[href='#{teams_referential_path}']", text: /Référentiel/, minimum: 1
       assert_select "main a[href='#{team_home_path}']", { count: 0 }, "#{path} ne ramène plus à l'accueil"
+      # Constat du challenger : l'entrée « Référentiel » de la carte « Configuration » est la courante.
+      assert_select "nav#sidebar_secondary a[href='#{teams_referential_path}'][aria-current=page]", 1, path
+      assert_select "button#bottom_bar_more[aria-current=page]", 1, path
     end
   end
 end
