@@ -1,5 +1,6 @@
 # ADR-0045 §4, amended by ADR-0069 §4.1: an announcement is a short card of the team, a direction or a teacher. Every
-# message but a draft has an end date, at most 90 days after its publication; a withdrawal names its moderator.
+# live message (scheduled or published) has an end date, at most 90 days after its publication; a withdrawal names
+# its moderator.
 class CreateMessages < ActiveRecord::Migration[8.1]
   def change
     create_table :messages do |t|
@@ -26,7 +27,7 @@ class CreateMessages < ActiveRecord::Migration[8.1]
       t.check_constraint "btrim(title) <> ''", name: "messages_title_present"
       t.check_constraint "btrim(body) <> ''", name: "messages_body_present"
       t.check_constraint "status NOT IN ('scheduled', 'published') OR published_at IS NOT NULL", name: "messages_published_at_when_live"
-      t.check_constraint "status = 'draft' OR ends_at IS NOT NULL", name: "messages_ends_at_unless_draft"
+      t.check_constraint "status NOT IN ('scheduled', 'published') OR ends_at IS NOT NULL", name: "messages_ends_at_when_live"
       t.check_constraint "ends_at IS NULL OR published_at IS NULL OR " \
                          "(ends_at > published_at AND ends_at <= published_at + interval '90 days')", name: "messages_ends_at_window"
       t.check_constraint "(status = 'withdrawn') = (withdrawn_at IS NOT NULL AND withdrawn_by_id IS NOT NULL)",

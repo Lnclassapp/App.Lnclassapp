@@ -445,8 +445,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_100200) do
     t.check_constraint "btrim(body::text) <> ''::text", name: "messages_body_present"
     t.check_constraint "btrim(title::text) <> ''::text", name: "messages_title_present"
     t.check_constraint "ends_at IS NULL OR published_at IS NULL OR ends_at > published_at AND ends_at <= (published_at + 'P90D'::interval)", name: "messages_ends_at_window"
+    t.check_constraint "status::text <> ALL (ARRAY['scheduled'::character varying, 'published'::character varying]::text[]) OR ends_at IS NOT NULL", name: "messages_ends_at_when_live"
     t.check_constraint "illustration::text = ANY (ARRAY['info'::character varying, 'calendar'::character varying, 'homework'::character varying, 'sheets'::character varying, 'exam'::character varying, 'meeting'::character varying, 'celebration'::character varying, 'holidays'::character varying]::text[])", name: "messages_illustration_values"
-    t.check_constraint "status::text = 'draft'::text OR ends_at IS NOT NULL", name: "messages_ends_at_unless_draft"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'scheduled'::character varying, 'published'::character varying, 'archived'::character varying, 'withdrawn'::character varying]::text[])", name: "messages_status_values"
   end
 

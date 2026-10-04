@@ -4,7 +4,7 @@ require "test_helper"
 # Each CHECK refuses a faulty row; dismissals and targeted classrooms are unique per pair; the files hang on the message.
 class Orm::MessageConstraintsTest < ActiveSupport::TestCase
   CHECKS = %w[messages_audience_values messages_status_values messages_illustration_values messages_title_present
-              messages_body_present messages_published_at_when_live messages_ends_at_unless_draft messages_ends_at_window
+              messages_body_present messages_published_at_when_live messages_ends_at_when_live messages_ends_at_window
               messages_withdrawn_iff_withdrawal messages_classrooms_need_school].freeze
 
   setup do
@@ -61,10 +61,12 @@ class Orm::MessageConstraintsTest < ActiveSupport::TestCase
     assert write(status: "draft", published_at: nil, ends_at: nil).persisted?
   end
 
-  test "every message but a draft has an end date" do
+  # ADR-0069, amendment of 2026-10-04: a draft archived before going live has no end date, and must stay archivable.
+  test "a scheduled or published message has an end date; a draft, even archived, may have none" do
     assert_refused(ends_at: nil)
     assert_refused(status: "scheduled", ends_at: nil)
-    assert write(status: "draft", ends_at: nil).persisted?
+    assert write(status: "draft", published_at: nil, ends_at: nil).persisted?
+    assert write(status: "archived", published_at: nil, ends_at: nil).persisted?
   end
 
   test "the end comes after the publication, at most 90 days later" do
