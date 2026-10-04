@@ -49,7 +49,8 @@ unless Orm::Exercise.exists?(essential:)
     [ "Quel est son rôle principal ?", [ [ "Contrôler les échanges", true ], [ "Produire l'énergie", false ],
                                          [ "Stocker l'ADN", false ], [ "Digérer les déchets", false ] ], "single_choice" ] ]
     .each.with_index(1) do |(content, answers, question_type), position|
-      question = exercise.questions.create!(position:, content: "<p>#{content}</p>", question_type:)
+      # Un énoncé est du texte brut (UDR-0017) ; seuls le cours et la fiche sont du texte riche.
+      question = exercise.questions.create!(position:, content:, question_type:)
       answers.each.with_index(1) { |(text, correct), rank| question.answers.create!(position: rank, content: text, correct:) }
     end
 end

@@ -208,11 +208,12 @@ module PerfDataset
     insert(ActionText::RichText, record_ids.map { { record_type:, record_id: it, name: "content", body:, created_at: now, updated_at: now } })
   end
 
+  # Énoncé et explication en texte brut (UDR-0017), comme à la saisie.
   def seed_questions(exercise_ids)
     question_ids = insert(Orm::Question, exercise_ids.flat_map do |exercise_id|
       (1..5).map do |position|
         { exercise_id:, position:, question_type: position == 1 ? "true_false" : "single_choice", created_at: now, updated_at: now,
-          content: "<p>Question #{position} : que vaut $x$ si $2x + 3 = 7$ ?</p>", explanation: "<p>On isole $x$.</p>" }
+          content: "Question #{position} : que vaut $x$ si $2x + 3 = 7$ ?", explanation: "On isole $x$." }
       end
     end, returning: %w[id])
     insert(Orm::Answer, answers_for(question_ids))

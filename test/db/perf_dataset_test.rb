@@ -23,4 +23,15 @@ class PerfDatasetTest < ActiveSupport::TestCase
     assert_empty assignments.pluck(:assignable_id) - @exercises.map(&:id)
     assert_equal assignments.pluck(:id, :assignable_id).sort, given.fetch(@classroom.id).map { |id, (exercise_id)| [ id, exercise_id ] }.sort
   end
+
+  # UDR-0017: a statement and its explanation are plain text, shown escaped with their line breaks.
+  test "the questions are plain text, as the exercise screens show them" do
+    exercise = create_exercise(questions: 0)
+
+    PerfDataset.seed_questions([ exercise.id ])
+
+    texts = Orm::Question.where(exercise:).pluck(:content, :explanation).flatten
+    assert_equal 10, texts.size
+    assert(texts.none? { it.match?(%r{</?[a-z]}) }, texts.uniq.inspect)
+  end
 end
