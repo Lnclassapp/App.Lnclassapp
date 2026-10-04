@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -18,21 +18,28 @@ module NavigationHelper
                [ :classroom, :student_classroom_path, "academic-cap" ] ],
     teacher: [ [ :home, :teacher_home_path, "home" ], [ :classrooms, :teacher_classrooms_path, "user-group" ],
                [ :courses, :courses_path, "book-open" ] ],
+    # UDR-0068 §3.1 : Imports passe dans la liste secondaire (2e carte, menu « Plus »).
     team: [ [ :home, :team_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
-            [ :schools, :schools_path, "building-library" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
-            [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
+            [ :schools, :schools_path, "building-library" ], [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
     # UDR-0052, UDR-0056 §3.1 : trois destinations, sans accueil ; « Travail des élèves » est l'accueil de la direction.
     school_admin: [ [ :student_work, :school_admin_classrooms_path, "chart-bar" ], [ :teachers, :school_admin_teachers_path, "user-group" ],
                     [ :school, :school_admin_school_path, "building-library" ] ]
   }.freeze
+  # UDR-0068 §3.1 : la configuration de l'équipe, 2e carte de la barre latérale et menu « Plus » de la barre basse.
+  SECONDARY_DESTINATIONS = {
+    team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ] ]
+  }.freeze
+  # UDR-0069 §3.6 : frames différés posés sous les cartes de la barre latérale, par rôle : [id du frame, route de la source].
+  SIDEBAR_FRAMES = { teacher: [ [ "sidebar_referral", :teacher_invite_path ] ] }.freeze
   ACCOUNT_LINKS = [ [ :profile, :profile_path, "user-circle", nil ],
                     [ :sign_out, :session_path, "arrow-right-start-on-rectangle", :delete ] ].freeze
   # Sections de l'accueil de chaque rôle (squelette) — reprises des fils d'accueil de l'ancienne application.
   # Celles de la direction ne servent plus qu'à la page de démonstration du shell (UDR-0052).
   HOME_SECTIONS = {
     student: [ [ :todo, "clipboard-document-check" ], [ :classroom, "academic-cap" ], [ :courses, "book-open" ] ],
-    teacher: [ [ :classrooms, "user-group" ], [ :activity, "bolt" ], [ :courses, "book-open" ] ],
-    team: [ [ :regions, "building-library" ], [ :levels, "squares-2x2" ], [ :activity, "bolt" ] ],
+    # UDR-0069 §3.1 : « Cours » passe en 2e ; UDR-0068 §3.4 : le Référentiel quitte l'accueil équipe.
+    teacher: [ [ :classrooms, "user-group" ], [ :courses, "book-open" ], [ :activity, "bolt" ] ],
+    team: [ [ :regions, "building-library" ], [ :activity, "bolt" ] ],
     school_admin: [ [ :overview, "chart-bar" ], [ :classrooms, "squares-2x2" ], [ :activity, "bolt" ] ]
   }.freeze
   ROLE_ACCENTS = { student: "bg-brand", teacher: "bg-teacher", team: "bg-team", school_admin: "bg-school" }.freeze
@@ -51,6 +58,31 @@ module NavigationHelper
 
   def navigation_for(role)
     DESTINATIONS.fetch(role.to_sym).map { |key, route, icon| Destination.new(key:, route:, icon:) }
+  end
+
+  # Liste secondaire du rôle (UDR-0068) ; vide pour un rôle qui n'en a pas.
+  def secondary_navigation_for(role)
+    SECONDARY_DESTINATIONS.fetch(role.to_sym, []).map { |key, route, icon| Destination.new(key:, route:, icon:) }
+  end
+
+  # Cases de la barre basse : les destinations, plus « Plus » si le rôle a une liste secondaire.
+  def bottom_bar_size(role)
+    navigation_for(role).size + (secondary_navigation_for(role).any? ? 1 : 0)
+  end
+
+  # « Plus » est actif quand la page ouverte est l'une de ses entrées.
+  def more_active?(role)
+    secondary_navigation_for(role).any? { nav_active?(it) }
+  end
+
+  # Frames différés de la barre latérale du rôle, sauf celui dont la source est la page ouverte (elle porte déjà le bloc).
+  def sidebar_frames_for(role)
+    SIDEBAR_FRAMES.fetch(role.to_sym, []).filter_map do |id, route|
+      next unless respond_to?(route)
+
+      src = public_send(route)
+      [ id, src ] unless current_page?(src)
+    end
   end
 
   def nav_path(destination)

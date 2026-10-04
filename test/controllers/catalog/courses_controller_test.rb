@@ -89,6 +89,72 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{@course.slug}"
   end
 
+  # RE-14 (UDR-0069 §3.3, §3.4) : l'adresse d'une bulle « Tle D » de l'accueil enseignant.
+  test "a « Tle D » bubble lists the subject's Tle courses without series and in Tle D, neither Tle C nor another subject" do
+    maths = create_material(name: "Mathématiques")
+    d = @course.series
+    common = create_course(name: "Analyse", level: @tle, material: maths)
+    own = create_course(name: "Probabilités", level: @tle, series: d, material: maths)
+    other_series = create_course(name: "Arithmétique", level: @tle, series: create_series(name: "C"), material: maths)
+    other_subject = create_course(name: "Mécanique", level: @tle, series: d, material: create_material(name: "Physique-Chimie"))
+    link_level_series(level: @tle, series: d)
+
+    [ create_teacher(material: maths), create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path(level: "tle", series: "d", material: "mathematiques")
+
+      assert_response :success
+      assert_select "#courses_list > li", 2
+      assert_select "#course_#{common.slug}"
+      assert_select "#course_#{own.slug}"
+      assert_select "#course_#{other_series.slug}", 0
+      assert_select "#course_#{other_subject.slug}", 0
+      assert_select "select[name=series] option[selected][value=d]", text: "D"
+      sign_out
+    end
+  end
+
+  test "the teacher and the team choose a « Série » between « Niveau » and « Matière »; the student has no such list" do
+    c = create_series(name: "C")
+    link_level_series(level: @tle, series: @course.series)
+    link_level_series(level: @tle, series: c)
+    link_level_series(level: create_level(name: "1ère"), series: c)
+
+    [ create_teacher, create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path
+
+      assert_select "form#courses-filters.lg\\:grid-cols-4" do
+        assert_select "div.sm\\:col-span-2.lg\\:col-span-4 input[name=q]"
+        assert_equal %w[level series material], css_select("select").map { it["name"] }
+        assert_select "label[for=filter_series]", text: tl("index.filters.series")
+        assert_select "select#filter_series[name=series][data-action='change->search#submit'] option", 3
+        assert_select "select[name=series] option:nth-child(1)[value='']", text: tl("index.filters.all_series")
+        assert_select "select[name=series] option:nth-child(2)[value=c]", text: "C"
+        assert_select "select[name=series] option:nth-child(3)[value=d]", text: "D"
+      end
+      sign_out
+    end
+
+    sign_in_as create_student_for(@course)
+    get courses_path
+
+    assert_equal %w[material], css_select("form#courses-filters select").map { it["name"] }
+    assert_select "label[for=filter_series]", 0
+  end
+
+  test "a series in the address only narrows a student's catalogue, never widens it" do
+    create_course(name: "Mécanique", level: @tle, series: create_series(name: "C"), material: @svt)
+    sign_in_as create_student_for(@course)
+
+    get courses_path(level: @tle.slug, series: "c")
+
+    assert_select "#courses_list > li", 1
+    assert_select "#course_#{@published.slug}"
+  end
+
   test "the filters form searches while typing: a « q » search field, lists sent on change, « Filtrer » kept without JS (FU-47)" do
     # Le filtre par niveau et la recherche dans tous les niveaux : un enseignant (l'élève ne voit que son niveau).
     sign_in_as create_teacher

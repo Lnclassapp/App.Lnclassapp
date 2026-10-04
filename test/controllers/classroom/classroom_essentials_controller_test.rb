@@ -143,6 +143,16 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     end
   end
 
+  # UDR-0069 §3.8 : la bascule nomme la classe dès le premier rendu, comme après un stream (et comme au catalogue).
+  test "the toggle's accessible name names the exercise and the classroom" do
+    sign_in_as @teacher
+
+    get page_path
+
+    label = I18n.t("classroom.assignments.toggle.assign_to_label", name: "Les phases", classroom: "Tle D 1")
+    assert_select "#{toggle_id("Exercise", @phases.public_id)} [aria-label='#{label}']"
+  end
+
   test "the team never gets the days modal" do
     sign_in_as create_team_member
 

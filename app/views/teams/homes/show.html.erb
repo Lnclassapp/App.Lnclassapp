@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/homes/show — accueil équipe (TR-09, CA-25) %>
 <%# Rôle : raccourcis, demandes de suppression (admin), directions retirées (admin, field), puis HOME_SECTIONS[:team] %>
-<%# ADR  : 0034, 0036 (amendement 2), 0038, 0041, 0077 · UDR : 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass »), 0067, 0070 %>
+<%# ADR  : 0034, 0036 (amendement 2), 0038, 0041, 0077 · UDR : 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass »), 0067, 0068 (sans Référentiel), 0070 %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle") %>
 
@@ -23,8 +23,6 @@
           <%= ui_button t(".regions_action"), href: schools_path, variant: :secondary, size: :sm, icon: "building-library" %>
         <% end %>
       <% end %>
-    <% elsif key == :levels %>
-      <%= render "referential", home: @home, icon: %>
     <% elsif key == :activity %>
       <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon:, id: "team_home_activity" do %>
         <%= turbo_frame_tag Teams::HomesController::RECENT_CONTENT_FRAME, src: team_home_path, loading: :lazy, target: "_top" do %>

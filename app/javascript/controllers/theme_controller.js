@@ -1,5 +1,5 @@
 // ⚡ FRONT · theme_controller — interrupteur clair / sombre, retenu sur cet appareil (cookie `theme`, un an)
-// Rôle : pose data-theme sur <html> et la meta color-scheme, tient aria-checked à jour ; l'interrupteur est caché sans JS
+// Rôle : pose data-theme sur <html> et la meta color-scheme, tient aria-checked à jour ; caché sans JS, remontré après un morph
 // UDR  : 0065 (amendement du 2026-10-03) · ADR : 0049 (aucun script en ligne)
 import { Controller } from "@hotwired/stimulus"
 
@@ -11,13 +11,21 @@ export default class extends Controller {
   connect() {
     this.media = window.matchMedia("(prefers-color-scheme: dark)")
     this.sync = this.sync.bind(this)
+    this.reveal = this.reveal.bind(this)
     this.media.addEventListener("change", this.sync)
-    this.sync()
-    this.element.hidden = false
+    // Un rafraîchissement fusionné (morph) remet le `hidden` du serveur sans reconnecter le contrôleur : on se remontre.
+    document.addEventListener("turbo:morph", this.reveal)
+    this.reveal()
   }
 
   disconnect() {
     this.media.removeEventListener("change", this.sync)
+    document.removeEventListener("turbo:morph", this.reveal)
+  }
+
+  reveal() {
+    this.sync()
+    this.element.hidden = false
   }
 
   // Le choix vaut pour toutes les pages de cet appareil : le serveur le relit dans le cookie au prochain chargement.

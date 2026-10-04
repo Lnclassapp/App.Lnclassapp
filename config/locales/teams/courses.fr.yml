@@ -1,4 +1,4 @@
-# Gestion des cours par l'équipe (plan boucle-pedagogique, Lot B2) — UDR-0014, UDR-0007
+# Gestion des cours par l'équipe (plan boucle-pedagogique, Lot B2) — UDR-0014, UDR-0007 ; niveau d'un cours assigné — ADR-0075
 fr:
   activemodel:
     attributes:
@@ -22,6 +22,7 @@ fr:
             level_slug:
               blank: "Choisissez un niveau."
               inclusion: "Ce niveau n'existe pas."
+              assigned_elsewhere: "Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer."
             series_slug:
               inclusion: "Cette série n'existe pas."
               not_allowed: "Cette série n'est pas ouverte à ce niveau."

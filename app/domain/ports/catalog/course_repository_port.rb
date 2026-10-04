@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::CourseRepositoryPort
 # Rôle : contrat de persistance des cours, un seul agrégat pour lire et écrire
-# ADR  : 0029, 0035, 0039
+# ADR  : 0029, 0035, 0039, 0075
 module Ports
   module Catalog
     module CourseRepositoryPort
@@ -32,6 +32,12 @@ module Ports
       # Slugs déjà pris, pour les calculer avant une insertion en masse (Entities::Catalog::Slug). → Set[String]
       def taken_slugs
         raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"
+      end
+
+      # ADR-0075 : une entrée par classe où un exercice d'une fiche du cours est assigné (assignation active).
+      # → Array<[level_id, series_id]> (series_id de la classe, nil si elle n'en a pas)
+      def assigned_classroom_levels(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #assigned_classroom_levels"
       end
     end
   end

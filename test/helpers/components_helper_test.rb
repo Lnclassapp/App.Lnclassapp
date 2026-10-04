@@ -453,6 +453,59 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span.bg-mist", 2
   end
 
+  # RE-13, RE-17 (UDR-0069 §3.3) : l'illustration suit le slug figé de la matière ; toute autre matière prend la générique.
+  test "subject_illustration picks the drawing and tint by the frozen slug, aliases included" do
+    {
+      "mathematiques" => %w[maths indigo], "maths" => %w[maths indigo], "physique-chimie" => %w[physique-chimie lilac],
+      "svt" => %w[svt green], "francais" => %w[francais yellow], "histoire-geo" => %w[histoire-geographie lavender],
+      "edhc" => %w[edhc pink], "philosophie" => %w[philosophie pink], invite: %w[inviter red]
+    }.each do |slug, (file, tint)|
+      illustration = subject_illustration(slug)
+
+      assert_equal "subjects/#{file}.svg", illustration.path, slug
+      assert_equal "bg-tint-#{tint}", illustration.tint, slug
+    end
+  end
+
+  test "subject_illustration falls back to the generic drawing for any other subject" do
+    [ "anglais", "eps", nil ].each do |slug|
+      assert_equal ComponentsHelper::Illustration.new(path: "subjects/generique.svg", tint: "bg-mist"), subject_illustration(slug)
+    end
+  end
+
+  test "every illustration file exists, standalone and without style attributes" do
+    paths = [ *ComponentsHelper::SUBJECT_ILLUSTRATIONS.values.map(&:path), ComponentsHelper::SUBJECT_ILLUSTRATION_FALLBACK.path ].uniq
+
+    assert_equal 9, paths.size
+    paths.each do |path|
+      svg = Rails.root.join("app/assets/images", path).read
+
+      assert_match(/\A<svg xmlns="http:\/\/www.w3.org\/2000\/svg" viewBox="0 0 48 48">/, svg, path)
+      assert_no_match(/\sstyle=|\sclass=/, svg, path)
+    end
+  end
+
+  test "ui_subject_bubble is a link with a tinted disc, a decorative drawing, a label and an optional spoken suffix" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses?level=tle", illustration: subject_illustration("mathematiques"),
+                           sr_suffix: ", cours de Mathématiques", id: "course_level_tle_d") +
+         ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite))
+
+    assert_select "a#course_level_tle_d.min-h-tap[href='/courses?level=tle']" do
+      assert_select "span.size-15.rounded-full.bg-tint-indigo img[alt=''][aria-hidden=true][src*='maths']"
+      assert_select "span", text: "Tle D"
+      assert_select "span.sr-only", text: ", cours de Mathématiques"
+    end
+    assert_select "a[href='/teachers/invite']:not([id]) span.bg-tint-red"
+    assert_select "a[href='/teachers/invite'] span.sr-only", 0
+  end
+
+  # Constat du challenger : le nom accessible se lit « Tle D, cours de … », sans espace avant la virgule.
+  test "ui_subject_bubble reads its label and spoken suffix without a stray space" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses", illustration: subject_illustration("svt"), sr_suffix: ", cours de SVT")
+
+    assert_equal "Tle D, cours de SVT", css_select("a").first.text.gsub(/\s+/, " ").strip
+  end
+
   test "ui_avatar shows initials on a stable tone" do
     show ui_avatar("Awa Marie Koné", size: :lg)
 

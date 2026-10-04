@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/classroom_essentials/show — une fiche essentielle vue depuis une classe (CL-12, AS-20) %>
 <%# Rôle : en-tête de la fiche, puis ses exercices publiés, chacun avec sa bascule (échéance, modale des jours) et la réussite %>
 <%#        de la classe ; la fiche ne s'assigne plus %>
-<%# ADR  : 0048, 0072 · UDR : 0006, 0007, 0028, 0029 (amendée le 2026-10-02), 0054, 0062 (§3.4) · retour : le cours dans la classe %>
+<%# ADR  : 0048, 0072 · UDR : 0006, 0007, 0028, 0029 (amendée le 2026-10-02), 0054, 0062 (§3.4), 0069 (§3.8) · retour : le cours dans la classe %>
 <% essential = @essential.essential %>
 <% active = @classroom.status == "active" %>
 <% page_title essential.name %>
@@ -48,7 +48,7 @@
           </div>
           <% if active %>
             <%= render "classroom/assignments/toggle", classroom_public_id: @classroom.public_id, assignable_type: "Exercise",
-                       assignable_key: exercise.public_id, assignable_name: exercise.title,
+                       assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: @classroom.name,
                        assignment_public_id: exercise.assignment_public_id, due_on: exercise.due_on,
                        needs_session_days: @essential.needs_session_days %>
           <% elsif exercise.assignment_public_id %>

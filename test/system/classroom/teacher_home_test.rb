@@ -2,6 +2,8 @@ require "application_system_test_case"
 
 # TR-05, TR-02 (UDR-0026): a teacher signs in for real, lands on their home, sees their classrooms and opens one. The old
 # feed raised NameError as soon as the teacher had a classroom.
+# RE-20 (UDR-0069): the invitation block on a phone only; the header of « Mes classes » and its ⋮ menu on one line at
+# 375 px. The menu items and the bubbles are links: the controller test checks them.
 class Classroom::TeacherHomeTest < ApplicationSystemTestCase
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan")
@@ -17,8 +19,22 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
 
   def tl(key, **) = I18n.t("classroom.teacher_homes.#{key}", **)
   def card(classroom) = find("li#classroom_#{classroom.public_id}")
+  def box(element) = page.evaluate_script("arguments[0].getBoundingClientRect().toJSON()", element)
+  # The window takes this width for the block, then gets its size back.
+  def at_width(width, &) = with_mobile_viewport([ width, 900 ], &)
 
-  test "the teacher sees their classrooms, then opens one" do
+  # The line boxes of an element's text: one when it does not wrap.
+  def line_count(element)
+    page.evaluate_script(<<~JS.squish, element)
+      (function (element) {
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        return new Set(Array.from(range.getClientRects(), (rect) => Math.round(rect.top))).size;
+      })(arguments[0])
+    JS
+  end
+
+  test "the teacher sees their classrooms, then opens one; from 1280 px, the invitation block is hidden (RE-20)" do
     sign_in_as @teacher
 
     assert_current_path teacher_home_path
@@ -29,8 +45,9 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
       assert_text tl("classroom_card.assignments", count: 1)
       assert_text tl("classroom_card.score", score: 75)
     end
-    assert_link tl("show.edit_classrooms"), href: teacher_classrooms_path
     within("#teacher_home_activity") { assert_text tl("show.activity_soon") }
+    # The sidebar card « Parrainage » takes its place (UDR-0069 §3.6); the block stays in the page, hidden.
+    at_width(1280) { assert_selector "#invite_colleagues", visible: :hidden }
 
     assert_no_page_reload do
       card(@classroom).click_link
@@ -47,16 +64,27 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
     assert_current_path teacher_classrooms_path
   end
 
-  test "on a phone, the home and its bottom bar are visible, without horizontal scrolling" do
+  test "on a phone, the home, the invitation block (RE-20) and the bottom bar are visible, without horizontal scrolling" do
     sign_in_as @teacher
 
     with_mobile_viewport do
       visit teacher_home_path
 
       assert_selector "#teacher_home_classrooms > ul > li", count: 2
+      assert_selector "#invite_colleagues", visible: :visible
       assert_selector "nav.bottom-0", visible: :visible
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+
+      # UDR-0069 §3.2: at 375 px, the header of « Mes classes » holds on one line with its ⋮ menu.
+      at_width(375) do
+        title = find("#teacher_home_classrooms h2", text: tl("show.classrooms_title"))
+        menu = find("#teacher_home_classrooms button[aria-haspopup=menu][aria-label='#{tl('show.classrooms_menu')}']")
+        title_box, menu_box, card_box = [ title, menu, find("#teacher_home_classrooms") ].map { box(it) }
+        assert_equal 1, line_count(title), "le titre « Mes classes » passe à la ligne"
+        assert menu_box["top"] < title_box["bottom"] && menu_box["bottom"] > title_box["top"], "le menu ⋮ passe sous le titre"
+        assert_operator menu_box["right"], :<=, card_box["right"]
+      end
     end
   end
 end

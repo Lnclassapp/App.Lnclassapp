@@ -52,8 +52,9 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
     document
   end
 
+  # UDR-0068 : la barre latérale de l'équipe porte deux cartes de navigation ; Imports est dans « Configuration ».
   def open_sidebar_entry(label)
-    within("aside nav") { click_on label }
+    within("aside") { click_on label }
   end
 
   def upload(path)

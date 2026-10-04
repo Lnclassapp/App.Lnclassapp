@@ -1,4 +1,5 @@
-# Page d'une fiche essentielle (plan boucle-pedagogique, Lot B3) — ADR-0028, ADR-0033, ADR-0043, UDR-0007, UDR-0015
+# Page d'une fiche essentielle (plan boucle-pedagogique, Lot B3 ; reorganisation-equipe-enseignant, Lot F) — ADR-0028, ADR-0033,
+# ADR-0043, UDR-0007, UDR-0015, UDR-0069 §3.8
 fr:
   catalog:
     essentials:
@@ -25,6 +26,8 @@ fr:
         empty_description: "Les exercices de cette fiche essentielle apparaîtront ici dès leur publication."
         team_empty_title: "Aucun exercice pour cette fiche essentielle"
         team_empty_description: "Créez un exercice ou importez-en : chacun naît en brouillon, à publier ensuite."
+        # UDR-0069 §3.8 : l'enseignant sans classe au niveau du cours ; level : « Tle D », « 3ème ».
+        assign_targets_none: "Aucune de vos classes n'est en %{level}."
       exercise_progress:
         assigned: "Assigné par ton enseignant"
         exercise_types:
@@ -40,3 +43,4 @@ fr:
         resume_label: "Reprendre l'exercice « %{title} »"
         open: "Voir l'exercice"
         open_label: "Voir l'exercice « %{title} »"
+        assign_targets: "Assigner « %{title} » à vos classes"

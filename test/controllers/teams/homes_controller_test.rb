@@ -1,7 +1,8 @@
 require "test_helper"
 
 # TR-09, CA-25 (UDR-0018): the team home. The old feed read an Orm constant that had disappeared, and the referential was
-# only reachable from a tabbed dashboard served by two concurrent 12-hour caches.
+# only reachable from a tabbed dashboard served by two concurrent 12-hour caches. Since UDR-0068 §3.4 (RE-05), the
+# referential has its own page, out of the home.
 class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
   RECENT_FRAME = "team_home_recent_content".freeze
 
@@ -55,59 +56,24 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "the referential shows the counts of DRENA, levels, series and materials, each leading to its screen" do
-    create_drena
-    tle = create_level(name: "Tle", position: 7)
-    create_level(name: "6ème", position: 1)
-    link_level_series(level: tle, series: create_series(name: "D"))
-    create_series(name: "A1")
-    3.times { create_material }
-    sign_in_as @member
-
-    get team_home_path
-
-    assert_select "#team_home_referential" do
-      assert_select "h2", text: tl("referential.title")
-      { drenas_path => figure("referential.drenas", 1), levels_path => figure("referential.levels", 2),
-        series_index_path => figure("referential.series", 2), materials_path => figure("referential.materials", 3) }
-        .each { |path, label| assert_select "a[href='#{path}']", text: label }
-      assert_select "li", text: including("6ème")
-      assert_select "li", text: including("Tle") do
-        assert_select "*", text: "D"
-      end
-      assert_select "li", text: including(tl("referential.no_series"))
-    end
-  end
-
-  test "BC-10: the referential leads to the barème of the classrooms, with the total of a public lycée" do
+  # RE-05 (UDR-0068 §3.4): the referential has its own page (test/controllers/teams/referentials_controller_test.rb); the
+  # home keeps « Régions éducatives » then « Activité récente », and the « Importer » shortcut.
+  test "RE-05: the home reads « Régions éducatives » then « Activité récente », and no Référentiel section" do
     seed_referential
     sign_in_as @member
 
     get team_home_path
 
-    assert_select "#team_home_referential a[href='#{classroom_plan_path}']", text: figure("referential.classroom_plan", 77)
-  end
-
-  test "the counts follow the last creation, with no cache" do
-    sign_in_as @member
-    get team_home_path
-    assert_select "#team_home_referential a[href='#{levels_path}']", text: figure("referential.levels", 0)
-
-    create_level
-
-    get team_home_path
-    assert_select "#team_home_referential a[href='#{levels_path}']", text: figure("referential.levels", 1)
-  end
-
-  test "an empty referential says so and still leads to each screen" do
-    sign_in_as @member
-
-    get team_home_path
-
-    assert_select "#team_home_referential" do
-      assert_select "*", text: including(tl("referential.levels_empty"))
-      assert_select "a[href='#{levels_path}']"
+    assert_response :success
+    # The recent content is a lazy frame: the page received holds the headings of the two sections, in this order, alone.
+    assert_equal [ tl("show.regions_title"), tl("show.activity_title") ], css_select("main#main h2").map { it.text.strip }
+    assert_select "#team_home_referential", 0
+    assert_select "#team_referential", 0
+    [ drenas_path, levels_path, series_index_path, materials_path, classroom_plan_path ].each do |path|
+      assert_select "main#main a[href='#{path}']", 0
     end
+    assert_select "main#main li[id^=level_]", 0
+    assert_select "#team_home_shortcuts a[href='#{teams_imports_path}']", text: including(tl("shortcuts.imports"))
   end
 
   test "the shortcuts: new course and invitation in the modal, schools, imports and account unlocking" do
