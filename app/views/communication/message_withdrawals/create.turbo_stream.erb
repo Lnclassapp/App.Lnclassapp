@@ -1,0 +1,5 @@
+<%# 🌐 UI · communication/message_withdrawals/create — réponse au retrait d'une annonce (UDR-0071 §3.7) %>
+<%# Rôle : la ligne quitte « Enseignants » ou « Toutes », puis le toast « Annonce retirée. » %>
+<%# ADR  : 0078 · UDR : 0071 %>
+<%= turbo_stream.remove "moderated_announcement_#{@message.public_id}" %>
+<%= turbo_stream_toast t(".withdrawn"), type: :success %>
