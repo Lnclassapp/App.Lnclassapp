@@ -362,6 +362,8 @@ end
     assert_selector "[data-example=pagination-5] button[disabled]", text: t("components.pagination.next")
   end
 
+  # AN-22 (UDR-0071 §3.1): in the bottom bar, « Annonces » is the 4th and last case of the direction. The teacher's bottom
+  # bar is followed in communication/announcements_journey_test, the team's « Plus » menu in role_homes_test.
   test "the shell of every role: sidebar on desktop, bottom bar on mobile" do
     NavigationHelper::DESTINATIONS.each do |role, destinations|
       visit design_shell_path(role)
@@ -382,6 +384,12 @@ end
       find("button[aria-controls=account-menu]").click
 
       assert_selector "#account-menu [role=menuitem]", text: t("shared.navigation.sign_out")
+      visit design_shell_path(:school_admin)
+
+      within("nav.fixed.bottom-0 ul.grid-cols-4") do
+        assert_selector ":scope > li", count: 4
+        assert_selector "li:last-child a[href='#{announcements_path}']", text: t("shared.navigation.announcements")
+      end
     end
   end
 
