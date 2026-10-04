@@ -26,8 +26,8 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   def right(question) = question.answers.find_by!(correct: true)
   def wrong(question) = question.answers.where(correct: false).order(:id).first
 
-  def complete(score_percent:, first_correct: true, student: @student)
-    create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:).tap do |session|
+  def complete(score_percent:, first_correct: true, student: @student, gap: nil)
+    create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:, gap:).tap do |session|
       create_attempt(session:, question: @first, correct: first_correct)
       create_attempt(session:, question: @second, correct: true)
     end
@@ -35,12 +35,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   def show(session = @session) = get(exercise_session_result_path(session.public_id))
 
-  # Sessions terminées une minute après la précédente, à la suite de @session (rescorée au premier score).
-  def sessions(first, *scores)
+  # Sessions terminées une minute après la précédente, à la suite de @session (rescorée au premier score). remediations :
+  # les rangs (2 pour la deuxième session) faits en remédiation, sur une lacune de la fiche (ADR-0043).
+  def sessions(first, *scores, remediations: [])
     @session.update!(score_percent: first)
-    scores.map do |score_percent|
+    gap = create_gap(student: @student, essential: @essential) if remediations.any?
+    scores.each_with_index.map do |score_percent, index|
       travel 1.minute
-      complete(score_percent:)
+      complete(score_percent:, gap: (gap if remediations.include?(index + 2)))
     end
   end
 
@@ -239,6 +241,31 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show second
 
     assert_select "#session_progress", text: progress(:progress, first: 6, current: 18)
+  end
+
+  # Décision du 2026-10-04 (défaut D1 du challenger) : sous 50 %, la session suivante de la fiche est une remédiation.
+  # Elle fait l'exercice : son résultat porte la phrase, et elle compte dans l'historique des sessions d'après.
+  test "progrès : 25 puis 75 en remédiation, l'élève lit qu'il progresse sur le résultat de la remédiation" do
+    remediation = sessions(25, 75, remediations: [ 2 ]).last
+    sign_in_as @student
+
+    show remediation
+
+    assert_select "#session_progress", text: "Tu progresses : 5/20 à ta première session, 15/20 aujourd'hui."
+    assert_select "#session_progress svg.text-success", 1
+  end
+
+  test "progrès : 25, 75 en remédiation, 25, 75 en remédiation, 50 — la 3e et la 5e rappellent son meilleur, 15/20" do
+    _, third, _, fifth = sessions(25, 75, 25, 75, 50, remediations: [ 2, 4 ])
+    sign_in_as @student
+    expected = "Ton meilleur résultat reste 15/20. Relis la correction, tu peux le retrouver."
+
+    [ third, fifth ].each do |session|
+      show session
+
+      assert_select "#session_progress", text: expected
+      assert_select "#session_progress svg.text-mute", 1
+    end
   end
 
   test "progrès : aucune couleur de sanction dans la phrase, quel que soit le cas" do

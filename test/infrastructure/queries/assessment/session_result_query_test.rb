@@ -5,7 +5,8 @@ module Queries
     # AS-11, AS-12, AS-39 (ADR-0033, ADR-0054) : le résultat d'une session terminée — score, note sur 20, maîtrise, palier
     # de badge, « Nouveau badge ! » — et sa correction question par question. Sans reveal, seules les propositions
     # cochées sont lues, et jamais la colonne answers.correct ; avec reveal, toutes, propositions correctes marquées.
-    # UDR-0073 : le progrès de l'élève sur l'exercice, lu sur ses sessions standard terminées jusqu'à celle-ci (ADR-0079 §4.3).
+    # UDR-0073 : le progrès de l'élève sur l'exercice, lu sur ses sessions terminées, standard et remédiation, jusqu'à
+    # celle-ci (ADR-0079 §4.3).
     class SessionResultQueryTest < ActiveSupport::TestCase
       setup do
         @student = create_student(first_name: "Awa", last_name: "Koné")
@@ -160,29 +161,44 @@ module Queries
         assert_equal [ :progress, 6, 18, 18 ], grades(progress_of(later))
       end
 
-      test "progrès : ni session commencée, ni abandonnée, ni remédiation, ni autre élève, ni autre exercice" do
+      test "progrès : ni session commencée, ni abandonnée, standard ou remédiation, ni autre élève, ni autre exercice" do
         @session.update!(score_percent: 30)
+        gap = create_gap(student: @student, essential: @essential)
         travel 1.minute
         create_exercise_session(student: @student, exercise: @exercise, status: "abandoned", score_percent: 0,
                                 completed_at: Time.current)
-        create_exercise_session(student: @student, exercise: @exercise, status: "started")
-        gap = create_gap(student: @student, essential: @essential)
-        history(0, gap:)
+        create_exercise_session(student: @student, exercise: @exercise, status: "abandoned", score_percent: 0,
+                                completed_at: Time.current, gap:)
+        create_exercise_session(student: @student, exercise: @exercise, status: "started", gap:)
         history(0, student: create_student)
         travel 1.minute
         create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), status: "completed",
-                                score_percent: 0)
+                                score_percent: 0, gap:)
         current = history(90).last
 
         assert_equal [ :progress, 6, 18, 18 ], grades(progress_of(current))
       end
 
-      test "progrès : nil sur le résultat d'une session de remédiation, même après des sessions standard" do
-        @session.update!(score_percent: 30)
-        history(90)
-        remediation = history(50, gap: create_gap(student: @student, essential: @essential)).last
+      # Décision du 2026-10-04 (défaut D1 du challenger) : sous 50 %, une lacune s'ouvre et la session suivante de la fiche
+      # est une remédiation (ADR-0043). Elle fait l'exercice : elle compte, et son résultat porte la phrase.
+      test "progrès : 25 en standard puis 75 en remédiation, la remédiation lit :progress, 5/20 puis 15/20" do
+        @session.update!(score_percent: 25)
+        remediation = history(75, gap: create_gap(student: @student, essential: @essential)).last
 
-        assert_nil progress_of(remediation)
+        assert_equal "remediation", remediation.kind
+        assert_equal [ :progress, 5, 15, 15 ], grades(progress_of(remediation))
+      end
+
+      test "progrès : 25, 75 en remédiation, 25, 75 en remédiation, 50 — le meilleur 15/20 reste, sur la 3e et la 5e" do
+        gap = create_gap(student: @student, essential: @essential)
+        @session.update!(score_percent: 25)
+        history(75, gap:)
+        third = history(25).last
+        history(75, gap:)
+        fifth = history(50).last
+
+        assert_equal [ :decline, 5, 15, 5 ], grades(progress_of(third))
+        assert_equal [ :decline, 5, 15, 10 ], grades(progress_of(fifth))
       end
 
       test "progrès : les sessions de deux assignations de deux classes forment un seul historique" do
