@@ -1,0 +1,16 @@
+<%# 🌐 UI · assessment/comprehension/_circle — le cercle de la catégorie dominante d'un exercice assigné, avec « 18/25 » %>
+<%# Rôle : pastille de couleur jamais seule : le libellé est écrit à côté ; gris et « Pas encore lisible » sous 5 faits %>
+<%# ADR  : 0079 · UDR : 0072 (§3.3, §3.8) · size: :sm (page classe) ou :lg (section du suivi) %>
+<%# locals: (category:, done:, present:, size: :sm) -%>
+<% ratio = t("assessment.comprehension.done_ratio", done:, present:) %>
+<span class="inline-flex flex-wrap items-center gap-2">
+  <span class="<%= class_names("shrink-0 rounded-full", comprehension_dot_class(category), { sm: "size-4", lg: "size-14" }.fetch(size)) %>" aria-hidden="true"></span>
+  <% if size == :lg %>
+    <span class="flex flex-col">
+      <span class="font-display text-xl font-extrabold text-ink"><%= comprehension_label(category) %></span>
+      <span class="text-sm text-mute tabular-nums"><%= ratio %></span>
+    </span>
+  <% else %>
+    <span class="text-sm text-ink"><%= comprehension_label(category) %> · <span class="tabular-nums"><%= ratio %></span></span>
+  <% end %>
+</span>

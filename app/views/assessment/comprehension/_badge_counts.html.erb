@@ -1,0 +1,14 @@
+<%# 🌐 UI · assessment/comprehension/_badge_counts — les badges de la classe sur un exercice assigné, par palier %>
+<%# Rôle : toujours les quatre paliers, Bronze compris ; un palier à 0 est atténué, jamais omis ; chaque palier dit aux lecteurs d'écran %>
+<%# ADR  : 0033, 0079 · UDR : 0072 (§3.3, §3.8) · counts : { bronze:, silver:, gold:, diamond: }, entiers %>
+<%# locals: (counts:) -%>
+<ul class="flex items-center gap-3" aria-label="<%= t("assessment.comprehension.badges_label") %>">
+  <% Entities::Assessment::Grading::BADGE_ORDER.each do |level| %>
+    <% count = counts.fetch(level) %>
+    <li class="flex items-center gap-1">
+      <%= ui_icon "trophy", variant: :mini, size: :sm, class: comprehension_badge_class(level, count) %>
+      <span class="<%= class_names("text-sm tabular-nums", count.zero? ? "text-line" : "text-ink") %>" aria-hidden="true"><%= count %></span>
+      <span class="sr-only"><%= t("assessment.comprehension.badge_count", count:, level: badge_label(level)) %></span>
+    </li>
+  <% end %>
+</ul>
