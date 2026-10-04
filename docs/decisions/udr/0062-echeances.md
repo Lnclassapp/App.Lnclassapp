@@ -191,7 +191,7 @@ Route `GET /classrooms/:classroom_public_id/assignments/:public_id`, `Classroom:
 
 ## Amendement du 2026-10-04 — compréhension d'un exercice assigné
 
-*Chantier [`docs/chantiers/rapports-exercices`](../../chantiers/rapports-exercices/prd.md), [UDR-0072](0072-comprehension-d-un-exercice-assigne.md), [ADR-0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md). Statut : proposé. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/rapports-exercices`](../../chantiers/rapports-exercices/prd.md), [UDR-0072](0072-comprehension-d-un-exercice-assigne.md), [ADR-0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md). Statut : accepté (2026-10-04, porteur). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **§3.4, ligne d'un exercice assigné** : sous « N faits… », un pied, sous la même policy que les comptes : badges de la classe à gauche, cercle de compréhension à droite (UDR-0072 §3.4).
-- **§3.5, page de suivi** : une section « Compréhension » entre la carte d'en-tête et les rendus en retard, catégories dans l'adresse (`?category=`) (UDR-0072 §3.5). Le reste de la page ne change pas.
+- **§3.5, page de suivi** : une section « Compréhension » entre la carte d'en-tête et les rendus en retard, catégories dans l'adresse (`?category=`) (UDR-0072 §3.5). Les élèves pas encore faits sont désormais **nommés**, après les rendus en retard (UDR-0072 §3.5 bis, ADR-0079 §4.8). Le reste de la page ne change pas.

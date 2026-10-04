@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | en cours |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `feature/rapports-exercices` |
 | **Programme** | `refonte-application`, vague V3 ([feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)) : tranche « exercices » du chantier prévu `rapports-de-classe` |
@@ -38,8 +38,7 @@ La V1 (boucle pédagogique) est en production : les élèves font des exercices 
 - La **réussite de la fiche essentielle dans la classe** (UDR-0029) et l'**accueil enseignant** : inchangés.
 - Tout **cache** des agrégats : la lecture se fait en direct (ADR-0062, ADR-0067 : index d'abord, cache en dernier recours).
 - L'**export** (PDF, tableur) du rapport.
-- **Le signe de progrès vu par l'élève lui-même** sur ses pages : aligné sur la mission, mais c'est un autre acteur et un autre écran (UDR-0058). Chantier de suivi proposé : `progres-eleve`.
-- **Nommer les élèves qui n'ont pas encore fait l'exercice** sur la page de suivi : question ouverte de l'ADR-0072, à trancher par le porteur.
+- **Le signe de progrès vu par l'élève lui-même** sur ses pages : chantier [`progres-eleve`](../progres-eleve/memo.md), ouvert le 2026-10-04.
 - Ce que voit la **direction** : inchangé.
 
 ## Ce que le grill a révélé
@@ -61,6 +60,8 @@ La V1 (boucle pédagogique) est en production : les élèves font des exercices 
 | Que se passe-t-il au clic ? | **Décision alignée** : le cercle et la ligne mènent à la **page de suivi** de l'exercice assigné (UDR-0062 §3.5), qui gagne une section « Compréhension » sous ses trois chiffres : le grand cercle, la synthèse des signes, puis les trois catégories. Choisir une catégorie affiche le **taux de réussite de chaque question** pour ses élèves et la **liste de ses élèves** avec meilleur score et signe. Lisible sans JavaScript. | Une UDR nouvelle pour la section, qui amende l'UDR-0062 §3.5. La catégorie choisie vit dans l'adresse : l'écran se partage et se recharge sans perdre le choix. La page de suivi nomme déjà des élèves sous sa policy : rien ne change pour la confidentialité. |
 | Quels badges compter au bord bas de l'exercice ? | **Décision** : les quatre paliers (Bronze, Argent, Or, Diamant), comptés parmi les élèves qui ont fait l'exercice assigné, d'après leur **meilleur score sur cette assignation** (le barème de l'ADR-0033). Les quatre sont toujours affichés, un palier à zéro en atténué : l'ancien rapport omettait le Bronze (AS-25). | Couleur et badge viennent du même score : ils ne se contredisent jamais. Coût consenti : un élève qui a obtenu un badge plus haut hors de cette assignation (autre classe, avant l'assignation) apparaît ici à son palier de l'assignation. Aucune lecture de la table des badges. |
 | Les décisions servent-elles la mission ? | **Rappel du porteur** (2026-10-04) : la mission de Lnclass est d'aider les acteurs du système éducatif à **progresser** ; les décisions doivent s'y aligner. | Relecture de chaque décision. Trois ajouts : le taux au **premier essai** à côté du taux au meilleur essai, pour montrer ce que la classe a appris ; la marque « **À reprendre en classe** » sous 50 % ; les élèves **en baisse ou qui stagnent en tête** de leur catégorie. Une suite proposée hors de ce chantier : montrer à l'élève son propre signe de progrès. |
+| Faut-il nommer les élèves qui n'ont pas encore fait l'exercice ? (question ouverte de l'ADR-0072) | **Oui** (porteur, 2026-10-04) : pour les aider à progresser, l'enseignant doit savoir qui relancer. | La page de suivi gagne la liste « Pas encore faits », sous la même policy que les rendus en retard. Le Lot B devient propriétaire de la lecture du suivi. ADR-0079 §4.8, UDR-0072 §3.5 bis. |
+| Faut-il montrer à l'élève son propre signe de progrès ? | **Oui, dans un chantier à part** (porteur, 2026-10-04) : ouverture de `progres-eleve`. | Hors de ce chantier : autre acteur, autre écran. Il réutilisera les règles de l'ADR-0079. |
 | Que montre le cercle quand deux catégories sont à égalité ? | **Décision** : la plus fragile l'emporte (rouge avant jaune avant vert). L'enseignant est alerté plutôt que rassuré à tort. | Règle de domaine testée (égalité rouge/vert, jaune/vert). |
 | Où l'information apparaît-elle ? | Sur la carte de l'exercice, **bord bas** : les icônes de badges **à gauche**, l'icône de la statistique **à droite, isolée** des autres. (porteur, 2026-10-04) | La carte d'exercice dans la classe change : UDR obligatoire (amendement de l'UDR de la carte, ou nouvelle UDR). Les compteurs de badges (AS-25) entrent dans le périmètre. |
 
@@ -76,6 +77,5 @@ La V1 (boucle pédagogique) est en production : les élèves font des exercices 
 
 ## Questions encore ouvertes
 
-- Faut-il nommer, sur la page de suivi, les élèves qui n'ont pas encore fait l'exercice ? Pour les aider à progresser, l'enseignant doit savoir qui relancer. La question est restée ouverte à l'ADR-0072.
 - Le porteur a fourni des captures qui n'étaient pas les maquettes de l'écran : l'UDR propose une mise en page ; à confronter aux maquettes si elles existent.
 - La marge de 10 points est une première valeur : à revoir après usage réel, elle n'a qu'une définition dans le code.

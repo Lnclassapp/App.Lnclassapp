@@ -2,10 +2,10 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-04, porteur, avec le plan du chantier) |
 | **Date** | 2026-10-04 |
 | **Chantier** | [`docs/chantiers/rapports-exercices`](../../chantiers/rapports-exercices/memo.md) — tranche « exercices » de `rapports-de-classe` (V3) |
-| **Remplace** | — *(complète ADR-0033, ADR-0048, ADR-0072)* |
+| **Remplace** | — *(complète ADR-0033, ADR-0048, ADR-0072 ; tranche la question ouverte de l'ADR-0072 sur les élèves pas encore faits)* |
 | **Remplacé par** | — |
 
 ---
@@ -115,6 +115,10 @@ Ceux qui ont le plus besoin de l'enseignant d'abord : `:decline`, puis `:stagnan
 - **Aucun cache.** L'ordre des leviers de l'ADR-0062 s'applique : index, puis requête, puis cache par ADR.
 - La page classe lit les résumés de toutes ses assignations en un nombre de requêtes constant.
 
+### 4.8 Élèves qui n'ont pas encore fait l'exercice
+
+Décision du porteur (2026-10-04) : pour qu'il aide chaque élève à progresser, l'enseignant doit savoir **qui relancer**. La page de suivi **nomme** les élèves présents sans session faite sur l'assignation, triés par nom (`last_name`, `first_name`, `id`). Même policy que les rendus en retard (`FollowAssignmentPolicy`) : un élève ne voit jamais ces noms. Un élève qui a seulement une session commencée y figure. Cela tranche la question laissée ouverte par l'ADR-0072 (UDR-0062 §3.5 : « les pas encore faits ne sont pas nommés »).
+
 ## 5. Conséquences
 
 ### 🟢 Positives
@@ -122,7 +126,7 @@ Ceux qui ont le plus besoin de l'enseignant d'abord : `:decline`, puis `:stagnan
 - Le cercle, les badges et les « faits » d'un exercice viennent des mêmes sessions et du même score : ils ne se contredisent plus.
 - Le progrès a sa propre lecture, au lieu d'être noyé dans une moyenne.
 - Le taux par question ne dépasse plus 100 %. Il désigne la question à reprendre, catégorie par catégorie, et montre ce que la classe a appris entre le premier et le meilleur essai.
-- Chaque lecture appelle un geste : reprendre une question marquée, aller voir d'abord l'élève en baisse ou qui stagne.
+- Chaque lecture appelle un geste : reprendre une question marquée, aller voir d'abord l'élève en baisse ou qui stagne, relancer un élève qui n'a pas encore fait l'exercice.
 - Aucun cache à invalider : le défaut de l'ancien rapport disparaît avec lui.
 - Les règles tiennent dans un module pur, testable aux bornes et réutilisable par la V5 (suivi des remédiations, AS-17).
 

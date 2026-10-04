@@ -4,7 +4,7 @@
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 > Entrées : [memo](memo.md) · [PRD](prd.md) · [ADR-0079](../../decisions/adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) · [UDR-0072](../../decisions/udr/0072-comprehension-d-un-exercice-assigne.md)
 
-**Préalable (programme `refonte-application`)** : l'ADR-0079 et l'UDR-0072 sont au statut `Proposé`. Ils passent à `Accepté` avec la validation de ce plan par le porteur, **avant** le Lot 0. Ils consomment des décisions déjà acceptées : ADR-0033, ADR-0048, ADR-0067 et ADR-0072.
+**Préalable (programme `refonte-application`)** : l'ADR-0079 et l'UDR-0072 sont **acceptés** par le porteur avec ce plan, le 2026-10-04 (« lance les lots »). Ils consomment des décisions déjà acceptées : ADR-0033, ADR-0048, ADR-0067 et ADR-0072.
 
 **Ce que le chantier ne crée pas** : aucune migration, aucune table, aucun port, aucun use case, aucune route. C'est de la lecture pure (CQRS, ADR-0026), sous une policy existante.
 
@@ -98,10 +98,12 @@ Critères du PRD couverts :
 
 - **Couche**       : infrastructure + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/assessment/comprehension_detail_query.rb`
+                     `app/infrastructure/queries/classroom/assignment_follow_up_query.rb`
                      `app/controllers/classroom/assignment_follow_ups_controller.rb`
                      `app/views/assessment/comprehension/_section.html.erb`
                      `app/views/classroom/assignment_follow_ups/show.html.erb`
                      `test/infrastructure/queries/assessment/comprehension_detail_query_test.rb`
+                     `test/infrastructure/queries/classroom/assignment_follow_up_query_test.rb`
                      `test/controllers/classroom/assignment_follow_ups_controller_test.rb`
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/infrastructure/queries/assessment/comprehension_detail_query_test.rb` · `test/controllers/classroom/assignment_follow_ups_controller_test.rb`
@@ -123,7 +125,8 @@ Contenu attendu :
     - `first_rate` est lu sur leurs `first_session_id`, `nil` si aucun n'a deux essais.
     - `to_revisit` vaut `Comprehension.to_revisit?(rate)`.
   - `students` : `[StudentRow(display_name, best, trend)]` de `selected`, triés selon `TREND_ORDER`, puis par nom (ADR-0079 §4.7).
-- Contrôleur : après `FollowAssignmentPolicy` et le chargement du suivi, il lit `params[:category]` sur la liste blanche `Comprehension::CATEGORIES` et charge `@comprehension`. `AssignmentFollowUpQuery` n'est pas modifiée : ce fichier n'est dans aucun lot, et s'il faut le changer, il remonte au Lot 0.
+- Contrôleur : après `FollowAssignmentPolicy` et le chargement du suivi, il lit `params[:category]` sur la liste blanche `Comprehension::CATEGORIES` et charge `@comprehension`.
+- `AssignmentFollowUpQuery::Row` gagne `pending_students` (`[PendingStudent(display_name)]`) : les élèves présents sans session faite, triés par nom (ADR-0079 §4.8). Ses méthodes de classe `counts`, `present_students` et `first_done`, lues par le Lot 0 et le Lot A, **ne changent pas de signature**. Vue : UDR-0072 §3.5 bis.
 - Vues : UDR-0072 §3.5 et §3.6.
 
 Critères du PRD couverts :
@@ -134,6 +137,7 @@ Critères du PRD couverts :
 - « meilleur essai à égalité » ;
 - « liste des élèves d'une catégorie » ;
 - « catégorie dans l'adresse » ;
+- « élèves pas encore faits nommés » ;
 - « refus » ;
 - « les comptes existants ne bougent pas » (page de suivi).
 
@@ -151,7 +155,7 @@ Critères du PRD couverts :
   - il ouvre le suivi et choisit « Fragile » ;
   - il voit les taux et les élèves, puis recharge la page sans perdre la catégorie.
 
-  Un élève qui force l'adresse du suivi reçoit 403. `script/perf/measure_screens.rb` mesure la page classe et la page de suivi sous **100 ms p95** et **150 Ko** de HTML au volume de l'ADR-0067. Les chiffres sont reportés dans `prd.md` §7.
+  Il voit aussi, nommés, les élèves qui n'ont pas encore fait l'exercice. Un élève qui force l'adresse du suivi reçoit 403. `script/perf/measure_screens.rb` mesure la page classe et la page de suivi sous **100 ms p95** et **150 Ko** de HTML au volume de l'ADR-0067. Les chiffres sont reportés dans `prd.md` §7.
 
 Critères du PRD couverts : « budget de l'écran », et le parcours nominal et un chemin d'erreur rejoués de bout en bout.
 
@@ -170,7 +174,7 @@ Critères du PRD couverts : « budget de l'écran », et le parcours nominal et 
 | `app/views/assessment/comprehension/_badge_counts.html.erb` | Lot 0 (rendu par A) |
 | `app/helpers/assessment/comprehension_helper.rb` | Lot 0 (utilisé par A et B) |
 | `app/infrastructure/queries/assessment/assignment_scores.rb` | Lot 0 (lu par A et B) |
-| `app/infrastructure/queries/classroom/assignment_follow_up_query.rb` | **aucun** : lu, jamais modifié ; s'il doit l'être, il remonte au Lot 0 |
+| `app/infrastructure/queries/classroom/assignment_follow_up_query.rb` | Lot B (seul à l'écrire ; le Lot 0 et le Lot A lisent ses méthodes de classe, aux signatures gelées) |
 | `config/routes.rb`, `config/routes/classroom.rb` | **aucun** : pas de route nouvelle |
 | `test/support/factories/*.rb` | **aucun** : les fabriques existantes suffisent (`create_exercise_session`, `create_attempt`, `create_assignment`) ; un besoin nouveau remonte au Lot 0 |
 | `script/perf/measure_screens.rb` | Lot C |

@@ -43,6 +43,7 @@ L'enseignant assigne un exercice à sa classe et voit combien d'élèves l'ont f
 | Élève avec un seul essai | Pas de signe ; « 1 essai » à la place |
 | Question sans réponse parmi les élèves de la catégorie | « — » au lieu d'un taux |
 | Classe archivée | Tout reste lisible, rien ne change (lecture seule) |
+| Tous les élèves ont fait l'exercice | La section « Pas encore faits » est absente |
 | Élève, autre enseignant, direction | 403 sur la page de suivi ; sur la page classe, ni badges ni cercle (comme les comptes) |
 | Assignation archivée, d'une autre classe ou inconnue | 404 (inchangé) |
 
@@ -169,6 +170,13 @@ Scénario: catégorie dans l'adresse
   Alors la catégorie « Fragile » est choisie
   Et une catégorie inconnue dans l'adresse est ignorée
 
+Scénario: élèves pas encore faits nommés
+  Étant donné 25 élèves présents, dont 18 ont fait l'exercice assigné et 1 n'a qu'une session commencée
+  Quand l'enseignant ouvre la page de suivi
+  Alors la section « Pas encore faits · 7 » nomme les 7 autres, par nom, l'élève à session commencée compris
+  Et un élève parti ou anonymisé n'y figure pas
+  Et sans élève en attente la section est absente
+
 Scénario: refus
   Quand un élève de la classe, un enseignant d'une autre classe ou la direction ouvre la page de suivi
   Alors il reçoit 403
@@ -198,6 +206,7 @@ Scénario: budget de l'écran
 ## 6. Décisions rattachées
 
 - [ADR-0079](../../decisions/adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) — règles de lecture : catégorie au meilleur score, signe à trois essais et marge de 10 points, seuil de 5 élèves, dominante à égalité vers la plus fragile, sessions de l'assignation seulement, badges déduits du meilleur score, lecture en direct sans cache.
+- Élèves pas encore faits nommés sur la page de suivi : décision du porteur (2026-10-04), ADR-0079 §4.8, UDR-0072 §3.5 bis.
 - [UDR-0072](../../decisions/udr/0072-comprehension-d-un-exercice-assigne.md) — bord bas de l'exercice sur la page classe (badges à gauche, cercle à droite) et section « Compréhension » de la page de suivi ; **amende l'UDR-0062 §3.4 et §3.5**.
 - Inchangés et suivis : ADR-0033 (seuils), ADR-0048 et ADR-0072 (« fait », policy de suivi), ADR-0067 (budgets).
 

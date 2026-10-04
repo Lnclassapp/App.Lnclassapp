@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-04, porteur, avec le plan du chantier) |
 | **Date** | 2026-10-04 |
 | **Chantier** | [`docs/chantiers/rapports-exercices`](../../chantiers/rapports-exercices/prd.md) |
 | **ADR lié** | [ADR-0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) (règles de lecture) · [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (« fait », policy de suivi) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (seuils, badges) |
@@ -159,6 +159,15 @@ section#comprehension [aria-labelledby=comprehension_title] .mb-8
 - droite, `shrink-0 flex items-center gap-3 text-sm` : le meilleur score « 85 % » (`tabular-nums`), puis le signe, avec l'icône `trend_icon` (`mini`, `aria-hidden`) et `trend_label` en `text-mute`.
 - Les lignes ne sont pas des liens : la fiche élève (CL-13) n'est pas encore là.
 
+### 3.5 bis Page de suivi — élèves pas encore faits (Lot B, amende UDR-0062 §3.5)
+
+Décision du porteur (2026-10-04, ADR-0079 §4.8). Dans `app/views/classroom/assignment_follow_ups/show.html.erb`, **après** la liste des rendus en retard (ou à sa place si elle n'existe pas) :
+
+- `section#pending_students [aria-labelledby=pending_students_title]`, avec `h2#pending_students_title` « Pas encore faits · 7 » en `mb-4 font-display text-xl font-extrabold`, où le nombre est `t("assessment.comprehension.pending.title", count:)`.
+- Une `ul`, avec la même carte que les rendus en retard (`divide-y divide-line rounded-card border border-line bg-white shadow-card`). Chaque `li` contient le nom seul, `px-4 py-3 sm:px-5 truncate font-medium`, trié par nom. Les lignes ne sont pas des liens.
+- Aucun élève en attente : la section est **absente**. Le chiffre « Pas encore faits : 0 » de la carte d'en-tête suffit.
+- Aucun identifiant d'élève dans le HTML, comme pour les rendus en retard.
+
 ### 3.6 États obligatoires
 
 | État | Où | Rendu |
@@ -212,6 +221,8 @@ section#comprehension [aria-labelledby=comprehension_title] .mb-8
   - `title` : « Personne n'a encore fait cet exercice. » ;
   - `description` : « La compréhension s'affiche dès le premier exercice rendu. ».
 - `empty_category` : « Aucun élève dans cette catégorie. »
+- `pending` :
+  - `title` : `one` « Pas encore fait · 1 », `other` « Pas encore faits · %{count} ».
 
 Les pourcentages s'écrivent avec l'espace insécable de la charte (§12) : `number_to_percentage(rate, precision: 0, format: "%n %")`.
 
