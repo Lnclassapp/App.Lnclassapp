@@ -23,7 +23,7 @@
 
 <%= turbo_frame_tag "account_lookup", class: "block transition-opacity aria-busy:opacity-50", data: { turbo_action: "advance" } do %>
   <% if @account %>
-    <%= render "result", account: @account %>
+    <%= render "result", account: @account, can_delete: @can_delete %>
   <% elsif @contact.present? %>
     <div id="account-lookup-not-found">
       <%= ui_empty_state title: t(".not_found_title"), description: t(".not_found_description", contact: @contact), icon: "magnifying-glass" %>

@@ -2,7 +2,7 @@ require "test_helper"
 
 module Repositories
   module Communication
-    # ADR-0069 §6: the frozen port of the announcements. A message is read back with its targeted classrooms, written
+    # ADR-0078 §6: the frozen port of the announcements. A message is read back with its targeted classrooms, written
     # with them in one transaction, and the scheduled ones are found when their time has come.
     class MessageRepositoryTest < ActiveSupport::TestCase
       Message = Entities::Communication::Message

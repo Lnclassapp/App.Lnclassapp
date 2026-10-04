@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0045 §4 and ADR-0069 §4.4: one image and one audio file per message, on the configured service (the bucket in
+# ADR-0045 §4 and ADR-0078 §4.4: one image and one audio file per message, on the configured service (the bucket in
 # production), never analysed; the audio is read by byte range, for playback and resumption on a mobile network.
 module Repositories
   module Communication

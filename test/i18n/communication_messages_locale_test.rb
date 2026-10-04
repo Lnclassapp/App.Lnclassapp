@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0056 §3 : les libellés partagés des annonces (Lot 0), que les lots A, B et C lisent tels quels, et l'entrée
+# UDR-0071 §3 : les libellés partagés des annonces (Lot 0), que les lots A, B et C lisent tels quels, et l'entrée
 # « Annonces » de la navigation et de l'accueil élève.
 class CommunicationMessagesLocaleTest < ActiveSupport::TestCase
   def t(key, **) = I18n.t(key, locale: :fr, raise: true, **)

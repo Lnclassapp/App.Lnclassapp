@@ -2,9 +2,9 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Entrées : [memo](memo.md) · [PRD](prd.md) · [ADR-0069](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) (amende l'[ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md)) · [UDR-0056](../../decisions/udr/0056-annonces.md).
+> Entrées : [memo](memo.md) · [PRD](prd.md) · [ADR-0078](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) (amende l'[ADR-0045](../../decisions/adr/0045-annonces-publication-programmee-et-audience.md)) · [UDR-0071](../../decisions/udr/0071-annonces.md).
 
-**Condition d'entrée du Lot 0** (programme `refonte-application`, [`programme.md` §2](../../workflows/programme.md#2-décider--prdmd-cadre--adrudr-de-fondation)) : l'**ADR-0069** et l'**UDR-0056** sont `Accepté` par le porteur. Une décision « Proposé » ne débloque rien. **Tenue : acceptées le 2026-10-03.**
+**Condition d'entrée du Lot 0** (programme `refonte-application`, [`programme.md` §2](../../workflows/programme.md#2-décider--prdmd-cadre--adrudr-de-fondation)) : l'**ADR-0078** et l'**UDR-0071** sont `Accepté` par le porteur. Une décision « Proposé » ne débloque rien. **Tenue : acceptées le 2026-10-03.**
 
 ## Graphe
 
@@ -45,20 +45,20 @@ Pourquoi D existe : `test/system/role_homes_test.rb` compte les entrées de navi
                      `app/domain/ports/communication/attachment_store_port.rb`
                      `app/infrastructure/repositories/communication/message_repository.rb`
                      `app/infrastructure/repositories/communication/attachment_store.rb`
-                     `config/routes/communication.rb` *(toutes les routes du chantier, ADR-0069 §6 et UDR-0056)*
+                     `config/routes/communication.rb` *(toutes les routes du chantier, ADR-0078 §6 et UDR-0071)*
                      `config/locales/communication/messages.fr.yml` *(libellés partagés : illustrations, statuts, destinataires, onglets, signature)*
                      `config/locales/shared/navigation.fr.yml` (`navigation.announcements`, `home.sections.announcements`)
                      `app/helpers/navigation_helper.rb` (`HOME_SECTIONS[:student]` seulement)
                      `app/helpers/components_helper.rb` (`ui_toast(action:)`, `turbo_stream_toast(action:)`, `ui_checkbox_group`)
                      `app/views/components/_toast.html.erb` · `app/views/components/_checkbox_group.html.erb`
                      `app/helpers/communication/illustrations_helper.rb` (`announcement_illustration`)
-                     `app/views/communication/messages/illustrations/_info.html.erb` … `_holidays.html.erb` *(8 partiels, UDR-0056 §3.3)*
+                     `app/views/communication/messages/illustrations/_info.html.erb` … `_holidays.html.erb` *(8 partiels, UDR-0071 §3.3)*
                      `app/views/communication/shared/_tabs.html.erb`
                      `app/views/design/index.html.erb` (vitrine des huit illustrations)
                      `test/support/factories/communication.rb` (`create_message`, `dismiss_message`)
-- **Dépend de**    : — *(ADR-0069 et UDR-0056 acceptés)*
+- **Dépend de**    : — *(ADR-0078 et UDR-0071 acceptés)*
 - **Test associé** : `test/domain/entities/communication/message_test.rb` · `test/domain/entities/communication/audio_header_test.rb` (mp3 ID3, mp3 sans ID3, m4a, wav et PDF refusés)
-                     `test/infrastructure/orm/communication/message_constraints_test.rb` (chaque `CHECK` de l'ADR-0069 §4.1 refuse une ligne fautive ; unicité des rejets et des classes ciblées)
+                     `test/infrastructure/orm/communication/message_constraints_test.rb` (chaque `CHECK` de l'ADR-0078 §4.1 refuse une ligne fautive ; unicité des rejets et des classes ciblées)
                      `test/infrastructure/repositories/communication/message_repository_test.rb` · `attachment_store_test.rb` (lecture d'une plage)
                      `test/helpers/components_helper_test.rb` (toast avec action, groupe de cases) · `test/helpers/communication/illustrations_helper_test.rb` (8 clés, aucune couleur hors tokens)
                      `test/routing/communication_routes_test.rb` (noms et verbes des routes, `public_id` et jamais d'`:id`)
@@ -109,7 +109,7 @@ Pourquoi D existe : `test/system/role_homes_test.rb` compte les entrées de navi
                      `app/javascript/controllers/communication/audio_controller.js` · `app/javascript/controllers/communication/carousel_controller.js`
                      `config/locales/communication/inboxes.fr.yml` · `config/locales/communication/message_dismissals.fr.yml` · `config/locales/classroom/student_homes.fr.yml`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/infrastructure/queries/communication/readable_messages_test.rb` (**une condition par test**, ADR-0069 §7)
+- **Test associé** : `test/infrastructure/queries/communication/readable_messages_test.rb` (**une condition par test**, ADR-0078 §7)
                      `test/infrastructure/queries/communication/inbox_query_test.rb` (ordre, plafond de 5, masquées, nombre de requêtes constant)
                      `test/domain/policies/communication/dismiss_policy_test.rb` · `read_file_policy_test.rb`
                      `test/domain/use_cases/communication/dismiss_message_test.rb` · `restore_message_test.rb` · `read_message_file_test.rb`
@@ -168,7 +168,7 @@ git worktree add ../lnclass-annonces-lot-a -b feature/annonces-lot-a feature/ann
 git worktree add ../lnclass-annonces-lot-b -b feature/annonces-lot-b feature/annonces
 ```
 
-Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son lot recopié en entier, le [PRD](prd.md), l'[ADR-0069](../../decisions/adr/0069-annonces-trois-auteurs-classes-ciblees-et-retrait.md) §4 et §6, l'[UDR-0056](../../decisions/udr/0056-annonces.md) pour toute vue ; ordre imposé : test rouge → domaine → infrastructure → delivery → UI ; en-tête HITL sur chaque fichier de `app/`. **Interdiction de toucher un fichier hors de son champ `Fichiers`** : s'il en faut un, l'agent s'arrête et remonte (Lot 0 à rouvrir, ou plan faux). Aucun lot ne redéfinit un port du Lot 0.
+Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son lot recopié en entier, le [PRD](prd.md), l'[ADR-0078](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) §4 et §6, l'[UDR-0071](../../decisions/udr/0071-annonces.md) pour toute vue ; ordre imposé : test rouge → domaine → infrastructure → delivery → UI ; en-tête HITL sur chaque fichier de `app/`. **Interdiction de toucher un fichier hors de son champ `Fichiers`** : s'il en faut un, l'agent s'arrête et remonte (Lot 0 à rouvrir, ou plan faux). Aucun lot ne redéfinit un port du Lot 0.
 
 ---
 
@@ -219,7 +219,7 @@ Critères orphelins : **aucun**. AN-01 à AN-23 sont tous rattachés (voir « Do
 
 Propres à ce chantier :
 
-- [x] ADR-0069 et UDR-0056 `Accepté` **avant** le Lot 0 (programme, décisions de fondation)
+- [x] ADR-0078 et UDR-0071 `Accepté` **avant** le Lot 0 (programme, décisions de fondation)
 - [ ] Registre des contradictions de la feuille de route mis à jour (PRD cadre ↔ ADR-0045, design system §10 ↔ ADR-0045, ADR-0065 ↔ ce chantier) ; fiche V6 précisée (« riches » = image et audio)
 - [ ] Budget de l'accueil élève (ADR-0067) tenu avec le carrousel : nombre de requêtes constant, mesuré
 

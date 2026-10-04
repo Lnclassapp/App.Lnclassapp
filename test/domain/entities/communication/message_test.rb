@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Communication
-    # ADR-0069 §4 et §6 : l'annonce, ses listes fermées, ses bornes, et ce qu'elle dit d'elle-même (figée, par classes,
+    # ADR-0078 §4 et §6 : l'annonce, ses listes fermées, ses bornes, et ce qu'elle dit d'elle-même (figée, par classes,
     # officielle, retirable par qui).
     class MessageTest < ActiveSupport::TestCase
       Actor = Entities::Identity::Actor
@@ -27,7 +27,7 @@ module Entities
         assert_equal [ nil ] * 5, [ draft.published_at, draft.ends_at, draft.edited_at, draft.withdrawn_at, draft.withdrawn_by_id ]
       end
 
-      test "les listes fermées, dans l'ordre de l'UDR-0056" do
+      test "les listes fermées, dans l'ordre de l'UDR-0071" do
         assert_equal %w[all students teachers school_admins classrooms], Message::AUDIENCES
         assert_equal %w[draft scheduled published archived withdrawn], Message::STATUSES
         assert_equal %w[info calendar homework sheets exam meeting celebration holidays], Message::ILLUSTRATIONS

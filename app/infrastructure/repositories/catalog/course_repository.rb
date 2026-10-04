@@ -1,10 +1,15 @@
 # 🔌 INFRA · Repositories::Catalog::CourseRepository
 # Rôle : traduit Orm::Course et son contenu riche (Action Text) ↔ Entities::Catalog::Course ; slug figé à la création
-# ADR  : 0029, 0035, 0039
+# ADR  : 0029, 0035, 0039, 0075
 module Repositories
   module Catalog
     class CourseRepository
       include Ports::Catalog::CourseRepositoryPort
+
+      # ADR-0075 : les assignations d'exercices d'une fiche du cours (index classroom_assignments (assignable_type, assignable_id)).
+      ASSIGNED_EXERCISE = "JOIN exercises ON exercises.id = classroom_assignments.assignable_id " \
+                          "AND classroom_assignments.assignable_type = 'Exercise' " \
+                          "JOIN essentials ON essentials.id = exercises.essential_id".freeze
 
       def find_by_slug(slug:)
         # A single record: no eager loading, which Bullet reports as unused (lot B2). The rich text costs one query.
@@ -47,10 +52,18 @@ module Repositories
         Orm::Course.pluck(:slug).to_set
       end
 
+      # Lecture d'intégrité dans le contexte classroom (ADR-0075 §5) : une ligne par classe, quel que soit le nombre de
+      # ses assignations actives, en une requête (sous-requête IN).
+      def assigned_classroom_levels(id:)
+        classroom_ids = Orm::ClassroomAssignment.joins(ASSIGNED_EXERCISE).where(status: "active", essentials: { course_id: id })
+                                                .select(:classroom_id)
+        Orm::Classroom.where(id: classroom_ids).pluck(:level_id, :series_id)
+      end
+
       private
 
       def editable_attributes(course)
-        { name: course.name, subtitle: course.subtitle, content: RichTextSanitizer.call(course.content) }
+        { name: course.name, subtitle: course.subtitle, content: Repositories::Shared::RichTextSanitizer.call(course.content) }
       end
 
       # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.

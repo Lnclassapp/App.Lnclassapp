@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::MessageRepositoryPort
 # Rôle : contrat des annonces : lecture par public_id, écriture avec leurs classes ciblées, rejets, publication programmée
-# ADR  : 0045, 0069
+# ADR  : 0045, 0078
 module Ports
   module Communication
     # Gelé au Lot 0 : les lots A, B et C le consomment, aucun ne le redéfinit.
@@ -21,7 +21,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end
 
-      # Efface les rejets de l'annonce : modifier une annonce publiée la rend à ceux qui l'avaient masquée (ADR-0069
+      # Efface les rejets de l'annonce : modifier une annonce publiée la rend à ceux qui l'avaient masquée (ADR-0078
       # §4.1). → Integer (rejets effacés)
       def clear_dismissals(message_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #clear_dismissals"

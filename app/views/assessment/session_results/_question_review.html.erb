@@ -1,8 +1,8 @@
 <%# 🌐 UI · assessment/session_results/_question_review — correction d'une question dans le résultat %>
 <%# Rôle : verdict, énoncé, propositions (les seules cochées pour l'élève ; toutes, correctes marquées, si reveal), explication %>
-<%# ADR  : 0028, 0054 · UDR : 0007, 0022, 0023 %>
+<%# ADR  : 0028, 0054 · UDR : 0007, 0022, 0023, 0057 · pour l'élève propriétaire, masquée à partir de la 4e (« Voir plus ») %>
 <% tone = { true => :success, false => :error }.fetch(question.correct, :none) %>
-<li id="question_review_<%= question.id %>">
+<li id="question_review_<%= question.id %>" <%= tag.attributes(ui_reveal_item(index)) if owner %>>
   <%= ui_card padding: :none, class: "overflow-hidden" do %>
     <div class="flex items-center justify-between gap-3 border-b border-line bg-mist px-5 py-3 sm:px-6">
       <p class="text-sm font-medium text-mute"><%= t(".number", number: question.number) %></p>

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::AttachmentStorePort
 # Rôle : contrat du stockage de l'image et de l'audio d'une annonce (service Active Storage, bucket en production)
-# ADR  : 0045, 0047, 0069
+# ADR  : 0045, 0047, 0078
 module Ports
   module Communication
     # kind : :image ou :audio (une chaîne est acceptée), un fichier de chaque au plus par annonce ; tout autre kind lève

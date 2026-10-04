@@ -35,11 +35,22 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_questions [data-controller=math] li.question", 2
     assert_select "#exercise_questions", text: /Question 1/
     assert_select "#exercise_questions", text: /Proposition 4/
-    assert_select "#exercise_questions", text: /#{I18n.t("#{scope}.questions_preview.student_hint")}/
     assert_no_match(/#{correct_mark}|La méiose compte deux divisions/, response.body)
     @correct_ids.each { |id| assert_no_match(/answer_#{id}\b|value="#{id}"/, response.body) }
 
-    assert_select "#student_progress", text: /#{I18n.t("#{scope}.student_progress.no_score")}/
+    # UDR-0021, amendement du 2026-10-02 : la fiche n'est nommée que par le lien retour (R6) ; l'aide passe en infobulle (R4).
+    assert_select "#exercise_context", text: "Génétique et évolution"
+    assert_select "#exercise_header", text: /Fiche essentielle :/, count: 0
+    assert_select "#exercise_questions_title details", text: /#{I18n.t("#{scope}.questions_preview.student_hint")}/
+    assert_select "#exercise_questions p", text: /#{I18n.t("#{scope}.questions_preview.student_hint")}/, count: 0
+    assert_select "#exercise_questions[data-controller=reveal][data-reveal-step-value='3']"
+    assert_select "#exercise_questions li.question[data-reveal-target=item]", 2
+    assert_select "#exercise_questions li.question[hidden]", 0
+    assert_select "#exercise_questions [data-reveal-target=button]", 0
+
+    assert_select "#student_progress dt", text: I18n.t("#{scope}.student_progress.best_score")
+    assert_select "#student_progress dd", text: I18n.t("#{scope}.student_progress.no_score"), count: 2
+    assert_select "#student_progress", text: /Aucune session terminée/, count: 0
     assert_select "#student_progress", text: /#{I18n.t("#{scope}.student_progress.no_badge")}/
     assert_select "#student_progress form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}']" do
       assert_select "input[name=restart]", 0
@@ -49,7 +60,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#content_status_exercise_#{@exercise.public_id}", 0
   end
 
-  test "l'élève qui a une session en cours voit « Reprendre » et « Recommencer », son meilleur score, sa maîtrise et son badge" do
+  test "l'élève qui a une session en cours voit « Reprendre » et « Recommencer », sa meilleure note, sa maîtrise et son badge" do
     best = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85)
     create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40)
     create_badge(student: @student, exercise: @exercise, level: "gold", session: best)
@@ -60,7 +71,10 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#student_progress" do
-      assert_select "*", text: /85 %/
+      # UDR-0021, amendement du 2026-10-02 : la meilleure note sur 20, la seule forme de la note pour l'élève (R6).
+      assert_select "*", text: /#{I18n.t("#{scope}.student_progress.best_score")}/
+      assert_select "dd", text: "17/20"
+      assert_select "*", text: /85 %/, count: 0
       assert_select "*", text: /Acquis/
       assert_select "*", text: /#{I18n.t("#{scope}.student_progress.badge_level", level: "Or")}/
       assert_select "*", text: /#{I18n.t("#{scope}.student_progress.completed", count: 2)}/
@@ -70,6 +84,9 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
         assert_select "button[type=submit]", text: I18n.t("#{scope}.student_progress.restart")
       end
       assert_select "button", text: I18n.t("#{scope}.student_progress.start"), count: 0
+      # « Recommencer » s'explique dans son infobulle, plus dans un paragraphe permanent (R4).
+      assert_select "details", text: /#{Regexp.escape(I18n.t("#{scope}.student_progress.restart_hint"))}/
+      assert_select "p", text: /#{Regexp.escape(I18n.t("#{scope}.student_progress.restart_hint"))}/, count: 0
     end
     assert_no_match(/#{correct_mark}/, response.body)
   end
@@ -84,10 +101,72 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_questions li.answer[data-correct]", 2
     @correct_ids.each { |id| assert_select "#answer_#{id}[data-correct]", text: /#{correct_mark}/ }
     assert_select "#exercise_questions", text: /La méiose compte deux divisions\./
-    assert_select "#exercise_questions", text: /#{I18n.t("#{scope}.questions_preview.reveal_hint")}/
+    assert_select "#exercise_questions p", text: /#{I18n.t("#{scope}.questions_preview.reveal_hint")}/
     assert_select "#student_progress", 0
+    # Décision du porteur (2026-10-02) : l'enseignant garde l'écran inchangé — contexte complet, toutes les questions.
+    assert_select "#exercise_context", text: I18n.t("#{scope}.show.context", course: "Génétique et évolution", essential: "La méiose")
+    assert_select "#exercise_questions[data-controller=reveal]", 0
+    assert_select "#exercise_questions [data-reveal-target]", 0
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
     assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
+  end
+
+  # RE-22 — UDR-0069 §3.8 : après l'en-tête, la carte « Assigner à mes classes », une bascule par classe de l'enseignant
+  # du niveau et de la série du cours ; les libellés nomment l'exercice et la classe.
+  test "l'enseignant assigne depuis la page : « Assigner à mes classes », une bascule par classe de Tle D" do
+    course = @essential.course
+    school = create_school
+    tle_d1, tle_d2 = [ "Tle D 1", "Tle D 2" ].map { |name| create_classroom(school:, level: course.level, series: course.series, name:) }
+    tle_c1 = create_classroom(school:, level: course.level, series: create_series(name: "C"), name: "Tle C 1")
+    teacher = create_teacher(school:, classrooms: [ tle_c1, tle_d2, tle_d1 ])
+    assignment = create_assignment(classroom: tle_d2, assignable: @exercise, by: teacher)
+    sign_in_as teacher
+
+    get exercise_path(@exercise.public_id)
+
+    assert_response :success
+    assert_select "#exercise_header ~ div > #exercise_assign"
+    assert_select "#exercise_assign" do
+      assert_select "h2", text: I18n.t("#{scope}.show.assign_title")
+      assert_select "ul[aria-label=?]", I18n.t("#{scope}.show.assign_targets", title: "Méiose") do |list|
+        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li > span").map { it.text.strip }
+      end
+      assert_select "[id^='assignment_']", 2
+      assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{@exercise.public_id} a[data-turbo-frame=modal][aria-label=?]",
+                    "Assigner « Méiose » à Tle D 1"
+      assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id}" do
+        assert_select "*", text: /Assigné/
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button[aria-label=?]", "Retirer « Méiose » de Tle D 2"
+      end
+      assert_select "#exercise_assign_none", 0
+    end
+    assert_select "[id^='assignment_#{tle_c1.public_id}_']", 0
+  end
+
+  test "l'enseignant sans classe de Tle D lit « Aucune de vos classes n'est en Tle D. », sans bascule" do
+    sign_in_as create_teacher(classrooms: [ create_classroom(level: @essential.course.level, series: create_series(name: "C")) ])
+
+    get exercise_path(@exercise.public_id)
+
+    assert_response :success
+    assert_select "#exercise_assign #exercise_assign_none", text: "Aucune de vos classes n'est en Tle D."
+    assert_select "[id^='assignment_']", 0
+  end
+
+  # RE-26 — UDR-0069 §3.8 : ni l'équipe ni l'élève n'ont la carte ; le menu ⋮ de l'équipe est inchangé.
+  test "l'équipe et l'élève ne voient pas « Assigner à mes classes »" do
+    create_teacher(classrooms: [ create_classroom(level: @essential.course.level, series: @essential.course.series) ])
+
+    [ [ create_team_member, 1 ], [ @student, 0 ] ].each do |user, menus|
+      sign_in_as user
+      get exercise_path(@exercise.public_id)
+
+      assert_response :success
+      assert_select "#exercise_assign", 0
+      assert_select "[id^='assignment_']", 0
+      assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: "Méiose"), menus
+      sign_out
+    end
   end
 
   test "l'équipe ouvre un brouillon : statut, transitions, « Modifier » en modale et propositions correctes" do
@@ -108,6 +187,8 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
                   text: I18n.t("#{scope}.show.edit")
     assert_select "#exercise_questions li.answer[data-correct]", 2
     assert_select "#student_progress", 0
+    assert_select "#exercise_context", text: I18n.t("#{scope}.show.context", course: "Génétique et évolution", essential: "La méiose")
+    assert_select "#exercise_questions [data-reveal-target]", 0
   end
 
   test "un exercice sans question ni description, vu par l'équipe, le dit" do

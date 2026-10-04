@@ -96,6 +96,20 @@ module Repositories
         assert_equal [ :conflict, { contact: [ :taken ] } ], [ result.code, result.errors ]
         assert_equal "0102030405", record.reload.contact
       end
+
+      # ADR-0036 §4: the number is freed, the PIN is a random secret nobody knows, the name says the account is gone.
+      test "anonymize renames the account, frees its number, replaces its PIN and dates the anonymization" do
+        record = create_student(contact: "0102030405", pin: "2468")
+        at = Time.current.change(usec: 0)
+
+        assert @repository.anonymize(user_id: record.id, first_name: "Compte", last_name: "supprimé", at:)
+
+        record.reload
+        assert_equal [ "Compte", "supprimé", nil, at ], [ record.first_name, record.last_name, record.contact, record.anonymized_at ]
+        assert_not record.authenticate_pin("2468")
+        assert_nil @repository.authenticate(contact: "0102030405", pin: "2468")
+        assert create_student(contact: "0102030405").persisted?
+      end
     end
   end
 end

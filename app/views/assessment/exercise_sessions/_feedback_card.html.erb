@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/_feedback_card — verdict de la question qui vient d'être tentée %>
 <%# Rôle : « Bonne réponse » ou « Mauvaise réponse », seules les propositions cochées, explication ; jamais les propositions correctes %>
-<%# ADR  : 0028, 0054 · UDR : 0007, 0022 · Stimulus : math (KaTeX) %>
+<%# ADR  : 0028, 0054 · UDR : 0007, 0022, 0057 · Stimulus : math (KaTeX) %>
 <% tone = feedback.correct ? :success : :error %>
 <%= turbo_frame_tag "question" do %>
   <%= ui_card padding: :none, id: "feedback-card", class: "overflow-hidden" do %>

@@ -21,10 +21,22 @@ L'élève voyait tout le catalogue publié, tous niveaux confondus. Il pouvait a
 - **Filtre « Niveau »** : retiré du catalogue de l'élève.
 - **Autres rôles** : enseignant, direction et équipe sont inchangés.
 
-## Hors périmètre
+## Suite (même jour) : l'assignation hors niveau est refusée
 
-- Un contenu d'un autre niveau assigné par un enseignant à la classe de l'élève : il reste illisible pour l'élève. Ce cas n'est pas attendu.
+Décision du porteur : « Refuse l'assignation hors niveau ».
+
+- `AssignResource` refuse un contenu dont le cours n'est pas du niveau de la classe (`:conflict`, `other_level`), avec la règle de lecture de l'élève.
+- Le contenu résolu porte désormais `course_level`.
 
 ## Tests qui ont changé
 
 Les tests existants connectaient des élèves sans classe, qui voyaient tout. Ils utilisent maintenant `create_student_for(course)`, un élève d'une classe du niveau du cours. Trois tests du filtre par niveau sont joués par un enseignant, puisque l'élève n'a plus ce filtre.
+
+## Suite : les restes relevés par la revue de sécurité de la mise en production
+
+Décision du porteur : « ferme les 2 points ».
+
+- **Sessions ouvertes avant la règle** : jouer, répondre et relire le résultat sont refusés hors niveau. Le refus vient après le contrôle du propriétaire.
+- **Accueil de l'élève** : exercices assignés, sessions récentes et fiches à revoir sont filtrés par son niveau.
+- **Code** : le filtre SQL du catalogue devient `Queries::Catalog::AudienceFilter`, partagé avec l'accueil. `CourseLevelQuery` accepte aussi `exercise_id:` et `session_public_id:`.
+

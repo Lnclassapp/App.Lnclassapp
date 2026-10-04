@@ -1,6 +1,8 @@
 # Jeu de données de mesure du chantier cache-ecrans-lourds, à l'échelle de la feuille de route (ADR-0039 §7) : 500
 # établissements et leurs ~34 000 classes, 4 000 enseignants, 40 000 élèves, 200 cours complets, leurs devoirs et
-# ~300 000 sessions d'exercice sur 60 jours, sur une base qui porte le référentiel de db/seeds.
+# ~300 000 sessions d'exercice sur 60 jours, sur une base qui porte le référentiel de db/seeds ; et le blog (ADR-0074) :
+# 30 articles publiés de 1 500 mots, chacun avec sa couverture et cinq images dans le texte, plus deux brouillons et un
+# archivé.
 #
 #   bin/rails runner script/perf/seed_dataset.rb
 #
@@ -18,6 +20,8 @@ module PerfDataset
   TEACHERS = Integer(ENV.fetch("PERF_TEACHERS", 4_000))
   STUDENTS = Integer(ENV.fetch("PERF_STUDENTS", 40_000))
   COURSES = Integer(ENV.fetch("PERF_COURSES", 200))
+  ARTICLES = Integer(ENV.fetch("PERF_ARTICLES", 30))
+  ARTICLE_IMAGES = 5
   FOCUS_CLASS_SIZE = 55
   BATCH = 5_000
   PIN = "2468".freeze
@@ -77,6 +81,7 @@ module PerfDataset
     seed_sessions(students, assignments)
     seed_growth(adopting, teachers)
     seed_admin(adopting.first)
+    seed_blog
     elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
     log format("terminé en %.0f s", elapsed)
     report
@@ -342,6 +347,43 @@ module PerfDataset
     log "150 demandes en attente, #{Orm::Referral.count} parrainages, #{Orm::ReferralShare.count} partages"
   end
 
+  # Le blog public (ADR-0074, UDR-0066) : ARTICLES publiés, puis deux brouillons et un archivé, signés par l'auteur des
+  # cours. Les lignes d'article_images n'ont pas de fichier : la page d'un article ne lit que leurs colonnes, seule la
+  # route des images (hors mesure) lirait le bucket. Le texte cite ses cinq images par sgid, comme Action Text l'enregistre.
+  def seed_blog
+    author = Orm::User.find_by!(contact: "0700000000").id
+    statuses = Array.new(ARTICLES, "published") + %w[draft draft archived]
+    image_ids = insert(Orm::ArticleImage, Array.new(statuses.size * (ARTICLE_IMAGES + 1)) do |index|
+      { public_id:, alt: "Illustration #{index + 1}", content_type: "image/webp", byte_size: 180_000, width: 1600, height: 1067,
+        created_at: now, updated_at: now }
+    end, returning: %w[id])
+    images = Orm::ArticleImage.where(id: image_ids).order(:id).each_slice(ARTICLE_IMAGES + 1).to_a
+    rows = statuses.each_with_index.map do |status, index|
+      title = "Réviser le BEPC, conseil #{index + 1}"
+      published_at = (now - (index + 1).days unless status == "draft")
+      { public_id:, slug: title.parameterize, title:, excerpt: "Une méthode simple pour réviser, semaine après semaine.",
+        cover_image_id: images[index].first.id, cover_alt: "Une élève qui révise", signature: index.even? ? "team" : "author",
+        status:, published_at:, archived_at: (now if status == "archived"), author_id: author, created_at: now, updated_at: now }
+    end
+    article_ids = insert(Orm::Article, rows, returning: %w[id])
+    insert(ActionText::RichText, article_ids.each_with_index.map do |id, index|
+      Orm::ArticleImage.where(id: images[index].map(&:id)).update_all(article_id: id)
+      { record_type: "Orm::Article", record_id: id, name: "body", body: article_body(images[index].drop(1)), created_at: now,
+        updated_at: now }
+    end)
+    log "#{ARTICLES} articles publiés, 2 brouillons, 1 archivé, #{image_ids.size} images"
+  end
+
+  # 1 500 mots en quinze paragraphes, un intertitre, et une image tous les trois paragraphes.
+  def article_body(images)
+    paragraphs = Array.new(15) { "<div>#{(%w[Révisez chaque jour un chapitre court puis refaites les exercices corrigés] * 10).join(' ')}.</div>" }
+    attachments = images.map do |image|
+      %(<action-text-attachment sgid="#{image.attachable_sgid}" content-type="image/webp" width="1600" height="1067">) +
+        "</action-text-attachment>"
+    end
+    "<h2>Le plan</h2>" + paragraphs.each_slice(3).zip(attachments).flatten.compact.join
+  end
+
   # La direction de l'établissement focus (ADR-0065).
   def seed_admin(focus)
     id = insert(Orm::User, [ user_row(contact: ADMIN_CONTACT, role: "school_admin", created_at: days_ago(30)) ], returning: %w[id]).first
@@ -351,7 +393,8 @@ module PerfDataset
 
   def report
     %w[schools classrooms users classroom_students teacher_classrooms courses essentials exercises questions answers
-       classroom_assignments exercise_sessions exercise_badges knowledge_gaps referrals referral_shares].each do |table|
+       classroom_assignments exercise_sessions exercise_badges knowledge_gaps referrals referral_shares articles
+       article_images].each do |table|
       log format("%-22s %9d", table, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{table}"))
     end
   end

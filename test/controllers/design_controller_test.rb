@@ -28,7 +28,7 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#design-search-form[role=search][aria-label='#{I18n.t("design.index.finishes.search.label")}']"
   end
 
-  # UDR-0056 §3.6 and §3.8: the components the announcements bring are shown with the others.
+  # UDR-0071 §3.6 and §3.8: the components the announcements bring are shown with the others.
   test "the style guide shows a toast with its action and a checkbox group" do
     get design_path
 
@@ -37,7 +37,7 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-example=field-checkbox-group] fieldset#design_announcement_classrooms input[type=checkbox]", 3
   end
 
-  # UDR-0056 §3.3: the eight illustrations of the announcements, each named.
+  # UDR-0071 §3.3: the eight illustrations of the announcements, each named.
   test "the style guide shows the eight announcement illustrations, named" do
     get design_path
 
@@ -49,7 +49,7 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # UDR-0056 §3.1: « Annonces » is the second section of the student home, right after « À faire ».
+  # UDR-0071 §3.1: « Annonces » is the second section of the student home, right after « À faire ».
   test "the student shell shows the announcements section second" do
     get design_shell_path(role: "student")
 

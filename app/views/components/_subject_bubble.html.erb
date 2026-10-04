@@ -1,0 +1,11 @@
+<%# 🌐 UI · components/_subject_bubble — bulle ronde teintée d'une matière ou d'une action, appelée par ui_subject_bubble %>
+<%# Rôle : lien de 48 px au moins, illustration décorative 40 px dans une pastille de 60 px, libellé dessous %>
+<%# UDR  : 0069 (§3.3) · charte lnclass-design-system §9, §13 %>
+<%# locals: (label:, href:, illustration:, sr_suffix:, id:) -%>
+<%= link_to href, id:, class: "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-sm leading-tight font-medium text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" do %>
+  <span class="<%= class_names("grid size-15 place-items-center rounded-full transition group-active:scale-95", illustration.tint) %>">
+    <%= image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy" %>
+  </span>
+  <span class="break-words"><%= label %></span>
+  <% if sr_suffix %><span class="sr-only"><%= sr_suffix %></span><% end %>
+<% end %>

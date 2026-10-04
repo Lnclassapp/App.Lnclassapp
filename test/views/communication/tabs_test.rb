@@ -1,7 +1,7 @@
 require "test_helper"
 
 module Communication
-  # UDR-0056 §3.7 : les onglets par URL de la page « Annonces », un lien par onglet du rôle, aria-current sur le courant.
+  # UDR-0071 §3.7 : les onglets par URL de la page « Annonces », un lien par onglet du rôle, aria-current sur le courant.
   class TabsTest < ActionView::TestCase
     TAB = "inline-flex min-h-tap items-center border-b-2 px-4 text-sm font-medium whitespace-nowrap".freeze
 

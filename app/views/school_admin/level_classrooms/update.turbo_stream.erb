@@ -1,0 +1,9 @@
+<%# 🌐 UI · school_admin/level_classrooms/update — réponse de « + » et « − » du bloc « Classes par niveau » de « Établissement » %>
+<%# Rôle : toast (succès ou motif du refus), bloc remplacé par morphing, ses formulaires visant les routes de la direction %>
+<%# ADR  : 0059, 0071 · UDR : 0006, 0046, 0056 %>
+<%= turbo_stream_toast @notice || @alert, type: @notice ? :success : :error %>
+<%= turbo_stream.replace "school_level_classrooms", method: :morph do %>
+  <%= render "shared/level_classrooms", block: @block, add_url: school_admin_level_classrooms_path,
+                                        remove_url: ->(public_id) { school_admin_level_classroom_path(public_id) },
+                                        remove_when_inactive: false %>
+<% end %>

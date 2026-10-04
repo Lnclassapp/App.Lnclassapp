@@ -1,0 +1,30 @@
+<%# 🌐 UI · teams/articles/_article_row — un article de la liste de gestion du blog (UDR-0067 §3.2) %>
+<%# Rôle : titre, auteur réel et signature, badge d'état, date selon l'état, lectures ; menu ⋮ (Modifier, Aperçu, transition) %>
+<%# ADR  : 0035, 0074 · UDR : 0042, 0067 · remplacée par morphing (transition, publication refusée) : même id, focus du ⋮ gardé %>
+<%# locals: (article:) -%>
+<% date_key, date = { "published" => [ "published_on", article.published_at ], "archived" => [ "archived_on", article.archived_at ],
+                      "draft" => [ "updated_on", article.updated_at ] }.fetch(article.status) %>
+<tr id="article_<%= article.public_id %>" class="align-middle">
+  <td class="min-w-64 px-4 py-3">
+    <%# Le titre n'est pas un lien : l'aperçu est dans le menu. L'équipe lit toujours le nom réel de l'auteur (BL-18). %>
+    <span class="font-medium text-ink"><%= article.title %></span>
+    <span class="block text-xs text-mute"><%= t(".written_by", author: article.author_name) %> · <%= t(".signed_#{article.signature}") %></span>
+  </td>
+  <td class="px-4 py-3"><%= article_status_badge(article.status) %></td>
+  <td class="px-4 py-3 whitespace-nowrap text-mute"><%= t(".#{date_key}", date: l(date.to_date, format: :long)) %></td>
+  <%# BL-17 : un article archivé garde son compteur ; un article jamais publié n'en a pas. %>
+  <td class="px-4 py-3 tabular-nums">
+    <% if article.published_at %>
+      <%= number_with_delimiter(article.reads_count) %>
+    <% else %>
+      <span aria-hidden="true">—</span><span class="sr-only"><%= t(".never_published") %></span>
+    <% end %>
+  </td>
+  <td class="sticky-actions px-4 py-3">
+    <div class="flex justify-end">
+      <%= ui_dropdown label: t(".actions", title: article.title), id: "article-actions-#{article.public_id}", fixed: true do %>
+        <%= article_menu_items(article:) %>
+      <% end %>
+    </div>
+  </td>
+</tr>

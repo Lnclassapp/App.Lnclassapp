@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::ClassroomAssignment
-# Rôle : table classroom_assignments ; assignable_type et assignable_id sont de simples colonnes
-# ADR  : 0029, 0048
+# Rôle : table classroom_assignments ; assignable_type et assignable_id sont de simples colonnes ; due_on, l'échéance figée
+# ADR  : 0029, 0048, 0072
 module Orm
   class ClassroomAssignment < ApplicationRecord
     include HasPublicId

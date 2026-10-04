@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
-<%# Rôle : badge, « Félicitations ! » et confettis ou « Courage ! », note, score, maîtrise, « Recommencer », correction %>
-<%# ADR  : 0033, 0054 · UDR : 0007, 0023, 0054 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti %>
+<%# Rôle : badge, titre, note et maîtrise (élève ; score et questions justes en plus hors élève), « Recommencer », correction %>
+<%# ADR  : 0033, 0054 · UDR : 0007, 0023, 0054, 0057 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
 <% tone = result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? :success : :error %>
 <% page_title t(".page_title", title: result.exercise.title) %>
@@ -24,25 +24,30 @@
         </div>
       </div>
 
-      <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-6 sm:grid-cols-4">
+      <%# L'élève lit sa note sur 20, forme unique de la note (UDR-0023, 2026-10-02) ; l'enseignant et l'équipe gardent les 4 termes. %>
+      <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-6 <%= "sm:grid-cols-4" unless @owner %>">
         <div>
           <dt class="text-xs font-medium text-mute"><%= t(".grade") %></dt>
           <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= grade_label(result.score_percent) %></dd>
         </div>
-        <div>
-          <dt class="text-xs font-medium text-mute"><%= t(".score") %></dt>
-          <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
-        </div>
+        <% unless @owner %>
+          <div>
+            <dt class="text-xs font-medium text-mute"><%= t(".score") %></dt>
+            <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
+          </div>
+        <% end %>
         <div>
           <dt class="text-xs font-medium text-mute"><%= t(".mastery") %><%= ui_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
           <dd class="mt-2 font-medium"><%= mastery_label(result.score_percent) %></dd>
         </div>
-        <div>
-          <dt class="text-xs font-medium text-mute"><%= t(".correct") %></dt>
-          <dd class="mt-2 font-medium tabular-nums">
-            <%= t(".correct_value", count: result.correct_count, total: result.question_count) %>
-          </dd>
-        </div>
+        <% unless @owner %>
+          <div>
+            <dt class="text-xs font-medium text-mute"><%= t(".correct") %></dt>
+            <dd class="mt-2 font-medium tabular-nums">
+              <%= t(".correct_value", count: result.correct_count, total: result.question_count) %>
+            </dd>
+          </div>
+        <% end %>
       </dl>
 
       <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
@@ -57,15 +62,21 @@
     <% end %>
   </section>
 
-  <section id="session_review" aria-labelledby="session_review_title" class="space-y-4">
+  <%= tag.section id: "session_review", "aria-labelledby": "session_review_title", class: "space-y-4",
+                  data: (ui_reveal_data(step: 3) if @owner) do %>
     <div>
       <h2 id="session_review_title" class="font-display text-xl font-extrabold"><%= t(".review_title") %></h2>
-      <p class="mt-1 text-sm text-mute"><%= @reveal ? t(".review_hint_reveal") : t(".review_hint_student") %></p>
+      <% unless @owner %>
+        <p class="mt-1 text-sm text-mute"><%= @reveal ? t(".review_hint_reveal") : t(".review_hint_student") %></p>
+      <% end %>
     </div>
     <ol class="space-y-4" data-controller="math">
-      <% result.review.each do |question| %>
-        <%= render "assessment/session_results/question_review", question:, reveal: @reveal, owner: @owner %>
+      <% result.review.each_with_index do |question, index| %>
+        <%= render "assessment/session_results/question_review", question:, reveal: @reveal, owner: @owner, index: %>
       <% end %>
     </ol>
-  </section>
+    <% if @owner %>
+      <%= ui_reveal_more result.review.size %>
+    <% end %>
+  <% end %>
 </div>

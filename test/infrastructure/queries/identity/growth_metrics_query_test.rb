@@ -87,6 +87,13 @@ module Queries
         assert_equal [ @school.public_id ], metrics.schools_leaderboard.map(&:public_id)
       end
 
+      # ADR-0036, amendment (2): its membership stays, closed, but a deleted account is no longer a student who joined.
+      test "a student account deleted on request no longer counts among the students who joined" do
+        Orm::User.where(role: "student").first.update!(anonymized_at: NOW - 1.day)
+
+        assert_equal 2, metrics.students_joined
+      end
+
       test "an empty period: zeros, and no division by zero" do
         row = GrowthMetricsQuery.new.call(from: NOW + 1.day, to: NOW + 2.days)
 

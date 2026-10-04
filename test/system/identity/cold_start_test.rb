@@ -1,10 +1,10 @@
 require "application_system_test_case"
 
 # CP-11 to CP-14 (ADR-0063, UDR-0050): a teacher whose school has no code for them signs up by its national code (or by
-# the DRENA list), waits on the pending screen, and is validated by a colleague who vouches for them — or by the team,
-# from the school page. On a desktop and on a 390 px phone.
+# the DRENA list). ADR-0073: while validation is paused, they are attached at once and land on picking their classes. A
+# request still pending from before the pause is validated by a colleague who vouches for them — or by the team, from the
+# school page. On a desktop and on a 390 px phone.
 class Identity::ColdStartTest < ApplicationSystemTestCase
-  PENDING = "identity.pending_accounts.show.join_request".freeze
   SIGNUP = "identity.teacher_registrations".freeze
 
   setup do
@@ -31,18 +31,23 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     fill_in "teacher_registration[national_code]", with: "012 345"
     growth_shot("1280-inscription-sans-code")
     click_on I18n.t("#{SIGNUP}.form.submit")
-    assert_selector "#pending_account", text: I18n.t("#{PENDING}.pending.title")
+    assert_toast I18n.t("identity.pending_teacher_registrations.create.welcome")
+    assert_current_path teacher_classrooms_path
   end
 
-  test "CP-11, CP-13: by the national code, then held on the pending screen, then vouched by a colleague" do
-    sponsor = create_teacher(school: @school, first_name: "Yao")
+  test "ADR-0073: by the national code, the teacher is attached at once and reaches the catalogue" do
     sign_up_by_national_code
 
-    assert_text "Lycée Classique d'Abidjan"
-    growth_shot("1280-compte-en-attente")
     visit courses_path
-    assert_current_path pending_account_path
-    sign_out
+    assert_current_path courses_path
+    teacher = Orm::User.find_by!(contact: "0501020304")
+    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
+  end
+
+  test "CP-13: a request pending from before the pause is vouched by a colleague" do
+    sponsor = create_teacher(school: @school, first_name: "Yao")
+    awa = create_teacher(school: nil, first_name: "Awa", last_name: "Koné", contact: "0501020304")
+    create_join_request(school: @school, teacher: awa)
 
     sign_in_as sponsor
     visit teacher_home_path
@@ -53,12 +58,8 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     end
     assert_toast I18n.t("school.join_request_vouches.create.done", name: "Awa Koné")
     assert_no_selector "#pending_colleagues"
-    teacher = Orm::User.find_by!(contact: "0501020304")
-    assert_equal [ sponsor.id ], Orm::Referral.where(referee: teacher).pluck(:referrer_id)
-    sign_out
-
-    sign_in_as teacher, pin: "4821"
-    assert_current_path teacher_classrooms_path
+    assert_equal [ sponsor.id ], Orm::Referral.where(referee: awa).pluck(:referrer_id)
+    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher: awa).pluck(:school_id)
   end
 
   test "CP-11: by the DRENA then the school, when the national code is not known" do
@@ -68,8 +69,8 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     select "Lycée Classique d'Abidjan", from: "teacher_registration[school_public_id]"
     click_on I18n.t("#{SIGNUP}.form.submit")
 
-    assert_selector "#pending_account", text: "Lycée Classique d'Abidjan"
-    assert_equal [ @school.id ], Orm::SchoolJoinRequest.pluck(:school_id)
+    assert_current_path teacher_classrooms_path
+    assert_equal [ [ @school.id, "approved" ] ], Orm::SchoolJoinRequest.pluck(:school_id, :status)
   end
 
   test "CP-12: the team validates one pending teacher and refuses another from the school page" do
@@ -95,7 +96,7 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     assert_equal "rejected", koffi_request.reload.status
   end
 
-  test "CP-11: on a 390 px phone, the sign-up without code and the pending screen fit the width" do
+  test "CP-11: on a 390 px phone, the sign-up without code and the page that follows fit the width" do
     with_mobile_viewport do
       visit new_pending_teacher_registration_path
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
@@ -105,10 +106,9 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
       growth_shot("390-inscription-sans-code", desktop: false)
       click_on I18n.t("#{SIGNUP}.form.submit")
 
-      assert_selector "#pending_account", text: I18n.t("#{PENDING}.pending.title")
+      assert_current_path teacher_classrooms_path
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
-             "l'écran d'attente déborde en largeur"
-      growth_shot("390-compte-en-attente", desktop: false)
+             "la page qui suit l'inscription déborde en largeur"
     end
   end
 end

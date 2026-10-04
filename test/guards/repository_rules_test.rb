@@ -1,6 +1,8 @@
 # Pure Ruby, like the domain purity test: the rules the pre-commit enforces on
 # staged files, enforced by the CI on the whole tree (conventions.md §5 and §7).
 require "minitest/autorun"
+require "date"
+require "yaml"
 
 class RepositoryRulesTest < Minitest::Test
   ROOT = File.expand_path("../..", __dir__)
@@ -32,5 +34,25 @@ class RepositoryRulesTest < Minitest::Test
 
   def test_kamal_is_gone
     assert_empty ruby_files("config/deploy*.yml", ".kamal/*", "bin/kamal"), "ADR-0052 : Kamal n'est pas repris"
+  end
+
+  # A Yarn advisory is ignored only through this register, each with its date of re-examination (chantier
+  # audit-yarn-braces). Past that date the guard fails: the exception is re-examined, never forgotten.
+  AUDIT_EXCEPTIONS = {
+    # braces <= 3.0.3 (GHSA-vfj7-8cjw-p6xm), stack exhaustion on deeply nested patterns; build-time only
+    # (@tailwindcss/cli -> @parcel/watcher, fast-glob -> micromatch), no patched version published on 2026-10-03.
+    "1240992" => Date.new(2026, 10, 17)
+  }.freeze
+
+  def test_every_ignored_yarn_advisory_is_registered_with_a_review_date
+    ignored = Array(YAML.safe_load_file(File.join(ROOT, ".yarnrc.yml"))["npmAuditIgnoreAdvisories"]).map(&:to_s)
+
+    assert_equal AUDIT_EXCEPTIONS.keys.sort, ignored.sort, "avis Yarn ignorés hors du registre AUDIT_EXCEPTIONS"
+  end
+
+  def test_no_ignored_yarn_advisory_is_past_its_review_date
+    expired = AUDIT_EXCEPTIONS.select { |_, review_by| Date.today > review_by }.keys
+
+    assert_empty expired, "réexaminer l'avis ignoré (mise à jour publiée ? sinon nouvelle date) : #{expired.join(', ')}"
   end
 end

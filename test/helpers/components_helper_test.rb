@@ -261,7 +261,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { view.fields(:user) { |form| ui_radio_group(form, :level, columns: 4, choices: []) } }
   end
 
-  # --- Groupe de cases à cocher (UDR-0056 §3.8) -------------------------------
+  # --- Groupe de cases à cocher (UDR-0071 §3.8) -------------------------------
 
   test "ui_checkbox_group renders a legend, one 48 px option per choice and checks the object's values" do
     show view.fields(:announcement, model: Record.new(classrooms: %w[b2 c3])) { |form|
@@ -334,6 +334,46 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "dialog#served[open]"
     assert_select "dialog#later[open]", 0
+  end
+
+  # UDR-0064 (RH-13) : une entrée de rôle est un déclencheur `lg` pleine largeur ; sans option, celui d'aujourd'hui.
+  test "ui_modal sizes and stretches its trigger on demand, and keeps the default trigger otherwise" do
+    show ui_modal(title: "Élève", id: "entry", trigger: "Je suis élève", trigger_variant: :primary, trigger_size: :lg,
+                  trigger_full: true) +
+         ui_modal(title: "Plus tard", id: "plain", trigger: "Ouvrir")
+
+    assert_select "button[aria-controls=entry][aria-haspopup=dialog].bg-ink.min-h-14.w-full", text: "Je suis élève"
+    assert_select "button[aria-controls=plain].min-h-tap:not(.w-full)", text: "Ouvrir"
+    # Levée par ui_button pendant le rendu du partial : ActionView l'enveloppe, la cause reste l'ArgumentError.
+    error = assert_raises(ActionView::Template::Error) { ui_modal(title: "Taille", trigger: "Ouvrir", trigger_size: :xl) }
+    assert_kind_of ArgumentError, error.cause
+  end
+
+  # UDR-0061 §3.3 : `placement: :sheet` fait de la modale une feuille basse sous lg, avec sa poignée ; le défaut
+  # (`:center`) rend exactement le même HTML qu'avant l'option.
+  test "ui_modal placed as a sheet carries the sheet class and a decorative handle" do
+    show ui_modal(title: "Contacte-nous", id: "help-sheet", size: :sm, placement: :sheet) { "Corps" }
+
+    assert_select "dialog#help-sheet.dialog-sheet.sm\\:max-w-sm.motion-reduce\\:animate-none"
+    assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
+  end
+
+  test "ui_modal keeps its centred rendering by default, and refuses an unknown placement" do
+    default = ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir") { "Corps" }
+
+    assert_equal default, ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir", placement: :center) { "Corps" }
+    show default
+    assert_select ".dialog-sheet, .sheet-handle, .motion-reduce\\:animate-none", 0
+    assert_raises(ArgumentError) { ui_modal(title: "Info", placement: :side) }
+  end
+
+  # UDR-0061 §3.2 : sans JavaScript, le déclencheur reste un lien vers la page de repli ; le contrôleur l'intercepte.
+  test "ui_modal trigger with a fallback href is a link that opens the dialog" do
+    show ui_modal(title: "Contacte-nous", id: "help-sheet", trigger: "Besoin d'aide ?", trigger_href: "/aide",
+                  trigger_variant: :ghost, trigger_size: :sm)
+
+    assert_select "a[href='/aide'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=help-sheet]",
+                  text: "Besoin d'aide ?"
   end
 
   test "ui_dropdown renders a menu button and its items" do
@@ -459,6 +499,52 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span.bg-mist", 2
   end
 
+  # RE-13, RE-17 (UDR-0069 §3.3) : l'illustration suit le slug figé de la matière ; toute autre matière prend la générique.
+  test "subject_illustration picks the drawing and tint by the frozen slug, aliases included" do
+    {
+      "mathematiques" => %w[maths indigo], "maths" => %w[maths indigo], "physique-chimie" => %w[physique-chimie lilac],
+      "svt" => %w[svt green], "francais" => %w[francais yellow], "histoire-geo" => %w[histoire-geographie lavender],
+      "edhc" => %w[edhc pink], "philosophie" => %w[philosophie pink], invite: %w[inviter red]
+    }.each do |slug, (file, tint)|
+      illustration = subject_illustration(slug)
+
+      assert_equal "subjects/#{file}.svg", illustration.path, slug
+      assert_equal "bg-tint-#{tint}", illustration.tint, slug
+    end
+  end
+
+  test "subject_illustration falls back to the generic drawing for any other subject" do
+    [ "anglais", "eps", nil ].each do |slug|
+      assert_equal ComponentsHelper::Illustration.new(path: "subjects/generique.svg", tint: "bg-mist"), subject_illustration(slug)
+    end
+  end
+
+  test "every illustration file exists, standalone and without style attributes" do
+    paths = [ *ComponentsHelper::SUBJECT_ILLUSTRATIONS.values.map(&:path), ComponentsHelper::SUBJECT_ILLUSTRATION_FALLBACK.path ].uniq
+
+    assert_equal 9, paths.size
+    paths.each do |path|
+      svg = Rails.root.join("app/assets/images", path).read
+
+      assert_match(/\A<svg xmlns="http:\/\/www.w3.org\/2000\/svg" viewBox="0 0 48 48">/, svg, path)
+      assert_no_match(/\sstyle=|\sclass=/, svg, path)
+    end
+  end
+
+  test "ui_subject_bubble is a link with a tinted disc, a decorative drawing, a label and an optional spoken suffix" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses?level=tle", illustration: subject_illustration("mathematiques"),
+                           sr_suffix: ", cours de Mathématiques", id: "course_level_tle_d") +
+         ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite))
+
+    assert_select "a#course_level_tle_d.min-h-tap[href='/courses?level=tle']" do
+      assert_select "span.size-15.rounded-full.bg-tint-indigo img[alt=''][aria-hidden=true][src*='maths']"
+      assert_select "span", text: "Tle D"
+      assert_select "span.sr-only", text: ", cours de Mathématiques"
+    end
+    assert_select "a[href='/teachers/invite']:not([id]) span.bg-tint-red"
+    assert_select "a[href='/teachers/invite'] span.sr-only", 0
+  end
+
   test "ui_avatar shows initials on a stable tone" do
     show ui_avatar("Awa Marie Koné", size: :lg)
 
@@ -517,7 +603,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_nil flash_toast(:reload_document, true)
   end
 
-  # UDR-0056 §3.6 : « Annuler » dans le toast. Le toast part au départ de la requête (turbo:submit-start), pas au clic :
+  # UDR-0071 §3.6 : « Annuler » dans le toast. Le toast part au départ de la requête (turbo:submit-start), pas au clic :
   # retiré au clic, le formulaire ne serait plus dans la page et le navigateur ne l'enverrait pas.
   test "ui_toast with an action renders its button between the text and the close button" do
     show ui_toast("Elle reste dans « Toutes les annonces ».", type: :info, title: "Annonce masquée",
@@ -683,6 +769,32 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[hidden].min-h-tap:not([aria-label])", text: "Copier"
     assert_equal icon_paths(ui_icon("clipboard-document", size: :md)), icon_paths(css_select("button").first)
     assert_match "Raté.", Nokogiri::HTML5.fragment(rendered).css("template").last.inner_html
+  end
+
+  # --- « Voir plus » (UDR-0057 R3) ---------------------------------------------
+
+  test "ui_reveal_data wires the reveal controller with both announcements" do
+    data = ui_reveal_data(step: 2)
+
+    assert_equal "reveal", data[:controller]
+    assert_equal 2, data[:reveal_step_value]
+    assert_equal "1 ligne de plus affichée.", data[:reveal_one_value]
+    assert_equal "{count} lignes de plus affichées.", data[:reveal_other_value]
+  end
+
+  test "ui_reveal_item hides the lines after the third and targets them all" do
+    assert_equal({ hidden: false, data: { reveal_target: "item" } }, ui_reveal_item(2))
+    assert_equal({ hidden: true, data: { reveal_target: "item" } }, ui_reveal_item(3))
+  end
+
+  test "ui_reveal_more renders a full-width ghost button and a polite status, only beyond three lines" do
+    assert_nil ui_reveal_more(3)
+
+    show ui_reveal_more(4)
+
+    assert_select "button.w-full[data-reveal-target=button][data-action='reveal#more']", text: "Voir plus"
+    assert_select "button.bg-ink", 0
+    assert_select "p.sr-only[role=status][aria-live=polite][data-reveal-target=status]"
   end
 
   test "ui_modal hands its document title to the modal controller and its dialog to the autofocus controller" do

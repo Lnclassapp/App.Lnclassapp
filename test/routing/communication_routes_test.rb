@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0069 §4.6 and §6, UDR-0056 §3.7: every route of the announcements, drawn by the Lot 0 for the lots A, B and C,
+# ADR-0078 §4.6 and §6, UDR-0071 §3.7: every route of the announcements, drawn by the Lot 0 for the lots A, B and C,
 # names and paths frozen. A message is addressed by its public_id, never by an :id; there is no page of detail.
 class CommunicationRoutesTest < ActionDispatch::IntegrationTest
   PUBLIC_ID = "abcdefghijkmno".freeze
@@ -76,7 +76,9 @@ class CommunicationRoutesTest < ActionDispatch::IntegrationTest
     writes = announcement_routes.reject { it.verb == "GET" }
 
     assert_equal 6, writes.size
-    assert(writes.none? { it.path.spec.to_s.start_with?("/school-admin") })
-    assert(Rails.application.routes.routes.select { it.path.spec.to_s.start_with?("/school-admin") }.all? { it.verb == "GET" })
+    assert(writes.all? { it.path.spec.to_s.start_with?("/announcements") })
+    # ADR-0078, amendment of 2026-10-04: since ADR-0071, /school-admin has writes of its own; none of them is an announcement.
+    school_admin = Rails.application.routes.routes.select { it.path.spec.to_s.start_with?("/school-admin") }
+    assert(school_admin.none? { it.defaults[:controller].to_s.start_with?("communication/") })
   end
 end
