@@ -36,7 +36,7 @@ Une direction qui découvre Lnclass par ses enseignants ne trouve rien pour elle
 | Retirer (équipe) | `DELETE /teams/schools/:school_public_id/staff/:public_id` | `school_staff_member_path` | Turbo Stream ; 403, 404 |
 | Restaurer (équipe) | `POST /teams/schools/:school_public_id/staff/:public_id/restoration` | `school_staff_member_restoration_path` | Turbo Stream ; 409 plafond |
 
-`:public_id` est le `public_id` du **compte** de la direction. Débit de l'inscription : 10 envois par minute et par IP, comme l'inscription enseignant.
+`:public_id` est le `public_id` du **compte** de la direction. Débit de l'inscription : 5 envois par minute et par IP, comme l'inscription enseignant (revue de sécurité : 10 au départ, plus lâche que lui).
 
 ### 3.1 Page d'inscription — `identity/school_staff_registrations/new`
 

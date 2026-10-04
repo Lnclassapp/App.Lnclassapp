@@ -11,6 +11,7 @@
 | 2026-10-04 | Lot 0 : les places « 2 / 3 » sont un `<p id="school_staff_places">` dans la carte, pas le sous-titre de `ui_card` | Une cible stable pour le Turbo Stream du retrait | Non (détail de l'UDR §3.4) |
 | 2026-10-04 | Merge du Lot A : le lien discret du haut de page passe de `text-mute` à `text-ink/90` | `text-mute` sur `bg-brand` donne ≈ 2,4:1 en thème clair et ≈ 2,3:1 en sombre, sous le seuil WCAG AA de 4,5:1 | UDR-0070 §3.2 amendée |
 | 2026-10-04 | Merge du Lot B : la ligne des places devient `shared/_school_staff_places`, rendue par le bloc et par les Turbo Streams | Le Lot B avait recopié la balise dans son Turbo Stream ; le Lot C en aura besoin aussi | Non |
+| 2026-10-04 | Revue de sécurité (lots 0, A, B, D) : 4 constats bas, aucun haut. Corrigés : débit de l'inscription à 5 par minute comme l'enseignant (constat 2) ; `StaffRepository#archive` sous verrou de l'établissement et auteur relu après lui, car deux directions qui se retiraient l'une l'autre réussissaient toutes deux (constat 3, test à deux threads rouge sans le correctif) ; purge compte par compte, un échec étant rendu dans `failed` et journalisé par id (constat 4). Reporté : constat 1 | Rapport du `security-reviewer` | ADR-0077 §5 précisé ; PRD ID-07 et UDR §3.0 à 5 par minute |
 | 2026-10-04 | Lot 0 : la route de restauration prend `:staff_member_public_id` (ressource imbriquée), pas `:public_id` | Convention Rails des ressources imbriquées ; le nom de route est celui de l'UDR | Non |
 
 ## Ce qui a dérapé
@@ -38,6 +39,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | `test/infrastructure/queries/identity/account_search_query_test.rb:42` est instable : un numéro tiré par la fabrique peut contenir « 0304 » | Sans lien avec le chantier ; vert au passage suivant | à ouvrir (`bugfix`) |
+| La suppression d'un compte (élève par `AnonymizeUser`, direction par la purge à J+30) laisse le numéro dans `invitations.contact` et l'IP dans `audit_events.ip_address` (revue de sécurité, constat 1, basse) | Le reste est le même pour toute suppression de compte : à traiter une fois pour toutes | à ouvrir (`feature` ou `bugfix` sur la suppression de compte) |
 | `script/ci/record_timings` perd la première ligne quand la bannière Puma la coupe | Contournement possible (retirer la bannière avant l'enregistrement) | à ouvrir |
 
 ## Clôture

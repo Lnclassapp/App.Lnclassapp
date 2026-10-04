@@ -49,8 +49,11 @@ module UseCases
 
       def actor_staff(actor) = actor&.school_admin? ? @staff.find_by_user_id(user_id: actor.user_id) : nil
 
+      # archive verrouille l'établissement : relu après lui, le rattachement de l'auteur voit un retrait concurrent déjà validé.
+      # Deux directions qui se retirent l'une l'autre en même temps : la seconde est refusée (revue de sécurité, constat 3).
       def archive(actor, target, now)
         raise Aborted, Shared::Result.failure(:not_found) unless @staff.archive(user_id: target.user_id, by_id: actor.user_id, at: now)
+        raise Aborted, Shared::Result.failure(:forbidden) if actor_staff(actor)&.archived?
 
         @sessions.destroy_all_for(user_id: target.user_id)
         @audit_log.record(action: ACTION, actor_id: actor.user_id, at: now, subject_type: "User", subject_id: target.user_id,

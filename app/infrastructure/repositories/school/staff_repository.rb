@@ -28,8 +28,15 @@ module Repositories
 
       def find_by_public_id(public_id:) = first(Orm::SchoolStaff.where(users: { public_id: }))
 
+      # Sous le verrou de l'établissement, comme attach_by_code et restore : les retraits d'un même établissement se sérialisent.
       def archive(user_id:, by_id:, at:)
-        Orm::SchoolStaff.active.where(user_id:).update_all(archived_at: at, archived_by_id: by_id) == 1
+        Orm::SchoolStaff.transaction do
+          school_id = Orm::SchoolStaff.active.where(user_id:).pick(:school_id)
+          next false if school_id.nil?
+
+          lock_school(school_id)
+          Orm::SchoolStaff.active.where(user_id:).update_all(archived_at: at, archived_by_id: by_id) == 1
+        end
       end
 
       def restore(user_id:, cap:)

@@ -170,6 +170,36 @@ module UseCases
         assert_equal :forbidden, archive(actor: nil).code
         assert_nothing_written
       end
+
+      # Revue de sécurité, constat 3 : relu après le verrou de l'établissement, un auteur retiré entre-temps est refusé, et
+      # l'archivage de sa cible est annulé avec la transaction.
+      class RacingStaff < FakeStaff
+        def initialize(*rows, archived_meanwhile:)
+          super(*rows)
+          @archived_meanwhile = archived_meanwhile
+          @reads = 0
+        end
+
+        def find_by_user_id(user_id:)
+          row = super
+          return row unless user_id == @archived_meanwhile
+
+          @reads += 1
+          @reads > 1 ? row.with(archived_at: NOW, archived_by_id: 2) : row
+        end
+      end
+
+      test "an author removed by a concurrent removal is refused once the school is locked" do
+        staff = RacingStaff.new(staff(1, days: 10), staff(2, public_id: "aya", days: 10), archived_meanwhile: 1)
+        use_case = ArchiveSchoolStaff.new(staff:, schools: @schools, users: @users, sessions: @sessions, audit_log: @audit,
+                                          policy: Policies::School::RemoveSchoolStaffPolicy.new, transaction: @transaction,
+                                          clock: Clock.new(NOW))
+
+        result = use_case.call(actor: @kofi, target_public_id: "aya")
+
+        assert_equal :forbidden, result.code
+        assert_empty @audit.events
+      end
     end
   end
 end
