@@ -150,6 +150,23 @@ module Queries
         assert_equal [ 0, nil, nil ], detail(category: :fragile).questions.map(&:first_rate)
       end
 
+      # ADR-0079 §4.5: in a category mixing students of one session and of several, « 1re session » reads the first session
+      # of every student of the category, the single-session ones included: theirs is their first.
+      test "a mixed category: the rate at the first session reads the first session of every student, one session or several" do
+        student(scores: [ 30, 60 ], answers: [ { 1 => false, 2 => false }, { 1 => true, 2 => true } ])
+        student(scores: [ 55 ], answers: [ { 1 => true, 2 => false } ])
+        student(scores: [ 65 ], answers: [ { 1 => true, 2 => true } ])
+        student(scores: [ 50 ], answers: [ { 1 => false, 2 => false } ])
+
+        questions = detail(category: :fragile).questions
+
+        # Best sessions — Q1: true, true, true, false → 3/4; Q2: true, false, true, false → 2/4.
+        assert_equal [ 75, 50, nil ], questions.map(&:rate)
+        # First sessions — Q1: false, true, true, false → 2/4; Q2: false, false, true, false → 1/4. Read on the student of
+        # two sessions alone, both would be 0 %.
+        assert_equal [ 50, 25, nil ], questions.map(&:first_rate)
+      end
+
       test "on a tie of the best score, the most recent session counts for the rates" do
         student(scores: [ 80, 80 ], answers: [ { 1 => false, 2 => true }, { 1 => true, 2 => false } ])
 
@@ -176,6 +193,35 @@ module Queries
 
         assert_equal [ [ "Léa Stable", :stable ], [ "Marc Progres", :progress ] ],
                      detail(category: :acquired).students.map { [ it.display_name, it.trend ] }
+      end
+
+      # Stagnant means a best score under MASTERY_THRESHOLD, stable one from it: they never share a category. The single
+      # session sits between declining and stable in the same list, whatever the names say.
+      test "in one list, the single session comes after declining and before stable and progressing, against the name order" do
+        student("Aya", "Aba", scores: [ 70, 90 ])
+        student("Ali", "Abe", scores: [ 80, 85 ])
+        student("Yao", "Yeo", scores: [ 85 ])
+        student("Zoé", "Zoro", scores: [ 95, 80 ])
+
+        assert_equal [ [ "Zoé Zoro", :decline ], [ "Yao Yeo", nil ], [ "Ali Abe", :stable ], [ "Aya Aba", :progress ] ],
+                     detail(category: :acquired).students.map { [ it.display_name, it.trend ] }
+      end
+
+      test "a student of two classrooms: his session on the assignment of the other classroom does not count in this one" do
+        twice = student(scores: [ 60 ], answers: [ { 1 => false, 2 => false } ])
+        other_classroom = create_classroom(school: @school)
+        Orm::ClassroomStudent.create!(classroom: other_classroom, student: twice, primary: false, joined_at: Time.current)
+        other = create_assignment(classroom: other_classroom, assignable: @exercise)
+        hand_in(twice, 100, answers: { 1 => true, 2 => true }, assignment: other)
+
+        result = detail(category: :fragile)
+
+        assert_equal [ 1, 1, { struggling: 0, fragile: 1, acquired: 0 } ], [ result.done, result.present, result.category_counts ]
+        assert_equal({ progress: 0, flat: 0, decline: 0 }, result.trend_counts)
+        assert_equal [ [ 60, nil ] ], result.students.map { [ it.best, it.trend ] }
+        assert_equal [ [ 0, nil ], [ 0, nil ], [ nil, nil ] ], result.questions.map { [ it.rate, it.first_rate ] }
+        assert_equal [ [ 100, nil ] ], detail(category: :acquired, assignment: other, classroom_public_id: other_classroom.public_id)
+                                         .students.map { [ it.best, it.trend ] }
       end
 
       test "an archived assignment, one of another classroom or an unknown one has no detail" do

@@ -359,6 +359,98 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "section#late_students li", 2
   end
 
+  test "the rate at the first session is hidden where it equals the rate on the best session (UDR-0072 §3.5)" do
+    exercise = create_exercise(essential: @exercise.essential, questions: 2)
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    questions = exercise.questions.order(:position).to_a
+    student = create_student(classroom: @classroom, first_name: "Ali", last_name: "Progres")
+    [ [ 40, { 1 => true, 2 => false } ], [ 90, { 1 => true, 2 => true } ] ].each_with_index do |(score_percent, answers), index|
+      session = create_exercise_session(student:, exercise:, status: "completed", score_percent:, classroom_assignment: assignment,
+                                        completed_at: Time.zone.local(2026, 10, 3 + index, 8))
+      answers.each { |position, correct| create_attempt(session:, question: questions[position - 1], correct:) }
+    end
+    sign_in_as @teacher
+
+    get follow_up_path(assignment)
+
+    assert_select "#comprehension_panel ol li", 2 do |(same, moved)|
+      assert_equal "Question 1 : #{percent(100)} de réussite", same["aria-label"]
+      assert_no_match(/1re session/, same.text)
+      assert_equal "Question 2 : #{percent(100)} de réussite, #{percent(0)} à la première session", moved["aria-label"]
+      assert_match(/1re session : #{percent(0)}/, moved.text)
+    end
+  end
+
+  test "a classroom without any present student: the empty state of the section, no « Pas encore faits » section" do
+    classroom = create_classroom(school: @school)
+    Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
+    assignment = create_assignment(classroom:, assignable: create_exercise(essential: @exercise.essential), by: @teacher)
+    gone = create_student(classroom:, first_name: "Gone", last_name: "Parti")
+    hand_in(gone, 1.hour.ago, assignment:)
+    Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+    sign_in_as @teacher
+
+    get classroom_assignment_path(classroom.public_id, assignment.public_id)
+
+    assert_response :success
+    assert_select "section#comprehension h2#comprehension_title", text: "Compréhension"
+    assert_select "#comprehension_frame" do
+      assert_select "p", text: "Personne n'a encore fait cet exercice."
+      assert_select "nav, #comprehension_panel, #comprehension_trends", 0
+    end
+    assert_select "#pending_students", 0
+    assert_no_match(/Parti/, response.body)
+  end
+
+  test "an archived classroom stays readable: the « Compréhension » section, and a category can be chosen" do
+    classroom = create_classroom(school: @school, status: "archived")
+    Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
+    assignment = create_assignment(classroom:, assignable: create_exercise(essential: @exercise.essential), by: @teacher)
+    [ 100, 90, 80, 60, 40 ].each_with_index do |score_percent, index|
+      student = create_student(classroom:, first_name: "Élève", last_name: "N#{index}")
+      create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", score_percent:,
+                              classroom_assignment: assignment)
+    end
+    sign_in_as @teacher
+
+    get classroom_assignment_path(classroom.public_id, assignment.public_id)
+
+    assert_response :success
+    assert_select "section#comprehension h2#comprehension_title", text: "Compréhension"
+    assert_select "#comprehension_frame span", text: "Acquis"
+    assert_select "nav a[aria-current=true][href$='category=acquired']"
+
+    get classroom_assignment_path(classroom.public_id, assignment.public_id), params: { category: "fragile" }
+
+    assert_response :success
+    assert_select "nav a[aria-current=true][href$='category=fragile']", text: /Fragile\s*1/
+    assert_select "#comprehension_panel ul li", 1 do
+      assert_select "span", text: "Élève N3"
+    end
+  end
+
+  test "a student, a teacher of another classroom and the direction asking for a category get 403, and a body without any reading" do
+    build_quiz
+    names = /Progres|Stable|Baisse|Fragile|Difficile|Yao|Bamba|Kouassi|Pas-Encore/
+    asker = Orm::User.find_by!(first_name: "Fanta", last_name: "Fragile")
+    {
+      asker => /Progres|Stable|Baisse|Difficile|Yao|Bamba|Kouassi|Pas-Encore/,
+      create_teacher(school: @school, classrooms: [ create_classroom(school: @school) ]) => names,
+      create_school_admin(school: @school) => names
+    }.each do |actor, forbidden_names|
+      sign_in_as actor
+
+      get follow_up_path(@quiz), params: { category: "fragile" }
+
+      assert_response :forbidden
+      assert_select "#comprehension, #comprehension_frame, #pending_students", 0
+      assert_select "h2", text: "Compréhension", count: 0
+      assert_no_match(forbidden_names, response.body)
+      assert_no_match(/Badges de la classe|1re session|À reprendre en classe/, response.body)
+      sign_out
+    end
+  end
+
   test "a visitor is sent to the sign-in page" do
     get follow_up_path
 

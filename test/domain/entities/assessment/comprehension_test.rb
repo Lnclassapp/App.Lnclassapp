@@ -16,6 +16,11 @@ module Entities
         }.each { |scores, trend| assert_equal trend, Comprehension.trend_for(scores), scores.join("-") }
       end
 
+      test "without any move, the sign is stable from the mastery threshold, stagnant just under it: 70-70 and 69-69" do
+        assert_equal :stable, Comprehension.trend_for([ 70, 70 ])
+        assert_equal :stagnant, Comprehension.trend_for([ 69, 69 ])
+      end
+
       test "a single attempt has no sign" do
         assert_nil Comprehension.trend_for([ 70 ])
         assert_nil Comprehension.trend_for([])

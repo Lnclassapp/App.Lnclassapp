@@ -81,6 +81,20 @@ module Queries
         assert_equal ComprehensionSummaryQuery::Summary.new(category: nil, badge_counts: NO_BADGE.merge(bronze: 1)), summary
       end
 
+      test "a student of two classrooms: his session on the assignment of the other classroom counts there, not here" do
+        twice = create_student(classroom: @classroom)
+        other_classroom = create_classroom(school: @school)
+        Orm::ClassroomStudent.create!(classroom: other_classroom, student: twice, primary: false, joined_at: Time.current)
+        other = create_assignment(classroom: other_classroom, assignable: @exercise)
+        4.times { hand_in(create_student(classroom: @classroom), 90) }
+        hand_in(twice, 55)
+        hand_in(twice, 100, assignment: other)
+
+        assert_equal ComprehensionSummaryQuery::Summary.new(category: :acquired, badge_counts: NO_BADGE.merge(bronze: 1, gold: 4)), summary
+        assert_equal ComprehensionSummaryQuery::Summary.new(category: nil, badge_counts: NO_BADGE.merge(diamond: 1)),
+                     ComprehensionSummaryQuery.for(classroom_id: other_classroom.id, assignment_ids: [ other.id ]).fetch(other.id)
+      end
+
       test "one read whatever the number of assignments" do
         hand_in(create_student(classroom: @classroom), 70)
         one = count_queries { summaries }

@@ -193,6 +193,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#classroom_session_days", 0
     assert_select "#assignment_#{assignment.public_id} #{FOOTER}", text: /Pas encore lisible · 1\/2/
     assert_select "#assignment_#{on_time.public_id} #{FOOTER}", text: /Pas encore lisible · 0\/2/
+    assert_badges assignment, [ "0 Bronze", "0 Argent", "0 Or", "1 Diamant" ]
+    assert_badges on_time, [ "0 Bronze", "0 Argent", "0 Or", "0 Diamant" ]
   end
 
   # rapports-exercices, Lot A (ADR-0079, UDR-0072 §3.4) : au bord bas de chaque exercice assigné, les badges de la classe
@@ -266,6 +268,41 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_badges assignment, [ "1 Bronze", "0 Argent", "0 Or", "0 Diamant" ]
     assert_select "#assignment_#{assignment.public_id} #{FOOTER} span.text-ink", text: "Pas encore lisible · 1/2"
     assert_select "#assignment_#{assignment.public_id} p", text: "1 fait · 1 pas encore fait"
+  end
+
+  test "une classe sans élève présent : badges à zéro et cercle gris « Pas encore lisible · 0/0 », sans erreur" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    gone = hand_in(assignment, 100).student
+    Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_badges assignment, [ "0 Bronze", "0 Argent", "0 Or", "0 Diamant" ]
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER}" do
+      assert_select "span.bg-line.rounded-full", 1
+      assert_select "span.text-ink", text: "Pas encore lisible · 0/0"
+    end
+    assert_select "#assignment_#{assignment.public_id} p", text: "0 fait · 0 pas encore fait"
+  end
+
+  test "une classe archivée reste lisible : badges et cercle au bord bas de ses exercices assignés" do
+    classroom = create_classroom(school: @school, status: "archived")
+    Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
+    assignment = create_assignment(classroom:, assignable: create_exercise, by: @teacher)
+    [ 100, 90, 80, 60, 40 ].each { hand_in(assignment, it, student: create_student(classroom:)) }
+    sign_in_as @teacher
+
+    get classroom_path(classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.archived")}/
+    assert_badges assignment, [ "1 Bronze", "0 Argent", "2 Or", "1 Diamant" ]
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER} > :last-child" do
+      assert_select "span.bg-success.rounded-full[aria-hidden='true']", 1
+      assert_select "span.text-ink", text: "Acquis · 5/5"
+    end
   end
 
   test "sans les comptes (hors FollowAssignmentPolicy), la ligne n'a ni pied, ni badges, ni cercle" do
@@ -346,15 +383,19 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_courses_empty", text: /#{I18n.t("#{scope}.courses.empty_title")}/
   end
 
-  test "la direction de l'établissement reçoit 403, sans nom ni identifiant d'élève (UDR-0052)" do
+  test "la direction de l'établissement reçoit 403, sans nom ni identifiant d'élève, ni badges ni cercle (UDR-0052)" do
     student = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
-    create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    5.times { hand_in(assignment, 90) }
+    hand_in(assignment, 40, student:)
     sign_in_as create_school_admin(school: @school)
 
     get classroom_path(@classroom.public_id)
 
     assert_response :forbidden
-    assert_no_match(/Bamba|#{student.public_id}/, response.body)
+    assert_no_match(/Bamba|#{student.public_id}|Badges de la classe|Pas encore lisible|Acquis · /, response.body)
+    assert_select "h2", text: "Compréhension", count: 0
+    assert_select "#assigned_exercises, #assignment_#{assignment.public_id}", 0
   end
 
   test "non-régression CS#B8 : la page répond 200 avec un exercice assigné" do
