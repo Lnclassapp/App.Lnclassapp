@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `Develop` (directement, comme le chantier d'origine, décision du porteur du 2026-10-03) |
 | **Programme** | — |

@@ -80,6 +80,30 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Le test échoue sur le pilotage **national** 7 jours, à 397,8 ms : son code n'a pas changé, et il mesurait 294,8 ms une heure plus tôt sur le même conteneur (voir « Ce qui a dérapé »).
 
+### Challenger — rejoué dans l'application (2026-10-04)
+
+Rôle distinct, serveur de développement sur la base semée (développement + jeu de mesure), navigateur piloté (Playwright) :
+- **Bug 1 — PASS.**
+  - Première assignation de « Reconnaître la membrane » à « Tle D 1 » : modale des jours (lundi, jeudi), puis toast « Reconnaître la membrane ajouté à Tle D 1, à rendre lundi 5 oct. ». Un seul point, et le flux Turbo n'en contient pas deux.
+  - La bascule affiche « Pour lun. 5 oct. ».
+  - Retrait, puis réassignation en un clic : même toast.
+  - L'élève lit « À rendre demain ».
+- **Bug 3 — PASS.**
+  - Énoncés sans balise, côté enseignant et côté élève.
+  - Le cours « La cellule » reste en texte riche (paragraphe, deux formules KaTeX).
+- **Bug 2 — PASS.** Le jeu de mesure compte uniquement des devoirs `Exercise` (55 260) et 312 065 sessions. Ses 18 902 énoncés et leurs explications sont sans balise.
+- **Bug 4 — PASS**, sur Abidjan 2 (17 établissements, 5 274 élèves) :
+  1. Avant tout changement, les chiffres du haut égalent la somme du tableau, sur les quatre colonnes.
+  2. Un élève est ajouté à Marcory.
+  3. Rechargement dans les 5 minutes, en vue « année » : 5 274 en haut, 5 274 au tableau. Égaux, tous deux à l'ancien compte, comme décidé.
+  4. Recherches « marcory », « Lycée », « college » et « zzzz » : totaux et lignes cohérents.
+  5. En 7 et 30 jours, en direct : 5 275 = 5 275.
+  6. Après l'expiration : 5 275 = 5 275 en « année ».
+  7. L'élève est supprimé ensuite.
+- **Non vérifié par le challenger** :
+  - **Le journal du serveur** : la lecture de `log/development.log` lui a été refusée par l'outil de permissions. Seule preuve indirecte : aucune réponse ≥ 400 observée par ses scripts, et chaque page a rendu le contenu attendu.
+  - **Une vraie deuxième page d'établissements** : aucune DRENA du jeu n'en a plus de 25, et créer des établissements temporaires a été refusé. La pagination reste prouvée par les tests (RE-09 dans `drena_schools_query_test.rb` et `dashboards_controller_test.rb`).
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
@@ -88,13 +112,16 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | Les bases de développement déjà semées gardent leurs deux énoncés en `<p>` | Les seeds sont idempotents par nom ; ces données ne sortent jamais du poste du développeur | `bin/rails db:reset` |
 | La fabrique de test `create_exercise` écrit ses énoncés en `<p>Question n</p>` | Données de test seulement ; six assertions comparent cette chaîne telle quelle. Les corriger ne change rien à l'application | Finitions, avec les tests qui la citent |
+| Toast d'assignation : la ligne se coupe dans le nom de la classe (« Tle D / 1 ») | Constat du challenger, hors des quatre bugs ; une espace insécable suffirait | Finitions |
+| Pendant les 5 minutes du cache de l'année, « Inscrits récents » (toujours en direct) peut déjà montrer un élève que les chiffres et le tableau ne comptent pas encore | Comportement décidé (ADR-0062, amendement du 2026-09-29 : aucune donnée personnelle dans le cache) ; constat du challenger | — |
 | Le budget `PERF=1` du pilotage sur 7 jours est à la limite sur ce conteneur, même pour le national inchangé | Machine plus lente et bruitée ; aucun écart dû au chantier (A/B) | Rejouer `PERF=1` sur la machine de recette ; en cas de dépassement, chantier `optimize` (ADR-0062) |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-04, sur `Develop` (sans PR, décision du porteur) |
+| **PR** | — |
+| **ADR produits** | Amendement du 2026-10-04 de l'ADR-0062 (établissements et chiffres en une lecture, `CACHE_VERSION` 2) |
+| **UDR produits** | Note d'amendement dans l'UDR-0068 (règle 8 tenue en vue « année ») |
+| **Preuve** | Un test rouge par bug, puis vert ; suite complète 3 586 tests, 0 échec, couverture 100 % lignes et branches ; 63 tests système du pilotage, de la classe, des exercices et des accueils ; rubocop, brakeman, gardes au vert ; challenger : les quatre reproductions rejouées dans l'application, PASS ; A/B du pilotage filtré (journal) |

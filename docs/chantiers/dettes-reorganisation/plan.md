@@ -138,6 +138,6 @@ Un seul exécutant, en série A → B → C → D : les lots sont petits, et C e
 - [x] Test au vert · suite du contexte borné au vert (suite complète : 3 586 tests, 0 échec, couverture 100 % lignes et branches ; 63 tests système du pilotage, de la classe, des exercices et des accueils)
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours (A : « jeudi 6 mai. » ; C : contenu du cours en texte riche ; D : 7 et 30 jours en direct, vue nationale en cache, RE-07 à RE-10)
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (bug 3, bases de développement)
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application (quatre PASS ; journal du serveur non lu, refusé au challenger)
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
