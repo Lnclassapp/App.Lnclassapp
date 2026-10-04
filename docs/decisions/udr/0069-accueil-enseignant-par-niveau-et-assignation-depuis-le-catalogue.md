@@ -121,20 +121,20 @@ Le porteur a tranché (memo, G1 à G13) : sections « Mes classes », « Cours �
 
 ### 3.8 Assigner depuis le catalogue
 
-**Lecture** — `Queries::Classroom::CatalogAssignmentTargetsQuery#call(teacher_id:, course_id:, exercise_ids:, today: Date.current)` → `Targets(scope_label, classrooms, states)` :
+**Lecture** — `Queries::Classroom::CatalogAssignmentTargetsQuery#call(teacher_id:, course_slug:, exercise_public_ids:, today: Date.current)` *(constat d'exécution : les pages n'ont que le slug du cours et les `public_id` des exercices)* → `Targets(scope_label, classrooms, states)` :
 - `classrooms` : `[Target(public_id, name, needs_session_days)]`, classes de `teacher_classrooms` de l'enseignant, actives, de l'année scolaire courante, **du niveau du cours** et, si le cours a une série, **de cette série** ; tri par nom naturel (« 3ème 2 » avant « 3ème 10 », comme `TeacherHomeQuery`). `needs_session_days` : aucune ligne de jours de séance pour (enseignant, classe) (ADR-0072 §4.2).
 - `states` : `{ [classroom_public_id, exercise_public_id] => State(assignment_public_id, due_on) }`, assignations **actives** seulement.
 - `scope_label` : « <niveau> <série> » du cours (« Tle D », « 3ème »).
 - Deux requêtes au plus, quel que soit le nombre d'exercices.
 
 **Fiche essentielle** (`catalog/essentials/show`, `Catalog::EssentialsController`) : pour `current_actor.teacher?` seulement, `@targets` = la query ci-dessus (exercices **publiés** de la fiche) ; équipe et élève : `nil`.
-- Au-dessus de la liste des exercices, si `@targets` et `@targets.classrooms.empty?` : `p#assign_targets_none.text-sm.text-mute` « Aucune de vos classes n'est en %{scope}. ».
+- Au-dessus de la liste des exercices, si `@targets` et `@targets.classrooms.empty?` : `p#assign_targets_none.text-sm.text-mute` « Aucune de vos classes n'est en %{level}. ».
 - `_exercise_progress` (branche non élève) reçoit `targets:` ; si `targets&.classrooms&.any?` et l'exercice est publié : sous la ligne, `ul.mt-3.space-y-2.sm:mt-0` `aria-label` « Assigner « %{title} » à vos classes », un `li.flex.items-center.justify-between.gap-3` par classe : `span.text-sm.font-medium.text-ink` le nom de la classe, puis `render "classroom/assignments/toggle"` (`classroom_public_id`, `assignable_type: "Exercise"`, `assignable_key: exercise.public_id`, `assignable_name: exercise.title`, `classroom_name: target.name`, `assignment_public_id` et `due_on` de `states`, `needs_session_days: target.needs_session_days`). Le bouton « Ouvrir » reste.
-- Mise en page de la ligne : la colonne des bascules passe sous le titre sous `sm`, à droite à partir de `sm` (la ligne `li` existante est déjà `sm:flex-row`).
+- Mise en page de la ligne : la colonne des bascules passe sous le titre sous `sm`, à droite à partir de `sm` (la ligne `li` existante est déjà `sm:flex-row`). Chaque `li` de classe est `flex-wrap`, la bascule dans un `div.max-w-full` : à 375 px, « Assigné · Pour … · Retirer » passe sous le nom de la classe au lieu de déborder.
 
-**Page d'un exercice** (`assessment/exercises/show`, `Assessment::ExercisesController`) : pour l'enseignant, après l'en-tête, si l'exercice est publié : `ui_card title: « Assigner à mes classes », icon: "user-group", id: "exercise_assign"` ; corps : la même `ul` de classes et de bascules, ou la phrase « Aucune de vos classes n'est en %{scope}. » (`p#exercise_assign_none`).
+**Page d'un exercice** (`assessment/exercises/show`, `Assessment::ExercisesController`) : pour l'enseignant, après l'en-tête, si l'exercice est publié : `ui_card title: « Assigner à mes classes », icon: "user-group", id: "exercise_assign"` ; corps : la même `ul` de classes et de bascules, ou la phrase « Aucune de vos classes n'est en %{level}. » (`p#exercise_assign_none`).
 
-**Bascule** (`classroom/assignments/_toggle`) : nouveau local `classroom_name: nil`. S'il est donné, les `aria-label` deviennent « Assigner « %{name} » à %{classroom} » et « Retirer « %{name} » de %{classroom} » (`assign_to_label`, `archive_from_label`) ; sinon ceux d'aujourd'hui. `create.turbo_stream` et `archive.turbo_stream` passent `classroom_name: @classroom.name`. Identifiant, streams, modale des jours, `return_to` et rafraîchissement par morphing : **inchangés** (UDR-0062 §3.4) ; ils fonctionnent sur toute page qui porte la bascule.
+**Bascule** (`classroom/assignments/_toggle`) : nouveau local `classroom_name: nil`, passé aussi par la fiche dans la classe (`classroom/classroom_essentials/show`) pour que l'`aria-label` ne change pas après un stream. S'il est donné, les `aria-label` deviennent « Assigner « %{name} » à %{classroom} » et « Retirer « %{name} » de %{classroom} » (`assign_to_label`, `archive_from_label`) ; sinon ceux d'aujourd'hui. `create.turbo_stream` et `archive.turbo_stream` passent `classroom_name: @classroom.name`. Identifiant, streams, modale des jours, `return_to` et rafraîchissement par morphing : **inchangés** (UDR-0062 §3.4) ; ils fonctionnent sur toute page qui porte la bascule.
 
 ### 3.9 Formulaire d'un cours — niveau d'un cours assigné (`teams/courses/_form`)
 
