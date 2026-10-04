@@ -13,7 +13,7 @@ Lot 1a — « Anciens élèves » : index classroom_students (student_id)       
 Lot 1b — « Anciens élèves » : liste lue dans les adhésions de l'établissement   ✅ gardé
   ⋯
 Lot 2 — « Travail des élèves » : agrégat élève × devoir                   à jouer
-Lot 3 — « Enseignants » : poids du HTML (441 → 152,5 Ko)                 leviers 1 et 3b ✅ · 150 Ko non atteint
+Lot 3 — « Enseignants » : poids du HTML (441 → 141,7 Ko)                 leviers 1, 3b et 3c ✅
 Lot D — script/perf/dataset.rb : semer anciens élèves et remédiations     dette, lot à part
 ```
 
@@ -159,7 +159,7 @@ Exécutions de la série *après* : p50 57,7 / 59,6 / 53,4 ms ; p95 136,1 / 182,
 - **Couche**       : ui (sans changer ce qui est affiché), et une route `GET` de lecture pour le levier 3b
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/controllers/school_admin/teachers_controller_test.rb`, `test/system/school_admin/`
-- **Done quand**   : HTML de `/school-admin/teachers` < 150 Ko, contre 441,1 Ko. **Non atteint : 152,5 Ko** après les leviers 1 et 3b ; voir « Reste » ci-dessous.
+- **Done quand**   : HTML de `/school-admin/teachers` < 150 Ko, contre 441,1 Ko. ✅ **Atteint : 141,7 Ko** après les leviers 1, 3b et 3c.
 
 Mesure : base `app_lnclassapp_perf_direction_lot_c` (60 enseignants dans l'établissement mesuré), mode production, `PERF_ONLY=admin_teachers`, protocole de l'ADR-0067 (3 chauffes, 30 × 3, médiane). Une ligne pesait 6,0 Ko après le levier 1 : la modale de confirmation 3,3 Ko (198 Ko pour la page), le menu ⋮ 1,9 Ko (114 Ko), l'indentation environ 0,46 Ko (27 Ko). Sur 103 ms, la vue en prenait environ 72.
 
@@ -194,9 +194,27 @@ Exécutions *après* : p50 63,7 / 62,6 / 55,8 ms ; p95 121,2 / 108,7 / 160,2 ms.
 | Dans le frame `modal` (`admin_teacher_removal`) | **3,6** | 1,4 | 18,4 ms | **30,3 ms** | 5 |
 | Page complète, sans JavaScript (`admin_teacher_removal_page`) | 17,2 | 4,3 | 20,8 ms | 41,0 ms | 7 |
 
-**Reste : 2,5 Ko au-delà du budget.** Une ligne pèse maintenant 2,3 Ko, dont 1,75 Ko pour le menu ⋮ ; le haut et le bas de la page (shell, en-tête, `<symbol>`) font 19 Ko. Prochain levier, à jouer seul :
-- **3c — attributs racine des icônes portés par le `<symbol>`** : `viewBox`, `fill`, `stroke` et `stroke-width` ne seraient plus répétés sur chaque `<svg><use>`. Trois icônes par ligne, environ 180 octets par ligne. **Estimation : −11 Ko, soit environ 141,5 Ko**, calculée sur le HTML rendu et non mesurée. Le levier touche `ui_icon_sprite` (levier 1) et son test de caractérisation.
-- Autre piste, plus large : les cinq écouteurs `@window` de chaque menu fixe (`data-action`, environ 200 octets par ligne). Soixante menus réagissent à chaque défilement. Ce levier touche `dropdown_controller.js`, partagé par toute l'application.
+Après le levier 3b, il restait **2,5 Ko au-delà du budget**. Une ligne pesait 2,3 Ko, dont 1,75 Ko pour le menu ⋮ ; le haut et le bas de la page (shell, en-tête, `<symbol>`) faisaient 19 Ko.
+
+### Levier 3c — attributs racine des icônes portés par le `<symbol>` ✅ commit `1de90607`
+
+- **Fichiers** : `app/helpers/components_helper.rb` (`ui_icon_sprite`, `sprite_icon`), `test/helpers/components_helper_test.rb`, `test/controllers/school_admin/teachers_controller_test.rb` (caractérisation)
+- Dans `ui_icon_sprite`, chaque `<svg><use>` répétait les attributs racine de son heroicon (`viewBox`, `fill`, `stroke`, `stroke-width`) : environ 180 octets par ligne, pour trois icônes. Ils sont maintenant écrits une fois, sur le `<symbol>`. Son instance dans `<use>` les porte, et son tracé en hérite. `currentColor` y prend la couleur du `<svg>`, donc celle du survol et du thème. `ui_icon_sprite` ne sert qu'à « Enseignants ».
+- **Caractérisation d'abord** : le test des icônes d'une ligne compare l'union des attributs racine du `<svg>` et du `<symbol>` au fichier vendu, et refuse une valeur contradictoire ; il est vert avant comme après. Le test du helper exige les attributs sur le seul `<symbol>` ; il est rouge sur le code précédent.
+- **Captures** : tableau, survol du ⋮, menu ouvert, entrée survolée et confirmation, en clair et en sombre. Elles sont **identiques à l'octet** avant et après, comme entre deux exécutions avant (le rendu est déterministe).
+
+Série appariée, à une minute d'écart, charge ≈ 1 :
+
+| « Enseignants » (30 × 3, médiane) | Ko | Ko gzip | p50 | p95 | Vue p50 | Allocations |
+|---|---|---|---|---|---|---|
+| Avant (levier 3b) | 152,5 | 10,0 | 59,5 ms | 104,3 ms | 30,7 ms | 32 043 |
+| **Après** | **141,7** | **9,9** | **58,8 ms** | **111,1 ms** | 31,0 ms | 31 965 |
+
+Exécutions *après* : p95 109,4 / 158,3 / 111,1 ms ; une seconde série donne 141,6 / 85,6 / 150,7 ms (médiane 141,6 ms). Le levier ne vise que le poids. Le temps ne bouge pas, et le p95 reste dans la queue de compilation YJIT (§ « Où part le temps restant »).
+
+**Bilan du lot 3** : 441,1 → **141,7 Ko**. p50 : 91,7 → 58,8 ms ; vue : 63,5 → 31,0 ms (séries appariées de chaque levier).
+
+**Trouvé en chemin, hors du lot** : la colonne d'actions d'« Enseignants » porte `sticky right-0 bg-white`, et non l'utilitaire `sticky-actions` de l'UDR-0042 (amendement du 2026-09-28). La cellule ne passe donc pas en `z-index: 50` quand son menu s'ouvre. Le menu ⋮ d'une ligne qui n'est pas la dernière s'ouvre **sous la cellule d'actions de la ligne suivante** : l'entrée est en partie masquée, et un clic sur la partie masquée tombe dans la ligne d'en dessous (captures du 2026-10-04). Le défaut existait avant ce chantier. Les tests système ne le voient pas : ils ouvrent toujours le menu de la dernière ligne. C'est la dette notée au [journal](journal.md#dette-laissée-derrière).
 
 ## Lot D — Jeu de mesure (dette, lot à part)
 
@@ -234,7 +252,7 @@ Exécutions *après* : p50 63,7 / 62,6 / 55,8 ms ; p95 121,2 / 108,7 / 160,2 ms.
 - [x] Pureté domaine · rubocop · tests · brakeman : au vert (voir § Vérifications)
 - [x] `journal.md` : leviers abandonnés et pourquoi
 - [ ] **Cible p95 < 100 ms** de « Anciens élèves » : non atteinte au protocole (136 ms), atteinte à chaud (78 ms) ; voir « Où part le temps restant »
-- [ ] Lot 2 ; Lot 3 : 152,5 Ko, budget de 150 Ko non atteint (levier 3c proposé)
+- [ ] Lot 2 (Lot 3 : ✅ 141,7 Ko)
 
 ## Vérifications
 
