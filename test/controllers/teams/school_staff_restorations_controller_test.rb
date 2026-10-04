@@ -24,7 +24,11 @@ class Teams::SchoolStaffRestorationsControllerTest < ActionDispatch::Integration
 
     assert_response :success
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(ts('done', name: 'Aya Koné'))}/
-    assert_select "turbo-stream[action=remove][target=school_archived_staff_#{@aya.public_id}]"
+    # Phase 5 : la dernière restaurée, la carte « Directions retirées » laisse place à sa cible vide, comme au rechargement.
+    assert_select "turbo-stream[action=replace][target=school_archived_staff] template" do
+      assert_select "div#school_archived_staff:empty"
+      assert_select "h2", 0
+    end
     assert_select "turbo-stream[action=replace][target=school_staff] template #school_staff" do
       assert_select "p#school_staff_places", text: I18n.t("shared.school_staff.subtitle", used: 3, cap: 3)
       assert_select "li#school_staff_#{@aya.public_id}", text: /Aya Koné/ do
@@ -96,6 +100,18 @@ class Teams::SchoolStaffRestorationsControllerTest < ActionDispatch::Integration
     assert_response :not_found
     assert_not_nil staff_of(zadi).archived_at
     assert_not Orm::AuditEvent.exists?(action: "school_staff.restored")
+  end
+
+  test "another removed direction left: the card stays, without the restored line" do
+    salif = create_school_admin(school: @school, first_name: "Salif", last_name: "Traoré", archived_at: 1.day.ago)
+    sign_in_as @admin
+
+    restore @aya, as: :turbo_stream
+
+    assert_select "turbo-stream[action=replace][target=school_archived_staff] template #school_archived_staff" do
+      assert_select "li#school_archived_staff_#{salif.public_id}"
+      assert_select "li#school_archived_staff_#{@aya.public_id}", 0
+    end
   end
 
   test "hors de l'équipe : 403 ; le visiteur va à « Se connecter »" do

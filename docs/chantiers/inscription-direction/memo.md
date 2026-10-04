@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `feature/inscription-direction` |
 | **Programme** | — |

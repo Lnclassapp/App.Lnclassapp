@@ -16,6 +16,7 @@
 | 2026-10-04 | L'agent du Lot C n'a pas pu lancer la suite complète, que l'outil de permissions lui a refusée (« Modify Shared Resources ») ; le coordinateur l'a lancée sur la branche de chantier après le merge | Le refus a été signalé au porteur ; aucune permission n'a été modifiée | Non |
 | 2026-10-04 | Revue de sécurité du Lot C : 1 constat moyen et 1 bas, corrigés. (1) Une direction restaurée juste avant la suppression de la nuit pouvait quand même être supprimée, car la purge ne relisait pas le compte : `StaffRepositoryPort#claim_for_purge` relit le rattachement sous le verrou de l'établissement, et un compte restauré entre-temps est sauté. Le test à deux threads est rouge sans le correctif. (2) La restauration relit la ligne sous le verrou et ne la met à jour qu'archivée : deux restaurations simultanées donnent un seul `:restored`. Ajout de tests sur le second facteur non vérifié, l'élève, l'enseignant et l'admin | Rapport du `security-reviewer` | ADR-0077 §4.2 complété |
 | 2026-10-04 | Analyse des tests (`pr-test-analyzer`) : aucun critère orphelin. Renforcés : ID-04 au niveau du use case (6 inscriptions simultanées, 1 compte, 5 annulées), ID-08 (défaut en base et invitation acceptée), session survivante d'une direction archivée (403, rien écrit), date de suppression exacte dans le flux de l'équipe, PRD §5 corrigé à 5/min | Rapport du `pr-test-analyzer` | Non |
+| 2026-10-04 | Challenger (phase 5) : parcours 1, 2, 3 et 5 OK ; 4 KO sur un écart. Après la restauration de la **dernière** direction retirée, la carte « Directions retirées » restait titrée et vide jusqu'au rechargement. Le Turbo Stream de la restauration remplace maintenant le bloc, ou le vide | Rapport du challenger, rejoué dans Chromium à 390 px et 1280 px | UDR-0070 §3.5 amendée |
 | 2026-10-04 | Lot 0 : la route de restauration prend `:staff_member_public_id` (ressource imbriquée), pas `:public_id` | Convention Rails des ressources imbriquées ; le nom de route est celui de l'UDR | Non |
 
 ## Ce qui a dérapé
@@ -47,13 +48,16 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | `test/system/teams/blog_management_test.rb:71` a échoué une fois dans `bin/rails test:system` complet (texte alternatif de l'image lu `nil`), et passe seul deux fois de suite | Hors du diff (aucun fichier du blog touché) ; à surveiller en CI | à ouvrir si la CI le reproduit |
 | `SchoolStaffQuery#archived` n'a pas de limite : l'accueil de l'équipe lit toutes les directions retirées pour en montrer 5 | Rétention de 30 jours : le volume reste faible | — |
 | Le format de date avec « 1er » est recopié dans `shared/_school_staff` et les deux `_archived_staff` | Un helper partagé devrait le porter | à ouvrir (`refactor`) |
+| Les toasts « … a été retiré de la direction. » et la ligne « … · retiré le … » restent au masculin pour une direction femme (challenger) | Texte du PRD ; l'accord demande de faire passer le genre jusqu'au toast et à la query des retirés | à ouvrir (petit `feature` de libellés) |
+| La page d'inscription de la direction n'a pas de `h1` visible sur téléphone (`hidden md:flex`), comme l'inscription enseignant | Même schéma que l'existant : à corriger pour les deux pages | à ouvrir (`bugfix` accessibilité) |
+| Sur la fiche de l'équipe à 390 px, le bloc « Direction » vient après toute la liste des classes | Ordre des colonnes de la fiche, antérieur au chantier | — |
 | `script/ci/record_timings` perd la première ligne quand la bannière Puma la coupe | Contournement possible (retirer la bannière avant l'enregistrement) | à ouvrir |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-04 (PR prête pour relecture) |
+| **PR** | [#163](https://github.com/Lnclassapp/App.Lnclassapp/pull/163) vers `Develop` |
+| **ADR produits** | ADR-0077 (amende 0044, 0065) |
+| **UDR produits** | UDR-0070 (amende 0064, 0059, 0052, 0056, 0018) |
