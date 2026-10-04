@@ -75,6 +75,26 @@ module Queries
         assert_equal [ nil, nil ], overview.assignments.map(&:counts)
       end
 
+      # rapports-exercices, Lot A (ADR-0079, UDR-0072 §3.4) : badges et cercle au bord bas, sous la même condition que les comptes.
+      test "le résumé de compréhension d'un exercice assigné, lu seulement sous FollowAssignmentPolicy, comme les comptes" do
+        exercise = create_exercise
+        create_assignment(classroom: @classroom, assignable: create_exercise(essential: exercise.essential))
+        assignment = create_assignment(classroom: @classroom, assignable: exercise)
+        [ 100, 85, 72, 65, 40, 30 ].each do |score_percent|
+          create_exercise_session(student: create_student(classroom: @classroom), exercise:, status: "completed",
+                                  score_percent:, classroom_assignment: assignment)
+        end
+
+        done, nobody = overview(show_follow_up: true).assignments
+        summary = Queries::Assessment::ComprehensionSummaryQuery::Summary
+
+        assert_equal assignment.public_id, done.public_id
+        assert_equal summary.new(category: :acquired, badge_counts: { bronze: 1, silver: 1, gold: 1, diamond: 1 }), done.comprehension
+        assert_equal summary.new(category: nil, badge_counts: { bronze: 0, silver: 0, gold: 0, diamond: 0 }), nobody.comprehension
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 6, late: 0, pending: 0), done.counts
+        assert_equal [ nil, nil ], overview.assignments.map(&:comprehension)
+      end
+
       test "cours : publiés, du niveau de la classe, sans série ou de sa série, de la matière de l'enseignant ; toutes pour l'équipe" do
         tle = create_level(name: "Tle")
         d = create_series(name: "D")
