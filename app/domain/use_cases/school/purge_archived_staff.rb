@@ -9,13 +9,14 @@ module UseCases
       # Un compte restauré entre la lecture de la liste et son tour n'est ni supprimé ni en échec : il est sauté.
       Purged = Data.define(:deleted, :failed)
 
-      def initialize(staffs:, users:, sessions:, photos:, login_attempts:, second_factors:, pin_recoveries:, audit_log:,
+      def initialize(staffs:, users:, sessions:, photos:, login_attempts:, invitations:, second_factors:, pin_recoveries:, audit_log:,
                      transaction:, policy:, clock:)
         @staffs = staffs
         @users = users
         @sessions = sessions
         @photos = photos
         @login_attempts = login_attempts
+        @invitations = invitations
         @second_factors = second_factors
         @pin_recoveries = pin_recoveries
         @audit_log = audit_log
@@ -57,6 +58,7 @@ module UseCases
         contact = @users.find(id: user_id).contact
         @photos.remove(user_id:)
         @login_attempts.destroy_all_for(user_id:, contact:)
+        @invitations.destroy_all_for(user_id:, contact:)
         @users.anonymize(user_id:, first_name: UseCases::Identity::AnonymizeUser::FIRST_NAME,
                          last_name: UseCases::Identity::AnonymizeUser::LAST_NAME, at: now)
         @sessions.destroy_all_for(user_id:)

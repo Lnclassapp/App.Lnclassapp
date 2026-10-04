@@ -8,7 +8,7 @@
   <ul class="divide-y divide-line">
     <% shown.each do |row| %>
       <li>
-        <%= link_to t(".line", name: row.name, school: row.school_name, date: fmt.(row.archived_at)), school_path(row.school_public_id),
+        <%= link_to t(".line.#{row.gender}", name: row.name, school: row.school_name, date: fmt.(row.archived_at)), school_path(row.school_public_id),
                     class: "flex min-h-tap items-center text-sm text-ink underline-offset-2 hover:underline" %>
       </li>
     <% end %>

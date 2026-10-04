@@ -9,7 +9,7 @@ class Teams::SchoolStaffTest < ApplicationSystemTestCase
 
   setup do
     @school = create_school(name: "Lycée Moderne de Bouaké")
-    @kofi = create_school_admin(school: @school, first_name: "Kofi", last_name: "Yao", joined_via: "code", joined_at: 2.days.ago)
+    @kofi = create_school_admin(school: @school, first_name: "Kofi", last_name: "Yao", gender: "male", joined_via: "code", joined_at: 2.days.ago)
     @field = create_team_member(team_role: "field", first_name: "Awa", last_name: "Bamba")
   end
 
@@ -24,7 +24,7 @@ class Teams::SchoolStaffTest < ApplicationSystemTestCase
       click_menu_action("#school_staff_#{@kofi.public_id}", ts("remove"))
       within("dialog[open]") { click_on ts("confirm.submit") }
 
-      assert_toast ts("done", name: "Kofi Yao")
+      assert_toast ts("done.male", name: "Kofi Yao")
       assert_no_selector "#school_staff_#{@kofi.public_id}"
       assert_selector "#school_staff_places", text: ts("subtitle", used: 0, cap: 3)
       within("#school_archived_staff_#{@kofi.public_id}") do

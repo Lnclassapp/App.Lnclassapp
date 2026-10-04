@@ -59,7 +59,7 @@ class SchoolAdmin::StaffMembersTest < ApplicationSystemTestCase
         click_on ts("confirm.submit")
       end
 
-      assert_toast ts("done", name: "Aya Koné")
+      assert_toast ts("done.female", name: "Aya Koné")
       assert_no_selector "#school_staff_#{@aya.public_id}"
       assert_no_selector "dialog[open]"
       assert_selector "#school_staff_places", text: ts("subtitle", used: 1, cap: 3)

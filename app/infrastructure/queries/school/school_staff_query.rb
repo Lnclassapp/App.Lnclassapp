@@ -5,7 +5,9 @@ module Queries
   module School
     class SchoolStaffQuery
       Row = Data.define(:user_id, :public_id, :name, :joined_via, :joined_at)
-      ArchivedRow = Data.define(:public_id, :name, :school_public_id, :school_name, :archived_by_name, :archived_at, :joined_via) do
+      # gender : accorde « retiré » ou « retirée » (suites-inscription-direction).
+      ArchivedRow = Data.define(:public_id, :name, :school_public_id, :school_name, :archived_by_name, :archived_at, :joined_via,
+                                :gender) do
         def deletion_due_at = archived_at + Entities::School::Staff::RETENTION_DAYS.days
       end
 
@@ -32,7 +34,8 @@ module Queries
                                 .joins("JOIN users authors ON authors.id = school_staffs.archived_by_id")
         scope = scope.where(school_id:) if school_id
         scope.order(archived_at: :desc, id: :desc)
-             .pluck("users.public_id", FULL_NAME, "schools.public_id", "schools.name", AUTHOR_NAME, :archived_at, :joined_via)
+             .pluck("users.public_id", FULL_NAME, "schools.public_id", "schools.name", AUTHOR_NAME, :archived_at, :joined_via,
+                    "users.gender")
              .map { ArchivedRow.new(*it) }
       end
 

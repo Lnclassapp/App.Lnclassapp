@@ -28,7 +28,7 @@ class SchoolAdmin::StaffMembersControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=remove][target=school_staff_#{@aya.public_id}]"
     assert_select "turbo-stream[action=replace][target=school_staff_places] template p#school_staff_places",
                   text: ts("subtitle", used: 1, cap: 3)
-    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(ts('done', name: 'Aya Koné'))}/
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(ts('done.female', name: 'Aya Koné'))}/
     staff = staff_of(@aya)
     assert_equal @kofi.id, staff.archived_by_id
     assert_not_nil staff.archived_at
@@ -49,7 +49,7 @@ class SchoolAdmin::StaffMembersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to school_admin_school_path
     assert_equal 303, response.status
-    assert_equal ts("done", name: "Aya Koné"), flash[:notice]
+    assert_equal ts("done.female", name: "Aya Koné"), flash[:notice]
   end
 
   test "ID-13 : un DELETE forgé d'Aya (2 jours) sur Kofi répond 403, toast, rien n'est écrit" do

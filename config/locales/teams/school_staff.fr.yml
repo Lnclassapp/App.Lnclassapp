@@ -5,8 +5,13 @@ fr:
     schools:
       archived_staff:
         title: "Directions retirées"
-        line: "Retiré le %{date} par %{author}"
-        due: "Supprimé le %{date}"
+        # suites-inscription-direction : accordés au genre du compte retiré.
+        line:
+          male: "Retiré le %{date} par %{author}"
+          female: "Retirée le %{date} par %{author}"
+        due:
+          male: "Supprimé le %{date}"
+          female: "Supprimée le %{date}"
         restore: "Restaurer"
         restore_label: "Restaurer %{name}"
     school_staff_restorations:
