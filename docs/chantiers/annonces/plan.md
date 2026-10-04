@@ -211,18 +211,18 @@ Critères orphelins : **aucun**. AN-01 à AN-23 sont tous rattachés (voir « Do
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 Propres à ce chantier :
 
 - [x] ADR-0078 et UDR-0071 `Accepté` **avant** le Lot 0 (programme, décisions de fondation)
-- [ ] Registre des contradictions de la feuille de route mis à jour (PRD cadre ↔ ADR-0045, design system §10 ↔ ADR-0045, ADR-0065 ↔ ce chantier) ; fiche V6 précisée (« riches » = image et audio)
-- [ ] Budget de l'accueil élève (ADR-0067) tenu avec le carrousel : nombre de requêtes constant, mesuré
+- [x] Registre des contradictions de la feuille de route mis à jour (PRD cadre ↔ ADR-0045, design system §10 ↔ ADR-0045, ADR-0065 ↔ ce chantier) ; fiche V6 précisée (« riches » = image et audio)
+- [x] Budget de l'accueil élève (ADR-0067) tenu avec le carrousel : nombre de requêtes constant, mesuré
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >

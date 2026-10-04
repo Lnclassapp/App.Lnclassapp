@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré en PR (#162, 2026-10-04) |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `feature/annonces` |
 | **Programme** | `refonte-application`, vague **V6a** ([feuille de route §5, V6](../refonte-application/feuille-de-route.md#v6--communication)) — sortie du backlog par le porteur le 2026-10-03 |

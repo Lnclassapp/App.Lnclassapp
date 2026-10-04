@@ -69,7 +69,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-04 en PR (fusion dans `Develop` à dater) |
+| **PR** | [#162](https://github.com/Lnclassapp/App.Lnclassapp/pull/162) |
+| **ADR produits** | [ADR-0078](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) (amende ADR-0045 et ADR-0065) |
+| **UDR produits** | [UDR-0071](../../decisions/udr/0071-annonces.md) |
+| **Preuve** | Suite complète 3 976 tests, 0 échec, couverture 100 % lignes et branches ; tests système du chantier 14,2 s sur 15 ; challenger empirique (phase 5) sans échec ; revue de sécurité : 2 constats moyens et 4 bas, corrigés sauf C5 (décision produit, en dette) ; rubocop, brakeman, pureté du domaine au vert |
+| **Chantiers de suivi** | Plafond par auteur dans le carrousel (décision du porteur) ; jeton « sur la marque » pour le cercle de ▶ en mode sombre ; `script/perf/dataset.rb` ; limite de corps de requête (hébergement) ; helper de dates commun aux listes d'annonces |
