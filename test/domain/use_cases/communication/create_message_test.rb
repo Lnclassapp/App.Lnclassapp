@@ -119,6 +119,12 @@ module UseCases
         assert_equal 0, Orm::Message.count
       end
 
+      test "a direction or the team sending no audience is refused: only the teacher has a default one, his classrooms" do
+        assert_equal :forbidden, create(@kamate).code
+        assert_equal :forbidden, create(@fatou, scope: "national").code
+        assert_equal 0, Orm::Message.count
+      end
+
       test "a student and a visitor write nothing" do
         assert_equal :forbidden, create(create_student(classroom: @b3), audience: "students").code
         assert_equal :forbidden, create(nil, audience: "students").code
