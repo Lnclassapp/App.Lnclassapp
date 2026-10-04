@@ -36,7 +36,10 @@ Le porteur demande (2026-10-04) que la page principale de la direction s'organis
 
 *(à compléter au grill)*
 
-- Toute écriture par la direction qui n'est pas explicitement décidée ici (l'espace direction reste en lecture seule par défaut, ADR-0065).
+- **Construire les annonces** (rédiger, publier, lire, masquer, retirer) : chantier `annonces`, en cours sur sa branche. Ce chantier ne fait qu'afficher son carrousel.
+- **Masquer une annonce depuis l'accueil de la direction** (Q3) : à rouvrir si les directions le demandent, par un amendement de l'ADR-0078.
+- Un bouton « Rédiger une annonce » sur l'accueil : la rédaction reste sur la page « Annonces ».
+- Toute écriture par la direction qui n'est pas explicitement décidée ici.
 - La page « Enseignants » : inchangée.
 
 ## Ce que le grill a révélé
@@ -45,6 +48,7 @@ Le porteur demande (2026-10-04) que la page principale de la direction s'organis
 |---|---|---|
 | Q1. Les annonces n'existent pas sur `Develop` : ce chantier les construit-il ? | **Non** : un chantier `annonces` est en cours sur sa propre branche (porteur, 2026-10-04). | Ce chantier **ne construit rien** des annonces : il les **affiche** sur l'accueil de la direction, en lisant ce que le chantier `annonces` fournit. **Dépendance** : la section ne peut se coder qu'après le merge d'`annonces` dans `Develop`. Écart à trancher : `annonces` a décidé que le carrousel reste propre à l'accueil élève et que la direction lit ses annonces sur une page « Annonces » de sa navigation ; une section sur l'accueil de la direction est un **ajout** à l'UDR-0071, pas une contradiction. Fichier partagé probable : `navigation_helper` (le Lot D d'`annonces` y ajoute « Annonces »). |
 | Q2. Que montre la section « Annonces » de l'accueil de la direction ? (A aperçu des reçues · B aperçu + « Rédiger » · C ses annonces en ligne · D le carrousel de l'élève) | **D : le carrousel de l'élève, à l'identique** (porteur, 2026-10-04). | On réutilise le carrousel du chantier `annonces` (5 cartes au plus, ordre direction → enseignants → Lnclass, lien « Toutes les annonces » vers la page « Annonces »), alimenté par la même règle de lecture : la direction y voit les annonces nationales et celles de son établissement destinées à « tous » ou « aux directions ». Pas de bouton « Rédiger » sur l'accueil : on rédige depuis la page « Annonces ». Le gabarit du carrousel porte aujourd'hui des identifiants propres à l'accueil élève : il faudra le paramétrer (fichier du chantier `annonces`, donc **après son merge**). Point dur : « masquer » est réservé à l'élève par le chantier `annonces` (voir Q3). |
+| Q3. Dans son carrousel, la direction peut-elle masquer une annonce ? (le chantier `annonces` réserve le masquage à l'élève) | **Non** (porteur, 2026-10-04). | Le carrousel de la direction s'affiche **sans aucune croix** ; la règle de masquage du chantier `annonces` (ADR-0078 §4.2) ne change pas. Une annonce de l'équipe reste dans le carrousel jusqu'à sa date de fin. Un test vérifie l'absence de croix, et le serveur refuse déjà un masquage forgé par une direction (403). Le carrousel doit donc accepter « jamais masquable » comme paramètre, en plus de la règle « officielle ». |
 
 ## Cas limites identifiés
 
