@@ -16,6 +16,8 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
+- **Lot 0 : code écrit avant ses tests.** Le rouge a été prouvé après coup : code de `app/` et `config/` mis de côté (`git stash`), tests lancés (6 erreurs `NameError` / `NoMethodError` attendues), code rétabli, tests verts. À ne pas refaire : le test d'abord, même pour un socle.
+- **Environnement du conteneur** : Ruby 3.4.9 absent (compilé par `rbenv install`, ~10 min), PostgreSQL arrêté, rôle `dev-rails` à créer, `chromedriver` 147 face à Chromium 141 (driver 141 téléchargé depuis Chrome for Testing), locale non UTF-8 qui faisait échouer le contrôle de pureté du domaine (`invalid byte sequence in US-ASCII`) : `LANG=C.UTF-8`. `db:prepare` en test charge les seeds et casse les tests (`index_materials_on_name`) : `db:test:prepare` ou `db:schema:load`.
 - **Exploration sur un clone périmé** : le dépôt local avait 296 commits de retard sur `origin/Develop` pendant la première exploration et le début du grill. Deux questions (G6, G12) sont parties de prémisses fausses : l'assignation de cours existait encore, la règle de niveau n'était pas appliquée. Corrigé dans le memo avant le PRD. Leçon : `git fetch` et comparer à `origin/<branche>` **avant** d'explorer, pas au premier `push` refusé.
 
 ## Ce qu'on a appris sur la codebase
