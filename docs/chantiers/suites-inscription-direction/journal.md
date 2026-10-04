@@ -47,13 +47,14 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | L'IP du journal d'audit gardée 12 mois puis effacée, pour tous les comptes (décision du porteur) | Règle nouvelle et job de rétention : c'est une feature | `retention-ip-audit` |
+| Le `h1` de l'inscription enseignant et de l'invitation est l'accueil générique (« Bienvenue sur Lnclass »), alors que l'onglet et le `h2` portent le nom de la page (challenger, d'après UDR-0054 §3.1) | Texte d'origine, le même que celui de la colonne large ; renommer les titres est un choix de libellé | à ouvrir (libellés) |
 | « %{name} a été retiré(e) de l'établissement » (enseignant retiré, `school_admin.teachers`) | Même accord, autre parcours ; hors du périmètre du memo | à ouvrir (petit `bugfix`) |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-04 |
+| **PR** | [#166](https://github.com/Lnclassapp/App.Lnclassapp/pull/166) vers `Develop` |
+| **ADR produits** | ADR-0077 §4.3 précisé (ADR-0036 §4 appliqué) |
+| **UDR produits** | UDR-0070 §3.7, UDR-0054 §3.1 amendées |

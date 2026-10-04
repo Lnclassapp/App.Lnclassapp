@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `fix/suites-inscription-direction` |
 | **Programme** | — |
@@ -17,7 +17,7 @@ Trois écarts relevés à la phase 5 d'[`inscription-direction`](../inscription-
 ### Symptômes
 
 1. **Accord.** Une direction femme retirée est annoncée au masculin. Le toast dit « Aya Kouassi a été retiré de la direction. », l'accueil de l'équipe « … · retiré le 4 octobre 2026 » et la fiche « Retiré le … par … · Supprimé le … ». Constaté par le challenger dans Chromium. La règle de la langue de l'interface (UDR-0007) est le français correct, et le genre du compte est connu.
-2. **Invitation.** Le numéro d'une direction invitée reste en clair dans `invitations.contact` après la suppression de son compte, que ce soit la suppression automatique à J+30 ou la suppression par l'équipe. Constaté par la revue de sécurité, puis reproduit en base. L'ADR-0036 §4 prévoit pourtant « sessions, second facteur, codes et **invitations supprimés** ».
+2. **Invitation.** Le numéro d'une direction invitée reste en clair dans `invitations.contact` après la suppression de son compte par la suppression automatique à J+30. La suppression par l'équipe (`AnonymizeUser`) ne vise que des élèves (`DeleteUserPolicy`), qui n'ont pas d'invitation : elle est corrigée par cohérence avec l'ADR-0036 §4, et couverte par les seuls tests unitaires. Constaté par la revue de sécurité, puis reproduit en base. L'ADR-0036 §4 prévoit pourtant « sessions, second facteur, codes et **invitations supprimés** ».
 3. **Titre.** Sur téléphone, trois pages n'ont aucun `h1` visible : inscription de la direction, inscription enseignant, acceptation d'une invitation. La page « rejoindre une classe » a déjà le sien dans sa carte ; le test la vérifie quand même. Le titre principal est dans la colonne `hidden md:flex`, et l'écran ne montre qu'un `h2`. Constaté par le challenger à 390 px. UDR-0054 : le `h1` porte le nom de la page.
 
 ### Reproduction
@@ -76,6 +76,6 @@ Les trois points sont ouverts dans le journal du chantier livré, et le porteur 
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application (Chromium, 390 et 1280 px : les trois points sont OK, ainsi que le cas symétrique de l'inscription et de la restauration)
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
