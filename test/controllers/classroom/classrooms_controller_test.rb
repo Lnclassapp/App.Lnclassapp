@@ -247,7 +247,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#assignment_#{assignment.public_id} p", text: "4 faits · 21 pas encore faits"
   end
 
-  test "PRD : une autre classe, une remédiation, une session commencée, un élève parti ou anonymisé ne comptent pas" do
+  # ADR-0079 §4.1 : une remédiation sur l'exercice assigné, c'est faire cet exercice ; hors de l'assignation, elle ne compte pas.
+  test "PRD : une remédiation sur l'assignation compte ; une autre classe, une remédiation hors de l'assignation, une session commencée, un élève parti ou anonymisé ne comptent pas" do
     exercise = create_exercise
     assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
     present = create_student(classroom: @classroom)
@@ -258,6 +259,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     create_exercise_session(student: other, exercise:, status: "completed", score_percent: 100,
                             gap: create_gap(student: other, essential: exercise.essential))
     create_exercise_session(student: other, exercise:, classroom_assignment: assignment)
+    remediated = create_student(classroom: @classroom)
+    hand_in(assignment, 100, student: remediated, gap: create_gap(student: remediated, essential: exercise.essential))
     gone = hand_in(assignment, 100).student
     Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
     hand_in(assignment, 100).student.update_columns(anonymized_at: Time.current)
@@ -265,9 +268,9 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     get classroom_path(@classroom.public_id)
 
-    assert_badges assignment, [ "1 Bronze", "0 Argent", "0 Or", "0 Diamant" ]
-    assert_select "#assignment_#{assignment.public_id} #{FOOTER} span.text-ink", text: "Pas encore lisible · 1/2"
-    assert_select "#assignment_#{assignment.public_id} p", text: "1 fait · 1 pas encore fait"
+    assert_badges assignment, [ "1 Bronze", "0 Argent", "0 Or", "1 Diamant" ]
+    assert_select "#assignment_#{assignment.public_id} #{FOOTER} span.text-ink", text: "Pas encore lisible · 2/3"
+    assert_select "#assignment_#{assignment.public_id} p", text: "2 faits · 1 pas encore fait"
   end
 
   test "une classe sans élève présent : badges à zéro et cercle gris « Pas encore lisible · 0/0 », sans erreur" do
