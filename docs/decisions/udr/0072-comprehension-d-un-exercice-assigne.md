@@ -28,7 +28,8 @@ Le porteur demande (2026-10-04) :
 2. **Le détail est une section de la page de suivi**, pas un écran de plus. Cette page est déjà le lieu de l'exercice assigné et elle nomme déjà des élèves sous la même policy. La section s'insère sous les trois chiffres.
 3. **Les catégories sont des liens dans un Turbo Frame**, pas des onglets JavaScript. La catégorie vit dans l'adresse (`?category=`) : la page se recharge et se partage sans perdre le choix, et marche sans JavaScript.
 4. **Couleur et texte toujours ensemble.** Le cercle n'est jamais seul : la catégorie est écrite à côté (charte §14, R6).
-5. **Trois couleurs propres à la compréhension**, nouvelles et réservées aux écrans enseignant. L'ambre reste l'urgence (charte §5) : la ligne affiche déjà une échéance en retard en ambre, le jaune « Fragile » ne doit pas s'y confondre. Le vert « Acquis » est le vert « réussi » existant.
+5. **Chaque lecture appelle un geste**, selon la mission de Lnclass : aider chaque acteur à progresser (porteur, 2026-10-04). La section marque la question à reprendre en classe, montre ce que la classe a appris entre le premier et le meilleur essai, et place en tête les élèves qui ont besoin de l'enseignant.
+6. **Trois couleurs propres à la compréhension**, nouvelles et réservées aux écrans enseignant. L'ambre reste l'urgence (charte §5) : la ligne affiche déjà une échéance en retard en ambre, le jaune « Fragile » ne doit pas s'y confondre. Le vert « Acquis » est le vert « réussi » existant.
 
 ## 3. Règles d'implémentation
 
@@ -149,9 +150,11 @@ section#comprehension [aria-labelledby=comprehension_title] .mb-8
 - l'énoncé en texte brut, `min-w-0 flex-1 line-clamp-2 text-sm text-ink` ;
 - à droite, `w-28 shrink-0`, une barre `h-2 rounded-full bg-mist` dont le remplissage a pour largeur le taux et pour couleur `comprehension_dot_class(Grading.mastery_for(taux))`, puis le taux « 50 % » en `text-sm tabular-nums text-ink` ;
 - sans tentative : « — » et pas de barre.
-- La barre est `aria-hidden`. Le taux écrit suffit : `aria-label` de la `li` = « Question 1 : 50 % de réussite ».
+- **Progrès** : si `first_rate` est présent et différent du taux, sous le taux à droite, `text-xs text-mute tabular-nums` : « 1er essai : 20 % ».
+- **À reprendre** : si `to_revisit`, sous l'énoncé, `ui_badge t(".to_revisit"), tone: :brand, size: :sm, icon: "arrow-path"` : « À reprendre en classe ». Le bleu de la marque dit l'action, jamais l'ambre de l'urgence.
+- La barre est `aria-hidden`. Le taux écrit suffit : l'`aria-label` de la `li` est « Question 1 : 50 % de réussite », complété par « , 20 % au premier essai » et « , à reprendre en classe » quand c'est le cas.
 
-**Élèves** (`ul`, même carte) — une `li` par élève de la catégorie, triés par nom (`last_name, first_name`), `flex items-center justify-between gap-3 px-4 py-3 sm:px-5` :
+**Élèves** (`ul`, même carte) — une `li` par élève de la catégorie, **dans l'ordre fourni par la query** (ADR-0079 §4.7 : en baisse, stagne, un seul essai, stable, en progrès, puis par nom), `flex items-center justify-between gap-3 px-4 py-3 sm:px-5` :
 - gauche : le nom, `min-w-0 truncate font-medium` ;
 - droite, `shrink-0 flex items-center gap-3 text-sm` : le meilleur score « 85 % » (`tabular-nums`), puis le signe, avec l'icône `trend_icon` (`mini`, `aria-hidden`) et `trend_label` en `text-mute`.
 - Les lignes ne sont pas des liens : la fiche élève (CL-13) n'est pas encore là.
@@ -194,7 +197,11 @@ section#comprehension [aria-labelledby=comprehension_title] .mb-8
   - `students_title` : « Élèves » ;
   - `question_label` : « Question %{number} : %{rate} de réussite » ;
   - `question_number` : « Q%{number} » ;
-  - `no_attempt` : « — ».
+  - `no_attempt` : « — » ;
+  - `first_rate` : « 1er essai : %{rate} » ;
+  - `first_rate_label` : « , %{rate} au premier essai » ;
+  - `to_revisit` : « À reprendre en classe » ;
+  - `to_revisit_label` : « , à reprendre en classe ».
 - `trends_summary` : « %{progress} · %{flat} · %{decline} », avec les pluriels :
   - `progress` : « %{count} en progrès » ;
   - `flat` : « %{count} sans évolution » ;

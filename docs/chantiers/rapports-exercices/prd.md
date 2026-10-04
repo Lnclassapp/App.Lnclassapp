@@ -4,6 +4,8 @@
 
 ## 1. Contexte
 
+> **Mission** (porteur, 2026-10-04) : Lnclass aide chaque acteur du système éducatif à progresser. Chaque lecture de ce chantier appelle un geste de l'enseignant.
+
 L'enseignant assigne un exercice à sa classe et voit combien d'élèves l'ont fait (ADR-0072), mais pas s'ils l'ont compris, ni qui progresse. Ce chantier ajoute, à chaque exercice assigné, une **lecture de la compréhension** : chaque élève qui l'a fait est classé par son meilleur score (rouge, jaune, vert) et porte un signe de progrès ; un cercle donne la couleur dominante de la classe, au bord bas de l'exercice sur la page classe, et la page de suivi détaille les catégories, question par question. Voir le [memo](memo.md).
 
 ## 2. Acteurs et permissions
@@ -26,7 +28,8 @@ L'enseignant assigne un exercice à sa classe et voit combien d'élèves l'ont f
 2. Au **bord bas** de chaque exercice : **à gauche**, les quatre badges avec leur nombre d'élèves ; **à droite**, isolé, le **cercle** de compréhension et « 18/25 ».
 3. Le cercle est **gris** tant que moins de 5 élèves ont fait l'exercice ; ensuite il prend la couleur de la **catégorie dominante**.
 4. L'enseignant touche l'exercice (ou le cercle) : la page de suivi s'ouvre. Sous les trois chiffres existants, la section **« Compréhension »** montre le grand cercle, la synthèse « 8 en progrès · 7 sans évolution · 3 en baisse », puis les trois catégories avec leur nombre d'élèves.
-5. La catégorie dominante est choisie par défaut. L'enseignant en choisit une autre : la liste des **questions** affiche, pour les élèves de cette catégorie, le taux de réussite de chaque question, puis la liste de ses **élèves** avec meilleur score et signe.
+5. La catégorie dominante est choisie par défaut. L'enseignant en choisit une autre. La liste des **questions** affiche, pour les élèves de cette catégorie, le taux de réussite de chaque question au meilleur essai, et à côté le taux au premier essai s'ils ont recommencé. Les questions sous 50 % sont marquées « À reprendre en classe ».
+6. Viennent ensuite les **élèves** de la catégorie, avec meilleur score et signe : d'abord ceux en baisse ou qui stagnent, ceux qui ont le plus besoin de lui.
 
 ### Chemins alternatifs et erreurs
 
@@ -140,13 +143,26 @@ Scénario: taux par question pour une catégorie
   Et les questions sont numérotées dans l'ordre de l'exercice
   Et aucun taux ne dépasse 100 %, même si les élèves ont recommencé
 
+Scénario: progrès par question et question à reprendre
+  Étant donné deux élèves « Fragile » qui ont raté la question 2 au premier essai et réussi au meilleur
+  Et la question 3 réussie par aucun des deux au meilleur essai
+  Quand l'enseignant choisit la catégorie « Fragile »
+  Alors la question 2 affiche 100 % et « 1er essai : 0 % »
+  Et la question 3 affiche 0 % et « À reprendre en classe »
+  Et une question à 50 % n'est pas « À reprendre en classe »
+  Et sans élève à deux essais, aucun taux au premier essai n'est affiché
+
+Scénario: les élèves qui ont besoin de l'enseignant d'abord
+  Étant donné dans une catégorie un élève en progrès, un élève en baisse, un élève qui stagne et un élève à un seul essai
+  Alors la liste les montre dans l'ordre : en baisse, stagne, un seul essai, en progrès
+
 Scénario: meilleur essai à égalité
   Étant donné un élève dont deux essais valent 80
   Alors c'est le plus récent des deux qui compte pour les taux par question
 
 Scénario: liste des élèves d'une catégorie
   Quand l'enseignant choisit la catégorie « En difficulté »
-  Alors il voit ses seuls élèves, par nom, avec meilleur score et signe
+  Alors il voit ses seuls élèves, avec meilleur score et signe
 
 Scénario: catégorie dans l'adresse
   Quand l'enseignant ouvre la page de suivi avec la catégorie « Fragile » dans l'adresse

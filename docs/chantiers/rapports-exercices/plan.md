@@ -38,18 +38,20 @@ Lot 0 — SOCLE (séquentiel, court)
                      `test/design/dark_mode_test.rb` *(partagé)*
 - **Dépend de**    : — (ADR-0079 et UDR-0072 acceptés)
 - **Test associé** : `test/domain/entities/assessment/comprehension_test.rb` · `test/infrastructure/queries/assessment/assignment_scores_test.rb` · `test/helpers/assessment/comprehension_helper_test.rb`
-- **Done quand**   : les règles de domaine passent aux bornes du PRD §4 « Règles de domaine » (catégories 49/50/69/70 ; séries 30-60-90, 60-60-60, 30-90-40, 90-40, 100-100, 50-59, 50-60, 80-90-81, 80-90-80, un seul essai ; égalités ; 4 et 5 élèves). La lecture socle exclut la remédiation, une autre classe, une session commencée, un élève parti ou anonymisé, et désigne le meilleur essai le plus récent à égalité. `bin/rails runner "puts Entities::Assessment::Comprehension.name, Queries::Assessment::AssignmentScores.name"` répond. Les quatre tokens existent dans les deux thèmes.
+- **Done quand**   : les règles de domaine passent aux bornes du PRD §4 « Règles de domaine » (catégories 49/50/69/70 ; séries 30-60-90, 60-60-60, 30-90-40, 90-40, 100-100, 50-59, 50-60, 80-90-81, 80-90-80, un seul essai ; égalités ; 4 et 5 élèves ; `to_revisit?` à 49 et 50). La lecture socle exclut la remédiation, une autre classe, une session commencée, un élève parti ou anonymisé, et désigne le premier essai ainsi que le meilleur essai, le plus récent à égalité. `bin/rails runner "puts Entities::Assessment::Comprehension.name, Queries::Assessment::AssignmentScores.name"` répond. Les quatre tokens existent dans les deux thèmes.
 
 **Contrats gelés par le Lot 0** (les lots A et B les consomment, ne les modifient pas) :
 
 ```ruby
 # Entities::Assessment::Comprehension — ADR-0079 §6, tel quel
-PROGRESS_MARGIN = 10 ; MIN_DONE_FOR_READING = 5 ; CATEGORIES = %i[struggling fragile acquired]
+PROGRESS_MARGIN = 10 ; MIN_DONE_FOR_READING = 5 ; CATEGORIES = %i[struggling fragile acquired] ; TREND_ORDER
 .category_for(best) → Symbol   .trend_for(scores) → nil | Symbol   .dominant(counts) → nil | Symbol   .readable?(done) → Boolean
+.to_revisit?(rate) → Boolean
 
 # Queries::Assessment::AssignmentScores — lecture socle, une requête quel que soit le nombre d'assignations
-StudentScores = Data.define(:student_id, :scores, :best_session_id)
-# scores : score_percent des sessions faites, ordre (completed_at, id) ; best_session_id : session de score max, la plus récente à égalité
+StudentScores = Data.define(:student_id, :scores, :first_session_id, :best_session_id)
+# scores : score_percent des sessions faites, ordre (completed_at, id) ; first_session_id : la première ;
+# best_session_id : session de score max, la plus récente à égalité
 .for(classroom_id:, assignment_ids:) → { assignment_id => [StudentScores] }   # absente = aucun fait
 # « fait » et « présent » : réutilise Queries::Classroom::AssignmentFollowUpQuery.present_students (même définition, ADR-0072 §4.4)
 
@@ -116,13 +118,18 @@ Contenu attendu :
   - `category_counts` : `{ struggling:, fragile:, acquired: }`.
   - `trend_counts` : `{ progress:, flat:, decline: }`.
   - `selected` : la catégorie demandée si valide, sinon la dominante, sinon `:struggling`.
-  - `questions` : `[QuestionRate(number, content, rate_or_nil)]`, dans l'ordre de `position`, lus sur les `best_session_id` des élèves de `selected`.
-  - `students` : `[StudentRow(display_name, best, trend)]` de `selected`, triés par nom.
+  - `questions` : `[QuestionRate(number, content, rate, first_rate, to_revisit)]`, dans l'ordre de `position`.
+    - `rate` est lu sur les `best_session_id` des élèves de `selected`.
+    - `first_rate` est lu sur leurs `first_session_id`, `nil` si aucun n'a deux essais.
+    - `to_revisit` vaut `Comprehension.to_revisit?(rate)`.
+  - `students` : `[StudentRow(display_name, best, trend)]` de `selected`, triés selon `TREND_ORDER`, puis par nom (ADR-0079 §4.7).
 - Contrôleur : après `FollowAssignmentPolicy` et le chargement du suivi, il lit `params[:category]` sur la liste blanche `Comprehension::CATEGORIES` et charge `@comprehension`. `AssignmentFollowUpQuery` n'est pas modifiée : ce fichier n'est dans aucun lot, et s'il faut le changer, il remonte au Lot 0.
 - Vues : UDR-0072 §3.5 et §3.6.
 
 Critères du PRD couverts :
 - « synthèse et catégories » ;
+- « progrès par question et question à reprendre » ;
+- « les élèves qui ont besoin de l'enseignant d'abord » ;
 - « taux par question pour une catégorie » ;
 - « meilleur essai à égalité » ;
 - « liste des élèves d'une catégorie » ;

@@ -29,6 +29,7 @@ Quatre questions n'avaient pas de réponse :
 
 ## 2. Moteurs de décision
 
+0. **La mission de Lnclass : aider chaque acteur du système éducatif à progresser** (porteur, 2026-10-04). Une lecture qui ne débouche sur aucun geste de l'enseignant (reprendre une question, aider un élève) n'aide personne : chaque chiffre affiché doit en appeler un.
 1. **Une seule vérité par écran** : le cercle, les badges et le compte « faits » d'un même exercice ne se contredisent jamais.
 2. **Le progrès se voit**, sans brouiller le niveau atteint.
 3. **Pas d'alerte sur trop peu de données** : deux élèves sur quarante-cinq ne décrivent pas une classe.
@@ -100,6 +101,12 @@ Les sessions faites de l'élève sont prises dans l'ordre de `completed_at` : `f
 - Pour chaque question de l'exercice, dans l'ordre de `position`, le taux est la part arrondie des tentatives justes (`correct`) parmi les tentatives de ces sessions sur cette question.
 - Pas de tentative : « — ».
 - Le dénominateur compte des tentatives, une au plus par session et par question (index unique) : le taux **ne peut pas dépasser 100 %**.
+- **Progrès par question** : le même taux, lu sur le **premier essai** (première session faite) de chaque élève de la catégorie. Il n'est donné que si au moins un élève de la catégorie a deux essais ou plus ; sinon il serait égal au premier.
+- **Question à reprendre** : une question dont le taux au meilleur essai est **sous `PASS_THRESHOLD` (50)** est marquée « À reprendre en classe ». C'est l'« alerte révision » de l'ancien rapport, avec un seuil nommé.
+
+### 4.7 Ordre des élèves d'une catégorie
+
+Ceux qui ont le plus besoin de l'enseignant d'abord : `:decline`, puis `:stagnant`, puis sans signe (un seul essai), puis `:stable`, puis `:progress` ; à égalité, par nom (`last_name`, `first_name`). Un élève en progrès n'a pas besoin qu'on le cherche.
 
 ### 4.6 Lecture, autorisation, cache
 
@@ -114,7 +121,8 @@ Les sessions faites de l'élève sont prises dans l'ordre de `completed_at` : `f
 
 - Le cercle, les badges et les « faits » d'un exercice viennent des mêmes sessions et du même score : ils ne se contredisent plus.
 - Le progrès a sa propre lecture, au lieu d'être noyé dans une moyenne.
-- Le taux par question ne dépasse plus 100 %. Il désigne la question à reprendre, catégorie par catégorie.
+- Le taux par question ne dépasse plus 100 %. Il désigne la question à reprendre, catégorie par catégorie, et montre ce que la classe a appris entre le premier et le meilleur essai.
+- Chaque lecture appelle un geste : reprendre une question marquée, aller voir d'abord l'élève en baisse ou qui stagne.
 - Aucun cache à invalider : le défaut de l'ancien rapport disparaît avec lui.
 - Les règles tiennent dans un module pur, testable aux bornes et réutilisable par la V5 (suivi des remédiations, AS-17).
 
@@ -139,6 +147,8 @@ module Entities
       MIN_DONE_FOR_READING = 5
       # Du plus fragile au plus solide : l'ordre tranche les égalités de la dominante.
       CATEGORIES = %i[struggling fragile acquired].freeze
+      # Ordre des élèves d'une catégorie (§4.7) : qui a le plus besoin de l'enseignant d'abord ; nil = un seul essai.
+      TREND_ORDER = [ :decline, :stagnant, nil, :stable, :progress ].freeze
 
       def self.category_for(best) = Grading.mastery_for(best)
 
@@ -161,6 +171,8 @@ module Entities
       end
 
       def self.readable?(done) = done >= MIN_DONE_FOR_READING
+
+      def self.to_revisit?(rate) = !rate.nil? && rate < Grading::PASS_THRESHOLD
     end
   end
 end
@@ -172,8 +184,9 @@ end
   - meilleurs scores 49, 50, 69 et 70 ;
   - séries 30-60-90, 60-60-60, 30-90-40, 90-40, 100-100, 50-59, 50-60, 80-90-81, 80-90-80 et un seul essai ;
   - égalités Acquis/Fragile et En difficulté/Acquis ;
+  - ordre des signes pour le tri des élèves ;
   - 4 et 5 élèves.
-- Tests des queries `Queries::Assessment::*` : une session de remédiation, une session d'une autre classe, une session commencée, un élève parti et un élève anonymisé ne comptent pas. Un élève qui recommence ne fait pas dépasser 100 % au taux d'une question. À égalité de meilleur score, la session la plus récente compte.
+- Tests des queries `Queries::Assessment::*` : une session de remédiation, une session d'une autre classe, une session commencée, un élève parti et un élève anonymisé ne comptent pas. Un élève qui recommence ne fait pas dépasser 100 % au taux d'une question. À égalité de meilleur score, la session la plus récente compte. Le taux au premier essai lit la première session, et il est absent sans élève à deux essais. Une question à 49 % est « À reprendre en classe », à 50 % elle ne l'est pas.
 - Test de contrôleur : élève de la classe, enseignant d'une autre classe et direction reçoivent 403 sur la page de suivi.
 - Budget : `script/perf/measure_screens.rb` sur la page classe et la page de suivi (ADR-0067).
 - `grep -rn "Rails.cache" app/infrastructure/queries/assessment` ne renvoie rien.
