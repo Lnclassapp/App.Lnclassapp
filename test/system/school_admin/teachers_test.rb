@@ -44,7 +44,42 @@ class SchoolAdmin::TeachersTest < ApplicationSystemTestCase
     end
   end
 
+  # Bugfix menu-enseignants-masque (UDR-0042, amendement du 2026-09-28): the ⋮ menu of a row in the middle opens over
+  # the actions cell of the next row. Before the fix, that cell (sticky, later in the page) was drawn above the open menu:
+  # it hid part of « Retirer de l'établissement » and took its click. The other tests only open the last row's menu.
+  test "GD-14: the ⋮ menu of a row in the middle is above the next rows, and its « Retirer » opens that teacher's confirmation" do
+    create_teacher(school: @school, first_name: "Fanta", last_name: "Touré")
+    sign_in_as @admin
+    assert_selector "main#main", wait: SIGN_IN_WAIT
+    visit school_admin_teachers_path
+    assert_selector "#school_teachers tbody tr", count: 3
+    assert_selector "#school_teachers tbody tr:nth-child(2)#teacher_#{@teacher.public_id}"
+
+    within("#teacher_#{@teacher.public_id}") { find("button[aria-haspopup=menu]").click }
+    item = find("#teacher-actions-#{@teacher.public_id} [role=menuitem]", text: t("index.remove"))
+    assert on_top?(item), "« #{t('index.remove')} » est masqué par la ligne suivante"
+
+    item.click
+    within("dialog[open]") do
+      assert_selector "h2", text: t("index.remove_title", name: "Awa Koné")
+      click_on t("index.cancel")
+    end
+    assert_no_selector "dialog[open]"
+    assert Orm::TeacherSchool.exists?(teacher_id: @teacher.id)
+  end
+
   private
+
+  # True when the point at the middle of the element is the element itself or one of its descendants: nothing is drawn
+  # over it, and a click there reaches it.
+  def on_top?(element)
+    page.evaluate_script(<<~JS, element)
+      (element => {
+        const box = element.getBoundingClientRect()
+        return element.contains(document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2))
+      })(arguments[0])
+    JS
+  end
 
   def assert_withdrawal
     assert_selector "main#main", wait: SIGN_IN_WAIT
