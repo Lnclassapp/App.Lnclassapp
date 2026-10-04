@@ -1,12 +1,21 @@
-<%# 🌐 UI · teams/dashboards/_drenas — couverture par DRENA, triée par nombre d'élèves %>
-<%# Rôle : tableau (caption, scope) qui défile dans sa carte sur téléphone, jamais la page %>
-<%# ADR  : 0062 · UDR : 0049, 0054 (infobulles des colonnes, panneau dans l'en-tête : le tableau défile, pas la page) %>
-<%# locals: (rows:, period_scope:) -%>
+<%# 🌐 UI · teams/dashboards/_drenas — couverture par DRENA, triée par nombre d'élèves, filtrable dans le navigateur %>
+<%# Rôle : tableau (caption, scope) qui défile dans sa carte sur téléphone ; chaque nom mène au pilotage filtré sur sa DRENA %>
+<%# ADR  : 0062 · UDR : 0049, 0054 (infobulles des colonnes), 0068 §3.5 (recherche de DRENA, contrôleur table-filter) %>
+<%# locals: (rows:, period_scope:, period:) -%>
 <% columns = %i[schools_count classrooms_count teachers_count students_count active_students_count] %>
-<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "map-pin", id: "team_dashboard_drenas" do %>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "map-pin", id: "team_dashboard_drenas",
+            data: { controller: "table-filter", table_filter_one_value: t(".filter_status.one"),
+                    table_filter_other_value: t(".filter_status.other") } do %>
   <% if rows.empty? %>
     <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "map-pin" %>
   <% else %>
+    <%# Sans JavaScript, le champ reste masqué et toutes les lignes restent visibles. %>
+    <div id="drena_filter" hidden class="mb-4 max-w-sm" data-table-filter-target="field">
+      <label for="drena_filter_input" class="mb-1.5 block text-sm font-medium text-ink"><%= t(".filter_label") %></label>
+      <input id="drena_filter_input" type="search" autocomplete="off"
+             class="<%= class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap", ComponentsHelper::FIELD_STATES[:valid]) %>"
+             data-table-filter-target="input" data-action="input->table-filter#filter">
+    </div>
     <div class="relative -mx-2 overflow-x-auto">
       <table class="w-full min-w-2xl text-left text-sm">
         <caption class="sr-only"><%= t(".caption", period: period_scope) %></caption>
@@ -25,8 +34,14 @@
         </thead>
         <tbody class="divide-y divide-line">
           <% rows.each do |row| %>
-            <tr id="drena_row_<%= row.public_id %>">
-              <th scope="row" class="px-2 py-3 font-medium text-ink"><%= row.name %></th>
+            <tr id="drena_row_<%= row.public_id %>" data-table-filter-target="row"
+                data-filter-text="<%= I18n.transliterate(row.name).downcase %>">
+              <th scope="row" class="px-2 py-3 font-medium text-ink">
+                <%= link_to team_dashboard_path(period: period.key, drena: row.public_id),
+                            class: "font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" do %>
+                  <%= row.name %><span class="sr-only"><%= t(".see_schools") %></span>
+                <% end %>
+              </th>
               <% columns.each do |column| %>
                 <td class="px-2 py-3 text-right tabular-nums"><%= row.public_send(column) %></td>
               <% end %>
@@ -35,5 +50,7 @@
         </tbody>
       </table>
     </div>
+    <p id="drena_filter_empty" hidden class="py-4 text-sm text-mute" data-table-filter-target="empty"><%= t(".filter_empty") %></p>
+    <p class="sr-only" aria-live="polite" data-table-filter-target="status"></p>
   <% end %>
 <% end %>

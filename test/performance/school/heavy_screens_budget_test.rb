@@ -34,18 +34,23 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
   end
 
   # Every budget is played in one test: the dataset is seeded once.
-  test "the dashboard, its search and « Travail des élèves » read within their budgets" do
+  test "the dashboard, filtered or not, its search and « Travail des élèves » read within their budgets" do
     today = Date.current
+    # La plus grande DRENA : la première ligne du tableau « Par DRENA », triée par élèves.
+    largest = dashboard("7d", today).drenas.first.public_id
     budgets = {
       "pilotage 7 j" => [ PILOTAGE_MS, -> { dashboard("7d", today) } ],
       # Chiffres de l'année gardés 5 minutes (ADR-0062, amendement du 2026-09-29) : le budget porte sur l'entrée chaude.
       "pilotage année" => [ PILOTAGE_MS, -> { dashboard("year", today) } ],
+      # UDR-0068 §3.6, ADR-0062 (amendement du 2026-10-03) : la page filtrée lit ses chiffres puis « Par établissement ».
+      "pilotage filtré, plus grande DRENA" => [ PILOTAGE_MS, -> { filtered_dashboard("7d", today, largest) } ],
       "recherche « kou »" => [ SCREEN_MS, -> { Queries::Identity::AccountSearchQuery.new.call(term: "kou") } ],
       "Travail des élèves" => [ SCREEN_MS, -> { Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus) } ]
     }
 
     assert_operator Queries::Identity::AccountSearchQuery.new.call(term: "kou").total_count, :>, 1_000, "the worst case is measured"
     assert_equal 77, Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus).classrooms.size
+    assert_operator filtered_dashboard("7d", today, largest).total, :>, 1, "the establishments of the largest DRENA are read"
 
     measured = budgets.transform_values { |budget, read| [ budget, p95_ms(&read) ] }
 
@@ -60,6 +65,13 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
 
   def dashboard(key, today, cache: Rails.cache)
     Queries::School::TeamDashboardQuery.new(cache:).call(period: Entities::School::ReportingPeriod.parse(key, today:), today:)
+  end
+
+  # Les deux lectures de la page sous filtre DRENA, dans l'ordre du contrôleur.
+  def filtered_dashboard(key, today, drena)
+    period = Entities::School::ReportingPeriod.parse(key, today:)
+    Queries::School::TeamDashboardQuery.new.call(period:, drena_public_id: drena, today:)
+    Queries::School::DrenaSchoolsQuery.new.call(drena_public_id: drena, period:, today:)
   end
 
   def p95_ms(&read)

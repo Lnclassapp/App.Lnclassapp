@@ -1,0 +1,65 @@
+<%# 🌐 UI · teams/dashboards/_schools — « Par établissement » : les établissements d'une DRENA et leurs chiffres %>
+<%# Rôle : sous filtre DRENA, à la place de « Par DRENA » ; recherche par nom et pages de 25 côté serveur, période et DRENA gardées %>
+<%# ADR  : 0062 (amendement du 2026-10-03) · UDR : 0049, 0054 (infobulle « Élèves actifs »), 0068 §3.6 %>
+<%# locals: (page:, period:, drena:, search:, period_scope:) -%>
+<% columns = %i[classrooms_count teachers_count students_count active_students_count] %>
+<% clear_href = team_dashboard_path(period: period.key, drena: drena.public_id) %>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle", drena: drena.name), icon: "building-library", id: "team_dashboard_schools" do %>
+  <% if page.total.zero? && search.blank? %>
+    <%= ui_empty_state title: t(".empty_title"), icon: "building-library" %>
+  <% else %>
+    <%# `role` et `aria-label` passent par `html:` : au premier niveau, form_with ne les rend pas. %>
+    <%= form_with url: team_dashboard_path, method: :get, html: { role: "search", "aria-label": t(".form_label") },
+                  class: "mb-4 flex flex-wrap items-end gap-3" do %>
+      <%= hidden_field_tag :period, period.key, id: nil %>
+      <%= hidden_field_tag :drena, drena.public_id, id: nil %>
+      <div class="min-w-0 flex-1 basis-60">
+        <%= label_tag "school_q", t(".search_label"), class: "mb-1.5 block text-sm font-medium text-ink" %>
+        <%= search_field_tag :school_q, search, autocomplete: "off",
+                             class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap", ComponentsHelper::FIELD_STATES[:valid]) %>
+      </div>
+      <%= ui_button t(".submit"), type: :submit, icon: "magnifying-glass", variant: :secondary %>
+      <% if search.present? %>
+        <%= ui_button t(".clear"), href: clear_href, variant: :ghost, icon: "x-mark" %>
+      <% end %>
+    <% end %>
+    <% if page.rows.empty? %>
+      <%= ui_empty_state title: t(".no_match_title"), icon: "magnifying-glass" do %>
+        <%= ui_button t(".clear"), href: clear_href, variant: :secondary, icon: "x-mark" %>
+      <% end %>
+    <% else %>
+      <div class="relative -mx-2 overflow-x-auto">
+        <table class="w-full min-w-2xl text-left text-sm">
+          <caption class="sr-only"><%= t(".caption", drena: drena.name, period: period_scope) %></caption>
+          <thead class="border-b border-line text-xs text-mute">
+            <tr>
+              <th scope="col" class="px-2 py-3 font-medium"><%= t(".columns.name") %></th>
+              <% %i[classrooms teachers students active_students].each do |column| %>
+                <th scope="col" class="px-2 py-3 text-right font-medium">
+                  <%= t(".columns.#{column}") %>
+                  <% if column == :active_students %>
+                    <%= ui_info_tip t("teams.dashboards.drenas.tips.active_students"), label: t(".columns.active_students") %>
+                  <% end %>
+                </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line">
+            <% page.rows.each do |school| %>
+              <tr id="school_row_<%= school.public_id %>">
+                <th scope="row" class="px-2 py-3 font-medium text-ink"><%= school.name %><% unless school.status == "active" %> <%= ui_badge t(".inactive"), size: :sm %><% end %></th>
+                <% columns.each do |column| %>
+                  <td class="px-2 py-3 text-right tabular-nums"><%= school.public_send(column) %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-mute"><%= t(".total", count: page.total) %></p>
+      <% if page.pages > 1 %>
+        <div class="mt-4"><%= ui_pagination page: page.page, pages: page.pages, param: :school_page %></div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
