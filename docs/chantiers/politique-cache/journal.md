@@ -93,6 +93,24 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 - `LinkPrefetchObserver` n'écoute que `mouseenter`, avec un délai de 100 ms (`PREFETCH_DELAY`) et une durée de vie de 10 s. Un clic vide le préchargement en attente (`prefetchCache.clear()`), donc pas de requête en double au toucher, mais pas de gain non plus.
 - L'aperçu des pages déjà vues est actif (10 instantanés). Seules les pages `secret_response` en sont exclues (ADR-0031).
 
+## Lot R : le déplacement en Europe (2026-10-03 et 04)
+
+Ordre réel des opérations (UTC) :
+
+| Heure | Qui | Quoi |
+|---|---|---|
+| 21:40 | porteur | Application de Develop en `europe-west4`, seule (journal, « Ce qui a dérapé ») |
+| 22:42 → 23:22 | Claude | Base de Develop passée en `europe-west4` **par l'API** : la configuration change, **le volume reste à Singapour**, même après un redéploiement. Configuration remise sur Singapour |
+| 23:29 / 23:30 | porteur | Bases de **production** et de **Staging** déplacées depuis le tableau de bord : Railway y migre le volume (`europe-west4`) |
+| 23:36 | porteur | Refuse la validation (`accept-deploy`) du déplacement de la base de Develop |
+| 23:37 → 23:44 | Claude | Applications de production et de Staging passées en `europe-west4` (sans volume, donc sans coupure), puis **redéployées** : sans redéploiement, le conteneur restait à Singapour et le trafic faisait le détour par Amsterdam (≈ 420 à 590 ms de trajet au lieu de 250) |
+| 23:42 → 23:47 | Claude | Trois buckets `ams` créés, un par environnement (`lnclass-fichiers-eu-develop`, `-staging`, `-production`) |
+| 23:46 → 23:59 | Claude | Copie par un service `rclone/rclone:1.68` temporaire dans chaque environnement, avec des identifiants passés par références Railway (`${{organized-trunk.ACCESS_KEY_ID}}`…), jamais lus en clair. `rclone copy -M` puis `rclone check --one-way` : production 1 fichier (472 Kio), Staging 0, Develop 28 fichiers (3,16 Mio). 0 différence |
+| 23:50 → 23:58 | Claude | Variables `BUCKET_*` des applications passées sur `${{lnclass-fichiers-eu-<env>.…}}` (redéploiement), puis seconde passe de copie après la bascule : rien de nouveau, 0 différence |
+| 23:59 | porteur | Refuse la suppression des services de copie et de l'ancien bucket `organized-trunk` |
+
+Mesure « après » : memo, « Mesure après — région ». De 23:29 à 23:53, la production a tourné avec sa base à Amsterdam et son application à Singapour : chaque requête SQL traversait l'Europe et l'Asie (environ 24 minutes, la nuit). Les journaux HTTP de cette fenêtre ne montrent aucune page connectée : les requêtes des bancs de mesure et une seule visite anonyme de `/` (un iPhone, 563 ms, à 23:39).
+
 ## Décisions prises en cours de route
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
@@ -139,6 +157,11 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 
   Lecture : la région paie sur le trajet (−115 ms par requête, vu de Chicago), mais **chaque requête SQL coûte désormais ~170 ms** (un aller-retour Amsterdam–Singapour). Une page connectée en fait 4 à 25 : elle passe de quelques dizaines de millisecondes à plusieurs secondes. C'est le cas que le plan (lot R) interdisait. Deux sorties : remettre l'application à Singapour (sans interruption, le service n'a pas de volume), ou déplacer PostgreSQL à Amsterdam (interruption pendant la migration du volume). Décision au porteur.
 
+- **Railway, région d'une base** : l'API (outil `update-service`, champ `regions`) change la configuration d'un service à volume sans migrer le volume. Le service continue de tourner là où est son volume, et la configuration ment. Seul le tableau de bord (Settings › Regions, puis appliquer) lance la migration du volume. L'agent Railway, lui, affirmait à tort qu'un volume ne change jamais de région.
+- **Railway, région d'une application** : changer la région d'un service sans volume ne déplace pas son conteneur ; il faut le redéployer. Entre les deux, le trafic passe par la nouvelle région puis revient à l'ancienne, et c'est plus lent qu'avant.
+- **Railway, environnements dérivés** : Develop et Staging dérivent de production. Un service créé ou une image rattachée « dans tous les environnements » n'arrive qu'en production. Dans Develop, valider les changements en attente applique **tous** ceux de l'environnement, y compris ceux d'un autre service.
+- **Railway, buckets** : leur région ne change jamais. Il faut un nouveau bucket, une copie, puis la bascule des variables. Le nom d'un bucket est unique dans le projet : un nom déjà pris est remplacé par un nom généré (`wrapped-pannikin-OhaX`), à renommer.
+
 ## Ce qu'on a appris sur la codebase
 
 - La production, Staging et Develop tournent tous en `asia-southeast1` (Singapour), un réplica chacun, PostgreSQL au même endroit. Cloudflare proxifie `lnclass.com`, `app-develop.lnclass.com` et `app-staging.lnclass.com`.
@@ -152,7 +175,9 @@ Le HTML ne porte pas d'`ETag` utile : le nonce CSP (par session) et le jeton CSR
 |---|---|---|
 | `/` redirige une personne connectée vers son accueil (+1 requête en série à chaque ouverture) | Changer l'adresse de l'accueil est une `feature` | à ouvrir si le porteur le souhaite |
 | Mise en veille de Develop et Staging | Réglage de recette, non mesuré | à voir avec le porteur |
-| Mesure depuis Abidjan | Aucun point de mesure en Côte d'Ivoire depuis le conteneur | question 1 du memo, bloquante pour le lot R |
+| Mesure depuis Abidjan | Aucun point de mesure en Côte d'Ivoire depuis le conteneur | question 1 du memo : seule preuve de la cible du lot R |
+| Base de Develop à Singapour, application de Develop à Amsterdam | Validation refusée par le porteur le 2026-10-03 ; à faire depuis le tableau de bord | question 2 du memo |
+| Ancien bucket `organized-trunk` (`sin`) et services arrêtés `migration-fichiers`, `-staging`, `-develop` | Suppressions refusées au moment de les demander ; contenu copié et vérifié deux fois | question 3 du memo |
 
 ## Clôture
 

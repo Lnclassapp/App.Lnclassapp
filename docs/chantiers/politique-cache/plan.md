@@ -14,8 +14,8 @@ Lot 0 — Bench et décision (fait en cadrage : 3 scripts, mesure « avant », A
   │     ✗ Lot C — `immutable` sur les assets           FERMÉ (non mesurable ici, dépendait de B)
   │
   ├─► Lot D — Cloudflare : Early Hints + Tiered Cache  (porteur, tableau de bord Cloudflare)
-  └─► Lot R — Région europe-west4 : application ET PostgreSQL ensemble
-        mesure Abidjan « avant » → Develop → mesure → Staging → mesure → production
+  └─► Lot R — Région europe-west4 : application, PostgreSQL et fichiers   FAIT en production et Staging ;
+        Develop sans sa base ; mesure depuis Abidjan attendue
 ```
 
 Ordre par gain/risque au cadrage : A → B → D → R → C. Après les décisions du porteur, il reste **D** (sans code, premières visites) puis **R** (le seul levier sur toutes les pages, mais une migration de base).
@@ -114,6 +114,8 @@ Vérification après activation : `curl -sv --http2 https://lnclass.com/login 2>
 - **Done quand**   : le `DOMContentLoaded` médian d'une première visite de `/` et de `/login` baisse d'**au moins 30 %** (782 et 871 ms avant), au même point de mesure, sur 3 exécutions. Sinon les réglages sont désactivés
 
 ## Lot R — Région : application et PostgreSQL en `europe-west4` *(décision du porteur, hors code)*
+
+> **Appliqué les 2026-10-03 et 04** (memo, « Mesure après — région » ; journal, « Lot R »). Production et Staging : application, base et fichiers en Europe. Develop : application et fichiers en Europe, **base encore à Singapour**. Au point de mesure, le surcoût d'un aller-retour passe de 227 à 107 ms. La cible d'Abidjan attend sa mesure.
 
 - **Couche**       : infrastructure Railway (environnements Develop, Staging, puis production)
 - **Fichiers**     : aucun dans le dépôt ; `docs/decisions/adr/0076-…` §4.3 passe à « Accepté » avec la région retenue et la mesure qui la justifie

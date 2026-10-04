@@ -73,7 +73,7 @@ Le porteur garde, le 2026-10-03, le frame différé des accueils élève et équ
 
 > **L'application et sa base vivent ensemble dans la région Railway la plus proche des utilisateurs.** Le choix se fait sur une mesure prise depuis la Côte d'Ivoire (`script/perf/measure_network.rb`). À vol d'oiseau, la candidate est `europe-west4` (Amsterdam).
 
-Le porteur a accepté l'étude le 2026-10-03, Develop et Staging d'abord. Le déplacement de chaque environnement attend sa mesure « avant » depuis Abidjan. On ne déplace jamais l'application sans sa base : chaque page fait 4 à 25 requêtes SQL, et une traversée Europe–Asie par requête SQL coûterait plus que tout le reste.
+**Décision du porteur, 2026-10-03 : `europe-west4` pour les trois environnements, avec leurs bases et leurs fichiers.** C'est appliqué en production et en Staging le 2026-10-04 ; la base de Develop reste à déplacer. Au point de mesure, le surcoût d'un aller-retour jusqu'au serveur est passé de 227 à 107 ms, et le chargement d'une page déjà visitée de 403 à 238 ms. La mesure depuis Abidjan reste à prendre. Les fichiers d'Active Storage vivent dans un bucket `ams` par environnement (`lnclass-fichiers-eu-<environnement>`), car la région d'un bucket ne change jamais. On ne déplace jamais l'application sans sa base : chaque page fait 4 à 25 requêtes SQL, et une traversée Europe–Asie par requête SQL coûterait plus que tout le reste.
 
 ## 5. Conséquences
 

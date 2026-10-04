@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | décision — porteur, 2026-10-03 : lots A et B refusés, C fermé ; D et R en cours (porteur) ; mesure depuis Abidjan attendue |
+| **Statut** | en cours — lot R appliqué le 2026-10-03/04 (production et Staging en Europe, Develop sans sa base) ; lot D et mesure depuis Abidjan attendus du porteur |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `perf/politique-cache` |
 
@@ -23,6 +23,42 @@ Réponse du porteur aux six questions du cadrage : « 1, 2, 5 et 6 oui ; 2 et 4 
 | 6. Pousser la branche, PR brouillon vers `Develop` | oui | fait |
 
 Sans les lots A et B, **aucun levier de code ne reste** : le compte de requêtes en série devient un plafond à ne pas dépasser (ADR-0076 §4.2), et le gain viendra de la périphérie (D) et de la région (R). Le lot C, qui dépendait de B, est fermé (voir le [plan](plan.md)).
+
+## Mesure après — région (lot R, 2026-10-04)
+
+Décision du porteur, le 2026-10-03 : « déplace tous les environnements en Europe, production, Staging et Develop, avec les bases et les buckets ». Le déroulé est dans le [journal](journal.md#lot-r--le-déplacement-en-europe-2026-10-03-et-04).
+
+**État au 2026-10-04, 00:10 UTC :**
+
+| Environnement | Application | PostgreSQL | Fichiers (Active Storage) |
+|---|---|---|---|
+| production | `europe-west4` | `europe-west4` (volume migré) | `lnclass-fichiers-eu-production` (`ams`) : 1 fichier, copié et vérifié deux fois |
+| Staging | `europe-west4` | `europe-west4` (volume migré) | `lnclass-fichiers-eu-staging` (`ams`) : l'ancien bucket était vide |
+| Develop | `europe-west4` | **`asia-southeast1`** (pas déplacée) | `lnclass-fichiers-eu-develop` (`ams`) : 28 fichiers (3,16 Mio), copiés et vérifiés deux fois |
+
+L'ancien bucket `organized-trunk` (`sin`) existe toujours, ainsi que les trois services de copie (arrêtés) : leur suppression a été refusée au moment de la demander.
+
+**Production, même machine, même méthode, médiane de 3 exécutions :**
+
+| Métrique | Avant | Cible | **Après** | Tenu ? |
+|---|--:|--:|--:|:-:|
+| Surcoût d'une requête qui va jusqu'au serveur (comparé à un `HIT` Cloudflare) | 227 ms | < 100 ms | **107 ms** | non, à 7 ms |
+| Trajet jusqu'au serveur, hors serveur | 251 ms | — | **133 ms** | — |
+| Chargement d'une page déjà visitée (`load`), `/` et `/login` | 403 / 393 ms | < 200 ms | **238 / 231 ms** | non |
+| Premier octet, page déjà visitée | 360 / 358 ms | — | 204 / 200 ms | — |
+| Chargement d'une première visite (`load`) | 943 / 875 ms | — | 734 / 732 ms | — |
+| Connexion neuve à `/login` | 348 ms | — | 208 ms | — |
+| Temps serveur (`x-runtime`) de `/`, `/login`, `/up` | 8,7 / 6,4 / 1,7 ms | inchangé | 3,4–5,4 / 2,8–6,6 / 0,9–2,2 ms | oui |
+| Requêtes en série par parcours | 4 / 3 / 3 / 2 / 1 / 2 / 1 / 3 | plafond | inchangé | oui |
+| **Surcoût vu d'Abidjan** | non mesuré | < 150 ms | **non mesuré** | à mesurer |
+
+Staging donne les mêmes chiffres (trajet 129 ms, surcoût 101 à 108 ms).
+
+Ce que la mesure dit :
+
+1. **Chaque aller-retour jusqu'au serveur coûte 47 % de moins** au point de mesure (Chicago) : 227 → 107 ms. Une page déjà visitée se charge en 238 ms au lieu de 403, soit −41 %.
+2. Les deux cibles fixées pour Chicago sont manquées de peu (107 ms contre 100, 238 ms contre 200). Elles servaient de témoin : la cible qui compte est celle d'Abidjan, où l'écart entre Singapour et Amsterdam doit être plus grand qu'aux États-Unis. Elle reste à mesurer (question 1).
+3. **Develop reste lent tant que sa base est à Singapour** : chaque requête SQL y coûte ~170 ms, et une page connectée 1 à 10 s.
 
 ## Le problème
 
@@ -122,8 +158,9 @@ Leviers **écartés par la mesure** :
 
 ## Questions encore ouvertes
 
-*Questions du cadrage, posées le 2026-10-03 ; réponses en tête de ce memo.*
+*Questions du cadrage, posées le 2026-10-03 ; réponses en tête de ce memo. Mise à jour le 2026-10-04 après le lot R.*
 
-1. **Mesure depuis Abidjan** : `ruby script/perf/measure_network.rb` et `ruby script/perf/measure_network.rb https://app-develop.lnclass.com`, trois fois chacun, depuis un poste en Côte d'Ivoire (sans compte, Ruby 3.4). À prendre **avant** tout changement de région de Develop, sinon Develop n'aura plus de « avant ».
-2. **Changement en attente sur Develop** : un changement non appliqué (créé le 2026-10-03 à 20:36 UTC) déplace **l'application seule** en `europe-west4`. PostgreSQL et le bucket resteraient à Singapour : chaque requête SQL traverserait alors l'Europe et l'Asie, et Develop serait beaucoup plus lent qu'aujourd'hui. **À ne pas appliquer tel quel** : la base doit bouger dans le même changement (plan, lot R).
-3. **Cloudflare** : prévenir quand *Early Hints* et *Tiered Cache* sont actifs, pour la mesure « après » du lot D.
+1. **Mesure depuis Abidjan** : `ruby script/perf/measure_network.rb` (production) trois fois, depuis un poste en Côte d'Ivoire (sans compte, Ruby 3.4). Il n'y a plus de « avant » à Singapour, la production est en Europe. Cette mesure dit si la cible de moins de 150 ms est tenue là où sont les élèves.
+2. **Base de Develop** : elle est restée à Singapour, alors que l'application de Develop est à Amsterdam. Il faut la déplacer depuis le tableau de bord Railway (Postgres › Settings › Regions › `europe-west4`, puis appliquer : Railway migre le volume, avec une coupure), comme pour Staging et la production.
+3. **Nettoyage** : supprimer l'ancien bucket `organized-trunk` (région `sin`, plus utilisé, contenu copié et vérifié) et les services arrêtés `migration-fichiers`, `migration-fichiers-staging` et `migration-fichiers-develop`.
+4. **Cloudflare** : prévenir quand *Early Hints* et *Tiered Cache* sont actifs, pour la mesure « après » du lot D.
