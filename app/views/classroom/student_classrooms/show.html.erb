@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève (CL-22, CL-10 volet élève) %>
-<%# Rôle : la classe et son code (aide en infobulle) ; lecture seule, jamais la liste nominative ; plus de « Cours assignés » %>
-<%# ADR  : 0028, 0048, 0072 · UDR : 0006, 0007, 0011 (amendée deux fois le 2026-10-02), 0054, 0057, 0062 · code à dicter : jamais de « Copier » %>
+<%# Rôle : la classe et son code, les cours assignés en bande, les exercices à faire et traités ; lecture seule, sans nom d'élève %>
+<%# ADR  : 0028, 0048, 0072, 0076 · UDR : 0006, 0007, 0011, 0054, 0057, 0062, 0071 §3.5, 0076 §3.2 · code à dicter : jamais de « Copier » %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".title") %>
 
@@ -41,5 +41,59 @@
         <p class="rounded-card bg-mist p-4 text-sm text-mute sm:shrink-0"><%= t(".no_join_code") %></p>
       <% end %>
     </div>
+  <% end %>
+
+  <% courses = @classroom.courses %>
+  <%= ui_card title: t(".courses_title"), icon: "book-open", id: "student_classroom_courses" do |card| %>
+    <% if courses.empty? %>
+      <%= ui_empty_state title: t(".courses_empty"), description: t(".courses_empty_description"), icon: "book-open" %>
+    <% else %>
+      <% card.actions do %>
+        <%= ui_badge t(".courses_count", count: courses.size), tone: :brand, size: :sm %>
+      <% end %>
+      <%# La bande et ses points sont ceux du carrousel d'annonces (UDR-0071 §3.5) : sans JavaScript, elle défile, sans points. %>
+      <div class="min-w-0" data-controller="communication--carousel">
+        <ul class="scrollbar-none flex snap-x snap-mandatory gap-3 overflow-x-auto motion-safe:scroll-smooth"
+            aria-label="<%= t(".courses_title") %>" data-communication--carousel-target="track">
+          <%= render partial: "course_card", collection: courses, as: :course %>
+        </ul>
+        <div class="hidden justify-center gap-1.5 pt-3" aria-hidden="true" data-communication--carousel-target="pager">
+          <% courses.each_index do |index| %>
+            <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+                  data-communication--carousel-target="dot"></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% assigned = @classroom.assigned_exercises %>
+  <%= ui_card title: t(".assigned_title"), icon: "clipboard-document-check", id: "student_classroom_assigned",
+              data: (ui_reveal_data if assigned.any?) do %>
+    <% if assigned.empty? %>
+      <%= ui_empty_state title: t(".assigned_empty"), description: t(".assigned_empty_description"), icon: "clipboard-document-check" %>
+    <% else %>
+      <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+        <% assigned.each_with_index do |exercise, index| %>
+          <%= render "assigned_exercise", exercise:, index: %>
+        <% end %>
+      </ul>
+      <%= ui_reveal_more assigned.size %>
+    <% end %>
+  <% end %>
+
+  <% treated = @classroom.treated_exercises %>
+  <%= ui_card title: t(".treated_title"), icon: "check-circle", id: "student_classroom_treated",
+              data: (ui_reveal_data if treated.any?) do %>
+    <% if treated.empty? %>
+      <%= ui_empty_state title: t(".treated_empty"), description: t(".treated_empty_description"), icon: "check-circle" %>
+    <% else %>
+      <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+        <% treated.each_with_index do |exercise, index| %>
+          <%= render "treated_exercise", exercise:, index: %>
+        <% end %>
+      </ul>
+      <%= ui_reveal_more treated.size %>
+    <% end %>
   <% end %>
 </div>
