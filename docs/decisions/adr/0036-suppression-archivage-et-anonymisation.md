@@ -145,7 +145,7 @@ La politique de protection des données ne peut donc pas promettre « 30 jours �
    - un élève **sorti de toute classe** (toutes ses adhésions ont un `left_at`) ; mais un élève qui change de classe passe par cet état un instant ;
    - une **fin d'année scolaire sans réinscription** (classe archivée, ADR-0041, sans nouvelle adhésion à la rentrée) ;
    - et, pour un enseignant : retiré de son établissement (ADR-0071) ? sans classe déclarée ?
-2. **Quelles données sont « sensibles » ?** Nom et prénom(s), numéro, photo, genre ? L'adresse IP des sessions, des tentatives et du journal ? Le numéro saisi dans `login_attempts.contact` ?
+2. **Quelles données sont « sensibles » ?** Nom et prénom(s), numéro, photo, genre ? L'adresse IP des sessions, des tentatives et du journal ? Le numéro saisi dans `login_attempts.contact` ? *(Pour le journal d'audit : tranché par [ADR-0080](./0080-retention-de-l-ip-du-journal-d-audit.md), l'IP est gardée 12 mois puis effacée.)*
 3. **Sessions et badges** : rattachés au compte anonymisé (proposition, qui garde les statistiques), ou détachés ?
 
 ### Vérification prévue

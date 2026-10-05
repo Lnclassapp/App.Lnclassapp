@@ -28,6 +28,11 @@ production:
     class: School::PurgeArchivedStaffJob
     queue: default
     schedule: every day at 4am
+  # ADR-0080 : the IP of audit events older than 12 months is erased; the events stay.
+  erase_audit_ips:
+    class: Identity::EraseAuditIpsJob
+    queue: default
+    schedule: every day at 4:30am
   # ADR-0045, ADR-0078 : scheduled announcements are published within 5 minutes of their time.
   publish_scheduled_messages:
     class: Communication::PublishScheduledMessagesJob
