@@ -130,7 +130,9 @@ Le nombre de requêtes ne dépend pas du nombre d'exercices : 20 requêtes à 10
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-05 (fusion dans `Develop`) |
+| **PR** | [#164](https://github.com/Lnclassapp/App.Lnclassapp/pull/164) |
+| **ADR produits** | [ADR-0079](../../decisions/adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) ; compléments datés de l'ADR-0072 (2026-10-04, bis) |
+| **UDR produits** | [UDR-0072](../../decisions/udr/0072-comprehension-d-un-exercice-assigne.md) (amende l'UDR-0062 §3.4 et §3.5) |
+| **Preuve** | Suite complète, couverture 100 % lignes et branches ; tests système du chantier dans Chromium 141 ; challenger empirique (phase 5) : défauts D1 à D4 corrigés ou portés en dette ; rubocop, brakeman, pureté du domaine au vert |
+| **Chantiers de suivi** | `optimize page-classe-legere` (page classe hors budget, préexistant) ; `script/perf/dataset.rb` sans `question_attempts` ; `progres-eleve` (fusionné, #168) |

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (#164, fusionnée dans `Develop` le 2026-10-05) |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `feature/rapports-exercices` |
 | **Programme** | `refonte-application`, vague V3 ([feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)) : tranche « exercices » du chantier prévu `rapports-de-classe` |
