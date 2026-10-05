@@ -186,14 +186,24 @@ module Queries
 
         leaving = departing
 
-        assert_equal "Réunion parents", leaving.title
-        assert_equal Orm::Message.find_by!(title: "Réunion parents").public_id, leaving.public_id
+        assert_equal [ [ Orm::Message.find_by!(title: "Réunion parents").public_id, "Réunion parents" ] ], leaving.map(&:deconstruct)
+        assert(leaving.all?(AuthoredMessagesQuery::Departing))
+      end
+
+      # Phase 5, decision of the orchestrator (UDR-0075, amendment): an author with more than 3 live announcements (data
+      # from before the chantier) loses « live − 2 » at his next publication; they would all leave, and are all named.
+      test "AV-06 — with 5 live announcements, the 3 oldest are those a publication would archive, the oldest first" do
+        { "Sortie au musée" => 4, "Réunion parents" => 1, "Cantine" => 2, "Fiches chapitre 3" => 3, "Chorale" => 4 }.each do |title, day|
+          create_message(author: @kamate, title:, published_at: Time.zone.local(2026, 10, day, 8))
+        end
+
+        assert_equal [ "Réunion parents", "Cantine", "Fiches chapitre 3" ], departing.map(&:title)
       end
 
       test "AV-06 — with 2 live announcements, nothing would be archived" do
         [ 1, 3 ].each { create_message(author: @kamate, published_at: Time.zone.local(2026, 10, it, 8)) }
 
-        assert_nil departing
+        assert_empty departing
       end
 
       test "AV-04, AV-06 — only the live announcements of the author count: not a draft, a scheduled, an archived, a withdrawn, an ended one" do
@@ -205,7 +215,7 @@ module Queries
         create_message(author: @kamate, published_at: Time.zone.local(2026, 9, 1, 8), ends_at: NOW)
         3.times { create_message(author: create_school_admin(school: @lauriers), published_at: Time.zone.local(2026, 9, 20, 8)) }
 
-        assert_nil departing
+        assert_empty departing
       end
 
       test "AV-06 — the announcement that would leave is read in one query, without lock: the publication counts again under it" do
@@ -214,7 +224,7 @@ module Queries
         statements = sql_of { departing }
 
         assert_equal 1, statements.size
-        assert_no_match(/FOR UPDATE|FOR SHARE/i, statements.join)
+        assert_no_match(/FOR (NO KEY )?UPDATE|FOR (KEY )?SHARE/i, statements.join)
       end
     end
   end

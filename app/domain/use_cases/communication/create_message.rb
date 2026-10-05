@@ -13,11 +13,16 @@ module UseCases
 
         private
 
-        # À appeler dans la transaction de la parution, avant d'écrire l'annonce qui paraît : live_of verrouille le compte
-        # auteur, puis ses plus anciennes en ligne sont archivées jusqu'à ce qu'il lui en reste LIVE_CAP - 1. Une
-        # annonce figée entre-temps n'est pas réécrite (update rend nil). → [Message archivées], la plus ancienne d'abord
-        def make_room(author_id, now)
-          live = @messages.live_of(author_id:, now:)
+        # En tête de la transaction de la parution : live_of verrouille le compte auteur jusqu'à sa fin, et rend ses
+        # annonces en ligne. Deux parutions du même auteur se suivent : une annonce existante qui paraît se relit APRÈS
+        # ce verrou, quand une parution concurrente de la même annonce est finie et se voit (phase 5, F1).
+        # → [Message en ligne], la plus ancienne d'abord
+        def lock_author(author_id, now) = @messages.live_of(author_id:, now:)
+
+        # Les plus anciennes de live sont archivées jusqu'à ce qu'il en reste LIVE_CAP - 1. L'annonce qui paraît n'est
+        # pas comptée : relue sous le verrou, elle n'est pas encore en ligne. Une annonce figée entre-temps n'est pas
+        # réécrite (update rend nil). → [Message archivées], la plus ancienne d'abord
+        def make_room(live)
           excess = [ live.size - (Entities::Communication::Message::LIVE_CAP - 1), 0 ].max
           live.first(excess).filter_map { @messages.update(message: it.with(status: "archived")) }
         end
@@ -63,22 +68,24 @@ module UseCases
         end
 
         # Les erreurs de la saisie, du dessin de l'équipe choisi et de la policy (aucune classe cochée), ensemble sous
-        # leurs champs. live : l'annonce déjà publiée qu'une modification garde en ligne, ou nil.
-        # → [erreurs, id du dessin de l'équipe | nil]
-        def form_errors(dto, allowed, now:, live: nil)
+        # leurs champs. live : l'annonce déjà publiée qu'une modification garde en ligne, ou nil ; carried_id : le dessin
+        # de l'équipe que porte l'annonce modifiée, ou nil (création). → [erreurs, id du dessin de l'équipe | nil]
+        def form_errors(dto, allowed, now:, live: nil, carried_id: nil)
           dto.valid_at?(now:, live_since: live&.published_at, live_until: live&.ends_at)
-          illustration_id = library_illustration_id(dto)
+          illustration_id = library_illustration_id(dto, carried_id:)
           allowed.errors.each { |attribute, codes| codes.each { dto.errors.add(attribute, it) } }
           [ dto.errors.to_hash, illustration_id ]
         end
 
         # ADR-0081 §4.3 : un dessin de l'équipe est choisi par son public_id ; inconnu ou retiré, il n'est pas dans la
-        # bibliothèque et l'erreur va sous « Illustration » (AV-10). → son id | nil (clé de base, ou refusé)
-        def library_illustration_id(dto)
+        # bibliothèque et l'erreur va sous « Illustration » (AV-10). Décision du chantier (Lot E) : le dessin que porte
+        # l'annonce modifiée (carried_id) reste servi jusqu'à sa fin, la modification le garde donc, même retiré depuis ;
+        # seul le nouveau choix d'un dessin retiré est refusé. → son id | nil (clé de base, ou refusé)
+        def library_illustration_id(dto, carried_id:)
           return unless dto.library_illustration?
 
           illustration = @illustrations.find_by_public_id(public_id: dto.illustration)
-          return illustration.id if illustration && !illustration.retired?
+          return illustration.id if illustration && (!illustration.retired? || illustration.id == carried_id)
 
           dto.errors.add(:illustration, :inclusion)
           nil
@@ -144,7 +151,7 @@ module UseCases
 
       # Publiée tout de suite : une parution, sous le plafond (ADR-0081 §4.1) ; brouillon et programmée n'archivent rien.
       def create(actor, dto, targets, now, illustration_id)
-        archived = dto.status == "published" ? make_room(actor.user_id, now) : []
+        archived = dto.status == "published" ? make_room(lock_author(actor.user_id, now)) : []
         message = @messages.create(message: Entities::Communication::Message.new(
           author_id: actor.user_id, **written(dto, targets, illustration_id)
         ))

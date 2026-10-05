@@ -46,11 +46,17 @@ class Teams::AnnouncementIllustrationsControllerTest < ActionDispatch::Integrati
     assert_equal [ "Bus scolaire", nil ], bus.reload.values_at(:name, :retired_at)
   end
 
-  test "AV-11 — un visiteur est envoyé à « Se connecter »" do
-    every_request(create_illustration(name: "Bus scolaire", created_by: @fatou)).each do |request|
-      request.call
+  test "AV-11 — un visiteur est envoyé à « Se connecter » ; rien ne change" do
+    bus = create_illustration(name: "Bus scolaire", created_by: @fatou)
 
-      assert_redirected_to new_session_path
+    assert_no_difference -> { Orm::MessageIllustration.count } do
+      assert_no_changes -> { bus.reload.values_at(:name, :retired_at) } do
+        every_request(bus).each do |request|
+          request.call
+
+          assert_redirected_to new_session_path
+        end
+      end
     end
   end
 

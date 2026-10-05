@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Ports::Communication::MessageRepositoryPort
-# Rôle : contrat des annonces : lecture par public_id, écriture avec leurs classes ciblées, rejets, publication, plafond
+# Rôle : contrat des annonces : lecture par public_id, écriture avec leurs classes ciblées, rejets, publication du job, plafond
 # ADR  : 0045, 0078, 0081
 module Ports
   module Communication
@@ -41,13 +41,21 @@ module Ports
       end
 
       # ADR-0081 §4.1 (Lot 0 d'annonces-v2). À appeler DANS la transaction de l'appelant, celle de la parution : verrouille
-      # la ligne users de l'auteur (SELECT … FOR UPDATE) jusqu'à sa fin, puis lit ses annonces en ligne. Deux parutions
-      # du même auteur se suivent donc. En ligne = published et now < ends_at (published_at n'est pas comparé : une
+      # la ligne users de l'auteur (SELECT … FOR NO KEY UPDATE, phase 5) jusqu'à sa fin, puis lit ses annonces en ligne.
+      # Deux parutions du même auteur se suivent donc ; une ligne qui le référence (journal d'audit) s'écrit toujours. En ligne = published et now < ends_at (published_at n'est pas comparé : une
       # parution qui a lu son horloge avant le verrou compte celle qui vient d'avoir lieu) ; brouillon, programmée,
       # archivée, retirée et terminée ne comptent pas. → [Message] avec leurs classes, la plus ancienne d'abord
       # (published_at, puis id)
       def live_of(author_id:, now:)
         raise NotImplementedError, "#{self.class} doit implémenter #live_of"
+      end
+
+      # Phase 5 d'annonces-v2 (F2), pour le job, dans la transaction de la parution et sous le verrou de l'auteur : passe en
+      # published l'annonce d'id donné si elle est encore programmée et due (published_at <= now), en une écriture
+      # conditionnelle qui ne touche à aucune autre colonne ; ce qui a changé depuis sa lecture reste.
+      # → Message publiée, avec ses classes | nil (plus programmée, ou pas encore due : rien n'est écrit)
+      def publish_scheduled(id:, now:)
+        raise NotImplementedError, "#{self.class} doit implémenter #publish_scheduled"
       end
     end
   end

@@ -188,6 +188,31 @@ module Repositories
         assert_empty live_of(create_teacher(school: @school))
       end
 
+      def row_of(message) = Orm::Message.find(message.id).attributes.except("status", "updated_at")
+
+      test "F2 — publish_scheduled writes only the status of a scheduled announcement whose time has come, and gives it back" do
+        due = posted(status: "scheduled", published_at: NOW - 1.minute, classrooms: @classrooms.first(2), theme: "mangue")
+        at_the_minute = posted(status: "scheduled", published_at: NOW)
+        rows = [ due, at_the_minute ].map { row_of(it) }
+
+        published = [ due, at_the_minute ].map { @repository.publish_scheduled(id: it.id, now: NOW) }
+
+        assert_equal [ due, at_the_minute ].map { @repository.find_by_public_id(public_id: it.public_id) }, published
+        assert_equal %w[published published], published.map(&:status)
+        assert_equal @classrooms.first(2).map(&:id).sort, published.first.classroom_ids
+        assert_equal rows, [ due, at_the_minute ].map { row_of(it) }, "rien d'autre que le statut n'est écrit"
+      end
+
+      test "F2 — publish_scheduled writes nothing to an announcement not yet due or no longer scheduled: nil" do
+        later = posted(status: "scheduled", published_at: NOW + 1.minute)
+        others = [ posted(status: "draft", published_at: nil), posted(published_at: NOW - 1.day),
+                   posted(status: "archived", published_at: NOW - 1.day), posted(status: "withdrawn", published_at: NOW - 1.day) ]
+
+        assert_equal [ nil ] * 5, [ later, *others ].map { @repository.publish_scheduled(id: it.id, now: NOW) }
+        assert_nil @repository.publish_scheduled(id: 0, now: NOW)
+        assert_equal %w[scheduled draft published archived withdrawn], [ later, *others ].map { it.reload.status }
+      end
+
       test "author_role reads the role of the author's account" do
         authors = { team: create_team_member(second_factor: false), school_admin: create_school_admin(school: @school),
                     teacher: @teacher, student: create_student }
@@ -198,7 +223,7 @@ module Repositories
       end
     end
 
-    # ADR-0081 §4.1 and §6 (AV-05): live_of locks the author's row (SELECT … FOR UPDATE) in the caller's transaction.
+    # ADR-0081 §4.1 and §6 (AV-05): live_of locks the author's row (SELECT … FOR NO KEY UPDATE) in the caller's transaction.
     # Outside any test transaction: each thread has its own connection, and sees what the other one committed.
     class MessageRepositoryLockTest < ActiveSupport::TestCase
       self.use_transactional_tests = false
@@ -214,6 +239,7 @@ module Repositories
       end
 
       teardown do
+        Orm::AuditEvent.where(actor_id: [ @author.id, @colleague.id ]).delete_all
         Orm::Message.where(author_id: [ @author.id, @colleague.id ]).delete_all
         Orm::User.where(id: [ @author.id, @colleague.id ]).delete_all
       end
@@ -240,6 +266,27 @@ module Repositories
 
         assert_equal [ @live.map(&:public_id), true, false ], held
         assert_not locked?(@author)
+      end
+
+      # Phase 5: FOR NO KEY UPDATE, not FOR UPDATE. A row that references the author by foreign key (the journal, a message)
+      # takes FOR KEY SHARE on his account, which FOR UPDATE blocks for the whole publication, upload included.
+      test "AV-05 — while live_of holds the author, another connection still journals an event of his within 300 ms" do
+        journaled = Orm::Message.transaction do
+          @repository.live_of(author_id: @author.id, now: NOW)
+          Thread.new do
+            ActiveRecord::Base.connection_pool.with_connection do
+              Orm::AuditEvent.transaction do
+                Orm::AuditEvent.connection.execute("SET LOCAL lock_timeout = '300ms'")
+                Repositories::Identity::AuditLogRepository.new.record(action: "message.published", actor_id: @author.id, at: NOW)
+              end
+            rescue ActiveRecord::LockWaitTimeout
+              false
+            end
+          end.value
+        end
+
+        assert journaled, "l'événement attend la fin de la parution"
+        assert_equal 1, Orm::AuditEvent.where(actor_id: @author.id).count
       end
 
       test "AV-05 — two publications of the same author at the same instant follow each other: 3 live, never 4" do

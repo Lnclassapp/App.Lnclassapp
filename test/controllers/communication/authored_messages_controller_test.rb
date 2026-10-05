@@ -765,6 +765,35 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_select "#announcement-cap-notice + div.flex.flex-wrap.justify-end button[value=publish]"
   end
 
+  # Phase 5, decision of the orchestrator (UDR-0075, amendment): an author with more than 3 live announcements (data from
+  # before the chantier) loses « live − 2 » at his next publication; the notice names them all, the oldest first.
+  test "AV-06 — with 5 live announcements, the notice names the 3 that publishing archives, the oldest first" do
+    three_live
+    { "Cantine" => 2, "Chorale" => 5 }.each do |title, day|
+      create_message(author: @kamate, title:, school: @lauriers, published_at: Time.zone.local(2026, 10, day, 8))
+    end
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "div#announcement-cap-notice[role=status]" do
+      assert_select "p", "Tu as déjà 5 annonces en ligne. En publiant, « Réunion parents », « Cantine » et « Fiches chapitre 3 » " \
+                         "seront archivées."
+      assert_select "p.mt-1.text-xs", "Programmée, elle archivera à sa parution la plus ancienne alors en ligne."
+    end
+  end
+
+  test "AV-06 — with 4 live announcements, the notice names the 2 that publishing archives" do
+    three_live
+    create_message(author: @kamate, title: "Cantine", school: @lauriers, published_at: Time.zone.local(2026, 10, 2, 8))
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "#announcement-cap-notice > p:first-child",
+                  "Tu as déjà 4 annonces en ligne. En publiant, « Réunion parents » et « Cantine » seront archivées."
+  end
+
   test "AV-06 — with 2 live announcements, there is no notice" do
     three_live.first.update!(status: "archived")
     sign_in_as @kamate

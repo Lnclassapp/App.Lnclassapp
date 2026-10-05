@@ -1,5 +1,5 @@
 # 🔌 INFRA · Queries::Communication::AuthoredMessagesQuery
-# Rôle : « Mes annonces » (20 par page, « Terminée » déduite, thème) et ce que montre le formulaire, dont l'annonce qui partirait
+# Rôle : « Mes annonces » (20 par page, « Terminée » déduite, thème) et ce que montre le formulaire, dont les annonces qui partiraient
 # ADR  : 0026, 0078, 0081 · UDR : 0071 (§3.7, §3.8), 0075 (§3.1, §3.3)
 module Queries
   module Communication
@@ -16,7 +16,7 @@ module Queries
       end
       Page = Data.define(:rows, :page, :pages)
       School = Data.define(:public_id, :name)
-      # L'annonce en ligne qu'une parution archiverait (UDR-0075 §3.3, encadré du plafond).
+      # Une annonce en ligne qu'une parution archiverait (UDR-0075 §3.3, encadré du plafond).
       Departing = Data.define(:public_id, :title)
       # Une annonce vue par son formulaire : son établissement, ses classes et son dessin de l'équipe par public_id, ses
       # fichiers.
@@ -43,12 +43,13 @@ module Queries
       end
 
       # ADR-0081 §4.1 : une lecture d'information, sans verrou ; la parution refait le calcul sous le verrou de l'auteur.
-      # En ligne comme pour live_of : publiée, et now < ends_at. → Departing (la plus ancienne en ligne, quand l'auteur en
-      # a LIVE_CAP) | nil
+      # En ligne comme pour live_of : publiée, et now < ends_at. Une parution en laisse LIVE_CAP - 1 : un auteur à plus de
+      # LIVE_CAP (données antérieures au chantier) en perd plusieurs, toutes rendues (UDR-0075, amendement de la phase 5).
+      # → [Departing] la plus ancienne d'abord ; vide sous LIVE_CAP
       def departing(author_id:, now:)
         live = Orm::Message.where(author_id:, status: "published").where("ends_at > ?", now).order(:published_at, :id)
-                           .limit(Entities::Communication::Message::LIVE_CAP).pluck(:public_id, :title)
-        Departing.new(*live.first) if live.size == Entities::Communication::Message::LIVE_CAP
+                           .pluck(:public_id, :title)
+        live.first([ live.size - (Entities::Communication::Message::LIVE_CAP - 1), 0 ].max).map { Departing.new(*it) }
       end
 
       # Les classes que l'enseignant peut viser : actives, de son établissement, où il enseigne ; par niveau puis par nom.

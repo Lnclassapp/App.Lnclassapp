@@ -25,7 +25,7 @@ module UseCases
 
       def actor(user) = Repositories::Identity::UserRepository.new.actor_for(user_id: user.id)
 
-      # Records, at each call of live_of, whether the transaction of the use case is open (AV-05).
+      # Says whether the transaction of the use case is open (AV-05).
       class SpyTransaction < Repositories::Shared::Transaction
         attr_reader :open
 
@@ -37,16 +37,30 @@ module UseCases
         end
       end
 
+      # Records each call to the repository, and whether the transaction is open: the order of the calls is all a spy
+      # proves. The lock itself is proven on two connections (message_publication_concurrency_test.rb).
       class WatchedMessages < SimpleDelegator
-        attr_reader :live_of_calls
+        attr_reader :calls
 
-        def initialize(repository, transaction) = super(repository).tap { @transaction = transaction }
-        def live_of(**) = __getobj__.live_of(**).tap { (@live_of_calls ||= []) << @transaction.open }
+        def initialize(repository, transaction)
+          super(repository)
+          @transaction = transaction
+          @calls = []
+        end
+
+        def live_of(**) = watched(:lock) { __getobj__.live_of(**) }
+        def update(message:) = watched(message.status) { __getobj__.update(message:) }
+        def create(message:) = watched(:create) { __getobj__.create(message:) }
+
+        private
+
+        def watched(call) = yield.tap { @calls << [ call, @transaction.open == true ] }
       end
 
-      def use_case(messages: Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new)
+      def use_case(messages: Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new,
+                   attachments: Repositories::Communication::AttachmentStore.new)
         CreateMessage.new(
-          messages:, attachments: Repositories::Communication::AttachmentStore.new,
+          messages:, attachments:,
           schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new,
           teachings: Repositories::Classroom::TeachingRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
           illustrations: Repositories::Communication::IllustrationRepository.new, transaction:,
@@ -55,10 +69,17 @@ module UseCases
       end
 
       def create(user, messages: Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new,
-                 **attributes)
+                 attachments: Repositories::Communication::AttachmentStore.new, **attributes)
         dto = Dtos::Communication::MessageInput.new(title: "Rentrée numérique", body: "Tout le monde en ligne lundi.",
                                                     illustration: "info", commit: "publish", **attributes)
-        use_case(messages:, transaction:).call(actor: user && actor(user), dto:)
+        use_case(messages:, transaction:, attachments:).call(actor: user && actor(user), dto:)
+      end
+
+      # A storage that fails on each file it receives, after the cap has archived (test analysis of phase 5, 2.1).
+      class FailingAttachments < Repositories::Communication::AttachmentStore
+        Down = Class.new(StandardError)
+
+        def attach(**) = raise(Down, "le stockage ne répond pas")
       end
 
       # Three live announcements of the direction, published on September 25th, 27th and 29th (the oldest first).
@@ -222,6 +243,18 @@ module UseCases
         assert_equal [ [ @kamate.id, result.value.message.id ] ], published_events.pluck(:actor_id, :subject_id), "l'archivage n'est pas journalisé"
       end
 
+      # Phase 5 (test analysis 2.1), on the real base: the archiving by the cap, the announcement and its journal are
+      # written in one transaction, which the failure of its file undoes entirely.
+      test "AV-03 — a publication whose file cannot be stored writes nothing: the oldest live one stays live" do
+        live = three_live
+
+        assert_raises(FailingAttachments::Down) do
+          create(@kamate, audience: "students", audio: StringIO.new(MP3), attachments: FailingAttachments.new)
+        end
+        assert_equal %w[published published published], statuses(live)
+        assert_equal [ 3, 0, 0 ], [ Orm::Message.where(author: @kamate).count, published_events.count, ActiveStorage::Blob.count ]
+      end
+
       test "AV-04 — 2 live, 1 scheduled, 1 draft, 1 archived, 1 withdrawn and 1 ended: publishing archives nothing" do
         counted = [ 25, 27 ].map { create_message(author: @kamate, school: @lauriers, published_at: Time.zone.local(2026, 9, it, 8)) }
         ignored = [ create_message(author: @kamate, status: "scheduled", school: @lauriers, published_at: Time.zone.local(2026, 10, 2, 8)),
@@ -254,14 +287,14 @@ module UseCases
         assert_equal %w[published published published], statuses(live)
       end
 
-      test "AV-05 — the live announcements of the author are read inside the transaction of the publication" do
+      test "AV-05 — in the transaction of the publication: the author locked first, then the oldest archived, then the creation" do
         three_live
         transaction = SpyTransaction.new
         messages = WatchedMessages.new(Repositories::Communication::MessageRepository.new, transaction)
 
         create(@kamate, audience: "students", messages:, transaction:)
 
-        assert_equal [ true ], messages.live_of_calls
+        assert_equal [ [ :lock, true ], [ "archived", true ], [ :create, true ] ], messages.calls
       end
 
       test "AV-07 — the theme chosen is written; an unknown one is refused, and nothing is written" do
@@ -297,23 +330,24 @@ module UseCases
     end
 
     # ADR-0081 §4.1 (AV-05): two publications of the same author at the same instant, through the use case, on two
-    # connections. Outside any test transaction: each thread sees what the other one committed.
+    # connections. Outside any test transaction: each thread sees what the other one committed. The first one keeps the
+    # author's lock until the second one waits on it: their order is the lock's, never a sleep's.
     class CreateMessageConcurrencyTest < ActiveSupport::TestCase
       self.use_transactional_tests = false
 
-      PAUSE = 0.3
-
-      # Holds the author's lock a moment, and says so: without it, the second publication would read the same 3 live.
-      class SlowLive < Repositories::Communication::MessageRepository
-        def initialize(locked:)
+      # Says when it holds the author's lock, and keeps it until the test releases it: without the lock, the second
+      # publication would read the same 3 live and never wait.
+      class Holding < Repositories::Communication::MessageRepository
+        def initialize(held:, release:)
           super()
-          @locked = locked
+          @held = held
+          @release = release
         end
 
         def live_of(author_id:, now:)
           super.tap do
-            @locked << true
-            sleep PAUSE
+            @held << true
+            @release.pop(timeout: 10)
           end
         end
       end
@@ -330,8 +364,10 @@ module UseCases
         Orm::User.where(id: @fatou.id).delete_all
       end
 
-      def publish(title, messages: Repositories::Communication::MessageRepository.new)
-        ActiveRecord::Base.connection_pool.with_connection do
+      # backend : a queue that receives the pid of the connection, when given.
+      def publish(title, messages: Repositories::Communication::MessageRepository.new, backend: nil)
+        ActiveRecord::Base.connection_pool.with_connection do |connection|
+          backend&.push(connection.select_value("SELECT pg_backend_pid()"))
           CreateMessage.new(
             messages:, attachments: Repositories::Communication::AttachmentStore.new,
             schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new,
@@ -344,18 +380,36 @@ module UseCases
         end
       end
 
-      test "AV-05 — two publications of the same author at the same instant: 3 live after both, never 4" do
-        locked = Queue.new
-        first = Thread.new { publish("Première", messages: SlowLive.new(locked:)) }
-        started = locked.pop(timeout: 5)
-        second = Thread.new { publish("Seconde") }
-        results = [ first.value, second.value ]
+      # Uncached: the query cache of the test would give the first answer again.
+      def waiting?(pid)
+        Orm::Message.uncached do
+          Orm::Message.connection.select_value("SELECT EXISTS (SELECT 1 FROM pg_locks WHERE pid = #{Integer(pid)} AND NOT granted)")
+        end
+      end
 
-        assert started, "la première publication ne lit pas les annonces en ligne de son auteur"
+      test "AV-05 — two publications of the same author at the same instant: 3 live after both, never 4" do
+        held = Queue.new
+        release = Queue.new
+        backend = Queue.new
+        threads = [ Thread.new { publish("Première", messages: Holding.new(held:, release:)) } ]
+        assert held.pop(timeout: 5), "la première publication ne lit pas les annonces en ligne de son auteur"
+        threads << Thread.new { publish("Seconde", backend:) }
+        pid = backend.pop(timeout: 5)
+        deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + 5
+        until !threads.last.alive? || waiting?(pid)
+          flunk "la seconde publication n'attend pas le verrou de l'auteur" if Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+          sleep 0.01
+        end
+        release << true
+        results = threads.map(&:value)
+
         assert results.all?(&:success?)
         assert_equal [ [ @live[0].public_id ], [ @live[1].public_id ] ], results.map { it.value.archived.map(&:public_id) }
         assert_equal [ "1 jours", "Première", "Seconde" ],
                      Orm::Message.where(author_id: @fatou.id, status: "published").order(:id).pluck(:title)
+      ensure
+        release << true
+        threads&.each { it.join(10) }
       end
     end
   end

@@ -108,3 +108,49 @@ module Repositories
     end
   end
 end
+
+module Repositories
+  module Communication
+    # Phase 5 of annonces-v2 (F3): lock_library locks the library in the caller's transaction, so that two additions
+    # follow each other; another connection cannot take that lock before the transaction ends, and still reads the
+    # library. Outside any test transaction: each thread has its own connection.
+    class IllustrationLibraryLockTest < ActiveSupport::TestCase
+      self.use_transactional_tests = false
+
+      setup do
+        @repository = IllustrationRepository.new
+        @team = create_team_member(second_factor: false)
+        create_illustration(name: "Bus scolaire", created_by: @team)
+      end
+
+      teardown do
+        Orm::MessageIllustration.where(created_by_id: @team.id).delete_all
+        Orm::User.where(id: @team.id).delete_all
+      end
+
+      def other_connection(&) = Thread.new { ActiveRecord::Base.connection_pool.with_connection(&) }.value
+
+      # From another connection, which waits 300 ms at most: true when it could lock the library.
+      def lockable?
+        other_connection do
+          Orm::MessageIllustration.transaction do
+            Orm::MessageIllustration.connection.execute("SET LOCAL lock_timeout = '300ms'")
+            IllustrationRepository.new.lock_library
+          end
+        rescue ActiveRecord::LockWaitTimeout
+          false
+        end
+      end
+
+      test "F3 — lock_library holds the library until the end of the caller's transaction, without blocking its reading" do
+        held = Orm::MessageIllustration.transaction do
+          @repository.lock_library
+          [ lockable?, other_connection { IllustrationRepository.new.available.map(&:name) } ]
+        end
+
+        assert_equal [ false, [ "Bus scolaire" ] ], held
+        assert lockable?
+      end
+    end
+  end
+end

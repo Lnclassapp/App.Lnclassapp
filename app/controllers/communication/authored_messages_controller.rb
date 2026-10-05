@@ -99,13 +99,22 @@ module Communication
 
     def classroom_choices = query.classroom_choices(teacher_id: current_actor.user_id, school_id: current_actor.school_id)
 
-    # UDR-0075 §3.3 : les dessins de l'équipe offerts, après les 8 de base, le plus ancien d'abord.
-    def library_illustrations = illustrations.available
+    # UDR-0075 §3.3 : les dessins de l'équipe offerts, après les 8 de base, le plus ancien d'abord. Décision du chantier
+    # (Lot E) : une annonce garde son dessin de l'équipe jusqu'à sa fin, même retiré depuis ; son formulaire le propose
+    # encore, en dernier (UpdateMessage l'accepte), une nouvelle annonce ne le voit pas. message : l'annonce modifiée, ou nil.
+    # → [Entities::Communication::Illustration]
+    def library_illustrations(message)
+      offered = illustrations.available
+      carried = message&.illustration_id
+      return offered if carried.nil? || offered.any? { it.id == carried }
 
-    # UDR-0075 §3.3 : l'annonce qu'une parution archiverait, pour l'encadré du plafond ; jamais en modification d'une
-    # annonce déjà publiée, qui n'est pas une parution. → AuthoredMessagesQuery::Departing | nil
+      offered + illustrations.find_all_by_ids(ids: [ carried ]).values
+    end
+
+    # UDR-0075 §3.3 : les annonces qu'une parution archiverait, pour l'encadré du plafond ; aucune en modification d'une
+    # annonce déjà publiée, qui n'est pas une parution. → [AuthoredMessagesQuery::Departing], la plus ancienne d'abord
     def departing
-      return if @message&.status == "published"
+      return [] if @message&.status == "published"
 
       query.departing(author_id: current_actor.user_id, now: Time.zone.now)
     end

@@ -12,10 +12,16 @@ module UseCases
       Clock = Data.define(:now)
       MP3 = ("ID3".b + ("\x00".b * 64)).freeze
 
-      # Reads the announcement, then lets another request change it before the use case writes (ADR-0078 §4.2).
+      # Reads the announcement, then lets another request change it before the use case writes (ADR-0078 §4.2); once.
       class Racing < SimpleDelegator
         def initialize(repository, &race) = super(repository).tap { @race = race }
-        def find_by_public_id(public_id:) = __getobj__.find_by_public_id(public_id:).tap { @race.call }
+
+        def find_by_public_id(public_id:)
+          __getobj__.find_by_public_id(public_id:).tap do
+            @race&.call
+            @race = nil
+          end
+        end
       end
 
       setup do
@@ -32,7 +38,7 @@ module UseCases
 
       def actor(user) = Repositories::Identity::UserRepository.new.actor_for(user_id: user.id)
 
-      # Records, at each call of live_of, whether the transaction of the use case is open (AV-05).
+      # Says whether the transaction of the use case is open (AV-05).
       class SpyTransaction < Repositories::Shared::Transaction
         attr_reader :open
 
@@ -44,11 +50,24 @@ module UseCases
         end
       end
 
+      # Records each call to the repository, and whether the transaction is open: the order of the calls is all a spy
+      # proves. The lock itself is proven on two connections (message_publication_concurrency_test.rb).
       class WatchedMessages < SimpleDelegator
-        attr_reader :live_of_calls
+        attr_reader :calls
 
-        def initialize(repository, transaction) = super(repository).tap { @transaction = transaction }
-        def live_of(**) = __getobj__.live_of(**).tap { (@live_of_calls ||= []) << @transaction.open }
+        def initialize(repository, transaction)
+          super(repository)
+          @transaction = transaction
+          @calls = []
+        end
+
+        def live_of(**) = watched(:lock) { __getobj__.live_of(**) }
+        def find_by_public_id(public_id:) = watched(:read) { __getobj__.find_by_public_id(public_id:) }
+        def update(message:) = watched(message.status) { __getobj__.update(message:) }
+
+        private
+
+        def watched(call) = yield.tap { @calls << [ call, @transaction.open == true ] }
       end
 
       def use_case(messages: Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new)
@@ -230,7 +249,42 @@ module UseCases
         assert_equal 0, published_events.count
       end
 
-      test "AV-05 — the live announcements of the author are read inside the transaction of the publication" do
+      # Phase 5 (F1): the announcement is read again after the lock, when a concurrent publication of it has ended.
+      # Phase 5 (F1): the second « Publier » of a draft, or one sent while the job publishes it, finds it published under
+      # the lock of its author. Its form is applied as a modification of the live announcement: nothing more is archived
+      # nor journaled (the request that published it did both).
+      def published_meanwhile(message)
+        Racing.new(Repositories::Communication::MessageRepository.new) do
+          Orm::Message.where(id: message.id).update_all(status: "published", published_at: NOW - 1.minute,
+                                                         ends_at: NOW - 1.minute + 30.days)
+        end
+      end
+
+      test "AV-03 — published by another request since its reading: « Publier » modifies the live announcement, nothing archived" do
+        live = [ 25, 27 ].map { create_message(author: @kamate, school: @lauriers, published_at: Time.zone.local(2026, 9, it, 8)) }
+        draft = create_message(author: @kamate, status: "draft", published_at: nil, school: @lauriers)
+
+        result = update(@kamate, draft, audience: "students", classroom_public_ids: [], title: "Sortie au musée",
+                                        messages: published_meanwhile(draft))
+
+        assert_equal [ [], NOW ], [ result.value.archived, result.value.message.edited_at ]
+        assert_equal [ "published", "Sortie au musée", NOW - 1.minute, NOW - 1.minute + 30.days, NOW ],
+                     draft.reload.values_at(:status, :title, :published_at, :ends_at, :edited_at)
+        assert_equal %w[published published], statuses(live)
+        assert_equal 0, published_events.count
+      end
+
+      test "published by another request since its reading, a draft saved stays published: it never goes back to draft" do
+        draft = create_message(author: @kamate, status: "draft", published_at: nil, school: @lauriers)
+
+        result = update(@kamate, draft, audience: "students", classroom_public_ids: [], commit: "draft", published_at: "2026-12-01T08:00",
+                                        messages: published_meanwhile(draft))
+
+        assert result.success?
+        assert_equal [ "published", NOW - 1.minute, NOW ], draft.reload.values_at(:status, :published_at, :edited_at)
+      end
+
+      test "AV-05 — in the transaction of the publication: the author locked, the draft read again, the oldest archived, the draft written" do
         three_live
         draft = create_message(author: @kamate, status: "draft", published_at: nil, school: @lauriers)
         transaction = SpyTransaction.new
@@ -238,7 +292,7 @@ module UseCases
 
         update(@kamate, draft, audience: "students", classroom_public_ids: [], messages:, transaction:)
 
-        assert_equal [ true ], messages.live_of_calls
+        assert_equal [ [ :read, false ], [ :lock, true ], [ :read, true ], [ "archived", true ], [ "published", true ] ], messages.calls
       end
 
       test "AV-07 — the theme is changed; an unknown one is refused, and nothing changes" do

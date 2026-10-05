@@ -69,14 +69,9 @@
     <% end %>
   <% end %>
 
-  <%# Les 8 de base, puis les dessins de l'équipe non retirés, par date d'ajout ; la valeur d'un dessin est son public_id. %>
-  <%# Décision du chantier annonces-v2 (Lot E) : une annonce garde son dessin de l'équipe jusqu'à sa fin, même retiré depuis ; %>
-  <%# son formulaire le propose encore, en dernier (UpdateMessage l'accepte, une nouvelle annonce ne le voit pas). %>
-  <% drawings = library_illustrations %>
-  <% carried = message&.illustration_id %>
-  <% if carried && drawings.none? { it.id == carried } %>
-    <% drawings += Repositories::Communication::IllustrationRepository.new.find_all_by_ids(ids: [ carried ]).values %>
-  <% end %>
+  <%# Les 8 de base, puis les dessins de l'équipe non retirés, par date d'ajout, et celui que porte l'annonce, même retiré ; %>
+  <%# la valeur d'un dessin est son public_id. %>
+  <% drawings = library_illustrations(message) %>
   <fieldset id="announcement-illustrations">
     <legend class="mb-1.5 block text-sm font-medium text-ink"><%= Dtos::Communication::MessageInput.human_attribute_name(:illustration) %></legend>
     <div class="grid grid-cols-4 gap-2">
@@ -129,10 +124,17 @@
     </div>
   <% end %>
 
-  <%# UDR-0075 §3.3 : l'encadré du plafond, lu à l'ouverture ; jamais en modification d'une annonce publiée (departing est nil). %>
-  <% if (leaving = departing) %>
+  <%# UDR-0075 §3.3 : l'encadré du plafond, lu à l'ouverture ; jamais en modification d'une annonce publiée (departing est vide). %>
+  <%# Amendement de la phase 5 : plus de 3 en ligne (données antérieures), toutes celles qui partiraient sont nommées. %>
+  <% leaving = departing %>
+  <% if leaving.any? %>
+    <% live = caps::LIVE_CAP - 1 + leaving.size %>
     <div id="announcement-cap-notice" role="status" class="rounded-ln bg-info-soft p-4 text-sm text-info">
-      <p><%= t(".cap.notice", count: caps::LIVE_CAP, title: leaving.title) %></p>
+      <% if leaving.one? %>
+        <p><%= t(".cap.notice", count: live, title: leaving.first.title) %></p>
+      <% else %>
+        <p><%= t(".cap.several", count: live, titles: leaving.map { t(".cap.quoted", title: it.title) }.to_sentence) %></p>
+      <% end %>
       <p class="mt-1 text-xs"><%= t(".cap.scheduled") %></p>
     </div>
   <% end %>
