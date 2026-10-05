@@ -129,14 +129,16 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_assign" do
       assert_select "h2", text: I18n.t("#{scope}.show.assign_title")
       assert_select "ul[aria-label=?]", I18n.t("#{scope}.show.assign_targets", title: "Méiose") do |list|
-        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li > span").map { it.text.strip }
+        # UDR-0077 §3.3 : la ligne compacte de la fiche — la classe d'abord, la bascule (✕ seul) à droite.
+        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li [id^='assignment_'] > div > p:first-child").map { it.text.strip }
       end
       assert_select "[id^='assignment_']", 2
       assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{@exercise.public_id} a[data-turbo-frame=modal][aria-label=?]",
                     "Assigner « Méiose » à Tle D 1"
       assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id}" do
         assert_select "*", text: /Assigné/
-        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button[aria-label=?]", "Retirer « Méiose » de Tle D 2"
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']:has(input[name=compact]) button.size-tap[aria-label=?]",
+                      "Retirer « Méiose » de Tle D 2"
       end
       assert_select "#exercise_assign_none", 0
     end

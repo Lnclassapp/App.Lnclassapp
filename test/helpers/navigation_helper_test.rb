@@ -189,8 +189,8 @@ class NavigationHelperTest < ActionView::TestCase
   end
 
   # RE-05, RE-11 (UDR-0068 §3.4, UDR-0069 §3.1).
-  test "the teacher's home reads classrooms, courses then activities; the team's has no referential" do
-    assert_equal %i[classrooms courses activity], home_sections_for(:teacher).map(&:first)
+  test "the teacher's home reads classrooms, courses, announcements then activities; the team's has no referential" do
+    assert_equal %i[classrooms courses announcements activity], home_sections_for(:teacher).map(&:first)
     assert_equal %i[regions activity], home_sections_for(:team).map(&:first)
   end
 

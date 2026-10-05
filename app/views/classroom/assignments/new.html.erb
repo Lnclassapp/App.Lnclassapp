@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/assignments/new — « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal » (page sans JavaScript) %>
 <%# Rôle : six jours (lundi … samedi), « Plus tard » ou « Assigner » ; sans jour coché, « Assigner » revient en 422 avec l'erreur %>
-<%# ADR  : 0072 · UDR : 0006, 0054, 0062 (§3.4, §3.7, §3.9) · Stimulus : modal, autofocus %>
+<%# ADR  : 0072 · UDR : 0006, 0054, 0062 (§3.4, §3.7, §3.9), 0077 (§3.3) · Stimulus : modal, autofocus %>
 <% tab_title = page_title(t(".title", classroom: @classroom.name)) %>
 <% error = @form.errors[:weekdays].any? %>
 <% checked = Array(@form.weekdays) %>
@@ -16,6 +16,8 @@
       <%= hidden_field_tag "assignment[assignable_type]", "Exercise", id: nil %>
       <%= hidden_field_tag "assignment[assignable_key]", @exercise.key, id: nil %>
       <%= hidden_field_tag "return_to", @return_to, id: nil if @return_to %>
+      <%# UDR-0077 §3.3 : ouverte depuis une ligne compacte, la réponse « Plus tard » rend la ligne compacte. %>
+      <%= hidden_field_tag "compact", "1", id: nil if params[:compact].present? %>
       <p class="text-mute"><%= t(".context", name: @exercise.name) %></p>
       <%= tag.fieldset id: "assignment_weekdays", class: "space-y-2", "aria-invalid": ("true" if error),
                        "aria-describedby": ("assignment_weekdays_error" if error) do %>

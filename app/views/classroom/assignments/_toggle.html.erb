@@ -1,33 +1,49 @@
 <%# 🌐 UI · classroom/assignments/_toggle — bascule d'assignation d'un exercice dans une classe, remplacée par les streams %>
-<%# Rôle : « Assigner » (POST, ou lien vers la modale des jours tant que l'enseignant ne les a pas donnés), ou « Assigné », %>
-<%#        l'échéance (« Pour jeu. 8 oct. ») et « Retirer » (PATCH archive) ; avec classroom_name, les aria-label nomment la classe %>
-<%# ADR  : 0048, 0072 · UDR : 0006, 0028, 0062 (§3.4), 0069 (§3.8) %>
-<%# locals: (classroom_public_id:, assignable_type:, assignable_key:, assignable_name:, assignment_public_id:, due_on: nil, needs_session_days: false, classroom_name: nil) -%>
+<%# Rôle : « Assigner » (POST, ou la modale des jours), ou « Assigné », l'échéance et « Retirer » ; compact (fiche, page exercice) : toute la %>
+<%#        ligne de la classe — nom, échéance dessous, « Assigné » et ✕ — le mode voyage avec la requête (compact=1) %>
+<%# ADR  : 0048, 0072 · UDR : 0006, 0028, 0062 (§3.4), 0069 (§3.8), 0077 (§3.3) %>
+<%# locals: (classroom_public_id:, assignable_type:, assignable_key:, assignable_name:, assignment_public_id:, due_on: nil, needs_session_days: false, classroom_name: nil, compact: false) -%>
 <% button = class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm]) %>
 <% names = { name: assignable_name, classroom: classroom_name } %>
 <% assign_label = classroom_name ? t(".assign_to_label", **names) : t(".assign_label", name: assignable_name) %>
 <% archive_label = classroom_name ? t(".archive_from_label", **names) : t(".archive_label", name: assignable_name) %>
-<div id="<%= "assignment_#{classroom_public_id}_#{assignable_type}_#{assignable_key}" %>" class="flex shrink-0 flex-wrap items-center gap-2">
+<% compact_param = { compact: ("1" if compact) }.compact %>
+<% id = "assignment_#{classroom_public_id}_#{assignable_type}_#{assignable_key}" %>
+<% actions = capture do %>
   <% if assignment_public_id %>
-    <%= ui_badge t(".assigned"), tone: :success, icon: "check" %>
-    <% if due_on %>
+    <%= ui_badge t(".assigned"), tone: :success, icon: "check", size: (compact ? :sm : :md) %>
+    <% if due_on && !compact %>
       <span class="text-sm text-mute"><%= due_for_teacher(due_on) %></span>
     <% end %>
-    <%= button_to archive_assignment_path(assignment_public_id), method: :patch, params: { classroom_public_id: },
-                  form_class: "contents", class: class_names(button, ComponentsHelper::BUTTON_VARIANTS[:ghost]),
-                  "aria-label": archive_label do %>
-      <%= ui_icon "x-mark", size: :sm %><%= t(".archive") %>
+    <%# Compact : ✕ seul, cible de 48 px ; son aria-label nomme l'exercice et la classe. %>
+    <% archive_class = compact ? "grid size-tap shrink-0 cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand" : class_names(button, ComponentsHelper::BUTTON_VARIANTS[:ghost]) %>
+    <%= button_to archive_assignment_path(assignment_public_id), method: :patch, params: { classroom_public_id:, **compact_param },
+                  form_class: "contents", class: archive_class, "aria-label": archive_label do %>
+      <%= ui_icon "x-mark", size: :sm %><%= t(".archive") unless compact %>
     <% end %>
   <% elsif needs_session_days %>
     <%= ui_button t(".assign"), variant: :secondary, size: :sm, icon: "plus",
-                  href: new_classroom_assignment_path(classroom_public_id, assignable_key:),
+                  href: new_classroom_assignment_path(classroom_public_id, assignable_key:, **compact_param),
                   data: { turbo_frame: "modal" }, "aria-label": assign_label %>
   <% else %>
     <%= button_to classroom_assignments_path(classroom_public_id),
-                  params: { assignment: { assignable_type:, assignable_key: } }, form_class: "contents",
+                  params: { assignment: { assignable_type:, assignable_key: }, **compact_param }, form_class: "contents",
                   class: class_names(button, ComponentsHelper::BUTTON_VARIANTS[:secondary]),
                   "aria-label": assign_label do %>
       <%= ui_icon "plus", size: :sm %><%= t(".assign") %>
     <% end %>
   <% end %>
-</div>
+<% end %>
+<% if compact %>
+  <div id="<%= id %>" class="flex items-center justify-between gap-3 px-3 py-2">
+    <div class="min-w-0">
+      <p class="truncate text-sm font-medium text-ink"><%= classroom_name %></p>
+      <% if assignment_public_id && due_on %>
+        <p class="text-xs text-mute"><%= due_for_teacher(due_on) %></p>
+      <% end %>
+    </div>
+    <div class="flex shrink-0 items-center gap-1"><%= actions %></div>
+  </div>
+<% else %>
+  <div id="<%= id %>" class="flex shrink-0 flex-wrap items-center gap-2"><%= actions %></div>
+<% end %>
