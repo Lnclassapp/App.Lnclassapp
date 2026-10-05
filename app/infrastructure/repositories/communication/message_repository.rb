@@ -49,7 +49,9 @@ module Repositories
       # parution du même auteur attend ici, puis lit ce que la première a écrit. Trois requêtes : verrou, lignes, classes.
       def live_of(author_id:, now:)
         Orm::User.where(id: author_id).lock.pluck(:id)
-        records = Orm::Message.where(author_id:, status: "published", published_at: ..now).where("ends_at > ?", now)
+        # published_at n'est pas comparé à now : une annonce publiée l'a été en s'écrivant, et une parution concurrente qui a
+        # lu son horloge avant le verrou doit compter celle que l'autre vient de publier.
+        records = Orm::Message.where(author_id:, status: "published").where("ends_at > ?", now)
                               .order(:published_at, :id).to_a
         classroom_ids = classroom_ids_of(records.map(&:id))
         records.map { entity(it, classroom_ids.fetch(it.id, [])) }

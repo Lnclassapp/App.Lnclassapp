@@ -42,7 +42,8 @@ module Ports
 
       # ADR-0081 §4.1 (Lot 0 d'annonces-v2). À appeler DANS la transaction de l'appelant, celle de la parution : verrouille
       # la ligne users de l'auteur (SELECT … FOR UPDATE) jusqu'à sa fin, puis lit ses annonces en ligne. Deux parutions
-      # du même auteur se suivent donc. En ligne = published et published_at <= now < ends_at ; brouillon, programmée,
+      # du même auteur se suivent donc. En ligne = published et now < ends_at (published_at n'est pas comparé : une
+      # parution qui a lu son horloge avant le verrou compte celle qui vient d'avoir lieu) ; brouillon, programmée,
       # archivée, retirée et terminée ne comptent pas. → [Message] avec leurs classes, la plus ancienne d'abord
       # (published_at, puis id)
       def live_of(author_id:, now:)

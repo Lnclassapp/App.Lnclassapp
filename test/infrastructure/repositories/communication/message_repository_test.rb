@@ -171,7 +171,9 @@ module Repositories
         assert_equal @repository.find_by_public_id(public_id: newest.public_id), live.last
       end
 
-      test "AV-04 — only a published message within its window is live: published_at <= now < ends_at" do
+      # A published message counts whatever its published_at: it was published when written, and a concurrent request
+      # that read its clock before taking the lock must still count the message the other one has just published.
+      test "AV-04 — only a published message not yet ended is live: ends_at > now; draft, scheduled, archived, withdrawn are not" do
         kept = [ posted(published_at: NOW - 2.days), posted(published_at: NOW) ]
         posted(status: "draft", published_at: nil)
         posted(status: "scheduled", published_at: NOW + 1.hour)
@@ -179,10 +181,10 @@ module Repositories
         posted(status: "withdrawn", published_at: NOW - 1.day)
         ended = posted(published_at: NOW - 31.days, ends_at: NOW - 1.day)
         ending = posted(published_at: NOW - 30.days, ends_at: NOW)
-        posted(published_at: NOW + 1.minute)
+        just_published = posted(published_at: NOW + 1.minute)
 
-        assert_equal kept.map(&:public_id), live_of.map(&:public_id)
-        assert_equal [ ended, ending ].map(&:public_id), live_of(now: NOW - 3.days).map(&:public_id)
+        assert_equal (kept + [ just_published ]).map(&:public_id), live_of.map(&:public_id)
+        assert_equal [ ended, ending, *kept, just_published ].map(&:public_id), live_of(now: NOW - 3.days).map(&:public_id)
         assert_empty live_of(create_teacher(school: @school))
       end
 
