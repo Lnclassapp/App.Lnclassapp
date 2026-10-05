@@ -194,6 +194,7 @@ Vérification après activation : `curl -sv --http2 https://lnclass.com/login 2>
 - **Levier**       : A, des classes partagées pour la forme des badges et le survol des cartes-liens, sans changement visible ; C, plus de pied « Ouvrir le cours » ; E, statut seulement s'il n'est pas « Publié »
 - **Test associé** : `shared_classes_test.rb` fige chaque classe partagée sur l'ancienne liste. Une sonde jetable a comparé les styles calculés de chaque élément de `/design` (survol d'une carte-lien compris) et des deux écrans d'établissements, avant et après A : identiques. Elle n'est pas versionnée : les écrans changent, elle n'aurait plus de référence
 - **Done quand**   : le catalogue s'allège au même volume. **Tenu** : enseignant 62,8 → 43,2 Ko, équipe 75,3 → 50,5 Ko, élève 46,9 → 33,6 Ko
+- **Révision du porteur (2026-10-05)** : la carte filtrée de l'élève, réduite à son titre, est jugée trop pauvre. C est annulé (pied « Ouvrir le cours → » rétabli, statut « Brouillon » ou « Archivé » de nouveau dans le pied) et le badge de matière reste sur chaque carte, filtre actif ou non (UDR-0013, amendement ter). Catalogue : enseignant 55,2 Ko, équipe 62,4 Ko, élève 42,5 Ko
 
 ### Challenger du lot E *(2026-10-05, rôle distinct de l'exécutant)*
 

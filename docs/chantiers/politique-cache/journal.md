@@ -199,6 +199,7 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 - **`script/ci/record_timings`** : sans `LANG=C.UTF-8`, il plante sur un fichier de test non ASCII. Avec la locale, il ne lit qu'une des deux durées du fichier : la première ligne `-v` est coupée par le démarrage de Puma. Il retire aussi une entrée dont le fichier n'existe plus (`student_work_test.rb`). La durée de `sidebar_referral_test.rb` (3,78 + 1,56 s, soit 5,3 s) a donc été reportée à la main, et le reste du fichier laissé tel quel.
 
 - **Lot E5, premier `bin/ci`** : quatre tests ciblaient les badges par leurs anciennes classes (`span.rounded-full`) ou par l'ordre « titre puis Brouillon » de la carte ; ils sont mis à jour. Le même passage a vu échouer une fois `BouclePedagogiqueTest` (la modale « Nouveau cours » de l'accueil équipe introuvable). Le test passe seul, puis au `bin/ci` complet suivant, et le lot ne touche ni cette modale ni l'accueil équipe. L'échec est noté ici sans cause trouvée.
+- **Lot E5, révision du porteur** : sur `/courses?material=svt`, la carte de l'élève n'avait plus que son titre et son sous-titre. Le niveau lui était déjà retiré, et la matière filtrée aussi (amendement du 2026-10-02) ; le lot E5 a ôté le pied. Le porteur a demandé la carte de sa capture : badge de matière, titre, sous-titre, pied « Ouvrir le cours → ». Leçon : un allègement se juge sur chaque vue de l'écran (rôle, filtre), pas sur la vue mesurée.
 
 ## Ce qu'on a appris sur la codebase
 

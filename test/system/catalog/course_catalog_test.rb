@@ -169,7 +169,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   end
 
   # UDR-0013, amendement du 2026-10-02 (UDR-0057) : le catalogue filtré par matière et la page cours, vus par l'élève à
-  # 390 × 844, passent la règle de sobriété ; la matière filtrée et le niveau quittent les cartes.
+  # 390 × 844, passent la règle de sobriété ; le niveau quitte les cartes. Amendement du 2026-10-05 ter : la matière
+  # filtrée y reste (badge), avec le pied « Ouvrir le cours → ».
   test "on a phone, the student's catalogue filtered by subject and the course page pass the sobriety rule" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_student_for(@course)
@@ -179,8 +180,9 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       assert_selector "#courses_list > li", count: 1
       assert_single_primary_action
       assert_blocks_above_fold "#main > div > *", max: 5
-      within("#courses_list") do
-        assert_no_text "SVT"
+      within("#course_#{@course.slug}") do
+        assert_text "SVT"
+        assert_text t("catalog.courses.course_card.open")
         assert_no_text "Tle"
       end
       assert_selector "#main details summary", visible: :all,

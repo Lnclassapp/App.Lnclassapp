@@ -114,8 +114,8 @@ L'élève arrive au catalogue par la navigation, et bientôt par les cases de ma
 |---|---|---|---|---|
 | Sous-titre de l'en-tête | « Les cours de ton niveau, par matière. », affiché en permanence | `ui_page_header title: t(".title")`, sans sous-titre. Dans le bloc de l'en-tête : `ui_info_tip t(".student_scope"), label: t(".student_scope_label")` | R4 | Dans l'infobulle : « Tu vois seulement les cours de ton niveau. » (`student_scope`). Son nom : « Quels cours ? » (`student_scope_label`). |
 | Badge « niveau série » de chaque carte | « Tle D » ou « Tle » sur chaque carte | Non rendu pour l'élève | R6 | L'élève ne voit que son niveau : le badge redit la même chose sur chaque carte. Le niveau reste dans l'en-tête de la page du cours et de la fiche. |
-| Badge de matière de chaque carte, quand le filtre « Matière » est actif | Sur chaque carte | Non rendu pour l'élève seulement (décision du porteur du 2026-10-02) | R6 | La liste « Matière » du formulaire dit la matière, une fois. Sans filtre de matière, le badge reste sur chaque carte. |
-| Rangée des badges de la carte (`div.mb-4`) | Toujours rendue | Rendue seulement si elle porte au moins un badge | R6 (conséquence) | — |
+| Badge de matière de chaque carte, quand le filtre « Matière » est actif | Sur chaque carte | ~~Non rendu pour l'élève seulement (décision du porteur du 2026-10-02)~~ Rétabli le 2026-10-05 (amendement ter) | R6 | La liste « Matière » du formulaire dit la matière, une fois. Sans filtre de matière, le badge reste sur chaque carte. |
+| Rangée des badges de la carte (`div.mb-4`) | Toujours rendue | ~~Rendue seulement si elle porte au moins un badge~~ Toujours rendue de nouveau (amendement ter) | R6 (conséquence) | — |
 | Description de l'état « aucun résultat » | « Essayez un autre nom, un autre niveau ou une autre matière. » | Élève : « Essaye un autre nom ou une autre matière. » (`student_no_match_description`) | Clarté du filtre par matière (UDR-0058 §3.2) | L'élève n'a pas de filtre de niveau. Le texte le tutoie, comme ses autres textes. Une case de matière sans cours mène donc à un état vide juste. |
 
 **Page d'un cours** (`catalog/courses/show`, `_essential_row`)
@@ -232,3 +232,12 @@ Ce qui ne change pas pour l'élève :
 - Écartés par le porteur : B (masquer le niveau quand un niveau est filtré) et D (retirer l'icône du badge matière).
 - **Mesure** (`measure_screens.rb`, 100 requêtes, médiane de 3) : catalogue de l'enseignant 62,8 → **43,2 Ko**, de l'équipe 75,3 → **50,5 Ko**, de l'élève 46,9 → **33,6 Ko**.
 
+## Amendement du 2026-10-05 (ter) — badge de matière et pied rétablis · Statut : Accepté (porteur, 2026-10-05)
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), révision du lot E5. Le porteur, le même jour : « la carte avec filtre est devenue trop vilaine, remettre certains éléments. Les cartes doivent être identiques à la capture sur la page /courses?material=svt ». En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+- **C est annulé : le pied « Ouvrir le cours → » revient.** Séparateur, texte et flèche animée au survol, au bas de la carte, comme avant le lot E5.
+- **Le badge de matière reste sur chaque carte, filtre « Matière » actif ou non, pour tous les rôles.** La règle R6 de l'amendement du 2026-10-02, qui le retirait à l'élève quand il filtrait par matière, est levée : sans lui ni badge de niveau, la carte de l'élève n'avait plus qu'un titre. La rangée des badges est donc toujours rendue.
+- **E est gardé, à sa place d'origine.** L'équipe ne lit le statut que s'il n'est pas « Publié » ; « Brouillon » ou « Archivé » reprend sa place dans le pied, à droite de « Ouvrir le cours → ».
+- **A est gardé** (classes partagées, sans changement visible). Le badge de niveau, hors élève, ne change pas.
+- **Mesure** (`measure_screens.rb`, 30 requêtes) : catalogue de l'enseignant **55,2 Ko**, de l'équipe **62,4 Ko**, de l'élève **42,5 Ko**, sous le plafond de 150 Ko (ADR-0067).
