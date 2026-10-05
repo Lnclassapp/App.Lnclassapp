@@ -43,6 +43,15 @@ module Queries
         assert_equal %w[published published archived draft published], rows.map(&:status)
       end
 
+      # CA-5 (UDR-0077 §3.2) : l'enseignant, sa matière seule, aux niveaux (et séries) de ses classes.
+      test "material_id restreint à une matière ; avec l'audience d'un enseignant, sa matière à ses niveaux seulement" do
+        assert_equal [ @cellule, @genetique ].map(&:slug), catalog(:teacher, material_id: @svt.id).map(&:slug)
+
+        audience = Entities::Catalog::LevelAudience.new(pairs: [ [ @tle.id, @genetique.series_id ] ])
+        assert_equal [ @genetique.slug ], catalog(:teacher, audience:, material_id: @svt.id).map(&:slug)
+        assert_empty catalog(:teacher, audience: Entities::Catalog::LevelAudience.none, material_id: @svt.id)
+      end
+
       test "le filtre par matière et le filtre par niveau se combinent, par slug" do
         assert_equal [ @cellule, @genetique ].map(&:slug), catalog(:student, material: @svt.slug).map(&:slug)
         assert_equal [ @conscience, @genetique ].map(&:slug), catalog(:student, level: @tle.slug).map(&:slug)

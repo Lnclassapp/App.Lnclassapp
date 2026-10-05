@@ -60,8 +60,10 @@ Bande plutôt que grille : sur un écran de 375 px une bande tient en une hauteu
 
 - **Portée de l'enseignant** : `Queries::Catalog::TeacherAudienceQuery#call(teacher_id:)` → `Scope(audience: LevelAudience, material_id:)`, les (niveau, série) de ses classes **actives de l'année** et sa matière. `CourseCatalogQuery` reçoit `audience:` et `material_id:`. Audience vide → aucun cours ; état vide « Déclarez vos classes pour voir vos cours » / « Les cours de votre matière, aux niveaux de vos classes, apparaîtront ici. », bouton « Déclarer mes classes » vers `teacher_classrooms_path`.
 - Filtres de l'enseignant (ordinateur) : pas de liste « Matière » ; « Niveau » et « Série » ne proposent que ceux de ses classes.
-- **Téléphone, tous les rôles** : le formulaire `#courses-filters` porte `hidden sm:grid` (caché sous 640 px). Le paragraphe `#courses_total` devient `flex items-center justify-between` et, si un filtre est actif, contient `link_to "Tout voir", courses_path, id: "courses_reset_mobile", class: "sm:hidden … min-h-tap"` (cible ≥ 48 px).
+- **Téléphone, tous les rôles** : le formulaire `#courses-filters` porte `hidden sm:grid` (caché sous 640 px). Le total `#courses_total` est placé dans une rangée `flex items-center justify-between` qui, si un filtre est actif, contient aussi `link_to "Tout voir", courses_path, id: "courses_reset_mobile", class: "sm:hidden … min-h-tap"` (cible ≥ 48 px).
 - Sous-titre de l'enseignant : « Les cours de %{material}, aux niveaux de vos classes. »
+- Cartes de l'enseignant : sans badge de matière (R6 : sa matière est dite une fois, par le sous-titre) ; le badge du niveau reste.
+- Le total `#courses_total` reste seul dans sa région `aria-live` ; « Tout voir » est un lien voisin, pas annoncé.
 
 ### 3.3 Fiche essentielle — lignes de l'enseignant
 
