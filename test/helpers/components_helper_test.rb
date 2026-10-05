@@ -55,6 +55,19 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "svg.size-5 > path", true, "après le bloc, l'icône est de nouveau en ligne"
   end
 
+  # Lot E4 (politique-cache) : deux blocs de la même page (pages du catalogue chargées au défilement) ne partagent aucun id.
+  test "ui_icon_sprite prefixes its symbols when asked, so that two blocks of a page never share an id" do
+    show(safe_join([ ui_icon_sprite { ui_icon("home") }, ui_icon_sprite(prefix: "courses-page-2-") { ui_icon("home") } ]))
+
+    assert_select "use[href='#icon-24-outline-home']", 1
+    assert_select "use[href='#courses-page-2-icon-24-outline-home']", 1
+    assert_select "symbol#icon-24-outline-home", 1
+    assert_select "symbol#courses-page-2-icon-24-outline-home", 1
+
+    show ui_icon_sprite { ui_icon("home") }
+    assert_select "symbol#icon-24-outline-home", 1, "le préfixe ne survit pas à son bloc"
+  end
+
   test "ui_spinner spins at the requested size" do
     show ui_spinner(size: :lg)
 

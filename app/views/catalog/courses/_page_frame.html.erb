@@ -1,0 +1,7 @@
+<%# 🌐 UI · catalog/courses/_page_frame — réponse du frame différé « courses_page_<n> » : la page n, sans layout %>
+<%# Rôle : les cartes de la page demandée et le frame de la suivante, dans le frame qui les a demandées (target _top : une carte ouvre le cours) %>
+<%# ADR  : 0076 · UDR : 0013 (amendement du 2026-10-05) %>
+<%# locals: (page:) -%>
+<%= turbo_frame_tag turbo_frame_request_id, target: "_top" do %>
+  <%= render "catalog/courses/page", page:, nested: true %>
+<% end %>
