@@ -108,6 +108,7 @@ module PerfScreens
       [ "admin_classrooms", :admin, "/school-admin/classrooms" ],
       [ "admin_classroom", :admin, "/school-admin/classrooms/#{student_classroom.public_id}" ],
       [ "admin_teachers", :admin, "/school-admin/teachers" ],
+      [ "admin_departed_students", :admin, "/school-admin/students/departed" ],
       [ "blog", :visitor, "/blog", PHONE ],
       [ "blog_page_2", :visitor, "/blog?page=2", PHONE ],
       [ "blog_article", :visitor, "/blog/#{article}", PHONE ]
