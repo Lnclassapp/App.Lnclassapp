@@ -5,6 +5,8 @@ module Queries
     # UDR-0071 §3.7 « Mes annonces » and §3.8: the announcements of their author, most recent first, 20 a page, in a
     # constant number of queries; « Terminée » is deduced from the end date, never stored (ADR-0078 §4.1). And what the
     # form of an announcement shows: the classrooms of the teacher, the school, the targets and files of an announcement.
+    # ADR-0081, UDR-0075 §3.1 and §3.3 (annonces-v2): the theme of each row, a drawing of the team as its thumbnail, and
+    # the announcement that a publication would archive, read without lock.
     class AuthoredMessagesQueryTest < ActiveSupport::TestCase
       NOW = Time.zone.local(2026, 10, 4, 12)
 
@@ -17,11 +19,13 @@ module Queries
       def rows(author = @kamate, page: 1) = @query.page(author_id: author.id, page:, now: NOW).rows
       def by_title(author = @kamate) = rows(author).index_by(&:title)
 
-      def count_queries(&)
-        count = 0
-        counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+      def count_queries(&) = sql_of(&).size
+
+      def sql_of(&)
+        statements = []
+        counter = ->(*, payload) { statements << payload[:sql] unless payload[:name] == "SCHEMA" }
         ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
-        count
+        statements
       end
 
       test "one row per announcement, with its status and the dates it shows" do
@@ -93,15 +97,19 @@ module Queries
                                      .then { [ it.page, it.pages ] }
       end
 
-      test "a constant number of queries, whatever the number of announcements and classrooms" do
+      test "a constant number of queries, whatever the number of announcements, classrooms and drawings of the team" do
         teacher = create_teacher(school: @lauriers)
         classrooms = Array.new(3) { create_classroom(school: @lauriers) }
-        create_message(author: teacher, audience: "classrooms", classrooms: classrooms.first(1))
+        create_message(author: teacher, audience: "classrooms", classrooms: classrooms.first(1),
+                       illustration: create_illustration(name: "Premier", created_by: @kamate))
         few = count_queries { rows(teacher) }
-        6.times { create_message(author: teacher, audience: "classrooms", classrooms:) }
+        6.times do |index|
+          drawing = create_illustration(name: "Dessin #{index}", created_by: @kamate) if index.even?
+          create_message(author: teacher, audience: "classrooms", classrooms:, illustration: drawing || "exam")
+        end
 
         assert_equal few, count_queries { rows(teacher) }
-        assert_equal 3, few
+        assert_equal 4, few
       end
 
       test "the classrooms a teacher may target: active, of his school, where he teaches, by level then by name" do
@@ -149,6 +157,64 @@ module Queries
         message = Repositories::Communication::MessageRepository.new.find_by_public_id(public_id: record.public_id)
 
         assert_equal bus.public_id, @query.edited(message).illustration_public_id
+      end
+
+      test "AV-07 — each row carries the theme of its announcement, for the dot of « Mes annonces »" do
+        create_message(author: @kamate, title: "Mangue", theme: "mangue")
+        create_message(author: @kamate, title: "Ciel")
+
+        assert_equal({ "Mangue" => "mangue", "Ciel" => "ciel" }, by_title.transform_values(&:theme))
+      end
+
+      test "AV-08, AV-10 — a row with a drawing of the team carries it for its thumbnail, retired or not" do
+        bus = create_illustration(name: "Bus scolaire", created_by: @kamate)
+        retired = create_illustration(name: "Ancien", created_by: @kamate, retired_at: 1.day.ago)
+        create_message(author: @kamate, title: "Bus", illustration: bus)
+        create_message(author: @kamate, title: "Ancien", illustration: retired)
+
+        drawings = by_title.values_at("Bus", "Ancien").map(&:illustration)
+        assert drawings.all?(Entities::Communication::Illustration)
+        assert_equal [ [ bus.public_id, false ], [ retired.public_id, true ] ], drawings.map { [ it.public_id, it.retired? ] }
+      end
+
+      def departing(author = @kamate) = @query.departing(author_id: author.id, now: NOW)
+
+      test "AV-06 — with 3 live announcements, the oldest is the one a publication would archive" do
+        { "Réunion parents" => 1, "Fiches chapitre 3" => 3, "Sortie au musée" => 4 }.each do |title, day|
+          create_message(author: @kamate, title:, published_at: Time.zone.local(2026, 10, day, 8))
+        end
+
+        leaving = departing
+
+        assert_equal "Réunion parents", leaving.title
+        assert_equal Orm::Message.find_by!(title: "Réunion parents").public_id, leaving.public_id
+      end
+
+      test "AV-06 — with 2 live announcements, nothing would be archived" do
+        [ 1, 3 ].each { create_message(author: @kamate, published_at: Time.zone.local(2026, 10, it, 8)) }
+
+        assert_nil departing
+      end
+
+      test "AV-04, AV-06 — only the live announcements of the author count: not a draft, a scheduled, an archived, a withdrawn, an ended one" do
+        [ 1, 3 ].each { create_message(author: @kamate, published_at: Time.zone.local(2026, 10, it, 8)) }
+        create_message(author: @kamate, status: "draft", published_at: nil)
+        create_message(author: @kamate, status: "scheduled", published_at: Time.zone.local(2026, 10, 5, 8))
+        create_message(author: @kamate, status: "archived")
+        create_message(author: @kamate, status: "withdrawn")
+        create_message(author: @kamate, published_at: Time.zone.local(2026, 9, 1, 8), ends_at: NOW)
+        3.times { create_message(author: create_school_admin(school: @lauriers), published_at: Time.zone.local(2026, 9, 20, 8)) }
+
+        assert_nil departing
+      end
+
+      test "AV-06 — the announcement that would leave is read in one query, without lock: the publication counts again under it" do
+        3.times { create_message(author: @kamate, published_at: Time.zone.local(2026, 10, it + 1, 8)) }
+
+        statements = sql_of { departing }
+
+        assert_equal 1, statements.size
+        assert_no_match(/FOR UPDATE|FOR SHARE/i, statements.join)
       end
     end
   end

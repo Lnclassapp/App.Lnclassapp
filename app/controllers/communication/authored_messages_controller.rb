@@ -1,11 +1,11 @@
 # 🌐 DELIVERY · Communication::AuthoredMessagesController
-# Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant ; toast des archivées
+# Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant ; encadré et toast du plafond
 # ADR  : 0026, 0028, 0045, 0078, 0081 · UDR : 0071 (§3.7, §3.8), 0075 (§3.3)
 module Communication
   class AuthoredMessagesController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team
 
-    helper_method :form_school, :classroom_choices, :edited, :announcement_date
+    helper_method :form_school, :classroom_choices, :edited, :announcement_date, :library_illustrations, :departing
 
     # Aucune date de fin : elle est calculée (ADR-0081 §4.1), un visible_until forgé n'est pas lu.
     PERMITTED = [ :title, :body, :scope, :school_public_id, :audience, :theme, :illustration, :remove_image, :remove_audio,
@@ -98,6 +98,17 @@ module Communication
     end
 
     def classroom_choices = query.classroom_choices(teacher_id: current_actor.user_id, school_id: current_actor.school_id)
+
+    # UDR-0075 §3.3 : les dessins de l'équipe offerts, après les 8 de base, le plus ancien d'abord.
+    def library_illustrations = illustrations.available
+
+    # UDR-0075 §3.3 : l'annonce qu'une parution archiverait, pour l'encadré du plafond ; jamais en modification d'une
+    # annonce déjà publiée, qui n'est pas une parution. → AuthoredMessagesQuery::Departing | nil
+    def departing
+      return if @message&.status == "published"
+
+      query.departing(author_id: current_actor.user_id, now: Time.zone.now)
+    end
     def edited = @edited ||= query.edited(@message)
 
     def query = @query ||= Queries::Communication::AuthoredMessagesQuery.new

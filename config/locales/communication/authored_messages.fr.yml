@@ -77,6 +77,8 @@ fr:
         archive_title: "Archiver cette annonce ?"
         archive_text: "Elle disparaîtra pour tous ses destinataires et ne pourra plus être publiée."
         cancel: "Annuler"
+        # UDR-0075 §3.1 : la pastille du thème, pour un lecteur d'écran
+        theme: "Thème : %{theme}"
         recipients: "%{place} · %{audience}"
         line: "%{recipients} · %{dates}"
         dates:
@@ -101,9 +103,19 @@ fr:
           body: "140 caractères au plus. Les détails peuvent aller dans l'audio."
           classrooms: "Les élèves de ces classes la verront."
           image: "PNG, JPEG ou WebP, 2 Mo au plus. Elle remplace l'illustration."
-          audio: "MP3 ou M4A, 10 Mo au plus."
+          audio: "MP3 ou M4A, 10 Mo au plus. Un enregistrement de téléphone convient."
           published_at: "Laissez vide pour publier dès l'envoi."
         lasts: "L'annonce reste visible 30 jours."
+        # UDR-0075 §3.3 : le décompte (contrôleur communication--character-count de l'UDR-0067) ; %{count} et %{max}
+        # de near et full sont remplacés par le contrôleur
+        counter:
+          count: "%{count} / %{max}"
+          near: "Il reste %{count} caractères."
+          full: "Limite atteinte : %{max} caractères."
+        # UDR-0075 §3.3 : l'encadré du plafond
+        cap:
+          notice: "Tu as déjà %{count} annonces en ligne. En publiant, « %{title} » sera archivée."
+          scheduled: "Programmée, elle archivera à sa parution la plus ancienne alors en ligne."
         cancel: "Annuler"
         save_draft: "Enregistrer le brouillon"
         publish: "Publier"

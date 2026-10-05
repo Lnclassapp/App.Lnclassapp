@@ -179,6 +179,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
       assert_select "input[type=file][name='announcement[image]'][accept='image/png,image/jpeg,image/webp']"
       assert_select "#announcement_image_hint", "PNG, JPEG ou WebP, 2 Mo au plus. Elle remplace l'illustration."
       assert_select "input[type=file][name='announcement[audio]'][accept='audio/mpeg,audio/mp4,.mp3,.m4a']"
+      assert_select "#announcement_audio_hint", "MP3 ou M4A, 10 Mo au plus. Un enregistrement de téléphone convient."
       assert_select "input[type=datetime-local][name='announcement[published_at]']"
       assert_select "#announcement_published_at_hint", "Laissez vide pour publier dès l'envoi."
       assert_select "a[href='#{my_announcements_path}']", "Annuler"
@@ -576,5 +577,172 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_response :unprocessable_entity
     assert_select "fieldset p.text-error", "Choisissez une illustration de la bibliothèque."
     assert_equal 0, Orm::Message.count
+  end
+
+  test "AV-01 — the title and the text show their count, rendered by the server, for the counter of UDR-0067" do
+    message = create_message(author: @kamate, title: "Réunion de parents", body: "a" * 97, school: @lauriers)
+    sign_in_as @kamate
+
+    get edit_announcement_path(message.public_id)
+
+    { title: [ 60, "18 / 60" ], body: [ 140, "97 / 140" ] }.each do |field, (max, count)|
+      assert_select "div[data-controller='communication--character-count'][data-communication--character-count-max-value='#{max}']" \
+                    "[data-communication--character-count-near-value='Il reste %{count} caractères.']" \
+                    "[data-communication--character-count-full-value='Limite atteinte : %{max} caractères.']" do
+        assert_select "#announcement_#{field}[maxlength='#{max}'][data-communication--character-count-target=input]" \
+                      "[data-action='input->communication--character-count#update']"
+        assert_select "p.mt-1.text-right.text-xs.tabular-nums.text-mute[data-communication--character-count-target=count]", count
+        assert_select "span.sr-only[aria-live=polite][data-communication--character-count-target=status]", ""
+      end
+    end
+  end
+
+  test "AV-01 — the form of a new announcement counts from zero" do
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "[data-communication--character-count-target=count]", count: 2
+    assert_select "div:has(> div > #announcement_title) > [data-communication--character-count-target=count]", "0 / 60"
+    assert_select "div:has(> div > #announcement_body) > [data-communication--character-count-target=count]", "0 / 140"
+  end
+
+  test "AV-07 — ten themes in their order, each named, « Ciel » checked by default, before the illustration" do
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "fieldset[data-controller='communication--theme-preview'][data-communication--theme-preview-illustrations-value='announcement-illustrations']" do
+      assert_select "legend", "Thème"
+      assert_select "div.grid.grid-cols-5.gap-2 > label", count: 10
+      assert_select "label.min-h-tap.has-checked\\:bg-mist.has-checked\\:font-bold.has-focus-visible\\:outline-2", count: 10
+      Entities::Communication::Message::THEMES.zip(%w[Ciel Lagune Menthe Citron Mangue Corail Hibiscus Lavande Indigo Nuit])
+                                              .each_with_index do |(key, label), index|
+        assert_select "label:nth-child(#{index + 1})" do
+          assert_select "input.sr-only[type=radio][name='announcement[theme]'][value=#{key}][data-action='change->communication--theme-preview#preview']"
+          assert_select "span.grid.size-10.rounded-full.bg-brand-soft.ring-1[data-announcement-theme=#{key}] span.size-3.rounded-full.bg-brand-strong"
+          assert_select "span", text: label
+        end
+      end
+      assert_select "input[name='announcement[theme]'][checked]", count: 1
+      assert_select "input[name='announcement[theme]'][value=ciel][checked]"
+    end
+    assert_select "fieldset[data-controller='communication--theme-preview'] + fieldset#announcement-illustrations"
+    assert_select "fieldset#announcement-illustrations[data-announcement-theme]", 0, "sans JavaScript, l'aperçu reste en « Ciel »"
+  end
+
+  test "AV-07 — the theme of an announcement is checked in its form, and written when it is modified" do
+    message = create_message(author: @kamate, school: @lauriers, theme: "mangue")
+    sign_in_as @kamate
+
+    get edit_announcement_path(message.public_id)
+    assert_select "input[name='announcement[theme]'][value=mangue][checked]"
+
+    patch announcement_path(message.public_id), params: { announcement: { title: "Fête", body: "Samedi.", illustration: "info",
+                                                                          audience: "students", theme: "nuit" }, commit: "publish" }
+    assert_equal "nuit", message.reload.theme
+  end
+
+  test "AV-07 — an unknown theme sent by a forged form is refused in 422, the error under « Thème »" do
+    sign_in_as @kamate
+
+    publish(audience: "students", theme: "rose")
+
+    assert_response :unprocessable_entity
+    assert_select "fieldset[data-controller='communication--theme-preview'] p.text-error", "Choisissez un thème de la liste."
+    assert_equal 0, Orm::Message.count
+  end
+
+  test "AV-08 — the drawings of the team follow the 8 base ones, by date of addition; their value is their public_id" do
+    bus = create_illustration(name: "Bus scolaire", created_by: @fatou, created_at: 1.day.ago)
+    cantine = create_illustration(name: "Cantine", created_by: @fatou, created_at: 2.days.ago)
+    create_illustration(name: "Retirée", created_by: @fatou, retired_at: 1.hour.ago)
+    sign_in_as @kouassi
+
+    get new_announcement_path
+
+    assert_select "fieldset#announcement-illustrations div.grid.grid-cols-4.gap-2" do
+      assert_select "label", count: 10
+      assert_select "label:nth-child(9) input[type=radio][name='announcement[illustration]'][value='#{cantine.public_id}']"
+      assert_select "label:nth-child(9) span", "Cantine"
+      assert_select "label:nth-child(10) input[value='#{bus.public_id}']"
+      assert_select "label:nth-child(10) svg.size-12.fill-brand-strong[aria-hidden=true] rect"
+      assert_select "label", text: "Retirée", count: 0
+    end
+  end
+
+  test "AV-08 — an announcement published with a drawing of the team keeps it: checked in its form, shown in its row" do
+    bus = create_illustration(name: "Bus scolaire", created_by: @fatou)
+    sign_in_as @kamate
+
+    publish(audience: "students", illustration: bus.public_id)
+    assert_equal [ nil, bus.id ], created.values_at(:illustration, :illustration_id)
+
+    get edit_announcement_path(created.public_id)
+    assert_select "input[name='announcement[illustration]'][value='#{bus.public_id}'][checked]"
+    get my_announcements_path
+    assert_select "#my_announcement_#{created.public_id} span.size-10 svg.size-7.fill-brand-strong"
+  end
+
+  test "AV-07 — each row of « Mes annonces » has the dot of its theme, named for a screen reader, before its title" do
+    message = create_message(author: @kamate, title: "Sortie au musée", school: @lauriers, theme: "mangue")
+    sign_in_as @kamate
+
+    get my_announcements_path
+
+    assert_select "#my_announcement_#{message.public_id}" do
+      assert_select "span.size-3.rounded-full.bg-brand-soft.ring-1[data-announcement-theme=mangue] + p.font-medium", "Sortie au musée"
+      assert_select "span[data-announcement-theme=mangue] span.sr-only", "Thème : Mangue"
+    end
+  end
+
+  test "AV-06 — with 3 live announcements, the form says which one publishing archives, just before its buttons" do
+    three_live
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "div#announcement-cap-notice.rounded-ln.bg-info-soft.p-4.text-sm.text-info[role=status]" do
+      assert_select "p", "Tu as déjà 3 annonces en ligne. En publiant, « Réunion parents » sera archivée."
+      assert_select "p.mt-1.text-xs", "Programmée, elle archivera à sa parution la plus ancienne alors en ligne."
+    end
+    assert_select "#announcement-cap-notice + div.flex.flex-wrap.justify-end button[value=publish]"
+  end
+
+  test "AV-06 — with 2 live announcements, there is no notice" do
+    three_live.first.update!(status: "archived")
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "#announcement-cap-notice", 0
+  end
+
+  test "AV-06 — the notice in the form of a draft or a scheduled announcement, never in that of a published one" do
+    live = three_live
+    draft = create_message(author: @kamate, status: "draft", published_at: nil, school: @lauriers)
+    scheduled = create_message(author: @kamate, status: "scheduled", published_at: Time.zone.local(2026, 10, 10, 8), school: @lauriers)
+    sign_in_as @kamate
+
+    [ draft, scheduled ].each do |message|
+      get edit_announcement_path(message.public_id)
+      assert_select "#announcement-cap-notice", text: /« Réunion parents » sera archivée/
+    end
+    get edit_announcement_path(live.last.public_id)
+    assert_select "#announcement-cap-notice", 0
+    patch announcement_path(live.last.public_id), params: { announcement: { title: "", body: "Jeudi.", illustration: "info",
+                                                                            audience: "students" }, commit: "publish" }
+    assert_response :unprocessable_entity
+    assert_select "#announcement-cap-notice", 0
+  end
+
+  test "AV-06 — a refused form shows the notice again" do
+    three_live
+    sign_in_as @kamate
+
+    publish(audience: "students", title: "")
+
+    assert_response :unprocessable_entity
+    assert_select "#announcement-cap-notice", text: /« Réunion parents »/
   end
 end
