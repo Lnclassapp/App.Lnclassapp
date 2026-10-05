@@ -10,7 +10,7 @@ Lot 0 — bench + non-régression        ✅
   ↓
 Lot 1 — agréger par (classe, élève) avant la jointure aux élèves présents   ✅ ea032253
   ↓   (si p95 ≥ 100 ms)
-Lot 2 — compter les élèves présents dans la même requête que les totaux     ✅ (gain gardé ; p95 < 100 ms non atteint)
+Lot 2 — compter les élèves présents dans la même requête que les totaux     retiré à la fusion de #167 (requête des élèves présents réécrite par #167)
 ```
 
 ## Protocole
@@ -68,9 +68,9 @@ Le sous-select `handed` rendait une ligne par (classe, devoir, élève) : 22 792
 - [x] Chaque levier sans gain mesuré a été **annulé**, pas conservé (1a remplacé par 1b ; vue, Arel, cache, dénormalisation écartés)
 - [x] Bench après : même machine, même volume, même méthode, ≥ 3 exécutions, médiane
 - [x] Tableau `Mesures` complété (Avant / Cible / Après) — p95 < 100 ms **non atteint**, dit tel quel
-- [ ] **Challenger a relancé le bench lui-même** et obtenu le gain annoncé
+- [x] **Challenger a relancé le bench lui-même** et obtenu le gain annoncé (lots 1 et 2, sur `d65938c8` ; [journal](journal.md#rapport-du-challenger))
 - [x] Résultat fonctionnel strictement identique (aucun écran, aucune sortie modifiés) — 35 035 aperçus et pages, octet pour octet
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert (4 192 tests, couverture 100 %)
 - [x] `journal.md` : leviers abandonnés et pourquoi — c'est la partie la plus réutilisable
 
 > **Clause de rejet** : le chantier ne se clôt pas sans mesure après, au même volume, par la même méthode, ≥ 3 exécutions, médiane. Le challenger relance lui-même le bench ; un gain qu'il ne retrouve pas n'est pas prouvé.
