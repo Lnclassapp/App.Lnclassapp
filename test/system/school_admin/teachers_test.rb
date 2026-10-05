@@ -3,6 +3,8 @@ require "application_system_test_case"
 # GD-14 (ADR-0071 §4.3, UDR-0056 §3.3): on « Enseignants », the direction opens the ⋮ menu of a teacher's row, chooses
 # « Retirer de l'établissement » and confirms in the modal; the row goes without a page reload and the toast says how many
 # assignments were archived. On a desktop, then on a 390 px phone without the page scrolling sideways.
+# Lever 3b of ecrans-direction-lents (UDR-0056, amendment of 2026-10-04): the confirmation is no longer in the row, it is
+# loaded on demand in the shared « modal » frame; the same title, text, buttons and DELETE.
 class SchoolAdmin::TeachersTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 
@@ -29,6 +31,24 @@ class SchoolAdmin::TeachersTest < ApplicationSystemTestCase
 
       assert_withdrawal
     end
+  end
+
+  # Lever 3b: « Annuler » closes the confirmation and empties the frame; the same entry loads it again.
+  test "GD-14: cancelling the confirmation keeps the teacher, and the ⋮ entry loads it again" do
+    sign_in_as @admin
+    assert_selector "main#main", wait: SIGN_IN_WAIT
+    visit school_admin_teachers_path
+
+    assert_no_page_reload do
+      2.times do
+        click_menu_action("#teacher_#{@teacher.public_id}", t("index.remove"))
+        within("turbo-frame#modal dialog[open]") { click_on t("removal.cancel") }
+        assert_no_selector "dialog[open]"
+        assert_selector "turbo-frame#modal:empty", visible: :all
+      end
+    end
+    assert_selector "#teacher_#{@teacher.public_id}", text: "Awa Koné"
+    assert Orm::TeacherSchool.exists?(teacher_id: @teacher.id)
   end
 
   # Challenge empirique (2026-10-01) : le tableau défile dans sa carte, mais le menu ⋮ reste visible sans le faire glisser.
@@ -60,9 +80,9 @@ class SchoolAdmin::TeachersTest < ApplicationSystemTestCase
     assert on_top?(item), "« #{t('index.remove')} » est masqué par la ligne suivante"
 
     item.click
-    within("dialog[open]") do
-      assert_selector "h2", text: t("index.remove_title", name: "Awa Koné")
-      click_on t("index.cancel")
+    within("turbo-frame#modal dialog[open]") do
+      assert_selector "h2", text: t("removal.title", name: "Awa Koné")
+      click_on t("removal.cancel")
     end
     assert_no_selector "dialog[open]"
     assert Orm::TeacherSchool.exists?(teacher_id: @teacher.id)
@@ -89,11 +109,12 @@ class SchoolAdmin::TeachersTest < ApplicationSystemTestCase
 
     assert_no_page_reload do
       click_menu_action("#teacher_#{@teacher.public_id}", t("index.remove"))
-      within("dialog[open]") do
-        assert_selector "h2", text: t("index.remove_title", name: "Awa Koné")
-        assert_text t("index.remove_body", first_name: "Awa")
+      within("turbo-frame#modal dialog[open]") do
+        assert_selector "h2", text: t("removal.title", name: "Awa Koné")
+        assert_text t("removal.body", first_name: "Awa")
+        assert page.evaluate_script("document.activeElement.textContent.trim()") == t("removal.cancel"), "le focus est sur « Annuler »"
         assert_no_horizontal_scroll
-        click_on t("index.confirm")
+        click_on t("removal.confirm")
       end
 
       assert_toast t("destroy.detached", name: "Awa Koné", count: 2)

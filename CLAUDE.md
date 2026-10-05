@@ -7,6 +7,12 @@ Lnclass est une plateforme éducative (LMS) en Rails 8, construite en **architec
 
 ---
 
+## Communication avec le porteur
+
+**Réponses courtes.** Pendant le travail, ne montrer que l'essentiel : le résultat, ce qui bloque, ce que le porteur doit décider. Pas de récit des étapes ni des détails techniques, sauf s'il les demande.
+
+---
+
 ## Avant de coder
 
 **Tout travail suit [`docs/workflows/README.md`](docs/workflows/README.md)** — c'est le seul processus valide, en 5 phases : Cadrer → Décider → Planifier → Exécuter → Prouver.

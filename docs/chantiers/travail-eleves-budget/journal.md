@@ -23,6 +23,7 @@ L'estimateur prévoit **1 ligne** à la sortie de la jointure aux adhésions (co
 | 2026-10-05 | La valeur avant est celle du jour (156,9 ms p95), pas les 230 ms de `ecrans-direction-lents`. | Même code, même base : la machine était plus chargée le 2026-10-04. Chaque levier se compare à `Develop` rejoué dans la même série. | Non |
 | 2026-10-05 | `COUNT(*)` remplace `COUNT(DISTINCT handed.student_id)`. | Une ligne `handed` par (classe, élève), et l'index unique `(classroom_id, student_id)` de `classroom_students` : une seule adhésion par élève et par classe. | Non |
 | 2026-10-05 | Non-régression par comparaison complète, pas par échantillon : les 35 035 aperçus et pages de classe du jeu, avant et après. | Une requête d'agrégat réécrite se trompe sur les cas rares (deux sessions d'un devoir, remédiation, départ) ; le jeu de l'ADR-0067 les contient tous. | Non |
+| 2026-10-05 | Merge de `Develop` (#167) : le levier 2 (élèves présents comptés dans la requête des totaux, `LEFT JOIN`) est abandonné ; le levier 1 reste. | `Develop` compte déjà, en une lecture (`present_counts`, `GROUPING SETS`), l'effectif de chaque classe et les élèves distincts de l'établissement dont l'accueil a besoin : la requête que le levier 2 retirait n'existe plus. Requêtes de l'écran : celles de `Develop`. | Non |
 
 ## Leviers essayés
 

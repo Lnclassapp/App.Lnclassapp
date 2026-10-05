@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# Lot R of fonctions-espace-eleve (ADR-0036, memo Q19): from « Travail des élèves », the direction opens « Anciens élèves »
+# Lot R of fonctions-espace-eleve (ADR-0036, memo Q19): from its home, the direction opens « Anciens élèves »
 # and finds, by typing a name, a former student and the results he obtained in its school, without a page reload.
 class SchoolAdmin::DepartedStudentsTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
@@ -32,7 +32,7 @@ class SchoolAdmin::DepartedStudentsTest < ApplicationSystemTestCase
       assert_selector "main#main", wait: SIGN_IN_WAIT
 
       assert_no_page_reload do
-        click_on I18n.t("school_admin.classrooms.index.departed")
+        click_on I18n.t("school_admin.classrooms.school_card.links.departed")
         assert_current_path school_admin_departed_students_path
         assert_selector "h1", text: t("title")
       end

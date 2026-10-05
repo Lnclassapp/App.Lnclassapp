@@ -96,7 +96,9 @@ Une fois D1 corrigé, le premier test ne paiera plus son attente de 2 s, et le f
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-05 (fusion dans `Develop`) |
+| **PR** | [#168](https://github.com/Lnclassapp/App.Lnclassapp/pull/168) |
+| **ADR produits** | aucun (règles du signe : ADR-0079) |
+| **UDR produits** | [UDR-0073](../../decisions/udr/0073-progres-de-l-eleve-sur-son-resultat.md) (phrase de progrès sur le résultat de session ; amende l'UDR-0023) |
+| **Preuve** | Suite complète, couverture 100 % lignes et branches ; `test/system/assessment/student_progress_test.rb` dans Chromium 141 ; challenger empirique (phase 5) : D1 (remédiation absente de l'histoire) corrigé — la remédiation compte ; rubocop, brakeman au vert |
+| **Chantiers de suivi** | Après usage : progrès sur l'accueil ou la fiche (memo, questions ouvertes) |

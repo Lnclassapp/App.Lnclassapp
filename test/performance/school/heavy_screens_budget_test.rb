@@ -34,7 +34,7 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
   end
 
   # Every budget is played in one test: the dataset is seeded once.
-  test "the dashboard, filtered or not, its search and « Travail des élèves » read within their budgets" do
+  test "the dashboard, filtered or not, its search and the direction's home read within their budgets" do
     today = Date.current
     # La plus grande DRENA : la première ligne du tableau « Par DRENA », triée par élèves.
     largest = dashboard("7d", today).drenas.first.public_id
@@ -47,11 +47,13 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
       "pilotage filtré, plus grande DRENA" => [ PILOTAGE_MS, -> { filtered_dashboard("7d", today, largest) } ],
       "pilotage filtré année" => [ PILOTAGE_MS, -> { filtered_dashboard("year", today, largest) } ],
       "recherche « kou »" => [ SCREEN_MS, -> { Queries::Identity::AccountSearchQuery.new.call(term: "kou") } ],
-      "Travail des élèves" => [ SCREEN_MS, -> { Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus) } ]
+      # UDR-0074 §3.2 : l'accueil de la direction (carte « Établissement » et « Niveaux ») remplace « Travail des élèves ».
+      # Gardé 5 minutes (ADR-0065, amendement du 2026-10-04) : le budget porte sur l'entrée chaude, comme le pilotage année.
+      "Accueil" => [ SCREEN_MS, -> { Queries::School::DirectionHomeQuery.new.call(school_id: @focus) } ]
     }
 
     assert_operator Queries::Identity::AccountSearchQuery.new.call(term: "kou").total_count, :>, 1_000, "the worst case is measured"
-    assert_equal 77, Queries::School::StudentWorkQuery.new.classrooms(school_id: @focus).classrooms.size
+    assert_equal 77, Queries::School::DirectionHomeQuery.new.call(school_id: @focus).figures.classrooms
     assert_operator filtered_dashboard("7d", today, largest).total, :>, 1, "the establishments of the largest DRENA are read"
 
     measured = budgets.transform_values { |budget, read| [ budget, p95_ms(&read) ] }
@@ -62,6 +64,9 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
                 "pilotage année", cold)
     cold_filtered = p95_ms { filtered_dashboard("year", today, largest, cache: ActiveSupport::Cache::NullStore.new) }
     puts format("\n[PERF] %-20s p95 %6.1f ms (à froid ; noté, non budgété)", "pilotage filtré année", cold_filtered)
+    cold_home = p95_ms { Queries::School::DirectionHomeQuery.new(cache: ActiveSupport::Cache::NullStore.new).call(school_id: @focus) }
+    puts format("\n[PERF] %-20s p95 %6.1f ms (à froid, une lecture toutes les 5 minutes par établissement ; noté, non budgété)",
+                "Accueil", cold_home)
     measured.each { |name, (budget, p95)| assert_operator p95, :<, budget, name }
   end
 
