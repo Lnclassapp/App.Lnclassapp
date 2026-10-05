@@ -70,7 +70,7 @@ Et la saisie reste bornée à 60 et 140 caractères (maxlength) ; sans JavaScrip
 # AV-02 — Plus de date de fin à saisir
 Étant donné le formulaire d'une annonce, nouvelle ou en modification
 Alors il n'a pas de champ « Visible jusqu'au »
-Et une annonce publiée le 6 octobre se termine le 5 novembre à 00:00, soit 30 jours après
+Et une annonce publiée le 6 octobre à 10:00 se termine le 5 novembre à 10:00, 30 jours après (ADR-0081 §4.1)
 Et une annonce programmée prend sa fin 30 jours après sa date de parution
 Et la modification d'une annonce publiée ne change pas sa date de fin
 Et un paramètre visible_until forgé est ignoré
