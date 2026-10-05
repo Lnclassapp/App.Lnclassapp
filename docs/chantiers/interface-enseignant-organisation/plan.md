@@ -63,12 +63,12 @@ Lot 0 — SOCLE (ordre de l'accueil, locales)
 
 - **Couche**       : delivery + ui
 - **Fichiers**     : `app/views/classroom/assignments/_toggle.html.erb` · `create.turbo_stream.erb` · `archive.turbo_stream.erb` · `new.html.erb`
-                     `app/controllers/classroom/assignments_controller.rb`
                      `app/views/catalog/essentials/_exercise_progress.html.erb`
                      `app/views/assessment/exercises/show.html.erb`
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/controllers/catalog/essentials_controller_test.rb`
                      `test/controllers/classroom/assignments_controller_test.rb`
+                     `test/controllers/assessment/exercises_controller_test.rb` · `test/system/classroom/catalog_assignment_test.rb`
 - **Done quand**   : sur la fiche, une classe tient sur une ligne ; assigner et retirer remplacent la ligne entière, échéance comprise
 
 ---

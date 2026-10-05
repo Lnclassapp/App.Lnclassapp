@@ -41,18 +41,15 @@
   <% if @targets %>
     <%= ui_card title: t(".assign_title"), icon: "user-group", id: "exercise_assign" do %>
       <% if @targets.classrooms.any? %>
-        <ul class="space-y-2" aria-label="<%= t(".assign_targets", title: exercise.title) %>">
+        <%# UDR-0077 §3.3 : la ligne compacte de la fiche, une par classe. %>
+        <ul class="-mx-1 divide-y divide-line rounded-ln border border-line" aria-label="<%= t(".assign_targets", title: exercise.title) %>">
           <% @targets.classrooms.each do |target| %>
             <% state = @targets.states[[ target.public_id, exercise.public_id ]] %>
-            <li class="flex flex-wrap items-center justify-between gap-3">
-              <span class="text-sm font-medium text-ink"><%= target.name %></span>
-              <%# Trop large pour la ligne (« Assigné · Pour … · Retirer » à 375 px), la bascule passe dessous et s'y replie. %>
-              <div class="max-w-full">
-                <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
-                           assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
-                           assignment_public_id: state&.assignment_public_id, due_on: state&.due_on,
-                           needs_session_days: target.needs_session_days %>
-              </div>
+            <li>
+              <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
+                         assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
+                         assignment_public_id: state&.assignment_public_id, due_on: state&.due_on,
+                         needs_session_days: target.needs_session_days, compact: true %>
             </li>
           <% end %>
         </ul>
