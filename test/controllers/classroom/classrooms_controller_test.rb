@@ -99,13 +99,17 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{awa.public_id}", text: /85 %/
     assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']",
                   text: I18n.t("#{scope}.roster.see_result")
-    assert_select "#student_#{awa.public_id} form[method=post][action='#{account_pin_recovery_codes_path(awa.public_id)}']" \
-                  "[data-turbo-frame=_top] button[type=submit]", text: I18n.t("#{scope}.roster.issue_code")
+    # CA-8 (UDR-0077 §3.4) : le code de récupération est une entrée du menu ⋮ de la ligne, qui nomme l'élève.
+    assert_select "#student_#{awa.public_id} button[aria-haspopup=menu][aria-controls='student-actions-#{awa.public_id}'][aria-label=?]",
+                  I18n.t("#{scope}.roster.actions_label", name: "Awa Bamba")
+    assert_select "#student-actions-#{awa.public_id}[role=menu] a[role=menuitem][href='#{account_pin_recovery_codes_path(awa.public_id)}']" \
+                  "[data-turbo-method=post][data-turbo-frame=_top]", text: I18n.t("#{scope}.roster.issue_code")
+    assert_select "#classroom_roster form[action='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
     assert_select "#classroom_roster", text: /#{I18n.t("#{scope}.roster.no_score")}/
     assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
 
-  test "jours de séance renseignés : « Vos jours de séance : lundi, jeudi » et « Modifier » dans le frame modal" do
+  test "jours de séance renseignés : « Vos jours de séance : lundi, jeudi » et « Modifier » dans le menu ⋮, vers le frame modal" do
     [ 4, 1 ].each { Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: it) }
     sign_in_as @teacher
 
@@ -114,8 +118,12 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#classroom_session_days" do
       assert_select "h2", text: I18n.t("#{scope}.session_days.title")
       assert_select "p", text: "Vos jours de séance : lundi, jeudi"
-      assert_select "a[href='#{edit_classroom_session_days_path(@classroom.public_id)}'][data-turbo-frame=modal]",
-                    text: I18n.t("#{scope}.session_days.edit")
+      # UDR-0077 §3.4 : « Modifier » est une entrée du menu ⋮ du bloc, plus un bouton visible.
+      assert_select "button[aria-haspopup=menu][aria-controls=classroom-session-days-menu][aria-label=?]",
+                    I18n.t("#{scope}.session_days.menu")
+      assert_select "#classroom-session-days-menu[role=menu] a[role=menuitem][data-turbo-frame=modal]" \
+                    "[href='#{edit_classroom_session_days_path(@classroom.public_id)}']", text: I18n.t("#{scope}.session_days.edit")
+      assert_select "a.inline-flex[href='#{edit_classroom_session_days_path(@classroom.public_id)}']", 0
     end
   end
 
@@ -378,6 +386,33 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Fonctions|Autre niveau/, response.body)
   end
 
+  # CA-8 (UDR-0077 §3.4) : cours en bande, exercices assignés (3 puis « Voir plus »), élèves — dans cet ordre.
+  test "CA-8 : l'ordre de la page — cours en bande, quatre exercices dont trois visibles, puis les élèves" do
+    svt = create_material(name: "SVT", category: "science")
+    level = create_level(name: "Tle")
+    classroom = create_classroom(school: @school, level:)
+    teacher = create_teacher(school: @school, material: svt, classrooms: [ classroom ])
+    courses = [ "Génétique", "Écologie" ].map { create_course(level:, material: svt, name: it) }
+    4.times { create_assignment(classroom:, assignable: create_exercise(essential: create_essential(course: courses.first)), by: teacher) }
+    create_student(classroom:)
+    sign_in_as teacher
+
+    get classroom_path(classroom.public_id)
+
+    assert_equal %w[classroom_courses assigned_exercises classroom_roster],
+                 css_select("#classroom_courses, #assigned_exercises, #classroom_roster").map { it["id"] }
+    assert_select "section#classroom_courses.min-w-0 [data-controller='communication--carousel']" do
+      assert_select "ul.overflow-x-auto.snap-x[data-communication--carousel-target=track][aria-label=?] > li.basis-3\\/4",
+                    I18n.t("#{scope}.courses.title"), count: 2
+      assert_select "[data-communication--carousel-target=pager][aria-hidden=true] [data-communication--carousel-target=dot]", 2
+    end
+    assert_select "section#assigned_exercises[data-controller=reveal]" do
+      assert_select "li[id^='assignment_'][data-reveal-target=item]", 4
+      assert_select "li[id^='assignment_'][hidden]", 1
+      assert_select "button[data-reveal-target=button]", text: /Voir plus/
+    end
+  end
+
   test "bloc « Cours » sans cours publié : l'état vide" do
     sign_in_as @teacher
 
@@ -486,6 +521,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.archived")}/
     assert_select "#student_#{student.public_id}", 1
     assert_select "#classroom_roster_list form", 0
+    assert_select "#classroom_roster_list [role=menu]", 0
   end
 
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do
