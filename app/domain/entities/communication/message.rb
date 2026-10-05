@@ -41,9 +41,6 @@ module Entities
     Message::BODY_MAX = 140
     # Le plus grand côté d'une image jointe, en pixels : une photo de téléphone (4032 px) passe (ADR-0060).
     Message::IMAGE_MAX_SIDE = 4096
-    # Retirées au Lot E d'annonces-v2 : la fin n'est plus choisie (ADR-0081 §4.1).
-    Message::DEFAULT_DURATION = 30.days
-    Message::MAX_DURATION = 90.days
     # ADR-0081 §4.2, UDR-0075 §3.1 : la liste fermée des thèmes, dans cet ordre ; libellés communication.themes.<clé>.
     Message::THEMES = %w[ciel lagune menthe citron mangue corail hibiscus lavande indigo nuit].freeze
     Message::DEFAULT_THEME = "ciel"

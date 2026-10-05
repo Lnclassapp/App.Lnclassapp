@@ -58,8 +58,8 @@ module Entities
         assert_equal [ 60, 140 ], [ Message::TITLE_MAX, Message::BODY_MAX ]
       end
 
-      test "AN-08 — une annonce dure 30 jours par défaut, 90 au plus" do
-        assert_equal [ 30.days, 90.days ], [ Message::DEFAULT_DURATION, Message::MAX_DURATION ]
+      test "AV-02 — la fin n'est plus choisie : ni durée par défaut, ni durée maximale, seulement DURATION (ADR-0081 §4.1)" do
+        assert_equal [ false, false ], %i[DEFAULT_DURATION MAX_DURATION].map { Message.const_defined?(it, false) }
       end
 
       test "une annonce archivée ou retirée est figée ; brouillon, programmée et publiée ne le sont pas" do
