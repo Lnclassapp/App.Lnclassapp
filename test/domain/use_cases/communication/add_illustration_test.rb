@@ -16,23 +16,34 @@ module UseCases
       }.freeze
       FULL = "La bibliothèque compte déjà 50 illustrations : retirez-en une avant d'en ajouter."
 
-      # active : le nombre d'illustrations encore proposées (available), celles écrites ici comprises.
+      # active : le nombre d'illustrations encore proposées (available), celles écrites ici comprises ; added_meanwhile :
+      # celles qu'un autre ajout aura écrites quand le verrou de la bibliothèque est obtenu ; calls : l'ordre des appels.
       class FakeIllustrations
         include Ports::Communication::IllustrationRepositoryPort
 
-        attr_reader :created
-        attr_writer :active
+        attr_reader :created, :calls
+        attr_writer :active, :added_meanwhile
 
         def initialize
           @created = []
           @active = 0
+          @added_meanwhile = 0
+          @calls = []
+        end
+
+        def lock_library
+          @calls << :lock
+          @active += @added_meanwhile
+          true
         end
 
         def available
+          @calls << :count
           Array.new(@active + @created.size) { Illustration.new(name: "Dessin", view_box: "0 0 64 64", shapes: SHAPES, created_by_id: 1) }
         end
 
         def create(illustration:)
+          @calls << :create
           @created << illustration
           illustration.with(id: @created.size, public_id: "ill0000000000#{@created.size}")
         end
@@ -172,6 +183,26 @@ module UseCases
         assert_equal 0, @transaction.calls
       end
 
+      # Phase 5 (F3) : l'ordre des appels seulement ; le verrou lui-même est prouvé sur deux connexions, plus bas.
+      test "le plafond est recompté sous le verrou de la bibliothèque, dans la transaction : un ajout fait entre-temps le remplit" do
+        @illustrations.active = Illustration::LIBRARY_CAP - 1
+        @illustrations.added_meanwhile = 1
+
+        result = add(Input.new(name: "Bus", file: svg))
+
+        assert_equal [ :invalid, { file: [ FULL ] } ], [ result.code, result.errors ]
+        assert_equal [ :count, :lock, :count ], @illustrations.calls
+        assert_empty @illustrations.created
+        assert_equal 1, @transaction.calls
+      end
+
+      test "sous le verrou, une bibliothèque de 49 reçoit l'ajout : compte, verrou, recompte, écriture" do
+        @illustrations.active = Illustration::LIBRARY_CAP - 1
+
+        assert add(Input.new(name: "Bus", file: svg)).success?
+        assert_equal [ :count, :lock, :count, :create ], @illustrations.calls
+      end
+
       test "avec 49 illustrations actives, l'ajout passe ; la suivante est refusée" do
         @illustrations.active = Illustration::LIBRARY_CAP - 1
 
@@ -209,6 +240,91 @@ module UseCases
 
       test "un nom de 30 caractères est accepté" do
         assert add(Input.new(name: "B" * 30, file: svg)).success?
+      end
+    end
+
+    # F3 of the security review (phase 5 of annonces-v2): two additions at the same instant on a library of 49 drawings,
+    # on two connections, outside any test transaction. The library is locked, then counted again, in the transaction of
+    # the addition: one passes, the other one is refused under « Dessin ».
+    class AddIllustrationConcurrencyTest < ActiveSupport::TestCase
+      self.use_transactional_tests = false
+
+      FULL = "La bibliothèque compte déjà 50 illustrations : retirez-en une avant d'en ajouter."
+
+      # An addition about to write says so, and writes only once the test lets it.
+      class Meeting < Repositories::Communication::IllustrationRepository
+        def initialize(arrived:, go:)
+          super()
+          @arrived = arrived
+          @go = go
+        end
+
+        def create(illustration:)
+          @arrived << true
+          @go.pop(timeout: 10)
+          super
+        end
+      end
+
+      setup do
+        @fatou = create_team_member(second_factor: false)
+        (Entities::Communication::Illustration::LIBRARY_CAP - 1).times { create_illustration(name: "Dessin #{it}", created_by: @fatou) }
+      end
+
+      teardown do
+        Orm::MessageIllustration.where(created_by_id: @fatou.id).delete_all
+        Orm::User.where(id: @fatou.id).delete_all
+      end
+
+      def add(name, illustrations)
+        AddIllustration.new(illustrations:, drawings: ::Communication::DrawingReader.new,
+                            transaction: Repositories::Shared::Transaction.new,
+                            policy: Policies::Communication::ManageIllustrationsPolicy.new)
+                       .call(actor: Entities::Identity::Actor.new(user_id: @fatou.id, role: :team, team_role: "content"),
+                             dto: Dtos::Communication::IllustrationInput.new(
+                               name:, file: StringIO.new(%(<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="48" height="48"/></svg>))
+                             ))
+      end
+
+      # Uncached: the query cache of the test would give the first answer again.
+      def waiting?(pids)
+        Orm::MessageIllustration.uncached do
+          Orm::MessageIllustration.connection.select_value(
+            "SELECT EXISTS (SELECT 1 FROM pg_locks WHERE pid IN (#{pids.map { Integer(it) }.join(', ')}) AND NOT granted)"
+          )
+        end
+      end
+
+      # The first addition about to write waits until the other one is about to write too, or waits on a lock: their
+      # order is given by the lock of the library, never by a sleep.
+      test "F3 — two additions at the same instant on a library of 49: one passes, the other one is refused under « Dessin »" do
+        arrived = Queue.new
+        go = Queue.new
+        backends = Queue.new
+        threads = [ "Bus", "Car" ].map do |name|
+          Thread.new do
+            ActiveRecord::Base.connection_pool.with_connection do |connection|
+              backends << connection.select_value("SELECT pg_backend_pid()")
+              add(name, Meeting.new(arrived:, go:))
+            end
+          end
+        end
+        pids = Array.new(2) { backends.pop(timeout: 5) }
+        assert arrived.pop(timeout: 5), "aucun ajout n'arrive à l'écriture"
+        deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + 5
+        until arrived.size.positive? || waiting?(pids) || threads.none?(&:alive?)
+          flunk "le second ajout n'arrive ni à l'écriture ni au verrou" if Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+          sleep 0.01
+        end
+        2.times { go << true }
+        results = threads.map(&:value)
+
+        assert_equal [ 1, 1 ], [ results.count(&:success?), results.count { it.code == :invalid } ]
+        assert_equal({ file: [ FULL ] }, results.find(&:failure?).errors)
+        assert_equal Entities::Communication::Illustration::LIBRARY_CAP, Orm::MessageIllustration.where(retired_at: nil).count
+      ensure
+        2.times { go << true }
+        threads&.each { it.join(10) }
       end
     end
   end

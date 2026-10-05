@@ -18,19 +18,31 @@ module UseCases
       def call(actor:, dto:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
-        return full(dto) if @illustrations.available.size >= ILLUSTRATION::LIBRARY_CAP
+        # Une lecture rapide, sans verrou : le dessin d'une bibliothèque déjà pleine n'est pas lu.
+        return full(dto) if full?
 
         drawing = read(dto)
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) if dto.errors.any?
 
         illustration = ILLUSTRATION.new(name: dto.name, view_box: drawing[:view_box], shapes: drawing[:shapes],
                                         created_by_id: actor.user_id)
-        Shared::Result.success(@transaction.call { @illustrations.create(illustration:) })
+        @transaction.call { add(dto, illustration) }
       end
 
       private
 
-      # La bibliothèque pleine : rien n'est lu, la raison s'affiche sous « Dessin ».
+      # Phase 5 (F3) : le plafond tient en concurrence. La bibliothèque est verrouillée, puis recomptée, dans la
+      # transaction de l'écriture : un second ajout simultané attend, puis compte celui-ci.
+      def add(dto, illustration)
+        @illustrations.lock_library
+        return full(dto) if full?
+
+        Shared::Result.success(@illustrations.create(illustration:))
+      end
+
+      def full? = @illustrations.available.size >= ILLUSTRATION::LIBRARY_CAP
+
+      # La bibliothèque pleine : rien n'est écrit, la raison s'affiche sous « Dessin ».
       def full(dto)
         dto.errors.add(:file, :library_full, count: ILLUSTRATION::LIBRARY_CAP)
         Shared::Result.failure(:invalid, errors: dto.errors.to_hash)

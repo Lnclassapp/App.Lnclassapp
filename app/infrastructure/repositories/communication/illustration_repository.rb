@@ -1,5 +1,5 @@
 # 🔌 INFRA · Repositories::Communication::IllustrationRepository
-# Rôle : bibliothèque d'illustrations de l'équipe : lecture, choix des auteurs, ajout, renommage, retrait (jamais supprimée)
+# Rôle : bibliothèque d'illustrations de l'équipe : lecture, choix des auteurs, ajout sous verrou, renommage, retrait (jamais supprimée)
 # ADR  : 0029, 0081
 module Repositories
   module Communication
@@ -29,6 +29,13 @@ module Repositories
       def retire(id:, at:)
         Orm::MessageIllustration.where(id:, retired_at: nil).update_all(retired_at: at, updated_at: Time.current)
         read(Orm::MessageIllustration.find_by(id:))
+      end
+
+      # Un verrou consultatif de transaction (pg_advisory_xact_lock) : aucune ligne n'est verrouillée, les lectures
+      # passent, et il tombe avec la transaction de l'appelant. Une seule bibliothèque, une seule clé.
+      def lock_library
+        Orm::MessageIllustration.connection.execute("SELECT pg_advisory_xact_lock(hashtext('message_illustrations'))")
+        true
       end
 
       private

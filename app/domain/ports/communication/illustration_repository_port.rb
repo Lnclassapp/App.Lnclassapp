@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Ports::Communication::IllustrationRepositoryPort
-# Rôle : contrat de la bibliothèque d'illustrations de l'équipe : lecture, choix des auteurs, ajout, renommage, retrait
+# Rôle : contrat de la bibliothèque d'illustrations de l'équipe : lecture, choix des auteurs, ajout sous verrou, renommage, retrait
 # ADR  : 0081 · UDR : 0075
 module Ports
   module Communication
@@ -37,6 +37,12 @@ module Ports
       # Pose retired_at ; une illustration déjà retirée garde sa première date. → Illustration | nil (id inconnu)
       def retire(id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #retire"
+      end
+
+      # Phase 5 d'annonces-v2 (F3). À appeler DANS la transaction de l'ajout : verrouille la bibliothèque jusqu'à sa fin,
+      # sans bloquer sa lecture. Deux ajouts se suivent donc, et le second compte ce que le premier a écrit. → true
+      def lock_library
+        raise NotImplementedError, "#{self.class} doit implémenter #lock_library"
       end
     end
   end
