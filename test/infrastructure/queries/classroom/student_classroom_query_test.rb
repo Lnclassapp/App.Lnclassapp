@@ -110,6 +110,16 @@ module Queries
                      rows.first.to_h.values_at(:last_session_public_id, :exercise_public_id, :material_name, :material_category)
       end
 
+      # UDR-0076 §3.2 : le travail terminé reste à l'élève quand l'exercice est dépublié ensuite, comme « Mes activités
+      # récentes » de l'accueil ; son résultat reste ouvert par ReadSessionPolicy.
+      test "a treated exercise unpublished afterwards stays in the treated exercises" do
+        archived = exercise("Archivé ensuite")
+        create_exercise_session(student: @student, exercise: archived, status: "completed", score_percent: 60)
+        archived.update!(status: "archived", archived_at: Time.current)
+
+        assert_equal [ "Archivé ensuite" ], classroom.treated_exercises.map(&:title)
+      end
+
       test "nothing assigned, nothing treated: three empty lists" do
         assert_equal [ [], [], [] ], classroom.to_h.values_at(:courses, :assigned_exercises, :treated_exercises)
       end

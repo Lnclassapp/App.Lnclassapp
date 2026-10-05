@@ -72,6 +72,7 @@ Hiérarchie, du haut vers le bas, dans `div.grid.gap-5` :
    - Vide : `ui_empty_state title: « Rien à faire pour l'instant », description: « Les exercices que tes enseignants assignent à ta classe apparaîtront ici. », icon: "clipboard-document-check"`.
 4. **« Exercices traités »** — `ui_card title: « Exercices traités », icon: "check-circle", id: "student_classroom_treated", data: ui_reveal_data` (avec au moins une ligne).
    - Une ligne par exercice terminé au moins une fois (sessions `completed`, standard ou de remédiation), de son niveau ; la plus récemment terminée d'abord.
+   - Un exercice dépublié ou archivé après coup **reste** dans la liste : c'est le travail de l'élève, comme « Mes activités récentes » de l'accueil, et son résultat reste ouvert (`ReadSessionPolicy`).
    - Ligne (`_treated_exercise`, locals `(exercise:, index:)`) : un lien `exercise_session_result_path(last_session_public_id)` sur toute la ligne ; à gauche, la pastille `size-12 rounded-ln` de la note **meilleure** (`grade_label(best_score_percent)`), `bg-success-soft text-success` au-dessus du seuil de passage, sinon `bg-mist text-ink` (jamais d'ambre ni de rouge pour une note, charte §5) ; au milieu le titre (`truncate`) et « Meilleur score · <maîtrise> » (`text-xs text-mute`) ; chevron à droite.
    - 3 lignes puis « Voir plus », comme ci-dessus.
    - Vide : `ui_empty_state title: « Aucun exercice traité pour l'instant », description: « Termine un exercice pour retrouver ici ton meilleur score. », icon: "check-circle"`.
