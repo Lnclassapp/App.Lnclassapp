@@ -39,7 +39,7 @@ puis la carte « Mes activités récentes » (`id: "student_home_activity"`, fra
 - `:classroom` → `_classroom_card` inchangé.
 - `:subjects` → `_subjects` (nouveau), décrit ci-dessous.
 - `:announcements` → `communication/messages/_carousel` inchangé, seulement si `@announcements.any_readable?` (UDR-0071 §3.5).
-- `:todo` → la carte « À faire » inchangée, suivie des fiches à revoir s'il y en a.
+- `:todo` → la carte « À faire », suivie des fiches à revoir s'il y en a ; elle gagne `class: "min-w-0"` (une ligne avec échéance et bouton élargissait la page à 390 px).
 
 **« Mes matières »** — `classroom/student_homes/_subjects`, locals `(subjects:, late_slugs:, icon:)` :
 - `ui_card title: « Mes matières », icon: "squares-2x2", id: "student_home_subjects"`, sans sous-titre.
@@ -62,6 +62,7 @@ Hiérarchie, du haut vers le bas, dans `div.grid.gap-5` :
      - `ul.scrollbar-none.flex.snap-x.snap-mandatory.gap-3.overflow-x-auto.motion-safe:scroll-smooth[data-communication--carousel-target=track][aria-label="Cours assignés"]`.
      - Un `li.shrink-0.basis-3/4.snap-start.sm:basis-1/3` par cours > `_course_card`.
      - Points de pagination (`pager`, `hidden` jusqu'à 2 cartes, `aria-hidden`), écrits comme ceux des annonces.
+   - La carte porte `class: "min-w-0"` : case de la grille, elle prendrait sinon la largeur de sa bande et la page défilerait en largeur à 390 px.
    - **Carte d'un cours** (`_course_card`, locals `(course:)`) : `li#course_<slug>` > un lien `course_path(slug)` sur toute la carte, `flex h-full flex-col gap-3 rounded-card border border-line bg-white p-4`, `hover:border-brand`, focus `outline-brand` ; dedans : la pastille ronde teintée de la matière (`illustration.tint`, `size-12`, image décorative `size-8`), le nom (`font-display font-extrabold`, `line-clamp-2`), `ui_subject_badge` de la matière (`sm`), puis « N exercices assignés » (`text-xs text-mute`).
    - Vide : `ui_empty_state title: « Aucun cours assigné pour l'instant », description: « Les cours des exercices que tes enseignants assignent à ta classe apparaîtront ici. », icon: "book-open"`.
    - Ordre : le cours dont un exercice a été assigné le plus récemment d'abord.
@@ -90,7 +91,8 @@ Hiérarchie, du haut vers le bas, dans `div.grid.gap-5` :
 - `assessment--next-question#show` : s'il a une cible `question`, il annule la navigation, remplace `turbo-frame#question` par celui du `<template>`, puis donne le focus à la `legend` de la question (`tabindex="-1"` posé par le contrôleur). Sans cible, il laisse le lien naviguer.
 - Dernière réponse : pas de `<template>` ; « Voir mon résultat » inchangé (`_top`, un aller-retour).
 - La page `GET /sessions/:id` reste le repli et la reprise (AS-08) : inchangée.
-- **Interdits** : `cache`, `fresh_when`, `stale?`, `expires_in` dans ces contrôleurs et ces vues ; aucune colonne `correct` lue pour la question jointe (`SessionPlayQuery::Answer` n'en a pas).
+- Sans JavaScript, la réponse redirige vers la session, qui montre déjà la question suivante : le verdict n'est pas affiché et le lien n'est pas atteint (comportement antérieur, inchangé).
+- **Interdits** : `cache`, `fresh_when`, `stale?`, `expires_in` dans ces contrôleurs et ces vues (l'ETag faible que Rails pose sur toute réponse reste, il ne vaut jamais 304) ; aucune colonne `correct` lue pour la question jointe (`SessionPlayQuery::Answer` n'en a pas).
 
 ### 3.4 États obligatoires
 
@@ -98,7 +100,7 @@ Hiérarchie, du haut vers le bas, dans `div.grid.gap-5` :
 |---|---|---|---|---|
 | Accueil, matières | état vide + « Tous les cours » | rendu serveur, pas de chargement | — (lecture seule) | bulles |
 | « Ma classe », trois sections | état vide de chaque section | rendu serveur | — (lecture seule) | bande, listes à 3 lignes |
-| Session, question suivante | — | aucun : la question est déjà là | question déjà répondue ailleurs : refus 409 de l'ADR-0054 (toast, état réel) | la question s'affiche, focus sur son énoncé |
+| Session, question suivante | — | aucun : la question est déjà là | question déjà répondue ailleurs : refus sans écriture de l'ADR-0054 (réponse 200 : toast « déjà répondue », puis rafraîchissement vers l'état réel) | la question s'affiche, focus sur son énoncé |
 
 ### 3.5 Accessibilité
 

@@ -34,8 +34,8 @@ Règles inchangées : `allow_roles :student`, `ReadClassroomPolicy` pour « Ma c
 | Aucun cours dans le travail de la classe | état vide dans la section « Cours assignés » |
 | Aucun exercice assigné restant | état vide « Rien à faire pour l'instant » |
 | Aucun exercice traité | état vide |
-| Sans JavaScript | « Question suivante » est un lien vers la session, comme avant |
-| Question déjà répondue ailleurs | refus sans écriture, toast et retour à l'état réel (inchangé) |
+| Sans JavaScript | la réponse redirige vers la session, qui montre la question suivante (comme avant) ; le lien « Question suivante » garde cette adresse |
+| Question déjà répondue ailleurs | refus sans écriture : réponse 200 avec un toast « déjà répondue » et un rafraîchissement vers l'état réel (inchangé) |
 | Élève sans classe principale active | redirection unique vers l'écran de sortie (inchangé) |
 
 ## 4. Critères d'acceptation
@@ -83,11 +83,14 @@ Et aucun score d'un autre élève n'apparaît
 Quand l'élève répond à la première
 Alors la réponse du serveur contient le verdict et la deuxième question, sans aucune proposition correcte
 Et « Question suivante » affiche la deuxième question sans requête au serveur
-Et sans JavaScript, « Question suivante » reste un lien vers la session
+Et le lien « Question suivante » garde l'adresse de la session (sans JavaScript, la réponse redirige déjà vers la question suivante)
 
 # CA-8 — politique de cache
 Étant donné les pages /students, /students/classroom, /sessions/:id et le stream d'une réponse
-Alors aucune ne pose d'ETag ni de Cache-Control public, et aucune vue ne contient de cache de fragment
+Alors aucune n'a de Cache-Control public, aucun contrôleur ne pose d'ETag applicatif (fresh_when, stale?)
+Et aucune vue ne contient de cache de fragment
+# L'ETag faible de Rack::ETag, posé par Rails sur toute réponse, reste : il ne vaut jamais 304, le jeton CSRF et le
+# nonce changeant à chaque page (ADR-0076, journal de politique-cache).
 ```
 
 ## 5. Modélisation préliminaire

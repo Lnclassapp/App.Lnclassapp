@@ -50,6 +50,11 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
   # UDR-0011 (UDR-0057), UDR-0076 §3.2 : à 390 px, aucune action principale, chaque liste à 3 lignes au plus, aucune
   # page qui défile en largeur (seule la bande des cours défile) ; l'aide du code s'ouvre au toucher.
   test "at 390 px, Ma classe passes the sobriety rule and opens the code help" do
+    # Challenger : avec trois cours, la bande élargissait toute la page (485 px pour 390) ; seule la bande doit défiler.
+    [ %w[Fonctions Mathématiques], %w[Électricité Physique-Chimie] ].each do |name, material|
+      course = create_course(name:, material: create_material(name: material), level: @classroom.level, series: @classroom.series)
+      create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)))
+    end
     sign_in_as @student
 
     with_mobile_viewport do

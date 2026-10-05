@@ -44,7 +44,8 @@
   <% end %>
 
   <% courses = @classroom.courses %>
-  <%= ui_card title: t(".courses_title"), icon: "book-open", id: "student_classroom_courses" do |card| %>
+  <%# min-w-0 : case de la grille, la carte prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
+  <%= ui_card title: t(".courses_title"), icon: "book-open", id: "student_classroom_courses", class: "min-w-0" do |card| %>
     <% if courses.empty? %>
       <%= ui_empty_state title: t(".courses_empty"), description: t(".courses_empty_description"), icon: "book-open" %>
     <% else %>
@@ -52,7 +53,7 @@
         <%= ui_badge t(".courses_count", count: courses.size), tone: :brand, size: :sm %>
       <% end %>
       <%# La bande et ses points sont ceux du carrousel d'annonces (UDR-0071 §3.5) : sans JavaScript, elle défile, sans points. %>
-      <div class="min-w-0" data-controller="communication--carousel">
+      <div data-controller="communication--carousel">
         <ul class="scrollbar-none flex snap-x snap-mandatory gap-3 overflow-x-auto motion-safe:scroll-smooth"
             aria-label="<%= t(".courses_title") %>" data-communication--carousel-target="track">
           <%= render partial: "course_card", collection: courses, as: :course %>

@@ -11,7 +11,8 @@
 <div id="student_home" class="grid gap-5">
   <% home_sections_for(:student).each do |key, icon| %>
     <% if key == :todo %>
-      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises",
+      <%# min-w-0 : une ligne (titre, échéance, bouton) élargissait sinon la case de la grille, et la page avec elle. %>
+      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises", class: "min-w-0",
                   data: (ui_reveal_data if exercises.any?) do |card| %>
         <% if exercises.empty? %>
           <%= ui_empty_state title: t(".todo_empty"), description: t(".todo_empty_description"), icon: %>

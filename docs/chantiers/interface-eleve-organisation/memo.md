@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (PR vers `Develop`) |
 | **Ouvert le** | 2026-10-05 |
 | **Branche** | `feature/interface-eleve-organisation` |
 | **Programme** | — |

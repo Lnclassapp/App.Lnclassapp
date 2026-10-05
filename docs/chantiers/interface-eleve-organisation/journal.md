@@ -30,9 +30,28 @@ Le temps de test n'est pas celui de la production (journal SQL, pas d'eager load
 
 **Preuve d'exécution de « aucune requête »** : `test/system/assessment/exercise_session_test.rb` lit le Resource Timing du navigateur avant et après « Question suivante ». Sans l'action Stimulus, le test échoue (2 requêtes attendues, 3 lues) ; avec, il passe.
 
+## Contradiction empirique (phase 5)
+
+Un challenger distinct de l'auteur a rejoué le PRD sur l'application en mode développement, dans Chromium (Playwright), avec ses propres données : accueil, « Ma classe », une session de 3 questions, deux onglets sur la même session, JavaScript coupé, `curl -sI` des en-têtes.
+
+| Point | Résultat | Suite donnée |
+|---|---|---|
+| Ordre de l'accueil, bulles, catalogue filtré, pastille ambre | OK | — |
+| Bande des cours, « Voir plus » des deux listes, 16/20 vers la dernière session, aucune action principale | OK | — |
+| « Question suivante » : 0 requête au survol et au clic (2 sur 2), focus sur l'énoncé, aucun `correct` dans le stream | OK | — |
+| Réponse vide (422), deux onglets (rien écrit, toast, état réel) | OK | L'UDR disait « 409 » : c'est une réponse 200 avec toast ; texte corrigé |
+| **« Ma classe » à 390 px : la page faisait 485 px** (la bande élargissait la carte, case de grille sans `min-w-0`) | **KO** | Test système rouge avec trois cours, puis `min-w-0` sur la carte ; vert |
+| **Accueil à 390 px : 405 px** (une ligne « À faire » avec échéance et bouton), défaut antérieur au chantier | **KO** | Test système rouge (échéance, titre long : 665 px), puis `min-w-0` sur la carte ; vert |
+| `Cache-Control` privé partout, aucun `fresh_when` ni fragment | OK | — |
+| ETag faible présent (Rack::ETag par défaut) | écart au texte du CA-8 | Il ne vaut jamais 304 (jeton CSRF, nonce) : le CA-8 est réécrit sur l'ETag applicatif, rien n'est retiré |
+| Sans JavaScript, la réponse redirige vers la question suivante : le lien n'est jamais atteint | écart au texte du PRD | Comportement antérieur ; PRD et UDR corrigés |
+
+La revue de sécurité (rôle distinct, lecture) n'a trouvé qu'un constat bas : « Exercices traités » garde un exercice dépublié après coup. Choix conservé, comme « Mes activités récentes » de l'accueil, écrit dans l'UDR-0076 §3.2 et figé par un test. `bin/brakeman` : aucun avertissement.
+
 ## Ce qui a dérapé
 
 - **La copie locale de `Develop` avait plusieurs jours de retard.** J'ai d'abord conclu que les annonces n'existaient pas, et posé la question au porteur, qui a répondu qu'elles étaient affichées après « À faire ». Un `git fetch` d'abord aurait évité la question. Tout le cadrage a été repris sur le `Develop` à jour.
+- Les tests système de « Ma classe » et de l'accueil à 390 px passaient avec des données trop courtes (un cours, des lignes sans échéance) : le débordement ne s'est vu qu'avec les données du challenger. Les deux tests portent maintenant ces données.
 - Le numéro d'UDR 0075 était pris par `feature/annonces-v2` (non fusionnée) : vérifié sur toutes les branches distantes avant de numéroter, d'où l'UDR-0076.
 
 ## Ce qu'on a appris sur la codebase
