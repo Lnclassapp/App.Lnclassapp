@@ -77,7 +77,9 @@ La porte « Bug reproduit à la main dans l'application » n'avait pas été fra
 
 | | |
 |---|---|
-| **Livré le** | — (commité le 2026-10-04 : `7b428c07` index, `813b3b90` correctif ; non poussé) |
-| **PR** | |
+| **Livré le** | 2026-10-05 (fusion dans `Develop`) |
+| **PR** | [#169](https://github.com/Lnclassapp/App.Lnclassapp/pull/169) |
 | **ADR produits** | aucun ; compléments datés de 0065 §4, 0072 (ter), note de 0067 (levier 1) |
-| **UDR produits** | |
+| **UDR produits** | — |
+| **Preuve** | Suite complète, couverture 100 % lignes et branches ; `test/system/school_admin/remediation_handed_in_test.rb` ; migration `20261004190000` (index des sessions rendues, `CONCURRENTLY`) ; rubocop, brakeman au vert |
+| **Chantiers de suivi** | `travail-eleves-budget` ([#173](https://github.com/Lnclassapp/App.Lnclassapp/pull/173)) : « Travail des élèves » sous son budget |

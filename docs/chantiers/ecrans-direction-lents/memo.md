@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | livré (lots 1 et 3, challenger passé) ; lot 2 déplacé vers `travail-eleves-budget` |
+| **Statut** | livré (#170, fusionnée dans `Develop` le 2026-10-05 ; lots 1 et 3) ; lot 2 déplacé vers `travail-eleves-budget` |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `perf/ecrans-direction-lents` |
 | **Programme** | `refonte-application` — dette relevée par `remediation-comptee-faite` et `rapports-exercices` |

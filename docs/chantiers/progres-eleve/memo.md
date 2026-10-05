@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré (#168, fusionnée dans `Develop` le 2026-10-05) |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `feature/progres-eleve` |
 | **Programme** | `refonte-application` — suite du chantier [`rapports-exercices`](../rapports-exercices/memo.md) (V3), à rattacher à une vague par le porteur |
