@@ -8,9 +8,9 @@
 ```
 Lot 0 — bench + non-régression        ✅
   ↓
-Lot 1 — agréger par (classe, élève) avant la jointure aux élèves présents
+Lot 1 — agréger par (classe, élève) avant la jointure aux élèves présents   ✅ ea032253
   ↓   (si p95 ≥ 100 ms)
-Lot 2 — compter les élèves présents dans la même requête que les totaux
+Lot 2 — compter les élèves présents dans la même requête que les totaux     ✅ (gain gardé ; p95 < 100 ms non atteint)
 ```
 
 ## Protocole
@@ -38,7 +38,7 @@ Lot 2 — compter les élèves présents dans la même requête que les totaux
 - **Fichiers**     : `app/infrastructure/queries/school/student_work_query.rb`
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/infrastructure/queries/school/student_work_query_test.rb`
-- **Done quand**   : la requête des totaux passe de 73 ms à < 35 ms (`EXPLAIN ANALYZE`), chiffres identiques sur tout le jeu
+- **Done quand**   : la requête des totaux passe de 73 ms à < 35 ms (`EXPLAIN ANALYZE`), chiffres identiques sur tout le jeu. ✅ **28–38 ms**, chiffres identiques ; p50 de l'écran 103,6 → 64,7 ms
 
 Le sous-select `handed` rendait une ligne par (classe, devoir, élève) : 22 792 lignes, chacune jointe aux adhésions puis à `users` en boucle imbriquée (l'estimateur prévoyait 1 ligne), puis triées pour `COUNT(DISTINCT élève)`. Il rend maintenant une ligne par (classe, élève) avec `COUNT(DISTINCT devoir)` : 4 235 lignes à joindre, plus de `COUNT(DISTINCT)` au-dessus.
 
@@ -48,7 +48,7 @@ Le sous-select `handed` rendait une ligne par (classe, devoir, élève) : 22 792
 - **Fichiers**     : `app/infrastructure/queries/school/student_work_query.rb`
 - **Dépend de**    : Lot 1, et seulement si le p95 reste ≥ 100 ms
 - **Test associé** : `test/infrastructure/queries/school/student_work_query_test.rb`
-- **Done quand**   : une requête de moins pour l'aperçu, p95 de `/school-admin/classrooms` < 100 ms, chiffres identiques sur tout le jeu
+- **Done quand**   : une requête de moins pour l'aperçu, p95 de `/school-admin/classrooms` < 100 ms, chiffres identiques sur tout le jeu. **Partiel** : une requête de moins ✅, chiffres identiques ✅, p50 64,6 → 55,9 ms ✅ ; p95 122,1 ms ❌ — la queue vient de la machine ([memo § Mesures](memo.md#mesures-avant--cible--après))
 
 ## Vérification de collision
 
@@ -64,13 +64,13 @@ Le sous-select `handed` rendait une ligne par (classe, devoir, élève) : 22 792
 - [x] ADR écrit si un contrat change (callbacks contournés, dénormalisation, cache, port modifié) — aucun contrat ne change
 - [x] Bench versionné, produisant la valeur avant
 - [x] Tests de non-régression fonctionnelle verts **avant** le premier levier
-- [ ] Un lot = un levier = un chiffre
-- [ ] Chaque levier sans gain mesuré a été **annulé**, pas conservé
-- [ ] Bench après : même machine, même volume, même méthode, ≥ 3 exécutions, médiane
-- [ ] Tableau `Mesures` complété (Avant / Cible / Après)
+- [x] Un lot = un levier = un chiffre
+- [x] Chaque levier sans gain mesuré a été **annulé**, pas conservé (1a remplacé par 1b ; vue, Arel, cache, dénormalisation écartés)
+- [x] Bench après : même machine, même volume, même méthode, ≥ 3 exécutions, médiane
+- [x] Tableau `Mesures` complété (Avant / Cible / Après) — p95 < 100 ms **non atteint**, dit tel quel
 - [ ] **Challenger a relancé le bench lui-même** et obtenu le gain annoncé
-- [ ] Résultat fonctionnel strictement identique (aucun écran, aucune sortie modifiés)
+- [x] Résultat fonctionnel strictement identique (aucun écran, aucune sortie modifiés) — 35 035 aperçus et pages, octet pour octet
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] `journal.md` : leviers abandonnés et pourquoi — c'est la partie la plus réutilisable
+- [x] `journal.md` : leviers abandonnés et pourquoi — c'est la partie la plus réutilisable
 
 > **Clause de rejet** : le chantier ne se clôt pas sans mesure après, au même volume, par la même méthode, ≥ 3 exécutions, médiane. Le challenger relance lui-même le bench ; un gain qu'il ne retrouve pas n'est pas prouvé.
