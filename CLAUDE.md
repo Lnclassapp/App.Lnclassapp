@@ -11,6 +11,8 @@ Lnclass est une plateforme éducative (LMS) en Rails 8, construite en **architec
 
 **Réponses courtes.** Pendant le travail, ne montrer que l'essentiel : le résultat, ce qui bloque, ce que le porteur doit décider. Pas de récit des étapes ni des détails techniques, sauf s'il les demande.
 
+**PR prêtes.** Une PR sans conflit avec sa base s'ouvre directement « prête », jamais en brouillon.
+
 ---
 
 ## Avant de coder
