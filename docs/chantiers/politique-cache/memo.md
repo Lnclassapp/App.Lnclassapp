@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — lot R appliqué le 2026-10-03/04 (production et Staging en Europe, Develop sans sa base) ; lot D et mesure depuis Abidjan attendus du porteur |
+| **Statut** | en cours — lot R appliqué le 2026-10-03/04 (production et Staging en Europe ; base de Develop en attente de validation au tableau de bord) ; lot E (audit de toutes les pages, 2026-10-05) livré en PR ; lot D et mesure depuis Abidjan attendus du porteur |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `perf/politique-cache` |
 
@@ -59,6 +59,68 @@ Ce que la mesure dit :
 1. **Chaque aller-retour jusqu'au serveur coûte 47 % de moins** au point de mesure (Chicago) : 227 → 107 ms. Une page déjà visitée se charge en 238 ms au lieu de 403, soit −41 %.
 2. Les deux cibles fixées pour Chicago sont manquées de peu (107 ms contre 100, 238 ms contre 200). Elles servaient de témoin : la cible qui compte est celle d'Abidjan, où l'écart entre Singapour et Amsterdam doit être plus grand qu'aux États-Unis. Elle reste à mesurer (question 1).
 3. **Develop reste lent tant que sa base est à Singapour** : chaque requête SQL y coûte ~170 ms, et une page connectée 1 à 10 s.
+
+## Lot E — audit de toutes les pages (2026-10-05)
+
+Le porteur, le 2026-10-05 : « après la migration vers UE, je trouve l'app Lnclass super lente », puis « analyse toutes les pages, puis assure-toi que la politique de cache est respectée, et que toutes les pages sont optimisées ».
+
+### D'où vient la lenteur ressentie : Develop, pas la production
+
+Railway (`http-response-time`, 72 h ; journaux HTTP du 2026-10-05) :
+
+| Environnement | p50 serveur depuis la migration | Pages > 300 ms le 2026-10-05 |
+|---|--:|---|
+| production | **4 à 6 ms** (p99 ≤ 110 ms) | **aucune** depuis 06:00 UTC |
+| Staging | 10 à 35 ms | — |
+| **Develop** | **1 731 à 3 249 ms** (p99 jusqu'à 9 968 ms) | toutes les pages connectées : `/teams` 3 574 à 9 911 ms, `/teams/referential` 3 223 à 8 163 ms, `/courses` 1 374 à 5 148 ms, `/exercises/:id` 3 630 à 6 508 ms |
+
+Les pages lentes sont celles du porteur, sur `app-develop.lnclass.com`. Son application est à Amsterdam, mais sa base est restée à Singapour : chaque requête SQL fait l'aller-retour Europe–Asie (~170 ms), et une page en fait 5 à 23. C'est le cas que le lot R interdisait (ADR-0076 §4.3 : « on ne déplace jamais l'application sans sa base »). Sur demande du porteur (« déplace sa DB Amsterdam aussi »), le déplacement de PostgreSQL vers `europe-west4` est **préparé en changement en attente** dans Develop (Postgres seul). Sa validation par l'API expire deux fois : elle reste à faire au tableau de bord (journal).
+
+### L'audit
+
+`script/perf/audit_pages.rb` explore, pour cinq profils (visiteur, élève, enseignant, direction, équipe), toutes les routes GET sans paramètre. Il suit ensuite les liens, les frames et les formulaires GET de chaque page, comme des clics Turbo. Il mesure chaque page sur 15 visites après chauffe, en mode production, sur le jeu de l'ADR-0067 (500 établissements, 40 000 élèves, 311 957 sessions).
+
+- **Couverture** : 405 adresses visitées, dont **218 pages en 200** (équipe 89, enseignant 42, direction 39, élève 31, visiteur 17), soit **91 routes**. 7 routes restent hors d'atteinte : un jeton d'invitation, trois fichiers lus depuis le bucket (photo, image et audio d'annonce), et trois pages sans ligne dans le jeu (session d'exercice en cours, annonce à modifier, demande de suppression).
+- **Cache du HTML, conforme partout** : les 218 pages sont en `max-age=0, private, must-revalidate`, et **aucune réponse HTML n'est `public`**. L'action `secret_response` atteinte (`/identity/second-factor/enrollment/new`) répond `no-store`. En production, Staging et Develop, le HTML est `cf-cache-status: DYNAMIC` et les assets digérés `public, max-age=31556952`, servis en `HIT` par Cloudflare dès le second appel. Le seul cache serveur est celui que l'ADR-0067 admet : le pilotage « année » (ADR-0062) et l'accueil de la direction (ADR-0065, amendement du 2026-10-04), 5 minutes chacun.
+- **Temps serveur** : p95 médian **15 ms** sur les 218 pages. Au-dessus de 100 ms, seulement les listes déjà connues de l'ADR-0067 (établissements, catalogue de l'équipe) et des pointes isolées au bord du seuil.
+
+### Écarts trouvés, et ce qui en est fait
+
+| Écart | Où | Règle | Suite |
+|---|---|---|---|
+| **Carte « Parrainage » redemandée à chaque clic de l'enseignant** (frame de la barre latérale, UDR-0069 §3.6, posé le 2026-10-04) | 20 pages de l'espace enseignant, sur grand écran | ADR-0076 §4.2 : 1 requête par clic, 3 à la connexion | **corrigé, lot E1** |
+| **HTML au-dessus de 150 Ko** : icônes redessinées sur chaque ligne | catalogue (enseignant, direction, équipe), établissements, DRENA, fiche d'un établissement | ADR-0067 | **réduit, lot E2** ; reste au-dessus du budget (ci-dessous) |
+| Frame différé de l'« Activité récente » de la direction (UDR-0074 §3.11, posé le 2026-10-04) | accueil de la direction : 2 requêtes en série | ADR-0076 §4.2 ne l'admet que sur les accueils élève et équipe, ou hors de l'écran à l'arrivée | **question au porteur** (5) |
+| Une requête par image du texte d'un article (Action Text résout chaque pièce jointe) | `/blog/:slug` ×5, `/teams/blog/:id/edit` ×6 | ADR-0067 : budget tenu (p95 25 à 37 ms) | gardé : 5 à 6 requêtes dans la même région coûtent ~2 ms |
+| Lien `/` vers l'accueil depuis une page publique ou d'erreur, vu par une personne connectée : une redirection | `/aide`, `/blog`, pages légales, pages 403 | plafond « ouverture de lnclass.com » : 3 | dans le plafond ; gardé (journal, leviers abandonnés) |
+
+### Mesures du lot E
+
+**E1 — carte « Parrainage » permanente, rendue avec l'accueil** (`count_round_trips.rb`, base du jeu de mesure, 3 exécutions identiques) :
+
+| Parcours (enseignant, grand écran) | Plafond | Avant | **Après** |
+|---|--:|--:|--:|
+| Connexion (formulaire → accueil) | 3 | **4** | **3** |
+| Clic vers l'accueil | 1 | **2** | **1** |
+| Clic d'une page de l'espace à une autre | 1 | **2** | **1** |
+
+Décomposition : avec le seul `data-turbo-permanent`, le clic de page à page passe à 1, mais la connexion reste à 4 et l'accueil à 2. Le rendu de la carte avec l'accueil, qui lit déjà l'invitation, ramène ces deux parcours au plafond. Tous les autres parcours sont inchangés.
+
+**E2 — icônes dessinées une fois** (`ui_icon_sprite`, déjà admis par l'ADR-0067 pour « Enseignants » de la direction) ; `measure_screens.rb`, même jeu, 30 requêtes après 3 de chauffe, médiane de 3 exécutions :
+
+| Écran | HTML avant | **HTML après** | p50 avant → après | p95 avant → après |
+|---|--:|--:|--:|--:|
+| Catalogue, enseignant (`/courses`) | 487,8 Ko | **338,8 Ko** (−31 %) | 73,8 → 71,6 ms | 103,8 → 87,6 ms |
+| Catalogue, équipe | 566,7 Ko | **410,4 Ko** (−28 %) | 84,2 → 82,2 ms | 122,6 → 110,3 ms |
+| DRENA (`/teams/drenas`) | 317,0 Ko | **240,4 Ko** (−24 %) | 77,3 → 77,0 ms | 114,2 → 101,2 ms |
+| Établissements (`/teams/schools`) | 603,4 Ko | **517,1 Ko** (−14 %) | 104,6 → 101,7 ms | 139,3 → 139,5 ms |
+| Fiche d'un établissement | 305,0 Ko | **268,8 Ko** (−12 %) | 70,1 → 64,2 ms | 153,8 → 155,6 ms |
+
+Les temps bougent dans le bruit de la machine. Compressé, le HTML ne baisse que de 2 à 9 % (catalogue de l'équipe 16,9 → 15,4 Ko, établissements 23,0 → 22,5 Ko) : le gain porte sur le poids brut, donc sur l'analyse du DOM par un téléphone d'entrée de gamme, presque pas sur les données mobiles. Le challenger a rejoué les deux bancs (avant et après, 3 fois chacun) et retrouvé les mêmes chiffres, à 0,1 Ko près. Il a aussi tranché deux p95 « après » plus hauts en alternant avant et après sur 100 requêtes : c'était du bruit. **Aucun de ces écrans ne passe sous 150 Ko.** Ce qui reste :
+- les deux modales par ligne (formulaire et jeton CSRF compris) des établissements et des DRENA : 290 Ko sur 517 pour les établissements ;
+- les classes Tailwind des 210 cartes du catalogue : 183 Ko.
+
+Les retirer change la structure de l'écran : modale lue à la demande, comme pour « Retirer » de la direction (UDR-0056, amendement du 2026-10-04), ou liste paginée. C'est le lot 5 du chantier `cache-ecrans-lourds`, que le porteur a reporté après les lots UX (question 6). La page d'une classe (enseignant, 216,5 Ko, dont 69 Ko de 56 formulaires) n'est pas touchée : le sprite n'y retirerait qu'environ 45 Ko.
 
 ## Le problème
 
@@ -158,9 +220,11 @@ Leviers **écartés par la mesure** :
 
 ## Questions encore ouvertes
 
-*Questions du cadrage, posées le 2026-10-03 ; réponses en tête de ce memo. Mise à jour le 2026-10-04 après le lot R.*
+*Questions du cadrage, posées le 2026-10-03 ; réponses en tête de ce memo. Mise à jour le 2026-10-05 après le lot E.*
 
 1. **Mesure depuis Abidjan** : `ruby script/perf/measure_network.rb` (production) trois fois, depuis un poste en Côte d'Ivoire (sans compte, Ruby 3.4). Il n'y a plus de « avant » à Singapour, la production est en Europe. Cette mesure dit si la cible de moins de 150 ms est tenue là où sont les élèves.
-2. **Base de Develop** : elle est restée à Singapour, alors que l'application de Develop est à Amsterdam. Il faut la déplacer depuis le tableau de bord Railway (Postgres › Settings › Regions › `europe-west4`, puis appliquer : Railway migre le volume, avec une coupure), comme pour Staging et la production.
-3. **Nettoyage** : supprimer l'ancien bucket `organized-trunk` (région `sin`, plus utilisé, contenu copié et vérifié) et les services arrêtés `migration-fichiers`, `migration-fichiers-staging` et `migration-fichiers-develop`.
-4. **Cloudflare** : prévenir quand *Early Hints* et *Tiered Cache* sont actifs, pour la mesure « après » du lot D.
+2. **Base de Develop** : le déplacement vers `europe-west4` est prêt dans Railway, en changement en attente (Develop › Postgres, `asia-southeast1` → `europe-west4`). Il reste à le valider au tableau de bord (« Deploy ») : par l'API, la validation expire. Railway migre alors le volume, avec une coupure de la base de Develop pendant la migration. Tant que ce n'est pas fait, **Develop reste à 1 à 10 s par page connectée**.
+3. ~~**Nettoyage**~~ : fait le 2026-10-05. `organized-trunk` et les trois services de copie sont supprimés ; il ne reste que les buckets `lnclass-fichiers-eu-<environnement>`.
+4. **Cloudflare** : prévenir quand *Early Hints* et *Tiered Cache* sont actifs, pour la mesure « après » du lot D. Le conteneur passe par un relais qui termine le TLS : il ne voit pas les réponses `103`, et l'activation ne peut pas être vérifiée d'ici.
+5. **Accueil de la direction** (nouveau, lot E) : son « Activité récente » est un frame différé (UDR-0074 §3.11, du 2026-10-04). Cela fait 2 requêtes en série par visite, alors que l'ADR-0076 §4.2 ne l'admet que sur les accueils élève et équipe. Deux réponses possibles : **(a)** l'admettre comme eux, en ajoutant l'accueil de la direction à la ligne « 2 » du plafond ; **(b)** rendre l'activité avec la page, ce qui fait gagner une requête et amende l'UDR-0074.
+6. **Listes encore au-dessus de 150 Ko** (lot E2) : établissements (517 Ko), catalogue de l'équipe (410 Ko) et de l'enseignant (339 Ko), DRENA (240 Ko), fiche d'un établissement (269 Ko), page d'une classe (217 Ko). Il faudrait sortir les modales des lignes (chargées à la demande, une requête au clic) ou paginer le catalogue, ce qui change l'écran. Faut-il ouvrir maintenant le lot 5 de `cache-ecrans-lourds`, que le porteur avait reporté après les lots UX ?
