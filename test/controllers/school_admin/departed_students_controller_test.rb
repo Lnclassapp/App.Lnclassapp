@@ -24,7 +24,8 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
     assert_response :success
     assert_select "title", text: /\AAnciens élèves/
     assert_select "h1", "Anciens élèves"
-    assert_select "main nav[aria-label=Retour] a[href='#{school_admin_classrooms_path}']", "Travail des élèves"
+    assert_select "main nav[aria-label=Retour] a[href='#{school_admin_classrooms_path}']", "Accueil"
+    assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.home")
     assert_select "#departed_students tbody tr", 1
     assert_select "tr#departed_student_0" do
       assert_select "th[scope=row]", "Awa Koné"
@@ -38,7 +39,7 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
     assert_no_match @awa.contact, response.body
   end
 
-  test "« Travail des élèves » leads to « Anciens élèves »" do
+  test "the direction's home leads to « Anciens élèves »" do
     sign_in_as @admin
 
     get school_admin_classrooms_path

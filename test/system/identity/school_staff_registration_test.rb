@@ -12,7 +12,7 @@ class Identity::SchoolStaffRegistrationTest < ApplicationSystemTestCase
     @school = create_school(name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
   end
 
-  test "ID-09, ID-01: at 390 px, the three entries lead to the registration; the direction lands on its student work" do
+  test "ID-09, ID-01: at 390 px, the three entries lead to the registration; the direction lands on its home" do
     with_mobile_viewport do
       visit root_path
       assert no_horizontal_scroll?, "la page d'accueil défile en largeur à 390 px"
@@ -32,8 +32,9 @@ class Identity::SchoolStaffRegistrationTest < ApplicationSystemTestCase
 
       assert_toast I18n.t("identity.school_staff_registrations.create.created")
       assert_current_path school_admin_classrooms_path
-      assert_selector "h1", text: I18n.t("school_admin.classrooms.index.title")
-      assert no_horizontal_scroll?, "« Travail des élèves » défile en largeur à 390 px"
+      assert_selector "h1", text: /\ABonjour, /
+      assert_selector "#direction_home_school"
+      assert no_horizontal_scroll?, "l'accueil de la direction défile en largeur à 390 px"
     end
     admin = Orm::User.find_by!(contact: "0701020304", role: "school_admin")
     assert_equal [ [ @school.id, "code" ] ], Orm::SchoolStaff.where(user: admin).pluck(:school_id, :joined_via)
