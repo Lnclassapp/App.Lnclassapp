@@ -163,3 +163,12 @@ La page « Référentiel » gagne une tuile, au même gabarit que les autres :
 - La carte de l'UDR-0071 ne change que par un attribut. Les thèmes passent par les tokens, comme le mode sombre.
 - Un 11ᵉ thème demandera une nouvelle clé, ses 8 valeurs et le test de palette : rien d'autre.
 - Les dessins de l'équipe sont monochromes, par choix de sécurité (ADR-0081 §4.3).
+
+## Amendement du 2026-10-05 — phase 5 : l'encadré nomme toutes les annonces qui partiraient
+
+Décision de l'orchestrateur du chantier `annonces-v2`, prise à la revue de phase 5 (Lot F). Un auteur peut avoir plus de 3 annonces en ligne : celles publiées avant le chantier ne sont pas archivées d'office. Sa prochaine parution en archive alors « en ligne − 2 » d'un coup, les plus anciennes (ADR-0081 §4.1). L'encadré du plafond (§3.3) les nomme toutes, la plus ancienne d'abord :
+
+- à 3 en ligne, le texte du §3.3 ne change pas : « Tu as déjà 3 annonces en ligne. En publiant, « <titre> » sera archivée. » ;
+- au-delà : « Tu as déjà <n> annonces en ligne. En publiant, « <titre 1> », « <titre 2> » et « <titre 3> » seront archivées. », les titres en liste française (virgules, puis « et »).
+
+La seconde ligne de l'encadré (« Programmée, elle archivera à sa parution la plus ancienne alors en ligne. ») et les toasts ne changent pas : le toast nommait déjà toutes les annonces archivées.

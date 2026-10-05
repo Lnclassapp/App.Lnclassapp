@@ -102,10 +102,10 @@ module Communication
     # UDR-0075 §3.3 : les dessins de l'équipe offerts, après les 8 de base, le plus ancien d'abord.
     def library_illustrations = illustrations.available
 
-    # UDR-0075 §3.3 : l'annonce qu'une parution archiverait, pour l'encadré du plafond ; jamais en modification d'une
-    # annonce déjà publiée, qui n'est pas une parution. → AuthoredMessagesQuery::Departing | nil
+    # UDR-0075 §3.3 : les annonces qu'une parution archiverait, pour l'encadré du plafond ; aucune en modification d'une
+    # annonce déjà publiée, qui n'est pas une parution. → [AuthoredMessagesQuery::Departing], la plus ancienne d'abord
     def departing
-      return if @message&.status == "published"
+      return [] if @message&.status == "published"
 
       query.departing(author_id: current_actor.user_id, now: Time.zone.now)
     end

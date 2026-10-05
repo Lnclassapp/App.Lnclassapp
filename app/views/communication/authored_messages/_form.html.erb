@@ -129,10 +129,17 @@
     </div>
   <% end %>
 
-  <%# UDR-0075 §3.3 : l'encadré du plafond, lu à l'ouverture ; jamais en modification d'une annonce publiée (departing est nil). %>
-  <% if (leaving = departing) %>
+  <%# UDR-0075 §3.3 : l'encadré du plafond, lu à l'ouverture ; jamais en modification d'une annonce publiée (departing est vide). %>
+  <%# Amendement de la phase 5 : plus de 3 en ligne (données antérieures), toutes celles qui partiraient sont nommées. %>
+  <% leaving = departing %>
+  <% if leaving.any? %>
+    <% live = caps::LIVE_CAP - 1 + leaving.size %>
     <div id="announcement-cap-notice" role="status" class="rounded-ln bg-info-soft p-4 text-sm text-info">
-      <p><%= t(".cap.notice", count: caps::LIVE_CAP, title: leaving.title) %></p>
+      <% if leaving.one? %>
+        <p><%= t(".cap.notice", count: live, title: leaving.first.title) %></p>
+      <% else %>
+        <p><%= t(".cap.several", count: live, titles: leaving.map { t(".cap.quoted", title: it.title) }.to_sentence) %></p>
+      <% end %>
       <p class="mt-1 text-xs"><%= t(".cap.scheduled") %></p>
     </div>
   <% end %>

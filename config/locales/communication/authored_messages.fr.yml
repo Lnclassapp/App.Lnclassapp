@@ -112,9 +112,12 @@ fr:
           count: "%{count} / %{max}"
           near: "Il reste %{count} caractères."
           full: "Limite atteinte : %{max} caractères."
-        # UDR-0075 §3.3 : l'encadré du plafond
+        # UDR-0075 §3.3 : l'encadré du plafond ; several et quoted : son amendement de la phase 5, plus de 3 en ligne
+        # (%{titles} : les titres entre guillemets, « A », « B » et « C »)
         cap:
           notice: "Tu as déjà %{count} annonces en ligne. En publiant, « %{title} » sera archivée."
+          several: "Tu as déjà %{count} annonces en ligne. En publiant, %{titles} seront archivées."
+          quoted: "« %{title} »"
           scheduled: "Programmée, elle archivera à sa parution la plus ancienne alors en ligne."
         cancel: "Annuler"
         save_draft: "Enregistrer le brouillon"
