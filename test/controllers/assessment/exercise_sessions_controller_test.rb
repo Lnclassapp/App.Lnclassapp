@@ -5,9 +5,11 @@ require "test_helper"
 # prochaine question, sans aucune correction.
 class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @classroom = create_classroom
-    @student = create_student(classroom: @classroom)
     @exercise = create_exercise(title: "Méiose", questions: 2)
+    course = @exercise.essential.course
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de l'exercice.
+    @classroom = create_classroom(level: course.level, series: course.series)
+    @student = create_student(classroom: @classroom)
   end
 
   def scope = "assessment.exercise_sessions"
@@ -27,12 +29,29 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     follow_redirect!
     assert_response :success
     assert_select "h1", text: "Méiose"
-    assert_select "#progress_bar progress[value='0'][max='100']"
-    assert_select "#progress_bar", text: /#{I18n.t("#{scope}.progress_bar.answered", count: 0, total: 2)}/
-    assert_select "turbo-frame#question #question-card", text: /Question 1/
+    # UDR-0022, amendement du 2026-10-02 : l'avancement n'est dit qu'une fois, par « Question n sur T » ; la barre est seule (R6).
+    assert_select "#progress_bar > *", 1
+    assert_select "#progress_bar > progress[value='0'][max='100'][aria-label=?]", I18n.t("#{scope}.progress_bar.label"),
+                  text: I18n.t("#{scope}.progress_bar.percent", percent: 0)
+    assert_select "turbo-frame#question #question-card", text: /#{I18n.t("#{scope}.question_card.number", number: 1, total: 2)}/
+    # Une question à choix unique : pas de consigne, les boutons radio la portent (R4).
+    assert_select "#attempt-form fieldset > p", 0
     assert_select "#attempt-form[action='#{exercise_session_attempts_path(session.public_id)}'] input[type=radio]", 4
     assert_select "#attempt-form input[type=hidden][name='attempt[question_id]'][value='#{@exercise.questions.order(:position).first.id}']"
     assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: /#{I18n.t("#{scope}.show.quit")}/
+  end
+
+  test "une question à plusieurs réponses : « Coche N propositions. », sans badge qui le redit" do
+    @exercise.questions.order(:position).first.update!(question_type: "multiple_correct_2")
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    sign_in_as @student
+
+    get exercise_session_path(session.public_id)
+
+    assert_response :success
+    assert_select "#attempt-form fieldset > p", text: "Coche 2 propositions."
+    assert_select "#attempt-form input[type=checkbox]", 4
+    assert_select "#question-card", text: /Plusieurs propositions correctes/, count: 0
   end
 
   test "un exercice assigné à la classe : la session est rattachée à l'assignation" do

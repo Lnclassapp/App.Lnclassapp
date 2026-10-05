@@ -73,7 +73,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=refresh]"
     assert_equal "image/jpeg", stored.content_type
-    assert_not Entities::Identity::ImageHeader.read(stored.download).metadata
+    assert_not Entities::Shared::ImageHeader.read(stored.download).metadata
     event = Orm::AuditEvent.find_by!(action: "profile.photo_changed")
     assert_equal [ @student.id, "User", @student.id ], [ event.actor_id, event.subject_type, event.subject_id ]
     assert_equal({ "content_type" => "image/jpeg", "byte_size" => stored.byte_size, "width" => 64, "height" => 48,

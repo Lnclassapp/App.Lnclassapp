@@ -194,6 +194,54 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_equal tc("update.updated", name: "Génétique bis"), flash[:notice]
   end
 
+  # ADR-0075, RE-27: a Tle D course whose exercise is assigned to a Tle D 1 keeps a level that covers this classroom.
+  def assigned_course
+    course = create_course(name: "Génétique", level: @tle, series: @d, material: @svt)
+    assignment = create_assignment(classroom: create_classroom(name: "Tle D 1", level: @tle, series: @d),
+                                   assignable: create_exercise(essential: create_essential(course:)))
+    [ course, assignment ]
+  end
+
+  test "RE-27: moving an assigned course out of its classroom's level or series is refused in 422, under « Niveau »" do
+    create_level(name: "3ème", position: 4, cycle: "first")
+    link_level_series(level: @tle, series: @c)
+    course, = assigned_course
+    sign_in_as @member
+
+    [ { level_slug: "3eme", series_slug: "" }, { series_slug: "c" } ].each do |taxonomy|
+      patch teams_course_path(course.slug), params: course_params(name: "Génétique", **taxonomy)
+
+      assert_response :unprocessable_entity
+      assert_select "turbo-frame#modal form#course-form" do
+        assert_select "label[for=course_level_slug]", text: including(I18n.t("activemodel.attributes.dtos/catalog/course_input.level_slug"))
+        assert_select "select#course_level_slug[aria-invalid=true][aria-describedby~=course_level_slug_error]"
+        assert_select "#course_level_slug_error", text: error(:level_slug, :assigned_elsewhere)
+        assert_select "select[name='course[level_slug]'] option[selected][value=?]", taxonomy.fetch(:level_slug, "tle")
+      end
+    end
+    assert_equal [ "Génétique", @tle.id, @d.id ], course.reload.attributes.values_at("name", "level_id", "series_id")
+  end
+
+  test "RE-27: an assigned course widens to « Tle » without series and is renamed; once unassigned, its level changes" do
+    third = create_level(name: "3ème", position: 4, cycle: "first")
+    course, assignment = assigned_course
+    sign_in_as @member
+
+    patch teams_course_path(course.slug), params: course_params(name: "Génétique", series_slug: ""), as: :turbo_stream
+    assert_response :success
+    assert_equal [ @tle.id, nil ], course.reload.attributes.values_at("level_id", "series_id")
+
+    patch teams_course_path(course.slug), params: course_params(name: "Génétique humaine", series_slug: ""), as: :turbo_stream
+    assert_response :success
+    assert_equal "Génétique humaine", course.reload.name
+
+    assignment.update!(status: "archived", archived_at: Time.current)
+    patch teams_course_path(course.slug), params: course_params(name: "Génétique humaine", level_slug: "3eme", series_slug: ""),
+                                          as: :turbo_stream
+    assert_response :success
+    assert_equal [ third.id, nil ], course.reload.attributes.values_at("level_id", "series_id")
+  end
+
   test "publishing a draft replaces its status panel, sets its publication date and writes the audit trail" do
     course = create_course(name: "Génétique", level: @tle, material: @svt, status: "draft")
     sign_in_as @member
@@ -207,7 +255,11 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("transition.published", name: "Génétique"))
     assert_select "turbo-stream[action=replace][target=content_status_course_genetique]" do
       assert_select "#content_status_course_genetique", text: including(I18n.t("catalog.content_status.published"))
-      assert_select "form[action='#{archive_teams_course_path('genetique')}']"
+    end
+    # Les transitions sont des entrées du menu ⋮, remplacées avec le statut.
+    assert_select "turbo-stream[action=replace][target=content_transitions_course_genetique]" do
+      assert_select "a[role=menuitem][data-turbo-method=patch][href='#{archive_teams_course_path('genetique')}']"
+      assert_select "a[href='#{publish_teams_course_path('genetique')}']", 0
     end
     assert_equal [ [ "content.published", @member.id, course.id ] ], Orm::AuditEvent.pluck(:action, :actor_id, :subject_id)
   end
@@ -215,14 +267,14 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
   test "a published course is archived, then published again; a second publication is refused in 422" do
     course = create_course(name: "Génétique", level: @tle, material: @svt)
     essential = create_essential(course:)
-    assignment = create_assignment(assignable: course)
+    assignment = create_assignment(assignable: create_exercise(essential:))
     sign_in_as @member
 
     patch archive_teams_course_path(course.slug), as: :turbo_stream
     assert_response :success
     assert_equal "archived", course.reload.status
     assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("transition.archived", name: "Génétique"))
-    assert_select "#content_status_course_genetique form[action='#{publish_teams_course_path('genetique')}']"
+    assert_select "#content_transitions_course_genetique a[data-turbo-method=patch][href='#{publish_teams_course_path('genetique')}']"
     assert essential.reload.persisted?
     assert_equal "active", assignment.reload.status
 
@@ -234,6 +286,7 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tc("transition.refused", name: "Génétique"))
     assert_select "turbo-stream[action=replace][target=content_status_course_genetique]"
+    assert_select "turbo-stream[action=replace][target=content_transitions_course_genetique]"
     assert_equal %w[content.archived content.published], Orm::AuditEvent.order(:id).pluck(:action)
   end
 
@@ -251,5 +304,65 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     patch publish_teams_course_path(course.slug)
     assert_redirected_to course_path("genetique")
     assert_equal tc("transition.published", name: "Génétique"), flash[:notice]
+  end
+
+  # ADR-0035, amendement du 2026-10-01 : « Tout publier » depuis le menu ⋮ du cours.
+  def cascade(key, **) = I18n.t("teams.publish_cascade.#{key}", **)
+
+  test "« Tout publier » publishes the course, its draft sheets and their complete draft exercises; the rest stays as it is" do
+    course = create_course(name: "Génétique", level: @tle, material: @svt, status: "draft")
+    meiose = create_essential(course:, name: "La méiose", status: "draft")
+    archived = create_essential(course:, status: "archived")
+    complete = create_exercise(essential: meiose, status: "draft")
+    incomplete = create_exercise(essential: meiose, status: "draft", questions: 0)
+    waiting = create_exercise(essential: archived, status: "draft")
+    sign_in_as @member
+
+    patch publish_all_teams_course_path(course.slug), as: :turbo_stream
+
+    assert_response :success
+    assert_equal %w[published published published draft archived draft],
+                 [ course, meiose, complete, incomplete, archived, waiting ].map { it.reload.status }
+    done = cascade("done.course", name: "Génétique", essentials: cascade("essentials", count: 1), exercises: cascade("exercises", count: 1))
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(done)
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(cascade("skipped", count: 1))
+    assert_select "turbo-stream[action=refresh]", 1
+    assert_equal [ [ "Course", course.id ], [ "Essential", meiose.id ], [ "Exercise", complete.id ] ],
+                 Orm::AuditEvent.where(action: "content.published").order(:id).pluck(:subject_type, :subject_id)
+  end
+
+  test "« Tout publier » on a course where all is published says so, and writes nothing" do
+    course = create_course(name: "Génétique", level: @tle, material: @svt)
+    create_exercise(essential: create_essential(course:))
+    sign_in_as @member
+
+    patch publish_all_teams_course_path(course.slug), as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts]",
+                  text: including(cascade("done.course", name: "Génétique", essentials: cascade("essentials", count: 0),
+                                                         exercises: cascade("exercises", count: 0)))
+    assert_select "turbo-stream[action=append][target=toasts]", 1
+    assert_not Orm::AuditEvent.exists?
+  end
+
+  test "« Tout publier »: a teacher is refused, an unknown course is not found, and without Turbo it leads back with the summary" do
+    course = create_course(name: "Génétique", level: @tle, material: @svt, status: "draft")
+    sign_in_as create_teacher
+
+    patch publish_all_teams_course_path(course.slug), as: :turbo_stream
+    assert_response :forbidden
+    assert_equal "draft", course.reload.status
+    sign_out
+
+    sign_in_as @member
+    patch publish_all_teams_course_path("inconnu"), as: :turbo_stream
+    assert_response :not_found
+
+    patch publish_all_teams_course_path(course.slug), headers: { "HTTP_REFERER" => course_path(course.slug) }
+    assert_redirected_to course_path(course.slug)
+    assert_equal cascade("done.course", name: "Génétique", essentials: cascade("essentials", count: 0),
+                                        exercises: cascade("exercises", count: 0)), flash[:notice]
+    assert_equal "published", course.reload.status
   end
 end

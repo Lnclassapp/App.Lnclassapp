@@ -1,4 +1,4 @@
-# Pilotage de l'équipe (chantier pilotage-equipe, V4, TR-10, TR-11, TR-12) — UDR-0049, ADR-0062
+# Pilotage de l'équipe (chantier pilotage-equipe, V4, TR-10, TR-11, TR-12) — UDR-0049, ADR-0062 ; RE-06 à RE-10 — UDR-0068
 fr:
   teams:
     dashboards:
@@ -97,6 +97,34 @@ fr:
           active_students: "Élèves qui ont commencé au moins un exercice sur la période."
         empty_title: "Aucune DRENA"
         empty_description: "Les DRENA se créent depuis l'écran des DRENA."
+        # Recherche de DRENA dans le navigateur (UDR-0068 §3.5) ; %{count} est remplacé par le contrôleur table-filter.
+        filter_label: "Chercher une DRENA"
+        filter_empty: "Aucune DRENA ne correspond."
+        filter_status:
+          one: "%{count} DRENA affichée"
+          other: "%{count} DRENA affichées"
+        see_schools: ", voir ses établissements"
+      # Établissements d'une DRENA, sous filtre (UDR-0068 §3.6, ADR-0062 amendé le 2026-10-03)
+      schools:
+        title: "Par établissement"
+        subtitle: "%{drena} · triés par nombre d'élèves"
+        caption: "Établissements de la DRENA %{drena} sur %{period}"
+        form_label: "Chercher un établissement de la DRENA"
+        search_label: "Chercher un établissement"
+        submit: "Chercher"
+        clear: "Effacer"
+        columns:
+          name: "Établissement"
+          classrooms: "Classes"
+          teachers: "Enseignants"
+          students: "Élèves"
+          active_students: "Élèves actifs"
+        inactive: "Inactif"
+        total:
+          one: "%{count} établissement"
+          other: "%{count} établissements"
+        empty_title: "Aucun établissement actif dans cette DRENA"
+        no_match_title: "Aucun établissement ne correspond."
       recent_signups:
         title: "Inscrits récents"
         subtitle: "Les 10 derniers comptes, numéro masqué"

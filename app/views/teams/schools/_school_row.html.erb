@@ -1,5 +1,5 @@
 <%# 🌐 UI · teams/schools/_school_row — un établissement de la liste nationale %>
-<%# Rôle : lien vers la fiche (hors du frame) ; menu ⋮ : « Modifier » en modale, désactivation et suppression confirmées dans la page %>
+<%# Rôle : lien vers la fiche (hors du frame), code d'établissement ; menu ⋮ : « Modifier » en modale, désactivation et suppression confirmées %>
 <%# ADR  : 0030, 0036 · UDR : 0006, 0036, 0042 %>
 <% active = school.status != "inactive" %>
 <tr id="school_<%= school.public_id %>" class="align-middle">
@@ -10,6 +10,8 @@
       <span class="block text-xs text-mute"><%= school.sigle %></span>
     <% end %>
   </td>
+  <%# Le code secret d'inscription des enseignants (ADR-0057), groupé comme sur la fiche ; l'équipe seule voit cette liste. %>
+  <td class="px-4 py-3 font-mono whitespace-nowrap"><%= Entities::School::SchoolCode.display(school.school_code) %></td>
   <td class="px-4 py-3 whitespace-nowrap text-mute"><%= school.drena_name %></td>
   <td class="px-4 py-3 whitespace-nowrap"><%= t("school_types.#{school.school_type}") %></td>
   <td class="px-4 py-3"><%= t("teams.schools.cycles.#{school.cycle}") %></td>

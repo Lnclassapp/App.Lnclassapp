@@ -1,13 +1,15 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
-# Rôle : résultat d'une session terminée (score, note, maîtrise, badge) et sa correction ; sans reveal, seuls les choix de l'élève
-# ADR  : 0028, 0033, 0054 · UDR : 0007, 0023 · sécurité n° 29
+# Rôle : résultat d'une session terminée (score, note, maîtrise, badge, progrès) et sa correction ; sans reveal, seuls les choix
+# ADR  : 0028, 0033, 0043, 0054, 0079 · UDR : 0007, 0023, 0073 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery
       # badge_level : palier du score de cette session (Grading), nil sous le seuil ; earned_now : le badge de l'élève
-      # sur l'exercice vient de cette session.
+      # sur l'exercice vient de cette session. progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
       Row = Data.define(:session_public_id, :student_id, :student_name, :exercise, :essential, :score_percent, :grade_on_20,
-                        :correct_count, :question_count, :mastery, :badge_level, :earned_now, :review)
+                        :correct_count, :question_count, :mastery, :badge_level, :earned_now, :progress, :review)
+      # trend : Comprehension.trend_for ; les trois notes sur 20, du premier, du meilleur et du dernier score (cette session).
+      Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade)
       ExerciseRow = Data.define(:public_id, :title)
       EssentialRow = Data.define(:slug, :name, :course_slug)
       # correct : verdict de la tentative (nil sans tentative).
@@ -18,12 +20,12 @@ module Queries
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id users.first_name
                            users.last_name exercise_sessions.score_percent exercise_sessions.correct_count
                            exercise_sessions.question_count exercises.id exercises.public_id exercises.title essentials.slug
-                           essentials.name courses.slug].freeze
+                           essentials.name courses.slug exercise_sessions.completed_at].freeze
 
       # reveal : décidé en amont par RevealAnswersPolicy. → Row | nil
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
-          exercise_public_id, title, essential_slug, essential_name, course_slug =
+          exercise_public_id, title, essential_slug, essential_name, course_slug, completed_at =
           Orm::ExerciseSession.joins(:student, exercise: { essential: :course }).where(public_id:).pick(*SESSION_COLUMNS)
         return if id.nil?
 
@@ -31,7 +33,8 @@ module Queries
                 exercise: ExerciseRow.new(public_id: exercise_public_id, title:),
                 essential: EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:),
                 correct_count:, question_count:, **grading(score_percent),
-                earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id), review: review(id, exercise_id, reveal))
+                earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id),
+                progress: progress(id, student_id, exercise_id, completed_at), review: review(id, exercise_id, reveal))
       end
 
       # Fait teaches_student de ReadSessionPolicy : l'élève est encore inscrit dans une classe active de l'enseignant.
@@ -48,6 +51,20 @@ module Queries
         grading = Entities::Assessment::Grading
         { score_percent:, grade_on_20: grading.grade_on_20(score_percent), mastery: grading.mastery_for(score_percent),
           badge_level: grading.badge_for(score_percent) }
+      end
+
+      # Historique de l'élève sur l'exercice, toutes classes et assignations confondues : ses sessions terminées, standard
+      # et remédiation, jusqu'à celle-ci incluse, dans l'ordre (completed_at, id). Une seule requête. Une remédiation fait
+      # l'exercice : sous 50 %, la session suivante de la fiche en est une (ADR-0043), et c'est le progrès à montrer.
+      def progress(session_id, student_id, exercise_id, completed_at)
+        scores = Orm::ExerciseSession.where(student_id:, exercise_id:, status: "completed")
+                                     .where("(exercise_sessions.completed_at, exercise_sessions.id) <= (?, ?)", completed_at, session_id)
+                                     .order(:completed_at, :id).pluck(:score_percent)
+        return if scores.size < 2
+
+        grade = Entities::Assessment::Grading.method(:grade_on_20)
+        Progress.new(trend: Entities::Assessment::Comprehension.trend_for(scores), first_grade: grade.(scores.first),
+                     best_grade: grade.(scores.max), current_grade: grade.(scores.last))
       end
 
       def review(session_id, exercise_id, reveal)

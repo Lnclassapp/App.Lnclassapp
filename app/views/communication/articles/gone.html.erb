@@ -1,0 +1,16 @@
+<%# 🌐 UI · communication/articles/gone — article archivé (410) : « Cet article n'est plus disponible » %>
+<%# Rôle : logo seul, encadré avec un h1 et « Tous les articles » ; ni titre ni texte de l'article ; noindex %>
+<%# UDR  : 0066 (§3.3, §3.4) · ADR : 0074 (§4.2) %>
+<% page_title t(".page_title") %>
+<% content_for :head, tag.meta(name: "robots", content: "noindex, nofollow") %>
+<main class="flex min-h-dvh flex-col items-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-prose">
+    <%= render "communication/articles/masthead", back_label: nil, back_href: nil %>
+    <section id="article_gone" class="flex flex-col items-center rounded-card border border-line bg-white px-6 py-10 text-center">
+      <span class="grid size-14 place-items-center rounded-full bg-mist text-mute"><%= ui_icon "archive-box", size: :lg %></span>
+      <h1 class="mt-4 font-display text-xl font-extrabold"><%= t(".title") %></h1>
+      <p class="mt-1 text-sm text-mute"><%= t(".description") %></p>
+      <div class="mt-5"><%= ui_button t(".all_articles"), href: blog_path, variant: :primary %></div>
+    </section>
+  </div>
+</main>

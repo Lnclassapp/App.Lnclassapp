@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classroom_courses/show — un cours vu depuis une classe (CL-11) %>
-<%# Rôle : en-tête du cours avec sa bascule, puis ses fiches essentielles publiées, chacune avec la sienne %>
-<%# ADR  : 0048 · UDR : 0006, 0007, 0028, 0054 · retour : la classe %>
+<%# Rôle : en-tête du cours, puis ses fiches essentielles publiées, chacune menant à la fiche dans la classe ; rien ne s'assigne ici %>
+<%# ADR  : 0048, 0072 · UDR : 0006, 0007, 0028 (amendée le 2026-10-02), 0054, 0062 · retour : la classe %>
 <% course = @course.course %>
 <% active = @classroom.status == "active" %>
 <% page_title course.name %>
@@ -8,25 +8,15 @@
 <%= ui_back_link @classroom.name, href: classroom_path(@classroom.public_id) %>
 
 <%= ui_card padding: :md, class: "mb-8" do %>
-  <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-    <div class="min-w-0 space-y-3">
-      <p class="text-sm text-mute"><%= t(".context", classroom: @classroom.name, school: @classroom.school_name) %></p>
-      <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= course.name %></h1>
-      <% if course.subtitle.present? %>
-        <p class="text-mute"><%= course.subtitle %></p>
-      <% end %>
-      <div class="flex flex-wrap items-center gap-2">
-        <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
-        <%= ui_subject_badge course.material_name, category: course.material_category %>
-      </div>
-    </div>
-    <div aria-label="<%= t(".course_assignment") %>" role="group" class="lg:shrink-0">
-      <% if active %>
-        <%= render "classroom/assignments/toggle", classroom_public_id: @classroom.public_id, assignable_type: "Course",
-                   assignable_key: course.slug, assignable_name: course.name, assignment_public_id: course.assignment_public_id %>
-      <% elsif course.assignment_public_id %>
-        <%= ui_badge t("classroom.assignments.toggle.assigned"), tone: :success, icon: "check" %>
-      <% end %>
+  <div class="min-w-0 space-y-3">
+    <p class="text-sm text-mute"><%= t(".context", classroom: @classroom.name, school: @classroom.school_name) %></p>
+    <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= course.name %></h1>
+    <% if course.subtitle.present? %>
+      <p class="text-mute"><%= course.subtitle %></p>
+    <% end %>
+    <div class="flex flex-wrap items-center gap-2">
+      <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
+      <%= ui_subject_badge course.material_name, category: course.material_category %>
     </div>
   </div>
   <% unless active %>
@@ -35,32 +25,17 @@
 <% end %>
 
 <section id="classroom_course_essentials" aria-labelledby="classroom_course_essentials_title">
-  <div class="mb-4">
-    <h2 id="classroom_course_essentials_title" class="font-display text-xl font-extrabold"><%= t(".essentials_title") %></h2>
-    <% if active %>
-      <p class="mt-1 text-sm text-mute"><%= t(".essentials_hint") %></p>
-    <% end %>
-  </div>
+  <h2 id="classroom_course_essentials_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".essentials_title") %></h2>
   <% if @course.essentials.empty? %>
     <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "document-text" %>
   <% else %>
     <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
       <% @course.essentials.each do |essential| %>
-        <li class="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-          <div class="min-w-0">
-            <%= link_to essential.name, classroom_essential_path(@classroom.public_id, course.slug, essential.slug),
-                        class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-            <% if essential.subtitle.present? %>
-              <p class="mt-0.5 truncate text-sm text-mute"><%= essential.subtitle %></p>
-            <% end %>
-            <p class="mt-1 text-xs text-mute"><%= t(".exercises", count: essential.exercises_count) %></p>
-          </div>
-          <% if active %>
-            <%= render "classroom/assignments/toggle", classroom_public_id: @classroom.public_id, assignable_type: "Essential",
-                       assignable_key: essential.slug, assignable_name: essential.name,
-                       assignment_public_id: essential.assignment_public_id %>
-          <% elsif essential.assignment_public_id %>
-            <%= ui_badge t("classroom.assignments.toggle.assigned"), tone: :success, icon: "check" %>
+        <li class="min-w-0 px-4 py-4 sm:px-5">
+          <%= link_to essential.name, classroom_essential_path(@classroom.public_id, course.slug, essential.slug),
+                      class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+          <% if essential.subtitle.present? %>
+            <p class="mt-0.5 truncate text-sm text-mute"><%= essential.subtitle %></p>
           <% end %>
         </li>
       <% end %>

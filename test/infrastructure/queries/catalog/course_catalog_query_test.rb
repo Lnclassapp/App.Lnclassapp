@@ -81,6 +81,33 @@ module Queries
         assert_equal 1, queries
       end
 
+      # RE-15 (UDR-0069 §3.4) : la règle de l'élève (AudienceFilter), série vide ou cette série, appliquée au filtre.
+      test "avec un niveau, la série garde les cours sans série et ceux de cette série ; une série inconnue n'en garde aucun" do
+        mecanique = create_course(name: "Mécanique", level: @tle, material: @svt, series: create_series(name: "C"))
+        create_course(name: "Ondes", level: @seconde, material: @svt, series: @genetique.series)
+
+        assert_equal [ @conscience, @genetique ].map(&:slug), catalog(:teacher, level: @tle.slug, series: "d").map(&:slug)
+        assert_equal [ @conscience, mecanique ].map(&:slug), catalog(:teacher, level: @tle.slug, series: "c").map(&:slug)
+        assert_equal [ @genetique.slug ], catalog(:teacher, level: @tle.slug, series: "d", material: @svt.slug).map(&:slug)
+        assert_equal [ @conscience, @genetique, mecanique ].map(&:slug), catalog(:teacher, level: @tle.slug, series: "").map(&:slug)
+        assert_empty catalog(:teacher, level: @tle.slug, series: "inconnue")
+        assert_equal 1, count_queries { catalog(:team, level: @tle.slug, series: "d") }
+      end
+
+      test "sans niveau, la série est ignorée" do
+        create_course(name: "Mécanique", level: @tle, material: @svt, series: create_series(name: "C"))
+
+        assert_equal 4, catalog(:teacher, series: "d").size
+        assert_equal 4, catalog(:teacher, level: "", series: "inconnue").size
+      end
+
+      test "la série restreint l'audience d'un élève, sans jamais l'élargir" do
+        create_course(name: "Mécanique", level: @tle, material: @svt, series: create_series(name: "C"))
+        audience = Entities::Catalog::LevelAudience.new(pairs: [ [ @tle.id, @genetique.series_id ] ])
+
+        assert_equal [ @conscience.slug ], catalog(:student, level: @tle.slug, series: "c", audience:).map(&:slug)
+      end
+
       private
 
       def count_queries(&)
@@ -88,6 +115,26 @@ module Queries
         counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
         ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
         count
+      end
+
+      # UDR-0013, amendement du 2026-10-01 : l'audience d'un élève restreint le catalogue à son niveau.
+      test "avec l'audience d'un élève de Tle D : Tle D et Tle sans série ; ni Tle C, ni un autre niveau ; sans classe, rien" do
+        tle = create_level
+        d = create_series
+        c = create_series
+        own = create_course(name: "Génétique", level: tle, series: d)
+        common = create_course(name: "Philosophie", level: tle)
+        create_course(name: "Mécanique", level: tle, series: c)
+        create_course(name: "Seconde", level: create_level)
+        student = Entities::Identity::Actor.new(user_id: 1, role: :student)
+        query = CourseCatalogQuery.new
+
+        rows = query.call(actor: student, audience: Entities::Catalog::LevelAudience.new(pairs: [ [ tle.id, d.id ] ]))
+
+        assert_equal [ own.slug, common.slug ].sort, rows.map(&:slug).sort
+        assert_empty query.call(actor: student, audience: Entities::Catalog::LevelAudience.none)
+        # Sans audience (enseignant, direction), la requête ne restreint pas le niveau.
+        assert_includes query.call(actor: student).map(&:name), "Seconde"
       end
     end
   end

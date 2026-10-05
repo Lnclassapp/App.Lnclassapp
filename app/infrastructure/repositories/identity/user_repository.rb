@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
-# Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur
-# ADR  : 0026, 0028, 0050, 0055, 0065
+# Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur, anonymise un compte
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077
 module Repositories
   module Identity
     class UserRepository
@@ -13,7 +13,11 @@ module Repositories
       def find_by_contact(contact:) = map(Orm::User.find_by(contact:))
 
       # authenticate_by hache un PIN factice quand le numéro est inconnu : même durée dans les deux cas.
-      def authenticate(contact:, pin:) = map(Orm::User.authenticate_by(contact:, pin:))
+      # Une direction archivée reçoit le refus d'un mauvais PIN : le compte n'est pas révélé (ADR-0077 §4.2).
+      def authenticate(contact:, pin:)
+        user = Orm::User.authenticate_by(contact:, pin:)
+        map(user) unless user && archived_school_admin?(user)
+      end
 
       def update_pin(user_id:, pin:)
         Orm::User.find(user_id).update!(pin:)
@@ -33,6 +37,12 @@ module Repositories
         ::Shared::Result.failure(:conflict, errors: TAKEN)
       end
 
+      # Le secret aléatoire n'est ni rendu ni journalisé : plus personne ne connaît le PIN du compte.
+      def anonymize(user_id:, first_name:, last_name:, at:)
+        Orm::User.find(user_id).update!(first_name:, last_name:, contact: nil, pin: SecureRandom.base58(32), anonymized_at: at)
+        true
+      end
+
       def actor_for(user_id:)
         user = Orm::User.find(user_id)
         Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id: school_id_of(user))
@@ -40,11 +50,16 @@ module Repositories
 
       private
 
-      # L'école principale d'un enseignant ; le rattachement d'une direction (ADR-0065).
+      # L'école principale d'un enseignant ; le rattachement actif d'une direction (ADR-0065) : archivée, elle n'en a
+      # aucun et une session survivante la mène à l'écran d'attente (ADR-0077 §4.2).
       def school_id_of(user)
-        return user.school_staff&.school_id if user.role == "school_admin"
+        return Orm::SchoolStaff.active.where(user_id: user.id).pick(:school_id) if user.role == "school_admin"
 
         Orm::TeacherSchool.where(teacher_id: user.id, primary: true).pick(:school_id)
+      end
+
+      def archived_school_admin?(user)
+        user.role == "school_admin" && Orm::SchoolStaff.where(user_id: user.id).where.not(archived_at: nil).exists?
       end
 
       def map(record)

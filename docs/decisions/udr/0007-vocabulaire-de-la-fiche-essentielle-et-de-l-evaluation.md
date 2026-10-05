@@ -72,3 +72,13 @@ La connexion ne dit jamais « session » : on écrit « Connexion » et « Se d�
 - `test/i18n/vocabulary_test.rb` parcourt `config/locales/**/*.fr.yml` et `app/views/**/*`, et échoue sur les termes interdits, sans tenir compte de la casse : `quiz`, `habilet`, `notion(s) clé(s)`, `conforme au programme`. « Diamant » est un terme **autorisé** : c'est le badge du sans-faute.
 - **Accepté par le porteur le 2026-09-25** : « Fiche essentielle » plutôt que « Habileté », et « Session » pour `ExerciseSession`, « Tentative » restant réservé à la réponse à une question.
 - **Arbitrage du porteur (2026-09-25)** : quatre badges, dont « Diamant » pour le sans-faute (ADR-0033). « Diamant » quitte la liste des termes interdits.
+
+## Amendement du 2026-09-30 — « Essentielles de la leçon »
+
+*Décision du porteur du 2026-09-30 (épuration des en-têtes, voir l'[UDR-0042, amendement du 2026-09-30](0042-actions-de-ligne-dans-un-menu.md)). Elle fait foi en cas d'écart avec le §2.*
+
+- **Exception** : la liste des fiches d'un cours s'intitule « Essentielles de la leçon ». Cela vaut dans le catalogue (`catalog.courses.show.essentials_title`) et dans la page d'un cours d'une classe (`classroom.classroom_courses.show.essentials_title`).
+- **Pourquoi c'est compatible** : « leçon » y désigne le **cours parent**, pas la fiche, et « Essentielles » n'y nomme pas une fiche seule.
+- **Portée** : la règle du §2 reste entière ailleurs. Une fiche ne s'appelle ni « Leçon » ni « Essentiel », et « Fiche essentielle » reste son nom partout, y compris dans ses propres pages et dans les imports.
+- **Vérification** : `test/i18n/locale_files_test.rb` n'admet « leçon » que sous ces deux clés, avec cette valeur exacte (`ALLOWED`). Un autre emploi, ou une autre valeur sous ces clés, échoue.
+

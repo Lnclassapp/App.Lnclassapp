@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot C1, critères AS-02, AS-39, TR-cadre-3 ; sécurité n° 29 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`, `RevealAnswersPolicy`, `StartSessionPolicy`) · [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (badges, maîtrise) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (démarrer, reprendre, recommencer) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0017](0017-formulaire-exercice.md) (modale « Modifier ») |
@@ -78,3 +78,56 @@ Avant de faire un exercice, l'élève veut savoir ce qui l'attend et où il en e
 - Retour : `ui_back_link` vers `course_essential_path`, libellé = nom de la fiche (au lieu de « Fiche essentielle : <nom> »).
 - Titre : « <titre de l'exercice> · <espace> · Lnclass ».
 - Badge et maîtrise de l'élève : suivis d'une infobulle des seuils (UDR-0054 §3.4).
+
+## Amendement du 2026-10-02 — épuration (UDR-0057) · Statut : Accepté (2026-10-02, porteur)
+
+> **Décision du porteur (2026-10-02)** : amendement accepté. Les retraits ne valent **que pour l'élève** : l'enseignant et l'équipe gardent ces écrans inchangés, y compris pour les simples répétitions. Toute ligne du tableau ci-dessous qui vise un autre rôle est caduque. « Meilleure note » en /20 accepté : la note n'a qu'une forme dans le parcours élève.
+
+*Chantier [`interface-epuree`](../../chantiers/interface-epuree/memo.md), Lot C, [UDR-0057](0057-ecrans-eleve-epures.md). Statut : `Accepté` (porteur, 2026-10-02). Le Lot C ne code rien avant l'acceptation du porteur (plan, « Porte des lots C à F »). Une fois acceptée, cette section fait foi en cas d'écart avec le texte ci-dessus et les amendements précédents.*
+
+**Contexte.** L'UDR-0057 impose six règles (R1 à R6) à chaque écran élève. Cette page est l'écran de détail de l'exercice : elle reçoit ce que l'accueil retire de ses lignes (UDR-0058 §3.3, grill Q4). L'audit de la vue élève, le 2026-10-02, relève deux textes d'aide permanents, deux répétitions, deux formes de la note dans le parcours et une liste sans limite.
+
+**Q4 — ce que l'accueil retire.** Le bloc `#student_progress` affiche **déjà** les quatre informations : badge, meilleur score, maîtrise et nombre de sessions terminées (§2.5, `_student_progress`). Badge et maîtrise ont déjà leur infobulle des seuils (amendement du 2026-09-29) : la page explique donc badges et maîtrise, comme l'UDR-0058 §3.3 l'exige. Rien n'est à ajouter. Le Lot C prouve par un test système que les quatre valeurs restent visibles.
+
+**Changements pour l'élève**
+
+| Élément | Aujourd'hui | Après | Règle (R1–R6, Q4) | Où va l'information |
+|---|---|---|---|---|
+| Ligne de contexte de `#exercise_header` (`p#exercise_context`) | « <cours> · Fiche essentielle : <fiche> » | **Élève seulement** : « <cours> » seul, la vue rend `course.name`. La clé `show.context` (« %{course} · Fiche essentielle : %{essential} ») reste celle de l'enseignant et de l'équipe | R6 | Le nom de la fiche reste dans le lien retour (`ui_back_link`), juste au-dessus de la carte |
+| « Meilleur score » de `_student_progress` | « 85 % » | Libellé « Meilleure note », valeur `grade_label(progress.best_score_percent)` (« 17/20 »). Clés : `best_score: "Meilleure note"` ; `score` supprimée | R6 (une seule forme de la note dans le parcours, UDR-0058 §3.3) | Même valeur, sous la forme du résultat de session et de l'accueil |
+| « Meilleur score » sans session terminée | « Aucune session terminée » | « — » en `text-mute`. Clé : `no_score: "—"` | R6 | « Sessions » dit déjà « Aucune terminée », dans le même bloc |
+| Phrase `restart_hint` de `_student_progress` | Paragraphe permanent sous les boutons, quand une session est en cours | Paragraphe retiré. Même texte dans `ui_info_tip t(".restart_hint"), label: t(".restart")`, juste après le bouton « Recommencer », dans le même conteneur d'actions | R4 | Dans l'infobulle « Aide : Recommencer » |
+| Aide `student_hint` de `_questions_preview` | Paragraphe permanent sous « Aperçu des questions » | Paragraphe retiré. Même texte dans `ui_info_tip t(".student_hint"), label: t(".title")`, dans le `h2`, juste après son texte (motif des `dt` de `_student_progress`) | R4 | Dans l'infobulle « Aide : Aperçu des questions ». La session montre aussi le verdict après chaque réponse |
+| Liste `ol` des questions de `_questions_preview` | Toutes les questions | 3 questions visibles, les suivantes rendues mais masquées (`hidden`), puis « Voir plus » | R3 | Les questions suivantes sont déjà dans la page. « Voir plus » les révèle par 3, sans requête |
+
+**« Voir plus » de l'aperçu (élève seulement)**
+- `show` passe une locale de plus : `render "questions_preview", questions: @detail.questions, reveal: @reveal, student: @progress.present?`. `@progress` n'existe que pour l'élève (`StartSessionPolicy`).
+- Si `student` : `section#exercise_questions` porte `data-controller="reveal"` et `data-reveal-step-value="3"`. Chaque `li.question` porte `data-reveal-target="item"`. À partir de la quatrième, il porte aussi `hidden`.
+- Après l'`ol`, s'il y a plus de 3 questions : `ui_button` « Voir plus » (`variant: :ghost`, `full: true`, `data-reveal-target="button"`), puis `p.sr-only[aria-live=polite][data-reveal-target=status]`. Libellés et action : le contrat du contrôleur `reveal` et ses clés de `config/locales/shared/components.fr.yml` (Lot 0).
+- `data-controller="math"` reste sur l'`ol` : KaTeX rend aussi les questions masquées.
+- Sans `student`, l'aperçu est inchangé : toutes les questions, aucune cible `reveal`.
+
+**Contrôle R1 à R6 (vue élève)**
+- **R1** — Conforme aujourd'hui. Une seule action principale : « Commencer l'exercice » (`primary`), ou « Reprendre » (`primary`) avec « Recommencer » (`secondary`). « Voir plus » est `ghost`. L'élève n'a pas de menu ⋮.
+- **R2** — Conforme aujourd'hui. Le `main` a deux enfants directs : `#exercise_header` et `div.space-y-10`. À 390 px, l'élève voit au plus quatre blocs : lien retour, carte de l'exercice, « Ta progression », aperçu.
+- **R3** — Change : 3 questions, puis « Voir plus ». Les badges de l'en-tête ne forment pas une liste de lignes.
+- **R4** — Change : `restart_hint` et `student_hint` passent en infobulle. Badge et maîtrise ont déjà la leur.
+- **R5** — Conforme aujourd'hui. L'accent est `brand` (badge du type). La couleur du badge de matière suit la pastille de matière (UDR-0058 §3.4). Le ton du badge de palier code le palier, et le nomme en texte (UDR-0007).
+- **R6** — Change : la fiche n'est plus nommée deux fois. « Aucune session terminée » n'est plus dit deux fois. La note a une seule forme, sur 20.
+
+**Inchangé pour l'enseignant, l'équipe et la direction** (décision du porteur, 2026-10-02 : rien ne change pour eux, même une simple répétition)
+- Panneau de statut, menu ⋮ « Modifier », publier, archiver (équipe).
+- Ligne de contexte complète : « <cours> · Fiche essentielle : <fiche> ».
+- Aide de l'aperçu en paragraphe : `reveal_hint` (enseignant, équipe), `student_hint` pour un lecteur sans correction ni progression. Aperçu complet, sans « Voir plus ».
+- Pas de bloc « Ta progression ».
+- La condition « élève » de la vue est `@progress.present?` (`StartSessionPolicy`), passée à `_questions_preview` par la locale `student`.
+
+**Vérification**
+- `test/system/assessment/exercise_page_test.rb` : badge, meilleure note, maîtrise et sessions visibles pour l'élève (Q4) ; contexte « <cours> » seul ; 3 questions puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'enseignant voit le contexte complet, toutes les questions, `reveal_hint` et aucun « Voir plus ».
+- `test/controllers/assessment/exercises_controller_test.rb` : l'assertion sur `student_hint` vise désormais le panneau de l'infobulle ; ligne de contexte (élève : le cours seul ; enseignant et équipe : complète) et « Meilleure note » en /20.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Enseignant** : après l'en-tête d'un exercice publié, la carte « Assigner à mes classes » (`#exercise_assign`) porte une bascule par classe de l'enseignant au niveau et à la série du cours (UDR-0069 §3.8).

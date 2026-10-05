@@ -1,9 +1,10 @@
 <%# 🌐 UI · assessment/exercises/show — page d'un exercice (AS-02), pour l'élève, l'enseignant et l'équipe %>
-<%# Rôle : en-tête ; progression et « Commencer » de l'élève ; statut et menu ⋮ « Modifier » (modale) de l'équipe ; aperçu des questions %>
-<%# ADR  : 0028, 0054 · UDR : 0006, 0007, 0021, 0042, 0054 · aucun cache : le HTML dépend du rôle (sécurité n° 29) %>
+<%# Rôle : en-tête (contexte : le cours seul pour l'élève) ; progression et « Commencer » de l'élève ; statut et menu ⋮ de l'équipe ; « Assigner à mes classes » de l'enseignant ; aperçu des questions %>
+<%# ADR  : 0028, 0054, 0072 · UDR : 0006, 0007, 0021, 0042, 0054, 0057, 0062, 0069 · aucun cache : le HTML dépend du rôle (sécurité n° 29) %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
+<% student = @progress.present? %>
 <% page_title t(".page_title", title: exercise.title) %>
 <% content_for :nav_key, "courses" %>
 <div id="exercise_header" class="mb-8">
@@ -11,7 +12,7 @@
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
       <div class="min-w-0 space-y-3">
-        <p class="text-sm text-mute"><%= t(".context", course: course.name, essential: essential.name) %></p>
+        <p id="exercise_context" class="text-sm text-mute"><%= student ? course.name : t(".context", course: course.name, essential: essential.name) %></p>
         <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= exercise.title %></h1>
         <div class="flex flex-wrap items-center gap-2">
           <%= ui_subject_badge course.material_name, category: course.material_category %>
@@ -25,6 +26,7 @@
           <%= content_status_panel(record: @status_record) %>
           <%= ui_dropdown label: t(".actions", name: exercise.title), id: "exercise-actions-menu", fixed: true do %>
             <%= ui_dropdown_item t(".edit"), href: edit_teams_exercise_path(exercise.public_id), icon: "pencil-square", frame: "modal" %>
+            <%= content_transition_items(record: @status_record) %>
           <% end %>
         </div>
       <% end %>
@@ -36,8 +38,31 @@
 </div>
 
 <div class="space-y-10">
+  <% if @targets %>
+    <%= ui_card title: t(".assign_title"), icon: "user-group", id: "exercise_assign" do %>
+      <% if @targets.classrooms.any? %>
+        <ul class="space-y-2" aria-label="<%= t(".assign_targets", title: exercise.title) %>">
+          <% @targets.classrooms.each do |target| %>
+            <% state = @targets.states[[ target.public_id, exercise.public_id ]] %>
+            <li class="flex flex-wrap items-center justify-between gap-3">
+              <span class="text-sm font-medium text-ink"><%= target.name %></span>
+              <%# Trop large pour la ligne (« Assigné · Pour … · Retirer » à 375 px), la bascule passe dessous et s'y replie. %>
+              <div class="max-w-full">
+                <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
+                           assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
+                           assignment_public_id: state&.assignment_public_id, due_on: state&.due_on,
+                           needs_session_days: target.needs_session_days %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p id="exercise_assign_none" class="text-sm text-mute"><%= t(".assign_none", level: @targets.scope_label) %></p>
+      <% end %>
+    <% end %>
+  <% end %>
   <% if @progress %>
     <%= render "student_progress", progress: @progress, exercise: %>
   <% end %>
-  <%= render "questions_preview", questions: @detail.questions, reveal: @reveal %>
+  <%= render "questions_preview", questions: @detail.questions, reveal: @reveal, student: %>
 </div>

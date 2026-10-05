@@ -1,12 +1,15 @@
 <%# 🌐 UI · layouts/application — document HTML commun (pages publiques et shell) %>
 <%# Rôle : en-tête HTML, feuille et script uniques, région des toasts ; le shell y injecte :body %>
-<%# UDR  : 0005, 0006, 0054 · ADR : 0031, 0049, 0051 %>
+<%# UDR  : 0005, 0006, 0054, 0065 · ADR : 0031, 0049, 0051 %>
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
+<%# UDR-0065, amendement du 2026-10-03 : le choix de l'interrupteur (cookie) est rendu par le serveur, sans éclair %>
+<html lang="<%= I18n.locale %>"<%= tag.attributes(data: { theme: theme_preference }) %>>
   <head>
     <%# UDR-0054 §3.1 : « Page · Espace · Lnclass », nommé par page_title dans chaque vue de page. %>
     <title><%= document_title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <%# UDR-0065 : le navigateur peint le bon fond avant la feuille de style ; « light dark » tant qu'aucun choix n'est fait %>
+    <meta name="color-scheme" content="<%= color_scheme_content %>">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Lnclass">
     <meta name="mobile-web-app-capable" content="yes">
@@ -31,7 +34,6 @@
     <%= preload_link_tag "dm-sans-latin-wght-normal.woff2", as: "font", type: "font/woff2", crossorigin: "anonymous" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-    <%= debugbar_head if defined?(Debugbar) %>
   </head>
 
   <%# UDR-0054 §3.3 : auto-focus de page (premier champ en erreur, sinon le champ que l'écran déclare) %>
@@ -42,6 +44,5 @@
     <%# UDR-0006 : cible des modales CRUD (lien data-turbo-frame="modal"), vidée à la fermeture %>
     <%= turbo_frame_tag "modal" %>
     <%= content_for?(:body) ? yield(:body) : yield %>
-    <%= debugbar_body(nonce: content_security_policy_nonce) if defined?(Debugbar) %>
   </body>
 </html>

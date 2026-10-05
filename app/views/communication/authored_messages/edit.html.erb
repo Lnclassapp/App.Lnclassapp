@@ -1,0 +1,9 @@
+<%# 🌐 UI · communication/authored_messages/edit — « Modifier l'annonce », page entière, pour son seul auteur %>
+<%# Rôle : le formulaire prérempli ; publiée, un avertissement, ni date de publication ni brouillon ; re-rendu en 422 %>
+<%# ADR  : 0078 · UDR : 0054, 0071 (§3.8) %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "announcements" %>
+<%= ui_page_header title: t(".title"), back: { label: t("communication.tabs.mine"), href: my_announcements_path } %>
+<%= ui_card do %>
+  <%= render "form", form: @form, message: @message, url: announcement_path(@message.public_id), method: :patch %>
+<% end %>

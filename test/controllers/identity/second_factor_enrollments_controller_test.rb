@@ -94,6 +94,19 @@ class Identity::SecondFactorEnrollmentsControllerTest < ActionDispatch::Integrat
     assert_secret_response(stream: true)
   end
 
+  # Chantier enrolement-secret-stable: a reload or a second tab must not invalidate the QR code already scanned.
+  test "the QR code scanned before reopening the enrollment still activates the second factor" do
+    get new_identity_second_factor_enrollment_path
+    scanned = enrollment_params(code: current_code)
+    get new_identity_second_factor_enrollment_path
+
+    post identity_second_factor_enrollment_path, params: { second_factor: scanned }
+
+    assert_response :success
+    assert_select "li", 10
+    assert_not_nil credential.confirmed_at
+  end
+
   test "a wrong code re-renders the same QR code in 422" do
     get new_identity_second_factor_enrollment_path
     secret = Orm::TotpCredential.find_by!(user: @member).secret

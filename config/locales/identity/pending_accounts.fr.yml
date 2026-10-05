@@ -1,4 +1,4 @@
-# Compte sans accueil : élève sans classe, enseignant sans école ou en attente de validation — ADR-0030, ADR-0040, ADR-0063, UDR-0050
+# Compte sans accueil : élève sans classe, enseignant sans école ou en attente de validation — ADR-0030, ADR-0036, ADR-0040, ADR-0063, ADR-0071, UDR-0050, UDR-0056
 fr:
   identity:
     pending_accounts:
@@ -9,9 +9,23 @@ fr:
           title: "Tu n'as pas encore de classe"
           description: "Demande le code de ta classe à ton enseignant, puis rejoins-la."
           join: "Rejoindre une classe"
+          archive: "Voir mon historique"
+        # Lot R (ADR-0036, memo Q19) : l'élève qui a quitté sa classe garde son historique.
+        former_student:
+          title: "Tu n'as plus de classe active"
+          description: "Rejoins ta nouvelle classe avec son code. Tes classes et tes exercices terminés restent dans ton historique."
         teacher:
           title: "Votre compte attend son école"
           description: "L'équipe Lnclass vous rattache à votre établissement. Vous serez prévenu dès que c'est fait."
+        no_school:
+          title: "Vous n'êtes rattaché à aucun établissement"
+          description: "Saisissez le code de votre établissement pour le rejoindre. Il vous a été transmis par sa direction."
+        school_code_placeholder: "K7M-4QZ"
+        school_code_hint: "6 caractères, transmis par votre établissement."
+        join: "Rejoindre l'établissement"
+        rate_limited:
+          title: "Trop de tentatives"
+          message: "Réessayez dans une minute."
         other:
           title: "Votre compte est en attente"
           description: "Cet espace n'est pas encore ouvert. Contactez l'équipe Lnclass."

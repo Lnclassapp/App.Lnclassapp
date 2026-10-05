@@ -45,6 +45,10 @@ module Repositories
         Orm::Essential.where(course_id:).maximum(:position).to_i + 1
       end
 
+      def draft_slugs(course_id:)
+        Orm::Essential.where(course_id:, status: "draft").order(:position, :id).pluck(:slug)
+      end
+
       def taken_slugs
         Orm::Essential.pluck(:slug).to_set
       end
@@ -52,7 +56,7 @@ module Repositories
       private
 
       def editable_attributes(essential)
-        { name: essential.name, subtitle: essential.subtitle, content: RichTextSanitizer.call(essential.content) }
+        { name: essential.name, subtitle: essential.subtitle, content: Repositories::Shared::RichTextSanitizer.call(essential.content) }
       end
 
       # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.

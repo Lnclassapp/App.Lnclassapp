@@ -1,0 +1,31 @@
+<%# 🌐 UI · shared/_theme_switch — interrupteur clair / sombre : icône dans l'en-tête (lg+), carte « Apparence » du profil %>
+<%# Rôle : bouton role=switch, caché sans JavaScript ; le contrôleur theme pose data-theme sur <html> et le cookie %>
+<%# UDR  : 0065 (amendement du 2026-10-03) · locals : variant (:icon | :card), wrapper (classes de l'enveloppe) %>
+<% dark = theme_preference == "dark" %>
+<%= tag.div hidden: true, class: local_assigns[:wrapper],
+      data: { controller: "theme", action: "theme:changed@window->theme#sync" } do %>
+  <% if variant == :icon %>
+    <%= tag.button type: "button", role: "switch", "aria-checked": dark.to_s, "aria-label": t("shared.theme_switch.label"),
+          data: { theme_target: "switch", action: "theme#toggle" },
+          class: "group grid size-tap cursor-pointer place-items-center rounded-full text-ink transition hover:bg-ink/5 " \
+                 "focus-visible:outline-2 focus-visible:outline-brand" do %>
+      <%= ui_icon "moon", class: "group-aria-checked:hidden" %>
+      <%= ui_icon "sun", class: "hidden group-aria-checked:block" %>
+    <% end %>
+  <% else %>
+    <%= ui_card id: "profile_theme", "aria-labelledby": "profile_theme_title" do %>
+      <h2 id="profile_theme_title" class="font-display text-lg leading-tight font-extrabold"><%= t("shared.theme_switch.title") %></h2>
+      <%= tag.button type: "button", role: "switch", "aria-checked": dark.to_s, data: { theme_target: "switch", action: "theme#toggle" },
+            class: "group mt-3 flex min-h-tap w-full cursor-pointer items-center justify-between gap-4 rounded-ln text-left " \
+                   "focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <span>
+          <span class="block font-medium"><%= t("shared.theme_switch.label") %></span>
+          <span class="block text-sm text-mute"><%= t("shared.theme_switch.hint") %></span>
+        </span>
+        <span class="relative h-7 w-12 shrink-0 rounded-full bg-mute transition group-aria-checked:bg-brand" aria-hidden="true">
+          <span class="absolute top-1 left-1 size-5 rounded-full bg-white shadow-card transition group-aria-checked:translate-x-5"></span>
+        </span>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

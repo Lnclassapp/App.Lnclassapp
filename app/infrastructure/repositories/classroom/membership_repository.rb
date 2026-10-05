@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::MembershipRepository
 # Rôle : adhésions des élèves (classroom_students) ; une seule classe principale active, garantie par l'index partiel
-# ADR  : 0040
+# ADR  : 0036, 0040
 module Repositories
   module Classroom
     class MembershipRepository
@@ -25,6 +25,11 @@ module Repositories
 
       def leave_primary(student_id:, at:)
         Orm::ClassroomStudent.where(student_id:, primary: true, left_at: nil).update_all(left_at: at)
+        true
+      end
+
+      def leave_all(student_id:, at:)
+        Orm::ClassroomStudent.where(student_id:, left_at: nil).update_all(left_at: at)
         true
       end
 

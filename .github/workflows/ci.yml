@@ -1,18 +1,26 @@
 # GitHub runs bin/ci, exactly like a developer does locally: the steps live in config/ci.rb only
-# (feuille-de-route §2, garde-fou n° 4). The jobs below split them into groups that run side by side,
-# each job playing `CI_GROUP=<group>` (ADR-0064); test/guards/ci_plan_test.rb proves they add up to the whole list.
-# The job named « ci » gathers them: it is the one status a pull request waits for.
+# (feuille-de-route §2, garde-fou n° 4). The one status a pull request waits for is « ci » (ADR-0069).
+#
+# The GitHub minutes of a private repository are counted per job, rounded up to the minute. Hence (ADR-0069):
+#   - pull requests only: a push on Develop, Staging or main merges a tree its pull request already tested;
+#   - a draft pull request waits: the run starts when it is marked ready for review;
+#   - a tree that already got a green « ci » is not replayed (a promotion, a re-run): about two minutes;
+#   - a pull request that touches documentation alone is green without playing the checks;
+#   - otherwise the whole bin/ci, in four jobs side by side (ADR-0069 §9: ten minutes of clock at most on any runner):
+#     « unit » plays every group but the system tests, « system » plays the system tests in three parts of
+#     similar duration (script/ci/test_timings.yml), the only step longer than two minutes.
+# « plan » decides (a few seconds) and « ci » gives the verdict and publishes the proof of the tested tree.
+# test/guards/ci_plan_test.rb holds these rules.
 name: CI
 
 on:
   pull_request:
-  push:
-    branches: [ Develop, Staging, main ]
+    types: [ opened, synchronize, reopened, ready_for_review ]
 
-# A new push to a pull request cancels the run it makes obsolete. Pushes to the long branches always finish.
+# A new push to a pull request cancels the run it makes obsolete.
 concurrency:
-  group: ci-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -21,127 +29,208 @@ env:
   RUBOCOP_CACHE_ROOT: tmp/rubocop
 
 jobs:
-  # A pull request that touches only documentation skips the checks below, and « ci » still reports green.
-  # Any doubt (a push, an unreadable diff) runs everything.
-  changes:
+  # What this run plays: the draw, the proof of the tree, the documentation-only rule. No toolchain, a few seconds.
+  # ADR-0069, amendment of 2026-10-04: the CI is switched off until the repository variable CI_ENABLED is « true »
+  # (Settings → Secrets and variables → Actions → Variables). Off, « plan » is skipped and so is everything after,
+  # as for a draft: no runner, no failure. The proof is then bin/ci run locally.
+  plan:
+    name: plan
+    if: ${{ !github.event.pull_request.draft && vars.CI_ENABLED == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     # Job permissions replace the workflow's: the private repository needs contents too (HTTP 403 without it).
     permissions:
+      actions: read
       contents: read
       pull-requests: read
     outputs:
-      code: ${{ steps.diff.outputs.code }}
+      full: ${{ steps.draw.outputs.full }}
+      unit: ${{ steps.draw.outputs.unit }}
+      tested: ${{ steps.proof.outputs.tested }}
+      code: ${{ steps.changes.outputs.code }}
+      tree: ${{ steps.tree.outputs.sha }}
+
     steps:
-      - id: diff
+      - uses: actions/checkout@v7
+
+      # ADR-0069 §8 : a promotion into Staging always replays the whole suite, and GitHub draws one pull request into
+      # Develop in five that replays it whatever its proof says. The draw is fixed per pull request (a new push does not
+      # draw again) and nobody can foresee it: it hashes the repository secret CI_DRAW_SALT with the pull request number.
+      # Without the secret (not set yet, or a Dependabot pull request), every pull request into Develop replays it.
+      - id: draw
+        env:
+          BASE: ${{ github.base_ref }}
+          PR: ${{ github.event.pull_request.number }}
+          SALT: ${{ secrets.CI_DRAW_SALT }}
+        run: |
+          echo "CI_DRAW_SALT : $([ -n "$SALT" ] && echo présent || echo absent)"
+          full=false
+          if [ "$BASE" = "Staging" ] || { [ "$BASE" = "Develop" ] && [ -z "$SALT" ]; }; then
+            full=true
+          elif [ "$BASE" = "Develop" ]; then
+            hash=$(printf '%s:%s' "$SALT" "$PR" | sha256sum | cut -c1-8)
+            [ $(( 16#$hash % 5 )) -eq 0 ] && full=true
+          fi
+          echo "full=$full" | tee -a "$GITHUB_OUTPUT"
+          # ADR-0069 §9 : the groups of the « unit » job; « system » plays the system tests. The import performance
+          # tests (ADR-0039) run on a full run only: a pull request that replays the suite without being drawn plays
+          # every other group, the promotion into Staging plays them.
+          [ "$full" = true ] && unit="lint,security,unit,seeds,assets,perf" || unit="lint,security,unit,seeds,assets"
+          echo "unit=$unit" | tee -a "$GITHUB_OUTPUT"
+
+      # Has this exact tree already got a green « ci »? Any doubt (unreadable commit, API error) answers no.
+      - id: proof
+        if: steps.draw.outputs.full != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # ADR-0069 §8 : the proof of a cloud session counts for a pull request into Develop only.
+          LOCAL_PROOF: ${{ github.base_ref == 'Develop' }}
+        run: script/ci/tested_tree
+
+      # Documentation alone: nothing to check. Any doubt (an unreadable diff) runs everything.
+      # A renamed file counts under both names: moving code into docs/ still removes code.
+      - id: changes
+        if: steps.proof.outputs.tested != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
         run: |
           code=true
-          if [ -n "$PR" ] && files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[].filename') && [ -n "$files" ]; then
+          if files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)') && [ -n "$files" ]; then
             echo "$files"
             echo "$files" | grep -qvE '^docs/|\.md$' || code=false
           fi
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
 
-  # No database: the static groups.
-  checks:
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
+      # The tree the jobs below test, read here: the proof is the tree, not the commit (ADR-0069 §4.3).
+      - id: tree
+        run: echo "sha=$(git rev-parse 'HEAD^{tree}')" >> "$GITHUB_OUTPUT"
+
+  # Every group but the system tests: lint, security, the unit suite with its 100 % coverage, seeds, assets,
+  # and the import performance tests on a full run.
+  unit:
+    name: unit
+    needs: plan
+    if: needs.plan.outputs.code == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        group: [ "lint", "security,assets" ]
-    env:
-      CI_GROUP: ${{ matrix.group }}
+    permissions:
+      contents: read
+
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
+
+      # ADR-0069 §9 : the PostgreSQL of the runner image, already installed, instead of a service container (23 s to
+      # pull and start). Same credentials as config/database.yml, loopback only (the image binds 127.0.0.1).
+      - name: PostgreSQL of the image
+        run: |
+          sudo systemctl start postgresql
+          sudo -u postgres psql -v ON_ERROR_STOP=1 -c "CREATE ROLE \"dev-rails\" LOGIN SUPERUSER PASSWORD 'dev-rails'"
+          pg_isready -h 127.0.0.1
+
       - uses: ./.github/actions/setup
 
       - name: Rubocop cache
-        if: matrix.group == 'lint'
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: tmp/rubocop
           key: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-${{ github.sha }}
           restore-keys: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-
 
-      - name: Run bin/ci (${{ matrix.group }})
-        run: bin/ci
-
-  # PostgreSQL: the unit suite with its 100 % threshold, the system tests in a real Chrome, the import budgets.
-  tests:
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        # The unit suite is never split: SimpleCov measures the whole suite (ADR-0024, configuration.md §4.1).
-        # Six system parts and three import parts, balanced on script/ci/test_timings.yml, end with the unit job:
-        # a part costs about a minute of runner before its first test, more parts buy nothing (chantier ci-rapide).
-        # The seeds ride with the shortest import part: the unit job is the longest one, it keeps the suite only.
-        group: [ "unit",
-                 "system:1/6", "system:2/6", "system:3/6", "system:4/6", "system:5/6", "system:6/6",
-                 "perf:1/3,seeds", "perf:2/3", "perf:3/3" ]
-    env:
-      CI_GROUP: ${{ matrix.group }}
-
-    services:
-      postgres:
-        image: postgres:17
-        # Same credentials as config/database.yml, so no DATABASE_URL is needed.
+      - name: Run bin/ci
         env:
-          POSTGRES_USER: dev-rails
-          POSTGRES_PASSWORD: dev-rails
-        ports:
-          - 5432:5432
-        # The job waits for the first healthy check: every second, not every ten.
-        options: --health-cmd="pg_isready" --health-interval=1s --health-timeout=5s --health-retries=30
-
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup
-
-      # Google Chrome and its driver are preinstalled on ubuntu-latest: the
-      # system tests run in a real headless browser, never under rack_test.
-      - name: Run bin/ci (${{ matrix.group }})
+          CI_GROUP: ${{ needs.plan.outputs.unit }}
         run: bin/ci
-
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure() && startsWith(matrix.group, 'system')
-        with:
-          name: screenshots-${{ strategy.job-index }}
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
 
       - name: Keep the coverage report
-        uses: actions/upload-artifact@v4
-        if: always() && startsWith(matrix.group, 'unit')
+        uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: coverage
           path: ${{ github.workspace }}/coverage
           if-no-files-found: ignore
 
-  # The status the branches wait for keeps its name, « ci ». Green only when every group passed,
-  # or when the pull request touches documentation alone. A job cancelled or skipped otherwise is red.
+  # The system tests alone, the longest group (7 of the 9 minutes bin/ci takes on a runner), in three parts of
+  # similar recorded duration: about 3 minutes of clock each. A red part does not cancel the others.
+  system:
+    name: system ${{ matrix.part }}/3
+    needs: plan
+    if: needs.plan.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [ 1, 2, 3 ]
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v7
+
+      # ADR-0069 §9 : the PostgreSQL of the runner image (see « unit »).
+      - name: PostgreSQL of the image
+        run: |
+          sudo systemctl start postgresql
+          sudo -u postgres psql -v ON_ERROR_STOP=1 -c "CREATE ROLE \"dev-rails\" LOGIN SUPERUSER PASSWORD 'dev-rails'"
+          pg_isready -h 127.0.0.1
+
+      - uses: ./.github/actions/setup
+
+      # Google Chrome and its driver are preinstalled on ubuntu-latest: the
+      # system tests run in a real headless browser, never under rack_test.
+      - name: Run bin/ci
+        env:
+          CI_GROUP: system:${{ matrix.part }}/3
+        run: bin/ci
+
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: screenshots-${{ matrix.part }}
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
+  # The verdict the branches wait for. Green when nothing had to be replayed (a proven tree, documentation alone),
+  # or when every test job is green (« system » stands for its three parts): only then does the run prove its tree, ci-tree-<tree>, kept 30 days, so that a
+  # later promotion of the same files is green in about two minutes. A draft (« plan » skipped) gets no verdict.
   ci:
     name: ci
-    if: always()
-    needs: [ changes, checks, tests ]
+    needs: [ plan, unit, system ]
+    if: ${{ !cancelled() && needs.plan.result != 'skipped' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
+
     steps:
-      - env:
-          NEEDS: ${{ toJSON(needs) }}
+      - id: verdict
+        env:
+          PLAN: ${{ needs.plan.result }}
+          CODE: ${{ needs.plan.outputs.code }}
+          UNIT: ${{ needs.unit.result }}
+          SYSTEM: ${{ needs.system.result }}
         run: |
-          echo "$NEEDS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"'
-          code=$(echo "$NEEDS" | jq -r '.changes.outputs.code // "true"')
-          echo "$NEEDS" | jq -e --arg code "$code" '
-            (.changes.result == "success") and
-            ([ del(.changes)[] | .result ] | all(. == "success" or ($code != "true" and . == "skipped")))' > /dev/null
+          echo "plan=$PLAN code=$CODE unit=$UNIT system=$SYSTEM"
+          [ "$PLAN" = success ] || { echo "::error::« plan » n'a pas abouti"; exit 1; }
+          if [ "$CODE" != true ]; then
+            echo "Rien à rejouer : arbre déjà prouvé, ou documents seulement."
+            exit 0
+          fi
+          if [ "$UNIT" = success ] && [ "$SYSTEM" = success ]; then
+            : > "$RUNNER_TEMP/ci-tree"
+            echo "proof=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::unit : $UNIT, system : $SYSTEM"
+            exit 1
+          fi
+
+      - name: Publish the proof of the tested tree
+        if: steps.verdict.outputs.proof == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: ci-tree-${{ needs.plan.outputs.tree }}
+          path: ${{ runner.temp }}/ci-tree
+          retention-days: 30
+          if-no-files-found: error

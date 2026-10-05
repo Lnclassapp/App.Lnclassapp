@@ -15,9 +15,10 @@ module Finitions
       create_course(name: "La cellule", level: @tle, material: @svt)
       @essential = create_essential(course: @course, name: "La méiose")
       @exercise = create_exercise(essential: @essential, title: "Méiose et ADN")
-      @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37")
+      # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est de Tle, le niveau des cours du catalogue.
+      @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", level: @tle)
       @student = create_student(classroom: @classroom, first_name: "Aya")
-      create_assignment(classroom: @classroom, assignable: @essential)
+      create_assignment(classroom: @classroom, assignable: @exercise)
     end
 
     def t(key, **) = I18n.t(key, **)
@@ -99,16 +100,14 @@ module Finitions
       assert_title "Cours · Élève · Lnclass"
     end
 
-    test "FU-02 : l'accueil élève s'appelle « Accueil · Élève · Lnclass » ; badges et maîtrise s'y expliquent" do
+    # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
+    test "FU-02 : l'accueil élève s'appelle « Accueil · Élève · Lnclass », sans aide affichée en permanence" do
       completed_session
       sign_in_as @student
 
       assert_current_path student_home_path
       assert_title "Accueil · Élève · Lnclass"
-      within "#student_home_exercises" do
-        assert_info_tip t("classroom.student_homes.show.badges_help"), t("shared.info_tips.badges")
-        assert_info_tip t("classroom.student_homes.show.mastery_help"), t("shared.info_tips.mastery")
-      end
+      within("#student_home_exercises") { assert_no_selector "#student_home_help" }
     end
 
     test "FU-27 : « Ma classe » montre le code de la classe sans bouton « Copier »" do
@@ -131,7 +130,8 @@ module Finitions
       assert_current_path course_path(@course.slug)
 
       visit course_essential_path(@course.slug, @essential.slug)
-      within("#essential_exercises") { assert_info_tip t("catalog.essentials.show.badges_help"), t("shared.info_tips.badges") }
+      # UDR-0015, amendement du 2026-10-02 : l'aide « Badges » quitte la fiche ; elle reste sur la page de l'exercice.
+      assert_no_selector "#essential_badges_help"
 
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"

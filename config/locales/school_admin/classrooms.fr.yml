@@ -1,5 +1,6 @@
 # Travail des élèves de la direction (chantier espace-direction-simple, Lot C, DS-05, DS-07 à DS-10) — UDR-0052, ADR-0065
 # Finitions (chantier finitions-ux, Lot G) : infobulles, retour, recherche d'un élève — UDR-0054 §3.4, §3.9
+# Lien « Anciens élèves » (fonctions-espace-eleve, lot R) — ADR-0036
 fr:
   school_admin:
     classrooms:
@@ -17,6 +18,12 @@ fr:
         title: "Travail des élèves"
         subtitle: "%{school} · Année %{year}"
         caption: "Travail des élèves par classe"
+        # UDR-0070 §3.3 : bandeau d'arrivée d'une autre direction, 7 jours.
+        arrivals:
+          line: "%{name} a rejoint la direction le %{date} (%{via})."
+          via:
+            code: "avec le code de l'établissement"
+            invitation: "sur invitation de l'équipe"
         columns:
           classroom: "Classe"
           students: "Élèves"
@@ -24,6 +31,7 @@ fr:
           submission_rate: "Taux de rendu"
           average: "Moyenne"
         empty: "Aucune classe cette année"
+        departed: "Anciens élèves"
       show:
         back: "Travail des élèves"
         subtitle:

@@ -1,15 +1,18 @@
-<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36) %>
-<%# Rôle : sections dans l'ordre de HOME_SECTIONS[:student] (à faire, ma classe, cours), puis l'activité récente, différée %>
-<%# ADR  : 0033, 0043 · UDR : 0006, 0007, 0010, 0054 · titre « Accueil · Élève · Lnclass », seuils des badges et de la maîtrise en infobulle %>
+<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
+<%# Rôle : « Bonjour » seul, puis les sections de HOME_SECTIONS[:student] (à faire, annonces, ma classe, cours) et l'activité, différée %>
+<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0057, 0058 §3.3, 0061 (carte d'aide), 0071 §3.5 (annonces) · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <% exercises = @home.assigned_exercises %>
-<%= ui_page_header title: t(".greeting", name: shell_user.first_name),
-                   subtitle: t(".subtitle", school: @home.school_name, classroom: @home.classroom_name) %>
+<%= ui_page_header title: t(".greeting", name: shell_user.first_name) do %>
+  <%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. %>
+  <%= render "shared/help_sheet" %>
+<% end %>
 
-<div class="grid gap-5">
+<div id="student_home" class="grid gap-5">
   <% home_sections_for(:student).each do |key, icon| %>
     <% if key == :todo %>
-      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises" do |card| %>
+      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises",
+                  data: (ui_reveal_data if exercises.any?) do |card| %>
         <% if exercises.empty? %>
           <%= ui_empty_state title: t(".todo_empty"), description: t(".todo_empty_description"), icon: %>
         <% else %>
@@ -17,18 +20,21 @@
             <%= ui_badge t(".todo_progress", done: exercises.count { it.completed_count.positive? }, total: exercises.size),
                          tone: :brand, size: :sm %>
           <% end %>
-          <%# Badges et maîtrise de chaque ligne (partial) s'expliquent ici, une fois pour la liste (UDR-0054 §3.4). %>
-          <div id="student_home_help" class="mb-3 flex flex-wrap items-start gap-x-4 text-sm text-mute">
-            <div><%= t(".badges_help") %><%= ui_info_tip t("shared.info_tips.badges"), label: t(".badges_help") %></div>
-            <div><%= t(".mastery_help") %><%= ui_info_tip t("shared.info_tips.mastery"), label: t(".mastery_help") %></div>
-          </div>
           <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
-            <%= render partial: "assigned_exercise", collection: exercises, as: :exercise %>
+            <% exercises.each_with_index do |exercise, index| %>
+              <%= render "assigned_exercise", exercise:, index: %>
+            <% end %>
           </ul>
+          <%= ui_reveal_more exercises.size %>
         <% end %>
       <% end %>
       <% if @home.pending_gaps.any? %>
         <%= render "pending_gaps", gaps: @home.pending_gaps %>
+      <% end %>
+    <% elsif key == :announcements %>
+      <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises (toutes masquées : le lien seul). %>
+      <% if @announcements.any_readable? %>
+        <%= render "communication/messages/carousel", carousel: @announcements %>
       <% end %>
     <% elsif key == :classroom %>
       <%= render "classroom_card", home: @home, icon: %>

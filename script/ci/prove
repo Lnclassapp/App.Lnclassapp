@@ -1,0 +1,124 @@
+#!/usr/bin/env ruby
+# Plays the whole bin/ci in a Claude cloud session and, when it is green, publishes the proof of the tested tree as the
+# file arbres/<tree> of the branch ci/preuves (ADR-0069 §8, chantier ci-quota). The proof is a declaration: GitHub
+# draws one pull request in five and replays the suite anyway, and every promotion into Staging replays it in full.
+#
+#   script/ci/prove                  # the branch must already contain origin/Develop
+#   script/ci/prove --base Staging   # another base
+#
+# Refuses, and publishes nothing, when the work tree is dirty, when the branch does not contain its base (GitHub would
+# test another tree), when bin/ci is red, or when HEAD moved during the run.
+require "open3"
+require "socket"
+require "time"
+require "tmpdir"
+
+class CiProof
+  BRANCH = "ci/preuves"
+  ATTEMPTS = 3
+
+  class Refused < StandardError; end
+
+  # git: a callable taking git arguments and returning [stdout, success]; run: a callable that plays bin/ci and returns
+  # [success, summary lines]; clock: a callable returning the current Time.
+  def initialize(git:, run:, clock: -> { Time.now.utc }, remote: "origin")
+    @git = git
+    @run = run
+    @clock = clock
+    @remote = remote
+  end
+
+  # → the tree proven. Raises Refused with the reason otherwise.
+  def call(base:)
+    _, clean = @git.call("diff", "--quiet", "HEAD")
+    raise Refused, "des fichiers suivis sont modifiés : committe d'abord, la preuve porte sur un commit" unless clean
+    _, fetched = @git.call("fetch", "--quiet", @remote, base)
+    raise Refused, "impossible de lire #{@remote}/#{base}" unless fetched
+    _, contains = @git.call("merge-base", "--is-ancestor", "#{@remote}/#{base}", "HEAD")
+    raise Refused, "la branche ne contient pas #{@remote}/#{base} : fusionne-la d'abord, sinon GitHub teste un autre arbre" unless contains
+
+    head = read("rev-parse", "HEAD")
+    tree = read("rev-parse", "HEAD^{tree}")
+    green, summary = @run.call
+    raise Refused, "bin/ci est rouge : aucune preuve" unless green
+    raise Refused, "HEAD a bougé pendant bin/ci : aucune preuve" unless read("rev-parse", "HEAD") == head
+
+    publish(tree, proof_text(tree:, head:, base:, summary:))
+    tree
+  end
+
+  private
+
+  def proof_text(tree:, head:, base:, summary:)
+    <<~PROOF
+      arbre: #{tree}
+      commit: #{head}
+      base: #{base}
+      date: #{@clock.call.iso8601}
+      machine: #{Socket.gethostname}
+      ruby: #{RUBY_VERSION}
+      session: #{ENV.fetch('CLAUDE_CODE_REMOTE_SESSION_ID', 'inconnue')}
+      bin/ci:
+      #{summary.map { "  #{it}" }.join("\n")}
+    PROOF
+  end
+
+  # Adds arbres/<tree> to the tip of ci/preuves without touching the work tree, then pushes. Another session may push
+  # in between: the push is then refused, and the next attempt starts again from the new tip.
+  def publish(tree, text)
+    ATTEMPTS.times do
+      parent = tip
+      Dir.mktmpdir do |dir|
+        index = { "GIT_INDEX_FILE" => File.join(dir, "index") }
+        File.write(File.join(dir, "proof"), text)
+        blob = read("hash-object", "-w", File.join(dir, "proof"))
+        parent ? read("read-tree", parent, env: index) : read("read-tree", "--empty", env: index)
+        read("update-index", "--add", "--cacheinfo", "100644,#{blob},arbres/#{tree}", env: index)
+        commit = read("commit-tree", read("write-tree", env: index), *([ "-p", parent ] if parent), "-m", "ci: preuve de l'arbre #{tree}")
+        _, pushed = @git.call("push", "--quiet", @remote, "#{commit}:refs/heads/#{BRANCH}")
+        return if pushed
+      end
+    end
+    raise Refused, "la preuve n'a pas pu être poussée sur #{BRANCH} après #{ATTEMPTS} essais"
+  end
+
+  # The tip of ci/preuves on the remote, or nil before the first proof.
+  def tip
+    out, found = @git.call("ls-remote", "--heads", @remote, BRANCH)
+    raise Refused, "impossible de lire #{@remote}/#{BRANCH}" unless found
+    return nil if out.strip.empty?
+
+    read("fetch", "--quiet", @remote, BRANCH)
+    read("rev-parse", "FETCH_HEAD")
+  end
+
+  def read(*args, env: {})
+    out, ok = @git.call(*args, env:)
+    raise Refused, "git #{args.first} a échoué" unless ok
+
+    out.strip
+  end
+end
+
+if $PROGRAM_NAME == __FILE__
+  base = ARGV[ARGV.index("--base") + 1] if ARGV.include?("--base")
+  git = lambda do |*args, env: {}|
+    out, status = Open3.capture2(env, "git", *args, err: File::NULL)
+    [ out, status.success? ]
+  end
+  run = lambda do
+    lines = []
+    status = Open3.popen2e("bin/ci") do |_, output, wait|
+      output.each_line { |line| print line; lines << line.strip if line.match?(/runs,|coverage:|Continuous Integration/) }
+      wait.value
+    end
+    [ status.success?, lines ]
+  end
+
+  begin
+    tree = CiProof.new(git:, run:).call(base: base || "Develop")
+    puts "✅ Preuve publiée : #{CiProof::BRANCH}:arbres/#{tree}"
+  rescue CiProof::Refused => refusal
+    abort "❌ #{refusal.message}"
+  end
+end

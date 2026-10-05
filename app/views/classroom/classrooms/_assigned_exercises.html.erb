@@ -1,0 +1,48 @@
+<%# 🌐 UI · classroom/classrooms/_assigned_exercises — bloc « Exercices assignés » de la page d'une classe, à la place de « Cours assignés » %>
+<%# Rôle : une ligne par assignation active (titre, matière, échéance) ; « 18 faits… » ; pied badges et cercle ; lien vers le suivi %>
+<%# ADR  : 0048, 0072, 0079 · UDR : 0062 (§3.4), 0072 (§3.4) · comptes, pied et lien seulement sous FollowAssignmentPolicy (counts nil sinon) %>
+<%# locals: (classroom:, assignments:) -%>
+<section id="assigned_exercises" aria-labelledby="assigned_exercises_title" class="min-w-0">
+  <h2 id="assigned_exercises_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <% if assignments.empty? %>
+    <div id="assigned_exercises_empty">
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "clipboard-document-list" %>
+    </div>
+  <% else %>
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+      <% assignments.each do |assignment| %>
+        <% counts = assignment.counts %>
+        <li id="assignment_<%= assignment.public_id %>" class="relative flex items-center gap-3 px-4 py-4 hover:bg-mist sm:px-5">
+          <div class="min-w-0 flex-1 space-y-1.5">
+            <% if counts %>
+              <%= link_to assignment.exercise_title, classroom_assignment_path(classroom.public_id, assignment.public_id),
+                          class: "block truncate font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+            <% else %>
+              <p class="truncate font-medium text-ink"><%= assignment.exercise_title %></p>
+            <% end %>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <%= ui_subject_badge assignment.material_name, category: assignment.material_category, size: :sm %>
+              <span class="text-sm text-mute"><%= due_for_teacher(assignment.due_on) %></span>
+            </div>
+            <% if counts %>
+              <% done = t(".done", count: counts.done) %>
+              <% done = t(".done_with_late", done:, count: counts.late) if assignment.due_on && counts.late.positive? %>
+              <p class="text-sm tabular-nums"><%= t(".summary", done:, pending: t(".pending", count: counts.pending)) %></p>
+              <%# Téléphone étroit : le cercle passe sous les badges, toujours à droite (UDR-0072 §3.4, amendé). %>
+              <div class="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-t border-line pt-3">
+                <%= render "assessment/comprehension/badge_counts", counts: assignment.comprehension.badge_counts %>
+                <span class="ml-auto">
+                  <%= render "assessment/comprehension/circle", category: assignment.comprehension.category, done: counts.done,
+                                                               present: counts.done + counts.pending %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <% if counts %>
+            <%= ui_icon "chevron-right", variant: :mini, class: "text-mute" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

@@ -1,0 +1,21 @@
+<%# 🌐 UI · communication/shared/_tabs — onglets par URL de la page « Annonces », un onglet = une route (UDR-0071 §3.7) %>
+<%# Rôle : locaux current: (:received, :mine, :moderation) et role: ; onglets du rôle, aria-current sur le courant ; rien pour l'élève %>
+<%# ADR  : 0078 · UDR : 0005, 0071 %>
+<% role = role.to_sym %>
+<% current = current.to_sym %>
+<% keys = { teacher: %i[received mine], school_admin: %i[received mine moderation], team: %i[mine moderation] }.fetch(role, []) %>
+<% paths = { received: announcements_path, mine: my_announcements_path, moderation: moderated_announcements_path } %>
+<%# La modération s'appelle « Enseignants » pour la direction, « Toutes » pour l'équipe. %>
+<% labels = { received: "received", mine: "mine", moderation: role == :team ? "all" : "school" } %>
+<% if keys.any? %>
+  <nav id="announcement-tabs" aria-label="<%= t("communication.tabs.label") %>"
+       class="scrollbar-none mb-5 flex gap-1 overflow-x-auto border-b border-line">
+    <% keys.each do |key| %>
+      <%# L'onglet courant remplace les couleurs de repos : deux couleurs de bordure ou de texte se contrediraient. %>
+      <%= link_to t("communication.tabs.#{labels[key]}"), paths[key], "aria-current": ("page" if key == current),
+            class: class_names("inline-flex min-h-tap items-center border-b-2 px-4 text-sm font-medium whitespace-nowrap",
+                               "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand",
+                               key == current ? "border-brand text-ink" : "border-transparent text-mute hover:text-ink") %>
+    <% end %>
+  </nav>
+<% end %>

@@ -24,7 +24,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   def t(key, **) = I18n.t(key, **)
 
   test "a student filters the catalogue by subject without a page reload, then opens a course whose formula KaTeX renders" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle, le niveau des deux cours.
+    sign_in_as create_student_for(@course)
     visit courses_path
     assert_selector "#courses_list > li", count: 2
 
@@ -100,11 +101,13 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     end
 
     assert_no_page_reload do
-      within("#content_status_course_#{course.slug}") { click_on t("catalog.content_status.actions.publish") }
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish")
       assert_toast t("teams.courses.transition.published", name: "Mutations")
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
 
-      within("#content_status_course_#{course.slug}") { click_on t("catalog.content_status.actions.archive") }
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.archive")
       assert_toast t("teams.courses.transition.archived", name: "Mutations")
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.archived")
     end
@@ -112,14 +115,88 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     assert_empty page.evaluate_script("window.cspViolations")
   end
 
+  # ADR-0035, amendement du 2026-10-01 : « Tout publier » depuis le menu ⋮ ; la page fusionnée montre chaque statut publié.
+  test "the team publishes a draft course with its sheets and exercises from the ⋮ menu, without a page reload" do
+    course = create_course(name: "Mutations", status: "draft")
+    essential = create_essential(course:, name: "Les mutations", status: "draft")
+    create_exercise(essential:, status: "draft")
+    sign_in_as create_team_member
+    visit course_path(course.slug)
+
+    assert_no_page_reload do
+      find("button[aria-controls=course-actions-menu]").click
+      click_on t("catalog.content_status.actions.publish_all")
+      assert_toast t("teams.publish_cascade.done.course", name: "Mutations",
+                                                          essentials: t("teams.publish_cascade.essentials", count: 1),
+                                                          exercises: t("teams.publish_cascade.exercises", count: 1))
+      assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
+      assert_selector "#essential_#{essential.slug}", text: t("catalog.content_status.published")
+    end
+    assert_equal %w[published published published], [ course, essential, essential.exercises.first ].map { it.reload.status }
+  end
+
   test "on a phone, the catalogue and the course page never scroll sideways" do
-    sign_in_as create_student
+    # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
+    sign_in_as create_student_for(@course)
     with_mobile_viewport do
       [ courses_path, course_path(@course.slug) ].each do |path|
         visit path
         assert_selector "h1"
         assert page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth"), "#{path} défile sur le côté"
       end
+    end
+  end
+
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : le catalogue filtré par matière et la page cours, vus par l'élève à
+  # 390 × 844, passent la règle de sobriété ; la matière filtrée et le niveau quittent les cartes.
+  test "on a phone, the student's catalogue filtered by subject and the course page pass the sobriety rule" do
+    %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
+    sign_in_as create_student_for(@course)
+
+    with_mobile_viewport do
+      visit courses_path(material: @svt.slug)
+      assert_selector "#courses_list > li", count: 1
+      assert_single_primary_action
+      assert_blocks_above_fold "#main > div > *", max: 5
+      within("#courses_list") do
+        assert_no_text "SVT"
+        assert_no_text "Tle"
+      end
+      assert_selector "#main details summary", visible: :all,
+                                               text: t("components.info_tip.label", label: t("catalog.courses.index.student_scope_label"))
+
+      visit course_path(@course.slug)
+      assert_single_primary_action
+      assert_blocks_above_fold "#main > div > *", max: 5
+      assert_list_capped "#course_essentials ul"
+      assert_no_text "Hérédité"
+      assert_no_page_reload { click_on t("components.reveal.more") }
+      assert_selector "#course_essentials li", text: "Hérédité"
+
+      # The whole row is the link: a tap anywhere on it opens the sheet.
+      find("#course_essentials li", text: "Mitose").click
+      assert_selector "#essential_header h1", text: "Mitose"
+    end
+  end
+
+  # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
+  # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
+  test "on a phone, the teacher's filtered catalogue and course page are unchanged, without « Assigner à mes classes »" do
+    %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
+    sign_in_as create_teacher
+
+    with_mobile_viewport do
+      visit courses_path(material: @svt.slug)
+      within("#course_#{@course.slug}") do
+        assert_text "SVT"
+        assert_text "Tle"
+      end
+
+      visit course_path(@course.slug)
+      assert_selector "#course_essentials li", count: 4
+      assert_no_button t("components.reveal.more")
+      assert_no_link "Assigner à mes classes"
+      assert_no_button "Assigner à mes classes"
     end
   end
 

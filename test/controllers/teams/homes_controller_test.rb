@@ -1,7 +1,8 @@
 require "test_helper"
 
 # TR-09, CA-25 (UDR-0018): the team home. The old feed read an Orm constant that had disappeared, and the referential was
-# only reachable from a tabbed dashboard served by two concurrent 12-hour caches.
+# only reachable from a tabbed dashboard served by two concurrent 12-hour caches. Since UDR-0068 §3.4 (RE-05), the
+# referential has its own page, out of the home.
 class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
   RECENT_FRAME = "team_home_recent_content".freeze
 
@@ -55,59 +56,24 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "the referential shows the counts of DRENA, levels, series and materials, each leading to its screen" do
-    create_drena
-    tle = create_level(name: "Tle", position: 7)
-    create_level(name: "6ème", position: 1)
-    link_level_series(level: tle, series: create_series(name: "D"))
-    create_series(name: "A1")
-    3.times { create_material }
-    sign_in_as @member
-
-    get team_home_path
-
-    assert_select "#team_home_referential" do
-      assert_select "h2", text: tl("referential.title")
-      { drenas_path => figure("referential.drenas", 1), levels_path => figure("referential.levels", 2),
-        series_index_path => figure("referential.series", 2), materials_path => figure("referential.materials", 3) }
-        .each { |path, label| assert_select "a[href='#{path}']", text: label }
-      assert_select "li", text: including("6ème")
-      assert_select "li", text: including("Tle") do
-        assert_select "*", text: "D"
-      end
-      assert_select "li", text: including(tl("referential.no_series"))
-    end
-  end
-
-  test "BC-10: the referential leads to the barème of the classrooms, with the total of a public lycée" do
+  # RE-05 (UDR-0068 §3.4): the referential has its own page (test/controllers/teams/referentials_controller_test.rb); the
+  # home keeps « Régions éducatives » then « Activité récente », and the « Importer » shortcut.
+  test "RE-05: the home reads « Régions éducatives » then « Activité récente », and no Référentiel section" do
     seed_referential
     sign_in_as @member
 
     get team_home_path
 
-    assert_select "#team_home_referential a[href='#{classroom_plan_path}']", text: figure("referential.classroom_plan", 77)
-  end
-
-  test "the counts follow the last creation, with no cache" do
-    sign_in_as @member
-    get team_home_path
-    assert_select "#team_home_referential a[href='#{levels_path}']", text: figure("referential.levels", 0)
-
-    create_level
-
-    get team_home_path
-    assert_select "#team_home_referential a[href='#{levels_path}']", text: figure("referential.levels", 1)
-  end
-
-  test "an empty referential says so and still leads to each screen" do
-    sign_in_as @member
-
-    get team_home_path
-
-    assert_select "#team_home_referential" do
-      assert_select "*", text: including(tl("referential.levels_empty"))
-      assert_select "a[href='#{levels_path}']"
+    assert_response :success
+    # The recent content is a lazy frame: the page received holds the headings of the two sections, in this order, alone.
+    assert_equal [ tl("show.regions_title"), tl("show.activity_title") ], css_select("main#main h2").map { it.text.strip }
+    assert_select "#team_home_referential", 0
+    assert_select "#team_referential", 0
+    [ drenas_path, levels_path, series_index_path, materials_path, classroom_plan_path ].each do |path|
+      assert_select "main#main a[href='#{path}']", 0
     end
+    assert_select "main#main li[id^=level_]", 0
+    assert_select "#team_home_shortcuts a[href='#{teams_imports_path}']", text: including(tl("shortcuts.imports"))
   end
 
   test "the shortcuts: new course and invitation in the modal, schools, imports and account unlocking" do
@@ -130,8 +96,35 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
 
     get team_home_path
 
-    assert_select "#team_home_shortcuts a", 5
+    assert_select "#team_home_shortcuts a", 6
     assert_select "a[href='#{new_teams_invitation_path}']", 0
+  end
+
+  test "BL-08 (UDR-0067 §3.1): the « Blog » shortcut, after « Croissance » and before the invitation, for admin and content" do
+    sign_in_as @member
+
+    get team_home_path
+
+    shortcuts = css_select("#team_home_shortcuts a").pluck("href")
+    assert_equal shortcuts.index(teams_growth_path) + 1, shortcuts.index(teams_articles_path)
+    assert_equal shortcuts.index(teams_articles_path) + 1, shortcuts.index(new_teams_invitation_path)
+    assert_select "a#team_home_blog_shortcut[href='#{teams_articles_path}']:not([data-turbo-frame])", text: including(tl("shortcuts.blog"))
+    sign_out
+
+    sign_in_as create_team_member(team_role: "content")
+    get team_home_path
+    assert_select "a#team_home_blog_shortcut[href='#{teams_articles_path}']"
+  end
+
+  test "BL-08: a field member does not see the « Blog » shortcut" do
+    sign_in_as create_team_member(team_role: "field")
+
+    get team_home_path
+
+    assert_response :success
+    assert_select "#team_home_shortcuts"
+    assert_select "#team_home_blog_shortcut", 0
+    assert_select "a[href='#{teams_articles_path}']", 0
   end
 
   test "the recent content is a lazy frame, which receives only its partial" do
@@ -213,5 +206,125 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#team_home_recent_courses", text: including(tl("recent_content.courses_empty"))
     assert_select "#team_home_recent_exercises", text: including(tl("recent_content.exercises_empty"))
     assert_select "#team_home_recent_imports", text: including(tl("recent_content.imports_empty"))
+  end
+
+  # ADR-0036, amendement (2) : le rappel des demandes de suppression, pour l'admin seul ; ambre au 25e jour, en retard au 31e.
+  def deletion_request(requested_on, status: "pending")
+    closed = { closed_at: Time.current, closed_by: @member } unless status == "pending"
+    Orm::AccountDeletionRequest.create!(user: create_student, requested_on:, recorded_by: @member, status:, **closed.to_h)
+  end
+
+  test "without pending deletion request, no card" do
+    deletion_request(Date.current - 40, status: "processed")
+    sign_in_as @member
+
+    get team_home_path
+
+    assert_select "#team_home_deletion_requests", 0
+  end
+
+  test "the admin sees the number of pending deletion requests and the nearest due date, leading to the list" do
+    travel_to Time.zone.local(2026, 10, 2, 10) do
+      deletion_request(Date.new(2026, 9, 20))
+      deletion_request(Date.new(2026, 9, 10))
+      deletion_request(Date.new(2026, 8, 1), status: "cancelled")
+      sign_in_as @member
+
+      get team_home_path
+
+      assert_select "a#team_home_deletion_requests[href='#{teams_deletion_requests_path}']" do
+        assert_select "h2", tl("deletion_requests.title")
+        assert_select "p", tl("deletion_requests.pending", count: 2)
+        assert_select "span:not(.bg-warning-soft)", I18n.t("teams.deletion_requests.due.before", date: I18n.l(Date.new(2026, 10, 10), format: :due_short))
+      end
+    end
+  end
+
+  test "the card turns amber on the 25th day, and says « En retard » on the 31st" do
+    deletion_request(Date.new(2026, 9, 1))
+    sign_in_as @member
+    due = I18n.l(Date.new(2026, 10, 1), format: :due_short)
+
+    { 24 => [ "before", 0 ], 25 => [ "before", 1 ], 31 => [ "late", 1 ] }.each do |day, (key, amber)|
+      travel_to Time.zone.local(2026, 9, 1, 10) + day.days do
+        get team_home_path
+
+        assert_select "#team_home_deletion_requests span", I18n.t("teams.deletion_requests.due.#{key}", date: due)
+        assert_select "#team_home_deletion_requests span.bg-warning-soft", amber
+      end
+    end
+  end
+
+  test "a team member content or field sees no deletion card" do
+    deletion_request(Date.current - 26)
+
+    %w[content field].each do |team_role|
+      sign_in_as create_team_member(team_role:)
+      get team_home_path
+      assert_response :success
+      assert_select "#team_home_deletion_requests", 0
+      sign_out
+    end
+  end
+
+  test "ID-21 (UDR-0070 §3.5): 6 removed directions of two schools: the 5 most recent, each leading to its school, then « Et 1 autre »" do
+    travel_to Time.zone.local(2026, 10, 4, 10) do
+      bouake = create_school(name: "Lycée Moderne de Bouaké")
+      korhogo = create_school(name: "Collège de Korhogo")
+      removed = 6.times.map do |index|
+        create_school_admin(school: index.even? ? bouake : korhogo, first_name: "Direction#{index}", last_name: "Koné",
+                            archived_at: (index + 1).days.ago)
+      end
+      deletion_request(Date.current - 3)
+      sign_in_as @member
+
+      get team_home_path
+
+      assert_select "#team_home_archived_staff" do
+        assert_select "h2", tl("archived_staff.title")
+        assert_select "*", text: tl("archived_staff.subtitle")
+        assert_select "li", 5
+        assert_select "li a[href='#{school_path(bouake.public_id)}']",
+                      text: tl("archived_staff.line.female", name: "Direction0 Koné", school: "Lycée Moderne de Bouaké", date: "3 octobre 2026")
+        assert_select "li a[href='#{school_path(korhogo.public_id)}']", text: /Direction1 Koné · Collège de Korhogo/
+        assert_select "li", text: /#{removed.last.first_name}/, count: 0
+        assert_select "p#team_home_archived_staff_more", tl("archived_staff.more", count: 1)
+      end
+      assert_operator response.body.index("team_home_deletion_requests"), :<, response.body.index("team_home_archived_staff")
+    end
+  end
+
+  test "ID-21: a field member sees the removed directions; a content member does not; without any, no card" do
+    create_school_admin(archived_at: 1.day.ago)
+
+    sign_in_as create_team_member(team_role: "field")
+    get team_home_path
+    assert_select "#team_home_archived_staff li", 1
+    assert_select "#team_home_archived_staff_more", 0
+    sign_out
+
+    sign_in_as create_team_member(team_role: "content")
+    get team_home_path
+    assert_response :success
+    assert_select "#team_home_archived_staff", 0
+    sign_out
+
+    Orm::SchoolStaff.update_all(archived_at: nil, archived_by_id: nil)
+    sign_in_as @member
+    get team_home_path
+    assert_select "#team_home_archived_staff", 0
+  end
+
+  # suites-inscription-direction (1) : la carte « Directions retirées » accorde « retiré » au genre de la personne.
+  test "the removed directions card says « retirée » for a woman, « retiré » for a man" do
+    school = create_school(name: "Lycée Moderne de Bouaké")
+    create_school_admin(school:, first_name: "Aya", last_name: "Koné", gender: "female", archived_at: 1.day.ago)
+    create_school_admin(school:, first_name: "Kofi", last_name: "Yao", gender: "male", archived_at: 2.days.ago)
+    sign_in_as create_team_member(team_role: "field")
+
+    get team_home_path
+
+    assert_select "#team_home_archived_staff", text: /Aya Koné · Lycée Moderne de Bouaké · retirée le /
+    assert_select "#team_home_archived_staff", text: /Kofi Yao · Lycée Moderne de Bouaké · retiré le /
   end
 end

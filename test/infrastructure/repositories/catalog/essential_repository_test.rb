@@ -86,6 +86,17 @@ module Repositories
         assert_equal 1, @repository.next_position(course_id: create_course.id)
         assert_includes @repository.taken_slugs, mine.slug
       end
+
+      # ADR-0035, amendement du 2026-10-01 (« Tout publier ») : les fiches brouillons du cours seules, dans son ordre.
+      test "draft_slugs liste les fiches brouillons du cours, dans l'ordre du cours, sans les publiées, archivées ni d'autres cours" do
+        second = create_essential(course: @course, name: "Seconde", status: "draft", position: 2)
+        first = create_essential(course: @course, name: "Première", status: "draft", position: 1)
+        create_essential(course: @course, status: "published")
+        create_essential(course: @course, status: "archived")
+        create_essential(course: create_course, status: "draft")
+
+        assert_equal [ first.slug, second.slug ], @repository.draft_slugs(course_id: @course.id)
+      end
     end
   end
 end

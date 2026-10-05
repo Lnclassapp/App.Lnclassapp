@@ -1,0 +1,15 @@
+<%# 🌐 UI · teams/school_staff_restorations/create — l'équipe restaure une direction retirée (ID-19) %>
+<%# Rôle : toast, « Directions retirées » re-rendu (cible vide s'il n'en reste aucune), bloc « Direction » entier re-rendu %>
+<%# ADR  : 0077 · UDR : 0006, 0070 (§3.4, §3.5) · un replace de #school_staff plutôt qu'un append : l'ordre et le vide restent justes %>
+<%= turbo_stream_toast @notice, type: :success %>
+<%# Phase 5 : un remove de la seule ligne laissait la carte titrée et vide ; la fiche rechargée n'a qu'une cible vide. %>
+<% if @archived_staff.any? %>
+  <%= turbo_stream.replace "school_archived_staff", partial: "teams/schools/archived_staff",
+                                                    locals: { school_public_id: @school.public_id, rows: @archived_staff, can_restore: @can_restore } %>
+<% else %>
+  <%= turbo_stream.replace("school_archived_staff") { tag.div(id: "school_archived_staff") } %>
+<% end %>
+<%= turbo_stream.replace "school_staff", partial: "shared/school_staff",
+                                         locals: { staff: @staff, by_code_count: @by_code_count, viewer_id: nil,
+                                                   remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) },
+                                                   removable: @removable, newcomer: false } %>

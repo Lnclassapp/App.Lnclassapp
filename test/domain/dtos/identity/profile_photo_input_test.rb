@@ -31,7 +31,7 @@ module Dtos
 
         assert dto.valid?
         assert_not_includes dto.data, "PhoneMaker"
-        assert_not Entities::Identity::ImageHeader.read(dto.data).metadata
+        assert_not Entities::Shared::ImageHeader.read(dto.data).metadata
       end
 
       # Challenge of PR #50: files posted directly, without the browser's crop.
@@ -60,7 +60,7 @@ module Dtos
       end
 
       test "the kept bytes are read again: if stripping ever left metadata, the image would be refused" do
-        header = Entities::Identity::ImageHeader
+        header = Entities::Shared::ImageHeader
         strip = header.method(:strip)
         header.define_singleton_method(:strip) { |bytes| bytes }
         assert_equal({ error: :unsupported }, error(input("photo_exif.jpg")))

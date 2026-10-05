@@ -1,0 +1,53 @@
+# Compréhension d'un exercice assigné (ADR-0079, UDR-0072 §3.7) — écrans enseignant seulement.
+# « session » et non « essai » (trends.single, section.first_rate*, no_trend) : vocabulaire de l'UDR-0007, vérifié par locale_files_test.
+fr:
+  assessment:
+    comprehension:
+      categories:
+        struggling: "En difficulté"
+        fragile: "Fragile"
+        acquired: "Acquis"
+        unreadable: "Pas encore lisible"
+      trends:
+        progress: "En progrès"
+        decline: "En baisse"
+        stable: "Stable"
+        stagnant: "Stagne"
+        single: "1 session"
+      done_ratio: "%{done}/%{present}"
+      badges_label: "Badges de la classe"
+      badge_count: "%{count} %{level}"
+      section:
+        title: "Compréhension"
+        categories_label: "Catégories"
+        questions_title: "Questions"
+        students_title: "Élèves"
+        question_label: "Question %{number} : %{rate} de réussite"
+        question_number: "Q%{number}"
+        no_attempt: "—"
+        first_rate: "1re session : %{rate}"
+        first_rate_label: ", %{rate} à la première session"
+        to_revisit: "À reprendre en classe"
+        to_revisit_label: ", à reprendre en classe"
+      # La phrase assemble les trois groupes, chacun au pluriel : « 8 en progrès · 7 sans évolution · 3 en baisse ».
+      trends_summary:
+        sentence_html: "%{progress} · %{flat} · %{decline}"
+        progress:
+          one: "%{count} en progrès"
+          other: "%{count} en progrès"
+        flat:
+          one: "%{count} sans évolution"
+          other: "%{count} sans évolution"
+        decline:
+          one: "%{count} en baisse"
+          other: "%{count} en baisse"
+      no_trend: "Pas encore de progrès à lire : chaque élève n'a fait qu'une session."
+      unreliable: "Moins de 5 élèves ont fait l'exercice : la tendance n'est pas encore fiable."
+      empty:
+        title: "Personne n'a encore fait cet exercice."
+        description: "La compréhension s'affiche dès le premier exercice rendu."
+      empty_category: "Aucun élève dans cette catégorie."
+      pending:
+        title:
+          one: "Pas encore fait · 1"
+          other: "Pas encore faits · %{count}"

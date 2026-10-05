@@ -106,6 +106,27 @@ module Repositories
 
         assert_equal({ @essential.id => 4, empty.id => 1 }, @repository.next_positions(essential_ids: [ @essential.id, empty.id ]))
       end
+
+      # ADR-0035, amendement du 2026-10-01 (« Tout publier ») : les exercices brouillons sous des fiches publiées, dans
+      # l'ordre des fiches puis des exercices ; ceux d'une fiche brouillon ou archivée attendent leur fiche.
+      test "draft_public_ids liste les exercices brouillons des fiches publiées d'un cours, ou d'une fiche" do
+        course = create_course
+        first = create_essential(course:, position: 1)
+        second = create_essential(course:, position: 2)
+        drafted = create_essential(course:, position: 3, status: "draft")
+        b = create_exercise(essential: first, status: "draft", position: 2)
+        a = create_exercise(essential: first, status: "draft", position: 1)
+        c = create_exercise(essential: second, status: "draft")
+        create_exercise(essential: first, status: "published")
+        create_exercise(essential: second, status: "archived")
+        create_exercise(essential: drafted, status: "draft")
+        create_exercise(essential: create_essential, status: "draft")
+        repository = Repositories::Assessment::ExerciseRepository.new
+
+        assert_equal [ a, b, c ].map(&:public_id), repository.draft_public_ids(course_id: course.id)
+        assert_equal [ a, b ].map(&:public_id), repository.draft_public_ids(essential_id: first.id)
+        assert_empty repository.draft_public_ids(essential_id: drafted.id)
+      end
     end
   end
 end

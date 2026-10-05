@@ -1,0 +1,70 @@
+# Inscription de la direction avec le code d'établissement (chantier inscription-direction, Lot A) — ADR-0077, UDR-0070 §3.1
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/school_staff_registration_input:
+        last_name: "Nom"
+        first_name: "Prénom(s)"
+        gender: "Genre"
+        contact: "Numéro de téléphone"
+        pin: "PIN"
+        pin_confirmation: "Confirmation du PIN"
+        school_code: "Code d'établissement"
+    errors:
+      models:
+        dtos/identity/school_staff_registration_input:
+          attributes:
+            base:
+              cap_reached: "Votre établissement a déjà 3 comptes direction créés avec son code. Contactez l'équipe Lnclass."
+            last_name:
+              blank: "Saisissez votre nom."
+              too_long: "Le nom compte %{count} caractères au plus."
+              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
+            first_name:
+              blank: "Saisissez votre ou vos prénoms."
+              too_long: "Les prénoms comptent %{count} caractères au plus."
+              invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
+            gender:
+              inclusion: "Choisissez votre genre."
+            contact:
+              blank: "Saisissez votre numéro de téléphone."
+              invalid: "Saisissez un numéro ivoirien à 10 chiffres, par exemple 07 01 02 03 04."
+              taken: "Ce numéro a déjà un compte Lnclass. Utilisez un autre numéro."
+            pin:
+              blank: "Choisissez un PIN à 4 chiffres."
+              invalid: "Le PIN compte 4 chiffres."
+            pin_confirmation:
+              confirmation: "Les deux PIN ne sont pas identiques."
+            school_code:
+              blank: "Saisissez le code de votre établissement."
+              invalid: "Code d'établissement invalide. Il compte 6 caractères, par exemple K7M-4QZ."
+              classroom_code: "Ce code est un code de classe. Saisissez le code de l'établissement (6 caractères)."
+              inclusion: "Code d'établissement invalide. Vérifiez-le auprès de vos enseignants."
+  identity:
+    school_staff_registrations:
+      new:
+        page_title: "Inscription de la direction"
+        logo_home: "Lnclass, accueil"
+        welcome: "Bienvenue, direction"
+        welcome_hint: "Suivez le travail des élèves et l'arrivée de vos enseignants, avec votre numéro de téléphone et un PIN à 4 chiffres."
+        title: "Créer votre compte de direction"
+        subtitle: "Avec le code d'établissement que vos enseignants utilisent."
+        have_account: "Vous avez déjà un compte ?"
+        sign_in: "Se connecter"
+        rate_limited_title: "Trop de tentatives"
+      form:
+        personal: "Vous"
+        last_name_placeholder: "Ex. : Kouassi"
+        first_name_placeholder: "Ex. : Aya Marie"
+        contact: "Contact"
+        contact_placeholder: "07 00 00 00 00"
+        contact_hint: "10 chiffres. Il vous servira à vous connecter."
+        school: "Établissement"
+        school_code_placeholder: "K7M-4QZ"
+        school_code_hint: "6 caractères, celui que vos enseignants utilisent pour s'inscrire."
+        security: "Sécurité"
+        pin_hint: "4 chiffres, que vous seul connaissez."
+        submit: "Créer mon compte"
+        submitting: "Création…"
+      create:
+        created: "Bienvenue ! Votre compte de direction est créé."

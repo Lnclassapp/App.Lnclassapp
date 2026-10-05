@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Accepté — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot D5, critères CL-11, CL-16, CL-17, CL-20, AS-18, AS-19 |
 | **ADR lié** | [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (active/archived, nouvelle ligne à la réassignation) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (seul un contenu publié s'assigne) · [UDR-0006](0006-shell-applicatif-par-role.md) §7 (CRUD Hotwire) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |
@@ -77,3 +77,11 @@ L'enseignant prépare sa classe en lui assignant un cours, une fiche essentielle
 
 - Retour : `ui_back_link` vers `classroom_path`, libellé = nom de la classe (au lieu de « Retour à <classe> »).
 - Titre : « <nom du cours> · Enseignant · Lnclass ».
+
+## Amendement du 2026-10-02 — le cours et ses fiches ne s'assignent plus · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; le détail est dans l'[UDR-0062](0062-echeances.md) §3.4 et §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **§2.1** : la bascule ne sert plus qu'à l'exercice ; `assignable_type` vaut toujours `Exercise`. Elle gagne le local `needs_session_days:` et, assignée, la date limite (UDR-0062 §3.4).
+- **Cet écran perd ses bascules** : celle du cours dans l'en-tête, celle de chaque fiche, et l'aide « Assignez une fiche essentielle… ». Il reste l'en-tête du cours et la liste des fiches publiées, chacune avec son nombre d'exercices et son lien vers la fiche dans la classe.
+- Les refus et streams du §3 (« Déjà assigné », « Déjà retiré », 403, 404, jamais de 204) restent ceux de la bascule d'exercice.

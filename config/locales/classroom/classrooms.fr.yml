@@ -1,4 +1,5 @@
-# Page d'une classe, enseignant et équipe (CL-10, CL-04, ID-15) — UDR-0027, vocabulaire UDR-0007, finitions UDR-0054
+# Page d'une classe, enseignant et équipe (CL-10, CL-04, ID-15) — UDR-0027, vocabulaire UDR-0007, finitions UDR-0054 ; « Cours assignés » retiré (ADR-0072, UDR-0062 §3.6)
+# Jours de séance, exercices assignés et cours : UDR-0062 §3.4 (fonctions-espace-eleve, Lot E)
 fr:
   classroom:
     classrooms:
@@ -22,14 +23,6 @@ fr:
         copy_link_label: "Copier le lien de la classe"
         share_whatsapp: "Partager sur WhatsApp"
         share_message: "Rejoignez la classe %{classroom} (%{school}) sur Lnclass : %{link}. Code de la classe : %{code}."
-      assigned_courses:
-        title: "Cours assignés"
-        essentials:
-          zero: "Aucune fiche essentielle"
-          one: "%{count} fiche essentielle"
-          other: "%{count} fiches essentielles"
-        empty_title: "Aucun cours assigné"
-        empty_description: "Ouvrez un cours du catalogue pour l'assigner à cette classe."
       roster:
         title:
           one: "%{count} élève"
@@ -51,3 +44,30 @@ fr:
         issue_code_hint: "Un élève qui a perdu son PIN le réinitialise avec un code de récupération, valable 15 minutes."
         empty_title: "Aucun élève inscrit"
         empty_description: "Partagez le code de la classe : les premiers inscrits apparaîtront ici."
+      session_days:
+        title: "Jours de séance"
+        set_html: "Vos jours de séance : <strong class=\"font-medium\">%{days}</strong>"
+        unset: "Jours de séance non renseignés : vos exercices n'auront pas de date limite."
+        edit: "Modifier"
+        fill: "Renseigner"
+      assigned_exercises:
+        title: "Exercices assignés"
+        empty_title: "Aucun exercice assigné"
+        empty_description: "Ouvrez un cours ci-dessous pour assigner un exercice à cette classe."
+        done:
+          one: "%{count} fait"
+          other: "%{count} faits"
+        done_with_late:
+          one: "%{done}, dont %{count} en retard"
+          other: "%{done}, dont %{count} en retard"
+        pending:
+          one: "%{count} pas encore fait"
+          other: "%{count} pas encore faits"
+        summary: "%{done} · %{pending}"
+      courses:
+        title: "Cours"
+        empty_title: "Aucun cours publié pour cette classe"
+        empty_description: "Les cours de votre matière pour ce niveau apparaîtront ici dès leur publication."
+        essentials:
+          one: "%{count} fiche essentielle"
+          other: "%{count} fiches essentielles"

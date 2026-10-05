@@ -77,6 +77,12 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_#{school.public_id} a[data-turbo-frame=_top][href='#{school_path(school.public_id)}']",
                   text: "Lycée Classique d'Abidjan"
     assert_select "#school_#{school.public_id}", text: /LCA/
+    # Demande du porteur (2026-10-01) : le code d'établissement est dans le tableau, groupé comme sur la fiche, avec son aide.
+    assert_select "thead th", text: /#{I18n.t('teams.schools.index.columns.school_code')}/
+    assert_select "thead details summary .sr-only", text: I18n.t("components.info_tip.label",
+                                                                 label: I18n.t("teams.schools.index.columns.school_code"))
+    assert_select "#school_#{school.public_id} td.font-mono",
+                  text: Entities::School::SchoolCode.display(Orm::School.find(school.id).school_code)
     assert_select "#school_#{school.public_id}", text: /Abidjan 1/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('school_types.mixed')}/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('teams.schools.cycles.first')}/
@@ -241,7 +247,21 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 5)
 
     get schools_path
-    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5"
+    assert_select "#school_#{school.public_id} td:nth-child(7)", text: "5" # « Classes », après le code d'établissement
+  end
+
+  # UDR-0056 §3.2: the block moved to shared/_level_classrooms, shared with the direction; the team's page is unchanged.
+  test "UDR-0056: the school page renders the shared « Classes par niveau » block, aimed at the team's routes" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+    partials = []
+    callback = ->(*, payload) { partials << payload[:identifier].delete_prefix("#{Rails.root}/app/views/") }
+
+    ActiveSupport::Notifications.subscribed(callback, "render_partial.action_view") { get school_path(school.public_id) }
+
+    assert_includes partials, "shared/_level_classrooms.html.erb"
+    assert_not_includes partials, "teams/schools/_level_classrooms.html.erb"
+    assert_select "#school_classrooms #school_level_classrooms"
   end
 
   test "UDR-0046: a draft school's block keeps « − » but offers no « + », and says why" do
@@ -616,5 +636,58 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "title", text: "Modifier l'établissement · Équipe · Lnclass"
     assert_select "[data-modal-document-title-value=\"Modifier l'établissement · Équipe · Lnclass\"] dialog#school-modal"
+  end
+
+  test "ID-18 (UDR-0070 §3.4, §3.5): « Direction » heads the teachers' section, then « Directions retirées », with « Restaurer »" do
+    school = create_school(drena: @drena)
+    kofi = create_school_admin(school:, first_name: "Kofi", last_name: "Yao", joined_via: "code", joined_at: 1.day.ago)
+    author = create_team_member(team_role: "field", second_factor: false, first_name: "Awa", last_name: "Bamba")
+    aya = create_school_admin(school:, first_name: "Aya", last_name: "Koné", joined_via: "code", archived_at: Time.zone.local(2026, 9, 1, 10),
+                              archived_by: author)
+    create_teacher(school:, first_name: "Moussa", last_name: "Traoré")
+    sign_in_as create_team_member(team_role: "field")
+
+    get school_path(school.public_id)
+
+    assert_select "#school_teachers > div:first-child #school_staff" do
+      assert_select "p#school_staff_places", text: I18n.t("shared.school_staff.subtitle", used: 1, cap: 3)
+      assert_select "li", 1
+      assert_select "li#school_staff_#{kofi.public_id} button[aria-haspopup=menu]"
+      assert_select "form[action='#{school_staff_member_path(school.public_id, kofi.public_id)}']"
+    end
+    assert_select "#school_staff + #school_archived_staff" do
+      assert_select "h2", text: I18n.t("teams.schools.archived_staff.title")
+      assert_select "li#school_archived_staff_#{aya.public_id}", text: /Aya Koné/ do
+        assert_select "p", text: /Retirée le 1er septembre 2026 par Awa Bamba\s+· Supprimée le 1er octobre 2026/
+        assert_select "form[action='#{school_staff_member_restoration_path(school.public_id, aya.public_id)}'] button",
+                      text: I18n.t("teams.schools.archived_staff.restore")
+      end
+    end
+    assert_select "#school_teachers li", text: /Moussa Traoré/
+  end
+
+  test "ID-21: a content member sees « Direction » without ⋮ menu, and « Directions retirées » without « Restaurer »" do
+    school = create_school(drena: @drena)
+    kofi = create_school_admin(school:, joined_at: 30.days.ago)
+    create_school_admin(school:, archived_at: 1.day.ago)
+    sign_in_as create_team_member(team_role: "content")
+
+    get school_path(school.public_id)
+
+    assert_select "li#school_staff_#{kofi.public_id}"
+    assert_select "#school_staff button[aria-haspopup=menu]", 0
+    assert_select "#school_archived_staff li", 1
+    assert_select "#school_archived_staff form", 0
+  end
+
+  test "UDR-0070 §3.5: without removed direction, no « Directions retirées » card, only the empty target of the stream" do
+    school = create_school(drena: @drena)
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "#school_staff", text: /#{I18n.t('shared.school_staff.empty')}/
+    assert_select "div#school_archived_staff:empty"
+    assert_select "#school_teachers h2", text: I18n.t("teams.schools.archived_staff.title"), count: 0
   end
 end
