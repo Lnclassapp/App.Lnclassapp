@@ -55,15 +55,16 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   # sans rechargement de page, et une carte de la suite ouvre son cours en page entière.
   test "the teacher scrolls down the catalogue: the next cards load in place, and one of them opens its course" do
     25.times { |index| create_course(name: format("Cours %02d", index), level: @tle, material: @svt) }
-    sign_in_as create_teacher
+    # UDR-0077 §3.2 : l'enseignant lit sa matière aux niveaux de ses classes — les 26 cours de SVT de Tle, sans la philosophie.
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
     visit courses_path
-    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 27)
+    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 26)
     assert_selector "#courses_list > li", count: 24
     assert_no_selector "#courses_list_page_2"
 
     assert_no_page_reload do
       scroll_to find("turbo-frame#courses_page_2")
-      assert_selector "#courses_list_page_2 > li", count: 3
+      assert_selector "#courses_list_page_2 > li", count: 2
       assert_no_selector "turbo-frame#courses_page_3"
     end
     last = all("#courses_list_page_2 > li").last
