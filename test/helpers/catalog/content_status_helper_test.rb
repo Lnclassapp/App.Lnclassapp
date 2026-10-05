@@ -9,7 +9,7 @@ module Catalog
     test "le badge nomme chaque statut" do
       render html: safe_join(%w[draft published archived].map { content_status_badge(it) })
 
-      assert_equal [ "Brouillon — visible uniquement par l'équipe", "Publié", "Archivé" ], css_select("span.whitespace-nowrap").map(&:text)
+      assert_equal [ "Brouillon — visible uniquement par l'équipe", "Publié", "Archivé" ], css_select("span.ui-badge").map(&:text)
       assert_raises(KeyError) { content_status_badge("deleted") }
     end
 

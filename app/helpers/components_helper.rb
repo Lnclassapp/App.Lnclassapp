@@ -63,8 +63,8 @@ module ComponentsHelper
   BUTTON_ICON_SIZES = { sm: :sm, md: :md, lg: :md }.freeze
 
   CARD_BASE = "block rounded-card border border-line bg-white shadow-card"
-  CARD_LINK = "transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift " \
-              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+  # Lot E5 (politique-cache) : survol et focus d'une carte-lien, écrits une fois dans application.tailwind.css.
+  CARD_LINK = "ui-card-link"
   CARD_PADDINGS = { none: nil, sm: "p-4", md: "p-5 sm:p-6", lg: "p-6 sm:p-8" }.freeze
 
   FIELD_BUILDERS = {
@@ -116,7 +116,9 @@ module ComponentsHelper
     team: { chip: "bg-team/10 text-team", dot: "bg-team" },
     gold: { chip: "bg-gold/20 text-ink", dot: "bg-gold" }
   }.freeze
-  BADGE_SIZES = { sm: "px-2 py-0.5 text-2xs", md: "px-2.5 py-1 text-xs" }.freeze
+  # Lot E5 (politique-cache) : la forme et les tailles d'un badge, écrites une fois dans application.tailwind.css.
+  BADGE_BASE = "ui-badge"
+  BADGE_SIZES = { sm: "ui-badge-sm", md: "ui-badge-md" }.freeze
   ROLE_TONES = { student: :brand, teacher: :teacher, team: :team, school_admin: :school }.freeze
   # Teinte d'une matière = sa catégorie (`materials.category`, enum literature / science / other), jamais son nom (CA-26).
   SUBJECT_CATEGORIES = {
@@ -319,8 +321,7 @@ module ComponentsHelper
 
   def ui_badge(label, tone: :neutral, size: :md, icon: nil, dot: false)
     colors = option!(BADGE_TONES, tone, "ui_badge tone")
-    tag.span(class: class_names("inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap",
-                                colors[:chip], option!(BADGE_SIZES, size, "ui_badge size"))) do
+    tag.span(class: class_names(BADGE_BASE, colors[:chip], option!(BADGE_SIZES, size, "ui_badge size"))) do
       safe_join([ (tag.span(class: "size-1.5 rounded-full #{colors[:dot]}", "aria-hidden": "true") if dot),
                   (ui_icon(icon, variant: :mini, size: :sm) if icon), label ].compact)
     end

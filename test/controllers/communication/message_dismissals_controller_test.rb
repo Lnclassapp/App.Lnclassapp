@@ -53,8 +53,8 @@ module Communication
 
       phone.get announcements_path
 
-      assert_equal [ tc("card.dismissed") ], phone.css_select("#announcement_#{@fiches.public_id} span.rounded-full").map(&:text)
-      assert_empty phone.css_select("#announcement_#{@devoirs.public_id} span.rounded-full")
+      assert_equal [ tc("card.dismissed") ], phone.css_select("#announcement_#{@fiches.public_id} span.ui-badge").map(&:text)
+      assert_empty phone.css_select("#announcement_#{@devoirs.public_id} span.ui-badge")
     end
 
     test "AN-12 — « Annuler » removes the dismissal: the card and the carousel get it back, without a new toast" do
