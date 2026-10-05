@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-0072 §3.6: each level has its own drawing, chosen by the frozen slug of the level, on its own tint; any other slug
+# UDR-0074 §3.6: each level has its own drawing, chosen by the frozen slug of the level, on its own tint; any other slug
 # falls back to the generic drawing of UDR-0069. The files exist and follow the rules of the drawings (no style, no class).
 module SchoolAdmin
   class LevelsHelperTest < ActionView::TestCase

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::DirectionHomeQuery
 # Rôle : accueil de la direction : carte « Établissement » (chiffres, alertes) et bulles « Niveaux » à taux de rendu
-# ADR  : 0065 (amendement du 2026-10-04 : gardé 5 minutes), 0067 · UDR : 0072 (§3.2) · compose StudentWorkQuery et SchoolTeachersQuery
+# ADR  : 0065 (amendement du 2026-10-04 : gardé 5 minutes), 0067 · UDR : 0074 (§3.2) · compose StudentWorkQuery et SchoolTeachersQuery
 module Queries
   module School
     class DirectionHomeQuery

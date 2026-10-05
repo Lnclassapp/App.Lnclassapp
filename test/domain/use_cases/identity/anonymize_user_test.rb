@@ -60,6 +60,14 @@ module UseCases
         def destroy_all_for(user_id:, contact:) = (@destroyed_for ||= []) << [ user_id, contact ]
       end
 
+      class FakeInvitations
+        include Ports::Identity::InvitationRepositoryPort
+
+        attr_reader :destroyed_for
+
+        def destroy_all_for(user_id:, contact:) = (@destroyed_for ||= []) << [ user_id, contact ]
+      end
+
       class FakeMemberships
         include Ports::Classroom::MembershipRepositoryPort
 
@@ -115,6 +123,7 @@ module UseCases
         @second_factors = FakeSecondFactors.new
         @pin_recoveries = FakePinRecoveries.new
         @login_attempts = FakeLoginAttempts.new
+        @invitations = FakeInvitations.new
         @memberships = FakeMemberships.new
         @photos = FakeProfilePhotoStore.new(8 => Ports::Identity::ProfilePhotoStorePort::StoredPhoto.new(content_type: "image/png", data: "x"))
         @audit = FakeAuditLog.new
@@ -122,7 +131,7 @@ module UseCases
         @learning_data = FakeLearningData.new(@transaction)
         @deletion_requests = FakeDeletionRequests.new(transaction: @transaction, pending:)
         AnonymizeUser.new(users: @users, sessions: @sessions, second_factors: @second_factors, pin_recoveries: @pin_recoveries,
-                          login_attempts: @login_attempts, memberships: @memberships, photos: @photos, audit_log: @audit,
+                          login_attempts: @login_attempts, invitations: @invitations, memberships: @memberships, photos: @photos, audit_log: @audit,
                           learning_data: @learning_data, transaction: @transaction,
                           policy: Policies::Identity::DeleteUserPolicy.new, clock: Clock.new(NOW), deletion_requests: @deletion_requests)
                      .call(actor:, target_public_id: target, dto: Dtos::Identity::DeletionRequestInput.new(requested_on:))
@@ -132,6 +141,7 @@ module UseCases
         assert_nil @users.anonymized
         assert_nil @sessions.destroyed_for
         assert_nil @login_attempts.destroyed_for
+        assert_nil @invitations.destroyed_for
         assert_nil @memberships.left
         assert_nil @learning_data.erased_for
         assert_empty @photos.writes
@@ -151,6 +161,7 @@ module UseCases
         assert_equal [ 8 ], @second_factors.resets
         assert_equal [ 8 ], @pin_recoveries.destroyed_for
         assert_equal [ [ 8, "0100000008" ] ], @login_attempts.destroyed_for
+        assert_equal [ [ 8, "0100000008" ] ], @invitations.destroyed_for
         assert_equal [ [ 8, NOW ] ], @memberships.left
         assert_equal [ [ :remove, 8 ] ], @photos.writes
         assert_equal 1, @transaction.calls

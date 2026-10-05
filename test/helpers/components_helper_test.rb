@@ -552,7 +552,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_equal "Tle D, cours de SVT", css_select("a").first.text.gsub(/\s+/, " ").strip
   end
 
-  # AD-07, AD-09 (UDR-0072 §3.5): the direction's bubbles carry a decorative dot of the work signal; without a signal the
+  # AD-07, AD-09 (UDR-0074 §3.5): the direction's bubbles carry a decorative dot of the work signal; without a signal the
   # bubble stays the one of UDR-0069.
   test "ui_subject_bubble puts a decorative signal dot on its disc, in the colour of the signal" do
     %i[green yellow red].each do |signal|

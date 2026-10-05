@@ -128,6 +128,6 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 
 ## Amendement du 2026-10-04 — « Accueil » de la direction
 
-*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md), [UDR-0072](0072-accueil-de-la-direction.md) §3.1. Statut : `Proposé`.*
+*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md), [UDR-0074](0074-accueil-de-la-direction.md) §3.1. Statut : `Proposé`.*
 
 - La première destination `school_admin` devient `[:home, :school_admin_classrooms_path, "home"]` (« Accueil »), à la place de « Travail des élèves ». Les sections d'accueil de la direction (`HOME_SECTIONS[:school_admin]`) ne changent pas : elles ne servent qu'à la page de démonstration du shell.

@@ -1,6 +1,6 @@
 # 🌐 UI · SchoolAdmin::LevelsHelper — illustrations des niveaux de la direction
 # Rôle : une illustration et une teinte par niveau, choisies par le slug figé du niveau ; tout autre → l'illustration générique
-# UDR  : 0072 (§3.6) · même forme que les matières (ComponentsHelper::Illustration, UDR-0069 §3.3)
+# UDR  : 0074 (§3.6) · même forme que les matières (ComponentsHelper::Illustration, UDR-0069 §3.3)
 module SchoolAdmin
   module LevelsHelper
     LEVEL_ILLUSTRATIONS = {

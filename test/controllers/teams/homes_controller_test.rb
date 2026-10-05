@@ -285,7 +285,7 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
         assert_select "*", text: tl("archived_staff.subtitle")
         assert_select "li", 5
         assert_select "li a[href='#{school_path(bouake.public_id)}']",
-                      text: tl("archived_staff.line", name: "Direction0 Koné", school: "Lycée Moderne de Bouaké", date: "3 octobre 2026")
+                      text: tl("archived_staff.line.female", name: "Direction0 Koné", school: "Lycée Moderne de Bouaké", date: "3 octobre 2026")
         assert_select "li a[href='#{school_path(korhogo.public_id)}']", text: /Direction1 Koné · Collège de Korhogo/
         assert_select "li", text: /#{removed.last.first_name}/, count: 0
         assert_select "p#team_home_archived_staff_more", tl("archived_staff.more", count: 1)
@@ -313,5 +313,18 @@ class Teams::HomesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @member
     get team_home_path
     assert_select "#team_home_archived_staff", 0
+  end
+
+  # suites-inscription-direction (1) : la carte « Directions retirées » accorde « retiré » au genre de la personne.
+  test "the removed directions card says « retirée » for a woman, « retiré » for a man" do
+    school = create_school(name: "Lycée Moderne de Bouaké")
+    create_school_admin(school:, first_name: "Aya", last_name: "Koné", gender: "female", archived_at: 1.day.ago)
+    create_school_admin(school:, first_name: "Kofi", last_name: "Yao", gender: "male", archived_at: 2.days.ago)
+    sign_in_as create_team_member(team_role: "field")
+
+    get team_home_path
+
+    assert_select "#team_home_archived_staff", text: /Aya Koné · Lycée Moderne de Bouaké · retirée le /
+    assert_select "#team_home_archived_staff", text: /Kofi Yao · Lycée Moderne de Bouaké · retiré le /
   end
 end

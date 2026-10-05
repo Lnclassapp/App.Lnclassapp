@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolAdmin::ActivitiesController
 # Rôle : « Activité récente » de l'accueil de la direction (AD-17 à AD-19) : le seul contenu du frame différé, sans layout
-# ADR  : 0065 · UDR : 0072 §3.11 · l'établissement est celui du compte, jamais un paramètre ; 403 par BaseController
+# ADR  : 0065 · UDR : 0074 §3.11 · l'établissement est celui du compte, jamais un paramètre ; 403 par BaseController
 module SchoolAdmin
   class ActivitiesController < BaseController
     # Demandée par le frame paresseux de l'accueil, elle ne rend que ce frame, en HTML seulement : un autre format reçoit 406

@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# AD-02 to AD-13, AD-17, AD-20 to AD-22 (UDR-0072), the nominal journey of the PRD §3: the direction signs in on its home,
+# AD-02 to AD-13, AD-17, AD-20 to AD-22 (UDR-0074), the nominal journey of the PRD §3: the direction signs in on its home,
 # reads its school card and its alerts, opens the level whose bubble carries a dot, then the red classroom, and comes back
 # to the level; the recent activity loads after the page. The error path: the address of a level without a classroom is a
 # 404. The same journey on a 390 px phone, from the bottom bar, without the page scrolling sideways.

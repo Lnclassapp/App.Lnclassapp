@@ -47,7 +47,7 @@ class School::HeavyScreensBudgetTest < ActiveSupport::TestCase
       "pilotage filtré, plus grande DRENA" => [ PILOTAGE_MS, -> { filtered_dashboard("7d", today, largest) } ],
       "pilotage filtré année" => [ PILOTAGE_MS, -> { filtered_dashboard("year", today, largest) } ],
       "recherche « kou »" => [ SCREEN_MS, -> { Queries::Identity::AccountSearchQuery.new.call(term: "kou") } ],
-      # UDR-0072 §3.2 : l'accueil de la direction (carte « Établissement » et « Niveaux ») remplace « Travail des élèves ».
+      # UDR-0074 §3.2 : l'accueil de la direction (carte « Établissement » et « Niveaux ») remplace « Travail des élèves ».
       # Gardé 5 minutes (ADR-0065, amendement du 2026-10-04) : le budget porte sur l'entrée chaude, comme le pilotage année.
       "Accueil" => [ SCREEN_MS, -> { Queries::School::DirectionHomeQuery.new.call(school_id: @focus) } ]
     }

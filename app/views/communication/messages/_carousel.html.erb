@@ -1,8 +1,8 @@
 <%# 🌐 UI · communication/messages/_carousel — les annonces de l'accueil élève, en bande défilante (UDR-0071 §3.5) %>
 <%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage), dismissible: (croix) %>
-<%# ADR  : 0078 · UDR : 0005, 0071, 0072 (§3.10 : accueil de la direction, sans croix) · Stimulus : communication--carousel %>
+<%# ADR  : 0078 · UDR : 0005, 0071, 0074 (§3.10 : accueil de la direction, sans croix) · Stimulus : communication--carousel %>
 <% refocus = local_assigns.fetch(:refocus, false) %>
-<%# UDR-0072 §3.10 : l'accueil de la direction passe dismissible: false ; l'élève garde la croix des annonces non officielles. %>
+<%# UDR-0074 §3.10 : l'accueil de la direction passe dismissible: false ; l'élève garde la croix des annonces non officielles. %>
 <% dismissible = local_assigns.fetch(:dismissible, true) %>
 <%# min-w-0 : dans la grille de l'accueil, la section prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
 <%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",

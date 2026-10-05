@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/classrooms/_levels — section « Niveaux » de l'accueil de la direction (AD-06 à AD-08, AD-22) %>
 <%# Rôle : une bulle illustrée par niveau ayant une classe active, vers la page du niveau, avec la pastille de son taux de rendu %>
-<%# UDR  : 0069 (§3.3, bulles), 0072 (§3.4, §3.5, §3.12) · la pastille est aria-hidden : sr_suffix dit classes, taux et signal %>
+<%# UDR  : 0069 (§3.3, bulles), 0074 (§3.4, §3.5, §3.12) · la pastille est aria-hidden : sr_suffix dit classes, taux et signal %>
 <%# locals: (home:) -%>
 <%= ui_card id: "direction_home_levels", title: t(".title"), subtitle: t(".subtitle"), icon: "squares-2x2" do %>
   <% if home.levels.empty? %>

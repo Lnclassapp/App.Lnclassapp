@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Spécifications : [`prd.md`](prd.md) · Interface : [UDR-0072](../../decisions/udr/0072-accueil-de-la-direction.md) · Pas d'ADR ([PRD §6](prd.md#6-décisions-rattachées)).
+> Spécifications : [`prd.md`](prd.md) · Interface : [UDR-0074](../../decisions/udr/0074-accueil-de-la-direction.md) · Pas d'ADR ([PRD §6](prd.md#6-décisions-rattachées)).
 
 ## Graphe
 
@@ -38,7 +38,7 @@ Lot 0 — SOCLE (séquentiel)
                      `app/helpers/school_admin/levels_helper.rb`
                      `app/assets/images/levels/6eme.svg` · `5eme.svg` · `4eme.svg` · `3eme.svg` · `2nde.svg` · `1ere.svg` · `tle.svg`
                      `app/views/school_admin/shared/_signal_legend.html.erb` · `config/locales/school_admin/signals.fr.yml`
-                     `app/views/school_admin/classrooms/show.html.erb` *(nav_key `home`, retour vers la page du niveau — UDR-0072 §3.9)*
+                     `app/views/school_admin/classrooms/show.html.erb` *(nav_key `home`, retour vers la page du niveau — UDR-0074 §3.9)*
                      `app/views/school_admin/classrooms/index.html.erb` *(nav_key `home` seulement ; réécrit au Lot A)*
                      `app/views/school_admin/departed_students/index.html.erb` · `config/locales/school_admin/departed_students.fr.yml` *(nav_key `home`, retour « Accueil »)*
 - **Dépend de**    : —
@@ -63,7 +63,7 @@ Lot 0 — SOCLE (séquentiel)
 - **Fichiers**     : `app/domain/entities/school/direction_alerts.rb`
                      `app/infrastructure/queries/school/direction_home_query.rb`
                      `app/controllers/school_admin/classrooms_controller.rb` *(index)*
-                     `app/views/school_admin/classrooms/index.html.erb` *(réécrit : UDR-0072 §3.2 ; carte « Activité récente » avec son frame paresseux vers `school_admin_activity_path`)*
+                     `app/views/school_admin/classrooms/index.html.erb` *(réécrit : UDR-0074 §3.2 ; carte « Activité récente » avec son frame paresseux vers `school_admin_activity_path`)*
                      `app/views/school_admin/classrooms/_school_card.html.erb` · `app/views/school_admin/classrooms/_levels.html.erb`
                      `config/locales/school_admin/classrooms.fr.yml` *(clés de l'accueil ; clés du tableau retirées)*
                      `test/performance/school/heavy_screens_budget_test.rb` *(budget « Accueil » à la place de « Travail des élèves »)*
@@ -104,7 +104,7 @@ Lot 0 — SOCLE (séquentiel)
 ## Lot D — Annonces sur l'accueil
 
 - **Couche**       : delivery + ui *(tout le reste appartient au chantier `annonces`)*
-- **Fichiers**     : `app/controllers/school_admin/classrooms_controller.rb` *(`@announcements`, UDR-0072 §3.10)*
+- **Fichiers**     : `app/controllers/school_admin/classrooms_controller.rb` *(`@announcements`, UDR-0074 §3.10)*
                      `app/views/school_admin/classrooms/index.html.erb` *(rendu du carrousel entre « Niveaux » et « Activité récente »)*
                      `app/views/communication/messages/_carousel.html.erb` *(local `dismissible:`, vrai par défaut)*
                      `test/controllers/school_admin/home_announcements_test.rb`
@@ -158,7 +158,7 @@ Worktree d'un lot, **depuis la branche de chantier une fois le Lot 0 mergé** :
 git worktree add ../lnclass-accueil-direction-lot-a -b feature/accueil-direction-lot-a feature/accueil-direction
 ```
 
-Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son lot recopié en entier, le [PRD](prd.md), l'[UDR-0072](../../decisions/udr/0072-accueil-de-la-direction.md) ; ordre imposé : test rouge → domaine → infrastructure → delivery → UI ; en-tête HITL sur chaque fichier de `app/`. **Interdiction de toucher un fichier hors de son champ `Fichiers`** : s'il en faut un, l'agent s'arrête et remonte (Lot 0 à rouvrir, ou plan faux). Aucun lot ne redéfinit un contrat du Lot 0.
+Brief de chaque agent : chemin **absolu** du worktree (`git -C <worktree>`), son lot recopié en entier, le [PRD](prd.md), l'[UDR-0074](../../decisions/udr/0074-accueil-de-la-direction.md) ; ordre imposé : test rouge → domaine → infrastructure → delivery → UI ; en-tête HITL sur chaque fichier de `app/`. **Interdiction de toucher un fichier hors de son champ `Fichiers`** : s'il en faut un, l'agent s'arrête et remonte (Lot 0 à rouvrir, ou plan faux). Aucun lot ne redéfinit un contrat du Lot 0.
 
 ## Couverture des critères
 
@@ -211,7 +211,7 @@ Aucun critère orphelin.
 - [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
 - [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md` *(aucun : PRD §6)*
-- [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0072)*
+- [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0074)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord

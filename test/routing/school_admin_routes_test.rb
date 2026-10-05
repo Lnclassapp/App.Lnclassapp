@@ -24,7 +24,7 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
     assert_equal({ controller: "school_admin/teachers", action: "index" }, first_match("/school-admin/teachers"))
   end
 
-  # AD-09, AD-17 (UDR-0072 §3.8, §3.11): the page of a level, by its frozen slug, and the deferred activity of the home.
+  # AD-09, AD-17 (UDR-0074 §3.8, §3.11): the page of a level, by its frozen slug, and the deferred activity of the home.
   test "the page of a level and the activity of the home are drawn, GET only" do
     assert_equal "/school-admin/levels/3eme", helpers.school_admin_level_path("3eme")
     assert_equal "/school-admin/activity", helpers.school_admin_activity_path

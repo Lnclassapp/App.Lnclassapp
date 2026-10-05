@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/levels/_classroom_card — une classe sur la page de son niveau (AD-09, AD-22) %>
 <%# Rôle : illustration du niveau et pastille du taux de rendu, effectif, devoirs, taux et moyenne ; toute la carte mène à la classe %>
-<%# ADR  : 0065 · UDR : 0072 (§3.5, §3.8) · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
+<%# ADR  : 0065 · UDR : 0074 (§3.5, §3.8) · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
 <%# locals: (classroom:, illustration:, signal:) -%>
 <% figure = lambda do |value|
      next tag.span(t("school_admin.classrooms.percent", value:), class: "font-medium text-ink") unless value.nil?

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolAdmin::ClassroomsController
 # Rôle : accueil de la direction (établissement, niveaux, bandeau d'arrivée) et page d'une classe, en lecture ; 404 hors établissement
-# ADR  : 0006, 0065, 0077, 0078 · UDR : 0052, 0054, 0070, 0071, 0072 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
+# ADR  : 0006, 0065, 0077, 0078 · UDR : 0052, 0054, 0070, 0071, 0074 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
 module SchoolAdmin
   class ClassroomsController < BaseController
     def index
@@ -24,7 +24,7 @@ module SchoolAdmin
 
     def query = Queries::School::StudentWorkQuery.new
 
-    # UDR-0072 §3.10 : le carrousel de l'élève, par la règle de lecture des annonces (ADR-0078 §4.3), lu en direct.
+    # UDR-0074 §3.10 : le carrousel de l'élève, par la règle de lecture des annonces (ADR-0078 §4.3), lu en direct.
     def announcements
       reader = Queries::Communication::ReadableMessages.new.reader_for(actor: current_actor)
       Queries::Communication::InboxQuery.new.carousel(reader:, now: Time.current)

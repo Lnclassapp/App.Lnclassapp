@@ -105,7 +105,7 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil nav_path(teachers)
   end
 
-  # DS-05 (UDR-0052, amendment of UDR-0006), GD-01 (UDR-0056 §3.1), AD-20 (UDR-0072 §3.1): the direction's destinations
+  # DS-05 (UDR-0052, amendment of UDR-0006), GD-01 (UDR-0056 §3.1), AD-20 (UDR-0074 §3.1): the direction's destinations
   # are all drawn; its home is « Accueil », at the address of the former « Travail des élèves ». AN-22 (UDR-0071 §3.1):
   # « Annonces » comes last.
   test "AD-20: the direction's navigation is « Accueil », « Enseignants », « Établissement » then « Annonces »" do

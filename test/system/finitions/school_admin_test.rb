@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# FU-10, FU-21, FU-49 (UDR-0054, UDR-0052, UDR-0072): on a classroom's page, the school management opens the help of « Taux
+# FU-10, FU-21, FU-49 (UDR-0054, UDR-0052, UDR-0074): on a classroom's page, the school management opens the help of « Taux
 # de rendu » with one touch; from its home it opens a level, then a classroom, searches a student while typing, then comes
 # back to the level by the common back link.
 module Finitions

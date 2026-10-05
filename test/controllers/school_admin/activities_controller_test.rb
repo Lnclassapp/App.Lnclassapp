@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AD-12, AD-17, AD-19 (UDR-0072 §3.11): « Activité récente », the lazy frame of the direction's home. The address answers
+# AD-12, AD-17, AD-19 (UDR-0074 §3.11): « Activité récente », the lazy frame of the direction's home. The address answers
 # its frame alone, without the shell; the school is always the account's, never a parameter; any other role gets 403.
 class SchoolAdmin::ActivitiesControllerTest < ActionDispatch::IntegrationTest
   FRAME = "turbo-frame#direction_home_activity_feed".freeze
@@ -30,7 +30,7 @@ class SchoolAdmin::ActivitiesControllerTest < ActionDispatch::IntegrationTest
   # Days of October up to the 4th, of September after.
   def moment(day, hour, minute) = Time.zone.local(2026, day > 4 ? 9 : 10, day, hour, minute)
 
-  # The first drawing of a mini Heroicon, as ui_icon serves it (UDR-0072 §3.11: one icon per kind of event).
+  # The first drawing of a mini Heroicon, as ui_icon serves it (UDR-0074 §3.11: one icon per kind of event).
   def icon_path(name) = Nokogiri::XML(Rails.root.join("vendor/heroicons/20/solid/#{name}.svg").read).at_css("path")["d"]
 
   test "AD-17: the activity answers its frame alone, without the shell, one title per day, the most recent first" do

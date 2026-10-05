@@ -232,7 +232,7 @@ Et la page n'a qu'un titre h1
 ## 6. Décisions rattachées
 
 - **ADR-0065, amendement du 2026-10-04** — l'accueil de la direction est gardé 5 minutes (AD-23), sur la mesure du budget de l'ADR-0067.
-- **UDR-0072** — Accueil de la direction : établissement, niveaux, annonces, activité. Amende l'UDR-0052 (§2.1 « pas d'accueil », §2.2 « des tableaux, pas des cartes ») et l'UDR-0006 (navigation `school_admin`).
+- **UDR-0074** — Accueil de la direction : établissement, niveaux, annonces, activité. Amende l'UDR-0052 (§2.1 « pas d'accueil », §2.2 « des tableaux, pas des cartes ») et l'UDR-0006 (navigation `school_admin`).
 - **Pas de nouvel ADR** : aucun port, aucune table, aucune dépendance, aucun contrat de use case ne bouge ; le chantier n'ajoute que des lectures (queries) et deux règles de domaine pures. La seule stratégie de persistance nouvelle (le cache de l'accueil) amende l'ADR-0065. L'ADR-0065 (définitions du travail des élèves) est appliqué tel quel ; la seule écriture touchée (masquer une annonce) appartient au chantier `annonces` et à son ADR-0078.
 - **Dépendance externe** : chantier `annonces`, mergé dans `Develop` le 2026-10-04 (PR #162) **sans** la décision D-A1. Décision du porteur du même jour : le carrousel de la direction est en lecture seule, sans croix ; D-A1 relève d'un chantier à part.
 

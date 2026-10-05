@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::School::DirectionAlerts
 # Rôle : alertes de la carte « Établissement » de la direction : lesquelles, dans quel ordre, trois noms de classe au plus
-# UDR  : 0072 (§3.2, §3.3) · une alerte n'existe que si son compte est positif ; « rouge » se lit par WorkSignal
+# UDR  : 0074 (§3.2, §3.3) · une alerte n'existe que si son compte est positif ; « rouge » se lit par WorkSignal
 module Entities
   module School
     module DirectionAlerts

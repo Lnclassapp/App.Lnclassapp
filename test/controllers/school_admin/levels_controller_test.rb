@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AD-09 to AD-12, AD-22 (UDR-0072 §3.8, §3.12): the page of a level shows a card per active classroom of the year of that
+# AD-09 to AD-12, AD-22 (UDR-0074 §3.8, §3.12): the page of a level shows a card per active classroom of the year of that
 # level in the school of the direction, with the drawing of the level, the dot of its submission rate and its figures.
 # Another school's, archived or past classrooms never show; a level without classroom is a 404, any other role a 403.
 class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest

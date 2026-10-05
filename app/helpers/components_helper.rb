@@ -139,7 +139,7 @@ module ComponentsHelper
     %w[invite] => %w[inviter bg-tint-red]
   }.flat_map { |slugs, (file, tint)| slugs.map { [ it, Illustration.new(path: "subjects/#{file}.svg", tint:) ] } }.to_h.freeze
   SUBJECT_ILLUSTRATION_FALLBACK = Illustration.new(path: "subjects/generique.svg", tint: "bg-mist")
-  # UDR-0072 §3.5, §3.7 : pastille de la direction posée sur une bulle ; classes écrites en entier pour Tailwind.
+  # UDR-0074 §3.5, §3.7 : pastille de la direction posée sur une bulle ; classes écrites en entier pour Tailwind.
   SIGNAL_DOTS = { green: "bg-signal-green", yellow: "bg-signal-yellow", red: "bg-signal-red" }.freeze
 
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
@@ -319,7 +319,7 @@ module ComponentsHelper
   end
 
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
-  # signal (UDR-0072 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
+  # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
   def ui_subject_bubble(label:, href:, illustration:, sr_suffix: nil, id: nil, signal: nil)
     dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
     render "components/subject_bubble", label:, href:, illustration:, sr_suffix:, id:, dot:

@@ -1,0 +1,10 @@
+<%# 🌐 UI · assessment/session_results/_progress — phrase de progrès de l'élève, sous sa note sur 20 %>
+<%# Rôle : où il en est par rapport à ses sessions précédentes, et quoi faire ensuite ; jamais « stagne » ni « baisse » %>
+<%# ADR  : 0033, 0079 · UDR : 0007, 0023, 0073 · propriétaire seul · vert pour le progrès et le stable, neutre sinon %>
+<%# locals: (progress:) -%>
+<% icon, tone = { progress: %w[arrow-trending-up text-success], stable: %w[check-circle text-success] }
+                  .fetch(progress.trend, %w[book-open text-mute]) %>
+<p id="session_progress" class="mt-6 flex items-start justify-center gap-2 text-sm text-ink text-balance">
+  <%= ui_icon icon, variant: :mini, size: :sm, class: "mt-0.5 #{tone}" %>
+  <span><%= t(".#{progress.trend}", first: progress.first_grade, best: progress.best_grade, current: progress.current_grade) %></span>
+</p>

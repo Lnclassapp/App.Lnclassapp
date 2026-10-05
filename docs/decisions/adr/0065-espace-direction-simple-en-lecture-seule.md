@@ -140,11 +140,18 @@ end
 - `test/infrastructure/queries/school/student_work_query_test.rb` et `school_teachers_query_test.rb` : un test par ligne du tableau §4, données d'un autre établissement absentes, nombre de requêtes constant.
 - `test/controllers/school_admin/classrooms_controller_test.rb` et `teachers_controller_test.rb` : chaque page refusée aux autres rôles ; la classe d'un autre établissement donne 404. `test/routing/school_admin_routes_test.rb` : aucune route d'écriture sous `/school-admin`.
 
+## Complément du 2026-10-04 — un devoir rendu en remédiation est rendu
+
+*Chantier de correction [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/memo.md), décision de l'orchestrateur par mandat du porteur. Le texte ci-dessus reste tel qu'accepté.*
+
+- §4, ligne « Devoir rendu » : **au moins une session `completed`, rattachée au devoir (`classroom_assignment_id`), quel que soit son `kind`** (`standard` ou `remediation`). La phrase « Les sessions de remédiation (ADR-0043) ne comptent pas » est retirée : le score moyen d'un élève et la moyenne d'une classe lisent aussi les sessions de remédiation rattachées à un devoir de la classe.
+- Raison et portée : [ADR-0072, complément du 2026-10-04 (ter)](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md#complément-du-2026-10-04-ter--la-remédiation-compte-comme--rendu--côté-direction). Les autres définitions du tableau sont inchangées.
+
 ## Amendement du 2026-10-04 — l'accueil de la direction est gardé 5 minutes
 
 *Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md) (critère AD-23), décision du porteur du 2026-10-04, prise sur la mesure. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi pour l'accueil de la direction.*
 
-**Pourquoi.** L'accueil de la direction ([UDR-0072](../udr/0072-accueil-de-la-direction.md)) relit le travail des élèves de toutes les classes, puis les enseignants, les alertes et le taux de chaque niveau. Au volume de la feuille de route (`script/perf/dataset.rb`), il mesure **138 à 152 ms en p95** pour un budget de **100 ms** ([ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md)) ; l'ancienne page « Travail des élèves » en prenait 92,6 sur la même machine. L'essentiel du coût est la lecture des devoirs rendus, que l'ancienne page faisait déjà et qui frôle seule le budget. Le moteur 3 (« lues en direct ») cède pour cet écran, comme il a cédé pour la vue « année » du pilotage ([ADR-0062](./0062-indicateurs-de-pilotage-lus-en-direct.md), amendement du 2026-09-29).
+**Pourquoi.** L'accueil de la direction ([UDR-0074](../udr/0074-accueil-de-la-direction.md)) relit le travail des élèves de toutes les classes, puis les enseignants, les alertes et le taux de chaque niveau. Au volume de la feuille de route (`script/perf/dataset.rb`), il mesure **138 à 152 ms en p95** pour un budget de **100 ms** ([ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md)) ; l'ancienne page « Travail des élèves » en prenait 92,6 sur la même machine. L'essentiel du coût est la lecture des devoirs rendus, que l'ancienne page faisait déjà et qui frôle seule le budget. Le moteur 3 (« lues en direct ») cède pour cet écran, comme il a cédé pour la vue « année » du pilotage ([ADR-0062](./0062-indicateurs-de-pilotage-lus-en-direct.md), amendement du 2026-09-29).
 
 **Décision.** `Queries::School::DirectionHomeQuery` garde son résultat dans `Rails.cache` (Solid Cache en production) **5 minutes** (`expires_in: 5.minutes`).
 

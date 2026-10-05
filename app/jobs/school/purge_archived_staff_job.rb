@@ -22,6 +22,7 @@ module School
         staffs: Repositories::School::StaffRepository.new, users: Repositories::Identity::UserRepository.new,
         sessions: Repositories::Identity::SessionRepository.new, photos: Repositories::Identity::ProfilePhotoStore.new,
         login_attempts: Repositories::Identity::LoginAttemptRepository.new,
+        invitations: Repositories::Identity::InvitationRepository.new,
         second_factors: Repositories::Identity::SecondFactorRepository.new,
         pin_recoveries: Repositories::Identity::PinRecoveryRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
         transaction: Repositories::Shared::Transaction.new, policy: Policies::School::PurgeArchivedStaffPolicy.new,

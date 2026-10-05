@@ -1,6 +1,6 @@
 require "test_helper"
 
-# DS-09, DS-10, DS-11 (ADR-0065, UDR-0052), AD-02 to AD-08 (UDR-0072): the direction's home and the page of a classroom,
+# DS-09, DS-10, DS-11 (ADR-0065, UDR-0052), AD-02 to AD-08 (UDR-0074): the direction's home and the page of a classroom,
 # read by the school management of its own school only. Another school's classroom is a 404, any other role a 403, a
 # visitor signs in first.
 class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
@@ -49,7 +49,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # AD-02 to AD-08, AD-20, AD-22 (UDR-0072 §3.2 to §3.4, §3.11): the home of the direction, greeting by first name, then the
+  # AD-02 to AD-08, AD-20, AD-22 (UDR-0074 §3.2 to §3.4, §3.11): the home of the direction, greeting by first name, then the
   # school card, the level bubbles and the deferred activity, in this order.
   def card(key, **) = tc("school_card.#{key}", **)
   def levels_t(key, **) = tc("levels.#{key}", **)
@@ -318,6 +318,34 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "main form#student-work-search input[name=q]", count: 1
   end
 
+  # Memo of remediation-comptee-faite: Aya fails X at 25 %, a gap opens on the fiche (ADR-0043), she then does Y in
+  # remediation at 80 % (StartExerciseSession#new_session). Y is handed in on both pages, and the 80 % is in her average.
+  test "an exercise done in remediation is handed in, and its score counts in the student's average" do
+    teacher = create_teacher(school: @school)
+    essential = create_essential
+    x, y = Array.new(2) { create_exercise(essential:) }
+    given_x, given_y = [ x, y ].map { create_assignment(classroom: @classroom, assignable: it, by: teacher) }
+    aya = create_student(classroom: @classroom, first_name: "Aya", last_name: "Bamba")
+    failed = create_exercise_session(student: aya, exercise: x, status: "completed", score_percent: 25,
+                                     classroom_assignment_id: given_x.id)
+    create_exercise_session(student: aya, exercise: y, status: "completed", score_percent: 80, classroom_assignment_id: given_y.id,
+                            gap: create_gap(student: aya, essential:, source_session: failed))
+    sign_in_as @admin
+
+    get school_admin_level_path(@level.slug)
+
+    assert_select "li#classroom_#{@classroom.public_id} li", text: /#{I18n.t('school_admin.levels.classroom_card.submission_rate_html', rate: '\s*100 %')}/
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_select "ul#classroom_figures li", text: /100 %\s+#{tc('show.figures.submission_rate')}/
+    assert_select "tr#student_0" do
+      assert_select "th[scope=row]", text: "Aya Bamba"
+      assert_select "td", text: "2 / 2"
+      assert_select "td", text: "53 %"
+    end
+  end
+
   test "a classroom without student keeps its figures and says it is empty" do
     sign_in_as @admin
 
@@ -329,7 +357,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_students", text: /#{tc('show.empty')}/
   end
 
-  # AD-13 (UDR-0072 §3.9): the back link of a classroom leads to the page of its level, named after it.
+  # AD-13 (UDR-0074 §3.9): the back link of a classroom leads to the page of its level, named after it.
   test "AD-13, FU-10, FU-11: the classroom page returns to its level by the common back link, never an arrow button" do
     sign_in_as @admin
 
@@ -427,7 +455,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_students", text: /#{tc('show.empty')}/
   end
 
-  # ID-10 (ADR-0077 §4.4, UDR-0070 §3.3, UDR-0072 §3.2): the arrival banner, between the greeting and the home's sections.
+  # ID-10 (ADR-0077 §4.4, UDR-0070 §3.3, UDR-0074 §3.2): the arrival banner, between the greeting and the home's sections.
   def arrival(name, date, via) = tc("index.arrivals.line", name:, date:, via: tc("index.arrivals.via.#{via}"))
   def day(time) = I18n.l(time.to_date, format: :long).sub(/\A1 /, "1er ")
 

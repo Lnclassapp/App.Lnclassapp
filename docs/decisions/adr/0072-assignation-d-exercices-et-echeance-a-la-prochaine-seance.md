@@ -344,3 +344,20 @@ Acceptés tels quels par le porteur le 2026-10-02 (« lance les lots » ; memo, 
 6. **Retirer sa déclaration** d'une classe efface ses jours de séance.
 7. **« Fait »** = session rendue rattachée à l'assignation (définition de l'ADR-0048).
 8. **Direction** : elle ne voit ni les retards ni la liste nominative.
+
+## Complément du 2026-10-04 — élèves pas encore faits nommés
+
+*Par l'[ADR-0079](0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) §4.8 (chantier `rapports-exercices`), décision du porteur. Le texte ci-dessus reste tel qu'accepté.*
+
+- §4.5 : la page de suivi nomme aussi les élèves présents **qui n'ont pas encore fait** l'exercice, sous la même `FollowAssignmentPolicy`. La question laissée ouverte par le grill de ce chantier est tranchée : l'enseignant doit savoir qui relancer.
+
+## Complément du 2026-10-04 (bis) — la remédiation compte comme « fait »
+
+*Par l'[ADR-0079](0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) §4.1 (chantier `rapports-exercices`), décision de l'orchestrateur par mandat du porteur. Le texte ci-dessus reste tel qu'accepté.*
+
+- §4.4 : **pour l'enseignant, « fait » inclut désormais la remédiation.** Une session est faite si elle est `completed`, rattachée à l'assignation, d'un élève présent, quel que soit son `kind` (`standard` ou `remediation`). Une session de remédiation sur l'exercice assigné, c'est faire cet exercice : `StartExerciseSession` l'ouvre dès qu'une lacune est en attente sur la fiche (ADR-0043), pour tous les exercices de la fiche, et la rattache à l'assignation.
+- Le « rendu en retard » se lit sur la première session faite, quel que soit son `kind`.
+- Lu par `Queries::Classroom::AssignmentFollowUpQuery` (comptes, retards nommés, pas encore faits) et `Queries::Assessment::AssignmentScores` (page classe et page de suivi).
+- §7 : la ligne « remédiation → ne compte pas » de `assignment_follow_up_query_test.rb` est remplacée par « remédiation rattachée à l'assignation → fait, en retard après l'échéance ».
+- **Les queries de la direction** (`Queries::School::StudentWorkQuery`, `Queries::School::DepartedStudentsQuery`) comptent encore « fait » sans la remédiation. Elles suivront dans le chantier de correction `remediation-comptee-faite`, qui ajoute l'index nécessaire.
+

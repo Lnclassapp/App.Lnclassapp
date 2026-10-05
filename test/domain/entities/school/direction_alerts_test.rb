@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AD-03, AD-04, AD-05 (UDR-0072 §3.3): the alerts of the school card, in a fixed order, each present only when its count
+# AD-03, AD-04, AD-05 (UDR-0074 §3.3): the alerts of the school card, in a fixed order, each present only when its count
 # is positive; a classroom alert names its first three classrooms, in the order received, then counts the others.
 module Entities
   module School

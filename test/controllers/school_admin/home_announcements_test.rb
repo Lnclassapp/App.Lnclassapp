@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AD-14 to AD-16 (UDR-0072 §3.10, owner's decision of 2026-10-04): the direction's home shows the student carousel of
+# AD-14 to AD-16 (UDR-0074 §3.10, owner's decision of 2026-10-04): the direction's home shows the student carousel of
 # the announcements it reads, between « Niveaux » and « Activité récente », in reading only: no card carries a cross,
 # and a forged dismissal is refused by the announcements' own rule (ADR-0078 §4.2, unchanged).
 class SchoolAdmin::HomeAnnouncementsTest < ActionDispatch::IntegrationTest

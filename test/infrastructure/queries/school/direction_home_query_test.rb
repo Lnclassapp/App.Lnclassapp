@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AD-02 to AD-08 (UDR-0072 §3.2): the direction's home reads its school card and its level bubbles. Its figures reuse the
+# AD-02 to AD-08 (UDR-0074 §3.2): the direction's home reads its school card and its level bubbles. Its figures reuse the
 # definitions of « Travail des élèves » (ADR-0065) and of the « Enseignants » page, and the number of queries is fixed.
 class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
   Query = Queries::School::DirectionHomeQuery

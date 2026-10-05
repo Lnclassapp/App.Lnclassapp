@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::School::WorkSignal
 # Rôle : pastille de la direction lue sur le taux de rendu : vert dès 70 %, jaune dès 40 %, rouge en dessous, rien sans taux
-# UDR  : 0072 (§2.5) · seuils fixes décidés par le porteur, testés à leurs bornes
+# UDR  : 0074 (§2.5) · seuils fixes décidés par le porteur, testés à leurs bornes
 module Entities
   module School
     module WorkSignal

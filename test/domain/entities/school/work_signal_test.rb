@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AD-01 (UDR-0072 §2.5) : la pastille de la direction lit le taux de rendu à seuils fixes ; sans taux, pas de pastille.
+# AD-01 (UDR-0074 §2.5) : la pastille de la direction lit le taux de rendu à seuils fixes ; sans taux, pas de pastille.
 module Entities
   module School
     class WorkSignalTest < ActiveSupport::TestCase

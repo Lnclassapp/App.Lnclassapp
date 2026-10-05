@@ -97,4 +97,21 @@ class School::PurgeArchivedStaffJobTest < ActiveJob::TestCase
   ensure
     Rails.logger.stop_broadcasting_to(logger)
   end
+
+  # suites-inscription-direction (2), ADR-0036 §4 : ses invitations partent avec le compte, numéro compris ; celles qu'il a
+  # envoyées à d'autres numéros restent.
+  test "the invitations of the deleted account go with it; those it sent to others stay" do
+    due = create_school_admin(archived_at: 31.days.ago)
+    contact = due.contact
+    accepted = create_invitation(kind: "school_staff", contact:, accepted_at: 40.days.ago, accepted_user_id: due.id)
+    pending = create_invitation(kind: "team", contact:)
+    sent = create_invitation(kind: "school_staff", invited_by: due)
+
+    School::PurgeArchivedStaffJob.perform_now
+
+    assert_not Orm::Invitation.exists?(accepted.id)
+    assert_not Orm::Invitation.exists?(pending.id)
+    assert_not Orm::Invitation.exists?(contact:)
+    assert Orm::Invitation.exists?(sent.id)
+  end
 end

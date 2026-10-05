@@ -1,6 +1,6 @@
 require "test_helper"
 
-# AD-17, AD-18 (UDR-0072 §3.11): the recent activity of the direction's school, read in the dated business tables
+# AD-17, AD-18 (UDR-0074 §3.11): the recent activity of the direction's school, read in the dated business tables
 # (assignments, memberships, attachments), never in the audit log. Three kinds of event, the 10 most recent of the last
 # 30 days, in the active classrooms of the year of this school only, and a fixed number of queries whatever the volume.
 class Queries::School::SchoolActivityQueryTest < ActiveSupport::TestCase

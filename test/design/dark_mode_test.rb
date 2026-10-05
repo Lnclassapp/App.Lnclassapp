@@ -16,7 +16,7 @@ class DarkModeTest < ActiveSupport::TestCase
   ].map { [ *it, 4.5 ] }.freeze
   # Le contour de focus (`outline-brand`) se voit sur les surfaces sombres. En clair, il est à 2,7 : constat hors chantier.
   DARK_ONLY_PAIRS = [ [ "brand", "paper", 3.0 ], [ "brand", "white", 3.0 ] ].freeze
-  # UDR-0072 §3.7 : les pastilles de la direction se lisent sur leur anneau, de la couleur de la carte (3:1, élément graphique).
+  # UDR-0074 §3.7 : les pastilles de la direction se lisent sur leur anneau, de la couleur de la carte (3:1, élément graphique).
   # Constat du challenger (phase 5, O5) : le jaune #f2b705 n'y avait que 1,82.
   SIGNAL_PAIRS = %w[signal-green signal-yellow signal-red].map { [ it, "white", 3.0 ] }.freeze
 
@@ -44,6 +44,15 @@ class DarkModeTest < ActiveSupport::TestCase
 
     assert_equal literal.keys.sort, dark.keys.sort, "chaque --color-* littéral du @theme a sa valeur sombre (UDR-0065)"
     dark.each_value { |value| assert_match(/\A#\h{6}\z/, value) }
+  end
+
+  # UDR-0072 §3.1 : les quatre couleurs de la compréhension, pastilles et barres seulement (jamais un texte).
+  test "the four comprehension tokens exist in the theme and in both dark blocks" do
+    comprehension = %w[struggling struggling-soft fragile fragile-soft]
+
+    assert_equal %w[#c8322b #fdecea #e0a800 #fff8d2], light.values_at(*comprehension)
+    assert_equal %w[#ff7b72 #3d2023 #facc15 #3a3214], dark.values_at(*comprehension)
+    assert_equal dark.values_at(*comprehension), chosen_dark.values_at(*comprehension)
   end
 
   test "the shadows are redefined for dark surfaces, and the modal backdrop stays a dark veil" do

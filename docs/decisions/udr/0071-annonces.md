@@ -325,7 +325,7 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
 
 ## Amendement du 2026-10-04 — le carrousel sans croix, pour l'accueil de la direction
 
-*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md), [UDR-0072](0072-accueil-de-la-direction.md) §3.10. Le texte ci-dessus reste tel qu'accepté.*
+*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md), [UDR-0074](0074-accueil-de-la-direction.md) §3.10. Le texte ci-dessus reste tel qu'accepté.*
 
 - `communication/messages/_carousel` accepte un local `dismissible:` (vrai par défaut) : faux, aucune carte ne porte de croix. L'accueil de la direction le passe à faux ; l'accueil élève ne change pas (la croix des annonces non officielles reste).
 - Les règles de lecture et de masquage (ADR-0078 §4.2, §4.3) ne changent pas.

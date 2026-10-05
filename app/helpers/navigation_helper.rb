@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0072
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -23,7 +23,7 @@ module NavigationHelper
     # UDR-0068 §3.1 : Imports passe dans la liste secondaire (2e carte, menu « Plus »).
     team: [ [ :home, :team_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
             [ :schools, :schools_path, "building-library" ], [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
-    # UDR-0056 §3.1, UDR-0072 §3.1 : « Accueil » à l'adresse de l'ancien « Travail des élèves » ; UDR-0071 §3.1 : « Annonces » en dernier.
+    # UDR-0056 §3.1, UDR-0074 §3.1 : « Accueil » à l'adresse de l'ancien « Travail des élèves » ; UDR-0071 §3.1 : « Annonces » en dernier.
     school_admin: [ [ :home, :school_admin_classrooms_path, "home" ], [ :teachers, :school_admin_teachers_path, "user-group" ],
                     [ :school, :school_admin_school_path, "building-library" ], [ :announcements, :announcements_path, "megaphone" ] ]
   }.freeze

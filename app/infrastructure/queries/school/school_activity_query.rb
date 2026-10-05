@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolActivityQuery
 # Rôle : « Activité récente » de la direction : devoirs donnés, élèves arrivés, enseignants arrivés, sur 30 jours (AD-17, AD-18)
-# ADR  : 0065 · UDR : 0072 §3.11 · lue dans les tables métier datées, jamais dans le journal d'audit ; trois requêtes
+# ADR  : 0065 · UDR : 0074 §3.11 · lue dans les tables métier datées, jamais dans le journal d'audit ; trois requêtes
 module Queries
   module School
     class SchoolActivityQuery
