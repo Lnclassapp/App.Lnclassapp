@@ -2,11 +2,12 @@ require "test_helper"
 
 module Repositories
   module Communication
-    # Phase 5 of annonces-v2 (finding F1 of the security review, ADR-0081 §4.1). The same announcement published twice at
-    # the same instant — two « Publier » of its author, or his « Publier » and the job — appears once: one announcement
-    # archived by the cap, one « message.published » in the journal, no error; the second request is applied as a
-    # modification of the live announcement. On two connections, outside any test transaction. The order of the two
-    # requests is given by the author's lock (the first one keeps it until the second one waits on it), never by a sleep.
+    # Phase 5 of annonces-v2 (findings F1 and F2 of the security review, ADR-0081 §4.1). The same announcement published
+    # twice at the same instant — two « Publier » of its author, or his « Publier » and the job — appears once: one
+    # announcement archived by the cap, one « message.published » in the journal, no error; the second request is applied
+    # as a modification of the live announcement. The job writes only the status of a due announcement: what was changed
+    # after its reading stays. On two connections, outside any test transaction. The order of two requests is given by
+    # the author's lock (the first one keeps it until the second one waits on it), never by a sleep.
     class MessagePublicationConcurrencyTest < ActiveSupport::TestCase
       self.use_transactional_tests = false
 
@@ -24,6 +25,19 @@ module Repositories
           super.tap do
             @held << true
             @release.pop(timeout: 10)
+          end
+        end
+      end
+
+      # Reads the announcement once, then lets another connection change it, committed, before the use case writes.
+      class Racing < SimpleDelegator
+        def initialize(repository, &race) = super(repository).tap { @race = race }
+
+        def find_by_public_id(public_id:)
+          __getobj__.find_by_public_id(public_id:).tap do
+            race = @race
+            @race = nil
+            Thread.new { ActiveRecord::Base.connection_pool.with_connection { race.call } }.join if race
           end
         end
       end
@@ -138,6 +152,18 @@ module Repositories
         assert_equal %w[archived published published], statuses
         assert_equal 1, journaled(@scheduled)
         assert_equal [ "published", @now - 1.minute, @now ], @scheduled.reload.values_at(:status, :published_at, :edited_at)
+      end
+
+      test "F2 — the job writes only the status of a due announcement: what its author changed after its reading stays" do
+        racing = Racing.new(MessageRepository.new) do
+          Orm::Message.where(id: @scheduled.id).update_all(title: "Programmée corrigée", body: "Nouveau texte.", theme: "mangue")
+        end
+
+        assert_equal 1, run_job(racing).value
+        assert_equal [ "published", "Programmée corrigée", "Nouveau texte.", "mangue" ],
+                     @scheduled.reload.values_at(:status, :title, :body, :theme)
+        assert_equal %w[archived published published], statuses
+        assert_equal 1, journaled(@scheduled)
       end
     end
   end

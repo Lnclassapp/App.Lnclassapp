@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Ports::Communication::MessageRepositoryPort
-# Rôle : contrat des annonces : lecture par public_id, écriture avec leurs classes ciblées, rejets, publication, plafond
+# Rôle : contrat des annonces : lecture par public_id, écriture avec leurs classes ciblées, rejets, publication du job, plafond
 # ADR  : 0045, 0078, 0081
 module Ports
   module Communication
@@ -48,6 +48,14 @@ module Ports
       # (published_at, puis id)
       def live_of(author_id:, now:)
         raise NotImplementedError, "#{self.class} doit implémenter #live_of"
+      end
+
+      # Phase 5 d'annonces-v2 (F2), pour le job, dans la transaction de la parution et sous le verrou de l'auteur : passe en
+      # published l'annonce d'id donné si elle est encore programmée et due (published_at <= now), en une écriture
+      # conditionnelle qui ne touche à aucune autre colonne ; ce qui a changé depuis sa lecture reste.
+      # → Message publiée, avec ses classes | nil (plus programmée, ou pas encore due : rien n'est écrit)
+      def publish_scheduled(id:, now:)
+        raise NotImplementedError, "#{self.class} doit implémenter #publish_scheduled"
       end
     end
   end

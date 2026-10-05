@@ -32,8 +32,9 @@ module UseCases
           next false unless message.status == "scheduled" && message.published_at <= now
 
           make_room(live)
-          # Archivée ou retirée entre cette lecture et l'écriture : rien n'est écrit, ni archivé, ni journalisé.
-          raise Frozen unless @messages.update(message: message.with(status: "published"))
+          # Le statut seul est écrit (phase 5, F2) : rien de ce qui a changé depuis la relecture n'est écrasé. Archivée,
+          # retirée ou reprogrammée entre-temps : rien n'est écrit, ni archivé, ni journalisé.
+          raise Frozen unless @messages.publish_scheduled(id: message.id, now:)
 
           @audit_log.record(action: "message.published", actor_id: message.author_id, at: now, subject_type: "Message",
                             subject_id: message.id)

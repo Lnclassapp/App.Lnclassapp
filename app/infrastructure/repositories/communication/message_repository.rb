@@ -1,5 +1,5 @@
 # 🔌 INFRA · Repositories::Communication::MessageRepository
-# Rôle : annonces et leurs classes ciblées, écrites ensemble ; rejets effacés ; programmées venues ; en ligne sous verrou
+# Rôle : annonces et leurs classes ciblées, écrites ensemble ; rejets effacés ; programmées venues, publiées par leur seul statut ; en ligne sous verrou
 # ADR  : 0029, 0045, 0078, 0081
 module Repositories
   module Communication
@@ -55,6 +55,16 @@ module Repositories
                               .order(:published_at, :id).to_a
         classroom_ids = classroom_ids_of(records.map(&:id))
         records.map { entity(it, classroom_ids.fetch(it.id, [])) }
+      end
+
+      # Phase 5 (F2) : une seule écriture conditionnelle, qui verrouille la ligne ; le reste de la ligne est celui de la
+      # base, jamais une copie lue avant. Deux requêtes : l'écriture, puis la relecture avec ses classes.
+      def publish_scheduled(id:, now:)
+        written = Orm::Message.where(id:, status: "scheduled", published_at: ..now)
+                              .update_all(status: "published", updated_at: Time.current)
+        return if written.zero?
+
+        entity(Orm::Message.find(id), classroom_ids_of([ id ]).fetch(id, []))
       end
 
       private

@@ -42,6 +42,7 @@ module UseCases
         def live_of(**) = watched(:lock) { __getobj__.live_of(**) }
         def find_by_public_id(public_id:) = watched(:read) { __getobj__.find_by_public_id(public_id:) }
         def update(message:) = watched(message.status) { __getobj__.update(message:) }
+        def publish_scheduled(id:, now:) = watched(:publish) { __getobj__.publish_scheduled(id:, now:) }
 
         private
 
@@ -135,14 +136,14 @@ module UseCases
       end
 
       # Phase 5 (F1): the announcement is read again after the lock, when a publication of it by its author has ended.
-      test "AV-05 — in the transaction of each publication: the author locked, the announcement read again, the oldest archived, then it" do
+      test "AV-05 — in the transaction of each publication: the author locked, the announcement read again, the oldest archived, its status" do
         three_live
         transaction = SpyTransaction.new
         messages = WatchedMessages.new(Repositories::Communication::MessageRepository.new, transaction)
 
         publish(messages, transaction:)
 
-        assert_equal [ [ :lock, true ], [ :read, true ], [ "archived", true ], [ "published", true ] ], messages.calls
+        assert_equal [ [ :lock, true ], [ :read, true ], [ "archived", true ], [ :publish, true ] ], messages.calls
       end
     end
 
