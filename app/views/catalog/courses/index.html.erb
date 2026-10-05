@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
 <%# Rôle : recherche par nom et filtres (niveau et série sauf pour l'élève, matière) qui visent le frame « courses » ; élève : son niveau seul, épuré ; équipe : création et import %>
-<%# ADR  : 0028, 0035 · UDR : 0006, 0013, 0054, 0057, 0069 · grille non plafonnée à 3 (exception à R3, UDR-0013 amendement du 2026-10-02) %>
+<%# ADR  : 0028, 0035, 0076 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0054, 0057, 0069 · grille non plafonnée à 3, par pages de 24 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "courses" %>
 <% team = current_actor.team? %>
@@ -59,13 +59,10 @@
 
 <%# target _top : une carte ouvre la page du cours, pas le frame. %>
 <%= turbo_frame_tag "courses", target: "_top", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
-  <p id="courses_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @courses.size) %></p>
-  <% if @courses.any? %>
-    <ul id="courses_list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-      <%# Élève seulement (UDR-0057 R6) : son niveau est unique, et la matière filtrée est déjà dite par la liste « Matière ». %>
-      <%= render partial: "course_card", collection: @courses, as: :course,
-                 locals: { show_status: team, show_level: !student, show_material: !(student && @filters[:material].present?) } %>
-    </ul>
+  <p id="courses_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
+  <% if @page.rows.any? %>
+    <%# UDR-0013, amendement du 2026-10-05 : 24 cartes, puis la page suivante chargée au défilement (catalog/courses/_page). %>
+    <%= render "page", page: @page %>
   <% else %>
     <div id="courses_empty">
       <% if @filters.values.any?(&:present?) %>

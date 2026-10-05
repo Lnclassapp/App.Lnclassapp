@@ -1,6 +1,6 @@
 <%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
 <%# Rôle : carte de profil, destinations du rôle (les mêmes que la barre basse), 2e carte « Configuration » et frames différés du rôle %>
-<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6) %>
+<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6) · ADR : 0076 (§4.2) %>
 <% secondary = secondary_navigation_for(user.role) %>
 <aside class="fixed top-bar bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
   <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
@@ -27,10 +27,15 @@
       </ul>
     </nav>
   <% end %>
-  <%# Différé : la barre latérale est masquée sous lg, le frame n'y est donc jamais demandé (UDR-0069 §3.6). %>
+  <%# Différé : la barre latérale est masquée sous lg, le frame n'y est donc jamais demandé (UDR-0069 §3.6). Permanent : une
+      visite Turbo le garde chargé ; la page qui a déjà ses données le fournit (content_for de même id, ADR-0076 §4.2). %>
   <% sidebar_frames_for(user.role).each do |id, src| %>
-    <%= turbo_frame_tag id, src:, loading: :lazy, target: "_top", class: "mt-4 block" do %>
-      <%= ui_loading_state variant: :skeleton %>
+    <% if content_for?(id.to_sym) %>
+      <%= content_for(id.to_sym) %>
+    <% else %>
+      <%= turbo_frame_tag id, src:, loading: :lazy, **NavigationHelper::SIDEBAR_FRAME_OPTIONS do %>
+        <%= ui_loading_state variant: :skeleton %>
+      <% end %>
     <% end %>
   <% end %>
 </aside>

@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 # UDR-0042: the actions of a team table row live in a ⋮ menu. « Supprimer » in the menu closes it, opens the row's
-# confirmation dialog and deletes; the menu escapes the table's horizontal scroll, on a desk as on a phone, and the
+# confirmation dialog (read on demand in the « modal » frame since lot E3 of politique-cache) and deletes; the menu escapes the table's horizontal scroll, on a desk as on a phone, and the
 # keyboard goes from the ⋮ button to the dialog and back to the ⋮ button.
 class Teams::RowActionsMenuTest < ApplicationSystemTestCase
   setup do
@@ -34,11 +34,12 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
         assert_selector "button[aria-controls='#{menu.delete('#')}'][aria-expanded=true]"
         assert reachable?("#{menu} [role=menuitem]:last-child"), "le menu est rogné par le tableau"
 
-        find("#{menu} button[role=menuitem]", text: "Supprimer").click
+        # Lot E3 (politique-cache) : « Supprimer » charge sa confirmation dans le frame « modal ».
+        find("#{menu} a[role=menuitem]", text: "Supprimer").click
       end
 
       assert_no_selector menu, visible: true
-      within("dialog#delete-drena-#{last.public_id}[open]") do
+      within("turbo-frame#modal dialog#delete-drena-#{last.public_id}[open]") do
         assert_selector "h2", text: "Supprimer la DRENA « Bouaké » ?"
         click_on "Supprimer la DRENA"
       end
@@ -58,10 +59,10 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
     assert_selector "#drena-actions-#{drena.public_id} a[role=menuitem]:focus", text: "Modifier"
 
     page.active_element.send_keys(:arrow_down)
-    assert_selector "#drena-actions-#{drena.public_id} button[role=menuitem]:focus", text: "Supprimer"
+    assert_selector "#drena-actions-#{drena.public_id} a[role=menuitem]:focus", text: "Supprimer"
 
     page.active_element.send_keys(:enter)
-    assert_selector "dialog#delete-drena-#{drena.public_id}[open]"
+    assert_selector "turbo-frame#modal dialog#delete-drena-#{drena.public_id}[open]"
 
     page.active_element.send_keys(:escape)
     assert_no_selector "dialog[open]"

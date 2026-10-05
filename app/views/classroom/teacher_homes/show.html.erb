@@ -1,7 +1,9 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
 <%# Rôle : sections de HOME_SECTIONS[:teacher] (classes et leur menu ⋮, cours par niveau, activités), collègues en attente, invitation sur téléphone %>
-<%# ADR  : 0026, 0048, 0063 · UDR : 0006, 0007, 0026, 0050, 0054, 0069 · titre « Accueil · Enseignant · Lnclass » %>
+<%# ADR  : 0026, 0048, 0063, 0076 · UDR : 0006, 0007, 0026, 0050, 0054, 0069 · titre « Accueil · Enseignant · Lnclass » %>
 <% page_title t(".page_title") %>
+<%# Grand écran : la carte « Parrainage » de la barre latérale vient avec la page, sans frame à demander (ADR-0076 §4.2). %>
+<% content_for :sidebar_referral, render("identity/referrals/sidebar_card", invite: @invite, frame: NavigationHelper::SIDEBAR_FRAME_OPTIONS) %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle", school: @home.school_name) do %>
   <%= ui_subject_badge @home.material_name, category: @home.material_category %>
 <% end %>

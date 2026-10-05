@@ -23,6 +23,8 @@ bin/rails runner script/perf/count_round_trips.rb
 - `measure_network.rb` : 3 requêtes de chauffe, puis 30 mesurées sur **une connexion gardée ouverte**, comme une navigation Turbo. La feuille de style sert de témoin du cache de Cloudflare : son nom est lu dans `/login`, et la chauffe la met en `HIT`. « Hors serveur » = durée − `x-runtime`. Le PoP de Cloudflare se lit à la fin de `cf-ray`.
 - `measure_browser.cjs` : Chromium headless (Playwright global, `/opt/pw-browsers`). Un navigateur neuf par visite pour la « première visite », puis une seconde visite dans le même navigateur. Ce sont les valeurs de la Navigation Timing (ms depuis le début de la navigation). `HTTPS_PROXY` est transmis à Chromium.
 - `count_round_trips.rb` : `Integration::Session` simule ce que fait Turbo 8. Une visite envoie `X-Turbo-Request-Id`, fetch suit les redirections, `turbo-visit-control: reload` recharge le document, et chaque `<turbo-frame src>` est demandé avec `Turbo-Frame`. Le compte ne dépend ni de la machine ni du réseau ; le temps serveur affiché est local. Une passe de chauffe précède la mesure. Chaque parcours se connecte depuis une adresse privée tirée au hasard, à cause de `rate_limit` (5 connexions par minute et par adresse).
+- **Lot E — toutes les pages** (2026-10-05) : sur le jeu de l'ADR-0067 (`bin/rails db:reset` puis `bin/rails runner script/perf/seed_dataset.rb`, base dédiée), avec le même préfixe que `count_round_trips.rb` : `bin/rails runner script/perf/audit_pages.rb`. Il faut environ 1 min 30. Le script écrit un tableau Markdown et `tmp/perf-audit.json`. `PERF_RUNS` (15) fixe les visites mesurées par page, `PERF_PER_ROUTE` (3) les adresses par route, `PERF_ONLY=team,admin` les profils. Les écrans lourds se remesurent avec `measure_screens.rb` (`PERF_ONLY=schools,school_show,drenas,courses_team,courses_teacher`, 3 exécutions, médiane).
+- **Tests navigateur dans le conteneur** : le `chromedriver` 147 de `/opt/node22/bin` ne pilote pas le Chromium 141 de Playwright. On retire `/opt/node22/bin` du `PATH` : selenium-manager télécharge alors Chrome for Testing 154 et son pilote dans `~/.cache/selenium`. On les désigne ensuite par `CHROME_BIN` et `CHROMEDRIVER_PATH`.
 - **Conteneur de mesure** : Chromium n'y faisait confiance à aucune autorité (`ERR_CERT_AUTHORITY_INVALID`), parce que sa base NSS était vide. On y a importé le paquet d'autorités du conteneur (`certutil -A -t "C,,"`, paquet `libnss3-tools`). La vérification TLS reste active.
 
 ## Où part le temps
@@ -111,6 +113,21 @@ Ordre réel des opérations (UTC) :
 
 Mesure « après » : memo, « Mesure après — région ». De 23:29 à 23:53, la production a tourné avec sa base à Amsterdam et son application à Singapour : chaque requête SQL traversait l'Europe et l'Asie (environ 24 minutes, la nuit). Les journaux HTTP de cette fenêtre ne montrent aucune page connectée : les requêtes des bancs de mesure et une seule visite anonyme de `/` (un iPhone, 563 ms, à 23:39).
 
+## Lot E : l'audit de toutes les pages (2026-10-05)
+
+| Heure (UTC) | Qui | Quoi |
+|---|---|---|
+| ≈ 13:27 | porteur | « après la migration vers UE, je trouve l'app Lnclass super lente » |
+| 13:28 | Claude | Railway : production à 4–6 ms en p50 serveur, aucune requête au-dessus de 300 ms depuis 06:00 ; **Develop à 1,7–3,2 s en p50, jusqu'à 10 s**, toutes ses pages connectées. Les journaux HTTP montrent une seule personne (le porteur) sur Develop |
+| 13:30 | porteur | « analyse toutes les pages, puis assure-toi que la politique de cache est respectée, et que toutes les pages sont optimisées » |
+| 13:30 → 13:45 | Claude | Jeu de l'ADR-0067 semé dans une base dédiée (2 min 53 s). Le robot `audit_pages.rb` est écrit, puis lancé |
+| 13:45 | porteur | « déplace sa DB Amsterdam aussi » |
+| 13:45 | Claude | Changement en attente dans Develop : Postgres `asia-southeast1` → `europe-west4`, Postgres seul (vérifié par `get-staged-changes`). `accept-deploy` expire deux fois après 60 s ; le changement reste « staged ». Comme pour les suppressions, la validation doit se faire au tableau de bord |
+| 13:50 → 14:40 | Claude | Lots E1 et E2 : mesures avant et après, tests, audit relancé |
+| 14:15 | Railway | Le changement est appliqué ; volume de Postgres en `europe-west4`, déploiement réussi. Rien ne dit si c'est le porteur, au tableau de bord, ou l'un des deux `accept-deploy` expirés côté client. Vérifié à 14:20 : `x-runtime` de `/` à 5–11 ms (175 ms avant), pages connectées du porteur à 18–380 ms |
+
+Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée sur toutes les pages atteintes. Deux décisions d'interface du 2026-10-04, l'une sur la carte « Parrainage » de l'enseignant, l'autre sur l'activité de la direction, ajoutaient chacune une requête en série au-delà du plafond de l'ADR-0076, posé la veille. La première se corrige sans changer l'écran ; la seconde est une question au porteur.
+
 ## Décisions prises en cours de route
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
@@ -123,6 +140,14 @@ Mesure « après » : memo, « Mesure après — région ». De 23:29 à 23:53, 
 | 2026-10-03 | **Porteur** : lots A et B refusés, on garde les UDR-0010, 0018 et l'ADR-0049 | Les décisions d'interface (frame différé) et de sécurité (rechargement à chaque nouvelle session) priment sur un aller-retour | ADR-0076 §4.2 : le compte d'aujourd'hui devient un plafond |
 | 2026-10-03 | **Porteur** : région étudiée, Develop et Staging d'abord ; Early Hints et Tiered Cache activés par lui | Seuls leviers restants, tous deux hors du dépôt | ADR-0076 §4.3 |
 | 2026-10-03 | Lot C fermé | Sa clause de fermeture s'applique : WebKit n'est pas installable dans le conteneur, et Chromium ne revalide pas les sous-ressources | non |
+| 2026-10-05 | Un robot d'exploration plutôt qu'une liste d'écrans | Une liste écrite à la main oublie les pages ajoutées depuis ; le robot part des routes et des liens réels, une adresse par forme (route, frame visé, noms des paramètres) | non |
+| 2026-10-05 | Un frame présent sur toutes les pages d'un espace est `data-turbo-permanent` | Il ne coûte plus qu'au premier chargement ; l'écran ne change pas | ADR-0076 §4.2 (ajout), UDR-0069 §3.6 (amendement) |
+| 2026-10-05 | **Porteur** : lots E3 et E4 (« fenêtre unique » des établissements et des DRENA ; catalogue paginé avec chargement Hotwire) | Reprise du lot 5 de `cache-ecrans-lourds` ; les lots UX qu'il attendait ne touchent plus ces vues | UDR-0013, UDR-0035, UDR-0036 (amendements) |
+| 2026-10-05 | « Fenêtre unique » = la confirmation chargée à la demande dans le frame « modal » | C'est le modèle déjà accepté pour la direction (UDR-0056) ; une `<dialog>` partagée remplie en JavaScript aurait évité l'aller-retour, mais elle demandait un nouveau contrôleur Stimulus et des textes composés côté client | non |
+| 2026-10-05 | Pagination plutôt que cache des cartes du catalogue | Le cache prévu par le lot 5 accélère le rendu mais n'allège pas la page (339 à 410 Ko) | UDR-0013 (amendement) |
+| 2026-10-05 | `CourseCatalogQuery#call` renvoie une page (`Page`, comme `SchoolsQuery`) au lieu de toutes les cartes | Une seule entrée ; le compte coûte une requête de plus (2 au lieu de 1) | non |
+| 2026-10-05 | Frame de la page suivante en bloc **après** la grille, pas dans la grille | Un frame en `display: contents` n'a pas de boîte : l'`IntersectionObserver` de Turbo ne le verrait jamais entrer à l'écran | non |
+| 2026-10-05 | Sprite d'icônes posé **dans** le frame de la liste | La réponse d'un frame seul (recherche, page suivante) doit apporter ses `<symbol>` ; posé hors du frame, une icône absente de la première page serait perdue | non (levier déjà admis, ADR-0067) |
 
 ## Leviers abandonnés, et pourquoi
 
@@ -135,6 +160,11 @@ Mesure « après » : memo, « Mesure après — région ». De 23:29 à 23:53, 
 | B — connexion et déconnexion hors Turbo | −1 requête en série et un rendu de moins par connexion | Refusé par le porteur : l'ADR-0049 garde le rechargement à chaque nouvelle session |
 | C — `immutable` | un aller-retour vers Cloudflare au rechargement, sous Safari et Firefox seulement | Non mesurable dans le conteneur (pas de WebKit) |
 | Supprimer la redirection de `/` pour une personne connectée | −1 requête à chaque ouverture | Change l'adresse de l'accueil : c'est une `feature` |
+| Logo et bouton « Accueil » des pages publiques et d'erreur vers l'accueil du rôle plutôt que `/` (lot E) | −1 requête, sur des pages peu visitées par une personne connectée | Dans le plafond « ouverture de lnclass.com » (3). Le gain est rare, et ces pages sont partagées par le visiteur et la personne connectée |
+| Une seule requête pour les images d'un article (lot E) | 4 à 5 requêtes de ~0,4 ms, soit ~2 ms dans la même région | Budget de l'ADR-0067 tenu (p95 25 à 37 ms). Il faudrait contourner la résolution des pièces jointes d'Action Text |
+| Cache des cartes du catalogue (`render collection, cached: true`, lot 5 de `cache-ecrans-lourds`) | rendu plus rapide, poids inchangé | Remplacé par la pagination (E4), qui fait les deux |
+| `<dialog>` de confirmation partagée, remplie en JavaScript (E3) | pas d'aller-retour à l'ouverture | Nouveau contrôleur et textes composés côté client ; le modèle « à la demande » existe déjà (UDR-0056) |
+| Sprite sur la page d'une classe (lot E) | ~45 Ko sur 217 | Ne la ramène pas sous 150 Ko : ce sont surtout ses 56 formulaires. À traiter avec la question 6 du memo |
 
 ## Ce qui a dérapé
 
@@ -162,6 +192,9 @@ Mesure « après » : memo, « Mesure après — région ». De 23:29 à 23:53, 
 - **Railway, environnements dérivés** : Develop et Staging dérivent de production. Un service créé ou une image rattachée « dans tous les environnements » n'arrive qu'en production. Dans Develop, valider les changements en attente applique **tous** ceux de l'environnement, y compris ceux d'un autre service.
 - **Railway, buckets** : leur région ne change jamais. Il faut un nouveau bucket, une copie, puis la bascule des variables. Le nom d'un bucket est unique dans le projet : un nom déjà pris est remplacé par un nom généré (`wrapped-pannikin-OhaX`), à renommer.
 
+- **Lot E, premier passage de l'audit** : la première page explorée après la connexion héritait du rechargement de la nouvelle session (`/account/pending` marquée « rechargement forcé »). Le robot consomme désormais ce rechargement sur l'accueil avant d'explorer. Il comptait aussi le frame permanent de l'enseignant comme une requête à chaque page : un frame `data-turbo-permanent` est maintenant relevé à part, comme une requête à l'arrivée seulement.
+- **`script/ci/record_timings`** : sans `LANG=C.UTF-8`, il plante sur un fichier de test non ASCII. Avec la locale, il ne lit qu'une des deux durées du fichier : la première ligne `-v` est coupée par le démarrage de Puma. Il retire aussi une entrée dont le fichier n'existe plus (`student_work_test.rb`). La durée de `sidebar_referral_test.rb` (3,78 + 1,56 s, soit 5,3 s) a donc été reportée à la main, et le reste du fichier laissé tel quel.
+
 ## Ce qu'on a appris sur la codebase
 
 - La production, Staging et Develop tournent tous en `asia-southeast1` (Singapour), un réplica chacun, PostgreSQL au même endroit. Cloudflare proxifie `lnclass.com`, `app-develop.lnclass.com` et `app-staging.lnclass.com`.
@@ -176,8 +209,8 @@ Mesure « après » : memo, « Mesure après — région ». De 23:29 à 23:53, 
 | `/` redirige une personne connectée vers son accueil (+1 requête en série à chaque ouverture) | Changer l'adresse de l'accueil est une `feature` | à ouvrir si le porteur le souhaite |
 | Mise en veille de Develop et Staging | Réglage de recette, non mesuré | à voir avec le porteur |
 | Mesure depuis Abidjan | Aucun point de mesure en Côte d'Ivoire depuis le conteneur | question 1 du memo : seule preuve de la cible du lot R |
-| Base de Develop à Singapour, application de Develop à Amsterdam | Validation refusée par le porteur le 2026-10-03 ; à faire depuis le tableau de bord | question 2 du memo |
-| Ancien bucket `organized-trunk` (`sin`) et services arrêtés `migration-fichiers`, `-staging`, `-develop` | Suppressions refusées au moment de les demander ; contenu copié et vérifié deux fois | question 3 du memo |
+| Frame différé de l'activité de la direction (2 requêtes en série) | Décision d'interface du 2026-10-04 (UDR-0074 §3.11), postérieure au plafond | question 5 du memo |
+| Listes encore au-dessus de 150 Ko de HTML : établissements (222 Ko), fiche d'un établissement (269 Ko), page d'une classe (217 Ko) | Ce qui reste est le menu ⋮ de chaque ligne et les formulaires de la page d'une classe | question 6 du memo |
 
 ## Clôture
 

@@ -155,6 +155,34 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # ADR-0076 §4.2, UDR-0069 §3.6 amended (chantier politique-cache, lot E1): the home, which reads the invitation already,
+  # renders the card with the page in the permanent frame of the sidebar; another page of the space keeps the deferred
+  # frame. A teacher of a draft or inactive school gets the same permanent frame on the home, empty.
+  test "RE-19: the home renders the card in the permanent sidebar frame; another page defers it; a closed invitation leaves it empty" do
+    sign_in_as @teacher
+
+    get teacher_home_path
+    assert_select "aside turbo-frame#sidebar_referral[data-turbo-permanent][target=_top]:not([src])", 1 do
+      assert_select "#sidebar_referral_count", text: "Aucun collègue inscrit grâce à vous pour l'instant."
+      assert_select "a#sidebar_referral_link[href='#{link}']", text: link
+    end
+    get teacher_classrooms_path
+    assert_select "aside turbo-frame#sidebar_referral[data-turbo-permanent][target=_top][loading=lazy][src='#{teacher_invite_path}']", 1
+    assert_select "#sidebar_referral_card", 0
+    sign_out
+
+    %w[draft inactive].each do |status|
+      sign_in_as create_teacher(school: create_school(status:))
+
+      get teacher_home_path
+
+      assert_response :success, status
+      assert_select "aside turbo-frame#sidebar_referral[data-turbo-permanent]:not([src])", 1, status
+      assert_select "#sidebar_referral_card, #sidebar_referral_link", 0, status
+      sign_out
+    end
+  end
+
   test "RE-19: every id of the card is prefixed sidebar_referral_ and none is shared with the invitation block" do
     sign_in_as @teacher
     get teacher_invite_path

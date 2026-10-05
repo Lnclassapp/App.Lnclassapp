@@ -67,13 +67,14 @@ Le porteur garde, le 2026-10-03, le frame différé des accueils élève et équ
 | Ouverture de `lnclass.com` par une personne connectée (redirection, accueil, frame) | **3** |
 
 - Un nouveau frame différé (`loading: :lazy`) ajoute une requête en série. Il n'est justifié que si son contenu coûte, côté serveur, plus qu'un aller-retour, ou s'il est hors de l'écran à l'arrivée sur la page.
+- **Un frame présent sur toutes les pages d'un espace** (barre latérale) est `data-turbo-permanent` : Turbo le garde d'une page à l'autre, il ne coûte qu'à l'arrivée par un chargement complet. Une page qui a déjà ses données le rend avec elle. *(Ajout du 2026-10-05, lot E1 : carte « Parrainage » de l'enseignant, UDR-0069 §3.6.)*
 - Le plafond se vérifie avec `script/perf/count_round_trips.rb`. Un parcours qui le dépasse ouvre un chantier `optimize`.
 
 ### 4.3 Région
 
 > **L'application et sa base vivent ensemble dans la région Railway la plus proche des utilisateurs.** Le choix se fait sur une mesure prise depuis la Côte d'Ivoire (`script/perf/measure_network.rb`). À vol d'oiseau, la candidate est `europe-west4` (Amsterdam).
 
-**Décision du porteur, 2026-10-03 : `europe-west4` pour les trois environnements, avec leurs bases et leurs fichiers.** C'est appliqué en production et en Staging le 2026-10-04 ; la base de Develop reste à déplacer. Au point de mesure, le surcoût d'un aller-retour jusqu'au serveur est passé de 227 à 107 ms, et le chargement d'une page déjà visitée de 403 à 238 ms. La mesure depuis Abidjan reste à prendre. Les fichiers d'Active Storage vivent dans un bucket `ams` par environnement (`lnclass-fichiers-eu-<environnement>`), car la région d'un bucket ne change jamais. On ne déplace jamais l'application sans sa base : chaque page fait 4 à 25 requêtes SQL, et une traversée Europe–Asie par requête SQL coûterait plus que tout le reste.
+**Décision du porteur, 2026-10-03 : `europe-west4` pour les trois environnements, avec leurs bases et leurs fichiers.** C'est appliqué en production et en Staging le 2026-10-04, et pour la base de Develop le 2026-10-05. Au point de mesure, le surcoût d'un aller-retour jusqu'au serveur est passé de 227 à 107 ms, et le chargement d'une page déjà visitée de 403 à 238 ms. La mesure depuis Abidjan reste à prendre. Les fichiers d'Active Storage vivent dans un bucket `ams` par environnement (`lnclass-fichiers-eu-<environnement>`), car la région d'un bucket ne change jamais. On ne déplace jamais l'application sans sa base : chaque page fait 4 à 25 requêtes SQL, et une traversée Europe–Asie par requête SQL coûterait plus que tout le reste.
 
 ## 5. Conséquences
 
@@ -112,6 +113,7 @@ RAILS_ENV=production … bin/rails runner script/perf/count_round_trips.rb   # r
 ## 7. Comment vérifier que la décision est respectée
 
 - `script/perf/count_round_trips.rb` : aucun parcours au-dessus de son plafond (§4.2).
+- `script/perf/audit_pages.rb` (ajouté le 2026-10-05, lot E) : toutes les pages GET que chaque profil atteint, sur le jeu de mesure de l'ADR-0067. Le script relève le `Cache-Control` (jamais `public` sur le HTML, `no-store` sur une action `secret_response`), les frames à source, les liens qui redirigent, les requêtes SQL répétées, le temps serveur et le poids du HTML.
 - `curl -sI https://lnclass.com/` : HTML en `private, max-age=0` et `cf-cache-status: DYNAMIC` ; `curl -sI` d'un asset digéré : `public, max-age=31536000`, puis `HIT` au second appel.
 - `script/perf/measure_network.rb` lancé depuis la Côte d'Ivoire, avant et après tout changement de région.
 - Toute PR qui ajoute un `Rails.cache.fetch`, un cache de fragment ou un `fresh_when` cite l'écran et le budget de l'ADR-0067 qu'il fait tenir.

@@ -137,20 +137,20 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       assert_selector "#school_#{unused.public_id}", text: I18n.t("school_types.mixed")
 
       click_menu_action("#school_#{used.public_id}", I18n.t("#{row_scope}.delete"))
-      within("#school_#{used.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
+      within("turbo-frame#modal dialog#delete-school-#{used.public_id}[open]") { click_on I18n.t("teams.schools.deletion.confirm") }
 
       assert_toast I18n.t("teams.schools.destroy.referenced")
       assert_selector "#school_#{used.public_id}", text: "Lycée Classique"
-      assert_no_selector "#school_#{used.public_id} dialog[open]"
+      assert_no_selector "turbo-frame#modal dialog[open]"
 
       click_menu_action("#school_#{used.public_id}", I18n.t("#{row_scope}.deactivate"))
-      within("#school_#{used.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_deactivate") }
+      within("turbo-frame#modal dialog#deactivate-school-#{used.public_id}[open]") { click_on I18n.t("teams.schools.deactivation.confirm") }
 
       assert_toast I18n.t("teams.schools.deactivate.done", name: "Lycée Classique")
       assert_selector "#school_#{used.public_id}", text: I18n.t("school_statuses.inactive")
 
       click_menu_action("#school_#{unused.public_id}", I18n.t("#{row_scope}.delete"))
-      within("#school_#{unused.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
+      within("turbo-frame#modal dialog#delete-school-#{unused.public_id}[open]") { click_on I18n.t("teams.schools.deletion.confirm") }
 
       assert_toast I18n.t("teams.schools.destroy.done")
       assert_no_selector "#school_#{unused.public_id}"
@@ -166,7 +166,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
 
     assert_no_page_reload do
       click_menu_action("#school_#{last.public_id}", I18n.t("#{row_scope}.delete"))
-      within("#school_#{last.public_id} dialog[open]") { click_on I18n.t("#{row_scope}.confirm_delete") }
+      within("turbo-frame#modal dialog#delete-school-#{last.public_id}[open]") { click_on I18n.t("teams.schools.deletion.confirm") }
 
       assert_toast I18n.t("teams.schools.destroy.done")
       assert_selector "#schools_empty", text: I18n.t("teams.schools.index.no_match_title")

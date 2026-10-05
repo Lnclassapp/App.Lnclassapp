@@ -38,29 +38,32 @@
 <%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50", data: { turbo_action: "advance" } do %>
   <p id="schools_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
   <% if @page.rows.any? %>
-    <%# relative : les libellés sr-only de la dernière colonne restent pris dans le défilement du tableau, pas dans celui de la page. %>
-    <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
-      <table class="w-full min-w-4xl text-left text-sm">
-        <caption class="sr-only"><%= t(".caption") %></caption>
-        <thead class="border-b border-line text-xs text-mute">
-          <tr>
-            <% %i[school school_code drena type cycle status classrooms teachers].each do |column| %>
-              <th scope="col" class="px-4 py-3 font-medium">
-                <%= t(".columns.#{column}") %>
-                <%# UDR-0054 §3.4 : les statuts s'expliquent une fois, dans l'en-tête, pas sur chaque ligne. %>
-                <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".columns.status") if column == :status %>
-                <%# Même aide que la fiche (UDR-0054 §3.4, texte validé) : le code est secret, à ne pas confondre avec le code national. %>
-                <%= ui_info_tip t("teams.schools.header.school_code_tip"), label: t(".columns.school_code") if column == :school_code %>
-              </th>
-            <% end %>
-            <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
-          </tr>
-        </thead>
-        <tbody id="schools_list" class="divide-y divide-line">
-          <%= render partial: "school_row", collection: @page.rows, as: :school %>
-        </tbody>
-      </table>
-    </div>
+    <%# Une ligne porte ses icônes, son menu ⋮ et ses modales : dessinées une fois dans le frame, reprises par <use> (ADR-0067). %>
+    <%= ui_icon_sprite do %>
+      <%# relative : les libellés sr-only de la dernière colonne restent pris dans le défilement du tableau, pas dans celui de la page. %>
+      <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
+        <table class="w-full min-w-4xl text-left text-sm">
+          <caption class="sr-only"><%= t(".caption") %></caption>
+          <thead class="border-b border-line text-xs text-mute">
+            <tr>
+              <% %i[school school_code drena type cycle status classrooms teachers].each do |column| %>
+                <th scope="col" class="px-4 py-3 font-medium">
+                  <%= t(".columns.#{column}") %>
+                  <%# UDR-0054 §3.4 : les statuts s'expliquent une fois, dans l'en-tête, pas sur chaque ligne. %>
+                  <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".columns.status") if column == :status %>
+                  <%# Même aide que la fiche (UDR-0054 §3.4, texte validé) : le code est secret, à ne pas confondre avec le code national. %>
+                  <%= ui_info_tip t("teams.schools.header.school_code_tip"), label: t(".columns.school_code") if column == :school_code %>
+                </th>
+              <% end %>
+              <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+            </tr>
+          </thead>
+          <tbody id="schools_list" class="divide-y divide-line">
+            <%= render partial: "school_row", collection: @page.rows, as: :school %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
   <% else %>
     <div id="schools_empty">
       <% if @filters.values.any?(&:present?) %>

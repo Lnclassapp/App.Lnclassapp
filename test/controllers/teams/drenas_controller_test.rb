@@ -23,6 +23,8 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
       assert_response :forbidden
       get edit_drena_path(drena)
       assert_response :forbidden
+      get deletion_drena_path(drena), headers: { "Turbo-Frame" => "modal" }
+      assert_response :forbidden
       patch drena_path(drena), params: { drena: { name: "Abidjan 1" } }
       assert_response :forbidden
       delete drena_path(drena)
@@ -48,8 +50,9 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
       assert_select "td", text: "Abidjan 1"
       assert_select "code", "drena-abidjan-1"
       assert_select "a[data-turbo-frame=modal][href='#{edit_drena_path(abidjan)}']"
-      assert_select "dialog#delete-drena-#{abidjan.public_id} form[action='#{drena_path(abidjan)}'] input[name=_method][value=delete]",
-                    count: 1, visible: :all
+      # Lot E3 (politique-cache) : la confirmation n'est plus dans la ligne ; son lien la charge dans le frame « modal ».
+      assert_select "a[data-turbo-frame=modal][href='#{deletion_drena_path(abidjan)}']", text: "Supprimer"
+      assert_select "dialog, form", 0
     end
     assert_select "#{row(abidjan)} td.tabular-nums", text: "1", count: 2
     assert_select "#{row(yamoussoukro)} code", "drena-yamoussoukro"
@@ -289,5 +292,45 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to drenas_path
     assert_equal "La DRENA « Abidjan 1 » a 1 établissement : elle ne peut pas être supprimée.", flash[:alert]
     assert Orm::Drena.exists?(kept.id)
+  end
+
+  # Chantier politique-cache, lot E (ADR-0067) : les icônes des lignes (menu ⋮, modales) sont dessinées une fois pour la page.
+  test "the rows take their icons from symbols drawn once for the page" do
+    create_drena(name: "Abidjan 1")
+    create_drena(name: "Bouaké")
+    sign_in_as @member
+
+    get drenas_path
+    assert_icons_drawn_once "#main"
+  end
+
+  # Lot E3 (chantier politique-cache) : la confirmation de suppression arrive dans le frame « modal », avec le même titre,
+  # le même texte et le même DELETE ; sans frame, une page complète ; une DRENA inconnue, 404 ; un refus la referme.
+  test "the deletion confirmation is read on demand in the modal frame, or as a full page; a refusal closes it" do
+    drena = create_drena(name: "Abidjan 1")
+    sign_in_as @member
+
+    get deletion_drena_path(drena), headers: { "Turbo-Frame" => "modal" }
+    assert_response :success
+    assert_select "turbo-frame#modal dialog#delete-drena-#{drena.public_id}[open]" do
+      assert_select "h2", text: "Supprimer la DRENA « Abidjan 1 » ?"
+      assert_select "p", text: I18n.t("teams.drenas.deletion.body")
+      assert_select "form#delete-drena-#{drena.public_id}-form[action='#{drena_path(drena)}'] input[name=_method][value=delete]"
+      assert_select "button[type=submit]", text: "Supprimer la DRENA"
+    end
+    assert_select "#back-to-drenas", 0
+
+    get deletion_drena_path(drena)
+    assert_response :success
+    assert_select "main#main a#back-to-drenas[href='#{drenas_path}']", text: I18n.t("teams.drenas.deletion.back")
+
+    get deletion_drena_path("drena-inconnue")
+    assert_response :not_found
+
+    create_school(drena:)
+    delete drena_path(drena), as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=update][target=modal] template", text: ""
+    assert Orm::Drena.exists?(drena.id)
   end
 end

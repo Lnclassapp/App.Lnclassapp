@@ -98,6 +98,7 @@ module PerfScreens
       [ "schools_search", :team, "/teams/schools?search=bouake" ],
       [ "schools_page_6", :team, "/teams/schools?page=6" ],
       [ "school_show", :team, "/teams/schools/#{focus.public_id}" ],
+      [ "drenas", :team, "/teams/drenas" ],
       [ "courses_team", :team, "/courses" ],
       [ "imports", :team, "/teams/imports" ],
       [ "teacher_home", :teacher, "/teachers" ],

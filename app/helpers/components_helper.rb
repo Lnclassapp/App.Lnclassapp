@@ -175,13 +175,17 @@ module ComponentsHelper
 
   # Liste longue (ADR-0067) : dans le bloc, chaque ui_icon reprend par <use> un <symbol> émis une seule fois, après le
   # bloc, hors de ses lignes : un Turbo Stream qui retire une ligne n'emporte pas le dessin des autres.
-  def ui_icon_sprite(&block)
+  # prefix : préfixe des identifiants des <symbol>, quand plusieurs blocs se suivent dans la même page (pages du
+  # catalogue chargées au défilement) : jamais deux <symbol> de même id.
+  def ui_icon_sprite(prefix: nil, &block)
     @icon_sprite = {}
+    @icon_sprite_prefix = prefix
     content = capture(&block)
     symbols = @icon_sprite.map { |id, (root, paths)| %(<symbol id="#{id}" #{root}>#{paths}</symbol>).html_safe } # rubocop:disable Rails/OutputSafety -- fichier vendu, jamais une saisie
     safe_join([ content, tag.svg(safe_join(symbols), class: "absolute size-0 overflow-hidden", "aria-hidden": "true", focusable: "false") ])
   ensure
     @icon_sprite = nil
+    @icon_sprite_prefix = nil
   end
 
   def ui_spinner(size: :md)
@@ -497,7 +501,7 @@ module ComponentsHelper
       attributes, inner = heroicon_source(set, name).match(%r{\A<svg ([^>]*)>\s*(.*?)\s*</svg>\z}m).captures
       [ attributes.gsub(/\s*(?:xmlns|aria-hidden|data-slot)="[^"]*"/, "").strip, inner ]
     end
-    id = "icon-#{set.tr('/', '-')}-#{name}"
+    id = "#{@icon_sprite_prefix}icon-#{set.tr('/', '-')}-#{name}"
     @icon_sprite[id] ||= [ root, paths ]
     %(<svg class="#{ERB::Util.html_escape(classes)}" #{a11y} focusable="false"><use href="##{id}"></use></svg>).html_safe # rubocop:disable Rails/OutputSafety -- classes échappées, identifiant du fichier vendu
   end
