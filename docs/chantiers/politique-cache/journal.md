@@ -142,6 +142,11 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 | 2026-10-03 | Lot C fermé | Sa clause de fermeture s'applique : WebKit n'est pas installable dans le conteneur, et Chromium ne revalide pas les sous-ressources | non |
 | 2026-10-05 | Un robot d'exploration plutôt qu'une liste d'écrans | Une liste écrite à la main oublie les pages ajoutées depuis ; le robot part des routes et des liens réels, une adresse par forme (route, frame visé, noms des paramètres) | non |
 | 2026-10-05 | Un frame présent sur toutes les pages d'un espace est `data-turbo-permanent` | Il ne coûte plus qu'au premier chargement ; l'écran ne change pas | ADR-0076 §4.2 (ajout), UDR-0069 §3.6 (amendement) |
+| 2026-10-05 | **Porteur** : lots E3 et E4 (« fenêtre unique » des établissements et des DRENA ; catalogue paginé avec chargement Hotwire) | Reprise du lot 5 de `cache-ecrans-lourds` ; les lots UX qu'il attendait ne touchent plus ces vues | UDR-0013, UDR-0035, UDR-0036 (amendements) |
+| 2026-10-05 | « Fenêtre unique » = la confirmation chargée à la demande dans le frame « modal » | C'est le modèle déjà accepté pour la direction (UDR-0056) ; une `<dialog>` partagée remplie en JavaScript aurait évité l'aller-retour, mais elle demandait un nouveau contrôleur Stimulus et des textes composés côté client | non |
+| 2026-10-05 | Pagination plutôt que cache des cartes du catalogue | Le cache prévu par le lot 5 accélère le rendu mais n'allège pas la page (339 à 410 Ko) | UDR-0013 (amendement) |
+| 2026-10-05 | `CourseCatalogQuery#call` renvoie une page (`Page`, comme `SchoolsQuery`) au lieu de toutes les cartes | Une seule entrée ; le compte coûte une requête de plus (2 au lieu de 1) | non |
+| 2026-10-05 | Frame de la page suivante en bloc **après** la grille, pas dans la grille | Un frame en `display: contents` n'a pas de boîte : l'`IntersectionObserver` de Turbo ne le verrait jamais entrer à l'écran | non |
 | 2026-10-05 | Sprite d'icônes posé **dans** le frame de la liste | La réponse d'un frame seul (recherche, page suivante) doit apporter ses `<symbol>` ; posé hors du frame, une icône absente de la première page serait perdue | non (levier déjà admis, ADR-0067) |
 
 ## Leviers abandonnés, et pourquoi
@@ -157,6 +162,8 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 | Supprimer la redirection de `/` pour une personne connectée | −1 requête à chaque ouverture | Change l'adresse de l'accueil : c'est une `feature` |
 | Logo et bouton « Accueil » des pages publiques et d'erreur vers l'accueil du rôle plutôt que `/` (lot E) | −1 requête, sur des pages peu visitées par une personne connectée | Dans le plafond « ouverture de lnclass.com » (3). Le gain est rare, et ces pages sont partagées par le visiteur et la personne connectée |
 | Une seule requête pour les images d'un article (lot E) | 4 à 5 requêtes de ~0,4 ms, soit ~2 ms dans la même région | Budget de l'ADR-0067 tenu (p95 25 à 37 ms). Il faudrait contourner la résolution des pièces jointes d'Action Text |
+| Cache des cartes du catalogue (`render collection, cached: true`, lot 5 de `cache-ecrans-lourds`) | rendu plus rapide, poids inchangé | Remplacé par la pagination (E4), qui fait les deux |
+| `<dialog>` de confirmation partagée, remplie en JavaScript (E3) | pas d'aller-retour à l'ouverture | Nouveau contrôleur et textes composés côté client ; le modèle « à la demande » existe déjà (UDR-0056) |
 | Sprite sur la page d'une classe (lot E) | ~45 Ko sur 217 | Ne la ramène pas sous 150 Ko : ce sont surtout ses 56 formulaires. À traiter avec la question 6 du memo |
 
 ## Ce qui a dérapé
@@ -203,7 +210,7 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 | Mise en veille de Develop et Staging | Réglage de recette, non mesuré | à voir avec le porteur |
 | Mesure depuis Abidjan | Aucun point de mesure en Côte d'Ivoire depuis le conteneur | question 1 du memo : seule preuve de la cible du lot R |
 | Frame différé de l'activité de la direction (2 requêtes en série) | Décision d'interface du 2026-10-04 (UDR-0074 §3.11), postérieure au plafond | question 5 du memo |
-| Listes au-dessus de 150 Ko de HTML (établissements, catalogue, DRENA, fiche d'établissement, page d'une classe) | Le reste du poids tient à la structure de l'écran (modales par ligne, cartes) | question 6 du memo ; lot 5 de `cache-ecrans-lourds` |
+| Listes encore au-dessus de 150 Ko de HTML : établissements (222 Ko), fiche d'un établissement (269 Ko), page d'une classe (217 Ko) | Ce qui reste est le menu ⋮ de chaque ligne et les formulaires de la page d'une classe | question 6 du memo |
 
 ## Clôture
 

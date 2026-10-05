@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — lot R appliqué le 2026-10-03/04 (production et Staging en Europe ; base de Develop déplacée le 2026-10-05) ; lot E (audit de toutes les pages, 2026-10-05) livré en PR ; lot D et mesure depuis Abidjan attendus du porteur |
+| **Statut** | en cours — lot R appliqué le 2026-10-03/04 (production et Staging en Europe ; base de Develop déplacée le 2026-10-05) ; lot E (audit de toutes les pages, puis E1 à E4, 2026-10-05) livré en PR ; lot D et mesure depuis Abidjan attendus du porteur |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `perf/politique-cache` |
 
@@ -122,6 +122,22 @@ Les temps bougent dans le bruit de la machine. Compressé, le HTML ne baisse que
 
 Les retirer change la structure de l'écran : modale lue à la demande, comme pour « Retirer » de la direction (UDR-0056, amendement du 2026-10-04), ou liste paginée. C'est le lot 5 du chantier `cache-ecrans-lourds`, que le porteur a reporté après les lots UX (question 6). La page d'une classe (enseignant, 216,5 Ko, dont 69 Ko de 56 formulaires) n'est pas touchée : le sprite n'y retirerait qu'environ 45 Ko.
 
+### Lots E3 et E4 — les listes encore lourdes (2026-10-05)
+
+Décision du porteur, 2026-10-05 : « go pour la fenêtre unique des établissements, et la même chose pour les DRENA ; pour le catalogue, pagination avec du loading (Hotwire) ». C'est la reprise du lot 5 de `cache-ecrans-lourds`. Ce lot prévoyait aussi un cache des cartes du catalogue, mais un cache aurait accéléré le rendu sans alléger la page : il est remplacé par la pagination.
+
+| Écran (`measure_screens.rb`, médiane de 3) | HTML avant | **HTML après** | p50 avant → après | p95 avant → après | Budget |
+|---|--:|--:|--:|--:|---|
+| Établissements (E3 : confirmations lues à la demande) | 517,1 Ko | **222,1 Ko** | 101,7 → **47,5 ms** | 139,5 → **90,4 ms** | temps tenu ; HTML encore au-dessus |
+| DRENA (E3), 100 requêtes | 240,4 Ko | **121,2 Ko** | 76,5 → **59,3 ms** | 108,5 → **84,6 ms** | **tenu** |
+| Catalogue, enseignant (E4 : 24 cartes, la suite au défilement), 100 requêtes | 338,8 Ko | **62,8 Ko** | 64,1 → **24,4 ms** | 97,2 → **35,3 ms** | **tenu** |
+| Catalogue, équipe (E4), 100 requêtes | 410,4 Ko | **75,3 Ko** | 82,8 → **30,6 ms** | 170,8 → **55,0 ms** | **tenu** |
+| Catalogue, élève (E4) | 46,9 Ko | 46,9 Ko | 23,4 → 24,7 ms | 31,0 → 32,0 ms | inchangé (moins de 24 cours à son niveau) |
+
+- **E3** : « Désactiver » et « Supprimer » ne sont plus copiés dans chaque ligne. Comme « Retirer » de la direction (UDR-0056, amendement du 2026-10-04), ils chargent leur confirmation dans le frame « modal ». Ouvrir une confirmation coûte un aller-retour, sur un geste rare (UDR-0036 et UDR-0035, amendements du 2026-10-05).
+- **E4** : un frame différé, posé au bas des 24 premières cartes, demande les suivantes quand il entre à l'écran. Il est hors de l'écran à l'arrivée, donc le clic vers le catalogue reste à 1 requête en série (ADR-0076 §4.2). Sans JavaScript, un bouton « Afficher plus de cours » ouvre la page suivante (UDR-0013, amendement du 2026-10-05).
+- **Ce qui reste au-dessus de 150 Ko** : la liste des établissements (222 Ko, dont 2,5 Ko de menu ⋮ par ligne sur 3,5), la fiche d'un établissement (269 Ko) et la page d'une classe (217 Ko). Il n'y a plus de modale par ligne à retirer sur la liste. Il resterait un menu ⋮ partagé par toutes les lignes (JavaScript), ou des classes de composant plus courtes : question 6.
+
 ## Le problème
 
 Le porteur trouve l'application lente : « le chargement des pages dépasse 500 ms ». Il demande une révision en profondeur de la politique de cache pour accélérer toutes les pages.
@@ -227,4 +243,5 @@ Leviers **écartés par la mesure** :
 3. ~~**Nettoyage**~~ : fait le 2026-10-05. `organized-trunk` et les trois services de copie sont supprimés ; il ne reste que les buckets `lnclass-fichiers-eu-<environnement>`.
 4. **Cloudflare** : prévenir quand *Early Hints* et *Tiered Cache* sont actifs, pour la mesure « après » du lot D. Le conteneur passe par un relais qui termine le TLS : il ne voit pas les réponses `103`, et l'activation ne peut pas être vérifiée d'ici.
 5. **Accueil de la direction** (nouveau, lot E) : son « Activité récente » est un frame différé (UDR-0074 §3.11, du 2026-10-04). Cela fait 2 requêtes en série par visite, alors que l'ADR-0076 §4.2 ne l'admet que sur les accueils élève et équipe. Deux réponses possibles : **(a)** l'admettre comme eux, en ajoutant l'accueil de la direction à la ligne « 2 » du plafond ; **(b)** rendre l'activité avec la page, ce qui fait gagner une requête et amende l'UDR-0074.
-6. **Listes encore au-dessus de 150 Ko** (lot E2) : établissements (517 Ko), catalogue de l'équipe (410 Ko) et de l'enseignant (339 Ko), DRENA (240 Ko), fiche d'un établissement (269 Ko), page d'une classe (217 Ko). Il faudrait sortir les modales des lignes (chargées à la demande, une requête au clic) ou paginer le catalogue, ce qui change l'écran. Faut-il ouvrir maintenant le lot 5 de `cache-ecrans-lourds`, que le porteur avait reporté après les lots UX ?
+6. ~~**Listes au-dessus de 150 Ko**~~ : le porteur a répondu le 2026-10-05 (lots E3 et E4). DRENA et catalogue tiennent leur budget ; les établissements tiennent le temps (p95 90 ms) mais pèsent encore 222 Ko. Restent hors budget de poids : la liste des établissements, la fiche d'un établissement (269 Ko) et la page d'une classe (217 Ko). Ouvrir un lot pour elles ?
+7. **Cartes du catalogue** : la liste de leurs éléments et ce qui pourrait s'alléger est posée au porteur. Depuis la pagination, une page de 24 cartes pèse 33 Ko : rien n'oblige à les alléger pour tenir le budget.
