@@ -24,8 +24,11 @@ class AnnouncementThemesTest < ActiveSupport::TestCase
     "indigo" => [ %w[#2e3a8c #ffffff #a5b4fc #e0e7ff], %w[#1e2563 #e0e7ff #6366f1 #c7d2fe] ],
     "nuit" => [ %w[#1f2937 #f9fafb #60a5fa #fbbf24], %w[#0b0f17 #e5e7eb #3b82f6 #fbbf24] ]
   }.freeze
-  # The signature is `text-school/80`: the text at 80 % over the background of the card.
-  SIGNATURE_ALPHA = 0.8
+  # The card itself: its signature and its audio message are `text-school/NN`, the text at NN % over its background.
+  # Read where the card writes them (phase 5), so that this test follows the card instead of a copy of its value.
+  CARD = Rails.root.join("app/views/communication/messages/_card.html.erb").read
+  TRANSLUCENT_TEXTS = CARD.scan(%r{\btext-school/(\d+)\b}).flatten.uniq.to_h { [ "text-school/#{it}", it.to_i / 100.0 ] }
+  SIGNATURE = CARD[%r{<p class="[^"]*\b(text-school/\d+)\b[^"]*">(?:(?!</p>).)*?announcement_signature}m, 1]
 
   def light = @light ||= themes(STYLESHEET, "")
   def dark = @dark ||= themes(block(DARK_MEDIA, CHOSEN_MEDIA), ':root:not\(\[data-theme="light"\]\) ', indent: "  ")
@@ -68,12 +71,16 @@ class AnnouncementThemesTest < ActiveSupport::TestCase
     assert_operator first_light, :<, STYLESHEET.index(DARK_MEDIA)
   end
 
-  test "AV-07, AV-08 — text, signature at 80 % and badge or drawing keep their contrast on each theme, in light and in dark" do
+  test "the signature of the card is a translucent text of the card, read from the card itself" do
+    assert_includes TRANSLUCENT_TEXTS.keys, SIGNATURE
+  end
+
+  test "AV-07, AV-08 — text, signature and audio message at the card's opacity, badge or drawing keep their contrast in each theme" do
     failures = { "clair" => light, "sombre" => dark }.flat_map do |mode, palette|
       palette.flat_map do |theme, tokens|
         background, text, _illustration, strong = tokens.values
-        { "texte" => [ contrast(text, background), 4.5 ],
-          "signature à 80 %" => [ contrast(blend(text, background, SIGNATURE_ALPHA), background), 4.5 ],
+        translucent = TRANSLUCENT_TEXTS.to_h { |name, alpha| [ name, [ contrast(blend(text, background, alpha), background), 4.5 ] ] }
+        { "texte" => [ contrast(text, background), 4.5 ], **translucent,
           "badge (forte)" => [ contrast(strong, background), 3.0 ] }.filter_map do |pair, (ratio, minimum)|
           "#{mode} : #{theme}, #{pair} = #{ratio.round(2)} (< #{minimum})" if ratio < minimum
         end
@@ -86,7 +93,7 @@ class AnnouncementThemesTest < ActiveSupport::TestCase
   test "the contrast helpers follow WCAG 2.x and alpha compositing" do
     assert_in_delta 21.0, contrast("#000000", "#ffffff"), 0.01
     assert_in_delta 1.0, contrast("#0070b3", "#0070b3"), 0.001
-    assert_equal "#cccccc", blend("#ffffff", "#000000", SIGNATURE_ALPHA)
+    assert_equal "#cccccc", blend("#ffffff", "#000000", 0.8)
     assert_equal "#1b365d", blend("#1b365d", "#e5f5ff", 1.0)
   end
 

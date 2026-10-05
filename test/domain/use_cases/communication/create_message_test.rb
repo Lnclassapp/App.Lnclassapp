@@ -57,9 +57,10 @@ module UseCases
         def watched(call) = yield.tap { @calls << [ call, @transaction.open == true ] }
       end
 
-      def use_case(messages: Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new)
+      def use_case(messages: Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new,
+                   attachments: Repositories::Communication::AttachmentStore.new)
         CreateMessage.new(
-          messages:, attachments: Repositories::Communication::AttachmentStore.new,
+          messages:, attachments:,
           schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new,
           teachings: Repositories::Classroom::TeachingRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
           illustrations: Repositories::Communication::IllustrationRepository.new, transaction:,
@@ -68,10 +69,17 @@ module UseCases
       end
 
       def create(user, messages: Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new,
-                 **attributes)
+                 attachments: Repositories::Communication::AttachmentStore.new, **attributes)
         dto = Dtos::Communication::MessageInput.new(title: "Rentrée numérique", body: "Tout le monde en ligne lundi.",
                                                     illustration: "info", commit: "publish", **attributes)
-        use_case(messages:, transaction:).call(actor: user && actor(user), dto:)
+        use_case(messages:, transaction:, attachments:).call(actor: user && actor(user), dto:)
+      end
+
+      # A storage that fails on each file it receives, after the cap has archived (test analysis of phase 5, 2.1).
+      class FailingAttachments < Repositories::Communication::AttachmentStore
+        Down = Class.new(StandardError)
+
+        def attach(**) = raise(Down, "le stockage ne répond pas")
       end
 
       # Three live announcements of the direction, published on September 25th, 27th and 29th (the oldest first).
@@ -233,6 +241,18 @@ module UseCases
         assert_equal 3, Orm::Message.where(author: @kamate, status: "published").count
         assert_equal %w[published published published], statuses(others), "un collègue, un enseignant ou l'équipe : intouchés"
         assert_equal [ [ @kamate.id, result.value.message.id ] ], published_events.pluck(:actor_id, :subject_id), "l'archivage n'est pas journalisé"
+      end
+
+      # Phase 5 (test analysis 2.1), on the real base: the archiving by the cap, the announcement and its journal are
+      # written in one transaction, which the failure of its file undoes entirely.
+      test "AV-03 — a publication whose file cannot be stored writes nothing: the oldest live one stays live" do
+        live = three_live
+
+        assert_raises(FailingAttachments::Down) do
+          create(@kamate, audience: "students", audio: StringIO.new(MP3), attachments: FailingAttachments.new)
+        end
+        assert_equal %w[published published published], statuses(live)
+        assert_equal [ 3, 0, 0 ], [ Orm::Message.where(author: @kamate).count, published_events.count, ActiveStorage::Blob.count ]
       end
 
       test "AV-04 — 2 live, 1 scheduled, 1 draft, 1 archived, 1 withdrawn and 1 ended: publishing archives nothing" do

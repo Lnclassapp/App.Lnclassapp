@@ -106,6 +106,24 @@ module Dtos
         end
       end
 
+      def recording(name) = file_fixture("audio/#{name}").binread
+
+      # Phase 5 (test analysis 2.2), ADR-0081 §4.4: real recordings of test/fixtures/files/audio (README.txt). The frame
+      # of remplissage.mp3 comes after 512 null bytes: a header read cut at 64 bytes would refuse it.
+      test "AV-12 — real recordings: an MP3 whose frame follows 512 null bytes and a 3GP M4A are accepted, an AMR refused" do
+        assert_operator recording("remplissage.mp3").index(/[^\x00]/n), :>=, 512
+        { "remplissage.mp3" => [ "audio/mpeg", "audio.mp3" ], "marque-3gp4.m4a" => [ "audio/mp4", "audio.m4a" ] }
+          .each do |name, (type, filename)|
+          dto = checked(audio: StringIO.new(recording(name)))
+
+          assert_empty dto.errors.to_hash, name
+          upload = dto.upload(:audio)
+          assert_equal [ type, filename, recording(name) ], [ upload.content_type, upload.filename, upload.io.read.b ], name
+        end
+        assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] },
+                     errors(audio: StringIO.new(recording("enregistrement.amr"))))
+      end
+
       test "AN-18 — a PDF renamed « affiche.png » and a WAV are refused: the error names the refused file" do
         assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: photo("document.pdf")))
         assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] }, errors(audio: StringIO.new(WAV)))

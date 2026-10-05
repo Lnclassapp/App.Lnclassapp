@@ -60,6 +60,22 @@ module Communication
       end
     end
 
+    # Phase 5 (test analysis 2.5), UDR-0075 §3.1 and §3.2: the card a moderator sees is the card of its readers.
+    test "AV-07, AV-08 — the moderated card takes the theme of its announcement and its drawing of the team, rebuilt" do
+      bus = create_illustration(name: "Bus scolaire", created_by: @fatou)
+      fiche = fiches(theme: "mangue", illustration: bus)
+      sign_in_as @kamate
+
+      get moderated_announcements_path
+
+      assert_select "#moderated_announcement_#{fiche.public_id} > article#announcement_#{fiche.public_id}[data-announcement-theme=mangue]" do
+        # Its only shape, rebuilt from the stored one, in a single colour: no shape of a base illustration.
+        assert_select "article > div.w-24 svg", 1
+        assert_select "article > div.w-24 > svg.size-16.fill-brand-strong[viewBox='0 0 64 64'][aria-hidden=true] > *", 1
+        assert_select "article > div.w-24 > svg > rect[x='8'][y='8'][width='48'][height='48'][rx='6']:not([class])", 1
+      end
+    end
+
     test "AN-16, AN-17 — each line has « Retirer », confirmed in a dialog that posts the withdrawal in Turbo Stream" do
       fiche = fiches
       sign_in_as @kamate
