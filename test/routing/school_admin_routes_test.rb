@@ -58,6 +58,14 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # Lot 3 of ecrans-direction-lents (UDR-0056, amendment of 2026-10-04): the confirmation « Retirer » is read on demand.
+  test "the confirmation of a teacher's withdrawal is a page of its own, GET only" do
+    assert_equal "/school-admin/teachers/abcdefghijkmno/removal", helpers.school_admin_teacher_removal_path("abcdefghijkmno")
+    assert_equal({ controller: "school_admin/teachers", action: "removal", public_id: "abcdefghijkmno" },
+                 first_match("/school-admin/teachers/abcdefghijkmno/removal"))
+    %w[POST PATCH PUT DELETE].each { assert_nil first_match("/school-admin/teachers/abcdefghijkmno/removal", method: it), it }
+  end
+
   test "the team invites the direction from the page of a school" do
     assert_equal "/teams/schools/abcdefghijkmno/staff-invitations/new", helpers.new_school_staff_invitation_path("abcdefghijkmno")
     assert_equal "/teams/schools/abcdefghijkmno/staff-invitations", helpers.school_staff_invitations_path("abcdefghijkmno")

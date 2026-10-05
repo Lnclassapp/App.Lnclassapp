@@ -11,6 +11,8 @@ scope "school-admin", module: "school_admin", as: "school_admin" do
   # Avant `resources :teachers` : « departed » n'est pas un public_id.
   get "teachers/departed", to: "departed_teachers#index", as: :departed_teachers
   resources :teachers, only: %i[index destroy], param: :public_id
+  # La confirmation « Retirer », lue à la demande dans le frame « modal », page complète sans JavaScript (UDR-0056, 2026-10-04).
+  get "teachers/:public_id/removal", to: "teachers#removal", as: :teacher_removal
   post "teachers/:public_id/reinstatement", to: "teacher_reinstatements#create", as: :teacher_reinstatement
   resource :school, only: :show
   # PATCH seul : `resource :link` ajouterait un PUT que l'UDR-0056 §3.0 ne dessine pas.

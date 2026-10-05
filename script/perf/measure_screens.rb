@@ -79,6 +79,8 @@ module PerfScreens
     course = Orm::Course.find(assigned_course || Orm::Course.where(status: "published").order(:id).pick(:id))
     essential = course.essentials.order(:position).first
     exercise = essential.exercises.order(:position).first
+    # La confirmation « Retirer », lue à la demande (UDR-0056, amendement du 2026-10-04) : dans le frame, puis sans JavaScript.
+    removable = Orm::TeacherSchool.joins(:teacher).where(school_id: admin_school, users: { anonymized_at: nil }).order(:id).pick("users.public_id")
     done = "(SELECT COUNT(*) FROM exercise_sessions s WHERE s.classroom_assignment_id = classroom_assignments.id AND s.status = 'completed')"
     follow_up = Orm::ClassroomAssignment.where(classroom: teacher_classroom, status: "active")
                                         .order(Arel.sql("#{done} DESC"), :id).pick(:public_id)
@@ -116,6 +118,8 @@ module PerfScreens
       [ "admin_classrooms", :admin, "/school-admin/classrooms" ],
       [ "admin_classroom", :admin, "/school-admin/classrooms/#{student_classroom.public_id}" ],
       [ "admin_teachers", :admin, "/school-admin/teachers" ],
+      [ "admin_teacher_removal", :admin, "/school-admin/teachers/#{removable}/removal", { "Turbo-Frame" => "modal" } ],
+      [ "admin_teacher_removal_page", :admin, "/school-admin/teachers/#{removable}/removal" ],
       [ "admin_departed_students", :admin, "/school-admin/students/departed" ],
       [ "blog", :visitor, "/blog", PHONE ],
       [ "blog_page_2", :visitor, "/blog?page=2", PHONE ],

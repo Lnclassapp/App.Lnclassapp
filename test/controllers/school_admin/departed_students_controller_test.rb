@@ -63,6 +63,24 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
     assert_select "turbo-frame#departed_students_list", text: /Aucun ancien élève/
   end
 
+  # Characterization (chantier ecrans-direction-lents): the page keeps its rows, their order, its count and its « — ».
+  test "the most recent departures first, then by name; the count; a student without results reads « — »" do
+    older = create_classroom(school: @school, name: "4ème 1", level: create_level(name: "4ème"), status: "archived", school_year: "2024-2025")
+    create_student(classroom: older, first_name: "Aya", last_name: "Bamba")
+    create_student(classroom: @last_year, first_name: "Zoé", last_name: "Yao")
+    sign_in_as @admin
+
+    get school_admin_departed_students_path
+
+    assert_select "#departed_students p[aria-live=polite]", "3 anciens élèves"
+    assert_equal [ "Awa Koné", "Zoé Yao", "Aya Bamba" ], css_select("#departed_students tbody th[scope=row]").map(&:text)
+    assert_select "tr#departed_student_2" do
+      assert_select "td span", "4ème · 2024-2025"
+      assert_select "td", "0"
+      assert_select "td span[aria-hidden=true]", "—"
+    end
+  end
+
   test "a teacher, a student and the team are refused" do
     [ create_teacher(school: @school), @awa, create_team_member ].each do |user|
       sign_in_as user
