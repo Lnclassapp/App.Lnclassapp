@@ -658,7 +658,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_staff + #school_archived_staff" do
       assert_select "h2", text: I18n.t("teams.schools.archived_staff.title")
       assert_select "li#school_archived_staff_#{aya.public_id}", text: /Aya Koné/ do
-        assert_select "p", text: /Retiré le 1er septembre 2026 par Awa Bamba\s+· Supprimé le 1er octobre 2026/
+        assert_select "p", text: /Retirée le 1er septembre 2026 par Awa Bamba\s+· Supprimée le 1er octobre 2026/
         assert_select "form[action='#{school_staff_member_restoration_path(school.public_id, aya.public_id)}'] button",
                       text: I18n.t("teams.schools.archived_staff.restore")
       end

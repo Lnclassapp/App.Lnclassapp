@@ -6,7 +6,7 @@ require "test_helper"
 class Teams::SchoolStaffMembersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school(name: "Lycée Moderne de Bouaké")
-    @kofi = create_school_admin(school: @school, first_name: "Kofi", last_name: "Yao", joined_via: "code", joined_at: 2.days.ago)
+    @kofi = create_school_admin(school: @school, first_name: "Kofi", last_name: "Yao", gender: "male", joined_via: "code", joined_at: 2.days.ago)
     @aya = create_school_admin(school: @school, first_name: "Aya", last_name: "Koné", joined_via: "invitation", joined_at: 20.days.ago)
     @field = create_team_member(team_role: "field", first_name: "Awa", last_name: "Bamba")
   end
@@ -28,7 +28,7 @@ class Teams::SchoolStaffMembersControllerTest < ActionDispatch::IntegrationTest
       remove @kofi, as: :turbo_stream
 
       assert_response :success
-      assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(ts('done', name: 'Kofi Yao'))}/
+      assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(ts('done.male', name: 'Kofi Yao'))}/
       assert_select "turbo-stream[action=remove][target=school_staff_#{@kofi.public_id}]"
       assert_select "turbo-stream[action=replace][target=school_staff_places] template p#school_staff_places",
                     text: ts("subtitle", used: 0, cap: 3)
@@ -60,7 +60,7 @@ class Teams::SchoolStaffMembersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to school_path(@school.public_id)
     assert_equal 303, response.status
-    assert_equal ts("done", name: "Aya Koné"), flash[:notice]
+    assert_equal ts("done.female", name: "Aya Koné"), flash[:notice]
   end
 
   test "un membre content reçoit 403, toast, rien n'est écrit" do
@@ -135,5 +135,18 @@ class Teams::SchoolStaffMembersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_not_nil staff_of(@aya).archived_at
+  end
+
+  # suites-inscription-direction (1) : le retrait d'une femme se dit au féminin, celui d'un homme au masculin.
+  test "the removal is said in the gender of the person removed" do
+    sign_in_as @field
+
+    remove @aya, as: :turbo_stream
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Aya Koné a été retirée de la direction\./
+    assert_select "li#school_archived_staff_#{@aya.public_id}", text: /Retirée le .+ · Supprimée le /
+
+    remove @kofi, as: :turbo_stream
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Kofi Yao a été retiré de la direction\./
+    assert_select "li#school_archived_staff_#{@kofi.public_id}", text: /Retiré le .+ · Supprimé le /
   end
 end

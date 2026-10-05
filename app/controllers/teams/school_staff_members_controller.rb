@@ -12,7 +12,7 @@ module Teams
       return refuse(result.code) if result.failure?
 
       @archived = result.value
-      @notice = t("shared.school_staff.done", name: @archived.user.display_name)
+      @notice = t("shared.school_staff.done.#{@archived.user.gender}", name: @archived.user.display_name)
       respond_to do |format|
         format.turbo_stream { load_school_staff(@school) }
         format.html { redirect_to school_path(@school.public_id), notice: @notice, status: :see_other }

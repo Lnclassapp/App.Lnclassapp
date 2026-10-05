@@ -8,7 +8,7 @@ module SchoolAdmin
       return refuse(result.code) if result.failure?
 
       @archived = result.value
-      @notice = t("shared.school_staff.done", name: @archived.user.display_name)
+      @notice = t("shared.school_staff.done.#{@archived.user.gender}", name: @archived.user.display_name)
       respond_to do |format|
         format.turbo_stream { @by_code_count = Queries::School::SchoolStaffQuery.new.by_code_count(school_id: current_actor.school_id) }
         format.html { redirect_to school_admin_school_path, notice: @notice, status: :see_other }
