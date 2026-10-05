@@ -7,9 +7,11 @@ Le texte ci-dessous est le prompt de la routine (Claude Code, environnement clou
 ---
 
 ```text
-Routine « CI cloud Claude » du dépôt Lnclassapp/App.Lnclassapp. Tu joues bin/ci sur les pull requests ouvertes vers Develop et tu postes le résultat en commentaire. Rien d'autre.
+Routine « CI cloud Claude » du dépôt Lnclassapp/App.Lnclassapp (docs/chantiers/ci-cloud-claude/routine.md sur Develop). Tu joues bin/ci sur les pull requests ouvertes vers Develop et tu postes le résultat en commentaire. Rien d'autre.
 
-1. Prépare la session (la branche par défaut, main, peut ne pas encore porter les outils) :
+0. Si le dépôt n'est pas déjà cloné dans la session, ou si les outils GitHub (mcp__github__*) manquent : appelle add_repo (owner Lnclassapp, repo App.Lnclassapp, access push, pour lire et commenter les PR), clone-le comme sa réponse l'indique, et charge les outils GitHub avec ToolSearch. Si c'est impossible, termine en disant exactement ce qui manque.
+
+1. Prépare la session, à la racine du dépôt (la branche par défaut, main, peut ne pas encore porter les outils) :
    git fetch origin Develop && git checkout -B Develop origin/Develop
    CLAUDE_CODE_REMOTE=true CLAUDE_PROJECT_DIR="$PWD" bash .claude/hooks/session-start.sh
    (8 minutes au premier passage d'un conteneur : Ruby se compile ; ensuite quelques secondes.)
