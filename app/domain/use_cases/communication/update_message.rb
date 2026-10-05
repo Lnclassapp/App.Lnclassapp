@@ -36,8 +36,7 @@ module UseCases
 
         now = @clock.now
         live = message if message.status == "published"
-        @carried_id = message.illustration_id
-        errors, illustration_id = form_errors(dto, allowed, now:, live:)
+        errors, illustration_id = form_errors(dto, allowed, now:, live:, carried_id: message.illustration_id)
         return Shared::Result.failure(:invalid, errors:) unless errors.empty?
 
         @transaction.call do
@@ -48,15 +47,6 @@ module UseCases
       end
 
       private
-
-      # Décision du chantier annonces-v2 (Lot E) : le dessin de l'équipe qu'une annonce porte reste servi jusqu'à sa fin
-      # (AV-10) ; la modification le garde donc, même retiré depuis. Seul le nouveau choix d'un dessin retiré est refusé.
-      # @carried_id : le dessin que porte l'annonce lue par cet appel, ou nil. → son id | celui de Writing
-      def library_illustration_id(dto)
-        return super unless @carried_id && dto.library_illustration?
-
-        @illustrations.find_by_public_id(public_id: dto.illustration)&.id == @carried_id ? @carried_id : super
-      end
 
       # Brouillon ou programmée à la lecture : relue sous le verrou de l'auteur. Parue entre-temps (« Publier » envoyé
       # deux fois, ou le passage du job), la saisie s'applique comme la modification de l'annonce en ligne : rien n'est

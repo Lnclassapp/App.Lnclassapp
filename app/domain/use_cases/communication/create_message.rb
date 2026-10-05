@@ -68,22 +68,24 @@ module UseCases
         end
 
         # Les erreurs de la saisie, du dessin de l'équipe choisi et de la policy (aucune classe cochée), ensemble sous
-        # leurs champs. live : l'annonce déjà publiée qu'une modification garde en ligne, ou nil.
-        # → [erreurs, id du dessin de l'équipe | nil]
-        def form_errors(dto, allowed, now:, live: nil)
+        # leurs champs. live : l'annonce déjà publiée qu'une modification garde en ligne, ou nil ; carried_id : le dessin
+        # de l'équipe que porte l'annonce modifiée, ou nil (création). → [erreurs, id du dessin de l'équipe | nil]
+        def form_errors(dto, allowed, now:, live: nil, carried_id: nil)
           dto.valid_at?(now:, live_since: live&.published_at, live_until: live&.ends_at)
-          illustration_id = library_illustration_id(dto)
+          illustration_id = library_illustration_id(dto, carried_id:)
           allowed.errors.each { |attribute, codes| codes.each { dto.errors.add(attribute, it) } }
           [ dto.errors.to_hash, illustration_id ]
         end
 
         # ADR-0081 §4.3 : un dessin de l'équipe est choisi par son public_id ; inconnu ou retiré, il n'est pas dans la
-        # bibliothèque et l'erreur va sous « Illustration » (AV-10). → son id | nil (clé de base, ou refusé)
-        def library_illustration_id(dto)
+        # bibliothèque et l'erreur va sous « Illustration » (AV-10). Décision du chantier (Lot E) : le dessin que porte
+        # l'annonce modifiée (carried_id) reste servi jusqu'à sa fin, la modification le garde donc, même retiré depuis ;
+        # seul le nouveau choix d'un dessin retiré est refusé. → son id | nil (clé de base, ou refusé)
+        def library_illustration_id(dto, carried_id:)
           return unless dto.library_illustration?
 
           illustration = @illustrations.find_by_public_id(public_id: dto.illustration)
-          return illustration.id if illustration && !illustration.retired?
+          return illustration.id if illustration && (!illustration.retired? || illustration.id == carried_id)
 
           dto.errors.add(:illustration, :inclusion)
           nil

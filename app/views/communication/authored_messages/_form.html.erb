@@ -69,14 +69,9 @@
     <% end %>
   <% end %>
 
-  <%# Les 8 de base, puis les dessins de l'équipe non retirés, par date d'ajout ; la valeur d'un dessin est son public_id. %>
-  <%# Décision du chantier annonces-v2 (Lot E) : une annonce garde son dessin de l'équipe jusqu'à sa fin, même retiré depuis ; %>
-  <%# son formulaire le propose encore, en dernier (UpdateMessage l'accepte, une nouvelle annonce ne le voit pas). %>
-  <% drawings = library_illustrations %>
-  <% carried = message&.illustration_id %>
-  <% if carried && drawings.none? { it.id == carried } %>
-    <% drawings += Repositories::Communication::IllustrationRepository.new.find_all_by_ids(ids: [ carried ]).values %>
-  <% end %>
+  <%# Les 8 de base, puis les dessins de l'équipe non retirés, par date d'ajout, et celui que porte l'annonce, même retiré ; %>
+  <%# la valeur d'un dessin est son public_id. %>
+  <% drawings = library_illustrations(message) %>
   <fieldset id="announcement-illustrations">
     <legend class="mb-1.5 block text-sm font-medium text-ink"><%= Dtos::Communication::MessageInput.human_attribute_name(:illustration) %></legend>
     <div class="grid grid-cols-4 gap-2">
