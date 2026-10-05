@@ -13,8 +13,8 @@ class Identity::EraseAuditIpsJobTest < ActiveJob::TestCase
     assert_nil old.reload.ip_address
     assert_equal [ "login.locked", "User", 5, { "failures" => 5 } ], [ old.action, old.subject_type, old.subject_id, old.metadata ]
     assert_equal "41.202.1.2", recent.reload.ip_address
-    assert_includes logs, "[Identity::EraseAuditIpsJob] 1 audit event IP(s) erased"
-    assert_includes capture_log { Identity::EraseAuditIpsJob.perform_now }, "[Identity::EraseAuditIpsJob] 0 audit event IP(s) erased"
+    assert_includes logs, "1 audit event IP(s) erased"
+    assert_includes capture_log { Identity::EraseAuditIpsJob.perform_now }, "0 audit event IP(s) erased"
   end
 
   private

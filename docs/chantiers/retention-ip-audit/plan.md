@@ -31,16 +31,16 @@ Un seul lot : pas de collision possible.
 
 ## Portes de sortie
 
-- [ ] `memo.md` complet, section `Hors périmètre` non vide
-- [ ] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
-- [ ] `prd.md` : critères d'acceptation en Gherkin, tous testables
-- [ ] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
-- [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
-- [ ] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `memo.md` complet, section `Hors périmètre` non vide
+- [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
+- [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
+- [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
+- [x] UDR écrite pour **chaque** vue créée ou modifiée : aucune vue ne change, donc pas d'UDR
+- [x] `plan.md` : 4 champs par lot, tableau de collision rempli
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

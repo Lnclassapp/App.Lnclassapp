@@ -7,7 +7,7 @@ module Identity
     def perform
       at = Time.current - Entities::Identity::AuditRetention::IP_MONTHS.months
       erased = use_case.call(at:).value
-      Rails.logger.info("[#{self.class.name}] #{erased} audit event IP(s) erased")
+      Rails.logger.info("#{erased} audit event IP(s) erased")
       erased
     end
 

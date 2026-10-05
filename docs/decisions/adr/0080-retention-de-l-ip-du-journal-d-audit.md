@@ -48,6 +48,7 @@
 ### 🔴 Coûts consentis
 
 - Au-delà de 12 mois, on ne sait plus d'où venait un geste : seuls l'auteur et la date restent.
+- **Seule écriture après coup sur un journal en ajout seul (ADR-0050).** `update_all` contourne le `readonly?` du modèle `Orm::AuditEvent`. C'est voulu : cette exception ne touche que `ip_address`, et seulement par `AuditLogRepository#erase_ips_before`.
 - Un index de plus sur `audit_events`, et une écriture par ligne échue à la première exécution, en lots.
 - Les IP des sessions et des tentatives de connexion n'entrent pas dans cette règle. Elles relèvent d'autres tables, déjà effacées avec le compte supprimé (ADR-0036 §4, ADR-0077 §4.3).
 

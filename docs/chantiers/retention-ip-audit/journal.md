@@ -7,6 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-05 | Le porteur avait répondu à la question du grill dans le chantier `suites-inscription-direction` (« Gardée 12 mois puis effacée ») ; le cadrage reprend cette réponse sans nouvelle session de questions | La seule décision du chantier était déjà prise | Oui, ADR-0080 |
+| 2026-10-05 | Challenger : les 5 points sont OK. 2 501 IP effacées en 63 ms (3 lots, 7 requêtes), seconde exécution à 0, refus `:forbidden` pour l'équipe ; l'index partiel est utilisé quand les statistiques le justifient. Suites : le nom de classe n'est plus répété dans le log (ActiveJob le met déjà en tag) ; l'écriture qui contourne `readonly?` est documentée dans l'ADR-0080 et dans le repository | Rapport du challenger | ADR-0080 §5 complété |
 | 2026-10-05 | Tâche à 4 h 30, après la purge des directions (4 h) | Les tâches planifiées ne se chevauchent pas | Non |
 
 ## Ce qui a dérapé
@@ -34,7 +35,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-05 |
+| **PR** | [#176](https://github.com/Lnclassapp/App.Lnclassapp/pull/176) vers `Develop` |
+| **ADR produits** | ADR-0080 |
+| **UDR produits** | — (aucune vue) |

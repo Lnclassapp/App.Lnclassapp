@@ -14,7 +14,8 @@ module Repositories
         true
       end
 
-      # Un lot par requête : aucun verrou long, même au premier passage sur tout le journal.
+      # Un lot par requête : aucun verrou long, même au premier passage sur tout le journal. Seule écriture après coup sur le
+      # journal en ajout seul (ADR-0050) : update_all passe outre readonly?, et ne vide que ip_address (ADR-0080).
       def erase_ips_before(at:, batch_size:)
         erased = 0
         loop do
