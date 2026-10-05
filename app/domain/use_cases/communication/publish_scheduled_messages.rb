@@ -22,15 +22,16 @@ module UseCases
 
       private
 
-      # Relue dans sa transaction : une annonce archivée, modifiée ou reprogrammée depuis la lecture de la liste n'est
-      # pas réécrite. Sa parution archive d'abord les plus anciennes en ligne de son auteur, sous son verrou (ADR-0081
-      # §4.1). → true si elle est publiée
+      # Le verrou de l'auteur d'abord, puis l'annonce relue (phase 5, F1) : archivée, reprogrammée ou déjà publiée par
+      # son auteur depuis la lecture de la liste, elle n'est pas réécrite. Sa parution archive d'abord les plus anciennes
+      # en ligne de son auteur (ADR-0081 §4.1). → true si elle est publiée
       def publish(due, now)
         @transaction.call do
+          live = lock_author(due.author_id, now)
           message = @messages.find_by_public_id(public_id: due.public_id)
           next false unless message.status == "scheduled" && message.published_at <= now
 
-          make_room(message.author_id, now)
+          make_room(live)
           # Archivée ou retirée entre cette lecture et l'écriture : rien n'est écrit, ni archivé, ni journalisé.
           raise Frozen unless @messages.update(message: message.with(status: "published"))
 

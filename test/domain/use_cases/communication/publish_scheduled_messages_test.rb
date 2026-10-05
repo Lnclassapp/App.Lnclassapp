@@ -16,7 +16,7 @@ module UseCases
         def due_for_publication(now:) = @stale
       end
 
-      # Records, at each call of live_of, whether a transaction of the use case is open (AV-05).
+      # Says whether the transaction of the use case is open (AV-05).
       class SpyTransaction < Repositories::Shared::Transaction
         attr_reader :open
 
@@ -28,11 +28,24 @@ module UseCases
         end
       end
 
+      # Records each call to the repository, and whether the transaction is open: the order of the calls is all a spy
+      # proves. The lock itself is proven on two connections (message_publication_concurrency_test.rb).
       class WatchedMessages < SimpleDelegator
-        attr_reader :live_of_calls
+        attr_reader :calls
 
-        def initialize(repository, transaction) = super(repository).tap { @transaction = transaction }
-        def live_of(**) = __getobj__.live_of(**).tap { (@live_of_calls ||= []) << @transaction.open }
+        def initialize(repository, transaction)
+          super(repository)
+          @transaction = transaction
+          @calls = []
+        end
+
+        def live_of(**) = watched(:lock) { __getobj__.live_of(**) }
+        def find_by_public_id(public_id:) = watched(:read) { __getobj__.find_by_public_id(public_id:) }
+        def update(message:) = watched(message.status) { __getobj__.update(message:) }
+
+        private
+
+        def watched(call) = yield.tap { @calls << [ call, @transaction.open == true ] }
       end
 
       setup do
@@ -80,6 +93,19 @@ module UseCases
         assert_not Orm::AuditEvent.exists?(action: "message.published")
       end
 
+      # Phase 5 (F1): read again under the lock of its author, after his own « Publier » has ended.
+      test "AV-03 — published by its author since the list was read: the job leaves it, archives nothing, journals nothing" do
+        live = [ 25, 27 ].map { create_message(author: @kamate, published_at: Time.zone.local(2026, 9, it, 8)) }
+        repository = Repositories::Communication::MessageRepository.new
+        stale = repository.due_for_publication(now: NOW)
+        @morning.update!(status: "published", published_at: NOW - 1.minute, edited_at: nil)
+
+        assert_equal 0, publish(StaleMessages.new(repository, stale)).value
+        assert_equal [ "published", NOW - 1.minute ], @morning.reload.values_at(:status, :published_at)
+        assert_equal %w[published published], statuses(live)
+        assert_not Orm::AuditEvent.exists?(action: "message.published")
+      end
+
       test "AV-04 — at its publication by the job, a scheduled announcement archives the oldest live one of its author" do
         live = three_live
         colleague = three_live(create_school_admin)
@@ -108,14 +134,15 @@ module UseCases
         assert_equal %w[published published], statuses(live)
       end
 
-      test "AV-05 — the live announcements of the author are read inside the transaction of each publication" do
+      # Phase 5 (F1): the announcement is read again after the lock, when a publication of it by its author has ended.
+      test "AV-05 — in the transaction of each publication: the author locked, the announcement read again, the oldest archived, then it" do
         three_live
         transaction = SpyTransaction.new
         messages = WatchedMessages.new(Repositories::Communication::MessageRepository.new, transaction)
 
         publish(messages, transaction:)
 
-        assert_equal [ true ], messages.live_of_calls
+        assert_equal [ [ :lock, true ], [ :read, true ], [ "archived", true ], [ "published", true ] ], messages.calls
       end
     end
 

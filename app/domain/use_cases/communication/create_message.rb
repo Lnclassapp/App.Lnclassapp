@@ -13,11 +13,16 @@ module UseCases
 
         private
 
-        # À appeler dans la transaction de la parution, avant d'écrire l'annonce qui paraît : live_of verrouille le compte
-        # auteur, puis ses plus anciennes en ligne sont archivées jusqu'à ce qu'il lui en reste LIVE_CAP - 1. Une
-        # annonce figée entre-temps n'est pas réécrite (update rend nil). → [Message archivées], la plus ancienne d'abord
-        def make_room(author_id, now)
-          live = @messages.live_of(author_id:, now:)
+        # En tête de la transaction de la parution : live_of verrouille le compte auteur jusqu'à sa fin, et rend ses
+        # annonces en ligne. Deux parutions du même auteur se suivent : une annonce existante qui paraît se relit APRÈS
+        # ce verrou, quand une parution concurrente de la même annonce est finie et se voit (phase 5, F1).
+        # → [Message en ligne], la plus ancienne d'abord
+        def lock_author(author_id, now) = @messages.live_of(author_id:, now:)
+
+        # Les plus anciennes de live sont archivées jusqu'à ce qu'il en reste LIVE_CAP - 1. L'annonce qui paraît n'est
+        # pas comptée : relue sous le verrou, elle n'est pas encore en ligne. Une annonce figée entre-temps n'est pas
+        # réécrite (update rend nil). → [Message archivées], la plus ancienne d'abord
+        def make_room(live)
           excess = [ live.size - (Entities::Communication::Message::LIVE_CAP - 1), 0 ].max
           live.first(excess).filter_map { @messages.update(message: it.with(status: "archived")) }
         end
@@ -144,7 +149,7 @@ module UseCases
 
       # Publiée tout de suite : une parution, sous le plafond (ADR-0081 §4.1) ; brouillon et programmée n'archivent rien.
       def create(actor, dto, targets, now, illustration_id)
-        archived = dto.status == "published" ? make_room(actor.user_id, now) : []
+        archived = dto.status == "published" ? make_room(lock_author(actor.user_id, now)) : []
         message = @messages.create(message: Entities::Communication::Message.new(
           author_id: actor.user_id, **written(dto, targets, illustration_id)
         ))
