@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Proposé · §2.2 et §2.3 confirmés par le porteur le 2026-10-05 |
 | **Date** | 2026-10-05 |
 | **Chantier** | [`docs/chantiers/interface-eleve-organisation`](../../chantiers/interface-eleve-organisation/memo.md) |
 | **ADR lié** | [ADR-0076](../adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md) (allers-retours, aucun HTML en cache) · [ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md) (nombre fixe de requêtes) · [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (aucune proposition correcte montrée) |

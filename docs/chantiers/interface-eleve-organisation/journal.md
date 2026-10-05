@@ -6,8 +6,8 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-10-05 | Les « cours assignés » sont les cours qui contiennent un exercice assigné à la classe | Un cours ne s'assigne plus (ADR-0072) ; c'est la seule lecture qui ne soit pas toujours vide | Non : UDR-0076 §2.2, à confirmer par le porteur |
-| 2026-10-05 | « Exercices assignés » ne garde que les exercices pas encore faits | Sinon un exercice fait serait dit deux fois sur la page (UDR-0057 R6) | Non : UDR-0076 §2.3, à confirmer par le porteur |
+| 2026-10-05 | Les « cours assignés » sont les cours qui contiennent un exercice assigné à la classe | Un cours ne s'assigne plus (ADR-0072) ; c'est la seule lecture qui ne soit pas toujours vide | Non : UDR-0076 §2.2, confirmé par le porteur le 2026-10-05 |
+| 2026-10-05 | « Exercices assignés » ne garde que les exercices pas encore faits | Sinon un exercice fait serait dit deux fois sur la page (UDR-0057 R6) | Non : UDR-0076 §2.3, confirmé par le porteur le 2026-10-05 |
 | 2026-10-05 | « Mes matières » sans case « Inviter » ni « Paiement » | Le code est déjà dans la carte « Ma classe », juste au-dessus ; le paiement n'existe pas | Non : memo, hors périmètre |
 | 2026-10-05 | Session : aucun cache, la question suivante voyage avec le verdict | ADR-0076 : le coût est l'aller-retour, pas le calcul (2 à 9 ms) ; un 304 paie le même trajet ; ADR-0054 interdit tout fragment qui contiendrait une correction | Non : application de l'ADR-0076, UDR-0076 §3.3 |
 | 2026-10-05 | « Question suivante » porte `data-turbo-prefetch="false"` | La question est déjà dans la page : le préchargement au survol de Turbo 8 coûterait une requête et 18 Ko pour rien | Non |

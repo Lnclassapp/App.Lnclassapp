@@ -46,8 +46,8 @@ Le porteur a fixé l'ordre des sections et le contenu de « Ma classe » le 2026
 | Que montre « Matières » ? | Les matières avec leurs icônes, comme « Niveaux » pour la direction et « Cours » pour l'enseignant. | Bulles `ui_subject_bubble` existantes ; elles remplacent la carte « Cours ». Point ambre de retard (UDR-0062 §3.3), donnée déjà lue par la query. |
 | Quel score pour « Exercices traités » ? | Le meilleur score. | Une ligne par exercice, meilleur score sur 20, triée par dernière session terminée ; elle ouvre le résultat de la dernière session. |
 | Comment procède-t-on (branche, grill) ? | Branche `feature/…`, chantier condensé à partir des consignes, PR brouillon vers `Develop`. | Pas de grill question par question : les réponses ci-dessus en tiennent lieu, les choix restants sont écrits en « Questions encore ouvertes ». |
-| « Cours assignés » : un cours ne s'assigne plus (ADR-0072). Lesquels montrer ? | Décision de l'auteur, révisable : les cours qui contiennent au moins un exercice assigné à la classe. | Une lecture de plus, sans table ni contrat nouveaux. |
-| Un exercice assigné et déjà fait apparaîtrait dans « assignés » et « traités ». | Décision de l'auteur, révisable : « assignés » ne garde que ceux qui ne sont pas encore faits. | Chaque exercice n'est dit qu'une fois sur la page (R6 de l'UDR-0057). |
+| « Cours assignés » : un cours ne s'assigne plus (ADR-0072). Lesquels montrer ? | Les cours qui contiennent au moins un exercice assigné à la classe (proposé par l'auteur, confirmé par le porteur le 2026-10-05). | Une lecture de plus, sans table ni contrat nouveaux. |
+| Un exercice assigné et déjà fait apparaîtrait dans « assignés » et « traités ». | « Assignés » ne garde que ceux qui ne sont pas encore faits (proposé par l'auteur, confirmé par le porteur le 2026-10-05). | Chaque exercice n'est dit qu'une fois sur la page (R6 de l'UDR-0057). |
 | La politique de cache autorise-t-elle un cache sur la session ? | Non : ADR-0076 §4.1, le HTML ne se met jamais en cache, et un 304 paie le même aller-retour. Le levier est le nombre de requêtes en série. | La question suivante arrive avec le verdict, dans le même Turbo Stream. « Question suivante » l'affiche sans requête : 1 aller-retour par question au lieu de 2. |
 
 ## Cas limites identifiés
@@ -62,6 +62,6 @@ Le porteur a fixé l'ordre des sections et le contenu de « Ma classe » le 2026
 
 ## Questions encore ouvertes
 
-- « Cours assignés » = cours qui contiennent un exercice assigné : à confirmer par le porteur.
-- « Exercices assignés » sans ceux déjà faits : à confirmer par le porteur.
+- ~~« Cours assignés » = cours qui contiennent un exercice assigné~~ : confirmé par le porteur le 2026-10-05.
+- ~~« Exercices assignés » sans ceux déjà faits~~ : confirmé par le porteur le 2026-10-05.
 - La mesure en millisecondes depuis Abidjan (ADR-0076 §4.3) n'est pas reprise ici : le compte de requêtes vaut partout.
