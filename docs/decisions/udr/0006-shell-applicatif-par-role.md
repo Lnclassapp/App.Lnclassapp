@@ -125,3 +125,9 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - **Deux listes pour l'équipe** (UDR-0068 §3.1) : `DESTINATIONS[:team]` perd « Imports » (Accueil, Cours, Établissements, Pilotage) ; `SECONDARY_DESTINATIONS[:team]` (Référentiel, Imports) forme une 2e carte « Configuration » dans la barre latérale et, dans la barre du bas, le menu « Plus » (5e case). La règle « pas de tiroir » du §2.2 est levée pour ce seul menu ; la barre du bas reste à 5 cases au plus.
 - **Sections d'accueil** : équipe « Régions éducatives », « Activités » (le Référentiel a sa page, UDR-0068 §3.4) ; enseignant « Mes classes », « Cours », « Activités » (UDR-0069 §3.1).
 - **Barre latérale de l'enseignant** : sous ses destinations, la carte « Parrainage », frame différé (UDR-0069 §3.6).
+
+## Amendement du 2026-10-04 — « Accueil » de la direction
+
+*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md), [UDR-0074](0074-accueil-de-la-direction.md) §3.1. Statut : `Proposé`.*
+
+- La première destination `school_admin` devient `[:home, :school_admin_classrooms_path, "home"]` (« Accueil »), à la place de « Travail des élèves ». Les sections d'accueil de la direction (`HOME_SECTIONS[:school_admin]`) ne changent pas : elles ne servent qu'à la page de démonstration du shell.

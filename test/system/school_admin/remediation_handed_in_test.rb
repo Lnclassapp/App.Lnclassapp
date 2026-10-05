@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 # Challenger of remediation-comptee-faite (bugfix, phase 5): the memo's reproduction, replayed in the browser. In 3ème B,
 # Aya fails X at 33 % in the interface, which opens a gap on the fiche (ADR-0043); she then starts Y, which opens a
-# remediation session on Y's assignment, and passes it at 100 %. The school management reads « Travail des élèves », then
-# 3ème B: Y is handed in and its 100 % is in the averages. A remediation started but not finished, and a student of
+# remediation session on Y's assignment, and passes it at 100 %. The school management opens the 3ème level from its home,
+# then 3ème B: Y is handed in and its 100 % is in the averages. A remediation started but not finished, and a student of
 # another classroom, change nothing to the figures of 3ème B. The rest of the classroom is set up by the factories.
 # The memo's 25 % and 80 % need 9 questions to play; 3 and 2 keep the scenario within the system budget (≤ 10 s).
 class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
@@ -65,16 +65,18 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
     sign_in_as @admin
     assert_selector "main#main", wait: SIGN_IN_WAIT
     assert_current_path school_admin_classrooms_path
+    find("#level_3eme").click
+    assert_current_path school_admin_level_path("3eme")
 
     # 3ème B: 6 students × 2 assignments; handed in: Aya 2, four classmates 1 → 6 / 12 = 50 %.
     # Average of the handed-in sessions: (33 + 100 + 4 × 60) / 6 = 62,2 → 62 %. Before the fix: 5 / 12 = 42 %, 273 / 5 = 55 %.
-    assert_equal [ "6", "2", "50 %", "62 %" ], cells("#classroom_#{@klass.public_id}")
+    assert_equal [ "6 élèves", "2 devoirs donnés", "Taux de rendu : 50 %", "Moyenne : 62 %" ], figures(@klass)
     # 3ème A: Koffi's remediation counts for his own classroom; fewer than 5 students handed in, no average.
-    other = cells("#classroom_#{@other.public_id}")
-    assert_equal [ "1", "1", "100 %" ], other.first(3)
-    assert_match(/\A—/, other.last)
+    other = figures(@other)
+    assert_equal [ "1 élève", "1 devoir donné", "Taux de rendu : 100 %" ], other.first(3)
+    assert_match(/\AMoyenne : —/, other.last)
 
-    click_link "3ème B"
+    find("#classroom_#{@klass.public_id} a").click
 
     assert_current_path school_admin_classroom_path(@klass.public_id)
     assert_equal [ "2", "50 %", "62 %" ], all("#classroom_figures li > span:first-child").map(&:text)
@@ -110,5 +112,6 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
     assert_link I18n.t("#{SESSION}.feedback_card.result")
   end
 
-  def cells(row) = find(row).all("td").map(&:text)
+  # The figures of a classroom's card, on the page of its level.
+  def figures(classroom) = find("#classroom_#{classroom.public_id}").all("ul > li").map { it.text.squish }
 end

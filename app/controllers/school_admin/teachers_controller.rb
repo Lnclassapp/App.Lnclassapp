@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolAdmin::TeachersController
-# Rôle : « Enseignants » de la direction et leur retrait (DetachTeacher) ; l'établissement est celui du compte, jamais un paramètre
-# ADR  : 0065, 0071 · UDR : 0052, 0056
+# Rôle : « Enseignants » de la direction, la confirmation de leur retrait (lue à la demande) et le retrait (DetachTeacher)
+# ADR  : 0065, 0067, 0071 · UDR : 0006, 0052, 0056 · l'établissement est celui du compte, jamais un paramètre
 module SchoolAdmin
   class TeachersController < BaseController
     def index
@@ -8,6 +8,16 @@ module SchoolAdmin
       # Gestes affichés sur un établissement actif seulement, le serveur refuse de toute façon (UDR-0056 §2.6) ; BaseController
       # a déjà refusé une direction sans établissement.
       @manageable = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id).active?
+    end
+
+    # UDR-0056, amendement du 2026-10-04 : la confirmation n'est plus copiée dans chaque ligne, elle arrive dans le frame
+    # « modal » ; sans frame, la même adresse est une page complète. La policy du retrait passe avant toute lecture.
+    def removal
+      allowed = manage_teachers.call(actor: current_actor, school: schools.find_by_id(id: current_actor.school_id))
+      render_result allowed, success: lambda { |_|
+        @teacher = teachers_query.teacher(school_id: current_actor.school_id, public_id: params[:public_id])
+        render_not_found if @teacher.nil?
+      }
     end
 
     def destroy
@@ -35,13 +45,15 @@ module SchoolAdmin
     end
 
     def teachers_query = Queries::School::SchoolTeachersQuery.new
+    def schools = Repositories::School::SchoolRepository.new
+    def manage_teachers = Policies::School::ManageSchoolTeachersPolicy.new
 
     def detach_teacher
       UseCases::School::DetachTeacher.new(
-        schools: Repositories::School::SchoolRepository.new, users: Repositories::Identity::UserRepository.new,
+        schools:, users: Repositories::Identity::UserRepository.new,
         teachings: Repositories::Classroom::TeachingRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
         departures: Repositories::School::TeacherDepartureRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-        policy: Policies::School::ManageSchoolTeachersPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        policy: manage_teachers, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
       )
     end
   end

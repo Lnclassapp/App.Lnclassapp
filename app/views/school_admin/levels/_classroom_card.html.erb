@@ -1,0 +1,42 @@
+<%# 🌐 UI · school_admin/levels/_classroom_card — une classe sur la page de son niveau (AD-09, AD-22) %>
+<%# Rôle : illustration du niveau et pastille du taux de rendu, effectif, devoirs, taux et moyenne ; toute la carte mène à la classe %>
+<%# ADR  : 0065 · UDR : 0074 (§3.5, §3.8) · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
+<%# locals: (classroom:, illustration:, signal:) -%>
+<% figure = lambda do |value|
+     next tag.span(t("school_admin.classrooms.percent", value:), class: "font-medium text-ink") unless value.nil?
+
+     safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
+   end %>
+<li id="classroom_<%= classroom.public_id %>">
+  <%= link_to school_admin_classroom_path(classroom.public_id),
+              class: "group flex h-full flex-col gap-4 rounded-ln border border-line bg-white p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <div class="flex items-center gap-3">
+      <span class="<%= class_names("relative grid size-15 shrink-0 place-items-center rounded-full", illustration.tint) %>">
+        <%= image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy" %>
+        <%= tag.span(class: [ "absolute -top-0.5 -right-0.5 size-3.5 rounded-full ring-2 ring-white", ComponentsHelper::SIGNAL_DOTS.fetch(signal) ],
+                     "aria-hidden": true) if signal %>
+      </span>
+      <div class="min-w-0">
+        <p class="truncate font-display text-lg font-extrabold text-ink"><%= classroom.name %></p>
+        <%= tag.span(t("school_admin.signals.#{signal}.label"), class: "sr-only") if signal %>
+      </div>
+    </div>
+    <ul class="space-y-1.5 text-sm text-mute">
+      <li class="inline-flex w-full items-center gap-1.5">
+        <%= ui_icon "users", variant: :mini, size: :sm %><%= t(".students", count: classroom.students_count) %>
+      </li>
+      <li class="inline-flex w-full items-center gap-1.5">
+        <%= ui_icon "clipboard-document-list", variant: :mini, size: :sm %><%= t(".assignments", count: classroom.assignments_count) %>
+      </li>
+      <li class="inline-flex w-full items-center gap-1.5">
+        <%= ui_icon "chart-bar", variant: :mini, size: :sm %><%= t(".submission_rate_html", rate: figure.call(classroom.submission_rate)) %>
+      </li>
+      <li class="inline-flex w-full items-center gap-1.5">
+        <%= ui_icon "academic-cap", variant: :mini, size: :sm %><%= t(".average_html", value: figure.call(classroom.average_percent)) %>
+      </li>
+    </ul>
+    <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
+      <%= t(".open") %><%= ui_icon "arrow-right", variant: :mini, size: :sm, class: "transition group-hover:translate-x-0.5" %>
+    </span>
+  <% end %>
+</li>
