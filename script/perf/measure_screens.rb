@@ -14,6 +14,7 @@
 # Aucune donnée n'est écrite, sauf les sessions de connexion des quatre comptes de mesure et le compteur de lectures de
 # l'article mesuré : la lecture d'un visiteur compte, et son UPDATE entre dans le budget (ADR-0074 §4.7). Le blog
 # (/blog, /blog?page=2, /blog/:slug) est lu sans compte, par la session `visitor` : sous 100 ms p95 et 150 Ko (ADR-0067).
+# La page d'un niveau de la direction est lue sur son niveau le plus fourni en classes.
 # Le suivi d'un exercice assigné (UDR-0072, ADR-0079) est lu sur l'assignation active la plus faite de la classe mesurée :
 # la page entière, puis le seul cadre d'une catégorie choisie (Turbo-Frame comprehension_frame).
 require "json"
@@ -73,6 +74,9 @@ module PerfScreens
     admin_school = Orm::SchoolStaff.joins(:user).find_by!(users: { contact: ACTORS[:admin] }).school_id
     focus = Orm::School.find(admin_school)
     student_classroom = Orm::ClassroomStudent.joins(:student).find_by!(users: { contact: ACTORS[:student] }).classroom
+    # La page d'un niveau (UDR-0074 §3.8) se lit en direct, sans cache : le niveau de l'établissement mesuré qui a le plus de classes.
+    level_slug = Orm::Classroom.joins(:level).where(school_id: admin_school, status: "active", school_year: Entities::Classroom::SchoolYear.current(Date.current))
+                               .group("levels.slug").order(Arel.sql("COUNT(*) DESC"), "levels.slug").pick("levels.slug")
     teacher_classroom = Orm::TeacherClassroom.joins("JOIN users ON users.id = teacher_classrooms.teacher_id")
                                              .where(users: { contact: ACTORS[:teacher] }).order(:id).first.classroom
     assigned_course = Orm::ClassroomAssignment.where(classroom: teacher_classroom, assignable_type: "Course").pick(:assignable_id)
@@ -117,6 +121,7 @@ module PerfScreens
       [ "exercise_show", :student, "/exercises/#{exercise.public_id}" ],
       [ "admin_classrooms", :admin, "/school-admin/classrooms" ],
       [ "admin_classroom", :admin, "/school-admin/classrooms/#{student_classroom.public_id}" ],
+      [ "admin_level", :admin, "/school-admin/levels/#{level_slug}" ],
       [ "admin_teachers", :admin, "/school-admin/teachers" ],
       [ "admin_teacher_removal", :admin, "/school-admin/teachers/#{removable}/removal", { "Turbo-Frame" => "modal" } ],
       [ "admin_teacher_removal_page", :admin, "/school-admin/teachers/#{removable}/removal" ],
