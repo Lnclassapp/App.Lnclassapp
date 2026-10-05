@@ -6,9 +6,10 @@
 <% day_format = t("teams.announcement_illustrations.formats.#{row.added_at.day == 1 ? 'first_day' : 'day'}") %>
 <li id="illustration_<%= public_id %>" class="flex items-center gap-3 rounded-ln border border-line p-3">
   <div class="flex shrink-0 gap-1">
-    <%# Le dessin n'est jamais le fichier envoyé : announcement_illustration le reconstruit depuis ses formes revérifiées. %>
+    <%# Le dessin n'est jamais le fichier envoyé : announcement_illustration le reconstruit depuis ses formes revérifiées.
+        Sur téléphone, Ciel seul : les deux autres aperçus laisseraient le nom illisible à 360 px. %>
     <% %w[ciel mangue nuit].each do |theme| %>
-      <span class="rounded-ln bg-brand-soft p-1" data-announcement-theme="<%= theme %>"><%= announcement_illustration illustration, class: "size-12" %></span>
+      <span class="<%= class_names("rounded-ln bg-brand-soft p-1", "hidden sm:block": theme != "ciel") %>" data-announcement-theme="<%= theme %>"><%= announcement_illustration illustration, class: "size-12" %></span>
     <% end %>
   </div>
   <div class="min-w-0 flex-1">

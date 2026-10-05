@@ -14,13 +14,23 @@ module UseCases
         not_svg: "Ce fichier n'est pas un dessin SVG.",
         empty: "Ce dessin est vide."
       }.freeze
+      FULL = "La bibliothèque compte déjà 50 illustrations : retirez-en une avant d'en ajouter."
 
+      # active : le nombre d'illustrations encore proposées (available), celles écrites ici comprises.
       class FakeIllustrations
         include Ports::Communication::IllustrationRepositoryPort
 
         attr_reader :created
+        attr_writer :active
 
-        def initialize = @created = []
+        def initialize
+          @created = []
+          @active = 0
+        end
+
+        def available
+          Array.new(@active + @created.size) { Illustration.new(name: "Dessin", view_box: "0 0 64 64", shapes: SHAPES, created_by_id: 1) }
+        end
 
         def create(illustration:)
           @created << illustration
@@ -148,6 +158,53 @@ module UseCases
         end
         assert_equal({ name: [ "Saisissez un nom." ], file: [ MESSAGES[:unsafe] ] }, add(Input.new(file: svg), read: refused(:unsafe)).errors)
         assert_empty @illustrations.created
+      end
+
+      test "la bibliothèque est plafonnée à 50 illustrations actives : la 51ᵉ est refusée sous « Dessin », rien n'est lu ni écrit" do
+        @illustrations.active = Illustration::LIBRARY_CAP
+
+        result = add(Input.new(name: "Bus", file: svg))
+
+        assert_equal 50, Illustration::LIBRARY_CAP
+        assert_equal [ :invalid, { file: [ FULL ] } ], [ result.code, result.errors ]
+        assert_empty @drawings.reads
+        assert_empty @illustrations.created
+        assert_equal 0, @transaction.calls
+      end
+
+      test "avec 49 illustrations actives, l'ajout passe ; la suivante est refusée" do
+        @illustrations.active = Illustration::LIBRARY_CAP - 1
+
+        assert add(Input.new(name: "Bus", file: svg)).success?
+        assert_equal({ file: [ FULL ] }, add(Input.new(name: "Car", file: svg)).errors)
+        assert_equal 1, @illustrations.created.size
+      end
+
+      # Défense en profondeur (ADR-0081 §4.3) : le domaine revérifie ce que rend le port, quel qu'en soit l'adaptateur.
+      test "AV-09 — des formes interdites rendues par le port ne sont pas écrites : seules les formes permises le sont" do
+        forbidden = [ { "name" => "script", "attributes" => {}, "children" => [] },
+                      { "name" => "rect", "attributes" => { "onload" => "alert(1)" }, "children" => [] },
+                      { "name" => "path", "attributes" => { "d" => "M0 0" }, "children" => [ SHAPES.first ] },
+                      { "name" => "rect", "attributes" => { "width" => "url(#a)" }, "children" => [] },
+                      "<script>alert(1)</script>" ]
+
+        result = add(Input.new(name: "Bus", file: svg), read: Shared::Result.success({ view_box: "0 0 64 64", shapes: forbidden + SHAPES }))
+
+        assert result.success?
+        assert_equal [ SHAPES ], @illustrations.created.map(&:shapes)
+      end
+
+      test "AV-09 — si aucune forme rendue par le port ne passe la liste blanche, ou si sa viewBox n'est pas conforme : « Ce dessin est vide. »" do
+        { "0 0 64 64" => [ { "name" => "script", "attributes" => {}, "children" => [] } ],
+          "0 0 64 64\" onload=\"alert(1)" => SHAPES,
+          nil => SHAPES,
+          "0 0 64 64 " => nil }.each do |view_box, shapes|
+          result = add(Input.new(name: "Bus", file: svg), read: Shared::Result.success({ view_box:, shapes: }))
+
+          assert_equal [ :invalid, { file: [ MESSAGES[:empty] ] } ], [ result.code, result.errors ], [ view_box, shapes ].inspect
+        end
+        assert_empty @illustrations.created
+        assert_equal 0, @transaction.calls
       end
 
       test "un nom de 30 caractères est accepté" do

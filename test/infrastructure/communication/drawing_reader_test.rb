@@ -198,6 +198,25 @@ module Communication
       end
     end
 
+    # Un préfixe non déclaré laisse le nom entier (« x:script ») à l'élément ou à l'attribut : le nom local, après « : »,
+    # est comparé aussi.
+    test "AV-09 — <x:script/> est refusé, que son préfixe soit déclaré ou non" do
+      [ "", ' xmlns:x="urn:x"' ].each do |declaration|
+        assert_refused :unsafe, read(svg('<x:script/><path d="M0 0h1v1z"/>', root: %(viewBox="0 0 64 64"#{declaration}))), declaration
+      end
+    end
+
+    test "AV-09 — x:onload est refusé, que son préfixe soit déclaré ou non" do
+      [ "", ' xmlns:x="urn:x"' ].each do |declaration|
+        assert_refused :unsafe, read(svg('<path x:onload="a" d="M0 0h1v1z"/>', root: %(viewBox="0 0 64 64"#{declaration}))), declaration
+      end
+    end
+
+    test "AV-09 — x:href et x:foreignObject sont refusés sous un préfixe non déclaré" do
+      assert_refused :unsafe, read(svg('<path x:href="a" d="M0 0h1v1z"/>', root: 'viewBox="0 0 64 64"'))
+      assert_refused :unsafe, read(svg('<x:foreignObject/><path d="M0 0h1v1z"/>', root: 'viewBox="0 0 64 64"'))
+    end
+
     test "AV-09 — une valeur refusée l'est sur tout élément, même ignoré, et dans une déclaration d'espace de noms" do
       [ '<desc class="vbscript:msgbox(1)"/>', '<metadata id="u r l (x)"/>', '<title lang="&#x6A;avascript&#x3A;x"/>',
         '<g xmlns:x="javascript:alert(1)"/>', '<path d="M0 0h1v1z" style="fill:\\55\\52\\4C(#a)"/>',

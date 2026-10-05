@@ -108,6 +108,9 @@ class Teams::AnnouncementIllustrationsControllerTest < ActionDispatch::Integrati
     assert_equal %w[ciel mangue nuit], css_select("li#illustration_#{@bus.public_id} [data-announcement-theme]").map { it["data-announcement-theme"] }
     assert_select "li#illustration_#{@bus.public_id}.flex.items-center.gap-3.rounded-ln.border.border-line.p-3" do
       assert_select "[data-announcement-theme].bg-brand-soft.rounded-ln.p-1 > svg.size-12.fill-brand-strong[aria-hidden=true]", 3
+      # Sur téléphone, un seul aperçu (Ciel) : le nom garde la place de se lire.
+      assert_select "[data-announcement-theme=ciel]:not(.hidden)"
+      assert_select "[data-announcement-theme=mangue].hidden.sm\\:block, [data-announcement-theme=nuit].hidden.sm\\:block", 2
       assert_select "p.font-bold.truncate", "Bus scolaire"
       assert_select "p.text-xs.text-mute", text: /Ajoutée le 5 oct\./
       assert_select "*", text: "Retirée", count: 0
@@ -176,6 +179,19 @@ class Teams::AnnouncementIllustrationsControllerTest < ActionDispatch::Integrati
       assert_select "#illustration_file_error", REFUSALS.fetch(reason), file
       assert_select "input#illustration_name[value='Bus scolaire']", 1, file
     end
+  end
+
+  test "la bibliothèque compte 50 illustrations actives au plus : la 51ᵉ est refusée en 422 sous « Dessin », rien n'est enregistré" do
+    49.times { create_illustration(name: "Dessin #{it}", created_by: @fatou) }
+    create_illustration(name: "Cantine", created_by: @fatou, retired_at: Time.current)
+    sign_in_as @fatou
+
+    add
+    assert_redirected_to teams_announcement_illustrations_path
+
+    assert_no_difference(-> { Orm::MessageIllustration.count }) { add(name: "Car scolaire") }
+    assert_response :unprocessable_entity
+    assert_select "#illustration_file_error", "La bibliothèque compte déjà 50 illustrations : retirez-en une avant d'en ajouter."
   end
 
   test "AV-09 — une image PNG n'est pas un dessin SVG" do

@@ -81,14 +81,18 @@ module Communication
     end
 
     def unsafe_element?(name)
-      name = name.downcase
+      name = local(name)
       UNSAFE_ELEMENTS.include?(name) || name.start_with?(UNSAFE_ELEMENT_PREFIX)
     end
 
     def unsafe_attribute?(attribute)
-      name = attribute.name.downcase
+      name = local(attribute.name)
       name.start_with?(UNSAFE_ATTRIBUTE_PREFIX) || UNSAFE_ATTRIBUTES.include?(name) || unsafe_value?(attribute.value)
     end
+
+    # Le nom local, en minuscules. Sous un préfixe non déclaré, libxml2 laisse le nom entier (« x:script », « x:onload ») :
+    # seul ce qui suit le dernier « : » est comparé.
+    def local(name) = name.downcase.split(":").last.to_s
 
     # \75 rl( se lit url( en CSS : un échappement est rendu à son caractère ASCII (au-delà, à un caractère de contrôle,
     # ensuite retiré).
