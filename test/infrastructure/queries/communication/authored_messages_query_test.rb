@@ -137,10 +137,18 @@ module Queries
         message = Repositories::Communication::MessageRepository.new.find_by_public_id(public_id: record.public_id)
 
         assert_equal AuthoredMessagesQuery::Edited.new(school_public_id: @lauriers.public_id, image: false, audio: true,
-                                                       classroom_public_ids: classrooms.map(&:public_id).sort),
+                                                       classroom_public_ids: classrooms.map(&:public_id).sort, illustration_public_id: nil),
                      @query.edited(message).then { it.with(classroom_public_ids: it.classroom_public_ids.sort) }
         national = Repositories::Communication::MessageRepository.new.find_by_public_id(public_id: create_message(author: @kamate, audience: "all").public_id)
-        assert_equal [ nil, [], false, false ], @query.edited(national).deconstruct
+        assert_equal [ nil, [], false, false, nil ], @query.edited(national).deconstruct
+      end
+
+      test "AV-08 — the form of an announcement with a drawing of the team names it by its public_id" do
+        bus = create_illustration(name: "Bus scolaire", created_by: create_team_member(second_factor: false))
+        record = create_message(author: @kamate, illustration: bus)
+        message = Repositories::Communication::MessageRepository.new.find_by_public_id(public_id: record.public_id)
+
+        assert_equal bus.public_id, @query.edited(message).illustration_public_id
       end
     end
   end

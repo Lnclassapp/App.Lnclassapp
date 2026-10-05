@@ -71,9 +71,12 @@
   <% end %>
 
   <% unless published %>
-    <%= ui_field f, :published_at, type: "datetime-local", hint: t(".hints.published_at") %>
+    <%# UDR-0075 §3.3 : plus de « Visible jusqu'au » ; la fin est la parution + 30 jours (ADR-0081 §4.1). %>
+    <div class="space-y-1.5">
+      <%= ui_field f, :published_at, type: "datetime-local", hint: t(".hints.published_at") %>
+      <p class="text-xs text-mute"><%= t(".lasts") %></p>
+    </div>
   <% end %>
-  <%= ui_field f, :visible_until, as: :date, required: true, hint: t(".hints.visible_until") %>
 
   <div class="flex flex-wrap justify-end gap-3">
     <%= ui_button t(".cancel"), variant: :ghost, href: my_announcements_path %>

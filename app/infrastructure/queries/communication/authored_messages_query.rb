@@ -14,8 +14,9 @@ module Queries
       end
       Page = Data.define(:rows, :page, :pages)
       School = Data.define(:public_id, :name)
-      # Une annonce vue par son formulaire : son établissement et ses classes par public_id, ses fichiers.
-      Edited = Data.define(:school_public_id, :classroom_public_ids, :image, :audio)
+      # Une annonce vue par son formulaire : son établissement, ses classes et son dessin de l'équipe par public_id, ses
+      # fichiers.
+      Edited = Data.define(:school_public_id, :classroom_public_ids, :image, :audio, :illustration_public_id)
 
       IMAGE = Arel.sql("EXISTS (SELECT 1 FROM active_storage_attachments files WHERE files.record_type = 'Orm::Message' " \
                        "AND files.record_id = messages.id AND files.name = 'image')").freeze
@@ -55,7 +56,8 @@ module Queries
         attached = ActiveStorage::Attachment.where(record_type: "Orm::Message", record_id: message.id).pluck(:name)
         Edited.new(school_public_id: Orm::School.where(id: message.school_id).pick(:public_id),
                    classroom_public_ids: Orm::Classroom.where(id: message.classroom_ids).pluck(:public_id),
-                   image: attached.include?("image"), audio: attached.include?("audio"))
+                   image: attached.include?("image"), audio: attached.include?("audio"),
+                   illustration_public_id: Orm::MessageIllustration.where(id: message.illustration_id).pick(:public_id))
       end
 
       private

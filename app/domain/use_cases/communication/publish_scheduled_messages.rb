@@ -1,9 +1,11 @@
 # 🧠 DOMAINE · UseCases::Communication::PublishScheduledMessages
-# Rôle : publie les annonces programmées dont l'heure est venue, chacune journalisée avec son auteur pour acteur
-# ADR  : 0045, 0078 · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
+# Rôle : publie les annonces programmées dont l'heure est venue, chacune sous le plafond de 3 de son auteur et journalisée
+# ADR  : 0045, 0078, 0081 · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
 module UseCases
   module Communication
     class PublishScheduledMessages
+      include CreateMessage::Parution
+
       def initialize(messages:, audit_log:, transaction:, clock:)
         @messages = messages
         @audit_log = audit_log
@@ -21,19 +23,23 @@ module UseCases
       private
 
       # Relue dans sa transaction : une annonce archivée, modifiée ou reprogrammée depuis la lecture de la liste n'est
-      # pas réécrite. → true si elle est publiée
+      # pas réécrite. Sa parution archive d'abord les plus anciennes en ligne de son auteur, sous son verrou (ADR-0081
+      # §4.1). → true si elle est publiée
       def publish(due, now)
         @transaction.call do
           message = @messages.find_by_public_id(public_id: due.public_id)
           next false unless message.status == "scheduled" && message.published_at <= now
 
-          # Archivée ou retirée entre cette lecture et l'écriture : rien n'est écrit, ni journalisé.
-          next false unless @messages.update(message: message.with(status: "published"))
+          make_room(message.author_id, now)
+          # Archivée ou retirée entre cette lecture et l'écriture : rien n'est écrit, ni archivé, ni journalisé.
+          raise Frozen unless @messages.update(message: message.with(status: "published"))
 
           @audit_log.record(action: "message.published", actor_id: message.author_id, at: now, subject_type: "Message",
                             subject_id: message.id)
           true
         end
+      rescue Frozen
+        false
       end
     end
   end
