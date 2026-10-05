@@ -1,15 +1,9 @@
-<%# 🌐 UI · school_admin/classrooms/index — « Travail des élèves », accueil de la direction (DS-05, DS-07, DS-10, FU-21) %>
-<%# Rôle : bandeau d'arrivée des directions (ID-10) ; une ligne par classe de l'année, le tableau défile dans sa carte ; aucun bouton %>
-<%# ADR  : 0036, 0065, 0077 · UDR : 0005, 0052, 0054, 0070 · « — » (aria-hidden) + « non calculé » (sr-only) ; aides natives (<details>) ; lien « Anciens élèves » (lot R) %>
+<%# 🌐 UI · school_admin/classrooms/index — accueil de la direction (AD-02 à AD-08, ID-10) %>
+<%# Rôle : « Bonjour », bandeau d'arrivée, puis « Établissement », « Niveaux », « Annonces » (sans croix) et « Activité récente » (différée) %>
+<%# ADR  : 0065, 0077, 0078 · UDR : 0052, 0070 (§3.3), 0071, 0074 (§3.2, §3.10, §3.11) · lecture seule : les sections ne portent que des liens %>
 <% page_title t(".page_title") %>
-<% content_for :nav_key, "student_work" %>
-<% percent = lambda do |value|
-     next t("school_admin.classrooms.percent", value:) unless value.nil?
-
-     safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
-   end %>
-<% tips = { submission_rate: :submission_rate, average: :average } %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, year: @overview.school_year) %>
+<% content_for :nav_key, "home" %>
+<%= ui_page_header title: t(".greeting", name: shell_user.first_name) %>
 
 <% if @arrivals.any? %>
   <%# Le premier du mois s'écrit « 1er » (UDR-0056, comme departed_teachers/index). %>
@@ -21,49 +15,17 @@
   </div>
 <% end %>
 
-<%= ui_card id: "student_work" do %>
-  <% if @overview.classrooms.empty? %>
-    <%= ui_empty_state title: t(".empty"), icon: "squares-2x2" %>
-  <% else %>
-    <div class="relative overflow-x-auto">
-      <table class="w-full min-w-xl text-left text-sm">
-        <caption class="sr-only"><%= t(".caption") %></caption>
-        <thead class="border-b border-line text-xs text-mute">
-          <tr>
-            <th scope="col" class="px-2 py-3 font-medium"><%= t(".columns.classroom") %></th>
-            <% %i[students assignments submission_rate average].each do |column| %>
-              <th scope="col" class="px-2 py-3 text-right align-top font-medium">
-                <%= t(".columns.#{column}") %>
-                <% if tips.key?(column) %>
-                  <%= ui_info_tip t("school_admin.classrooms.tips.#{tips[column]}"), label: t(".columns.#{column}") %>
-                <% end %>
-              </th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-line">
-          <% @overview.classrooms.each do |row| %>
-            <tr id="classroom_<%= row.public_id %>">
-              <th scope="row" class="px-2 py-2 font-normal">
-                <%= link_to row.name, school_admin_classroom_path(row.public_id),
-                      class: "inline-flex min-h-tap items-center font-medium text-ink hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-                <span class="block text-xs text-mute"><%= row.level_name %></span>
-              </th>
-              <td class="px-2 py-2 text-right tabular-nums"><%= row.students_count %></td>
-              <td class="px-2 py-2 text-right tabular-nums"><%= row.assignments_count %></td>
-              <td class="px-2 py-2 text-right tabular-nums"><%= percent.call(row.submission_rate) %></td>
-              <td class="px-2 py-2 text-right tabular-nums"><%= percent.call(row.average_percent) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="mt-3 text-xs text-mute">
-      <span aria-hidden="true">—</span> <%= t("school_admin.classrooms.legend.label") %>
-      <%= ui_info_tip t("school_admin.classrooms.tips.missing"), label: t("school_admin.classrooms.legend.label") %>
-    </div>
+<div class="grid gap-5">
+  <%= render "school_card", home: @home %>
+  <%= render "levels", home: @home %>
+  <%# UDR-0074 §3.10 : en lecture seule, sans croix (décision du porteur du 2026-10-04) ; absent sans annonce lisible. %>
+  <% if @announcements.any_readable? %>
+    <%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %>
   <% end %>
-<% end %>
-
-<%= link_to t(".departed"), school_admin_departed_students_path, id: "departed-students-link",
-            class: "mt-4 inline-flex min-h-tap items-center gap-1 text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+  <%= ui_card id: "direction_home_activity", title: t(".activity.title"), subtitle: t(".activity.subtitle"), icon: "bolt" do %>
+    <%# UDR-0074 §3.11 : chargée après la page, par SchoolAdmin::ActivitiesController ; ses liens ouvrent la page entière. %>
+    <%= turbo_frame_tag "direction_home_activity_feed", src: school_admin_activity_path, loading: :lazy, target: "_top" do %>
+      <%= ui_loading_state variant: :skeleton %>
+    <% end %>
+  <% end %>
+</div>

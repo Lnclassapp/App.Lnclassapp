@@ -79,14 +79,14 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_signs_out
   end
 
-  # The school admin's own pages (« Travail des élèves », « Enseignants », « Établissement ») are walked by
-  # test/system/school_admin/*; here, its navigation in order, and « Annonces », last, by its real link.
+  # The school admin's journey (sign-in, « Accueil », a level, a classroom) is the system test of accueil-direction Lot E
+  # (test/system/school_admin/direction_home_test.rb); here, its navigation in order, and « Annonces », last, by its real link.
   test "AN-22 — the direction reaches « Annonces », last of its navigation" do
     sign_in_as @school_admin
 
     assert_home school_admin_classrooms_path
     within(MAIN_SIDEBAR_NAV) do
-      assert_equal %i[student_work teachers school announcements].map { tn(it) }, all("a[href]").map(&:text)
+      assert_equal %i[home teachers school announcements].map { tn(it) }, all("a[href]").map(&:text)
       click_link tn(:announcements)
     end
 

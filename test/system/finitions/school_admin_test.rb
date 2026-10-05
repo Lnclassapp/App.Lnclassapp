@@ -1,7 +1,8 @@
 require "application_system_test_case"
 
-# FU-10, FU-21, FU-49 (UDR-0054, UDR-0052): on « Travail des élèves », the school management opens the help of « Taux de
-# rendu » with one touch, opens a classroom, searches a student while typing, then comes back by « Travail des élèves ».
+# FU-10, FU-21, FU-49 (UDR-0054, UDR-0052, UDR-0074): on a classroom's page, the school management opens the help of « Taux
+# de rendu » with one touch; from its home it opens a level, then a classroom, searches a student while typing, then comes
+# back to the level by the common back link.
 module Finitions
   class SchoolAdminTest < ApplicationSystemTestCase
     SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
@@ -18,14 +19,15 @@ module Finitions
 
     def tc(key, **) = I18n.t("school_admin.classrooms.#{key}", **)
 
-    test "FU-21: the help of « Taux de rendu » opens with one touch under its header, on a 390 px phone" do
+    test "FU-21: the help of « Taux de rendu » opens with one touch under its figure, on a 390 px phone" do
       with_mobile_viewport do
         sign_in_as @admin
-        assert_selector "h1", text: tc("index.title"), wait: SIGN_IN_WAIT
-        assert_title "#{tc('index.page_title')} · Direction · Lnclass"
+        assert_selector "#direction_home_school", wait: SIGN_IN_WAIT
+        visit school_admin_classroom_path(@classroom.public_id)
+        assert_title "2nde C 1 · Direction · Lnclass"
         assert_no_text tc("tips.submission_rate")
 
-        summary = find("summary", text: "Aide : #{tc('index.columns.submission_rate')}", visible: :all)
+        summary = find("#classroom_figures summary", text: "Aide : #{tc('show.figures.submission_rate')}", visible: :all)
         summary.click
 
         assert_text tc("tips.submission_rate")
@@ -35,13 +37,15 @@ module Finitions
       end
     end
 
-    test "FU-49, FU-10: the school management searches a student of the classroom, then returns by « Travail des élèves »" do
+    test "FU-49, FU-10: the school management searches a student of the classroom, then returns to its level" do
       sign_in_as @admin
-      assert_selector "h1", text: tc("index.title"), wait: SIGN_IN_WAIT
+      assert_selector "#direction_home_school", wait: SIGN_IN_WAIT
+      find("#level_2nde").click
+      assert_selector "h1", text: "2nde"
       click_link "2nde C 1"
       assert_selector "h1", text: "2nde C 1"
       assert_title "2nde C 1 · Direction · Lnclass"
-      assert_equal school_admin_classrooms_path, URI(first("main a")[:href]).path
+      assert_equal school_admin_level_path("2nde"), URI(first("main a")[:href]).path
       assert_no_button tc("show.search.submit")
 
       fill_in tc("show.search.label"), with: "awa"
@@ -59,10 +63,10 @@ module Finitions
 
       assert_selector "#student_work_students tbody tr", count: 2
 
-      within("main nav[aria-label='#{I18n.t('components.back_link.label')}']") { click_link tc("show.back") }
+      within("main nav[aria-label='#{I18n.t('components.back_link.label')}']") { click_link "2nde" }
 
-      assert_current_path school_admin_classrooms_path
-      assert_selector "h1", text: tc("index.title")
+      assert_current_path school_admin_level_path("2nde")
+      assert_selector "h1", text: "2nde"
     end
   end
 end

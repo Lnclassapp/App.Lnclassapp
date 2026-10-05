@@ -1,7 +1,9 @@
 <%# 🌐 UI · communication/messages/_carousel — les annonces de l'accueil élève, en bande défilante (UDR-0071 §3.5) %>
-<%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage) ; défilement natif %>
-<%# ADR  : 0078 · UDR : 0005, 0071 · Stimulus : communication--carousel (points, focus) %>
+<%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage), dismissible: (croix) %>
+<%# ADR  : 0078 · UDR : 0005, 0071, 0074 (§3.10 : accueil de la direction, sans croix) · Stimulus : communication--carousel %>
 <% refocus = local_assigns.fetch(:refocus, false) %>
+<%# UDR-0074 §3.10 : l'accueil de la direction passe dismissible: false ; l'élève garde la croix des annonces non officielles. %>
+<% dismissible = local_assigns.fetch(:dismissible, true) %>
 <%# min-w-0 : dans la grille de l'accueil, la section prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
 <%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",
                 class: "min-w-0 rounded-card bg-mist p-2.5",
@@ -13,7 +15,7 @@
         data-communication--carousel-target="track">
       <% carousel.cards.each do |card| %>
         <li class="shrink-0 basis-11/12 snap-start sm:basis-1/2">
-          <%= render "communication/messages/card", card:, context: :carousel, dismissible: !card.official? %>
+          <%= render "communication/messages/card", card:, context: :carousel, dismissible: dismissible && !card.official? %>
         </li>
       <% end %>
     </ul>
