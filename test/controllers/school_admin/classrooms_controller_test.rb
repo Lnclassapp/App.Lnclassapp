@@ -128,6 +128,34 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "main form#student-work-search input[name=q]", count: 1
   end
 
+  # Memo of remediation-comptee-faite: Aya fails X at 25 %, a gap opens on the fiche (ADR-0043), she then does Y in
+  # remediation at 80 % (StartExerciseSession#new_session). Y is handed in on both pages, and the 80 % is in her average.
+  test "an exercise done in remediation is handed in, and its score counts in the student's average" do
+    teacher = create_teacher(school: @school)
+    essential = create_essential
+    x, y = Array.new(2) { create_exercise(essential:) }
+    given_x, given_y = [ x, y ].map { create_assignment(classroom: @classroom, assignable: it, by: teacher) }
+    aya = create_student(classroom: @classroom, first_name: "Aya", last_name: "Bamba")
+    failed = create_exercise_session(student: aya, exercise: x, status: "completed", score_percent: 25,
+                                     classroom_assignment_id: given_x.id)
+    create_exercise_session(student: aya, exercise: y, status: "completed", score_percent: 80, classroom_assignment_id: given_y.id,
+                            gap: create_gap(student: aya, essential:, source_session: failed))
+    sign_in_as @admin
+
+    get school_admin_classrooms_path
+
+    assert_select "tr#classroom_#{@classroom.public_id} td", text: "100 %"
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_select "ul#classroom_figures li", text: /100 %\s+#{tc('show.figures.submission_rate')}/
+    assert_select "tr#student_0" do
+      assert_select "th[scope=row]", text: "Aya Bamba"
+      assert_select "td", text: "2 / 2"
+      assert_select "td", text: "53 %"
+    end
+  end
+
   test "a classroom without student keeps its figures and says it is empty" do
     sign_in_as @admin
 

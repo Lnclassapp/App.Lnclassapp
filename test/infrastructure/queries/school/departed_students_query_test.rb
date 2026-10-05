@@ -53,12 +53,26 @@ module Queries
         hand_in(yao, @this_year, 90)
         hand_in(yao, elsewhere, 10)
         create_exercise_session(student: yao, exercise: @exercise, status: "completed", score_percent: 0)
-        remediated = create_exercise
-        create_exercise_session(student: yao, exercise: remediated, status: "completed", score_percent: 0, gap: create_gap(student: yao),
-                                classroom_assignment_id: create_assignment(classroom: @this_year, assignable: remediated, by: @teacher).id)
+        create_exercise_session(student: yao, exercise: @exercise, status: "completed", score_percent: 0, gap: create_gap(student: yao))
 
         row = overview.students.sole
         assert_equal [ "Yao Brou", "2nde C 1", 1, 90 ], [ row.display_name, row.classroom_name, row.submitted_count, row.average_percent ]
+      end
+
+      # Memo of remediation-comptee-faite: X failed at 25 % opens a pending gap on the fiche (ADR-0043), so Y is done in a
+      # remediation session tied to its assignment (StartExerciseSession#new_session). Y is handed in, and its 80 % counts.
+      test "an exercise done in remediation in one of its classrooms is handed in, and its score counts in the average" do
+        awa = create_student(first_name: "Awa", last_name: "Koné")
+        member(awa, @last_year)
+        essential = create_essential
+        x, y = Array.new(2) { create_exercise(essential:) }
+        given_x, given_y = [ x, y ].map { create_assignment(classroom: @last_year, assignable: it, by: @teacher) }
+        failed = create_exercise_session(student: awa, exercise: x, status: "completed", score_percent: 25,
+                                         classroom_assignment_id: given_x.id)
+        create_exercise_session(student: awa, exercise: y, status: "completed", score_percent: 80, classroom_assignment_id: given_y.id,
+                                gap: create_gap(student: awa, essential:, source_session: failed))
+
+        assert_equal [ 2, 53 ], overview.students.sole.to_h.values_at(:submitted_count, :average_percent)
       end
 
       test "neither a present student, nor one who never came, nor an anonymized account; without results, « — »" do

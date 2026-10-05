@@ -360,3 +360,4 @@ Acceptés tels quels par le porteur le 2026-10-02 (« lance les lots » ; memo, 
 - Lu par `Queries::Classroom::AssignmentFollowUpQuery` (comptes, retards nommés, pas encore faits) et `Queries::Assessment::AssignmentScores` (page classe et page de suivi).
 - §7 : la ligne « remédiation → ne compte pas » de `assignment_follow_up_query_test.rb` est remplacée par « remédiation rattachée à l'assignation → fait, en retard après l'échéance ».
 - **Les queries de la direction** (`Queries::School::StudentWorkQuery`, `Queries::School::DepartedStudentsQuery`) comptent encore « fait » sans la remédiation. Elles suivront dans le chantier de correction `remediation-comptee-faite`, qui ajoute l'index nécessaire.
+
