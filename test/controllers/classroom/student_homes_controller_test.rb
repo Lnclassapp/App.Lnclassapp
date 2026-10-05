@@ -41,6 +41,89 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match "Koffi", response.body
   end
 
+  # UDR-0076 §3.1 (CA-1): the classroom, the subjects, the announcements, « À faire », then the recent activity; the
+  # « Cours » card is gone, the subjects lead to the catalogue.
+  test "the home reads classroom, subjects, announcements, « À faire », then the recent activity" do
+    assign_together(create_exercise(essential: @essential, title: "Méiose, les étapes"))
+    create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal %w[student_home_classroom student_home_subjects student_home_announcements student_home_exercises
+                    student_home_activity], css_select("#student_home > [id]").map { it["id"] }
+    assert_no_match "Voir les cours", response.body
+  end
+
+  # UDR-0076 §3.1 (CA-2): one bubble per subject with a published course of the student's level, in the order of the
+  # charter, each to the catalogue filtered on it; a draft course or a course of another level brings no bubble.
+  test "« Mes matières »: a bubble per subject of the student's level, to the filtered catalogue, in the charter order" do
+    maths = create_material(name: "Mathématiques")
+    create_course(material: maths, level: @classroom.level)
+    create_course(material: create_material(name: "Français", category: "literature"), level: create_level)
+    create_course(material: create_material(name: "Philosophie", category: "literature"), level: @classroom.level, status: "draft")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_equal %w[subject_mathematiques subject_svt], css_select("#student_home_subject_bubbles li a").map { it["id"] }
+    assert_select "#student_home_subjects nav#student_home_subject_bubbles[aria-label=?]", tl("subjects.label") do
+      assert_select "a#subject_mathematiques[href=?]", courses_path(material: "mathematiques"), text: including("Mathématiques")
+      assert_select "a#subject_svt[href=?]", courses_path(material: "svt"), text: including("SVT")
+      assert_select "a#subject_svt img[src*='subjects/svt']"
+    end
+    assert_select "#student_home_subjects a[href=?]", courses_path, text: tl("subjects.all")
+    assert_no_match(/subject_francais|subject_philosophie/, response.body)
+  end
+
+  # UDR-0076 §3.1, UDR-0062 §3.3 (CA-3): the amber dot only on the subject of a late exercise, said in words too.
+  test "the bubble of a subject with a late exercise carries the amber dot, the others none" do
+    create_course(material: create_material(name: "Mathématiques"), level: @classroom.level)
+    late = create_exercise(essential: @essential, title: "Méiose, en retard")
+    create_assignment(classroom: @classroom, assignable: late, assigned_at: 4.days.ago, due_on: Time.zone.today - 2)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "a#subject_svt span.bg-warning[aria-hidden=true]", 1
+    assert_select "a#subject_svt .sr-only", text: tl("subjects.late")
+    assert_select "a#subject_mathematiques span.bg-warning", 0
+  end
+
+  test "a late exercise already done brings no dot" do
+    done = create_exercise(essential: @essential)
+    create_assignment(classroom: @classroom, assignable: done, assigned_at: 4.days.ago, due_on: Time.zone.today - 2)
+    create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 75)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "a#subject_svt span.bg-warning", 0
+  end
+
+  test "no published course at the student's level: the empty subjects, and the link to every course" do
+    classroom = create_classroom(level: create_level)
+    sign_in_as create_student(classroom:)
+
+    get student_home_path
+
+    assert_select "#student_home_subjects" do
+      assert_select "nav", 0
+      assert_select "*", text: tl("subjects.empty")
+      assert_select "a[href=?]", courses_path, text: tl("subjects.all")
+    end
+  end
+
+  # ADR-0076 §4.1 (CA-8): the home is personal; the browser keeps it private, no shared cache ever does.
+  test "ADR-0076 — the home is never public in a cache" do
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_match(/private|no-store/, response.headers["Cache-Control"])
+    assert_no_match(/public/, response.headers["Cache-Control"])
+  end
+
   # UDR-0058 §3.3: a line keeps its title, its subject and one button; badge, best score, mastery and sessions live on
   # the exercise page, which the title opens (UDR-0057 §2.4). The first button of the list is the primary one, the next ones are secondary (UDR-0057 R1).
   # UDR-0062 §3.2: the exercise already completed once goes after the one not completed yet.
@@ -310,7 +393,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     count
   end
 
-  test "AN-10 — the carousel after « À faire »: the direction, the teachers newest first, the team; five cards, then the link" do
+  test "AN-10 — the carousel before « À faire » (UDR-0076): the direction, the teachers newest first, the team; five cards, then the link" do
     teacher = create_teacher(school: @classroom.school, classrooms: [ @classroom ])
     team = create_team_member(second_factor: false)
     announce(create_school_admin(school: @classroom.school), "Devoirs communs", at: 5.hours.ago, school: @classroom.school)
@@ -323,8 +406,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_equal %w[student_home_exercises student_home_announcements student_home_classroom],
-                 css_select("#student_home > [id]").map { it["id"] }.first(3)
+    assert_equal %w[student_home_classroom student_home_subjects student_home_announcements student_home_exercises],
+                 css_select("#student_home > [id]").map { it["id"] }.first(4)
     assert_equal [ "Devoirs communs", "Fiches 3", "Fiches 2", "Fiches 1", "Rentrée numérique" ], announcement_titles
   end
 
