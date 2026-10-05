@@ -40,7 +40,7 @@ Liste fermée, dans cet ordre (`Entities::Communication::Message::THEMES`). Libe
 | `nuit` | Nuit | `#1f2937` · `#f9fafb` · `#60a5fa` · `#fbbf24` | `#0b0f17` · `#e5e7eb` · `#3b82f6` · `#fbbf24` |
 
 Contrastes mesurés à l'écriture de cette UDR, et revérifiés par `test/design/announcement_themes_test.rb` :
-- texte ≥ 8,9:1 ;
+- texte ≥ 8,06:1 (« Ciel » en sombre) ;
 - signature (texte à 80 %) ≥ 5,2:1 ;
 - badge (forte) ≥ 4,4:1.
 
