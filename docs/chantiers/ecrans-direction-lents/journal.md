@@ -124,7 +124,9 @@ Aucun défaut fonctionnel.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | aucun (réécriture locale d'une query, aucun index livré, aucun cache) |
-| **UDR produits** | |
+| **Livré le** | 2026-10-05 (fusion dans `Develop`) |
+| **PR** | [#170](https://github.com/Lnclassapp/App.Lnclassapp/pull/170) |
+| **ADR produits** | aucun (réécriture locale d'une query, aucun index livré, aucun cache) ; notes datées de l'ADR-0067 |
+| **UDR produits** | — ; amendements datés de l'UDR-0056 (confirmation du retrait chargée à la demande) et de l'UDR-0042 |
+| **Preuve** | Challenger empirique (phase 5) : gains retrouvés (« Anciens élèves » 8,1 s → ≈ 60 ms en p50, 172 comparaisons sans différence ; « Enseignants » 441,1 → 141,7 Ko à l'octet) ; suite complète, couverture 100 % ; à la fusion de `Develop` du 2026-10-05, le correctif de #171 (`sticky-actions`), `follow_up_path` et les clés `removal.*` ont été rétablis (`8d47b314`) |
+| **Chantiers de suivi** | `travail-eleves-budget` ([#173](https://github.com/Lnclassapp/App.Lnclassapp/pull/173), lot 2 déplacé) ; p95 de « Anciens élèves » au protocole (chauffe YJIT, décision du porteur) ; `script/perf/dataset.rb` sans anciens élèves ni remédiations |

@@ -29,8 +29,8 @@ module Queries
       HANDED_IN_COLUMNS = [ "classroom_assignments.classroom_id", "exercise_sessions.student_id",
                             "COUNT(DISTINCT exercise_sessions.classroom_assignment_id) AS submitted",
                             "SUM(exercise_sessions.score_percent) AS score_sum", "COUNT(*) AS sessions" ].freeze
-      # Par clé (classe ou élève) : devoirs rendus distincts, élèves ayant rendu, somme et nombre des scores. Une ligne
-      # handed par élève et par classe, et une seule adhésion par (classe, élève) (index unique) : COUNT(*) compte les élèves.
+      # Par clé (classe ou élève) : devoirs rendus distincts, élèves ayant rendu, somme et nombre des scores. Une seule
+      # adhésion par (classe, élève) (index unique) et une ligne handed par adhésion : COUNT(*) compte les élèves ayant rendu.
       TOTALS = [ "SUM(handed.submitted)::bigint", "COUNT(*)", "SUM(handed.score_sum)::bigint", "SUM(handed.sessions)::bigint" ].freeze
       Totals = Data.define(:submitted, :students, :score_sum, :sessions) do
         def self.none = new(submitted: 0, students: 0, score_sum: 0, sessions: 0)
@@ -70,7 +70,7 @@ module Queries
         totals = totals_by("classroom_students.student_id", row.first)
 
         Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }),
-                   students: students.map { |id, first_name, last_name| student_row("#{first_name} #{last_name}", totals[id]) })
+                   students: students.map { |id, first_name, last_name| student_row("#{first_name} #{last_name}", totals.fetch(id, Totals.none)) })
       end
 
       private
@@ -124,8 +124,7 @@ module Queries
                          average_percent: (total.average if total.students >= MIN_STUDENTS_FOR_AVERAGE))
       end
 
-      def student_row(display_name, totals)
-        total = totals || Totals.none
+      def student_row(display_name, total)
         StudentRow.new(display_name:, submitted_count: total.submitted, average_percent: total.average)
       end
     end

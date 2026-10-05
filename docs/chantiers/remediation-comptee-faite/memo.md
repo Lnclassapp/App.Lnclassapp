@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | exécuté (2026-10-04) — lot 0 commité sur `fix/remediation-comptee-faite`, non poussé ; reste le challenger ([plan](plan.md#portes-de-sortie)) |
+| **Statut** | livré (#169, fusionnée dans `Develop` le 2026-10-05) |
 | **Ouvert le** | 2026-10-04 |
 | **Branche** | `fix/remediation-comptee-faite` |
 | **Programme** | `refonte-application` — suite de [`rapports-exercices`](../rapports-exercices/journal.md) |

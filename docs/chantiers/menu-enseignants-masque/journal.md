@@ -71,7 +71,9 @@ Cette branche réécrit les lignes de la même vue (lignes sans indentation, con
 
 | | |
 |---|---|
-| **Livré le** | — *(commité le 2026-10-04 sur `fix/menu-enseignants-masque`, non poussé)* |
-| **PR** | |
+| **Livré le** | 2026-10-05 (fusion dans `Develop`) |
+| **PR** | [#171](https://github.com/Lnclassapp/App.Lnclassapp/pull/171) |
 | **ADR produits** | — |
-| **UDR produits** | — |
+| **UDR produits** | — (applique l'UDR-0042, amendement du 2026-09-28) |
+| **Preuve** | Test système « le menu ⋮ d'une ligne du milieu est au-dessus des lignes suivantes » dans Chromium 141, rouge avant le correctif ; suite complète au vert. Le correctif est conservé dans #170 (`perf/ecrans-direction-lents`, commit `8d47b314`) après la fusion de `Develop` |
+| **Chantiers de suivi** | Vérifier `sticky-actions` sur les tableaux des équipes et des plans de classe |
