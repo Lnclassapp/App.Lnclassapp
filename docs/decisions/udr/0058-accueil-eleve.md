@@ -174,3 +174,11 @@ Le bloc est `hidden lg:block`. On garde la structure de l'UDR-0010, avec ces cha
   - « Hors connexion » ;
   - le bouton d'aide.
 - Une nouvelle matière proposée par Lnclass passe par `SUBJECT_TILES`, son illustration et sa teinte. La grille ne s'allonge jamais d'elle-même.
+
+## Amendement du 2026-10-05 — ordre des sections · Statut : Proposé
+
+*Chantier [`interface-eleve-organisation`](../../chantiers/interface-eleve-organisation/memo.md), [UDR-0076](0076-organisation-des-ecrans-eleve.md) §3.1. Cette section fait foi sur le §3.3 en cas d'écart, une fois acceptée.*
+
+- Famille ordinateur (§3.3), aujourd'hui seule rendue : « Ma classe », « Mes matières », annonces, « À faire » (et fiches à revoir), « Mes activités récentes ».
+- « Mes matières » remplace la carte « Cours » : une bulle illustrée par matière du niveau de l'élève, vers le catalogue filtré ; pastille ambre si un exercice de la matière est en retard (UDR-0062 §3.3) ; « Tous les cours » en pied de carte.
+- La famille téléphone (§3.2), quand elle sera codée, garde cet ordre.
