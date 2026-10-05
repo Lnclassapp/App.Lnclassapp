@@ -109,6 +109,56 @@ module Queries
                                                        cards["Rentrée numérique"].image?, cards["Rentrée numérique"].audio? ]
       end
 
+      test "AV-07 — a card carries the theme of its message, « Ciel » by default" do
+        from_teacher("Nouvelles fiches", theme: "mangue")
+        from_team("Rentrée numérique")
+
+        assert_equal({ "Nouvelles fiches" => "mangue", "Rentrée numérique" => "ciel" }, page.cards.to_h { [ it.title, it.theme ] })
+        assert_equal %w[mangue ciel], carousel.cards.map(&:theme)
+      end
+
+      test "AV-08 — a card carries the drawing of the team as an Illustration, a base illustration as its key" do
+        bus = create_illustration(name: "Bus scolaire", created_by: @fatou)
+        from_teacher("Sortie", illustration: bus)
+        from_team("Rentrée numérique", illustration: "calendar")
+
+        cards = page.cards.index_by(&:title)
+        drawing = cards["Sortie"].illustration
+
+        assert_kind_of Entities::Communication::Illustration, drawing
+        assert_equal [ bus.id, bus.public_id, "Bus scolaire", "0 0 64 64", bus.shapes ],
+                     [ drawing.id, drawing.public_id, drawing.name, drawing.view_box, drawing.shapes ]
+        assert_equal "calendar", cards["Rentrée numérique"].illustration
+      end
+
+      test "AV-10 — a retired drawing of the team stays on the live messages that carry it" do
+        bus = create_illustration(name: "Bus scolaire", created_by: @fatou, retired_at: 1.day.ago)
+        sortie = from_teacher("Sortie", illustration: bus)
+
+        card = @query.card(reader: reader, now: @now, public_id: sortie.public_id)
+
+        assert_predicate card.illustration, :retired?
+        assert_equal bus.public_id, card.illustration.public_id
+        assert_predicate carousel.cards.sole.illustration, :retired?
+      end
+
+      test "AV-07, AV-08 — cards of any relation (the moderation) carry their theme and their drawing of the team" do
+        bus = create_illustration(name: "Bus scolaire", created_by: @fatou)
+        sortie = from_direction("Sortie", theme: "nuit", illustration: bus)
+
+        card = @query.cards(Orm::Message.where(id: sortie.id)).sole
+
+        assert_equal [ "nuit", "Bus scolaire" ], [ card.theme, card.illustration.name ]
+      end
+
+      test "a card built without a theme takes « Ciel », the look before the themes" do
+        card = InboxQuery::MessageCard.new(public_id: "msg", title: "Titre", body: "Texte.", illustration: "info", author_role: :team,
+                                           gender: nil, last_name: "Traoré", material_name: nil, anonymized: false, official: false,
+                                           image: false, audio: false, edited: false, dismissed: false)
+
+        assert_equal Entities::Communication::Message::DEFAULT_THEME, card.theme
+      end
+
       test "an anonymized author is marked on the card" do
         from_teacher("Nouvelles fiches")
         @kouassi.update!(anonymized_at: Time.current)
@@ -148,10 +198,13 @@ module Queries
         assert_equal [ [ "Ancienne", false ], [ "Récente", false ] ], cards.map { [ it.title, it.dismissed? ] }
       end
 
+      # AV-08: the drawings of the team of all the cards come in one query, whatever their number.
       test "ADR-0067 — the carousel and the list cost the same number of queries for one message or for eight" do
+        drawings = Array.new(3) { |index| create_illustration(name: "Dessin #{index}", created_by: @fatou) }
         build = lambda do |count|
           count.times do |index|
-            message = index.even? ? from_teacher("Fiches #{index}") : from_team("Équipe #{index}")
+            illustration = index.odd? ? "info" : drawings[index % 3]
+            message = index.even? ? from_teacher("Fiches #{index}", illustration:) : from_team("Équipe #{index}", illustration:)
             attach(message, :audio)
             dismiss_message(message:, user: @awa) if index == 2
           end
