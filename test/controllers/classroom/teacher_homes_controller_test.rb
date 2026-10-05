@@ -104,6 +104,18 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_announcements form[action*='dismissal']", 0
   end
 
+  test "CA-2: neither an announcement of another school, nor one to the direction, reaches the teacher's home" do
+    team = create_team_member(second_factor: false)
+    create_message(author: team, title: "Ailleurs", audience: "teachers", school: create_school)
+    create_message(author: team, title: "Pour la direction", audience: "school_admins")
+    create_message(author: team, title: "Chez nous", audience: "teachers", school: @school)
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_equal [ "Chez nous" ], css_select("#student_home_announcements li article h3").map { it.text.strip }
+  end
+
   test "CA-2: without a readable announcement, no announcement section" do
     sign_in_as @teacher
 

@@ -292,6 +292,17 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{own.slug} div.mb-4", text: including("Tle D")
   end
 
+  test "CA-5: a draft or archived course of the teacher's subject and levels stays out of their catalogue" do
+    draft = create_course(name: "Brouillon SVT", level: @tle, series: @course.series, material: @svt, status: "draft")
+    archived = create_course(name: "Archivé SVT", level: @tle, series: @course.series, material: @svt, status: "archived")
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
+
+    get courses_path
+
+    assert_select "#course_#{@course.slug}"
+    [ draft, archived ].each { assert_select "#course_#{it.slug}", 0 }
+  end
+
   test "CA-5: a teacher without a classroom this year sees no course, and is invited to declare their classrooms" do
     sign_in_as create_teacher(material: @svt)
 

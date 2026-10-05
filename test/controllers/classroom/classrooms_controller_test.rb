@@ -109,7 +109,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
 
-  test "jours de séance renseignés : « Vos jours de séance : lundi, jeudi » et « Modifier » dans le frame modal" do
+  test "jours de séance renseignés : « Vos jours de séance : lundi, jeudi » et « Modifier » dans le menu ⋮, vers le frame modal" do
     [ 4, 1 ].each { Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: it) }
     sign_in_as @teacher
 
@@ -118,8 +118,12 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#classroom_session_days" do
       assert_select "h2", text: I18n.t("#{scope}.session_days.title")
       assert_select "p", text: "Vos jours de séance : lundi, jeudi"
-      assert_select "a[href='#{edit_classroom_session_days_path(@classroom.public_id)}'][data-turbo-frame=modal]",
-                    text: I18n.t("#{scope}.session_days.edit")
+      # UDR-0077 §3.4 : « Modifier » est une entrée du menu ⋮ du bloc, plus un bouton visible.
+      assert_select "button[aria-haspopup=menu][aria-controls=classroom-session-days-menu][aria-label=?]",
+                    I18n.t("#{scope}.session_days.menu")
+      assert_select "#classroom-session-days-menu[role=menu] a[role=menuitem][data-turbo-frame=modal]" \
+                    "[href='#{edit_classroom_session_days_path(@classroom.public_id)}']", text: I18n.t("#{scope}.session_days.edit")
+      assert_select "a.inline-flex[href='#{edit_classroom_session_days_path(@classroom.public_id)}']", 0
     end
   end
 
