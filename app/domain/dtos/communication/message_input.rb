@@ -20,8 +20,9 @@ module Dtos
         audio: { megabytes: 10, header: Entities::Communication::AudioHeader,
                  formats: { mpeg: %w[audio/mpeg audio.mp3], mp4: %w[audio/mp4 audio.m4a] } }
       }.freeze
-      # Les formats se lisent dans les 12 premiers octets (« RIFF....WEBP », « ....ftypM4A »).
-      HEADER_BYTES = 12
+      # Les formats se lisent dans les 4096 premiers octets : un MP3 de téléphone peut commencer par du remplissage
+      # (ADR-0081 §4.4) ; une image, dans ses 12 premiers (« RIFF....WEBP »).
+      HEADER_BYTES = 4096
       # Format d'un champ datetime-local.
       TIME_FORMAT = "%Y-%m-%dT%H:%M".freeze
       BOOLEAN = ActiveModel::Type::Boolean.new

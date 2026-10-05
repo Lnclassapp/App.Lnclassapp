@@ -50,7 +50,7 @@ Deux points sont dangereux :
 ### 4.1 Durée et plafond (amende l'ADR-0078 §4.1)
 
 - **Plus de date de fin choisie.** `ends_at` = parution + **30 jours** (`Message::DURATION`). Pour une annonce programmée, la fin court depuis sa date de parution. La modification d'une annonce publiée ne change pas sa fin. Un brouillon n'a pas de fin. `Message::MAX_DURATION` et la contrainte des 90 jours disparaissent ; la contrainte « une annonce programmée ou publiée a une fin » reste.
-- **3 annonces en ligne au plus par compte auteur** (`Message::LIVE_CAP = 3`). « En ligne » = `published`, `published_at <= now < ends_at`. Ne comptent pas : brouillon, programmée, archivée, retirée, terminée.
+- **3 annonces en ligne au plus par compte auteur** (`Message::LIVE_CAP = 3`). « En ligne » = `published` et `now < ends_at` ; `published_at` n'est pas comparé, pour qu'une parution concurrente qui a lu son horloge avant le verrou compte celle qui vient d'avoir lieu. Ne comptent pas : brouillon, programmée, archivée, retirée, terminée.
 - **À chaque parution** (création publiée tout de suite, brouillon ou programmée publiée par son auteur, passage du job de publication), dans **la même transaction** :
   1. la ligne `users` de l'auteur est verrouillée (`SELECT … FOR UPDATE`) ;
   2. ses annonces en ligne sont lues, de la plus ancienne à la plus récente ;

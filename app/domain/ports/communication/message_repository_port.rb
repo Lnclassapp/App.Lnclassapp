@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::MessageRepositoryPort
-# Rôle : contrat des annonces : lecture par public_id, écriture avec leurs classes ciblées, rejets, publication programmée
-# ADR  : 0045, 0078
+# Rôle : contrat des annonces : lecture par public_id, écriture avec leurs classes ciblées, rejets, publication, plafond
+# ADR  : 0045, 0078, 0081
 module Ports
   module Communication
     # Gelé au Lot 0 : les lots A, B et C le consomment, aucun ne le redéfinit.
@@ -38,6 +38,16 @@ module Ports
       # → :team | :school_admin | :teacher | :student
       def author_role(message:)
         raise NotImplementedError, "#{self.class} doit implémenter #author_role"
+      end
+
+      # ADR-0081 §4.1 (Lot 0 d'annonces-v2). À appeler DANS la transaction de l'appelant, celle de la parution : verrouille
+      # la ligne users de l'auteur (SELECT … FOR UPDATE) jusqu'à sa fin, puis lit ses annonces en ligne. Deux parutions
+      # du même auteur se suivent donc. En ligne = published et now < ends_at (published_at n'est pas comparé : une
+      # parution qui a lu son horloge avant le verrou compte celle qui vient d'avoir lieu) ; brouillon, programmée,
+      # archivée, retirée et terminée ne comptent pas. → [Message] avec leurs classes, la plus ancienne d'abord
+      # (published_at, puis id)
+      def live_of(author_id:, now:)
+        raise NotImplementedError, "#{self.class} doit implémenter #live_of"
       end
     end
   end

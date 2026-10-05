@@ -303,7 +303,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     long = upload(MP3 + ("\x00".b * (12 * 1024 * 1024)), "message.mp3", "audio/mpeg")
 
     { { image: pdf } => [ :image, "Ce fichier n'est pas accepté." ], { image: heavy } => [ :image, "Ce fichier est trop lourd (2 Mo au plus)." ],
-      { audio: wav } => [ :audio, "Ce fichier n'est pas accepté." ], { audio: long } => [ :audio, "Ce fichier est trop lourd (10 Mo au plus)." ] }
+      { audio: wav } => [ :audio, "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ], { audio: long } => [ :audio, "Ce fichier est trop lourd (10 Mo au plus)." ] }
       .each do |file, (field, message)|
       publish(audience: "students", **file)
 
