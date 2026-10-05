@@ -113,5 +113,5 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
   end
 
   # The figures of a classroom's card, on the page of its level.
-  def figures(classroom) = find("#classroom_#{classroom.public_id}").all("ul > li").map { it.text.strip }
+  def figures(classroom) = find("#classroom_#{classroom.public_id}").all("ul > li").map { it.text.squish }
 end
