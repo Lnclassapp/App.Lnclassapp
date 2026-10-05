@@ -3,9 +3,11 @@ require "test_helper"
 # ADR-0078 §4.1 (amends ADR-0045 §4): the three tables of the announcements and every rule the database holds by itself.
 # Each CHECK refuses a faulty row; dismissals and targeted classrooms are unique per pair; the files hang on the message.
 class Orm::MessageConstraintsTest < ActiveSupport::TestCase
+  # ADR-0081 §4.2 et §4.3 : le thème et « exactement une illustration » s'ajoutent (chantier annonces-v2, Lot 0).
   CHECKS = %w[messages_audience_values messages_status_values messages_illustration_values messages_title_present
               messages_body_present messages_published_at_when_live messages_ends_at_when_live messages_ends_at_window
-              messages_withdrawn_iff_withdrawal messages_classrooms_need_school].freeze
+              messages_withdrawn_iff_withdrawal messages_classrooms_need_school messages_theme_values
+              messages_one_illustration].freeze
 
   setup do
     @school = create_school
@@ -69,11 +71,12 @@ class Orm::MessageConstraintsTest < ActiveSupport::TestCase
     assert write(status: "archived", published_at: nil, ends_at: nil).persisted?
   end
 
-  test "the end comes after the publication, at most 90 days later" do
+  # ADR-0081 §4.1 : la fin est calculée (parution + 30 jours) ; la borne des 90 jours disparaît de la base.
+  test "the end comes after the publication; the database no longer bounds it to 90 days" do
     assert_refused(ends_at: @now)
     assert_refused(ends_at: @now - 1.day)
-    assert_refused(ends_at: @now + 90.days + 1.second)
-    assert write(ends_at: @now + 90.days).persisted?
+    assert write(ends_at: @now + 90.days + 1.second).persisted?
+    assert write(ends_at: @now + 30.days).persisted?
     assert write(status: "draft", published_at: nil, ends_at: @now + 200.days).persisted?
   end
 

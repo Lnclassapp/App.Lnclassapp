@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::MessageRepository
-# Rôle : annonces et leurs classes ciblées, écrites ensemble ; rejets effacés ; annonces programmées dont l'heure est venue
-# ADR  : 0029, 0045, 0078
+# Rôle : annonces et leurs classes ciblées, écrites ensemble ; rejets effacés ; programmées venues ; en ligne sous verrou
+# ADR  : 0029, 0045, 0078, 0081
 module Repositories
   module Communication
     class MessageRepository
@@ -8,7 +8,7 @@ module Repositories
 
       # Ce qu'une écriture pose sur la ligne ; l'auteur et le public_id ne changent qu'à la création.
       WRITTEN = %i[title body audience school_id illustration status published_at ends_at edited_at withdrawn_at
-                   withdrawn_by_id].freeze
+                   withdrawn_by_id theme illustration_id].freeze
 
       def find_by_public_id(public_id:)
         record = Orm::Message.find_by(public_id:)
@@ -45,6 +45,16 @@ module Repositories
 
       def author_role(message:) = Orm::User.where(id: message.author_id).pick(:role).to_sym
 
+      # ADR-0081 §4.1 : le verrou de la ligne users dure jusqu'à la fin de la transaction de l'appelant ; une seconde
+      # parution du même auteur attend ici, puis lit ce que la première a écrit. Trois requêtes : verrou, lignes, classes.
+      def live_of(author_id:, now:)
+        Orm::User.where(id: author_id).lock.pluck(:id)
+        records = Orm::Message.where(author_id:, status: "published", published_at: ..now).where("ends_at > ?", now)
+                              .order(:published_at, :id).to_a
+        classroom_ids = classroom_ids_of(records.map(&:id))
+        records.map { entity(it, classroom_ids.fetch(it.id, [])) }
+      end
+
       private
 
       # Écrit les classes ciblées, une fois chacune. → leurs ids triés
@@ -65,7 +75,8 @@ module Repositories
           id: record.id, public_id: record.public_id, author_id: record.author_id, title: record.title, body: record.body,
           audience: record.audience, school_id: record.school_id, classroom_ids:, illustration: record.illustration,
           status: record.status, published_at: record.published_at, ends_at: record.ends_at, edited_at: record.edited_at,
-          withdrawn_at: record.withdrawn_at, withdrawn_by_id: record.withdrawn_by_id
+          withdrawn_at: record.withdrawn_at, withdrawn_by_id: record.withdrawn_by_id, theme: record.theme,
+          illustration_id: record.illustration_id
         )
       end
     end

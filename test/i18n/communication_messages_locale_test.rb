@@ -15,6 +15,14 @@ class CommunicationMessagesLocaleTest < ActiveSupport::TestCase
     assert_equal Entities::Communication::Message::AUDIENCES, t("communication.audiences").keys.map(&:to_s)
   end
 
+  # UDR-0075 §3.1 : les libellés des dix thèmes, dans l'ordre de Entities::Communication::Message::THEMES (Lot 0 de
+  # annonces-v2, lus par les lots A et B).
+  test "AV-07 — les dix thèmes ont chacun leur libellé, dans l'ordre de l'ADR-0081" do
+    assert_equal({ ciel: "Ciel", lagune: "Lagune", menthe: "Menthe", citron: "Citron", mangue: "Mangue", corail: "Corail",
+                   hibiscus: "Hibiscus", lavande: "Lavande", indigo: "Indigo", nuit: "Nuit" }, t("communication.themes"))
+    assert_equal Entities::Communication::Message::THEMES, t("communication.themes").keys.map(&:to_s)
+  end
+
   test "la signature et les onglets" do
     assert_equal({ team: "Lnclass", school_admin: "Direction", male: "M.", female: "Mme" }, t("communication.signature"))
     assert_equal({ label: "Annonces", received: "Reçues", mine: "Mes annonces", school: "Enseignants", all: "Toutes" },

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
-# Rôle : référentiel, DRENA, établissements, contenu, blog, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077 · UDR : 0067, 0068, 0070
+# Rôle : référentiel, DRENA, établissements, contenu, blog, illustrations d'annonce, imports, invitations, comptes, jobs
+# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081 · UDR : 0067, 0068, 0070, 0075
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -69,6 +69,12 @@ namespace :teams do
     member { patch :publish; patch :archive }
   end
   resources :imports, only: %i[index new create show], param: :public_id
+  # ADR-0081 §4.3, UDR-0075 §3.5 : la bibliothèque d'illustrations d'annonce, une illustration par son public_id. Ni
+  # suppression ni PUT : le retrait la sort du choix, le renommage passe par PATCH seul.
+  resources :announcement_illustrations, path: "announcement-illustrations", param: :public_id, only: %i[index create edit]
+  patch "announcement-illustrations/:public_id", to: "announcement_illustrations#update", as: :announcement_illustration
+  post "announcement-illustrations/:public_id/retirement", to: "announcement_illustration_retirements#create",
+                                                          as: :announcement_illustration_retirement
   resources :invitations, only: %i[new create]
   resource :account_lookup, only: :show, path: "accounts"
   # ADR-0036 §4 : une demande de suppression d'un compte élève, datée, traitée depuis la fiche du compte (modale).

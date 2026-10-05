@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_05_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -494,6 +494,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_090000) do
     t.index ["user_id"], name: "index_message_dismissals_on_user_id"
   end
 
+  create_table "message_illustrations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "created_by_id", null: false
+    t.string "name", limit: 30, null: false
+    t.string "public_id", limit: 14, null: false
+    t.datetime "retired_at"
+    t.jsonb "shapes", null: false
+    t.datetime "updated_at", null: false
+    t.string "view_box", null: false
+    t.index ["created_by_id"], name: "index_message_illustrations_on_created_by_id"
+    t.index ["public_id"], name: "index_message_illustrations_on_public_id", unique: true
+    t.check_constraint "\nCASE\n    WHEN jsonb_typeof(shapes) = 'array'::text THEN jsonb_array_length(shapes) <= 500\n    ELSE true\nEND", name: "message_illustrations_shapes_max"
+    t.check_constraint "btrim(name::text) <> ''::text", name: "message_illustrations_name_present"
+    t.check_constraint "jsonb_typeof(shapes) = 'array'::text", name: "message_illustrations_shapes_array"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.string "audience", null: false
     t.bigint "author_id", null: false
@@ -501,16 +517,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_090000) do
     t.datetime "created_at", null: false
     t.datetime "edited_at"
     t.datetime "ends_at"
-    t.string "illustration", null: false
+    t.string "illustration"
+    t.bigint "illustration_id"
     t.string "public_id", limit: 14, null: false
     t.datetime "published_at"
     t.bigint "school_id"
     t.string "status", null: false
+    t.string "theme", default: "ciel", null: false
     t.string "title", limit: 60, null: false
     t.datetime "updated_at", null: false
     t.datetime "withdrawn_at"
     t.bigint "withdrawn_by_id"
     t.index ["author_id", "created_at"], name: "index_messages_on_author_id_and_created_at"
+    t.index ["illustration_id"], name: "index_messages_on_illustration_id"
     t.index ["public_id"], name: "index_messages_on_public_id", unique: true
     t.index ["school_id"], name: "index_messages_on_school_id"
     t.index ["status", "published_at"], name: "index_messages_on_status_and_published_at"
@@ -520,10 +539,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_090000) do
     t.check_constraint "audience::text = ANY (ARRAY['all'::character varying, 'students'::character varying, 'teachers'::character varying, 'school_admins'::character varying, 'classrooms'::character varying]::text[])", name: "messages_audience_values"
     t.check_constraint "btrim(body::text) <> ''::text", name: "messages_body_present"
     t.check_constraint "btrim(title::text) <> ''::text", name: "messages_title_present"
-    t.check_constraint "ends_at IS NULL OR published_at IS NULL OR ends_at > published_at AND ends_at <= (published_at + 'P90D'::interval)", name: "messages_ends_at_window"
+    t.check_constraint "ends_at IS NULL OR published_at IS NULL OR ends_at > published_at", name: "messages_ends_at_window"
     t.check_constraint "status::text <> ALL (ARRAY['scheduled'::character varying, 'published'::character varying]::text[]) OR ends_at IS NOT NULL", name: "messages_ends_at_when_live"
     t.check_constraint "illustration::text = ANY (ARRAY['info'::character varying, 'calendar'::character varying, 'homework'::character varying, 'sheets'::character varying, 'exam'::character varying, 'meeting'::character varying, 'celebration'::character varying, 'holidays'::character varying]::text[])", name: "messages_illustration_values"
+    t.check_constraint "num_nonnulls(illustration, illustration_id) = 1", name: "messages_one_illustration"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'scheduled'::character varying, 'published'::character varying, 'archived'::character varying, 'withdrawn'::character varying]::text[])", name: "messages_status_values"
+    t.check_constraint "theme::text = ANY (ARRAY['ciel'::character varying, 'lagune'::character varying, 'menthe'::character varying, 'citron'::character varying, 'mangue'::character varying, 'corail'::character varying, 'hibiscus'::character varying, 'lavande'::character varying, 'indigo'::character varying, 'nuit'::character varying]::text[])", name: "messages_theme_values"
   end
 
   create_table "pin_recovery_codes", force: :cascade do |t|
@@ -975,6 +996,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_090000) do
   add_foreign_key "message_classrooms", "messages", on_delete: :cascade
   add_foreign_key "message_dismissals", "messages", on_delete: :cascade
   add_foreign_key "message_dismissals", "users", on_delete: :restrict
+  add_foreign_key "message_illustrations", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "messages", "message_illustrations", column: "illustration_id", on_delete: :restrict
   add_foreign_key "messages", "schools", on_delete: :restrict
   add_foreign_key "messages", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "messages", "users", column: "withdrawn_by_id", on_delete: :restrict

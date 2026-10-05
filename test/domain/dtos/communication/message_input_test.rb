@@ -78,9 +78,9 @@ module Dtos
 
       test "AN-18 — a PDF renamed « affiche.png » and a WAV are refused: the error names the refused file" do
         assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: photo("document.pdf")))
-        assert_equal({ audio: [ "Ce fichier n'est pas accepté." ] }, errors(audio: StringIO.new(WAV)))
+        assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] }, errors(audio: StringIO.new(WAV)))
         assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: StringIO.new("")))
-        assert_equal({ audio: [ "Ce fichier n'est pas accepté." ] }, errors(audio: photo("photo.png")))
+        assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] }, errors(audio: photo("photo.png")))
       end
 
       test "AN-18 — an image of 3 MB and an audio of 12 MB are refused by their weight, before any read" do
