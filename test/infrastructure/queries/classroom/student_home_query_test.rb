@@ -234,10 +234,32 @@ module Queries
                      home.pending_gaps.map { it.to_h.values_at(:essential_name, :essential_slug, :course_slug) }
       end
 
+      # UDR-0076 §3.1: the subjects with a published course of the student's level, once each, in the charter order
+      # (Mathématiques, Physique-Chimie, SVT, Français, Histoire-Géographie, EDHC, Philosophie), then the others by name.
+      test "the subjects of the student's level, published courses only, once each, in the charter order" do
+        level = @classroom.level
+        create_course(material: @svt, level:)
+        create_course(material: create_material(name: "Anglais", category: "literature"), level:)
+        create_course(material: create_material(name: "Mathématiques"), level:)
+        create_course(material: create_material(name: "Physique-Chimie"), level:, status: "draft")
+        create_course(material: create_material(name: "Français", category: "literature"), level: create_level)
+
+        assert_equal [ %w[mathematiques Mathématiques], %w[svt SVT], %w[anglais Anglais] ],
+                     home.subjects.map { [ it.slug, it.name ] }
+      end
+
+      test "a student of another series sees no subject of a course reserved to a series" do
+        series = create_series(name: "D")
+        create_course(material: create_material(name: "Mathématiques"), level: @classroom.level, series:)
+
+        assert_equal %w[svt], home.subjects.map(&:slug)
+      end
+
       test "an empty home" do
         row = home
 
         assert_equal [ [], [], [], [] ], row.to_h.values_at(:assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs)
+        assert_equal %w[svt], row.subjects.map(&:slug)
       end
     end
   end

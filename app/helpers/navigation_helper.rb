@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -45,8 +45,9 @@ module NavigationHelper
   # Celles de la direction ne servent plus qu'à la page de démonstration du shell (UDR-0052).
   # Élève : les annonces juste après « À faire » (UDR-0071 §3.1) ; une vue qui ne connaît pas une clé ne rend rien.
   HOME_SECTIONS = {
-    student: [ [ :todo, "clipboard-document-check" ], [ :announcements, "megaphone" ], [ :classroom, "academic-cap" ],
-               [ :courses, "book-open" ] ],
+    # UDR-0076 §3.1 : classe, matières, annonces, à faire ; l'activité récente suit toujours, hors de cette liste.
+    student: [ [ :classroom, "academic-cap" ], [ :subjects, "squares-2x2" ], [ :announcements, "megaphone" ],
+               [ :todo, "clipboard-document-check" ] ],
     # UDR-0069 §3.1 : « Cours » passe en 2e ; UDR-0068 §3.4 : le Référentiel quitte l'accueil équipe.
     teacher: [ [ :classrooms, "user-group" ], [ :courses, "book-open" ], [ :activity, "bolt" ] ],
     team: [ [ :regions, "building-library" ], [ :activity, "bolt" ] ],

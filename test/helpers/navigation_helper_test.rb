@@ -194,6 +194,11 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal %i[regions activity], home_sections_for(:team).map(&:first)
   end
 
+  # UDR-0076 §3.1 : l'accueil de l'élève se lit classe, matières, annonces, à faire ; l'activité récente suit toujours.
+  test "the student's home reads classroom, subjects, announcements then todo, without a courses card" do
+    assert_equal %i[classroom subjects announcements todo], home_sections_for(:student).map(&:first)
+  end
+
   # UDR-0069 §3.6 : la carte « Parrainage » de l'enseignant, frame différé, sauf sur la page qui porte déjà le bloc.
   test "the teacher's sidebar defers the referral card, except on the invite page itself" do
     request.path = "/teachers"

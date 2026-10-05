@@ -49,14 +49,12 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # UDR-0071 §3.1: « Annonces » is the second section of the student home, right after « À faire ».
-  test "the student shell shows the announcements section second" do
+  # UDR-0076 §3.1 (amends UDR-0071 §3.1): the student home reads classroom, subjects, announcements, « À faire ».
+  test "the student shell shows classroom, subjects, announcements, then « À faire »" do
     get design_shell_path(role: "student")
 
-    assert_select "main h2", count: 4
-    assert_select "main h2", text: I18n.t("shared.home.sections.announcements.title")
     titles = css_select("main h2").map { it.text.strip }
-    assert_equal I18n.t("shared.home.sections.announcements.title"), titles.second
+    assert_equal %w[classroom subjects announcements todo].map { I18n.t("shared.home.sections.#{it}.title") }, titles
   end
 
   test "refuses an unknown role" do

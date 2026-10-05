@@ -22,7 +22,7 @@ L'estimateur prévoit **1 ligne** à la sortie de la jointure aux adhésions (co
 |---|---|---|---|
 | 2026-10-05 | La valeur avant est celle du jour (156,9 ms p95), pas les 230 ms de `ecrans-direction-lents`. | Même code, même base : la machine était plus chargée le 2026-10-04. Chaque levier se compare à `Develop` rejoué dans la même série. | Non |
 | 2026-10-05 | `COUNT(*)` remplace `COUNT(DISTINCT handed.student_id)`. | Une ligne `handed` par (classe, élève), et l'index unique `(classroom_id, student_id)` de `classroom_students` : une seule adhésion par élève et par classe. | Non |
-| 2026-10-05 | Non-régression par comparaison complète, pas par échantillon : les 35 035 aperçus et pages de classe du jeu, avant et après. | Une requête d'agrégat réécrite se trompe sur les cas rares (deux sessions d'un devoir, remédiation, départ) ; le jeu de l'ADR-0067 les contient tous. | Non |
+| 2026-10-05 | Non-régression par comparaison complète, pas par échantillon : les 35 035 aperçus et pages de classe du jeu, avant et après. | Une requête d'agrégat réécrite se trompe sur les cas rares. Le jeu de l'ADR-0067 contient 61 407 devoirs rendus plusieurs fois, 14 698 remédiations et 357 élèves anonymisés présents, mais **aucune adhésion quittée** et un seul élève présent sans rendu (défaut D3 du challenger) : les départs sont prouvés par les tests de la query et par les scénarios du challenger, pas par la comparaison complète. | Non |
 | 2026-10-05 | Merge de `Develop` (#167) : le levier 2 (élèves présents comptés dans la requête des totaux, `LEFT JOIN`) est abandonné ; le levier 1 reste. | `Develop` compte déjà, en une lecture (`present_counts`, `GROUPING SETS`), l'effectif de chaque classe et les élèves distincts de l'établissement dont l'accueil a besoin : la requête que le levier 2 retirait n'existe plus. Requêtes de l'écran : celles de `Develop`. | Non |
 
 ## Leviers essayés
@@ -53,7 +53,10 @@ Plan de la requête après les lots 1 et 2 (27,9 ms) : lecture d'index seule des
 
 ## Ce qui a dérapé
 
-- …
+- **#167 (`accueil-direction`) a été fusionnée pendant le chantier** et modifie la même query : elle compte les élèves présents distincts de l'établissement par `GROUPING SETS` dans `present_counts`, la requête que le lot 2 supprimait. À la fusion de `Develop` (2026-10-05), **le lot 2 est retiré** ; le lot 1 s'applique tel quel sur la version de #167. Le lot 2, prouvé par le challenger sur l'ancienne base, n'est pas gardé « par principe » : un lot se rejoue mesuré sur la base qui l'accueille.
+- **#173 a été fusionnée (12 h 27) pendant que je préparais la mesure finale.** Ma première « mesure finale » comparait donc `Develop`… qui contenait déjà le lot 1 : aucun écart, à juste titre. La mesure finale compare `f75011c7`, `Develop` juste avant la fusion. Le rapport du challenger et la correction de D3, poussés sur la branche après la fusion, entrent par la PR de clôture.
+- **L'écran mesuré n'était plus le même.** Depuis #167, `/school-admin/classrooms` est l'accueil de la direction, gardé 5 minutes : mesuré au protocole, il lit le cache (28 ms, 9 requêtes) et ne dit rien de la query. Il se mesure cache vide (`PERF_COLD=1`), et la page d'un niveau, qui appelle la query en direct, entre dans `measure_screens.rb` (`admin_level`).
+- **Mes tests ont tourné pendant la série B du challenger** (vers 11 h 59, 4 workers) : je résolvais le conflit avec #167. Ses chiffres de B restent dans la fourchette des autres séries, mais une mesure de phase 5 se protège : rien de lourd sur la machine tant que le challenger mesure.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -67,11 +70,34 @@ Plan de la requête après les lots 1 et 2 (27,9 ms) : lecture d'index seule des
 |---|---|---|
 | p95 de « Travail des élèves » sous 100 ms, prouvé | La queue vient de la machine de mesure ; le code a rendu ce qu'un calcul en direct peut rendre. | Si le challenger mesure encore > 100 ms sur une machine calme : dénormaliser les totaux, avec ADR |
 
+## Rapport du challenger
+
+*2026-10-05, phase 5. Rôle distinct de l'auteur : il n'a écrit aucun code du chantier ; il a rejoué le bench sur sa propre copie de la base, avant de lire le memo. Mesuré sur la tête de la PR **avant** la fusion de #167 (lots 1 et 2), contre `Develop` `d65938c8`.*
+
+**Verdict : le gain est reproduit ; aucun défaut de code ; trois écarts de documentation.**
+
+| Affirmation | Verdict | Chiffres du challenger (12 exécutions de chaque côté, 4 séries alternées) |
+|---|---|---|
+| p50 −40 % | **retrouvé, mieux** | 97,8 → 53,8 ms (−45 %) |
+| SQL p50 −56 % | **retrouvé** | 64,6 → 26,8 ms (−59 %) |
+| Une requête de moins, −7 % d'allocations | **retrouvé** | 11 → 10 ; ≈ 19 350 → ≈ 18 065 |
+| Requête des totaux 73,4 → 27,9 ms | **gain retrouvé** | 74,4 → 33,8 ms en médiane (28–38 annoncés au plan) |
+| Chiffres identiques | **retrouvé** | 35 035 sorties octet pour octet, plus 9 scénarios piégés dans une transaction annulée (départs au seuil de 5 élèves, anonymisé, élève de deux classes, classe entièrement partie, sessions d'un autre établissement, remédiation seule, devoirs archivés) : 79 sorties identiques |
+| Témoin inchangé | **retrouvé** | p50 20,7 → 20,4 ms |
+| p95 non atteint (160 → 133 ms) | **133 ms non retrouvé** | 152,4 → **101,5 ms** (−33 %) ; 2 séries sur 4 sous 100 ms (93 ; 92), 2 au-dessus (108 ; 113) |
+| La queue vient de la machine | **plausible** | p95/p50 du témoin ≈ 1,7, de l'écran ≈ 1,9 ; pointes de vue sans GC ; 150 mesures dans un processus : p95 **83,9 ms** |
+
+- **D1, D2** (memo) : la phrase « une classe sans session rendue est absente des totaux » et le passage « `COUNT(DISTINCT)` → `COUNT(*)` » décrivaient le lot 1, pas le lot 2 (`LEFT JOIN`, `COUNT(handed.student_id)`). **Sans objet depuis le retrait du lot 2** : ils décrivent de nouveau le code.
+- **D3** (journal) : le jeu n'a aucun départ ; corrigé dans « Décisions prises en cours de route ».
+- **O1** : avec le lot 2, le plan lisait toute la table `users` (seq scan, 43 797 lignes, ≈ 5 ms), un coût qui suit la table entière et non l'établissement. Sans objet depuis le retrait du lot 2.
+
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
-| **ADR produits** | aucun |
+| **Livré le** | 2026-10-05 (fusion dans `Develop`) |
+| **PR** | [#173](https://github.com/Lnclassapp/App.Lnclassapp/pull/173) ; clôture et mesure finale : PR de `docs/travail-eleves-budget-cloture` |
+| **ADR produits** | aucun (réécriture locale d'une requête de lecture) |
 | **UDR produits** | aucun |
+| **Preuve** | Lot 1 : accueil cache vide p50 115 → 86 ms, SQL 75 → 47 ms ; page d'un niveau p50 60 → 53 ms, SQL 27 → 20 ms ; 38 485 sorties identiques ; challenger (lots 1 et 2, ancien écran) : p50 −45 %, SQL −59 %, 35 035 sorties et 9 scénarios piégés identiques ; 4 192 tests, couverture 100 % |
+| **Chantiers de suivi** | p95 de la page d'un niveau (107 ms) et de l'accueil cache vide (142 ms) au-dessus de 100 ms : la queue vient surtout de la machine (témoin p95 ≈ 1,7 × p50) ; à rejouer sur une machine calme avant tout levier qui demanderait un ADR (dénormalisation) |

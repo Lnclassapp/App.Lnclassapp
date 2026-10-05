@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071 · ADR : 0009, 0049, 0067
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076 · ADR : 0009, 0049, 0067
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -142,7 +142,8 @@ module ComponentsHelper
   }.flat_map { |slugs, (file, tint)| slugs.map { [ it, Illustration.new(path: "subjects/#{file}.svg", tint:) ] } }.to_h.freeze
   SUBJECT_ILLUSTRATION_FALLBACK = Illustration.new(path: "subjects/generique.svg", tint: "bg-mist")
   # UDR-0074 §3.5, §3.7 : pastille de la direction posée sur une bulle ; classes écrites en entier pour Tailwind.
-  SIGNAL_DOTS = { green: "bg-signal-green", yellow: "bg-signal-yellow", red: "bg-signal-red" }.freeze
+  # warning : l'ambre de l'urgence, sur la matière d'un exercice en retard de l'élève (UDR-0076 §3.1, charte §9).
+  SIGNAL_DOTS = { green: "bg-signal-green", yellow: "bg-signal-yellow", red: "bg-signal-red", warning: "bg-warning" }.freeze
 
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
