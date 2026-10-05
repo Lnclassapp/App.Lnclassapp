@@ -15,8 +15,8 @@ Lot 0 — Bench et décision (fait en cadrage : 3 scripts, mesure « avant », A
   │     ✗ Lot C — `immutable` sur les assets           FERMÉ (non mesurable ici, dépendait de B)
   │
   ├─► Lot D — Cloudflare : Early Hints + Tiered Cache  (porteur, tableau de bord Cloudflare)
-  ├─► Lot R — Région europe-west4 : application, PostgreSQL et fichiers   FAIT en production et Staging ;
-  │     base de Develop en attente de validation ; mesure depuis Abidjan attendue
+  ├─► Lot R — Région europe-west4 : application, PostgreSQL et fichiers   FAIT en production et Staging,
+  │     Develop le 2026-10-05 ; mesure depuis Abidjan attendue
   │
   └─► Lot E — Audit de toutes les pages (2026-10-05)
         ├─ E1 — Carte « Parrainage » permanente, rendue avec l'accueil   FAIT
@@ -120,7 +120,7 @@ Vérification après activation : `curl -sv --http2 https://lnclass.com/login 2>
 
 ## Lot R — Région : application et PostgreSQL en `europe-west4` *(décision du porteur, hors code)*
 
-> **Appliqué les 2026-10-03 et 04** (memo, « Mesure après — région » ; journal, « Lot R »). Production et Staging : application, base et fichiers en Europe. Develop : application et fichiers en Europe, **base encore à Singapour**. Au point de mesure, le surcoût d'un aller-retour passe de 227 à 107 ms. La cible d'Abidjan attend sa mesure.
+> **Appliqué les 2026-10-03 et 04** (memo, « Mesure après — région » ; journal, « Lot R »). Production et Staging : application, base et fichiers en Europe. Develop : application et fichiers en Europe, base déplacée le 2026-10-05. Au point de mesure, le surcoût d'un aller-retour passe de 227 à 107 ms. La cible d'Abidjan attend sa mesure.
 
 - **Couche**       : infrastructure Railway (environnements Develop, Staging, puis production)
 - **Fichiers**     : aucun dans le dépôt ; `docs/decisions/adr/0076-…` §4.3 passe à « Accepté » avec la région retenue et la mesure qui la justifie

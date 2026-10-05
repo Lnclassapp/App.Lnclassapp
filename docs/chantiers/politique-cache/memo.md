@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — lot R appliqué le 2026-10-03/04 (production et Staging en Europe ; base de Develop en attente de validation au tableau de bord) ; lot E (audit de toutes les pages, 2026-10-05) livré en PR ; lot D et mesure depuis Abidjan attendus du porteur |
+| **Statut** | en cours — lot R appliqué le 2026-10-03/04 (production et Staging en Europe ; base de Develop déplacée le 2026-10-05) ; lot E (audit de toutes les pages, 2026-10-05) livré en PR ; lot D et mesure depuis Abidjan attendus du porteur |
 | **Ouvert le** | 2026-10-03 |
 | **Branche** | `perf/politique-cache` |
 
@@ -74,7 +74,7 @@ Railway (`http-response-time`, 72 h ; journaux HTTP du 2026-10-05) :
 | Staging | 10 à 35 ms | — |
 | **Develop** | **1 731 à 3 249 ms** (p99 jusqu'à 9 968 ms) | toutes les pages connectées : `/teams` 3 574 à 9 911 ms, `/teams/referential` 3 223 à 8 163 ms, `/courses` 1 374 à 5 148 ms, `/exercises/:id` 3 630 à 6 508 ms |
 
-Les pages lentes sont celles du porteur, sur `app-develop.lnclass.com`. Son application est à Amsterdam, mais sa base est restée à Singapour : chaque requête SQL fait l'aller-retour Europe–Asie (~170 ms), et une page en fait 5 à 23. C'est le cas que le lot R interdisait (ADR-0076 §4.3 : « on ne déplace jamais l'application sans sa base »). Sur demande du porteur (« déplace sa DB Amsterdam aussi »), le déplacement de PostgreSQL vers `europe-west4` est **préparé en changement en attente** dans Develop (Postgres seul). Sa validation par l'API expire deux fois : elle reste à faire au tableau de bord (journal).
+Les pages lentes sont celles du porteur, sur `app-develop.lnclass.com`. Son application est à Amsterdam, mais sa base est restée à Singapour : chaque requête SQL fait l'aller-retour Europe–Asie (~170 ms), et une page en fait 5 à 23. C'est le cas que le lot R interdisait (ADR-0076 §4.3 : « on ne déplace jamais l'application sans sa base »). Sur demande du porteur (« déplace sa DB Amsterdam aussi »), le déplacement de PostgreSQL vers `europe-west4` est préparé en changement en attente dans Develop (Postgres seul). Sa validation par l'API expire deux fois, mais le changement est appliqué à 14:15 UTC, volume migré. Develop répond depuis en **18 à 380 ms** par page connectée au lieu de 1,7 à 10 s (question 2).
 
 ### L'audit
 
@@ -223,7 +223,7 @@ Leviers **écartés par la mesure** :
 *Questions du cadrage, posées le 2026-10-03 ; réponses en tête de ce memo. Mise à jour le 2026-10-05 après le lot E.*
 
 1. **Mesure depuis Abidjan** : `ruby script/perf/measure_network.rb` (production) trois fois, depuis un poste en Côte d'Ivoire (sans compte, Ruby 3.4). Il n'y a plus de « avant » à Singapour, la production est en Europe. Cette mesure dit si la cible de moins de 150 ms est tenue là où sont les élèves.
-2. **Base de Develop** : le déplacement vers `europe-west4` est prêt dans Railway, en changement en attente (Develop › Postgres, `asia-southeast1` → `europe-west4`). Il reste à le valider au tableau de bord (« Deploy ») : par l'API, la validation expire. Railway migre alors le volume, avec une coupure de la base de Develop pendant la migration. Tant que ce n'est pas fait, **Develop reste à 1 à 10 s par page connectée**.
+2. ~~**Base de Develop**~~ : déplacée en `europe-west4` le 2026-10-05 (changement préparé par l'API, appliqué à 14:15 UTC ; volume migré). Le `x-runtime` de `/`, une requête SQL, passe de 175 ms à **5–11 ms**. Les pages connectées du porteur sur Develop passent de 3,5–10 s à **18–380 ms** dans les journaux de Railway, première visite après la migration comprise.
 3. ~~**Nettoyage**~~ : fait le 2026-10-05. `organized-trunk` et les trois services de copie sont supprimés ; il ne reste que les buckets `lnclass-fichiers-eu-<environnement>`.
 4. **Cloudflare** : prévenir quand *Early Hints* et *Tiered Cache* sont actifs, pour la mesure « après » du lot D. Le conteneur passe par un relais qui termine le TLS : il ne voit pas les réponses `103`, et l'activation ne peut pas être vérifiée d'ici.
 5. **Accueil de la direction** (nouveau, lot E) : son « Activité récente » est un frame différé (UDR-0074 §3.11, du 2026-10-04). Cela fait 2 requêtes en série par visite, alors que l'ADR-0076 §4.2 ne l'admet que sur les accueils élève et équipe. Deux réponses possibles : **(a)** l'admettre comme eux, en ajoutant l'accueil de la direction à la ligne « 2 » du plafond ; **(b)** rendre l'activité avec la page, ce qui fait gagner une requête et amende l'UDR-0074.

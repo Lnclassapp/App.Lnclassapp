@@ -124,6 +124,7 @@ Mesure « après » : memo, « Mesure après — région ». De 23:29 à 23:53, 
 | 13:45 | porteur | « déplace sa DB Amsterdam aussi » |
 | 13:45 | Claude | Changement en attente dans Develop : Postgres `asia-southeast1` → `europe-west4`, Postgres seul (vérifié par `get-staged-changes`). `accept-deploy` expire deux fois après 60 s ; le changement reste « staged ». Comme pour les suppressions, la validation doit se faire au tableau de bord |
 | 13:50 → 14:40 | Claude | Lots E1 et E2 : mesures avant et après, tests, audit relancé |
+| 14:15 | Railway | Le changement est appliqué ; volume de Postgres en `europe-west4`, déploiement réussi. Rien ne dit si c'est le porteur, au tableau de bord, ou l'un des deux `accept-deploy` expirés côté client. Vérifié à 14:20 : `x-runtime` de `/` à 5–11 ms (175 ms avant), pages connectées du porteur à 18–380 ms |
 
 Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée sur toutes les pages atteintes. Deux décisions d'interface du 2026-10-04, l'une sur la carte « Parrainage » de l'enseignant, l'autre sur l'activité de la direction, ajoutaient chacune une requête en série au-delà du plafond de l'ADR-0076, posé la veille. La première se corrige sans changer l'écran ; la seconde est une question au porteur.
 
@@ -201,7 +202,6 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 | `/` redirige une personne connectée vers son accueil (+1 requête en série à chaque ouverture) | Changer l'adresse de l'accueil est une `feature` | à ouvrir si le porteur le souhaite |
 | Mise en veille de Develop et Staging | Réglage de recette, non mesuré | à voir avec le porteur |
 | Mesure depuis Abidjan | Aucun point de mesure en Côte d'Ivoire depuis le conteneur | question 1 du memo : seule preuve de la cible du lot R |
-| Base de Develop à Singapour, application de Develop à Amsterdam | Préparée en changement en attente le 2026-10-05 ; la validation par l'API expire, elle reste à faire au tableau de bord | question 2 du memo |
 | Frame différé de l'activité de la direction (2 requêtes en série) | Décision d'interface du 2026-10-04 (UDR-0074 §3.11), postérieure au plafond | question 5 du memo |
 | Listes au-dessus de 150 Ko de HTML (établissements, catalogue, DRENA, fiche d'établissement, page d'une classe) | Le reste du poids tient à la structure de l'écran (modales par ligne, cartes) | question 6 du memo ; lot 5 de `cache-ecrans-lourds` |
 
