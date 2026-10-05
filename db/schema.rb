@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_04_190000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_05_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -136,6 +136,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_04_190000) do
     t.string "subject_type", limit: 40
     t.index ["actor_id", "created_at"], name: "index_audit_events_on_actor_id_and_created_at"
     t.index ["subject_type", "subject_id"], name: "index_audit_events_on_subject_type_and_subject_id"
+    t.index ["created_at"], name: "index_audit_events_with_ip_on_created_at", where: "(ip_address IS NOT NULL)"
   end
 
   create_table "backup_codes", force: :cascade do |t|

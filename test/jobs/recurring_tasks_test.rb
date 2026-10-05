@@ -17,4 +17,11 @@ class RecurringTasksTest < ActiveSupport::TestCase
 
     assert_equal({ class: "School::PurgeArchivedStaffJob", queue: "default", schedule: "every day at 4am" }, task)
   end
+
+  # RI-05, ADR-0080 : l'IP du journal d'audit est effacée après 12 mois, chaque nuit.
+  test "the erasure of old audit IPs runs every day at 4:30am on the default queue" do
+    task = Rails.application.config_for(:recurring, env: "production").fetch(:erase_audit_ips)
+
+    assert_equal({ class: "Identity::EraseAuditIpsJob", queue: "default", schedule: "every day at 4:30am" }, task)
+  end
 end
