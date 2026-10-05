@@ -81,7 +81,10 @@ module PerfScreens
     exercise = essential.exercises.order(:position).first
     # La confirmation « Retirer », lue à la demande (UDR-0056, amendement du 2026-10-04) : dans le frame, puis sans JavaScript.
     removable = Orm::TeacherSchool.joins(:teacher).where(school_id: admin_school, users: { anonymized_at: nil }).order(:id).pick("users.public_id")
-
+    done = "(SELECT COUNT(*) FROM exercise_sessions s WHERE s.classroom_assignment_id = classroom_assignments.id AND s.status = 'completed')"
+    follow_up = Orm::ClassroomAssignment.where(classroom: teacher_classroom, status: "active")
+                                        .order(Arel.sql("#{done} DESC"), :id).pick(:public_id)
+    follow_up_path = "/classrooms/#{teacher_classroom.public_id}/assignments/#{follow_up}"
     article = Orm::Article.where(status: "published").order(published_at: :desc, id: :desc).pick(:slug) or
       raise "aucun article publié : semer le jeu (script/perf/seed_dataset.rb)"
     [

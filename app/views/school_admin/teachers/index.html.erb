@@ -41,7 +41,7 @@
 <% else %>
 <td class="px-4 py-3 text-mute"><%= t(".no_classroom") %></td>
 <% end %>
-<td class="sticky right-0 bg-white px-4 py-3 text-right">
+<td class="sticky-actions px-4 py-3 text-right">
 <%# UDR-0056, amendement du 2026-10-04 : la confirmation n'est plus copiée ici, « Retirer » la charge dans le frame « modal ». %>
 <% if @manageable %>
 <% remove = ui_dropdown_item(t(".remove"), href: school_admin_teacher_removal_path(teacher.public_id), frame: "modal", icon: "user-minus",

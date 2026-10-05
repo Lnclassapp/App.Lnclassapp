@@ -80,9 +80,9 @@ class SchoolAdmin::TeachersTest < ApplicationSystemTestCase
     assert on_top?(item), "« #{t('index.remove')} » est masqué par la ligne suivante"
 
     item.click
-    within("dialog[open]") do
-      assert_selector "h2", text: t("index.remove_title", name: "Awa Koné")
-      click_on t("index.cancel")
+    within("turbo-frame#modal dialog[open]") do
+      assert_selector "h2", text: t("removal.title", name: "Awa Koné")
+      click_on t("removal.cancel")
     end
     assert_no_selector "dialog[open]"
     assert Orm::TeacherSchool.exists?(teacher_id: @teacher.id)
