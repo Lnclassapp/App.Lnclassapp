@@ -34,7 +34,7 @@ Le porteur a fixé, le 2026-10-05, l'organisation de trois écrans de l'élève 
 
 **Ordre** : `NavigationHelper::HOME_SECTIONS[:student]` vaut
 `[[:classroom, "academic-cap"], [:subjects, "squares-2x2"], [:announcements, "megaphone"], [:todo, "clipboard-document-check"]]`,
-puis la carte « Mes activités récentes » (frame différé inchangé), toujours en dernier. La clé `:courses` disparaît de l'accueil élève.
+puis la carte « Mes activités récentes » (`id: "student_home_activity"`, frame différé inchangé), toujours en dernier. La clé `:courses` disparaît de l'accueil élève.
 
 - `:classroom` → `_classroom_card` inchangé.
 - `:subjects` → `_subjects` (nouveau), décrit ci-dessous.
@@ -83,9 +83,9 @@ Hiérarchie, du haut vers le bas, dans `div.grid.gap-5` :
 ### 3.3 Session (`assessment/question_attempts/create`, `assessment/exercise_sessions/_feedback_card`)
 
 - Le stream `create` garde ses deux `replace` (`question` par le verdict, `progress_bar`).
-- Si la session n'est pas terminée et qu'une question suit, `_feedback_card` reçoit `next_question:` et rend, **dans** `turbo-frame#question`, après la carte :
+- Si une question suit, `_feedback_card` reçoit `next_question:` (`@play.next_question`, nil à la dernière réponse) et rend, à la fin de la carte `#feedback-card` :
   `<template data-assessment--next-question-target="question">` contenant `_question_card` de cette question (`form: nil`). Le `<template>` n'est pas rendu par le navigateur et n'est pas lu par un lecteur d'écran.
-- La carte du verdict porte `data-controller="assessment--next-question"`. Le bouton « Question suivante » garde `href: exercise_session_path(...)` (repli sans JavaScript, et navigation du frame) et gagne `data-action="assessment--next-question#show"`.
+- La carte du verdict porte alors `data-controller="assessment--next-question"`. Le bouton « Question suivante » garde `href: exercise_session_path(...)` (repli sans JavaScript, et navigation du frame) et gagne `data-action="assessment--next-question#show"`. Il porte toujours `data-turbo-prefetch="false"` : la question est déjà là, le préchargement au survol coûterait une requête pour rien.
 - `assessment--next-question#show` : s'il a une cible `question`, il annule la navigation, remplace `turbo-frame#question` par celui du `<template>`, puis donne le focus à la `legend` de la question (`tabindex="-1"` posé par le contrôleur). Sans cible, il laisse le lien naviguer.
 - Dernière réponse : pas de `<template>` ; « Voir mon résultat » inchangé (`_top`, un aller-retour).
 - La page `GET /sessions/:id` reste le repli et la reprise (AS-08) : inchangée.

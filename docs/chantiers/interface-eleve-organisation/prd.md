@@ -108,7 +108,9 @@ Alors aucune ne pose d'ETag ni de Cache-Control public, et aucune vue ne contien
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes en série par question d'une session (réponse → question suivante) | 2 | 1 | voir journal |
-| Requêtes SQL de `/students` | voir journal | +1 au plus (matières), constant | voir journal |
-| Requêtes SQL de `/students/classroom` | voir journal | nombre fixe, quel que soit le volume | voir journal |
-| Requêtes en série pour ouvrir `/students/classroom` | 1 | 1 (aucun frame différé) | voir journal |
+| Requêtes en série par question d'une session (réponse → question suivante) | 2 | 1 | **1** (test système, Resource Timing) |
+| Requêtes SQL de `/students` | 20 | +1 au plus (matières), constant | 21 |
+| Requêtes SQL de `/students/classroom` | 9 | nombre fixe, quel que soit le volume | 18, fixe (test « une ou cinq ») |
+| Requêtes en série pour ouvrir `/students/classroom` | 1 | 1 (aucun frame différé) | 1 |
+
+Détail et conditions de mesure : [`journal.md`](journal.md#mesures).
