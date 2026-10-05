@@ -22,7 +22,8 @@
         <% else %>
           <%# UDR-0077 §3.1 : la bande et ses points du carrousel d'annonces (UDR-0071 §3.5) ; sans JavaScript, elle défile, sans points. %>
           <div data-controller="communication--carousel">
-            <ul class="scrollbar-none flex snap-x snap-mandatory gap-3 overflow-x-auto motion-safe:scroll-smooth"
+            <%# L'espace entre cartes est leur remplissage (px-1.5), repris par -mx-1.5 : trois tiers entiers à partir de 640 px. %>
+            <ul class="scrollbar-none -mx-1.5 flex snap-x snap-mandatory overflow-x-auto motion-safe:scroll-smooth"
                 aria-label="<%= t(".classrooms_title") %>" data-communication--carousel-target="track">
               <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom %>
             </ul>
