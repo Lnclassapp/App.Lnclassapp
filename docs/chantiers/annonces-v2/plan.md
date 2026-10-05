@@ -199,9 +199,9 @@ Aucun critère orphelin.
 
 Propres à ce chantier :
 
-- [ ] ADR-0081 et UDR-0075 `Accepté` **avant** le Lot 0 (programme)
+- [x] ADR-0081 et UDR-0075 `Accepté` **avant** le Lot 0 (programme) — porteur, 2026-10-05
 - [ ] Revue de sécurité sur le Lot C (lecture des SVG) et sur le rendu des illustrations du Lot 0, avant le merge du Lot C
-- [ ] Palette des 10 thèmes validée par le porteur (UDR-0075 §3.1)
+- [x] Palette des 10 thèmes validée par le porteur (UDR-0075 §3.1) — 2026-10-05
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >

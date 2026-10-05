@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | en cours |
 | **Ouvert le** | 2026-10-05 |
 | **Branche** | `feature/annonces-v2` |
 | **Programme** | `refonte-application`, vague V6 (suite de [`annonces`](../annonces/memo.md), V6a) |
@@ -74,6 +74,6 @@ Les annonces viennent d'être livrées. Le porteur s'en sert et bute sur ces poi
 ## Questions encore ouvertes
 
 - ~~Le compteur affiche-t-il « 12 / 60 » ou « 48 restants » ?~~ « 18 / 60 », comme le résumé d'article (UDR-0067), tranché par l'UDR-0075.
-- La durée maximale reste-t-elle de 30 jours pour toutes les annonces, celles de l'équipe comprises ? (PRD, défaut : oui)
-- ~~Les 10 thèmes : quelles couleurs ?~~ Proposés par l'UDR-0075 §3.1 (Ciel, Lagune, Menthe, Citron, Mangue, Corail, Hibiscus, Lavande, Indigo, Nuit), avec leurs contrastes mesurés : **à valider par le porteur**.
-- ~~Une illustration de l'équipe suit-elle le thème en une seule couleur ?~~ Oui : l'ADR-0081 §4.3 en fait un dessin d'une seule couleur, par sécurité. **À valider par le porteur.**
+- ~~La durée maximale reste-t-elle de 30 jours pour toutes les annonces ?~~ Oui, pour tous les auteurs (PRD AV-02, ADR-0081 §4.1, accepté).
+- ~~Les 10 thèmes : quelles couleurs ?~~ Proposés par l'UDR-0075 §3.1 (Ciel, Lagune, Menthe, Citron, Mangue, Corail, Hibiscus, Lavande, Indigo, Nuit), avec leurs contrastes mesurés : **validés par le porteur le 2026-10-05**.
+- ~~Une illustration de l'équipe suit-elle le thème en une seule couleur ?~~ Oui : l'ADR-0081 §4.3 en fait un dessin d'une seule couleur, par sécurité. **Validé par le porteur le 2026-10-05.**

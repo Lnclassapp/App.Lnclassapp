@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-05 : dessins de l'équipe en une seule couleur compris)* |
 | **Date** | 2026-10-05 |
 | **Chantier** | `docs/chantiers/annonces-v2` |
 | **Remplace** | — *(amende l'[ADR-0078](0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) §4.1 « date de fin » et §4.4 « fichiers »)* |

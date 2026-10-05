@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-05 : palette des 10 thèmes comprise)* |
 | **Date** | 2026-10-05 |
 | **Chantier** | `docs/chantiers/annonces-v2` |
 | **ADR liés** | [0081](../adr/0081-annonces-trois-en-ligne-themes-et-illustrations-de-l-equipe.md), [0078](../adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) |
