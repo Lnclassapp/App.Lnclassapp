@@ -72,3 +72,11 @@ Dans l'ancienne application, trois défauts gênaient ce travail :
 *Chantier [`docs/chantiers/actions-en-menu`](../../chantiers/actions-en-menu/prd.md), [UDR-0042](0042-actions-de-ligne-dans-un-menu.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Les actions de ligne passent dans le menu ⋮** « Actions pour <nom> » (`#drena-actions-<public_id>`, `fixed: true`) : « Modifier » (`frame: "modal"`) puis « Supprimer » (`dialog: "delete-drena-<public_id>"`, `:danger`). La modale est rendue sans `trigger:`, son pied est inchangé. L'`aria-label` de « Modifier » est remplacé par celui du bouton ⋮.
+
+## Amendement du 2026-10-05 — confirmation de suppression chargée à la demande
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), lot E3. Décision du porteur, 2026-10-05, avec la liste des établissements (UDR-0036, même date). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- L'item « Supprimer » du menu ⋮ devient un lien vers `GET /teams/drenas/:public_id/deletion`, avec `data-turbo-frame="modal"`. La confirmation arrive ouverte dans le frame « modal », avec le même titre, le même texte, le même `DELETE` et l'identifiant `delete-drena-<public_id>`. Sans frame, la même adresse est une page complète, avec un retour « ← DRENA ». Une DRENA inconnue répond 404.
+- Le refus (`:conflict`) ajoute `turbo_stream.update "modal"`, qui referme la confirmation : avant, c'est le re-rendu de la ligne qui la refermait.
+- Mesure (`measure_screens.rb`, 42 DRENA, 100 requêtes, médiane de 3) : HTML 240,4 → **121,2 Ko**, sous le budget de 150 Ko ; rendu de la vue 35,1 → **16,5 ms** ; p50 76,5 → **59,3 ms**, p95 108,5 → **84,6 ms**.

@@ -4,6 +4,8 @@
 <% if @refusal %>
   <%= turbo_stream_toast @refusal, type: :error %>
   <%= turbo_stream.replace "drena_#{@drena.public_id}", partial: "drena_row", locals: { drena: @drena } %>
+  <%# La confirmation vit dans le frame « modal » (lot E3) : le refus la referme, comme avant le re-rendu de la ligne. %>
+  <%= turbo_stream.update "modal" %>
 <% else %>
   <%= turbo_stream_toast t(".deleted", name: @drena.name), type: :success %>
   <%= turbo_stream.remove "drena_#{@drena.public_id}" %>

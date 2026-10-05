@@ -9,12 +9,21 @@ get "teams/referential", to: "teams/referentials#show", as: :teams_referential
 
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
 scope "teams", module: "teams" do
-  resources :drenas, param: :public_id, except: :show
+  resources :drenas, param: :public_id, except: :show do
+    # Chantier politique-cache, lot E3 : la confirmation de suppression, lue à la demande dans le frame « modal ».
+    member { get :deletion }
+  end
   # ADR-0056 : génération des classes manquantes, suivie dans son rapport (teams/imports). Avant `schools` : chemin fixe.
   post "schools/classroom-generations", to: "classroom_generations#create", as: :classroom_generations
   # Aucun formulaire de création : les établissements n'entrent que par import JSON (teams/imports, kind « schools »).
   resources :schools, param: :public_id, except: %i[new create] do
-    member { patch :deactivate }
+    member do
+      patch :deactivate
+      # Lot E3 (politique-cache) : les confirmations, lues à la demande dans le frame « modal » au lieu d'être copiées
+      # dans chaque ligne de la liste (comme UDR-0056, amendement du 2026-10-04).
+      get :deactivation
+      get :deletion
+    end
     resources :classrooms, only: %i[new create], controller: "school_classrooms"
     # ADR-0057 : régénération du code d'établissement (PATCH seul ; le code se lit sur la fiche).
     resource :code, only: :update, controller: "school_codes"
