@@ -3,6 +3,7 @@ require "test_helper"
 # UDR-0071 §3.7 « Mes annonces » and §3.8 « Formulaire », ADR-0078 §4.2 and §4.6: the team, a direction and a teacher
 # write, schedule and modify their announcements from « Mes annonces »; every attempt outside their right is refused
 # (403 for a student, 403 for a forged target, 404 for the announcement of someone else) and writes nothing.
+# ADR-0081, UDR-0075 §3.3 (annonces-v2): no end to choose (30 days), 3 live per author, the toast names the archived.
 class Communication::AuthoredMessagesControllerTest < ActionDispatch::IntegrationTest
   NOW = Time.zone.local(2026, 10, 4, 12)
   MP3 = ("ID3".b + ("\x00".b * 64)).freeze
@@ -25,7 +26,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
 
   def publish(commit: "publish", **announcement)
     post announcements_path, params: { announcement: { title: "Devoirs communs", body: "Ils commencent lundi.", illustration: "info",
-                                                       visible_until: "2026-11-02", **announcement }, commit: }
+                                                       **announcement }, commit: }
   end
 
   def created = Orm::Message.order(:id).last
@@ -178,10 +179,9 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
       assert_select "input[type=file][name='announcement[image]'][accept='image/png,image/jpeg,image/webp']"
       assert_select "#announcement_image_hint", "PNG, JPEG ou WebP, 2 Mo au plus. Elle remplace l'illustration."
       assert_select "input[type=file][name='announcement[audio]'][accept='audio/mpeg,audio/mp4,.mp3,.m4a']"
+      assert_select "#announcement_audio_hint", "MP3 ou M4A, 10 Mo au plus. Un enregistrement de téléphone convient."
       assert_select "input[type=datetime-local][name='announcement[published_at]']"
       assert_select "#announcement_published_at_hint", "Laissez vide pour publier dès l'envoi."
-      assert_select "input[type=date][name='announcement[visible_until]'][value='2026-11-02'][required]"
-      assert_select "#announcement_visible_until_hint", "30 jours par défaut, 90 au plus."
       assert_select "a[href='#{my_announcements_path}']", "Annuler"
       assert_select "button[type=submit][name=commit][value=draft]", "Enregistrer le brouillon"
       assert_select "button[type=submit][name=commit][value=publish]", "Publier"
@@ -336,7 +336,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
   test "an invalid form is shown again in 422, each error under its field, the values kept" do
     sign_in_as @kamate
 
-    publish(audience: "teachers", title: "a" * 61, body: "", published_at: "2026-10-03T08:00", visible_until: "2026-12-31")
+    publish(audience: "teachers", title: "a" * 61, body: "", published_at: "2026-10-03T08:00")
 
     assert_response :unprocessable_entity
     assert_equal [ "Le titre compte 60 caractères au plus.", "Saisissez le texte de l'annonce.",
@@ -385,7 +385,8 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
       assert_select "audio[controls][preload=none][src='#{announcement_file_path(message.public_id, kind: 'audio')}']"
       assert_select "label", text: "Retirer l'audio"
       assert_select "input[name='announcement[published_at]']", 0
-      assert_select "input[name='announcement[visible_until]'][value='#{(message.ends_at - 1).to_date.iso8601}']"
+      assert_select "input[name='announcement[visible_until]']", 0
+      assert_select "p", text: "L'annonce reste visible 30 jours.", count: 0
       assert_select "button[value=draft]", 0
       assert_select "button[value=publish]", "Publier"
     end
@@ -429,18 +430,19 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_response :not_found
   end
 
-  test "AN-14 — the teacher modifies « Nouvelles fiches »: it comes back to Awa, who had dismissed it, marked edited" do
+  test "AN-14, AV-02 — the teacher modifies « Nouvelles fiches »: back to Awa, who had dismissed it, marked edited, its end kept" do
     message = create_message(author: @kouassi, title: "Nouvelles fiches", audience: "classrooms", classrooms: [ @b3 ])
+    ends_at = message.ends_at
     dismiss_message(message:, user: @awa)
     sign_in_as @kouassi
 
     patch announcement_path(message.public_id), params: { announcement: { title: "Nouvelles fiches", body: "Chapitre 4 en ligne.",
-                                                                          illustration: "sheets", visible_until: "2026-10-30",
+                                                                          illustration: "sheets", visible_until: "2026-12-30",
                                                                           classroom_public_ids: [ "", @b3.public_id ] }, commit: "publish" }
 
     assert_redirected_to my_announcements_path
     assert_equal "Annonce modifiée.", flash[:notice]
-    assert_equal [ "Chapitre 4 en ligne.", NOW, Time.zone.local(2026, 10, 31) ], message.reload.values_at(:body, :edited_at, :ends_at)
+    assert_equal [ "Chapitre 4 en ligne.", NOW, ends_at ], message.reload.values_at(:body, :edited_at, :ends_at)
     assert_not Orm::MessageDismissal.exists?(message_id: message.id)
 
     sign_out
@@ -488,5 +490,259 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
                                                                            audience: "students" }, commit: "publish" }
     assert_redirected_to my_announcements_path
     assert_equal [ "archived", "Devoirs communs" ], archived.reload.values_at(:status, :title)
+  end
+
+  test "AV-02 — the form has no field « Visible jusqu'au »: under « Publier le », the announcement stays visible 30 days" do
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "form#announcement-form" do
+      assert_select "[name='announcement[visible_until]']", 0
+      assert_select "label", text: /Visible jusqu'au/, count: 0
+      assert_select "div:has(> div > #announcement_published_at) > p.text-xs.text-mute", "L'annonce reste visible 30 jours."
+    end
+  end
+
+  test "AV-02 — a forged visible_until is ignored: published now, the announcement ends 30 days later" do
+    sign_in_as @kamate
+
+    publish(audience: "students", visible_until: "2026-12-31")
+
+    assert_redirected_to my_announcements_path
+    assert_equal [ NOW, NOW + 30.days ], created.values_at(:published_at, :ends_at)
+  end
+
+  # Three live announcements of the direction, « Réunion parents » the oldest (UDR-0075 §3.3, PRD §3).
+  def three_live(author = @kamate)
+    { "Réunion parents" => 1, "Fiches chapitre 3" => 3, "Sortie au musée" => 4 }.map do |title, day|
+      create_message(author:, title:, school: @lauriers, published_at: Time.zone.local(2026, 10, day, 8))
+    end
+  end
+
+  test "AV-03, AV-06 — publishing a 4th announcement archives « Réunion parents », and the toast names it" do
+    live = three_live
+    sign_in_as @kamate
+
+    publish(audience: "students", title: "Conseil de classe")
+
+    assert_redirected_to my_announcements_path
+    assert_equal "Annonce publiée. « Réunion parents » est archivée.", flash[:notice]
+    assert_equal %w[archived published published], live.map { it.reload.status }
+    follow_redirect!
+    assert_select "li#my_announcement_#{live.first.public_id} p.text-mute", "Collège Les Lauriers · Élèves · Archivée le 4 oct."
+  end
+
+  test "AV-06 — the toast names every archived announcement" do
+    live = three_live << create_message(author: @kamate, title: "Cantine", school: @lauriers, published_at: Time.zone.local(2026, 10, 4, 9))
+    sign_in_as @kamate
+
+    publish(audience: "students")
+
+    assert_equal "Annonce publiée. « Réunion parents » et « Fiches chapitre 3 » sont archivées.", flash[:notice]
+    assert_equal %w[archived archived published published], live.map { it.reload.status }
+  end
+
+  test "AV-06 — a draft published from its form archives the oldest live one, and the toast names it" do
+    three_live
+    draft = create_message(author: @kamate, status: "draft", published_at: nil, school: @lauriers)
+    sign_in_as @kamate
+
+    patch announcement_path(draft.public_id), params: { announcement: { title: "Fête", body: "Samedi.", illustration: "celebration",
+                                                                        audience: "students" }, commit: "publish" }
+
+    assert_equal "Annonce publiée. « Réunion parents » est archivée.", flash[:notice]
+  end
+
+  test "AV-06 — a scheduled announcement, a draft and a modification archive nothing: their toasts are unchanged" do
+    live = three_live
+    sign_in_as @kamate
+
+    publish(audience: "students", published_at: "2026-10-05T10:00")
+    assert_equal "Annonce programmée pour le 5 oct. à 10:00.", flash[:notice]
+    publish(audience: "students", commit: "draft")
+    assert_equal "Brouillon enregistré.", flash[:notice]
+    patch announcement_path(live.last.public_id), params: { announcement: { title: "Sortie", body: "Jeudi.", illustration: "info",
+                                                                            audience: "students" }, commit: "publish" }
+    assert_equal "Annonce modifiée.", flash[:notice]
+    assert_equal %w[published published published], live.map { it.reload.status }
+  end
+
+  test "AV-10 — a forged form choosing a retired drawing of the team is refused in 422, the error under « Illustration »" do
+    retired = create_illustration(name: "Bus scolaire", created_by: @fatou, retired_at: 1.day.ago)
+    sign_in_as @kamate
+
+    publish(audience: "students", illustration: retired.public_id)
+
+    assert_response :unprocessable_entity
+    assert_select "fieldset p.text-error", "Choisissez une illustration de la bibliothèque."
+    assert_equal 0, Orm::Message.count
+  end
+
+  test "AV-01 — the title and the text show their count, rendered by the server, for the counter of UDR-0067" do
+    message = create_message(author: @kamate, title: "Réunion de parents", body: "a" * 97, school: @lauriers)
+    sign_in_as @kamate
+
+    get edit_announcement_path(message.public_id)
+
+    { title: [ 60, "18 / 60" ], body: [ 140, "97 / 140" ] }.each do |field, (max, count)|
+      assert_select "div[data-controller='communication--character-count'][data-communication--character-count-max-value='#{max}']" \
+                    "[data-communication--character-count-near-value='Il reste %{count} caractères.']" \
+                    "[data-communication--character-count-full-value='Limite atteinte : %{max} caractères.']" do
+        assert_select "#announcement_#{field}[maxlength='#{max}'][data-communication--character-count-target=input]" \
+                      "[data-action='input->communication--character-count#update']"
+        assert_select "p.mt-1.text-right.text-xs.tabular-nums.text-mute[data-communication--character-count-target=count]", count
+        assert_select "span.sr-only[aria-live=polite][data-communication--character-count-target=status]", ""
+      end
+    end
+  end
+
+  test "AV-01 — the form of a new announcement counts from zero" do
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "[data-communication--character-count-target=count]", count: 2
+    assert_select "div:has(> div > #announcement_title) > [data-communication--character-count-target=count]", "0 / 60"
+    assert_select "div:has(> div > #announcement_body) > [data-communication--character-count-target=count]", "0 / 140"
+  end
+
+  test "AV-07 — ten themes in their order, each named, « Ciel » checked by default, before the illustration" do
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "fieldset[data-controller='communication--theme-preview'][data-communication--theme-preview-illustrations-value='announcement-illustrations']" do
+      assert_select "legend", "Thème"
+      assert_select "div.grid.grid-cols-5.gap-2 > label", count: 10
+      assert_select "label.min-h-tap.has-checked\\:bg-mist.has-checked\\:font-bold.has-focus-visible\\:outline-2", count: 10
+      Entities::Communication::Message::THEMES.zip(%w[Ciel Lagune Menthe Citron Mangue Corail Hibiscus Lavande Indigo Nuit])
+                                              .each_with_index do |(key, label), index|
+        assert_select "label:nth-child(#{index + 1})" do
+          assert_select "input.sr-only[type=radio][name='announcement[theme]'][value=#{key}][data-action='change->communication--theme-preview#preview']"
+          assert_select "span.grid.size-10.rounded-full.bg-brand-soft.ring-1[data-announcement-theme=#{key}] span.size-3.rounded-full.bg-brand-strong"
+          assert_select "span", text: label
+        end
+      end
+      assert_select "input[name='announcement[theme]'][checked]", count: 1
+      assert_select "input[name='announcement[theme]'][value=ciel][checked]"
+    end
+    assert_select "fieldset[data-controller='communication--theme-preview'] + fieldset#announcement-illustrations"
+    assert_select "fieldset#announcement-illustrations[data-announcement-theme]", 0, "sans JavaScript, l'aperçu reste en « Ciel »"
+  end
+
+  test "AV-07 — the theme of an announcement is checked in its form, and written when it is modified" do
+    message = create_message(author: @kamate, school: @lauriers, theme: "mangue")
+    sign_in_as @kamate
+
+    get edit_announcement_path(message.public_id)
+    assert_select "input[name='announcement[theme]'][value=mangue][checked]"
+
+    patch announcement_path(message.public_id), params: { announcement: { title: "Fête", body: "Samedi.", illustration: "info",
+                                                                          audience: "students", theme: "nuit" }, commit: "publish" }
+    assert_equal "nuit", message.reload.theme
+  end
+
+  test "AV-07 — an unknown theme sent by a forged form is refused in 422, the error under « Thème »" do
+    sign_in_as @kamate
+
+    publish(audience: "students", theme: "rose")
+
+    assert_response :unprocessable_entity
+    assert_select "fieldset[data-controller='communication--theme-preview'] p.text-error", "Choisissez un thème de la liste."
+    assert_equal 0, Orm::Message.count
+  end
+
+  test "AV-08 — the drawings of the team follow the 8 base ones, by date of addition; their value is their public_id" do
+    bus = create_illustration(name: "Bus scolaire", created_by: @fatou, created_at: 1.day.ago)
+    cantine = create_illustration(name: "Cantine", created_by: @fatou, created_at: 2.days.ago)
+    create_illustration(name: "Retirée", created_by: @fatou, retired_at: 1.hour.ago)
+    sign_in_as @kouassi
+
+    get new_announcement_path
+
+    assert_select "fieldset#announcement-illustrations div.grid.grid-cols-4.gap-2" do
+      assert_select "label", count: 10
+      assert_select "label:nth-child(9) input[type=radio][name='announcement[illustration]'][value='#{cantine.public_id}']"
+      assert_select "label:nth-child(9) span", "Cantine"
+      assert_select "label:nth-child(10) input[value='#{bus.public_id}']"
+      assert_select "label:nth-child(10) svg.size-12.fill-brand-strong[aria-hidden=true] rect"
+      assert_select "label", text: "Retirée", count: 0
+    end
+  end
+
+  test "AV-08 — an announcement published with a drawing of the team keeps it: checked in its form, shown in its row" do
+    bus = create_illustration(name: "Bus scolaire", created_by: @fatou)
+    sign_in_as @kamate
+
+    publish(audience: "students", illustration: bus.public_id)
+    assert_equal [ nil, bus.id ], created.values_at(:illustration, :illustration_id)
+
+    get edit_announcement_path(created.public_id)
+    assert_select "input[name='announcement[illustration]'][value='#{bus.public_id}'][checked]"
+    get my_announcements_path
+    assert_select "#my_announcement_#{created.public_id} span.size-10 svg.size-7.fill-brand-strong"
+  end
+
+  test "AV-07 — each row of « Mes annonces » has the dot of its theme, named for a screen reader, before its title" do
+    message = create_message(author: @kamate, title: "Sortie au musée", school: @lauriers, theme: "mangue")
+    sign_in_as @kamate
+
+    get my_announcements_path
+
+    assert_select "#my_announcement_#{message.public_id}" do
+      assert_select "span.size-3.rounded-full.bg-brand-soft.ring-1[data-announcement-theme=mangue] + p.font-medium", "Sortie au musée"
+      assert_select "span[data-announcement-theme=mangue] span.sr-only", "Thème : Mangue"
+    end
+  end
+
+  test "AV-06 — with 3 live announcements, the form says which one publishing archives, just before its buttons" do
+    three_live
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "div#announcement-cap-notice.rounded-ln.bg-info-soft.p-4.text-sm.text-info[role=status]" do
+      assert_select "p", "Tu as déjà 3 annonces en ligne. En publiant, « Réunion parents » sera archivée."
+      assert_select "p.mt-1.text-xs", "Programmée, elle archivera à sa parution la plus ancienne alors en ligne."
+    end
+    assert_select "#announcement-cap-notice + div.flex.flex-wrap.justify-end button[value=publish]"
+  end
+
+  test "AV-06 — with 2 live announcements, there is no notice" do
+    three_live.first.update!(status: "archived")
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "#announcement-cap-notice", 0
+  end
+
+  test "AV-06 — the notice in the form of a draft or a scheduled announcement, never in that of a published one" do
+    live = three_live
+    draft = create_message(author: @kamate, status: "draft", published_at: nil, school: @lauriers)
+    scheduled = create_message(author: @kamate, status: "scheduled", published_at: Time.zone.local(2026, 10, 10, 8), school: @lauriers)
+    sign_in_as @kamate
+
+    [ draft, scheduled ].each do |message|
+      get edit_announcement_path(message.public_id)
+      assert_select "#announcement-cap-notice", text: /« Réunion parents » sera archivée/
+    end
+    get edit_announcement_path(live.last.public_id)
+    assert_select "#announcement-cap-notice", 0
+    patch announcement_path(live.last.public_id), params: { announcement: { title: "", body: "Jeudi.", illustration: "info",
+                                                                            audience: "students" }, commit: "publish" }
+    assert_response :unprocessable_entity
+    assert_select "#announcement-cap-notice", 0
+  end
+
+  test "AV-06 — a refused form shows the notice again" do
+    three_live
+    sign_in_as @kamate
+
+    publish(audience: "students", title: "")
+
+    assert_response :unprocessable_entity
+    assert_select "#announcement-cap-notice", text: /« Réunion parents »/
   end
 end
