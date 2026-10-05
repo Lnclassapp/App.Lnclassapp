@@ -223,7 +223,7 @@ module Repositories
       end
     end
 
-    # ADR-0081 §4.1 and §6 (AV-05): live_of locks the author's row (SELECT … FOR UPDATE) in the caller's transaction.
+    # ADR-0081 §4.1 and §6 (AV-05): live_of locks the author's row (SELECT … FOR NO KEY UPDATE) in the caller's transaction.
     # Outside any test transaction: each thread has its own connection, and sees what the other one committed.
     class MessageRepositoryLockTest < ActiveSupport::TestCase
       self.use_transactional_tests = false
@@ -266,6 +266,27 @@ module Repositories
 
         assert_equal [ @live.map(&:public_id), true, false ], held
         assert_not locked?(@author)
+      end
+
+      # Phase 5: FOR NO KEY UPDATE, not FOR UPDATE. A row that references the author by foreign key (the journal, a message)
+      # takes FOR KEY SHARE on his account, which FOR UPDATE blocks for the whole publication, upload included.
+      test "AV-05 — while live_of holds the author, another connection still journals an event of his within 300 ms" do
+        journaled = Orm::Message.transaction do
+          @repository.live_of(author_id: @author.id, now: NOW)
+          Thread.new do
+            ActiveRecord::Base.connection_pool.with_connection do
+              Orm::AuditEvent.transaction do
+                Orm::AuditEvent.connection.execute("SET LOCAL lock_timeout = '300ms'")
+                Repositories::Identity::AuditLogRepository.new.record(action: "message.published", actor_id: @author.id, at: NOW)
+              end
+            rescue ActiveRecord::LockWaitTimeout
+              false
+            end
+          end.value
+        end
+
+        assert journaled, "l'événement attend la fin de la parution"
+        assert_equal 1, Orm::AuditEvent.where(actor_id: @author.id).count
       end
 
       test "AV-05 — two publications of the same author at the same instant follow each other: 3 live, never 4" do
