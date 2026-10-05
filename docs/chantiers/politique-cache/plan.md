@@ -22,7 +22,8 @@ Lot 0 — Bench et décision (fait en cadrage : 3 scripts, mesure « avant », A
         ├─ E1 — Carte « Parrainage » permanente, rendue avec l'accueil   FAIT
         ├─ E2 — Icônes dessinées une fois sur les listes lourdes         FAIT (poids réduit, budget non atteint)
         ├─ E3 — Confirmations des établissements et des DRENA à la demande   FAIT (porteur, 2026-10-05)
-        └─ E4 — Catalogue par pages de 24, la suite au défilement       FAIT (porteur, 2026-10-05)
+        ├─ E4 — Catalogue par pages de 24, la suite au défilement       FAIT (porteur, 2026-10-05)
+        └─ E5 — Cartes du catalogue allégées (A, C, E)                  FAIT (porteur, 2026-10-05)
 ```
 
 Ordre par gain/risque au cadrage : A → B → D → R → C. Après les décisions du porteur, il reste **D** (sans code, premières visites) puis **R** (le seul levier sur toutes les pages, mais une migration de base).
@@ -186,6 +187,14 @@ Vérification après activation : `curl -sv --http2 https://lnclass.com/login 2>
 - **Test associé** : un test système fait défiler le catalogue : les cartes suivantes arrivent sans rechargement, et l'une d'elles ouvre son cours. Le frame n'est pas demandé à l'arrivée
 - **Done quand**   : catalogue sous 150 Ko et sous 100 ms en p95. **Tenu** : enseignant 62,8 Ko et 35,3 ms ; équipe 75,3 Ko et 55,0 ms
 
+### E5 — Cartes du catalogue allégées : A, C et E ✅ *(décision du porteur, 2026-10-05)*
+
+- **Couche**       : UI (feuille de style, `ComponentsHelper`, carte du catalogue)
+- **Fichiers**     : `app/assets/stylesheets/application.tailwind.css` (`ui-badge`, `ui-badge-sm`, `ui-badge-md`, `ui-card-link`), `app/helpers/components_helper.rb`, `app/views/catalog/courses/_course_card.html.erb`, `config/locales/catalog/courses.fr.yml`, `test/design/shared_classes_test.rb`, tests de helper et de contrôleur, UDR-0013 (amendement bis)
+- **Levier**       : A, des classes partagées pour la forme des badges et le survol des cartes-liens, sans changement visible ; C, plus de pied « Ouvrir le cours » ; E, statut seulement s'il n'est pas « Publié »
+- **Test associé** : `shared_classes_test.rb` fige chaque classe partagée sur l'ancienne liste. Une sonde jetable a comparé les styles calculés de chaque élément de `/design` (survol d'une carte-lien compris) et des deux écrans d'établissements, avant et après A : identiques. Elle n'est pas versionnée : les écrans changent, elle n'aurait plus de référence
+- **Done quand**   : le catalogue s'allège au même volume. **Tenu** : enseignant 62,8 → 43,2 Ko, équipe 75,3 → 50,5 Ko, élève 46,9 → 33,6 Ko
+
 ### Challenger du lot E *(2026-10-05, rôle distinct de l'exécutant)*
 
 Il a rejoué `count_round_trips.rb` et `measure_screens.rb` avant le levier (`app/` mis de côté) et après, trois fois chacun. Il retrouve les chiffres annoncés : 4/2/2 → 3/1/1 requêtes en série, et les poids à 0,1 Ko près. Tests navigateur, de contrôleur et de helper verts ; `bin/rubocop` (1 459 fichiers) et `bin/brakeman` sans alerte. Il a relevé un trou : rien ne vérifiait la carte rendue avec l'accueil d'un enseignant d'établissement brouillon ou inactif. Le test « RE-19: the home renders the card in the permanent sidebar frame… » le couvre désormais ; il est rouge sur le code précédent.
@@ -217,7 +226,8 @@ Doublons vérifiés mécaniquement (`awk … | sort | uniq -d` : aucune sortie).
 | `app/helpers/navigation_helper.rb` (`SIDEBAR_FRAME_OPTIONS`) · `app/views/shared/navigation/_sidebar.html.erb` · `app/views/identity/referrals/_sidebar_card.html.erb` · `app/views/classroom/teacher_homes/show.html.erb` · `docs/decisions/udr/0069-…` | Lot E1 |
 | `app/views/catalog/courses/index.html.erb` · `app/views/teams/schools/{index,show}.html.erb` · `app/views/teams/drenas/index.html.erb` · `test/support/icon_sprite_assertions.rb` | Lot E2 (puis E4 pour le catalogue, après E2) |
 | `config/routes/teams.rb` · `app/controllers/teams/{schools,drenas}_controller.rb` · `app/views/teams/{schools,drenas}/*` (lignes, confirmations, flux de suppression) · `docs/decisions/udr/0035-…` · `0036-…` | Lot E3 |
-| `app/infrastructure/queries/catalog/course_catalog_query.rb` · `app/controllers/catalog/courses_controller.rb` · `app/views/catalog/courses/_page*.html.erb` · `app/helpers/components_helper.rb` · `docs/decisions/udr/0013-…` | Lot E4 |
+| `app/infrastructure/queries/catalog/course_catalog_query.rb` · `app/controllers/catalog/courses_controller.rb` · `app/views/catalog/courses/_page*.html.erb` · `app/helpers/components_helper.rb` · `docs/decisions/udr/0013-…` | Lot E4 (puis E5 pour le helper et l'UDR, après E4) |
+| `app/assets/stylesheets/application.tailwind.css` · `app/views/catalog/courses/_course_card.html.erb` · `test/design/shared_classes_test.rb` | Lot E5 |
 
 Aucun lot ne touche `config/routes.rb`, `config/locales/*.yml` ni `app/views/layouts/`. Si le lot A ou B a besoin d'une clé de traduction, il s'arrête : le fichier remonte au Lot 0.
 

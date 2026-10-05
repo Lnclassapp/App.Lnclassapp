@@ -52,7 +52,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: including("Tle D"), count: 0
       assert_select "h2", text: "Génétique et évolution"
       assert_select "*", text: including("Du gène à l'espèce")
-      assert_select "*", text: including(tl("course_card.open"))
+      # UDR-0013, amendement du 2026-10-05 : toute la carte est le lien, elle n'a plus de pied « Ouvrir le cours ».
+      assert_select "*", text: including("Ouvrir le cours"), count: 0
     end
     assert_no_match(/Brouillon de cours|Cours archivé/, response.body)
     assert_no_match(including(status_label(:published)), response.body)
@@ -69,7 +70,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_list > li", 4
     assert_select "#course_#{@draft.slug}", text: including(status_label(:draft))
     assert_select "#course_#{@archived.slug}", text: including(status_label(:archived))
-    assert_select "#course_#{@course.slug}", text: including(status_label(:published))
+    # UDR-0013, amendement du 2026-10-05 : « Publié », l'état normal, n'est plus écrit sur la carte.
+    assert_select "#course_#{@course.slug}", text: including(status_label(:published)), count: 0
+    assert_select "#course_#{@course.slug} h2", text: "Génétique et évolution"
     assert_select modal_link(new_teams_course_path), text: tl("index.new_course")
     assert_select modal_link(new_teams_import_path(kind: "course_tree")), text: tl("index.import")
   end

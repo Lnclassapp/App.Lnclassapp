@@ -222,3 +222,13 @@ Ce qui ne change pas pour l'élève :
 
 **Mesure** (`measure_screens.rb`, 210 cours, 100 requêtes, médiane de 3) : enseignant 338,8 → **62,8 Ko**, p95 97,2 → **35,3 ms** ; équipe 410,4 → **75,3 Ko**, p95 170,8 → **55,0 ms**. Le rendu de la vue passe de 53 à 16 ms (enseignant) et de 68 à 19 ms (équipe).
 
+## Amendement du 2026-10-05 (bis) — carte allégée · Statut : Accepté (porteur, 2026-10-05 : « go pour A, C et E »)
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), lot E5. Le porteur a choisi trois des cinq allègements proposés pour la carte d'un cours. En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+- **C — plus de pied « Ouvrir le cours → ».** Toute la carte est déjà le lien vers le cours (charte : « dire chaque chose une seule fois »). Le séparateur, le texte et la flèche animée disparaissent ; la carte se termine au sous-titre. Le nom accessible du lien est celui de son contenu : matière, niveau, titre et sous-titre.
+- **E — statut, pour l'équipe seulement, et seulement s'il n'est pas « Publié ».** « Publié » est l'état normal ; « Brouillon » et « Archivé » restent (`content_status_badge`). Le badge rejoint la ligne du haut, à droite, après le badge de niveau, dans un `span.flex.flex-wrap.gap-2`.
+- **A — sans changement visible.** Les badges et les cartes-liens de toute l'application portent une classe partagée (`ui-badge`, `ui-badge-sm`, `ui-badge-md`, `ui-card-link`, définies dans `application.tailwind.css`) au lieu de leur liste de classes. Les styles calculés de chaque élément de `/design`, de la liste et de la fiche des établissements sont identiques avant et après, survol compris.
+- Écartés par le porteur : B (masquer le niveau quand un niveau est filtré) et D (retirer l'icône du badge matière).
+- **Mesure** (`measure_screens.rb`, 100 requêtes, médiane de 3) : catalogue de l'enseignant 62,8 → **43,2 Ko**, de l'équipe 75,3 → **50,5 Ko**, de l'élève 46,9 → **33,6 Ko**.
+

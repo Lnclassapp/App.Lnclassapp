@@ -126,7 +126,8 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
     open_sidebar_entry "Cours"
     within "#courses_list" do
       assert_selector "li", count: 1
-      assert_selector "li", text: /#{COURSE}.*Brouillon/m
+      # UDR-0013, amendement du 2026-10-05 (bis) : le statut est dans la ligne du haut de la carte, avant le titre.
+      assert_selector "li", text: /Brouillon.*#{COURSE}/m
       click_on COURSE
     end
     within "#course_essentials" do
