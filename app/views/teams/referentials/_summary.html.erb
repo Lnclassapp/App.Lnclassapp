@@ -1,12 +1,14 @@
 <%# 🌐 UI · teams/referentials/_summary — tuiles et structure scolaire de la page « Référentiel » (CA-25, RE-03) %>
-<%# Rôle : compteurs des DRENA, niveaux, séries, matières et total du barème, chacun vers son écran de gestion ; niveaux et leurs séries %>
-<%# ADR  : 0034, 0058 · UDR : 0018, 0045, 0068 (§3.4 : reprend teams/homes/_referential, deux cartes, sans titre pour les tuiles) %>
-<%# locals: (home:) -%>
+<%# Rôle : compteurs des DRENA, niveaux, séries, matières, total du barème et illustrations d'annonce, chacun vers son écran ; niveaux et leurs séries %>
+<%# ADR  : 0034, 0058, 0081 · UDR : 0018, 0045, 0068 (§3.4 : reprend teams/homes/_referential, deux cartes, sans titre pour les tuiles), 0075 (§3.6) %>
+<%# locals: (home:, illustrations_count: @illustrations_count) -%>
+<%# illustrations_count : le compte de Queries::Communication::IllustrationLibraryQuery, lu par Teams::ReferentialsController. -%>
 <% figures = [ [ :drenas, home.drenas_count, drenas_path, "map-pin" ], [ :levels, home.levels.size, levels_path, "squares-2x2" ],
                [ :series, home.series_count, series_index_path, "rectangle-stack" ], [ :materials, home.materials_count, materials_path, "book-open" ],
-               [ :classroom_plan, home.classroom_plan_total, classroom_plan_path, "calculator" ] ] %>
+               [ :classroom_plan, home.classroom_plan_total, classroom_plan_path, "calculator" ],
+               [ :announcement_illustrations, illustrations_count, teams_announcement_illustrations_path, "photo" ] ] %>
 <%= ui_card id: "team_referential" do %>
-  <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
+  <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
     <% figures.each do |figure, count, path, figure_icon| %>
       <li>
         <%= link_to path, class: "group flex h-full flex-col gap-3 rounded-ln border border-line p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>

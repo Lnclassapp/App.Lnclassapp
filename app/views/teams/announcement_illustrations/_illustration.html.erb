@@ -1,0 +1,40 @@
+<%# 🌐 UI · teams/announcement_illustrations/_illustration — une illustration de l'équipe dans la page « Illustrations d'annonce » %>
+<%# Rôle : trois aperçus reconstruits (Ciel, Mangue, Nuit), nom, date d'ajout ; « Retirée », ou le menu ⋮ : renommer, retirer après confirmation %>
+<%# ADR  : 0081 (§4.3) · UDR : 0005, 0042, 0075 (§3.2, §3.5) · local : row (Queries::Communication::IllustrationLibraryQuery::Row) %>
+<% illustration = row.illustration %>
+<% public_id = illustration.public_id %>
+<% day_format = t("teams.announcement_illustrations.formats.#{row.added_at.day == 1 ? 'first_day' : 'day'}") %>
+<li id="illustration_<%= public_id %>" class="flex items-center gap-3 rounded-ln border border-line p-3">
+  <div class="flex shrink-0 gap-1">
+    <%# Le dessin n'est jamais le fichier envoyé : announcement_illustration le reconstruit depuis ses formes revérifiées. %>
+    <% %w[ciel mangue nuit].each do |theme| %>
+      <span class="rounded-ln bg-brand-soft p-1" data-announcement-theme="<%= theme %>"><%= announcement_illustration illustration, class: "size-12" %></span>
+    <% end %>
+  </div>
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-bold"><%= illustration.name %></p>
+    <p class="flex flex-wrap items-center gap-2 text-xs text-mute">
+      <span><%= t(".added_on", date: l(row.added_at.to_date, format: day_format)) %></span>
+      <% if illustration.retired? %>
+        <%= ui_badge t(".retired"), tone: :neutral, size: :sm %>
+      <% end %>
+    </p>
+  </div>
+  <% unless illustration.retired? %>
+    <div class="shrink-0">
+      <%= ui_dropdown label: t(".actions", name: illustration.name), id: "illustration-actions-#{public_id}" do %>
+        <%= ui_dropdown_item t(".rename"), href: edit_teams_announcement_illustration_path(public_id), icon: "pencil-square" %>
+        <%= ui_dropdown_item t(".retire"), dialog: "retire-illustration-#{public_id}", icon: "archive-box-x-mark", tone: :danger %>
+      <% end %>
+      <%= ui_modal title: t(".retire_title"), id: "retire-illustration-#{public_id}", size: :sm do |modal| %>
+        <% modal.footer do %>
+          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+          <%= ui_button t(".confirm"), type: :submit, variant: :danger, form: "retire-illustration-form-#{public_id}" %>
+        <% end %>
+        <%= form_with url: teams_announcement_illustration_retirement_path(public_id), method: :post, id: "retire-illustration-form-#{public_id}" do %>
+          <p class="text-sm text-mute"><%= t(".retire_body") %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</li>

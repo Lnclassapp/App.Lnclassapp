@@ -65,8 +65,31 @@ class Teams::ReferentialsControllerTest < ActionDispatch::IntegrationTest
       { drenas_path => figure("drenas", 1), levels_path => figure("levels", 2),
         series_index_path => figure("series", 2), materials_path => figure("materials", 3) }
         .each { |path, label| assert_select "a[href='#{path}']", text: label }
-      assert_select "a", text: including(tl("summary.manage")), count: 5
+      assert_select "a", text: including(tl("summary.manage")), count: 6
     end
+  end
+
+  # UDR-0075 §3.6 : la tuile de la bibliothèque d'illustrations d'annonce compte les 8 de base et celles de l'équipe
+  # encore proposées ; une illustration retirée n'y compte plus.
+  test "AV-08 — la tuile « illustrations d'annonce » compte 8, puis 9 quand l'équipe en ajoute une ; une retirée ne compte pas" do
+    sign_in_as @member
+    tile = "#team_referential a[href='#{teams_announcement_illustrations_path}']"
+
+    get teams_referential_path
+    assert_select tile, text: figure("announcement_illustrations", 8) do
+      assert_select "svg", minimum: 1
+      assert_select "*", text: including(tl("summary.manage"))
+    end
+
+    create_illustration(name: "Bus scolaire", created_by: @member)
+    create_illustration(name: "Cantine", created_by: @member, retired_at: Time.current)
+    get teams_referential_path
+    assert_select tile, text: figure("announcement_illustrations", 9)
+  end
+
+  test "la tuile dit « illustration d'annonce » au singulier, « illustrations d'annonce » au pluriel" do
+    assert_equal [ "illustration d'annonce", "illustrations d'annonce" ],
+                 [ 1, 9 ].map { tl("summary.announcement_illustrations", count: it) }
   end
 
   test "RE-03: the school structure is its own card, each level with its series, or « Sans série »" do
@@ -115,7 +138,8 @@ class Teams::ReferentialsControllerTest < ActionDispatch::IntegrationTest
     get teams_referential_path
 
     assert_select "#team_referential" do
-      [ drenas_path, levels_path, series_index_path, materials_path, classroom_plan_path ].each { assert_select "a[href='#{it}']" }
+      [ drenas_path, levels_path, series_index_path, materials_path, classroom_plan_path,
+        teams_announcement_illustrations_path ].each { assert_select "a[href='#{it}']" }
     end
     assert_select "#team_referential_structure", text: including(tl("summary.levels_empty"))
   end
@@ -124,7 +148,7 @@ class Teams::ReferentialsControllerTest < ActionDispatch::IntegrationTest
   test "each referential screen leads back to the referential page" do
     sign_in_as @member
 
-    [ drenas_path, levels_path, series_index_path, materials_path, classroom_plan_path ].each do |path|
+    [ drenas_path, levels_path, series_index_path, materials_path, classroom_plan_path, teams_announcement_illustrations_path ].each do |path|
       get path
 
       assert_response :success

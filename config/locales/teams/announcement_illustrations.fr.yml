@@ -1,0 +1,66 @@
+# Bibliothèque d'illustrations d'annonce de l'équipe (chantier annonces-v2, Lot C) — ADR-0081 §4.3, UDR-0075 §3.5.
+# Vouvoiement, comme les autres écrans de l'équipe ; « illustration », « dessin », « retirer » (jamais « supprimer »).
+fr:
+  activemodel:
+    attributes:
+      dtos/communication/illustration_input:
+        name: "Nom"
+        file: "Dessin"
+    errors:
+      models:
+        # Le poids est vérifié avant toute lecture ; unsafe, not_svg et empty sont les raisons du lecteur de SVG
+        # (Ports::Communication::DrawingReaderPort), rédigées ici comme celles du fichier.
+        dtos/communication/illustration_input:
+          attributes:
+            name:
+              blank: "Saisissez un nom."
+              too_long: "Le nom compte %{count} caractères au plus."
+            file:
+              blank: "Choisissez un dessin SVG."
+              too_heavy: "Ce fichier est trop lourd (%{count} Ko au plus)."
+              unsafe: "Ce dessin n'est pas accepté : il contient autre chose que des formes."
+              not_svg: "Ce fichier n'est pas un dessin SVG."
+              empty: "Ce dessin est vide."
+  teams:
+    announcement_illustrations:
+      # Design system §12 : « 5 oct. », « 1ᵉʳ nov. »
+      formats:
+        day: "%-d %b"
+        first_day: "1ᵉʳ %b"
+      index:
+        page_title: "Illustrations d'annonce"
+        title: "Illustrations d'annonce"
+        subtitle: "Les auteurs les choisissent pour leurs annonces."
+        back: "Référentiel"
+        add_title: "Ajouter une illustration"
+        name_hint: "30 caractères au plus. Les auteurs le lisent dans le choix."
+        file_hint: "SVG d'une seule couleur, 50 Ko au plus. Il prend la couleur du thème de l'annonce."
+        submit: "Ajouter"
+        team_title: "Ajoutées par l'équipe"
+        empty: "Aucune illustration ajoutée pour l'instant."
+        base_title: "Fournies par Lnclass"
+      # Une illustration de l'équipe dans la liste (_illustration) ; son menu ⋮ et la confirmation du retrait.
+      illustration:
+        added_on: "Ajoutée le %{date}"
+        retired: "Retirée"
+        actions: "Actions pour « %{name} »"
+        rename: "Renommer"
+        retire: "Retirer"
+        retire_title: "Retirer cette illustration ?"
+        retire_body: "Elle ne sera plus proposée. Les annonces qui l'utilisent la gardent jusqu'à leur fin."
+        cancel: "Annuler"
+        confirm: "Retirer"
+      # UDR-0075 §3.5 : « Renommer (→ edit) » ; la page elle-même n'y est pas décrite.
+      edit:
+        page_title: "Renommer l'illustration"
+        title: "Renommer l'illustration"
+        back: "Illustrations d'annonce"
+        submit: "Renommer"
+        cancel: "Annuler"
+      create:
+        added: "Illustration ajoutée."
+      update:
+        renamed: "Illustration renommée."
+    announcement_illustration_retirements:
+      create:
+        retired: "Illustration retirée."
