@@ -16,6 +16,8 @@ Lot 0 — SOCLE (séquentiel) : schéma, entités, ports + adaptateurs, rendu s�
   └─► Lot D — Accepter les enregistrements de téléphone                          ┘
         ↓ (A, B, C et D mergés)
       Lot E — Parcours de bout en bout, nettoyage des constantes, mesures
+        ↓ (phase 5 : revue de sécurité, analyse des tests, challenger)
+      Lot F — Corrections de la phase 5 (ajouté le 2026-10-05, hors plan initial)
 ```
 
 Dispatch :
@@ -24,6 +26,7 @@ Dispatch :
 Vague 1 : Lot 0                              → 1 agent, séquentiel
 Vague 2 : Lot A ‖ Lot B ‖ Lot C ‖ Lot D       → 4 agents, worktrees isolés
 Vague 3 : Lot E                              → 1 agent
+Vague 4 : Lot F                              → 1 agent (ajouté en phase 5)
 ```
 
 Worktrees : `git worktree add ../lnclass-annonces-v2-lot-<x> -b feature/annonces-v2-lot-<x> feature/annonces-v2`, **après** le merge du Lot 0.
@@ -131,6 +134,22 @@ Règles pour chaque lot :
 - **Test associé** : `test/system/communication/announcements_v2_journey_test.rb`
 - **Done quand**   : le parcours nominal du PRD §3 se joue en navigateur réel, en 390 px ; le budget système du chantier tient (15 s, mesuré face à `Develop`) ; l'accueil élève garde 16 requêtes avec des annonces thémées
 
+> **Résultat** : parcours en 390 px, 9,3 s de suite système sur 15. L'accueil élève fait 16 requêtes sans annonce, 17 avec des annonces thémées et 18 avec des dessins de l'équipe, quel que soit leur nombre ; `Develop` fait déjà 16 et 17 (PRD §7 corrigé).
+
+---
+
+## Lot F — Corrections de la phase 5 *(ajouté le 2026-10-05)*
+
+- **Couche**       : domaine, infrastructure, delivery, tests
+- **Fichiers**     : `app/domain/use_cases/communication/{create_message,update_message,publish_scheduled_messages,add_illustration}.rb`
+                     `app/domain/ports/communication/{message_repository_port,illustration_repository_port}.rb` *(ajouts : `publish_scheduled`, `lock_library`)*
+                     `app/infrastructure/repositories/communication/{message_repository,illustration_repository}.rb` *(`FOR NO KEY UPDATE`)*
+                     `app/infrastructure/queries/communication/authored_messages_query.rb`, `app/controllers/communication/authored_messages_controller.rb`, `app/views/communication/authored_messages/_form.html.erb`, `config/locales/communication/authored_messages.fr.yml`
+                     `test/infrastructure/repositories/communication/message_publication_concurrency_test.rb` et les tests des fichiers ci-dessus, `test/design/announcement_themes_test.rb`, `test/controllers/{communication/message_files,communication/moderations,teams/announcement_illustrations}_controller_test.rb`
+- **Dépend de**    : Lot E et phase 5
+- **Test associé** : `test/infrastructure/repositories/communication/message_publication_concurrency_test.rb`
+- **Done quand**   : deux parutions concurrentes de la même annonce n'archivent et ne journalisent qu'une fois ; le job n'écrit que le statut ; deux ajouts concurrents à 49 dessins n'en laissent passer qu'un ; chaque trou de l'analyse des tests a son test, vu rouge sur un mutant
+
 ---
 
 ## Rattachement des critères
@@ -189,18 +208,18 @@ Aucun critère orphelin.
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur *(challenger de la phase 5, 2026-10-05)*
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert *(en local, la CI étant coupée)*
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR *([#182](https://github.com/Lnclassapp/App.Lnclassapp/pull/182))*
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 Propres à ce chantier :
 
 - [x] ADR-0081 et UDR-0075 `Accepté` **avant** le Lot 0 (programme) — porteur, 2026-10-05
-- [ ] Revue de sécurité sur le Lot C (lecture des SVG) et sur le rendu des illustrations du Lot 0, avant le merge du Lot C
+- [x] Revue de sécurité sur le Lot C (lecture des SVG) et sur le rendu des illustrations du Lot 0, avant le merge du Lot C *(rien d'exploitable ; plafond de 50 ajouté)*
 - [x] Palette des 10 thèmes validée par le porteur (UDR-0075 §3.1) — 2026-10-05
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.

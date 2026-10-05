@@ -172,3 +172,10 @@ Décision de l'orchestrateur du chantier `annonces-v2`, prise à la revue de pha
 - au-delà : « Tu as déjà <n> annonces en ligne. En publiant, « <titre 1> », « <titre 2> » et « <titre 3> » seront archivées. », les titres en liste française (virgules, puis « et »).
 
 La seconde ligne de l'encadré (« Programmée, elle archivera à sa parution la plus ancienne alors en ligne. ») et les toasts ne changent pas : le toast nommait déjà toutes les annonces archivées.
+
+## Amendement du 2026-10-05 — clôture : le dessin retiré que l'annonce porte, et la bibliothèque pleine
+
+Décisions de l'orchestrateur du chantier `annonces-v2` (Lot E et revue de sécurité du Lot C), à la clôture.
+
+- **Formulaire de modification (§3.3).** Une annonce garde son dessin de l'équipe jusqu'à sa fin, même retiré de la bibliothèque depuis (ADR-0081, amendement de clôture). Son formulaire de modification le propose donc encore, **en dernier** après les dessins non retirés, et coché. Un formulaire de création, ou celui d'une annonce qui porte un autre dessin, ne le montre pas. Choisir un dessin retiré qu'on ne portait pas reste refusé (422, « Choisissez une illustration de la bibliothèque. »).
+- **Bibliothèque pleine (§3.5).** 50 dessins non retirés au plus. Au-delà, l'ajout est refusé sous « Dessin » : « La bibliothèque compte déjà 50 illustrations : retirez-en une avant d'en ajouter. » Le fichier n'est pas lu.

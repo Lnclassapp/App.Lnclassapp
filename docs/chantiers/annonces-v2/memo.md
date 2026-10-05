@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré en PR ([#182](https://github.com/Lnclassapp/App.Lnclassapp/pull/182), 2026-10-05) |
 | **Ouvert le** | 2026-10-05 |
 | **Branche** | `feature/annonces-v2` |
 | **Programme** | `refonte-application`, vague V6 (suite de [`annonces`](../annonces/memo.md), V6a) |
