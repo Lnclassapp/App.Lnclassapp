@@ -1,7 +1,7 @@
 require "test_helper"
 
 # Lot E of fonctions-espace-eleve (ADR-0072 §4.4, UDR-0062 §3.5): the follow-up of an assigned exercise. « Fait » is a
-# completed standard session attached to the assignment (ADR-0048); « rendu en retard » compares the local date of the
+# completed session attached to the assignment (ADR-0048), standard or remediation (ADR-0079 §4.1); « rendu en retard » compares the local date of the
 # FIRST one with due_on, the due day itself being on time. Read, never written.
 module Queries
   module Classroom
@@ -63,13 +63,38 @@ module Queries
         assert_equal [ [ "Koffi Yao", Date.new(2026, 10, 9) ] ], row.late_students.map { [ it.display_name, it.done_on ] }
       end
 
-      test "a remediation session, a started one or one of another assignment does not count: still « pas encore fait »" do
+      test "a started session or a completed one outside the assignment does not count: still « pas encore fait »" do
         student = create_student(classroom: @classroom)
-        hand_in(student, at: Time.zone.local(2026, 10, 9, 10), gap: create_gap(student:, essential: @exercise.essential))
         create_exercise_session(student:, exercise: @exercise, classroom_assignment: @assignment)
         create_exercise_session(student:, exercise: @exercise, status: "completed", completed_at: Time.zone.local(2026, 10, 9, 10))
 
         assert_equal AssignmentFollowUpQuery::Counts.new(done: 0, late: 0, pending: 1), follow_up.counts
+        assert_empty follow_up.late_students
+      end
+
+      # ADR-0079 §4.1 : une session de remédiation sur l'exercice assigné, c'est faire cet exercice. Une lacune ouverte par
+      # un autre exercice de la fiche fait de la session de l'exercice assigné une remédiation (ADR-0043) : elle compte.
+      test "a remediation session is doing the exercise: alone on the assignment, it is done, late after the due date" do
+        late = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+        on_time = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+        create_student(classroom: @classroom, first_name: "Jean", last_name: "Kouassi")
+        hand_in(late, at: Time.zone.local(2026, 10, 9, 10), gap: create_gap(student: late, essential: @exercise.essential))
+        hand_in(on_time, at: Time.zone.local(2026, 10, 8, 10), gap: create_gap(student: on_time, essential: @exercise.essential))
+
+        row = follow_up
+
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 2, late: 1, pending: 1), row.counts
+        assert_equal [ AssignmentFollowUpQuery::LateStudent.new(display_name: "Koffi Yao", done_on: Date.new(2026, 10, 9)) ],
+                     row.late_students
+        assert_equal [ AssignmentFollowUpQuery::PendingStudent.new(display_name: "Jean Kouassi") ], row.pending_students
+      end
+
+      test "the first done session decides, whatever its kind: a remediation on time, then a standard one late, is on time" do
+        student = create_student(classroom: @classroom)
+        hand_in(student, at: Time.zone.local(2026, 10, 7, 10), gap: create_gap(student:, essential: @exercise.essential))
+        hand_in(student, at: Time.zone.local(2026, 10, 10, 10))
+
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 1, late: 0, pending: 0), follow_up.counts
         assert_empty follow_up.late_students
       end
 
@@ -93,6 +118,31 @@ module Queries
 
         assert_equal [ [ "Koffi Achi", Date.new(2026, 10, 11) ], [ "Awa Bamba", Date.new(2026, 10, 10) ], [ "Zoé Bamba", Date.new(2026, 10, 9) ] ],
                      follow_up.late_students.map { [ it.display_name, it.done_on ] }
+      end
+
+      test "the students not done yet are named by last name, then first name; one with only a started session among them" do
+        [ %w[Zoé Bamba], %w[Awa Bamba], %w[Koffi Achi] ].each { |first_name, last_name| create_student(classroom: @classroom, first_name:, last_name:) }
+        started = create_student(classroom: @classroom, first_name: "Jean", last_name: "Kouassi")
+        create_exercise_session(student: started, exercise: @exercise, classroom_assignment: @assignment)
+        hand_in(create_student(classroom: @classroom, first_name: "Fait", last_name: "Déjà"), at: Time.zone.local(2026, 10, 7, 10))
+
+        row = follow_up
+
+        assert_equal [ AssignmentFollowUpQuery::PendingStudent.new(display_name: "Koffi Achi"), AssignmentFollowUpQuery::PendingStudent.new(display_name: "Awa Bamba"),
+                       AssignmentFollowUpQuery::PendingStudent.new(display_name: "Zoé Bamba"), AssignmentFollowUpQuery::PendingStudent.new(display_name: "Jean Kouassi") ],
+                     row.pending_students
+        assert_equal row.counts.pending, row.pending_students.size
+      end
+
+      test "a student who left, an anonymized one or one of another classroom is not « pas encore fait »; all done, nobody waits" do
+        Orm::ClassroomStudent.where(student: create_student(classroom: @classroom, last_name: "Parti")).update_all(left_at: Time.current)
+        create_student(classroom: @classroom, last_name: "Anonyme").update_columns(anonymized_at: Time.current)
+        create_student(classroom: create_classroom(school: @school), last_name: "Ailleurs")
+        hand_in(create_student(classroom: @classroom, last_name: "Fait"), at: Time.zone.local(2026, 10, 7, 10))
+        other = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential))
+
+        assert_empty follow_up.pending_students
+        assert_equal [ "Fait" ], follow_up(other).pending_students.map { it.display_name.split.last }
       end
 
       test "without a due date, nothing is late: done and pending only" do

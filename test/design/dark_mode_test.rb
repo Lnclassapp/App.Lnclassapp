@@ -43,6 +43,15 @@ class DarkModeTest < ActiveSupport::TestCase
     dark.each_value { |value| assert_match(/\A#\h{6}\z/, value) }
   end
 
+  # UDR-0072 §3.1 : les quatre couleurs de la compréhension, pastilles et barres seulement (jamais un texte).
+  test "the four comprehension tokens exist in the theme and in both dark blocks" do
+    comprehension = %w[struggling struggling-soft fragile fragile-soft]
+
+    assert_equal %w[#c8322b #fdecea #e0a800 #fff8d2], light.values_at(*comprehension)
+    assert_equal %w[#ff7b72 #3d2023 #facc15 #3a3214], dark.values_at(*comprehension)
+    assert_equal dark.values_at(*comprehension), chosen_dark.values_at(*comprehension)
+  end
+
   test "the shadows are redefined for dark surfaces, and the modal backdrop stays a dark veil" do
     %w[--shadow-card --shadow-lift --shadow-pop].each { |shadow| assert_match(/#{shadow}: [^;]*rgb\(0 0 0/, dark_block) }
     assert_match(/dialog::backdrop \{\s*background-color: rgb\(0 0 0/, dark_block)

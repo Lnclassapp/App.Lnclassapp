@@ -14,6 +14,8 @@
 # Aucune donnée n'est écrite, sauf les sessions de connexion des quatre comptes de mesure et le compteur de lectures de
 # l'article mesuré : la lecture d'un visiteur compte, et son UPDATE entre dans le budget (ADR-0074 §4.7). Le blog
 # (/blog, /blog?page=2, /blog/:slug) est lu sans compte, par la session `visitor` : sous 100 ms p95 et 150 Ko (ADR-0067).
+# Le suivi d'un exercice assigné (UDR-0072, ADR-0079) est lu sur l'assignation active la plus faite de la classe mesurée :
+# la page entière, puis le seul cadre d'une catégorie choisie (Turbo-Frame comprehension_frame).
 require "json"
 require "zlib"
 
@@ -77,6 +79,10 @@ module PerfScreens
     course = Orm::Course.find(assigned_course || Orm::Course.where(status: "published").order(:id).pick(:id))
     essential = course.essentials.order(:position).first
     exercise = essential.exercises.order(:position).first
+    done = "(SELECT COUNT(*) FROM exercise_sessions s WHERE s.classroom_assignment_id = classroom_assignments.id AND s.status = 'completed')"
+    follow_up = Orm::ClassroomAssignment.where(classroom: teacher_classroom, status: "active")
+                                        .order(Arel.sql("#{done} DESC"), :id).pick(:public_id)
+    follow_up_path = "/classrooms/#{teacher_classroom.public_id}/assignments/#{follow_up}"
     article = Orm::Article.where(status: "published").order(published_at: :desc, id: :desc).pick(:slug) or
       raise "aucun article publié : semer le jeu (script/perf/seed_dataset.rb)"
     [
@@ -95,6 +101,8 @@ module PerfScreens
       [ "teacher_home", :teacher, "/teachers" ],
       [ "teacher_classrooms", :teacher, "/teachers/classrooms" ],
       [ "classroom_show", :teacher, "/classrooms/#{teacher_classroom.public_id}" ],
+      [ "assignment_follow_up", :teacher, follow_up_path ],
+      [ "assignment_follow_up_fragile", :teacher, "#{follow_up_path}?category=fragile", { "Turbo-Frame" => "comprehension_frame" } ],
       [ "classroom_course", :teacher, "/classrooms/#{teacher_classroom.public_id}/courses/#{course.slug}" ],
       [ "course_assignments", :teacher, "/courses/#{course.slug}/assignments" ],
       [ "courses_teacher", :teacher, "/courses" ],

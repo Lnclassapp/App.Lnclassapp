@@ -1,4 +1,5 @@
 # Résultat d'une session (AS-11 à AS-13) — Lot C3, UDR-0023 ; vocabulaire de l'UDR-0007
+# Phrase de progrès de l'élève : UDR-0073 §3, à la lettre ; jamais « stagne », « baisse » ni « essai ».
 # Les encouragements reprennent la locale de gamification de l'ancienne application.
 fr:
   assessment:
@@ -49,6 +50,11 @@ fr:
         answers: "Propositions"
         correct: "Proposition correcte"
         explanation: "Explication"
+      progress:
+        progress: "Tu progresses : %{first}/20 à ta première session, %{current}/20 aujourd'hui."
+        stable: "Tu confirmes ta maîtrise : %{current}/20."
+        stagnant: "Tu restes autour de %{current}/20. Relis la correction ci-dessous avant de recommencer."
+        decline: "Ton meilleur résultat reste %{best}/20. Relis la correction, tu peux le retrouver."
       badge:
         label: "Badge %{level}"
         new: "Nouveau badge !"

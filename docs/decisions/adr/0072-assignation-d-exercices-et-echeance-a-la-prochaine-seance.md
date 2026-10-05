@@ -345,11 +345,19 @@ Acceptés tels quels par le porteur le 2026-10-02 (« lance les lots » ; memo, 
 7. **« Fait »** = session rendue rattachée à l'assignation (définition de l'ADR-0048).
 8. **Direction** : elle ne voit ni les retards ni la liste nominative.
 
-## Complément du 2026-10-04 (ter) — la remédiation compte comme « rendu » côté direction
+## Complément du 2026-10-04 — élèves pas encore faits nommés
 
-*Chantier de correction [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/memo.md), décision de l'orchestrateur par mandat du porteur (2026-10-04). Le texte ci-dessus reste tel qu'accepté. Pendant côté enseignant : ADR-0079 §4.1 et complément (bis) de cet ADR, livrés par le chantier `rapports-exercices` ([PR #164](https://github.com/Lnclassapp/App.Lnclassapp/pull/164)).*
+*Par l'[ADR-0079](0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) §4.8 (chantier `rapports-exercices`), décision du porteur. Le texte ci-dessus reste tel qu'accepté.*
 
-- §1 point 1 et §4.4 : **pour la direction comme pour l'enseignant, « rendu » et « fait » incluent la remédiation.** Un devoir est rendu s'il existe une session `completed`, rattachée à l'assignation (`classroom_assignment_id`), d'un élève présent, **quel que soit son `kind`** (`standard` ou `remediation`). Les moyennes (de l'élève, de la classe, des anciens élèves) incluent ces sessions.
-- **Pourquoi** : `StartExerciseSession#new_session` ouvre une session `remediation` sur **tout** exercice d'une fiche dès que l'élève y a une lacune en attente (ADR-0043), et la rattache à l'assignation. Un élève qui rate l'exercice X à 25 % puis fait l'exercice assigné Y à 80 % le fait donc en remédiation : ne compter que `standard` le montrait « pas encore rendu » à la direction, faussait le taux de rendu de sa classe et écartait son 80 % de la moyenne. Ce sont précisément les élèves en difficulté, ceux que la direction doit voir.
-- Lu par `Queries::School::StudentWorkQuery` (« Travail des élèves », page d'une classe) et `Queries::School::DepartedStudentsQuery` (« Anciens élèves »). Une remédiation **hors** assignation, une session commencée ou abandonnée ne comptent toujours pas.
-- L'index partiel `index_exercise_sessions_handed_in` perd sa condition sur `kind` (même nom, même clé, même `INCLUDE`) : voir la note du 2026-10-04 de l'[ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md).
+- §4.5 : la page de suivi nomme aussi les élèves présents **qui n'ont pas encore fait** l'exercice, sous la même `FollowAssignmentPolicy`. La question laissée ouverte par le grill de ce chantier est tranchée : l'enseignant doit savoir qui relancer.
+
+## Complément du 2026-10-04 (bis) — la remédiation compte comme « fait »
+
+*Par l'[ADR-0079](0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) §4.1 (chantier `rapports-exercices`), décision de l'orchestrateur par mandat du porteur. Le texte ci-dessus reste tel qu'accepté.*
+
+- §4.4 : **pour l'enseignant, « fait » inclut désormais la remédiation.** Une session est faite si elle est `completed`, rattachée à l'assignation, d'un élève présent, quel que soit son `kind` (`standard` ou `remediation`). Une session de remédiation sur l'exercice assigné, c'est faire cet exercice : `StartExerciseSession` l'ouvre dès qu'une lacune est en attente sur la fiche (ADR-0043), pour tous les exercices de la fiche, et la rattache à l'assignation.
+- Le « rendu en retard » se lit sur la première session faite, quel que soit son `kind`.
+- Lu par `Queries::Classroom::AssignmentFollowUpQuery` (comptes, retards nommés, pas encore faits) et `Queries::Assessment::AssignmentScores` (page classe et page de suivi).
+- §7 : la ligne « remédiation → ne compte pas » de `assignment_follow_up_query_test.rb` est remplacée par « remédiation rattachée à l'assignation → fait, en retard après l'échéance ».
+- **Les queries de la direction** (`Queries::School::StudentWorkQuery`, `Queries::School::DepartedStudentsQuery`) comptent encore « fait » sans la remédiation. Elles suivront dans le chantier de correction `remediation-comptee-faite`, qui ajoute l'index nécessaire.
+
