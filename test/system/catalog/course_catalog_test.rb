@@ -51,6 +51,27 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
            "une ressource vient d'un hôte tiers"
   end
 
+  # Lot E4 (chantier politique-cache), UDR-0013 amendement du 2026-10-05 : 24 cartes ; la suite arrive quand on descend,
+  # sans rechargement de page, et une carte de la suite ouvre son cours en page entière.
+  test "the teacher scrolls down the catalogue: the next cards load in place, and one of them opens its course" do
+    25.times { |index| create_course(name: format("Cours %02d", index), level: @tle, material: @svt) }
+    sign_in_as create_teacher
+    visit courses_path
+    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 27)
+    assert_selector "#courses_list > li", count: 24
+    assert_no_selector "#courses_list_page_2"
+
+    assert_no_page_reload do
+      scroll_to find("turbo-frame#courses_page_2")
+      assert_selector "#courses_list_page_2 > li", count: 3
+      assert_no_selector "turbo-frame#courses_page_3"
+    end
+    last = all("#courses_list_page_2 > li").last
+    name = last.find("h2").text
+    last.find("a").click
+    assert_selector "h1", text: name
+  end
+
   test "the team edits the content in the rich text editor from the course page, then publishes and archives it, without a page reload" do
     course = create_course(name: "Mutation et diversité", level: @tle, material: @svt, status: "draft",
                            content: "<div>Probabilité : $\\frac{1}{2}$</div>")

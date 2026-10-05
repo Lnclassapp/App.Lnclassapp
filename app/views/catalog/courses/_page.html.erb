@@ -1,0 +1,29 @@
+<%# 🌐 UI · catalog/courses/_page — une page de cartes du catalogue, puis le frame différé de la suivante %>
+<%# Rôle : 24 cartes (CourseCatalogQuery::PER_PAGE), icônes dessinées une fois par page ; au bas, la page suivante, chargée au défilement, ou son lien sans JavaScript %>
+<%# ADR  : 0035, 0067, 0076 (§4.2 : hors de l'écran à l'arrivée) · UDR : 0013 (amendement du 2026-10-05), 0057, 0077 · nested : page chargée dans le frame de la précédente %>
+<%# locals: (page:, nested: false) -%>
+<% team = current_actor.team? %>
+<% student = current_actor.student? %>
+<% teacher = teacher_scope %>
+<% filters = @filters.compact_blank %>
+<%# Une carte porte deux icônes (matière, flèche) : dessinées une fois par page, reprises par <use> (ADR-0067) ; les pages
+    suivantes préfixent leurs <symbol>, pour qu'aucun id ne se répète dans la page. %>
+<%= ui_icon_sprite(prefix: ("courses-page-#{page.page}-" if nested)) do %>
+  <ul id="<%= nested ? "courses_list_page_#{page.page}" : "courses_list" %>" class="<%= class_names("grid gap-5 sm:grid-cols-2 xl:grid-cols-3", "mt-5" => nested) %>">
+    <%# UDR-0057 R6 : l'élève a un seul niveau, et la matière filtrée est déjà dite par la liste « Matière » ; l'enseignant
+        n'a qu'une matière, dite par le sous-titre (UDR-0077 §3.2). %>
+    <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course,
+               locals: { show_status: team, show_level: !student,
+                         show_material: !(teacher || (student && filters[:material].present?)) } %>
+  </ul>
+<% end %>
+<% if page.page < page.pages %>
+  <% next_page = page.page + 1 %>
+  <% next_path = courses_path(**filters, page: next_page) %>
+  <%# Demandé quand il entre à l'écran ; le bouton vise ce frame (sans JavaScript, il ouvre la page suivante). %>
+  <%= turbo_frame_tag "courses_page_#{next_page}", src: next_path, loading: :lazy, target: "_top", class: "mt-5 block" do %>
+    <div class="flex justify-center py-2">
+      <%= ui_button t("catalog.courses.page.more"), href: next_path, variant: :secondary, data: { turbo_frame: "courses_page_#{next_page}" } %>
+    </div>
+  <% end %>
+<% end %>

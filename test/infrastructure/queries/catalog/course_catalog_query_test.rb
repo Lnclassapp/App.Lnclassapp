@@ -19,7 +19,7 @@ module Queries
       end
 
       def actor(role) = Entities::Identity::Actor.new(user_id: 1, role:)
-      def catalog(role, **filters) = CourseCatalogQuery.new.call(actor: actor(role), **filters)
+      def catalog(role, **filters) = CourseCatalogQuery.new.call(actor: actor(role), **filters).rows
 
       test "un élève, un enseignant ou un personnel d'établissement ne lit que les cours publiés, par matière, niveau et nom" do
         %i[student teacher school_admin].each do |role|
@@ -84,10 +84,11 @@ module Queries
         assert_empty catalog(:student, search: "%")
       end
 
-      test "une seule requête, quel que soit le nombre de cours" do
+      # Lot E4 (politique-cache) : le compte, puis la page ; deux requêtes, quel que soit le nombre de cours.
+      test "deux requêtes, quel que soit le nombre de cours" do
         queries = count_queries { catalog(:team, level: @tle.slug) }
 
-        assert_equal 1, queries
+        assert_equal 2, queries
       end
 
       # RE-15 (UDR-0069 §3.4) : la règle de l'élève (AudienceFilter), série vide ou cette série, appliquée au filtre.
@@ -100,7 +101,7 @@ module Queries
         assert_equal [ @genetique.slug ], catalog(:teacher, level: @tle.slug, series: "d", material: @svt.slug).map(&:slug)
         assert_equal [ @conscience, @genetique, mecanique ].map(&:slug), catalog(:teacher, level: @tle.slug, series: "").map(&:slug)
         assert_empty catalog(:teacher, level: @tle.slug, series: "inconnue")
-        assert_equal 1, count_queries { catalog(:team, level: @tle.slug, series: "d") }
+        assert_equal 2, count_queries { catalog(:team, level: @tle.slug, series: "d") }
       end
 
       test "sans niveau, la série est ignorée" do
@@ -138,12 +139,30 @@ module Queries
         student = Entities::Identity::Actor.new(user_id: 1, role: :student)
         query = CourseCatalogQuery.new
 
-        rows = query.call(actor: student, audience: Entities::Catalog::LevelAudience.new(pairs: [ [ tle.id, d.id ] ]))
+        rows = query.call(actor: student, audience: Entities::Catalog::LevelAudience.new(pairs: [ [ tle.id, d.id ] ])).rows
 
         assert_equal [ own.slug, common.slug ].sort, rows.map(&:slug).sort
-        assert_empty query.call(actor: student, audience: Entities::Catalog::LevelAudience.none)
+        assert_empty query.call(actor: student, audience: Entities::Catalog::LevelAudience.none).rows
         # Sans audience (enseignant, direction), la requête ne restreint pas le niveau.
-        assert_includes query.call(actor: student).map(&:name), "Seconde"
+        assert_includes query.call(actor: student).rows.map(&:name), "Seconde"
+      end
+
+      # Lot E4 (politique-cache, UDR-0013 amendement du 2026-10-05) : des pages de 24 cartes, dans l'ordre du catalogue,
+      # avec le compte total ; une page hors bornes ou forgée est ramenée à la plus proche.
+      test "le catalogue se lit par pages de 24 cartes, dans le même ordre, avec le compte total" do
+        26.times { |index| create_course(name: format("Cours %02d", index), level: @seconde, material: @svt) }
+        query = CourseCatalogQuery.new
+        first = query.call(actor: actor(:team))
+        second = query.call(actor: actor(:team), page: 2)
+
+        assert_equal [ 31, 31 ], [ first.total_count, second.total_count ], "5 cours de départ et 26 de plus, tous états"
+        assert_equal [ 1, 2, 2 ], [ first.page, second.page, second.pages ]
+        assert_equal [ 24, 7 ], [ first.rows.size, second.rows.size ]
+        slugs = (first.rows + second.rows).map(&:slug)
+        assert_equal Orm::Course.order(:id).pluck(:slug).sort, slugs.sort
+        assert_equal 2, query.call(actor: actor(:team), page: "99").page
+        assert_equal 1, query.call(actor: actor(:team), page: [ "2" ]).page
+        assert_equal [ 1, 0 ], query.call(actor: actor(:team), material: "inconnue").then { [ it.pages, it.total_count ] }
       end
     end
   end

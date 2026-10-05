@@ -55,6 +55,19 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "svg.size-5 > path", true, "après le bloc, l'icône est de nouveau en ligne"
   end
 
+  # Lot E4 (politique-cache) : deux blocs de la même page (pages du catalogue chargées au défilement) ne partagent aucun id.
+  test "ui_icon_sprite prefixes its symbols when asked, so that two blocks of a page never share an id" do
+    show(safe_join([ ui_icon_sprite { ui_icon("home") }, ui_icon_sprite(prefix: "courses-page-2-") { ui_icon("home") } ]))
+
+    assert_select "use[href='#icon-24-outline-home']", 1
+    assert_select "use[href='#courses-page-2-icon-24-outline-home']", 1
+    assert_select "symbol#icon-24-outline-home", 1
+    assert_select "symbol#courses-page-2-icon-24-outline-home", 1
+
+    show ui_icon_sprite { ui_icon("home") }
+    assert_select "symbol#icon-24-outline-home", 1, "le préfixe ne survit pas à son bloc"
+  end
+
   test "ui_spinner spins at the requested size" do
     show ui_spinner(size: :lg)
 
@@ -582,6 +595,14 @@ class ComponentsHelperTest < ActionView::TestCase
       assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-signal-#{signal}[aria-hidden=true]",
                     count: 1
     end
+  end
+
+  # UDR-0076 §3.1, charte §5 et §9 : la bulle d'une matière en retard porte la pastille ambre, celle de l'urgence.
+  test "ui_subject_bubble puts the amber dot of a late subject" do
+    show ui_subject_bubble(label: "SVT", href: "/courses?material=svt", illustration: subject_illustration("svt"), signal: :warning)
+
+    assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-warning[aria-hidden=true]",
+                  count: 1
   end
 
   test "ui_subject_bubble without a signal has no dot, and refuses an unknown signal" do

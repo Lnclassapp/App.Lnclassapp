@@ -206,3 +206,19 @@ Ce qui ne change pas pour l'élève :
 
 - **Filtre « Série »** (UDR-0069 §3.4) pour l'enseignant et l'équipe : avec un niveau, il garde les cours sans série et ceux de la série choisie (la règle de l'élève). `FILTERS = %i[level series material q]`.
 - **Puce « Autres rôles » de l'amendement du 2026-10-01** : l'enseignant assigne depuis sa classe **et** depuis le catalogue (fiche essentielle, page d'un exercice), aux seules classes de son niveau (UDR-0069 §3.8). La page d'un cours n'a toujours aucun bouton d'assignation.
+
+## Amendement du 2026-10-05 — cartes par pages de 24, la suite chargée au défilement · Statut : Accepté (porteur, 2026-10-05)
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), lot E4 (reprise du lot 5 de `cache-ecrans-lourds`). Décision du porteur, 2026-10-05 : « pagination avec du loading (Hotwire) ». En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+**Raison.** Le catalogue rendait tous les cours d'un coup, soit 210 cartes : 339 Ko de HTML pour l'enseignant et 410 Ko pour l'équipe, pour un budget de 150 Ko ([ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md)). Un cache des cartes aurait accéléré le rendu sans alléger la page.
+
+**Ce qui change**
+- `#courses_list` montre les **24 premières cartes** (`CourseCatalogQuery::PER_PAGE` : des lignes pleines sur 1, 2 ou 3 colonnes), dans l'ordre inchangé (matière, niveau, nom). `#courses_total` annonce toujours le nombre total de cours.
+- S'il reste des cours, un `turbo_frame_tag "courses_page_<n>"` (`loading: :lazy`, `target: "_top"`, `mt-5 block`) suit la liste. Il demande la page suivante, filtres et recherche compris, quand il entre à l'écran. Hors de l'écran à l'arrivée, il n'ajoute aucune requête en série au clic vers le catalogue ([ADR-0076](../adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md) §4.2).
+- La réponse (`catalog/courses/_page_frame`, sans layout) ne contient que ce frame, avec `ul#courses_list_page_<n>.mt-5` (24 cartes, icônes dessinées une fois avec un préfixe de page) et, s'il en reste, le frame de la page suivante.
+- Dans le frame, un bouton secondaire « Afficher plus de cours » vise ce frame. Sans JavaScript, il ouvre la page suivante entière (`?page=<n>`).
+- Filtrer ou chercher remplace le frame `courses` et repart de la page 1. L'élève, qui ne voit que son niveau (moins de 24 cours aujourd'hui), ne voit pas de différence.
+
+**Mesure** (`measure_screens.rb`, 210 cours, 100 requêtes, médiane de 3) : enseignant 338,8 → **62,8 Ko**, p95 97,2 → **35,3 ms** ; équipe 410,4 → **75,3 Ko**, p95 170,8 → **55,0 ms**. Le rendu de la vue passe de 53 à 16 ms (enseignant) et de 68 à 19 ms (équipe).
+

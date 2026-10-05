@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | livré (lots 1 et 2) ; p95 sous 100 ms non atteint sur la machine de mesure — à rejouer par le challenger |
+| **Statut** | livré (#173, fusionnée dans `Develop` le 2026-10-05 ; lot 1) — lot 2 retiré à la fusion de #167 |
 | **Ouvert le** | 2026-10-05 |
 | **Branche** | `perf/travail-eleves-budget` |
 | **Programme** | — *(suite du lot 2 de [`ecrans-direction-lents`](../ecrans-direction-lents/memo.md))* |
@@ -45,29 +45,27 @@ La direction (SchoolStaff), au moment où elle fait le point sur le travail des 
 
 ## Mesures (Avant / Cible / Après)
 
-Chaque levier est mesuré dans la même série que ce qu'il remplace, rejoué juste avant lui ([plan § Protocole](plan.md#protocole)). Médiane de 3 exécutions × 30 mesures ; entre parenthèses, les 3 exécutions.
+### Ce qui est livré : lot 1, sur la base de `Develop` après #167
 
-**Série finale** (2026-10-05, `Develop` `d65938c8` puis la branche, à la suite) :
+Pendant le chantier, #167 (`accueil-direction`) a transformé l'écran : le tableau des classes de « Travail des élèves » est devenu **l'accueil de la direction**, dont les chiffres sont **gardés 5 minutes** par établissement (ADR-0065, amendement du 2026-10-04), et une **page par niveau**, lue en direct. `StudentWorkQuery` sert ces deux écrans et la page d'une classe. Le lot 2 a été retiré à la fusion (#167 compte les élèves présents autrement) ; seul le lot 1 est livré.
 
-| Métrique | Avant (`Develop`) | Cible | Après (lots 1 et 2) | Écart |
+Mesure finale, 2026-10-05 : `f75011c7` (`Develop` juste avant #173) contre la branche, seul le fichier de la query changeant ; même base, protocole de l'ADR-0067, **2 séries alternées × 3 exécutions × 30 mesures, médiane des 6**. La page d'un niveau est mesurée sur le niveau le plus fourni de l'établissement (« 1ère », 24 classes) ; l'accueil, cache vidé avant chaque requête (`PERF_COLD=1`).
+
+| Écran | Avant p50 / p95 / SQL | Après p50 / p95 / SQL | Écart p50 / SQL | Budget p95 < 100 ms |
 |---|---|---|---|---|
-| p50 « Travail des élèves » | 102,5 ms (95,1 / 102,5 / 104,8) | — | **61,7 ms** (67,3 / 55,4 / 61,7) | −40 % |
-| p95 « Travail des élèves » | 160,4 ms (129,1 / 163,5 / 160,4) | < 100 ms | **132,6 ms** (139,9 / 112,1 / 132,6) | −17 % — **cible non atteinte** |
-| SQL p50 de l'écran | 67,3 ms | — | **29,6 ms** | −56 % |
-| Requête des totaux (`EXPLAIN ANALYZE`) | 73,4 ms | < 35 ms | **27,9 ms** | ✅ |
-| Requêtes SQL de l'écran | 11 | — | 10 | −1 |
-| Allocations par rendu | 19 352 | — | 18 056 | −7 % |
-| Témoin : p50 / p95 page d'une classe | 22,8 / 46,3 ms | inchangé | 19,9 / 42,2 ms | inchangé |
-| Chiffres affichés | — | identiques | **identiques** : 35 035 aperçus et pages de classe du jeu, octet pour octet | ✅ |
+| Accueil de la direction, **cache vide** (1 lecture toutes les 5 minutes par établissement) | 115,3 / 167,0 / 75,1 ms | **85,8 / 141,8 / 47,0 ms** | **−26 % / −37 %** | non (avant non plus) ; ces requêtes ne sont qu'une sur cinq minutes |
+| Accueil de la direction, cache chaud (les autres visites) | 28,0 / 82,1 ms | inchangé (la query n'est pas appelée) | — | **oui** |
+| Page d'un niveau (24 classes), en direct | 60,0 / 112,3 / 27,2 ms | **53,2 / 106,7 / 19,5 ms** | **−11 % / −28 %** | non (avant non plus) |
+| Chiffres affichés | — | **identiques** : 38 485 aperçus, pages de niveau et pages de classe du jeu, octet pour octet | | |
 
-**Par levier** (séries séparées) :
+### Historique : lots 1 et 2, sur l'ancien écran (`Develop` `d65938c8`, avant #167)
 
-| Levier | Remplace (même série) | p50 | p95 | SQL p50 |
-|---|---|---|---|---|
-| Lot 1 — agréger par (classe, élève) | `Develop` : 103,6 / 146,7 / 68,6 ms | **64,7 ms** | 118,8 ms | **31,7 ms** |
-| Lot 2 — élèves présents dans la requête des totaux | lot 1 : 64,6 / 166,1 / 34,4 ms | **55,9 ms** | 122,1 ms | **28,3 ms** |
-
-**Pourquoi le p95 reste au-dessus de 100 ms.** Sur 30 mesures, le p95 est la deuxième plus lente : deux pointes suffisent à le déplacer, et il varie de 112 à 140 ms sur le même code. Dans les rendus lents, **toutes** les étapes s'allongent ensemble (SQL ×1,4, vue ×3 à ×4), sans passage du ramasse-miettes : c'est la machine virtuelle partagée, pas l'écran. Le témoin, à 20 ms de médiane, monte lui aussi jusqu'à 62 ms en p95. Ce que le code pouvait gagner, il l'a gagné : la requête des totaux est à 28 ms, dont environ 20 pour lire et agréger les 29 283 sessions rendues, ce qui est le plancher d'un calcul en direct. Aller plus bas demande de dénormaliser ou de mettre en cache, donc un ADR ([journal § Leviers écartés](journal.md#leviers-écartés)).
+| Métrique | Avant | Après (lots 1 et 2) | Challenger (12 exécutions par côté) |
+|---|---|---|---|
+| p50 « Travail des élèves » | 102,5 ms | 61,7 ms | 97,8 → 53,8 ms (−45 %) |
+| p95 | 160,4 ms | 132,6 ms | 152,4 → 101,5 ms |
+| SQL p50 | 67,3 ms | 29,6 ms | 64,6 → 26,8 ms (−59 %) |
+| Requête des totaux (`EXPLAIN ANALYZE`) | 73,4 ms | 27,9 ms | 74,4 → 33,8 ms |
 
 ## Ce que le grill a révélé
 

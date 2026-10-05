@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_school_row — un établissement de la liste nationale %>
-<%# Rôle : lien vers la fiche (hors du frame), code d'établissement ; menu ⋮ : « Modifier » en modale, désactivation et suppression confirmées %>
-<%# ADR  : 0030, 0036 · UDR : 0006, 0036, 0042 %>
+<%# Rôle : lien vers la fiche (hors du frame), code d'établissement ; menu ⋮ : « Modifier », désactivation et suppression, chacune dans le frame « modal » %>
+<%# ADR  : 0030, 0036, 0076 · UDR : 0006, 0036, 0042 · confirmations lues à la demande (lot E3 du chantier politique-cache) %>
 <% active = school.status != "inactive" %>
 <tr id="school_<%= school.public_id %>" class="align-middle">
   <td class="min-w-48 px-4 py-3">
@@ -22,31 +22,12 @@
     <div class="flex justify-end">
       <%= ui_dropdown label: t(".actions", name: school.name), id: "school-actions-#{school.public_id}", fixed: true do %>
         <%= ui_dropdown_item t(".edit"), href: edit_school_path(school.public_id), icon: "pencil-square", frame: "modal" %>
+        <%# Lot E3 (politique-cache) : les deux confirmations sont lues à la demande dans le frame « modal ». %>
         <% if active %>
-          <%= ui_dropdown_item t(".deactivate"), dialog: "deactivate-school-#{school.public_id}", icon: "no-symbol" %>
+          <%= ui_dropdown_item t(".deactivate"), href: deactivation_school_path(school.public_id), icon: "no-symbol", frame: "modal" %>
         <% end %>
-        <%= ui_dropdown_item t(".delete"), dialog: "delete-school-#{school.public_id}", icon: "trash", tone: :danger %>
+        <%= ui_dropdown_item t(".delete"), href: deletion_school_path(school.public_id), icon: "trash", tone: :danger, frame: "modal" %>
       <% end %>
     </div>
-    <% if active %>
-      <%= ui_modal title: t(".deactivate_title", name: school.name), id: "deactivate-school-#{school.public_id}", size: :sm do |modal| %>
-        <% modal.footer do %>
-          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
-          <%= ui_button t(".confirm_deactivate"), type: :submit, form: "deactivate-school-form-#{school.public_id}" %>
-        <% end %>
-        <%= form_with url: deactivate_school_path(school.public_id), method: :patch, id: "deactivate-school-form-#{school.public_id}" do %>
-          <p class="text-sm text-mute"><%= t(".deactivate_warning") %></p>
-        <% end %>
-      <% end %>
-    <% end %>
-    <%= ui_modal title: t(".delete_title", name: school.name), id: "delete-school-#{school.public_id}", size: :sm do |modal| %>
-      <% modal.footer do %>
-        <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
-        <%= ui_button t(".confirm_delete"), type: :submit, variant: :danger, form: "delete-school-form-#{school.public_id}" %>
-      <% end %>
-      <%= form_with url: school_path(school.public_id), method: :delete, id: "delete-school-form-#{school.public_id}" do %>
-        <p class="text-sm text-mute"><%= t(".delete_warning") %></p>
-      <% end %>
-    <% end %>
   </td>
 </tr>

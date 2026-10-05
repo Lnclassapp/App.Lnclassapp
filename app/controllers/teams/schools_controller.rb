@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolsController
-# Rôle : liste nationale filtrée, fiche (enseignants en attente, « Direction », « Directions retirées »), modale, désactivation
-# ADR  : 0026, 0030, 0036, 0059, 0063, 0077 · UDR : 0006, 0036, 0046, 0050, 0070 · aucune création : un établissement n'entre que par l'import
+# Rôle : liste nationale filtrée, fiche (enseignants en attente, « Direction », « Directions retirées »), modale, confirmations lues à la demande, désactivation
+# ADR  : 0026, 0030, 0036, 0059, 0063, 0076, 0077 · UDR : 0006, 0036, 0046, 0050, 0070 · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
     include SchoolStaffBlock
@@ -39,6 +39,18 @@ module Teams
       use_case = build(UseCases::School::UpdateSchool, drenas: Repositories::School::DrenaRepository.new)
       render_result use_case.call(actor: current_actor, public_id: params[:public_id], dto: @form), form: :edit,
                     success: ->(school) { respond_with_school(notice: t(".done", name: school.name)) }
+    end
+
+    # Lot E3 (politique-cache) : la confirmation n'est plus copiée dans chaque ligne. Elle arrive dans le frame « modal » ;
+    # sans frame, la même adresse est une page complète. Un établissement déjà inactif n'a rien à désactiver : 404.
+    def deactivation
+      @school = schools_query.find(public_id: params[:public_id])
+      render_not_found if @school.nil? || @school.status == "inactive"
+    end
+
+    def deletion
+      @school = schools_query.find(public_id: params[:public_id])
+      render_not_found if @school.nil?
     end
 
     def deactivate

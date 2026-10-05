@@ -532,4 +532,50 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "script[src^=http], link[rel=stylesheet][href^=http]", 0
     end
   end
+
+  # Chantier politique-cache, lot E (ADR-0067) : les icônes des cartes (matière, flèche) sont dessinées une fois, dans le
+  # frame « courses » qu'une recherche ou un filtre remplace seul.
+  test "the cards take their icons from symbols drawn once in the courses frame" do
+    sign_in_as create_team_member
+
+    get courses_path
+    assert_icons_drawn_once "turbo-frame#courses"
+
+    get courses_path(material: @svt.slug), headers: { "Turbo-Frame" => "courses" }
+    assert_icons_drawn_once "turbo-frame#courses"
+  end
+
+  # Lot E4 (chantier politique-cache), UDR-0013 amendement du 2026-10-05 : 24 cartes par page ; au bas, un frame différé
+  # demande la suivante (filtres gardés) et ne reçoit que ses cartes et le frame d'après ; sans JavaScript, son bouton
+  # ouvre la page suivante entière. Le compte annonce tous les cours.
+  test "the catalog shows 24 cards, then loads the next page in a lazy frame; the filters ride along" do
+    25.times { |index| create_course(name: format("Cours %02d", index), level: @seconde, material: @svt) }
+    sign_in_as create_team_member
+    next_path = courses_path(material: @svt.slug, page: 2)
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "#courses_total", text: tl("index.total", count: 28)
+    assert_select "#courses_list > li", 24
+    assert_select "turbo-frame#courses_page_2[loading=lazy][target=_top][src='#{next_path}']" do
+      assert_select "a[href='#{next_path}'][data-turbo-frame=courses_page_2]", text: tl("page.more")
+    end
+    assert_icons_drawn_once "turbo-frame#courses"
+
+    get next_path, headers: { "Turbo-Frame" => "courses_page_2" }
+
+    assert_response :success
+    assert_match(/\A\s*<turbo-frame id="courses_page_2" target="_top">/, response.body)
+    assert_no_match(/<html|<main|courses-filters|courses_total/, response.body)
+    assert_select "ul#courses_list_page_2.mt-5 > li", 4
+    assert_select "turbo-frame#courses_page_3", 0
+    assert_icons_drawn_once "turbo-frame#courses_page_2"
+    assert_select "symbol[id^='courses-page-2-icon-']", minimum: 1
+
+    get next_path
+
+    assert_response :success
+    assert_select "main#main #courses_list > li", 4
+    assert_select "#courses_total", text: tl("index.total", count: 28)
+  end
 end

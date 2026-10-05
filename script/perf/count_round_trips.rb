@@ -11,7 +11,8 @@
 #
 # Le navigateur est simulé par Integration::Session, comme Turbo 8 le ferait : une visite Turbo envoie
 # X-Turbo-Request-Id, fetch suit les redirections, la balise turbo-visit-control « reload » recharge le document, et
-# chaque <turbo-frame src> de la page arrivée est demandé avec l'en-tête Turbo-Frame (on suppose le frame visible).
+# chaque <turbo-frame src> de la page arrivée est demandé avec l'en-tête Turbo-Frame (on suppose le frame visible), sauf
+# un frame data-turbo-permanent déjà présent, avec le même id, dans la page de départ : Turbo le garde tel quel.
 # Les assets ne sont pas comptés : sur une visite répétée, le navigateur les garde un an. Le compte ne dépend ni de la
 # machine ni du réseau ; le temps serveur affiché est local et indicatif. Écrit tmp/perf-round-trips.json.
 require "json"
@@ -44,8 +45,9 @@ module PerfRoundTrips
     session.response
   end
 
-  # Suit les redirections comme fetch ou le navigateur, puis le rechargement forcé, puis les frames différés.
-  def arrive(session, trips, depth, response, turbo:)
+  # Suit les redirections comme fetch ou le navigateur, puis le rechargement forcé, puis les frames différés. kept : ids
+  # des éléments data-turbo-permanent de la page de départ (une visite Turbo les reporte dans la page d'arrivée).
+  def arrive(session, trips, depth, response, turbo:, kept: [])
     while response.redirect?
       depth += 1
       location = path_of(response.location)
@@ -57,13 +59,16 @@ module PerfRoundTrips
       response = request(session, trips, depth, :get, path_of(session.request.url))
       document = Nokogiri::HTML(response.body)
     end
-    frames = document.css("turbo-frame[src]")
+    frames = document.css("turbo-frame[src]").reject { turbo && it["data-turbo-permanent"] && kept.include?(it["id"]) }
     depth += 1 if frames.any?
     frames.each do |frame|
       request(session, trips, depth, :get, path_of(frame["src"]), headers: turbo_headers(TURBO_VISIT).merge("Turbo-Frame" => frame["id"]))
     end
     depth
   end
+
+  # Les éléments que Turbo reporterait d'une page à la suivante.
+  def permanent_ids(body) = Nokogiri::HTML(body).css("[data-turbo-permanent][id]").map { it["id"] }
 
   def path_of(url) = URI(url).then { it.is_a?(URI::HTTP) ? it.request_uri : url }
 
@@ -122,6 +127,11 @@ module PerfRoundTrips
           sign_in(s, setup, ACTORS.fetch(role))
           arrive(s, t, 1, request(s, t, 1, :get, path, headers: turbo_headers(TURBO_VISIT)), turbo: true)
         end
+      end,
+      journey("Clic de l'enseignant d'une page à l'autre (barre latérale visible)") do |s, t, setup|
+        sign_in(s, setup, ACTORS[:teacher])
+        kept = permanent_ids(request(s, setup, 0, :get, "/teachers", headers: turbo_headers(TURBO_VISIT)).body)
+        arrive(s, t, 1, request(s, t, 1, :get, "/teachers/classrooms", headers: turbo_headers(TURBO_VISIT)), turbo: true, kept:)
       end,
       journey("Clic vers le catalogue (élève)") do |s, t, setup|
         sign_in(s, setup, ACTORS[:student])

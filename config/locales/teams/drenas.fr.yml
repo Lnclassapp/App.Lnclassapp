@@ -35,10 +35,13 @@ fr:
         edit: "Modifier"
         actions: "Actions pour %{name}"
         delete: "Supprimer"
-        delete_title: "Supprimer la DRENA « %{name} » ?"
-        delete_body: "La DRENA disparaît de la liste. Une DRENA qui a des établissements ne peut pas être supprimée."
+      # Lot E3 (politique-cache) : la confirmation de suppression, lue à la demande dans le frame « modal ».
+      deletion:
+        title: "Supprimer la DRENA « %{name} » ?"
+        body: "La DRENA disparaît de la liste. Une DRENA qui a des établissements ne peut pas être supprimée."
         cancel: "Annuler"
-        confirm_delete: "Supprimer la DRENA"
+        confirm: "Supprimer la DRENA"
+        back: "← DRENA"
       form:
         name_placeholder: "Ex. : Abidjan 1"
         name_hint_new: "Le slug est tiré du nom et préfixé par drena- à la création, puis ne change plus : c'est lui que citent les fichiers d'import."

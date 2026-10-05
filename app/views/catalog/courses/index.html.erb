@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
 <%# Rôle : recherche et filtres (cachés sous 640 px) qui visent le frame « courses » ; élève : son niveau, épuré ; enseignant : sa matière à ses niveaux ; équipe : création et import %>
-<%# ADR  : 0028, 0035 · UDR : 0006, 0013, 0054, 0057, 0069, 0077 §3.2 · grille non plafonnée à 3 (exception à R3, UDR-0013 amendement du 2026-10-02) %>
+<%# ADR  : 0028, 0035, 0076 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0054, 0057, 0069, 0077 §3.2 · grille non plafonnée à 3, par pages de 24 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "courses" %>
 <% team = current_actor.team? %>
@@ -73,20 +73,16 @@
 <%= turbo_frame_tag "courses", target: "_top", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
   <% filtered = @filters.values.any?(&:present?) %>
   <div class="mb-3 flex items-center justify-between gap-3">
-    <p id="courses_total" class="text-sm text-mute" aria-live="polite"><%= t(".total", count: @courses.size) %></p>
+    <p id="courses_total" class="text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
     <%# Sur téléphone, sans le formulaire, le seul moyen de quitter le filtre d'une bulle (UDR-0077 §3.2). %>
     <% if filtered %>
       <%= link_to t(".reset_mobile"), courses_path, id: "courses_reset_mobile",
                   class: "inline-flex min-h-tap items-center px-2 text-sm font-medium text-brand-strong sm:hidden" %>
     <% end %>
   </div>
-  <% if @courses.any? %>
-    <ul id="courses_list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-      <%# Élève seulement (UDR-0057 R6) : son niveau est unique, et la matière filtrée est déjà dite par la liste « Matière ». %>
-      <%= render partial: "course_card", collection: @courses, as: :course,
-                 locals: { show_status: team, show_level: !student,
-                           show_material: !(teacher || (student && @filters[:material].present?)) } %>
-    </ul>
+  <% if @page.rows.any? %>
+    <%# UDR-0013, amendement du 2026-10-05 : 24 cartes, puis la page suivante chargée au défilement (catalog/courses/_page). %>
+    <%= render "page", page: @page %>
   <% else %>
     <div id="courses_empty">
       <% if filtered %>
