@@ -38,6 +38,9 @@ module Entities
     end
 
     Illustration::NAME_MAX = 30
+    # Illustrations de l'équipe encore proposées, au plus : la 51ᵉ attend qu'une autre soit retirée (revue de sécurité
+    # du Lot C d'annonces-v2, constat B1 ; seule constante ajoutée par le Lot C à ce contrat du Lot 0).
+    Illustration::LIBRARY_CAP = 50
     # Poids du fichier SVG envoyé, vérifié avant toute lecture (ADR-0081 §4.3).
     Illustration::MAX_BYTES = 50 * 1024
     # Formes d'un dessin, tous niveaux confondus ; la base borne aussi le premier niveau.

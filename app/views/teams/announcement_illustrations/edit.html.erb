@@ -1,0 +1,23 @@
+<%# 🌐 UI · teams/announcement_illustrations/edit — renommer une illustration de l'équipe, page entière (« Renommer » du menu ⋮) %>
+<%# Rôle : aperçus reconstruits aux trois thèmes, le nom seul modifiable (le dessin ne change pas) ; erreur en 422 sous « Nom » %>
+<%# ADR  : 0081 (§4.3) · UDR : 0005, 0075 (§3.5) · locaux : @illustration (Entities::Communication::Illustration), @form %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "referential" %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: teams_announcement_illustrations_path } %>
+
+<%= ui_card do |card| %>
+  <div class="mb-5 flex gap-1">
+    <% %w[ciel mangue nuit].each do |theme| %>
+      <span class="rounded-ln bg-brand-soft p-1" data-announcement-theme="<%= theme %>"><%= announcement_illustration @illustration, class: "size-12" %></span>
+    <% end %>
+  </div>
+  <%= form_with model: @form, scope: :illustration, url: teams_announcement_illustration_path(@illustration.public_id), method: :patch,
+                id: "illustration-form", class: "grid max-w-form gap-5" do |f| %>
+    <%= ui_field f, :name, maxlength: Entities::Communication::Illustration::NAME_MAX, required: true,
+                           hint: t("teams.announcement_illustrations.index.name_hint") %>
+  <% end %>
+  <% card.footer do %>
+    <%= ui_button t(".cancel"), variant: :ghost, href: teams_announcement_illustrations_path %>
+    <%= ui_button t(".submit"), type: :submit, form: "illustration-form" %>
+  <% end %>
+<% end %>
