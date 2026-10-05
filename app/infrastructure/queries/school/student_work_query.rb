@@ -21,13 +21,17 @@ module Queries
       PRESENT = "JOIN classroom_students ON classroom_students.student_id = users.id AND classroom_students.left_at IS NULL"
       # Un devoir rendu : au moins une session terminée, rattachée à un devoir de la classe, quel que soit son kind : une
       # remédiation sur l'exercice assigné, c'est l'avoir fait (ADR-0072 §4.4, complément ter). Une ligne par (classe,
-      # devoir, élève), lue sur l'index partiel des sessions rendues (index_exercise_sessions_handed_in).
+      # élève) : ses devoirs rendus distincts, la somme et le nombre de ses scores, lus sur l'index partiel des sessions
+      # rendues (index_exercise_sessions_handed_in). Agréger avant la jointure aux élèves présents : 4 235 lignes à joindre
+      # au lieu de 22 792 (classe, devoir, élève) au volume de l'ADR-0067 (chantier travail-eleves-budget).
       HANDED_IN = "JOIN exercise_sessions ON exercise_sessions.classroom_assignment_id = classroom_assignments.id " \
                   "AND exercise_sessions.status = 'completed'"
       HANDED_IN_COLUMNS = [ "classroom_assignments.classroom_id", "exercise_sessions.student_id",
+                            "COUNT(DISTINCT exercise_sessions.classroom_assignment_id) AS submitted",
                             "SUM(exercise_sessions.score_percent) AS score_sum", "COUNT(*) AS sessions" ].freeze
-      # Par clé (classe ou élève) : devoirs rendus distincts, élèves ayant rendu, somme et nombre des scores.
-      TOTALS = [ "COUNT(*)", "COUNT(DISTINCT handed.student_id)", "SUM(handed.score_sum)::bigint", "SUM(handed.sessions)::bigint" ].freeze
+      # Par clé (classe ou élève) : devoirs rendus distincts, élèves ayant rendu, somme et nombre des scores. Une seule
+      # adhésion par (classe, élève) (index unique) et une ligne handed par adhésion : COUNT(*) compte les élèves ayant rendu.
+      TOTALS = [ "SUM(handed.submitted)::bigint", "COUNT(*)", "SUM(handed.score_sum)::bigint", "SUM(handed.sessions)::bigint" ].freeze
       Totals = Data.define(:submitted, :students, :score_sum, :sessions) do
         def self.none = new(submitted: 0, students: 0, score_sum: 0, sessions: 0)
 
@@ -66,7 +70,7 @@ module Queries
         totals = totals_by("classroom_students.student_id", row.first)
 
         Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }),
-                   students: students.map { |id, first_name, last_name| student_row("#{first_name} #{last_name}", totals[id]) })
+                   students: students.map { |id, first_name, last_name| student_row("#{first_name} #{last_name}", totals.fetch(id, Totals.none)) })
       end
 
       private
@@ -100,8 +104,7 @@ module Queries
       # élève est présent dans la classe du devoir : on part des adhésions présentes des classes, jamais des sessions.
       def totals_by(key, classroom_ids)
         handed = Orm::ClassroomAssignment.joins(HANDED_IN).where(classroom_id: classroom_ids)
-                                         .group("classroom_assignments.classroom_id", "exercise_sessions.classroom_assignment_id",
-                                                "exercise_sessions.student_id")
+                                         .group("classroom_assignments.classroom_id", "exercise_sessions.student_id")
                                          .select(*HANDED_IN_COLUMNS)
         Orm::ClassroomStudent.joins(:student).where(classroom_id: classroom_ids, left_at: nil, users: { anonymized_at: nil })
                              .joins("JOIN (#{handed.to_sql}) handed ON handed.classroom_id = classroom_students.classroom_id " \
@@ -121,8 +124,7 @@ module Queries
                          average_percent: (total.average if total.students >= MIN_STUDENTS_FOR_AVERAGE))
       end
 
-      def student_row(display_name, totals)
-        total = totals || Totals.none
+      def student_row(display_name, total)
         StudentRow.new(display_name:, submitted_count: total.submitted, average_percent: total.average)
       end
     end
