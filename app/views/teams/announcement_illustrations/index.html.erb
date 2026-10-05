@@ -5,10 +5,11 @@
 <% content_for :nav_key, "referential" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"), back: { label: t(".back"), href: teams_referential_path } %>
 
-<div class="grid gap-8">
+<div class="space-y-8">
   <%= ui_card title: t(".add_title"), icon: "plus" do |card| %>
+    <%# Le succès revient sur cette page : sans « advance », Turbo la fusionnerait (morph) et garderait le fichier choisi. %>
     <%= form_with model: @form, scope: :illustration, url: teams_announcement_illustrations_path, method: :post, multipart: true,
-                  id: "illustration-form", class: "grid max-w-form gap-5" do |f| %>
+                  id: "illustration-form", class: "grid max-w-form gap-5", data: { turbo_action: "advance" } do |f| %>
       <%= ui_field f, :name, maxlength: Entities::Communication::Illustration::NAME_MAX, required: true, hint: t(".name_hint") %>
       <%# ui_field ne connaît pas as: :file : le type passe au contrôle, comme tout attribut ; jamais de valeur sur un fichier. %>
       <%= ui_field f, :file, type: "file", value: nil, accept: "image/svg+xml,.svg", hint: t(".file_hint"),
@@ -24,7 +25,8 @@
     <% if library.empty? %>
       <%= ui_empty_state title: t(".empty"), icon: "photo" %>
     <% else %>
-      <ul class="grid gap-3 sm:grid-cols-2">
+      <%# grid-cols-1 : une colonne qui peut se réduire ; implicite (auto), elle prendrait la largeur d'un nom sans retour à la ligne. %>
+      <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <%= render partial: "teams/announcement_illustrations/illustration", collection: library, as: :row %>
       </ul>
     <% end %>

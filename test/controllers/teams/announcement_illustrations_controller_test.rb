@@ -65,7 +65,9 @@ class Teams::AnnouncementIllustrationsControllerTest < ActionDispatch::Integrati
     assert_select "main p", "Les auteurs les choisissent pour leurs annonces."
     assert_select "main a[href='#{teams_referential_path}']", text: /Référentiel/
     assert_select "nav#sidebar_secondary a[aria-current=page][href='#{teams_referential_path}']"
-    assert_select "form#illustration-form[action='#{teams_announcement_illustrations_path}'][method=post][enctype='multipart/form-data']" do
+    # « advance » : le succès revient sur la page, que Turbo fusionnerait (morph) en gardant le fichier choisi.
+    assert_select "form#illustration-form[action='#{teams_announcement_illustrations_path}'][method=post][enctype='multipart/form-data']" \
+                  "[data-turbo-action=advance]" do
       assert_select "input#illustration_name[name='illustration[name]'][maxlength='30'][required]"
       assert_select "label[for=illustration_name]", text: /Nom/
       assert_select "#illustration_name_hint", "30 caractères au plus. Les auteurs le lisent dans le choix."
