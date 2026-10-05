@@ -1,20 +1,25 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
-# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, exercices assignés de son niveau triés par échéance, activité, lacunes
-# ADR  : 0026, 0033, 0035, 0043, 0048, 0072 · UDR : 0010, 0062 (§3.2 ordre et `due_on`, §3.3 `late_material_slugs`)
+# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, activité, lacunes
+# ADR  : 0026, 0033, 0035, 0043, 0048, 0072 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2)
 module Queries
   module Classroom
     class StudentHomeQuery
-      # late_material_slugs : les matières où un exercice est en retard pour l'élève, pour la famille téléphone (UDR-0062 §3.3).
+      # late_material_slugs : les matières où un exercice est en retard pour l'élève, pastille de « Mes matières » (UDR-0062
+      # §3.3, UDR-0076 §3.1) ; subjects : les matières qui ont un cours publié de son niveau.
       Row = Data.define(:school_name, :level_name, :classroom_name, :join_code_display, :classmates_count,
-                        :assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs)
+                        :assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs, :subjects)
       # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
       # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance.
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :badge_level,
                                 :best_score_percent, :completed_count, :started_session_public_id, :due_on)
       SessionRow = Data.define(:public_id, :exercise_title, :score_percent, :completed_at)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
+      SubjectRow = Data.define(:slug, :name)
 
       RECENT_SESSIONS = 10
+      # L'ordre de la grille de la charte (§9) ; une matière hors de cette liste suit, par nom.
+      SUBJECT_ORDER = %w[mathematiques maths physique-chimie pc svt francais histoire-geographie histoire-geo hg edhc
+                         philosophie philo].freeze
       HEADER_COLUMNS = [ "classrooms.id", "schools.name", "levels.name", "classrooms.name", "classrooms.join_code" ].freeze
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
                            "materials.slug", "courses.id", "essentials.position", "exercises.position" ].freeze
@@ -28,12 +33,17 @@ module Queries
                                .pick(*HEADER_COLUMNS)
         return if classroom_id.nil?
 
-        exercises = assigned_exercises(classroom_id, student_id)
+        exercises = assigned_with_slugs(classroom_id, student_id)
         Row.new(school_name:, level_name:, classroom_name:, join_code_display: Entities::Classroom::JoinCode.display(join_code),
                 classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
                 assigned_exercises: exercises.map(&:last), recent_sessions: recent_sessions(student_id:),
-                pending_gaps: pending_gaps(student_id), late_material_slugs: late_material_slugs(exercises, today))
+                pending_gaps: pending_gaps(student_id), late_material_slugs: late_material_slugs(exercises, today),
+                subjects: subjects(student_id))
       end
+
+      # Les exercices assignés à la classe, dans l'ordre de « À faire » ; lue aussi par « Ma classe » (UDR-0076 §3.2).
+      # → [ExerciseRow]
+      def assigned_exercises(classroom_id:, student_id:) = assigned_with_slugs(classroom_id, student_id).map(&:last)
 
       # Lue seule par le frame différé de l'activité récente.
       def recent_sessions(student_id:)
@@ -54,7 +64,7 @@ module Queries
 
       # ADR-0072 §4.1 : seul un exercice s'assigne ; il ne se lit plus par sa fiche ni par son cours. L'index actif unique
       # garantit une seule ligne par exercice. → [[slug de la matière, ExerciseRow]], dans l'ordre de « À faire ».
-      def assigned_exercises(classroom_id, student_id)
+      def assigned_with_slugs(classroom_id, student_id)
         assignments = Orm::ClassroomAssignment.where(classroom_id:, status: "active", assignable_type: "Exercise")
                                               .pluck(:assignable_id, :assigned_at, :due_on).to_h { |id, *dates| [ id, dates ] }
         rows = published_exercises(assignments.keys).merge(own_level(student_id)).pluck(*EXERCISE_COLUMNS)
@@ -93,6 +103,13 @@ module Queries
                                 completed_count:, started_session_public_id: started[id], due_on:)
           [ urgency(row, assigned_at, *program_order), material_slug, row ]
         end
+      end
+
+      # UDR-0076 §3.1 : une matière par cours publié du niveau de l'élève, une seule fois, dans l'ordre de la charte.
+      def subjects(student_id)
+        Orm::Material.joins(:courses).merge(own_level(student_id)).where(courses: { status: "published" }).distinct
+                     .pluck(:slug, :name).map { |slug, name| SubjectRow.new(slug:, name:) }
+                     .sort_by { [ SUBJECT_ORDER.index(it.slug) || SUBJECT_ORDER.size, it.name ] }
       end
 
       # Une lacune dont la fiche n'est plus publiée n'a plus de page à ouvrir : elle n'est pas proposée.
