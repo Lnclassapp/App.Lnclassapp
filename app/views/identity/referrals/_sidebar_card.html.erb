@@ -1,8 +1,9 @@
 <%# 🌐 UI · identity/referrals/_sidebar_card — carte « Parrainage » du frame différé de la barre latérale (ReferralQuery::Row ou nil) %>
 <%# Rôle : compteur, badge, lien /e/<code>?ref=<jeton>, WhatsApp et copie comptés comme sur la page d'invitation ; sans invitation, le frame vide %>
-<%# ADR  : 0063 · UDR : 0050, 0069 (§3.6) · Stimulus : identity--share, clipboard · identifiants préfixés sidebar_referral_ (le bloc _invite reste dans le DOM) %>
-<%# locals: (invite:) -%>
-<%= turbo_frame_tag "sidebar_referral" do %>
+<%# ADR  : 0063, 0076 (§4.2) · UDR : 0050, 0069 (§3.6) · Stimulus : identity--share, clipboard · identifiants préfixés sidebar_referral_ (le bloc _invite reste dans le DOM) %>
+<%# frame : options du frame quand une page rend la carte avec elle (NavigationHelper::SIDEBAR_FRAME_OPTIONS) %>
+<%# locals: (invite:, frame: {}) -%>
+<%= turbo_frame_tag "sidebar_referral", **frame do %>
   <% if invite %>
     <% link = school_code_signup_url(invite.school_code, ref: invite.referral_token) %>
     <% message = t("identity.referrals.invite.message", school: invite.school_name, link:) %>

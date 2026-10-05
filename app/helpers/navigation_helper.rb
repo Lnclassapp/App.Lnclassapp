@@ -36,6 +36,9 @@ module NavigationHelper
   }.freeze
   # UDR-0069 §3.6 : frames différés posés sous les cartes de la barre latérale, par rôle : [id du frame, route de la source].
   SIDEBAR_FRAMES = { teacher: [ [ "sidebar_referral", :teacher_invite_path ] ] }.freeze
+  # ADR-0076 §4.2 : un frame de la barre latérale est permanent. Une visite Turbo garde la carte déjà chargée au lieu de
+  # la redemander à chaque page ; une page qui a déjà ses données la rend avec elle, sous les mêmes options.
+  SIDEBAR_FRAME_OPTIONS = { target: "_top", class: "mt-4 block", data: { turbo_permanent: true } }.freeze
   ACCOUNT_LINKS = [ [ :profile, :profile_path, "user-circle", nil ],
                     [ :sign_out, :session_path, "arrow-right-start-on-rectangle", :delete ] ].freeze
   # Sections de l'accueil de chaque rôle (squelette) — reprises des fils d'accueil de l'ancienne application.
