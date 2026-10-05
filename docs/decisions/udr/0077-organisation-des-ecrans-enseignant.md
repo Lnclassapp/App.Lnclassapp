@@ -37,7 +37,7 @@ Bande plutôt que grille : sur un écran de 375 px une bande tient en une hauteu
 - Vide : état vide existant.
 - Sinon : `div[data-controller="communication--carousel"]` contenant :
   - `ul.scrollbar-none.flex.snap-x.snap-mandatory.gap-3.overflow-x-auto.motion-safe:scroll-smooth[data-communication--carousel-target="track"][aria-label="Mes classes"]` ;
-  - chaque `li#classroom_<public_id>` : `shrink-0 basis-3/4 snap-start sm:basis-1/3`, contenu de la carte inchangé (`_classroom_card`) ;
+  - chaque `li#classroom_<public_id>` : `shrink-0 basis-3/4 snap-start sm:basis-[calc((100%-1.5rem)/3)]` (trois cartes entières à partir de 640 px, les deux espaces de `gap-3` déduits), contenu de la carte inchangé (`_classroom_card`) ;
   - `div.hidden.justify-center.gap-1.5.pt-3[aria-hidden="true"][data-communication--carousel-target="pager"]` avec un point par classe, le premier `h-1.5 w-4 rounded-full bg-brand-strong`, les autres `h-1.5 w-1.5 rounded-full bg-line`.
 - La carte englobante porte `min-w-0` (sinon la bande élargit la grille et la page défile en largeur).
 
@@ -84,7 +84,7 @@ Dans `_exercise_progress` (branche non-élève) :
 
 **Jours de séance** (décision du porteur, 2026-10-05) — une rangée `flex items-center justify-between` : la phrase à gauche ; à droite, jours renseignés : `ui_dropdown label: "Actions sur les jours de séance", id: "classroom-session-days-menu"` avec `ui_dropdown_item "Modifier les jours", frame: "modal", icon: "pencil-square"` ; jours manquants : le bouton « Renseigner » reste visible (sans lui, les exercices n'ont pas de date limite). Classe archivée : ni menu ni bouton.
 
-**Cours** — `section#classroom_courses` (`min-w-0`), titre inchangé ; vide inchangé ; sinon la bande de §3.1 (`communication--carousel`, `basis-3/4 sm:basis-1/3`), une carte par cours au contenu inchangé (`li#classroom_course_<slug>`), points de pagination.
+**Cours** — `section#classroom_courses` (`min-w-0`), titre inchangé ; vide inchangé ; sinon la bande de §3.1 (`communication--carousel`, `basis-3/4 sm:basis-[calc((100%-1.5rem)/3)]`), une carte par cours au contenu inchangé (`li#classroom_course_<slug>`), points de pagination.
 
 **Exercices assignés** — inchangés ligne à ligne ; le conteneur porte `data: ui_reveal_data`, chaque `li` `ui_reveal_item(index)`, puis `ui_reveal_more(assignments.size)`.
 

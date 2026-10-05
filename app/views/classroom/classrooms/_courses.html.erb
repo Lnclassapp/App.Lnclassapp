@@ -15,7 +15,7 @@
           aria-label="<%= t(".title") %>" data-communication--carousel-target="track">
         <% courses.each do |course| %>
           <li id="classroom_course_<%= course.slug %>"
-              class="relative flex shrink-0 basis-3/4 snap-start flex-col gap-3 rounded-card border border-line bg-white p-4 transition hover:border-brand/40 sm:basis-1/3">
+              class="relative flex shrink-0 basis-3/4 snap-start flex-col gap-3 rounded-card border border-line bg-white p-4 transition hover:border-brand/40 sm:basis-[calc((100%-1.5rem)/3)]">
             <div class="flex flex-wrap gap-1.5">
               <%= ui_subject_badge course.material_name, category: course.material_category, size: :sm %>
               <%= ui_badge [ course.level_name, course.series_name ].compact.join(" · "), size: :sm %>
