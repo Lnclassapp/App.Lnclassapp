@@ -20,13 +20,15 @@
             <% %i[teacher material classrooms].each do |column| %>
               <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.#{column}") %></th>
             <% end %>
-            <%# Au téléphone, la colonne d'actions reste collée au bord droit de la carte : le ⋮ est visible sans faire défiler le tableau. %>
-            <th scope="col" class="sticky right-0 bg-white px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+            <%# Au téléphone, la colonne d'actions reste collée au bord droit de la carte : le ⋮ est visible sans faire défiler le tableau.
+                Menu ouvert, sa cellule passe au-dessus de celles des lignes suivantes (sticky-actions, UDR-0042). %>
+            <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-line">
           <%# Lignes sans indentation : 60 lignes en portaient ≈ 27 Ko d'espaces ; entre cellules, aucun espace ne se voit (ADR-0067). %>
           <% @overview.teachers.each do |teacher| %>
+
 <tr id="teacher_<%= teacher.public_id %>">
 <th scope="row" class="px-4 py-3 font-medium text-ink"><%= teacher.name %></th>
 <% if teacher.material_name %>
@@ -48,6 +50,7 @@
 <% end %>
 </td>
 </tr>
+
           <% end %>
         </tbody>
       </table>

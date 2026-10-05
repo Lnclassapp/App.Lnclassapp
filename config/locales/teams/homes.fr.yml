@@ -26,7 +26,10 @@ fr:
       archived_staff:
         title: "Directions retirées"
         subtitle: "À vérifier avant leur suppression"
-        line: "%{name} · %{school} · retiré le %{date}"
+        # suites-inscription-direction : accordé au genre du compte retiré.
+        line:
+          male: "%{name} · %{school} · retiré le %{date}"
+          female: "%{name} · %{school} · retirée le %{date}"
         more:
           one: "Et 1 autre, sur la fiche de son établissement."
           other: "Et %{count} autres, sur les fiches de leurs établissements."

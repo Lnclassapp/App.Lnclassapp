@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
-<%# Rôle : badge, titre, note et maîtrise (élève ; score et questions justes en plus hors élève), « Recommencer », correction %>
-<%# ADR  : 0033, 0054 · UDR : 0007, 0023, 0054, 0057 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# Rôle : badge, titre, note et maîtrise (élève, avec son progrès ; score et questions justes hors élève), « Recommencer », correction %>
+<%# ADR  : 0033, 0054, 0079 · UDR : 0007, 0023, 0054, 0057, 0073 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
 <% tone = result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? :success : :error %>
 <% page_title t(".page_title", title: result.exercise.title) %>
@@ -49,6 +49,11 @@
           </div>
         <% end %>
       </dl>
+
+      <%# UDR-0073 : la phrase de progrès parle à l'élève seul, à partir de sa deuxième session. %>
+      <% if @owner && result.progress %>
+        <%= render "assessment/session_results/progress", progress: result.progress %>
+      <% end %>
 
       <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
         <% if @can_restart && result.score_percent < Entities::Assessment::Grading::PERFECT_THRESHOLD %>

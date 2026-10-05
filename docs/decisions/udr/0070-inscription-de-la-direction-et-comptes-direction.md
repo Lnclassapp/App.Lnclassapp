@@ -111,6 +111,14 @@ Partial partagé `shared/_school_staff.html.erb`, locals `staff:` (lignes active
 - La section d'accueil a son `h2` relié par `aria-labelledby`.
 - La règle des 390 px s'applique : aucune page ne défile horizontalement.
 
+### 3.7 Accord et titre — amendement du 2026-10-04 (chantier `suites-inscription-direction`)
+
+- Les textes qui nomment une direction retirée s'accordent à son genre (`users.gender`). Chaque clé a une variante `male` et une variante `female` :
+  - le toast `shared.school_staff.done` : « %{name} a été retiré / retirée de la direction. » ;
+  - `teams.schools.archived_staff.line` et `.due` : « Retiré / Retirée le … par … » et « Supprimé / Supprimée le … » ;
+  - `teams.homes.archived_staff.line` : « … · retiré / retirée le … ».
+- La page d'inscription de la direction porte un `h1` visible sur téléphone, dans l'en-tête `md:hidden`, avec le même texte que celui de la colonne gauche, masquée sur téléphone (UDR-0054 §3.1).
+
 ## 4. Conséquences
 
 - La page d'accueil compte trois sections tournées vers un public (élèves dans le haut de page, Enseignants, Établissements). UDR-0064 « un écran, une décision » reste vraie pour le haut de page, qui ne gagne qu'un lien texte.

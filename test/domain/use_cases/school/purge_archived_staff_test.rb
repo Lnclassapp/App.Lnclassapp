@@ -90,6 +90,13 @@ module UseCases
         def reset(user_id:) = @journal << [ :second_factor_reset, user_id ]
       end
 
+      class FakeInvitations
+        include Ports::Identity::InvitationRepositoryPort
+
+        def initialize(journal) = @journal = journal
+        def destroy_all_for(user_id:, contact:) = @journal << [ :invitations_erased, user_id, contact ]
+      end
+
       class FakePinRecoveries
         include Ports::Identity::PinRecoveryRepositoryPort
 
@@ -115,6 +122,7 @@ module UseCases
         @transaction = FakeTransaction.new
         PurgeArchivedStaff.new(staffs: @staffs, users: FakeUsers.new(@journal), sessions: FakeSessions.new(@journal),
                                photos: FakePhotos.new(@journal, failing: failing_photo), login_attempts: FakeLoginAttempts.new(@journal),
+                               invitations: FakeInvitations.new(@journal),
                                second_factors: FakeSecondFactors.new(@journal),
                                pin_recoveries: FakePinRecoveries.new(@journal), audit_log: FakeAudit.new(@journal),
                                transaction: @transaction, policy: Policies::School::PurgeArchivedStaffPolicy.new,
@@ -125,6 +133,7 @@ module UseCases
       def erasure_of(user_id)
         [ [ :photo_removed, user_id ],
           [ :login_attempts_erased, user_id, format("07%08d", user_id) ],
+          [ :invitations_erased, user_id, format("07%08d", user_id) ],
           [ :anonymized, { user_id:, first_name: "Compte", last_name: "supprimé", at: NOW } ],
           [ :sessions_closed, user_id ],
           [ :second_factor_reset, user_id ],

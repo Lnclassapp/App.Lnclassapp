@@ -114,3 +114,9 @@
 - `test/system/assessment/session_result_test.rb` : pour l'élève, le `dl` a « Note » et « Maîtrise » seulement ; l'élève voit 3 cartes puis « Voir plus » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px ; l'équipe voit les 4 termes, toutes les cartes et `review_hint_reveal`.
 - `test/controllers/assessment/session_results_controller_test.rb` : l'élève n'a plus « Score » ni « Questions justes » ; l'enseignant les garde.
 - `test/system/boucle_pedagogique_test.rb` (ligne 350, `review_hint_reveal`) reste vert.
+
+## Amendement du 2026-10-04 — progrès de l'élève
+
+*Chantier [`docs/chantiers/progres-eleve`](../../chantiers/progres-eleve/prd.md), [UDR-0073](0073-progres-de-l-eleve-sur-son-resultat.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Pour l'élève propriétaire, à partir de son deuxième essai : une phrase de progrès dans la carte, entre les notes et les boutons (UDR-0073 §3). Rien ne change pour l'enseignant ni l'équipe.

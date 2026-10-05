@@ -20,13 +20,13 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
   def classroom(name: "2nde C 1", level: @seconde, school: @school, **) = create_classroom(school:, level:, name:, **)
   def assignment(classroom, **) = create_assignment(classroom:, assignable: create_exercise, by: @teacher, **)
 
-  # A submitted assignment: a completed standard session tied to it (ADR-0065 §4).
+  # A submitted assignment: a completed session tied to it (ADR-0065 §4), standard unless a gap makes it a remediation.
   def submit(student, assignment, score, **)
     create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: score,
                             classroom_assignment_id: assignment.id, **)
   end
 
-  # DS-07 and DS-09: 4 students, 2 assignments; A hands in both (80, 60), B one (70), C and D none; B's remediation at 100.
+  # DS-07 and DS-09: 4 students, 2 assignments; A hands in both (80, 60), B one (70, then 100 in remediation), C and D none.
   def seconde_c1
     klass = classroom
     first, second = assignment(klass), assignment(klass)
@@ -107,7 +107,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     assert_equal [ 1 ], detail(klass).students.map(&:submitted_count)
   end
 
-  test "a session is handed in only if completed, standard, tied to an assignment of the classroom and by one of its students" do
+  test "a session is handed in only if completed, tied to an assignment of the classroom and by one of its students" do
     klass = classroom
     given = assignment(klass)
     student = create_student(classroom: klass)
@@ -118,6 +118,33 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
 
     assert_equal 0, row_of(klass).submission_rate
     assert_equal [ 0, nil ], detail(klass).students.map { [ it.submitted_count, it.average_percent ] }.first
+  end
+
+  # Memo of remediation-comptee-faite: X failed at 25 % opens a pending gap on the fiche (ADR-0043), so Y is done in a
+  # remediation session tied to its assignment (StartExerciseSession#new_session). Y is handed in, and its 80 % counts.
+  test "an exercise done in remediation is handed in, and its score counts in the student's and the classroom's averages" do
+    klass = classroom(name: "3ème B")
+    essential = create_essential
+    x, y = Array.new(2) { create_exercise(essential:) }
+    given_x, given_y = [ x, y ].map { create_assignment(classroom: klass, assignable: it, by: @teacher) }
+    aya = create_student(classroom: klass, first_name: "Aya", last_name: "Bamba")
+    failed = create_exercise_session(student: aya, exercise: x, status: "completed", score_percent: 25, classroom_assignment_id: given_x.id)
+    create_exercise_session(student: aya, exercise: y, status: "completed", score_percent: 80, classroom_assignment_id: given_y.id,
+                            gap: create_gap(student: aya, essential:, source_session: failed))
+    4.times { |index| submit(create_student(classroom: klass, last_name: "Zz#{index}"), given_x, 50) }
+
+    assert_equal [ 60, 51 ], row_of(klass).to_h.values_at(:submission_rate, :average_percent), "6 of 10; (25 + 80 + 4 × 50) / 6"
+    assert_equal Query::StudentRow.new(display_name: "Aya Bamba", submitted_count: 2, average_percent: 53), detail(klass).students.first
+  end
+
+  test "a student whose only session on the assignment is a remediation has handed it in" do
+    klass = classroom
+    given = assignment(klass)
+    student = create_student(classroom: klass)
+    submit(student, given, 90, gap: create_gap(student:))
+
+    assert_equal 100, row_of(klass).submission_rate
+    assert_equal [ 1, 90 ], detail(klass).students.map { [ it.submitted_count, it.average_percent ] }.first
   end
 
   test "an assignment handed in twice counts once in the rate, but both sessions count in the averages" do
@@ -186,7 +213,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
 
     assert_equal row_of(klass), found.classroom
     assert_equal [ Query::StudentRow.new(display_name: "Aya Bamba", submitted_count: 2, average_percent: 70),
-                   Query::StudentRow.new(display_name: "Moussa Coulibaly", submitted_count: 1, average_percent: 70),
+                   Query::StudentRow.new(display_name: "Moussa Coulibaly", submitted_count: 1, average_percent: 85),
                    Query::StudentRow.new(display_name: "Fanta Diabaté", submitted_count: 0, average_percent: nil),
                    Query::StudentRow.new(display_name: "Koffi Diallo", submitted_count: 0, average_percent: nil) ], found.students
   end

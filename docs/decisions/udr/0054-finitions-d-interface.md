@@ -57,6 +57,8 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 **Comportement**
 - Une navigation dans un frame (`advance`) ne change pas le titre (acceptable, UDR-0036).
 
+**Titre sur téléphone** (amendement du 2026-10-04, chantier `suites-inscription-direction`) : une page en deux colonnes dont le `h1` est dans une colonne `hidden md:flex` répète ce `h1` dans son en-tête `md:hidden`. Cela concerne l'inscription de la direction, l'inscription enseignant et l'acceptation d'une invitation. Une seule des deux balises est affichée à chaque largeur.
+
 ### 3.2 Retour
 
 **Structure**

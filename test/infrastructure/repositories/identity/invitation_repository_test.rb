@@ -84,6 +84,27 @@ module Repositories
         found = @repository.find_by_token_digest(token_digest: invitation.token_digest)
         assert_equal [ at, member.id, :accepted ], [ found.accepted_at, found.accepted_user_id, found.status(now: at) ]
       end
+
+      # suites-inscription-direction (2), ADR-0036 §4.
+      test "destroy_all_for removes the invitation accepted by the account and every one to its number, not those it sent" do
+        admin = create_school_admin
+        accepted = create_invitation(kind: "school_staff", contact: admin.contact, accepted_at: 1.day.ago, accepted_user_id: admin.id)
+        pending = create_invitation(kind: "team", contact: admin.contact)
+        sent = create_invitation(kind: "team", invited_by: admin)
+        other = create_invitation(kind: "team")
+
+        assert_equal 2, @repository.destroy_all_for(user_id: admin.id, contact: admin.contact)
+        assert_equal [ sent.id, other.id ].sort, Orm::Invitation.where(id: [ accepted, pending, sent, other ].map(&:id)).ids.sort
+      end
+
+      test "destroy_all_for of an account whose number is already erased removes only what it accepted" do
+        admin = create_school_admin
+        create_invitation(kind: "school_staff", contact: admin.contact, accepted_at: 1.day.ago, accepted_user_id: admin.id)
+        kept = create_invitation(kind: "team")
+
+        assert_equal 1, @repository.destroy_all_for(user_id: admin.id, contact: nil)
+        assert Orm::Invitation.exists?(kept.id)
+      end
     end
   end
 end
