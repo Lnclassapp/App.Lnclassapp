@@ -100,7 +100,7 @@ Il est absent avec 2 annonces en ligne ou moins, et en modification d'une annonc
 ### 3.4 « Mes annonces » (complète l'UDR-0071 §3.7)
 
 - La ligne d'une annonce archivée par le plafond est « Archivée le <date> », comme un archivage par l'auteur.
-- La fin affichée (« · jusqu'au <date> ») reste calculée : fin − 1 jour.
+- La fin affichée (« · jusqu'au <date> ») est la date de la fin elle-même : elle tombe à l'heure de parution, 30 jours après (ADR-0081 §4.1), c'est donc le dernier jour de visibilité. La règle « fin − 1 jour » de l'UDR-0071 valait pour une fin à minuit.
 
 ### 3.5 Page « Illustrations d'annonce » — équipe
 

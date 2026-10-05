@@ -34,14 +34,14 @@ Les règles d'autorisation existantes ne changent pas (`PublishPolicy`, `ManageO
 3. Il choisit le thème « Mangue » parmi 10 pastilles, puis l'illustration « Bus scolaire » que l'équipe a ajoutée. L'aperçu de la carte prend les couleurs du thème.
 4. Il joint l'enregistrement fait avec son téléphone (un M4A de marque `3gp4`). Il n'y a plus de champ « Visible jusqu'au ».
 5. Au-dessus du bouton, un encadré dit : « Tu as déjà 3 annonces en ligne. En publiant, « Réunion parents » sera archivée. »
-6. Il publie. Le toast dit « Annonce publiée. « Réunion parents » est archivée. ». Dans « Mes annonces », la nouvelle est « Publiée le 6 oct. · jusqu'au 4 nov. », et « Réunion parents » est « Archivée ».
+6. Il publie. Le toast dit « Annonce publiée. « Réunion parents » est archivée. ». Dans « Mes annonces », la nouvelle est « Publiée le 6 oct. · jusqu'au 5 nov. » (dernier jour de visibilité, la fin tombant à l'heure de parution), et « Réunion parents » est « Archivée ».
 7. Awa (3ème B) voit la nouvelle carte, orange, dans son carrousel. « Réunion parents » n'y est plus.
 
 ### Autre chemin nominal — l'équipe enrichit la bibliothèque
 
 1. Fatou (équipe) ouvre « Référentiel ». Une tuile indique « 8 illustrations d'annonce · Gérer → ».
 2. La page « Illustrations d'annonce » liste les 8 de base (« Fournie par Lnclass », non modifiables) et celles de l'équipe.
-3. « Ajouter une illustration » : un nom (« Bus scolaire », 30 caractères au plus) et un fichier SVG d'une seule couleur, de 50 Ko au plus. L'aperçu montre le dessin aux couleurs de 3 thèmes.
+3. « Ajouter une illustration » : un nom (« Bus scolaire », 30 caractères au plus) et un fichier SVG d'une seule couleur, de 50 Ko au plus. Une fois ajouté, la liste montre le dessin aux couleurs de 3 thèmes (un seul sur téléphone).
 4. Elle l'ajoute. Tous les auteurs le trouvent dans le choix d'illustration, après les 8 de base.
 5. Plus tard, elle la retire : elle disparaît du choix, mais les annonces qui l'utilisent la gardent jusqu'à leur fin.
 
@@ -160,5 +160,5 @@ Et le poids reste vérifié avant toute lecture (10 Mo)
 
 ## 7. Mesures
 
-- Accueil élève : le nombre de requêtes reste constant (16 avec des annonces), thèmes et illustrations de l'équipe compris ; mesuré comme au chantier `annonces`.
+- Accueil élève : le nombre de requêtes reste **constant** quel que soit le nombre d'annonces et de dessins (ADR-0067). Mesuré par le challenger le 2026-10-05 : 16 sans annonce, 17 avec des annonces thémées, 18 avec au moins un dessin de l'équipe (une requête pour tous les dessins). La V1 mesurait 15 et 16 ; la requête de plus sans annonce vient d'autres chantiers mergés sur `Develop`.
 - Budget des tests système : 15 s au plus pour ce chantier (ADR-0069 §9), mesurées face à `Develop` sur une même machine.
