@@ -61,19 +61,97 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "RE-11: « Mes classes », « Cours », then « Activités », announced for later and without any link" do
+  test "CA-1 (UDR-0077 §3.1): « Mes classes », « Cours », the announcements, then « Activités »" do
+    create_message(author: create_team_member(second_factor: false), title: "Conseil de classe", audience: "teachers")
     sign_in_as @teacher
 
     get teacher_home_path
 
-    assert_equal %w[teacher_home_classrooms teacher_home_courses teacher_home_activity],
-                 css_select("#teacher_home_classrooms, #teacher_home_courses, #teacher_home_activity").map { it["id"] }
+    sections = "#teacher_home_classrooms, #teacher_home_courses, #student_home_announcements, #teacher_home_activity"
+    assert_equal %w[teacher_home_classrooms teacher_home_courses student_home_announcements teacher_home_activity],
+                 css_select(sections).map { it["id"] }
     assert_select "#teacher_home_classrooms h2", text: "Mes classes"
     assert_select "#teacher_home_courses h2", text: "Cours"
     assert_select "#teacher_home_activity h2", text: "Activités"
-    assert_select "#teacher_home_activity", text: including(tl("show.activity_soon"))
-    assert_select "#teacher_home_activity a", 0
-    assert_no_match "Activité de vos classes", response.body
+    assert_select "#teacher_home_activity", text: including("Bientôt"), count: 0
+  end
+
+  test "CA-1: « Mes classes » is a scrolling band, one card per classroom, with its pager" do
+    second = create_classroom(school: @school, level: @tle, name: "Tle D 2")
+    Orm::TeacherClassroom.create!(teacher: @teacher, classroom: second)
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "#teacher_home_classrooms.min-w-0 [data-controller='communication--carousel']" do
+      assert_select "ul.overflow-x-auto.snap-x[data-communication--carousel-target=track][aria-label='Mes classes'] > li", 2 do |items|
+        assert_equal [ "classroom_#{@classroom.public_id}", "classroom_#{second.public_id}" ], items.map { it["id"] }
+        items.each { assert_includes it["class"], "basis-3/4" }
+      end
+      assert_select "[data-communication--carousel-target=pager][aria-hidden=true] [data-communication--carousel-target=dot]", 2
+    end
+  end
+
+  test "CA-2: the announcements to teachers, read only — no cross to hide them" do
+    create_message(author: create_team_member(second_factor: false), title: "Conseil de classe", audience: "teachers")
+    create_message(author: create_team_member(second_factor: false), title: "Pour les élèves", audience: "students")
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "#student_home_announcements li article h3", text: "Conseil de classe"
+    assert_select "#student_home_announcements", text: including("Pour les élèves"), count: 0
+    assert_select "#student_home_announcements form[action*='dismissal']", 0
+  end
+
+  test "CA-2: without a readable announcement, no announcement section" do
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "#student_home_announcements", 0
+  end
+
+  test "CA-3: « Activités » lists the exercises to follow, each to its follow-up in the classroom" do
+    students = Array.new(3) { create_student(classroom: @classroom) }
+    exercise = create_exercise(title: "Photosynthèse", essential: create_essential(course: create_course(material: @svt)))
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, due_on: Date.current + 3)
+    create_exercise_session(student: students.first, exercise:, status: "completed", classroom_assignment: assignment)
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "#teacher_home_activity li#follow_up_#{assignment.public_id}" do
+      assert_select "a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']", text: "Photosynthèse"
+      assert_select "*", text: including("Tle D 1")
+      assert_select "*", text: including("2 élèves sur 3 ne l'ont pas fait")
+    end
+  end
+
+  test "CA-3: nothing to follow — the empty state" do
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "#teacher_home_activity", text: including("Rien à suivre pour l'instant")
+    assert_select "#teacher_home_activity li", 0
+  end
+
+  test "CA-4: four exercises to follow — three shown, the fourth hidden behind « Voir plus »" do
+    create_student(classroom: @classroom)
+    4.times do |index|
+      exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
+      create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, due_on: Date.current + index + 1)
+    end
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "#teacher_home_activity[data-controller=reveal]" do
+      assert_select "li[data-reveal-target=item]", 4
+      assert_select "li[data-reveal-target=item][hidden]", 1
+      assert_select "button[data-reveal-target=button]", text: including("Voir plus")
+    end
   end
 
   test "RE-12: « Modifier mes classes » lives in the « Actions sur mes classes » menu, and the card has no footer" do

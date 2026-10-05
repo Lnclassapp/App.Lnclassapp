@@ -39,13 +39,13 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
 
     assert_current_path teacher_home_path
     assert_selector "h1", text: tl("show.greeting", name: "Yao")
-    assert_selector "#teacher_home_classrooms > ul > li", count: 2
+    assert_selector "#teacher_home_classrooms ul[data-communication--carousel-target=track] > li", count: 2
     within(card(@classroom)) do
       assert_text tl("classroom_card.students", count: 1)
       assert_text tl("classroom_card.assignments", count: 1)
       assert_text tl("classroom_card.score", score: 75)
     end
-    within("#teacher_home_activity") { assert_text tl("show.activity_soon") }
+    within("#teacher_home_activity") { assert_text tl("follow_ups.empty") }
     # The sidebar card « Parrainage » takes its place (UDR-0069 §3.6); the block stays in the page, hidden.
     at_width(1280) { assert_selector "#invite_colleagues", visible: :hidden }
 
@@ -70,7 +70,7 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit teacher_home_path
 
-      assert_selector "#teacher_home_classrooms > ul > li", count: 2
+      assert_selector "#teacher_home_classrooms ul[data-communication--carousel-target=track] > li", count: 2
       assert_selector "#invite_colleagues", visible: :visible
       assert_selector "nav.bottom-0", visible: :visible
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),

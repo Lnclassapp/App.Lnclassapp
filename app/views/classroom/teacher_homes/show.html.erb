@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
-<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes et leur menu ⋮, cours par niveau, activités), collègues en attente, invitation sur téléphone %>
-<%# ADR  : 0026, 0048, 0063 · UDR : 0006, 0007, 0026, 0050, 0054, 0069 · titre « Accueil · Enseignant · Lnclass » %>
+<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes en bande, cours par niveau, annonces, exercices à suivre), collègues en attente, invitation sur téléphone %>
+<%# ADR  : 0026, 0048, 0063, 0078 · UDR : 0006, 0007, 0026, 0050, 0054, 0069, 0071 §3.5, 0077 §3.1 · titre « Accueil · Enseignant · Lnclass » %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle", school: @home.school_name) do %>
   <%= ui_subject_badge @home.material_name, category: @home.material_category %>
@@ -9,7 +9,9 @@
 <div class="grid gap-5">
   <% home_sections_for(:teacher).each do |key, icon| %>
     <% if key == :classrooms %>
-      <%= ui_card title: t(".classrooms_title"), subtitle: t(".classrooms_subtitle"), icon:, id: "teacher_home_classrooms" do |card| %>
+      <%# min-w-0 : case de la grille, la carte prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
+      <%= ui_card title: t(".classrooms_title"), subtitle: t(".classrooms_subtitle"), icon:, id: "teacher_home_classrooms",
+                  class: "min-w-0" do |card| %>
         <% card.actions do %>
           <%= ui_dropdown label: t(".classrooms_menu"), id: "teacher-classrooms-menu" do %>
             <%= ui_dropdown_item t(".edit_classrooms"), href: teacher_classrooms_path, icon: "pencil-square" %>
@@ -18,9 +20,19 @@
         <% if @home.classrooms.empty? %>
           <%= ui_empty_state title: t(".classrooms_empty"), description: t(".classrooms_empty_description"), icon: %>
         <% else %>
-          <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom %>
-          </ul>
+          <%# UDR-0077 §3.1 : la bande et ses points du carrousel d'annonces (UDR-0071 §3.5) ; sans JavaScript, elle défile, sans points. %>
+          <div data-controller="communication--carousel">
+            <ul class="scrollbar-none flex snap-x snap-mandatory gap-3 overflow-x-auto motion-safe:scroll-smooth"
+                aria-label="<%= t(".classrooms_title") %>" data-communication--carousel-target="track">
+              <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom %>
+            </ul>
+            <div class="hidden justify-center gap-1.5 pt-3" aria-hidden="true" data-communication--carousel-target="pager">
+              <% @home.classrooms.each_index do |index| %>
+                <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+                      data-communication--carousel-target="dot"></span>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       <% end %>
     <% elsif key == :courses %>
@@ -31,10 +43,13 @@
           <%= ui_button t(".all_courses"), href: courses_path, variant: :ghost, size: :sm, icon_end: "arrow-right" %>
         <% end %>
       <% end %>
-    <% elsif key == :activity %>
-      <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon:, id: "teacher_home_activity" do %>
-        <%= ui_empty_state title: t(".activity_soon"), description: t(".activity_soon_description"), icon: %>
+    <% elsif key == :announcements %>
+      <%# UDR-0077 §3.1 : en lecture seule, sans croix (le masquage est à l'élève) ; absent sans annonce lisible. %>
+      <% if @announcements.any_readable? %>
+        <%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %>
       <% end %>
+    <% elsif key == :activity %>
+      <%= render "follow_ups", follow_ups: @follow_ups, icon: %>
     <% end %>
   <% end %>
   <% if @pending_colleagues %>
