@@ -10,6 +10,9 @@
 | 2026-10-05 | La page d'un exercice prend la même ligne compacte que la fiche | Même liste, même défaut à 375 px ; une seule forme à maintenir | Non (UDR-0077 §3.3) |
 | 2026-10-05 | Les cartes du catalogue de l'enseignant perdent le badge de matière | R6 : sa matière unique est déjà dite par le sous-titre | Non (UDR-0077 §3.2) |
 | 2026-10-05 | Le carrousel d'annonces de l'enseignant garde l'identifiant de section `student_home_announcements` | Partial partagé avec l'élève et la direction ; sans croix, aucune réponse de masquage ne le cible | Non |
+| 2026-10-05 | Le porteur valide la fenêtre des exercices à suivre (7 jours avant, 14 après), le catalogue vide sans classe et les jours de séance sous l'en-tête | Les trois décisions de l'auteur, présentées dans la PR | Non (memo, UDR-0077) |
+| 2026-10-05 | « Modifier les jours » passe dans le menu ⋮ du bloc ; « Renseigner » reste visible | Demande du porteur ; sans jours, les exercices n'ont pas de date limite | Non (UDR-0077 §3.4) |
+| 2026-10-05 | Les bandes remplissent trois tiers par un remplissage (`px-1.5`, liste en `-mx-1.5`) ; leurs points ne s'affichent que si elles défilent | Captures sur ordinateur : 3e carte coupée, points inutiles ; la valeur arbitraire `basis-[calc(…)]` est refusée par UDR-0005 | Non (UDR-0077 §3.1) |
 | 2026-10-05 | Sur téléphone, le score de la liste des élèves est limité à 6 rem | Capture à 390 px : « Aucune session terminée » écrasait le nom (« Ay… ») et cassait le numéro | Non |
 
 ## Ce qui a dérapé
@@ -28,14 +31,14 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Fenêtre des « Exercices à suivre » (7 jours avant, 14 après), catalogue vide sans classe, jours de séance sous l'en-tête | Décisions de l'auteur, à confirmer par le porteur | — |
 | Un enseignant ouvre encore par URL un cours d'une autre matière ou d'un autre niveau | Hors périmètre : la restriction est une lecture du catalogue, pas une règle d'accès | — |
+| Sans JavaScript, « Générer un code de récupération » (menu ⋮) envoie un GET vers une route POST : erreur au lieu du code | Comme tout menu ⋮ de l'application (UDR-0042) ; relevé par la revue sécurité, sans faille | — |
 
 ## Clôture
 
 | | |
 |---|---|
 | **Livré le** | 2026-10-05 |
-| **PR** | |
+| **PR** | [Lnclassapp/App.Lnclassapp#183](https://github.com/Lnclassapp/App.Lnclassapp/pull/183) |
 | **ADR produits** | — |
 | **UDR produits** | UDR-0077 |

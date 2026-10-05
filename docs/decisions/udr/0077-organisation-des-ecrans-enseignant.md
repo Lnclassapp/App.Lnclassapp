@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-05)* |
 | **Date** | 2026-10-05 |
 | **Chantier** | `docs/chantiers/interface-enseignant-organisation` |
 | **ADR lié** | ADR-0067 (nombre fixe de requêtes), ADR-0072 (assignation et échéance), ADR-0078 (annonces) |

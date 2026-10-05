@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré (PR vers `Develop`) |
 | **Ouvert le** | 2026-10-05 |
 | **Branche** | `feature/interface-enseignant-organisation` |
 | **Programme** | — |
@@ -66,6 +66,7 @@ L'organisation de l'élève vient d'être fixée et livrée ; l'enseignant doit 
 
 ## Questions encore ouvertes
 
-- Fenêtre des « Exercices à suivre » (7 jours avant, 14 jours après) : à confirmer par le porteur.
-- Enseignant sans classe : catalogue vide plutôt que catalogue de sa matière — à confirmer.
-- Jours de séance laissés sous l'en-tête de la classe — à confirmer.
+Aucune. Le porteur a validé le 2026-10-05 les trois décisions de l'auteur :
+- fenêtre des « Exercices à suivre » : échéance dans les 7 prochains jours, ou passée depuis 14 jours au plus ;
+- enseignant sans classe de l'année : catalogue vide, avec l'invitation à déclarer ses classes ;
+- jours de séance sous l'en-tête de la classe, « Modifier les jours » dans leur menu ⋮ (demande du porteur).
