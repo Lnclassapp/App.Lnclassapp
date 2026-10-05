@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
-<%# Rôle : « Chercher un élève » (GET hors du frame, contrôleur search) ; frame classroom_roster_list : compteur, une ligne par élève, code de récupération %>
-<%# ADR  : 0028, 0032, 0060 · UDR : 0007, 0020, 0027, 0047, 0054 · le formulaire du code vise _top : sa réponse est le stream de la modale %>
+<%# Rôle : « Chercher un élève » (GET hors du frame, contrôleur search) ; frame classroom_roster_list : compteur, une ligne par élève, code de récupération dans son menu ⋮ %>
+<%# ADR  : 0028, 0032, 0060 · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4) · l'entrée du code vise _top : sa réponse est le stream de la modale %>
 <%# locals: (classroom:, students:, search: "") -%>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
   <h2 id="classroom_roster_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title", count: classroom.active_students_count) %></h2>
@@ -41,20 +41,20 @@
       <% else %>
         <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
           <% students.each do |student| %>
-            <li id="student_<%= student.public_id %>" class="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center">
+            <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3">
               <div class="flex min-w-0 flex-1 items-center gap-3">
                 <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>
                 <div class="min-w-0">
                   <p class="truncate text-sm font-medium"><%= student.display_name %></p>
                   <% if student.contact %>
-                    <p class="text-xs text-mute tabular-nums">
+                    <p class="text-xs whitespace-nowrap text-mute tabular-nums">
                       <span class="sr-only"><%= t(".contact") %></span> <%= student.contact.scan(/\d{2}/).join(" ") %>
                     </p>
                   <% end %>
                 </div>
               </div>
-              <div class="flex flex-wrap items-center justify-between gap-3 sm:flex-nowrap sm:justify-end sm:gap-4">
-                <p class="text-sm sm:text-right">
+              <div class="flex shrink-0 items-center gap-1 sm:gap-3">
+                <p class="w-24 text-right text-sm sm:w-auto">
                   <span class="block text-xs text-mute"><%= t(".last_score") %></span>
                   <% if student.last_score_percent %>
                     <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
@@ -65,11 +65,12 @@
                     <span class="text-mute"><%= t(".no_score") %></span>
                   <% end %>
                 </p>
+                <%# UDR-0077 §3.4 : le code de récupération, action rare, passe dans le menu ⋮ de la ligne (UDR-0042). %>
                 <% if classroom.status == "active" %>
-                  <%= form_with url: account_pin_recovery_codes_path(student.public_id), method: :post, class: "shrink-0",
-                                data: { turbo_frame: "_top" } do %>
-                    <%= ui_button t(".issue_code"), type: :submit, variant: :secondary, size: :sm, icon: "key",
-                                  "aria-label": t(".issue_code_label", name: student.display_name) %>
+                  <%= ui_dropdown label: t(".actions_label", name: student.display_name), id: "student-actions-#{student.public_id}",
+                                  fixed: true do %>
+                    <%= ui_dropdown_item t(".issue_code"), href: account_pin_recovery_codes_path(student.public_id), method: :post,
+                                         frame: "_top", icon: "key" %>
                   <% end %>
                 <% end %>
               </div>

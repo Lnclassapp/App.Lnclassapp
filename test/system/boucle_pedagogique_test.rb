@@ -333,7 +333,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_text "100 %"
     end
     assert_no_page_reload do
-      within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.issue_code") }
+      click_menu_action("[id='student_#{student.public_id}']", t("classroom.classrooms.roster.issue_code"))
       assert_toast t("identity.pin_recovery_codes.create.issued")
       within "turbo-frame#modal dialog#pin-recovery-code-modal[open]" do
         assert_text "Aya Kouassi"
