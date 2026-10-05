@@ -465,4 +465,16 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "script[src^=http], link[rel=stylesheet][href^=http]", 0
     end
   end
+
+  # Chantier politique-cache, lot E (ADR-0067) : les icônes des cartes (matière, flèche) sont dessinées une fois, dans le
+  # frame « courses » qu'une recherche ou un filtre remplace seul.
+  test "the cards take their icons from symbols drawn once in the courses frame" do
+    sign_in_as create_team_member
+
+    get courses_path
+    assert_icons_drawn_once "turbo-frame#courses"
+
+    get courses_path(material: @svt.slug), headers: { "Turbo-Frame" => "courses" }
+    assert_icons_drawn_once "turbo-frame#courses"
+  end
 end

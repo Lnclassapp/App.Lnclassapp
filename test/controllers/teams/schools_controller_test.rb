@@ -690,4 +690,22 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "div#school_archived_staff:empty"
     assert_select "#school_teachers h2", text: I18n.t("teams.schools.archived_staff.title"), count: 0
   end
+
+  # Chantier politique-cache, lot E (ADR-0067) : les icônes des lignes (menu ⋮, modales) sont dessinées une fois, dans le
+  # frame « schools » qu'un filtre ou une page remplace seul ; celles de la fiche, une fois pour la page.
+  test "the list and a school's page take their icons from symbols drawn once" do
+    school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan")
+    create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    create_teacher(school:, first_name: "Awa", last_name: "Koné", material: create_material(name: "SVT", category: "science"))
+    sign_in_as @member
+
+    get schools_path
+    assert_icons_drawn_once "turbo-frame#schools"
+
+    get schools_path(search: "Cocody"), headers: { "Turbo-Frame" => "schools" }
+    assert_icons_drawn_once "turbo-frame#schools"
+
+    get school_path(school.public_id)
+    assert_icons_drawn_once "#main"
+  end
 end

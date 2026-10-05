@@ -61,11 +61,14 @@
 <%= turbo_frame_tag "courses", target: "_top", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
   <p id="courses_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @courses.size) %></p>
   <% if @courses.any? %>
-    <ul id="courses_list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-      <%# Élève seulement (UDR-0057 R6) : son niveau est unique, et la matière filtrée est déjà dite par la liste « Matière ». %>
-      <%= render partial: "course_card", collection: @courses, as: :course,
-                 locals: { show_status: team, show_level: !student, show_material: !(student && @filters[:material].present?) } %>
-    </ul>
+    <%# Une carte porte deux icônes (matière, flèche) : dessinées une fois dans le frame, reprises par <use> (ADR-0067). %>
+    <%= ui_icon_sprite do %>
+      <ul id="courses_list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <%# Élève seulement (UDR-0057 R6) : son niveau est unique, et la matière filtrée est déjà dite par la liste « Matière ». %>
+        <%= render partial: "course_card", collection: @courses, as: :course,
+                   locals: { show_status: team, show_level: !student, show_material: !(student && @filters[:material].present?) } %>
+      </ul>
+    <% end %>
   <% else %>
     <div id="courses_empty">
       <% if @filters.values.any?(&:present?) %>

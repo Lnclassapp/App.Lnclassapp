@@ -290,4 +290,14 @@ class Teams::DrenasControllerTest < ActionDispatch::IntegrationTest
     assert_equal "La DRENA « Abidjan 1 » a 1 établissement : elle ne peut pas être supprimée.", flash[:alert]
     assert Orm::Drena.exists?(kept.id)
   end
+
+  # Chantier politique-cache, lot E (ADR-0067) : les icônes des lignes (menu ⋮, modales) sont dessinées une fois pour la page.
+  test "the rows take their icons from symbols drawn once for the page" do
+    create_drena(name: "Abidjan 1")
+    create_drena(name: "Bouaké")
+    sign_in_as @member
+
+    get drenas_path
+    assert_icons_drawn_once "#main"
+  end
 end
