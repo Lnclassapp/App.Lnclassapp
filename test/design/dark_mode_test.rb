@@ -19,6 +19,11 @@ class DarkModeTest < ActiveSupport::TestCase
   # UDR-0074 §3.7 : les pastilles de la direction se lisent sur leur anneau, de la couleur de la carte (3:1, élément graphique).
   # Constat du challenger (phase 5, O5) : le jaune #f2b705 n'y avait que 1,82.
   SIGNAL_PAIRS = %w[signal-green signal-yellow signal-red].map { [ it, "white", 3.0 ] }.freeze
+  # UDR-0075 §3.1 : après `:root`, chaque bloc sombre porte les thèmes d'annonce, qui redéfinissent quatre tokens à
+  # l'échelle d'une carte. Ce sont les seules règles admises en plus ; leurs valeurs et leurs contrastes sont vérifiés par
+  # test/design/announcement_themes_test.rb, et ce test-ci lit les blocs sans elles.
+  ANNOUNCEMENT_THEME = /^  :root[^\n{]* \[data-announcement-theme="[a-z]+"\] \{\n[^{}]*?\n  \}\n\n?/
+  ANNOUNCEMENT_TOKENS = %w[brand brand-soft brand-strong school].freeze
 
   def light = @light ||= tokens(STYLESHEET[/@theme \{(.*?)\n\}/m, 1])
   def dark = @dark ||= tokens(dark_block)
@@ -72,6 +77,16 @@ class DarkModeTest < ActiveSupport::TestCase
     assert_empty failures
   end
 
+  test "besides :root, the dark blocks only hold the announcement themes, each redefining its four tokens and nothing else" do
+    [ system_block, switch_block ].each do |block|
+      themes = block.scan(ANNOUNCEMENT_THEME)
+
+      assert_equal Entities::Communication::Message::THEMES.size, themes.size
+      themes.each { assert_equal ANNOUNCEMENT_TOKENS, tokens(it).keys.sort, it }
+      assert_no_match(/data-announcement-theme/, block.gsub(ANNOUNCEMENT_THEME, ""), "règle de thème hors du format attendu")
+    end
+  end
+
   test "the layout tells the browser both schemes, before the stylesheet arrives" do
     layout = Rails.root.join("app/views/layouts/application.html.erb").read
 
@@ -81,12 +96,16 @@ class DarkModeTest < ActiveSupport::TestCase
 
   private
 
-  def dark_block
+  # Les deux blocs sombres, sans les thèmes d'annonce : seul `:root` y redéfinit les tokens.
+  def dark_block = system_block.gsub(ANNOUNCEMENT_THEME, "")
+  def chosen_block = switch_block.gsub(ANNOUNCEMENT_THEME, "")
+
+  def system_block
     start = STYLESHEET.index(DARK_MEDIA) or flunk "bloc #{DARK_MEDIA} absent"
     STYLESHEET[start...(STYLESHEET.index(CHOSEN_MEDIA) || STYLESHEET.size)]
   end
 
-  def chosen_block
+  def switch_block
     start = STYLESHEET.index(CHOSEN_MEDIA) or flunk "bloc du choix sombre absent"
     STYLESHEET[start..]
   end

@@ -449,13 +449,35 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # UDR-0075 §3.1 and §3.2 (annonces-v2, Lot B): the card of the carousel takes the theme of its message; a drawing of the
+  # team is rebuilt in the strong colour of the theme.
+  test "AV-07, AV-08 — the carousel shows each card in its theme, with its drawing of the team" do
+    team = create_team_member(second_factor: false)
+    bus = create_illustration(name: "Bus scolaire", created_by: team)
+    sortie = announce(team, "Sortie", audience: "all", theme: "mangue", illustration: bus)
+    rentree = announce(team, "Rentrée numérique", audience: "all", at: 2.hours.ago)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#student_home_announcements li article#announcement_#{sortie.public_id}[data-announcement-theme=mangue]" do
+      assert_select "svg.fill-brand-strong[viewBox='0 0 64 64'] > rect"
+    end
+    assert_select "#student_home_announcements li article#announcement_#{rentree.public_id}[data-announcement-theme=ciel]"
+  end
+
+  # AV-08: the drawings of the team come in one query, whatever the number of cards that carry one.
   test "ADR-0067 — the home costs the same number of queries with one announcement or with six" do
     team = create_team_member(second_factor: false)
+    drawings = Array.new(2) { |index| create_illustration(name: "Dessin #{index}", created_by: team) }
     sign_in_as @student
-    announce(team, "Annonce 0", audience: "all")
+    announce(team, "Annonce 0", audience: "all", theme: "mangue", illustration: drawings.first)
     get student_home_path
     one = count_queries { get student_home_path }
-    5.times { |index| announce(team, "Annonce #{index + 1}", audience: "all") }
+    5.times do |index|
+      announce(team, "Annonce #{index + 1}", audience: "all", theme: Entities::Communication::Message::THEMES[index],
+                                             illustration: index.even? ? drawings[index % 2] : "info")
+    end
 
     assert_equal one, count_queries { get student_home_path }
     assert_equal 5, announcement_titles.size
