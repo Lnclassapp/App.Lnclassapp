@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::Communication::UpdateMessage
-# Rôle : son auteur modifie une annonce ; publiée, elle garde ses dates et revient chez ceux qui l'avaient masquée ; sa parution suit le plafond de 3
+# Rôle : son auteur modifie une annonce ; publiée, elle garde ses dates et revient chez ceux qui l'avaient masquée ; sa parution suit le plafond de 3 ; elle garde son dessin de l'équipe, même retiré
 # ADR  : 0028, 0045, 0078, 0081 · UDR : 0071, 0075
 module UseCases
   module Communication
@@ -36,6 +36,7 @@ module UseCases
 
         now = @clock.now
         live = message if message.status == "published"
+        @carried_id = message.illustration_id
         errors, illustration_id = form_errors(dto, allowed, now:, live:)
         return Shared::Result.failure(:invalid, errors:) unless errors.empty?
 
@@ -45,6 +46,15 @@ module UseCases
       end
 
       private
+
+      # Décision du chantier annonces-v2 (Lot E) : le dessin de l'équipe qu'une annonce porte reste servi jusqu'à sa fin
+      # (AV-10) ; la modification le garde donc, même retiré depuis. Seul le nouveau choix d'un dessin retiré est refusé.
+      # @carried_id : le dessin que porte l'annonce lue par cet appel, ou nil. → son id | celui de Writing
+      def library_illustration_id(dto)
+        return super unless @carried_id && dto.library_illustration?
+
+        @illustrations.find_by_public_id(public_id: dto.illustration)&.id == @carried_id ? @carried_id : super
+      end
 
       # Publiée : ses dates gardées, edited_at et rejets effacés dans la même transaction (ADR-0078 §4.1, AN-14), rien
       # d'archivé. Brouillon ou programmée qui paraît maintenant : une parution, sous le plafond (ADR-0081 §4.1), et

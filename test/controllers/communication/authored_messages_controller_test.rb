@@ -684,6 +684,37 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_select "#my_announcement_#{created.public_id} span.size-10 svg.size-7.fill-brand-strong"
   end
 
+  # Decision of the orchestrator (annonces-v2, Lot E): the drawing an announcement carries stays served until its end, so its
+  # form still offers it, checked, once retired; a new announcement does not offer it (AV-10, UDR-0075 §3.3).
+  test "AV-10 — the form of an announcement carrying a retired drawing still offers it, checked; modified, it keeps it" do
+    bus = create_illustration(name: "Bus scolaire", created_by: @fatou)
+    cantine = create_illustration(name: "Cantine", created_by: @fatou)
+    message = create_message(author: @kamate, school: @lauriers, illustration: bus)
+    bus.update!(retired_at: 1.hour.ago)
+    sign_in_as @kamate
+
+    get edit_announcement_path(message.public_id)
+    assert_select "fieldset#announcement-illustrations div.grid.grid-cols-4.gap-2" do
+      assert_select "label", count: 10
+      assert_select "label:nth-child(9) input[value='#{cantine.public_id}']:not([checked])"
+      assert_select "label:nth-child(10) input[type=radio][name='announcement[illustration]'][value='#{bus.public_id}'][checked]"
+      assert_select "label:nth-child(10) svg.size-12.fill-brand-strong[aria-hidden=true] rect"
+      assert_select "label:nth-child(10) span", "Bus scolaire"
+    end
+
+    patch announcement_path(message.public_id), params: { announcement: { title: "Fête", body: "", illustration: "info",
+                                                                          audience: "students" }, commit: "publish" }
+    assert_response :unprocessable_entity
+    assert_select "input[value='#{bus.public_id}']:not([checked])"
+    patch announcement_path(message.public_id), params: { announcement: { title: "Fête", body: "Samedi.", illustration: bus.public_id,
+                                                                          audience: "students" }, commit: "publish" }
+    assert_redirected_to my_announcements_path
+    assert_equal [ nil, bus.id, "Samedi." ], message.reload.values_at(:illustration, :illustration_id, :body)
+
+    get new_announcement_path
+    assert_select "input[value='#{bus.public_id}']", 0
+  end
+
   test "AV-07 — each row of « Mes annonces » has the dot of its theme, named for a screen reader, before its title" do
     message = create_message(author: @kamate, title: "Sortie au musée", school: @lauriers, theme: "mangue")
     sign_in_as @kamate

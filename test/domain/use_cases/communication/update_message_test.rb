@@ -267,6 +267,43 @@ module UseCases
         assert_equal [ :invalid, { illustration: [ "Choisissez une illustration de la bibliothèque." ] } ], [ result.code, result.errors ]
         assert_equal [ "info", nil, "Ils commencent lundi." ], @fiches.reload.values_at(:illustration, :illustration_id, :body)
       end
+
+      # Decision of the orchestrator (annonces-v2, Lot E): the drawing an announcement carries stays served until its end
+      # (AV-10), so a modification keeps it even once retired; only choosing a retired drawing anew is refused.
+      test "AV-10 — a modified announcement keeps its drawing of the team retired since; choosing another retired one is refused" do
+        fatou = create_team_member(second_factor: false)
+        bus = create_illustration(name: "Bus scolaire", created_by: fatou)
+        cantine = create_illustration(name: "Cantine", created_by: fatou, retired_at: 1.day.ago)
+        @fiches.update!(illustration: nil, library_illustration: bus)
+        draft = create_message(author: @kouassi, status: "draft", published_at: nil, illustration: bus, audience: "classrooms",
+                               classrooms: [ @b3 ])
+        bus.update!(retired_at: 1.hour.ago)
+
+        assert update(@kouassi, illustration: bus.public_id, body: "Gardée.").success?
+        assert_equal [ nil, bus.id, "Gardée." ], @fiches.reload.values_at(:illustration, :illustration_id, :body)
+        assert update(@kouassi, draft, illustration: bus.public_id).success?
+        assert_equal [ "published", bus.id ], draft.reload.values_at(:status, :illustration_id)
+
+        result = update(@kouassi, illustration: cantine.public_id, body: "Piraté.")
+
+        assert_equal [ :invalid, { illustration: [ "Choisissez une illustration de la bibliothèque." ] } ], [ result.code, result.errors ]
+        assert_equal [ bus.id, "Gardée." ], @fiches.reload.values_at(:illustration_id, :body)
+      end
+
+      test "AV-10 — an announcement carrying a retired drawing cannot choose an unknown one, nor its own once it has left it" do
+        bus = create_illustration(name: "Bus scolaire", created_by: create_team_member(second_factor: false))
+        @fiches.update!(illustration: nil, library_illustration: bus)
+        bus.update!(retired_at: 1.hour.ago)
+        refused = [ :invalid, { illustration: [ "Choisissez une illustration de la bibliothèque." ] } ]
+
+        result = update(@kouassi, illustration: "Bq7xK2mN9pR4sT")
+        assert_equal refused, [ result.code, result.errors ]
+        assert update(@kouassi, illustration: "exam").success?
+        result = update(@kouassi, illustration: bus.public_id)
+
+        assert_equal refused, [ result.code, result.errors ]
+        assert_equal [ "exam", nil ], @fiches.reload.values_at(:illustration, :illustration_id)
+      end
     end
   end
 end
