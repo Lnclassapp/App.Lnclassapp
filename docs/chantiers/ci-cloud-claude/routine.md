@@ -1,8 +1,13 @@
 # Routine « CI cloud Claude »
 
-Le texte ci-dessous est le prompt de la routine (Claude Code, environnement cloud du dépôt). Chaque déclenchement ouvre **une session neuve** : il n'y a pas de machine à garder allumée. Toute modification de ce texte se reporte dans la routine (claude.ai → Routines → « CI cloud Claude » → modifier le prompt).
+Le texte ci-dessous est la consigne de la routine. Toute modification se pousse sur `Develop` : la routine relit ce fichier à chaque déclenchement.
 
-**Déclencheurs** : toutes les heures ; ajouter dans l'interface des routines le déclencheur GitHub « pull request » sur `Develop` pour ne pas attendre l'heure suivante. Le script est idempotent par SHA de tête : un déclenchement de trop ne poste rien.
+**Montage** (2026-10-05) :
+
+- **Routine** `CI cloud Claude` (`trig_01V4nnrFWbrqJBrEa6xErLEZ`), toutes les heures. Elle réveille toujours la même session.
+- **Session** `CI cloud Claude (routine)` (`session_0126TYEav52eBLaSb9TfQK6N`), attachée au dépôt sur `Develop`. Si son conteneur a été repris, le réveil le recrée et le hook SessionStart prépare tout : il n'y a pas de machine à garder allumée.
+- Pourquoi pas une session neuve à chaque fois : une routine créée depuis une session n'attache pas de dépôt à ses sessions neuves (essai du 2026-10-05 : ni dépôt, ni outils GitHub). Une routine créée dans l'interface claude.ai, dépôt choisi, le pourrait.
+- **Déclencheur GitHub** facultatif, à ajouter dans l'interface des routines (pull request vers `Develop`) pour ne pas attendre l'heure suivante. Le script est idempotent par SHA de tête : un déclenchement de trop ne poste rien.
 
 ---
 

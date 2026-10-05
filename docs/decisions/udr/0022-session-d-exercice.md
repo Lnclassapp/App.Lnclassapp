@@ -96,3 +96,10 @@ L'élève fait un exercice question par question. Dans l'ancienne application :
 **Vérification**
 - `test/system/assessment/exercise_session_test.rb` : la ligne 53 lit désormais la valeur du `<progress>` ; une question à choix unique n'a pas de consigne ; une question à plusieurs réponses a « Coche N propositions. » et aucun badge « Plusieurs propositions correctes » ; `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)` à 390 px.
 - `test/controllers/assessment/exercise_sessions_controller_test.rb` : la ligne 33 lit la valeur du `<progress>`, plus le texte « N questions répondues sur T ».
+
+## Amendement du 2026-10-05 — question suivante sans requête · Statut : Proposé
+
+*Chantier [`interface-eleve-organisation`](../../chantiers/interface-eleve-organisation/memo.md), [UDR-0076](0076-organisation-des-ecrans-eleve.md) §3.3, en application de l'[ADR-0076](../adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md). Cette section fait foi sur le §2.1 en cas d'écart, une fois acceptée.*
+
+- Le stream d'une réponse joint la question suivante dans un `<template>` du frame `question`. « Question suivante » l'affiche sans requête (contrôleur `assessment--next-question`) et donne le focus à son énoncé ; sans JavaScript, le lien recharge le frame comme avant.
+- Aucun cache : ni fragment, ni ETag. La question jointe ne porte aucune proposition correcte.

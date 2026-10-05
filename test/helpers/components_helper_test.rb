@@ -584,6 +584,14 @@ class ComponentsHelperTest < ActionView::TestCase
     end
   end
 
+  # UDR-0076 §3.1, charte §5 et §9 : la bulle d'une matière en retard porte la pastille ambre, celle de l'urgence.
+  test "ui_subject_bubble puts the amber dot of a late subject" do
+    show ui_subject_bubble(label: "SVT", href: "/courses?material=svt", illustration: subject_illustration("svt"), signal: :warning)
+
+    assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-warning[aria-hidden=true]",
+                  count: 1
+  end
+
   test "ui_subject_bubble without a signal has no dot, and refuses an unknown signal" do
     show ui_subject_bubble(label: "Tle D", href: "/courses", illustration: subject_illustration("svt"))
 

@@ -2,7 +2,8 @@ require "application_system_test_case"
 
 # AS-07 à AS-11 (UDR-0022) : dans sa session, l'élève valide sans rien cocher (erreur dans la carte), puis répond aux deux
 # questions ; le verdict et la progression arrivent après chaque réponse, et la dernière propose « Voir mon résultat » —
-# tout sans rechargement de page, sur un bureau comme à 390 px. Aucune proposition correcte n'est montrée.
+# tout sans rechargement de page, sur un bureau comme à 390 px. Aucune proposition correcte n'est montrée. UDR-0076 §3.3 :
+# la question suivante arrive avec le verdict, « Question suivante » l'affiche sans requête.
 class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
   # La page de résultat (Lot C3), que Turbo précharge au survol de « Voir mon résultat », n'est pas encore fusionnée :
   # une doublure répond sur sa route, comme dans test/system/classroom/join_test.rb. Un contrôleur fusionné est
@@ -79,8 +80,12 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
       end
       assert_selector "#progress_bar progress[value='50']"
 
+      # UDR-0076 §3.3, ADR-0076 : la question suivante est arrivée avec le verdict ; l'afficher ne coûte aucune requête.
+      requests = server_requests
       click_on I18n.t("#{SCOPE}.feedback_card.next")
       assert_selector "#question-card", text: "La méiose réduit-elle le nombre de chromosomes ?"
+      assert_equal requests, server_requests, "« Question suivante » ne doit rien demander au serveur"
+      assert_equal "La méiose réduit-elle le nombre de chromosomes ?", page.evaluate_script("document.activeElement.textContent").strip
       choose right_answer(@second).content
       click_on I18n.t("#{SCOPE}.question_card.submit")
       assert_selector "#feedback-card", text: I18n.t("#{SCOPE}.feedback_card.verdict.success")
@@ -89,6 +94,11 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
     end
     assert_equal [ "completed", 50 ], @session.reload.values_at(:status, :score_percent)
   end
+
+  # Les requêtes du document (fetch de Turbo, formulaires, frames), lues dans le Resource Timing du navigateur.
+  def server_requests = page.evaluate_script(<<~JS)
+    performance.getEntriesByType("resource").filter((entry) => ["fetch", "xmlhttprequest"].includes(entry.initiatorType)).length
+  JS
 
   def right_answer(question) = question.answers.find_by!(correct: true)
   def wrong_answer(question) = question.answers.where(correct: false).order(:id).first
