@@ -10,9 +10,7 @@
 
 ## Ce qui a dérapé
 
-Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
-
-- …
+- **2026-10-05** : le porteur n'a plus le fichier refusé. Sans lui, le bug ne se reproduit pas, et la porte « bug reproduit à la main » ne peut pas être franchie. Le chantier s'arrête au cadrage. Choisir les enregistrements de téléphone acceptés (autres marques MP4/3GP, MP3 précédé d'octets de remplissage, AMR, OGG/Opus) devient une question du chantier feature `annonces-v2`. Leçon : quand un fichier est refusé, garder le fichier.
 
 ## Ce qu'on a appris sur la codebase
 

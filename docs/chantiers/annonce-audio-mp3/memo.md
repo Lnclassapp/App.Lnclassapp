@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | abandonné *(2026-10-05 : non reproductible, le fichier n'est plus disponible ; la question passe au chantier [`annonces-v2`](../annonces-v2/memo.md))* |
 | **Ouvert le** | 2026-10-05 |
 | **Branche** | `fix/annonce-audio-mp3` |
 | **Programme** | `refonte-application` (suite de la V6a, chantier [`annonces`](../annonces/memo.md)) |
