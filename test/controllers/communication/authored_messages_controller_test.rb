@@ -324,6 +324,31 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_equal [ "image/png", "audio/mpeg" ], [ created.image.content_type, created.audio.content_type ]
   end
 
+  # End to end (annonces-v2, Lot E): the recognition of each variant is in audio_header_test (Lot D); here, a real phone
+  # recording goes through the form, the storage and the reading.
+  test "AV-12 — a teacher publishes with a phone recording (M4A of brand 3gp4): stored and served as audio/mp4; an AMR is refused" do
+    recording = file_fixture("audio/marque-3gp4.m4a").binread
+    sign_in_as @kouassi
+
+    publish(classroom_public_ids: [ @b3.public_id ],
+            audio: upload(file_fixture("audio/enregistrement.amr").binread, "enregistrement.amr", "audio/amr"))
+
+    assert_response :unprocessable_entity
+    assert_equal "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A.", field_error(:audio)
+    assert_equal [ 0, 0 ], [ Orm::Message.count, ActiveStorage::Attachment.count ]
+
+    publish(title: "Réunion de rentrée", classroom_public_ids: [ @b3.public_id ],
+            audio: upload(recording, "Enregistrement 12.m4a", "audio/x-m4a"))
+
+    assert_redirected_to my_announcements_path
+    assert_equal [ "Réunion de rentrée", "published", @kouassi.id ], created.values_at(:title, :status, :author_id)
+    assert_equal [ "audio/mp4", "audio.m4a", recording ], [ created.audio.content_type, created.audio.filename.to_s, created.audio.download.b ]
+    sign_out
+    sign_in_as @awa
+    get announcement_file_path(created.public_id, kind: "audio")
+    assert_equal [ 200, "audio/mp4", recording ], [ response.status, response.media_type, response.body.b ]
+  end
+
   test "ADR-0060 — a phone photo is stored without its Exif (GPS, device): what a student downloads carries none" do
     sign_in_as @kamate
 
