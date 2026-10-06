@@ -82,7 +82,8 @@ module Assessment
 
     test "the trophy is defined once per page, then reused: a <symbol>, and one <use> per tier" do
       counts = { bronze: 1, silver: 0, gold: 0, diamond: 2 }
-      2.times { render partial: "assessment/comprehension/badge_counts", locals: { counts: } }
+      # Les deux partiels dans un seul rendu : depuis Rails 8.1.4, chaque render du test repart d'une page vide.
+      render inline: "<%= render 'assessment/comprehension/badge_counts', counts: %>" * 2, locals: { counts: }
 
       assert_dom "symbol#comprehension-trophy[viewBox='0 0 20 20'] path", count: 1
       assert_dom "svg use[href='#comprehension-trophy']", count: 8
