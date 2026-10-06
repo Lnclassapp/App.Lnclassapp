@@ -151,6 +151,9 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 | 2026-10-05 | A appliqué à `ui_badge` et à `ui_card` (lien) dans toute l'application, pas seulement au catalogue | Une seule source de style. Le risque de conflit avec une classe ajoutée par une vue est nul : `ui_badge` n'en accepte pas, et seul le survol de la carte-lien est partagé, pas son fond ni sa bordure | non |
 | 2026-10-05 | Preuve de A par les styles calculés, pas par des captures | Deux captures de la même page diffèrent déjà de 800 à 34 000 pixels (codes, ports, animations) ; les styles calculés de chaque élément, survol compris, sont identiques d'une exécution à l'autre | non |
 | 2026-10-05 | Sprite d'icônes posé **dans** le frame de la liste | La réponse d'un frame seul (recherche, page suivante) doit apporter ses `<symbol>` ; posé hors du frame, une icône absente de la première page serait perdue | non (levier déjà admis, ADR-0067) |
+| 2026-10-06 | E6 repart d'une branche neuve depuis `Develop` : la PR #184 (E3 à E5) est fusionnée | Une PR fusionnée ne porte plus de travail ; vérifié d'abord que `Develop` n'avait pas déjà ces classes | non |
+| 2026-10-06 | E6 : le sprite des icônes s'ajoute à la liste des élèves d'une classe, dans son frame | Même levier que E2, sur le seul écran lourd qui ne l'avait pas : −31 Ko | non |
+| 2026-10-06 | E6 arrêté sous le budget de 150 Ko : les leviers suivants changent l'écran | Menu ⋮ partagé (JavaScript), pages de 25 lignes, confirmations de la fiche lues à la demande : décisions du porteur | non |
 
 ## Leviers abandonnés, et pourquoi
 
@@ -200,6 +203,9 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 
 - **Lot E5, premier `bin/ci`** : quatre tests ciblaient les badges par leurs anciennes classes (`span.rounded-full`) ou par l'ordre « titre puis Brouillon » de la carte ; ils sont mis à jour. Le même passage a vu échouer une fois `BouclePedagogiqueTest` (la modale « Nouveau cours » de l'accueil équipe introuvable). Le test passe seul, puis au `bin/ci` complet suivant, et le lot ne touche ni cette modale ni l'accueil équipe. L'échec est noté ici sans cause trouvée.
 - **Lot E5, révision du porteur** : sur `/courses?material=svt`, la carte de l'élève n'avait plus que son titre et son sous-titre. Le niveau lui était déjà retiré, et la matière filtrée aussi (amendement du 2026-10-02) ; le lot E5 a ôté le pied. Le porteur a demandé la carte de sa capture : badge de matière, titre, sous-titre, pied « Ouvrir le cours → ». Leçon : un allègement se juge sur chaque vue de l'écran (rôle, filtre), pas sur la vue mesurée.
+
+- **Lot E6, sonde de styles** : la référence « avant » prise sur la branche de E5 ne vaut plus après la fusion de PR #185 et #186 (vues changées). La référence se reprend sur la même base, lot retiré (`git stash`), puis remis.
+- **Lot E6, commit pendant `bin/ci`** : le pre-commit lance les tests des fichiers stagés sur la même base de test que `bin/ci`. Les deux se sont bloqués mutuellement (`PG::TRDeadlockDetected`) : aucun commit n'est passé, et le `bin/ci` en cours n'était plus fiable. Ne jamais commiter dans un dossier pendant que `bin/ci` y tourne. Un autre worktree a sa propre base de test (`app_lnclassapp_test_<worktree>`).
 
 ## Ce qu'on a appris sur la codebase
 

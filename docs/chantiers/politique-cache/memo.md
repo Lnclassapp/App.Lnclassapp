@@ -139,7 +139,26 @@ Décision du porteur, 2026-10-05 : « go pour la fenêtre unique des établissem
 - **E5 — cartes du catalogue** (porteur, 2026-10-05 : « go pour A, C et E » ; C annulé le même jour, voir ci-dessous). A : des classes partagées pour les badges et les cartes-liens de toute l'application, sans changement visible (styles calculés identiques). C : plus de pied « Ouvrir le cours ». E : statut seulement s'il n'est pas « Publié ». Catalogue de l'enseignant 62,8 → **43,2 Ko**, de l'équipe 75,3 → **50,5 Ko**, de l'élève 46,9 → **33,6 Ko** ; établissements 222,1 → 218,3 Ko grâce à A seul.
 - **Ce qui reste au-dessus de 150 Ko** : la liste des établissements (222 Ko, dont 2,5 Ko de menu ⋮ par ligne sur 3,5), la fiche d'un établissement (269 Ko) et la page d'une classe (217 Ko). Il n'y a plus de modale par ligne à retirer sur la liste. Il resterait un menu ⋮ partagé par toutes les lignes (JavaScript), ou des classes de composant plus courtes : question 6.
 
-## Le problème
+### Lot E6 — classes de composant courtes (2026-10-06)
+
+Décision du porteur, 2026-10-05 : « go pour le lot des trois écrans au-dessus de 150 Ko ». Repris le 2026-10-06 sur `Develop` (7f48b744), après la fusion de la PR #184. Entre-temps, la page d'une classe est passée de 217 à 267 Ko (PR #185 et #186). Mesure : `measure_screens.rb`, même jeu, 30 requêtes après 3 de chauffe, avant et après en alternance, médiane de 3.
+
+| Écran | HTML avant | **HTML après** | gzip | p50 avant → après | p95 avant → après |
+|---|--:|--:|--:|--:|--:|
+| Établissements (`/teams/schools`) | 218,3 Ko | **180,0 Ko** (−18 %) | 16,2 → 15,4 Ko | 69,8 → 69,7 ms | 104,7 → 106,0 ms |
+| Fiche d'un établissement | 263,6 Ko | **223,7 Ko** (−15 %) | 20,3 → 19,4 Ko | 82,2 → 77,4 ms | 186,4 → 155,9 ms |
+| Page d'une classe (enseignant) | 267,2 Ko | **202,1 Ko** (−24 %) | 18,8 → 18,1 Ko | 78,0 → 75,3 ms | 112,2 → 107,6 ms |
+| DRENA | 121,2 Ko | **95,8 Ko** (−21 %) | 9,6 → 9,2 Ko | 67,6 → 60,9 ms | 95,2 → 83,6 ms |
+| Catalogue, équipe | 62,8 Ko | 60,1 Ko | 8,8 → 8,5 Ko | 30,5 → 27,9 ms | 48,0 → 41,1 ms |
+
+- Les classes partagées font l'essentiel. Sur la page d'une classe, le sprite des icônes de la liste des élèves retire 30,8 Ko de plus (232,9 → 202,1 Ko).
+- Comme pour E2, le gain compressé est faible (2 à 5 %) : il porte sur le poids brut, donc sur l'analyse du DOM par un téléphone d'entrée de gamme.
+- **Ce qui reste au-dessus de 150 Ko** tient à la structure des écrans, pas aux classes :
+  - **Établissements** : une ligne pèse 2,7 Ko, dont 1,5 Ko de menu ⋮ (bouton, trois entrées, icônes). 50 lignes font 137 Ko. Pour descendre, il faudrait un seul menu partagé par toutes les lignes (JavaScript) ou des pages de 25 lignes.
+  - **Fiche d'un établissement** : 19 modales recopiées dans la page (31 Ko), qu'on pourrait lire à la demande comme au lot E3, et 60 enseignants listés (37 Ko).
+  - **Page d'une classe** : 55 élèves à 2,9 Ko par ligne, menu ⋮ compris.
+
+
 
 Le porteur trouve l'application lente : « le chargement des pages dépasse 500 ms ». Il demande une révision en profondeur de la politique de cache pour accélérer toutes les pages.
 

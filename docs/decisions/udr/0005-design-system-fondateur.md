@@ -185,3 +185,15 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 - Les petits badges (`ui_badge size: :sm` : matière, échéance, type de question) passent en `text-xs` (12 px) : à 11 px, ils restaient difficiles à lire sur téléphone.
 - `text-2xs` (11 px) ne sert plus qu'aux libellés de la barre basse (UDR-0006) et aux mentions secondaires d'un en-tête de tableau.
 - Décision du porteur du 2026-10-06 : **sous 640 px, une carte de premier niveau va bord à bord** (sans arrondi ni bord latéral). La marge d'écran `gutter` passe de 20 à 16 px, le rembourrage `ui_card padding: :md` de 20 à 16 px (`lg` de 24 à 20 px) : le texte d'une carte est à 16 px du bord de l'écran au lieu de 40. Une carte dans une carte, dans une modale, dans un carrousel ou côte à côte garde ses marges.
+
+## Amendement du 2026-10-06 — classes partagées des boutons, menus, modales et avatars
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), lot E6. Décision du porteur du 2026-10-05 (« go pour le lot des trois écrans au-dessus de 150 Ko »). Sans changement visible : le texte ci-dessus reste tel qu'accepté.*
+
+- Comme les badges et les cartes-liens (UDR-0013, amendement bis), les composants répétés à chaque ligne d'une liste portent une classe partagée, définie une fois dans `application.tailwind.css`, au lieu de leur liste de classes :
+  - `ui_button` : `ui-button`, une variante (`ui-button-primary`, `-brand`, `-secondary`, `-ghost`, `-danger`) et une taille (`ui-button-sm`, `-md`, `-lg`) ;
+  - bouton ⋮ d'un menu : `ui-icon-button` ; menu : `ui-menu` ; entrée : `ui-menu-item` et son ton (`ui-menu-item-default`, `-danger`) ;
+  - `ui_modal` : `ui-dialog` ; `ui_avatar` : `ui-avatar`.
+- **Chaque nom est écrit en entier** dans `ComponentsHelper` : Tailwind ne génère que ce qu'il lit, et un nom interpolé (`"ui-button-#{variant}"`) n'est jamais généré. `test/design/shared_classes_test.rb` fige le contenu de chaque classe sur l'ancienne liste et vérifie que chaque nom est écrit en entier dans `app/views`, `app/helpers` ou `app/javascript`.
+- Le contrôleur `dropdown` écoute le clic extérieur, le cache de Turbo, le défilement et le redimensionnement **menu ouvert seulement** ; le menu ne les déclare plus dans son HTML.
+- **Vérification** : une sonde jetable a comparé les styles calculés de chaque élément de `/design` (survol d'un bouton compris), de la liste et de la fiche des établissements, des DRENA et de la page d'une classe (menu ⋮ ouvert compris), avant et après : identiques, hors l'opacité d'une animation en cours.
