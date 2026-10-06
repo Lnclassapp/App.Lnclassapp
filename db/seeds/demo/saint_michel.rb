@@ -42,7 +42,7 @@ account = lambda do |contact, **attributes|
 end
 
 # 1. L'établissement et ses classes, générées par le barème comme le fait l'import (ADR-0058).
-drena = Orm::Drena.find_by!(slug: "tiassale")
+drena = Orm::Drena.find_by!(slug: Entities::School::Drena.slug_for("Tiassalé"))
 school = Orm::School.find_by(name: "Collège Saint Michel de Tiassalé")
 unless school
   school_code = Entities::School::SchoolCode.generate_unique(count: 1, taken: Repositories::School::SchoolRepository.new.taken_school_codes).first
