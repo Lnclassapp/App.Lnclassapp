@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.3", ">= 8.1.3.1"
+gem "rails", "~> 8.1.4"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use postgresql as the database for Active Record
@@ -22,7 +22,7 @@ gem "bcrypt", "~> 3.1.7"
 
 # TOTP second factor for the team, QR code rendered as inline SVG (ADR-0031)
 gem "rotp", "~> 6.3"
-gem "rqrcode", "~> 2.2"
+gem "rqrcode", "~> 3.2"
 
 # JSON Schema validation of bulk imports (ADR-0039)
 gem "json_schemer", "~> 2.3"
@@ -82,6 +82,6 @@ group :test do
   gem "simplecov", require: false
 end
 
-# json 3.x n'accepte plus de hash positionnel dans JSON.parse, ce qui casse
-# ActiveSupport::JSON.decode (lecture des cookies de session) en Rails 8.1
-gem "json", "~> 2.21"
+# json 3.x n'accepte plus de hash positionnel dans JSON.parse : ActiveSupport::JSON.decode (lecture des
+# cookies de session) ne lui passe ses options en mots-clés que depuis Rails 8.1.4. json 3 exige donc Rails >= 8.1.4.
+gem "json", "~> 3.0"

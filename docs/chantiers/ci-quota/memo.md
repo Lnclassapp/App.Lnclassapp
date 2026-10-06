@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — lots 1, 5, 6, 7, 8 et 9 livrés (#106, #136, #148, #149, #150) ; **dix minutes par feature** tenues : 4 min 30 d'horloge au run 479 ; reste la mesure sur 3 runs et le chantier `selection-par-carte-de-couverture` |
+| **Statut** | en cours — lots 1, 2, 5, 6, 7, 8 et 9 livrés (#106, lot 2 le 2026-10-06, #136, #148, #149, #150) ; **dix minutes par feature** tenues : 4 min 30 d'horloge au run 479 ; reste la mesure sur 3 runs et le chantier `selection-par-carte-de-couverture` |
 | **Ouvert le** | 2026-09-29 |
 | **Branche** | `perf/ci-quota` |
 | **Programme** | — |
