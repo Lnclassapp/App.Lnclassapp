@@ -12,9 +12,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     @essential = create_essential(course: @course, name: "La méiose")
   end
 
-  # ComponentsHelper::BUTTON_VARIANTS, as CSS classes: primary = bg-ink text-white, secondary = border-line bg-white.
-  PRIMARY = "bg-ink.text-white".freeze
-  SECONDARY = "border-line.bg-white".freeze
+  # ComponentsHelper::BUTTON_VARIANTS, as CSS classes.
+  PRIMARY = "ui-button-primary".freeze
+  SECONDARY = "ui-button-secondary".freeze
 
   def tl(key, **) = I18n.t("classroom.student_homes.#{key}", **)
   def including(text) = /#{Regexp.escape(text)}/

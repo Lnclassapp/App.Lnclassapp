@@ -79,7 +79,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_button renders a typed button with its variant and size" do
     show ui_button("Enregistrer", variant: :brand, size: :lg, type: :submit, full: true, class: "mt-4")
 
-    assert_select "button[type=submit].bg-brand.min-h-14.w-full.mt-4", text: "Enregistrer"
+    assert_select "button[type=submit].ui-button-brand.ui-button-lg.w-full.mt-4", text: "Enregistrer"
     assert_select "button[disabled]", 0
   end
 
@@ -100,13 +100,13 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_button becomes a link, with a Turbo method when asked" do
     show ui_button("Supprimer", href: "/x", variant: :danger, method: :delete, data: { confirm: "?" })
 
-    assert_select "a[href='/x'][data-turbo-method=delete][data-confirm='?'].bg-error"
+    assert_select "a[href='/x'][data-turbo-method=delete][data-confirm='?'].ui-button-danger"
   end
 
   test "ui_button link without method keeps its data untouched" do
     show ui_button("Voir", href: "/x", variant: :ghost, size: :sm)
 
-    assert_select "a[href='/x']:not([data-turbo-method]).h-10"
+    assert_select "a[href='/x']:not([data-turbo-method]).ui-button-sm"
   end
 
   test "a disabled link keeps its place but loses its href" do
@@ -377,8 +377,8 @@ class ComponentsHelperTest < ActionView::TestCase
                   trigger_full: true) +
          ui_modal(title: "Plus tard", id: "plain", trigger: "Ouvrir")
 
-    assert_select "button[aria-controls=entry][aria-haspopup=dialog].bg-ink.min-h-14.w-full", text: "Je suis élève"
-    assert_select "button[aria-controls=plain].min-h-tap:not(.w-full)", text: "Ouvrir"
+    assert_select "button[aria-controls=entry][aria-haspopup=dialog].ui-button-primary.ui-button-lg.w-full", text: "Je suis élève"
+    assert_select "button[aria-controls=plain].ui-button-md:not(.w-full)", text: "Ouvrir"
     # Levée par ui_button pendant le rendu du partial : ActionView l'enveloppe, la cause reste l'ArgumentError.
     error = assert_raises(ActionView::Template::Error) { ui_modal(title: "Taille", trigger: "Ouvrir", trigger_size: :xl) }
     assert_kind_of ArgumentError, error.cause
@@ -422,7 +422,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[aria-haspopup=menu][aria-expanded=false][aria-controls=menu-actions]"
     assert_select "div#menu-actions[role=menu][hidden].left-0"
     assert_select "a[role=menuitem][href='/edit'] svg"
-    assert_select "a[role=menuitem][data-turbo-method=delete].text-error"
+    assert_select "a[role=menuitem][data-turbo-method=delete].ui-menu-item-danger"
     assert_select "span[role=menuitem][aria-disabled=true]", text: "Bientôt"
   end
 
@@ -449,8 +449,10 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "[data-controller=dropdown][data-dropdown-fixed-value=true]"
     assert_select "div#row-menu[role=menu].z-50", 1, "au-dessus de la barre basse (z-40) du mobile"
-    assert_select "[data-controller=dropdown][data-action*='scroll@window->dropdown#place:capture']"
-    assert_select "[data-controller=dropdown][data-action*='resize@window->dropdown#place']"
+    # Lot E6 (politique-cache) : défilement et redimensionnement sont écoutés par le contrôleur, menu ouvert seulement ;
+    # le HTML de chaque menu ne déclare plus que le clavier (test système : teams/row_actions_menu_test.rb).
+    assert_select "[data-controller=dropdown][data-action='keydown->dropdown#keydown']"
+    assert_select "[data-action*='@window'], [data-action*='@document']", 0
     assert_select "button[aria-label='Actions pour Abidjan 1'][aria-controls=row-menu] svg"
   end
 
@@ -466,7 +468,7 @@ class ComponentsHelperTest < ActionView::TestCase
     show ui_dropdown_item("Supprimer", dialog: "delete-drena-1", icon: "trash", tone: :danger)
 
     assert_select "button[type=button][role=menuitem][tabindex='-1'][aria-haspopup=dialog][aria-controls=delete-drena-1]" \
-                  "[data-action='dropdown#openDialog'][data-dropdown-dialog-param=delete-drena-1].text-error.min-h-tap svg",
+                  "[data-action='dropdown#openDialog'][data-dropdown-dialog-param=delete-drena-1].ui-menu-item.ui-menu-item-danger svg",
                   count: 1
     assert_select "button", text: "Supprimer"
     assert_select "a", 0
@@ -475,7 +477,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_dropdown_item keeps the default tone for a dialog, and refuses an unknown tone" do
     show ui_dropdown_item("Désactiver", dialog: "deactivate-school-1")
 
-    assert_select "button.text-ink[role=menuitem]", text: "Désactiver"
+    assert_select "button.ui-menu-item-default[role=menuitem]", text: "Désactiver"
     assert_select "button.text-error", 0
     assert_raises(ArgumentError) { ui_dropdown_item("X", dialog: "x", tone: :loud) }
   end
@@ -632,7 +634,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_avatar shows a photo round and cropped, lazily, in every size up to xl" do
     show ui_avatar("Awa Koné", src: "/accounts/abc/photo?v=1", size: :xl)
 
-    assert_select "img[alt='Awa Koné'][src='/accounts/abc/photo?v=1'][loading=lazy][decoding=async].rounded-full.object-cover.size-28"
+    assert_select "img[alt='Awa Koné'][src='/accounts/abc/photo?v=1'][loading=lazy][decoding=async].ui-avatar.object-cover.size-28"
     assert_includes ui_avatar("Awa Koné", size: :xl), "size-28"
   end
 
@@ -716,14 +718,14 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "p", text: "Vide"
     assert_select "p", text: "Rien ici"
-    assert_select "a[href='/new'].bg-ink", text: "Créer"
+    assert_select "a[href='/new'].ui-button-primary", text: "Créer"
   end
 
   test "ui_empty_state with a free block or nothing" do
     show ui_empty_state(title: "Vide") { "Libre" } + ui_empty_state(title: "Nu", action: { label: "A", href: "/", variant: :secondary })
 
     assert_includes rendered, "Libre"
-    assert_select "a.bg-white", text: "A"
+    assert_select "a.ui-button-secondary", text: "A"
     assert_no_match(/<a|<button/, ui_empty_state(title: "Sans action"))
   end
 
@@ -819,7 +821,7 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "span[data-controller=clipboard][data-clipboard-text-value='https://lnclass.ci/c/KFM37']" do
       assert_select "button[type=button][hidden][data-clipboard-target=button][data-action='clipboard#copy']" \
-                    "[aria-label='Copier le lien de la classe'].border-line.h-10", text: "Copier le lien"
+                    "[aria-label='Copier le lien de la classe'].ui-button-secondary.ui-button-sm", text: "Copier le lien"
       assert_select "template[data-clipboard-target=copied]"
       assert_select "template[data-clipboard-target=failed]"
     end
@@ -834,7 +836,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_copy_button defaults: secondary, small, clipboard icon, no aria-label of its own" do
     show ui_copy_button("KFM37", label: "Copier", copied: "Code copié.", failed: "Raté.", variant: :ghost, size: :md)
 
-    assert_select "button[hidden].min-h-tap:not([aria-label])", text: "Copier"
+    assert_select "button[hidden].ui-button-md:not([aria-label])", text: "Copier"
     assert_equal icon_paths(ui_icon("clipboard-document", size: :md)), icon_paths(css_select("button").first)
     assert_match "Raté.", Nokogiri::HTML5.fragment(rendered).css("template").last.inner_html
   end
@@ -861,7 +863,7 @@ class ComponentsHelperTest < ActionView::TestCase
     show ui_reveal_more(4)
 
     assert_select "button.w-full[data-reveal-target=button][data-action='reveal#more']", text: "Voir plus"
-    assert_select "button.bg-ink", 0
+    assert_select "button.ui-button-primary", 0
     assert_select "p.sr-only[role=status][aria-live=polite][data-reveal-target=status]"
   end
 

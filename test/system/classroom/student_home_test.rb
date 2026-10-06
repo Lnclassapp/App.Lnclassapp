@@ -90,7 +90,7 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
           end
         end
         assert_selector "li:first-child :is(#{SobrietyAssertions::PRIMARY_ACTION})", text: tl("assigned_exercise.start")
-        assert_selector "li:not(:first-child) button.border-line.bg-white", count: 2
+        assert_selector "li:not(:first-child) button.ui-button-secondary", count: 2
         assert_button more
       end
       assert_single_primary_action

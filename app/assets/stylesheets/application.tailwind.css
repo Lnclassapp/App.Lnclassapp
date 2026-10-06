@@ -338,6 +338,72 @@
   @apply transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
 }
 
+/* Lot E6 (politique-cache) : boutons, bouton icône, menu ⋮, boîte de dialogue et avatar, sur le même principe ; une
+   ligne de tableau en porte plusieurs, une confirmation trois. */
+@utility ui-button {
+  @apply relative inline-flex cursor-pointer items-center justify-center rounded-full font-medium whitespace-nowrap select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
+}
+
+@utility ui-button-primary {
+  @apply bg-ink text-white hover:bg-ink/85;
+}
+
+@utility ui-button-brand {
+  @apply bg-brand text-ink hover:bg-brand/85;
+}
+
+@utility ui-button-secondary {
+  @apply border border-line bg-white text-ink hover:bg-mist;
+}
+
+@utility ui-button-ghost {
+  @apply text-ink hover:bg-ink/5;
+}
+
+@utility ui-button-danger {
+  @apply bg-error text-white hover:bg-error/90;
+}
+
+@utility ui-button-sm {
+  @apply h-10 gap-1.5 px-4 text-sm after:absolute after:-inset-1;
+}
+
+@utility ui-button-md {
+  @apply min-h-tap gap-2 px-5 text-sm;
+}
+
+@utility ui-button-lg {
+  @apply min-h-14 gap-2 px-6 text-base;
+}
+
+@utility ui-icon-button {
+  @apply grid size-tap cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand;
+}
+
+@utility ui-menu {
+  @apply absolute mt-2 w-64 rounded-ln border border-line bg-white p-1.5 shadow-pop animate-fade-in;
+}
+
+@utility ui-menu-item {
+  @apply flex min-h-tap w-full items-center gap-3 rounded-sm px-3 text-sm font-medium focus:outline-none;
+}
+
+@utility ui-menu-item-default {
+  @apply text-ink hover:bg-mist focus:bg-mist;
+}
+
+@utility ui-menu-item-danger {
+  @apply text-error hover:bg-error-soft focus:bg-error-soft;
+}
+
+@utility ui-dialog {
+  @apply m-auto w-full max-w-none rounded-sheet bg-white p-0 text-ink shadow-pop backdrop:bg-ink/50 open:animate-slide-up max-sm:mb-0 max-sm:rounded-b-none;
+}
+
+@utility ui-avatar {
+  @apply inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold;
+}
+
 /* UDR-0054 §3.4, amendement « survol » — largeur de la bulle : celle d'un formulaire, jamais plus que la fenêtre moins
    ses deux gouttières de 1 rem. */
 @utility max-w-bubble {

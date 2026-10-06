@@ -34,7 +34,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "header a[href='#{new_session_path}']", text: "Se connecter"
     assert_select "#hero button[aria-haspopup='dialog']", text: "Je suis élève"
     assert_select "#hero button[aria-haspopup='dialog']", text: "Je suis enseignant"
-    assert_select "#hero button[aria-haspopup='dialog'].min-h-14.w-full", 2
+    assert_select "#hero button[aria-haspopup='dialog'].ui-button-lg.w-full", 2
   end
 
   test "the visitor sees the student and teacher entries" do
