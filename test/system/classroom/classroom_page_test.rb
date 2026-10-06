@@ -148,7 +148,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert_operator find("#classroom_courses").rect.y, :<, find("#assigned_exercises").rect.y
       assert_selector "#classroom_courses ul[data-communication--carousel-target=track] > li", count: 3
       within("#student_#{@koffi.public_id}") do
-        avatar = find(".rounded-full.shrink-0", match: :first).rect
+        avatar = find(".ui-avatar", match: :first).rect
         menu = find("button[aria-haspopup=menu]").rect
         assert_in_delta avatar.y + (avatar.height / 2), menu.y + (menu.height / 2), 8, "⋮ n'est pas sur la ligne de l'élève"
         # « Aucune session terminée » ne doit pas écraser le nom.
