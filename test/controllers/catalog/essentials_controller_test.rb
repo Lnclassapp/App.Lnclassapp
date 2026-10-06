@@ -50,11 +50,11 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_badges_help", 0
     # Une ligne = un lien étiré, le titre, « Type · Assigné par ton enseignant », une seule action à droite.
     assert_select row_of(@exercise) do
-      assert_select "a.truncate.after\\:absolute.after\\:inset-0[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
+      assert_select "a.line-clamp-2.after\\:absolute.after\\:inset-0[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
       assert_select "p.text-mute", text: I18n.t("#{scope}.exercise_progress.exercise_types.fixation")
       assert_select "*", text: /Deux divisions successives|Badge|Meilleur score|Acquis|question/, count: 0
       assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}'] button.bg-ink",
-                    text: I18n.t("#{scope}.exercise_progress.start")
+                    text: I18n.t("#{scope}.exercise_progress.redo")
     end
     assert_select row_of(doing) do
       assert_select "p.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.fixation")} · " \

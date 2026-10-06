@@ -159,7 +159,9 @@ class Communication::PagesControllerTest < ActionDispatch::IntegrationTest
     simulate_online(:privacy, :terms)
     get help_path
 
-    assert_select "#help_your_data", text: /\AVos données : Protection des données · Conditions d'utilisation\z/
+    assert_select "#help_your_data", text: /\AVos données :\s+Protection des données\s+Conditions d'utilisation\z/
+    # UDR-0061, amendement du 2026-10-06 : chaque lien est une cible de 48 px.
+    assert_select "#help_your_data a.min-h-tap", count: 2
     assert_select "#help_your_data a[href='/confidentialite']", "Protection des données"
     assert_select "#help_your_data a[href='/conditions-utilisation']", "Conditions d'utilisation"
   end

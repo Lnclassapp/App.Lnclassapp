@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+# bin/system-changed — joue en local les seuls tests système que la branche touche ; la suite complète tourne en CI,
+# en trois parts (config/ci.rb). Sur un poste de 4 cœurs, la suite complète met 15 à 25 min et dépasse ses délais
+# quand la machine sature : chaque processus y lance son Chrome, son serveur et ses requêtes (docs/guide/onboarding.md §4).
+#
+#   bin/system-changed             tests système liés aux fichiers changés depuis origin/Develop
+#   bin/system-changed --list      la même sélection, affichée sans rien lancer
+#   bin/system-changed --all       toute la suite système, sur 2 processus au lieu d'un par cœur
+#   BASE=origin/main bin/system-changed
+#
+# Sélection : un test système modifié ; un test système qui visite la ressource d'une vue ou d'un contrôleur modifié
+# par son helper de route exact (app/views/classroom/student_homes → `student_home_path`) ; et, si un fichier commun
+# change (composant, shared, layout, helper, CSS, Stimulus), les parcours transverses de COMMON.
+require "open3"
+
+COMMON = %w[test/system/design_system_test.rb test/system/role_homes_test.rb].freeze
+SHARED_PATHS = %r{\Aapp/(views/(components|shared|layouts)/|helpers/|assets/stylesheets/|javascript/)}
+
+base = ENV.fetch("BASE", "origin/Develop")
+all = ARGV.include?("--all")
+list = ARGV.include?("--list")
+
+def changed_files(base)
+  merge_base, status = Open3.capture2("git", "merge-base", base, "HEAD")
+  abort "❌ Impossible de comparer à #{base} (git fetch ?)" unless status.success?
+
+  committed = `git diff --name-only #{merge_base.strip} HEAD`.lines
+  pending = `git diff --name-only HEAD`.lines + `git ls-files --others --exclude-standard`.lines
+  (committed + pending).map(&:strip).uniq
+end
+
+def resource_of(file)
+  case file
+  when %r{\Aapp/views/(?:[^/]+/)*([^/]+)/[^/]+\z} then Regexp.last_match(1)
+  when %r{\Aapp/controllers/(?:[^/]+/)*([^/]+)_controller\.rb\z} then Regexp.last_match(1)
+  end
+end
+
+def visiting(resource)
+  route = /(?<![\w.])#{Regexp.escape(resource.delete_suffix("s"))}s?_(?:path|url)\b/
+  Dir["test/system/**/*_test.rb"].select { File.read(it).match?(route) }
+end
+
+tests =
+  if all
+    [ "test/system" ]
+  else
+    files = changed_files(base)
+    selected = files.grep(%r{\Atest/system/.+_test\.rb\z}).select { File.exist?(it) }
+    selected += files.filter_map { resource_of(it) }.uniq.flat_map { visiting(it) }
+    selected += COMMON if files.any? { it.match?(SHARED_PATHS) }
+    selected.uniq.sort
+  end
+
+if tests.empty?
+  puts "ℹ️  Aucun test système lié aux fichiers changés depuis #{base}."
+  exit 0
+end
+puts "🧭 #{all ? 'Toute la suite système' : "#{tests.size} fichier(s) de tests système"} :"
+tests.each { puts "   #{it}" } unless all
+exit 0 if list
+
+# Machine déjà chargée (éditeur, serveur de dev, autre suite) : les tests dépasseront leurs délais.
+load = File.read("/proc/loadavg").split.first.to_f rescue 0
+cores = Integer(`nproc`.strip, exception: false) || 1
+if load > cores
+  warn "⚠️  Charge #{load} pour #{cores} cœurs : ferme VS Code, arrête bin/dev et toute autre suite, sinon les tests " \
+       "dépasseront leurs délais (faux échecs)."
+end
+
+# Chromium en snap (poste Ubuntu) : trouvé sans configuration, comme le pose docs/guide/configuration.md §4.3.
+env = { "COVERAGE" => "0", "PARALLEL_WORKERS" => ENV.fetch("PARALLEL_WORKERS", "2") }
+snap_chrome = "/snap/chromium/current/usr/lib/chromium-browser/chrome"
+if ENV["CHROME_BIN"].to_s.empty? && File.executable?(snap_chrome)
+  env["CHROME_BIN"] = snap_chrome
+  env["CHROMEDRIVER_PATH"] = "/snap/bin/chromium.chromedriver"
+end
+
+exec(env, "bin/rails", "test", *tests)

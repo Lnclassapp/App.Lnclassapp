@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/_student_progress — progression de l'élève sur l'exercice, et son bouton de session %>
-<%# Rôle : meilleure note sur 20, maîtrise, badge, sessions terminées ; « Commencer l'exercice », ou « Reprendre » et « Recommencer » %>
-<%# ADR  : 0033, 0054 · UDR : 0007, 0021, 0054, 0057 · « Commencer » change de page (Turbo Drive) ; seuils et « Recommencer » en infobulle %>
+<%# Rôle : meilleure note sur 20, maîtrise, badge, sessions terminées ; « Commencer l'exercice » (« Refaire l'exercice » après une session terminée), ou « Reprendre » et « Recommencer » %>
+<%# ADR  : 0033, 0054 · UDR : 0007, 0015, 0021, 0054, 0057 · « Commencer » change de page (Turbo Drive) ; seuils et « Recommencer » en infobulle %>
 <section id="student_progress" aria-labelledby="student_progress_title">
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -8,7 +8,7 @@
         <h2 id="student_progress_title" class="font-display text-xl font-extrabold"><%= t(".title") %></h2>
         <dl class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".best_score") %></dt>
+            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".best_score") %></dt>
             <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums">
               <% if progress.best_score_percent %>
                 <%= grade_label(progress.best_score_percent) %>
@@ -18,13 +18,13 @@
             </dd>
           </div>
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".mastery") %><%= ui_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
+            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".mastery") %><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
             <dd class="mt-1 font-medium">
               <%= progress.mastery ? t("assessment.badges.mastery.#{progress.mastery}") : t(".no_mastery") %>
             </dd>
           </div>
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".badge") %><%= ui_info_tip t("shared.info_tips.badges"), label: t(".badge") %></dt>
+            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".badge") %><%= stat_info_tip t("shared.info_tips.badges"), label: t(".badge") %></dt>
             <dd class="mt-1">
               <% if progress.badge_level %>
                 <%= ui_badge t(".badge_level", level: badge_label(progress.badge_level)), tone: badge_tone(progress.badge_level), icon: "trophy" %>
@@ -34,7 +34,7 @@
             </dd>
           </div>
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".sessions") %></dt>
+            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".sessions") %></dt>
             <dd class="mt-1 font-medium tabular-nums"><%= t(".completed", count: progress.completed_count) %></dd>
           </div>
         </dl>
@@ -51,7 +51,12 @@
           </div>
         <% else %>
           <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "start-exercise-form", class: "contents" do %>
-            <%= ui_button t(".start"), type: :submit, icon: "play" %>
+            <%# UDR-0015, amendement du 2026-10-06 : un exercice déjà terminé se « Refait ». %>
+            <% if progress.completed_count.positive? %>
+              <%= ui_button t(".redo"), type: :submit, icon: "arrow-path" %>
+            <% else %>
+              <%= ui_button t(".start"), type: :submit, icon: "play" %>
+            <% end %>
           <% end %>
         <% end %>
       </div>

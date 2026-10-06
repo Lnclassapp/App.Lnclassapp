@@ -105,7 +105,7 @@
 
   /* Espacements nommés — l'échelle numérique autorisée est listée dans UDR-0005 §3 */
   --spacing-tap: 3rem;
-  --spacing-gutter: 1.25rem;
+  --spacing-gutter: 1rem;
   --spacing-bar: 4rem;
   --spacing-rail: 18rem;
 
@@ -299,6 +299,11 @@
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* Élément collant posé juste au-dessus de la barre basse (« Question suivante », chantier ux-pages-eleve) */
+@utility bottom-above-bar {
+  bottom: calc(var(--spacing-bar) + env(safe-area-inset-bottom));
+}
+
 /* Colonne des actions (⋮) d'un tableau qui défile en largeur : collée au bord droit du tableau, sur un fond blanc qui
    masque les colonnes qui passent dessous. Au téléphone, le ⋮ est à l'écran sans faire défiler le tableau (UDR-0042).
    `sticky` crée un contexte d'empilement qui enfermerait le menu fixe (z-50) sous la barre basse (z-40) : menu ouvert,
@@ -320,8 +325,9 @@
   @apply inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap;
 }
 
+/* UDR-0005, amendement du 2026-10-06 : 12 px au lieu de 11, illisibles sur téléphone. */
 @utility ui-badge-sm {
-  @apply px-2 py-0.5 text-2xs;
+  @apply px-2 py-0.5 text-xs;
 }
 
 @utility ui-badge-md {
@@ -379,6 +385,50 @@
     overflow-y: auto;
     border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
     padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Chantier ux-pages-eleve — formules KaTeX lisibles sur téléphone. Hors couche, exprès : l'emporte sur katex.min.css.
+   1. Une formule en ligne ne se coupe plus en fin de ligne (« 1 ≤ 2 + / sin x ≤ 3 ») : elle passe entière à la ligne.
+   2. Une formule centrée trop large défile dans sa propre largeur au lieu d'élargir la page.
+   3. Une fraction en ligne s'écrit en « scriptstyle » (0,7 em), illisible vers 8 px dans une proposition : elle grandit
+      d'un quart, en entier (numérateur, barre et dénominateur), sans toucher aux fractions centrées. */
+.katex {
+  white-space: nowrap;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
+}
+
+:not(.katex-display) > .katex .mfrac {
+  font-size: 1.25em;
+}
+
+/* La fraction agrandie dépasse la hauteur de ligne prévue par KaTeX : sa formule prend un peu d'air au-dessus et
+   au-dessous, pour ne pas mordre sur la ligne voisine. Sans `:has` (navigateurs anciens), seul cet air manque. */
+:not(.katex-display) > .katex:has(.mfrac) {
+  display: inline-block;
+  margin-block: 0.3em;
+}
+
+/* UDR-0005, amendement du 2026-10-06 — sous 640 px, une carte de premier niveau du shell va bord à bord : la marge
+   d'écran (`data-bleed`, `px-gutter`) est rendue à la carte, qui perd ses arrondis et ses bords latéraux. Restent dans
+   la marge : une carte dans une carte, dans une modale, dans un carrousel, ou côte à côte avec une autre. */
+@media (width < 40rem) {
+  [data-bleed] .rounded-card.shadow-card:not(.rounded-card .rounded-card, dialog *, .snap-x *, .flex:not(.flex-col) > *,
+                                            [class~="grid-cols-2"] > *, [class~="grid-cols-3"] > *, [class~="grid-cols-4"] > *) {
+    margin-inline: calc(-1 * var(--spacing-gutter));
+    border-inline-width: 0;
+    border-radius: 0;
+
+    /* Une carte qui ouvre la page (carte de classe de l'accueil élève) garde ses deux coins du haut arrondis. */
+    &[data-bleed-round-top] {
+      border-start-start-radius: var(--radius-card);
+      border-start-end-radius: var(--radius-card);
+    }
   }
 }
 

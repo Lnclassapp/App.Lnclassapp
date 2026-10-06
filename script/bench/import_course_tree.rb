@@ -23,7 +23,9 @@
 # y compris les rapports d'import, leurs fichiers et leurs événements d'audit. Hors CI : la mesure dépend de la machine.
 
 module ImportCourseTreeBench
-  LESSONS = Rails.root.glob("docs/contenus/lecons-traitees/tle-d/*.json").sort
+  LESSONS = %w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools
+               svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes]
+            .map { Rails.root.join("docs/contenus/lecons-traitees/tle-d/#{it}.json") }.sort_by { File.basename(it) }
   SIZES = ARGV.any? ? ARGV.map { Integer(it) } : [ 200, 500 ]
   RUNS = Integer(ENV.fetch("BENCH_RUNS", 3))
   FILE_COURSES = 200

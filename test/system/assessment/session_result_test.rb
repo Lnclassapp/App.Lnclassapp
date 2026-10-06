@@ -104,13 +104,13 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_no_button I18n.t("components.reveal.more")
   end
 
-  test "sous le seuil : « Courage ! », « Non acquis », aucun confetti" do
+  test "sous le seuil : « Courage ! », « Pas encore de badge », aucun confetti" do
     session = completed_session(correct: 4)
 
     visit exercise_session_result_path(session.public_id)
 
     assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.error")
-    assert_selector "#session_badge[aria-label='#{I18n.t("assessment.badges.levels.none")}']"
+    assert_selector "#session_badge[aria-label='#{I18n.t("#{SCOPE}.badge.none")}']"
     assert_text I18n.t("assessment.badges.mastery.struggling")
     assert_no_selector "#confetti", visible: :all
     assert_button I18n.t("#{SCOPE}.show.restart")

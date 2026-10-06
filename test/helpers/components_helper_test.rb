@@ -130,7 +130,7 @@ class ComponentsHelperTest < ActionView::TestCase
     end
     show html
 
-    assert_select "div#c.rounded-card.p-6 h3", text: "Classes"
+    assert_select "div#c.rounded-card.p-5 h3", text: "Classes"
     assert_select "div#c p", text: "3 classes"
     assert_select "div#c svg"
     assert_select "div#c", text: /Tout voir.*Corps.*Pied/m
@@ -139,7 +139,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_card without block nor header renders an empty card" do
     show ui_card(padding: :none)
 
-    assert_select "div.rounded-card:not(.p-5)"
+    assert_select "div.rounded-card:not(.p-4)"
     assert_select "h2", 0
   end
 

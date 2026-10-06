@@ -65,7 +65,8 @@ module ComponentsHelper
   CARD_BASE = "block rounded-card border border-line bg-white shadow-card"
   # Lot E5 (politique-cache) : survol et focus d'une carte-lien, écrits une fois dans application.tailwind.css.
   CARD_LINK = "ui-card-link"
-  CARD_PADDINGS = { none: nil, sm: "p-4", md: "p-5 sm:p-6", lg: "p-6 sm:p-8" }.freeze
+  # UDR-0005, amendement du 2026-10-06 : 16 px de rembourrage sous 640 px.
+  CARD_PADDINGS = { none: nil, sm: "p-4", md: "p-4 sm:p-6", lg: "p-5 sm:p-8" }.freeze
 
   FIELD_BUILDERS = {
     text: :text_field, email: :email_field, password: :password_field, tel: :telephone_field,
@@ -116,7 +117,8 @@ module ComponentsHelper
     team: { chip: "bg-team/10 text-team", dot: "bg-team" },
     gold: { chip: "bg-gold/20 text-ink", dot: "bg-gold" }
   }.freeze
-  # Lot E5 (politique-cache) : la forme et les tailles d'un badge, écrites une fois dans application.tailwind.css.
+  # Lot E5 (politique-cache) : la forme et les tailles d'un badge, écrites une fois dans application.tailwind.css
+  # (petit badge en 12 px, UDR-0005, amendement du 2026-10-06).
   BADGE_BASE = "ui-badge"
   BADGE_SIZES = { sm: "ui-badge-sm", md: "ui-badge-md" }.freeze
   ROLE_TONES = { student: :brand, teacher: :teacher, team: :team, school_admin: :school }.freeze
@@ -283,11 +285,12 @@ module ComponentsHelper
   # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:center` (défaut) ne change rien.
   # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
-               document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, placement: :center, &block)
+               document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, trigger_class: nil,
+               placement: :center, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
-           trigger_icon:, trigger_href:, trigger_size:, trigger_full:, open:, body:, slots:, document_title:,
+           trigger_icon:, trigger_href:, trigger_size:, trigger_full:, trigger_class:, open:, body:, slots:, document_title:,
            size_class: option!(MODAL_SIZES, size, "ui_modal size"),
            placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet
   end
@@ -340,9 +343,10 @@ module ComponentsHelper
 
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
   # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
-  def ui_subject_bubble(label:, href:, illustration:, sr_suffix: nil, id: nil, signal: nil)
+  # short_label : libellé affiché sous 640 px (« PC ») ; le nom entier reste le nom accessible.
+  def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil)
     dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
-    render "components/subject_bubble", label:, href:, illustration:, sr_suffix:, id:, dot:
+    render "components/subject_bubble", label:, short_label:, href:, illustration:, sr_suffix:, id:, dot:
   end
 
   def ui_subject_badge(label, category:, size: :md)

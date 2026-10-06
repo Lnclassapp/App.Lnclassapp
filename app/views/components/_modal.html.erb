@@ -9,7 +9,7 @@
                     action: "turbo:before-cache@document->modal#close" } do %>
   <% if trigger %>
     <%= ui_button trigger, variant: trigger_variant, icon: trigger_icon, href: trigger_href, size: trigger_size, full: trigger_full,
-          data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": id %>
+          class: trigger_class, data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": id %>
   <% end %>
   <dialog id="<%= id %>" <%= "open" if open %> aria-labelledby="<%= id %>-title" data-modal-target="dialog" data-action="click->modal#backdrop close->modal#closed turbo:submit-end->modal#submitEnd modal:opened->autofocus#focus"
           data-controller="autofocus" data-autofocus-mode-value="dialog"

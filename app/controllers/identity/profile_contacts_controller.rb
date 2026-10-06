@@ -1,8 +1,10 @@
 # 🌐 DELIVERY · Identity::ProfileContactsController
 # Rôle : changer son numéro en modale, sous PIN actuel ; succès : nouvelle session, 303 vers « Mon profil » ; verrouillage : connexion
-# ADR  : 0049, 0050, 0055 · UDR : 0041
+# ADR  : 0049, 0050, 0055 · UDR : 0041 (élève tutoyé, 2026-10-06)
 module Identity
   class ProfileContactsController < AuthenticatedController
+    include Tone
+
     def edit
       @form = Dtos::Identity::ContactChangeInput.new
     end
@@ -14,7 +16,7 @@ module Identity
 
       render_result result, form: :edit, success: lambda { |changed|
         start_session(changed.token)
-        redirect_to main_app.profile_path, notice: t(".changed"), status: :see_other
+        redirect_to main_app.profile_path, notice: tone_t(".changed"), status: :see_other
       }
     end
 

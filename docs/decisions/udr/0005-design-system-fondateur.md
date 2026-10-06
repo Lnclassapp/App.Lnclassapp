@@ -177,3 +177,11 @@ Opacités autorisées sur ces tokens (`bg-ink/5`, `border-ink/10`, `text-white/7
 
 - La **décision 4** (« Pas de mode sombre en V1 ») est **levée** : l'application suit le thème sombre du téléphone, en redéfinissant la valeur des tokens (UDR-0065).
 - L'interdiction de la variante `dark:` **reste** : le mode sombre ne passe que par les tokens, jamais par une classe dans une vue.
+
+## Amendement du 2026-10-06 — téléphone : petits badges en 12 px, cartes bord à bord
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Les petits badges (`ui_badge size: :sm` : matière, échéance, type de question) passent en `text-xs` (12 px) : à 11 px, ils restaient difficiles à lire sur téléphone.
+- `text-2xs` (11 px) ne sert plus qu'aux libellés de la barre basse (UDR-0006) et aux mentions secondaires d'un en-tête de tableau.
+- Décision du porteur du 2026-10-06 : **sous 640 px, une carte de premier niveau va bord à bord** (sans arrondi ni bord latéral). La marge d'écran `gutter` passe de 20 à 16 px, le rembourrage `ui_card padding: :md` de 20 à 16 px (`lg` de 24 à 20 px) : le texte d'une carte est à 16 px du bord de l'écran au lieu de 40. Une carte dans une carte, dans une modale, dans un carrousel ou côte à côte garde ses marges.

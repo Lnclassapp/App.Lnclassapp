@@ -1,10 +1,11 @@
 <%# 🌐 UI · classroom/student_homes/_classroom_card — la classe principale de l'élève sur son accueil %>
 <%# Rôle : classe, niveau, établissement, effectif et code de la classe en majuscules ; jamais la liste nominative %>
-<%# ADR  : 0040, 0041 · UDR : 0010 %>
+<%# ADR  : 0040, 0041 · UDR : 0010 · un lien plein cadre, sans bordure : pas de carte dans la carte %>
 <%# locals: (home:, icon:) -%>
-<%= ui_card title: t(".title"), icon:, id: "student_home_classroom" do %>
+<%# Bord à bord sous 640 px, elle ouvre l'accueil : ses deux coins du haut restent arrondis (data-bleed-round-top). %>
+<%= ui_card title: t(".title"), icon:, id: "student_home_classroom", data: { bleed_round_top: true } do %>
   <%= link_to student_classroom_path,
-              class: "group flex flex-col gap-4 rounded-ln border border-line bg-brand-soft/40 p-4 transition hover:border-brand sm:flex-row sm:items-center sm:justify-between focus-visible:outline-2 focus-visible:outline-brand" do %>
+              class: "group -m-2 flex flex-col gap-4 rounded-ln p-2 transition hover:bg-mist active:bg-mist sm:flex-row sm:items-center sm:justify-between focus-visible:outline-2 focus-visible:outline-brand" do %>
     <div class="min-w-0 space-y-1">
       <p class="truncate font-display text-lg font-extrabold text-ink"><%= home.classroom_name %></p>
       <p class="text-sm text-mute"><%= t(".context", level: home.level_name, school: home.school_name) %></p>

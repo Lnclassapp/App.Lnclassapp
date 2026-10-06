@@ -5,11 +5,11 @@
 <% passed = exercise.best_score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD %>
 <%= tag.li(**ui_reveal_item(index)) do %>
   <%= link_to exercise_session_result_path(exercise.last_session_public_id),
-              class: "group flex min-h-tap items-center gap-3 px-5 py-3 transition hover:bg-mist active:bg-mist sm:px-6 focus-visible:outline-2 focus-visible:outline-brand" do %>
+              class: "group flex min-h-tap items-center gap-3 px-4 py-3 transition hover:bg-mist active:bg-mist sm:px-6 focus-visible:outline-2 focus-visible:outline-brand" do %>
     <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-ln text-xs font-bold tabular-nums",
                                  passed ? "bg-success-soft text-success" : "bg-mist text-ink") %>"><%= grade_label(exercise.best_score_percent) %></span>
     <span class="min-w-0 flex-1">
-      <span class="block truncate font-medium text-ink"><%= exercise.title %></span>
+      <span class="line-clamp-2 font-medium break-words text-ink"><%= exercise.title %></span>
       <span class="mt-0.5 block text-xs text-mute"><%= t(".best") %> · <%= mastery_label(exercise.best_score_percent) %></span>
     </span>
     <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>

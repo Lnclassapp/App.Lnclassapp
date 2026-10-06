@@ -114,7 +114,19 @@ Dans `_exercise_progress` (branche non-élève) :
 - Le catalogue de l'enseignant est restreint par lecture, pas par policy : un lien direct vers un cours d'une autre matière reste ouvert (hors périmètre, memo).
 - Interdit désormais : une grille de classes ou de cours sur l'accueil enseignant ou la page d'une classe ; un bouton d'action secondaire (code de récupération) à côté de chaque élève ; l'échéance redite à la fois sous la classe et dans la bascule (R6).
 
-## Amendement du 2026-10-06 — badge de matière sur les cartes de l'enseignant · Statut : Accepté (porteur, 2026-10-06)
+## Amendement du 2026-10-06 — le filtre du catalogue sur téléphone
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md). Décision du porteur, 2026-10-06. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+Motif : avec des données réelles (démo du Collège Saint Michel de Tiassalé), le catalogue d'un élève de Tle D compte 19 cours, soit 4 560 px de défilement à 390 px, sans aucun moyen de le restreindre.
+
+- **§3.2, téléphone** : le formulaire `#courses-filters` est visible à toutes les largeurs (`grid`, une colonne sous 640 px, `p-3`), pour tous les rôles. Plus de `hidden sm:grid`.
+- **Quitter les filtres** : « Tout voir » (`#courses_reset`, ex-`#courses_reset_mobile`) est rendu dans le frame `courses` à toutes les largeurs, dès qu'un filtre est actif ; cible `min-h-tap`. Le bouton « Effacer » du formulaire disparaît : avec JavaScript, « Filtrer » se cache et « Effacer » restait seul.
+- **« Filtrer »** : la cible `search#button` est la cellule qui le contient, cachée entière avec JavaScript ; sans JavaScript, il reste.
+- **Titre de l'élève** : l'infobulle « Quels cours ? » est collée au `h1` (`flex flex-wrap items-center`), et non plus rendue en action de `ui_page_header`, où elle restait seule sous le titre sur téléphone.
+- **Carte** : une année scolaire du sous-titre (« 2026-2027 ») ne se coupe pas à son tiret (`whitespace-nowrap`).
+
+## Amendement du 2026-10-06 (bis) — badge de matière sur les cartes de l'enseignant · Statut : Accepté (porteur, 2026-10-06)
 
 *Fusion de la PR [#184](https://github.com/Lnclassapp/App.Lnclassapp/pull/184) (`politique-cache`, lot E5) dans `Develop`. L'amendement du 2026-10-05 (ter) de l'[UDR-0013](0013-catalogue-et-page-cours.md), décidé le même jour que cette UDR, garde le badge de matière sur chaque carte « pour tous les rôles ». Le porteur, le 2026-10-06, tranche l'écart : « badge pour tous ». En cas d'écart avec le texte ci-dessus, cette section fait foi.*
 

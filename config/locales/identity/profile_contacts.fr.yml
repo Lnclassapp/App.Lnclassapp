@@ -1,23 +1,25 @@
 # Profil : changer son numéro sous PIN actuel (chantier profil-utilisateur, Lot B) — ADR-0055, UDR-0041
+# UDR-0041, amendement du 2026-10-06 : l'élève est tutoyé (charte §1) ; clés « _student », lues par tone_t. Les erreurs,
+# communes à tous les rôles, se disent sans pronom.
 fr:
   activemodel:
     attributes:
       dtos/identity/contact_change_input:
         current_pin: "PIN actuel"
         contact: "Nouveau numéro"
-        contact_confirmation: "Confirmez le nouveau numéro"
+        contact_confirmation: "Confirmation du nouveau numéro"
     errors:
       models:
         dtos/identity/contact_change_input:
           attributes:
             current_pin:
-              blank: "Saisissez votre PIN actuel."
+              blank: "Le PIN actuel est obligatoire."
               invalid: "Le PIN compte 4 chiffres."
               incorrect: "PIN incorrect."
             contact:
-              blank: "Saisissez votre nouveau numéro."
-              invalid: "Saisissez un numéro ivoirien à 10 chiffres, par exemple 05 01 02 03 04."
-              unchanged: "C'est déjà votre numéro."
+              blank: "Le nouveau numéro est obligatoire."
+              invalid: "Un numéro ivoirien compte 10 chiffres, par exemple 05 01 02 03 04."
+              unchanged: "C'est déjà le numéro de ce compte."
               taken: "Ce numéro ne peut pas être utilisé."
             contact_confirmation:
               confirmation: "Les deux numéros ne sont pas identiques."
@@ -26,9 +28,12 @@ fr:
       edit:
         title: "Changer mon numéro"
         intro: "Vous vous connecterez ensuite avec le nouveau numéro. Vos autres appareils seront déconnectés."
+        intro_student: "Tu te connecteras ensuite avec le nouveau numéro. Tes autres appareils seront déconnectés."
         current_pin_hint: "Le PIN à 4 chiffres que vous utilisez pour vous connecter."
+        current_pin_hint_student: "Le PIN à 4 chiffres que tu utilises pour te connecter."
         contact_placeholder: "07 00 00 00 00"
         cancel: "Annuler"
         submit: "Changer mon numéro"
       update:
         changed: "Votre numéro est changé."
+        changed_student: "Ton numéro est changé."

@@ -113,9 +113,9 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
     {
       { pin_confirmation: "1358" } => [ "pin_confirmation", "Les deux PIN ne sont pas identiques." ],
       { pin: "13579", pin_confirmation: "13579" } => [ "pin", "Le PIN compte 4 chiffres." ],
-      { pin: "", pin_confirmation: "" } => [ "pin", "Choisissez un nouveau PIN à 4 chiffres." ],
-      { current_pin: "" } => [ "current_pin", "Saisissez votre PIN actuel." ],
-      { pin: "2468" } => [ "pin", "C'est déjà votre PIN." ]
+      { pin: "", pin_confirmation: "" } => [ "pin", "Le nouveau PIN, à 4 chiffres, est obligatoire." ],
+      { current_pin: "" } => [ "current_pin", "Le PIN actuel est obligatoire." ],
+      { pin: "2468" } => [ "pin", "C'est déjà le PIN de ce compte." ]
     }.each do |entry, (field, message)|
       change_pin(**entry)
 

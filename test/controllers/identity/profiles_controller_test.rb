@@ -33,7 +33,7 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
       assert_modal_link edit_profile_contact_path, /Changer mon numéro/
     end
     assert_select "#profile_security" do
-      assert_select "details", text: /Votre PIN protège votre compte/
+      assert_select "details", text: /Ton PIN protège ton compte/
       assert_modal_link edit_profile_pin_path, /Changer mon PIN/
     end
     assert_select "dt", text: "Établissement", count: 0
@@ -54,15 +54,55 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: "Élève", count: 0
       assert_select "dl.mt-5.divide-y.divide-line.border-t.border-line.text-sm"
       assert_select "dd span[aria-hidden=true] [role=img][aria-label='Aya Koné']", text: "AK"
-      assert_select "dd span.sr-only", "Aucune photo : vos initiales s'affichent."
+      assert_select "dd span.sr-only", "Aucune photo : tes initiales s'affichent."
       assert_select "a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Ajouter une photo/
     end
     assert_select "#profile_security" do
       assert_select "div.flex.flex-wrap.items-center > h2#profile_security_title", "Mon PIN"
       assert_select "details summary .sr-only", "Aide : Mon PIN"
-      assert_select "details div", "Votre PIN protège votre compte. Changez-le si vous pensez qu'une autre personne le connaît."
-      assert_select "p", text: /Votre PIN protège votre compte/, count: 0
+      assert_select "details div", "Ton PIN protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
+      assert_select "p", text: /Ton PIN protège ton compte/, count: 0
     end
+  end
+
+  # UDR-0041, amendment of 2026-10-06: the student is called « tu » (charter §1), the other roles keep « vous ».
+  test "UDR-0041: the student's profile says « tu », never « vous »" do
+    sign_in_as create_student(classroom: create_classroom)
+
+    get profile_path
+
+    assert_no_match(/\b(vous|votre|vos)\b/i, css_select("#main").text)
+    assert_select "#profile_security details div", "Ton PIN protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
+    assert_select "#profile_information dd span.sr-only", "Aucune photo : tes initiales s'affichent."
+  end
+
+  # UDR-0041, amendment of 2026-10-06: the student saw three styles (outline 40 px, dark filled, switch).
+  test "UDR-0041: the four actions of the student's profile share one button style, 48 px high" do
+    sign_in_as create_student(classroom: create_classroom)
+
+    get profile_path
+
+    classes = css_select("#main a[data-turbo-frame=modal]").map { it["class"] }
+    assert_equal 4, classes.size
+    assert_equal 1, classes.uniq.size, "styles : #{classes.uniq.inspect}"
+    assert_includes classes.first.split, "min-h-tap"
+  end
+
+  test "UDR-0041: the student's profile modals say « tu », a teacher's keep « vous »" do
+    sign_in_as create_student(classroom: create_classroom)
+    { edit_profile_pin_path => "Saisis ton PIN actuel", edit_profile_contact_path => "Tu te connecteras",
+      edit_profile_photo_path => "sur ton téléphone", edit_profile_name_path => "Modifier mon nom" }.each do |path, text|
+      get path
+
+      assert_select "dialog", text: /#{text}/
+      assert_no_match(/\b(vous|votre|vos)\b/i, css_select("dialog").text, path)
+    end
+    sign_out
+
+    sign_in_as create_teacher
+    get edit_profile_pin_path
+
+    assert_select "dialog", text: /Saisissez votre PIN actuel/
   end
 
   # UDR-0041, amendment of 2026-10-02: the other roles keep the current profile until their own clean-up.

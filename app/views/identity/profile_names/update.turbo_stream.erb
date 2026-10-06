@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profile_names/update — succès du changement de nom %>
 <%# Rôle : toast, modale refermée, carte #profile_information rendue de nouveau %>
-<%# ADR  : 0055 · UDR : 0006, 0041 %>
-<%= turbo_stream_toast t(".updated"), type: :success %>
+<%# ADR  : 0055 · UDR : 0006, 0041 (élève tutoyé, 2026-10-06) %>
+<%= turbo_stream_toast tone_t(".updated"), type: :success %>
 <%= turbo_stream.update "modal", "" %>
 <%= turbo_stream.replace "profile_information", partial: "identity/profiles/information", locals: { profile: @profile } %>

@@ -43,7 +43,8 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     end
   end
 
-  test "the student sees the content, his gold badge at 80 % one tap away, and « Commencer » opens the first question" do
+  # UDR-0015, amendment of 2026-10-06: once a session is done, the button reads « Refaire ».
+  test "the student sees the content, his gold badge at 80 % one tap away, and « Refaire » opens the first question" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de la fiche.
     student = create_student_for(@course)
     best = create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 80)
@@ -66,7 +67,7 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     end
 
     visit page_path
-    within("#essential_exercise_#{@exercise.public_id}") { click_on I18n.t("#{scope}.exercise_progress.start") }
+    within("#essential_exercise_#{@exercise.public_id}") { click_on I18n.t("#{scope}.exercise_progress.redo") }
 
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_text "Question 1"
