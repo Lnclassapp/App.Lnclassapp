@@ -1,0 +1,30 @@
+<%# 🌐 UI · communication/help/_questions — la liste des questions et la ligne « Vos données » de /aide %>
+<%# Rôle : une question par <details> natif, réponse repliée, sans JS ; partagée par la page d'entrée et le shell %>
+<%# UDR  : 0061 (§3.1 ; amendement du 2026-10-06 : liens de 48 px), 0063 (§3.4 « Vos données »), 0057, 0062 %>
+<ul id="help_questions" class="-my-2 divide-y divide-line">
+  <% Communication::HelpController::QUESTIONS.each do |key| %>
+    <li>
+      <details id="help_question_<%= key %>" class="group">
+        <summary class="summary-plain flex min-h-tap cursor-pointer items-center justify-between gap-3 py-3 font-medium
+                        focus-visible:outline-2 focus-visible:outline-brand">
+          <%= t("communication.help.show.questions.#{key}.question") %>
+          <%= ui_icon "chevron-down", size: :sm, class: "text-mute transition group-open:rotate-180 motion-reduce:transition-none" %>
+        </summary>
+        <p class="pb-4 text-sm text-mute"><%= t("communication.help.show.questions.#{key}.answer", **thresholds) %></p>
+      </details>
+    </li>
+  <% end %>
+</ul>
+<%# UDR-0063 §3.4 : la ligne n'apparaît qu'avec une de ses pages en ligne ; libellé dans public_pages.fr.yml.
+    UDR-0061, amendement du 2026-10-06 : chaque lien est une cible de 48 px, sur sa propre ligne de liens. %>
+<% if (data_links = public_page_links(%i[privacy terms])).any? %>
+  <div id="help_your_data" class="mt-4 border-t border-line pt-4 text-sm text-mute">
+    <p><%= t("communication.help.show.your_data") %></p>
+    <p class="flex flex-wrap gap-x-5">
+      <% data_links.each do |label, href| %>
+        <%= link_to label, href, class: "inline-flex min-h-tap items-center underline underline-offset-2 hover:text-ink
+                                         focus-visible:outline-2 focus-visible:outline-brand" %>
+      <% end %>
+    </p>
+  </div>
+<% end %>

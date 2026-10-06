@@ -38,13 +38,45 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
     assert_select "#help_question_late p", text: /date limite.*toujours le faire/
   end
 
-  test "a signed-in student reads the same page" do
+  # UDR-0061, amendement du 2026-10-06 : connecté, l'élève lit la FAQ dans son shell, retour vers son accueil.
+  test "a signed-in student reads the FAQ in the shell, with a way back to the student home" do
     sign_in_as create_student(classroom: create_classroom)
 
     get help_path
 
     assert_response :success
+    assert_select "main#main", count: 1
+    assert_select "nav", minimum: 2
+    assert_select "h1", count: 1, text: "Questions fréquentes"
+    assert_select "nav a[href='#{student_home_path}']", text: /Accueil/
+    assert_select "a[aria-label='Lnclass, accueil']", 0
     assert_select "#help_questions details", count: Communication::HelpController::QUESTIONS.size
+  end
+
+  test "a visitor keeps the entry page: logo, back to the public home, no shell" do
+    get help_path
+
+    assert_select "main#main", 0
+    assert_select "a[aria-label='Lnclass, accueil'][href='#{root_path}']"
+  end
+
+  # ADR-0063 : l'enseignant sans école n'a pas de navigation ; il garde la page d'entrée.
+  test "a teacher waiting for a school keeps the entry page" do
+    sign_in_as create_user(role: "teacher")
+
+    get help_path
+
+    assert_response :success
+    assert_select "main#main", 0
+    assert_select "a[aria-label='Lnclass, accueil']"
+  end
+
+  # UDR-0061, amendement du 2026-10-06 : les liens « Vos données » faisaient 18 px de haut.
+  test "every link of « Vos données » is a 48 px target" do
+    get help_path
+
+    assert_select "#help_your_data a", count: 2
+    assert_select "#help_your_data a:not(.min-h-tap)", 0
   end
 
   test "the student home offers « Besoin d'aide ? », which leads to the FAQ" do
