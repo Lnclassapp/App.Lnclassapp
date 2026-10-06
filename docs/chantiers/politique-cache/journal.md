@@ -147,6 +147,9 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 | 2026-10-05 | Pagination plutôt que cache des cartes du catalogue | Le cache prévu par le lot 5 accélère le rendu mais n'allège pas la page (339 à 410 Ko) | UDR-0013 (amendement) |
 | 2026-10-05 | `CourseCatalogQuery#call` renvoie une page (`Page`, comme `SchoolsQuery`) au lieu de toutes les cartes | Une seule entrée ; le compte coûte une requête de plus (2 au lieu de 1) | non |
 | 2026-10-05 | Frame de la page suivante en bloc **après** la grille, pas dans la grille | Un frame en `display: contents` n'a pas de boîte : l'`IntersectionObserver` de Turbo ne le verrait jamais entrer à l'écran | non |
+| 2026-10-05 | **Porteur** : cartes du catalogue, A, C et E (B et D écartés) | A ne change rien à l'écran ; C et E retirent ce qui se répète (« dire chaque chose une seule fois ») | UDR-0013 (amendement bis) |
+| 2026-10-05 | A appliqué à `ui_badge` et à `ui_card` (lien) dans toute l'application, pas seulement au catalogue | Une seule source de style. Le risque de conflit avec une classe ajoutée par une vue est nul : `ui_badge` n'en accepte pas, et seul le survol de la carte-lien est partagé, pas son fond ni sa bordure | non |
+| 2026-10-05 | Preuve de A par les styles calculés, pas par des captures | Deux captures de la même page diffèrent déjà de 800 à 34 000 pixels (codes, ports, animations) ; les styles calculés de chaque élément, survol compris, sont identiques d'une exécution à l'autre | non |
 | 2026-10-05 | Sprite d'icônes posé **dans** le frame de la liste | La réponse d'un frame seul (recherche, page suivante) doit apporter ses `<symbol>` ; posé hors du frame, une icône absente de la première page serait perdue | non (levier déjà admis, ADR-0067) |
 
 ## Leviers abandonnés, et pourquoi
@@ -194,6 +197,9 @@ Lecture de l'audit (memo, « Lot E ») : la politique de cache est respectée su
 
 - **Lot E, premier passage de l'audit** : la première page explorée après la connexion héritait du rechargement de la nouvelle session (`/account/pending` marquée « rechargement forcé »). Le robot consomme désormais ce rechargement sur l'accueil avant d'explorer. Il comptait aussi le frame permanent de l'enseignant comme une requête à chaque page : un frame `data-turbo-permanent` est maintenant relevé à part, comme une requête à l'arrivée seulement.
 - **`script/ci/record_timings`** : sans `LANG=C.UTF-8`, il plante sur un fichier de test non ASCII. Avec la locale, il ne lit qu'une des deux durées du fichier : la première ligne `-v` est coupée par le démarrage de Puma. Il retire aussi une entrée dont le fichier n'existe plus (`student_work_test.rb`). La durée de `sidebar_referral_test.rb` (3,78 + 1,56 s, soit 5,3 s) a donc été reportée à la main, et le reste du fichier laissé tel quel.
+
+- **Lot E5, premier `bin/ci`** : quatre tests ciblaient les badges par leurs anciennes classes (`span.rounded-full`) ou par l'ordre « titre puis Brouillon » de la carte ; ils sont mis à jour. Le même passage a vu échouer une fois `BouclePedagogiqueTest` (la modale « Nouveau cours » de l'accueil équipe introuvable). Le test passe seul, puis au `bin/ci` complet suivant, et le lot ne touche ni cette modale ni l'accueil équipe. L'échec est noté ici sans cause trouvée.
+- **Lot E5, révision du porteur** : sur `/courses?material=svt`, la carte de l'élève n'avait plus que son titre et son sous-titre. Le niveau lui était déjà retiré, et la matière filtrée aussi (amendement du 2026-10-02) ; le lot E5 a ôté le pied. Le porteur a demandé la carte de sa capture : badge de matière, titre, sous-titre, pied « Ouvrir le cours → ». Leçon : un allègement se juge sur chaque vue de l'écran (rôle, filtre), pas sur la vue mesurée.
 
 ## Ce qu'on a appris sur la codebase
 

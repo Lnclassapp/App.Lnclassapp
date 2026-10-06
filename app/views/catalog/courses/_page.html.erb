@@ -10,11 +10,10 @@
     suivantes préfixent leurs <symbol>, pour qu'aucun id ne se répète dans la page. %>
 <%= ui_icon_sprite(prefix: ("courses-page-#{page.page}-" if nested)) do %>
   <ul id="<%= nested ? "courses_list_page_#{page.page}" : "courses_list" %>" class="<%= class_names("grid gap-5 sm:grid-cols-2 xl:grid-cols-3", "mt-5" => nested) %>">
-    <%# UDR-0057 R6 : l'élève a un seul niveau, et la matière filtrée est déjà dite par la liste « Matière » ; l'enseignant
-        n'a qu'une matière, dite par le sous-titre (UDR-0077 §3.2). %>
+    <%# Élève seulement (UDR-0057 R6) : son niveau est unique. La matière reste sur chaque carte, filtrée ou non
+        (UDR-0013, amendement du 2026-10-05 ter). %>
     <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course,
-               locals: { show_status: team, show_level: !student,
-                         show_material: !(teacher || (student && filters[:material].present?)) } %>
+               locals: { show_status: team, show_level: !student } %>
   </ul>
 <% end %>
 <% if page.page < page.pages %>

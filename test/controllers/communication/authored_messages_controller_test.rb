@@ -112,7 +112,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
       assert_select "li#my_announcement_#{message.public_id}" do
         assert_select "p.font-medium", message.title
         assert_select "p.text-mute", line
-        assert_select "span.rounded-full", text: status
+        assert_select "span.ui-badge", text: status
       end
     end
     assert_select "#my_announcement_#{draft.public_id} img[src='#{announcement_file_path(draft.public_id, kind: 'image')}'][alt='']"

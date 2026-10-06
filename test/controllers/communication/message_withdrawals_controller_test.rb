@@ -60,7 +60,7 @@ module Communication
       sign_in_as @kouassi
       get my_announcements_path
       assert_select "li#my_announcement_#{@fiches.public_id}" do
-        assert_select "span.rounded-full", text: "Retirée"
+        assert_select "span.ui-badge", text: "Retirée"
         assert_select "p.text-mute", text: /Retirée le 4 oct\./
         assert_select "[role=menu]", 0
       end

@@ -313,6 +313,25 @@
   }
 }
 
+/* Chantier politique-cache, lot E5 (A) : les classes que chaque badge et chaque carte-lien répétaient, écrites une fois
+   ici. Le rendu est le même, le HTML plus léger (une page du catalogue porte 24 cartes et 48 à 72 badges). Leur liste
+   est celle d'avant, figée par test/design/shared_classes_test.rb. */
+@utility ui-badge {
+  @apply inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap;
+}
+
+@utility ui-badge-sm {
+  @apply px-2 py-0.5 text-2xs;
+}
+
+@utility ui-badge-md {
+  @apply px-2.5 py-1 text-xs;
+}
+
+@utility ui-card-link {
+  @apply transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+}
+
 /* UDR-0054 §3.4, amendement « survol » — largeur de la bulle : celle d'un formulaire, jamais plus que la fenêtre moins
    ses deux gouttières de 1 rem. */
 @utility max-w-bubble {

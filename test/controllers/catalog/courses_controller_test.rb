@@ -52,6 +52,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: including("Tle D"), count: 0
       assert_select "h2", text: "Génétique et évolution"
       assert_select "*", text: including("Du gène à l'espèce")
+      # UDR-0013, amendement du 2026-10-05 ter : le pied « Ouvrir le cours → » est rétabli.
       assert_select "*", text: including(tl("course_card.open"))
     end
     assert_no_match(/Brouillon de cours|Cours archivé/, response.body)
@@ -69,7 +70,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_list > li", 4
     assert_select "#course_#{@draft.slug}", text: including(status_label(:draft))
     assert_select "#course_#{@archived.slug}", text: including(status_label(:archived))
-    assert_select "#course_#{@course.slug}", text: including(status_label(:published))
+    # UDR-0013, amendement du 2026-10-05 : « Publié », l'état normal, n'est plus écrit sur la carte.
+    assert_select "#course_#{@course.slug}", text: including(status_label(:published)), count: 0
+    assert_select "#course_#{@course.slug} h2", text: "Génétique et évolution"
     assert_select modal_link(new_teams_course_path), text: tl("index.new_course")
     assert_select modal_link(new_teams_import_path(kind: "course_tree")), text: tl("index.import")
   end
@@ -224,8 +227,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_empty", text: including(tl("index.empty_title"))
   end
 
-  # UDR-0013, amendement du 2026-10-02 (UDR-0057), décision du porteur : élève seulement.
-  test "a student's catalogue has no subtitle but an info tip, and its cards drop the filtered subject" do
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057), décision du porteur : élève seulement. Amendement du 2026-10-05 ter :
+  # la carte garde le badge de la matière filtrée, et son pied « Ouvrir le cours → ».
+  test "a student's catalogue has no subtitle but an info tip, and its cards keep the filtered subject" do
     sign_in_as create_student_for(@course)
 
     get courses_path(material: @svt.slug)
@@ -237,8 +241,10 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "#course_#{@course.slug}" do
       assert_select "h2", text: "Génétique et évolution"
-      assert_select "*", text: including("SVT"), count: 0
-      assert_select "div.mb-4", 0
+      assert_select "div.mb-4 > span", 1
+      assert_select "div.mb-4 > span", text: "SVT"
+      assert_select "*", text: including("Tle"), count: 0
+      assert_select "div.border-t", text: including(tl("course_card.open"))
     end
 
     get courses_path(material: @philo.slug, q: "zzz"), headers: { "Turbo-Frame" => "courses" }

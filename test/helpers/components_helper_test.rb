@@ -146,7 +146,8 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_card with an href is a lifting link" do
     show ui_card(title: "Cours", href: "/courses", padding: :sm) { "Corps" }
 
-    assert_select "a[href='/courses'].hover\\:shadow-lift.p-4 h2", text: "Cours"
+    # Lot E5 (politique-cache) : survol et focus par la classe partagée ui-card-link (test/design/shared_classes_test.rb).
+    assert_select "a[href='/courses'].ui-card-link.p-4 h2", text: "Cours"
   end
 
   test "ui_card refuses an unknown padding" do
@@ -504,7 +505,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_badge renders a tone, a dot and an icon" do
     show ui_badge("Validé", tone: :success, size: :sm, icon: "check-circle", dot: true)
 
-    assert_select "span.bg-success-soft.text-2xs", text: "Validé"
+    assert_select "span.ui-badge.ui-badge-sm.bg-success-soft", text: "Validé"
     assert_select "span span.bg-success[aria-hidden=true]"
     assert_select "span svg"
   end
