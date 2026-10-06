@@ -389,7 +389,8 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_modal placed as a sheet carries the sheet class and a decorative handle" do
     show ui_modal(title: "Contacte-nous", id: "help-sheet", size: :sm, placement: :sheet) { "Corps" }
 
-    assert_select "dialog#help-sheet.dialog-sheet.sm\\:max-w-sm.motion-reduce\\:animate-none"
+    # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (revue de la PR #191), la feuille n'a plus à l'arrêter.
+    assert_select "dialog#help-sheet.ui-dialog.dialog-sheet.sm\\:max-w-sm"
     assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
   end
 
@@ -478,7 +479,7 @@ class ComponentsHelperTest < ActionView::TestCase
     show ui_dropdown_item("Désactiver", dialog: "deactivate-school-1")
 
     assert_select "button.ui-menu-item-default[role=menuitem]", text: "Désactiver"
-    assert_select "button.text-error", 0
+    assert_select "button.ui-menu-item-danger", 0
     assert_raises(ArgumentError) { ui_dropdown_item("X", dialog: "x", tone: :loud) }
   end
 

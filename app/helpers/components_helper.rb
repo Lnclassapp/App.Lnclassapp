@@ -88,7 +88,9 @@ module ComponentsHelper
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
   # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet motion-reduce:animate-none" }.freeze
+  # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
+  # l'arrêtait pas).
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 

@@ -34,7 +34,7 @@ class SharedClassesTest < ActiveSupport::TestCase
     "ui-menu-item-default" => "text-ink hover:bg-mist focus:bg-mist",
     "ui-menu-item-danger" => "text-error hover:bg-error-soft focus:bg-error-soft",
     "ui-dialog" => "m-auto w-full max-w-none rounded-sheet bg-white p-0 text-ink shadow-pop backdrop:bg-ink/50 " \
-                   "open:animate-slide-up max-sm:mb-0 max-sm:rounded-b-none",
+                   "motion-safe:open:animate-slide-up max-sm:mb-0 max-sm:rounded-b-none",
     "ui-avatar" => "inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold"
   }.freeze
 
