@@ -300,7 +300,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
         assert_select "div > p:first-child", text: "6ème 1"
         assert_select "div > p.text-xs", text: "Pour jeu. 8 oct."
         assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']:has(input[name=compact][value='1']) " \
-                      "button.size-tap[aria-label=?]", tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
+                      "button.ui-icon-button[aria-label=?]", tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
       end
     end
 

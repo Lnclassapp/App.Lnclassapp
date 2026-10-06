@@ -168,7 +168,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
         assert_select "div > p.text-xs", text: "Pour jeu. 8 oct."
         assert_select "*", text: /Assigné/
         assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=compact][value='1']"
-        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button.size-tap[aria-label=?]",
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button.ui-icon-button[aria-label=?]",
                       "Retirer « Méiose et ADN » de Tle D 1", text: ""
       end
       # Tle D 2 : pas encore de jours, « Assigner » ouvre la modale des jours.
