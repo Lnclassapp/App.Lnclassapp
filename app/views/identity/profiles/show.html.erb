@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/show — « Mon profil », dans le shell du rôle ; épuré pour l'élève seul (UDR-0041, 2026-10-02) %>
-<%# Rôle : retour « Accueil », « Mes informations », badge Ambassadeur (enseignant), carte du PIN ; changements dans le frame modal %>
-<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050, 0054, 0057, 0065 (carte « Apparence », téléphone et tablette) %>
+<%# Rôle : retour « Accueil », « Mes informations », badge Ambassadeur (enseignant), carte du PIN ; élève tutoyé, un seul style de bouton %>
+<%# ADR  : 0055, 0063 · UDR : 0006, 0041 (amendement du 2026-10-06), 0050, 0054, 0057, 0065 (carte « Apparence ») %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".title"), subtitle: (t(".subtitle") unless current_actor.student?),
                    back: { label: t(".back"), href: home_path_for(current_actor.role) } %>
@@ -21,14 +21,16 @@
     <% if current_actor.student? %>
       <div class="flex flex-wrap items-center gap-x-1">
         <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
-        <%= ui_info_tip t(".security_body"), label: t(".security_title") %>
+        <%= ui_info_tip tone_t(".security_body"), label: t(".security_title") %>
       </div>
     <% else %>
     <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
     <p class="mt-2 text-sm text-mute"><%= t(".security_body") %></p>
     <% end %>
     <div class="mt-4">
-      <%= ui_button t(".change_pin"), href: edit_profile_pin_path, icon: "key", data: { turbo_frame: "modal" } %>
+      <%# UDR-0041, amendement du 2026-10-06 : chez l'élève, toutes les actions du profil ont le même style (secondary, md) %>
+      <%= ui_button t(".change_pin"), href: edit_profile_pin_path, icon: "key", data: { turbo_frame: "modal" },
+                                      variant: (current_actor.student? ? :secondary : :primary) %>
     </div>
   <% end %>
 

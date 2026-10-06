@@ -60,7 +60,7 @@ module UseCases
       end
 
       test "no file, a PDF, a too wide image: invalid with the errors of the form; nothing stored nor audited" do
-        { nil => "Choisissez une photo.", "document.pdf" => "Choisissez une photo JPEG, PNG ou WebP.",
+        { nil => "Aucune photo n'est choisie.", "document.pdf" => "La photo est en JPEG, PNG ou WebP.",
           "too_wide.png" => "La photo mesure 1024 pixels de côté au plus." }.each do |name, message|
           result = change(name)
 

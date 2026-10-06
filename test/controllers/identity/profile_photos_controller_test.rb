@@ -39,13 +39,13 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav", 0
     assert_select "turbo-frame#modal dialog#profile-photo-modal[aria-labelledby]", text: /Ma photo/
     assert_select "[data-identity--photo-picker-target=current] [role=img][aria-label='Aya Koné'].size-28", text: "AK"
-    assert_select "img[data-identity--photo-picker-target=preview][hidden][alt='Aperçu de votre nouvelle photo']"
+    assert_select "img[data-identity--photo-picker-target=preview][hidden][alt='Aperçu de ta nouvelle photo']"
     assert_select "form#profile-photo-form[action='#{profile_photo_path}'][enctype='multipart/form-data'][data-controller='identity--photo-picker']" do
       assert_select "input[name=_method][value=patch]", visible: :all
       assert_select "input[type=file][name='profile_photo[photo]'][accept='image/jpeg,image/png,image/webp,image/*']" \
                     "[required][aria-describedby=profile_photo_photo_hint]:not([capture])"
       assert_select "label[for=profile_photo_photo]", text: /Photo/
-      assert_select "#profile_photo_photo_hint", text: /recadrée en carré et allégée sur votre téléphone/
+      assert_select "#profile_photo_photo_hint", text: /recadrée en carré et allégée sur ton téléphone/
     end
     assert_select "button[type=submit][form=profile-photo-form]", "Enregistrer"
     assert_select "form[action='#{profile_photo_path}'] input[name=_method][value=delete]", count: 0
@@ -69,7 +69,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     change(upload("photo_exif.jpg"))
 
     assert_response :success
-    assert_select "turbo-stream[action=append][target=toasts]", text: /Votre photo est enregistrée\./
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Ta photo est enregistrée\./
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=refresh]"
     assert_equal "image/jpeg", stored.content_type
@@ -87,7 +87,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     change(upload("hostile/motion_photo_trailer.jpg"))
 
     assert_response :success
-    assert_select "turbo-stream[action=append][target=toasts]", text: /Votre photo est enregistrée\./
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Ta photo est enregistrée\./
     assert_equal file_fixture("photos/photo.jpg").binread, stored.download
   end
 
@@ -99,7 +99,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to profile_path
     assert_response :see_other
     follow_redirect!
-    assert_select "#toasts", text: /Votre photo est enregistrée\./
+    assert_select "#toasts", text: /Ta photo est enregistrée\./
     assert_select "#profile_information img[alt='Aya Koné'][src^='#{account_photo_path(@student.public_id)}?v=']"
   end
 
@@ -107,7 +107,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @student
     heavy = Rack::Test::UploadedFile.new(StringIO.new("\xFF\xD8".b + ("\0" * 1_048_577)), "image/jpeg", original_filename: "lourde.jpg")
 
-    [ [ nil, "Choisissez une photo." ], [ upload("document.pdf", "image/jpeg"), "Choisissez une photo JPEG, PNG ou WebP." ],
+    [ [ nil, "Aucune photo n'est choisie." ], [ upload("document.pdf", "image/jpeg"), "La photo est en JPEG, PNG ou WebP." ],
       [ heavy, "La photo pèse 1 Mo au plus." ], [ upload("too_wide.png", "image/png"), "La photo mesure 1024 pixels de côté au plus." ] ]
       .each do |photo, message|
         change(photo, headers: MODAL)
@@ -129,7 +129,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     delete profile_photo_path, headers: TURBO_STREAM
 
     assert_response :success
-    assert_select "turbo-stream[action=append][target=toasts]", text: /Votre photo est retirée\./
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Ta photo est retirée\./
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=refresh]"
     assert_not stored.attached?
@@ -164,7 +164,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
       change(upload("hostile/#{name}", type), headers: MODAL)
 
       assert_response :unprocessable_entity, name
-      assert_select "#profile_photo_photo_error", text: "Choisissez une photo JPEG, PNG ou WebP."
+      assert_select "#profile_photo_photo_error", text: "La photo est en JPEG, PNG ou WebP."
     end
     assert_not stored.attached?
 
