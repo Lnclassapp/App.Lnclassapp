@@ -15,7 +15,7 @@
 | 2026-10-06 | Accueil sous lg : ni « Bonjour » ni bouton d'aide ; « Besoin d'aide ? » dans le menu du compte ; carte de classe en tête, coins du haut arrondis ; avatar collé à droite | Décision du porteur | UDR-0061, amendée |
 | 2026-10-06 | « Mes matières » sous 640 px : abréviations (Math, PC, HG, Philo), sans « Tous les cours », titre remonté | Décision du porteur | UDR-0069, amendée |
 | 2026-10-06 | Lot 10 : connecté, `/aide` se lit dans le shell du rôle ; visiteur et enseignant en attente gardent la page d'entrée. Liens « Vos données » à 48 px (18 px avant) | L'élève quittait son application pour lire la FAQ | UDR-0061, amendée |
-| 2026-10-06 | Lot 10 : la page « Accès interdit » n'est pas touchée. La mettre dans le shell revient sur la règle « une page d'erreur se rend toujours dans le layout application » | Règle que le porteur rattache à l'ADR-0026 et à l'ADR-0028 : décision à lui soumettre. Ses liens font déjà 48 px | Question au porteur |
+| 2026-10-06 | Lot 10 : la page « Accès interdit » n'est pas touchée. La mettre dans le shell revient sur la règle « une page d'erreur se rend toujours dans le layout application » | Règle que le porteur rattache à l'ADR-0026 et à l'ADR-0028. Ses liens font déjà 48 px. Le porteur place le point au backlog (2026-10-06) | Backlog : `erreurs-dans-le-shell` |
 | 2026-10-06 | Lot 11 : tutoiement de l'élève sur le profil, ses modales et ses messages, par des clés `_student` (`tone_t`) ; vouvoiement inchangé pour les autres rôles ; erreurs des formulaires sans pronom, pour tous | Charte §1, UDR-0063 et UDR-0064 : l'espace élève tutoie. Le profil sert à tous les rôles, et les erreurs viennent de DTO communs | UDR-0041, amendée |
 | 2026-10-06 | Lot 11 : chez l'élève, les quatre actions du profil en `secondary`, taille `md` (48 px) ; « Changer mon PIN » quitte `primary` | Trois styles, dont des boutons de 40 px ; le profil n'a pas d'action principale (R1) | UDR-0041, amendée |
 
@@ -45,6 +45,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Catalogue : Leçon 1 avant Leçon 2 | La table `courses` n'a pas de rang : il faut une migration | À ouvrir |
 | Résultat : nommer la lacune et renvoyer vers sa fiche | `SessionResultQuery` ne porte pas la lacune | À ouvrir |
 | Cours : avancée et lacune par fiche ; Catalogue : avancée sur la carte | Demandent une lecture d'avancée par fiche et par cours | À ouvrir |
+| « Accès interdit » et « Page introuvable » dans le shell d'un compte connecté | Revient sur la règle des pages d'erreur dans le layout application : amendement de l'ADR-0026 | `erreurs-dans-le-shell` (backlog) |
 
 ## Clôture
 
