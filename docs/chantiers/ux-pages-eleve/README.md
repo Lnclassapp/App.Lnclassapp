@@ -24,6 +24,6 @@ Gravité : **B** bloquant · **G** gênant · **F** finition.
 | 7 | Catalogue | 19 cours sur 4 560 px sans filtre sur téléphone (UDR-0077 §3.2) ; Leçon 2 avant Leçon 1 (tri par nom) ; aucune avancée sur la carte ; ⓘ isolée | G, F | Fait (ordre, avancée : dette) |
 | 8 | Accueil (hors débordement) | Notes basses sur ambre ; « Besoin d'aide ? » isolé ; carte imbriquée ; titres « À faire » tronqués ; carrousel d'annonces peu lisible | G, F | Fait |
 | 9 | Toutes | Pastilles (matière, échéance, type de question) en 11 px ; lien de retour tronqué ; barre latérale « Collège Saint Michel de Tiassa… » | G, F | Fait (retour tronqué : UDR-0054) |
-| 10 | Aide, Accès interdit | Perdent la coquille de l'application une fois connecté ; liens de 18 px de haut | F | À faire |
-| 11 | Profil | Boutons d'action de 3 styles différents ; « vous » et « tu » mêlés | F | À faire |
+| 10 | Aide, Accès interdit | Perdent la coquille de l'application une fois connecté ; liens de 18 px de haut | F | Aide : fait (UDR-0061, amendée). Accès interdit : en attente d'une décision du porteur |
+| 11 | Profil | Boutons d'action de 3 styles différents ; « vous » et « tu » mêlés | F | Fait (UDR-0041, amendée) |
 | 12 | Annonces | Pas d'onglet dans la barre du bas (à décider) | F | Décidé : pas d'onglet |
