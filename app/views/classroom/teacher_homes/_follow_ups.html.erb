@@ -6,7 +6,7 @@
   <% if follow_ups.empty? %>
     <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: %>
   <% else %>
-    <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+    <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
       <% follow_ups.each_with_index do |follow_up, index| %>
         <%= tag.li id: "follow_up_#{follow_up.public_id}", class: "relative flex items-center gap-3 px-5 py-4 active:bg-mist sm:px-6",
                    **ui_reveal_item(index) do %>

@@ -1,4 +1,6 @@
 # Photo de profil (chantier photo-de-profil) — PH-01 à PH-07, ADR-0060, UDR-0047
+# UDR-0041, amendement du 2026-10-06 : l'élève est tutoyé (charte §1) ; clés « _student », lues par tone_t. Les erreurs,
+# communes à tous les rôles, se disent sans pronom.
 fr:
   activemodel:
     attributes:
@@ -9,8 +11,8 @@ fr:
         dtos/identity/profile_photo_input:
           attributes:
             photo:
-              blank: "Choisissez une photo."
-              unsupported: "Choisissez une photo JPEG, PNG ou WebP."
+              blank: "Aucune photo n'est choisie."
+              unsupported: "La photo est en JPEG, PNG ou WebP."
               too_large: "La photo pèse %{count} Mo au plus."
               too_wide: "La photo mesure %{count} pixels de côté au plus."
   identity:
@@ -18,19 +20,26 @@ fr:
       information:
         photo: "Photo"
         photo_present: "Votre photo remplace vos initiales."
+        photo_present_student: "Ta photo remplace tes initiales."
         photo_absent: "Aucune photo : vos initiales s'affichent."
+        photo_absent_student: "Aucune photo : tes initiales s'affichent."
         add_photo: "Ajouter une photo"
         change_photo: "Changer ma photo"
     profile_photos:
       edit:
         title: "Ma photo"
         hint: "JPEG, PNG ou WebP. Elle est recadrée en carré et allégée sur votre téléphone avant l'envoi."
+        hint_student: "JPEG, PNG ou WebP. Elle est recadrée en carré et allégée sur ton téléphone avant l'envoi."
         preview: "Aperçu de votre nouvelle photo"
+        preview_student: "Aperçu de ta nouvelle photo"
         unreadable: "Cette image est illisible ou abîmée. Choisissez-en une autre."
+        unreadable_student: "Cette image est illisible ou abîmée. Choisis-en une autre."
         submit: "Enregistrer"
         cancel: "Annuler"
         remove: "Retirer ma photo"
       update:
         changed: "Votre photo est enregistrée."
+        changed_student: "Ta photo est enregistrée."
       destroy:
         removed: "Votre photo est retirée."
+        removed_student: "Ta photo est retirée."

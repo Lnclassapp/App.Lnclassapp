@@ -1,21 +1,22 @@
 <%# 🌐 UI · classroom/student_archives/show — « Mon historique » de l'élève, même sans classe active (lot R) %>
 <%# Rôle : ses classes (établissement, année), puis ses exercices terminés et leur note ; 3 lignes puis « Voir plus », aucun bouton %>
-<%# ADR  : 0036, 0040 · UDR : 0006, 0057, 0058 §3.3 (une seule forme de la note) · pas de lien vers un résultat hors niveau (UDR-0013) %>
+<%# ADR  : 0036, 0040 · UDR : 0006, 0057, 0058 §3.3 (une seule forme de la note), charte §5 (note jamais en ambre) · pas de lien vers un résultat hors niveau (UDR-0013) %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
 
-<div class="grid gap-5">
+<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
+<div class="grid grid-cols-1 gap-5">
   <%= ui_card title: t(".classrooms.title"), icon: "academic-cap", id: "student_archive_classrooms" do %>
     <% if @archive.classrooms.empty? %>
       <%= ui_empty_state title: t(".classrooms.empty"), description: t(".classrooms.empty_description"), icon: "academic-cap" %>
     <% else %>
       <%= tag.div(class: "space-y-3", data: ui_reveal_data) do %>
-        <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+        <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
           <% @archive.classrooms.each_with_index do |classroom, index| %>
-            <%= tag.li class: "flex items-center gap-3 px-5 py-3 sm:px-6", **ui_reveal_item(index) do %>
+            <%= tag.li class: "flex items-center gap-3 px-4 py-3 sm:px-6", **ui_reveal_item(index) do %>
               <div class="min-w-0 flex-1">
                 <p class="truncate font-medium text-ink"><%= classroom.name %></p>
-                <p class="truncate text-sm text-mute"><%= t(".classrooms.detail", level: classroom.level_name, school: classroom.school_name) %></p>
+                <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail", level: classroom.level_name, school: classroom.school_name) %></p>
               </div>
               <span class="shrink-0 text-sm text-mute tabular-nums"><%= classroom.school_year %></span>
             <% end %>
@@ -31,18 +32,18 @@
       <%= ui_empty_state title: t(".results.empty"), description: t(".results.empty_description"), icon: "clipboard-document-check" %>
     <% else %>
       <%= tag.div(class: "space-y-3", data: ui_reveal_data(step: 10)) do %>
-        <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+        <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
           <% @archive.results.each_with_index do |result, index| %>
-            <%= tag.li class: "flex items-center gap-3 px-5 py-3 sm:px-6", **ui_reveal_item(index) do %>
+            <%= tag.li class: "flex items-center gap-3 px-4 py-3 sm:px-6", **ui_reveal_item(index) do %>
               <div class="min-w-0 flex-1 space-y-1">
-                <p class="truncate font-medium text-ink"><%= result.exercise_title %></p>
+                <p class="line-clamp-2 font-medium break-words text-ink"><%= result.exercise_title %></p>
                 <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mute">
                   <%= ui_subject_badge result.material_name, category: result.material_category, size: :sm %>
                   <span><%= l(result.completed_at.to_date, format: :long) %></span>
                 </p>
               </div>
               <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-ln text-xs font-bold",
-                                           result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? "bg-success-soft text-success" : "bg-warning-soft text-warning") %>"><%= grade_label(result.score_percent) %></span>
+                                           result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? "bg-success-soft text-success" : "bg-mist text-ink") %>"><%= grade_label(result.score_percent) %></span>
             <% end %>
           <% end %>
         </ul>

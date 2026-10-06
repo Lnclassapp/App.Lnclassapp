@@ -79,7 +79,7 @@ module Finitions
         assert_current_path(/material=#{@maths.slug}/)
       end
 
-      click_on tc("filters.reset")
+      click_on tc("reset")
       assert_selector "#courses_list > li", count: 3
       assert_equal "", search_field.value
     end
@@ -154,16 +154,16 @@ module Finitions
       assert_link t("assessment.exercise_sessions.show.quit"), href: exercise_path(@exercise.public_id)
     end
 
-    # UDR-0077 §3.2 : à 390 px, plus de recherche ; un catalogue filtré (par une bulle) garde « Tout voir ».
+    # UDR-0077, amendement du 2026-10-06 : à 390 px, la recherche et les filtres restent ; un catalogue filtré offre « Tout voir ».
     test "FU-53 : à 390 px, le catalogue filtré sans recherche, les pages de l'élève et les infobulles ne débordent pas" do
       session = completed_session
       sign_in_as @student
 
       with_mobile_viewport do
         visit courses_path(q: "genetique")
-        assert_no_selector "#courses-filters"
+        assert_selector "#courses-filters"
         assert_selector "#courses_list > li", count: 1
-        assert_link tc("reset_mobile"), href: courses_path
+        assert_link tc("reset"), href: courses_path
         assert_no_horizontal_scroll "le catalogue filtré"
 
         [ course_path(@course.slug), student_home_path, student_classroom_path, exercise_path(@exercise.public_id),

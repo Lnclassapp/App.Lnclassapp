@@ -3,16 +3,22 @@
 <%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <% exercises = @home.assigned_exercises %>
-<%= ui_page_header title: t(".greeting", name: shell_user.first_name) do %>
-  <%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. %>
-  <%= render "shared/help_sheet" %>
+<%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. Amendement du
+    2026-10-06 : sous lg, ni « Bonjour » visible ni bouton (la carte de classe monte en tête) ; l'entrée « Besoin d'aide ? »
+    du menu du compte ouvre la même carte, rendue une seule fois. %>
+<% content_for :account_menu do %>
+  <%= ui_dropdown_item t("shared.help_sheet.trigger"), icon: "question-mark-circle", dialog: "help-sheet" %>
 <% end %>
+<div class="flex flex-col gap-4 lg:mb-6 lg:flex-row lg:items-end lg:justify-between">
+  <h1 class="font-display text-3xl font-extrabold tracking-tight text-balance max-lg:sr-only"><%= t(".greeting", name: shell_user.first_name) %></h1>
+  <%= render "shared/help_sheet", trigger_class: "max-lg:hidden" %>
+</div>
 
-<div id="student_home" class="grid gap-5">
+<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
+<div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
   <% home_sections_for(:student).each do |key, icon| %>
     <% if key == :todo %>
-      <%# min-w-0 : une ligne (titre, échéance, bouton) élargissait sinon la case de la grille, et la page avec elle. %>
-      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises", class: "min-w-0",
+      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises",
                   data: (ui_reveal_data if exercises.any?) do |card| %>
         <% if exercises.empty? %>
           <%= ui_empty_state title: t(".todo_empty"), description: t(".todo_empty_description"), icon: %>
@@ -21,7 +27,7 @@
             <%= ui_badge t(".todo_progress", done: exercises.count { it.completed_count.positive? }, total: exercises.size),
                          tone: :brand, size: :sm %>
           <% end %>
-          <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+          <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
             <% exercises.each_with_index do |exercise, index| %>
               <%= render "assigned_exercise", exercise:, index: %>
             <% end %>

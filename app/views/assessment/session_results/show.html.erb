@@ -27,23 +27,23 @@
       <%# L'élève lit sa note sur 20, forme unique de la note (UDR-0023, 2026-10-02) ; l'enseignant et l'équipe gardent les 4 termes. %>
       <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-6 <%= "sm:grid-cols-4" unless @owner %>">
         <div>
-          <dt class="text-xs font-medium text-mute"><%= t(".grade") %></dt>
+          <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".grade") %></dt>
           <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= grade_label(result.score_percent) %></dd>
         </div>
         <% unless @owner %>
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".score") %></dt>
+            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".score") %></dt>
             <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
           </div>
         <% end %>
         <div>
-          <dt class="text-xs font-medium text-mute"><%= t(".mastery") %><%= ui_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
-          <dd class="mt-2 font-medium"><%= mastery_label(result.score_percent) %></dd>
+          <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".mastery") %><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
+          <dd class="mt-1 font-medium"><%= mastery_label(result.score_percent) %></dd>
         </div>
         <% unless @owner %>
           <div>
-            <dt class="text-xs font-medium text-mute"><%= t(".correct") %></dt>
-            <dd class="mt-2 font-medium tabular-nums">
+            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".correct") %></dt>
+            <dd class="mt-1 font-medium tabular-nums">
               <%= t(".correct_value", count: result.correct_count, total: result.question_count) %>
             </dd>
           </div>

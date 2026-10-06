@@ -54,7 +54,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       screenshot("1-apercu")
       within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
-      assert_toast "Votre photo est enregistrée."
+      assert_toast "Ta photo est enregistrée."
       assert_no_selector "turbo-frame#modal dialog[open]"
       assert_photo_loaded "#profile_information img[alt='Aya Koné']"
       assert_photo_loaded "header button[aria-controls=account-menu] img[alt='Aya Koné']"
@@ -70,7 +70,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
     assert_no_page_reload do
       within("turbo-frame#modal dialog[open]") { click_on "Retirer ma photo" }
 
-      assert_toast "Votre photo est retirée."
+      assert_toast "Ta photo est retirée."
       within("#profile_information") { assert_selector "[role=img][aria-label='Aya Koné']", text: "AK" }
       assert_selector "header button[aria-controls=account-menu] [role=img]", text: "AK"
     end
@@ -87,7 +87,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
     assert_selector "img[data-identity--photo-picker-target=preview][src^='blob:']"
     within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
-    assert_toast "Votre photo est enregistrée."
+    assert_toast "Ta photo est enregistrée."
     assert_equal [ 512, 512, false ], stored_facts.then { [ it.width, it.height, it.metadata ] }
     assert_operator stored.byte_size, :<, Entities::Identity::ProfilePhoto::MAX_BYTES
   ensure
@@ -102,7 +102,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
     within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
     within "turbo-frame#modal dialog[open]" do
-      assert_selector "#profile_photo_photo_error", text: "Choisissez une photo JPEG, PNG ou WebP."
+      assert_selector "#profile_photo_photo_error", text: "La photo est en JPEG, PNG ou WebP."
     end
     assert_not stored.attached?
   end
@@ -115,10 +115,10 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
     attach_file "profile_photo[photo]", file_fixture("photos/hostile/truncated.webp")
     within "turbo-frame#modal dialog[open]" do
-      assert_selector "[role=alert]", text: "Cette image est illisible ou abîmée. Choisissez-en une autre."
+      assert_selector "[role=alert]", text: "Cette image est illisible ou abîmée. Choisis-en une autre."
       assert_no_selector "img[data-identity--photo-picker-target=preview]"
       assert_selector "input[type=file][aria-invalid=true]"
-      assert_equal "Cette image est illisible ou abîmée. Choisissez-en une autre.",
+      assert_equal "Cette image est illisible ou abîmée. Choisis-en une autre.",
                    find("input[type=file]", visible: :all).evaluate_script("this.validationMessage")
       click_on "Enregistrer"
     end
@@ -129,7 +129,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
     within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
     within "turbo-frame#modal dialog[open]" do
-      assert_selector "#profile_photo_photo_error", text: "Choisissez une photo JPEG, PNG ou WebP."
+      assert_selector "#profile_photo_photo_error", text: "La photo est en JPEG, PNG ou WebP."
     end
     assert_not stored.attached?
   end
@@ -144,7 +144,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       screenshot("4-mobile-apercu")
       within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
-      assert_toast "Votre photo est enregistrée."
+      assert_toast "Ta photo est enregistrée."
       assert_photo_loaded "#profile_information img[alt='Aya Koné']"
       assert_photo_loaded "header button[aria-controls=account-menu] img[alt='Aya Koné']"
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")

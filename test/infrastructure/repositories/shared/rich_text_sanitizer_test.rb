@@ -32,7 +32,7 @@ module Repositories
       # Rails sur un HTML analysé une seconde fois.
       test "une seule analyse rend exactement ce que rendaient les deux, sur les leçons de Tle D" do
         two_passes = Rails::HTML5::SafeListSanitizer.new
-        contents = Rails.root.glob("docs/contenus/lecons-traitees/tle-d/*.json").flat_map do |file|
+        contents = Rails.root.glob("docs/contenus/lecons-traitees/tle-d/**/*.json").flat_map do |file|
           JSON.parse(file.read).fetch("courses").flat_map { |course| [ course["content"], *course["essentials"].pluck("content") ] }
         end.compact
         contents += [ %(<p>a &amp; b &lt; c &nbsp;é “q” 😀 $\\frac{1}{2}$</p>\n<pre>\ncode\tici</pre>), "<p>non fermé <b>gras", " " ]

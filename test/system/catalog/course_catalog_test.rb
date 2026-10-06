@@ -205,24 +205,24 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
   # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
   # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
-  # UDR-0077 §3.2 : sur téléphone, ni recherche ni filtres (tous les rôles) ; la matière de l'enseignant est dite par le
-  # sous-titre, plus par chaque carte (R6) ; « Tout voir » quitte le filtre.
-  test "on a phone, the teacher's filtered catalogue hides the filters and keeps « Tout voir »; the course page is unchanged" do
+  # UDR-0077 §3.2, amendée le 2026-10-06 : sur téléphone, la recherche et les filtres restent (tous les rôles) ; « Tout
+  # voir » quitte le filtre. UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte.
+  test "on a phone, the teacher's filtered catalogue shows the filters and « Tout voir »; the course page is unchanged" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
 
     with_mobile_viewport do
       visit courses_path(material: @svt.slug)
-      assert_no_selector "#courses-filters"
+      assert_selector "#courses-filters"
       within("#course_#{@course.slug}") do
-        assert_no_text "SVT"
+        assert_text "SVT"
         assert_text "Tle"
       end
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
-      click_link t("catalog.courses.index.reset_mobile")
+      click_link t("catalog.courses.index.reset")
       assert_current_path courses_path
-      assert_no_link t("catalog.courses.index.reset_mobile")
+      assert_no_link t("catalog.courses.index.reset")
 
       visit course_path(@course.slug)
       assert_selector "#course_essentials li", count: 4

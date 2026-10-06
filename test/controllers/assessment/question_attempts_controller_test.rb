@@ -47,7 +47,11 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
       assert_select "#feedback-card", text: /La méiose donne quatre cellules/
       assert_select "#feedback-card", text: /#{I18n.t("#{scope}.feedback_card.selected")}/
       assert_select "#feedback-card li", text: wrong(@first).content, count: 1
+      # Le choix dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes (2026-10-06).
+      assert_select "#feedback-card li.flex > span.min-w-0", text: wrong(@first).content, count: 1
       assert_select "a[href='#{exercise_session_path(@session.public_id)}']", text: I18n.t("#{scope}.feedback_card.next")
+      # Sous lg, « Question suivante » colle au-dessus de la barre du bas, qui reste visible (décision du porteur, 2026-10-06).
+      assert_select "#feedback-card.overflow-clip #feedback-actions.sticky a.w-full", 1
     end
     assert_select "turbo-stream[action=replace][target=progress_bar] template progress[value='50']"
   end

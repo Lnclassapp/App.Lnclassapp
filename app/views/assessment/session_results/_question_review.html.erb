@@ -4,12 +4,12 @@
 <% tone = { true => :success, false => :error }.fetch(question.correct, :none) %>
 <li id="question_review_<%= question.id %>" <%= tag.attributes(ui_reveal_item(index)) if owner %>>
   <%= ui_card padding: :none, class: "overflow-hidden" do %>
-    <div class="flex items-center justify-between gap-3 border-b border-line bg-mist px-5 py-3 sm:px-6">
+    <div class="flex items-center justify-between gap-3 border-b border-line bg-mist px-4 py-3 sm:px-6">
       <p class="text-sm font-medium text-mute"><%= t(".number", number: question.number) %></p>
       <%= ui_badge t(".verdict.#{tone}"), tone: { success: :success, error: :error, none: :neutral }.fetch(tone),
                    icon: { success: "check-circle", error: "x-circle", none: "minus-circle" }.fetch(tone) %>
     </div>
-    <div class="space-y-4 p-5 sm:p-6">
+    <div class="space-y-4 p-4 sm:p-6">
       <p class="font-semibold whitespace-pre-line text-ink"><%= question.content %></p>
       <% unless reveal || question.answers.empty? %>
         <p class="text-xs font-semibold tracking-wide text-mute uppercase"><%= t(".selected") %></p>
@@ -36,7 +36,10 @@
               <span class="min-w-0 flex-1 text-mute"><%= answer.content %></span>
             </li>
           <% else %>
-            <li class="flex min-h-tap items-center rounded-ln border border-ink bg-mist px-4 py-2 font-medium"><%= answer.content %></li>
+            <%# Le contenu dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes. %>
+            <li class="flex min-h-tap items-center rounded-ln border border-ink bg-mist px-4 py-2 font-medium">
+              <span class="min-w-0 flex-1"><%= answer.content %></span>
+            </li>
           <% end %>
         <% end %>
       </ul>

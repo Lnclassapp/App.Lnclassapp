@@ -169,7 +169,10 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[type=search][name=q][id=q][value='généti'][autocomplete=off][data-action='search#queue']"
       assert_select "select[name=level][data-action='change->search#submit']"
       assert_select "select[name=material][data-action='change->search#submit']"
-      assert_select "button[type=submit][data-search-target=button]", text: tl("index.filters.submit")
+      # UDR-0077, amendement du 2026-10-06 : la cellule de « Filtrer » est la cible, cachée entière avec JavaScript ;
+      # plus d'« Effacer » dans le formulaire.
+      assert_select "div[data-search-target=button] button[type=submit]", text: tl("index.filters.submit")
+      assert_select "a[href='#{courses_path}']", 0
     end
     assert_select "turbo-frame#courses.transition-opacity.aria-busy\\:opacity-50"
     assert_select "#courses_list > li", 1
@@ -293,8 +296,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_equal [ "", "tle" ], css_select("select[name=level] option").map { it["value"] }
       assert_equal [ "", "d" ], css_select("select[name=series] option").map { it["value"] }
     end
-    # R6 : la matière est dite une fois, dans le sous-titre.
-    assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques"), count: 0
+    # UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte, pour tous les rôles.
+    assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques")
     assert_select "#course_#{own.slug} div.mb-4", text: including("Tle D")
   end
 
@@ -320,19 +323,23 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CA-6: on a phone, the search and filters are hidden for every role; a filtered list keeps « Tout voir »" do
+  # UDR-0077, amendement du 2026-10-06 (décision du porteur) : les filtres s'affichent aussi sur téléphone ; « Tout voir »,
+  # dans le frame, quitte les filtres à toutes les largeurs.
+  test "CA-6: the search and filters show on a phone too, for every role; a filtered list offers « Tout voir » at every width" do
     teacher = create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
     [ create_student_for(@course), teacher, create_team_member ].each do |user|
       sign_in_as user
 
       get courses_path
 
-      assert_select "form#courses-filters.hidden.sm\\:grid"
-      assert_select "#courses_reset_mobile", 0
+      assert_select "form#courses-filters.grid"
+      assert_select "form#courses-filters.hidden", 0
+      assert_select "#courses_reset", 0
 
       get courses_path(material: @svt.slug)
 
-      assert_select "#courses_reset_mobile.sm\\:hidden[href='#{courses_path}']", text: tl("index.reset_mobile")
+      assert_select "turbo-frame#courses #courses_reset.min-h-tap[href='#{courses_path}']", text: tl("index.reset")
+      assert_select "#courses_reset.sm\\:hidden", 0
       sign_out
     end
   end
@@ -402,9 +409,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "[role=status][aria-live=polite]"
     end
     assert_select "#essential_#{sheets.first.slug}.relative.active\\:bg-mist" do
-      assert_select "a.after\\:absolute.after\\:inset-0.truncate[href='#{course_essential_path(@course.slug, sheets.first.slug)}']",
+      assert_select "a.after\\:absolute.after\\:inset-0.line-clamp-2[href='#{course_essential_path(@course.slug, sheets.first.slug)}']",
                     text: "Méiose"
-      assert_select "p.truncate", text: "Sous-titre"
+      assert_select "p.line-clamp-2", text: "Sous-titre"
       assert_select "svg[aria-hidden=true]"
     end
   end

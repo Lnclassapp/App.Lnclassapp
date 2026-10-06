@@ -6,7 +6,7 @@
 <% dismissible = local_assigns.fetch(:dismissible, true) %>
 <%# min-w-0 : dans la grille de l'accueil, la section prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
 <%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",
-                class: "min-w-0 rounded-card bg-mist p-2.5",
+                class: "min-w-0 rounded-card bg-mist p-2.5 max-sm:-mx-gutter max-sm:rounded-none max-sm:px-gutter",
                 data: { controller: "communication--carousel", communication__carousel_refocus_value: (true if refocus) } do %>
   <h2 id="student_home_announcements_title" class="sr-only" tabindex="-1"><%= t("shared.home.sections.announcements.title") %></h2>
   <%# Toutes masquées : ni bande ni points, le lien reste. %>

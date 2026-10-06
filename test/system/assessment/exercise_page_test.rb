@@ -30,7 +30,8 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
 
   def scope = "assessment.exercises"
 
-  test "l'élève voit sa progression et les questions sans marque, puis « Commencer » l'amène à la première question" do
+  # UDR-0015, amendement du 2026-10-06 : après une session terminée, le bouton est « Refaire l'exercice ».
+  test "l'élève voit sa progression et les questions sans marque, puis « Refaire » l'amène à la première question" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
     student = create_student_for(@course)
     create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 50)
@@ -53,7 +54,8 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
     assert_no_selector "#exercise_questions [data-correct]"
     assert_no_text I18n.t("#{scope}.questions_preview.correct")
 
-    click_on I18n.t("#{scope}.student_progress.start")
+    assert_no_button I18n.t("#{scope}.student_progress.start")
+    click_on I18n.t("#{scope}.student_progress.redo")
 
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_text "Question 1"

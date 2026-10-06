@@ -9,7 +9,8 @@ class SharedClassesTest < ActiveSupport::TestCase
   # Les listes que ComponentsHelper écrivait sur chaque élément jusqu'au 2026-10-05.
   BEFORE = {
     "ui-badge" => "inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap",
-    "ui-badge-sm" => "px-2 py-0.5 text-2xs",
+    # UDR-0005, amendement du 2026-10-06 (ux-pages-eleve) : le petit badge passe de 11 à 12 px.
+    "ui-badge-sm" => "px-2 py-0.5 text-xs",
     "ui-badge-md" => "px-2.5 py-1 text-xs",
     "ui-card-link" => "transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift " \
                       "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"

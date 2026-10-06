@@ -7,7 +7,7 @@
     <%= ui_avatar user.name, src: user.avatar_url %>
     <div class="min-w-0">
       <p class="truncate font-semibold"><%= user.name %></p>
-      <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
+      <% if user.detail %><p class="line-clamp-2 text-xs text-mute"><%= user.detail %></p><% end %>
     </div>
   </div>
   <nav aria-label="<%= t(".label") %>" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">

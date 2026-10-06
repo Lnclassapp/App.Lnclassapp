@@ -1,8 +1,9 @@
 <%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève, en bulles illustrées %>
 <%# Rôle : une bulle par matière de son niveau, vers le catalogue filtré ; pastille ambre si un exercice y est en retard %>
-<%# UDR  : 0062 §3.3, 0069 §3.3 (bulles), 0076 §3.1 · charte §9 : jamais de compteur ; la pastille est dite par sr_suffix %>
+<%# UDR  : 0062 §3.3, 0069 §3.3 (bulles, amendement du 2026-10-06 : sous 640 px, abréviations et sans « Tous les cours »), 0076 §3.1 %>
+<%# charte §9 : jamais de compteur ; la pastille est dite par sr_suffix %>
 <%# locals: (subjects:, late_slugs:, icon:) -%>
-<%= ui_card title: t(".title"), icon:, id: "student_home_subjects" do |card| %>
+<%= ui_card title: t(".title"), icon:, id: "student_home_subjects", class: "max-sm:pt-3" do %>
   <% if subjects.empty? %>
     <%= ui_empty_state title: t(".empty"), icon: %>
   <% else %>
@@ -11,7 +12,8 @@
         <% subjects.each do |subject| %>
           <% late = late_slugs.include?(subject.slug) %>
           <li>
-            <%= ui_subject_bubble label: subject.name, href: courses_path(material: subject.slug),
+            <%= ui_subject_bubble label: subject.name, short_label: t(".short.#{subject.slug}", default: nil),
+                                  href: courses_path(material: subject.slug),
                                   illustration: subject_illustration(subject.slug), id: "subject_#{subject.slug}",
                                   signal: (:warning if late), sr_suffix: (t(".late") if late) %>
           </li>
@@ -19,7 +21,8 @@
       </ul>
     </nav>
   <% end %>
-  <% card.footer do %>
+  <%# Pied de carte à la main : sous 640 px, « Tous les cours » disparaît (l'onglet Cours de la barre du bas y mène). %>
+  <div class="mt-5 flex flex-wrap items-center justify-end gap-3 border-t border-line pt-4 max-sm:hidden">
     <%= ui_button t(".all"), href: courses_path, variant: :ghost, size: :sm, icon_end: "arrow-right" %>
-  <% end %>
+  </div>
 <% end %>

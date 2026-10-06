@@ -55,7 +55,7 @@ class Identity::ProfileContactsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to profile_path
     assert_response :see_other
-    assert_equal "Votre numéro est changé.", flash[:notice]
+    assert_equal "Ton numéro est changé.", flash[:notice]
     assert_equal NEW_CONTACT, @student.reload.contact
     assert_not Orm::Session.exists?(other.id)
     assert_equal 1, Orm::Session.where(user: @student).count
@@ -81,7 +81,7 @@ class Identity::ProfileContactsControllerTest < ActionDispatch::IntegrationTest
     get edit_profile_contact_path, headers: { "Turbo-Frame" => "modal", "X-Turbo-Request-Id" => "1" }
 
     assert_select "meta[name=turbo-visit-control][content=reload]"
-    assert_select "#toasts", text: /Votre numéro est changé\./
+    assert_select "#toasts", text: /Ton numéro est changé\./
     get edit_profile_contact_path, headers: { "Turbo-Frame" => "modal" }
     assert_select "meta[name=turbo-visit-control]", count: 0
   end
@@ -150,7 +150,7 @@ class Identity::ProfileContactsControllerTest < ActionDispatch::IntegrationTest
     change(contact: "08 11 22 33 44", contact_confirmation: "0811223344")
 
     assert_response :unprocessable_entity
-    assert_select "#contact_change_contact_error", text: /Saisissez un numéro ivoirien à 10 chiffres/
+    assert_select "#contact_change_contact_error", text: /Un numéro ivoirien compte 10 chiffres/
     assert_nothing_written
   end
 
@@ -158,7 +158,7 @@ class Identity::ProfileContactsControllerTest < ActionDispatch::IntegrationTest
     change(contact: "01 01 02 03 04", contact_confirmation: "0101020304")
 
     assert_response :unprocessable_entity
-    assert_select "#contact_change_contact_error", text: "C'est déjà votre numéro."
+    assert_select "#contact_change_contact_error", text: "C'est déjà le numéro de ce compte."
     assert_nothing_written
   end
 
