@@ -21,13 +21,16 @@ fr:
         missing: "non calculé"
         actions: "Actions pour %{name}"
         remove: "Retirer de l'établissement"
-        remove_title: "Retirer %{name} de l'établissement ?"
-        remove_body: "%{first_name} ne verra plus l'établissement ni ses classes. Ses devoirs encore actifs seront archivés : les élèves ne les verront plus à faire. Les classes, les élèves et leurs résultats restent. Vous pourrez le réintégrer depuis « Enseignants retirés »."
-        cancel: "Annuler"
-        confirm: "Retirer"
         empty:
           title: "Aucun enseignant pour l'instant"
           description: "Un enseignant apparaît ici dès qu'il a rejoint l'établissement."
+      # Confirmation lue à la demande dans le frame « modal » (UDR-0056, amendement du 2026-10-04) ; textes inchangés.
+      removal:
+        title: "Retirer %{name} de l'établissement ?"
+        body: "%{first_name} ne verra plus l'établissement ni ses classes. Ses devoirs encore actifs seront archivés : les élèves ne les verront plus à faire. Les classes, les élèves et leurs résultats restent. Vous pourrez le réintégrer depuis « Enseignants retirés »."
+        cancel: "Annuler"
+        confirm: "Retirer"
+        back: "← Enseignants"
       destroy:
         detached:
           zero: "%{name} a été retiré(e) de l'établissement. Aucun devoir archivé."

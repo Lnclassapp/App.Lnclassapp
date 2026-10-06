@@ -3,10 +3,15 @@ require "application_system_test_case"
 # UDR-0061 §3.2 à §3.8 (PRD §4, « Carte d'aide ») : « Besoin d'aide ? » ouvre une feuille ancrée en bas sur téléphone et
 # une modale centrée sur ordinateur, avec la FAQ, WhatsApp et l'appel ; le focus va sur la première ligne et revient
 # sur le bouton à la fermeture. Sans JavaScript, le bouton reste un lien vers /aide. Données du support : celles du
-# test (config/support.yml).
+# test (config/support.yml). UDR-0066 §3.5 (amendement de l'UDR-0061 §3.3) : le pied de la carte, « Plus sur Lnclass »,
+# porte « Blog » dès le premier article publié (BL-06) ; le focus va toujours sur la première ligne. Le contenu du pied
+# se prouve sans navigateur (test/controllers/classroom/student_homes_controller_test.rb), la lecture de /blog sans
+# détour aussi (BL-20, test/integration/communication/articles_test.rb). Amendement du 2026-10-06 : sous lg, le bouton
+# quitte l'accueil ; « Besoin d'aide ? » est la première entrée du menu du compte, et le focus revient à ce menu.
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
-  TRIGGER = "[aria-controls=help-sheet]".freeze
+  TRIGGER = "a[aria-controls=help-sheet]".freeze
+  ACCOUNT_MENU = "[aria-haspopup=menu][aria-controls=account-menu]".freeze
 
   setup { sign_in_as create_student(classroom: create_classroom) }
 
@@ -14,8 +19,14 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   def sheet = find("dialog#help-sheet")
 
   # L'entrée glisse de 0,75 rem (open:animate-slide-up) : la boîte se mesure une fois l'animation finie.
-  def open_sheet
-    click_on tr("trigger")
+  # Sur téléphone (from_menu:), « Besoin d'aide ? » s'ouvre depuis le menu du compte.
+  def open_sheet(from_menu: false)
+    if from_menu
+      find(ACCOUNT_MENU).click
+      within("#account-menu") { click_on tr("trigger") }
+    else
+      click_on tr("trigger")
+    end
     assert_selector "dialog#help-sheet[open]", visible: true
     page.document.synchronize do
       settled = page.evaluate_script(<<~JS)
@@ -37,12 +48,13 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   end
 
   def focused_text = page.evaluate_script("document.activeElement.textContent").squish
-  def trigger_focused? = page.evaluate_script("document.activeElement.matches('#{TRIGGER}')")
+  def trigger_focused?(selector = TRIGGER) = page.evaluate_script("document.activeElement.matches('#{selector}')")
 
   test "on a phone, the sheet rises from the bottom, at least a quarter high, with a handle and a close button" do
     with_mobile_viewport do
       visit student_home_path
-      open_sheet
+      assert_no_link tr("trigger")
+      open_sheet(from_menu: true)
 
       box = geometry
       assert_in_delta box["viewportHeight"], box["bottom"], 1, "la feuille n'est pas ancrée en bas"
@@ -61,16 +73,18 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     end
   end
 
-  test "on a phone, the focus lands on « Questions fréquentes », Escape closes and gives the focus back" do
+  test "on a phone, the focus lands on « Questions fréquentes », even with « Blog » in the footer; Escape gives it back" do
+    create_article
     with_mobile_viewport do
       visit student_home_path
-      open_sheet
+      open_sheet(from_menu: true)
 
+      within(sheet) { assert_link "Blog" }
       assert_match(/\A#{Regexp.escape(tr('faq.title'))}/, focused_text)
 
       sheet.send_keys(:escape)
       assert_no_selector "dialog#help-sheet", visible: true
-      assert trigger_focused?, "le focus n'est pas revenu sur « Besoin d'aide ? »"
+      assert trigger_focused?(ACCOUNT_MENU), "le focus n'est pas revenu sur le menu du compte"
     end
   end
 
@@ -115,10 +129,10 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit student_home_path
       assert_single_primary_action scope: "#main"
-      open_sheet
+      open_sheet(from_menu: true)
 
       within(sheet) { assert_no_selector SobrietyAssertions::PRIMARY_ACTION }
-      assert_list_capped "#help-sheet ul"
+      assert_list_capped "#help-sheet ul.divide-y"
       assert_equal 3, sheet.all("ul > li .bg-brand-soft.text-brand-strong").size
     end
   end

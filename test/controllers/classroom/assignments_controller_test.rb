@@ -28,6 +28,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     post classroom_assignments_path(@classroom.public_id), params:, **
   end
 
+  # Le message du toast, mot pour mot (UDR-0062 §3.4) : une inclusion laisserait passer « oct.. ».
+  def toast_message = css_select("turbo-stream[action=append][target=toasts] template p").last.text.squish
+
   def session_days(teacher = @teacher) = Orm::ClassroomSessionDay.where(teacher_id: teacher.id).order(:weekday).pluck(:weekday)
 
   def withdraw(assignment, classroom: @classroom, **)
@@ -241,6 +244,90 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::ClassroomAssignment.exists?
   end
 
+  # RE-25 — UDR-0069 §3.8 : le catalogue ne propose que les classes du niveau et de la série du cours ; un POST forgé vers
+  # une autre classe de l'enseignant est refusé par la règle existante, en place, et rien n'est écrit.
+  test "a forged POST of a Tle D exercise to the teacher's 3ème 1 or Tle C 1: 422 other_level, nothing written" do
+    tle = create_level(name: "Tle")
+    tle_d = create_exercise(essential: create_essential(course: create_course(level: tle, series: create_series(name: "D"))))
+    third = create_classroom(name: "3ème 1", level: create_level(name: "3ème"))
+    tle_c = create_classroom(name: "Tle C 1", level: tle, series: create_series(name: "C"))
+    sign_in_as create_teacher(classrooms: [ third, tle_c ])
+
+    [ third, tle_c ].each do |classroom|
+      assign("Exercise", tle_d.public_id, classroom:, as: :turbo_stream)
+
+      assert_response :unprocessable_entity, classroom.name
+      assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("refusals.other_level"))
+      assert_select "turbo-stream[action=replace]", 0
+    end
+    assert_not Orm::ClassroomAssignment.exists?
+  end
+
+  # UDR-0069 §3.8 : sur une page qui porte les bascules de plusieurs classes, chaque libellé nomme la classe.
+  test "the streams' toggles name the classroom in their aria-labels" do
+    Orm::ClassroomSessionDay.create!(teacher_id: @teacher.id, classroom_id: @classroom.id, weekday: 1)
+    sign_in_as @teacher
+
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+
+    assignment = Orm::ClassroomAssignment.sole
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template " \
+                  "form[action='#{archive_assignment_path(assignment.public_id)}'] button[aria-label=?]",
+                  tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
+
+    withdraw(assignment, as: :turbo_stream)
+
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template " \
+                  "form[action='#{classroom_assignments_path(@classroom.public_id)}'] button[aria-label=?]",
+                  tl("toggle.assign_to_label", name: "Méiose", classroom: "6ème 1")
+    assert_equal "Assigner « Méiose » à 6ème 1", tl("toggle.assign_to_label", name: "Méiose", classroom: "6ème 1")
+    assert_equal "Retirer « Méiose » de 6ème 1", tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
+  end
+
+  # CA-7 (UDR-0077 §3.3) : depuis la fiche ou la page exercice (compact=1), le stream remplace la ligne compacte entière.
+  test "compact: assigned, then withdrawn, the stream replaces the whole compact row, due date included" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id,
+                                                                weekdays: [ 1, 4 ], at: Time.current)
+    sign_in_as @teacher
+
+    post classroom_assignments_path(@classroom.public_id), as: :turbo_stream,
+         params: { assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id }, compact: "1" }
+
+    assignment = Orm::ClassroomAssignment.sole
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template" do
+      assert_select "##{toggle_id('Exercise', @exercise.public_id)}.justify-between" do
+        assert_select "div > p:first-child", text: "6ème 1"
+        assert_select "div > p.text-xs", text: "Pour jeu. 8 oct."
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']:has(input[name=compact][value='1']) " \
+                      "button.ui-icon-button[aria-label=?]", tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
+      end
+    end
+
+    patch archive_assignment_path(assignment.public_id), as: :turbo_stream,
+          params: { classroom_public_id: @classroom.public_id, compact: "1" }
+
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template" do
+      assert_select "div > p:first-child", text: "6ème 1"
+      assert_select "p.text-xs", 0
+      assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']:has(input[name=compact][value='1'])"
+    end
+  end
+
+  test "compact: the days modal carries compact on to its form, and « Plus tard » answers a compact row" do
+    sign_in_as @teacher
+
+    get new_classroom_assignment_path(@classroom.public_id, assignable_key: @exercise.public_id, compact: 1)
+
+    assert_select "form#assignment-days-form input[type=hidden][name=compact][value='1']"
+
+    post classroom_assignments_path(@classroom.public_id), as: :turbo_stream, params: {
+      assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id, weekdays: [ "" ] }, later: "1", compact: "1"
+    }
+
+    assert_select "turbo-stream[action=replace] template ##{toggle_id('Exercise', @exercise.public_id)} div > p:first-child", text: "6ème 1"
+  end
+
   # UDR-0062 §3.4 : la modale « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal », lisible sans JavaScript.
   test "the days modal names the classroom and the exercise, with six weekdays, « Plus tard » and « Assigner »" do
     sign_in_as @teacher
@@ -292,11 +379,21 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assignment = Orm::ClassroomAssignment.sole
     assert_equal Date.new(2026, 10, 8), assignment.due_on
     assert_equal [ 1, 4 ], session_days
-    assert_select "turbo-stream[action=append][target=toasts]",
-                  text: including(tl("create.done_due", name: "Méiose", classroom: "6ème 1", date: "jeudi 8 oct."))
+    assert_equal "Méiose ajouté à 6ème 1, à rendre jeudi 8 oct.", toast_message
     assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template",
                   text: including("Pour jeu. 8 oct.")
     assert_select "turbo-stream[action=refresh]"
+  end
+
+  # Le point abréviatif du mois tient lieu de point final ; un mois écrit en entier garde le sien.
+  test "a due month written in full keeps its full stop: « à rendre jeudi 6 mai. »" do
+    travel_to Time.zone.local(2027, 5, 3, 10)
+    sign_in_as @teacher
+
+    assign_with_days(%w[1 4], as: :turbo_stream)
+
+    assert_response :success
+    assert_equal "Méiose ajouté à 6ème 1, à rendre jeudi 6 mai.", toast_message
   end
 
   test "once the days are known, one click assigns with the due date; no refresh" do

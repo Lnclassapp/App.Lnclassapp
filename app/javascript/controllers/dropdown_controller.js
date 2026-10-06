@@ -7,6 +7,17 @@ export default class extends Controller {
   static targets = ["button", "menu"]
   static values = { fixed: Boolean }
 
+  // Lot E6 (politique-cache) : les écouteurs de la fenêtre et du document ne vivent que menu ouvert. Une page de 50
+  // lignes n'en pose plus 200 au chargement, et chaque menu n'a plus à les déclarer dans son HTML. Un menu resté ouvert
+  // quand son contrôleur se rebranche (morph, déplacement) reprend les siens.
+  connect() {
+    if (!this.menuTarget.hidden) this.listen()
+  }
+
+  disconnect() {
+    this.unlisten()
+  }
+
   toggle() {
     this.menuTarget.hidden ? this.open() : this.close()
   }
@@ -14,6 +25,7 @@ export default class extends Controller {
   open() {
     this.menuTarget.hidden = false
     this.buttonTarget.setAttribute("aria-expanded", "true")
+    this.listen()
     this.place()
     this.items[0]?.focus({ preventScroll: true })
   }
@@ -21,6 +33,29 @@ export default class extends Controller {
   close() {
     this.menuTarget.hidden = true
     this.buttonTarget.setAttribute("aria-expanded", "false")
+    this.unlisten()
+  }
+
+  // Clic hors du menu, page mise en cache par Turbo ; menu `fixed` : défilement (capturé, celui d'un tableau compris)
+  // et redimensionnement, qui le replacent.
+  // Les fonctions liées naissent à la première ouverture : un menu jamais ouvert n'en crée aucune.
+  listen() {
+    this.handlers ??= { outside: this.outside.bind(this), close: this.close.bind(this), place: this.place.bind(this) }
+    window.addEventListener("click", this.handlers.outside)
+    document.addEventListener("turbo:before-cache", this.handlers.close)
+    if (!this.fixedValue) return
+
+    window.addEventListener("scroll", this.handlers.place, true)
+    window.addEventListener("resize", this.handlers.place)
+  }
+
+  unlisten() {
+    if (!this.handlers) return
+
+    window.removeEventListener("click", this.handlers.outside)
+    document.removeEventListener("turbo:before-cache", this.handlers.close)
+    window.removeEventListener("scroll", this.handlers.place, true)
+    window.removeEventListener("resize", this.handlers.place)
   }
 
   // Ferme le menu et rend le focus au bouton : une modale ouverte ensuite le lui rendra à sa fermeture.

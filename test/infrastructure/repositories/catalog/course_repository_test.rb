@@ -91,6 +91,24 @@ module Repositories
         assert_raises(ArgumentError) { @repository.transition(id: record.id, to: "draft", at: @at) }
       end
 
+      # ADR-0075 : une entrée par classe ayant une assignation active d'un exercice d'une fiche du cours.
+      test "assigned_classroom_levels : une entrée par classe assignée, assignations actives seulement, en une requête" do
+        series = create_series
+        record = create_course(level: @level, material: @material, series:)
+        first, second = 2.times.map { create_exercise(essential: create_essential(course: record)) }
+        tle_d1, tle_d2, tle = create_classroom(level: @level, series:), create_classroom(level: @level, series:), create_classroom(level: @level)
+        [ first, second ].each { create_assignment(classroom: tle_d1, assignable: it) }
+        create_assignment(classroom: tle_d2, assignable: first)
+        create_assignment(classroom: tle, assignable: second)
+        create_assignment(classroom: create_classroom(level: create_level), assignable: first, status: "archived")
+        create_assignment(classroom: create_classroom(level: create_level), assignable: create_exercise)
+
+        levels = assert_queries_count(1) { @repository.assigned_classroom_levels(id: record.id) }
+
+        assert_equal({ [ @level.id, series.id ] => 2, [ @level.id, nil ] => 1 }, levels.tally)
+        assert_equal [], @repository.assigned_classroom_levels(id: create_course.id)
+      end
+
       test "donne les clés de doublon et les slugs pris" do
         series = create_series
         record = create_course(level: @level, material: @material, series:, name: "Génétique  et Évolution")

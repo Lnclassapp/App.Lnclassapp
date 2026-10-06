@@ -50,21 +50,21 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_badges_help", 0
     # Une ligne = un lien étiré, le titre, « Type · Assigné par ton enseignant », une seule action à droite.
     assert_select row_of(@exercise) do
-      assert_select "a.truncate.after\\:absolute.after\\:inset-0[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
+      assert_select "a.line-clamp-2.after\\:absolute.after\\:inset-0[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
       assert_select "p.text-mute", text: I18n.t("#{scope}.exercise_progress.exercise_types.fixation")
       assert_select "*", text: /Deux divisions successives|Badge|Meilleur score|Acquis|question/, count: 0
-      assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}'] button.bg-ink",
-                    text: I18n.t("#{scope}.exercise_progress.start")
+      assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}'] button.ui-button-primary",
+                    text: I18n.t("#{scope}.exercise_progress.redo")
     end
     assert_select row_of(doing) do
       assert_select "p.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.fixation")} · " \
                                          "#{I18n.t("#{scope}.exercise_progress.assigned")}"
-      assert_select "a.border-line[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.exercise_progress.resume")
+      assert_select "a.ui-button-secondary[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.exercise_progress.resume")
       assert_select "form", 0
     end
     # R1 : seule la première ligne garde « primary » ; aucun « brand ».
-    assert_select "#essential_exercises .bg-ink", 1
-    assert_select "#essential_exercises .bg-brand", 0
+    assert_select "#essential_exercises .ui-button-primary", 1
+    assert_select "#essential_exercises .ui-button-brand", 0
 
     assert_select "#essential_team_actions", 0
     assert_select "#content_status_essential_#{@essential.slug}", 0
@@ -109,8 +109,8 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
       assert_select "li[hidden]", text: /Caryotype/
       assert_select "button[data-action='reveal#more']", text: I18n.t("components.reveal.more")
     end
-    assert_select "#essential_exercises .bg-ink", 1
-    assert_select "#{row_of(@exercise)} .bg-ink", 1
+    assert_select "#essential_exercises .ui-button-primary", 1
+    assert_select "#{row_of(@exercise)} .ui-button-primary", 1
   end
 
   test "the teacher reads the published exercises, without progress, session button nor team menu" do
@@ -124,7 +124,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_header p", text: I18n.t("#{scope}.show.eyebrow", course: "Génétique et évolution")
     assert_select row_of(@exercise) do
       assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
-      assert_select "a.border-line[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
+      assert_select "a.ui-button-secondary[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
       assert_select "*", text: /Deux divisions successives\./
       assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.exercise_types.fixation")}/
       assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.questions", count: 2)}/
@@ -133,7 +133,92 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_no_match(/Brouillon caché/, response.body)
     assert_select "#essential_team_actions", 0
-    assert_select "#essential_exercises .bg-ink, #essential_exercises .bg-brand", 0
+    assert_select "#essential_exercises .ui-button-primary, #essential_exercises .ui-button-brand", 0
+  end
+
+  # RE-21, RE-23 — UDR-0069 §3.8 : sous chaque exercice publié, une bascule par classe de l'enseignant du niveau et de la
+  # série du cours, triées par nom ; la bascule de la classe (UDR-0062 §3.4), dont les libellés nomment la classe.
+  test "the teacher gets one toggle per classroom of the course's level and series under each published exercise" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    brassage = create_exercise(essential: @essential, title: "Brassage", position: 2)
+    create_exercise(essential: @essential, title: "Brouillon caché", status: "draft", position: 3)
+    school = create_school
+    tle_d1, tle_d2 = [ "Tle D 1", "Tle D 2" ].map { |name| create_classroom(school:, level: @course.level, series: @course.series, name:) }
+    tle_c1 = create_classroom(school:, level: @course.level, series: create_series(name: "C"), name: "Tle C 1")
+    teacher = create_teacher(school:, classrooms: [ tle_d2, tle_c1, tle_d1 ])
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: teacher.id, classroom_id: tle_d1.id,
+                                                                weekdays: [ 1, 4 ], at: Time.current)
+    assignment = create_assignment(classroom: tle_d1, assignable: @exercise, by: teacher, due_on: Date.new(2026, 10, 8))
+    sign_in_as teacher
+
+    get page_path
+
+    assert_response :success
+    assert_select "#assign_targets_none", 0
+    assert_select "#essential_exercises [id^='assignment_']", 4
+    assert_select "[id^='assignment_#{tle_c1.public_id}_']", 0
+    assert_no_match(/Brouillon caché/, response.body)
+    assert_select row_of(@exercise) do
+      assert_select "ul[aria-label=?]", I18n.t("#{scope}.exercise_progress.assign_targets", title: "Méiose et ADN") do |list|
+        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li [id^='assignment_'] > div > p:first-child").map { it.text.strip }
+      end
+      # CA-7 (UDR-0077 §3.3) : une ligne compacte — la classe, l'échéance dessous, « Assigné » et ✕ à droite.
+      assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{@exercise.public_id}.flex.justify-between" do
+        assert_select "div > p:first-child", text: "Tle D 1"
+        assert_select "div > p.text-xs", text: "Pour jeu. 8 oct."
+        assert_select "*", text: /Assigné/
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=compact][value='1']"
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button.ui-icon-button[aria-label=?]",
+                      "Retirer « Méiose et ADN » de Tle D 1", text: ""
+      end
+      # Tle D 2 : pas encore de jours, « Assigner » ouvre la modale des jours.
+      assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id} a[data-turbo-frame=modal][href=?][aria-label=?]",
+                    new_classroom_assignment_path(tle_d2.public_id, assignable_key: @exercise.public_id, compact: 1),
+                    "Assigner « Méiose et ADN » à Tle D 2"
+      assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id} p.text-xs", 0
+      # Sur téléphone, le titre suffit : « Ouvrir » ne se montre qu'à partir de 640 px.
+      assert_select "a.hidden.sm\\:inline-flex[href='#{exercise_path(@exercise.public_id)}']",
+                    text: I18n.t("#{scope}.exercise_progress.open")
+      assert_select "p.text-sm.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.#{@exercise.exercise_type}")} · " \
+                                                  "#{I18n.t("#{scope}.exercise_progress.questions", count: @exercise.questions.count)}"
+    end
+    # Tle D 1 : jours connus, « Assigner » assigne en un clic.
+    assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{brassage.public_id} " \
+                  "form[action='#{classroom_assignments_path(tle_d1.public_id)}']:has(input[name=compact][value='1']) button[aria-label=?]",
+                  "Assigner « Brassage » à Tle D 1"
+  end
+
+  # RE-24 — UDR-0069 §3.8 : aucune classe au niveau du cours, aucune bascule ; une phrase le dit au-dessus des exercices.
+  test "a teacher without any classroom of the course's level reads « Aucune de vos classes n'est en 3ème. »" do
+    course = create_course(level: create_level(name: "3ème"), name: "Nombres et calculs")
+    essential = create_essential(course:)
+    create_exercise(essential:)
+    sign_in_as create_teacher(classrooms: [ create_classroom(level: @course.level, series: @course.series, name: "Tle D 1") ])
+
+    get page_path(essential)
+
+    assert_response :success
+    assert_select "#essential_exercises #assign_targets_none", text: "Aucune de vos classes n'est en 3ème."
+    assert_select "[id^='assignment_']", 0
+    assert_select "#essential_exercises ul[aria-label]", 0
+  end
+
+  # RE-26 — UDR-0069 §3.8 : l'équipe n'a pas de classe ; ni bascule ni phrase pour elle, ni pour l'élève. Son menu ⋮ reste.
+  test "the team and the student see no assignment toggle on a published sheet" do
+    create_teacher(classrooms: [ create_classroom(level: @course.level, series: @course.series) ])
+    menu = "#essential_team_actions button[aria-haspopup=menu]"
+
+    [ [ create_team_member, 1 ], [ @student, 0 ] ].each do |user, menus|
+      sign_in_as user
+      get page_path
+
+      assert_response :success
+      assert_select "[id^='assignment_']", 0
+      assert_select "#assign_targets_none", 0
+      assert_select "#essential_exercises ul[aria-label]", 0
+      assert_select menu, menus
+      sign_out
+    end
   end
 
   test "the team opens a draft sheet of a draft course: status panel, menu in the modal, every exercise with its status" do

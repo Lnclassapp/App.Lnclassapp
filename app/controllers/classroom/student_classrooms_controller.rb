@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentClassroomsController
-# Rôle : « Ma classe » de l'élève (CL-22, CL-10 volet élève) : sa classe, son code en majuscules, ses cours assignés
-# ADR  : 0026, 0028, 0040 · UDR : 0006, 0011 · jamais la liste nominative ; sans classe active, l'écran de sortie
+# Rôle : « Ma classe » de l'élève (CL-22, CL-10 volet élève) : sa classe, son code, les cours assignés, ses exercices à faire et traités
+# ADR  : 0026, 0028, 0040 · UDR : 0006, 0011, 0076 · jamais la liste nominative ; sans classe active, l'écran de sortie
 module Classroom
   class StudentClassroomsController < AuthenticatedController
     allow_roles :student

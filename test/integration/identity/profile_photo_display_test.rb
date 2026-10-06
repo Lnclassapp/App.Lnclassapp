@@ -14,7 +14,7 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
 
     get profile_path
 
-    assert_select "header button[aria-controls=account-menu] img.rounded-full[alt='Aya Koné'][src='#{@src}']"
+    assert_select "header button[aria-controls=account-menu] img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
     assert_select "aside img[alt='Aya Koné'][src='#{@src}']"
     assert_select "#profile_information" do
       # UDR-0041, amendment of 2026-10-02: for the student, the avatar is the value of the « Photo » row, the
@@ -22,7 +22,7 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
       assert_select "img.size-14[alt='Aya Koné'][src='#{@src}']", count: 1
       assert_select "dt", "Photo"
       assert_select "dd span[aria-hidden=true] img.size-14[src='#{@src}']"
-      assert_select "dd span.sr-only", "Votre photo remplace vos initiales."
+      assert_select "dd span.sr-only", "Ta photo remplace tes initiales."
       assert_select "a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Changer ma photo/
     end
   end
@@ -35,7 +35,7 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
     assert_select "header button[aria-controls=account-menu] [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "header img[src*='/photo']", 0
     assert_select "#profile_information dd span[aria-hidden=true] [role=img][aria-label='Awa Traoré']", text: "AT"
-    assert_select "#profile_information dd span.sr-only", "Aucune photo : vos initiales s'affichent."
+    assert_select "#profile_information dd span.sr-only", "Aucune photo : tes initiales s'affichent."
     assert_select "#profile_information a[href='#{edit_profile_photo_path}']", text: /Ajouter une photo/
   end
 

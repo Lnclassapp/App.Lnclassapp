@@ -148,3 +148,19 @@ Deux gestes sont fréquents et risqués : corriger un établissement mal import�
 - **Pourquoi c'est sûr** : la liste n'est servie qu'à l'équipe, qui voit déjà le code sur chaque fiche (ADR-0057). Aucune donnée nouvelle n'est exposée.
 - **Pas de bouton « Copier » sur la ligne** : il reste sur la fiche, avec le lien d'inscription.
 - **Vérification** : `test/controllers/teams/schools_controller_test.rb` (colonne, aide, valeur groupée).
+
+## Amendement du 2026-10-05 — confirmations de la liste chargées à la demande
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), lot E3 (reprise du lot 5 de `cache-ecrans-lourds`). Décision du porteur, 2026-10-05 : « go pour la fenêtre unique des établissements, et la même chose pour les DRENA ». Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+**Raison.** Chaque ligne de la liste portait ses deux `<dialog>` de confirmation (« Désactiver », « Supprimer »), chacune avec son formulaire et son jeton CSRF. Sur 50 lignes, cela faisait 290 Ko d'un HTML de 517 Ko, pour un budget de 150 Ko ([ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md)), alors que l'équipe en ouvre une au plus.
+
+**Ce qui change dans la liste** (la fiche et son en-tête ne changent pas) :
+- les items « Désactiver » et « Supprimer » du menu ⋮ deviennent des liens vers `GET /teams/schools/:public_id/deactivation` et `…/deletion`, avec `data-turbo-frame="modal"`, comme « Modifier » ;
+- la confirmation arrive dans le frame « modal », ouverte, avec le même titre, le même texte, les mêmes boutons, le même envoi et les mêmes identifiants (`deactivate-school-<public_id>`, `delete-school-<public_id>`) ; sans frame (sans JavaScript), la même adresse est une page complète, avec un retour « ← Établissements » ;
+- un refus de suppression (`:conflict`) ajoute `turbo_stream.update "modal"`, qui referme la confirmation : avant, c'est le re-rendu de la ligne qui la refermait ;
+- un établissement inconnu, ou déjà inactif pour la désactivation, répond 404.
+
+**Coût consenti.** Ouvrir une confirmation demande un aller-retour au serveur, sur un geste rare. Le chargement de la liste, lui, est fait à chaque visite.
+
+**Mesure** (`measure_screens.rb`, jeu de l'ADR-0067, médiane de 3) : HTML 517,1 → **222,1 Ko**, p50 101,7 → **47,5 ms**, p95 139,5 → **90,4 ms**. Le temps tient désormais son budget ; le poids le dépasse encore, à cause du menu ⋮ de chaque ligne (2,5 Ko sur 3,5).

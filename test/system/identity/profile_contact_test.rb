@@ -39,7 +39,7 @@ class Identity::ProfileContactTest < ApplicationSystemTestCase
     end
 
     assert_current_path profile_path, wait: SIGN_IN_WAIT
-    assert_toast "Votre numéro est changé."
+    assert_toast "Ton numéro est changé."
 
     using_session(:other_phone) do
       visit student_home_path

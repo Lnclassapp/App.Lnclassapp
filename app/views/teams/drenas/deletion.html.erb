@@ -1,0 +1,21 @@
+<%# 🌐 UI · teams/drenas/deletion — confirmation « Supprimer la DRENA <nom> ? », lue à la demande (SC-01) %>
+<%# Rôle : servie dans le frame « modal » depuis le menu ⋮ de la liste ; sans frame (sans JavaScript), page complète utilisable %>
+<%# ADR  : 0036, 0067, 0076 · UDR : 0006, 0035, 0042, 0054 · lot E3 du chantier politique-cache : plus de copie dans chaque ligne %>
+<% id = "delete-drena-#{@drena.public_id}" %>
+<% page_title t(".title", name: @drena.name) %>
+<% content_for :nav_key, "referential" %>
+<%# Page complète seulement : le retour à la liste, puisque « Annuler » ne fait rien sans JavaScript (UDR-0054). %>
+<% unless turbo_frame_request? %>
+  <%= link_to t(".back"), drenas_path, id: "back-to-drenas", class: "mb-4 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+<% end %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal id:, size: :sm, open: true, title: t(".title", name: @drena.name) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= form_with url: drena_path(@drena.public_id), method: :delete, id: "#{id}-form" do %>
+        <%= ui_button t(".confirm"), type: :submit, variant: :danger, icon: "trash", full: true %>
+      <% end %>
+    <% end %>
+    <p class="text-sm text-mute"><%= t(".body") %></p>
+  <% end %>
+<% end %>

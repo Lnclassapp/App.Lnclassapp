@@ -153,3 +153,10 @@ Cet amendement applique à « Ma classe » la règle de sobriété de l'UDR-0057
 
 - **La carte « Cours assignés » est retirée** : un cours ne s'assigne plus, elle resterait vide. « Ma classe » garde la carte de la classe ; les cours restent au catalogue, filtré sur le niveau de l'élève.
 - Toujours aucune liste nominative, aucun retard d'un autre élève (§2, Q12 du chantier).
+
+## Amendement du 2026-10-05 — « Ma classe » de travail · Statut : Proposé
+
+*Chantier [`interface-eleve-organisation`](../../chantiers/interface-eleve-organisation/memo.md), [UDR-0076](0076-organisation-des-ecrans-eleve.md) §3.2. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart, une fois acceptée.*
+
+- Sous la carte de la classe, trois sections : « Cours assignés » en carrousel (les cours qui contiennent un exercice assigné à la classe, ADR-0072), « Exercices assignés » non encore faits, « Exercices traités » au meilleur score de l'élève. Les deux listes montrent 3 lignes, puis « Voir plus ».
+- Toujours aucune liste nominative, aucun score ni retard d'un autre élève, aucune action principale.

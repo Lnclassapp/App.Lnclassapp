@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves
-# ADR  : 0026, 0028, 0048, 0060, 0072 · UDR : 0027, 0047, 0054, 0062 (§3.4)
+# ADR  : 0026, 0028, 0048, 0060, 0072, 0079 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -12,7 +12,9 @@ module Queries
       # photo_version : nil sans photo (ADR-0060).
       StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version)
       # counts : AssignmentFollowUpQuery::Counts, nil sans show_follow_up (FollowAssignmentPolicy, ADR-0072 §4.5).
-      AssignmentRow = Data.define(:public_id, :exercise_title, :material_name, :material_category, :due_on, :counts)
+      # comprehension : Assessment::ComprehensionSummaryQuery::Summary (ADR-0079), nil sans show_follow_up, comme counts.
+      AssignmentRow = Data.define(:public_id, :exercise_title, :material_name, :material_category, :due_on, :counts,
+                                  :comprehension)
       CourseRow = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category,
                               :essentials_count)
 
@@ -68,10 +70,17 @@ module Queries
                                        .order(Arel.sql("classroom_assignments.due_on ASC NULLS LAST"),
                                               assigned_at: :desc, id: :desc)
                                        .pluck(*ASSIGNMENT_COLUMNS)
-        counts = show_follow_up ? AssignmentFollowUpQuery.counts(classroom_id:, assignment_ids: rows.map(&:first)) : {}
+        counts, comprehension = show_follow_up ? follow_up(classroom_id, rows.map(&:first)) : [ {}, {} ]
         rows.map do |id, public_id, exercise_title, material_name, material_category, due_on|
-          AssignmentRow.new(public_id:, exercise_title:, material_name:, material_category:, due_on:, counts: counts[id])
+          AssignmentRow.new(public_id:, exercise_title:, material_name:, material_category:, due_on:, counts: counts[id],
+                            comprehension: comprehension[id])
         end
+      end
+
+      # Comptes et résumé de compréhension de toutes les assignations, en un nombre de requêtes constant (ADR-0079).
+      def follow_up(classroom_id, assignment_ids)
+        [ AssignmentFollowUpQuery.counts(classroom_id:, assignment_ids:),
+          Queries::Assessment::ComprehensionSummaryQuery.for(classroom_id:, assignment_ids:) ]
       end
 
       # Bloc « Cours » (UDR-0062 §3.4, memo Q18) : le chemin de l'enseignant vers les exercices. La règle d'AudienceFilter

@@ -1,4 +1,6 @@
 # Page « Mon profil » et modale du nom (plan profil-utilisateur, Lot A) — PR-01 à PR-03, ADR-0055, UDR-0041 ; direction : UDR-0052
+# UDR-0041, amendement du 2026-10-06 : l'élève est tutoyé (charte §1) ; clés « _student », lues par tone_t. Les erreurs,
+# communes à tous les rôles, se disent sans pronom.
 fr:
   activemodel:
     errors:
@@ -6,11 +8,11 @@ fr:
         dtos/identity/person_name_input:
           attributes:
             last_name:
-              blank: "Saisissez votre nom."
+              blank: "Le nom est obligatoire."
               too_long: "Le nom compte %{count} caractères au plus."
               invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
             first_name:
-              blank: "Saisissez votre ou vos prénoms."
+              blank: "Le ou les prénoms sont obligatoires."
               too_long: "Les prénoms comptent %{count} caractères au plus."
               invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
   identity:
@@ -22,6 +24,7 @@ fr:
         subtitle: "Ce que Lnclass sait de vous, et ce que vous pouvez changer."
         security_title: "Mon PIN"
         security_body: "Votre PIN protège votre compte. Changez-le si vous pensez qu'une autre personne le connaît."
+        security_body_student: "Ton PIN protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
         change_pin: "Changer mon PIN"
       information:
         title: "Mes informations"
@@ -49,3 +52,4 @@ fr:
         cancel: "Annuler"
       update:
         updated: "Votre nom est enregistré."
+        updated_student: "Ton nom est enregistré."

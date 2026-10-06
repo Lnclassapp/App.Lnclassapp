@@ -42,10 +42,21 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_selector "#classroom_roster li", count: 2
     assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
     assert_selector "#student_#{@awa.public_id}", text: "100 %"
-    assert_selector "#student_#{@koffi.public_id} button", text: I18n.t("#{scope}.roster.issue_code")
+    # UDR-0077 §3.4 : le code de récupération est dans le menu ⋮ de la ligne ; il ouvre toujours la modale du code.
+    assert_no_selector "#student_#{@koffi.public_id} button", text: I18n.t("#{scope}.roster.issue_code")
+    assert_no_page_reload do
+      click_menu_action("#student_#{@koffi.public_id}", I18n.t("#{scope}.roster.issue_code"))
+      assert_selector "turbo-frame#modal dialog#pin-recovery-code-modal[open]"
+      assert_toast I18n.t("identity.pin_recovery_codes.create.issued")
+      click_on I18n.t("identity.pin_recovery_codes.code.close")
+    end
 
     assert_no_page_reload do
-      click_on I18n.t("#{scope}.header.copy")
+      # Fermée, la modale rend le focus au ⋮ de la ligne : la page reste descendue sur la liste, et « Copier » passe sous
+      # l'en-tête fixe, où le clic tomberait sur un autre bouton. On le ramène au milieu de l'écran, comme le ferait l'enseignant.
+      copy = find_button(I18n.t("#{scope}.header.copy"))
+      scroll_to(copy, align: :center)
+      copy.click
 
       assert_toast I18n.t("shared.clipboard.copied_code")
     end
@@ -116,8 +127,10 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert_selector "li", count: 1
       assert_text "Koffi Yao"
       assert_text "Fait le ven. 9 oct."
+      assert_no_text "Awa Bamba"
     end
-    assert_no_text "Awa Bamba"
+    # ADR-0079 §4.8 : Awa n'a pas encore fait l'exercice ; elle est nommée pour être relancée, jamais parmi les retards.
+    within("#pending_students") { assert_text "Awa Bamba" }
 
     click_on "Tle D 1"
     within("#classroom_courses") { click_on "La cellule" }
@@ -128,11 +141,25 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
   test "sur un téléphone, les blocs de la classe et le suivi tiennent dans la largeur" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise(title: "Un titre d'exercice assez long pour un écran étroit"),
                                    by: @teacher)
+    svt = Orm::TeacherProfile.find_by!(user: @teacher).material
+    3.times { create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "Cours de la bande #{it}") }
     with_mobile_viewport do
       visit classroom_path(@classroom.public_id)
 
       assert_selector "#classroom_session_days", text: I18n.t("#{scope}.session_days.unset")
       assert_selector "#assignment_#{assignment.public_id}", text: "0 fait · 2 pas encore faits"
+      # UDR-0077 §3.4 : les cours en bande, avant les exercices ; ⋮ de l'élève sur la ligne de son nom.
+      assert_operator find("#classroom_courses").rect.y, :<, find("#assigned_exercises").rect.y
+      assert_selector "#classroom_courses ul[data-communication--carousel-target=track] > li", count: 3
+      within("#student_#{@koffi.public_id}") do
+        avatar = find(".ui-avatar", match: :first).rect
+        menu = find("button[aria-haspopup=menu]").rect
+        assert_in_delta avatar.y + (avatar.height / 2), menu.y + (menu.height / 2), 8, "⋮ n'est pas sur la ligne de l'élève"
+        # « Aucune session terminée » ne doit pas écraser le nom.
+        assert_selector "p", exact_text: "Koffi Yao"
+        name = find("p", exact_text: "Koffi Yao")
+        assert_equal name.evaluate_script("this.scrollWidth"), name.evaluate_script("this.clientWidth"), "le nom est tronqué"
+      end
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page de la classe déborde en largeur"
 

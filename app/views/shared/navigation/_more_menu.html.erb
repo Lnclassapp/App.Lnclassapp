@@ -1,0 +1,27 @@
+<%# 🌐 UI · shared/navigation/_more_menu — case « Plus » de la barre basse : la liste secondaire du rôle, ouverte vers le haut %>
+<%# Rôle : motif « menu button » du contrôleur dropdown ; « Plus » est courant quand la page ouverte est l'une de ses entrées %>
+<%# UDR  : 0005, 0068 (§3.3) · Stimulus : dropdown %>
+<%# locals: (role:, entries:) -%>
+<% active = more_active?(role) %>
+<% styles = NavigationHelper::NAV_STYLES[:bottom] %>
+<% labels = entries.map { t("shared.navigation.#{it.key}") } %>
+<%# Clic extérieur et cache Turbo : écoutés par le contrôleur dropdown, menu ouvert seulement (lot E6 de politique-cache). %>
+<div class="relative" data-controller="dropdown" data-action="keydown->dropdown#keydown">
+  <%= content_tag :button, type: "button", id: "bottom_bar_more", "aria-haspopup": "menu", "aria-expanded": "false",
+                  "aria-controls": "bottom_bar_more_menu", "aria-current": ("page" if active),
+                  "aria-label": t("shared.navigation.bottom_bar.more_label", entries: labels.join(", ")),
+                  data: { dropdown_target: "button", action: "dropdown#toggle" },
+                  class: class_names(styles[:base], active ? styles[:active] : styles[:idle], "w-full cursor-pointer") do %>
+    <span class="<%= NavigationHelper::NAV_ICON_STYLES[:bottom][active ? :active : :idle] %>">
+      <%= ui_icon "ellipsis-horizontal", variant: (active ? :solid : :outline) %>
+    </span>
+    <span><%= t("shared.navigation.bottom_bar.more") %></span>
+  <% end %>
+  <div id="bottom_bar_more_menu" role="menu" aria-label="<%= t("shared.navigation.sidebar.secondary_label.#{role}") %>"
+       data-dropdown-target="menu" hidden
+       class="absolute right-0 bottom-full z-50 mb-2 w-56 rounded-ln border border-line bg-white p-1.5 shadow-pop animate-fade-in">
+    <% entries.each do |destination| %>
+      <%= ui_dropdown_item t("shared.navigation.#{destination.key}"), href: nav_path(destination), icon: destination.icon %>
+    <% end %>
+  </div>
+</div>

@@ -34,10 +34,13 @@ module Factories
       end
     end
 
-    # ADR-0065: a direction account attached to its school, signing in by PIN alone.
-    def create_school_admin(school: create_school, invited_by: nil, **attributes)
+    # ADR-0065: a direction account attached to its school, signing in by PIN alone. ADR-0077: joined by invitation or
+    # by the school's code, on `joined_at`; archived by `archived_by` on `archived_at`.
+    def create_school_admin(school: create_school, invited_by: nil, joined_via: "invitation", joined_at: Time.current,
+                            archived_at: nil, archived_by: nil, **attributes)
       create_user(role: "school_admin", **attributes).tap do |admin|
-        Orm::SchoolStaff.create!(user: admin, school:, invited_by:)
+        archived_by ||= create_team_member(second_factor: false) if archived_at
+        Orm::SchoolStaff.create!(user: admin, school:, invited_by:, joined_via:, created_at: joined_at, archived_at:, archived_by:)
       end
     end
 

@@ -1,0 +1,28 @@
+<%# 🌐 UI · classroom/teacher_homes/_course_levels — bulles de la section « Cours » de l'accueil enseignant %>
+<%# Rôle : une bulle par couple niveau-série enseigné, vers le catalogue filtré (niveau, série, matière), puis « Inviter » %>
+<%# ADR  : 0026, 0063 · UDR : 0069 (§3.3, §3.5) %>
+<%# locals: (home:, invite:) -%>
+<% if home.course_levels.empty? %>
+  <p id="teacher_home_courses_empty" class="mb-4 text-sm text-mute"><%= t(".empty") %></p>
+<% end %>
+<% if home.course_levels.any? || invite %>
+  <nav id="teacher_home_course_levels" aria-label="<%= t(".label") %>">
+    <ul class="grid grid-cols-4 gap-y-4 sm:grid-cols-6">
+      <% home.course_levels.each do |level| %>
+        <li>
+          <%= ui_subject_bubble label: level.label,
+                                href: courses_path({ level: level.level_slug, series: level.series_slug, material: home.material_slug }.compact),
+                                illustration: subject_illustration(home.material_slug),
+                                sr_suffix: t(".sr_level", material: home.material_name),
+                                id: "course_level_#{[ level.level_slug, level.series_slug ].compact.join('_')}" %>
+        </li>
+      <% end %>
+      <% if invite %>
+        <li>
+          <%= ui_subject_bubble label: t(".invite"), href: teacher_invite_path, illustration: subject_illustration(:invite),
+                                id: "course_level_invite" %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>

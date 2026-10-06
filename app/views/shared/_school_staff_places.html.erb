@@ -1,0 +1,6 @@
+<%# 🌐 UI · shared/_school_staff_places — « N / 3 comptes créés avec le code » du bloc « Direction » %>
+<%# Rôle : une seule balise, rendue par le bloc et remplacée telle quelle par les Turbo Streams du retrait et de la restauration %>
+<%# ADR  : 0077 · UDR : 0070 (§3.4) · local : by_code_count %>
+<p id="school_staff_places" class="-mt-2 mb-2 text-sm text-mute">
+  <%= t("shared.school_staff.subtitle", used: by_code_count, cap: Entities::School::Staff::CODE_CAP) %>
+</p>

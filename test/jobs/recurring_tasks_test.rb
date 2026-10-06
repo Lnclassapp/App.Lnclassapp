@@ -10,4 +10,18 @@ class RecurringTasksTest < ActiveSupport::TestCase
       assert task.valid?, "#{key} : #{task.errors.full_messages.to_sentence}"
     end
   end
+
+  # ADR-0077 §4.5 : les comptes direction archivés depuis 30 jours sont supprimés chaque nuit.
+  test "the purge of archived school staff runs every day at 4am on the default queue" do
+    task = Rails.application.config_for(:recurring, env: "production").fetch(:purge_archived_staff)
+
+    assert_equal({ class: "School::PurgeArchivedStaffJob", queue: "default", schedule: "every day at 4am" }, task)
+  end
+
+  # RI-05, ADR-0080 : l'IP du journal d'audit est effacée après 12 mois, chaque nuit.
+  test "the erasure of old audit IPs runs every day at 4:30am on the default queue" do
+    task = Rails.application.config_for(:recurring, env: "production").fetch(:erase_audit_ips)
+
+    assert_equal({ class: "Identity::EraseAuditIpsJob", queue: "default", schedule: "every day at 4:30am" }, task)
+  end
 end

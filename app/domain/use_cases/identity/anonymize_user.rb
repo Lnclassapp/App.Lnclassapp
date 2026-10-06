@@ -13,7 +13,7 @@ module UseCases
 
       Anonymized = Data.define(:user, :requested_on)
 
-      def initialize(users:, sessions:, second_factors:, pin_recoveries:, login_attempts:, memberships:, photos:, audit_log:,
+      def initialize(users:, sessions:, second_factors:, pin_recoveries:, login_attempts:, invitations:, memberships:, photos:, audit_log:,
                      learning_data:, transaction:, policy:, clock:, deletion_requests:)
         @users = users
         @sessions = sessions
@@ -22,6 +22,7 @@ module UseCases
         @login_attempts = login_attempts
         @memberships = memberships
         @photos = photos
+        @invitations = invitations
         @audit_log = audit_log
         @learning_data = learning_data
         @transaction = transaction
@@ -62,6 +63,8 @@ module UseCases
       def anonymize(actor, target, requested_on, now)
         @photos.remove(user_id: target.id)
         @login_attempts.destroy_all_for(user_id: target.id, contact: target.contact)
+        # ADR-0036 §4 : ses invitations, numéro compris (suites-inscription-direction).
+        @invitations.destroy_all_for(user_id: target.id, contact: target.contact)
         @users.anonymize(user_id: target.id, first_name: FIRST_NAME, last_name: LAST_NAME, at: now)
         @sessions.destroy_all_for(user_id: target.id)
         @second_factors.reset(user_id: target.id)

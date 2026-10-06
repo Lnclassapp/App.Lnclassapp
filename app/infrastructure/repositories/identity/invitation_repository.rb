@@ -26,6 +26,12 @@ module Repositories
                        .update_all(revoked_at: at, updated_at: at)
       end
 
+      def destroy_all_for(user_id:, contact:)
+        scope = Orm::Invitation.where(accepted_user_id: user_id)
+        scope = scope.or(Orm::Invitation.where(contact:)) if contact
+        scope.delete_all
+      end
+
       def mark_accepted(id:, user_id:, at:)
         Orm::Invitation.where(id:).update_all(accepted_at: at, accepted_user_id: user_id, updated_at: at)
         true

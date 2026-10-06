@@ -1,10 +1,14 @@
 <%# 🌐 UI · assessment/exercise_sessions/_feedback_card — verdict de la question qui vient d'être tentée %>
-<%# Rôle : « Bonne réponse » ou « Mauvaise réponse », seules les propositions cochées, explication ; jamais les propositions correctes %>
-<%# ADR  : 0028, 0054 · UDR : 0007, 0022, 0057 · Stimulus : math (KaTeX) %>
+<%# Rôle : verdict, seules les propositions cochées, explication ; la question suivante jointe, affichée sans requête %>
+<%# ADR  : 0028, 0054, 0076 · UDR : 0007, 0022, 0057, 0076 §3.3 · Stimulus : math (KaTeX), assessment--next-question %>
 <% tone = feedback.correct ? :success : :error %>
+<%# UDR-0076 §3.3 : la question suivante (SessionPlayQuery, sans aucune colonne `correct`), ou nil à la dernière réponse. %>
+<% next_question = local_assigns[:next_question] %>
 <%= turbo_frame_tag "question" do %>
-  <%= ui_card padding: :none, id: "feedback-card", class: "overflow-hidden" do %>
-    <div role="status" class="flex items-center gap-3 border-b border-line px-5 py-4 sm:px-6 <%= feedback.correct ? "bg-success-soft" : "bg-error-soft" %>">
+  <%# overflow-clip et non overflow-hidden : hidden ferait de la carte le conteneur de défilement et casserait le sticky. %>
+  <%= ui_card padding: :none, id: "feedback-card", class: "overflow-clip",
+              data: ({ controller: "assessment--next-question" } if next_question) do %>
+    <div role="status" class="flex items-center gap-3 border-b border-line px-4 py-4 sm:px-6 <%= feedback.correct ? "bg-success-soft" : "bg-error-soft" %>">
       <%= ui_icon feedback.correct ? "check-circle" : "x-circle", variant: :solid, size: :lg,
                   class: feedback.correct ? "text-success" : "text-error" %>
       <div>
@@ -12,7 +16,7 @@
         <p class="text-sm text-ink"><%= t(".encouragement.#{tone}") %></p>
       </div>
     </div>
-    <div class="space-y-6 p-5 sm:p-6" data-controller="math">
+    <div class="space-y-6 p-4 sm:p-6" data-controller="math">
       <div class="space-y-1">
         <p class="text-sm font-medium text-mute"><%= t(".number", number: feedback.number, total: play.question_count) %></p>
         <p class="text-lg font-semibold whitespace-pre-line text-ink"><%= feedback.content %></p>
@@ -21,7 +25,10 @@
         <p id="feedback-selected" class="text-xs font-semibold tracking-wide text-mute uppercase"><%= t(".selected") %></p>
         <ul class="space-y-2" aria-labelledby="feedback-selected">
           <% feedback.selected_answers.each do |answer| %>
-            <li class="flex min-h-tap items-center rounded-ln border border-ink bg-mist px-4 py-3 font-medium"><%= answer.content %></li>
+            <%# Le contenu dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes. %>
+            <li class="flex min-h-tap items-center rounded-ln border border-ink bg-mist px-4 py-3 font-medium">
+              <span class="min-w-0 flex-1"><%= answer.content %></span>
+            </li>
           <% end %>
         </ul>
       </div>
@@ -33,14 +40,24 @@
           <p class="mt-1 text-sm whitespace-pre-line text-ink"><%= feedback.explanation %></p>
         </div>
       <% end %>
-      <div class="flex justify-end border-t border-line pt-4">
+      <%# Sous lg, la barre du bas reste visible (décision du porteur, 2026-10-06) : l'action colle juste au-dessus d'elle, même
+          quand une longue explication la pousserait sous le pli. Pleine largeur sous 640 px. %>
+      <div id="feedback-actions"
+           class="sticky bottom-above-bar z-10 -mx-4 -mb-4 border-t border-line bg-white px-4 py-4 sm:-mx-6 sm:-mb-6 sm:flex sm:justify-end sm:px-6 lg:static lg:mx-0 lg:mb-0 lg:px-0 lg:pt-4 lg:pb-0">
         <% if play.completed? %>
           <%= ui_button t(".result"), href: exercise_session_result_path(play.session_public_id), variant: :brand, icon_end: "trophy",
-                                      data: { turbo_frame: "_top" } %>
+                                      class: "w-full sm:w-auto", data: { turbo_frame: "_top" } %>
         <% else %>
-          <%= ui_button t(".next"), href: exercise_session_path(play.session_public_id), icon_end: "arrow-right" %>
+          <%# Repli sans JavaScript : le lien recharge le frame. Pas de préchargement : la question est déjà là. %>
+          <%= ui_button t(".next"), href: exercise_session_path(play.session_public_id), icon_end: "arrow-right", class: "w-full sm:w-auto",
+                                    data: { action: ("assessment--next-question#show" if next_question), turbo_prefetch: false } %>
         <% end %>
       </div>
     </div>
+    <% if next_question %>
+      <%= tag.template data: { assessment__next_question_target: "question" } do %>
+        <%= render "assessment/exercise_sessions/question_card", play:, question: next_question, form: nil %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

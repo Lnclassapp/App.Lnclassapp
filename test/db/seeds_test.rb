@@ -20,6 +20,13 @@ class SeedsTest < ActiveSupport::TestCase
     Rails.env = "test"
   end
 
+  def as_development
+    Rails.env = "development"
+    yield
+  ensure
+    Rails.env = "test"
+  end
+
   def with_bootstrap_contact(contact)
     previous = ENV["TEAM_BOOTSTRAP_CONTACT"]
     ENV["TEAM_BOOTSTRAP_CONTACT"] = contact
@@ -35,7 +42,8 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal %w[6eme 5eme 4eme 3eme 2nde 1ere tle], Orm::Level.order(:position).pluck(:slug)
     assert_equal 10, Orm::LevelSeries.count
     assert_equal 28, Orm::ClassroomPlanEntry.count
-    assert_equal %w[literature literature literature literature science science science], Orm::Material.order(:category).pluck(:category)
+    assert_equal %w[literature literature literature science science science], Orm::Material.order(:category).pluck(:category)
+    assert_not Orm::Material.exists?(name: "Anglais"), "Lnclass ne propose pas l'Anglais (ADR-0034, amendement du 2026-10-03)"
     assert_equal({ "Lycée Moderne de Treichville" => 77, "Lycée privé Les Lauriers" => 38, "Lycée mixte La Réussite" => 38,
                    "Collège Moderne de Marcory" => 28 },
                  Orm::School.joins(:classrooms).group(:name).count)
@@ -73,6 +81,17 @@ class SeedsTest < ActiveSupport::TestCase
     error = assert_raises(RuntimeError) { load Rails.root.join("db/seeds/development.rb").to_s, true }
 
     assert_match "réservé au développement", error.message
+  end
+
+  # UDR-0017: a statement is typed in a text area and shown escaped, with its line breaks (_question_card); only the
+  # content of a course or an essential is rich text. Played in the transaction of the test, after the test seeds.
+  test "in development, the demo statements are plain text and the course content rich text" do
+    run_seeds
+    as_development { capture_io { load Rails.root.join("db/seeds/development.rb").to_s, true } }
+
+    assert_equal [ "La membrane plasmique délimite la cellule.", "Quel est son rôle principal ?" ],
+                 Orm::Question.order(:position).pluck(:content)
+    assert_includes Orm::Course.find_by!(name: "La cellule").content.body.to_html, "<p>La cellule est l'unité de base du vivant"
   end
 
   test "without a team account, the bootstrap contact receives one admin invitation, whose link is printed" do

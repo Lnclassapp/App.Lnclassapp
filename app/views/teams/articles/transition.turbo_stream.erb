@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/articles/transition — publication, archivage ou remise en ligne, rendu par publish et archive (UDR-0067 §3.2) %>
+<%# Rôle : toast et ligne remplacée par morphing (le ⋮ garde son focus) ; :conflict (422) : toast d'erreur, ligne relue dans son état %>
+<%# ADR  : 0035, 0074 · UDR : 0042, 0067 %>
+<%= turbo_stream_toast t(".#{@outcome}", title: @article.title), type: (@outcome == "conflict" ? :error : :success) %>
+<%= turbo_stream.replace "article_#{@article.public_id}", method: :morph, partial: "teams/articles/article_row", locals: { article: @article } %>

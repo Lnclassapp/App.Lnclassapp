@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -82,6 +82,50 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
     t.index ["question_id", "position"], name: "index_answers_on_question_id_and_position", unique: true
   end
 
+  create_table "article_images", force: :cascade do |t|
+    t.string "alt", limit: 150
+    t.bigint "article_id"
+    t.integer "byte_size", null: false
+    t.string "content_type", null: false
+    t.datetime "created_at", null: false
+    t.integer "height", null: false
+    t.string "public_id", limit: 14, null: false
+    t.datetime "updated_at", null: false
+    t.integer "width", null: false
+    t.index ["article_id"], name: "index_article_images_on_article_id"
+    t.index ["public_id"], name: "index_article_images_on_public_id", unique: true
+    t.check_constraint "byte_size >= 1 AND byte_size <= 1048576", name: "article_images_byte_size"
+    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "article_images_content_type_values"
+    t.check_constraint "width >= 1 AND width <= 1600 AND height >= 1 AND height <= 1600", name: "article_images_sides"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.datetime "archived_at"
+    t.bigint "author_id", null: false
+    t.string "cover_alt", limit: 150
+    t.bigint "cover_image_id"
+    t.datetime "created_at", null: false
+    t.string "excerpt", limit: 200
+    t.string "public_id", limit: 14, null: false
+    t.datetime "published_at"
+    t.integer "reads_count", default: 0, null: false
+    t.string "signature", default: "team", null: false
+    t.string "slug", limit: 140, null: false
+    t.string "status", default: "draft", null: false
+    t.string "title", limit: 120, null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["public_id"], name: "index_articles_on_public_id", unique: true
+    t.index ["published_at", "id"], name: "index_articles_published", order: :desc, where: "((status)::text = 'published'::text)"
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
+    t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "articles_archived_at"
+    t.check_constraint "char_length(btrim(title::text)) >= 1", name: "articles_title_present"
+    t.check_constraint "reads_count >= 0", name: "articles_reads_count_positive"
+    t.check_constraint "signature::text = ANY (ARRAY['team'::character varying, 'author'::character varying]::text[])", name: "articles_signature_values"
+    t.check_constraint "status::text = 'draft'::text OR published_at IS NOT NULL AND btrim(excerpt::text) <> ''::text", name: "articles_published_complete"
+    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'published'::character varying, 'archived'::character varying]::text[])", name: "articles_status_values"
+  end
+
   create_table "audit_events", force: :cascade do |t|
     t.string "action", limit: 60, null: false
     t.bigint "actor_id"
@@ -92,6 +136,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
     t.string "subject_type", limit: 40
     t.index ["actor_id", "created_at"], name: "index_audit_events_on_actor_id_and_created_at"
     t.index ["subject_type", "subject_id"], name: "index_audit_events_on_subject_type_and_subject_id"
+    t.index ["created_at"], name: "index_audit_events_with_ip_on_created_at", where: "(ip_address IS NOT NULL)"
   end
 
   create_table "backup_codes", force: :cascade do |t|
@@ -273,7 +318,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
     t.string "status", default: "started", null: false
     t.bigint "student_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["classroom_assignment_id", "student_id"], name: "index_exercise_sessions_handed_in", where: "(((status)::text = 'completed'::text) AND ((kind)::text = 'standard'::text))", include: ["score_percent"]
+    t.index ["classroom_assignment_id", "student_id"], name: "index_exercise_sessions_handed_in", where: "((status)::text = 'completed'::text)", include: ["score_percent"]
     t.index ["classroom_assignment_id"], name: "index_exercise_sessions_on_classroom_assignment_id"
     t.index ["completed_at"], name: "index_exercise_sessions_completed_on_completed_at", where: "((status)::text = 'completed'::text)", include: ["student_id", "score_percent"]
     t.index ["exercise_id"], name: "index_exercise_sessions_on_exercise_id"
@@ -434,6 +479,74 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
     t.check_constraint "category::text = ANY (ARRAY['literature'::character varying, 'science'::character varying, 'other'::character varying]::text[])", name: "materials_category_values"
   end
 
+  create_table "message_classrooms", force: :cascade do |t|
+    t.bigint "classroom_id", null: false
+    t.bigint "message_id", null: false
+    t.index ["classroom_id"], name: "index_message_classrooms_on_classroom_id"
+    t.index ["message_id", "classroom_id"], name: "index_message_classrooms_on_message_id_and_classroom_id", unique: true
+  end
+
+  create_table "message_dismissals", force: :cascade do |t|
+    t.datetime "dismissed_at", null: false
+    t.bigint "message_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["message_id", "user_id"], name: "index_message_dismissals_on_message_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_message_dismissals_on_user_id"
+  end
+
+  create_table "message_illustrations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "created_by_id", null: false
+    t.string "name", limit: 30, null: false
+    t.string "public_id", limit: 14, null: false
+    t.datetime "retired_at"
+    t.jsonb "shapes", null: false
+    t.datetime "updated_at", null: false
+    t.string "view_box", null: false
+    t.index ["created_by_id"], name: "index_message_illustrations_on_created_by_id"
+    t.index ["public_id"], name: "index_message_illustrations_on_public_id", unique: true
+    t.check_constraint "\nCASE\n    WHEN jsonb_typeof(shapes) = 'array'::text THEN jsonb_array_length(shapes) <= 500\n    ELSE true\nEND", name: "message_illustrations_shapes_max"
+    t.check_constraint "btrim(name::text) <> ''::text", name: "message_illustrations_name_present"
+    t.check_constraint "jsonb_typeof(shapes) = 'array'::text", name: "message_illustrations_shapes_array"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "audience", null: false
+    t.bigint "author_id", null: false
+    t.string "body", limit: 140, null: false
+    t.datetime "created_at", null: false
+    t.datetime "edited_at"
+    t.datetime "ends_at"
+    t.string "illustration"
+    t.bigint "illustration_id"
+    t.string "public_id", limit: 14, null: false
+    t.datetime "published_at"
+    t.bigint "school_id"
+    t.string "status", null: false
+    t.string "theme", default: "ciel", null: false
+    t.string "title", limit: 60, null: false
+    t.datetime "updated_at", null: false
+    t.datetime "withdrawn_at"
+    t.bigint "withdrawn_by_id"
+    t.index ["author_id", "created_at"], name: "index_messages_on_author_id_and_created_at"
+    t.index ["illustration_id"], name: "index_messages_on_illustration_id"
+    t.index ["public_id"], name: "index_messages_on_public_id", unique: true
+    t.index ["school_id"], name: "index_messages_on_school_id"
+    t.index ["status", "published_at"], name: "index_messages_on_status_and_published_at"
+    t.check_constraint "(status::text <> ALL (ARRAY['scheduled'::character varying, 'published'::character varying]::text[])) OR published_at IS NOT NULL", name: "messages_published_at_when_live"
+    t.check_constraint "(status::text = 'withdrawn'::text) = (withdrawn_at IS NOT NULL AND withdrawn_by_id IS NOT NULL)", name: "messages_withdrawn_iff_withdrawal"
+    t.check_constraint "audience::text <> 'classrooms'::text OR school_id IS NOT NULL", name: "messages_classrooms_need_school"
+    t.check_constraint "audience::text = ANY (ARRAY['all'::character varying, 'students'::character varying, 'teachers'::character varying, 'school_admins'::character varying, 'classrooms'::character varying]::text[])", name: "messages_audience_values"
+    t.check_constraint "btrim(body::text) <> ''::text", name: "messages_body_present"
+    t.check_constraint "btrim(title::text) <> ''::text", name: "messages_title_present"
+    t.check_constraint "ends_at IS NULL OR published_at IS NULL OR ends_at > published_at", name: "messages_ends_at_window"
+    t.check_constraint "status::text <> ALL (ARRAY['scheduled'::character varying, 'published'::character varying]::text[]) OR ends_at IS NOT NULL", name: "messages_ends_at_when_live"
+    t.check_constraint "illustration::text = ANY (ARRAY['info'::character varying, 'calendar'::character varying, 'homework'::character varying, 'sheets'::character varying, 'exam'::character varying, 'meeting'::character varying, 'celebration'::character varying, 'holidays'::character varying]::text[])", name: "messages_illustration_values"
+    t.check_constraint "num_nonnulls(illustration, illustration_id) = 1", name: "messages_one_illustration"
+    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'scheduled'::character varying, 'published'::character varying, 'archived'::character varying, 'withdrawn'::character varying]::text[])", name: "messages_status_values"
+    t.check_constraint "theme::text = ANY (ARRAY['ciel'::character varying, 'lagune'::character varying, 'menthe'::character varying, 'citron'::character varying, 'mangue'::character varying, 'corail'::character varying, 'hibiscus'::character varying, 'lavande'::character varying, 'indigo'::character varying, 'nuit'::character varying]::text[])", name: "messages_theme_values"
+  end
+
   create_table "pin_recovery_codes", force: :cascade do |t|
     t.string "code_digest", limit: 64, null: false
     t.datetime "created_at", null: false
@@ -508,18 +621,26 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
     t.index ["school_id", "status"], name: "index_school_join_requests_on_school_id_and_status"
     t.index ["teacher_id"], name: "index_school_join_requests_on_teacher_id", unique: true
     t.check_constraint "(status::text = 'pending'::text) = (decided_at IS NULL)", name: "school_join_requests_decided_iff_not_pending"
-    t.check_constraint "decided_via::text = ANY (ARRAY['team'::character varying, 'sponsor'::character varying]::text[])", name: "school_join_requests_decided_via_values"
+    t.check_constraint "decided_via::text = ANY (ARRAY['team'::character varying, 'sponsor'::character varying, 'auto'::character varying]::text[])", name: "school_join_requests_decided_via_values"
     t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'approved'::character varying, 'rejected'::character varying]::text[])", name: "school_join_requests_status_values"
   end
 
   create_table "school_staffs", force: :cascade do |t|
+    t.datetime "archived_at"
+    t.bigint "archived_by_id"
     t.datetime "created_at", null: false
     t.bigint "invited_by_id"
+    t.string "joined_via", default: "invitation", null: false
     t.bigint "school_id", null: false
     t.bigint "user_id", null: false
+    t.index ["archived_at"], name: "index_school_staffs_on_archived_at", where: "(archived_at IS NOT NULL)"
+    t.index ["archived_by_id"], name: "index_school_staffs_on_archived_by_id"
     t.index ["invited_by_id"], name: "index_school_staffs_on_invited_by_id"
+    t.index ["school_id", "joined_via"], name: "index_school_staffs_on_school_id_and_joined_via", where: "(archived_at IS NULL)"
     t.index ["school_id"], name: "index_school_staffs_on_school_id"
     t.index ["user_id"], name: "index_school_staffs_on_user_id", unique: true
+    t.check_constraint "(archived_at IS NULL) = (archived_by_id IS NULL)", name: "school_staffs_archived_together"
+    t.check_constraint "joined_via::text = ANY (ARRAY['invitation'::character varying, 'code'::character varying]::text[])", name: "school_staffs_joined_via_values"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -828,6 +949,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions", on_delete: :restrict
+  add_foreign_key "article_images", "articles", on_delete: :restrict
+  add_foreign_key "articles", "article_images", column: "cover_image_id", on_delete: :restrict
+  add_foreign_key "articles", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "audit_events", "users", column: "actor_id", on_delete: :restrict
   add_foreign_key "backup_codes", "users", on_delete: :cascade
   add_foreign_key "classroom_assignments", "classrooms", on_delete: :restrict
@@ -868,6 +992,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
   add_foreign_key "level_series", "levels", on_delete: :restrict
   add_foreign_key "level_series", "series", on_delete: :restrict
   add_foreign_key "login_attempts", "users", on_delete: :cascade
+  add_foreign_key "message_classrooms", "classrooms", on_delete: :restrict
+  add_foreign_key "message_classrooms", "messages", on_delete: :cascade
+  add_foreign_key "message_dismissals", "messages", on_delete: :cascade
+  add_foreign_key "message_dismissals", "users", on_delete: :restrict
+  add_foreign_key "message_illustrations", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "messages", "message_illustrations", column: "illustration_id", on_delete: :restrict
+  add_foreign_key "messages", "schools", on_delete: :restrict
+  add_foreign_key "messages", "users", column: "author_id", on_delete: :restrict
+  add_foreign_key "messages", "users", column: "withdrawn_by_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", column: "issued_by_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", on_delete: :cascade
   add_foreign_key "question_attempts", "exercise_sessions", on_delete: :restrict
@@ -881,6 +1014,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_03_110000) do
   add_foreign_key "school_join_requests", "users", column: "decided_by_id", on_delete: :restrict
   add_foreign_key "school_join_requests", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "school_staffs", "schools", on_delete: :restrict
+  add_foreign_key "school_staffs", "users", column: "archived_by_id", on_delete: :restrict
   add_foreign_key "school_staffs", "users", column: "invited_by_id", on_delete: :restrict
   add_foreign_key "school_staffs", "users", on_delete: :restrict
   add_foreign_key "schools", "drenas", on_delete: :restrict

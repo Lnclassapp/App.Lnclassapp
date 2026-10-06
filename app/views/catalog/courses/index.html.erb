@@ -1,11 +1,13 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
-<%# Rôle : recherche par nom et filtres (niveau sauf pour l'élève, matière) qui visent le frame « courses » ; élève : son niveau seul, épuré ; équipe : création et import %>
-<%# ADR  : 0028, 0035 · UDR : 0006, 0013, 0054, 0057 · grille non plafonnée à 3 (exception à R3, UDR-0013 amendement du 2026-10-02) %>
+<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, épuré ; enseignant : sa matière à ses niveaux ; équipe : création et import %>
+<%# ADR  : 0028, 0035, 0076 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0054 (élève : retour « Accueil », amendement du 2026-10-06), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06) · grille non plafonnée à 3, par pages de 24 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "courses" %>
 <% team = current_actor.team? %>
 <%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
 <% student = current_actor.student? %>
+<%# UDR-0077 §3.2 : l'enseignant ne lit que sa matière, aux niveaux (et séries) de ses classes de l'année. %>
+<% teacher = teacher_scope %>
 <% unless list_frame_request? %>
   <% if team %>
     <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
@@ -14,24 +16,42 @@
       <%= ui_button t(".new_course"), href: new_teams_course_path, icon: "plus", data: { turbo_frame: "modal" } %>
     <% end %>
   <% elsif student %>
-    <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R4) : la portée du catalogue passe du sous-titre à l'infobulle. %>
-    <%= ui_page_header title: t(".title") do %>
+    <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R4) : la portée du catalogue passe du sous-titre à l'infobulle, collée au
+        titre (UDR-0077, amendement du 2026-10-06) : en action de ui_page_header, elle restait seule sous le titre sur téléphone.
+        UDR-0054, amendement du 2026-10-06 : chez l'élève, toute page autre que l'Accueil y ramène, filtrée ou non. %>
+    <%= ui_back_link t(".back_home"), href: student_home_path %>
+    <div class="mb-6 flex flex-wrap items-center gap-x-1">
+      <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= t(".title") %></h1>
       <%= ui_info_tip t(".student_scope"), label: t(".student_scope_label") %>
-    <% end %>
+    </div>
+  <% elsif teacher %>
+    <% material = filter_options.materials.find { it.id == teacher.material_id } %>
+    <%= ui_page_header title: t(".title"), subtitle: t(".teacher_subtitle", material: material&.name) %>
   <% else %>
     <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
   <% end %>
 
   <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
+  <%# UDR-0069 §3.4 : une série sert plusieurs niveaux ; la liste la donne une fois, par nom. %>
+  <% series = filter_options.series_by_level.values.flatten.uniq(&:slug).sort_by(&:name) %>
+  <% levels = filter_options.levels %>
+  <% if teacher %>
+    <%# UDR-0077 §3.2 : ses niveaux et ses séries seulement ; pas de liste « Matière », il n'en a qu'une. %>
+    <% levels = levels.select { |level| teacher.audience.pairs.any? { it.first == level.id } } %>
+    <% series = series.select { |one| teacher.audience.pairs.any? { it.last == one.id } } %>
+  <% end %>
   <% selects = {
-       level: ([ [ t(".filters.all_levels"), "" ], *filter_options.levels.map { [ it.name, it.slug ] } ] unless student),
-       material: [ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ]
+       level: ([ [ t(".filters.all_levels"), "" ], *levels.map { [ it.name, it.slug ] } ] unless student),
+       series: ([ [ t(".filters.all_series"), "" ], *series.map { [ it.name, it.slug ] } ] unless student || (teacher && series.empty?)),
+       material: ([ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ] unless teacher)
      }.compact %>
   <%# Recherche pendant la frappe (UDR-0054 §3.9) : le champ reste hors du frame ; « Filtrer » sert sans JavaScript. %>
+  <%# UDR-0077, amendement du 2026-10-06 (décision du porteur) : visible sur téléphone aussi, une colonne sous 640 px. %>
   <%= form_with url: courses_path, method: :get, id: "courses-filters", html: { role: "search", "aria-label": t(".filters.label") },
                 data: { turbo_frame: "courses", turbo_action: "advance", controller: "search" },
-                class: "mb-6 grid items-end gap-3 rounded-card border border-line bg-white p-4 shadow-card sm:grid-cols-2 lg:grid-cols-3" do |form| %>
-    <div class="sm:col-span-2 lg:col-span-3">
+                class: "mb-6 grid items-end gap-3 rounded-card border border-line bg-white p-3 shadow-card sm:grid-cols-2 sm:p-4 lg:grid-cols-4" do |form| %>
+    <%# Une seule liste (l'élève : « Matière ») : la recherche la partage avec elle sur une ligne, sur ordinateur. %>
+    <div class="<%= class_names("sm:col-span-2", selects.size == 1 ? "lg:col-span-3" : "lg:col-span-4") %>">
       <%= ui_field form, :q, as: :search, label: t(".filters.search"), name: "q", value: @filters[:q], autocomplete: "off",
                              data: { action: "search#queue" } %>
     </div>
@@ -45,9 +65,10 @@
         </div>
       </div>
     <% end %>
-    <div class="flex flex-wrap gap-3 sm:col-span-2 lg:col-span-1 lg:justify-end">
-      <%= ui_button t(".filters.submit"), type: :submit, icon: "funnel", data: { search_target: "button" } %>
-      <%= ui_button t(".filters.reset"), href: courses_path, variant: :ghost %>
+    <%# Sans JavaScript, « Filtrer » ; avec, la cellule entière se cache (plus d'« Effacer » seul) : « Tout voir », dans le
+        frame, quitte le filtre (UDR-0077, amendement du 2026-10-06). %>
+    <div class="flex flex-wrap gap-3 sm:col-span-2 lg:col-span-1 lg:justify-end" data-search-target="button">
+      <%= ui_button t(".filters.submit"), type: :submit, icon: "funnel" %>
     </div>
     <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
     <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
@@ -56,22 +77,32 @@
 
 <%# target _top : une carte ouvre la page du cours, pas le frame. %>
 <%= turbo_frame_tag "courses", target: "_top", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
-  <p id="courses_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @courses.size) %></p>
-  <% if @courses.any? %>
-    <ul id="courses_list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-      <%# Élève seulement (UDR-0057 R6) : son niveau est unique, et la matière filtrée est déjà dite par la liste « Matière ». %>
-      <%= render partial: "course_card", collection: @courses, as: :course,
-                 locals: { show_status: team, show_level: !student, show_material: !(student && @filters[:material].present?) } %>
-    </ul>
+  <% filtered = @filters.values.any?(&:present?) %>
+  <div class="mb-3 flex items-center justify-between gap-3">
+    <p id="courses_total" class="text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
+    <%# Le seul moyen de quitter les filtres, à toutes les largeurs (UDR-0077, amendement du 2026-10-06) : rendu dans le frame,
+        il suit chaque filtrage ; target _top, il recharge aussi la recherche. %>
+    <% if filtered %>
+      <%= link_to t(".reset"), courses_path, id: "courses_reset",
+                  class: "inline-flex min-h-tap items-center px-2 text-sm font-medium text-brand-strong" %>
+    <% end %>
+  </div>
+  <% if @page.rows.any? %>
+    <%# UDR-0013, amendement du 2026-10-05 : 24 cartes, puis la page suivante chargée au défilement (catalog/courses/_page). %>
+    <%= render "page", page: @page %>
   <% else %>
     <div id="courses_empty">
-      <% if @filters.values.any?(&:present?) %>
+      <% if filtered %>
         <%= ui_empty_state title: t(".no_match_title"), description: t(student ? ".student_no_match_description" : ".no_match_description"),
                            icon: "magnifying-glass" do %>
           <%= ui_button t(".clear_search"), href: courses_path, variant: :secondary, icon: "x-mark" %>
         <% end %>
       <% elsif student && student_audience.empty? %>
         <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
+      <% elsif teacher&.audience&.empty? %>
+        <%= ui_empty_state title: t(".teacher_no_class_title"), description: t(".teacher_no_class_description"), icon: "user-group" do %>
+          <%= ui_button t(".teacher_no_class_action"), href: teacher_classrooms_path, variant: :secondary, icon: "pencil-square" %>
+        <% end %>
       <% else %>
         <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
       <% end %>

@@ -2,9 +2,10 @@
 # One list of steps, one place: bin/ci and the GitHub workflow never diverge (feuille-de-route §2, garde-fou n° 4).
 # Order: cheapest and most fundamental first.
 #
-# The steps are grouped (ADR-0064). bin/ci plays every group, in this order, locally and in the one GitHub job
-# (ADR-0069: one job, the minutes are counted per job). `CI_GROUP=<group>[,<group>…]` or a part of a sharded group
-# (`system:2/4`) still plays a subset by hand.
+# The steps are grouped (ADR-0064). bin/ci plays every group, in this order, locally; GitHub plays them in two
+# kinds of jobs side by side, « unit » (every group but system) and three parts of « system » (ADR-0069 §9: the
+# minutes are counted per job, the clock stays under ten minutes). `CI_GROUP=<group>[,<group>…]` or a part of a sharded group
+# (`system:2/4`) plays a subset.
 require_relative "../script/ci/plan"
 
 # The Yarn audit is network-bound (2 min 40 s measured locally) and its result only moves with the JS dependencies.
@@ -21,6 +22,7 @@ CI_PLAN = CiPlan.define do
     step "Guard: Domain purity", "ruby -Itest test/domain/domain_purity_test.rb"
     step "Guard: HITL headers, no :nocov:, worker in Puma", "ruby -Itest test/guards/repository_rules_test.rb"
     step "Guard: CI groups add up to bin/ci", "ruby -Itest test/guards/ci_plan_test.rb"
+    step "Guard: System suite budget (15 s per chantier)", "ruby -Itest test/guards/system_budget_test.rb"
 
     step "Style: Ruby", "bin/rubocop"
   end

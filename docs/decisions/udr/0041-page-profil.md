@@ -160,3 +160,27 @@ Aucune information ne quitte l'application. Aucun libellé n'est créé ni suppr
   
   Ces deux derniers fichiers ne sont pas dans la liste du Lot F : le lot le signale à l'orchestrateur avant d'y écrire.
 - Un test vérifie que l'enseignant, la direction et l'équipe gardent le sous-titre, le bloc d'identité et le paragraphe du PIN.
+
+## Amendement du 2026-10-06 — un seul style de bouton, l'élève tutoyé (lot 11)
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md), lot 11. Règle de ton : charte §1 (« tutoiement pour l'élève ») ; UDR-0063 §3 et UDR-0064 (l'espace élève tutoie, les autres publics sont vouvoyés). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi. Les autres rôles gardent leur rendu.*
+
+Constat (Collège Saint Michel, 390 et 1280 px), pour l'élève :
+
+- **trois styles de bouton** : « Ajouter une photo », « Modifier » et « Changer mon numéro » en contour de **40 px** de haut, sous la cible de 44 px ; « Changer mon PIN » en bouton plein sombre de 48 px ; l'interrupteur « Mode sombre » ;
+- **« vous » et « tu » mêlés** : la page, ses quatre modales et leurs messages vouvoient (« Votre PIN protège votre compte », « Saisissez votre PIN actuel… », « Votre numéro est changé. »), alors que l'espace élève tutoie, jusqu'à la carte d'aide du même menu du compte (« Contacte-nous »).
+
+**Boutons, élève seulement**
+
+- Les quatre actions (« Ajouter une photo » ou « Changer ma photo », « Modifier », « Changer mon numéro », « Changer mon PIN ») sont des `ui_button` **`secondary`, taille `md`** (`min-h-tap`, 48 px), chacune avec son icône. « Changer mon PIN » quitte `primary` : le profil n'a pas d'action principale (UDR-0057, R1 : au plus une).
+- L'interrupteur « Mode sombre » reste un interrupteur (`role="switch"`, UDR-0065) : c'est un réglage, pas une action.
+- Les autres rôles gardent `sm` et le `primary` du PIN.
+
+**Ton**
+
+- **Élève : tutoiement** sur la page, dans les modales « Changer mon numéro », « Changer mon PIN », « Ma photo », et dans les messages de succès. Chaque texte concerné a une clé `<clé>_student`, lue par `tone_t` (`ToneHelper` pour les vues, concern `Tone` pour les contrôleurs) quand l'acteur est un élève. Sans variante, la clé commune est lue.
+- **Autres rôles : vouvoiement inchangé.**
+- **Messages d'erreur des formulaires du profil** : ils viennent des DTO, communs à tous les rôles. Ils se disent désormais **sans pronom**, pour tous les rôles : « Le PIN actuel est obligatoire. », « Le nouveau numéro est obligatoire. », « Un numéro ivoirien compte 10 chiffres, par exemple 05 01 02 03 04. », « C'est déjà le numéro de ce compte. », « Le nouveau PIN, à 4 chiffres, est obligatoire. », « C'est déjà le PIN de ce compte. », « Le nom est obligatoire. », « Le ou les prénoms sont obligatoires. », « Aucune photo n'est choisie. », « La photo est en JPEG, PNG ou WebP. » ; le libellé « Confirmez le nouveau numéro » devient « Confirmation du nouveau numéro », comme celui du PIN.
+- Les libellés de bouton à la première personne (« Changer mon PIN », « Ma photo ») ne changent pas : ils conviennent aux deux tons.
+
+**Preuves** : `test/controllers/identity/profiles_controller_test.rb` (aucun « vous » sur la page ni dans les modales de l'élève ; quatre actions d'un même style, `min-h-tap` ; l'enseignant garde « Saisissez votre PIN actuel »), `test/helpers/tone_helper_test.rb`, `test/system/identity/profile_test.rb` (à 390 px, chaque action fait au moins 44 px), et les tests des modales, mis au nouveau ton.

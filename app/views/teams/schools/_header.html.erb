@@ -48,6 +48,8 @@
           <% if accepts_classrooms %>
             <%= ui_dropdown_item t(".invite_staff"), href: new_school_staff_invitation_path(school.public_id), icon: "user-plus",
                                                      frame: "modal" %>
+            <%# UDR-0071 §3.8 : une annonce pour cet établissement, établissement actif seulement %>
+            <%= ui_dropdown_item t("communication.authored_messages.school_entry"), href: new_announcement_path(school: school.public_id), icon: "megaphone" %>
           <% end %>
           <%= ui_dropdown_item t(".edit"), href: edit_school_path(school.public_id), icon: "pencil-square", frame: "modal" %>
           <%= ui_dropdown_item t(".regenerate_code"), dialog: "regenerate-school-code", icon: "arrow-path" %>

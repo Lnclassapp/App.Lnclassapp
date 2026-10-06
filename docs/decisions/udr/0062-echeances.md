@@ -182,3 +182,16 @@ Route `GET /classrooms/:classroom_public_id/assignments/:public_id`, `Classroom:
 - **La homepage ment** : « Déclare tes classes, assigne-leur des cours et des exercices » (`homepage.index.audience.roles.teachers.text`, `role_modal.teacher.lead`, `features.items.teachers.text`). Ces textes passent à « des exercices » dans le lot des échéances.
 - **À signaler, sans le modifier ici** : l'UDR-0058 (§2.1, §4) annonce le retour de la **durée** d'un exercice par ce chantier ; elle est abandonnée (Q9). Son amendement de phase 2 d'`interface-epuree` la retire, et reprend le §3.3 ci-dessus et l'icône d'aide de l'UDR-0061.
 - Interdit désormais : formater une échéance hors de `DueDateHelper` ; utiliser l'ambre pour autre chose qu'une échéance ; montrer un nom d'élève en retard à un élève.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **La bascule sert aussi au catalogue** (UDR-0069 §3.8) : fiche essentielle et page d'un exercice, une bascule par classe du bon niveau ; nouveau local `classroom_name:` qui nomme la classe dans les `aria-label`. Modale des jours, streams et rafraîchissement inchangés.
+
+## Amendement du 2026-10-04 — compréhension d'un exercice assigné
+
+*Chantier [`docs/chantiers/rapports-exercices`](../../chantiers/rapports-exercices/prd.md), [UDR-0072](0072-comprehension-d-un-exercice-assigne.md), [ADR-0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md). Statut : accepté (2026-10-04, porteur). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **§3.4, ligne d'un exercice assigné** : sous « N faits… », un pied, sous la même policy que les comptes : badges de la classe à gauche, cercle de compréhension à droite (UDR-0072 §3.4).
+- **§3.5, page de suivi** : une section « Compréhension » entre la carte d'en-tête et les rendus en retard, catégories dans l'adresse (`?category=`) (UDR-0072 §3.5). Les élèves pas encore faits sont désormais **nommés**, après les rendus en retard (UDR-0072 §3.5 bis, ADR-0079 §4.8). Le reste de la page ne change pas.

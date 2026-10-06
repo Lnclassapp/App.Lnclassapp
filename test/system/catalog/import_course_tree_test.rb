@@ -76,7 +76,9 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
 
   # IM-01, IM-11, IM-12 (ADR-0068, UDR-0055) : les 4 leçons de Tle D, choisies d'un coup, forment un seul import.
   test "IM-01 the four Tle D lessons chosen at once: the summary, then one report with a line per file" do
-    lessons = Dir[Rails.root.join("docs/contenus/lecons-traitees/tle-d/*.json")].sort
+    lessons = %w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools
+                 svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes]
+              .map { Rails.root.join("docs/contenus/lecons-traitees/tle-d/#{it}.json").to_s }.sort_by { File.basename(it) }
 
     open_in_modal(new_teams_import_path(kind: "course_tree"))
 

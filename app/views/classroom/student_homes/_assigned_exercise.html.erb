@@ -3,9 +3,10 @@
 <%# ADR  : 0054, 0072 · UDR : 0057 §2.4, 0058 §3.3, 0062 §3.2 (échéance par due_badge, aucune une fois terminé) %>
 <%# locals: (exercise:, index:) -%>
 <% variant = index.zero? ? :primary : :secondary %>
-<%= tag.li class: "flex items-center gap-3 px-5 py-3 sm:gap-4 sm:px-6", **ui_reveal_item(index) do %>
+<%= tag.li class: "flex items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6", **ui_reveal_item(index) do %>
   <div class="min-w-0 flex-1 space-y-1">
-    <p class="truncate font-medium text-ink">
+    <%# 2 lignes au plus : le titre reste lisible à côté du bouton, sur un téléphone de 360 px. %>
+    <p class="line-clamp-2 font-medium break-words text-ink">
       <%= link_to exercise.title, exercise_path(exercise.public_id),
                   class: "rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
     </p>

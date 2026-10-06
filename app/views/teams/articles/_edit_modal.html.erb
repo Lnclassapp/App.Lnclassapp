@@ -1,0 +1,34 @@
+<%# 🌐 UI · teams/articles/_edit_modal — modale de modification d'un article (edit, update en 422, publication refusée) %>
+<%# Rôle : alerte « Publication impossible » et ses manques en tête si refused ; état de l'article ; formulaire ; jamais de « Publier » %>
+<%# ADR  : 0035, 0074 · UDR : 0006, 0014, 0054, 0067 (§3.3, §3.5) %>
+<%# locals: (article:, form:, refused:) -%>
+<%= ui_modal title: t(".title"), id: "article-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
+  <% modal.footer do %>
+    <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+    <%= ui_button t(".submit"), type: :submit, form: "article-form", id: "article-submit" %>
+  <% end %>
+  <% if refused %>
+    <%# Les messages nomment eux-mêmes leur champ ou leur image : full_messages y ajouterait « Image alts <public_id> ». %>
+    <div id="article_publish_refused" role="alert" class="mb-5 flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm text-error">
+      <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <div class="space-y-1">
+        <p class="font-semibold"><%= t(".refused_title") %></p>
+        <p><%= t(".refused_body") %></p>
+        <ul class="list-disc pl-5">
+          <% form.errors.each do |error| %>
+            <li><%= error.message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <p class="mb-5 flex flex-wrap items-center gap-2 text-sm text-mute">
+    <%= article_status_badge(article.status) %> <%= t(".status_notice") %>
+    <% if article.status == "published" %>
+      <%= t(".published_notice") %>
+    <% end %>
+  </p>
+  <%= render "teams/articles/form", input: form, url: teams_article_path(article.public_id), method: :patch,
+                                    upload_url: teams_article_images_path(article: article.public_id),
+                                    author_name: article.author_name, slug: article.slug %>
+<% end %>

@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/_information — carte « Mes informations » (Queries::Identity::ProfileQuery::Row) %>
-<%# Rôle : photo, nom, numéro, rôle, inscription ; remplacée par profile_names/update ; élève : sans bloc d'identité, avatar en ligne « Photo » %>
-<%# ADR  : 0055, 0060, 0065 · UDR : 0006, 0041 (amendement du 2026-10-02, lu sur profile.role), 0047, 0052, 0057 %>
+<%# Rôle : photo, nom, numéro, rôle, inscription ; remplacée par profile_names/update ; élève : avatar en ligne « Photo », boutons md, tutoiement %>
+<%# ADR  : 0055, 0060, 0065 · UDR : 0006, 0041 (amendements du 2026-10-02 et du 2026-10-06, lus sur profile.role), 0047, 0052, 0057 %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
   <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
   <% student = profile.role == :student %>
@@ -27,21 +27,21 @@
         <% if student %>
           <dd class="mt-1.5">
             <span aria-hidden="true"><%= ui_avatar profile.display_name, src: account_photo_src(profile.public_id, profile.photo_version), size: :lg %></span>
-            <span class="sr-only"><%= t(profile.photo_version ? ".photo_present" : ".photo_absent") %></span>
+            <span class="sr-only"><%= tone_t(profile.photo_version ? ".photo_present" : ".photo_absent") %></span>
           </dd>
         <% else %>
         <dd class="mt-0.5 font-medium text-ink"><%= t(profile.photo_version ? ".photo_present" : ".photo_absent") %></dd>
         <% end %>
       </div>
       <%= ui_button t(profile.photo_version ? ".change_photo" : ".add_photo"), href: edit_profile_photo_path, variant: :secondary,
-                                                                               size: :sm, icon: "camera", data: { turbo_frame: "modal" } %>
+                                                                               size: (student ? :md : :sm), icon: "camera", data: { turbo_frame: "modal" } %>
     </div>
     <div class="flex flex-wrap items-center justify-between gap-3 py-3">
       <div class="min-w-0">
         <dt class="text-mute"><%= t(".name") %></dt>
         <dd class="mt-0.5 font-medium text-ink"><%= profile.display_name %></dd>
       </div>
-      <%= ui_button t(".edit_name"), href: edit_profile_name_path, variant: :secondary, size: :sm, icon: "pencil-square",
+      <%= ui_button t(".edit_name"), href: edit_profile_name_path, variant: :secondary, size: (student ? :md : :sm), icon: "pencil-square",
                                      "aria-label": t(".edit_name_label"), data: { turbo_frame: "modal" } %>
     </div>
     <div class="flex flex-wrap items-center justify-between gap-3 py-3">
@@ -49,7 +49,7 @@
         <dt class="text-mute"><%= t(".contact") %></dt>
         <dd class="mt-0.5 font-medium text-ink tabular-nums"><%= profile.grouped_contact %></dd>
       </div>
-      <%= ui_button t(".change_contact"), href: edit_profile_contact_path, variant: :secondary, size: :sm, icon: "phone",
+      <%= ui_button t(".change_contact"), href: edit_profile_contact_path, variant: :secondary, size: (student ? :md : :sm), icon: "phone",
                                           data: { turbo_frame: "modal" } %>
     </div>
     <% case profile.role %>

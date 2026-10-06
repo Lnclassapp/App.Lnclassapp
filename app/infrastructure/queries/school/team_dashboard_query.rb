@@ -1,12 +1,14 @@
 # 🔌 INFRA · Queries::School::TeamDashboardQuery
-# Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs agrégés, élèves par niveau, couverture par DRENA, derniers inscrits
+# Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs, élèves par niveau, par DRENA ou par établissement, derniers inscrits
 # ADR  : 0040, 0041, 0049, 0062 · UDR : 0049 · un nombre fixe de requêtes groupées, quel que soit le volume
 module Queries
   module School
     class TeamDashboardQuery
+      # school_rows : sous un filtre DRENA, les lignes de tous ses établissements (DrenaSchoolsQuery#rows), lues avec les
+      # chiffres ; nil en vue nationale.
       Row = Data.define(:period, :school_year, :drena, :accounts, :signups_count, :active_students_count,
                         :completed_sessions_count, :average_score, :assignments_count, :schools, :classrooms_count,
-                        :levels, :placed_students_count, :unplaced_students_count, :drenas, :recent_signups)
+                        :levels, :placed_students_count, :unplaced_students_count, :drenas, :school_rows, :recent_signups)
       Filter = Data.define(:public_id, :name)
       # team : nil sous un filtre DRENA, l'équipe n'ayant pas de territoire.
       Accounts = Data.define(:students, :teachers, :team)
@@ -21,10 +23,11 @@ module Queries
 
       RECENT = 10
       # ADR-0062, amendement du 2026-09-29 : les chiffres de l'année scolaire sont gardés 5 minutes ; 7 et 30 jours restent
-      # lus en direct. Changer une définition ou la forme des chiffres, c'est changer CACHE_VERSION.
+      # lus en direct. Changer une définition ou la forme des chiffres, c'est changer CACHE_VERSION (2 : les lignes
+      # d'établissements sous filtre, amendement du 2026-10-04).
       CACHED_PERIODS = %w[year].freeze
       CACHE_TTL = 5.minutes
-      CACHE_VERSION = 1
+      CACHE_VERSION = 2
 
       # Une seule lecture : les établissements actifs, et combien ont une classe, un enseignant, un élève (élève placé :
       # ADR-0062). SQL constant : seule l'année scolaire est liée.
@@ -63,14 +66,16 @@ module Queries
 
       private
 
-      # Tout le reste de la page : des agrégats, sans aucune donnée personnelle.
+      # Tout le reste de la page : des agrégats, sans aucune donnée personnelle. Sous un filtre, les établissements de la
+      # DRENA sont lus ici, avec les chiffres : la page ne mêle jamais deux instants (UDR-0068 règle 8, ADR-0062,
+      # amendement du 2026-10-04).
       def figures(drena)
         placed = placed_students
         placed_count = placed.sum(&:students)
         accounts = accounts_by_role(placed_count)
         { accounts:, **flows, schools: coverage, classrooms_count: classrooms.count, levels: levels(tally(placed, :level_id)),
           placed_students_count: placed_count, unplaced_students_count: (accounts.students - placed_count if drena.nil?),
-          drenas: drena_rows(placed) }
+          drenas: drena_rows(placed), school_rows: (DrenaSchoolsQuery.new.rows(drena_id: @drena_id, year: @year, since: @since) if drena) }
       end
 
       # Une entrée par année scolaire, début de période et DRENA résolue (une DRENA inconnue lit la vue nationale) ; aucune

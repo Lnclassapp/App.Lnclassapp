@@ -19,6 +19,15 @@ module Repositories
         assert_equal record.public_id, result.value.public_id
       end
 
+      test "create_school_admin creates a direction account, with no attachment (ADR-0077)" do
+        result = @repository.create_school_admin(user: person(contact: "0701020304"), pin: "2468")
+
+        assert result.success?
+        record = Orm::User.find(result.value.id)
+        assert_equal [ "school_admin", nil ], [ record.role, record.school_staff ]
+        assert_equal "school_admin", result.value.role
+      end
+
       test "a taken contact is a conflict and leaves the enclosing transaction usable" do
         create_student(contact: "0101020304")
 

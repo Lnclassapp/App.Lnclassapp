@@ -65,7 +65,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#level_tle", text: "Tle"
     end
 
-    navigate_to team_home_path
     click_referential(series_index_path)
     assert_no_page_reload do
       click_on t("teams.series.index.new")
@@ -81,7 +80,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#level_series_tle_d button[aria-pressed=true]"
     end
 
-    navigate_to team_home_path
     click_referential(materials_path)
     assert_no_page_reload do
       click_on t("teams.materials.index.new")
@@ -95,7 +93,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#material_svt", text: "SVT"
     end
 
-    navigate_to team_home_path
     click_referential(drenas_path)
     assert_no_page_reload do
       click_on t("teams.drenas.index.new")
@@ -113,7 +110,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
   # D1 (owner, 2026-09-28): linking D to Tle filled its barème line, 6 public and 3 private, without any entry by hand.
   def team_sets_the_classroom_plan
-    navigate_to team_home_path
     click_referential(classroom_plan_path)
     within("#classroom_plan_line_tle_d") { assert_text(/Tle\s+D\s+6\s+3/) }
     assert_no_selector "[data-plan=undefined]"
@@ -337,7 +333,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_text "100 %"
     end
     assert_no_page_reload do
-      within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.issue_code") }
+      click_menu_action("[id='student_#{student.public_id}']", t("classroom.classrooms.roster.issue_code"))
       assert_toast t("identity.pin_recovery_codes.create.issued")
       within "turbo-frame#modal dialog#pin-recovery-code-modal[open]" do
         assert_text "Aya Kouassi"
@@ -421,8 +417,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_current_path path
   end
 
+  # UDR-0068 §3.4 : le Référentiel a sa page, atteinte par la carte « Configuration » de la barre latérale.
   def click_referential(path)
-    within("#team_home_referential") { find("a[href='#{path}']").click }
+    navigate_to teams_referential_path
+    within("#team_referential") { find("a[href='#{path}']").click }
     assert_current_path path
   end
 

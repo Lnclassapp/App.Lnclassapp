@@ -1,4 +1,5 @@
-# Accueil enseignant (plan boucle-pedagogique, Lot D3, TR-05) — UDR-0007, UDR-0026
+# Accueil enseignant (plan boucle-pedagogique, Lot D3, TR-05 ; reorganisation-equipe-enseignant, Lot D ;
+# interface-enseignant-organisation, Lot A) — UDR-0007, UDR-0026, UDR-0069, UDR-0077
 fr:
   classroom:
     teacher_homes:
@@ -8,16 +9,27 @@ fr:
         subtitle: "%{school}"
         classrooms_title: "Mes classes"
         classrooms_subtitle: "Vos classes actives de cette année scolaire"
+        classrooms_menu: "Actions sur mes classes"
         edit_classrooms: "Modifier mes classes"
         classrooms_empty: "Aucune classe déclarée"
         classrooms_empty_description: "Déclarez les classes où vous enseignez : vous les retrouverez ici."
-        activity_title: "Activité de vos classes"
-        activity_subtitle: "Les dernières sessions terminées par vos élèves"
-        activity_soon: "Bientôt"
-        activity_soon_description: "Vous suivrez bientôt ici les sessions terminées par vos élèves."
         courses_title: "Cours"
-        courses_subtitle: "Le catalogue, pour assigner un cours à vos classes"
-        courses_action: "Voir les cours"
+        courses_subtitle: "Les cours de vos niveaux en %{material}"
+        all_courses: "Voir tout le catalogue"
+      # UDR-0077 §3.1 : les exercices assignés à suivre cette semaine.
+      follow_ups:
+        title: "Activités"
+        subtitle: "Les exercices à suivre cette semaine"
+        empty: "Rien à suivre pour l'instant"
+        empty_description: "Les exercices assignés dont l'échéance approche apparaîtront ici."
+        pending:
+          one: "1 élève sur %{present} ne l'a pas fait"
+          other: "%{count} élèves sur %{present} ne l'ont pas fait"
+      course_levels:
+        label: "Vos niveaux et actions"
+        empty: "Déclarez vos classes pour retrouver ici les cours de vos niveaux."
+        sr_level: ", cours de %{material}"
+        invite: "Inviter"
       classroom_card:
         students:
           zero: "Aucun élève"

@@ -52,6 +52,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: including("Tle D"), count: 0
       assert_select "h2", text: "Génétique et évolution"
       assert_select "*", text: including("Du gène à l'espèce")
+      # UDR-0013, amendement du 2026-10-05 ter : le pied « Ouvrir le cours → » est rétabli.
       assert_select "*", text: including(tl("course_card.open"))
     end
     assert_no_match(/Brouillon de cours|Cours archivé/, response.body)
@@ -69,14 +70,16 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_list > li", 4
     assert_select "#course_#{@draft.slug}", text: including(status_label(:draft))
     assert_select "#course_#{@archived.slug}", text: including(status_label(:archived))
-    assert_select "#course_#{@course.slug}", text: including(status_label(:published))
+    # UDR-0013, amendement du 2026-10-05 : « Publié », l'état normal, n'est plus écrit sur la carte.
+    assert_select "#course_#{@course.slug}", text: including(status_label(:published)), count: 0
+    assert_select "#course_#{@course.slug} h2", text: "Génétique et évolution"
     assert_select modal_link(new_teams_course_path), text: tl("index.new_course")
     assert_select modal_link(new_teams_import_path(kind: "course_tree")), text: tl("index.import")
   end
 
   test "the filters list the levels and materials, and keep the chosen ones" do
-    # Le filtre par niveau et la recherche dans tous les niveaux : un enseignant (l'élève ne voit que son niveau).
-    sign_in_as create_teacher
+    # Tous les niveaux et toutes les matières : l'équipe (l'élève voit son niveau, l'enseignant ses classes, UDR-0077 §3.2).
+    sign_in_as create_team_member
 
     get courses_path(material: @svt.slug)
 
@@ -85,13 +88,79 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "select[name=level] option[value='#{@tle.slug}']", text: "Tle"
       assert_select "select[name=material] option[selected][value='#{@svt.slug}']", text: "SVT"
     end
-    assert_select "#courses_list > li", 1
+    assert_select "#courses_list > li", 3
     assert_select "#course_#{@course.slug}"
   end
 
+  # RE-14 (UDR-0069 §3.3, §3.4) : l'adresse d'une bulle « Tle D » de l'accueil enseignant.
+  test "a « Tle D » bubble lists the subject's Tle courses without series and in Tle D, neither Tle C nor another subject" do
+    maths = create_material(name: "Mathématiques")
+    d = @course.series
+    common = create_course(name: "Analyse", level: @tle, material: maths)
+    own = create_course(name: "Probabilités", level: @tle, series: d, material: maths)
+    other_series = create_course(name: "Arithmétique", level: @tle, series: create_series(name: "C"), material: maths)
+    other_subject = create_course(name: "Mécanique", level: @tle, series: d, material: create_material(name: "Physique-Chimie"))
+    link_level_series(level: @tle, series: d)
+
+    [ create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d) ]), create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path(level: "tle", series: "d", material: "mathematiques")
+
+      assert_response :success
+      assert_select "#courses_list > li", 2
+      assert_select "#course_#{common.slug}"
+      assert_select "#course_#{own.slug}"
+      assert_select "#course_#{other_series.slug}", 0
+      assert_select "#course_#{other_subject.slug}", 0
+      assert_select "select[name=series] option[selected][value=d]", text: "D"
+      sign_out
+    end
+  end
+
+  test "the team chooses a « Série » between « Niveau » and « Matière »; the student has no such list" do
+    c = create_series(name: "C")
+    link_level_series(level: @tle, series: @course.series)
+    link_level_series(level: @tle, series: c)
+    link_level_series(level: create_level(name: "1ère"), series: c)
+
+    [ create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path
+
+      assert_select "form#courses-filters.lg\\:grid-cols-4" do
+        assert_select "div.sm\\:col-span-2.lg\\:col-span-4 input[name=q]"
+        assert_equal %w[level series material], css_select("select").map { it["name"] }
+        assert_select "label[for=filter_series]", text: tl("index.filters.series")
+        assert_select "select#filter_series[name=series][data-action='change->search#submit'] option", 3
+        assert_select "select[name=series] option:nth-child(1)[value='']", text: tl("index.filters.all_series")
+        assert_select "select[name=series] option:nth-child(2)[value=c]", text: "C"
+        assert_select "select[name=series] option:nth-child(3)[value=d]", text: "D"
+      end
+      sign_out
+    end
+
+    sign_in_as create_student_for(@course)
+    get courses_path
+
+    assert_equal %w[material], css_select("form#courses-filters select").map { it["name"] }
+    assert_select "label[for=filter_series]", 0
+  end
+
+  test "a series in the address only narrows a student's catalogue, never widens it" do
+    create_course(name: "Mécanique", level: @tle, series: create_series(name: "C"), material: @svt)
+    sign_in_as create_student_for(@course)
+
+    get courses_path(level: @tle.slug, series: "c")
+
+    assert_select "#courses_list > li", 1
+    assert_select "#course_#{@published.slug}"
+  end
+
   test "the filters form searches while typing: a « q » search field, lists sent on change, « Filtrer » kept without JS (FU-47)" do
-    # Le filtre par niveau et la recherche dans tous les niveaux : un enseignant (l'élève ne voit que son niveau).
-    sign_in_as create_teacher
+    # Le filtre par niveau et la recherche dans tous les niveaux : l'équipe (UDR-0077 §3.2).
+    sign_in_as create_team_member
 
     get courses_path(q: "généti")
 
@@ -100,7 +169,10 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[type=search][name=q][id=q][value='généti'][autocomplete=off][data-action='search#queue']"
       assert_select "select[name=level][data-action='change->search#submit']"
       assert_select "select[name=material][data-action='change->search#submit']"
-      assert_select "button[type=submit][data-search-target=button]", text: tl("index.filters.submit")
+      # UDR-0077, amendement du 2026-10-06 : la cellule de « Filtrer » est la cible, cachée entière avec JavaScript ;
+      # plus d'« Effacer » dans le formulaire.
+      assert_select "div[data-search-target=button] button[type=submit]", text: tl("index.filters.submit")
+      assert_select "a[href='#{courses_path}']", 0
     end
     assert_select "turbo-frame#courses.transition-opacity.aria-busy\\:opacity-50"
     assert_select "#courses_list > li", 1
@@ -110,8 +182,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test "the search ignores case and accents, and combines with the filters (FU-47)" do
     create_course(name: "Mathématiques 3e", level: @seconde, material: @philo)
-    # Le filtre par niveau et la recherche dans tous les niveaux : un enseignant (l'élève ne voit que son niveau).
-    sign_in_as create_teacher
+    # Le filtre par niveau et la recherche dans tous les niveaux : l'équipe (UDR-0077 §3.2).
+    sign_in_as create_team_member
 
     get courses_path(q: "MATHEMATIQUES"), headers: { "Turbo-Frame" => "courses" }
     assert_select "#courses_list > li", 1
@@ -158,8 +230,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_empty", text: including(tl("index.empty_title"))
   end
 
-  # UDR-0013, amendement du 2026-10-02 (UDR-0057), décision du porteur : élève seulement.
-  test "a student's catalogue has no subtitle but an info tip, and its cards drop the filtered subject" do
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057), décision du porteur : élève seulement. Amendement du 2026-10-05 ter :
+  # la carte garde le badge de la matière filtrée, et son pied « Ouvrir le cours → ».
+  test "a student's catalogue has no subtitle but an info tip, and its cards keep the filtered subject" do
     sign_in_as create_student_for(@course)
 
     get courses_path(material: @svt.slug)
@@ -171,16 +244,52 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "#course_#{@course.slug}" do
       assert_select "h2", text: "Génétique et évolution"
-      assert_select "*", text: including("SVT"), count: 0
-      assert_select "div.mb-4", 0
+      assert_select "div.mb-4 > span", 1
+      assert_select "div.mb-4 > span", text: "SVT"
+      assert_select "*", text: including("Tle"), count: 0
+      assert_select "div.border-t", text: including(tl("course_card.open"))
     end
 
     get courses_path(material: @philo.slug, q: "zzz"), headers: { "Turbo-Frame" => "courses" }
     assert_select "#courses_empty", text: including(tl("index.student_no_match_description"))
   end
 
-  test "the teacher's and the team's catalogue are unchanged: subtitle, level badge, subject badge even when filtered" do
-    [ create_teacher, create_team_member ].each do |user|
+  # UDR-0054, amendment of 2026-10-06: the student's catalogue, filtered or not, brings back to « Accueil »; the team's
+  # catalogue, a destination of its navigation, has no back link.
+  test "the student's catalogue, filtered or not, brings back to « Accueil »; the team's has no back link" do
+    sign_in_as create_student_for(@course)
+
+    [ courses_path, courses_path(material: @svt.slug) ].each do |path|
+      get path
+
+      assert_select "nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), student_home_path, text: tl("index.back_home")
+    end
+
+    sign_in_as create_team_member
+    get courses_path
+
+    assert_select "nav[aria-label=?]", I18n.t("components.back_link.label"), 0
+  end
+
+  # UDR-0054 §3.2: from the filtered catalogue, « Cours » brings back to the same filter; from anywhere else, or from
+  # another site, to the bare catalogue.
+  test "the back link of a course keeps the filter of the catalogue the student came from, never another site's address" do
+    sign_in_as create_student_for(@course)
+    back = "nav[aria-label='#{I18n.t('components.back_link.label')}'] a[href=?]"
+    filtered = courses_path(material: @svt.slug)
+
+    get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{filtered}" }
+    assert_select back, filtered, text: tl("show.back")
+
+    get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{student_home_path}" }
+    assert_select back, courses_path
+
+    get course_path(@course.slug), headers: { "Referer" => "https://ailleurs.example#{filtered}" }
+    assert_select back, courses_path
+  end
+
+  test "the team's catalogue is unchanged: subtitle, level badge, subject badge even when filtered" do
+    [ create_team_member ].each do |user|
       sign_in_as user
 
       get courses_path(material: @svt.slug)
@@ -194,6 +303,77 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
       get courses_path(q: "zzz"), headers: { "Turbo-Frame" => "courses" }
       assert_select "#courses_empty", text: including(tl("index.no_match_description"))
+      sign_out
+    end
+  end
+
+  # ── Catalogue de l'enseignant et téléphone (UDR-0077 §3.2) ───────────────
+
+  test "CA-5: the teacher sees their subject at the levels and series of their classrooms, nothing else" do
+    maths = create_material(name: "Mathématiques")
+    d = @course.series
+    own = create_course(name: "Probabilités", level: @tle, series: d, material: maths)
+    common = create_course(name: "Analyse", level: @tle, material: maths)
+    other_series = create_course(name: "Arithmétique", level: @tle, series: create_series(name: "C"), material: maths)
+    other_level = create_course(name: "Calcul littéral", level: @seconde, material: maths)
+    other_subject = create_course(name: "Mécanique", level: @tle, series: d, material: create_material(name: "Physique-Chimie"))
+    link_level_series(level: @tle, series: d)
+    sign_in_as create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d) ])
+
+    get courses_path
+
+    assert_equal [ "course_#{common.slug}", "course_#{own.slug}" ], css_select("#courses_list > li").map { it["id"] }
+    [ other_series, other_level, other_subject ].each { assert_select "#course_#{it.slug}", 0 }
+    assert_select "#main", text: including(tl("index.teacher_subtitle", material: "Mathématiques"))
+    assert_select "form#courses-filters" do
+      assert_equal %w[level series], css_select("select").map { it["name"] }
+      assert_equal [ "", "tle" ], css_select("select[name=level] option").map { it["value"] }
+      assert_equal [ "", "d" ], css_select("select[name=series] option").map { it["value"] }
+    end
+    # UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte, pour tous les rôles.
+    assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques")
+    assert_select "#course_#{own.slug} div.mb-4", text: including("Tle D")
+  end
+
+  test "CA-5: a draft or archived course of the teacher's subject and levels stays out of their catalogue" do
+    draft = create_course(name: "Brouillon SVT", level: @tle, series: @course.series, material: @svt, status: "draft")
+    archived = create_course(name: "Archivé SVT", level: @tle, series: @course.series, material: @svt, status: "archived")
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
+
+    get courses_path
+
+    assert_select "#course_#{@course.slug}"
+    [ draft, archived ].each { assert_select "#course_#{it.slug}", 0 }
+  end
+
+  test "CA-5: a teacher without a classroom this year sees no course, and is invited to declare their classrooms" do
+    sign_in_as create_teacher(material: @svt)
+
+    get courses_path
+
+    assert_select "#courses_list", 0
+    assert_select "#courses_empty", text: including(tl("index.teacher_no_class_title")) do
+      assert_select "a[href='#{teacher_classrooms_path}']", text: tl("index.teacher_no_class_action")
+    end
+  end
+
+  # UDR-0077, amendement du 2026-10-06 (décision du porteur) : les filtres s'affichent aussi sur téléphone ; « Tout voir »,
+  # dans le frame, quitte les filtres à toutes les largeurs.
+  test "CA-6: the search and filters show on a phone too, for every role; a filtered list offers « Tout voir » at every width" do
+    teacher = create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
+    [ create_student_for(@course), teacher, create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path
+
+      assert_select "form#courses-filters.grid"
+      assert_select "form#courses-filters.hidden", 0
+      assert_select "#courses_reset", 0
+
+      get courses_path(material: @svt.slug)
+
+      assert_select "turbo-frame#courses #courses_reset.min-h-tap[href='#{courses_path}']", text: tl("index.reset")
+      assert_select "#courses_reset.sm\\:hidden", 0
       sign_out
     end
   end
@@ -263,9 +443,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "[role=status][aria-live=polite]"
     end
     assert_select "#essential_#{sheets.first.slug}.relative.active\\:bg-mist" do
-      assert_select "a.after\\:absolute.after\\:inset-0.truncate[href='#{course_essential_path(@course.slug, sheets.first.slug)}']",
+      assert_select "a.after\\:absolute.after\\:inset-0.line-clamp-2[href='#{course_essential_path(@course.slug, sheets.first.slug)}']",
                     text: "Méiose"
-      assert_select "p.truncate", text: "Sous-titre"
+      assert_select "p.line-clamp-2", text: "Sous-titre"
       assert_select "svg[aria-hidden=true]"
     end
   end
@@ -398,5 +578,51 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "script[src^=http], link[rel=stylesheet][href^=http]", 0
     end
+  end
+
+  # Chantier politique-cache, lot E (ADR-0067) : les icônes des cartes (matière, flèche) sont dessinées une fois, dans le
+  # frame « courses » qu'une recherche ou un filtre remplace seul.
+  test "the cards take their icons from symbols drawn once in the courses frame" do
+    sign_in_as create_team_member
+
+    get courses_path
+    assert_icons_drawn_once "turbo-frame#courses"
+
+    get courses_path(material: @svt.slug), headers: { "Turbo-Frame" => "courses" }
+    assert_icons_drawn_once "turbo-frame#courses"
+  end
+
+  # Lot E4 (chantier politique-cache), UDR-0013 amendement du 2026-10-05 : 24 cartes par page ; au bas, un frame différé
+  # demande la suivante (filtres gardés) et ne reçoit que ses cartes et le frame d'après ; sans JavaScript, son bouton
+  # ouvre la page suivante entière. Le compte annonce tous les cours.
+  test "the catalog shows 24 cards, then loads the next page in a lazy frame; the filters ride along" do
+    25.times { |index| create_course(name: format("Cours %02d", index), level: @seconde, material: @svt) }
+    sign_in_as create_team_member
+    next_path = courses_path(material: @svt.slug, page: 2)
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "#courses_total", text: tl("index.total", count: 28)
+    assert_select "#courses_list > li", 24
+    assert_select "turbo-frame#courses_page_2[loading=lazy][target=_top][src='#{next_path}']" do
+      assert_select "a[href='#{next_path}'][data-turbo-frame=courses_page_2]", text: tl("page.more")
+    end
+    assert_icons_drawn_once "turbo-frame#courses"
+
+    get next_path, headers: { "Turbo-Frame" => "courses_page_2" }
+
+    assert_response :success
+    assert_match(/\A\s*<turbo-frame id="courses_page_2" target="_top">/, response.body)
+    assert_no_match(/<html|<main|courses-filters|courses_total/, response.body)
+    assert_select "ul#courses_list_page_2.mt-5 > li", 4
+    assert_select "turbo-frame#courses_page_3", 0
+    assert_icons_drawn_once "turbo-frame#courses_page_2"
+    assert_select "symbol[id^='courses-page-2-icon-']", minimum: 1
+
+    get next_path
+
+    assert_response :success
+    assert_select "main#main #courses_list > li", 4
+    assert_select "#courses_total", text: tl("index.total", count: 28)
   end
 end

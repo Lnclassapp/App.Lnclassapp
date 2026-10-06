@@ -12,7 +12,9 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
     @student = create_student(classroom:, first_name: "Awa")
     course = create_course(material: create_material(name: "Mathématiques", category: "science"))
     essential = create_essential(course:)
-    %w[Fractions Équations Statistiques Géométrie].each_with_index do |title, index|
+    # Audit ux-pages-eleve (2026-10-06) : un titre réel, tronqué sur une ligne, élargissait la page (583 px pour 390).
+    [ "Fractions", "Équations", "Statistiques — Lire et interpréter un diagramme en boîte sur deux séries", "Géométrie" ]
+      .each_with_index do |title, index|
       create_exercise_session(student: @student, exercise: create_exercise(essential:, title:), status: "completed",
                               score_percent: 60, completed_at: Time.zone.local(2026, 3, 10 + index, 10))
     end
@@ -28,7 +30,7 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
   test "at 390 px, the student who left reads his archive from the exit screen, without a page reload" do
     with_mobile_viewport do
       sign_in_as @student
-      assert_selector "#pending_account p", text: t("identity.pending_accounts.show.former_student.title"), wait: SIGN_IN_WAIT
+      assert_selector "#pending_account h1", text: t("identity.pending_accounts.show.former_student.title"), wait: SIGN_IN_WAIT
       assert_single_primary_action
 
       assert_no_page_reload do

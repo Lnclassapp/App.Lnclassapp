@@ -111,6 +111,66 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
   end
 
+  # RE-22 — UDR-0069 §3.8 : après l'en-tête, la carte « Assigner à mes classes », une bascule par classe de l'enseignant
+  # du niveau et de la série du cours ; les libellés nomment l'exercice et la classe.
+  test "l'enseignant assigne depuis la page : « Assigner à mes classes », une bascule par classe de Tle D" do
+    course = @essential.course
+    school = create_school
+    tle_d1, tle_d2 = [ "Tle D 1", "Tle D 2" ].map { |name| create_classroom(school:, level: course.level, series: course.series, name:) }
+    tle_c1 = create_classroom(school:, level: course.level, series: create_series(name: "C"), name: "Tle C 1")
+    teacher = create_teacher(school:, classrooms: [ tle_c1, tle_d2, tle_d1 ])
+    assignment = create_assignment(classroom: tle_d2, assignable: @exercise, by: teacher)
+    sign_in_as teacher
+
+    get exercise_path(@exercise.public_id)
+
+    assert_response :success
+    assert_select "#exercise_header ~ div > #exercise_assign"
+    assert_select "#exercise_assign" do
+      assert_select "h2", text: I18n.t("#{scope}.show.assign_title")
+      assert_select "ul[aria-label=?]", I18n.t("#{scope}.show.assign_targets", title: "Méiose") do |list|
+        # UDR-0077 §3.3 : la ligne compacte de la fiche — la classe d'abord, la bascule (✕ seul) à droite.
+        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li [id^='assignment_'] > div > p:first-child").map { it.text.strip }
+      end
+      assert_select "[id^='assignment_']", 2
+      assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{@exercise.public_id} a[data-turbo-frame=modal][aria-label=?]",
+                    "Assigner « Méiose » à Tle D 1"
+      assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id}" do
+        assert_select "*", text: /Assigné/
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']:has(input[name=compact]) button.ui-icon-button[aria-label=?]",
+                      "Retirer « Méiose » de Tle D 2"
+      end
+      assert_select "#exercise_assign_none", 0
+    end
+    assert_select "[id^='assignment_#{tle_c1.public_id}_']", 0
+  end
+
+  test "l'enseignant sans classe de Tle D lit « Aucune de vos classes n'est en Tle D. », sans bascule" do
+    sign_in_as create_teacher(classrooms: [ create_classroom(level: @essential.course.level, series: create_series(name: "C")) ])
+
+    get exercise_path(@exercise.public_id)
+
+    assert_response :success
+    assert_select "#exercise_assign #exercise_assign_none", text: "Aucune de vos classes n'est en Tle D."
+    assert_select "[id^='assignment_']", 0
+  end
+
+  # RE-26 — UDR-0069 §3.8 : ni l'équipe ni l'élève n'ont la carte ; le menu ⋮ de l'équipe est inchangé.
+  test "l'équipe et l'élève ne voient pas « Assigner à mes classes »" do
+    create_teacher(classrooms: [ create_classroom(level: @essential.course.level, series: @essential.course.series) ])
+
+    [ [ create_team_member, 1 ], [ @student, 0 ] ].each do |user, menus|
+      sign_in_as user
+      get exercise_path(@exercise.public_id)
+
+      assert_response :success
+      assert_select "#exercise_assign", 0
+      assert_select "[id^='assignment_']", 0
+      assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: "Méiose"), menus
+      sign_out
+    end
+  end
+
   test "l'équipe ouvre un brouillon : statut, transitions, « Modifier » en modale et propositions correctes" do
     exercise = create_exercise(essential: @essential, status: "draft")
     sign_in_as create_team_member

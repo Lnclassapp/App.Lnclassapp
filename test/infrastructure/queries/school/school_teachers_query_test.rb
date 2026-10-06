@@ -79,6 +79,31 @@ module Queries
         assert_equal 3, single
       end
 
+      # Lot 3 of ecrans-direction-lents (UDR-0056, amendment of 2026-10-04): the confirmation « Retirer » loaded on demand
+      # names one teacher of this school, the same ones DetachTeacher would withdraw; nil for anyone else.
+      def teacher(public_id, school_id: @school.id) = SchoolTeachersQuery.new.teacher(school_id:, public_id:)
+
+      test "la confirmation du retrait : nom et prénom d'un enseignant de l'établissement, en une requête" do
+        awa = create_teacher(school: @school, first_name: "Awa", last_name: "Koné", material: @maths)
+
+        assert_equal 1, count_queries { teacher(awa.public_id) }
+        assert_equal SchoolTeachersQuery::Teacher.new(public_id: awa.public_id, first_name: "Awa", name: "Awa Koné"),
+                     teacher(awa.public_id)
+      end
+
+      test "la confirmation du retrait : nil pour un enseignant d'ailleurs, en attente, anonymisé, un autre rôle ou un inconnu" do
+        elsewhere = create_teacher(school: create_school)
+        anonymized = create_teacher(school: @school).tap { it.update!(anonymized_at: Time.current) }
+        pending = create_teacher(school: nil)
+        create_join_request(school: @school, teacher: pending)
+        student = create_user(role: "student")
+        Orm::TeacherSchool.create!(teacher: student, school: @school, primary: true)
+
+        [ elsewhere, anonymized, pending, student ].each { assert_nil teacher(it.public_id), it.role }
+        assert_nil teacher("abcdefghijkmno")
+        assert_nil teacher(create_teacher(school: @school).public_id, school_id: create_school.id)
+      end
+
       def count_queries(&)
         count = 0
         counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }

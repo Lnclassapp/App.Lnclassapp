@@ -13,6 +13,10 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     @student = create_student_for(@exercise.essential.course)
     @first, @second = @exercise.questions.order(:position).to_a
     @first.update!(explanation: "La méiose donne quatre cellules.")
+    # UDR-0076 §3.3 : le stream joint la question suivante ; ses propositions ont leurs propres textes, pour qu'un test
+    # anti-fuite ne confonde jamais une proposition de la question suivante avec la correction de la question tentée.
+    @second.update!(content: "La méiose réduit-elle le nombre de chromosomes ?")
+    @second.answers.each { it.update!(content: "Choix #{it.position} de la question 2") }
     @session = create_exercise_session(student: @student, exercise: @exercise)
   end
 
@@ -43,9 +47,50 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
       assert_select "#feedback-card", text: /La méiose donne quatre cellules/
       assert_select "#feedback-card", text: /#{I18n.t("#{scope}.feedback_card.selected")}/
       assert_select "#feedback-card li", text: wrong(@first).content, count: 1
+      # Le choix dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes (2026-10-06).
+      assert_select "#feedback-card li.flex > span.min-w-0", text: wrong(@first).content, count: 1
       assert_select "a[href='#{exercise_session_path(@session.public_id)}']", text: I18n.t("#{scope}.feedback_card.next")
+      # Sous lg, « Question suivante » colle au-dessus de la barre du bas, qui reste visible (décision du porteur, 2026-10-06).
+      assert_select "#feedback-card.overflow-clip #feedback-actions.sticky a.w-full", 1
     end
     assert_select "turbo-stream[action=replace][target=progress_bar] template progress[value='50']"
+  end
+
+  # UDR-0076 §3.3 (CA-7), ADR-0076 : la question suivante arrive avec le verdict, dans un <template> de la carte ; « Question
+  # suivante » l'affiche sans requête, et reste un lien vers la session (repli sans JavaScript), sans préchargement.
+  test "le verdict joint la question suivante, sans aucune correction : un aller-retour par question" do
+    sign_in_as @student
+
+    answer @first, wrong(@first)
+
+    assert_select "turbo-stream[action=replace][target=question] template turbo-frame#question " \
+                  "#feedback-card[data-controller='assessment--next-question']" do
+      assert_select "a[href=?][data-action='assessment--next-question#show'][data-turbo-prefetch=false]",
+                    exercise_session_path(@session.public_id), text: I18n.t("#{scope}.feedback_card.next")
+      assert_select "template[data-assessment--next-question-target=question] turbo-frame#question #question-card" do
+        assert_select "legend", text: "La méiose réduit-elle le nombre de chromosomes ?"
+        assert_select "form[action=?]", exercise_session_attempts_path(@session.public_id)
+        assert_select "input[type=hidden][name='attempt[question_id]'][value=?]", @second.id.to_s
+        assert_equal @second.answers.pluck(:id).map(&:to_s).sort,
+                     css_select("input[type=radio][name='attempt[answer_ids][]']").map { it["value"] }.sort
+      end
+    end
+    assert_select "[data-correct], [correct]", 0
+    assert_no_match(/correct/i, response.body.scan(/<template data-assessment--next-question-target.*?<\/template>/m).join)
+  end
+
+  # ADR-0076 §4.1 (CA-8) : ni la page de la session ni le stream d'une réponse ne vont dans un cache partagé.
+  test "ADR-0076 — la session et le stream d'une réponse ne sont jamais publics en cache" do
+    sign_in_as @student
+
+    get exercise_session_path(@session.public_id)
+    page = response.headers["Cache-Control"]
+    answer @first, wrong(@first)
+
+    [ page, response.headers["Cache-Control"] ].each do |header|
+      assert_match(/private|no-store/, header)
+      assert_no_match(/public/, header)
+    end
   end
 
   test "la correction ne contient jamais le texte d'une proposition juste que l'élève n'a pas choisie" do
@@ -89,6 +134,8 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#feedback-card", text: /#{I18n.t("#{scope}.feedback_card.verdict.success")}/
     assert_select "#feedback-card a[href='#{exercise_session_result_path(@session.public_id)}'][data-turbo-frame=_top]",
                   text: I18n.t("#{scope}.feedback_card.result")
+    assert_select "template[data-assessment--next-question-target]", 0
+    assert_select "[data-controller='assessment--next-question']", 0
   end
 
   test "réponse vide en Turbo : 422 dans la carte, avec « Sélectionne au moins une proposition. », jamais 500" do

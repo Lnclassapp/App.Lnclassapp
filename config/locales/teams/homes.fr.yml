@@ -1,11 +1,12 @@
 # Accueil équipe (plan boucle-pedagogique, Lot B6, TR-09, CA-25) — UDR-0007, UDR-0018
+# UDR-0068 §3.4 : le Référentiel a sa page ; ses clés sont passées sous teams.referentials.summary.
 fr:
   teams:
     homes:
       show:
         page_title: "Accueil"
         greeting: "Bonjour, %{name}"
-        subtitle: "Le référentiel, les établissements et le contenu de la plateforme."
+        subtitle: "Les établissements, l'activité et le contenu de la plateforme."
         regions_title: "Régions éducatives"
         regions_subtitle: "Les DRENA, leurs établissements et les classes de cette année scolaire"
         regions_action: "Voir les établissements"
@@ -21,6 +22,17 @@ fr:
         activity_title: "Activité récente"
         activity_subtitle: "Les derniers cours, exercices et imports, tous statuts confondus"
       # ADR-0036, amendement 2 : le rappel des demandes de suppression, pour l'admin seul.
+      # UDR-0070 §3.5 : directions retirées, à vérifier avant leur suppression (admin, field).
+      archived_staff:
+        title: "Directions retirées"
+        subtitle: "À vérifier avant leur suppression"
+        # suites-inscription-direction : accordé au genre du compte retiré.
+        line:
+          male: "%{name} · %{school} · retiré le %{date}"
+          female: "%{name} · %{school} · retirée le %{date}"
+        more:
+          one: "Et 1 autre, sur la fiche de son établissement."
+          other: "Et %{count} autres, sur les fiches de leurs établissements."
       deletion_requests:
         title: "Demandes de suppression"
         pending:
@@ -32,30 +44,10 @@ fr:
         schools: "Établissements"
         imports: "Importer"
         growth: "Croissance"
+        # UDR-0067 §3.1 : réservé à l'équipe Administration et Contenu, entre « Croissance » et « Inviter un membre ».
+        blog: "Blog"
         invite: "Inviter un membre"
         unlock_account: "Débloquer un compte"
-      referential:
-        title: "Référentiel"
-        subtitle: "Ce que l'équipe crée avant tout établissement, tout cours et toute classe"
-        manage: "Gérer"
-        drenas:
-          one: "DRENA"
-          other: "DRENA"
-        levels:
-          one: "niveau"
-          other: "niveaux"
-        series:
-          one: "série"
-          other: "séries"
-        materials:
-          one: "matière"
-          other: "matières"
-        classroom_plan:
-          one: "classe d'un lycée public · Barème des classes"
-          other: "classes d'un lycée public · Barème des classes"
-        structure_title: "Structure scolaire"
-        no_series: "Sans série"
-        levels_empty: "Aucun niveau pour l'instant."
       recent_content:
         courses_title: "Derniers cours"
         exercises_title: "Derniers exercices"

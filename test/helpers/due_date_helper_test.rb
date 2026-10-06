@@ -71,6 +71,13 @@ class DueDateHelperTest < ActionView::TestCase
     assert_equal "Sans date limite", due_for_teacher(nil)
   end
 
+  # UDR-0062 §3.4 : le toast d'assignation finit sur la date ; le point abréviatif du mois tient lieu de point final.
+  test "en fin de phrase : la date longue avec un seul point final" do
+    assert_equal "jeudi 8 oct.", due_closing(Date.new(2026, 10, 8))
+    assert_equal "jeudi 6 mai.", due_closing(Date.new(2027, 5, 6))
+    assert_equal "mardi 2 mars.", due_closing(Date.new(2027, 3, 2))
+  end
+
   test "les formats de la charte (§12) sont ceux de la locale" do
     assert_equal "jeu. 8 oct.", I18n.l(Date.new(2026, 10, 8), format: :due_short)
     assert_equal "mardi 29 sept.", I18n.l(Date.new(2026, 9, 29), format: :due_long)

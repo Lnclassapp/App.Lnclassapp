@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/dashboards/show — pilotage de l'équipe (TR-10, TR-11, TR-12) %>
-<%# Rôle : périmètre, filtres GET, chiffres de la période et du moment, élèves par niveau, couverture par DRENA, inscrits, recherche %>
-<%# ADR  : 0049, 0062 · UDR : 0005, 0006, 0049, 0054 · aucune bibliothèque de graphiques ; seul le filtre DRENA part au changement %>
+<%# Rôle : périmètre, filtres GET, chiffres, élèves par niveau, par DRENA (ou, sous filtre, par établissement), inscrits, recherche %>
+<%# ADR  : 0049, 0062 · UDR : 0005, 0006, 0049, 0054, 0068 · aucune bibliothèque de graphiques ; seul le filtre DRENA part au changement %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "dashboard" %>
 <% period_scope = t("teams.dashboards.period_scopes.#{@period.key}", year: @dashboard.school_year) %>
@@ -16,6 +16,11 @@
     <%= render "levels", dashboard: @dashboard %>
     <%= render "recent_signups", signups: @dashboard.recent_signups %>
   </div>
-  <%= render "drenas", rows: @dashboard.drenas, period_scope: %>
+  <%# UDR-0068 §3.6 : sous filtre, « Par DRENA » n'aurait qu'une ligne ; « Par établissement » prend sa place. %>
+  <% if @dashboard.drena && @schools %>
+    <%= render "schools", page: @schools, period: @period, drena: @dashboard.drena, search: @school_search, period_scope: %>
+  <% else %>
+    <%= render "drenas", rows: @dashboard.drenas, period_scope:, period: @period %>
+  <% end %>
   <%= render "search", search: @search, period: @period, drena: @dashboard.drena %>
 </div>

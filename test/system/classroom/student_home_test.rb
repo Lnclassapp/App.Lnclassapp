@@ -90,7 +90,7 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
           end
         end
         assert_selector "li:first-child :is(#{SobrietyAssertions::PRIMARY_ACTION})", text: tl("assigned_exercise.start")
-        assert_selector "li:not(:first-child) button.border-line.bg-white", count: 2
+        assert_selector "li:not(:first-child) button.ui-button-secondary", count: 2
         assert_button more
       end
       assert_single_primary_action
@@ -178,7 +178,11 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
     end
   end
 
+  # Challenger d'interface-eleve-organisation : une ligne avec son échéance et son bouton élargissait la carte « À faire »,
+  # case de la grille sans min-w-0, et toute la page avec elle (405 px pour 390).
   test "on a phone, the home and its bottom bar are visible, without horizontal scrolling" do
+    Orm::ClassroomAssignment.find_by!(assignable_id: @meiose.id).update!(due_on: Time.zone.today + 4)
+    @meiose.update!(title: "La méiose et la formation des gamètes chez les mammifères")
     sign_in_as @student
 
     with_mobile_viewport do

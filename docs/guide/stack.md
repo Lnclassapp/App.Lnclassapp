@@ -150,7 +150,9 @@ Si tu lis « Redux » quelque part, c'est de la doc périmée. Signale-le.
 | `rails-i18n` ~> 8.1 | Traductions Rails de base en `:fr` | `config/locales/fr.yml`, `en.yml`, `gamification.fr.yml` |
 | `bcrypt` | Mots de passe (`has_secure_password`) | `app/infrastructure/orm/user.rb` |
 | `jbuilder` | Vues JSON | rarement utilisé |
-| `debugbar`, `web-console` | Diagnostic en développement | groupe `:development` |
+| `web-console` | Console sur les pages d'erreur, en développement | groupe `:development` |
+
+> ⚠️ La gem `debugbar` **n'est plus au `Gemfile`** : retirée le 2026-10-03 par le chantier [`retrait-debugbar`](../chantiers/retrait-debugbar/memo.md). Après l'envoi d'une image, son middleware faisait répondre `500` à toutes les requêtes de développement jusqu'au redémarrage ; elle ouvrait aussi Action Cable à toute origine.
 
 > ⚠️ La gem `nanoid` **n'est plus au `Gemfile`** : supprimée par [ADR-0017](../decisions/adr/0017-remplacement-nanoid-par-secure-random.md) au profit de `SecureRandom.base58`. Détail dans [`glossaire.md` §7](glossaire.md#7-identifiants--public_id-slug).
 

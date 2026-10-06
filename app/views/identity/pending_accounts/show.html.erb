@@ -12,7 +12,8 @@
           <p class="mt-1 text-mute"><%= t(".join_request.rejected.description", school: @join_request.school_name) %></p>
         </div>
       <% end %>
-      <%= ui_empty_state title: t(".no_school.title"), description: t(".no_school.description"), icon: "building-library" %>
+      <%= ui_empty_state title: t(".no_school.title"), description: t(".no_school.description"), icon: "building-library",
+                         heading: :h1 %>
       <% if @rate_limited %>
         <%= ui_error_state title: t(".rate_limited.title"), message: t(".rate_limited.message") %>
       <% else %>
@@ -37,7 +38,8 @@
       <% key = @archived ? "former_student" : @case %>
       <% title, description, icon = t(".#{key}.title"), t(".#{key}.description"), "clock" %>
     <% end %>
-    <%= ui_empty_state title:, description:, icon: do %>
+    <%# L'état vide est toute la page : son titre en est le h1 (UDR-0054 §3.1). %>
+    <%= ui_empty_state title:, description:, icon:, heading: :h1 do %>
       <% if @case == :student %>
         <%= ui_button t(".student.join"), href: new_join_code_path, variant: :brand, icon: "academic-cap" %>
         <% if @archived %>

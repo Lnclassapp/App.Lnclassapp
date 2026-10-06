@@ -114,8 +114,8 @@ L'élève arrive au catalogue par la navigation, et bientôt par les cases de ma
 |---|---|---|---|---|
 | Sous-titre de l'en-tête | « Les cours de ton niveau, par matière. », affiché en permanence | `ui_page_header title: t(".title")`, sans sous-titre. Dans le bloc de l'en-tête : `ui_info_tip t(".student_scope"), label: t(".student_scope_label")` | R4 | Dans l'infobulle : « Tu vois seulement les cours de ton niveau. » (`student_scope`). Son nom : « Quels cours ? » (`student_scope_label`). |
 | Badge « niveau série » de chaque carte | « Tle D » ou « Tle » sur chaque carte | Non rendu pour l'élève | R6 | L'élève ne voit que son niveau : le badge redit la même chose sur chaque carte. Le niveau reste dans l'en-tête de la page du cours et de la fiche. |
-| Badge de matière de chaque carte, quand le filtre « Matière » est actif | Sur chaque carte | Non rendu pour l'élève seulement (décision du porteur du 2026-10-02) | R6 | La liste « Matière » du formulaire dit la matière, une fois. Sans filtre de matière, le badge reste sur chaque carte. |
-| Rangée des badges de la carte (`div.mb-4`) | Toujours rendue | Rendue seulement si elle porte au moins un badge | R6 (conséquence) | — |
+| Badge de matière de chaque carte, quand le filtre « Matière » est actif | Sur chaque carte | ~~Non rendu pour l'élève seulement (décision du porteur du 2026-10-02)~~ Rétabli le 2026-10-05 (amendement ter) | R6 | La liste « Matière » du formulaire dit la matière, une fois. Sans filtre de matière, le badge reste sur chaque carte. |
+| Rangée des badges de la carte (`div.mb-4`) | Toujours rendue | ~~Rendue seulement si elle porte au moins un badge~~ Toujours rendue de nouveau (amendement ter) | R6 (conséquence) | — |
 | Description de l'état « aucun résultat » | « Essayez un autre nom, un autre niveau ou une autre matière. » | Élève : « Essaye un autre nom ou une autre matière. » (`student_no_match_description`) | Clarté du filtre par matière (UDR-0058 §3.2) | L'élève n'a pas de filtre de niveau. Le texte le tutoie, comme ses autres textes. Une case de matière sans cours mène donc à un état vide juste. |
 
 **Page d'un cours** (`catalog/courses/show`, `_essential_row`)
@@ -199,3 +199,45 @@ Ce qui ne change pas pour l'élève :
 - **Amendement du 2026-10-01, puce « Assignation »** : la règle de niveau vaut désormais pour le seul exercice ; « Cela vaut pour le cours, la fiche et l'exercice » se lit « Elle vaut pour l'exercice ».
 - **Amendement du 2026-10-01, puce « Autres rôles »** : l'enseignant lit toujours tous les niveaux ; il assigne depuis sa classe (UDR-0062 §3.4), plus depuis le catalogue.
 - **Vérification** : `test/controllers/catalog/courses_controller_test.rb` — sur la page d'un cours, un enseignant ne voit aucun lien vers `course_assignments_path`, ni aucun bouton « Assigner » ; l'équipe garde `#course-actions-menu`.
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Filtre « Série »** (UDR-0069 §3.4) pour l'enseignant et l'équipe : avec un niveau, il garde les cours sans série et ceux de la série choisie (la règle de l'élève). `FILTERS = %i[level series material q]`.
+- **Puce « Autres rôles » de l'amendement du 2026-10-01** : l'enseignant assigne depuis sa classe **et** depuis le catalogue (fiche essentielle, page d'un exercice), aux seules classes de son niveau (UDR-0069 §3.8). La page d'un cours n'a toujours aucun bouton d'assignation.
+
+## Amendement du 2026-10-05 — cartes par pages de 24, la suite chargée au défilement · Statut : Accepté (porteur, 2026-10-05)
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), lot E4 (reprise du lot 5 de `cache-ecrans-lourds`). Décision du porteur, 2026-10-05 : « pagination avec du loading (Hotwire) ». En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+**Raison.** Le catalogue rendait tous les cours d'un coup, soit 210 cartes : 339 Ko de HTML pour l'enseignant et 410 Ko pour l'équipe, pour un budget de 150 Ko ([ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md)). Un cache des cartes aurait accéléré le rendu sans alléger la page.
+
+**Ce qui change**
+- `#courses_list` montre les **24 premières cartes** (`CourseCatalogQuery::PER_PAGE` : des lignes pleines sur 1, 2 ou 3 colonnes), dans l'ordre inchangé (matière, niveau, nom). `#courses_total` annonce toujours le nombre total de cours.
+- S'il reste des cours, un `turbo_frame_tag "courses_page_<n>"` (`loading: :lazy`, `target: "_top"`, `mt-5 block`) suit la liste. Il demande la page suivante, filtres et recherche compris, quand il entre à l'écran. Hors de l'écran à l'arrivée, il n'ajoute aucune requête en série au clic vers le catalogue ([ADR-0076](../adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md) §4.2).
+- La réponse (`catalog/courses/_page_frame`, sans layout) ne contient que ce frame, avec `ul#courses_list_page_<n>.mt-5` (24 cartes, icônes dessinées une fois avec un préfixe de page) et, s'il en reste, le frame de la page suivante.
+- Dans le frame, un bouton secondaire « Afficher plus de cours » vise ce frame. Sans JavaScript, il ouvre la page suivante entière (`?page=<n>`).
+- Filtrer ou chercher remplace le frame `courses` et repart de la page 1. L'élève, qui ne voit que son niveau (moins de 24 cours aujourd'hui), ne voit pas de différence.
+
+**Mesure** (`measure_screens.rb`, 210 cours, 100 requêtes, médiane de 3) : enseignant 338,8 → **62,8 Ko**, p95 97,2 → **35,3 ms** ; équipe 410,4 → **75,3 Ko**, p95 170,8 → **55,0 ms**. Le rendu de la vue passe de 53 à 16 ms (enseignant) et de 68 à 19 ms (équipe).
+
+## Amendement du 2026-10-05 (bis) — carte allégée · Statut : Accepté (porteur, 2026-10-05 : « go pour A, C et E »)
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), lot E5. Le porteur a choisi trois des cinq allègements proposés pour la carte d'un cours. En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+- **C — plus de pied « Ouvrir le cours → ».** Toute la carte est déjà le lien vers le cours (charte : « dire chaque chose une seule fois »). Le séparateur, le texte et la flèche animée disparaissent ; la carte se termine au sous-titre. Le nom accessible du lien est celui de son contenu : matière, niveau, titre et sous-titre.
+- **E — statut, pour l'équipe seulement, et seulement s'il n'est pas « Publié ».** « Publié » est l'état normal ; « Brouillon » et « Archivé » restent (`content_status_badge`). Le badge rejoint la ligne du haut, à droite, après le badge de niveau, dans un `span.flex.flex-wrap.gap-2`.
+- **A — sans changement visible.** Les badges et les cartes-liens de toute l'application portent une classe partagée (`ui-badge`, `ui-badge-sm`, `ui-badge-md`, `ui-card-link`, définies dans `application.tailwind.css`) au lieu de leur liste de classes. Les styles calculés de chaque élément de `/design`, de la liste et de la fiche des établissements sont identiques avant et après, survol compris.
+- Écartés par le porteur : B (masquer le niveau quand un niveau est filtré) et D (retirer l'icône du badge matière).
+- **Mesure** (`measure_screens.rb`, 100 requêtes, médiane de 3) : catalogue de l'enseignant 62,8 → **43,2 Ko**, de l'équipe 75,3 → **50,5 Ko**, de l'élève 46,9 → **33,6 Ko**.
+
+## Amendement du 2026-10-05 (ter) — badge de matière et pied rétablis · Statut : Accepté (porteur, 2026-10-05)
+
+*Chantier [`docs/chantiers/politique-cache`](../../chantiers/politique-cache/plan.md), révision du lot E5. Le porteur, le même jour : « la carte avec filtre est devenue trop vilaine, remettre certains éléments. Les cartes doivent être identiques à la capture sur la page /courses?material=svt ». En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+- **C est annulé : le pied « Ouvrir le cours → » revient.** Séparateur, texte et flèche animée au survol, au bas de la carte, comme avant le lot E5.
+- **Le badge de matière reste sur chaque carte, filtre « Matière » actif ou non, pour tous les rôles.** La règle R6 de l'amendement du 2026-10-02, qui le retirait à l'élève quand il filtrait par matière, est levée : sans lui ni badge de niveau, la carte de l'élève n'avait plus qu'un titre. La rangée des badges est donc toujours rendue.
+- **E est gardé, à sa place d'origine.** L'équipe ne lit le statut que s'il n'est pas « Publié » ; « Brouillon » ou « Archivé » reprend sa place dans le pied, à droite de « Ouvrir le cours → ».
+- **A est gardé** (classes partagées, sans changement visible). Le badge de niveau, hors élève, ne change pas.
+- **Mesure** (`measure_screens.rb`, 30 requêtes) : catalogue de l'enseignant **55,2 Ko**, de l'équipe **62,4 Ko**, de l'élève **42,5 Ko**, sous le plafond de 150 Ko (ADR-0067).

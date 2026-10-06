@@ -88,14 +88,20 @@ fr:
         edit: "Modifier"
         actions: "Actions pour %{name}"
         deactivate: "Désactiver"
-        deactivate_title: "Désactiver « %{name} » ?"
-        deactivate_warning: "L'établissement n'est plus proposé à l'inscription des enseignants ni à la création de classe. Ses classes, ses élèves et ses enseignants sont conservés."
-        confirm_deactivate: "Désactiver l'établissement"
         delete: "Supprimer"
-        delete_title: "Supprimer « %{name} » ?"
-        delete_warning: "L'établissement et ses classes disparaissent. Un établissement dont une classe a un élève, un enseignant ou une assignation ne peut pas être supprimé : désactivez-le plutôt."
-        confirm_delete: "Supprimer l'établissement"
+      # Lot E3 (politique-cache) : les confirmations de la liste, lues à la demande dans le frame « modal ».
+      deactivation:
+        title: "Désactiver « %{name} » ?"
+        warning: "L'établissement n'est plus proposé à l'inscription des enseignants ni à la création de classe. Ses classes, ses élèves et ses enseignants sont conservés."
+        confirm: "Désactiver l'établissement"
         cancel: "Annuler"
+        back: "← Établissements"
+      deletion:
+        title: "Supprimer « %{name} » ?"
+        warning: "L'établissement et ses classes disparaissent. Un établissement dont une classe a un élève, un enseignant ou une assignation ne peut pas être supprimé : désactivez-le plutôt."
+        confirm: "Supprimer l'établissement"
+        cancel: "Annuler"
+        back: "← Établissements"
       header:
         sigle: "Sigle :"
         drena: "DRENA"

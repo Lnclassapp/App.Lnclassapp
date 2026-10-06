@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/assignments/create — exercice assigné, ou refus en place (déjà assigné, type inconnu : 422) %>
 <%# Rôle : succès : toast (avec l'échéance s'il y en a une), bascule remplacée par « Assigné · Pour … » ; jours tout juste %>
 <%#        donnés : la page est rafraîchie par morphing, ses autres « Assigner » n'ouvrent plus la modale ; refus : toast seul %>
-<%# ADR  : 0048, 0072 · UDR : 0006, 0028, 0062 (§3.4) · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
+<%# ADR  : 0048, 0072 · UDR : 0006, 0028, 0062 (§3.4), 0069 (§3.8), 0077 (§3.3) : compact=1, la ligne compacte · Stimulus : modal (fermeture sur turbo:submit-end réussi) %>
 <% if @refusal %>
   <%= turbo_stream_toast @refusal, type: :error, title: t("classroom.assignments.refusals.title") %>
 <% else %>
@@ -11,7 +11,8 @@
                            partial: "classroom/assignments/toggle",
                            locals: { classroom_public_id: @classroom.public_id, assignable_type: assignable.type,
                                      assignable_key: assignable.key, assignable_name: assignable.name,
-                                     assignment_public_id: @assignment.public_id, due_on: @assignment.due_on } %>
+                                     assignment_public_id: @assignment.public_id, due_on: @assignment.due_on,
+                                     classroom_name: @classroom.name, compact: params[:compact].present? } %>
   <% if @days_saved %>
     <%= turbo_stream.refresh(request_id: nil) %>
   <% end %>

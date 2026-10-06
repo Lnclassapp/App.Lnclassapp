@@ -7,7 +7,8 @@ class FactoriesTest < ActiveSupport::TestCase
     %i[create_user create_student create_teacher create_team_member create_invitation create_pin_recovery_code
        create_backup_code create_login_session create_login_attempt create_audit_event create_drena create_school
        create_classroom create_assignment create_level create_series link_level_series create_material create_course
-       create_essential create_import_report create_exercise create_exercise_session create_attempt create_badge create_gap].each do |factory|
+       create_essential create_import_report create_exercise create_exercise_session create_attempt create_badge create_gap
+       create_article create_article_image].each do |factory|
       record = factory == :create_user ? create_user(role: "student") : public_send(factory)
 
       assert record.persisted?, factory
@@ -44,6 +45,27 @@ class FactoriesTest < ActiveSupport::TestCase
     assert_equal [ "principal", nil ], [ invitation.position, invitation.team_role ]
   end
 
+  # ADR-0074 : the blog factories write what the application writes; their images are checked and stored by the adapter.
+  test "an article cites its images, attached to it with its cover; an image is stored without article by default" do
+    cover = create_article_image(alt: nil)
+    images = [ create_article_image(fixture: "photos/photo.png"), create_article_image(fixture: "photos/photo_lossy.webp") ]
+    article = create_article(body: article_body_with(*images, text: "Bonjour"), cover:)
+    orphan = create_article_image(alt: "Un tableau", created_at: 3.days.ago)
+
+    assert_equal [ "published", "team", "La couverture de l'article", cover ], [ article.status, article.signature, article.cover_alt, article.cover_image ]
+    assert_equal [ cover, *images ].map(&:id).sort, article.images.pluck(:id).sort
+    assert_equal images, article.body.body.attachables
+    assert_equal "Bonjour", article.body.to_plain_text.lines.first.strip
+    assert_equal [ "image/jpeg", "image/png", "image/webp" ], [ cover, *images ].map(&:content_type)
+    assert_equal [ 64, 48 ], [ cover.width, cover.height ]
+    assert_equal [ nil, "Un tableau" ], [ orphan.article_id, orphan.alt ]
+    assert_in_delta 3.days.ago, orphan.created_at, 1.minute
+    assert orphan.file.attached?
+    assert_equal [ nil, nil ], create_article(status: "draft").then { [ it.published_at, it.archived_at ] }
+    assert create_article(status: "archived").archived_at
+    assert_raises(ArgumentError) { create_article_image(fixture: "article_images/animation.gif") }
+  end
+
   test "archived rows carry their archive date" do
     assert create_classroom(status: "archived", join_code: nil).archived_at
     assert create_assignment(status: "archived").archived_by
@@ -70,12 +92,13 @@ class FactoriesTest < ActiveSupport::TestCase
     assert create_gap(status: "remediated").resolved_at
   end
 
-  test "the seed referential gives 7 levels, 5 series, 10 pairs and 7 materials" do
+  test "the seed referential gives 7 levels, 5 series, 10 pairs and 6 materials, without Anglais" do
     referential = seed_referential
 
     assert_equal %w[6eme 5eme 4eme 3eme 2nde 1ere tle], referential[:levels].keys
     assert_equal %w[a c a1 a2 d], referential[:series].keys
-    assert_equal [ 7, 5, 10, 7 ], [ Orm::Level.count, Orm::Series.count, Orm::LevelSeries.count, Orm::Material.count ]
+    assert_nil Orm::Material.find_by(name: "Anglais"), "Lnclass ne propose pas l'Anglais (porteur, 2026-10-03)"
+    assert_equal [ 7, 5, 10, 6 ], [ Orm::Level.count, Orm::Series.count, Orm::LevelSeries.count, Orm::Material.count ]
     assert_equal %w[a c], referential[:levels]["2nde"].series.map(&:slug).sort
     assert_equal 28, Orm::ClassroomPlanEntry.count
   end

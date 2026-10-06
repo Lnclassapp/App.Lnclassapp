@@ -42,7 +42,7 @@ class Identity::ProfileNamesControllerTest < ActionDispatch::IntegrationTest
     rename(first_name: "  Aya   Marie ", as: :turbo_stream)
 
     assert_response :success
-    assert_select "turbo-stream[action=append][target=toasts]", text: /Votre nom est enregistré\./
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Ton nom est enregistré\./
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=replace][target=profile_information] template #profile_information dd", text: /Aya Marie Koné/
     assert_equal [ "Aya Marie", "Koné" ], [ @student.reload.first_name, @student.last_name ]
@@ -60,14 +60,14 @@ class Identity::ProfileNamesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to profile_path
     assert_response :see_other
     follow_redirect!
-    assert_select "#toasts", text: /Votre nom est enregistré\./
+    assert_select "#toasts", text: /Ton nom est enregistré\./
     assert_select "#profile_information dd", text: /Aya Marie Koné/
   end
 
   test "an empty, blank or too long name is refused in 422 in the modal, and nothing is written" do
     sign_in_as @student
 
-    [ { last_name: "", message: "Saisissez votre nom." }, { first_name: "   ", message: "Saisissez votre ou vos prénoms." },
+    [ { last_name: "", message: "Le nom est obligatoire." }, { first_name: "   ", message: "Le ou les prénoms sont obligatoires." },
       { last_name: "a" * 51, message: "Le nom compte 50 caractères au plus." },
       { first_name: "b" * 81, message: "Les prénoms comptent 80 caractères au plus." } ].each do |attributes|
       message = attributes.delete(:message)

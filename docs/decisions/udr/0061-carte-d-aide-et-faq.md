@@ -6,6 +6,7 @@
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q4, Q13, Q14 ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script tiers, CSP stricte) · [UDR-0057](0057-ecrans-eleve-epures.md) (règle R1 à R6, deux familles) · [UDR-0058](0058-accueil-eleve.md) (accueil élève) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (motif des écrans d'entrée) · [UDR-0054](0054-finitions-d-interface.md) (retour, titre, focus) · [UDR-0005](0005-design-system-fondateur.md) (tokens, `ui_modal`) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) (pages publiques liées depuis `/aide`) |
+| **Amendé par** | [UDR-0066](0066-blog-public-liste-article-et-partage.md) : §3.3 point 3 et §3.5 (pied de la carte d'aide) |
 | **Remplacé par** | — |
 
 ---
@@ -154,3 +155,36 @@ Les trois ronds ont la **même teinte**. L'exemple du porteur teinte chaque rond
 - L'UDR-0058 §3.2 (bandeau téléphone, « Aucun bouton d'aide tant qu'aucune page d'aide n'existe ») est à amender en phase 2 d'`interface-epuree` : l'icône d'aide y revient.
 - Aucun service tiers, aucun cookie, aucune donnée envoyée : la carte ne fait qu'afficher des liens.
 - Interdit désormais : écrire un numéro de support dans une vue ou une locale ; un widget de discussion chargé depuis un tiers.
+
+## Amendement du 2026-10-02 — pied de la carte d'aide (blog)
+
+*Chantier [`docs/chantiers/blog`](../../chantiers/blog/plan.md), Lot 0. Statut : accepté (porteur, 2026-10-02 : délégation). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **§3.3, point 3 (pied de la carte, jamais construit jusqu'ici)** : sous la liste des contacts, `nav#help_sheet_links` (`aria-label` `shared.help_sheet.footer.label`, « Plus sur Lnclass ») liste `[ blog_link, *public_page_links(%i[mission privacy terms]) ].compact` : « Blog » (seulement s'il a un article publié), « Notre mission », « Protection des données », « Conditions d'utilisation » ([UDR-0066](0066-blog-public-liste-article-et-partage.md) §3.5).
+- **§3.5** : les clés `shared.help_sheet.footer.mission`, `.privacy` et `.terms` **ne sont pas créées** ; les libellés sont ceux de `public_pages.links` (une page a un seul nom dans l'application) ; « Confidentialité » devient « Protection des données ». Seule `shared.help_sheet.footer.label` est ajoutée.
+- Le focus d'ouverture reste sur « Questions fréquentes ».
+
+## Amendement du 2026-10-06 — accueil élève sur téléphone
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md). Décisions du porteur du 2026-10-06. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Sous lg**, l'accueil élève n'affiche plus « Bonjour, prénom » (le `<h1>` reste, pour les lecteurs d'écran) ni le bouton « Besoin d'aide ? » : la carte de classe ouvre la page, ses deux coins du haut arrondis.
+- « Besoin d'aide ? » devient la **première entrée du menu du compte** (`content_for :account_menu`, `ui_dropdown_item dialog: "help-sheet"`) et ouvre la même carte d'aide, rendue une seule fois. Sur ordinateur, le bouton reste à droite du titre.
+- Sous lg, l'avatar de l'en-tête se colle au bord droit (`pr-2`).
+
+## Amendement du 2026-10-06 — la FAQ dans le shell une fois connecté (lot 10)
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md), lot 10. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+Constat (Collège Saint Michel, 390 et 1280 px) : l'élève qui ouvre « Questions fréquentes » depuis le menu du compte quitte son application. Plus d'en-tête ni de barre du bas : il ne revient qu'avec le lien de retour. Sous les questions, « Protection des données » et « Conditions d'utilisation » font **18 px** de haut.
+
+- **§3.1, « Mise en page »** : « layout `application`, sans le shell : la page est la même connecté ou non » est remplacé.
+  - **Compte connecté** : `/aide` se rend dans le shell de son rôle (`layouts/shell`, en-tête, barre latérale, barre du bas). La page a `ui_page_header` (« Questions fréquentes », un seul `h1`, retour « Accueil » vers l'accueil du rôle, `home_path_for`), puis une `ui_card` `padding: :lg` qui porte les questions. Pas de logo : l'en-tête du shell le porte. Sous 640 px, la carte est bord à bord (`data-bleed`, amendement du 2026-10-06 de l'UDR-0005).
+  - **Visiteur**, et **enseignant en attente d'école** (ADR-0063 : il n'a pas de navigation) : la page d'entrée actuelle, inchangée (logo, retour vers `root_path`, `h1` dans la carte).
+  - Un compte d'équipe dont le second facteur n'est pas vérifié n'a pas encore d'acteur : il garde la page d'entrée.
+  - Le contrôleur décide (`Communication::HelpController#in_shell?`) ; la liste des questions est un partiel commun, `communication/help/_questions`. `shell_user` passe d'`AuthenticatedController` au concern `ShellLayout`, partagé par les deux contrôleurs.
+  - Aucune fuite par cache : le HTML est toujours `private, max-age=0` (ADR-0076).
+- **« Vos données »** (amendement de l'UDR-0063 §3.4 ci-dessus) : la phrase reste au-dessus, et les liens passent sur une ligne à eux, `flex flex-wrap gap-x-5`. Chaque lien est une cible de 48 px (`inline-flex min-h-tap items-center`), toujours souligné. Le séparateur « · » disparaît : l'écart le remplace.
+- Les textes ne changent pas.
+
+**Preuves** : `test/controllers/communication/help_controller_test.rb` (shell et retour vers l'accueil de l'élève ; page d'entrée du visiteur et de l'enseignant en attente ; liens de 48 px), `test/controllers/communication/pages_controller_test.rb`, `test/system/communication/help_test.rb` (à 390 px, la barre du bas reste, sans défilement en largeur).

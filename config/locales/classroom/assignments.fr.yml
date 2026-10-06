@@ -1,5 +1,6 @@
 # Assignation d'un exercice à une classe : bascule, modale des jours de séance et streams (plan boucle-pedagogique, Lot D5 ;
-# fonctions-espace-eleve, Lot C) — ADR-0048, ADR-0072, UDR-0007, UDR-0028, UDR-0062 §3.4
+# fonctions-espace-eleve, Lot C ; reorganisation-equipe-enseignant, Lot F) — ADR-0048, ADR-0072, UDR-0007, UDR-0028, UDR-0062 §3.4,
+# UDR-0069 §3.8
 fr:
   classroom:
     assignments:
@@ -9,6 +10,9 @@ fr:
         assigned: "Assigné"
         archive: "Retirer"
         archive_label: "Retirer « %{name} » de la classe"
+        # UDR-0069 §3.8 : la page porte les bascules de plusieurs classes (catalogue) ; le libellé nomme la classe.
+        assign_to_label: "Assigner « %{name} » à %{classroom}"
+        archive_from_label: "Retirer « %{name} » de %{classroom}"
       new:
         title: "Quels jours voyez-vous la %{classroom} ?"
         context: "%{name} sera à rendre pour la séance suivante."
@@ -32,7 +36,8 @@ fr:
           "6": "Samedi"
       create:
         done: "%{name} ajouté à %{classroom}."
-        done_due: "%{name} ajouté à %{classroom}, à rendre %{date}."
+        # %{date} porte le point final (DueDateHelper#due_closing) : « oct. » n'en reçoit pas un second.
+        done_due: "%{name} ajouté à %{classroom}, à rendre %{date}"
       archive:
         done: "%{name} retiré de %{classroom}."
       refusals:

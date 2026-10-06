@@ -8,8 +8,9 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   JOIN_CODE_LENGTH = defined?(Entities::Classroom::JoinCode::LENGTH) ? Entities::Classroom::JoinCode::LENGTH : 5
 
   PUBLIC_ID_TABLES = %w[users drenas schools classrooms classroom_assignments exercises exercise_sessions
-                        knowledge_gaps import_reports school_join_requests].freeze
-  SLUG_TABLES = %w[drenas levels series materials courses essentials].freeze
+                        knowledge_gaps import_reports school_join_requests articles article_images
+                        message_illustrations].freeze
+  SLUG_TABLES = %w[drenas levels series materials courses essentials articles].freeze
 
   # table => [[columns], where] for every unique index beyond public_id and slug. The
   # condition is compared without casts, parentheses nor spaces: PostgreSQL rewrites it.
@@ -72,11 +73,16 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
                           "status" => %w[queued validating importing completed rejected failed] },
-    "classroom_plan_entries" => { "school_type" => %w[public private] }
+    "classroom_plan_entries" => { "school_type" => %w[public private] },
+    "articles" => { "status" => %w[draft published archived], "signature" => %w[team author] }, # ADR-0074 §4.1
+    "article_images" => { "content_type" => %w[image/jpeg image/png image/webp] },
+    "messages" => { "theme" => %w[ciel lagune menthe citron mangue corail hibiscus lavande indigo nuit] } # ADR-0081 §4.2
   }.freeze
 
   # ADR-0036 : the closed list of cascades, from a parent to its technical rows.
   CASCADES = %w[sessions login_attempts totp_credentials backup_codes pin_recovery_codes].freeze
+  # ADR-0078 §4.1 : the targeted classrooms and the dismissals of an announcement go with it.
+  MESSAGE_CASCADES = %w[message_classrooms message_dismissals].freeze
   FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
 
   def connection = ActiveRecord::Base.connection
@@ -172,7 +178,26 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     admin = create_school_admin(school:)
 
     assert_raises(ActiveRecord::RecordNotUnique) { Orm::SchoolStaff.create!(user: admin, school: create_school) }
-    assert_equal %w[created_at id invited_by_id school_id user_id], connection.columns("school_staffs").map(&:name).sort
+    assert_equal %w[archived_at archived_by_id created_at id invited_by_id joined_via school_id user_id],
+                 connection.columns("school_staffs").map(&:name).sort
+  end
+
+  # ADR-0077 §4.1 : une arrivée vaut invitation ou code ; archivé et auteur du retrait vont ensemble.
+  test "ID-08: school_staffs joined_via and archiving are constrained" do
+    admin = create_school_admin
+    staff = Orm::SchoolStaff.find_by!(user: admin)
+    bare = create_user(role: "school_admin")
+    connection.execute("INSERT INTO school_staffs (user_id, school_id, created_at) VALUES (#{bare.id}, #{staff.school_id}, now())")
+
+    assert_equal "invitation", Orm::SchoolStaff.find_by!(user: bare).joined_via
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { staff.update_columns(joined_via: "self") }
+    end
+    assert_raises(ActiveRecord::CheckViolation) do
+      connection.transaction(requires_new: true) { staff.update_columns(archived_at: Time.current) }
+    end
+    staff.update_columns(archived_at: Time.current, archived_by_id: create_team_member.id)
+    assert_not_nil staff.reload.archived_at
   end
 
   test "DS-01: a school staff invitation needs a school, not a position" do
@@ -227,6 +252,134 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::School.where(id: school.id).delete_all } }
   end
 
+  # ADR-0074 §4.1 : un article, ses images ; la base refuse ce que le domaine refuse déjà.
+  test "BL: the database refuses an article or an image the blog must never hold" do
+    author = create_team_member(team_role: "content", second_factor: false)
+    article = lambda do |**columns|
+      Orm::Article.insert!({ public_id: SecureRandom.base58(14), slug: "a-#{SecureRandom.hex(4)}", title: "Réviser",
+                             author_id: author.id, created_at: Time.current, updated_at: Time.current, **columns })
+    end
+    image = lambda do |**columns|
+      Orm::ArticleImage.insert!({ public_id: SecureRandom.base58(14), content_type: "image/jpeg", byte_size: 1000,
+                                  width: 1600, height: 900, created_at: Time.current, updated_at: Time.current, **columns })
+    end
+    article.call
+    image.call
+    article.call(status: "published", excerpt: "Un plan.", published_at: Time.current)
+    article.call(status: "archived", excerpt: "Un plan.", published_at: Time.current, archived_at: Time.current)
+    image.call(byte_size: 1_048_576, width: 1, height: 1)
+
+    {
+      "a status in French" => -> { article.call(status: "publié") },
+      "an unknown signature" => -> { article.call(signature: "x") },
+      "a blank title" => -> { article.call(title: "  ") },
+      "a published article without excerpt" => -> { article.call(status: "published", excerpt: " ", published_at: Time.current) },
+      "a published article without date" => -> { article.call(status: "published", excerpt: "Un plan.") },
+      "an archived article without archived_at" => -> { article.call(status: "archived", excerpt: "Un plan.", published_at: Time.current) },
+      "an archive date on a draft" => -> { article.call(archived_at: Time.current) },
+      "a negative reads count" => -> { article.call(reads_count: -1) },
+      "an image of 1601 px" => -> { image.call(width: 1601) },
+      "an image of 0 px" => -> { image.call(height: 0) },
+      "a GIF" => -> { image.call(content_type: "image/gif") },
+      "an empty file" => -> { image.call(byte_size: 0) },
+      "1 MB and 1 byte" => -> { image.call(byte_size: 1_048_577) }
+    }.each do |label, insert|
+      assert_raises(ActiveRecord::CheckViolation, label) { connection.transaction(requires_new: true) { insert.call } }
+    end
+  end
+
+  test "BL: an article and its images keep their author, their article and their cover (RESTRICT)" do
+    assert_equal({ "author_id" => "users", "cover_image_id" => "article_images" },
+                 connection.foreign_keys("articles").to_h { [ it.column, it.to_table ] })
+    assert_equal({ "article_id" => "articles" }, connection.foreign_keys("article_images").to_h { [ it.column, it.to_table ] })
+    assert((connection.foreign_keys("articles") + connection.foreign_keys("article_images")).all? { it.on_delete == :restrict })
+    assert_equal({ "slug" => 140, "title" => 120, "excerpt" => 200, "cover_alt" => 150 },
+                 connection.columns("articles").select { it.limit && it.type == :string }.to_h { [ it.name, it.limit ] }.except("public_id"))
+    assert_equal 150, connection.columns("article_images").find { it.name == "alt" }.limit
+    assert_equal [ [ %w[published_at id], "status='published'" ] ],
+                 connection.indexes("articles").reject(&:unique).filter_map { [ it.columns, it.where&.gsub(/::[\w ]+|[()"\s]/, "") ] if it.where }
+    assert_includes connection.indexes("articles").map(&:columns), %w[author_id]
+    assert_not connection.indexes("articles").any? { it.columns.include?("reads_count") }
+  end
+
+  # ADR-0081 §4.2 et §4.3 : une annonce a l'un des dix thèmes, et exactement une illustration, de base ou de l'équipe.
+  # Une illustration de l'équipe garde un nom, une viewBox et ses formes reconstruites (une liste, 500 au plus).
+  ILLUSTRATION_SHAPE = { "name" => "rect", "attributes" => { "x" => "8", "y" => "8", "width" => "48", "height" => "48" },
+                         "children" => [] }.freeze
+
+  def insert_message(**columns)
+    @announcer ||= create_team_member(second_factor: false)
+    Orm::Message.insert!({ public_id: SecureRandom.base58(14), author_id: @announcer.id, title: "Rentrée", body: "Lundi.",
+                           audience: "all", status: "draft", illustration: "info", created_at: Time.current,
+                           updated_at: Time.current, **columns })
+  end
+
+  def insert_illustration(**columns)
+    @illustrator ||= create_team_member(second_factor: false)
+    Orm::MessageIllustration.insert!({ public_id: SecureRandom.base58(14), name: "Bus scolaire", view_box: "0 0 64 64",
+                                       shapes: [ ILLUSTRATION_SHAPE ], created_by_id: @illustrator.id,
+                                       created_at: Time.current, updated_at: Time.current, **columns })
+  end
+
+  def refused(error = ActiveRecord::CheckViolation, label = "", &)
+    assert_raises(error, label.to_s) { connection.transaction(requires_new: true, &) }
+  end
+
+  test "AV-07 — a message's theme is one of the ten, ciel by default; the database refuses any other" do
+    theme = connection.columns("messages").find { it.name == "theme" }
+
+    assert_equal [ :string, false, "ciel" ], [ theme.type, theme.null, theme.default ]
+    assert_equal "ciel", Orm::Message.find(insert_message.rows.first.first).theme
+    Entities::Communication::Message::THEMES.each { |key| assert insert_message(theme: key), key }
+    [ "rouge", "Ciel", "", " ciel" ].each { |key| refused(ActiveRecord::CheckViolation, key) { insert_message(theme: key) } }
+    refused(ActiveRecord::NotNullViolation) { insert_message(theme: nil) }
+    assert_match(/\btheme\b.*#{Entities::Communication::Message::THEMES.map { "'#{it}'" }.join('.*')}/m,
+                 connection.check_constraints("messages").find { it.name == "messages_theme_values" }.expression)
+  end
+
+  test "AV-09 — a message carries exactly one illustration: a base key or a drawing of the team, never both nor none" do
+    drawing = insert_illustration.rows.first.first
+
+    assert insert_message(illustration: "info", illustration_id: nil)
+    assert insert_message(illustration: nil, illustration_id: drawing)
+    refused { insert_message(illustration: nil, illustration_id: nil) }
+    refused { insert_message(illustration: "info", illustration_id: drawing) }
+    refused { insert_message(illustration: "rocket") }
+    refused(ActiveRecord::InvalidForeignKey) { insert_message(illustration: nil, illustration_id: 0) }
+    assert connection.columns("messages").find { it.name == "illustration" }.null
+    assert_equal "num_nonnulls(illustration, illustration_id) = 1",
+                 connection.check_constraints("messages").find { it.name == "messages_one_illustration" }.expression
+    assert_includes connection.indexes("messages").map(&:columns), %w[illustration_id]
+  end
+
+  test "AV-08 — a drawing of the team has a name of 30 characters, a viewBox and a list of at most 500 shapes" do
+    assert insert_illustration(name: "a" * 30, retired_at: Time.current)
+    assert insert_illustration(shapes: [ ILLUSTRATION_SHAPE ] * 500)
+    refused(ActiveRecord::ValueTooLong) { insert_illustration(name: "a" * 31) }
+    [ "", "   " ].each { |name| refused(ActiveRecord::CheckViolation, name.inspect) { insert_illustration(name:) } }
+    %i[name view_box shapes created_by_id].each do |column|
+      refused(ActiveRecord::NotNullViolation, column) { insert_illustration(column => nil) }
+    end
+    [ {}, "rect", 1, ILLUSTRATION_SHAPE ].each { |shapes| refused(ActiveRecord::CheckViolation, shapes.inspect) { insert_illustration(shapes:) } }
+    refused { insert_illustration(shapes: [ ILLUSTRATION_SHAPE ] * 501) }
+    refused(ActiveRecord::InvalidForeignKey) { insert_illustration(created_by_id: 0) }
+    assert_equal %w[message_illustrations_name_present message_illustrations_shapes_array message_illustrations_shapes_max],
+                 connection.check_constraints("message_illustrations").map(&:name).sort
+    assert_equal({ "name" => 30, "public_id" => 14 },
+                 connection.columns("message_illustrations").select { it.type == :string && it.limit }.to_h { [ it.name, it.limit ] })
+    assert_equal :jsonb, connection.columns("message_illustrations").find { it.name == "shapes" }.sql_type.to_sym
+  end
+
+  test "AV-10 — a drawing is never deleted under a message, nor its author under it (RESTRICT)" do
+    drawing = insert_illustration.rows.first.first
+    insert_message(illustration: nil, illustration_id: drawing)
+
+    assert_equal({ "created_by_id" => "users" }, connection.foreign_keys("message_illustrations").to_h { [ it.column, it.to_table ] })
+    assert_equal "message_illustrations", connection.foreign_keys("messages").find { it.column == "illustration_id" }.to_table
+    refused(ActiveRecord::InvalidForeignKey) { Orm::MessageIllustration.where(id: drawing).delete_all }
+    refused(ActiveRecord::InvalidForeignKey) { Orm::User.where(id: @illustrator.id).delete_all }
+  end
+
   test "every exposed table has a 14 character public_id with a unique index" do
     PUBLIC_ID_TABLES.each do |table|
       column = connection.columns(table).find { |candidate| candidate.name == "public_id" }
@@ -273,7 +426,9 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   test "every foreign key restricts deletion, except the closed list of cascades" do
     application_tables.each do |table|
       connection.foreign_keys(table).each do |foreign_key|
-        expected = CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id" ? :cascade : :restrict
+        cascade = (CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id") ||
+                  (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages")
+        expected = cascade ? :cascade : :restrict
 
         assert_equal expected, foreign_key.on_delete, "#{table}.#{foreign_key.column}"
       end

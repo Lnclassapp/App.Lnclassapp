@@ -1,0 +1,8 @@
+<%# 🌐 UI · teams/school_staff_members/destroy — l'équipe retire une direction depuis la fiche (ID-18) %>
+<%# Rôle : toast, ligne retirée avec sa modale, places « par le code » recomptées, « Directions retirées » à jour %>
+<%# ADR  : 0077 · UDR : 0006, 0070 (§3.4, §3.5) · le bloc des retirés est rendu même vide, sa cible restant sur la fiche %>
+<%= turbo_stream_toast @notice, type: :success %>
+<%= turbo_stream.remove "school_staff_#{@archived.staff.user_public_id}" %>
+<%= turbo_stream.replace "school_staff_places", partial: "shared/school_staff_places", locals: { by_code_count: @by_code_count } %>
+<%= turbo_stream.replace "school_archived_staff", partial: "teams/schools/archived_staff",
+                                                  locals: { school_public_id: @school.public_id, rows: @archived_staff, can_restore: @can_restore } %>

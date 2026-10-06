@@ -1,4 +1,4 @@
-# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056
+# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068, UDR-0071, UDR-0074
 fr:
   layouts:
     shell:
@@ -16,18 +16,24 @@ fr:
       classrooms: "Classes"
       schools: "Établissements"
       imports: "Imports"
+      referential: "Référentiel"
       dashboard: "Pilotage"
       teachers: "Enseignants"
-      student_work: "Travail des élèves"
       school: "Établissement"
+      announcements: "Annonces"
       profile: "Mon profil"
       sign_out: "Se déconnecter"
       header:
         account: "Mon compte"
       sidebar:
         label: "Navigation principale"
+        # UDR-0068 §3.1 : titre de la 2e carte, par rôle ayant une liste secondaire.
+        secondary_label:
+          team: "Configuration"
       bottom_bar:
         label: "Navigation principale"
+        more: "Plus"
+        more_label: "Plus de destinations : %{entries}"
     home:
       skeleton:
         greeting: "Bonjour, %{name}"
@@ -41,6 +47,14 @@ fr:
           title: "À faire"
           subtitle: "Les exercices donnés par tes enseignants"
           empty: "Rien à faire pour l'instant"
+        subjects:
+          title: "Mes matières"
+          subtitle: "Les cours de ton niveau, matière par matière"
+          empty: "Aucune matière pour l'instant"
+        announcements:
+          title: "Annonces"
+          subtitle: "Ce que t'annoncent tes enseignants, ta direction et Lnclass"
+          empty: "Aucune annonce pour le moment"
         classroom:
           title: "Ma classe"
           subtitle: "Tes enseignants et tes camarades"

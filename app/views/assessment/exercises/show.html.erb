@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/show — page d'un exercice (AS-02), pour l'élève, l'enseignant et l'équipe %>
-<%# Rôle : en-tête (contexte : le cours seul pour l'élève) ; progression et « Commencer » de l'élève ; statut et menu ⋮ (modifier, publier, archiver) de l'équipe ; aperçu des questions %>
-<%# ADR  : 0028, 0054 · UDR : 0006, 0007, 0021, 0042, 0054, 0057 · aucun cache : le HTML dépend du rôle (sécurité n° 29) %>
+<%# Rôle : en-tête (contexte : le cours seul pour l'élève) ; progression et « Commencer » de l'élève ; statut et menu ⋮ de l'équipe ; « Assigner à mes classes » de l'enseignant ; aperçu des questions %>
+<%# ADR  : 0028, 0054, 0072 · UDR : 0006, 0007, 0021, 0042, 0054, 0057, 0062, 0069 · aucun cache : le HTML dépend du rôle (sécurité n° 29) %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
@@ -38,6 +38,26 @@
 </div>
 
 <div class="space-y-10">
+  <% if @targets %>
+    <%= ui_card title: t(".assign_title"), icon: "user-group", id: "exercise_assign" do %>
+      <% if @targets.classrooms.any? %>
+        <%# UDR-0077 §3.3 : la ligne compacte de la fiche, une par classe. %>
+        <ul class="-mx-1 divide-y divide-line rounded-ln border border-line" aria-label="<%= t(".assign_targets", title: exercise.title) %>">
+          <% @targets.classrooms.each do |target| %>
+            <% state = @targets.states[[ target.public_id, exercise.public_id ]] %>
+            <li>
+              <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
+                         assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
+                         assignment_public_id: state&.assignment_public_id, due_on: state&.due_on,
+                         needs_session_days: target.needs_session_days, compact: true %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p id="exercise_assign_none" class="text-sm text-mute"><%= t(".assign_none", level: @targets.scope_label) %></p>
+      <% end %>
+    <% end %>
+  <% end %>
   <% if @progress %>
     <%= render "student_progress", progress: @progress, exercise: %>
   <% end %>
