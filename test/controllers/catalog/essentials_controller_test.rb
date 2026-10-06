@@ -53,18 +53,18 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
       assert_select "a.line-clamp-2.after\\:absolute.after\\:inset-0[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
       assert_select "p.text-mute", text: I18n.t("#{scope}.exercise_progress.exercise_types.fixation")
       assert_select "*", text: /Deux divisions successives|Badge|Meilleur score|Acquis|question/, count: 0
-      assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}'] button.bg-ink",
+      assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}'] button.ui-button-primary",
                     text: I18n.t("#{scope}.exercise_progress.redo")
     end
     assert_select row_of(doing) do
       assert_select "p.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.fixation")} · " \
                                          "#{I18n.t("#{scope}.exercise_progress.assigned")}"
-      assert_select "a.border-line[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.exercise_progress.resume")
+      assert_select "a.ui-button-secondary[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.exercise_progress.resume")
       assert_select "form", 0
     end
     # R1 : seule la première ligne garde « primary » ; aucun « brand ».
-    assert_select "#essential_exercises .bg-ink", 1
-    assert_select "#essential_exercises .bg-brand", 0
+    assert_select "#essential_exercises .ui-button-primary", 1
+    assert_select "#essential_exercises .ui-button-brand", 0
 
     assert_select "#essential_team_actions", 0
     assert_select "#content_status_essential_#{@essential.slug}", 0
@@ -109,8 +109,8 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
       assert_select "li[hidden]", text: /Caryotype/
       assert_select "button[data-action='reveal#more']", text: I18n.t("components.reveal.more")
     end
-    assert_select "#essential_exercises .bg-ink", 1
-    assert_select "#{row_of(@exercise)} .bg-ink", 1
+    assert_select "#essential_exercises .ui-button-primary", 1
+    assert_select "#{row_of(@exercise)} .ui-button-primary", 1
   end
 
   test "the teacher reads the published exercises, without progress, session button nor team menu" do
@@ -124,7 +124,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_header p", text: I18n.t("#{scope}.show.eyebrow", course: "Génétique et évolution")
     assert_select row_of(@exercise) do
       assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
-      assert_select "a.border-line[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
+      assert_select "a.ui-button-secondary[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
       assert_select "*", text: /Deux divisions successives\./
       assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.exercise_types.fixation")}/
       assert_select "*", text: /#{I18n.t("#{scope}.exercise_progress.questions", count: 2)}/
@@ -133,7 +133,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_no_match(/Brouillon caché/, response.body)
     assert_select "#essential_team_actions", 0
-    assert_select "#essential_exercises .bg-ink, #essential_exercises .bg-brand", 0
+    assert_select "#essential_exercises .ui-button-primary, #essential_exercises .ui-button-brand", 0
   end
 
   # RE-21, RE-23 — UDR-0069 §3.8 : sous chaque exercice publié, une bascule par classe de l'enseignant du niveau et de la
@@ -168,7 +168,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
         assert_select "div > p.text-xs", text: "Pour jeu. 8 oct."
         assert_select "*", text: /Assigné/
         assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=compact][value='1']"
-        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button.size-tap[aria-label=?]",
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button.ui-icon-button[aria-label=?]",
                       "Retirer « Méiose et ADN » de Tle D 1", text: ""
       end
       # Tle D 2 : pas encore de jours, « Assigner » ouvre la modale des jours.

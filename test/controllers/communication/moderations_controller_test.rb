@@ -90,7 +90,7 @@ module Communication
           assert_select "h2", tm("withdraw_title")
           assert_select "p", tm("withdraw_text")
           assert_select "button[data-action='modal#close']", tm("cancel")
-          assert_select "form[action=?][method=post] button[type=submit][data-turbo-stream=true].bg-error",
+          assert_select "form[action=?][method=post] button[type=submit][data-turbo-stream=true].ui-button-danger",
                         announcement_withdrawal_path(fiche.public_id), text: tm("withdraw")
         end
       end

@@ -85,7 +85,8 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     classes = css_select("#main a[data-turbo-frame=modal]").map { it["class"] }
     assert_equal 4, classes.size
     assert_equal 1, classes.uniq.size, "styles : #{classes.uniq.inspect}"
-    assert_includes classes.first.split, "min-h-tap"
+    # Lot E6 (politique-cache): « md » is the shared class ui-button-md, whose min-h-tap (48 px) shared_classes_test freezes.
+    assert_includes classes.first.split, "ui-button-md"
   end
 
   test "UDR-0041: the student's profile modals say « tu », a teacher's keep « vous »" do

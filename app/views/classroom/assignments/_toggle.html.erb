@@ -16,7 +16,7 @@
       <span class="text-sm text-mute"><%= due_for_teacher(due_on) %></span>
     <% end %>
     <%# Compact : ✕ seul, cible de 48 px ; son aria-label nomme l'exercice et la classe. %>
-    <% archive_class = compact ? "grid size-tap shrink-0 cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand" : class_names(button, ComponentsHelper::BUTTON_VARIANTS[:ghost]) %>
+    <% archive_class = compact ? "ui-icon-button shrink-0" : class_names(button, ComponentsHelper::BUTTON_VARIANTS[:ghost]) %>
     <%= button_to archive_assignment_path(assignment_public_id), method: :patch, params: { classroom_public_id:, **compact_param },
                   form_class: "contents", class: archive_class, "aria-label": archive_label do %>
       <%= ui_icon "x-mark", size: :sm %><%= t(".archive") unless compact %>

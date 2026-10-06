@@ -23,7 +23,8 @@ Lot 0 — Bench et décision (fait en cadrage : 3 scripts, mesure « avant », A
         ├─ E2 — Icônes dessinées une fois sur les listes lourdes         FAIT (poids réduit, budget non atteint)
         ├─ E3 — Confirmations des établissements et des DRENA à la demande   FAIT (porteur, 2026-10-05)
         ├─ E4 — Catalogue par pages de 24, la suite au défilement       FAIT (porteur, 2026-10-05)
-        └─ E5 — Cartes du catalogue allégées (A, C, E)                  FAIT (porteur, 2026-10-05)
+        ├─ E5 — Cartes du catalogue allégées (A, C, E)                  FAIT (porteur, 2026-10-05)
+        └─ E6 — Classes de composant courtes, trois écrans > 150 Ko     FAIT (poids réduit, budget non atteint)
 ```
 
 Ordre par gain/risque au cadrage : A → B → D → R → C. Après les décisions du porteur, il reste **D** (sans code, premières visites) puis **R** (le seul levier sur toutes les pages, mais une migration de base).
@@ -196,6 +197,15 @@ Vérification après activation : `curl -sv --http2 https://lnclass.com/login 2>
 - **Done quand**   : le catalogue s'allège au même volume. **Tenu** : enseignant 62,8 → 43,2 Ko, équipe 75,3 → 50,5 Ko, élève 46,9 → 33,6 Ko
 - **Révision du porteur (2026-10-05)** : la carte filtrée de l'élève, réduite à son titre, est jugée trop pauvre. C est annulé (pied « Ouvrir le cours → » rétabli, statut « Brouillon » ou « Archivé » de nouveau dans le pied) et le badge de matière reste sur chaque carte, filtre actif ou non (UDR-0013, amendement ter). Catalogue : enseignant 55,2 Ko, équipe 62,4 Ko, élève 42,5 Ko
 
+### E6 — Classes de composant courtes, sur les trois écrans au-dessus de 150 Ko ✅ *(décision du porteur, 2026-10-05 ; gain partiel)*
+
+- **Reprise du 2026-10-06** : la PR #184 (E3 à E5) est fusionnée ; E6 repart d'une branche neuve depuis `Develop` (7f48b744). Vérifié avant de reprendre : `Develop` n'a ni `ui-button` ni `ui-menu`, ni `ui-dialog`, ni `ui-avatar` ; `BUTTON_BASE` y est encore la longue liste de classes. Le travail mis de côté s'applique sans conflit de code (un seul test en conflit : la PR #186 y attend « Refaire » au lieu de « Commencer », gardé)
+- **Couche**       : UI (feuille de style, `ComponentsHelper`, composants, liste des élèves d'une classe)
+- **Fichiers**     : `app/assets/stylesheets/application.tailwind.css` (`ui-button*`, `ui-icon-button`, `ui-menu*`, `ui-dialog`, `ui-avatar`), `app/helpers/components_helper.rb`, `app/javascript/controllers/dropdown_controller.js`, `app/views/components/{_dropdown,_modal,_toast}.html.erb`, `app/views/shared/navigation/_more_menu.html.erb`, `app/views/classroom/classrooms/_roster.html.erb`, `test/design/shared_classes_test.rb`, `test/support/sobriety_assertions.rb`, tests de helper, de contrôleur et système qui lisaient les anciennes classes, UDR-0005 (amendement)
+- **Levier**       : celui de E5 A, étendu aux boutons, aux menus ⋮, aux modales et aux avatars : une classe partagée remplace la longue liste répétée à chaque ligne, sans changement visible. Le contrôleur du menu n'écoute le document que menu ouvert. Sur la page d'une classe, les icônes de la liste des élèves sont dessinées une fois (`ui_icon_sprite`, comme E2), dans le frame qu'une recherche remplace seul
+- **Test associé** : `shared_classes_test.rb` fige chaque classe partagée sur l'ancienne liste, et vérifie que chaque nom est écrit en entier là où Tailwind lit (un nom interpolé, `"ui-button-#{variant}"`, n'est jamais généré : les boutons perdaient leur taille). `classrooms_controller_test.rb` : les icônes de la liste passent par `<use>`, sur la page et dans la réponse d'une recherche (rouge sans le sprite). Une sonde jetable a comparé les styles calculés de `/design`, des établissements, des DRENA et de la page d'une classe (menus ouverts compris), avant et après : identiques
+- **Done quand**   : la liste des établissements, la fiche d'un établissement et la page d'une classe baissent au même volume (`measure_screens.rb`, médiane de 3), à temps égal ; cible 150 Ko. **Tenu en partie** : établissements 218,3 → **180,0 Ko**, fiche 263,6 → **223,7 Ko**, page d'une classe 267,2 → **202,1 Ko**, temps égaux ou meilleurs. **Le budget de 150 Ko n'est pas atteint** : ce qui reste tient à la structure des écrans (memo, « Lot E6 »)
+
 ### Challenger du lot E *(2026-10-05, rôle distinct de l'exécutant)*
 
 Il a rejoué `count_round_trips.rb` et `measure_screens.rb` avant le levier (`app/` mis de côté) et après, trois fois chacun. Il retrouve les chiffres annoncés : 4/2/2 → 3/1/1 requêtes en série, et les poids à 0,1 Ko près. Tests navigateur, de contrôleur et de helper verts ; `bin/rubocop` (1 459 fichiers) et `bin/brakeman` sans alerte. Il a relevé un trou : rien ne vérifiait la carte rendue avec l'accueil d'un enseignant d'établissement brouillon ou inactif. Le test « RE-19: the home renders the card in the permanent sidebar frame… » le couvre désormais ; il est rouge sur le code précédent.
@@ -229,6 +239,7 @@ Doublons vérifiés mécaniquement (`awk … | sort | uniq -d` : aucune sortie).
 | `config/routes/teams.rb` · `app/controllers/teams/{schools,drenas}_controller.rb` · `app/views/teams/{schools,drenas}/*` (lignes, confirmations, flux de suppression) · `docs/decisions/udr/0035-…` · `0036-…` | Lot E3 |
 | `app/infrastructure/queries/catalog/course_catalog_query.rb` · `app/controllers/catalog/courses_controller.rb` · `app/views/catalog/courses/_page*.html.erb` · `app/helpers/components_helper.rb` · `docs/decisions/udr/0013-…` | Lot E4 (puis E5 pour le helper et l'UDR, après E4) |
 | `app/assets/stylesheets/application.tailwind.css` · `app/views/catalog/courses/_course_card.html.erb` · `test/design/shared_classes_test.rb` | Lot E5 |
+| `app/assets/stylesheets/application.tailwind.css` · `app/helpers/components_helper.rb` · `app/views/components/{_dropdown,_modal,_toast}.html.erb` · `app/views/shared/navigation/_more_menu.html.erb` · `app/javascript/controllers/dropdown_controller.js` · `test/design/shared_classes_test.rb` | Lot E6 (après E5, fusionné) |
 
 Aucun lot ne touche `config/routes.rb`, `config/locales/*.yml` ni `app/views/layouts/`. Si le lot A ou B a besoin d'une clé de traduction, il s'arrête : le fichier remonte au Lot 0.
 

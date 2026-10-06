@@ -137,7 +137,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
                     "Assigner « Méiose » à Tle D 1"
       assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id}" do
         assert_select "*", text: /Assigné/
-        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']:has(input[name=compact]) button.size-tap[aria-label=?]",
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']:has(input[name=compact]) button.ui-icon-button[aria-label=?]",
                       "Retirer « Méiose » de Tle D 2"
       end
       assert_select "#exercise_assign_none", 0

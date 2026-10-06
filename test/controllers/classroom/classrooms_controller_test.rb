@@ -478,6 +478,20 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{other.public_id}", 0
   end
 
+  # Chantier politique-cache, lot E6 (ADR-0067) : les icônes des lignes sont dessinées une fois, dans le frame
+  # « classroom_roster_list » qu'une recherche remplace seul.
+  test "the roster takes its icons from symbols drawn once, in its frame, on the page and in a search" do
+    create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+    create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+    assert_icons_drawn_once "turbo-frame#classroom_roster_list"
+
+    get classroom_path(@classroom.public_id, q: "awa"), headers: { "Turbo-Frame" => "classroom_roster_list" }
+    assert_icons_drawn_once "turbo-frame#classroom_roster_list"
+  end
+
   test "FU-48 : une recherche sans résultat le dit et propose d'effacer la recherche" do
     create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
     sign_in_as @teacher

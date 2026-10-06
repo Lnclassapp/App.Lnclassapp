@@ -43,23 +43,13 @@ module ComponentsHelper
   ICON_SIZES = { sm: "size-4", md: "size-5", lg: "size-6", xl: "size-8" }.freeze
   ICON_CACHE = {} # rubocop:disable Style/MutableConstant -- cache des SVG lus sur disque
 
-  BUTTON_BASE = "relative inline-flex cursor-pointer items-center justify-center rounded-full font-medium " \
-                "whitespace-nowrap select-none transition active:scale-95 focus-visible:outline-2 " \
-                "focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none " \
-                "disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50"
-  BUTTON_VARIANTS = {
-    primary: "bg-ink text-white hover:bg-ink/85",
-    brand: "bg-brand text-ink hover:bg-brand/85",
-    secondary: "border border-line bg-white text-ink hover:bg-mist",
-    ghost: "text-ink hover:bg-ink/5",
-    danger: "bg-error text-white hover:bg-error/90"
-  }.freeze
+  # Lot E6 (politique-cache) : forme, variantes et tailles écrites une fois dans application.tailwind.css (classes
+  # partagées ui-button*, leur contenu figé par test/design/shared_classes_test.rb).
+  BUTTON_BASE = "ui-button"
+  BUTTON_VARIANTS = { primary: "ui-button-primary", brand: "ui-button-brand", secondary: "ui-button-secondary",
+                      ghost: "ui-button-ghost", danger: "ui-button-danger" }.freeze
   # `sm` agrandit sa zone tactile à 48 px par un pseudo-élément : le bouton paraît petit, le doigt ne le rate pas.
-  BUTTON_SIZES = {
-    sm: "h-10 gap-1.5 px-4 text-sm after:absolute after:-inset-1",
-    md: "min-h-tap gap-2 px-5 text-sm",
-    lg: "min-h-14 gap-2 px-6 text-base"
-  }.freeze
+  BUTTON_SIZES = { sm: "ui-button-sm", md: "ui-button-md", lg: "ui-button-lg" }.freeze
   BUTTON_ICON_SIZES = { sm: :sm, md: :md, lg: :md }.freeze
 
   CARD_BASE = "block rounded-card border border-line bg-white shadow-card"
@@ -98,12 +88,11 @@ module ComponentsHelper
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
   # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet motion-reduce:animate-none" }.freeze
+  # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
+  # l'arrêtait pas).
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
-  DROPDOWN_TONES = {
-    default: "text-ink hover:bg-mist focus:bg-mist",
-    danger: "text-error hover:bg-error-soft focus:bg-error-soft"
-  }.freeze
+  DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 
   BADGE_TONES = {
     neutral: { chip: "bg-mist text-ink", dot: "bg-mute" },
@@ -305,8 +294,7 @@ module ComponentsHelper
   # Entrée de menu : lien (`href:`, `method:`, `frame:` pour l'ouvrir dans un Turbo Frame), bouton qui ouvre une
   # <dialog> de la page (`dialog:` son id, UDR-0042), ou entrée inactive sans l'un ni l'autre.
   def ui_dropdown_item(label, href: nil, icon: nil, method: nil, tone: :default, frame: nil, dialog: nil)
-    classes = class_names("flex min-h-tap w-full items-center gap-3 rounded-sm px-3 text-sm font-medium focus:outline-none",
-                          option!(DROPDOWN_TONES, tone, "ui_dropdown_item tone"))
+    classes = class_names("ui-menu-item", option!(DROPDOWN_TONES, tone, "ui_dropdown_item tone"))
     content = safe_join([ (ui_icon(icon, class: "opacity-70") if icon), tag.span(label) ].compact)
     return dropdown_dialog_item(content, classes, dialog) if dialog
     return tag.span(content, class: class_names(classes, "opacity-50"), role: "menuitem", "aria-disabled": "true", tabindex: -1) if href.nil?
@@ -356,7 +344,7 @@ module ComponentsHelper
 
   # Photo si `src:`, sinon initiales (premier et dernier mot) sur une couleur stable dérivée du nom.
   def ui_avatar(name, src: nil, size: :md, tone: nil)
-    classes = class_names("inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold",
+    classes = class_names("ui-avatar",
                           option!(AVATAR_SIZES, size, "ui_avatar size"))
     # Photo de profil (ADR-0060, UDR-0047) : une seule taille servie, recadrée par le rond ; hors écran, pas chargée.
     return image_tag(src, alt: name, loading: "lazy", decoding: "async", class: class_names(classes, "object-cover")) if src

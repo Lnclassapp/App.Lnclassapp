@@ -14,7 +14,7 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
 
     get profile_path
 
-    assert_select "header button[aria-controls=account-menu] img.rounded-full[alt='Aya Koné'][src='#{@src}']"
+    assert_select "header button[aria-controls=account-menu] img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
     assert_select "aside img[alt='Aya Koné'][src='#{@src}']"
     assert_select "#profile_information" do
       # UDR-0041, amendment of 2026-10-02: for the student, the avatar is the value of the « Photo » row, the

@@ -5,8 +5,8 @@
 <% active = more_active?(role) %>
 <% styles = NavigationHelper::NAV_STYLES[:bottom] %>
 <% labels = entries.map { t("shared.navigation.#{it.key}") } %>
-<div class="relative" data-controller="dropdown"
-     data-action="keydown->dropdown#keydown click@window->dropdown#outside turbo:before-cache@document->dropdown#close">
+<%# Clic extérieur et cache Turbo : écoutés par le contrôleur dropdown, menu ouvert seulement (lot E6 de politique-cache). %>
+<div class="relative" data-controller="dropdown" data-action="keydown->dropdown#keydown">
   <%= content_tag :button, type: "button", id: "bottom_bar_more", "aria-haspopup": "menu", "aria-expanded": "false",
                   "aria-controls": "bottom_bar_more_menu", "aria-current": ("page" if active),
                   "aria-label": t("shared.navigation.bottom_bar.more_label", entries: labels.join(", ")),

@@ -52,7 +52,11 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     end
 
     assert_no_page_reload do
-      click_on I18n.t("#{scope}.header.copy")
+      # Fermée, la modale rend le focus au ⋮ de la ligne : la page reste descendue sur la liste, et « Copier » passe sous
+      # l'en-tête fixe, où le clic tomberait sur un autre bouton. On le ramène au milieu de l'écran, comme le ferait l'enseignant.
+      copy = find_button(I18n.t("#{scope}.header.copy"))
+      scroll_to(copy, align: :center)
+      copy.click
 
       assert_toast I18n.t("shared.clipboard.copied_code")
     end
@@ -148,7 +152,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert_operator find("#classroom_courses").rect.y, :<, find("#assigned_exercises").rect.y
       assert_selector "#classroom_courses ul[data-communication--carousel-target=track] > li", count: 3
       within("#student_#{@koffi.public_id}") do
-        avatar = find(".rounded-full.shrink-0", match: :first).rect
+        avatar = find(".ui-avatar", match: :first).rect
         menu = find("button[aria-haspopup=menu]").rect
         assert_in_delta avatar.y + (avatar.height / 2), menu.y + (menu.height / 2), 8, "⋮ n'est pas sur la ligne de l'élève"
         # « Aucune session terminée » ne doit pas écraser le nom.

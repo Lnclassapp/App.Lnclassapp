@@ -3,8 +3,9 @@
 <%# UDR  : 0005, 0042 · Stimulus : dropdown %>
 <%# Sans indentation : un menu par ligne de tableau la répète autant de fois (« Enseignants » : 60, ADR-0067). Entre ces
     éléments, aucun espace ne se voit : bouton en grille ou en flex, menu en bloc. %>
-<div class="relative inline-block" data-controller="dropdown" <%= "data-dropdown-fixed-value=true" if fixed %>
-data-action="keydown->dropdown#keydown click@window->dropdown#outside turbo:before-cache@document->dropdown#close<%= " scroll@window->dropdown#place:capture resize@window->dropdown#place" if fixed %>">
+<%# Lot E6 (politique-cache) : clic extérieur, cache Turbo, défilement et redimensionnement sont écoutés par le contrôleur,
+    menu ouvert seulement, et non plus déclarés sur chaque menu de la page. %>
+<div class="relative inline-block" data-controller="dropdown" <%= "data-dropdown-fixed-value=true" if fixed %> data-action="keydown->dropdown#keydown">
 <% if trigger %>
 <button type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="<%= id %>" aria-label="<%= label %>"
 data-dropdown-target="button" data-action="dropdown#toggle"
@@ -15,12 +16,12 @@ class="flex min-h-tap cursor-pointer items-center gap-2 rounded-full py-1 pr-3 p
 <% else %>
 <button type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="<%= id %>" aria-label="<%= label %>"
 data-dropdown-target="button" data-action="dropdown#toggle"
-class="grid size-tap cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand">
+class="ui-icon-button">
 <%= ui_icon icon %>
 </button>
 <% end %>
 <div id="<%= id %>" role="menu" aria-label="<%= label %>" data-dropdown-target="menu" hidden
-class="absolute <%= fixed ? "z-50" : "z-30" %> mt-2 w-64 rounded-ln border border-line bg-white p-1.5 shadow-pop animate-fade-in <%= align_class %>">
+class="ui-menu <%= fixed ? "z-50" : "z-30" %> <%= align_class %>">
 <%= items %>
 </div>
 </div>
