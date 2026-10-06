@@ -27,3 +27,28 @@ Gravité : **B** bloquant · **G** gênant · **F** finition.
 | 10 | Aide, Accès interdit | Perdent la coquille de l'application une fois connecté ; liens de 18 px de haut | F | Aide : fait (UDR-0061, amendée). Accès interdit : en attente d'une décision du porteur |
 | 11 | Profil | Boutons d'action de 3 styles différents ; « vous » et « tu » mêlés | F | Fait (UDR-0041, amendée) |
 | 12 | Annonces | Pas d'onglet dans la barre du bas (à décider) | F | Décidé : pas d'onglet |
+
+### Deuxième passe — 2026-10-06, après la PR #186
+
+Demande du porteur : sur l'Accueil, retirer « Tous les cours » et « Toutes les annonces » ; un bouton de retour sur
+le catalogue filtré (`/courses?material=…`) et sur Ma classe ; puis fouiller toutes les pages élève.
+Chaque point a d'abord été vérifié sur `Develop` (7f48b744) : ce que la PR #186 a déjà livré n'est pas refait.
+
+| # | Page | Points | Gravité | Statut |
+|---|---|---|---|---|
+| 13 | Accueil | « Tous les cours » encore affiché dès 640 px (le point 8 ne l'a retiré que sur téléphone) ; « Toutes les annonces » sous le carrousel | G | Fait (UDR-0069 et UDR-0071, amendées) |
+| 14 | Catalogue, Ma classe, Annonces | Aucun lien de retour : le seul chemin vers l'Accueil est la navigation | G | Fait (UDR-0054, amendée) |
+| 15 | Cours | « Cours » (le retour) renvoie au catalogue sans son filtre (`?material=`) : l'élève reperd sa matière | G | Fait (UDR-0054, amendée) |
+| 16 | Rejoindre une classe | « ton professeur » sur les écrans du code, « tes enseignants » partout ailleurs dans l'espace élève (glossaire : enseignant) | F | Fait (FAQ comprise) |
+| 17 | Compte en attente | Aucun titre de page (`h1`) : le lecteur d'écran n'a pas de point d'entrée | F | Fait (`h1` pour lecteur d'écran) |
+
+Déjà livrés par la PR #186, non refaits : débordement de Ma classe, de l'Accueil et de l'Historique (point 1) ;
+grilles Note / Maîtrise décalées (points 2 et 4) ; ⓘ du catalogue isolée (point 7) ; « vous » du profil (point 11) ;
+retour de l'Aide vers l'accueil du rôle (point 10).
+
+Écartés, car déjà tranchés : « Essentielles de la leçon » (UDR-0007, amendement du 2026-09-30) ; « Entrer » sur la
+carte de classe (UDR-0010).
+
+À décider par le porteur, non faits : « Mon historique » n'est lié que depuis l'écran d'attente, pas pour l'élève qui
+a une classe ; « Exercice : Exercice 2 de Fiche… » sur le résultat, quand le titre de l'exercice commence lui-même par
+« Exercice ».

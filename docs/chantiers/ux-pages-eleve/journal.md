@@ -18,6 +18,11 @@
 | 2026-10-06 | Lot 10 : la page « Accès interdit » n'est pas touchée. La mettre dans le shell revient sur la règle « une page d'erreur se rend toujours dans le layout application » | Règle que le porteur rattache à l'ADR-0026 et à l'ADR-0028 : décision à lui soumettre. Ses liens font déjà 48 px | Question au porteur |
 | 2026-10-06 | Lot 11 : tutoiement de l'élève sur le profil, ses modales et ses messages, par des clés `_student` (`tone_t`) ; vouvoiement inchangé pour les autres rôles ; erreurs des formulaires sans pronom, pour tous | Charte §1, UDR-0063 et UDR-0064 : l'espace élève tutoie. Le profil sert à tous les rôles, et les erreurs viennent de DTO communs | UDR-0041, amendée |
 | 2026-10-06 | Lot 11 : chez l'élève, les quatre actions du profil en `secondary`, taille `md` (48 px) ; « Changer mon PIN » quitte `primary` | Trois styles, dont des boutons de 40 px ; le profil n'a pas d'action principale (R1) | UDR-0041, amendée |
+| 2026-10-06 | Deuxième passe : chaque point de l'audit est d'abord cherché sur `Develop` ; cinq étaient déjà livrés par la PR #186, deux déjà tranchés par une UDR | Demande du porteur : « vérifie avant d'implémenter que ces changements ne sont pas encore faits » | Non |
+| 2026-10-06 | Point 13 : « Tous les cours » retiré à toutes les tailles, « Toutes les annonces » retiré de l'accueil élève | Demande du porteur ; l'onglet Cours mène au catalogue, et les annonces restent sur l'Accueil (pas d'onglet) | UDR-0069 et UDR-0071, amendées |
+| 2026-10-06 | Point 13 : toutes masquées, la section des annonces reste rendue avec `hidden` ; toast « Elle n'apparaît plus sur ton accueil. » | « Annuler » remplace la section : sans elle, l'annulation ne se verrait pas sur l'accueil ; l'ancien toast renvoyait vers une page qui n'est plus liée | UDR-0071, amendée |
+| 2026-10-06 | Point 14 : chez l'élève, toute page autre que l'Accueil porte un retour « Accueil » (Catalogue, Ma classe, Annonces) | Demande du porteur ; exception à « les destinations de la navigation n'ont pas de retour », pour l'élève seulement | UDR-0054, amendée |
+| 2026-10-06 | Point 16 : « ton enseignant » au lieu de « ton professeur » (code de classe, FAQ) | Le reste de l'espace élève et le glossaire disent « enseignant » | Non |
 
 ## Ce qui a dérapé
 
@@ -45,6 +50,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Catalogue : Leçon 1 avant Leçon 2 | La table `courses` n'a pas de rang : il faut une migration | À ouvrir |
 | Résultat : nommer la lacune et renvoyer vers sa fiche | `SessionResultQuery` ne porte pas la lacune | À ouvrir |
 | Cours : avancée et lacune par fiche ; Catalogue : avancée sur la carte | Demandent une lecture d'avancée par fiche et par cours | À ouvrir |
+| Annonces de l'élève : la page n'est plus liée ; une annonce masquée ne se réaffiche qu'avec « Annuler » | Conséquence acceptée du point 13 (pas d'onglet, pas de lien) | À décider par le porteur |
+| « Mon historique » lié seulement depuis l'écran d'attente | Choix de navigation pour l'élève qui a une classe | À décider par le porteur |
 
 ## Clôture
 
