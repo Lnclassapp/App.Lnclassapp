@@ -1,16 +1,31 @@
 <%# 🌐 UI · communication/authored_messages/_form — le formulaire d'annonce, page entière (nouvelle ou modifiée) %>
-<%# Rôle : titre, texte, destinataires du rôle, illustration, image, audio, dates ; brouillon ou publier ; erreurs en 422 sous les champs %>
-<%# ADR  : 0045, 0078 · UDR : 0005, 0071 (§3.8) · locaux : form:, message: (nil pour une nouvelle), url:, method: %>
+<%# Rôle : titre et texte décomptés, destinataires, thème, illustration (base puis équipe), image, audio, parution, encadré du plafond ; 422 sous les champs %>
+<%# ADR  : 0045, 0078, 0081 · UDR : 0005, 0067, 0071 (§3.8), 0075 (§3.3) · locaux : form:, message: (nil pour une nouvelle), url:, method: %>
+<% caps = Entities::Communication::Message %>
 <% published = message&.status == "published" %>
 <% reselect = form.errors.any? ? " #{t('.reselect')}" : "" %>
+<%# UDR-0075 §3.3 : le décompte du résumé d'article (UDR-0067), réutilisé tel quel ; le serveur rend « 18 / 60 ». %>
+<% counted = ->(max) { { controller: "communication--character-count", "communication--character-count-max-value": max,
+                         "communication--character-count-near-value": t(".counter.near"),
+                         "communication--character-count-full-value": t(".counter.full") } } %>
+<% counting = { "communication--character-count-target": "input", action: "input->communication--character-count#update" } %>
+<% option = "flex min-h-tap cursor-pointer flex-col items-center gap-1 rounded-ln border border-line bg-white p-2 text-xs font-medium " \
+            "has-checked:border-brand has-checked:bg-brand-soft has-focus-visible:outline-2 has-focus-visible:outline-brand" %>
 <%= form_with model: form, scope: :announcement, url:, method:, multipart: true, id: "announcement-form", class: "grid max-w-form gap-5" do |f| %>
   <% if published %>
     <div class="rounded-ln bg-info-soft p-4 text-sm text-info"><%= t(".published_notice") %></div>
   <% end %>
 
-  <%= ui_field f, :title, required: true, maxlength: Entities::Communication::Message::TITLE_MAX, hint: t(".hints.title") %>
-  <%= ui_field f, :body, as: :textarea, rows: 3, required: true, maxlength: Entities::Communication::Message::BODY_MAX,
-                         hint: t(".hints.body") %>
+  <%= tag.div data: counted.(caps::TITLE_MAX) do %>
+    <%= ui_field f, :title, required: true, maxlength: caps::TITLE_MAX, hint: t(".hints.title"), data: counting %>
+    <p class="mt-1 text-right text-xs tabular-nums text-mute" data-communication--character-count-target="count"><%= t(".counter.count", count: form.title.length, max: caps::TITLE_MAX) %></p>
+    <span class="sr-only" aria-live="polite" data-communication--character-count-target="status"></span>
+  <% end %>
+  <%= tag.div data: counted.(caps::BODY_MAX) do %>
+    <%= ui_field f, :body, as: :textarea, rows: 3, required: true, maxlength: caps::BODY_MAX, hint: t(".hints.body"), data: counting %>
+    <p class="mt-1 text-right text-xs tabular-nums text-mute" data-communication--character-count-target="count"><%= t(".counter.count", count: form.body.length, max: caps::BODY_MAX) %></p>
+    <span class="sr-only" aria-live="polite" data-communication--character-count-target="status"></span>
+  <% end %>
 
   <% case current_actor.role %>
   <% when :team %>
@@ -33,14 +48,45 @@
                                                     hint: t(".hints.classrooms"), required: true %>
   <% end %>
 
-  <fieldset>
+  <%# UDR-0075 §3.3 : dix pastilles ; le contrôleur recolore les illustrations du fieldset voisin, sans JavaScript elles restent en « Ciel ». %>
+  <%= tag.fieldset data: { controller: "communication--theme-preview", "communication--theme-preview-illustrations-value": "announcement-illustrations" } do %>
+    <legend class="mb-1.5 block text-sm font-medium text-ink"><%= Dtos::Communication::MessageInput.human_attribute_name(:theme) %></legend>
+    <div class="grid grid-cols-5 gap-2">
+      <% caps::THEMES.each do |key| %>
+        <label class="flex min-h-tap cursor-pointer flex-col items-center gap-1 rounded-ln p-1 text-xs font-medium has-focus-visible:outline-2 has-focus-visible:outline-brand has-checked:bg-mist has-checked:font-bold">
+          <%= f.radio_button :theme, key, class: "sr-only", data: { action: "change->communication--theme-preview#preview" } %>
+          <span class="grid size-10 place-items-center rounded-full bg-brand-soft ring-1 ring-school/30" data-announcement-theme="<%= key %>">
+            <span class="size-3 rounded-full bg-brand-strong"></span>
+          </span>
+          <span><%= t("communication.themes.#{key}") %></span>
+        </label>
+      <% end %>
+    </div>
+    <% if (error = form.errors[:theme].first) %>
+      <p class="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <%# Les 8 de base, puis les dessins de l'équipe non retirés, par date d'ajout, et celui que porte l'annonce, même retiré ; %>
+  <%# la valeur d'un dessin est son public_id. %>
+  <% drawings = library_illustrations(message) %>
+  <fieldset id="announcement-illustrations">
     <legend class="mb-1.5 block text-sm font-medium text-ink"><%= Dtos::Communication::MessageInput.human_attribute_name(:illustration) %></legend>
     <div class="grid grid-cols-4 gap-2">
-      <% Entities::Communication::Message::ILLUSTRATIONS.each do |key| %>
-        <label class="flex min-h-tap cursor-pointer flex-col items-center gap-1 rounded-ln border border-line bg-white p-2 text-xs font-medium has-checked:border-brand has-checked:bg-brand-soft has-focus-visible:outline-2 has-focus-visible:outline-brand">
+      <% caps::ILLUSTRATIONS.each do |key| %>
+        <label class="<%= option %>">
           <%= f.radio_button :illustration, key, class: "peer sr-only" %>
           <%= announcement_illustration key, class: "size-12" %>
           <span><%= t("communication.illustrations.#{key}") %></span>
+        </label>
+      <% end %>
+      <% drawings.each do |illustration| %>
+        <label class="<%= option %>">
+          <%= f.radio_button :illustration, illustration.public_id, class: "peer sr-only" %>
+          <%= announcement_illustration illustration, class: "size-12" %>
+          <span><%= illustration.name %></span>
         </label>
       <% end %>
     </div>
@@ -71,9 +117,27 @@
   <% end %>
 
   <% unless published %>
-    <%= ui_field f, :published_at, type: "datetime-local", hint: t(".hints.published_at") %>
+    <%# UDR-0075 §3.3 : plus de « Visible jusqu'au » ; la fin est la parution + 30 jours (ADR-0081 §4.1). %>
+    <div class="space-y-1.5">
+      <%= ui_field f, :published_at, type: "datetime-local", hint: t(".hints.published_at") %>
+      <p class="text-xs text-mute"><%= t(".lasts") %></p>
+    </div>
   <% end %>
-  <%= ui_field f, :visible_until, as: :date, required: true, hint: t(".hints.visible_until") %>
+
+  <%# UDR-0075 §3.3 : l'encadré du plafond, lu à l'ouverture ; jamais en modification d'une annonce publiée (departing est vide). %>
+  <%# Amendement de la phase 5 : plus de 3 en ligne (données antérieures), toutes celles qui partiraient sont nommées. %>
+  <% leaving = departing %>
+  <% if leaving.any? %>
+    <% live = caps::LIVE_CAP - 1 + leaving.size %>
+    <div id="announcement-cap-notice" role="status" class="rounded-ln bg-info-soft p-4 text-sm text-info">
+      <% if leaving.one? %>
+        <p><%= t(".cap.notice", count: live, title: leaving.first.title) %></p>
+      <% else %>
+        <p><%= t(".cap.several", count: live, titles: leaving.map { t(".cap.quoted", title: it.title) }.to_sentence) %></p>
+      <% end %>
+      <p class="mt-1 text-xs"><%= t(".cap.scheduled") %></p>
+    </div>
+  <% end %>
 
   <div class="flex flex-wrap justify-end gap-3">
     <%= ui_button t(".cancel"), variant: :ghost, href: my_announcements_path %>

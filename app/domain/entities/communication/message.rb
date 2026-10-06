@@ -1,16 +1,19 @@
 # 🧠 DOMAINE · Entities::Communication::Message
 # Rôle : une annonce (carte courte et signée) de l'équipe, d'une direction ou d'un enseignant ; listes fermées et bornes
-# ADR  : 0045, 0078 · UDR : 0071
+# ADR  : 0045, 0078, 0081 · UDR : 0071, 0075
 module Entities
   module Communication
     # Contrat gelé au Lot 0 (ADR-0078 §6). « Terminée » n'est pas un statut : une annonce publiée dont ends_at est passée
     # l'est, la lecture la filtre. Les longueurs sont validées par le DTO ; la base les borne aussi (ADR-0078 §4.1).
+    # ADR-0081 §4.2 et §4.3 (Lot 0 d'annonces-v2) : un thème, et soit une clé de base (illustration), soit une
+    # illustration de l'équipe (illustration_id, la clé est alors nil) ; la base impose exactement l'une des deux.
     Message = Data.define(:id, :public_id, :author_id, :title, :body, :audience, :school_id, :classroom_ids,
-                          :illustration, :status, :published_at, :ends_at, :edited_at, :withdrawn_at, :withdrawn_by_id) do
-      # Une annonce à créer n'a ni id ni public_id ; une annonce par rôle n'a aucune classe.
+                          :illustration, :status, :published_at, :ends_at, :edited_at, :withdrawn_at, :withdrawn_by_id,
+                          :theme, :illustration_id) do
+      # Une annonce à créer n'a ni id ni public_id ; une annonce par rôle n'a aucune classe ; sans thème, « Ciel ».
       def initialize(author_id:, title:, body:, audience:, illustration:, status:, id: nil, public_id: nil, school_id: nil,
                      classroom_ids: [], published_at: nil, ends_at: nil, edited_at: nil, withdrawn_at: nil,
-                     withdrawn_by_id: nil)
+                     withdrawn_by_id: nil, theme: Message::DEFAULT_THEME, illustration_id: nil)
         super
       end
 
@@ -38,7 +41,11 @@ module Entities
     Message::BODY_MAX = 140
     # Le plus grand côté d'une image jointe, en pixels : une photo de téléphone (4032 px) passe (ADR-0060).
     Message::IMAGE_MAX_SIDE = 4096
-    Message::DEFAULT_DURATION = 30.days
-    Message::MAX_DURATION = 90.days
+    # ADR-0081 §4.2, UDR-0075 §3.1 : la liste fermée des thèmes, dans cet ordre ; libellés communication.themes.<clé>.
+    Message::THEMES = %w[ciel lagune menthe citron mangue corail hibiscus lavande indigo nuit].freeze
+    Message::DEFAULT_THEME = "ciel"
+    # ADR-0081 §4.1 : une annonce reste en ligne 30 jours après sa parution ; un auteur en a 3 en ligne au plus.
+    Message::DURATION = 30.days
+    Message::LIVE_CAP = 3
   end
 end

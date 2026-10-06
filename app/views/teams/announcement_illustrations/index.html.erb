@@ -1,0 +1,46 @@
+<%# 🌐 UI · teams/announcement_illustrations/index — page « Illustrations d'annonce » de l'équipe, atteinte par la tuile du Référentiel %>
+<%# Rôle : ajout d'un dessin SVG (erreurs en 422 sous les champs), illustrations de l'équipe (aperçus, menu ⋮), puis les 8 fournies par Lnclass %>
+<%# ADR  : 0081 (§4.3) · UDR : 0005, 0042, 0068, 0075 (§3.5) · locaux : @form (Dtos::Communication::IllustrationInput), library %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "referential" %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle"), back: { label: t(".back"), href: teams_referential_path } %>
+
+<div class="space-y-8">
+  <%= ui_card title: t(".add_title"), icon: "plus" do |card| %>
+    <%# Le succès revient sur cette page : sans « advance », Turbo la fusionnerait (morph) et garderait le fichier choisi. %>
+    <%= form_with model: @form, scope: :illustration, url: teams_announcement_illustrations_path, method: :post, multipart: true,
+                  id: "illustration-form", class: "grid max-w-form gap-5", data: { turbo_action: "advance" } do |f| %>
+      <%= ui_field f, :name, maxlength: Entities::Communication::Illustration::NAME_MAX, required: true, hint: t(".name_hint") %>
+      <%# ui_field ne connaît pas as: :file : le type passe au contrôle, comme tout attribut ; jamais de valeur sur un fichier. %>
+      <%= ui_field f, :file, type: "file", value: nil, accept: "image/svg+xml,.svg", hint: t(".file_hint"),
+                             class: "cursor-pointer py-2.5 file:mr-3 file:cursor-pointer file:border-0 file:bg-transparent file:font-medium file:text-brand-strong" %>
+    <% end %>
+    <% card.footer do %>
+      <%= ui_button t(".submit"), type: :submit, form: "illustration-form" %>
+    <% end %>
+  <% end %>
+
+  <section id="team_illustrations" aria-labelledby="team_illustrations_title">
+    <h2 id="team_illustrations_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".team_title") %></h2>
+    <% if library.empty? %>
+      <%= ui_empty_state title: t(".empty"), icon: "photo" %>
+    <% else %>
+      <%# grid-cols-1 : une colonne qui peut se réduire ; implicite (auto), elle prendrait la largeur d'un nom sans retour à la ligne. %>
+      <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <%= render partial: "teams/announcement_illustrations/illustration", collection: library, as: :row %>
+      </ul>
+    <% end %>
+  </section>
+
+  <section id="base_illustrations" aria-labelledby="base_illustrations_title">
+    <h2 id="base_illustrations_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".base_title") %></h2>
+    <ul class="grid grid-cols-4 gap-2">
+      <% Entities::Communication::Message::ILLUSTRATIONS.each do |key| %>
+        <li class="flex flex-col items-center gap-1 text-center text-xs font-medium">
+          <%= announcement_illustration key, class: "size-12" %>
+          <span><%= t("communication.illustrations.#{key}") %></span>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</div>
