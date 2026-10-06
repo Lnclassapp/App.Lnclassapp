@@ -12,6 +12,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
 
       assert_response :success
     end
+    assert_select "h1.sr-only", t("page_title")
     assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre une classe"
     assert_select "a[href='#{session_path}'][data-turbo-method=delete]", text: /Se déconnecter/
   end

@@ -2,6 +2,8 @@
 <%# Rôle : écran de sortie, sans redirection ; issues : rejoindre une classe ou voir son historique (élève), rejoindre un établissement par son code %>
 <%# ADR  : 0030, 0036, 0040, 0063, 0071 · UDR : 0006, 0050, 0054, 0056 (§3.5) %>
 <% page_title t(".page_title") %>
+<%# Le titre visible est celui de l'état vide (un p) : le h1 donne au lecteur d'écran le point d'entrée de la page. %>
+<h1 class="sr-only"><%= t(".page_title") %></h1>
 <div id="pending_account">
   <% if @school_join %>
     <%# Enseignant sans établissement ni demande en attente (retiré, ou demande refusée) : le code de son établissement. %>
