@@ -6,7 +6,8 @@
 <% student = current_actor.student? %>
 <% page_title t(".page_title", name: course.name) %>
 <% content_for :nav_key, "courses" %>
-<%= ui_back_link t(".back"), href: courses_path %>
+<%# UDR-0054 §3.2 : venu du catalogue filtré (?material=…), le retour y ramène avec son filtre. %>
+<%= ui_back_link t(".back"), href: back_href(courses_path, from: courses_path) %>
 
 <div id="course_header" class="mb-8">
   <%= ui_card padding: :md do %>

@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
 <%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, épuré ; enseignant : sa matière à ses niveaux ; équipe : création et import %>
-<%# ADR  : 0028, 0035, 0076 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0054, 0057, 0069, 0077 §3.2 (amendement du 2026-10-06) · grille non plafonnée à 3, par pages de 24 %>
+<%# ADR  : 0028, 0035, 0076 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0054 (élève : retour « Accueil », amendement du 2026-10-06), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06) · grille non plafonnée à 3, par pages de 24 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "courses" %>
 <% team = current_actor.team? %>
@@ -17,7 +17,9 @@
     <% end %>
   <% elsif student %>
     <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R4) : la portée du catalogue passe du sous-titre à l'infobulle, collée au
-        titre (UDR-0077, amendement du 2026-10-06) : en action de ui_page_header, elle restait seule sous le titre sur téléphone. %>
+        titre (UDR-0077, amendement du 2026-10-06) : en action de ui_page_header, elle restait seule sous le titre sur téléphone.
+        UDR-0054, amendement du 2026-10-06 : chez l'élève, toute page autre que l'Accueil y ramène, filtrée ou non. %>
+    <%= ui_back_link t(".back_home"), href: student_home_path %>
     <div class="mb-6 flex flex-wrap items-center gap-x-1">
       <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= t(".title") %></h1>
       <%= ui_info_tip t(".student_scope"), label: t(".student_scope_label") %>

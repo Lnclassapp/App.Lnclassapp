@@ -1,7 +1,8 @@
 require "application_system_test_case"
 
 # AN-10, AN-12, AN-13, AN-18 (UDR-0071 §3.2, §3.4 to §3.7), in a real browser. On her home, Awa sees the carousel (direction,
-# teachers, team), hides a card with its cross and « Annuler » gives it back; on « Toutes les annonces », a hidden message is
+# teachers, team), hides a card with its cross and « Annuler » gives it back; on the list (no link from her home since the
+# amendment of 2026-10-06, which also gives it « Accueil »), a hidden message is
 # marked « Masquée » and « Réafficher » gives it back; ▶ exists only on a message with an audio, plays it, and says when the
 # phone cannot. One journey on a phone. Four tests, one sign-in each: the chantier has 15 s of system suite (ADR-0069 §9).
 class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
@@ -62,10 +63,15 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
     end
     assert_not dismissed?(@fiches)
 
-    within("#student_home_announcements") { click_on tc("inboxes.carousel.all") }
+    # UDR-0071 and UDR-0054, amendments of 2026-10-06: no « Toutes les annonces » on her home; the list, open by its
+    # address, brings her back to « Accueil ».
+    within("#student_home_announcements") { assert_no_link tc("inboxes.carousel.all") }
+    visit announcements_path
 
-    assert_current_path announcements_path
     assert_equal [ "Nouvelles fiches", "Rentrée numérique", "Devoirs communs" ], list_titles
+    within("nav[aria-label='#{I18n.t('components.back_link.label')}']") { click_on tc("inboxes.show.back") }
+
+    assert_current_path student_home_path
   end
 
   test "AN-12 — in « Toutes les annonces », hidden, a card is marked « Masquée »; « Annuler » and « Réafficher » give it back" do
