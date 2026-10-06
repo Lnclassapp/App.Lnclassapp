@@ -49,6 +49,7 @@ Chantier selection-par-carte-de-couverture (ouvert le 2026-10-03, hors de ce cha
 - **Dépend de**    : Lot 1 *(le run de cette PR se paie au nouveau tarif)*
 - **Test associé** : `bin/ci` complet en local, puis le run de la PR.
 - **Done quand**   : `Develop` contient `main` (`git merge-base --is-ancestor origin/main origin/Develop`), suite verte.
+- **Fait (2026-10-06)** : `main` fusionnée dans `Develop` ; `ci.yml` garde la version de `Develop`, qui avait déjà les versions d'actions de `main`. Rails 8.1.4 change `ActionView::TestCase#render` (chaque rendu du test repart d'une page vide) : un test du trophée corrigé ([#190](https://github.com/Lnclassapp/App.Lnclassapp/pull/190), repris ici). Le commentaire du Gemfile sur json 3 est remis à jour : depuis Rails 8.1.4, `ActiveSupport::JSON.decode` passe ses options en mots-clés.
 
 ## Lot 3 — Mesure après
 

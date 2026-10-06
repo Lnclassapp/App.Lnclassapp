@@ -32,6 +32,7 @@
 | 2026-10-03 | **Accord du porteur sur les cinq étapes appliquées ; la suite système se joue en trois parts** (« parallélise les tests de plus de 2 minutes » : c'est la seule étape qui les dépasse). Quatre jobs jouent `bin/ci`. | Horloge ≈ 7 min 30 → ≈ 3 min 30 pour ≈ 4 minutes facturées de plus par run complet ; les durées fraîches du run 472 donnent trois parts à 271 s. | ADR-0069 §9 |
 | 2026-10-03 | **Mesure des deux jobs (run 476, #149 fusionnée)** : `unit` 2 min 43, `system` 9 min 56 (`bin/ci` 9 min 32 pour 338 tests, 7 min 04 au run 472 : runner 1,35× plus lent), horloge 10 min 16, 15 minutes facturées. | Confirme que le job système seul ne tient pas dix minutes sur un runner lent ; le lot 9 (trois parts) est nécessaire, pas optionnel. | ADR-0069 §9 |
 | 2026-10-03 | **Mesure des quatre jobs (run 479, #150 fusionnée, PR tirée au sort)** : horloge **4 min 30** (10 min 16 au run 476), parts système 3 min 21 / 3 min 42 / 4 min 08, `unit` 3 min 32 avec perf, 19 minutes facturées. L'exigence de dix minutes est tenue avec marge, même sur un runner lent. | Un levier, un chiffre : deux jobs ne suffisaient pas, trois parts oui. Les durées enregistrées sur le run 472 ont donné des parts équilibrées à 20 % près. | ADR-0069 §9 |
+| 2026-10-06 | **Lot 2 : `main` fusionnée dans `Develop`**, demandé par le porteur avant une promotion jusqu'à `main`. `ci.yml` garde la version de `Develop`. | Sans lui, chaque release `Staging → main` rejouait le même conflit sur `ci.yml` et livrait en production des gems (Rails 8.1.4, json 3.0.2…) que `Develop` n'avait jamais testées. | — |
 
 ## Ce qui a dérapé
 
@@ -60,6 +61,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - **`test/system/identity/teacher_signup_test.rb` pèse 68 s sur le run 472**, dont un seul test à 30,9 s (FU-19, aide du code établissement) : premier candidat pour `tests-instables` ou la sélection par carte de couverture.
 - **`script/ci/record_timings` ne reconnaissait pas une classe déclarée dans un `module`** (`module Finitions` / `class X`) : cinq fichiers n'avaient jamais eu de durée.
 - **L'API de facturation par run ne répond rien d'utile** : `GET /actions/runs/<id>/timing` renvoie `total_ms: 0` pour tous les runs de ce dépôt. Seuls les horodatages des jobs permettent de compter.
+- **Rails 8.1.4 change `ActionView::TestCase#render` (2026-10-06).** Chaque `render` de premier niveau d'un test de vue repart d'un `rendered` vide (`_reset_rendered`) : un test qui rend deux fois puis inspecte le premier rendu ne voit plus que le second. Rendre les partiels dans un seul gabarit `inline` (un `render` imbriqué ne remet rien à zéro). Le même jour, Rails 8.1.4 passe les options de `ActiveSupport::JSON.decode` en mots-clés, ce qui rend json 3 utilisable.
 
 ## Dette laissée derrière
 
