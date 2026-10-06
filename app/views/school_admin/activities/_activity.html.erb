@@ -1,0 +1,35 @@
+<%# 🌐 UI · school_admin/activities/_activity — contenu du frame différé « Activité récente » de l'accueil de la direction %>
+<%# Rôle : les 10 derniers événements des 30 derniers jours, groupés par jour (Aujourd'hui, Hier, Mardi 29 sept.) ; vide ; erreur %>
+<%# ADR  : 0065 · UDR : 0074 §3.11 · jours dans le fuseau de l'application (Africa/Abidjan) %>
+<%# locals: (events:, failed: false) -%>
+<% icons = { assignment: "clipboard-document-list", student_joined: "user-plus", teacher_joined: "academic-cap" } %>
+<% today = Time.zone.today %>
+<% day_titles = { today => t(".today"), today.yesterday => t(".yesterday") } %>
+<%= turbo_frame_tag "direction_home_activity_feed", target: "_top" do %>
+  <% if failed %>
+    <%= ui_error_state retry_href: school_admin_classrooms_path %>
+  <% elsif events.empty? %>
+    <%= ui_empty_state title: t(".empty"), icon: "bolt" %>
+  <% else %>
+    <% events.group_by { it.at.to_date }.each do |day, day_events| %>
+      <h3 class="mt-4 first:mt-0 mb-1 text-xs font-semibold tracking-wider text-mute uppercase"><%= day_titles.fetch(day) { l(day, format: t(".day_format")).upcase_first } %></h3>
+      <ul class="divide-y divide-line">
+        <% day_events.each do |event| %>
+          <%# « M. Kouassi », « Mme Kouassi », ou sa seule fonction une fois anonymisé ; un élève : « Awa K. » (memo Q10). %>
+          <% teacher = t(".teacher.#{event.teacher_anonymized ? 'anonymized' : event.teacher_gender}", name: event.teacher_last_name) unless event.kind == :student_joined %>
+          <% classroom = link_to(event.classroom_name, school_admin_classroom_path(event.classroom_public_id), class: "font-medium text-brand-strong hover:underline") if event.classroom_public_id %>
+          <% sentence = case event.kind
+                        when :assignment then t(".assignment_html", teacher:, exercise: event.exercise_title, classroom:)
+                        when :student_joined then t(".student_joined_html", student: t(".student", first_name: event.student_first_name, initial: event.student_last_initial), classroom:)
+                        else t(".teacher_joined", teacher:)
+                        end %>
+          <li class="flex min-h-tap items-center gap-3 py-2">
+            <span class="grid size-9 shrink-0 place-items-center rounded-full bg-mist text-mute"><%= ui_icon icons.fetch(event.kind), variant: :mini, size: :sm %></span>
+            <p class="min-w-0 flex-1 text-sm text-ink"><%= sentence %></p>
+            <%= time_tag event.at, l(event.at, format: t(".time_format")), class: "shrink-0 text-xs text-mute tabular-nums" %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+<% end %>

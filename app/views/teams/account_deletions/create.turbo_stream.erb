@@ -1,0 +1,12 @@
+<%# 🌐 UI · teams/account_deletions/create — succès de la suppression (anonymisation) d'un compte élève %>
+<%# Rôle : toast ; la fiche du compte remplacée par « Compte supprimé », avec la date de la demande ; la modale se ferme %>
+<%# ADR  : 0036 (§4) · UDR : 0006, 0020 %>
+<%= turbo_stream_toast t(".done", name: @deleted.user.display_name), type: :success %>
+<%= turbo_stream.update "modal", "" %>
+<%= turbo_stream.replace "account-lookup-result" do %>
+  <div id="account-lookup-result" aria-live="polite">
+    <%= ui_empty_state title: t(".title"),
+                       description: t(".description", requested_on: l(@deleted.requested_on, format: :long)),
+                       icon: "trash" %>
+  </div>
+<% end %>

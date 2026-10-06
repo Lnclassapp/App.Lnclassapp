@@ -49,7 +49,7 @@ class SchoolAdmin::DepartedTeachersTest < ApplicationSystemTestCase
     with_mobile_viewport do
       sign_in_as yao
 
-      assert_selector "p", text: t("identity.pending_accounts.show.no_school.title"), wait: SIGN_IN_WAIT
+      assert_selector "h1", text: t("identity.pending_accounts.show.no_school.title"), wait: SIGN_IN_WAIT
       assert_no_horizontal_scroll
       fill_in "school_join[school_code]", with: "K7M-4QZ"
       click_on t("identity.pending_accounts.show.join")

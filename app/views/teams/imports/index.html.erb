@@ -8,7 +8,7 @@
     <% Entities::Catalog::ImportKind::KINDS.each do |kind| %>
       <%= link_to t("import_kinds.#{kind}"), new_teams_import_path(kind:), role: "menuitem", tabindex: -1,
                   data: { turbo_frame: "modal" },
-                  class: "flex min-h-tap w-full items-center gap-3 rounded-sm px-3 text-sm font-medium text-ink hover:bg-mist focus:bg-mist focus:outline-none" %>
+                  class: "ui-menu-item ui-menu-item-default" %>
     <% end %>
   <% end %>
 <% end %>

@@ -85,6 +85,8 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
     assert_equal "Votre compte est créé. Connectez-vous avec votre numéro et votre PIN.", flash[:notice]
+    # ID-08 (ADR-0077) : une direction entrée par invitation est marquée comme telle.
+    assert_equal "invitation", Orm::SchoolStaff.joins(:user).find_by!(users: { contact: "0500000007" }).joined_via
     follow_redirect!
     assert_select "input[name='session[contact]'][value='05 00 00 00 07']"
   end

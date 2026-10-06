@@ -1,0 +1,26 @@
+<%# 🌐 UI · teams/schools/_archived_staff — « Directions retirées » de la fiche (Queries::School::SchoolStaffQuery::ArchivedRow) %>
+<%# Rôle : qui a retiré, quand, et la date de suppression ; « Restaurer » si can_restore (RestoreSchoolStaffPolicy) %>
+<%# ADR  : 0077 · UDR : 0070 (§3.5) · rendu par la fiche s'il y a des lignes, et par le Turbo Stream du retrait même sans %>
+<%# locals: (school_public_id:, rows:, can_restore:) -%>
+<% fmt = ->(time) { date = time.to_date; date.day == 1 ? "1er #{l(date, format: "%B %Y")}" : l(date, format: :long) } %>
+<%= ui_card id: "school_archived_staff", title: t("teams.schools.archived_staff.title"), padding: :md, class: "mt-5" do %>
+  <ul id="school_archived_staff_list" class="divide-y divide-line">
+    <% rows.each do |row| %>
+      <li id="school_archived_staff_<%= row.public_id %>" class="flex min-h-tap items-center justify-between gap-3 py-3">
+        <div class="min-w-0">
+          <p class="truncate font-medium text-ink"><%= row.name %></p>
+          <p class="text-xs text-mute">
+            <%= t("teams.schools.archived_staff.line.#{row.gender}", date: fmt.(row.archived_at), author: row.archived_by_name) %>
+            · <%= t("teams.schools.archived_staff.due.#{row.gender}", date: fmt.(row.deletion_due_at)) %>
+          </p>
+        </div>
+        <% if can_restore %>
+          <%= form_with url: school_staff_member_restoration_path(school_public_id, row.public_id), method: :post do %>
+            <%= ui_button t("teams.schools.archived_staff.restore"), type: :submit, variant: :secondary, size: :sm,
+                                                                    "aria-label": t("teams.schools.archived_staff.restore_label", name: row.name) %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

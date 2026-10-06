@@ -1,0 +1,25 @@
+# Bloc « Direction » partagé par la direction et l'équipe (chantier inscription-direction) — ADR-0077, UDR-0070 §3.4
+fr:
+  shared:
+    school_staff:
+      title: "Direction"
+      subtitle: "%{used} / %{cap} comptes créés avec le code"
+      joined:
+        code: "Depuis le %{date} · avec le code"
+        invitation: "Depuis le %{date} · sur invitation"
+      you: "(vous)"
+      actions: "Actions pour %{name}"
+      remove: "Retirer de la direction"
+      newcomer: "Vous pourrez retirer un compte direction 7 jours après votre arrivée."
+      empty: "Aucun compte direction"
+      confirm:
+        title: "Retirer %{name} de la direction ?"
+        body: "Son compte est archivé : il ne peut plus se connecter. L'équipe Lnclass est prévenue et peut l'annuler pendant 30 jours ; ensuite, le compte est supprimé."
+        cancel: "Annuler"
+        submit: "Retirer"
+      # suites-inscription-direction : accordé au genre du compte retiré.
+      done:
+        male: "%{name} a été retiré de la direction."
+        female: "%{name} a été retirée de la direction."
+      forbidden: "Vous ne pouvez pas retirer ce compte."
+      not_found: "Introuvable."

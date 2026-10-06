@@ -113,7 +113,7 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     assert_equal 0, Orm::Session.count
   end
 
-  test "FU-32: a reload forgets the number; a school admin invitation also ends on the filled-in sign-in, then « Travail des élèves »" do
+  test "FU-32: a reload forgets the number; a school admin invitation also ends on the filled-in sign-in, then its home" do
     visit invitation_path(@invitation.token)
     accept_invitation
     assert_field "session[contact]", with: "01 00 00 00 09", wait: SIGN_IN_WAIT
@@ -130,7 +130,8 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     click_on I18n.t("identity.sessions.new.submit")
 
     assert_current_path school_admin_classrooms_path, wait: SIGN_IN_WAIT
-    assert_selector "h1", text: "Travail des élèves"
+    assert_selector "h1", text: /\ABonjour, /
+    assert_selector "#direction_home_school"
   end
 
   test "FU-33: an invitation sent without a name comes back in 422, focus on « Nom », nothing kept for the sign-in" do

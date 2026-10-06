@@ -10,7 +10,7 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     {
       "assume_ssl" => app.config.assume_ssl,
       "force_ssl" => app.config.force_ssl,
-      "http_root" => call.("http://lnclass.up.railway.app/").then { |r| [ r.status, r.headers["strict-transport-security"].to_s ] },
+      "http_page" => call.("http://lnclass.up.railway.app/mission").then { |r| [ r.status, r.headers["strict-transport-security"].to_s ] },
       "redirect_excludes" => %w[/up /].map { |path| app.config.ssl_options.dig(:redirect, :exclude).call(ActionDispatch::Request.new(Rack::MockRequest.env_for(path))) },
       "http_up" => call.("http://healthcheck.railway.app/up").status,
       "unknown_host" => call.("https://evil.example.org/").status,
@@ -33,7 +33,8 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     assert production["assume_ssl"]
     assert production["force_ssl"]
 
-    status, hsts = production["http_root"]
+    # A static public page: the probe's database is never connected, and the homepage now reads it (« Blog » link, UDR-0066).
+    status, hsts = production["http_page"]
     assert_equal 200, status, "derrière le proxy Railway, une requête est traitée comme HTTPS"
     assert_match(/max-age=\d+/, hsts)
   end
@@ -56,6 +57,15 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     hosts = EnvironmentProbe.run("production", "Rails.application.config.hosts.map(&:to_s)")
 
     assert_equal [ "localhost" ], hosts
+  end
+
+  test "a canonical host that production does not serve is warned about at boot, once; a served one is not" do
+    warning = "CANONICAL_HOST lnclass.com is not in config.hosts"
+    _, unserved = EnvironmentProbe.run_with_output("production", "true", env: RAILWAY)
+    _, served = EnvironmentProbe.run_with_output("production", "true", env: RAILWAY.merge("CANONICAL_HOST" => "www.lnclass.app"))
+
+    assert_equal 1, unserved.scan(warning).size, unserved
+    assert_no_match(/is not in config\.hosts/, served)
   end
 
   test "jobs go to Solid Queue" do

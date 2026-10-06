@@ -171,3 +171,43 @@ Lectures groupées : un `GROUP BY` par dimension (rôle, niveau, DRENA) ; la cou
 - `PERF=1 test/performance/school/heavy_screens_budget_test.rb` : p95 de la vue « année » à chaud sous 300 ms ; le froid est affiché.
 - `script/perf/measure_screens.rb` et `PERF_COLD=1` : la page à chaud et à froid.
 
+## Amendement du 2026-10-03 — lecture « Par établissement » d'une DRENA
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0068](../udr/0068-configuration-et-pilotage-par-etablissement.md) §3.6. Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Nouvelle lecture** `Queries::School::DrenaSchoolsQuery`, servie par le pilotage sous filtre DRENA : les établissements de la DRENA et, pour chacun, classes, enseignants, élèves et élèves actifs.
+- **Mêmes définitions** que `TeamDashboardQuery#drena_rows`, établissement par établissement : classes actives de l'année scolaire ; enseignants rattachés à titre principal, non anonymisés ; élèves placés (classe principale, non quittée, active, de l'année) ; élèves placés ayant commencé une session dans la période. Une définition qui change, change pour les deux lectures.
+- **Liste** : les établissements actifs, plus tout établissement non actif qui compte encore une classe, un enseignant ou un élève, pour que **la somme des établissements égale la ligne de la DRENA** (critère RE-08, testé).
+- **Nombre de requêtes fixe** (le total, puis une page de 25 aux chiffres calculés par agrégats groupés ou sous-requêtes), quel que soit le nombre d'établissements ; tri par élèves décroissants, nom, id ; recherche par `Queries::Shared::TextSearch` sur le nom.
+- **Aucun cache** : la page d'établissements n'entre pas dans le cache des chiffres de l'année (second amendement du 2026-09-29) ; `CACHE_VERSION` reste 1.
+- **Coût consenti** (constat du challenger, 2026-10-04) : en vue « année », la ligne DRENA et les chiffres clés sont gardés 5 minutes, le tableau des établissements est lu en direct. Pendant ces 5 minutes après un changement, la somme des établissements peut différer de la ligne DRENA (ex. 423 élèves contre 422). En 7 et 30 jours, les deux lectures sont en direct et égales (RE-08). Faire entrer le tableau dans le cache est le levier si l'écart gêne. Budget : celui du pilotage (ADR-0067, < 300 ms p95), mesuré sur la plus grande DRENA du jeu de mesure ; un dépassement ouvre un chantier `optimize` (index d'abord).
+
+## Amendement du 2026-10-04 — sous filtre DRENA, les établissements et les chiffres sont une seule lecture
+
+*Chantier [`docs/chantiers/dettes-reorganisation`](../../chantiers/dettes-reorganisation/memo.md) (bug 4), demande du porteur du 2026-10-04 (« Fix les 4 dettes »). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi. Remplace le « Coût consenti » et le point « Aucun cache » de l'amendement du 2026-10-03.*
+
+**Pourquoi.** En vue « année », sous filtre DRENA, la page lisait ses chiffres dans le cache (jusqu'à 5 minutes de retard) et le tableau « Par établissement » en direct. La somme des établissements pouvait donc différer des chiffres de la DRENA sur la même page, ce que la règle 8 de l'UDR-0068 (RE-08) interdit. Deux options ont été écartées :
+- **Un second cache pour le tableau** n'aligne rien : deux entrées remplies à deux instants restent décalées.
+- **Tout lire en direct sous filtre** referait payer le coût que le cache de l'année évite. La sous-requête des élèves actifs parcourt toutes les sessions de la période, quel que soit le filtre, et ce coût croît jusqu'à la fin de l'année scolaire.
+
+**Décision.** Sous un filtre DRENA, `TeamDashboardQuery` calcule, **dans la même lecture que ses chiffres**, les lignes de **tous** les établissements listés de la DRENA. `school_rows` vient de `DrenaSchoolsQuery#rows`, avec les définitions et la liste de l'amendement du 2026-10-03, inchangées.
+
+- **Même instant.** En vue « année », ces lignes entrent dans l'**entrée de cache des chiffres**, à la même clé. En 7 et 30 jours, tout est lu en direct, comme avant. Les chiffres du haut et le tableau datent donc toujours du même instant, et leur somme est égale à toute période.
+- **Recherche et pages.** `DrenaSchoolsQuery#page` les fait sur ces lignes : pages de 25, dans l'ordre de l'instantané.
+  - La recherche garde sa définition : `Queries::Shared::TextSearch` sur le nom, en SQL, en une requête, parmi les établissements de l'instantané.
+  - Un établissement créé ou renommé depuis apparaît à l'expiration de l'entrée, comme tout chiffre de l'année.
+- **Version du cache.** La forme des chiffres gardés change : `CACHE_VERSION` passe à **2**, et les entrées v1 ne sont plus lues. La vue nationale garde le même contenu, sans lignes d'établissements (`school_rows` vaut `nil`).
+- **Taille de l'entrée.** Elle grandit d'une ligne de sept valeurs par établissement de la DRENA : quelques centaines au plus, des nombres et des noms d'établissements, aucune donnée de personne.
+- **Requêtes.** Le nombre reste fixe, quel que soit le volume.
+  - Sous filtre, la lecture des chiffres compte une requête de plus (les lignes).
+  - Le contrôleur n'en lit plus que pour une recherche (une requête), au lieu de trois : la DRENA, le total et la page.
+
+**Coût consenti.**
+- Le tableau d'une DRENA en vue « année » a désormais le même retard possible que ses chiffres, jusqu'à 5 minutes.
+- En passant de la vue nationale à une DRENA, la ligne « Par DRENA » et la page filtrée sont deux entrées, remplies à deux instants : pendant 5 minutes au plus, elles peuvent différer. Ce sont deux pages ; l'égalité RE-08 est celle d'une même page.
+
+**Vérification.**
+- `test/infrastructure/queries/school/drena_schools_query_test.rb` : avec le cache réel, une page filtrée en vue « année » relue après un changement a toujours une somme des établissements égale à ses chiffres ; RE-07 à RE-10 inchangés.
+- `test/infrastructure/queries/school/team_dashboard_query_test.rb` : la vue nationale « année » garde son cache ; le nombre de requêtes reste indépendant du volume.
+- `PERF=1 test/performance/school/heavy_screens_budget_test.rb` : la page filtrée de la plus grande DRENA, en 7 jours et en année (entrée chaude), sous 300 ms p95.
+

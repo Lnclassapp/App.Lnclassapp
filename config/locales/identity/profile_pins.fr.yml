@@ -1,4 +1,6 @@
 # Changer son PIN depuis « Mon profil » (chantier profil-utilisateur, Lot C) — PR-06, PR-07, ADR-0055, UDR-0041
+# UDR-0041, amendement du 2026-10-06 : l'élève est tutoyé (charte §1) ; clés « _student », lues par tone_t. Les erreurs,
+# communes à tous les rôles, se disent sans pronom.
 fr:
   activemodel:
     attributes:
@@ -11,13 +13,13 @@ fr:
         dtos/identity/pin_change_input:
           attributes:
             current_pin:
-              blank: "Saisissez votre PIN actuel."
+              blank: "Le PIN actuel est obligatoire."
               invalid: "Le PIN compte 4 chiffres."
               incorrect: "PIN incorrect."
             pin:
-              blank: "Choisissez un nouveau PIN à 4 chiffres."
+              blank: "Le nouveau PIN, à 4 chiffres, est obligatoire."
               invalid: "Le PIN compte 4 chiffres."
-              unchanged: "C'est déjà votre PIN."
+              unchanged: "C'est déjà le PIN de ce compte."
             pin_confirmation:
               confirmation: "Les deux PIN ne sont pas identiques."
   identity:
@@ -25,8 +27,11 @@ fr:
       edit:
         title: "Changer mon PIN"
         intro: "Saisissez votre PIN actuel, puis deux fois le nouveau. Vos autres appareils seront déconnectés."
+        intro_student: "Saisis ton PIN actuel, puis deux fois le nouveau. Tes autres appareils seront déconnectés."
         pin_hint: "4 chiffres, que vous seul connaissez."
+        pin_hint_student: "4 chiffres, que toi seul connais."
         cancel: "Annuler"
         submit: "Changer mon PIN"
       update:
         changed: "Votre PIN est changé."
+        changed_student: "Ton PIN est changé."

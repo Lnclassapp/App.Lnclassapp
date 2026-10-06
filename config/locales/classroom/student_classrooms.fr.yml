@@ -1,26 +1,33 @@
-# Ma classe, élève (plan boucle-pedagogique, Lot A3, CL-22, CL-10 volet élève) — UDR-0007, UDR-0011
+# Ma classe, élève (plan boucle-pedagogique, Lot A3, CL-22, CL-10 volet élève) — UDR-0007, UDR-0011 (amendée le 2026-10-02, interface-epuree Lot E, puis fonctions-espace-eleve), UDR-0076 §3.2
 fr:
   classroom:
     student_classrooms:
       show:
         page_title: "Ma classe"
         title: "Ma classe"
-        subtitle: "%{school} · %{classroom}"
+        # UDR-0054, amendement du 2026-10-06 : nom de la page de destination.
+        back: "Accueil"
         level: "Niveau"
         school: "Établissement"
         school_year: "Année scolaire"
         join_code: "Code de la classe"
-        join_code_hint: "Tes camarades rejoignent la classe avec ce code."
+        join_code_info_tip: "Tes camarades rejoignent la classe avec ce code."
         no_join_code: "Aucun code pour cette classe"
         courses_title: "Cours assignés"
-        courses_subtitle: "Les cours que tes enseignants ont assignés à ta classe"
         courses_count:
           one: "1 cours"
           other: "%{count} cours"
         courses_empty: "Aucun cours assigné pour l'instant"
-        courses_empty_description: "Les cours que tes enseignants assignent à ta classe apparaîtront ici."
-      assigned_course:
-        essentials:
-          zero: "Aucune fiche essentielle"
-          one: "1 fiche essentielle"
-          other: "%{count} fiches essentielles"
+        courses_empty_description: "Les cours des exercices que tes enseignants assignent à ta classe apparaîtront ici."
+        assigned_title: "Exercices assignés"
+        assigned_empty: "Rien à faire pour l'instant"
+        assigned_empty_description: "Les exercices que tes enseignants assignent à ta classe apparaîtront ici."
+        treated_title: "Exercices traités"
+        treated_empty: "Aucun exercice traité pour l'instant"
+        treated_empty_description: "Termine un exercice pour retrouver ici ton meilleur score."
+      course_card:
+        assigned:
+          one: "1 exercice assigné"
+          other: "%{count} exercices assignés"
+      treated_exercise:
+        best: "Meilleur score"

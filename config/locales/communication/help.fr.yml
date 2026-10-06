@@ -1,0 +1,44 @@
+# Questions fréquentes (/aide) — UDR-0061, construite directement à la demande du porteur (2026-10-02) ;
+# « En retard » ajoutée par le lot des échéances (UDR-0062 §4, ADR-0072 §4.4 : rien ne se ferme après la date).
+# Les seuils (%{pass}, %{mastery}, %{gold}, %{perfect}, %{remediation}) et l'exemple de note viennent de
+# Entities::Assessment::Grading : la FAQ ne recopie aucun chiffre du barème.
+fr:
+  communication:
+    help:
+      show:
+        page_title: "Questions fréquentes"
+        logo_home: "Lnclass, accueil"
+        # Lien de retour : le nom de la page d'arrivée (UDR-0054 §3.2) ; connecté, l'accueil public renvoie à son accueil.
+        back: "Accueil"
+        title: "Questions fréquentes"
+        questions:
+          pin:
+            question: "J'ai oublié mon PIN, que faire ?"
+            answer: "Demande un code de récupération à ton enseignant ou à l'équipe Lnclass. Il a 8 chiffres et reste valable 15 minutes. Sur l'écran de connexion, touche « PIN oublié ? », saisis ton numéro, le code, puis ton nouveau PIN."
+          join:
+            question: "Comment rejoindre ma classe ?"
+            answer: "Ton enseignant te donne le code de la classe : 3 lettres puis 2 chiffres. Sur l'accueil de Lnclass, touche « Je suis élève », puis « Rejoindre ma classe », et saisis le code : la classe s'ouvre dès qu'il est complet."
+          change_classroom:
+            question: "Si je change de classe, est-ce que je perds mes résultats ?"
+            answer: "Non. En rejoignant une nouvelle classe avec son code, tu gardes ton compte, tes sessions et tes badges."
+          late:
+            question: "Que veut dire « En retard » ?"
+            answer: "La date limite donnée par ton enseignant est passée et tu n'as pas encore terminé l'exercice. Il reste ouvert : tu peux toujours le faire. Une fois terminé, il n'est plus marqué « En retard », mais ton enseignant voit qu'il a été rendu après la date."
+          grade:
+            question: "Comment ma note sur 20 est-elle calculée ?"
+            answer: "Elle vient de la part de bonnes réponses : 8 bonnes réponses sur 10, c'est 80 %, soit %{example_grade}/20. Sur la page d'un exercice, « Meilleure note » garde ton meilleur résultat."
+          badges:
+            question: "Comment gagner un badge ?"
+            answer: "En réussissant un exercice : Bronze à partir de %{pass} %, Argent à partir de %{mastery} %, Or à partir de %{gold} %, Diamant à %{perfect} %, sans aucune faute. Tu as un seul badge par exercice, et il ne peut que monter."
+          mastery:
+            question: "Que veut dire « Maîtrise » ?"
+            answer: "Elle dit où tu en es sur un exercice : Acquis à partir de %{mastery} %, Fragile à partir de %{pass} %, En difficulté sous %{pass} %."
+          gaps:
+            question: "Pourquoi une fiche est-elle « à revoir » ?"
+            answer: "Quand tu obtiens moins de %{pass} % à un exercice, sa fiche essentielle passe « à revoir ». Relis-la, puis obtiens au moins %{remediation} % à l'un de ses exercices : elle ne sera plus à revoir."
+          retry:
+            question: "Puis-je refaire un exercice ?"
+            answer: "Oui, autant de fois que tu veux. Ta meilleure note et ton badge restent acquis. « Recommencer » abandonne la session en cours et repart de la première question."
+          profile:
+            question: "Comment changer mon numéro, mon nom ou mon PIN ?"
+            answer: "Ouvre le menu de ton compte, en haut de l'écran, puis « Mon profil ». Tu peux y changer ton nom, ton numéro et ton PIN."

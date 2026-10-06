@@ -1,0 +1,30 @@
+<%# 🌐 UI · communication/articles/index — liste publique du blog, dix articles par page, sans shell %>
+<%# Rôle : en-tête commun, h1 « Blog », cartes ou état vide, pagination ; balises de partage de la liste %>
+<%# UDR  : 0066 (§3.2, §3.4, §3.6) · ADR : 0074 %>
+<% paged = @page.page > 1 %>
+<% page_title(paged ? t(".page_title_paged", page: @page.page) : t(".page_title")) %>
+<% content_for :head do %>
+  <%= render "communication/articles/head", title: t(".og_title"), description: t(".description"),
+                                            canonical: canonical_url(paged ? blog_path(page: @page.page) : blog_path),
+                                            type: "website", image: nil, published_on: nil %>
+<% end %>
+<main class="flex min-h-dvh flex-col items-center bg-paper px-gutter py-10">
+  <div class="w-full max-w-prose">
+    <%= render "communication/articles/masthead", back_label: t(".back"), back_href: root_path %>
+    <h1 id="blog_title" class="mb-6 font-display text-3xl leading-tight font-extrabold"><%= t(".title") %></h1>
+    <% if @page.rows.any? %>
+      <%# Pas de préchargement au survol : il serait compté comme une lecture (BL-17). %>
+      <ol id="blog_articles" class="space-y-5" aria-labelledby="blog_title" data-turbo-prefetch="false">
+        <% @page.rows.each_with_index do |article, index| %>
+          <li><%= render "communication/articles/article_card", article:, eager: index.zero? %></li>
+        <% end %>
+      </ol>
+      <div class="mt-8"><%= ui_pagination page: @page.page, pages: @page.pages %></div>
+    <% else %>
+      <div id="blog_empty">
+        <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description"), icon: "newspaper",
+                           action: { label: t(".empty.action"), href: root_path } %>
+      </div>
+    <% end %>
+  </div>
+</main>

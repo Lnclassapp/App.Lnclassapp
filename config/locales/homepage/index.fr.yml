@@ -1,63 +1,83 @@
+# Page d'accueil publique — UDR-0064 (un écran, une décision) ; modales de rôle — UDR-0012 §2 ; pied — UDR-0063 §3.4.
+# L'élève est tutoyé, l'enseignant vouvoyé, comme dans l'application. Aucun tarif, aucune promesse hors V1 ;
+# l'enseignant n'assigne que des exercices (UDR-0062 §4).
 fr:
   homepage:
     index:
       page_title: "Accueil"
       nav:
-        audience: "Pour qui ?"
-        features: "Fonctionnalités"
-        how: "Comment ça marche"
+        label: "Navigation principale"
+        home: "Lnclass, accueil"
         sign_in: "Se connecter"
       hero:
         eyebrow: "Programme officiel, de la 6e à la Terminale"
-        title: "Avec Lnclass, tu comprends chap chap !"
-        lead: "Accède à tes cours, fais tes exercices et prépare tes examens avec tes enseignants sur Lnclass."
+        title: "Lnclass, tu comprends chap chap !"
+        lead: "Révise l'essentiel du cours, fais tes exercices avec la correction et prépare tes interros avec tes enseignants."
         image_alt: "Deux élèves révisent leurs cours avec Lnclass sur leur téléphone"
         card_title: "Badge Or obtenu"
         card_meta: "Mathématiques · score de 85 %"
       subjects:
-        label: "Toutes les matières du programme"
-        more: "et plus encore"
-      audience:
-        eyebrow: "Pour qui ?"
-        title: "Un espace pour chaque rôle de la classe."
-        lead: "L'élève apprend à son rythme, l'enseignant guide sa classe : chacun a son espace, pensé pour ses besoins."
-        roles:
-          students:
-            title: "Élèves"
-            text: "Rejoins ta classe avec son code, révise les fiches essentielles et entraîne-toi avec des exercices corrigés."
-          teachers:
-            title: "Enseignants"
-            text: "Déclare tes classes, assigne-leur des cours et des exercices, et suis les scores de tes élèves."
-      features:
-        eyebrow: "Fonctionnalités"
-        title: "Tout ce qu'il faut pour apprendre, rien de superflu."
-        lead: "Une application légère, conçue pour fonctionner sur tous les téléphones, même avec une connexion modeste."
-        items:
-          exercises:
-            title: "Exercices quotidiens"
-            text: "10 à 15 minutes par jour, avec la correction détaillée de chaque question."
-          curriculum:
-            title: "Programme officiel"
-            text: "Des cours et des fiches essentielles de la 6e à la Terminale, pour préparer le BEPC et le BAC."
-          badges:
-            title: "Badges et progression"
-            text: "Bronze, Argent, Or ou Diamant selon ton score, et la maîtrise de chaque exercice."
-          teachers:
-            title: "Espace enseignant"
-            text: "Assigne du contenu à tes classes et suis les résultats de tes élèves."
+        label: "Les matières du programme"
       how:
         eyebrow: "Comment ça marche"
         title: "Prêt en trois étapes."
         steps:
           code:
             title: "Récupère le code de ta classe"
-            text: "Ton enseignant te le donne. Enseignant, crée ton compte et déclare tes classes."
+            text: "Ton enseignant te le donne, en classe ou sur WhatsApp."
           join:
             title: "Rejoins ta classe"
-            text: "Saisis le code, crée ton compte en quelques secondes et retrouve ta classe."
+            text: "Saisis le code, puis crée ton compte avec ton numéro et un PIN à 4 chiffres."
           learn:
             title: "Apprends et progresse"
-            text: "Fais tes exercices, lis la correction et gagne tes badges."
+            text: "Fais tes exercices, lis la correction de chaque question et gagne tes badges."
+      features:
+        eyebrow: "Fonctionnalités"
+        title: "Tout ce qu'il faut pour apprendre, rien de superflu."
+        lead: "Une application légère, pensée pour les téléphones de tous les jours."
+        items:
+          exercises:
+            title: "Exercices corrigés"
+            text: "10 à 15 minutes par jour, avec la correction détaillée de chaque question."
+          curriculum:
+            title: "Programme officiel"
+            text: "Des cours et des fiches essentielles de la 6e à la Terminale, pour préparer le BEPC et le BAC."
+          badges:
+            title: "Badges et progression"
+            text: "Bronze, Argent, Or ou Diamant selon ton score, pour chaque exercice."
+          light:
+            title: "Léger, sur tous les téléphones"
+            text: "Lnclass se charge vite, même avec une petite connexion, et sans rien installer."
+      teachers:
+        eyebrow: "Enseignants"
+        title: "Votre classe vous suit sur Lnclass."
+        lead: "Créez votre espace en quelques minutes : vos classes, vos élèves et leurs résultats, au même endroit."
+        items:
+          classrooms: "Déclarez vos classes et partagez leur code à vos élèves."
+          assign: "Assignez-leur des exercices du catalogue, avec les jours de vos séances."
+          follow: "Suivez le score de chaque élève, classe par classe."
+        cta: "Créer mon compte enseignant"
+      # UDR-0070 §3.2 : le lien discret du haut de page et la section des établissements (direction, vouvoyée).
+      school_staff_link:
+        prompt: "Vous êtes la direction d'un établissement ?"
+        link: "Créer votre compte"
+      schools:
+        eyebrow: "Établissements"
+        title: "Suivez le travail de tout votre établissement"
+        lead: "Proviseur, censeur, directeur des études : créez votre compte avec le code de votre établissement."
+        items:
+          student_work: "Le travail des élèves, classe par classe"
+          teachers: "Vos enseignants, leurs classes, leur arrivée"
+          link: "Le lien d'inscription à partager à vos professeurs"
+        cta: "Créer mon compte de direction"
+      footer:
+        copyright: "© %{year}"
+        # UDR-0066 §3.5 : la liste porte la mission et le blog, pas seulement des informations légales.
+        public_pages: "Plus sur Lnclass"
+        how: "Comment ça marche"
+        teachers: "Enseignants"
+        schools: "Établissements"
+        sign_in: "Se connecter"
     role_modal:
       sign_in: "Se connecter"
       student:
@@ -68,7 +88,7 @@ fr:
         hint: "Ton enseignant te donne le code de ta classe."
       teacher:
         trigger: "Je suis enseignant"
-        title: "Tu es enseignant ?"
-        lead: "Crée ton espace pour assigner du contenu à tes classes et suivre tes élèves."
+        title: "Vous êtes enseignant ?"
+        lead: "Créez votre espace pour assigner des exercices à vos classes et suivre vos élèves."
         sign_up: "Créer un compte"
-        hint: "Tu déclares tes classes juste après ton inscription."
+        hint: "Vous déclarez vos classes juste après votre inscription."

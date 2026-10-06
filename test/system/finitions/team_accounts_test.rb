@@ -66,7 +66,9 @@ class FinitionsTeamAccountsTest < ApplicationSystemTestCase
     select "Abidjan 1", from: "DRENA"
 
     assert_selector "#team_dashboard_scope", text: "Abidjan 1"
-    assert_selector "#team_dashboard_drenas tbody tr", count: 1
+    # UDR-0068 §3.6 : sous un filtre, « Par DRENA » laisse place aux établissements de la DRENA.
+    assert_no_selector "#team_dashboard_drenas"
+    assert_selector "#team_dashboard_schools tbody tr", count: 1
     assert_match(/drena=#{abidjan.public_id}/, current_url)
   end
 

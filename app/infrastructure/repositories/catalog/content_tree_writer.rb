@@ -122,7 +122,7 @@ module Repositories
       # seul le strip que cette conversion appliquait est gardé.
       def write_rich_texts(record_type, nodes, ids)
         rows = nodes.filter_map do |node|
-          body = RichTextSanitizer.call(node.content.to_s)
+          body = Repositories::Shared::RichTextSanitizer.call(node.content.to_s)
           { record_type:, record_id: ids.fetch(node.slug), name: "content", body: body.strip } if body.present?
         end
         insert(Orm::RichTextRow, rows)

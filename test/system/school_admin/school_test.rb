@@ -37,7 +37,7 @@ class SchoolAdmin::SchoolTest < ApplicationSystemTestCase
   def assert_school_journey(nav:)
     assert_selector "main#main", wait: SIGN_IN_WAIT
     within(nav) do
-      assert_selector "a[href]", count: 3
+      assert_selector "a[href]", count: 4 # « Annonces », last, since annonces (UDR-0071 §3.1)
       assert_no_selector "a[aria-disabled]"
       click_link tn(:school)
     end

@@ -1,9 +1,10 @@
 <%# 🌐 UI · teams/series/index — écran des séries de l'équipe %>
 <%# Rôle : tableau des séries (code, niveaux, classes, cours), puis la matrice niveau × série ; tout s'écrit sans rechargement %>
-<%# ADR  : 0034, 0036 · UDR : 0006, 0033, 0054 %>
+<%# ADR  : 0034, 0036 · UDR : 0006, 0033, 0054, 0068 %>
 <% page_title t(".page_title") %>
+<% content_for :nav_key, "referential" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle"),
-                   back: { label: t(".back"), href: team_home_path } do %>
+                   back: { label: t(".back"), href: teams_referential_path } do %>
   <%= ui_button t(".new"), href: new_series_path, icon: "plus", data: { turbo_frame: "modal" } %>
 <% end %>
 

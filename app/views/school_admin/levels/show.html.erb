@@ -1,0 +1,18 @@
+<%# 🌐 UI · school_admin/levels/show — page d'un niveau pour la direction (AD-09 à AD-12, AD-22) %>
+<%# Rôle : une carte par classe active de l'année du niveau, triée par nom, avec sa pastille ; la légende si une pastille au moins %>
+<%# ADR  : 0065 · UDR : 0052, 0074 (§3.8, §3.12) · le taux et la moyenne sont ceux de la page d'une classe, inchangés %>
+<% page_title @level.level_name %>
+<% content_for :nav_key, "home" %>
+<% illustration = level_illustration(@level.level_slug) %>
+<% signals = @level.classrooms.map { Entities::School::WorkSignal.for(it.submission_rate) } %>
+<%= ui_page_header title: @level.level_name,
+                   subtitle: t(".subtitle", classrooms: t(".classrooms", count: @level.classrooms.size),
+                                            students: t(".students", count: @level.students_count)),
+                   back: { label: t(".back"), href: school_admin_classrooms_path } %>
+
+<ul id="level_classrooms" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+  <% @level.classrooms.zip(signals) do |classroom, signal| %>
+    <%= render "classroom_card", classroom:, illustration:, signal: %>
+  <% end %>
+</ul>
+<%= render "school_admin/shared/signal_legend" if signals.any? %>

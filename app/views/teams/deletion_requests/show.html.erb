@@ -1,0 +1,5 @@
+<%# 🌐 UI · teams/deletion_requests/show — le bloc « demande de suppression » d'un compte élève, chargé par son frame %>
+<%# Rôle : rend teams/deletion_requests/_account_block pour le frame de la fiche du compte %>
+<%# ADR  : 0036 (amendement 2) · UDR : 0020 %>
+<% page_title t(".page_title", name: @account.display_name) %>
+<%= render "account_block", account: @account, request: @request %>

@@ -1,0 +1,15 @@
+<%# 🌐 UI · school_admin/shared/_signal_legend — légende des pastilles de la direction, sous les bulles et sous les cartes %>
+<%# Rôle : ce que mesure la pastille (infobulle du taux de rendu) et le seuil de chacune des trois couleurs %>
+<%# UDR  : 0074 (§3.12) · la couleur n'est jamais seule : chaque pastille a son texte %>
+<div id="signal_legend" class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-mute">
+  <span>
+    <%= t("school_admin.signals.legend_title") %>
+    <%= ui_info_tip t("school_admin.classrooms.tips.submission_rate"), label: t("school_admin.signals.legend_title") %>
+  </span>
+  <% Entities::School::WorkSignal::ALL.each do |signal| %>
+    <span class="inline-flex items-center gap-1.5">
+      <%= tag.span(class: [ "size-2.5 rounded-full", ComponentsHelper::SIGNAL_DOTS.fetch(signal) ], "aria-hidden": true) %>
+      <%= t("school_admin.signals.#{signal}.legend") %>
+    </span>
+  <% end %>
+</div>

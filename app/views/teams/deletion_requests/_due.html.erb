@@ -1,0 +1,10 @@
+<%# 🌐 UI · teams/deletion_requests/_due — l'échéance d'une demande de suppression (réception + 30 jours) %>
+<%# Rôle : « À traiter avant le … », ambre à 5 jours ou moins (25e jour), « En retard » au-delà ; texte et couleur ensemble %>
+<%# ADR  : 0036 (amendement 2) · UDR : 0062 (ambre réservé aux échéances), 0057 (R6) %>
+<%# locals: (due_on:, stage:) -%>
+<% date = l(due_on, format: :due_short) %>
+<% if stage == :late %>
+  <%= ui_badge t(".late", date:), tone: :warning, size: :sm, icon: "exclamation-circle" %>
+<% else %>
+  <%= ui_badge t(".before", date:), tone: stage == :soon ? :warning : :neutral, size: :sm, icon: "clock" %>
+<% end %>

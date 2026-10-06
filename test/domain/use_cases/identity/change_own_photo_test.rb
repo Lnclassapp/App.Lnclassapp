@@ -37,7 +37,7 @@ module UseCases
         assert result.success?
         stored = @photos.read(user_id: 3)
         assert_equal "image/jpeg", stored.content_type
-        assert_not Entities::Identity::ImageHeader.read(stored.data).metadata
+        assert_not Entities::Shared::ImageHeader.read(stored.data).metadata
         assert_equal [ { action: "profile.photo_changed", actor_id: 3, at: NOW, subject_type: "User", subject_id: 3,
                          metadata: { content_type: "image/jpeg", byte_size: stored.data.bytesize, width: 64, height: 48,
                                      replaced: false }, ip: "1.2.3.4" } ], @audit.entries
@@ -60,7 +60,7 @@ module UseCases
       end
 
       test "no file, a PDF, a too wide image: invalid with the errors of the form; nothing stored nor audited" do
-        { nil => "Choisissez une photo.", "document.pdf" => "Choisissez une photo JPEG, PNG ou WebP.",
+        { nil => "Aucune photo n'est choisie.", "document.pdf" => "La photo est en JPEG, PNG ou WebP.",
           "too_wide.png" => "La photo mesure 1024 pixels de côté au plus." }.each do |name, message|
           result = change(name)
 

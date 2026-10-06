@@ -1,0 +1,17 @@
+<%# 🌐 UI · classroom/student_classrooms/_assigned_exercise — un exercice assigné que l'élève n'a pas encore fait %>
+<%# Rôle : toute la ligne mène à l'exercice : titre, matière, échéance ; aucun bouton, « Ma classe » n'a pas d'action principale %>
+<%# ADR  : 0072 · UDR : 0057 (R1, R3), 0062 §3.1 (due_badge), 0076 §3.2 %>
+<%# locals: (exercise:, index:) -%>
+<%= tag.li(**ui_reveal_item(index)) do %>
+  <%= link_to exercise_path(exercise.public_id),
+              class: "group flex min-h-tap items-center gap-3 px-4 py-3 transition hover:bg-mist active:bg-mist sm:px-6 focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <span class="min-w-0 flex-1 space-y-1">
+      <span class="line-clamp-2 font-medium break-words text-ink"><%= exercise.title %></span>
+      <span class="flex flex-wrap items-center gap-2">
+        <%= ui_subject_badge exercise.material_name, category: exercise.material_category, size: :sm %>
+        <%= due_badge exercise.due_on, size: :sm %>
+      </span>
+    </span>
+    <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
+  <% end %>
+<% end %>

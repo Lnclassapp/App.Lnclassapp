@@ -1,0 +1,9 @@
+<%# 🌐 UI · communication/authored_messages/new — « Nouvelle annonce », page entière (jamais une modale) %>
+<%# Rôle : le formulaire d'annonce vide (première illustration, « Ciel », encadré du plafond) ; re-rendu en 422 après une saisie refusée %>
+<%# ADR  : 0078, 0081 · UDR : 0054, 0071 (§3.8), 0075 (§3.3) %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "announcements" %>
+<%= ui_page_header title: t(".title"), back: { label: t("communication.tabs.mine"), href: my_announcements_path } %>
+<%= ui_card do %>
+  <%= render "form", form: @form, message: nil, url: announcements_path, method: :post %>
+<% end %>

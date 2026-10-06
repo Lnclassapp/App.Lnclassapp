@@ -18,3 +18,23 @@ production:
     class: Shared::PurgeUnattachedBlobsJob
     queue: default
     schedule: every day at 3am
+  # ADR-0074 §4.4 : article images uploaded then never saved (modal closed) are deleted after 48 h, file purged.
+  purge_orphan_article_images:
+    class: Communication::PurgeOrphanArticleImagesJob
+    queue: default
+    schedule: every day at 3:30am
+  # ADR-0077 §4.5 : school staff accounts archived for 30 days are anonymized, their attachment deleted.
+  purge_archived_staff:
+    class: School::PurgeArchivedStaffJob
+    queue: default
+    schedule: every day at 4am
+  # ADR-0080 : the IP of audit events older than 12 months is erased; the events stay.
+  erase_audit_ips:
+    class: Identity::EraseAuditIpsJob
+    queue: default
+    schedule: every day at 4:30am
+  # ADR-0045, ADR-0078 : scheduled announcements are published within 5 minutes of their time.
+  publish_scheduled_messages:
+    class: Communication::PublishScheduledMessagesJob
+    queue: default
+    schedule: every 5 minutes

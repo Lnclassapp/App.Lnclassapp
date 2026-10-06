@@ -1,7 +1,7 @@
 require "test_helper"
 
 # UDR-0013 et ADR-0035, amendements du 2026-10-01 : un élève de Tle D ne voit, n'ouvre et ne commence que les cours de
-# Tle D et ceux de Tle sans série ; un autre niveau répond 404 sans rien confirmer. Les autres rôles lisent tout.
+# Tle D et ceux de Tle sans série ; un autre niveau répond 404 sans rien confirmer. Les autres rôles ouvrent tout.
 class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
   setup do
     tle = create_level(name: "Tle")
@@ -27,7 +27,11 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{@other.slug}", 0
     assert_select "select[name=level]", 0
     assert_select "select[name=material]"
-    assert_match tl("student_subtitle"), response.body
+    # UDR-0013, amendement du 2026-10-02 (UDR-0057) : plus de sous-titre ; la portée du catalogue passe dans l'infobulle, et
+    # le badge de niveau quitte les cartes.
+    assert_select "#main details", text: /#{Regexp.escape(tl("student_scope"))}/
+    assert_no_match(/#{Regexp.escape(tl("subtitle"))}|Les cours de ton niveau, par matière/, response.body)
+    assert_select "#courses_list", text: /Tle/, count: 0
   end
 
   test "a course, a sheet and an exercise of another level answer 404 to the student, and no session starts" do
@@ -49,7 +53,9 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "a student without a class of the year is told to join one; a teacher still reads every level" do
+  # UDR-0077 §3.2 : le catalogue de l'enseignant se réduit à sa matière et à ses niveaux ; la page d'un cours, elle,
+  # reste ouverte à tout niveau (une lecture du catalogue, pas une règle d'accès).
+  test "a student without a class of the year is told to join one; a teacher still opens every level's course" do
     sign_in_as create_student
 
     get courses_path
@@ -57,11 +63,12 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     assert_select "#courses_empty", text: /#{Regexp.escape(tl("no_class_title"))}/
     sign_out
 
-    sign_in_as create_teacher
+    sign_in_as create_teacher(material: @own.material, classrooms: [ create_classroom(level: @own.level, series: @own.series) ])
     get course_path(@other.slug)
     assert_response :success
     get courses_path
-    assert_select "#course_#{@other.slug}"
+    assert_select "#course_#{@own.slug}"
+    assert_select "#course_#{@other.slug}", 0
   end
 
   # Revue de sécurité de la mise en production du 2026-10-01 : une session ouverte avant la règle, sur un exercice d'un

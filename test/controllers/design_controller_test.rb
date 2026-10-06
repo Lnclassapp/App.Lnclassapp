@@ -28,6 +28,35 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#design-search-form[role=search][aria-label='#{I18n.t("design.index.finishes.search.label")}']"
   end
 
+  # UDR-0071 §3.6 and §3.8: the components the announcements bring are shown with the others.
+  test "the style guide shows a toast with its action and a checkbox group" do
+    get design_path
+
+    assert_select "[data-example=toast-action] [data-controller=toast] form[data-action='turbo:submit-start->toast#dismiss'] button",
+                  text: I18n.t("design.index.toasts.action.undo")
+    assert_select "[data-example=field-checkbox-group] fieldset#design_announcement_classrooms input[type=checkbox]", 3
+  end
+
+  # UDR-0071 §3.3: the eight illustrations of the announcements, each named.
+  test "the style guide shows the eight announcement illustrations, named" do
+    get design_path
+
+    assert_select "nav a[href='#announcement_illustrations']", I18n.t("design.index.sections.announcement_illustrations")
+    assert_select "section#announcement_illustrations li[data-illustration]", 8
+    Entities::Communication::Message::ILLUSTRATIONS.each do |key|
+      assert_select "li[data-illustration=#{key}] svg[aria-hidden=true]"
+      assert_select "li[data-illustration=#{key}] p", text: I18n.t("communication.illustrations.#{key}")
+    end
+  end
+
+  # UDR-0076 §3.1 (amends UDR-0071 §3.1): the student home reads classroom, subjects, announcements, « À faire ».
+  test "the student shell shows classroom, subjects, announcements, then « À faire »" do
+    get design_shell_path(role: "student")
+
+    titles = css_select("main h2").map { it.text.strip }
+    assert_equal %w[classroom subjects announcements todo].map { I18n.t("shared.home.sections.#{it}.title") }, titles
+  end
+
   test "refuses an unknown role" do
     assert_raises(ActionController::UrlGenerationError) { design_shell_path(role: "admin") }
   end

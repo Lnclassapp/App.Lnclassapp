@@ -1,15 +1,32 @@
 <%# 🌐 UI · catalog/courses/_essential_row — une fiche essentielle dans la page de son cours (CA-10) %>
-<%# Rôle : lien vers la fiche, sous-titre ; statut de la fiche pour l'équipe %>
-<%# ADR  : 0035 · UDR : 0007, 0013 %>
-<li id="essential_<%= essential.slug %>" class="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-  <div class="min-w-0">
-    <%= link_to essential.name, course_essential_path(course_slug, essential.slug),
-                class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-    <% if essential.subtitle.present? %>
-      <p class="mt-0.5 truncate text-sm text-mute"><%= essential.subtitle %></p>
-    <% end %>
-  </div>
-  <% if show_status %>
-    <div class="flex shrink-0 flex-wrap items-center gap-2"><%= content_status_badge(essential.status) %></div>
+<%# Rôle : lien vers la fiche, sous-titre ; statut pour l'équipe ; élève : la ligne entière est le lien, repliée au-delà de 3 (UDR-0057) %>
+<%# ADR  : 0035 · UDR : 0007, 0013, 0057 %>
+<%# locals: (essential:, course_slug:, show_status:, student: false, folded: false) -%>
+<% if student %>
+  <%# Lien étiré (motif de classroom/classrooms/_assigned_courses) ; sans pastille de matière : c'est celle du cours (R6). %>
+  <%= tag.li id: "essential_#{essential.slug}", class: "relative flex items-center gap-3 px-4 py-4 active:bg-mist sm:px-5",
+             hidden: folded, data: { reveal_target: "item" } do %>
+    <div class="min-w-0 flex-1">
+      <%# Titre et sous-titre sur 2 lignes au plus : une ligne tronquait le titre à 390 px (chantier ux-pages-eleve). %>
+      <%= link_to essential.name, course_essential_path(course_slug, essential.slug),
+                  class: "line-clamp-2 font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+      <% if essential.subtitle.present? %>
+        <p class="mt-0.5 line-clamp-2 text-sm text-mute"><%= essential.subtitle %></p>
+      <% end %>
+    </div>
+    <%= ui_icon "chevron-right", variant: :mini, class: "text-mute" %>
   <% end %>
-</li>
+<% else %>
+  <li id="essential_<%= essential.slug %>" class="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+    <div class="min-w-0">
+      <%= link_to essential.name, course_essential_path(course_slug, essential.slug),
+                  class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+      <% if essential.subtitle.present? %>
+        <p class="mt-0.5 truncate text-sm text-mute"><%= essential.subtitle %></p>
+      <% end %>
+    </div>
+    <% if show_status %>
+      <div class="flex shrink-0 flex-wrap items-center gap-2"><%= content_status_badge(essential.status) %></div>
+    <% end %>
+  </li>
+<% end %>

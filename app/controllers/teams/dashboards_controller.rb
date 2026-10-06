@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::DashboardsController
-# Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs filtrés par période et DRENA ; recherche de compte (TR-11) dans son frame
-# ADR  : 0028, 0038, 0049, 0062 · UDR : 0006, 0049
+# Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs par période et DRENA, établissements de la DRENA ; recherche de compte (TR-11)
+# ADR  : 0028, 0038, 0049, 0062 · UDR : 0006, 0049, 0068
 module Teams
   class DashboardsController < BaseController
     SEARCH_FRAME = "team_dashboard_search".freeze
@@ -22,6 +22,15 @@ module Teams
       @period = Entities::School::ReportingPeriod.parse(text_param(:period), today: Date.current)
       @dashboard = Queries::School::TeamDashboardQuery.new.call(period: @period, drena_public_id: text_param(:drena))
       @drenas = Queries::School::SchoolOptionsQuery.new.drenas
+      read_schools if @dashboard.drena
+    end
+
+    # UDR-0068 §3.6 : sous filtre DRENA, « Par établissement » remplace « Par DRENA », paginé et cherché côté serveur. Ses
+    # lignes viennent de la lecture des chiffres (ADR-0062, amendement du 2026-10-04) : la somme égale toujours le haut.
+    def read_schools
+      @school_search = text_param(:school_q)
+      @schools = Queries::School::DrenaSchoolsQuery.new.page(drena: @dashboard.drena, rows: @dashboard.school_rows,
+                                                             search: @school_search, page: text_param(:school_page))
     end
 
     # Un paramètre de la page n'est lu que s'il est un texte sans octet nul : un tableau (q[]=), un hash (page[a]=) ou

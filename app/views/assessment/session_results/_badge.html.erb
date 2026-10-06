@@ -1,12 +1,14 @@
-<%# 🌐 UI · assessment/session_results/_badge — palier obtenu par la session : Bronze, Argent, Or, Diamant ou « Non acquis » %>
+<%# 🌐 UI · assessment/session_results/_badge — palier obtenu par la session : Bronze, Argent, Or, Diamant ou « Pas encore de badge » %>
 <%# Rôle : médaillon et nom du palier, nommé en toutes lettres pour les lecteurs d'écran ; « Nouveau badge ! » si earned_now %>
 <%# ADR  : 0033 · UDR : 0007, 0023, 0054 · les seuils des paliers en infobulle, juste après le nom %>
-<% name = badge_label(level) %>
+<%# Sans palier, un but à atteindre (drapeau) et non « Non acquis » sous un cadenas : à côté de la maîtrise « En difficulté »,
+    deux mots pour le même échec (2026-10-06). %>
+<% name = level ? badge_label(level) : t(".none") %>
 <div id="session_badge" role="group" aria-label="<%= level ? t(".label", level: name) : name %>"
      class="flex flex-col items-center gap-2 animate-slide-up">
   <span class="grid size-24 place-items-center rounded-full border-4 border-white shadow-lift <%= ComponentsHelper::BADGE_TONES.fetch(badge_tone(level))[:chip] %>"
         aria-hidden="true">
-    <%= ui_icon level ? "trophy" : "lock-closed", variant: :solid, size: :xl %>
+    <%= ui_icon level ? "trophy" : "flag", variant: :solid, size: :xl %>
   </span>
   <div>
     <span class="font-display text-sm font-extrabold tracking-wide uppercase"><%= name %></span><%= ui_info_tip t("shared.info_tips.badges"), label: t(".help") %>

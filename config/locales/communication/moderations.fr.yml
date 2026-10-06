@@ -1,0 +1,34 @@
+# « Enseignants » (direction) et « Toutes » (équipe) : les annonces en cours à modérer (chantier annonces, Lot C) — ADR-0078, UDR-0071 §3.7
+fr:
+  communication:
+    moderations:
+      # Design system §12 : « 5 oct. », « 1ᵉʳ nov. », « 5 oct. à 10:00 », comme « Mes annonces »
+      formats:
+        day: "%-d %b"
+        first_day: "1ᵉʳ %b"
+        time: "%H:%M"
+        day_and_time: "%{day} à %{time}"
+      index:
+        # Le helper ajoute l'espace et « Lnclass » (UDR-0054 §3.1).
+        page_title:
+          school_admin: "Enseignants · Annonces"
+          team: "Toutes · Annonces"
+        title: "Annonces"
+        filter:
+          label: "Filtrer les annonces par établissement"
+          school: "Établissement"
+          hint: "Nom ou sigle"
+          submit: "Filtrer"
+        empty:
+          school_admin: "Vos enseignants n'ont aucune annonce en cours."
+          team: "Aucune annonce en cours."
+          search: "Aucune annonce pour cet établissement."
+      moderated_message:
+        line: "%{place} · %{dates}"
+        dates:
+          scheduled: "Programmée le %{date}"
+          published: "Publiée le %{date} · jusqu'au %{last_day}"
+        withdraw: "Retirer"
+        withdraw_title: "Retirer cette annonce ?"
+        withdraw_text: "Elle disparaîtra pour tous ses destinataires. Son auteur la verra « Retirée » et ne pourra pas la republier."
+        cancel: "Annuler"

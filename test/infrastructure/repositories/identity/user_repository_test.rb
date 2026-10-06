@@ -58,6 +58,24 @@ module Repositories
                      @repository.actor_for(user_id: admin.id)
       end
 
+      # ADR-0077 §4.2 : un compte direction archivé reçoit le refus d'un mauvais PIN ; une session survivante mène à l'attente.
+      test "an archived school admin is not authenticated by their right PIN and their actor has no school" do
+        admin = create_school_admin(pin: "1357", archived_at: 1.day.ago)
+
+        assert_nil @repository.authenticate(contact: admin.contact, pin: "1357")
+        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: nil),
+                     @repository.actor_for(user_id: admin.id)
+      end
+
+      test "a restored school admin signs in again and finds their school" do
+        school = create_school
+        admin = create_school_admin(school:, pin: "1357", archived_at: 1.day.ago)
+        admin.school_staff.update!(archived_at: nil, archived_by: nil)
+
+        assert_equal admin.id, @repository.authenticate(contact: admin.contact, pin: "1357").id
+        assert_equal school.id, @repository.actor_for(user_id: admin.id).school_id
+      end
+
       test "actor_for gives a school admin without attachment no school" do
         admin = create_user(role: "school_admin")
 
@@ -95,6 +113,20 @@ module Repositories
 
         assert_equal [ :conflict, { contact: [ :taken ] } ], [ result.code, result.errors ]
         assert_equal "0102030405", record.reload.contact
+      end
+
+      # ADR-0036 §4: the number is freed, the PIN is a random secret nobody knows, the name says the account is gone.
+      test "anonymize renames the account, frees its number, replaces its PIN and dates the anonymization" do
+        record = create_student(contact: "0102030405", pin: "2468")
+        at = Time.current.change(usec: 0)
+
+        assert @repository.anonymize(user_id: record.id, first_name: "Compte", last_name: "supprimé", at:)
+
+        record.reload
+        assert_equal [ "Compte", "supprimé", nil, at ], [ record.first_name, record.last_name, record.contact, record.anonymized_at ]
+        assert_not record.authenticate_pin("2468")
+        assert_nil @repository.authenticate(contact: "0102030405", pin: "2468")
+        assert create_student(contact: "0102030405").persisted?
       end
     end
   end

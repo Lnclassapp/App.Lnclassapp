@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::InvitationRepositoryPort
 # Rôle : contrat des invitations, une seule en attente par type et par contact
-# ADR  : 0038, 0044
+# ADR  : 0036 (§4), 0038, 0044
 module Ports
   module Identity
     module InvitationRepositoryPort
@@ -18,6 +18,12 @@ module Ports
       # Révoque les invitations en attente expirées de ce contact, pour qu'il puisse être réinvité. → Integer
       def revoke_expired(kind:, contact:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #revoke_expired"
+      end
+
+      # ADR-0036 §4 : à la suppression d'un compte, ses invitations partent avec lui : celle qu'il a acceptée et toute invitation
+      # adressée à son numéro. Celles qu'il a envoyées à d'autres numéros restent. → Integer (nombre supprimé)
+      def destroy_all_for(user_id:, contact:)
+        raise NotImplementedError, "#{self.class} doit implémenter #destroy_all_for"
       end
 
       # → true

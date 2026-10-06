@@ -57,6 +57,8 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 **Comportement**
 - Une navigation dans un frame (`advance`) ne change pas le titre (acceptable, UDR-0036).
 
+**Titre sur téléphone** (amendement du 2026-10-04, chantier `suites-inscription-direction`) : une page en deux colonnes dont le `h1` est dans une colonne `hidden md:flex` répète ce `h1` dans son en-tête `md:hidden`. Cela concerne l'inscription de la direction, l'inscription enseignant et l'acceptation d'une invitation. Une seule des deux balises est affichée à chaque largeur.
+
 ### 3.2 Retour
 
 **Structure**
@@ -298,3 +300,14 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
 - **Vérification** :
   - `test/system/design_system_test.rb` : ouverture au survol en bulle fixe, sans que l'icône bouge ; fermeture au départ du pointeur ; clic qui garde ouvert, de retour dans le flux ; clic suivant qui ferme ;
   - `test/helpers/components_helper_test.rb` : le contrôleur et ses actions sont posés.
+
+## Amendement du 2026-10-06 — le retour de l'élève
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md), point 14 et point 15. Demande du porteur du 2026-10-06 : « sur courses?material=physique-chimie et /students/classroom [il n'y a] pas de bouton retour, l'UX est importante ». Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Exception pour l'élève** à la règle du §2.3 (« les destinations de la navigation n'ont pas de retour ») : chez l'élève, toute page autre que l'Accueil porte un retour. Le Catalogue (`catalog/courses/index`, filtré ou non), Ma classe (`classroom/student_classrooms/show`) et Annonces (`communication/inboxes/show`) ramènent à « Accueil » (`student_home_path`).
+  - **Pourquoi l'élève seulement** : ses pages s'ouvrent depuis l'Accueil (bulle d'une matière, carte de classe) bien plus que depuis la barre du bas ; sans retour, la seule issue est la navigation.
+  - **Pourquoi Annonces** : l'élève n'a pas d'onglet « Annonces » (décision du porteur du 2026-10-06) ; sans retour, la page serait une impasse.
+  - Les autres rôles ne changent pas : leurs destinations de la navigation restent sans retour.
+- **Retour d'un cours** : « Cours » (`catalog/courses/show`) passe par `back_href(courses_path, from: courses_path)` : venu du catalogue filtré (`?material=…`), l'élève y revient avec son filtre ; d'ailleurs, ou d'un autre site, il revient au catalogue sans filtre.
+- **Vérification** : `test/controllers/catalog/courses_controller_test.rb`, `test/controllers/classroom/student_classrooms_controller_test.rb`, `test/controllers/communication/inboxes_controller_test.rb` ; `test/system/communication/student_announcements_test.rb` (le retour des Annonces ramène à l'Accueil).

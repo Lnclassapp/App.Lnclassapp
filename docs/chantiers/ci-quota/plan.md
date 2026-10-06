@@ -14,6 +14,18 @@ Lot 2 — Rapatrier dans Develop les 8 mises à jour Dependabot fusionnées sur 
 Lot 3 — Mesure après : 3 PR de chantier, 3 promotions, 1 PR de documents
   ↓ (si le gain tient et que les runs système restent instables)
 Lot 4 — Accélérer : tests système instables sous 2 CPU, puis tests système redescendus au niveau contrôleur (à décider test par test)
+
+Exigence du 2026-10-02 : ≤ 10 min d'horloge par feature
+  ↓
+Lot 6 — Supprimer : perf d'import hors des runs non tirés, PostgreSQL de l'image (#148, run 472 : 9 min 27, 10 facturées)
+  ↓
+Lot 7 — Simplifier et accélérer : deux jobs côte à côte, unit et system, encadrés par plan et ci (ADR-0069 §9)
+  ↓
+Lot 8 — Automatiser : budget de croissance de la suite système, 15 s par chantier, 82 fichiers avec leur durée
+  ↓
+Lot 9 — Accélérer : la suite système en trois parts équilibrées (quatre jobs jouent bin/ci), horloge ≈ 3 min 30
+  ↓
+Chantier selection-par-carte-de-couverture (ouvert le 2026-10-03, hors de ce chantier)
 ```
 
 ---
@@ -37,6 +49,7 @@ Lot 4 — Accélérer : tests système instables sous 2 CPU, puis tests système
 - **Dépend de**    : Lot 1 *(le run de cette PR se paie au nouveau tarif)*
 - **Test associé** : `bin/ci` complet en local, puis le run de la PR.
 - **Done quand**   : `Develop` contient `main` (`git merge-base --is-ancestor origin/main origin/Develop`), suite verte.
+- **Fait (2026-10-06)** : `main` fusionnée dans `Develop` ; `ci.yml` garde la version de `Develop`, qui avait déjà les versions d'actions de `main`. Rails 8.1.4 change `ActionView::TestCase#render` (chaque rendu du test repart d'une page vide) : un test du trophée corrigé ([#190](https://github.com/Lnclassapp/App.Lnclassapp/pull/190), repris ici). Le commentaire du Gemfile sur json 3 est remis à jour : depuis Rails 8.1.4, `ActiveSupport::JSON.decode` passe ses options en mots-clés.
 
 ## Lot 3 — Mesure après
 
@@ -50,6 +63,38 @@ Lot 4 — Accélérer : tests système instables sous 2 CPU, puis tests système
                      **appliqué par le porteur** : `script/ci/tested_tree` *(lit `ci/preuves`)*, `LOCAL_PROOF` dans le workflow, leurs tests
 - **Prérequis porteur** : appliquer le patch ; créer le secret `CI_DRAW_SALT` (*Settings → Secrets and variables → Actions*, une valeur aléatoire longue)
 - **Done quand**   : une PR prouvée et non tirée coûte ≤ 1 minute ; une PR tirée rejoue la suite ; une promotion vers `Staging` rejoue la suite ; une release vers `main` trouve la preuve GitHub de `Staging`
+
+## Lot 6 — Dix minutes (1) : supprimer (livré, PR #148)
+
+- **Couche**       : CI
+- **Fichiers**     : `.github/workflows/ci.yml` *(plus de conteneur de service ; PostgreSQL de l'image ; `CI_GROUP` sans `perf` hors run complet)*, `test/guards/ci_plan_test.rb`
+- **Dépend de**    : Lot 5
+- **Test associé** : `test/guards/ci_plan_test.rb`
+- **Done quand**   : le run de la PR est vert sans conteneur ni perf. **Mesuré** : run 472, `bin/ci` 8 min 52 (8 min 09 au run 407 avec perf et conteneur, sur un runner plus rapide), job 9 min 27, 10 minutes facturées.
+
+## Lot 7 — Dix minutes (2) : deux jobs côte à côte
+
+- **Couche**       : CI
+- **Fichiers**     : `.github/workflows/ci.yml` *(jobs `plan`, `unit`, `system`, `ci`)*, `config/ci.rb` *(en-tête)*, `test/guards/ci_plan_test.rb`
+- **Dépend de**    : Lot 6
+- **Test associé** : `test/guards/ci_plan_test.rb` (quatre jobs, les deux jobs font `bin/ci`, preuve par `ci` seulement, brouillon sans verdict)
+- **Done quand**   : le run de la PR de ce lot est vert. **Mesuré** (run 476) : `unit` 2 min 43, `system` 9 min 56 sur un runner lent, horloge 10 min 16, 15 minutes facturées. Le plafond n'est pas tenu par ce seul lot : lot 9.
+
+## Lot 8 — Automatiser : budget de croissance de la suite système
+
+- **Couche**       : CI
+- **Fichiers**     : `script/ci/system_budget.rb`, `test/guards/system_budget_test.rb`, `config/ci.rb` *(étape du groupe `lint`)*, `script/ci/record_timings` *(classes dans un `module`, fichiers disparus élagués)*, `script/ci/test_timings.yml` *(82 fichiers système, run 472)*
+- **Dépend de**    : —
+- **Test associé** : `test/guards/system_budget_test.rb`
+- **Done quand**   : un fichier système sans durée est refusé ; un chantier qui ajoute plus de 15 s de durée enregistrée est refusé ; ce chantier passe (0 s ajoutée).
+
+## Lot 9 — Accélérer : la suite système en trois parts
+
+- **Couche**       : CI
+- **Fichiers**     : `.github/workflows/ci.yml` *(matrice `part: [1, 2, 3]` du job `system`, `CI_GROUP=system:k/3`, captures par part)*, `config/ci.rb` *(en-tête)*, `test/guards/ci_plan_test.rb`
+- **Dépend de**    : Lot 7
+- **Test associé** : `test/guards/ci_plan_test.rb` (seule matrice : les parts de `system` ; chaque fichier système dans une part et une seule)
+- **Done quand**   : le run de la PR est vert ; **horloge du run ≤ 4 min**, ≈ 17 minutes facturées. **Mesuré** (run 479, PR tirée au sort donc avec perf) : horloge 4 min 30, parts système 3 min 21 à 4 min 08, 19 minutes facturées. La part 3/3 (3 min 46 de `bin/ci`) est la plus lourde : à rééquilibrer en réenregistrant les durées depuis ce run, puis quatre parts si elle dépasse encore 4 min.
 
 ## Lot 4 — Accélérer (à ouvrir selon le lot 3)
 

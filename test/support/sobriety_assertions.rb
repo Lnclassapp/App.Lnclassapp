@@ -3,8 +3,10 @@
 module SobrietyAssertions
   ActionDispatch::SystemTestCase.include(self)
 
-  # ComponentsHelper::BUTTON_VARIANTS: primary = bg-ink text-white, brand = bg-brand text-ink.
-  PRIMARY_ACTION = "a.bg-ink.text-white, button.bg-ink.text-white, a.bg-brand.text-ink, button.bg-brand.text-ink".freeze
+  # ComponentsHelper::BUTTON_VARIANTS (ui-button-primary, ui-button-brand), and the same look written by hand in a view
+  # (primary = bg-ink text-white, brand = bg-brand text-ink).
+  PRIMARY_ACTION = "a.ui-button-primary, button.ui-button-primary, a.ui-button-brand, button.ui-button-brand, " \
+                   "a.bg-ink.text-white, button.bg-ink.text-white, a.bg-brand.text-ink, button.bg-brand.text-ink".freeze
 
   # R1: visible primary or brand buttons and links inside the scope (the page's main by default).
   def assert_single_primary_action(scope: "#main")

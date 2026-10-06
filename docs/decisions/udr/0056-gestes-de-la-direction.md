@@ -132,3 +132,28 @@ Dans `identity/pending_accounts/show`, pour un `teacher` **sans établissement**
 - Le bloc « Classes par niveau » n'existe plus qu'en un exemplaire, partagé par l'équipe et la direction.
 - Interdit dans l'espace direction : un identifiant d'établissement dans une URL ; un bouton de geste sur un établissement non actif ; un retrait sans confirmation.
 - Les fonctions de direction (Chef d'établissement, ACE ou Directeur des études, Éducateur, Secrétaire) ne sont pas affichées : elles viendront avec leur propre UDR.
+
+## Amendement du 2026-10-04 — confirmation du retrait chargée à la demande
+
+*Chantier [`docs/chantiers/ecrans-direction-lents`](../../chantiers/ecrans-direction-lents/plan.md), lot 3, levier 3b. Décision de l'orchestrateur, sur mandat délégué par le porteur, au service de la direction qui consulte sur un téléphone d'entrée de gamme. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+**Raison.** Avec 60 enseignants, « Enseignants » pesait 368,5 Ko de HTML pour un budget de 150 Ko ([ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md)). Chaque ligne portait sa propre `<dialog>` de confirmation : 3,3 Ko par ligne, 198 Ko en tout. Le serveur passait environ 72 de ses 103 ms à rendre 60 modales, alors que la direction en ouvre une au plus.
+
+**§3.3, ce qui change**
+- L'entrée du menu ⋮ devient un lien : `ui_dropdown_item "Retirer de l'établissement", href: school_admin_teacher_removal_path(public_id), frame: "modal", icon: "user-minus", tone: :danger` (`<a role="menuitem" data-turbo-frame="modal" data-action="dropdown#dismiss">`). Elle remplace `dialog:`, et la ligne ne porte plus aucune `ui_modal`.
+- Nouvelle route `GET /school-admin/teachers/:public_id/removal` → `teachers#removal`, nommée `school_admin_teacher_removal_path`. Elle s'ajoute au tableau du §3.0. C'est un `GET` : la liste fermée des écritures de la direction ne change pas.
+- La vue `school_admin/teachers/removal` contient `turbo_frame_tag "modal"` → `ui_modal(id: "remove-teacher-<public_id>", size: :sm, open: true, title: "Retirer <nom> de l'établissement ?")`, au motif des modales de l'UDR-0006. Titre, texte, pied (« Annuler », « Retirer » `danger` `form: "remove-teacher-<public_id>-form"`) et `form_with … method: :delete, id: "remove-teacher-<public_id>-form"` sont ceux d'avant. Elle n'a pas de `document_title` : une confirmation laisse l'onglet tel quel (UDR-0054 §3.1).
+- **Sans JavaScript**, ou sans en-tête `Turbo-Frame`, la même adresse rend une page complète. Elle contient le shell, puis le lien `a#back-to-teachers` « ← Enseignants » (motif du §3.4), puis la `<dialog open>`, lisible (chantier `modales-sans-js`). « Retirer » envoie le `DELETE`, dont le repli HTML est une redirection 303 vers la liste, avec la notice. Le lien de retour remplace « Annuler », qui ne fait rien sans JavaScript.
+- **Accès.** L'action applique d'abord la policy du retrait (`ManageSchoolTeachersPolicy`), **avant toute lecture** de l'enseignant. L'élève, l'enseignant, l'équipe et la direction d'un établissement non actif reçoivent 403, même pour un `public_id` inconnu. L'enseignant est ensuite lu par `SchoolTeachersQuery#teacher`. Inconnu, d'un autre établissement, déjà retiré, en attente, anonymisé ou d'un autre rôle : 404, comme le `DELETE` (GD-16, GD-18). La direction d'un autre établissement reçoit donc **404**, et non 403, conformément au §3.0.
+
+**Inchangé** : le menu ⋮ et ses libellés, le `DELETE` et `DetachTeacher`, les Turbo Streams (`remove`, toast, état vide quand la liste se vide), les refus en toast, l'absence de menu sur un établissement non actif.
+
+**Accessibilité** : à l'ouverture, le focus va sur « Annuler » (UDR-0054 §3.3). À la fermeture, il revient au ⋮. « Annuler », Échap ou le fond ferment la boîte et vident le frame, et l'entrée du menu la recharge.
+
+**Seule différence visible** : quand le titre de la confirmation passe sur deux lignes, il est aligné à gauche. C'est le cas au téléphone, et aussi au bureau, car la modale `sm` fait passer le titre à la ligne même avec un nom court (constat du challenger), comme toute modale de l'application. Jusqu'ici, il héritait de l'alignement à droite de la cellule d'actions (`text-right`), que le texte compensait déjà par `text-left`.
+
+**Chiffres** (60 enseignants, base `app_lnclassapp_perf_direction_lot_c`, protocole de l'ADR-0067, 30 × 3, médiane) :
+- « Enseignants » : HTML **368,5 → 152,5 Ko** (gzip 15,2 → 10,0 Ko) ; vue p50 63,5 → 30,1 ms ; p50 91,7 → 62,6 ms ; p95 118,5 → 121,2 ms (bruit : la queue du p95 vient de la compilation YJIT, voir le plan du chantier) ; allocations 71 731 → 32 037 ;
+- confirmation dans le frame : **3,6 Ko**, 5 requêtes SQL, p50 18,4 ms, **p95 30,3 ms** ; en page complète sans JavaScript : 17,2 Ko, p95 41,0 ms.
+
+**Preuve** : `test/controllers/school_admin/teachers_controller_test.rb` (menu, confirmation dans le frame et en page complète, retrait de bout en bout, 403 et 404), `test/infrastructure/queries/school/school_teachers_query_test.rb`, `test/routing/school_admin_routes_test.rb`, `test/system/school_admin/teachers_test.rb` (retrait au bureau et à 390 px, focus sur « Annuler », annulation puis rechargement).

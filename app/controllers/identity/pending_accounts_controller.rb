@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::PendingAccountsController
 # Rôle : écran de sortie d'un compte sans accueil (élève sans classe, enseignant sans école ou en attente) ; ne redirige jamais
-# ADR  : 0030, 0040, 0063, 0071 · UDR : 0050, 0056
+# ADR  : 0030, 0036, 0040, 0063, 0071 · UDR : 0050, 0056 · l'élève qui a quitté sa classe y trouve son historique (lot R)
 module Identity
   class PendingAccountsController < AuthenticatedController
     CASES = %i[student teacher].freeze
@@ -10,6 +10,7 @@ module Identity
 
     def show
       @case = CASES.include?(current_actor.role) ? current_actor.role : :other
+      @archived = Queries::Classroom::StudentArchiveQuery.new.any?(student_id: current_actor.user_id) if @case == :student
       return unless @case == :teacher
 
       @join_request = Queries::School::JoinRequestsQuery.new.status_for(teacher_id: current_actor.user_id)

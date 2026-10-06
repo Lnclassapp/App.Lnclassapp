@@ -1,0 +1,6 @@
+<%# 🌐 UI · school_admin/staff_members/destroy — une direction retirée par une autre (ID-12) %>
+<%# Rôle : toast, ligne retirée avec sa modale, places « par le code » recomptées (shared/_school_staff_places) %>
+<%# ADR  : 0077 · UDR : 0006, 0070 (§3.4) %>
+<%= turbo_stream_toast @notice, type: :success %>
+<%= turbo_stream.remove "school_staff_#{@archived.staff.user_public_id}" %>
+<%= turbo_stream.replace "school_staff_places", partial: "shared/school_staff_places", locals: { by_code_count: @by_code_count } %>

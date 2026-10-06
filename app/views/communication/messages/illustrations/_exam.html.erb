@@ -1,0 +1,13 @@
+<%# 🌐 UI · communication/messages/illustrations/_exam — illustration « Examen », rendue par announcement_illustration %>
+<%# Rôle : copie et chronomètre (cadran blanc, aiguille sombre) ; décorative, couleurs par tokens seulement %>
+<%# UDR  : 0005, 0071 §3.3 %>
+<%= tag.svg viewBox: "0 0 64 64", "aria-hidden": "true", focusable: "false", class: classes do %>
+  <rect x="8" y="5" width="34" height="46" rx="4" class="fill-white"/>
+  <rect x="14" y="14" width="22" height="3" rx="1.5" class="fill-school"/>
+  <rect x="14" y="22" width="15" height="3" rx="1.5" class="fill-school"/>
+  <rect x="41" y="25" width="6" height="6" rx="1.5" class="fill-teacher"/>
+  <circle cx="44" cy="44" r="15" class="fill-teacher"/>
+  <circle cx="44" cy="44" r="10.5" class="fill-white"/>
+  <rect x="42.75" y="36" width="2.5" height="9.5" rx="1.25" class="fill-school"/>
+  <circle cx="44" cy="44" r="2.5" class="fill-school"/>
+<% end %>

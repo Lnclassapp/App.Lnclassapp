@@ -21,6 +21,22 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert page.evaluate_script("document.fonts.check('16px \"DM Sans\"')")
   end
 
+# UDR-0065 : un téléphone en thème sombre reçoit les mêmes pages, couleurs redéfinies par les tokens ; une page
+# imprimée reste claire. Le navigateur réévalue les media queries sans recharger la page.
+test "in a dark system theme the tokens turn dark, and a printed page stays light" do
+  emulate_media(features: [ { name: "prefers-color-scheme", value: "dark" } ])
+
+  assert_equal "rgb(15, 18, 24)", css(find("body"), "background-color")
+  assert_equal "rgb(238, 241, 245)", css(find("body"), "color")
+  assert_equal "rgb(0, 112, 179)", css(find("[data-token='brand'] div"), "background-color")
+
+  emulate_media(media: "print", features: [ { name: "prefers-color-scheme", value: "dark" } ])
+
+  assert_equal TOKENS.fetch("paper"), css(find("body"), "background-color")
+ensure
+  emulate_media
+end
+
   test "icons render in every variant and size, labelled when asked" do
     within("[data-example=icon-variants]") { assert_selector "svg[aria-hidden=true]", count: 3 }
     within("[data-example=icon-sizes]") do
@@ -135,6 +151,23 @@ class DesignSystemTest < ApplicationSystemTestCase
     page.driver.browser.action.move_to_location(5, 5).click.perform
 
     assert_no_selector "#{dialog}[open]"
+  end
+
+  # UDR-0064 : le déclencheur d'une entrée de rôle fait 56 px de haut et toute la largeur de sa cellule.
+  test "a modal trigger can be large and full width, and still opens its dialog" do
+    trigger = find("button[aria-controls=demo-modal-entry]")
+
+    assert_equal 56, trigger.style("height")["height"].to_f.round
+    assert page.evaluate_script(<<~JS, trigger), "le déclencheur large ne prend pas toute la largeur"
+      Math.round(arguments[0].getBoundingClientRect().width) === Math.round(arguments[0].closest("div.w-full").getBoundingClientRect().width)
+    JS
+
+    trigger.click
+
+    assert_selector "dialog#demo-modal-entry[open]"
+    find("dialog#demo-modal-entry[open]").send_keys(:escape)
+
+    assert_no_selector "dialog#demo-modal-entry[open]"
   end
 
   test "the dropdown follows the menu button pattern" do
@@ -329,11 +362,14 @@ class DesignSystemTest < ApplicationSystemTestCase
     assert_selector "[data-example=pagination-5] button[disabled]", text: t("components.pagination.next")
   end
 
+  # AN-22 (UDR-0071 §3.1): in the bottom bar, « Annonces » is the 4th and last case of the direction. The teacher's bottom
+  # bar is followed in communication/announcements_journey_test, the team's « Plus » menu in role_homes_test.
   test "the shell of every role: sidebar on desktop, bottom bar on mobile" do
     NavigationHelper::DESTINATIONS.each do |role, destinations|
       visit design_shell_path(role)
 
-      assert_selector "aside nav a", count: destinations.size
+      # UDR-0068 §3.1 : l'équipe a une 2e carte (Référentiel, Imports) dans la barre latérale.
+      assert_selector "aside nav a", count: destinations.size + NavigationHelper::SECONDARY_DESTINATIONS.fetch(role, []).size
       assert_no_selector "nav.fixed.bottom-0"
       assert_selector "header", text: t("shared.roles.#{role}")
       assert_selector "main h1", text: t("design.shell.names.#{role}").split.first
@@ -348,6 +384,12 @@ class DesignSystemTest < ApplicationSystemTestCase
       find("button[aria-controls=account-menu]").click
 
       assert_selector "#account-menu [role=menuitem]", text: t("shared.navigation.sign_out")
+      visit design_shell_path(:school_admin)
+
+      within("nav.fixed.bottom-0 ul.grid-cols-4") do
+        assert_selector ":scope > li", count: 4
+        assert_selector "li:last-child a[href='#{announcements_path}']", text: t("shared.navigation.announcements")
+      end
     end
   end
 
@@ -587,6 +629,10 @@ class DesignSystemTest < ApplicationSystemTestCase
   end
 
   def submissions = evaluate_script("window.submissions")
+
+  def emulate_media(media: "", features: [])
+    page.driver.browser.execute_cdp("Emulation.setEmulatedMedia", media:, features:)
+  end
 
   # Valeur calculée par le navigateur, sous sa forme sérialisée CSS (`rgb(…)`), pas celle de WebDriver (`rgba(…)`).
   def css(element, property)

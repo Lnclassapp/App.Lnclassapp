@@ -11,15 +11,17 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
   def t(key, **) = I18n.t("school_admin.schools.#{key}", **)
   def tn(key) = I18n.t("shared.navigation.#{key}")
 
-  test "GD-01: the direction's navigation has three destinations, all drawn, « Établissement » current on its page" do
+  # AN-22 (chantier annonces, UDR-0071 §3.1): « Annonces » closes the direction's navigation, after its three destinations.
+  test "GD-01, AN-22: the direction's navigation has four destinations, all drawn, « Établissement » current on its page" do
     sign_in_as @admin
     get school_admin_classrooms_path
 
-    assert_select "aside nav a[href]", 3
+    assert_select "aside nav a[href]", 4
     assert_select "aside nav a[aria-disabled]", 0
-    assert_select "aside nav a[href='#{school_admin_classrooms_path}']", text: tn(:student_work)
+    assert_select "aside nav a[href='#{school_admin_classrooms_path}']", text: tn(:home)
     assert_select "aside nav a[href='#{school_admin_teachers_path}']", text: tn(:teachers)
     assert_select "aside nav a[href='#{school_admin_school_path}']", text: tn(:school)
+    assert_select "aside nav a[href='#{announcements_path}']", text: tn(:announcements)
 
     get school_admin_school_path
 
@@ -122,5 +124,60 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
       assert_response :forbidden, user.role
       sign_out
     end
+  end
+
+  # ID-11, ID-13, ID-16 (ADR-0077, UDR-0070 §3.4): the « Direction » block, after #school_link.
+  def ts(key, **) = I18n.t("shared.school_staff.#{key}", **)
+
+  def seed_staff
+    @kofi = create_school_admin(school: @school, first_name: "Kofi", last_name: "Yao", joined_via: "code", joined_at: 10.days.ago)
+    @aya = create_school_admin(school: @school, first_name: "Aya", last_name: "Koné", joined_via: "code", joined_at: 2.days.ago)
+    create_school_admin(school: @school, first_name: "Gone", last_name: "Archivé", joined_via: "code", archived_at: 1.day.ago)
+    create_school_admin(school: create_school, first_name: "Zadi", last_name: "Ailleurs", joined_via: "code")
+  end
+
+  test "ID-11: Kofi reads the « Direction » block after the link, « (vous) » on his line, the ⋮ menu on the others only" do
+    seed_staff
+    sign_in_as @kofi
+    get school_admin_school_path
+
+    assert_response :success
+    assert_select "#school_link + #school_staff"
+    assert_select "#school_staff" do
+      assert_select "#school_staff_places", text: ts("subtitle", used: 2, cap: 3)
+      assert_select "#school_staff_list li", 3
+      assert_select "li#school_staff_#{@kofi.public_id}", text: /Kofi Yao\s+#{Regexp.escape(ts('you'))}/
+      assert_select "li#school_staff_#{@kofi.public_id} [aria-haspopup]", 0
+      assert_select "li#school_staff_#{@admin.public_id} [aria-label=?]", ts("actions", name: "#{@admin.first_name} #{@admin.last_name}")
+      assert_select "li#school_staff_#{@aya.public_id} [aria-label=?]", ts("actions", name: "Aya Koné")
+      assert_select "dialog#remove-staff-#{@aya.public_id} h2", text: ts("confirm.title", name: "Aya Koné")
+      assert_select "form#remove-staff-#{@aya.public_id}-form[action='#{school_admin_staff_member_path(@aya.public_id)}'] " \
+                    "input[name=_method][value=delete]"
+      assert_select "#school_staff_newcomer", 0
+    end
+    [ "Archivé", "Ailleurs" ].each { assert_not_includes response.body, it }
+  end
+
+  test "ID-13: Aya (2 days) has no ⋮ menu on any line, and the newcomer note" do
+    seed_staff
+    sign_in_as @aya
+    get school_admin_school_path
+
+    assert_select "#school_staff_list li", 3
+    assert_select "#school_staff [aria-haspopup]", 0
+    assert_select "#school_staff form", 0
+    assert_select "#school_staff_newcomer.text-xs.text-mute", text: ts("newcomer")
+  end
+
+  test "ID-16: an inactive school shows the block without any ⋮ menu" do
+    seed_staff
+    @school.update!(status: "inactive")
+    sign_in_as @kofi
+    get school_admin_school_path
+
+    assert_response :success
+    assert_select "#school_staff_list li", 3
+    assert_select "#school_staff [aria-haspopup]", 0
+    assert_select "#school_staff_newcomer", 0
   end
 end
