@@ -293,8 +293,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_equal [ "", "tle" ], css_select("select[name=level] option").map { it["value"] }
       assert_equal [ "", "d" ], css_select("select[name=series] option").map { it["value"] }
     end
-    # R6 : la matière est dite une fois, dans le sous-titre.
-    assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques"), count: 0
+    # UDR-0077, amendement du 2026-10-06 : la carte garde le badge de la matière, comme pour tous les rôles (UDR-0013 ter).
+    assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques")
     assert_select "#course_#{own.slug} div.mb-4", text: including("Tle D")
   end
 

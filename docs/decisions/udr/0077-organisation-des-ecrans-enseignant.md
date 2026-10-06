@@ -113,3 +113,9 @@ Dans `_exercise_progress` (branche non-élève) :
 - L'accueil enseignant n'a plus de section « Bientôt » : toute section d'accueil montre une donnée réelle.
 - Le catalogue de l'enseignant est restreint par lecture, pas par policy : un lien direct vers un cours d'une autre matière reste ouvert (hors périmètre, memo).
 - Interdit désormais : une grille de classes ou de cours sur l'accueil enseignant ou la page d'une classe ; un bouton d'action secondaire (code de récupération) à côté de chaque élève ; l'échéance redite à la fois sous la classe et dans la bascule (R6).
+
+## Amendement du 2026-10-06 — badge de matière sur les cartes de l'enseignant · Statut : Accepté (porteur, 2026-10-06)
+
+*Fusion de la PR [#184](https://github.com/Lnclassapp/App.Lnclassapp/pull/184) (`politique-cache`, lot E5) dans `Develop`. L'amendement du 2026-10-05 (ter) de l'[UDR-0013](0013-catalogue-et-page-cours.md), décidé le même jour que cette UDR, garde le badge de matière sur chaque carte « pour tous les rôles ». Le porteur, le 2026-10-06, tranche l'écart : « badge pour tous ». En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+- §3.2, « Cartes de l'enseignant » : **le badge de matière reste**, à côté du badge du niveau. La matière est donc dite par le sous-titre et par chaque carte ; la règle R6 ne s'applique plus aux cartes du catalogue.
