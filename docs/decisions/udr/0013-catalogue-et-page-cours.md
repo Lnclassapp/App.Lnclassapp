@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot B1, critères CA-01, CA-04, CA-10, CA-26, CA-27 (point d'entrée), TR-41 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadPublishedPolicy`) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (statuts) · [ADR-0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) (KaTeX et Trix à la demande) · [UDR-0001](0001-design-visuel-du-catalogue-pedagogique.md) (carte-vitrine) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0014](0014-formulaire-cours.md) (modale du cours, panneau de statut) |
@@ -114,9 +114,9 @@ L'élève arrive au catalogue par la navigation, et bientôt par les cases de ma
 |---|---|---|---|---|
 | Sous-titre de l'en-tête | « Les cours de ton niveau, par matière. », affiché en permanence | `ui_page_header title: t(".title")`, sans sous-titre. Dans le bloc de l'en-tête : `ui_info_tip t(".student_scope"), label: t(".student_scope_label")` | R4 | Dans l'infobulle : « Tu vois seulement les cours de ton niveau. » (`student_scope`). Son nom : « Quels cours ? » (`student_scope_label`). |
 | Badge « niveau série » de chaque carte | « Tle D » ou « Tle » sur chaque carte | Non rendu pour l'élève | R6 | L'élève ne voit que son niveau : le badge redit la même chose sur chaque carte. Le niveau reste dans l'en-tête de la page du cours et de la fiche. |
-| Badge de matière de chaque carte, quand le filtre « Matière » est actif | Sur chaque carte | Non rendu, pour tous les rôles (répétition simple) | R6 | La liste « Matière » du formulaire dit la matière, une fois. Sans filtre de matière, le badge reste sur chaque carte. |
+| Badge de matière de chaque carte, quand le filtre « Matière » est actif | Sur chaque carte | Non rendu pour l'élève seulement (décision du porteur du 2026-10-02) | R6 | La liste « Matière » du formulaire dit la matière, une fois. Sans filtre de matière, le badge reste sur chaque carte. |
 | Rangée des badges de la carte (`div.mb-4`) | Toujours rendue | Rendue seulement si elle porte au moins un badge | R6 (conséquence) | — |
-| Description de l'état « aucun résultat » | « Essayez un autre nom, un autre niveau ou une autre matière. » | Élève : « Essaie un autre nom ou une autre matière. » (`student_no_match_description`) | Clarté du filtre par matière (UDR-0058 §3.2) | L'élève n'a pas de filtre de niveau. Le texte le tutoie, comme ses autres textes. Une case de matière sans cours mène donc à un état vide juste. |
+| Description de l'état « aucun résultat » | « Essayez un autre nom, un autre niveau ou une autre matière. » | Élève : « Essaye un autre nom ou une autre matière. » (`student_no_match_description`) | Clarté du filtre par matière (UDR-0058 §3.2) | L'élève n'a pas de filtre de niveau. Le texte le tutoie, comme ses autres textes. Une case de matière sans cours mène donc à un état vide juste. |
 
 **Page d'un cours** (`catalog/courses/show`, `_essential_row`)
 
@@ -148,7 +148,7 @@ Ce qui ne change pas pour l'élève :
 
 **`catalog/courses/index`**
 - Élève : `ui_page_header title: t(".title") do` → `ui_info_tip t(".student_scope"), label: t(".student_scope_label")`. Les autres rôles gardent leur en-tête.
-- Les cartes reçoivent `locals: { show_status: team, show_level: !student, show_material: @filters[:material].blank? }`.
+- Les cartes reçoivent `locals: { show_status: team, show_level: !student, show_material: !(student && @filters[:material].present?) }`. Les deux nouveaux locals valent `true` par défaut : un autre appel de `_course_card` garde son rendu.
 - État « aucun résultat » : `description: t(student ? ".student_no_match_description" : ".no_match_description")`.
 
 **`_course_card`**
@@ -172,7 +172,7 @@ Ce qui ne change pas pour l'élève :
 - Retirer `index.student_subtitle`.
 - Ajouter `index.student_scope` : « Tu vois seulement les cours de ton niveau. »
 - Ajouter `index.student_scope_label` : « Quels cours ? »
-- Ajouter `index.student_no_match_description` : « Essaie un autre nom ou une autre matière. »
+- Ajouter `index.student_no_match_description` : « Essaye un autre nom ou une autre matière. » (« Essaye » et non « Essaie » : le vocabulaire de l'UDR-0007 interdit « essai », et `test/i18n/locale_files_test.rb` refuse « Essaie ».)
 
 **Tokens** : tokens du `@theme` seulement (UDR-0005). Aucune couleur en dur, aucune valeur entre crochets, aucun `dark:`.
 
@@ -182,10 +182,20 @@ Ce qui ne change pas pour l'élève :
 - L'en-tête du catalogue de l'équipe : « Importer des cours » et « Nouveau cours ». Le sous-titre « Les cours du programme, par matière et par niveau. ».
 - Le filtre « Niveau », le badge « niveau série » de chaque carte, le badge de statut des cartes et des fiches.
 - La liste complète des fiches d'un cours, sans « Voir plus », et la forme actuelle de `_essential_row`.
-- Seul changement commun à tous les rôles, parce que c'est une simple répétition : le badge de matière quitte les cartes quand le filtre « Matière » est actif.
+- Le badge de matière de chaque carte, même quand le filtre « Matière » est actif (décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève).
 
 ### Vérification
 
 - `test/controllers/catalog/student_level_test.rb` : le catalogue de l'élève n'a plus de sous-titre et porte l'infobulle ; ses cartes n'ont pas de badge de niveau.
 - `test/system/catalog/course_catalog_test.rb`, à 390 × 844, pour l'élève : sur `courses_path(material: <slug>)`, `assert_single_primary_action` et `assert_blocks_above_fold(max: 5)`, et aucune carte ne porte le badge de matière ; sur la page d'un cours à 4 fiches, `assert_list_capped(max: 3)` sur `#course_essentials`, puis « Voir plus » montre la 4e.
-- `test/controllers/catalog/courses_controller_test.rb` : l'enseignant et l'équipe voient le badge de niveau, la liste complète et `_role_actions` inchangé.
+- `test/controllers/catalog/courses_controller_test.rb` : l'enseignant et l'équipe voient le badge de niveau, le badge de matière sous filtre, la liste complète et `_role_actions` inchangé.
+
+## Amendement du 2026-10-02 — un cours ne s'assigne plus · Statut : Accepté (porteur, 2026-10-02 : « lance les lots »)
+
+*Chantier [`fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md), grill Q6 et Q7 ; [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (seul un exercice s'assigne) ; [UDR-0062](0062-echeances.md) §3.6. Le texte ci-dessus reste tel qu'il a été accepté ; cette section fait foi en cas d'écart.*
+
+- **§2.5 et `_role_actions`** : l'enseignant n'a plus « Assigner à mes classes ». `_role_actions` ne rend rien pour lui : il lit le cours, ses fiches et leurs exercices, sans action dans l'en-tête. Le panneau de statut et le menu ⋮ de l'équipe ne changent pas.
+- La route `course_assignments` et son écran disparaissent (UDR-0030, dépréciée).
+- **Amendement du 2026-10-01, puce « Assignation »** : la règle de niveau vaut désormais pour le seul exercice ; « Cela vaut pour le cours, la fiche et l'exercice » se lit « Elle vaut pour l'exercice ».
+- **Amendement du 2026-10-01, puce « Autres rôles »** : l'enseignant lit toujours tous les niveaux ; il assigne depuis sa classe (UDR-0062 §3.4), plus depuis le catalogue.
+- **Vérification** : `test/controllers/catalog/courses_controller_test.rb` — sur la page d'un cours, un enseignant ne voit aucun lien vers `course_assignments_path`, ni aucun bouton « Assigner » ; l'équipe garde `#course-actions-menu`.

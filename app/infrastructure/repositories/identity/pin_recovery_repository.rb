@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::PinRecoveryRepository
 # Rôle : codes de récupération du PIN (empreinte seulement), un seul actif par compte
-# ADR  : 0032
+# ADR  : 0032, 0036
 module Repositories
   module Identity
     class PinRecoveryRepository
@@ -34,6 +34,8 @@ module Repositories
         Orm::PinRecoveryCode.where(id:).update_all(used_at: at)
         true
       end
+
+      def destroy_all_for(user_id:) = Orm::PinRecoveryCode.where(user_id:).delete_all
 
       private
 

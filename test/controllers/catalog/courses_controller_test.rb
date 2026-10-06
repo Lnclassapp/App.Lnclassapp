@@ -3,7 +3,8 @@ require "test_helper"
 # CA-01, CA-04, CA-10, CA-26, CA-27, TR-41 — UDR-0013. Le catalogue et la page d'un cours, pour tous les rôles connectés.
 # L'ancienne application ignorait les filtres, laissait lire un brouillon par URL directe, colorait la matière d'après
 # son nom, et n'affichait jamais « Assigner à mes classes ». Ici : filtres par slug, 404 hors équipe pour tout cours non
-# publié, couleur tirée de la catégorie, points d'entrée de l'équipe en modale, lien d'assignation pour l'enseignant.
+# publié, couleur tirée de la catégorie, points d'entrée de l'équipe en modale. ADR-0072, UDR-0013 (amendée le
+# 2026-10-02) : un cours ne s'assigne plus ; l'enseignant lit la page sans action, et l'ancien écran répond 404.
 class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @tle = create_level(name: "Tle", position: 7)
@@ -22,6 +23,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   def including(text) = /#{Regexp.escape(text)}/
   def modal_link(href) = "a[href='#{href}'][data-turbo-frame=modal]"
   def status_label(status) = I18n.t("catalog.content_status.#{status}")
+  # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
+  def assignments_href(slug) = "/courses/#{slug}/assignments"
 
   test "a visitor is sent to the sign-in" do
     get courses_path
@@ -42,10 +45,11 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "#{tl("index.page_title")} · Élève · Lnclass"
     assert_select "h1", text: tl("index.title")
     assert_select "turbo-frame#courses[data-turbo-action=advance][target=_top] #courses_list > li", 2
-    assert_select "#courses_list li:first-child", text: /Philosophie.*Tle.*La conscience/m
+    assert_select "#courses_list li:first-child", text: /Philosophie.*La conscience/m
     assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}']" do
       assert_select "*", text: including("SVT")
-      assert_select "*", text: including("Tle D")
+      # UDR-0013, amendement du 2026-10-02 : l'élève ne voit que son niveau ; le badge de niveau quitte ses cartes.
+      assert_select "*", text: including("Tle D"), count: 0
       assert_select "h2", text: "Génétique et évolution"
       assert_select "*", text: including("Du gène à l'espèce")
       assert_select "*", text: including(tl("course_card.open"))
@@ -154,6 +158,46 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_empty", text: including(tl("index.empty_title"))
   end
 
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057), décision du porteur : élève seulement.
+  test "a student's catalogue has no subtitle but an info tip, and its cards drop the filtered subject" do
+    sign_in_as create_student_for(@course)
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "h1", text: tl("index.title")
+    assert_no_match(including(tl("index.subtitle")), response.body)
+    assert_select "#main details", text: including(tl("index.student_scope")) do
+      assert_select "summary", text: including(tl("index.student_scope_label"))
+    end
+    assert_select "#course_#{@course.slug}" do
+      assert_select "h2", text: "Génétique et évolution"
+      assert_select "*", text: including("SVT"), count: 0
+      assert_select "div.mb-4", 0
+    end
+
+    get courses_path(material: @philo.slug, q: "zzz"), headers: { "Turbo-Frame" => "courses" }
+    assert_select "#courses_empty", text: including(tl("index.student_no_match_description"))
+  end
+
+  test "the teacher's and the team's catalogue are unchanged: subtitle, level badge, subject badge even when filtered" do
+    [ create_teacher, create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path(material: @svt.slug)
+
+      assert_select "#main", text: including(tl("index.subtitle"))
+      assert_select "#main details", 0
+      assert_select "#course_#{@course.slug} div.mb-4" do
+        assert_select "*", text: including("SVT")
+        assert_select "*", text: including("Tle D")
+      end
+
+      get courses_path(q: "zzz"), headers: { "Turbo-Frame" => "courses" }
+      assert_select "#courses_empty", text: including(tl("index.no_match_description"))
+      sign_out
+    end
+  end
+
   test "the colour and icon of a subject come from its category, never from its name (CA-26)" do
     create_course(name: "Analyse", level: @tle, material: create_material(name: "Mathématiques", category: "literature"))
     sign_in_as create_student_for(@course)
@@ -200,7 +244,46 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "#course-actions-menu", 0
-    assert_select "a[href='#{course_assignments_path(@course.slug)}']", 0
+    assert_select "a[href='#{assignments_href(@course.slug)}']", 0
+  end
+
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : 3 fiches, puis « Voir plus » ; chaque ligne est un lien étiré.
+  test "a student sees 3 sheets then « Voir plus », each row a stretched link without status" do
+    sheets = %w[Méiose Mitose Mutations Hérédité].map { create_essential(course: @course, name: it, subtitle: "Sous-titre") }
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_select "#course_essentials [data-controller=reveal]" do
+      assert_select "li", 4
+      assert_select "li[hidden]", 1
+      assert_select "li[data-reveal-target=item]", 4
+      assert_select "#essential_#{sheets.last.slug}[hidden]"
+      assert_select "button[data-action='reveal#more']", text: I18n.t("components.reveal.more")
+      assert_select "[role=status][aria-live=polite]"
+    end
+    assert_select "#essential_#{sheets.first.slug}.relative.active\\:bg-mist" do
+      assert_select "a.after\\:absolute.after\\:inset-0.truncate[href='#{course_essential_path(@course.slug, sheets.first.slug)}']",
+                    text: "Méiose"
+      assert_select "p.truncate", text: "Sous-titre"
+      assert_select "svg[aria-hidden=true]"
+    end
+  end
+
+  test "the teacher and the team keep the full list of sheets, without « Voir plus », in the current row" do
+    %w[Méiose Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
+
+    [ create_teacher, create_team_member ].each do |user|
+      sign_in_as user
+
+      get course_path(@course.slug)
+
+      assert_select "#course_essentials li", 4
+      assert_select "#course_essentials li[hidden]", 0
+      assert_select "#course_essentials [data-controller=reveal]", 0
+      assert_select "#course_essentials li.sm\\:flex-row", 4
+      sign_out
+    end
   end
 
   test "a draft or archived course, or an unknown slug, answers 404 outside the team (CA-04)" do
@@ -240,19 +323,37 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
                     text: tl("role_actions.import_essentials")
     end
     assert_select "#course_essentials li", text: /Fiche en brouillon.*#{Regexp.escape(status_label(:draft))}/m
-    assert_select "a[href='#{course_assignments_path(@draft.slug)}']", 0
+    assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
   end
 
-  test "the teacher sees « Assigner à mes classes », and no team action (CA-27)" do
+  test "the teacher reads the course without any action: no « Assigner à mes classes », no team action (ADR-0072)" do
     sign_in_as create_teacher
 
     get course_path(@course.slug)
 
     assert_response :success
-    assert_select "#course_header a[href='#{course_assignments_path(@course.slug)}']", text: tl("role_actions.assign")
+    assert_select "a[href='#{assignments_href(@course.slug)}']", 0
+    assert_select "#course_header a, #course_header button", text: /Assigner/, count: 0
+    assert_no_match(/Assigner/, response.body)
     assert_select "#course-actions-menu", 0
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "a[href='#{edit_teams_course_path(@course.slug)}']", 0
+  end
+
+  test "the former « Assigner un cours » screen answers 404, for every role (UDR-0030, deprecated)" do
+    get assignments_href(@course.slug)
+    assert_response :not_found
+
+    [ create_teacher, create_team_member, create_student_for(@course) ].each do |user|
+      sign_in_as user
+
+      get assignments_href(@course.slug)
+
+      assert_response :not_found
+      assert_no_match "Génétique et évolution", response.body
+      sign_out
+    end
+    assert_not Rails.application.routes.url_helpers.respond_to?(:course_assignments_path)
   end
 
   test "a school staff member reads the catalogue and a published course, without any action" do
@@ -264,7 +365,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get course_path(@course.slug)
     assert_response :success
     assert_select "#course-actions-menu", 0
-    assert_select "a[href='#{course_assignments_path(@course.slug)}']", 0
+    assert_select "a[href='#{assignments_href(@course.slug)}']", 0
   end
 
   test "a course without essential sheet nor content shows the empty state and no content section" do

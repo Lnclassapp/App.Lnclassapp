@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
-<%# Rôle : écran de sortie, sans redirection ; issues : rejoindre une classe (élève), rejoindre un établissement par son code %>
-<%# ADR  : 0030, 0040, 0063, 0071 · UDR : 0006, 0050, 0054, 0056 (§3.5) %>
+<%# Rôle : écran de sortie, sans redirection ; issues : rejoindre une classe ou voir son historique (élève), rejoindre un établissement par son code %>
+<%# ADR  : 0030, 0036, 0040, 0063, 0071 · UDR : 0006, 0050, 0054, 0056 (§3.5) %>
 <% page_title t(".page_title") %>
 <div id="pending_account">
   <% if @school_join %>
@@ -34,11 +34,15 @@
       <% description = t(".join_request.#{state}.description", school: @join_request.school_name) %>
       <% icon = state == "rejected" ? "no-symbol" : "clock" %>
     <% else %>
-      <% title, description, icon = t(".#{@case}.title"), t(".#{@case}.description"), "clock" %>
+      <% key = @archived ? "former_student" : @case %>
+      <% title, description, icon = t(".#{key}.title"), t(".#{key}.description"), "clock" %>
     <% end %>
     <%= ui_empty_state title:, description:, icon: do %>
       <% if @case == :student %>
         <%= ui_button t(".student.join"), href: new_join_code_path, variant: :brand, icon: "academic-cap" %>
+        <% if @archived %>
+          <%= ui_button t(".student.archive"), href: student_archive_path, variant: :secondary, icon: "archive-box" %>
+        <% end %>
       <% end %>
       <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary %>
     <% end %>

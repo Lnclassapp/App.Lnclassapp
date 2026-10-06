@@ -1,34 +1,38 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
-# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, exercices assignés publiés de son niveau, progression, activité, lacunes
-# ADR  : 0026, 0033, 0035, 0043, 0048 · UDR : 0010
+# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, exercices assignés de son niveau triés par échéance, activité, lacunes
+# ADR  : 0026, 0033, 0035, 0043, 0048, 0072 · UDR : 0010, 0062 (§3.2 ordre et `due_on`, §3.3 `late_material_slugs`)
 module Queries
   module Classroom
     class StudentHomeQuery
+      # late_material_slugs : les matières où un exercice est en retard pour l'élève, pour la famille téléphone (UDR-0062 §3.3).
       Row = Data.define(:school_name, :level_name, :classroom_name, :join_code_display, :classmates_count,
-                        :assigned_exercises, :recent_sessions, :pending_gaps)
-      # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil.
+                        :assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs)
+      # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
+      # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance.
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :badge_level,
-                                :best_score_percent, :completed_count, :started_session_public_id)
+                                :best_score_percent, :completed_count, :started_session_public_id, :due_on)
       SessionRow = Data.define(:public_id, :exercise_title, :score_percent, :completed_at)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
 
       RECENT_SESSIONS = 10
       HEADER_COLUMNS = [ "classrooms.id", "schools.name", "levels.name", "classrooms.name", "classrooms.join_code" ].freeze
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
-                           "essentials.id", "courses.id", "essentials.position", "exercises.position" ].freeze
+                           "materials.slug", "courses.id", "essentials.position", "exercises.position" ].freeze
 
+      # today : la date d'Abidjan (Time.zone), qui dit si une échéance est passée.
       # → Row | nil (aucune classe principale active : l'élève n'a pas d'accueil)
-      def call(student_id:)
+      def call(student_id:, today: Time.zone.today)
         classroom_id, school_name, level_name, classroom_name, join_code =
           Orm::ClassroomStudent.joins(classroom: %i[school level])
                                .where(student_id:, primary: true, left_at: nil, classrooms: { status: "active" })
                                .pick(*HEADER_COLUMNS)
         return if classroom_id.nil?
 
+        exercises = assigned_exercises(classroom_id, student_id)
         Row.new(school_name:, level_name:, classroom_name:, join_code_display: Entities::Classroom::JoinCode.display(join_code),
                 classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
-                assigned_exercises: assigned_exercises(classroom_id, student_id),
-                recent_sessions: recent_sessions(student_id:), pending_gaps: pending_gaps(student_id))
+                assigned_exercises: exercises.map(&:last), recent_sessions: recent_sessions(student_id:),
+                pending_gaps: pending_gaps(student_id), late_material_slugs: late_material_slugs(exercises, today))
       end
 
       # Lue seule par le frame différé de l'activité récente.
@@ -48,38 +52,46 @@ module Queries
         @own_level ||= Queries::Catalog::AudienceFilter.courses(Queries::Catalog::StudentAudienceQuery.new.call(student_id:))
       end
 
-      # Le plus récemment assigné d'abord ; un exercice atteint par plusieurs assignations n'apparaît qu'une fois.
+      # ADR-0072 §4.1 : seul un exercice s'assigne ; il ne se lit plus par sa fiche ni par son cours. L'index actif unique
+      # garantit une seule ligne par exercice. → [[slug de la matière, ExerciseRow]], dans l'ordre de « À faire ».
       def assigned_exercises(classroom_id, student_id)
-        assigned_at = Orm::ClassroomAssignment.where(classroom_id:, status: "active")
-                                              .pluck(:assignable_type, :assignable_id, :assigned_at)
-                                              .to_h { |type, id, at| [ [ type, id ], at ] }
-        rows = published_exercises(assigned_at.keys).merge(own_level(student_id)).pluck(*EXERCISE_COLUMNS).sort_by do |id, *, essential_id, course_id, essential_position, position|
-          latest = [ [ "Exercise", id ], [ "Essential", essential_id ], [ "Course", course_id ] ].filter_map { assigned_at[it] }.max
-          [ -latest.to_f, course_id, essential_position, position ]
-        end
-        exercise_rows(rows, student_id)
+        assignments = Orm::ClassroomAssignment.where(classroom_id:, status: "active", assignable_type: "Exercise")
+                                              .pluck(:assignable_id, :assigned_at, :due_on).to_h { |id, *dates| [ id, dates ] }
+        rows = published_exercises(assignments.keys).merge(own_level(student_id)).pluck(*EXERCISE_COLUMNS)
+        exercise_rows(rows, assignments, student_id).sort_by(&:first).map { |_, slug, row| [ slug, row ] }
+      end
+
+      # UDR-0062 §3.2, dans cet ordre : les non terminés avant les terminés ; par échéance croissante, sans échéance après ;
+      # le plus récemment assigné d'abord ; assignés au même instant, l'ordre du cours et de la fiche. Un exercice commencé
+      # ne passe pas devant un exercice dû plus tôt (charte §8).
+      def urgency(row, assigned_at, *program_order)
+        [ row.completed_count.positive? ? 1 : 0, row.due_on ? 0 : 1, row.due_on&.jd.to_i, -assigned_at.to_f, *program_order ]
+      end
+
+      # ADR-0072 §4.4 : en retard pour l'élève = non terminé, et l'échéance est passée ; sans échéance, jamais.
+      def late_material_slugs(exercises, today)
+        exercises.filter_map { |slug, row| slug if row.completed_count.zero? && row.due_on && row.due_on < today }.uniq
       end
 
       # Un exercice publié dont la fiche et le cours le sont aussi (ADR-0035).
-      def published_exercises(keys)
-        ids = ->(type) { keys.filter_map { |key_type, id| id if key_type == type } }
-        scope = Orm::Exercise.joins(essential: { course: :material })
-                             .where(status: "published", essentials: { status: "published" }, courses: { status: "published" })
-        scope.where(id: ids.call("Exercise")).or(scope.where(essential_id: ids.call("Essential")))
-             .or(scope.where(essentials: { course_id: ids.call("Course") }))
+      def published_exercises(ids)
+        Orm::Exercise.joins(essential: { course: :material })
+                     .where(id: ids, status: "published", essentials: { status: "published" }, courses: { status: "published" })
       end
 
-      def exercise_rows(rows, student_id)
+      def exercise_rows(rows, assignments, student_id)
         ids = rows.map(&:first)
         completed = Orm::ExerciseSession.where(student_id:, exercise_id: ids, status: "completed").group(:exercise_id)
                                         .pluck(:exercise_id, Arel.sql("MAX(score_percent)"), Arel.sql("COUNT(*)"))
                                         .to_h { |id, best, count| [ id, [ best, count ] ] }
         started = Orm::ExerciseSession.where(student_id:, exercise_id: ids, status: "started").pluck(:exercise_id, :public_id).to_h
         badges = Orm::ExerciseBadge.where(student_id:, exercise_id: ids).pluck(:exercise_id, :level).to_h
-        rows.map do |id, public_id, title, material_name, material_category|
+        rows.map do |id, public_id, title, material_name, material_category, material_slug, *program_order|
           best_score_percent, completed_count = completed.fetch(id, [ nil, 0 ])
-          ExerciseRow.new(public_id:, title:, material_name:, material_category:, badge_level: badges[id], best_score_percent:,
-                          completed_count:, started_session_public_id: started[id])
+          assigned_at, due_on = assignments.fetch(id)
+          row = ExerciseRow.new(public_id:, title:, material_name:, material_category:, badge_level: badges[id], best_score_percent:,
+                                completed_count:, started_session_public_id: started[id], due_on:)
+          [ urgency(row, assigned_at, *program_order), material_slug, row ]
         end
       end
 
