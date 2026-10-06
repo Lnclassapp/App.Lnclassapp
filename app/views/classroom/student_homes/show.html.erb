@@ -39,9 +39,10 @@
         <%= render "pending_gaps", gaps: @home.pending_gaps %>
       <% end %>
     <% elsif key == :announcements %>
-      <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises (toutes masquées : le lien seul). %>
+      <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises. Amendement du 2026-10-06 :
+          sans « Toutes les annonces » ; toutes masquées, la section est rendue cachée (cible d'« Annuler »). %>
       <% if @announcements.any_readable? %>
-        <%= render "communication/messages/carousel", carousel: @announcements %>
+        <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
       <% end %>
     <% elsif key == :classroom %>
       <%= render "classroom_card", home: @home, icon: %>
