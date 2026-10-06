@@ -4,7 +4,6 @@
 <%# locals: (page:, nested: false) -%>
 <% team = current_actor.team? %>
 <% student = current_actor.student? %>
-<% teacher = teacher_scope %>
 <% filters = @filters.compact_blank %>
 <%# Une carte porte deux icônes (matière, flèche) : dessinées une fois par page, reprises par <use> (ADR-0067) ; les pages
     suivantes préfixent leurs <symbol>, pour qu'aucun id ne se répète dans la page. %>

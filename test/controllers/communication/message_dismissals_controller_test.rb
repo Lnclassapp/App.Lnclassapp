@@ -36,6 +36,8 @@ module Communication
       assert_select "turbo-stream[target=student_home_announcements] template" do
         assert_select "section#student_home_announcements[data-communication--carousel-refocus-value=true]"
         assert_equal [ "Devoirs communs", "Rentrée numérique" ], css_select("li article h3").map(&:text)
+        # UDR-0071, amendment of 2026-10-06: the student's band, recomputed, stays without « Toutes les annonces ».
+        assert_select "a[href=?]", announcements_path, 0
       end
       assert_select "turbo-stream[target=toasts] template" do
         assert_select "p", tc("dismissal.title")

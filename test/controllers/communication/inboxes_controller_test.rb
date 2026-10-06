@@ -46,6 +46,8 @@ module Communication
       assert_select "h1", tl("title")
       assert_select "*", text: tl("subtitle.student")
       assert_select "nav#announcement-tabs", 0
+      # UDR-0054, amendment of 2026-10-06: no « Annonces » tab for the student, so « Accueil » brings her back.
+      assert_select "nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), student_home_path, text: tl("back")
       assert_select "ul#announcements.grid.gap-3 > li > article h3", 6
       assert_equal [ "Fiches 3", "Fiches 2", "Fiches 1", "Rentrée", "Devoirs communs", "Concours" ],
                    css_select("ul#announcements article h3").map(&:text)
@@ -242,6 +244,8 @@ module Communication
       assert_select "nav#announcement-tabs a[aria-current=page][href=?]", announcements_path, I18n.t("communication.tabs.received")
       assert_equal [ "Conseil de classe", "Formation" ], css_select("ul#announcements article h3").map(&:text).sort
       assert_select "article form", 0
+      # « Annonces » is in the teacher's navigation: a destination of the navigation has no back link (UDR-0054).
+      assert_select "nav[aria-label=?]", I18n.t("components.back_link.label"), 0
     end
 
     test "AN-02 — the direction reads in « Reçues » what is for directions; empty, the adult text" do

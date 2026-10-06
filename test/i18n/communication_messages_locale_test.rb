@@ -36,7 +36,7 @@ class CommunicationMessagesLocaleTest < ActiveSupport::TestCase
     assert_equal({ new: "Écouter le message", playing: "Arrêter la lecture", played: "Réécouter le message" },
                  t("communication.audio.labels"))
     assert_equal [ "Audio indisponible sur ce téléphone.", "Écouter" ], %w[unavailable fallback].map { t("communication.audio.#{it}") }
-    assert_equal [ "Annonce masquée", "Elle reste dans « Toutes les annonces ».", "Annuler", "Cette annonce ne peut pas être masquée." ],
+    assert_equal [ "Annonce masquée", "Elle n'apparaît plus sur ton accueil.", "Annuler", "Cette annonce ne peut pas être masquée." ],
                  %w[title message undo refused].map { t("communication.dismissal.#{it}") }
   end
 

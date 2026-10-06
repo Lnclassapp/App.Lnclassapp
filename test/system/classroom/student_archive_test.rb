@@ -30,7 +30,7 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
   test "at 390 px, the student who left reads his archive from the exit screen, without a page reload" do
     with_mobile_viewport do
       sign_in_as @student
-      assert_selector "#pending_account p", text: t("identity.pending_accounts.show.former_student.title"), wait: SIGN_IN_WAIT
+      assert_selector "#pending_account h1", text: t("identity.pending_accounts.show.former_student.title"), wait: SIGN_IN_WAIT
       assert_single_primary_action
 
       assert_no_page_reload do

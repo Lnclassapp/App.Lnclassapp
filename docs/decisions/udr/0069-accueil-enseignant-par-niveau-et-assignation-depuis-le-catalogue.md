@@ -178,3 +178,10 @@ Le porteur a tranché (memo, G1 à G13) : sections « Mes classes », « Cours �
 
 - Sous 640 px, une bulle affiche le libellé court de sa matière, choisi par slug figé (`classroom.student_homes.subjects.short` : Math, PC, HG, Philo) ; sans entrée, le nom entier. Le nom entier reste le nom accessible (`max-sm:sr-only`), le libellé court est muet.
 - Sous 640 px, le pied « Tous les cours » disparaît (l'onglet Cours de la barre du bas y mène) et la carte remonte son titre (`pt-3`).
+
+## Amendement du 2026-10-06 (bis) — plus de « Tous les cours »
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md), point 13. Demande du porteur du 2026-10-06 : « sur /students, supprime « Tous les cours » ». Cette section remplace le second point de l'amendement précédent.*
+
+- La carte « Mes matières » de l'accueil élève n'a plus de pied, à toutes les tailles : l'onglet Cours (barre du bas sous `lg`, barre latérale au-delà) mène au catalogue, et chaque bulle au catalogue filtré. La clé `classroom.student_homes.subjects.all` disparaît.
+- Sans matière, la carte garde son état vide, sans lien.

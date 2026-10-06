@@ -1,10 +1,12 @@
 <%# 🌐 UI · communication/inboxes/show — « Reçues » des adultes, « Toutes les annonces » de l'élève (UDR-0071 §3.7) %>
 <%# Rôle : les annonces lisibles en cartes, la plus récente d'abord, 20 par page ; l'élève masque et réaffiche, sans onglets %>
-<%# ADR  : 0078 · UDR : 0005, 0054, 0071 %>
+<%# ADR  : 0078 · UDR : 0005, 0054 (élève : retour « Accueil », amendement du 2026-10-06), 0071 %>
 <% audience = current_actor.student? ? "student" : "adult" %>
 <% page_title t(".page_title.#{audience}") %>
 <% content_for :nav_key, "announcements" %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle.#{audience}") %>
+<%# L'élève n'a pas d'onglet « Annonces » : sans retour, la page serait une impasse. %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle.#{audience}"),
+                   back: ({ label: t(".back"), href: student_home_path } if current_actor.student?) %>
 <%= render "communication/shared/tabs", role: current_actor.role, current: :received %>
 
 <% if @page.cards.empty? %>

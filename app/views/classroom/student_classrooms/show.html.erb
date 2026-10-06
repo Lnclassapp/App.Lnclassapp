@@ -1,8 +1,8 @@
 <%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève (CL-22, CL-10 volet élève) %>
 <%# Rôle : la classe et son code, les cours assignés en bande, les exercices à faire et traités ; lecture seule, sans nom d'élève %>
-<%# ADR  : 0028, 0048, 0072, 0076 · UDR : 0006, 0007, 0011, 0054, 0057, 0062, 0071 §3.5, 0076 §3.2 · code à dicter : jamais de « Copier » %>
+<%# ADR  : 0028, 0048, 0072, 0076 · UDR : 0006, 0007, 0011, 0054 (retour « Accueil », amendement du 2026-10-06), 0057, 0062, 0071 §3.5, 0076 §3.2 · code à dicter : jamais de « Copier » %>
 <% page_title t(".page_title") %>
-<%= ui_page_header title: t(".title") %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
 
 <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
 <div class="grid grid-cols-1 gap-5">

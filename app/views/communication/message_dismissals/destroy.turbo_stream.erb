@@ -7,4 +7,4 @@
                            locals: { card: @card, context: :list, dismissible: !@card.official? } %>
 <% end %>
 <%= turbo_stream.replace "student_home_announcements", partial: "communication/messages/carousel",
-                         locals: { carousel: @carousel, refocus: true } %>
+                         locals: { carousel: @carousel, refocus: true, link: false } %>

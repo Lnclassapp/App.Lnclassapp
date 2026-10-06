@@ -139,10 +139,11 @@ module NavigationHelper
   end
 
   # Retour vers une liste filtrée (UDR-0054 §3.2) : l'URL de provenance si elle est de ce même hôte et que son chemin
-  # est exactement `from` (chaîne de requête conservée), sinon `default`. Jamais une adresse d'un autre site.
+  # est exactement `from` (chaîne de requête conservée), sinon `default`. Jamais une adresse d'un autre site. Seule une
+  # adresse http(s) a une request_uri : `//hôte/chemin` ou `ftp://hôte/chemin` reviennent au défaut, jamais à une 500.
   def back_href(default, from:)
     referer = URI.parse(request.referer.to_s)
-    referer.host == request.host && referer.path == from ? referer.request_uri : default
+    referer.is_a?(URI::HTTP) && referer.host == request.host && referer.path == from ? referer.request_uri : default
   rescue URI::InvalidURIError
     default
   end

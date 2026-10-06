@@ -27,6 +27,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "title", text: including(tl("show.page_title"))
     assert_select "h1", text: tl("show.title")
     assert_select "h1 + p", 0
+    # UDR-0054, amendment of 2026-10-06: every student page but the home brings back to « Accueil ».
+    assert_select "nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), student_home_path, text: tl("show.back")
     assert_select "#student_classroom_header" do
       assert_select "h2", text: "Tle D 1"
       assert_select "*", text: "Tle · D"
