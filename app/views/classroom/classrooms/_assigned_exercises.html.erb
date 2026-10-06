@@ -1,8 +1,9 @@
 <%# 🌐 UI · classroom/classrooms/_assigned_exercises — bloc « Exercices assignés » de la page d'une classe, à la place de « Cours assignés » %>
 <%# Rôle : une ligne par assignation active (titre, matière, échéance) ; « 18 faits… » ; pied badges et cercle ; lien vers le suivi %>
-<%# ADR  : 0048, 0072, 0079 · UDR : 0062 (§3.4), 0072 (§3.4) · comptes, pied et lien seulement sous FollowAssignmentPolicy (counts nil sinon) %>
+<%# ADR  : 0048, 0072, 0079 · UDR : 0062 (§3.4), 0072 (§3.4), 0077 (§3.4 : 3 lignes puis « Voir plus ») · comptes, pied et lien seulement sous FollowAssignmentPolicy %>
 <%# locals: (classroom:, assignments:) -%>
-<section id="assigned_exercises" aria-labelledby="assigned_exercises_title" class="min-w-0">
+<%= tag.section id: "assigned_exercises", "aria-labelledby": "assigned_exercises_title", class: "min-w-0",
+                data: (ui_reveal_data if assignments.any?) do %>
   <h2 id="assigned_exercises_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
   <% if assignments.empty? %>
     <div id="assigned_exercises_empty">
@@ -10,9 +11,10 @@
     </div>
   <% else %>
     <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
-      <% assignments.each do |assignment| %>
+      <% assignments.each_with_index do |assignment, index| %>
         <% counts = assignment.counts %>
-        <li id="assignment_<%= assignment.public_id %>" class="relative flex items-center gap-3 px-4 py-4 hover:bg-mist sm:px-5">
+        <%= tag.li id: "assignment_#{assignment.public_id}", class: "relative flex items-center gap-3 px-4 py-4 hover:bg-mist sm:px-5",
+                   **ui_reveal_item(index) do %>
           <div class="min-w-0 flex-1 space-y-1.5">
             <% if counts %>
               <%= link_to assignment.exercise_title, classroom_assignment_path(classroom.public_id, assignment.public_id),
@@ -41,8 +43,9 @@
           <% if counts %>
             <%= ui_icon "chevron-right", variant: :mini, class: "text-mute" %>
           <% end %>
-        </li>
+        <% end %>
       <% end %>
     </ul>
+    <%= ui_reveal_more assignments.size %>
   <% end %>
-</section>
+<% end %>

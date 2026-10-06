@@ -1,6 +1,6 @@
 /* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
    Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
-   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051, 0061, 0065 (mode sombre) */
+   ADR  : 0009, 0049, 0051, 0081 · UDR : 0005, 0006, 0051, 0061, 0065 (mode sombre), 0075 (thèmes d'annonce) */
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
@@ -126,6 +126,82 @@
     from { opacity: 0; transform: translateY(0.75rem); }
     to { opacity: 1; transform: translateY(0); }
   }
+}
+
+/* UDR-0075 §3.1, ADR-0081 §4.2 — Thèmes d'annonce : une carte (`data-announcement-theme`, Message::THEMES) redéfinit
+   à son échelle le fond (`brand-soft`), le texte, la signature et `fill-school` (`school`), l'illustration (`brand`)
+   et l'illustration forte ou le badge (`brand-strong`). Les utilitaires de la carte lisent ces variables : les 8 dessins
+   de base et ceux de l'équipe suivent sans être réécrits. « Ciel » reprend les valeurs du @theme. Valeurs sombres dans
+   les deux blocs de l'UDR-0065, plus bas. Hors couche, comme eux ; test/design/announcement_themes_test.rb vérifie
+   chaque valeur et chaque contraste. */
+[data-announcement-theme="ciel"] {
+  --color-brand-soft: #e5f5ff;
+  --color-school: #1b365d;
+  --color-brand: #00a0ff;
+  --color-brand-strong: #0070b3;
+}
+
+[data-announcement-theme="lagune"] {
+  --color-brand-soft: #d9f7f3;
+  --color-school: #0b4a45;
+  --color-brand: #14b8a6;
+  --color-brand-strong: #0f766e;
+}
+
+[data-announcement-theme="menthe"] {
+  --color-brand-soft: #e3f9e5;
+  --color-school: #14452a;
+  --color-brand: #22c55e;
+  --color-brand-strong: #15803d;
+}
+
+[data-announcement-theme="citron"] {
+  --color-brand-soft: #fff6c7;
+  --color-school: #4a3b05;
+  --color-brand: #eab308;
+  --color-brand-strong: #a16207;
+}
+
+[data-announcement-theme="mangue"] {
+  --color-brand-soft: #ffe9d2;
+  --color-school: #5a2a05;
+  --color-brand: #f97316;
+  --color-brand-strong: #c2410c;
+}
+
+[data-announcement-theme="corail"] {
+  --color-brand-soft: #ffe3df;
+  --color-school: #5f1a12;
+  --color-brand: #f2554a;
+  --color-brand-strong: #b91c1c;
+}
+
+[data-announcement-theme="hibiscus"] {
+  --color-brand-soft: #ffe1f3;
+  --color-school: #5c1642;
+  --color-brand: #ec4899;
+  --color-brand-strong: #be185d;
+}
+
+[data-announcement-theme="lavande"] {
+  --color-brand-soft: #efe5ff;
+  --color-school: #3b1d6e;
+  --color-brand: #8b5cf6;
+  --color-brand-strong: #6d28d9;
+}
+
+[data-announcement-theme="indigo"] {
+  --color-brand-soft: #2e3a8c;
+  --color-school: #ffffff;
+  --color-brand: #a5b4fc;
+  --color-brand-strong: #e0e7ff;
+}
+
+[data-announcement-theme="nuit"] {
+  --color-brand-soft: #1f2937;
+  --color-school: #f9fafb;
+  --color-brand: #60a5fa;
+  --color-brand-strong: #fbbf24;
 }
 
 @layer base {
@@ -323,7 +399,7 @@
    Amendement du 2026-10-03 — l'interrupteur pose `data-theme` sur <html> : `dark` l'emporte sur un téléphone clair,
    `light` sur un téléphone sombre ; sans choix, le réglage du téléphone. Les deux blocs portent les mêmes valeurs.
    Hors couche, exprès : l'emporte sur `@layer theme`. test/design/dark_mode_test.rb vérifie chaque token, chaque
-   contraste et l'identité des deux blocs. */
+   contraste et l'identité des deux blocs. Après `:root`, chaque bloc porte les thèmes d'annonce en sombre (UDR-0075). */
 @media screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
@@ -376,6 +452,77 @@
   /* `backdrop:bg-ink/50` deviendrait un voile clair : le fond d'une modale reste un voile sombre. */
   :root:not([data-theme="light"]) dialog::backdrop {
     background-color: rgb(0 0 0 / 0.6);
+  }
+
+  /* UDR-0075 §3.1 — les thèmes d'annonce en sombre ; plus précis que le thème clair de la carte, ils l'emportent. */
+  :root:not([data-theme="light"]) [data-announcement-theme="ciel"] {
+    --color-brand-soft: #132c42;
+    --color-school: #a9c4ee;
+    --color-brand: #0070b3;
+    --color-brand-strong: #7fd0ff;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="lagune"] {
+    --color-brand-soft: #0f2e2b;
+    --color-school: #99e6dc;
+    --color-brand: #0f766e;
+    --color-brand-strong: #5eead4;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="menthe"] {
+    --color-brand-soft: #13301c;
+    --color-school: #a7e8b8;
+    --color-brand: #15803d;
+    --color-brand-strong: #86efac;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="citron"] {
+    --color-brand-soft: #332a0c;
+    --color-school: #f5e08a;
+    --color-brand: #a16207;
+    --color-brand-strong: #fde047;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="mangue"] {
+    --color-brand-soft: #3a220f;
+    --color-school: #fdc897;
+    --color-brand: #c2410c;
+    --color-brand-strong: #fdba74;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="corail"] {
+    --color-brand-soft: #3d1b18;
+    --color-school: #fbb4ac;
+    --color-brand: #b91c1c;
+    --color-brand-strong: #fca5a5;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="hibiscus"] {
+    --color-brand-soft: #3d1a30;
+    --color-school: #f9b4dc;
+    --color-brand: #be185d;
+    --color-brand-strong: #f9a8d4;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="lavande"] {
+    --color-brand-soft: #2a1e45;
+    --color-school: #d4c2fb;
+    --color-brand: #6d28d9;
+    --color-brand-strong: #c4b5fd;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="indigo"] {
+    --color-brand-soft: #1e2563;
+    --color-school: #e0e7ff;
+    --color-brand: #6366f1;
+    --color-brand-strong: #c7d2fe;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="nuit"] {
+    --color-brand-soft: #0b0f17;
+    --color-school: #e5e7eb;
+    --color-brand: #3b82f6;
+    --color-brand-strong: #fbbf24;
   }
 }
 
@@ -430,5 +577,76 @@
 
   :root[data-theme="dark"] dialog::backdrop {
     background-color: rgb(0 0 0 / 0.6);
+  }
+
+  /* UDR-0075 §3.1 — les mêmes thèmes d'annonce en sombre, choisis par l'interrupteur. */
+  :root[data-theme="dark"] [data-announcement-theme="ciel"] {
+    --color-brand-soft: #132c42;
+    --color-school: #a9c4ee;
+    --color-brand: #0070b3;
+    --color-brand-strong: #7fd0ff;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="lagune"] {
+    --color-brand-soft: #0f2e2b;
+    --color-school: #99e6dc;
+    --color-brand: #0f766e;
+    --color-brand-strong: #5eead4;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="menthe"] {
+    --color-brand-soft: #13301c;
+    --color-school: #a7e8b8;
+    --color-brand: #15803d;
+    --color-brand-strong: #86efac;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="citron"] {
+    --color-brand-soft: #332a0c;
+    --color-school: #f5e08a;
+    --color-brand: #a16207;
+    --color-brand-strong: #fde047;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="mangue"] {
+    --color-brand-soft: #3a220f;
+    --color-school: #fdc897;
+    --color-brand: #c2410c;
+    --color-brand-strong: #fdba74;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="corail"] {
+    --color-brand-soft: #3d1b18;
+    --color-school: #fbb4ac;
+    --color-brand: #b91c1c;
+    --color-brand-strong: #fca5a5;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="hibiscus"] {
+    --color-brand-soft: #3d1a30;
+    --color-school: #f9b4dc;
+    --color-brand: #be185d;
+    --color-brand-strong: #f9a8d4;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="lavande"] {
+    --color-brand-soft: #2a1e45;
+    --color-school: #d4c2fb;
+    --color-brand: #6d28d9;
+    --color-brand-strong: #c4b5fd;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="indigo"] {
+    --color-brand-soft: #1e2563;
+    --color-school: #e0e7ff;
+    --color-brand: #6366f1;
+    --color-brand-strong: #c7d2fe;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="nuit"] {
+    --color-brand-soft: #0b0f17;
+    --color-school: #e5e7eb;
+    --color-brand: #3b82f6;
+    --color-brand-strong: #fbbf24;
   }
 }

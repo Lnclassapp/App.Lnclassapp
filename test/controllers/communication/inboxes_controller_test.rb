@@ -131,6 +131,59 @@ module Communication
       end
     end
 
+    # UDR-0075 §3.1 and §3.2 (annonces-v2, Lot B): a card takes the theme of its message by one attribute, its classes stay
+    # those of UDR-0071 §3.2; a drawing of the team is rebuilt in one colour, the strong illustration of the theme.
+    CARD_CLASSES = "relative flex min-h-40 gap-2 rounded-ln bg-brand-soft py-3 pr-2 pl-4 text-school".freeze
+    CIRCLE = { "name" => "circle", "attributes" => { "cx" => "32", "cy" => "32", "r" => "20" }, "children" => [] }.freeze
+
+    test "AV-07 — each card carries the theme of its message, « Ciel » by default, with the classes of UDR-0071 unchanged" do
+      mangue = fiches(theme: "mangue")
+      nuit = devoirs(theme: "nuit")
+      ciel = rentree
+      sign_in_as @awa
+
+      get announcements_path
+
+      assert_select "article#{card_id(mangue)}[data-announcement-theme=mangue]"
+      assert_select "article#{card_id(nuit)}[data-announcement-theme=nuit]"
+      assert_select "article#{card_id(ciel)}[data-announcement-theme=ciel]"
+      assert_equal [ CARD_CLASSES ] * 3, css_select("article").map { it["class"] }
+    end
+
+    test "AV-07 — the teacher reads in « Reçues » the card in its theme" do
+      create_message(author: @fatou, title: "Formation", audience: "teachers", theme: "lavande")
+      sign_in_as @kouassi
+
+      get announcements_path
+
+      assert_select "ul#announcements article[data-announcement-theme=lavande] h3", "Formation"
+    end
+
+    test "AV-08 — a drawing of the team is rebuilt on the card, in the strong colour of the theme" do
+      bus = create_illustration(name: "Bus scolaire", created_by: @fatou, shapes: [ CIRCLE ])
+      sortie = fiches(theme: "mangue", illustration: bus)
+      sign_in_as @awa
+
+      get announcements_path
+
+      assert_select "#{card_id(sortie)}[data-announcement-theme=mangue]" do
+        assert_select "svg.size-16.fill-brand-strong[viewBox='0 0 64 64'][aria-hidden=true][focusable=false]" do
+          assert_select "> circle[cx='32'][cy='32'][r='20']"
+        end
+      end
+    end
+
+    test "AV-10 — a retired drawing stays on the live message that carries it" do
+      bus = create_illustration(name: "Bus scolaire", created_by: @fatou, shapes: [ CIRCLE ])
+      sortie = fiches(illustration: bus)
+      Repositories::Communication::IllustrationRepository.new.retire(id: bus.id, at: Time.current)
+      sign_in_as @awa
+
+      get announcements_path
+
+      assert_select "#{card_id(sortie)} svg.fill-brand-strong[viewBox='0 0 64 64'] > circle[r='20']"
+    end
+
     test "the ▶ button carries its labels and its failure message for the Stimulus controller" do
       attach(fiches, :audio, AUDIO, "audio/mpeg")
       sign_in_as @awa

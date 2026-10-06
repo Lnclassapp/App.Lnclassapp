@@ -284,6 +284,50 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Retirer « Méiose » de 6ème 1", tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
   end
 
+  # CA-7 (UDR-0077 §3.3) : depuis la fiche ou la page exercice (compact=1), le stream remplace la ligne compacte entière.
+  test "compact: assigned, then withdrawn, the stream replaces the whole compact row, due date included" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id,
+                                                                weekdays: [ 1, 4 ], at: Time.current)
+    sign_in_as @teacher
+
+    post classroom_assignments_path(@classroom.public_id), as: :turbo_stream,
+         params: { assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id }, compact: "1" }
+
+    assignment = Orm::ClassroomAssignment.sole
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template" do
+      assert_select "##{toggle_id('Exercise', @exercise.public_id)}.justify-between" do
+        assert_select "div > p:first-child", text: "6ème 1"
+        assert_select "div > p.text-xs", text: "Pour jeu. 8 oct."
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']:has(input[name=compact][value='1']) " \
+                      "button.size-tap[aria-label=?]", tl("toggle.archive_from_label", name: "Méiose", classroom: "6ème 1")
+      end
+    end
+
+    patch archive_assignment_path(assignment.public_id), as: :turbo_stream,
+          params: { classroom_public_id: @classroom.public_id, compact: "1" }
+
+    assert_select "turbo-stream[action=replace][target='#{toggle_id('Exercise', @exercise.public_id)}'] template" do
+      assert_select "div > p:first-child", text: "6ème 1"
+      assert_select "p.text-xs", 0
+      assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}']:has(input[name=compact][value='1'])"
+    end
+  end
+
+  test "compact: the days modal carries compact on to its form, and « Plus tard » answers a compact row" do
+    sign_in_as @teacher
+
+    get new_classroom_assignment_path(@classroom.public_id, assignable_key: @exercise.public_id, compact: 1)
+
+    assert_select "form#assignment-days-form input[type=hidden][name=compact][value='1']"
+
+    post classroom_assignments_path(@classroom.public_id), as: :turbo_stream, params: {
+      assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id, weekdays: [ "" ] }, later: "1", compact: "1"
+    }
+
+    assert_select "turbo-stream[action=replace] template ##{toggle_id('Exercise', @exercise.public_id)} div > p:first-child", text: "6ème 1"
+  end
+
   # UDR-0062 §3.4 : la modale « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal », lisible sans JavaScript.
   test "the days modal names the classroom and the exercise, with six weekdays, « Plus tard » and « Assigner »" do
     sign_in_as @teacher

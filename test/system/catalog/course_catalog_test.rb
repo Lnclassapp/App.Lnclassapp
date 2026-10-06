@@ -55,15 +55,16 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   # sans rechargement de page, et une carte de la suite ouvre son cours en page entière.
   test "the teacher scrolls down the catalogue: the next cards load in place, and one of them opens its course" do
     25.times { |index| create_course(name: format("Cours %02d", index), level: @tle, material: @svt) }
-    sign_in_as create_teacher
+    # UDR-0077 §3.2 : l'enseignant lit sa matière aux niveaux de ses classes — les 26 cours de SVT de Tle, sans la philosophie.
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
     visit courses_path
-    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 27)
+    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 26)
     assert_selector "#courses_list > li", count: 24
     assert_no_selector "#courses_list_page_2"
 
     assert_no_page_reload do
       scroll_to find("turbo-frame#courses_page_2")
-      assert_selector "#courses_list_page_2 > li", count: 3
+      assert_selector "#courses_list_page_2 > li", count: 2
       assert_no_selector "turbo-frame#courses_page_3"
     end
     last = all("#courses_list_page_2 > li").last
@@ -204,16 +205,24 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
   # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
   # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
-  test "on a phone, the teacher's filtered catalogue and course page are unchanged, without « Assigner à mes classes »" do
+  # UDR-0077 §3.2 : sur téléphone, ni recherche ni filtres (tous les rôles) ; la matière de l'enseignant est dite par le
+  # sous-titre, plus par chaque carte (R6) ; « Tout voir » quitte le filtre.
+  test "on a phone, the teacher's filtered catalogue hides the filters and keeps « Tout voir »; the course page is unchanged" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
-    sign_in_as create_teacher
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
 
     with_mobile_viewport do
       visit courses_path(material: @svt.slug)
+      assert_no_selector "#courses-filters"
       within("#course_#{@course.slug}") do
-        assert_text "SVT"
+        assert_no_text "SVT"
         assert_text "Tle"
       end
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+      click_link t("catalog.courses.index.reset_mobile")
+      assert_current_path courses_path
+      assert_no_link t("catalog.courses.index.reset_mobile")
 
       visit course_path(@course.slug)
       assert_selector "#course_essentials li", count: 4

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-05 : dessins de l'équipe en une seule couleur compris)* |
 | **Date** | 2026-10-05 |
 | **Chantier** | `docs/chantiers/annonces-v2` |
 | **Remplace** | — *(amende l'[ADR-0078](0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) §4.1 « date de fin » et §4.4 « fichiers »)* |
@@ -50,7 +50,7 @@ Deux points sont dangereux :
 ### 4.1 Durée et plafond (amende l'ADR-0078 §4.1)
 
 - **Plus de date de fin choisie.** `ends_at` = parution + **30 jours** (`Message::DURATION`). Pour une annonce programmée, la fin court depuis sa date de parution. La modification d'une annonce publiée ne change pas sa fin. Un brouillon n'a pas de fin. `Message::MAX_DURATION` et la contrainte des 90 jours disparaissent ; la contrainte « une annonce programmée ou publiée a une fin » reste.
-- **3 annonces en ligne au plus par compte auteur** (`Message::LIVE_CAP = 3`). « En ligne » = `published`, `published_at <= now < ends_at`. Ne comptent pas : brouillon, programmée, archivée, retirée, terminée.
+- **3 annonces en ligne au plus par compte auteur** (`Message::LIVE_CAP = 3`). « En ligne » = `published` et `now < ends_at` ; `published_at` n'est pas comparé, pour qu'une parution concurrente qui a lu son horloge avant le verrou compte celle qui vient d'avoir lieu. Ne comptent pas : brouillon, programmée, archivée, retirée, terminée.
 - **À chaque parution** (création publiée tout de suite, brouillon ou programmée publiée par son auteur, passage du job de publication), dans **la même transaction** :
   1. la ligne `users` de l'auteur est verrouillée (`SELECT … FOR UPDATE`) ;
   2. ses annonces en ligne sont lues, de la plus ancienne à la plus récente ;
@@ -154,3 +154,14 @@ def read(bytes:) = raise NotImplementedError
 - `test/design/announcement_themes_test.rb` : les 10 thèmes, clair et sombre, tiennent leurs contrastes (AV-07).
 - `test/domain/entities/communication/audio_header_test.rb` : un fichier réel par variante (AV-12).
 - La règle de lecture `ReadableMessages#scope` ne change pas : son test reste vert sans modification.
+
+## Amendement du 2026-10-05 — clôture du chantier
+
+Ce que l'exécution (lots 0 à F) et la phase 5 ont arrêté, sans changer la décision.
+
+1. **Verrou de l'auteur : `FOR NO KEY UPDATE`** (§4.1, §6). `FOR UPDATE` sur la ligne `users` bloquait, pendant tout le téléversement des fichiers, chaque insertion qui référence l'auteur par clé étrangère (journal d'audit…). `FOR NO KEY UPDATE` sérialise autant deux parutions du même auteur.
+2. **Une parution relit son annonce sous le verrou** (§4.1). Le verrou de l'auteur est pris en tête de la transaction, **puis** l'annonce existante qui paraît (modification d'un brouillon ou d'une programmée, passage du job) est relue ; elle n'est pas comptée parmi les annonces en ligne. Parue entre-temps (« Publier » envoyé deux fois, ou le job), la seconde écriture s'applique comme la modification de l'annonce en ligne : rien n'est archivé ni journalisé deux fois.
+3. **Le job n'écrit que le statut** : `MessageRepositoryPort#publish_scheduled(id:, now:)`, une écriture conditionnelle (`status = 'scheduled' AND published_at <= now`) qui n'écrase rien de ce que l'auteur a modifié depuis la lecture.
+4. **Une annonce modifiée garde son dessin de l'équipe**, même retiré depuis (§4.3) : seul un **nouveau** choix d'un dessin retiré est refusé. Le dessin reste servi jusqu'à la fin de l'annonce ; l'obliger à en changer pour corriger une faute n'avait pas de raison.
+5. **Bibliothèque plafonnée à 50 dessins non retirés** (`Illustration::LIBRARY_CAP`, revue de sécurité du Lot C) : sans plafond, un compte de l'équipe compromis alourdissait le formulaire de tous les auteurs. Le plafond tient en concurrence : `IllustrationRepositoryPort#lock_library` (`pg_advisory_xact_lock`) puis recompte, dans la transaction de l'ajout.
+6. **`DrawingReaderPort` créé au Lot C**, avec son adaptateur (`test/architecture/port_contracts_test.rb` exige un adaptateur par port). Son échec est `Shared::Result.failure(:invalid, errors: { file: [:unsafe | :not_svg | :empty] })` : `Shared::Result` n'accepte que ses codes. Le §6 qui écrit `failure(:unsafe | :not_svg | :empty)` se lit ainsi.

@@ -154,15 +154,17 @@ module Finitions
       assert_link t("assessment.exercise_sessions.show.quit"), href: exercise_path(@exercise.public_id)
     end
 
-    test "FU-53 : à 390 px, le catalogue avec sa recherche, les pages de l'élève et les infobulles ne débordent pas" do
+    # UDR-0077 §3.2 : à 390 px, plus de recherche ; un catalogue filtré (par une bulle) garde « Tout voir ».
+    test "FU-53 : à 390 px, le catalogue filtré sans recherche, les pages de l'élève et les infobulles ne débordent pas" do
       session = completed_session
       sign_in_as @student
 
       with_mobile_viewport do
-        visit courses_path
-        search_field.fill_in with: "genetique"
+        visit courses_path(q: "genetique")
+        assert_no_selector "#courses-filters"
         assert_selector "#courses_list > li", count: 1
-        assert_no_horizontal_scroll "le catalogue avec sa recherche"
+        assert_link tc("reset_mobile"), href: courses_path
+        assert_no_horizontal_scroll "le catalogue filtré"
 
         [ course_path(@course.slug), student_home_path, student_classroom_path, exercise_path(@exercise.public_id),
           exercise_session_result_path(session.public_id) ].each do |path|

@@ -1,0 +1,27 @@
+<%# 🌐 UI · classroom/teacher_homes/_follow_ups — « Activités » de l'accueil enseignant : les exercices à suivre %>
+<%# Rôle : un exercice assigné par ligne (titre vers son suivi, classe, échéance, élèves qui ne l'ont pas fait) ; 3 lignes puis « Voir plus » %>
+<%# ADR  : 0072 · UDR : 0057 (R3), 0062 (§3.1), 0077 §3.1 · locals: (follow_ups: [TeacherFollowUpsQuery::Row], icon:) %>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon:, id: "teacher_home_activity",
+            data: (ui_reveal_data if follow_ups.any?) do %>
+  <% if follow_ups.empty? %>
+    <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: %>
+  <% else %>
+    <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+      <% follow_ups.each_with_index do |follow_up, index| %>
+        <%= tag.li id: "follow_up_#{follow_up.public_id}", class: "relative flex items-center gap-3 px-5 py-4 active:bg-mist sm:px-6",
+                   **ui_reveal_item(index) do %>
+          <div class="min-w-0 flex-1 space-y-1">
+            <%= link_to follow_up.exercise_title, classroom_assignment_path(follow_up.classroom_public_id, follow_up.public_id),
+                        class: "block truncate font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+            <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mute">
+              <span><%= follow_up.classroom_name %></span><%= due_badge(follow_up.due_on) %>
+            </p>
+            <p class="text-sm tabular-nums"><%= t(".pending", count: follow_up.pending, present: follow_up.present) %></p>
+          </div>
+          <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute" %>
+        <% end %>
+      <% end %>
+    </ul>
+    <%= ui_reveal_more follow_ups.size %>
+  <% end %>
+<% end %>

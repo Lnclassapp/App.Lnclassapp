@@ -142,7 +142,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
       sign_in_as teacher
       click_on "Tle D 1"
       assert_no_page_reload do
-        within("#student_#{student.public_id}") { click_on t("classroom.classrooms.roster.issue_code") }
+        click_menu_action("#student_#{student.public_id}", t("classroom.classrooms.roster.issue_code"))
         assert_selector "#pin-recovery-code-modal"
         assert_toast t("identity.pin_recovery_codes.create.issued")
       end

@@ -53,6 +53,29 @@ module Communication
       assert_nil response.headers["Content-Range"]
     end
 
+    # Phase 5 (test analysis 2.3): a real M4A recording, typed by its content as the form stores it (ADR-0081 §4.4).
+    test "AV-12 — an M4A recording is served as audio/mp4, with the headers of the audio, and by byte range" do
+      m4a = file_fixture("audio/marque-3gp4.m4a").binread
+      dto = Dtos::Communication::MessageInput.new(title: "Chorale", body: "Écoutez.", illustration: "info", commit: "publish",
+                                                  audio: StringIO.new(m4a)).tap { it.valid_at?(now: Time.current) }
+      message = create_message(author: @kouassi, title: "Chorale", audience: "classrooms", classrooms: [ @troisieme_b ])
+      Repositories::Communication::AttachmentStore.new.attach(message_id: message.id, kind: :audio, **dto.upload(:audio).to_h)
+      sign_in_as @awa
+
+      get file_path("audio", message)
+
+      assert_equal [ 200, "audio/mp4" ], [ response.status, response.media_type ]
+      assert response.body.b == m4a, "l'enregistrement est servi tel quel"
+      assert_match(/\Ainline/, response.headers["Content-Disposition"])
+      assert_equal [ "no-store", "private" ], response.headers["Cache-Control"].split(/,\s*/).sort
+      assert_equal [ "bytes", nil ], response.headers.values_at("Accept-Ranges", "Content-Range")
+
+      get file_path("audio", message), headers: { "Range" => "bytes=4-11" }
+
+      assert_equal [ 206, "ftyp3gp4", "audio/mp4" ], [ response.status, response.body.b, response.media_type ]
+      assert_equal "bytes 4-11/#{m4a.bytesize}", response.headers["Content-Range"]
+    end
+
     test "AN-09 — a student of 3ème A receives 404 for the image and the audio" do
       assert_not_served create_student(classroom: @troisieme_a)
     end

@@ -1,9 +1,10 @@
 <%# 🌐 UI · catalog/courses/_page — une page de cartes du catalogue, puis le frame différé de la suivante %>
 <%# Rôle : 24 cartes (CourseCatalogQuery::PER_PAGE), icônes dessinées une fois par page ; au bas, la page suivante, chargée au défilement, ou son lien sans JavaScript %>
-<%# ADR  : 0035, 0067, 0076 (§4.2 : hors de l'écran à l'arrivée) · UDR : 0013 (amendement du 2026-10-05), 0057 · nested : page chargée dans le frame de la précédente %>
+<%# ADR  : 0035, 0067, 0076 (§4.2 : hors de l'écran à l'arrivée) · UDR : 0013 (amendement du 2026-10-05), 0057, 0077 · nested : page chargée dans le frame de la précédente %>
 <%# locals: (page:, nested: false) -%>
 <% team = current_actor.team? %>
 <% student = current_actor.student? %>
+<% teacher = teacher_scope %>
 <% filters = @filters.compact_blank %>
 <%# Une carte porte deux icônes (matière, flèche) : dessinées une fois par page, reprises par <use> (ADR-0067) ; les pages
     suivantes préfixent leurs <symbol>, pour qu'aucun id ne se répète dans la page. %>

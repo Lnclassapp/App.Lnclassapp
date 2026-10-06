@@ -160,23 +160,31 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Brouillon caché/, response.body)
     assert_select row_of(@exercise) do
       assert_select "ul[aria-label=?]", I18n.t("#{scope}.exercise_progress.assign_targets", title: "Méiose et ADN") do |list|
-        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li > span").map { it.text.strip }
+        assert_equal [ "Tle D 1", "Tle D 2" ], list.css("li [id^='assignment_'] > div > p:first-child").map { it.text.strip }
       end
-      assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{@exercise.public_id}" do
+      # CA-7 (UDR-0077 §3.3) : une ligne compacte — la classe, l'échéance dessous, « Assigné » et ✕ à droite.
+      assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{@exercise.public_id}.flex.justify-between" do
+        assert_select "div > p:first-child", text: "Tle D 1"
+        assert_select "div > p.text-xs", text: "Pour jeu. 8 oct."
         assert_select "*", text: /Assigné/
-        assert_select "*", text: /Pour jeu\. 8 oct\./
-        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button[aria-label=?]",
-                      "Retirer « Méiose et ADN » de Tle D 1"
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=compact][value='1']"
+        assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] button.size-tap[aria-label=?]",
+                      "Retirer « Méiose et ADN » de Tle D 1", text: ""
       end
       # Tle D 2 : pas encore de jours, « Assigner » ouvre la modale des jours.
       assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id} a[data-turbo-frame=modal][href=?][aria-label=?]",
-                    new_classroom_assignment_path(tle_d2.public_id, assignable_key: @exercise.public_id),
+                    new_classroom_assignment_path(tle_d2.public_id, assignable_key: @exercise.public_id, compact: 1),
                     "Assigner « Méiose et ADN » à Tle D 2"
-      assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
+      assert_select "#assignment_#{tle_d2.public_id}_Exercise_#{@exercise.public_id} p.text-xs", 0
+      # Sur téléphone, le titre suffit : « Ouvrir » ne se montre qu'à partir de 640 px.
+      assert_select "a.hidden.sm\\:inline-flex[href='#{exercise_path(@exercise.public_id)}']",
+                    text: I18n.t("#{scope}.exercise_progress.open")
+      assert_select "p.text-sm.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.#{@exercise.exercise_type}")} · " \
+                                                  "#{I18n.t("#{scope}.exercise_progress.questions", count: @exercise.questions.count)}"
     end
     # Tle D 1 : jours connus, « Assigner » assigne en un clic.
     assert_select "#assignment_#{tle_d1.public_id}_Exercise_#{brassage.public_id} " \
-                  "form[action='#{classroom_assignments_path(tle_d1.public_id)}'] button[aria-label=?]",
+                  "form[action='#{classroom_assignments_path(tle_d1.public_id)}']:has(input[name=compact][value='1']) button[aria-label=?]",
                   "Assigner « Brassage » à Tle D 1"
   end
 

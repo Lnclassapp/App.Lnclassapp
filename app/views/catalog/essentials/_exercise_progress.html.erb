@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/essentials/_exercise_progress — un exercice de la fiche, selon le rôle %>
-<%# Rôle : élève → lien étiré, « Type · Assigné par ton enseignant », « Commencer » ou « Reprendre » ; autres → type, questions, statut (équipe), une bascule par classe (enseignant) %>
-<%# ADR  : 0028, 0033, 0054, 0072 · UDR : 0007, 0015, 0057, 0062 (§3.4), 0069 (§3.8) · tout exercice publié se démarre, assigné ou non %>
+<%# Rôle : élève → lien étiré, « Type · Assigné par ton enseignant », « Commencer » ou « Reprendre » ; autres → « Type · N questions », statut (équipe), une ligne compacte par classe (enseignant) %>
+<%# ADR  : 0028, 0033, 0054, 0072 · UDR : 0007, 0015, 0057, 0062 (§3.4), 0069 (§3.8), 0077 (§3.3) · tout exercice publié se démarre, assigné ou non %>
 <%# locals: (exercise:, student:, team:, targets: nil, primary: false, folded: false) -%>
 <% if student %>
   <%# UDR-0015, amendement du 2026-10-02 : badge, score et maîtrise sont sur la page de l'exercice, à un tap. %>
@@ -37,35 +37,33 @@
       <% if exercise.description.present? %>
         <p class="line-clamp-2 text-sm text-mute"><%= exercise.description %></p>
       <% end %>
+      <%# UDR-0077 §3.3 : type et nombre de questions en une ligne de texte ; le statut de l'équipe reste un badge. %>
       <div class="flex flex-wrap items-center gap-2">
-        <%= ui_badge t(".exercise_types.#{exercise.exercise_type}"), tone: :brand, size: :sm %>
-        <%= ui_badge t(".questions", count: exercise.questions_count), size: :sm, icon: "question-mark-circle" %>
+        <p class="text-sm text-mute"><%= t(".exercise_types.#{exercise.exercise_type}") %> · <%= t(".questions", count: exercise.questions_count) %></p>
         <% if team %>
           <%= content_status_badge(exercise.status) %>
         <% end %>
       </div>
     </div>
     <% if targets&.classrooms&.any? && exercise.status == "published" %>
-      <%# Sous le titre sur téléphone, à droite à partir de sm : la ligne passe en sm:flex-row. %>
-      <ul class="mt-3 space-y-2 sm:mt-0" aria-label="<%= t(".assign_targets", title: exercise.title) %>">
+      <%# UDR-0077 §3.3 : une ligne compacte par classe (nom, échéance dessous, « Assigné » et ✕), sous le titre sur téléphone. %>
+      <ul class="mt-3 divide-y divide-line rounded-ln border border-line sm:mt-0 sm:w-72 sm:shrink-0"
+          aria-label="<%= t(".assign_targets", title: exercise.title) %>">
         <% targets.classrooms.each do |target| %>
           <% state = targets.states[[ target.public_id, exercise.public_id ]] %>
-          <li class="flex flex-wrap items-center justify-between gap-3">
-            <span class="text-sm font-medium text-ink"><%= target.name %></span>
-            <%# Trop large pour la ligne (« Assigné · Pour … · Retirer » à 375 px), la bascule passe dessous et s'y replie. %>
-            <div class="max-w-full">
-              <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
-                         assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
-                         assignment_public_id: state&.assignment_public_id, due_on: state&.due_on,
-                         needs_session_days: target.needs_session_days %>
-            </div>
+          <li>
+            <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
+                       assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
+                       assignment_public_id: state&.assignment_public_id, due_on: state&.due_on,
+                       needs_session_days: target.needs_session_days, compact: true %>
           </li>
         <% end %>
       </ul>
     <% end %>
-    <div class="shrink-0 sm:self-center">
+    <%# Sur téléphone, le titre est déjà un lien : « Ouvrir » ne se montre qu'à partir de 640 px (UDR-0077 §3.3). %>
+    <div class="hidden shrink-0 sm:block sm:self-center">
       <%= ui_button t(".open"), href: exercise_path(exercise.public_id), variant: :secondary, size: :sm, icon_end: "arrow-right",
-                    "aria-label": t(".open_label", title: exercise.title) %>
+                    class: "hidden sm:inline-flex", "aria-label": t(".open_label", title: exercise.title) %>
     </div>
   </li>
 <% end %>
