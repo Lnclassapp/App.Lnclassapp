@@ -432,8 +432,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_announcements", 0
   end
 
-  # UDR-0071, amendment of 2026-10-06: all dismissed, the section stays hidden (the target of « Annuler »), without a link.
-  test "AN-12 — a dismissed announcement is out of the carousel, on any device; all dismissed, the section is hidden" do
+  # UDR-0071, amendment of 2026-10-06: all dismissed, the section stays for screen readers only (the target of « Annuler »),
+  # without a link.
+  test "AN-12 — a dismissed announcement is out of the carousel, on any device; all dismissed, screen readers only" do
     team = create_team_member(second_factor: false)
     dismissed = announce(team, "Rentrée numérique", audience: "all")
     announce(team, "Concours", audience: "all", at: 2.hours.ago)
@@ -447,8 +448,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     dismiss_message(message: Orm::Message.find_by!(title: "Concours"), user: @student)
     get student_home_path
 
-    assert_select "#student_home_announcements[hidden]" do
+    assert_select "#student_home_announcements.sr-only" do
       assert_select "ul", 0
+      assert_select "p", I18n.t("communication.inboxes.carousel.all_dismissed")
     end
     assert_select "a[href=?]", announcements_path, 0
   end

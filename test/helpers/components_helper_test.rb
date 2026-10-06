@@ -674,7 +674,7 @@ class ComponentsHelperTest < ActionView::TestCase
   # UDR-0071 §3.6 : « Annuler » dans le toast. Le toast part au départ de la requête (turbo:submit-start), pas au clic :
   # retiré au clic, le formulaire ne serait plus dans la page et le navigateur ne l'enverrait pas.
   test "ui_toast with an action renders its button between the text and the close button" do
-    show ui_toast("Elle reste dans « Toutes les annonces ».", type: :info, title: "Annonce masquée",
+    show ui_toast("Elle n'apparaît plus sur ton accueil.", type: :info, title: "Annonce masquée",
                   action: { label: "Annuler", href: "/announcements/abcdefghijkmno/dismissal", method: :delete })
 
     assert_select "div[data-controller=toast][data-toast-type=info][data-toast-delay-value='5000']" do
@@ -717,6 +717,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "p", text: "Vide"
     assert_select "p", text: "Rien ici"
     assert_select "a[href='/new'].bg-ink", text: "Créer"
+  end
+
+  test "ui_empty_state titles in a p, or in the heading it is given when it is the whole page" do
+    show ui_empty_state(title: "Vide")
+    assert_select "p", text: "Vide"
+    assert_select "h1", 0
+
+    show ui_empty_state(title: "Tu n'as pas encore de classe", heading: :h1)
+    assert_select "h1.font-display", text: "Tu n'as pas encore de classe"
   end
 
   test "ui_empty_state with a free block or nothing" do

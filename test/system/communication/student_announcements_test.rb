@@ -74,7 +74,7 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
     assert_current_path student_home_path
   end
 
-  test "AN-12 — in « Toutes les annonces », hidden, a card is marked « Masquée »; « Annuler » and « Réafficher » give it back" do
+  test "AN-12 — in the list of announcements, hidden, a card is marked « Masquée »; « Annuler » and « Réafficher » give it back" do
     sign_in_as @awa
     visit announcements_path
 

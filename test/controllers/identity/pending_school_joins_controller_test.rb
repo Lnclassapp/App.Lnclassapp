@@ -43,7 +43,7 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
         assert_select "input[name='school_join[school_code]'][value=?][aria-invalid=true]", code
         assert_select "#school_join_school_code_error", text: INVALID
       end
-      assert_select "p", text: t("no_school.title")
+      assert_select "h1", text: t("no_school.title")
     end
     assert_empty Orm::TeacherSchool.where(teacher: @teacher)
   end

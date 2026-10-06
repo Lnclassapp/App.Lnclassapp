@@ -74,16 +74,18 @@ module Communication
     test "link: false — the band of the student leads nowhere else" do
       carousel([ card("a", "Une") ], link: false)
 
-      assert_select "section#student_home_announcements:not([hidden])" do
+      assert_select "section#student_home_announcements.bg-mist:not(.sr-only)" do
         assert_select "li article h3", "Une"
       end
       assert_select "a[href=?]", announcements_path, 0
     end
 
-    test "link: false, every message dismissed: the section stays in the page, hidden, as the target of « Annuler »" do
-      carousel([], link: false)
+    test "link: false, every message dismissed: the section stays for screen readers only, target of « Annuler » and of the focus" do
+      carousel([], link: false, refocus: true)
 
-      assert_select "section#student_home_announcements[hidden]" do
+      assert_select "section#student_home_announcements.sr-only:not([hidden])[data-communication--carousel-refocus-value=true]" do
+        assert_select "h2#student_home_announcements_title[tabindex='-1']"
+        assert_select "p", I18n.t("communication.inboxes.carousel.all_dismissed")
         assert_select "ul", 0
         assert_select "a", 0
       end

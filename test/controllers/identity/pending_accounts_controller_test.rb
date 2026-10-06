@@ -12,7 +12,9 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
 
       assert_response :success
     end
-    assert_select "h1.sr-only", t("page_title")
+    # The empty state is the whole page: its visible title is the page heading.
+    assert_select "h1", 1
+    assert_select "h1", t("student.title")
     assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre une classe"
     assert_select "a[href='#{session_path}'][data-turbo-method=delete]", text: /Se déconnecter/
   end
@@ -24,7 +26,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     get pending_account_path
 
     assert_response :success
-    assert_select "p", text: "Vous n'êtes rattaché à aucun établissement"
+    assert_select "h1", text: "Vous n'êtes rattaché à aucun établissement"
     assert_select "form#school-join-form"
     assert_select "a[href='#{new_join_code_path}']", 0
   end
@@ -42,7 +44,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#pending_account" do
-      assert_select "p", text: t("no_school.title")
+      assert_select "h1", text: t("no_school.title")
       assert_select "p", text: t("no_school.description")
       assert_select "form#school-join-form[action='#{pending_school_join_path}'][method=post]" do
         assert_select "label[for=school_join_school_code]", text: /Code d'établissement/
@@ -66,7 +68,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     get pending_account_path
 
     assert_select "form#school-join-form"
-    assert_select "p", text: I18n.t("identity.pending_accounts.show.join_request.pending.title"), count: 0
+    assert_select "h1", text: I18n.t("identity.pending_accounts.show.join_request.pending.title"), count: 0
   end
 
   test "GD-22: a refused request keeps its message above the form" do
@@ -88,7 +90,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
 
     get pending_account_path
 
-    assert_select "p", text: I18n.t("identity.pending_accounts.show.join_request.pending.title")
+    assert_select "h1", text: I18n.t("identity.pending_accounts.show.join_request.pending.title")
     assert_select "form#school-join-form", 0
   end
 
@@ -111,7 +113,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
 
     get pending_account_path
 
-    assert_select "p", text: "Votre compte attend son école"
+    assert_select "h1", text: "Votre compte attend son école"
     assert_select "form#school-join-form", 0
   end
 
@@ -123,7 +125,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     get pending_account_path
 
     assert_response :success
-    assert_select "p", text: I18n.t("identity.pending_accounts.show.join_request.pending.title")
+    assert_select "h1", text: I18n.t("identity.pending_accounts.show.join_request.pending.title")
     assert_select "#pending_account", text: /Lycée Classique d'Abidjan/
   end
 
@@ -156,6 +158,6 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     get pending_account_path
 
     assert_response :success
-    assert_select "p", text: "Votre compte est en attente"
+    assert_select "h1", text: "Votre compte est en attente"
   end
 end
