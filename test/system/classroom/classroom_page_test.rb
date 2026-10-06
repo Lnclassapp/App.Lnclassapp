@@ -52,7 +52,11 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     end
 
     assert_no_page_reload do
-      click_on I18n.t("#{scope}.header.copy")
+      # Fermée, la modale rend le focus au ⋮ de la ligne : la page reste descendue sur la liste, et « Copier » passe sous
+      # l'en-tête fixe, où le clic tomberait sur un autre bouton. On le ramène au milieu de l'écran, comme le ferait l'enseignant.
+      copy = find_button(I18n.t("#{scope}.header.copy"))
+      scroll_to(copy, align: :center)
+      copy.click
 
       assert_toast I18n.t("shared.clipboard.copied_code")
     end
