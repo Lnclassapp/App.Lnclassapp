@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/authored_messages/_row — une annonce de « Mes annonces » (Queries::Communication::AuthoredMessagesQuery::Row) %>
-<%# Rôle : vignette, titre, « destinataires · dates », statut ; menu Modifier / Archiver (confirmation) tant qu'elle n'est ni terminée, ni archivée, ni retirée %>
-<%# ADR  : 0078 · UDR : 0005, 0042, 0071 (§3.7) · Stimulus : dropdown, modal %>
+<%# Rôle : vignette (image, illustration de base ou de l'équipe), pastille du thème, titre, « destinataires · dates », statut ; menu Modifier / Archiver %>
+<%# ADR  : 0078, 0081 · UDR : 0005, 0042, 0071 (§3.7), 0075 (§3.1) · Stimulus : dropdown, modal %>
 <% tones = { "draft" => :neutral, "scheduled" => :info, "published" => :success, "ended" => :neutral, "archived" => :neutral,
              "withdrawn" => :error } %>
 <% place = row.school_name || t("communication.scopes.national") %>
@@ -21,7 +21,11 @@
     <% end %>
   </span>
   <div class="min-w-0 flex-1">
-    <p class="truncate font-medium text-ink"><%= row.title %></p>
+    <%# UDR-0075 §3.1 : la pastille du thème précède le titre, son libellé pour un lecteur d'écran. %>
+    <div class="flex items-center gap-2">
+      <span class="size-3 shrink-0 rounded-full bg-brand-soft ring-1 ring-school/30" data-announcement-theme="<%= row.theme %>"><span class="sr-only"><%= t(".theme", theme: t("communication.themes.#{row.theme}")) %></span></span>
+      <p class="truncate font-medium text-ink"><%= row.title %></p>
+    </div>
     <p class="truncate text-sm text-mute"><%= t(".line", recipients:, dates:) %></p>
   </div>
   <%= ui_badge t("communication.statuses.#{row.status}"), tone: tones.fetch(row.status) %>

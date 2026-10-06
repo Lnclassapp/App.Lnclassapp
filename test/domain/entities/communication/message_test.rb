@@ -14,17 +14,37 @@ module Entities
                     edited_at: nil, withdrawn_at: nil, withdrawn_by_id: nil).with(**changes)
       end
 
-      test "porte chaque champ du contrat gelé, dans l'ordre de l'ADR" do
+      test "porte chaque champ du contrat gelé, dans l'ordre de l'ADR ; le thème et l'illustration de l'équipe à la fin" do
         assert_equal %i[id public_id author_id title body audience school_id classroom_ids illustration status published_at
-                        ends_at edited_at withdrawn_at withdrawn_by_id], Message.members
+                        ends_at edited_at withdrawn_at withdrawn_by_id theme illustration_id], Message.members
         assert_equal [ 11, 12 ], announcement.classroom_ids
       end
 
-      test "une annonce à créer n'a ni id, ni public_id, ni classes, ni dates par défaut" do
+      test "une annonce à créer n'a ni id, ni public_id, ni classes, ni dates par défaut ; elle est « Ciel »" do
         draft = Message.new(author_id: 1, title: "Rentrée", body: "Lundi.", audience: "all", illustration: "info", status: "draft")
 
         assert_equal [ nil, nil, nil, [] ], [ draft.id, draft.public_id, draft.school_id, draft.classroom_ids ]
         assert_equal [ nil ] * 5, [ draft.published_at, draft.ends_at, draft.edited_at, draft.withdrawn_at, draft.withdrawn_by_id ]
+        assert_equal [ "ciel", nil ], [ draft.theme, draft.illustration_id ]
+      end
+
+      # ADR-0081 §4.3 : une illustration de l'équipe se désigne par son id ; la clé de base est alors nil.
+      test "une annonce porte une clé de base, ou l'illustration de l'équipe qu'elle désigne" do
+        drawn = Message.new(author_id: 1, title: "Sortie", body: "Le bus part à 8 h.", audience: "all", illustration: nil,
+                            illustration_id: 5, theme: "mangue", status: "draft")
+
+        assert_equal [ nil, 5, "mangue" ], [ drawn.illustration, drawn.illustration_id, drawn.theme ]
+      end
+
+      test "AV-07 — dix thèmes, dans l'ordre de l'ADR-0081, « Ciel » par défaut" do
+        assert_equal %w[ciel lagune menthe citron mangue corail hibiscus lavande indigo nuit], Message::THEMES
+        assert Message::THEMES.frozen?
+        assert_equal "ciel", Message::DEFAULT_THEME
+        assert_equal Message::THEMES.first, Message::DEFAULT_THEME
+      end
+
+      test "AV-02 et AV-03 — une annonce dure 30 jours, et un auteur en a 3 en ligne au plus (ADR-0081 §4.1)" do
+        assert_equal [ 30.days, 3 ], [ Message::DURATION, Message::LIVE_CAP ]
       end
 
       test "les listes fermées, dans l'ordre de l'UDR-0071" do
@@ -38,8 +58,8 @@ module Entities
         assert_equal [ 60, 140 ], [ Message::TITLE_MAX, Message::BODY_MAX ]
       end
 
-      test "AN-08 — une annonce dure 30 jours par défaut, 90 au plus" do
-        assert_equal [ 30.days, 90.days ], [ Message::DEFAULT_DURATION, Message::MAX_DURATION ]
+      test "AV-02 — la fin n'est plus choisie : ni durée par défaut, ni durée maximale, seulement DURATION (ADR-0081 §4.1)" do
+        assert_equal [ false, false ], %i[DEFAULT_DURATION MAX_DURATION].map { Message.const_defined?(it, false) }
       end
 
       test "une annonce archivée ou retirée est figée ; brouillon, programmée et publiée ne le sont pas" do

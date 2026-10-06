@@ -15,7 +15,7 @@ module Communication
     test "le badge nomme chaque état avec les tons du catalogue" do
       render html: safe_join(%w[draft published archived].map { article_status_badge(it) })
 
-      assert_equal %w[Brouillon Publié Archivé], css_select("span.whitespace-nowrap").map(&:text)
+      assert_equal %w[Brouillon Publié Archivé], css_select("span.ui-badge").map(&:text)
       assert_equal({ "draft" => :warning, "published" => :success, "archived" => :neutral }, ArticleStatusHelper::ARTICLE_STATUS_TONES)
       assert_dom "span.bg-warning-soft", text: "Brouillon"
       assert_raises(KeyError) { article_status_badge("deleted") }

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-05 : palette des 10 thèmes comprise)* |
 | **Date** | 2026-10-05 |
 | **Chantier** | `docs/chantiers/annonces-v2` |
 | **ADR liés** | [0081](../adr/0081-annonces-trois-en-ligne-themes-et-illustrations-de-l-equipe.md), [0078](../adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) |
@@ -40,7 +40,7 @@ Liste fermée, dans cet ordre (`Entities::Communication::Message::THEMES`). Libe
 | `nuit` | Nuit | `#1f2937` · `#f9fafb` · `#60a5fa` · `#fbbf24` | `#0b0f17` · `#e5e7eb` · `#3b82f6` · `#fbbf24` |
 
 Contrastes mesurés à l'écriture de cette UDR, et revérifiés par `test/design/announcement_themes_test.rb` :
-- texte ≥ 8,9:1 ;
+- texte ≥ 8,06:1 (« Ciel » en sombre) ;
 - signature (texte à 80 %) ≥ 5,2:1 ;
 - badge (forte) ≥ 4,4:1.
 
@@ -100,7 +100,7 @@ Il est absent avec 2 annonces en ligne ou moins, et en modification d'une annonc
 ### 3.4 « Mes annonces » (complète l'UDR-0071 §3.7)
 
 - La ligne d'une annonce archivée par le plafond est « Archivée le <date> », comme un archivage par l'auteur.
-- La fin affichée (« · jusqu'au <date> ») reste calculée : fin − 1 jour.
+- La fin affichée (« · jusqu'au <date> ») est la date de la fin elle-même : elle tombe à l'heure de parution, 30 jours après (ADR-0081 §4.1), c'est donc le dernier jour de visibilité. La règle « fin − 1 jour » de l'UDR-0071 valait pour une fin à minuit.
 
 ### 3.5 Page « Illustrations d'annonce » — équipe
 
@@ -163,3 +163,19 @@ La page « Référentiel » gagne une tuile, au même gabarit que les autres :
 - La carte de l'UDR-0071 ne change que par un attribut. Les thèmes passent par les tokens, comme le mode sombre.
 - Un 11ᵉ thème demandera une nouvelle clé, ses 8 valeurs et le test de palette : rien d'autre.
 - Les dessins de l'équipe sont monochromes, par choix de sécurité (ADR-0081 §4.3).
+
+## Amendement du 2026-10-05 — phase 5 : l'encadré nomme toutes les annonces qui partiraient
+
+Décision de l'orchestrateur du chantier `annonces-v2`, prise à la revue de phase 5 (Lot F). Un auteur peut avoir plus de 3 annonces en ligne : celles publiées avant le chantier ne sont pas archivées d'office. Sa prochaine parution en archive alors « en ligne − 2 » d'un coup, les plus anciennes (ADR-0081 §4.1). L'encadré du plafond (§3.3) les nomme toutes, la plus ancienne d'abord :
+
+- à 3 en ligne, le texte du §3.3 ne change pas : « Tu as déjà 3 annonces en ligne. En publiant, « <titre> » sera archivée. » ;
+- au-delà : « Tu as déjà <n> annonces en ligne. En publiant, « <titre 1> », « <titre 2> » et « <titre 3> » seront archivées. », les titres en liste française (virgules, puis « et »).
+
+La seconde ligne de l'encadré (« Programmée, elle archivera à sa parution la plus ancienne alors en ligne. ») et les toasts ne changent pas : le toast nommait déjà toutes les annonces archivées.
+
+## Amendement du 2026-10-05 — clôture : le dessin retiré que l'annonce porte, et la bibliothèque pleine
+
+Décisions de l'orchestrateur du chantier `annonces-v2` (Lot E et revue de sécurité du Lot C), à la clôture.
+
+- **Formulaire de modification (§3.3).** Une annonce garde son dessin de l'équipe jusqu'à sa fin, même retiré de la bibliothèque depuis (ADR-0081, amendement de clôture). Son formulaire de modification le propose donc encore, **en dernier** après les dessins non retirés, et coché. Un formulaire de création, ou celui d'une annonce qui porte un autre dessin, ne le montre pas. Choisir un dessin retiré qu'on ne portait pas reste refusé (422, « Choisissez une illustration de la bibliothèque. »).
+- **Bibliothèque pleine (§3.5).** 50 dessins non retirés au plus. Au-delà, l'ajout est refusé sous « Dessin » : « La bibliothèque compte déjà 50 illustrations : retirez-en une avant d'en ajouter. » Le fichier n'est pas lu.

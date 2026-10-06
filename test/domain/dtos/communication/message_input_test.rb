@@ -3,7 +3,9 @@ require "test_helper"
 module Dtos
   module Communication
     # ADR-0045 §4, ADR-0078 §4.1 and §4.4, UDR-0071 §3.8: the form of an announcement. Lengths, files read in their
-    # first bytes (the weight before any read), dates in the time zone of the application.
+    # first bytes (the weight before any read), dates in the time zone of the application. ADR-0081 §4.1 to §4.3,
+    # UDR-0075 §3.3 (annonces-v2): no end to choose, 30 days from the publication; a theme; a base illustration or the
+    # public_id of a drawing of the team.
     class MessageInputTest < ActiveSupport::TestCase
       NOW = Time.zone.local(2026, 10, 1, 10, 0, 30)
       MEGABYTE = 1024 * 1024
@@ -22,8 +24,8 @@ module Dtos
                          commit: "publish", **attributes)
       end
 
-      def checked(now: NOW, live_since: nil, **attributes)
-        input(**attributes).tap { it.valid_at?(now:, live_since:) }
+      def checked(now: NOW, live_since: nil, live_until: nil, **attributes)
+        input(**attributes).tap { it.valid_at?(now:, live_since:, live_until:) }
       end
 
       def errors(**) = checked(**).errors.to_hash
@@ -52,6 +54,34 @@ module Dtos
 
       test "an illustration outside the library is refused" do
         assert_equal({ illustration: [ "Choisissez une illustration de la bibliothèque." ] }, errors(illustration: "skull"))
+        assert_equal({ illustration: [ "Choisissez une illustration de la bibliothèque." ] }, errors(illustration: nil))
+      end
+
+      test "AV-10 — the value of a drawing of the team is its public_id: its shape is checked here, its existence by the use case" do
+        team = checked(illustration: "Bq7xK2mN9pR4sT")
+
+        assert team.errors.empty?
+        assert_equal [ true, nil ], [ team.library_illustration?, team.base_illustration ]
+        assert_equal [ false, "sheets" ], checked.then { [ it.library_illustration?, it.base_illustration ] }
+        [ "Bq7xK2mN9pR4s", "Bq7xK2mN9pR4sT5", "Bq7xK2mN9pR4s!", "<svg onload=x>" ].each do |forged|
+          assert_equal({ illustration: [ "Choisissez une illustration de la bibliothèque." ] }, errors(illustration: forged), forged)
+          assert_not input(illustration: forged).library_illustration?, forged
+        end
+      end
+
+      test "AV-07 — the ten themes are accepted, « Ciel » by default" do
+        Entities::Communication::Message::THEMES.each do |theme|
+          assert checked(theme:).errors.empty?, theme
+          assert_equal theme, input(theme:).theme
+        end
+        assert_equal "ciel", input.theme
+      end
+
+      test "AV-07 — an unknown theme sent by a forged form is refused under « Thème »" do
+        [ "rose", "", "CIEL" ].each do |forged|
+          assert_equal({ theme: [ "Choisissez un thème de la liste." ] }, errors(theme: forged), forged)
+        end
+        assert_equal "Thème", MessageInput.human_attribute_name(:theme)
       end
 
       test "a PNG, a JPEG and a WebP are accepted, typed by their content and renamed" do
@@ -76,11 +106,29 @@ module Dtos
         end
       end
 
+      def recording(name) = file_fixture("audio/#{name}").binread
+
+      # Phase 5 (test analysis 2.2), ADR-0081 §4.4: real recordings of test/fixtures/files/audio (README.txt). The frame
+      # of remplissage.mp3 comes after 512 null bytes: a header read cut at 64 bytes would refuse it.
+      test "AV-12 — real recordings: an MP3 whose frame follows 512 null bytes and a 3GP M4A are accepted, an AMR refused" do
+        assert_operator recording("remplissage.mp3").index(/[^\x00]/n), :>=, 512
+        { "remplissage.mp3" => [ "audio/mpeg", "audio.mp3" ], "marque-3gp4.m4a" => [ "audio/mp4", "audio.m4a" ] }
+          .each do |name, (type, filename)|
+          dto = checked(audio: StringIO.new(recording(name)))
+
+          assert_empty dto.errors.to_hash, name
+          upload = dto.upload(:audio)
+          assert_equal [ type, filename, recording(name) ], [ upload.content_type, upload.filename, upload.io.read.b ], name
+        end
+        assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] },
+                     errors(audio: StringIO.new(recording("enregistrement.amr"))))
+      end
+
       test "AN-18 — a PDF renamed « affiche.png » and a WAV are refused: the error names the refused file" do
         assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: photo("document.pdf")))
-        assert_equal({ audio: [ "Ce fichier n'est pas accepté." ] }, errors(audio: StringIO.new(WAV)))
+        assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] }, errors(audio: StringIO.new(WAV)))
         assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: StringIO.new("")))
-        assert_equal({ audio: [ "Ce fichier n'est pas accepté." ] }, errors(audio: photo("photo.png")))
+        assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] }, errors(audio: photo("photo.png")))
       end
 
       test "AN-18 — an image of 3 MB and an audio of 12 MB are refused by their weight, before any read" do
@@ -134,7 +182,6 @@ module Dtos
 
       test "a date of more than four digits of year is unreadable, a draft's too: 422, never an error of the database" do
         assert_equal [ "Saisissez une date valide." ], errors(published_at: "99999-01-01T00:00")[:published_at]
-        assert_equal [ "Saisissez une date valide." ], errors(visible_until: "99999-01-20")[:visible_until]
         assert_equal [ "Saisissez une date valide." ], errors(commit: "draft", published_at: "99999999-01-01T00:00")[:published_at]
       end
 
@@ -162,14 +209,18 @@ module Dtos
         assert_equal [ "published", NOW, NOW + 30.days ], [ dto.status, dto.publication_time, dto.ends_at ]
       end
 
-      test "AN-08 — published on October 1st without an end chosen, it ends on October 31st" do
-        assert_equal Time.zone.local(2026, 10, 31, 10, 0, 30), checked(visible_until: "").ends_at
+      test "AV-02 — published on October 6th, it ends 30 days later, on November 5th: no end is asked" do
+        now = Time.zone.local(2026, 10, 6, 10, 15)
+
+        assert_equal Time.zone.local(2026, 11, 5, 10, 15), checked(now:).ends_at
+        assert_raises(ActiveModel::UnknownAttributeError) { input(visible_until: "2026-12-31") }
+        assert_not MessageInput.method_defined?(:visible_until)
       end
 
-      test "a future date schedules it; the end is the day after the last day shown, at midnight" do
-        dto = checked(published_at: "2026-10-05T10:00", visible_until: "2026-11-01")
+      test "AV-02 — a future date schedules it; its end runs 30 days from its publication" do
+        dto = checked(published_at: "2026-10-05T10:00")
 
-        assert_equal [ "scheduled", Time.zone.local(2026, 10, 5, 10), Time.zone.local(2026, 11, 2) ],
+        assert_equal [ "scheduled", Time.zone.local(2026, 10, 5, 10), Time.zone.local(2026, 11, 4, 10) ],
                      [ dto.status, dto.publication_time, dto.ends_at ]
         assert dto.errors.empty?
       end
@@ -186,21 +237,12 @@ module Dtos
                      errors(published_at: "2026-10-01T09:59"))
       end
 
-      test "AN-08 — an end on October 1st (shown until September 30) or on December 31st is refused" do
-        assert_equal({ visible_until: [ "Choisissez un jour qui suit la publication." ] }, errors(visible_until: "2026-09-30"))
-        assert_equal({ visible_until: [ "L'annonce reste visible 90 jours au plus." ] }, errors(visible_until: "2026-12-31"))
-        assert_equal({ visible_until: [ "L'annonce reste visible 90 jours au plus." ] }, errors(visible_until: "2026-12-30"))
-        assert checked(visible_until: "2026-10-01").errors.empty?, "visible le jour même de sa publication"
-        assert checked(visible_until: "2026-12-29").errors.empty?
+      test "an unreadable publication date is refused under its field" do
+        assert_equal({ published_at: [ "Saisissez une date valide." ] }, errors(published_at: "2026-13-45T99:00"))
       end
 
-      test "unreadable dates are refused, each under its field" do
-        assert_equal({ published_at: [ "Saisissez une date valide." ], visible_until: [ "Saisissez une date valide." ] },
-                     errors(published_at: "2026-13-45T99:00", visible_until: "le 31"))
-      end
-
-      test "a draft keeps its date, has no end and is not checked against the clock" do
-        dto = checked(commit: "draft", published_at: "2026-09-01T08:00", visible_until: "2027-06-01")
+      test "AV-02 — a draft keeps its date, has no end and is not checked against the clock" do
+        dto = checked(commit: "draft", published_at: "2026-09-01T08:00")
 
         assert dto.errors.empty?
         assert_equal [ "draft", Time.zone.local(2026, 9, 1, 8), nil ], [ dto.status, dto.publication_time, dto.ends_at ]
@@ -208,50 +250,41 @@ module Dtos
         assert_equal({ published_at: [ "Saisissez une date valide." ] }, errors(commit: "draft", published_at: "demain"))
       end
 
-      test "an announcement already published keeps its publication date and stays published" do
+      test "AV-02 — an announcement already published keeps its publication date and its end, and stays published" do
         live_since = Time.zone.local(2026, 9, 20, 8)
-        dto = checked(live_since:, commit: "draft", published_at: "n'importe quoi", visible_until: "2026-10-31")
+        live_until = Time.zone.local(2026, 10, 20, 8)
+        dto = checked(live_since:, live_until:, commit: "draft", published_at: "n'importe quoi")
 
         assert dto.errors.empty?
-        assert_equal [ "published", live_since, Time.zone.local(2026, 11, 1) ], [ dto.status, dto.publication_time, dto.ends_at ]
-        assert_equal({ visible_until: [ "L'annonce reste visible 90 jours au plus." ] },
-                     errors(live_since:, visible_until: "2026-12-19"))
+        assert_equal [ "published", live_since, live_until ], [ dto.status, dto.publication_time, dto.ends_at ]
       end
 
-      test "the form of a new announcement: the first illustration, shown for 30 days" do
-        dto = MessageInput.blank(today: Date.new(2026, 10, 1))
+      test "the form of a new announcement: the first illustration, « Ciel »" do
+        dto = MessageInput.blank
 
-        assert_equal [ "info", "2026-10-30", nil, nil ], [ dto.illustration, dto.visible_until, dto.scope, dto.school_public_id ]
-        assert_equal [ "school", "lauriers" ], MessageInput.blank(today: Date.new(2026, 10, 1), school_public_id: "lauriers")
-                                                           .then { [ it.scope, it.school_public_id ] }
+        assert_equal [ "info", "ciel", nil, nil ], [ dto.illustration, dto.theme, dto.scope, dto.school_public_id ]
+        assert_equal [ "school", "lauriers" ], MessageInput.blank(school_public_id: "lauriers").then { [ it.scope, it.school_public_id ] }
       end
 
-      test "the form of an existing announcement shows its values, its dates in the formats of the fields" do
+      test "the form of an existing announcement shows its values, its date in the format of the field" do
         message = Entities::Communication::Message.new(
           id: 1, author_id: 2, title: "Devoirs communs", body: "Lundi.", audience: "students", illustration: "exam",
-          status: "scheduled", school_id: 10, published_at: Time.zone.local(2026, 10, 5, 10), ends_at: Time.zone.local(2026, 11, 2)
+          status: "scheduled", school_id: 10, published_at: Time.zone.local(2026, 10, 5, 10), ends_at: Time.zone.local(2026, 11, 4, 10),
+          theme: "mangue"
         )
-        dto = MessageInput.for(message, school_public_id: "lauriers", classroom_public_ids: [], today: Date.new(2026, 10, 1))
+        dto = MessageInput.for(message, school_public_id: "lauriers", classroom_public_ids: [], illustration_public_id: nil)
 
-        assert_equal [ "Devoirs communs", "Lundi.", "school", "lauriers", "students", "exam", "2026-10-05T10:00", "2026-11-01" ],
-                     [ dto.title, dto.body, dto.scope, dto.school_public_id, dto.audience, dto.illustration, dto.published_at,
-                       dto.visible_until ]
+        assert_equal [ "Devoirs communs", "Lundi.", "school", "lauriers", "students", "exam", "mangue", "2026-10-05T10:00" ],
+                     [ dto.title, dto.body, dto.scope, dto.school_public_id, dto.audience, dto.illustration, dto.theme, dto.published_at ]
       end
 
-      test "a national draft without dates: no publication date, shown for 30 days from today" do
+      test "a national draft without date, with a drawing of the team: its public_id is the value of the illustration" do
         draft = Entities::Communication::Message.new(author_id: 2, title: "Rentrée", body: "Bientôt.", audience: "all",
-                                                     illustration: "info", status: "draft", classroom_ids: [ 3 ])
-        dto = MessageInput.for(draft, school_public_id: nil, classroom_public_ids: [ "b3" ], today: Date.new(2026, 10, 1))
+                                                     illustration: nil, illustration_id: 7, status: "draft", classroom_ids: [ 3 ])
+        dto = MessageInput.for(draft, school_public_id: nil, classroom_public_ids: [ "b3" ], illustration_public_id: "Bq7xK2mN9pR4sT")
 
-        assert_equal [ "national", nil, "2026-10-30", [ "b3" ] ], [ dto.scope, dto.published_at, dto.visible_until, dto.classroom_public_ids ]
-      end
-
-      test "a dated draft is shown for 30 days from its date of publication" do
-        draft = Entities::Communication::Message.new(author_id: 2, title: "Rentrée", body: "Bientôt.", audience: "all",
-                                                     illustration: "info", status: "draft", published_at: Time.zone.local(2026, 11, 2, 8))
-        dto = MessageInput.for(draft, school_public_id: nil, classroom_public_ids: [], today: Date.new(2026, 10, 1))
-
-        assert_equal [ "2026-11-02T08:00", "2026-12-01" ], [ dto.published_at, dto.visible_until ]
+        assert_equal [ "national", nil, [ "b3" ], "Bq7xK2mN9pR4sT", "ciel" ],
+                     [ dto.scope, dto.published_at, dto.classroom_public_ids, dto.illustration, dto.theme ]
       end
     end
   end

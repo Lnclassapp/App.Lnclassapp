@@ -1,14 +1,15 @@
 # 🌐 DELIVERY · Communication::AuthoredMessagesController
-# Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant
-# ADR  : 0026, 0028, 0045, 0078 · UDR : 0071 (§3.7, §3.8)
+# Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant ; encadré et toast du plafond
+# ADR  : 0026, 0028, 0045, 0078, 0081 · UDR : 0071 (§3.7, §3.8), 0075 (§3.3)
 module Communication
   class AuthoredMessagesController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team
 
-    helper_method :form_school, :classroom_choices, :edited, :announcement_date
+    helper_method :form_school, :classroom_choices, :edited, :announcement_date, :library_illustrations, :departing
 
-    PERMITTED = [ :title, :body, :scope, :school_public_id, :audience, :illustration, :remove_image, :remove_audio,
-                  :published_at, :visible_until, { classroom_public_ids: [] } ].freeze
+    # Aucune date de fin : elle est calculée (ADR-0081 §4.1), un visible_until forgé n'est pas lu.
+    PERMITTED = [ :title, :body, :scope, :school_public_id, :audience, :theme, :illustration, :remove_image, :remove_audio,
+                  :published_at, { classroom_public_ids: [] } ].freeze
 
     def index
       @page = query.page(author_id: current_actor.user_id, page: params[:page], now: Time.zone.now)
@@ -16,7 +17,7 @@ module Communication
 
     # L'équipe venue de la fiche d'un établissement (?school=<public_id>) le vise d'abord.
     def new
-      @form = Dtos::Communication::MessageInput.blank(today: Date.current, school_public_id: params.permit(:school)[:school].presence)
+      @form = Dtos::Communication::MessageInput.blank(school_public_id: params.permit(:school)[:school].presence)
     end
 
     def create
@@ -29,7 +30,8 @@ module Communication
       @message = messages.find_by_public_id(public_id: params[:public_id])
       managed Policies::Communication::ManageOwnPolicy.new.call(actor: current_actor, message: @message), success: lambda { |_|
         @form = Dtos::Communication::MessageInput.for(@message, school_public_id: edited.school_public_id,
-                                                                classroom_public_ids: edited.classroom_public_ids, today: Date.current)
+                                                                classroom_public_ids: edited.classroom_public_ids,
+                                                                illustration_public_id: edited.illustration_public_id)
       }
     end
 
@@ -49,8 +51,10 @@ module Communication
       render_result(result, **)
     end
 
-    def saved(message)
-      redirect_to my_announcements_path, notice: saved_notice(message), status: :see_other
+    # saved : CreateMessage::Writing::Saved, l'annonce et celles que sa parution a archivées.
+    def saved(saved)
+      notice = [ saved_notice(saved.message), archived_notice(saved.archived) ].compact.join(" ")
+      redirect_to my_announcements_path, notice:, status: :see_other
     end
 
     # UDR-0071 §3.8 : « Annonce modifiée. » pour une annonce déjà publiée, sinon selon ce qu'elle est devenue.
@@ -59,6 +63,14 @@ module Communication
       return t("communication.authored_messages.saved.scheduled", date: announcement_date(message.published_at, time: true)) if message.status == "scheduled"
 
       t("communication.authored_messages.saved.#{message.status}")
+    end
+
+    # UDR-0075 §3.3 : « « Réunion parents » est archivée. », « « A » et « B » sont archivées. » ; rien sans archivage.
+    def archived_notice(archived)
+      return if archived.empty?
+
+      titles = archived.map { t("communication.authored_messages.saved.quoted", title: it.title) }.to_sentence
+      t("communication.authored_messages.saved.archived", count: archived.size, titles:)
     end
 
     # Design system §12 : « 5 oct. », « 1ᵉʳ nov. », « 5 oct. à 10:00 ».
@@ -86,6 +98,26 @@ module Communication
     end
 
     def classroom_choices = query.classroom_choices(teacher_id: current_actor.user_id, school_id: current_actor.school_id)
+
+    # UDR-0075 §3.3 : les dessins de l'équipe offerts, après les 8 de base, le plus ancien d'abord. Décision du chantier
+    # (Lot E) : une annonce garde son dessin de l'équipe jusqu'à sa fin, même retiré depuis ; son formulaire le propose
+    # encore, en dernier (UpdateMessage l'accepte), une nouvelle annonce ne le voit pas. message : l'annonce modifiée, ou nil.
+    # → [Entities::Communication::Illustration]
+    def library_illustrations(message)
+      offered = illustrations.available
+      carried = message&.illustration_id
+      return offered if carried.nil? || offered.any? { it.id == carried }
+
+      offered + illustrations.find_all_by_ids(ids: [ carried ]).values
+    end
+
+    # UDR-0075 §3.3 : les annonces qu'une parution archiverait, pour l'encadré du plafond ; aucune en modification d'une
+    # annonce déjà publiée, qui n'est pas une parution. → [AuthoredMessagesQuery::Departing], la plus ancienne d'abord
+    def departing
+      return [] if @message&.status == "published"
+
+      query.departing(author_id: current_actor.user_id, now: Time.zone.now)
+    end
     def edited = @edited ||= query.edited(@message)
 
     def query = @query ||= Queries::Communication::AuthoredMessagesQuery.new
@@ -100,10 +132,13 @@ module Communication
                                                             publish_policy: Policies::Communication::PublishPolicy.new)
     end
 
+    def illustrations = @illustrations ||= Repositories::Communication::IllustrationRepository.new
+
     def writing
       { messages:, attachments: Repositories::Communication::AttachmentStore.new, schools: Repositories::School::SchoolRepository.new,
         classrooms: Repositories::Classroom::ClassroomRepository.new, teachings: Repositories::Classroom::TeachingRepository.new,
-        audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone }
+        audit_log: Repositories::Identity::AuditLogRepository.new, illustrations:, transaction: Repositories::Shared::Transaction.new,
+        clock: Time.zone }
     end
   end
 end

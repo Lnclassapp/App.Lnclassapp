@@ -1,28 +1,30 @@
 # 🧠 DOMAINE · UseCases::Communication::UpdateMessage
-# Rôle : son auteur modifie une annonce ; publiée, elle garde sa date, est marquée modifiée et revient chez ceux qui l'avaient masquée
-# ADR  : 0028, 0045, 0078 · UDR : 0071
+# Rôle : son auteur modifie une annonce ; publiée, elle garde ses dates et revient chez ceux qui l'avaient masquée ; sa parution suit le plafond de 3, une fois ; elle garde son dessin de l'équipe
+# ADR  : 0028, 0045, 0078, 0081 · UDR : 0071, 0075
 module UseCases
   module Communication
     class UpdateMessage
       include CreateMessage::Writing
 
       # policy : ManageOwnPolicy (l'auteur seul, rien de figé) ; publish_policy : PublishPolicy (pour qui, comme à la
-      # création : les destinataires peuvent changer).
-      def initialize(messages:, attachments:, schools:, classrooms:, teachings:, audit_log:, transaction:, policy:,
-                     publish_policy:, clock:)
+      # création : les destinataires peuvent changer) ; illustrations : IllustrationRepositoryPort.
+      def initialize(messages:, attachments:, schools:, classrooms:, teachings:, audit_log:, illustrations:, transaction:,
+                     policy:, publish_policy:, clock:)
         @messages = messages
         @attachments = attachments
         @schools = schools
         @classrooms = classrooms
         @teachings = teachings
         @audit_log = audit_log
+        @illustrations = illustrations
         @transaction = transaction
         @policy = policy
         @publish_policy = publish_policy
         @clock = clock
       end
 
-      # → success(Message) | :not_found (inconnue, ou d'un autre auteur) | :conflict (figée) | :forbidden | :invalid
+      # → success(Saved : l'annonce, et les annonces archivées par sa parution) | :not_found (inconnue, ou d'un autre
+      # auteur) | :conflict (figée) | :forbidden | :invalid
       def call(actor:, public_id:, dto:)
         message = @messages.find_by_public_id(public_id:)
         owned = @policy.call(actor:, message:)
@@ -33,31 +35,47 @@ module UseCases
         return allowed if allowed.code == :forbidden
 
         now = @clock.now
-        live_since = message.published_at if message.status == "published"
-        errors = form_errors(dto, allowed, now:, live_since:)
+        live = message if message.status == "published"
+        errors, illustration_id = form_errors(dto, allowed, now:, live:, carried_id: message.illustration_id)
         return Shared::Result.failure(:invalid, errors:) unless errors.empty?
 
-        @transaction.call { update(message, dto, targets, now, live: !live_since.nil?) }
+        @transaction.call do
+          live ? modify(message, dto, targets, now, illustration_id) : save(message, dto, targets, now, illustration_id)
+        end
+      rescue Frozen
+        Shared::Result.failure(:conflict)
       end
 
       private
 
-      # Publiée : edited_at et rejets effacés dans la même transaction (ADR-0078 §4.1, AN-14). Brouillon ou programmée
-      # qui paraît maintenant : journalisée comme une publication.
-      def update(message, dto, targets, now, live:)
-        saved = @messages.update(message: message.with(
-          title: dto.title, body: dto.body, audience: targets.audience, school_id: targets.school_id,
-          classroom_ids: targets.classroom_ids, illustration: dto.illustration, status: dto.status,
-          published_at: dto.publication_time, ends_at: dto.ends_at, edited_at: (now if live)
-        ))
-        # Archivée ou retirée depuis la lecture : rien n'est écrit.
-        return Shared::Result.failure(:conflict) if saved.nil?
+      # Brouillon ou programmée à la lecture : relue sous le verrou de l'auteur. Parue entre-temps (« Publier » envoyé
+      # deux fois, ou le passage du job), la saisie s'applique comme la modification de l'annonce en ligne : rien n'est
+      # archivé ni journalisé une seconde fois (phase 5, F1). Sinon, une parution suit le plafond (ADR-0081 §4.1) et se
+      # journalise ; un brouillon ou une programmée n'archive rien.
+      def save(read, dto, targets, now, illustration_id)
+        live = lock_author(read.author_id, now)
+        message = @messages.find_by_public_id(public_id: read.public_id)
+        return modify(message, dto, targets, now, illustration_id) if message.status == "published"
 
-        @messages.clear_dismissals(message_id: message.id) if live
+        archived = dto.status == "published" ? make_room(live) : []
+        saved = write(message.with(**written(dto, targets, illustration_id)))
         store_files(message.id, dto)
-        journal_publication(saved, now) if !live && saved.status == "published"
-        Shared::Result.success(saved)
+        journal_publication(saved, now) if saved.status == "published"
+        Shared::Result.success(Saved.new(message: saved, archived:))
       end
+
+      # Publiée : ses dates gardées (la saisie est relue avec elles), edited_at et rejets effacés dans la même
+      # transaction (ADR-0078 §4.1, AN-14), rien d'archivé ni de journalisé.
+      def modify(message, dto, targets, now, illustration_id)
+        dto.valid_at?(now:, live_since: message.published_at, live_until: message.ends_at)
+        saved = write(message.with(**written(dto, targets, illustration_id), edited_at: now))
+        @messages.clear_dismissals(message_id: message.id)
+        store_files(message.id, dto)
+        Shared::Result.success(Saved.new(message: saved, archived: []))
+      end
+
+      # Archivée ou retirée depuis la lecture : rien n'est écrit, et les archivages du plafond sont annulés.
+      def write(message) = @messages.update(message:) || raise(Frozen)
     end
   end
 end
