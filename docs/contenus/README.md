@@ -6,7 +6,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 |---|---|
 | [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 cours sans fiche), à importer depuis **Imports → Cours complets**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche, 3 exercices par fiche, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : le cours, ses fiches et leurs exercices |
-| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par cours complet, rangées par niveau et série. Pour l'instant `tle-d/` : la première leçon de Maths, Physique, Chimie et SVT |
+| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par cours complet, rangées par niveau et série, puis par matière. Pour l'instant `tle-d/` : 18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français |
 
 ## Le principe
 
@@ -24,7 +24,7 @@ Exemple de référence, le théorème des gendarmes : deux policiers tiennent un
 1. Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression.
 2. Importer le JSON obtenu depuis **Imports → Cours complets**. **Un seul import** crée le cours, ses fiches essentielles et les exercices de chaque fiche, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Un même cours présent dans deux fichiers de l'envoi n'est importé dans aucun des deux.
 3. Faire relire le contenu par un enseignant de la discipline, puis publier.
-4. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/` et ajouter une ligne au tableau ci-dessous.
+4. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
 
 ## Ordre des imports
 
@@ -41,16 +41,34 @@ Si la progression a déjà été importée, le cours de la leçon existe vide, e
 
 | Fichier | Cours | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|
-| `limites-et-continuite.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
-| `cinematique-du-point.json` | Cinématique du point (Physique) | 3 | 9 | 45 |
-| `les-alcools.json` | Les alcools (Chimie) | 3 | 9 | 54 |
-| `le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères (SVT) | 3 | 9 | 53 |
+| `mathematiques/limites-et-continuite.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
+| `mathematiques/probabilite-conditionnelle-et-variable-aleatoire.json` | Probabilité conditionnelle et variable aléatoire (Maths) | 3 | 9 | 54 |
+| `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions (Maths) | 3 | 9 | 51 |
+| `physique-chimie/cinematique-du-point.json` | Cinématique du point (Physique) | 3 | 9 | 45 |
+| `physique-chimie/les-alcools.json` | Les alcools (Chimie) | 3 | 9 | 54 |
+| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide (Physique) | 4 | 12 | 60 |
+| `svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères (SVT) | 3 | 9 | 53 |
+| `svt/le-fonctionnement-des-organes-sexuels-chez-l-homme.json` | Le fonctionnement des organes sexuels chez l'Homme (SVT) | 3 | 9 | 54 |
+| `svt/la-reproduction-chez-les-spermaphytes.json` | La reproduction chez les spermaphytes (SVT) | 3 | 9 | 54 |
+| `histoire-geographie/histoire-l-onu.json` | Histoire — L'ONU | 3 | 3 | 18 |
+| `histoire-geographie/geographie-les-fondements-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les fondements du développement économique de la Côte d'Ivoire | 3 | 3 | 18 |
+| `histoire-geographie/histoire-l-ere-de-la-bipolarisation-de-1947-a-1991.json` | Histoire — L'ère de la bipolarisation de 1947 à 1991 | 3 | 3 | 18 |
+| `philosophie/la-dissertation-philosophique.json` | La dissertation philosophique | 3 | 3 | 18 |
+| `philosophie/le-commentaire-de-texte-philosophique.json` | Le commentaire de texte philosophique | 3 | 3 | 18 |
+| `philosophie/la-connaissance-de-l-homme.json` | La connaissance de l'homme | 3 | 3 | 18 |
+| `francais/oeuvre-narrative.json` | Œuvre narrative | 3 | 3 | 18 |
+| `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 3 | 3 | 18 |
+| `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 3 | 3 | 18 |
 
-Les 4 fichiers ont été importés le 2026-09-29 sur une base neuve, par la vraie chaîne d'import, **sans aucune erreur** : 4 cours, 12 fiches, 36 exercices, 203 questions, 786 propositions. Les progressions de Maths, Physique-Chimie et SVT importées ensuite ont ignoré ces 4 cours comme doublons et créé les autres.
+Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français (2026-10-06) n'ont qu'**un exercice par fiche** (Comprendre, Appliquer, S'évaluer, une fiche chacun), contre trois dans le prompt : un format court, pour la démo. Elles ont été importées sans erreur par la vraie chaîne d'import. Aucun enseignant ne les a encore relues.
+
+Les 5 leçons 2 et 3 de Maths, de Physique et de SVT (2026-10-06) suivent le prompt complet, 3 exercices par fiche. Elles ont été importées sans erreur par la vraie chaîne d'import. Aucun enseignant ne les a encore relues. « Mouvement du centre d'inertie d'un solide » a 4 fiches : le mouvement circulaire uniforme, confirmé au programme par le porteur, en a une à lui.
+
+Les 4 premiers fichiers ont été importés le 2026-09-29 sur une base neuve, par la vraie chaîne d'import, **sans aucune erreur** : 4 cours, 12 fiches, 36 exercices, 203 questions, 786 propositions. Les progressions de Maths, Physique-Chimie et SVT importées ensuite ont ignoré ces 4 cours comme doublons et créé les autres.
 
 À faire valider par un enseignant, car le programme détaillé n'était pas disponible :
 
-- **Maths** : les asymptotes ne sont pas traitées, faute de place en 3 fiches.
+- **Maths** : les asymptotes ne sont pas traitées, faute de place en 3 fiches. Dans « Dérivabilité et étude de fonctions », l'inégalité des accroissements finis et les dérivées successives ne le sont pas non plus (signalées dans le sous-titre de la dernière fiche). Deux explications de « Limites et continuité » dépassent 400 caractères (450 et 444).
 - **Physique** : il faut vérifier que le repère de Frenet et le recours à une primitive sont au programme.
 - **Chimie** : il faut vérifier que la règle de Markovnikov est au programme. DNPH, Fehling et Schiff chevauchent peut-être la leçon suivante sur les aldéhydes et cétones.
 - **SVT** : l'hCG, le corps jaune et la progestérone sont traités au minimum, parce qu'ils relèvent aussi de la leçon suivante.
