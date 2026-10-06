@@ -4,7 +4,8 @@
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".title") %>
 
-<div class="grid gap-5">
+<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
+<div class="grid grid-cols-1 gap-5">
   <%= ui_card id: "student_classroom_header" do %>
     <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex min-w-0 items-start gap-4">
@@ -44,8 +45,7 @@
   <% end %>
 
   <% courses = @classroom.courses %>
-  <%# min-w-0 : case de la grille, la carte prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
-  <%= ui_card title: t(".courses_title"), icon: "book-open", id: "student_classroom_courses", class: "min-w-0" do |card| %>
+  <%= ui_card title: t(".courses_title"), icon: "book-open", id: "student_classroom_courses" do |card| %>
     <% if courses.empty? %>
       <%= ui_empty_state title: t(".courses_empty"), description: t(".courses_empty_description"), icon: "book-open" %>
     <% else %>
@@ -74,7 +74,7 @@
     <% if assigned.empty? %>
       <%= ui_empty_state title: t(".assigned_empty"), description: t(".assigned_empty_description"), icon: "clipboard-document-check" %>
     <% else %>
-      <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+      <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
         <% assigned.each_with_index do |exercise, index| %>
           <%= render "assigned_exercise", exercise:, index: %>
         <% end %>
@@ -89,7 +89,7 @@
     <% if treated.empty? %>
       <%= ui_empty_state title: t(".treated_empty"), description: t(".treated_empty_description"), icon: "check-circle" %>
     <% else %>
-      <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
+      <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
         <% treated.each_with_index do |exercise, index| %>
           <%= render "treated_exercise", exercise:, index: %>
         <% end %>

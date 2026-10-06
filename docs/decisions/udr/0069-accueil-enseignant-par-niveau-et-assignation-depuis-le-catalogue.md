@@ -171,3 +171,10 @@ Le porteur a tranché (memo, G1 à G13) : sections « Mes classes », « Cours �
 - L'enseignant assigne un exercice depuis sa classe **ou** depuis le catalogue ; la règle de niveau reste unique, côté serveur.
 - Le lien de parrainage vers d'autres établissements (référence de l'enseignant) reste hors périmètre (G2).
 - Interdit : une assignation active hors niveau, par quelque chemin que ce soit ; une bascule d'assignation pour l'équipe au catalogue, une bascule vers une classe d'un autre niveau, un sprite SVG en ligne dans le shell, un identifiant HTML partagé entre la carte Parrainage et le bloc d'invitation.
+
+## Amendement du 2026-10-06 — « Mes matières » sur téléphone
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md). Décision du porteur du 2026-10-06. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Sous 640 px, une bulle affiche le libellé court de sa matière, choisi par slug figé (`classroom.student_homes.subjects.short` : Math, PC, HG, Philo) ; sans entrée, le nom entier. Le nom entier reste le nom accessible (`max-sm:sr-only`), le libellé court est muet.
+- Sous 640 px, le pied « Tous les cours » disparaît (l'onglet Cours de la barre du bas y mène) et la carte remonte son titre (`pt-3`).

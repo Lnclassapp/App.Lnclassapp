@@ -4,11 +4,11 @@
 <% errors = form ? form.errors[:answer_ids] + form.errors[:base] : [] %>
 <%= turbo_frame_tag "question" do %>
   <%= ui_card padding: :none, id: "question-card", class: "overflow-hidden" do %>
-    <div class="border-b border-line bg-mist px-5 py-3 sm:px-6">
+    <div class="border-b border-line bg-mist px-4 py-3 sm:px-6">
       <span class="text-sm font-medium text-mute"><%= t(".number", number: question.number, total: play.question_count) %></span>
     </div>
     <%= form_with scope: :attempt, url: exercise_session_attempts_path(play.session_public_id), id: "attempt-form",
-                  class: "space-y-6 p-5 sm:p-6", data: { controller: "math" } do |f| %>
+                  class: "space-y-6 p-4 sm:p-6", data: { controller: "math" } do |f| %>
       <%= f.hidden_field :question_id, value: question.id %>
       <fieldset class="space-y-4" <%= tag.attributes("aria-describedby": ("attempt-errors" if errors.any?)) %>>
         <legend class="text-lg font-semibold whitespace-pre-line text-ink"><%= question.content %></legend>
@@ -35,8 +35,9 @@
           <p><%= errors.to_sentence %></p>
         </div>
       <% end %>
-      <div class="flex justify-end border-t border-line pt-4">
-        <%= ui_button t(".submit"), type: :submit, icon_end: "arrow-right" %>
+      <%# Pleine largeur sous 640 px : le pouce l'atteint des deux côtés. %>
+      <div class="border-t border-line pt-4 sm:flex sm:justify-end">
+        <%= ui_button t(".submit"), type: :submit, icon_end: "arrow-right", class: "w-full sm:w-auto" %>
       </div>
     <% end %>
   <% end %>

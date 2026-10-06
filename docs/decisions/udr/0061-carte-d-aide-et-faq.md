@@ -163,3 +163,11 @@ Les trois ronds ont la **même teinte**. L'exemple du porteur teinte chaque rond
 - **§3.3, point 3 (pied de la carte, jamais construit jusqu'ici)** : sous la liste des contacts, `nav#help_sheet_links` (`aria-label` `shared.help_sheet.footer.label`, « Plus sur Lnclass ») liste `[ blog_link, *public_page_links(%i[mission privacy terms]) ].compact` : « Blog » (seulement s'il a un article publié), « Notre mission », « Protection des données », « Conditions d'utilisation » ([UDR-0066](0066-blog-public-liste-article-et-partage.md) §3.5).
 - **§3.5** : les clés `shared.help_sheet.footer.mission`, `.privacy` et `.terms` **ne sont pas créées** ; les libellés sont ceux de `public_pages.links` (une page a un seul nom dans l'application) ; « Confidentialité » devient « Protection des données ». Seule `shared.help_sheet.footer.label` est ajoutée.
 - Le focus d'ouverture reste sur « Questions fréquentes ».
+
+## Amendement du 2026-10-06 — accueil élève sur téléphone
+
+*Chantier [`docs/chantiers/ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md). Décisions du porteur du 2026-10-06. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Sous lg**, l'accueil élève n'affiche plus « Bonjour, prénom » (le `<h1>` reste, pour les lecteurs d'écran) ni le bouton « Besoin d'aide ? » : la carte de classe ouvre la page, ses deux coins du haut arrondis.
+- « Besoin d'aide ? » devient la **première entrée du menu du compte** (`content_for :account_menu`, `ui_dropdown_item dialog: "help-sheet"`) et ouvre la même carte d'aide, rendue une seule fois. Sur ordinateur, le bouton reste à droite du titre.
+- Sous lg, l'avatar de l'en-tête se colle au bord droit (`pr-2`).

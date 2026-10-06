@@ -9,7 +9,7 @@
         <%= tag.li(**ui_reveal_item(index)) do %>
           <%= link_to course_essential_path(gap.course_slug, gap.essential_slug),
                       class: "group flex min-h-tap items-center justify-between gap-3 rounded-ln border border-line px-4 py-2 font-medium text-ink transition hover:border-warning hover:bg-warning-soft focus-visible:outline-2 focus-visible:outline-brand" do %>
-            <span class="min-w-0 truncate"><%= gap.essential_name %></span>
+            <span class="line-clamp-2 min-w-0 break-words"><%= gap.essential_name %></span>
             <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
           <% end %>
         <% end %>

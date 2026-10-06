@@ -51,6 +51,10 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
   # page qui défile en largeur (seule la bande des cours défile) ; l'aide du code s'ouvre au toucher.
   test "at 390 px, Ma classe passes the sobriety rule and opens the code help" do
     # Challenger : avec trois cours, la bande élargissait toute la page (485 px pour 390) ; seule la bande doit défiler.
+    # Audit ux-pages-eleve (2026-10-06) : un titre d'exercice réel, tronqué sur une ligne, l'élargissait aussi (611 px).
+    create_assignment(classroom: @classroom, assigned_at: 1.minute.ago, assignable: create_exercise(
+      essential: @essential, title: "Appliquer — Calculer des limites et lever une indétermination dans une fonction rationnelle"
+    ))
     [ %w[Fonctions Mathématiques], %w[Électricité Physique-Chimie] ].each do |name, material|
       course = create_course(name:, material: create_material(name: material), level: @classroom.level, series: @classroom.series)
       create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)))

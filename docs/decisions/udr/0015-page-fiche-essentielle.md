@@ -180,3 +180,15 @@ Ce qui ne change pas pour l'élève : le retour (nom du cours), le titre, le sou
 *Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Enseignant** : sous chaque exercice publié, une bascule d'assignation par classe de l'enseignant au niveau et à la série du cours ; sans telle classe, la phrase « Aucune de vos classes n'est en <niveau série>. » au-dessus des exercices (UDR-0069 §3.8). Équipe et élève : inchangés.
+
+## Amendement du 2026-10-06 — « Refaire », titre sur 2 lignes, action de la lacune · Statut : Accepté (porteur, 2026-10-06)
+
+*Chantier [`ux-pages-eleve`](../../chantiers/ux-pages-eleve/README.md), plan par page n° 4 et 5. Décision du porteur du 2026-10-06 : « refaire au lieu de commencer ». Le texte ci-dessus et les amendements précédents restent en vigueur ; en cas d'écart, cette section fait foi. Élève seulement : l'enseignant et l'équipe sont inchangés.*
+
+Avec des données réelles (un élève qui a fait 6 fois chaque exercice), la fiche disait « Commencer » sur des exercices déjà faits, et les titres d'exercice étaient tronqués à 13 caractères à 390 px, à côté du bouton.
+
+- **« Refaire »** : une ligne d'exercice dont l'élève a au moins une session terminée (`best_score_percent` présent) porte « Refaire » (icône `arrow-path`, nom accessible « Refaire l'exercice « <titre> » »), au lieu de « Commencer ». « Reprendre » (session en cours) l'emporte toujours. Même règle sur la page de l'exercice (`#student_progress`) : « Refaire l'exercice » dès une session terminée. Le bouton reste un POST vers `exercise_sessions_path` : il ouvre une nouvelle session.
+- **Forme de la ligne** : la règle « horizontale à toutes les tailles » ne vaut plus qu'à partir de 640 px. Sous 640 px, le bouton passe sous le titre, aligné à gauche ; le titre tient sur 2 lignes (`line-clamp-2`) au lieu d'une ligne tronquée. Le lien étiré, l'état pressé et la variante (`primary` sur la première ligne seulement, R1) ne changent pas.
+- **Encart `#essential_gap`** : sous la date, un bouton `secondary` `sm` « Refaire un exercice » (`#essential_gap_action`) mène à la page du premier exercice de la fiche, quand la fiche en a. R1 reste respectée : un seul `primary`.
+
+**Vérification** : à 390 × 844 sur la fiche « Calculer une limite et lever une forme indéterminée » de l'élève de démo 0110000020 (`db/seeds/demo/saint_michel.rb`) : titres entiers sur 2 lignes, « Refaire » sur les 3 lignes, bouton sous l'encart de la lacune.

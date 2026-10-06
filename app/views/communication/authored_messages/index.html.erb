@@ -10,7 +10,7 @@
 
 <% if @page.rows.any? %>
   <%= ui_card id: "my_announcements" do %>
-    <ul class="-mx-5 divide-y divide-line sm:-mx-6">
+    <ul class="-mx-4 divide-y divide-line sm:-mx-6">
       <%= render partial: "row", collection: @page.rows, as: :row %>
     </ul>
   <% end %>

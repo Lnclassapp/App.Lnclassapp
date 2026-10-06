@@ -3,7 +3,7 @@
 <%# UDR  : 0061 (§3.2 à §3.8), 0066 (§3.5, pied), 0057, 0054 · ADR : 0049 · sans JS, le déclencheur mène à /aide ; focus : 1re ligne %>
 <%= ui_modal id: "help-sheet", title: t(".title"), size: :sm, placement: :sheet,
              trigger: t(".trigger"), trigger_href: help_path, trigger_variant: :ghost, trigger_size: :sm,
-             trigger_icon: "question-mark-circle" do %>
+             trigger_icon: "question-mark-circle", trigger_class: local_assigns[:trigger_class] do %>
   <ul class="-my-2 divide-y divide-line">
     <% support_contacts.each_with_index do |contact, index| %>
       <% id = "help-sheet-#{contact.key}" %>
