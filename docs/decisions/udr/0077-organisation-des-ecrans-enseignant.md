@@ -125,3 +125,9 @@ Motif : avec des données réelles (démo du Collège Saint Michel de Tiassalé)
 - **« Filtrer »** : la cible `search#button` est la cellule qui le contient, cachée entière avec JavaScript ; sans JavaScript, il reste.
 - **Titre de l'élève** : l'infobulle « Quels cours ? » est collée au `h1` (`flex flex-wrap items-center`), et non plus rendue en action de `ui_page_header`, où elle restait seule sous le titre sur téléphone.
 - **Carte** : une année scolaire du sous-titre (« 2026-2027 ») ne se coupe pas à son tiret (`whitespace-nowrap`).
+
+## Amendement du 2026-10-06 (bis) — badge de matière sur les cartes de l'enseignant · Statut : Accepté (porteur, 2026-10-06)
+
+*Fusion de la PR [#184](https://github.com/Lnclassapp/App.Lnclassapp/pull/184) (`politique-cache`, lot E5) dans `Develop`. L'amendement du 2026-10-05 (ter) de l'[UDR-0013](0013-catalogue-et-page-cours.md), décidé le même jour que cette UDR, garde le badge de matière sur chaque carte « pour tous les rôles ». Le porteur, le 2026-10-06, tranche l'écart : « badge pour tous ». En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+- §3.2, « Cartes de l'enseignant » : **le badge de matière reste**, à côté du badge du niveau. La matière est donc dite par le sous-titre et par chaque carte ; la règle R6 ne s'applique plus aux cartes du catalogue.
