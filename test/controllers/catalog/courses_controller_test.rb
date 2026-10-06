@@ -254,6 +254,40 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_empty", text: including(tl("index.student_no_match_description"))
   end
 
+  # UDR-0054, amendment of 2026-10-06: the student's catalogue, filtered or not, brings back to « Accueil »; the team's
+  # catalogue, a destination of its navigation, has no back link.
+  test "the student's catalogue, filtered or not, brings back to « Accueil »; the team's has no back link" do
+    sign_in_as create_student_for(@course)
+
+    [ courses_path, courses_path(material: @svt.slug) ].each do |path|
+      get path
+
+      assert_select "nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), student_home_path, text: tl("index.back_home")
+    end
+
+    sign_in_as create_team_member
+    get courses_path
+
+    assert_select "nav[aria-label=?]", I18n.t("components.back_link.label"), 0
+  end
+
+  # UDR-0054 §3.2: from the filtered catalogue, « Cours » brings back to the same filter; from anywhere else, or from
+  # another site, to the bare catalogue.
+  test "the back link of a course keeps the filter of the catalogue the student came from, never another site's address" do
+    sign_in_as create_student_for(@course)
+    back = "nav[aria-label='#{I18n.t('components.back_link.label')}'] a[href=?]"
+    filtered = courses_path(material: @svt.slug)
+
+    get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{filtered}" }
+    assert_select back, filtered, text: tl("show.back")
+
+    get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{student_home_path}" }
+    assert_select back, courses_path
+
+    get course_path(@course.slug), headers: { "Referer" => "https://ailleurs.example#{filtered}" }
+    assert_select back, courses_path
+  end
+
   test "the team's catalogue is unchanged: subtitle, level badge, subject badge even when filtered" do
     [ create_team_member ].each do |user|
       sign_in_as user

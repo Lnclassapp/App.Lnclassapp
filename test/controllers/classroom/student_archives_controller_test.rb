@@ -19,7 +19,7 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_equal pending_account_path, path
     assert_select "#pending_account" do
-      assert_select "p", text: "Tu n'as plus de classe active"
+      assert_select "h1", text: "Tu n'as plus de classe active"
       assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre une classe"
       assert_select "a[href='#{student_archive_path}']", text: "Voir mon historique"
     end
@@ -46,7 +46,7 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as create_student
 
     get pending_account_path
-    assert_select "p", text: "Tu n'as pas encore de classe"
+    assert_select "h1", text: "Tu n'as pas encore de classe"
     assert_select "a[href='#{student_archive_path}']", 0
 
     get student_archive_path

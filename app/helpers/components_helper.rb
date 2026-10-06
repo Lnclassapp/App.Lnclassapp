@@ -390,13 +390,14 @@ module ComponentsHelper
     turbo_stream.append("toasts", ui_toast(message, type:, title:, action:))
   end
 
-  def ui_empty_state(title:, description: nil, icon: "inbox", action: nil, &block)
+  # heading: :h1 quand l'état vide est toute la page (compte en attente) : son titre en devient le titre (UDR-0054 §3.1).
+  def ui_empty_state(title:, description: nil, icon: "inbox", action: nil, heading: :p, &block)
     actions = if block
       capture(&block)
     elsif action
       ui_button(action[:label], href: action[:href], variant: action.fetch(:variant, :primary), icon: action[:icon])
     end
-    render "components/empty_state", title:, description:, icon:, actions:
+    render "components/empty_state", title:, description:, icon:, actions:, heading:
   end
 
   def ui_error_state(title: nil, message: nil, retry_href: nil, retry_label: nil)

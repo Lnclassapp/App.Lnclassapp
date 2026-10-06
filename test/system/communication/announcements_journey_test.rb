@@ -3,7 +3,7 @@ require "application_system_test_case"
 # AN-22 and the nominal journey of the PRD (§3), in a real browser, end to end, then its error path on the same announcement.
 # On his phone, M. Kouassi opens « Annonces » from his bottom bar and publishes « Nouvelles fiches » for 3ème B and 3ème C with
 # an mp3. On hers, Awa finds the announcement of Mme Kamaté first (official badge, no cross), then M. Kouassi's card with ▶
-# on his mp3; she hides it with its cross and « Toutes les annonces » shows it « Masquée ». Fatou opens « Annonces » from the
+# on his mp3; she hides it with its cross and the list, open by its address, shows it « Masquée ». Fatou opens « Annonces » from the
 # second card of her sidebar (the team's secondary list), then « Toutes », and withdraws it behind its confirmation: the line
 # leaves the list.
 #
@@ -86,7 +86,7 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
   end
 
   # PRD §3, steps 4 and 5: the carousel (direction first, official, no cross; then the card with ▶ on the mp3), the cross,
-  # and « Toutes les annonces ». Returns the announcement.
+  # and the list, open by its address (no link from her home since 2026-10-06). Returns the announcement.
   def read_and_hide_as_awa
     fiches = Orm::Message.find_by!(title: "Nouvelles fiches")
     sign_in_as @awa
@@ -111,9 +111,10 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
       assert_no_selector "#student_home_announcements #{card(fiches)}"
       assert_equal [ "Devoirs communs" ], carousel_titles
     end
-    within("#student_home_announcements") { click_on tc("inboxes.carousel.all") }
+    # UDR-0071, amendment of 2026-10-06: no link from her home; the list, open by its address, keeps it « Masquée ».
+    within("#student_home_announcements") { assert_no_link tc("inboxes.carousel.all") }
+    visit announcements_path
 
-    assert_current_path announcements_path
     within(card(fiches)) { assert_text tc("card.dismissed") }
     sign_out
     fiches

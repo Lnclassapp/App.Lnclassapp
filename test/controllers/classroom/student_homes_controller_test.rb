@@ -72,7 +72,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a#subject_svt[href=?]", courses_path(material: "svt"), text: including("SVT")
       assert_select "a#subject_svt img[src*='subjects/svt']"
     end
-    assert_select "#student_home_subjects a[href=?]", courses_path, text: tl("subjects.all")
+    # UDR-0069, amendment of 2026-10-06: no « Tous les cours » any more, the Cours tab leads there.
+    assert_select "#student_home_subjects a[href=?]", courses_path, 0
     assert_no_match(/subject_francais|subject_philosophie/, response.body)
   end
 
@@ -110,7 +111,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_subjects" do
       assert_select "nav", 0
       assert_select "*", text: tl("subjects.empty")
-      assert_select "a[href=?]", courses_path, text: tl("subjects.all")
+      assert_select "a[href=?]", courses_path, 0
     end
   end
 
@@ -411,13 +412,15 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "Devoirs communs", "Fiches 3", "Fiches 2", "Fiches 1", "Rentrée numérique" ], announcement_titles
   end
 
-  test "AN-22 — the carousel of the student leads to « Toutes les annonces »" do
+  # UDR-0071, amendment of 2026-10-06: the announcements live on the home; no « Toutes les annonces » under the band.
+  test "AN-22 — the carousel of the student has no « Toutes les annonces »" do
     announce(create_team_member(second_factor: false), "Rentrée numérique", audience: "all")
     sign_in_as @student
 
     get student_home_path
 
-    assert_select "#student_home_announcements a[href=?]", announcements_path, text: I18n.t("communication.inboxes.carousel.all")
+    assert_select "#student_home_announcements article h3", "Rentrée numérique"
+    assert_select "a[href=?]", announcements_path, 0
   end
 
   test "AN-11 — no announcement for the student: no announcements band at all" do
@@ -429,7 +432,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_announcements", 0
   end
 
-  test "AN-12 — a dismissed announcement is out of the carousel, on any device; all dismissed, the link alone stays" do
+  # UDR-0071, amendment of 2026-10-06: all dismissed, the section stays for screen readers only (the target of « Annuler »),
+  # without a link.
+  test "AN-12 — a dismissed announcement is out of the carousel, on any device; all dismissed, screen readers only" do
     team = create_team_member(second_factor: false)
     dismissed = announce(team, "Rentrée numérique", audience: "all")
     announce(team, "Concours", audience: "all", at: 2.hours.ago)
@@ -443,10 +448,11 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     dismiss_message(message: Orm::Message.find_by!(title: "Concours"), user: @student)
     get student_home_path
 
-    assert_select "#student_home_announcements" do
+    assert_select "#student_home_announcements.sr-only" do
       assert_select "ul", 0
-      assert_select "a[href=?]", announcements_path
+      assert_select "p", I18n.t("communication.inboxes.carousel.all_dismissed")
     end
+    assert_select "a[href=?]", announcements_path, 0
   end
 
   # UDR-0075 §3.1 and §3.2 (annonces-v2, Lot B): the card of the carousel takes the theme of its message; a drawing of the

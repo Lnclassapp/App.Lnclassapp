@@ -245,7 +245,9 @@ class NavigationHelperTest < ActionView::TestCase
       "http://evil.example/teams/schools?search=x" => "another host",
       "http://test.host/teams" => "a shorter path",
       "not a uri at all ::" => "a malformed referer",
-      "mailto:x@y.ci" => "a referer without host"
+      "mailto:x@y.ci" => "a referer without host",
+      "//test.host/teams/schools?search=x" => "a referer without scheme",
+      "ftp://test.host/teams/schools" => "a referer of another scheme"
     }.each do |referer, reason|
       request.env["HTTP_REFERER"] = referer
 
