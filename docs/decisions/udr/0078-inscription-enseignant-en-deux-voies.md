@@ -201,6 +201,11 @@ Sous le nom de chaque enseignant, ajouter une ligne `text-xs text-mute` : « Ins
 
 La formule « Inscription : … » ne s'accorde pas : il n'y a pas de « arrivé(e) » (UDR-0007).
 
+### 3.8 bis Tableau des établissements de l'équipe (`teams/schools/index`, `_school_row`, `_filters`) — ajout du 2026-10-07 (memo Q21)
+
+- Retirer la colonne `school_code` du `<thead>` (et son `ui_info_tip`) et la cellule correspondante de `_school_row` ; l'ordre des colonnes restantes ne change pas.
+- Recherche : libellé « Nom ou sigle » (`teams.schools.filters.search`), exemple « Ex. : Lycée Classique, LCA » (`search_placeholder`). La recherche ne porte plus sur le code national.
+
 ### 3.9 Écran d'attente (`identity/pending_accounts/show`, enseignant sans établissement)
 
 - Le champ `school_code` est remplacé par la même rubrique « Établissement » que la voie standard, **sans** la matière : sélecteur DRENA, `<noscript>`, frame `schools`. Le formulaire `GET` de repli s'appelle `school-join-drena` et pointe vers `pending_account_path`.

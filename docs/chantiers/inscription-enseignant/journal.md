@@ -6,6 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
+| 2026-10-07 | Lot E ajouté : tableau `/teams/schools` sans recherche par code national ni colonne « Code d'établissement », retrait de `find_by_national_code` | Demande du porteur (memo Q21), en cours de phase 4 | Oui, ADR-0082 §4.5 et UDR-0078 §3.8 bis amendés |
 | 2026-10-07 | Lot 0 élargi : 5 fichiers (faux dépôts des tests de use case, `models_test`, deux seeds) puis l'adaptateur des liens d'invitation et `registration_repository_test` | `joined_via` NOT NULL sans défaut et la nouvelle signature de `create_teacher` cassaient ces appelants ; `test/architecture/port_contracts_test.rb` exige un adaptateur pour chaque port | Non (plan.md) |
 | 2026-10-07 | Lot C : le frame `schools` de l'écran d'attente est servi par l'écran lui-même, pas par `/drenas/:id/schools` | `School::DrenaSchoolsController` écrit le préfixe `teacher_registration` en dur ; le local `scope` du Lot 0 ne suffisait pas | À régler au Lot D (paramètre `scope` du contrôleur), sinon amender l'ADR-0082 §4.5 |
 
@@ -35,7 +36,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | Barre latérale d'un enseignant sans établissement : « Content missing » à 1280 px (le frame différé est redirigé vers l'écran d'attente) | Antérieur au chantier, relevé par le Lot C | bugfix à ouvrir |
 | Code d'établissement et « Régénérer le code » encore présents pour la direction | Périmètre (Q8) | `inscription-direction-sans-code` |
-| `SchoolRepositoryPort#find_by_national_code` et son adaptateur : plus d'appelant après la suppression de `RegisterPendingTeacher` | Retirer une méthode de port sort du Lot D ; l'entité `NationalCode` sert encore à l'import | refactor à ouvrir (ou `inscription-direction-sans-code`) |
+| Index trigramme de `schools.national_code` : plus utilisé par la recherche de l'équipe après le Lot E | Une migration de retrait d'index n'apporte rien à l'utilisateur ; à mesurer avant | optimize à ouvrir si l'écriture des établissements en pâtit |
 | Code de classe des élèves | Périmètre (Q20) | `inscription-eleve-sans-code` (branche ouverte) |
 
 ## Clôture

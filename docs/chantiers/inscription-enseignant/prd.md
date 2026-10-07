@@ -13,7 +13,7 @@ Un enseignant peut s'inscrire de trois façons (code d'établissement, choix man
 | Visiteur (futur enseignant) | S'inscrire par la voie standard ; s'inscrire par un lien d'invitation valable, l'établissement déjà choisi ; quitter l'établissement du lien (« Ce n'est pas votre établissement ? ») pour la voie standard | Saisir un code d'établissement ; choisir un établissement en brouillon ou désactivé ; s'inscrire avec un numéro qui a déjà un compte |
 | Teacher (connecté) | Copier et partager son lien « Inviter un collègue » (fermé sans établissement actif, comme aujourd'hui) ; ouvrir WhatsApp directement depuis la bulle « Inviter » de la section « Cours » de son accueil | Ouvrir l'inscription ou un lien d'invitation : il est renvoyé vers son accueil (`GET`) ou reçoit 403 (`POST`) ; rejoindre un second établissement par un lien |
 | SchoolStaff (direction) | Copier et partager le lien d'invitation de son établissement, sans code affiché | « Changer le lien » (retiré) |
-| Team | Copier le lien d'invitation d'un établissement depuis sa fiche ; voir la voie d'arrivée des enseignants dans la liste « Enseignants » de la fiche (il n'existe pas de fiche enseignant) | — « Régénérer le code » reste, pour l'inscription de la direction, jusqu'au chantier `inscription-direction-sans-code` |
+| Team | Chercher un établissement par nom ou sigle dans `/teams/schools` (plus par code national, plus de colonne « Code d'établissement ») ; copier le lien d'invitation d'un établissement depuis sa fiche ; voir la voie d'arrivée des enseignants dans la liste « Enseignants » de la fiche (il n'existe pas de fiche enseignant) | — « Régénérer le code » reste, pour l'inscription de la direction, jusqu'au chantier `inscription-direction-sans-code` |
 | Student, Parent | Rien ne change | — |
 
 Règles d'autorisation : l'inscription est publique et refusée à toute personne connectée (règle existante de l'inscription). « Inviter un collègue » reste sous `InviteColleaguePolicy` ; le lien de la direction sous les règles de l'espace direction ; celui de l'équipe sous la gestion des établissements.
@@ -175,6 +175,15 @@ Quand il touche la bulle « Inviter » de la section « Cours »
 Alors WhatsApp s'ouvre (lien wa.me) avec le message d'invitation contenant son lien /i/<jeton>, dans un nouvel onglet
 Et le partage est compté sur le canal « whatsapp »
 Et la page « Inviter un collègue » reste accessible par sa propre adresse et par la carte latérale
+
+# IE-21 — tableau des établissements de l'équipe
+Quand l'équipe ouvre /teams/schools
+Alors le tableau n'a pas de colonne « Code d'établissement »
+Et le champ de recherche s'intitule « Nom ou sigle »
+Quand elle cherche « 012345 », le code national d'un établissement
+Alors cet établissement n'est pas trouvé par son code national
+Quand elle cherche « Lycée Classique » ou « LCA »
+Alors l'établissement est trouvé
 
 # IE-16 — direction inchangée
 Quand une direction s'inscrit par /school-staff-signup avec le code d'établissement

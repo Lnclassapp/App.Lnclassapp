@@ -112,6 +112,7 @@ L'écran d'attente rattache par établissement choisi (`school_public_id` d'un �
 ### 4.5 Ce qui ne change pas
 
 - `schools.school_code`, `find_by_school_code`, `RegenerateSchoolCode`, `Teams::SchoolCodesController` et `RegisterSchoolStaff` restent, pour la direction (ADR-0077).
+- `SchoolRepositoryPort#find_by_national_code` est retiré (plus d'appelant), et la recherche de la liste de l'équipe (`SchoolsQuery`) ne porte plus sur le code national (memo Q21). Le code national reste importé, modifiable et affiché sur la fiche.
 - Côté direction, « Changer le lien » (`PATCH /school-admin/school/link`) est retiré : le bloc ne montre plus le code.
 - `/drenas/:drena_public_id/schools` (frame et JSON) redevient la source de la liste des établissements, comme l'avait décidé l'UDR-0024.
 

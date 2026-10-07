@@ -179,6 +179,20 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 
 ---
 
+## Lot E — Tableau des établissements de l'équipe sans code (ajout du 2026-10-07, memo Q21)
+
+- **Couche**       : domaine (port) + infrastructure + ui
+- **Fichiers**     : `app/domain/ports/school/school_repository_port.rb` · `app/infrastructure/repositories/school/school_repository.rb` *(retrait de `find_by_national_code`)*
+                     `app/infrastructure/queries/school/schools_query.rb` *(recherche par nom ou sigle ; `Row` sans `school_code` si plus lu)*
+                     `app/views/teams/schools/index.html.erb` · `app/views/teams/schools/_school_row.html.erb` · `app/views/teams/schools/_filters.html.erb`
+                     `config/locales/teams/schools.fr.yml`
+                     `test/infrastructure/repositories/school/school_repository_test.rb` · `test/infrastructure/queries/school/schools_query_test.rb` · `test/controllers/teams/schools_controller_test.rb` · `test/system/teams/schools_test.rb`
+- **Dépend de**    : Lot D
+- **Test associé** : `test/infrastructure/queries/school/schools_query_test.rb` (IE-21 : « 012345 » ne trouve plus l'établissement, nom et sigle oui) · `test/controllers/teams/schools_controller_test.rb` (IE-21 : pas de colonne « Code d'établissement », libellé « Nom ou sigle »)
+- **Done quand**   : sur `/teams/schools`, le tableau n'a plus de colonne « Code d'établissement » et la recherche ne trouve plus un établissement par son code national ; `find_by_national_code` n'existe plus (`grep` vide)
+
+---
+
 ## Rattachement des critères d'acceptation
 
 | Critère | Lot(s) |
@@ -195,6 +209,7 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 | IE-16 | D |
 | IE-17, IE-19 | A |
 | IE-20 | 0 (option de la bulle), B |
+| IE-21 | E |
 | IE-18 | C |
 
 Aucun critère orphelin.
