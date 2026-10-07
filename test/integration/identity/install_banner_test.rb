@@ -55,7 +55,7 @@ class Identity::InstallBannerMarkupTest < ActionDispatch::IntegrationTest
   def assert_hidden_banner(role:)
     assert_select "main#main div[data-bleed] > section#install_banner:first-child[hidden][data-controller=install]" \
                   "[aria-labelledby=install_banner_title]" do
-      assert_select "h2#install_banner_title", text: tb("title.#{role}")
+      assert_select "p#install_banner_title", text: tb("title.#{role}")
       assert_select "p", text: tb("body.#{role}")
       assert_select "ol[data-install-target=ios][hidden] > li", count: 2
       assert_select "ol li strong", text: "Partager"

@@ -40,11 +40,11 @@ section#install_banner.lg:hidden.mb-5.rounded-card.border.border-line.bg-brand-s
   div.flex.items-start.gap-3
     img[src="/icon-192.png"][alt=""][width=48][height=48].size-12.shrink-0.rounded-ln
     div.min-w-0.flex-1
-      h2#install_banner_title.font-display.text-base.font-extrabold.text-ink   → t(".title.<role>")
+      p#install_banner_title.font-display.text-base.font-extrabold.text-ink    → t(".title.<role>")  (un p, pas un h2 : le bandeau précède le h1 de la page)
       p.mt-1.text-sm.text-mute                                                  → t(".body.<role>")
       ol.mt-2.grid.gap-1.text-sm.text-ink[data-install-target="ios"][hidden]   → 2 li, §3.1.2
       div.mt-3.flex.flex-wrap.gap-2
-        ui_button t(".install"), variant: :primary, size: :sm, icon: "arrow-down-tray",
+        ui_button t(".install"), variant: :secondary, size: :sm, icon: "arrow-down-tray",   (secondaire : le bandeau ne prend pas l'action principale de l'écran, UDR-0057 R1)
                   data: { install_target: "android", action: "install#prompt" }, hidden: true
         ui_button t(".later"), variant: :ghost, size: :sm,
                   data: { action: "install#later" }

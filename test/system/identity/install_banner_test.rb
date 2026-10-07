@@ -28,7 +28,7 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       within(BANNER) do
-        assert_selector "h2", text: tb("title.student")
+        assert_selector "#install_banner_title", text: tb("title.student")
         assert_text tb("body.student")
         assert_button tb(:install)
         assert_no_selector "ol"
@@ -77,7 +77,7 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
       with_mobile_viewport do
         open_home teacher_home_path
         within(BANNER) do
-          assert_selector "h2", text: tb("title.teacher")
+          assert_selector "#install_banner_title", text: tb("title.teacher")
           assert_equal [ "1 Touchez Partager", "2 Puis Sur l'écran d'accueil" ], all("ol > li").map { it.text.squish }
           assert_no_button tb(:install)
           assert_button tb(:later)
