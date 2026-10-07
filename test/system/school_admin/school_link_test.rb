@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# IE-07 (ADR-0082 §4.1, UDR-0078 §3.7), replacing GD-04: the direction's invitation link is stable. On a 390 px phone,
+# IE-07 (ADR-0083 §4.1, UDR-0079 §3.7), replacing GD-04: the direction's invitation link is stable. On a 390 px phone,
 # the block shows the /i/<token> link, « Copier le lien » and « Partager sur WhatsApp », without the school's code nor
 # « Changer le lien », and fits the width. The arrival page behind the link is tested end to end with Lot D.
 class SchoolAdmin::SchoolLinkTest < ApplicationSystemTestCase

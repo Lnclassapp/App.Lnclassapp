@@ -1,7 +1,7 @@
 require "test_helper"
 
 # ADR-0071 §4.6 : la page « Établissement » de la direction lit son établissement, par l'identifiant de son compte.
-# ADR-0082 §4.5 : sans « Changer le lien », la page ne lit plus le code ; seul le jeton du lien de la direction.
+# ADR-0083 §4.5 : sans « Changer le lien », la page ne lit plus le code ; seul le jeton du lien de la direction.
 class Queries::School::OwnSchoolQueryTest < ActiveSupport::TestCase
   def own(school_id) = Queries::School::OwnSchoolQuery.new.call(school_id:)
 

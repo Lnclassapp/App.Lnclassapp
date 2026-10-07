@@ -95,7 +95,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster details", text: /#{I18n.t("#{scope}.roster.last_score_tip")}/
     assert_select "#classroom_roster li", 2
     assert_select "#student_#{awa.public_id}", text: /Awa Bamba/
-    # IE-22 (UDR-0078 §3.8 ter) : le numéro masqué, tel que la requête le rend ; le numéro complet nulle part.
+    # IE-22 (UDR-0079 §3.8 ter) : le numéro masqué, tel que la requête le rend ; le numéro complet nulle part.
     assert_select "#student_#{awa.public_id} p[title=?]", I18n.t("#{scope}.roster.contact_masked") do
       assert_select "span[aria-hidden=true]", text: "01 •• •• •• 05"
       assert_select "span.sr-only", text: I18n.t("#{scope}.roster.contact_masked")

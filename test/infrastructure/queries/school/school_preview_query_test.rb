@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IE-06, IE-09 (ADR-0082 §4.1, UDR-0078 §3.6): the banner of an invite link names the school and its DRENA, nothing
+# IE-06, IE-09 (ADR-0083 §4.1, UDR-0079 §3.6): the banner of an invite link names the school and its DRENA, nothing
 # more, and only for an active school.
 class Queries::School::SchoolPreviewQueryTest < ActiveSupport::TestCase
   setup do

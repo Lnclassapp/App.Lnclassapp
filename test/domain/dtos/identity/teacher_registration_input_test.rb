@@ -2,7 +2,7 @@ require "test_helper"
 
 module Dtos
   module Identity
-    # IE-03, IE-05, IE-19 (ADR-0082 §4.4, UDR-0078 §3.3): the name and the first names are two fields, under the ADR-0037
+    # IE-03, IE-05, IE-19 (ADR-0083 §4.4, UDR-0079 §3.3): the name and the first names are two fields, under the ADR-0037
     # rules; no full name any more. The school is chosen in its DRENA, or given by an invite token; no school code any more.
     class TeacherRegistrationInputTest < ActiveSupport::TestCase
       def build(**overrides)
@@ -72,7 +72,7 @@ module Dtos
         assert found.of_kind?(:material_slug, :blank)
       end
 
-      test "ADR-0082 §4.1: with an invite token, no DRENA nor school is asked; the token is normalized" do
+      test "ADR-0083 §4.1: with an invite token, no DRENA nor school is asked; the token is normalized" do
         input = build(drena_public_id: nil, school_public_id: nil, invite_token: " 0A1B2C3D4E5F ")
 
         assert input.valid?

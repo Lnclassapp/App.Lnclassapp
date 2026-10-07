@@ -1,6 +1,6 @@
 // ⚡ FRONT · identity/pin_match_controller — dit en direct si la confirmation du code secret concorde
 // Rôle : dès 4 chiffres, icône et message sous la confirmation, annoncés (aria-live) ; le serveur refuse toujours des codes différents
-// ADR  : 0050, 0051, 0082 · UDR : 0078 (§3.5)
+// ADR  : 0050, 0051, 0083 · UDR : 0079 (§3.5)
 import { Controller } from "@hotwired/stimulus"
 
 const LENGTH = 4

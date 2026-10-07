@@ -1,4 +1,4 @@
-# ADR-0082 §4.1, §4.2: a teacher signs up through the standard way or through an invite link /i/<token>. Every school
+# ADR-0083 §4.1, §4.2: a teacher signs up through the standard way or through an invite link /i/<token>. Every school
 # draws two opaque invite tokens (direction, team) by the database default, in the shape of the referral token
 # (ADR-0063), so that imports, seeds and existing rows all get them without touching a write path. Every teacher profile
 # records its arrival channel: existing teachers receive the one deduced from what is known of them (a link referral

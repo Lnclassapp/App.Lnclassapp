@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
 <%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée %>
-<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0078, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <% exercises = @home.assigned_exercises %>
 <%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. Amendement du
@@ -58,3 +58,5 @@
     <% end %>
   <% end %>
 </div>
+<%# UDR-0078, amendement du 2026-10-07 : l'invitation à installer l'app, en pop-up, sur l'accueil seulement %>
+<%= render "shared/navigation/install_banner", role: "student" %>

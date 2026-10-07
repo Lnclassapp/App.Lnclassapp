@@ -151,7 +151,7 @@ module Queries
                      students.first.to_h.values_at(:display_name, :contact, :last_score_percent, :last_session_public_id)
       end
 
-      # IE-22 (ADR-0082 §4.4 bis, memo Q23) : quel que soit le lecteur (enseignant, quelle que soit sa voie, ou équipe),
+      # IE-22 (ADR-0083 §4.4 bis, memo Q23) : quel que soit le lecteur (enseignant, quelle que soit sa voie, ou équipe),
       # le numéro complet d'un élève ne sort jamais de la requête.
       test "IE-22 : le numéro d'un élève sort masqué de la requête, pour tout lecteur, jamais en entier" do
         create_student(classroom: @classroom, contact: "0701020304")

@@ -17,6 +17,17 @@ module Repositories
         end
       end
 
+      test "mark_app_opened dates the last opening from the installed app, and only on that account (ADR-0082 §4.3)" do
+        student = create_student
+        other = create_student
+        at = Time.zone.parse("2026-10-07 08:15:00")
+
+        assert_nil Orm::User.find(student.id).app_opened_at
+        assert @repository.mark_app_opened(user_id: student.id, at:)
+        assert_equal at, Orm::User.find(student.id).app_opened_at
+        assert_nil Orm::User.find(other.id).app_opened_at
+      end
+
       test "an unknown account is nil" do
         assert_nil @repository.find(id: 0)
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
@@ -127,6 +138,16 @@ module Repositories
         assert_not record.authenticate_pin("2468")
         assert_nil @repository.authenticate(contact: "0102030405", pin: "2468")
         assert create_student(contact: "0102030405").persisted?
+      end
+
+      # ADR-0036, ADR-0082 §4.3 : on ne garde pas de trace d'usage d'un compte anonymisé.
+      test "anonymize forgets when the account last opened the installed app" do
+        record = create_student
+        @repository.mark_app_opened(user_id: record.id, at: Time.current.change(usec: 0))
+
+        @repository.anonymize(user_id: record.id, first_name: "Compte", last_name: "supprimé", at: Time.current)
+
+        assert_nil record.reload.app_opened_at
       end
     end
   end

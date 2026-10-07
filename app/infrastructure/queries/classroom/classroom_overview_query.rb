@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves au numéro masqué
-# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0082 (§4.4 bis) · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0078 (§3.8 ter)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis) · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -11,7 +11,7 @@ module Queries
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
       # photo_version : nil sans photo (ADR-0060).
       # contact : toujours masqué (« 07 •• •• •• 04 »), pour tout lecteur ; le numéro complet ne quitte pas cette requête
-      # (ADR-0082 §4.4 bis : protéger les élèves).
+      # (ADR-0083 §4.4 bis : protéger les élèves).
       StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version)
       # counts : AssignmentFollowUpQuery::Counts, nil sans show_follow_up (FollowAssignmentPolicy, ADR-0072 §4.5).
       # comprehension : Assessment::ComprehensionSummaryQuery::Summary (ADR-0079), nil sans show_follow_up, comme counts.

@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Identity
-    # IE-01, IE-03 to IE-06, IE-08 to IE-13 (ADR-0082, UDR-0078): one use case, two ways in. The school is chosen in its
+    # IE-01, IE-03 to IE-06, IE-08 to IE-13 (ADR-0083, UDR-0079): one use case, two ways in. The school is chosen in its
     # DRENA, or given by an invite link /i/<token> (a colleague, the direction, the team), resolved again on submit. The
     # teacher is attached at once, without any join request, and the way in is recorded (teacher_profiles.joined_via).
     class RegisterTeacherTest < ActiveSupport::TestCase
@@ -143,7 +143,7 @@ module UseCases
         end
       end
 
-      # Into the same journal: the audit line is rolled back with the account (ADR-0082 §4.4 bis).
+      # Into the same journal: the audit line is rolled back with the account (ADR-0083 §4.4 bis).
       class FakeAudit
         include Ports::Identity::AuditLogPort
 
@@ -260,7 +260,7 @@ module UseCases
         end
       end
 
-      test "ADR-0082 §4.1: with a valid link, the school sent by the form is ignored" do
+      test "ADR-0083 §4.1: with a valid link, the school sent by the form is ignored" do
         assert register(invite_token: "eeeeeeeeeeee", drena_public_id: "drn-abj2", school_public_id: "sch-other").success?
 
         assert_includes @journal, [ :teacher_school, 41, 31, true, NOW ]

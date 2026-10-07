@@ -1,11 +1,11 @@
 # 🌐 DELIVERY · School::DrenaSchoolsController
 # Rôle : établissements actifs d'une DRENA, publics et limités en débit : frame « schools » (inscription, écran d'attente) ou JSON
-# ADR  : 0026, 0029, 0050, 0082 · UDR : 0024, 0078
+# ADR  : 0026, 0029, 0050, 0083 · UDR : 0024, 0079
 module School
   class DrenaSchoolsController < ApplicationController
     allow_unauthenticated_access
     rate_limit to: 30, within: 1.minute, by: -> { request.remote_ip }
-    # Le scope des champs du frame : inscription (défaut) ou écran d'attente (ADR-0082 §4.5) ; toute autre valeur → défaut.
+    # Le scope des champs du frame : inscription (défaut) ou écran d'attente (ADR-0083 §4.5) ; toute autre valeur → défaut.
     SCOPES = %w[teacher_registration school_join].freeze
 
     def index

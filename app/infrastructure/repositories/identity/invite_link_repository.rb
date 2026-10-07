@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::InviteLinkRepository
 # Rôle : résout le jeton d'un lien /i/<jeton> : parrainage d'un collègue (école principale, sauf anonymisé), puis direction, puis équipe
-# ADR  : 0063, 0082
+# ADR  : 0063, 0083
 module Repositories
   module Identity
     class InviteLinkRepository
@@ -9,7 +9,7 @@ module Repositories
       ACTIVE = "active".freeze
       SCHOOL_TOKENS = { "direction" => :direction_invite_token, "team" => :team_invite_token }.freeze
 
-      # Un jeton commun à plusieurs tables (48 bits chacune) reste possible : le collègue passe d'abord (ADR-0082 §5).
+      # Un jeton commun à plusieurs tables (48 bits chacune) reste possible : le collègue passe d'abord (ADR-0083 §5).
       def resolve(token:)
         colleague(token) || SCHOOL_TOKENS.lazy.filter_map { |channel, column| school(token, channel, column) }.first
       end

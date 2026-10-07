@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IE-24 (memo Q25, UDR-0078 §3.11, ADR-0082 §4.4 ter): the 4-digit secret is called « code secret » in every text shown.
+# IE-24 (memo Q25, UDR-0079 §3.11, ADR-0083 §4.4 ter): the 4-digit secret is called « code secret » in every text shown.
 # Every French translation loaded by the application is read, flat; none may say « PIN ». The code keeps `pin`.
 class NoPinWordingTest < ActiveSupport::TestCase
   WORD = /\bPINs?\b/

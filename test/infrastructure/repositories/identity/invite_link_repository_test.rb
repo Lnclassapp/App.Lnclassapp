@@ -2,7 +2,7 @@ require "test_helper"
 
 module Repositories
   module Identity
-    # ADR-0082 §4.1: the token of an invite link /i/<token> is a colleague's referral token, or the direction or team
+    # ADR-0083 §4.1: the token of an invite link /i/<token> is a colleague's referral token, or the direction or team
     # token of a school. The repository says who invites and to which school; the caller judges with valid?.
     class InviteLinkRepositoryTest < ActiveSupport::TestCase
       InviteLink = Ports::Identity::InviteLinkRepositoryPort::InviteLink

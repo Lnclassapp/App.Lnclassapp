@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_filters — recherche et filtres de la liste nationale %>
 <%# Rôle : formulaire GET qui vise le frame « schools » : la frappe part après une pause (URL remplacée), une liste au changement %>
-<%# ADR  : 0030, 0082 · UDR : 0006, 0036, 0054, 0078 · Stimulus : search · recherche par nom ou sigle (IE-21) ; sans JavaScript, « Filtrer » %>
+<%# ADR  : 0030, 0083 · UDR : 0006, 0036, 0054, 0079 · Stimulus : search · recherche par nom ou sigle (IE-21) ; sans JavaScript, « Filtrer » %>
 <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
 <% selects = {
      drena: drena_options.map { [ it.name, it.public_id ] },

@@ -92,6 +92,35 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#team_dashboard_drenas table", 0
   end
 
+  # CA-11 (ADR-0082 §4.4, UDR-0078 §3.3): the « Ouvert depuis l'app installée » tile, in the period card.
+  test "the app openers tile reads the students and teachers who opened the installed app in the period" do
+    3.times { create_student(app_opened_at: 1.day.ago) }
+    create_student(app_opened_at: 20.days.ago)
+    create_student(app_opened_at: 1.day.ago, anonymized_at: Time.current)
+    create_teacher(app_opened_at: 2.days.ago)
+    sign_in_as @member
+
+    get team_dashboard_path
+
+    assert_select "#team_dashboard_period #figure_app_openers" do
+      assert_select "span", text: tl("key_figures.app_openers_title")
+      assert_select "ul#team_dashboard_app_openers[aria-label=?]", tl("key_figures.app_openers_label") do
+        assert_select "li", text: tl("key_figures.app_openers_students", count: 3)
+        assert_select "li", text: tl("key_figures.app_openers_teachers", count: 1)
+      end
+    end
+    assert_includes response.body, ERB::Util.html_escape(tl("key_figures.app_openers_tip"))
+  end
+
+  test "the app openers tile shows zeros rather than hiding" do
+    sign_in_as @member
+
+    get team_dashboard_path
+
+    assert_select "#figure_app_openers li", text: "0 élève"
+    assert_select "#figure_app_openers li", text: "0 enseignant"
+  end
+
   test "the period links keep the DRENA, and the current one is marked" do
     drena = create_drena(name: "Abidjan 1")
     sign_in_as @member

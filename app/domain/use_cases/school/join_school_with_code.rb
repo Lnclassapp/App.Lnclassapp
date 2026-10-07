@@ -1,11 +1,11 @@
 # 🧠 DOMAINE · UseCases::School::JoinSchoolWithCode
 # Rôle : un enseignant sans établissement rejoint un établissement actif choisi dans sa DRENA, jamais celui qui l'a retiré
-# ADR  : 0028, 0063, 0071, 0082 · UDR : 0056, 0078
+# ADR  : 0028, 0063, 0071, 0083 · UDR : 0056, 0079
 module UseCases
   module School
     class JoinSchoolWithCode
       # join_requests : Ports::School::JoinRequestRepositoryPort ; seule une demande en attente va à la policy (ADR-0071 §4.5).
-      # Le nom de la classe reste celui de la voie par code (ADR-0082 §4.3), pour limiter le diff.
+      # Le nom de la classe reste celui de la voie par code (ADR-0083 §4.3), pour limiter le diff.
       def initialize(schools:, drenas:, departures:, join_requests:, audit_log:, policy:, transaction:, clock:)
         @schools = schools
         @drenas = drenas

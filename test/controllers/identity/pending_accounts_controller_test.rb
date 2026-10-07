@@ -19,7 +19,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{session_path}'][data-turbo-method=delete]", text: /Se déconnecter/
   end
 
-  # GD-22 (ADR-0071), then IE-18 (ADR-0082): a teacher without a school and without request chooses one.
+  # GD-22 (ADR-0071), then IE-18 (ADR-0083): a teacher without a school and without request chooses one.
   test "a teacher without a school is offered to join one" do
     sign_in_as create_user(role: "teacher")
 
@@ -31,7 +31,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{new_join_code_path}']", 0
   end
 
-  # IE-18 (ADR-0082 §4.3, UDR-0078 §3.9) replaces the code field of GD-22: the DRENA, then the school, as at sign-up.
+  # IE-18 (ADR-0083 §4.3, UDR-0079 §3.9) replaces the code field of GD-22: the DRENA, then the school, as at sign-up.
   test "IE-18: a detached teacher, still signed in, is held on the waiting screen and chooses a DRENA, no code field" do
     abidjan = create_drena(name: "Abidjan 1")
     school = create_school(drena: abidjan)
@@ -90,7 +90,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_join_school_public_id_error", 0
   end
 
-  # ADR-0082 §4.5: /drenas/:drena_public_id/schools is again the source of the list, in the scope of the join form.
+  # ADR-0083 §4.5: /drenas/:drena_public_id/schools is again the source of the list, in the scope of the join form.
   test "IE-18: the frame of the schools is fed by /drenas/:id/schools, in the school_join scope" do
     sign_in_as create_teacher(school: nil)
 

@@ -86,6 +86,6 @@ La connexion ne dit jamais « session » : on écrit « Connexion » et « Se d�
 
 ## Amendement du 2026-10-07 — « code secret »
 
-*Chantier [`docs/chantiers/inscription-enseignant`](../../chantiers/inscription-enseignant/memo.md) (Q25), [UDR-0078](0078-inscription-enseignant-en-deux-voies.md) §3.11.*
+*Chantier [`docs/chantiers/inscription-enseignant`](../../chantiers/inscription-enseignant/memo.md) (Q25), [UDR-0079](0079-inscription-enseignant-en-deux-voies.md) §3.11.*
 
 Le secret à 4 chiffres de connexion s'appelle **« code secret »** dans toute l'interface, jamais « PIN ». Le code garde `pin`.

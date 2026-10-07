@@ -2,7 +2,7 @@ require "test_helper"
 
 module Dtos
   module School
-    # IE-18 (ADR-0082 §4.3, UDR-0078 §3.9): on the waiting screen, an unattached teacher chooses a DRENA, then one of its
+    # IE-18 (ADR-0083 §4.3, UDR-0079 §3.9): on the waiting screen, an unattached teacher chooses a DRENA, then one of its
     # schools; no school code any more.
     class SchoolJoinInputTest < ActiveSupport::TestCase
       def input(**) = SchoolJoinInput.new(**)

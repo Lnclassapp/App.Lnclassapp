@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0078 · ADR : 0009, 0049, 0067, 0082
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079 · ADR : 0009, 0049, 0067, 0083
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -332,7 +332,7 @@ module ComponentsHelper
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
   # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
   # short_label : libellé affiché sous 640 px (« PC ») ; le nom entier reste le nom accessible.
-  # link_html (UDR-0078 §3.7) : attributs ajoutés au lien (target, rel, data), vide par défaut : rendu inchangé sans lui.
+  # link_html (UDR-0079 §3.7) : attributs ajoutés au lien (target, rel, data), vide par défaut : rendu inchangé sans lui.
   def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil, link_html: {})
     dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
     render "components/subject_bubble", label:, short_label:, href:, illustration:, sr_suffix:, id:, dot:, link_html:

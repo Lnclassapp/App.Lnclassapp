@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/dashboards/_key_figures — chiffres « Sur la période » (flux) puis « En ce moment » (stocks) %>
 <%# Rôle : inscrits, élèves actifs, exercices terminés et réussite, assignations ; comptes, classes, couverture des établissements %>
-<%# ADR  : 0062 · UDR : 0049, 0054 (infobulle de « Réussite moyenne », panneau dans le flux de la tuile) %>
+<%# ADR  : 0062, 0082 · UDR : 0049, 0054 (infobulle de « Réussite moyenne », panneau dans le flux de la tuile), 0078 (§3.3) %>
 <%# locals: (dashboard:, period_scope:) -%>
 <% tile = ->(key, count, hint = nil) { render "figure", key:, count:, hint:, label: t(".#{key}", count: count || 0) } %>
 <% rate = dashboard.average_score ? t(".success_rate", rate: dashboard.average_score) : t(".no_success_rate") %>
@@ -17,6 +17,15 @@
       </div>
     </li>
     <%= tile.call(:assignments, dashboard.assignments_count, t(".assignments_hint")) %>
+    <%# UDR-0078 §3.3 : ouvertures depuis l'app installée, par rôle ; un zéro s'affiche, il dit que l'installation ne prend pas %>
+    <li id="figure_app_openers" class="col-span-2 rounded-ln bg-mist px-3 py-4 lg:col-span-4">
+      <span class="text-sm text-mute"><%= t(".app_openers_title") %></span>
+      <%= ui_info_tip t(".app_openers_tip"), label: t(".app_openers_tip_label") %>
+      <ul id="team_dashboard_app_openers" aria-label="<%= t(".app_openers_label") %>" class="mt-2 grid gap-1 text-sm text-ink sm:grid-cols-2">
+        <li class="tabular-nums"><%= t(".app_openers_students", count: dashboard.app_openers.students) %></li>
+        <li class="tabular-nums"><%= t(".app_openers_teachers", count: dashboard.app_openers.teachers) %></li>
+      </ul>
+    </li>
   </ul>
 <% end %>
 <%= ui_card title: t(".now_title"), subtitle: t(".now_subtitle"), icon: "chart-bar", id: "team_dashboard_now" do %>

@@ -1,4 +1,4 @@
-# ADR-0082 : L'enseignant s'inscrit par la voie standard ou par un lien d'invitation à jeton, sans code d'établissement, et sa voie d'arrivée est enregistrée
+# ADR-0083 : L'enseignant s'inscrit par la voie standard ou par un lien d'invitation à jeton, sans code d'établissement, et sa voie d'arrivée est enregistrée
 
 | | |
 |---|---|

@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Specs : [`prd.md`](prd.md) · [ADR-0082](../../decisions/adr/0082-inscription-enseignant-en-deux-voies.md) · [UDR-0078](../../decisions/udr/0078-inscription-enseignant-en-deux-voies.md)
+> Specs : [`prd.md`](prd.md) · [ADR-0083](../../decisions/adr/0083-inscription-enseignant-en-deux-voies.md) · [UDR-0079](../../decisions/udr/0079-inscription-enseignant-en-deux-voies.md)
 
 ## Graphe
 
@@ -167,7 +167,7 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
                      `test/system/finitions/public_pages_test.rb` · `test/system/finitions/narrow_screens_test.rb` · `test/system/finitions/narrow_titles_test.rb`
                      `test/views/page_titles_test.rb` · `test/integration/pin_reveal_fields_test.rb` · `test/helpers/share_helper_test.rb`
                      `test/system/school_admin/departed_teachers_test.rb` *(GD-23 : écran d'attente par DRENA → établissement ; ajout du 2026-10-07, relevé par le Lot C)*
-                     `app/controllers/school/drena_schools_controller.rb` · `test/controllers/school/drena_schools_controller_test.rb` · `app/controllers/identity/pending_accounts_controller.rb` · `app/views/identity/pending_accounts/show.html.erb` *(paramètre `scope` limité à `teacher_registration` ou `school_join`, pour que l'écran d'attente reprenne `/drenas/:id/schools` — ADR-0082 §4.5 ; ajout du 2026-10-07)*
+                     `app/controllers/school/drena_schools_controller.rb` · `test/controllers/school/drena_schools_controller_test.rb` · `app/controllers/identity/pending_accounts_controller.rb` · `app/views/identity/pending_accounts/show.html.erb` *(paramètre `scope` limité à `teacher_registration` ou `school_join`, pour que l'écran d'attente reprenne `/drenas/:id/schools` — ADR-0083 §4.5 ; ajout du 2026-10-07)*
                      `test/controllers/teams/school_codes_controller_test.rb` *(CE-07 visite `/e/<code>` ; relevé par le Lot A)*
                      `test/system/teams/school_code_test.rb` *(CE-07 lit `SchoolCodePreviewQuery` ; vérifier par `find_by_school_code`)* · `app/infrastructure/queries/school/own_school_query.rb` · `test/infrastructure/queries/school/own_school_query_test.rb` *(plus de `school_code`, seul `school_links` le lisait)* · `app/views/school_admin/schools/_link.html.erb` · `app/domain/dtos/identity/teacher_registration_input.rb` *(commentaires périmés)* — *ajouts du 2026-10-07, relevés par l'exécutant du Lot D*
                      `test/routing/school_admin_routes_test.rb` *(`WRITES` sans `PATCH /school-admin/school/link` ; ajout du 2026-10-07, relevé par l'exécutant du Lot D)*
@@ -272,8 +272,8 @@ git worktree add ../lnclass-inscription-enseignant-lot-c -b feature/inscription-
 Consignes à chaque agent de lot :
 
 - chemins **absolus**, `git -C <worktree absolu>` ;
-- ordre intra-lot : test rouge → domaine → infrastructure → delivery → UI (UDR-0078) ;
-- en-tête HITL de 3 lignes sur chaque fichier créé ou modifié dans `app/`, avec ADR-0082 et UDR-0078 ;
+- ordre intra-lot : test rouge → domaine → infrastructure → delivery → UI (UDR-0079) ;
+- en-tête HITL de 3 lignes sur chaque fichier créé ou modifié dans `app/`, avec ADR-0083 et UDR-0079 ;
 - **interdiction de toucher un fichier absent de son champ `Fichiers`**. S'il en a besoin, il s'arrête et remonte : le fichier appartient au Lot 0, ou le plan est faux.
 
 ---

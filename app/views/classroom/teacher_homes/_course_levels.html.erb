@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/_course_levels — bulles de la section « Cours » de l'accueil enseignant %>
 <%# Rôle : une bulle par couple niveau-série enseigné, vers le catalogue filtré, puis « Inviter » : WhatsApp avec le lien /i/<jeton> %>
-<%# ADR  : 0026, 0063, 0082 · UDR : 0069 (§3.3, §3.5), 0078 (§3.7) · Stimulus : identity--share (partage compté « whatsapp ») %>
+<%# ADR  : 0026, 0063, 0083 · UDR : 0069 (§3.3, §3.5), 0079 (§3.7) · Stimulus : identity--share (partage compté « whatsapp ») %>
 <%# locals: (home:, invite:) -%>
 <% if home.course_levels.empty? %>
   <p id="teacher_home_courses_empty" class="mb-4 text-sm text-mute"><%= t(".empty") %></p>

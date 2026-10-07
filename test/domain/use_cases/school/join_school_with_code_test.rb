@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module School
-    # IE-18 (ADR-0082 §4.3) on GD-23, GD-26, GD-27 (ADR-0071 §4.3): a teacher without a school joins an active school
+    # IE-18 (ADR-0083 §4.3) on GD-23, GD-26, GD-27 (ADR-0071 §4.3): a teacher without a school joins an active school
     # chosen in its DRENA; the school that detached them, an unknown school, a school not active and a school of another
     # DRENA give the very same error.
     class JoinSchoolWithCodeTest < ActiveSupport::TestCase

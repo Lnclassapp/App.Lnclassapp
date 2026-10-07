@@ -583,7 +583,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "a[href='/teachers/invite'] span.sr-only", 0
   end
 
-  # UDR-0078 §3.7 : la bulle « Inviter » ouvre WhatsApp dans un nouvel onglet et porte l'action de partage ; les attributs
+  # UDR-0079 §3.7 : la bulle « Inviter » ouvre WhatsApp dans un nouvel onglet et porte l'action de partage ; les attributs
   # de link_html vont sur le lien, sans rien changer d'autre. Sans link_html, le lien est exactement celui d'avant.
   test "ui_subject_bubble merges link_html on its link, and renders the same link without it" do
     plain = ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite))

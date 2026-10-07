@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Identity::ReferralQuery
 # Rôle : bloc « Inviter un collègue » : école principale, jeton du parrain (lien /i/<jeton>) et nombre de filleuls (lecture seule)
-# ADR  : 0063, 0082 · UDR : 0050, 0078
+# ADR  : 0063, 0083 · UDR : 0050, 0079
 module Queries
   module Identity
     class ReferralQuery

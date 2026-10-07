@@ -3,7 +3,7 @@ require "test_helper"
 module Queries
   module Identity
     # CP-01, CP-06 (ADR-0063, UDR-0050): what the « Inviter un collègue » block shows of the teacher signed in.
-    # IE-06 (ADR-0082 §4.1): the link is /i/<token>; the row no longer carries the school's code.
+    # IE-06 (ADR-0083 §4.1): the link is /i/<token>; the row no longer carries the school's code.
     class ReferralQueryTest < ActiveSupport::TestCase
       test "IE-06: the primary school, the teacher's token and the number of referees, without the school's code" do
         school = create_school(name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")

@@ -1,11 +1,11 @@
-# UDR-0078 : Inscription enseignant en deux voies — page réordonnée, nom complet corrigeable, numéro et code secret vérifiés en direct, liens d'invitation sans code
+# UDR-0079 : Inscription enseignant en deux voies — page réordonnée, nom complet corrigeable, numéro et code secret vérifiés en direct, liens d'invitation sans code
 
 | | |
 |---|---|
 | **Statut** | Accepté *(porteur, 2026-10-07)* |
 | **Date** | 2026-10-07 |
 | **Chantier** | [`docs/chantiers/inscription-enseignant`](../../chantiers/inscription-enseignant/prd.md) — critères IE-01 à IE-19 |
-| **ADR lié** | [ADR-0082](../adr/0082-inscription-enseignant-en-deux-voies.md) · [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0054](0054-finitions-d-interface.md) · remplace [UDR-0044](0044-inscription-enseignant-par-code-d-etablissement.md) côté enseignant (le bloc du code sur la fiche de l'équipe reste, amendé §3.7) ; amende [UDR-0024](0024-inscription-enseignant.md), [UDR-0050](0050-inviter-un-collegue-et-croissance.md), [UDR-0056](0056-gestes-de-la-direction.md) |
+| **ADR lié** | [ADR-0083](../adr/0083-inscription-enseignant-en-deux-voies.md) · [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0054](0054-finitions-d-interface.md) · remplace [UDR-0044](0044-inscription-enseignant-par-code-d-etablissement.md) côté enseignant (le bloc du code sur la fiche de l'équipe reste, amendé §3.7) ; amende [UDR-0024](0024-inscription-enseignant.md), [UDR-0050](0050-inviter-un-collegue-et-croissance.md), [UDR-0056](0056-gestes-de-la-direction.md) |
 | **Remplacé par** | — |
 
 ---

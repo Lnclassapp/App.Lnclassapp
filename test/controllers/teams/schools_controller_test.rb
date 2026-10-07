@@ -81,7 +81,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_#{school.public_id} a[data-turbo-frame=_top][href='#{school_path(school.public_id)}']",
                   text: "Lycée Classique d'Abidjan"
     assert_select "#school_#{school.public_id}", text: /LCA/
-    # IE-21 (UDR-0078 §3.8 bis) : le tableau n'a plus de colonne « Code d'établissement », ni son code ni son aide.
+    # IE-21 (UDR-0079 §3.8 bis) : le tableau n'a plus de colonne « Code d'établissement », ni son code ni son aide.
     assert_select "thead th", text: /Code d'établissement/, count: 0
     assert_select "thead th", 8
     assert_select "#school_#{school.public_id} td.font-mono", 0
@@ -595,7 +595,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#schools-filters[method=get][action='#{schools_path}'][data-controller=search]" \
                   "[data-turbo-frame=schools][data-turbo-action=advance]" \
                   "[role=search][aria-label='#{I18n.t('teams.schools.filters.label')}']" do
-      # IE-21 (UDR-0078 §3.8 bis) : la recherche porte sur le nom ou le sigle, plus sur le code national.
+      # IE-21 (UDR-0079 §3.8 bis) : la recherche porte sur le nom ou le sigle, plus sur le code national.
       assert_select "label[for=filter_search]", text: "Nom ou sigle"
       assert_select "input#filter_search[type=search][name=search][data-action='input->search#queue']" \
                     "[placeholder='Ex. : Lycée Classique, LCA']"

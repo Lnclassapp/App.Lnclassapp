@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IE-01 to IE-13, IE-17, IE-19 server side (ADR-0082, UDR-0078): one sign-up page in three sections (school, you, secret
+# IE-01 to IE-13, IE-17, IE-19 server side (ADR-0083, UDR-0079): one sign-up page in three sections (school, you, secret
 # code), no school code. The standard way chooses the DRENA then the school; an invite link /i/<token> arrives with the
 # school already chosen. The teacher is attached at once and the way in is recorded.
 class Identity::TeacherRegistrationsControllerTest < ActionDispatch::IntegrationTest
@@ -359,7 +359,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
   end
 
-  test "UDR-0078 §3.6: the eleventh link opened in a minute receives 429, without the school; the form keeps its own count" do
+  test "UDR-0079 §3.6: the eleventh link opened in a minute receives 429, without the school; the form keeps its own count" do
     10.times { |index| get teacher_invite_link_path(index.even? ? @school.team_invite_token : "cccccccccccc") }
 
     get teacher_invite_link_path(@school.team_invite_token)

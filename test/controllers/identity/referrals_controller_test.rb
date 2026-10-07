@@ -2,7 +2,7 @@ require "test_helper"
 
 # CP-01, CP-05 to CP-07 (ADR-0063, UDR-0050): « Inviter un collègue », on its page and on the teacher home: the personal
 # link, WhatsApp, SMS, copy and native share, and the counter. Only a teacher of an active school sees the block.
-# IE-06 (ADR-0082 §4.1, UDR-0078 §3.7): the personal link is /i/<token>, without the school's code.
+# IE-06 (ADR-0083 §4.1, UDR-0079 §3.7): the personal link is /i/<token>, without the school's code.
 class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
   PAGE = "identity.referrals".freeze
 
@@ -39,7 +39,7 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#referral_count", text: I18n.t("#{PAGE}.invite.count", count: 0)
     end
     assert_includes share_message, "Lycée Classique d'Abidjan"
-    # ADR-0082: an invited colleague has no code to look for any more.
+    # ADR-0083: an invited colleague has no code to look for any more.
     assert_select "#invite_colleagues", text: /vos collègues de Lycée Classique d'Abidjan s'inscrivent avec votre établissement déjà rempli/
     assert_no_match(/code/i, css_select("#invite_colleagues").text)
   end

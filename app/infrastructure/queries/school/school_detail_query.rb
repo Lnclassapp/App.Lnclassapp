@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolDetailQuery
 # Rôle : fiche d'un établissement (SC-05) : en-tête, code et lien de l'équipe, classes par niveau, enseignants, leur voie et leur parrain ici
-# ADR  : 0026, 0030, 0041, 0057, 0063, 0082 · UDR : 0036, 0044, 0050, 0078
+# ADR  : 0026, 0030, 0041, 0057, 0063, 0083 · UDR : 0036, 0044, 0050, 0079
 module Queries
   module School
     class SchoolDetailQuery
@@ -10,7 +10,7 @@ module Queries
       end
       Level = Data.define(:name, :classrooms)
       ClassroomRow = Data.define(:public_id, :name, :join_code_display, :students_count, :teacher_names, :status)
-      # joined_via : voie d'arrivée (ADR-0082 §4.2) ; referrer_name : « NOM Prénoms » du parrain, nil sans parrain, anonymisé,
+      # joined_via : voie d'arrivée (ADR-0083 §4.2) ; referrer_name : « NOM Prénoms » du parrain, nil sans parrain, anonymisé,
       # ou parrain d'un autre établissement (l'enseignant parrainé ailleurs puis rattaché ici garde sa voie, sans nom).
       TeacherRow = Data.define(:name, :material_name, :material_category, :primary, :joined_via, :referrer_name)
 

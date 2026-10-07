@@ -928,6 +928,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_07_100000) do
 
   create_table "users", force: :cascade do |t|
     t.datetime "anonymized_at"
+    t.datetime "app_opened_at"
     t.string "contact", limit: 10
     t.datetime "created_at", null: false
     t.string "first_name", limit: 80, null: false

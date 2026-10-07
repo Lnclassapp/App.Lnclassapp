@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# IE-01, IE-03, IE-05, IE-06, IE-09, IE-17, IE-19 (ADR-0082, UDR-0078): one sign-up page in three sections. The standard
+# IE-01, IE-03, IE-05, IE-06, IE-09, IE-17, IE-19 (ADR-0083, UDR-0079): one sign-up page in three sections. The standard
 # way chooses the DRENA, then the school, then the subject; the name and the first names are two fields (ADR-0037); the
 # number is cleaned while typed; the secret code says live whether the confirmation matches. An invite link arrives with
 # the school already chosen. Errors come back without reloading the page until the account exists.
@@ -169,7 +169,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
   end
 end
 
-# IE-17, IE-19 and UDR-0078 §2.4: without JavaScript, the DRENA is sent by its own GET form, the server cleans the number
+# IE-17, IE-19 and UDR-0079 §2.4: without JavaScript, the DRENA is sent by its own GET form, the server cleans the number
 # and refuses different codes. Chrome runs with scripts disabled.
 class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ], options: { name: :chrome_without_javascript } do |options|

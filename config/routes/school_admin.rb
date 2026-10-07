@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace direction ; tout contrôleur hérite de SchoolAdmin::BaseController
 # Rôle : lectures de la direction sur son seul établissement, et ses gestes (classes d'un niveau, enseignants, directions)
-# ADR  : 0036, 0065, 0071, 0077, 0082 · UDR : 0052, 0056, 0070, 0074, 0078 · l'établissement vient toujours du compte, jamais d'un paramètre
+# ADR  : 0036, 0065, 0071, 0077, 0083 · UDR : 0052, 0056, 0070, 0074, 0079 · l'établissement vient toujours du compte, jamais d'un paramètre
 scope "school-admin", module: "school_admin", as: "school_admin" do
   resources :classrooms, only: %i[index show], param: :public_id
   # UDR-0074 §3.8, §3.11 : la page d'un niveau, par son slug figé ; l'activité récente, frame différé de l'accueil.

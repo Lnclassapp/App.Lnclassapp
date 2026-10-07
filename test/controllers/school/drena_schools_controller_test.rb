@@ -26,7 +26,7 @@ class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "option[value='#{@elsewhere.public_id}']", count: 0
   end
 
-  # ADR-0082 §4.5, UDR-0078 §3.9: the waiting screen reuses this frame, its fields in the school_join scope.
+  # ADR-0083 §4.5, UDR-0079 §3.9: the waiting screen reuses this frame, its fields in the school_join scope.
   test "HTML: scope=school_join names the fields of the waiting screen's join form" do
     get drena_schools_path(@drena.public_id, scope: "school_join"), headers: { "Turbo-Frame" => "schools" }
 

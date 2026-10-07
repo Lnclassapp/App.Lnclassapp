@@ -1,7 +1,7 @@
 require "test_helper"
 require Rails.root.join("db/migrate/20261007100000_add_teacher_arrival_and_school_invite_tokens").to_s
 
-# ADR-0082 §4.1, §4.2 (IE-14): on a live database, every existing teacher receives an arrival channel deduced from what
+# ADR-0083 §4.1, §4.2 (IE-14): on a live database, every existing teacher receives an arrival channel deduced from what
 # is known of him (a link referral, then a join request, else the school code), and every existing school its two
 # invite tokens. Each test runs in the rolled back transaction of the test: PostgreSQL rolls the columns back with it.
 class AddTeacherArrivalAndSchoolInviteTokensMigrationTest < ActiveSupport::TestCase

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolPreviewQuery
 # Rôle : bandeau d'un lien d'invitation : nom de l'établissement et de sa DRENA, rien d'autre ; établissement actif seulement
-# ADR  : 0082 · UDR : 0078
+# ADR  : 0083 · UDR : 0079
 module Queries
   module School
     class SchoolPreviewQuery

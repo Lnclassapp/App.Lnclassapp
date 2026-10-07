@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # CE-06, CE-07, FU-26 (ADR-0057, UDR-0044, UDR-0054): on a school's page, the team reads the school code, copies it and its sign-up link,
 # and regenerates it from the ⋮ menu after a confirmation — without reloading the page. The old code stops working.
-# IE-08 (ADR-0082 §4.1, UDR-0078 §3.7): the code is for the direction; the link copied is the team's /i/<token>.
+# IE-08 (ADR-0083 §4.1, UDR-0079 §3.7): the code is for the direction; the link copied is the team's /i/<token>.
 class Teams::SchoolCodeTest < ApplicationSystemTestCase
   HEADER = "teams.schools.header".freeze
 

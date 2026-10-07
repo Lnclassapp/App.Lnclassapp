@@ -219,8 +219,8 @@ Alors son inscription fonctionne comme avant ce chantier
 
 ## 6. Décisions rattachées
 
-- [ADR-0082](../../decisions/adr/0082-inscription-enseignant-en-deux-voies.md) *(Accepté)* — inscription enseignant en deux voies : liens d'invitation à jeton sans code d'établissement, voie d'arrivée enregistrée, nom complet saisi en un champ. Amende ADR-0037 (saisie seulement, stockage inchangé), ADR-0057 et ADR-0063 (côté enseignant), ADR-0071 (« Changer le lien »), ADR-0073 (plus de demande validée automatiquement).
-- [UDR-0078](../../decisions/udr/0078-inscription-enseignant-en-deux-voies.md) *(Accepté)* — page d'inscription enseignant réordonnée, nom complet avec aperçu, bandeau du lien ; blocs de lien de l'enseignant, de la direction et de l'équipe ; voie dans la liste « Enseignants ». Remplace UDR-0044, amende UDR-0024, UDR-0050, UDR-0056.
+- [ADR-0083](../../decisions/adr/0083-inscription-enseignant-en-deux-voies.md) *(Accepté)* — inscription enseignant en deux voies : liens d'invitation à jeton sans code d'établissement, voie d'arrivée enregistrée, nom complet saisi en un champ. Amende ADR-0037 (saisie seulement, stockage inchangé), ADR-0057 et ADR-0063 (côté enseignant), ADR-0071 (« Changer le lien »), ADR-0073 (plus de demande validée automatiquement).
+- [UDR-0079](../../decisions/udr/0079-inscription-enseignant-en-deux-voies.md) *(Accepté)* — page d'inscription enseignant réordonnée, nom complet avec aperçu, bandeau du lien ; blocs de lien de l'enseignant, de la direction et de l'équipe ; voie dans la liste « Enseignants ». Remplace UDR-0044, amende UDR-0024, UDR-0050, UDR-0056.
 
 ## 7. Mesures
 

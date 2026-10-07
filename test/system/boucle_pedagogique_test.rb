@@ -3,7 +3,7 @@ require "application_system_test_case"
 # Lot E, PRD §5 (V1 gate): the whole teaching loop on a blank base, through the real buttons only — no open_in_modal,
 # no stand-in controller, no factory. The team accepts the bootstrap invitation, builds the referential, a DRENA and a
 # public lycée by import (6 « Tle D » classrooms generated), then writes and publishes a course, a sheet and an exercise;
-# the teacher signs up by the DRENA, then the school (ADR-0082), with a full name, declares a classroom and assigns the
+# the teacher signs up by the DRENA, then the school (ADR-0083), with a full name, declares a classroom and assigns the
 # exercise; the student joins by the code, plays the exercise on a phone and wins « Diamant »; the teacher issues a
 # recovery code and reads the result. Every write is wrapped in assert_no_page_reload.
 class BouclePedagogiqueTest < ApplicationSystemTestCase

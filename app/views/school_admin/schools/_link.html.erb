@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/schools/_link — lien d'invitation des enseignants de la direction (stable : ni code ni « Changer le lien ») %>
 <%# Rôle : lien /i/<jeton de la direction>, « Copier le lien », « Partager sur WhatsApp » %>
-<%# ADR  : 0071, 0082 (§4.1) · UDR : 0050, 0056, 0078 (§3.7) · Stimulus : clipboard (ui_copy_button) · WhatsApp : lien sortant %>
+<%# ADR  : 0071, 0083 (§4.1) · UDR : 0050, 0056, 0079 (§3.7) · Stimulus : clipboard (ui_copy_button) · WhatsApp : lien sortant %>
 <% link = teacher_invite_link_url(school.direction_invite_token) %>
 <div id="school_link_block">
   <p class="flex flex-col gap-1">

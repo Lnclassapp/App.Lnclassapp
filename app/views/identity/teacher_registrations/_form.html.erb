@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en trois rubriques %>
 <%# Rôle : Établissement (DRENA → liste, ou bandeau d'un lien), Vous (nom, prénoms, genre, numéro), Code secret ; 422 re-rendu %>
-<%# ADR  : 0030, 0037, 0050, 0082 · UDR : 0024, 0054, 0078 %>
+<%# ADR  : 0030, 0037, 0050, 0083 · UDR : 0024, 0054, 0079 %>
 <%# Formulaire GET de la seule DRENA (repli sans JavaScript, UDR-0024 §2.4) : son sélecteur s'y rattache par l'attribut form. %>
 <form id="teacher-signup-drena" action="<%= new_teacher_registration_path %>" method="get"></form>
 <%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",

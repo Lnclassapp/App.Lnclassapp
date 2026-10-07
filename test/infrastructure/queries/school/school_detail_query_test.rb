@@ -30,7 +30,7 @@ module Queries
         assert_equal "012345", detail.national_code
       end
 
-      test "IE-08 : l'en-tête porte le jeton du lien d'invitation de l'équipe (ADR-0082 §4.1)" do
+      test "IE-08 : l'en-tête porte le jeton du lien d'invitation de l'équipe (ADR-0083 §4.1)" do
         assert_equal @school.reload.team_invite_token, detail.team_invite_token
         assert_match(/\A\h{12}\z/, detail.team_invite_token)
       end

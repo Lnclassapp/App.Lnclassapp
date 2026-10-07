@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
 <%# Rôle : « Chercher un élève » (GET hors du frame) ; frame classroom_roster_list : compteur, une ligne par élève au numéro masqué, code de récupération dans son menu ⋮ %>
-<%# ADR  : 0028, 0032, 0060, 0067, 0082 (§4.4 bis) · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4), 0078 (§3.8 ter) · l'entrée du code vise _top %>
+<%# ADR  : 0028, 0032, 0060, 0067, 0083 (§4.4 bis) · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4), 0079 (§3.8 ter) · l'entrée du code vise _top %>
 <%# locals: (classroom:, students:, search: "") -%>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
   <h2 id="classroom_roster_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title", count: classroom.active_students_count) %></h2>
@@ -49,7 +49,7 @@
                   <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>
                   <div class="min-w-0">
                     <p class="truncate text-sm font-medium"><%= student.display_name %></p>
-                    <%# UDR-0078 §3.8 ter : la valeur masquée de la requête, telle quelle ; ni tel:, ni copie, ni reformatage. %>
+                    <%# UDR-0079 §3.8 ter : la valeur masquée de la requête, telle quelle ; ni tel:, ni copie, ni reformatage. %>
                     <% if student.contact %>
                       <%# aria-label est interdit sur un <p> : la mention passe en sr-only, le numéro masqué est caché aux lecteurs d'écran. %>
                       <p class="font-mono text-xs whitespace-nowrap text-mute" title="<%= t(".contact_masked") %>">

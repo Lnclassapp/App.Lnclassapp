@@ -40,7 +40,7 @@ module Repositories
         end
       end
 
-      test "create_teacher also creates the teacher profile, with its arrival channel (ADR-0082 §4.2)" do
+      test "create_teacher also creates the teacher profile, with its arrival channel (ADR-0083 §4.2)" do
         material = create_material
 
         result = @repository.create_teacher(user: person(contact: "0501020304"), pin: "2468", material_id: material.id,
