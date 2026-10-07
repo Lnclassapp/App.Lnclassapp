@@ -70,10 +70,11 @@ Le Lot 0 gèle le contrat `mark_app_opened(user_id:, at:) → true`. Les lots ve
 
 - **Couche**       : domaine + infrastructure + delivery
 - **Fichiers**     : `app/domain/use_cases/identity/record_app_open.rb` *(ADR-0082 §4.3)*
+                     `app/domain/policies/identity/record_app_open_policy.rb` *(ajouté à l'exécution : `UseCasePoliciesTest` exige une policy injectée, ADR-0028)*
                      `app/infrastructure/repositories/identity/user_repository.rb` *(`anonymize` remet `app_opened_at` à `NULL` ; `mark_app_opened` est livré par le Lot 0)*
                      `app/controllers/homepage_controller.rb` *(appelle le use case si `params[:source] == "app"` et un compte est connecté, puis redirige comme aujourd'hui)*
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/use_cases/identity/record_app_open_test.rb` (pose l'heure de l'horloge injectée ; un échec du port est journalisé et n'empêche pas la suite) · `test/infrastructure/repositories/identity/user_repository_test.rb` (`mark_app_opened` ; l'anonymisation efface la colonne) · `test/controllers/homepage_controller_test.rb` (CA-10 : élève sur `/?source=app` → colonne posée et redirection vers son accueil ; visiteur → page publique, rien d'écrit ; `source=autre` → rien d'écrit)
+- **Test associé** : `test/domain/policies/identity/record_app_open_policy_test.rb` · `test/domain/use_cases/identity/record_app_open_test.rb` (pose l'heure de l'horloge injectée ; un échec du port est journalisé et n'empêche pas la suite) · `test/infrastructure/repositories/identity/user_repository_test.rb` (`mark_app_opened` ; l'anonymisation efface la colonne) · `test/controllers/homepage_controller_test.rb` (CA-10 : élève sur `/?source=app` → colonne posée et redirection vers son accueil ; visiteur → page publique, rien d'écrit ; `source=autre` → rien d'écrit)
 - **Done quand**   : un élève qui touche l'icône arrive sur son accueil et son compte porte l'heure d'ouverture ; un visiteur sur `/?source=app` voit la page publique sans écriture en base
 
 > `user_repository_test.rb` est aussi cité par le Lot 0 : le Lot 0 n'y ajoute que l'assertion de colonne ; le Lot C y ajoute ses tests **après** le merge du Lot 0. Les deux ne tournent jamais en parallèle (dépendance), ce n'est pas une collision.

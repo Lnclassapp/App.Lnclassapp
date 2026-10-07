@@ -22,6 +22,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
 - `PortContractsTest` exige que chaque adaptateur implémente toute méthode de son port : un port qui gagne une méthode au Lot 0 doit être implémenté au Lot 0, pas au lot vertical. Le plan avait mis l'implémentation au Lot C.
+- `UseCasePoliciesTest` exige une `policy:` injectée dans chaque use case (ADR-0028) : l'ADR-0082 disait « aucune policy propre » pour `RecordAppOpen`. Corrigé par une policy dédiée (élève et enseignant seulement).
 - `DesignTokensTest` refuse toute couleur hexadécimale dans `app/views`, y compris le manifeste JSON : les couleurs de l'app installée vivent dans `config.x.pwa`.
 - Deux tests (`with_routing`) rendent le layout sous un jeu de routes réduit : un helper de route dans le layout les casse. Le manifeste y est déclaré par son chemin littéral.
 - Le `db/schema.rb` régénéré en local réécrit toutes les contraintes `CHECK` (version de PostgreSQL différente de la CI) : n'y garder que la vraie modification.

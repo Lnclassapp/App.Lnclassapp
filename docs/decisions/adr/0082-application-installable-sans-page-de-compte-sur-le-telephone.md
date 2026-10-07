@@ -80,7 +80,7 @@ La page « Pas de connexion » est un fichier **statique** de `public/` : elle n
 
 - Colonne `users.app_opened_at` (`datetime`, nulle, sans index : on ne la lit qu'agrégée, dans la requête du pilotage).
 - Port `Ports::Identity::UserRepositoryPort#mark_app_opened(user_id:, at:)` → `true`.
-- Use case `UseCases::Identity::RecordAppOpen(actor:)` : pose `app_opened_at` à l'heure du serveur (horloge injectée). Aucune policy propre : l'acteur ne marque que son propre compte, et seul un acteur authentifié l'appelle. Une erreur d'écriture n'empêche jamais la redirection vers l'accueil : elle est journalisée, pas avalée en silence.
+- Use case `UseCases::Identity::RecordAppOpen(actor:)` : pose `app_opened_at` à l'heure du serveur (horloge injectée). Policy `Policies::Identity::RecordAppOpenPolicy` (ADR-0028, une policy par use case ; corrigé à l'exécution, la première version disait « aucune policy propre ») : seuls un élève ou un enseignant connectés marquent leur propre compte, les seuls rôles que compte le pilotage ; tout autre acteur est refusé sans rien écrire, sans erreur. Une erreur d'écriture n'empêche jamais la redirection vers l'accueil : elle est signalée (`Rails.error`), pas avalée en silence.
 - `HomepageController#index` l'appelle quand `params[:source] == "app"` et qu'un compte est connecté, puis redirige vers l'accueil comme aujourd'hui. Toute autre valeur de `source` est ignorée.
 - `AnonymizeUser` remet `app_opened_at` à `NULL` (ADR-0036 : on ne garde pas de trace d'usage d'un compte anonymisé).
 
