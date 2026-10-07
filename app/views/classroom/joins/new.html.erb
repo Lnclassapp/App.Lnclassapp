@@ -1,6 +1,6 @@
-<%# 🌐 UI · classroom/joins/new — /c/<code> : aperçu de la classe, puis inscription (visiteur) ou bouton « Rejoindre » (élève) %>
+<%# 🌐 UI · classroom/joins/new — /c/<code> ou /c/<jeton> : aperçu, inscription (code), bouton « Rejoindre » (élève) ou classe complète (lien) %>
 <%# Rôle : code inconnu en 404, débit dépassé en 429 sans aperçu ; échec re-rendu en 422 (ou 403 avec sa raison) par Turbo %>
-<%# ADR  : 0040, 0041, 0050 · UDR : 0005, 0009 (amendée le 2026-10-02 : sans sous-titre), 0054 (§3.2 logo ; aucun focus d'arrivée), 0057 %>
+<%# ADR  : 0040, 0041, 0050, 0083 · UDR : 0005, 0009 (amendée le 2026-10-02 : sans sous-titre), 0054 (§3.2 logo ; aucun focus d'arrivée), 0057, 0079 (§3.4) %>
 <% page_title t(".page_title") %>
 <main class="grid min-h-dvh bg-paper md:grid-cols-2">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
@@ -46,7 +46,12 @@
 
           <%= render "classroom_preview", preview: @preview %>
 
-          <% if current_actor %>
+          <% if @link_full %>
+            <div id="classroom-full" role="alert" class="mt-6 flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+              <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+              <p><%= t(".classroom_full") %></p>
+            </div>
+          <% elsif current_actor %>
             <%= form_with url: join_classroom_path(@code), method: :post, id: "join-form", class: "mt-6 space-y-5" do %>
               <% if @form.errors[:base].any? %>
                 <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">

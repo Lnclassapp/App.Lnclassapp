@@ -1,0 +1,28 @@
+<%# 🌐 UI · classroom/student_registrations/_class_picker — la cascade DRENA → établissement → niveau → classe %>
+<%# Rôle : quatre listes enchaînées (Stimulus classroom--class-picker sur le formulaire hôte), chaque frame vide tant que son parent n'est pas choisi ; repli GET %>
+<%# ADR  : 0062, 0083 · UDR : 0024, 0079 (§3.3) %>
+<%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:) -%>
+<%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0079 §3.5) : schools, levels, classrooms valent nil tant que
+    leur parent n'est pas choisi. Le formulaire hôte porte le contrôleur, ses trois adresses et la cible submit. %>
+<div class="space-y-4">
+  <div class="space-y-2">
+    <%= ui_field form, :drena_public_id, as: :select, label: t(".drena"), required: true,
+                 choices: drenas.map { [ it.name, it.public_id ] }, prompt: t(".drena_prompt"),
+                 data: { action: "change->classroom--class-picker#loadSchools" } %>
+    <%# Repli sans JavaScript : la page revient en GET avec les choix faits, et le serveur rend la liste suivante. %>
+    <noscript>
+      <%= ui_button t(".continue"), type: :submit, variant: :secondary, size: :sm, icon_end: "arrow-right",
+                                    formaction: url_for(action: :new), formmethod: :get, formnovalidate: true %>
+    </noscript>
+  </div>
+
+  <%= render template: "school/drena_schools/index",
+             locals: { schools:, drena_public_id: form.object.drena_public_id, registration: form.object, scope:, picker: true } %>
+  <%= render template: "school/school_levels/index", locals: { levels:, registration: form.object, scope: } %>
+  <%= render template: "school/level_classrooms/index", locals: { classrooms:, registration: form.object, scope: } %>
+
+  <%# Une liste qui n'arrive pas (réseau, réponse sans son frame) : le contrôleur pose cet état dans le frame, son adresse en reprise. %>
+  <template data-classroom--class-picker-target="loadError">
+    <%= ui_error_state title: t(".load_error"), message: t(".load_error_message"), retry_href: "#", retry_label: t(".retry") %>
+  </template>
+</div>

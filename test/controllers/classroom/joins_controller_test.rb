@@ -3,6 +3,9 @@ require "test_helper"
 # ID-01, ID-02, ID-07, CL-06, CL-07, CL-08, TR-cadre-1, Sécurité n° 5 (ADR-0040, ADR-0041, ADR-0050, UDR-0009):
 # a visitor opens /c/<code>, sees only the classroom, its level and its school, signs up as a student and lands home,
 # signed in; a signed-in student whose classroom is archived joins the new one; any other role is refused.
+# IL-08, IL-09, IL-10 (ADR-0083 §4.1, UDR-0079 §3.4): /c/<token> — 12 hexadecimal characters — opens the student sign-up
+# with the classroom already chosen; an invalid token opens the standard page with the alert. A 5-character code keeps
+# the former path above, unchanged, until Lot F.
 class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/classroom/join_with_code_input.attributes".freeze
 
@@ -227,7 +230,149 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_archived")
   end
 
+  test "IL-08: a visitor opening the link sees the sign-up page, the classroom, its school and level already chosen" do
+    teacher = create_teacher(classrooms: [ @classroom ], last_name: "Yao", first_name: "Konan")
+    create_student(classroom: @classroom, last_name: "Bamba", first_name: "Issa")
+    token = link_token
+
+    get join_classroom_path(token.upcase)
+
+    assert_response :success
+    assert_select "h2", text: I18n.t("classroom.student_registrations.new.title")
+    assert_select "form#student-registration-form[action='#{student_registrations_path}'][method=post]" do
+      assert_select "#classroom-preview", text: /6ème 1 — Lycée Classique d'Abidjan/
+      assert_select "#classroom-preview", text: /Niveau : 6ème/
+      assert_select "input[type=hidden][name='student_registration[link_token]'][value='#{token}']"
+      assert_select "a#other-classroom[href='#{new_student_registration_path}']",
+                    text: I18n.t("classroom.student_registrations.form.other_classroom")
+      assert_select "input[name='student_registration[full_name]']"
+      assert_select "button#student-registration-submit:not([disabled])"
+    end
+    assert_select "select[name='student_registration[drena_public_id]'], turbo-frame#picker_schools, #classroom-link-invalid", 0
+    assert_select "[name*=code]", 0
+    assert_not_includes join_classroom_path(token), "kfm37"
+    [ "Yao", "Konan", "Bamba", "Issa", teacher.public_id, @classroom.public_id, "kfm37", "KFM37", "/ 80" ].each do |secret|
+      assert_not_includes response.body, secret
+    end
+  end
+
+  test "IL-10: « Ce n'est pas ta classe ? » opens the standard page without the alert" do
+    get join_classroom_path(link_token)
+    get css_select("a#other-classroom").first["href"]
+
+    assert_response :success
+    assert_select "select[name='student_registration[drena_public_id]']"
+    assert_select "#classroom-link-invalid, #classroom-preview", 0
+  end
+
+  test "IL-09: an unknown or changed token, an archived classroom or a closed school opens the standard page with the alert" do
+    token = link_token
+    archived = create_classroom(school: @school, name: "6ème 2", status: "archived")
+    closed = create_classroom(school: create_school(status: "inactive"), name: "6ème 1")
+
+    [ "cccccccccccc", archived.reload.link_token, closed.reload.link_token ].each do |invalid|
+      get join_classroom_path(invalid)
+
+      assert_redirected_to new_student_registration_path
+      follow_redirect!
+      assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("classroom.student_registrations.form.link_invalid")
+      assert_select "#classroom-preview", 0
+      assert_no_match(/6ème 2/, response.body)
+    end
+
+    @classroom.update!(link_token: "ffffffffffff")
+    get join_classroom_path(token)
+
+    assert_redirected_to new_student_registration_path
+  end
+
+  test "IL-05: the link of a full classroom shows the classroom and « Cette classe est complète. », without a form" do
+    @classroom.update!(max_students: 1)
+    create_student(classroom: @classroom)
+
+    get join_classroom_path(link_token)
+
+    assert_response :success
+    assert_select "#classroom-preview", text: /6ème 1/
+    assert_select "#classroom-full[role=alert]", text: I18n.t("classroom.joins.new.classroom_full")
+    assert_equal "Cette classe est complète.", I18n.t("classroom.joins.new.classroom_full")
+    assert_select "form, button[type=submit]", 0
+  end
+
+  test "a visitor posting to the link is sent back to the link page" do
+    post join_classroom_path(link_token), params: { join: join_params }
+
+    assert_redirected_to join_classroom_path(link_token)
+    assert_not Orm::User.exists?(contact: "0701020304")
+  end
+
+  test "a signed-in teacher receives 403 on the link page" do
+    sign_in_as create_teacher
+
+    get join_classroom_path(link_token)
+
+    assert_response :forbidden
+    assert_not_includes response.body, "6ème 1"
+  end
+
+  test "UDR-0079 §3.4: a student without a classroom sees the single « Join this classroom » button, and joins by it" do
+    archived = create_classroom(school: @school, name: "6ème 3", status: "archived")
+    student = create_student(classroom: archived)
+    sign_in_as student
+    token = link_token
+
+    get join_classroom_path(token)
+
+    assert_response :success
+    assert_select "#classroom-preview", text: /6ème 1/
+    assert_select "form#join-form[action='#{join_classroom_path(token)}'] button", text: I18n.t("classroom.joins.new.join_as_student")
+    assert_select "input[name*=pin]", 0
+
+    assert_no_difference -> { Orm::User.count } do
+      post join_classroom_path(token)
+    end
+
+    assert_redirected_to student_home_path
+    assert_equal [ @classroom.id, nil ], Orm::ClassroomStudent.where(student:, left_at: nil).pick(:classroom_id, :removed_at)
+  end
+
+  test "a student refused on the link path sees the reason on the link page" do
+    student = create_student(classroom: create_classroom(school: @school, name: "6ème 4"))
+    sign_in_as student
+
+    post join_classroom_path(link_token)
+
+    assert_response :unprocessable_entity
+    assert_select "#classroom-preview", text: /6ème 1/
+    assert_select "[role=alert]", text: I18n.t("#{ERRORS}.base.already_enrolled")
+  end
+
+  test "UDR-0079 §3.4: an invalid link sends a student without a classroom to « Choose your classroom », with the alert" do
+    sign_in_as create_student
+
+    get join_classroom_path("cccccccccccc")
+
+    assert_redirected_to new_student_classroom_choice_path
+    assert flash[:link_invalid]
+
+    post join_classroom_path("cccccccccccc")
+
+    assert_redirected_to new_student_classroom_choice_path
+  end
+
+  test "ADR-0083 §4.2: the link page shares the limit of 10 openings a minute" do
+    token = link_token
+    10.times { |index| get join_classroom_path(index.even? ? token : "cccccccccccc") }
+
+    get join_classroom_path(token)
+
+    assert_response :too_many_requests
+    assert_not_includes response.body, "6ème 1"
+  end
+
   private
+
+  def link_token = @classroom.reload.link_token
 
   def join_params(**overrides)
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",

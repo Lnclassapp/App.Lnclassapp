@@ -1,4 +1,4 @@
-# Rejoindre une classe par son code : saisie du code, aperçu de /c/<code>, inscription de l'élève (plan boucle-pedagogique, Lot A1) — ADR-0040, ADR-0041, ADR-0050, UDR-0007, UDR-0009 (amendée le 2026-10-02, interface-epuree Lot E), UDR-0054
+# Rejoindre une classe par son code ou par son lien : saisie du code, aperçu de /c/<code> et de /c/<jeton>, inscription de l'élève (plan boucle-pedagogique, Lot A1) — ADR-0040, ADR-0041, ADR-0050, ADR-0083, UDR-0007, UDR-0009 (amendée le 2026-10-02, interface-epuree Lot E), UDR-0054, UDR-0079
 fr:
   activemodel:
     attributes:
@@ -16,6 +16,8 @@ fr:
             base:
               classroom_archived: "Cette classe est archivée. Demande le code de ta nouvelle classe à ton enseignant."
               classroom_full: "Cette classe est complète. Préviens ton enseignant."
+              # ADR-0083 §4.3 : l'élève retiré ne revient pas par la voie standard, seulement par le lien.
+              removed_from_classroom: "Tu ne peux pas rejoindre cette classe. Demande son lien à ton enseignant."
               join_code_revoked: "Ce code de classe n'est plus valable. Demande le nouveau code à ton enseignant."
               already_enrolled: "Tu es déjà inscrit dans une classe."
               already_member: "Tu es déjà inscrit dans cette classe."
@@ -68,6 +70,8 @@ fr:
         have_account: "Déjà un compte ?"
         sign_in: "Se connecter"
         rate_limited_title: "Trop de tentatives"
+        # UDR-0079 §3.4 : le lien d'une classe complète l'affiche, sans formulaire.
+        classroom_full: "Cette classe est complète."
         invalid_code:
           title: "Code de classe invalide."
           description: "Vérifie le code auprès de ton enseignant, puis saisis-le de nouveau."

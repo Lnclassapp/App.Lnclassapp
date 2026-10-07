@@ -1,0 +1,107 @@
+# Inscription élève sans code de classe : voie standard (DRENA → établissement → niveau → classe) et lien de classe, et les deux listes publiques de la cascade — ADR-0050, ADR-0082, ADR-0083, UDR-0007, UDR-0054, UDR-0078, UDR-0079
+fr:
+  activemodel:
+    attributes:
+      dtos/classroom/student_registration_input:
+        full_name: "Nom complet"
+        last_name: "Nom"
+        first_name: "Prénom(s)"
+        gender: "Genre"
+        contact: "Numéro de téléphone"
+        pin: "PIN"
+        pin_confirmation: "Confirmation du PIN"
+        drena_public_id: "DRENA"
+        school_public_id: "Établissement"
+        level_slug: "Niveau"
+        classroom_public_id: "Classe"
+    errors:
+      models:
+        dtos/classroom/student_registration_input:
+          attributes:
+            base:
+              classroom_full: "Cette classe est complète."
+              classroom_archived: "Cette classe est archivée. Choisis ta classe."
+              already_enrolled: "Tu es déjà inscrit dans une classe."
+              already_member: "Tu es déjà inscrit dans cette classe."
+            full_name:
+              blank: "Saisis ton nom et tes prénoms."
+              single_word: "Saisis ton nom et tes prénoms."
+              too_long: "Le nom compte %{count} caractères au plus."
+              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
+            last_name:
+              blank: "Saisis ton nom."
+              too_long: "Le nom compte %{count} caractères au plus."
+              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
+            first_name:
+              blank: "Saisis ton ou tes prénoms."
+              too_long: "Les prénoms comptent %{count} caractères au plus."
+              invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
+            gender:
+              inclusion: "Choisis ton genre."
+            contact:
+              blank: "Saisis ton numéro de téléphone."
+              invalid: "Saisis un numéro ivoirien à 10 chiffres, par exemple 07 01 02 03 04."
+              taken: "Ce numéro est déjà utilisé."
+            pin:
+              blank: "Choisis un PIN à 4 chiffres."
+              invalid: "Le PIN compte 4 chiffres."
+            pin_confirmation:
+              confirmation: "Les deux PIN ne sont pas identiques."
+            classroom_public_id:
+              blank: "Choisis ta classe."
+              unavailable: "Cette classe n'est pas disponible. Choisis-en une dans la liste."
+  classroom:
+    student_registrations:
+      new:
+        page_title: "Inscription élève"
+        logo_home: "Lnclass, accueil"
+        welcome: "Bienvenue sur Lnclass"
+        welcome_hint: "Ton espace d'apprentissage pour mieux comprendre tes cours, t'exercer et réussir tes examens."
+        title: "Créer ton compte élève"
+        subtitle: "Trois rubriques, une minute."
+        have_account: "Déjà un compte ?"
+        sign_in: "Se connecter"
+        rate_limited_title: "Trop de tentatives"
+      form:
+        link_invalid: "Ce lien n'est plus valable. Choisis ta classe."
+        classroom: "Ta classe"
+        other_classroom: "Ce n'est pas ta classe ?"
+        you: "Toi"
+        full_name_placeholder: "Ex. : KOUASSI Aya Marie"
+        full_name_hint: "Ton nom, puis tes prénoms."
+        preview_last: "Nom :"
+        preview_first: "Prénom(s) :"
+        correct_name: "Corriger le nom ou les prénoms"
+        contact_placeholder: "0701020304"
+        contact_hint: "10 chiffres, par ex. 0701020304. Il te servira à te connecter."
+        security: "Code secret"
+        pin_hint: "4 chiffres, que toi seul connais."
+        pin_match:
+          ok: "Les codes concordent."
+          ko: "Les codes ne concordent pas."
+        submit: "Créer mon compte"
+      # UDR-0079 §3.3 : la cascade, partagée par l'inscription et par « Choisis ta classe » ; ses trois listes y puisent leurs textes.
+      class_picker:
+        drena: "DRENA"
+        drena_prompt: "Choisis ta DRENA"
+        continue: "Continuer"
+        school_prompt: "Choisis ton établissement"
+        level: "Niveau"
+        level_prompt: "Choisis ton niveau"
+        classroom: "Classe"
+        full: "Complète"
+        not_found_title: "Ta classe n'est pas encore sur Lnclass."
+        not_found_description: "Préviens ton enseignant ou la direction de ton établissement."
+        load_error: "Impossible de charger la liste."
+        load_error_message: "Vérifie ta connexion, puis réessaie."
+        rate_limited: "Trop de tentatives. Réessaie dans une minute."
+        retry: "Réessayer"
+      create:
+        welcome: "Bienvenue dans ta classe !"
+  school:
+    school_levels:
+      index:
+        page_title: "Niveaux de l'établissement"
+    level_classrooms:
+      index:
+        page_title: "Classes du niveau"
