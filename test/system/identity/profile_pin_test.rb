@@ -16,7 +16,7 @@ class Identity::ProfilePinTest < ApplicationSystemTestCase
     fill_in "pin_change[current_pin]", with: current
     fill_in "pin_change[pin]", with: pin
     fill_in "pin_change[pin_confirmation]", with: confirmation
-    click_on "Changer mon PIN"
+    click_on "Changer mon code secret"
   end
 
   test "a teacher changes the PIN; the other browser is signed out; only the new PIN signs in" do
@@ -29,14 +29,14 @@ class Identity::ProfilePinTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open]" do
         fill_in_pins "2468", "1357", "1358"
 
-        assert_selector "#pin_change_pin_confirmation_error", text: "Les deux PIN ne sont pas identiques."
+        assert_selector "#pin_change_pin_confirmation_error", text: "Les deux codes secrets ne sont pas identiques."
         %w[current_pin pin pin_confirmation].each { assert_field "pin_change[#{it}]", with: "" }
       end
     end
     within("turbo-frame#modal dialog[open]") { fill_in_pins "2468", "1357", "1357" }
 
     assert_current_path profile_path
-    assert_toast "Votre PIN est changé."
+    assert_toast "Votre code secret est changé."
     assert_no_selector "turbo-frame#modal dialog[open]"
 
     using_session(:other_device) do
@@ -49,7 +49,7 @@ class Identity::ProfilePinTest < ApplicationSystemTestCase
     fill_in "session[contact]", with: teacher.contact
     fill_in "session[pin]", with: "2468"
     click_on I18n.t("identity.sessions.new.submit")
-    assert_selector "[role=alert]", text: "Numéro ou PIN incorrect."
+    assert_selector "[role=alert]", text: "Code secret ou numéro incorrect."
 
     sign_in_as teacher, pin: "1357"
     assert_current_path teacher_home_path

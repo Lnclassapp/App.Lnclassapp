@@ -9,7 +9,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: "Connexion"
     assert_select "input[type=tel][name='session[contact]'][maxlength='15'][placeholder='07 00 00 00 00']"
     assert_select "input[type=password][name='session[pin]'][inputmode=numeric]"
-    assert_select "a[href='#{new_identity_pin_reset_path}']", text: "PIN oublié ?"
+    assert_select "a[href='#{new_identity_pin_reset_path}']", text: "Code secret oublié ?"
   end
 
   test "FU-03, FU-19: the page is « Connexion · Lnclass », its logo leads home, the number is the autofocus target" do
@@ -19,7 +19,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{root_path}'][aria-label='Lnclass, accueil'] img[alt='']", 2
     assert_select "input[name='session[contact]'][autocomplete=username][data-autofocus-target=field]:not([autofocus])"
     assert_select "input[name='session[pin]'][autocomplete=current-password]:not([data-autofocus-target])"
-    assert_select "details summary .sr-only", "Aide : PIN"
+    assert_select "details summary .sr-only", "Aide : Code secret"
     assert_select "details", text: /Code secret de 4 chiffres, choisi à l'inscription/
   end
 
@@ -36,7 +36,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_pin_hint", 0
     assert_select "details div", text: "Code secret de 4 chiffres, choisi à l'inscription."
     assert_equal 1, response.body.scan("4 chiffres").size
-    assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "PIN oublié ?"
+    assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "Code secret oublié ?"
   end
 
   test "UDR-0060 §3.2: the two columns start at lg; below, the welcome column is hidden" do
@@ -103,7 +103,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     post session_path, params: { session: { contact: " 01 #{student.contact[2..]}", pin: "1357" } }
 
     assert_response :unprocessable_entity
-    assert_select "[role=alert]", text: "Numéro ou PIN incorrect."
+    assert_select "[role=alert]", text: "Code secret ou numéro incorrect."
     assert_select "input[name='session[contact]'][value=?]", " 01 #{student.contact[2..]}"
     assert_select "input[name='session[pin]']:not([value])"
   end
@@ -120,7 +120,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     unknown_number = css_select("[role=alert]").map { it.text.squish }
 
     assert_response :unprocessable_entity
-    assert_equal [ "Numéro ou PIN incorrect." ], wrong_pin
+    assert_equal [ "Code secret ou numéro incorrect." ], wrong_pin
     assert_equal wrong_pin, unknown_number
     assert_select "input[name='session[pin]'][type=password]:not([value])"
     assert_select "input[value='1357']", 0
@@ -144,7 +144,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     post session_path, params: { session: { contact: "0700000000", pin: "12" } }
 
     assert_response :unprocessable_entity
-    assert_select "#session_pin_error", text: "Le PIN compte 4 chiffres."
+    assert_select "#session_pin_error", text: "Le code secret compte 4 chiffres."
   end
 
   test "a locked number receives 429 and the unlock time" do

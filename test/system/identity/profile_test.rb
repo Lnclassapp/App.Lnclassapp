@@ -51,7 +51,7 @@ end
       assert_text "Tle D 1"
       assert_text "1 septembre 2026"
     end
-    assert_selector "#profile_security a", text: "Changer mon PIN"
+    assert_selector "#profile_security a", text: "Changer mon code secret"
 
     assert_no_page_reload do
       within("#profile_information") { click_on "Modifier" }
@@ -105,10 +105,10 @@ end
         assert_link "Ajouter une photo"
       end
       within "#profile_security" do
-        assert_no_text "Ton PIN protège ton compte."
-        find("details summary", text: "Aide : Mon PIN").click
-        assert_text "Ton PIN protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
-        assert_link "Changer mon PIN"
+        assert_no_text "Ton code secret protège ton compte."
+        find("details summary", text: "Aide : Mon code secret").click
+        assert_text "Ton code secret protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
+        assert_link "Changer mon code secret"
       end
       # UDR-0041, amendment of 2026-10-06: one button style, each action at least 44 px high.
       heights = all("#main a[data-turbo-frame=modal]").map { page.evaluate_script("arguments[0].getBoundingClientRect().height", it) }
@@ -129,7 +129,7 @@ end
       assert_text "Lycée Classique d'Abidjan"
       assert_text "SVT"
     end
-    within("#profile_security") { assert_text "Votre PIN protège votre compte." }
+    within("#profile_security") { assert_text "Votre code secret protège votre compte." }
     sign_out
 
     sign_in_as create_team_member(team_role: "content")

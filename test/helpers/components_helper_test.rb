@@ -251,11 +251,11 @@ class ComponentsHelperTest < ActionView::TestCase
 
   test "an invalid PIN keeps its error wiring next to the reveal button" do
     record = Record.new
-    record.errors.add(:pin, "PIN incorrect.")
+    record.errors.add(:pin, "Code secret incorrect.")
     show view.fields(:user, model: record) { |form| ui_field(form, :pin, as: :password, reveal: true) }
 
     assert_select "input#user_pin.border-error[aria-invalid=true][aria-describedby=user_pin_error]"
-    assert_select "p#user_pin_error", text: "PIN incorrect."
+    assert_select "p#user_pin_error", text: "Code secret incorrect."
   end
 
   # --- Groupe de boutons radio ------------------------------------------------
