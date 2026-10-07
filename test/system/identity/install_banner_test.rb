@@ -1,12 +1,13 @@
 require "application_system_test_case"
 
-# CA-5 to CA-8 (chantier installation-pwa, UDR-0078 §3.1): the install banner on a phone, in a real Chrome. The browser's
+# CA-5 to CA-8 (chantier installation-pwa, UDR-0078 §3.1, amended 2026-10-07): the install pop-up on the home page of a
+# phone, in a real Chrome. The browser's
 # `beforeinstallprompt` is simulated from the page, with a stubbed `prompt()` and `userChoice`; the iPhone by Safari's user
 # agent; the installed app by a `matchMedia` answering `(display-mode: standalone)`, set before the page's scripts run.
 # Two sign-ins only (ADR-0069 §9, system budget); the texts of each role are checked on the HTML by
 # test/integration/identity/install_banner_test.rb.
 class Identity::InstallBannerTest < ApplicationSystemTestCase
-  BANNER = "section#install_banner".freeze
+  BANNER = "dialog#install_banner".freeze
   STORAGE_KEY = "lnclass.install.later_until".freeze
   IPHONE_SAFARI = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) " \
                   "Version/17.5 Mobile/15E148 Safari/604.1".freeze
@@ -20,28 +21,29 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
 
   def tb(key) = I18n.t("shared.navigation.install_banner.#{key}")
 
-  test "CA-5, CA-6 — on Android, the student sees the banner; « Plus tard » hides it 3 days, « Installer » opens the browser's window" do
+  test "CA-5, CA-6 — on Android, the student's home opens the pop-up; « Plus tard » or Escape silence it 3 days, « Installer » opens the browser's window" do
     sign_in_as create_student(classroom: create_classroom)
     open_home student_home_path
     offer_install
-    assert_no_selector BANNER # écran ≥ lg : jamais de bandeau
+    assert_no_selector BANNER # écran ≥ lg : jamais de pop-up
 
     with_mobile_viewport do
+      open_home student_home_path
+      offer_install
       within(BANNER) do
-        assert_selector "#install_banner_title", text: tb("title.student")
+        assert_selector "#install_banner-title", text: tb("title.student")
         assert_text tb("body.student")
         assert_button tb(:install)
         assert_no_selector "ol"
       end
 
-      # CA-6: « Plus tard », on this phone only: nothing reaches the server, the page stays, the focus goes to the content.
+      # CA-6: « Plus tard », on this phone only: nothing reaches the server, the page stays.
       requests = resource_requests
       page.execute_script("window.samePage = true")
       click_button tb(:later)
 
       assert_no_selector BANNER
       assert_in_delta 3.days.from_now.to_f * 1000, later_until, 60_000
-      assert_equal "main", evaluate_script("document.activeElement.id")
       assert evaluate_script("window.samePage")
       assert_equal requests, resource_requests
 
@@ -50,7 +52,16 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
       offer_install
       assert_no_selector BANNER
 
-      # The three days are over: the banner comes back; « Installer » opens the browser's window, accepted.
+      # Escape (or the cross, or the backdrop) counts as « Plus tard ».
+      store_later_until(1.minute.ago)
+      open_home student_home_path
+      offer_install
+      assert_selector BANNER
+      find(BANNER).send_keys(:escape)
+      assert_no_selector BANNER
+      assert_in_delta 3.days.from_now.to_f * 1000, later_until, 60_000
+
+      # The three days are over: the pop-up comes back; « Installer » opens the browser's window, accepted.
       store_later_until(1.minute.ago)
       open_home student_home_path
       offer_install
@@ -77,7 +88,7 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
       with_mobile_viewport do
         open_home teacher_home_path
         within(BANNER) do
-          assert_selector "#install_banner_title", text: tb("title.teacher")
+          assert_selector "#install_banner-title", text: tb("title.teacher")
           assert_equal [ "1 Touchez Partager", "2 Puis Sur l'écran d'accueil" ], all("ol > li").map { it.text.squish }
           assert_no_button tb(:install)
           assert_button tb(:later)
@@ -106,10 +117,10 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
   def open_home(path)
     visit path
     assert_current_path path
-    assert_selector "#{BANNER}[data-controller=install]", visible: :all
+    assert_selector "[data-controller=install] #{BANNER}", visible: :all
     page.document.synchronize do
       connected = evaluate_script(<<~JS)
-        !!window.Stimulus?.getControllerForElementAndIdentifier(document.getElementById("install_banner"), "install")
+        !!window.Stimulus?.getControllerForElementAndIdentifier(document.querySelector("[data-controller=install]"), "install")
       JS
       raise Capybara::ExpectationNotMet, "le contrôleur install n'est pas encore branché" unless connected
     end

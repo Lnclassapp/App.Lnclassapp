@@ -1,11 +1,12 @@
-// ⚡ FRONT · install_controller — bandeau d'installation : « Installer » sur Android, mode d'emploi sur Safari iPhone
-// Rôle : montre le bandeau caché par le serveur ; « Plus tard » le tait 3 jours sur ce téléphone (localStorage, jamais le serveur)
-// UDR  : 0078 · ADR : 0082, 0049
+// ⚡ FRONT · install_controller — pop-up d'installation : « Installer » sur Android, mode d'emploi sur Safari iPhone
+// Rôle : ouvre la feuille (contrôleur modal) sur l'accueil, téléphone seulement ; fermée sans installer, elle se tait 3 jours sur ce téléphone (localStorage, jamais le serveur)
+// UDR  : 0078 (amendement du 2026-10-07) · ADR : 0082, 0049
 import { Controller } from "@hotwired/stimulus"
 
 const STORAGE_KEY = "lnclass.install.later_until"
 const LATER_DAYS = 3
 const DAY = 24 * 60 * 60 * 1000
+const COMPUTER = "(min-width: 64rem)"
 
 // Le navigateur n'annonce l'installation qu'une fois par document : gardée ici, elle sert encore après une visite Turbo.
 let deferred = null
@@ -15,10 +16,9 @@ export default class extends Controller {
 
   connect() {
     this.offer = this.offer.bind(this)
-    this.hide = this.hide.bind(this)
-    this.reveal = this.reveal.bind(this)
+    this.installed = this.installed.bind(this)
     if (window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true) return
-    if (this.laterUntil() > Date.now()) return
+    if (window.matchMedia(COMPUTER).matches || this.laterUntil() > Date.now()) return
 
     const agent = navigator.userAgent
     if (/iPhone|iPad/.test(agent) && !/CriOS|FxiOS|EdgiOS/.test(agent)) {
@@ -27,15 +27,12 @@ export default class extends Controller {
       if (deferred) this.show(this.androidTarget)
       window.addEventListener("beforeinstallprompt", this.offer)
     }
-    window.addEventListener("appinstalled", this.hide)
-    // Un rafraîchissement fusionné (morph) remet le `hidden` du serveur sans reconnecter le contrôleur.
-    document.addEventListener("turbo:morph", this.reveal)
+    window.addEventListener("appinstalled", this.installed)
   }
 
   disconnect() {
     window.removeEventListener("beforeinstallprompt", this.offer)
-    window.removeEventListener("appinstalled", this.hide)
-    document.removeEventListener("turbo:morph", this.reveal)
+    window.removeEventListener("appinstalled", this.installed)
   }
 
   offer(event) {
@@ -51,18 +48,31 @@ export default class extends Controller {
     try {
       await event.prompt()
       const { outcome } = await event.userChoice
-      outcome === "accepted" ? this.hide() : this.later()
+      outcome === "accepted" ? this.installed() : this.later()
     } catch {
       this.later()
     }
   }
 
+  // « Plus tard », la croix, Échap ou le fond : la feuille se tait 3 jours sur ce téléphone.
   later() {
+    this.remember()
+    this.modal?.close()
+  }
+
+  dismissed(event) {
+    if (event.target.id === "install_banner" && !this.done) this.remember()
+  }
+
+  installed() {
+    this.done = true
+    this.modal?.close()
+  }
+
+  remember() {
     try {
       localStorage.setItem(STORAGE_KEY, String(Date.now() + LATER_DAYS * DAY))
     } catch {}
-    this.hide()
-    document.getElementById("main")?.focus()
   }
 
   laterUntil() {
@@ -73,19 +83,14 @@ export default class extends Controller {
     }
   }
 
+  // Le contrôleur modal de la feuille se connecte juste après celui-ci : on l'attend une microtâche.
   show(target) {
-    this.shown = target
-    this.reveal()
+    target.hidden = false
+    queueMicrotask(() => this.modal?.open())
   }
 
-  reveal() {
-    if (!this.shown) return
-    this.shown.hidden = false
-    this.element.hidden = false
-  }
-
-  hide() {
-    this.shown = null
-    this.element.hidden = true
+  get modal() {
+    const element = this.element.querySelector("[data-controller~='modal']")
+    return element && this.application.getControllerForElementAndIdentifier(element, "modal")
   }
 }

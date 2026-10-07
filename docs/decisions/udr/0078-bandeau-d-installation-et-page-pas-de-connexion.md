@@ -137,3 +137,42 @@ Dans la carte « Sur la période » (`#team_dashboard_period`), **après** la tu
 - Aucun autre écran ne propose l'installation : un futur bouton « Installer » ailleurs (profil, aide) réutilise le contrôleur `install` et ce mode d'emploi, sans nouvelle règle.
 - Interdit : un bandeau d'installation fixé en bas d'écran, une fenêtre modale d'installation, un bandeau pour la direction, l'équipe ou les pages publiques, une mémorisation du choix sur le serveur.
 - La page « Pas de connexion » ne suit pas les composants ERB ni la feuille de l'application : toute évolution du design system qui doit l'atteindre se recopie à la main dans `offline.css`, et le numéro de cache du programme d'arrière-plan augmente.
+
+## Amendement du 2026-10-07 — une pop-up, sur l'accueil seulement
+
+*Décision du porteur, après les captures du bandeau. En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+**Ce qui change**
+
+1. **Une pop-up, plus un bandeau.** L'invitation est une `ui_modal` en feuille basse (`placement: :sheet`, `size: :sm`, UDR-0061 §3.3) : elle monte du bas sur téléphone. Elle remplace §2.1 et la structure de §3.1. L'interdit de §4 sur la fenêtre modale d'installation est levé.
+2. **Sur l'accueil seulement** : `classroom/student_homes/show` et `classroom/teacher_homes/show` rendent `shared/navigation/install_banner` avec `role:` en dernier. Le shell ne le rend plus (UDR-0006 retrouve son texte). Aucune autre page n'en porte, « Ma classe » comprise.
+3. **Téléphone seulement** : le contrôleur n'ouvre rien quand `(min-width: 64rem)` est vrai.
+
+**Structure**
+
+```
+div[data-controller="install"][data-action="close->install#dismissed:capture"]
+  ui_modal id: "install_banner", title: t(".title.<role>"), size: :sm, placement: :sheet
+    div.flex.items-start.gap-3
+      img[src="/icon-192.png"][alt=""].size-12.shrink-0.rounded-ln
+      div.min-w-0.flex-1
+        p.text-sm.text-mute                                  → t(".body.<role>")
+        ol.mt-3.grid.gap-2.text-sm.text-ink[data-install-target="ios"][hidden]  → les deux étapes (§3.1.2, pastilles bg-brand-soft)
+    footer
+      ui_button t(".later"), variant: :ghost, data-action install#later
+      ui_button t(".install"), variant: :primary, icon: "arrow-down-tray", hidden, data-install-target android, data-action install#prompt
+```
+
+Le titre est le `h2` de la modale (`#install_banner-title`) : il vit dans la couche supérieure, hors de l'ordre des titres de la page. La croix, Échap et le fond ferment la modale, comme toute `ui_modal`.
+
+**Comportement (remplace §3.1.1)**
+
+- `connect()` s'arrête sans rien ouvrir en mode `standalone`, sur un écran ≥ 64rem, ou si « Plus tard » date de moins de 3 jours.
+- Sur Safari iPhone, il montre les deux étapes ; sur Android, il attend `beforeinstallprompt` et montre « Installer ». Il ouvre ensuite la modale par son contrôleur `modal`, une microtâche plus tard, le temps que ce contrôleur se connecte.
+- Toute fermeture sans installation (« Plus tard », croix, Échap, fond) écrit `lnclass.install.later_until` = maintenant + 3 jours. L'événement `close` de la `<dialog>` ne remonte pas : on l'écoute en phase de capture.
+- Après une installation acceptée, ou après `appinstalled`, la modale se ferme sans rien écrire.
+
+**Conséquences**
+
+- La règle R2 de sobriété n'est plus en jeu : la pop-up ne prend aucune place dans la page.
+- La pop-up couvre l'accueil à la première visite sur téléphone, puis au plus une fois tous les 3 jours. C'est le prix de la visibilité, choisi par le porteur.

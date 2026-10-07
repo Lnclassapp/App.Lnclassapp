@@ -24,7 +24,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   setup { ActiveJob::Base.queue_adapter.perform_enqueued_jobs = false }
 
   # UDR-0078 §4: Chrome finds the site installable (manifest and service worker, ADR-0082) and fires a real
-  # `beforeinstallprompt` whenever it likes, which would show the install banner in the middle of any test. The real event
+  # `beforeinstallprompt` whenever it likes, which would open the install pop-up in the middle of any home page test. The real event
   # is stopped before the page's scripts see it; the banner's own tests dispatch a simulated one, which goes through.
   IGNORE_BROWSER_INSTALL_PROMPT = <<~JS.freeze
     window.addEventListener("beforeinstallprompt", (event) => { if (event.isTrusted) event.stopImmediatePropagation() }, true)

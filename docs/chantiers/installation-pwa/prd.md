@@ -23,7 +23,7 @@ Règles d'autorisation : la fiche d'application, le programme d'arrière-plan et
 ### Chemin nominal — Android
 
 1. Awa, élève, se connecte sur Chrome Android. Le navigateur annonce que le site est installable.
-2. Un bandeau apparaît au-dessus de la barre de navigation basse : « Installe Lnclass sur ton téléphone » avec « Installer » et « Plus tard ».
+2. Sur son accueil, une pop-up monte du bas de l'écran : « Installe Lnclass sur ton téléphone » avec « Installer » et « Plus tard » *(amendement du 2026-10-07 : pop-up, accueil seulement)*.
 3. Awa touche « Installer » : la fenêtre d'installation du navigateur s'ouvre ; elle accepte. Le bandeau disparaît.
 4. L'icône « Lnclass » (le baobab sur fond bleu) est sur son écran d'accueil. En la touchant, Lnclass s'ouvre en plein écran, sans barre d'adresse, sur son accueil.
 5. Le serveur note qu'Awa a ouvert Lnclass depuis l'app installée ; l'équipe la compte dans son pilotage.
@@ -77,10 +77,10 @@ Quand le réseau est coupé et qu'il revient sur son accueil
 Alors il voit la page « Pas de connexion », pas son accueil
 Et le stockage du programme d'arrière-plan ne contient que la page « Pas de connexion », sa feuille de style et le logo
 
-# CA-5 — Bandeau Android, élève et enseignant
+# CA-5 — Pop-up Android, élève et enseignant, sur l'accueil seulement
 Étant donné un élève connecté sur un téléphone Android dont le navigateur annonce que le site est installable
 Quand il ouvre son accueil
-Alors il voit le bandeau « Installe Lnclass sur ton téléphone » avec « Installer » et « Plus tard »
+Alors une pop-up s'ouvre « Installe Lnclass sur ton téléphone » avec « Installer » et « Plus tard »
 Et quand il touche « Installer », la fenêtre d'installation du navigateur s'ouvre
 
 # CA-6 — « Plus tard » pendant 3 jours, sur ce téléphone

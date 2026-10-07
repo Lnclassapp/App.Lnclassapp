@@ -1,29 +1,29 @@
-<%# 🌐 UI · shared/navigation/_install_banner — bandeau d'installation de l'app, élève et enseignant, sur téléphone %>
-<%# Rôle : caché par défaut ; le contrôleur Stimulus install le montre (Android installable, ou Safari iPhone) — Lot B %>
-<%# UDR  : 0078 · ADR : 0082 %>
+<%# 🌐 UI · shared/navigation/_install_banner — invitation à installer l'app, en pop-up, sur l'accueil élève et enseignant %>
+<%# Rôle : feuille basse (ui_modal placement: :sheet) ouverte par le contrôleur install, sur téléphone seulement : Android installable, ou Safari iPhone %>
+<%# UDR  : 0078 (amendement du 2026-10-07 : pop-up, accueil seul), 0061 · ADR : 0082 %>
 <%# locals: (role:) -%>
-<section id="install_banner" class="mb-5 rounded-card border border-line bg-brand-soft p-4 lg:hidden" hidden
-         aria-labelledby="install_banner_title" data-controller="install">
-  <div class="flex items-start gap-3">
-    <%= tag.img src: "/icon-192.png", alt: "", width: 48, height: 48, class: "size-12 shrink-0 rounded-ln" %>
-    <div class="min-w-0 flex-1">
-      <p id="install_banner_title" class="font-display text-base font-extrabold text-ink"><%= t(".title.#{role}") %></p>
-      <p class="mt-1 text-sm text-mute"><%= t(".body.#{role}") %></p>
-      <%# §3.1.2 : la liste ordonnée donne l'ordre aux lecteurs d'écran ; pastilles et icônes sont décoratives. %>
-      <ol class="mt-2 grid gap-1 text-sm text-ink" data-install-target="ios" hidden>
-        <% { ios_share: "arrow-up-on-square", ios_add: "plus-circle" }.each.with_index(1) do |(key, icon), step| %>
-          <li class="flex items-center gap-2">
-            <span class="grid size-6 place-items-center rounded-full bg-white text-xs font-bold text-brand-strong" aria-hidden="true"><%= step %></span>
-            <span><%= t(".#{key}.#{role}_html") %></span>
-            <%= ui_icon icon, size: :sm %>
-          </li>
-        <% end %>
-      </ol>
-      <div class="mt-3 flex flex-wrap gap-2">
-        <%= ui_button t(".install"), variant: :secondary, size: :sm, icon: "arrow-down-tray", hidden: true,
-                      data: { install_target: "android", action: "install#prompt" } %>
-        <%= ui_button t(".later"), variant: :ghost, size: :sm, data: { action: "install#later" } %>
+<div data-controller="install" data-action="close->install#dismissed:capture">
+  <%= ui_modal id: "install_banner", title: t(".title.#{role}"), size: :sm, placement: :sheet do |modal| %>
+    <div class="flex items-start gap-3">
+      <%= tag.img src: "/icon-192.png", alt: "", width: 48, height: 48, class: "size-12 shrink-0 rounded-ln" %>
+      <div class="min-w-0 flex-1">
+        <p class="text-sm text-mute"><%= t(".body.#{role}") %></p>
+        <%# §3.1.2 : la liste ordonnée donne l'ordre aux lecteurs d'écran ; pastilles et icônes sont décoratives. %>
+        <ol class="mt-3 grid gap-2 text-sm text-ink" data-install-target="ios" hidden>
+          <% { ios_share: "arrow-up-on-square", ios_add: "plus-circle" }.each.with_index(1) do |(key, icon), step| %>
+            <li class="flex items-center gap-2">
+              <span class="grid size-6 place-items-center rounded-full bg-brand-soft text-xs font-bold text-brand-strong" aria-hidden="true"><%= step %></span>
+              <span><%= t(".#{key}.#{role}_html") %></span>
+              <%= ui_icon icon, size: :sm %>
+            </li>
+          <% end %>
+        </ol>
       </div>
     </div>
-  </div>
-</section>
+    <% modal.footer do %>
+      <%= ui_button t(".later"), variant: :ghost, data: { action: "install#later" } %>
+      <%= ui_button t(".install"), variant: :primary, icon: "arrow-down-tray", hidden: true,
+                    data: { install_target: "android", action: "install#prompt" } %>
+    <% end %>
+  <% end %>
+</div>
