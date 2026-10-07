@@ -59,8 +59,8 @@ Le Lot 0 gèle le contrat `mark_app_opened(user_id:, at:) → true`. Les lots ve
 - **Fichiers**     : `app/views/shared/navigation/_install_banner.html.erb` *(contenu, UDR-0078 §3.1)*
                      `app/javascript/controllers/install_controller.js` *(UDR-0078 §3.1.1 ; enregistré automatiquement par `controllers/index.js`)*
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/system/identity/install_banner_test.rb` (CA-5 : événement `beforeinstallprompt` simulé → bandeau, « Installer » appelle `prompt()` ; CA-6 : horloge du navigateur avancée de 6 puis 8 jours, aucune requête vers le serveur au clic ; CA-7 : User-Agent de Safari iPhone → deux étapes, pas de bouton « Installer » ; CA-8 : `display-mode: standalone` émulé → pas de bandeau) · `test/integration/identity/install_banner_test.rb` (CA-9 : le HTML de la direction, de l'équipe et de la page publique ne contient pas `install_banner` ; celui de l'élève et de l'enseignant le contient avec `hidden`)
-- **Done quand**   : un élève connecté sur Chrome Android voit « Installe Lnclass sur ton téléphone » ; « Plus tard » le fait disparaître pour 7 jours sur ce téléphone ; un enseignant sur iPhone voit les deux étapes ; un compte direction ne voit rien
+- **Test associé** : `test/system/identity/install_banner_test.rb` (CA-5 : événement `beforeinstallprompt` simulé → bandeau, « Installer » appelle `prompt()` ; CA-6 : horloge du navigateur avancée de 2 puis 4 jours, aucune requête vers le serveur au clic ; CA-7 : User-Agent de Safari iPhone → deux étapes, pas de bouton « Installer » ; CA-8 : `display-mode: standalone` émulé → pas de bandeau) · `test/integration/identity/install_banner_test.rb` (CA-9 : le HTML de la direction, de l'équipe et de la page publique ne contient pas `install_banner` ; celui de l'élève et de l'enseignant le contient avec `hidden`)
+- **Done quand**   : un élève connecté sur Chrome Android voit « Installe Lnclass sur ton téléphone » ; « Plus tard » le fait disparaître pour 3 jours sur ce téléphone ; un enseignant sur iPhone voit les deux étapes ; un compte direction ne voit rien
 
 ---
 
@@ -98,7 +98,7 @@ Le Lot 0 gèle le contrat `mark_app_opened(user_id:, at:) → true`. Les lots ve
 | CA-3 Page « Pas de connexion » | A |
 | CA-4 Aucune page de compte gardée | A |
 | CA-5 Bandeau Android | B |
-| CA-6 « Plus tard » 7 jours | B |
+| CA-6 « Plus tard » 3 jours | B |
 | CA-7 Mode d'emploi iPhone | B |
 | CA-8 Pas de bandeau dans l'app installée | B |
 | CA-9 Pas de bandeau pour les autres | B (le choix du rôle est dans le shell : Lot 0 ; le test est dans B) |

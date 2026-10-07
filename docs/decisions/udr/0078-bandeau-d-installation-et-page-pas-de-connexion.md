@@ -17,7 +17,7 @@ Un élève ou un enseignant qui veut Lnclass sur son téléphone ne sait pas que
 
 ## 2. Décision
 
-1. **Un bandeau en tête du contenu, pas une fenêtre** : il ne bloque pas la tâche de l'écran, il se ferme d'un geste et ne revient pas avant 7 jours sur ce téléphone. Il n'est **pas fixé** au-dessus de la barre basse : il défile avec la page, pour ne jamais masquer un bouton.
+1. **Un bandeau en tête du contenu, pas une fenêtre** : il ne bloque pas la tâche de l'écran, il se ferme d'un geste et ne revient pas avant 3 jours sur ce téléphone. Il n'est **pas fixé** au-dessus de la barre basse : il défile avec la page, pour ne jamais masquer un bouton.
 2. **Deux variantes, choisies par le navigateur, jamais par le serveur** : Android (le navigateur a annoncé que le site est installable) montre « Installer » ; iPhone (Safari, hors de l'app installée) montre le mode d'emploi en deux étapes, sans bouton « Installer », puisque rien ne peut installer à la place de l'utilisateur.
 3. **Caché par défaut dans le HTML** (`hidden`) : sans JavaScript, ou sur un navigateur qui ne sait pas installer, rien ne s'affiche. Le serveur rend le même HTML à tous les élèves et enseignants : zéro requête, aucune variante en cache.
 4. **La page « Pas de connexion » est statique**, sans logo d'image lourd ni police web : elle doit s'afficher depuis le téléphone, sans réseau, avec le seul bleu de marque.
@@ -63,7 +63,7 @@ section#install_banner.lg:hidden.mb-5.rounded-card.border.border-line.bg-brand-s
 
 #### 3.1.1 Contrôleur Stimulus `install` — `app/javascript/controllers/install_controller.js`
 
-Cibles `android`, `ios`. Constantes : `STORAGE_KEY = "lnclass.install.later_until"`, `LATER_DAYS = 7`.
+Cibles `android`, `ios`. Constantes : `STORAGE_KEY = "lnclass.install.later_until"`, `LATER_DAYS = 3`.
 
 - **`connect()`** :
   1. Si `matchMedia("(display-mode: standalone)").matches` ou `navigator.standalone === true` → ne rien montrer, fin.
@@ -72,7 +72,7 @@ Cibles `android`, `ios`. Constantes : `STORAGE_KEY = "lnclass.install.later_unti
   4. Sinon, écouter `beforeinstallprompt` sur `window` : `event.preventDefault()`, garder l'événement, montrer la cible `android` puis le bandeau.
   5. Écouter `appinstalled` sur `window` → cacher le bandeau.
 - **`prompt()`** : appelle `deferred.prompt()`, attend `userChoice`. `accepted` → cacher. `dismissed` → même effet que `later()`. L'événement n'est utilisé qu'une fois.
-- **`later()`** : écrit `Date.now() + 7 j` sous `STORAGE_KEY`, cache le bandeau, puis rend le focus à `main#main`.
+- **`later()`** : écrit `Date.now() + 3 j` sous `STORAGE_KEY`, cache le bandeau, puis rend le focus à `main#main`.
 - **`laterUntil()`** : lit `STORAGE_KEY` ; valeur absente, non numérique ou exception → `0`.
 - Toute lecture ou écriture de `localStorage` est dans un `try/catch` ; une exception ne casse jamais la page (le bandeau peut alors revenir).
 - **`disconnect()`** : retire les écouteurs `window`.
@@ -87,7 +87,7 @@ Cibles `android`, `ios`. Constantes : `STORAGE_KEY = "lnclass.install.later_unti
 | État | Rendu |
 |---|---|
 | Défaut (HTML servi, JS pas encore exécuté, ou pas de JS) | `hidden` : rien |
-| Navigateur qui ne sait pas installer, app installée, « Plus tard » de moins de 7 jours, écran ≥ `lg` | rien |
+| Navigateur qui ne sait pas installer, app installée, « Plus tard » de moins de 3 jours, écran ≥ `lg` | rien |
 | Android, installable | titre, texte, « Installer », « Plus tard » |
 | iPhone Safari | titre, texte, les deux étapes, « Plus tard » |
 | Fenêtre d'Android ouverte | inchangé jusqu'au choix |

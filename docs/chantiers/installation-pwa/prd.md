@@ -11,7 +11,7 @@ Lnclass ne vit que dans un onglet du navigateur : pas d'icône sur le téléphon
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
 | Visiteur non connecté | Installer par le menu de son navigateur ; voir la page « Pas de connexion » | Voir le bandeau d'installation |
-| Student | Installer depuis le bandeau (Android) ou suivre le mode d'emploi (iPhone) ; reporter le bandeau de 7 jours ; ouvrir Lnclass depuis l'icône | Faire un exercice sans réseau (chantier `exercices-hors-ligne`) ; retrouver une page de compte sans réseau |
+| Student | Installer depuis le bandeau (Android) ou suivre le mode d'emploi (iPhone) ; reporter le bandeau de 3 jours ; ouvrir Lnclass depuis l'icône | Faire un exercice sans réseau (chantier `exercices-hors-ligne`) ; retrouver une page de compte sans réseau |
 | Teacher | Les mêmes gestes que l'élève | Les mêmes limites |
 | SchoolStaff (direction) | Installer par le menu du navigateur | Voir le bandeau |
 | Team | Installer par le menu du navigateur ; lire dans son pilotage le nombre d'élèves et d'enseignants qui ont ouvert l'app installée sur la période | Voir le bandeau |
@@ -38,7 +38,7 @@ Règles d'autorisation : la fiche d'application, le programme d'arrière-plan et
 | Situation | Comportement attendu |
 |---|---|
 | Sans réseau, on ouvre Lnclass ou on change de page | La page « Pas de connexion » de Lnclass s'affiche à la place de l'erreur du navigateur ; « Réessayer » recharge la page demandée |
-| « Plus tard » | Le bandeau disparaît et ne revient pas sur ce téléphone avant 7 jours |
+| « Plus tard » | Le bandeau disparaît et ne revient pas sur ce téléphone avant 3 jours |
 | Stockage du navigateur absent ou vidé (navigation privée) | Le bandeau peut réapparaître ; aucune erreur |
 | L'utilisateur refuse dans la fenêtre d'installation d'Android | Le bandeau se comporte comme « Plus tard » |
 | Navigateur qui ne sait pas installer (WebView de Facebook ou WhatsApp, ancien Chrome) | Aucun bandeau ; le site marche comme avant |
@@ -83,11 +83,11 @@ Quand il ouvre son accueil
 Alors il voit le bandeau « Installe Lnclass sur ton téléphone » avec « Installer » et « Plus tard »
 Et quand il touche « Installer », la fenêtre d'installation du navigateur s'ouvre
 
-# CA-6 — « Plus tard » pendant 7 jours, sur ce téléphone
+# CA-6 — « Plus tard » pendant 3 jours, sur ce téléphone
 Étant donné un enseignant qui a touché « Plus tard » sur le bandeau
-Quand il revient 6 jours plus tard sur le même téléphone
+Quand il revient 2 jours plus tard sur le même téléphone
 Alors il ne voit pas le bandeau
-Et quand il revient 8 jours après « Plus tard », il voit le bandeau
+Et quand il revient 4 jours après « Plus tard », il voit le bandeau
 Et aucune requête n'a été envoyée au serveur pour retenir ce choix
 
 # CA-7 — Mode d'emploi iPhone
