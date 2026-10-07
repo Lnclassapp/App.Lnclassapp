@@ -66,5 +66,8 @@ module AppLnclassapp
     # lnclass.com et www.lnclass.com servent tous deux l'application : la variable tranche, sans code. CANONICAL_HOST
     # doit figurer dans APP_HOSTS (docs/guide/configuration.md).
     config.x.canonical_host = ENV["CANONICAL_HOST"].presence || "lnclass.com"
+    # Amendement du 2026-10-07 : seuls les hôtes de la production s'indexent. Toute autre adresse (Staging, Develop,
+    # domaine Railway, poste local) est fermée aux moteurs de recherche, sans variable à poser : un oubli ne l'ouvre pas.
+    config.x.indexed_hosts = %w[lnclass.com www.lnclass.com].freeze
   end
 end
