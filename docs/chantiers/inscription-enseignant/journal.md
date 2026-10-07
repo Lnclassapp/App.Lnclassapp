@@ -15,6 +15,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - Le Lot 0 s'est arrêté deux fois sur des fichiers hors liste : l'exploration de la phase 2 n'avait pas cherché tous les appelants de `create_teacher` ni les tests d'architecture. Parade pour les prochains plans : `grep` de chaque méthode de port modifiée et lecture de `test/architecture/` avant d'écrire le Lot 0.
 - Le local `scope` du frame DRENA a été posé dans la vue sans vérifier que le contrôleur qui la rend seul (`School::DrenaSchoolsController`) pouvait le recevoir.
+- Lot D : `test/system/teams/blog_management_test.rb:71` (hors chantier) a échoué une fois dans `bin/rails test:system` complet (texte d'image tronqué : « Une élève révise à ») et passe seul à la relance : test instable sous charge, à surveiller.
+- Lot D : deux retraits ont laissé des appelants hors liste (`test/system/teams/school_code_test.rb`, `test/routing/school_admin_routes_test.rb`) : le `grep` de la phase 3 doit aussi couvrir les chemins d'URL (`/school-admin/school/link`) et les tests de `test/routing/`, pas seulement les helpers et les constantes.
 
 ## Ce qu'on a appris sur la codebase
 
