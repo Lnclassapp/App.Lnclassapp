@@ -46,6 +46,7 @@ Constats du porteur (2026-10-07) :
 - **L'inscription de la direction** (voie standard, liens d'invitation vers la direction, plafond, retrait) et la **suppression définitive du code d'établissement** : chantier suivant `inscription-direction-sans-code` (Q5–Q8). Ici, la direction s'inscrit encore avec le code.
 - **Rejoindre un second établissement** par un lien d'invitation : un enseignant connecté qui ouvre un lien est renvoyé vers son accueil (Q12).
 - **L'élève et le parent** : rien ne change pour eux.
+- La vérification en direct de la confirmation du code secret sur les autres formulaires (élève, direction, invitation, changement de code) : à reprendre ailleurs si elle plaît.
 - La vérification du numéro par WhatsApp (chantier `verification-whatsapp`, au backlog).
 
 ## Ce que le grill a révélé
@@ -69,6 +70,7 @@ Constats du porteur (2026-10-07) :
 | Q13. Enregistre-t-on la voie d'arrivée de chaque enseignant ? | **Oui** : standard, lien d'un collègue (lequel), lien de la direction, lien de l'équipe. L'enseignant est rattaché tout de suite dans tous les cas. | Une donnée nouvelle par enseignant (ADR). Les enseignants déjà inscrits reçoivent une voie d'après leur histoire : « code » (valeur historique), « standard » (ancienne voie sans code), « collègue » (parrainage). La demande en attente validée automatiquement n'a plus lieu d'être pour les nouvelles inscriptions. |
 | Q14. Un lien d'invitation devenu invalide (établissement désactivé, collègue retiré ou supprimé) ? | **Inscription standard, avec un message neutre** : « Ce lien n'est plus valable. Choisissez votre établissement. » | Un seul message pour toutes les causes (on ne dit pas pourquoi). La voie enregistrée est alors « standard ». |
 | Q15. Une page ou des étapes ? | **Une page réordonnée**, dans l'ordre du parcours, en blocs titrés : établissement (DRENA, établissement, matière) → vous (nom complet, genre, contact) → code secret. | Pas d'assistant multi-étapes ni d'état intermédiaire à garder. |
+| Q16. Ordre des champs ? | Porteur : ordre présenté accepté (Établissement : DRENA, établissement, matière → Vous : nom complet, genre, numéro → Code secret : code, confirmation ; par lien, l'établissement est déjà affiché). Il ajoute une **vérification en direct de la confirmation** : une icône dans le champ confirmation et un court message dessous disent si les deux codes concordent. | Nouveau comportement côté navigateur (aucun n'existe pour la confirmation). Le serveur garde sa vérification : sans JavaScript, l'erreur arrive au renvoi (422). Limité à l'inscription enseignant ; les autres formulaires à code secret (élève, direction, invitation, changement de code) restent tels quels. |
 
 ## Cas limites identifiés
 

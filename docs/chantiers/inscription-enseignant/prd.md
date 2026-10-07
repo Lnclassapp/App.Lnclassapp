@@ -25,7 +25,7 @@ Règles d'autorisation : l'inscription est publique et refusée à toute personn
 1. Le visiteur ouvre `/teacher-signup` (page d'accueil « Je suis enseignant », ou application).
 2. Rubrique **Établissement** : il choisit sa DRENA ; la liste de ses établissements actifs se charge ; il choisit son établissement, puis sa matière.
 3. Rubrique **Vous** : il tape son nom complet (« KOUASSI Aya Marie ») ; l'aperçu affiche « Nom : KOUASSI · Prénom(s) : Aya Marie » ; il peut ouvrir « Corriger » pour éditer nom et prénoms séparément. Il choisit son genre et saisit son numéro.
-4. Rubrique **Code secret** : PIN et confirmation.
+4. Rubrique **Code secret** : PIN et confirmation. Dès que la confirmation a 4 chiffres, une icône dans le champ et un message dessous disent « Les codes concordent. » ou « Les codes ne concordent pas. ».
 5. « Créer mon compte » : le compte est créé, l'enseignant est **rattaché tout de suite** à l'établissement (école principale), sa voie d'arrivée est « standard », la session s'ouvre et il arrive sur « Quelles classes enseignez-vous ? » avec « Bienvenue ! ».
 
 ### Chemin nominal — lien d'invitation
@@ -141,6 +141,15 @@ Et leur voie d'arrivée vaut respectivement « code », « standard » et « lie
 Quand l'équipe ouvre la fiche d'un établissement
 Alors chaque ligne de la liste « Enseignants » montre la voie d'arrivée (et le collègue, pour un lien d'un collègue)
 
+# IE-17 — vérification en direct de la confirmation
+Étant donné la page d'inscription ouverte avec JavaScript
+Quand le visiteur saisit « 1234 » puis « 1235 » en confirmation
+Alors une icône d'erreur apparaît dans le champ confirmation et « Les codes ne concordent pas. » s'affiche dessous, annoncé aux lecteurs d'écran
+Quand il corrige la confirmation en « 1234 »
+Alors une icône de succès remplace l'icône d'erreur et « Les codes concordent. » s'affiche
+Et tant que la confirmation a moins de 4 chiffres, ni icône ni message ne s'affichent
+Et sans JavaScript, des codes différents sont refusés au renvoi (422, message existant)
+
 # IE-16 — direction inchangée
 Quand une direction s'inscrit par /school-staff-signup avec le code d'établissement
 Alors son inscription fonctionne comme avant ce chantier
@@ -155,7 +164,7 @@ Alors son inscription fonctionne comme avant ce chantier
 | Domaine | **Un seul use case** `UseCases::Identity::RegisterTeacher`, qui absorbe `RegisterPendingTeacher` : policy `RegisterTeacherPolicy` (inchangée) → DTO → invitation résolue (ou aucune) → établissement actif de la DRENA (ou celui de l'invitation) → `create_teacher` → `attach_teacher(primary: true)` → parrainage si lien d'un collègue → session. **Plus de demande en attente** (`school_join_requests`) pour une nouvelle inscription. Nouveau DTO `TeacherRegistrationInput` : `full_name`, `last_name`/`first_name` (correction), `gender`, `contact`, `pin`, `pin_confirmation`, `drena_public_id`, `school_public_id`, `material_slug`, `invite_token` ; plus de `school_code` ni de `national_code`. Nouvelle entité-valeur `Entities::Identity::FullName` (découpage « premier mot = nom »). Nouvelle entité-valeur `Entities::Identity::ArrivalChannel` (`standard`, `colleague`, `direction`, `team`, `code`). Nouveau port de lecture des liens d'invitation (`resolve(token:)` → établissement, émetteur, voie). |
 | Infrastructure | Migration : `teacher_profiles.joined_via` (CHECK sur les cinq voies, sur le modèle de `school_staffs.joined_via`) avec reprise de l'historique ; table des liens d'invitation d'établissement (direction, équipe) à jeton stable. Repository des liens d'invitation ; `RegistrationRepository#create_teacher` reçoit la voie. `ReferralQuery`, `OwnSchoolQuery`, `SchoolDetailQuery` exposent le jeton du lien au lieu du code ; `SchoolDetailQuery#teachers` expose la voie. `test/db/growth_migrations_test.rb` : la nouvelle migration s'ajoute à `LATER`. |
 | Delivery | `GET/POST /teacher-signup` (une seule voie) ; `GET /i/:token` (lien d'invitation) ; **retirés** : `GET /e/:code`, `GET/POST /teacher-signup/without-code`, `PATCH /school-admin/school/link` (« Changer le lien »). `PendingTeacherRegistrationsController` disparaît. `/drenas/:drena_public_id/schools` inchangé. |
-| UI | Formulaire réordonné (Établissement → Vous → Code secret), champ « Nom complet » avec aperçu et « Corriger » (contrôleur Stimulus d'aperçu, nouveau), bandeau de l'établissement choisi par lien, alerte « lien plus valable ». Blocs de lien : « Inviter un collègue » (page et carte latérale), espace direction (sans code ni « Changer le lien »), fiche équipe (lien d'invitation à côté du code, qui reste pour la direction). Liste « Enseignants » de la fiche équipe : voie d'arrivée. |
+| UI | Formulaire réordonné (Établissement → Vous → Code secret), champ « Nom complet » avec aperçu et « Corriger » (contrôleur Stimulus d'aperçu, nouveau), vérification en direct de la confirmation du code secret (contrôleur Stimulus, nouveau), bandeau de l'établissement choisi par lien, alerte « lien plus valable ». Blocs de lien : « Inviter un collègue » (page et carte latérale), espace direction (sans code ni « Changer le lien »), fiche équipe (lien d'invitation à côté du code, qui reste pour la direction). Liste « Enseignants » de la fiche équipe : voie d'arrivée. |
 
 ## 6. Décisions rattachées
 
