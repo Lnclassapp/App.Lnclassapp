@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/_course_levels — bulles de la section « Cours » de l'accueil enseignant %>
-<%# Rôle : une bulle par couple niveau-série enseigné, vers le catalogue filtré (niveau, série, matière), puis « Inviter » %>
-<%# ADR  : 0026, 0063 · UDR : 0069 (§3.3, §3.5) %>
+<%# Rôle : une bulle par couple niveau-série enseigné, vers le catalogue filtré, puis « Inviter » : WhatsApp avec le lien /i/<jeton> %>
+<%# ADR  : 0026, 0063, 0082 · UDR : 0069 (§3.3, §3.5), 0078 (§3.7) · Stimulus : identity--share (partage compté « whatsapp ») %>
 <%# locals: (home:, invite:) -%>
 <% if home.course_levels.empty? %>
   <p id="teacher_home_courses_empty" class="mb-4 text-sm text-mute"><%= t(".empty") %></p>
@@ -18,9 +18,14 @@
         </li>
       <% end %>
       <% if invite %>
-        <li>
-          <%= ui_subject_bubble label: t(".invite"), href: teacher_invite_path, illustration: subject_illustration(:invite),
-                                id: "course_level_invite" %>
+        <% link = teacher_invite_link_url(invite.referral_token) %>
+        <% message = t("identity.referrals.invite.message", school: invite.school_name, link:) %>
+        <li data-controller="identity--share" data-identity--share-url-value="<%= teacher_referral_shares_path %>"
+            data-identity--share-link-value="<%= link %>" data-identity--share-text-value="<%= message %>">
+          <%= ui_subject_bubble label: t(".invite"), href: whatsapp_share_url(message), illustration: subject_illustration(:invite),
+                                sr_suffix: t(".invite_sr"), id: "course_level_invite",
+                                link_html: { target: "_blank", rel: "noopener",
+                                             data: { action: "identity--share#record", "identity--share-channel-param": "whatsapp" } } %>
         </li>
       <% end %>
     </ul>
