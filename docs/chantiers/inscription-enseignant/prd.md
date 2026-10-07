@@ -49,6 +49,7 @@ Règles d'autorisation : l'inscription est publique et refusée à toute personn
 | Lien d'invitation inconnu, d'un établissement désactivé, ou d'un collègue retiré ou supprimé | La page standard s'ouvre avec l'alerte « Ce lien n'est plus valable. Choisissez votre établissement. » ; voie « standard » |
 | « Ce n'est pas votre établissement ? » depuis un lien | La page standard s'ouvre sans établissement ; voie « standard » ; pas de parrainage |
 | Personne connectée qui ouvre `/teacher-signup` ou un lien d'invitation | Renvoyée vers son accueil ; `POST` → 403 |
+| Enseignant retiré, sur l'écran d'attente | Il choisit DRENA puis établissement ; rattaché tout de suite ; l'établissement qui l'a retiré est refusé par une erreur neutre (422) |
 | Ancienne adresse `/e/<code>` | 404 (aucun lien partagé, memo Q11) |
 | Plus de 5 envois par minute | 429 re-rendu dans le formulaire (règle existante) |
 
@@ -150,6 +151,14 @@ Alors une icône de succès remplace l'icône d'erreur et « Les codes concorden
 Et tant que la confirmation a moins de 4 chiffres, ni icône ni message ne s'affichent
 Et sans JavaScript, des codes différents sont refusés au renvoi (422, message existant)
 
+# IE-18 — écran d'attente sans code
+Étant donné un enseignant retiré du « Lycée Moderne de Cocody », connecté, sur l'écran d'attente
+Alors l'écran ne contient aucun champ « Code d'établissement »
+Quand il choisit la DRENA « Abidjan 1 » puis le « Lycée Classique d'Abidjan »
+Alors il est rattaché à ce lycée comme école principale et arrive sur son accueil
+Quand il choisit le « Lycée Moderne de Cocody »
+Alors l'écran est re-rendu en 422 avec l'erreur neutre et il n'est rattaché à rien
+
 # IE-16 — direction inchangée
 Quand une direction s'inscrit par /school-staff-signup avec le code d'établissement
 Alors son inscription fonctionne comme avant ce chantier
@@ -161,10 +170,10 @@ Alors son inscription fonctionne comme avant ce chantier
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | **Un seul use case** `UseCases::Identity::RegisterTeacher`, qui absorbe `RegisterPendingTeacher` : policy `RegisterTeacherPolicy` (inchangée) → DTO → invitation résolue (ou aucune) → établissement actif de la DRENA (ou celui de l'invitation) → `create_teacher` → `attach_teacher(primary: true)` → parrainage si lien d'un collègue → session. **Plus de demande en attente** (`school_join_requests`) pour une nouvelle inscription. Nouveau DTO `TeacherRegistrationInput` : `full_name`, `last_name`/`first_name` (correction), `gender`, `contact`, `pin`, `pin_confirmation`, `drena_public_id`, `school_public_id`, `material_slug`, `invite_token` ; plus de `school_code` ni de `national_code`. Nouvelle entité-valeur `Entities::Identity::FullName` (découpage « premier mot = nom »). Nouvelle entité-valeur `Entities::Identity::ArrivalChannel` (`standard`, `colleague`, `direction`, `team`, `code`). Nouveau port de lecture des liens d'invitation (`resolve(token:)` → établissement, émetteur, voie). |
+| Domaine | **Un seul use case** `UseCases::Identity::RegisterTeacher`, qui absorbe `RegisterPendingTeacher` : policy `RegisterTeacherPolicy` (inchangée) → DTO → invitation résolue (ou aucune) → établissement actif de la DRENA (ou celui de l'invitation) → `create_teacher` → `attach_teacher(primary: true)` → parrainage si lien d'un collègue → session. `UseCases::School::JoinSchoolWithCode` devient un rattachement par établissement choisi (`school_public_id` de la DRENA au lieu du code), règle des départs inchangée. **Plus de demande en attente** (`school_join_requests`) pour une nouvelle inscription. Nouveau DTO `TeacherRegistrationInput` : `full_name`, `last_name`/`first_name` (correction), `gender`, `contact`, `pin`, `pin_confirmation`, `drena_public_id`, `school_public_id`, `material_slug`, `invite_token` ; plus de `school_code` ni de `national_code`. Nouvelle entité-valeur `Entities::Identity::FullName` (découpage « premier mot = nom »). Nouvelle entité-valeur `Entities::Identity::ArrivalChannel` (`standard`, `colleague`, `direction`, `team`, `code`). Nouveau port de lecture des liens d'invitation (`resolve(token:)` → établissement, émetteur, voie). |
 | Infrastructure | Migration : `teacher_profiles.joined_via` (CHECK sur les cinq voies, sur le modèle de `school_staffs.joined_via`) avec reprise de l'historique ; table des liens d'invitation d'établissement (direction, équipe) à jeton stable. Repository des liens d'invitation ; `RegistrationRepository#create_teacher` reçoit la voie. `ReferralQuery`, `OwnSchoolQuery`, `SchoolDetailQuery` exposent le jeton du lien au lieu du code ; `SchoolDetailQuery#teachers` expose la voie. `test/db/growth_migrations_test.rb` : la nouvelle migration s'ajoute à `LATER`. |
-| Delivery | `GET/POST /teacher-signup` (une seule voie) ; `GET /i/:token` (lien d'invitation) ; **retirés** : `GET /e/:code`, `GET/POST /teacher-signup/without-code`, `PATCH /school-admin/school/link` (« Changer le lien »). `PendingTeacherRegistrationsController` disparaît. `/drenas/:drena_public_id/schools` inchangé. |
-| UI | Formulaire réordonné (Établissement → Vous → Code secret), champ « Nom complet » avec aperçu et « Corriger » (contrôleur Stimulus d'aperçu, nouveau), vérification en direct de la confirmation du code secret (contrôleur Stimulus, nouveau), bandeau de l'établissement choisi par lien, alerte « lien plus valable ». Blocs de lien : « Inviter un collègue » (page et carte latérale), espace direction (sans code ni « Changer le lien »), fiche équipe (lien d'invitation à côté du code, qui reste pour la direction). Liste « Enseignants » de la fiche équipe : voie d'arrivée. |
+| Delivery | `GET/POST /teacher-signup` (une seule voie) ; `GET /i/:token` (lien d'invitation) ; **retirés** : `GET /e/:code`, `GET/POST /teacher-signup/without-code`, `PATCH /school-admin/school/link` (« Changer le lien »). `PendingTeacherRegistrationsController` disparaît. L'écran d'attente (`PendingSchoolJoinsController`) reçoit DRENA → établissement. `/drenas/:drena_public_id/schools` inchangé. |
+| UI | Formulaire réordonné (Établissement → Vous → Code secret), champ « Nom complet » avec aperçu et « Corriger » (contrôleur Stimulus d'aperçu, nouveau), vérification en direct de la confirmation du code secret (contrôleur Stimulus, nouveau), bandeau de l'établissement choisi par lien, alerte « lien plus valable ». Blocs de lien : « Inviter un collègue » (page et carte latérale), espace direction (sans code ni « Changer le lien »), fiche équipe (lien d'invitation à côté du code, qui reste pour la direction). Liste « Enseignants » de la fiche équipe : voie d'arrivée. Écran d'attente : DRENA → établissement au lieu du code. |
 
 ## 6. Décisions rattachées
 

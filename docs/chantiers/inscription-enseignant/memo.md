@@ -71,6 +71,7 @@ Constats du porteur (2026-10-07) :
 | Q14. Un lien d'invitation devenu invalide (établissement désactivé, collègue retiré ou supprimé) ? | **Inscription standard, avec un message neutre** : « Ce lien n'est plus valable. Choisissez votre établissement. » | Un seul message pour toutes les causes (on ne dit pas pourquoi). La voie enregistrée est alors « standard ». |
 | Q15. Une page ou des étapes ? | **Une page réordonnée**, dans l'ordre du parcours, en blocs titrés : établissement (DRENA, établissement, matière) → vous (nom complet, genre, contact) → code secret. | Pas d'assistant multi-étapes ni d'état intermédiaire à garder. |
 | Q16. Ordre des champs ? | Porteur : ordre présenté accepté (Établissement : DRENA, établissement, matière → Vous : nom complet, genre, numéro → Code secret : code, confirmation ; par lien, l'établissement est déjà affiché). Il ajoute une **vérification en direct de la confirmation** : une icône dans le champ confirmation et un court message dessous disent si les deux codes concordent. | Nouveau comportement côté navigateur (aucun n'existe pour la confirmation). Le serveur garde sa vérification : sans JavaScript, l'erreur arrive au renvoi (422). Limité à l'inscription enseignant ; les autres formulaires à code secret (élève, direction, invitation, changement de code) restent tels quels. |
+| Q17. L'écran d'attente d'un enseignant sans établissement (retiré) rejoint par le code : que devient-il ? | **DRENA → établissement**, comme l'inscription standard ; rattachement immédiat. | Le code ne sert plus du tout à l'enseignant. La règle existante tient : l'établissement qui l'a retiré refuse, avec la même erreur neutre que pour un établissement absent de la liste. Sa voie d'arrivée ne change pas (elle décrit l'inscription). Le code national disparaît aussi de l'inscription (non cité par le porteur, retiré par défaut). |
 
 ## Cas limites identifiés
 
@@ -81,6 +82,7 @@ Constats du porteur (2026-10-07) :
 - Numéro déjà inscrit (enseignant, élève ou direction) : refus « Ce numéro a déjà un compte Lnclass. », avec « Se connecter », sans révéler le rôle.
 - Personne connectée qui ouvre un lien d'invitation ou l'inscription standard : renvoyée vers son accueil.
 - Lien d'invitation d'un établissement désactivé, ou d'un collègue retiré ou supprimé : inscription standard + message neutre, voie « standard ».
+- Enseignant retiré qui choisit, sur l'écran d'attente, l'établissement qui l'a retiré : refus neutre, comme un établissement absent de la liste.
 - Ancienne adresse `/e/<code>` : n'existe plus (aucun lien partagé, Q11).
 - Établissement en brouillon ou désactivé : absent de la liste de la DRENA, comme aujourd'hui.
 - Enseignant « Ce n'est pas votre établissement ? » depuis un lien : il repasse à l'inscription standard, la voie enregistrée devient « standard ».
