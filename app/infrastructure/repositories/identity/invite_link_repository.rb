@@ -1,5 +1,5 @@
 # 🔌 INFRA · Repositories::Identity::InviteLinkRepository
-# Rôle : résout le jeton d'un lien /i/<jeton> : parrainage d'un collègue (école principale), puis direction, puis équipe
+# Rôle : résout le jeton d'un lien /i/<jeton> : parrainage d'un collègue (école principale, sauf anonymisé), puis direction, puis équipe
 # ADR  : 0063, 0082
 module Repositories
   module Identity
@@ -16,10 +16,15 @@ module Repositories
 
       private
 
+      # Un collègue anonymisé (compte supprimé) peut garder son rattachement : son lien est invalide, comme sans école.
       def colleague(token)
-        user_id, school_id, status = Orm::TeacherProfile.joins(ReferralRepository::PRIMARY_SCHOOL).where(referral_token: token)
-                                                        .pick(:user_id, "teacher_schools.school_id", "schools.status")
-        user_id && InviteLink.new(school_id:, school_active: status == ACTIVE, channel: "colleague", referrer_id: user_id)
+        user_id, school_id, status, anonymized_at =
+          Orm::TeacherProfile.joins(:user).joins(ReferralRepository::PRIMARY_SCHOOL).where(referral_token: token)
+                             .pick(:user_id, "teacher_schools.school_id", "schools.status", "users.anonymized_at")
+        return if user_id.nil?
+        return InviteLink.new(school_id: nil, school_active: false, channel: "colleague", referrer_id: user_id) if anonymized_at
+
+        InviteLink.new(school_id:, school_active: status == ACTIVE, channel: "colleague", referrer_id: user_id)
       end
 
       def school(token, channel, column)

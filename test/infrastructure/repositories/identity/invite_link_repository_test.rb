@@ -43,6 +43,17 @@ module Repositories
         assert_not link.valid?
       end
 
+      # Memo, cas limites : le lien d'un collègue supprimé est invalide. Anonymisé, il garde parfois son rattachement.
+      test "an anonymized colleague gives a link without school, not valid, even when still attached to an active school" do
+        colleague = create_teacher(school: create_school)
+        Orm::User.where(id: colleague.id).update_all(anonymized_at: Time.current)
+
+        link = @repository.resolve(token: referral_token_of(colleague))
+
+        assert_equal InviteLink.new(school_id: nil, school_active: false, channel: "colleague", referrer_id: colleague.id), link
+        assert_not link.valid?
+      end
+
       test "a school that is not active gives a link that is not valid, whoever invites" do
         closed = create_school(status: "inactive").reload
         colleague = create_teacher(school: closed)
