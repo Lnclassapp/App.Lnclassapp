@@ -1,4 +1,5 @@
 # Établissements : liste nationale, fiche, modification (plan boucle-pedagogique, Lot S2), code d'établissement — ADR-0030, ADR-0036, ADR-0057, ADR-0065, UDR-0007, UDR-0036, UDR-0044
+# Lien d'invitation de l'équipe et voie d'arrivée des enseignants — ADR-0082, UDR-0078 §3.7, §3.8
 fr:
   activemodel:
     attributes:
@@ -118,13 +119,14 @@ fr:
         confirm_deactivate: "Désactiver l'établissement"
         cancel: "Annuler"
         school_code: "Code d'établissement"
-        school_code_hint: "À transmettre aux enseignants de l'établissement : ils saisissent ce code à l'inscription, ou ouvrent le lien"
+        school_code_hint: "Pour l'inscription de la direction."
         school_code_inactive: "Tant que l'établissement n'est pas actif, ce code ne permet pas de s'inscrire."
-        school_code_tip: "Code secret à transmettre aux enseignants de l'établissement pour qu'ils s'inscrivent. À ne pas confondre avec le code national, public, à 6 chiffres."
+        school_code_tip: "Code secret à transmettre à la direction de l'établissement pour qu'elle s'inscrive. À ne pas confondre avec le code national, public, à 6 chiffres."
         copy_code: "Copier le code"
         copy_code_label: "Copier le code %{code}"
         copy_link: "Copier le lien"
-        copy_link_label: "Copier le lien d'inscription"
+        copy_link_label: "Copier le lien d'invitation des enseignants"
+        invite_link: "Lien d'invitation des enseignants"
         regenerate_code: "Régénérer le code"
         regenerate_title: "Régénérer le code de « %{name} » ?"
         regenerate_warning: "L'ancien code %{code} cessera aussitôt de fonctionner : transmettez le nouveau aux enseignants qui ne sont pas encore inscrits. Les enseignants déjà inscrits ne sont pas touchés."
@@ -143,8 +145,17 @@ fr:
           one: "Enseignants (%{count})"
           other: "Enseignants (%{count})"
         no_teachers: "Aucun enseignant rattaché"
-        no_teachers_description: "Les enseignants s'inscrivent avec le code d'établissement ci-dessus."
+        no_teachers_description: "Les enseignants s'inscrivent avec le lien d'invitation ci-dessus."
         secondary_school: "Établissement secondaire"
+        # UDR-0078 §3.8 : « Inscription : … » ne s'accorde pas (UDR-0007).
+        joined_via_line: "Inscription : %{via}"
+        joined_via:
+          standard: "inscription standard"
+          colleague: "lien d'un collègue (%{name})"
+          colleague_unnamed: "lien d'un collègue"
+          direction: "lien de la direction"
+          team: "lien de l'équipe"
+          code: "code d'établissement"
       classroom_group:
         count:
           one: "%{count} classe"

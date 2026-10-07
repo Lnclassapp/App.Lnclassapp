@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 # CE-06, CE-07, FU-26 (ADR-0057, UDR-0044, UDR-0054): on a school's page, the team reads the school code, copies it and its sign-up link,
 # and regenerates it from the ⋮ menu after a confirmation — without reloading the page. The old code stops working.
+# IE-08 (ADR-0082 §4.1, UDR-0078 §3.7): the code is for the direction; the link copied is the team's /i/<token>.
 class Teams::SchoolCodeTest < ApplicationSystemTestCase
   HEADER = "teams.schools.header".freeze
 
@@ -14,12 +15,13 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
 
   def clipboard = page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
 
-  test "CE-06: the code and its link are shown and copied, as displayed, without reloading the page" do
+  test "CE-06, IE-08: the code and the team's invitation link are shown and copied, as displayed, without reloading the page" do
     visit school_path(@school.public_id)
 
     within "#school_code" do
       assert_selector "#school_code_value", exact_text: "K7M-4QZ"
-      assert_selector "a#school_code_link", text: "/e/k7m4qz"
+      assert_text "Pour l'inscription de la direction."
+      assert_selector "a#school_code_link", text: %r{/i/#{@school.reload.team_invite_token}\z}
     end
     assert_no_page_reload do
       click_on I18n.t("#{HEADER}.copy_code")
@@ -28,7 +30,7 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
 
       click_on I18n.t("#{HEADER}.copy_link")
       assert_toast I18n.t("shared.clipboard.copied_link")
-      assert_equal school_code_signup_url("k7m4qz", host: URI(current_url).host, port: URI(current_url).port), clipboard
+      assert_equal teacher_invite_link_url(@school.team_invite_token, host: URI(current_url).host, port: URI(current_url).port), clipboard
     end
   end
 
@@ -51,6 +53,7 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
       new_code = Entities::School::SchoolCode.display(@school.reload.school_code)
       assert_toast I18n.t("teams.school_codes.update.done", code: new_code)
       assert_selector "#school_code_value", exact_text: new_code
+      assert_selector "a#school_code_link", text: %r{/i/#{@school.team_invite_token}\z}
       assert_no_selector "#school_header dialog[open]"
     end
     assert_not_equal "k7m4qz", @school.reload.school_code

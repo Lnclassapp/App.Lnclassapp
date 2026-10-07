@@ -186,14 +186,15 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
   end
 
-  test "CE-06: a school's page shows its code, the buttons to copy it and its link, and « Régénérer le code » in the menu" do
+  test "CE-06, IE-08: a school's page shows the direction's code, the team's invitation link, and « Régénérer le code » in the menu" do
     school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
     sign_in_as @member
 
     get school_path(school.public_id)
 
     header = "teams.schools.header"
-    link = school_code_signup_url("k7m4qz")
+    link = teacher_invite_link_url(school.reload.team_invite_token)
+    assert_match %r{/i/\h{12}\z}, link
     assert_select "#school_code #school_code_label", text: I18n.t("#{header}.school_code")
     assert_select "#school_code #school_code_value[aria-labelledby=school_code_label]", text: "K7M-4QZ"
     # FU-26 : les deux copies passent par le contrôleur unique `clipboard` (UDR-0054 §3.5), boutons cachés sans JavaScript.
@@ -208,13 +209,37 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_code'))}/
     assert_select "#school_code [data-clipboard-text-value='#{link}'] template[data-clipboard-target=copied]",
                   text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_link'))}/
-    assert_select "#school_code a#school_code_link[href='#{link}']", text: link
-    assert_select "#school_code", text: /#{Regexp.escape(I18n.t("#{header}.school_code_hint"))}/
+    assert_select "#school_code a#school_code_link[href='#{link}'][aria-labelledby=school_invite_link_label]", text: link
+    assert_select "#school_code #school_invite_link_label", text: "Lien d'invitation des enseignants"
+    assert_select "#school_code", text: /Pour l'inscription de la direction\./
+    assert_equal "Pour l'inscription de la direction.", I18n.t("#{header}.school_code_hint")
+    assert_select "#school_code a[href*='/e/']", 0
     assert_select "#school_code", { text: /#{Regexp.escape(I18n.t("#{header}.school_code_inactive"))}/, count: 0 }
     assert_select "#school-header-actions button[aria-controls=regenerate-school-code]", text: I18n.t("#{header}.regenerate_code")
     assert_select "dialog#regenerate-school-code form#regenerate-school-code-form[action='#{school_code_path(school.public_id)}'] " \
                   "input[name=_method][value=patch]"
     assert_select "dialog#regenerate-school-code", text: /K7M-4QZ/
+  end
+
+  test "IE-15: each teacher of the list reads « Inscription : » and their arrival channel, the colleague named when known" do
+    school = create_school(drena: @drena)
+    awa = create_teacher(school:, first_name: "Awa", last_name: "Koné", joined_via: "standard")
+    create_referral(referrer: awa, referee: create_teacher(school:, first_name: "Yao", last_name: "Brou", joined_via: "colleague"))
+    gone = create_teacher(school:, first_name: "Ama", last_name: "Diallo", joined_via: "direction", anonymized_at: 1.day.ago)
+    create_referral(referrer: gone, referee: create_teacher(school:, first_name: "Ali", last_name: "Bamba", joined_via: "colleague"))
+    create_teacher(school:, first_name: "Ida", last_name: "Touré", joined_via: "team")
+    create_teacher(school:, first_name: "Léa", last_name: "Yao", joined_via: "code")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    { "Awa Koné" => "Inscription : inscription standard", "Yao Brou" => "Inscription : lien d'un collègue (Koné Awa)",
+      "Ama Diallo" => "Inscription : lien de la direction", "Ali Bamba" => "Inscription : lien d'un collègue",
+      "Ida Touré" => "Inscription : lien de l'équipe", "Léa Yao" => "Inscription : code d'établissement" }.each do |name, via|
+      assert_select "#school_teachers li", text: /#{Regexp.escape(name)}/ do
+        assert_select "p.text-xs.text-mute", text: via
+      end
+    end
   end
 
   test "CE-06: the page of a school that is not active warns that its code lets nobody sign up" do
@@ -416,6 +441,9 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: /#{I18n.t('teams.schools.update.done', name: "Lycée Classique d'Abidjan")}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr#school_#{school.public_id}", text: /Bouaké/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('teams.schools.cycles.first')}/
+    # IE-08: the header re-rendered from a SchoolsQuery::Row keeps the team's invitation link.
+    assert_select "turbo-stream[action=replace][target=school_header] #school_code a#school_code_link[href=?]",
+                  teacher_invite_link_url(school.team_invite_token)
     assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms" # UDR-0046
     assert_equal "school.changed", Orm::AuditEvent.sole.action
   end
