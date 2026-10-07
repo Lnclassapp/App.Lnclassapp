@@ -109,6 +109,12 @@ L'écran d'attente rattache par établissement choisi (`school_public_id` d'un �
 - Les validations de l'ADR-0037 (motif, longueurs 50 et 80, casse gardée) s'appliquent au résultat. Un seul mot donne l'erreur `full_name: [:single_word]`.
 - Les autres formulaires (élève, direction, invitation, profil) gardent leurs deux champs.
 
+### 4.4 bis Numéros des élèves masqués jusqu'à la certification (phase 5, memo Q22)
+
+- Un enseignant dont `joined_via` est `standard`, `direction` ou `team` est **sans preuve** : dans la liste de ses classes, le numéro de chaque élève est remplacé par `Entities::Identity::Contact.mask` (ADR-0062) **côté serveur** — le numéro complet ne sort jamais de la requête. `colleague` et `code` voient le numéro complet.
+- La règle vit dans le domaine (`Entities::Identity::ArrivalChannel.vouched?(joined_via)`), la requête de la liste de classe l'applique. Les annonces et le reste de l'espace enseignant ne changent pas.
+- Chaque inscription écrit une ligne d'audit `school.changed` (`change: "teacher_joined"`, `via: <voie>`), comme le rattachement par l'écran d'attente.
+
 ### 4.5 Ce qui ne change pas
 
 - `schools.school_code`, `find_by_school_code`, `RegenerateSchoolCode`, `Teams::SchoolCodesController` et `RegisterSchoolStaff` restent, pour la direction (ADR-0077).
@@ -128,6 +134,8 @@ L'écran d'attente rattache par établissement choisi (`school_public_id` d'un �
 ### 🔴 Coûts consentis
 
 - **L'inscription n'a aucune preuve** : n'importe qui peut se rattacher à n'importe quel établissement actif. La pause de l'ADR-0073 le faisait déjà pour la voie sans code ; c'est désormais la règle pour tous, jusqu'à la certification.
+- **Le chemin `/i/<jeton>` est écrit dans les journaux de requêtes** (« Started GET »), comme l'était `/e/<code>`. Accepté : le jeton ne donne qu'une voie, et les journaux de production sont d'accès restreint.
+- **Un inscrit sans preuve voit ses élèves et leur travail, et peut leur publier des annonces**, jusqu'à la certification ; seuls leurs numéros lui sont masqués (§4.4 bis).
 - **Un jeton de direction ou d'équipe qui fuit ne se change pas.** Il ne donne qu'une voie, mais une voie fausse peut tromper la certification. La certification devra croiser la voie avec d'autres signaux.
 - **Collision de jetons entre tables** (`teacher_profiles` et les deux colonnes de `schools`), sur 48 bits chacun. La résolution cherche d'abord le collègue, puis la direction, puis l'équipe. Le risque est négligeable, mais aucune contrainte ne l'interdit.
 - **Un nom de famille en deux mots est mal coupé** si l'enseignant ne corrige pas l'aperçu. L'ADR-0037 refusait toute règle de découpage : la règle revient, du bon côté du nom, et l'enseignant garde la main.

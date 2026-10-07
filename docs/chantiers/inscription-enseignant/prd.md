@@ -25,7 +25,7 @@ Règles d'autorisation : l'inscription est publique et refusée à toute personn
 1. Le visiteur ouvre `/teacher-signup` (page d'accueil « Je suis enseignant », ou application).
 2. Rubrique **Établissement** : il choisit sa DRENA ; la liste de ses établissements actifs se charge ; il choisit son établissement, puis sa matière.
 3. Rubrique **Vous** : il tape son nom complet (« KOUASSI Aya Marie ») ; l'aperçu affiche « Nom : KOUASSI · Prénom(s) : Aya Marie » ; il peut ouvrir « Corriger » pour éditer nom et prénoms séparément. Il choisit son genre et saisit son numéro : le champ n'accepte que des chiffres, 10 au plus, et retire en direct `+225`, `(+225)`, `00225` et les espaces.
-4. Rubrique **Code secret** : PIN et confirmation. Dès que la confirmation a 4 chiffres, une icône dans le champ et un message dessous disent « Les codes concordent. » ou « Les codes ne concordent pas. ».
+4. Rubrique **Code secret** : PIN et confirmation. Dès que la confirmation a 4 chiffres, une icône et un message sous le champ disent « Les codes concordent. » ou « Les codes ne concordent pas. ».
 5. « Créer mon compte » : le compte est créé, l'enseignant est **rattaché tout de suite** à l'établissement (école principale), sa voie d'arrivée est « standard », la session s'ouvre et il arrive sur « Quelles classes enseignez-vous ? » avec « Bienvenue ! ».
 
 ### Chemin nominal — lien d'invitation
@@ -145,9 +145,9 @@ Alors chaque ligne de la liste « Enseignants » montre la voie d'arrivée (et l
 # IE-17 — vérification en direct de la confirmation
 Étant donné la page d'inscription ouverte avec JavaScript
 Quand le visiteur saisit « 1234 » puis « 1235 » en confirmation
-Alors une icône d'erreur apparaît dans le champ confirmation et « Les codes ne concordent pas. » s'affiche dessous, annoncé aux lecteurs d'écran
+Alors une icône d'erreur et « Les codes ne concordent pas. » apparaissent sous le champ confirmation, dont le bord passe au rouge, s'affiche dessous, annoncé aux lecteurs d'écran
 Quand il corrige la confirmation en « 1234 »
-Alors une icône de succès remplace l'icône d'erreur et « Les codes concordent. » s'affiche
+Alors une icône de succès remplace l'icône d'erreur, « Les codes concordent. » s'affiche et le bord passe au vert
 Et tant que la confirmation a moins de 4 chiffres, ni icône ni message ne s'affichent
 Et sans JavaScript, des codes différents sont refusés au renvoi (422, message existant)
 
@@ -184,6 +184,19 @@ Quand elle cherche « 012345 », le code national d'un établissement
 Alors cet établissement n'est pas trouvé par son code national
 Quand elle cherche « Lycée Classique » ou « LCA »
 Alors l'établissement est trouvé
+
+# IE-22 — numéros des élèves masqués pour un inscrit sans preuve
+Étant donné un enseignant inscrit par la voie standard (ou par le lien de la direction ou de l'équipe), déclaré dans la classe 3ème 1
+Quand il ouvre la liste des élèves de la 3ème 1
+Alors le numéro de chaque élève s'affiche masqué, sous la forme « 07 •• •• •• 04 »
+Et le numéro complet n'apparaît nulle part dans la page
+Étant donné un enseignant inscrit par le lien d'un collègue (ou par l'ancien code d'établissement)
+Quand il ouvre la même liste
+Alors il voit les numéros complets
+
+# IE-23 — trace d'audit de chaque inscription
+Quand un enseignant s'inscrit, par n'importe quelle voie
+Alors une ligne d'audit « school.changed / teacher_joined » porte l'établissement et la voie d'arrivée
 
 # IE-16 — direction inchangée
 Quand une direction s'inscrit par /school-staff-signup avec le code d'établissement
