@@ -1,5 +1,5 @@
 <%# 🌐 UI · school/drena_schools/index — frame « schools » : liste des établissements actifs d'une DRENA %>
-<%# Rôle : servi seul au changement de DRENA, ou rendu dans un formulaire (scope de ses champs) ; la DRENA voyage avec la liste %>
+<%# Rôle : servi seul au changement de DRENA, ou dans un formulaire (scope de ses champs) ; la DRENA voyage avec la liste ; invite gardée après un 422 %>
 <%# ADR  : 0029, 0030, 0082 · UDR : 0024, 0078 %>
 <%# locals: (schools:, drena_public_id:, registration: nil, scope: :teacher_registration) -%>
 <%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50",
@@ -8,8 +8,12 @@
     <% if drena_public_id.present? %>
       <%= fields.hidden_field :drena_public_id, value: drena_public_id, id: nil %>
     <% end %>
+    <%# Rails n'écrit l'invite que sans valeur : un établissement envoyé puis sorti de la liste (422) laisserait le premier
+        lycée présélectionné en silence. L'invite reste alors, sélectionnée. %>
+    <% sent = registration&.school_public_id.presence %>
+    <% prompt_choice = [ [ t(".prompt"), "", { selected: true } ] ] if sent && schools.none? { it.public_id == sent } %>
     <%= ui_field fields, :school_public_id, as: :select, label: t(".label"), required: true,
-                 choices: schools.map { [ it.name, it.public_id ] }, prompt: t(".prompt"), disabled: schools.empty?,
-                 hint: (t(drena_public_id.present? ? ".none" : ".choose_drena_first") if schools.empty?) %>
+                 choices: Array(prompt_choice) + schools.map { [ it.name, it.public_id ] }, prompt: t(".prompt"),
+                 disabled: schools.empty?, hint: (t(drena_public_id.present? ? ".none" : ".choose_drena_first") if schools.empty?) %>
   <% end %>
 <% end %>

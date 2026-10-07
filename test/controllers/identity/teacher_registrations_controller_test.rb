@@ -140,6 +140,30 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     end
   end
 
+  test "IE-11: after a 422 on a school no longer listed, « Choisissez votre établissement » stays, selected, never a school" do
+    create_school(drena: @drena, name: "Lycée Alpha")
+    closed = create_school(drena: @drena, status: "inactive")
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(school_public_id: closed.public_id) }
+
+    assert_refused :school_public_id, I18n.t("#{ERRORS}.school_public_id.inclusion")
+    assert_select "select[name='teacher_registration[school_public_id]']" do
+      assert_select "option:first-child[value=''][selected]", text: I18n.t("school.drena_schools.index.prompt")
+      assert_select "option[selected]", 1
+      assert_select "option[value='#{@school.public_id}']", text: "Lycée Moderne de Cocody"
+    end
+  end
+
+  test "IE-11: a school still listed comes back selected after a 422, the prompt kept unselected" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params(pin_confirmation: "1357") }
+
+    assert_response :unprocessable_entity
+    assert_select "select[name='teacher_registration[school_public_id]']" do
+      assert_select "option[selected]", 1
+      assert_select "option[selected][value='#{@school.public_id}']"
+    end
+  end
+
   test "IE-11: no DRENA chosen: each field says so in 422" do
     post teacher_registrations_path,
          params: { teacher_registration: registration_params(drena_public_id: "", school_public_id: "") }
