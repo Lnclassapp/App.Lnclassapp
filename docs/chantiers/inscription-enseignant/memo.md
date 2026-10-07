@@ -68,6 +68,7 @@ Constats du porteur (2026-10-07) :
 | Q12. Un enseignant inscrit (A) ouvre le lien d'un collègue de B ? | **Renvoi vers son accueil**, comme aujourd'hui pour une personne connectée. | Rejoindre un second établissement par un lien sort du chantier (écrit dans `Hors périmètre`). Non connecté, il tombe sur l'inscription : son numéro est refusé (« déjà un compte ») avec un lien « Se connecter ». |
 | Q13. Enregistre-t-on la voie d'arrivée de chaque enseignant ? | **Oui** : standard, lien d'un collègue (lequel), lien de la direction, lien de l'équipe. L'enseignant est rattaché tout de suite dans tous les cas. | Une donnée nouvelle par enseignant (ADR). Les enseignants déjà inscrits reçoivent une voie d'après leur histoire : « code » (valeur historique), « standard » (ancienne voie sans code), « collègue » (parrainage). La demande en attente validée automatiquement n'a plus lieu d'être pour les nouvelles inscriptions. |
 | Q14. Un lien d'invitation devenu invalide (établissement désactivé, collègue retiré ou supprimé) ? | **Inscription standard, avec un message neutre** : « Ce lien n'est plus valable. Choisissez votre établissement. » | Un seul message pour toutes les causes (on ne dit pas pourquoi). La voie enregistrée est alors « standard ». |
+| Q15. Une page ou des étapes ? | **Une page réordonnée**, dans l'ordre du parcours, en blocs titrés : établissement (DRENA, établissement, matière) → vous (nom complet, genre, contact) → code secret. | Pas d'assistant multi-étapes ni d'état intermédiaire à garder. |
 
 ## Cas limites identifiés
 
@@ -88,4 +89,3 @@ Constats du porteur (2026-10-07) :
 
 - Le chantier suivant `inscription-direction-sans-code` reprend Q5 à Q8 : inscription standard de la direction, liens d'invitation vers la direction (émis par un enseignant, la direction, l'équipe), plafond de 3, retrait définitif du code d'établissement et de « Régénérer le code ».
 - Le lien d'un collègue et celui de la direction ou de l'équipe : même adresse avec un parrain en plus, ou deux formes ? (choix technique, ADR).
-- L'écran d'inscription standard : une page réordonnée ou plusieurs étapes courtes ? Le porteur a dit « réorganiser selon le flux » (Q2) ; la forme est fixée par l'UDR.
