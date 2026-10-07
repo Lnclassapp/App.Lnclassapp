@@ -8,6 +8,7 @@
 |---|---|---|---|
 | 2026-10-07 | La PWA passe avant les apps Android | Le porteur a vu une vidéo sur les apps mobiles faites avec Claude Code (Expo) ; Expo réécrirait tous les écrans, la PWA garde ceux du site | Oui : ADR-0082, amendement de l'ADR-0070 |
 | 2026-10-07 | Les exercices hors ligne sortent vers `eleve-hors-ligne` | Ils touchent la correction de l'ADR-0054 ; le chantier ne tenait plus en quelques jours (grill, question 10) | Non : l'ADR viendra avec `eleve-hors-ligne` |
+| 2026-10-07 | Le test de phase 5 est fait par une autre personne, sur un vrai Android, en recette | Une PWA ne s'éprouve qu'en HTTPS, dans un vrai navigateur de téléphone | Non : clause du plan |
 | 2026-10-07 | Le bandeau ne garde rien sur le serveur | L'installation est une affaire d'appareil (grill, question 9) | Oui : ADR-0082 §4.5 ; colonnes `install_banner_*` abandonnées |
 
 ## Ce qui a dérapé
