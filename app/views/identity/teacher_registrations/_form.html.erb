@@ -1,15 +1,18 @@
-<%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en quatre rubriques %>
-<%# Rôle : l'établissement est désigné par son code (champ, ou bandeau quand il est déjà trouvé), ou sans code (@pending) ; 422 %>
-<%# ADR  : 0030, 0037, 0050, 0057, 0063 · UDR : 0024, 0044, 0050, 0054 (§3.4 : infobulle du code d'établissement) %>
-<% if @pending %>
-  <%# Formulaire GET de la seule DRENA (repli sans JavaScript, UDR-0024) : son sélecteur s'y rattache par l'attribut form. %>
-  <form id="teacher-signup-drena" action="<%= new_pending_teacher_registration_path %>" method="get"></form>
-<% end %>
-<%= form_with model: @form, scope: :teacher_registration, url: (@pending ? pending_teacher_registrations_path : teacher_registrations_path),
-              id: (@pending ? "pending-teacher-registration-form" : "teacher-registration-form"), class: "space-y-6",
-              data: ({ controller: "school--drena-schools", "school--drena-schools-url-value": drena_schools_path("__drena__") } if @pending) do |form| %>
-  <% if @form.ref %>
-    <%= form.hidden_field :ref %>
+<%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en trois rubriques %>
+<%# Rôle : Établissement (DRENA → liste, ou bandeau d'un lien), Vous (nom complet corrigeable, genre, numéro), Code secret ; 422 re-rendu %>
+<%# ADR  : 0030, 0037, 0050, 0082 · UDR : 0024, 0054, 0078 %>
+<%# Formulaire GET de la seule DRENA (repli sans JavaScript, UDR-0024 §2.4) : son sélecteur s'y rattache par l'attribut form. %>
+<form id="teacher-signup-drena" action="<%= new_teacher_registration_path %>" method="get"></form>
+<%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",
+              class: "space-y-6",
+              data: { controller: "school--drena-schools identity--full-name identity--phone-digits identity--pin-match",
+                      "school--drena-schools-url-value": drena_schools_path("__drena__"),
+                      "identity--pin-match-ok-value": t(".pin_match.ok"), "identity--pin-match-ko-value": t(".pin_match.ko") } do |form| %>
+  <% if @invite_invalid %>
+    <div id="invite-link-invalid" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-ink">
+      <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
+      <p><%= t("identity.teacher_registrations.new.invite_invalid") %></p>
+    </div>
   <% end %>
   <% if @form.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
@@ -17,11 +20,45 @@
       <p><%= @form.errors[:base].to_sentence %></p>
     </div>
   <% end %>
+  <% if @preview %>
+    <%= form.hidden_field :invite_token %>
+  <% end %>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".personal") %></legend>
-    <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
-    <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school") %></legend>
+    <% if @preview %>
+      <div class="space-y-2">
+        <%= render "identity/teacher_registrations/school_preview", preview: @preview %>
+        <%= link_to t(".other_school"), new_teacher_registration_path, id: "other-school",
+                    class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+      </div>
+    <% else %>
+      <%= render "identity/teacher_registrations/school_fields", form: %>
+    <% end %>
+    <%= ui_field form, :material_slug, as: :select, required: true, choices: material_options, prompt: t(".material_prompt") %>
+  </fieldset>
+
+  <fieldset class="space-y-4">
+    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".you") %></legend>
+    <%= ui_field form, :full_name, required: true, maxlength: 131, autocomplete: "name", spellcheck: false,
+                 placeholder: t(".full_name_placeholder"), hint: t(".full_name_hint"),
+                 data: { identity__full_name_target: "input", action: "input->identity--full-name#preview" } %>
+    <p id="full_name_preview" data-identity--full-name-target="preview" aria-live="polite" hidden
+       class="text-sm text-mute"><%= t(".preview_last") %> <strong class="text-ink" data-identity--full-name-target="lastOut"></strong>
+       · <%= t(".preview_first") %> <strong class="text-ink" data-identity--full-name-target="firstOut"></strong></p>
+    <%# Les champs corrigés montrent la saisie, jamais le découpage : remplis tous deux, ils font foi (ADR-0082 §4.4). %>
+    <details id="name-correction" data-identity--full-name-target="editor" data-action="toggle->identity--full-name#fill"
+             <%= "open" if @form.errors[:last_name].any? || @form.errors[:first_name].any? || @form.corrected? %>>
+      <summary class="inline-flex min-h-tap cursor-pointer items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline">
+        <%= t(".correct_name") %>
+      </summary>
+      <div class="mt-2 space-y-4">
+        <%= ui_field form, :last_name, value: @form.raw_last_name, maxlength: 50, autocomplete: "family-name",
+                     data: { identity__full_name_target: "lastName" } %>
+        <%= ui_field form, :first_name, value: @form.raw_first_name, maxlength: 80, autocomplete: "given-name",
+                     data: { identity__full_name_target: "firstName" } %>
+      </div>
+    </details>
     <% gender_error = @form.errors[:gender].first %>
     <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("teacher_registration_gender_error" if gender_error)) %>>
       <legend class="mb-1.5 block text-sm font-medium text-ink">
@@ -42,42 +79,25 @@
         </p>
       <% end %>
     </fieldset>
-  </fieldset>
-
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".contact") %></legend>
-    <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
-                 autocomplete: "tel", placeholder: t(".contact_placeholder"), hint: t(".contact_hint") %>
-  </fieldset>
-
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school_and_subject") %></legend>
-    <% if @pending %>
-      <%= render "identity/pending_teacher_registrations/school_fields", form: %>
-    <% elsif @preview %>
-      <div class="space-y-2">
-        <%= render "identity/teacher_registrations/school_preview", preview: @preview %>
-        <%= form.hidden_field :school_code, value: Entities::School::SchoolCode.display(@form.school_code) %>
-        <%= link_to t(".other_code"), new_teacher_registration_path, id: "other-school-code",
-                    class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
-      </div>
-    <% else %>
-      <%= ui_field form, :school_code, required: true, value: @form.raw_school_code, maxlength: 12, autocomplete: "off",
-                   autocapitalize: "characters", spellcheck: false, placeholder: t(".school_code_placeholder"),
-                   hint: t(".school_code_hint"), class: "font-display tracking-widest uppercase" %>
-      <%= ui_info_tip t(".school_code_info_tip"), label: Dtos::Identity::TeacherRegistrationInput.human_attribute_name(:school_code) %>
-      <%= link_to t(".no_school_code"), new_pending_teacher_registration_path, id: "no-school-code",
-                  class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
-    <% end %>
-    <%= ui_field form, :material_slug, as: :select, required: true, choices: material_options, prompt: t(".material_prompt") %>
+    <%# Sans pattern ni filtre serveur du champ : « +225 07 01 02 03 04 » collé sans JavaScript est nettoyé par le serveur. %>
+    <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 20, inputmode: "numeric",
+                 autocomplete: "tel-national", placeholder: t(".contact_placeholder"), hint: t(".contact_hint"),
+                 data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
   </fieldset>
 
   <fieldset class="space-y-4">
     <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
     <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
-                 hint: t(".pin_hint") %>
-    <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
-                 autocomplete: "new-password" %>
+                 hint: t(".pin_hint"), data: { identity__pin_match_target: "pin", action: "input->identity--pin-match#check" } %>
+    <div class="space-y-1.5">
+      <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                   autocomplete: "new-password",
+                   data: { identity__pin_match_target: "confirmation", action: "input->identity--pin-match#check" } %>
+      <p id="pin_match_status" data-identity--pin-match-target="status" aria-live="polite" hidden
+         class="flex items-center gap-1.5 text-sm font-medium"></p>
+      <template data-identity--pin-match-target="okIcon"><%= ui_icon "check-circle", variant: :mini, size: :sm %></template>
+      <template data-identity--pin-match-target="koIcon"><%= ui_icon "x-circle", variant: :mini, size: :sm %></template>
+    </div>
   </fieldset>
 
   <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true %>
