@@ -193,6 +193,27 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 
 ---
 
+## Lot F — Corrections de la phase 5 (ajout du 2026-10-07)
+
+Issues du challenger, des revues sécurité, tests et échecs silencieux, et des décisions Q22–Q23.
+
+- **Couche**       : domaine + infrastructure + delivery + ui + tests
+- **Fichiers**     : `app/infrastructure/queries/classroom/classroom_overview_query.rb` · `app/views/classroom/classrooms/_roster.html.erb` · `config/locales/classroom/classrooms.fr.yml` *(IE-22 : numéro masqué pour tout lecteur)*
+                     `app/domain/use_cases/identity/register_teacher.rb` · `app/controllers/identity/teacher_registrations_controller.rb` *(IE-23 : audit `school.changed` / `teacher_joined` avec la voie)*
+                     `app/domain/use_cases/school/join_school_with_code.rb` *(audit : ajouter la voie d'origine si disponible, sinon inchangé)*
+                     `app/infrastructure/repositories/identity/invite_link_repository.rb` *(collègue anonymisé → lien invalide)*
+                     `app/infrastructure/queries/school/school_detail_query.rb` *(parrain affiché seulement sur l'établissement du parrainage)*
+                     `db/migrate/20261007100000_add_teacher_arrival_and_school_invite_tokens.rb` *(reprise seulement quand la colonne vient d'être créée)*
+                     `app/views/school/drena_schools/index.html.erb` *(invite « Choisissez votre établissement » toujours présente après un 422)*
+                     `app/javascript/controllers/identity/full_name_controller.js` *(aperçu = champs corrigés quand « Corriger » est ouvert)*
+                     `config/locales/identity/referrals.fr.yml` *(« sans chercher le code » retiré)*
+                     tests correspondants, plus : icône de concordance (`teacher_signup_test`), IE-12 sur trois rôles, IE-10 composé, `joined_via` forgé, `/e/K7M-4QZ` en requête 404, migration rejouée sur un enseignant `code` ; et l'instabilité de `bin/ci` relevée par le challenger (`PG::UndefinedColumn national_code`, `StaffRestoreConcurrencyTest:63`) à diagnostiquer
+- **Dépend de**    : Lot E
+- **Test associé** : `test/infrastructure/queries/classroom/classroom_overview_query_test.rb` (IE-22) · `test/domain/use_cases/identity/register_teacher_test.rb` (IE-23) · `test/infrastructure/repositories/identity/invite_link_repository_test.rb` · `test/infrastructure/queries/school/school_detail_query_test.rb` · `test/db/add_teacher_arrival_and_school_invite_tokens_migration_test.rb`
+- **Done quand**   : un enseignant ne voit plus jamais le numéro complet d'un élève dans sa classe ; chaque inscription laisse une ligne d'audit avec sa voie ; les défauts du challenger ne se reproduisent plus ; `bin/ci` vert deux fois de suite
+
+---
+
 ## Rattachement des critères d'acceptation
 
 | Critère | Lot(s) |
@@ -210,6 +231,7 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 | IE-17, IE-19 | A |
 | IE-20 | 0 (option de la bulle), B |
 | IE-21 | E |
+| IE-22, IE-23 | F |
 | IE-18 | C |
 
 Aucun critère orphelin.
@@ -223,6 +245,7 @@ Vague 1 : Lot 0                    → 1 agent, séquentiel, sur feature/inscrip
 Vague 2 : Lot A ‖ Lot B ‖ Lot C    → 3 agents, worktrees isolés, après merge du Lot 0
 Vague 3 : Lot D                    → 1 agent, après merge de A, B et C
 Vague 4 : Lot E                    → 1 agent, après le Lot D
+Vague 5 : Lot F                    → 1 agent, après la phase 5 (corrections)
 ```
 
 Worktrees de la vague 2, créés depuis la branche de chantier **après** le merge du Lot 0 :

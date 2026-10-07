@@ -38,6 +38,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Code d'établissement et « Régénérer le code » encore présents pour la direction | Périmètre (Q8) | `inscription-direction-sans-code` |
 | Index trigramme de `schools.national_code` : plus utilisé par la recherche de l'équipe après le Lot E ; le commentaire de `test/infrastructure/queries/trigram_search_indexes_test.rb` est périmé | Une migration de retrait d'index n'apporte rien à l'utilisateur ; à mesurer avant | optimize à ouvrir si l'écriture des établissements en pâtit |
 | `/teams/schools` à 1280 px : l'en-tête « Statut » et son aide passent sur deux lignes | Antérieur au chantier, relevé par le Lot E | finitions à ouvrir |
+| Articles devant le nom d'un établissement (« de Lycée Moderne… », « à Lycée… ») dans les messages d'invitation | Antérieur au chantier, élision délicate selon le nom | finitions à ouvrir |
+| Le contour de focus cache la couleur du bord de la confirmation du code secret ; le message reste visible | Mineur, relevé par le challenger | finitions à ouvrir |
 | Code de classe des élèves | Périmètre (Q20) | `inscription-eleve-sans-code` (branche ouverte) |
 
 ## Clôture
