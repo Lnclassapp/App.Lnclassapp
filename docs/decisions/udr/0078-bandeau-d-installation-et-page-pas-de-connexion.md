@@ -126,7 +126,7 @@ Dans la carte « Sur la période » (`#team_dashboard_period`), **après** la tu
 
 - Titre `span.text-sm.text-mute` : « Ouvert depuis l'app installée ».
 - `ul#team_dashboard_app_openers.mt-2.grid.gap-1.text-sm.text-ink.sm:grid-cols-2[aria-label="Ouvert depuis l'app installée, par rôle"]` : deux `li.tabular-nums` : « %{count} élève(s) », « %{count} enseignant(s) » (pluriels i18n `one`/`other`, `0` → « 0 élève »).
-- `ui_info_tip` : « Comptes qui ont ouvert Lnclass depuis l'icône de leur téléphone sur la période. Un compte compte une fois. » avec le label « À propos de ce chiffre ».
+- `ui_info_tip` : « Comptes qui ont ouvert Lnclass depuis l'icône de leur téléphone sur la période. Un compte compte une fois. » avec le label « Ouvert depuis l'app installée » (comme les autres infobulles, qui nomment leur chiffre).
 - La grille passe ainsi à 4 tuiles + une tuile pleine largeur sur `lg`.
 - États : vide → « 0 élève », « 0 enseignant » (jamais masqué : un zéro dit que l'installation ne prend pas encore) ; chargement et erreur : ceux du tableau de bord existant (UDR-0049).
 

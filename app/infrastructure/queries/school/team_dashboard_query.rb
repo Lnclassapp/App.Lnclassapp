@@ -1,17 +1,19 @@
 # 🔌 INFRA · Queries::School::TeamDashboardQuery
 # Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs, élèves par niveau, par DRENA ou par établissement, derniers inscrits
-# ADR  : 0040, 0041, 0049, 0062 · UDR : 0049 · un nombre fixe de requêtes groupées, quel que soit le volume
+# ADR  : 0040, 0041, 0049, 0062, 0082 · UDR : 0049, 0078 · un nombre fixe de requêtes groupées, quel que soit le volume
 module Queries
   module School
     class TeamDashboardQuery
       # school_rows : sous un filtre DRENA, les lignes de tous ses établissements (DrenaSchoolsQuery#rows), lues avec les
       # chiffres ; nil en vue nationale.
       Row = Data.define(:period, :school_year, :drena, :accounts, :signups_count, :active_students_count,
-                        :completed_sessions_count, :average_score, :assignments_count, :schools, :classrooms_count,
+                        :completed_sessions_count, :average_score, :assignments_count, :app_openers, :schools, :classrooms_count,
                         :levels, :placed_students_count, :unplaced_students_count, :drenas, :school_rows, :recent_signups)
       Filter = Data.define(:public_id, :name)
       # team : nil sous un filtre DRENA, l'équipe n'ayant pas de territoire.
       Accounts = Data.define(:students, :teachers, :team)
+      # ADR-0082 §4.4 : comptes ouverts depuis l'icône de l'app installée pendant la période, par rôle.
+      AppOpeners = Data.define(:students, :teachers)
       Coverage = Data.define(:active, :with_classroom, :with_teacher, :with_student)
       LevelShare = Data.define(:slug, :name, :students_count, :percent)
       DrenaRow = Data.define(:public_id, :name, :schools_count, :classrooms_count, :teachers_count, :students_count,
@@ -24,10 +26,10 @@ module Queries
       RECENT = 10
       # ADR-0062, amendement du 2026-09-29 : les chiffres de l'année scolaire sont gardés 5 minutes ; 7 et 30 jours restent
       # lus en direct. Changer une définition ou la forme des chiffres, c'est changer CACHE_VERSION (2 : les lignes
-      # d'établissements sous filtre, amendement du 2026-10-04).
+      # d'établissements sous filtre, amendement du 2026-10-04 ; 3 : les ouvertures depuis l'app installée, ADR-0082).
       CACHED_PERIODS = %w[year].freeze
       CACHE_TTL = 5.minutes
-      CACHE_VERSION = 2
+      CACHE_VERSION = 3
 
       # Une seule lecture : les établissements actifs, et combien ont une classe, un enseignant, un élève (élève placé :
       # ADR-0062). SQL constant : seule l'année scolaire est liée.
@@ -129,7 +131,14 @@ module Queries
         { signups_count: territorial_users.where(created_at: @since..).count,
           active_students_count: sessions.where(started_at: @since..).distinct.count(:student_id),
           completed_sessions_count: completed_count, average_score: average&.to_i,
-          assignments_count: in_drena(Orm::ClassroomAssignment.joins(classroom: :school).where(assigned_at: @since..)).count }
+          assignments_count: in_drena(Orm::ClassroomAssignment.joins(classroom: :school).where(assigned_at: @since..)).count,
+          app_openers: }
+      end
+
+      # ADR-0082 §4.4 : une lecture groupée par rôle, sur les comptes du territoire (non anonymisés), comme les inscrits.
+      def app_openers
+        counts = territorial_users.where(anonymized_at: nil, app_opened_at: @since..).group(:role).count
+        AppOpeners.new(students: counts.fetch("student", 0), teachers: counts.fetch("teacher", 0))
       end
 
       def sessions
