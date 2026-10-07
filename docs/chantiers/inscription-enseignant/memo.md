@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | décision |
 | **Ouvert le** | 2026-10-07 |
 | **Branche** | `feature/inscription-enseignant` |
 | **Programme** | — |
@@ -43,9 +43,10 @@ Constats du porteur (2026-10-07) :
 
 ## Hors périmètre
 
-Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du memo : c'est elle qui empêche le chantier de gonfler.
-
-- …
+- **L'inscription de la direction** (voie standard, liens d'invitation vers la direction, plafond, retrait) et la **suppression définitive du code d'établissement** : chantier suivant `inscription-direction-sans-code` (Q5–Q8). Ici, la direction s'inscrit encore avec le code.
+- **Rejoindre un second établissement** par un lien d'invitation : un enseignant connecté qui ouvre un lien est renvoyé vers son accueil (Q12).
+- **L'élève et le parent** : rien ne change pour eux.
+- La vérification du numéro par WhatsApp (chantier `verification-whatsapp`, au backlog).
 
 ## Ce que le grill a révélé
 
@@ -55,12 +56,36 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 |---|---|---|
 | Q1. Pourquoi maintenant ? | Code introuvable, parcours confus, trop d'informations demandées. | Le chantier ne se limite pas à retirer une entrée : il doit aussi alléger ce qui est demandé (à préciser, Q2). |
 | Q2. Comment alléger ce qui est demandé ? | Supprimer le code d'établissement ; **un seul champ « nom complet »** au lieu de nom + prénoms, séparé ensuite par une règle ; **réordonner** les informations dans l'ordre du parcours (DRENA → établissement → matière → nom complet, genre, contact → code secret). | Une règle de découpage du nom complet est à fixer (Q3). Les données enregistrées restent « nom » et « prénoms » séparés. Le formulaire change d'ordre : UDR obligatoire. |
-| Q3. Quelle règle sépare le nom complet ? | **Premier mot = nom, le reste = prénoms**, affiché en aperçu (« Nom : … · Prénoms : … ») sous le champ ; l'enseignant peut corriger avant de valider. | Un nom en deux mots se corrige à la main. Le découpage doit aussi se faire côté serveur (l'aperçu n'est qu'un confort) ; la correction donne deux champs séparés. Cas d'un seul mot à trancher. |
+| Q3. Quelle règle sépare le nom complet ? | **Premier mot = nom, le reste = prénoms**, affiché en aperçu (« Nom : … · Prénoms : … ») sous le champ ; l'enseignant peut corriger avant de valider. | Un nom en deux mots se corrige à la main. Le découpage doit aussi se faire côté serveur (l'aperçu n'est qu'un confort) ; la correction donne deux champs séparés. Un nom complet d'un seul mot est refusé (« Saisissez votre nom et vos prénoms. ») — *défaut de l'agent, réponse confirmée « c'est bon » sans détail*. |
+| Q4. Par le lien d'un collègue, que remplit l'enseignant ? | L'établissement est **déjà choisi** : DRENA et établissement préremplis et affichés, avec « Ce n'est pas votre établissement ? » (retour à l'inscription standard). Il saisit matière, nom complet, genre, contact, code secret. | Le lien doit continuer d'identifier l'établissement **et** le collègue qui invite (parrainage). Ce qu'il porte (code d'établissement ou autre) est à trancher (Q5). |
+| Q5. Le code d'établissement disparaît-il seulement de l'inscription enseignant ? | **Non : partout.** | Disparaissent aussi : le « lien de l'établissement » de la direction et de l'équipe (et leur geste « Régénérer »), et le code comme clé de l'inscription de la direction. Le lien d'un collègue doit identifier l'établissement autrement que par ce code. L'inscription de la direction doit trouver une autre voie (Q6). ADR obligatoire : le code d'établissement est un contrat posé par des ADR antérieurs. |
+| Q6. Sans code, comment une direction s'inscrit-elle ? | Comme l'enseignant, deux voies : **l'inscription standard** (DRENA → établissement → identité → code secret) ou **un lien d'invitation** envoyé par un enseignant, l'équipe ou une autre direction de l'établissement. | La direction aussi passe de « code » à « standard + lien ». Nouveaux émetteurs d'invitation vers la direction (enseignant, direction). Sans preuve, le plafond de 3 et le retrait par une autre direction restent la seule protection : à confirmer (Q7). Le périmètre double : découpage à trancher (Q8). |
+| Q7. Quelle protection pour une direction inscrite par la voie standard ? | Les règles actuelles, reprises : **au plus 3 directions par la voie standard** (les invitées ne comptent pas), retrait par une autre direction ou par l'équipe, et un nouvel arrivant ne retire personne pendant 7 jours. | Le plafond compte désormais « inscrite par la voie standard » au lieu de « inscrite par le code » ; les directions déjà inscrites par le code sont comptées comme standard. Risque accepté par le porteur : sans preuve, un imposteur peut occuper une place et voir le travail des élèves jusqu'à son retrait. |
+| Q8. Un seul chantier ou deux ? | **Deux.** Celui-ci : l'enseignant. Le suivant, `inscription-direction-sans-code` : la direction (voie standard, liens d'invitation vers la direction, plafond et retrait repris, Q6–Q7) et le retrait définitif du code d'établissement. | Q6 et Q7 sont transmises au chantier suivant. Ici, le code d'établissement survit en coulisse pour la direction ; il ne sert plus du tout à l'enseignant. |
+| Q9. Que devient le bloc « Lien d'inscription des enseignants » de la direction et de l'équipe ? | Il **devient un lien d'invitation** : « Copier » et « WhatsApp » restent, le code n'est plus affiché ; le lien ouvre l'inscription enseignant avec l'établissement déjà choisi. | Trois émetteurs du même type de lien : collègue (avec parrainage), direction, équipe (sans parrain). Le lien ne doit plus contenir le code d'établissement. |
+| Q10. Garde-t-on « Changer le lien » (direction) et « Régénérer » (équipe) ? | **Les retirer** : le lien est stable et ne protège plus rien. | « Changer le lien » disparaît de l'espace direction. Nuance de l'agent : côté équipe, « Régénérer le code » protège encore l'inscription de la direction jusqu'au chantier suivant ; il est retiré **avec** le code, dans `inscription-direction-sans-code`. |
+| Q11. Les anciens liens `/e/<code>` déjà partagés ? | **Aucun lien n'a été partagé** pour l'instant. | Pas de compatibilité à garder : l'adresse `/e/<code>` est retirée côté enseignant sans redirection. |
+| Q12. Un enseignant inscrit (A) ouvre le lien d'un collègue de B ? | **Renvoi vers son accueil**, comme aujourd'hui pour une personne connectée. | Rejoindre un second établissement par un lien sort du chantier (écrit dans `Hors périmètre`). Non connecté, il tombe sur l'inscription : son numéro est refusé (« déjà un compte ») avec un lien « Se connecter ». |
+| Q13. Enregistre-t-on la voie d'arrivée de chaque enseignant ? | **Oui** : standard, lien d'un collègue (lequel), lien de la direction, lien de l'équipe. L'enseignant est rattaché tout de suite dans tous les cas. | Une donnée nouvelle par enseignant (ADR). Les enseignants déjà inscrits reçoivent une voie d'après leur histoire : « code » (valeur historique), « standard » (ancienne voie sans code), « collègue » (parrainage). La demande en attente validée automatiquement n'a plus lieu d'être pour les nouvelles inscriptions. |
+| Q14. Un lien d'invitation devenu invalide (établissement désactivé, collègue retiré ou supprimé) ? | **Inscription standard, avec un message neutre** : « Ce lien n'est plus valable. Choisissez votre établissement. » | Un seul message pour toutes les causes (on ne dit pas pourquoi). La voie enregistrée est alors « standard ». |
 
 ## Cas limites identifiés
 
-- …
+- Nom complet d'un seul mot : refusé, avec « Saisissez votre nom et vos prénoms. ».
+- Nom de famille en deux mots (« Koné Ouattara Awa ») : mal coupé par la règle, corrigé par l'enseignant dans l'aperçu.
+- Nom complet avec espaces en trop ou en minuscules : espaces normalisés ; la casse saisie est gardée.
+- Navigateur sans JavaScript : pas d'aperçu en direct, mais le découpage se fait côté serveur et l'enseignant peut quand même ouvrir les deux champs séparés.
+- Numéro déjà inscrit (enseignant, élève ou direction) : refus « Ce numéro a déjà un compte Lnclass. », avec « Se connecter », sans révéler le rôle.
+- Personne connectée qui ouvre un lien d'invitation ou l'inscription standard : renvoyée vers son accueil.
+- Lien d'invitation d'un établissement désactivé, ou d'un collègue retiré ou supprimé : inscription standard + message neutre, voie « standard ».
+- Ancienne adresse `/e/<code>` : n'existe plus (aucun lien partagé, Q11).
+- Établissement en brouillon ou désactivé : absent de la liste de la DRENA, comme aujourd'hui.
+- Enseignant « Ce n'est pas votre établissement ? » depuis un lien : il repasse à l'inscription standard, la voie enregistrée devient « standard ».
+- Enseignants inscrits avant le chantier : rattachement inchangé, voie d'arrivée déduite de leur histoire.
+- Demandes encore « en attente » d'avant la pause : déjà validées par `validation-enseignants-en-pause` ; rien à reprendre.
 
 ## Questions encore ouvertes
 
-- …
+- Le chantier suivant `inscription-direction-sans-code` reprend Q5 à Q8 : inscription standard de la direction, liens d'invitation vers la direction (émis par un enseignant, la direction, l'équipe), plafond de 3, retrait définitif du code d'établissement et de « Régénérer le code ».
+- Le lien d'un collègue et celui de la direction ou de l'équipe : même adresse avec un parrain en plus, ou deux formes ? (choix technique, ADR).
+- L'écran d'inscription standard : une page réordonnée ou plusieurs étapes courtes ? Le porteur a dit « réorganiser selon le flux » (Q2) ; la forme est fixée par l'UDR.
