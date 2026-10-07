@@ -516,7 +516,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.no_join_code")}/
-    assert_select "[data-controller=clipboard]", 0
+    assert_select "#classroom_join_code", 0
+    assert_select "#classroom_link", 1
     assert_select "#assigned_courses_empty", 0
     assert_select "#classroom_roster_empty", text: /#{I18n.t("#{scope}.roster.empty_title")}/
     assert_select "#classroom-roster-search", 0

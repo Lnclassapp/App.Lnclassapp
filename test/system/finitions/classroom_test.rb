@@ -64,7 +64,8 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     assert_equal "KFM37", clipboard
 
     # Le bloc « Parrainage » de la barre latérale (UDR-0069 §3.6) a aussi « Copier le lien » : celui de la classe est dans son en-tête.
-    within("#classroom_header") { click_on t("#{SCOPE}.header.copy_link") }
+    # Jusqu'au Lot F de inscription-eleve-sans-code, l'en-tête a aussi le « Copier le lien » du jeton (#classroom_link) : on vise celui du code.
+    within("#classroom_header") { find("[data-clipboard-text-value$='/c/KFM37'] button").click }
 
     assert_toast t("shared.clipboard.copied_link")
     assert_equal URI.join(page.current_url, join_classroom_path("KFM37")).to_s, clipboard

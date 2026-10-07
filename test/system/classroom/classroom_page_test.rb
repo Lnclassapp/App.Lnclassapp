@@ -83,7 +83,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
              "la page déborde en largeur"
       click_on I18n.t("#{scope}.header.copy")
       assert_toast I18n.t("shared.clipboard.copied_code")
-      assert find_link(I18n.t("#{scope}.header.share_whatsapp"))[:href].start_with?("https://wa.me/?text=")
+      assert find("#classroom_whatsapp_share")[:href].start_with?("https://wa.me/?text=")
       growth_shot("390-classe-partager-whatsapp", desktop: false, scroll_to: "#classroom_whatsapp_share")
     end
   end
@@ -91,7 +91,8 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
   test "CP-08: le lien de la classe se partage sur WhatsApp, avec un message prêt pour le groupe de la classe" do
     visit classroom_path(@classroom.public_id)
 
-    share = find_link(I18n.t("#{scope}.header.share_whatsapp"))
+    # Jusqu'au Lot F de inscription-eleve-sans-code, l'en-tête a deux « Partager sur WhatsApp » : celui du code, puis celui du lien.
+    share = find("#classroom_whatsapp_share")
     text = CGI.unescape(share[:href].delete_prefix("https://wa.me/?text="))
     assert_includes text, "Tle D 1"
     assert_includes text, "/c/KFM37"
