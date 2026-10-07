@@ -82,3 +82,10 @@ La connexion ne dit jamais « session » : on écrit « Connexion » et « Se d�
 - **Portée** : la règle du §2 reste entière ailleurs. Une fiche ne s'appelle ni « Leçon » ni « Essentiel », et « Fiche essentielle » reste son nom partout, y compris dans ses propres pages et dans les imports.
 - **Vérification** : `test/i18n/locale_files_test.rb` n'admet « leçon » que sous ces deux clés, avec cette valeur exacte (`ALLOWED`). Un autre emploi, ou une autre valeur sous ces clés, échoue.
 
+
+
+## Amendement du 2026-10-07 — « code secret »
+
+*Chantier [`docs/chantiers/inscription-enseignant`](../../chantiers/inscription-enseignant/memo.md) (Q25), [UDR-0078](0078-inscription-enseignant-en-deux-voies.md) §3.11.*
+
+Le secret à 4 chiffres de connexion s'appelle **« code secret »** dans toute l'interface, jamais « PIN ». Le code garde `pin`.

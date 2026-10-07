@@ -214,6 +214,17 @@ Issues du challenger, des revues sécurité, tests et échecs silencieux, et des
 
 ---
 
+## Lot G — Deux champs Nom / Prénom(s) et vocabulaire « code secret » (ajout du 2026-10-07, memo Q24, Q25)
+
+- **Couche**       : domaine + delivery + ui + tests
+- **Fichiers**     : *Nom et prénoms* — `app/domain/dtos/identity/teacher_registration_input.rb` (plus de `full_name`) · `app/domain/entities/identity/full_name.rb` et son test *(supprimés)* · `app/views/identity/teacher_registrations/_form.html.erb` · `app/javascript/controllers/identity/full_name_controller.js` *(supprimé)* · `config/locales/identity/teacher_registrations.fr.yml` · tests de l'inscription enseignant (DTO, use case, contrôleur, système) et tests système qui remplissent `full_name` (`cold_start_test`, `invite_colleague_test`, `boucle_pedagogique_test`, `departed_teachers_test`…)
+                     *Code secret* — tous les fichiers de `config/locales/**/*.fr.yml` qui affichent « PIN », les textes en dur des vues, helpers et contrôleurs Stimulus (`app/views/**`, `app/helpers/components_helper.rb`, `app/javascript/controllers/password_reveal_controller.js`…), et les tests qui lisent ces textes. Commentaires et identifiants de code non concernés.
+- **Dépend de**    : Lot F
+- **Test associé** : `test/system/identity/teacher_signup_test.rb` (IE-03, IE-05) · un test qui parcourt les fichiers de traduction `fr` et échoue si un texte contient « PIN » (IE-24)
+- **Done quand**   : l'inscription enseignant a deux champs Nom / Prénom(s) ; `grep -rnw "PIN" config/locales app/views app/javascript app/helpers` ne renvoie plus de texte affiché ; `bin/ci` vert
+
+---
+
 ## Rattachement des critères d'acceptation
 
 | Critère | Lot(s) |
@@ -232,6 +243,7 @@ Issues du challenger, des revues sécurité, tests et échecs silencieux, et des
 | IE-20 | 0 (option de la bulle), B |
 | IE-21 | E |
 | IE-22, IE-23 | F |
+| IE-03, IE-05 (version deux champs), IE-24 | G |
 | IE-18 | C |
 
 Aucun critère orphelin.
@@ -246,6 +258,7 @@ Vague 2 : Lot A ‖ Lot B ‖ Lot C    → 3 agents, worktrees isolés, après m
 Vague 3 : Lot D                    → 1 agent, après merge de A, B et C
 Vague 4 : Lot E                    → 1 agent, après le Lot D
 Vague 5 : Lot F                    → 1 agent, après la phase 5 (corrections)
+Vague 6 : Lot G                    → 1 agent, après le Lot F
 ```
 
 Worktrees de la vague 2, créés depuis la branche de chantier **après** le merge du Lot 0 :

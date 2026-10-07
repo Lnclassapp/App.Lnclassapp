@@ -18,7 +18,7 @@ L'enseignant arrive sur `/teacher-signup` et rencontre aussitôt un champ « Cod
 
 1. **Une seule page**, dans l'ordre du parcours (Q15, Q16), en trois rubriques : **Établissement** (DRENA, établissement, matière), **Vous** (nom complet, genre, numéro), **Code secret** (code, confirmation). Pas d'étapes : il n'y a pas d'état intermédiaire à garder, et la page marche sans JavaScript.
 2. **Par un lien d'invitation** (`/i/<jeton>`), la même page s'ouvre avec l'établissement **déjà affiché** dans le bandeau existant (`_school_preview`), et « Ce n'est pas votre établissement ? » ramène à la page standard. La DRENA et la liste n'apparaissent pas.
-3. **Nom complet en un champ, avec un aperçu du découpage.** La correction se fait dans un `<details>` natif, qui s'ouvre sans JavaScript, plutôt que dans une modale : les deux champs corrigés restent dans le même formulaire.
+3. **Nom et prénoms en deux champs** (amendement du 2026-10-07 : le nom complet avec aperçu et « Corriger » de la première version est retiré, memo Q24).
 4. **Le numéro et la confirmation du code secret sont vérifiés en direct** (Q16, Q18). Le serveur reste la garantie : sans JavaScript, il nettoie le numéro et refuse des codes différents.
 5. Erreur : la page est re-rendue en 422 par Turbo, sans rechargement (UDR-0024 §2.5). Succès : la page change, l'enseignant arrive sur la déclaration des classes avec « Bienvenue ! ». Aucun `*.turbo_stream.erb`.
 
@@ -51,7 +51,7 @@ L'enseignant arrive sur `/teacher-signup` et rencontre aussitôt un champ « Cod
 **Structure**
 
 - Un seul `form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form"`.
-- `data-controller="school--drena-schools identity--full-name identity--phone-digits identity--pin-match"` ; la valeur `school--drena-schools-url-value` reste `drena_schools_path("__drena__")`.
+- `data-controller="school--drena-schools identity--phone-digits identity--pin-match"` ; la valeur `school--drena-schools-url-value` reste `drena_schools_path("__drena__")`.
 - Avant le formulaire principal, toujours : `<form id="teacher-signup-drena" action="<%= new_teacher_registration_path %>" method="get"></form>` (repli sans JavaScript de l'UDR-0024 §2.4).
 - Le bloc `role="alert"` des erreurs `base` reste en tête du formulaire.
 - Champ caché `invite_token`, seulement quand l'établissement vient d'un lien valide.
@@ -60,8 +60,8 @@ L'enseignant arrive sur `/teacher-signup` et rencontre aussitôt un champ « Cod
 | # | Légende (`t`) | Contenu, dans l'ordre |
 |---|---|---|
 | 1 | « Établissement » (`.school`) | **Voie standard** : sélecteur DRENA, `<noscript>` « Afficher les établissements », frame `schools`, puis matière. **Voie lien** : bandeau `_school_preview`, lien « Ce n'est pas votre établissement ? », puis matière. |
-| 2 | « Vous » (`.you`) | Nom complet, aperçu, `<details>` « Corriger », genre (radios actuelles, inchangées), numéro |
-| 3 | « Code secret » (`.security`) | Code secret (aide actuelle), confirmation, statut de concordance |
+| 2 | « Vous » (`.you`) | Nom, Prénom(s), genre (radios actuelles, inchangées), numéro |
+| 3 | « Code secret » (`.security`) | « Code secret » (aide « 4 chiffres, que vous seul connaissez. »), « Confirmation du code secret », statut de concordance |
 
 - Puis `ui_button t(".submit")` (« Créer mon compte »), `brand`, `lg`, `full: true`.
 
@@ -78,52 +78,13 @@ L'enseignant arrive sur `/teacher-signup` et rencontre aussitôt un champ « Cod
 - `link_to t(".other_school"), new_teacher_registration_path, id: "other-school"`, avec la classe actuelle de `#other-school-code`. Texte : « Ce n'est pas votre établissement ? ».
 - Puis la matière.
 
-### 3.3 Nom complet
+### 3.3 Nom et prénoms (amendement du 2026-10-07, memo Q24)
 
-```erb
-<%= ui_field form, :full_name, required: true, maxlength: 131, autocomplete: "name", spellcheck: false,
-             placeholder: t(".full_name_placeholder"), hint: t(".full_name_hint"),
-             data: { identity__full_name_target: "input", action: "input->identity--full-name#preview" } %>
-<p id="full_name_preview" data-identity--full-name-target="preview" aria-live="polite" hidden
-   class="text-sm text-mute">Nom : <strong class="text-ink" data-identity--full-name-target="lastOut"></strong>
-   · Prénom(s) : <strong class="text-ink" data-identity--full-name-target="firstOut"></strong></p>
-<details id="name-correction" data-identity--full-name-target="editor" data-action="toggle->identity--full-name#fill"
-         <%= "open" if @form.errors[:last_name].any? || @form.errors[:first_name].any? || @form.corrected? %>>
-  <summary class="inline-flex min-h-tap cursor-pointer items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline">
-    <%= t(".correct_name") %>
-  </summary>
-  <div class="mt-2 space-y-4">
-    <%= ui_field form, :last_name, maxlength: 50, autocomplete: "family-name", data: { identity__full_name_target: "lastName" } %>
-    <%= ui_field form, :first_name, maxlength: 80, autocomplete: "given-name", data: { identity__full_name_target: "firstName" } %>
-  </div>
-</details>
-```
+> La version d'origine de cette section prévoyait un « Nom complet » avec aperçu et `<details>` « Corriger ». Elle est retirée : retour à deux champs.
 
-Textes (`fr`) :
-
-- libellé : « Nom complet » ;
-- `full_name_placeholder` : « Ex. : KOUASSI Aya Marie » ;
-- `full_name_hint` : « Votre nom, puis vos prénoms. » ;
-- `correct_name` : « Corriger le nom ou les prénoms » ;
-- les libellés « Nom » et « Prénom(s) » sont inchangés ;
-- le texte de l'aperçu est fait de deux clés, `preview_last` (« Nom : ») et `preview_first` (« Prénom(s) : »). Il ne se met jamais en dur.
-
-**Stimulus `identity/full_name_controller.js`** (nouveau) :
-
-- targets : `input`, `preview`, `lastOut`, `firstOut`, `editor`, `lastName`, `firstName`.
-- `preview()` : `squish`, puis découpe au premier espace.
-  - Moins de deux mots : `preview.hidden = true`.
-  - Sinon, remplit `lastOut` et `firstOut`, puis `preview.hidden = false`.
-  - Si `editor.open` est vrai, la méthode ne touche pas aux champs corrigés.
-- `syncEditor()` (au `connect`, au morphing et à chaque `toggle`) : « Corriger » fermé, `lastName` et `firstName` sont `disabled`, donc non envoyés ; ouvert, ils sont actifs. Sans JavaScript, rien n'est désactivé.
-- `fill()` : à l'ouverture du `<details>`, si `lastName` et `firstName` sont vides, les remplit avec le découpage courant. La fermeture ne vide rien.
-- Pas de `textContent` construit par concaténation HTML : les valeurs passent par `textContent`.
-
-**Règle serveur** (ADR-0082 §4.4) :
-
-- Si `last_name` **et** `first_name` sont remplis, ils font foi (`@form.corrected?`).
-- Sinon, le serveur découpe `full_name`.
-- Un seul mot donne, sous « Nom complet » : « Saisissez votre nom et vos prénoms. » (`full_name.single_word`).
+- Rubrique « Vous », dans l'ordre : `ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder")` puis `ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder")`, puis le genre, puis le numéro.
+- Libellés « Nom » et « Prénom(s) » (inchangés depuis l'ADR-0037). Placeholders : « Ex. : KOUASSI » et « Ex. : Aya Marie ».
+- Aucun aperçu, aucun `<details>`, aucun contrôleur Stimulus pour le nom ; erreurs sous chaque champ (messages existants).
 
 ### 3.4 Numéro
 
@@ -222,19 +183,23 @@ La formule « Inscription : … » ne s'accorde pas : il n'y a pas de « arrivé
 
 | État | Rendu |
 |---|---|
-| Vide | Sans DRENA : liste désactivée, aide « Choisissez d'abord votre DRENA. » ; DRENA sans établissement actif : « Aucun établissement actif dans cette DRENA. Vérifiez la DRENA choisie. » (UDR-0024, inchangé) ; aperçu du nom et statut du code masqués. |
+| Vide | Sans DRENA : liste désactivée, aide « Choisissez d'abord votre DRENA. » ; DRENA sans établissement actif : « Aucun établissement actif dans cette DRENA. Vérifiez la DRENA choisie. » (UDR-0024, inchangé) ; statut du code secret masqué. |
 | Chargement | Frame `schools` en `aria-busy` à 50 % d'opacité (UDR-0024, inchangé). |
-| Erreur | 422 re-rendu, saisies gardées sauf les codes secrets ; chaque message sous son champ (`aria-invalid`, `aria-describedby`) ; `<details>` ouvert si nom ou prénoms sont en erreur ; erreurs `base` et 429 dans le bloc `role="alert"` ; lien invalide : `#invite-link-invalid`. |
+| Erreur | 422 re-rendu, saisies gardées sauf les codes secrets ; chaque message sous son champ (`aria-invalid`, `aria-describedby`) ; erreurs `base` et 429 dans le bloc `role="alert"` ; lien invalide : `#invite-link-invalid`. |
 | Succès | Session ouverte ; redirection vers `/teachers/classrooms` avec le toast « Bienvenue ! Sélectionnez vos classes pour commencer. » ; écran d'attente : accueil enseignant. |
 
 **Accessibilité**
 
 - Cibles tactiles ≥ 48 px (`min-h-tap`), y compris `summary` et « Ce n'est pas votre établissement ? ».
-- `aria-live="polite"` sur l'aperçu du nom et sur le statut du code : ils sont annoncés sans voler le focus.
-- `<details>` et `<summary>` natifs : clavier et lecteur d'écran sans script.
-- Ordre de tabulation = ordre visuel : DRENA → établissement → matière → nom complet → Corriger → genre → numéro → code → confirmation → bouton.
+- `aria-live="polite"` sur le statut du code secret : ils sont annoncés sans voler le focus.
+- Ordre de tabulation = ordre visuel : DRENA → établissement → matière → nom → prénoms → genre → numéro → code secret → confirmation → bouton.
 - Codes secrets : règles actuelles de l'UDR-0024 (`type="password"`, `inputmode="numeric"`, `maxlength="4"`, `autocomplete="new-password"`, jamais renvoyés).
 - Parcours prouvé à 390 px et sur ordinateur, avec et sans lien.
+
+## 3.11 Vocabulaire « code secret » (amendement du 2026-10-07, memo Q25)
+
+- Dans **toute** l'interface (connexion, profil, changement et réinitialisation, codes de récupération, inscriptions élève, enseignant et direction, invitations, aide), le secret à 4 chiffres s'appelle « code secret », jamais « PIN ». Formes : « votre code secret », « Code secret oublié ? », « Confirmation du code secret », « Nouveau code secret », « Les deux codes secrets ne sont pas identiques. », « Code secret ou numéro incorrect. ». Accords au masculin.
+- Les libellés accessibles (`aria-label`, `title`, textes `sr-only`) suivent la même règle. Le code (classes, méthodes, routes, clés de traduction, colonnes) garde `pin`.
 
 ## 4. Conséquences
 

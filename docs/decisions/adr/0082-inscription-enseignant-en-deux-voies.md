@@ -5,7 +5,7 @@
 | **Statut** | Accepté *(porteur, 2026-10-07)* |
 | **Date** | 2026-10-07 |
 | **Chantier** | [`docs/chantiers/inscription-enseignant`](../../chantiers/inscription-enseignant/prd.md) |
-| **Remplace** | — *(amende ADR-0037 §4 pour la saisie, ADR-0057 et ADR-0063 côté enseignant, ADR-0071 §« Changer le lien », ADR-0073 pour les nouvelles inscriptions)* |
+| **Remplace** | — *(amendait ADR-0037 §4 pour la saisie jusqu'au retour à deux champs du 2026-10-07, ADR-0057 et ADR-0063 côté enseignant, ADR-0071 §« Changer le lien », ADR-0073 pour les nouvelles inscriptions)* |
 | **Remplacé par** | — |
 
 ---
@@ -68,7 +68,7 @@ Enfin, le porteur veut le nom et les prénoms dans **un seul champ** (Q2, Q3). L
 >
 > **La voie d'arrivée est enregistrée dans `teacher_profiles.joined_via`. L'enseignant est rattaché à son établissement dès l'inscription, sans demande en attente.**
 >
-> **Le nom se saisit en un champ « Nom complet » : le premier mot est le nom, le reste les prénoms. L'enseignant peut corriger le découpage, qui est enregistré dans les deux colonnes de l'ADR-0037.**
+> **Le nom et les prénoms se saisissent dans deux champs (ADR-0037 ; amendement §4.4).**
 
 ### 4.1 Liens d'invitation
 
@@ -102,12 +102,16 @@ Reprise des enseignants existants, dans la même migration :
 
 L'écran d'attente rattache par établissement choisi (`school_public_id` d'un établissement actif de la DRENA) au lieu du code. La règle des départs (ADR-0071) ne change pas : l'établissement qui a retiré l'enseignant est refusé par l'erreur neutre.
 
-### 4.4 Nom complet
+### 4.4 Nom et prénoms — retour à deux champs (amendement du 2026-10-07, memo Q24)
 
-- `Entities::Identity::FullName.split(raw)` applique `squish`, puis coupe au **premier** espace. Elle renvoie `[last_name, first_name]`, ou `nil` s'il y a moins de deux mots.
-- Le DTO reçoit `full_name`, `last_name` et `first_name`. Quand `last_name` **et** `first_name` sont remplis (l'enseignant a ouvert « Corriger », UDR-0078 §3.3), ils font foi. Sinon, le serveur découpe `full_name`, que l'aperçu ait tourné ou non.
-- Les validations de l'ADR-0037 (motif, longueurs 50 et 80, casse gardée) s'appliquent au résultat. Un seul mot donne l'erreur `full_name: [:single_word]`.
-- Les autres formulaires (élève, direction, invitation, profil) gardent leurs deux champs.
+> La première version de cette décision faisait saisir un « Nom complet » coupé au premier mot, avec un aperçu et « Corriger ». Le porteur l'a retirée après la phase 5 : « Revenons à 2 champs. Nom et prénoms. C'est plus simple. »
+
+- L'inscription enseignant saisit `last_name` et `first_name` dans deux champs, selon l'**ADR-0037, qui s'applique sans amendement**.
+- `Entities::Identity::FullName`, le champ `full_name` du DTO, l'aperçu et le contrôleur Stimulus `identity--full-name` sont retirés.
+
+### 4.4 ter Vocabulaire : « code secret », jamais « PIN » (memo Q25)
+
+- Partout dans l'interface, le secret à 4 chiffres s'appelle « code secret ». Le code interne garde `pin` (ADR-0025).
 
 ### 4.4 bis Numéros des élèves masqués dans la classe (phase 5, memo Q22 puis Q23)
 
@@ -139,26 +143,10 @@ L'écran d'attente rattache par établissement choisi (`school_public_id` d'un �
 - **Un enseignant ne peut plus joindre un élève par téléphone depuis Lnclass** : il passe par la classe, les annonces ou l'établissement.
 - **Un jeton de direction ou d'équipe qui fuit ne se change pas.** Il ne donne qu'une voie, mais une voie fausse peut tromper la certification. La certification devra croiser la voie avec d'autres signaux.
 - **Collision de jetons entre tables** (`teacher_profiles` et les deux colonnes de `schools`), sur 48 bits chacun. La résolution cherche d'abord le collègue, puis la direction, puis l'équipe. Le risque est négligeable, mais aucune contrainte ne l'interdit.
-- **Un nom de famille en deux mots est mal coupé** si l'enseignant ne corrige pas l'aperçu. L'ADR-0037 refusait toute règle de découpage : la règle revient, du bon côté du nom, et l'enseignant garde la main.
 - La voie d'un enseignant inscrit avant le chantier est **déduite** : une voie `standard` peut cacher un enseignant passé par le code national.
 - Le code d'établissement vit encore dans le schéma et sur la fiche de l'équipe, pour la seule direction, jusqu'au chantier suivant.
 
 ## 6. Notes d'implémentation
-
-```ruby
-# app/domain/entities/identity/full_name.rb
-module Entities
-  module Identity
-    module FullName
-      # Ordre ivoirien : le nom, puis un ou plusieurs prénoms. nil sous deux mots.
-      def self.split(raw)
-        last_name, first_name = raw.to_s.squish.split(" ", 2)
-        [last_name, first_name] if first_name.present?
-      end
-    end
-  end
-end
-```
 
 ```ruby
 # app/domain/entities/identity/arrival_channel.rb
@@ -194,6 +182,6 @@ add_column :teacher_profiles, :joined_via, :string, null: false, default: "code"
 - `test/routing/v1_routes_test.rb` : `/e/:code` et `/teacher-signup/without-code` ne sont plus routés ; `/i/:token` l'est.
 - `test/db/schema_constraints_test.rb` : le `CHECK` de `teacher_profiles.joined_via` refuse une valeur hors liste ; les jetons de `schools` refusent un format invalide et un doublon.
 - `test/domain/use_cases/identity/register_teacher_test.rb` : chaque voie enregistre sa valeur ; aucune écriture dans `school_join_requests` (double du port non appelé) ; un `school_public_id` envoyé avec un jeton valide est ignoré.
-- `test/domain/entities/identity/full_name_test.rb` : découpage au premier mot, `nil` sous deux mots.
+- `test/system/identity/teacher_signup_test.rb` : deux champs « Nom » et « Prénom(s) », aucun « Nom complet » ; aucun « PIN » affiché.
 - `test/system/identity/teacher_signup_test.rb` : aucun champ « Code d'établissement » sur `/teacher-signup` ni sur l'écran d'attente.
 - `test/db/growth_migrations_test.rb` : la nouvelle migration figure dans `LATER`.
