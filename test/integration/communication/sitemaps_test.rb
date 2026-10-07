@@ -100,7 +100,7 @@ module Communication
     end
 
     test "robots.txt allows every robot and points to the sitemap on the canonical host" do
-      get robots_path
+      get robots_path, headers: { "HOST" => "lnclass.com" }
 
       assert_response :success
       assert_equal "text/plain", response.media_type
@@ -117,10 +117,29 @@ module Communication
     test "CANONICAL_HOST changes the Sitemap line without touching the code" do
       Rails.configuration.x.canonical_host = "www.lnclass.com"
 
-      get robots_path, headers: { "HOST" => "example.org" }
+      get robots_path, headers: { "HOST" => "lnclass.com" }
 
       assert_includes response.body.lines, "Sitemap: https://www.lnclass.com/sitemap.xml\n"
-      assert_no_match(/example\.org/, response.body)
+      assert_no_match(%r{https://lnclass\.com/}, response.body)
+    end
+
+    # ADR-0074, amendement du 2026-10-07 : seuls les hôtes de la production s'indexent, quel que soit CANONICAL_HOST.
+    test "on any host but production, robots.txt forbids every robot and announces no sitemap, whatever CANONICAL_HOST" do
+      [ [ "app-staging.lnclass.com", "app-staging.lnclass.com" ], [ "app-develop.lnclass.com", "app-develop.lnclass.com" ],
+        [ "app-staging.lnclass.com", "lnclass.com" ], [ "applnclassapp-staging-b274.up.railway.app", "lnclass.com" ],
+        [ "www.example.com", "lnclass.com" ] ].each do |host, canonical_host|
+        Rails.configuration.x.canonical_host = canonical_host
+
+        get robots_path, headers: { "HOST" => host }
+
+        assert_response :success
+        assert_equal "max-age=86400, public", response.headers["Cache-Control"]
+        assert_equal <<~ROBOTS, response.body, "#{host} (CANONICAL_HOST #{canonical_host})"
+          # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+          User-agent: *
+          Disallow: /
+        ROBOTS
+      end
     end
 
     test "neither public/robots.txt nor public/sitemap.xml exist: they would shadow the routes with a one-year cache" do

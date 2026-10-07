@@ -46,7 +46,7 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 | Variable | Rôle |
 |---|---|
 | `APP_HOSTS` | Domaines personnalisés autorisés, séparés par des virgules |
-| `CANONICAL_HOST` | Hôte des adresses partagées et indexées du blog : lien `canonical`, `og:url`, `og:image`, `/sitemap.xml` et ligne `Sitemap:` de `/robots.txt` (`config.x.canonical_host`, ADR-0074 §4.6). `lnclass.com` par défaut ; `www.lnclass.com` pour l'autre choix. **Doit aussi figurer dans `APP_HOSTS`**, sinon les adresses partagées répondent 403 ; le démarrage de production le signale alors dans le journal (`[config] WARNING: CANONICAL_HOST … is not in config.hosts`). En changer après indexation demande une nouvelle indexation |
+| `CANONICAL_HOST` | Hôte des adresses partagées et indexées du blog : lien `canonical`, `og:url`, `og:image`, `/sitemap.xml` et ligne `Sitemap:` de `/robots.txt` (`config.x.canonical_host`, ADR-0074 §4.6). `lnclass.com` par défaut ; `www.lnclass.com` pour l'autre choix. **Doit aussi figurer dans `APP_HOSTS`**, sinon les adresses partagées répondent 403 ; le démarrage de production le signale alors dans le journal (`[config] WARNING: CANONICAL_HOST … is not in config.hosts`). En changer après indexation demande une nouvelle indexation. **Staging** : `app-staging.lnclass.com` ; **Develop** : `app-develop.lnclass.com` (ADR-0074, amendement du 2026-10-07). L'indexation ne dépend pas de cette variable : hors des hôtes `lnclass.com` et `www.lnclass.com`, `/robots.txt` interdit tout robot et chaque réponse porte `X-Robots-Tag: noindex, nofollow` |
 | `BUCKET_REGION` | Région du bucket, `auto` par défaut |
 | `BUCKET_FORCE_PATH_STYLE` | `true` si le bucket Railway annonce des URL en *path-style* |
 
@@ -57,6 +57,12 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 | `TEAM_BOOTSTRAP_CONTACT` | Numéro du premier membre de l'équipe (ADR-0034, ADR-0038). Tant qu'aucun compte équipe n'existe, chaque déploiement révoque l'invitation ouverte et imprime **un** nouveau lien dans les logs du pré-déploiement. Absente : aucune invitation |
 
 La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`railway.json` et réglage « Pre-deploy Command » du service, ADR-0052). En production, `db:prepare` ne sème jamais (`seeds: false` dans `config/database.yml`) : sans cela, sur une base neuve, il semait avant que `db:seed` ne sème à nouveau, et deux liens s'imprimaient par déploiement (amendement du 2026-09-29).
+
+### Déploiement automatique
+
+Chaque environnement Railway déploie seul la branche qu'il suit : Develop ← `Develop`, Staging ← `Staging`, production ← `main`. Après un merge, un déploiement doit apparaître dans la minute. Sinon, lancer « Deploy latest commit » au tableau de bord, puis reconnecter la source : *Settings › Source*, déconnecter puis reconnecter le dépôt sur la même branche.
+
+**Les réglages d'un service de Staging ou de production (région, source, répertoire racine) se changent au tableau de bord, jamais par l'API ni par un agent** : une modification validée par l'API réécrit les déclencheurs GitHub du service sans autorisation GitHub, et les merges ne déploient plus (journal de `politique-cache`, 2026-10-07).
 
 ### Facultatives — réglage de charge
 
