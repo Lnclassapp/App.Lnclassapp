@@ -139,6 +139,16 @@ module Repositories
         assert_nil @repository.authenticate(contact: "0102030405", pin: "2468")
         assert create_student(contact: "0102030405").persisted?
       end
+
+      # ADR-0036, ADR-0082 §4.3 : on ne garde pas de trace d'usage d'un compte anonymisé.
+      test "anonymize forgets when the account last opened the installed app" do
+        record = create_student
+        @repository.mark_app_opened(user_id: record.id, at: Time.current.change(usec: 0))
+
+        @repository.anonymize(user_id: record.id, first_name: "Compte", last_name: "supprimé", at: Time.current)
+
+        assert_nil record.reload.app_opened_at
+      end
     end
   end
 end
