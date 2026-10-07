@@ -97,7 +97,7 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 - **Fichiers**     : `app/infrastructure/queries/identity/referral_query.rb` *(plus de `school_code` dans la ligne)*
                      `app/infrastructure/queries/school/own_school_query.rb` *(`direction_invite_token`)*
                      `app/infrastructure/queries/school/school_detail_query.rb` *(`team_invite_token` ; `teachers` : `joined_via` et nom du parrain)*
-                     `app/infrastructure/queries/school/schools_query.rb` · `test/infrastructure/queries/school/own_school_query_test.rb` *(ajout du 2026-10-07 : l'en-tête `teams/schools/_header` est aussi rendu par trois Turbo Streams avec une `SchoolsQuery::Row`, qui doit porter `team_invite_token` ; le test fige la liste des champs de `OwnSchoolQuery::Row`)*
+                     `app/infrastructure/queries/school/schools_query.rb` · `test/infrastructure/queries/school/own_school_query_test.rb` · `test/infrastructure/queries/school/schools_query_test.rb` *(ajout du 2026-10-07 : l'en-tête `teams/schools/_header` est aussi rendu par trois Turbo Streams avec une `SchoolsQuery::Row`, qui doit porter `team_invite_token` ; le test fige la liste des champs de `OwnSchoolQuery::Row`)*
                      `app/views/identity/referrals/_invite.html.erb`
                      `app/views/identity/referrals/_sidebar_card.html.erb`
                      `app/views/school_admin/schools/_link.html.erb` *(sans code ni « Changer le lien »)*
