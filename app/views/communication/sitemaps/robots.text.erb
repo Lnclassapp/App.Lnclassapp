@@ -1,8 +1,12 @@
 <%# 🌐 UI · communication/sitemaps/robots.text — robots.txt, servi par une route (ADR-0074 §4.6) %>
-<%# Rôle : règles de l'ancien public/robots.txt (aucune : tout robot est admis) et ligne Sitemap sur l'hôte canonique %>
-<%# PRD blog : BL-19 %>
+<%# Rôle : sur un hôte de la production, tout robot est admis et la ligne Sitemap vise l'hôte canonique ; ailleurs, tout est interdit %>
+<%# PRD blog : BL-19 · ADR-0074, amendement du 2026-10-07 %>
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 User-agent: *
+<% if @indexed -%>
 Disallow:
 
 Sitemap: <%= canonical_url(sitemap_path) %>
+<% else -%>
+Disallow: /
+<% end -%>

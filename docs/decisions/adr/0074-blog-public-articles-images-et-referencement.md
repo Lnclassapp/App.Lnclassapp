@@ -367,3 +367,14 @@ Le reste suit le PRD §5 et les UDR : DTO `Dtos::Communication::ArticleInput` (`
 - Hôte canonique : `lnclass.com` par défaut, `CANONICAL_HOST=www.lnclass.com` sinon (memo, question 3).
 - Plafonds : 1 Mo et 1600 px par image, 10 images dans le texte en plus de la couverture, 150 caractères de texte de remplacement (memo, question 4).
 - « Auteur désactivé » : aucun état de ce nom n'existe ; seule l'anonymisation fait repli en V1.
+
+## Amendement du 2026-10-07 — Staging et Develop sur leur propre domaine, sans indexation · Statut : Accepté (porteur, 2026-10-07)
+
+*En cas d'écart avec le texte ci-dessus, cette section fait foi.*
+
+- **Hôte canonique par environnement** : production `lnclass.com` (défaut) ; Staging `CANONICAL_HOST=app-staging.lnclass.com` ; Develop `CANONICAL_HOST=app-develop.lnclass.com`. La recette teste ainsi les liens partagés, le plan du site et `/robots.txt` sur son propre domaine. L'avertissement de démarrage (§4.6 : `CANONICAL_HOST` absent de `config.hosts`) ne se déclenche plus hors production, l'hôte figurant déjà dans `APP_HOSTS`.
+- **Seule la production s'indexe, et c'est l'hôte de la requête qui le décide**, jamais une variable : `config.x.indexed_hosts` = `lnclass.com`, `www.lnclass.com`. Sur tout autre hôte (Staging, Develop, domaine `*.up.railway.app`, poste local), même si `CANONICAL_HOST` y vaut `lnclass.com` par oubli :
+  - `/robots.txt` répond `User-agent: *` puis `Disallow: /`, sans ligne `Sitemap:` ;
+  - chaque réponse d'un contrôleur porte `X-Robots-Tag: noindex, nofollow`, posé avant tout autre filtre pour rester aussi sur une redirection (`ApplicationController`).
+  Sur les hôtes de la production, rien ne change : tout robot est admis, la ligne `Sitemap:` vise l'hôte canonique, aucun `X-Robots-Tag`.
+- Tests : `test/integration/communication/sitemaps_test.rb`, `test/integration/indexing_test.rb`.
