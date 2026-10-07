@@ -75,7 +75,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
     Orm::TeacherProfile.create!(user: teacher, material: graph[:material], joined_via: "standard")
     Orm::TeacherSchool.create!(teacher:, school:, primary: true)
     Orm::TeacherClassroom.create!(teacher:, classroom:)
-    Orm::ClassroomStudent.create!(classroom:, student:, primary: true, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student:, primary: true, joined_at: Time.current)
     gap = Orm::KnowledgeGap.create!(student:, essential:, source_session: session)
     Orm::ExerciseBadge.create!(student:, exercise:, exercise_session: session, level: "bronze", awarded_at: Time.current)
 

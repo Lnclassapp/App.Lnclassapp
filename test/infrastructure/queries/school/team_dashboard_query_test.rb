@@ -223,8 +223,8 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     placed_student(first_class).tap { create_exercise_session(student: it, started_at: 1.day.ago) }
     placed_student(second_class).tap { create_exercise_session(student: it, started_at: 40.days.ago) }
     twice = placed_student(first_class).tap { create_exercise_session(student: it, started_at: 2.days.ago) }
-    Orm::ClassroomStudent.create!(classroom: there_class, student: twice, primary: false, joined_at: Time.current)
-    create_student.tap { Orm::ClassroomStudent.create!(classroom: first_class, student: it, primary: false, joined_at: Time.current) }
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: there_class, student: twice, primary: false, joined_at: Time.current)
+    create_student.tap { Orm::ClassroomStudent.create!(joined_via: "standard", classroom: first_class, student: it, primary: false, joined_at: Time.current) }
     placed_student(create_classroom(school: here_school, level: first, status: "archived"))
     placed_student(create_classroom(school: here_school, level: first, school_year: "2020-2021"))
     placed_student(first_class, anonymized_at: Time.current).tap { create_exercise_session(student: it, started_at: 1.day.ago) }

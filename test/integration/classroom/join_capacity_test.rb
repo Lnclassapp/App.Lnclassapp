@@ -25,7 +25,7 @@ class Classroom::JoinCapacityTest < ActiveSupport::TestCase
   end
 
   class RefusedMemberships < Repositories::Classroom::MembershipRepository
-    def add_primary(classroom_id:, student_id:, at:)
+    def add_primary(classroom_id:, student_id:, via:, at:)
       Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
     end
   end

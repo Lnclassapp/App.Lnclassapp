@@ -24,7 +24,7 @@ module Queries
         gone = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
         secondary = create_user(role: "student")
-        Orm::ClassroomStudent.create!(classroom: @classroom, student: secondary, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: @classroom, student: secondary, primary: false, joined_at: Time.current)
 
         row = home
 
@@ -177,7 +177,7 @@ module Queries
 
       test "the primary classroom only" do
         other = create_classroom
-        Orm::ClassroomStudent.create!(classroom: other, student: @student, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other, student: @student, primary: false, joined_at: Time.current)
         create_assignment(classroom: other, assignable: create_exercise(essential: @essential, title: "Autre classe"))
 
         assert_empty titles

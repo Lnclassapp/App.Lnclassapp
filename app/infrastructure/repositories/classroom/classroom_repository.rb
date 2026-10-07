@@ -1,12 +1,13 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
-# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; code d'adhésion, verrou, génération en masse, retrait d'une classe vide
-# ADR  : 0030, 0039, 0041, 0059
+# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; code, jeton du lien, verrou, génération en masse, retrait d'une classe vide
+# ADR  : 0030, 0039, 0041, 0059, 0083
 module Repositories
   module Classroom
     class ClassroomRepository
       include Ports::Classroom::ClassroomRepositoryPort
 
       JOIN_CODE_INDEX = "index_classrooms_on_join_code".freeze
+      LINK_TOKEN_SQL = "substr(replace(gen_random_uuid()::text, '-', ''), 1, 12)".freeze
       # ADR-0059 : ce qui fait qu'une classe a servi, dans l'ordre où la raison est donnée.
       USAGES = { has_students: Orm::ClassroomStudent, has_teachers: Orm::TeacherClassroom,
                  has_assignments: Orm::ClassroomAssignment }.freeze
@@ -24,6 +25,22 @@ module Repositories
       def lock_by_join_code(join_code:)
         record = Orm::Classroom.lock.find_by(join_code:)
         record && map_to_entity(record)
+      end
+
+      def lock_by_public_id(public_id:)
+        record = Orm::Classroom.lock.find_by(public_id:)
+        record && map_to_entity(record)
+      end
+
+      def lock_by_link_token(token:)
+        record = token.presence && Orm::Classroom.lock.find_by(link_token: token)
+        record && map_to_entity(record)
+      end
+
+      # Le jeton est tiré par la base, comme à la création : une seule source de sa forme (ADR-0083 §4.1).
+      def rotate_link_token(id:)
+        Orm::Classroom.where(id:).update_all([ "link_token = #{LINK_TOKEN_SQL}, updated_at = ?", Time.current ])
+        Orm::Classroom.where(id:).pick(:link_token)
       end
 
       # Un code déjà pris est retiré une fois ; un nom pris dans l'école et l'année donne :conflict.
@@ -87,7 +104,8 @@ module Repositories
       def map_to_entity(record)
         Entities::Classroom::Classroom.new(
           id: record.id, public_id: record.public_id, school_id: record.school_id, level_id: record.level_id,
-          series_id: record.series_id, school_year: record.school_year, join_code: record.join_code, name: record.name,
+          series_id: record.series_id, school_year: record.school_year, join_code: record.join_code,
+          link_token: record.link_token, name: record.name,
           status: record.status, max_students: record.max_students,
           teacher_ids: Orm::TeacherClassroom.where(classroom_id: record.id).pluck(:teacher_id),
           active_students_count: Orm::ClassroomStudent.where(classroom_id: record.id, left_at: nil).count

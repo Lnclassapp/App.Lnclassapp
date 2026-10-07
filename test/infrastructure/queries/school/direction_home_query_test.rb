@@ -50,7 +50,7 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
     classroom("3ème 9", status: "archived")
     classroom("3ème 8", school_year: "2020-2021")
     both = create_student(classroom: first)
-    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: both, primary: false, joined_at: Time.current)
     create_student(classroom: second)
     create_student(classroom: third)
     gone = create_student(classroom: third)

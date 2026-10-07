@@ -76,7 +76,7 @@ module UseCases
           @refuse = refuse
         end
 
-        def add_primary(classroom_id:, student_id:, at:)
+        def add_primary(classroom_id:, student_id:, via:, at:)
           return Shared::Result.failure(:conflict, errors: { base: [ :already_member ] }) if @refuse
 
           @journal << [ :membership, classroom_id, student_id, at ]

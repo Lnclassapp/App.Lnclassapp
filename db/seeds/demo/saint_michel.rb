@@ -205,7 +205,8 @@ students = [ %w[Ahoua Kouadio male], %w[Aka Bénédicte female], %w[Assi Franck 
            .each_with_index.map do |(last_name, first_name, gender), index|
   student = account.call(format("0110000%03d", index + 1), role: "student", last_name:, first_name:, gender:)
   unless Orm::ClassroomStudent.exists?(student_id: student.id)
-    Orm::ClassroomStudent.create!(student_id: student.id, classroom:, primary: true, joined_at: START - rand(1..5).days)
+    Orm::ClassroomStudent.create!(student_id: student.id, classroom:, primary: true, joined_at: START - rand(1..5).days,
+                                  joined_via: "standard")
   end
   student
 end

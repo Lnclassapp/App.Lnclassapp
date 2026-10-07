@@ -27,7 +27,7 @@ module Repositories
         record = Orm::Classroom.find(created.id)
         teacher = create_teacher(classrooms: [ record ])
         create_student(classroom: record)
-        Orm::ClassroomStudent.create!(classroom: record, student: create_student, joined_at: @at, left_at: @at)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: record, student: create_student, joined_at: @at, left_at: @at)
 
         found = ClassroomRepository.new.find_by_public_id(public_id: created.public_id)
 
@@ -108,7 +108,7 @@ module Repositories
 
       test "refuse une classe qui a eu un élève, même parti, un enseignant ou une assignation, même archivée (CN-06)" do
         left = create_classroom(school: @school)
-        Orm::ClassroomStudent.create!(classroom: left, student: create_student, joined_at: @at, left_at: @at)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: left, student: create_student, joined_at: @at, left_at: @at)
         taught = create_classroom(school: @school)
         create_teacher(school: @school, classrooms: [ taught ])
         assigned = create_classroom(school: @school)
@@ -140,6 +140,34 @@ module Repositories
                    level_id: @level.id, series_id: nil, join_code: taken } ]
 
         assert_raises(ActiveRecord::RecordNotUnique) { ClassroomRepository.new.insert_generated(rows:, at: @at) }
+      end
+
+      test "IL-08: verrouille une classe par son identifiant public ou par le jeton de son lien, avec son effectif" do
+        record = create_classroom(school: @school)
+        create_student(classroom: record)
+        repository = ClassroomRepository.new
+
+        by_id = Orm::Classroom.transaction { repository.lock_by_public_id(public_id: record.public_id) }
+        by_token = Orm::Classroom.transaction { repository.lock_by_link_token(token: record.reload.link_token) }
+
+        assert_equal [ record.id, record.id ], [ by_id.id, by_token.id ]
+        assert_equal [ record.link_token, 1 ], [ by_token.link_token, by_token.active_students_count ]
+        assert_nil repository.lock_by_public_id(public_id: "inconnu")
+        assert_nil repository.lock_by_link_token(token: "0123456789ab")
+        assert_nil repository.lock_by_link_token(token: nil)
+      end
+
+      test "IL-11: changer le lien tire un nouveau jeton et invalide l'ancien" do
+        record = create_classroom(school: @school).reload
+        old = record.link_token
+        repository = ClassroomRepository.new
+
+        fresh = repository.rotate_link_token(id: record.id)
+
+        assert_match(/\A[0-9a-f]{12}\z/, fresh)
+        assert_not_equal old, fresh
+        assert_equal fresh, record.reload.link_token
+        assert_nil repository.lock_by_link_token(token: old)
       end
     end
   end

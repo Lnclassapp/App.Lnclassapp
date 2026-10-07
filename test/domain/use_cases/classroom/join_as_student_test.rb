@@ -60,7 +60,7 @@ module UseCases
           true
         end
 
-        def add_primary(classroom_id:, student_id:, at:)
+        def add_primary(classroom_id:, student_id:, via:, at:)
           return Shared::Result.failure(:conflict, errors: { base: [ :already_member ] }) if @refuse
 
           @journal << [ :add, classroom_id, student_id, at ]

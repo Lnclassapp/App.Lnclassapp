@@ -48,7 +48,7 @@ module Queries
 
         create_student(classroom: tle_d10)
         create_student(classroom: tle_d10)
-        Orm::ClassroomStudent.create!(classroom: tle_d10, student: create_student, joined_at: 1.month.ago, left_at: 1.day.ago)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: tle_d10, student: create_student, joined_at: 1.month.ago, left_at: 1.day.ago)
         create_teacher(school: @school, first_name: "Awa", last_name: "Koné", classrooms: [ tle_d10, sixth_one ])
         create_teacher(school: @school, first_name: "Yao", last_name: "Brou", classrooms: [ tle_d10 ])
 

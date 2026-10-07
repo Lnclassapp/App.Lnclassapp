@@ -134,7 +134,7 @@ module Queries
       test "only the student's active primary classroom counts" do
         exercise = create_exercise(essential: @essential)
         secondary = create_classroom
-        Orm::ClassroomStudent.create!(classroom: secondary, student: @student, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: secondary, student: @student, primary: false, joined_at: Time.current)
         create_assignment(classroom: secondary, assignable: exercise)
         left = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: left).update_all(left_at: Time.current)

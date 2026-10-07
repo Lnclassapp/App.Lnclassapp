@@ -6,6 +6,8 @@ module UseCases
     class JoinWithCode
       Joined = Data.define(:user, :classroom, :token)
       ROLE = "student".freeze
+      # ADR-0083 §4.4 : la voie historique, tant que ce chemin existe.
+      VIA = "code".freeze
 
       # Un refus après la création du compte traverse la transaction pour l'annuler, puis ressort en Result.
       class Aborted < StandardError
@@ -57,7 +59,7 @@ module UseCases
 
       def enroll(user, classroom, ip, user_agent)
         now = @clock.now
-        added = @memberships.add_primary(classroom_id: classroom.id, student_id: user.id, at: now)
+        added = @memberships.add_primary(classroom_id: classroom.id, student_id: user.id, via: VIA, at: now)
         raise Aborted, added if added.failure?
 
         Shared::Result.success(Joined.new(user:, classroom:, token: open_session(user, ip, user_agent, now)))

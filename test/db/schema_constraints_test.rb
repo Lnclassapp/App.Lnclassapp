@@ -32,7 +32,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "series" => [ [ %w[name], nil ] ],
     "level_series" => [ [ %w[level_id series_id], nil ] ],
     "materials" => [ [ %w[name], nil ], [ %w[shortname], nil ] ],
-    "classrooms" => [ [ %w[school_id school_year name], nil ], [ %w[join_code], "join_codeISNOTNULL" ] ],
+    "classrooms" => [ [ %w[school_id school_year name], nil ], [ %w[join_code], "join_codeISNOTNULL" ],
+                      [ %w[link_token], nil ] ],
     "classroom_students" => [ [ %w[classroom_id student_id], nil ], [ %w[student_id], "primaryANDleft_atISNULL" ] ],
     "teacher_classrooms" => [ [ %w[teacher_id classroom_id], nil ] ],
     "courses" => [ [ %w[level_id material_id name], "series_idISNULL" ],
@@ -71,6 +72,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
     "referrals" => { "source" => %w[link sponsor] },
     "teacher_profiles" => { "joined_via" => %w[standard colleague direction team code] }, # ADR-0082 §4.2
+    "classroom_students" => { "joined_via" => %w[standard link code] }, # ADR-0083 §4.4
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
@@ -147,6 +149,48 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     %w[standard colleague direction team code].each { profile.update_column(:joined_via, it) }
     assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { profile.update_column(:joined_via, "sponsor") } }
     assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { profile.update_column(:joined_via, nil) } }
+  end
+
+  test "IL-22: every classroom draws its own link token, opaque, unique (ADR-0083 §4.1)" do
+    classrooms = Array.new(2) { create_classroom.reload }
+    tokens = classrooms.map(&:link_token)
+    assert_equal 2, tokens.uniq.size
+    assert(tokens.all? { it.match?(/\A[0-9a-f]{12}\z/) }, tokens.inspect)
+
+    last = classrooms.last
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { last.update_column(:link_token, "ABCDEF012345") } }
+    assert_raises(ActiveRecord::RecordNotUnique) { connection.transaction(requires_new: true) { last.update_column(:link_token, tokens.first) } }
+    assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { last.update_column(:link_token, nil) } }
+  end
+
+  test "IL-22: a membership has a mandatory arrival channel, without default, among the three (ADR-0083 §4.4)" do
+    column = connection.columns("classroom_students").find { |candidate| candidate.name == "joined_via" }
+    assert_equal [ false, nil ], [ column.null, column.default ]
+
+    membership = Orm::ClassroomStudent.find_by!(student: create_student(classroom: create_classroom))
+    %w[standard link code].each { membership.update_column(:joined_via, it) }
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { membership.update_column(:joined_via, "sms") } }
+    assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { membership.update_column(:joined_via, nil) } }
+  end
+
+  test "IL-14: a removal names who removed, and only closes a membership that has ended (ADR-0083 §4.5)" do
+    membership = Orm::ClassroomStudent.find_by!(student: create_student(classroom: create_classroom))
+    teacher = create_teacher
+    now = Time.current
+
+    assert_raises(ActiveRecord::CheckViolation, "retiré sans être parti") do
+      connection.transaction(requires_new: true) { membership.update_columns(removed_at: now, removed_by_id: teacher.id) }
+    end
+    assert_raises(ActiveRecord::CheckViolation, "retiré par personne") do
+      connection.transaction(requires_new: true) { membership.update_columns(left_at: now, removed_at: now) }
+    end
+    assert_raises(ActiveRecord::CheckViolation, "auteur sans retrait") do
+      connection.transaction(requires_new: true) { membership.update_columns(left_at: now, removed_by_id: teacher.id) }
+    end
+    membership.update_columns(left_at: now, removed_at: now, removed_by_id: teacher.id)
+
+    key = connection.foreign_keys("classroom_students").find { it.column == "removed_by_id" }
+    assert_equal [ "users", :restrict ], [ key.to_table, key.on_delete ]
   end
 
   test "IE-14: every school draws its own direction and team invite tokens, opaque, unique (ADR-0082 §4.1)" do

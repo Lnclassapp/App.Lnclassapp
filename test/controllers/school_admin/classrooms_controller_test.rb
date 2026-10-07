@@ -86,7 +86,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     second = create_classroom(school: @school, level: @level, name: "2nde C 2")
     create_classroom(school: @school, level: @level, name: "2nde C 9", status: "archived")
     both = create_student(classroom: @classroom)
-    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: both, primary: false, joined_at: Time.current)
     create_student(classroom: second)
     create_teacher(school: @school, classrooms: [ @classroom, second ])
     sign_in_as @admin

@@ -5,6 +5,8 @@ module UseCases
   module Classroom
     class JoinAsStudent
       ALREADY_ENROLLED = { base: [ :already_enrolled ] }.freeze
+      # ADR-0083 §4.4 : la voie historique, tant que ce chemin existe.
+      VIA = "code".freeze
 
       # L'échec de la nouvelle adhésion traverse la transaction pour rouvrir l'ancienne, puis ressort en Result.
       class Aborted < StandardError
@@ -53,7 +55,7 @@ module UseCases
 
         now = @clock.now
         @memberships.leave_primary(student_id:, at: now) if current
-        added = @memberships.add_primary(classroom_id: classroom.id, student_id:, at: now)
+        added = @memberships.add_primary(classroom_id: classroom.id, student_id:, via: VIA, at: now)
         raise Aborted, added if added.failure?
 
         Shared::Result.success(classroom)

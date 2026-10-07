@@ -40,11 +40,13 @@ Pourquoi un Lot F : supprimer `/join`, `Entities::Classroom::JoinCode` et la col
                      `app/infrastructure/orm/classroom_student.rb` *(association `removed_by`)*
                      `app/domain/policies/classroom/manage_classroom_members_policy.rb` *(partagée par C, D et E)*
                      `app/domain/use_cases/classroom/join_with_code.rb` · `app/domain/use_cases/classroom/join_as_student.rb` *(une ligne chacun : `via: "code"` ; réécrits par A et B)*
-                     `config/routes/classroom.rb` · `config/routes/school.rb` *(ajout seulement : `/student-signup`, `/students/classroom/new`, les deux adresses de la cascade, `PATCH /classrooms/:public_id/link`, `DELETE /classrooms/:classroom_public_id/students/:student_public_id`)*
+                     `config/routes/classroom.rb` · `config/routes/school.rb` *(ajout seulement : `/student-signup`, `/students/classroom/new` et son `POST /students/classroom`, les deux adresses de la cascade — `school_picker_levels_path`, `school_picker_classrooms_path` —, `PATCH /classrooms/:public_id/link`, `DELETE /classrooms/:classroom_public_id/students/:student_public_id`)*
                      `config/locales/classroom/classrooms.fr.yml` *(clés du lien, des pastilles et du retrait : partagées par C et D)*
-                     `test/support/factories/classroom.rb` *(`via:`, élève retiré)*
+                     `test/support/factories/identity.rb` *(`create_student` accepte `joined_via:` et `joined_at:`)*
+                     `db/seeds/development.rb` · `db/seeds/demo/saint_michel.rb` · les 20 fichiers de `test/` qui écrivent une adhésion par `Orm::ClassroomStudent.create!` *(`joined_via: "standard"` : la colonne n'a pas de défaut ; ajout du 2026-10-07, découvert par l'exécutant du Lot 0)*
+                     `test/integration/classroom/join_capacity_test.rb` *(faux dépôt : `add_primary` accepte `via:` ; même ajout)*
+                     `test/routing/v1_routes_test.rb` *(les routes ajoutées ; même ajout)*
                      `test/db/add_classroom_link_tokens_and_student_removal_migration_test.rb`
-                     `test/db/growth_migrations_test.rb` *(nouvelle migration dans `LATER`)*
                      `test/db/schema_constraints_test.rb`
                      `test/domain/entities/classroom/student_arrival_channel_test.rb`
                      `test/domain/policies/classroom/manage_classroom_members_policy_test.rb`
@@ -68,8 +70,8 @@ def add_primary(classroom_id:, student_id:, via:, at:)             = raise NotIm
 def remove(classroom_id:, student_id:, removed_by_id:, at:)        = raise NotImplementedError # → true si close, false si déjà parti
 def removed_from?(classroom_id:, student_id:)                      = raise NotImplementedError # → Boolean
 
-# Policies::Classroom::ManageClassroomMembersPolicy#call(actor:, classroom:, teaches:, staff_school_id:)
-#   → success | failure(:not_found) pour un enseignant ou une direction hors périmètre | failure(:forbidden) sinon
+# Policies::Classroom::ManageClassroomMembersPolicy#call(actor:, classroom:)   # classroom : avec teacher_ids et school_id
+#   → success | failure(:not_found) pour un enseignant ou une direction hors périmètre | failure(:forbidden) pour un élève ou un visiteur
 # Entities::Classroom::StudentArrivalChannel::ALL = %w[standard link code] / WRITABLE = %w[standard link]
 ```
 
@@ -278,7 +280,7 @@ Vague 2 (A ‖ C ‖ D) : aucun fichier commun — A est sous `student_registrat
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
