@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | livré (PR vers `Develop`) |
 | **Ouvert le** | 2026-10-07 |
 | **Branche** | `fix/alt-couverture-perdu` |
 | **Programme** | — |
@@ -50,19 +50,19 @@ Un seul lot, aucune migration, aucun fichier partagé : pas de `plan.md` ni de `
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit **à la main** dans l'application avant toute ligne de code
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test
-- [ ] Test de reproduction écrit **avant** le correctif
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
-- [ ] Données déjà corrompues : réparées, ou dette explicitement notée au journal
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] Test de reproduction écrit **avant** le correctif
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
+- [x] Test au vert · suite du contexte borné au vert
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
 ### Contrat d'exécution
 
 1. Écrire le test de reproduction dans `test/system/teams/blog_management_test.rb`. Il faut un vrai navigateur : le focus et Trix n'existent pas plus bas dans la pile. Mettre ce test dans un fichier existant tient le budget de la suite système (ADR-0069 §9 : un fichier sans durée enregistrée est refusé). Le test glisse une image dans le texte, place aussitôt le focus dans le texte de remplacement de la couverture, attend la ligne « Image 1 », vérifie que le focus n'a pas bougé, puis que la frappe arrive dans ce champ.
 2. Le lancer et le voir **rouge** pour la bonne raison : le focus est sur `article_body`.
-3. Corriger dans `app/javascript/controllers/rich_text_editor_controller.js` (`prepare`, autour de `this.editor.insertFile(ready)`). Si l'auteur écrivait ailleurs que dans l'éditeur au moment de l'insertion, lui rendre le focus, et la sélection de son champ, dès l'insertion faite.
+3. Corriger dans `app/javascript/controllers/rich_text_editor_controller.js`. Si l'auteur écrit ailleurs que dans l'éditeur quand Trix replace son curseur, Trix ne le pose pas dans la page. *Révisé en cours d'exécution : rendre le focus après `insertFile` ne suffisait pas, Trix replace son curseur à chaque rendu (`journal.md`).*
 4. Vert ; puis les tests système du blog, de l'éditeur des cours et des fiches (cas symétrique : glisser une image en écrivant dans l'éditeur garde le curseur dans le texte, juste après l'image).

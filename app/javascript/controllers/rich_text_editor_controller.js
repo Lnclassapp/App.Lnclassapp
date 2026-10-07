@@ -10,6 +10,9 @@ import { Controller } from "@hotwired/stimulus"
 const refuseFile = (event) => event.preventDefault()
 const dropAttachment = (event) => event.attachment.remove()
 
+// The selection managers whose cursor already leaves the focus alone (keepFocus), one per editor.
+const guarded = new WeakSet()
+
 const fill = (template, values) => template.replace(/%\{(\w+)\}/g, (token, key) => values[key] ?? token)
 
 // Trix builds its toolbar in English as soon as it is defined. The French texts go into Trix.config.lang for the
@@ -42,7 +45,8 @@ export default class extends Controller {
   async connect() {
     this.images = this.attachmentsValue && this.uploadUrlValue !== ""
     this.listeners = this.images
-      ? { "trix-file-accept": this.accept, "trix-attachment-add": this.attachmentAdded, "trix-attachment-remove": this.attachmentRemoved }
+      ? { "trix-initialize": this.keepFocus, "trix-file-accept": this.accept, "trix-attachment-add": this.attachmentAdded,
+          "trix-attachment-remove": this.attachmentRemoved }
       : { "trix-file-accept": refuseFile, "trix-attachment-add": dropAttachment }
     Object.entries(this.listeners).forEach(([type, listener]) => this.element.addEventListener(type, listener))
     if (this.images) this.listenForImages()
@@ -54,6 +58,7 @@ export default class extends Controller {
     // Under an image, only its caption: neither the file name nor its size in English units (« 23.4 KB »).
     Trix.config.attachments.preview.caption = { name: false, size: false }
     this.pickButtonTarget.hidden = false
+    this.keepFocus() // an editor already initialized: trix-initialize is past
   }
 
   disconnect() {
@@ -108,6 +113,36 @@ export default class extends Controller {
     this.errorsTarget.replaceChildren()
     this.errorsTarget.hidden = true
     this.track(this.prepare(files))
+  }
+
+  // Trix puts its cursor back in the page each time it draws the text (an image inserted once shrunk, its size known,
+  // its address received, a file dropped), and the browser gives the focus to the editor with it. The author who writes
+  // in another field keeps the focus, and their typing (UDR-0067 §3.4.2, WCAG 3.2.2): Trix keeps its cursor for the next
+  // image, off the page. Its selection manager is inside Trix: the system test of the blog watches it.
+  keepFocus = () => {
+    const selection = this.editor?.selectionManager
+    if (!selection || guarded.has(selection)) return
+
+    guarded.add(selection)
+    const place = selection.setLocationRange.bind(selection)
+    selection.setLocationRange = (range) => {
+      if (!this.writingElsewhere()) return place(range)
+      if (range == null || selection.lockedLocationRange) return
+
+      const [start, end] = Array.isArray(range) ? range : [range]
+      // A point outside the text (a drop without a place in it): Trix keeps its cursor, as it does without this guard.
+      if (start?.index == null) return
+      selection.updateCurrentLocationRange([{ ...start }, { ...(end ?? start) }])
+    }
+  }
+
+  // In another field of the page: neither the text, its toolbar, nor « Insérer une image », after which the author
+  // goes on in the text, after the image.
+  writingElsewhere() {
+    const active = document.activeElement
+    if (!active || active === document.body) return false
+    const editor = this.element.querySelector("trix-editor")
+    return ![editor, editor.toolbarElement, this.pickButtonTarget, this.fileInputTarget].some((element) => element?.contains(active))
   }
 
   // → true if every file went into the text, false if one was refused.
