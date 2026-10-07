@@ -185,14 +185,12 @@ Alors cet établissement n'est pas trouvé par son code national
 Quand elle cherche « Lycée Classique » ou « LCA »
 Alors l'établissement est trouvé
 
-# IE-22 — numéros des élèves masqués pour un inscrit sans preuve
-Étant donné un enseignant inscrit par la voie standard (ou par le lien de la direction ou de l'équipe), déclaré dans la classe 3ème 1
+# IE-22 — numéros des élèves masqués dans la classe, pour tous les enseignants
+Étant donné un enseignant déclaré dans la classe 3ème 1, quelle que soit sa voie d'arrivée (standard, collègue, direction, équipe, ancien code)
 Quand il ouvre la liste des élèves de la 3ème 1
 Alors le numéro de chaque élève s'affiche masqué, sous la forme « 07 •• •• •• 04 »
-Et le numéro complet n'apparaît nulle part dans la page
-Étant donné un enseignant inscrit par le lien d'un collègue (ou par l'ancien code d'établissement)
-Quand il ouvre la même liste
-Alors il voit les numéros complets
+Et le numéro complet n'apparaît nulle part dans la page (ni texte, ni lien tel:, ni attribut)
+Et l'équipe Lnclass garde l'accès au numéro complet dans ses écrans de support
 
 # IE-23 — trace d'audit de chaque inscription
 Quand un enseignant s'inscrit, par n'importe quelle voie

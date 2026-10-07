@@ -206,9 +206,9 @@ La formule « Inscription : … » ne s'accorde pas : il n'y a pas de « arrivé
 - Retirer la colonne `school_code` du `<thead>` (et son `ui_info_tip`) et la cellule correspondante de `_school_row` ; l'ordre des colonnes restantes ne change pas.
 - Recherche : libellé « Nom ou sigle » (`teams.schools.filters.search`), exemple « Ex. : Lycée Classique, LCA » (`search_placeholder`). La recherche ne porte plus sur le code national.
 
-### 3.8 ter Liste des élèves d'une classe pour un enseignant sans preuve (phase 5, memo Q22)
+### 3.8 ter Liste des élèves d'une classe : numéro masqué (phase 5, memo Q23)
 
-- `classroom/classrooms/_roster` : quand la requête rend un numéro masqué, la cellule affiche la valeur telle quelle (« 07 •• •• •• 04 ») en `font-mono text-mute`, sans lien `tel:` ni bouton de copie, avec `title` et `aria-label` « Numéro masqué jusqu'à la certification de votre compte » (`t(".contact_masked")`). Aucune autre différence de rendu.
+- `classroom/classrooms/_roster` : la cellule du numéro affiche la valeur masquée rendue par la requête (« 07 •• •• •• 04 »), telle quelle, en `font-mono text-mute`, sans lien `tel:`, sans bouton de copie, sans reformatage par paires. `title` et `aria-label` : « Numéro masqué pour protéger les élèves » (`t(".contact_masked")`). Aucune autre différence de rendu.
 
 ### 3.9 Écran d'attente (`identity/pending_accounts/show`, enseignant sans établissement)
 
