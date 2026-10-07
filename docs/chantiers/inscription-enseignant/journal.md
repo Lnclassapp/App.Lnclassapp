@@ -44,6 +44,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Le contour de focus cache la couleur du bord de la confirmation du code secret ; le message reste visible | Mineur, relevé par le challenger | finitions à ouvrir |
 | Test instable `DirectionHomeQueryTest` AD-23 (ligne 199) : `read_at` pris avant la première lecture du cache, échoue si elle dure plus d'une seconde | Antérieur au chantier (accueil-direction) ; correctif proposé : prendre `read_at` après la lecture | bugfix `tests-instables` |
 | Deux lancements de tests simultanés dans le même dossier se marchent dessus (mêmes bases de worker) : `growth_migrations_test` y retire `schools.national_code` le temps de rejouer ses migrations | Outillage ; proposition : verrou consultatif PostgreSQL par base de test dans `test/test_helper.rb` | bugfix `tests-instables` |
+| `test/system/teams/blog_management_test.rb:71` (blog, hors chantier) : échoue sous la charge de `bin/ci` (texte alternatif d'image tronqué pendant la frappe), **deux passages sur deux au Lot G**, vert relancé seul | Sans lien avec l'inscription ; corriger le test sort du chantier | bugfix `tests-instables` (à ouvrir avant la fusion si la CI le confirme) |
+| Sorties console des seeds (« PIN … ») et deux commentaires de vues citant « PIN incorrect. » | Textes pour développeurs, pas pour l'utilisateur | — |
 | Code de classe des élèves | Périmètre (Q20) | `inscription-eleve-sans-code` (branche ouverte) |
 
 ## Clôture
