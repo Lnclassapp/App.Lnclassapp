@@ -222,6 +222,7 @@ Aucun critère orphelin.
 Vague 1 : Lot 0                    → 1 agent, séquentiel, sur feature/inscription-enseignant
 Vague 2 : Lot A ‖ Lot B ‖ Lot C    → 3 agents, worktrees isolés, après merge du Lot 0
 Vague 3 : Lot D                    → 1 agent, après merge de A, B et C
+Vague 4 : Lot E                    → 1 agent, après le Lot D
 ```
 
 Worktrees de la vague 2, créés depuis la branche de chantier **après** le merge du Lot 0 :
