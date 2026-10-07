@@ -12,6 +12,8 @@
 
 ## Ce qui a dérapé
 
+- La phase 5 a ajouté deux règles (Q22 puis Q23 : numéros des élèves masqués pour tous les enseignants) et un Lot F de corrections : la revue sécurité a montré que le chaînage « inscription sans preuve → déclaration de classe → numéros d'élèves » n'avait pas été vu au grill. Parade : au grill d'une feature qui ouvre un accès, suivre jusqu'aux données personnelles qu'il atteint.
+
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - Le Lot 0 s'est arrêté deux fois sur des fichiers hors liste : l'exploration de la phase 2 n'avait pas cherché tous les appelants de `create_teacher` ni les tests d'architecture. Parade pour les prochains plans : `grep` de chaque méthode de port modifiée et lecture de `test/architecture/` avant d'écrire le Lot 0.
@@ -26,7 +28,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - `test/architecture/port_contracts_test.rb` exige un adaptateur pour chaque port : un port ne peut pas être gelé seul au Lot 0.
 - `test/db/growth_migrations_test.rb` rejoue les migrations de `LATER` déjà appliquées : une migration qui touche ces tables doit être idempotente (`if_not_exists`, reprise limitée aux lignes non encore reprises).
 - `bin/rails db:schema:dump` avec la version locale de PostgreSQL réécrit une cinquantaine de CHECK existants : `db/schema.rb` a été édité à la main pour ne garder que l'ajout.
-- `config/database.yml` donne une base par worktree : des lots parallèles peuvent lancer leurs tests en même temps.
+- `config/database.yml` donne une base par worktree : des lots parallèles peuvent lancer leurs tests en même temps. Dans un **même** dossier, deux lancements simultanés (un pre-commit pendant `bin/ci`) partagent les bases des workers et se cassent (diagnostic du Lot F, journal PostgreSQL à l'appui).
 
 ## Dette laissée derrière
 
@@ -40,6 +42,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | `/teams/schools` à 1280 px : l'en-tête « Statut » et son aide passent sur deux lignes | Antérieur au chantier, relevé par le Lot E | finitions à ouvrir |
 | Articles devant le nom d'un établissement (« de Lycée Moderne… », « à Lycée… ») dans les messages d'invitation | Antérieur au chantier, élision délicate selon le nom | finitions à ouvrir |
 | Le contour de focus cache la couleur du bord de la confirmation du code secret ; le message reste visible | Mineur, relevé par le challenger | finitions à ouvrir |
+| Test instable `DirectionHomeQueryTest` AD-23 (ligne 199) : `read_at` pris avant la première lecture du cache, échoue si elle dure plus d'une seconde | Antérieur au chantier (accueil-direction) ; correctif proposé : prendre `read_at` après la lecture | bugfix `tests-instables` |
+| Deux lancements de tests simultanés dans le même dossier se marchent dessus (mêmes bases de worker) : `growth_migrations_test` y retire `schools.national_code` le temps de rejouer ses migrations | Outillage ; proposition : verrou consultatif PostgreSQL par base de test dans `test/test_helper.rb` | bugfix `tests-instables` |
 | Code de classe des élèves | Périmètre (Q20) | `inscription-eleve-sans-code` (branche ouverte) |
 
 ## Clôture

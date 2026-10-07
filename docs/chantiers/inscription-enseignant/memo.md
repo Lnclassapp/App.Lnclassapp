@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | en revue (PR vers `Develop`) |
 | **Ouvert le** | 2026-10-07 |
 | **Branche** | `feature/inscription-enseignant` |
 | **Programme** | — |
