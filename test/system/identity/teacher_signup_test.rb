@@ -108,10 +108,17 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     find_field("teacher_registration[contact]").send_keys("5", "a")
     assert_field "teacher_registration[contact]", with: "0701020304"
 
-    fill_codes(pin: "1234", confirmation: "1235")
+    assert_no_selector "#pin_match_status svg", visible: :all
+    fill_codes(pin: "1234", confirmation: "123")
+    assert_no_selector "#pin_match_status svg", visible: :all
+    find_field("teacher_registration[pin_confirmation]").send_keys("5")
+    assert_selector "#pin_match_status.text-error svg", count: 1
     assert_text t("#{FORM}.pin_match.ko")
+    find_field("teacher_registration[pin_confirmation]").send_keys(:backspace, "4")
+    assert_selector "#pin_match_status.text-success svg", count: 1
     find_field("teacher_registration[pin_confirmation]").send_keys(:backspace)
     assert_no_selector "#pin_match_status", visible: true
+    assert_no_selector "#pin_match_status svg"
     assert_no_selector "#teacher_registration_pin_confirmation[aria-invalid]"
     assert_includes find("#teacher_registration_pin_confirmation")["aria-describedby"], "pin_match_status"
   end

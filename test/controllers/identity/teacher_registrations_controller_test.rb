@@ -260,15 +260,21 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "input[name='teacher_registration[pin]'][value]", count: 0
   end
 
-  test "IE-12: a number already used is refused in 422 with its message, the role not revealed" do
-    create_user(role: "student", contact: "0501020304")
+  test "IE-12: a number already used by a teacher, a student or a direction is refused in 422, the role never revealed" do
+    { "teacher" => :create_teacher, "student" => :create_student, "school_admin" => :create_school_admin }
+      .each_with_index do |(role, factory), index|
+        existing = public_send(factory, contact: "0501020304")
+        count = Orm::User.count
 
-    post teacher_registrations_path, params: { teacher_registration: registration_params }
+        post teacher_registrations_path, params: { teacher_registration: registration_params }
 
-    assert_response :unprocessable_entity
-    assert_select "#teacher_registration_contact_error", text: I18n.t("#{ERRORS}.contact.taken")
-    assert_no_match(/élève/i, css_select("#teacher_registration_contact_error").text)
-    assert_equal 1, Orm::User.count
+        assert_response :unprocessable_entity, role
+        message = css_select("#teacher_registration_contact_error").text.strip
+        assert_equal I18n.t("#{ERRORS}.contact.taken"), message, role
+        assert_no_match(/enseignant|élève|direction/i, message, role)
+        assert_equal [ count, role ], [ Orm::User.count, Orm::User.find_by!(contact: "0501020304").role ], role
+        existing.update_columns(contact: "070000000#{index}")
+      end
   end
 
   test "IE-23: each sign-up leaves one audit line school.changed / teacher_joined with the school and the way" do
@@ -278,6 +284,45 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     event = Orm::AuditEvent.sole
     assert_equal [ "school.changed", new_teacher.id, "School", @school.id, { "change" => "teacher_joined", "via" => "standard" } ],
                  [ event.action, event.actor_id, event.subject_type, event.subject_id, event.metadata ]
+  end
+
+  test "IE-10: from a colleague's link, « Ce n'est pas votre établissement ? » then the sign-up: way « standard », no referral" do
+    get teacher_invite_link_path(referral_token_of(create_teacher(school: @school)))
+    other_school = css_select("a#other-school").first["href"]
+
+    get other_school
+
+    assert_response :success
+    assert_select "input[name='teacher_registration[invite_token]']", 0
+    post teacher_registrations_path, params: { teacher_registration: registration_params }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal "standard", joined_via
+    assert_equal 0, Orm::Referral.count
+    assert_equal "standard", Orm::AuditEvent.sole.metadata["via"]
+  end
+
+  test "a way forged in the POST is ignored: standard without a token, colleague with a valid colleague's token" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params(joined_via: "team") }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal "standard", joined_via
+    sign_out
+    referrer = create_teacher(school: @school)
+
+    post teacher_registrations_path,
+         params: { teacher_registration: registration_params(contact: "05 01 02 03 99", joined_via: "direction",
+                                                             invite_token: referral_token_of(referrer)) }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal "colleague", Orm::TeacherProfile.find_by!(user: Orm::User.find_by!(contact: "0501020399")).joined_via
+  end
+
+  test "IE-02: the old code link /e/K7M-4QZ answers 404" do
+    get "/e/K7M-4QZ"
+
+    assert_response :not_found
+    assert_no_match(/Lycée Moderne de Cocody/, response.body)
   end
 
   test "IE-13: a signed-in person who opens the page or a link is sent home; a POST is refused" do
