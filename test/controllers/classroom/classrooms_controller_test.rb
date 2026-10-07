@@ -470,7 +470,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(@classroom.public_id, q: "awa")
 
     assert_response :success
-    assert_select "#classroom_roster_title", text: I18n.t("#{scope}.roster.title", count: 2)
+    assert_select "#classroom_roster_title", text: /\A\s*#{I18n.t("#{scope}.roster.title", count: 2)}/
     assert_select "input[name=q][value=awa]"
     assert_select "#classroom_roster_list [aria-live=polite]", text: I18n.t("#{scope}.roster.count", count: 1)
     assert_select "#student_#{awa.public_id}", 1
@@ -536,6 +536,81 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{student.public_id}", 1
     assert_select "#classroom_roster_list form", 0
     assert_select "#classroom_roster_list [role=menu]", 0
+    assert_select "#classroom_roster_list dialog", 0
+  end
+
+  # IL-13 (ADR-0083 §4.4, UDR-0079 §3.7) : « Nouveau » pendant 7 jours, la voie sous chaque nom, les nouveaux en tête,
+  # le compte des nouveaux dans le titre de la liste.
+  test "IL-13 : « Nouveau » et « Inscrit seul » sur l'arrivé d'il y a 2 jours, « Par le lien » seul sur celui d'il y a 10 jours" do
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_via: "link", joined_at: 10.days.ago)
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_via: "standard", joined_at: 2.days.ago)
+    ali = create_student(classroom: @classroom, first_name: "Ali", last_name: "Cissé", joined_via: "code", joined_at: 1.year.ago)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "h2#classroom_roster_title[tabindex='-1']", text: /#{I18n.t("#{scope}.roster.title", count: 3)}/ do
+      assert_select "span", text: I18n.t("#{scope}.roster.new_count", count: 1)
+    end
+    assert_select "h2#classroom_roster_title[data-controller]", 0
+    assert_equal [ koffi, awa, ali ].map { "student_#{it.public_id}" }, css_select("#classroom_roster_list li[id]").map { it["id"] }
+    assert_select "#student_#{koffi.public_id}" do
+      assert_select "span", text: I18n.t("#{scope}.roster.new")
+      assert_select "p.text-xs.text-mute", text: I18n.t("#{scope}.roster.via.standard")
+    end
+    assert_select "#student_#{awa.public_id}" do
+      assert_select "span", text: I18n.t("#{scope}.roster.new"), count: 0
+      assert_select "p.text-xs.text-mute", text: I18n.t("#{scope}.roster.via.link")
+    end
+    assert_select "#student_#{ali.public_id}", text: /#{I18n.t("#{scope}.roster.via.standard")}|#{I18n.t("#{scope}.roster.via.link")}/,
+                                                count: 0
+    assert_select "#student_#{ali.public_id}", text: /#{I18n.t("#{scope}.roster.new")}/, count: 0
+  end
+
+  test "IL-13 : sans nouvel arrivé, le titre n'a pas de pastille" do
+    create_student(classroom: @classroom, joined_at: 8.days.ago)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "h2#classroom_roster_title", text: I18n.t("#{scope}.roster.title", count: 1)
+    assert_select "h2#classroom_roster_title span", 0
+  end
+
+  # IL-14 (UDR-0079 §3.7) : dernier item du menu ⋮, séparé par un filet ; la modale nomme l'élève ; DELETE vers la ligne.
+  test "IL-14 : « Retirer de la classe » termine le menu ⋮ de chaque ligne et ouvre une confirmation qui nomme l'élève" do
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id, q: "koffi")
+
+    dialog = "remove-student-#{koffi.public_id}"
+    assert_select "#student-actions-#{koffi.public_id}[role=menu]" do
+      assert_select "> :last-child[role=menuitem][aria-controls='#{dialog}'][aria-haspopup=dialog].ui-menu-item-danger",
+                    text: I18n.t("#{scope}.roster.remove")
+      assert_select "> [role=separator] + [aria-controls='#{dialog}']"
+      assert_select "button[aria-controls='#{dialog}'] svg"
+    end
+    assert_select "#student_#{koffi.public_id} dialog##{dialog}" do
+      assert_select "h2", text: I18n.t("#{scope}.roster.remove_title", name: "Koffi Yao")
+      assert_select "p", text: I18n.t("#{scope}.roster.remove_warning", name: "Koffi Yao")
+      assert_select "form##{dialog}-form[method=post][action='#{classroom_student_path(@classroom.public_id, koffi.public_id)}']" \
+                    "[data-turbo-frame=_top]" do
+        assert_select "input[name=_method][value=delete]"
+        assert_select "input[type=hidden][name=q][value=koffi]"
+      end
+      assert_select "button[data-action='modal#close']", text: I18n.t("#{scope}.roster.cancel")
+      assert_select "button[type=submit][form='#{dialog}-form']", text: I18n.t("#{scope}.roster.remove_confirm")
+    end
+  end
+
+  test "IL-14 : l'équipe a aussi « Retirer de la classe »" do
+    koffi = create_student(classroom: @classroom)
+    sign_in_as create_team_member
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "dialog#remove-student-#{koffi.public_id}", 1
   end
 
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do

@@ -1,9 +1,17 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
-<%# Rôle : « Chercher un élève » (GET hors du frame, contrôleur search) ; frame classroom_roster_list : compteur, une ligne par élève, code de récupération dans son menu ⋮ %>
-<%# ADR  : 0028, 0032, 0060, 0067 · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4) · l'entrée du code vise _top : sa réponse est le stream de la modale %>
-<%# locals: (classroom:, students:, search: "") -%>
+<%# Rôle : « Chercher un élève » (GET hors du frame, contrôleur search) ; frame classroom_roster_list : compteur, une ligne par élève (nouveau, voie), code de récupération et retrait dans son menu ⋮ %>
+<%# ADR  : 0028, 0032, 0060, 0067, 0083 · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4), 0079 (§3.7) · les entrées du menu visent _top : leurs réponses sont des streams %>
+<%# new_count, can_remove : par défaut ceux que la page de la classe a lus (@overview, @can_remove_students) ; le stream du
+    retrait (classroom_students/destroy) les passe, avec focus_title pour rendre le focus au titre (UDR-0079 §3.7). -%>
+<%# locals: (classroom:, students:, search: "", new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
-  <h2 id="classroom_roster_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title", count: classroom.active_students_count) %></h2>
+  <%# UDR-0079 §3.7 : le compte des nouveaux est dans le titre, lu avec lui ; la même balise est rendue par le stream du retrait. %>
+  <%= tag.h2 id: "classroom_roster_title", tabindex: -1,
+             class: "mb-4 flex flex-wrap items-center gap-2 font-display text-xl font-extrabold focus:outline-none",
+             data: ({ controller: "autofocus", autofocus_target: "field" } if focus_title) do %>
+    <%= t(".title", count: classroom.active_students_count) %>
+    <% if new_count.positive? %><%= ui_badge t(".new_count", count: new_count), tone: :brand %><% end %>
+  <% end %>
   <% if classroom.active_students_count.zero? %>
     <div id="classroom_roster_empty">
       <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
@@ -29,7 +37,7 @@
     <%= turbo_frame_tag "classroom_roster_list", class: "block transition-opacity aria-busy:opacity-50" do %>
       <%= ui_icon_sprite do %>
         <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <p aria-live="polite" class="text-sm text-mute">
+          <p id="classroom_roster_count" aria-live="polite" class="text-sm text-mute">
             <%= students.empty? ? t(".no_match") : t(".count", count: students.size) %>
           </p>
           <p class="flex items-center gap-1 text-sm text-mute">
@@ -44,15 +52,37 @@
         <% else %>
           <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
             <% students.each do |student| %>
+              <% remove_dialog = "remove-student-#{student.public_id}" %>
               <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3">
                 <div class="flex min-w-0 flex-1 items-center gap-3">
                   <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>
                   <div class="min-w-0">
-                    <p class="truncate text-sm font-medium"><%= student.display_name %></p>
+                    <div class="flex min-w-0 items-center gap-2">
+                      <p class="truncate text-sm font-medium"><%= student.display_name %></p>
+                      <% if student.newcomer %><span class="shrink-0"><%= ui_badge t(".new"), tone: :brand, size: :sm %></span><% end %>
+                    </div>
+                    <%# UDR-0079 §3.7 : la voie d'arrivée sous chaque nom ; rien pour le code, la voie d'avant le lien. %>
+                    <% via = { "standard" => t(".via.standard"), "link" => t(".via.link") }[student.joined_via] %>
+                    <% if via %><p class="text-xs text-mute"><%= via %></p><% end %>
                     <% if student.contact %>
                       <p class="text-xs whitespace-nowrap text-mute tabular-nums">
                         <span class="sr-only"><%= t(".contact") %></span> <%= student.contact.scan(/\d{2}/).join(" ") %>
                       </p>
+                    <% end %>
+                    <%# UDR-0079 §3.7 : la confirmation nomme l'élève ; elle part avec sa ligne quand le stream la retire. Hors
+                        des colonnes en flex : la <dialog> fermée n'y prend ni place ni écart. %>
+                    <% if classroom.status == "active" && can_remove %>
+                      <%= ui_modal title: t(".remove_title", name: student.display_name), id: remove_dialog, size: :sm do |modal| %>
+                        <% modal.footer do %>
+                          <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+                          <%= ui_button t(".remove_confirm"), type: :submit, form: "#{remove_dialog}-form", variant: :danger, icon: "user-minus" %>
+                        <% end %>
+                        <p class="text-left text-sm text-mute"><%= t(".remove_warning", name: student.display_name) %></p>
+                        <%= form_with url: classroom_student_path(classroom.public_id, student.public_id), method: :delete,
+                                      id: "#{remove_dialog}-form", data: { turbo_frame: "_top" } do %>
+                          <%= hidden_field_tag :q, search, id: nil %>
+                        <% end %>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>
@@ -74,6 +104,10 @@
                                     fixed: true do %>
                       <%= ui_dropdown_item t(".issue_code"), href: account_pin_recovery_codes_path(student.public_id), method: :post,
                                            frame: "_top", icon: "key" %>
+                      <% if can_remove %>
+                        <div role="separator" class="my-1 border-t border-line"></div>
+                        <%= ui_dropdown_item t(".remove"), dialog: remove_dialog, icon: "user-minus", tone: :danger %>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </div>
