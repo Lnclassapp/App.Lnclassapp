@@ -22,6 +22,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
 - `PortContractsTest` exige que chaque adaptateur implémente toute méthode de son port : un port qui gagne une méthode au Lot 0 doit être implémenté au Lot 0, pas au lot vertical. Le plan avait mis l'implémentation au Lot C.
+- Depuis que le site est installable, Chrome headless émet un vrai `beforeinstallprompt` quand il veut : le bandeau apparaissait au milieu d'autres tests système (sobriété du profil, R2). `ApplicationSystemTestCase` arrête l'événement réel ; les tests du bandeau en simulent un.
+- Un nouveau test système doit déclarer sa durée dans `script/ci/test_timings.yml` (budget de 15 s par chantier) : 6,8 s + 7,5 s ici.
 - `UseCasePoliciesTest` exige une `policy:` injectée dans chaque use case (ADR-0028) : l'ADR-0082 disait « aucune policy propre » pour `RecordAppOpen`. Corrigé par une policy dédiée (élève et enseignant seulement).
 - `DesignTokensTest` refuse toute couleur hexadécimale dans `app/views`, y compris le manifeste JSON : les couleurs de l'app installée vivent dans `config.x.pwa`.
 - Deux tests (`with_routing`) rendent le layout sous un jeu de routes réduit : un helper de route dans le layout les casse. Le manifeste y est déclaré par son chemin littéral.
