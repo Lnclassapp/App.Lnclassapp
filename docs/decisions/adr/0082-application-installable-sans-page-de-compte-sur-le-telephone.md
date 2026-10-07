@@ -66,7 +66,7 @@ Les icônes sont des fichiers de `public/`, générés depuis le logo officiel (
 
 ### 4.2 Programme d'arrière-plan
 
-Servi par `Rails::PwaController` (`GET /service-worker.js`, route `pwa_service_worker`) avec `Cache-Control: no-cache`, pour qu'une nouvelle version soit prise à la visite suivante. Enregistré à la portée `/` par le JavaScript d'entrée, seulement si `navigator.serviceWorker` existe.
+Servi par `Rails::PwaController` (`GET /service-worker.js`, route `pwa_service_worker`) avec l'en-tête par défaut de Rails pour une réponse dynamique (`max-age=0, private, must-revalidate`), qui vaut `no-cache` ici : une nouvelle version est prise à la visite suivante. Le navigateur revalide de toute façon le script principal d'un programme d'arrière-plan sans passer par son cache HTTP. Enregistré à la portée `/` par le JavaScript d'entrée, seulement si `navigator.serviceWorker` existe.
 
 - **`install`** : ouvre le cache `lnclass-offline-v<N>` et y met **exactement** `/offline.html`, `/offline.css` et `/icon-192.png`. Puis `skipWaiting()`.
 - **`activate`** : supprime tout cache dont le nom n'est pas le cache courant. Puis `clients.claim()`.
@@ -112,7 +112,7 @@ La phrase « La PWA (`installation-pwa`, V4) et l'app iOS restent au backlog » 
 - **`source=app` se falsifie** : n'importe qui peut taper `/?source=app` et se compter. L'indicateur sert à suivre une tendance, jamais à décider pour un compte.
 - **iPhone** : pas de bouton d'installation possible, et Safari peut effacer le stockage du site, ce qui fait réapparaître le bandeau.
 - **Changer l'icône ou le nom** met plusieurs jours à atteindre les écrans d'accueil (rafraîchissement du manifeste décidé par le navigateur).
-- **Un programme d'arrière-plan défectueux reste actif** jusqu'à la version suivante : le fichier est servi en `no-cache` et ne garde aucune page, ce qui limite le risque à la page « Pas de connexion ».
+- **Un programme d'arrière-plan défectueux reste actif** jusqu'à la version suivante : le fichier est revalidé à chaque visite et ne garde aucune page, ce qui limite le risque à la page « Pas de connexion ».
 
 ## 6. Notes d'implémentation
 
@@ -145,7 +145,7 @@ self.addEventListener("fetch", (event) => {
 
 ## 7. Comment vérifier que la décision est respectée
 
-- Test d'intégration : `GET /manifest.json` rend le JSON du §4.1 ; `GET /service-worker.js` rend `Cache-Control: no-cache`.
+- Test d'intégration : `GET /manifest.json` rend le JSON du §4.1 ; `GET /service-worker.js` rend un `Cache-Control` qui exige la revalidation (`no-cache`, ou `max-age=0` et `must-revalidate`).
 - Test : la constante `OFFLINE_FILES` du programme ne contient que les trois chemins du §4.2, et le fichier ne contient pas `cache.put`.
 - Test système (Chrome) : programme actif, réseau coupé, navigation vers l'accueil → « Pas de connexion » ; le contenu de `caches` se limite à `OFFLINE_FILES`.
 - `grep -rn "install_banner" app db` ne trouve rien.

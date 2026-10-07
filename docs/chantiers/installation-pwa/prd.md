@@ -62,7 +62,7 @@ Et chaque page du site déclare ce manifeste dans son en-tête
 # CA-2 — Programme d'arrière-plan
 Étant donné un visiteur non connecté
 Quand il demande « /service-worker.js »
-Alors il reçoit du JavaScript avec l'en-tête « Cache-Control: no-cache »
+Alors il reçoit du JavaScript dont l'en-tête « Cache-Control » interdit de le resservir sans revalidation (« no-cache », ou « max-age=0 » avec « must-revalidate »)
 Et la page enregistre ce programme à la portée « / »
 
 # CA-3 — Page « Pas de connexion »
