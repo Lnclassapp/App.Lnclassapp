@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte identity
 # Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil
-# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0071, 0077
+# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0071, 0077, 0082
 get "login", to: "identity/sessions#new", as: :new_session
 resource :session, only: %i[create destroy], controller: "identity/sessions" # session_path, gelé : DELETE = « Se déconnecter »
 namespace :identity do
@@ -21,6 +21,8 @@ get "school-staff-signup", to: "identity/school_staff_registrations#new", as: :n
 post "school-staff-signup", to: "identity/school_staff_registrations#create", as: :school_staff_registrations
 # ADR-0057 : le lien à partager d'un code d'établissement ouvre l'inscription, établissement déjà trouvé (limité en débit).
 get "e/:code", to: "identity/teacher_registrations#with_code", as: :school_code_signup
+# ADR-0082 §4.1 : le lien d'invitation d'un collègue, de la direction ou de l'équipe ouvre l'inscription, établissement choisi.
+get "i/:token", to: "identity/teacher_registrations#invite", as: :teacher_invite_link
 # ADR-0063 : « Inviter un collègue » ; un clic « Partager » est enregistré par le serveur (204), sur la session.
 get "teachers/invite", to: "identity/referrals#show", as: :teacher_invite
 post "teachers/invite/shares", to: "identity/referral_shares#create", as: :teacher_referral_shares

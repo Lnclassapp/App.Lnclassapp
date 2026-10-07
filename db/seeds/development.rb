@@ -21,7 +21,7 @@ series_d = Orm::Series.find_by!(slug: "d")
 classroom = Orm::Classroom.joins(:school).find_by!(name: "Tle D 1", schools: { name: "Lycée Moderne de Treichville" })
 
 teacher = account.call("0500000001", role: "teacher", last_name: "Yao", first_name: "Koffi")
-Orm::TeacherProfile.create!(user: teacher, material: svt, onboarding_completed_at: Time.current) unless teacher.teacher_profile
+Orm::TeacherProfile.create!(user: teacher, material: svt, joined_via: "standard", onboarding_completed_at: Time.current) unless teacher.teacher_profile
 unless Orm::TeacherSchool.exists?(teacher_id: teacher.id)
   Orm::TeacherSchool.create!(teacher_id: teacher.id, school_id: classroom.school_id, primary: true)
 end

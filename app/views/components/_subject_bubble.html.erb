@@ -1,8 +1,8 @@
 <%# 🌐 UI · components/_subject_bubble — bulle ronde teintée d'une matière ou d'une action, appelée par ui_subject_bubble %>
 <%# Rôle : lien de 48 px au moins, illustration décorative 40 px dans une pastille de 60 px, libellé dessous %>
-<%# UDR  : 0069 (§3.3), 0074 (§3.5 : pastille dot, classe de couleur ou nil) · charte lnclass-design-system §9, §13 %>
-<%# locals: (label:, href:, illustration:, sr_suffix:, id:, dot: nil, short_label: nil) -%>
-<%= link_to href, id:, class: "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-sm leading-tight font-medium text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" do %>
+<%# UDR  : 0069 (§3.3), 0074 (§3.5 : pastille dot, classe de couleur ou nil), 0078 (§3.7 : link_html) · ADR : 0082 · charte §9, §13 %>
+<%# locals: (label:, href:, illustration:, sr_suffix:, id:, dot: nil, short_label: nil, link_html: {}) -%>
+<%= link_to href, **link_html, id:, class: "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-sm leading-tight font-medium text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" do %>
   <span class="<%= class_names("grid size-15 place-items-center rounded-full transition group-active:scale-95", illustration.tint, "relative" => dot) %>">
     <%= image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy" %>
     <%= tag.span(class: [ "absolute -top-0.5 -right-0.5 size-3.5 rounded-full ring-2 ring-white", dot ], "aria-hidden": true) if dot %>

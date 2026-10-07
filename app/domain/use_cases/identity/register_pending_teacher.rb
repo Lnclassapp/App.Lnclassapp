@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterPendingTeacher
 # Rôle : inscrit un enseignant sans code (code national ou école de sa DRENA) : compte, demande validée aussitôt (pause), session
-# ADR  : 0026, 0028, 0030, 0050, 0063, 0073 · UDR : 0024, 0050
+# ADR  : 0026, 0028, 0030, 0050, 0063, 0073, 0082 · UDR : 0024, 0050
 module UseCases
   module Identity
     class RegisterPendingTeacher
@@ -62,7 +62,8 @@ module UseCases
       def register(dto, school, material, ip, user_agent)
         now = @clock.now
         @transaction.call do
-          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id))
+          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id,
+                                                       joined_via: "standard"))
           # Plafond compté et tenu sous verrou par le repository (B2), après le compte : « trop de demandes » ne se lit
           # qu'au bout d'un formulaire entièrement valide.
           request = written(@join_requests.create(teacher_id: user.id, school_id: school.id, at: now,

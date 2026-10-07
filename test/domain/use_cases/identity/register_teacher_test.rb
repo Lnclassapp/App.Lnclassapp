@@ -40,8 +40,8 @@ module UseCases
           @taken = taken
         end
 
-        def create_teacher(user:, pin:, material_id:)
-          @received = { user:, pin:, material_id: }
+        def create_teacher(user:, pin:, material_id:, joined_via:)
+          @received = { user:, pin:, material_id:, joined_via: }
           return Shared::Result.failure(:conflict, errors: { contact: [ :taken ] }) if @taken.include?(user.contact)
 
           @journal << [ :user, user.contact, user.role, material_id ]
@@ -206,6 +206,7 @@ module UseCases
 
         assert_equal "teacher", @registrations.received[:user].role
         assert_nil @registrations.received[:user].team_role
+        assert_equal "code", @registrations.received[:joined_via], "ADR-0082 §4.2 : la voie du code, jusqu'au Lot A"
       end
 
       test "une personne déjà connectée est refusée avant toute lecture" do

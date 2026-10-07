@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
 # Rôle : inscrit un enseignant (rôle imposé), le rattache à l'établissement de son code, note son parrain, ouvre sa session
-# ADR  : 0026, 0028, 0030, 0050, 0057, 0063 · UDR : 0024, 0044, 0050
+# ADR  : 0026, 0028, 0030, 0050, 0057, 0063, 0082 · UDR : 0024, 0044, 0050
 module UseCases
   module Identity
     class RegisterTeacher
@@ -59,7 +59,7 @@ module UseCases
       def register(dto, school, material, ip, user_agent)
         now = @clock.now
         @transaction.call do
-          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id))
+          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id, joined_via: "code"))
           written(@schools.attach_teacher(teacher_id: user.id, school_id: school.id, primary: true, at: now))
           record_referrer(dto.ref, user, school, now)
           Shared::Result.success(Registered.new(user:, token: open_session(user, ip, user_agent, now)))

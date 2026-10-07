@@ -24,7 +24,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "pin_recovery_codes" => [ [ %w[user_id], "used_atISNULLANDrevoked_atISNULL" ] ],
     "invitations" => [ [ %w[token_digest], nil ], [ %w[kind contact], "accepted_atISNULLANDrevoked_atISNULL" ] ],
     "drenas" => [ [ %w[name], nil ] ],
-    "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ] ],
+    "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ],
+                   [ %w[direction_invite_token], nil ], [ %w[team_invite_token], nil ] ],
     "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ] ],
     "school_staffs" => [ [ %w[user_id], nil ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
@@ -69,6 +70,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
     "referrals" => { "source" => %w[link sponsor] },
+    "teacher_profiles" => { "joined_via" => %w[standard colleague direction team code] }, # ADR-0082 §4.2
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
@@ -134,6 +136,31 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { profile.update_column(:referral_token, "ABC") } }
     assert_raises(ActiveRecord::RecordNotUnique) do
       connection.transaction(requires_new: true) { profile.update_column(:referral_token, tokens.first) }
+    end
+  end
+
+  test "IE-14: a teacher profile has a mandatory arrival channel, without default, among the five (ADR-0082 §4.2)" do
+    column = connection.columns("teacher_profiles").find { |candidate| candidate.name == "joined_via" }
+    assert_equal [ false, nil ], [ column.null, column.default ]
+
+    profile = create_teacher.teacher_profile
+    %w[standard colleague direction team code].each { profile.update_column(:joined_via, it) }
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { profile.update_column(:joined_via, "sponsor") } }
+    assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { profile.update_column(:joined_via, nil) } }
+  end
+
+  test "IE-14: every school draws its own direction and team invite tokens, opaque, unique (ADR-0082 §4.1)" do
+    schools = Array.new(2) { create_school.reload }
+    tokens = schools.flat_map { [ it.direction_invite_token, it.team_invite_token ] }
+    assert_equal 4, tokens.uniq.size
+    assert(tokens.all? { it.match?(/\A[0-9a-f]{12}\z/) }, tokens.inspect)
+
+    %i[direction_invite_token team_invite_token].each do |column|
+      assert_raises(ActiveRecord::CheckViolation, column.to_s) { connection.transaction(requires_new: true) { schools.last.update_column(column, "ABCDEF012345") } }
+      assert_raises(ActiveRecord::RecordNotUnique, column.to_s) do
+        connection.transaction(requires_new: true) { schools.last.update_column(column, schools.first[column]) }
+      end
+      assert_raises(ActiveRecord::NotNullViolation, column.to_s) { connection.transaction(requires_new: true) { schools.last.update_column(column, nil) } }
     end
   end
 

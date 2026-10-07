@@ -25,9 +25,11 @@ module Factories
       create_student(classroom: create_classroom(level: course.level, series: course.series), **attributes)
     end
 
-    def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], **attributes)
+    # ADR-0082 §4.2: joined_via, the arrival channel, has no default in the database.
+    def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], joined_via: "standard",
+                       **attributes)
       create_user(role: "teacher", **attributes).tap do |teacher|
-        Orm::TeacherProfile.create!(user: teacher, material:, onboarding_completed_at: (Time.current if onboarded))
+        Orm::TeacherProfile.create!(user: teacher, material:, joined_via:, onboarding_completed_at: (Time.current if onboarded))
         # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
         Orm::TeacherSchool.create!(teacher:, school:, primary: true) if school
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }

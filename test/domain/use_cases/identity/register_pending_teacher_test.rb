@@ -39,10 +39,10 @@ module UseCases
           @taken = taken
         end
 
-        def create_teacher(user:, pin:, material_id:)
+        def create_teacher(user:, pin:, material_id:, joined_via:)
           return Shared::Result.failure(:conflict, errors: { contact: [ :taken ] }) if @taken.include?(user.contact)
 
-          @journal << [ :user, user.contact, user.role, material_id, pin ]
+          @journal << [ :user, user.contact, user.role, material_id, pin, joined_via ]
           Shared::Result.success(Entities::Identity::User.new(id: 41, public_id: "usr-41", last_name: user.last_name,
                                                               first_name: user.first_name, contact: user.contact,
                                                               gender: user.gender, role: "teacher"))
@@ -129,7 +129,7 @@ module UseCases
 
         assert result.success?
         token = result.value.token
-        assert_equal [ [ :user, "0501020304", "teacher", 5, "4821" ], [ :join_request, 41, 31, NOW ], [ :approved, 5, nil, "auto", NOW ],
+        assert_equal [ [ :user, "0501020304", "teacher", 5, "4821", "standard" ], [ :join_request, 41, 31, NOW ], [ :approved, 5, nil, "auto", NOW ],
                        [ :session, 41, Entities::Identity::SecretDigest.hmac(token, key: KEY), "1.2.3.4", "Chrome", NOW ] ], @journal
         assert_equal 1, @transaction.calls
       end

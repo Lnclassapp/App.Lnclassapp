@@ -583,6 +583,24 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "a[href='/teachers/invite'] span.sr-only", 0
   end
 
+  # UDR-0078 §3.7 : la bulle « Inviter » ouvre WhatsApp dans un nouvel onglet et porte l'action de partage ; les attributs
+  # de link_html vont sur le lien, sans rien changer d'autre. Sans link_html, le lien est exactement celui d'avant.
+  test "ui_subject_bubble merges link_html on its link, and renders the same link without it" do
+    plain = ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite))
+    assert_equal plain, ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite),
+                                          link_html: {})
+
+    show ui_subject_bubble(label: "Inviter", href: "https://wa.me/?text=x", illustration: subject_illustration(:invite), id: "invite",
+                           link_html: { target: "_blank", rel: "noopener", data: { action: "share#count", share_channel_param: "whatsapp" } })
+
+    assert_select "a#invite.min-h-tap.rounded-ln[href='https://wa.me/?text=x'][target=_blank][rel=noopener]" \
+                  "[data-action='share#count'][data-share-channel-param=whatsapp]" do
+      assert_select "span.size-15.rounded-full.bg-tint-red img[alt='']"
+      assert_select "span", text: "Inviter"
+    end
+    assert_select "a:not([target])", 0
+  end
+
   # Constat du challenger : le nom accessible se lit « Tle D, cours de … », sans espace avant la virgule.
   test "ui_subject_bubble reads its label and spoken suffix without a stray space" do
     show ui_subject_bubble(label: "Tle D", href: "/courses", illustration: subject_illustration("svt"), sr_suffix: ", cours de SVT")
