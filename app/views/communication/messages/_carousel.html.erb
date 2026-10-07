@@ -1,0 +1,43 @@
+<%# 🌐 UI · communication/messages/_carousel — les annonces de l'accueil élève, en bande défilante (UDR-0071 §3.5) %>
+<%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage), dismissible: (croix), link: (« Toutes les annonces ») %>
+<%# ADR  : 0078 · UDR : 0005, 0071 (amendement du 2026-10-06 : l'élève, sans lien), 0074 (§3.10 : accueil de la direction, sans croix) · Stimulus : communication--carousel %>
+<% refocus = local_assigns.fetch(:refocus, false) %>
+<%# UDR-0074 §3.10 : l'accueil de la direction passe dismissible: false ; l'élève garde la croix des annonces non officielles. %>
+<% dismissible = local_assigns.fetch(:dismissible, true) %>
+<%# UDR-0071, amendement du 2026-10-06 : l'accueil élève et les réponses au masquage passent link: false. Sans carte ni
+    lien, la section reste dans la page pour les seuls lecteurs d'écran (sr-only) : « Annuler » garde une cible à
+    remplacer, et le titre peut encore reprendre le focus quand la dernière carte part. %>
+<% link = local_assigns.fetch(:link, true) %>
+<% empty = !link && carousel.cards.none? %>
+<%# min-w-0 : dans la grille de l'accueil, la section prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
+<%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",
+                class: (empty ? "sr-only" : "min-w-0 rounded-card bg-mist p-2.5 max-sm:-mx-gutter max-sm:rounded-none max-sm:px-gutter"),
+                data: { controller: "communication--carousel", communication__carousel_refocus_value: (true if refocus) } do %>
+  <h2 id="student_home_announcements_title" class="sr-only" tabindex="-1"><%= t("shared.home.sections.announcements.title") %></h2>
+  <% if empty %><p><%= t("communication.inboxes.carousel.all_dismissed") %></p><% end %>
+  <%# Toutes masquées : ni bande ni points ; le lien reste, s'il y en a un. %>
+  <% if carousel.cards.any? %>
+    <ul class="scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto motion-safe:scroll-smooth"
+        data-communication--carousel-target="track">
+      <% carousel.cards.each do |card| %>
+        <li class="shrink-0 basis-11/12 snap-start sm:basis-1/2">
+          <%= render "communication/messages/card", card:, context: :carousel, dismissible: dismissible && !card.official? %>
+        </li>
+      <% end %>
+    </ul>
+    <div class="hidden justify-center gap-1.5 pt-2" aria-hidden="true" data-communication--carousel-target="pager">
+      <% carousel.cards.each_index do |index| %>
+        <%# Les deux états sont écrits en entier : Tailwind ne compile que ce qu'il lit (le contrôleur les échange). %>
+        <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+              data-communication--carousel-target="dot"></span>
+      <% end %>
+    </div>
+  <% end %>
+  <% if link %>
+    <p class="flex justify-end">
+      <%= link_to announcements_path, class: "inline-flex min-h-tap items-center gap-1 px-2 text-sm font-medium text-brand-strong" do %>
+        <%= t("communication.inboxes.carousel.all") %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>

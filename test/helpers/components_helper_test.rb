@@ -9,6 +9,7 @@ class ComponentsHelperTest < ActionView::TestCase
     attribute :level, :string
     attribute :terms, :boolean
     attribute :pin, :string
+    attribute :classrooms
   end
 
   # --- Icônes -----------------------------------------------------------------
@@ -33,6 +34,40 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { ui_icon("home", variant: :duotone) }
   end
 
+  test "ui_icon_sprite draws each icon of its block once, in a <symbol> after the block, taken back by <use>" do
+    show(ui_icon_sprite { safe_join([ ui_icon("home"), ui_icon("home", size: :lg), ui_icon("home", variant: :mini, label: "Accueil") ]) })
+
+    assert_select "svg.size-5[aria-hidden=true][focusable=false] use[href='#icon-24-outline-home']"
+    assert_select "svg.size-6 use[href='#icon-24-outline-home']"
+    assert_select "svg[role=img][aria-label=Accueil] use[href='#icon-20-solid-home']"
+    # Lever 3c (ecrans-direction-lents): the root attributes of the file are written once, on the <symbol>.
+    assert_select "svg:has(> use)[viewBox], svg:has(> use)[fill], svg:has(> use)[stroke], svg:has(> use)[stroke-width]", 0
+    assert_select "svg.absolute.size-0[aria-hidden=true]:last-child" do
+      assert_select "symbol", 2
+      assert_select "symbol#icon-24-outline-home[viewBox='0 0 24 24'][fill=none][stroke=currentColor][stroke-width='1.5']"
+      assert_select "symbol#icon-20-solid-home[viewBox='0 0 20 20'][fill=currentColor]:not([stroke])"
+    end
+    assert_equal icon_paths(ui_icon("home")), css_select("symbol#icon-24-outline-home[viewBox='0 0 24 24'] path").map { it["d"] }
+    assert_select "svg[xmlns], svg[data-slot]", 0
+    assert_select "svg > path", 0
+
+    show ui_icon("home")
+    assert_select "svg.size-5 > path", true, "après le bloc, l'icône est de nouveau en ligne"
+  end
+
+  # Lot E4 (politique-cache) : deux blocs de la même page (pages du catalogue chargées au défilement) ne partagent aucun id.
+  test "ui_icon_sprite prefixes its symbols when asked, so that two blocks of a page never share an id" do
+    show(safe_join([ ui_icon_sprite { ui_icon("home") }, ui_icon_sprite(prefix: "courses-page-2-") { ui_icon("home") } ]))
+
+    assert_select "use[href='#icon-24-outline-home']", 1
+    assert_select "use[href='#courses-page-2-icon-24-outline-home']", 1
+    assert_select "symbol#icon-24-outline-home", 1
+    assert_select "symbol#courses-page-2-icon-24-outline-home", 1
+
+    show ui_icon_sprite { ui_icon("home") }
+    assert_select "symbol#icon-24-outline-home", 1, "le préfixe ne survit pas à son bloc"
+  end
+
   test "ui_spinner spins at the requested size" do
     show ui_spinner(size: :lg)
 
@@ -44,7 +79,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_button renders a typed button with its variant and size" do
     show ui_button("Enregistrer", variant: :brand, size: :lg, type: :submit, full: true, class: "mt-4")
 
-    assert_select "button[type=submit].bg-brand.min-h-14.w-full.mt-4", text: "Enregistrer"
+    assert_select "button[type=submit].ui-button-brand.ui-button-lg.w-full.mt-4", text: "Enregistrer"
     assert_select "button[disabled]", 0
   end
 
@@ -65,13 +100,13 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_button becomes a link, with a Turbo method when asked" do
     show ui_button("Supprimer", href: "/x", variant: :danger, method: :delete, data: { confirm: "?" })
 
-    assert_select "a[href='/x'][data-turbo-method=delete][data-confirm='?'].bg-error"
+    assert_select "a[href='/x'][data-turbo-method=delete][data-confirm='?'].ui-button-danger"
   end
 
   test "ui_button link without method keeps its data untouched" do
     show ui_button("Voir", href: "/x", variant: :ghost, size: :sm)
 
-    assert_select "a[href='/x']:not([data-turbo-method]).h-10"
+    assert_select "a[href='/x']:not([data-turbo-method]).ui-button-sm"
   end
 
   test "a disabled link keeps its place but loses its href" do
@@ -95,7 +130,7 @@ class ComponentsHelperTest < ActionView::TestCase
     end
     show html
 
-    assert_select "div#c.rounded-card.p-6 h3", text: "Classes"
+    assert_select "div#c.rounded-card.p-5 h3", text: "Classes"
     assert_select "div#c p", text: "3 classes"
     assert_select "div#c svg"
     assert_select "div#c", text: /Tout voir.*Corps.*Pied/m
@@ -104,14 +139,15 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_card without block nor header renders an empty card" do
     show ui_card(padding: :none)
 
-    assert_select "div.rounded-card:not(.p-5)"
+    assert_select "div.rounded-card:not(.p-4)"
     assert_select "h2", 0
   end
 
   test "ui_card with an href is a lifting link" do
     show ui_card(title: "Cours", href: "/courses", padding: :sm) { "Corps" }
 
-    assert_select "a[href='/courses'].hover\\:shadow-lift.p-4 h2", text: "Cours"
+    # Lot E5 (politique-cache) : survol et focus par la classe partagée ui-card-link (test/design/shared_classes_test.rb).
+    assert_select "a[href='/courses'].ui-card-link.p-4 h2", text: "Cours"
   end
 
   test "ui_card refuses an unknown padding" do
@@ -260,6 +296,51 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { view.fields(:user) { |form| ui_radio_group(form, :level, columns: 4, choices: []) } }
   end
 
+  # --- Groupe de cases à cocher (UDR-0071 §3.8) -------------------------------
+
+  test "ui_checkbox_group renders a legend, one 48 px option per choice and checks the object's values" do
+    show view.fields(:announcement, model: Record.new(classrooms: %w[b2 c3])) { |form|
+      ui_checkbox_group(form, :classrooms, label: "Classes", required: true,
+                                           choices: [ [ "3ème A", "a1" ], [ "3ème B", "b2" ], [ "3ème C", "c3" ] ])
+    }
+
+    assert_select "fieldset#announcement_classrooms > legend", text: /Classes\s*\*/
+    assert_select "fieldset > input[type=hidden][name='announcement[classrooms][]'][value='']:not([id])", 1
+    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line", 3
+    assert_select "label", text: "3ème A" do
+      assert_select "input#announcement_classrooms_a1[type=checkbox][name='announcement[classrooms][]'][value=a1]:not([checked])"
+    end
+    assert_select "input[type=checkbox][checked]", 2
+    assert_select "input#announcement_classrooms_c3.size-5.accent-brand[checked]"
+    assert_select "input[type=checkbox][name='announcement[classrooms][]']", 3
+    assert_select "input[type=hidden][name='announcement[classrooms][]']", 1
+    assert_select "input[required], input[aria-invalid], input[aria-describedby], p", 0
+  end
+
+  test "ui_checkbox_group wires its hint and first error to every option, never makes each box required" do
+    record = Record.new
+    record.errors.add(:classrooms, "Choisis au moins une de tes classes.")
+    record.errors.add(:classrooms, "Second")
+    show view.fields(:announcement, model: record) { |form|
+      ui_checkbox_group(form, :classrooms, hint: "Aide", columns: 3, choices: [ %w[A a], %w[B b] ])
+    }
+
+    assert_select "legend", text: "Classrooms"
+    assert_select "legend span", 0
+    assert_select "div.sm\\:grid-cols-3 > label.border-error", 2
+    assert_select "input[type=checkbox]:not([required]):not([checked])[aria-invalid=true][aria-describedby='announcement_classrooms_hint announcement_classrooms_error']", 2
+    assert_select "fieldset > p#announcement_classrooms_hint + p#announcement_classrooms_error", text: "Choisis au moins une de tes classes."
+  end
+
+  test "ui_checkbox_group works without a model, stacks on one column and refuses an unknown column count" do
+    show view.fields(:announcement) { |form| ui_checkbox_group(form, :classrooms, columns: 1, choices: [ %w[A a] ]) }
+
+    assert_select "legend", text: "Classrooms"
+    assert_select "fieldset div.grid:not([class*=grid-cols]) > label > input:not([checked])", 1
+    error = assert_raises(ArgumentError) { view.fields(:announcement) { |form| ui_checkbox_group(form, :classrooms, columns: 4, choices: []) } }
+    assert_match "ui_checkbox_group", error.message
+  end
+
   # --- Modale, menu, onglets --------------------------------------------------
 
   test "ui_modal renders a native dialog with its trigger and footer" do
@@ -290,6 +371,47 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#later[open]", 0
   end
 
+  # UDR-0064 (RH-13) : une entrée de rôle est un déclencheur `lg` pleine largeur ; sans option, celui d'aujourd'hui.
+  test "ui_modal sizes and stretches its trigger on demand, and keeps the default trigger otherwise" do
+    show ui_modal(title: "Élève", id: "entry", trigger: "Je suis élève", trigger_variant: :primary, trigger_size: :lg,
+                  trigger_full: true) +
+         ui_modal(title: "Plus tard", id: "plain", trigger: "Ouvrir")
+
+    assert_select "button[aria-controls=entry][aria-haspopup=dialog].ui-button-primary.ui-button-lg.w-full", text: "Je suis élève"
+    assert_select "button[aria-controls=plain].ui-button-md:not(.w-full)", text: "Ouvrir"
+    # Levée par ui_button pendant le rendu du partial : ActionView l'enveloppe, la cause reste l'ArgumentError.
+    error = assert_raises(ActionView::Template::Error) { ui_modal(title: "Taille", trigger: "Ouvrir", trigger_size: :xl) }
+    assert_kind_of ArgumentError, error.cause
+  end
+
+  # UDR-0061 §3.3 : `placement: :sheet` fait de la modale une feuille basse sous lg, avec sa poignée ; le défaut
+  # (`:center`) rend exactement le même HTML qu'avant l'option.
+  test "ui_modal placed as a sheet carries the sheet class and a decorative handle" do
+    show ui_modal(title: "Contacte-nous", id: "help-sheet", size: :sm, placement: :sheet) { "Corps" }
+
+    # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (revue de la PR #191), la feuille n'a plus à l'arrêter.
+    assert_select "dialog#help-sheet.ui-dialog.dialog-sheet.sm\\:max-w-sm"
+    assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
+  end
+
+  test "ui_modal keeps its centred rendering by default, and refuses an unknown placement" do
+    default = ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir") { "Corps" }
+
+    assert_equal default, ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir", placement: :center) { "Corps" }
+    show default
+    assert_select ".dialog-sheet, .sheet-handle, .motion-reduce\\:animate-none", 0
+    assert_raises(ArgumentError) { ui_modal(title: "Info", placement: :side) }
+  end
+
+  # UDR-0061 §3.2 : sans JavaScript, le déclencheur reste un lien vers la page de repli ; le contrôleur l'intercepte.
+  test "ui_modal trigger with a fallback href is a link that opens the dialog" do
+    show ui_modal(title: "Contacte-nous", id: "help-sheet", trigger: "Besoin d'aide ?", trigger_href: "/aide",
+                  trigger_variant: :ghost, trigger_size: :sm)
+
+    assert_select "a[href='/aide'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=help-sheet]",
+                  text: "Besoin d'aide ?"
+  end
+
   test "ui_dropdown renders a menu button and its items" do
     html = ui_dropdown(label: "Actions", align: :start) do
       ui_dropdown_item("Modifier", href: "/edit", icon: "pencil") +
@@ -301,7 +423,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "button[aria-haspopup=menu][aria-expanded=false][aria-controls=menu-actions]"
     assert_select "div#menu-actions[role=menu][hidden].left-0"
     assert_select "a[role=menuitem][href='/edit'] svg"
-    assert_select "a[role=menuitem][data-turbo-method=delete].text-error"
+    assert_select "a[role=menuitem][data-turbo-method=delete].ui-menu-item-danger"
     assert_select "span[role=menuitem][aria-disabled=true]", text: "Bientôt"
   end
 
@@ -328,8 +450,10 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "[data-controller=dropdown][data-dropdown-fixed-value=true]"
     assert_select "div#row-menu[role=menu].z-50", 1, "au-dessus de la barre basse (z-40) du mobile"
-    assert_select "[data-controller=dropdown][data-action*='scroll@window->dropdown#place:capture']"
-    assert_select "[data-controller=dropdown][data-action*='resize@window->dropdown#place']"
+    # Lot E6 (politique-cache) : défilement et redimensionnement sont écoutés par le contrôleur, menu ouvert seulement ;
+    # le HTML de chaque menu ne déclare plus que le clavier (test système : teams/row_actions_menu_test.rb).
+    assert_select "[data-controller=dropdown][data-action='keydown->dropdown#keydown']"
+    assert_select "[data-action*='@window'], [data-action*='@document']", 0
     assert_select "button[aria-label='Actions pour Abidjan 1'][aria-controls=row-menu] svg"
   end
 
@@ -345,7 +469,7 @@ class ComponentsHelperTest < ActionView::TestCase
     show ui_dropdown_item("Supprimer", dialog: "delete-drena-1", icon: "trash", tone: :danger)
 
     assert_select "button[type=button][role=menuitem][tabindex='-1'][aria-haspopup=dialog][aria-controls=delete-drena-1]" \
-                  "[data-action='dropdown#openDialog'][data-dropdown-dialog-param=delete-drena-1].text-error.min-h-tap svg",
+                  "[data-action='dropdown#openDialog'][data-dropdown-dialog-param=delete-drena-1].ui-menu-item.ui-menu-item-danger svg",
                   count: 1
     assert_select "button", text: "Supprimer"
     assert_select "a", 0
@@ -354,8 +478,8 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_dropdown_item keeps the default tone for a dialog, and refuses an unknown tone" do
     show ui_dropdown_item("Désactiver", dialog: "deactivate-school-1")
 
-    assert_select "button.text-ink[role=menuitem]", text: "Désactiver"
-    assert_select "button.text-error", 0
+    assert_select "button.ui-menu-item-default[role=menuitem]", text: "Désactiver"
+    assert_select "button.ui-menu-item-danger", 0
     assert_raises(ArgumentError) { ui_dropdown_item("X", dialog: "x", tone: :loud) }
   end
 
@@ -384,7 +508,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_badge renders a tone, a dot and an icon" do
     show ui_badge("Validé", tone: :success, size: :sm, icon: "check-circle", dot: true)
 
-    assert_select "span.bg-success-soft.text-2xs", text: "Validé"
+    assert_select "span.ui-badge.ui-badge-sm.bg-success-soft", text: "Validé"
     assert_select "span span.bg-success[aria-hidden=true]"
     assert_select "span svg"
   end
@@ -413,6 +537,85 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span.bg-mist", 2
   end
 
+  # RE-13, RE-17 (UDR-0069 §3.3) : l'illustration suit le slug figé de la matière ; toute autre matière prend la générique.
+  test "subject_illustration picks the drawing and tint by the frozen slug, aliases included" do
+    {
+      "mathematiques" => %w[maths indigo], "maths" => %w[maths indigo], "physique-chimie" => %w[physique-chimie lilac],
+      "svt" => %w[svt green], "francais" => %w[francais yellow], "histoire-geo" => %w[histoire-geographie lavender],
+      "edhc" => %w[edhc pink], "philosophie" => %w[philosophie pink], invite: %w[inviter red]
+    }.each do |slug, (file, tint)|
+      illustration = subject_illustration(slug)
+
+      assert_equal "subjects/#{file}.svg", illustration.path, slug
+      assert_equal "bg-tint-#{tint}", illustration.tint, slug
+    end
+  end
+
+  test "subject_illustration falls back to the generic drawing for any other subject" do
+    [ "anglais", "eps", nil ].each do |slug|
+      assert_equal ComponentsHelper::Illustration.new(path: "subjects/generique.svg", tint: "bg-mist"), subject_illustration(slug)
+    end
+  end
+
+  test "every illustration file exists, standalone and without style attributes" do
+    paths = [ *ComponentsHelper::SUBJECT_ILLUSTRATIONS.values.map(&:path), ComponentsHelper::SUBJECT_ILLUSTRATION_FALLBACK.path ].uniq
+
+    assert_equal 9, paths.size
+    paths.each do |path|
+      svg = Rails.root.join("app/assets/images", path).read
+
+      assert_match(/\A<svg xmlns="http:\/\/www.w3.org\/2000\/svg" viewBox="0 0 48 48">/, svg, path)
+      assert_no_match(/\sstyle=|\sclass=/, svg, path)
+    end
+  end
+
+  test "ui_subject_bubble is a link with a tinted disc, a decorative drawing, a label and an optional spoken suffix" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses?level=tle", illustration: subject_illustration("mathematiques"),
+                           sr_suffix: ", cours de Mathématiques", id: "course_level_tle_d") +
+         ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite))
+
+    assert_select "a#course_level_tle_d.min-h-tap[href='/courses?level=tle']" do
+      assert_select "span.size-15.rounded-full.bg-tint-indigo img[alt=''][aria-hidden=true][src*='maths']"
+      assert_select "span", text: "Tle D"
+      assert_select "span.sr-only", text: ", cours de Mathématiques"
+    end
+    assert_select "a[href='/teachers/invite']:not([id]) span.bg-tint-red"
+    assert_select "a[href='/teachers/invite'] span.sr-only", 0
+  end
+
+  # Constat du challenger : le nom accessible se lit « Tle D, cours de … », sans espace avant la virgule.
+  test "ui_subject_bubble reads its label and spoken suffix without a stray space" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses", illustration: subject_illustration("svt"), sr_suffix: ", cours de SVT")
+
+    assert_equal "Tle D, cours de SVT", css_select("a").first.text.gsub(/\s+/, " ").strip
+  end
+
+  # AD-07, AD-09 (UDR-0074 §3.5): the direction's bubbles carry a decorative dot of the work signal; without a signal the
+  # bubble stays the one of UDR-0069.
+  test "ui_subject_bubble puts a decorative signal dot on its disc, in the colour of the signal" do
+    %i[green yellow red].each do |signal|
+      show ui_subject_bubble(label: "3ème", href: "/school-admin/levels/3eme", illustration: subject_illustration(nil), signal:)
+
+      assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-signal-#{signal}[aria-hidden=true]",
+                    count: 1
+    end
+  end
+
+  # UDR-0076 §3.1, charte §5 et §9 : la bulle d'une matière en retard porte la pastille ambre, celle de l'urgence.
+  test "ui_subject_bubble puts the amber dot of a late subject" do
+    show ui_subject_bubble(label: "SVT", href: "/courses?material=svt", illustration: subject_illustration("svt"), signal: :warning)
+
+    assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-warning[aria-hidden=true]",
+                  count: 1
+  end
+
+  test "ui_subject_bubble without a signal has no dot, and refuses an unknown signal" do
+    show ui_subject_bubble(label: "Tle D", href: "/courses", illustration: subject_illustration("svt"))
+
+    assert_select "span[class*='bg-signal-']", 0
+    assert_raises(ArgumentError) { ui_subject_bubble(label: "3ème", href: "/", illustration: subject_illustration(nil), signal: :blue) }
+  end
+
   test "ui_avatar shows initials on a stable tone" do
     show ui_avatar("Awa Marie Koné", size: :lg)
 
@@ -432,7 +635,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_avatar shows a photo round and cropped, lazily, in every size up to xl" do
     show ui_avatar("Awa Koné", src: "/accounts/abc/photo?v=1", size: :xl)
 
-    assert_select "img[alt='Awa Koné'][src='/accounts/abc/photo?v=1'][loading=lazy][decoding=async].rounded-full.object-cover.size-28"
+    assert_select "img[alt='Awa Koné'][src='/accounts/abc/photo?v=1'][loading=lazy][decoding=async].ui-avatar.object-cover.size-28"
     assert_includes ui_avatar("Awa Koné", size: :xl), "size-28"
   end
 
@@ -471,6 +674,36 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_nil flash_toast(:reload_document, true)
   end
 
+  # UDR-0071 §3.6 : « Annuler » dans le toast. Le toast part au départ de la requête (turbo:submit-start), pas au clic :
+  # retiré au clic, le formulaire ne serait plus dans la page et le navigateur ne l'enverrait pas.
+  test "ui_toast with an action renders its button between the text and the close button" do
+    show ui_toast("Elle n'apparaît plus sur ton accueil.", type: :info, title: "Annonce masquée",
+                  action: { label: "Annuler", href: "/announcements/abcdefghijkmno/dismissal", method: :delete })
+
+    assert_select "div[data-controller=toast][data-toast-type=info][data-toast-delay-value='5000']" do
+      assert_select "div.flex-1 + form[action='/announcements/abcdefghijkmno/dismissal'][method=post] + button[data-action='toast#dismiss']"
+      assert_select "form[data-action='turbo:submit-start->toast#dismiss'] input[type=hidden][name=_method][value=delete]"
+      assert_select "form button[type=submit][data-turbo-stream=true]", text: "Annuler" do |buttons|
+        assert_equal "min-h-tap shrink-0 rounded-ln px-3 text-sm font-bold text-brand-strong hover:bg-brand-soft", buttons.first["class"]
+      end
+    end
+    assert_select "p", text: "Annonce masquée"
+  end
+
+  test "ui_toast without action renders no form, and an action defaults to POST" do
+    show ui_toast("Fait") + ui_toast("Rétabli", action: { label: "Refaire", href: "/redo" })
+
+    assert_select "form", 1
+    assert_select "form[action='/redo'][method=post]:not(:has(input[name=_method]))"
+  end
+
+  test "turbo_stream_toast carries the action of its toast" do
+    show view.turbo_stream_toast("Masquée", action: { label: "Annuler", href: "/undo", method: :delete })
+
+    assert_includes rendered, "turbo:submit-start-&gt;toast#dismiss"
+    assert_includes rendered, "Annuler"
+  end
+
   test "turbo_stream_toast appends the rendered toast to the stack" do
     show view.turbo_stream_toast("Fait", type: :success)
 
@@ -486,14 +719,23 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "p", text: "Vide"
     assert_select "p", text: "Rien ici"
-    assert_select "a[href='/new'].bg-ink", text: "Créer"
+    assert_select "a[href='/new'].ui-button-primary", text: "Créer"
+  end
+
+  test "ui_empty_state titles in a p, or in the heading it is given when it is the whole page" do
+    show ui_empty_state(title: "Vide")
+    assert_select "p", text: "Vide"
+    assert_select "h1", 0
+
+    show ui_empty_state(title: "Tu n'as pas encore de classe", heading: :h1)
+    assert_select "h1.font-display", text: "Tu n'as pas encore de classe"
   end
 
   test "ui_empty_state with a free block or nothing" do
     show ui_empty_state(title: "Vide") { "Libre" } + ui_empty_state(title: "Nu", action: { label: "A", href: "/", variant: :secondary })
 
     assert_includes rendered, "Libre"
-    assert_select "a.bg-white", text: "A"
+    assert_select "a.ui-button-secondary", text: "A"
     assert_no_match(/<a|<button/, ui_empty_state(title: "Sans action"))
   end
 
@@ -589,7 +831,7 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "span[data-controller=clipboard][data-clipboard-text-value='https://lnclass.ci/c/KFM37']" do
       assert_select "button[type=button][hidden][data-clipboard-target=button][data-action='clipboard#copy']" \
-                    "[aria-label='Copier le lien de la classe'].border-line.h-10", text: "Copier le lien"
+                    "[aria-label='Copier le lien de la classe'].ui-button-secondary.ui-button-sm", text: "Copier le lien"
       assert_select "template[data-clipboard-target=copied]"
       assert_select "template[data-clipboard-target=failed]"
     end
@@ -604,9 +846,35 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_copy_button defaults: secondary, small, clipboard icon, no aria-label of its own" do
     show ui_copy_button("KFM37", label: "Copier", copied: "Code copié.", failed: "Raté.", variant: :ghost, size: :md)
 
-    assert_select "button[hidden].min-h-tap:not([aria-label])", text: "Copier"
+    assert_select "button[hidden].ui-button-md:not([aria-label])", text: "Copier"
     assert_equal icon_paths(ui_icon("clipboard-document", size: :md)), icon_paths(css_select("button").first)
     assert_match "Raté.", Nokogiri::HTML5.fragment(rendered).css("template").last.inner_html
+  end
+
+  # --- « Voir plus » (UDR-0057 R3) ---------------------------------------------
+
+  test "ui_reveal_data wires the reveal controller with both announcements" do
+    data = ui_reveal_data(step: 2)
+
+    assert_equal "reveal", data[:controller]
+    assert_equal 2, data[:reveal_step_value]
+    assert_equal "1 ligne de plus affichée.", data[:reveal_one_value]
+    assert_equal "{count} lignes de plus affichées.", data[:reveal_other_value]
+  end
+
+  test "ui_reveal_item hides the lines after the third and targets them all" do
+    assert_equal({ hidden: false, data: { reveal_target: "item" } }, ui_reveal_item(2))
+    assert_equal({ hidden: true, data: { reveal_target: "item" } }, ui_reveal_item(3))
+  end
+
+  test "ui_reveal_more renders a full-width ghost button and a polite status, only beyond three lines" do
+    assert_nil ui_reveal_more(3)
+
+    show ui_reveal_more(4)
+
+    assert_select "button.w-full[data-reveal-target=button][data-action='reveal#more']", text: "Voir plus"
+    assert_select "button.ui-button-primary", 0
+    assert_select "p.sr-only[role=status][aria-live=polite][data-reveal-target=status]"
   end
 
   test "ui_modal hands its document title to the modal controller and its dialog to the autofocus controller" do

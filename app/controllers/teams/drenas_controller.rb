@@ -1,9 +1,9 @@
 # 🌐 DELIVERY · Teams::DrenasController
-# Rôle : l'équipe gère les DRENA : liste, création et renommage en modale, suppression refusée tant qu'il y a des écoles
-# ADR  : 0026, 0028, 0029, 0036 · UDR : 0006, 0035
+# Rôle : l'équipe gère les DRENA : liste, création et renommage en modale, suppression confirmée en modale et refusée tant qu'il y a des écoles
+# ADR  : 0026, 0028, 0029, 0036, 0076 · UDR : 0006, 0035
 module Teams
   class DrenasController < BaseController
-    before_action :load_drena, only: %i[edit update]
+    before_action :load_drena, only: %i[edit update deletion]
 
     def index
       @drenas = drenas_query.call
@@ -28,6 +28,10 @@ module Teams
       render_result update_drena.call(actor: current_actor, public_id: @drena.public_id, dto: @form), form: :edit,
                     success: ->(drena) { respond_with_list(drena, :updated) }
     end
+
+    # Lot E3 (politique-cache) : la confirmation de suppression, lue à la demande dans le frame « modal » ; sans frame, une
+    # page complète. La DRENA est lue par load_drena (404 si inconnue).
+    def deletion; end
 
     # Refus (:conflict, la DRENA a des établissements) : toast d'erreur avec la raison, ligne conservée, statut 422.
     def destroy

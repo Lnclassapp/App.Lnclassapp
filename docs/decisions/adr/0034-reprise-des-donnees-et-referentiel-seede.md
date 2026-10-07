@@ -60,7 +60,7 @@ Option C retenue par le porteur le 2026-09-25.
 |---|---|---|
 | `db/seeds/school.rb` | développement et test | les 41 DRENA, depuis `db/seeds/data/drenas.yml` ; quelques écoles, avec leurs classes générées ; idempotent par slug |
 | `db/seeds/identity.rb` | tous | la première invitation `team` pour `ENV["TEAM_BOOTSTRAP_CONTACT"]`, si aucun compte `team` n'existe (ADR-0038) ; aucun compte avec un PIN connu |
-| `db/seeds/catalog.rb` | développement et test | niveaux : `6ème`, `5ème`, `4ème`, `3ème` (cycle `first`), `2nde`, `1ère`, `Tle` (cycle `second`) ; séries : `A` et `C` rattachées à `2nde`, `A1`, `A2`, `C`, `D` rattachées à `1ère` et à `Tle` ; matières : Mathématiques, Physique-Chimie, SVT (`science`), Français, Anglais, Histoire-Géographie, Philosophie (`literature`) |
+| `db/seeds/catalog.rb` | développement et test | niveaux : `6ème`, `5ème`, `4ème`, `3ème` (cycle `first`), `2nde`, `1ère`, `Tle` (cycle `second`) ; séries : `A` et `C` rattachées à `2nde`, `A1`, `A2`, `C`, `D` rattachées à `1ère` et à `Tle` ; matières : Mathématiques, Physique-Chimie, SVT (`science`), Français, Histoire-Géographie, Philosophie (`literature`) *(Anglais retiré, amendement du 2026-10-03)* |
 | `db/seeds/development.rb` | développement | comptes et contenus fictifs |
 
 Garde : un fichier réservé au développement ou au test lève une erreur s'il est évalué ailleurs.
@@ -128,3 +128,10 @@ raise "db/seeds/catalog.rb est réservé au développement et au test" unless Ra
 
 - **Production** : aucun seed de DRENA, d'établissement ni de référentiel (niveaux, séries, `level_series`, matières). La production démarre vide, et l'équipe crée ou importe tout (ADR-0039). `db/seeds/catalog.rb`, `db/seeds/school.rb` et `db/seeds/development.rb` lèvent une erreur hors développement et test. Seul `db/seeds/identity.rb` s'exécute en production.
 - **Codes** : il n'y a **pas de colonne `code`** sur `levels` ni sur `series`. Le **slug figé** à la création (ADR-0029) en tient lieu. Ce sont ces slugs qu'utilisent la génération des classes (ADR-0030) et la résolution des imports (ADR-0039) : `6eme`, `5eme`, `4eme`, `3eme`, `2nde`, `1ere`, `tle` ; `a`, `a1`, `a2`, `c`, `d`. Renommer un niveau ou une série ne change pas son slug.
+
+## Amendement du 2026-10-03 — l'Anglais sort du référentiel
+
+*Décision du porteur (revue de la PR de [`refonte-homepage`](../../chantiers/refonte-homepage/memo.md)). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- Lnclass ne propose pas l'Anglais. Le référentiel de développement et de test compte **six matières** : Mathématiques, Physique-Chimie, SVT, Français, Histoire-Géographie, Philosophie. `db/seeds/catalog.rb` et `test/support/factories/catalog.rb` le suivent ; `test/support/factories_test.rb` le vérifie.
+- La production n'a pas de seed (§4) : l'équipe ne crée pas d'Anglais à l'écran. Les tests qui écrivent « Anglais » comme nom de matière quelconque (création par l'équipe, tri par nom) restent, ce sont des données d'exemple.

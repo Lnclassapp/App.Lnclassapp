@@ -51,6 +51,28 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
            "une ressource vient d'un hôte tiers"
   end
 
+  # Lot E4 (chantier politique-cache), UDR-0013 amendement du 2026-10-05 : 24 cartes ; la suite arrive quand on descend,
+  # sans rechargement de page, et une carte de la suite ouvre son cours en page entière.
+  test "the teacher scrolls down the catalogue: the next cards load in place, and one of them opens its course" do
+    25.times { |index| create_course(name: format("Cours %02d", index), level: @tle, material: @svt) }
+    # UDR-0077 §3.2 : l'enseignant lit sa matière aux niveaux de ses classes — les 26 cours de SVT de Tle, sans la philosophie.
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
+    visit courses_path
+    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 26)
+    assert_selector "#courses_list > li", count: 24
+    assert_no_selector "#courses_list_page_2"
+
+    assert_no_page_reload do
+      scroll_to find("turbo-frame#courses_page_2")
+      assert_selector "#courses_list_page_2 > li", count: 2
+      assert_no_selector "turbo-frame#courses_page_3"
+    end
+    last = all("#courses_list_page_2 > li").last
+    name = last.find("h2").text
+    last.find("a").click
+    assert_selector "h1", text: name
+  end
+
   test "the team edits the content in the rich text editor from the course page, then publishes and archives it, without a page reload" do
     course = create_course(name: "Mutation et diversité", level: @tle, material: @svt, status: "draft",
                            content: "<div>Probabilité : $\\frac{1}{2}$</div>")
@@ -144,6 +166,69 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
         assert_selector "h1"
         assert page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth"), "#{path} défile sur le côté"
       end
+    end
+  end
+
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : le catalogue filtré par matière et la page cours, vus par l'élève à
+  # 390 × 844, passent la règle de sobriété ; le niveau quitte les cartes. Amendement du 2026-10-05 ter : la matière
+  # filtrée y reste (badge), avec le pied « Ouvrir le cours → ».
+  test "on a phone, the student's catalogue filtered by subject and the course page pass the sobriety rule" do
+    %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
+    sign_in_as create_student_for(@course)
+
+    with_mobile_viewport do
+      visit courses_path(material: @svt.slug)
+      assert_selector "#courses_list > li", count: 1
+      assert_single_primary_action
+      assert_blocks_above_fold "#main > div > *", max: 5
+      within("#course_#{@course.slug}") do
+        assert_text "SVT"
+        assert_text t("catalog.courses.course_card.open")
+        assert_no_text "Tle"
+      end
+      assert_selector "#main details summary", visible: :all,
+                                               text: t("components.info_tip.label", label: t("catalog.courses.index.student_scope_label"))
+
+      visit course_path(@course.slug)
+      assert_single_primary_action
+      assert_blocks_above_fold "#main > div > *", max: 5
+      assert_list_capped "#course_essentials ul"
+      assert_no_text "Hérédité"
+      assert_no_page_reload { click_on t("components.reveal.more") }
+      assert_selector "#course_essentials li", text: "Hérédité"
+
+      # The whole row is the link: a tap anywhere on it opens the sheet.
+      find("#course_essentials li", text: "Mitose").click
+      assert_selector "#essential_header h1", text: "Mitose"
+    end
+  end
+
+  # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
+  # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
+  # UDR-0077 §3.2, amendée le 2026-10-06 : sur téléphone, la recherche et les filtres restent (tous les rôles) ; « Tout
+  # voir » quitte le filtre. UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte.
+  test "on a phone, the teacher's filtered catalogue shows the filters and « Tout voir »; the course page is unchanged" do
+    %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
+
+    with_mobile_viewport do
+      visit courses_path(material: @svt.slug)
+      assert_selector "#courses-filters"
+      within("#course_#{@course.slug}") do
+        assert_text "SVT"
+        assert_text "Tle"
+      end
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+      click_link t("catalog.courses.index.reset")
+      assert_current_path courses_path
+      assert_no_link t("catalog.courses.index.reset")
+
+      visit course_path(@course.slug)
+      assert_selector "#course_essentials li", count: 4
+      assert_no_button t("components.reveal.more")
+      assert_no_link "Assigner à mes classes"
+      assert_no_button "Assigner à mes classes"
     end
   end
 

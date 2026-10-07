@@ -117,3 +117,17 @@ Dans l'ancienne application, chaque rôle a sa propre navigation : 4 rôles × 4
 - **Auto-focus** : `layouts/application` pose le contrôleur `autofocus` sur `<body>` ; après un 422, le focus va au premier champ en erreur (UDR-0054 §3.3).
 - **Toasts** : la région `#toasts` porte `print:hidden`.
 - **CRUD Hotwire** : la modale chargée dans le frame vise son premier champ, jamais la croix ; une confirmation vise « Annuler ».
+
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0068](0068-configuration-et-pilotage-par-etablissement.md) et [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Deux listes pour l'équipe** (UDR-0068 §3.1) : `DESTINATIONS[:team]` perd « Imports » (Accueil, Cours, Établissements, Pilotage) ; `SECONDARY_DESTINATIONS[:team]` (Référentiel, Imports) forme une 2e carte « Configuration » dans la barre latérale et, dans la barre du bas, le menu « Plus » (5e case). La règle « pas de tiroir » du §2.2 est levée pour ce seul menu ; la barre du bas reste à 5 cases au plus.
+- **Sections d'accueil** : équipe « Régions éducatives », « Activités » (le Référentiel a sa page, UDR-0068 §3.4) ; enseignant « Mes classes », « Cours », « Activités » (UDR-0069 §3.1).
+- **Barre latérale de l'enseignant** : sous ses destinations, la carte « Parrainage », frame différé (UDR-0069 §3.6).
+
+## Amendement du 2026-10-04 — « Accueil » de la direction
+
+*Chantier [`docs/chantiers/accueil-direction`](../../chantiers/accueil-direction/prd.md), [UDR-0074](0074-accueil-de-la-direction.md) §3.1. Statut : `Proposé`.*
+
+- La première destination `school_admin` devient `[:home, :school_admin_classrooms_path, "home"]` (« Accueil »), à la place de « Travail des élèves ». Les sections d'accueil de la direction (`HOME_SECTIONS[:school_admin]`) ne changent pas : elles ne servent qu'à la page de démonstration du shell.

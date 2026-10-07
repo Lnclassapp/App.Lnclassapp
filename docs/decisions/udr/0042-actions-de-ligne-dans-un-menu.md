@@ -96,3 +96,17 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 - **Vérification** : `test/helpers/catalog/content_status_helper_test.rb`, les tests de contrôleur des trois pages et des transitions, et les tests système `catalog/course_catalog_test.rb`, `catalog/essential_page_test.rb` et `boucle_pedagogique_test.rb`, qui ouvrent le menu ⋮ avant de publier, d'archiver ou de créer un exercice.
 - **« Tout publier »** *(ajout du 2026-10-01)* : le menu ⋮ d'un cours et celui d'une fiche portent aussi « Tout publier » (`PATCH …/publish-all`, icône `check-badge`), après « Publier » ou « Archiver ». Il publie le contenu et ses descendants brouillons ([ADR-0035, amendement du 2026-10-01](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md#amendement-du-2026-10-01--tout-publier-publication-en-cascade)). Un exercice n'a pas de descendant : son menu ne le porte pas.
 
+## Amendement du 2026-10-03 — réorganisation des espaces équipe et enseignant
+
+*Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0069](0069-accueil-enseignant-par-niveau-et-assignation-depuis-le-catalogue.md). Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Exception** : « Modifier mes classes » de l'accueil enseignant, lien de navigation que le §2 gardait hors des menus, entre dans le menu ⋮ « Actions sur mes classes » à la demande du porteur (UDR-0069 §3.2).
+
+## Amendement du 2026-10-04 — confirmation chargée à la demande
+
+*Chantier [`docs/chantiers/ecrans-direction-lents`](../../chantiers/ecrans-direction-lents/plan.md), lot 3, levier 3b ; [UDR-0056, amendement du 2026-10-04](0056-gestes-de-la-direction.md#amendement-du-2026-10-04--confirmation-du-retrait-chargée-à-la-demande). Décision de l'orchestrateur, sur mandat délégué par le porteur. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Seconde forme admise pour une confirmation de ligne** : au lieu de la `<dialog>` copiée dans la ligne (§2, §3 « Structure »), l'entrée du menu peut être un lien `ui_dropdown_item(…, href: <confirmation>, frame: "modal")` vers une action `GET` qui rend `turbo_frame_tag "modal"` → `ui_modal(id: "<geste>-<objet>-<clé>", open: true)` avec son formulaire `…-form`, au motif des modales d'édition (UDR-0006). Sans en-tête `Turbo-Frame` (sans JavaScript), la même adresse rend une page complète utilisable : un lien de retour vers la liste, puis la `<dialog open>`.
+- **Quand** : un tableau dont le nombre de lignes fait peser les confirmations copiées sur le budget de HTML de l'ADR-0067 (« Enseignants » : 60 confirmations, 198 Ko). Un tableau court garde ses `<dialog>` de ligne.
+- **Règles** : l'action `GET` applique la policy de l'écriture qu'elle confirme **avant toute lecture**, et refuse comme elle (403, 404) ; titre, texte, boutons, ids et formulaire sont ceux de la `<dialog>` qu'elle remplace ; focus sur « Annuler » à l'ouverture et retour au ⋮ à la fermeture (amendement du 2026-09-29) ; « Annuler », Échap ou le fond vident le frame, et l'entrée recharge la confirmation.
+- Premier écran : « Enseignants » de la direction (UDR-0056 §3.3, amendé). Preuve : `test/controllers/school_admin/teachers_controller_test.rb`, `test/system/school_admin/teachers_test.rb`.

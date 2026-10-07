@@ -1,0 +1,31 @@
+<%# 🌐 UI · communication/help/show — « Questions fréquentes » : dans le shell une fois connecté, sinon écran d'entrée %>
+<%# Rôle : connecté, en-tête de page et retour vers l'accueil du rôle ; visiteur, logo, retour, un seul h1 ; seuils du domaine %>
+<%# UDR  : 0061 (FAQ ; amendement du 2026-10-06), 0063 (§3.4), 0057 (R3 non appliquée : la liste est l'objet de la page), 0060, 0054 %>
+<% page_title t(".page_title") %>
+<% grading = Entities::Assessment::Grading %>
+<% thresholds = { pass: grading::PASS_THRESHOLD, mastery: grading::MASTERY_THRESHOLD, gold: grading::GOLD_THRESHOLD,
+                  perfect: grading::PERFECT_THRESHOLD, remediation: grading::REMEDIATION_THRESHOLD,
+                  example_grade: grading.grade_on_20(80) } %>
+<% if in_shell? %>
+  <div class="max-w-2xl">
+    <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: home_path_for(current_actor.role) } %>
+    <%= ui_card padding: :lg do %>
+      <%= render "questions", thresholds: %>
+    <% end %>
+  </div>
+<% else %>
+  <main class="flex min-h-dvh flex-col items-center bg-paper px-gutter py-10">
+    <div class="w-full max-w-xl">
+      <div class="mb-6 text-center">
+        <%= link_to root_path, "aria-label": t(".logo_home"),
+                               class: "mx-auto flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+          <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+        <% end %>
+      </div>
+      <%= ui_back_link t(".back"), href: root_path %>
+      <%= ui_card title: t(".title"), heading: :h1, padding: :lg do %>
+        <%= render "questions", thresholds: %>
+      <% end %>
+    </div>
+  </main>
+<% end %>

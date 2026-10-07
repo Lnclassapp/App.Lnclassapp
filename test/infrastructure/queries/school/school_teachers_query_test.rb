@@ -18,11 +18,12 @@ module Queries
       test "DS-06 : un enseignant de l'établissement, avec sa matière et ses classes, niveau puis nom" do
         tle = create_classroom(school: @school, level: @final, name: "Tle D 2", school_year: YEAR)
         second = create_classroom(school: @school, level: @second, name: "2nde C 1", school_year: YEAR)
-        create_teacher(school: @school, first_name: "Awa", last_name: "Koné", material: @maths, classrooms: [ tle, second ])
+        awa = create_teacher(school: @school, first_name: "Awa", last_name: "Koné", material: @maths, classrooms: [ tle, second ])
 
         assert_equal SchoolTeachersQuery::Overview.new(
           school_name: "Lycée Moderne de Bouaké",
-          teachers: [ SchoolTeachersQuery::TeacherRow.new(name: "Awa Koné", material_name: "Mathématiques",
+          teachers: [ SchoolTeachersQuery::TeacherRow.new(public_id: awa.public_id, first_name: "Awa", name: "Awa Koné",
+                                                          material_name: "Mathématiques",
                                                           material_category: "science", classroom_names: [ "2nde C 1", "Tle D 2" ]) ]
         ), overview
       end
@@ -54,6 +55,14 @@ module Queries
         assert_equal [ [ "2nde A 1" ] ], overview(school_id: other_school.id).teachers.map(&:classroom_names)
       end
 
+      test "GD-14 (ADR-0071 §4.6, UDR-0056 §3.3) : chaque ligne porte le public_id et le prénom, pour « Retirer »" do
+        yao = create_teacher(school: @school, first_name: "Yao", last_name: "Brou")
+        awa = create_teacher(school: @school, first_name: "Awa", last_name: "Koné")
+
+        assert_equal [ [ yao.public_id, "Yao", "Yao Brou" ], [ awa.public_id, "Awa", "Awa Koné" ] ],
+                     overview.teachers.map { [ it.public_id, it.first_name, it.name ] }
+      end
+
       test "un établissement sans enseignant : liste vide" do
         create_teacher(school: create_school)
 
@@ -68,6 +77,31 @@ module Queries
 
         assert_equal single, count_queries { assert_equal 3, overview.teachers.size }
         assert_equal 3, single
+      end
+
+      # Lot 3 of ecrans-direction-lents (UDR-0056, amendment of 2026-10-04): the confirmation « Retirer » loaded on demand
+      # names one teacher of this school, the same ones DetachTeacher would withdraw; nil for anyone else.
+      def teacher(public_id, school_id: @school.id) = SchoolTeachersQuery.new.teacher(school_id:, public_id:)
+
+      test "la confirmation du retrait : nom et prénom d'un enseignant de l'établissement, en une requête" do
+        awa = create_teacher(school: @school, first_name: "Awa", last_name: "Koné", material: @maths)
+
+        assert_equal 1, count_queries { teacher(awa.public_id) }
+        assert_equal SchoolTeachersQuery::Teacher.new(public_id: awa.public_id, first_name: "Awa", name: "Awa Koné"),
+                     teacher(awa.public_id)
+      end
+
+      test "la confirmation du retrait : nil pour un enseignant d'ailleurs, en attente, anonymisé, un autre rôle ou un inconnu" do
+        elsewhere = create_teacher(school: create_school)
+        anonymized = create_teacher(school: @school).tap { it.update!(anonymized_at: Time.current) }
+        pending = create_teacher(school: nil)
+        create_join_request(school: @school, teacher: pending)
+        student = create_user(role: "student")
+        Orm::TeacherSchool.create!(teacher: student, school: @school, primary: true)
+
+        [ elsewhere, anonymized, pending, student ].each { assert_nil teacher(it.public_id), it.role }
+        assert_nil teacher("abcdefghijkmno")
+        assert_nil teacher(create_teacher(school: @school).public_id, school_id: create_school.id)
       end
 
       def count_queries(&)

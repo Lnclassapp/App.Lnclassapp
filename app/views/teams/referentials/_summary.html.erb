@@ -1,0 +1,45 @@
+<%# 🌐 UI · teams/referentials/_summary — tuiles et structure scolaire de la page « Référentiel » (CA-25, RE-03) %>
+<%# Rôle : compteurs des DRENA, niveaux, séries, matières, total du barème et illustrations d'annonce, chacun vers son écran ; niveaux et leurs séries %>
+<%# ADR  : 0034, 0058, 0081 · UDR : 0018, 0045, 0068 (§3.4 : reprend teams/homes/_referential, deux cartes, sans titre pour les tuiles), 0075 (§3.6) %>
+<%# locals: (home:, illustrations_count: @illustrations_count) -%>
+<%# illustrations_count : le compte de Queries::Communication::IllustrationLibraryQuery, lu par Teams::ReferentialsController. -%>
+<% figures = [ [ :drenas, home.drenas_count, drenas_path, "map-pin" ], [ :levels, home.levels.size, levels_path, "squares-2x2" ],
+               [ :series, home.series_count, series_index_path, "rectangle-stack" ], [ :materials, home.materials_count, materials_path, "book-open" ],
+               [ :classroom_plan, home.classroom_plan_total, classroom_plan_path, "calculator" ],
+               [ :announcement_illustrations, illustrations_count, teams_announcement_illustrations_path, "photo" ] ] %>
+<%= ui_card id: "team_referential" do %>
+  <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
+    <% figures.each do |figure, count, path, figure_icon| %>
+      <li>
+        <%= link_to path, class: "group flex h-full flex-col gap-3 rounded-ln border border-line p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>
+          <span class="grid size-10 place-items-center rounded-ln bg-brand-soft text-brand-strong"><%= ui_icon figure_icon %></span>
+          <span><span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= count %></span> <span class="text-sm text-mute"><%= t(".#{figure}", count:) %></span></span>
+          <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
+            <%= t(".manage") %><%= ui_icon "arrow-right", variant: :mini, size: :sm, class: "transition group-hover:translate-x-0.5" %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= ui_card title: t(".structure_title"), icon: "squares-2x2", id: "team_referential_structure", class: "mt-5" do %>
+  <% if home.levels.empty? %>
+    <p class="text-sm text-mute"><%= t(".levels_empty") %></p>
+  <% else %>
+    <ul class="flex flex-wrap gap-2">
+      <% home.levels.each do |level| %>
+        <li id="level_<%= level.slug %>" class="flex items-center gap-2 rounded-ln bg-mist px-3 py-2 text-sm">
+          <span class="font-semibold text-ink"><%= level.name %></span>
+          <% if level.series_names.empty? %>
+            <span class="text-mute"><%= t(".no_series") %></span>
+          <% else %>
+            <% level.series_names.each do |series_name| %>
+              <span class="rounded-full border border-line bg-white px-2 text-xs font-medium text-mute"><%= series_name %></span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

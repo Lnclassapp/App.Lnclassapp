@@ -18,7 +18,7 @@ module Finitions
       # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est de Tle, le niveau des cours du catalogue.
       @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", level: @tle)
       @student = create_student(classroom: @classroom, first_name: "Aya")
-      create_assignment(classroom: @classroom, assignable: @essential)
+      create_assignment(classroom: @classroom, assignable: @exercise)
     end
 
     def t(key, **) = I18n.t(key, **)
@@ -79,7 +79,7 @@ module Finitions
         assert_current_path(/material=#{@maths.slug}/)
       end
 
-      click_on tc("filters.reset")
+      click_on tc("reset")
       assert_selector "#courses_list > li", count: 3
       assert_equal "", search_field.value
     end
@@ -100,16 +100,14 @@ module Finitions
       assert_title "Cours · Élève · Lnclass"
     end
 
-    test "FU-02 : l'accueil élève s'appelle « Accueil · Élève · Lnclass » ; badges et maîtrise s'y expliquent" do
+    # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
+    test "FU-02 : l'accueil élève s'appelle « Accueil · Élève · Lnclass », sans aide affichée en permanence" do
       completed_session
       sign_in_as @student
 
       assert_current_path student_home_path
       assert_title "Accueil · Élève · Lnclass"
-      within "#student_home_exercises" do
-        assert_info_tip t("classroom.student_homes.show.badges_help"), t("shared.info_tips.badges")
-        assert_info_tip t("classroom.student_homes.show.mastery_help"), t("shared.info_tips.mastery")
-      end
+      within("#student_home_exercises") { assert_no_selector "#student_home_help" }
     end
 
     test "FU-27 : « Ma classe » montre le code de la classe sans bouton « Copier »" do
@@ -132,7 +130,8 @@ module Finitions
       assert_current_path course_path(@course.slug)
 
       visit course_essential_path(@course.slug, @essential.slug)
-      within("#essential_exercises") { assert_info_tip t("catalog.essentials.show.badges_help"), t("shared.info_tips.badges") }
+      # UDR-0015, amendement du 2026-10-02 : l'aide « Badges » quitte la fiche ; elle reste sur la page de l'exercice.
+      assert_no_selector "#essential_badges_help"
 
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
@@ -155,15 +154,17 @@ module Finitions
       assert_link t("assessment.exercise_sessions.show.quit"), href: exercise_path(@exercise.public_id)
     end
 
-    test "FU-53 : à 390 px, le catalogue avec sa recherche, les pages de l'élève et les infobulles ne débordent pas" do
+    # UDR-0077, amendement du 2026-10-06 : à 390 px, la recherche et les filtres restent ; un catalogue filtré offre « Tout voir ».
+    test "FU-53 : à 390 px, le catalogue filtré sans recherche, les pages de l'élève et les infobulles ne débordent pas" do
       session = completed_session
       sign_in_as @student
 
       with_mobile_viewport do
-        visit courses_path
-        search_field.fill_in with: "genetique"
+        visit courses_path(q: "genetique")
+        assert_selector "#courses-filters"
         assert_selector "#courses_list > li", count: 1
-        assert_no_horizontal_scroll "le catalogue avec sa recherche"
+        assert_link tc("reset"), href: courses_path
+        assert_no_horizontal_scroll "le catalogue filtré"
 
         [ course_path(@course.slug), student_home_path, student_classroom_path, exercise_path(@exercise.public_id),
           exercise_session_result_path(session.public_id) ].each do |path|

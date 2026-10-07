@@ -235,6 +235,19 @@ module Repositories
         assert_equal first.id, @repository.primary_school_id_for(teacher_id: teacher.id)
         assert_nil @repository.primary_school_id_for(teacher_id: create_user(role: "teacher").id)
       end
+
+      # ADR-0071 §4.5 : retirer un enseignant de cet établissement, sans toucher à un autre.
+      test "detach_teacher supprime le rattachement à cet établissement seulement, et compte les lignes supprimées" do
+        here, elsewhere = create_school, create_school
+        teacher = create_teacher(school: here)
+        Orm::TeacherSchool.create!(teacher:, school: elsewhere, primary: false)
+        colleague = create_teacher(school: here)
+
+        assert_equal 1, @repository.detach_teacher(teacher_id: teacher.id, school_id: here.id)
+        assert_equal [ elsewhere.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
+        assert Orm::TeacherSchool.exists?(teacher: colleague, school: here)
+        assert_equal 0, @repository.detach_teacher(teacher_id: teacher.id, school_id: here.id)
+      end
     end
   end
 end

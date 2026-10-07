@@ -52,8 +52,9 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
     document
   end
 
+  # UDR-0068 : la barre latérale de l'équipe porte deux cartes de navigation ; Imports est dans « Configuration ».
   def open_sidebar_entry(label)
-    within("aside nav") { click_on label }
+    within("aside") { click_on label }
   end
 
   def upload(path)
@@ -125,6 +126,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
     open_sidebar_entry "Cours"
     within "#courses_list" do
       assert_selector "li", count: 1
+      # UDR-0013, amendement du 2026-10-05 ter : le statut est dans le pied de la carte, après le titre.
       assert_selector "li", text: /#{COURSE}.*Brouillon/m
       click_on COURSE
     end

@@ -63,7 +63,8 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     end
     assert_equal "KFM37", clipboard
 
-    click_on t("#{SCOPE}.header.copy_link")
+    # Le bloc « Parrainage » de la barre latérale (UDR-0069 §3.6) a aussi « Copier le lien » : celui de la classe est dans son en-tête.
+    within("#classroom_header") { click_on t("#{SCOPE}.header.copy_link") }
 
     assert_toast t("shared.clipboard.copied_link")
     assert_equal URI.join(page.current_url, join_classroom_path("KFM37")).to_s, clipboard
@@ -119,7 +120,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id, q: "awa")
 
-    within("#student_#{@awa.public_id}") { click_on t("#{SCOPE}.roster.issue_code") }
+    click_menu_action("#student_#{@awa.public_id}", t("#{SCOPE}.roster.issue_code"))
 
     assert_selector "dialog[open]", text: "Awa Bamba"
     assert_no_selector "dialog[open] [data-controller=clipboard]"

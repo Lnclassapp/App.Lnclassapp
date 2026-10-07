@@ -1,54 +1,68 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
-<%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année par niveau, enseignants en attente et rattachés %>
-<%# ADR  : 0030, 0041, 0059, 0063 · UDR : 0006, 0036, 0046, 0050, 0054 · retour vers la liste filtrée d'où la fiche a été ouverte %>
+<%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année, « Direction » et « Directions retirées », enseignants %>
+<%# ADR  : 0030, 0041, 0059, 0063, 0077 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070 · retour vers la liste filtrée d'origine %>
 <% page_title @school.name %>
 <% content_for :nav_key, "schools" %>
 <%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
 <%= ui_back_link t(".back"), href: back_href(schools_path, from: schools_path) %>
 <%= render "header", school: @school %>
 
-<div class="grid gap-8 lg:grid-cols-main-aside">
-  <section id="school_classrooms" aria-labelledby="school_classrooms_title" class="min-w-0 space-y-8">
-    <div>
-      <h2 id="school_classrooms_title" class="font-display text-xl font-extrabold">
-        <%= t(".classrooms", count: @school.classrooms_count) %>
-      </h2>
-      <p class="mt-1 text-sm text-mute"><%= t(".school_year", year: @school.school_year) %></p>
-    </div>
-    <%= render "level_classrooms", block: @level_classrooms %>
-    <% if @school.levels.empty? %>
-      <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
-    <% else %>
-      <%= render partial: "classroom_group", collection: @school.levels, as: :level %>
-    <% end %>
-  </section>
+<%# Classes, directions et enseignants répètent leurs icônes : dessinées une fois pour la page, reprises par <use> (ADR-0067). %>
+<%= ui_icon_sprite do %>
+  <div class="grid gap-8 lg:grid-cols-main-aside">
+    <section id="school_classrooms" aria-labelledby="school_classrooms_title" class="min-w-0 space-y-8">
+      <div>
+        <h2 id="school_classrooms_title" class="font-display text-xl font-extrabold">
+          <%= t(".classrooms", count: @school.classrooms_count) %>
+        </h2>
+        <p class="mt-1 text-sm text-mute"><%= t(".school_year", year: @school.school_year) %></p>
+      </div>
+      <%= render "shared/level_classrooms", block: @level_classrooms, add_url: school_level_classrooms_path(@school.public_id),
+                                            remove_url: ->(public_id) { school_level_classroom_path(@school.public_id, public_id) } %>
+      <% if @school.levels.empty? %>
+        <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
+      <% else %>
+        <%= render partial: "classroom_group", collection: @school.levels, as: :level %>
+      <% end %>
+    </section>
 
-  <section id="school_teachers" aria-labelledby="school_teachers_title" class="min-w-0">
-    <% if @join_requests.any? %>
-      <%= render "teams/schools/join_requests", school: @school, requests: @join_requests %>
-    <% end %>
-    <h2 id="school_teachers_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".teachers", count: @school.teachers.size) %></h2>
-    <% if @school.teachers.empty? %>
-      <%= ui_empty_state title: t(".no_teachers"), description: t(".no_teachers_description"), icon: "user-group" %>
-    <% else %>
-      <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
-        <% @school.teachers.each do |teacher| %>
-          <li class="flex items-center gap-3 px-4 py-3">
-            <%= ui_avatar teacher.name, size: :sm, tone: :teacher %>
-            <div class="min-w-0 flex-1">
-              <p class="truncate text-sm font-medium"><%= teacher.name %></p>
-              <div class="mt-1 flex flex-wrap gap-1.5">
-                <% if teacher.material_name %>
-                  <%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %>
-                <% end %>
-                <% unless teacher.primary %>
-                  <%= ui_badge t(".secondary_school"), size: :sm %>
-                <% end %>
-              </div>
-            </div>
-          </li>
+    <section id="school_teachers" aria-labelledby="school_teachers_title" class="min-w-0">
+      <div class="mb-8">
+        <%= render "shared/school_staff", staff: @staff, by_code_count: @by_code_count, viewer_id: nil, removable: @removable,
+                                          remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) }, newcomer: false %>
+        <% if @archived_staff.any? %>
+          <%= render "teams/schools/archived_staff", school_public_id: @school.public_id, rows: @archived_staff, can_restore: @can_restore %>
+        <% else %>
+          <%# Cible du Turbo Stream du retrait (UDR-0070 §3.5) : la carte n'apparaît qu'avec sa première ligne. %>
+          <div id="school_archived_staff"></div>
         <% end %>
-      </ul>
-    <% end %>
-  </section>
-</div>
+      </div>
+      <% if @join_requests.any? %>
+        <%= render "teams/schools/join_requests", school: @school, requests: @join_requests %>
+      <% end %>
+      <h2 id="school_teachers_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".teachers", count: @school.teachers.size) %></h2>
+      <% if @school.teachers.empty? %>
+        <%= ui_empty_state title: t(".no_teachers"), description: t(".no_teachers_description"), icon: "user-group" %>
+      <% else %>
+        <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+          <% @school.teachers.each do |teacher| %>
+            <li class="flex items-center gap-3 px-4 py-3">
+              <%= ui_avatar teacher.name, size: :sm, tone: :teacher %>
+              <div class="min-w-0 flex-1">
+                <p class="truncate text-sm font-medium"><%= teacher.name %></p>
+                <div class="mt-1 flex flex-wrap gap-1.5">
+                  <% if teacher.material_name %>
+                    <%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %>
+                  <% end %>
+                  <% unless teacher.primary %>
+                    <%= ui_badge t(".secondary_school"), size: :sm %>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+  </div>
+<% end %>

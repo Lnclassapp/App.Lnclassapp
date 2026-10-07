@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+# Plays bin/ci on one pull request, in a Claude Code cloud session prepared by .claude/hooks/session-start.sh
+# (docs/chantiers/ci-cloud-claude/memo.md). The routine « CI cloud Claude » calls it for each pull request to Develop:
+#
+#   script/ci/cloud-check <pr-number>
+#
+# Like GitHub's pull_request event, it tests the merge of the pull request into its base (refs/pull/N/merge), or
+# its head when GitHub has no merge (conflict). It writes tmp/ci-cloud/pr-<N>.md, the comment the routine posts,
+# marked with the head SHA so a commit is never checked twice, and exits with the status of bin/ci.
+set -uo pipefail
+
+# The checkout below may remove this very file (a pull request opened before it existed): bash reads a script
+# as it runs, so it runs from a copy.
+if [ -z "${CLOUD_CHECK_COPY:-}" ]; then
+  copy="$(mktemp)"
+  cp "$0" "$copy"
+  CLOUD_CHECK_COPY="$copy" exec bash "$copy" "$@"
+fi
+trap 'rm -f "$CLOUD_CHECK_COPY"' EXIT
+
+# Ruby, Node, Chrome and the proxy bypass that .claude/hooks/session-start.sh prepared.
+# shellcheck source=/dev/null
+[ -f "$HOME/.lnclass-ci-env" ] && . "$HOME/.lnclass-ci-env"
+
+pr="${1:?usage: script/ci/cloud-check <pr-number>}"
+root="$(git rev-parse --show-toplevel)"
+cd "$root"
+out="tmp/ci-cloud"
+mkdir -p "$out"
+log="$out/pr-$pr.log"
+report="$out/pr-$pr.md"
+
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+  echo "❌ uncommitted changes in $root: cloud-check needs a clean worktree" >&2
+  exit 2
+fi
+
+# The guards compare with origin/Develop (system budget): it must be today's Develop, as on GitHub.
+git fetch --quiet origin "+refs/heads/Develop:refs/remotes/origin/Develop" || { echo "❌ cannot fetch Develop" >&2; exit 2; }
+git fetch --quiet origin "+refs/pull/$pr/head:refs/ci-cloud/$pr/head" || { echo "❌ pull request #$pr not found" >&2; exit 2; }
+head_sha="$(git rev-parse "refs/ci-cloud/$pr/head")"
+if git fetch --quiet origin "+refs/pull/$pr/merge:refs/ci-cloud/$pr/merge" 2>/dev/null; then
+  tested="refs/ci-cloud/$pr/merge"
+  what="fusion dans Develop"
+else
+  tested="refs/ci-cloud/$pr/head"
+  what="tête de la PR (GitHub n'a pas de commit de fusion : conflit avec la base ?)"
+fi
+tested_sha="$(git rev-parse "$tested")"
+
+back="$(git symbolic-ref --quiet --short HEAD || git rev-parse HEAD)"
+git checkout --quiet --detach "$tested_sha"
+
+started=$(date +%s)
+{
+  echo "== cloud-check #$pr: $what, $tested_sha (head $head_sha) =="
+  bin/setup --skip-server && CI=true bin/ci
+} > "$log" 2>&1
+status=$?
+elapsed=$(( $(date +%s) - started ))
+
+# bin/setup may rewrite tracked files (db/schema.rb dumped by another PostgreSQL): the worktree was clean before
+# the run, so what the run changed is dropped.
+git checkout --quiet --force "$back"
+
+duration="$((elapsed / 60)) min $((elapsed % 60)) s"
+{
+  echo "<!-- ci-cloud:$head_sha -->"
+  if [ "$status" -eq 0 ]; then
+    echo "### ✅ CI cloud Claude : vert"
+  else
+    echo "### ❌ CI cloud Claude : rouge (code $status)"
+  fi
+  echo
+  echo "\`bin/ci\` complet sur ${head_sha:0:7}, $what, en $duration ($(nproc) cœurs)."
+  echo
+  steps="$(sed -E 's/\x1b\[[0-9;]*m//g' "$log" | grep -E '^(✅|❌)' || true)"
+  if [ -n "$steps" ]; then
+    echo "<details><summary>Étapes</summary>"
+    echo
+    echo '```'
+    echo "$steps"
+    echo '```'
+    echo "</details>"
+  fi
+  if [ "$status" -ne 0 ]; then
+    echo
+    echo "<details open><summary>Fin du journal</summary>"
+    echo
+    echo '```'
+    sed -E 's/\x1b\[[0-9;]*m//g' "$log" | tail -n 60 | cut -c1-300
+    echo '```'
+    echo "</details>"
+  fi
+  echo
+  echo "_Routine CI cloud Claude (docs/chantiers/ci-cloud-claude) : la preuve \`bin/ci\` écrite dans la PR que demande l'ADR-0069 pendant la coupure de la CI GitHub._"
+} > "$report"
+
+echo "$report ($duration, bin/ci exit $status)"
+exit "$status"

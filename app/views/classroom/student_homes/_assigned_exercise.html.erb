@@ -1,42 +1,31 @@
-<%# 🌐 UI · classroom/student_homes/_assigned_exercise — un exercice assigné et la progression de l'élève %>
-<%# Rôle : matière, badge, meilleur score et maîtrise, sessions terminées ; « Commencer » (POST) ou « Reprendre » (session en cours) %>
-<%# ADR  : 0033, 0054 · UDR : 0007, 0010 %>
-<%# locals: (exercise:) -%>
-<% done = exercise.completed_count.positive? %>
-<li class="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:gap-4 sm:px-6">
-  <div class="flex min-w-0 flex-1 items-start gap-3">
-    <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-ln", done ? "bg-success-soft text-success" : "bg-warning-soft text-warning") %>">
-      <%= ui_icon(done ? "check-circle" : "clock") %>
-    </span>
-    <div class="min-w-0 space-y-1.5">
-      <p class="font-medium text-ink"><%= exercise.title %></p>
-      <div class="flex flex-wrap items-center gap-2">
-        <%= ui_subject_badge exercise.material_name, category: exercise.material_category, size: :sm %>
-        <% if exercise.badge_level %>
-          <%= ui_badge t(".badge", level: badge_label(exercise.badge_level)), tone: badge_tone(exercise.badge_level), size: :sm,
-                       icon: "trophy" %>
-        <% end %>
-      </div>
-      <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-mute">
-        <% if exercise.best_score_percent %>
-          <span><%= t(".best_score", score: exercise.best_score_percent) %></span>
-          <span class="font-medium text-ink"><%= mastery_label(exercise.best_score_percent) %></span>
-        <% end %>
-        <span><%= t(".sessions", count: exercise.completed_count) %></span>
-      </p>
+<%# 🌐 UI · classroom/student_homes/_assigned_exercise — un exercice assigné : titre (lien), matière, échéance, un bouton %>
+<%# Rôle : « Commencer » (POST) ou « Reprendre » (session en cours), principal sur la 1re ligne (la plus urgente) seulement %>
+<%# ADR  : 0054, 0072 · UDR : 0057 §2.4, 0058 §3.3, 0062 §3.2 (échéance par due_badge, aucune une fois terminé) %>
+<%# locals: (exercise:, index:) -%>
+<% variant = index.zero? ? :primary : :secondary %>
+<%= tag.li class: "flex items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6", **ui_reveal_item(index) do %>
+  <div class="min-w-0 flex-1 space-y-1">
+    <%# 2 lignes au plus : le titre reste lisible à côté du bouton, sur un téléphone de 360 px. %>
+    <p class="line-clamp-2 font-medium break-words text-ink">
+      <%= link_to exercise.title, exercise_path(exercise.public_id),
+                  class: "rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+    </p>
+    <div class="flex flex-wrap items-center gap-2">
+      <%= ui_subject_badge exercise.material_name, category: exercise.material_category, size: :sm %>
+      <%= due_badge exercise.due_on, done: exercise.completed_count.positive?, size: :sm %>
     </div>
   </div>
-  <div class="shrink-0 sm:self-center">
+  <div class="shrink-0">
     <% if exercise.started_session_public_id %>
-      <%= ui_button t(".resume"), href: exercise_session_path(exercise.started_session_public_id), variant: :brand, size: :sm,
+      <%= ui_button t(".resume"), href: exercise_session_path(exercise.started_session_public_id), variant:, size: :sm,
                     icon: "arrow-path", "aria-label": t(".resume_label", title: exercise.title) %>
     <% else %>
       <%= button_to exercise_sessions_path(exercise.public_id), form_class: "contents",
                     class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm],
-                                       ComponentsHelper::BUTTON_VARIANTS[done ? :secondary : :primary]),
+                                       ComponentsHelper::BUTTON_VARIANTS[variant]),
                     "aria-label": t(".start_label", title: exercise.title) do %>
         <%= ui_icon "play", size: :sm %><%= t(".start") %>
       <% end %>
     <% end %>
   </div>
-</li>
+<% end %>

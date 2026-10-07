@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054 · ADR : 0009, 0049
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076 · ADR : 0009, 0049, 0067
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -43,29 +43,20 @@ module ComponentsHelper
   ICON_SIZES = { sm: "size-4", md: "size-5", lg: "size-6", xl: "size-8" }.freeze
   ICON_CACHE = {} # rubocop:disable Style/MutableConstant -- cache des SVG lus sur disque
 
-  BUTTON_BASE = "relative inline-flex cursor-pointer items-center justify-center rounded-full font-medium " \
-                "whitespace-nowrap select-none transition active:scale-95 focus-visible:outline-2 " \
-                "focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none " \
-                "disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50"
-  BUTTON_VARIANTS = {
-    primary: "bg-ink text-white hover:bg-ink/85",
-    brand: "bg-brand text-ink hover:bg-brand/85",
-    secondary: "border border-line bg-white text-ink hover:bg-mist",
-    ghost: "text-ink hover:bg-ink/5",
-    danger: "bg-error text-white hover:bg-error/90"
-  }.freeze
+  # Lot E6 (politique-cache) : forme, variantes et tailles écrites une fois dans application.tailwind.css (classes
+  # partagées ui-button*, leur contenu figé par test/design/shared_classes_test.rb).
+  BUTTON_BASE = "ui-button"
+  BUTTON_VARIANTS = { primary: "ui-button-primary", brand: "ui-button-brand", secondary: "ui-button-secondary",
+                      ghost: "ui-button-ghost", danger: "ui-button-danger" }.freeze
   # `sm` agrandit sa zone tactile à 48 px par un pseudo-élément : le bouton paraît petit, le doigt ne le rate pas.
-  BUTTON_SIZES = {
-    sm: "h-10 gap-1.5 px-4 text-sm after:absolute after:-inset-1",
-    md: "min-h-tap gap-2 px-5 text-sm",
-    lg: "min-h-14 gap-2 px-6 text-base"
-  }.freeze
+  BUTTON_SIZES = { sm: "ui-button-sm", md: "ui-button-md", lg: "ui-button-lg" }.freeze
   BUTTON_ICON_SIZES = { sm: :sm, md: :md, lg: :md }.freeze
 
   CARD_BASE = "block rounded-card border border-line bg-white shadow-card"
-  CARD_LINK = "transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift " \
-              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-  CARD_PADDINGS = { none: nil, sm: "p-4", md: "p-5 sm:p-6", lg: "p-6 sm:p-8" }.freeze
+  # Lot E5 (politique-cache) : survol et focus d'une carte-lien, écrits une fois dans application.tailwind.css.
+  CARD_LINK = "ui-card-link"
+  # UDR-0005, amendement du 2026-10-06 : 16 px de rembourrage sous 640 px.
+  CARD_PADDINGS = { none: nil, sm: "p-4", md: "p-4 sm:p-6", lg: "p-5 sm:p-8" }.freeze
 
   FIELD_BUILDERS = {
     text: :text_field, email: :email_field, password: :password_field, tel: :telephone_field,
@@ -96,11 +87,12 @@ module ComponentsHelper
   RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
   MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
+  # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
+  # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
+  # l'arrêtait pas).
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
-  DROPDOWN_TONES = {
-    default: "text-ink hover:bg-mist focus:bg-mist",
-    danger: "text-error hover:bg-error-soft focus:bg-error-soft"
-  }.freeze
+  DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 
   BADGE_TONES = {
     neutral: { chip: "bg-mist text-ink", dot: "bg-mute" },
@@ -114,7 +106,10 @@ module ComponentsHelper
     team: { chip: "bg-team/10 text-team", dot: "bg-team" },
     gold: { chip: "bg-gold/20 text-ink", dot: "bg-gold" }
   }.freeze
-  BADGE_SIZES = { sm: "px-2 py-0.5 text-2xs", md: "px-2.5 py-1 text-xs" }.freeze
+  # Lot E5 (politique-cache) : la forme et les tailles d'un badge, écrites une fois dans application.tailwind.css
+  # (petit badge en 12 px, UDR-0005, amendement du 2026-10-06).
+  BADGE_BASE = "ui-badge"
+  BADGE_SIZES = { sm: "ui-badge-sm", md: "ui-badge-md" }.freeze
   ROLE_TONES = { student: :brand, teacher: :teacher, team: :team, school_admin: :school }.freeze
   # Teinte d'une matière = sa catégorie (`materials.category`, enum literature / science / other), jamais son nom (CA-26).
   SUBJECT_CATEGORIES = {
@@ -123,6 +118,23 @@ module ComponentsHelper
     other: { tone: :team, icon: "academic-cap" }
   }.freeze
   SUBJECT_FALLBACK = { tone: :neutral, icon: "book-open" }.freeze
+  # UDR-0069 §3.3 : la bulle d'une matière porte l'illustration du modèle de l'accueil élève, choisie par le slug figé de la
+  # matière (exception à CA-26, décidée par le porteur : ce sont les seules matières illustrées) ; toute autre → générique.
+  Illustration = Data.define(:path, :tint)
+  SUBJECT_ILLUSTRATIONS = {
+    %w[mathematiques maths] => %w[maths bg-tint-indigo],
+    %w[physique-chimie pc] => %w[physique-chimie bg-tint-lilac],
+    %w[svt sciences-de-la-vie-et-de-la-terre] => %w[svt bg-tint-green],
+    %w[francais] => %w[francais bg-tint-yellow],
+    %w[histoire-geographie histoire-geo hg] => %w[histoire-geographie bg-tint-lavender],
+    %w[edhc] => %w[edhc bg-tint-pink],
+    %w[philosophie philo] => %w[philosophie bg-tint-pink],
+    %w[invite] => %w[inviter bg-tint-red]
+  }.flat_map { |slugs, (file, tint)| slugs.map { [ it, Illustration.new(path: "subjects/#{file}.svg", tint:) ] } }.to_h.freeze
+  SUBJECT_ILLUSTRATION_FALLBACK = Illustration.new(path: "subjects/generique.svg", tint: "bg-mist")
+  # UDR-0074 §3.5, §3.7 : pastille de la direction posée sur une bulle ; classes écrites en entier pour Tailwind.
+  # warning : l'ambre de l'urgence, sur la matière d'un exercice en retard de l'élève (UDR-0076 §3.1, charte §9).
+  SIGNAL_DOTS = { green: "bg-signal-green", yellow: "bg-signal-yellow", red: "bg-signal-red", warning: "bg-warning" }.freeze
 
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   AVATAR_TONES = {
@@ -143,12 +155,30 @@ module ComponentsHelper
 
   # Icône heroicons vendorée (vendor/heroicons, MIT). Décorative par défaut ; `label:` la rend lisible.
   def ui_icon(name, variant: :outline, size: :md, label: nil, **html)
-    svg = heroicon_source(option!(ICON_SETS, variant, "ui_icon variant"), name.to_s)
+    set = option!(ICON_SETS, variant, "ui_icon variant")
+    svg = heroicon_source(set, name.to_s)
     classes = class_names("shrink-0", option!(ICON_SIZES, size, "ui_icon size"), html[:class])
     a11y = label ? %(role="img" aria-label="#{ERB::Util.html_escape(label)}") : %(aria-hidden="true")
+    return sprite_icon(set, name.to_s, classes, a11y) if @icon_sprite
+
     svg.sub(' aria-hidden="true"', "")
        .sub("<svg ", %(<svg class="#{ERB::Util.html_escape(classes)}" #{a11y} focusable="false" ))
        .html_safe
+  end
+
+  # Liste longue (ADR-0067) : dans le bloc, chaque ui_icon reprend par <use> un <symbol> émis une seule fois, après le
+  # bloc, hors de ses lignes : un Turbo Stream qui retire une ligne n'emporte pas le dessin des autres.
+  # prefix : préfixe des identifiants des <symbol>, quand plusieurs blocs se suivent dans la même page (pages du
+  # catalogue chargées au défilement) : jamais deux <symbol> de même id.
+  def ui_icon_sprite(prefix: nil, &block)
+    @icon_sprite = {}
+    @icon_sprite_prefix = prefix
+    content = capture(&block)
+    symbols = @icon_sprite.map { |id, (root, paths)| %(<symbol id="#{id}" #{root}>#{paths}</symbol>).html_safe } # rubocop:disable Rails/OutputSafety -- fichier vendu, jamais une saisie
+    safe_join([ content, tag.svg(safe_join(symbols), class: "absolute size-0 overflow-hidden", "aria-hidden": "true", focusable: "false") ])
+  ensure
+    @icon_sprite = nil
+    @icon_sprite_prefix = nil
   end
 
   def ui_spinner(size: :md)
@@ -223,27 +253,35 @@ module ComponentsHelper
   # Groupe de boutons radio : `fieldset` et `legend`, une option de 48 px par choix `[libellé, valeur]`, la valeur
   # de l'objet cochée. L'aide et la première erreur, sous le groupe, sont reliées à chaque option.
   def ui_radio_group(form, method, choices:, label: nil, hint: nil, required: false, columns: 2)
-    grid = RADIO_COLUMNS.fetch(columns) do
-      raise ArgumentError, "ui_radio_group columns : « #{columns} » inconnu (#{RADIO_COLUMNS.keys.join(', ')})"
-    end
-    id = form.field_id(method)
-    error = field_errors(form.object, method).first
-    described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact.join(" ").presence
-    input_html = { required:, class: RADIO_INPUT, "aria-invalid": ("true" if error), "aria-describedby": described_by }
+    group = choice_group("ui_radio_group", form, method, label:, hint:, columns:)
+    render "components/radio_group", **group.except(:aria), choices:, required:,
+           input_html: { required:, class: RADIO_INPUT, **group[:aria] }
+  end
 
-    render "components/radio_group", form:, method:, choices:, id:, hint:, error:, required:, grid:, input_html:,
-           option_class: class_names(RADIO_OPTION, RADIO_STATES[error ? :invalid : :valid]),
-           label: label || field_label(form.object, method)
+  # Groupe de cases à cocher (UDR-0071 §3.8), pendant de `ui_radio_group` : mêmes `fieldset`, options et aide ; les
+  # valeurs de l'objet (un tableau) sont cochées. Un champ caché vide envoie le tableau même sans case cochée.
+  # `required:` ne pose que l'astérisque : `required` sur chaque case exigerait de toutes les cocher ; le serveur
+  # refuse un groupe vide.
+  def ui_checkbox_group(form, method, choices:, label: nil, hint: nil, required: false, columns: 2)
+    group = choice_group("ui_checkbox_group", form, method, label:, hint:, columns:)
+    render "components/checkbox_group", **group.except(:aria), choices:, required:,
+           input_html: { multiple: true, class: FIELD_CHECKBOX, **group[:aria] }
   end
 
   # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
   # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
+  # `trigger_href:` fait du déclencheur un lien, suivi sans JavaScript, que le contrôleur `modal` intercepte (UDR-0061).
+  # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:center` (défaut) ne change rien.
+  # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
-               document_title: nil, &block)
+               document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, trigger_class: nil,
+               placement: :center, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
-           trigger_icon:, open:, body:, slots:, document_title:, size_class: option!(MODAL_SIZES, size, "ui_modal size")
+           trigger_icon:, trigger_href:, trigger_size:, trigger_full:, trigger_class:, open:, body:, slots:, document_title:,
+           size_class: option!(MODAL_SIZES, size, "ui_modal size"),
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
@@ -256,8 +294,7 @@ module ComponentsHelper
   # Entrée de menu : lien (`href:`, `method:`, `frame:` pour l'ouvrir dans un Turbo Frame), bouton qui ouvre une
   # <dialog> de la page (`dialog:` son id, UDR-0042), ou entrée inactive sans l'un ni l'autre.
   def ui_dropdown_item(label, href: nil, icon: nil, method: nil, tone: :default, frame: nil, dialog: nil)
-    classes = class_names("flex min-h-tap w-full items-center gap-3 rounded-sm px-3 text-sm font-medium focus:outline-none",
-                          option!(DROPDOWN_TONES, tone, "ui_dropdown_item tone"))
+    classes = class_names("ui-menu-item", option!(DROPDOWN_TONES, tone, "ui_dropdown_item tone"))
     content = safe_join([ (ui_icon(icon, class: "opacity-70") if icon), tag.span(label) ].compact)
     return dropdown_dialog_item(content, classes, dialog) if dialog
     return tag.span(content, class: class_names(classes, "opacity-50"), role: "menuitem", "aria-disabled": "true", tabindex: -1) if href.nil?
@@ -276,8 +313,7 @@ module ComponentsHelper
 
   def ui_badge(label, tone: :neutral, size: :md, icon: nil, dot: false)
     colors = option!(BADGE_TONES, tone, "ui_badge tone")
-    tag.span(class: class_names("inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap",
-                                colors[:chip], option!(BADGE_SIZES, size, "ui_badge size"))) do
+    tag.span(class: class_names(BADGE_BASE, colors[:chip], option!(BADGE_SIZES, size, "ui_badge size"))) do
       safe_join([ (tag.span(class: "size-1.5 rounded-full #{colors[:dot]}", "aria-hidden": "true") if dot),
                   (ui_icon(icon, variant: :mini, size: :sm) if icon), label ].compact)
     end
@@ -288,6 +324,19 @@ module ComponentsHelper
   end
 
   # Une catégorie inconnue ou absente donne la teinte neutre : le badge reste lisible, sans couleur inventée.
+  # slug : slug figé d'une matière, ou :invite pour l'action « Inviter ». → Illustration(path, tint)
+  def subject_illustration(slug)
+    SUBJECT_ILLUSTRATIONS.fetch(slug.to_s, SUBJECT_ILLUSTRATION_FALLBACK)
+  end
+
+  # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
+  # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
+  # short_label : libellé affiché sous 640 px (« PC ») ; le nom entier reste le nom accessible.
+  def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil)
+    dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
+    render "components/subject_bubble", label:, short_label:, href:, illustration:, sr_suffix:, id:, dot:
+  end
+
   def ui_subject_badge(label, category:, size: :md)
     config = SUBJECT_CATEGORIES.fetch(category.to_s.to_sym, SUBJECT_FALLBACK)
     ui_badge(label, tone: config[:tone], size:, icon: config[:icon])
@@ -295,7 +344,7 @@ module ComponentsHelper
 
   # Photo si `src:`, sinon initiales (premier et dernier mot) sur une couleur stable dérivée du nom.
   def ui_avatar(name, src: nil, size: :md, tone: nil)
-    classes = class_names("inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold",
+    classes = class_names("ui-avatar",
                           option!(AVATAR_SIZES, size, "ui_avatar size"))
     # Photo de profil (ADR-0060, UDR-0047) : une seule taille servie, recadrée par le rond ; hors écran, pas chargée.
     return image_tag(src, alt: name, loading: "lazy", decoding: "async", class: class_names(classes, "object-cover")) if src
@@ -307,9 +356,10 @@ module ComponentsHelper
 
   # Le message est rendu côté serveur, dans le HTML du toast : il survit au Turbo Stream comme à la redirection.
   # `persistent: true` garde le toast jusqu'à sa fermeture ; une erreur l'est toujours.
-  def ui_toast(message, type: :info, title: nil, persistent: false)
+  # `action: { label:, href:, method: }` (UDR-0071 §3.6) ajoute un bouton entre le texte et la croix (« Annuler »).
+  def ui_toast(message, type: :info, title: nil, persistent: false, action: nil)
     config = option!(TOAST_TYPES, type, "ui_toast type")
-    render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay]
+    render "components/toast", message:, title:, type: type.to_sym, config:, delay: persistent ? 0 : config[:delay], action:
   end
 
   # Un flash est un message, ou { "message", "title" } quand le titre du type ne dit pas la situation. Toute autre valeur
@@ -324,17 +374,18 @@ module ComponentsHelper
     FLASH_TYPES.fetch(key) { TOAST_TYPES.key?(key) ? key : :info }
   end
 
-  def turbo_stream_toast(message, type: :info, title: nil)
-    turbo_stream.append("toasts", ui_toast(message, type:, title:))
+  def turbo_stream_toast(message, type: :info, title: nil, action: nil)
+    turbo_stream.append("toasts", ui_toast(message, type:, title:, action:))
   end
 
-  def ui_empty_state(title:, description: nil, icon: "inbox", action: nil, &block)
+  # heading: :h1 quand l'état vide est toute la page (compte en attente) : son titre en devient le titre (UDR-0054 §3.1).
+  def ui_empty_state(title:, description: nil, icon: "inbox", action: nil, heading: :p, &block)
     actions = if block
       capture(&block)
     elsif action
       ui_button(action[:label], href: action[:href], variant: action.fetch(:variant, :primary), icon: action[:icon])
     end
-    render "components/empty_state", title:, description:, icon:, actions:
+    render "components/empty_state", title:, description:, icon:, actions:, heading:
   end
 
   def ui_error_state(title: nil, message: nil, retry_href: nil, retry_label: nil)
@@ -384,10 +435,50 @@ module ComponentsHelper
            failed: ui_toast(failed, type: :error)
   end
 
+  # UDR-0057 R3 : une liste montre au plus REVEAL_LIMIT lignes, puis « Voir plus » révèle les suivantes, déjà rendues.
+  REVEAL_LIMIT = 3
+
+  # Attributs du conteneur de la liste (contrôleur `reveal`) : `tag.div(data: ui_reveal_data) { … }`.
+  def ui_reveal_data(step: 0)
+    { controller: "reveal", reveal_step_value: step, reveal_one_value: t("components.reveal.announce_one"),
+      reveal_other_value: t("components.reveal.announce_other") }
+  end
+
+  # Attributs d'une ligne : masquée à partir de la (REVEAL_LIMIT + 1)e, révélée par « Voir plus ».
+  def ui_reveal_item(index)
+    { hidden: index >= REVEAL_LIMIT, data: { reveal_target: "item" } }
+  end
+
+  # « Voir plus » et sa région d'annonce, seulement s'il y a plus de REVEAL_LIMIT lignes.
+  def ui_reveal_more(total, label: t("components.reveal.more"))
+    return if total <= REVEAL_LIMIT
+
+    safe_join([
+      ui_button(label, variant: :ghost, size: :sm, full: true, icon_end: "chevron-down",
+                       data: { reveal_target: "button", action: "reveal#more" }),
+      tag.p(class: "sr-only", role: "status", "aria-live": "polite", data: { reveal_target: "status" })
+    ])
+  end
+
   private
 
   def option!(table, key, component)
     table.fetch(key.to_sym) { raise ArgumentError, "#{component} : « #{key} » inconnu (#{table.keys.join(', ')})" }
+  end
+
+  # Ce que partagent les groupes de radios et de cases : grille, id, aide, première erreur, libellé, classe d'option,
+  # et les attributs ARIA de chaque contrôle.
+  def choice_group(component, form, method, label:, hint:, columns:)
+    grid = RADIO_COLUMNS.fetch(columns) do
+      raise ArgumentError, "#{component} columns : « #{columns} » inconnu (#{RADIO_COLUMNS.keys.join(', ')})"
+    end
+    id = form.field_id(method)
+    error = field_errors(form.object, method).first
+    described_by = [ ("#{id}_hint" if hint), ("#{id}_error" if error) ].compact.join(" ").presence
+
+    { form:, method:, id:, hint:, error:, grid:, label: label || field_label(form.object, method),
+      option_class: class_names(RADIO_OPTION, RADIO_STATES[error ? :invalid : :valid]),
+      aria: { "aria-invalid": ("true" if error), "aria-describedby": described_by } }
   end
 
   # Ferme le menu, rend le focus au bouton ⋮ puis ouvre la <dialog> : à sa fermeture, le focus revient au bouton.
@@ -395,6 +486,18 @@ module ComponentsHelper
     tag.button(content, type: "button", class: class_names(classes, "cursor-pointer text-left"), role: "menuitem",
                         tabindex: -1, "aria-haspopup": "dialog", "aria-controls": dialog,
                         data: { action: "dropdown#openDialog", dropdown_dialog_param: dialog })
+  end
+
+  # Les attributs racine du fichier (viewBox, fill, stroke, stroke-width) sont écrits une fois, sur le <symbol> : son
+  # instance dans <use> les porte, et son tracé en hérite ; `currentColor` y prend la couleur du <svg> (ADR-0067, levier 3c).
+  def sprite_icon(set, name, classes, a11y)
+    root, paths = ICON_CACHE[[ set, name, :sprite ]] ||= begin
+      attributes, inner = heroicon_source(set, name).match(%r{\A<svg ([^>]*)>\s*(.*?)\s*</svg>\z}m).captures
+      [ attributes.gsub(/\s*(?:xmlns|aria-hidden|data-slot)="[^"]*"/, "").strip, inner ]
+    end
+    id = "#{@icon_sprite_prefix}icon-#{set.tr('/', '-')}-#{name}"
+    @icon_sprite[id] ||= [ root, paths ]
+    %(<svg class="#{ERB::Util.html_escape(classes)}" #{a11y} focusable="false"><use href="##{id}"></use></svg>).html_safe # rubocop:disable Rails/OutputSafety -- classes échappées, identifiant du fichier vendu
   end
 
   def heroicon_source(set, name)

@@ -208,6 +208,9 @@ Recoupements consignés sans nouvelle ligne, parce qu'une décision existante le
 | C-47 | Remédiation | ADR-0018 §3.1 : détection « lors de l'échec d'une session », une **ou plusieurs** lacunes ; une session de remédiation reconnaissable | Code : une lacune au plus, déclenchée par une simulation morte ; aucune colonne ne marque la session de remédiation (AS E-08, E-11) | ✅ **Fermée** 2026-09-25 — F-21 |
 | C-48 | Vocabulaire de l'évaluation | Glossaire : « tentative » = `QuestionAttempt` ; ne jamais écrire « Quiz » | UDR-0003 §2 : « Quiz interactif » ; UI enseignant : « Tentatives » compte des sessions (AS E-18, E-19) | ✅ **Fermée** 2026-09-25 — F-32 (étendue au vocabulaire de l'évaluation) |
 | C-49 | Nommage des lacunes | ADR-0018 §3.2 : `Entities::KnowledgeGap`, `Ports::KnowledgeGapRepository` à la racine | Conventions §2 : tout est namespacé par contexte borné (AS E-09) | ✅ **Fermée** 2026-09-25 — F-02 |
+| C-50 | Qui publie une annonce | [PRD du programme](prd.md) §3 : l'équipe seule | ADR-0045 : l'équipe et la direction de son école | ✅ **Fermée** 2026-10-04 — [ADR-0078](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) : l'équipe, la direction (officielle) et l'enseignant (à ses classes) ; le PRD du programme est corrigé |
+| C-51 | Forme d'une annonce | Design system Lnclass §10 : carte courte, lecture vocale du texte par le téléphone, catégories | ADR-0045 : page de détail, pièces jointes, rédigées par l'équipe | ✅ **Fermée** 2026-10-04 — ADR-0078 et [UDR-0071](../../decisions/udr/0071-annonces.md) : carte de 60 + 140 caractères sans page de détail, image et **fichier audio** téléversés (pas de synthèse vocale, écart assumé), signée par son émetteur |
+| C-52 | Espace direction en lecture seule | ADR-0065 : la direction lit, n'écrit rien | Chantier `annonces` : la direction publie et retire | ✅ **Fermée** 2026-10-04 — ADR-0071 (gestes de la direction) puis ADR-0078, qui amende l'ADR-0065 |
 
 Les écarts d'**état** — le code ne fait pas ce que tout le monde attend, par exemple la réactivation d'une assignation (ADR-0016) ou le fil de la direction toujours vide — ne sont pas des contradictions entre sources. Ce sont des bugs de l'ancien, listés dans la colonne « Ne pas reproduire » du §6.
 
@@ -314,7 +317,8 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 
 | Champ | Contenu |
 |---|---|
-| **Objectif** | L'équipe publie des annonces riches ciblées, planifiables, que chacun peut écarter durablement ; ceux qui y consentent en sont avertis sur WhatsApp |
+| **Objectif** | L'équipe, la direction et l'enseignant publient des annonces riches (une image et un fichier audio) ciblées, planifiables, à date de fin, que chacun peut écarter durablement ; ceux qui y consentent en sont avertis sur WhatsApp |
+| **État au 2026-10-04** | `annonces` (V6a) ouvert le 2026-10-03 et livré en [PR #162](https://github.com/Lnclassapp/App.Lnclassapp/pull/162) ([ADR-0078](../../decisions/adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md), [UDR-0071](../../decisions/udr/0071-annonces.md)) ; `canal-whatsapp` reste au backlog |
 | **Chantiers, dans l'ordre** | 1. `annonces` (V6a). 2. [`canal-whatsapp`](https://github.com/Lnclassapp/App.Lnclassapp/pull/70), rattaché à la V6 le 2026-09-28 (cadrage ouvert par une autre session, PR #70 non fusionnée, memo en brouillon) |
 | **Reste : `annonces`** (10 features) | CO-01, CO-02, CO-03, CO-04, CO-05, CO-06, CO-07, CO-10, CO-11, CO-12 |
 | **Ce que `canal-whatsapp` ajoute aux annonces** | Aucune feature d'inventaire. Aujourd'hui une annonce n'est vue qu'à la prochaine visite (ADR-0045, « Conséquences ») ; le canal la pousse **hors de l'application**, sur WhatsApp, vers l'audience de l'annonce. Il sort donc du « hors périmètre » de l'ADR-0045 (notifications et SMS) : il lui faut son ADR et un amendement de l'ADR-0045. Il vise aussi la récupération du PIN, contrat de la V1 (ADR-0032, qui reporte le SMS) : ce volet est un amendement de l'ADR-0032, et peut attendre (Q14) |
@@ -478,18 +482,18 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
-| CO-01 | Publier une annonce | ⚠️ | V6a (`annonces`) | Des pièces jointes non validées ; un flux Turbo qui ne cible rien |
-| CO-02 | Modifier une annonce | ⚠️ | V6a | Aucun bouton Éditer pour l'équipe sur `/messages` |
-| CO-03 | Supprimer une annonce | ⚠️ | V6a | Idem |
-| CO-04 | Parcourir les annonces qui me sont destinées | ⚠️ | V6a | — |
-| CO-05 | Lire le détail d'une annonce | ⚠️ | V6a | Une annonce lisible hors de son audience ou avant sa publication, par URL directe |
-| CO-06 | Voir les annonces récentes dans son fil | ⚠️ | V6a | — |
-| CO-07 | Écarter une annonce | ⚠️ | V6a (`message_dismissals`) | Un rejet stocké dans un cookie de session, perdu au changement d'appareil |
+| CO-01 | Publier une annonce | ⚠️ | V6a (`annonces`) — PR #162 | Des pièces jointes non validées ; un flux Turbo qui ne cible rien |
+| CO-02 | Modifier une annonce | ⚠️ | V6a — PR #162 | Aucun bouton Éditer pour l'équipe sur `/messages` |
+| CO-03 | Supprimer une annonce | ⚠️ | V6a — PR #162 (archiver ; retirer par l'équipe ou la direction) | Idem |
+| CO-04 | Parcourir les annonces qui me sont destinées | ⚠️ | V6a — PR #162 | — |
+| CO-05 | Lire le détail d'une annonce | ⚠️ | V6a — PR #162 : **sans page de détail**, la carte est l'annonce (ADR-0078) | Une annonce lisible hors de son audience ou avant sa publication, par URL directe |
+| CO-06 | Voir les annonces récentes dans son fil | ⚠️ | V6a — PR #162 (carrousel de l'accueil élève) | — |
+| CO-07 | Écarter une annonce | ⚠️ | V6a (`message_dismissals`) — PR #162 | Un rejet stocké dans un cookie de session, perdu au changement d'appareil |
 | CO-08 | Recevoir une annonce sans recharger la page | ❌ absent | **écartée** — retirée du plan le 2026-09-22 | — |
 | CO-09 | Toasts de confirmation et d'erreur | ⚠️ | V1 (Lot 0c, F-31) — livrée 2026-09-27 (#33) | Un toast d'erreur Turbo qui perd son message |
-| CO-10 | Programmer ou archiver une annonce | ❌ | V6a (job de publication, F-23) | Des statuts sans effet |
-| CO-11 | Annonces dans l'espace direction | ❌ | V6a | Un bloc vide codé en dur ; une audience sans valeur `school_admin` |
-| CO-12 | Widget « annonces » du tableau de bord équipe | 💀 | V6a | — |
+| CO-10 | Programmer ou archiver une annonce | ❌ | V6a (job de publication, F-23) — PR #162 | Des statuts sans effet |
+| CO-11 | Annonces dans l'espace direction | ❌ | V6a — PR #162 (page « Annonces » de la direction) | Un bloc vide codé en dur ; une audience sans valeur `school_admin` |
+| CO-12 | Widget « annonces » du tableau de bord équipe | 💀 | **écartée** (2026-10-03, grill d'`annonces`) : la page « Annonces » de l'équipe la remplace | — |
 | CO-13 | Annonces factices en développement | ⚠️ | **écartée** : remplacée par des seeds de développement | Des données factices dans le code des contrôleurs |
 
 ### 6.3 School — `SC`

@@ -66,9 +66,6 @@ group :development, :test do
 
   # Detect N+1 queries and unused eager loading [https://github.com/flyerhzm/bullet]
   gem "bullet"
-
-  # Debug toolbar for requests, queries and logs [https://github.com/julienbourdeau/debugbar]
-  gem "debugbar"
 end
 
 group :development do
@@ -85,6 +82,6 @@ group :test do
   gem "simplecov", require: false
 end
 
-# json 3.x n'accepte plus de hash positionnel dans JSON.parse, ce qui casse
-# ActiveSupport::JSON.decode (lecture des cookies de session) en Rails 8.1
+# json 3.x n'accepte plus de hash positionnel dans JSON.parse : ActiveSupport::JSON.decode (lecture des
+# cookies de session) ne lui passe ses options en mots-clés que depuis Rails 8.1.4. json 3 exige donc Rails >= 8.1.4.
 gem "json", "~> 3.0"

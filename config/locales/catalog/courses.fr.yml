@@ -6,18 +6,31 @@ fr:
         page_title: "Cours"
         title: "Cours"
         subtitle: "Les cours du programme, par matière et par niveau."
-        student_subtitle: "Les cours de ton niveau, par matière."
+        # UDR-0013, amendement du 2026-10-02 : la portée du catalogue de l'élève, en infobulle (UDR-0057 R4).
+        student_scope: "Tu vois seulement les cours de ton niveau."
+        student_scope_label: "Quels cours ?"
+        # UDR-0054, amendement du 2026-10-06 : l'élève revient à son Accueil (nom de la page de destination).
+        back_home: "Accueil"
+        # UDR-0077 §3.2 : l'enseignant, sa matière aux niveaux de ses classes.
+        teacher_subtitle: "Les cours de %{material}, aux niveaux de vos classes."
+        teacher_no_class_title: "Déclarez vos classes pour voir vos cours"
+        teacher_no_class_description: "Les cours de votre matière, aux niveaux de vos classes, apparaîtront ici."
+        teacher_no_class_action: "Déclarer mes classes"
+        # UDR-0077, amendement du 2026-10-06 : quitter les filtres, à toutes les largeurs.
+        reset: "Tout voir"
         new_course: "Nouveau cours"
         import: "Importer des cours"
         filters:
           label: "Filtrer les cours"
           search: "Rechercher un cours"
           level: "Niveau"
+          # UDR-0069 §3.4 : enseignant et équipe seulement.
+          series: "Série"
           material: "Matière"
           all_levels: "Tous les niveaux"
+          all_series: "Toutes les séries"
           all_materials: "Toutes les matières"
           submit: "Filtrer"
-          reset: "Effacer"
         total:
           zero: "Aucun cours"
           one: "1 cours"
@@ -28,7 +41,11 @@ fr:
         no_class_description: "Les cours de ton niveau apparaîtront ici dès que tu seras dans une classe de cette année."
         no_match_title: "Aucun cours ne correspond"
         no_match_description: "Essayez un autre nom, un autre niveau ou une autre matière."
+        student_no_match_description: "Essaye un autre nom ou une autre matière."
         clear_search: "Effacer la recherche"
+      # Lot E4 (politique-cache, UDR-0013 amendement du 2026-10-05) : les cartes par pages de 24, chargées au défilement.
+      page:
+        more: "Afficher plus de cours"
       course_card:
         open: "Ouvrir le cours"
       show:
@@ -43,4 +60,3 @@ fr:
         edit: "Modifier"
         new_essential: "Nouvelle fiche essentielle"
         import_essentials: "Importer des fiches essentielles"
-        assign: "Assigner à mes classes"

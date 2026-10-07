@@ -1,15 +1,25 @@
-<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36) %>
-<%# Rôle : sections dans l'ordre de HOME_SECTIONS[:student] (à faire, ma classe, cours), puis l'activité récente, différée %>
-<%# ADR  : 0033, 0043 · UDR : 0006, 0007, 0010, 0054 · titre « Accueil · Élève · Lnclass », seuils des badges et de la maîtrise en infobulle %>
+<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
+<%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée %>
+<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <% exercises = @home.assigned_exercises %>
-<%= ui_page_header title: t(".greeting", name: shell_user.first_name),
-                   subtitle: t(".subtitle", school: @home.school_name, classroom: @home.classroom_name) %>
+<%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. Amendement du
+    2026-10-06 : sous lg, ni « Bonjour » visible ni bouton (la carte de classe monte en tête) ; l'entrée « Besoin d'aide ? »
+    du menu du compte ouvre la même carte, rendue une seule fois. %>
+<% content_for :account_menu do %>
+  <%= ui_dropdown_item t("shared.help_sheet.trigger"), icon: "question-mark-circle", dialog: "help-sheet" %>
+<% end %>
+<div class="flex flex-col gap-4 lg:mb-6 lg:flex-row lg:items-end lg:justify-between">
+  <h1 class="font-display text-3xl font-extrabold tracking-tight text-balance max-lg:sr-only"><%= t(".greeting", name: shell_user.first_name) %></h1>
+  <%= render "shared/help_sheet", trigger_class: "max-lg:hidden" %>
+</div>
 
-<div class="grid gap-5">
+<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
+<div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
   <% home_sections_for(:student).each do |key, icon| %>
     <% if key == :todo %>
-      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises" do |card| %>
+      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises",
+                  data: (ui_reveal_data if exercises.any?) do |card| %>
         <% if exercises.empty? %>
           <%= ui_empty_state title: t(".todo_empty"), description: t(".todo_empty_description"), icon: %>
         <% else %>
@@ -17,31 +27,31 @@
             <%= ui_badge t(".todo_progress", done: exercises.count { it.completed_count.positive? }, total: exercises.size),
                          tone: :brand, size: :sm %>
           <% end %>
-          <%# Badges et maîtrise de chaque ligne (partial) s'expliquent ici, une fois pour la liste (UDR-0054 §3.4). %>
-          <div id="student_home_help" class="mb-3 flex flex-wrap items-start gap-x-4 text-sm text-mute">
-            <div><%= t(".badges_help") %><%= ui_info_tip t("shared.info_tips.badges"), label: t(".badges_help") %></div>
-            <div><%= t(".mastery_help") %><%= ui_info_tip t("shared.info_tips.mastery"), label: t(".mastery_help") %></div>
-          </div>
-          <ul class="-mx-5 divide-y divide-line border-t border-line sm:-mx-6">
-            <%= render partial: "assigned_exercise", collection: exercises, as: :exercise %>
+          <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
+            <% exercises.each_with_index do |exercise, index| %>
+              <%= render "assigned_exercise", exercise:, index: %>
+            <% end %>
           </ul>
+          <%= ui_reveal_more exercises.size %>
         <% end %>
       <% end %>
       <% if @home.pending_gaps.any? %>
         <%= render "pending_gaps", gaps: @home.pending_gaps %>
       <% end %>
+    <% elsif key == :announcements %>
+      <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises. Amendement du 2026-10-06 :
+          sans « Toutes les annonces » ; toutes masquées, la section est rendue cachée (cible d'« Annuler »). %>
+      <% if @announcements.any_readable? %>
+        <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
+      <% end %>
     <% elsif key == :classroom %>
       <%= render "classroom_card", home: @home, icon: %>
-    <% elsif key == :courses %>
-      <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle"), icon:, href: courses_path do %>
-        <span class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
-          <%= t(".courses_action") %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
-        </span>
-      <% end %>
+    <% elsif key == :subjects %>
+      <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs, icon: %>
     <% end %>
   <% end %>
 
-  <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon: "bolt" do %>
+  <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon: "bolt", id: "student_home_activity" do %>
     <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, src: student_home_path, loading: :lazy,
                         target: "_top" do %>
       <%= ui_loading_state variant: :skeleton %>

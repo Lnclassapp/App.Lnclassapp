@@ -11,7 +11,12 @@
 # PERF_RUNS (30 par défaut) requêtes mesurées par écran, après 3 de chauffe ; PERF_ONLY=dashboard,schools limite
 # aux écrans nommés. PERF_COLD=1 vide le cache (Rails.cache) avant chaque requête, hors du temps mesuré : la mesure à
 # froid du pilotage « année », dont les chiffres sont gardés 5 minutes (ADR-0062, amendement du 2026-09-29). La requête passe par toute la pile Rack (Integration::Session), sans réseau ni navigateur.
-# Aucune donnée n'est écrite, sauf les sessions de connexion des quatre comptes de mesure.
+# Aucune donnée n'est écrite, sauf les sessions de connexion des quatre comptes de mesure et le compteur de lectures de
+# l'article mesuré : la lecture d'un visiteur compte, et son UPDATE entre dans le budget (ADR-0074 §4.7). Le blog
+# (/blog, /blog?page=2, /blog/:slug) est lu sans compte, par la session `visitor` : sous 100 ms p95 et 150 Ko (ADR-0067).
+# La page d'un niveau de la direction est lue sur son niveau le plus fourni en classes.
+# Le suivi d'un exercice assigné (UDR-0072, ADR-0079) est lu sur l'assignation active la plus faite de la classe mesurée :
+# la page entière, puis le seul cadre d'une catégorie choisie (Turbo-Frame comprehension_frame).
 require "json"
 require "zlib"
 
@@ -24,6 +29,8 @@ module PerfScreens
   SLOWEST = 3
   SLOW_DB_MS = 50
   COLD = ENV["PERF_COLD"] == "1"
+  # Sans agent, une requête passe pour un robot et la lecture n'est pas comptée (Entities::Communication::ArticleRead).
+  PHONE = { "User-Agent" => "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Mobile Safari/537.36" }.freeze
 
   module_function
 
@@ -37,10 +44,15 @@ module PerfScreens
     sql.gsub(/'(?:[^']|'')*'/, "?").gsub(/\$\d+/, "?").gsub(/\b\d+\b/, "?").gsub(/\(\?(?:, ?\?)*\)/, "(?)").squish
   end
 
+  def anonymous_session
+    ActionDispatch::Integration::Session.new(Rails.application).tap do |session|
+      session.host = "localhost"
+      session.https!
+    end
+  end
+
   def session_for(contact)
-    session = ActionDispatch::Integration::Session.new(Rails.application)
-    session.host = "localhost"
-    session.https!
+    session = anonymous_session
     # La connexion est limitée à 5 par minute et par adresse : une adresse privée tirée au hasard par compte.
     session.remote_addr = "10.#{Array.new(3) { rand(1..254) }.join('.')}"
     session.post("/session", params: { session: { contact:, pin: PIN } })
@@ -55,19 +67,30 @@ module PerfScreens
       session = session_for(contact)
       Orm::Session.where(user_id: Orm::User.where(contact:).select(:id)).update_all(second_factor_verified_at: Time.current) if role == :team
       [ role, session ]
-    end
+    end.merge(visitor: anonymous_session)
   end
 
   def screens
     admin_school = Orm::SchoolStaff.joins(:user).find_by!(users: { contact: ACTORS[:admin] }).school_id
     focus = Orm::School.find(admin_school)
     student_classroom = Orm::ClassroomStudent.joins(:student).find_by!(users: { contact: ACTORS[:student] }).classroom
+    # La page d'un niveau (UDR-0074 §3.8) se lit en direct, sans cache : le niveau de l'établissement mesuré qui a le plus de classes.
+    level_slug = Orm::Classroom.joins(:level).where(school_id: admin_school, status: "active", school_year: Entities::Classroom::SchoolYear.current(Date.current))
+                               .group("levels.slug").order(Arel.sql("COUNT(*) DESC"), "levels.slug").pick("levels.slug")
     teacher_classroom = Orm::TeacherClassroom.joins("JOIN users ON users.id = teacher_classrooms.teacher_id")
                                              .where(users: { contact: ACTORS[:teacher] }).order(:id).first.classroom
     assigned_course = Orm::ClassroomAssignment.where(classroom: teacher_classroom, assignable_type: "Course").pick(:assignable_id)
     course = Orm::Course.find(assigned_course || Orm::Course.where(status: "published").order(:id).pick(:id))
     essential = course.essentials.order(:position).first
     exercise = essential.exercises.order(:position).first
+    # La confirmation « Retirer », lue à la demande (UDR-0056, amendement du 2026-10-04) : dans le frame, puis sans JavaScript.
+    removable = Orm::TeacherSchool.joins(:teacher).where(school_id: admin_school, users: { anonymized_at: nil }).order(:id).pick("users.public_id")
+    done = "(SELECT COUNT(*) FROM exercise_sessions s WHERE s.classroom_assignment_id = classroom_assignments.id AND s.status = 'completed')"
+    follow_up = Orm::ClassroomAssignment.where(classroom: teacher_classroom, status: "active")
+                                        .order(Arel.sql("#{done} DESC"), :id).pick(:public_id)
+    follow_up_path = "/classrooms/#{teacher_classroom.public_id}/assignments/#{follow_up}"
+    article = Orm::Article.where(status: "published").order(published_at: :desc, id: :desc).pick(:slug) or
+      raise "aucun article publié : semer le jeu (script/perf/seed_dataset.rb)"
     [
       [ "teams_home", :team, "/teams" ],
       [ "dashboard_7d", :team, "/teams/dashboard" ],
@@ -79,11 +102,14 @@ module PerfScreens
       [ "schools_search", :team, "/teams/schools?search=bouake" ],
       [ "schools_page_6", :team, "/teams/schools?page=6" ],
       [ "school_show", :team, "/teams/schools/#{focus.public_id}" ],
+      [ "drenas", :team, "/teams/drenas" ],
       [ "courses_team", :team, "/courses" ],
       [ "imports", :team, "/teams/imports" ],
       [ "teacher_home", :teacher, "/teachers" ],
       [ "teacher_classrooms", :teacher, "/teachers/classrooms" ],
       [ "classroom_show", :teacher, "/classrooms/#{teacher_classroom.public_id}" ],
+      [ "assignment_follow_up", :teacher, follow_up_path ],
+      [ "assignment_follow_up_fragile", :teacher, "#{follow_up_path}?category=fragile", { "Turbo-Frame" => "comprehension_frame" } ],
       [ "classroom_course", :teacher, "/classrooms/#{teacher_classroom.public_id}/courses/#{course.slug}" ],
       [ "course_assignments", :teacher, "/courses/#{course.slug}/assignments" ],
       [ "courses_teacher", :teacher, "/courses" ],
@@ -96,7 +122,14 @@ module PerfScreens
       [ "exercise_show", :student, "/exercises/#{exercise.public_id}" ],
       [ "admin_classrooms", :admin, "/school-admin/classrooms" ],
       [ "admin_classroom", :admin, "/school-admin/classrooms/#{student_classroom.public_id}" ],
-      [ "admin_teachers", :admin, "/school-admin/teachers" ]
+      [ "admin_level", :admin, "/school-admin/levels/#{level_slug}" ],
+      [ "admin_teachers", :admin, "/school-admin/teachers" ],
+      [ "admin_teacher_removal", :admin, "/school-admin/teachers/#{removable}/removal", { "Turbo-Frame" => "modal" } ],
+      [ "admin_teacher_removal_page", :admin, "/school-admin/teachers/#{removable}/removal" ],
+      [ "admin_departed_students", :admin, "/school-admin/students/departed" ],
+      [ "blog", :visitor, "/blog", PHONE ],
+      [ "blog_page_2", :visitor, "/blog?page=2", PHONE ],
+      [ "blog_article", :visitor, "/blog/#{article}", PHONE ]
     ]
   end
 

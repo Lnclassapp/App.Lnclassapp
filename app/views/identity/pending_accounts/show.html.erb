@@ -1,20 +1,52 @@
 <%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
-<%# Rôle : écran de sortie, sans redirection ; seules issues : rejoindre une classe (élève) ou se déconnecter ; état de la demande %>
-<%# ADR  : 0030, 0040, 0063 · UDR : 0006, 0050, 0054 %>
+<%# Rôle : écran de sortie, sans redirection ; issues : rejoindre une classe ou voir son historique (élève), rejoindre un établissement par son code %>
+<%# ADR  : 0030, 0036, 0040, 0063, 0071 · UDR : 0006, 0050, 0054, 0056 (§3.5) %>
 <% page_title t(".page_title") %>
-<% if @join_request %>
-  <% state = @join_request.status == "rejected" ? "rejected" : "pending" %>
-  <% title = t(".join_request.#{state}.title") %>
-  <% description = t(".join_request.#{state}.description", school: @join_request.school_name) %>
-  <% icon = state == "rejected" ? "no-symbol" : "clock" %>
-<% else %>
-  <% title, description, icon = t(".#{@case}.title"), t(".#{@case}.description"), "clock" %>
-<% end %>
 <div id="pending_account">
-  <%= ui_empty_state title:, description:, icon: do %>
-    <% if @case == :student %>
-      <%= ui_button t(".student.join"), href: new_join_code_path, variant: :brand, icon: "academic-cap" %>
+  <% if @school_join %>
+    <%# Enseignant sans établissement ni demande en attente (retiré, ou demande refusée) : le code de son établissement. %>
+    <div class="flex flex-col gap-6">
+      <% if @join_request&.status == "rejected" %>
+        <div id="join_request_rejected" class="rounded-card border border-line bg-white/60 p-4 text-sm">
+          <p class="font-medium text-ink"><%= t(".join_request.rejected.title") %></p>
+          <p class="mt-1 text-mute"><%= t(".join_request.rejected.description", school: @join_request.school_name) %></p>
+        </div>
+      <% end %>
+      <%= ui_empty_state title: t(".no_school.title"), description: t(".no_school.description"), icon: "building-library",
+                         heading: :h1 %>
+      <% if @rate_limited %>
+        <%= ui_error_state title: t(".rate_limited.title"), message: t(".rate_limited.message") %>
+      <% else %>
+        <%= form_with model: @school_join, scope: :school_join, url: pending_school_join_path, id: "school-join-form",
+                      class: "flex flex-col gap-4" do |form| %>
+          <%= ui_field form, :school_code, required: true, value: @school_join.raw_school_code.presence, maxlength: 12,
+                       autocomplete: "off", autocapitalize: "characters", spellcheck: false,
+                       placeholder: t(".school_code_placeholder"), hint: t(".school_code_hint"),
+                       class: "font-mono tracking-wider uppercase" %>
+          <%= ui_button t(".join"), type: :submit, variant: :brand, full: true %>
+        <% end %>
+      <% end %>
+      <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary, full: true %>
+    </div>
+  <% else %>
+    <% if @join_request %>
+      <% state = @join_request.status == "rejected" ? "rejected" : "pending" %>
+      <% title = t(".join_request.#{state}.title") %>
+      <% description = t(".join_request.#{state}.description", school: @join_request.school_name) %>
+      <% icon = state == "rejected" ? "no-symbol" : "clock" %>
+    <% else %>
+      <% key = @archived ? "former_student" : @case %>
+      <% title, description, icon = t(".#{key}.title"), t(".#{key}.description"), "clock" %>
     <% end %>
-    <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary %>
+    <%# L'état vide est toute la page : son titre en est le h1 (UDR-0054 §3.1). %>
+    <%= ui_empty_state title:, description:, icon:, heading: :h1 do %>
+      <% if @case == :student %>
+        <%= ui_button t(".student.join"), href: new_join_code_path, variant: :brand, icon: "academic-cap" %>
+        <% if @archived %>
+          <%= ui_button t(".student.archive"), href: student_archive_path, variant: :secondary, icon: "archive-box" %>
+        <% end %>
+      <% end %>
+      <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary %>
+    <% end %>
   <% end %>
 </div>

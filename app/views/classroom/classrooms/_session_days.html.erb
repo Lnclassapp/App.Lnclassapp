@@ -1,0 +1,29 @@
+<%# 🌐 UI · classroom/classrooms/_session_days — bloc « Jours de séance » de la page d'une classe, enseignant de la classe seul %>
+<%# Rôle : les jours où l'enseignant voit la classe (ou « non renseignés »), « Modifier » / « Renseigner » dans le frame modal %>
+<%# ADR  : 0072 (§4.2) · UDR : 0042, 0062 (§3.4), 0077 (§3.4 : « Modifier » dans le menu ⋮) · la modale (session_days/edit) ; classe archivée : lecture seule %>
+<%# locals: (classroom:, weekdays:) -%>
+<section id="classroom_session_days" aria-labelledby="classroom_session_days_title"
+         class="flex items-center justify-between gap-3 rounded-card border border-line bg-white px-4 py-3 shadow-card sm:px-5">
+  <h2 id="classroom_session_days_title" class="sr-only"><%= t(".title") %></h2>
+  <p class="flex items-start gap-2 text-sm">
+    <%= ui_icon "calendar-days", size: :sm, class: "mt-0.5 text-mute" %>
+    <% if weekdays.any? %>
+      <span><%= t(".set_html", days: weekdays.map { t("date.day_names")[it] }.join(", ")) %></span>
+    <% else %>
+      <span class="text-mute"><%= t(".unset") %></span>
+    <% end %>
+  </p>
+  <% if classroom.status == "active" %>
+    <% if weekdays.any? %>
+      <%# UDR-0077 §3.4 (décision du porteur) : « Modifier », action rare, passe dans le menu ⋮ du bloc. %>
+      <%= ui_dropdown label: t(".menu"), id: "classroom-session-days-menu" do %>
+        <%= ui_dropdown_item t(".edit"), href: edit_classroom_session_days_path(classroom.public_id), icon: "pencil-square",
+                             frame: "modal" %>
+      <% end %>
+    <% else %>
+      <%# Jours manquants : « Renseigner » reste visible, sans lui les exercices n'ont pas de date limite. %>
+      <%= ui_button t(".fill"), href: edit_classroom_session_days_path(classroom.public_id), variant: :secondary, size: :sm,
+                                class: "shrink-0", data: { turbo_frame: "modal" } %>
+    <% end %>
+  <% end %>
+</section>

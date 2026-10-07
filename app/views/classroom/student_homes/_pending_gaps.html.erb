@@ -1,17 +1,20 @@
 <%# 🌐 UI · classroom/student_homes/_pending_gaps — « Fiches essentielles à revoir » (lacunes en attente) %>
-<%# Rôle : une ligne par lacune pending, avec le lien vers sa fiche essentielle publiée %>
-<%# ADR  : 0043 · UDR : 0007, 0010 %>
+<%# Rôle : une ligne par lacune pending, vers sa fiche essentielle publiée ; 3 lignes, puis « Voir plus » %>
+<%# ADR  : 0043 · UDR : 0007, 0057, 0058 §3.3 %>
 <%# locals: (gaps:) -%>
 <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "light-bulb", id: "student_home_gaps" do %>
-  <ul class="space-y-2">
-    <% gaps.each do |gap| %>
-      <li>
-        <%= link_to course_essential_path(gap.course_slug, gap.essential_slug),
-                    class: "group flex min-h-tap items-center justify-between gap-3 rounded-ln border border-line px-4 py-2 font-medium text-ink transition hover:border-warning hover:bg-warning-soft focus-visible:outline-2 focus-visible:outline-brand" do %>
-          <span class="min-w-0 truncate"><%= gap.essential_name %></span>
-          <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
+  <%= tag.div data: ui_reveal_data do %>
+    <ul class="space-y-2">
+      <% gaps.each_with_index do |gap, index| %>
+        <%= tag.li(**ui_reveal_item(index)) do %>
+          <%= link_to course_essential_path(gap.course_slug, gap.essential_slug),
+                      class: "group flex min-h-tap items-center justify-between gap-3 rounded-ln border border-line px-4 py-2 font-medium text-ink transition hover:border-warning hover:bg-warning-soft focus-visible:outline-2 focus-visible:outline-brand" do %>
+            <span class="line-clamp-2 min-w-0 break-words"><%= gap.essential_name %></span>
+            <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
+          <% end %>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
+      <% end %>
+    </ul>
+    <%= ui_reveal_more gaps.size %>
+  <% end %>
 <% end %>

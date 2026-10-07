@@ -20,8 +20,8 @@ class Teams::ClassroomPlanTest < ApplicationSystemTestCase
   def classrooms_of(school) = Orm::Classroom.where(school:)
 
   test "change a count from the menu of its line, then generate: the school without classrooms gets the new count" do
-    visit team_home_path
-    within("#team_home_referential") { click_on "Barème des classes" }
+    visit teams_referential_path
+    within("#team_referential") { click_on "Barème des classes" }
 
     assert_selector "h1", text: "Barème des classes"
     assert_text "Les classes déjà créées ne changent pas"

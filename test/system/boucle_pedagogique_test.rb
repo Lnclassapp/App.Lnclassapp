@@ -11,6 +11,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
   # The import job writes the school and its classrooms before the request returns: seconds, on a loaded machine.
   IMPORT_WAIT = 20
+  # The first modal of the run renders the course form and its rich text editor on a cold server: more than the
+  # 2 s Capybara waits by default under the loaded suite (2 vCPU in CI, run 37017565081 of 2026-10-02).
+  MODAL_WAIT = 10
   TEAM_CONTACT = "0100000001".freeze
   TEACHER_CONTACT = "0501020304".freeze
   STUDENT_CONTACT = "0701020304".freeze
@@ -62,7 +65,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#level_tle", text: "Tle"
     end
 
-    navigate_to team_home_path
     click_referential(series_index_path)
     assert_no_page_reload do
       click_on t("teams.series.index.new")
@@ -78,7 +80,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#level_series_tle_d button[aria-pressed=true]"
     end
 
-    navigate_to team_home_path
     click_referential(materials_path)
     assert_no_page_reload do
       click_on t("teams.materials.index.new")
@@ -92,7 +93,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_selector "#material_svt", text: "SVT"
     end
 
-    navigate_to team_home_path
     click_referential(drenas_path)
     assert_no_page_reload do
       click_on t("teams.drenas.index.new")
@@ -110,7 +110,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
   # D1 (owner, 2026-09-28): linking D to Tle filled its barème line, 6 public and 3 private, without any entry by hand.
   def team_sets_the_classroom_plan
-    navigate_to team_home_path
     click_referential(classroom_plan_path)
     within("#classroom_plan_line_tle_d") { assert_text(/Tle\s+D\s+6\s+3/) }
     assert_no_selector "[data-plan=undefined]"
@@ -192,7 +191,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     navigate_to team_home_path
     assert_no_page_reload do
       within("#team_home_shortcuts") { click_on t("teams.homes.shortcuts.new_course") }
-      within "turbo-frame#modal dialog[open]" do
+      within "turbo-frame#modal dialog[open]", wait: MODAL_WAIT do
         fill_in "course[name]", with: COURSE
         select "Tle", from: "course[level_slug]"
         select "D", from: "course[series_slug]"
@@ -297,23 +296,26 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     code = find("#classroom_join_code").text
     assert_equal classroom.join_code.upcase, code
 
+    # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
     navigate_to courses_path
     find("#courses_list a", text: COURSE).click
-    click_on t("catalog.courses.role_actions.assign")
-    course = Orm::Course.find_by!(name: COURSE)
-    assert_no_page_reload do
-      within("[id='assignment_#{classroom.public_id}_Course_#{course.slug}']") { click_on "Assigner" }
-      assert_toast "#{COURSE} ajouté à Tle D 1."
-    end
+    assert_selector "#course_header h1", text: COURSE
+    assert_no_button "Assigner"
+    assert_no_link "Assigner"
 
+    # The « Cours » block of the classroom page leads to the course in the classroom (UDR-0062 §3.4, memo Q18).
     navigate_to teacher_home_path
     find("li[id='classroom_#{classroom.public_id}'] a").click
-    find("#assigned_courses a", text: COURSE).click
+    within("#classroom_courses") { click_on COURSE }
+    assert_current_path classroom_course_path(classroom.public_id, Orm::Course.find_by!(name: COURSE).slug)
+    assert_no_button "Assigner"
     find("#classroom_course_essentials a", text: ESSENTIAL).click
     assert_selector "h1", text: ESSENTIAL
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
+      # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4); « Plus tard » assigns without a due date.
+      within("turbo-frame#modal dialog[open]") { click_on "Plus tard" }
       assert_toast "#{EXERCISE} ajouté à Tle D 1."
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { assert_text "Assigné" }
     end
@@ -331,7 +333,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_text "100 %"
     end
     assert_no_page_reload do
-      within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.issue_code") }
+      click_menu_action("[id='student_#{student.public_id}']", t("classroom.classrooms.roster.issue_code"))
       assert_toast t("identity.pin_recovery_codes.create.issued")
       within "turbo-frame#modal dialog#pin-recovery-code-modal[open]" do
         assert_text "Aya Kouassi"
@@ -341,7 +343,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog[open]"
     end
 
-    # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27).
+    # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27). The blocks of
+    # Lot E push the roster to the foot of the page, under the toast of the code just issued: it leaves after 5 s.
+    assert_no_selector "[data-controller=toast]", wait: 10
     within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.see_result") }
     assert_current_path exercise_session_result_path(session.public_id)
     assert_text t("assessment.session_results.show.student", name: "Aya Kouassi")
@@ -413,8 +417,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_current_path path
   end
 
+  # UDR-0068 §3.4 : le Référentiel a sa page, atteinte par la carte « Configuration » de la barre latérale.
   def click_referential(path)
-    within("#team_home_referential") { find("a[href='#{path}']").click }
+    navigate_to teams_referential_path
+    within("#team_referential") { find("a[href='#{path}']").click }
     assert_current_path path
   end
 

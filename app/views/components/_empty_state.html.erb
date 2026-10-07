@@ -1,9 +1,9 @@
 <%# 🌐 UI · components/_empty_state — état vide, appelé par ui_empty_state %>
-<%# Rôle : remplace les 17 états vides de l'ancienne application ; action en hash ou en bloc %>
+<%# Rôle : remplace les 17 états vides de l'ancienne application ; action en hash ou en bloc ; titre en p, ou en h1 quand l'état vide est la page %>
 <%# UDR  : 0005, 0006 %>
 <div class="flex flex-col items-center rounded-card border-2 border-dashed border-line bg-white/60 px-6 py-10 text-center">
   <span class="grid size-14 place-items-center rounded-full bg-mist text-mute"><%= ui_icon icon, size: :lg %></span>
-  <p class="mt-4 font-display text-lg font-extrabold"><%= title %></p>
+  <%= content_tag heading, title, class: "mt-4 font-display text-lg font-extrabold" %>
   <% if description %>
     <p class="mt-1 max-w-sm text-sm text-mute"><%= description %></p>
   <% end %>

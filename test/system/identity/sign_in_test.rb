@@ -47,6 +47,12 @@ class Identity::SignInTest < ApplicationSystemTestCase
     assert_arrived_on teacher_home_path
   end
 
+  test "a school admin lands on the classrooms of their school, as before" do
+    sign_in_as create_school_admin
+
+    assert_arrived_on school_admin_classrooms_path
+  end
+
   test "a team member goes through the second factor without a click, then reaches the team home" do
     member = create_team_member
     visit new_session_path
@@ -95,7 +101,46 @@ class Identity::SignInTest < ApplicationSystemTestCase
     end
   end
 
+  # UDR-0060 §3.10, UDR-0057: the two entry screens pass the rule at 390 px, for every role.
+  test "at 390 px, the sign-in and the forgotten PIN show one column, one title and one action" do
+    with_mobile_viewport do
+      visit new_session_path
+
+      assert_selector "h1", text: "Connexion", count: 1
+      assert_no_text "Heureux de vous revoir"
+      assert_single_primary_action scope: "main"
+      assert_blocks_above_fold "main > *", max: 1
+      assert_no_text "4 chiffres"
+      find("details summary", text: "Aide : PIN").click
+      assert_text "Code secret de 4 chiffres, choisi à l'inscription."
+      assert_operator tap_height(find_link(I18n.t("identity.sessions.new.forgot_pin"))), :>=, 48
+
+      click_on I18n.t("identity.sessions.new.forgot_pin")
+
+      assert_selector "h1", text: "PIN oublié", count: 1
+      assert_text "Saisissez le code de récupération remis par votre enseignant ou par l'équipe."
+      assert_single_primary_action scope: "main"
+      assert_blocks_above_fold "main > *", max: 1
+      assert_blocks_above_fold "main > div > *", max: 3
+      assert_no_text "8 chiffres"
+      find("details summary", text: "Aide : Code de récupération").click
+      assert_text "8 chiffres, valable 15 minutes."
+    end
+  end
+
+  test "from 1 024 px, the sign-in keeps its welcome column beside the form" do
+    visit new_session_path
+
+    assert_selector "main > section.bg-brand-soft", text: "Heureux de vous revoir"
+    assert_selector "h1", text: "Connexion", count: 1
+    assert_single_primary_action scope: "main"
+  end
+
   private
+
+  def tap_height(element)
+    page.evaluate_script("arguments[0].getBoundingClientRect().height", element)
+  end
 
   # The code leaves by itself at the sixth digit (UDR-0054 §3.6): no click on « Vérifier », which may be gone already.
   def sign_in_with_second_factor(member)

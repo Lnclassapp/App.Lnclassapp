@@ -1,0 +1,43 @@
+<%# 🌐 UI · classroom/assignments/new — « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal » (page sans JavaScript) %>
+<%# Rôle : six jours (lundi … samedi), « Plus tard » ou « Assigner » ; sans jour coché, « Assigner » revient en 422 avec l'erreur %>
+<%# ADR  : 0072 · UDR : 0006, 0054, 0062 (§3.4, §3.7, §3.9), 0077 (§3.3) · Stimulus : modal, autofocus %>
+<% tab_title = page_title(t(".title", classroom: @classroom.name)) %>
+<% error = @form.errors[:weekdays].any? %>
+<% checked = Array(@form.weekdays) %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title", classroom: @classroom.name), id: "session-days-modal", size: :sm, open: true,
+               document_title: tab_title do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".later"), variant: :ghost, type: :submit, form: "assignment-days-form", name: "later", value: "1" %>
+      <%= ui_button t(".submit"), type: :submit, form: "assignment-days-form", icon: "plus" %>
+    <% end %>
+    <%= form_with url: classroom_assignments_path(@classroom.public_id), method: :post, id: "assignment-days-form",
+                  class: "space-y-4" do %>
+      <%= hidden_field_tag "assignment[assignable_type]", "Exercise", id: nil %>
+      <%= hidden_field_tag "assignment[assignable_key]", @exercise.key, id: nil %>
+      <%= hidden_field_tag "return_to", @return_to, id: nil if @return_to %>
+      <%# UDR-0077 §3.3 : ouverte depuis une ligne compacte, la réponse « Plus tard » rend la ligne compacte. %>
+      <%= hidden_field_tag "compact", "1", id: nil if params[:compact].present? %>
+      <p class="text-mute"><%= t(".context", name: @exercise.name) %></p>
+      <%= tag.fieldset id: "assignment_weekdays", class: "space-y-2", "aria-invalid": ("true" if error),
+                       "aria-describedby": ("assignment_weekdays_error" if error) do %>
+        <legend class="sr-only"><%= t(".legend") %></legend>
+        <%= hidden_field_tag "assignment[weekdays][]", "", id: nil %>
+        <div class="grid grid-cols-3 gap-2 sm:grid-cols-6">
+          <% (1..6).each do |day| %>
+            <label class="flex min-h-tap cursor-pointer items-center justify-center rounded-ln border border-line bg-white text-sm font-medium text-ink transition hover:bg-mist has-checked:border-brand has-checked:bg-brand-soft has-checked:text-brand-strong has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand">
+              <%= check_box_tag "assignment[weekdays][]", day, checked.include?(day), id: "assignment_weekdays_#{day}", class: "sr-only" %>
+              <span aria-hidden="true"><%= t(".short.#{day}") %></span>
+              <span class="sr-only"><%= t(".long.#{day}") %></span>
+            </label>
+          <% end %>
+        </div>
+        <% if error %>
+          <p id="assignment_weekdays_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+            <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= t(".weekdays_blank") %>
+          </p>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

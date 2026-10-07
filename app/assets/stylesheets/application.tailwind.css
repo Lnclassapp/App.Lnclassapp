@@ -1,6 +1,6 @@
 /* 🌐 UI · Design system Lnclass — tokens @theme, polices auto-hébergées, utilitaires maison
    Rôle : seule source des couleurs, rayons, ombres, espacements et animations (UDR-0005)
-   ADR  : 0009, 0049, 0051 · UDR : 0005, 0006, 0051 */
+   ADR  : 0009, 0049, 0051, 0081 · UDR : 0005, 0006, 0051, 0061, 0065 (mode sombre), 0075 (thèmes d'annonce) */
 
 /* Sources explicites : la documentation contient des classes d'exemple qui ne doivent pas être compilées. */
 @import "tailwindcss" source(none);
@@ -70,6 +70,26 @@
   --color-info: var(--color-brand-strong);
   --color-info-soft: var(--color-brand-soft);
 
+  /* Compréhension d'un exercice (UDR-0072) — écrans enseignant seulement, jamais une note d'élève */
+  --color-struggling: #c8322b;
+  --color-struggling-soft: #fdecea;
+  --color-fragile: #e0a800;
+  --color-fragile-soft: #fff8d2;
+
+  /* Teintes des bulles de matières (UDR-0069 §3.3, charte §3) — fond d'une illustration, jamais d'un texte */
+  --color-tint-indigo: #dee5ff;
+  --color-tint-lilac: #f0dfff;
+  --color-tint-green: #e3ffdf;
+  --color-tint-yellow: #fff8d2;
+  --color-tint-lavender: #f2f2ff;
+  --color-tint-pink: #ffe1f3;
+  --color-tint-red: #fff0f0;
+
+  /* Pastilles de la direction (UDR-0074 §3.7) — taux de rendu d'une classe ou d'un niveau, et leur légende seulement */
+  --color-signal-green: #1f9d55;
+  --color-signal-yellow: #b88700;
+  --color-signal-red: #d93a3a;
+
   /* Rayons — `rounded-full` reste disponible pour les pilules et les avatars */
   --radius-*: initial;
   --radius-sm: 0.5rem;
@@ -85,7 +105,7 @@
 
   /* Espacements nommés — l'échelle numérique autorisée est listée dans UDR-0005 §3 */
   --spacing-tap: 3rem;
-  --spacing-gutter: 1.25rem;
+  --spacing-gutter: 1rem;
   --spacing-bar: 4rem;
   --spacing-rail: 18rem;
 
@@ -106,6 +126,82 @@
     from { opacity: 0; transform: translateY(0.75rem); }
     to { opacity: 1; transform: translateY(0); }
   }
+}
+
+/* UDR-0075 §3.1, ADR-0081 §4.2 — Thèmes d'annonce : une carte (`data-announcement-theme`, Message::THEMES) redéfinit
+   à son échelle le fond (`brand-soft`), le texte, la signature et `fill-school` (`school`), l'illustration (`brand`)
+   et l'illustration forte ou le badge (`brand-strong`). Les utilitaires de la carte lisent ces variables : les 8 dessins
+   de base et ceux de l'équipe suivent sans être réécrits. « Ciel » reprend les valeurs du @theme. Valeurs sombres dans
+   les deux blocs de l'UDR-0065, plus bas. Hors couche, comme eux ; test/design/announcement_themes_test.rb vérifie
+   chaque valeur et chaque contraste. */
+[data-announcement-theme="ciel"] {
+  --color-brand-soft: #e5f5ff;
+  --color-school: #1b365d;
+  --color-brand: #00a0ff;
+  --color-brand-strong: #0070b3;
+}
+
+[data-announcement-theme="lagune"] {
+  --color-brand-soft: #d9f7f3;
+  --color-school: #0b4a45;
+  --color-brand: #14b8a6;
+  --color-brand-strong: #0f766e;
+}
+
+[data-announcement-theme="menthe"] {
+  --color-brand-soft: #e3f9e5;
+  --color-school: #14452a;
+  --color-brand: #22c55e;
+  --color-brand-strong: #15803d;
+}
+
+[data-announcement-theme="citron"] {
+  --color-brand-soft: #fff6c7;
+  --color-school: #4a3b05;
+  --color-brand: #eab308;
+  --color-brand-strong: #a16207;
+}
+
+[data-announcement-theme="mangue"] {
+  --color-brand-soft: #ffe9d2;
+  --color-school: #5a2a05;
+  --color-brand: #f97316;
+  --color-brand-strong: #c2410c;
+}
+
+[data-announcement-theme="corail"] {
+  --color-brand-soft: #ffe3df;
+  --color-school: #5f1a12;
+  --color-brand: #f2554a;
+  --color-brand-strong: #b91c1c;
+}
+
+[data-announcement-theme="hibiscus"] {
+  --color-brand-soft: #ffe1f3;
+  --color-school: #5c1642;
+  --color-brand: #ec4899;
+  --color-brand-strong: #be185d;
+}
+
+[data-announcement-theme="lavande"] {
+  --color-brand-soft: #efe5ff;
+  --color-school: #3b1d6e;
+  --color-brand: #8b5cf6;
+  --color-brand-strong: #6d28d9;
+}
+
+[data-announcement-theme="indigo"] {
+  --color-brand-soft: #2e3a8c;
+  --color-school: #ffffff;
+  --color-brand: #a5b4fc;
+  --color-brand-strong: #e0e7ff;
+}
+
+[data-announcement-theme="nuit"] {
+  --color-brand-soft: #1f2937;
+  --color-school: #f9fafb;
+  --color-brand: #60a5fa;
+  --color-brand-strong: #fbbf24;
 }
 
 @layer base {
@@ -203,6 +299,11 @@
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* Élément collant posé juste au-dessus de la barre basse (« Question suivante », chantier ux-pages-eleve) */
+@utility bottom-above-bar {
+  bottom: calc(var(--spacing-bar) + env(safe-area-inset-bottom));
+}
+
 /* Colonne des actions (⋮) d'un tableau qui défile en largeur : collée au bord droit du tableau, sur un fond blanc qui
    masque les colonnes qui passent dessous. Au téléphone, le ⋮ est à l'écran sans faire défiler le tableau (UDR-0042).
    `sticky` crée un contexte d'empilement qui enfermerait le menu fixe (z-50) sous la barre basse (z-40) : menu ouvert,
@@ -215,6 +316,92 @@
   &:has([aria-expanded="true"]) {
     z-index: 50;
   }
+}
+
+/* Chantier politique-cache, lot E5 (A) : les classes que chaque badge et chaque carte-lien répétaient, écrites une fois
+   ici. Le rendu est le même, le HTML plus léger (une page du catalogue porte 24 cartes et 48 à 72 badges). Leur liste
+   est celle d'avant, figée par test/design/shared_classes_test.rb. */
+@utility ui-badge {
+  @apply inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap;
+}
+
+/* UDR-0005, amendement du 2026-10-06 : 12 px au lieu de 11, illisibles sur téléphone. */
+@utility ui-badge-sm {
+  @apply px-2 py-0.5 text-xs;
+}
+
+@utility ui-badge-md {
+  @apply px-2.5 py-1 text-xs;
+}
+
+@utility ui-card-link {
+  @apply transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+}
+
+/* Lot E6 (politique-cache) : boutons, bouton icône, menu ⋮, boîte de dialogue et avatar, sur le même principe ; une
+   ligne de tableau en porte plusieurs, une confirmation trois. */
+@utility ui-button {
+  @apply relative inline-flex cursor-pointer items-center justify-center rounded-full font-medium whitespace-nowrap select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
+}
+
+@utility ui-button-primary {
+  @apply bg-ink text-white hover:bg-ink/85;
+}
+
+@utility ui-button-brand {
+  @apply bg-brand text-ink hover:bg-brand/85;
+}
+
+@utility ui-button-secondary {
+  @apply border border-line bg-white text-ink hover:bg-mist;
+}
+
+@utility ui-button-ghost {
+  @apply text-ink hover:bg-ink/5;
+}
+
+@utility ui-button-danger {
+  @apply bg-error text-white hover:bg-error/90;
+}
+
+@utility ui-button-sm {
+  @apply h-10 gap-1.5 px-4 text-sm after:absolute after:-inset-1;
+}
+
+@utility ui-button-md {
+  @apply min-h-tap gap-2 px-5 text-sm;
+}
+
+@utility ui-button-lg {
+  @apply min-h-14 gap-2 px-6 text-base;
+}
+
+@utility ui-icon-button {
+  @apply grid size-tap cursor-pointer place-items-center rounded-full text-mute transition hover:bg-ink/5 hover:text-ink focus-visible:outline-2 focus-visible:outline-brand;
+}
+
+@utility ui-menu {
+  @apply absolute mt-2 w-64 rounded-ln border border-line bg-white p-1.5 shadow-pop animate-fade-in;
+}
+
+@utility ui-menu-item {
+  @apply flex min-h-tap w-full items-center gap-3 rounded-sm px-3 text-sm font-medium focus:outline-none;
+}
+
+@utility ui-menu-item-default {
+  @apply text-ink hover:bg-mist focus:bg-mist;
+}
+
+@utility ui-menu-item-danger {
+  @apply text-error hover:bg-error-soft focus:bg-error-soft;
+}
+
+@utility ui-dialog {
+  @apply m-auto w-full max-w-none rounded-sheet bg-white p-0 text-ink shadow-pop backdrop:bg-ink/50 motion-safe:open:animate-slide-up max-sm:mb-0 max-sm:rounded-b-none;
+}
+
+@utility ui-avatar {
+  @apply inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold;
 }
 
 /* UDR-0054 §3.4, amendement « survol » — largeur de la bulle : celle d'un formulaire, jamais plus que la fenêtre moins
@@ -237,6 +424,80 @@
   scrollbar-width: none;
 }
 
+/* UDR-0061 §3.3 — poignée d'une feuille basse (36 × 4 px), décorative : elle signale la feuille, rien de plus. */
+@utility sheet-handle {
+  display: block;
+  width: 2.25rem;
+  height: 0.25rem;
+  margin-inline: auto;
+  border-radius: 9999px;
+  background-color: var(--color-line);
+}
+
+/* UDR-0061 §3.3 — `ui_modal placement: :sheet` : sous lg, une feuille ancrée en bas, pleine largeur, coins hauts
+   arrondis, 25 % de la hauteur au moins, 90 % au plus avec défilement interne ; à partir de lg, la modale centrée `sm`
+   de ses utilitaires. Hors couche, exprès : une règle hors couche l'emporte sur les utilitaires de la <dialog>
+   (`m-auto`, `sm:max-w-sm`, `p-0`, `rounded-sheet`) quel que soit l'ordre de génération. `max-width` plutôt qu'une
+   plage de media query, et `vh` avant `dvh` : lisible par les navigateurs de l'ADR-0051. */
+@media (max-width: 63.99rem) {
+  dialog.dialog-sheet {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    min-height: 25vh;
+    min-height: 25dvh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Chantier ux-pages-eleve — formules KaTeX lisibles sur téléphone. Hors couche, exprès : l'emporte sur katex.min.css.
+   1. Une formule en ligne ne se coupe plus en fin de ligne (« 1 ≤ 2 + / sin x ≤ 3 ») : elle passe entière à la ligne.
+   2. Une formule centrée trop large défile dans sa propre largeur au lieu d'élargir la page.
+   3. Une fraction en ligne s'écrit en « scriptstyle » (0,7 em), illisible vers 8 px dans une proposition : elle grandit
+      d'un quart, en entier (numérateur, barre et dénominateur), sans toucher aux fractions centrées. */
+.katex {
+  white-space: nowrap;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
+}
+
+:not(.katex-display) > .katex .mfrac {
+  font-size: 1.25em;
+}
+
+/* La fraction agrandie dépasse la hauteur de ligne prévue par KaTeX : sa formule prend un peu d'air au-dessus et
+   au-dessous, pour ne pas mordre sur la ligne voisine. Sans `:has` (navigateurs anciens), seul cet air manque. */
+:not(.katex-display) > .katex:has(.mfrac) {
+  display: inline-block;
+  margin-block: 0.3em;
+}
+
+/* UDR-0005, amendement du 2026-10-06 — sous 640 px, une carte de premier niveau du shell va bord à bord : la marge
+   d'écran (`data-bleed`, `px-gutter`) est rendue à la carte, qui perd ses arrondis et ses bords latéraux. Restent dans
+   la marge : une carte dans une carte, dans une modale, dans un carrousel, ou côte à côte avec une autre. */
+@media (width < 40rem) {
+  [data-bleed] .rounded-card.shadow-card:not(.rounded-card .rounded-card, dialog *, .snap-x *, .flex:not(.flex-col) > *,
+                                            [class~="grid-cols-2"] > *, [class~="grid-cols-3"] > *, [class~="grid-cols-4"] > *) {
+    margin-inline: calc(-1 * var(--spacing-gutter));
+    border-inline-width: 0;
+    border-radius: 0;
+
+    /* Une carte qui ouvre la page (carte de classe de l'accueil élève) garde ses deux coins du haut arrondis. */
+    &[data-bleed-round-top] {
+      border-start-start-radius: var(--radius-card);
+      border-start-end-radius: var(--radius-card);
+    }
+  }
+}
+
 /* ADR-0051 — bandeau « navigateur ancien » : CSS simple, hors utilitaires, pour rester lisible là où
    les fonctions récentes de Tailwind v4 (couches, oklch, :where) ne sont pas comprises. */
 .outdated-browser {
@@ -244,4 +505,264 @@
   color: #262626;
   padding: 0.5rem 1rem;
   text-align: center;
+}
+
+/* UDR-0065 — Mode sombre, par les tokens : le téléphone en thème sombre reçoit la même interface, couleurs redéfinies.
+   Aucune classe `dark:` dans les vues ; chaque utilitaire lit la variable du token, et ces blocs en changent la valeur.
+   La règle d'inversion : le texte (`ink`, `mute`) devient clair, les surfaces (`white`, `paper`, `mist`) sombres ; un fond
+   qui porte un texte blanc (`team`, `school`, `error`, `success`, `warning`) devient clair, un fond qui porte un texte
+   `ink` (`brand`, `teacher`, `gold`) devient profond. Écran seulement : une page imprimée reste claire (codes de secours).
+   Amendement du 2026-10-03 — l'interrupteur pose `data-theme` sur <html> : `dark` l'emporte sur un téléphone clair,
+   `light` sur un téléphone sombre ; sans choix, le réglage du téléphone. Les deux blocs portent les mêmes valeurs.
+   Hors couche, exprès : l'emporte sur `@layer theme`. test/design/dark_mode_test.rb vérifie chaque token, chaque
+   contraste et l'identité des deux blocs. Après `:root`, chaque bloc porte les thèmes d'annonce en sombre (UDR-0075). */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-white: #171c24;
+    --color-ink: #eef1f5;
+    --color-mute: #a3acb9;
+    --color-line: #2c3542;
+    --color-mist: #222a35;
+    --color-paper: #0f1218;
+
+    --color-brand: #0070b3;
+    --color-brand-soft: #132c42;
+    --color-brand-strong: #7fd0ff;
+
+    --color-teacher: #9a5000;
+    --color-school: #a9c4ee;
+    --color-team: #c3a4ff;
+    --color-gold: #8c5c00;
+
+    --color-success: #6fd69a;
+    --color-success-soft: #133a26;
+    --color-warning: #ffbf73;
+    --color-warning-soft: #3a2a10;
+    --color-error: #ff9a90;
+    --color-error-soft: #3d1c1c;
+
+    --color-struggling: #ff7b72;
+    --color-struggling-soft: #3d2023;
+    --color-fragile: #facc15;
+    --color-fragile-soft: #3a3214;
+
+    --color-tint-indigo: #23284d;
+    --color-tint-lilac: #33224a;
+    --color-tint-green: #18361d;
+    --color-tint-yellow: #3a3214;
+    --color-tint-lavender: #252845;
+    --color-tint-pink: #3d1a30;
+    --color-tint-red: #3d2023;
+
+    --color-signal-green: #6fd69a;
+    --color-signal-yellow: #ffd34d;
+    --color-signal-red: #ff8a80;
+
+    --shadow-card: 0 2px 8px rgb(0 0 0 / 0.3);
+    --shadow-lift: 0 12px 24px rgb(0 0 0 / 0.4);
+    --shadow-pop: 0 20px 40px -8px rgb(0 0 0 / 0.6);
+  }
+
+  /* `backdrop:bg-ink/50` deviendrait un voile clair : le fond d'une modale reste un voile sombre. */
+  :root:not([data-theme="light"]) dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+  }
+
+  /* UDR-0075 §3.1 — les thèmes d'annonce en sombre ; plus précis que le thème clair de la carte, ils l'emportent. */
+  :root:not([data-theme="light"]) [data-announcement-theme="ciel"] {
+    --color-brand-soft: #132c42;
+    --color-school: #a9c4ee;
+    --color-brand: #0070b3;
+    --color-brand-strong: #7fd0ff;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="lagune"] {
+    --color-brand-soft: #0f2e2b;
+    --color-school: #99e6dc;
+    --color-brand: #0f766e;
+    --color-brand-strong: #5eead4;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="menthe"] {
+    --color-brand-soft: #13301c;
+    --color-school: #a7e8b8;
+    --color-brand: #15803d;
+    --color-brand-strong: #86efac;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="citron"] {
+    --color-brand-soft: #332a0c;
+    --color-school: #f5e08a;
+    --color-brand: #a16207;
+    --color-brand-strong: #fde047;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="mangue"] {
+    --color-brand-soft: #3a220f;
+    --color-school: #fdc897;
+    --color-brand: #c2410c;
+    --color-brand-strong: #fdba74;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="corail"] {
+    --color-brand-soft: #3d1b18;
+    --color-school: #fbb4ac;
+    --color-brand: #b91c1c;
+    --color-brand-strong: #fca5a5;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="hibiscus"] {
+    --color-brand-soft: #3d1a30;
+    --color-school: #f9b4dc;
+    --color-brand: #be185d;
+    --color-brand-strong: #f9a8d4;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="lavande"] {
+    --color-brand-soft: #2a1e45;
+    --color-school: #d4c2fb;
+    --color-brand: #6d28d9;
+    --color-brand-strong: #c4b5fd;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="indigo"] {
+    --color-brand-soft: #1e2563;
+    --color-school: #e0e7ff;
+    --color-brand: #6366f1;
+    --color-brand-strong: #c7d2fe;
+  }
+
+  :root:not([data-theme="light"]) [data-announcement-theme="nuit"] {
+    --color-brand-soft: #0b0f17;
+    --color-school: #e5e7eb;
+    --color-brand: #3b82f6;
+    --color-brand-strong: #fbbf24;
+  }
+}
+
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --color-white: #171c24;
+    --color-ink: #eef1f5;
+    --color-mute: #a3acb9;
+    --color-line: #2c3542;
+    --color-mist: #222a35;
+    --color-paper: #0f1218;
+
+    --color-brand: #0070b3;
+    --color-brand-soft: #132c42;
+    --color-brand-strong: #7fd0ff;
+
+    --color-teacher: #9a5000;
+    --color-school: #a9c4ee;
+    --color-team: #c3a4ff;
+    --color-gold: #8c5c00;
+
+    --color-success: #6fd69a;
+    --color-success-soft: #133a26;
+    --color-warning: #ffbf73;
+    --color-warning-soft: #3a2a10;
+    --color-error: #ff9a90;
+    --color-error-soft: #3d1c1c;
+
+    --color-struggling: #ff7b72;
+    --color-struggling-soft: #3d2023;
+    --color-fragile: #facc15;
+    --color-fragile-soft: #3a3214;
+
+    --color-tint-indigo: #23284d;
+    --color-tint-lilac: #33224a;
+    --color-tint-green: #18361d;
+    --color-tint-yellow: #3a3214;
+    --color-tint-lavender: #252845;
+    --color-tint-pink: #3d1a30;
+    --color-tint-red: #3d2023;
+
+    --color-signal-green: #6fd69a;
+    --color-signal-yellow: #ffd34d;
+    --color-signal-red: #ff8a80;
+
+    --shadow-card: 0 2px 8px rgb(0 0 0 / 0.3);
+    --shadow-lift: 0 12px 24px rgb(0 0 0 / 0.4);
+    --shadow-pop: 0 20px 40px -8px rgb(0 0 0 / 0.6);
+  }
+
+  :root[data-theme="dark"] dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+  }
+
+  /* UDR-0075 §3.1 — les mêmes thèmes d'annonce en sombre, choisis par l'interrupteur. */
+  :root[data-theme="dark"] [data-announcement-theme="ciel"] {
+    --color-brand-soft: #132c42;
+    --color-school: #a9c4ee;
+    --color-brand: #0070b3;
+    --color-brand-strong: #7fd0ff;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="lagune"] {
+    --color-brand-soft: #0f2e2b;
+    --color-school: #99e6dc;
+    --color-brand: #0f766e;
+    --color-brand-strong: #5eead4;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="menthe"] {
+    --color-brand-soft: #13301c;
+    --color-school: #a7e8b8;
+    --color-brand: #15803d;
+    --color-brand-strong: #86efac;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="citron"] {
+    --color-brand-soft: #332a0c;
+    --color-school: #f5e08a;
+    --color-brand: #a16207;
+    --color-brand-strong: #fde047;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="mangue"] {
+    --color-brand-soft: #3a220f;
+    --color-school: #fdc897;
+    --color-brand: #c2410c;
+    --color-brand-strong: #fdba74;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="corail"] {
+    --color-brand-soft: #3d1b18;
+    --color-school: #fbb4ac;
+    --color-brand: #b91c1c;
+    --color-brand-strong: #fca5a5;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="hibiscus"] {
+    --color-brand-soft: #3d1a30;
+    --color-school: #f9b4dc;
+    --color-brand: #be185d;
+    --color-brand-strong: #f9a8d4;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="lavande"] {
+    --color-brand-soft: #2a1e45;
+    --color-school: #d4c2fb;
+    --color-brand: #6d28d9;
+    --color-brand-strong: #c4b5fd;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="indigo"] {
+    --color-brand-soft: #1e2563;
+    --color-school: #e0e7ff;
+    --color-brand: #6366f1;
+    --color-brand-strong: #c7d2fe;
+  }
+
+  :root[data-theme="dark"] [data-announcement-theme="nuit"] {
+    --color-brand-soft: #0b0f17;
+    --color-school: #e5e7eb;
+    --color-brand: #3b82f6;
+    --color-brand-strong: #fbbf24;
+  }
 }

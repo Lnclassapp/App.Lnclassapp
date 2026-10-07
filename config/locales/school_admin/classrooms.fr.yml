@@ -1,5 +1,7 @@
 # Travail des élèves de la direction (chantier espace-direction-simple, Lot C, DS-05, DS-07 à DS-10) — UDR-0052, ADR-0065
 # Finitions (chantier finitions-ux, Lot G) : infobulles, retour, recherche d'un élève — UDR-0054 §3.4, §3.9
+# Lien « Anciens élèves » (fonctions-espace-eleve, lot R) — ADR-0036
+# Accueil de la direction (accueil-direction, Lot A) : le tableau quitte la page, la page d'une classe garde ses clés — UDR-0074
 fr:
   school_admin:
     classrooms:
@@ -12,20 +14,70 @@ fr:
         missing: "— : pas encore de chiffre (aucun élève, aucun devoir, ou moins de 5 élèves pour une moyenne)."
       legend:
         label: "Chiffre non calculé"
+      # Accueil de la direction (chantier accueil-direction, Lot A) — UDR-0074 §3.2, §3.11
       index:
-        page_title: "Travail des élèves"
-        title: "Travail des élèves"
-        subtitle: "%{school} · Année %{year}"
-        caption: "Travail des élèves par classe"
-        columns:
-          classroom: "Classe"
-          students: "Élèves"
-          assignments: "Devoirs donnés"
-          submission_rate: "Taux de rendu"
-          average: "Moyenne"
-        empty: "Aucune classe cette année"
+        page_title: "Accueil"
+        greeting: "Bonjour, %{name}"
+        # UDR-0070 §3.3 : bandeau d'arrivée d'une autre direction, 7 jours.
+        arrivals:
+          line: "%{name} a rejoint la direction le %{date} (%{via})."
+          via:
+            code: "avec le code de l'établissement"
+            invitation: "sur invitation de l'équipe"
+        activity:
+          title: "Activité récente"
+          subtitle: "Les 30 derniers jours dans votre établissement"
+      # Carte « Établissement » de l'accueil — UDR-0074 §3.3
+      school_card:
+        subtitle: "%{type} · Année %{year}"
+        figures:
+          classrooms:
+            one: "classe"
+            other: "classes"
+          students:
+            one: "élève"
+            other: "élèves"
+          teachers:
+            one: "enseignant"
+            other: "enseignants"
+        alerts_title: "À surveiller"
+        all_clear: "Rien à signaler"
+        alerts:
+          inactive: "Votre établissement n'est pas actif : les enseignants ne peuvent pas s'y inscrire."
+          without_teacher:
+            one: "1 classe sans enseignant : %{names}"
+            other: "%{count} classes sans enseignant : %{names}"
+          without_students:
+            one: "1 classe sans élève : %{names}"
+            other: "%{count} classes sans élève : %{names}"
+          red_signal:
+            one: "1 classe rend moins de 40 % des devoirs : %{names}"
+            other: "%{count} classes rendent moins de 40 % des devoirs : %{names}"
+          teachers_without_classroom:
+            one: "1 enseignant n'a déclaré aucune classe"
+            other: "%{count} enseignants n'ont déclaré aucune classe"
+          names_more:
+            one: "%{names} et %{count} autre"
+            other: "%{names} et %{count} autres"
+        links:
+          school: "Voir l'établissement"
+          invite: "Inviter des enseignants"
+          teachers: "Voir les enseignants"
+          departed: "Anciens élèves"
+      # Section « Niveaux » de l'accueil — UDR-0074 §3.4
+      levels:
+        title: "Niveaux"
+        subtitle: "Les classes de chaque niveau et leur travail"
+        label: "Vos niveaux"
+        empty:
+          title: "Aucune classe cette année"
+          description: "Ajoutez des classes depuis la page Établissement."
+          action: "Voir l'établissement"
+        sr_level:
+          one: ", 1 classe"
+          other: ", %{count} classes"
+        sr_rate: ", taux de rendu %{rate} %"
       show:
-        back: "Travail des élèves"
         subtitle:
           one: "%{level} · %{count} élève"
           other: "%{level} · %{count} élèves"

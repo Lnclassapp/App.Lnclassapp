@@ -1,8 +1,9 @@
 require "application_system_test_case"
 
-# TR-09, CA-25 (UDR-0018): a team member signs in for real, lands on the team home, reads its counts and its referential,
-# sees the recent content load in its lazy frame, and opens « Nouveau cours » in the modal. The old feed read an Orm
-# constant that had disappeared.
+# TR-09, CA-25 (UDR-0018): a team member signs in for real, lands on the team home, reads its counts, sees the recent
+# content load in its lazy frame, and opens « Nouveau cours » in the modal. The old feed read an Orm constant that had
+# disappeared. RE-05 (UDR-0068 §3.4): the referential has left the home for its own page, reached from the
+# « Configuration » card (test/system/teams/configuration_navigation_test.rb).
 class Teams::TeamHomeTest < ApplicationSystemTestCase
   setup do
     drena = create_drena(name: "Abidjan 1")
@@ -17,7 +18,7 @@ class Teams::TeamHomeTest < ApplicationSystemTestCase
   def tl(key, **) = I18n.t("teams.homes.#{key}", **)
   def figure(key, count) = "#{count} #{tl(key, count:)}"
 
-  test "the team member reads the counts and the referential, then opens a new course in the modal" do
+  test "the team member reads the counts, with no referential, then opens a new course in the modal" do
     sign_in_as create_team_member(first_name: "Aya")
 
     assert_current_path team_home_path
@@ -27,12 +28,13 @@ class Teams::TeamHomeTest < ApplicationSystemTestCase
       assert_text figure("show.schools", 1), normalize_ws: true
       assert_text figure("show.classrooms", 1), normalize_ws: true
     end
-    within("#team_home_referential") do
-      assert_link href: levels_path, text: figure("referential.levels", 1), normalize_ws: true
-      assert_link href: series_index_path, text: figure("referential.series", 1), normalize_ws: true
-      assert_selector "li#level_tle", text: "D"
-    end
     within("#team_home_recent_courses") { assert_link "Génétique et évolution" }
+    within("main#main") do
+      assert_equal [ tl("show.regions_title"), tl("show.activity_title") ], all("h2", minimum: 2).map(&:text)
+      assert_no_selector "#team_home_referential"
+      assert_no_link href: levels_path
+      assert_no_selector "li#level_tle"
+    end
 
     assert_no_page_reload do
       within("#team_home_shortcuts") { click_link tl("shortcuts.new_course") }

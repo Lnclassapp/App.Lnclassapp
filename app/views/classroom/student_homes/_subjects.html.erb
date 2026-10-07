@@ -1,0 +1,24 @@
+<%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève, en bulles illustrées %>
+<%# Rôle : une bulle par matière de son niveau, vers le catalogue filtré ; pastille ambre si un exercice y est en retard %>
+<%# UDR  : 0062 §3.3, 0069 §3.3 (bulles ; amendements du 2026-10-06 : abréviations sous 640 px, plus de « Tous les cours »), 0076 §3.1 %>
+<%# charte §9 : jamais de compteur ; la pastille est dite par sr_suffix %>
+<%# locals: (subjects:, late_slugs:, icon:) -%>
+<%= ui_card title: t(".title"), icon:, id: "student_home_subjects", class: "max-sm:pt-3" do %>
+  <% if subjects.empty? %>
+    <%= ui_empty_state title: t(".empty"), icon: %>
+  <% else %>
+    <nav id="student_home_subject_bubbles" aria-label="<%= t(".label") %>">
+      <ul class="grid grid-cols-4 gap-y-4 sm:grid-cols-6">
+        <% subjects.each do |subject| %>
+          <% late = late_slugs.include?(subject.slug) %>
+          <li>
+            <%= ui_subject_bubble label: subject.name, short_label: t(".short.#{subject.slug}", default: nil),
+                                  href: courses_path(material: subject.slug),
+                                  illustration: subject_illustration(subject.slug), id: "subject_#{subject.slug}",
+                                  signal: (:warning if late), sr_suffix: (t(".late") if late) %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  <% end %>
+<% end %>

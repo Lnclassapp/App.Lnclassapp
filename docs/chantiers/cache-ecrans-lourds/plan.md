@@ -91,7 +91,9 @@ Contrat d'exécution de chaque lot (cycle optimisation, étape 4) :
 - **Test associé** : `PERF=1 PARALLEL_WORKERS=1 bin/rails test test/performance/school/heavy_screens_budget_test.rb`
 - **Done quand**   : le tableau « Mesure après » du memo est rempli pour les 28 écrans, et les budgets tenus ou non sont dits
 
-## Lot 5 — Listes légères (piste 5) — **reporté**
+## Lot 5 — Listes légères (piste 5) — **repris le 2026-10-05 par `politique-cache`, lots E3 et E4**
+
+> Décision du porteur, 2026-10-05. La modale partagée des établissements devient la confirmation lue à la demande (E3, DRENA comprises). Le cache des cartes du catalogue est remplacé par une pagination chargée au défilement (E4), qui allège aussi la page. Catalogue et DRENA tiennent leur budget ; les établissements tiennent le temps et pèsent encore 222 Ko ([memo de `politique-cache`](../politique-cache/memo.md#lots-e3-et-e4--les-listes-encore-lourdes-2026-10-05)).
 
 - **Couche**       : ui (vues) — **c'est pour cela qu'il attend**
 - **Fichiers**     : `app/views/teams/schools/_school_row.html.erb` (une modale de confirmation partagée au lieu de deux par ligne) ; `app/views/catalog/courses/_course_card.html.erb` et `index` (`render collection, cached: true`)

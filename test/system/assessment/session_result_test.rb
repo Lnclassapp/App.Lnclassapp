@@ -56,13 +56,61 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     on_a_slow_network { play_nine_out_of_ten }
   end
 
-  test "sous le seuil : « Courage ! », « Non acquis », aucun confetti" do
+  # UDR-0023, amendement du 2026-10-02 (UDR-0057) : à 390 × 844, la note sur 20 seule, une seule action principale,
+  # au plus 5 blocs avant le pli, et 3 cartes de correction puis « Voir plus », par 3.
+  test "à 390 px, l'élève lit sa note seule et 3 cartes de correction, puis « Voir plus »" do
+    session = completed_session(correct: 9)
+
+    with_mobile_viewport do
+      visit exercise_session_result_path(session.public_id)
+
+      within "#session_result dl" do
+        assert_selector "dt", count: 2
+        assert_text "18/20"
+        assert_no_text "#{GRADING.score_percent(correct: 9, total: 10)} %"
+        assert_no_text I18n.t("#{SCOPE}.show.correct")
+      end
+      assert_no_text I18n.t("#{SCOPE}.show.review_hint_student")
+      assert_single_primary_action
+      assert_blocks_above_fold "#main .max-w-2xl > *"
+      assert_list_capped "#session_review ol", items: "li[id^=question_review_]"
+
+      within "#session_review" do
+        assert_no_page_reload { click_on I18n.t("components.reveal.more") }
+        assert_selector "li[id^=question_review_]", count: 6
+        click_on I18n.t("components.reveal.more")
+        click_on I18n.t("components.reveal.more")
+        assert_selector "li[id^=question_review_]", count: 10
+        assert_no_button I18n.t("components.reveal.more")
+      end
+    end
+  end
+
+  test "l'équipe voit le résultat inchangé : score, questions justes, aide et toutes les cartes" do
+    session = completed_session(correct: 9)
+    sign_out
+    sign_in_as create_team_member
+
+    visit exercise_session_result_path(session.public_id)
+
+    within "#session_result dl" do
+      assert_selector "dt", count: 4
+      assert_text "18/20"
+      assert_text "#{GRADING.score_percent(correct: 9, total: 10)} %"
+      assert_text I18n.t("#{SCOPE}.show.correct_value", count: 9, total: 10)
+    end
+    assert_text I18n.t("#{SCOPE}.show.review_hint_reveal")
+    assert_selector "#session_review li[id^=question_review_]", count: 10
+    assert_no_button I18n.t("components.reveal.more")
+  end
+
+  test "sous le seuil : « Courage ! », « Pas encore de badge », aucun confetti" do
     session = completed_session(correct: 4)
 
     visit exercise_session_result_path(session.public_id)
 
     assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.error")
-    assert_selector "#session_badge[aria-label='#{I18n.t("assessment.badges.levels.none")}']"
+    assert_selector "#session_badge[aria-label='#{I18n.t("#{SCOPE}.badge.none")}']"
     assert_text I18n.t("assessment.badges.mastery.struggling")
     assert_no_selector "#confetti", visible: :all
     assert_button I18n.t("#{SCOPE}.show.restart")
@@ -80,8 +128,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_selector "#session_badge[aria-label='#{badge('Or')}']"
     assert_no_selector "#session_badge[aria-label='#{badge('Diamant')}']"
     assert_text "18/20"
-    assert_text "#{GRADING.score_percent(correct: 9, total: 10)} %"
-    assert_selector "#session_review li[id^=question_review_]", count: 10
+    assert_selector "#session_review li[id^=question_review_]", count: 3
 
     click_on I18n.t("#{SCOPE}.show.restart")
 

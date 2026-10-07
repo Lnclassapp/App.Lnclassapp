@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::School::RegenerateSchoolCode
-# Rôle : remplace le code d'établissement ; l'ancien cesse aussitôt de fonctionner, les enseignants inscrits restent rattachés
-# ADR  : 0026, 0028, 0057 · UDR : 0044
+# Rôle : remplace le code d'établissement (équipe partout, direction sur le sien actif) ; l'ancien cesse aussitôt
+# ADR  : 0026, 0028, 0057, 0071 · UDR : 0044, 0056
 module UseCases
   module School
     class RegenerateSchoolCode
@@ -16,12 +16,13 @@ module UseCases
       end
 
       # → Result(School) | :forbidden | :not_found | :conflict (aucun code libre après ATTEMPTS tirages)
+      # policy : ManageSchoolStructurePolicy, interrogée une fois l'établissement lu (ADR-0071 §4.2).
       def call(actor:, public_id:)
-        allowed = @policy.call(actor:)
-        return allowed if allowed.failure?
-
         school = @schools.find_by_public_id(public_id:)
         return Shared::Result.failure(:not_found) if school.nil?
+
+        allowed = @policy.call(actor:, school:)
+        return allowed if allowed.failure?
 
         now = @clock.now
         @transaction.call do

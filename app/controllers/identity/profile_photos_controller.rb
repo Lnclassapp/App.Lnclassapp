@@ -1,8 +1,10 @@
 # 🌐 DELIVERY · Identity::ProfilePhotosController
 # Rôle : chacun ajoute, change ou retire sa photo dans la modale ; succès en Turbo Stream (toast, page rafraîchie), repli HTML
-# ADR  : 0026, 0028, 0060 · UDR : 0006, 0041, 0047
+# ADR  : 0026, 0028, 0060 · UDR : 0006, 0041 (élève tutoyé, 2026-10-06), 0047
 module Identity
   class ProfilePhotosController < AuthenticatedController
+    include Tone
+
     helper_method :profile
 
     def edit
@@ -12,12 +14,12 @@ module Identity
     def update
       @form = Dtos::Identity::ProfilePhotoInput.new(photo: uploaded_photo)
       result = change.call(actor: current_actor, user: own_user, dto: @form, ip: request.remote_ip)
-      render_result result, form: :edit, success: ->(_) { saved(t(".changed")) }
+      render_result result, form: :edit, success: ->(_) { saved(tone_t(".changed")) }
     end
 
     def destroy
       result = remove.call(actor: current_actor, user: own_user, ip: request.remote_ip)
-      render_result result, success: ->(_) { saved(t(".removed")) }
+      render_result result, success: ->(_) { saved(tone_t(".removed")) }
     end
 
     private

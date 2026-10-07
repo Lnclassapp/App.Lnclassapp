@@ -1,6 +1,8 @@
 # Jeu de données de mesure du chantier cache-ecrans-lourds, à l'échelle de la feuille de route (ADR-0039 §7) : 500
 # établissements et leurs ~34 000 classes, 4 000 enseignants, 40 000 élèves, 200 cours complets, leurs devoirs et
-# ~300 000 sessions d'exercice sur 60 jours, sur une base qui porte le référentiel de db/seeds.
+# ~300 000 sessions d'exercice sur 60 jours, sur une base qui porte le référentiel de db/seeds ; et le blog (ADR-0074) :
+# 30 articles publiés de 1 500 mots, chacun avec sa couverture et cinq images dans le texte, plus deux brouillons et un
+# archivé.
 #
 #   bin/rails runner script/perf/seed_dataset.rb
 #
@@ -18,7 +20,10 @@ module PerfDataset
   TEACHERS = Integer(ENV.fetch("PERF_TEACHERS", 4_000))
   STUDENTS = Integer(ENV.fetch("PERF_STUDENTS", 40_000))
   COURSES = Integer(ENV.fetch("PERF_COURSES", 200))
+  ARTICLES = Integer(ENV.fetch("PERF_ARTICLES", 30))
+  ARTICLE_IMAGES = 5
   FOCUS_CLASS_SIZE = 55
+  ASSIGNMENTS = 10
   BATCH = 5_000
   PIN = "2468".freeze
   # Contacts du jeu, hors de ceux de db/seeds/development.rb (…00000001).
@@ -77,6 +82,7 @@ module PerfDataset
     seed_sessions(students, assignments)
     seed_growth(adopting, teachers)
     seed_admin(adopting.first)
+    seed_blog
     elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
     log format("terminé en %.0f s", elapsed)
     report
@@ -202,11 +208,12 @@ module PerfDataset
     insert(ActionText::RichText, record_ids.map { { record_type:, record_id: it, name: "content", body:, created_at: now, updated_at: now } })
   end
 
+  # Énoncé et explication en texte brut (UDR-0017), comme à la saisie.
   def seed_questions(exercise_ids)
     question_ids = insert(Orm::Question, exercise_ids.flat_map do |exercise_id|
       (1..5).map do |position|
         { exercise_id:, position:, question_type: position == 1 ? "true_false" : "single_choice", created_at: now, updated_at: now,
-          content: "<p>Question #{position} : que vaut $x$ si $2x + 3 = 7$ ?</p>", explanation: "<p>On isole $x$.</p>" }
+          content: "Question #{position} : que vaut $x$ si $2x + 3 = 7$ ?", explanation: "On isole $x$." }
       end
     end, returning: %w[id])
     insert(Orm::Answer, answers_for(question_ids))
@@ -232,8 +239,8 @@ module PerfDataset
     end
   end
 
-  # 10 devoirs par classe peuplée (7 exercices, 2 fiches, 1 cours), 10 % archivés, sur 60 jours.
-  # → { classroom_id => [ [ assignment_id, [ exercise_id… ] ]… ] }
+  # 10 devoirs d'exercice par classe peuplée (ADR-0072 : seul l'exercice s'assigne), 10 % archivés, sur 60 jours.
+  # → { classroom_id => [ [ assignment_id, [ exercise_id ] ]… ] }
   def seed_assignments(classroom_ids, teachers, catalog)
     team = Orm::User.find_by!(contact: "0700000000").id
     by_classroom = teachers.values.flatten(1).each_with_object({}) { |(id, taught), map| taught.each { map[it] ||= id } }
@@ -242,26 +249,20 @@ module PerfDataset
       courses = catalog[[ level_id, series_id ]]
       next if courses.blank?
 
-      essentials = courses.flat_map { |course| course[:essentials].to_a }
-      targets = Array.new(7) { [ "Exercise", pick(pick(essentials).last) ] }.uniq +
-                essentials.sample(2, random: RNG).map { |essential_id, exercise_ids| [ "Essential", essential_id, exercise_ids ] } +
-                [ pick(courses).then { [ "Course", it[:course], it[:essentials].values.flatten ] } ]
-      [ id, targets.uniq { it.first(2) } ]
+      [ id, courses.flat_map { |course| course[:essentials].values.flatten }.sample(ASSIGNMENTS, random: RNG) ]
     end
-    rows = plans.flat_map do |classroom_id, targets|
-      targets.map do |type, assignable_id, *|
+    rows = plans.flat_map do |classroom_id, exercise_ids|
+      exercise_ids.map do |assignable_id|
         assigned_at = days_ago(60)
         archived = RNG.rand < 0.1
-        { public_id:, classroom_id:, assignable_type: type, assignable_id:, assigned_at:, assigned_by_id: by_classroom.fetch(classroom_id, team),
-          status: archived ? "archived" : "active", archived_at: (now if archived), archived_by_id: (team if archived),
-          created_at: assigned_at, updated_at: assigned_at }
+        { public_id:, classroom_id:, assignable_type: "Exercise", assignable_id:, assigned_at:,
+          assigned_by_id: by_classroom.fetch(classroom_id, team), status: archived ? "archived" : "active",
+          archived_at: (now if archived), archived_by_id: (team if archived), created_at: assigned_at, updated_at: assigned_at }
       end
     end
     ids = insert(Orm::ClassroomAssignment, rows, returning: %w[id]).each
     log "#{rows.size} devoirs dans #{plans.size} classes"
-    plans.to_h do |classroom_id, targets|
-      [ classroom_id, targets.map { |type, assignable_id, exercise_ids| [ ids.next, type == "Exercise" ? [ assignable_id ] : exercise_ids ] } ]
-    end
+    plans.to_h { |classroom_id, exercise_ids| [ classroom_id, exercise_ids.map { [ ids.next, [ it ] ] } ] }
   end
 
   # Chaque élève fait 6 exercices de ses devoirs, 1 ou 2 fois : 85 % terminés, 10 % en cours, 5 % abandonnés.
@@ -342,6 +343,43 @@ module PerfDataset
     log "150 demandes en attente, #{Orm::Referral.count} parrainages, #{Orm::ReferralShare.count} partages"
   end
 
+  # Le blog public (ADR-0074, UDR-0066) : ARTICLES publiés, puis deux brouillons et un archivé, signés par l'auteur des
+  # cours. Les lignes d'article_images n'ont pas de fichier : la page d'un article ne lit que leurs colonnes, seule la
+  # route des images (hors mesure) lirait le bucket. Le texte cite ses cinq images par sgid, comme Action Text l'enregistre.
+  def seed_blog
+    author = Orm::User.find_by!(contact: "0700000000").id
+    statuses = Array.new(ARTICLES, "published") + %w[draft draft archived]
+    image_ids = insert(Orm::ArticleImage, Array.new(statuses.size * (ARTICLE_IMAGES + 1)) do |index|
+      { public_id:, alt: "Illustration #{index + 1}", content_type: "image/webp", byte_size: 180_000, width: 1600, height: 1067,
+        created_at: now, updated_at: now }
+    end, returning: %w[id])
+    images = Orm::ArticleImage.where(id: image_ids).order(:id).each_slice(ARTICLE_IMAGES + 1).to_a
+    rows = statuses.each_with_index.map do |status, index|
+      title = "Réviser le BEPC, conseil #{index + 1}"
+      published_at = (now - (index + 1).days unless status == "draft")
+      { public_id:, slug: title.parameterize, title:, excerpt: "Une méthode simple pour réviser, semaine après semaine.",
+        cover_image_id: images[index].first.id, cover_alt: "Une élève qui révise", signature: index.even? ? "team" : "author",
+        status:, published_at:, archived_at: (now if status == "archived"), author_id: author, created_at: now, updated_at: now }
+    end
+    article_ids = insert(Orm::Article, rows, returning: %w[id])
+    insert(ActionText::RichText, article_ids.each_with_index.map do |id, index|
+      Orm::ArticleImage.where(id: images[index].map(&:id)).update_all(article_id: id)
+      { record_type: "Orm::Article", record_id: id, name: "body", body: article_body(images[index].drop(1)), created_at: now,
+        updated_at: now }
+    end)
+    log "#{ARTICLES} articles publiés, 2 brouillons, 1 archivé, #{image_ids.size} images"
+  end
+
+  # 1 500 mots en quinze paragraphes, un intertitre, et une image tous les trois paragraphes.
+  def article_body(images)
+    paragraphs = Array.new(15) { "<div>#{(%w[Révisez chaque jour un chapitre court puis refaites les exercices corrigés] * 10).join(' ')}.</div>" }
+    attachments = images.map do |image|
+      %(<action-text-attachment sgid="#{image.attachable_sgid}" content-type="image/webp" width="1600" height="1067">) +
+        "</action-text-attachment>"
+    end
+    "<h2>Le plan</h2>" + paragraphs.each_slice(3).zip(attachments).flatten.compact.join
+  end
+
   # La direction de l'établissement focus (ADR-0065).
   def seed_admin(focus)
     id = insert(Orm::User, [ user_row(contact: ADMIN_CONTACT, role: "school_admin", created_at: days_ago(30)) ], returning: %w[id]).first
@@ -351,7 +389,8 @@ module PerfDataset
 
   def report
     %w[schools classrooms users classroom_students teacher_classrooms courses essentials exercises questions answers
-       classroom_assignments exercise_sessions exercise_badges knowledge_gaps referrals referral_shares].each do |table|
+       classroom_assignments exercise_sessions exercise_badges knowledge_gaps referrals referral_shares articles
+       article_images].each do |table|
       log format("%-22s %9d", table, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{table}"))
     end
   end
