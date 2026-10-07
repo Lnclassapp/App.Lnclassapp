@@ -1,19 +1,20 @@
-# Rejoindre un établissement par son code depuis l'écran d'attente — GD-23 à GD-28, ADR-0071 §4.3, UDR-0056 §3.5
+# Rejoindre un établissement depuis l'écran d'attente : DRENA puis établissement — IE-18, ADR-0071 §4.3, ADR-0082 §4.3, UDR-0078 §3.9
 fr:
   activemodel:
     attributes:
       dtos/school/school_join_input:
-        school_code: "Code d'établissement"
+        drena_public_id: "DRENA"
+        school_public_id: "Établissement"
     errors:
       models:
         dtos/school/school_join_input:
           attributes:
-            school_code:
-              blank: "Saisissez le code de votre établissement."
-              invalid: "Code d'établissement invalide. Il compte 6 caractères, par exemple K7M-4QZ."
-              classroom_code: "Ce code est un code de classe. Demandez le code d'établissement à votre établissement."
-              inclusion: "Code d'établissement invalide. Vérifiez-le auprès de votre établissement."
+            drena_public_id:
+              blank: "Choisissez votre DRENA."
+            school_public_id:
+              blank: "Choisissez votre établissement."
+              inclusion: "Cet établissement ne peut pas être rejoint."
   identity:
     pending_school_joins:
       create:
-        welcome: "Bienvenue à %{school}. Sélectionnez vos classes."
+        welcome: "Bienvenue à %{school}."

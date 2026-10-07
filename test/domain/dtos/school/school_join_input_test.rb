@@ -2,36 +2,44 @@ require "test_helper"
 
 module Dtos
   module School
-    # ADR-0071 §4.3: the code an unattached teacher types on the waiting screen, normalised as at sign-up (ADR-0057).
+    # IE-18 (ADR-0082 §4.3, UDR-0078 §3.9): on the waiting screen, an unattached teacher chooses a DRENA, then one of its
+    # schools; no school code any more.
     class SchoolJoinInputTest < ActiveSupport::TestCase
-      def errors(school_code) = SchoolJoinInput.new(school_code:).tap(&:validate).errors
+      def input(**) = SchoolJoinInput.new(**)
+      def errors(**) = input(**).tap(&:validate).errors
 
-      test "un code saisi n'importe comment est normalisé ; la saisie brute reste pour le re-rendu" do
-        input = SchoolJoinInput.new(school_code: " k7m-4QZ ")
+      test "IE-18 : la DRENA et l'établissement choisis, par leurs identifiants publics" do
+        join = input(drena_public_id: "drena-abidjan-1", school_public_id: "sch_7Kq2")
 
-        assert input.valid?
-        assert_equal "k7m4qz", input.school_code
-        assert_equal " k7m-4QZ ", input.raw_school_code
-        assert_equal({ school_code: "k7m4qz" }, input.to_h)
+        assert join.valid?
+        assert_equal({ drena_public_id: "drena-abidjan-1", school_public_id: "sch_7Kq2" }, join.to_h)
       end
 
-      test "distingue un code absent, mal formé, ou un code de classe saisi par erreur" do
-        assert errors("").of_kind?(:school_code, :blank)
-        assert errors(nil).of_kind?(:school_code, :blank)
-        assert errors("k7m4q").of_kind?(:school_code, :invalid)
-        assert errors("KFM 37").of_kind?(:school_code, :classroom_code)
-        assert_not errors("KFM 37").of_kind?(:school_code, :invalid)
+      test "IE-18 : plus aucun code d'établissement" do
+        assert_not_respond_to input, :school_code
+        assert_raises(ActiveModel::UnknownAttributeError) { input(school_code: "k7m4qz") }
       end
 
-      test "sans saisie, la saisie brute est vide" do
-        assert_equal "", SchoolJoinInput.new.raw_school_code
+      test "une DRENA ou un établissement absent : blank sous son champ" do
+        assert errors(school_public_id: "sch-1").of_kind?(:drena_public_id, :blank)
+        assert errors(drena_public_id: "drena-1").of_kind?(:school_public_id, :blank)
+        assert errors(drena_public_id: "drena-1", school_public_id: "").of_kind?(:school_public_id, :blank)
       end
 
-      test "le message d'un code mal formé et d'un code refusé" do
-        assert_equal [ "Code d'établissement invalide. Il compte 6 caractères, par exemple K7M-4QZ." ],
-                     errors("k7m4q").messages_for(:school_code)
-        assert_equal "Code d'établissement invalide. Vérifiez-le auprès de votre établissement.",
-                     SchoolJoinInput.new.errors.generate_message(:school_code, :inclusion)
+      test "un identifiant forgé (octet nul, espaces, trop long) est oublié avant la base" do
+        join = input(drena_public_id: "drena 1", school_public_id: "sch\u00001")
+
+        assert_nil join.drena_public_id
+        assert_nil join.school_public_id
+        assert_nil input(school_public_id: "x" * 65).school_public_id
+        assert join.tap(&:validate).errors.of_kind?(:school_public_id, :blank)
+      end
+
+      test "les messages : choix manquants et établissement refusé, neutre" do
+        assert_equal [ "Choisissez votre DRENA." ], errors(school_public_id: "sch-1").messages_for(:drena_public_id)
+        assert_equal [ "Choisissez votre établissement." ], errors(drena_public_id: "drena-1").messages_for(:school_public_id)
+        assert_equal "Cet établissement ne peut pas être rejoint.",
+                     input.errors.generate_message(:school_public_id, :inclusion)
       end
     end
   end

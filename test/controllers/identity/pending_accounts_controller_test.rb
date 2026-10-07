@@ -19,8 +19,8 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{session_path}'][data-turbo-method=delete]", text: /Se déconnecter/
   end
 
-  # GD-22 (ADR-0071, UDR-0056 §3.5) changes this case: a teacher without a school and without request types a code.
-  test "a teacher without a school is offered to join one by its code" do
+  # GD-22 (ADR-0071), then IE-18 (ADR-0082): a teacher without a school and without request chooses one.
+  test "a teacher without a school is offered to join one" do
     sign_in_as create_user(role: "teacher")
 
     get pending_account_path
@@ -31,8 +31,10 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{new_join_code_path}']", 0
   end
 
-  test "GD-22: a detached teacher, still signed in, is held on the waiting screen and reads the code field" do
-    school = create_school
+  # IE-18 (ADR-0082 §4.3, UDR-0078 §3.9) replaces the code field of GD-22: the DRENA, then the school, as at sign-up.
+  test "IE-18: a detached teacher, still signed in, is held on the waiting screen and chooses a DRENA, no code field" do
+    abidjan = create_drena(name: "Abidjan 1")
+    school = create_school(drena: abidjan)
     teacher = create_teacher(school:)
     sign_in_as teacher
     Orm::TeacherSchool.where(teacher:).delete_all
@@ -46,18 +48,66 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#pending_account" do
       assert_select "h1", text: t("no_school.title")
       assert_select "p", text: t("no_school.description")
-      assert_select "form#school-join-form[action='#{pending_school_join_path}'][method=post]" do
-        assert_select "label[for=school_join_school_code]", text: /Code d'établissement/
-        assert_select "input#school_join_school_code[name='school_join[school_code]'][required][autocomplete=off]" \
-                      "[autocapitalize=characters][placeholder='K7M-4QZ'][aria-describedby=school_join_school_code_hint]" \
-                      ".font-mono.tracking-wider.uppercase"
-        assert_select "input#school_join_school_code[value]", 0
-        assert_select "#school_join_school_code_hint", text: t("school_code_hint")
+      assert_select "form#school-join-drena[action='#{pending_account_path}'][method=get]"
+      assert_select "form#school-join-form[action='#{pending_school_join_path}'][method=post]" \
+                    "[data-controller~='school--drena-schools']" do
+        assert_select "label[for=school_join_drena_public_id]", text: /DRENA/
+        assert_select "select#school_join_drena_public_id[name='school_join[drena_public_id]'][form=school-join-drena]" \
+                      "[data-action='change->school--drena-schools#load']" do
+          assert_select "option[value='']", text: t("drena_prompt")
+          assert_select "option[value=?]", abidjan.public_id, text: "Abidjan 1"
+        end
+        assert_select "noscript", text: /#{t('show_schools')}/
+        assert_select "turbo-frame#schools" do
+          assert_select "select#school_join_school_public_id[name='school_join[school_public_id]'][disabled][required]"
+          assert_select "#school_join_school_public_id_hint", text: "Choisissez d'abord votre DRENA."
+        end
         assert_select "button[type=submit].w-full", text: t("join")
       end
       assert_select "a[href='#{session_path}'][data-turbo-method=delete]", text: /Se déconnecter/
     end
+    assert_select "input[name*=school_code], #school_join_school_code", 0
+    assert_select "#pending_account", text: /Code d'établissement/, count: 0
     assert_select "#join_request_rejected", 0
+  end
+
+  test "IE-18: without JavaScript, the chosen DRENA comes back by GET and lists its active schools" do
+    abidjan = create_drena(name: "Abidjan 1")
+    classique = create_school(drena: abidjan, name: "Lycée Classique d'Abidjan")
+    create_school(drena: abidjan, name: "Lycée fermé", status: "inactive")
+    create_school(name: "Lycée de Bouaké")
+    sign_in_as create_teacher(school: nil)
+
+    get pending_account_path(school_join: { drena_public_id: abidjan.public_id })
+
+    assert_response :success
+    assert_select "select#school_join_drena_public_id option[selected][value=?]", abidjan.public_id
+    assert_select "turbo-frame#schools" do
+      assert_select "input[type=hidden][name='school_join[drena_public_id]'][value=?]", abidjan.public_id
+      assert_select "select#school_join_school_public_id:not([disabled]) option[value]:not([value=''])", 1
+      assert_select "select#school_join_school_public_id option[value=?]", classique.public_id, text: "Lycée Classique d'Abidjan"
+    end
+    assert_select "#school_join_school_public_id_error", 0
+  end
+
+  test "IE-18: the frame of the schools is fed by the waiting screen itself, in the scope of the join form" do
+    sign_in_as create_teacher(school: nil)
+
+    get pending_account_path
+
+    url = pending_account_path(school_join: { drena_public_id: "__drena__" })
+    assert_select "form#school-join-form[data-school--drena-schools-url-value=?]", url
+  end
+
+  test "IE-18: an unknown DRENA lists nothing; a school code in the address pre-fills nothing" do
+    sign_in_as create_teacher(school: nil)
+
+    get pending_account_path(school_join: { drena_public_id: "inconnue" }, school_code: "k7m4qz")
+
+    assert_response :success
+    assert_select "select#school_join_school_public_id[disabled]"
+    assert_select "input[name*=school_code]", 0
+    assert_select "#pending_account", text: /K7M-4QZ/i, count: 0
   end
 
   test "GD-22: a teacher whose request was approved, then detached, gets the form, without the request's message" do
@@ -83,7 +133,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#school-join-form"
   end
 
-  test "GD-22: a teacher whose request is pending reads it, without the code form" do
+  test "GD-22: a teacher whose request is pending reads it, without the join form" do
     teacher = create_teacher(school: nil)
     create_join_request(teacher:)
     sign_in_as teacher
@@ -92,20 +142,6 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "h1", text: I18n.t("identity.pending_accounts.show.join_request.pending.title")
     assert_select "form#school-join-form", 0
-  end
-
-  test "GD-28: the code of the invitation link is pre-filled, shown « K7M-4QZ »; a malformed one arrives as is" do
-    sign_in_as create_teacher(school: nil)
-
-    get pending_account_path(school_code: "k7m4qz")
-
-    assert_select "input#school_join_school_code[value='K7M-4QZ']"
-    assert_select "#school_join_school_code_error", 0
-
-    get pending_account_path(school_code: "zz9")
-
-    assert_select "input#school_join_school_code[value='zz9']"
-    assert_select "#school_join_school_code_error", 0
   end
 
   test "a teacher attached to a school who opens the screen reads the generic teacher text, without the form" do

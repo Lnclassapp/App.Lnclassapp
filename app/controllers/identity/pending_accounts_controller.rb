@@ -1,10 +1,24 @@
 # 🌐 DELIVERY · Identity::PendingAccountsController
 # Rôle : écran de sortie d'un compte sans accueil (élève sans classe, enseignant sans école ou en attente) ; ne redirige jamais
-# ADR  : 0030, 0036, 0040, 0063, 0071 · UDR : 0050, 0056 · l'élève qui a quitté sa classe y trouve son historique (lot R)
+# ADR  : 0030, 0036, 0040, 0063, 0071, 0082 · UDR : 0050, 0056, 0078 · l'élève qui a quitté sa classe y trouve son historique (lot R)
 module Identity
   class PendingAccountsController < AuthenticatedController
     CASES = %i[student teacher].freeze
     PENDING = "pending".freeze
+
+    # Listes DRENA → établissements de l'écran (UDR-0078 §3.9), aussi pour son re-rendu par PendingSchoolJoinsController.
+    module SchoolChoice
+      private
+
+      # Seule une DRENA connue est cherchée (comme School::DrenaSchoolsController) : un identifiant forgé ne touche pas la base.
+      def load_school_choice(drena_public_id)
+        options = Queries::School::SchoolOptionsQuery.new
+        drenas = options.drenas
+        @drena_options = drenas.map { [ it.name, it.public_id ] }
+        @school_options = drenas.any? { it.public_id == drena_public_id } ? options.schools_for(drena_public_id:) : []
+      end
+    end
+    include SchoolChoice
 
     skip_before_action :hold_pending_teacher
 
@@ -14,18 +28,14 @@ module Identity
       return unless @case == :teacher
 
       @join_request = Queries::School::JoinRequestsQuery.new.status_for(teacher_id: current_actor.user_id)
-      # Sans établissement ni demande en attente : le code d'établissement (ADR-0071), pré-rempli par le lien /e/<code>.
+      # Sans établissement ni demande en attente : DRENA puis établissement (ADR-0082 §4.3). Sans JavaScript, la DRENA
+      # choisie revient ici en GET (formulaire school-join-drena) ; avec, ce même écran nourrit le frame « schools ».
       return unless current_actor.school_id.nil? && @join_request&.status != PENDING
 
-      @school_join = Dtos::School::SchoolJoinInput.new(school_code: prefill(params[:school_code].to_s))
-    end
-
-    private
-
-    # Un code bien formé s'affiche « K7M-4QZ » ; un autre arrive tel quel, et reçoit son erreur à l'envoi (UDR-0056 §3.5).
-    def prefill(raw)
-      code = Entities::School::SchoolCode.normalize(raw)
-      Entities::School::SchoolCode.valid?(code) ? Entities::School::SchoolCode.display(code) : raw
+      @school_join = Dtos::School::SchoolJoinInput.new(
+        drena_public_id: params.permit(school_join: :drena_public_id).dig(:school_join, :drena_public_id)
+      )
+      load_school_choice(@school_join.drena_public_id)
     end
   end
 end
