@@ -66,4 +66,15 @@ class AddTeacherArrivalAndSchoolInviteTokensMigrationTest < ActiveSupport::TestC
       migrate(:up)
     end
   end
+
+  test "running up again deduces nothing: a teacher still on code with a join request made after the migration keeps code" do
+    requested = create_teacher(school: nil, joined_via: "code")
+    create_join_request(teacher: requested)
+    linked = create_teacher(joined_via: "code")
+    create_referral(referee: linked)
+
+    migrate(:up)
+
+    assert_equal({ requested: "code", linked: "code" }, channels(requested:, linked:))
+  end
 end
