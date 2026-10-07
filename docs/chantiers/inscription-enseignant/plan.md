@@ -36,6 +36,8 @@ Pourquoi un Lot D : retirer `/e/:code`, `/teacher-signup/without-code` et « Cha
                      `app/helpers/components_helper.rb` · `app/views/components/_subject_bubble.html.erb` *(option `link_html:` de `ui_subject_bubble`, vide par défaut)*
                      `config/routes/identity.rb` *(ajout seulement : `get "i/:token", to: "identity/teacher_registrations#invite", as: :teacher_invite_link`)*
                      `test/support/factories/identity.rb` *(`create_teacher` accepte `joined_via:`)*
+                     `test/domain/use_cases/identity/register_teacher_test.rb` · `test/domain/use_cases/identity/register_pending_teacher_test.rb` *(faux dépôts : `create_teacher` accepte `joined_via:` ; ajout du 2026-10-07, découvert par l'exécutant du Lot 0)*
+                     `test/infrastructure/orm/models_test.rb` · `db/seeds/development.rb` · `db/seeds/demo/saint_michel.rb` *(écritures de `teacher_profiles` : `joined_via: "standard"` ; même ajout)*
                      `test/db/add_teacher_arrival_and_school_invite_tokens_migration_test.rb`
                      `test/db/growth_migrations_test.rb` *(nouvelle migration dans `LATER`)*
                      `test/db/schema_constraints_test.rb`
@@ -228,7 +230,9 @@ Consignes à chaque agent de lot :
 | `app/domain/use_cases/identity/register_teacher.rb` | Lot 0 (une ligne), puis Lot A |
 | `app/domain/use_cases/identity/register_pending_teacher.rb` | Lot 0 (une ligne), puis Lot D (suppression) |
 | `app/domain/ports/identity/registration_repository_port.rb` · `app/infrastructure/repositories/identity/registration_repository.rb` | Lot 0 |
-| `test/support/factories/identity.rb` | Lot 0 |
+| `test/support/factories/identity.rb` · `test/infrastructure/orm/models_test.rb` · `db/seeds/development.rb` · `db/seeds/demo/saint_michel.rb` | Lot 0 |
+| `test/domain/use_cases/identity/register_teacher_test.rb` | Lot 0 (faux dépôt), puis Lot A |
+| `test/domain/use_cases/identity/register_pending_teacher_test.rb` | Lot 0 (faux dépôt), puis Lot D (suppression) |
 | `app/helpers/components_helper.rb` · `app/views/components/_subject_bubble.html.erb` | Lot 0 |
 | `app/views/classroom/teacher_homes/_course_levels.html.erb` · `config/locales/classroom/teacher_homes.fr.yml` | Lot B |
 | `config/locales/identity/teacher_registrations.fr.yml` | Lot A |
