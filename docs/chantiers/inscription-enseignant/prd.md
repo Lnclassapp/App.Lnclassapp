@@ -13,7 +13,7 @@ Un enseignant peut s'inscrire de trois façons (code d'établissement, choix man
 | Visiteur (futur enseignant) | S'inscrire par la voie standard ; s'inscrire par un lien d'invitation valable, l'établissement déjà choisi ; quitter l'établissement du lien (« Ce n'est pas votre établissement ? ») pour la voie standard | Saisir un code d'établissement ; choisir un établissement en brouillon ou désactivé ; s'inscrire avec un numéro qui a déjà un compte |
 | Teacher (connecté) | Copier et partager son lien « Inviter un collègue » (fermé sans établissement actif, comme aujourd'hui) | Ouvrir l'inscription ou un lien d'invitation : il est renvoyé vers son accueil (`GET`) ou reçoit 403 (`POST`) ; rejoindre un second établissement par un lien |
 | SchoolStaff (direction) | Copier et partager le lien d'invitation de son établissement, sans code affiché | « Changer le lien » (retiré) |
-| Team | Copier le lien d'invitation d'un établissement depuis sa fiche ; voir la voie d'arrivée d'un enseignant | — « Régénérer le code » reste, pour l'inscription de la direction, jusqu'au chantier `inscription-direction-sans-code` |
+| Team | Copier le lien d'invitation d'un établissement depuis sa fiche ; voir la voie d'arrivée des enseignants dans la liste « Enseignants » de la fiche (il n'existe pas de fiche enseignant) | — « Régénérer le code » reste, pour l'inscription de la direction, jusqu'au chantier `inscription-direction-sans-code` |
 | Student, Parent | Rien ne change | — |
 
 Règles d'autorisation : l'inscription est publique et refusée à toute personne connectée (règle existante de l'inscription). « Inviter un collègue » reste sous `InviteColleaguePolicy` ; le lien de la direction sous les règles de l'espace direction ; celui de l'équipe sous la gestion des établissements.
@@ -44,7 +44,7 @@ Règles d'autorisation : l'inscription est publique et refusée à toute personn
 | Nom complet avec espaces multiples | Normalisé (`squish`) ; casse saisie gardée (ADR-0037) |
 | Caractère interdit dans le nom (chiffre, symbole) | 422, message existant de nom invalide |
 | Sans JavaScript | Pas d'aperçu en direct ; « Corriger » reste accessible ; le serveur découpe le nom complet |
-| Numéro déjà inscrit | 422 « Ce numéro a déjà un compte Lnclass. » avec « Se connecter », sans révéler le rôle |
+| Numéro déjà inscrit | 422, message existant « Ce numéro est déjà utilisé. » sous le champ, sans révéler le rôle |
 | DRENA non choisie, ou établissement absent de la DRENA, en brouillon ou désactivé | 422, message sous le champ ; aucun compte créé |
 | Lien d'invitation inconnu, d'un établissement désactivé, ou d'un collègue retiré ou supprimé | La page standard s'ouvre avec l'alerte « Ce lien n'est plus valable. Choisissez votre établissement. » ; voie « standard » |
 | « Ce n'est pas votre établissement ? » depuis un lien | La page standard s'ouvre sans établissement ; voie « standard » ; pas de parrainage |
@@ -122,7 +122,7 @@ Alors la page est re-rendue en 422 et aucun compte n'est créé
 # IE-12 — numéro déjà inscrit
 Étant donné un compte existant (enseignant, élève ou direction) sur le numéro 0700000001
 Quand un visiteur s'inscrit avec ce numéro
-Alors la page est re-rendue en 422 avec « Ce numéro a déjà un compte Lnclass. » et « Se connecter »
+Alors la page est re-rendue en 422 avec « Ce numéro est déjà utilisé. » sous le champ
 Et le message ne révèle pas le rôle du compte existant
 
 # IE-13 — personne connectée
@@ -138,8 +138,8 @@ Alors leur rattachement est inchangé
 Et leur voie d'arrivée vaut respectivement « code », « standard » et « lien d'un collègue »
 
 # IE-15 — voie visible par l'équipe
-Quand l'équipe ouvre la fiche d'un enseignant
-Alors elle lit sa voie d'arrivée (et le collègue, pour un lien d'un collègue)
+Quand l'équipe ouvre la fiche d'un établissement
+Alors chaque ligne de la liste « Enseignants » montre la voie d'arrivée (et le collègue, pour un lien d'un collègue)
 
 # IE-16 — direction inchangée
 Quand une direction s'inscrit par /school-staff-signup avec le code d'établissement
@@ -148,11 +148,19 @@ Alors son inscription fonctionne comme avant ce chantier
 
 ## 5. Modélisation préliminaire
 
-*À compléter après l'exploration du code existant.*
+Établie après exploration du code existant (contexte `identity`, avec `school` pour le rattachement).
+
+| Couche | Éléments prévus |
+|---|---|
+| Domaine | **Un seul use case** `UseCases::Identity::RegisterTeacher`, qui absorbe `RegisterPendingTeacher` : policy `RegisterTeacherPolicy` (inchangée) → DTO → invitation résolue (ou aucune) → établissement actif de la DRENA (ou celui de l'invitation) → `create_teacher` → `attach_teacher(primary: true)` → parrainage si lien d'un collègue → session. **Plus de demande en attente** (`school_join_requests`) pour une nouvelle inscription. Nouveau DTO `TeacherRegistrationInput` : `full_name`, `last_name`/`first_name` (correction), `gender`, `contact`, `pin`, `pin_confirmation`, `drena_public_id`, `school_public_id`, `material_slug`, `invite_token` ; plus de `school_code` ni de `national_code`. Nouvelle entité-valeur `Entities::Identity::FullName` (découpage « premier mot = nom »). Nouvelle entité-valeur `Entities::Identity::ArrivalChannel` (`standard`, `colleague`, `direction`, `team`, `code`). Nouveau port de lecture des liens d'invitation (`resolve(token:)` → établissement, émetteur, voie). |
+| Infrastructure | Migration : `teacher_profiles.joined_via` (CHECK sur les cinq voies, sur le modèle de `school_staffs.joined_via`) avec reprise de l'historique ; table des liens d'invitation d'établissement (direction, équipe) à jeton stable. Repository des liens d'invitation ; `RegistrationRepository#create_teacher` reçoit la voie. `ReferralQuery`, `OwnSchoolQuery`, `SchoolDetailQuery` exposent le jeton du lien au lieu du code ; `SchoolDetailQuery#teachers` expose la voie. `test/db/growth_migrations_test.rb` : la nouvelle migration s'ajoute à `LATER`. |
+| Delivery | `GET/POST /teacher-signup` (une seule voie) ; `GET /i/:token` (lien d'invitation) ; **retirés** : `GET /e/:code`, `GET/POST /teacher-signup/without-code`, `PATCH /school-admin/school/link` (« Changer le lien »). `PendingTeacherRegistrationsController` disparaît. `/drenas/:drena_public_id/schools` inchangé. |
+| UI | Formulaire réordonné (Établissement → Vous → Code secret), champ « Nom complet » avec aperçu et « Corriger » (contrôleur Stimulus d'aperçu, nouveau), bandeau de l'établissement choisi par lien, alerte « lien plus valable ». Blocs de lien : « Inviter un collègue » (page et carte latérale), espace direction (sans code ni « Changer le lien »), fiche équipe (lien d'invitation à côté du code, qui reste pour la direction). Liste « Enseignants » de la fiche équipe : voie d'arrivée. |
 
 ## 6. Décisions rattachées
 
-*À compléter.*
+- **ADR-0082** (à écrire) — inscription enseignant en deux voies : liens d'invitation à jeton sans code d'établissement, voie d'arrivée enregistrée, nom complet saisi en un champ. Amende ADR-0037 (saisie seulement, stockage inchangé), ADR-0057 et ADR-0063 (côté enseignant), ADR-0071 (« Changer le lien »), ADR-0073 (plus de demande validée automatiquement).
+- **UDR-0078** (à écrire) — page d'inscription enseignant réordonnée, nom complet avec aperçu, bandeau du lien ; blocs de lien de l'enseignant, de la direction et de l'équipe ; voie dans la liste « Enseignants ». Remplace UDR-0044, amende UDR-0024, UDR-0050, UDR-0056.
 
 ## 7. Mesures
 
