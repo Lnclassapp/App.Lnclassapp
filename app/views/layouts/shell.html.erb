@@ -1,12 +1,16 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
 <%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile) ; exige helper_method :shell_user (NavigationHelper::ShellUser) %>
-<%# UDR  : 0006 %>
+<%# UDR  : 0006, 0078 %>
 <% content_for :body do %>
   <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white"><%= t(".skip") %></a>
   <%= render "shared/navigation/header", user: shell_user %>
   <%= render "shared/navigation/sidebar", user: shell_user %>
   <main id="main" tabindex="-1" class="pb-28 focus:outline-none lg:pb-12 lg:pl-rail">
     <div class="mx-auto max-w-page px-gutter py-6 lg:px-8 lg:py-8" data-bleed>
+      <%# UDR-0078 §3.1 : bandeau d'installation, élève et enseignant seulement, caché tant que le navigateur ne l'appelle pas %>
+      <% if shell_user.role.to_s.in?(%w[student teacher]) %>
+        <%= render "shared/navigation/install_banner", role: shell_user.role.to_s %>
+      <% end %>
       <%= yield %>
     </div>
   </main>

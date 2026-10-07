@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | en cours |
 | **Ouvert le** | 2026-10-07 |
 | **Branche** | `ccr-e4a51f57-9ve9og` *(branche imposée par la session ; `feature/installation-pwa` selon la convention)* |
 | **Programme** | `refonte-application`, vague V4 (ID-26, TR-24, TR-25), avancée à la demande du porteur le 2026-10-07 |

@@ -69,5 +69,9 @@ module AppLnclassapp
     # Amendement du 2026-10-07 : seuls les hôtes de la production s'indexent. Toute autre adresse (Staging, Develop,
     # domaine Railway, poste local) est fermée aux moteurs de recherche, sans variable à poser : un oubli ne l'ouvre pas.
     config.x.indexed_hosts = %w[lnclass.com www.lnclass.com].freeze
+
+    # ADR-0082 §4.1 : couleurs de l'app installée (manifeste, barre d'état), le bleu de marque pour tous les rôles. Une
+    # fiche d'application ne lit pas les tokens CSS : la valeur vit ici, hors des vues (UDR-0005, pas d'hexadécimal).
+    config.x.pwa = { theme_color: "#00a0ff", background_color: "#ffffff" }.freeze
   end
 end

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
 # Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur, anonymise un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082
 module Repositories
   module Identity
     class UserRepository
@@ -40,6 +40,12 @@ module Repositories
       # Le secret aléatoire n'est ni rendu ni journalisé : plus personne ne connaît le PIN du compte.
       def anonymize(user_id:, first_name:, last_name:, at:)
         Orm::User.find(user_id).update!(first_name:, last_name:, contact: nil, pin: SecureRandom.base58(32), anonymized_at: at)
+        true
+      end
+
+      # ADR-0082 §4.3 : une seule colonne, sans toucher updated_at (ce n'est pas une modification du compte).
+      def mark_app_opened(user_id:, at:)
+        Orm::User.where(id: user_id).update_all(app_opened_at: at)
         true
       end
 

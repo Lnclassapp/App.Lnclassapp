@@ -1,4 +1,4 @@
-# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068, UDR-0071, UDR-0074
+# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068, UDR-0071, UDR-0074, UDR-0078
 fr:
   layouts:
     shell:
@@ -34,6 +34,22 @@ fr:
         label: "Navigation principale"
         more: "Plus"
         more_label: "Plus de destinations : %{entries}"
+      # UDR-0078 §3.1 : bandeau d'installation, élève (tutoiement) et enseignant (vouvoiement), dans le shell
+      install_banner:
+        title:
+          student: "Installe Lnclass sur ton téléphone"
+          teacher: "Installez Lnclass sur votre téléphone"
+        body:
+          student: "Retrouve tes cours et tes exercices en un geste, depuis ton écran d'accueil."
+          teacher: "Retrouvez vos classes en un geste, depuis votre écran d'accueil."
+        ios_share_html:
+          student: "Touche <strong>Partager</strong>"
+          teacher: "Touchez <strong>Partager</strong>"
+        ios_add_html:
+          student: "Puis <strong>Sur l'écran d'accueil</strong>"
+          teacher: "Puis <strong>Sur l'écran d'accueil</strong>"
+        install: "Installer"
+        later: "Plus tard"
     home:
       skeleton:
         greeting: "Bonjour, %{name}"

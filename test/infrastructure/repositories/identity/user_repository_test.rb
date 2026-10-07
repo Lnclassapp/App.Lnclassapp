@@ -17,6 +17,17 @@ module Repositories
         end
       end
 
+      test "mark_app_opened dates the last opening from the installed app, and only on that account (ADR-0082 §4.3)" do
+        student = create_student
+        other = create_student
+        at = Time.zone.parse("2026-10-07 08:15:00")
+
+        assert_nil Orm::User.find(student.id).app_opened_at
+        assert @repository.mark_app_opened(user_id: student.id, at:)
+        assert_equal at, Orm::User.find(student.id).app_opened_at
+        assert_nil Orm::User.find(other.id).app_opened_at
+      end
+
       test "an unknown account is nil" do
         assert_nil @repository.find(id: 0)
         assert_nil @repository.find_by_public_id(public_id: "inconnu")

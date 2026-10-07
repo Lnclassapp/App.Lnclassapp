@@ -26,6 +26,8 @@ Le Lot 0 gèle le contrat `mark_app_opened(user_id:, at:) → true`. Les lots ve
 - **Couche**       : infrastructure + domaine (contrat) + fichiers partagés
 - **Fichiers**     : `db/migrate/<horodatage>_add_app_opened_at_to_users.rb` · `db/schema.rb`
                      `app/domain/ports/identity/user_repository_port.rb` *(ajout de `mark_app_opened`, `NotImplementedError`)*
+                     `app/infrastructure/repositories/identity/user_repository.rb` *(`mark_app_opened` seul : le test d'architecture `PortContractsTest` exige que l'adaptateur couvre tout le port dès qu'il change — remonté du Lot C pendant l'exécution)*
+                     `config/application.rb` *(`config.x.pwa` : couleurs de la fiche d'application ; le test `DesignTokensTest` refuse l'hexadécimal dans les vues)*
                      `config/routes.rb` *(`get "manifest" => "rails/pwa#manifest", as: :pwa_manifest` et `get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker`)*
                      `app/views/layouts/application.html.erb` *(balise `<link rel="manifest">`, `meta theme-color`)*
                      `app/views/layouts/shell.html.erb` *(`render "shared/navigation/install_banner", role:` pour `student` et `teacher`, premier enfant de `[data-bleed]`)*
@@ -35,7 +37,7 @@ Le Lot 0 gèle le contrat `mark_app_opened(user_id:, at:) → true`. Les lots ve
                      `public/icon-192.png` · `public/icon-maskable.png` *(générés depuis le logo officiel)*
 - **Dépend de**    : —
 - **Test associé** : `test/routing/pwa_routing_test.rb` (les deux routes répondent) · `test/infrastructure/repositories/identity/user_repository_test.rb` (la colonne existe et est nulle par défaut) · `test/i18n/` existant (aucune clé manquante)
-- **Done quand**   : `bin/rails test` passe ; les deux routes PWA répondent 200 ; une page élève contient un `#install_banner` vide et caché ; le contrat du port est gelé
+- **Done quand**   : `bin/rails test` passe ; les deux routes PWA répondent 200 ; le layout déclare le manifeste ; le shell élève et enseignant rend le partial du bandeau (vide) ; le contrat du port est gelé et implémenté
 
 ---
 
@@ -68,7 +70,7 @@ Le Lot 0 gèle le contrat `mark_app_opened(user_id:, at:) → true`. Les lots ve
 
 - **Couche**       : domaine + infrastructure + delivery
 - **Fichiers**     : `app/domain/use_cases/identity/record_app_open.rb` *(ADR-0082 §4.3)*
-                     `app/infrastructure/repositories/identity/user_repository.rb` *(`mark_app_opened` ; `anonymize` remet `app_opened_at` à `NULL`)*
+                     `app/infrastructure/repositories/identity/user_repository.rb` *(`anonymize` remet `app_opened_at` à `NULL` ; `mark_app_opened` est livré par le Lot 0)*
                      `app/controllers/homepage_controller.rb` *(appelle le use case si `params[:source] == "app"` et un compte est connecté, puis redirige comme aujourd'hui)*
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/identity/record_app_open_test.rb` (pose l'heure de l'horloge injectée ; un échec du port est journalisé et n'empêche pas la suite) · `test/infrastructure/repositories/identity/user_repository_test.rb` (`mark_app_opened` ; l'anonymisation efface la colonne) · `test/controllers/homepage_controller_test.rb` (CA-10 : élève sur `/?source=app` → colonne posée et redirection vers son accueil ; visiteur → page publique, rien d'écrit ; `source=autre` → rien d'écrit)
@@ -125,7 +127,8 @@ Aucun critère orphelin.
 | `app/javascript/application.js` | Lot A |
 | `app/views/pwa/*` · `public/offline.*` · `app/javascript/pwa.js` | Lot A |
 | `app/javascript/controllers/install_controller.js` | Lot B |
-| `app/infrastructure/repositories/identity/user_repository.rb` | Lot C |
+| `app/infrastructure/repositories/identity/user_repository.rb` | Lot 0 (`mark_app_opened`) puis Lot C (`anonymize`), séquentiels |
+| `config/application.rb` | Lot 0 |
 | `app/controllers/homepage_controller.rb` | Lot C |
 | `app/infrastructure/queries/school/team_dashboard_query.rb` | Lot D |
 | `app/views/teams/dashboards/_key_figures.html.erb` | Lot D |
