@@ -7,6 +7,7 @@
   --mute: #5f6470;
   --accent: #00a0ff;
   --accent-strong: #0070b3;
+  --on-accent: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,6 +16,7 @@
     --ink: #eef1f5;
     --mute: #9aa3b0;
     --accent-strong: #7fd0ff;
+    --on-accent: #0f1218;
   }
 }
 
@@ -63,14 +65,14 @@ body {
   min-height: 48px;
   padding: 0 24px;
   border-radius: 9999px;
-  background: var(--accent);
-  color: #ffffff;
+  background: var(--accent-strong);
+  color: var(--on-accent);
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
 }
 
 .offline-retry:focus-visible {
-  outline: 3px solid var(--accent-strong);
+  outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
