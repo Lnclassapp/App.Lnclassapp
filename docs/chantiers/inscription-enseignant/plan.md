@@ -38,6 +38,8 @@ Pourquoi un Lot D : retirer `/e/:code`, `/teacher-signup/without-code` et « Cha
                      `test/support/factories/identity.rb` *(`create_teacher` accepte `joined_via:`)*
                      `test/domain/use_cases/identity/register_teacher_test.rb` · `test/domain/use_cases/identity/register_pending_teacher_test.rb` *(faux dépôts : `create_teacher` accepte `joined_via:` ; ajout du 2026-10-07, découvert par l'exécutant du Lot 0)*
                      `test/infrastructure/orm/models_test.rb` · `db/seeds/development.rb` · `db/seeds/demo/saint_michel.rb` *(écritures de `teacher_profiles` : `joined_via: "standard"` ; même ajout)*
+                     `test/infrastructure/repositories/identity/registration_repository_test.rb` *(`joined_via:` écrit ; même ajout)*
+                     `app/infrastructure/repositories/identity/invite_link_repository.rb` · `test/infrastructure/repositories/identity/invite_link_repository_test.rb` *(déplacés du Lot A : `test/architecture/port_contracts_test.rb` exige un adaptateur pour chaque port)*
                      `test/db/add_teacher_arrival_and_school_invite_tokens_migration_test.rb`
                      `test/db/growth_migrations_test.rb` *(nouvelle migration dans `LATER`)*
                      `test/db/schema_constraints_test.rb`
@@ -68,7 +70,6 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 - **Couche**       : domaine + infrastructure + delivery + ui
 - **Fichiers**     : `app/domain/use_cases/identity/register_teacher.rb` *(réécrit : absorbe la voie sans code, résout le jeton, rattache, `joined_via`)*
                      `app/domain/dtos/identity/teacher_registration_input.rb` *(`full_name`, correction, `drena_public_id`, `school_public_id`, `invite_token` ; plus de `school_code` ni de `ref`)*
-                     `app/infrastructure/repositories/identity/invite_link_repository.rb`
                      `app/infrastructure/queries/school/school_preview_query.rb` *(nom et DRENA d'un établissement actif, par identifiant)*
                      `app/controllers/identity/teacher_registrations_controller.rb` *(`new`, `create`, `invite` ; plus de `with_code`)*
                      `app/views/identity/teacher_registrations/new.html.erb`
@@ -81,7 +82,6 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
                      `config/locales/identity/teacher_registrations.fr.yml`
                      `test/domain/use_cases/identity/register_teacher_test.rb`
                      `test/domain/dtos/identity/teacher_registration_input_test.rb`
-                     `test/infrastructure/repositories/identity/invite_link_repository_test.rb`
                      `test/infrastructure/queries/school/school_preview_query_test.rb`
                      `test/controllers/identity/teacher_registrations_controller_test.rb`
                      `test/system/identity/teacher_signup_test.rb`
