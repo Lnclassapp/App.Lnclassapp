@@ -37,9 +37,11 @@ module Repositories
         ::Shared::Result.failure(:conflict, errors: TAKEN)
       end
 
-      # Le secret aléatoire n'est ni rendu ni journalisé : plus personne ne connaît le PIN du compte.
+      # Le secret aléatoire n'est ni rendu ni journalisé : plus personne ne connaît le PIN du compte. Aucune trace d'usage
+      # n'est gardée (ADR-0036) : l'heure de la dernière ouverture depuis l'app installée est oubliée (ADR-0082 §4.3).
       def anonymize(user_id:, first_name:, last_name:, at:)
-        Orm::User.find(user_id).update!(first_name:, last_name:, contact: nil, pin: SecureRandom.base58(32), anonymized_at: at)
+        Orm::User.find(user_id).update!(first_name:, last_name:, contact: nil, pin: SecureRandom.base58(32), anonymized_at: at,
+                                        app_opened_at: nil)
         true
       end
 
