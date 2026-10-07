@@ -95,7 +95,11 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster details", text: /#{I18n.t("#{scope}.roster.last_score_tip")}/
     assert_select "#classroom_roster li", 2
     assert_select "#student_#{awa.public_id}", text: /Awa Bamba/
-    assert_select "#student_#{awa.public_id}", text: /01 02 03 04 05/
+    # IE-22 (UDR-0078 §3.8 ter) : le numéro masqué, tel que la requête le rend ; le numéro complet nulle part.
+    assert_select "#student_#{awa.public_id} [title=?][aria-label=?]", I18n.t("#{scope}.roster.contact_masked"),
+                  I18n.t("#{scope}.roster.contact_masked"), text: "01 •• •• •• 05"
+    assert_no_match(/0102030405|01 02 03 04 05/, response.body)
+    assert_select "#classroom_roster a[href^='tel:'], #classroom_roster [data-controller~=clipboard]", 0
     assert_select "#student_#{awa.public_id}", text: /85 %/
     assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']",
                   text: I18n.t("#{scope}.roster.see_result")
@@ -107,6 +111,28 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster form[action='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
     assert_select "#classroom_roster", text: /#{I18n.t("#{scope}.roster.no_score")}/
     assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
+  end
+
+  test "IE-22 : quelle que soit la voie de l'enseignant, et pour l'équipe, le numéro d'un élève reste masqué" do
+    student = create_student(classroom: @classroom, contact: "0701020304")
+    # La connexion est limitée à 5 essais par minute : les voies qui voyaient tout sous Q22 (collègue, ancien code), une
+    # voie sans preuve, et l'équipe. La requête ne lit pas la voie : elle masque pour tout lecteur (ClassroomOverviewQueryTest).
+    readers = %w[colleague code standard].map do |channel|
+      create_teacher(school: @school, classrooms: [ @classroom ]).tap do
+        Orm::TeacherProfile.where(user_id: it.id).update_all(joined_via: channel)
+      end
+    end
+
+    (readers + [ create_team_member ]).each do |reader|
+      sign_in_as reader
+      get classroom_path(@classroom.public_id)
+
+      assert_response :success
+      assert_select "#student_#{student.public_id}", text: /07 •• •• •• 04/
+      assert_no_match(/0701020304|07 01 02 03 04/, response.body)
+      assert_select "#classroom_roster a[href^='tel:']", 0
+      sign_out
+    end
   end
 
   test "jours de séance renseignés : « Vos jours de séance : lundi, jeudi » et « Modifier » dans le menu ⋮, vers le frame modal" do
