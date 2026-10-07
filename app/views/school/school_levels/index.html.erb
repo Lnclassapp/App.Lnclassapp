@@ -1,0 +1,25 @@
+<%# 🌐 UI · school/school_levels/index — frame « picker_levels » de la cascade élève : niveaux qui ont une classe active %>
+<%# Rôle : servi seul au choix d'un établissement, ou rendu dans le formulaire (scope de ses champs) ; vide, introuvable, erreur ou liste %>
+<%# ADR  : 0062, 0083 · UDR : 0079 (§3.3) %>
+<%# locals: (levels:, registration: nil, scope: :student_registration, rate_limited: false) -%>
+<% page_title t(".page_title") %>
+<%= turbo_frame_tag "picker_levels", class: "block transition-opacity aria-busy:opacity-50", "aria-live": "polite",
+                                     data: { "classroom--class-picker-target": "levels",
+                                             action: "turbo:frame-missing->classroom--class-picker#missing " \
+                                                     "turbo:fetch-request-error->classroom--class-picker#missing " \
+                                                     "turbo:frame-load->classroom--class-picker#sync" } do %>
+  <% if rate_limited %>
+    <%= ui_error_state title: t("classroom.student_registrations.class_picker.load_error"),
+                       message: t("classroom.student_registrations.class_picker.rate_limited"),
+                       retry_href: request.fullpath, retry_label: t("classroom.student_registrations.class_picker.retry") %>
+  <% elsif levels&.empty? %>
+    <%= ui_empty_state title: t("classroom.student_registrations.class_picker.not_found_title"),
+                       description: t("classroom.student_registrations.class_picker.not_found_description"), icon: "academic-cap" %>
+  <% elsif levels %>
+    <%= fields scope, model: registration do |fields| %>
+      <%= ui_field fields, :level_slug, as: :select, label: t("classroom.student_registrations.class_picker.level"), required: true,
+                   choices: levels.map { [ it.name, it.slug ] }, prompt: t("classroom.student_registrations.class_picker.level_prompt"),
+                   data: { action: "change->classroom--class-picker#loadClassrooms" } %>
+    <% end %>
+  <% end %>
+<% end %>
