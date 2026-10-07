@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-# GD-04 (ADR-0071 §4.2, UDR-0056 §3.2): on a 390 px phone, the direction opens « Changer le lien », cancels once, then
-# confirms; the new link replaces the old one without a reload, and the old /e/ link answers « Code d'établissement
-# invalide » while the new one opens the sign-up with the school filled in.
+# IE-07 (ADR-0082 §4.1, UDR-0078 §3.7), replacing GD-04: the direction's invitation link is stable. On a 390 px phone,
+# the block shows the /i/<token> link, « Copier le lien » and « Partager sur WhatsApp », without the school's code nor
+# « Changer le lien », and fits the width. The arrival page behind the link is tested end to end with Lot D.
 class SchoolAdmin::SchoolLinkTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 
@@ -11,44 +11,26 @@ class SchoolAdmin::SchoolLinkTest < ApplicationSystemTestCase
     @admin = create_school_admin(school: @school)
   end
 
-  def t(key, **) = I18n.t("school_admin.schools.link.change.#{key}", **)
+  def t(key, **) = I18n.t("school_admin.schools.link.#{key}", **)
 
-  test "GD-04: on a 390 px phone, the direction changes the link after confirming; the old link is refused" do
+  test "IE-07: on a 390 px phone, the direction reads a stable /i/ link, without code nor « Changer le lien »" do
     with_mobile_viewport do
       sign_in_as @admin
       assert_selector "main#main", wait: SIGN_IN_WAIT
       visit school_admin_school_path
 
-      within("#school_link_block") { click_on t(:trigger) }
-      within("dialog#change-school-link[open]") do
-        assert_text t(:title)
-        assert_text t(:warning)
-        click_on t(:cancel)
+      token = @school.reload.direction_invite_token
+      within("#school_link_block") do
+        assert_selector "a#school_link_value", text: %r{/i/#{token}\z}
+        assert_button t(:copy)
+        assert_link t(:share_whatsapp)
+        assert_no_button "Changer le lien"
+        assert_no_selector "#school_code_value"
+        assert_no_text "K7M-4QZ"
       end
-      assert_no_selector "dialog#change-school-link[open]"
-      assert_equal "k7m4qz", @school.reload.school_code
-
-      assert_no_page_reload do
-        within("#school_link_block") { click_on t(:trigger) }
-        within("dialog#change-school-link[open]") { click_on t(:confirm) }
-        assert_no_selector "#school_code_value", exact_text: "K7M-4QZ"
-      end
-      new_code = @school.reload.school_code
-      display = Entities::School::SchoolCode.display(new_code)
-      assert_toast I18n.t("school_admin.school_links.update.done", code: display)
-      assert_selector "#school_code_value", exact_text: display
-      assert_selector "a#school_link_value", text: %r{/e/#{new_code}\z}
-      assert_no_selector "dialog#change-school-link[open]"
+      assert_no_selector "dialog#change-school-link"
       assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=,
                       page.evaluate_script("document.documentElement.clientWidth")
-
-      sign_out
-      visit school_code_signup_path("k7m4qz")
-      assert_text I18n.t("identity.teacher_registrations.new.invalid_code.title")
-
-      visit school_code_signup_path(new_code)
-      assert_text "Lycée Moderne de Bouaké"
-      assert_no_text I18n.t("identity.teacher_registrations.new.invalid_code.title")
     end
   end
 end

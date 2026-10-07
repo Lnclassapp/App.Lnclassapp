@@ -3,6 +3,7 @@ require "application_system_test_case"
 # GD-01, GD-03 (ADR-0071, UDR-0056 §3.1, §3.2): the direction signs in, sees its three destinations, opens
 # « Établissement », reads its teachers' sign-up link, copies it and finds it in the WhatsApp message; the « Classes par
 # niveau » block follows. Then the same on a 390 px phone, from the bottom bar, without the page scrolling sideways.
+# IE-07 (ADR-0082 §4.1, UDR-0078 §3.7): the link is the direction's /i/<token>, without the code nor « Changer le lien ».
 class SchoolAdmin::SchoolTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 
@@ -45,10 +46,12 @@ class SchoolAdmin::SchoolTest < ApplicationSystemTestCase
     assert_current_path school_admin_school_path
     within(nav) { assert_selector "a[aria-current=page]", text: tn(:school) }
     assert_selector "h1", text: "Lycée Moderne de Bouaké"
-    link = school_code_signup_url("k7m4qz", host: URI(current_url).host, port: URI(current_url).port)
+    link = teacher_invite_link_url(@school.reload.direction_invite_token, host: URI(current_url).host, port: URI(current_url).port)
     within "#school_link" do
       assert_selector "a#school_link_value", exact_text: link
-      assert_selector "#school_code_value", exact_text: "K7M-4QZ"
+      assert_no_selector "#school_code_value"
+      assert_no_text "K7M-4QZ"
+      assert_no_button "Changer le lien"
       whatsapp = find_link(t("link.share_whatsapp"))
       assert whatsapp[:href].start_with?("https://wa.me/?text=")
       assert_equal t("link.share_message", school: "Lycée Moderne de Bouaké", link:), CGI.unescape(whatsapp[:href].delete_prefix("https://wa.me/?text="))
