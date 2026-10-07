@@ -1,5 +1,5 @@
 // ⚡ FRONT · identity/full_name_controller — aperçu du « Nom complet » : premier mot = nom, le reste = prénoms, ou la correction
-// Rôle : « Nom : … · Prénom(s) : … » pendant la frappe ; « Corriger » ouvert, l'aperçu suit les champs corrigés ; le serveur découpe sans JavaScript
+// Rôle : aperçu « Nom : … · Prénom(s) : … » ; « Corriger » ouvert, l'aperçu suit les champs corrigés, fermé ils ne partent pas
 // ADR  : 0037, 0051, 0082 · UDR : 0078 (§3.3)
 import { Controller } from "@hotwired/stimulus"
 
@@ -8,6 +8,7 @@ export default class extends Controller {
 
   // Un re-rendu 422 est un morphing : il remet le `hidden` du serveur sans reconnecter le contrôleur.
   connect() {
+    this.syncEditor()
     this.preview()
     document.addEventListener("turbo:morph", this.refresh)
   }
@@ -16,7 +17,18 @@ export default class extends Controller {
     document.removeEventListener("turbo:morph", this.refresh)
   }
 
-  refresh = () => this.preview()
+  refresh = () => {
+    this.syncEditor()
+    this.preview()
+  }
+
+  // « Corriger » fermé : ses deux champs ne partent pas, le serveur découpe le nom complet comme l'aperçu. Sans JavaScript,
+  // rien n'est désactivé et la règle serveur (les deux champs remplis font foi) s'applique.
+  syncEditor() {
+    const closed = !this.editorTarget.open
+    this.lastNameTarget.disabled = closed
+    this.firstNameTarget.disabled = closed
+  }
 
   // La saisie dans un champ corrigé met l'aperçu à jour ; la vue ne porte l'action que sur le nom complet.
   lastNameTargetConnected(field) {
@@ -48,6 +60,7 @@ export default class extends Controller {
   // À l'ouverture de « Corriger », deux champs vides reçoivent le découpage courant ; la fermeture ne vide rien. Dans les
   // deux cas, l'aperçu change de source.
   fill() {
+    this.syncEditor()
     if (this.editorTarget.open && !this.lastNameTarget.value && !this.firstNameTarget.value) {
       const parts = this.split()
       if (parts) [this.lastNameTarget.value, this.firstNameTarget.value] = parts

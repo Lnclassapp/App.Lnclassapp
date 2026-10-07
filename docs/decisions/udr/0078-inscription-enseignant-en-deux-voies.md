@@ -115,6 +115,7 @@ Textes (`fr`) :
   - Moins de deux mots : `preview.hidden = true`.
   - Sinon, remplit `lastOut` et `firstOut`, puis `preview.hidden = false`.
   - Si `editor.open` est vrai, la méthode ne touche pas aux champs corrigés.
+- `syncEditor()` (au `connect`, au morphing et à chaque `toggle`) : « Corriger » fermé, `lastName` et `firstName` sont `disabled`, donc non envoyés ; ouvert, ils sont actifs. Sans JavaScript, rien n'est désactivé.
 - `fill()` : à l'ouverture du `<details>`, si `lastName` et `firstName` sont vides, les remplit avec le découpage courant. La fermeture ne vide rien.
 - Pas de `textContent` construit par concaténation HTML : les valeurs passent par `textContent`.
 
@@ -208,7 +209,7 @@ La formule « Inscription : … » ne s'accorde pas : il n'y a pas de « arrivé
 
 ### 3.8 ter Liste des élèves d'une classe : numéro masqué (phase 5, memo Q23)
 
-- `classroom/classrooms/_roster` : la cellule du numéro affiche la valeur masquée rendue par la requête (« 07 •• •• •• 04 »), telle quelle, en `font-mono text-mute`, sans lien `tel:`, sans bouton de copie, sans reformatage par paires. `title` et `aria-label` : « Numéro masqué pour protéger les élèves » (`t(".contact_masked")`). Aucune autre différence de rendu.
+- `classroom/classrooms/_roster` : la cellule du numéro affiche la valeur masquée rendue par la requête (« 07 •• •• •• 04 »), telle quelle, en `font-mono text-mute`, sans lien `tel:`, sans bouton de copie, sans reformatage par paires. `title` « Numéro masqué pour protéger les élèves » (`t(".contact_masked")`) ; la valeur masquée en `aria-hidden`, la même mention en `sr-only` (un `aria-label` est interdit sur un `<p>`). Aucune autre différence de rendu.
 
 ### 3.9 Écran d'attente (`identity/pending_accounts/show`, enseignant sans établissement)
 

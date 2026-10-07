@@ -155,6 +155,23 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     assert_equal [ "KONÉ OUATTARA", "Awa" ], Orm::User.where(contact: "0701020304").pick(:last_name, :first_name)
   end
 
+  test "IE-04: corrected then closed, « Corriger » no longer counts: the server splits the full name, as the preview says" do
+    visit new_teacher_registration_path
+    choose_school
+    fill_person(full_name: "KONÉ OUATTARA Awa", contact: "0701020305")
+    find("#name-correction summary").click
+    fill_in "teacher_registration[last_name]", with: "KONÉ OUATTARA"
+    fill_in "teacher_registration[first_name]", with: "Awa"
+    find("#name-correction summary").click
+
+    assert_preview "KONÉ", "OUATTARA Awa"
+    fill_codes
+    click_on t("#{FORM}.submit")
+
+    assert_current_path teacher_classrooms_path
+    assert_equal [ "KONÉ", "OUATTARA Awa" ], Orm::User.where(contact: "0701020305").pick(:last_name, :first_name)
+  end
+
   test "IE-06, IE-09: a colleague's link shows the school and counts the referral; an unknown link warns" do
     referrer = create_teacher(school: @school)
     token = Orm::TeacherProfile.find_by!(user: referrer).referral_token

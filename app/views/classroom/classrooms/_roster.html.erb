@@ -51,8 +51,10 @@
                     <p class="truncate text-sm font-medium"><%= student.display_name %></p>
                     <%# UDR-0078 §3.8 ter : la valeur masquée de la requête, telle quelle ; ni tel:, ni copie, ni reformatage. %>
                     <% if student.contact %>
-                      <p class="font-mono text-xs whitespace-nowrap text-mute" title="<%= t(".contact_masked") %>"
-                         aria-label="<%= t(".contact_masked") %>"><%= student.contact %></p>
+                      <%# aria-label est interdit sur un <p> : la mention passe en sr-only, le numéro masqué est caché aux lecteurs d'écran. %>
+                      <p class="font-mono text-xs whitespace-nowrap text-mute" title="<%= t(".contact_masked") %>">
+                        <span aria-hidden="true"><%= student.contact %></span><span class="sr-only"><%= t(".contact_masked") %></span>
+                      </p>
                     <% end %>
                   </div>
                 </div>
