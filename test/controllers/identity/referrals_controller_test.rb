@@ -39,6 +39,9 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#referral_count", text: I18n.t("#{PAGE}.invite.count", count: 0)
     end
     assert_includes share_message, "Lycée Classique d'Abidjan"
+    # ADR-0082: an invited colleague has no code to look for any more.
+    assert_select "#invite_colleagues", text: /vos collègues de Lycée Classique d'Abidjan s'inscrivent avec votre établissement déjà rempli/
+    assert_no_match(/code/i, css_select("#invite_colleagues").text)
   end
 
   test "CP-06: the counter says how many colleagues signed up thanks to the teacher" do
