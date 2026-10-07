@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolDetailQuery
-# Rôle : fiche d'un établissement (SC-05) : en-tête, code et lien de l'équipe, classes par niveau, enseignants et leur voie
-# ADR  : 0026, 0030, 0041, 0057, 0063, 0082 · UDR : 0036, 0044, 0050, 0078
+# Rôle : fiche d'un établissement (SC-05) : en-tête, code et lien de l'équipe, classes par niveau et leur lien, enseignants et leur voie
+# ADR  : 0026, 0030, 0041, 0057, 0063, 0082, 0083 · UDR : 0036, 0044, 0050, 0078, 0079 (§3.7)
 module Queries
   module School
     class SchoolDetailQuery
@@ -8,7 +8,9 @@ module Queries
                            :teachers, :national_code, :team_invite_token) do
         def classrooms_count = levels.sum { it.classrooms.size }
       end
-      Level = Data.define(:name, :classrooms)
+      # link_tokens : { public_id de la classe => jeton de son lien /c/<jeton> } (ADR-0083 §4.1), que l'équipe copie. À côté
+      # des lignes tant que ClassroomRow porte le code : le retrait du code (Lot F) y ramènera le jeton.
+      Level = Data.define(:name, :classrooms, :link_tokens)
       ClassroomRow = Data.define(:public_id, :name, :join_code_display, :students_count, :teacher_names, :status)
       # joined_via : voie d'arrivée (ADR-0082 §4.2) ; referrer_name : « NOM Prénoms » du parrain, nil sans parrain ou anonymisé.
       TeacherRow = Data.define(:name, :material_name, :material_category, :primary, :joined_via, :referrer_name)
@@ -16,7 +18,7 @@ module Queries
       SCHOOL_COLUMNS = %w[schools.id schools.public_id schools.name schools.sigle drenas.name schools.school_type schools.cycle
                           schools.status schools.school_code schools.national_code schools.team_invite_token].freeze
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name classrooms.join_code classrooms.status
-                             levels.name levels.position series.name].freeze
+                             levels.name levels.position series.name classrooms.link_token].freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
       TEACHER_COLUMNS = [ FULL_NAME, "materials.name", "materials.category", :primary, "teacher_profiles.joined_via",
                           Arel.sql("referrers.last_name || ' ' || referrers.first_name") ].freeze
@@ -42,7 +44,12 @@ module Queries
 
         classrooms.sort_by { |_, _, name, _, _, _, position, series| [ position, series.to_s, name[/\d+\z/].to_i, name ] }
                   .chunk_while { |left, right| left[6] == right[6] }
-                  .map { |group| Level.new(name: group.first[5], classrooms: group.map { classroom_row(it, students, teachers) }) }
+                  .map { |group| level(group, students, teachers) }
+      end
+
+      def level(group, students, teachers)
+        Level.new(name: group.first[5], classrooms: group.map { classroom_row(it, students, teachers) },
+                  link_tokens: group.to_h { [ it[1], it.last ] })
       end
 
       def classroom_row(values, students, teachers)

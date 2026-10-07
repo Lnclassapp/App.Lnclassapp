@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_classroom_group — les classes d'un niveau, sur la fiche d'un établissement %>
-<%# Rôle : une carte par classe : nom (lien vers sa page), code d'adhésion affiché, effectif, enseignants %>
-<%# ADR  : 0030, 0041 · UDR : 0036 %>
+<%# Rôle : une carte par classe : nom (lien vers sa page), code d'adhésion affiché, effectif, enseignants, « Copier le lien » %>
+<%# ADR  : 0030, 0041, 0083 · UDR : 0036, 0079 (§3.7 : le lien se copie ici, il se change sur la page de la classe) %>
 <% heading_id = "level_#{level.name.parameterize}" %>
 <section aria-labelledby="<%= heading_id %>">
   <div class="mb-4 flex items-center justify-between gap-3 border-b border-line pb-3">
@@ -32,6 +32,14 @@
             <dd class="truncate"><%= classroom.teacher_names.any? ? classroom.teacher_names.join(", ") : t(".no_teacher") %></dd>
           </div>
         </dl>
+        <%# Au-dessus du lien étiré de la carte ; le lien d'une classe archivée n'ouvre plus rien (ADR-0083 §4.1). %>
+        <% if classroom.status == "active" %>
+          <div class="relative z-10 mt-3">
+            <%= ui_copy_button join_classroom_url(level.link_tokens.fetch(classroom.public_id)), label: t("classroom.classrooms.link.copy"),
+                               aria_label: t("classroom.classrooms.link.copy_label"), icon: "link",
+                               copied: t("classroom.classrooms.link.copied") %>
+          </div>
+        <% end %>
       </li>
     <% end %>
   </ul>
