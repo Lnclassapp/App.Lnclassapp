@@ -29,7 +29,23 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   IGNORE_BROWSER_INSTALL_PROMPT = <<~JS.freeze
     window.addEventListener("beforeinstallprompt", (event) => { if (event.isTrusted) event.stopImmediatePropagation() }, true)
   JS
-  setup { page.driver.browser.execute_cdp("Page.addScriptToEvaluateOnNewDocument", source: IGNORE_BROWSER_INSTALL_PROMPT) }
+  setup { ignore_browser_install_prompt }
+
+  # Each browser of a test (using_session opens another one) gets the script once.
+  def using_session(name, &block)
+    super(name) do |*args|
+      ignore_browser_install_prompt
+      block.call(*args)
+    end
+  end
+
+  def ignore_browser_install_prompt
+    browser = page.driver.browser
+    return if browser.instance_variable_get(:@install_prompt_ignored)
+
+    browser.execute_cdp("Page.addScriptToEvaluateOnNewDocument", source: IGNORE_BROWSER_INSTALL_PROMPT)
+    browser.instance_variable_set(:@install_prompt_ignored, true)
+  end
 
   MOBILE_VIEWPORT = [ 390, 844 ].freeze
 
