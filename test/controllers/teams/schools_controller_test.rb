@@ -81,12 +81,12 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_#{school.public_id} a[data-turbo-frame=_top][href='#{school_path(school.public_id)}']",
                   text: "Lycée Classique d'Abidjan"
     assert_select "#school_#{school.public_id}", text: /LCA/
-    # Demande du porteur (2026-10-01) : le code d'établissement est dans le tableau, groupé comme sur la fiche, avec son aide.
-    assert_select "thead th", text: /#{I18n.t('teams.schools.index.columns.school_code')}/
-    assert_select "thead details summary .sr-only", text: I18n.t("components.info_tip.label",
-                                                                 label: I18n.t("teams.schools.index.columns.school_code"))
-    assert_select "#school_#{school.public_id} td.font-mono",
-                  text: Entities::School::SchoolCode.display(Orm::School.find(school.id).school_code)
+    # IE-21 (UDR-0078 §3.8 bis) : le tableau n'a plus de colonne « Code d'établissement », ni son code ni son aide.
+    assert_select "thead th", text: /Code d'établissement/, count: 0
+    assert_select "thead th", 8
+    assert_select "#school_#{school.public_id} td.font-mono", 0
+    assert_select "#school_#{school.public_id}",
+                  text: /#{Entities::School::SchoolCode.display(Orm::School.find(school.id).school_code)}/, count: 0
     assert_select "#school_#{school.public_id}", text: /Abidjan 1/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('school_types.mixed')}/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('teams.schools.cycles.first')}/
@@ -280,7 +280,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 5)
 
     get schools_path
-    assert_select "#school_#{school.public_id} td:nth-child(7)", text: "5" # « Classes », après le code d'établissement
+    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5" # « Classes » : plus de code d'établissement (IE-21)
   end
 
   # UDR-0056 §3.2: the block moved to shared/_level_classrooms, shared with the direction; the team's page is unchanged.
@@ -390,16 +390,21 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "023456", other.reload.national_code
   end
 
-  test "CP-10: a school without national code shows none; the list is searched by it" do
-    create_school(drena: @drena, name: "Lycée Classique", national_code: "012345")
+  test "CP-10, IE-21: a school without national code shows none; the list is searched by name or sigle, not by it" do
+    create_school(drena: @drena, name: "Lycée Classique", sigle: "LCA", national_code: "012345")
     school = create_school(drena: @drena, name: "Lycée Moderne")
     sign_in_as @member
 
     get school_path(school.public_id)
     assert_select "#school_national_code", 0
     get schools_path(search: "012345")
-    assert_select "tbody tr", 1
-    assert_select "tbody", text: /Lycée Classique/
+    assert_select "#schools_list tr", 0
+    assert_select "#schools_empty", text: /#{I18n.t('teams.schools.index.no_match_title')}/
+    [ "Lycée Classique", "LCA" ].each do |search|
+      get schools_path(search:)
+      assert_select "#schools_list tr", 1
+      assert_select "#schools_list", text: /Lycée Classique/
+    end
   end
 
   test "outside the frame, the edition opens as a modal over the shell; an unknown school has none" do
@@ -590,7 +595,10 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#schools-filters[method=get][action='#{schools_path}'][data-controller=search]" \
                   "[data-turbo-frame=schools][data-turbo-action=advance]" \
                   "[role=search][aria-label='#{I18n.t('teams.schools.filters.label')}']" do
-      assert_select "input#filter_search[type=search][name=search][data-action='input->search#queue']"
+      # IE-21 (UDR-0078 §3.8 bis) : la recherche porte sur le nom ou le sigle, plus sur le code national.
+      assert_select "label[for=filter_search]", text: "Nom ou sigle"
+      assert_select "input#filter_search[type=search][name=search][data-action='input->search#queue']" \
+                    "[placeholder='Ex. : Lycée Classique, LCA']"
       %w[drena school_type cycle status].each do |name|
         assert_select "select#filter_#{name}[name=#{name}][data-action='change->search#submit']"
       end

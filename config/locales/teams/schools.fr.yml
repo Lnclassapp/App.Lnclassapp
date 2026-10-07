@@ -58,7 +58,6 @@ fr:
         caption: "Liste nationale des établissements"
         columns:
           school: "Établissement"
-          school_code: "Code d'établissement"
           drena: "DRENA"
           type: "Type"
           cycle: "Cycle"
@@ -73,8 +72,9 @@ fr:
         clear_filters: "Effacer les filtres"
       filters:
         label: "Rechercher un établissement"
-        search: "Nom, sigle ou code national"
-        search_placeholder: "Ex. : Lycée Classique, LCA, 012345"
+        # IE-21 (UDR-0078 §3.8 bis) : la recherche porte sur le nom ou le sigle, plus sur le code national.
+        search: "Nom ou sigle"
+        search_placeholder: "Ex. : Lycée Classique, LCA"
         drena: "DRENA"
         school_type: "Type"
         cycle: "Cycle"
