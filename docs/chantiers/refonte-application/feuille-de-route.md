@@ -294,7 +294,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Reste : `catalogue-complet`** (6 features) | CA-02, CA-03, CA-17, CA-21, CA-23 (venue de la V2 le 2026-09-28), AS-01 ; plus la partie V4 de CA-01 |
 | **Reste : `installation-pwa`** (3 features) | ID-26, TR-24, TR-25 |
 | **Reste : `sous-roles-equipe`** | Aucune feature d'inventaire : la matrice de l'ADR-0038 (`admin`, `content`, `field`), un test de refus par case vide |
-| **Tables** | Colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` (§7.1). `team_role` existe depuis la V1 |
+| **Tables** | ~~Colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` (§7.1)~~ : abandonnées le 2026-10-07 (ADR-0082 §4.5, le bandeau ne garde rien sur le serveur) ; `installation-pwa` ajoute `users.app_opened_at` (ADR-0082 §4.3). `team_role` existe depuis la V1 |
 | **Décisions préalables** | F-16 (ADR-0038), F-27 (ADR-0049) : `Accepté`. **À prendre** : un amendement de l'ADR-0038 pour les pages livrées après lui (Q9) ; ADR-0063 et UDR-0050 acceptées le 2026-09-28 (Q4) ; un ADR si la PWA fonctionne hors ligne (Q10) |
 | **Questions au porteur** | Q4, Q9, Q10 |
 | **Dépend de** | V1. `sous-roles-equipe` dépend aussi d'`annuaire-equipe` (V2) |
@@ -756,7 +756,7 @@ Source : [`complements-transverse.md` §5.1](inventaire/complements-transverse.m
 | `question_attempts` | `question_attempts` | V1 | AS-09, AS-10 | Une par question et par session, garantie en base ; réponse structurée (F-34) |
 | `exercise_badges` | `exercise_badges` | V1 | AS-11, AS-12 | Barème selon F-10 ; `exercise_sessions.badge_level`, lue mais jamais écrite dans l'ancien, n'est pas reprise |
 | `messages` | `messages` | V6 | CO-01…13 | Audience `school_admin` réelle (F-23) ; publication différée par job |
-| `AddInstallBannerStatusToUsers` | colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` | V4 | ID-26, TR-25 | Le serveur n'accepte que les transitions prévues, et « installée » n'est enregistré que sur un signal réel du navigateur |
+| ~~`AddInstallBannerStatusToUsers`~~ *(abandonnée le 2026-10-07, ADR-0082 §4.5)* | colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` | V4 | ID-26, TR-25 | Le serveur n'accepte que les transitions prévues, et « installée » n'est enregistré que sur un signal réel du navigateur |
 | `school_roles` | `school_roles` | V2 | SC-11, SC-12 | Rôles de référence (F-22), toujours scopés à leur école |
 | `school_staffs` | `school_staffs` | V2 | SC-13…16 | Index unique ; le nombre d'écoles par personne est tranché par F-22 (C-30) |
 | `knowledge_gaps` | `knowledge_gaps` | V5 | AS-14…17 | Clé `bigint` (C-15) ; une seule lacune en attente, garantie en base (F-21) |

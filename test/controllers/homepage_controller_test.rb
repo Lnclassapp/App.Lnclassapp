@@ -258,4 +258,75 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_match(/Espace Etabl|Inscrire mon établissement|FCFA/, response.body)
   end
+
+  # CA-10 (ADR-0082 §4.3) : l'icône de l'app installée ouvre « /?source=app ».
+  test "CA-10: a student opening the installed app has their account dated at the server's time and lands on their home" do
+    student = create_student
+    sign_in_as student
+    opened_at = Time.current.change(usec: 0)
+
+    travel_to(opened_at) { get root_path(source: "app") }
+
+    assert_redirected_to pending_account_path
+    assert_equal opened_at, student.reload.app_opened_at
+  end
+
+  test "CA-10: a visitor opening « /?source=app » sees the public home page, and nothing is written" do
+    assert_no_queries_match(/\A\s*(UPDATE|INSERT|DELETE)/i) { get root_path(source: "app") }
+
+    assert_response :success
+    assert_select "h1", text: "Lnclass, tu comprends chap chap !"
+  end
+
+  test "CA-10: any other source is ignored: the signed-in person is redirected, their account is not dated" do
+    teacher = create_teacher
+    sign_in_as teacher
+
+    [ "other", "", nil ].each do |source|
+      get root_path(source:)
+
+      assert_redirected_to teacher_home_path
+    end
+    assert_nil teacher.reload.app_opened_at
+  end
+
+  test "CA-10: a direction opening « /?source=app » is not counted: nothing is dated, it lands on its home as before" do
+    admin = create_school_admin
+    sign_in_as admin
+    get root_path
+    home = response.location
+
+    assert_no_queries_match(/\A\s*UPDATE\s+"users"/i) { get root_path(source: "app") }
+
+    assert_redirected_to home
+    assert_nil admin.reload.app_opened_at
+  end
+
+  test "CA-10: a team session whose second factor is not verified has no actor: nothing is dated" do
+    member = create_team_member
+    post session_path, params: { session: { contact: member.contact, pin: "2468" } }
+
+    get root_path(source: "app")
+
+    assert_redirected_to new_identity_second_factor_path
+    assert_nil member.reload.app_opened_at
+  end
+
+  test "CA-10: a failure of the recording never blocks the home: it is reported as handled, with the account" do
+    student = create_student
+    sign_in_as student
+    repository = Repositories::Identity::UserRepository
+    repository.alias_method :original_mark_app_opened, :mark_app_opened
+    repository.define_method(:mark_app_opened) { |user_id:, at:| raise ActiveRecord::ConnectionTimeoutError, "pool épuisé" }
+
+    report = assert_error_reported(ActiveRecord::ConnectionTimeoutError) { get root_path(source: "app") }
+
+    assert_redirected_to pending_account_path
+    assert report.handled
+    assert_equal student.id, report.context[:user_id]
+    assert_nil student.reload.app_opened_at
+  ensure
+    repository.alias_method :mark_app_opened, :original_mark_app_opened
+    repository.remove_method :original_mark_app_opened
+  end
 end

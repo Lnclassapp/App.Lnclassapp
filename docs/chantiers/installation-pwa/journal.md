@@ -1,0 +1,51 @@
+# Journal — Installer Lnclass sur le téléphone (PWA)
+
+> Rempli **pendant** le chantier, pas reconstitué à la fin. C'est ici que se capitalise ce qui ne rentre ni dans un ADR ni dans un commit.
+
+## Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-10-07 | La PWA passe avant les apps Android | Le porteur a vu une vidéo sur les apps mobiles faites avec Claude Code (Expo) ; Expo réécrirait tous les écrans, la PWA garde ceux du site | Oui : ADR-0082, amendement de l'ADR-0070 |
+| 2026-10-07 | Les exercices hors ligne sortent vers `eleve-hors-ligne` | Ils touchent la correction de l'ADR-0054 ; le chantier ne tenait plus en quelques jours (grill, question 10) | Non : l'ADR viendra avec `eleve-hors-ligne` |
+| 2026-10-07 | Le test de phase 5 est fait par une autre personne, sur un vrai Android, en recette | Une PWA ne s'éprouve qu'en HTTPS, dans un vrai navigateur de téléphone | Non : clause du plan |
+| 2026-10-07 | Le bandeau ne garde rien sur le serveur | L'installation est une affaire d'appareil (grill, question 9) | Oui : ADR-0082 §4.5 ; colonnes `install_banner_*` abandonnées |
+
+## Ce qui a dérapé
+
+Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
+
+- Le chantier est parti comme « installer l'app » et a failli absorber les exercices hors ligne, plusieurs semaines de travail sur le moteur d'évaluation. Le grill l'a vu à la question 10 : poser la question de la taille dès qu'une réponse fait sortir le chantier de son contexte borné.
+
+## Ce qu'on a appris sur la codebase
+
+Découvertes sur du code existant, pièges, dépendances non documentées.
+
+- `PortContractsTest` exige que chaque adaptateur implémente toute méthode de son port : un port qui gagne une méthode au Lot 0 doit être implémenté au Lot 0, pas au lot vertical. Le plan avait mis l'implémentation au Lot C.
+- Depuis que le site est installable, Chrome headless émet un vrai `beforeinstallprompt` quand il veut : le bandeau apparaissait au milieu d'autres tests système (sobriété du profil, R2). `ApplicationSystemTestCase` arrête l'événement réel ; les tests du bandeau en simulent un.
+- Un nouveau test système doit déclarer sa durée dans `script/ci/test_timings.yml` (budget de 15 s par chantier) : 6,8 s + 7,5 s ici.
+- `UseCasePoliciesTest` exige une `policy:` injectée dans chaque use case (ADR-0028) : l'ADR-0082 disait « aucune policy propre » pour `RecordAppOpen`. Corrigé par une policy dédiée (élève et enseignant seulement).
+- `DesignTokensTest` refuse toute couleur hexadécimale dans `app/views`, y compris le manifeste JSON : les couleurs de l'app installée vivent dans `config.x.pwa`.
+- Deux tests (`with_routing`) rendent le layout sous un jeu de routes réduit : un helper de route dans le layout les casse. Le manifeste y est déclaré par son chemin littéral.
+- Le `db/schema.rb` régénéré en local réécrit toutes les contraintes `CHECK` (version de PostgreSQL différente de la CI) : n'y garder que la vraie modification.
+- …
+
+## Dette laissée derrière
+
+Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| Exercices hors ligne : téléchargement des exercices assignés, réponses envoyées au retour du réseau, correction au serveur, premier arrivé gagne, réponses gardées au nom de l'élève sur un téléphone partagé | Touche la correction (ADR-0054) et l'identité ; plusieurs semaines | `eleve-hors-ligne`, qui reprend les questions 1 à 6 du grill |
+| Fiches liées aux exercices assignés et « Ma classe » hors ligne (première donnée personnelle sur le téléphone, effacée à la déconnexion) | Demandé après le plan ; même mécanique que les exercices | `eleve-hors-ligne` (questions 12 et 13) |
+| Relire hors ligne les pages déjà vues | Garderait le HTML des comptes sur un téléphone partagé (ADR-0076) | `eleve-hors-ligne` |
+| Bandeau seulement à partir de la deuxième visite ? | Question encore ouverte au porteur | — |
+
+## Clôture
+
+| | |
+|---|---|
+| **Livré le** | AAAA-MM-JJ |
+| **PR** | |
+| **ADR produits** | |
+| **UDR produits** | |
