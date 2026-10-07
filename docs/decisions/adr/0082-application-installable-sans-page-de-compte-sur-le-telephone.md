@@ -15,7 +15,7 @@
 
 Le site n'est pas installable. La fiche d'application (manifeste) est celle du générateur Rails : nom « AppLnclassapp », couleur `red`, une seule icône. Elle n'est déclarée dans aucune page, ses routes ne sont pas montées, et le programme d'arrière-plan (*service worker*) est entièrement commenté (TR-24). L'ancienne application avait un bandeau d'installation qui enregistrait « installée » sur iPhone sans rien installer et acceptait n'importe quelle valeur du client (ID-26, TR-25). La feuille de route prévoyait deux colonnes sur `users` pour ce bandeau.
 
-Le porteur a avancé le chantier le 2026-10-07, avant les apps Android de l'ADR-0070. Il a aussi voulu des exercices hors ligne. Le grill les a sortis vers un chantier distinct, `exercices-hors-ligne`, car ils touchent la correction de l'ADR-0054. Il reste à décider ce que le programme d'arrière-plan garde sur le téléphone, ce qu'il ne garde jamais, et comment l'équipe sait si l'installation prend, sans traceur (ADR-0049).
+Le porteur a avancé le chantier le 2026-10-07, avant les apps Android de l'ADR-0070. Il a aussi voulu des exercices hors ligne. Le grill les a sortis vers un chantier distinct, `eleve-hors-ligne`, car ils touchent la correction de l'ADR-0054. Il reste à décider ce que le programme d'arrière-plan garde sur le téléphone, ce qu'il ne garde jamais, et comment l'équipe sait si l'installation prend, sans traceur (ADR-0049).
 
 ## 2. Moteurs de décision
 
@@ -31,7 +31,7 @@ Le porteur a avancé le chantier le 2026-10-07, avant les apps Android de l'ADR-
 |---|---|---|
 | A — Pas de programme d'arrière-plan, manifeste seul | Le plus simple | Chrome Android exige un programme qui répond aux navigations pour proposer l'installation ; sans réseau, erreur du navigateur |
 | B — **Réseau seul pour les pages, page « Pas de connexion » gardée** | Installable ; rien de personnel sur le téléphone ; quelques dizaines de lignes, sans dépendance | Aucune lecture hors ligne |
-| C — Garder les pages vues (réseau d'abord, cache ensuite) | Relire hors ligne | Garde le HTML des comptes sur un téléphone partagé ; contredit l'ADR-0076 ; renvoyé à `exercices-hors-ligne`, qui aura son propre ADR |
+| C — Garder les pages vues (réseau d'abord, cache ensuite) | Relire hors ligne | Garde le HTML des comptes sur un téléphone partagé ; contredit l'ADR-0076 ; renvoyé à `eleve-hors-ligne`, qui aura son propre ADR |
 | D — Bibliothèque Workbox | Stratégies prêtes | Dépendance de plus, poids ; inutile pour une seule page gardée |
 
 Pour l'indicateur :
@@ -71,7 +71,7 @@ Servi par `Rails::PwaController` (`GET /service-worker.js`, route `pwa_service_w
 - **`install`** : ouvre le cache `lnclass-offline-v<N>` et y met **exactement** `/offline.html`, `/offline.css` et `/icon-192.png`. Puis `skipWaiting()`.
 - **`activate`** : supprime tout cache dont le nom n'est pas le cache courant. Puis `clients.claim()`.
 - **`fetch`** : ne traite que les requêtes de **navigation** (`request.mode === "navigate"`) en `GET`. Il les passe au réseau ; si le réseau échoue (exception de `fetch`), il répond `/offline.html` depuis le cache. **Une réponse du réseau n'est jamais mise en cache.** Toute autre requête (formulaires, Turbo, ressources, Action Cable) n'est pas interceptée.
-- Aucun `push`, aucune synchronisation en arrière-plan (chantiers `notifications-push` et `exercices-hors-ligne`).
+- Aucun `push`, aucune synchronisation en arrière-plan (chantiers `notifications-push` et `eleve-hors-ligne`).
 - `<N>` est un entier écrit dans le fichier. On l'augmente à chaque modification de la page « Pas de connexion » ou de sa feuille.
 
 La page « Pas de connexion » est un fichier **statique** de `public/` : elle ne contient aucune donnée de compte, ne charge aucun script et lie sa propre feuille `/offline.css`. Elle ne dépend donc ni de la feuille de l'application, dont le nom porte une empreinte, ni de la CSP par nonce.
@@ -107,7 +107,7 @@ La phrase « La PWA (`installation-pwa`, V4) et l'app iOS restent au backlog » 
 
 ### 🔴 Coûts consentis
 
-- **Aucune lecture hors ligne** : un élève sans réseau ne relit ni son accueil ni ses leçons. C'est l'objet de `exercices-hors-ligne`, qui devra amender cet ADR (§4.2) pour garder des données sur le téléphone.
+- **Aucune lecture hors ligne** : un élève sans réseau ne relit ni son accueil ni ses leçons. C'est l'objet de `eleve-hors-ligne`, qui devra amender cet ADR (§4.2) pour garder des données sur le téléphone.
 - **L'indicateur est grossier** : la dernière ouverture seulement, ni fréquence ni appareil. Un compte ouvert depuis l'icône hors de la période n'est pas compté, même s'il a l'app. Un Android qui reprend l'app en mémoire sans recharger l'adresse de départ n'est pas compté.
 - **`source=app` se falsifie** : n'importe qui peut taper `/?source=app` et se compter. L'indicateur sert à suivre une tendance, jamais à décider pour un compte.
 - **iPhone** : pas de bouton d'installation possible, et Safari peut effacer le stockage du site, ce qui fait réapparaître le bandeau.
@@ -157,4 +157,4 @@ self.addEventListener("fetch", (event) => {
 - **Amende** l'ADR-0070 (§4.6) et l'ADR-0062 (§4.4).
 - **Complète** l'ADR-0049 (aucune mesure côté client), l'ADR-0051 (poids) et l'ADR-0076 (aucun HTML en cache, y compris dans le programme d'arrière-plan).
 - **Corrige** la feuille de route de `refonte-application` : la migration `AddInstallBannerStatusToUsers` et la route `PATCH /install_banner` sont abandonnées (ID-26, TR-25).
-- Sera amendé par l'ADR de `exercices-hors-ligne`.
+- Sera amendé par l'ADR de `eleve-hors-ligne`.

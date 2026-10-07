@@ -4,14 +4,14 @@
 
 ## 1. Contexte
 
-Lnclass ne vit que dans un onglet du navigateur : pas d'icône sur le téléphone, et la fiche d'application du site est celle du générateur (« AppLnclassapp », rouge). Ce chantier rend le site **installable** : icône et nom « Lnclass », ouverture en plein écran, page « Pas de connexion » propre à Lnclass, bandeau d'invitation pour les élèves et les enseignants sur téléphone, et un indicateur d'usage dans le pilotage de l'équipe. Les exercices hors ligne sont un chantier distinct, `exercices-hors-ligne`, qui suivra ([memo](memo.md), question 10).
+Lnclass ne vit que dans un onglet du navigateur : pas d'icône sur le téléphone, et la fiche d'application du site est celle du générateur (« AppLnclassapp », rouge). Ce chantier rend le site **installable** : icône et nom « Lnclass », ouverture en plein écran, page « Pas de connexion » propre à Lnclass, bandeau d'invitation pour les élèves et les enseignants sur téléphone, et un indicateur d'usage dans le pilotage de l'équipe. Les exercices hors ligne sont un chantier distinct, `eleve-hors-ligne`, qui suivra ([memo](memo.md), question 10).
 
 ## 2. Acteurs et permissions
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
 | Visiteur non connecté | Installer par le menu de son navigateur ; voir la page « Pas de connexion » | Voir le bandeau d'installation |
-| Student | Installer depuis le bandeau (Android) ou suivre le mode d'emploi (iPhone) ; reporter le bandeau de 3 jours ; ouvrir Lnclass depuis l'icône | Faire un exercice sans réseau (chantier `exercices-hors-ligne`) ; retrouver une page de compte sans réseau |
+| Student | Installer depuis le bandeau (Android) ou suivre le mode d'emploi (iPhone) ; reporter le bandeau de 3 jours ; ouvrir Lnclass depuis l'icône | Faire un exercice sans réseau (chantier `eleve-hors-ligne`) ; retrouver une page de compte sans réseau |
 | Teacher | Les mêmes gestes que l'élève | Les mêmes limites |
 | SchoolStaff (direction) | Installer par le menu du navigateur | Voir le bandeau |
 | Team | Installer par le menu du navigateur ; lire dans son pilotage le nombre d'élèves et d'enseignants qui ont ouvert l'app installée sur la période | Voir le bandeau |

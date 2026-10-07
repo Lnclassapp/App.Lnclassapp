@@ -7,7 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-07 | La PWA passe avant les apps Android | Le porteur a vu une vidéo sur les apps mobiles faites avec Claude Code (Expo) ; Expo réécrirait tous les écrans, la PWA garde ceux du site | Oui : ADR-0082, amendement de l'ADR-0070 |
-| 2026-10-07 | Les exercices hors ligne sortent vers `exercices-hors-ligne` | Ils touchent la correction de l'ADR-0054 ; le chantier ne tenait plus en quelques jours (grill, question 10) | Non : l'ADR viendra avec `exercices-hors-ligne` |
+| 2026-10-07 | Les exercices hors ligne sortent vers `eleve-hors-ligne` | Ils touchent la correction de l'ADR-0054 ; le chantier ne tenait plus en quelques jours (grill, question 10) | Non : l'ADR viendra avec `eleve-hors-ligne` |
 | 2026-10-07 | Le bandeau ne garde rien sur le serveur | L'installation est une affaire d'appareil (grill, question 9) | Oui : ADR-0082 §4.5 ; colonnes `install_banner_*` abandonnées |
 
 ## Ce qui a dérapé
@@ -28,8 +28,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Exercices hors ligne : téléchargement des exercices assignés, réponses envoyées au retour du réseau, correction au serveur, premier arrivé gagne, réponses gardées au nom de l'élève sur un téléphone partagé | Touche la correction (ADR-0054) et l'identité ; plusieurs semaines | `exercices-hors-ligne`, qui reprend les questions 1 à 6 du grill |
-| Relire hors ligne les pages déjà vues | Garderait le HTML des comptes sur un téléphone partagé (ADR-0076) | `exercices-hors-ligne` |
+| Exercices hors ligne : téléchargement des exercices assignés, réponses envoyées au retour du réseau, correction au serveur, premier arrivé gagne, réponses gardées au nom de l'élève sur un téléphone partagé | Touche la correction (ADR-0054) et l'identité ; plusieurs semaines | `eleve-hors-ligne`, qui reprend les questions 1 à 6 du grill |
+| Fiches liées aux exercices assignés et « Ma classe » hors ligne (première donnée personnelle sur le téléphone, effacée à la déconnexion) | Demandé après le plan ; même mécanique que les exercices | `eleve-hors-ligne` (questions 12 et 13) |
+| Relire hors ligne les pages déjà vues | Garderait le HTML des comptes sur un téléphone partagé (ADR-0076) | `eleve-hors-ligne` |
 | Bandeau seulement à partir de la deuxième visite ? | Question encore ouverte au porteur | — |
 
 ## Clôture

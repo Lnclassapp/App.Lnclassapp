@@ -133,4 +133,4 @@ end
 *Chantier [`docs/chantiers/installation-pwa`](../../chantiers/installation-pwa/memo.md), décision du porteur du 2026-10-07. Le texte ci-dessus reste tel qu'écrit ; en cas d'écart, cette section fait foi.*
 
 - La phrase « La PWA (`installation-pwa`, V4) et l'app iOS restent au backlog » ne vaut plus pour la PWA : le site devient installable par l'[ADR-0082](./0082-application-installable-sans-page-de-compte-sur-le-telephone.md). L'app iOS reste au backlog, et les apps Android restent en attente.
-- Les exercices hors ligne, voulus par le porteur, ouvrent le chantier `exercices-hors-ligne`. S'il garde des données sur le téléphone, la question se reposera pour les apps Android, qui affichent les mêmes pages.
+- Les exercices hors ligne, voulus par le porteur, ouvrent le chantier `eleve-hors-ligne`. S'il garde des données sur le téléphone, la question se reposera pour les apps Android, qui affichent les mêmes pages.
