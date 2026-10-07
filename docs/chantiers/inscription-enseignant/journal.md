@@ -33,6 +33,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | Barre latérale d'un enseignant sans établissement : « Content missing » à 1280 px (le frame différé est redirigé vers l'écran d'attente) | Antérieur au chantier, relevé par le Lot C | bugfix à ouvrir |
 | Code d'établissement et « Régénérer le code » encore présents pour la direction | Périmètre (Q8) | `inscription-direction-sans-code` |
+| `SchoolRepositoryPort#find_by_national_code` et son adaptateur : plus d'appelant après la suppression de `RegisterPendingTeacher` | Retirer une méthode de port sort du Lot D ; l'entité `NationalCode` sert encore à l'import | refactor à ouvrir (ou `inscription-direction-sans-code`) |
 | Code de classe des élèves | Périmètre (Q20) | `inscription-eleve-sans-code` (branche ouverte) |
 
 ## Clôture
