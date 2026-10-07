@@ -22,7 +22,7 @@
         <%= form_with model: @school_join, scope: :school_join, url: pending_school_join_path, id: "school-join-form",
                       class: "flex flex-col gap-4",
                       data: { controller: "school--drena-schools",
-                              "school--drena-schools-url-value": pending_account_path(school_join: { drena_public_id: "__drena__" }) } do |form| %>
+                              "school--drena-schools-url-value": drena_schools_path("__drena__", scope: :school_join) } do |form| %>
           <% if @school_join.errors[:base].any? %>
             <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
               <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
@@ -38,7 +38,7 @@
                             form: "school-join-drena" %>
             </noscript>
           </div>
-          <%# Le frame est servi par cet écran (URL ci-dessus) : ses champs restent dans le scope school_join. %>
+          <%# Avec JavaScript, le frame vient de /drenas/:id/schools?scope=school_join (ADR-0082 §4.5) : mêmes champs, même scope. %>
           <%= render template: "school/drena_schools/index",
                      locals: { schools: @school_options, drena_public_id: @school_join.drena_public_id, registration: @school_join,
                                scope: :school_join } %>

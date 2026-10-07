@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace direction ; tout contrôleur hérite de SchoolAdmin::BaseController
-# Rôle : lectures de la direction sur son seul établissement, et ses trois gestes (lien, classes d'un niveau, enseignants)
-# ADR  : 0036, 0065, 0071, 0077 · UDR : 0052, 0056, 0070, 0074 · l'établissement vient toujours du compte, jamais d'un paramètre
+# Rôle : lectures de la direction sur son seul établissement, et ses gestes (classes d'un niveau, enseignants, directions)
+# ADR  : 0036, 0065, 0071, 0077, 0082 · UDR : 0052, 0056, 0070, 0074, 0078 · l'établissement vient toujours du compte, jamais d'un paramètre
 scope "school-admin", module: "school_admin", as: "school_admin" do
   resources :classrooms, only: %i[index show], param: :public_id
   # UDR-0074 §3.8, §3.11 : la page d'un niveau, par son slug figé ; l'activité récente, frame différé de l'accueil.
@@ -15,8 +15,6 @@ scope "school-admin", module: "school_admin", as: "school_admin" do
   get "teachers/:public_id/removal", to: "teachers#removal", as: :teacher_removal
   post "teachers/:public_id/reinstatement", to: "teacher_reinstatements#create", as: :teacher_reinstatement
   resource :school, only: :show
-  # PATCH seul : `resource :link` ajouterait un PUT que l'UDR-0056 §3.0 ne dessine pas.
-  patch "school/link", to: "school_links#update", as: :school_link
   # Sous /school-admin/school, sans le préfixe de nom « school_ » (UDR-0056 §3.0 : school_admin_level_classrooms_path).
   scope "school" do
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id

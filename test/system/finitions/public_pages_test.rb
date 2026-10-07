@@ -21,7 +21,7 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
 
   test "FU-13: the logo of each public page leads to the public home" do
     [ new_session_path, new_join_code_path, join_classroom_path("KFM37"), new_teacher_registration_path,
-      new_pending_teacher_registration_path, invitation_path(@invitation.token), new_identity_pin_reset_path ].each do |path|
+      teacher_invite_link_path("cccccccccccc"), invitation_path(@invitation.token), new_identity_pin_reset_path ].each do |path|
       visit path
       find("a[aria-label='Lnclass, accueil']").click
 

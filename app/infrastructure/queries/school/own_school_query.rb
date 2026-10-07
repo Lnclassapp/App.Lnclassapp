@@ -1,10 +1,10 @@
 # 🔌 INFRA · Queries::School::OwnSchoolQuery
-# Rôle : l'établissement de la direction pour sa page « Établissement » : nom, type, statut, code et jeton du lien de la direction
-# ADR  : 0006, 0057, 0071, 0082 · UDR : 0056, 0078 · school_code : lu par school_links jusqu'au Lot D
+# Rôle : l'établissement de la direction pour sa page « Établissement » : nom, type, statut et jeton du lien de la direction
+# ADR  : 0006, 0071, 0082 · UDR : 0056, 0078
 module Queries
   module School
     class OwnSchoolQuery
-      COLUMNS = %i[public_id name school_type status school_code direction_invite_token].freeze
+      COLUMNS = %i[public_id name school_type status direction_invite_token].freeze
 
       Row = Data.define(*COLUMNS) do
         # Un établissement inactif ou en brouillon se lit, sans geste (UDR-0056 §2.6).

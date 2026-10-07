@@ -1,47 +1,46 @@
 require "application_system_test_case"
 
-# CP-11 to CP-14 (ADR-0063, UDR-0050): a teacher whose school has no code for them signs up by its national code (or by
-# the DRENA list). ADR-0073: while validation is paused, they are attached at once and land on picking their classes. A
-# request still pending from before the pause is validated by a colleague who vouches for them — or by the team, from the
-# school page. On a desktop and on a 390 px phone.
+# CP-11, CP-14 (ADR-0063, UDR-0050), rewritten by ADR-0082 §4.3 and UDR-0078: a teacher whose school has never used
+# Lnclass signs up on /teacher-signup by the DRENA, then the school, with a full name. They are attached at once, without
+# any request, and land on picking their classes. CP-12, CP-13: a request still pending from before the pause is validated
+# by a colleague who vouches for them — or by the team, from the school page. On a desktop and on a 390 px phone.
 class Identity::ColdStartTest < ApplicationSystemTestCase
   SIGNUP = "identity.teacher_registrations".freeze
 
   setup do
     @drena = create_drena(name: "Abidjan 1")
-    @school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", national_code: "012345")
+    @school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan")
     create_material(name: "SVT", shortname: "SVT")
   end
 
-  def fill_person(contact: "05 01 02 03 04")
-    fill_in "teacher_registration[last_name]", with: "Koné"
-    fill_in "teacher_registration[first_name]", with: "Awa"
-    choose I18n.t("genders.female")
-    fill_in "teacher_registration[contact]", with: contact
+  def sign_up(shot:, desktop: true)
+    visit new_teacher_registration_path
+    yield if block_given?
+    assert_field "teacher_registration[contact]", placeholder: "0701020304"
+    select "Abidjan 1", from: "teacher_registration[drena_public_id]"
+    select "Lycée Classique d'Abidjan", from: "teacher_registration[school_public_id]"
     select "SVT", from: "teacher_registration[material_slug]"
+    fill_in "teacher_registration[full_name]", with: "KONÉ Awa"
+    choose I18n.t("genders.female")
+    fill_in "teacher_registration[contact]", with: "0501020304"
     fill_in "teacher_registration[pin]", with: "4821"
     fill_in "teacher_registration[pin_confirmation]", with: "4821"
-  end
-
-  def sign_up_by_national_code
-    visit new_teacher_registration_path
-    click_on I18n.t("#{SIGNUP}.form.no_school_code")
-    assert_selector "h2", text: I18n.t("#{SIGNUP}.new.pending_title")
-    fill_person
-    fill_in "teacher_registration[national_code]", with: "012 345"
-    growth_shot("1280-inscription-sans-code")
+    growth_shot(shot, desktop:)
     click_on I18n.t("#{SIGNUP}.form.submit")
-    assert_toast I18n.t("identity.pending_teacher_registrations.create.welcome")
+    assert_toast I18n.t("#{SIGNUP}.create.welcome")
     assert_current_path teacher_classrooms_path
   end
 
-  test "ADR-0073: by the national code, the teacher is attached at once and reaches the catalogue" do
-    sign_up_by_national_code
+  test "ADR-0082 §4.3: by the DRENA then the school, the teacher is attached at once, without a request, and reaches the catalogue" do
+    sign_up(shot: "1280-inscription-drena")
 
     visit courses_path
     assert_current_path courses_path
     teacher = Orm::User.find_by!(contact: "0501020304")
-    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
+    assert_equal [ "KONÉ", "Awa" ], [ teacher.last_name, teacher.first_name ]
+    assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher:).pluck(:school_id, :primary)
+    assert_equal "standard", Orm::TeacherProfile.find_by!(user: teacher).joined_via
+    assert_not Orm::SchoolJoinRequest.exists?
   end
 
   test "CP-13: a request pending from before the pause is vouched by a colleague" do
@@ -60,17 +59,6 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     assert_no_selector "#pending_colleagues"
     assert_equal [ sponsor.id ], Orm::Referral.where(referee: awa).pluck(:referrer_id)
     assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher: awa).pluck(:school_id)
-  end
-
-  test "CP-11: by the DRENA then the school, when the national code is not known" do
-    visit new_pending_teacher_registration_path
-    fill_person
-    select "Abidjan 1", from: "teacher_registration[drena_public_id]"
-    select "Lycée Classique d'Abidjan", from: "teacher_registration[school_public_id]"
-    click_on I18n.t("#{SIGNUP}.form.submit")
-
-    assert_current_path teacher_classrooms_path
-    assert_equal [ [ @school.id, "approved" ] ], Orm::SchoolJoinRequest.pluck(:school_id, :status)
   end
 
   test "CP-12: the team validates one pending teacher and refuses another from the school page" do
@@ -96,17 +84,13 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     assert_equal "rejected", koffi_request.reload.status
   end
 
-  test "CP-11: on a 390 px phone, the sign-up without code and the page that follows fit the width" do
+  test "CP-11: on a 390 px phone, the sign-up and the page that follows fit the width" do
     with_mobile_viewport do
-      visit new_pending_teacher_registration_path
-      assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
-             "le formulaire déborde en largeur"
-      fill_person
-      fill_in "teacher_registration[national_code]", with: "012345"
-      growth_shot("390-inscription-sans-code", desktop: false)
-      click_on I18n.t("#{SIGNUP}.form.submit")
+      sign_up(shot: "390-inscription-drena", desktop: false) do
+        assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
+               "le formulaire déborde en largeur"
+      end
 
-      assert_current_path teacher_classrooms_path
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page qui suit l'inscription déborde en largeur"
     end

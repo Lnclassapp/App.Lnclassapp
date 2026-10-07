@@ -90,12 +90,14 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_join_school_public_id_error", 0
   end
 
-  test "IE-18: the frame of the schools is fed by the waiting screen itself, in the scope of the join form" do
+  # ADR-0082 §4.5: /drenas/:drena_public_id/schools is again the source of the list, in the scope of the join form.
+  test "IE-18: the frame of the schools is fed by /drenas/:id/schools, in the school_join scope" do
     sign_in_as create_teacher(school: nil)
 
     get pending_account_path
 
-    url = pending_account_path(school_join: { drena_public_id: "__drena__" })
+    url = drena_schools_path("__drena__", scope: "school_join")
+    assert_equal "/drenas/__drena__/schools?scope=school_join", url
     assert_select "form#school-join-form[data-school--drena-schools-url-value=?]", url
   end
 

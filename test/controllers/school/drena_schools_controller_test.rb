@@ -1,7 +1,8 @@
 require "test_helper"
 
 # ID-08, SC-26 (UDR-0024): the active schools of a DRENA, public and rate limited — the « schools » frame of the
-# teacher sign-up in HTML, a list of { public_id, name } in JSON. Only the active schools, sorted by name.
+# teacher sign-up (or of the waiting screen, scope=school_join) in HTML, a list of { public_id, name } in JSON.
+# Only the active schools, sorted by name.
 class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @drena = create_drena(name: "Abidjan 1")
@@ -23,6 +24,34 @@ class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "option[value='#{@closed.public_id}']", count: 0
     assert_select "option[value='#{@elsewhere.public_id}']", count: 0
+  end
+
+  # ADR-0082 §4.5, UDR-0078 §3.9: the waiting screen reuses this frame, its fields in the school_join scope.
+  test "HTML: scope=school_join names the fields of the waiting screen's join form" do
+    get drena_schools_path(@drena.public_id, scope: "school_join"), headers: { "Turbo-Frame" => "schools" }
+
+    assert_response :success
+    assert_select "turbo-frame#schools" do
+      assert_select "input[type=hidden][name='school_join[drena_public_id]'][value='#{@drena.public_id}']:not([id])"
+      assert_select "select[name='school_join[school_public_id]'][required]:not([disabled])"
+      assert_equal [ "Collège Voltaire", "Lycée Classique d'Abidjan" ], css_select("option[value!='']").map(&:text)
+      assert_select "label[for='school_join_school_public_id']"
+    end
+    assert_select "[name^='teacher_registration']", 0
+  end
+
+  test "HTML: any other scope falls back to the sign-up's teacher_registration" do
+    [ "teacher_registration", "user", "school_join]", "" ].each do |scope|
+      get drena_schools_path(@drena.public_id, scope:)
+
+      assert_response :success, scope
+      assert_select "select[name='teacher_registration[school_public_id]']", 1, scope
+      assert_select "[name^='school_join'], [name^='user']", 0, scope
+    end
+    get drena_schools_path(@drena.public_id, scope: [ "school_join" ])
+
+    assert_response :success
+    assert_select "select[name='teacher_registration[school_public_id]']"
   end
 
   test "HTML: a DRENA without an active school says so and disables the list" do

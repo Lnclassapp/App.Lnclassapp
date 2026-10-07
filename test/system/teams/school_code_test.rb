@@ -57,7 +57,7 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
       assert_no_selector "#school_header dialog[open]"
     end
     assert_not_equal "k7m4qz", @school.reload.school_code
-    assert_nil Queries::School::SchoolCodePreviewQuery.new.call(code: "k7m4qz")
+    assert_nil Repositories::School::SchoolRepository.new.find_by_school_code(school_code: "k7m4qz")
   end
 
   test "on a phone, the code block fits the width and the code is copied" do

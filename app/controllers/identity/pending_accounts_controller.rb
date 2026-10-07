@@ -29,7 +29,7 @@ module Identity
 
       @join_request = Queries::School::JoinRequestsQuery.new.status_for(teacher_id: current_actor.user_id)
       # Sans établissement ni demande en attente : DRENA puis établissement (ADR-0082 §4.3). Sans JavaScript, la DRENA
-      # choisie revient ici en GET (formulaire school-join-drena) ; avec, ce même écran nourrit le frame « schools ».
+      # choisie revient ici en GET (formulaire school-join-drena) ; avec, /drenas/:id/schools?scope=school_join sert le frame.
       return unless current_actor.school_id.nil? && @join_request&.status != PENDING
 
       @school_join = Dtos::School::SchoolJoinInput.new(

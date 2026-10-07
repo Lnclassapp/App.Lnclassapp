@@ -76,8 +76,7 @@ module Dtos
         moved.each { errors.import(it, attribute: :full_name) }
       end
 
-      # Avec un jeton, l'établissement vient du lien et le use case le juge. Même nom que la validation de
-      # PendingTeacherRegistrationInput, qui la remplace chez elle (supprimée au Lot D).
+      # Avec un jeton, l'établissement vient du lien et le use case le juge.
       def school_designated
         return if invite_token
 
