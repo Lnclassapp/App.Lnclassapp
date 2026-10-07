@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-07)* |
 | **Date** | 2026-10-07 |
 | **Chantier** | [`docs/chantiers/inscription-enseignant`](../../chantiers/inscription-enseignant/prd.md) |
 | **Remplace** | — *(amende ADR-0037 §4 pour la saisie, ADR-0057 et ADR-0063 côté enseignant, ADR-0071 §« Changer le lien », ADR-0073 pour les nouvelles inscriptions)* |
