@@ -23,6 +23,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   # with jobs queued, not performed; a test that needs them performed sets it in its own setup, which runs after this one.
   setup { ActiveJob::Base.queue_adapter.perform_enqueued_jobs = false }
 
+  # UDR-0078 §4: Chrome finds the site installable (manifest and service worker, ADR-0082) and fires a real
+  # `beforeinstallprompt` whenever it likes, which would show the install banner in the middle of any test. The real event
+  # is stopped before the page's scripts see it; the banner's own tests dispatch a simulated one, which goes through.
+  IGNORE_BROWSER_INSTALL_PROMPT = <<~JS.freeze
+    window.addEventListener("beforeinstallprompt", (event) => { if (event.isTrusted) event.stopImmediatePropagation() }, true)
+  JS
+  setup { page.driver.browser.execute_cdp("Page.addScriptToEvaluateOnNewDocument", source: IGNORE_BROWSER_INSTALL_PROMPT) }
+
   MOBILE_VIEWPORT = [ 390, 844 ].freeze
 
   # The same journey on a phone: the window shrinks for the block, then returns to its size.

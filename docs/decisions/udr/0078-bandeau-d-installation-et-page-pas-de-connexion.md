@@ -133,6 +133,7 @@ Dans la carte « Sur la période » (`#team_dashboard_period`), **après** la tu
 ## 4. Conséquences
 
 - Le shell élève et enseignant porte un bloc caché de plus dans chaque page ; il n'ajoute aucune requête.
+- Le bandeau ne compte pas dans les blocs visibles avant le premier défilement (règle R2 de sobriété) : c'est une invitation passagère, qui se ferme d'un geste et ne revient pas avant 3 jours. Les tests système ignorent donc le vrai signal d'installation de Chrome ; seuls les tests du bandeau le simulent.
 - Aucun autre écran ne propose l'installation : un futur bouton « Installer » ailleurs (profil, aide) réutilise le contrôleur `install` et ce mode d'emploi, sans nouvelle règle.
 - Interdit : un bandeau d'installation fixé en bas d'écran, une fenêtre modale d'installation, un bandeau pour la direction, l'équipe ou les pages publiques, une mémorisation du choix sur le serveur.
 - La page « Pas de connexion » ne suit pas les composants ERB ni la feuille de l'application : toute évolution du design system qui doit l'atteindre se recopie à la main dans `offline.css`, et le numéro de cache du programme d'arrière-plan augmente.
