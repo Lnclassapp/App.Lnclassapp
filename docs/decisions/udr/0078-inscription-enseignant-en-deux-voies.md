@@ -182,7 +182,10 @@ Textes (`fr`) :
 |---|---|
 | `identity/referrals/_invite`, `identity/referrals/_sidebar_card` | `link = teacher_invite_link_url(invite.referral_token)` (`/i/<jeton>`). Aucun autre changement de texte ni de geste. |
 | `school_admin/schools/_link` | `link = teacher_invite_link_url(school.direction_invite_token)`. **Retirer** le paragraphe du code (`#school_code_value`) et toute la modale « Changer le lien » (`change-school-link`, son formulaire). « Copier le lien » et « Partager sur WhatsApp » restent. `school_admin/school_links/update.turbo_stream.erb` est supprimé. |
+| `classroom/teacher_homes/_course_levels`, bulle « Inviter » (`#course_level_invite`) | `href: whatsapp_share_url(message)` avec `message = t("identity.referrals.invite.message", school:, link: teacher_invite_link_url(invite.referral_token))`, `link_html: { target: "_blank", rel: "noopener", data: { action: "identity--share#record", "identity--share-channel-param": "whatsapp" } }`. Le `<li>` porte `data-controller="identity--share"` et les valeurs `url` (`teacher_referral_shares_path`), `link` et `text`, comme `#referral_share_actions`. Le libellé reste « Inviter » ; `sr_suffix` : « sur WhatsApp ». La page « Inviter un collègue » ne change pas. |
 | `teams/schools/_header`, bloc `#school_code` | Le bloc garde le code, « Copier le code » et « Régénérer le code », mais l'aide devient « Pour l'inscription de la direction. » (`school_code_hint`). « Copier le lien » et `#school_code_link` montrent `teacher_invite_link_url(school.team_invite_token)`, sous un libellé « Lien d'invitation des enseignants » (`invite_link`). |
+
+`ui_subject_bubble` reçoit une option `link_html:` (attributs fusionnés sur le `<a>` : `target`, `rel`, `data`), vide par défaut ; les bulles existantes ne changent pas.
 
 ### 3.8 Liste « Enseignants » de la fiche équipe (`teams/schools/show`)
 

@@ -45,7 +45,7 @@ Constats du porteur (2026-10-07) :
 
 - **L'inscription de la direction** (voie standard, liens d'invitation vers la direction, plafond, retrait) et la **suppression définitive du code d'établissement** : chantier suivant `inscription-direction-sans-code` (Q5–Q8). Ici, la direction s'inscrit encore avec le code.
 - **Rejoindre un second établissement** par un lien d'invitation : un enseignant connecté qui ouvre un lien est renvoyé vers son accueil (Q12).
-- **L'élève et le parent** : rien ne change pour eux.
+- **L'élève et le parent** : rien ne change pour eux ici. Le retrait du code de classe et les deux flux d'inscription de l'élève (porteur, Q20) font l'objet du chantier suivant `inscription-eleve-sans-code`.
 - Le nettoyage en direct du numéro et la vérification en direct de la confirmation du code secret sur les autres formulaires (élève, direction, invitation, changement de code) : à reprendre ailleurs si elle plaît.
 - La vérification du numéro par WhatsApp (chantier `verification-whatsapp`, au backlog).
 
@@ -73,6 +73,8 @@ Constats du porteur (2026-10-07) :
 | Q16. Ordre des champs ? | Porteur : ordre présenté accepté (Établissement : DRENA, établissement, matière → Vous : nom complet, genre, numéro → Code secret : code, confirmation ; par lien, l'établissement est déjà affiché). Il ajoute une **vérification en direct de la confirmation** : une icône dans le champ confirmation et un court message dessous disent si les deux codes concordent. | Nouveau comportement côté navigateur (aucun n'existe pour la confirmation). Le serveur garde sa vérification : sans JavaScript, l'erreur arrive au renvoi (422). Limité à l'inscription enseignant ; les autres formulaires à code secret (élève, direction, invitation, changement de code) restent tels quels. |
 | Q17. L'écran d'attente d'un enseignant sans établissement (retiré) rejoint par le code : que devient-il ? | **DRENA → établissement**, comme l'inscription standard ; rattachement immédiat. | Le code ne sert plus du tout à l'enseignant. La règle existante tient : l'établissement qui l'a retiré refuse, avec la même erreur neutre que pour un établissement absent de la liste. Sa voie d'arrivée ne change pas (elle décrit l'inscription). Le code national disparaît aussi de l'inscription (non cité par le porteur, retiré par défaut). |
 | Q18. Le champ du numéro ? | **Chiffres seulement, 10 au plus** ; un `+225`, `(+225)`, `00225` ou des espaces saisis ou collés sont **retirés en direct**. | Nouveau comportement côté navigateur. Le serveur le fait déjà à l'enregistrement : il reste la garantie sans JavaScript. Un numéro ivoirien commence par 0 : un `225` ou `00225` en tête est toujours l'indicatif. Limité à l'inscription enseignant, comme Q16. |
+| Q19. Le bouton « Inviter » de la section « Cours » de l'accueil enseignant ? | Il doit **ouvrir directement WhatsApp** pour inviter un collègue (aujourd'hui, il ouvre la page « Inviter un collègue »). Le lien d'une classe, lui, est destiné aux élèves. | Le bouton devient un lien WhatsApp sortant portant le message et le lien d'invitation `/i/<jeton>`, et le partage est compté (canal `whatsapp`), comme le bouton WhatsApp de la page « Inviter un collègue ». Rattaché au Lot B. |
+| Q20. Retirer aussi le code de classe pour les élèves (deux flux, comme l'enseignant) ? | **Oui, mais dans un chantier séparé**, `inscription-eleve-sans-code`, avec son propre grill. | Écrit dans `Hors périmètre`. Ici, le code et le lien de classe des élèves ne changent pas. |
 
 ## Cas limites identifiés
 

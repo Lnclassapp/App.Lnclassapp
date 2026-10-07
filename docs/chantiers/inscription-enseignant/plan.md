@@ -33,6 +33,7 @@ Pourquoi un Lot D : retirer `/e/:code`, `/teacher-signup/without-code` et « Cha
                      `app/domain/use_cases/identity/register_teacher.rb` *(une ligne : `joined_via: "code"`, réécrit ensuite par le Lot A)*
                      `app/domain/use_cases/identity/register_pending_teacher.rb` *(une ligne : `joined_via: "standard"`, supprimé ensuite par le Lot D)*
                      `app/views/school/drena_schools/index.html.erb` *(local `scope`, `:teacher_registration` par défaut ; partagé par A et C)*
+                     `app/helpers/components_helper.rb` · `app/views/components/_subject_bubble.html.erb` *(option `link_html:` de `ui_subject_bubble`, vide par défaut)*
                      `config/routes/identity.rb` *(ajout seulement : `get "i/:token", to: "identity/teacher_registrations#invite", as: :teacher_invite_link`)*
                      `test/support/factories/identity.rb` *(`create_teacher` accepte `joined_via:`)*
                      `test/db/add_teacher_arrival_and_school_invite_tokens_migration_test.rb`
@@ -99,6 +100,9 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
                      `app/views/school_admin/schools/_link.html.erb` *(sans code ni « Changer le lien »)*
                      `app/views/teams/schools/_header.html.erb`
                      `app/views/teams/schools/show.html.erb` *(ligne « Inscription : … »)*
+                     `app/views/classroom/teacher_homes/_course_levels.html.erb` *(bulle « Inviter » → WhatsApp, partage compté)*
+                     `config/locales/classroom/teacher_homes.fr.yml`
+                     `test/controllers/classroom/teacher_homes_controller_test.rb`
                      `config/locales/identity/referrals.fr.yml`
                      `config/locales/school_admin/schools.fr.yml`
                      `config/locales/teams/schools.fr.yml`
@@ -113,8 +117,8 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
                      `test/system/identity/sidebar_referral_test.rb`
                      `test/system/finitions/classroom_test.rb`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/controllers/school_admin/schools_controller_test.rb` (IE-07 : lien `/i/`, ni code ni « Changer le lien ») · `test/controllers/teams/schools_controller_test.rb` (IE-08 lien de l'équipe, IE-15 voie dans la liste) · `test/controllers/identity/referrals_controller_test.rb` (IE-06 : le lien ne contient pas le code) · `test/infrastructure/queries/school/school_detail_query_test.rb` (IE-15)
-- **Done quand**   : un enseignant, la direction et l'équipe copient chacun un lien `/i/<jeton>` qui ne contient pas le code d'établissement ; la direction n'a plus « Changer le lien » ; la fiche de l'équipe montre la voie d'arrivée de chaque enseignant
+- **Test associé** : `test/controllers/school_admin/schools_controller_test.rb` (IE-07 : lien `/i/`, ni code ni « Changer le lien ») · `test/controllers/teams/schools_controller_test.rb` (IE-08 lien de l'équipe, IE-15 voie dans la liste) · `test/controllers/identity/referrals_controller_test.rb` (IE-06 : le lien ne contient pas le code) · `test/infrastructure/queries/school/school_detail_query_test.rb` (IE-15) · `test/controllers/classroom/teacher_homes_controller_test.rb` (IE-20 : la bulle « Inviter » pointe vers wa.me avec `/i/<jeton>` et porte l'action de partage)
+- **Done quand**   : la bulle « Inviter » de l'accueil enseignant ouvre WhatsApp avec le lien d'invitation ; un enseignant, la direction et l'équipe copient chacun un lien `/i/<jeton>` qui ne contient pas le code d'établissement ; la direction n'a plus « Changer le lien » ; la fiche de l'équipe montre la voie d'arrivée de chaque enseignant
 
 ---
 
@@ -180,6 +184,7 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 | IE-15 | B |
 | IE-16 | D |
 | IE-17, IE-19 | A |
+| IE-20 | 0 (option de la bulle), B |
 | IE-18 | C |
 
 Aucun critère orphelin.
@@ -224,6 +229,8 @@ Consignes à chaque agent de lot :
 | `app/domain/use_cases/identity/register_pending_teacher.rb` | Lot 0 (une ligne), puis Lot D (suppression) |
 | `app/domain/ports/identity/registration_repository_port.rb` · `app/infrastructure/repositories/identity/registration_repository.rb` | Lot 0 |
 | `test/support/factories/identity.rb` | Lot 0 |
+| `app/helpers/components_helper.rb` · `app/views/components/_subject_bubble.html.erb` | Lot 0 |
+| `app/views/classroom/teacher_homes/_course_levels.html.erb` · `config/locales/classroom/teacher_homes.fr.yml` | Lot B |
 | `config/locales/identity/teacher_registrations.fr.yml` | Lot A |
 | `config/locales/identity/pending_accounts.fr.yml` · `pending_school_joins.fr.yml` | Lot C |
 | `config/locales/identity/referrals.fr.yml` · `school_admin/schools.fr.yml` · `teams/schools.fr.yml` | Lot B |
