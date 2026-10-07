@@ -110,6 +110,7 @@ def removed_from?(classroom_id:, student_id:)                      = raise NotIm
                      `test/controllers/school/level_classrooms_controller_test.rb`
                      `test/controllers/classroom/joins_controller_test.rb`
                      `test/integration/classroom/join_capacity_test.rb`
+                     `app/controllers/school/drena_schools_controller.rb` · `app/views/school/drena_schools/index.html.erb` · `test/controllers/school/drena_schools_controller_test.rb` *(ajout du 2026-10-07 : la cascade réutilise ce gabarit, paramètre `picker:` rétrocompatible ; découvert à l'exécution)*
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/classroom/register_student_test.rb` (IL-01, IL-03, IL-08, IL-10, IL-19) · `test/controllers/classroom/student_registrations_controller_test.rb` (IL-02 pour la page, IL-05, IL-06, IL-07, IL-20, IL-23) · `test/infrastructure/queries/classroom/level_classrooms_query_test.rb` (IL-04) · `test/controllers/classroom/joins_controller_test.rb` (IL-08, IL-09 pour un jeton inconnu ou d'une classe archivée) · `test/integration/classroom/join_capacity_test.rb` (IL-05 sous concurrence)
 - **Done quand**   : un visiteur ouvre `/student-signup`, choisit DRENA, établissement, niveau et classe, crée son compte et arrive sur son accueil dans cette classe ; un autre ouvre `/c/<jeton>` et s'inscrit dans la classe affichée ; une classe complète ou introuvable se dit dans la liste
@@ -171,6 +172,7 @@ def removed_from?(classroom_id:, student_id:)                      = raise NotIm
                      `test/infrastructure/queries/classroom/student_home_query_test.rb`
                      `test/controllers/classroom/student_classroom_choices_controller_test.rb`
                      `test/controllers/classroom/student_homes_controller_test.rb`
+                     `app/controllers/classroom/joins_controller.rb` · `test/controllers/classroom/joins_controller_test.rb` · `app/infrastructure/queries/classroom/join_preview_query.rb` · `test/infrastructure/queries/classroom/join_preview_query_test.rb` *(ajout du 2026-10-07 : l'élève connecté qui ouvre `/c/<jeton>` rejoint aujourd'hui par le code, lu dans `LinkRow#join_code` ; le Lot B passe le jeton à `JoinAsStudent`, retire `join_code` de `LinkRow`, et `student_classroom_choices#new` lit `flash[:link_invalid]` posé par le Lot A. Le scope de la cascade est `student_classroom_choice`.)*
 - **Dépend de**    : Lot A *(le partial `_class_picker`, les deux lectures de la cascade et `JoinPolicy`)*
 - **Test associé** : `test/domain/use_cases/classroom/join_as_student_test.rb` (IL-15, IL-16, IL-17) · `test/controllers/classroom/student_classroom_choices_controller_test.rb` (IL-15, IL-17, IL-18) · `test/controllers/classroom/student_homes_controller_test.rb` (IL-14 côté élève : accueil sans classe et son message)
 - **Done quand**   : un élève retiré, ou dont la classe est archivée, voit « Choisis ta classe » sur son accueil, choisit une classe et y entre ; la classe dont il a été retiré lui est refusée par ce chemin, et son lien l'y ramène
@@ -185,6 +187,7 @@ def removed_from?(classroom_id:, student_id:)                      = raise NotIm
 `app/infrastructure/queries/school/student_work_query.rb` *(la lecture qui nourrit cette page : jeton du lien, `joined_at`, voie, identifiant de l'élève pour le retrait)*
                      `config/locales/school_admin/classrooms.fr.yml`
                      `test/controllers/school_admin/classrooms_controller_test.rb`
+                     `app/controllers/classroom/classroom_students_controller.rb` · `app/views/classroom/classroom_students/destroy.turbo_stream.erb` · `test/controllers/classroom/classroom_students_controller_test.rb` *(ajout du 2026-10-07, si besoin : la réponse au `DELETE` du Lot D vise les identifiants de la page enseignant — `student_<public_id>`, `classroom_roster_title`, `classroom_roster_count`, `classroom_roster`, `classroom_headcount` ; la page de la direction les porte, ou reçoit sa propre réponse)*
 - **Dépend de**    : Lot C, Lot D
 - **Test associé** : `test/controllers/school_admin/classrooms_controller_test.rb` (IL-12 pour la direction : son établissement accordé, un autre 404 ; IL-13 et IL-14 depuis sa page)
 - **Done quand**   : la direction ouvre une classe de son établissement, copie et change son lien, voit les nouveaux arrivés et retire un élève ; elle ne peut rien sur la classe d'un autre établissement
@@ -213,6 +216,7 @@ def removed_from?(classroom_id:, student_id:)                      = raise NotIm
                      `test/domain/entities/classroom/join_code_test.rb` · `test/domain/use_cases/classroom/join_with_code_test.rb` · `test/domain/dtos/classroom/join_with_code_input_test.rb` · `test/controllers/classroom/join_codes_controller_test.rb` *(supprimés)*
                      `test/routing/v1_routes_test.rb` · `test/db/schema_constraints_test.rb` · `test/guards/repository_rules_test.rb`
                      `test/system/classroom/join_test.rb` *(réécrit : les deux voies)* · `test/system/classroom/student_removal_test.rb`
+                     `test/system/classroom/classroom_page_test.rb` · `test/system/finitions/classroom_test.rb` · `test/infrastructure/queries/school/school_detail_query_test.rb` · `app/views/classroom/classroom_students/destroy.turbo_stream.erb` *(ajout du 2026-10-07 : dette de la vague 2 dans `journal.md` — tests système qui visent le bloc du code, jetons de la fiche dans `ClassroomRow`, titre de la liste recopié)*
                      `docs/guide/glossaire.md` · `docs/decisions/udr/0009-rejoindre-une-classe.md` *(statut « Remplacée »)* · `docs/decisions/adr/0041-vie-d-une-classe-annee-scolaire-et-code.md` *(note d'amendement)*
 - **Dépend de**    : Lot A, Lot B, Lot C, Lot D, Lot E
 - **Test associé** : `test/routing/v1_routes_test.rb` (IL-02 : `/join` redirige) · `test/controllers/classroom/joins_controller_test.rb` (IL-09 pour l'ancien lien `/c/kfm37`) · `test/guards/repository_rules_test.rb` (aucun `join_code` sous `app/`) · `test/db/schema_constraints_test.rb` (plus de colonne `join_code`) · `test/system/classroom/join_test.rb` (IL-01, IL-08, IL-10 dans un vrai navigateur) · `test/system/classroom/student_removal_test.rb` (IL-14, IL-15, IL-16 de bout en bout)
@@ -263,7 +267,9 @@ git worktree add ../lnclass-inscription-eleve-sans-code-lot-a -b feature/inscrip
 | `join_with_code.rb` et son test | Lot 0 (une ligne) → Lot F (suppression) ; le Lot A écrit `register_student.rb` à côté |
 | `join_as_student.rb` et son test | Lot 0 (une ligne) → Lot B |
 | `join_policy.rb` | Lot A → Lot F |
-| `joins_controller.rb` et son test, `join_preview_query.rb` | Lot A → Lot F |
+| `joins_controller.rb` et son test, `join_preview_query.rb` et son test | Lot A → Lot B → Lot F |
+| `school/drena_schools` (contrôleur, gabarit, test) | Lot A seul |
+| `classroom_students_controller.rb`, `destroy.turbo_stream.erb` et leur test | Lot D → Lot E → Lot F |
 | `classroom_header_query.rb`, `_header.html.erb`, `school_detail_query.rb`, `teams/schools/_classroom_group.html.erb` | Lot C → Lot F |
 | `student_home_query.rb` | Lot B → Lot F |
 | `app/views/classroom/classrooms/show.html.erb` | aucun lot : `_header` (C) et `_roster` (D) y sont déjà rendus |
