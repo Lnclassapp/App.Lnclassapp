@@ -1,9 +1,9 @@
 require "application_system_test_case"
 
-# IE-01, IE-04, IE-06, IE-09, IE-17, IE-19 (ADR-0082, UDR-0078): one sign-up page in three sections. The standard way
-# chooses the DRENA, then the school, then the subject; the full name shows its split and can be corrected; the number is
-# cleaned while typed; the secret code says live whether the confirmation matches. An invite link arrives with the school
-# already chosen. Errors come back without reloading the page until the account exists.
+# IE-01, IE-03, IE-05, IE-06, IE-09, IE-17, IE-19 (ADR-0082, UDR-0078): one sign-up page in three sections. The standard
+# way chooses the DRENA, then the school, then the subject; the name and the first names are two fields (ADR-0037); the
+# number is cleaned while typed; the secret code says live whether the confirmation matches. An invite link arrives with
+# the school already chosen. Errors come back without reloading the page until the account exists.
 class Identity::TeacherSignupTest < ApplicationSystemTestCase
   FORM = "identity.teacher_registrations.form".freeze
   ERRORS = "activemodel.errors.models.dtos/identity/teacher_registration_input.attributes".freeze
@@ -29,8 +29,9 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     select "SVT", from: "teacher_registration[material_slug]"
   end
 
-  def fill_person(full_name: "KOUASSI Aya Marie", contact: "0501020304")
-    fill_in "teacher_registration[full_name]", with: full_name
+  def fill_person(last_name: "KOUASSI", first_name: "Aya Marie", contact: "0501020304")
+    fill_in "teacher_registration[last_name]", with: last_name
+    fill_in "teacher_registration[first_name]", with: first_name
     choose t("genders.female")
     fill_in "teacher_registration[contact]", with: contact
   end
@@ -38,13 +39,6 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
   def fill_codes(pin: "4821", confirmation: "4821")
     fill_in "teacher_registration[pin]", with: pin
     fill_in "teacher_registration[pin_confirmation]", with: confirmation
-  end
-
-  def assert_preview(last_name, first_name)
-    within "#full_name_preview" do
-      assert_selector "[data-identity--full-name-target=lastOut]", exact_text: last_name
-      assert_selector "[data-identity--full-name-target=firstOut]", exact_text: first_name
-    end
   end
 
   def assert_signed_up(channel)
@@ -66,12 +60,8 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
            "la page déborde en largeur"
     assert_no_page_reload do
       choose_school
-      fill_in "teacher_registration[full_name]", with: "KOUASSI  Aya Marie"
-
-      within "#full_name_preview" do
-        assert_selector "[data-identity--full-name-target=lastOut]", exact_text: "KOUASSI"
-        assert_selector "[data-identity--full-name-target=firstOut]", exact_text: "Aya Marie"
-      end
+      fill_in "teacher_registration[last_name]", with: "KOUASSI"
+      fill_in "teacher_registration[first_name]", with: "Aya  Marie"
       choose t("genders.female")
       paste "teacher_registration[contact]", "+225 07 01 02 03 04"
 
@@ -123,53 +113,33 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     assert_includes find("#teacher_registration_pin_confirmation")["aria-describedby"], "pin_match_status"
   end
 
-  test "IE-04, IE-05: a one-word name is refused without reloading; « Corriger » keeps the name in two words" do
+  test "IE-03, IE-05: Nom, Prénom(s), Genre, Numéro, never a full name; first names left blank are refused" do
     visit new_teacher_registration_path
 
+    within all("form#teacher-registration-form > fieldset")[1] do
+      assert_equal [ "Nom", "Prénom(s)", "Genre", "Numéro de téléphone" ],
+                   all("label[for], legend:not(.uppercase)").map { it.text.delete("*").strip }
+      assert_equal [ "last_name", "first_name", "gender", "contact" ],
+                   all("input").map { it[:name][/\[(\w+)\]/, 1] }.uniq
+    end
+    assert_no_field "teacher_registration[full_name]"
+    assert_no_text "Nom complet"
+    assert_no_text "Corriger"
     assert_no_page_reload do
       choose_school
-      fill_person(full_name: "KONÉ", contact: "0701020304")
+      fill_person(last_name: "N'GUESSAN", first_name: "  ", contact: "0701020304")
       fill_codes
       click_on t("#{FORM}.submit")
 
-      assert_selector "#teacher_registration_full_name_error", text: t("#{ERRORS}.full_name.single_word")
+      assert_selector "#teacher_registration_first_name_error", text: t("#{ERRORS}.first_name.blank")
     end
-    fill_in "teacher_registration[full_name]", with: "KONÉ OUATTARA Awa"
-    find("#name-correction summary").click
-
-    assert_field "teacher_registration[last_name]", with: "KONÉ"
-    assert_field "teacher_registration[first_name]", with: "OUATTARA Awa"
-    fill_in "teacher_registration[last_name]", with: "KONÉ OUATTARA"
-    fill_in "teacher_registration[first_name]", with: "Awa"
-
-    # « Corriger » open: the preview follows the corrected fields; closed, the split of the full name.
-    assert_preview "KONÉ OUATTARA", "Awa"
-    find("#name-correction summary").click
-    assert_preview "KONÉ", "OUATTARA Awa"
-    find("#name-correction summary").click
-    assert_preview "KONÉ OUATTARA", "Awa"
+    assert_not Orm::User.exists?(contact: "0701020304")
+    fill_in "teacher_registration[first_name]", with: "Konan  Jean-Baptiste"
     fill_codes
     click_on t("#{FORM}.submit")
 
     assert_current_path teacher_classrooms_path
-    assert_equal [ "KONÉ OUATTARA", "Awa" ], Orm::User.where(contact: "0701020304").pick(:last_name, :first_name)
-  end
-
-  test "IE-04: corrected then closed, « Corriger » no longer counts: the server splits the full name, as the preview says" do
-    visit new_teacher_registration_path
-    choose_school
-    fill_person(full_name: "KONÉ OUATTARA Awa", contact: "0701020305")
-    find("#name-correction summary").click
-    fill_in "teacher_registration[last_name]", with: "KONÉ OUATTARA"
-    fill_in "teacher_registration[first_name]", with: "Awa"
-    find("#name-correction summary").click
-
-    assert_preview "KONÉ", "OUATTARA Awa"
-    fill_codes
-    click_on t("#{FORM}.submit")
-
-    assert_current_path teacher_classrooms_path
-    assert_equal [ "KONÉ", "OUATTARA Awa" ], Orm::User.where(contact: "0701020305").pick(:last_name, :first_name)
+    assert_equal [ "N'GUESSAN", "Konan Jean-Baptiste" ], Orm::User.where(contact: "0701020304").pick(:last_name, :first_name)
   end
 
   test "IE-06, IE-09: a colleague's link shows the school and counts the referral; an unknown link warns" do
@@ -199,8 +169,8 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
   end
 end
 
-# IE-17, IE-19 and UDR-0078 §2.4: without JavaScript, the DRENA is sent by its own GET form, the server splits the full
-# name, cleans the number and refuses different codes. Chrome runs with scripts disabled.
+# IE-17, IE-19 and UDR-0078 §2.4: without JavaScript, the DRENA is sent by its own GET form, the server cleans the number
+# and refuses different codes. Chrome runs with scripts disabled.
 class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ], options: { name: :chrome_without_javascript } do |options|
     options.binary = ENV["CHROME_BIN"] if ENV["CHROME_BIN"].present?
@@ -221,7 +191,8 @@ class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
     click_on I18n.t("identity.teacher_registrations.school_fields.show_schools")
     select "Lycée Moderne de Cocody", from: "teacher_registration[school_public_id]"
     select "SVT", from: "teacher_registration[material_slug]"
-    fill_in "teacher_registration[full_name]", with: "KOUASSI Aya Marie"
+    fill_in "teacher_registration[last_name]", with: "KOUASSI"
+    fill_in "teacher_registration[first_name]", with: "Aya Marie"
     choose I18n.t("genders.female")
     fill_in "teacher_registration[contact]", with: "+225 07 01 02 03 04"
     fill_in "teacher_registration[pin]", with: "4821"

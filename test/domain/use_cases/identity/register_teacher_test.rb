@@ -176,8 +176,8 @@ module UseCases
         @registrations = FakeRegistrations.new(@journal, taken:)
         @invite_links = FakeInviteLinks.new
         dto = Dtos::Identity::TeacherRegistrationInput.new(
-          full_name: "KOUASSI Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821", pin_confirmation: "4821",
-          drena_public_id: "drn-abj1", school_public_id: "sch-lmc", material_slug: "svt", **attributes
+          last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821",
+          pin_confirmation: "4821", drena_public_id: "drn-abj1", school_public_id: "sch-lmc", material_slug: "svt", **attributes
         )
         RegisterTeacher.new(
           registrations: @registrations, schools: FakeSchools.new(@journal, *@schools_list, refuse_attach:),
@@ -215,22 +215,16 @@ module UseCases
         assert_includes params, :invite_links
       end
 
-      test "IE-03: the full name, uncorrected, is split at the first word, case kept" do
-        register(full_name: "N'GUESSAN  Konan Jean-Baptiste")
+      test "IE-03: the name and the first names are passed as typed, spaces reduced, case kept" do
+        register(last_name: "N'GUESSAN", first_name: "Konan  Jean-Baptiste")
 
         assert_equal [ "N'GUESSAN", "Konan Jean-Baptiste" ], [ user_received.last_name, user_received.first_name ]
       end
 
-      test "IE-04: the corrected name and first names prevail over the split" do
-        register(full_name: "KONÉ OUATTARA Awa", last_name: "KONÉ OUATTARA", first_name: "Awa")
+      test "IE-05: missing first names are refused under « Prénom(s) », nothing is read nor written" do
+        result = register(first_name: " ")
 
-        assert_equal [ "KONÉ OUATTARA", "Awa" ], [ user_received.last_name, user_received.first_name ]
-      end
-
-      test "IE-05: a one-word full name is refused under the full name, nothing is read nor written" do
-        result = register(full_name: "Kouassi")
-
-        assert_equal [ :invalid, { full_name: [ I18n.t("#{ERRORS}.full_name.single_word") ] } ], [ result.code, result.errors ]
+        assert_equal [ :invalid, { first_name: [ I18n.t("#{ERRORS}.first_name.blank") ] } ], [ result.code, result.errors ]
         assert_nil @registrations.received
         assert_empty @journal
         assert_equal 0, @transaction.calls
@@ -365,7 +359,7 @@ module UseCases
       test "IE-23: no audit line without an account: a refused sign-up writes none, a rolled back one keeps none" do
         register(taken: [ "0501020304" ])
         register(refuse_attach: true)
-        register(full_name: "Kouassi")
+        register(first_name: "")
 
         assert_not(@journal.any? { it.first == :audit })
       end

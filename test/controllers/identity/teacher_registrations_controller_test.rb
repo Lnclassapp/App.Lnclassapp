@@ -15,7 +15,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   def registration_params(**overrides)
-    { full_name: "KOUASSI Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821", pin_confirmation: "4821",
+    { last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821", pin_confirmation: "4821",
       drena_public_id: @drena.public_id, school_public_id: @school.public_id, material_slug: @material.slug, **overrides }
   end
 
@@ -29,23 +29,23 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_not Orm::User.exists?(contact: "0501020304")
   end
 
-  test "IE-02: three sections in order, the DRENA then the list, the full name — never a school code" do
+  test "IE-02, IE-03: three sections in order, the DRENA then the list, Nom then Prénom(s) — never a school code" do
     get new_teacher_registration_path
 
     assert_response :success
     assert_select "h2", text: I18n.t("#{PAGE}.title")
     assert_select "form#teacher-signup-drena[action='#{new_teacher_registration_path}'][method=get]"
     assert_select "form#teacher-registration-form[action='#{teacher_registrations_path}']" \
-                  "[data-controller='school--drena-schools identity--full-name identity--phone-digits identity--pin-match']" do
+                  "[data-controller='school--drena-schools identity--phone-digits identity--pin-match']" do
       assert_equal [ "Établissement", "Vous", "Code secret" ], css_select("fieldset > legend.uppercase").map { it.text.strip }
       assert_select "select[name='teacher_registration[drena_public_id]'][form=teacher-signup-drena] option[value='#{@drena.public_id}']"
       assert_select "turbo-frame#schools select[name='teacher_registration[school_public_id]'][disabled]"
       assert_select "select[name='teacher_registration[material_slug]'] option[value='#{@material.slug}']", text: "SVT"
-      assert_select "input[name='teacher_registration[full_name]'][maxlength='131'][autocomplete=name]"
-      assert_select "p#full_name_preview[hidden][aria-live=polite]"
-      assert_select "details#name-correction:not([open]) summary", text: I18n.t("#{FORM}.correct_name")
-      assert_select "details#name-correction input[name='teacher_registration[last_name]']"
-      assert_select "details#name-correction input[name='teacher_registration[first_name]']"
+      assert_select "input[name='teacher_registration[last_name]'][required][maxlength='50'][autocomplete=family-name]" \
+                    "[placeholder='Ex. : KOUASSI']"
+      assert_select "input[name='teacher_registration[first_name]'][required][maxlength='80'][autocomplete=given-name]" \
+                    "[placeholder='Ex. : Aya Marie']"
+      assert_select "input[name='teacher_registration[full_name]'], details, #full_name_preview", 0
       assert_select "input[type=radio][name='teacher_registration[gender]']", count: 2
       assert_select "input[type=tel][name='teacher_registration[contact]'][maxlength='20'][inputmode=numeric]:not([pattern])"
       assert_select "input[type=password][name='teacher_registration[pin]'][inputmode=numeric][maxlength='4']"
@@ -86,29 +86,28 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert cookies[:session_token].present?
   end
 
-  test "IE-04: the name and first names corrected by hand prevail" do
+  test "IE-03: the name and the first names are saved as typed, spaces reduced, case kept" do
     post teacher_registrations_path,
-         params: { teacher_registration: registration_params(full_name: "KONÉ OUATTARA Awa", last_name: "KONÉ OUATTARA",
-                                                             first_name: "Awa") }
+         params: { teacher_registration: registration_params(last_name: " N'GUESSAN ", first_name: "Konan  Jean-Baptiste") }
 
     assert_redirected_to teacher_classrooms_path
-    assert_equal [ "KONÉ OUATTARA", "Awa" ], [ new_teacher.last_name, new_teacher.first_name ]
+    assert_equal [ "N'GUESSAN", "Konan Jean-Baptiste" ], [ new_teacher.last_name, new_teacher.first_name ]
   end
 
-  test "IE-05: a one-word name is refused in 422 under the full name, the correction stays closed" do
-    post teacher_registrations_path, params: { teacher_registration: registration_params(full_name: "Kouassi") }
+  test "IE-05: missing first names are refused in 422 under « Prénom(s) », the name kept, no account" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params(first_name: "  ") }
 
-    assert_refused :full_name, I18n.t("#{ERRORS}.full_name.single_word")
-    assert_select "input[name='teacher_registration[full_name]'][value='Kouassi'][aria-invalid=true]"
-    assert_select "details#name-correction:not([open])"
+    assert_refused :first_name, I18n.t("#{ERRORS}.first_name.blank")
+    assert_select "input[name='teacher_registration[last_name]'][value='KOUASSI']"
+    assert_select "#teacher_registration_last_name_error", 0
   end
 
-  test "UDR-0078 §3.3: an error on a corrected name opens the correction, the entries kept" do
-    post teacher_registrations_path,
-         params: { teacher_registration: registration_params(last_name: "Kouassi", first_name: "Aya 2") }
+  test "ADR-0037: a missing name or an invalid first name is refused under its own field, the entry kept" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params(last_name: "", first_name: "Aya 2") }
 
-    assert_refused :first_name, I18n.t("#{ERRORS}.first_name.invalid")
-    assert_select "details#name-correction[open] input[name='teacher_registration[first_name]'][value='Aya 2']"
+    assert_refused :last_name, I18n.t("#{ERRORS}.last_name.blank")
+    assert_select "#teacher_registration_first_name_error", text: I18n.t("#{ERRORS}.first_name.invalid")
+    assert_select "input[name='teacher_registration[first_name]'][value='Aya 2'][aria-invalid=true]"
   end
 
   test "IE-17, IE-19 without JavaScript: different codes are refused in 422; « +225 07 01 02 03 04 » is saved cleaned" do
@@ -118,7 +117,8 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_response :unprocessable_entity
     assert_select "#teacher_registration_pin_confirmation_error", text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
     assert_select "input[name='teacher_registration[contact]'][value='+225 07 01 02 03 04']"
-    assert_select "input[name='teacher_registration[full_name]'][value='KOUASSI Aya Marie']"
+    assert_select "input[name='teacher_registration[last_name]'][value='KOUASSI']"
+    assert_select "input[name='teacher_registration[first_name]'][value='Aya Marie']"
     assert_select "input[name='teacher_registration[pin]'][value]", count: 0
     assert_select "turbo-frame#schools option[selected][value='#{@school.public_id}']"
 

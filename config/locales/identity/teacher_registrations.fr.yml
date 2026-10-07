@@ -3,7 +3,6 @@ fr:
   activemodel:
     attributes:
       dtos/identity/teacher_registration_input:
-        full_name: "Nom complet"
         last_name: "Nom"
         first_name: "Prénom(s)"
         gender: "Genre"
@@ -17,9 +16,6 @@ fr:
       models:
         dtos/identity/teacher_registration_input:
           attributes:
-            full_name:
-              blank: "Saisissez votre nom et vos prénoms."
-              single_word: "Saisissez votre nom et vos prénoms."
             last_name:
               blank: "Saisissez votre nom."
               too_long: "Le nom compte %{count} caractères au plus."
@@ -72,11 +68,8 @@ fr:
         other_school: "Ce n'est pas votre établissement ?"
         material_prompt: "Choisissez votre matière"
         you: "Vous"
-        full_name_placeholder: "Ex. : KOUASSI Aya Marie"
-        full_name_hint: "Votre nom, puis vos prénoms."
-        preview_last: "Nom :"
-        preview_first: "Prénom(s) :"
-        correct_name: "Corriger le nom ou les prénoms"
+        last_name_placeholder: "Ex. : KOUASSI"
+        first_name_placeholder: "Ex. : Aya Marie"
         contact_placeholder: "0701020304"
         contact_hint: "10 chiffres, par ex. 0701020304."
         security: "Code secret"

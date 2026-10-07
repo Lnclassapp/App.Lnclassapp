@@ -269,7 +269,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       select "Abidjan 1", from: "teacher_registration[drena_public_id]"
       select SCHOOL, from: "teacher_registration[school_public_id]"
       select "SVT", from: "teacher_registration[material_slug]"
-      fill_in "teacher_registration[full_name]", with: "YAO Koffi"
+      fill_in "teacher_registration[last_name]", with: "YAO"
+      fill_in "teacher_registration[first_name]", with: "Koffi"
       choose t("genders.male")
       fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
       fill_in "teacher_registration[pin]", with: "1357"
