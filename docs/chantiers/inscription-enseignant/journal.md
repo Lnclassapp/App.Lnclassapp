@@ -36,7 +36,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | Barre latérale d'un enseignant sans établissement : « Content missing » à 1280 px (le frame différé est redirigé vers l'écran d'attente) | Antérieur au chantier, relevé par le Lot C | bugfix à ouvrir |
 | Code d'établissement et « Régénérer le code » encore présents pour la direction | Périmètre (Q8) | `inscription-direction-sans-code` |
-| Index trigramme de `schools.national_code` : plus utilisé par la recherche de l'équipe après le Lot E | Une migration de retrait d'index n'apporte rien à l'utilisateur ; à mesurer avant | optimize à ouvrir si l'écriture des établissements en pâtit |
+| Index trigramme de `schools.national_code` : plus utilisé par la recherche de l'équipe après le Lot E ; le commentaire de `test/infrastructure/queries/trigram_search_indexes_test.rb` est périmé | Une migration de retrait d'index n'apporte rien à l'utilisateur ; à mesurer avant | optimize à ouvrir si l'écriture des établissements en pâtit |
+| `/teams/schools` à 1280 px : l'en-tête « Statut » et son aide passent sur deux lignes | Antérieur au chantier, relevé par le Lot E | finitions à ouvrir |
 | Code de classe des élèves | Périmètre (Q20) | `inscription-eleve-sans-code` (branche ouverte) |
 
 ## Clôture
