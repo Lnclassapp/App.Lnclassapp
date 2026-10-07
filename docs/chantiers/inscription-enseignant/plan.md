@@ -165,6 +165,8 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
                      `test/system/boucle_pedagogique_test.rb`
                      `test/system/finitions/public_pages_test.rb` · `test/system/finitions/narrow_screens_test.rb` · `test/system/finitions/narrow_titles_test.rb`
                      `test/views/page_titles_test.rb` · `test/integration/pin_reveal_fields_test.rb` · `test/helpers/share_helper_test.rb`
+                     `test/system/school_admin/departed_teachers_test.rb` *(GD-23 : écran d'attente par DRENA → établissement ; ajout du 2026-10-07, relevé par le Lot C)*
+                     `app/controllers/school/drena_schools_controller.rb` · `test/controllers/school/drena_schools_controller_test.rb` · `app/controllers/identity/pending_accounts_controller.rb` · `app/views/identity/pending_accounts/show.html.erb` *(paramètre `scope` limité à `teacher_registration` ou `school_join`, pour que l'écran d'attente reprenne `/drenas/:id/schools` — ADR-0082 §4.5 ; ajout du 2026-10-07)*
 - **Dépend de**    : Lot A, Lot B, Lot C
 - **Test associé** : `test/routing/v1_routes_test.rb` (IE-02 : `/e/:code` et `/teacher-signup/without-code` non routés) · `test/system/identity/invite_colleague_test.rb` (IE-06 de bout en bout : lien d'Awa → inscription → parrainage compté) · `test/system/identity/school_staff_registration_test.rb` inchangé et vert (IE-16)
 - **Done quand**   : `/e/K7M-4QZ` répond 404 ; plus aucune référence à `school_code_signup`, `RegisterPendingTeacher` ni `new_pending_teacher_registration` dans `app/` (`grep` vide) ; l'inscription de la direction par le code marche toujours ; `bin/ci` est vert
