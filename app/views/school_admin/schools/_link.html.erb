@@ -1,33 +1,17 @@
-<%# 🌐 UI · school_admin/schools/_link — lien d'inscription des enseignants, cible du Turbo Stream de « Changer le lien » %>
-<%# Rôle : lien /e/<code> et code, « Copier le lien », « Partager sur WhatsApp », « Changer le lien » confirmé (actif seulement) %>
-<%# ADR  : 0057, 0071 · UDR : 0050, 0056 · Stimulus : clipboard (ui_copy_button), modal · WhatsApp : lien sortant %>
-<% link = school_code_signup_url(school.school_code) %>
+<%# 🌐 UI · school_admin/schools/_link — lien d'invitation des enseignants de la direction (stable : ni code ni « Changer le lien ») %>
+<%# Rôle : lien /i/<jeton de la direction>, « Copier le lien », « Partager sur WhatsApp » ; school_links le rend encore jusqu'au Lot D %>
+<%# ADR  : 0071, 0082 (§4.1) · UDR : 0050, 0056, 0078 (§3.7) · Stimulus : clipboard (ui_copy_button) · WhatsApp : lien sortant %>
+<% link = teacher_invite_link_url(school.direction_invite_token) %>
 <div id="school_link_block">
   <p class="flex flex-col gap-1">
     <span id="school_link_label" class="text-sm text-mute"><%= t(".label") %></span>
     <a id="school_link_value" href="<%= link %>" aria-labelledby="school_link_label"
        class="font-mono text-sm break-all text-brand-strong"><%= link %></a>
   </p>
-  <p class="mt-3 text-sm text-mute">
-    <%= t(".code") %>
-    <span id="school_code_value" class="font-mono font-bold tracking-widest text-ink"><%= Entities::School::SchoolCode.display(school.school_code) %></span>
-  </p>
   <div class="mt-4 flex flex-col gap-3 sm:flex-row">
     <%= ui_copy_button link, label: t(".copy"), copied: t(".copied"), aria_label: t(".copy_label"), icon: "link" %>
     <%= ui_button t(".share_whatsapp"), href: whatsapp_share_url(t(".share_message", school: school.name, link:)), variant: :brand,
                                         size: :sm, icon: "chat-bubble-left-right", target: "_blank", rel: "noopener",
                                         id: "school_link_whatsapp" %>
-    <% if school.active? %>
-      <%= ui_modal id: "change-school-link", size: :sm, title: t(".change.title"), trigger: t(".change.trigger"),
-                   trigger_variant: :secondary, trigger_icon: "arrow-path" do |modal| %>
-        <% modal.footer do %>
-          <%= ui_button t(".change.cancel"), variant: :secondary, data: { action: "modal#close" } %>
-          <%= ui_button t(".change.confirm"), variant: :danger, type: :submit, form: "change-school-link-form" %>
-        <% end %>
-        <%= form_with url: school_admin_school_link_path, method: :patch, id: "change-school-link-form" do %>
-          <p class="text-sm text-mute"><%= t(".change.warning") %></p>
-        <% end %>
-      <% end %>
-    <% end %>
   </div>
 </div>

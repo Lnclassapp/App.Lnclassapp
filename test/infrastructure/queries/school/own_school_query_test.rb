@@ -17,7 +17,7 @@ class Queries::School::OwnSchoolQueryTest < ActiveSupport::TestCase
   end
 
   test "reads nothing else: no identifier of the database, no teacher, no headcount" do
-    assert_equal %i[public_id name school_type status school_code], Queries::School::OwnSchoolQuery::Row.members
+    assert_equal %i[public_id name school_type status school_code direction_invite_token], Queries::School::OwnSchoolQuery::Row.members
   end
 
   test "an unknown or missing school gives nil, in one query at most" do

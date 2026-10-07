@@ -36,7 +36,7 @@ class Identity::SidebarReferralTest < ApplicationSystemTestCase
       assert_selector "#sidebar_referral_card h2", text: "Parrainage"
       assert_selector "#sidebar_referral_count", text: "3 collègues inscrits grâce à vous"
       assert_text "Ambassadeur"
-      assert_selector "a#sidebar_referral_link", text: %r{/e/k7m4qz\?ref=#{@token}\z}
+      assert_selector "a#sidebar_referral_link", text: %r{/i/#{@token}\z} # IE-06 : sans le code d'établissement
       assert_button "Copier le lien"
       new_window = window_opened_by { click_on "WhatsApp" }
       new_window.close

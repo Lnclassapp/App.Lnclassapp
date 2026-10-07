@@ -1,8 +1,8 @@
 <%# 🌐 UI · identity/referrals/_invite — bloc « Inviter un collègue » (Queries::Identity::ReferralQuery::Row) %>
-<%# Rôle : lien personnel /e/<code>?ref=<jeton>, WhatsApp, SMS, copier, partage natif (comptés par identity--share), compteur %>
-<%# ADR  : 0049, 0057, 0063 · UDR : 0050, 0054 · Stimulus : identity--share, clipboard (la copie est comptée sur clipboard:copied) %>
+<%# Rôle : lien personnel /i/<jeton>, WhatsApp, SMS, copier, partage natif (comptés par identity--share), compteur %>
+<%# ADR  : 0049, 0063, 0082 · UDR : 0050, 0054, 0078 (§3.7) · Stimulus : identity--share, clipboard (copie comptée sur clipboard:copied) %>
 <%# locals: (invite:) -%>
-<% link = school_code_signup_url(invite.school_code, ref: invite.referral_token) %>
+<% link = teacher_invite_link_url(invite.referral_token) %>
 <% message = t("identity.referrals.invite.message", school: invite.school_name, link:) %>
 <%= ui_card title: t("identity.referrals.invite.title"), subtitle: t("identity.referrals.invite.subtitle", school: invite.school_name),
             icon: "user-plus", id: "invite_colleagues" do %>

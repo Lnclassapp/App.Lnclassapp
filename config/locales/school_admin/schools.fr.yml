@@ -1,5 +1,6 @@
 # « Établissement » de la direction : lien d'inscription des enseignants, puis « Classes par niveau » — GD-01 à GD-03,
-# ADR-0071, UDR-0056 §3.2 · titre de l'onglet : UDR-0054 §3.1 · le bloc des classes garde ses clés teams.level_classrooms.block
+# ADR-0071, UDR-0056 §3.2 · lien /i/<jeton> stable, sans code ni « Changer le lien » : ADR-0082 §4.1, UDR-0078 §3.7
+# titre de l'onglet : UDR-0054 §3.1 · le bloc des classes garde ses clés teams.level_classrooms.block
 fr:
   school_admin:
     schools:
@@ -10,16 +11,8 @@ fr:
         link_subtitle: "Ils s'inscrivent avec ce lien : votre établissement est déjà rempli."
       link:
         label: "Lien d'inscription"
-        code: "Code d'établissement :"
         copy: "Copier le lien"
         copied: "Lien copié"
         copy_label: "Copier le lien d'inscription"
         share_whatsapp: "Partager sur WhatsApp"
         share_message: "Bonjour ! Inscrivez-vous sur Lnclass comme enseignant de %{school} avec ce lien, l'établissement est déjà rempli : %{link}"
-        # « Changer le lien » (Lot A) : textes de l'UDR-0056 §3.2, posés au socle avec la page qui les porte.
-        change:
-          trigger: "Changer le lien"
-          title: "Changer le lien d'inscription ?"
-          warning: "L'ancien lien et l'ancien code cesseront aussitôt de fonctionner, liens de parrainage des enseignants compris. Les enseignants déjà inscrits restent dans l'établissement. Faites-le si le lien a circulé hors de l'établissement."
-          cancel: "Annuler"
-          confirm: "Changer le lien"
