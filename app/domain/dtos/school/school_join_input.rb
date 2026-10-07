@@ -1,34 +1,27 @@
 # 🧠 DOMAINE · Dtos::School::SchoolJoinInput
-# Rôle : code d'établissement saisi sur l'écran d'attente par un enseignant sans établissement, normalisé comme à l'inscription
-# ADR  : 0057, 0071 · UDR : 0056
+# Rôle : DRENA puis établissement choisis sur l'écran d'attente par un enseignant sans établissement (plus de code)
+# ADR  : 0071, 0082 · UDR : 0078
 module Dtos
   module School
     class SchoolJoinInput
       include ActiveModel::Model
       include ActiveModel::Attributes
 
-      attribute :school_code, :string
+      # Identifiants publics (ADR-0029) : toute autre forme (octet nul, espaces…) est oubliée avant la base.
+      PUBLIC_ID = /\A[\w-]{1,64}\z/
 
-      validate :school_code_well_formed
+      attribute :drena_public_id, :string
+      attribute :school_public_id, :string
 
-      # « k7m 4QZ » → « k7m4qz » ; la saisie brute reste pour le re-rendu (et le pré-remplissage du lien /e/<code>).
-      def school_code=(raw)
-        @raw_school_code = raw.to_s
-        super(Entities::School::SchoolCode.normalize(raw))
-      end
+      validates :drena_public_id, :school_public_id, presence: true
 
-      def raw_school_code = @raw_school_code.to_s
-      def to_h = { school_code: }
+      def drena_public_id = public_id_or_nil(super)
+      def school_public_id = public_id_or_nil(super)
+      def to_h = { drena_public_id:, school_public_id: }
 
       private
 
-      # La forme seule, sans recherche, avec les motifs de l'inscription enseignant (ADR-0057).
-      def school_code_well_formed
-        return errors.add(:school_code, :blank) if school_code.blank?
-        return if Entities::School::SchoolCode.valid?(school_code)
-
-        errors.add(:school_code, Entities::School::SchoolCode.classroom_code?(school_code) ? :classroom_code : :invalid)
-      end
+      def public_id_or_nil(value) = (value if PUBLIC_ID.match?(value.to_s))
     end
   end
 end
