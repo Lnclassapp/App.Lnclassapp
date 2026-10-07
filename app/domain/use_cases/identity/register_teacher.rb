@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
-# Rôle : inscrit un enseignant (rôle imposé) dans l'établissement de sa DRENA ou de son lien d'invitation, note sa voie, ouvre sa session
+# Rôle : inscrit un enseignant (rôle imposé) dans l'établissement de sa DRENA ou de son lien, note et audite sa voie, ouvre sa session
 # ADR  : 0026, 0028, 0030, 0050, 0063, 0082 · UDR : 0024, 0050, 0078
 module UseCases
   module Identity
@@ -21,8 +21,8 @@ module UseCases
         end
       end
 
-      def initialize(registrations:, schools:, drenas:, invite_links:, taxonomy:, sessions:, referrals:, policy:, transaction:,
-                     digest_key:, clock:)
+      def initialize(registrations:, schools:, drenas:, invite_links:, taxonomy:, sessions:, referrals:, audit_log:, policy:,
+                     transaction:, digest_key:, clock:)
         @registrations = registrations
         @schools = schools
         @drenas = drenas
@@ -30,6 +30,7 @@ module UseCases
         @taxonomy = taxonomy
         @sessions = sessions
         @referrals = referrals
+        @audit_log = audit_log
         @policy = policy
         @transaction = transaction
         @digest_key = digest_key
@@ -87,6 +88,9 @@ module UseCases
                                                        joined_via: destination.channel))
           written(@schools.attach_teacher(teacher_id: user.id, school_id: destination.school_id, primary: true, at: now))
           record_referral(destination, user, now)
+          # ADR-0082 §4.4 bis (IE-23) : comme le rattachement depuis l'écran d'attente, avec la voie en plus.
+          @audit_log.record(action: "school.changed", actor_id: user.id, at: now, subject_type: "School",
+                            subject_id: destination.school_id, metadata: { change: "teacher_joined", via: destination.channel }, ip:)
           Shared::Result.success(Registered.new(user:, token: open_session(user, ip, user_agent, now)))
         end
       end

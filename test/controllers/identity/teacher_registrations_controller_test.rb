@@ -247,6 +247,15 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_equal 1, Orm::User.count
   end
 
+  test "IE-23: each sign-up leaves one audit line school.changed / teacher_joined with the school and the way" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params }
+
+    assert_redirected_to teacher_classrooms_path
+    event = Orm::AuditEvent.sole
+    assert_equal [ "school.changed", new_teacher.id, "School", @school.id, { "change" => "teacher_joined", "via" => "standard" } ],
+                 [ event.action, event.actor_id, event.subject_type, event.subject_id, event.metadata ]
+  end
+
   test "IE-13: a signed-in person who opens the page or a link is sent home; a POST is refused" do
     sign_in_as create_teacher
 

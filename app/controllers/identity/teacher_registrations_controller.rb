@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
-# Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée
+# Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
 # ADR  : 0026, 0028, 0030, 0050, 0063, 0082 · UDR : 0024, 0050, 0078
 module Identity
   class TeacherRegistrationsController < ApplicationController
@@ -88,7 +88,8 @@ module Identity
         registrations: Repositories::Identity::RegistrationRepository.new, schools: Repositories::School::SchoolRepository.new,
         drenas: Repositories::School::DrenaRepository.new, invite_links:,
         taxonomy: Repositories::Catalog::TaxonomyRepository.new, sessions: Repositories::Identity::SessionRepository.new,
-        referrals: Repositories::Identity::ReferralRepository.new, policy: Policies::Identity::RegisterTeacherPolicy.new,
+        referrals: Repositories::Identity::ReferralRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+        policy: Policies::Identity::RegisterTeacherPolicy.new,
         transaction: Repositories::Shared::Transaction.new, digest_key: secret_digest_key, clock: Time.zone
       )
     end

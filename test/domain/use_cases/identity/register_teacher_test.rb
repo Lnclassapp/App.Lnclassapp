@@ -143,6 +143,18 @@ module UseCases
         end
       end
 
+      # Into the same journal: the audit line is rolled back with the account (ADR-0082 §4.4 bis).
+      class FakeAudit
+        include Ports::Identity::AuditLogPort
+
+        def initialize(journal) = @journal = journal
+
+        def record(action:, actor_id:, at:, subject_type: nil, subject_id: nil, metadata: {}, ip: nil)
+          @journal << [ :audit, action, actor_id, at, subject_type, subject_id, metadata, ip ]
+          true
+        end
+      end
+
       setup do
         @journal = []
         @transaction = JournalTransaction.new(@journal)
@@ -170,12 +182,13 @@ module UseCases
         RegisterTeacher.new(
           registrations: @registrations, schools: FakeSchools.new(@journal, *@schools_list, refuse_attach:),
           drenas: FakeDrenas.new, invite_links: @invite_links, taxonomy: @taxonomy, sessions: FakeSessions.new(@journal),
-          referrals: FakeReferrals.new(@journal, refuse: refuse_referral), policy: Policies::Identity::RegisterTeacherPolicy.new,
-          transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW)
+          referrals: FakeReferrals.new(@journal, refuse: refuse_referral), audit_log: FakeAudit.new(@journal),
+          policy: Policies::Identity::RegisterTeacherPolicy.new, transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW)
         ).call(actor:, dto:, ip: "1.2.3.4", user_agent: "Chrome")
       end
 
       def user_received = @registrations.received[:user]
+      def audit_line(via) = [ :audit, "school.changed", 41, NOW, "School", 31, { change: "teacher_joined", via: }, "1.2.3.4" ]
 
       test "IE-01: by the standard way, the teacher is created, attached as primary, way « standard », signed in" do
         result = register
@@ -186,6 +199,7 @@ module UseCases
         assert_operator token.length, :>=, 43
         assert_equal [ [ :user, "0501020304", "teacher", 5, "standard" ],
                        [ :teacher_school, 41, 31, true, NOW ],
+                       audit_line("standard"),
                        [ :session, 41, Entities::Identity::SecretDigest.hmac(token, key: KEY), "1.2.3.4", "Chrome", NOW ] ],
                      @journal
         assert_equal [ "KOUASSI", "Aya Marie", "female", "4821" ],
@@ -336,6 +350,24 @@ module UseCases
         assert_empty @invite_links.lookups
         assert_empty @journal
         assert_equal 0, @transaction.calls
+      end
+
+      test "IE-23: every way writes one audit line school.changed / teacher_joined with the school and the way" do
+        { nil => "standard", "0a1b2c3d4e5f" => "colleague", "dddddddddddd" => "direction", "eeeeeeeeeeee" => "team" }
+          .each do |token, via|
+            @journal.clear
+
+            assert register(invite_token: token).success?, via
+            assert_equal [ audit_line(via) ], @journal.select { it.first == :audit }, via
+          end
+      end
+
+      test "IE-23: no audit line without an account: a refused sign-up writes none, a rolled back one keeps none" do
+        register(taken: [ "0501020304" ])
+        register(refuse_attach: true)
+        register(full_name: "Kouassi")
+
+        assert_not(@journal.any? { it.first == :audit })
       end
 
       test "the role is forced to teacher: the entity never carries another role" do
