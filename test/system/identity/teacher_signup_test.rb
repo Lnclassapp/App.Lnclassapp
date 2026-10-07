@@ -40,6 +40,13 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     fill_in "teacher_registration[pin_confirmation]", with: confirmation
   end
 
+  def assert_preview(last_name, first_name)
+    within "#full_name_preview" do
+      assert_selector "[data-identity--full-name-target=lastOut]", exact_text: last_name
+      assert_selector "[data-identity--full-name-target=firstOut]", exact_text: first_name
+    end
+  end
+
   def assert_signed_up(channel)
     assert_toast t("identity.teacher_registrations.create.welcome")
     assert_current_path teacher_classrooms_path
@@ -127,6 +134,13 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     assert_field "teacher_registration[first_name]", with: "OUATTARA Awa"
     fill_in "teacher_registration[last_name]", with: "KONÉ OUATTARA"
     fill_in "teacher_registration[first_name]", with: "Awa"
+
+    # « Corriger » open: the preview follows the corrected fields; closed, the split of the full name.
+    assert_preview "KONÉ OUATTARA", "Awa"
+    find("#name-correction summary").click
+    assert_preview "KONÉ", "OUATTARA Awa"
+    find("#name-correction summary").click
+    assert_preview "KONÉ OUATTARA", "Awa"
     fill_codes
     click_on t("#{FORM}.submit")
 
