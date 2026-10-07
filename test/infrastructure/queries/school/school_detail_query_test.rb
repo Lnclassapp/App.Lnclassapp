@@ -97,6 +97,18 @@ module Queries
                      rows)
       end
 
+      test "IE-15 : le parrain n'est nommé que sur la fiche de l'établissement du parrainage ; ailleurs, la voie reste, sans nom" do
+        school_a = create_school(drena: @drena, name: "Lycée A")
+        referrer = create_teacher(school: school_a, first_name: "Awa", last_name: "Koné")
+        referee = create_teacher(school: school_a, first_name: "Yao", last_name: "Brou", joined_via: "colleague")
+        create_referral(referrer:, referee:, school_id: school_a.id)
+        Orm::TeacherSchool.where(teacher: referee).update_all(school_id: @school.id)
+
+        assert_equal [ [ "Yao Brou", "colleague", nil ] ], detail.teachers.map { it.to_h.values_at(:name, :joined_via, :referrer_name) }
+        Orm::TeacherSchool.where(teacher: referee).update_all(school_id: school_a.id)
+        assert_includes detail(public_id: school_a.public_id).teachers.map { [ it.name, it.referrer_name ] }, [ "Yao Brou", "Koné Awa" ]
+      end
+
       test "IE-15 : la voie et le parrain ne coûtent aucune requête de plus, quel que soit le nombre d'enseignants" do
         queries = lambda do
           count = 0
