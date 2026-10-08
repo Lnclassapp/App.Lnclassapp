@@ -3,10 +3,10 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — **en attente** (backlog, porteur, 2026-09-30) |
+| **Statut** | cadrage — **repris** le 2026-10-08 (porteur), app élèves d'abord |
 | **Ouvert le** | 2026-09-30 |
-| **Branche** | `ccr-9b7287af-3kx7cj` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
-| **Programme** | — *(hors plan de `refonte-application` ; la PWA reste en V4, `installation-pwa`)* |
+| **Branche** | `ccr-e4a51f57-9ve9og` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
+| **Programme** | — *(hors plan de `refonte-application` ; la PWA est livrée par `installation-pwa`, ADR-0082)* |
 
 ---
 
@@ -62,6 +62,28 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 | Vers quoi part la notification de test de l'équipe, qui n'a pas d'app et est refusée dans les deux ? | **Reportée** au chantier de suivi (apps et notifications de l'équipe) | L'équipe garde ses deux indicateurs (comptes par app, notifications envoyées) ; la vérification de l'envoi en recette se fait avec les comptes de recette élève et enseignant, sans écran dédié |
 | Le chantier (deux apps, liens, notifications, indicateurs) tient-il dans une seule PR ? | **Non : deux chantiers.** `app-android` : les deux apps, la connexion par app, l'inscription et les liens, les indicateurs d'usage. Puis `notifications-push` : le service d'envoi, les quatre événements, les résumés et les horaires | Les réponses aux questions 5 à 11 deviennent le point de départ du memo de `notifications-push`, qui aura son ADR (service externe, table des appareils) et l'amendement de l'ADR-0045. L'indicateur « notifications envoyées » de l'équipe part avec lui. `app-android` n'ajoute plus de service externe côté serveur |
 | Avec quel compte Google Play publier ? | **Un compte d'organisation** au nom de la société Lnclass | Il faut un numéro D-U-N-S, dont le délai d'obtention est variable : à demander dès la reprise du chantier, avant tout code. Nom d'éditeur « Lnclass » sur les deux fiches ; pas de test fermé imposé par Google, mais une recette sur téléphones réels reste exigée par ce chantier. Les clés de signature des deux apps appartiennent à ce compte |
+
+### Reprise du 2026-10-08 — l'app élèves d'abord
+
+> Le porteur reprend le chantier après la livraison de la PWA, avec un objectif : l'app élèves, de la connexion aux exercices, en une journée de travail. Les questions sont posées en une fois, à sa demande.
+
+| Question posée | Réponse | Conséquence sur le chantier |
+|---|---|---|
+| Première version : l'app élèves seule ? | **Oui** : « Lnclass » d'abord, « Lnclass Teacher » ensuite | Une seule coque, un seul identifiant d'application. Le refus par rôle (question 2) ne vise qu'un sens : enseignant, direction et équipe dans l'app élèves |
+| Toutes les pages de l'élève, ou seulement connexion et exercices ? | **Toutes** | L'app affiche les pages du site : rien à réécrire, mais toutes les pages élève sont à vérifier dans la coque |
+| Inscription par code de classe dans l'app ? | **Oui** | Les liens `/c/:code` et `/join` s'ouvrent dans l'app (question 3) |
+| Avant le Play Store, l'APK par WhatsApp à des testeurs ? | **Oui, 5 à 10 élèves** sur des Android d'entrée de gamme | Une version signée « test » distribuable hors magasin ; une liste de testeurs à tenir |
+| D-U-N-S demandé ? | **Pas encore** : guidé le 2026-10-08 | Ne bloque pas le code ni le test fermé ; bloque seulement le passage en compte d'organisation |
+| Nom, icône, identifiant | **« Lnclass »**, baobab sur bleu (icônes validées le 2026-10-08), **`com.lnclass.student`** | L'identifiant est définitif dès la première publication |
+| Les onglets en bas de l'app ? | **Aucun onglet en bas** : Profil, Ma classe et Cours passent dans un panneau latéral (« slide-over ») ouvert par l'avatar ; l'aide, à décider | Change la navigation décidée par l'UDR-0006 (barre basse) : une UDR est obligatoire. Reste à trancher si le changement vaut pour l'app seule ou aussi pour le site sur téléphone |
+| Un enseignant dans l'app élèves ? | **Message « Utilisez Lnclass Teacher »**, lien vers le site tant que l'app enseignants n'existe pas | Règle d'identité de la question 2, côté app élèves seulement |
+| La pop-up « Installer Lnclass » dans l'app ? | **Jamais** | Le contrôleur `install` se tait quand la page tourne dans l'app (User-Agent de la coque) : amendement de l'UDR-0078 |
+| Recette avant production ? | **Oui** : une version qui pointe vers la recette, puis une vers la production | Deux variantes de compilation (adresse du site), même code |
+| Version minimale d'Android | **Android 7** (minimum de Hotwire Native) | Les téléphones plus anciens restent sur le site, qui garde toutes les fonctions (question 4) |
+| Clé de signature | **Play App Signing** ; une clé de secours chez le porteur, jamais dans le dépôt | La clé d'envoi ne vit ni dans le code ni dans la CI sans secret |
+| Mesure | **Oui** : l'équipe voit les élèves qui utilisent l'app, à côté du chiffre de la PWA | La tuile « Ouvert depuis l'app installée » (ADR-0082) gagne l'origine « app Android » |
+| Compte Play Store | **Compte personnel tout de suite**, test fermé de 14 jours avec 12 élèves au moins ; passage en compte d'organisation à l'arrivée du D-U-N-S | Remplace la réponse « compte d'organisation d'abord » (ligne précédente) : le test fermé de 14 jours devient la recette sur téléphones réels |
+| Où développer et tester ? | **APK compilé ici**, testé par le porteur ; guide pour Android Studio et le téléphone en USB | Les livrables de chaque lot incluent un APK et ses étapes d'installation |
 
 ## Cas limites identifiés
 
