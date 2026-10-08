@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
 # Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur, anonymise un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084
 module Repositories
   module Identity
     class UserRepository
@@ -37,17 +37,20 @@ module Repositories
         ::Shared::Result.failure(:conflict, errors: TAKEN)
       end
 
+      # ADR-0082 §4.3, ADR-0084 §4.6 : une colonne par canal d'ouverture.
+      APP_OPENED_COLUMNS = { pwa: :app_opened_at, android: :android_opened_at }.freeze
+
       # Le secret aléatoire n'est ni rendu ni journalisé : plus personne ne connaît le PIN du compte. Aucune trace d'usage
-      # n'est gardée (ADR-0036) : l'heure de la dernière ouverture depuis l'app installée est oubliée (ADR-0082 §4.3).
+      # n'est gardée (ADR-0036) : les heures de dernière ouverture depuis les apps sont oubliées (ADR-0082 §4.3, ADR-0084).
       def anonymize(user_id:, first_name:, last_name:, at:)
         Orm::User.find(user_id).update!(first_name:, last_name:, contact: nil, pin: SecureRandom.base58(32), anonymized_at: at,
-                                        app_opened_at: nil)
+                                        **APP_OPENED_COLUMNS.values.index_with(nil))
         true
       end
 
-      # ADR-0082 §4.3 : une seule colonne, sans toucher updated_at (ce n'est pas une modification du compte).
-      def mark_app_opened(user_id:, at:)
-        Orm::User.where(id: user_id).update_all(app_opened_at: at)
+      # Une seule colonne, celle du canal, sans toucher updated_at (ce n'est pas une modification du compte).
+      def mark_app_opened(user_id:, at:, channel: :pwa)
+        Orm::User.where(id: user_id).update_all(APP_OPENED_COLUMNS.fetch(channel) => at)
         true
       end
 
