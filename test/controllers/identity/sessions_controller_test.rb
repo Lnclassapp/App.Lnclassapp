@@ -187,20 +187,34 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Session.count
   end
 
-  # ADR-0084 §4.5, UDR-0080 §3.4: the students' app recognised by its User-Agent (§4.1).
+  # ADR-0084 §4.5, ADR-0086 §4.5, UDR-0082 §3.4: the two Android shells recognised by their User-Agent (ADR-0086 §4.1).
   APP_USER_AGENT = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
                    "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
+  TEACHER_APP_USER_AGENT = APP_USER_AGENT.sub("LnclassStudentAndroid", "LnclassTeacherAndroid").freeze
+  STUDENT_STORE_URL = "https://play.google.com/store/apps/details?id=com.lnclass.student".freeze
+  TEACHER_STORE_URL = "https://play.google.com/store/apps/details?id=com.lnclass.teacher".freeze
 
-  test "CA-3: in the students' app, a teacher with the right PIN reads the refusal, gets no session and an empty form" do
-    teacher = create_teacher
+  def with_store_urls(student: STUDENT_STORE_URL, teacher: TEACHER_STORE_URL)
+    previous = Rails.configuration.x.android
+    Rails.configuration.x.android = { apps: { student: { package_name: "com.lnclass.student", store_url: student },
+                                              teacher: { package_name: "com.lnclass.teacher", store_url: teacher } },
+                                      cert_fingerprints: [] }.freeze
+    yield
+  ensure
+    Rails.configuration.x.android = previous
+  end
 
-    post session_path, params: { session: { contact: teacher.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+  def sign_in_from(user_agent, user, pin: "2468", ip: "127.0.0.1")
+    post session_path, params: { session: { contact: user.contact, pin: } }, headers: { "User-Agent" => user_agent },
+                       env: { "REMOTE_ADDR" => ip }
+  end
 
+  def assert_refused(title:, body:, link:, href:)
     assert_response :unprocessable_entity
     assert_select "#wrong-app[role=alert]" do
-      assert_select "p", text: "Cette app est réservée aux élèves"
-      assert_select "p", text: /Enseignants, direction et équipe : continuez sur le site\./
-      assert_select "a[href='https://lnclass.com'][target=_blank][rel=noopener]", text: "Ouvrir lnclass.com"
+      assert_select "p", text: title
+      assert_select "p", text: /#{Regexp.escape(body)}/
+      assert_select "a[href='#{href}'][target=_blank][rel=noopener]", text: link
     end
     assert_equal 0, Orm::Session.count
     assert_empty cookies[:session_token].to_s
@@ -208,19 +222,53 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='session[pin]']:not([value])"
   end
 
-  test "CA-3: in the students' app, a team member is refused before any second factor" do
-    member = create_team_member
+  test "CA-3, CA-T3: in the students' app, a teacher with the right PIN is sent to Lnclass Teacher, with no session" do
+    sign_in_from APP_USER_AGENT, create_teacher
 
-    post session_path, params: { session: { contact: member.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
-
-    assert_response :unprocessable_entity
-    assert_select "#wrong-app", text: /Cette app est réservée aux élèves/
-    assert_equal 0, Orm::Session.count
+    assert_refused title: "Utilisez Lnclass Teacher", link: "Ouvrir Lnclass Teacher", href: "https://lnclass.com",
+                   body: "Cette app est réservée aux élèves. Les enseignants ont leur app, Lnclass Teacher."
   end
 
-  test "CA-3: in the students' app, a teacher's wrong PIN reads exactly a student's wrong-PIN message" do
-    [ create_student, create_teacher ].each do |user|
-      post session_path, params: { session: { contact: user.contact, pin: "1357" } }, headers: { "User-Agent" => APP_USER_AGENT }
+  test "CA-T3: in the students' app, the teacher's link is the Lnclass Teacher Play Store page once it is published" do
+    with_store_urls { sign_in_from APP_USER_AGENT, create_teacher }
+
+    assert_refused title: "Utilisez Lnclass Teacher", link: "Ouvrir Lnclass Teacher", href: TEACHER_STORE_URL,
+                   body: "Cette app est réservée aux élèves. Les enseignants ont leur app, Lnclass Teacher."
+  end
+
+  test "CA-3: in the students' app, a team member is refused before any second factor and sent to the website" do
+    with_store_urls { sign_in_from APP_USER_AGENT, create_team_member }
+
+    assert_refused title: "Cette app est réservée aux élèves", body: "Direction et équipe : continuez sur le site.",
+                   link: "Ouvrir lnclass.com", href: "https://lnclass.com"
+  end
+
+  test "CA-T3: in the teachers' app, a student with the right PIN is sent to the Lnclass app, with no session" do
+    sign_in_from TEACHER_APP_USER_AGENT, create_student(classroom: create_classroom)
+
+    assert_refused title: "Utilisez l'app Lnclass", link: "Ouvrir Lnclass", href: "https://lnclass.com",
+                   body: "Cette app est réservée aux enseignants. Les élèves ont leur app, Lnclass."
+  end
+
+  test "CA-T3: in the teachers' app, the student's link is the Lnclass Play Store page once it is published" do
+    with_store_urls { sign_in_from TEACHER_APP_USER_AGENT, create_student(classroom: create_classroom) }
+
+    assert_refused title: "Utilisez l'app Lnclass", link: "Ouvrir Lnclass", href: STUDENT_STORE_URL,
+                   body: "Cette app est réservée aux enseignants. Les élèves ont leur app, Lnclass."
+  end
+
+  test "CA-T3: in the teachers' app, the school admin is sent to the website, even with published apps" do
+    with_store_urls { sign_in_from TEACHER_APP_USER_AGENT, create_school_admin }
+
+    assert_refused title: "Cette app est réservée aux enseignants", body: "Direction et équipe : continuez sur le site.",
+                   link: "Ouvrir lnclass.com", href: "https://lnclass.com"
+  end
+
+  test "CA-3, CA-T3: in either app, a wrong PIN reads exactly a wrong-PIN message, whatever the role" do
+    users = [ create_student, create_teacher, create_school_admin ]
+    [ APP_USER_AGENT, TEACHER_APP_USER_AGENT ].product(users).each_with_index do |(agent, user), index|
+      # Une adresse par essai : le plafond de 5 envois par minute et par adresse n'est pas l'objet du test.
+      sign_in_from agent, user, pin: "1357", ip: "10.0.0.#{index + 1}"
 
       assert_response :unprocessable_entity
       assert_equal [ "Numéro ou code secret incorrect." ], css_select("[role=alert]").map { it.text.squish }
@@ -231,10 +279,20 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
   test "CA-4: in the students' app, a student with the right PIN lands on the student home" do
     student = create_student(classroom: create_classroom)
 
-    post session_path, params: { session: { contact: student.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+    sign_in_from APP_USER_AGENT, student
 
     assert_redirected_to student_home_path
     assert_equal 1, Orm::Session.where(user: student).count
+    assert_not_empty cookies[:session_token].to_s
+  end
+
+  test "CA-T4: in the teachers' app, a teacher with the right PIN lands on the teacher home" do
+    teacher = create_teacher
+
+    sign_in_from TEACHER_APP_USER_AGENT, teacher
+
+    assert_redirected_to teacher_home_path
+    assert_equal 1, Orm::Session.where(user: teacher).count
     assert_not_empty cookies[:session_token].to_s
   end
 end

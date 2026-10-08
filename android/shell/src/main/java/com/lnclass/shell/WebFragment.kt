@@ -1,4 +1,4 @@
-package com.lnclass.student
+package com.lnclass.shell
 
 import android.graphics.BitmapFactory
 import android.os.Bundle

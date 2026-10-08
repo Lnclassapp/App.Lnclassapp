@@ -49,4 +49,22 @@ class AppAndroidPathConfigurationTest < ActionDispatch::IntegrationTest
     assert_equal [ "/students/menu", "/aide" ], [ helpers.student_menu_path, helpers.help_path ]
     assert_equal "default", properties("/students/classroom")["context"]
   end
+
+  # Lnclass Teacher, Lot TB — CA-T2 (ADR-0086 §4.3): one file for both apps; the teacher's account panel, the new
+  # assignment and the session days open in a modal, the rest of the teacher's space in the tab.
+  test "CA-T2 — the teacher's account panel, a new assignment and the session days open in a modal" do
+    helpers = Rails.application.routes.url_helpers
+    paths = [ helpers.teacher_menu_path, helpers.new_classroom_assignment_path("cls123"),
+              helpers.edit_classroom_session_days_path("cls123") ]
+
+    assert_equal [ "/teachers/menu", "/classrooms/cls123/assignments/new", "/classrooms/cls123/session_days/edit" ], paths
+    paths.each do |path|
+      assert_equal({ "context" => "modal", "uri" => "hotwire://fragment/web", "pull_to_refresh_enabled" => false },
+                   properties(path), path)
+    end
+    [ helpers.teacher_home_path, helpers.teacher_classrooms_path, helpers.classroom_assignment_path("cls123", "asg456"),
+      "/classrooms/cls123/assignments/new/extra" ].each do |path|
+      assert_equal "default", properties(path)["context"], path
+    end
+  end
 end

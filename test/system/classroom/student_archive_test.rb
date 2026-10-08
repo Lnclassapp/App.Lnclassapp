@@ -1,8 +1,9 @@
 require "application_system_test_case"
 
 # Lot R of fonctions-espace-eleve (ADR-0036, memo Q19): no automatic anonymization. At 390 px, a student whose classroom
-# was archived signs in, lands on the exit screen and opens « Mon historique »: his classrooms and his finished exercises,
-# 3 lines then « Voir plus », under the sobriety rule (UDR-0057).
+# was archived signs in, lands on his home without a classroom (ADR-0085 §4.3: no more waiting screen for a student) and
+# opens « Voir mon historique »: his classrooms and his finished exercises, 3 lines then « Voir plus », under the
+# sobriety rule (UDR-0057).
 class Classroom::StudentArchiveTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 
@@ -27,14 +28,13 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
 
   def t(key, **) = I18n.t(key, **)
 
-  test "at 390 px, the student who left reads his archive from the exit screen, without a page reload" do
+  test "at 390 px, the student who left reads his archive from his home without a classroom, without a page reload" do
     with_mobile_viewport do
       sign_in_as @student
-      assert_selector "#pending_account h1", text: t("identity.pending_accounts.show.former_student.title"), wait: SIGN_IN_WAIT
-      assert_single_primary_action
+      assert_selector "#student_home_no_classroom", text: t("classroom.student_homes.no_classroom.title"), wait: SIGN_IN_WAIT
 
       assert_no_page_reload do
-        click_on t("identity.pending_accounts.show.student.archive")
+        click_on t("classroom.student_homes.no_classroom.archive")
         assert_current_path student_archive_path
         assert_selector "h1", text: t("classroom.student_archives.show.title")
       end

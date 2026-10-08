@@ -95,9 +95,7 @@ kotlin {
     }
 }
 
+// Hotwire Native, Material et l'écran de démarrage viennent avec le socle (ADR-0086 §4.8).
 dependencies {
-    implementation("dev.hotwire:core:1.3.1")
-    implementation("dev.hotwire:navigation-fragments:1.3.1")
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("com.google.android.material:material:1.12.0")
+    implementation(project(":shell"))
 }
