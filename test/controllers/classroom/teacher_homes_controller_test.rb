@@ -204,13 +204,37 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
         assert_select ".sr-only", text: ", cours de Mathématiques"
       end
     end
-    assert_select "a#course_level_invite[href='#{teacher_invite_path}']", text: "Inviter" do
+    assert_select "a#course_level_invite", text: including("Inviter") do
       assert_select "img[src='#{illustration('inviter')}']"
     end
     assert_select "#teacher_home_course_levels", text: including("4ème"), count: 0
     assert_select "#teacher_home_courses_empty", 0
     assert_select "#teacher_home_courses a[href='#{courses_path}']", text: including("Voir tout le catalogue")
     assert_select "a#teacher_home_courses", 0
+  end
+
+  test "IE-20: « Inviter » opens WhatsApp in a new tab with the invitation message and its /i/<token> link, the share counted" do
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    link = teacher_invite_link_url(Orm::TeacherProfile.find_by!(user: @teacher).referral_token)
+    message = I18n.t("identity.referrals.invite.message", school: "Lycée Classique d'Abidjan", link:)
+    assert_match %r{/i/\h{12}\z}, link
+    assert_select "#teacher_home_course_levels li[data-controller='identity--share']" \
+                  "[data-identity--share-url-value='#{teacher_referral_shares_path}'][data-identity--share-link-value='#{link}']" \
+                  "[data-identity--share-text-value=?]", message do
+      assert_select "a#course_level_invite[href=?][target=_blank][rel=noopener]" \
+                    "[data-action='identity--share#record'][data-identity--share-channel-param=whatsapp]",
+                    "https://wa.me/?text=#{ERB::Util.url_encode(message)}" do
+        assert_select "span", text: "Inviter"
+        assert_select ".sr-only", text: "sur WhatsApp"
+      end
+    end
+    # The « Inviter un collègue » page stays reachable by its own address and by the sidebar card.
+    assert_select "#sidebar_referral a[href='#{teacher_invite_path}']"
+    get teacher_invite_path
+    assert_response :success
   end
 
   test "RE-16: a teacher without a classroom this year has no level bubble, a hint, « Inviter » and the full catalog" do

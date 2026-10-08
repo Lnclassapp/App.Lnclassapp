@@ -1,5 +1,0 @@
-<%# 🌐 UI · school_admin/school_links/update — réponse de « Changer le lien » (GD-04, GD-07) %>
-<%# Rôle : toast (nouveau code ou motif du refus), bloc du lien remplacé : la confirmation se referme, sans rechargement %>
-<%# ADR  : 0057, 0071 · UDR : 0006, 0056 %>
-<%= turbo_stream_toast @notice || @alert, type: @notice ? :success : :error %>
-<%= turbo_stream.replace "school_link_block", partial: "school_admin/schools/link", locals: { school: @school } %>

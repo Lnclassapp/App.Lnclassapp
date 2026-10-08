@@ -27,7 +27,7 @@ class Identity::ProfileContactTest < ApplicationSystemTestCase
         fill_in "contact_change[contact_confirmation]", with: "07 11 22 33 44"
         click_on "Changer mon numéro"
 
-        assert_selector "[role=alert]", text: "PIN incorrect."
+        assert_selector "[role=alert]", text: "Code secret incorrect."
         assert_field "contact_change[current_pin]", with: ""
         assert_field "contact_change[contact]", with: "07 11 22 33 44"
       end
