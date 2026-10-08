@@ -53,11 +53,12 @@ fr:
         last_score_tip: "Score de la dernière session d'exercice terminée par l'élève, en pourcentage de bonnes réponses."
         no_score: "Aucune session terminée"
         see_result: "Voir le résultat"
-        contact: "Numéro"
+        # UDR-0079 §3.8 ter (memo Q23) : le numéro d'un élève est masqué pour tout lecteur de la classe.
+        contact_masked: "Numéro masqué pour protéger les élèves"
         issue_code: "Générer un code de récupération"
         # UDR-0077 §3.4 : le menu ⋮ de la ligne d'un élève.
         actions_label: "Actions pour %{name}"
-        issue_code_hint: "Un élève qui a perdu son PIN le réinitialise avec un code de récupération, valable 15 minutes."
+        issue_code_hint: "Un élève qui a perdu son code secret le réinitialise avec un code de récupération, valable 15 minutes."
         # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève.
         new: "Nouveau"
         new_count:

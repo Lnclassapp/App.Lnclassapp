@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IE-18 (ADR-0082 §4.3, UDR-0078 §3.9) on GD-23 to GD-26 (ADR-0071 §4.3): from the waiting screen, a teacher without a
+# IE-18 (ADR-0083 §4.3, UDR-0079 §3.9) on GD-23 to GD-26 (ADR-0071 §4.3): from the waiting screen, a teacher without a
 # school chooses a DRENA, then an active school of it, and lands on their home; the school that detached them, an inactive
 # school and a school of another DRENA read the same neutral error; ten tries a minute; a pending request is refused.
 class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTest

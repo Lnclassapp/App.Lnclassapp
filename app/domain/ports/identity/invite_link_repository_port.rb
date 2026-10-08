@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::InviteLinkRepositoryPort
 # Rôle : contrat de résolution d'un jeton de lien d'invitation /i/<jeton> (collègue, direction, équipe)
-# ADR  : 0063, 0082
+# ADR  : 0063, 0083
 module Ports
   module Identity
     module InviteLinkRepositoryPort
@@ -11,7 +11,7 @@ module Ports
         def valid? = school_id.present? && school_active == true
       end
 
-      # Cherche le collègue d'abord, puis la direction, puis l'équipe (ADR-0082 §5). L'appelant juge avec valid?.
+      # Cherche le collègue d'abord, puis la direction, puis l'équipe (ADR-0083 §5). L'appelant juge avec valid?.
       # → InviteLink | nil (jeton inconnu)
       def resolve(token:)
         raise NotImplementedError, "#{self.class} doit implémenter #resolve"

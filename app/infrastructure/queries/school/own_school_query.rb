@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::OwnSchoolQuery
 # Rôle : l'établissement de la direction pour sa page « Établissement » : nom, type, statut et jeton du lien de la direction
-# ADR  : 0006, 0071, 0082 · UDR : 0056, 0078
+# ADR  : 0006, 0071, 0083 · UDR : 0056, 0079
 module Queries
   module School
     class OwnSchoolQuery

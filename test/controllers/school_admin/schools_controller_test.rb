@@ -2,7 +2,7 @@ require "test_helper"
 
 # GD-01, GD-02, GD-03 (ADR-0071, UDR-0056 §3.1, §3.2): « Établissement », the third destination of the direction: the
 # teachers' sign-up link to read, copy and share on WhatsApp, then the « Classes par niveau » block shared with the team.
-# IE-07 (ADR-0082 §4.1, UDR-0078 §3.7): the link is the direction's /i/<token>, without the code nor « Changer le lien ».
+# IE-07 (ADR-0083 §4.1, UDR-0079 §3.7): the link is the direction's /i/<token>, without the code nor « Changer le lien ».
 class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school(name: "Lycée Moderne de Bouaké", school_type: "private", school_code: "k7m4qz")
@@ -57,7 +57,7 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
       assert_includes message, link
       assert_includes message, "Lycée Moderne de Bouaké"
     end
-    # IE-07: the links are stable (ADR-0082 §4.1): no « Changer le lien », no form, and the code is never shown.
+    # IE-07: the links are stable (ADR-0083 §4.1): no « Changer le lien », no form, and the code is never shown.
     assert_select "#school_link form, #school_link dialog, #change-school-link", 0
     assert_select "#school_link", text: /Changer le lien/, count: 0
     assert_no_match(/k7m4qz|K7M-?4QZ/i, response.body)

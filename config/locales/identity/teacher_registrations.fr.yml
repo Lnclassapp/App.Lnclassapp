@@ -1,15 +1,14 @@
-# Inscription enseignant en deux voies (DRENA → établissement, ou lien d'invitation), et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0082, UDR-0007, UDR-0024, UDR-0054, UDR-0078
+# Inscription enseignant en deux voies (DRENA → établissement, ou lien d'invitation), et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0083, UDR-0007, UDR-0024, UDR-0054, UDR-0079
 fr:
   activemodel:
     attributes:
       dtos/identity/teacher_registration_input:
-        full_name: "Nom complet"
         last_name: "Nom"
         first_name: "Prénom(s)"
         gender: "Genre"
         contact: "Numéro de téléphone"
-        pin: "PIN"
-        pin_confirmation: "Confirmation du PIN"
+        pin: "Code secret"
+        pin_confirmation: "Confirmation du code secret"
         drena_public_id: "DRENA"
         school_public_id: "Établissement"
         material_slug: "Matière enseignée"
@@ -17,9 +16,6 @@ fr:
       models:
         dtos/identity/teacher_registration_input:
           attributes:
-            full_name:
-              blank: "Saisissez votre nom et vos prénoms."
-              single_word: "Saisissez votre nom et vos prénoms."
             last_name:
               blank: "Saisissez votre nom."
               too_long: "Le nom compte %{count} caractères au plus."
@@ -35,10 +31,10 @@ fr:
               invalid: "Saisissez un numéro ivoirien à 10 chiffres, par exemple 05 01 02 03 04."
               taken: "Ce numéro est déjà utilisé."
             pin:
-              blank: "Choisissez un PIN à 4 chiffres."
-              invalid: "Le PIN compte 4 chiffres."
+              blank: "Choisissez un code secret à 4 chiffres."
+              invalid: "Le code secret compte 4 chiffres."
             pin_confirmation:
-              confirmation: "Les deux PIN ne sont pas identiques."
+              confirmation: "Les deux codes secrets ne sont pas identiques."
             drena_public_id:
               blank: "Choisissez votre DRENA."
               inclusion: "Cette DRENA n'existe pas. Choisissez-en une autre."
@@ -54,7 +50,7 @@ fr:
         page_title: "Inscription enseignant"
         logo_home: "Lnclass, accueil"
         welcome: "Bienvenue sur Lnclass"
-        welcome_hint: "Créez votre compte enseignant en une minute, avec votre numéro de téléphone et un PIN à 4 chiffres."
+        welcome_hint: "Créez votre compte enseignant en une minute, avec votre numéro de téléphone et un code secret à 4 chiffres."
         title: "Créer un compte enseignant"
         subtitle: "Trois rubriques, une minute."
         have_account: "Déjà un compte ?"
@@ -72,11 +68,8 @@ fr:
         other_school: "Ce n'est pas votre établissement ?"
         material_prompt: "Choisissez votre matière"
         you: "Vous"
-        full_name_placeholder: "Ex. : KOUASSI Aya Marie"
-        full_name_hint: "Votre nom, puis vos prénoms."
-        preview_last: "Nom :"
-        preview_first: "Prénom(s) :"
-        correct_name: "Corriger le nom ou les prénoms"
+        last_name_placeholder: "Ex. : KOUASSI"
+        first_name_placeholder: "Ex. : Aya Marie"
         contact_placeholder: "0701020304"
         contact_hint: "10 chiffres, par ex. 0701020304."
         security: "Code secret"

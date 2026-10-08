@@ -251,11 +251,11 @@ class ComponentsHelperTest < ActionView::TestCase
 
   test "an invalid PIN keeps its error wiring next to the reveal button" do
     record = Record.new
-    record.errors.add(:pin, "PIN incorrect.")
+    record.errors.add(:pin, "Code secret incorrect.")
     show view.fields(:user, model: record) { |form| ui_field(form, :pin, as: :password, reveal: true) }
 
     assert_select "input#user_pin.border-error[aria-invalid=true][aria-describedby=user_pin_error]"
-    assert_select "p#user_pin_error", text: "PIN incorrect."
+    assert_select "p#user_pin_error", text: "Code secret incorrect."
   end
 
   # --- Groupe de boutons radio ------------------------------------------------
@@ -353,6 +353,14 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "[data-controller=modal][data-modal-open-value=true]"
     assert_select "button[aria-controls=modal-nouvelle-classe][aria-haspopup=dialog]", text: "Ouvrir"
     assert_select "dialog#modal-nouvelle-classe.sm\\:max-w-2xl[aria-labelledby=modal-nouvelle-classe-title]", text: /Corps.*Pied/m
+  end
+
+  # UDR-0080 §3.2 : le panneau du compte de l'élève, une feuille ancrée à gauche.
+  test "ui_modal placed as a drawer is a dialog anchored to the left, without the bottom sheet's handle" do
+    show ui_modal(title: "Mon compte", id: "account_panel", size: :sm, placement: :drawer)
+
+    assert_select "dialog#account_panel.ui-dialog.dialog-drawer"
+    assert_select "dialog#account_panel .sheet-handle", 0
   end
 
   test "ui_modal without trigger nor block keeps an explicit id" do
@@ -583,7 +591,7 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "a[href='/teachers/invite'] span.sr-only", 0
   end
 
-  # UDR-0078 §3.7 : la bulle « Inviter » ouvre WhatsApp dans un nouvel onglet et porte l'action de partage ; les attributs
+  # UDR-0079 §3.7 : la bulle « Inviter » ouvre WhatsApp dans un nouvel onglet et porte l'action de partage ; les attributs
   # de link_html vont sur le lien, sans rien changer d'autre. Sans link_html, le lien est exactement celui d'avant.
   test "ui_subject_bubble merges link_html on its link, and renders the same link without it" do
     plain = ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite))

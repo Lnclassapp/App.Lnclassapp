@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
-<%# Rôle : « Chercher un élève » (GET hors du frame, contrôleur search) ; frame classroom_roster_list : compteur, une ligne par élève (nouveau, voie), code de récupération et retrait dans son menu ⋮ %>
-<%# ADR  : 0028, 0032, 0060, 0067, 0085 · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4), 0081 (§3.7) · les entrées du menu visent _top : leurs réponses sont des streams %>
+<%# Rôle : « Chercher un élève » (GET hors du frame, contrôleur search) ; frame classroom_roster_list : compteur, une ligne par élève au numéro masqué (nouveau, voie), code de récupération et retrait dans son menu ⋮ %>
+<%# ADR  : 0028, 0032, 0060, 0067, 0083 (§4.4 bis), 0085 · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4), 0079 (§3.8 ter), 0081 (§3.7) · les entrées du menu visent _top : leurs réponses sont des streams %>
 <%# new_count, can_remove : par défaut ceux que la page de la classe a lus (@overview, @can_remove_students) ; le stream du
     retrait (classroom_students/destroy) les passe, avec focus_title pour rendre le focus au titre (UDR-0081 §3.7). -%>
 <%# locals: (classroom:, students:, search: "", new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
@@ -66,9 +66,11 @@
                       <% via = { "standard" => t(".via.standard"), "link" => t(".via.link") }[student.joined_via] %>
                       <% if via %><p class="text-xs text-mute sm:w-full"><%= via %></p><% end %>
                     </div>
+                    <%# UDR-0079 §3.8 ter : la valeur masquée de la requête, telle quelle ; ni tel:, ni copie, ni reformatage. %>
                     <% if student.contact %>
-                      <p class="text-xs whitespace-nowrap text-mute tabular-nums">
-                        <span class="sr-only"><%= t(".contact") %></span> <%= student.contact.scan(/\d{2}/).join(" ") %>
+                      <%# aria-label est interdit sur un <p> : la mention passe en sr-only, le numéro masqué est caché aux lecteurs d'écran. %>
+                      <p class="font-mono text-xs whitespace-nowrap text-mute" title="<%= t(".contact_masked") %>">
+                        <span aria-hidden="true"><%= student.contact %></span><span class="sr-only"><%= t(".contact_masked") %></span>
                       </p>
                     <% end %>
                     <%# UDR-0081 §3.7 : la confirmation nomme l'élève ; elle part avec sa ligne quand le stream la retire. Hors

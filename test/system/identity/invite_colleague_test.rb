@@ -4,7 +4,7 @@ require "application_system_test_case"
 # the server; the colleague signs up by the link and the counter of the referrer moves. The same on a 390 px phone.
 # Since UDR-0054, the copy goes through the clipboard controller; identity--share counts it on clipboard:copied.
 # Since UDR-0069 §3.6-§3.7 (RE-20), the home's block is shown below lg only; a wide screen has the sidebar card instead.
-# IE-06 (ADR-0082 §4.1, UDR-0078 §3.6-§3.7): the link is /i/<referral token>, without the school code; the colleague
+# IE-06 (ADR-0083 §4.1, UDR-0079 §3.6-§3.7): the link is /i/<referral token>, without the school code; the colleague
 # arrives with the school and its DRENA already chosen, and signs up with a full name by the « colleague » way.
 class Identity::InviteColleagueTest < ApplicationSystemTestCase
   INVITE = "identity.referrals.invite".freeze
@@ -65,7 +65,8 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     assert_no_field "teacher_registration[drena_public_id]"
     assert_no_field "teacher_registration[school_code]"
     select "SVT", from: "teacher_registration[material_slug]"
-    fill_in "teacher_registration[full_name]", with: "KOUASSI Koffi"
+    fill_in "teacher_registration[last_name]", with: "KOUASSI"
+    fill_in "teacher_registration[first_name]", with: "Koffi"
     choose I18n.t("genders.male")
     fill_in "teacher_registration[contact]", with: "0501020304"
     fill_in "teacher_registration[pin]", with: "4821"

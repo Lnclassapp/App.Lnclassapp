@@ -1,11 +1,11 @@
 <%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en trois rubriques %>
-<%# Rôle : Établissement (DRENA → liste, ou bandeau d'un lien), Vous (nom complet corrigeable, genre, numéro), Code secret ; 422 re-rendu %>
-<%# ADR  : 0030, 0037, 0050, 0082 · UDR : 0024, 0054, 0078 %>
+<%# Rôle : Établissement (DRENA → liste, ou bandeau d'un lien), Vous (nom, prénoms, genre, numéro), Code secret ; 422 re-rendu %>
+<%# ADR  : 0030, 0037, 0050, 0083 · UDR : 0024, 0054, 0079 %>
 <%# Formulaire GET de la seule DRENA (repli sans JavaScript, UDR-0024 §2.4) : son sélecteur s'y rattache par l'attribut form. %>
 <form id="teacher-signup-drena" action="<%= new_teacher_registration_path %>" method="get"></form>
 <%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",
               class: "space-y-6",
-              data: { controller: "school--drena-schools identity--full-name identity--phone-digits identity--pin-match",
+              data: { controller: "school--drena-schools identity--phone-digits identity--pin-match",
                       "school--drena-schools-url-value": drena_schools_path("__drena__"),
                       "identity--pin-match-ok-value": t(".pin_match.ok"), "identity--pin-match-ko-value": t(".pin_match.ko") } do |form| %>
   <% if @invite_invalid %>
@@ -40,25 +40,8 @@
 
   <fieldset class="space-y-4">
     <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".you") %></legend>
-    <%= ui_field form, :full_name, required: true, maxlength: 131, autocomplete: "name", spellcheck: false,
-                 placeholder: t(".full_name_placeholder"), hint: t(".full_name_hint"),
-                 data: { identity__full_name_target: "input", action: "input->identity--full-name#preview" } %>
-    <p id="full_name_preview" data-identity--full-name-target="preview" aria-live="polite" hidden
-       class="text-sm text-mute"><%= t(".preview_last") %> <strong class="text-ink" data-identity--full-name-target="lastOut"></strong>
-       · <%= t(".preview_first") %> <strong class="text-ink" data-identity--full-name-target="firstOut"></strong></p>
-    <%# Les champs corrigés montrent la saisie, jamais le découpage : remplis tous deux, ils font foi (ADR-0082 §4.4). %>
-    <details id="name-correction" data-identity--full-name-target="editor" data-action="toggle->identity--full-name#fill"
-             <%= "open" if @form.errors[:last_name].any? || @form.errors[:first_name].any? || @form.corrected? %>>
-      <summary class="inline-flex min-h-tap cursor-pointer items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline">
-        <%= t(".correct_name") %>
-      </summary>
-      <div class="mt-2 space-y-4">
-        <%= ui_field form, :last_name, value: @form.raw_last_name, maxlength: 50, autocomplete: "family-name",
-                     data: { identity__full_name_target: "lastName" } %>
-        <%= ui_field form, :first_name, value: @form.raw_first_name, maxlength: 80, autocomplete: "given-name",
-                     data: { identity__full_name_target: "firstName" } %>
-      </div>
-    </details>
+    <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
+    <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
     <% gender_error = @form.errors[:gender].first %>
     <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("teacher_registration_gender_error" if gender_error)) %>>
       <legend class="mb-1.5 block text-sm font-medium text-ink">

@@ -3,10 +3,10 @@
 # ADR  : 0026, 0028, 0050, 0062, 0085 · UDR : 0079, 0081
 module Classroom
   class StudentRegistrationsController < ApplicationController
-    FIELDS = %i[full_name last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id level_slug
+    FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id level_slug
                 classroom_public_id link_token].freeze
     # Repli sans JavaScript (UDR-0081 §3.3) : les choix reviennent en GET ; jamais les PIN, qui n'y sont pas relus.
-    PICKER_FIELDS = %i[full_name last_name first_name gender contact drena_public_id school_public_id level_slug
+    PICKER_FIELDS = %i[last_name first_name gender contact drena_public_id school_public_id level_slug
                        classroom_public_id].freeze
 
     allow_unauthenticated_access

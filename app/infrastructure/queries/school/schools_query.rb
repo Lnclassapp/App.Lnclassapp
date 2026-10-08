@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolsQuery
 # Rôle : liste nationale des établissements (SC-04) : filtres DRENA, type, cycle, statut, nom ou sigle (IE-21), 50 par page
-# ADR  : 0026, 0030, 0057, 0063, 0082 · UDR : 0036, 0044, 0050, 0078 · codes et team_invite_token : en-tête re-rendu par les streams
+# ADR  : 0026, 0030, 0057, 0063, 0083 · UDR : 0036, 0044, 0050, 0079 · codes et team_invite_token : en-tête re-rendu par les streams
 module Queries
   module School
     class SchoolsQuery
@@ -12,7 +12,7 @@ module Queries
       # La recherche ignore casse et accents sans extension PostgreSQL : les deux côtés passent par la même table.
       ACCENTED = "àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ".freeze
       PLAIN = "aaaceeeeiioouuuyaaaceeeeiioouuuy".freeze
-      # IE-21 (ADR-0082 §4.5) : nom ou sigle seulement ; le code national reste sur la ligne, plus dans la recherche.
+      # IE-21 (ADR-0083 §4.5) : nom ou sigle seulement ; le code national reste sur la ligne, plus dans la recherche.
       SEARCHED = %w[schools.name schools.sigle].map { "translate(lower(#{it}), '#{ACCENTED}', '#{PLAIN}') LIKE :pattern" }
                                                 .join(" OR ").freeze
 

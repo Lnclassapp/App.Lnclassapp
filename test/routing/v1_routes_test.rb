@@ -65,7 +65,7 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     assert_equal "/drenas/abcdefghijkmno/schools", helpers.drena_schools_path("abcdefghijkmno")
   end
 
-  # ADR-0057, ADR-0082 §4.5: the team regenerates the school code, which stays for the direction only.
+  # ADR-0057, ADR-0083 §4.5: the team regenerates the school code, which stays for the direction only.
   test "the school code keeps its regeneration under the school" do
     assert_equal "/teams/schools/abcdefghijkmno/code", helpers.school_code_path("abcdefghijkmno")
     assert_equal({ controller: "teams/school_codes", action: "update" }, first_match("/teams/schools/abcdefghijkmno/code", method: "PATCH"))
@@ -90,7 +90,7 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
                  first_match("/classrooms/#{id}/students/pqrstuvwxyzabc", method: "DELETE"))
   end
 
-  # IE-02 (ADR-0082 §4.1, §4.3): a teacher signs up by /teacher-signup or by an invite link /i/<token>; the code link
+  # IE-02 (ADR-0083 §4.1, §4.3): a teacher signs up by /teacher-signup or by an invite link /i/<token>; the code link
   # /e/<code> and the sign-up without a code are gone.
   test "IE-02: /i/:token opens the sign-up; /e/:code and /teacher-signup/without-code are not routed" do
     assert_equal "/i/ab12cd34ef56", helpers.teacher_invite_link_path("ab12cd34ef56")

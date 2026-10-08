@@ -2,7 +2,7 @@ require "test_helper"
 
 module Repositories
   module Identity
-    # ADR-0082 §4.1: the token of an invite link /i/<token> is a colleague's referral token, or the direction or team
+    # ADR-0083 §4.1: the token of an invite link /i/<token> is a colleague's referral token, or the direction or team
     # token of a school. The repository says who invites and to which school; the caller judges with valid?.
     class InviteLinkRepositoryTest < ActiveSupport::TestCase
       InviteLink = Ports::Identity::InviteLinkRepositoryPort::InviteLink
@@ -40,6 +40,17 @@ module Repositories
         link = @repository.resolve(token: referral_token_of(pending))
 
         assert_equal InviteLink.new(school_id: nil, school_active: false, channel: "colleague", referrer_id: pending.id), link
+        assert_not link.valid?
+      end
+
+      # Memo, cas limites : le lien d'un collègue supprimé est invalide. Anonymisé, il garde parfois son rattachement.
+      test "an anonymized colleague gives a link without school, not valid, even when still attached to an active school" do
+        colleague = create_teacher(school: create_school)
+        Orm::User.where(id: colleague.id).update_all(anonymized_at: Time.current)
+
+        link = @repository.resolve(token: referral_token_of(colleague))
+
+        assert_equal InviteLink.new(school_id: nil, school_active: false, channel: "colleague", referrer_id: colleague.id), link
         assert_not link.valid?
       end
 

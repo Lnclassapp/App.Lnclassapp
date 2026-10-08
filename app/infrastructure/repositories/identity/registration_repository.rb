@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::RegistrationRepository
 # Rôle : crée les comptes (élève, enseignant, direction, invité) ; un numéro déjà pris devient :conflict
-# ADR  : 0026, 0030, 0038, 0050, 0077, 0082
+# ADR  : 0026, 0030, 0038, 0050, 0077, 0083
 module Repositories
   module Identity
     class RegistrationRepository

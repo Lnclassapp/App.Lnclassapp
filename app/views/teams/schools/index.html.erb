@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
 <%# Rôle : « Importer des établissements » (principale), puis le menu « Classes » : génération confirmée, barème ; filtres et pages dans le frame « schools » %>
-<%# ADR  : 0030, 0036, 0056, 0058, 0082 · UDR : 0006, 0036, 0043, 0045, 0054, 0078 · sans code d'établissement (IE-21) ; recherche pendant la frappe %>
+<%# ADR  : 0030, 0036, 0056, 0058, 0083 · UDR : 0006, 0036, 0043, 0045, 0054, 0079 · sans code d'établissement (IE-21) ; recherche pendant la frappe %>
 <% page_title t(".page_title") %>
 <% unless list_frame_request? %>
   <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
@@ -46,7 +46,7 @@
           <caption class="sr-only"><%= t(".caption") %></caption>
           <thead class="border-b border-line text-xs text-mute">
             <tr>
-              <%# IE-21 (UDR-0078 §3.8 bis) : plus de colonne « Code d'établissement » ; le code reste sur la fiche. %>
+              <%# IE-21 (UDR-0079 §3.8 bis) : plus de colonne « Code d'établissement » ; le code reste sur la fiche. %>
               <% %i[school drena type cycle status classrooms teachers].each do |column| %>
                 <th scope="col" class="px-4 py-3 font-medium">
                   <%= t(".columns.#{column}") %>

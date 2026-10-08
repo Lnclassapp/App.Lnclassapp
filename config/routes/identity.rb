@@ -1,7 +1,9 @@
 # 🌐 DELIVERY · routes du contexte identity
-# Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil
-# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0071, 0077, 0082
+# Rôle : connexion, session, second facteur, code secret oublié, inscription enseignant, invitations, profil, liens de l'app Android
+# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0071, 0077, 0083, 0084
 get "login", to: "identity/sessions#new", as: :new_session
+# ADR-0084 §4.7 : Android vérifie ici que l'app « Lnclass » peut ouvrir les liens du site (/c/, /join).
+get ".well-known/assetlinks", to: "identity/asset_links#show", as: :android_asset_links, format: true, constraints: { format: :json }
 resource :session, only: %i[create destroy], controller: "identity/sessions" # session_path, gelé : DELETE = « Se déconnecter »
 namespace :identity do
   resource :second_factor, only: %i[new create], path: "second-factor"
@@ -9,14 +11,14 @@ namespace :identity do
   resource :pin_reset, only: %i[new create], path: "pin-reset"
 end
 get "account/pending", to: "identity/pending_accounts#show", as: :pending_account
-# ADR-0071, ADR-0082 §4.3 : un enseignant sans établissement (retiré, demande refusée) choisit DRENA puis établissement.
+# ADR-0071, ADR-0083 §4.3 : un enseignant sans établissement (retiré, demande refusée) choisit DRENA puis établissement.
 post "account/pending/school", to: "identity/pending_school_joins#create", as: :pending_school_join
 get "teacher-signup", to: "identity/teacher_registrations#new", as: :new_teacher_registration
 post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher_registrations
 # ADR-0077 : la direction s'inscrit seule avec le code d'établissement (plafond de 3 par le code).
 get "school-staff-signup", to: "identity/school_staff_registrations#new", as: :new_school_staff_registration
 post "school-staff-signup", to: "identity/school_staff_registrations#create", as: :school_staff_registrations
-# ADR-0082 §4.1 : le lien d'invitation d'un collègue, de la direction ou de l'équipe ouvre l'inscription, établissement choisi.
+# ADR-0083 §4.1 : le lien d'invitation d'un collègue, de la direction ou de l'équipe ouvre l'inscription, établissement choisi.
 get "i/:token", to: "identity/teacher_registrations#invite", as: :teacher_invite_link
 # ADR-0063 : « Inviter un collègue » ; un clic « Partager » est enregistré par le serveur (204), sur la session.
 get "teachers/invite", to: "identity/referrals#show", as: :teacher_invite

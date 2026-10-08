@@ -15,8 +15,9 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
   MIGRATIONS = [ CreateReferrals, AddNationalCodeToSchools, CreateSchoolJoinRequests ].freeze
   # Later migrations whose indexes or constraints fall with a column or table dropped above: replayed after « up »
   # (idempotent), so that the test database ends exactly as the schema describes it (the trigram index of
-  # schools.national_code, ADR-0067; the "auto" way of school_join_requests, ADR-0073; the arrival channel deduced from
-  # the referrals and the join requests, ADR-0082, which leaves a channel already written alone).
+  # schools.national_code, ADR-0067; the "auto" way of school_join_requests, ADR-0073; the invite tokens and the arrival
+  # channel, ADR-0083, which deduce nothing again once the column exists). Outside any transaction, this test drops
+  # columns of the worker's database: two test runs sharing those databases at once break each other.
   LATER = [ AddTrigramSearchIndexes, PauseTeacherJoinRequestReview, AddTeacherArrivalAndSchoolInviteTokens ].freeze
 
   def migrate(direction)

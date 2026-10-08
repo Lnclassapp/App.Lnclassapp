@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::PendingSchoolJoinsController
 # Rôle : « Rejoindre cet établissement » de l'écran d'attente : l'établissement choisi dans sa DRENA rattache l'enseignant
-# ADR  : 0028, 0063, 0071, 0082 · UDR : 0050, 0056, 0078
+# ADR  : 0028, 0063, 0071, 0083 · UDR : 0050, 0056, 0079
 module Identity
   class PendingSchoolJoinsController < AuthenticatedController
     include PendingAccountsController::SchoolChoice

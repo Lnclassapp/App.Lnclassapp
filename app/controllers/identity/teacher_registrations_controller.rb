@@ -1,14 +1,14 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
-# Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée
-# ADR  : 0026, 0028, 0030, 0050, 0063, 0082 · UDR : 0024, 0050, 0078
+# Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083 · UDR : 0024, 0050, 0079
 module Identity
   class TeacherRegistrationsController < ApplicationController
-    FIELDS = %i[full_name last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id
+    FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id
                 material_slug invite_token].freeze
 
     allow_unauthenticated_access
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many_posts }
-    # Le lien d'invitation a son propre compteur, comme l'ancien /e/<code> (ADR-0082 §4.1) ; au-delà, rien n'est révélé.
+    # Le lien d'invitation a son propre compteur, comme l'ancien /e/<code> (ADR-0083 §4.1) ; au-delà, rien n'est révélé.
     rate_limit to: 10, within: 1.minute, only: :invite, name: "invite_link", by: -> { request.remote_ip },
                with: -> { refuse_too_many }
     helper_method :material_options, :drena_options, :school_options
@@ -88,7 +88,8 @@ module Identity
         registrations: Repositories::Identity::RegistrationRepository.new, schools: Repositories::School::SchoolRepository.new,
         drenas: Repositories::School::DrenaRepository.new, invite_links:,
         taxonomy: Repositories::Catalog::TaxonomyRepository.new, sessions: Repositories::Identity::SessionRepository.new,
-        referrals: Repositories::Identity::ReferralRepository.new, policy: Policies::Identity::RegisterTeacherPolicy.new,
+        referrals: Repositories::Identity::ReferralRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+        policy: Policies::Identity::RegisterTeacherPolicy.new,
         transaction: Repositories::Shared::Transaction.new, digest_key: secret_digest_key, clock: Time.zone
       )
     end

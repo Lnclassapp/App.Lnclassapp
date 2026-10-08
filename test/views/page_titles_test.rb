@@ -94,7 +94,7 @@ class PageTitlesTest < ActiveSupport::TestCase
     assert_equal [ " ui_field f, :q, autofocus: true " ], %(<%= ui_field f, :q, autofocus: true %>).scan(ERB_CODE).flatten
     assert_equal "identity/teacher_registrations/new",
                  %( render template: "identity/teacher_registrations/new" )[RENDERED_TEMPLATE, 1]
-    # A page that only renders the page view naming itself (no such view is left in app/views since ADR-0082).
+    # A page that only renders the page view naming itself (no such view is left in app/views since ADR-0083).
     Tempfile.create([ "delegating", ".html.erb" ]) do |view|
       view.write(%(<%= render template: "identity/teacher_registrations/new" %>\n))
       view.flush

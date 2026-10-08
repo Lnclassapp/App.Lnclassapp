@@ -1,6 +1,6 @@
 // ⚡ FRONT · identity/phone_digits_controller — numéro ivoirien nettoyé pendant la frappe et au collage
 // Rôle : chiffres seuls, indicatif 225 / 00225 retiré, 10 chiffres au plus ; le serveur fait de même sans JavaScript
-// ADR  : 0050, 0051, 0082 · UDR : 0078 (§3.4)
+// ADR  : 0050, 0051, 0083 · UDR : 0079 (§3.4)
 import { Controller } from "@hotwired/stimulus"
 
 const MAX_DIGITS = 10

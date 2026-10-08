@@ -71,7 +71,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "exercise_badges" => { "level" => %w[bronze silver gold diamond] },
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
     "referrals" => { "source" => %w[link sponsor] },
-    "teacher_profiles" => { "joined_via" => %w[standard colleague direction team code] }, # ADR-0082 §4.2
+    "teacher_profiles" => { "joined_via" => %w[standard colleague direction team code] }, # ADR-0083 §4.2
     "classroom_students" => { "joined_via" => %w[standard link code] }, # ADR-0085 §4.4
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
@@ -141,7 +141,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     end
   end
 
-  test "IE-14: a teacher profile has a mandatory arrival channel, without default, among the five (ADR-0082 §4.2)" do
+  test "IE-14: a teacher profile has a mandatory arrival channel, without default, among the five (ADR-0083 §4.2)" do
     column = connection.columns("teacher_profiles").find { |candidate| candidate.name == "joined_via" }
     assert_equal [ false, nil ], [ column.null, column.default ]
 
@@ -193,7 +193,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_equal [ "users", :restrict ], [ key.to_table, key.on_delete ]
   end
 
-  test "IE-14: every school draws its own direction and team invite tokens, opaque, unique (ADR-0082 §4.1)" do
+  test "IE-14: every school draws its own direction and team invite tokens, opaque, unique (ADR-0083 §4.1)" do
     schools = Array.new(2) { create_school.reload }
     tokens = schools.flat_map { [ it.direction_invite_token, it.team_invite_token ] }
     assert_equal 4, tokens.uniq.size

@@ -131,8 +131,9 @@ module UseCases
       def register(actor: nil, classrooms: [ classroom ], schools: [ @school ], taken: [], refuse_membership: false, **attributes)
         @registrations = FakeRegistrations.new(@journal, taken:)
         dto = Dtos::Classroom::StudentRegistrationInput.new(
-          full_name: "KOUASSI Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821", pin_confirmation: "4821",
-          drena_public_id: "drn-1", school_public_id: "sch-3", level_slug: "3eme", classroom_public_id: "cls-7", **attributes
+          last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",
+          pin_confirmation: "4821", drena_public_id: "drn-1", school_public_id: "sch-3", level_slug: "3eme", classroom_public_id: "cls-7",
+          **attributes
         )
         RegisterStudent.new(
           classrooms: FakeClassrooms.new(@journal, classrooms), schools: FakeSchools.new(*schools),
@@ -259,10 +260,10 @@ module UseCases
       end
 
       test "an invalid entry: :invalid with the form's errors, nothing read nor written" do
-        result = register(full_name: "Kouassi", pin_confirmation: "1357")
+        result = register(first_name: "", pin_confirmation: "1357")
 
         assert_equal :invalid, result.code
-        assert_equal %i[pin_confirmation full_name], result.errors.keys
+        assert_equal %i[first_name pin_confirmation], result.errors.keys.sort
         assert_empty @journal
         assert_equal 0, @transaction.calls
       end

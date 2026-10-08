@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Specs : [`prd.md`](prd.md) · [ADR-0082](../../decisions/adr/0082-inscription-enseignant-en-deux-voies.md) · [UDR-0078](../../decisions/udr/0078-inscription-enseignant-en-deux-voies.md)
+> Specs : [`prd.md`](prd.md) · [ADR-0083](../../decisions/adr/0083-inscription-enseignant-en-deux-voies.md) · [UDR-0079](../../decisions/udr/0079-inscription-enseignant-en-deux-voies.md)
 
 ## Graphe
 
@@ -167,7 +167,7 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
                      `test/system/finitions/public_pages_test.rb` · `test/system/finitions/narrow_screens_test.rb` · `test/system/finitions/narrow_titles_test.rb`
                      `test/views/page_titles_test.rb` · `test/integration/pin_reveal_fields_test.rb` · `test/helpers/share_helper_test.rb`
                      `test/system/school_admin/departed_teachers_test.rb` *(GD-23 : écran d'attente par DRENA → établissement ; ajout du 2026-10-07, relevé par le Lot C)*
-                     `app/controllers/school/drena_schools_controller.rb` · `test/controllers/school/drena_schools_controller_test.rb` · `app/controllers/identity/pending_accounts_controller.rb` · `app/views/identity/pending_accounts/show.html.erb` *(paramètre `scope` limité à `teacher_registration` ou `school_join`, pour que l'écran d'attente reprenne `/drenas/:id/schools` — ADR-0082 §4.5 ; ajout du 2026-10-07)*
+                     `app/controllers/school/drena_schools_controller.rb` · `test/controllers/school/drena_schools_controller_test.rb` · `app/controllers/identity/pending_accounts_controller.rb` · `app/views/identity/pending_accounts/show.html.erb` *(paramètre `scope` limité à `teacher_registration` ou `school_join`, pour que l'écran d'attente reprenne `/drenas/:id/schools` — ADR-0083 §4.5 ; ajout du 2026-10-07)*
                      `test/controllers/teams/school_codes_controller_test.rb` *(CE-07 visite `/e/<code>` ; relevé par le Lot A)*
                      `test/system/teams/school_code_test.rb` *(CE-07 lit `SchoolCodePreviewQuery` ; vérifier par `find_by_school_code`)* · `app/infrastructure/queries/school/own_school_query.rb` · `test/infrastructure/queries/school/own_school_query_test.rb` *(plus de `school_code`, seul `school_links` le lisait)* · `app/views/school_admin/schools/_link.html.erb` · `app/domain/dtos/identity/teacher_registration_input.rb` *(commentaires périmés)* — *ajouts du 2026-10-07, relevés par l'exécutant du Lot D*
                      `test/routing/school_admin_routes_test.rb` *(`WRITES` sans `PATCH /school-admin/school/link` ; ajout du 2026-10-07, relevé par l'exécutant du Lot D)*
@@ -193,6 +193,38 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 
 ---
 
+## Lot F — Corrections de la phase 5 (ajout du 2026-10-07)
+
+Issues du challenger, des revues sécurité, tests et échecs silencieux, et des décisions Q22–Q23.
+
+- **Couche**       : domaine + infrastructure + delivery + ui + tests
+- **Fichiers**     : `app/infrastructure/queries/classroom/classroom_overview_query.rb` · `app/views/classroom/classrooms/_roster.html.erb` · `config/locales/classroom/classrooms.fr.yml` *(IE-22 : numéro masqué pour tout lecteur)*
+                     `app/domain/use_cases/identity/register_teacher.rb` · `app/controllers/identity/teacher_registrations_controller.rb` *(IE-23 : audit `school.changed` / `teacher_joined` avec la voie)*
+                     `app/domain/use_cases/school/join_school_with_code.rb` *(audit : ajouter la voie d'origine si disponible, sinon inchangé)*
+                     `app/infrastructure/repositories/identity/invite_link_repository.rb` *(collègue anonymisé → lien invalide)*
+                     `app/infrastructure/queries/school/school_detail_query.rb` *(parrain affiché seulement sur l'établissement du parrainage)*
+                     `db/migrate/20261007100000_add_teacher_arrival_and_school_invite_tokens.rb` *(reprise seulement quand la colonne vient d'être créée)*
+                     `app/views/school/drena_schools/index.html.erb` *(invite « Choisissez votre établissement » toujours présente après un 422)*
+                     `app/javascript/controllers/identity/full_name_controller.js` *(aperçu = champs corrigés quand « Corriger » est ouvert)*
+                     `config/locales/identity/referrals.fr.yml` *(« sans chercher le code » retiré)*
+                     tests correspondants, plus : icône de concordance (`teacher_signup_test`), IE-12 sur trois rôles, IE-10 composé, `joined_via` forgé, `/e/K7M-4QZ` en requête 404, migration rejouée sur un enseignant `code` ; et l'instabilité de `bin/ci` relevée par le challenger (`PG::UndefinedColumn national_code`, `StaffRestoreConcurrencyTest:63`) à diagnostiquer
+- **Dépend de**    : Lot E
+- **Test associé** : `test/infrastructure/queries/classroom/classroom_overview_query_test.rb` (IE-22) · `test/domain/use_cases/identity/register_teacher_test.rb` (IE-23) · `test/infrastructure/repositories/identity/invite_link_repository_test.rb` · `test/infrastructure/queries/school/school_detail_query_test.rb` · `test/db/add_teacher_arrival_and_school_invite_tokens_migration_test.rb`
+- **Done quand**   : un enseignant ne voit plus jamais le numéro complet d'un élève dans sa classe ; chaque inscription laisse une ligne d'audit avec sa voie ; les défauts du challenger ne se reproduisent plus ; `bin/ci` vert deux fois de suite
+
+---
+
+## Lot G — Deux champs Nom / Prénom(s) et vocabulaire « code secret » (ajout du 2026-10-07, memo Q24, Q25)
+
+- **Couche**       : domaine + delivery + ui + tests
+- **Fichiers**     : *Nom et prénoms* — `app/domain/dtos/identity/teacher_registration_input.rb` (plus de `full_name`) · `app/domain/entities/identity/full_name.rb` et son test *(supprimés)* · `app/views/identity/teacher_registrations/_form.html.erb` · `app/javascript/controllers/identity/full_name_controller.js` *(supprimé)* · `config/locales/identity/teacher_registrations.fr.yml` · tests de l'inscription enseignant (DTO, use case, contrôleur, système) et tests système qui remplissent `full_name` (`cold_start_test`, `invite_colleague_test`, `boucle_pedagogique_test`, `departed_teachers_test`…)
+                     *Code secret* — tous les fichiers de `config/locales/**/*.fr.yml` qui affichent « PIN », les textes en dur des vues, helpers et contrôleurs Stimulus (`app/views/**`, `app/helpers/components_helper.rb`, `app/javascript/controllers/password_reveal_controller.js`…), et les tests qui lisent ces textes. Commentaires et identifiants de code non concernés.
+- **Dépend de**    : Lot F
+- **Test associé** : `test/system/identity/teacher_signup_test.rb` (IE-03, IE-05) · un test qui parcourt les fichiers de traduction `fr` et échoue si un texte contient « PIN » (IE-24)
+- **Done quand**   : l'inscription enseignant a deux champs Nom / Prénom(s) ; `grep -rnw "PIN" config/locales app/views app/javascript app/helpers` ne renvoie plus de texte affiché ; `bin/ci` vert
+
+---
+
 ## Rattachement des critères d'acceptation
 
 | Critère | Lot(s) |
@@ -210,6 +242,8 @@ def create_teacher(user:, pin:, material_id:, joined_via:) = raise NotImplemente
 | IE-17, IE-19 | A |
 | IE-20 | 0 (option de la bulle), B |
 | IE-21 | E |
+| IE-22, IE-23 | F |
+| IE-03, IE-05 (version deux champs), IE-24 | G |
 | IE-18 | C |
 
 Aucun critère orphelin.
@@ -223,6 +257,8 @@ Vague 1 : Lot 0                    → 1 agent, séquentiel, sur feature/inscrip
 Vague 2 : Lot A ‖ Lot B ‖ Lot C    → 3 agents, worktrees isolés, après merge du Lot 0
 Vague 3 : Lot D                    → 1 agent, après merge de A, B et C
 Vague 4 : Lot E                    → 1 agent, après le Lot D
+Vague 5 : Lot F                    → 1 agent, après la phase 5 (corrections)
+Vague 6 : Lot G                    → 1 agent, après le Lot F
 ```
 
 Worktrees de la vague 2, créés depuis la branche de chantier **après** le merge du Lot 0 :
@@ -236,8 +272,8 @@ git worktree add ../lnclass-inscription-enseignant-lot-c -b feature/inscription-
 Consignes à chaque agent de lot :
 
 - chemins **absolus**, `git -C <worktree absolu>` ;
-- ordre intra-lot : test rouge → domaine → infrastructure → delivery → UI (UDR-0078) ;
-- en-tête HITL de 3 lignes sur chaque fichier créé ou modifié dans `app/`, avec ADR-0082 et UDR-0078 ;
+- ordre intra-lot : test rouge → domaine → infrastructure → delivery → UI (UDR-0079) ;
+- en-tête HITL de 3 lignes sur chaque fichier créé ou modifié dans `app/`, avec ADR-0083 et UDR-0079 ;
 - **interdiction de toucher un fichier absent de son champ `Fichiers`**. S'il en a besoin, il s'arrête et remonte : le fichier appartient au Lot 0, ou le plan est faux.
 
 ---
@@ -280,13 +316,13 @@ Contrôle mécanique (`awk … | sort | uniq -d`, 2026-10-07) : 17 doublons, don
 - [x] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >

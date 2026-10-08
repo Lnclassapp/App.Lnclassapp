@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CP-11, CP-14 (ADR-0063, UDR-0050), rewritten by ADR-0082 §4.3 and UDR-0078: a teacher whose school has never used
+# CP-11, CP-14 (ADR-0063, UDR-0050), rewritten by ADR-0083 §4.3 and UDR-0079: a teacher whose school has never used
 # Lnclass signs up on /teacher-signup by the DRENA, then the school, with a full name. They are attached at once, without
 # any request, and land on picking their classes. CP-12, CP-13: a request still pending from before the pause is validated
 # by a colleague who vouches for them — or by the team, from the school page. On a desktop and on a 390 px phone.
@@ -20,7 +20,8 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     select "Abidjan 1", from: "teacher_registration[drena_public_id]"
     select "Lycée Classique d'Abidjan", from: "teacher_registration[school_public_id]"
     select "SVT", from: "teacher_registration[material_slug]"
-    fill_in "teacher_registration[full_name]", with: "KONÉ Awa"
+    fill_in "teacher_registration[last_name]", with: "KONÉ"
+    fill_in "teacher_registration[first_name]", with: "Awa"
     choose I18n.t("genders.female")
     fill_in "teacher_registration[contact]", with: "0501020304"
     fill_in "teacher_registration[pin]", with: "4821"
@@ -31,7 +32,7 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     assert_current_path teacher_classrooms_path
   end
 
-  test "ADR-0082 §4.3: by the DRENA then the school, the teacher is attached at once, without a request, and reaches the catalogue" do
+  test "ADR-0083 §4.3: by the DRENA then the school, the teacher is attached at once, without a request, and reaches the catalogue" do
     sign_up(shot: "1280-inscription-drena")
 
     visit courses_path

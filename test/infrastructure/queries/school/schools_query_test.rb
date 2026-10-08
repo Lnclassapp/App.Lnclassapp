@@ -89,7 +89,7 @@ module Queries
         assert_equal 3, query(search: "  ").total_count
       end
 
-      # IE-21 (ADR-0082 §4.5, UDR-0078 §3.8 bis) : l'équipe cherche par nom ou sigle ; le code national reste sur la ligne.
+      # IE-21 (ADR-0083 §4.5, UDR-0079 §3.8 bis) : l'équipe cherche par nom ou sigle ; le code national reste sur la ligne.
       test "IE-21 : la recherche trouve par nom ou sigle, plus par code national" do
         create_school(name: "Lycée Classique", sigle: "LCA", national_code: "012345")
         create_school(name: "Lycée Moderne")

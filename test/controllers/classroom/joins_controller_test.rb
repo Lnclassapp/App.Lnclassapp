@@ -250,7 +250,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[type=hidden][name='student_registration[link_token]'][value='#{token}']"
       assert_select "a#other-classroom[href='#{new_student_registration_path}']",
                     text: I18n.t("classroom.student_registrations.form.other_classroom")
-      assert_select "input[name='student_registration[full_name]']"
+      assert_select "input[name='student_registration[last_name]']"
       assert_select "button#student-registration-submit:not([disabled])"
     end
     assert_select "select[name='student_registration[drena_public_id]'], turbo-frame#picker_schools, #classroom-link-invalid", 0

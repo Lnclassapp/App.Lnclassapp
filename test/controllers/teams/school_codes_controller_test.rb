@@ -33,7 +33,7 @@ class Teams::SchoolCodesControllerTest < ActionDispatch::IntegrationTest
     assert Orm::AuditEvent.exists?(action: "school.changed", subject_id: @school.id)
   end
 
-  # ADR-0082 §4.5: the code now opens only the direction's sign-up (/school-staff-signup).
+  # ADR-0083 §4.5: the code now opens only the direction's sign-up (/school-staff-signup).
   test "CE-07: the old code no longer signs up a direction, the new one does" do
     sign_in_as create_team_member
     patch school_code_path(@school.public_id), as: :turbo_stream

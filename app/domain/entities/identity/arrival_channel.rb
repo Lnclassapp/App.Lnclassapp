@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Identity::ArrivalChannel
 # Rôle : liste fermée des voies d'arrivée d'un enseignant (teacher_profiles.joined_via) ; « code » est historique, plus écrit
-# ADR  : 0082
+# ADR  : 0083
 module Entities
   module Identity
     module ArrivalChannel

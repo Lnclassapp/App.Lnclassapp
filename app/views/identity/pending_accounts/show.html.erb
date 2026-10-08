@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
 <%# Rôle : écran de sortie, sans redirection ; issues : rejoindre une classe ou voir son historique (élève), DRENA puis établissement (enseignant) %>
-<%# ADR  : 0030, 0036, 0040, 0063, 0071, 0082 · UDR : 0006, 0050, 0054, 0056, 0078 (§3.9) %>
+<%# ADR  : 0030, 0036, 0040, 0063, 0071, 0083 · UDR : 0006, 0050, 0054, 0056, 0079 (§3.9) %>
 <% page_title t(".page_title") %>
 <div id="pending_account">
   <% if @school_join %>
@@ -38,7 +38,7 @@
                             form: "school-join-drena" %>
             </noscript>
           </div>
-          <%# Avec JavaScript, le frame vient de /drenas/:id/schools?scope=school_join (ADR-0082 §4.5) : mêmes champs, même scope. %>
+          <%# Avec JavaScript, le frame vient de /drenas/:id/schools?scope=school_join (ADR-0083 §4.5) : mêmes champs, même scope. %>
           <%= render template: "school/drena_schools/index",
                      locals: { schools: @school_options, drena_public_id: @school_join.drena_public_id, registration: @school_join,
                                scope: :school_join } %>

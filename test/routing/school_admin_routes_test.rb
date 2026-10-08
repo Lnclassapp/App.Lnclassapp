@@ -37,7 +37,7 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
   end
 
   # ADR-0071, UDR-0056 §3.0 (gestion-etablissement-direction, Lot 0) amends DS-11: the direction's gestures are its only
-  # writes, a closed list; its reading pages still accept GET alone. ADR-0082 §4.5: « Changer le lien » is gone.
+  # writes, a closed list; its reading pages still accept GET alone. ADR-0083 §4.5: « Changer le lien » is gone.
   WRITES = [ [ "DELETE", "/school-admin/teachers/:public_id(.:format)" ],
              [ "POST", "/school-admin/teachers/:public_id/reinstatement(.:format)" ],
              [ "POST", "/school-admin/school/level-classrooms(.:format)" ],

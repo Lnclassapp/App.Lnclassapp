@@ -1,31 +1,42 @@
-<%# 🌐 UI · shared/navigation/_header — en-tête du shell : logo, rôle, menu du compte %>
-<%# Rôle : filet de couleur du rôle en haut ; même en-tête pour les quatre rôles %>
-<%# UDR  : 0006, 0065 (interrupteur clair / sombre à côté de l'avatar, lg+), 0061 (amendement du 2026-10-06 : entrées de page :account_menu) %>
+<%# 🌐 UI · shared/navigation/_header — en-tête du shell : logo, rôle, menu du compte ; chez l'élève, avatar, aide, thème %>
+<%# Rôle : filet de couleur du rôle en haut ; même en-tête pour l'enseignant, la direction et l'équipe %>
+<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar, lg+), 0061 (entrées de page :account_menu), 0080 §3.1 (élève) %>
 <header class="sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur">
   <div class="absolute inset-x-0 top-0 h-1 <%= role_accent(user.role) %>" aria-hidden="true"></div>
-  <%# Sous lg, l'avatar se colle au bord droit (pr-2). %>
-  <div class="flex h-full items-center justify-between gap-3 px-gutter max-lg:pr-2 lg:px-8">
-    <%= link_to home_path_for(user.role), class: "flex items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
-      <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-9 rounded-sm" %>
-      <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
-    <% end %>
-    <div class="flex items-center gap-3">
-      <span class="hidden sm:inline-flex"><%= ui_role_badge user.role %></span>
-      <%= render "shared/theme_switch", variant: :icon, wrapper: "max-lg:hidden" %>
-      <%= ui_dropdown label: t(".account"), id: "account-menu",
-            trigger: safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm), tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]) do %>
-        <div class="border-b border-line px-3 pt-2 pb-3">
-          <p class="truncate font-semibold"><%= user.name %></p>
-          <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
-        </div>
-        <div class="pt-1.5">
-          <%# Une page peut ajouter ses entrées en tête du menu (UDR-0061 : « Besoin d'aide ? » de l'accueil élève). %>
-          <%= yield :account_menu %>
-          <% account_links.each do |link| %>
-            <%= ui_dropdown_item link[:label], href: link[:href], icon: link[:icon], method: link[:method], tone: link[:tone] %>
-          <% end %>
-        </div>
-      <% end %>
+  <% if user.role.to_s == "student" %>
+    <%# UDR-0080 §3.1 : sans logo ; l'avatar ouvre le panneau du compte, l'aide et l'interrupteur à droite, à toute largeur. %>
+    <div class="flex h-full items-center justify-between gap-3 px-gutter lg:px-8">
+      <%= render "shared/navigation/account_panel", user: %>
+      <div class="flex items-center gap-1">
+        <%= render "shared/help_sheet", trigger_class: nil %>
+        <%= render "shared/theme_switch", variant: :icon, wrapper: nil %>
+      </div>
     </div>
-  </div>
+  <% else %>
+    <%# Sous lg, l'avatar se colle au bord droit (pr-2). %>
+    <div class="flex h-full items-center justify-between gap-3 px-gutter max-lg:pr-2 lg:px-8">
+      <%= link_to home_path_for(user.role), class: "flex items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-9 rounded-sm" %>
+        <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
+      <% end %>
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline-flex"><%= ui_role_badge user.role %></span>
+        <%= render "shared/theme_switch", variant: :icon, wrapper: "max-lg:hidden" %>
+        <%= ui_dropdown label: t(".account"), id: "account-menu",
+              trigger: safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm), tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]) do %>
+          <div class="border-b border-line px-3 pt-2 pb-3">
+            <p class="truncate font-semibold"><%= user.name %></p>
+            <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
+          </div>
+          <div class="pt-1.5">
+            <%# Une page peut ajouter ses entrées en tête du menu (UDR-0061). %>
+            <%= yield :account_menu %>
+            <% account_links.each do |link| %>
+              <%= ui_dropdown_item link[:label], href: link[:href], icon: link[:icon], method: link[:method], tone: link[:tone] %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </header>

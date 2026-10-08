@@ -30,7 +30,7 @@ module Queries
         assert_equal "012345", detail.national_code
       end
 
-      test "IE-08 : l'en-tête porte le jeton du lien d'invitation de l'équipe (ADR-0082 §4.1)" do
+      test "IE-08 : l'en-tête porte le jeton du lien d'invitation de l'équipe (ADR-0083 §4.1)" do
         assert_equal @school.reload.team_invite_token, detail.team_invite_token
         assert_match(/\A\h{12}\z/, detail.team_invite_token)
       end
@@ -95,6 +95,18 @@ module Queries
                        "Eva Coulibaly" => [ "direction", nil ], "Ama Diallo" => [ "standard", nil ],
                        "Awa Koné" => [ "colleague", nil ], "Ida Touré" => [ "team", nil ], "Léa Yao" => [ "code", nil ] },
                      rows)
+      end
+
+      test "IE-15 : le parrain n'est nommé que sur la fiche de l'établissement du parrainage ; ailleurs, la voie reste, sans nom" do
+        school_a = create_school(drena: @drena, name: "Lycée A")
+        referrer = create_teacher(school: school_a, first_name: "Awa", last_name: "Koné")
+        referee = create_teacher(school: school_a, first_name: "Yao", last_name: "Brou", joined_via: "colleague")
+        create_referral(referrer:, referee:, school_id: school_a.id)
+        Orm::TeacherSchool.where(teacher: referee).update_all(school_id: @school.id)
+
+        assert_equal [ [ "Yao Brou", "colleague", nil ] ], detail.teachers.map { it.to_h.values_at(:name, :joined_via, :referrer_name) }
+        Orm::TeacherSchool.where(teacher: referee).update_all(school_id: school_a.id)
+        assert_includes detail(public_id: school_a.public_id).teachers.map { [ it.name, it.referrer_name ] }, [ "Yao Brou", "Koné Awa" ]
       end
 
       test "IE-15 : la voie et le parrain ne coûtent aucune requête de plus, quel que soit le nombre d'enseignants" do

@@ -30,7 +30,7 @@ module Repositories
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
       end
 
-      # IE-21 (ADR-0082 §4.5) : le dépôt ne cherche plus par code national ; l'import lit encore les codes pris.
+      # IE-21 (ADR-0083 §4.5) : le dépôt ne cherche plus par code national ; l'import lit encore les codes pris.
       test "CP-09 : liste les codes nationaux pris (ADR-0063)" do
         create_school(drena: @drena, national_code: "012345")
         create_school(drena: @drena, national_code: nil)

@@ -1,7 +1,7 @@
 require "test_helper"
 require Rails.root.join("db/migrate/20261007100000_add_teacher_arrival_and_school_invite_tokens").to_s
 
-# ADR-0082 §4.1, §4.2 (IE-14): on a live database, every existing teacher receives an arrival channel deduced from what
+# ADR-0083 §4.1, §4.2 (IE-14): on a live database, every existing teacher receives an arrival channel deduced from what
 # is known of him (a link referral, then a join request, else the school code), and every existing school its two
 # invite tokens. Each test runs in the rolled back transaction of the test: PostgreSQL rolls the columns back with it.
 class AddTeacherArrivalAndSchoolInviteTokensMigrationTest < ActiveSupport::TestCase
@@ -65,5 +65,16 @@ class AddTeacherArrivalAndSchoolInviteTokensMigrationTest < ActiveSupport::TestC
     assert_no_changes -> { [ school.reload.attributes.slice("direction_invite_token", "team_invite_token"), channels(t: teacher) ] } do
       migrate(:up)
     end
+  end
+
+  test "running up again deduces nothing: a teacher still on code with a join request made after the migration keeps code" do
+    requested = create_teacher(school: nil, joined_via: "code")
+    create_join_request(teacher: requested)
+    linked = create_teacher(joined_via: "code")
+    create_referral(referee: linked)
+
+    migrate(:up)
+
+    assert_equal({ requested: "code", linked: "code" }, channels(requested:, linked:))
   end
 end

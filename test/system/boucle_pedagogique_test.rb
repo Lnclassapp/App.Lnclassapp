@@ -3,7 +3,7 @@ require "application_system_test_case"
 # Lot E, PRD §5 (V1 gate): the whole teaching loop on a blank base, through the real buttons only — no open_in_modal,
 # no stand-in controller, no factory. The team accepts the bootstrap invitation, builds the referential, a DRENA and a
 # public lycée by import (6 « Tle D » classrooms generated), then writes and publishes a course, a sheet and an exercise;
-# the teacher signs up by the DRENA, then the school (ADR-0082), with a full name, declares a classroom and assigns the
+# the teacher signs up by the DRENA, then the school (ADR-0083), with a full name, declares a classroom and assigns the
 # exercise; the student joins by the code, plays the exercise on a phone and wins « Diamant »; the teacher issues a
 # recovery code and reads the result. Every write is wrapped in assert_no_page_reload.
 class BouclePedagogiqueTest < ApplicationSystemTestCase
@@ -269,7 +269,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       select "Abidjan 1", from: "teacher_registration[drena_public_id]"
       select SCHOOL, from: "teacher_registration[school_public_id]"
       select "SVT", from: "teacher_registration[material_slug]"
-      fill_in "teacher_registration[full_name]", with: "YAO Koffi"
+      fill_in "teacher_registration[last_name]", with: "YAO"
+      fill_in "teacher_registration[first_name]", with: "Koffi"
       choose t("genders.male")
       fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
       fill_in "teacher_registration[pin]", with: "1357"

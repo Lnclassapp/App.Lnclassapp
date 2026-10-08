@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
-# Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves (nouveaux, voie)
-# ADR  : 0026, 0028, 0048, 0060, 0072, 0079, 0085 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0081 (§3.7)
+# Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves au numéro masqué (nouveaux, voie)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -10,7 +10,10 @@ module Queries
       # nil sans teacher_id (l'équipe n'a pas de jours, ADR-0072 §4.2).
       Overview = Data.define(:students, :new_students_count, :session_days, :assignments, :courses)
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
-      # photo_version : nil sans photo (ADR-0060). joined_via : Entities::Classroom::StudentArrivalChannel.
+      # photo_version : nil sans photo (ADR-0060).
+      # contact : toujours masqué (« 07 •• •• •• 04 »), pour tout lecteur ; le numéro complet ne quitte pas cette requête
+      # (ADR-0083 §4.4 bis : protéger les élèves).
+      # joined_via : Entities::Classroom::StudentArrivalChannel.
       # newcomer : arrivé depuis moins de NEW_FOR (ADR-0085 §4.4).
       StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version,
                                :joined_via, :newcomer)
@@ -61,9 +64,9 @@ module Queries
 
         rows.map do |id, public_id, first_name, last_name, contact, joined_via, joined_at|
           score, session_public_id = sessions[id]
-          StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact:, last_score_percent: score,
-                         last_session_public_id: session_public_id, photo_version: photos[id], joined_via:,
-                         newcomer: joined_at > since)
+          StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact: Entities::Identity::Contact.mask(contact),
+                         last_score_percent: score, last_session_public_id: session_public_id, photo_version: photos[id],
+                         joined_via:, newcomer: joined_at > since)
         end
       end
 

@@ -5,7 +5,7 @@ module School
   class DrenaSchoolsController < ApplicationController
     allow_unauthenticated_access
     rate_limit to: 30, within: 1.minute, by: -> { request.remote_ip }, with: -> { refuse_too_many }
-    # Le scope des champs du frame : inscription (défaut) ou écran d'attente (ADR-0082 §4.5) ; toute autre valeur → défaut.
+    # Le scope des champs du frame : inscription (défaut) ou écran d'attente (ADR-0083 §4.5) ; toute autre valeur → défaut.
     SCOPES = %w[teacher_registration school_join].freeze
     # ADR-0085 §4.2 : la cascade élève (UDR-0081 §3.3), à l'inscription ou dans « Choisis ta classe ».
     PICKER_SCOPES = %w[student_registration student_classroom_choice].freeze

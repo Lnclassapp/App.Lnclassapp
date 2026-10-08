@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Identity
-    # IE-01, IE-03 to IE-06, IE-08 to IE-13 (ADR-0082, UDR-0078): one use case, two ways in. The school is chosen in its
+    # IE-01, IE-03 to IE-06, IE-08 to IE-13 (ADR-0083, UDR-0079): one use case, two ways in. The school is chosen in its
     # DRENA, or given by an invite link /i/<token> (a colleague, the direction, the team), resolved again on submit. The
     # teacher is attached at once, without any join request, and the way in is recorded (teacher_profiles.joined_via).
     class RegisterTeacherTest < ActiveSupport::TestCase
@@ -143,6 +143,18 @@ module UseCases
         end
       end
 
+      # Into the same journal: the audit line is rolled back with the account (ADR-0083 §4.4 bis).
+      class FakeAudit
+        include Ports::Identity::AuditLogPort
+
+        def initialize(journal) = @journal = journal
+
+        def record(action:, actor_id:, at:, subject_type: nil, subject_id: nil, metadata: {}, ip: nil)
+          @journal << [ :audit, action, actor_id, at, subject_type, subject_id, metadata, ip ]
+          true
+        end
+      end
+
       setup do
         @journal = []
         @transaction = JournalTransaction.new(@journal)
@@ -164,18 +176,19 @@ module UseCases
         @registrations = FakeRegistrations.new(@journal, taken:)
         @invite_links = FakeInviteLinks.new
         dto = Dtos::Identity::TeacherRegistrationInput.new(
-          full_name: "KOUASSI Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821", pin_confirmation: "4821",
-          drena_public_id: "drn-abj1", school_public_id: "sch-lmc", material_slug: "svt", **attributes
+          last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821",
+          pin_confirmation: "4821", drena_public_id: "drn-abj1", school_public_id: "sch-lmc", material_slug: "svt", **attributes
         )
         RegisterTeacher.new(
           registrations: @registrations, schools: FakeSchools.new(@journal, *@schools_list, refuse_attach:),
           drenas: FakeDrenas.new, invite_links: @invite_links, taxonomy: @taxonomy, sessions: FakeSessions.new(@journal),
-          referrals: FakeReferrals.new(@journal, refuse: refuse_referral), policy: Policies::Identity::RegisterTeacherPolicy.new,
-          transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW)
+          referrals: FakeReferrals.new(@journal, refuse: refuse_referral), audit_log: FakeAudit.new(@journal),
+          policy: Policies::Identity::RegisterTeacherPolicy.new, transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW)
         ).call(actor:, dto:, ip: "1.2.3.4", user_agent: "Chrome")
       end
 
       def user_received = @registrations.received[:user]
+      def audit_line(via) = [ :audit, "school.changed", 41, NOW, "School", 31, { change: "teacher_joined", via: }, "1.2.3.4" ]
 
       test "IE-01: by the standard way, the teacher is created, attached as primary, way « standard », signed in" do
         result = register
@@ -186,6 +199,7 @@ module UseCases
         assert_operator token.length, :>=, 43
         assert_equal [ [ :user, "0501020304", "teacher", 5, "standard" ],
                        [ :teacher_school, 41, 31, true, NOW ],
+                       audit_line("standard"),
                        [ :session, 41, Entities::Identity::SecretDigest.hmac(token, key: KEY), "1.2.3.4", "Chrome", NOW ] ],
                      @journal
         assert_equal [ "KOUASSI", "Aya Marie", "female", "4821" ],
@@ -201,22 +215,16 @@ module UseCases
         assert_includes params, :invite_links
       end
 
-      test "IE-03: the full name, uncorrected, is split at the first word, case kept" do
-        register(full_name: "N'GUESSAN  Konan Jean-Baptiste")
+      test "IE-03: the name and the first names are passed as typed, spaces reduced, case kept" do
+        register(last_name: "N'GUESSAN", first_name: "Konan  Jean-Baptiste")
 
         assert_equal [ "N'GUESSAN", "Konan Jean-Baptiste" ], [ user_received.last_name, user_received.first_name ]
       end
 
-      test "IE-04: the corrected name and first names prevail over the split" do
-        register(full_name: "KONÉ OUATTARA Awa", last_name: "KONÉ OUATTARA", first_name: "Awa")
+      test "IE-05: missing first names are refused under « Prénom(s) », nothing is read nor written" do
+        result = register(first_name: " ")
 
-        assert_equal [ "KONÉ OUATTARA", "Awa" ], [ user_received.last_name, user_received.first_name ]
-      end
-
-      test "IE-05: a one-word full name is refused under the full name, nothing is read nor written" do
-        result = register(full_name: "Kouassi")
-
-        assert_equal [ :invalid, { full_name: [ I18n.t("#{ERRORS}.full_name.single_word") ] } ], [ result.code, result.errors ]
+        assert_equal [ :invalid, { first_name: [ I18n.t("#{ERRORS}.first_name.blank") ] } ], [ result.code, result.errors ]
         assert_nil @registrations.received
         assert_empty @journal
         assert_equal 0, @transaction.calls
@@ -252,7 +260,7 @@ module UseCases
         end
       end
 
-      test "ADR-0082 §4.1: with a valid link, the school sent by the form is ignored" do
+      test "ADR-0083 §4.1: with a valid link, the school sent by the form is ignored" do
         assert register(invite_token: "eeeeeeeeeeee", drena_public_id: "drn-abj2", school_public_id: "sch-other").success?
 
         assert_includes @journal, [ :teacher_school, 41, 31, true, NOW ]
@@ -336,6 +344,24 @@ module UseCases
         assert_empty @invite_links.lookups
         assert_empty @journal
         assert_equal 0, @transaction.calls
+      end
+
+      test "IE-23: every way writes one audit line school.changed / teacher_joined with the school and the way" do
+        { nil => "standard", "0a1b2c3d4e5f" => "colleague", "dddddddddddd" => "direction", "eeeeeeeeeeee" => "team" }
+          .each do |token, via|
+            @journal.clear
+
+            assert register(invite_token: token).success?, via
+            assert_equal [ audit_line(via) ], @journal.select { it.first == :audit }, via
+          end
+      end
+
+      test "IE-23: no audit line without an account: a refused sign-up writes none, a rolled back one keeps none" do
+        register(taken: [ "0501020304" ])
+        register(refuse_attach: true)
+        register(first_name: "")
+
+        assert_not(@journal.any? { it.first == :audit })
       end
 
       test "the role is forced to teacher: the entity never carries another role" do

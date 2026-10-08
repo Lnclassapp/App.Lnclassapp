@@ -3,13 +3,12 @@ fr:
   activemodel:
     attributes:
       dtos/classroom/student_registration_input:
-        full_name: "Nom complet"
         last_name: "Nom"
         first_name: "Prénom(s)"
         gender: "Genre"
         contact: "Numéro de téléphone"
-        pin: "PIN"
-        pin_confirmation: "Confirmation du PIN"
+        pin: "Code secret"
+        pin_confirmation: "Confirmation du code secret"
         drena_public_id: "DRENA"
         school_public_id: "Établissement"
         level_slug: "Niveau"
@@ -23,11 +22,6 @@ fr:
               classroom_archived: "Cette classe est archivée. Choisis ta classe."
               already_enrolled: "Tu es déjà inscrit dans une classe."
               already_member: "Tu es déjà inscrit dans cette classe."
-            full_name:
-              blank: "Saisis ton nom et tes prénoms."
-              single_word: "Saisis ton nom et tes prénoms."
-              too_long: "Le nom compte %{count} caractères au plus."
-              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
             last_name:
               blank: "Saisis ton nom."
               too_long: "Le nom compte %{count} caractères au plus."
@@ -43,10 +37,10 @@ fr:
               invalid: "Saisis un numéro ivoirien à 10 chiffres, par exemple 07 01 02 03 04."
               taken: "Ce numéro est déjà utilisé."
             pin:
-              blank: "Choisis un PIN à 4 chiffres."
-              invalid: "Le PIN compte 4 chiffres."
+              blank: "Choisis un code secret à 4 chiffres."
+              invalid: "Le code secret compte 4 chiffres."
             pin_confirmation:
-              confirmation: "Les deux PIN ne sont pas identiques."
+              confirmation: "Les deux codes secrets ne sont pas identiques."
             classroom_public_id:
               blank: "Choisis ta classe."
               unavailable: "Cette classe n'est pas disponible. Choisis-en une dans la liste."
@@ -67,11 +61,8 @@ fr:
         classroom: "Ta classe"
         other_classroom: "Ce n'est pas ta classe ?"
         you: "Toi"
-        full_name_placeholder: "Ex. : KOUASSI Aya Marie"
-        full_name_hint: "Ton nom, puis tes prénoms."
-        preview_last: "Nom :"
-        preview_first: "Prénom(s) :"
-        correct_name: "Corriger le nom ou les prénoms"
+        last_name_placeholder: "Ex. : KOUASSI"
+        first_name_placeholder: "Ex. : Aya Marie"
         contact_placeholder: "0701020304"
         contact_hint: "10 chiffres, par ex. 0701020304. Il te servira à te connecter."
         security: "Code secret"

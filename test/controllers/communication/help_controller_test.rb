@@ -18,7 +18,7 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#help_questions details", count: Communication::HelpController::QUESTIONS.size
     assert_select "#help_questions details[open]", 0
-    assert_select "#help_questions details > summary", text: "J'ai oublié mon PIN, que faire ?"
+    assert_select "#help_questions details > summary", text: "J'ai oublié mon code secret, que faire ?"
   end
 
   test "the answers quote the thresholds of the domain, not copies of them" do

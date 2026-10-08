@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::School::SchoolJoinInput
 # Rôle : DRENA puis établissement choisis sur l'écran d'attente par un enseignant sans établissement (plus de code)
-# ADR  : 0071, 0082 · UDR : 0078
+# ADR  : 0071, 0083 · UDR : 0079
 module Dtos
   module School
     class SchoolJoinInput

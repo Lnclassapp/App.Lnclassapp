@@ -3,7 +3,7 @@ require "application_system_test_case"
 # GD-01, GD-03 (ADR-0071, UDR-0056 §3.1, §3.2): the direction signs in, sees its three destinations, opens
 # « Établissement », reads its teachers' sign-up link, copies it and finds it in the WhatsApp message; the « Classes par
 # niveau » block follows. Then the same on a 390 px phone, from the bottom bar, without the page scrolling sideways.
-# IE-07 (ADR-0082 §4.1, UDR-0078 §3.7): the link is the direction's /i/<token>, without the code nor « Changer le lien ».
+# IE-07 (ADR-0083 §4.1, UDR-0079 §3.7): the link is the direction's /i/<token>, without the code nor « Changer le lien ».
 class SchoolAdmin::SchoolTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 

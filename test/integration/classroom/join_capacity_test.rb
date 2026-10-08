@@ -45,7 +45,7 @@ class Classroom::JoinCapacityTest < ActiveSupport::TestCase
   def register(contact, link_token: nil, classrooms: Repositories::Classroom::ClassroomRepository.new,
                memberships: Repositories::Classroom::MembershipRepository.new)
     dto = Dtos::Classroom::StudentRegistrationInput.new(
-      full_name: "KOUASSI Aya", gender: "female", contact:, pin: "4821", pin_confirmation: "4821", link_token:,
+      last_name: "KOUASSI", first_name: "Aya", gender: "female", contact:, pin: "4821", pin_confirmation: "4821", link_token:,
       school_public_id: @classroom.school.public_id, level_slug: @level.slug, classroom_public_id: @classroom.public_id
     )
     UseCases::Classroom::RegisterStudent.new(

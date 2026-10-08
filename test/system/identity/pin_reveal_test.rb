@@ -45,7 +45,7 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     assert_no_js_errors
   end
 
-  test "profile: the three PIN fields of « Changer mon PIN » show and hide one by one" do
+  test "profile: the three PIN fields of « Changer mon code secret » show and hide one by one" do
     sign_in_as create_teacher
     profile_pin_fields_one_by_one
     assert_no_js_errors

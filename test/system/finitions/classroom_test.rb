@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # Finitions UX, Lot E (UDR-0054, amendements d'UDR-0027 et d'UDR-0050) : la classe vue par l'enseignant et par l'équipe,
 # « Inviter un collègue ». FU-02 (enseignant), FU-07, FU-08, FU-10 (Inviter un collègue), FU-26 (classe), FU-28, FU-48,
-# FU-53 (classe). IE-20 (UDR-0078 §3.7) : la bulle « Inviter » de l'accueil ouvre WhatsApp, partage compté.
+# FU-53 (classe). IE-20 (UDR-0079 §3.7) : la bulle « Inviter » de l'accueil ouvre WhatsApp, partage compté.
 module Finitions; end
 
 class Finitions::ClassroomTest < ApplicationSystemTestCase

@@ -26,7 +26,7 @@ module Factories
       create_student(classroom: create_classroom(level: course.level, series: course.series), **attributes)
     end
 
-    # ADR-0082 §4.2: joined_via, the arrival channel, has no default in the database.
+    # ADR-0083 §4.2: joined_via, the arrival channel, has no default in the database.
     def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], joined_via: "standard",
                        **attributes)
       create_user(role: "teacher", **attributes).tap do |teacher|

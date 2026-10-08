@@ -24,26 +24,24 @@ Règles d'autorisation : l'inscription est publique et refusée à toute personn
 
 1. Le visiteur ouvre `/teacher-signup` (page d'accueil « Je suis enseignant », ou application).
 2. Rubrique **Établissement** : il choisit sa DRENA ; la liste de ses établissements actifs se charge ; il choisit son établissement, puis sa matière.
-3. Rubrique **Vous** : il tape son nom complet (« KOUASSI Aya Marie ») ; l'aperçu affiche « Nom : KOUASSI · Prénom(s) : Aya Marie » ; il peut ouvrir « Corriger » pour éditer nom et prénoms séparément. Il choisit son genre et saisit son numéro : le champ n'accepte que des chiffres, 10 au plus, et retire en direct `+225`, `(+225)`, `00225` et les espaces.
-4. Rubrique **Code secret** : PIN et confirmation. Dès que la confirmation a 4 chiffres, une icône dans le champ et un message dessous disent « Les codes concordent. » ou « Les codes ne concordent pas. ».
+3. Rubrique **Vous** : il saisit son nom (« KOUASSI ») et ses prénoms (« Aya Marie ») dans deux champs (ADR-0037, memo Q24). Il choisit son genre et saisit son numéro : le champ n'accepte que des chiffres, 10 au plus, et retire en direct `+225`, `(+225)`, `00225` et les espaces.
+4. Rubrique **Code secret** : code secret et confirmation. Dès que la confirmation a 4 chiffres, une icône et un message sous le champ disent « Les codes concordent. » ou « Les codes ne concordent pas. ».
 5. « Créer mon compte » : le compte est créé, l'enseignant est **rattaché tout de suite** à l'établissement (école principale), sa voie d'arrivée est « standard », la session s'ouvre et il arrive sur « Quelles classes enseignez-vous ? » avec « Bienvenue ! ».
 
 ### Chemin nominal — lien d'invitation
 
 1. Le visiteur ouvre le lien reçu (d'un collègue, de la direction ou de l'équipe).
 2. La même page s'ouvre ; la rubrique Établissement montre l'établissement et sa DRENA déjà choisis (bandeau), avec « Ce n'est pas votre établissement ? ». Il choisit sa matière.
-3. Rubriques Vous et Code secret comme ci-dessus.
+3. Rubriques Vous et Code secret comme ci-dessus (nom, prénoms, genre, numéro, code secret).
 4. « Créer mon compte » : rattaché à l'établissement du lien ; voie d'arrivée « lien d'un collègue » (avec le collègue, et le parrainage compté comme aujourd'hui), « lien de la direction » ou « lien de l'équipe ».
 
 ### Chemins alternatifs et erreurs
 
 | Situation | Comportement attendu |
 |---|---|
-| Nom complet d'un seul mot | 422, sous le champ : « Saisissez votre nom et vos prénoms. » |
-| Nom ou prénoms corrigés à la main | Les champs corrigés font foi ; le découpage automatique n'est pas réappliqué |
-| Nom complet avec espaces multiples | Normalisé (`squish`) ; casse saisie gardée (ADR-0037) |
+| Nom ou prénoms vides | 422, message existant sous le champ (ADR-0037) |
+| Nom ou prénoms avec espaces multiples | Normalisés (`squish`) ; casse saisie gardée (ADR-0037) |
 | Caractère interdit dans le nom (chiffre, symbole) | 422, message existant de nom invalide |
-| Sans JavaScript | Pas d'aperçu en direct ; « Corriger » reste accessible ; le serveur découpe le nom complet |
 | Numéro déjà inscrit | 422, message existant « Ce numéro est déjà utilisé. » sous le champ, sans révéler le rôle |
 | DRENA non choisie, ou établissement absent de la DRENA, en brouillon ou désactivé | 422, message sous le champ ; aucun compte créé |
 | Lien d'invitation inconnu, d'un établissement désactivé, ou d'un collègue retiré ou supprimé | La page standard s'ouvre avec l'alerte « Ce lien n'est plus valable. Choisissez votre établissement. » ; voie « standard » |
@@ -61,7 +59,7 @@ Formulés de manière vérifiable. Chacun devient un test. Identifiants `IE-NN`.
 # IE-01 — inscription standard
 Étant donné un établissement actif « Lycée Moderne de Cocody » de la DRENA « Abidjan 1 »
 Quand un visiteur choisit cette DRENA, cet établissement, la matière « SVT »,
-  tape « KOUASSI Aya Marie », choisit « Féminin », saisit un numéro libre et un code secret confirmé
+  saisit le nom « KOUASSI » et les prénoms « Aya Marie », choisit « Féminin », saisit un numéro libre et un code secret confirmé
 Alors un compte enseignant est créé avec le nom « KOUASSI » et les prénoms « Aya Marie »
 Et il est rattaché à cet établissement comme école principale, sans demande en attente
 Et sa voie d'arrivée est « standard »
@@ -71,19 +69,21 @@ Et il arrive sur « Quelles classes enseignez-vous ? » avec « Bienvenue ! »
 Quand un visiteur ouvre /teacher-signup
 Alors la page ne contient aucun champ « Code d'établissement »
 Et les rubriques apparaissent dans l'ordre : Établissement, Vous, Code secret
+Et le mot « PIN » n'apparaît nulle part dans la page
 Et /e/K7M-4QZ répond 404
 
-# IE-03 — découpage du nom complet
-Quand le nom complet « N'GUESSAN  Konan Jean-Baptiste » est envoyé sans correction
+# IE-03 — nom et prénoms en deux champs (memo Q24)
+Quand un visiteur ouvre /teacher-signup
+Alors la rubrique « Vous » montre, dans l'ordre, « Nom », « Prénom(s) », « Genre », « Numéro de téléphone »
+Et aucun champ « Nom complet » ni « Corriger » n'existe
+Quand il saisit le nom « N'GUESSAN » et les prénoms « Konan  Jean-Baptiste »
 Alors le nom enregistré est « N'GUESSAN » et les prénoms « Konan Jean-Baptiste »
 
-# IE-04 — correction du découpage
-Quand le visiteur tape « KONÉ OUATTARA Awa » puis corrige : nom « KONÉ OUATTARA », prénoms « Awa »
-Alors le nom enregistré est « KONÉ OUATTARA » et les prénoms « Awa »
+# IE-04 — (fusionné dans IE-03)
 
-# IE-05 — nom d'un seul mot
-Quand le nom complet envoyé est « Kouassi »
-Alors la page est re-rendue en 422 avec « Saisissez votre nom et vos prénoms. » sous le champ
+# IE-05 — nom ou prénoms manquants
+Quand le formulaire est envoyé sans prénoms
+Alors la page est re-rendue en 422 avec le message existant sous « Prénom(s) »
 Et aucun compte n'est créé
 
 # IE-06 — lien d'un collègue
@@ -91,7 +91,7 @@ Et aucun compte n'est créé
 Quand un visiteur ouvre ce lien
 Alors l'établissement et sa DRENA sont affichés, déjà choisis, sans code d'établissement
 Et le lien ne contient pas le code de l'établissement
-Quand il complète matière, nom complet, genre, numéro et code secret
+Quand il complète matière, nom, prénoms, genre, numéro et code secret
 Alors il est rattaché à ce lycée, sa voie d'arrivée est « lien d'un collègue » avec Awa
 Et l'inscription compte dans le parrainage d'Awa
 
@@ -145,9 +145,9 @@ Alors chaque ligne de la liste « Enseignants » montre la voie d'arrivée (et l
 # IE-17 — vérification en direct de la confirmation
 Étant donné la page d'inscription ouverte avec JavaScript
 Quand le visiteur saisit « 1234 » puis « 1235 » en confirmation
-Alors une icône d'erreur apparaît dans le champ confirmation et « Les codes ne concordent pas. » s'affiche dessous, annoncé aux lecteurs d'écran
+Alors une icône d'erreur et « Les codes ne concordent pas. » apparaissent sous le champ confirmation, dont le bord passe au rouge, s'affiche dessous, annoncé aux lecteurs d'écran
 Quand il corrige la confirmation en « 1234 »
-Alors une icône de succès remplace l'icône d'erreur et « Les codes concordent. » s'affiche
+Alors une icône de succès remplace l'icône d'erreur, « Les codes concordent. » s'affiche et le bord passe au vert
 Et tant que la confirmation a moins de 4 chiffres, ni icône ni message ne s'affichent
 Et sans JavaScript, des codes différents sont refusés au renvoi (422, message existant)
 
@@ -185,6 +185,22 @@ Alors cet établissement n'est pas trouvé par son code national
 Quand elle cherche « Lycée Classique » ou « LCA »
 Alors l'établissement est trouvé
 
+# IE-22 — numéros des élèves masqués dans la classe, pour tous les enseignants
+Étant donné un enseignant déclaré dans la classe 3ème 1, quelle que soit sa voie d'arrivée (standard, collègue, direction, équipe, ancien code)
+Quand il ouvre la liste des élèves de la 3ème 1
+Alors le numéro de chaque élève s'affiche masqué, sous la forme « 07 •• •• •• 04 »
+Et le numéro complet n'apparaît nulle part dans la page (ni texte, ni lien tel:, ni attribut)
+Et l'équipe Lnclass garde l'accès au numéro complet dans ses écrans de support
+
+# IE-23 — trace d'audit de chaque inscription
+Quand un enseignant s'inscrit, par n'importe quelle voie
+Alors une ligne d'audit « school.changed / teacher_joined » porte l'établissement et la voie d'arrivée
+
+# IE-24 — « code secret » partout (memo Q25)
+Quand on parcourt les écrans de l'application (connexion, profil, changement et réinitialisation du code, inscriptions élève, enseignant et direction, invitations, aide)
+Alors le mot « PIN » n'apparaît dans aucun texte affiché ni dans aucun libellé accessible
+Et le secret à 4 chiffres s'appelle « code secret » (« Confirmation du code secret », « Code secret oublié ? », « Les deux codes secrets ne sont pas identiques. »)
+
 # IE-16 — direction inchangée
 Quand une direction s'inscrit par /school-staff-signup avec le code d'établissement
 Alors son inscription fonctionne comme avant ce chantier
@@ -196,20 +212,20 @@ Alors son inscription fonctionne comme avant ce chantier
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | **Un seul use case** `UseCases::Identity::RegisterTeacher`, qui absorbe `RegisterPendingTeacher` : policy `RegisterTeacherPolicy` (inchangée) → DTO → invitation résolue (ou aucune) → établissement actif de la DRENA (ou celui de l'invitation) → `create_teacher` → `attach_teacher(primary: true)` → parrainage si lien d'un collègue → session. `UseCases::School::JoinSchoolWithCode` devient un rattachement par établissement choisi (`school_public_id` de la DRENA au lieu du code), règle des départs inchangée. **Plus de demande en attente** (`school_join_requests`) pour une nouvelle inscription. Nouveau DTO `TeacherRegistrationInput` : `full_name`, `last_name`/`first_name` (correction), `gender`, `contact`, `pin`, `pin_confirmation`, `drena_public_id`, `school_public_id`, `material_slug`, `invite_token` ; plus de `school_code` ni de `national_code`. Nouvelle entité-valeur `Entities::Identity::FullName` (découpage « premier mot = nom »). Nouvelle entité-valeur `Entities::Identity::ArrivalChannel` (`standard`, `colleague`, `direction`, `team`, `code`). Nouveau port de lecture des liens d'invitation (`resolve(token:)` → établissement, émetteur, voie). |
+| Domaine | **Un seul use case** `UseCases::Identity::RegisterTeacher`, qui absorbe `RegisterPendingTeacher` : policy `RegisterTeacherPolicy` (inchangée) → DTO → invitation résolue (ou aucune) → établissement actif de la DRENA (ou celui de l'invitation) → `create_teacher` → `attach_teacher(primary: true)` → parrainage si lien d'un collègue → session. `UseCases::School::JoinSchoolWithCode` devient un rattachement par établissement choisi (`school_public_id` de la DRENA au lieu du code), règle des départs inchangée. **Plus de demande en attente** (`school_join_requests`) pour une nouvelle inscription. Nouveau DTO `TeacherRegistrationInput` : `last_name`, `first_name`, `gender`, `contact`, `pin`, `pin_confirmation`, `drena_public_id`, `school_public_id`, `material_slug`, `invite_token` ; plus de `school_code` ni de `national_code`. Nouvelle entité-valeur `Entities::Identity::ArrivalChannel` (`standard`, `colleague`, `direction`, `team`, `code`). Nouveau port de lecture des liens d'invitation (`resolve(token:)` → établissement, émetteur, voie). |
 | Infrastructure | Migration : `teacher_profiles.joined_via` (CHECK sur les cinq voies, sur le modèle de `school_staffs.joined_via`) avec reprise de l'historique ; table des liens d'invitation d'établissement (direction, équipe) à jeton stable. Repository des liens d'invitation ; `RegistrationRepository#create_teacher` reçoit la voie. `ReferralQuery`, `OwnSchoolQuery`, `SchoolDetailQuery` exposent le jeton du lien au lieu du code ; `SchoolDetailQuery#teachers` expose la voie. `test/db/growth_migrations_test.rb` : la nouvelle migration s'ajoute à `LATER`. |
 | Delivery | `GET/POST /teacher-signup` (une seule voie) ; `GET /i/:token` (lien d'invitation) ; **retirés** : `GET /e/:code`, `GET/POST /teacher-signup/without-code`, `PATCH /school-admin/school/link` (« Changer le lien »). `PendingTeacherRegistrationsController` disparaît. L'écran d'attente (`PendingSchoolJoinsController`) reçoit DRENA → établissement. `/drenas/:drena_public_id/schools` inchangé. |
-| UI | Formulaire réordonné (Établissement → Vous → Code secret), champ « Nom complet » avec aperçu et « Corriger » (contrôleur Stimulus d'aperçu, nouveau), vérification en direct de la confirmation du code secret et nettoyage en direct du numéro (contrôleurs Stimulus, nouveaux), bandeau de l'établissement choisi par lien, alerte « lien plus valable ». Blocs de lien : « Inviter un collègue » (page et carte latérale), espace direction (sans code ni « Changer le lien »), fiche équipe (lien d'invitation à côté du code, qui reste pour la direction). Liste « Enseignants » de la fiche équipe : voie d'arrivée. Écran d'attente : DRENA → établissement au lieu du code. |
+| UI | Formulaire réordonné (Établissement → Vous → Code secret), vérification en direct de la confirmation du code secret et nettoyage en direct du numéro (contrôleurs Stimulus, nouveaux), bandeau de l'établissement choisi par lien, alerte « lien plus valable ». Blocs de lien : « Inviter un collègue » (page et carte latérale), espace direction (sans code ni « Changer le lien »), fiche équipe (lien d'invitation à côté du code, qui reste pour la direction). Liste « Enseignants » de la fiche équipe : voie d'arrivée. Écran d'attente : DRENA → établissement au lieu du code. |
 
 ## 6. Décisions rattachées
 
-- [ADR-0082](../../decisions/adr/0082-inscription-enseignant-en-deux-voies.md) *(Accepté)* — inscription enseignant en deux voies : liens d'invitation à jeton sans code d'établissement, voie d'arrivée enregistrée, nom complet saisi en un champ. Amende ADR-0037 (saisie seulement, stockage inchangé), ADR-0057 et ADR-0063 (côté enseignant), ADR-0071 (« Changer le lien »), ADR-0073 (plus de demande validée automatiquement).
-- [UDR-0078](../../decisions/udr/0078-inscription-enseignant-en-deux-voies.md) *(Accepté)* — page d'inscription enseignant réordonnée, nom complet avec aperçu, bandeau du lien ; blocs de lien de l'enseignant, de la direction et de l'équipe ; voie dans la liste « Enseignants ». Remplace UDR-0044, amende UDR-0024, UDR-0050, UDR-0056.
+- [ADR-0083](../../decisions/adr/0083-inscription-enseignant-en-deux-voies.md) *(Accepté)* — inscription enseignant en deux voies : liens d'invitation à jeton sans code d'établissement, voie d'arrivée enregistrée, nom complet saisi en un champ. Amende ADR-0037 (saisie seulement, stockage inchangé), ADR-0057 et ADR-0063 (côté enseignant), ADR-0071 (« Changer le lien »), ADR-0073 (plus de demande validée automatiquement).
+- [UDR-0079](../../decisions/udr/0079-inscription-enseignant-en-deux-voies.md) *(Accepté)* — page d'inscription enseignant réordonnée, nom complet avec aperçu, bandeau du lien ; blocs de lien de l'enseignant, de la direction et de l'équipe ; voie dans la liste « Enseignants ». Remplace UDR-0044, amende UDR-0024, UDR-0050, UDR-0056.
 
 ## 7. Mesures
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Champs à remplir, inscription standard | 9 (DRENA ou code, établissement, matière, nom, prénoms, genre, numéro, PIN, confirmation) — voie code : 8 | 8 (DRENA, établissement, matière, nom complet, genre, numéro, PIN, confirmation) | |
-| Champs à remplir, par lien | 8 | 6 (matière, nom complet, genre, numéro, PIN, confirmation) | |
+| Champs à remplir, inscription standard | 9 (DRENA ou code, établissement, matière, nom, prénoms, genre, numéro, PIN, confirmation) — voie code : 8 | 9 (DRENA, établissement, matière, nom, prénoms, genre, numéro, code secret, confirmation) — l'allègement vient de l'ordre et de la disparition du code (Q24) | |
+| Champs à remplir, par lien | 8 | 7 (matière, nom, prénoms, genre, numéro, code secret, confirmation) | |
 | Entrées d'inscription enseignant | 3 | 2 | |

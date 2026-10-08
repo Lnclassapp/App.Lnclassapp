@@ -42,7 +42,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
     create_school(drena: @bouake, name: "Lycée Municipal", school_type: "private")
     visit schools_path
     assert_selector "#schools_list tr", count: 3
-    # IE-21 (UDR-0078 §3.8 bis) : plus de colonne « Code d'établissement » ; la recherche porte sur le nom ou le sigle.
+    # IE-21 (UDR-0079 §3.8 bis) : plus de colonne « Code d'établissement » ; la recherche porte sur le nom ou le sigle.
     assert_no_selector "thead th", text: "Code d'établissement"
     assert_selector "label[for=filter_search]", text: "Nom ou sigle"
     # UDR-0054 §3.9 : avec JavaScript, « Filtrer » s'efface ; chaque liste part au changement, la frappe après une pause.

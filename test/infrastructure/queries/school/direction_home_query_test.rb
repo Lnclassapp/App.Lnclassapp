@@ -189,6 +189,9 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
   test "AD-23: a second read within 5 minutes runs no query; the figures are late at 4 min 59 s, fresh at 5 min 01 s" do
     fill(classroom("3ème 1"), students: 2, assignments: 1, handed: [ 1 ])
     cache = ActiveSupport::Cache::MemoryStore.new
+    # The cache counts its 5 minutes from the write, at the end of the first read: the clock is frozen so that this read,
+    # however slow on a loaded machine, writes its entry at read_at (chantier tests-instables-cache-blog).
+    freeze_time
     read_at = Time.current
     home(cache:)
 

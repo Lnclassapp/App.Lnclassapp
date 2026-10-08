@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 # GD-19 then GD-23 (ADR-0071 §4.3, UDR-0056 §3.4, §3.5), on a 390 px phone: the direction opens « Enseignants retirés »
 # and reinstates a teacher, whose row leaves without a reload; then another teacher detached from the same school reads
-# the waiting screen, is refused by that school and joins another one, chosen by its DRENA (IE-18, ADR-0082 §4.3,
-# UDR-0078 §3.9), without any school code; already configured, he lands on his home.
+# the waiting screen, is refused by that school and joins another one, chosen by its DRENA (IE-18, ADR-0083 §4.3,
+# UDR-0079 §3.9), without any school code; already configured, he lands on his home.
 class SchoolAdmin::DepartedTeachersTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 
