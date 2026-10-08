@@ -1,12 +1,14 @@
 # UDR-0009 : Rejoindre une classe — un code, un aperçu limité à trois noms, une inscription en trois rubriques, arrivée connecté sur l'accueil
 
+> ⚠️ **Remplacée par [UDR-0081](0081-inscription-eleve-sans-code-de-classe.md)** (2026-10-08, Lot F du chantier `inscription-eleve-sans-code`) : plus de code de classe ni d'écran `/join` (qui mène à `/student-signup`). La règle de l'aperçu limité à trois noms est gardée par l'UDR-0081 §3.4.
+
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `interface-epuree`* |
+| **Statut** | ⚠️ Remplacée (2026-10-08) — *acceptée le 2026-09-27 (porteur), amendée le 2026-10-02 par le chantier `interface-epuree`* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot A1, critères ID-01, ID-02, ID-07, CL-06, CL-07, CL-08, TR-cadre-1, sécurité n° 5 |
 | **ADR lié** | [ADR-0037](../adr/0037-nom-et-prenoms-en-deux-champs.md) (nom et prénoms) · [ADR-0040](../adr/0040-classe-principale-unique-de-l-eleve.md) (classe principale) · [ADR-0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) (code, plafond, débit) · [ADR-0050](../adr/0050-authentification-et-session.md) (PIN, session) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · [UDR-0024](0024-inscription-enseignant.md) |
-| **Remplacé par** | — |
+| **Remplacé par** | [UDR-0081](0081-inscription-eleve-sans-code-de-classe.md) |
 
 ---
 

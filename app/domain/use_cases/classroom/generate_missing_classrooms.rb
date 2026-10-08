@@ -10,9 +10,9 @@ module UseCases
 
       # policy : Policies::School::ManageSchoolPolicy, revérifiée pour l'auteur au démarrage (ADR-0028) ;
       # classroom_plan : le barème, lu une fois au démarrage (ADR-0058) ;
-      # random : tirage des codes d'adhésion ; batch_size : établissements par transaction. Injectables pour les tests.
+      # batch_size : établissements par transaction, injectable pour les tests.
       def initialize(reports:, schools:, classrooms:, taxonomy:, classroom_plan:, users:, audit_log:, transaction:, policy:,
-                     clock:, random: SecureRandom, batch_size: BATCH_SIZE)
+                     clock:, batch_size: BATCH_SIZE)
         @reports = reports
         @schools = schools
         @classrooms = classrooms
@@ -23,7 +23,6 @@ module UseCases
         @transaction = transaction
         @policy = policy
         @clock = clock
-        @random = random
         @batch_size = batch_size
       end
 
@@ -62,7 +61,6 @@ module UseCases
         school_year = Entities::Classroom::SchoolYear.current(at.to_date)
         @lookup = @taxonomy.lookup
         @plan = @classroom_plan.plan
-        @taken_codes = @classrooms.taken_join_codes
         after_id = 0
         done = 0
         loop do
@@ -99,13 +97,10 @@ module UseCases
         @tally.invalid([ Entities::Catalog::ImportError.new(path: plan.school.name, code: "write_failed", params: {}) ])
       end
 
-      # Codes uniques en base et dans toute la génération (ADR-0041).
+      # Chaque classe reçoit son identifiant public ; son jeton de lien est tiré par la base (ADR-0085 §4.1).
       def insert(plans, at)
-        rows = plans.flat_map(&:rows)
-        codes = Entities::Classroom::JoinCode.generate_unique(count: rows.size, taken: @taken_codes, random: @random)
-        @classrooms.insert_generated(
-          rows: rows.zip(codes).map { |row, join_code| row.merge(join_code:, public_id: SecureRandom.base58(PUBLIC_ID_LENGTH)) }, at:
-        )
+        rows = plans.flat_map(&:rows).map { |row| row.merge(public_id: SecureRandom.base58(PUBLIC_ID_LENGTH)) }
+        @classrooms.insert_generated(rows:, at:)
       end
 
       # Dotés et sans classe à générer comptent leurs niveaux et séries sautés, comme à l'import.

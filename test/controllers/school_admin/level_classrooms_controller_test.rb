@@ -28,9 +28,7 @@ class SchoolAdmin::LevelClassroomsControllerTest < ActionDispatch::IntegrationTe
     classroom = Orm::Classroom.find_by!(name: "6ème 5")
     assert_equal [ @school.id, @levels["6eme"].id, current_school_year, "active" ],
                  [ classroom.school_id, classroom.level_id, classroom.school_year, classroom.status ]
-    assert_match Entities::Classroom::JoinCode::FORMAT, classroom.join_code
-    assert_select "turbo-stream[action=append][target=toasts]",
-                  text: including(tc("create.done", name: "6ème 5", code: classroom.join_code.upcase))
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("create.done", name: "6ème 5"))
     assert_select "turbo-stream[action=replace][target=school_level_classrooms][method=morph]"
     assert_select(*sixth_count(5))
     assert_select "turbo-stream[action=replace] template dialog form[action='#{school_admin_level_classroom_path(classroom.public_id)}']"
@@ -148,7 +146,7 @@ class SchoolAdmin::LevelClassroomsControllerTest < ActionDispatch::IntegrationTe
     post school_admin_level_classrooms_path, params: { level: "6eme" }
     assert_redirected_to school_admin_school_path
     assert_response :see_other
-    assert_equal tc("create.done", name: "6ème 5", code: Orm::Classroom.find_by!(name: "6ème 5").join_code.upcase), flash[:notice]
+    assert_equal tc("create.done", name: "6ème 5"), flash[:notice]
 
     delete school_admin_level_classroom_path(@sixths.first.public_id)
     assert_redirected_to school_admin_school_path

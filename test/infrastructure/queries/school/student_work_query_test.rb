@@ -69,7 +69,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
   test "the overview counts each present student of the school once, whatever the number of their classrooms" do
     first, second = classroom, classroom(name: "2nde C 2")
     both = create_student(classroom: first)
-    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: both, primary: false, joined_at: Time.current)
     create_student(classroom: second)
     create_student(classroom: second, anonymized_at: Time.current)
     gone = create_student(classroom: first)
@@ -184,12 +184,12 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     first, second = classroom, classroom(name: "2nde C 2")
     first_assignment, second_assignment = assignment(first), assignment(second)
     both = create_student(classroom: first, first_name: "Awa", last_name: "Koné")
-    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: both, primary: false, joined_at: Time.current)
     submit(both, first_assignment, 40)
     submit(both, second_assignment, 80)
     submit(both, second_assignment, 60)
     left = create_student(classroom: first, first_name: "Yao", last_name: "Kouassi")
-    Orm::ClassroomStudent.create!(classroom: second, student: left, primary: false, joined_at: Time.current, left_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: left, primary: false, joined_at: Time.current, left_at: Time.current)
     submit(left, second_assignment, 100)
     submit(left, first_assignment, 20)
 
@@ -284,7 +284,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
   test "AD-09: a student present in two classrooms of the level counts once in the level" do
     first, second = classroom, classroom(name: "2nde A 2")
     both = create_student(classroom: first)
-    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: both, primary: false, joined_at: Time.current)
     create_student(classroom: second)
     gone = create_student(classroom: second)
     Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)

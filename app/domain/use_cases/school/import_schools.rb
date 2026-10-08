@@ -20,15 +20,13 @@ module UseCases
       ERROR_KEYS = { name: "name", sigle: "sigle", status: "status", school_type: "type", cycle: "cycle" }.freeze
       ERROR_CODES = { blank: "blank", too_long: "too_long", inclusion: "invalid_value" }.freeze
 
-      # classroom_plan : le barème, lu une fois à la préparation (ADR-0058) ; random : tirage des codes d'adhésion des
-      # classes, injectable pour les tests ; les codes d'établissement ont le leur.
-      def initialize(drenas:, schools:, classrooms:, taxonomy:, classroom_plan:, random: SecureRandom)
+      # classroom_plan : le barème, lu une fois à la préparation (ADR-0058).
+      def initialize(drenas:, schools:, classrooms:, taxonomy:, classroom_plan:)
         @drenas = drenas
         @schools = schools
         @classrooms = classrooms
         @taxonomy = taxonomy
         @classroom_plan = classroom_plan
-        @random = random
       end
 
       # La DRENA de l'enveloppe est facultative : chaque école peut porter la sienne.
@@ -41,14 +39,13 @@ module UseCases
         Shared::Result.success(drena)
       end
 
-      # Les codes déjà pris (classes et établissements) sont gardés pour write, qui les complète lot après lot.
+      # Les codes d'établissement déjà pris sont gardés pour write, qui les complète lot après lot.
       def prepare(target:)
         ids_by_slug = @drenas.ids_by_slug
-        @taken_codes = @classrooms.taken_join_codes
         @taken_school_codes = @schools.taken_school_codes
         Entities::Catalog::ImportContext.new(target:, existing_keys: @schools.existing_keys(drena_ids: ids_by_slug.values),
                                              data: { ids_by_slug:, lookup: @taxonomy.lookup, plan: @classroom_plan.plan,
-                                                     taken_codes: @taken_codes, national_codes: @schools.taken_national_codes })
+                                                     national_codes: @schools.taken_national_codes })
       end
 
       def validate_root(root:, path:, context:)
@@ -72,7 +69,7 @@ module UseCases
           school_id = school_ids.fetch(item.plan.fetch(:school).fetch(:public_id))
           item.plan.fetch(:classrooms).map { it.merge(school_id:, school_year:) }
         end
-        created = @classrooms.insert_generated(rows: with_codes(rows), at:)
+        created = @classrooms.insert_generated(rows: with_public_ids(rows), at:)
         { imported: items.size, details: details(items, created) }
       end
 
@@ -151,10 +148,9 @@ module UseCases
         rows.zip(codes).map { |row, school_code| row.merge(school_code:) }
       end
 
-      # Codes uniques en base et dans tout le lot (ADR-0041).
-      def with_codes(rows)
-        codes = Entities::Classroom::JoinCode.generate_unique(count: rows.size, taken: @taken_codes, random: @random)
-        rows.zip(codes).map { |row, join_code| row.merge(join_code:, public_id: SecureRandom.base58(PUBLIC_ID_LENGTH)) }
+      # Chaque classe reçoit son identifiant public ; son jeton de lien est tiré par la base (ADR-0085 §4.1).
+      def with_public_ids(rows)
+        rows.map { |row| row.merge(public_id: SecureRandom.base58(PUBLIC_ID_LENGTH)) }
       end
 
       # Les niveaux et séries sautés ne paraissent au rapport que s'il y en a.

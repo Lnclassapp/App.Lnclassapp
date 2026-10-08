@@ -1,7 +1,8 @@
-<%# 🌐 UI · school_admin/classrooms/show — page d'une classe pour la direction (DS-09, DS-10, FU-10, FU-21, FU-49) %>
-<%# Rôle : les chiffres de la classe en trois tuiles, puis chaque élève présent (cherché pendant la frappe) : rendus / donnés, score %>
-<%# ADR  : 0065 · UDR : 0005, 0049, 0052, 0054, 0074 · aucun identifiant d'élève dans le HTML : les lignes sont numérotées %>
+<%# 🌐 UI · school_admin/classrooms/show — page d'une classe pour la direction (DS-09, DS-10, FU-10, FU-21, FU-49, IL-12 à IL-14) %>
+<%# Rôle : le lien de la classe, ses chiffres en trois tuiles, puis chaque élève présent (cherché pendant la frappe) : nouveau, voie, rendus / donnés, score, retrait %>
+<%# ADR  : 0065, 0085 · UDR : 0005, 0049, 0052, 0054, 0074, 0081 (§3.6, §3.7) · le public_id d'un élève n'est que sur sa ligne, celle du geste (ADR-0085 §4.5) %>
 <% classroom = @detail.classroom %>
+<% roster = "classroom.classrooms.roster" %>
 <% page_title classroom.name %>
 <% content_for :nav_key, "home" %>
 <% percent = lambda do |value|
@@ -12,6 +13,11 @@
 <%# UDR-0074 §3.9 : le retour mène à la page du niveau de la classe, à son nom. %>
 <%= ui_page_header title: classroom.name, subtitle: t(".subtitle", level: classroom.level_name, count: classroom.students_count),
                    back: { label: classroom.level_name, href: school_admin_level_path(classroom.level_slug) } %>
+
+<%# UDR-0081 §3.6 : le bloc de la page de l'enseignant, au-dessus des trois tuiles ; « Changer le lien » le remplace par Turbo
+    Stream. Permanent, à l'identifiant propre à la classe : la page re-demandée après un retrait (morphing) ne cache pas de
+    nouveau « Copier le lien », que le contrôleur clipboard a montré à son arrivée. %>
+<div id="classroom_link_block_<%= classroom.public_id %>" class="mb-5" data-turbo-permanent><%= render "classroom/classrooms/link", classroom: @detail.link %></div>
 
 <ul id="classroom_figures" class="mb-5 grid grid-cols-3 gap-3">
   <% [ [ :assignments, classroom.assignments_count, nil ], [ :submission_rate, percent.call(classroom.submission_rate), :submission_rate ],
@@ -29,7 +35,10 @@
 </ul>
 
 <%= ui_card id: "classroom_students" do %>
-  <% if @detail.students.empty? %>
+  <%# UDR-0081 §3.7 : le titre de la liste de l'enseignant, compte des nouveaux compris ; après un retrait, le stream
+      (classroom_students/destroy) le remplace et y met le focus, puis la page re-demandée remet le reste. %>
+  <%= render "classroom/classrooms/roster_title", count: classroom.students_count, new_count: @detail.new_students_count %>
+  <% if @detail.members.empty? %>
     <%= ui_empty_state title: t(".empty"), icon: "users" %>
   <% else %>
     <%= form_with scope: :student_work_search, url: school_admin_classroom_path(classroom.public_id), method: :get,
@@ -40,7 +49,10 @@
         <%= ui_field form, :q, as: :search, label: t(".search.label"), name: "q", value: @search, autocomplete: "off",
                                data: { action: "search#queue" } %>
       </div>
-      <%= ui_button t(".search.submit"), type: :submit, variant: :secondary, data: { search_target: "button" } %>
+      <%# Permanent, comme le bloc du lien : la page re-demandée après un retrait ne ré-affiche pas ce bouton, que le
+          contrôleur search a caché à son arrivée ; sans JavaScript, il reste. %>
+      <%= ui_button t(".search.submit"), type: :submit, variant: :secondary, id: "student-work-search-submit-#{classroom.public_id}",
+                                         data: { search_target: "button", turbo_permanent: true } %>
       <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
       <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
     <% end %>
@@ -64,16 +76,47 @@
                   <%= t(".columns.average") %>
                   <%= ui_info_tip t("school_admin.classrooms.tips.student_average"), label: t(".columns.average") %>
                 </th>
+                <th scope="col" class="w-12 px-2 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
               </tr>
             </thead>
             <tbody class="divide-y divide-line">
-              <% @students.each_with_index do |student, index| %>
-                <tr id="student_<%= index %>">
-                  <th scope="row" class="px-2 py-3 font-medium text-ink"><%= student.display_name %></th>
+              <% @students.each do |student| %>
+                <% remove_dialog = "remove-student-#{student.public_id}" %>
+                <%# La ligne porte l'identifiant de la page de l'enseignant : le stream du retrait la retire (UDR-0081 §3.7). %>
+                <tr id="student_<%= student.public_id %>">
+                  <th scope="row" class="px-2 py-3 font-medium text-ink">
+                    <%# UDR-0081 §3.7, amendée le 2026-10-08 : sous sm, la pastille passe sous le nom, sur la ligne de la voie
+                        d'arrivée ; à partir de sm, elle reste à côté du nom. Rien pour la voie du code. %>
+                    <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <p class="w-full sm:w-auto"><%= student.display_name %></p>
+                      <% if student.newcomer %><span class="shrink-0"><%= ui_badge t("#{roster}.new"), tone: :brand, size: :sm %></span><% end %>
+                      <% via = { "standard" => t("#{roster}.via.standard"), "link" => t("#{roster}.via.link") }[student.joined_via] %>
+                      <% if via %><p class="text-xs font-normal text-mute sm:w-full"><%= via %></p><% end %>
+                    </div>
+                  </th>
                   <td class="px-2 py-3 text-right tabular-nums">
-                    <%= t(".submitted", count: student.submitted_count, total: classroom.assignments_count) %>
+                    <%= t(".submitted", count: student.work.submitted_count, total: classroom.assignments_count) %>
                   </td>
-                  <td class="px-2 py-3 text-right tabular-nums"><%= percent.call(student.average_percent) %></td>
+                  <td class="px-2 py-3 text-right tabular-nums"><%= percent.call(student.work.average_percent) %></td>
+                  <td class="px-2 py-1 text-right">
+                    <%# UDR-0081 §3.7 : le menu ⋮ et la confirmation de la page de l'enseignant ; menu en position fixe, hors
+                        du défilement du tableau (UDR-0042). %>
+                    <%= ui_dropdown label: t("#{roster}.actions_label", name: student.display_name), id: "student-actions-#{student.public_id}",
+                                    fixed: true do %>
+                      <%= ui_dropdown_item t("#{roster}.remove"), dialog: remove_dialog, icon: "user-minus", tone: :danger %>
+                    <% end %>
+                    <%= ui_modal title: t("#{roster}.remove_title", name: student.display_name), id: remove_dialog, size: :sm do |modal| %>
+                      <% modal.footer do %>
+                        <%= ui_button t("#{roster}.cancel"), variant: :secondary, data: { action: "modal#close" } %>
+                        <%= ui_button t("#{roster}.remove_confirm"), type: :submit, form: "#{remove_dialog}-form", variant: :danger,
+                                                                     icon: "user-minus" %>
+                      <% end %>
+                      <p class="text-left text-sm text-mute"><%= t("#{roster}.remove_warning", name: student.display_name) %></p>
+                      <%= form_with url: classroom_student_path(classroom.public_id, student.public_id), method: :delete,
+                                    id: "#{remove_dialog}-form", data: { turbo_frame: "_top" } do %>
+                      <% end %>
+                    <% end %>
+                  </td>
                 </tr>
               <% end %>
             </tbody>

@@ -35,12 +35,12 @@ module Queries
         assert_match(/\A\h{12}\z/, detail.team_invite_token)
       end
 
-      test "SC-05 : les classes de l'année, groupées par niveau dans l'ordre du référentiel, avec code, effectif et enseignants" do
+      test "SC-05 : les classes de l'année, groupées par niveau dans l'ordre du référentiel, avec jeton de lien, effectif et enseignants" do
         d_series = create_series(name: "D")
         a_series = create_series(name: "A1")
-        tle_d10 = create_classroom(school: @school, level: @final, series: d_series, name: "Tle D 10", join_code: "kfm37",
+        tle_d10 = create_classroom(school: @school, level: @final, series: d_series, name: "Tle D 10",
                                    school_year: YEAR)
-        create_classroom(school: @school, level: @final, series: d_series, name: "Tle D 2", join_code: nil, school_year: YEAR)
+        create_classroom(school: @school, level: @final, series: d_series, name: "Tle D 2", school_year: YEAR)
         create_classroom(school: @school, level: @final, series: a_series, name: "Tle A1 1", school_year: YEAR, status: "archived")
         sixth_one = create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR)
         create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: "2025-2026")
@@ -48,7 +48,7 @@ module Queries
 
         create_student(classroom: tle_d10)
         create_student(classroom: tle_d10)
-        Orm::ClassroomStudent.create!(classroom: tle_d10, student: create_student, joined_at: 1.month.ago, left_at: 1.day.ago)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: tle_d10, student: create_student, joined_at: 1.month.ago, left_at: 1.day.ago)
         create_teacher(school: @school, first_name: "Awa", last_name: "Koné", classrooms: [ tle_d10, sixth_one ])
         create_teacher(school: @school, first_name: "Yao", last_name: "Brou", classrooms: [ tle_d10 ])
 
@@ -58,12 +58,12 @@ module Queries
         assert_equal [ "Tle A1 1", "Tle D 2", "Tle D 10" ], levels.last.classrooms.map(&:name)
 
         row = levels.last.classrooms.last
-        assert_equal SchoolDetailQuery::ClassroomRow.new(public_id: tle_d10.public_id, name: "Tle D 10", join_code_display: "KFM37",
+        assert_equal SchoolDetailQuery::ClassroomRow.new(public_id: tle_d10.public_id, name: "Tle D 10", link_token: tle_d10.reload.link_token,
                                                          students_count: 2, teacher_names: [ "Yao Brou", "Awa Koné" ],
                                                          status: "active"),
                      row
-        assert_equal [ nil, 0, [], "active" ], levels.last.classrooms.second.to_h.values_at(:join_code_display, :students_count,
-                                                                                            :teacher_names, :status)
+        assert_equal [ 0, [], "active" ], levels.last.classrooms.second.to_h.values_at(:students_count, :teacher_names, :status)
+        assert_not_includes SchoolDetailQuery::ClassroomRow.members, :join_code_display
         assert_equal "archived", levels.last.classrooms.first.status
         assert_equal 4, detail.classrooms_count
       end

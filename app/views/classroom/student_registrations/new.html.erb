@@ -1,0 +1,48 @@
+<%# 🌐 UI · classroom/student_registrations/new — inscription élève, en deux colonnes (structure de classroom/joins/new) %>
+<%# Rôle : accueil à gauche, formulaire à droite ; voie standard (cascade) ou lien de classe (bandeau) ; 429 du lien, 422/403 re-rendus %>
+<%# ADR  : 0050, 0085 · UDR : 0005, 0054 (§3.2 : logo vers l'accueil public), 0079, 0081 (§3.1) %>
+<% page_title t(".page_title") %>
+<main class="grid min-h-dvh bg-paper md:grid-cols-2">
+  <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
+    <div class="max-w-sm text-center">
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
+      <% end %>
+      <h1 class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></h1>
+      <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+  </section>
+
+  <section class="flex flex-col items-center justify-center px-gutter py-10">
+    <div class="mb-8 text-center md:hidden">
+      <%= link_to root_path, "aria-label": t(".logo_home"),
+                             class: "mx-auto mb-3 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+      <% end %>
+      <%# Le h1 de la colonne gauche est masqué sur téléphone (hidden md:flex) : celui-ci le remplace, UDR-0054. %>
+      <h1 class="mb-2 font-display text-xl font-extrabold text-ink"><%= t(".welcome") %></h1>
+      <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
+    </div>
+
+    <div class="w-full max-w-md">
+      <% if @rate_limited %>
+        <%= ui_error_state title: t(".rate_limited_title"), message: t("errors.codes.rate_limited") %>
+      <% else %>
+        <%= ui_card padding: :lg do %>
+          <div class="mb-8 text-center">
+            <h2 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h2>
+            <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
+          </div>
+
+          <%= render "classroom/student_registrations/form" %>
+
+          <p class="mt-6 text-center text-sm text-mute">
+            <%= t(".have_account") %>
+            <%= link_to t(".sign_in"), new_session_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+</main>

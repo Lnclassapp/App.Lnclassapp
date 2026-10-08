@@ -64,7 +64,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "dialog#role-modal-student-hero" do
       assert_select "a[href='#{new_session_path}']", text: "Se connecter"
-      assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre ma classe"
+      assert_select "a[href='#{new_student_registration_path}']", text: "Rejoindre ma classe"
     end
   end
 
@@ -110,7 +110,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "#comment ol > li", 3
-    assert_select "#comment ol > li:first-child h3", text: "Récupère le code de ta classe"
+    assert_select "#comment ol > li:first-child h3", text: "Trouve ta classe"
     assert_select "#comment ol > li:last-child h3", text: "Apprends et progresse"
   end
 
@@ -272,7 +272,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     travel_to(opened_at) { get root_path(source: "app") }
 
-    assert_redirected_to pending_account_path
+    assert_redirected_to student_home_path
     assert_equal opened_at, student.reload.app_opened_at
   end
 
@@ -326,7 +326,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     report = assert_error_reported(ActiveRecord::ConnectionTimeoutError) { get root_path(source: "app") }
 
-    assert_redirected_to pending_account_path
+    assert_redirected_to student_home_path
     assert report.handled
     assert_equal student.id, report.context[:user_id]
     assert_nil student.reload.app_opened_at

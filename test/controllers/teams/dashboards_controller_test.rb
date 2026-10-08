@@ -351,7 +351,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @member
     get team_dashboard_path(period: "year", drena: abidjan.public_id)
     create_student(classroom:).tap do |twice|
-      Orm::ClassroomStudent.create!(classroom: create_classroom(school:), student: twice, primary: false, joined_at: Time.current)
+      Orm::ClassroomStudent.create!(joined_via: "standard", classroom: create_classroom(school:), student: twice, primary: false, joined_at: Time.current)
     end
     create_student(classroom: create_classroom(school: create_school(drena: abidjan)))
 

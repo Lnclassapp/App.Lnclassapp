@@ -5,7 +5,7 @@ require "application_system_test_case"
 # 3 exercices assignés puis « Voir plus », ses exercices traités au meilleur score.
 class Classroom::StudentClassroomTest < ApplicationSystemTestCase
   setup do
-    @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"),
+    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"),
                                   level: create_level(name: "Tle"), series: create_series(name: "D"))
     @student = create_student(classroom: @classroom, first_name: "Aya")
     # UDR-0013, amendement du 2026-10-01 : le cours de l'exercice assigné est du niveau et de la série de la classe.
@@ -22,7 +22,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
 
   def tl(key, **) = I18n.t("classroom.student_classrooms.#{key}", **)
 
-  test "the student sees their classroom code, the course band, 3 assigned exercises then « Voir plus », and their score" do
+  test "the student sees their classroom without code, the course band, 3 assigned exercises then « Voir plus », and their score" do
     sign_in_as @student
 
     assert_no_page_reload do
@@ -31,7 +31,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     end
     within "#student_classroom_header" do
       assert_selector "h2", text: "Tle D 1"
-      assert_selector "#student_classroom_join_code", exact_text: "KFM37"
+      assert_no_selector "[id*=join_code]"
     end
     within("#student_classroom_courses") { assert_link "Génétique et évolution", href: course_path(@course.slug) }
     within "#student_classroom_treated" do
@@ -68,12 +68,6 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
       assert_list_capped "#student_classroom_assigned ul"
       assert_list_capped "#student_classroom_treated ul"
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
-
-      within("#student_classroom_header") do
-        assert_no_text tl("show.join_code_info_tip")
-        find("summary", text: I18n.t("components.info_tip.label", label: tl("show.join_code")), visible: :all).click
-        assert_text tl("show.join_code_info_tip")
-      end
     end
   end
 end

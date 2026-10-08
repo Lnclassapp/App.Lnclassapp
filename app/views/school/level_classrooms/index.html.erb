@@ -1,0 +1,46 @@
+<%# 🌐 UI · school/level_classrooms/index — frame « picker_classrooms » de la cascade élève : une ligne radio par classe active %>
+<%# Rôle : nom de la classe, et « Complète » (radio désactivé) ; jamais d'effectif ni d'enseignant (IL-04) ; vide, introuvable, erreur ou liste %>
+<%# ADR  : 0041, 0062, 0085 · UDR : 0081 (§3.3) %>
+<%# locals: (classrooms:, registration: nil, scope: :student_registration, rate_limited: false) -%>
+<% page_title t(".page_title") %>
+<% error = registration&.errors&.[](:classroom_public_id)&.first %>
+<% error_id = "#{scope}_classroom_public_id_error" %>
+<%= turbo_frame_tag "picker_classrooms", class: "block transition-opacity aria-busy:opacity-50", "aria-live": "polite",
+                                         data: { "classroom--class-picker-target": "classrooms",
+                                                 action: "turbo:frame-missing->classroom--class-picker#missing " \
+                                                         "turbo:fetch-request-error->classroom--class-picker#missing " \
+                                                         "turbo:frame-load->classroom--class-picker#sync" } do %>
+  <% if rate_limited %>
+    <%= ui_error_state title: t("classroom.student_registrations.class_picker.load_error"),
+                       message: t("classroom.student_registrations.class_picker.rate_limited"),
+                       retry_href: request.fullpath, retry_label: t("classroom.student_registrations.class_picker.retry") %>
+  <% elsif classrooms&.empty? %>
+    <%= ui_empty_state title: t("classroom.student_registrations.class_picker.not_found_title"),
+                       description: t("classroom.student_registrations.class_picker.not_found_description"), icon: "academic-cap" %>
+  <% elsif classrooms %>
+    <%= fields scope, model: registration do |fields| %>
+      <fieldset class="space-y-2" <%= tag.attributes("aria-describedby": (error_id if error)) %>>
+        <legend class="mb-1.5 block text-sm font-medium text-ink">
+          <%= t("classroom.student_registrations.class_picker.classroom") %><span class="text-error" aria-hidden="true"> *</span>
+        </legend>
+        <% classrooms.each do |classroom| %>
+          <label class="<%= class_names("flex min-h-tap items-center gap-3 rounded-ln border border-line px-4",
+                                        classroom.full ? "opacity-60" : "cursor-pointer bg-white transition has-checked:border-brand has-checked:bg-brand-soft") %>">
+            <%= fields.radio_button :classroom_public_id, classroom.public_id, required: true, disabled: classroom.full,
+                                    class: "size-5 shrink-0 accent-brand", "aria-invalid": ("true" if error),
+                                    data: { action: "change->classroom--class-picker#sync" } %>
+            <span class="text-sm font-medium text-ink"><%= classroom.name %></span>
+            <% if classroom.full %>
+              <span class="ml-auto"><%= ui_badge t("classroom.student_registrations.class_picker.full"), tone: :neutral, size: :sm %></span>
+            <% end %>
+          </label>
+        <% end %>
+      </fieldset>
+    <% end %>
+  <% end %>
+  <% if error %>
+    <p id="<%= error_id %>" class="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+    </p>
+  <% end %>
+<% end %>

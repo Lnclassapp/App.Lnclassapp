@@ -4,7 +4,9 @@ require "test_helper"
 class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
   def t(key, **) = I18n.t("identity.pending_accounts.show.#{key}", **)
 
-  test "a student without a classroom is invited to join one, without any loop" do
+  # IL-02, ADR-0085 §4.3: no student is sent here any more (HomeDestination); one who types the address is offered the
+  # classroom choice, never a classroom code.
+  test "IL-02: a student without a classroom is offered to choose one, without any loop nor code" do
     sign_in_as create_student
 
     2.times do
@@ -15,7 +17,8 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     # The empty state is the whole page: its visible title is the page heading.
     assert_select "h1", 1
     assert_select "h1", t("student.title")
-    assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre une classe"
+    assert_select "a[href='#{new_student_classroom_choice_path}']", text: "Choisir ma classe"
+    assert_no_match(/code/i, css_select("#pending_account").text)
     assert_select "a[href='#{session_path}'][data-turbo-method=delete]", text: /Se déconnecter/
   end
 
@@ -28,7 +31,7 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", text: "Vous n'êtes rattaché à aucun établissement"
     assert_select "form#school-join-form"
-    assert_select "a[href='#{new_join_code_path}']", 0
+    assert_select "a[href='#{new_student_classroom_choice_path}']", 0
   end
 
   # IE-18 (ADR-0083 §4.3, UDR-0079 §3.9) replaces the code field of GD-22: the DRENA, then the school, as at sign-up.

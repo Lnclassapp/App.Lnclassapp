@@ -31,7 +31,7 @@ end
 
 student = account.call("0100000001", role: "student", last_name: "Traoré", first_name: "Awa")
 unless Orm::ClassroomStudent.exists?(student_id: student.id)
-  Orm::ClassroomStudent.create!(student_id: student.id, classroom:, primary: true, joined_at: Time.current)
+  Orm::ClassroomStudent.create!(student_id: student.id, classroom:, primary: true, joined_at: Time.current, joined_via: "standard")
 end
 
 now = Time.current

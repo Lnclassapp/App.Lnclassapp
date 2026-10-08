@@ -16,7 +16,7 @@ module Finitions
       @essential = create_essential(course: @course, name: "La méiose")
       @exercise = create_exercise(essential: @essential, title: "Méiose et ADN")
       # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est de Tle, le niveau des cours du catalogue.
-      @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", level: @tle)
+      @classroom = create_classroom(name: "Tle D 1", level: @tle)
       @student = create_student(classroom: @classroom, first_name: "Aya")
       create_assignment(classroom: @classroom, assignable: @exercise)
     end
@@ -110,12 +110,13 @@ module Finitions
       within("#student_home_exercises") { assert_no_selector "#student_home_help" }
     end
 
-    test "FU-27 : « Ma classe » montre le code de la classe sans bouton « Copier »" do
+    # FU-27, UDR-0081 §3.8 : plus de code de classe sur « Ma classe », et toujours rien à copier.
+    test "FU-27 : « Ma classe » ne montre ni code de classe ni bouton « Copier »" do
       sign_in_as @student
       visit student_classroom_path
 
       assert_title "Ma classe · Élève · Lnclass"
-      assert_selector "#student_classroom_join_code", exact_text: "KFM37"
+      assert_no_selector "[id*=join_code]"
       assert_no_selector "button, a", text: /Copier/, visible: :all
       assert_no_selector "[data-controller~=clipboard]", visible: :all
     end
