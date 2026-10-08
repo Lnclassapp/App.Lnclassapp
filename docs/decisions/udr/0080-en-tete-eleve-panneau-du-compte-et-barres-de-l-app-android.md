@@ -37,17 +37,17 @@ Le porteur a fixé, le 2026-10-08, la navigation de l'élève sur le site et dan
 
 ### 3.1 En-tête de l'élève — `shared/navigation/_header`, branche `student`
 
-Le partial existant garde sa structure pour les autres rôles. Pour `user.role == "student"`, la rangée intérieure devient :
+Le partial existant garde sa structure pour les autres rôles. Pour un élève (`user.role.to_s == "student"` : le rôle du shell est un symbole), la rangée intérieure devient :
 
 ```
 header (inchangé : sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur, filet du rôle)
   div.flex.h-full.items-center.justify-between.gap-3.px-gutter.lg:px-8
-    button#account_panel_trigger[type=button][aria-haspopup=dialog][aria-controls=account_panel]
-          [data-action="modal#open"] (déclencheur de la ui_modal du §3.2)
-          .flex.min-h-tap.items-center.gap-2.5.rounded-full.pr-2.focus-visible:outline-2.focus-visible:outline-brand
-      ui_avatar(user.name, src: user.avatar_url, size: :sm)
-      span.hidden.text-sm.font-medium.md:inline → user.name
-      span.sr-only → t("shared.navigation.account_panel.open")   « Ouvrir le menu du compte »
+    render "shared/navigation/account_panel", user:      (le panneau du §3.2 et son déclencheur)
+      a[href=/students/menu][aria-haspopup=dialog][aria-controls=account_panel][data-action="modal#open"]
+          (déclencheur-lien de ui_modal, trigger_href:, UDR-0061 ; suivi sans JavaScript, intercepté avec)
+        ui_avatar(user.name, src: user.avatar_url, size: :sm)          aria-hidden
+        span.hidden.text-sm.font-medium.md:inline → user.name           aria-hidden
+        nom accessible → t("shared.navigation.account_panel.open")   « Ouvrir le menu du compte »
     div.flex.items-center.gap-1
       render "shared/help_sheet", trigger_class: nil       (« Besoin d'aide ? » + icône question-mark-circle, ghost, sm ; visible partout)
       render "shared/theme_switch", variant: :icon, wrapper: nil   (visible partout, plus seulement lg+)
@@ -59,7 +59,7 @@ header (inchangé : sticky top-0 z-40 h-bar border-b border-line bg-paper/90 bac
 
 ### 3.2 Panneau du compte — `shared/navigation/_account_panel`, locals `(user:)`
 
-**Sur le site** : `ui_modal id: "account_panel", title: t(".title"), size: :sm, placement: :drawer`, sans déclencheur propre (c'est le bouton de l'en-tête qui l'ouvre).
+**Sur le site** : `ui_modal id: "account_panel", title: t(".title"), size: :sm, placement: :drawer`, rendu à gauche de l'en-tête : son déclencheur-lien est l'avatar (le contrôleur `modal` n'ouvre qu'un déclencheur qu'il contient). Avec `page: true`, le partial rend le contenu seul, pour `/students/menu`.
 - Le titre est « Mon compte ».
 - Le nouveau placement **`:drawer`** de `ui_modal` est une feuille ancrée à gauche :
   - `dialog.dialog-drawer` : `margin: 0 auto 0 0`, `height: 100dvh`, `max-height: none`, `width: min(20rem, 85vw)`, `border-radius: 0 var(--radius-sheet) var(--radius-sheet) 0` ;
@@ -90,7 +90,7 @@ div.pt-3.border-t.border-line
   - rend le même partial dans le shell ;
   - est faite pour l'app, où le shell est sans en-tête ;
   - sur le site, elle s'affiche normalement si on l'ouvre, par exemple sans JavaScript.
-- Sans JavaScript, le bouton de l'avatar devient un lien vers `/students/menu`, sur le même modèle que le déclencheur-lien de l'UDR-0061.
+- Sans JavaScript, l'avatar est un lien vers `/students/menu` (déclencheur-lien de l'UDR-0061) ; la ligne du thème y montre son libellé sans l'interrupteur, caché sans JavaScript (UDR-0065).
 
 ### 3.3 Barres de l'app Android (coque, ADR-0084)
 
@@ -138,7 +138,7 @@ Le PIN et le numéro ne sont pas réaffichés.
 
 ### 3.6 Accessibilité
 
-- Le bouton de l'avatar est nommé (« Ouvrir le menu du compte ») et porte `aria-haspopup="dialog"` et `aria-controls`.
+- Le lien de l'avatar est nommé (« Ouvrir le menu du compte ») et porte `aria-haspopup="dialog"` et `aria-controls`.
 - Le panneau est une `<dialog>` modale nommée par son titre. Le focus y est piégé, et Échap le ferme.
 - Les cibles tactiles font au moins 48 px (site) et 48 dp (app).
 - L'interrupteur garde son `role="switch"` (UDR-0065).
