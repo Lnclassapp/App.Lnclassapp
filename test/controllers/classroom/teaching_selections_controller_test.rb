@@ -27,7 +27,7 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
     assert_response :success
     assert_select "h1", tl("index.title")
     assert_select "main", text: /#{Regexp.escape(tl('index.subtitle', school: "Lycée Classique d'Abidjan"))}/
-    assert_equal [ "6ème", "3ème" ], css_select("h2").map { it.text.strip }
+    assert_equal [ "6ème", "3ème" ], css_select("main h2").map { it.text.strip }
     assert_select "form#teaching_#{@sixth1.public_id}[action='#{classroom_teaching_path(@sixth1.public_id)}'] button[aria-pressed=false]"
     assert_select "form#teaching_#{@third_b.public_id} input[name=_method][value=delete]", 1
     assert_select "form#teaching_#{@third_b.public_id} button[aria-pressed=true]", text: /3ème B/
