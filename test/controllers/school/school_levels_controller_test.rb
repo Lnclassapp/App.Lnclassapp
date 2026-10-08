@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IL-04, IL-06 (ADR-0083 §4.2, UDR-0079 §3.3): the levels of a school, public and limited to 30 requests a minute — the
+# IL-04, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the levels of a school, public and limited to 30 requests a minute — the
 # « picker_levels » frame of the student cascade. Only the levels that have an active classroom this year; never a
 # classroom, a headcount nor a teacher.
 class School::SchoolLevelsControllerTest < ActionDispatch::IntegrationTest

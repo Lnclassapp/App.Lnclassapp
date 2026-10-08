@@ -1,6 +1,6 @@
-# ADR-0083 §4.1, §4.4, §4.5: a student enters a classroom chosen in the cascade or given by a link /c/<token>, without
+# ADR-0085 §4.1, §4.4, §4.5: a student enters a classroom chosen in the cascade or given by a link /c/<token>, without
 # a classroom code. Every classroom draws an opaque link token by the database default, in the shape of the invite
-# tokens (ADR-0082), so that generation, imports, seeds and existing rows all get one without touching a write path.
+# tokens (ADR-0083), so that generation, imports, seeds and existing rows all get one without touching a write path.
 # Every membership records its arrival channel: the existing ones receive « code », the historical way, then the
 # column loses its default: every write names its channel. A removal is kept on the membership itself (removed_at,
 # removed_by_id): it only exists on a membership that has ended, and always names who removed. Rerunnable: up again

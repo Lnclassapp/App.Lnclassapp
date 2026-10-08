@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classroom_students/destroy — un élève retiré de la classe (IL-14) %>
 <%# Rôle : toast, ligne retirée avec sa modale, titre de la liste recompté (focus) ; page enseignant : effectif et compte filtré, liste vidée → état vide ; page de la direction : re-demandée et fusionnée %>
-<%# ADR  : 0065, 0083 (§4.5) · UDR : 0006, 0079 (§3.7) · le titre reçoit le focus (autofocus, tabindex -1) ; @search : la recherche de la liste %>
+<%# ADR  : 0065, 0085 (§4.5) · UDR : 0006, 0081 (§3.7) · le titre reçoit le focus (autofocus, tabindex -1) ; @search : la recherche de la liste %>
 <% roster = { classroom: @header, students: @overview.students, search: @search, new_count: @overview.new_students_count,
               can_remove: true, focus_title: true } %>
 <%# La balise du titre de classroom/classrooms/_roster (et de school_admin/classrooms/show), avec l'autofocus qui y ramène le focus. %>

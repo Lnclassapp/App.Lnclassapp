@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_registrations/_form — formulaire d'inscription élève, en trois rubriques %>
 <%# Rôle : Ta classe (cascade, ou bandeau d'un lien), Toi (nom complet corrigeable, genre, numéro), Code secret ; 422/403 re-rendus %>
-<%# ADR  : 0037, 0050, 0082, 0083 · UDR : 0009, 0054, 0078, 0079 (§3.2) %>
+<%# ADR  : 0037, 0050, 0083, 0085 · UDR : 0009, 0054, 0079, 0081 (§3.2) %>
 <%= form_with model: @form, scope: :student_registration, url: student_registrations_path, id: "student-registration-form",
               class: "space-y-6",
               data: { controller: "classroom--class-picker identity--full-name identity--phone-digits identity--pin-match",
@@ -46,7 +46,7 @@
     <p id="full_name_preview" data-identity--full-name-target="preview" aria-live="polite" hidden
        class="text-sm text-mute"><%= t(".preview_last") %> <strong class="text-ink" data-identity--full-name-target="lastOut"></strong>
        · <%= t(".preview_first") %> <strong class="text-ink" data-identity--full-name-target="firstOut"></strong></p>
-    <%# Les champs corrigés montrent la saisie, jamais le découpage : remplis tous deux, ils font foi (ADR-0082 §4.4). %>
+    <%# Les champs corrigés montrent la saisie, jamais le découpage : remplis tous deux, ils font foi (ADR-0083 §4.4). %>
     <details id="name-correction" data-identity--full-name-target="editor" data-action="toggle->identity--full-name#fill"
              <%= "open" if @form.errors[:last_name].any? || @form.errors[:first_name].any? || @form.corrected? %>>
       <summary class="inline-flex min-h-tap cursor-pointer items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline">

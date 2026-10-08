@@ -1,29 +1,29 @@
-# UDR-0079 : Inscription élève sans code — une cascade de quatre listes, un lien de classe, les nouveaux arrivés marqués et le retrait d'un élève
+# UDR-0081 : Inscription élève sans code — une cascade de quatre listes, un lien de classe, les nouveaux arrivés marqués et le retrait d'un élève
 
 | | |
 |---|---|
 | **Statut** | Accepté *(porteur, 2026-10-07 — validation rapportée par le développeur du chantier)* |
 | **Date** | 2026-10-07 |
 | **Chantier** | [`docs/chantiers/inscription-eleve-sans-code`](../../chantiers/inscription-eleve-sans-code/prd.md) — critères IL-01 à IL-23 |
-| **ADR lié** | [ADR-0083](../adr/0083-inscription-eleve-sans-code-de-classe.md) · [ADR-0082](../adr/0082-inscription-enseignant-en-deux-voies.md) · [UDR-0078](0078-inscription-enseignant-en-deux-voies.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0054](0054-finitions-d-interface.md) · remplace [UDR-0009](0009-rejoindre-une-classe.md) |
+| **ADR lié** | [ADR-0085](../adr/0085-inscription-eleve-sans-code-de-classe.md) · [ADR-0083](../adr/0083-inscription-enseignant-en-deux-voies.md) · [UDR-0079](0079-inscription-enseignant-en-deux-voies.md) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0054](0054-finitions-d-interface.md) · remplace [UDR-0009](0009-rejoindre-une-classe.md) |
 | **Remplacé par** | — |
 
 ---
 
 ## 1. Contexte
 
-L'élève n'entre que par le code de sa classe (UDR-0009). Celui dont aucun enseignant n'est sur Lnclass n'a pas de code, et l'écran « Rejoindre une classe » ne lui offre rien d'autre qu'un champ qu'il ne peut pas remplir. L'ADR-0083 retire le code : l'élève choisit sa classe, ou la reçoit par un lien.
+L'élève n'entre que par le code de sa classe (UDR-0009). Celui dont aucun enseignant n'est sur Lnclass n'a pas de code, et l'écran « Rejoindre une classe » ne lui offre rien d'autre qu'un champ qu'il ne peut pas remplir. L'ADR-0085 retire le code : l'élève choisit sa classe, ou la reçoit par un lien.
 
 L'enseignant, la direction et l'équipe voient aujourd'hui un code à dicter ou à écrire au tableau. Ils reçoivent à la place un lien à partager, et deux gestes qu'ils n'avaient pas : changer ce lien, et retirer un élève.
 
 ## 2. Décision
 
-1. **Une seule page**, `/student-signup`, en trois rubriques dans l'ordre du parcours : **Ta classe** (DRENA, établissement, niveau, classe), **Toi** (nom complet, genre, numéro), **Code secret**. Pas d'étapes : même raison que l'UDR-0078 §2.1, et la page marche sans JavaScript.
+1. **Une seule page**, `/student-signup`, en trois rubriques dans l'ordre du parcours : **Ta classe** (DRENA, établissement, niveau, classe), **Toi** (nom complet, genre, numéro), **Code secret**. Pas d'étapes : même raison que l'UDR-0079 §2.1, et la page marche sans JavaScript.
 2. **Quatre listes enchaînées, chacune chargée par le choix de la précédente**, plutôt qu'une recherche : l'élève connaît sa région, son école et son niveau, pas l'orthographe exacte de sa classe (memo Q12). Une liste qui n'a pas encore de parent choisi n'est pas affichée : la page grandit avec les choix.
 3. **Par un lien de classe** (`/c/<jeton>`), la même page s'ouvre avec la classe **déjà affichée** dans le bandeau existant (`_classroom_preview`), et « Ce n'est pas ta classe ? » ramène à la page standard. Les quatre listes n'apparaissent pas.
 4. **Une classe complète reste visible, désactivée**, plutôt que cachée : l'élève comprend que sa classe existe.
 5. **« Introuvable » est un état, pas une erreur** : un message d'orientation remplace la liste (memo Q9).
-6. **Nom complet, numéro et code secret** : les règles de l'UDR-0078 §3.3 à §3.5, avec le tutoiement de l'élève.
+6. **Nom complet, numéro et code secret** : les règles de l'UDR-0079 §3.3 à §3.5, avec le tutoiement de l'élève.
 7. **Les nouveaux arrivés se lisent dans la liste des élèves**, par une pastille sur la ligne, plutôt que dans une notification : trois acteurs regardent la même liste (memo Q14).
 8. **Retirer un élève passe par une confirmation en modale** qui le nomme : le geste est rare, et il touche une personne.
 9. Erreur : page re-rendue en 422 ou 403 par Turbo, saisies gardées sauf les PIN. Succès de l'inscription : la page change, la session vient de naître. Le retrait et le changement de lien répondent par Turbo Stream.
@@ -39,7 +39,7 @@ L'enseignant, la direction et l'équipe voient aujourd'hui un code à dicter ou 
 - La structure en deux colonnes de `classroom/joins/new` (UDR-0009 §3) et la carte `ui_card(padding: :lg)` sont reprises telles quelles. Colonne gauche : « Bienvenue sur Lnclass ».
 - Titre de la carte (`h2`) : « Créer ton compte élève ». Sous-titre : « Trois rubriques, une minute. ».
 - `@rate_limited` : `ui_error_state` « Trop de tentatives », à la place du formulaire.
-- **Lien invalide** (`@link_invalid`) : en tête du formulaire, avant tout `fieldset`, le bloc de l'UDR-0078 §3.1 avec `id="classroom-link-invalid"` et le texte `t(".link_invalid")` : « Ce lien n'est plus valable. Choisis ta classe. ».
+- **Lien invalide** (`@link_invalid`) : en tête du formulaire, avant tout `fieldset`, le bloc de l'UDR-0079 §3.1 avec `id="classroom-link-invalid"` et le texte `t(".link_invalid")` : « Ce lien n'est plus valable. Choisis ta classe. ».
 - Sous la carte : « Déjà un compte ? Se connecter » (lien existant de `join_codes/new`).
 
 ### 3.2 Formulaire `classroom/student_registrations/_form`
@@ -57,8 +57,8 @@ L'enseignant, la direction et l'équipe voient aujourd'hui un code à dicter ou 
 | 3 | « Code secret » (`.security`) | Code secret, confirmation, statut de concordance |
 
 - Puis `ui_button t(".submit")` (« Créer mon compte »), `brand`, `lg`, `full: true`, `id: "student-registration-submit"`.
-- **Voie lien** : `link_to t(".other_classroom"), new_student_registration_path, id: "other-classroom"`, classe de `#other-school` (UDR-0078 §3.2).
-- Textes de la rubrique 2, à la place de ceux de l'UDR-0078 : `full_name_placeholder` « Ex. : KOUASSI Aya Marie » ; `full_name_hint` « Ton nom, puis tes prénoms. » ; erreur d'un seul mot « Saisis ton nom et tes prénoms. ».
+- **Voie lien** : `link_to t(".other_classroom"), new_student_registration_path, id: "other-classroom"`, classe de `#other-school` (UDR-0079 §3.2).
+- Textes de la rubrique 2, à la place de ceux de l'UDR-0079 : `full_name_placeholder` « Ex. : KOUASSI Aya Marie » ; `full_name_hint` « Ton nom, puis tes prénoms. » ; erreur d'un seul mot « Saisis ton nom et tes prénoms. ».
 
 ### 3.3 Cascade `classroom/student_registrations/_class_picker`
 

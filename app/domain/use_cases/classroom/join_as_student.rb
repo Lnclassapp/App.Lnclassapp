@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::JoinAsStudent
 # Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie, celle d'un lien, ou d'un ancien code
-# ADR  : 0026, 0028, 0040, 0041, 0083 · UDR : 0009, 0079
+# ADR  : 0026, 0028, 0040, 0041, 0085 · UDR : 0009, 0081
 module UseCases
   module Classroom
     class JoinAsStudent
@@ -64,7 +64,7 @@ module UseCases
         move(actor.user_id, current, destination)
       end
 
-      # ADR-0083 §4.3 : le retrait ne ferme que la voie standard (et l'ancien code) ; le lien le lève.
+      # ADR-0085 §4.3 : le retrait ne ferme que la voie standard (et l'ancien code) ; le lien le lève.
       def allowed(actor, destination, code)
         classroom = destination.classroom
         via_link = destination.via == LINK
@@ -74,7 +74,7 @@ module UseCases
 
       def designated(dto) = dto.link_token ? linked(dto.link_token) : chosen(dto)
 
-      # ADR-0083 §4.1 : le lien n'ouvre qu'une classe active d'un établissement actif ; sinon il ne mène nulle part.
+      # ADR-0085 §4.1 : le lien n'ouvre qu'une classe active d'un établissement actif ; sinon il ne mène nulle part.
       def linked(token)
         classroom = @classrooms.lock_by_link_token(token:)
         return Shared::Result.failure(:not_found) unless classroom&.active? && school_of(classroom).active?
@@ -82,7 +82,7 @@ module UseCases
         Destination.new(classroom:, via: LINK)
       end
 
-      # La classe doit être de celles que la cascade propose (ADR-0083 §4.2), sinon la même erreur sous le champ.
+      # La classe doit être de celles que la cascade propose (ADR-0085 §4.2), sinon la même erreur sous le champ.
       def chosen(dto)
         return Shared::Result.failure(:invalid, errors: BLANK) if dto.classroom_public_id.nil?
 

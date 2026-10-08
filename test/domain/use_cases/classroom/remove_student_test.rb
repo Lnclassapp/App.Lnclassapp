@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Classroom
-    # IL-14, IL-21, IL-12 pour le retrait (ADR-0083 §4.5) : sous le verrou de la classe et ManageClassroomMembersPolicy,
+    # IL-14, IL-21, IL-12 pour le retrait (ADR-0085 §4.5) : sous le verrou de la classe et ManageClassroomMembersPolicy,
     # l'adhésion active est close et retient qui l'a retirée ; le compte n'est pas touché. Idempotent : un élève déjà
     # retiré (retrait simultané, double envoi) donne un succès sans écriture. Un élève qui n'est pas dans la classe : 404,
     # son nom ne sort pas.
@@ -132,7 +132,7 @@ module UseCases
         assert_nothing_removed
       end
 
-      # UDR-0079 §3.7, amendée le 2026-10-08 (porteur) : comme le changement de lien, le serveur refuse le retrait dans une
+      # UDR-0081 §3.7, amendée le 2026-10-08 (porteur) : comme le changement de lien, le serveur refuse le retrait dans une
       # classe archivée, que l'interface masque déjà. La policy passe d'abord : hors périmètre, la classe reste un 404.
       test "une classe archivée : :forbidden, raison classroom_archived ; rien n'est écrit" do
         @classroom.status = "archived"

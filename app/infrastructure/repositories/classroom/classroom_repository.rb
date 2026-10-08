@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
 # Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; code, jeton du lien, verrou, génération en masse, retrait d'une classe vide
-# ADR  : 0030, 0039, 0041, 0059, 0083
+# ADR  : 0030, 0039, 0041, 0059, 0085
 module Repositories
   module Classroom
     class ClassroomRepository
@@ -37,7 +37,7 @@ module Repositories
         record && map_to_entity(record)
       end
 
-      # Le jeton est tiré par la base, comme à la création : une seule source de sa forme (ADR-0083 §4.1).
+      # Le jeton est tiré par la base, comme à la création : une seule source de sa forme (ADR-0085 §4.1).
       def rotate_link_token(id:)
         Orm::Classroom.where(id:).update_all([ "link_token = #{LINK_TOKEN_SQL}, updated_at = ?", Time.current ])
         Orm::Classroom.where(id:).pick(:link_token)

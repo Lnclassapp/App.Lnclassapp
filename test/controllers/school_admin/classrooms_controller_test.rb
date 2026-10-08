@@ -456,7 +456,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_students", text: /#{tc('show.empty')}/
   end
 
-  # IL-12, IL-13, IL-14 from the direction's page (ADR-0083 §4.5, UDR-0079 §3.6, §3.7): the link block above the three tiles,
+  # IL-12, IL-13, IL-14 from the direction's page (ADR-0085 §4.5, UDR-0081 §3.6, §3.7): the link block above the three tiles,
   # then on the numbered lines the new arrivals, their arrival channel and « Retirer de la classe » in the line's ⋮ menu. The
   # gestures are those of the teacher's page (Lots C and D), under ManageClassroomMembersPolicy: its own school only.
   def tl(key, **) = I18n.t("classroom.classrooms.link.#{key}", **)
@@ -575,7 +575,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
         assert_select "button", text: tr("cancel")
       end
     end
-    # ADR-0083 §4.5: a student's public_id is on the line of the gesture, nowhere else.
+    # ADR-0085 §4.5: a student's public_id is on the line of the gesture, nowhere else.
     [ koffi, awa ].each do |student|
       assert_operator response.body.scan(student.public_id).size, :>, 0
       assert_equal response.body.scan(student.public_id).size, css_select("tr#student_#{student.public_id}").to_s.scan(student.public_id).size

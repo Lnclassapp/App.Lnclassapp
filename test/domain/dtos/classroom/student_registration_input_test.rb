@@ -2,7 +2,7 @@ require "test_helper"
 
 module Dtos
   module Classroom
-    # IL-01, IL-02, IL-08, IL-20 (ADR-0083 §4.3, UDR-0079 §3.2): the student's name is typed in one field and split at the
+    # IL-01, IL-02, IL-08, IL-20 (ADR-0085 §4.3, UDR-0081 §3.2): the student's name is typed in one field and split at the
     # first word (the rules of the teacher sign-up, IE-03 to IE-05, IE-19), the classroom is chosen in the cascade or
     # given by the token of a classroom link; no classroom code, no role.
     class StudentRegistrationInputTest < ActiveSupport::TestCase
@@ -108,7 +108,7 @@ module Dtos
         assert_nil build(link_token: "cls-1").link_token
       end
 
-      test "ADR-0083 §4.1: a link token has the form of the ADR-0082 tokens, any other form gives nil" do
+      test "ADR-0085 §4.1: a link token has the form of the ADR-0083 tokens, any other form gives nil" do
         assert_equal "0a1b2c3d4e5f", StudentRegistrationInput.normalize_link_token("0A1B2C3D4E5F")
         [ "kfm37", "0a1b2c3d4e5", "0a1b2c3d4e5fa", "0a1b2c3d4e5g", "", nil ].each do |raw|
           assert_nil StudentRegistrationInput.normalize_link_token(raw), raw.inspect

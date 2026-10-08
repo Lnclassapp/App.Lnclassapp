@@ -1,8 +1,8 @@
 <%# 🌐 UI · classroom/student_registrations/_class_picker — la cascade DRENA → établissement → niveau → classe %>
 <%# Rôle : quatre listes enchaînées (Stimulus classroom--class-picker sur le formulaire hôte), chaque frame vide tant que son parent n'est pas choisi ; repli GET %>
-<%# ADR  : 0062, 0083 · UDR : 0024, 0079 (§3.3) %>
+<%# ADR  : 0062, 0085 · UDR : 0024, 0081 (§3.3) %>
 <%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:) -%>
-<%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0079 §3.5) : schools, levels, classrooms valent nil tant que
+<%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0081 §3.5) : schools, levels, classrooms valent nil tant que
     leur parent n'est pas choisi. Le formulaire hôte porte le contrôleur, ses trois adresses et la cible submit. %>
 <div class="space-y-4">
   <div class="space-y-2">

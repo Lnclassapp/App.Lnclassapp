@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IL-04, IL-05, IL-06 (ADR-0083 §4.2, UDR-0079 §3.3): the classrooms list of the cascade. Only the active classrooms of
+# IL-04, IL-05, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the classrooms list of the cascade. Only the active classrooms of
 # the current year, of this level, in this active school, in natural order; each one shows its name and whether it is
 # full — never its headcount, its ceiling, a teacher, a student nor its link token.
 class Queries::Classroom::LevelClassroomsQueryTest < ActiveSupport::TestCase
@@ -56,7 +56,7 @@ class Queries::Classroom::LevelClassroomsQueryTest < ActiveSupport::TestCase
     assert_empty classrooms(level_slug: nil)
   end
 
-  test "ADR-0083 §4.2: a draft or inactive school, or an unknown one, gives no classroom" do
+  test "ADR-0085 §4.2: a draft or inactive school, or an unknown one, gives no classroom" do
     assert_empty classrooms(school_public_id: "sch-inconnu")
 
     %w[draft inactive].each do |status|

@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_link — bloc « Lien de la classe » : copier, partager sur WhatsApp, changer (menu ⋮, confirmation) %>
 <%# Rôle : l'adresse absolue /c/<jeton> n'est portée que par les boutons, jamais affichée ; vu par l'enseignant, la direction et l'équipe %>
-<%# ADR  : 0063, 0083 (§4.1) · UDR : 0054 (§3.5), 0079 (§3.6) · classroom : public_id, name, link_token · rendu par qui l'accorde %>
+<%# ADR  : 0063, 0085 (§4.1) · UDR : 0054 (§3.5), 0081 (§3.6) · classroom : public_id, name, link_token · rendu par qui l'accorde %>
 <%# locals: (classroom:) -%>
 <% url = join_classroom_url(classroom.link_token) %>
 <div id="classroom_link" class="rounded-card bg-brand-soft p-4">

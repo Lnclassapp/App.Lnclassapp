@@ -1,7 +1,7 @@
 require "test_helper"
 
-# IL-01, IL-02 (the page), IL-05, IL-06, IL-07, IL-08, IL-09, IL-10, IL-19, IL-20, IL-23 server side (ADR-0083,
-# UDR-0079 §3.1 to §3.3): one public sign-up page in three sections (your classroom, you, secret code), no classroom
+# IL-01, IL-02 (the page), IL-05, IL-06, IL-07, IL-08, IL-09, IL-10, IL-19, IL-20, IL-23 server side (ADR-0085,
+# UDR-0081 §3.1 to §3.3): one public sign-up page in three sections (your classroom, you, secret code), no classroom
 # code. The classroom is chosen in four chained lists (DRENA, school, level, classroom), or given by a classroom link;
 # the student enters it at once, signed in.
 class Classroom::StudentRegistrationsControllerTest < ActionDispatch::IntegrationTest
@@ -200,7 +200,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "details#name-correction:not([open])"
   end
 
-  test "UDR-0079 §3.2: an error on a corrected name opens the correction, the entries kept" do
+  test "UDR-0081 §3.2: an error on a corrected name opens the correction, the entries kept" do
     register(last_name: "Kouassi", first_name: "Aya 2")
 
     assert_refused :first_name, I18n.t("#{ERRORS}.first_name.invalid")

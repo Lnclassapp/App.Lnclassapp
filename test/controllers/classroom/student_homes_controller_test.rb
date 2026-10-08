@@ -330,7 +330,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#student_home_recent_activity", text: including(tl("recent_activity.empty"))
   end
 
-  # IL-14, IL-17 (UDR-0079 §3.5): the home of a student without an active classroom (archived, or removed) answers, and
+  # IL-14, IL-17 (UDR-0081 §3.5): the home of a student without an active classroom (archived, or removed) answers, and
   # offers « Choisis ta classe » in place of the classroom card. A removal under 7 days old says why, once.
   REMOVED = "Tu ne fais plus partie de cette classe. Choisis ta classe.".freeze
 

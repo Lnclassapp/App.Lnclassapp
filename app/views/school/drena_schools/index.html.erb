@@ -1,9 +1,9 @@
 <%# 🌐 UI · school/drena_schools/index — frame « schools » (enseignant) ou « picker_schools » (cascade élève) : établissements actifs d'une DRENA %>
 <%# Rôle : servi seul au changement de DRENA, ou rendu dans un formulaire (scope de ses champs) ; enseignant : la DRENA voyage avec la liste %>
-<%# ADR  : 0029, 0030, 0082, 0083 · UDR : 0024, 0078, 0079 (§3.3) %>
+<%# ADR  : 0029, 0030, 0083, 0085 · UDR : 0024, 0079, 0081 (§3.3) %>
 <%# locals: (schools:, drena_public_id:, registration: nil, scope: :teacher_registration, picker: false, rate_limited: false) -%>
 <% if picker %>
-  <%# Cascade élève : vide sans DRENA, « introuvable » sans établissement, erreur au-delà du débit (UDR-0079 §3.3). %>
+  <%# Cascade élève : vide sans DRENA, « introuvable » sans établissement, erreur au-delà du débit (UDR-0081 §3.3). %>
   <%= turbo_frame_tag "picker_schools", class: "block transition-opacity aria-busy:opacity-50", "aria-live": "polite",
                                         data: { "classroom--class-picker-target": "schools",
                                                 action: "turbo:frame-missing->classroom--class-picker#missing " \

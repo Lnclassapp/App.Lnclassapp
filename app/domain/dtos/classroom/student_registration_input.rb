@@ -1,12 +1,12 @@
 # 🧠 DOMAINE · Dtos::Classroom::StudentRegistrationInput
 # Rôle : forme de l'inscription élève : nom complet découpé (ou corrigé), classe choisie dans la cascade ou donnée par le jeton d'un lien
-# ADR  : 0026, 0037, 0050, 0082, 0083 · UDR : 0079
+# ADR  : 0026, 0037, 0050, 0083, 0085 · UDR : 0081
 module Dtos
   module Classroom
     class StudentRegistrationInput < Identity::PersonNameInput
       # Identifiants publics et slugs (ADR-0029) : toute autre forme (octet nul, espaces…) est oubliée avant la base.
       PUBLIC_ID = /\A[\w-]{1,64}\z/
-      # Jeton d'un lien /c/<jeton> (ADR-0083 §4.1) : la forme des jetons de l'ADR-0082, 12 caractères hexadécimaux.
+      # Jeton d'un lien /c/<jeton> (ADR-0085 §4.1) : la forme des jetons de l'ADR-0083, 12 caractères hexadécimaux.
       LINK_TOKEN = /\A[0-9a-f]{12}\z/
 
       attribute :full_name, :string
@@ -39,7 +39,7 @@ module Dtos
 
       def full_name = super&.squish
 
-      # « Corriger » (UDR-0079 §3.2, UDR-0078 §3.3) : le nom et les prénoms, tous deux remplis, font foi.
+      # « Corriger » (UDR-0081 §3.2, UDR-0079 §3.3) : le nom et les prénoms, tous deux remplis, font foi.
       def corrected? = raw_last_name.present? && raw_first_name.present?
 
       def last_name = corrected? ? super : split&.first
@@ -87,7 +87,7 @@ module Dtos
       end
 
       # Avec un jeton, la classe vient du lien et le use case le juge ; sans lui, la classe choisie est exigée. La DRENA,
-      # l'établissement et le niveau sont jugés par le use case, avec la classe (ADR-0083 §4.2).
+      # l'établissement et le niveau sont jugés par le use case, avec la classe (ADR-0085 §4.2).
       def classroom_designated
         return if link_token
 

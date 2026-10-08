@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IL-15, IL-16, IL-17, IL-18 (ADR-0040, ADR-0083 §4.3, UDR-0079 §3.5): a signed-in student without an active classroom
+# IL-15, IL-16, IL-17, IL-18 (ADR-0040, ADR-0085 §4.3, UDR-0081 §3.5): a signed-in student without an active classroom
 # (archived, or removed) chooses one through the same cascade, the DRENA and the school of their last classroom already
 # chosen and the levels already listed; the classroom they were removed from is refused by this way, only its link brings
 # them back. A student in an active classroom is sent home, and refused in 403 on the form.
@@ -31,7 +31,7 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
   def choose(classroom = @other, **) = post(student_classroom_choices_path, params: { student_classroom_choice: choice_params(classroom, **) })
   def open_memberships(student = @student) = Orm::ClassroomStudent.where(student:, left_at: nil).pluck(:classroom_id, :joined_via)
 
-  test "UDR-0079 §3.5: « Choose your classroom », the DRENA and the school of the last classroom chosen, the levels listed" do
+  test "UDR-0081 §3.5: « Choose your classroom », the DRENA and the school of the last classroom chosen, the levels listed" do
     sign_in_as @student
 
     get new_student_classroom_choice_path
@@ -79,7 +79,7 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     %w[picker_schools picker_levels picker_classrooms].each { assert_select "turbo-frame##{it} *", 0 }
   end
 
-  test "UDR-0079 §3.4: arriving from an invalid link, the alert once, in the student's words" do
+  test "UDR-0081 §3.4: arriving from an invalid link, the alert once, in the student's words" do
     sign_in_as @student
 
     get join_classroom_path("cccccccccccc")

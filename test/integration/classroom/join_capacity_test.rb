@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IL-05, IL-01 (ADR-0083 §4.3, ADR-0041): on PostgreSQL, the classroom row lock keeps the headcount right under
+# IL-05, IL-01 (ADR-0085 §4.3, ADR-0041): on PostgreSQL, the classroom row lock keeps the headcount right under
 # concurrency — two sign-ups racing for the last seat, one by the cascade and one by the link, only one wins — and a
 # membership refused after the account rolls both back.
 class Classroom::JoinCapacityTest < ActiveSupport::TestCase

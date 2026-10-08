@@ -1,7 +1,7 @@
 require "test_helper"
 
 # CL-08, ID-07 (ADR-0041, UDR-0009): the preview of /c/<code> names the classroom, its level and its school, and nothing more.
-# IL-08, IL-09 (ADR-0083 §4.1, UDR-0079 §3.4): the preview of /c/<token> says the same three names, and whether the
+# IL-08, IL-09 (ADR-0085 §4.1, UDR-0081 §3.4): the preview of /c/<token> says the same three names, and whether the
 # classroom is full; an unknown or replaced token, an archived classroom or a school that is not active gives nil.
 class Queries::Classroom::JoinPreviewQueryTest < ActiveSupport::TestCase
   setup do

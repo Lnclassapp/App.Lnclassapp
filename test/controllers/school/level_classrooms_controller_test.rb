@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IL-04, IL-05, IL-06 (ADR-0083 §4.2, UDR-0079 §3.3): the classrooms of a level, public and limited to 30 requests a
+# IL-04, IL-05, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the classrooms of a level, public and limited to 30 requests a
 # minute — the « picker_classrooms » frame of the student cascade. One radio per active classroom; a full one disabled,
 # with « Complète » in its label; never a headcount, a ceiling, a teacher, a student nor a link token.
 class School::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest

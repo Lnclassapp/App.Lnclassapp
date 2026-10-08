@@ -1,6 +1,6 @@
 <%# 🌐 UI · school/school_levels/index — frame « picker_levels » de la cascade élève : niveaux qui ont une classe active %>
 <%# Rôle : servi seul au choix d'un établissement, ou rendu dans le formulaire (scope de ses champs) ; vide, introuvable, erreur ou liste %>
-<%# ADR  : 0062, 0083 · UDR : 0079 (§3.3) %>
+<%# ADR  : 0062, 0085 · UDR : 0081 (§3.3) %>
 <%# locals: (levels:, registration: nil, scope: :student_registration, rate_limited: false) -%>
 <% page_title t(".page_title") %>
 <%= turbo_frame_tag "picker_levels", class: "block transition-opacity aria-busy:opacity-50", "aria-live": "polite",

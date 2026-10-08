@@ -540,7 +540,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster_list dialog", 0
   end
 
-  # IL-13 (ADR-0083 §4.4, UDR-0079 §3.7) : « Nouveau » pendant 7 jours, la voie sous chaque nom, les nouveaux en tête,
+  # IL-13 (ADR-0085 §4.4, UDR-0081 §3.7) : « Nouveau » pendant 7 jours, la voie sous chaque nom, les nouveaux en tête,
   # le compte des nouveaux dans le titre de la liste.
   test "IL-13 : « Nouveau » et « Inscrit seul » sur l'arrivé d'il y a 2 jours, « Par le lien » seul sur celui d'il y a 10 jours" do
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_via: "link", joined_at: 10.days.ago)
@@ -578,7 +578,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2#classroom_roster_title span", 0
   end
 
-  # IL-14 (UDR-0079 §3.7) : dernier item du menu ⋮, séparé par un filet ; la modale nomme l'élève ; DELETE vers la ligne.
+  # IL-14 (UDR-0081 §3.7) : dernier item du menu ⋮, séparé par un filet ; la modale nomme l'élève ; DELETE vers la ligne.
   test "IL-14 : « Retirer de la classe » termine le menu ⋮ de chaque ligne et ouvre une confirmation qui nomme l'élève" do
     koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
     sign_in_as @teacher

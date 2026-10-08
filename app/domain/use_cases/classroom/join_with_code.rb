@@ -6,7 +6,7 @@ module UseCases
     class JoinWithCode
       Joined = Data.define(:user, :classroom, :token)
       ROLE = "student".freeze
-      # ADR-0083 §4.4 : la voie historique, tant que ce chemin existe.
+      # ADR-0085 §4.4 : la voie historique, tant que ce chemin existe.
       VIA = "code".freeze
 
       # Un refus après la création du compte traverse la transaction pour l'annuler, puis ressort en Result.

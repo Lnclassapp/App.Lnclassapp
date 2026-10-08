@@ -80,7 +80,7 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
 
     assert_current_path school_admin_classroom_path(@klass.public_id)
     assert_equal [ "2", "50 %", "62 %" ], all("#classroom_figures li > span:first-child").map(&:text)
-    # UDR-0079 §3.7 : sous le nom, la pastille « Nouveau » et la voie d'arrivée ; une 4e colonne porte le menu ⋮.
+    # UDR-0081 §3.7 : sous le nom, la pastille « Nouveau » et la voie d'arrivée ; une 4e colonne porte le menu ⋮.
     rows = all("#classroom_students tbody tr").to_h { |row| [ row.find("th p", match: :first).text, row.all("td").first(2).map(&:text) ] }
     assert_equal [ "2 / 2", "67 %" ], rows.fetch("Aya Bamba"), "Y rendu ; (33 + 100) / 2 = 66,5 → 67 %"
     assert_equal "0 / 2", rows.fetch("Moussa Coulibaly").first, "une remédiation commencée, non terminée, n'est pas rendue"

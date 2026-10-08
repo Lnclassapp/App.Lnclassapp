@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomLinksController
 # Rôle : « Changer le lien » d'une classe : nouveau jeton, bloc #classroom_link remplacé et toast ; repli HTML vers la page d'origine
-# ADR  : 0026, 0028, 0083 (§4.1) · UDR : 0079 (§3.6) · IL-12 : ManageClassroomMembersPolicy (autre classe : 404, élève : 403)
+# ADR  : 0026, 0028, 0085 (§4.1) · UDR : 0081 (§3.6) · IL-12 : ManageClassroomMembersPolicy (autre classe : 404, élève : 403)
 module Classroom
   class ClassroomLinksController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team

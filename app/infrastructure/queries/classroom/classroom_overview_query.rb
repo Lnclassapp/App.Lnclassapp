@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves (nouveaux, voie)
-# ADR  : 0026, 0028, 0048, 0060, 0072, 0079, 0083 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.7)
+# ADR  : 0026, 0028, 0048, 0060, 0072, 0079, 0085 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0081 (§3.7)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -11,7 +11,7 @@ module Queries
       Overview = Data.define(:students, :new_students_count, :session_days, :assignments, :courses)
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
       # photo_version : nil sans photo (ADR-0060). joined_via : Entities::Classroom::StudentArrivalChannel.
-      # newcomer : arrivé depuis moins de NEW_FOR (ADR-0083 §4.4).
+      # newcomer : arrivé depuis moins de NEW_FOR (ADR-0085 §4.4).
       StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version,
                                :joined_via, :newcomer)
       # counts : AssignmentFollowUpQuery::Counts, nil sans show_follow_up (FollowAssignmentPolicy, ADR-0072 §4.5).
@@ -23,9 +23,9 @@ module Queries
 
       STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact classroom_students.joined_via
                            classroom_students.joined_at].freeze
-      # ADR-0083 §4.4 : un élève est « nouveau » pendant 7 jours après son arrivée ; calcul de lecture, sans colonne.
+      # ADR-0085 §4.4 : un élève est « nouveau » pendant 7 jours après son arrivée ; calcul de lecture, sans colonne.
       NEW_FOR = 7.days
-      # UDR-0079 §3.7 : les nouveaux d'abord, du plus récent au plus ancien ; les autres (NULL) gardent l'ordre par nom.
+      # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien ; les autres (NULL) gardent l'ordre par nom.
       NEWCOMERS_FIRST = "CASE WHEN classroom_students.joined_at > ? THEN classroom_students.joined_at END DESC NULLS LAST".freeze
       # « Awa Bamba » se trouve par « awa », « bamba » ou « awa bamba » (UDR-0054 §3.9).
       STUDENT_NAME = "concat_ws(' ', users.first_name, users.last_name)".freeze

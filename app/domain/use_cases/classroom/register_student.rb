@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::RegisterStudent
 # Rôle : un visiteur crée son compte élève (rôle imposé) et entre tout de suite dans la classe choisie ou celle de son lien, en une transaction
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0083 · UDR : 0079
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 · UDR : 0081
 module UseCases
   module Classroom
     class RegisterStudent
@@ -67,14 +67,14 @@ module UseCases
         enroll(created.value, destination, ip, user_agent)
       end
 
-      # Résolu de nouveau à l'envoi (ADR-0083 §4.1) : un lien valide l'emporte sur la classe envoyée. Inconnu, changé, d'une
+      # Résolu de nouveau à l'envoi (ADR-0085 §4.1) : un lien valide l'emporte sur la classe envoyée. Inconnu, changé, d'une
       # classe archivée ou d'un établissement qui n'est pas actif, il retombe sans rien dire sur la voie standard.
       def linked(token)
         classroom = token && @classrooms.lock_by_link_token(token:)
         Destination.new(classroom:, via: LINK) if classroom&.active? && school_of(classroom).active?
       end
 
-      # La classe doit être de celles que la cascade propose (ADR-0083 §4.2), sinon la même erreur sous le champ.
+      # La classe doit être de celles que la cascade propose (ADR-0085 §4.2), sinon la même erreur sous le champ.
       def chosen(dto)
         return Shared::Result.failure(:invalid, errors: { classroom_public_id: [ :blank ] }) if dto.classroom_public_id.nil?
 

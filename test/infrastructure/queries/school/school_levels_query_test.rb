@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IL-04, IL-06 (ADR-0083 §4.2, UDR-0079 §3.3): the levels list of the cascade. Only the levels where an active school has
+# IL-04, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the levels list of the cascade. Only the levels where an active school has
 # an active classroom of the current school year, in the order of the referential; never a classroom, a headcount nor a
 # teacher.
 class Queries::School::SchoolLevelsQueryTest < ActiveSupport::TestCase
@@ -36,7 +36,7 @@ class Queries::School::SchoolLevelsQueryTest < ActiveSupport::TestCase
     assert_empty levels(create_school.public_id)
   end
 
-  test "ADR-0083 §4.2: a draft or inactive school, or an unknown one, gives no level" do
+  test "ADR-0085 §4.2: a draft or inactive school, or an unknown one, gives no level" do
     assert_empty levels("sch-inconnu")
     assert_empty levels(nil)
 

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::MembershipRepository
 # Rôle : adhésions des élèves (classroom_students) ; une seule classe principale active (index partiel), voie d'arrivée, retrait
-# ADR  : 0036, 0040, 0083
+# ADR  : 0036, 0040, 0085
 module Repositories
   module Classroom
     class MembershipRepository

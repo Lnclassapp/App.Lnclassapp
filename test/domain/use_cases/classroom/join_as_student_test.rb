@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Classroom
-    # CL-06, IL-15, IL-16, IL-17, IL-18 (ADR-0040, ADR-0083 §4.3): a signed-in student without an active classroom (archived,
+    # CL-06, IL-15, IL-16, IL-17, IL-18 (ADR-0040, ADR-0085 §4.3): a signed-in student without an active classroom (archived,
     # or removed) enters the classroom chosen in the cascade (way « standard ») or given by a link (way « link »), without a
     # new account; an archived primary classroom is left in the same transaction. The classroom they were removed from is
     # refused by the standard way and reopened by the link. The former code path (/c/<code>) stays until Lot F.

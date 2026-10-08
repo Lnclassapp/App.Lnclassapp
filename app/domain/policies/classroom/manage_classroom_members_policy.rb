@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Classroom::ManageClassroomMembersPolicy
 # Rôle : lien d'une classe et retrait d'un élève : l'enseignant de la classe, la direction de son établissement, l'équipe
-# ADR  : 0028, 0083
+# ADR  : 0028, 0085
 module Policies
   module Classroom
     class ManageClassroomMembersPolicy

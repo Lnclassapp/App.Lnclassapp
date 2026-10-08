@@ -161,7 +161,7 @@ module Queries
         assert_not_nil versions.first
       end
 
-      # IL-13 (ADR-0083 §4.4, UDR-0079 §3.7) : « nouveau » pendant 7 jours après joined_at, calcul de lecture ; la voie
+      # IL-13 (ADR-0085 §4.4, UDR-0081 §3.7) : « nouveau » pendant 7 jours après joined_at, calcul de lecture ; la voie
       # d'arrivée sur chaque ligne ; les nouveaux d'abord, du plus récent au plus ancien, les autres par nom.
       test "IL-13 : nouveaux arrivés en tête, du plus récent au plus ancien, avec leur voie ; les autres par nom" do
         travel_to(Time.zone.local(2026, 10, 7, 9)) do

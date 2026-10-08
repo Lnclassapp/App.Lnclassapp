@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::ChangeClassroomLink
 # Rôle : tire un nouveau jeton du lien d'une classe, sous son verrou ; l'ancien lien est invalide aussitôt, un lien par classe
-# ADR  : 0026, 0028, 0083 · UDR : 0079 (§3.6)
+# ADR  : 0026, 0028, 0085 · UDR : 0081 (§3.6)
 module UseCases
   module Classroom
     class ChangeClassroomLink

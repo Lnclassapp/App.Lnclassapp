@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
 # Rôle : contrat de persistance des classes, de leur code d'adhésion, du jeton de leur lien et de la génération par défaut
-# ADR  : 0030, 0039, 0041, 0059, 0083
+# ADR  : 0030, 0039, 0041, 0059, 0085
 module Ports
   module Classroom
     module ClassroomRepositoryPort
@@ -15,18 +15,18 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #lock_by_join_code"
       end
 
-      # ADR-0083 §4.3 : même verrou, la classe choisie dans la cascade. → Entities::Classroom::Classroom | nil
+      # ADR-0085 §4.3 : même verrou, la classe choisie dans la cascade. → Entities::Classroom::Classroom | nil
       def lock_by_public_id(public_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #lock_by_public_id"
       end
 
-      # ADR-0083 §4.1 : même verrou, la classe du lien /c/<jeton> ; nil pour un jeton inconnu ou remplacé.
+      # ADR-0085 §4.1 : même verrou, la classe du lien /c/<jeton> ; nil pour un jeton inconnu ou remplacé.
       # → Entities::Classroom::Classroom | nil
       def lock_by_link_token(token:)
         raise NotImplementedError, "#{self.class} doit implémenter #lock_by_link_token"
       end
 
-      # ADR-0083 §4.1 : tire un nouveau jeton, l'ancien est invalide aussitôt. → String (le nouveau jeton)
+      # ADR-0085 §4.1 : tire un nouveau jeton, l'ancien est invalide aussitôt. → String (le nouveau jeton)
       def rotate_link_token(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #rotate_link_token"
       end

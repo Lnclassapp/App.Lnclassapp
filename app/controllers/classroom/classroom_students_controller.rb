@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomStudentsController
 # Rôle : retirer un élève de la classe (IL-14), en Turbo Stream : ligne, titre de la liste, effectif, toast ; page de la direction re-demandée ; repli HTML : retour à la classe
-# ADR  : 0028, 0065, 0083 (§4.5) · UDR : 0006, 0079 (§3.7) · 403 (classe archivée comprise) et 404 en toast (RendersResult) ; `q` : la recherche de la liste
+# ADR  : 0028, 0065, 0085 (§4.5) · UDR : 0006, 0081 (§3.7) · 403 (classe archivée comprise) et 404 en toast (RendersResult) ; `q` : la recherche de la liste
 module Classroom
   class ClassroomStudentsController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team

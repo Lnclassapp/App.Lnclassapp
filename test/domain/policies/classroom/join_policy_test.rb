@@ -2,7 +2,7 @@ require "test_helper"
 
 module Policies
   module Classroom
-    # ADR-0083 §4.3: a visitor or a student enters an active classroom under its ceiling; a student removed from it is
+    # ADR-0085 §4.3: a visitor or a student enters an active classroom under its ceiling; a student removed from it is
     # refused, unless the entry comes from the classroom link. The code is checked only on the former path (until Lot F).
     class JoinPolicyTest < ActiveSupport::TestCase
       def classroom(**overrides)

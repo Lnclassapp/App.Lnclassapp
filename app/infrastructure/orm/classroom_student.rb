@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::ClassroomStudent
 # Rôle : table classroom_students, adhésions ; une ligne n'est jamais supprimée (left_at), le retrait s'y retient
-# ADR  : 0036, 0040, 0083
+# ADR  : 0036, 0040, 0085
 module Orm
   class ClassroomStudent < ApplicationRecord
     self.table_name = "classroom_students"

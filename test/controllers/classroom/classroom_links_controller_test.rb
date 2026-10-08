@@ -1,10 +1,10 @@
 require "test_helper"
 
-# IL-11 (ADR-0083 §4.1, UDR-0079 §3.6) : le bloc « Lien de la classe » de la page d'une classe, et « Changer le lien » :
+# IL-11 (ADR-0085 §4.1, UDR-0081 §3.6) : le bloc « Lien de la classe » de la page d'une classe, et « Changer le lien » :
 # un nouveau jeton, le bloc remplacé par Turbo Stream avec un toast, l'ancien jeton invalide, le même lien pour tous.
 # IL-12 : l'enseignant de la classe, la direction de son établissement et l'équipe ; un autre enseignant ou une autre
 # direction reçoit 404, un élève 403. La page de la direction est le Lot E ; ici, son geste seul.
-# UDR-0079 §3.7 : l'équipe copie le lien depuis la fiche de l'établissement.
+# UDR-0081 §3.7 : l'équipe copie le lien depuis la fiche de l'établissement.
 class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
   SCOPE = "classroom.classrooms.link".freeze
 
@@ -61,7 +61,7 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
     assert_link_block link_url, scope: "#classroom_header"
   end
 
-  test "UDR-0079 §3.6 : une classe archivée n'a pas de bloc du lien" do
+  test "UDR-0081 §3.6 : une classe archivée n'a pas de bloc du lien" do
     @classroom.update!(status: "archived", archived_at: Time.current)
     sign_in_as @teacher
 
@@ -193,7 +193,7 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to classroom_path(@classroom.public_id)
   end
 
-  test "UDR-0079 §3.7 : l'équipe copie le lien de chaque classe depuis la fiche de l'établissement, à côté du code" do
+  test "UDR-0081 §3.7 : l'équipe copie le lien de chaque classe depuis la fiche de l'établissement, à côté du code" do
     sign_in_as create_team_member
 
     get school_path(@school.public_id)

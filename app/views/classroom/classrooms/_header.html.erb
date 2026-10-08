@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_header — en-tête de la page d'une classe (CL-10, CL-04) %>
 <%# Rôle : retour selon le rôle ; nom, niveau, établissement, année ; code à copier ; bloc du lien (_link) ; effectif / plafond expliqué %>
-<%# ADR  : 0028, 0041, 0063, 0083 · UDR : 0027, 0050, 0054, 0079 · Stimulus : clipboard · WhatsApp : lien sortant, sans nom d'élève %>
+<%# ADR  : 0028, 0041, 0063, 0085 · UDR : 0027, 0050, 0054, 0081 · Stimulus : clipboard · WhatsApp : lien sortant, sans nom d'élève %>
 <div id="classroom_header" class="mb-8">
   <% if shell_user.role.to_s == "team" %>
     <%= ui_back_link classroom.school_name, href: school_path(classroom.school_public_id) %>
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <%# UDR-0079 §3.6 : le bloc du lien vient à côté du code, qui reste jusqu'au retrait du code de classe (Lot F). %>
+      <%# UDR-0081 §3.6 : le bloc du lien vient à côté du code, qui reste jusqu'au retrait du code de classe (Lot F). %>
       <div class="flex flex-col gap-3 lg:shrink-0">
         <% if classroom.join_code_display %>
           <% code = classroom.join_code_display %>

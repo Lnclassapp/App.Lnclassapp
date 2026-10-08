@@ -1,4 +1,4 @@
-# ADR-0083 : L'élève entre dans une classe choisie ou donnée par un lien à jeton remplaçable, sans code de classe, et quiconque gère la classe peut l'en retirer
+# ADR-0085 : L'élève entre dans une classe choisie ou donnée par un lien à jeton remplaçable, sans code de classe, et quiconque gère la classe peut l'en retirer
 
 | | |
 |---|---|
@@ -16,7 +16,7 @@ Depuis la V1, **le code de classe est la seule porte** d'un élève (ADR-0041, U
 
 Ce choix était délibéré. L'ancienne application avait une cascade niveau → école → classe qui laissait rejoindre n'importe quelle classe sans son code ; l'inventaire de la refonte l'a classée comme un défaut (ID-08, CL-08) et l'UDR-0009 l'a écartée : « Aucune cascade école + niveau → classe n'existe. »
 
-Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscrire seuls, alors qu'aucun enseignant de leur classe n'est sur Lnclass** (memo Q1). Personne ne peut leur donner de code. Le porteur a décidé de retirer le code de classe et de donner à l'élève deux flux, comme à l'enseignant (ADR-0082 ; `inscription-enseignant`, Q20).
+Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscrire seuls, alors qu'aucun enseignant de leur classe n'est sur Lnclass** (memo Q1). Personne ne peut leur donner de code. Le porteur a décidé de retirer le code de classe et de donner à l'élève deux flux, comme à l'enseignant (ADR-0083 ; `inscription-enseignant`, Q20).
 
 **Cet ADR rétablit donc, en connaissance de cause, la cascade que l'UDR-0009 avait écartée.** Ce qui la rend acceptable aujourd'hui n'est pas qu'elle soit devenue sûre : c'est qu'on lui ajoute une sortie (le retrait d'un élève) et une visibilité (les nouveaux arrivés), et que l'aperçu public reste aussi pauvre qu'avant.
 
@@ -26,7 +26,7 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 2. L'entrée immédiate ouvre toute classe à quiconque : il faut pouvoir **voir** une arrivée et **défaire** une entrée, y compris dans une classe sans enseignant (memo Q6, Q11).
 3. Un élève retiré ne doit pas revenir seul une minute plus tard (memo Q7).
 4. Ne pas divulguer plus qu'aujourd'hui : l'aperçu d'une classe dit trois noms, jamais un effectif, un enseignant ni un élève (UDR-0009 §2.2).
-5. Garder ce qui existe : la transaction de `JoinWithCode`, le verrou de la classe et le plafond (ADR-0041), la classe principale unique (ADR-0040), `Shared::Result`, la forme des jetons et `FullName` de l'ADR-0082.
+5. Garder ce qui existe : la transaction de `JoinWithCode`, le verrou de la classe et le plafond (ADR-0041), la classe principale unique (ADR-0040), `Shared::Result`, la forme des jetons et `FullName` de l'ADR-0083.
 
 ## 3. Options envisagées
 
@@ -44,7 +44,7 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 |---|---|---|
 | A — `/c/<public_id>` de la classe | Aucune colonne | Ne se change pas ; l'identifiant public circule déjà dans les adresses des enseignants |
 | B — **Jeton opaque remplaçable sur la classe** | Se change d'un geste ; ne dit rien de la classe | Une colonne ; les anciens liens à code meurent |
-| C — Jeton stable, comme `/i/<jeton>` (ADR-0082) | Même règle que l'enseignant | Le lien de classe lève un retrait (memo Q7) : il donne un droit que la voie standard n'a pas, donc il doit pouvoir être repris (memo Q8) |
+| C — Jeton stable, comme `/i/<jeton>` (ADR-0083) | Même règle que l'enseignant | Le lien de classe lève un retrait (memo Q7) : il donne un droit que la voie standard n'a pas, donc il doit pouvoir être repris (memo Q8) |
 
 ### Mémoire du retrait
 
@@ -61,7 +61,7 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 
 ### 4.1 Lien de classe
 
-- `classrooms.link_token` : 12 caractères hexadécimaux, tirés par la base (`DEFAULT`), `NOT NULL`, uniques, avec un `CHECK` de format — la forme des jetons de l'ADR-0082. Une classe générée ou importée reçoit son jeton sans changer `GenerateMissingClassrooms` ni `ImportSchools`, qui cessent seulement de tirer un code.
+- `classrooms.link_token` : 12 caractères hexadécimaux, tirés par la base (`DEFAULT`), `NOT NULL`, uniques, avec un `CHECK` de format — la forme des jetons de l'ADR-0083. Une classe générée ou importée reçoit son jeton sans changer `GenerateMissingClassrooms` ni `ImportSchools`, qui cessent seulement de tirer un code.
 - `GET /c/:token` garde son adresse et sa limite (10 requêtes par minute et par adresse). Le paramètre change de nature : un ancien code (5 caractères) ne peut pas être un jeton (12) ; il est traité comme un jeton inconnu.
 - Le lien est **invalide** quand le jeton est inconnu, quand la classe est archivée, ou quand son établissement n'est pas actif. La page standard s'ouvre alors avec l'alerte, et la voie enregistrée est `standard`.
 - À l'envoi, le serveur **résout de nouveau** le jeton. La classe envoyée par le formulaire est ignorée quand un jeton valide est présent.
@@ -96,7 +96,7 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 ### 4.6 Ce qui ne change pas
 
 - Une seule classe principale active par élève (ADR-0040) ; le plafond et le verrou (ADR-0041) ; l'archivage de fin d'année.
-- Le stockage du nom en deux colonnes (ADR-0037) ; la saisie suit l'ADR-0082 §4.4.
+- Le stockage du nom en deux colonnes (ADR-0037) ; la saisie suit l'ADR-0083 §4.4.
 - La règle de l'inscription : 5 envois par minute et par adresse.
 
 ## 5. Conséquences

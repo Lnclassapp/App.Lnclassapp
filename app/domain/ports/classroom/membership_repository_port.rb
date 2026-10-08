@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::MembershipRepositoryPort
 # Rôle : contrat des adhésions d'élèves, une seule classe principale active par élève ; voie d'arrivée et retrait
-# ADR  : 0036, 0040, 0083
+# ADR  : 0036, 0040, 0085
 module Ports
   module Classroom
     module MembershipRepositoryPort
@@ -21,7 +21,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #leave_primary"
       end
 
-      # ADR-0083 §4.5 : clôt l'adhésion active de l'élève à cette classe et retient le retrait. Idempotent.
+      # ADR-0085 §4.5 : clôt l'adhésion active de l'élève à cette classe et retient le retrait. Idempotent.
       # → true si une adhésion a été close, false si l'élève était déjà parti ou n'est jamais venu
       def remove(classroom_id:, student_id:, removed_by_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #remove"

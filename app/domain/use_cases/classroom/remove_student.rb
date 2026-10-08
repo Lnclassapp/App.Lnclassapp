@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::RemoveStudent
 # Rôle : l'enseignant de la classe, la direction de son établissement ou l'équipe retire un élève ; compte, sessions et résultats restent
-# ADR  : 0028, 0036, 0083 (§4.5) · UDR : 0079 (§3.7)
+# ADR  : 0028, 0036, 0085 (§4.5) · UDR : 0081 (§3.7)
 module UseCases
   module Classroom
     class RemoveStudent
@@ -31,7 +31,7 @@ module UseCases
 
         allowed = @policy.call(actor:, classroom:)
         return allowed if allowed.failure?
-        # UDR-0079 §3.7, amendée le 2026-10-08 (porteur) : comme ChangeClassroomLink, rien ne bouge dans une classe archivée.
+        # UDR-0081 §3.7, amendée le 2026-10-08 (porteur) : comme ChangeClassroomLink, rien ne bouge dans une classe archivée.
         return Shared::Result.failure(:forbidden, errors: { base: [ :classroom_archived ] }) unless classroom.active?
 
         student = @users.find_by_public_id(public_id: student_public_id)

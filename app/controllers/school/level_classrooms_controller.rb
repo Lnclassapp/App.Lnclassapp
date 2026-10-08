@@ -1,10 +1,10 @@
 # 🌐 DELIVERY · School::LevelClassroomsController
 # Rôle : classes actives d'un niveau d'un établissement actif, publiques et limitées en débit : frame « picker_classrooms »
-# ADR  : 0026, 0050, 0062, 0083 · UDR : 0079
+# ADR  : 0026, 0050, 0062, 0085 · UDR : 0081
 module School
   class LevelClassroomsController < ApplicationController
     allow_unauthenticated_access
-    # ADR-0083 §4.2 : 30 requêtes par minute et par adresse ; au-delà, l'état d'erreur du frame et « Réessayer ».
+    # ADR-0085 §4.2 : 30 requêtes par minute et par adresse ; au-delà, l'état d'erreur du frame et « Réessayer ».
     rate_limit to: 30, within: 1.minute, by: -> { request.remote_ip }, with: -> { refuse_too_many }
 
     # Chaque classe ne dit que son nom et si elle est complète (IL-04) ; aucune classe : l'état « introuvable ».

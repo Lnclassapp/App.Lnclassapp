@@ -1,6 +1,6 @@
 <%# 🌐 UI · school/level_classrooms/index — frame « picker_classrooms » de la cascade élève : une ligne radio par classe active %>
 <%# Rôle : nom de la classe, et « Complète » (radio désactivé) ; jamais d'effectif ni d'enseignant (IL-04) ; vide, introuvable, erreur ou liste %>
-<%# ADR  : 0041, 0062, 0083 · UDR : 0079 (§3.3) %>
+<%# ADR  : 0041, 0062, 0085 · UDR : 0081 (§3.3) %>
 <%# locals: (classrooms:, registration: nil, scope: :student_registration, rate_limited: false) -%>
 <% page_title t(".page_title") %>
 <% error = registration&.errors&.[](:classroom_public_id)&.first %>

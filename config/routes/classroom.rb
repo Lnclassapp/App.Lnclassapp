@@ -1,14 +1,14 @@
 # 🌐 DELIVERY · routes du contexte classroom
 # Rôle : inscription de l'élève, adhésion par code ou par lien, lien d'une classe, retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, jours de séance et suivi
-# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0083
+# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0085
 get "join", to: "classroom/join_codes#new", as: :new_join_code
 post "join", to: "classroom/join_codes#create", as: :join_codes
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
 post "c/:code", to: "classroom/joins#create"
-# ADR-0083 §4 : l'élève s'inscrit en choisissant sa classe (DRENA → établissement → niveau → classe), sans code.
+# ADR-0085 §4 : l'élève s'inscrit en choisissant sa classe (DRENA → établissement → niveau → classe), sans code.
 get "student-signup", to: "classroom/student_registrations#new", as: :new_student_registration
 post "student-signup", to: "classroom/student_registrations#create", as: :student_registrations
-# ADR-0083 §4.3 : l'élève sans classe active (classe archivée, ou retiré) en choisit une par la même cascade.
+# ADR-0085 §4.3 : l'élève sans classe active (classe archivée, ou retiré) en choisit une par la même cascade.
 get "students/classroom/new", to: "classroom/student_classroom_choices#new", as: :new_student_classroom_choice
 post "students/classroom", to: "classroom/student_classroom_choices#create", as: :student_classroom_choices
 
@@ -23,7 +23,7 @@ delete "teachers/classrooms/:classroom_public_id/teaching", to: "classroom/teach
 post "teachers/onboarding", to: "classroom/teacher_onboardings#create", as: :teacher_onboarding
 
 get "classrooms/:public_id", to: "classroom/classrooms#show", as: :classroom
-# ADR-0083 §4.1, §4.5 : changer le lien de la classe, retirer un élève (ManageClassroomMembersPolicy).
+# ADR-0085 §4.1, §4.5 : changer le lien de la classe, retirer un élève (ManageClassroomMembersPolicy).
 patch "classrooms/:public_id/link", to: "classroom/classroom_links#update", as: :classroom_link
 delete "classrooms/:classroom_public_id/students/:student_public_id", to: "classroom/classroom_students#destroy",
                                                                       as: :classroom_student

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentClassroomChoicesController
 # Rôle : « Choisis ta classe » de l'élève sans classe active (archivée, ou retiré) : la cascade, sa dernière école déjà choisie ; succès : accueil
-# ADR  : 0026, 0040, 0062, 0083 · UDR : 0079 (§3.3, §3.4, §3.5)
+# ADR  : 0026, 0040, 0062, 0085 · UDR : 0081 (§3.3, §3.4, §3.5)
 module Classroom
   class StudentClassroomChoicesController < AuthenticatedController
     FIELDS = %i[drena_public_id school_public_id level_slug classroom_public_id].freeze
@@ -10,11 +10,11 @@ module Classroom
     before_action :send_enrolled_home, only: :new
     helper_method :class_picker_lists
 
-    # Sans choix envoyés (repli sans JavaScript, UDR-0079 §3.3), la DRENA et l'établissement de sa dernière classe.
+    # Sans choix envoyés (repli sans JavaScript, UDR-0081 §3.3), la DRENA et l'établissement de sa dernière classe.
     def new
       choices = picker_params.presence || last_school
       @form = Dtos::Classroom::StudentRegistrationInput.new(**choices)
-      # Posé par /c/<jeton> quand le lien n'est plus valable (UDR-0079 §3.4) ; lu une fois.
+      # Posé par /c/<jeton> quand le lien n'est plus valable (UDR-0081 §3.4) ; lu une fois.
       @link_invalid = flash[:link_invalid].present?
     end
 

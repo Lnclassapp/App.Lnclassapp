@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
 <%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée ; sans classe, « Choisis ta classe » %>
-<%# ADR  : 0033, 0043, 0078, 0083 · UDR : 0006, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1, 0079 §3.5 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# ADR  : 0033, 0043, 0078, 0085 · UDR : 0006, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1, 0081 §3.5 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. Amendement du
     2026-10-06 : sous lg, ni « Bonjour » visible ni bouton (la carte de classe monte en tête) ; l'entrée « Besoin d'aide ? »
@@ -14,7 +14,7 @@
 </div>
 
 <% if @home.nil? %>
-<%# UDR-0079 §3.5 : sans classe active, ni exercices ni matières ni activité à lire (tous suivent la classe) : la seule carte. %>
+<%# UDR-0081 §3.5 : sans classe active, ni exercices ni matières ni activité à lire (tous suivent la classe) : la seule carte. %>
 <div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
   <%= render "no_classroom" %>
 </div>

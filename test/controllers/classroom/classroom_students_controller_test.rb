@@ -1,6 +1,6 @@
 require "test_helper"
 
-# IL-14, IL-12 pour le retrait, IL-21 (ADR-0083 §4.5, UDR-0079 §3.7) : « Retirer de la classe » répond en Turbo Stream —
+# IL-14, IL-12 pour le retrait, IL-21 (ADR-0085 §4.5, UDR-0081 §3.7) : « Retirer de la classe » répond en Turbo Stream —
 # ligne retirée, titre de la liste et effectif recomptés, toast — ; la liste vidée retrouve son état vide. Le compte, les
 # sessions et les résultats de l'élève restent. Enseignant de la classe, direction de l'établissement et équipe accordés ;
 # enseignant d'une autre classe, direction d'un autre établissement : 404 ; élève : 403.
@@ -188,7 +188,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_still_member
   end
 
-  # UDR-0079 §3.7, amendée le 2026-10-08 (porteur) : comme le changement de lien (ChangeClassroomLink).
+  # UDR-0081 §3.7, amendée le 2026-10-08 (porteur) : comme le changement de lien (ChangeClassroomLink).
   test "une classe archivée : 403 et toast d'erreur, la liste n'est pas touchée ; rien n'est écrit" do
     @classroom.update!(status: "archived", archived_at: Time.current)
     sign_in_as @teacher

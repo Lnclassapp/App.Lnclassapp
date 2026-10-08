@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, activité, lacunes ; sans classe, la dernière et un retrait récent
-# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0083 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0079 (§3.5)
+# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5)
 module Queries
   module Classroom
     class StudentHomeQuery
@@ -15,12 +15,12 @@ module Queries
       SessionRow = Data.define(:public_id, :exercise_title, :score_percent, :completed_at)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
       SubjectRow = Data.define(:slug, :name)
-      # L'élève sans classe active (UDR-0079 §3.5) : la DRENA et l'établissement de sa dernière classe principale, qui
+      # L'élève sans classe active (UDR-0081 §3.5) : la DRENA et l'établissement de sa dernière classe principale, qui
       # préremplissent « Choisis ta classe » ; recent_removal_at : l'heure du retrait qui l'en a fait sortir, s'il est récent.
       LastClassroom = Data.define(:drena_public_id, :school_public_id, :recent_removal_at)
 
       RECENT_SESSIONS = 10
-      # Un retrait est récent pendant 7 jours, la durée de la marque « Nouveau » (ADR-0083 §4.4) : un calcul de lecture,
+      # Un retrait est récent pendant 7 jours, la durée de la marque « Nouveau » (ADR-0085 §4.4) : un calcul de lecture,
       # sans colonne. Au-delà, l'accueil propose de choisir une classe sans revenir sur le départ.
       RECENT_REMOVAL = 7.days
       # La dernière adhésion principale : celle encore ouverte (classe archivée) d'abord, puis la plus récemment quittée.

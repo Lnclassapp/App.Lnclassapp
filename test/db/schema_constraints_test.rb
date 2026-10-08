@@ -72,7 +72,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "knowledge_gaps" => { "status" => %w[pending remediated self_corrected] },
     "referrals" => { "source" => %w[link sponsor] },
     "teacher_profiles" => { "joined_via" => %w[standard colleague direction team code] }, # ADR-0082 §4.2
-    "classroom_students" => { "joined_via" => %w[standard link code] }, # ADR-0083 §4.4
+    "classroom_students" => { "joined_via" => %w[standard link code] }, # ADR-0085 §4.4
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
     "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
@@ -151,7 +151,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { profile.update_column(:joined_via, nil) } }
   end
 
-  test "IL-22: every classroom draws its own link token, opaque, unique (ADR-0083 §4.1)" do
+  test "IL-22: every classroom draws its own link token, opaque, unique (ADR-0085 §4.1)" do
     classrooms = Array.new(2) { create_classroom.reload }
     tokens = classrooms.map(&:link_token)
     assert_equal 2, tokens.uniq.size
@@ -163,7 +163,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { last.update_column(:link_token, nil) } }
   end
 
-  test "IL-22: a membership has a mandatory arrival channel, without default, among the three (ADR-0083 §4.4)" do
+  test "IL-22: a membership has a mandatory arrival channel, without default, among the three (ADR-0085 §4.4)" do
     column = connection.columns("classroom_students").find { |candidate| candidate.name == "joined_via" }
     assert_equal [ false, nil ], [ column.null, column.default ]
 
@@ -173,7 +173,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { membership.update_column(:joined_via, nil) } }
   end
 
-  test "IL-14: a removal names who removed, and only closes a membership that has ended (ADR-0083 §4.5)" do
+  test "IL-14: a removal names who removed, and only closes a membership that has ended (ADR-0085 §4.5)" do
     membership = Orm::ClassroomStudent.find_by!(student: create_student(classroom: create_classroom))
     teacher = create_teacher
     now = Time.current

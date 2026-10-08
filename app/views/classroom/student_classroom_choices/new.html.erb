@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_classroom_choices/new — « Choisis ta classe » : l'élève sans classe active choisit la sienne %>
 <%# Rôle : page de l'espace élève, la cascade seule (DRENA et établissement de sa dernière classe déjà choisis), un bouton ; 422/403 re-rendus %>
-<%# ADR  : 0040, 0083 · UDR : 0005, 0054, 0079 (§3.3, §3.4, §3.5) %>
+<%# ADR  : 0040, 0085 · UDR : 0005, 0054, 0081 (§3.3, §3.4, §3.5) %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
 
@@ -19,7 +19,7 @@
           <p><%= t(".link_invalid") %></p>
         </div>
       <% end %>
-      <%# Retiré de cette classe, classe complète, déjà inscrit : la raison en tête (UDR-0079 §3.5). %>
+      <%# Retiré de cette classe, classe complète, déjà inscrit : la raison en tête (UDR-0081 §3.5). %>
       <% if @form.errors[:base].any? %>
         <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
           <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>

@@ -71,7 +71,7 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     assert_equal({ controller: "teams/school_codes", action: "update" }, first_match("/teams/schools/abcdefghijkmno/code", method: "PATCH"))
   end
 
-  # ADR-0083 §4: the Lot 0 of inscription-eleve-sans-code draws the routes its vertical lots fill; /join and /c/<code>
+  # ADR-0085 §4: the Lot 0 of inscription-eleve-sans-code draws the routes its vertical lots fill; /join and /c/<code>
   # stay until the last lot.
   test "IL-02: the student signs up by /student-signup, picks a classroom through the cascade, and a classroom has a link" do
     id = "abcdefghijkmno"

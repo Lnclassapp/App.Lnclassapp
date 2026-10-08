@@ -13,7 +13,7 @@ module Factories
       Orm::User.create!(role:, contact:, pin:, last_name:, first_name:, gender:, team_role:, **attributes)
     end
 
-    # ADR-0083 §4.4: joined_via, the arrival channel, has no default in the database.
+    # ADR-0085 §4.4: joined_via, the arrival channel, has no default in the database.
     def create_student(classroom: nil, joined_via: "standard", joined_at: Time.current, **attributes)
       create_user(role: "student", **attributes).tap do |student|
         Orm::ClassroomStudent.create!(classroom:, student:, primary: true, joined_at:, joined_via:) if classroom

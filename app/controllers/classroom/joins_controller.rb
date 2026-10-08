@@ -1,12 +1,12 @@
 # 🌐 DELIVERY · Classroom::JoinsController
 # Rôle : /c/<jeton> ouvre l'inscription élève, la classe déjà choisie, ou l'entrée de l'élève sans classe ; /c/<code> (ancien chemin, jusqu'au Lot F)
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0083 · UDR : 0009, 0079
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 · UDR : 0009, 0081
 module Classroom
   class JoinsController < ApplicationController
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation].freeze
 
     allow_unauthenticated_access
-    # ADR-0041, ADR-0083 §4.1 : l'aperçu et l'inscription partagent le compteur ; au-delà, rien n'est révélé.
+    # ADR-0041, ADR-0085 §4.1 : l'aperçu et l'inscription partagent le compteur ; au-delà, rien n'est révélé.
     rate_limit to: 10, within: 1.minute, by: -> { request.remote_ip }, with: -> { refuse_too_many }
     before_action :refuse_other_roles
     # IL-18 : l'élève déjà dans une classe active n'a rien à rejoindre ; son envoi est refusé par JoinAsStudent, en 403.
@@ -31,7 +31,7 @@ module Classroom
 
     private
 
-    # Un paramètre de 12 caractères hexadécimaux est un jeton de lien (UDR-0079 §3.4) ; un code de 5 caractères ne l'est
+    # Un paramètre de 12 caractères hexadécimaux est un jeton de lien (UDR-0081 §3.4) ; un code de 5 caractères ne l'est
     # jamais, et garde l'ancien chemin.
     def link_token = @link_token ||= Dtos::Classroom::StudentRegistrationInput.normalize_link_token(params[:code])
 
@@ -79,7 +79,7 @@ module Classroom
       render :new, status: :not_found if @preview.nil?
     end
 
-    # Par le lien, la classe vient du jeton, résolu de nouveau (voie « link », qui lève un retrait : ADR-0083 §4.3) ;
+    # Par le lien, la classe vient du jeton, résolu de nouveau (voie « link », qui lève un retrait : ADR-0085 §4.3) ;
     # par l'ancien code, du code (jusqu'au Lot F).
     def join_as_student
       @form = Dtos::Classroom::JoinWithCodeInput.new

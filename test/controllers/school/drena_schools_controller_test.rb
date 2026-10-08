@@ -3,7 +3,7 @@ require "test_helper"
 # ID-08, SC-26 (UDR-0024): the active schools of a DRENA, public and rate limited — the « schools » frame of the
 # teacher sign-up (or of the waiting screen, scope=school_join) in HTML, a list of { public_id, name } in JSON.
 # Only the active schools, sorted by name.
-# IL-04, IL-06 (ADR-0083 §4.2, UDR-0079 §3.3): the student cascade reuses the template in its « picker_schools » frame
+# IL-04, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the student cascade reuses the template in its « picker_schools » frame
 # (scope=student_registration or student_classroom_choice), its select chained to the levels.
 class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
   setup do

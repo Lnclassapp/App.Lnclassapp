@@ -1,6 +1,6 @@
 // ⚡ FRONT · classroom/class_picker_controller — cascade DRENA → établissement → niveau → classe de l'inscription élève
 // Rôle : chaque choix pose le src du frame suivant et vide ceux d'après ; « Créer mon compte » attend une classe cochée ; liste absente → erreur
-// ADR  : 0051, 0083 · UDR : 0079 (§3.3), sur le modèle de school/drena_schools_controller
+// ADR  : 0051, 0085 · UDR : 0081 (§3.3), sur le modèle de school/drena_schools_controller
 import { Controller } from "@hotwired/stimulus"
 
 const DRENA = "__drena__"

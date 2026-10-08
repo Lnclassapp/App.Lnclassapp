@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
 # Rôle : accueil élève (CL-23, TR-04, AS-36) et son carrousel d'annonces ; sans classe principale active, « Choisis ta classe » et, une fois, le retrait
-# ADR  : 0026, 0030, 0040, 0078, 0083 · UDR : 0006, 0010, 0071, 0079 (§3.5)
+# ADR  : 0026, 0030, 0040, 0078, 0085 · UDR : 0006, 0010, 0071, 0081 (§3.5)
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze

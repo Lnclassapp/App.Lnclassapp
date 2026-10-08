@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::StudentWorkQuery
 # Rôle : travail des élèves de la direction (DS-07 à DS-10) : chiffres de chaque classe de l'année, d'un niveau, puis des élèves (lien, nouveaux, retrait)
-# ADR  : 0006, 0043, 0062, 0065, 0067, 0072, 0083 · UDR : 0052, 0074, 0079 (§3.6, §3.7) · rendu : standard ou remédiation ; requêtes en nombre fixe
+# ADR  : 0006, 0043, 0062, 0065, 0067, 0072, 0085 · UDR : 0052, 0074, 0081 (§3.6, §3.7) · rendu : standard ou remédiation ; requêtes en nombre fixe
 module Queries
   module School
     class StudentWorkQuery
@@ -12,12 +12,12 @@ module Queries
       StudentRow = Data.define(:display_name, :submitted_count, :average_percent)
       # students_count : élèves présents distincts de l'établissement ; un élève de deux classes compte une fois (UDR-0074).
       Overview = Data.define(:school_name, :school_year, :students_count, :classrooms)
-      # Une ligne de la page d'une classe : le travail de l'élève (work), et ce qui sert à la gérer (UDR-0079 §3.7) : son
-      # public_id pour le retrait (ADR-0083 §4.5), sa voie d'arrivée (StudentArrivalChannel), nouveau ou non (ADR-0083 §4.4).
+      # Une ligne de la page d'une classe : le travail de l'élève (work), et ce qui sert à la gérer (UDR-0081 §3.7) : son
+      # public_id pour le retrait (ADR-0085 §4.5), sa voie d'arrivée (StudentArrivalChannel), nouveau ou non (ADR-0085 §4.4).
       Member = Data.define(:public_id, :joined_via, :newcomer, :work) do
         def display_name = work.display_name
       end
-      # Ce que le bloc « Lien de la classe » lit (classroom/classrooms/_link, UDR-0079 §3.6).
+      # Ce que le bloc « Lien de la classe » lit (classroom/classrooms/_link, UDR-0081 §3.6).
       Link = Data.define(:public_id, :name, :link_token)
       # members : par nom ; students : leur travail, dans le même ordre.
       Detail = Data.define(:classroom, :link, :members) do
@@ -138,7 +138,7 @@ module Queries
                          average_percent: (total.average if total.students >= MIN_STUDENTS_FOR_AVERAGE))
       end
 
-      # ADR-0083 §4.4 : « nouveau » pendant ClassroomOverviewQuery::NEW_FOR, la règle de la page de l'enseignant.
+      # ADR-0085 §4.4 : « nouveau » pendant ClassroomOverviewQuery::NEW_FOR, la règle de la page de l'enseignant.
       def members(students, totals)
         since = Time.current - Queries::Classroom::ClassroomOverviewQuery::NEW_FOR
         students.map do |id, public_id, first_name, last_name, joined_via, joined_at|

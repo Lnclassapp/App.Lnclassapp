@@ -262,7 +262,7 @@ module Queries
         assert_equal %w[svt], row.subjects.map(&:slug)
       end
 
-      # IL-14, IL-17 (UDR-0079 §3.5): a student without an active classroom chooses one, the DRENA and the school of their
+      # IL-14, IL-17 (UDR-0081 §3.5): a student without an active classroom chooses one, the DRENA and the school of their
       # last primary classroom already chosen; a removal of less than 7 days ago says why they have no classroom.
       def last(student, now: Time.current) = StudentHomeQuery.new.last_classroom(student_id: student.id, now:)
 

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolLevelsQuery
 # Rôle : niveaux de la cascade élève : ceux où un établissement actif a une classe active de l'année ; le nom, rien d'autre
-# ADR  : 0062, 0083 · UDR : 0079
+# ADR  : 0062, 0085 · UDR : 0081
 module Queries
   module School
     class SchoolLevelsQuery

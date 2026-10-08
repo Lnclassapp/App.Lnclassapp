@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Classroom
-    # IL-11 (ADR-0083 §4.1) : changer le lien tire un nouveau jeton sous le verrou de la classe ; l'ancien est invalide
+    # IL-11 (ADR-0085 §4.1) : changer le lien tire un nouveau jeton sous le verrou de la classe ; l'ancien est invalide
     # aussitôt. Un seul lien par classe : le jeton est celui de la classe, pas celui de l'acteur.
     # IL-12 : ManageClassroomMembersPolicy décide, une fois la classe lue sous verrou.
     class ChangeClassroomLinkTest < ActiveSupport::TestCase
@@ -104,7 +104,7 @@ module UseCases
         assert_empty @classrooms.rotated
       end
 
-      # UDR-0079 §3.6 : le bloc n'est rendu que sur une classe active ; le lien d'une classe archivée ne sert déjà plus.
+      # UDR-0081 §3.6 : le bloc n'est rendu que sur une classe active ; le lien d'une classe archivée ne sert déjà plus.
       test "une classe archivée garde son jeton : :forbidden, raison classroom_archived" do
         @classroom.status = "archived"
 

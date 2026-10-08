@@ -38,7 +38,7 @@ module Queries
         assert_nil ClassroomHeaderQuery.new.call(public_id: "inconnue")
       end
 
-      # ADR-0083 §4.1, UDR-0079 §3.6 : le jeton du lien et l'établissement, faits de ManageClassroomMembersPolicy.
+      # ADR-0085 §4.1, UDR-0081 §3.6 : le jeton du lien et l'établissement, faits de ManageClassroomMembersPolicy.
       test "l'en-tête porte le jeton du lien de la classe et l'identifiant de son établissement" do
         school = create_school
         classroom = create_classroom(school:)
@@ -72,7 +72,7 @@ module Queries
         assert_not row.link_shown_to?(nil)
       end
 
-      test "UDR-0079 §3.6 : le lien d'une classe archivée n'est montré à personne, pas même à l'équipe" do
+      test "UDR-0081 §3.6 : le lien d'une classe archivée n'est montré à personne, pas même à l'équipe" do
         classroom = create_classroom(status: "archived")
         row = ClassroomHeaderQuery.new.call(public_id: classroom.public_id)
 

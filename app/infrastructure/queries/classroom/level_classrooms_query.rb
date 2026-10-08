@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::LevelClassroomsQuery
 # Rôle : classes de la cascade élève : celles, actives et de l'année, d'un niveau d'un établissement actif ; nom et « complète »
-# ADR  : 0041, 0062, 0083 · UDR : 0079
+# ADR  : 0041, 0062, 0085 · UDR : 0081
 module Queries
   module Classroom
     class LevelClassroomsQuery

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Classroom::JoinPolicy
 # Rôle : entrée d'un visiteur ou d'un élève dans une classe active sous son plafond ; l'élève retiré n'y revient que par le lien
-# ADR  : 0028, 0040, 0041, 0083
+# ADR  : 0028, 0040, 0041, 0085
 module Policies
   module Classroom
     class JoinPolicy

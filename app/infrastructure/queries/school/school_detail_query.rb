@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolDetailQuery
 # Rôle : fiche d'un établissement (SC-05) : en-tête, code et lien de l'équipe, classes par niveau et leur lien, enseignants et leur voie
-# ADR  : 0026, 0030, 0041, 0057, 0063, 0082, 0083 · UDR : 0036, 0044, 0050, 0078, 0079 (§3.7)
+# ADR  : 0026, 0030, 0041, 0057, 0063, 0083, 0085 · UDR : 0036, 0044, 0050, 0079, 0081 (§3.7)
 module Queries
   module School
     class SchoolDetailQuery
@@ -8,7 +8,7 @@ module Queries
                            :teachers, :national_code, :team_invite_token) do
         def classrooms_count = levels.sum { it.classrooms.size }
       end
-      # link_tokens : { public_id de la classe => jeton de son lien /c/<jeton> } (ADR-0083 §4.1), que l'équipe copie. À côté
+      # link_tokens : { public_id de la classe => jeton de son lien /c/<jeton> } (ADR-0085 §4.1), que l'équipe copie. À côté
       # des lignes tant que ClassroomRow porte le code : le retrait du code (Lot F) y ramènera le jeton.
       Level = Data.define(:name, :classrooms, :link_tokens)
       ClassroomRow = Data.define(:public_id, :name, :join_code_display, :students_count, :teacher_names, :status)

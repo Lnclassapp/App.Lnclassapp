@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::JoinPreviewQuery
 # Rôle : aperçu public d'une classe par son code ou par le jeton de son lien : nom de la classe, de l'établissement et du niveau
-# ADR  : 0041, 0083 · UDR : 0009, 0079
+# ADR  : 0041, 0085 · UDR : 0009, 0081
 module Queries
   module Classroom
     class JoinPreviewQuery
@@ -20,7 +20,7 @@ module Queries
         Row.new(classroom_name:, school_name:, level_name:) if classroom_name
       end
 
-      # ADR-0083 §4.1 : le lien n'est valable que pour une classe active d'un établissement actif.
+      # ADR-0085 §4.1 : le lien n'est valable que pour une classe active d'un établissement actif.
       # → LinkRow | nil (jeton inconnu ou changé, classe archivée, établissement en brouillon ou désactivé)
       def link(token:)
         values = token.presence && Orm::Classroom.joins(:school, :level)

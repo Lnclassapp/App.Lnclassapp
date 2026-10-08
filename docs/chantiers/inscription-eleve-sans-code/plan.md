@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Specs : [`prd.md`](prd.md) · [ADR-0083](../../decisions/adr/0083-inscription-eleve-sans-code-de-classe.md) · [UDR-0079](../../decisions/udr/0079-inscription-eleve-sans-code-de-classe.md)
+> Specs : [`prd.md`](prd.md) · [ADR-0085](../../decisions/adr/0085-inscription-eleve-sans-code-de-classe.md) · [UDR-0081](../../decisions/udr/0081-inscription-eleve-sans-code-de-classe.md)
 
 > ⚠️ **Préalable avant le Lot 0.** Les lots de `inscription-enseignant` qui livrent `Entities::Identity::FullName` et les contrôleurs Stimulus `identity--full-name`, `identity--phone-digits`, `identity--pin-match` sont fusionnés dans la branche de base : ce chantier les réutilise.
 
@@ -188,7 +188,7 @@ def removed_from?(classroom_id:, student_id:)                      = raise NotIm
                      `config/locales/school_admin/classrooms.fr.yml`
                      `test/controllers/school_admin/classrooms_controller_test.rb`
                      `app/controllers/classroom/classroom_students_controller.rb` · `app/views/classroom/classroom_students/destroy.turbo_stream.erb` · `test/controllers/classroom/classroom_students_controller_test.rb` *(ajout du 2026-10-07, si besoin : la réponse au `DELETE` du Lot D vise les identifiants de la page enseignant — `student_<public_id>`, `classroom_roster_title`, `classroom_roster_count`, `classroom_roster`, `classroom_headcount` ; la page de la direction les porte, ou reçoit sa propre réponse)*
-                     `app/domain/use_cases/classroom/remove_student.rb` · `test/domain/use_cases/classroom/remove_student_test.rb` · `app/views/classroom/classrooms/_roster.html.erb` *(ajout du 2026-10-08, décisions du porteur : le serveur refuse le retrait dans une classe archivée ; à 390 px, la pastille « Nouveau » passe sous le nom — UDR-0079 §3.7 amendée)*
+                     `app/domain/use_cases/classroom/remove_student.rb` · `test/domain/use_cases/classroom/remove_student_test.rb` · `app/views/classroom/classrooms/_roster.html.erb` *(ajout du 2026-10-08, décisions du porteur : le serveur refuse le retrait dans une classe archivée ; à 390 px, la pastille « Nouveau » passe sous le nom — UDR-0081 §3.7 amendée)*
 - **Dépend de**    : Lot C, Lot D
 - **Test associé** : `test/controllers/school_admin/classrooms_controller_test.rb` (IL-12 pour la direction : son établissement accordé, un autre 404 ; IL-13 et IL-14 depuis sa page)
 - **Done quand**   : la direction ouvre une classe de son établissement, copie et change son lien, voit les nouveaux arrivés et retire un élève ; elle ne peut rien sur la classe d'un autre établissement

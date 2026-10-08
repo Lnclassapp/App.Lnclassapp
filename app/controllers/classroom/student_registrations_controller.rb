@@ -1,16 +1,16 @@
 # 🌐 DELIVERY · Classroom::StudentRegistrationsController
 # Rôle : inscription élève publique : classe choisie dans la cascade, ou donnée par le jeton d'un lien ; succès : session, accueil élève
-# ADR  : 0026, 0028, 0050, 0062, 0083 · UDR : 0078, 0079
+# ADR  : 0026, 0028, 0050, 0062, 0085 · UDR : 0079, 0081
 module Classroom
   class StudentRegistrationsController < ApplicationController
     FIELDS = %i[full_name last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id level_slug
                 classroom_public_id link_token].freeze
-    # Repli sans JavaScript (UDR-0079 §3.3) : les choix reviennent en GET ; jamais les PIN, qui n'y sont pas relus.
+    # Repli sans JavaScript (UDR-0081 §3.3) : les choix reviennent en GET ; jamais les PIN, qui n'y sont pas relus.
     PICKER_FIELDS = %i[full_name last_name first_name gender contact drena_public_id school_public_id level_slug
                        classroom_public_id].freeze
 
     allow_unauthenticated_access
-    # ADR-0083 §4.6 : la règle de l'inscription, 5 envois par minute et par adresse.
+    # ADR-0085 §4.6 : la règle de l'inscription, 5 envois par minute et par adresse.
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many_posts }
     helper_method :class_picker_lists
 
@@ -18,7 +18,7 @@ module Classroom
       return redirect_to_home if authenticated?
 
       @form = Dtos::Classroom::StudentRegistrationInput.new(**picker_params)
-      # Posé par /c/<jeton> quand le lien n'est plus valable (UDR-0079 §3.4) ; lu une fois.
+      # Posé par /c/<jeton> quand le lien n'est plus valable (UDR-0081 §3.4) ; lu une fois.
       @link_invalid = flash[:link_invalid].present?
     end
 

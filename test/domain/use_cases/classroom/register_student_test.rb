@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Classroom
-    # IL-01, IL-03, IL-05, IL-07, IL-08, IL-09, IL-10, IL-19 (ADR-0083 §4.1 to §4.3): a visitor creates a student account
+    # IL-01, IL-03, IL-05, IL-07, IL-08, IL-09, IL-10, IL-19 (ADR-0085 §4.1 to §4.3): a visitor creates a student account
     # and enters at once the classroom chosen in the cascade (way « standard ») or given by a valid link (way « link »),
     # in one transaction under the classroom lock. A valid token prevails over the classroom sent; an invalid one falls
     # back to the standard way. No account survives a refusal.

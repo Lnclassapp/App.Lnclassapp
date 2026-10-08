@@ -1,7 +1,7 @@
 require "test_helper"
 require Rails.root.join("db/migrate/20261007110000_add_classroom_link_tokens_and_student_removal").to_s
 
-# ADR-0083 §4.1, §4.4, §4.5 (IL-22): on a live database, every existing classroom receives its link token and every
+# ADR-0085 §4.1, §4.4, §4.5 (IL-22): on a live database, every existing classroom receives its link token and every
 # existing membership the historical arrival channel, « code ». Each test runs in the rolled back transaction of the
 # test: PostgreSQL rolls the columns back with it.
 class AddClassroomLinkTokensAndStudentRemovalMigrationTest < ActiveSupport::TestCase

@@ -3,7 +3,7 @@ require "test_helper"
 # ID-01, ID-02, ID-07, CL-06, CL-07, CL-08, TR-cadre-1, Sécurité n° 5 (ADR-0040, ADR-0041, ADR-0050, UDR-0009):
 # a visitor opens /c/<code>, sees only the classroom, its level and its school, signs up as a student and lands home,
 # signed in; a signed-in student whose classroom is archived joins the new one; any other role is refused.
-# IL-08, IL-09, IL-10 (ADR-0083 §4.1, UDR-0079 §3.4): /c/<token> — 12 hexadecimal characters — opens the student sign-up
+# IL-08, IL-09, IL-10 (ADR-0085 §4.1, UDR-0081 §3.4): /c/<token> — 12 hexadecimal characters — opens the student sign-up
 # with the classroom already chosen; an invalid token opens the standard page with the alert. A 5-character code keeps
 # the former path above, unchanged, until Lot F.
 class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
@@ -320,7 +320,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_not_includes response.body, "6ème 1"
   end
 
-  test "UDR-0079 §3.4: a student without a classroom sees the single « Join this classroom » button, and joins by it" do
+  test "UDR-0081 §3.4: a student without a classroom sees the single « Join this classroom » button, and joins by it" do
     archived = create_classroom(school: @school, name: "6ème 3", status: "archived")
     student = create_student(classroom: archived)
     sign_in_as student
@@ -395,7 +395,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::ClassroomStudent.exists?(student:)
   end
 
-  test "UDR-0079 §3.4: an invalid link sends a student without a classroom to « Choose your classroom », with the alert" do
+  test "UDR-0081 §3.4: an invalid link sends a student without a classroom to « Choose your classroom », with the alert" do
     sign_in_as create_student
 
     get join_classroom_path("cccccccccccc")
@@ -408,7 +408,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_student_classroom_choice_path
   end
 
-  test "ADR-0083 §4.2: the link page shares the limit of 10 openings a minute" do
+  test "ADR-0085 §4.2: the link page shares the limit of 10 openings a minute" do
     token = link_token
     10.times { |index| get join_classroom_path(index.even? ? token : "cccccccccccc") }
 
