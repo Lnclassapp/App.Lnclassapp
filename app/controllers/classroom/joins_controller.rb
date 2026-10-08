@@ -49,7 +49,7 @@ module Classroom
 
     def send_enrolled_student_home
       return unless current_actor
-      return unless Queries::Identity::HomeDestinationQuery.new.call(actor: current_actor) == :student_home
+      return unless Queries::Identity::HomeDestinationQuery.new.enrolled?(actor: current_actor)
 
       redirect_to student_home_path
     end

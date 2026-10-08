@@ -194,12 +194,12 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_no_match "KFM37", response.body
   end
 
-  test "a student without an active classroom: one redirection, to a page that answers" do
+  test "IL-14: a student without an active classroom: one redirection, to the home that offers to choose one" do
     sign_in_as create_student
 
     get student_classroom_path
 
-    assert_redirected_to pending_account_path
+    assert_redirected_to student_home_path
     follow_redirect!
     assert_response :success
   end

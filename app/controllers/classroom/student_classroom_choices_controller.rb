@@ -31,7 +31,7 @@ module Classroom
     private
 
     def send_enrolled_home
-      redirect_to student_home_path if Queries::Identity::HomeDestinationQuery.new.call(actor: current_actor) == :student_home
+      redirect_to student_home_path if Queries::Identity::HomeDestinationQuery.new.enrolled?(actor: current_actor)
     end
 
     # Un refus de JoinPolicy (retiré de cette classe, classe complète) ou un élève déjà inscrit : la raison en tête, en 403.

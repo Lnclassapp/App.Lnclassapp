@@ -14,7 +14,7 @@ module Classroom
       return render_recent_activity if turbo_frame_request_id == RECENT_ACTIVITY_FRAME
 
       @home = query.call(student_id: current_actor.user_id)
-      return notice_removal if @home.nil?
+      return no_classroom if @home.nil?
 
       @announcements = announcements
     end
@@ -27,9 +27,10 @@ module Classroom
 
     def query = Queries::Classroom::StudentHomeQuery.new
 
-    # IL-14 : sans classe, l'accueil propose d'en choisir une (_no_classroom) ; un retrait récent (StudentHomeQuery) se dit
-    # dans le bandeau, une fois par retrait et par session.
-    def notice_removal
+    # IL-14 : sans classe, l'accueil propose d'en choisir une (_no_classroom), et l'historique s'il y en a un (lot R,
+    # ADR-0036) ; un retrait récent (StudentHomeQuery) se dit dans le bandeau, une fois par retrait et par session.
+    def no_classroom
+      @archived = Queries::Classroom::StudentArchiveQuery.new.any?(student_id: current_actor.user_id)
       removed_at = query.last_classroom(student_id: current_actor.user_id).recent_removal_at&.to_i
       return if removed_at.nil? || session[REMOVAL_NOTICE] == removed_at
 

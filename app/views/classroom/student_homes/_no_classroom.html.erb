@@ -1,10 +1,14 @@
 <%# 🌐 UI · classroom/student_homes/_no_classroom — l'accueil de l'élève sans classe active (classe archivée, ou retiré) %>
-<%# Rôle : à la place de la carte de classe, « Choisis ta classe » et un seul bouton vers la cascade %>
-<%# ADR  : 0040, 0085 · UDR : 0081 (§3.5) %>
+<%# Rôle : à la place de la carte de classe, « Choisis ta classe », son bouton vers la cascade et, s'il existe, l'historique %>
+<%# ADR  : 0036, 0040, 0085 · UDR : 0081 (§3.5) %>
 <%= ui_card title: t(".title"), icon: "academic-cap", id: "student_home_no_classroom" do %>
   <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
     <p class="text-sm text-mute"><%= t(".no_classroom") %></p>
-    <%= ui_button t(".choose"), href: new_student_classroom_choice_path, variant: :brand, icon_end: "arrow-right",
-                                class: "shrink-0" %>
+    <div class="flex shrink-0 flex-col gap-2 sm:flex-row">
+      <%= ui_button t(".choose"), href: new_student_classroom_choice_path, variant: :brand, icon_end: "arrow-right" %>
+      <% if @archived %>
+        <%= ui_button t(".archive"), href: student_archive_path, variant: :secondary, icon: "archive-box" %>
+      <% end %>
+    </div>
   </div>
 <% end %>
