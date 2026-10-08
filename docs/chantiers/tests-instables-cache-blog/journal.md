@@ -10,6 +10,10 @@
 
 ## Ce qui a dérapé
 
+- (1) Reproduction rouge : la première lecture terminée 2 s après l'instant de référence donne `Expected: 2, Actual: 1`, le message vu dans `bin/ci`. Correctif : `freeze_time` pendant tout le test (`5e69402c`).
+- (2) Reproduction rouge dans le parcours du blog : image du texte insérée à la 12e touche de `cover_alt`, tapée à vitesse humaine → `Expected: "Une élève révise à sa table", Actual: "Une élève ré"`. Correctif dans `rich_text_editor_controller.js` (`keepOtherFieldsFocus`) : quand un autre champ a le focus, Trix mémorise sa sélection sans la remettre dans la page (`6a57213f`). Cas symétrique ajouté : une image qui arrive pendant la frappe dans le texte laisse le focus dans le texte.
+- Premier `bin/ci` du correctif (2) faussé : la base de développement portait `teacher_profiles.joined_via` venue de la branche `inscription-enseignant` ; `db:prepare` a réécrit `db/schema.rb` avec elle (1 156 erreurs). Schéma restauré, second passage vert. Leçon : une base de développement partagée entre branches qui ajoutent des migrations fausse `bin/ci`.
+
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - …
@@ -40,6 +44,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Articles du blog dont le texte aurait reçu des caractères destinés à un autre champ | Indiscernables automatiquement | Relecture des brouillons par l'équipe |
 | Deux lancements de tests simultanés dans le même dossier partagent les bases des workers | Outillage (memo, hors périmètre) | à ouvrir si cela se reproduit |
 | Signaler à Trix la restauration de sélection hors focus | Externe | — |
+| Le correctif s'appuie sur l'API interne `editorController.selectionManager` de Trix 2.1.x ; `package.json` déclare `^2.1.19` (seul `yarn.lock` fige 2.1.19) | Figer la version est une décision du porteur | à revoir à chaque montée de Trix |
 
 ## Clôture
 
