@@ -74,7 +74,8 @@ Règles d'autorisation. L'inscription est publique et refusée à toute personne
 | Élève retiré d'une classe qui la choisit par la voie standard | 403, alerte neutre : « Tu ne peux pas rejoindre cette classe. Demande son lien à ton enseignant. » |
 | Élève retiré qui ouvre le lien de cette classe | Il la rejoint ; le retrait est levé ; il porte de nouveau « Nouveau » |
 | Élève dans une classe active qui ouvre `/student-signup`, `/students/classroom/new` ou un lien | Renvoyé vers son accueil ; `POST` → 403 avec « Tu es déjà inscrit dans une classe. » |
-| Enseignant, direction ou équipe connectés qui ouvrent l'inscription ou un lien | Renvoyés vers leur accueil ; `POST` → 403 |
+| Enseignant, direction ou équipe connectés qui ouvrent l'inscription | Renvoyés vers leur accueil ; `POST` → 403 |
+| Enseignant, direction ou équipe connectés qui ouvrent un lien de classe ou « Choisis ta classe » | 403 *(corrigé le 2026-10-08 sur le comportement construit : ces deux pages ne servent qu'à l'élève)* ; `POST` → 403 |
 | Retrait d'un élève déjà parti (deux gestes simultanés) | Le second réussit sans erreur ; un seul départ enregistré |
 | Retrait par un enseignant d'une autre classe, ou une direction d'un autre établissement | 404 (la classe ne lui existe pas) |
 | Ancienne adresse `/join` | Redirigée vers `/student-signup` *(proposé)* |
