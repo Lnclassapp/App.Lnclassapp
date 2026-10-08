@@ -1,4 +1,5 @@
-// App « Lnclass » des élèves (ADR-0084) : une coque Hotwire Native qui affiche les pages du site.
+// App « Lnclass Teacher » des enseignants (ADR-0085) : une coque Hotwire Native qui affiche les pages du site, sur le
+// socle partagé avec l'app élèves.
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,7 +8,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-// Clé d'envoi hors dépôt (ADR-0084 §4.8) : variables d'environnement, ou local.properties sur le poste.
+// Clé d'envoi hors dépôt (ADR-0084 §4.8), la même que celle de l'app élèves : variables d'environnement, ou
+// local.properties sur le poste.
 val localProperties = Properties().apply {
     val file = rootProject.file("local.properties")
     if (file.exists()) file.inputStream().use { load(it) }
@@ -19,11 +21,11 @@ fun signingValue(env: String, local: String): String? =
 val keystorePath = signingValue("LNCLASS_KEYSTORE_PATH", "lnclass.keystore.path")
 
 android {
-    namespace = "com.lnclass.student"
+    namespace = "com.lnclass.teacher"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.lnclass.student"
+        applicationId = "com.lnclass.teacher"
         minSdk = 28 // Android 9, plancher de Hotwire Native Android (ADR-0070 amendé)
         targetSdk = 36 // Android 16 : le Play Store relève chaque fin août l'API cible exigée
         versionCode = 1
@@ -53,7 +55,7 @@ android {
             applicationIdSuffix = ".develop"
             buildConfigField("String", "BASE_URL", "\"https://app-develop.lnclass.com\"")
             manifestPlaceholders["appHost"] = "app-develop.lnclass.com"
-            resValue("string", "app_name", "Lnclass develop")
+            resValue("string", "app_name", "Lnclass Teacher develop")
             signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
         }
         create("recette") {
@@ -61,7 +63,7 @@ android {
             applicationIdSuffix = ".recette"
             buildConfigField("String", "BASE_URL", "\"https://app-staging.lnclass.com\"")
             manifestPlaceholders["appHost"] = "app-staging.lnclass.com"
-            resValue("string", "app_name", "Lnclass recette")
+            resValue("string", "app_name", "Lnclass Teacher recette")
             // Sans clé d'envoi, la recette se signe avec la clé de debug du poste : un APK de test, jamais publié.
             signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
         }
@@ -69,7 +71,7 @@ android {
             dimension = "environment"
             buildConfigField("String", "BASE_URL", "\"https://lnclass.com\"")
             manifestPlaceholders["appHost"] = "lnclass.com"
-            resValue("string", "app_name", "Lnclass")
+            resValue("string", "app_name", "Lnclass Teacher")
             signingConfig = signingConfigs.findByName("upload")
         }
     }
