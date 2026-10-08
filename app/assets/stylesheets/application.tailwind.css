@@ -454,6 +454,31 @@
   }
 }
 
+/* UDR-0080 §3.2 — `ui_modal placement: :drawer` : un panneau ancré à gauche, sur toute la hauteur, à toutes les
+   largeurs ; il glisse depuis la gauche, en mouvement autorisé seulement. Hors couche, comme la feuille ci-dessus. */
+dialog.dialog-drawer {
+  margin: 0 auto 0 0;
+  width: min(20rem, 85vw);
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  overflow-y: auto;
+  border-radius: 0 var(--radius-sheet) var(--radius-sheet) 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.dialog-drawer[open] {
+    animation: drawer-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes drawer-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
 /* Chantier ux-pages-eleve — formules KaTeX lisibles sur téléphone. Hors couche, exprès : l'emporte sur katex.min.css.
    1. Une formule en ligne ne se coupe plus en fin de ligne (« 1 ≤ 2 + / sin x ≤ 3 ») : elle passe entière à la ligne.
    2. Une formule centrée trop large défile dans sa propre largeur au lieu d'élargir la page.

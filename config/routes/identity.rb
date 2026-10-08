@@ -1,7 +1,9 @@
 # 🌐 DELIVERY · routes du contexte identity
-# Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil
-# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0071, 0077
+# Rôle : connexion, session, second facteur, PIN oublié, inscription enseignant, invitations, profil, liens de l'app Android
+# ADR  : 0031, 0032, 0038, 0050, 0055, 0057, 0060, 0063, 0071, 0077, 0084
 get "login", to: "identity/sessions#new", as: :new_session
+# ADR-0084 §4.7 : Android vérifie ici que l'app « Lnclass » peut ouvrir les liens du site (/c/, /join).
+get ".well-known/assetlinks", to: "identity/asset_links#show", as: :android_asset_links, format: true, constraints: { format: :json }
 resource :session, only: %i[create destroy], controller: "identity/sessions" # session_path, gelé : DELETE = « Se déconnecter »
 namespace :identity do
   resource :second_factor, only: %i[new create], path: "second-factor"
