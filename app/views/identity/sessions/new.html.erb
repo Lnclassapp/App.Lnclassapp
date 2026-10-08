@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/sessions/new — connexion par numéro et PIN : un titre, un formulaire, une action, pour tous les rôles %>
 <%# Rôle : deux colonnes à partir de lg ; échec re-rendu en 422 par Turbo ; focus sur le numéro, ou sur le PIN pré-rempli %>
-<%# ADR  : 0050, 0084 · UDR : 0005, 0019, 0054 (§3.2 logo, §3.3 focus, §3.4 infobulle, §3.8 numéro pré-rempli), 0057, 0060, 0080 (§3.4) %>
+<%# ADR  : 0050, 0084, 0085 · UDR : 0005, 0019, 0054 (§3.2 logo, §3.3 focus, §3.4 infobulle, §3.8 numéro pré-rempli), 0057, 0060, 0080, 0081 (§3.4) %>
 <% page_title t(".page_title") %>
 <main class="grid min-h-dvh bg-paper lg:grid-cols-2">
   <section class="hidden items-center justify-center bg-brand-soft p-10 lg:flex">
@@ -25,12 +25,13 @@
       <%= ui_card title: t(".title"), heading: :h1, padding: :lg do %>
         <%= form_with model: @form, scope: :session, url: session_path, id: "session-form", class: "space-y-5" do |form| %>
           <% if @wrong_app %>
-            <%# La coque ouvre dans le navigateur un lien en target="_blank". %>
+            <%# Le message selon la coque et l'app proposée ; la coque ouvre dans le navigateur un lien en target="_blank". %>
+            <% refusal = ".wrong_app_for.#{@wrong_app[:shell]}.#{@wrong_app[:app]}" %>
             <div id="wrong-app" role="alert">
-              <%= ui_toast safe_join([ t(".wrong_app.body"), " ",
-                                       link_to(t(".wrong_app.link"), "https://lnclass.com", target: "_blank", rel: "noopener",
+              <%= ui_toast safe_join([ t("#{refusal}.body"), " ",
+                                       link_to(t("#{refusal}.link"), @wrong_app[:url], target: "_blank", rel: "noopener",
                                                class: "font-medium text-brand-strong underline underline-offset-4") ]),
-                           type: :warning, title: t(".wrong_app.title"), persistent: true %>
+                           type: :warning, title: t("#{refusal}.title"), persistent: true %>
             </div>
           <% end %>
           <% if @form.errors[:base].any? %>
