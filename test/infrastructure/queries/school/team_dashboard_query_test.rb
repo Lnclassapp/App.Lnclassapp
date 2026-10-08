@@ -26,7 +26,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     assert_equal [ 0, 0, 0, 0 ], board.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :assignments_count)
     assert_nil board.average_score
     assert_equal Query::Accounts.new(students: 0, teachers: 0, team: 0), board.accounts
-    assert_equal Query::AppOpeners.new(students: 0, teachers: 0), board.app_openers
+    assert_equal Query::AppOpeners.new(students: 0, teachers: 0, android_students: 0), board.app_openers
     assert_equal Query::Coverage.new(active: 0, with_classroom: 0, with_teacher: 0, with_student: 0), board.schools
     assert_equal 0, board.classrooms_count
     assert_equal 0, board.placed_students_count
@@ -224,8 +224,23 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     create_teacher(app_opened_at: 3.days.ago)
     create_team_member.update!(app_opened_at: 1.hour.ago)
 
-    assert_equal Query::AppOpeners.new(students: 4, teachers: 1), dashboard.app_openers
-    assert_equal Query::AppOpeners.new(students: 5, teachers: 1), dashboard(period: "30d").app_openers
+    assert_equal Query::AppOpeners.new(students: 4, teachers: 1, android_students: 0), dashboard.app_openers
+    assert_equal Query::AppOpeners.new(students: 5, teachers: 1, android_students: 0), dashboard(period: "30d").app_openers
+  end
+
+  # CA-6 (ADR-0084 §4.6): the students who opened the Android app in the period, a part of the students who opened an
+  # installed app; an account opened from both counts once.
+  test "app openers count the students who opened the Android app in the period, within the installed app's students" do
+    since = Period.parse("7d", today: Date.current).since.in_time_zone
+    create_student(android_opened_at: 1.day.ago)
+    create_student(android_opened_at: since, app_opened_at: 2.days.ago)
+    create_student(android_opened_at: since - 1.second)
+    create_student(android_opened_at: 1.day.ago, anonymized_at: Time.current)
+    create_student(app_opened_at: 1.day.ago, android_opened_at: 20.days.ago)
+    create_teacher(app_opened_at: 3.days.ago)
+
+    assert_equal Query::AppOpeners.new(students: 3, teachers: 1, android_students: 2), dashboard.app_openers
+    assert_equal Query::AppOpeners.new(students: 4, teachers: 1, android_students: 4), dashboard(period: "30d").app_openers
   end
 
   test "under a DRENA filter, app openers are the territory's placed students and attached teachers" do
@@ -238,8 +253,11 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     end
     create_student(app_opened_at: 1.day.ago)
 
-    assert_equal Query::AppOpeners.new(students: 1, teachers: 1), dashboard(drena: here.public_id).app_openers
-    assert_equal Query::AppOpeners.new(students: 3, teachers: 2), dashboard.app_openers
+    placed_student(create_classroom(school: create_school(drena: here)), android_opened_at: 1.day.ago)
+    create_student(android_opened_at: 1.day.ago)
+
+    assert_equal Query::AppOpeners.new(students: 2, teachers: 1, android_students: 1), dashboard(drena: here.public_id).app_openers
+    assert_equal Query::AppOpeners.new(students: 5, teachers: 2, android_students: 2), dashboard.app_openers
   end
 
   # Non-regression of the placement definition (chantier cache-ecrans-lourds, lot 2): the total, the levels, the DRENA
@@ -401,7 +419,8 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
     assert_equal small, count_queries { dashboard(drena: nil) }
     assert_equal filtered_small, count_queries { dashboard(drena: Orm::Drena.first.public_id) }
-    # ADR-0082 §4.4: one grouped query more for the app openers (16 and 19 before).
+    # ADR-0082 §4.4: one grouped query more for the app openers (16 and 19 before); ADR-0084 §4.6: the Android part is
+    # read by that same query.
     assert_equal [ 17, 20 ], [ small, filtered_small ], "national, then under a DRENA filter with its school rows (ADR-0062)"
   end
 
