@@ -46,7 +46,7 @@ L'enseignant, la direction et l'équipe voient aujourd'hui un code à dicter ou 
 
 - Un seul `form_with model: @form, scope: :student_registration, url: student_registrations_path, id: "student-registration-form"`.
 - `data-controller="classroom--class-picker identity--phone-digits identity--pin-match"`.
-- Le bloc `role="alert"` des erreurs `base` (classe complète, élève retiré, déjà inscrit) reste en tête du formulaire, classes `bg-error-soft text-error` de l'UDR-0009.
+- Le bloc `role="alert"` des erreurs `base` (classe complète, élève retiré, déjà inscrit) reste en tête du formulaire, classes `bg-error-soft text-error` de l'UDR-0009. *Amendé le 2026-10-08 (challenger de la phase 5)* : après un refus, il reçoit le focus (`tabindex="-1"`, cible `field` du contrôleur `autofocus`) et la page défile jusqu'à lui (`scroll-mt-24`, sous l'en-tête fixe) — sur l'inscription, « Choisis ta classe » et la page du lien.
 - Champ caché `link_token`, seulement quand la classe vient d'un lien valide.
 - Trois `<fieldset class="space-y-4">`, chaque `<legend>` avec `mb-3 text-xs font-semibold tracking-wider text-mute uppercase` :
 
@@ -139,7 +139,7 @@ L'adresse du lien n'est **pas** affichée en clair : seuls les boutons la porten
 - Formulaire `button_to`/`form_with url: classroom_student_path(classroom.public_id, student.public_id), method: :delete`.
 - Réponse : Turbo Stream qui retire la ligne `#student_<public_id>` (*amendé le 2026-10-08, porteur* : l'identifiant existant de la ligne est gardé ; un index change avec la recherche et la réponse au retrait ne le connaît pas), remplace le titre (compteur et pastille) et pose le toast « %{name} a été retiré de la classe. ». Si la liste devient vide, le stream remplace `#classroom_roster` par son état vide existant.
 
-**Page de classe de la direction** (`school_admin/classrooms/show`) : mêmes pastilles, même menu et même modale sur ses lignes numérotées ; le bloc §3.6 au-dessus des trois tuiles.
+**Page de classe de la direction** (`school_admin/classrooms/show`) : mêmes pastilles, même menu et même modale sur ses lignes numérotées ; le bloc §3.6 au-dessus des trois tuiles. *Amendé le 2026-10-08 (porteur, challenger de la phase 5)* : même ordre que la page de l'enseignant (les nouveaux d'abord, du plus récent au plus ancien, puis par nom) ; sous `sm`, chaque élève est une ligne empilée — nom, pastille et voie, puis « Devoirs rendus : … » et « Score moyen : … », le ⋮ à droite —, l'en-tête du tableau en `sr-only` ; à partir de `sm`, le tableau.
 
 **Fiche d'établissement de l'équipe** (`teams/schools/_classroom_group`) : la ligne `dt`/`dd` du code est remplacée par un `ui_copy_button` « Copier le lien » ; le changement de lien et le retrait se font sur la page de la classe, que l'équipe ouvre déjà.
 
