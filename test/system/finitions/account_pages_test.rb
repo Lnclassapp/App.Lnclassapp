@@ -9,7 +9,7 @@ class Finitions::AccountPagesTest < ApplicationSystemTestCase
   PROFILE_MODALS = {
     "profile_name_last_name" => [ :edit_profile_name_path, "Modifier mon nom" ],
     "contact_change_current_pin" => [ :edit_profile_contact_path, "Changer mon numéro" ],
-    "pin_change_current_pin" => [ :edit_profile_pin_path, "Changer mon PIN" ],
+    "pin_change_current_pin" => [ :edit_profile_pin_path, "Changer mon code secret" ],
     "profile_photo_photo" => [ :edit_profile_photo_path, "Ma photo" ]
   }.freeze
 

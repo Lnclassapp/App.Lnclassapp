@@ -251,11 +251,11 @@ class ComponentsHelperTest < ActionView::TestCase
 
   test "an invalid PIN keeps its error wiring next to the reveal button" do
     record = Record.new
-    record.errors.add(:pin, "PIN incorrect.")
+    record.errors.add(:pin, "Code secret incorrect.")
     show view.fields(:user, model: record) { |form| ui_field(form, :pin, as: :password, reveal: true) }
 
     assert_select "input#user_pin.border-error[aria-invalid=true][aria-describedby=user_pin_error]"
-    assert_select "p#user_pin_error", text: "PIN incorrect."
+    assert_select "p#user_pin_error", text: "Code secret incorrect."
   end
 
   # --- Groupe de boutons radio ------------------------------------------------
@@ -589,6 +589,24 @@ class ComponentsHelperTest < ActionView::TestCase
     end
     assert_select "a[href='/teachers/invite']:not([id]) span.bg-tint-red"
     assert_select "a[href='/teachers/invite'] span.sr-only", 0
+  end
+
+  # UDR-0079 §3.7 : la bulle « Inviter » ouvre WhatsApp dans un nouvel onglet et porte l'action de partage ; les attributs
+  # de link_html vont sur le lien, sans rien changer d'autre. Sans link_html, le lien est exactement celui d'avant.
+  test "ui_subject_bubble merges link_html on its link, and renders the same link without it" do
+    plain = ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite))
+    assert_equal plain, ui_subject_bubble(label: "Inviter", href: "/teachers/invite", illustration: subject_illustration(:invite),
+                                          link_html: {})
+
+    show ui_subject_bubble(label: "Inviter", href: "https://wa.me/?text=x", illustration: subject_illustration(:invite), id: "invite",
+                           link_html: { target: "_blank", rel: "noopener", data: { action: "share#count", share_channel_param: "whatsapp" } })
+
+    assert_select "a#invite.min-h-tap.rounded-ln[href='https://wa.me/?text=x'][target=_blank][rel=noopener]" \
+                  "[data-action='share#count'][data-share-channel-param=whatsapp]" do
+      assert_select "span.size-15.rounded-full.bg-tint-red img[alt='']"
+      assert_select "span", text: "Inviter"
+    end
+    assert_select "a:not([target])", 0
   end
 
   # Constat du challenger : le nom accessible se lit « Tle D, cours de … », sans espace avant la virgule.

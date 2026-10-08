@@ -7,8 +7,8 @@ fr:
         first_name: "Prénom(s)"
         gender: "Genre"
         contact: "Numéro de téléphone"
-        pin: "PIN"
-        pin_confirmation: "Confirmation du PIN"
+        pin: "Code secret"
+        pin_confirmation: "Confirmation du code secret"
     errors:
       models:
         dtos/classroom/join_with_code_input:
@@ -34,10 +34,10 @@ fr:
               invalid: "Saisis un numéro ivoirien à 10 chiffres, par exemple 07 01 02 03 04."
               taken: "Ce numéro est déjà utilisé."
             pin:
-              blank: "Choisis un PIN à 4 chiffres."
-              invalid: "Le PIN compte 4 chiffres."
+              blank: "Choisis un code secret à 4 chiffres."
+              invalid: "Le code secret compte 4 chiffres."
             pin_confirmation:
-              confirmation: "Les deux PIN ne sont pas identiques."
+              confirmation: "Les deux codes secrets ne sont pas identiques."
   classroom:
     join_codes:
       new:
