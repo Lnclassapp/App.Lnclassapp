@@ -21,6 +21,13 @@
 | 2026-10-07 | Lot D : la ligne garde son identifiant `#student_<public_id>` et la modale `remove-student-<public_id>`, au lieu de `#classroom_student_<index>` (UDR-0079 §3.7) | La réponse au `DELETE` ne connaît pas l'index, qui change avec la recherche ; 4 tests système visent déjà `#student_<public_id>` | Validé par le porteur le 2026-10-08 : UDR-0079 §3.7 amendée |
 | 2026-10-07 | Lot D : retirer un élève qui n'est ni membre actif ni retiré de la classe → 404 ; un élève déjà retiré → succès sans écriture | La réponse nomme l'élève : un succès sur tout identifiant laisserait lire le nom de n'importe quel élève | Non |
 | 2026-10-07 | Lot D : la réponse au `DELETE` met aussi à jour `#classroom_headcount` et `#classroom_roster_count` (recherche transmise par un champ caché `q`) | L'effectif de l'en-tête et le compte filtré doivent suivre | Non |
+| 2026-10-08 | Lot B : `JoinAsStudent#call(actor:, dto: nil, code: nil)` ; le `dto` est `StudentRegistrationInput` (jeton → voie `link`, qui lève le retrait ; sinon voie `standard`, mêmes vérifications que `RegisterStudent`) ; `LinkRow#join_code` supprimé | Le pont du Lot A est défait ; le chemin `code:` reste pour `/join` jusqu'au Lot F | Non |
+| 2026-10-08 | Lot B : l'élève dans une classe active est refusé d'abord, en 403 `already_enrolled` (était un 422 `:conflict`) | IL-18 | Non |
+| 2026-10-08 | Lot B : `/students` affiche, pour l'élève sans classe active, le bonjour et la seule carte « Choisis ta classe » au lieu de rediriger vers `pending_account` | Les autres blocs suivent le niveau de la classe et seraient vides | Non |
+| 2026-10-08 | Lot B : « retrait récent » = dernière adhésion principale retirée il y a moins de 7 jours ; annoncé une fois par `session[:removal_noticed_at]` | Sans colonne : la durée est celle de « Nouveau » (ADR-0083 §4.4) | Non |
+| 2026-10-08 | Lot E : la page de la direction porte les identifiants de la page enseignant (`#student_<public_id>`, `h2#classroom_roster_title`) ; la réponse au retrait côté direction finit par `turbo_stream.refresh(request_id: nil)` | Remet à jour tuiles, sous-titre et état vide sans écrire un second stream ; modèle déjà utilisé par l'équipe | Non |
+| 2026-10-08 | Lot E : bloc du lien et bouton « Chercher » marqués permanents, avec des identifiants propres à la classe | Le rafraîchissement par fusion remettait à l'état serveur ce que Stimulus avait montré ou caché | Non |
+| 2026-10-08 | Lot E : sur la page de la direction, les élèves restent triés par nom (pas de nouveaux en tête) | L'UDR ne demande à la direction que pastilles, menu et modale | Non |
 
 ## Ce qui a dérapé
 
@@ -32,6 +39,9 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Vague 2, bases des worktrees (2026-10-07).** `RAILS_ENV=test bin/rails db:prepare` sur une base neuve la **remplit avec les seeds** : toute fabrique `create_level` / `create_drena` lève alors `PG::UniqueViolation`. Parade : `RAILS_ENV=test bin/rails db:schema:load`. À utiliser d'emblée pour préparer la base de test d'un worktree.
 - **Vague 2, fusion (2026-10-07).** Le Lot C n'a pas lancé les tests système : son bloc du lien, posé à côté du code, rendait ambigus « Copier le lien » et « Partager sur WhatsApp » dans trois tests système hors liste (`classroom_page_test`, `finitions/classroom_test`) et contredisait une assertion de `classrooms_controller_test.rb` (Lot D). Corrigé à la fusion (885ad96) en visant le bloc du code. Consigne pour les vagues suivantes : **chaque lot qui touche une vue lance `bin/rails test:system`**.
 - **Lots A et D, tests de concurrence (2026-10-07).** Écrits avant le code, ils attendaient un verrou qui ne venait jamais : `Queue#pop` bloque sans fin (≈ 10 min perdues). Corrigé par `locked.pop(timeout: 10)` dans une assertion ; le `join_capacity_test` d'origine avait le même défaut. Et `pkill -f "bin/rails test"` tue le shell qui le lance.
+- **Vague 3, tests système en parallèle (2026-10-08).** Les lots B et E ont lancé `bin/rails test:system` en même temps sur la même machine : 9 et 10 échecs, dits « instables ». Relancée seule après la fusion, la suite n'a donné que les 2 échecs attendus (`join_test.rb:64`, IL-18 ; `remediation_handed_in_test.rb:48`, nouvelle colonne de la direction), corrigés en 58edfee. **Les suites système ne se lancent pas en parallèle** ; un échec « instable » se vérifie par une relance seule avant d'être écarté.
+- **Lot E (2026-10-08).** Supposé que les éléments modifiés par Stimulus survivraient au rafraîchissement par fusion : faux pour « Copier le lien » et « Chercher » (≈ 15 min, vu sur les captures).
+- **Lot B (2026-10-08).** Un test système jetable de captures laissé dans `test/system` pendant la suite complète fait échouer `ci_plan_test` et `system_budget_test` : le supprimer avant de lancer la suite.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -44,6 +54,9 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - `test/views/page_titles_test.rb` exige `page_title` dans toute vue non partielle, frames de la cascade compris (seul `drena_schools/index` est exempté) ; `page_title` ne remplace pas un titre déjà posé.
 - SimpleCov ne mesure que les `.rb` : les vues ERB ne comptent pas dans les 100 %.
 - Dans une vue, la valeur par défaut d'un local strict peut lire une variable d'instance du contrôleur (`_roster` prend `@can_remove_students` par défaut) ; une cible Stimulus peut être l'élément qui porte le contrôleur (`data-controller="autofocus" data-autofocus-target="field"`).
+- Une classe archivée garde l'adhésion ouverte (`left_at` nul) : `primary_for` la rend et `leave_primary` la ferme au changement de classe. Écrire une seconde adhésion principale dans un test exige de fermer la première (index unique partiel).
+- `turbo_stream.refresh(request_id: nil)` remet une page à jour par fusion en gardant le défilement et les toasts (permanents) ; tout élément montré ou caché par Stimulus revient à son état serveur, sauf s'il est permanent.
+- La page de la direction n'affiche que les classes actives de l'année : une classe archivée y est en 404.
 
 ## Dette laissée derrière
 
@@ -60,6 +73,11 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | À 390 px, un nom long est tronqué à côté de la pastille « Nouveau » | Le porteur a décidé le 2026-10-08 : la pastille passe sous le nom sur téléphone ; UDR-0079 §3.7 amendée | Lot E |
 | `roster.empty_description` parle encore du code de la classe | Texte du code | Lot F |
 | Sans JavaScript, « Continuer » envoie tout le formulaire d'inscription en `GET` (un PIN déjà tapé irait dans l'URL ; le serveur ne le relit pas) | Cas improbable : la classe se choisit avant le PIN | — |
+| **L'élève sans classe n'arrive pas sur « Choisis ta classe » à la connexion** : `Entities::Identity::HomeDestination` l'envoie vers `pending_account` (« Demande le code de ta classe », bouton vers `/join`) ; `student_classrooms#show` aussi. Une fois `/join` redirigé, il tournerait en rond | Fichiers hors de la liste B | **Lot F (bloquant)** |
+| Règle « classe de la cascade » (`listed?`) et `class_picker_lists` recopiées entre `RegisterStudent` / `JoinAsStudent` et leurs contrôleurs | Fichiers hors liste | Lot F (extraction) |
+| Chemin `code:` de `JoinAsStudent` et `lock_by_join_code` | Ancien chemin `/join` | Lot F |
+| Titre de la liste des élèves écrit trois fois (`_roster`, stream du retrait, page de la direction) | Pas de partial dans les listes | Lot F |
+| À 390 px, le tableau de la direction défile en largeur : le menu ⋮ et les chiffres ne se voient qu'en faisant défiler, et le nom disparaît alors | Largeur minimale d'avant le chantier ; hors UDR | Lot F (proposé : lignes empilées sur téléphone, à valider) |
 
 ## Clôture
 
