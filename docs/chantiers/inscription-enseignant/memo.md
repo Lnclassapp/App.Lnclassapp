@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en revue (PR vers `Develop`) |
+| **Statut** | livré (fusionné dans `Develop` le 2026-10-08) |
 | **Ouvert le** | 2026-10-07 |
 | **Branche** | `feature/inscription-enseignant` |
 | **Programme** | — |

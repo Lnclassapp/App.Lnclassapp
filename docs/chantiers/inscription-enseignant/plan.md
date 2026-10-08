@@ -321,8 +321,8 @@ Contrôle mécanique (`awk … | sort | uniq -d`, 2026-10-07) : 17 doublons, don
 - [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [x] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >
