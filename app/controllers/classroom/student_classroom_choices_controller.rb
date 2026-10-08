@@ -1,0 +1,78 @@
+# 🌐 DELIVERY · Classroom::StudentClassroomChoicesController
+# Rôle : « Choisis ta classe » de l'élève sans classe active (archivée, ou retiré) : la cascade, sa dernière école déjà choisie ; succès : accueil
+# ADR  : 0026, 0040, 0062, 0083 · UDR : 0079 (§3.3, §3.4, §3.5)
+module Classroom
+  class StudentClassroomChoicesController < AuthenticatedController
+    FIELDS = %i[drena_public_id school_public_id level_slug classroom_public_id].freeze
+
+    allow_roles :student
+    # IL-18 : l'élève déjà dans une classe active n'a rien à choisir ; son envoi est refusé par JoinAsStudent, en 403.
+    before_action :send_enrolled_home, only: :new
+    helper_method :class_picker_lists
+
+    # Sans choix envoyés (repli sans JavaScript, UDR-0079 §3.3), la DRENA et l'établissement de sa dernière classe.
+    def new
+      choices = picker_params.presence || last_school
+      @form = Dtos::Classroom::StudentRegistrationInput.new(**choices)
+      # Posé par /c/<jeton> quand le lien n'est plus valable (UDR-0079 §3.4) ; lu une fois.
+      @link_invalid = flash[:link_invalid].present?
+    end
+
+    def create
+      @form = Dtos::Classroom::StudentRegistrationInput.new(**params.expect(student_classroom_choice: FIELDS).to_h.symbolize_keys)
+      result = join.call(actor: current_actor, dto: @form)
+      return render_refusal(result) if result.code == :forbidden
+
+      render_result result, form: :new, success: lambda { |_classroom|
+        redirect_to student_home_path, notice: t(".welcome"), status: :see_other
+      }
+    end
+
+    private
+
+    def send_enrolled_home
+      redirect_to student_home_path if Queries::Identity::HomeDestinationQuery.new.call(actor: current_actor) == :student_home
+    end
+
+    # Un refus de JoinPolicy (retiré de cette classe, classe complète) ou un élève déjà inscrit : la raison en tête, en 403.
+    # Un élève est toujours refusé avec sa raison ; les autres rôles sont arrêtés avant (allow_roles).
+    def render_refusal(result)
+      add_errors(result)
+      render :new, status: :forbidden
+    end
+
+    def picker_params = params.fetch(:student_classroom_choice, {}).permit(*FIELDS).to_h.symbolize_keys
+
+    def last_school
+      last = Queries::Classroom::StudentHomeQuery.new.last_classroom(student_id: current_actor.user_id)
+      { drena_public_id: last.drena_public_id, school_public_id: last.school_public_id }
+    end
+
+    # Les listes de la cascade, chacune seulement si le choix précédent lui appartient (règle de l'inscription,
+    # StudentRegistrationsController) : un identifiant forgé ne touche pas la base. nil : liste non affichée.
+    def class_picker_lists
+      @class_picker_lists ||= begin
+        drenas = options.drenas
+        schools = (options.schools_for(drena_public_id: @form.drena_public_id) if drenas.any? { it.public_id == @form.drena_public_id })
+        levels = (levels_of(@form.school_public_id) if schools&.any? { it.public_id == @form.school_public_id })
+        classrooms = (classrooms_of(@form.school_public_id, @form.level_slug) if levels&.any? { it.slug == @form.level_slug })
+        { drenas:, schools:, levels:, classrooms: }
+      end
+    end
+
+    def options = @options ||= Queries::School::SchoolOptionsQuery.new
+    def levels_of(school_public_id) = Queries::School::SchoolLevelsQuery.new.call(school_public_id:)
+
+    def classrooms_of(school_public_id, level_slug)
+      Queries::Classroom::LevelClassroomsQuery.new.call(school_public_id:, level_slug:)
+    end
+
+    def join
+      UseCases::Classroom::JoinAsStudent.new(
+        classrooms: Repositories::Classroom::ClassroomRepository.new, schools: Repositories::School::SchoolRepository.new,
+        taxonomy: Repositories::Catalog::TaxonomyRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
+        policy: Policies::Classroom::JoinPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+      )
+    end
+  end
+end
