@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié (2026-10-08) — app élèves d'abord |
+| **Statut** | exécuté (2026-10-08, [#205](https://github.com/Lnclassapp/App.Lnclassapp/pull/205)) — app élèves ; test sur un vrai téléphone en attente (phase 5) |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `ccr-e4a51f57-9ve9og` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
 | **Programme** | — *(hors plan de `refonte-application` ; la PWA est livrée par `installation-pwa`, ADR-0082)* |
