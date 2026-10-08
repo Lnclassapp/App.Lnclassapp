@@ -42,7 +42,8 @@ module Classroom
       render :new, status: :forbidden
     end
 
-    def picker_params = params.fetch(:student_classroom_choice, {}).permit(*FIELDS).to_h.symbolize_keys
+    # Une valeur qui n'est pas un hash (?student_classroom_choice=x) est écartée par permit, pas levée : la page s'ouvre vide.
+    def picker_params = (params.permit(student_classroom_choice: FIELDS)[:student_classroom_choice] || {}).to_h.symbolize_keys
 
     def last_school
       last = Queries::Classroom::StudentHomeQuery.new.last_classroom(student_id: current_actor.user_id)

@@ -124,6 +124,14 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "turbo-frame#picker_schools *", 0
   end
 
+  # Relecture sécurité de la PR 203 : une chaîne à la place des choix ne lève plus d'exception (500) ; elle est ignorée.
+  test "choices sent as a string instead of a hash are ignored, the page opens empty" do
+    get new_student_registration_path, params: { student_registration: "x" }
+
+    assert_response :success
+    %w[picker_schools picker_levels picker_classrooms].each { assert_select "turbo-frame##{it} *", 0 }
+  end
+
   test "IL-05: a full classroom is listed, disabled, with « Complète » in its label" do
     @classroom.update!(max_students: 1)
     create_student(classroom: @classroom)
@@ -325,6 +333,20 @@ end
     get new_student_registration_path
 
     assert_select "#classroom-link-invalid", 0
+  end
+
+  test "PRD §3: the direction and the team who open the page are sent to their home; their POST is refused" do
+    { create_school_admin => school_admin_classrooms_path, create_team_member => team_home_path }.each do |user, home|
+      sign_in_as user
+
+      get new_student_registration_path
+      assert_redirected_to home
+
+      register
+      assert_response :forbidden
+      assert_not Orm::User.exists?(contact: "0701020304")
+      sign_out
+    end
   end
 
   test "IL-18: a signed-in person who opens the page is sent home; a POST is refused, a student told why" do

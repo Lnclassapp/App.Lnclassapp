@@ -13,7 +13,10 @@ class SeedsTest < ActiveSupport::TestCase
     capture_io { load Rails.root.join("db/seeds.rb").to_s, true }.first
   end
 
+  # Rails 8 draws the routes on first use: drawn while Rails.env says production, they would lose /design for every
+  # later test of the same process (config/routes.rb). They are drawn before the switch.
   def as_production
+    Rails.application.reload_routes_unless_loaded
     Rails.env = "production"
     yield
   ensure
@@ -21,6 +24,7 @@ class SeedsTest < ActiveSupport::TestCase
   end
 
   def as_development
+    Rails.application.reload_routes_unless_loaded
     Rails.env = "development"
     yield
   ensure
