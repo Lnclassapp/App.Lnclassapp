@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · ApplicationController
 # Rôle : contrôleur parent ; authentifie par défaut, traduit les résultats, signale un navigateur ancien, ferme aux moteurs tout hôte hors production, reconnaît l'app Android
-# ADR  : 0026, 0031, 0050, 0051, 0074 (amendement du 2026-10-07), 0084
+# ADR  : 0026, 0031, 0050, 0051, 0074 (amendement du 2026-10-07), 0084, 0085
 class ApplicationController < ActionController::Base
   include Authentication
   include RendersResult
@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   # ADR-0084 §4.1 : une coque Lnclass se reconnaît au marqueur de Hotwire Native suivi de son jeton « <Jeton>/<version> ».
-  # Le jeton seul, sans Hotwire Native, ne compte pas. → :android_student ou nil
-  LNCLASS_APPS = { "LnclassStudentAndroid" => :android_student }.freeze
+  # Le jeton seul, sans Hotwire Native, ne compte pas. → :android_student, :android_teacher (ADR-0085 §4.1) ou nil
+  LNCLASS_APPS = { "LnclassStudentAndroid" => :android_student, "LnclassTeacherAndroid" => :android_teacher }.freeze
 
   private
 

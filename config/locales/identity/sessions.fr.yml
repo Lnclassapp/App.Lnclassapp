@@ -1,4 +1,4 @@
-# Connexion et déconnexion — ADR-0050 ; logo, infobulle du PIN — UDR-0054 ; épuration — UDR-0060 ; refus dans l'app élèves — UDR-0080 §3.4
+# Connexion et déconnexion — ADR-0050 ; logo, infobulle du PIN — UDR-0054 ; épuration — UDR-0060 ; refus dans les apps — UDR-0080 §3.4, UDR-0081 §3.4
 fr:
   identity:
     sessions:
@@ -15,6 +15,26 @@ fr:
           title: "Cette app est réservée aux élèves"
           body: "Enseignants, direction et équipe : continuez sur le site."
           link: "Ouvrir lnclass.com"
+        # UDR-0081 §3.4 : le refus selon la coque (1er niveau) et l'app proposée (2e niveau).
+        wrong_app_for:
+          android_student:
+            android_teacher:
+              title: "Utilisez Lnclass Teacher"
+              body: "Cette app est réservée aux élèves. Les enseignants ont leur app, Lnclass Teacher."
+              link: "Ouvrir Lnclass Teacher"
+            web:
+              title: "Cette app est réservée aux élèves"
+              body: "Direction et équipe : continuez sur le site."
+              link: "Ouvrir lnclass.com"
+          android_teacher:
+            android_student:
+              title: "Utilisez l'app Lnclass"
+              body: "Cette app est réservée aux enseignants. Les élèves ont leur app, Lnclass."
+              link: "Ouvrir Lnclass"
+            web:
+              title: "Cette app est réservée aux enseignants"
+              body: "Direction et équipe : continuez sur le site."
+              link: "Ouvrir lnclass.com"
       create:
         signed_in: "Connexion réussie"
       destroy:
