@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — **repris** le 2026-10-08 (porteur), app élèves d'abord |
+| **Statut** | planifié (2026-10-08) — app élèves d'abord |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `ccr-e4a51f57-9ve9og` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
 | **Programme** | — *(hors plan de `refonte-application` ; la PWA est livrée par `installation-pwa`, ADR-0082)* |
@@ -83,7 +83,7 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 | Un enseignant dans l'app élèves ? | **Message « Utilisez Lnclass Teacher »**, lien vers le site tant que l'app enseignants n'existe pas | Règle d'identité de la question 2, côté app élèves seulement |
 | La pop-up « Installer Lnclass » dans l'app ? | **Jamais** | Le contrôleur `install` se tait quand la page tourne dans l'app (User-Agent de la coque) : amendement de l'UDR-0078 |
 | Recette avant production ? | **Oui** : une version qui pointe vers la recette, puis une vers la production | Deux variantes de compilation (adresse du site), même code |
-| Version minimale d'Android | **Android 7** (minimum de Hotwire Native) | Les téléphones plus anciens restent sur le site, qui garde toutes les fonctions (question 4) |
+| Version minimale d'Android | **Android 7** accepté par le porteur, puis **corrigé en Android 9** : Hotwire Native Android exige l'API 28 (`minSdk = 28`, vérifié le 2026-10-08 dans ses fichiers Gradle) | Les téléphones plus anciens restent sur le site, qui garde toutes les fonctions (question 4) |
 | Clé de signature | **Play App Signing** ; une clé de secours chez le porteur, jamais dans le dépôt | La clé d'envoi ne vit ni dans le code ni dans la CI sans secret |
 | Mesure | **Oui** : l'équipe voit les élèves qui utilisent l'app, à côté du chiffre de la PWA | La tuile « Ouvert depuis l'app installée » (ADR-0082) gagne l'origine « app Android » |
 | Compte Play Store | **Compte personnel tout de suite**, test fermé de 14 jours avec 12 élèves au moins ; passage en compte d'organisation à l'arrivée du D-U-N-S | Remplace la réponse « compte d'organisation d'abord » (ligne précédente) : le test fermé de 14 jours devient la recette sur téléphones réels |
@@ -110,7 +110,7 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 Tranchées le 2026-10-08 :
 
 - ~~Le nouvel en-tête vaut-il pour les autres rôles ?~~ Non : élève seulement.
-- ~~Version minimale d'Android~~ : Android 7.
+- ~~Version minimale d'Android~~ : Android 9 (API 28), le plancher de Hotwire Native ; Android 7 et 8 restent sur le site.
 - ~~D-U-N-S et structure juridique~~ : la société n'est pas créée ; compte Google Play personnel d'ici là.
 - ~~Définition d'un « utilisateur de l'app »~~ : celle de l'ADR-0082 §4.4, un compte qui a ouvert l'app sur la période du pilotage.
 - ~~Onglets natifs~~ : Accueil, Cours, Ma classe, cachés pendant un exercice.

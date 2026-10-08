@@ -147,4 +147,4 @@ end
   - les clés de signature restent gérées par Play App Signing ; une clé de secours est gardée par le porteur, jamais dans le dépôt.
 - **Barres natives confirmées** : dans l'app, l'en-tête et la barre basse du site sont masqués (§6, « Layout »). La coque affiche une barre d'onglets Android en bas (Accueil, Cours, Ma classe, comme la barre du site) et une barre native en haut. Sur le site, l'en-tête élève devient celui décidé le 2026-10-08 : avatar à gauche ouvrant un panneau latéral, aide et thème à droite, sans logo. Ce qu'affiche la barre native du haut (titre, avatar, aide) est fixé par l'UDR du chantier.
 - **R7 confirmée** : aucun paiement dans l'app.
-- **Version minimale** : Android 7 ; les téléphones plus anciens restent sur le site.
+- **Version minimale** : Android 9 (API 28), le plancher de Hotwire Native Android (`minSdk = 28` dans ses fichiers Gradle, vérifié le 2026-10-08). Android 7 et 8 restent sur le site, qui garde toutes les fonctions.
