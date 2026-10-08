@@ -30,6 +30,12 @@
 | 2026-10-08 | Lot E : sur la page de la direction, les élèves restent triés par nom (pas de nouveaux en tête) | L'UDR ne demande à la direction que pastilles, menu et modale | Non |
 | 2026-10-08 | Fusion de `Develop` : décisions renumérotées ADR-0085 et UDR-0081 | `Develop` avait donné 0083 et 0079 à `inscription-enseignant` (anciens 0082 et 0078), et 0082, 0084, 0078, 0080 à d'autres chantiers. Seules les lignes écrites par cette branche ont changé (`5a5581a0`), avant la fusion | Non |
 | 2026-10-08 | Fusion de `Develop` : l'élève saisit son nom et ses prénoms dans deux champs (memo Q16, porteur) | L'enseignant y est revenu (Q24 de `inscription-enseignant`) et `Entities::Identity::FullName` a quitté `Develop`. UDR-0081 §2.6 et §3.2, ADR-0085 §5, PRD IL-20 amendés | Non : ADR-0037 |
+| 2026-10-08 | Lot F : tout élève va sur son accueil (`HomeDestination`) ; sans classe active, l'accueil propose « Choisis ta classe » et, s'il en a un, « Voir mon historique » (lot R). `HomeDestination.enrolled?` garde la question que posent la page du lien et « Choisis ta classe » | Dette bloquante de la vague 3 ; l'écran d'attente, seul accès à l'historique, envoyait vers `/join` | Non |
+| 2026-10-08 | Lot F : la règle de la cascade et la résolution d'un lien vivent dans `UseCases::Classroom::ClassroomDesignation` ; les listes du sélecteur dans le concern `ClassPicker` ; le titre de la liste dans `classroom/classrooms/_roster_title` | Recopiés entre `RegisterStudent` et `JoinAsStudent`, entre leurs contrôleurs, et trois fois pour le titre | Non |
+| 2026-10-08 | Lot F : un ancien code de classe saisi dans le champ du code d'établissement est un code mal formé (`:invalid`) ; le message « Ce code est un code de classe » est retiré | Il n'y a plus de code de classe à reconnaître | Non |
+| 2026-10-08 | Lot F : la migration `RemoveClassroomJoinCodes` (2026-10-08 12:00, après la dernière de `Develop`) retire `join_code`, `join_code_rotated_at`, leur index et leur format ; réversible, colonnes vides au retour | Le plan la datait du 2026-10-07 : elle serait passée avant une migration déjà jouée | Non |
+| 2026-10-08 | Lot F : les messages de création de classe nomment la classe (« La classe %{name} est créée. », « Classe « %{name} » ajoutée. ») ; le bouton WhatsApp du bloc du lien reprend l'identifiant `classroom_whatsapp_share` de l'ancien bloc du code | UDR-0081 §3.8 ; tests système et captures de croissance | Non |
+| 2026-10-08 | Lot F : l'aide (« Comment rejoindre ma classe ? »), la page de confidentialité et l'accueil public (« Comment ça marche », modale « Je suis élève ») ne parlent plus de code de classe ; la confidentialité dit que les noms des classes d'un établissement sont visibles à l'inscription | Hors de la liste du plan, mais IL-02 : aucun écran ne montre de code ; la cascade rend les noms de classes publics (ADR-0085 §4.2) | Non |
 
 ## Ce qui a dérapé
 
@@ -45,6 +51,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Lot E (2026-10-08).** Supposé que les éléments modifiés par Stimulus survivraient au rafraîchissement par fusion : faux pour « Copier le lien » et « Chercher » (≈ 15 min, vu sur les captures).
 - **Lot B (2026-10-08).** Un test système jetable de captures laissé dans `test/system` pendant la suite complète fait échouer `ci_plan_test` et `system_budget_test` : le supprimer avant de lancer la suite.
 - **Fusion de `Develop` (2026-10-08).** 13 fichiers en conflit, et deux ruptures sans conflit : les numéros d'ADR et d'UDR pris des deux côtés, et `FullName` retiré par `Develop` (41 erreurs à la fusion). La branche avait 92 commits de retard : fusionner `Develop` à chaque vague aurait montré ces deux ruptures le jour même.
+- **Lot F, durées des tests système (2026-10-08).** Une première mesure, sur 4 processus en parallèle, doublait presque toutes les durées (`boucle_pedagogique` 36,7 → 44,1 s, `pin_reveal` 12,2 → 26,1 s). Seuls les fichiers réécrits ont été remesurés, sur un processus ; ceux qu'une simple substitution a touchés gardent la durée de la CI. Puma coupe la ligne `-v` du premier test : `record_timings` la perd, il faut la rajouter à la main.
+- **Lot F, base locale (2026-10-08).** Postgres s'est arrêté deux fois pendant le lot (processus tué avec le shell qui l'avait lancé) ; `setsid` le garde en vie.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -67,26 +75,26 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Deux « Copier le lien » et deux « Partager sur WhatsApp » dans l'en-tête de la classe (code, puis jeton) ; les tests système visent celui du code | Le code reste jusqu'au retrait | Lot F |
-| Pont `LinkRow#join_code` : l'élève connecté qui ouvre un lien rejoint par le code, voie `code` | `JoinAsStudent` ne connaît que le code | Lot B (puis F) |
-| Jetons de la fiche d'établissement dans `Level#link_tokens` au lieu de `ClassroomRow` | `school_detail_query_test.rb` hors liste | Lot F |
-| Fiche d'établissement : même `aria-label` « Copier le lien de la classe » sur toutes les cartes ; « Copier le lien » proposé même si l'établissement n'est pas actif | Aucune clé de locale avec le nom ; le partial ignore le statut | Lot F |
+| Deux « Copier le lien » et deux « Partager sur WhatsApp » dans l'en-tête de la classe (code, puis jeton) ; les tests système visent celui du code | Le code reste jusqu'au retrait | Lot F — **fait** : le bloc du code est retiré |
+| Pont `LinkRow#join_code` : l'élève connecté qui ouvre un lien rejoint par le code, voie `code` | `JoinAsStudent` ne connaît que le code | Lot B — **fait** ; le chemin `code:` est retiré au Lot F |
+| Jetons de la fiche d'établissement dans `Level#link_tokens` au lieu de `ClassroomRow` | `school_detail_query_test.rb` hors liste | Lot F — **fait** : `ClassroomRow#link_token` |
+| Fiche d'établissement : même `aria-label` « Copier le lien de la classe » sur toutes les cartes ; « Copier le lien » proposé même si l'établissement n'est pas actif | Aucune clé de locale avec le nom ; le partial ignore le statut | Lot F — **fait** : libellé au nom de la classe, lien proposé seulement si l'établissement est actif |
 | Le serveur accepte le retrait d'un élève dans une classe archivée (seule l'interface le masque) | Le porteur a décidé le 2026-10-08 de le refuser (403), comme le changement de lien ; UDR-0081 §3.7 amendée | Lot E |
-| Titre de la liste recopié dans `classroom_students/destroy.turbo_stream.erb` (le `h2` existe en double) | Pas de partial possible dans la liste du Lot D | Lot F |
+| Titre de la liste recopié dans `classroom_students/destroy.turbo_stream.erb` (le `h2` existe en double) | Pas de partial possible dans la liste du Lot D | Lot F — **fait** : `_roster_title` |
 | À 390 px, un nom long est tronqué à côté de la pastille « Nouveau » | Le porteur a décidé le 2026-10-08 : la pastille passe sous le nom sur téléphone ; UDR-0081 §3.7 amendée | Lot E |
-| `roster.empty_description` parle encore du code de la classe | Texte du code | Lot F |
+| `roster.empty_description` parle encore du code de la classe | Texte du code | Lot F — **fait** : « Partagez le lien de la classe » |
 | Sans JavaScript, « Continuer » envoie tout le formulaire d'inscription en `GET` (un PIN déjà tapé irait dans l'URL ; le serveur ne le relit pas) | Cas improbable : la classe se choisit avant le PIN | — |
-| **L'élève sans classe n'arrive pas sur « Choisis ta classe » à la connexion** : `Entities::Identity::HomeDestination` l'envoie vers `pending_account` (« Demande le code de ta classe », bouton vers `/join`) ; `student_classrooms#show` aussi. Une fois `/join` redirigé, il tournerait en rond | Fichiers hors de la liste B | **Lot F (bloquant)** |
-| Règle « classe de la cascade » (`listed?`) et `class_picker_lists` recopiées entre `RegisterStudent` / `JoinAsStudent` et leurs contrôleurs | Fichiers hors liste | Lot F (extraction) |
-| Chemin `code:` de `JoinAsStudent` et `lock_by_join_code` | Ancien chemin `/join` | Lot F |
-| Titre de la liste des élèves écrit trois fois (`_roster`, stream du retrait, page de la direction) | Pas de partial dans les listes | Lot F |
-| À 390 px, le tableau de la direction défile en largeur : le menu ⋮ et les chiffres ne se voient qu'en faisant défiler, et le nom disparaît alors | Largeur minimale d'avant le chantier ; hors UDR | Lot F (proposé : lignes empilées sur téléphone, à valider) |
+| **L'élève sans classe n'arrive pas sur « Choisis ta classe » à la connexion** : `Entities::Identity::HomeDestination` l'envoie vers `pending_account` (« Demande le code de ta classe », bouton vers `/join`) ; `student_classrooms#show` aussi. Une fois `/join` redirigé, il tournerait en rond | Fichiers hors de la liste B | Lot F — **fait** : l'accueil, avec l'historique |
+| Règle « classe de la cascade » (`listed?`) et `class_picker_lists` recopiées entre `RegisterStudent` / `JoinAsStudent` et leurs contrôleurs | Fichiers hors liste | Lot F — **fait** : `ClassroomDesignation`, `ClassPicker` |
+| Chemin `code:` de `JoinAsStudent` et `lock_by_join_code` | Ancien chemin `/join` | Lot F — **fait** |
+| Titre de la liste des élèves écrit trois fois (`_roster`, stream du retrait, page de la direction) | Pas de partial dans les listes | Lot F — **fait** : `_roster_title` |
+| À 390 px, le tableau de la direction défile en largeur : le menu ⋮ et les chiffres ne se voient qu'en faisant défiler, et le nom disparaît alors | Largeur minimale d'avant le chantier ; hors UDR | Décision du porteur attendue (proposé : lignes empilées sur téléphone) |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-08 (PR vers `Develop`) |
+| **PR** | [#203](https://github.com/Lnclassapp/App.Lnclassapp/pull/203) |
+| **ADR produits** | [ADR-0085](../../decisions/adr/0085-inscription-eleve-sans-code-de-classe.md) ; amende l'ADR-0041 (plus de code d'adhésion) |
+| **UDR produits** | [UDR-0081](../../decisions/udr/0081-inscription-eleve-sans-code-de-classe.md) ; remplace l'UDR-0009 |
