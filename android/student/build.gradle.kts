@@ -20,12 +20,12 @@ val keystorePath = signingValue("LNCLASS_KEYSTORE_PATH", "lnclass.keystore.path"
 
 android {
     namespace = "com.lnclass.student"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.lnclass.student"
         minSdk = 28 // Android 9, plancher de Hotwire Native Android (ADR-0070 amendé)
-        targetSdk = 35
+        targetSdk = 36 // Android 16 : le Play Store relève chaque fin août l'API cible exigée
         versionCode = 1
         versionName = "1.0"
     }

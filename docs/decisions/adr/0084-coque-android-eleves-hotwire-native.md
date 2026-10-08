@@ -118,14 +118,14 @@ Les icônes sont celles du site (Heroicons `home`, `book-open`, `academic-cap`),
 
 - Projet Gradle dans **`android/`** à la racine du dépôt : un module d'app `student` aujourd'hui, `teacher` demain. Kotlin, `minSdk 28`, `targetSdk` imposé par le Play Store au moment de la publication.
 - Deux variantes de compilation :
-  - **`recette`** : `https://app-staging.lnclass.com`, nom affiché « Lnclass (recette) » ;
+  - **`recette`** : `https://app-staging.lnclass.com`, nom affiché « Lnclass recette » ;
   - **`production`** : `https://lnclass.com`.
 - Identifiant : `com.lnclass.student`, avec le suffixe `.recette` pour la variante de recette, pour que les deux coexistent sur un téléphone.
 - Les icônes validées le 2026-10-08 (`lnclass-eleves-icones-android.zip`) vont dans `android/student/src/main/res`.
 - **Aucune clé de signature dans le dépôt.**
   - L'APK de test est signé par une clé d'envoi gardée par le porteur.
   - La publication passe par Play App Signing.
-- La CI Rails ignore `android/`. Une tâche `bin/android-build` compile l'APK de recette en local.
+- La CI Rails ne compile pas `android/` : son garde (`test/guards/android_project_test.rb`, groupe lint de `bin/ci`) vérifie le projet sans le compiler. `bin/android-build` compile l'APK en local. Le dossier n'entre pas dans l'image Docker (`.dockerignore`).
 
 ## 5. Conséquences
 
