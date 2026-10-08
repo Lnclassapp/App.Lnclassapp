@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # bin/android-build — compile l'APK de la coque Android des élèves (ADR-0084 §4.8), hors de la CI Rails.
 #
+#   bin/android-build develop [dossier]      APK de develop (app-develop.lnclass.com) → <dossier>/lnclass-develop.apk
 #   bin/android-build recette [dossier]      APK de recette (app-staging.lnclass.com) → <dossier>/lnclass-recette.apk
 #   bin/android-build production [dossier]   APK de production (lnclass.com) → <dossier>/lnclass-production.apk
 #
 # Dossier de sortie par défaut : tmp/. Il faut le SDK Android (ANDROID_HOME). La clé d'envoi reste hors dépôt :
 # LNCLASS_KEYSTORE_PATH, LNCLASS_KEYSTORE_PASSWORD, LNCLASS_KEY_ALIAS, LNCLASS_KEY_PASSWORD (ou leurs équivalents
-# lnclass.* dans android/local.properties). Sans elle, la recette est signée avec la clé de debug du poste et la
+# lnclass.* dans android/local.properties). Sans elle, develop et recette sont signées avec la clé de debug du poste et la
 # production est refusée.
 set -euo pipefail
 
@@ -15,9 +16,10 @@ variant="${1:-}"
 out_dir="${2:-$root/tmp}"
 
 case "$variant" in
+  develop) task=":student:assembleDevelopRelease" ;;
   recette) task=":student:assembleRecetteRelease" ;;
   production) task=":student:assembleProductionRelease" ;;
-  *) echo "Usage : bin/android-build recette|production [dossier de sortie]" >&2; exit 64 ;;
+  *) echo "Usage : bin/android-build develop|recette|production [dossier de sortie]" >&2; exit 64 ;;
 esac
 
 if [[ -z "${ANDROID_HOME:-}" || ! -d "$ANDROID_HOME" ]]; then

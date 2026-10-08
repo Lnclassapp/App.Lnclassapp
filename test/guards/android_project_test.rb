@@ -19,8 +19,11 @@ class AndroidProjectTest < Minitest::Test
     assert_match(/^\s*minSdk = 28\b/, gradle, "ADR-0070 amendé : Android 9 (API 28), plancher de Hotwire Native")
   end
 
-  def test_the_two_variants_install_side_by_side_and_load_their_site
+  # Two test levels before production (Develop, then Staging), each installable next to the other.
+  def test_the_three_variants_install_side_by_side_and_load_their_site
     assert_match(/applicationId = "com\.lnclass\.student"/, gradle)
+    assert_match(/applicationIdSuffix = "\.develop"/, flavor("develop"))
+    assert_includes flavor("develop"), %("\\"https://app-develop.lnclass.com\\"")
     assert_match(/applicationIdSuffix = "\.recette"/, flavor("recette"))
     assert_includes flavor("recette"), %("\\"https://app-staging.lnclass.com\\"")
     assert_includes flavor("production"), %("\\"https://lnclass.com\\"")

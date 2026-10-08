@@ -47,6 +47,15 @@ android {
 
     flavorDimensions += "environment"
     productFlavors {
+        // Trois marches : develop (premier test), recette (second test, avant la mise en production), production.
+        create("develop") {
+            dimension = "environment"
+            applicationIdSuffix = ".develop"
+            buildConfigField("String", "BASE_URL", "\"https://app-develop.lnclass.com\"")
+            manifestPlaceholders["appHost"] = "app-develop.lnclass.com"
+            resValue("string", "app_name", "Lnclass develop")
+            signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
+        }
         create("recette") {
             dimension = "environment"
             applicationIdSuffix = ".recette"

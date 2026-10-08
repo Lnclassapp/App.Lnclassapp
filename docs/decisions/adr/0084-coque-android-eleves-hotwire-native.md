@@ -117,10 +117,11 @@ Les icônes sont celles du site (Heroicons `home`, `book-open`, `academic-cap`),
 ### 4.8 Le code Android
 
 - Projet Gradle dans **`android/`** à la racine du dépôt : un module d'app `student` aujourd'hui, `teacher` demain. Kotlin, `minSdk 28`, `targetSdk` imposé par le Play Store au moment de la publication.
-- Deux variantes de compilation :
-  - **`recette`** : `https://app-staging.lnclass.com`, nom affiché « Lnclass recette » ;
+- Trois variantes de compilation, deux niveaux de test avant la production (porteur, 2026-10-08) :
+  - **`develop`** : `https://app-develop.lnclass.com`, nom affiché « Lnclass develop » : premier test, dès la fusion dans Develop ;
+  - **`recette`** : `https://app-staging.lnclass.com`, nom affiché « Lnclass recette » : second test, après la promotion Develop → Staging ;
   - **`production`** : `https://lnclass.com`.
-- Identifiant : `com.lnclass.student`, avec le suffixe `.recette` pour la variante de recette, pour que les deux coexistent sur un téléphone.
+- Identifiant : `com.lnclass.student`, avec le suffixe `.develop` ou `.recette` pour les variantes de test, pour que les trois coexistent sur un téléphone.
 - Les icônes validées le 2026-10-08 (`lnclass-eleves-icones-android.zip`) vont dans `android/student/src/main/res`.
 - **Aucune clé de signature dans le dépôt.**
   - L'APK de test est signé par une clé d'envoi gardée par le porteur.
