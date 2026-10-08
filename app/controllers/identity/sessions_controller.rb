@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::SessionsController
-# Rôle : connexion par numéro et PIN, déconnexion ; échec re-rendu en 422 (le champ PIN ne renvoie jamais sa valeur)
-# ADR  : 0026, 0050 · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique)
+# Rôle : connexion par numéro et PIN, déconnexion ; échec re-rendu en 422 (le champ PIN ne renvoie jamais sa valeur), dont le refus de la coque élèves
+# ADR  : 0026, 0050, 0084 (§4.5) · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique), 0080 (§3.4)
 module Identity
   class SessionsController < ApplicationController
     allow_unauthenticated_access only: %i[new create]
@@ -19,7 +19,10 @@ module Identity
 
     def create
       @form = form_input
-      render_result authenticate.call(dto: @form), form: :new, success: lambda { |authenticated|
+      result = authenticate.call(dto: @form)
+      return render_wrong_app if result.errors == UseCases::Identity::Authenticate::WRONG_APP
+
+      render_result result, form: :new, success: lambda { |authenticated|
         start_session(authenticated.token)
         redirect_to_home notice: t(".signed_in"), status: :see_other
       }
@@ -34,8 +37,16 @@ module Identity
 
     def form_input
       Dtos::Identity::CredentialsInput.new(
-        **params.expect(session: %i[contact pin]).to_h.symbolize_keys, ip: request.remote_ip, user_agent: request.user_agent
+        **params.expect(session: %i[contact pin]).to_h.symbolize_keys, ip: request.remote_ip, user_agent: request.user_agent,
+        client: lnclass_app&.to_s || "web"
       )
+    end
+
+    # UDR-0080 §3.4 : le formulaire revient vide, ni numéro ni PIN, sous le message de la coque élèves.
+    def render_wrong_app
+      @wrong_app = true
+      @form = Dtos::Identity::CredentialsInput.new
+      render :new, status: :unprocessable_entity
     end
 
     def authenticate

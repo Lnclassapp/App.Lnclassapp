@@ -78,6 +78,10 @@ fr:
         app_openers_teachers:
           one: "%{count} enseignant"
           other: "%{count} enseignants"
+        # ADR-0084 §4.6 : part des élèves qui ont ouvert l'app Android « Lnclass » sur la période.
+        app_openers_android:
+          one: "dont app Android : %{count} élève"
+          other: "dont app Android : %{count} élèves"
         app_openers_tip: "Comptes qui ont ouvert Lnclass depuis l'icône de leur téléphone sur la période. Un compte compte une fois."
         app_openers_tip_label: "Ouvert depuis l'app installée"
       levels:

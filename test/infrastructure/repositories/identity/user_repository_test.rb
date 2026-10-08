@@ -28,6 +28,17 @@ module Repositories
         assert_nil Orm::User.find(other.id).app_opened_at
       end
 
+      test "mark_app_opened dates the column of its channel only (ADR-0084 §4.6)" do
+        student = create_student
+        at = Time.zone.parse("2026-10-08 09:00:00")
+
+        assert @repository.mark_app_opened(user_id: student.id, at:, channel: :android)
+        assert_equal [ nil, at ], Orm::User.where(id: student.id).pick(:app_opened_at, :android_opened_at)
+        assert @repository.mark_app_opened(user_id: student.id, at:, channel: :pwa)
+        assert_equal [ at, at ], Orm::User.where(id: student.id).pick(:app_opened_at, :android_opened_at)
+        assert_raises(KeyError) { @repository.mark_app_opened(user_id: student.id, at:, channel: :ios) }
+      end
+
       test "an unknown account is nil" do
         assert_nil @repository.find(id: 0)
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
@@ -144,10 +155,12 @@ module Repositories
       test "anonymize forgets when the account last opened the installed app" do
         record = create_student
         @repository.mark_app_opened(user_id: record.id, at: Time.current.change(usec: 0))
+        @repository.mark_app_opened(user_id: record.id, at: Time.current.change(usec: 0), channel: :android)
 
         @repository.anonymize(user_id: record.id, first_name: "Compte", last_name: "supprimé", at: Time.current)
 
         assert_nil record.reload.app_opened_at
+        assert_nil record.android_opened_at
       end
     end
   end

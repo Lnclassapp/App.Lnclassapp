@@ -355,6 +355,14 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#modal-nouvelle-classe.sm\\:max-w-2xl[aria-labelledby=modal-nouvelle-classe-title]", text: /Corps.*Pied/m
   end
 
+  # UDR-0080 §3.2 : le panneau du compte de l'élève, une feuille ancrée à gauche.
+  test "ui_modal placed as a drawer is a dialog anchored to the left, without the bottom sheet's handle" do
+    show ui_modal(title: "Mon compte", id: "account_panel", size: :sm, placement: :drawer)
+
+    assert_select "dialog#account_panel.ui-dialog.dialog-drawer"
+    assert_select "dialog#account_panel .sheet-handle", 0
+  end
+
   test "ui_modal without trigger nor block keeps an explicit id" do
     show ui_modal(title: "Info", id: "info")
 

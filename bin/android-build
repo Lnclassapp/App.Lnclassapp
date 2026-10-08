@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# bin/android-build — compile l'APK de la coque Android des élèves (ADR-0084 §4.8), hors de la CI Rails.
+#
+#   bin/android-build recette [dossier]      APK de recette (app-staging.lnclass.com) → <dossier>/lnclass-recette.apk
+#   bin/android-build production [dossier]   APK de production (lnclass.com) → <dossier>/lnclass-production.apk
+#
+# Dossier de sortie par défaut : tmp/. Il faut le SDK Android (ANDROID_HOME). La clé d'envoi reste hors dépôt :
+# LNCLASS_KEYSTORE_PATH, LNCLASS_KEYSTORE_PASSWORD, LNCLASS_KEY_ALIAS, LNCLASS_KEY_PASSWORD (ou leurs équivalents
+# lnclass.* dans android/local.properties). Sans elle, la recette est signée avec la clé de debug du poste et la
+# production est refusée.
+set -euo pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+variant="${1:-}"
+out_dir="${2:-$root/tmp}"
+
+case "$variant" in
+  recette) task=":student:assembleRecetteRelease" ;;
+  production) task=":student:assembleProductionRelease" ;;
+  *) echo "Usage : bin/android-build recette|production [dossier de sortie]" >&2; exit 64 ;;
+esac
+
+if [[ -z "${ANDROID_HOME:-}" || ! -d "$ANDROID_HOME" ]]; then
+  echo "ANDROID_HOME doit pointer vers le SDK Android (platforms;android-36, build-tools;36.0.0)." >&2
+  exit 1
+fi
+
+if [[ "$variant" == production && -z "${LNCLASS_KEYSTORE_PATH:-}" ]] && \
+   ! grep -qs '^lnclass.keystore.path=' "$root/android/local.properties"; then
+  echo "La production se signe avec la clé d'envoi : définir LNCLASS_KEYSTORE_PATH et ses mots de passe." >&2
+  exit 1
+fi
+
+(cd "$root/android" && ./gradlew "$task")
+
+apk="$root/android/student/build/outputs/apk/$variant/release/student-$variant-release.apk"
+mkdir -p "$out_dir"
+cp "$apk" "$out_dir/lnclass-$variant.apk"
+echo "APK : $out_dir/lnclass-$variant.apk"
