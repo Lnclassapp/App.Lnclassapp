@@ -16,8 +16,8 @@ module UseCases
         @clock = clock
       end
 
-      # → success(Removal) | :forbidden (élève, visiteur) | :not_found (classe inconnue ou hors du périmètre de l'acteur ;
-      #   compte inconnu, qui n'est pas un élève, ou élève ni dans la classe ni retiré d'elle)
+      # → success(Removal) | :forbidden (élève, visiteur ; classe archivée, base: classroom_archived) | :not_found (classe
+      #   inconnue ou hors du périmètre de l'acteur ; compte inconnu, qui n'est pas un élève, ou ni dans la classe ni retiré d'elle)
       def call(actor:, classroom_public_id:, student_public_id:)
         @transaction.call { remove(actor, classroom_public_id, student_public_id) }
       end
@@ -31,6 +31,8 @@ module UseCases
 
         allowed = @policy.call(actor:, classroom:)
         return allowed if allowed.failure?
+        # UDR-0079 §3.7, amendée le 2026-10-08 (porteur) : comme ChangeClassroomLink, rien ne bouge dans une classe archivée.
+        return Shared::Result.failure(:forbidden, errors: { base: [ :classroom_archived ] }) unless classroom.active?
 
         student = @users.find_by_public_id(public_id: student_public_id)
         return Shared::Result.failure(:not_found) unless student&.student?

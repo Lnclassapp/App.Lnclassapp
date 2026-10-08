@@ -1,26 +1,35 @@
 <%# 🌐 UI · classroom/classroom_students/destroy — un élève retiré de la classe (IL-14) %>
-<%# Rôle : toast, ligne retirée avec sa modale, titre de la liste (compteur, nouveaux) et effectif de l'en-tête recomptés, compte de la liste filtrée ; liste vidée : la section re-rendue, état vide %>
-<%# ADR  : 0083 (§4.5) · UDR : 0006, 0079 (§3.7) · le titre reçoit le focus (autofocus, tabindex -1) ; @search : la recherche de la liste %>
+<%# Rôle : toast, ligne retirée avec sa modale, titre de la liste recompté (focus) ; page enseignant : effectif et compte filtré, liste vidée → état vide ; page de la direction : re-demandée et fusionnée %>
+<%# ADR  : 0065, 0083 (§4.5) · UDR : 0006, 0079 (§3.7) · le titre reçoit le focus (autofocus, tabindex -1) ; @search : la recherche de la liste %>
 <% roster = { classroom: @header, students: @overview.students, search: @search, new_count: @overview.new_students_count,
               can_remove: true, focus_title: true } %>
-<%= turbo_stream_toast @notice, type: :success %>
-<%= turbo_stream.update "classroom_headcount",
-                        t("classroom.classrooms.header.headcount", count: @header.active_students_count, max: @header.max_students) %>
-<% if @overview.students.empty? %>
-  <%# Plus personne à montrer (classe vide, ou recherche sans résultat) : l'état vide existant de la section. %>
-  <%= turbo_stream.replace "classroom_roster", partial: "classroom/classrooms/roster", locals: roster %>
-<% else %>
-  <%= turbo_stream.remove "student_#{@student.public_id}" %>
-  <%= turbo_stream.update "classroom_roster_count", t("classroom.classrooms.roster.count", count: @overview.students.size) %>
-  <%# La balise du titre de classroom/classrooms/_roster, avec l'autofocus qui y ramène le focus. %>
-  <%= turbo_stream.replace "classroom_roster_title" do %>
-    <%= tag.h2 id: "classroom_roster_title", tabindex: -1,
-               class: "mb-4 flex flex-wrap items-center gap-2 font-display text-xl font-extrabold focus:outline-none",
-               data: { controller: "autofocus", autofocus_target: "field" } do %>
-      <%= t("classroom.classrooms.roster.title", count: @header.active_students_count) %>
-      <% if @overview.new_students_count.positive? %>
-        <%= ui_badge t("classroom.classrooms.roster.new_count", count: @overview.new_students_count), tone: :brand %>
-      <% end %>
+<%# La balise du titre de classroom/classrooms/_roster (et de school_admin/classrooms/show), avec l'autofocus qui y ramène le focus. %>
+<% title = capture do %>
+  <%= tag.h2 id: "classroom_roster_title", tabindex: -1,
+             class: "mb-4 flex flex-wrap items-center gap-2 font-display text-xl font-extrabold focus:outline-none",
+             data: { controller: "autofocus", autofocus_target: "field" } do %>
+    <%= t("classroom.classrooms.roster.title", count: @header.active_students_count) %>
+    <% if @overview.new_students_count.positive? %>
+      <%= ui_badge t("classroom.classrooms.roster.new_count", count: @overview.new_students_count), tone: :brand %>
     <% end %>
+  <% end %>
+<% end %>
+<%= turbo_stream_toast @notice, type: :success %>
+<% if @direction_page %>
+  <%# Sa page n'a ni l'effectif de l'en-tête ni la liste de l'enseignant : la ligne part, puis la page re-demandée remet
+      ses chiffres, son sous-titre et, liste vidée, son état vide (morphing, défilement gardé ; le toast est permanent). %>
+  <%= turbo_stream.remove "student_#{@student.public_id}" %>
+  <%= turbo_stream.replace "classroom_roster_title", title %>
+  <%= turbo_stream.refresh(request_id: nil) %>
+<% else %>
+  <%= turbo_stream.update "classroom_headcount",
+                          t("classroom.classrooms.header.headcount", count: @header.active_students_count, max: @header.max_students) %>
+  <% if @overview.students.empty? %>
+    <%# Plus personne à montrer (classe vide, ou recherche sans résultat) : l'état vide existant de la section. %>
+    <%= turbo_stream.replace "classroom_roster", partial: "classroom/classrooms/roster", locals: roster %>
+  <% else %>
+    <%= turbo_stream.remove "student_#{@student.public_id}" %>
+    <%= turbo_stream.update "classroom_roster_count", t("classroom.classrooms.roster.count", count: @overview.students.size) %>
+    <%= turbo_stream.replace "classroom_roster_title", title %>
   <% end %>
 <% end %>

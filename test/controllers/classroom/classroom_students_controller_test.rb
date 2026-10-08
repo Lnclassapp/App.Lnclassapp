@@ -110,6 +110,28 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_equal admin.id, membership(@koffi).removed_by_id
   end
 
+  # La page de la direction (school_admin/classrooms/show) n'a ni l'effectif de l'en-tête ni la liste de l'enseignant : la
+  # ligne part, le titre de sa liste est recompté et reçoit le focus, puis la page est re-demandée et fusionnée (chiffres,
+  # sous-titre, état vide), avec le toast.
+  test "IL-14 : la direction retire Koffi depuis sa page : ligne retirée, titre focalisé, page re-demandée, toast" do
+    sign_in_as create_school_admin(school: @school)
+
+    remove params: { q: "koffi" }, as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=remove][target=student_#{@koffi.public_id}]"
+    assert_select "turbo-stream[action=replace][target=classroom_roster_title] template" do
+      assert_select "h2#classroom_roster_title[tabindex='-1'][data-controller=autofocus][data-autofocus-target=field]",
+                    text: /#{tr('title', count: 2)}/
+      assert_select "h2 span", text: tr("new_count", count: 1)
+    end
+    assert_select "turbo-stream[action=refresh]", count: 1
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(tr('removed', name: 'Koffi Yao'))}/
+    assert_select "turbo-stream[target=classroom_headcount], turbo-stream[target=classroom_roster_count], " \
+                  "turbo-stream[target=classroom_roster]", 0
+    assert_not_nil membership(@koffi).removed_at
+  end
+
   test "IL-12 : l'équipe retire" do
     member = create_team_member
     sign_in_as member
@@ -162,6 +184,24 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
 
     remove as: :turbo_stream
 
+    assert_response :forbidden
+    assert_still_member
+  end
+
+  # UDR-0079 §3.7, amendée le 2026-10-08 (porteur) : comme le changement de lien (ChangeClassroomLink).
+  test "une classe archivée : 403 et toast d'erreur, la liste n'est pas touchée ; rien n'est écrit" do
+    @classroom.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @teacher
+
+    remove as: :turbo_stream
+
+    assert_response :forbidden
+    assert_select "turbo-stream", count: 1
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(I18n.t('errors.codes.forbidden'))}/
+    assert_no_match(/Koffi/, response.body)
+    assert_still_member
+
+    remove
     assert_response :forbidden
     assert_still_member
   end
