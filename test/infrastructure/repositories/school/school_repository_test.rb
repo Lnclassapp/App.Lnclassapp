@@ -30,12 +30,11 @@ module Repositories
         assert_nil @repository.find_by_public_id(public_id: "inconnu")
       end
 
-      test "CP-09 : retrouve un établissement par son code national ; liste les codes nationaux pris (ADR-0063)" do
-        school = create_school(drena: @drena, national_code: "012345")
+      # IE-21 (ADR-0083 §4.5) : le dépôt ne cherche plus par code national ; l'import lit encore les codes pris.
+      test "CP-09 : liste les codes nationaux pris (ADR-0063)" do
+        create_school(drena: @drena, national_code: "012345")
         create_school(drena: @drena, national_code: nil)
 
-        assert_equal [ school.id, "012345" ], @repository.find_by_national_code(national_code: "012345").then { [ it.id, it.national_code ] }
-        assert_nil @repository.find_by_national_code(national_code: "999999")
         assert_equal Set["012345"], @repository.taken_national_codes
       end
 

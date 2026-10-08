@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
 <%# Rôle : « Importer des établissements » (principale), puis le menu « Classes » : génération confirmée, barème ; filtres et pages dans le frame « schools » %>
-<%# ADR  : 0030, 0036, 0056, 0058 · UDR : 0006, 0036, 0043, 0045, 0054 · aucun bouton de création ; recherche pendant la frappe (frame estompé pendant l'envoi) %>
+<%# ADR  : 0030, 0036, 0056, 0058, 0083 · UDR : 0006, 0036, 0043, 0045, 0054, 0079 · sans code d'établissement (IE-21) ; recherche pendant la frappe %>
 <% page_title t(".page_title") %>
 <% unless list_frame_request? %>
   <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
@@ -46,13 +46,12 @@
           <caption class="sr-only"><%= t(".caption") %></caption>
           <thead class="border-b border-line text-xs text-mute">
             <tr>
-              <% %i[school school_code drena type cycle status classrooms teachers].each do |column| %>
+              <%# IE-21 (UDR-0079 §3.8 bis) : plus de colonne « Code d'établissement » ; le code reste sur la fiche. %>
+              <% %i[school drena type cycle status classrooms teachers].each do |column| %>
                 <th scope="col" class="px-4 py-3 font-medium">
                   <%= t(".columns.#{column}") %>
                   <%# UDR-0054 §3.4 : les statuts s'expliquent une fois, dans l'en-tête, pas sur chaque ligne. %>
                   <%= ui_info_tip t("shared.info_tips.school_status"), label: t(".columns.status") if column == :status %>
-                  <%# Même aide que la fiche (UDR-0054 §3.4, texte validé) : le code est secret, à ne pas confondre avec le code national. %>
-                  <%= ui_info_tip t("teams.schools.header.school_code_tip"), label: t(".columns.school_code") if column == :school_code %>
                 </th>
               <% end %>
               <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>

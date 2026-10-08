@@ -35,7 +35,7 @@ module Finitions
 
     test "FU-53: the public pages fit at 390 px" do
       assert_pages_fit [ root_path, new_session_path, new_join_code_path, join_classroom_path(@classroom.join_code),
-                         new_teacher_registration_path, new_pending_teacher_registration_path, new_identity_pin_reset_path ]
+                         new_teacher_registration_path, teacher_invite_link_path("cccccccccccc"), new_identity_pin_reset_path ]
     end
 
     test "FU-53, FU-23: the team screens fit at 390 px, info tips open" do

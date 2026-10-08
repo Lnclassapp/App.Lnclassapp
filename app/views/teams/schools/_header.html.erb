@@ -1,11 +1,11 @@
 <%# 🌐 UI · teams/schools/_header — en-tête de la fiche d'un établissement, remplacé par les streams update et deactivate %>
-<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code d'établissement (copier, lien) ; menu ⋮ : inviter la direction, modifier, régénérer le code, désactiver %>
-<%# ADR  : 0030, 0036, 0057, 0063, 0065 · UDR : 0006, 0036, 0042, 0044, 0050, 0052, 0054 · Stimulus : clipboard (ui_copy_button) %>
+<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code (direction) et lien /i/ de l'équipe ; menu ⋮ : inviter la direction, modifier, régénérer, désactiver %>
+<%# ADR  : 0030, 0036, 0057, 0063, 0065, 0083 · UDR : 0006, 0036, 0042, 0044, 0050, 0052, 0054, 0079 (§3.7) · Stimulus : clipboard %>
 <% active = school.status != "inactive" %>
 <%# Seul un établissement actif reçoit une classe ou une direction : ni désactivé, ni en brouillon (porteur, 2026-09-27 ; ADR-0065) %>
 <% accepts_classrooms = school.status == "active" %>
 <% code = Entities::School::SchoolCode.display(school.school_code) %>
-<% link = school_code_signup_url(school.school_code) %>
+<% link = teacher_invite_link_url(school.team_invite_token) %>
 <div id="school_header" class="mb-8">
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
@@ -89,6 +89,7 @@
           </div>
           <span id="school_code_value" aria-labelledby="school_code_label"
                 class="font-mono text-2xl font-bold tracking-widest text-ink"><%= code %></span>
+          <p class="mt-1 text-sm text-mute"><%= t(".school_code_hint") %></p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
           <%= ui_copy_button code, label: t(".copy_code"), aria_label: t(".copy_code_label", code:),
@@ -97,9 +98,10 @@
                                    copied: t("shared.clipboard.copied_link") %>
         </div>
       </div>
-      <p class="mt-3 text-sm text-mute">
-        <%= t(".school_code_hint") %>
-        <%= link_to link, link, id: "school_code_link", class: "font-medium break-all text-brand-strong underline-offset-4 hover:underline" %>
+      <p class="mt-4 flex flex-col gap-1">
+        <span id="school_invite_link_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".invite_link") %></span>
+        <%= link_to link, link, id: "school_code_link", "aria-labelledby": "school_invite_link_label",
+                                class: "text-sm font-medium break-all text-brand-strong underline-offset-4 hover:underline" %>
       </p>
       <% unless accepts_classrooms %>
         <p class="mt-2 flex items-start gap-1.5 text-sm font-medium text-warning">

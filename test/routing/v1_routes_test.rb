@@ -65,13 +65,23 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     assert_equal "/drenas/abcdefghijkmno/schools", helpers.drena_schools_path("abcdefghijkmno")
   end
 
-  # ADR-0057: a teacher signs up by the code of the school, typed or carried by /e/<code>; the team regenerates it.
-  test "the school code has its short sign-up link and its regeneration under the school" do
-    assert_equal "/e/k7m4qz", helpers.school_code_signup_path("k7m4qz")
-    assert_equal({ controller: "identity/teacher_registrations", action: "with_code" }, first_match("/e/k7m4qz"))
-    assert_nil first_match("/e/k7m4qz", method: "POST")
+  # ADR-0057, ADR-0083 §4.5: the team regenerates the school code, which stays for the direction only.
+  test "the school code keeps its regeneration under the school" do
     assert_equal "/teams/schools/abcdefghijkmno/code", helpers.school_code_path("abcdefghijkmno")
     assert_equal({ controller: "teams/school_codes", action: "update" }, first_match("/teams/schools/abcdefghijkmno/code", method: "PATCH"))
+  end
+
+  # IE-02 (ADR-0083 §4.1, §4.3): a teacher signs up by /teacher-signup or by an invite link /i/<token>; the code link
+  # /e/<code> and the sign-up without a code are gone.
+  test "IE-02: /i/:token opens the sign-up; /e/:code and /teacher-signup/without-code are not routed" do
+    assert_equal "/i/ab12cd34ef56", helpers.teacher_invite_link_path("ab12cd34ef56")
+    assert_equal({ controller: "identity/teacher_registrations", action: "invite" }, first_match("/i/ab12cd34ef56"))
+    assert_equal({ controller: "identity/teacher_registrations", action: "new" }, first_match("/teacher-signup"))
+    assert_equal({ controller: "identity/teacher_registrations", action: "create" }, first_match("/teacher-signup", method: "POST"))
+    %w[GET POST].each do |method|
+      assert_nil first_match("/e/K7M-4QZ", method:), "#{method} /e/K7M-4QZ"
+      assert_nil first_match("/teacher-signup/without-code", method:), "#{method} /teacher-signup/without-code"
+    end
   end
 
   test "no application route contains a numeric :id" do
@@ -88,8 +98,6 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
   # ADR-0063: the growth routes; « Croissance » is no navigation destination (UDR-0006).
   test "the growth routes are drawn, none of them in the navigation" do
     { [ "/teachers/invite", "GET" ] => "identity/referrals#show", [ "/teachers/invite/shares", "POST" ] => "identity/referral_shares#create",
-      [ "/teacher-signup/without-code", "GET" ] => "identity/pending_teacher_registrations#new",
-      [ "/teacher-signup/without-code", "POST" ] => "identity/pending_teacher_registrations#create",
       [ "/teachers/join-requests/r1/vouch", "POST" ] => "school/join_request_vouches#create",
       [ "/teams/schools/s1/join-requests/r1", "PATCH" ] => "teams/join_requests#update",
       [ "/teams/growth", "GET" ] => "teams/growth#show" }.each do |(path, method), target|

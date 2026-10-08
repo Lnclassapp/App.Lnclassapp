@@ -9,7 +9,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: "Connexion"
     assert_select "input[type=tel][name='session[contact]'][maxlength='15'][placeholder='07 00 00 00 00']"
     assert_select "input[type=password][name='session[pin]'][inputmode=numeric]"
-    assert_select "a[href='#{new_identity_pin_reset_path}']", text: "PIN oublié ?"
+    assert_select "a[href='#{new_identity_pin_reset_path}']", text: "Code secret oublié ?"
   end
 
   test "FU-03, FU-19: the page is « Connexion · Lnclass », its logo leads home, the number is the autofocus target" do
@@ -19,7 +19,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{root_path}'][aria-label='Lnclass, accueil'] img[alt='']", 2
     assert_select "input[name='session[contact]'][autocomplete=username][data-autofocus-target=field]:not([autofocus])"
     assert_select "input[name='session[pin]'][autocomplete=current-password]:not([data-autofocus-target])"
-    assert_select "details summary .sr-only", "Aide : PIN"
+    assert_select "details summary .sr-only", "Aide : Code secret"
     assert_select "details", text: /Code secret de 4 chiffres, choisi à l'inscription/
   end
 
@@ -36,7 +36,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_pin_hint", 0
     assert_select "details div", text: "Code secret de 4 chiffres, choisi à l'inscription."
     assert_equal 1, response.body.scan("4 chiffres").size
-    assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "PIN oublié ?"
+    assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "Code secret oublié ?"
   end
 
   test "UDR-0060 §3.2: the two columns start at lg; below, the welcome column is hidden" do
@@ -103,7 +103,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     post session_path, params: { session: { contact: " 01 #{student.contact[2..]}", pin: "1357" } }
 
     assert_response :unprocessable_entity
-    assert_select "[role=alert]", text: "Numéro ou PIN incorrect."
+    assert_select "[role=alert]", text: "Numéro ou code secret incorrect."
     assert_select "input[name='session[contact]'][value=?]", " 01 #{student.contact[2..]}"
     assert_select "input[name='session[pin]']:not([value])"
   end
@@ -120,7 +120,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     unknown_number = css_select("[role=alert]").map { it.text.squish }
 
     assert_response :unprocessable_entity
-    assert_equal [ "Numéro ou PIN incorrect." ], wrong_pin
+    assert_equal [ "Numéro ou code secret incorrect." ], wrong_pin
     assert_equal wrong_pin, unknown_number
     assert_select "input[name='session[pin]'][type=password]:not([value])"
     assert_select "input[value='1357']", 0
@@ -144,7 +144,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     post session_path, params: { session: { contact: "0700000000", pin: "12" } }
 
     assert_response :unprocessable_entity
-    assert_select "#session_pin_error", text: "Le PIN compte 4 chiffres."
+    assert_select "#session_pin_error", text: "Le code secret compte 4 chiffres."
   end
 
   test "a locked number receives 429 and the unlock time" do
@@ -185,5 +185,56 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_path
     assert_equal 0, Orm::Session.count
+  end
+
+  # ADR-0084 §4.5, UDR-0080 §3.4: the students' app recognised by its User-Agent (§4.1).
+  APP_USER_AGENT = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
+                   "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
+
+  test "CA-3: in the students' app, a teacher with the right PIN reads the refusal, gets no session and an empty form" do
+    teacher = create_teacher
+
+    post session_path, params: { session: { contact: teacher.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+    assert_response :unprocessable_entity
+    assert_select "#wrong-app[role=alert]" do
+      assert_select "p", text: "Cette app est réservée aux élèves"
+      assert_select "p", text: /Enseignants, direction et équipe : continuez sur le site\./
+      assert_select "a[href='https://lnclass.com'][target=_blank][rel=noopener]", text: "Ouvrir lnclass.com"
+    end
+    assert_equal 0, Orm::Session.count
+    assert_empty cookies[:session_token].to_s
+    assert_select "input[name='session[contact]']:not([value])"
+    assert_select "input[name='session[pin]']:not([value])"
+  end
+
+  test "CA-3: in the students' app, a team member is refused before any second factor" do
+    member = create_team_member
+
+    post session_path, params: { session: { contact: member.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+    assert_response :unprocessable_entity
+    assert_select "#wrong-app", text: /Cette app est réservée aux élèves/
+    assert_equal 0, Orm::Session.count
+  end
+
+  test "CA-3: in the students' app, a teacher's wrong PIN reads exactly a student's wrong-PIN message" do
+    [ create_student, create_teacher ].each do |user|
+      post session_path, params: { session: { contact: user.contact, pin: "1357" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+      assert_response :unprocessable_entity
+      assert_equal [ "Numéro ou code secret incorrect." ], css_select("[role=alert]").map { it.text.squish }
+      assert_select "#wrong-app", 0
+    end
+  end
+
+  test "CA-4: in the students' app, a student with the right PIN lands on the student home" do
+    student = create_student(classroom: create_classroom)
+
+    post session_path, params: { session: { contact: student.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+    assert_redirected_to student_home_path
+    assert_equal 1, Orm::Session.where(user: student).count
+    assert_not_empty cookies[:session_token].to_s
   end
 end

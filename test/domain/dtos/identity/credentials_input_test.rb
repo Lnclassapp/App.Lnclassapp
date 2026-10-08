@@ -33,6 +33,19 @@ module Dtos
         assert wrong.invalid?
         assert wrong.errors.of_kind?(:pin, :invalid)
       end
+
+      test "ADR-0084 §4.5 : le client est le site par défaut, ou la coque élèves, rien d'autre" do
+        web = CredentialsInput.new(contact: "0701020304", pin: "2468")
+        app = CredentialsInput.new(contact: "0701020304", pin: "2468", client: "android_student")
+        other = CredentialsInput.new(contact: "0701020304", pin: "2468", client: "ios")
+
+        assert_equal "web", web.client
+        assert_not web.student_app?
+        assert app.valid?
+        assert app.student_app?
+        assert other.invalid?
+        assert other.errors.of_kind?(:client, :inclusion)
+      end
     end
   end
 end

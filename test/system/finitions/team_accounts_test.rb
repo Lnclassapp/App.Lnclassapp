@@ -78,7 +78,7 @@ class FinitionsTeamAccountsTest < ApplicationSystemTestCase
     sign_in_as @member
     visit team_dashboard_path
 
-    labels = [ "Réussite moyenne", "Élèves actifs", "Établissements actifs" ]
+    labels = [ "Réussite moyenne", "Élèves actifs", "Établissements actifs", "Ouvert depuis l'app installée" ]
     labels.each { |label| assert_selector "details summary .sr-only", text: "Aide : #{label}", visible: :all }
 
     summary = find("#figure_completed_sessions summary")
