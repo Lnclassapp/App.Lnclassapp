@@ -3,17 +3,9 @@
 <%# ADR  : 0065, 0085 (§4.5) · UDR : 0006, 0081 (§3.7) · le titre reçoit le focus (autofocus, tabindex -1) ; @search : la recherche de la liste %>
 <% roster = { classroom: @header, students: @overview.students, search: @search, new_count: @overview.new_students_count,
               can_remove: true, focus_title: true } %>
-<%# La balise du titre de classroom/classrooms/_roster (et de school_admin/classrooms/show), avec l'autofocus qui y ramène le focus. %>
-<% title = capture do %>
-  <%= tag.h2 id: "classroom_roster_title", tabindex: -1,
-             class: "mb-4 flex flex-wrap items-center gap-2 font-display text-xl font-extrabold focus:outline-none",
-             data: { controller: "autofocus", autofocus_target: "field" } do %>
-    <%= t("classroom.classrooms.roster.title", count: @header.active_students_count) %>
-    <% if @overview.new_students_count.positive? %>
-      <%= ui_badge t("classroom.classrooms.roster.new_count", count: @overview.new_students_count), tone: :brand %>
-    <% end %>
-  <% end %>
-<% end %>
+<%# Le titre de la liste (classroom/classrooms/_roster_title), avec l'autofocus qui y ramène le focus. %>
+<% title = render partial: "classroom/classrooms/roster_title", formats: :html,
+                   locals: { count: @header.active_students_count, new_count: @overview.new_students_count, focus: true } %>
 <%= turbo_stream_toast @notice, type: :success %>
 <% if @direction_page %>
   <%# Sa page n'a ni l'effectif de l'en-tête ni la liste de l'enseignant : la ligne part, puis la page re-demandée remet

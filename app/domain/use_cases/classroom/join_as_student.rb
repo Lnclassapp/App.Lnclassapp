@@ -4,13 +4,7 @@
 module UseCases
   module Classroom
     class JoinAsStudent
-      # La classe désignée et la voie qui y mène (Entities::Classroom::StudentArrivalChannel::WRITABLE).
-      Destination = Data.define(:classroom, :via)
-      STANDARD = "standard".freeze
-      LINK = "link".freeze
       ALREADY_ENROLLED = { base: [ :already_enrolled ] }.freeze
-      BLANK = { classroom_public_id: [ :blank ] }.freeze
-      UNAVAILABLE = { classroom_public_id: [ :unavailable ] }.freeze
 
       # L'échec de la nouvelle adhésion traverse la transaction pour rouvrir l'ancienne, puis ressort en Result.
       class Aborted < StandardError
@@ -23,9 +17,7 @@ module UseCases
       end
 
       def initialize(classrooms:, schools:, taxonomy:, memberships:, policy:, transaction:, clock:)
-        @classrooms = classrooms
-        @schools = schools
-        @taxonomy = taxonomy
+        @designation = ClassroomDesignation.new(classrooms:, schools:, taxonomy:, clock:)
         @memberships = memberships
         @policy = policy
         @transaction = transaction
@@ -65,42 +57,17 @@ module UseCases
       # ADR-0085 §4.3 : le retrait ne ferme que la voie standard ; le lien le lève.
       def allowed(actor, destination)
         classroom = destination.classroom
-        via_link = destination.via == LINK
+        via_link = destination.via == ClassroomDesignation::LINK
         removed = !via_link && @memberships.removed_from?(classroom_id: classroom.id, student_id: actor.user_id)
         @policy.call(actor:, classroom:, via_link:, removed:)
       end
 
-      def designated(dto) = dto.link_token ? linked(dto.link_token) : chosen(dto)
+      # Avec un jeton, la classe du lien, qui ne retombe pas sur la cascade (ADR-0085 §4.1) ; sans, la classe choisie.
+      def designated(dto)
+        return @designation.chosen(dto) unless dto.link_token
 
-      # ADR-0085 §4.1 : le lien n'ouvre qu'une classe active d'un établissement actif ; sinon il ne mène nulle part.
-      def linked(token)
-        classroom = @classrooms.lock_by_link_token(token:)
-        return Shared::Result.failure(:not_found) unless classroom&.active? && school_of(classroom).active?
-
-        Destination.new(classroom:, via: LINK)
+        @designation.linked(dto.link_token) || Shared::Result.failure(:not_found)
       end
-
-      # La classe doit être de celles que la cascade propose (ADR-0085 §4.2), sinon la même erreur sous le champ.
-      def chosen(dto)
-        return Shared::Result.failure(:invalid, errors: BLANK) if dto.classroom_public_id.nil?
-
-        classroom = @classrooms.lock_by_public_id(public_id: dto.classroom_public_id)
-        return Shared::Result.failure(:invalid, errors: UNAVAILABLE) unless listed?(classroom, dto)
-
-        Destination.new(classroom:, via: STANDARD)
-      end
-
-      # Active, de l'année en cours, du niveau et de l'établissement envoyés, établissement actif (règle de RegisterStudent).
-      def listed?(classroom, dto)
-        return false unless classroom&.active? && classroom.school_year == Entities::Classroom::SchoolYear.current(@clock.now.to_date)
-
-        school = school_of(classroom)
-        level = dto.level_slug && @taxonomy.find_level(slug: dto.level_slug)
-        school.active? && school.public_id == dto.school_public_id && level&.id == classroom.level_id
-      end
-
-      # Une classe a toujours son établissement (clé étrangère, NOT NULL).
-      def school_of(classroom) = @schools.find_by_id(id: classroom.school_id)
 
       # IL-17 : l'adhésion à la classe archivée est close dans la même transaction que la nouvelle.
       def move(student_id, current, destination)

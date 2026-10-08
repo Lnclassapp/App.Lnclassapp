@@ -37,13 +37,7 @@
 <%= ui_card id: "classroom_students" do %>
   <%# UDR-0081 §3.7 : le titre de la liste de l'enseignant, compte des nouveaux compris ; après un retrait, le stream
       (classroom_students/destroy) le remplace et y met le focus, puis la page re-demandée remet le reste. %>
-  <%= tag.h2 id: "classroom_roster_title", tabindex: -1,
-             class: "mb-4 flex flex-wrap items-center gap-2 font-display text-xl font-extrabold focus:outline-none" do %>
-    <%= t("#{roster}.title", count: classroom.students_count) %>
-    <% if @detail.new_students_count.positive? %>
-      <%= ui_badge t("#{roster}.new_count", count: @detail.new_students_count), tone: :brand %>
-    <% end %>
-  <% end %>
+  <%= render "classroom/classrooms/roster_title", count: classroom.students_count, new_count: @detail.new_students_count %>
   <% if @detail.members.empty? %>
     <%= ui_empty_state title: t(".empty"), icon: "users" %>
   <% else %>

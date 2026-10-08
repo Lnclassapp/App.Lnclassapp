@@ -3,12 +3,13 @@
 # ADR  : 0026, 0040, 0062, 0085 · UDR : 0081 (§3.3, §3.4, §3.5)
 module Classroom
   class StudentClassroomChoicesController < AuthenticatedController
+    include ClassPicker
+
     FIELDS = %i[drena_public_id school_public_id level_slug classroom_public_id].freeze
 
     allow_roles :student
     # IL-18 : l'élève déjà dans une classe active n'a rien à choisir ; son envoi est refusé par JoinAsStudent, en 403.
     before_action :send_enrolled_home, only: :new
-    helper_method :class_picker_lists
 
     # Sans choix envoyés (repli sans JavaScript, UDR-0081 §3.3), la DRENA et l'établissement de sa dernière classe.
     def new
@@ -46,25 +47,6 @@ module Classroom
     def last_school
       last = Queries::Classroom::StudentHomeQuery.new.last_classroom(student_id: current_actor.user_id)
       { drena_public_id: last.drena_public_id, school_public_id: last.school_public_id }
-    end
-
-    # Les listes de la cascade, chacune seulement si le choix précédent lui appartient (règle de l'inscription,
-    # StudentRegistrationsController) : un identifiant forgé ne touche pas la base. nil : liste non affichée.
-    def class_picker_lists
-      @class_picker_lists ||= begin
-        drenas = options.drenas
-        schools = (options.schools_for(drena_public_id: @form.drena_public_id) if drenas.any? { it.public_id == @form.drena_public_id })
-        levels = (levels_of(@form.school_public_id) if schools&.any? { it.public_id == @form.school_public_id })
-        classrooms = (classrooms_of(@form.school_public_id, @form.level_slug) if levels&.any? { it.slug == @form.level_slug })
-        { drenas:, schools:, levels:, classrooms: }
-      end
-    end
-
-    def options = @options ||= Queries::School::SchoolOptionsQuery.new
-    def levels_of(school_public_id) = Queries::School::SchoolLevelsQuery.new.call(school_public_id:)
-
-    def classrooms_of(school_public_id, level_slug)
-      Queries::Classroom::LevelClassroomsQuery.new.call(school_public_id:, level_slug:)
     end
 
     def join

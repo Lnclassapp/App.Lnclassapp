@@ -6,12 +6,7 @@
 <%# locals: (classroom:, students:, search: "", new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
   <%# UDR-0081 §3.7 : le compte des nouveaux est dans le titre, lu avec lui ; la même balise est rendue par le stream du retrait. %>
-  <%= tag.h2 id: "classroom_roster_title", tabindex: -1,
-             class: "mb-4 flex flex-wrap items-center gap-2 font-display text-xl font-extrabold focus:outline-none",
-             data: ({ controller: "autofocus", autofocus_target: "field" } if focus_title) do %>
-    <%= t(".title", count: classroom.active_students_count) %>
-    <% if new_count.positive? %><%= ui_badge t(".new_count", count: new_count), tone: :brand %><% end %>
-  <% end %>
+  <%= render "classroom/classrooms/roster_title", count: classroom.active_students_count, new_count:, focus: focus_title %>
   <% if classroom.active_students_count.zero? %>
     <div id="classroom_roster_empty">
       <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
