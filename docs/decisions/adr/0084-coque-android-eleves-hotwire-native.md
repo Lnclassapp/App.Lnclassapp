@@ -105,7 +105,7 @@ Les icônes sont celles du site (Heroicons `home`, `book-open`, `academic-cap`),
 - Le port `UserRepositoryPort#mark_app_opened(user_id:, at:)` devient `mark_app_opened(user_id:, at:, channel:)`, avec `channel` dans `:pwa` ou `:android`.
 - `RecordAppOpen` reçoit le canal. `HomepageController` date l'ouverture quand `source=android` arrive d'une coque reconnue (§4.1), puis redirige vers l'accueil comme aujourd'hui.
 - L'anonymisation efface aussi cette colonne.
-- La tuile « Ouvert depuis l'app installée » du pilotage gagne une ligne « dont app Android : N élèves » (une requête groupée, inchangée en nombre).
+- La tuile « Ouvert depuis l'app installée » du pilotage gagne une ligne « dont app Android : N élèves » (une requête groupée, inchangée en nombre). Ses lignes par rôle comptent désormais les comptes ouverts par l'un **ou** l'autre canal, une fois chacun : la part Android en est un sous-ensemble, ce que dit « dont ». Les chiffres de l'année en cache changent de forme (`CACHE_VERSION` 4).
 - La colonne d'origine sur `sessions` de l'ADR-0070 n'est **pas** créée.
 
 ### 4.7 Liens ouverts dans l'app (ADR-0070 R2)
