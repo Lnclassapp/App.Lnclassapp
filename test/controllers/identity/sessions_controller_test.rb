@@ -103,7 +103,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     post session_path, params: { session: { contact: " 01 #{student.contact[2..]}", pin: "1357" } }
 
     assert_response :unprocessable_entity
-    assert_select "[role=alert]", text: "Code secret ou numéro incorrect."
+    assert_select "[role=alert]", text: "Numéro ou code secret incorrect."
     assert_select "input[name='session[contact]'][value=?]", " 01 #{student.contact[2..]}"
     assert_select "input[name='session[pin]']:not([value])"
   end
@@ -120,7 +120,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     unknown_number = css_select("[role=alert]").map { it.text.squish }
 
     assert_response :unprocessable_entity
-    assert_equal [ "Code secret ou numéro incorrect." ], wrong_pin
+    assert_equal [ "Numéro ou code secret incorrect." ], wrong_pin
     assert_equal wrong_pin, unknown_number
     assert_select "input[name='session[pin]'][type=password]:not([value])"
     assert_select "input[value='1357']", 0

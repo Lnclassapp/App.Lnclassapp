@@ -198,7 +198,7 @@ La formule « Inscription : … » ne s'accorde pas : il n'y a pas de « arrivé
 
 ## 3.11 Vocabulaire « code secret » (amendement du 2026-10-07, memo Q25)
 
-- Dans **toute** l'interface (connexion, profil, changement et réinitialisation, codes de récupération, inscriptions élève, enseignant et direction, invitations, aide), le secret à 4 chiffres s'appelle « code secret », jamais « PIN ». Formes : « votre code secret », « Code secret oublié ? », « Confirmation du code secret », « Nouveau code secret », « Les deux codes secrets ne sont pas identiques. », « Code secret ou numéro incorrect. ». Accords au masculin.
+- Dans **toute** l'interface (connexion, profil, changement et réinitialisation, codes de récupération, inscriptions élève, enseignant et direction, invitations, aide), le secret à 4 chiffres s'appelle « code secret », jamais « PIN ». Formes : « votre code secret », « Code secret oublié ? », « Confirmation du code secret », « Nouveau code secret », « Les deux codes secrets ne sont pas identiques. », « Numéro ou code secret incorrect. ». Accords au masculin.
 - Les libellés accessibles (`aria-label`, `title`, textes `sr-only`) suivent la même règle. Le code (classes, méthodes, routes, clés de traduction, colonnes) garde `pin`.
 
 ## 4. Conséquences

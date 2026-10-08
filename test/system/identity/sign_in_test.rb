@@ -29,7 +29,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
       fill_in "session[pin]", with: "1357"
       click_on I18n.t("identity.sessions.new.submit")
 
-      assert_selector "[role=alert]", text: "Code secret ou numéro incorrect."
+      assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
     end
     assert_field "session[contact]", with: student.contact
     assert_field "session[pin]", with: ""
@@ -86,7 +86,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
         fill_in "session[pin]", with: "1357"
         click_on I18n.t("identity.sessions.new.submit")
 
-        assert_selector "[role=alert]", text: "Code secret ou numéro incorrect."
+        assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
       end
 
       sign_in_as student

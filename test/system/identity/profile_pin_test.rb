@@ -49,7 +49,7 @@ class Identity::ProfilePinTest < ApplicationSystemTestCase
     fill_in "session[contact]", with: teacher.contact
     fill_in "session[pin]", with: "2468"
     click_on I18n.t("identity.sessions.new.submit")
-    assert_selector "[role=alert]", text: "Code secret ou numéro incorrect."
+    assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
 
     sign_in_as teacher, pin: "1357"
     assert_current_path teacher_home_path
