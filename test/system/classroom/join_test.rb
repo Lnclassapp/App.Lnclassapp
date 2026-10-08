@@ -51,6 +51,24 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_equal [ [ @classroom.id, "link" ] ], memberships_of_the_new_student
   end
 
+  # Challenger de la phase 5 (E1) : un refus 403 (la classe s'est remplie pendant la saisie) se lit sans chercher l'alerte.
+  test "IL-05 at 390 px: a classroom filled while the form was typed refuses in 403, the alert focused and in view" do
+    @classroom.update_column(:max_students, 1)
+
+    with_mobile_viewport do
+      visit new_student_registration_path
+      choose_classroom "6ème 1"
+      fill_in_the_student
+      create_student(classroom: @classroom)
+      click_on I18n.t("#{FORM}.submit")
+
+      assert_selector "#student-registration-refusal[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
+      assert_equal "student-registration-refusal", page.evaluate_script("document.activeElement.id")
+      assert_operator page.evaluate_script("document.getElementById('student-registration-refusal').getBoundingClientRect().top"), :>=, 0
+    end
+    assert_equal 0, Orm::User.where(role: "student", contact: "0701020304").count
+  end
+
   test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
     visit join_classroom_path(@classroom.reload.link_token)
     click_on I18n.t("#{FORM}.other_classroom")

@@ -42,8 +42,10 @@
             </div>
           <% elsif current_actor %>
             <%= form_with url: join_classroom_path(@form.link_token), method: :post, id: "join-form", class: "mt-6 space-y-5" do %>
+              <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>
               <% if @form.errors[:base].any? %>
-                <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+                <div id="join-refusal" role="alert" tabindex="-1" data-autofocus-target="field"
+                   class="flex scroll-mt-24 items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error outline-none">
                   <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
                   <p><%= @form.errors[:base].to_sentence %></p>
                 </div>
