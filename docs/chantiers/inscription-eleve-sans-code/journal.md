@@ -28,6 +28,8 @@
 | 2026-10-08 | Lot E : la page de la direction porte les identifiants de la page enseignant (`#student_<public_id>`, `h2#classroom_roster_title`) ; la réponse au retrait côté direction finit par `turbo_stream.refresh(request_id: nil)` | Remet à jour tuiles, sous-titre et état vide sans écrire un second stream ; modèle déjà utilisé par l'équipe | Non |
 | 2026-10-08 | Lot E : bloc du lien et bouton « Chercher » marqués permanents, avec des identifiants propres à la classe | Le rafraîchissement par fusion remettait à l'état serveur ce que Stimulus avait montré ou caché | Non |
 | 2026-10-08 | Lot E : sur la page de la direction, les élèves restent triés par nom (pas de nouveaux en tête) | L'UDR ne demande à la direction que pastilles, menu et modale | Non |
+| 2026-10-08 | Fusion de `Develop` : décisions renumérotées ADR-0085 et UDR-0081 | `Develop` avait donné 0083 et 0079 à `inscription-enseignant` (anciens 0082 et 0078), et 0082, 0084, 0078, 0080 à d'autres chantiers. Seules les lignes écrites par cette branche ont changé (`5a5581a0`), avant la fusion | Non |
+| 2026-10-08 | Fusion de `Develop` : l'élève saisit son nom et ses prénoms dans deux champs (memo Q16, porteur) | L'enseignant y est revenu (Q24 de `inscription-enseignant`) et `Entities::Identity::FullName` a quitté `Develop`. UDR-0081 §2.6 et §3.2, ADR-0085 §5, PRD IL-20 amendés | Non : ADR-0037 |
 
 ## Ce qui a dérapé
 
@@ -42,6 +44,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Vague 3, tests système en parallèle (2026-10-08).** Les lots B et E ont lancé `bin/rails test:system` en même temps sur la même machine : 9 et 10 échecs, dits « instables ». Relancée seule après la fusion, la suite n'a donné que les 2 échecs attendus (`join_test.rb:64`, IL-18 ; `remediation_handed_in_test.rb:48`, nouvelle colonne de la direction), corrigés en 58edfee. **Les suites système ne se lancent pas en parallèle** ; un échec « instable » se vérifie par une relance seule avant d'être écarté.
 - **Lot E (2026-10-08).** Supposé que les éléments modifiés par Stimulus survivraient au rafraîchissement par fusion : faux pour « Copier le lien » et « Chercher » (≈ 15 min, vu sur les captures).
 - **Lot B (2026-10-08).** Un test système jetable de captures laissé dans `test/system` pendant la suite complète fait échouer `ci_plan_test` et `system_budget_test` : le supprimer avant de lancer la suite.
+- **Fusion de `Develop` (2026-10-08).** 13 fichiers en conflit, et deux ruptures sans conflit : les numéros d'ADR et d'UDR pris des deux côtés, et `FullName` retiré par `Develop` (41 erreurs à la fusion). La branche avait 92 commits de retard : fusionner `Develop` à chaque vague aurait montré ces deux ruptures le jour même.
 
 ## Ce qu'on a appris sur la codebase
 

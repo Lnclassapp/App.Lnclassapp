@@ -18,12 +18,12 @@ L'enseignant, la direction et l'équipe voient aujourd'hui un code à dicter ou 
 
 ## 2. Décision
 
-1. **Une seule page**, `/student-signup`, en trois rubriques dans l'ordre du parcours : **Ta classe** (DRENA, établissement, niveau, classe), **Toi** (nom complet, genre, numéro), **Code secret**. Pas d'étapes : même raison que l'UDR-0079 §2.1, et la page marche sans JavaScript.
+1. **Une seule page**, `/student-signup`, en trois rubriques dans l'ordre du parcours : **Ta classe** (DRENA, établissement, niveau, classe), **Toi** (nom, prénoms, genre, numéro), **Code secret**. Pas d'étapes : même raison que l'UDR-0079 §2.1, et la page marche sans JavaScript.
 2. **Quatre listes enchaînées, chacune chargée par le choix de la précédente**, plutôt qu'une recherche : l'élève connaît sa région, son école et son niveau, pas l'orthographe exacte de sa classe (memo Q12). Une liste qui n'a pas encore de parent choisi n'est pas affichée : la page grandit avec les choix.
 3. **Par un lien de classe** (`/c/<jeton>`), la même page s'ouvre avec la classe **déjà affichée** dans le bandeau existant (`_classroom_preview`), et « Ce n'est pas ta classe ? » ramène à la page standard. Les quatre listes n'apparaissent pas.
 4. **Une classe complète reste visible, désactivée**, plutôt que cachée : l'élève comprend que sa classe existe.
 5. **« Introuvable » est un état, pas une erreur** : un message d'orientation remplace la liste (memo Q9).
-6. **Nom complet, numéro et code secret** : les règles de l'UDR-0079 §3.3 à §3.5, avec le tutoiement de l'élève.
+6. **Nom et prénoms, numéro et code secret** : les règles de l'UDR-0079 §3.3 à §3.5, avec le tutoiement de l'élève. Amendement du 2026-10-08 (memo Q16) : deux champs « Nom » et « Prénom(s) », comme l'enseignant ; plus de nom complet, d'aperçu ni de « Corriger ».
 7. **Les nouveaux arrivés se lisent dans la liste des élèves**, par une pastille sur la ligne, plutôt que dans une notification : trois acteurs regardent la même liste (memo Q14).
 8. **Retirer un élève passe par une confirmation en modale** qui le nomme : le geste est rare, et il touche une personne.
 9. Erreur : page re-rendue en 422 ou 403 par Turbo, saisies gardées sauf les PIN. Succès de l'inscription : la page change, la session vient de naître. Le retrait et le changement de lien répondent par Turbo Stream.
@@ -45,7 +45,7 @@ L'enseignant, la direction et l'équipe voient aujourd'hui un code à dicter ou 
 ### 3.2 Formulaire `classroom/student_registrations/_form`
 
 - Un seul `form_with model: @form, scope: :student_registration, url: student_registrations_path, id: "student-registration-form"`.
-- `data-controller="classroom--class-picker identity--full-name identity--phone-digits identity--pin-match"`.
+- `data-controller="classroom--class-picker identity--phone-digits identity--pin-match"`.
 - Le bloc `role="alert"` des erreurs `base` (classe complète, élève retiré, déjà inscrit) reste en tête du formulaire, classes `bg-error-soft text-error` de l'UDR-0009.
 - Champ caché `link_token`, seulement quand la classe vient d'un lien valide.
 - Trois `<fieldset class="space-y-4">`, chaque `<legend>` avec `mb-3 text-xs font-semibold tracking-wider text-mute uppercase` :
@@ -53,12 +53,12 @@ L'enseignant, la direction et l'équipe voient aujourd'hui un code à dicter ou 
 | # | Légende (`t`) | Contenu, dans l'ordre |
 |---|---|---|
 | 1 | « Ta classe » (`.classroom`) | **Voie standard** : partial `_class_picker` (§3.3). **Voie lien** : bandeau `_classroom_preview`, puis lien « Ce n'est pas ta classe ? ». |
-| 2 | « Toi » (`.you`) | Nom complet, aperçu, `<details>` « Corriger », genre (deux radios `min-h-tap`, sans présélection), numéro |
+| 2 | « Toi » (`.you`) | Nom, Prénom(s) (deux champs, amendement du 2026-10-08), genre (deux radios `min-h-tap`, sans présélection), numéro |
 | 3 | « Code secret » (`.security`) | Code secret, confirmation, statut de concordance |
 
 - Puis `ui_button t(".submit")` (« Créer mon compte »), `brand`, `lg`, `full: true`, `id: "student-registration-submit"`.
 - **Voie lien** : `link_to t(".other_classroom"), new_student_registration_path, id: "other-classroom"`, classe de `#other-school` (UDR-0079 §3.2).
-- Textes de la rubrique 2, à la place de ceux de l'UDR-0079 : `full_name_placeholder` « Ex. : KOUASSI Aya Marie » ; `full_name_hint` « Ton nom, puis tes prénoms. » ; erreur d'un seul mot « Saisis ton nom et tes prénoms. ».
+- Textes de la rubrique 2 : `last_name_placeholder` « Ex. : KOUASSI » ; `first_name_placeholder` « Ex. : Aya Marie » ; erreurs « Saisis ton nom. » et « Saisis ton ou tes prénoms. » (amendement du 2026-10-08 : le nom complet, son aperçu et son erreur d'un seul mot sont retirés).
 
 ### 3.3 Cascade `classroom/student_registrations/_class_picker`
 

@@ -26,7 +26,7 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 2. L'entrée immédiate ouvre toute classe à quiconque : il faut pouvoir **voir** une arrivée et **défaire** une entrée, y compris dans une classe sans enseignant (memo Q6, Q11).
 3. Un élève retiré ne doit pas revenir seul une minute plus tard (memo Q7).
 4. Ne pas divulguer plus qu'aujourd'hui : l'aperçu d'une classe dit trois noms, jamais un effectif, un enseignant ni un élève (UDR-0009 §2.2).
-5. Garder ce qui existe : la transaction de `JoinWithCode`, le verrou de la classe et le plafond (ADR-0041), la classe principale unique (ADR-0040), `Shared::Result`, la forme des jetons et `FullName` de l'ADR-0083.
+5. Garder ce qui existe : la transaction de `JoinWithCode`, le verrou de la classe et le plafond (ADR-0041), la classe principale unique (ADR-0040), `Shared::Result`, la forme des jetons de l'ADR-0083. Le nom et les prénoms se saisissent dans deux champs, selon l'ADR-0037 (amendement du 2026-10-08, memo Q16 : `FullName` est retiré avec le retour de l'enseignant à deux champs).
 
 ## 3. Options envisagées
 
@@ -116,7 +116,7 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 - **Un lien de classe qui fuit lève les retraits** jusqu'à ce que quelqu'un le change.
 - **Un second retrait écrase la date du premier** : l'historique des retraits n'est pas gardé.
 - **La liste des classes d'un établissement devient publique**, nom par nom. Elle était lisible un code à la fois.
-- **Dépendance** à `inscription-enseignant` pour `FullName`, les contrôleurs de saisie et la forme des jetons.
+- **Dépendance** à `inscription-enseignant` pour les contrôleurs de saisie et la forme des jetons.
 
 ## 6. Notes d'implémentation
 

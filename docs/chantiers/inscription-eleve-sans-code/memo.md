@@ -21,7 +21,7 @@ Sans code, il n'a aucune entrée. Un élève qui découvre Lnclass seul, ou dont
 
 Le porteur a décidé le 2026-10-07 (chantier `inscription-enseignant`, Q20) de **retirer le code de classe** et de donner à l'élève **deux flux d'inscription, comme pour l'enseignant**. Le grill les a précisés :
 
-- **l'inscription standard, « à froid »** : l'élève choisit « Je suis élève », sélectionne sa **DRENA**, son établissement, son niveau, puis sa classe, et saisit son nom complet, son genre, son numéro et son code secret. Il entre dans la classe tout de suite ;
+- **l'inscription standard, « à froid »** : l'élève choisit « Je suis élève », sélectionne sa **DRENA**, son établissement, son niveau, puis sa classe, et saisit son nom, ses prénoms, son genre, son numéro et son code secret. Il entre dans la classe tout de suite ;
 - **l'inscription par le lien de la classe**, où la classe est déjà désignée. Le lien ne porte plus le code ; il peut être changé.
 
 En contrepartie de l'entrée immédiate, les enseignants de la classe, la direction et l'équipe voient les nouveaux arrivés et peuvent **retirer un élève**.
@@ -63,9 +63,10 @@ Des élèves veulent s'inscrire **seuls**, alors qu'aucun enseignant de leur cla
 | Q10. Comment un élève déjà inscrit, mais sans classe, en rejoint-il une nouvelle ? | **Par le même choix que l'inscription** : établissement puis classe, son établissement déjà proposé ; le lien d'un enseignant marche aussi (2026-10-07). | Le code disparaît partout, y compris pour l'élève connecté. Le choix de la classe sert à deux moments : à l'inscription et depuis l'accueil d'un élève sans classe (classe archivée, ou retrait). La règle « une seule classe principale active » ne change pas. |
 | Q11. Le code retiré, que voient et que peuvent faire la direction et l'équipe ? | **Les mêmes gestes que l'enseignant** : copier le lien de classe, le changer, retirer un élève (2026-10-07). | Trois acteurs partagent ces gestes : les enseignants de la classe, la direction pour les classes de son seul établissement, l'équipe pour toutes. Une classe sans enseignant garde ainsi quelqu'un pour inviter et pour retirer un intrus. Le retrait d'un élève est un pouvoir nouveau pour la direction. Les écrans de la direction et de l'équipe qui montrent le code changent aussi. |
 | Q12. Après la DRENA et l'établissement, comment l'élève trouve-t-il sa classe ? | **En deux étapes** : son niveau, puis sa classe dans ce niveau (2026-10-07). | Le parcours standard a quatre choix enchaînés : DRENA → établissement → niveau → classe. Un niveau sans classe, ou dont toutes les classes sont pleines ou archivées, donne l'état « introuvable » de Q9. |
-| Q13. Quelles informations personnelles, et sous quelle forme ? | **Les trois améliorations de l'enseignant sont reprises** : un seul champ « nom complet » avec aperçu du découpage, numéro nettoyé en direct, concordance du code secret en direct (2026-10-07). | Les deux inscriptions se ressemblent. Le chantier dépend des éléments d'interface de `inscription-enseignant`, pas encore livrés. La règle « premier mot = nom » s'applique à l'élève, avec la même correction à la main ; un nom complet d'un seul mot est refusé. Le nom et les prénoms restent enregistrés séparément. |
+| Q13. Quelles informations personnelles, et sous quelle forme ? *(saisie en un champ annulée par Q16)* | **Les trois améliorations de l'enseignant sont reprises** : un seul champ « nom complet » avec aperçu du découpage, numéro nettoyé en direct, concordance du code secret en direct (2026-10-07). | Les deux inscriptions se ressemblent. Le chantier dépend des éléments d'interface de `inscription-enseignant`, pas encore livrés. La règle « premier mot = nom » s'applique à l'élève, avec la même correction à la main ; un nom complet d'un seul mot est refusé. Le nom et les prénoms restent enregistrés séparément. |
 | Q14. Comment l'enseignant est-il prévenu d'une arrivée ? | **Dans l'application seulement** : sur la page de la classe, les nouveaux arrivés sont marqués « Nouveau », avec « Retirer » à côté (2026-10-07). | Aucun message hors de l'application, aucun service extérieur. Il faut dire quand la marque « Nouveau » s'efface. La même marque sert à la direction et à l'équipe. Un enseignant qui n'ouvre pas Lnclass ne voit rien : risque accepté. |
 | Q15. Que voit un élève qui ouvre un ancien lien de classe, portant le code ? | **L'inscription standard, avec une alerte** : « Ce lien n'est plus valable. Choisissez votre classe. » (2026-10-07). | Les anciens liens ne sont pas repris : les codes peuvent être retirés pour de bon. Même comportement que le lien d'invitation invalide de l'enseignant. Un lien de classe changé (Q8) ou inconnu donne la même alerte. |
+| Q16. (à la fusion de `Develop`, 2026-10-08) L'enseignant est revenu à deux champs « Nom » et « Prénom(s) » (Q24 de `inscription-enseignant`). Et l'élève ? | **Deux champs aussi**, comme l'enseignant. | Q13 est annulée pour la saisie du nom : plus de nom complet, d'aperçu ni de « Corriger » ; l'ADR-0037 s'applique à l'inscription élève. Le numéro nettoyé et la concordance du code secret restent. |
 
 ## Cas limites identifiés
 
@@ -79,7 +80,7 @@ Des élèves veulent s'inscrire **seuls**, alors qu'aucun enseignant de leur cla
 - **Deux retraits simultanés** du même élève (un enseignant et la direction) : un seul compte, sans erreur pour le second.
 - **Classe sans enseignant** : l'élève y entre et y travaille ; seules la direction et l'équipe peuvent partager le lien ou retirer.
 - **Établissement, niveau ou classe introuvable** : pas d'inscription, message d'orientation (Q9).
-- **Nom complet d'un seul mot** : refusé (Q13).
+- **Nom ou prénoms manquants** : refusés sous leur champ (ADR-0037, Q16).
 
 ## Questions encore ouvertes
 

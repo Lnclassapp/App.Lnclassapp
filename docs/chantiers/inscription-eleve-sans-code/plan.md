@@ -4,7 +4,7 @@
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 > Specs : [`prd.md`](prd.md) · [ADR-0085](../../decisions/adr/0085-inscription-eleve-sans-code-de-classe.md) · [UDR-0081](../../decisions/udr/0081-inscription-eleve-sans-code-de-classe.md)
 
-> ⚠️ **Préalable avant le Lot 0.** Les lots de `inscription-enseignant` qui livrent `Entities::Identity::FullName` et les contrôleurs Stimulus `identity--full-name`, `identity--phone-digits`, `identity--pin-match` sont fusionnés dans la branche de base : ce chantier les réutilise.
+> ⚠️ **Préalable avant le Lot 0.** Les lots de `inscription-enseignant` qui livrent `Entities::Identity::FullName` *(retiré depuis, memo Q16)* et les contrôleurs Stimulus `identity--full-name` *(idem)*, `identity--phone-digits`, `identity--pin-match` sont fusionnés dans la branche de base : ce chantier les réutilise.
 
 ## Graphe
 

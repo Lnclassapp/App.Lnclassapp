@@ -28,7 +28,7 @@ Règles d'autorisation. L'inscription est publique et refusée à toute personne
 
 1. Le visiteur ouvre `/student-signup` (page d'accueil « Je suis élève », ou application).
 2. Rubrique **Ta classe** : il choisit sa DRENA ; la liste de ses établissements actifs se charge ; il choisit son établissement ; la liste des niveaux qui y ont une classe active se charge ; il choisit son niveau ; la liste des classes actives de ce niveau se charge ; il choisit sa classe. Une classe complète est affichée désactivée, avec « Complète ».
-3. Rubrique **Toi** : il tape son nom complet ; l'aperçu affiche « Nom : … · Prénom(s) : … » ; « Corriger » ouvre les deux champs séparés. Il choisit son genre et saisit son numéro, nettoyé en direct.
+3. Rubrique **Toi** : il saisit son nom (« KOUASSI ») et ses prénoms (« Aya Marie ») dans deux champs (ADR-0037, memo Q16). Il choisit son genre et saisit son numéro, nettoyé en direct.
 4. Rubrique **Code secret** : PIN et confirmation, concordance affichée en direct.
 5. « Créer mon compte » : le compte est créé, l'élève entre **tout de suite** dans la classe (classe principale), sa voie d'arrivée est « standard », la session s'ouvre et il arrive sur son accueil avec « Bienvenue dans ta classe ! ».
 
@@ -66,7 +66,7 @@ Règles d'autorisation. L'inscription est publique et refusée à toute personne
 | Classe complète, choisie malgré tout (envoi direct) | 403, alerte en tête du formulaire : « Cette classe est complète. » ; aucun compte créé |
 | Classe archivée, ou d'un établissement en brouillon ou désactivé, ou absente du niveau choisi | 422, message sous le champ ; aucun compte créé |
 | Établissement sans niveau, ou niveau sans classe active | La liste est remplacée par l'état « introuvable » : « Ta classe n'est pas encore sur Lnclass. Préviens ton enseignant ou la direction de ton établissement. » ; le bouton d'envoi reste désactivé |
-| Nom complet d'un seul mot | 422, sous le champ : « Saisis ton nom et tes prénoms. » |
+| Nom ou prénoms manquants | 422, sous le champ manquant : « Saisis ton nom. » ou « Saisis ton ou tes prénoms. » |
 | Numéro déjà inscrit | 422, message existant « Ce numéro est déjà utilisé. », sans révéler le rôle |
 | Lien de classe inconnu, changé, d'une classe archivée, ou **ancien lien à code** | La page standard s'ouvre avec l'alerte « Ce lien n'est plus valable. Choisis ta classe. » ; voie « standard » |
 | Lien d'une classe complète | La page du lien s'ouvre avec l'alerte « Cette classe est complète. » et sans formulaire |
@@ -80,7 +80,7 @@ Règles d'autorisation. L'inscription est publique et refusée à toute personne
 | Ancienne adresse `/join` | Redirigée vers `/student-signup` *(proposé)* |
 | Plus de 5 inscriptions par minute et par adresse | 429 re-rendu dans le formulaire (règle existante de l'inscription) |
 | Plus de 10 ouvertures de lien, ou 30 chargements de liste, par minute et par adresse | 429 ; la liste montre l'état d'erreur avec « Réessayer » |
-| Sans JavaScript | Les quatre listes se chargent par envoi de la page, une étape à la fois ; pas d'aperçu en direct ; le serveur découpe le nom |
+| Sans JavaScript | Les quatre listes se chargent par envoi de la page, une étape à la fois ; pas de nettoyage du numéro en direct ; le serveur le nettoie |
 
 ## 4. Critères d'acceptation
 
@@ -90,7 +90,7 @@ Formulés de manière vérifiable. Chacun devient un test. Identifiants `IL-NN`.
 # IL-01 — inscription standard
 Étant donné la classe active « 3e 2 » du « Lycée Moderne de Cocody », DRENA « Abidjan 1 », niveau « 3e », non complète
 Quand un visiteur choisit cette DRENA, cet établissement, ce niveau, cette classe,
-  tape « KOUASSI Aya Marie », choisit « Féminin », saisit un numéro libre et un code secret confirmé
+  saisit « KOUASSI » et « Aya Marie », choisit « Féminin », saisit un numéro libre et un code secret confirmé
 Alors un compte élève est créé avec le nom « KOUASSI » et les prénoms « Aya Marie »
 Et la « 3e 2 » est sa classe principale active, sans attente
 Et sa voie d'arrivée est « standard »
@@ -137,7 +137,7 @@ Alors la page est re-rendue en 422 et aucun compte n'est créé
 Quand un visiteur ouvre ce lien
 Alors la classe, son établissement et son niveau sont affichés, déjà choisis
 Et le lien ne contient ni code de classe ni identifiant de la classe
-Quand il complète nom complet, genre, numéro et code secret
+Quand il complète nom, prénoms, genre, numéro et code secret
 Alors la « 3e 2 » est sa classe principale et sa voie d'arrivée est « lien de classe »
 
 # IL-09 — lien qui n'est plus valable
@@ -208,9 +208,9 @@ Quand un visiteur s'inscrit avec ce numéro
 Alors la page est re-rendue en 422 avec « Ce numéro est déjà utilisé. » sous le champ
 Et aucune adhésion n'est créée
 
-# IL-20 — nom complet, numéro, code secret
-Alors le nom complet, le nettoyage du numéro et la concordance du code secret se comportent
-  comme les critères IE-03, IE-04, IE-05, IE-17 et IE-19 du chantier inscription-enseignant, avec le tutoiement
+# IL-20 — nom et prénoms, numéro, code secret
+Alors le nom et les prénoms (deux champs, memo Q16), le nettoyage du numéro et la concordance du code secret se comportent
+  comme les critères IE-03, IE-05, IE-17 et IE-19 du chantier inscription-enseignant, avec le tutoiement
 
 # IL-21 — retraits simultanés
 Quand un enseignant et la direction retirent le même élève au même moment
@@ -238,7 +238,7 @@ Alors la page est re-rendue en 429 et aucun compte n'est créé
 | Delivery | `GET/POST /student-signup` ; `GET/POST /c/:token` (le paramètre change de nature) ; `GET/POST /students/classroom/new` ; `GET /schools/:school_public_id/levels` et `GET /schools/:school_public_id/levels/:level_slug/classrooms` (frames de la cascade, limités en débit) ; `PATCH /classrooms/:public_id/link` ; `DELETE /classrooms/:classroom_public_id/students/:student_public_id`. **Retirés** : `GET/POST /join` (redirigé). `/drenas/:drena_public_id/schools` inchangé. |
 | UI | Page d'inscription élève en trois rubriques (Ta classe → Toi → Code secret), cascade de quatre listes, bandeau de la classe choisie par lien, alerte « lien plus valable », état « introuvable ». Accueil de l'élève sans classe et page « Choisis ta classe ». Page de classe (enseignant, équipe) et page de classe de la direction : bloc « Lien de la classe » à la place du code, marque « Nouveau » et voie d'arrivée dans la liste, « Retirer de la classe » avec confirmation. Fiche d'établissement de l'équipe et écrans de création de classe : plus de code. Contrôleurs Stimulus du nom complet, du numéro et de la concordance : ceux du chantier enseignant, réutilisés. Un contrôleur de cascade, sur le modèle de celui des établissements d'une DRENA. |
 
-**Dépendance.** Ce chantier réutilise `FullName`, les trois contrôleurs Stimulus et la forme des jetons de `inscription-enseignant`, dont seul le Lot 0 est écrit. Le Lot 0 d'ici ne part qu'une fois les lots B et C de l'enseignant fusionnés dans la branche de base.
+**Dépendance.** Ce chantier réutilisait `FullName` (retiré avec la saisie en un champ, memo Q16), les contrôleurs Stimulus et la forme des jetons de `inscription-enseignant`, dont seul le Lot 0 est écrit. Le Lot 0 d'ici ne part qu'une fois les lots B et C de l'enseignant fusionnés dans la branche de base.
 
 ## 6. Décisions rattachées
 
@@ -250,6 +250,6 @@ Alors la page est re-rendue en 429 et aucun compte n'est créé
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
 | Entrées d'inscription pour un élève sans code | 0 | 1 (standard) | |
-| Champs à remplir, inscription standard | — (impossible) | 9 (DRENA, établissement, niveau, classe, nom complet, genre, numéro, PIN, confirmation) | |
-| Champs à remplir, par lien | 6 (nom, prénoms, genre, numéro, PIN, confirmation) | 5 (nom complet, genre, numéro, PIN, confirmation) | |
+| Champs à remplir, inscription standard | — (impossible) | 10 (DRENA, établissement, niveau, classe, nom, prénoms, genre, numéro, code secret, confirmation) | |
+| Champs à remplir, par lien | 6 (nom, prénoms, genre, numéro, PIN, confirmation) | 6 (nom, prénoms, genre, numéro, code secret, confirmation) — memo Q16 | |
 | Écrans qui affichent un code de classe | à compter au Lot 0 | 0 | |
