@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_08_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -646,6 +646,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
   create_table "schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "cycle", default: "both", null: false
+    t.string "direction_invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.bigint "drena_id", null: false
     t.string "name", limit: 150, null: false
     t.string "national_code", limit: 6
@@ -655,20 +656,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
     t.string "school_type", null: false
     t.string "sigle", limit: 20
     t.string "status", default: "active", null: false
+    t.string "team_invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.datetime "updated_at", null: false
     t.index "translate(lower((name)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_name", using: :gin
     t.index "translate(lower((sigle)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_sigle", using: :gin
+    t.index ["direction_invite_token"], name: "index_schools_on_direction_invite_token", unique: true
     t.index ["drena_id", "name"], name: "index_schools_on_drena_id_and_name", unique: true
     t.index ["drena_id"], name: "index_schools_on_drena_id"
     t.index ["national_code"], name: "index_schools_on_national_code", unique: true, where: "(national_code IS NOT NULL)"
     t.index ["national_code"], name: "index_schools_on_national_code_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["public_id"], name: "index_schools_on_public_id", unique: true
     t.index ["school_code"], name: "index_schools_on_school_code", unique: true
+    t.index ["team_invite_token"], name: "index_schools_on_team_invite_token", unique: true
     t.check_constraint "cycle::text = ANY (ARRAY['first'::character varying, 'both'::character varying]::text[])", name: "schools_cycle_values"
+    t.check_constraint "direction_invite_token::text ~ '^[0-9a-f]{12}$'::text", name: "schools_direction_invite_token_format"
     t.check_constraint "national_code::text ~ '^[0-9]{6}$'::text", name: "schools_national_code_format"
     t.check_constraint "school_code::text ~ '^[a-hj-np-z2-9]{6}$'::text", name: "schools_school_code_format"
     t.check_constraint "school_type::text = ANY (ARRAY['public'::character varying, 'private'::character varying, 'mixed'::character varying]::text[])", name: "schools_school_type_values"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'active'::character varying, 'inactive'::character varying]::text[])", name: "schools_status_values"
+    t.check_constraint "team_invite_token::text ~ '^[0-9a-f]{12}$'::text", name: "schools_team_invite_token_format"
   end
 
   create_table "series", force: :cascade do |t|
@@ -873,6 +879,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
 
   create_table "teacher_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "joined_via", null: false
     t.bigint "material_id", null: false
     t.datetime "onboarding_completed_at"
     t.string "referral_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
@@ -881,6 +888,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
     t.index ["material_id"], name: "index_teacher_profiles_on_material_id"
     t.index ["referral_token"], name: "index_teacher_profiles_on_referral_token", unique: true
     t.index ["user_id"], name: "index_teacher_profiles_on_user_id", unique: true
+    t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying, 'colleague'::character varying, 'direction'::character varying, 'team'::character varying, 'code'::character varying]::text[])", name: "teacher_profiles_joined_via_values"
     t.check_constraint "referral_token::text ~ '^[0-9a-f]{12}$'::text", name: "teacher_profiles_referral_token_format"
   end
 
@@ -919,7 +927,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_100000) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.datetime "android_opened_at"
     t.datetime "anonymized_at"
+    t.datetime "app_opened_at"
     t.string "contact", limit: 10
     t.datetime "created_at", null: false
     t.string "first_name", limit: 80, null: false

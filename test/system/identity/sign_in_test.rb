@@ -29,7 +29,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
       fill_in "session[pin]", with: "1357"
       click_on I18n.t("identity.sessions.new.submit")
 
-      assert_selector "[role=alert]", text: "Numéro ou PIN incorrect."
+      assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
     end
     assert_field "session[contact]", with: student.contact
     assert_field "session[pin]", with: ""
@@ -86,7 +86,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
         fill_in "session[pin]", with: "1357"
         click_on I18n.t("identity.sessions.new.submit")
 
-        assert_selector "[role=alert]", text: "Numéro ou PIN incorrect."
+        assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
       end
 
       sign_in_as student
@@ -111,13 +111,13 @@ class Identity::SignInTest < ApplicationSystemTestCase
       assert_single_primary_action scope: "main"
       assert_blocks_above_fold "main > *", max: 1
       assert_no_text "4 chiffres"
-      find("details summary", text: "Aide : PIN").click
+      find("details summary", text: "Aide : Code secret").click
       assert_text "Code secret de 4 chiffres, choisi à l'inscription."
       assert_operator tap_height(find_link(I18n.t("identity.sessions.new.forgot_pin"))), :>=, 48
 
       click_on I18n.t("identity.sessions.new.forgot_pin")
 
-      assert_selector "h1", text: "PIN oublié", count: 1
+      assert_selector "h1", text: "Code secret oublié", count: 1
       assert_text "Saisissez le code de récupération remis par votre enseignant ou par l'équipe."
       assert_single_primary_action scope: "main"
       assert_blocks_above_fold "main > *", max: 1

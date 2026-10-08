@@ -72,7 +72,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
 
   test "the whole pedagogical loop is navigable through the associations" do
     graph => { team:, teacher:, student:, level:, series:, school:, classroom:, course:, essential:, exercise:, question:, session: }
-    Orm::TeacherProfile.create!(user: teacher, material: graph[:material])
+    Orm::TeacherProfile.create!(user: teacher, material: graph[:material], joined_via: "standard")
     Orm::TeacherSchool.create!(teacher:, school:, primary: true)
     Orm::TeacherClassroom.create!(teacher:, classroom:)
     Orm::ClassroomStudent.create!(classroom:, student:, primary: true, joined_at: Time.current)

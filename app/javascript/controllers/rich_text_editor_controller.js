@@ -1,5 +1,5 @@
 // ⚡ FRONT · rich_text_editor_controller — éditeur riche (Trix) des cours, des fiches et du blog
-// Rôle : charge Trix à la demande, hors du bundle commun ; refuse tout fichier ; images pour le blog seul, sur valeur `attachments`
+// Rôle : charge Trix à la demande, hors du bundle commun ; refuse tout fichier ; images pour le blog seul, sur valeur `attachments` ; laisse le focus aux autres champs
 // ADR  : 0047, 0049, 0051, 0074 · UDR : 0014, 0016, 0067 · usage : stylesheet_link_tag("trix") ; data-rich-text-editor-lang-value + rich_textarea
 import { Controller } from "@hotwired/stimulus"
 
@@ -10,8 +10,13 @@ import { Controller } from "@hotwired/stimulus"
 const refuseFile = (event) => event.preventDefault()
 const dropAttachment = (event) => event.attachment.remove()
 
-// The selection managers whose cursor already leaves the focus alone (keepFocus), one per editor.
-const guarded = new WeakSet()
+// The focus is in a field outside the editor and its toolbar: what the author types belongs to that field.
+function typingElsewhere(editorElement) {
+  const active = document.activeElement
+  if (!active || active === document.body || editorElement.contains(active)) return false
+  if (editorElement.toolbarElement?.contains(active)) return false
+  return active.matches("input, textarea, select") || active.isContentEditable
+}
 
 const fill = (template, values) => template.replace(/%\{(\w+)\}/g, (token, key) => values[key] ?? token)
 
@@ -45,20 +50,19 @@ export default class extends Controller {
   async connect() {
     this.images = this.attachmentsValue && this.uploadUrlValue !== ""
     this.listeners = this.images
-      ? { "trix-initialize": this.keepFocus, "trix-file-accept": this.accept, "trix-attachment-add": this.attachmentAdded,
-          "trix-attachment-remove": this.attachmentRemoved }
+      ? { "trix-file-accept": this.accept, "trix-attachment-add": this.attachmentAdded, "trix-attachment-remove": this.attachmentRemoved }
       : { "trix-file-accept": refuseFile, "trix-attachment-add": dropAttachment }
     Object.entries(this.listeners).forEach(([type, listener]) => this.element.addEventListener(type, listener))
     if (this.images) this.listenForImages()
 
     const { default: Trix } = await import("trix")
     translate(Trix.config.lang, this.langValue, this.element)
+    this.keepOtherFieldsFocus(this.element.querySelector("trix-editor"))
     if (!this.images) return
 
     // Under an image, only its caption: neither the file name nor its size in English units (« 23.4 KB »).
     Trix.config.attachments.preview.caption = { name: false, size: false }
     this.pickButtonTarget.hidden = false
-    this.keepFocus() // an editor already initialized: trix-initialize is past
   }
 
   disconnect() {
@@ -77,6 +81,45 @@ export default class extends Controller {
 
   get editor() {
     return this.element.querySelector("trix-editor").editor
+  }
+
+  // Trix redraws its text when an image goes in, ends its upload or shows its preview, and then puts its last selection
+  // back into the page: Chromium hands it the focus, and what the author was typing in the title, the summary or a text
+  // alternative goes on in the text, silently (chantier tests-instables-cache-blog). While the focus is in another field
+  // (not the editor, not its toolbar, whose link dialog Trix handles itself), the selection is only remembered: the next
+  // image still goes in at the cursor of the text, and the field keeps the focus.
+  //
+  // INTERNAL API of Trix 2.1.x (yarn.lock: 2.1.19, package.json « ^2.1.19 »): editorController.selectionManager and its
+  // setLocationRange / updateCurrentLocationRange / lockedLocationRange are not public. On a Trix upgrade, check that
+  // SelectionManager#unlock still restores through setLocationRange, that updateCurrentLocationRange(range) still only
+  // records the range, then replay the cover-alt step of test/system/teams/blog_management_test.rb. If the API is gone,
+  // nothing is wrapped, and if recording throws, Trix's own restore runs: the editor works as Trix ships it, and that
+  // test says the focus is stolen again.
+  keepOtherFieldsFocus(element) {
+    if (!element) return
+    if (!element.editorController) {
+      element.addEventListener("trix-initialize", () => this.keepOtherFieldsFocus(element), { once: true })
+      return
+    }
+
+    const manager = element.editorController.selectionManager
+    if (typeof manager?.setLocationRange !== "function" || typeof manager.updateCurrentLocationRange !== "function") return
+    if (manager.keepsOtherFieldsFocus) return
+
+    const setLocationRange = manager.setLocationRange.bind(manager)
+    manager.setLocationRange = (range) => {
+      if (manager.lockedLocationRange || range == null || !typingElsewhere(element)) return setLocationRange(range)
+      const [start, end] = Array.isArray(range) ? range : [range, range]
+      // A point outside the text (a drop without a place in it): Trix finds no DOM range and keeps its cursor; recording
+      // it would send the next image to the start of the text (chantier alt-couverture-perdu).
+      if (start?.index == null) return
+      try {
+        manager.updateCurrentLocationRange([start, end ?? start])
+      } catch {
+        setLocationRange(range)
+      }
+    }
+    manager.keepsOtherFieldsFocus = true
   }
 
   pickImages() {
@@ -113,36 +156,6 @@ export default class extends Controller {
     this.errorsTarget.replaceChildren()
     this.errorsTarget.hidden = true
     this.track(this.prepare(files))
-  }
-
-  // Trix puts its cursor back in the page each time it draws the text (an image inserted once shrunk, its size known,
-  // its address received, a file dropped), and the browser gives the focus to the editor with it. The author who writes
-  // in another field keeps the focus, and their typing (UDR-0067 §3.4.2, WCAG 3.2.2): Trix keeps its cursor for the next
-  // image, off the page. Its selection manager is inside Trix: the system test of the blog watches it.
-  keepFocus = () => {
-    const selection = this.editor?.selectionManager
-    if (!selection || guarded.has(selection)) return
-
-    guarded.add(selection)
-    const place = selection.setLocationRange.bind(selection)
-    selection.setLocationRange = (range) => {
-      if (!this.writingElsewhere()) return place(range)
-      if (range == null || selection.lockedLocationRange) return
-
-      const [start, end] = Array.isArray(range) ? range : [range]
-      // A point outside the text (a drop without a place in it): Trix keeps its cursor, as it does without this guard.
-      if (start?.index == null) return
-      selection.updateCurrentLocationRange([{ ...start }, { ...(end ?? start) }])
-    }
-  }
-
-  // In another field of the page: neither the text, its toolbar, nor « Insérer une image », after which the author
-  // goes on in the text, after the image.
-  writingElsewhere() {
-    const active = document.activeElement
-    if (!active || active === document.body) return false
-    const editor = this.element.querySelector("trix-editor")
-    return ![editor, editor.toolbarElement, this.pickButtonTarget, this.fileInputTarget].some((element) => element?.contains(active))
   }
 
   // → true if every file went into the text, false if one was refused.

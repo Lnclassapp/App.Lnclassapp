@@ -98,15 +98,24 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         assert_no_selector "#article_cover_remove"
         assert_equal "", find("#article_cover_public_id", visible: :hidden).value
         assert page.evaluate_script("document.activeElement.id === 'article_cover_file'")
-        # The cover chosen again is sent while the first image of the text is shrunk and sent.
+        # The cover chosen again is sent while the first image of the text is shrunk and sent. That image lands in the
+        # text as the 12th key of the cover's text alternative is typed, then ends its upload while the rest is typed:
+        # Trix redraws twice, and every key stays in the field, the focus too; the image goes where the cursor of the
+        # text was (chantier tests-instables-cache-blog).
         attach_file "article_cover_file", fixture("photos/photo.jpg")
         editor.click
         editor.send_keys("Première semaine : les fractions.")
-        drop_generated_image(name: "tableau.jpg", width: 2000, height: 1500)
+        insert_into_rich_text_on_keystroke("#article_cover_alt", after_keys: 12) do
+          drop_generated_image(name: "tableau.jpg", width: 2000, height: 1500)
+        end
         assert_selector "#article_cover_preview[src^='/blog/images/']", wait: UPLOAD_WAIT
         assert_selector "#article_cover_remove"
-        fill_in "article[cover_alt]", with: "Une élève révise à sa table"
+        find("#article_cover_alt").click
+        type_like_a_human("Une élève révise à sa table")
         image1 = assert_image_row(1)
+        assert_equal "Une élève révise à sa table", find("#article_cover_alt").value
+        assert_equal "article_cover_alt", focused_element_id, "le focus reste dans le champ où l'on tape"
+        assert_equal "Première semaine : les fractions.\uFFFC\n", rich_text_content, "le texte de l'article ne reçoit aucune touche"
         assert_selector "#article_body_upload_status", text: image_message("uploaded", number: 1), visible: :all
         within("##{image1}") { assert_text tf("image_alt_missing") }
         assert_selector "#article_insert_image"
@@ -118,8 +127,16 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         # the attachment and the editor is busy, however loaded the machine (a throttled network made this a race).
         # « Créer le brouillon » during the upload waits for it, then the article leaves with both images.
         hold_uploads do |release|
-          attach_file(fixture("photos/portrait.jpg")) { click_on tf("insert_image") }
+          # The other way round: the focus is in the text when the second image lands, at the first key typed after it;
+          # the image goes in at the cursor, and the typing goes on after it, in the text.
+          insert_into_rich_text_on_keystroke("trix-editor#article_body", after_keys: 1) do
+            drop_generated_image(name: "portrait.jpg", width: 640, height: 480)
+          end
+          type_like_a_human(" ")
           assert_selector "trix-editor figure progress.attachment__progress", wait: UPLOAD_WAIT
+          type_like_a_human("Une figure par jour.")
+          assert_equal "article_body", focused_element_id
+          assert_match(/la géométrie\. \uFFFCUne figure par jour\.\n\z/, rich_text_content)
           assert_selector "#article_editor[aria-busy=true]"
           mark_host_page
           click_on t("teams.articles.new.submit")

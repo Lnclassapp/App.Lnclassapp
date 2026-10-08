@@ -8,6 +8,7 @@
 |---|---|---|---|
 | 2026-10-07 | Le garde du focus vit dans `rich_text_editor_controller.js`, autour du `SelectionManager` de Trix (`setLocationRange`), et non autour de notre seul `insertFile` | Trix replace son curseur à **chaque** rendu du texte, pas seulement à l'insertion : taille de l'aperçu connue, adresse reçue, image retirée (voir le rapport). Rendre le focus après `insertFile` ne tenait pas 10 ms | Non : précédent de l'ADR-0068 (API privée, gardée par un test). Le test système du blog casse si une montée de Trix change ce point |
 | 2026-10-07 | Un fichier glissé dans le texte pendant que l'auteur écrit dans un autre champ ne lui prend plus le focus non plus ; « Insérer une image » le donne toujours au texte | UDR-0067 §3.4.2 à la lettre (« le focus ne bouge pas »). Le bouton reste une demande explicite d'écrire dans le texte : comportement d'avant gardé | Non |
+| 2026-10-08 | À la fusion de `Develop`, le garde de ce chantier cède la place à `keepOtherFieldsFocus` (`6a57213f`, chantier `tests-instables-cache-blog`), qui corrige le même vol pour tous les éditeurs. On n'en reporte que le cas du dépôt sans point dans le texte (écart vu par le challenger), ignoré comme Trix le fait. Le test de ce chantier reste, joué sur ce garde | Deux enveloppes du même `setLocationRange` se seraient empilées. Celui de `Develop` couvre aussi les éditeurs sans images | Non |
 
 ## Ce qui a dérapé
 
