@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours (preuve) |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-08 |
 | **Branche** | `fix/tests-instables-cache-blog` |
 | **Programme** | — |
@@ -82,6 +82,6 @@ Rapport complet : [`journal.md`](journal.md).
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés

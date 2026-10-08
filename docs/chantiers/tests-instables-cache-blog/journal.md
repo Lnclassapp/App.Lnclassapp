@@ -18,6 +18,12 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - …
 
+## Preuve (phase 5)
+
+- **Challenger empirique** (rôle distinct, Chromium réel, CPU ralenti 6×, réseau lent, frappe à 100 ms par touche, course prouvée par horodatage) : **avant** le correctif (`cb00b2ab`), 33 essais sur 33 faussés (texte alternatif de la couverture, titre, résumé, texte alternatif d'une image, curseur au milieu du texte), à 1280 et 390 px ; **après** (`ed281c0e`), 33 sur 33 bons, l'image toujours au curseur ; cas symétrique (frappe dans le texte pendant l'arrivée d'une image) bon avant et après ; formulaire des cours : l'éditeur refuse les images, course impossible. Aucune erreur de console, aucun défilement horizontal.
+- `bin/ci` : 4 595 tests et 378 tests système, 0 échec.
+- **Effets de bord écartés** : focus dans l'éditeur lui-même inchangé ; boîte « lien » de Trix (dans sa barre d'outils) laissée à Trix ; garde défensive si l'API interne de Trix disparaît.
+
 ## Ce qu'on a appris sur la codebase
 
 ### Rapport de cause — (1) AD-23, `direction_home_query_test.rb:199`
