@@ -1,15 +1,17 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
-<%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile) ; dans la coque Android, le contenu seul et le pont de l'élève %>
-<%# UDR  : 0006, 0080 (§3.3) · ADR : 0084 (§4.2) ; exige helper_method :shell_user (NavigationHelper::ShellUser) %>
+<%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile) ; dans une coque Android, le contenu seul et le pont du compte %>
+<%# UDR  : 0006, 0080 (§3.3) · ADR : 0084 (§4.2), 0085 (§4.2) ; exige helper_method :shell_user (NavigationHelper::ShellUser) %>
 <% in_app = lnclass_app? %>
 <% content_for :body do %>
   <% if in_app %>
     <%# ADR-0084 §4.2 : la coque porte ses propres barres ; aucune navigation du site, donc ni lien d'évitement ni marge réservée. %>
-    <% if shell_user.role.to_s == "student" %>
+    <%# ADR-0085 §4.2 : le pont du compte, pour les rôles qui ont une coque ; l'adresse est celle de leur panneau. %>
+    <% menu_path = { "student" => student_menu_path, "teacher" => teacher_menu_path }[shell_user.role.to_s] %>
+    <% if menu_path %>
       <%= tag.div hidden: true, data: { controller: "bridge--account",
                                         bridge__account_initials_value: avatar_initials(shell_user.name),
                                         bridge__account_photo_url_value: shell_user.avatar_url,
-                                        bridge__account_menu_url_value: student_menu_path,
+                                        bridge__account_menu_url_value: menu_path,
                                         bridge__account_help_url_value: help_path } %>
     <% end %>
   <% else %>
