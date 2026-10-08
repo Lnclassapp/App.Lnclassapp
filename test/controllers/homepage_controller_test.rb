@@ -110,7 +110,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "#comment ol > li", 3
-    assert_select "#comment ol > li:first-child h3", text: "Récupère le code de ta classe"
+    assert_select "#comment ol > li:first-child h3", text: "Trouve ta classe"
     assert_select "#comment ol > li:last-child h3", text: "Apprends et progresse"
   end
 
