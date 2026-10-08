@@ -191,15 +191,20 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='join[pin]']", count: 0
   end
 
-  test "CL-06: a student whose primary classroom is active is told so, and nothing changes" do
+  test "CL-06, IL-18: a student whose primary classroom is active is sent home from the page, refused in 403 on the form" do
     current = create_classroom(school: @school, name: "5ème 2")
     student = create_student(classroom: current)
     sign_in_as student
 
+    get join_classroom_path("kfm37")
+
+    assert_redirected_to student_home_path
+
     post join_classroom_path("kfm37")
 
-    assert_response :unprocessable_entity
+    assert_response :forbidden
     assert_select "[role=alert]", text: I18n.t("#{ERRORS}.base.already_enrolled")
+    assert_equal "Tu es déjà inscrit dans une classe.", I18n.t("#{ERRORS}.base.already_enrolled")
     assert_equal [ [ current.id, nil ] ], Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :left_at)
   end
 
@@ -333,18 +338,61 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to student_home_path
-    assert_equal [ @classroom.id, nil ], Orm::ClassroomStudent.where(student:, left_at: nil).pick(:classroom_id, :removed_at)
+    assert_equal I18n.t("classroom.joins.create.welcome"), flash[:notice]
+    assert_equal [ @classroom.id, "link", nil ],
+                 Orm::ClassroomStudent.where(student:, left_at: nil).pick(:classroom_id, :joined_via, :removed_at)
+    assert_not_nil Orm::ClassroomStudent.find_by!(student:, classroom: archived).left_at
   end
 
-  test "a student refused on the link path sees the reason on the link page" do
-    student = create_student(classroom: create_classroom(school: @school, name: "6ème 4"))
+  test "IL-18: a student in an active classroom opening a link is sent home; posting it is refused in 403 on the link page" do
+    current = create_classroom(school: @school, name: "6ème 4")
+    student = create_student(classroom: current)
     sign_in_as student
+
+    get join_classroom_path(link_token)
+
+    assert_redirected_to student_home_path
 
     post join_classroom_path(link_token)
 
-    assert_response :unprocessable_entity
+    assert_response :forbidden
     assert_select "#classroom-preview", text: /6ème 1/
     assert_select "[role=alert]", text: I18n.t("#{ERRORS}.base.already_enrolled")
+    assert_equal [ [ current.id, nil ] ], Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :left_at)
+  end
+
+  test "IL-16: a student removed from the classroom joins it again by its link: the same membership reopens, « New » again" do
+    student = create_student(classroom: @classroom, joined_via: "standard", joined_at: 30.days.ago)
+    Orm::ClassroomStudent.where(student:).update_all(left_at: 2.days.ago, removed_at: 2.days.ago,
+                                                     removed_by_id: create_teacher.id)
+    sign_in_as student
+
+    freeze_time do
+      post join_classroom_path(link_token)
+
+      assert_redirected_to student_home_path
+      assert_equal [ [ @classroom.id, "link", Time.current, nil, nil, nil ] ],
+                   Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :joined_via, :joined_at, :left_at, :removed_at,
+                                                                :removed_by_id)
+    end
+  end
+
+  test "a student without a classroom is refused a full classroom by its link, with the reason, and enters nothing" do
+    @classroom.update!(max_students: 1)
+    create_student(classroom: @classroom)
+    student = create_student
+    sign_in_as student
+
+    get join_classroom_path(link_token)
+
+    assert_select "#classroom-full[role=alert]", text: I18n.t("classroom.joins.new.classroom_full")
+    assert_select "form#join-form", 0
+
+    post join_classroom_path(link_token)
+
+    assert_response :forbidden
+    assert_select "#classroom-full[role=alert]", text: I18n.t("classroom.joins.new.classroom_full")
+    assert_not Orm::ClassroomStudent.exists?(student:)
   end
 
   test "UDR-0079 §3.4: an invalid link sends a student without a classroom to « Choose your classroom », with the alert" do
