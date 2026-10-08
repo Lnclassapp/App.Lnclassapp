@@ -131,27 +131,40 @@ module UseCases
         assert authenticate(attempts: FakeAttempts.new(count: 5, last_failed_at: NOW - 16.minutes)).success?
       end
 
-      # ADR-0084 §4.5, CA-3 and CA-4: in the students' app, the role is checked only once the PIN is right.
-      test "CA-3: in the students' app, a teacher, a school admin and a team member with the right PIN get :wrong_app and no session" do
-        [ { role: "teacher" }, { role: "school_admin" }, { role: "team", team_role: "admin" } ].each do |role|
-          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **role)
-          result = authenticate(client: "android_student")
+      # ADR-0084 §4.5, ADR-0086 §4.5, CA-3, CA-T3: in an Android shell, the role is checked only once the PIN is right; the
+      # refusal names the app to propose.
+      ROLE_ATTRIBUTES = { "student" => { role: "student" }, "teacher" => { role: "teacher" },
+                          "school_admin" => { role: "school_admin" }, "team" => { role: "team", team_role: "admin" } }.freeze
 
-          assert_equal :conflict, result.code, role
-          assert_equal({ base: [ :wrong_app ] }, result.errors)
+      {
+        [ "android_student", "teacher" ] => :android_teacher,
+        [ "android_student", "school_admin" ] => :web,
+        [ "android_student", "team" ] => :web,
+        [ "android_teacher", "student" ] => :android_student,
+        [ "android_teacher", "school_admin" ] => :web,
+        [ "android_teacher", "team" ] => :web
+      }.each do |(client, role), app|
+        test "CA-3, CA-T3: in the #{client} shell, a #{role} with the right PIN is sent to #{app}, without a session" do
+          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **ROLE_ATTRIBUTES.fetch(role))
+          result = authenticate(client:)
+
+          assert_equal :conflict, result.code
+          assert_equal({ base: [ :wrong_app ], app: [ app ] }, result.errors)
           assert_equal [ true ], @attempts.records.map { it[:succeeded] }
           assert_nil @sessions.created
         end
       end
 
-      test "CA-3: in the students' app, a teacher's wrong PIN gets exactly a student's wrong-PIN failure" do
-        student = authenticate(pin: "1357", client: "android_student")
-        @user = Entities::Identity::User.new(id: 1, contact: "0701020304", role: "teacher")
-        teacher = authenticate(pin: "1357", client: "android_student")
+      test "CA-3, CA-T3: in either shell, a wrong PIN gets exactly the same failure, whatever the role" do
+        failures = %w[android_student android_teacher web].product(ROLE_ATTRIBUTES.values).map do |client, attributes|
+          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **attributes)
+          result = authenticate(pin: "1357", client:)
 
-        assert_equal student, teacher
-        assert_equal :invalid, teacher.code
-        assert_equal [ false ], @attempts.records.map { it[:succeeded] }
+          assert_equal [ false ], @attempts.records.map { it[:succeeded] }
+          result
+        end
+
+        assert_equal [ Shared::Result.failure(:invalid, errors: Authenticate::INVALID) ], failures.uniq
         assert_nil @sessions.created
       end
 
@@ -163,11 +176,22 @@ module UseCases
         assert_equal 1, @sessions.created[:user_id]
       end
 
-      test "on the website, by default or by name, a teacher signs in as before" do
+      test "CA-T4: in the teachers' app, a teacher with the right PIN gets a session" do
         @user = Entities::Identity::User.new(id: 1, contact: "0701020304", role: "teacher")
+        result = authenticate(client: "android_teacher")
 
-        assert authenticate.success?
-        assert authenticate(client: "web").success?
+        assert result.success?
+        assert_equal @user, result.value.user
+        assert_equal 1, @sessions.created[:user_id]
+      end
+
+      test "on the website, by default or by name, every role signs in as before" do
+        ROLE_ATTRIBUTES.each_value do |attributes|
+          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **attributes)
+
+          assert authenticate.success?, attributes
+          assert authenticate(client: "web").success?, attributes
+        end
       end
 
       test "an unknown client is invalid and writes nothing" do

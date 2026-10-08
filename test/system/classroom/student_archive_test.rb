@@ -1,8 +1,9 @@
 require "application_system_test_case"
 
 # Lot R of fonctions-espace-eleve (ADR-0036, memo Q19): no automatic anonymization. At 390 px, a student whose classroom
-# was archived signs in, lands on his home and opens « Mon historique »: his classrooms and his finished exercises,
-# 3 lines then « Voir plus », under the sobriety rule (UDR-0057). Since ADR-0085, he lands on his home without a classroom.
+# was archived signs in, lands on his home without a classroom (ADR-0085 §4.3: no more waiting screen for a student) and
+# opens « Voir mon historique »: his classrooms and his finished exercises, 3 lines then « Voir plus », under the
+# sobriety rule (UDR-0057).
 class Classroom::StudentArchiveTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 

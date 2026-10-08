@@ -7,7 +7,7 @@
     <div class="max-w-sm text-center">
       <%= link_to root_path, "aria-label": t(".logo_home"),
                              class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
+        <%= image_tag brand_logo, alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
       <% end %>
       <h1 class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></h1>
       <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
@@ -18,7 +18,7 @@
     <div class="mb-8 text-center md:hidden">
       <%= link_to root_path, "aria-label": t(".logo_home"),
                              class: "mx-auto mb-3 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+        <%= image_tag brand_logo, alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
       <% end %>
       <%# Le h1 de la colonne gauche est masqué sur téléphone (hidden md:flex) : celui-ci le remplace, UDR-0054. %>
       <h1 class="mb-2 font-display text-xl font-extrabold text-ink"><%= t(".welcome") %></h1>

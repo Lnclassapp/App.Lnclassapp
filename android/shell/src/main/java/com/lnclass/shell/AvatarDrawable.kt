@@ -1,4 +1,4 @@
-package com.lnclass.student
+package com.lnclass.shell
 
 import android.content.Context
 import android.graphics.Bitmap

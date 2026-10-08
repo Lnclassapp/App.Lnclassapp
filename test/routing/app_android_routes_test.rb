@@ -10,12 +10,14 @@ class AppAndroidRoutesTest < ActionDispatch::IntegrationTest
     routes = Rails.application.routes.named_routes
 
     assert_equal({ controller: "classroom/student_menus", action: "show" }, routes[:student_menu].defaults)
+    assert_equal({ controller: "classroom/teacher_menus", action: "show" }, routes[:teacher_menu].defaults) # ADR-0086 §4.4
     assert_equal({ controller: "identity/asset_links", action: "show" }, routes[:android_asset_links].defaults)
     assert_equal [ "GET", { format: :json } ], [ routes[:android_asset_links].verb, routes[:android_asset_links].requirements.slice(:format) ]
   end
 
   test "their named routes give the frozen paths" do
     assert_equal "/students/menu", helpers.student_menu_path
+    assert_equal "/teachers/menu", helpers.teacher_menu_path
     assert_equal "/.well-known/assetlinks.json", helpers.android_asset_links_path(format: :json)
   end
 end
