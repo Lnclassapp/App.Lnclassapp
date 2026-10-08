@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # Finitions UX, Lot E (UDR-0054, amendements d'UDR-0027 et d'UDR-0050) : la classe vue par l'enseignant et par l'équipe,
 # « Inviter un collègue ». FU-02 (enseignant), FU-07, FU-08, FU-10 (Inviter un collègue), FU-26 (classe), FU-28, FU-48,
-# FU-53 (classe).
+# FU-53 (classe). IE-20 (UDR-0079 §3.7) : la bulle « Inviter » de l'accueil ouvre WhatsApp, partage compté.
 module Finitions; end
 
 class Finitions::ClassroomTest < ApplicationSystemTestCase
@@ -155,6 +155,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     sign_in_as @teacher
     visit teacher_invite_path
     link = find("a#referral_link")[:href]
+    assert_match %r{/i/\h{12}\z}, link
 
     click_on t("identity.referrals.invite.copy")
 
@@ -168,5 +169,20 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     assert_toast t("shared.clipboard.failed")
     sleep 0.5
     assert_equal %w[copy], shares
+  end
+
+  test "IE-20 : la bulle « Inviter » de l'accueil ouvre WhatsApp avec le lien /i/<jeton>, et le partage est compté" do
+    sign_in_as @teacher
+    visit teacher_home_path
+    token = Orm::TeacherProfile.find_by!(user: @teacher).referral_token
+
+    whatsapp = window_opened_by { find("a#course_level_invite").click }
+    whatsapp.close
+
+    Timeout.timeout(10) { sleep 0.1 until shares == %w[whatsapp] }
+    href = find("a#course_level_invite")[:href]
+    assert_match %r{\Ahttps://wa\.me/\?text=}, href
+    assert_match %r{/i/#{token}\z}, CGI.unescape(href)
+    assert_current_path teacher_home_path
   end
 end

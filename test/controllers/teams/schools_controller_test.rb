@@ -81,12 +81,12 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_#{school.public_id} a[data-turbo-frame=_top][href='#{school_path(school.public_id)}']",
                   text: "Lycée Classique d'Abidjan"
     assert_select "#school_#{school.public_id}", text: /LCA/
-    # Demande du porteur (2026-10-01) : le code d'établissement est dans le tableau, groupé comme sur la fiche, avec son aide.
-    assert_select "thead th", text: /#{I18n.t('teams.schools.index.columns.school_code')}/
-    assert_select "thead details summary .sr-only", text: I18n.t("components.info_tip.label",
-                                                                 label: I18n.t("teams.schools.index.columns.school_code"))
-    assert_select "#school_#{school.public_id} td.font-mono",
-                  text: Entities::School::SchoolCode.display(Orm::School.find(school.id).school_code)
+    # IE-21 (UDR-0079 §3.8 bis) : le tableau n'a plus de colonne « Code d'établissement », ni son code ni son aide.
+    assert_select "thead th", text: /Code d'établissement/, count: 0
+    assert_select "thead th", 8
+    assert_select "#school_#{school.public_id} td.font-mono", 0
+    assert_select "#school_#{school.public_id}",
+                  text: /#{Entities::School::SchoolCode.display(Orm::School.find(school.id).school_code)}/, count: 0
     assert_select "#school_#{school.public_id}", text: /Abidjan 1/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('school_types.mixed')}/
     assert_select "#school_#{school.public_id}", text: /#{I18n.t('teams.schools.cycles.first')}/
@@ -186,14 +186,15 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
   end
 
-  test "CE-06: a school's page shows its code, the buttons to copy it and its link, and « Régénérer le code » in the menu" do
+  test "CE-06, IE-08: a school's page shows the direction's code, the team's invitation link, and « Régénérer le code » in the menu" do
     school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
     sign_in_as @member
 
     get school_path(school.public_id)
 
     header = "teams.schools.header"
-    link = school_code_signup_url("k7m4qz")
+    link = teacher_invite_link_url(school.reload.team_invite_token)
+    assert_match %r{/i/\h{12}\z}, link
     assert_select "#school_code #school_code_label", text: I18n.t("#{header}.school_code")
     assert_select "#school_code #school_code_value[aria-labelledby=school_code_label]", text: "K7M-4QZ"
     # FU-26 : les deux copies passent par le contrôleur unique `clipboard` (UDR-0054 §3.5), boutons cachés sans JavaScript.
@@ -208,13 +209,37 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_code'))}/
     assert_select "#school_code [data-clipboard-text-value='#{link}'] template[data-clipboard-target=copied]",
                   text: /#{Regexp.escape(I18n.t('shared.clipboard.copied_link'))}/
-    assert_select "#school_code a#school_code_link[href='#{link}']", text: link
-    assert_select "#school_code", text: /#{Regexp.escape(I18n.t("#{header}.school_code_hint"))}/
+    assert_select "#school_code a#school_code_link[href='#{link}'][aria-labelledby=school_invite_link_label]", text: link
+    assert_select "#school_code #school_invite_link_label", text: "Lien d'invitation des enseignants"
+    assert_select "#school_code", text: /Pour l'inscription de la direction\./
+    assert_equal "Pour l'inscription de la direction.", I18n.t("#{header}.school_code_hint")
+    assert_select "#school_code a[href*='/e/']", 0
     assert_select "#school_code", { text: /#{Regexp.escape(I18n.t("#{header}.school_code_inactive"))}/, count: 0 }
     assert_select "#school-header-actions button[aria-controls=regenerate-school-code]", text: I18n.t("#{header}.regenerate_code")
     assert_select "dialog#regenerate-school-code form#regenerate-school-code-form[action='#{school_code_path(school.public_id)}'] " \
                   "input[name=_method][value=patch]"
     assert_select "dialog#regenerate-school-code", text: /K7M-4QZ/
+  end
+
+  test "IE-15: each teacher of the list reads « Inscription : » and their arrival channel, the colleague named when known" do
+    school = create_school(drena: @drena)
+    awa = create_teacher(school:, first_name: "Awa", last_name: "Koné", joined_via: "standard")
+    create_referral(referrer: awa, referee: create_teacher(school:, first_name: "Yao", last_name: "Brou", joined_via: "colleague"))
+    gone = create_teacher(school:, first_name: "Ama", last_name: "Diallo", joined_via: "direction", anonymized_at: 1.day.ago)
+    create_referral(referrer: gone, referee: create_teacher(school:, first_name: "Ali", last_name: "Bamba", joined_via: "colleague"))
+    create_teacher(school:, first_name: "Ida", last_name: "Touré", joined_via: "team")
+    create_teacher(school:, first_name: "Léa", last_name: "Yao", joined_via: "code")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    { "Awa Koné" => "Inscription : inscription standard", "Yao Brou" => "Inscription : lien d'un collègue (Koné Awa)",
+      "Ama Diallo" => "Inscription : lien de la direction", "Ali Bamba" => "Inscription : lien d'un collègue",
+      "Ida Touré" => "Inscription : lien de l'équipe", "Léa Yao" => "Inscription : code d'établissement" }.each do |name, via|
+      assert_select "#school_teachers li", text: /#{Regexp.escape(name)}/ do
+        assert_select "p.text-xs.text-mute", text: via
+      end
+    end
   end
 
   test "CE-06: the page of a school that is not active warns that its code lets nobody sign up" do
@@ -255,7 +280,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 5)
 
     get schools_path
-    assert_select "#school_#{school.public_id} td:nth-child(7)", text: "5" # « Classes », après le code d'établissement
+    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5" # « Classes » : plus de code d'établissement (IE-21)
   end
 
   # UDR-0056 §3.2: the block moved to shared/_level_classrooms, shared with the direction; the team's page is unchanged.
@@ -365,16 +390,21 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "023456", other.reload.national_code
   end
 
-  test "CP-10: a school without national code shows none; the list is searched by it" do
-    create_school(drena: @drena, name: "Lycée Classique", national_code: "012345")
+  test "CP-10, IE-21: a school without national code shows none; the list is searched by name or sigle, not by it" do
+    create_school(drena: @drena, name: "Lycée Classique", sigle: "LCA", national_code: "012345")
     school = create_school(drena: @drena, name: "Lycée Moderne")
     sign_in_as @member
 
     get school_path(school.public_id)
     assert_select "#school_national_code", 0
     get schools_path(search: "012345")
-    assert_select "tbody tr", 1
-    assert_select "tbody", text: /Lycée Classique/
+    assert_select "#schools_list tr", 0
+    assert_select "#schools_empty", text: /#{I18n.t('teams.schools.index.no_match_title')}/
+    [ "Lycée Classique", "LCA" ].each do |search|
+      get schools_path(search:)
+      assert_select "#schools_list tr", 1
+      assert_select "#schools_list", text: /Lycée Classique/
+    end
   end
 
   test "outside the frame, the edition opens as a modal over the shell; an unknown school has none" do
@@ -416,6 +446,9 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
                   text: /#{I18n.t('teams.schools.update.done', name: "Lycée Classique d'Abidjan")}/
     assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] tr#school_#{school.public_id}", text: /Bouaké/
     assert_select "turbo-stream[action=replace][target=school_header] #school_header", text: /#{I18n.t('teams.schools.cycles.first')}/
+    # IE-08: the header re-rendered from a SchoolsQuery::Row keeps the team's invitation link.
+    assert_select "turbo-stream[action=replace][target=school_header] #school_code a#school_code_link[href=?]",
+                  teacher_invite_link_url(school.team_invite_token)
     assert_select "turbo-stream[action=replace][target=school_level_classrooms] #school_level_classrooms" # UDR-0046
     assert_equal "school.changed", Orm::AuditEvent.sole.action
   end
@@ -562,7 +595,10 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#schools-filters[method=get][action='#{schools_path}'][data-controller=search]" \
                   "[data-turbo-frame=schools][data-turbo-action=advance]" \
                   "[role=search][aria-label='#{I18n.t('teams.schools.filters.label')}']" do
-      assert_select "input#filter_search[type=search][name=search][data-action='input->search#queue']"
+      # IE-21 (UDR-0079 §3.8 bis) : la recherche porte sur le nom ou le sigle, plus sur le code national.
+      assert_select "label[for=filter_search]", text: "Nom ou sigle"
+      assert_select "input#filter_search[type=search][name=search][data-action='input->search#queue']" \
+                    "[placeholder='Ex. : Lycée Classique, LCA']"
       %w[drena school_type cycle status].each do |name|
         assert_select "select#filter_#{name}[name=#{name}][data-action='change->search#submit']"
       end

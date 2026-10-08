@@ -1,20 +1,20 @@
 # 🔌 INFRA · Queries::School::SchoolsQuery
-# Rôle : liste nationale des établissements (SC-04) : filtres DRENA, type, cycle, statut, nom ou code national, 50 par page
-# ADR  : 0026, 0030, 0057, 0063 · UDR : 0036, 0044, 0050
+# Rôle : liste nationale des établissements (SC-04) : filtres DRENA, type, cycle, statut, nom ou sigle (IE-21), 50 par page
+# ADR  : 0026, 0030, 0057, 0063, 0083 · UDR : 0036, 0044, 0050, 0079 · codes et team_invite_token : en-tête re-rendu par les streams
 module Queries
   module School
     class SchoolsQuery
       PER_PAGE = 50
       Row = Data.define(:public_id, :name, :sigle, :drena_public_id, :drena_name, :school_type, :cycle, :status,
-                        :classrooms_count, :teachers_count, :school_code, :national_code)
+                        :classrooms_count, :teachers_count, :school_code, :national_code, :team_invite_token)
       Page = Data.define(:rows, :total_count, :page, :pages)
 
       # La recherche ignore casse et accents sans extension PostgreSQL : les deux côtés passent par la même table.
       ACCENTED = "àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ".freeze
       PLAIN = "aaaceeeeiioouuuyaaaceeeeiioouuuy".freeze
-      # Le code national (ADR-0063) : chiffres seulement, cherché tel quel.
-      SEARCHED = (%w[schools.name schools.sigle].map { "translate(lower(#{it}), '#{ACCENTED}', '#{PLAIN}') LIKE :pattern" } +
-                  [ "schools.national_code LIKE :pattern" ]).join(" OR ").freeze
+      # IE-21 (ADR-0083 §4.5) : nom ou sigle seulement ; le code national reste sur la ligne, plus dans la recherche.
+      SEARCHED = %w[schools.name schools.sigle].map { "translate(lower(#{it}), '#{ACCENTED}', '#{PLAIN}') LIKE :pattern" }
+                                                .join(" OR ").freeze
 
       def call(drena: nil, school_type: nil, cycle: nil, status: nil, search: nil, page: 1, school_year: current_school_year)
         scope = filtered(drena:, school_type:, cycle:, status:, search:)
@@ -49,7 +49,7 @@ module Queries
           Arel.sql(Orm::School.sanitize_sql_array([ "(SELECT COUNT(*) FROM classrooms WHERE classrooms.school_id = schools.id " \
                                                     "AND classrooms.school_year = ?)", school_year ])),
           Arel.sql("(SELECT COUNT(*) FROM teacher_schools WHERE teacher_schools.school_id = schools.id)"), "schools.school_code",
-          "schools.national_code" ]
+          "schools.national_code", "schools.team_invite_token" ]
       end
 
       def current_school_year = Entities::Classroom::SchoolYear.current(Date.current)

@@ -11,6 +11,11 @@ class Teams::SchoolCodesControllerTest < ActionDispatch::IntegrationTest
 
   def new_code = @school.reload.school_code
 
+  def staff_params(school_code:)
+    { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "0701020304", pin: "4821",
+      pin_confirmation: "4821", school_code: }
+  end
+
   test "CE-07: the regeneration replaces the code, replaces the header and says the new code; the teachers stay" do
     sign_in_as create_team_member
 
@@ -28,16 +33,19 @@ class Teams::SchoolCodesControllerTest < ActionDispatch::IntegrationTest
     assert Orm::AuditEvent.exists?(action: "school.changed", subject_id: @school.id)
   end
 
-  test "CE-07: the old code no longer opens the sign-up, the new one does" do
+  # ADR-0083 §4.5: the code now opens only the direction's sign-up (/school-staff-signup).
+  test "CE-07: the old code no longer signs up a direction, the new one does" do
     sign_in_as create_team_member
     patch school_code_path(@school.public_id), as: :turbo_stream
     sign_out
 
-    get school_code_signup_path("k7m4qz")
-    assert_response :not_found
+    post school_staff_registrations_path, params: { school_staff_registration: staff_params(school_code: "K7M-4QZ") }
+    assert_response :unprocessable_entity
+    assert_not Orm::User.exists?(contact: "0701020304")
 
-    get school_code_signup_path(new_code)
-    assert_response :success
+    post school_staff_registrations_path, params: { school_staff_registration: staff_params(school_code: new_code) }
+    assert_redirected_to school_admin_classrooms_path
+    assert_equal [ @school.id ], Orm::SchoolStaff.where(user: Orm::User.find_by!(contact: "0701020304")).pluck(:school_id)
   end
 
   test "without JavaScript, the regeneration comes back to the school's page with a notice" do

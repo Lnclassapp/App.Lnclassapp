@@ -1,15 +1,27 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
-<%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile) ; exige helper_method :shell_user (NavigationHelper::ShellUser) %>
-<%# UDR  : 0006 %>
+<%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile) ; dans la coque Android, le contenu seul et le pont de l'élève %>
+<%# UDR  : 0006, 0080 (§3.3) · ADR : 0084 (§4.2) ; exige helper_method :shell_user (NavigationHelper::ShellUser) %>
+<% in_app = lnclass_app? %>
 <% content_for :body do %>
-  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white"><%= t(".skip") %></a>
-  <%= render "shared/navigation/header", user: shell_user %>
-  <%= render "shared/navigation/sidebar", user: shell_user %>
-  <main id="main" tabindex="-1" class="pb-28 focus:outline-none lg:pb-12 lg:pl-rail">
+  <% if in_app %>
+    <%# ADR-0084 §4.2 : la coque porte ses propres barres ; aucune navigation du site, donc ni lien d'évitement ni marge réservée. %>
+    <% if shell_user.role.to_s == "student" %>
+      <%= tag.div hidden: true, data: { controller: "bridge--account",
+                                        bridge__account_initials_value: avatar_initials(shell_user.name),
+                                        bridge__account_photo_url_value: shell_user.avatar_url,
+                                        bridge__account_menu_url_value: student_menu_path,
+                                        bridge__account_help_url_value: help_path } %>
+    <% end %>
+  <% else %>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white"><%= t(".skip") %></a>
+    <%= render "shared/navigation/header", user: shell_user %>
+    <%= render "shared/navigation/sidebar", user: shell_user %>
+  <% end %>
+  <main id="main" tabindex="-1" class="<%= class_names("focus:outline-none", "pb-28 lg:pb-12 lg:pl-rail" => !in_app) %>">
     <div class="mx-auto max-w-page px-gutter py-6 lg:px-8 lg:py-8" data-bleed>
       <%= yield %>
     </div>
   </main>
-  <%= render "shared/navigation/bottom_bar", user: shell_user %>
+  <%= render "shared/navigation/bottom_bar", user: shell_user unless in_app %>
 <% end %>
 <%= render template: "layouts/application" %>

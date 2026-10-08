@@ -49,7 +49,7 @@ class Identity::TeamInvitationTest < ApplicationSystemTestCase
         fill_in "invitation[pin_confirmation]", with: "1357"
         click_on "Créer mon compte"
 
-        assert_selector "#invitation_pin_confirmation_error", text: "Les deux PIN ne sont pas identiques."
+        assert_selector "#invitation_pin_confirmation_error", text: "Les deux codes secrets ne sont pas identiques."
       end
       assert_field "invitation[last_name]", with: "Kouassi"
       fill_in "invitation[pin]", with: "4821"

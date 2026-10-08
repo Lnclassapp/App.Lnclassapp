@@ -59,9 +59,9 @@ module UseCases
         @audit = FakeAudit.new
       end
 
-      def authenticate(pin: "2468", contact: "07 01 02 03 04", attempts: FakeAttempts.new)
+      def authenticate(pin: "2468", contact: "07 01 02 03 04", attempts: FakeAttempts.new, client: nil)
         @attempts = attempts
-        dto = Dtos::Identity::CredentialsInput.new(contact:, pin:, ip: "1.2.3.4", user_agent: "UA")
+        dto = Dtos::Identity::CredentialsInput.new(contact:, pin:, ip: "1.2.3.4", user_agent: "UA", **{ client: }.compact)
         Authenticate.new(users: FakeUsers.new(@user), login_attempts: attempts, sessions: @sessions, audit_log: @audit,
                          digest_key: "key", clock: Clock.new(NOW)).call(dto:)
       end
@@ -129,6 +129,53 @@ module UseCases
 
       test "an elapsed lockout lets the account in again" do
         assert authenticate(attempts: FakeAttempts.new(count: 5, last_failed_at: NOW - 16.minutes)).success?
+      end
+
+      # ADR-0084 §4.5, CA-3 and CA-4: in the students' app, the role is checked only once the PIN is right.
+      test "CA-3: in the students' app, a teacher, a school admin and a team member with the right PIN get :wrong_app and no session" do
+        [ { role: "teacher" }, { role: "school_admin" }, { role: "team", team_role: "admin" } ].each do |role|
+          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **role)
+          result = authenticate(client: "android_student")
+
+          assert_equal :conflict, result.code, role
+          assert_equal({ base: [ :wrong_app ] }, result.errors)
+          assert_equal [ true ], @attempts.records.map { it[:succeeded] }
+          assert_nil @sessions.created
+        end
+      end
+
+      test "CA-3: in the students' app, a teacher's wrong PIN gets exactly a student's wrong-PIN failure" do
+        student = authenticate(pin: "1357", client: "android_student")
+        @user = Entities::Identity::User.new(id: 1, contact: "0701020304", role: "teacher")
+        teacher = authenticate(pin: "1357", client: "android_student")
+
+        assert_equal student, teacher
+        assert_equal :invalid, teacher.code
+        assert_equal [ false ], @attempts.records.map { it[:succeeded] }
+        assert_nil @sessions.created
+      end
+
+      test "CA-4: in the students' app, a student with the right PIN gets a session" do
+        result = authenticate(client: "android_student")
+
+        assert result.success?
+        assert_equal @user, result.value.user
+        assert_equal 1, @sessions.created[:user_id]
+      end
+
+      test "on the website, by default or by name, a teacher signs in as before" do
+        @user = Entities::Identity::User.new(id: 1, contact: "0701020304", role: "teacher")
+
+        assert authenticate.success?
+        assert authenticate(client: "web").success?
+      end
+
+      test "an unknown client is invalid and writes nothing" do
+        result = authenticate(client: "ios")
+
+        assert_equal :invalid, result.code
+        assert result.errors.key?(:client)
+        assert_empty @attempts.records
       end
     end
   end

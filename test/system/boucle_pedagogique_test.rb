@@ -3,7 +3,7 @@ require "application_system_test_case"
 # Lot E, PRD §5 (V1 gate): the whole teaching loop on a blank base, through the real buttons only — no open_in_modal,
 # no stand-in controller, no factory. The team accepts the bootstrap invitation, builds the referential, a DRENA and a
 # public lycée by import (6 « Tle D » classrooms generated), then writes and publishes a course, a sheet and an exercise;
-# the teacher signs up with the school code the team read on the school page, declares a classroom and assigns the
+# the teacher signs up by the DRENA, then the school (ADR-0083), with a full name, declares a classroom and assigns the
 # exercise; the student joins by the code, plays the exercise on a phone and wins « Diamant »; the teacher issues a
 # recovery code and reads the result. Every write is wrapped in assert_no_page_reload.
 class BouclePedagogiqueTest < ApplicationSystemTestCase
@@ -183,8 +183,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     (1..6).each { |n| assert_selector "[id^=classroom_]", text: "Tle D #{n}" }
     assert_no_text "Tle D 7"
     assert_equal (1..6).map { "Tle D #{it}" }, Orm::Classroom.order(:name).pluck(:name)
-    # ADR-0057: the team reads the school code on the school's page, and hands it to the teacher.
-    @school_code = find("#school_code_value").text
   end
 
   def team_publishes_a_course_a_sheet_and_an_exercise
@@ -268,18 +266,20 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   def teacher_signs_up_and_assigns_the_exercise
     visit new_teacher_registration_path
     assert_no_page_reload do
-      fill_in "teacher_registration[last_name]", with: "Yao"
+      select "Abidjan 1", from: "teacher_registration[drena_public_id]"
+      select SCHOOL, from: "teacher_registration[school_public_id]"
+      select "SVT", from: "teacher_registration[material_slug]"
+      fill_in "teacher_registration[last_name]", with: "YAO"
       fill_in "teacher_registration[first_name]", with: "Koffi"
       choose t("genders.male")
       fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
-      fill_in "teacher_registration[school_code]", with: @school_code
-      select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[pin]", with: "1357"
       fill_in "teacher_registration[pin_confirmation]", with: "1357"
     end
     click_on t("identity.teacher_registrations.form.submit")
     assert_toast t("identity.teacher_registrations.create.welcome")
     assert_current_path teacher_classrooms_path
+    assert_equal [ "YAO", "Koffi" ], Orm::User.where(contact: TEACHER_CONTACT).pick(:last_name, :first_name)
 
     classroom = Orm::Classroom.find_by!(name: "Tle D 1")
     assert_selector "form[id^=teaching_]", count: 6

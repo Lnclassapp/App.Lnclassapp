@@ -69,6 +69,21 @@ fr:
         with_classroom: "dont %{count} avec une classe"
         with_teacher: "dont %{count} avec un enseignant"
         with_student: "dont %{count} avec un élève"
+        # UDR-0078 §3.3 : ouvertures depuis l'icône de l'app installée, par rôle (ADR-0082 §4.4)
+        app_openers_title: "Ouvert depuis l'app installée"
+        app_openers_label: "Ouvert depuis l'app installée, par rôle"
+        app_openers_students:
+          one: "%{count} élève"
+          other: "%{count} élèves"
+        app_openers_teachers:
+          one: "%{count} enseignant"
+          other: "%{count} enseignants"
+        # ADR-0084 §4.6 : part des élèves qui ont ouvert l'app Android « Lnclass » sur la période.
+        app_openers_android:
+          one: "dont app Android : %{count} élève"
+          other: "dont app Android : %{count} élèves"
+        app_openers_tip: "Comptes qui ont ouvert Lnclass depuis l'icône de leur téléphone sur la période. Un compte compte une fois."
+        app_openers_tip_label: "Ouvert depuis l'app installée"
       levels:
         title: "Élèves par niveau"
         subtitle: "Élèves placés dans une classe active de l'année"
