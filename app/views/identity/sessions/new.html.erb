@@ -27,11 +27,14 @@
           <% if @wrong_app %>
             <%# Le message selon la coque et l'app proposée ; la coque ouvre dans le navigateur un lien en target="_blank". %>
             <% refusal = ".wrong_app_for.#{@wrong_app[:shell]}.#{@wrong_app[:app]}" %>
-            <div id="wrong-app" role="alert">
-              <%= ui_toast safe_join([ t("#{refusal}.body"), " ",
-                                       link_to(t("#{refusal}.link"), @wrong_app[:url], target: "_blank", rel: "noopener",
-                                               class: "font-medium text-brand-strong underline underline-offset-4") ]),
-                           type: :warning, title: t("#{refusal}.title"), persistent: true %>
+            <div id="wrong-app" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
+              <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
+              <div class="min-w-0">
+                <p class="font-semibold"><%= t("#{refusal}.title") %></p>
+                <p class="mt-0.5"><%= t("#{refusal}.body") %>
+                  <%= link_to t("#{refusal}.link"), @wrong_app[:url], target: "_blank", rel: "noopener",
+                              class: "font-medium text-brand-strong underline underline-offset-4" %></p>
+              </div>
             </div>
           <% end %>
           <% if @form.errors[:base].any? %>
