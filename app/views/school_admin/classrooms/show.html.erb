@@ -85,7 +85,7 @@
               <% @students.each do |student| %>
                 <% remove_dialog = "remove-student-#{student.public_id}" %>
                 <%# La ligne porte l'identifiant de la page de l'enseignant : le stream du retrait la retire (UDR-0081 §3.7). %>
-                <tr id="student_<%= student.public_id %>" class="max-sm:grid max-sm:grid-cols-[1fr_auto] max-sm:gap-x-3 max-sm:py-3">
+                <tr id="student_<%= student.public_id %>" class="max-sm:grid max-sm:grid-cols-content-action max-sm:gap-x-3 max-sm:py-3">
                   <th scope="row" class="px-2 py-3 font-medium text-ink max-sm:col-start-1 max-sm:py-0">
                     <%# UDR-0081 §3.7, amendée le 2026-10-08 : sous sm, la pastille passe sous le nom, sur la ligne de la voie
                         d'arrivée ; à partir de sm, elle reste à côté du nom. Rien pour la voie du code. %>
@@ -98,11 +98,11 @@
                   </th>
                   <%# Sous sm, le libellé de la colonne précède le chiffre (data-label), sans changer le texte de la cellule. %>
                   <td data-label="<%= t(".columns.submitted") %>"
-                      class="px-2 py-3 text-right tabular-nums max-sm:col-start-1 max-sm:pt-1 max-sm:pb-0 max-sm:text-left max-sm:text-xs max-sm:before:text-mute max-sm:before:content-[attr(data-label)_'_:_']">
+                      class="px-2 py-3 text-right tabular-nums max-sm:col-start-1 max-sm:pt-1 max-sm:pb-0 max-sm:text-left max-sm:text-xs max-sm:cell-label">
                     <%= t(".submitted", count: student.work.submitted_count, total: classroom.assignments_count) %>
                   </td>
                   <td data-label="<%= t(".columns.average") %>"
-                      class="px-2 py-3 text-right tabular-nums max-sm:col-start-1 max-sm:py-0 max-sm:text-left max-sm:text-xs max-sm:before:text-mute max-sm:before:content-[attr(data-label)_'_:_']"><%= percent.call(student.work.average_percent) %></td>
+                      class="px-2 py-3 text-right tabular-nums max-sm:col-start-1 max-sm:py-0 max-sm:text-left max-sm:text-xs max-sm:cell-label"><%= percent.call(student.work.average_percent) %></td>
                   <td class="px-2 py-1 text-right max-sm:col-start-2 max-sm:row-span-3 max-sm:row-start-1 max-sm:self-center">
                     <%# UDR-0081 §3.7 : le menu ⋮ et la confirmation de la page de l'enseignant ; menu en position fixe, hors
                         du défilement du tableau (UDR-0042). %>
