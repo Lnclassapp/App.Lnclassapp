@@ -6,12 +6,11 @@
   <% if in_app %>
     <%# ADR-0084 §4.2 : la coque porte ses propres barres ; aucune navigation du site, donc ni lien d'évitement ni marge réservée. %>
     <%# ADR-0085 §4.2 : le pont du compte, pour les rôles qui ont une coque ; l'adresse est celle de leur panneau. %>
-    <% menu_path = { "student" => student_menu_path, "teacher" => teacher_menu_path }[shell_user.role.to_s] %>
-    <% if menu_path %>
+    <% if account_panel?(shell_user.role) %>
       <%= tag.div hidden: true, data: { controller: "bridge--account",
                                         bridge__account_initials_value: avatar_initials(shell_user.name),
                                         bridge__account_photo_url_value: shell_user.avatar_url,
-                                        bridge__account_menu_url_value: menu_path,
+                                        bridge__account_menu_url_value: account_panel_page_path(shell_user.role),
                                         bridge__account_help_url_value: help_path } %>
     <% end %>
   <% else %>
