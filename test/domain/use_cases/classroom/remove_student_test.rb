@@ -132,6 +132,20 @@ module UseCases
         assert_nothing_removed
       end
 
+      # UDR-0079 §3.7, amendée le 2026-10-08 (porteur) : comme le changement de lien, le serveur refuse le retrait dans une
+      # classe archivée, que l'interface masque déjà. La policy passe d'abord : hors périmètre, la classe reste un 404.
+      test "une classe archivée : :forbidden, raison classroom_archived ; rien n'est écrit" do
+        @classroom.status = "archived"
+
+        result = remove("usr-koffi")
+
+        assert_equal :forbidden, result.code
+        assert_equal({ base: [ :classroom_archived ] }, result.errors)
+        assert_equal [ :begin, [ :lock, "cls-3e2" ], :commit ], @journal
+        assert_equal :not_found, remove("usr-koffi", actor: Actor.new(user_id: 61, role: :school_admin, school_id: 32)).code
+        assert_nothing_removed
+      end
+
       test "une classe inconnue : 404, avant toute policy" do
         assert_equal :not_found, remove("usr-koffi", classroom_public_id: "cls-inconnue").code
         assert_equal :not_found, remove("usr-koffi", actor: nil, classroom_public_id: "cls-inconnue").code
