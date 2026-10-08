@@ -57,13 +57,15 @@
                 <div class="flex min-w-0 flex-1 items-center gap-3">
                   <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>
                   <div class="min-w-0">
-                    <div class="flex min-w-0 items-center gap-2">
-                      <p class="truncate text-sm font-medium"><%= student.display_name %></p>
+                    <%# UDR-0079 §3.7 : la voie d'arrivée sous chaque nom ; rien pour le code, la voie d'avant le lien. Amendée
+                        le 2026-10-08 : sous sm, la pastille passe sous le nom, sur la ligne de la voie ; à partir de sm, elle
+                        reste à côté du nom. Le nom n'est jamais tronqué par la pastille ; sur téléphone, il passe à la ligne. %>
+                    <div class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5">
+                      <p class="w-full text-sm font-medium break-words sm:w-auto sm:truncate"><%= student.display_name %></p>
                       <% if student.newcomer %><span class="shrink-0"><%= ui_badge t(".new"), tone: :brand, size: :sm %></span><% end %>
+                      <% via = { "standard" => t(".via.standard"), "link" => t(".via.link") }[student.joined_via] %>
+                      <% if via %><p class="text-xs text-mute sm:w-full"><%= via %></p><% end %>
                     </div>
-                    <%# UDR-0079 §3.7 : la voie d'arrivée sous chaque nom ; rien pour le code, la voie d'avant le lien. %>
-                    <% via = { "standard" => t(".via.standard"), "link" => t(".via.link") }[student.joined_via] %>
-                    <% if via %><p class="text-xs text-mute"><%= via %></p><% end %>
                     <% if student.contact %>
                       <p class="text-xs whitespace-nowrap text-mute tabular-nums">
                         <span class="sr-only"><%= t(".contact") %></span> <%= student.contact.scan(/\d{2}/).join(" ") %>

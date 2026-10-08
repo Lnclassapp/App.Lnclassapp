@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomStudentsController
-# Rôle : retirer un élève de la classe (IL-14), en Turbo Stream : ligne, titre de la liste, effectif, toast ; repli HTML : retour à la classe
-# ADR  : 0028, 0083 (§4.5) · UDR : 0006, 0079 (§3.7) · 403 et 404 en toast (RendersResult) ; `q` : la recherche de la liste, pour son compte
+# Rôle : retirer un élève de la classe (IL-14), en Turbo Stream : ligne, titre de la liste, effectif, toast ; page de la direction re-demandée ; repli HTML : retour à la classe
+# ADR  : 0028, 0065, 0083 (§4.5) · UDR : 0006, 0079 (§3.7) · 403 (classe archivée comprise) et 404 en toast (RendersResult) ; `q` : la recherche de la liste
 module Classroom
   class ClassroomStudentsController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team
@@ -19,11 +19,16 @@ module Classroom
       @notice = t("classroom.classrooms.roster.removed", name: @student.display_name)
       public_id = removal.classroom.public_id
       respond_to do |format|
-        format.turbo_stream { read_roster(public_id) }
+        format.turbo_stream do
+          @direction_page = current_actor.school_admin?
+          read_roster(public_id)
+        end
         format.html { redirect_to classroom_page(public_id), notice: @notice, status: :see_other }
       end
     end
 
+    # La direction n'a que sa page de classe (school_admin/classrooms/show) : son titre de liste est recompté ici, le reste
+    # de sa page est re-demandé par le stream (destroy.turbo_stream.erb).
     def read_roster(public_id)
       @search = params[:q].to_s
       @header = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id:)
