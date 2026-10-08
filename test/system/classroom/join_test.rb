@@ -5,7 +5,8 @@ require "application_system_test_case"
 # secret code without reloading the page, then lands home in the classroom (way « standard »); or opens a classroom link,
 # sees the classroom already chosen and lands home in it (way « link »); « Ce n'est pas ta classe ? » goes back to the
 # cascade (way « standard »). An old link /c/<code> and /join lead to the standard page, the first with the alert.
-# UDR-0057: at 390 px, the link page keeps a single primary action.
+# IL-06 and IL-20 live in the browser: the submit button waits for a classroom, the number is cleaned while pasted and the
+# secret code concordance shows before sending. UDR-0057: at 390 px, the link page keeps a single primary action.
 class Classroom::JoinTest < ApplicationSystemTestCase
   FORM = "classroom.student_registrations.form".freeze
   JOINS = "classroom.joins.new".freeze
@@ -19,12 +20,19 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     @level = create_level(name: "6ème")
     @classroom = create_classroom(school: @school, level: @level, name: "6ème 1")
     @other = create_classroom(school: @school, level: @level, name: "6ème 2")
+    create_school(drena:, name: "Collège sans classe")
   end
 
-  test "IL-01: the cascade, an unconfirmed secret code shown without reloading, then the arrival in the classroom" do
+  test "IL-01, IL-06: the cascade, an unconfirmed secret code shown without reloading, then the arrival in the classroom" do
     visit new_student_registration_path
 
+    # IL-06 : un établissement sans classe le dit, et « Créer mon compte » reste désactivé tant qu'aucune classe n'est cochée.
+    select "Abidjan 1", from: "student_registration[drena_public_id]"
+    select "Collège sans classe", from: "student_registration[school_public_id]"
+    within("turbo-frame#picker_levels") { assert_text I18n.t("classroom.student_registrations.class_picker.not_found_title") }
+    assert_button I18n.t("#{FORM}.submit"), disabled: true
     choose_classroom "6ème 1"
+    assert_button I18n.t("#{FORM}.submit"), disabled: false
     sign_up_after_a_wrong_confirmation
 
     assert_equal [ [ @classroom.id, "standard" ] ], memberships_of_the_new_student
@@ -41,6 +49,24 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     end
 
     assert_equal [ [ @classroom.id, "link" ] ], memberships_of_the_new_student
+  end
+
+  # Challenger de la phase 5 (E1) : un refus 403 (la classe s'est remplie pendant la saisie) se lit sans chercher l'alerte.
+  test "IL-05 at 390 px: a classroom filled while the form was typed refuses in 403, the alert focused and in view" do
+    @classroom.update_column(:max_students, 1)
+
+    with_mobile_viewport do
+      visit new_student_registration_path
+      choose_classroom "6ème 1"
+      fill_in_the_student
+      create_student(classroom: @classroom)
+      click_on I18n.t("#{FORM}.submit")
+
+      assert_selector "#student-registration-refusal[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
+      assert_equal "student-registration-refusal", page.evaluate_script("document.activeElement.id")
+      assert_operator page.evaluate_script("document.getElementById('student-registration-refusal').getBoundingClientRect().top"), :>=, 0
+    end
+    assert_equal 0, Orm::User.where(role: "student", contact: "0701020304").count
   end
 
   test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
@@ -102,7 +128,9 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     fill_in "student_registration[last_name]", with: "KOUASSI"
     fill_in "student_registration[first_name]", with: "Aya Marie"
     choose I18n.t("genders.female")
-    fill_in "student_registration[contact]", with: "07 01 02 03 04"
+    # IL-20 (IE-19) : le numéro collé est nettoyé en direct.
+    paste "student_registration[contact]", "(+225) 07 01 02 03 04"
+    assert_field "student_registration[contact]", with: "0701020304"
     fill_in "student_registration[pin]", with: "4821"
     fill_in "student_registration[pin_confirmation]", with: pin_confirmation
   end
@@ -118,6 +146,8 @@ class Classroom::JoinTest < ApplicationSystemTestCase
   def sign_up_after_a_wrong_confirmation
     assert_no_page_reload do
       fill_in_the_student(pin_confirmation: "1357")
+      # IL-20 (IE-17) : la concordance du code secret se lit avant l'envoi ; le serveur refuse quand même.
+      assert_selector "#pin_match_status.text-error", text: I18n.t("#{FORM}.pin_match.ko")
       click_on I18n.t("#{FORM}.submit")
 
       assert_selector "#student_registration_pin_confirmation_error", text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
@@ -127,10 +157,17 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
     fill_in "student_registration[pin]", with: "4821"
     fill_in "student_registration[pin_confirmation]", with: "4821"
+    assert_selector "#pin_match_status.text-success", text: I18n.t("#{FORM}.pin_match.ok")
     click_on I18n.t("#{FORM}.submit")
 
     assert_toast I18n.t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
+  end
+
+  # Un collage : toute la valeur d'un coup, puis un seul événement input, comme le navigateur.
+  def paste(field, text)
+    execute_script("arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input', { bubbles: true }))",
+                   find_field(field), text)
   end
 
   def memberships_of_the_new_student

@@ -62,7 +62,8 @@ module Classroom
       Dtos::Classroom::StudentRegistrationInput.new(**params.expect(student_registration: FIELDS).to_h.symbolize_keys)
     end
 
-    def picker_params = params.fetch(:student_registration, {}).permit(*PICKER_FIELDS).to_h.symbolize_keys
+    # Une valeur qui n'est pas un hash (?student_registration=x) est écartée par permit, pas levée : la page s'ouvre vide.
+    def picker_params = (params.permit(student_registration: PICKER_FIELDS)[:student_registration] || {}).to_h.symbolize_keys
 
     def register
       UseCases::Classroom::RegisterStudent.new(

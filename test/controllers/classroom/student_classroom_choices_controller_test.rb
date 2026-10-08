@@ -69,6 +69,15 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     assert_select "turbo-frame#picker_classrooms input[type=radio][name='student_classroom_choice[classroom_public_id]']", 2
   end
 
+  test "choices sent as a string instead of a hash are ignored: the last classroom's school stays chosen" do
+    sign_in_as @student
+
+    get new_student_classroom_choice_path, params: { student_classroom_choice: "x" }
+
+    assert_response :success
+    assert_select "turbo-frame#picker_levels option[value='#{@level.slug}']"
+  end
+
   test "a student who never had a classroom starts from the DRENA" do
     sign_in_as create_student
 
@@ -190,12 +199,12 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     assert_equal [ [ @other.id, "standard" ] ], open_memberships(student)
   end
 
-  test "a visitor is sent to sign in; a teacher and the team receive 403" do
+  test "a visitor is sent to sign in; a teacher, the direction and the team receive 403 (PRD §3)" do
     get new_student_classroom_choice_path
 
     assert_redirected_to new_session_path
 
-    [ create_teacher, create_team_member ].each do |user|
+    [ create_teacher, create_school_admin, create_team_member ].each do |user|
       sign_in_as user
 
       get new_student_classroom_choice_path

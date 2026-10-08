@@ -526,7 +526,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Intrus/, response.body)
   end
 
-  test "IL-13: « Nouveau » and the arrival channel under each name, « 1 nouveau » in the list title, lines in name order" do
+  test "IL-13: « Nouveau » and the arrival channel under each name, « 1 nouveau » in the list title, newcomers first" do
     koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_at: 2.days.ago)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_via: "link", joined_at: 10.days.ago)
     ali = create_student(classroom: @classroom, first_name: "Ali", last_name: "Cissé", joined_via: "code", joined_at: 1.year.ago)
@@ -550,7 +550,8 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "span", text: tr("new"), count: 0
       assert_select "p", count: 1, text: "Ali Cissé"
     end
-    assert_equal [ awa, ali, koffi ].map { "student_#{it.public_id}" }, css_select("#classroom_students tbody tr").map { it["id"] }
+    # UDR-0081 §3.7 (challenger de la phase 5, E3) : le nouveau d'abord, puis les autres par nom, comme chez l'enseignant.
+    assert_equal [ koffi, awa, ali ].map { "student_#{it.public_id}" }, css_select("#classroom_students tbody tr").map { it["id"] }
   end
 
   test "IL-14: each line's ⋮ menu removes its student after a confirmation naming them; the page then counts one less" do

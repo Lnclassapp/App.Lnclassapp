@@ -117,6 +117,9 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 - **Un second retrait écrase la date du premier** : l'historique des retraits n'est pas gardé.
 - **La liste des classes d'un établissement devient publique**, nom par nom. Elle était lisible un code à la fois.
 - **Dépendance** à `inscription-enseignant` pour les contrôleurs de saisie et la forme des jetons.
+- *Ajouté le 2026-10-08 (relecture sécurité de la PR 203).* **Un enseignant non confirmé gère la classe qu'il s'est déclarée** : l'enseignant est rattaché dès l'inscription (ADR-0083) et se déclare enseignant d'une classe sans validation ; `ManageClassroomMembersPolicy` ne lit que les enseignants de la classe. Il peut donc retirer tous ses élèves et changer le lien en boucle. Chantier de suivi proposé : ne donner ces gestes qu'à un enseignant confirmé (ADR-0063).
+- *Ajouté le 2026-10-08.* **Le débit par adresse se contourne en IPv6** : une plage /64 donne autant d'adresses que voulu, et les 5 inscriptions par minute n'y freinent plus le remplissage d'une classe. Chantier de suivi proposé : compter le débit par /64.
+- *Ajouté le 2026-10-08.* **Changer le lien et retirer un élève ne laissent pas de trace d'audit** : le retrait garde son auteur sur l'adhésion, le changement de lien rien. Chantier de suivi proposé : `classroom.link_changed` et `classroom.student_removed` dans le journal d'audit.
 
 ## 6. Notes d'implémentation
 

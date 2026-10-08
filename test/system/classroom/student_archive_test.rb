@@ -31,7 +31,9 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
   test "at 390 px, the student who left reads his archive from his home without a classroom, without a page reload" do
     with_mobile_viewport do
       sign_in_as @student
+      # ADR-0085 §4.3 (Lot F) : sans classe active, l'élève arrive sur son accueil, « Choisis ta classe » et son historique.
       assert_selector "#student_home_no_classroom", text: t("classroom.student_homes.no_classroom.title"), wait: SIGN_IN_WAIT
+      assert_single_primary_action
 
       assert_no_page_reload do
         click_on t("classroom.student_homes.no_classroom.archive")

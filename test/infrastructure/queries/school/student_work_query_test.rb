@@ -30,10 +30,11 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
   def seconde_c1
     klass = classroom
     first, second = assignment(klass), assignment(klass)
-    a = create_student(classroom: klass, first_name: "Aya", last_name: "Bamba")
-    b = create_student(classroom: klass, first_name: "Moussa", last_name: "Coulibaly")
-    create_student(classroom: klass, first_name: "Fanta", last_name: "Diabaté")
-    create_student(classroom: klass, first_name: "Koffi", last_name: "Diallo")
+    # Arrivés depuis longtemps : aucun « nouveau », la liste suit les noms (UDR-0081 §3.7).
+    a = create_student(classroom: klass, first_name: "Aya", last_name: "Bamba", joined_at: 30.days.ago)
+    b = create_student(classroom: klass, first_name: "Moussa", last_name: "Coulibaly", joined_at: 30.days.ago)
+    create_student(classroom: klass, first_name: "Fanta", last_name: "Diabaté", joined_at: 30.days.ago)
+    create_student(classroom: klass, first_name: "Koffi", last_name: "Diallo", joined_at: 30.days.ago)
     submit(a, first, 80)
     submit(a, second, 60)
     submit(b, first, 70)
@@ -147,11 +148,11 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     essential = create_essential
     x, y = Array.new(2) { create_exercise(essential:) }
     given_x, given_y = [ x, y ].map { create_assignment(classroom: klass, assignable: it, by: @teacher) }
-    aya = create_student(classroom: klass, first_name: "Aya", last_name: "Bamba")
+    aya = create_student(classroom: klass, first_name: "Aya", last_name: "Bamba", joined_at: 30.days.ago)
     failed = create_exercise_session(student: aya, exercise: x, status: "completed", score_percent: 25, classroom_assignment_id: given_x.id)
     create_exercise_session(student: aya, exercise: y, status: "completed", score_percent: 80, classroom_assignment_id: given_y.id,
                             gap: create_gap(student: aya, essential:, source_session: failed))
-    4.times { |index| submit(create_student(classroom: klass, last_name: "Zz#{index}"), given_x, 50) }
+    4.times { |index| submit(create_student(classroom: klass, last_name: "Zz#{index}", joined_at: 30.days.ago), given_x, 50) }
 
     assert_equal [ 60, 51 ], row_of(klass).to_h.values_at(:submission_rate, :average_percent), "6 of 10; (25 + 80 + 4 × 50) / 6"
     assert_equal Query::StudentRow.new(display_name: "Aya Bamba", submitted_count: 2, average_percent: 53), detail(klass).students.first
@@ -183,12 +184,12 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
   test "a student in two classrooms counts only in the classroom of the assignment, and only while present in it" do
     first, second = classroom, classroom(name: "2nde C 2")
     first_assignment, second_assignment = assignment(first), assignment(second)
-    both = create_student(classroom: first, first_name: "Awa", last_name: "Koné")
+    both = create_student(classroom: first, first_name: "Awa", last_name: "Koné", joined_at: 30.days.ago)
     Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: both, primary: false, joined_at: Time.current)
     submit(both, first_assignment, 40)
     submit(both, second_assignment, 80)
     submit(both, second_assignment, 60)
-    left = create_student(classroom: first, first_name: "Yao", last_name: "Kouassi")
+    left = create_student(classroom: first, first_name: "Yao", last_name: "Kouassi", joined_at: 30.days.ago)
     Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: left, primary: false, joined_at: Time.current, left_at: Time.current)
     submit(left, second_assignment, 100)
     submit(left, first_assignment, 20)
@@ -236,6 +237,18 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
                    Query::StudentRow.new(display_name: "Moussa Coulibaly", submitted_count: 1, average_percent: 85),
                    Query::StudentRow.new(display_name: "Fanta Diabaté", submitted_count: 0, average_percent: nil),
                    Query::StudentRow.new(display_name: "Koffi Diallo", submitted_count: 0, average_percent: nil) ], found.students
+  end
+
+  # Challenger de la phase 5 (E3), UDR-0081 §3.7 : la règle de la page de l'enseignant ; les nouveaux d'abord, du plus
+  # récent au plus ancien, puis les autres par nom.
+  test "newcomers come first, the most recent first, then the others by name" do
+    klass = classroom
+    [ [ "Adjobi", 30.days.ago ], [ "Bamba", 3.days.ago ], [ "Zadi", 1.hour.ago ], [ "Kone", 20.days.ago ] ].each do |last_name, joined_at|
+      create_student(classroom: klass, first_name: "Awa", last_name:, joined_at:)
+    end
+
+    assert_equal [ "Awa Zadi", "Awa Bamba", "Awa Adjobi", "Awa Kone" ], detail(klass).students.map(&:display_name)
+    assert_equal [ true, true, false, false ], detail(klass).members.map(&:newcomer)
   end
 
   test "a student's average is rounded, a classroom without student lists nobody" do

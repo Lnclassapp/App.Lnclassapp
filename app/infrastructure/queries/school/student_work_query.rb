@@ -19,7 +19,7 @@ module Queries
       end
       # Ce que le bloc « Lien de la classe » lit (classroom/classrooms/_link, UDR-0081 §3.6).
       Link = Data.define(:public_id, :name, :link_token)
-      # members : par nom ; students : leur travail, dans le même ordre.
+      # members : les nouveaux d'abord, puis par nom ; students : leur travail, dans le même ordre.
       Detail = Data.define(:classroom, :link, :members) do
         def students = members.map(&:work)
         def new_students_count = members.count(&:newcomer)
@@ -78,8 +78,11 @@ module Queries
                                                        .pick(*CLASSROOM_COLUMNS, "classrooms.link_token")
         return if row.nil?
 
+        # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien, puis les autres par nom (la page de l'enseignant).
+        since = Time.current - Queries::Classroom::ClassroomOverviewQuery::NEW_FOR
+        newcomers_first = Arel.sql(Orm::ClassroomStudent.sanitize_sql_array([ Queries::Classroom::ClassroomOverviewQuery::NEWCOMERS_FIRST, since ]))
         students = present_students.where(classroom_students: { classroom_id: row.first })
-                                   .order(:last_name, :first_name, :id).pluck(*MEMBER_COLUMNS)
+                                   .order(newcomers_first, :last_name, :first_name, :id).pluck(*MEMBER_COLUMNS)
         assignments_count = Orm::ClassroomAssignment.where(classroom_id: row.first).count
         totals = totals_by("classroom_students.student_id", row.first)
 

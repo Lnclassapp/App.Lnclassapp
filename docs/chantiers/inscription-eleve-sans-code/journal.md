@@ -54,6 +54,10 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Lot F, durées des tests système (2026-10-08).** Une première mesure, sur 4 processus en parallèle, doublait presque toutes les durées (`boucle_pedagogique` 36,7 → 44,1 s, `pin_reveal` 12,2 → 26,1 s). Seuls les fichiers réécrits ont été remesurés, sur un processus ; ceux qu'une simple substitution a touchés gardent la durée de la CI. Puma coupe la ligne `-v` du premier test : `record_timings` la perd, il faut la rajouter à la main.
 - **Lot F, base locale (2026-10-08).** Postgres s'est arrêté deux fois pendant le lot (processus tué avec le shell qui l'avait lancé) ; `setsid` le garde en vie.
 
+- **Phase 5 (2026-10-08).** La vérification a trouvé : un test système resté sur l'ancienne page d'attente (`student_archive_test`, réel, causé par le Lot F) ; une 500 sur `?student_registration=x` et `?student_classroom_choice=x` (`params.fetch(...).permit` sur une chaîne) ; un test instable hérité de `Develop` — `seeds_test` passe `Rails.env` à production, et des routes dessinées à ce moment perdent `/design` pour la suite du processus ; IL-06 et IL-20 (direct) sans preuve en navigateur ; le PRD qui promettait une redirection là où le code répond 403. Tout est corrigé dans la PR. Et deux relecteurs qui lancent leurs tests sur la base de test pendant une suite système la faussent (un test de concurrence vide toute la base) : une seule suite à la fois par base.
+
+- **Challenger empirique (2026-10-08).** Les 8 parcours de l'encadré du plan sont conformes, rejoués dans Chrome à 390 px et à 1280 px, sans défilement horizontal de page. Trois écarts d'interface, corrigés sur décision du porteur : E1, après un refus 403 l'alerte restait hors de l'écran (focus sur `body`) ; E2, le ⋮ de la direction caché à droite d'un tableau à glisser ; E3, la direction ne voyait pas les nouveaux d'abord. Un test navigateur prouve E1 et E2, un test de lecture E3.
+
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
@@ -88,7 +92,10 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Règle « classe de la cascade » (`listed?`) et `class_picker_lists` recopiées entre `RegisterStudent` / `JoinAsStudent` et leurs contrôleurs | Fichiers hors liste | Lot F — **fait** : `ClassroomDesignation`, `ClassPicker` |
 | Chemin `code:` de `JoinAsStudent` et `lock_by_join_code` | Ancien chemin `/join` | Lot F — **fait** |
 | Titre de la liste des élèves écrit trois fois (`_roster`, stream du retrait, page de la direction) | Pas de partial dans les listes | Lot F — **fait** : `_roster_title` |
-| À 390 px, le tableau de la direction défile en largeur : le menu ⋮ et les chiffres ne se voient qu'en faisant défiler, et le nom disparaît alors | Largeur minimale d'avant le chantier ; hors UDR | Décision du porteur attendue (proposé : lignes empilées sur téléphone) |
+| À 390 px, le tableau de la direction défile en largeur : le menu ⋮ et les chiffres ne se voient qu'en faisant défiler, et le nom disparaît alors | Largeur minimale d'avant le chantier ; hors UDR | **Fait** le 2026-10-08 (décision du porteur) : lignes empilées sous `sm`, UDR-0081 §3.7 amendée |
+| Un enseignant non confirmé peut retirer les élèves et changer le lien de la classe qu'il s'est déclarée (relecture sécurité, moyen, hérité de l'ADR-0083) | Hors périmètre ; noté dans l'ADR-0085 §5 | Proposé : gestes réservés à l'enseignant confirmé |
+| Débit par adresse contournable en IPv6 (/64) | Règle commune à toutes les inscriptions | Proposé : débit compté par /64 |
+| Pas de trace d'audit pour le changement de lien et le retrait | Hors périmètre | Proposé : deux actions d'audit `classroom.*` |
 
 ## Clôture
 

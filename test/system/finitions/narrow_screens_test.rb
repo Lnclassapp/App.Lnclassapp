@@ -57,6 +57,17 @@ module Finitions
       sign_in_as create_school_admin(school: @school)
 
       assert_pages_fit [ school_admin_classrooms_path, school_admin_classroom_path(@classroom.public_id), school_admin_teachers_path ]
+
+      # Challenger de la phase 5 (E2), UDR-0081 §3.7 : à 390 px, la liste de la classe s'empile ; le ⋮ de chaque élève se
+      # voit et se touche sans glisser un tableau sur le côté.
+      with_mobile_viewport do
+        visit school_admin_classroom_path(@classroom.public_id)
+        menu = find("#classroom_students tbody [aria-haspopup]", match: :first)
+        right = evaluate_script("arguments[0].getBoundingClientRect().right", menu)
+        assert_operator right, :<=, evaluate_script("document.documentElement.clientWidth")
+        assert evaluate_script("Array.from(document.querySelectorAll('#classroom_students .overflow-x-auto')).every((box) => box.scrollWidth <= box.clientWidth)"),
+               "la liste de la direction défile en largeur à 390 px"
+      end
     end
 
     # The API line of the toasts (`flash[:notice|…]`, without a space) used to widen the page (journal, Lot 0).

@@ -128,13 +128,16 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::User.exists?(contact: "0701020304")
   end
 
-  test "a signed-in teacher receives 403 on the link page" do
-    sign_in_as create_teacher
+  test "a signed-in teacher or direction receives 403 on the link page (PRD §3)" do
+    [ create_teacher, create_school_admin ].each do |user|
+      sign_in_as user
 
-    get join_classroom_path(link_token)
+      get join_classroom_path(link_token)
 
-    assert_response :forbidden
-    assert_not_includes response.body, "6ème 1"
+      assert_response :forbidden
+      assert_not_includes response.body, "6ème 1"
+      sign_out
+    end
   end
 
   test "UDR-0081 §3.4: a student without a classroom sees the single « Join this classroom » button, and joins by it" do

@@ -65,10 +65,12 @@
                                             data: { turbo_frame: "_top" } %>
         <% end %>
       <% else %>
+        <%# UDR-0081 §3.7, amendée le 2026-10-08 (challenger de la phase 5) : sous sm, chaque élève est une ligne empilée —
+            nom, pastille et voie, puis ses chiffres libellés, le ⋮ à droite —, sans tableau à glisser ; à partir de sm, le tableau. %>
         <div class="relative overflow-x-auto">
-          <table class="w-full min-w-xl text-left text-sm">
+          <table class="w-full text-left text-sm sm:min-w-xl">
             <caption class="sr-only"><%= t(".caption", classroom: classroom.name) %></caption>
-            <thead class="border-b border-line text-xs text-mute">
+            <thead class="border-b border-line text-xs text-mute max-sm:sr-only">
               <tr>
                 <th scope="col" class="px-2 py-3 font-medium"><%= t(".columns.student") %></th>
                 <th scope="col" class="px-2 py-3 text-right align-top font-medium"><%= t(".columns.submitted") %></th>
@@ -83,8 +85,8 @@
               <% @students.each do |student| %>
                 <% remove_dialog = "remove-student-#{student.public_id}" %>
                 <%# La ligne porte l'identifiant de la page de l'enseignant : le stream du retrait la retire (UDR-0081 §3.7). %>
-                <tr id="student_<%= student.public_id %>">
-                  <th scope="row" class="px-2 py-3 font-medium text-ink">
+                <tr id="student_<%= student.public_id %>" class="max-sm:grid max-sm:grid-cols-content-action max-sm:gap-x-3 max-sm:py-3">
+                  <th scope="row" class="px-2 py-3 font-medium text-ink max-sm:col-start-1 max-sm:py-0">
                     <%# UDR-0081 §3.7, amendée le 2026-10-08 : sous sm, la pastille passe sous le nom, sur la ligne de la voie
                         d'arrivée ; à partir de sm, elle reste à côté du nom. Rien pour la voie du code. %>
                     <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -94,11 +96,14 @@
                       <% if via %><p class="text-xs font-normal text-mute sm:w-full"><%= via %></p><% end %>
                     </div>
                   </th>
-                  <td class="px-2 py-3 text-right tabular-nums">
+                  <%# Sous sm, le libellé de la colonne précède le chiffre (data-label), sans changer le texte de la cellule. %>
+                  <td data-label="<%= t(".columns.submitted") %>"
+                      class="px-2 py-3 text-right tabular-nums max-sm:col-start-1 max-sm:pt-1 max-sm:pb-0 max-sm:text-left max-sm:text-xs max-sm:cell-label">
                     <%= t(".submitted", count: student.work.submitted_count, total: classroom.assignments_count) %>
                   </td>
-                  <td class="px-2 py-3 text-right tabular-nums"><%= percent.call(student.work.average_percent) %></td>
-                  <td class="px-2 py-1 text-right">
+                  <td data-label="<%= t(".columns.average") %>"
+                      class="px-2 py-3 text-right tabular-nums max-sm:col-start-1 max-sm:py-0 max-sm:text-left max-sm:text-xs max-sm:cell-label"><%= percent.call(student.work.average_percent) %></td>
+                  <td class="px-2 py-1 text-right max-sm:col-start-2 max-sm:row-span-3 max-sm:row-start-1 max-sm:self-center">
                     <%# UDR-0081 §3.7 : le menu ⋮ et la confirmation de la page de l'enseignant ; menu en position fixe, hors
                         du défilement du tableau (UDR-0042). %>
                     <%= ui_dropdown label: t("#{roster}.actions_label", name: student.display_name), id: "student-actions-#{student.public_id}",
