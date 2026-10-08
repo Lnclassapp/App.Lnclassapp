@@ -6,7 +6,7 @@ module Queries
     class StudentHomeQuery
       # late_material_slugs : les matières où un exercice est en retard pour l'élève, pastille de « Mes matières » (UDR-0062
       # §3.3, UDR-0076 §3.1) ; subjects : les matières qui ont un cours publié de son niveau.
-      Row = Data.define(:school_name, :level_name, :classroom_name, :join_code_display, :classmates_count,
+      Row = Data.define(:school_name, :level_name, :classroom_name, :classmates_count,
                         :assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs, :subjects)
       # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
       # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance.
@@ -28,22 +28,21 @@ module Queries
       # L'ordre de la grille de la charte (§9) ; une matière hors de cette liste suit, par nom.
       SUBJECT_ORDER = %w[mathematiques maths physique-chimie pc svt francais histoire-geographie histoire-geo hg edhc
                          philosophie philo].freeze
-      HEADER_COLUMNS = [ "classrooms.id", "schools.name", "levels.name", "classrooms.name", "classrooms.join_code" ].freeze
+      HEADER_COLUMNS = [ "classrooms.id", "schools.name", "levels.name", "classrooms.name" ].freeze
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
                            "materials.slug", "courses.id", "essentials.position", "exercises.position" ].freeze
 
       # today : la date d'Abidjan (Time.zone), qui dit si une échéance est passée.
       # → Row | nil (aucune classe principale active : l'élève n'a pas d'accueil)
       def call(student_id:, today: Time.zone.today)
-        classroom_id, school_name, level_name, classroom_name, join_code =
+        classroom_id, school_name, level_name, classroom_name =
           Orm::ClassroomStudent.joins(classroom: %i[school level])
                                .where(student_id:, primary: true, left_at: nil, classrooms: { status: "active" })
                                .pick(*HEADER_COLUMNS)
         return if classroom_id.nil?
 
         exercises = assigned_with_slugs(classroom_id, student_id)
-        Row.new(school_name:, level_name:, classroom_name:, join_code_display: Entities::Classroom::JoinCode.display(join_code),
-                classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
+        Row.new(school_name:, level_name:, classroom_name:, classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
                 assigned_exercises: exercises.map(&:last), recent_sessions: recent_sessions(student_id:),
                 pending_gaps: pending_gaps(student_id), late_material_slugs: late_material_slugs(exercises, today),
                 subjects: subjects(student_id))

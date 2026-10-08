@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
-# CL-10, CL-04 — UDR-0027. L'enseignant ouvre sa classe : il voit le code en majuscules, le copie (toast « Code copié. »,
-# presse-papiers en majuscules, contrôleur clipboard depuis UDR-0054) sans rechargement de page, et voit la liste de ses élèves. Le bouton du code de
+# CL-10, CL-04 — UDR-0027, UDR-0081 §3.6. L'enseignant ouvre sa classe : il voit le bloc « Lien de la classe », copie le lien
+# (toast « Lien copié », contrôleur clipboard depuis UDR-0054) sans rechargement de page, et voit la liste de ses élèves. Le bouton du code de
 # récupération vise la route de B8 ; son parcours complet est rejoué au Lot E. ADR-0072, UDR-0027 (amendée le
 # 2026-10-02) : « Cours assignés » a disparu de la page. Lot E de fonctions-espace-eleve (UDR-0062 §3.4, §3.5) : ses jours
 # de séance, ses exercices assignés et leurs comptes, le suivi qui nomme les seuls rendus en retard, le bloc « Cours ».
@@ -15,7 +15,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
   setup do
     school = create_school(name: "Lycée Classique d'Abidjan")
     @classroom = create_classroom(school:, level: create_level(name: "Tle"), series: create_series(name: "D"), name: "Tle D 1",
-                                  join_code: "kfm37", max_students: 60)
+                                  max_students: 60)
     @teacher = create_teacher(school:, classrooms: [ @classroom ])
     @course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: @course)), by: @teacher)
@@ -28,12 +28,13 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
   def scope = "classroom.classrooms"
 
-  test "l'enseignant voit le code en majuscules, le copie sans rechargement, et voit ses élèves" do
+  test "l'enseignant voit le lien de la classe, le copie sans rechargement, et voit ses élèves" do
     visit classroom_path(@classroom.public_id)
 
     within "#classroom_header" do
       assert_selector "h1", text: "Tle D 1"
-      assert_selector "#classroom_join_code", exact_text: "KFM37"
+      assert_selector "#classroom_link"
+      assert_no_selector "[id*=join_code]"
       assert_selector "#classroom_headcount", text: I18n.t("#{scope}.header.headcount", count: 2, max: 60)
     end
     assert_no_selector "#assigned_courses"
@@ -54,35 +55,36 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_no_page_reload do
       # Fermée, la modale rend le focus au ⋮ de la ligne : la page reste descendue sur la liste, et « Copier » passe sous
       # l'en-tête fixe, où le clic tomberait sur un autre bouton. On le ramène au milieu de l'écran, comme le ferait l'enseignant.
-      copy = find_button(I18n.t("#{scope}.header.copy"))
+      # La barre latérale a son propre « Copier le lien » (parrainage, UDR-0069 §3.6) : on vise celui du bloc de la classe.
+      copy = within("#classroom_link") { find_button(I18n.t("#{scope}.link.copy")) }
       scroll_to(copy, align: :center)
       copy.click
 
-      assert_toast I18n.t("shared.clipboard.copied_code")
+      assert_toast I18n.t("#{scope}.link.copied")
     end
-    assert_equal "KFM37", page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
+    assert_equal URI.join(page.current_url, join_classroom_path(@classroom.reload.link_token)).to_s,
+                 page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
   end
 
-  test "une copie refusée par le navigateur le dit, et le code reste lisible" do
+  test "une copie refusée par le navigateur le dit" do
     visit classroom_path(@classroom.public_id)
     page.execute_script("navigator.clipboard.writeText = () => Promise.reject(new Error('refusé'))")
 
-    click_on I18n.t("#{scope}.header.copy")
+    within("#classroom_link") { click_on I18n.t("#{scope}.link.copy") }
 
     assert_toast I18n.t("shared.clipboard.failed")
-    assert_no_selector "#toasts", text: I18n.t("shared.clipboard.copied_code")
-    assert_selector "#classroom_join_code", exact_text: "KFM37"
+    assert_no_selector "#toasts", text: I18n.t("#{scope}.link.copied")
   end
 
-  test "sur un téléphone, la page tient dans la largeur et le code se copie" do
+  test "sur un téléphone, la page tient dans la largeur et le lien se copie" do
     with_mobile_viewport do
       visit classroom_path(@classroom.public_id)
 
-      assert_selector "#classroom_join_code", exact_text: "KFM37"
+      assert_selector "#classroom_link"
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
-      click_on I18n.t("#{scope}.header.copy")
-      assert_toast I18n.t("shared.clipboard.copied_code")
+      click_on I18n.t("#{scope}.link.copy")
+      assert_toast I18n.t("#{scope}.link.copied")
       assert find("#classroom_whatsapp_share")[:href].start_with?("https://wa.me/?text=")
       growth_shot("390-classe-partager-whatsapp", desktop: false, scroll_to: "#classroom_whatsapp_share")
     end
@@ -91,12 +93,10 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
   test "CP-08: le lien de la classe se partage sur WhatsApp, avec un message prêt pour le groupe de la classe" do
     visit classroom_path(@classroom.public_id)
 
-    # Jusqu'au Lot F de inscription-eleve-sans-code, l'en-tête a deux « Partager sur WhatsApp » : celui du code, puis celui du lien.
     share = find("#classroom_whatsapp_share")
     text = CGI.unescape(share[:href].delete_prefix("https://wa.me/?text="))
     assert_includes text, "Tle D 1"
-    assert_includes text, "/c/KFM37"
-    assert_includes text, "KFM37"
+    assert_includes text, "/c/#{@classroom.reload.link_token}"
     assert_no_match(/Awa|Bamba|Koffi|Yao/, text)
     growth_shot("1280-classe-partager-whatsapp", scroll_to: "#classroom_header")
   end

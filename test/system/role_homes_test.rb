@@ -15,7 +15,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     tle = create_level(name: "Tle", position: 7)
     drena = create_drena(name: "Abidjan 1")
     school = create_school(drena:, name: "Lycée Classique d'Abidjan")
-    @classroom = create_classroom(school:, level: tle, name: "Tle D 1", join_code: "kfm37")
+    @classroom = create_classroom(school:, level: tle, name: "Tle D 1")
     @teacher = create_teacher(school:, material: svt, classrooms: [ @classroom ], first_name: "Yao")
     @student = create_student(classroom: @classroom, first_name: "Aya")
     @school_admin = create_school_admin(school:, first_name: "Mariam")
@@ -37,7 +37,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     sign_in_as @student
 
     assert_home student_home_path, greeting: I18n.t("classroom.student_homes.show.greeting", name: "Aya")
-    assert_text "KFM37"
+    assert_selector "#student_home_classroom", text: "Tle D 1"
     within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
     assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path }
     assert_signs_out_from_panel

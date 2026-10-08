@@ -8,7 +8,7 @@ module Queries
     class StudentHomeQueryTest < ActiveSupport::TestCase
       setup do
         @school = create_school(name: "Lycée Classique")
-        @classroom = create_classroom(school: @school, level: create_level(name: "Tle"), name: "Tle D 1", join_code: "kfm37")
+        @classroom = create_classroom(school: @school, level: create_level(name: "Tle"), name: "Tle D 1")
         @student = create_student(classroom: @classroom)
         @svt = create_material(name: "SVT", category: "science")
         # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours.
@@ -28,8 +28,9 @@ module Queries
 
         row = home
 
-        assert_equal [ "Lycée Classique", "Tle", "Tle D 1", "KFM37", 3 ],
-                     row.to_h.values_at(:school_name, :level_name, :classroom_name, :join_code_display, :classmates_count)
+        assert_equal [ "Lycée Classique", "Tle", "Tle D 1", 3 ],
+                     row.to_h.values_at(:school_name, :level_name, :classroom_name, :classmates_count)
+        assert_not_includes StudentHomeQuery::Row.members, :join_code_display
       end
 
       test "no active primary classroom: nil" do

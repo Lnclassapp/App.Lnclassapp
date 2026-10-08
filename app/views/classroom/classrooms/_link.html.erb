@@ -15,7 +15,8 @@
   <div class="mt-2 flex flex-wrap gap-2" role="group" aria-labelledby="classroom_link_label">
     <%= ui_copy_button url, label: t(".copy"), aria_label: t(".copy_label"), icon: "link", copied: t(".copied") %>
     <%= ui_button t(".whatsapp"), href: whatsapp_share_url(t(".whatsapp_message", classroom: classroom.name, url:)),
-                                  variant: :secondary, size: :sm, icon: "chat-bubble-left-right", target: "_blank", rel: "noopener" %>
+                                  variant: :secondary, size: :sm, icon: "chat-bubble-left-right", target: "_blank", rel: "noopener",
+                                  id: "classroom_whatsapp_share" %>
   </div>
   <p class="mt-2 max-w-xs text-xs text-mute"><%= t(".hint") %></p>
   <%= ui_modal title: t(".change_title"), id: "change-classroom-link", size: :sm do |modal| %>

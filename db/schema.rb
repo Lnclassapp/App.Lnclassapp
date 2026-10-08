@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_08_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -217,8 +217,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_090000) do
   create_table "classrooms", force: :cascade do |t|
     t.datetime "archived_at"
     t.datetime "created_at", null: false
-    t.string "join_code", limit: 5
-    t.datetime "join_code_rotated_at"
     t.bigint "level_id", null: false
     t.string "link_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.integer "max_students", default: 80, null: false
@@ -229,14 +227,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_090000) do
     t.bigint "series_id"
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
-    t.index ["join_code"], name: "index_classrooms_on_join_code", unique: true, where: "(join_code IS NOT NULL)"
     t.index ["level_id"], name: "index_classrooms_on_level_id"
     t.index ["link_token"], name: "index_classrooms_on_link_token", unique: true
     t.index ["public_id"], name: "index_classrooms_on_public_id", unique: true
     t.index ["school_id", "school_year", "name"], name: "index_classrooms_on_school_id_and_school_year_and_name", unique: true
     t.index ["series_id"], name: "index_classrooms_on_series_id"
     t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "classrooms_archived_at_iff_archived"
-    t.check_constraint "join_code::text ~ '^[a-hj-np-z]{3}[2-9]{2}$'::text", name: "classrooms_join_code_format"
     t.check_constraint "link_token::text ~ '^[0-9a-f]{12}$'::text", name: "classrooms_link_token_format"
     t.check_constraint "max_students >= 1 AND max_students <= 150", name: "classrooms_max_students_range"
     t.check_constraint "school_year::text ~ '^[0-9]{4}-[0-9]{4}$'::text AND \"right\"(school_year::text, 4)::integer = (\"left\"(school_year::text, 4)::integer + 1)", name: "classrooms_school_year_format"

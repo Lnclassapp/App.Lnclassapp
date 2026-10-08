@@ -11,7 +11,7 @@ module Entities
       MAX_STUDENTS = 80
       MAX_STUDENTS_LIMIT = 150
 
-      attr_accessor :id, :public_id, :school_id, :level_id, :series_id, :school_year, :join_code, :link_token
+      attr_accessor :id, :public_id, :school_id, :level_id, :series_id, :school_year, :link_token
       attr_writer :status, :max_students, :teacher_ids, :active_students_count
       attr_reader :name
 

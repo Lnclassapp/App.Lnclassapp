@@ -5,7 +5,7 @@ module UseCases
     # CL-06, IL-15, IL-16, IL-17, IL-18 (ADR-0040, ADR-0085 §4.3): a signed-in student without an active classroom (archived,
     # or removed) enters the classroom chosen in the cascade (way « standard ») or given by a link (way « link »), without a
     # new account; an archived primary classroom is left in the same transaction. The classroom they were removed from is
-    # refused by the standard way and reopened by the link. The former code path (/c/<code>) stays until Lot F.
+    # refused by the standard way and reopened by the link. There is no classroom code any more (Lot F).
     class JoinAsStudentTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 10, 8, 12)
       YEAR = "2026-2027".freeze
@@ -49,11 +49,6 @@ module UseCases
         def lock_by_link_token(token:)
           @journal << [ :lock_link, token ]
           @classrooms.find { it.link_token == token }
-        end
-
-        def lock_by_join_code(join_code:)
-          @journal << [ :lock_code, join_code ]
-          @classrooms.find { it.join_code == join_code }
         end
       end
 
@@ -113,7 +108,7 @@ module UseCases
       end
 
       def classroom(**overrides)
-        Entities::Classroom::Classroom.new(id: 7, public_id: "cls-7", name: "3e 2", join_code: "kfm37", school_id: 3, level_id: 2,
+        Entities::Classroom::Classroom.new(id: 7, public_id: "cls-7", name: "3e 2", school_id: 3, level_id: 2,
                                            school_year: YEAR, link_token: TOKEN, active_students_count: 12, **overrides)
       end
 
@@ -127,13 +122,13 @@ module UseCases
                                                       classroom_public_id: "cls-7", **attributes)
       end
 
-      def join(actor: @student, dto: choice, code: nil, classrooms: [ classroom ], schools: [ @school ], primary: nil,
+      def join(actor: @student, dto: choice, classrooms: [ classroom ], schools: [ @school ], primary: nil,
                removed_from: [], refuse: false)
         JoinAsStudent.new(classrooms: FakeClassrooms.new(@journal, classrooms), schools: FakeSchools.new(*schools),
                           taxonomy: FakeTaxonomy.new(@level),
                           memberships: FakeMemberships.new(@journal, primary:, removed_from:, refuse:),
                           policy: Policies::Classroom::JoinPolicy.new, transaction: @transaction, clock: Clock.new(NOW))
-                     .call(actor:, dto:, code:)
+                     .call(actor:, dto:)
       end
 
       def added = @journal.find { it.first == :add }
@@ -263,18 +258,11 @@ module UseCases
         assert_empty @journal
       end
 
-      test "the former code path (until Lot F): the classroom by its code, way « code », the code checked by the policy" do
-        result = join(dto: nil, code: "KFM37", primary: membership("archived"))
+      test "IL-02: no classroom code is accepted any more" do
+        subject = JoinAsStudent.new(classrooms: nil, schools: nil, taxonomy: nil, memberships: nil, policy: nil, transaction: nil,
+                                    clock: nil)
 
-        assert result.success?
-        assert_equal [ [ :primary_for, 41 ], [ :lock_code, "kfm37" ], [ :removed_from?, 7, 41 ], [ :leave, 41, NOW ],
-                       [ :add, 7, 41, "code", NOW ] ], @journal
-
-        @journal.clear
-        assert_equal :not_found, join(dto: nil, code: "zzz99").code
-        assert_equal [ [ :primary_for, 41 ], [ :lock_code, "zzz99" ] ], @journal
-        assert_equal [ :forbidden, { base: [ :removed_from_classroom ] } ],
-                     join(dto: nil, code: "kfm37", removed_from: [ 7 ]).then { [ it.code, it.errors ] }
+        assert_raises(ArgumentError) { subject.call(actor: @student, code: "kfm37") }
       end
     end
   end

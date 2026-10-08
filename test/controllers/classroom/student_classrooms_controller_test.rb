@@ -9,7 +9,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
   PRIMARY_ACTION = SobrietyAssertions::PRIMARY_ACTION.split(", ").map { "#main #{it}" }.join(", ").freeze
 
   setup do
-    @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"),
+    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"),
                                   level: create_level(name: "Tle"), series: create_series(name: "D"), school_year: "2026-2027")
     @student = create_student(classroom: @classroom, first_name: "Aya", last_name: "Kouassi")
   end
@@ -34,12 +34,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select "*", text: "Tle · D"
       assert_select "*", text: "Lycée Classique"
       assert_select "*", text: "2026-2027"
-      assert_select "#student_classroom_join_code[aria-labelledby=student_classroom_join_code_label]", text: "KFM37"
-      assert_select "#student_classroom_join_code_label", text: tl("show.join_code")
-      assert_select "details summary", text: I18n.t("components.info_tip.label", label: tl("show.join_code"))
-      assert_select "details div", text: tl("show.join_code_info_tip")
+      # IL-02, UDR-0081 §3.8 : plus de code de classe, sans rien à la place.
+      assert_select "[id*=join_code]", 0
     end
-    assert_no_match "kfm37", response.body
+    assert_no_match(/Code de la classe/, response.body)
     assert_no_match "Yapo", response.body
     assert_no_match "Koffi", response.body
     assert_select "a[href='#{student_classroom_path}'][aria-current=page]"
@@ -173,16 +171,14 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "turbo-frame[src]", 0
   end
 
-  test "a classroom without series or code: the level alone and the empty state of the code" do
-    classroom = create_classroom(level: create_level(name: "6ème"), join_code: nil)
+  test "a classroom without series: the level alone" do
+    classroom = create_classroom(level: create_level(name: "6ème"))
     sign_in_as create_student(classroom:)
 
     get student_classroom_path
 
     assert_select "#student_classroom_header", text: including("6ème")
     assert_select "#student_classroom_header", text: including(" · "), count: 0
-    assert_select "#student_classroom_header", text: including(tl("show.no_join_code"))
-    assert_select "#student_classroom_join_code", 0
   end
 
   test "CL-10: the student receives 403 on the teacher page of their own classroom" do

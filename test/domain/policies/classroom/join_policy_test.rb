@@ -3,18 +3,14 @@ require "test_helper"
 module Policies
   module Classroom
     # ADR-0085 §4.3: a visitor or a student enters an active classroom under its ceiling; a student removed from it is
-    # refused, unless the entry comes from the classroom link. The code is checked only on the former path (until Lot F).
+    # refused, unless the entry comes from the classroom link. There is no classroom code to check any more (Lot F).
     class JoinPolicyTest < ActiveSupport::TestCase
       def classroom(**overrides)
-        Entities::Classroom::Classroom.new(name: "3ème 1", join_code: "abc23", active_students_count: 10, **overrides)
+        Entities::Classroom::Classroom.new(name: "3ème 1", active_students_count: 10, **overrides)
       end
 
       def call(actor: nil, via_link: false, removed: false, **overrides)
         JoinPolicy.new.call(actor:, classroom: classroom(**overrides), via_link:, removed:)
-      end
-
-      def call_with_code(code: "ABC 23", **overrides)
-        JoinPolicy.new.call(actor: nil, classroom: classroom(**overrides), code:)
       end
 
       test "IL-01, IL-08: a visitor or a student enters an active classroom, by the standard way or by the link" do
@@ -24,7 +20,7 @@ module Policies
       end
 
       test "IL-03: no teacher is needed, nor any code" do
-        assert call(teacher_ids: [], join_code: nil).success?
+        assert call(teacher_ids: []).success?
       end
 
       test "a teacher, the direction or the team are refused" do
@@ -54,11 +50,8 @@ module Policies
         end
       end
 
-      test "the former code path: the current code lets in, any other code is refused" do
-        assert call_with_code.success?
-        assert_equal [ :join_code_revoked ], call_with_code(code: "xyz23").errors[:base]
-        assert_equal [ :join_code_revoked ], call_with_code(join_code: nil, code: "").errors[:base]
-        assert_equal [ :classroom_full ], call_with_code(active_students_count: 80).errors[:base]
+      test "IL-02: no classroom code is accepted any more" do
+        assert_raises(ArgumentError) { JoinPolicy.new.call(actor: nil, classroom: classroom, code: "abc23") }
       end
     end
   end

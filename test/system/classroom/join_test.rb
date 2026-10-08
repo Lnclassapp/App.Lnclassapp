@@ -1,143 +1,140 @@
 require "application_system_test_case"
 
-# ID-01, ID-02, CL-06, CL-07 (UDR-0009): a visitor types the class code any way, sees the classroom, meets the 422 of
-# an unconfirmed PIN without reloading the page, then signs up and lands home, signed in — on a desktop and at 390 px.
-# /join sends a well-formed code by itself (FU-44, UDR-0054 §3.6): no click on « Continuer ».
-# UDR-0009, amendment of 2026-10-02 (UDR-0057): at 390 px, both screens pass the sobriety rule; the help texts are info
-# tips, and each state of /c/<code> keeps a single primary action.
+# IL-01, IL-02, IL-08, IL-09, IL-10 (ADR-0085, UDR-0081 §3.2 to §3.4), in a real browser: there is no classroom code any
+# more (Lot F). A visitor signs up by the cascade DRENA → school → level → classroom, meets the 422 of an unconfirmed
+# secret code without reloading the page, then lands home in the classroom (way « standard »); or opens a classroom link,
+# sees the classroom already chosen and lands home in it (way « link »); « Ce n'est pas ta classe ? » goes back to the
+# cascade (way « standard »). An old link /c/<code> and /join lead to the standard page, the first with the alert.
+# UDR-0057: at 390 px, the link page keeps a single primary action.
 class Classroom::JoinTest < ApplicationSystemTestCase
-  # The student home belongs to Lot A2: until it is merged, a stand-in answers on its route, as in
-  # test/system/identity/sign_in_test.rb. A merged controller is autoloadable, so the stand-in steps aside by itself.
-  HOME = "Classroom::StudentHomesController".freeze
-
-  unless Object.const_defined?(HOME)
-    namespace = Object.const_defined?(:Classroom) ? Object.const_get(:Classroom) : Object.const_set(:Classroom, Module.new)
-    namespace.const_set(:StudentHomesController, Class.new(AuthenticatedController) { def show = render(html: "accueil", layout: true) })
-  end
-
-  FORM = "classroom.joins.signup_form".freeze
-  CODES = "classroom.join_codes.new".freeze
+  FORM = "classroom.student_registrations.form".freeze
   JOINS = "classroom.joins.new".freeze
-  INPUT = Dtos::Classroom::JoinWithCodeInput
-  # Above the fold: on /join the logo and the card; on /c/<code> the left column (hidden under md), the logo and the card.
-  JOIN_CODE_BLOCKS = "main > div > *".freeze
+  ERRORS = "activemodel.errors.models.dtos/classroom/student_registration_input.attributes".freeze
+  # Above the fold on /c/<token>: the left column (hidden under md), the logo and the card.
   JOIN_BLOCKS = "main > section:first-child, main > section:last-child > *".freeze
-  ERRORS = "activemodel.errors.models.dtos/classroom/join_with_code_input.attributes".freeze
 
   setup do
-    school = create_school(name: "Lycée Classique d'Abidjan")
-    create_classroom(school:, level: create_level(name: "6ème"), name: "6ème 1", join_code: "kfm37")
+    drena = create_drena(name: "Abidjan 1")
+    @school = create_school(drena:, name: "Lycée Classique d'Abidjan")
+    @level = create_level(name: "6ème")
+    @classroom = create_classroom(school: @school, level: @level, name: "6ème 1")
+    @other = create_classroom(school: @school, level: @level, name: "6ème 2")
   end
 
-  test "a code typed any way, the preview, an unconfirmed PIN shown without reloading, then the arrival home" do
-    visit new_join_code_path
-    # FU-44 (UDR-0054 §3.6): the fifth valid character sends the code, without a click.
-    fill_in "join[code]", with: "Kfm 37"
+  test "IL-01: the cascade, an unconfirmed secret code shown without reloading, then the arrival in the classroom" do
+    visit new_student_registration_path
 
-    assert_current_path join_classroom_path("kfm37")
-    assert_selector "#classroom-preview", text: "6ème 1 — Lycée Classique d'Abidjan"
-
+    choose_classroom "6ème 1"
     sign_up_after_a_wrong_confirmation
+
+    assert_equal [ [ @classroom.id, "standard" ] ], memberships_of_the_new_student
   end
 
-  test "the same journey on a 390 px screen, from /join to home, each screen sober" do
+  test "IL-08: the link shows the classroom already chosen, and the student lands in it, way « link », at 390 px" do
     with_mobile_viewport do
-      visit new_join_code_path
+      visit join_classroom_path(@classroom.reload.link_token)
 
-      assert_sober JOIN_CODE_BLOCKS
-      assert_no_text "Saisis le code de ta classe"
-      assert_selector "#join_code_hint", exact_text: I18n.t("shared.autosubmit.hint_join")
-      assert_info_tip I18n.t("#{CODES}.code_label"), I18n.t("#{CODES}.code_info_tip")
-      fill_in "join[code]", with: "Kfm 37"
-
-      assert_current_path join_classroom_path("kfm37")
       assert_selector "#classroom-preview", text: "6ème 1 — Lycée Classique d'Abidjan"
-      assert_sober JOIN_BLOCKS
-      assert_no_text "Tu rejoins cette classe"
-      assert_no_selector "#join_contact_hint, #join_pin_hint"
-      assert_selector "summary", text: tip_label(INPUT.human_attribute_name(:contact)), visible: :all
-      assert_info_tip INPUT.human_attribute_name(:pin), I18n.t("#{FORM}.pin_info_tip")
+      assert_no_selector "select[name='student_registration[drena_public_id]']"
+      assert_no_text "6ème 2"
       sign_up_after_a_wrong_confirmation
     end
+
+    assert_equal [ [ @classroom.id, "link" ] ], memberships_of_the_new_student
   end
 
-  test "at 390 px, a signed-in student sees the preview and one button, the reassurance in an info tip" do
-    # IL-18 : un élève dans une classe active est renvoyé vers son accueil ; la carte est pour l'élève sans classe active.
+  test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
+    visit join_classroom_path(@classroom.reload.link_token)
+    click_on I18n.t("#{FORM}.other_classroom")
+
+    assert_current_path new_student_registration_path
+    assert_no_selector "#classroom-link-invalid"
+    choose_classroom "6ème 2"
+    sign_up
+
+    assert_equal [ [ @other.id, "standard" ] ], memberships_of_the_new_student
+  end
+
+  test "IL-02, IL-09: /join and an old classroom code link lead to the standard page, the old link with the alert" do
+    visit "/join"
+
+    assert_current_path new_student_registration_path
+    assert_no_selector "#classroom-link-invalid"
+
+    visit join_classroom_path("kfm37")
+
+    assert_current_path new_student_registration_path
+    assert_selector "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
+    assert_selector "select[name='student_registration[drena_public_id]']"
+    assert_no_selector "input[name*=code]"
+  end
+
+  test "at 390 px, a student without a classroom sees the preview and one button, the reassurance in an info tip" do
     sign_in_as create_student(classroom: create_classroom(status: "archived"))
 
     with_mobile_viewport do
-      visit join_classroom_path("kfm37")
+      visit join_classroom_path(@classroom.reload.link_token)
 
       assert_selector "h1", text: I18n.t("#{JOINS}.student_title")
-      assert_sober JOIN_BLOCKS
-      assert_button I18n.t("#{JOINS}.join_as_student")
-      assert_info_tip I18n.t("#{JOINS}.student_title"), I18n.t("#{JOINS}.student_info_tip")
+      assert_blocks_above_fold JOIN_BLOCKS, max: 5
+      assert_single_primary_action scope: "main"
+      assert_no_text I18n.t("#{JOINS}.student_info_tip")
+      find("summary", text: I18n.t("components.info_tip.label", label: I18n.t("#{JOINS}.student_title")), visible: :all).click
+      assert_text I18n.t("#{JOINS}.student_info_tip")
+      click_on I18n.t("#{JOINS}.join_as_student")
     end
-  end
 
-  test "an unknown code offers to type another one" do
-    visit join_classroom_path("zzz99")
-
-    assert_text I18n.t("classroom.joins.new.invalid_code.title")
-    with_mobile_viewport { assert_sober JOIN_BLOCKS }
-    click_on I18n.t("classroom.joins.new.invalid_code.other_code")
-
-    assert_current_path new_join_code_path
-  end
-
-  test "D1: a well-formed but unknown code, typed on /join, is refused in the field, on a desktop and at 390 px" do
-    [ nil, MOBILE_VIEWPORT ].each do |size|
-      size ? with_mobile_viewport(size) { refuse_an_unknown_code } : refuse_an_unknown_code
-    end
+    assert_toast I18n.t("classroom.joins.create.welcome")
+    assert_current_path student_home_path
   end
 
   private
 
-  def tip_label(label) = I18n.t("components.info_tip.label", label:)
-
-  # UDR-0057 R1 and R2 on a public screen: its main has no id.
-  def assert_sober(blocks)
-    assert_blocks_above_fold blocks, max: 5
-    assert_single_primary_action scope: "main"
+  # Each list of the cascade arrives in its frame once its parent is chosen (UDR-0081 §3.3).
+  def choose_classroom(name)
+    select "Abidjan 1", from: "student_registration[drena_public_id]"
+    select "Lycée Classique d'Abidjan", from: "student_registration[school_public_id]"
+    select "6ème", from: "student_registration[level_slug]"
+    within("turbo-frame#picker_classrooms") { choose name }
   end
 
-  # The help is hidden until the info tip is tapped.
-  def assert_info_tip(label, text)
-    assert_no_text text
-    find("summary", text: tip_label(label), visible: :all).click
-    assert_text text
+  def fill_in_the_student(pin_confirmation: "4821")
+    fill_in "student_registration[last_name]", with: "KOUASSI"
+    fill_in "student_registration[first_name]", with: "Aya Marie"
+    choose I18n.t("genders.female")
+    fill_in "student_registration[contact]", with: "07 01 02 03 04"
+    fill_in "student_registration[pin]", with: "4821"
+    fill_in "student_registration[pin_confirmation]", with: pin_confirmation
   end
 
-  def refuse_an_unknown_code
-    visit new_join_code_path
-    fill_in "join[code]", with: "ZZZ99"
+  def sign_up
+    fill_in_the_student
+    click_on I18n.t("#{FORM}.submit")
 
-    assert_selector "#join_code_error", text: I18n.t("classroom.joins.new.invalid_code.title")
-    assert_current_path new_join_code_path
-    assert_field "join[code]", with: "ZZZ99"
+    assert_toast I18n.t("classroom.student_registrations.create.welcome")
+    assert_current_path student_home_path
   end
 
   def sign_up_after_a_wrong_confirmation
     assert_no_page_reload do
-      fill_in "join[last_name]", with: "Kouassi"
-      fill_in "join[first_name]", with: "Aya Marie"
-      choose I18n.t("genders.female")
-      fill_in "join[contact]", with: "07 01 02 03 04"
-      fill_in "join[pin]", with: "4821"
-      fill_in "join[pin_confirmation]", with: "1357"
+      fill_in_the_student(pin_confirmation: "1357")
       click_on I18n.t("#{FORM}.submit")
 
-      assert_selector "#join_pin_confirmation_error", text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
+      assert_selector "#student_registration_pin_confirmation_error", text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
     end
-    assert_field "join[last_name]", with: "Kouassi"
-    assert_equal 0, Orm::User.count
+    assert_field "student_registration[last_name]", with: "KOUASSI"
+    assert_equal 0, Orm::User.where(role: "student").count
 
-    fill_in "join[pin]", with: "4821"
-    fill_in "join[pin_confirmation]", with: "4821"
+    fill_in "student_registration[pin]", with: "4821"
+    fill_in "student_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("#{FORM}.submit")
 
-    assert_toast I18n.t("classroom.joins.create.welcome")
+    assert_toast I18n.t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
-    assert Orm::User.exists?(contact: "0701020304", role: "student")
+  end
+
+  def memberships_of_the_new_student
+    student = Orm::User.find_by!(contact: "0701020304", role: "student")
+    Orm::ClassroomStudent.where(student:, left_at: nil).pluck(:classroom_id, :joined_via)
   end
 end

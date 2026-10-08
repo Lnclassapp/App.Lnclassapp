@@ -13,7 +13,7 @@ module SchoolAdmin
                .call(actor: current_actor, school_public_id: @school.public_id, level_slug: params[:level],
                      series_slug: params[:series])
       respond(result) do |classroom|
-        t("teams.level_classrooms.create.done", name: classroom.name, code: Entities::Classroom::JoinCode.display(classroom.join_code))
+        t("teams.level_classrooms.create.done", name: classroom.name)
       end
     end
 

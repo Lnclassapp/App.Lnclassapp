@@ -13,37 +13,14 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan")
-    @classroom = create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1", join_code: "kfm37",
+    @classroom = create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1",
                                   max_students: 60)
     @teacher = create_teacher(school: @school, classrooms: [ @classroom ])
   end
 
   def scope = "classroom.classrooms"
 
-  test "CP-08: « Partager sur WhatsApp » envoie le lien /c/<code> et le code, sans aucun nom d'élève (ADR-0063)" do
-    create_student(classroom: @classroom, first_name: "Zoé", last_name: "Unique")
-    sign_in_as @teacher
-
-    get classroom_path(@classroom.public_id)
-
-    message = I18n.t("#{scope}.header.share_message", classroom: "6ème 1", school: "Lycée Classique d'Abidjan",
-                                                       link: join_classroom_url("KFM37"), code: "KFM37")
-    assert_select "#classroom_header a#classroom_whatsapp_share[href='https://wa.me/?text=#{ERB::Util.url_encode(message)}']" \
-                  "[target=_blank][rel=noopener]", text: I18n.t("#{scope}.header.share_whatsapp")
-    assert_no_match(/Zoé|Unique/, message)
-    assert_includes message, "/c/KFM37"
-  end
-
-  test "CP-08: une classe sans code n'a rien à partager" do
-    @classroom.update!(join_code: nil)
-    sign_in_as @teacher
-
-    get classroom_path(@classroom.public_id)
-
-    assert_select "#classroom_whatsapp_share", 0
-  end
-
-  test "l'enseignant de la classe voit l'en-tête, le code en majuscules et ses élèves, sans « Cours assignés »" do
+  test "l'enseignant de la classe voit l'en-tête, le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", contact: "0102030405")
@@ -61,22 +38,11 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select within_header, text: /Lycée Classique d'Abidjan/
     assert_select within_header, text: /6ème/
     assert_select within_header, text: /#{@classroom.school_year}/
-    assert_select "#{within_header} #classroom_join_code", text: "KFM37"
-    assert_select "#{within_header} [data-controller=clipboard][data-clipboard-text-value='KFM37']" do
-      assert_select "button[hidden][data-action='clipboard#copy'][aria-label=?]", I18n.t("#{scope}.header.copy_label", code: "KFM37"),
-                    text: I18n.t("#{scope}.header.copy")
-      assert_select "template[data-clipboard-target=copied]", text: /#{I18n.t("shared.clipboard.copied_code")}/
-      assert_select "template[data-clipboard-target=failed]", text: /#{I18n.t("shared.clipboard.failed")}/
-    end
-    assert_select "#{within_header} [data-controller=clipboard][data-clipboard-text-value='#{join_classroom_url('KFM37')}']" do
-      assert_select "button[hidden][data-action='clipboard#copy'][aria-label=?]", I18n.t("#{scope}.header.copy_link_label"),
-                    text: I18n.t("#{scope}.header.copy_link")
-      assert_select "template[data-clipboard-target=copied]", text: /#{I18n.t("shared.clipboard.copied_link")}/
-    end
-    assert_select "[data-controller~='classroom--join-code-copy']", 0
+    # IL-02, UDR-0081 §3.6 : le bloc du lien a remplacé le code.
+    assert_select "#{within_header} #classroom_link", 1
+    assert_select "#{within_header} [id*=join_code], [data-controller~='classroom--join-code-copy']", 0
     assert_select "#{within_header} details summary", text: /#{I18n.t("#{scope}.header.headcount_label")}/
     assert_select "#{within_header} details", text: /#{I18n.t("#{scope}.header.headcount_tip", max: 60)}/
-    assert_no_match(/kfm37/, response.body)
     assert_select "#classroom_headcount", text: I18n.t("#{scope}.header.headcount", count: 2, max: 60)
 
     assert_select "#assigned_courses", 0
@@ -486,7 +452,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "6ème 1 · Équipe · Lnclass"
     assert_select "nav[aria-label='Retour'] a[href='#{school_path(@school.public_id)}']", text: "Lycée Classique d'Abidjan"
     assert_select "nav[aria-label='Retour'] a[href='#{teacher_home_path}']", 0
-    assert_select "#classroom_header", text: /KFM37/
+    assert_select "#classroom_header #classroom_link", 1
     assert_select "#student_#{student.public_id}", text: /Awa Bamba/
   end
 
@@ -536,16 +502,14 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "une classe vide, sans cours ni élève, et sans code, le dit" do
-    classroom = create_classroom(school: @school, join_code: nil)
+  test "une classe vide, sans cours ni élève, le dit" do
+    classroom = create_classroom(school: @school)
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
     sign_in_as @teacher
 
     get classroom_path(classroom.public_id)
 
     assert_response :success
-    assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.no_join_code")}/
-    assert_select "#classroom_join_code", 0
     assert_select "#classroom_link", 1
     assert_select "#assigned_courses_empty", 0
     assert_select "#classroom_roster_empty", text: /#{I18n.t("#{scope}.roster.empty_title")}/

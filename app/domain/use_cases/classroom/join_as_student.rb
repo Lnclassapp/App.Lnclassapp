@@ -1,14 +1,13 @@
 # 🧠 DOMAINE · UseCases::Classroom::JoinAsStudent
-# Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie, celle d'un lien, ou d'un ancien code
+# Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie ou dans celle d'un lien
 # ADR  : 0026, 0028, 0040, 0041, 0085 · UDR : 0009, 0081
 module UseCases
   module Classroom
     class JoinAsStudent
-      # La classe désignée et la voie qui y mène (Entities::Classroom::StudentArrivalChannel ; « code » jusqu'au Lot F).
+      # La classe désignée et la voie qui y mène (Entities::Classroom::StudentArrivalChannel::WRITABLE).
       Destination = Data.define(:classroom, :via)
       STANDARD = "standard".freeze
       LINK = "link".freeze
-      CODE = "code".freeze
       ALREADY_ENROLLED = { base: [ :already_enrolled ] }.freeze
       BLANK = { classroom_public_id: [ :blank ] }.freeze
       UNAVAILABLE = { classroom_public_id: [ :unavailable ] }.freeze
@@ -34,16 +33,15 @@ module UseCases
       end
 
       # dto : Dtos::Classroom::StudentRegistrationInput, dont seuls les champs de la classe comptent : link_token (voie
-      # « link »), sinon school_public_id, level_slug et classroom_public_id (voie « standard »). code : l'ancien chemin
-      # /c/<code>, à la place du dto, jusqu'au Lot F.
+      # « link »), sinon school_public_id, level_slug et classroom_public_id (voie « standard »).
       # → success(Entities::Classroom::Classroom) | :forbidden (visiteur, rôle, ou raison en errors[:base], déjà inscrit
-      #   compris) | :not_found (lien ou code qui ne mène plus à une classe ouverte) | :invalid (classe hors de la cascade)
+      #   compris) | :not_found (lien qui ne mène plus à une classe ouverte) | :invalid (classe hors de la cascade)
       #   | :conflict (écriture refusée)
-      def call(actor:, dto: nil, code: nil)
+      def call(actor:, dto:)
         # Un visiteur s'inscrit par RegisterStudent ; les autres rôles n'ont pas de classe principale.
         return Shared::Result.failure(:forbidden) unless actor&.student?
 
-        @transaction.call { join(actor, dto, code) }
+        @transaction.call { join(actor, dto) }
       rescue Aborted => e
         e.result
       end
@@ -51,25 +49,25 @@ module UseCases
       private
 
       # ADR-0040 : une seule classe principale active. L'élève qui en a une le sait d'abord, quelle que soit la classe visée.
-      def join(actor, dto, code)
+      def join(actor, dto)
         current = @memberships.primary_for(student_id: actor.user_id)
         return Shared::Result.failure(:forbidden, errors: ALREADY_ENROLLED) if current&.classroom_active?
 
-        destination = code ? coded(code) : designated(dto)
+        destination = designated(dto)
         return destination if destination.is_a?(Shared::Result)
 
-        allowed = allowed(actor, destination, code)
+        allowed = allowed(actor, destination)
         return allowed if allowed.failure?
 
         move(actor.user_id, current, destination)
       end
 
-      # ADR-0085 §4.3 : le retrait ne ferme que la voie standard (et l'ancien code) ; le lien le lève.
-      def allowed(actor, destination, code)
+      # ADR-0085 §4.3 : le retrait ne ferme que la voie standard ; le lien le lève.
+      def allowed(actor, destination)
         classroom = destination.classroom
         via_link = destination.via == LINK
         removed = !via_link && @memberships.removed_from?(classroom_id: classroom.id, student_id: actor.user_id)
-        @policy.call(actor:, classroom:, via_link:, removed:, code:)
+        @policy.call(actor:, classroom:, via_link:, removed:)
       end
 
       def designated(dto) = dto.link_token ? linked(dto.link_token) : chosen(dto)
@@ -90,11 +88,6 @@ module UseCases
         return Shared::Result.failure(:invalid, errors: UNAVAILABLE) unless listed?(classroom, dto)
 
         Destination.new(classroom:, via: STANDARD)
-      end
-
-      def coded(code)
-        classroom = @classrooms.lock_by_join_code(join_code: Entities::Classroom::JoinCode.normalize(code))
-        classroom ? Destination.new(classroom:, via: CODE) : Shared::Result.failure(:not_found)
       end
 
       # Active, de l'année en cours, du niveau et de l'établissement envoyés, établissement actif (règle de RegisterStudent).

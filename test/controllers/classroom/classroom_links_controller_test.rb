@@ -10,7 +10,7 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan")
-    @classroom = create_classroom(school: @school, level: create_level(name: "3ème"), name: "3e 2", join_code: "kfm37")
+    @classroom = create_classroom(school: @school, level: create_level(name: "3ème"), name: "3e 2")
     @teacher = create_teacher(school: @school, classrooms: [ @classroom ])
     @old_token = @classroom.reload.link_token
   end
@@ -33,14 +33,14 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
 
   def assert_link_unchanged = assert_equal(@old_token, token)
 
-  test "IL-11 : la page de la classe montre le bloc du lien à l'enseignant, à côté du code, sans l'adresse en clair" do
+  test "IL-11 : la page de la classe montre le bloc du lien à l'enseignant, sans code ni adresse en clair" do
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
     assert_response :success
     assert_link_block link_url, scope: "#classroom_header"
-    assert_select "#classroom_header #classroom_join_code", text: "KFM37"
+    assert_select "#classroom_header [id*=join_code]", 0
     assert_select "#classroom_link button[aria-label='#{I18n.t("#{SCOPE}.more_label")}']"
     assert_select "#classroom_link [role=menuitem][aria-controls='change-classroom-link']", text: I18n.t("#{SCOPE}.change")
     assert_select "dialog#change-classroom-link" do
@@ -193,15 +193,16 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to classroom_path(@classroom.public_id)
   end
 
-  test "UDR-0081 §3.7 : l'équipe copie le lien de chaque classe depuis la fiche de l'établissement, à côté du code" do
+  test "UDR-0081 §3.7 : l'équipe copie le lien de chaque classe depuis la fiche de l'établissement, nommée dans son libellé" do
     sign_in_as create_team_member
 
     get school_path(@school.public_id)
 
     assert_response :success
     assert_select "li#classroom_#{@classroom.public_id}" do
-      assert_select "[data-clipboard-text-value='#{link_url}'] button", text: I18n.t("#{SCOPE}.copy")
-      assert_select "dd", text: "KFM37"
+      assert_select "[data-clipboard-text-value='#{link_url}'] button[aria-label=?]",
+                    I18n.t("teams.schools.classroom_group.copy_link_label", name: "3e 2"), text: I18n.t("#{SCOPE}.copy")
+      assert_select "dt", text: /code/i, count: 0
     end
     assert_no_match link_url, css_select("li#classroom_#{@classroom.public_id}").map(&:text).join
   end

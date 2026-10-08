@@ -22,7 +22,7 @@
       <% if @school.levels.empty? %>
         <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
       <% else %>
-        <%= render partial: "classroom_group", collection: @school.levels, as: :level %>
+        <%= render partial: "classroom_group", collection: @school.levels, as: :level, locals: { school_active: @school.status == "active" } %>
       <% end %>
     </section>
 

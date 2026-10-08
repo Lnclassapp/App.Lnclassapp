@@ -4,7 +4,7 @@ require "test_helper"
 # classroom, and a student without a classroom bounced between / and /students forever.
 class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"),
+    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"),
                                   level: create_level(name: "Tle"))
     @student = create_student(classroom: @classroom, first_name: "Aya", last_name: "Kouassi")
     # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours.
@@ -24,7 +24,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     exercises.each { create_assignment(classroom: @classroom, assignable: it, assigned_at: at) }
   end
 
-  test "the student sees their classroom, its code in capitals, and no classmate by name" do
+  test "the student sees their classroom, no code and no classmate by name" do
     create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yapo")
     sign_in_as @student
 
@@ -34,7 +34,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: including(tl("show.greeting", name: "Aya"))
     # UDR-0058 §3.3, R6: the classroom card already says the school and the classroom, the header says them no more.
     assert_select "h1 + p", 0
-    assert_select "#student_home_classroom", text: including("KFM37")
+    assert_select "#student_home_classroom", text: including("Tle D 1")
+    assert_no_match(/Code de la classe/, response.body)
     assert_select "#student_home_classroom", text: including("Lycée Classique")
     assert_select "#student_home_classroom", text: including(tl("classroom_card.students", count: 2))
     assert_no_match "Yapo", response.body

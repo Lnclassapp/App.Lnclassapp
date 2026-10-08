@@ -54,10 +54,9 @@ unless school
     generated = Entities::Classroom::DefaultClassroomPlan.rows_for(
       school: created, lookup: Repositories::Catalog::TaxonomyRepository.new.lookup, plan: Repositories::Classroom::ClassroomPlanRepository.new.plan
     ).rows
-    codes = Entities::Classroom::JoinCode.generate_unique(count: generated.size, taken: classrooms.taken_join_codes)
-    classrooms.insert_generated(rows: generated.zip(codes).map { |row, join_code|
+    classrooms.insert_generated(rows: generated.map { |row|
       row.merge(public_id: SecureRandom.base58(14), school_id: created.id,
-                school_year: Entities::Classroom::SchoolYear.current(clock.now.to_date), join_code:)
+                school_year: Entities::Classroom::SchoolYear.current(clock.now.to_date))
     }, at: clock.now)
   end
   school = Orm::School.find_by!(name: "Collège Saint Michel de Tiassalé")

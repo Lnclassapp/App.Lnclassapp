@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
-# Rôle : contrat de persistance des classes, de leur code d'adhésion, du jeton de leur lien et de la génération par défaut
+# Rôle : contrat de persistance des classes, du jeton de leur lien et de la génération par défaut
 # ADR  : 0030, 0039, 0041, 0059, 0085
 module Ports
   module Classroom
@@ -9,13 +9,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
-      # Verrou (SELECT … FOR UPDATE), à appeler dans une transaction ; code déjà normalisé.
+      # Verrou (SELECT … FOR UPDATE), à appeler dans une transaction ; ADR-0085 §4.3 : la classe choisie dans la cascade.
       # → Entities::Classroom::Classroom | nil
-      def lock_by_join_code(join_code:)
-        raise NotImplementedError, "#{self.class} doit implémenter #lock_by_join_code"
-      end
-
-      # ADR-0085 §4.3 : même verrou, la classe choisie dans la cascade. → Entities::Classroom::Classroom | nil
       def lock_by_public_id(public_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #lock_by_public_id"
       end
@@ -31,19 +26,13 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #rotate_link_token"
       end
 
-      # Tire le code d'adhésion, retente une fois sur collision.
       # → Result(Classroom) | failure(:conflict, errors: { name: [:taken] })
       def create(classroom:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
-      # Codes d'adhésion déjà pris, pour tirer les nouveaux (JoinCode.generate_unique). → Set[String]
-      def taken_join_codes
-        raise NotImplementedError, "#{self.class} doit implémenter #taken_join_codes"
-      end
-
-      # rows : [{ public_id:, school_id:, school_year:, name:, level_id:, series_id:, join_code: }], public_id et
-      # join_code déjà tirés par le domaine ; insert_all ; un code pris lève (le rejeu est l'affaire du moteur).
+      # rows : [{ public_id:, school_id:, school_year:, name:, level_id:, series_id: }], public_id déjà tiré par le domaine ;
+      # insert_all ; un nom pris lève (le rejeu est l'affaire du moteur).
       # → Integer (classes créées)
       def insert_generated(rows:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #insert_generated"
@@ -59,7 +48,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #names_in_level"
       end
 
-      # ADR-0059 : dans la transaction de l'appelant, verrouille la classe (comme l'adhésion par code), puis la supprime
+      # ADR-0059 : dans la transaction de l'appelant, verrouille la classe (comme l'adhésion d'un élève), puis la supprime
       # si elle n'a jamais eu d'adhésion (même terminée), d'enseignant ni d'assignation (même archivée).
       # → Result | failure(:not_found) | failure(:conflict, errors: { base: [:has_students | :has_teachers | :has_assignments] })
       def delete_if_unused(id:)

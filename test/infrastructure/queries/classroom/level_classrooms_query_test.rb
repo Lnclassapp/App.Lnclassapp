@@ -27,7 +27,7 @@ class Queries::Classroom::LevelClassroomsQueryTest < ActiveSupport::TestCase
 
     assert_equal %i[public_id name full], Queries::Classroom::LevelClassroomsQuery::Row.members
     values = classrooms.flat_map { it.to_h.values }
-    [ "Yao", "Bamba", @un.reload.link_token, @un.join_code, 1, 2, 80 ].each { assert_not_includes values, it }
+    [ "Yao", "Bamba", @un.reload.link_token, 1, 2, 80 ].each { assert_not_includes values, it }
   end
 
   test "IL-05: a classroom whose active headcount reaches its ceiling is full; a student who left does not count" do

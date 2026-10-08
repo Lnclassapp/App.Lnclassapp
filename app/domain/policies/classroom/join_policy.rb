@@ -5,12 +5,10 @@ module Policies
   module Classroom
     class JoinPolicy
       # classroom : chargée sous verrou, avec active_students_count ; via_link : l'entrée vient d'un jeton de lien valide ;
-      # removed : l'élève a été retiré de cette classe. code : seulement sur l'ancien chemin par code (JoinWithCode,
-      # JoinAsStudent), qui disparaît au Lot F ; nil ailleurs, et alors aucun code n'est vérifié.
-      def call(actor:, classroom:, via_link: false, removed: false, code: nil)
+      # removed : l'élève a été retiré de cette classe.
+      def call(actor:, classroom:, via_link: false, removed: false)
         return Shared::Result.failure(:forbidden) unless actor.nil? || actor.student?
         return refuse(:classroom_archived) unless classroom.active?
-        return refuse(:join_code_revoked) unless code.nil? || current_code?(classroom, code)
         return refuse(:removed_from_classroom) if removed && !via_link
         return refuse(:classroom_full) if classroom.full?
 
@@ -18,10 +16,6 @@ module Policies
       end
 
       private
-
-      def current_code?(classroom, code)
-        classroom.join_code.present? && classroom.join_code == Entities::Classroom::JoinCode.normalize(code)
-      end
 
       def refuse(reason) = Shared::Result.failure(:forbidden, errors: { base: [ reason ] })
     end

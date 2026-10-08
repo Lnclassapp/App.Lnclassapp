@@ -51,7 +51,7 @@ class School::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     classrooms
 
-    [ "Yao", "Konan", "Bamba", "Issa", @deux.reload.link_token, @deux.join_code, "/ 80", "élève" ].each do |secret|
+    [ "Yao", "Konan", "Bamba", "Issa", @deux.reload.link_token, "/ 80", "élève" ].each do |secret|
       assert_not_includes response.body, secret
     end
   end

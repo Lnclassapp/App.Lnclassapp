@@ -1,8 +1,8 @@
 # 🌐 DELIVERY · routes du contexte classroom
-# Rôle : inscription de l'élève, adhésion par code ou par lien, lien d'une classe, retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, jours de séance et suivi
+# Rôle : inscription de l'élève, adhésion par lien, lien d'une classe, retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, jours de séance et suivi
 # ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0084, 0085
-get "join", to: "classroom/join_codes#new", as: :new_join_code
-post "join", to: "classroom/join_codes#create", as: :join_codes
+# IL-02 (ADR-0085, Lot F) : plus de code de classe ; l'ancienne entrée mène à l'inscription élève.
+get "join", to: redirect("/student-signup")
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
 post "c/:code", to: "classroom/joins#create"
 # ADR-0085 §4 : l'élève s'inscrit en choisissant sa classe (DRENA → établissement → niveau → classe), sans code.

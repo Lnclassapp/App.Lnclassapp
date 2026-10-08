@@ -4,7 +4,7 @@ require "application_system_test_case"
 # no stand-in controller, no factory. The team accepts the bootstrap invitation, builds the referential, a DRENA and a
 # public lycée by import (6 « Tle D » classrooms generated), then writes and publishes a course, a sheet and an exercise;
 # the teacher signs up by the DRENA, then the school (ADR-0083), with a full name, declares a classroom and assigns the
-# exercise; the student joins by the code, plays the exercise on a phone and wins « Diamant »; the teacher issues a
+# exercise; the student joins by the classroom link, plays the exercise on a phone and wins « Diamant »; the teacher issues a
 # recovery code and reads the result. Every write is wrapped in assert_no_page_reload.
 class BouclePedagogiqueTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
@@ -39,8 +39,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     using_session(:team) { team_builds_the_referential_and_the_school }
     using_session(:team) { team_publishes_a_course_a_sheet_and_an_exercise }
-    code = using_session(:teacher) { teacher_signs_up_and_assigns_the_exercise }
-    session = using_session(:student) { with_mobile_viewport { student_joins_and_wins_the_diamond(code) } }
+    link = using_session(:teacher) { teacher_signs_up_and_assigns_the_exercise }
+    session = using_session(:student) { with_mobile_viewport { student_joins_and_wins_the_diamond(link) } }
     using_session(:teacher) { teacher_issues_a_recovery_code_and_reads_the_result(session) }
   end
 
@@ -262,7 +262,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # ---------------------------------------------------------------------------------------------------------------------
   # Teacher
 
-  # → the join code of the declared classroom, as the teacher reads it on its page.
+  # → the link of the declared classroom, as the teacher copies it on its page (ADR-0085 §4.1).
   def teacher_signs_up_and_assigns_the_exercise
     visit new_teacher_registration_path
     assert_no_page_reload do
@@ -293,8 +293,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     find("li[id='classroom_#{classroom.public_id}'] a").click
     assert_selector "#classroom_header h1", text: "Tle D 1"
-    code = find("#classroom_join_code").text
-    assert_equal classroom.join_code.upcase, code
+    link = find("#classroom_link [data-clipboard-text-value]")["data-clipboard-text-value"]
+    assert_equal join_classroom_url(classroom.reload.link_token, host: URI(link).host, port: URI(link).port), link
 
     # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
     navigate_to courses_path
@@ -319,7 +319,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_toast "#{EXERCISE} ajouté à Tle D 1."
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { assert_text "Assigné" }
     end
-    code
+    link
   end
 
   def teacher_issues_a_recovery_code_and_reads_the_result(session)
@@ -365,23 +365,22 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # Student, on a phone
 
   # → the finished session, whose result the teacher opens.
-  def student_joins_and_wins_the_diamond(code)
-    visit join_classroom_path(code)
+  def student_joins_and_wins_the_diamond(link)
+    visit URI(link).path
     assert_selector "#classroom-preview", text: "Tle D 1 — #{SCHOOL}"
     assert_no_page_reload do
-      fill_in "join[last_name]", with: "Kouassi"
-      fill_in "join[first_name]", with: "Aya"
+      fill_in "student_registration[last_name]", with: "Kouassi"
+      fill_in "student_registration[first_name]", with: "Aya"
       choose t("genders.female")
-      fill_in "join[contact]", with: STUDENT_CONTACT
-      fill_in "join[pin]", with: "2468"
-      fill_in "join[pin_confirmation]", with: "2468"
+      fill_in "student_registration[contact]", with: STUDENT_CONTACT
+      fill_in "student_registration[pin]", with: "2468"
+      fill_in "student_registration[pin_confirmation]", with: "2468"
     end
-    click_on t("classroom.joins.signup_form.submit")
-    assert_toast t("classroom.joins.create.welcome")
+    click_on t("classroom.student_registrations.form.submit")
+    assert_toast t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
 
-    assert_selector "#student_home_classroom", text: code
-    assert_equal code.upcase, code
+    assert_selector "#student_home_classroom", text: "Tle D 1"
     within("#student_home_exercises li", text: EXERCISE) { click_on t("classroom.student_homes.assigned_exercise.start") }
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_selector "h1", text: EXERCISE

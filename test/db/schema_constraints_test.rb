@@ -4,9 +4,6 @@ require "test_helper"
 # every uniqueness, every enumeration and every foreign key rule of the V1 schema is
 # checked here against the live test database, not against the migration files.
 class SchemaConstraintsTest < ActiveSupport::TestCase
-  # Entities::Classroom::JoinCode::LENGTH once the domain lands (Lot 0.4).
-  JOIN_CODE_LENGTH = defined?(Entities::Classroom::JoinCode::LENGTH) ? Entities::Classroom::JoinCode::LENGTH : 5
-
   PUBLIC_ID_TABLES = %w[users drenas schools classrooms classroom_assignments exercises exercise_sessions
                         knowledge_gaps import_reports school_join_requests articles article_images
                         message_illustrations].freeze
@@ -32,8 +29,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "series" => [ [ %w[name], nil ] ],
     "level_series" => [ [ %w[level_id series_id], nil ] ],
     "materials" => [ [ %w[name], nil ], [ %w[shortname], nil ] ],
-    "classrooms" => [ [ %w[school_id school_year name], nil ], [ %w[join_code], "join_codeISNOTNULL" ],
-                      [ %w[link_token], nil ] ],
+    "classrooms" => [ [ %w[school_id school_year name], nil ], [ %w[link_token], nil ] ],
     "classroom_students" => [ [ %w[classroom_id student_id], nil ], [ %w[student_id], "primaryANDleft_atISNULL" ] ],
     "teacher_classrooms" => [ [ %w[teacher_id classroom_id], nil ] ],
     "courses" => [ [ %w[level_id material_id name], "series_idISNULL" ],
@@ -99,8 +95,11 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
   def check_expressions(table) = connection.check_constraints(table).map(&:expression).join("\n")
 
-  test "the join code column is exactly as long as the generated code" do
-    assert_equal JOIN_CODE_LENGTH, connection.columns("classrooms").find { |column| column.name == "join_code" }.limit
+  # IL-02 (ADR-0085 §4.1, Lot F): the classroom code is gone, its column, its index and its constraint with it.
+  test "IL-02: a classroom has no join code any more" do
+    assert_not_includes connection.columns("classrooms").map(&:name), "join_code"
+    assert_empty connection.indexes("classrooms").select { it.columns.include?("join_code") }
+    assert_no_match(/join_code/, check_expressions("classrooms"))
   end
 
   test "CE-09: every school has a school code of exactly 6 symbols, unique, in the documented alphabet (ADR-0057)" do
