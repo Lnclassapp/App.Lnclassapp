@@ -5,12 +5,11 @@ module Queries
   module Classroom
     class JoinPreviewQuery
       Row = Data.define(:classroom_name, :school_name, :level_name)
-      # full : la page du lien le dit au lieu d'offrir le formulaire. join_code : pont vers JoinAsStudent, qui ne connaît
-      # encore que le code (jusqu'au Lot B) ; jamais rendu.
-      LinkRow = Data.define(:classroom_name, :school_name, :level_name, :full, :join_code)
+      # full : la page du lien le dit au lieu d'offrir le formulaire.
+      LinkRow = Data.define(:classroom_name, :school_name, :level_name, :full)
 
       COLUMNS = [ "classrooms.name", "schools.name", "levels.name" ].freeze
-      LINK_COLUMNS = [ *COLUMNS, "classrooms.id", "classrooms.max_students", "classrooms.join_code" ].freeze
+      LINK_COLUMNS = [ *COLUMNS, "classrooms.id", "classrooms.max_students" ].freeze
 
       # → Row | nil (code inconnu, remplacé ou fermé)
       def call(code:)
@@ -29,9 +28,9 @@ module Queries
                                                  .pick(*LINK_COLUMNS)
         return unless values
 
-        classroom_name, school_name, level_name, id, max_students, join_code = values
+        classroom_name, school_name, level_name, id, max_students = values
         full = Orm::ClassroomStudent.where(classroom_id: id, left_at: nil).count >= max_students
-        LinkRow.new(classroom_name:, school_name:, level_name:, full:, join_code:)
+        LinkRow.new(classroom_name:, school_name:, level_name:, full:)
       end
     end
   end

@@ -1,9 +1,11 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
-# Rôle : accueil élève (CL-23, TR-04, AS-36) et son carrousel d'annonces ; sans classe principale active, un seul saut vers l'écran de sortie
-# ADR  : 0026, 0030, 0040, 0078 · UDR : 0006, 0010, 0071
+# Rôle : accueil élève (CL-23, TR-04, AS-36) et son carrousel d'annonces ; sans classe principale active, « Choisis ta classe » et, une fois, le retrait
+# ADR  : 0026, 0030, 0040, 0078, 0083 · UDR : 0006, 0010, 0071, 0079 (§3.5)
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze
+    # L'heure du dernier retrait déjà annoncé, gardée dans la session Rails : le bandeau ne le dit qu'une fois.
+    REMOVAL_NOTICE = :removal_noticed_at
 
     allow_roles :student
 
@@ -12,7 +14,7 @@ module Classroom
       return render_recent_activity if turbo_frame_request_id == RECENT_ACTIVITY_FRAME
 
       @home = query.call(student_id: current_actor.user_id)
-      return redirect_to pending_account_path if @home.nil?
+      return notice_removal if @home.nil?
 
       @announcements = announcements
     end
@@ -24,6 +26,16 @@ module Classroom
     end
 
     def query = Queries::Classroom::StudentHomeQuery.new
+
+    # IL-14 : sans classe, l'accueil propose d'en choisir une (_no_classroom) ; un retrait récent (StudentHomeQuery) se dit
+    # dans le bandeau, une fois par retrait et par session.
+    def notice_removal
+      removed_at = query.last_classroom(student_id: current_actor.user_id).recent_removal_at&.to_i
+      return if removed_at.nil? || session[REMOVAL_NOTICE] == removed_at
+
+      session[REMOVAL_NOTICE] = removed_at
+      flash.now[:warning] = t(".removed")
+    end
 
     # UDR-0071 §3.5 : les cartes du carrousel par la règle de lecture, en un nombre fixe de requêtes (ADR-0067).
     def announcements

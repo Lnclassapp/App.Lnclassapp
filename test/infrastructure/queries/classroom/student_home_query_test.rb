@@ -261,6 +261,67 @@ module Queries
         assert_equal [ [], [], [], [] ], row.to_h.values_at(:assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs)
         assert_equal %w[svt], row.subjects.map(&:slug)
       end
+
+      # IL-14, IL-17 (UDR-0079 §3.5): a student without an active classroom chooses one, the DRENA and the school of their
+      # last primary classroom already chosen; a removal of less than 7 days ago says why they have no classroom.
+      def last(student, now: Time.current) = StudentHomeQuery.new.last_classroom(student_id: student.id, now:)
+
+      def remove(student, classroom, at:)
+        Orm::ClassroomStudent.where(student:, classroom:).update_all(left_at: at, removed_at: at, removed_by_id: create_teacher.id)
+      end
+
+      test "IL-17: the DRENA and the school of the archived primary classroom, without a removal" do
+        drena = create_drena
+        archived = create_classroom(school: create_school(drena:), status: "archived")
+        student = create_student(classroom: archived)
+
+        row = last(student)
+
+        assert_equal [ drena.public_id, archived.school.public_id, nil ],
+                     row.to_h.values_at(:drena_public_id, :school_public_id, :recent_removal_at)
+      end
+
+      test "IL-14: the classroom the student was removed from, and the time of a removal under 7 days old" do
+        freeze_time do
+          remove(@student, @classroom, at: 2.days.ago)
+
+          row = last(@student)
+
+          assert_equal [ @school.drena.public_id, @school.public_id, 2.days.ago ],
+                       row.to_h.values_at(:drena_public_id, :school_public_id, :recent_removal_at)
+          assert_equal 2.days.ago, last(@student, now: 7.days.from_now - 2.days).recent_removal_at
+          assert_nil last(@student, now: 7.days.from_now - 2.days + 1.second).recent_removal_at
+        end
+      end
+
+      test "the last primary classroom: an open one (archived) first, then the most recently left; secondary ones ignored" do
+        earlier = create_classroom(school: create_school)
+        later = create_classroom(school: create_school)
+        student = create_student(classroom: earlier, joined_at: 2.years.ago)
+        Orm::ClassroomStudent.where(student:, classroom: earlier).update_all(left_at: 1.year.ago)
+        Orm::ClassroomStudent.create!(classroom: later, student:, primary: true, joined_at: 1.year.ago, joined_via: "standard")
+        remove(student, later, at: 1.day.ago)
+        Orm::ClassroomStudent.create!(classroom: create_classroom, student:, primary: false, joined_at: 1.hour.ago,
+                                      joined_via: "standard")
+
+        assert_equal later.school.public_id, last(student).school_public_id
+
+        archived = create_classroom(status: "archived")
+        Orm::ClassroomStudent.create!(classroom: archived, student:, primary: true, joined_at: 1.hour.ago, joined_via: "standard")
+
+        row = last(student)
+
+        assert_equal [ archived.school.public_id, nil ], row.to_h.values_at(:school_public_id, :recent_removal_at)
+      end
+
+      test "a removal followed by a departure elsewhere is not recent news; a student who never had a classroom: nothing" do
+        remove(@student, @classroom, at: 3.days.ago)
+        other = create_classroom(status: "archived")
+        Orm::ClassroomStudent.create!(classroom: other, student: @student, primary: true, joined_at: 2.days.ago, joined_via: "link")
+
+        assert_nil last(@student).recent_removal_at
+        assert_equal [ nil, nil, nil ], last(create_student).to_h.values
+      end
     end
   end
 end

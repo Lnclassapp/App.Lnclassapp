@@ -330,14 +330,72 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#student_home_recent_activity", text: including(tl("recent_activity.empty"))
   end
 
-  test "a student without an active classroom: one redirection, to a page that answers" do
-    sign_in_as create_student
+  # IL-14, IL-17 (UDR-0079 §3.5): the home of a student without an active classroom (archived, or removed) answers, and
+  # offers « Choisis ta classe » in place of the classroom card. A removal under 7 days old says why, once.
+  REMOVED = "Tu ne fais plus partie de cette classe. Choisis ta classe.".freeze
+
+  def remove(student, classroom, at:)
+    Orm::ClassroomStudent.where(student:, classroom:).update_all(left_at: at, removed_at: at, removed_by_id: create_teacher.id)
+  end
+
+  def assert_choose_your_classroom
+    assert_response :success
+    assert_select "h1", text: including(tl("show.greeting", name: "Aya"))
+    assert_select "#student_home_no_classroom", text: including(tl("no_classroom.title")) do
+      assert_select "p", text: tl("no_classroom.no_classroom")
+      assert_select "a.ui-button-brand[href='#{new_student_classroom_choice_path}']", text: tl("no_classroom.choose")
+    end
+    assert_equal [ "Choisis ta classe", "Tu n'as pas de classe cette année.", "Choisir ma classe" ],
+                 [ tl("no_classroom.title"), tl("no_classroom.no_classroom"), tl("no_classroom.choose") ]
+    assert_select "#student_home_classroom, #student_home_exercises, #student_home_activity", 0
+  end
+
+  test "IL-17: a student whose classroom is archived sees « Choisis ta classe » on the home, without any warning" do
+    student = create_student(classroom: create_classroom(status: "archived"), first_name: "Aya")
+    sign_in_as student
 
     get student_home_path
 
-    assert_redirected_to pending_account_path
-    follow_redirect!
-    assert_response :success
+    assert_choose_your_classroom
+    assert_no_match REMOVED, response.body
+  end
+
+  test "IL-14: a student just removed lands on the home without a classroom, told why once, as a warning" do
+    remove(@student, @classroom, at: 1.hour.ago)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_choose_your_classroom
+    assert_select "#toasts [data-toast-type=warning]", text: including(REMOVED)
+    assert_equal REMOVED, tl("show.removed")
+
+    get student_home_path
+
+    assert_choose_your_classroom
+    assert_no_match REMOVED, response.body
+  end
+
+  test "IL-14: removed again after coming back, the student is told again; a removal of more than 7 days says nothing" do
+    remove(@student, @classroom, at: 1.hour.ago)
+    sign_in_as @student
+    get student_home_path
+    Orm::ClassroomStudent.where(student: @student).update_all(left_at: nil, removed_at: nil, removed_by_id: nil)
+    remove(@student, @classroom, at: 1.minute.ago)
+
+    get student_home_path
+
+    assert_select "#toasts", text: including(REMOVED)
+
+    old = create_student(classroom: @classroom, first_name: "Aya")
+    remove(old, @classroom, at: 8.days.ago)
+    sign_out
+    sign_in_as old
+
+    get student_home_path
+
+    assert_choose_your_classroom
+    assert_no_match REMOVED, response.body
   end
 
   test "a teacher and the team receive 403" do

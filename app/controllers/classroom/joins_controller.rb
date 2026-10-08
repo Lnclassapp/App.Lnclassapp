@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Classroom::JoinsController
-# Rôle : /c/<jeton> ouvre l'inscription élève, la classe déjà choisie ; /c/<code> (ancien chemin, jusqu'au Lot F) ; limités en débit
+# Rôle : /c/<jeton> ouvre l'inscription élève, la classe déjà choisie, ou l'entrée de l'élève sans classe ; /c/<code> (ancien chemin, jusqu'au Lot F)
 # ADR  : 0026, 0028, 0040, 0041, 0050, 0083 · UDR : 0009, 0079
 module Classroom
   class JoinsController < ApplicationController
@@ -9,6 +9,8 @@ module Classroom
     # ADR-0041, ADR-0083 §4.1 : l'aperçu et l'inscription partagent le compteur ; au-delà, rien n'est révélé.
     rate_limit to: 10, within: 1.minute, by: -> { request.remote_ip }, with: -> { refuse_too_many }
     before_action :refuse_other_roles
+    # IL-18 : l'élève déjà dans une classe active n'a rien à rejoindre ; son envoi est refusé par JoinAsStudent, en 403.
+    before_action :send_enrolled_student_home, only: :new
     before_action :load_link, if: :link_token
     before_action :load_preview, unless: :link_token
 
@@ -45,6 +47,13 @@ module Classroom
       render_forbidden unless current_actor && current_actor.student?
     end
 
+    def send_enrolled_student_home
+      return unless current_actor
+      return unless Queries::Identity::HomeDestinationQuery.new.call(actor: current_actor) == :student_home
+
+      redirect_to student_home_path
+    end
+
     # Lien invalide (jeton inconnu ou changé, classe archivée, établissement inactif) : la voie standard, avec l'alerte.
     def load_link
       @code = link_token
@@ -70,11 +79,16 @@ module Classroom
       render :new, status: :not_found if @preview.nil?
     end
 
-    # Par le lien, l'élève passe encore par le code de la classe : JoinAsStudent ne connaît que lui jusqu'au Lot B.
+    # Par le lien, la classe vient du jeton, résolu de nouveau (voie « link », qui lève un retrait : ADR-0083 §4.3) ;
+    # par l'ancien code, du code (jusqu'au Lot F).
     def join_as_student
       @form = Dtos::Classroom::JoinWithCodeInput.new
-      code = link_token ? @preview.join_code : @code
-      respond_to_join(change_classroom.call(actor: current_actor, code:)) { nil }
+      result = if link_token
+        change_classroom.call(actor: current_actor, dto: Dtos::Classroom::StudentRegistrationInput.new(link_token:))
+      else
+        change_classroom.call(actor: current_actor, code: @code)
+      end
+      respond_to_join(result) { nil }
     end
 
     # Un refus de JoinPolicy nomme sa raison : la page la montre, en 403.
@@ -107,7 +121,8 @@ module Classroom
 
     def change_classroom
       UseCases::Classroom::JoinAsStudent.new(
-        classrooms: Repositories::Classroom::ClassroomRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
+        classrooms: Repositories::Classroom::ClassroomRepository.new, schools: Repositories::School::SchoolRepository.new,
+        taxonomy: Repositories::Catalog::TaxonomyRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
         policy: Policies::Classroom::JoinPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
       )
     end

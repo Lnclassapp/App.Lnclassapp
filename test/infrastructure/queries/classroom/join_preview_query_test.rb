@@ -50,14 +50,14 @@ class Queries::Classroom::JoinPreviewQueryTest < ActiveSupport::TestCase
                  [ row.classroom_name, row.school_name, row.level_name, row.full ]
   end
 
-  test "IL-08: the link row reveals no identifier, no headcount, no teacher and no token" do
+  test "IL-08: the link row reveals no identifier, no headcount, no teacher, no token and no code" do
     create_teacher(classrooms: [ @classroom ], last_name: "Yao")
     create_student(classroom: @classroom, last_name: "Bamba")
     token = @classroom.reload.link_token
 
-    assert_equal %i[classroom_name school_name level_name full join_code], Queries::Classroom::JoinPreviewQuery::LinkRow.members
+    assert_equal %i[classroom_name school_name level_name full], Queries::Classroom::JoinPreviewQuery::LinkRow.members
     values = link(token).to_h.values
-    [ @classroom.public_id, token, "Yao", "Bamba", 1, 80 ].each { assert_not_includes values, it }
+    [ @classroom.public_id, token, "kfm37", "Yao", "Bamba", 1, 80 ].each { assert_not_includes values, it }
   end
 
   test "IL-05: a classroom whose active headcount reaches its ceiling is full" do
@@ -69,10 +69,6 @@ class Queries::Classroom::JoinPreviewQueryTest < ActiveSupport::TestCase
     Orm::ClassroomStudent.where(student:).update!(left_at: Time.current)
 
     assert_not link(@classroom.link_token).full
-  end
-
-  test "until the student path takes the token (Lot B), the row carries the classroom's code, never shown" do
-    assert_equal "kfm37", link(@classroom.reload.link_token).join_code
   end
 
   test "IL-09: an unknown or replaced token, an archived classroom or a school that is not active gives nil" do

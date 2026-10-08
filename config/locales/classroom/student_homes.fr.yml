@@ -1,4 +1,4 @@
-# Accueil élève (plan boucle-pedagogique, Lot A2, CL-23, TR-04, AS-36) — UDR-0007, UDR-0058 §3.3 (interface-epuree, Lot A), UDR-0076 §3.1
+# Accueil élève (plan boucle-pedagogique, Lot A2, CL-23, TR-04, AS-36) — UDR-0007, UDR-0058 §3.3 (interface-epuree, Lot A), UDR-0076 §3.1 ; sans classe active, UDR-0079 §3.5
 fr:
   classroom:
     student_homes:
@@ -12,6 +12,12 @@ fr:
         todo_empty_description: "Les exercices que tes enseignants assignent à ta classe apparaîtront ici."
         activity_title: "Mes activités récentes"
         activity_subtitle: "Tes 10 dernières sessions terminées"
+        # IL-14 : le bandeau d'accueil, une fois après un retrait (UDR-0079 §3.5).
+        removed: "Tu ne fais plus partie de cette classe. Choisis ta classe."
+      no_classroom:
+        title: "Choisis ta classe"
+        no_classroom: "Tu n'as pas de classe cette année."
+        choose: "Choisir ma classe"
       classroom_card:
         title: "Ma classe"
         context: "%{level} · %{school}"

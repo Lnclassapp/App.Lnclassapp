@@ -1,8 +1,7 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
-<%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée %>
-<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée ; sans classe, « Choisis ta classe » %>
+<%# ADR  : 0033, 0043, 0078, 0083 · UDR : 0006, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1, 0079 §3.5 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
-<% exercises = @home.assigned_exercises %>
 <%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. Amendement du
     2026-10-06 : sous lg, ni « Bonjour » visible ni bouton (la carte de classe monte en tête) ; l'entrée « Besoin d'aide ? »
     du menu du compte ouvre la même carte, rendue une seule fois. %>
@@ -14,6 +13,13 @@
   <%= render "shared/help_sheet", trigger_class: "max-lg:hidden" %>
 </div>
 
+<% if @home.nil? %>
+<%# UDR-0079 §3.5 : sans classe active, ni exercices ni matières ni activité à lire (tous suivent la classe) : la seule carte. %>
+<div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
+  <%= render "no_classroom" %>
+</div>
+<% else %>
+<% exercises = @home.assigned_exercises %>
 <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
 <div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
   <% home_sections_for(:student).each do |key, icon| %>
@@ -58,3 +64,4 @@
     <% end %>
   <% end %>
 </div>
+<% end %>
