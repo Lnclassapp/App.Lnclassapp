@@ -76,6 +76,7 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 | D-U-N-S demandé ? | **Pas encore** : guidé le 2026-10-08 | Ne bloque pas le code ni le test fermé ; bloque seulement le passage en compte d'organisation |
 | Nom, icône, identifiant | **« Lnclass »**, baobab sur bleu (icônes validées le 2026-10-08), **`com.lnclass.student`** | L'identifiant est définitif dès la première publication |
 | Les onglets en bas de l'app ? | D'abord « aucun onglet, tout dans un panneau ouvert par l'avatar », puis **corrigé le même jour : on garde la barre du bas** ; l'en-tête change : **l'avatar à gauche, à la place du logo ; à droite, des icônes et « Besoin d'aide ? », à la place de l'avatar ; plus de logo dans la barre du haut** | Change l'en-tête du shell (UDR-0006) : une UDR est obligatoire. Contredit la règle du design system qui place le logo à gauche de l'en-tête et l'identifie sur les captures partagées sur WhatsApp : à assumer dans l'UDR. Restent à trancher : app seule ou site aussi, quelles icônes à droite, et ce que l'avatar ouvre |
+| En-tête : pour qui, quelles icônes à droite, que fait l'avatar ? | **App et site** pour l'élève. À droite, l'icône d'aide actuelle (`question-mark-circle`) avec « Besoin d'aide ? », puis l'interrupteur clair/sombre, rien d'autre. **L'avatar ouvre un panneau latéral** venant de la gauche : nom, classe, Profil, déconnexion. Le logo quitte l'en-tête (le porteur n'a pas retenu l'alternative proposée) | Une UDR de l'en-tête élève (amende l'UDR-0006 et l'UDR-0065) et un panneau latéral à construire, partagé par le site et l'app : c'est du code Rails, pas de la coque. L'interrupteur de thème, aujourd'hui caché sous `lg`, devient visible sur téléphone. Le chantier gagne un lot « en-tête » côté site, qui peut partir avant la coque |
 | Un enseignant dans l'app élèves ? | **Message « Utilisez Lnclass Teacher »**, lien vers le site tant que l'app enseignants n'existe pas | Règle d'identité de la question 2, côté app élèves seulement |
 | La pop-up « Installer Lnclass » dans l'app ? | **Jamais** | Le contrôleur `install` se tait quand la page tourne dans l'app (User-Agent de la coque) : amendement de l'UDR-0078 |
 | Recette avant production ? | **Oui** : une version qui pointe vers la recette, puis une vers la production | Deux variantes de compilation (adresse du site), même code |
@@ -99,6 +100,9 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 - Un compte anonymisé ou désactivé alors qu'il est connecté dans l'app : la session tombe, l'app revient à la connexion.
 
 ## Questions encore ouvertes
+
+- Le nouvel en-tête (avatar à gauche, aide à droite, sans logo) vaut-il aussi pour l'enseignant, la direction et l'équipe ? L'UDR-0006 donne aujourd'hui le même en-tête aux quatre rôles.
+- Sans logo dans l'en-tête, une capture d'écran partagée sur WhatsApp ne porte plus la marque : à confirmer à la relecture des captures.
 
 - Version minimale d'Android exigée par Hotwire Native Android et par la vue web système : à mesurer, puis à comparer au plancher de l'ADR-0051.
 - Délai d'obtention du numéro D-U-N-S et structure juridique qui porte le compte Google Play.
