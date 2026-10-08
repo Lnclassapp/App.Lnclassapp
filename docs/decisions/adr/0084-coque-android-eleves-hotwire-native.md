@@ -95,7 +95,7 @@ Les icônes sont celles du site (Heroicons `home`, `book-open`, `academic-cap`),
 ### 4.5 Aiguillage par rôle (ADR-0070 R1)
 
 - Le DTO de connexion reçoit `client` : `"web"` ou `"android_student"`, déduit de §4.1 par le contrôleur.
-- `UseCases::Identity::Authenticate` vérifie le PIN, **puis** compare le rôle à `client`. Un compte qui n'est pas élève, dans la coque élèves, reçoit `:wrong_app` **sans qu'aucune session ne s'ouvre**. La tentative est comptée comme réussie : le PIN était juste.
+- `UseCases::Identity::Authenticate` vérifie le PIN, **puis** compare le rôle à `client`. Un compte qui n'est pas élève, dans la coque élèves, reçoit le refus `wrong_app` **sans qu'aucune session ne s'ouvre**. La tentative est comptée comme réussie : le PIN était juste. Les codes de `Shared::Result` forment une liste fermée (ADR-0026) : le refus est un `:conflict` dont l'erreur est `base: [:wrong_app]` (`Authenticate::WRONG_APP`), sur le modèle de `DrawingReaderPort`.
 - Un PIN faux suit le chemin actuel (`:invalid`), le même pour tous les rôles : le refus ne révèle jamais le rôle d'un numéro.
 - Le message nomme la situation : « Cette app est réservée aux élèves. Enseignants : continuez sur lnclass.com. » Le lien s'ouvre dans le navigateur.
 
@@ -177,7 +177,7 @@ helper_method :lnclass_app?
 ## 7. Comment vérifier que la décision est respectée
 
 - Test d'intégration : avec le User-Agent de la coque, une page élève ne contient ni l'en-tête ni la barre basse du shell, mais contient `[data-controller="bridge--account"]`. Avec un User-Agent de navigateur, c'est l'inverse.
-- Test de use case : un enseignant avec un PIN correct et `client: "android_student"` reçoit `:wrong_app`, et aucune session n'est créée. Avec un PIN faux, il reçoit exactement l'échec d'un élève avec un PIN faux.
+- Test de use case : un enseignant avec un PIN correct et `client: "android_student"` reçoit le refus `WRONG_APP`, et aucune session n'est créée. Avec un PIN faux, il reçoit exactement l'échec d'un élève avec un PIN faux.
 - Test d'intégration : `GET /android/v1/path-configuration.json` et `GET /.well-known/assetlinks.json` répondent 200, en JSON, avec les règles du §4.3 et l'identifiant du §4.7.
 - Test : `/?source=android` venu de la coque date `android_opened_at`. Venu d'un navigateur, il ne date rien.
 - `grep -rn "keystore\|\.jks" android/` ne trouve aucun fichier de clé versionné.
