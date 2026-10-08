@@ -186,4 +186,55 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_equal 0, Orm::Session.count
   end
+
+  # ADR-0084 §4.5, UDR-0080 §3.4: the students' app recognised by its User-Agent (§4.1).
+  APP_USER_AGENT = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
+                   "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
+
+  test "CA-3: in the students' app, a teacher with the right PIN reads the refusal, gets no session and an empty form" do
+    teacher = create_teacher
+
+    post session_path, params: { session: { contact: teacher.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+    assert_response :unprocessable_entity
+    assert_select "#wrong-app[role=alert]" do
+      assert_select "p", text: "Cette app est réservée aux élèves"
+      assert_select "p", text: /Enseignants, direction et équipe : continuez sur le site\./
+      assert_select "a[href='https://lnclass.com'][target=_blank][rel=noopener]", text: "Ouvrir lnclass.com"
+    end
+    assert_equal 0, Orm::Session.count
+    assert_empty cookies[:session_token].to_s
+    assert_select "input[name='session[contact]']:not([value])"
+    assert_select "input[name='session[pin]']:not([value])"
+  end
+
+  test "CA-3: in the students' app, a team member is refused before any second factor" do
+    member = create_team_member
+
+    post session_path, params: { session: { contact: member.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+    assert_response :unprocessable_entity
+    assert_select "#wrong-app", text: /Cette app est réservée aux élèves/
+    assert_equal 0, Orm::Session.count
+  end
+
+  test "CA-3: in the students' app, a teacher's wrong PIN reads exactly a student's wrong-PIN message" do
+    [ create_student, create_teacher ].each do |user|
+      post session_path, params: { session: { contact: user.contact, pin: "1357" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+      assert_response :unprocessable_entity
+      assert_equal [ "Numéro ou PIN incorrect." ], css_select("[role=alert]").map { it.text.squish }
+      assert_select "#wrong-app", 0
+    end
+  end
+
+  test "CA-4: in the students' app, a student with the right PIN lands on the student home" do
+    student = create_student(classroom: create_classroom)
+
+    post session_path, params: { session: { contact: student.contact, pin: "2468" } }, headers: { "User-Agent" => APP_USER_AGENT }
+
+    assert_redirected_to student_home_path
+    assert_equal 1, Orm::Session.where(user: student).count
+    assert_not_empty cookies[:session_token].to_s
+  end
 end

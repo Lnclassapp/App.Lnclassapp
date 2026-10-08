@@ -1,17 +1,12 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
 <%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée %>
-<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0078, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0078, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1, 0080 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
 <% exercises = @home.assigned_exercises %>
-<%# UDR-0061 : « Besoin d'aide ? » ouvre la carte d'aide ; sans JavaScript, il reste un lien vers la FAQ. Amendement du
-    2026-10-06 : sous lg, ni « Bonjour » visible ni bouton (la carte de classe monte en tête) ; l'entrée « Besoin d'aide ? »
-    du menu du compte ouvre la même carte, rendue une seule fois. %>
-<% content_for :account_menu do %>
-  <%= ui_dropdown_item t("shared.help_sheet.trigger"), icon: "question-mark-circle", dialog: "help-sheet" %>
-<% end %>
-<div class="flex flex-col gap-4 lg:mb-6 lg:flex-row lg:items-end lg:justify-between">
+<%# UDR-0061, amendement du 2026-10-06 : sous lg, pas de « Bonjour » visible (la carte de classe monte en tête).
+    UDR-0080 §3.1 : « Besoin d'aide ? » est dans l'en-tête de l'élève, qui rend la carte d'aide une seule fois. %>
+<div class="lg:mb-6">
   <h1 class="font-display text-3xl font-extrabold tracking-tight text-balance max-lg:sr-only"><%= t(".greeting", name: shell_user.first_name) %></h1>
-  <%= render "shared/help_sheet", trigger_class: "max-lg:hidden" %>
 </div>
 
 <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>

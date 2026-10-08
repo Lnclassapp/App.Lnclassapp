@@ -112,6 +112,20 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, ERB::Util.html_escape(tl("key_figures.app_openers_tip"))
   end
 
+  # CA-6 (ADR-0084 §4.6): the tile tells how many of these students opened the Android app in the period.
+  test "CA-6: the app openers tile reads « dont app Android : 2 élèves » for 2 students in the period and 1 before" do
+    2.times { create_student(android_opened_at: 1.day.ago) }
+    create_student(android_opened_at: 20.days.ago)
+    sign_in_as @member
+
+    get team_dashboard_path
+
+    assert_select "#team_dashboard_period ul#team_dashboard_app_openers" do
+      assert_select "li", text: tl("key_figures.app_openers_students", count: 2)
+      assert_select "li#figure_app_openers_android", text: "dont app Android : 2 élèves"
+    end
+  end
+
   test "the app openers tile shows zeros rather than hiding" do
     sign_in_as @member
 
@@ -119,6 +133,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#figure_app_openers li", text: "0 élève"
     assert_select "#figure_app_openers li", text: "0 enseignant"
+    assert_select "#figure_app_openers li#figure_app_openers_android", text: "dont app Android : 0 élève"
   end
 
   test "the period links keep the DRENA, and the current one is marked" do

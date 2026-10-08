@@ -1,8 +1,9 @@
 require "application_system_test_case"
 
 # PH-01 to PH-04, PH-07, ADR-0060, UDR-0047: from « Mon profil », a student adds a photo from a file, sees it cropped
-# before sending, then in the account menu; a heavy image is lightened by the browser; a PDF is refused by the server;
-# the photo is removed and the initials come back. The same journey holds on a 390 px phone.
+# before sending, then on the avatar of the header and in the account panel (UDR-0080); a heavy image is lightened by
+# the browser; a PDF is refused by the server; the photo is removed and the initials come back. The same journey holds
+# on a 390 px phone.
 class Identity::ProfilePhotoTest < ApplicationSystemTestCase
   setup do
     @student = create_student(classroom: create_classroom, first_name: "Aya", last_name: "Koné")
@@ -42,7 +43,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
     Rails.root.join("tmp/heavy-#{SecureRandom.hex(4)}.png").tap { File.binwrite(it, png) }
   end
 
-  test "the student adds a photo, sees it cropped before sending, then in the account menu; then removes it" do
+  test "the student adds a photo, sees it cropped before sending, then in the header and the account panel; then removes it" do
     sign_in_as @student
     open_photo_modal
     assert_selector "[data-identity--photo-picker-target=current] [role=img]", text: "AK"
@@ -57,14 +58,17 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       assert_toast "Ta photo est enregistrée."
       assert_no_selector "turbo-frame#modal dialog[open]"
       assert_photo_loaded "#profile_information img[alt='Aya Koné']"
-      assert_photo_loaded "header button[aria-controls=account-menu] img[alt='Aya Koné']"
+      assert_photo_loaded "header a[aria-controls=account_panel] img[alt='Aya Koné']"
     end
     assert_equal Entities::Shared::ImageHeader::Facts.new(format: :webp, width: 480, height: 480, metadata: false), stored_facts
     assert Orm::AuditEvent.exists?(action: "profile.photo_changed", actor_id: @student.id)
     screenshot("2-profil-avec-photo")
-    find("button[aria-controls='account-menu']").click
-    screenshot("3-menu-du-compte")
-    find("button[aria-controls='account-menu']").click
+    # UDR-0080 §3.2 : le menu du compte de l'élève est devenu le panneau ouvert par l'avatar.
+    find("header a[aria-controls=account_panel]").click
+    assert_photo_loaded "dialog#account_panel[open] img.size-14[alt='Aya Koné']"
+    screenshot("3-panneau-du-compte")
+    find("dialog#account_panel[open]").send_keys(:escape)
+    assert_no_selector "dialog#account_panel[open]"
 
     open_photo_modal
     assert_no_page_reload do
@@ -72,7 +76,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
       assert_toast "Ta photo est retirée."
       within("#profile_information") { assert_selector "[role=img][aria-label='Aya Koné']", text: "AK" }
-      assert_selector "header button[aria-controls=account-menu] [role=img]", text: "AK"
+      assert_selector "header a[aria-controls=account_panel] [role=img]", text: "AK"
     end
     assert_not stored.attached?
   end
@@ -146,7 +150,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
       assert_toast "Ta photo est enregistrée."
       assert_photo_loaded "#profile_information img[alt='Aya Koné']"
-      assert_photo_loaded "header button[aria-controls=account-menu] img[alt='Aya Koné']"
+      assert_photo_loaded "header a[aria-controls=account_panel] img[alt='Aya Koné']"
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
       find("#toasts button[data-action='toast#dismiss']").click
       assert_no_selector "#toasts [data-controller=toast]"
