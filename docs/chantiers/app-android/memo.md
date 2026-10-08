@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | app élèves exécutée (2026-10-08, [#205](https://github.com/Lnclassapp/App.Lnclassapp/pull/205), [#206](https://github.com/Lnclassapp/App.Lnclassapp/pull/206)), test sur un vrai téléphone en attente ; app enseignants planifiée (2026-10-08) |
+| **Statut** | app élèves exécutée (2026-10-08, [#205](https://github.com/Lnclassapp/App.Lnclassapp/pull/205), [#206](https://github.com/Lnclassapp/App.Lnclassapp/pull/206)), test sur un vrai téléphone en attente ; app enseignants exécutée (2026-10-08), test sur un vrai téléphone en attente |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `ccr-e4a51f57-9ve9og` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
 | **Programme** | — *(hors plan de `refonte-application` ; la PWA est livrée par `installation-pwa`, ADR-0082)* |
