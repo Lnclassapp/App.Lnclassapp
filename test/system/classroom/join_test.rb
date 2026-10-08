@@ -62,7 +62,8 @@ class Classroom::JoinTest < ApplicationSystemTestCase
   end
 
   test "at 390 px, a signed-in student sees the preview and one button, the reassurance in an info tip" do
-    sign_in_as create_student(classroom: create_classroom)
+    # IL-18 : un élève dans une classe active est renvoyé vers son accueil ; la carte est pour l'élève sans classe active.
+    sign_in_as create_student(classroom: create_classroom(status: "archived"))
 
     with_mobile_viewport do
       visit join_classroom_path("kfm37")
