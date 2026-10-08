@@ -128,16 +128,16 @@ L'adresse du lien n'est **pas** affichée en clair : seuls les boutons la porten
 **Nouveaux arrivés**
 
 - Titre de la liste : après le compteur existant, si au moins un élève est nouveau, `ui_badge t(".new_count", count:)` (« 1 nouveau », « 3 nouveaux »), `tone: :brand`.
-- Sur la ligne d'un élève nouveau, après son nom : `ui_badge t(".new"), tone: :brand, size: :sm` (« Nouveau »).
+- Sur la ligne d'un élève nouveau, après son nom : `ui_badge t(".new"), tone: :brand, size: :sm` (« Nouveau »). *Amendé le 2026-10-08 (porteur)* : sous `sm`, la pastille passe à la ligne, sous le nom, sur la ligne de la voie d'arrivée ; à partir de `sm`, elle reste à côté du nom. Le nom n'est jamais tronqué par la pastille.
 - Sous le nom de **chaque** élève, en `text-xs text-mute` : `t(".via.standard")` « Inscrit seul », `t(".via.link")` « Par le lien », rien pour `code`.
 - Les élèves nouveaux sont listés **en premier**, du plus récent au plus ancien ; les autres gardent l'ordre actuel.
 
 **Retrait**
 
-- Dans le menu ⋮ existant de la ligne, dernier item, séparé par un filet : « Retirer de la classe », `tone: :danger`, icône `user-minus`, `dialog: "remove-student-<index>"`. Rendu seulement si la policy l'accorde et si la classe est active.
+- Dans le menu ⋮ existant de la ligne, dernier item, séparé par un filet : « Retirer de la classe », `tone: :danger`, icône `user-minus`, `dialog: "remove-student-<public_id>"`. Rendu seulement si la policy l'accorde et si la classe est active. Le serveur refuse aussi le retrait dans une classe archivée (403, *amendé le 2026-10-08, porteur*), comme le changement de lien.
 - `ui_modal title: t(".remove_title", name:), size: :sm` : « %{name} quittera cette classe. Son compte et son travail sont gardés. Il pourra revenir avec le lien de la classe. » ; boutons « Annuler » et « Retirer » (`danger`, `type: :submit`).
 - Formulaire `button_to`/`form_with url: classroom_student_path(classroom.public_id, student.public_id), method: :delete`.
-- Réponse : Turbo Stream qui retire la ligne `#classroom_student_<index>`, remplace le titre (compteur et pastille) et pose le toast « %{name} a été retiré de la classe. ». Si la liste devient vide, le stream remplace `#classroom_roster` par son état vide existant.
+- Réponse : Turbo Stream qui retire la ligne `#student_<public_id>` (*amendé le 2026-10-08, porteur* : l'identifiant existant de la ligne est gardé ; un index change avec la recherche et la réponse au retrait ne le connaît pas), remplace le titre (compteur et pastille) et pose le toast « %{name} a été retiré de la classe. ». Si la liste devient vide, le stream remplace `#classroom_roster` par son état vide existant.
 
 **Page de classe de la direction** (`school_admin/classrooms/show`) : mêmes pastilles, même menu et même modale sur ses lignes numérotées ; le bloc §3.6 au-dessus des trois tuiles.
 

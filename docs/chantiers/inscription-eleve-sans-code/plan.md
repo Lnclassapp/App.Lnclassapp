@@ -188,6 +188,7 @@ def removed_from?(classroom_id:, student_id:)                      = raise NotIm
                      `config/locales/school_admin/classrooms.fr.yml`
                      `test/controllers/school_admin/classrooms_controller_test.rb`
                      `app/controllers/classroom/classroom_students_controller.rb` · `app/views/classroom/classroom_students/destroy.turbo_stream.erb` · `test/controllers/classroom/classroom_students_controller_test.rb` *(ajout du 2026-10-07, si besoin : la réponse au `DELETE` du Lot D vise les identifiants de la page enseignant — `student_<public_id>`, `classroom_roster_title`, `classroom_roster_count`, `classroom_roster`, `classroom_headcount` ; la page de la direction les porte, ou reçoit sa propre réponse)*
+                     `app/domain/use_cases/classroom/remove_student.rb` · `test/domain/use_cases/classroom/remove_student_test.rb` · `app/views/classroom/classrooms/_roster.html.erb` *(ajout du 2026-10-08, décisions du porteur : le serveur refuse le retrait dans une classe archivée ; à 390 px, la pastille « Nouveau » passe sous le nom — UDR-0079 §3.7 amendée)*
 - **Dépend de**    : Lot C, Lot D
 - **Test associé** : `test/controllers/school_admin/classrooms_controller_test.rb` (IL-12 pour la direction : son établissement accordé, un autre 404 ; IL-13 et IL-14 depuis sa page)
 - **Done quand**   : la direction ouvre une classe de son établissement, copie et change son lien, voit les nouveaux arrivés et retire un élève ; elle ne peut rien sur la classe d'un autre établissement
@@ -269,7 +270,7 @@ git worktree add ../lnclass-inscription-eleve-sans-code-lot-a -b feature/inscrip
 | `join_policy.rb` | Lot A → Lot F |
 | `joins_controller.rb` et son test, `join_preview_query.rb` et son test | Lot A → Lot B → Lot F |
 | `school/drena_schools` (contrôleur, gabarit, test) | Lot A seul |
-| `classroom_students_controller.rb`, `destroy.turbo_stream.erb` et leur test | Lot D → Lot E → Lot F |
+| `classroom_students_controller.rb`, `destroy.turbo_stream.erb`, `remove_student.rb`, `_roster.html.erb` et leurs tests | Lot D → Lot E → Lot F |
 | `classroom_header_query.rb`, `_header.html.erb`, `school_detail_query.rb`, `teams/schools/_classroom_group.html.erb` | Lot C → Lot F |
 | `student_home_query.rb` | Lot B → Lot F |
 | `app/views/classroom/classrooms/show.html.erb` | aucun lot : `_header` (C) et `_roster` (D) y sont déjà rendus |

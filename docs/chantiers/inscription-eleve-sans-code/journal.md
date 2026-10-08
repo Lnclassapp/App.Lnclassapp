@@ -18,7 +18,7 @@
 | 2026-10-07 | Lot C : le droit d'afficher le bloc du lien passe par `ClassroomHeaderQuery::Row#link_shown_to?(actor)` (policy + classe active), appelé par `_header` avec `current_actor` | `classrooms_controller.rb` appartenait au Lot D, en parallèle | Non |
 | 2026-10-07 | Lot C : la fiche d'établissement reçoit les jetons par `Level#link_tokens` (`{ public_id => jeton }`), pas dans `ClassroomRow` | Ajouter un champ à `ClassroomRow` cassait `school_detail_query_test.rb`, hors liste | Non : à reprendre au Lot F |
 | 2026-10-07 | Lot C : `ChangeClassroomLink` sur une classe archivée → `:forbidden` avec `base: [:classroom_archived]` ; sans JavaScript, `redirect_back_or_to` | Sur le modèle de `SetSessionDaysPolicy` ; la page de la direction (Lot E) revient chez elle | Non |
-| 2026-10-07 | Lot D : la ligne garde son identifiant `#student_<public_id>` et la modale `remove-student-<public_id>`, au lieu de `#classroom_student_<index>` (UDR-0079 §3.7) | La réponse au `DELETE` ne connaît pas l'index, qui change avec la recherche ; 4 tests système visent déjà `#student_<public_id>` | Non : écart à l'UDR, à valider par le porteur |
+| 2026-10-07 | Lot D : la ligne garde son identifiant `#student_<public_id>` et la modale `remove-student-<public_id>`, au lieu de `#classroom_student_<index>` (UDR-0079 §3.7) | La réponse au `DELETE` ne connaît pas l'index, qui change avec la recherche ; 4 tests système visent déjà `#student_<public_id>` | Validé par le porteur le 2026-10-08 : UDR-0079 §3.7 amendée |
 | 2026-10-07 | Lot D : retirer un élève qui n'est ni membre actif ni retiré de la classe → 404 ; un élève déjà retiré → succès sans écriture | La réponse nomme l'élève : un succès sur tout identifiant laisserait lire le nom de n'importe quel élève | Non |
 | 2026-10-07 | Lot D : la réponse au `DELETE` met aussi à jour `#classroom_headcount` et `#classroom_roster_count` (recherche transmise par un champ caché `q`) | L'effectif de l'en-tête et le compte filtré doivent suivre | Non |
 
@@ -55,9 +55,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Pont `LinkRow#join_code` : l'élève connecté qui ouvre un lien rejoint par le code, voie `code` | `JoinAsStudent` ne connaît que le code | Lot B (puis F) |
 | Jetons de la fiche d'établissement dans `Level#link_tokens` au lieu de `ClassroomRow` | `school_detail_query_test.rb` hors liste | Lot F |
 | Fiche d'établissement : même `aria-label` « Copier le lien de la classe » sur toutes les cartes ; « Copier le lien » proposé même si l'établissement n'est pas actif | Aucune clé de locale avec le nom ; le partial ignore le statut | Lot F |
-| Le serveur accepte le retrait d'un élève dans une classe archivée (seule l'interface le masque) | Aucune règle ne le demande ; décision du porteur attendue | Lot E ou F |
+| Le serveur accepte le retrait d'un élève dans une classe archivée (seule l'interface le masque) | Le porteur a décidé le 2026-10-08 de le refuser (403), comme le changement de lien ; UDR-0079 §3.7 amendée | Lot E |
 | Titre de la liste recopié dans `classroom_students/destroy.turbo_stream.erb` (le `h2` existe en double) | Pas de partial possible dans la liste du Lot D | Lot F |
-| À 390 px, un nom long est tronqué à côté de la pastille « Nouveau » | Vu sur les captures de la vague 2 | Lot E ou F |
+| À 390 px, un nom long est tronqué à côté de la pastille « Nouveau » | Le porteur a décidé le 2026-10-08 : la pastille passe sous le nom sur téléphone ; UDR-0079 §3.7 amendée | Lot E |
 | `roster.empty_description` parle encore du code de la classe | Texte du code | Lot F |
 | Sans JavaScript, « Continuer » envoie tout le formulaire d'inscription en `GET` (un PIN déjà tapé irait dans l'URL ; le serveur ne le relit pas) | Cas improbable : la classe se choisit avant le PIN | — |
 
