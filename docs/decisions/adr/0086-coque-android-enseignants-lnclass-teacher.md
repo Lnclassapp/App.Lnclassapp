@@ -1,4 +1,4 @@
-# ADR-0085 : Coque Android « Lnclass Teacher » (enseignants) — même socle que l'app élèves, refus croisé, code Android partagé
+# ADR-0086 : Coque Android « Lnclass Teacher » (enseignants) — même socle que l'app élèves, refus croisé, code Android partagé
 
 | | |
 |---|---|
@@ -67,7 +67,7 @@ Onglets de l'app enseignants :
 
 ### 4.4 Panneau du compte de l'enseignant
 
-`GET /teachers/menu` (route `teacher_menu`, `Classroom::TeacherMenusController#show`, enseignant seulement) rend le panneau du compte de l'enseignant, comme `/students/menu` pour l'élève (UDR-0081).
+`GET /teachers/menu` (route `teacher_menu`, `Classroom::TeacherMenusController#show`, enseignant seulement) rend le panneau du compte de l'enseignant, comme `/students/menu` pour l'élève (UDR-0082).
 
 ### 4.5 Refus dans les deux sens
 
@@ -75,7 +75,7 @@ Onglets de l'app enseignants :
 - Chaque coque n'admet qu'un rôle : `android_student` → `student`, `android_teacher` → `teacher`.
 - Un autre rôle, PIN correct, reçoit `:conflict` avec `base: [:wrong_app]` et l'app à proposer, `app: [:android_teacher]`, `[:android_student]` ou `[:web]` (`Authenticate::WRONG_APP_FOR`). Aucune session ne s'ouvre ; la tentative compte comme réussie.
 - Un PIN faux reste `:invalid`, identique pour tous.
-- Le message (UDR-0081 §3.4) nomme l'app proposée. Son lien mène à la fiche Play Store de cette app si `ANDROID_STUDENT_STORE_URL` ou `ANDROID_TEACHER_STORE_URL` est posée, sinon au site.
+- Le message (UDR-0082 §3.4) nomme l'app proposée. Son lien mène à la fiche Play Store de cette app si `ANDROID_STUDENT_STORE_URL` ou `ANDROID_TEACHER_STORE_URL` est posée, sinon au site.
 
 ### 4.6 Mesure
 

@@ -1,4 +1,4 @@
-// Socle partagé des coques Lnclass (ADR-0085 §4.8) : fragment web, barre du haut, avatar, pont « account »,
+// Socle partagé des coques Lnclass (ADR-0086 §4.8) : fragment web, barre du haut, avatar, pont « account »,
 // onglets et configuration Hotwire. Chaque app (student, teacher) n'y ajoute que ce qui lui est propre.
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 

@@ -187,7 +187,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Session.count
   end
 
-  # ADR-0084 §4.5, ADR-0085 §4.5, UDR-0081 §3.4: the two Android shells recognised by their User-Agent (ADR-0085 §4.1).
+  # ADR-0084 §4.5, ADR-0086 §4.5, UDR-0082 §3.4: the two Android shells recognised by their User-Agent (ADR-0086 §4.1).
   APP_USER_AGENT = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
                    "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
   TEACHER_APP_USER_AGENT = APP_USER_AGENT.sub("LnclassStudentAndroid", "LnclassTeacherAndroid").freeze

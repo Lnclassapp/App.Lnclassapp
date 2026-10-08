@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::Authenticate
 # Rôle : connexion par contact et PIN, verrouillage progressif, aiguillage des coques Android, ouverture d'une session serveur
-# ADR  : 0028 (exempté de policy : l'acteur n'existe pas encore), 0050, 0084 (§4.5), 0085 (§4.5)
+# ADR  : 0028 (exempté de policy : l'acteur n'existe pas encore), 0050, 0084 (§4.5), 0086 (§4.5)
 module UseCases
   module Identity
     class Authenticate
@@ -8,7 +8,7 @@ module UseCases
       KIND = "pin".freeze
       # Un numéro inconnu et un PIN faux reçoivent le même message.
       INVALID = { base: [ :invalid_credentials ] }.freeze
-      # ADR-0085 §4.5 : un compte entré dans la coque d'un autre rôle. Shared::Result n'admet que ses codes (ADR-0026) :
+      # ADR-0086 §4.5 : un compte entré dans la coque d'un autre rôle. Shared::Result n'admet que ses codes (ADR-0026) :
       # la raison nommée est la clé d'erreur d'un :conflict, accompagnée de l'app à proposer selon le rôle.
       WRONG_APP = :wrong_app
       WRONG_APP_FOR = { "student" => :android_student, "teacher" => :android_teacher }.freeze
@@ -38,7 +38,7 @@ module UseCases
         user = @users.authenticate(contact: dto.contact, pin: dto.pin)
         return reject(dto, failures.count + 1, now) if user.nil?
 
-        # Le PIN était juste : la tentative compte comme réussie, même refusée par la coque (ADR-0085 §4.5).
+        # Le PIN était juste : la tentative compte comme réussie, même refusée par la coque (ADR-0086 §4.5).
         record_success(user, dto, now)
         return wrong_app(user) unless dto.admits?(user.role)
 

@@ -2,7 +2,7 @@ package com.lnclass.teacher
 
 import com.lnclass.shell.ShellActivity
 
-// Activité unique : quatre onglets natifs, chacun avec sa pile de pages du site (ADR-0085 §4.3, UDR-0081 §3.3). Les
+// Activité unique : quatre onglets natifs, chacun avec sa pile de pages du site (ADR-0086 §4.3, UDR-0082 §3.3). Les
 // liens /teacher-signup et /i/<code> (manifeste) s'ouvrent dans l'app.
 class MainActivity : ShellActivity(R.layout.activity_main) {
     override val baseUrl = BuildConfig.BASE_URL

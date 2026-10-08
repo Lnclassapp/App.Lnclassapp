@@ -188,7 +188,7 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil account_links.first[:href]
   end
 
-  # CA-8, CA-T6 (UDR-0080 §3.2, UDR-0081 §3.2): the student and the teacher have the account panel, each with its page
+  # CA-8, CA-T6 (UDR-0080 §3.2, UDR-0082 §3.2): the student and the teacher have the account panel, each with its page
   # and its links in order; the direction and the team keep the account menu.
   test "the account panel of the student and of the teacher: its page, then its links in order" do
     assert_equal [ true, true, false, false ], %w[student teacher school_admin team].map { account_panel?(it) }

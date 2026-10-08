@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-T6 (app-android, Lnclass Teacher) — UDR-0081 §3.2. « /teachers/menu » renders the teacher's account panel as a
+# CA-T6 (app-android, Lnclass Teacher) — UDR-0082 §3.2. « /teachers/menu » renders the teacher's account panel as a
 # page: the content of the header's <dialog>, which the teachers' shell opens as a modal and the site reaches without
 # JavaScript. Teacher only.
 class Classroom::TeacherMenusControllerTest < ActionDispatch::IntegrationTest

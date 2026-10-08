@@ -1,11 +1,11 @@
-# UDR-0081 : En-tête de l'enseignant comme celui de l'élève, panneau du compte de l'enseignant, barres de « Lnclass Teacher », messages de refus croisés
+# UDR-0082 : En-tête de l'enseignant comme celui de l'élève, panneau du compte de l'enseignant, barres de « Lnclass Teacher », messages de refus croisés
 
 | | |
 |---|---|
 | **Statut** | Proposé |
 | **Date** | 2026-10-08 |
 | **Chantier** | [`docs/chantiers/app-android`](../../chantiers/app-android/memo.md) (reprise « Lnclass Teacher ») |
-| **ADR lié** | [ADR-0085](../adr/0085-coque-android-enseignants-lnclass-teacher.md) · [ADR-0084](../adr/0084-coque-android-eleves-hotwire-native.md) |
+| **ADR lié** | [ADR-0086](../adr/0086-coque-android-enseignants-lnclass-teacher.md) · [ADR-0084](../adr/0084-coque-android-eleves-hotwire-native.md) |
 | **Amende** | [UDR-0080](0080-en-tete-eleve-panneau-du-compte-et-barres-de-l-app-android.md) §3.1 et §3.2 (étendus à l'enseignant), §3.4 (le message nomme la bonne app) · [UDR-0006](0006-shell-applicatif-par-role.md) (seules la direction et l'équipe gardent l'en-tête d'origine) |
 | **Remplacé par** | — |
 
@@ -48,7 +48,7 @@ Le lien courant porte `aria-current="page"`. La barre latérale de l'enseignant 
 - **Barre du haut** : identique à l'app élèves (UDR-0080 §3.3). Le menu de l'avatar ouvre `/teachers/menu` en modale.
 - **Onglets** : Accueil (`home`), Classes (`user-group`), Cours (`book-open`), Annonces (`megaphone`), avec les libellés de `shared.navigation`.
 - **Couleur active** : `#C2410C`, l'orange foncé du design system, lisible sur fond blanc. L'orange `#FF8A00` reste celui de l'écran de démarrage et de l'icône.
-- **Onglets cachés** sur les pages ouvertes en modale : « Assigner un exercice », « Jours de séance », le panneau du compte et l'aide (ADR-0085 §4.3).
+- **Onglets cachés** sur les pages ouvertes en modale : « Assigner un exercice », « Jours de séance », le panneau du compte et l'aide (ADR-0086 §4.3).
 
 ### 3.4 Messages de refus (page de connexion, 422, ton `:warning`)
 

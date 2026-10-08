@@ -109,8 +109,12 @@ export default class extends Controller {
     const setLocationRange = manager.setLocationRange.bind(manager)
     manager.setLocationRange = (range) => {
       if (manager.lockedLocationRange || range == null || !typingElsewhere(element)) return setLocationRange(range)
+      const [start, end] = Array.isArray(range) ? range : [range, range]
+      // A point outside the text (a drop without a place in it): Trix finds no DOM range and keeps its cursor; recording
+      // it would send the next image to the start of the text (chantier alt-couverture-perdu).
+      if (start?.index == null) return
       try {
-        manager.updateCurrentLocationRange(Array.isArray(range) ? [range[0], range[1] ?? range[0]] : [range, range])
+        manager.updateCurrentLocationRange([start, end ?? start])
       } catch {
         setLocationRange(range)
       }

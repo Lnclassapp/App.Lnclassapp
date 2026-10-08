@@ -1,10 +1,10 @@
 <%# 🌐 UI · shared/navigation/_header — en-tête du shell : élève et enseignant, avatar, aide, thème ; sinon logo, rôle, menu du compte %>
 <%# Rôle : filet de couleur du rôle en haut ; la direction et l'équipe gardent l'en-tête d'origine %>
-<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0081 §3.1 %>
+<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1 %>
 <header class="sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur">
   <div class="absolute inset-x-0 top-0 h-1 <%= role_accent(user.role) %>" aria-hidden="true"></div>
   <% if account_panel?(user.role) %>
-    <%# UDR-0080 §3.1, UDR-0081 §3.1 : sans logo ; l'avatar ouvre le panneau du compte, l'aide et l'interrupteur à droite, à toute largeur. %>
+    <%# UDR-0080 §3.1, UDR-0082 §3.1 : sans logo ; l'avatar ouvre le panneau du compte, l'aide et l'interrupteur à droite, à toute largeur. %>
     <div class="flex h-full items-center justify-between gap-3 px-gutter lg:px-8">
       <%= render "shared/navigation/account_panel", user: %>
       <div class="flex items-center gap-1">
@@ -16,7 +16,7 @@
     <%# Sous lg, l'avatar se colle au bord droit (pr-2). %>
     <div class="flex h-full items-center justify-between gap-3 px-gutter max-lg:pr-2 lg:px-8">
       <%= link_to home_path_for(user.role), class: "flex items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-9 rounded-sm" %>
+        <%= image_tag brand_logo, alt: "", class: "size-9 rounded-sm" %>
         <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
       <% end %>
       <div class="flex items-center gap-3">

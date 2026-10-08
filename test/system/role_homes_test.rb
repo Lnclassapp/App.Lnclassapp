@@ -7,7 +7,7 @@ require "application_system_test_case"
 # an exercise is the only assignable kind: two exercises of the sheet are assigned.
 # AN-22 (chantier annonces, UDR-0071 §3.1): « Annonces » closes the navigation of the teacher and of the direction, and the
 # secondary list of the team; the student has none.
-# UDR-0080 §3.1, §3.2 (app-android), UDR-0081 §3.1, §3.2 (Lnclass Teacher): the student's and the teacher's header has
+# UDR-0080 §3.1, §3.2 (app-android), UDR-0082 §3.1, §3.2 (Lnclass Teacher): the student's and the teacher's header has
 # no logo and no account menu; they come back home by « Accueil » and sign out from the account panel opened by the avatar.
 class RoleHomesTest < ApplicationSystemTestCase
   setup do
@@ -15,7 +15,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     tle = create_level(name: "Tle", position: 7)
     drena = create_drena(name: "Abidjan 1")
     school = create_school(drena:, name: "Lycée Classique d'Abidjan")
-    @classroom = create_classroom(school:, level: tle, name: "Tle D 1", join_code: "kfm37")
+    @classroom = create_classroom(school:, level: tle, name: "Tle D 1")
     @teacher = create_teacher(school:, material: svt, classrooms: [ @classroom ], first_name: "Yao")
     @student = create_student(classroom: @classroom, first_name: "Aya")
     @school_admin = create_school_admin(school:, first_name: "Mariam")
@@ -37,7 +37,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     sign_in_as @student
 
     assert_home student_home_path, greeting: I18n.t("classroom.student_homes.show.greeting", name: "Aya")
-    assert_text "KFM37"
+    assert_selector "#student_home_classroom", text: "Tle D 1"
     within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
     assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path }
     assert_signs_out_from_panel
@@ -107,7 +107,7 @@ class RoleHomesTest < ApplicationSystemTestCase
 
   # Chantier tests-instables: back to a home already visited, Turbo first draws its cached copy (a preview), then the
   # page received. On a slow network, the account menu opened on the preview vanished with it.
-  # The direction: the student's and the teacher's header have neither logo nor account menu (UDR-0080 §3.1, UDR-0081 §3.1).
+  # The direction: the student's and the teacher's header have neither logo nor account menu (UDR-0080 §3.1, UDR-0082 §3.1).
   test "back home by the logo on a slow network, the account menu opens on the page received, not on its preview" do
     sign_in_as @school_admin
     assert_home school_admin_classrooms_path
@@ -193,7 +193,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path new_session_path
   end
 
-  # UDR-0080 §3.2, UDR-0081 §3.2: the student's and the teacher's « Mon profil » and « Se déconnecter » live in the
+  # UDR-0080 §3.2, UDR-0082 §3.2: the student's and the teacher's « Mon profil » and « Se déconnecter » live in the
   # account panel opened by the avatar.
   def assert_signs_out_from_panel
     with_account_panel { assert_selector "nav a:not([aria-current])", text: tn(:profile) }

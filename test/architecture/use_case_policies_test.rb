@@ -14,8 +14,9 @@ class UseCasePoliciesTest < ActiveSupport::TestCase
     "UseCases::Communication::PublishScheduledMessages" => "job sans acteur : droit vérifié à la programmation, exposition bornée par la date de fin, retrait possible (ADR-0078 §6)"
   }.freeze
   # Modules shared by use cases, not use cases: the adapter contract of the import engine, the session renewal of the
-  # profile (ADR-0055).
-  CONTRACTS = %w[UseCases::Catalog::Importer UseCases::Identity::SessionRenewal].freeze
+  # profile (ADR-0055), the classroom a student designates (ADR-0085 §4.2: RegisterStudent and JoinAsStudent, which
+  # both inject JoinPolicy, call it).
+  CONTRACTS = %w[UseCases::Catalog::Importer UseCases::Identity::SessionRenewal UseCases::Classroom::ClassroomDesignation].freeze
   REGISTRY = [ "Entities::Catalog::ImportKind.fetch(", ".authorize(actor:" ].freeze
 
   def use_cases

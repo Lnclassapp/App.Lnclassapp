@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/dashboards/_key_figures — chiffres « Sur la période » (flux) puis « En ce moment » (stocks) %>
 <%# Rôle : inscrits, élèves actifs, exercices terminés et réussite, assignations ; comptes, classes, couverture des établissements %>
-<%# ADR  : 0062, 0082, 0084, 0085 · UDR : 0049, 0054 (infobulle de « Réussite moyenne », panneau dans le flux de la tuile), 0078 (§3.3) %>
+<%# ADR  : 0062, 0082, 0084, 0086 · UDR : 0049, 0054 (infobulle de « Réussite moyenne », panneau dans le flux de la tuile), 0078 (§3.3) %>
 <%# locals: (dashboard:, period_scope:) -%>
 <% tile = ->(key, count, hint = nil) { render "figure", key:, count:, hint:, label: t(".#{key}", count: count || 0) } %>
 <% rate = dashboard.average_score ? t(".success_rate", rate: dashboard.average_score) : t(".no_success_rate") %>
@@ -18,7 +18,7 @@
     </li>
     <%= tile.call(:assignments, dashboard.assignments_count, t(".assignments_hint")) %>
     <%# UDR-0078 §3.3 : ouvertures depuis l'app installée, par rôle ; un zéro s'affiche, il dit que l'installation ne prend pas.
-        ADR-0084 §4.6, ADR-0085 §4.6 : chaque part Android suit la ligne de son rôle, sous elle dès deux colonnes. %>
+        ADR-0084 §4.6, ADR-0086 §4.6 : chaque part Android suit la ligne de son rôle, sous elle dès deux colonnes. %>
     <li id="figure_app_openers" class="col-span-2 rounded-ln bg-mist px-3 py-4 lg:col-span-4">
       <span class="text-sm text-mute"><%= t(".app_openers_title") %></span>
       <%= ui_info_tip t(".app_openers_tip"), label: t(".app_openers_tip_label") %>

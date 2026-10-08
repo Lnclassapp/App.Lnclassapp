@@ -74,7 +74,7 @@ module AppLnclassapp
     # fiche d'application ne lit pas les tokens CSS : la valeur vit ici, hors des vues (UDR-0005, pas d'hexadécimal).
     config.x.pwa = { theme_color: "#00a0ff", background_color: "#ffffff" }.freeze
 
-    # ADR-0084 §4.7, ADR-0085 §4.7 : les apps Android que ce site autorise à ouvrir ses liens (/.well-known/assetlinks.json).
+    # ADR-0084 §4.7, ADR-0086 §4.7 : les apps Android que ce site autorise à ouvrir ses liens (/.well-known/assetlinks.json).
     # Les identifiants dépendent de l'environnement (la recette installe com.lnclass.student.recette) ; les empreintes SHA-256
     # des certificats de signature, communes aux deux apps et séparées par des virgules, sont publiques : aucune clé ici.
     # store_url : la fiche Play Store de l'app, vers laquelle le refus de l'autre app envoie ; vide, le refus mène au site.

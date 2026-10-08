@@ -54,10 +54,9 @@ unless school
     generated = Entities::Classroom::DefaultClassroomPlan.rows_for(
       school: created, lookup: Repositories::Catalog::TaxonomyRepository.new.lookup, plan: Repositories::Classroom::ClassroomPlanRepository.new.plan
     ).rows
-    codes = Entities::Classroom::JoinCode.generate_unique(count: generated.size, taken: classrooms.taken_join_codes)
-    classrooms.insert_generated(rows: generated.zip(codes).map { |row, join_code|
+    classrooms.insert_generated(rows: generated.map { |row|
       row.merge(public_id: SecureRandom.base58(14), school_id: created.id,
-                school_year: Entities::Classroom::SchoolYear.current(clock.now.to_date), join_code:)
+                school_year: Entities::Classroom::SchoolYear.current(clock.now.to_date))
     }, at: clock.now)
   end
   school = Orm::School.find_by!(name: "Collège Saint Michel de Tiassalé")
@@ -205,7 +204,8 @@ students = [ %w[Ahoua Kouadio male], %w[Aka Bénédicte female], %w[Assi Franck 
            .each_with_index.map do |(last_name, first_name, gender), index|
   student = account.call(format("0110000%03d", index + 1), role: "student", last_name:, first_name:, gender:)
   unless Orm::ClassroomStudent.exists?(student_id: student.id)
-    Orm::ClassroomStudent.create!(student_id: student.id, classroom:, primary: true, joined_at: START - rand(1..5).days)
+    Orm::ClassroomStudent.create!(student_id: student.id, classroom:, primary: true, joined_at: START - rand(1..5).days,
+                                  joined_via: "standard")
   end
   student
 end

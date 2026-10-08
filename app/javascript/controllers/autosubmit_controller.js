@@ -1,5 +1,5 @@
 // ⚡ FRONT · autosubmit_controller — envoie le formulaire, une seule fois, dès que la saisie correspond au motif
-// Rôle : code du second facteur (6 chiffres), code de /join ; le bouton d'envoi reste (sans JavaScript, rien ne change)
+// Rôle : code du second facteur (6 chiffres) ; le bouton d'envoi reste (sans JavaScript, rien ne change)
 // UDR  : 0054 (§3.6) · verrou : un envoi à la fois, qu'il vienne du contrôleur, d'Entrée ou du bouton
 import { Controller } from "@hotwired/stimulus"
 

@@ -243,7 +243,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     assert_equal Query::AppOpeners.new(students: 4, teachers: 1, android_students: 4, android_teachers: 0), dashboard(period: "30d").app_openers
   end
 
-  # CA-T5 (ADR-0085 §4.6): the teachers who opened Lnclass Teacher in the period, a part of the teachers who opened an
+  # CA-T5 (ADR-0086 §4.6): the teachers who opened Lnclass Teacher in the period, a part of the teachers who opened an
   # installed app, read by the same grouped query; the students' Android part stays theirs.
   test "app openers count the teachers who opened Lnclass Teacher in the period, within the installed app's teachers" do
     since = Period.parse("7d", today: Date.current).since.in_time_zone
@@ -291,8 +291,8 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     placed_student(first_class).tap { create_exercise_session(student: it, started_at: 1.day.ago) }
     placed_student(second_class).tap { create_exercise_session(student: it, started_at: 40.days.ago) }
     twice = placed_student(first_class).tap { create_exercise_session(student: it, started_at: 2.days.ago) }
-    Orm::ClassroomStudent.create!(classroom: there_class, student: twice, primary: false, joined_at: Time.current)
-    create_student.tap { Orm::ClassroomStudent.create!(classroom: first_class, student: it, primary: false, joined_at: Time.current) }
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: there_class, student: twice, primary: false, joined_at: Time.current)
+    create_student.tap { Orm::ClassroomStudent.create!(joined_via: "standard", classroom: first_class, student: it, primary: false, joined_at: Time.current) }
     placed_student(create_classroom(school: here_school, level: first, status: "archived"))
     placed_student(create_classroom(school: here_school, level: first, school_year: "2020-2021"))
     placed_student(first_class, anonymized_at: Time.current).tap { create_exercise_session(student: it, started_at: 1.day.ago) }
@@ -439,7 +439,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
     assert_equal small, count_queries { dashboard(drena: nil) }
     assert_equal filtered_small, count_queries { dashboard(drena: Orm::Drena.first.public_id) }
-    # ADR-0082 §4.4: one grouped query more for the app openers (16 and 19 before); ADR-0084 §4.6, ADR-0085 §4.6: the
+    # ADR-0082 §4.4: one grouped query more for the app openers (16 and 19 before); ADR-0084 §4.6, ADR-0086 §4.6: the
     # Android parts of the students and of the teachers are read by that same query.
     assert_equal [ 17, 20 ], [ small, filtered_small ], "national, then under a DRENA filter with its school rows (ADR-0062)"
   end

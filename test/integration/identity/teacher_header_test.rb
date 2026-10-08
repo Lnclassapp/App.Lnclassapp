@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-T6 (app-android, Lnclass Teacher) — UDR-0081 §3.1, §3.2. The teacher gets the student's header: no logo, no role
+# CA-T6 (app-android, Lnclass Teacher) — UDR-0082 §3.1, §3.2. The teacher gets the student's header: no logo, no role
 # badge, the avatar on the left opens the account panel (a link to /teachers/menu without JavaScript), « Besoin
 # d'aide ? » and the light / dark switch on the right. The panel lists « Mon profil » then « Inviter un collègue ».
 # The direction keeps the header it had: logo, role badge, account menu.

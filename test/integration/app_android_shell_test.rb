@@ -1,6 +1,6 @@
 require "test_helper"
 
-# Chantier app-android, Lot B — CA-1 (ADR-0084 §4.2, UDR-0080 §3.3); Lnclass Teacher, Lot TB — CA-T1 (ADR-0085 §4.2).
+# Chantier app-android, Lot B — CA-1 (ADR-0084 §4.2, UDR-0080 §3.3); Lnclass Teacher, Lot TB — CA-T1 (ADR-0086 §4.2).
 # Served to an Android shell, a page of the shell layout loses the site's navigation (header, sidebar, bottom bar) and the
 # install pop-up; a student's or a teacher's page declares the bridge element that feeds the native top bar, with the
 # address of their account panel. The same page in a browser is unchanged.
@@ -108,7 +108,7 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
     assert_select BRIDGE, 0
   end
 
-  test "ADR-0085 §4.2 — the direction has no app of its own: no bridge element, even through a shell" do
+  test "ADR-0086 §4.2 — the direction has no app of its own: no bridge element, even through a shell" do
     sign_in_as create_school_admin
 
     get school_admin_classrooms_path, headers: { "User-Agent" => TEACHER_APP }

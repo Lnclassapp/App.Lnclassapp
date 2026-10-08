@@ -131,7 +131,7 @@ module UseCases
         assert authenticate(attempts: FakeAttempts.new(count: 5, last_failed_at: NOW - 16.minutes)).success?
       end
 
-      # ADR-0084 §4.5, ADR-0085 §4.5, CA-3, CA-T3: in an Android shell, the role is checked only once the PIN is right; the
+      # ADR-0084 §4.5, ADR-0086 §4.5, CA-3, CA-T3: in an Android shell, the role is checked only once the PIN is right; the
       # refusal names the app to propose.
       ROLE_ATTRIBUTES = { "student" => { role: "student" }, "teacher" => { role: "teacher" },
                           "school_admin" => { role: "school_admin" }, "team" => { role: "team", team_role: "admin" } }.freeze

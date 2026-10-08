@@ -95,7 +95,7 @@ kotlin {
     }
 }
 
-// Hotwire Native, Material et l'écran de démarrage viennent avec le socle (ADR-0085 §4.8).
+// Hotwire Native, Material et l'écran de démarrage viennent avec le socle (ADR-0086 §4.8).
 dependencies {
     implementation(project(":shell"))
 }

@@ -1,19 +1,44 @@
-<%# 🌐 UI · school/drena_schools/index — frame « schools » : liste des établissements actifs d'une DRENA %>
-<%# Rôle : servi seul au changement de DRENA, ou dans un formulaire (scope de ses champs) ; la DRENA voyage avec la liste ; invite gardée après un 422 %>
-<%# ADR  : 0029, 0030, 0083 · UDR : 0024, 0079 %>
-<%# locals: (schools:, drena_public_id:, registration: nil, scope: :teacher_registration) -%>
-<%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50",
-                               data: { "school--drena-schools-target": "frame" } do %>
-  <%= fields scope, model: registration do |fields| %>
-    <% if drena_public_id.present? %>
-      <%= fields.hidden_field :drena_public_id, value: drena_public_id, id: nil %>
+<%# 🌐 UI · school/drena_schools/index — frame « schools » (enseignant) ou « picker_schools » (cascade élève) : établissements actifs d'une DRENA %>
+<%# Rôle : servi seul au changement de DRENA, ou rendu dans un formulaire (scope de ses champs) ; enseignant : la DRENA voyage avec la liste, invite gardée après un 422 %>
+<%# ADR  : 0029, 0030, 0083, 0085 · UDR : 0024, 0079, 0081 (§3.3) %>
+<%# locals: (schools:, drena_public_id:, registration: nil, scope: :teacher_registration, picker: false, rate_limited: false) -%>
+<% if picker %>
+  <%# Cascade élève : vide sans DRENA, « introuvable » sans établissement, erreur au-delà du débit (UDR-0081 §3.3). %>
+  <%= turbo_frame_tag "picker_schools", class: "block transition-opacity aria-busy:opacity-50", "aria-live": "polite",
+                                        data: { "classroom--class-picker-target": "schools",
+                                                action: "turbo:frame-missing->classroom--class-picker#missing " \
+                                                        "turbo:fetch-request-error->classroom--class-picker#missing " \
+                                                        "turbo:frame-load->classroom--class-picker#sync" } do %>
+    <% if rate_limited %>
+      <%= ui_error_state title: t("classroom.student_registrations.class_picker.load_error"),
+                         message: t("classroom.student_registrations.class_picker.rate_limited"),
+                         retry_href: request.fullpath, retry_label: t("classroom.student_registrations.class_picker.retry") %>
+    <% elsif schools&.empty? %>
+      <%= ui_empty_state title: t("classroom.student_registrations.class_picker.not_found_title"),
+                         description: t("classroom.student_registrations.class_picker.not_found_description"), icon: "academic-cap" %>
+    <% elsif schools %>
+      <%= fields scope, model: registration do |fields| %>
+        <%= ui_field fields, :school_public_id, as: :select, label: t(".label"), required: true,
+                     choices: schools.map { [ it.name, it.public_id ] },
+                     prompt: t("classroom.student_registrations.class_picker.school_prompt"),
+                     data: { action: "change->classroom--class-picker#loadLevels" } %>
+      <% end %>
     <% end %>
-    <%# Rails n'écrit l'invite que sans valeur : un établissement envoyé puis sorti de la liste (422) laisserait le premier
-        lycée présélectionné en silence. L'invite reste alors, sélectionnée. %>
-    <% sent = registration&.school_public_id.presence %>
-    <% prompt_choice = [ [ t(".prompt"), "", { selected: true } ] ] if sent && schools.none? { it.public_id == sent } %>
-    <%= ui_field fields, :school_public_id, as: :select, label: t(".label"), required: true,
-                 choices: Array(prompt_choice) + schools.map { [ it.name, it.public_id ] }, prompt: t(".prompt"),
-                 disabled: schools.empty?, hint: (t(drena_public_id.present? ? ".none" : ".choose_drena_first") if schools.empty?) %>
+  <% end %>
+<% else %>
+  <%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50",
+                                 data: { "school--drena-schools-target": "frame" } do %>
+    <%= fields scope, model: registration do |fields| %>
+      <% if drena_public_id.present? %>
+        <%= fields.hidden_field :drena_public_id, value: drena_public_id, id: nil %>
+      <% end %>
+      <%# Rails n'écrit l'invite que sans valeur : un établissement envoyé puis sorti de la liste (422) laisserait le premier
+          lycée présélectionné en silence. L'invite reste alors, sélectionnée. %>
+      <% sent = registration&.school_public_id.presence %>
+      <% prompt_choice = [ [ t(".prompt"), "", { selected: true } ] ] if sent && schools.none? { it.public_id == sent } %>
+      <%= ui_field fields, :school_public_id, as: :select, label: t(".label"), required: true,
+                   choices: Array(prompt_choice) + schools.map { [ it.name, it.public_id ] }, prompt: t(".prompt"),
+                   disabled: schools.empty?, hint: (t(drena_public_id.present? ? ".none" : ".choose_drena_first") if schools.empty?) %>
+    <% end %>
   <% end %>
 <% end %>

@@ -46,7 +46,7 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
     end
   end
 
-  # CA-T6 (Lnclass Teacher) — UDR-0081 §3.1, §3.2: the same header for the teacher; the panel lists « Mon profil » then
+  # CA-T6 (Lnclass Teacher) — UDR-0082 §3.1, §3.2: the same header for the teacher; the panel lists « Mon profil » then
   # « Inviter un collègue ». The opening and closing mechanics are those checked above.
   test "CA-T6: at 390 px, the teacher's header holds on one line and the avatar opens the panel with Invite" do
     sign_in_as create_teacher(first_name: "Awa", last_name: "Traoré")

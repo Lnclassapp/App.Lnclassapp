@@ -1,6 +1,6 @@
 # Plan — « Lnclass Teacher » (app Android des enseignants)
 
-> PRD : [prd-teacher.md](prd-teacher.md) · ADR-0085 · UDR-0081. Même découpage que l'app élèves ([plan.md](plan.md)) : un socle, puis cinq lots en parallèle.
+> PRD : [prd-teacher.md](prd-teacher.md) · ADR-0086 · UDR-0082. Même découpage que l'app élèves ([plan.md](plan.md)) : un socle, puis cinq lots en parallèle.
 
 ```
 Lot T0 (socle) ──┬── Lot TA  en-tête et panneau de l'enseignant (site)
@@ -22,7 +22,7 @@ Le Lot T0 gèle `LNCLASS_APPS` (`:android_teacher`), la route `teacher_menu`, la
   - `config/application.rb` : `config.x.android = { apps: { student: { package_name:, store_url: }, teacher: { package_name:, store_url: } }, cert_fingerprints: }`, lus dans `ANDROID_PACKAGE_NAME`, `ANDROID_TEACHER_PACKAGE_NAME`, `ANDROID_STUDENT_STORE_URL`, `ANDROID_TEACHER_STORE_URL`, `ANDROID_CERT_FINGERPRINTS` ;
   - `app/controllers/identity/asset_links_controller.rb` : adaptation minimale à la nouvelle forme, une déclaration par app ;
   - `docs/guide/configuration.md` : les nouvelles variables ;
-  - les locales de l'UDR-0081 : panneau de l'enseignant (`invite`), messages de refus des §3.4, `app_openers_android_teachers`.
+  - les locales de l'UDR-0082 : panneau de l'enseignant (`invite`), messages de refus des §3.4, `app_openers_android_teachers`.
 - **Tests** : `test/controllers/application_controller_test.rb` (jeton enseignants), `test/routing/app_android_routes_test.rb` (`teacher_menu`), `test/controllers/identity/asset_links_controller_test.rb` (deux déclarations).
 - **Done quand** : la suite du périmètre est verte et les contrats sont gelés.
 
@@ -34,12 +34,12 @@ Le Lot T0 gèle `LNCLASS_APPS` (`:android_teacher`), la route `teacher_menu`, la
 
 ## Lot TB — Pages servies à la coque enseignants
 
-- **Fichiers** : `app/views/layouts/shell.html.erb` (pont pour l'enseignant, `teacher_menu_path`), `public/android/v1/path-configuration.json` (règle de l'ADR-0085 §4.3).
+- **Fichiers** : `app/views/layouts/shell.html.erb` (pont pour l'enseignant, `teacher_menu_path`), `public/android/v1/path-configuration.json` (règle de l'ADR-0086 §4.3).
 - **Tests** : `test/integration/app_android_shell_test.rb` (CA-T1), `test/integration/app_android_path_configuration_test.rb` (CA-T2).
 
 ## Lot TC — Refus croisés à la connexion
 
-- **Fichiers** : `app/domain/dtos/identity/credentials_input.rb` (`android_teacher`), `app/domain/use_cases/identity/authenticate.rb` (`WRONG_APP_FOR`, l'app proposée dans les erreurs), `app/controllers/identity/sessions_controller.rb`, `app/views/identity/sessions/new.html.erb` (les quatre messages de l'UDR-0081 §3.4, liens Play Store ou site).
+- **Fichiers** : `app/domain/dtos/identity/credentials_input.rb` (`android_teacher`), `app/domain/use_cases/identity/authenticate.rb` (`WRONG_APP_FOR`, l'app proposée dans les erreurs), `app/controllers/identity/sessions_controller.rb`, `app/views/identity/sessions/new.html.erb` (les quatre messages de l'UDR-0082 §3.4, liens Play Store ou site).
 - **Tests** : `test/domain/use_cases/identity/authenticate_test.rb`, `test/controllers/identity/sessions_controller_test.rb` (CA-T3, CA-T4).
 
 ## Lot TD — Ouverture comptée, pilotage

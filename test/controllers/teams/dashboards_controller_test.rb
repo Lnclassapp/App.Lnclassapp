@@ -133,7 +133,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-T5 (ADR-0085 §4.6): the tile tells how many of these teachers opened Lnclass Teacher in the period, under their
+  # CA-T5 (ADR-0086 §4.6): the tile tells how many of these teachers opened Lnclass Teacher in the period, under their
   # line, read by the same grouped query: the page makes as many queries with or without them.
   test "CA-T5: the app openers tile reads « dont app Android : 1 enseignant », with as many queries as without" do
     sign_in_as @member
@@ -377,7 +377,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @member
     get team_dashboard_path(period: "year", drena: abidjan.public_id)
     create_student(classroom:).tap do |twice|
-      Orm::ClassroomStudent.create!(classroom: create_classroom(school:), student: twice, primary: false, joined_at: Time.current)
+      Orm::ClassroomStudent.create!(joined_via: "standard", classroom: create_classroom(school:), student: twice, primary: false, joined_at: Time.current)
     end
     create_student(classroom: create_classroom(school: create_school(drena: abidjan)))
 

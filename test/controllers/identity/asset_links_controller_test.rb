@@ -1,6 +1,6 @@
 require "test_helper"
 
-# Chantier app-android, Lot B — CA-9 (ADR-0084 §4.7), CA-T7 (ADR-0085 §4.7). /.well-known/assetlinks.json is public and
+# Chantier app-android, Lot B — CA-9 (ADR-0084 §4.7), CA-T7 (ADR-0086 §4.7). /.well-known/assetlinks.json is public and
 # declares, from config.x.android, the two Android apps allowed to open the site's links; without a fingerprint, none.
 class Identity::AssetLinksControllerTest < ActionDispatch::IntegrationTest
   FINGERPRINTS = [ "AB:CD:EF:01:23:45:67:89:AB:CD:EF:01:23:45:67:89:AB:CD:EF:01:23:45:67:89:AB:CD:EF:01:23:45:67:89",

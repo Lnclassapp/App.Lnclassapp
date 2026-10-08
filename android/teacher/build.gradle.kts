@@ -1,4 +1,4 @@
-// App « Lnclass Teacher » des enseignants (ADR-0085) : une coque Hotwire Native qui affiche les pages du site, sur le
+// App « Lnclass Teacher » des enseignants (ADR-0086) : une coque Hotwire Native qui affiche les pages du site, sur le
 // socle partagé avec l'app élèves.
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -97,7 +97,7 @@ kotlin {
     }
 }
 
-// Hotwire Native, Material et l'écran de démarrage viennent avec le socle (ADR-0085 §4.8).
+// Hotwire Native, Material et l'écran de démarrage viennent avec le socle (ADR-0086 §4.8).
 dependencies {
     implementation(project(":shell"))
 }

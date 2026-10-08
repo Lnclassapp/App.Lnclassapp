@@ -2,7 +2,7 @@ require "test_helper"
 
 # CA-7 (app-android) — UDR-0080 §3.1. The student's header has no logo: the avatar on the left opens the account panel
 # (a link to /students/menu without JavaScript), « Besoin d'aide ? » and the light / dark switch on the right, at every
-# width. The teacher gets the same header (UDR-0081, test/integration/identity/teacher_header_test.rb, which also checks
+# width. The teacher gets the same header (UDR-0082, test/integration/identity/teacher_header_test.rb, which also checks
 # that the direction keeps the header it had).
 class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
   TRIGGER = "a[href='/students/menu'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=account_panel]".freeze

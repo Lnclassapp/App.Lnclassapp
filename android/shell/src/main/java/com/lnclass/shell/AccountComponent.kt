@@ -7,7 +7,7 @@ import dev.hotwire.core.bridge.Message
 import dev.hotwire.navigation.destinations.HotwireDestination
 import org.json.JSONObject
 
-// Composant de pont « account » (ADR-0084 §4.2, ADR-0085 §4.2) : la page envoie, à « connect », de quoi dessiner
+// Composant de pont « account » (ADR-0084 §4.2, ADR-0086 §4.2) : la page envoie, à « connect », de quoi dessiner
 // l'avatar et les adresses du panneau du compte et de l'aide ; la barre du haut native les affiche.
 class AccountComponent(
     name: String,

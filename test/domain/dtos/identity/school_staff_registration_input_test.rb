@@ -39,11 +39,10 @@ module Dtos
         assert errors(pin_confirmation: "1357").of_kind?(:pin_confirmation, :confirmation)
       end
 
-      test "un code absent, mal formé ou de classe a chacun son erreur" do
+      test "un code absent ou mal formé a chacun son erreur ; un ancien code de classe est mal formé" do
         assert errors(school_code: " ").of_kind?(:school_code, :blank)
         assert errors(school_code: "k7m4q").of_kind?(:school_code, :invalid)
-        assert errors(school_code: "KFM 37").of_kind?(:school_code, :classroom_code)
-        assert_not errors(school_code: "KFM 37").of_kind?(:school_code, :invalid)
+        assert errors(school_code: "KFM 37").of_kind?(:school_code, :invalid)
       end
 
       test "n'a ni rôle ni matière" do

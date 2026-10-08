@@ -1,11 +1,11 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
 <%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile) ; dans une coque Android, le contenu seul et le pont du compte %>
-<%# UDR  : 0006, 0080 (§3.3) · ADR : 0084 (§4.2), 0085 (§4.2) ; exige helper_method :shell_user (NavigationHelper::ShellUser) %>
+<%# UDR  : 0006, 0080 (§3.3) · ADR : 0084 (§4.2), 0086 (§4.2) ; exige helper_method :shell_user (NavigationHelper::ShellUser) %>
 <% in_app = lnclass_app? %>
 <% content_for :body do %>
   <% if in_app %>
     <%# ADR-0084 §4.2 : la coque porte ses propres barres ; aucune navigation du site, donc ni lien d'évitement ni marge réservée. %>
-    <%# ADR-0085 §4.2 : le pont du compte, pour les rôles qui ont une coque ; l'adresse est celle de leur panneau. %>
+    <%# ADR-0086 §4.2 : le pont du compte, pour les rôles qui ont une coque ; l'adresse est celle de leur panneau. %>
     <% if account_panel?(shell_user.role) %>
       <%= tag.div hidden: true, data: { controller: "bridge--account",
                                         bridge__account_initials_value: avatar_initials(shell_user.name),

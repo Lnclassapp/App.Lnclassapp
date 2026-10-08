@@ -1,9 +1,9 @@
 # 🌐 DELIVERY · Identity::SessionsController
 # Rôle : connexion par numéro et PIN, déconnexion ; échec re-rendu en 422 (le champ PIN ne renvoie jamais sa valeur), dont le refus d'une coque Android
-# ADR  : 0026, 0050, 0084 (§4.5), 0085 (§4.5) · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique), 0080, 0081 (§3.4)
+# ADR  : 0026, 0050, 0084 (§4.5), 0086 (§4.5) · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique), 0080, 0082 (§3.4)
 module Identity
   class SessionsController < ApplicationController
-    # Lien du refus : la fiche Play Store de l'app proposée quand elle est publiée, sinon le site (ADR-0085 §4.5).
+    # Lien du refus : la fiche Play Store de l'app proposée quand elle est publiée, sinon le site (ADR-0086 §4.5).
     STORE_APPS = { android_student: :student, android_teacher: :teacher }.freeze
     SITE_URL = "https://lnclass.com".freeze
 
@@ -50,7 +50,7 @@ module Identity
       result.code == :conflict && result.errors[:base] == [ UseCases::Identity::Authenticate::WRONG_APP ]
     end
 
-    # UDR-0081 §3.4 : le formulaire revient vide, ni numéro ni PIN, sous le message de la coque qui nomme la bonne app.
+    # UDR-0082 §3.4 : le formulaire revient vide, ni numéro ni PIN, sous le message de la coque qui nomme la bonne app.
     def render_wrong_app(app)
       @wrong_app = { shell: lnclass_app, app:, url: wrong_app_url(app) }
       @form = Dtos::Identity::CredentialsInput.new

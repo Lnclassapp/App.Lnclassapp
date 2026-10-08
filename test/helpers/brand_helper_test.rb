@@ -1,6 +1,6 @@
 require "test_helper"
 
-# Porteur, 2026-10-08 (ADR-0085, UDR-0081) : le baobab au bras levé sur orange dans la coque enseignants et sur les pages
+# Porteur, 2026-10-08 (ADR-0086, UDR-0082) : le baobab au bras levé sur orange dans la coque enseignants et sur les pages
 # des enseignants ; ailleurs, le baobab sur bleu.
 class BrandHelperTest < ActionView::TestCase
   attr_accessor :lnclass_app

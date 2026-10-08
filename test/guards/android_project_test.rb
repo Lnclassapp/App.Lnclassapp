@@ -1,4 +1,4 @@
-# Pure Ruby, no compilation: the Android shells (android/, ADR-0084 §4.8, ADR-0085 §4.8) keep the contract the site
+# Pure Ruby, no compilation: the Android shells (android/, ADR-0084 §4.8, ADR-0086 §4.8) keep the contract the site
 # relies on (CA-10, CA-T8). The APKs themselves are built by bin/android-build, outside the Rails CI.
 require "minitest/autorun"
 require "json"
@@ -8,13 +8,14 @@ class AndroidProjectTest < Minitest::Test
   ROOT = File.expand_path("../..", __dir__)
   SERVED = "public/android/v1/path-configuration.json"
 
-  # One entry per app module: what each shell must carry (ADR-0084 §4.4 and §4.7, ADR-0085 §4.3 and §4.7).
+  # One entry per app module: what each shell must carry (ADR-0084 §4.4 and §4.7, ADR-0086 §4.3 and §4.7).
   APPS = {
     "student" => {
       application_id: "com.lnclass.student", app_name: "Lnclass", shell: :android_student,
       application_class: "StudentApplication", menu: "/students/menu",
       tabs: [ "/?source=android", "/courses", "/students/classroom" ],
-      links: [ %(<data android:pathPrefix="/c/" />), %(<data android:path="/join" />) ]
+      links: [ %(<data android:pathPrefix="/c/" />), %(<data android:path="/join" />),
+               %(<data android:path="/student-signup" />) ]
     },
     "teacher" => {
       application_id: "com.lnclass.teacher", app_name: "Lnclass Teacher", shell: :android_teacher,
@@ -62,7 +63,7 @@ class AndroidProjectTest < Minitest::Test
     end
   end
 
-  # ADR-0084 §4.1, ADR-0085 §4.1 : the token each shell adds is the one ApplicationController#lnclass_app looks for.
+  # ADR-0084 §4.1, ADR-0086 §4.1 : the token each shell adds is the one ApplicationController#lnclass_app looks for.
   def test_the_user_agent_carries_the_token_the_site_recognizes
     controller = read("app/controllers/application_controller.rb")
 
@@ -111,7 +112,7 @@ class AndroidProjectTest < Minitest::Test
     assert_includes read("android/.gitignore").lines.map(&:chomp), "*.keystore"
   end
 
-  # ADR-0084 §4.3, ADR-0085 §4.3 : one file for both apps; each embedded copy, for an offline start, is the one the
+  # ADR-0084 §4.3, ADR-0086 §4.3 : one file for both apps; each embedded copy, for an offline start, is the one the
   # site serves.
   def test_the_embedded_path_configurations_are_the_one_the_site_serves
     served = JSON.parse(read(SERVED))

@@ -1,6 +1,6 @@
 # 🌐 UI · BrandHelper — le logo Lnclass à afficher : le baobab sur bleu, ou celui des enseignants
 # Rôle : dans la coque « Lnclass Teacher » et sur les pages des enseignants, le baobab au bras levé sur orange (porteur, 2026-10-08)
-# ADR  : 0085 · UDR : 0081
+# ADR  : 0086 · UDR : 0082
 module BrandHelper
   LOGOS = { default: "logo/lnclass.jpeg", teacher: "logo/lnclass-teacher.jpeg" }.freeze
 

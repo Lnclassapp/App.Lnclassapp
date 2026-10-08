@@ -25,7 +25,7 @@ class ThemePreferenceTest < ActionDispatch::IntegrationTest
     assert_select "html:not([data-theme])"
   end
 
-  # UDR-0080 §3.1, UDR-0081 §3.1: the student's and the teacher's header carries the switch at every width
+  # UDR-0080 §3.1, UDR-0082 §3.1: the student's and the teacher's header carries the switch at every width
   # (test/integration/identity/student_header_test.rb, teacher_header_test.rb).
   test "a signed-in direction member finds the switch next to the avatar on a wide screen, and in the profile below lg" do
     sign_in_as create_school_admin(first_name: "Awa")

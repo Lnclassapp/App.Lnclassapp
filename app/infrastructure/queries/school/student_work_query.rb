@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::StudentWorkQuery
-# Rôle : travail des élèves de la direction (DS-07 à DS-10) : chiffres de chaque classe de l'année, d'un niveau, puis des élèves
-# ADR  : 0006, 0043, 0062, 0065, 0067, 0072 · UDR : 0052, 0074 · rendu : standard ou remédiation ; requêtes en nombre fixe
+# Rôle : travail des élèves de la direction (DS-07 à DS-10) : chiffres de chaque classe de l'année, d'un niveau, puis des élèves (lien, nouveaux, retrait)
+# ADR  : 0006, 0043, 0062, 0065, 0067, 0072, 0085 · UDR : 0052, 0074, 0081 (§3.6, §3.7) · rendu : standard ou remédiation ; requêtes en nombre fixe
 module Queries
   module School
     class StudentWorkQuery
@@ -12,11 +12,24 @@ module Queries
       StudentRow = Data.define(:display_name, :submitted_count, :average_percent)
       # students_count : élèves présents distincts de l'établissement ; un élève de deux classes compte une fois (UDR-0074).
       Overview = Data.define(:school_name, :school_year, :students_count, :classrooms)
-      Detail = Data.define(:classroom, :students)
+      # Une ligne de la page d'une classe : le travail de l'élève (work), et ce qui sert à la gérer (UDR-0081 §3.7) : son
+      # public_id pour le retrait (ADR-0085 §4.5), sa voie d'arrivée (StudentArrivalChannel), nouveau ou non (ADR-0085 §4.4).
+      Member = Data.define(:public_id, :joined_via, :newcomer, :work) do
+        def display_name = work.display_name
+      end
+      # Ce que le bloc « Lien de la classe » lit (classroom/classrooms/_link, UDR-0081 §3.6).
+      Link = Data.define(:public_id, :name, :link_token)
+      # members : par nom ; students : leur travail, dans le même ordre.
+      Detail = Data.define(:classroom, :link, :members) do
+        def students = members.map(&:work)
+        def new_students_count = members.count(&:newcomer)
+      end
       # students_count : élèves présents distincts du niveau, même règle (phase 5, O1).
       LevelOverview = Data.define(:level_name, :level_slug, :students_count, :classrooms)
 
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name levels.name levels.slug].freeze
+      MEMBER_COLUMNS = %w[users.id users.public_id users.first_name users.last_name classroom_students.joined_via
+                          classroom_students.joined_at].freeze
       # Un élève présent : adhésion non quittée, compte non anonymisé (ADR-0065 §4).
       PRESENT = "JOIN classroom_students ON classroom_students.student_id = users.id AND classroom_students.left_at IS NULL"
       # Un devoir rendu : au moins une session terminée, rattachée à un devoir de la classe, quel que soit son kind : une
@@ -61,16 +74,17 @@ module Queries
 
       # → Detail | nil : nil pour une classe inconnue, archivée, d'une autre année ou d'un autre établissement.
       def classroom(school_id:, public_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
-        row = active_classrooms(school_id, school_year).where(public_id: public_id.to_s).pick(*CLASSROOM_COLUMNS)
+        row = active_classrooms(school_id, school_year).where(public_id: public_id.to_s)
+                                                       .pick(*CLASSROOM_COLUMNS, "classrooms.link_token")
         return if row.nil?
 
         students = present_students.where(classroom_students: { classroom_id: row.first })
-                                   .order(:last_name, :first_name, :id).pluck(:id, :first_name, :last_name)
+                                   .order(:last_name, :first_name, :id).pluck(*MEMBER_COLUMNS)
         assignments_count = Orm::ClassroomAssignment.where(classroom_id: row.first).count
         totals = totals_by("classroom_students.student_id", row.first)
 
         Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }),
-                   students: students.map { |id, first_name, last_name| student_row("#{first_name} #{last_name}", totals.fetch(id, Totals.none)) })
+                   link: Link.new(public_id: row[1], name: row[2], link_token: row.last), members: members(students, totals))
       end
 
       private
@@ -122,6 +136,15 @@ module Queries
         ClassroomRow.new(public_id:, name:, level_name:, level_slug:, students_count:, assignments_count:, submitted_count: total.submitted,
                          submission_rate: ((total.submitted * 100.0 / given).round unless given.zero?),
                          average_percent: (total.average if total.students >= MIN_STUDENTS_FOR_AVERAGE))
+      end
+
+      # ADR-0085 §4.4 : « nouveau » pendant ClassroomOverviewQuery::NEW_FOR, la règle de la page de l'enseignant.
+      def members(students, totals)
+        since = Time.current - Queries::Classroom::ClassroomOverviewQuery::NEW_FOR
+        students.map do |id, public_id, first_name, last_name, joined_via, joined_at|
+          Member.new(public_id:, joined_via:, newcomer: joined_at > since,
+                     work: student_row("#{first_name} #{last_name}", totals.fetch(id, Totals.none)))
+        end
       end
 
       def student_row(display_name, total)

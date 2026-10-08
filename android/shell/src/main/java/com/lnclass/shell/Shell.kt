@@ -8,7 +8,7 @@ import dev.hotwire.navigation.config.defaultFragmentDestination
 import dev.hotwire.navigation.config.registerBridgeComponents
 import dev.hotwire.navigation.config.registerFragmentDestinations
 
-// Configuration Hotwire Native commune aux deux apps, une fois au lancement (ADR-0084 §4.1 et §4.3, ADR-0085 §4.8).
+// Configuration Hotwire Native commune aux deux apps, une fois au lancement (ADR-0084 §4.1 et §4.3, ADR-0086 §4.8).
 // Chaque app passe ce qui lui est propre : son jeton User-Agent, l'adresse de son site, son panneau du compte.
 object Shell {
     internal var accountMenuPath = "/students/menu"

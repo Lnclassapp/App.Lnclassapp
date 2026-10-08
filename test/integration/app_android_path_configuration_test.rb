@@ -50,7 +50,7 @@ class AppAndroidPathConfigurationTest < ActionDispatch::IntegrationTest
     assert_equal "default", properties("/students/classroom")["context"]
   end
 
-  # Lnclass Teacher, Lot TB — CA-T2 (ADR-0085 §4.3): one file for both apps; the teacher's account panel, the new
+  # Lnclass Teacher, Lot TB — CA-T2 (ADR-0086 §4.3): one file for both apps; the teacher's account panel, the new
   # assignment and the session days open in a modal, the rest of the teacher's space in the tab.
   test "CA-T2 — the teacher's account panel, a new assignment and the session days open in a modal" do
     helpers = Rails.application.routes.url_helpers

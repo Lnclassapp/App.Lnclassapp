@@ -111,7 +111,7 @@ Les icônes sont celles du site (Heroicons `home`, `book-open`, `academic-cap`),
 ### 4.7 Liens ouverts dans l'app (ADR-0070 R2)
 
 - Le site sert `GET /.well-known/assetlinks.json` : l'identifiant `com.lnclass.student` et les empreintes SHA-256 des certificats autorisés, lues dans `config.x.android` (une variable d'environnement par environnement).
-- La coque déclare les chemins `/c/` et `/join` avec vérification automatique.
+- La coque déclare les chemins `/c/`, `/join` et `/student-signup` avec vérification automatique. Depuis l'ADR-0085 (inscription élève sans code), `/join` mène à `/student-signup`, où l'élève choisit sa classe (amendement du 2026-10-08).
 - Sans vérification (APK de test hors Play Store), ces liens s'ouvrent dans le navigateur. Le parcours reste complet.
 
 ### 4.8 Le code Android

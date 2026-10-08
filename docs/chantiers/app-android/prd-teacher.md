@@ -1,7 +1,7 @@
 # PRD — App Android « Lnclass Teacher » pour les enseignants
 
 > Les specs sont figées ici. Toute évolution se fait par modification explicite de ce fichier.
-> Périmètre : **l'app enseignants**, après l'app élèves ([prd.md](prd.md)). Décisions : [memo](memo.md#reprise-du-2026-10-08--lnclass-teacher), [ADR-0085](../../decisions/adr/0085-coque-android-enseignants-lnclass-teacher.md), [UDR-0081](../../decisions/udr/0081-en-tete-enseignant-et-barres-de-lnclass-teacher.md).
+> Périmètre : **l'app enseignants**, après l'app élèves ([prd.md](prd.md)). Décisions : [memo](memo.md#reprise-du-2026-10-08--lnclass-teacher), [ADR-0086](../../decisions/adr/0086-coque-android-enseignants-lnclass-teacher.md), [UDR-0082](../../decisions/udr/0082-en-tete-enseignant-et-barres-de-lnclass-teacher.md).
 
 ## 1. Contexte
 

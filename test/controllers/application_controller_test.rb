@@ -31,7 +31,7 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
   test "each shell is recognised by Hotwire Native and its own token, and nothing else is" do
     {
       APP => :android_student,
-      APP.sub("LnclassStudentAndroid", "LnclassTeacherAndroid") => :android_teacher, # ADR-0085 §4.1
+      APP.sub("LnclassStudentAndroid", "LnclassTeacherAndroid") => :android_teacher, # ADR-0086 §4.1
       "#{FLOOR} LnclassTeacherAndroid/1.0" => nil,
       "#{FLOOR} Hotwire Native Android" => nil,
       "#{FLOOR} LnclassStudentAndroid/1.0" => nil,

@@ -223,7 +223,7 @@ module Queries
       test "a student of two classrooms: his session on the assignment of the other classroom does not count in this one" do
         twice = student(scores: [ 60 ], answers: [ { 1 => false, 2 => false } ])
         other_classroom = create_classroom(school: @school)
-        Orm::ClassroomStudent.create!(classroom: other_classroom, student: twice, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other_classroom, student: twice, primary: false, joined_at: Time.current)
         other = create_assignment(classroom: other_classroom, assignable: @exercise)
         hand_in(twice, 100, answers: { 1 => true, 2 => true }, assignment: other)
 

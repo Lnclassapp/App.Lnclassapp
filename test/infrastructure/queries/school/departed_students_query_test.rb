@@ -22,7 +22,7 @@ module Queries
       end
 
       def member(student, classroom, joined_at: 1.year.ago, left_at: nil)
-        Orm::ClassroomStudent.create!(classroom:, student:, primary: left_at.nil?, joined_at:, left_at:)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student:, primary: left_at.nil?, joined_at:, left_at:)
       end
 
       def hand_in(student, classroom, score, **)
@@ -124,7 +124,7 @@ module Queries
 
       test "present only through a membership not left, in an active classroom of the year, primary or not" do
         secondary = create_student(last_name: "Secondaire").tap { member(it, @last_year, left_at: 1.month.ago) }
-        Orm::ClassroomStudent.create!(classroom: @this_year, student: secondary, primary: false, joined_at: 1.month.ago)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: @this_year, student: secondary, primary: false, joined_at: 1.month.ago)
         archived_this_year = create_classroom(school: @school, name: "1ère D 2", status: "archived", school_year: "2026-2027")
         create_student(last_name: "Archivée").tap { member(it, archived_this_year) }
         active_last_year = create_classroom(school: @school, name: "Tle A 1", school_year: "2025-2026")
