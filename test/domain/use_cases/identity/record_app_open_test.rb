@@ -4,6 +4,7 @@ module UseCases
   module Identity
     # ADR-0082 §4.3, CA-10: an opening from the installed app's icon dates the actor's own account at the server's
     # time. A storage failure never raises: it is reported as handled, and the caller carries on.
+    # ADR-0084 §4.6, CA-5: the channel (:pwa by default, or :android) is passed on to the port.
     class RecordAppOpenTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 10, 7, 8, 15)
       Clock = Data.define(:now)
@@ -20,10 +21,10 @@ module UseCases
           @openings = []
         end
 
-        def mark_app_opened(user_id:, at:)
+        def mark_app_opened(user_id:, at:, channel: :pwa)
           raise @failure if @failure
 
-          @openings << [ user_id, at ]
+          @openings << [ user_id, at, channel ]
           true
         end
       end
@@ -40,40 +41,56 @@ module UseCases
         @reporter = FakeReporter.new
       end
 
-      def record(actor: Entities::Identity::Actor.new(user_id: 7, role: :student), users: @users)
+      def record(actor: Entities::Identity::Actor.new(user_id: 7, role: :student), users: @users, **channel)
         RecordAppOpen.new(users:, policy: Policies::Identity::RecordAppOpenPolicy.new, clock: Clock.new(NOW),
-                          reporter: @reporter, recoverable: Unavailable).call(actor:)
+                          reporter: @reporter, recoverable: Unavailable).call(actor:, **channel)
       end
 
       test "a direction, a team member or no actor is refused: nothing is dated, and a refusal is not reported" do
         [ Entities::Identity::Actor.new(user_id: 8, role: :school_admin, school_id: 3),
           Entities::Identity::Actor.new(user_id: 9, role: :team, team_role: "admin"), nil ].each do |actor|
           assert_equal :forbidden, record(actor:).code, actor&.role.inspect
+          assert_equal :forbidden, record(actor:, channel: :android).code, actor&.role.inspect
         end
 
         assert_empty @users.openings
         assert_empty @reporter.reports
       end
 
-      test "dates the actor's own account at the clock's time" do
+      test "dates the actor's own account at the clock's time, on the installed web app's channel by default" do
         result = record
 
         assert result.success?
         assert result.value
-        assert_equal [ [ 7, NOW ] ], @users.openings
+        assert_equal [ [ 7, NOW, :pwa ] ], @users.openings
         assert_empty @reporter.reports
       end
 
       test "a teacher's opening is dated the same way, on their own account only" do
         assert record(actor: Entities::Identity::Actor.new(user_id: 12, role: :teacher, school_id: 3)).success?
 
-        assert_equal [ [ 12, NOW ] ], @users.openings
+        assert_equal [ [ 12, NOW, :pwa ] ], @users.openings
+      end
+
+      test "CA-5: an opening from the Android app is dated on the :android channel" do
+        result = record(channel: :android)
+
+        assert result.success?
+        assert result.value
+        assert_equal [ [ 7, NOW, :android ] ], @users.openings
+        assert_empty @reporter.reports
+      end
+
+      test "the :pwa channel can be named explicitly" do
+        assert record(channel: :pwa).success?
+
+        assert_equal [ [ 7, NOW, :pwa ] ], @users.openings
       end
 
       test "a storage failure never raises: nothing is dated, the error is reported as handled, with the account" do
         error = Unavailable.new("base indisponible")
 
-        result = record(users: FakeUsers.new(failure: error))
+        result = record(users: FakeUsers.new(failure: error), channel: :android)
 
         assert result.success?
         assert_not result.value
