@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Statut** | Proposé — **en attente** (chantier au backlog, décision du porteur du 2026-09-30) |
+| **Statut** | Accepté *(porteur, 2026-10-08)*, amendé le 2026-10-08 (voir en fin de document) |
 | **Date** | 2026-09-30 |
 | **Chantier** | [`docs/chantiers/app-android`](../../chantiers/app-android/memo.md) |
 | **Complète** | [ADR-0009](./0009-stack-frontend-vanilla-css-tailwind-hotwire.md) (rendu serveur Hotwire), [ADR-0051](./0051-navigateurs-supportes-et-budget-de-poids.md) (aucun élève refusé), [ADR-0050](./0050-authentification-et-session.md) (session) |
@@ -134,3 +134,17 @@ end
 
 - La phrase « La PWA (`installation-pwa`, V4) et l'app iOS restent au backlog » ne vaut plus pour la PWA : le site devient installable par l'[ADR-0082](./0082-application-installable-sans-page-de-compte-sur-le-telephone.md). L'app iOS reste au backlog, et les apps Android restent en attente.
 - Les exercices hors ligne, voulus par le porteur, ouvrent le chantier `eleve-hors-ligne`. S'il garde des données sur le téléphone, la question se reposera pour les apps Android, qui affichent les mêmes pages.
+
+## Amendement du 2026-10-08 — l'app élèves d'abord, compte personnel, barres natives
+
+*Chantier [`docs/chantiers/app-android`](../../chantiers/app-android/memo.md), reprise du 2026-10-08, décisions du porteur. Le texte ci-dessus reste tel qu'écrit ; en cas d'écart, cette section fait foi.*
+
+- **Ordre** : « Lnclass » (élèves) est construite et publiée d'abord. « Lnclass Teacher » suit, dans une seconde étape du chantier. Jusque-là, R1 ne vise que l'app élèves : un compte enseignant, direction ou équipe y est refusé après un PIN correct. Le message renvoie l'enseignant vers le site, puisque l'app enseignants n'existe pas encore.
+- **R6 remplacée** : la société Lnclass n'est pas encore créée. Les apps sont publiées depuis un **compte Google Play personnel**. Conséquences :
+  - un test fermé d'au moins 12 testeurs pendant 14 jours d'affilée est imposé avant toute publication ouverte ;
+  - pas de numéro D-U-N-S possible avant la création de la société ;
+  - à sa création, le compte passe en compte d'organisation (D-U-N-S, site vérifié), sans transfert d'app ;
+  - les clés de signature restent gérées par Play App Signing ; une clé de secours est gardée par le porteur, jamais dans le dépôt.
+- **Barres natives confirmées** : dans l'app, l'en-tête et la barre basse du site sont masqués (§6, « Layout »). La coque affiche une barre d'onglets Android en bas (Accueil, Cours, Ma classe, comme la barre du site) et une barre native en haut. Sur le site, l'en-tête élève devient celui décidé le 2026-10-08 : avatar à gauche ouvrant un panneau latéral, aide et thème à droite, sans logo. Ce qu'affiche la barre native du haut (titre, avatar, aide) est fixé par l'UDR du chantier.
+- **R7 confirmée** : aucun paiement dans l'app.
+- **Version minimale** : Android 7 ; les téléphones plus anciens restent sur le site.
