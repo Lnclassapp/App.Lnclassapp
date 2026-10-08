@@ -38,7 +38,7 @@ class RepositoryRulesTest < Minitest::Test
 
   # IL-02 (ADR-0085, Lot F of inscription-eleve-sans-code): the classroom code is gone, from the code and from the texts.
   def test_the_classroom_join_code_is_gone
-    offenders = ruby_files("app/**/*.{rb,erb,js}", "config/**/*.{rb,yml}", "db/seeds/**/*.rb").select do |file|
+    offenders = ruby_files("app/**/*.{rb,erb,js}", "config/**/*.{rb,yml}", "db/seeds/**/*.rb", "script/**/*.rb").select do |file|
       File.read(File.join(ROOT, file)).match?(/join_code|JoinCode|JoinWithCode|join_with_code/)
     end
 
