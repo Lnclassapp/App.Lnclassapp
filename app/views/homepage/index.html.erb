@@ -14,7 +14,7 @@
     <nav aria-label="<%= t(".nav.label") %>" class="mx-auto flex h-bar max-w-page items-center justify-between gap-4 px-gutter">
       <%= link_to root_path, "aria-label": t(".nav.home"),
             class: "flex min-h-tap items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", width: 36, height: 36, class: "size-9 rounded-sm" %>
+        <%= image_tag brand_logo, alt: "", width: 36, height: 36, class: "size-9 rounded-sm" %>
         <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
       <% end %>
       <%= ui_button t(".nav.sign_in"), href: new_session_path, variant: :secondary, size: :sm, icon: "arrow-right-end-on-rectangle" %>
