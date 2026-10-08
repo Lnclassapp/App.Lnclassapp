@@ -104,13 +104,15 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 
 ## Questions encore ouvertes
 
-- ~~Le nouvel en-tête vaut-il pour les autres rôles ?~~ Non : élève seulement (porteur, 2026-10-08).
 - Sans logo dans l'en-tête, une capture d'écran partagée sur WhatsApp ne porte plus la marque : à confirmer à la relecture des captures.
+- Comment le serveur reconnaît-il l'app de façon fiable (l'en-tête d'identification se falsifie) ? Le refus par rôle reste un aiguillage, pas une barrière de sécurité (ADR-0070 R1) : la détection par User-Agent suffit.
 
-- Version minimale d'Android exigée par Hotwire Native Android et par la vue web système : à mesurer, puis à comparer au plancher de l'ADR-0051.
-- Délai d'obtention du numéro D-U-N-S et structure juridique qui porte le compte Google Play.
-- Comment le serveur reconnaît-il chaque app de façon fiable (l'en-tête d'identification se falsifie) ? Le refus de la question 2 n'est pas une barrière de sécurité, seulement un aiguillage : à écrire dans l'ADR.
-- Définition exacte d'un « utilisateur de l'app » pour les indicateurs (connecté au moins une fois, ou actif dans les 30 derniers jours).
-- Onglets natifs de chaque app : quelles destinations du shell de chaque rôle (UDR-0006) deviennent des onglets.
-- Nom, icône et couleurs des deux apps (le plan de juin proposait un fond bleu pour les élèves, blanc pour les enseignants).
-- Le paiement : aucune fonction payante dans l'app ; si un accès payant revient, la facturation de Google Play est à étudier avant.
+Tranchées le 2026-10-08 :
+
+- ~~Le nouvel en-tête vaut-il pour les autres rôles ?~~ Non : élève seulement.
+- ~~Version minimale d'Android~~ : Android 7.
+- ~~D-U-N-S et structure juridique~~ : la société n'est pas créée ; compte Google Play personnel d'ici là.
+- ~~Définition d'un « utilisateur de l'app »~~ : celle de l'ADR-0082 §4.4, un compte qui a ouvert l'app sur la période du pilotage.
+- ~~Onglets natifs~~ : Accueil, Cours, Ma classe, cachés pendant un exercice.
+- ~~Nom, icône, couleurs~~ : « Lnclass », baobab sur bleu `#00A0FF` ; « Lnclass Teacher », baobab au bras levé sur orange `#FF8A00`.
+- ~~Paiement~~ : aucun dans l'app.
