@@ -371,8 +371,8 @@ end
       # UDR-0068 §3.1 : l'équipe a une 2e carte (Référentiel, Imports) dans la barre latérale.
       assert_selector "aside nav a", count: destinations.size + NavigationHelper::SECONDARY_DESTINATIONS.fetch(role, []).size
       assert_no_selector "nav.fixed.bottom-0"
-      # UDR-0080 §3.1 : l'en-tête de l'élève n'a ni logo ni badge de rôle.
-      assert_selector "header", text: t("shared.roles.#{role}") unless role == :student
+      # UDR-0080 §3.1, UDR-0081 §3.1 : l'en-tête de l'élève et de l'enseignant n'a ni logo ni badge de rôle.
+      assert_selector "header", text: t("shared.roles.#{role}") unless NavigationHelper::ACCOUNT_PANELS.key?(role)
       assert_selector "main h1", text: t("design.shell.names.#{role}").split.first
       assert_selector "aside a[aria-current=page]", text: t("shared.navigation.#{destinations.first.first}")
     end

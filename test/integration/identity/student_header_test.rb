@@ -2,7 +2,8 @@ require "test_helper"
 
 # CA-7 (app-android) — UDR-0080 §3.1. The student's header has no logo: the avatar on the left opens the account panel
 # (a link to /students/menu without JavaScript), « Besoin d'aide ? » and the light / dark switch on the right, at every
-# width. The teacher, the direction and the team keep the header they had: logo, role badge, account menu.
+# width. The teacher gets the same header (UDR-0081, test/integration/identity/teacher_header_test.rb, which also checks
+# that the direction keeps the header it had).
 class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
   TRIGGER = "a[href='/students/menu'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=account_panel]".freeze
 
@@ -53,19 +54,5 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
 
     assert_select "dialog#account_panel nav a[href='#{profile_path}'][aria-current=page]"
     assert_select "dialog#account_panel nav a[href='#{courses_path}']:not([aria-current])"
-  end
-
-  test "CA-7: the teacher keeps the logo, the role badge, the account menu and the switch from lg" do
-    sign_in_as create_teacher(first_name: "Awa", last_name: "Traoré")
-
-    get teacher_home_path
-
-    assert_response :success
-    assert_select "header img[src*='logo/lnclass']", 1
-    assert_select "header a span", "Lnclass"
-    assert_select "header .ui-badge", text: "Enseignant"
-    assert_select "header button[aria-haspopup=menu][aria-controls=account-menu]", 1
-    assert_select "header div[data-controller=theme].max-lg\\:hidden", 1
-    assert_select "header [aria-controls=account_panel], #account_panel, header [aria-controls=help-sheet]", 0
   end
 end
