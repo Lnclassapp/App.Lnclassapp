@@ -1,4 +1,9 @@
 # ADR-0040 : Une classe principale unique par élève, garantie par index partiel ; sélecteur reporté à la V3
+<!-- index
+titre: Une classe principale unique par élève, garantie par index partiel ; sélecteur reporté à la V3
+statut: Accepté — *amende 0003*
+problematique: Index partiel « une principale active » ; un élève connecté ne recrée pas de compte par `/c/:code`. F-18.
+-->
 
 | | |
 |---|---|

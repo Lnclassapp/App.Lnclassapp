@@ -1,4 +1,9 @@
 # ADR-0016 : Conservation de l'Historique via Soft Delete (Archivage) pour les Assignations Polymorphes
+<!-- index
+titre: Conservation de l'historique via soft delete (archivage)
+statut: ⚠️ **Remplacé partiellement** par [0048](./0048-statuts-d-assignation-active-et-archived.md) *(§2)* ; complété par [0036](./0036-suppression-archivage-et-anonymisation.md), [0041](./0041-vie-d-une-classe-annee-scolaire-et-code.md)
+problematique: Utiliser un statut `archived` au lieu d'un `destroy` pour les assignations polymorphes, afin de préserver l'historique et la traçabilité.
+-->
 
 | | |
 |---|---|

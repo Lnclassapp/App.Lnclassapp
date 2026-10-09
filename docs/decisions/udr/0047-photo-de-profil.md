@@ -1,4 +1,10 @@
 # UDR-0047 : Photo de profil — ligne « Photo » du profil, modale d'ajout avec aperçu recadré, photo à la place des initiales
+<!-- index
+titre: Photo de profil
+statut: Accepté
+adr-lie: [0060](../adr/0060-photo-de-profil-stockee-privee-recadree-par-le-navigateur.md), [0041](./0041-page-profil.md)
+problematique: Ligne « Photo » du profil, modale avec aperçu recadré, photo à la place des initiales ; numéro = plus haut (0043) + 4
+-->
 
 | | |
 |---|---|

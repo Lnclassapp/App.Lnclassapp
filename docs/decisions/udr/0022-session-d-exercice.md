@@ -1,4 +1,10 @@
 # UDR-0022 : Session d'exercice — une question à la fois, un verdict après chaque réponse, sans rechargement de page
+<!-- index
+titre: Session d'exercice
+statut: Accepté — *amendé le 2026-10-02 : épuration élève (UDR-0057)*
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), [0043](../adr/0043-remediation-declenchee-par-la-cloture.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md), [0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md)
+problematique: Une question à la fois, un verdict après chaque réponse, sans rechargement de page
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,9 @@
 # ADR-0043 : Remédiation déclenchée par le seul use case de clôture, session de remédiation marquée, une lacune en attente par fiche garantie en base
+<!-- index
+titre: Remédiation déclenchée par le seul use case de clôture, session de remédiation marquée, une lacune en attente par fiche garantie en base
+statut: Accepté — *remplace 0018 §3*
+problematique: Lacune ouverte ou résolue par `CloseExerciseSession` ; `exercise_sessions.kind` ; index partiel `(student_id, essential_id)` en attente. F-21.
+-->
 
 | | |
 |---|---|

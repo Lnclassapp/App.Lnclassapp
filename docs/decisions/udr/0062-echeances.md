@@ -1,4 +1,10 @@
 # UDR-0062 : Échéances — les jours de séance à l'assignation, la date limite chez l'élève, les retards dans le suivi de l'enseignant
+<!-- index
+titre: Échéances
+statut: Accepté *(porteur, 2026-10-02 : « lance les lots »)* — *amendée par 0069 (bascule au catalogue), 2026-10-03*
+adr-lie: [0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md)
+problematique: Étape « Quels jours voyez-vous la classe ? » (lun. à sam., « Plus tard ») à l'assignation d'un exercice ; jours modifiables sur la page de la classe ; « À rendre demain » / « En retard · prévu mardi » sur l'accueil élève, ambre aujourd'hui, demain ou dépassé, tri par date limite ; « 18 faits, dont 3 en retard · 7 pas encore faits » et liste nominative des retardataires pour l'enseignant de la classe et l'équipe. Amende UDR-0011, 0013, 0015, 0027, 0028, 0029 ; déprécie 0030
+-->
 
 | | |
 |---|---|

@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+# Rebuilds the index tables of docs/decisions/adr/README.md and docs/decisions/udr/README.md from the
+# `<!-- index … -->` block that each ADR / UDR carries under its title (chantier sobriete-tokens: no more
+# hand-edited rows, no more conflicts to merge by hand in the shared README).
+#
+#   script/docs/build_index           # rewrites the two READMEs
+#   script/docs/build_index --check   # exits 1 and names the stale README, writes nothing
+#
+# Block, one `key: value` per line: titre, statut, date (only when it differs from the **Date** row of the header),
+# adr-lie (UDR only), problematique. The number and the link come from the file name.
+KINDS = {
+  "adr" => { columns: ["N°", "Titre", "Statut", "Date", "Problématique"], keys: %w[titre statut date problematique] },
+  "udr" => { columns: ["N°", "Titre", "Statut", "Date", "ADR lié", "Problématique"], keys: %w[titre statut date adr-lie problematique] }
+}.freeze
+START = "<!-- index:start -->".freeze
+FINISH = "<!-- index:end -->".freeze
+ROOT = File.expand_path("../../docs/decisions", __dir__)
+
+def metadata(path)
+  text = File.read(path)
+  block = text[/<!-- index\n(.*?)\n-->/m, 1] or abort "#{path}: no <!-- index --> block"
+  fields = block.lines.to_h { |line| line.chomp.split(": ", 2) }
+  header_date = text[/^\| \*\*Date\*\* \| (.*) \|$/, 1]&.strip
+  fields["date"] ||= header_date or abort "#{path}: no date"
+  fields
+end
+
+def table(kind)
+  spec = KINDS.fetch(kind)
+  rows = Dir[File.join(ROOT, kind, "[0-9][0-9][0-9][0-9]-*.md")].sort.map do |path|
+    file = File.basename(path)
+    fields = metadata(path)
+    missing = spec[:keys] - fields.keys
+    abort "#{path}: missing #{missing.join(', ')}" unless missing.empty?
+    cells = ["[#{file[0, 4]}](./#{file})"] + spec[:keys].map { |key| fields.fetch(key) }
+    "| #{cells.join(' | ')} |"
+  end
+  ["| #{spec[:columns].join(' | ')} |", "| #{(['---'] * spec[:columns].size).map { |s| ":#{s}" }.join(' | ')} |", *rows].join("\n")
+end
+
+stale = KINDS.keys.reject do |kind|
+  readme = File.join(ROOT, kind, "README.md")
+  current = File.read(readme)
+  region = /#{Regexp.escape(START)}\n.*?\n#{Regexp.escape(FINISH)}/m
+  abort "#{readme}: markers #{START} / #{FINISH} missing" unless current.match?(region)
+  updated = current.sub(region) { "#{START}\n#{table(kind)}\n#{FINISH}" }
+  File.write(readme, updated) unless ARGV.include?("--check") || updated == current
+  updated == current
+end
+
+if ARGV.include?("--check") && stale.any?
+  warn "stale index: #{stale.map { |kind| "docs/decisions/#{kind}/README.md" }.join(', ')} (run script/docs/build_index)"
+  exit 1
+end

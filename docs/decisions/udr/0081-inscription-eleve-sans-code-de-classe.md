@@ -1,4 +1,10 @@
 # UDR-0081 : Inscription élève sans code — une cascade de quatre listes, un lien de classe, les nouveaux arrivés marqués et le retrait d'un élève
+<!-- index
+titre: Inscription élève sans code : cascade de quatre listes, lien de classe, nouveaux arrivés marqués, retrait d'un élève
+statut: Accepté *(porteur, 2026-10-07)* — *remplace 0009 (Lot F, 2026-10-08) ; amendée le 2026-10-08 : nom et prénoms en deux champs*
+adr-lie: [0083](../adr/0085-inscription-eleve-sans-code-de-classe.md), [0083](../adr/0083-inscription-enseignant-en-deux-voies.md)
+problematique: Trois rubriques (Ta classe → Toi → Code secret) ; partial `_class_picker` (DRENA → établissement → niveau → classe), états vide, chargement, introuvable, erreur ; lien `/c/<jeton>` avec la classe déjà affichée ; bloc « Lien de la classe » (copier, WhatsApp, changer) ; pastille « Nouveau » et voie d'arrivée dans la liste ; « Retirer de la classe » en modale
+-->
 
 | | |
 |---|---|

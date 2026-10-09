@@ -1,4 +1,9 @@
 # ADR-0039 : Imports JSON en masse — quatre formats versionnés, un job, une validation complète, un import partiel atomique par élément racine, un rapport persisté
+<!-- index
+titre: Imports JSON en masse : quatre formats versionnés, un job, une validation complète, un import partiel atomique par élément racine, un rapport persisté
+statut: Accepté — *remplace 0012 §3.3, 0020 sauf §2.1 et §2.2* ; *amendé par [0066](./0066-import-des-drena-et-slug-prefixe.md) (cinquième type `drenas`)*
+problematique: Écoles, cours en arbre, fiches, exercices ; job Solid Queue ; Active Storage ; résolution par slug sans création ; doublons ignorés ; `insert_all` par lots ; contenu en brouillon ; `import_reports` à quatre compteurs. F-17.
+-->
 
 | | |
 |---|---|

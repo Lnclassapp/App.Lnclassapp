@@ -1,4 +1,10 @@
 # UDR-0009 : Rejoindre une classe — un code, un aperçu limité à trois noms, une inscription en trois rubriques, arrivée connecté sur l'accueil
+<!-- index
+titre: Rejoindre une classe
+statut: ⚠️ **Remplacée** par [0081](./0081-inscription-eleve-sans-code-de-classe.md) *(2026-10-08 : plus de code de classe)* — *amendé le 2026-10-02 : épuration élève (UDR-0057)*
+adr-lie: [0037](../adr/0037-nom-et-prenoms-en-deux-champs.md), [0040](../adr/0040-classe-principale-unique-de-l-eleve.md), [0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md), [0050](../adr/0050-authentification-et-session.md)
+problematique: Un code, un aperçu limité à trois noms, une inscription en trois rubriques, arrivée connecté sur l'accueil
+-->
 
 > ⚠️ **Remplacée par [UDR-0081](0081-inscription-eleve-sans-code-de-classe.md)** (2026-10-08, Lot F du chantier `inscription-eleve-sans-code`) : plus de code de classe ni d'écran `/join` (qui mène à `/student-signup`). La règle de l'aperçu limité à trois noms est gardée par l'UDR-0081 §3.4.
 

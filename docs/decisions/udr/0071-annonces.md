@@ -1,4 +1,10 @@
 # UDR-0071 : Annonces — une carte courte et signée, un carrousel sur l'accueil élève, une page « Annonces » par rôle
+<!-- index
+titre: Annonces : une carte courte et signée, un carrousel sur l'accueil élève, une page « Annonces » par rôle
+statut: Accepté *(2026-10-03)*
+adr-lie: [0045](../adr/0045-annonces-publication-programmee-et-audience.md), [0078](../adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md)
+problematique: Aucune annonce dans l'application, et une maquette validée par le porteur : carte signée (officielle sans croix), illustration ou image, ▶ sur un fichier audio, carrousel de 5 cartes après « À faire », page « Annonces » à onglets par URL (Reçues, Mes annonces, Enseignants, Toutes), formulaire en page, masquage annulable, retrait et archivage confirmés. Amende 0006, 0036, 0052.
+-->
 
 | | |
 |---|---|

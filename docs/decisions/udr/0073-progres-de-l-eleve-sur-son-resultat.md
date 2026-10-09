@@ -1,4 +1,10 @@
 # UDR-0073 : Progrès de l'élève sur le résultat de sa session — une phrase qui dit où il en est et quoi faire ensuite
+<!-- index
+titre: Progrès de l'élève sur le résultat de sa session
+statut: Accepté
+adr-lie: [0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md), [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md)
+problematique: Dès le deuxième essai, une phrase dans la carte du résultat, sur 20, pour l'élève seul : « Tu progresses », « Tu confirmes ta maîtrise », ou un renvoi à la correction ; jamais « stagne » ni « baisse », jamais de rouge ni d'ambre. Numéros 0071 et 0072 pris par `feature/annonces` et `rapports-exercices`. Amende UDR-0023
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,9 @@
 # ADR-0086 : Coque Android « Lnclass Teacher » (enseignants) — même socle que l'app élèves, refus croisé, code Android partagé
+<!-- index
+titre: Coque Android « Lnclass Teacher » (enseignants) : même socle que l'app élèves, refus croisé, code Android partagé
+statut: Proposé — *complète 0084 et 0070, amende 0084 §4.1, §4.3, §4.5 à §4.8*
+problematique: Jeton `LnclassTeacherAndroid/` ; `/teachers/menu` ; règles de chemins des pages enseignant en modale ; refus dans les deux sens avec l'app proposée (`WRONG_APP_FOR`) ; même colonne `android_opened_at`, « dont app Android : N enseignants » ; `assetlinks.json` à deux apps ; modules `shell`, `student`, `teacher`. Chantier `app-android`.
+-->
 
 | | |
 |---|---|

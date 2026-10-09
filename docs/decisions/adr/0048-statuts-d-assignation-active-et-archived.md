@@ -1,4 +1,9 @@
 # ADR-0048 : Une assignation est `active` ou `archived`, son auteur est un utilisateur, et une réassignation crée une nouvelle ligne
+<!-- index
+titre: Une assignation est `active` ou `archived`, son auteur est un utilisateur, et une réassignation crée une nouvelle ligne
+statut: Accepté — *remplace 0016 §2, 0007 §5 ; amendé par [0072](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (exercice seul, `due_on`)*
+problematique: Deux statuts ; `assigned_by_id` → `users` ; types `Course`/`Essential`/`Exercise` ; session rattachée par `classroom_assignment_id`. F-26.
+-->
 
 | | |
 |---|---|

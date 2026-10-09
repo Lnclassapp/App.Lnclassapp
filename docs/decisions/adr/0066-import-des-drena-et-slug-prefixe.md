@@ -1,4 +1,9 @@
 # ADR-0066 : Les DRENA s'importent par fichier, comme les établissements, et leur slug est préfixé `drena-`
+<!-- index
+titre: Les DRENA s'importent par fichier, comme les établissements, et leur slug est préfixé `drena-`
+statut: Proposé — *amende 0039 §9 et son amendement, 0034 §4*
+problematique: Cinquième type d'import `drenas` (`lnclass.drenas` v1, clé `name`, 500 lignes, doublon par slug) ; slug `drena-<nom>` au formulaire comme à l'import ; l'import des écoles n'ajoute aucun préfixe. Chantier `import-drenas`.
+-->
 
 | | |
 |---|---|

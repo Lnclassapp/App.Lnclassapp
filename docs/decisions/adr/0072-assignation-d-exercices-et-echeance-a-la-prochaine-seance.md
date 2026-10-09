@@ -1,4 +1,9 @@
 # ADR-0072 : Seul un exercice s'assigne ; son échéance est la prochaine séance de l'enseignant dans la classe, calculée et figée à l'assignation
+<!-- index
+titre: Seul un exercice s'assigne ; son échéance est la prochaine séance de l'enseignant dans la classe, calculée et figée à l'assignation
+statut: Accepté *(porteur, 2026-10-02 : « lance les lots »)* — *amende 0048, 0071*
+problematique: `Assignable::TYPES` = `Exercise`, migration qui échoue s'il reste une assignation de cours ou de fiche (Q7) ; table `classroom_session_days` (enseignant × classe × jour 1 à 6, clé composite vers `teacher_classrooms`) ; `classroom_assignments.due_on` (prochain jour de séance de l'auteur strictement après la date d'Abidjan, jamais recalculé, nul sans jours) ; « rendu en retard » lu (première session rendue après `due_on`), jamais stocké ; rien ne se ferme ; `FollowAssignmentPolicy` pour la liste nominative. Chantier `fonctions-espace-eleve`.
+-->
 
 | | |
 |---|---|

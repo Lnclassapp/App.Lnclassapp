@@ -1,4 +1,9 @@
 # ADR-0052 : Chaîne de livraison versionnée, worker toujours actif dans Puma, échecs de job visibles
+<!-- index
+titre: Chaîne de livraison versionnée, worker toujours actif dans Puma, échecs de job visibles
+statut: Accepté — *amende [0010](./0010-stack-ops-solid-suite-postgresql-railway.md) §3.1 et §5*
+problematique: `railway.json` versionné ; recette (`Staging`) et production (`main`) sur deux environnements Railway ; plugin Solid Queue inconditionnel, adaptateur `:solid_queue` en développement ; échecs visibles dans Mission Control Jobs ; `/up` testé et exclu de `force_ssl` ; Thruster gardé pour la compression. Tranche F-30 du programme de refonte.
+-->
 
 | | |
 |---|---|

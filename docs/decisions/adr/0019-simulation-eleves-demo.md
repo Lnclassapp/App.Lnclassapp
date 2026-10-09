@@ -1,4 +1,9 @@
 # ADR-0019 : Simulation des Élèves de Démonstration (Demo Students)
+<!-- index
+titre: Simulation des élèves de démonstration (Demo Students)
+statut: Accepté
+problematique: Peupler automatiquement une classe neuve d'élèves `is_demo` réalistes pour déclencher l'« aha moment » de l'enseignant face à un tableau de bord vide.
+-->
 
 | | |
 |---|---|

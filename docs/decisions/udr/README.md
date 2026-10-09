@@ -8,6 +8,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 
 ## Index des UDR
 
+<!-- index:start -->
 | N° | Titre | Statut | Date | ADR lié | Problématique |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | [0001](./0001-design-visuel-du-catalogue-pedagogique.md) | Design visuel du catalogue pédagogique | Accepté · Tokens remplacés par 0005 | — | [0022](../adr/0022-modelisation-hexagonale-du-catalogue-pedagogique.md) | Le catalogue affichait trop d'informations d'un coup (essentiels sur la carte de cours) : définir une direction « Étude Premium » et une carte-vitrine épurée. |
@@ -90,6 +91,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0080](./0080-en-tete-eleve-panneau-du-compte-et-barres-de-l-app-android.md) | En-tête élève, panneau du compte, barres natives de l'app Android | Proposé | 2026-10-08 | [0084](../adr/0084-coque-android-eleves-hotwire-native.md), [0070](../adr/0070-deux-apps-android-hotwire-native-le-site-reste-la-reference.md) | Élève : avatar à gauche ouvrant un panneau (`ui_modal placement: :drawer`, aussi servi à `/students/menu`), « Besoin d'aide ? » et interrupteur à droite, sans logo ; app : barre native (avatar, aide), trois onglets natifs cachés pendant un exercice ; message `:wrong_app`. Amende UDR-0006, 0065, 0061, 0078 |
 | [0081](./0081-inscription-eleve-sans-code-de-classe.md) | Inscription élève sans code : cascade de quatre listes, lien de classe, nouveaux arrivés marqués, retrait d'un élève | Accepté *(porteur, 2026-10-07)* — *remplace 0009 (Lot F, 2026-10-08) ; amendée le 2026-10-08 : nom et prénoms en deux champs* | 2026-10-07 | [0083](../adr/0085-inscription-eleve-sans-code-de-classe.md), [0083](../adr/0083-inscription-enseignant-en-deux-voies.md) | Trois rubriques (Ta classe → Toi → Code secret) ; partial `_class_picker` (DRENA → établissement → niveau → classe), états vide, chargement, introuvable, erreur ; lien `/c/<jeton>` avec la classe déjà affichée ; bloc « Lien de la classe » (copier, WhatsApp, changer) ; pastille « Nouveau » et voie d'arrivée dans la liste ; « Retirer de la classe » en modale |
 | [0082](./0082-en-tete-enseignant-et-barres-de-lnclass-teacher.md) | En-tête de l'enseignant, son panneau du compte, barres de « Lnclass Teacher », refus croisés | Proposé | 2026-10-08 | [0086](../adr/0086-coque-android-enseignants-lnclass-teacher.md), [0084](../adr/0084-coque-android-eleves-hotwire-native.md) | Enseignant : l'en-tête de l'élève (UDR-0080), panneau avec « Mon profil » et « Inviter un collègue », `/teachers/menu` ; app : quatre onglets (Accueil, Classes, Cours, Annonces), onglet actif `#C2410C` ; messages de refus qui nomment la bonne app. Amende UDR-0080 et UDR-0006 |
+<!-- index:end -->
 
 ---
 
@@ -107,7 +109,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 3. Décrire la **friction utilisateur** en section 1 : qui la subit, à quel moment, et ce qu'elle coûte.
 4. Écrire la section **Règles d'implémentation** comme un contrat : composant de référence, tokens (jamais de valeur en dur), comportement Turbo/Stimulus, **états obligatoires** (vide, chargement, erreur, succès) et accessibilité (cibles ≥ 48×48 px, contraste, focus, `aria-*`).
 5. Renseigner les **conséquences** : ce que la décision impose au reste de l'interface, et ce qu'elle interdit désormais.
-6. Ajouter la ligne correspondante dans le tableau d'index ci-dessus.
+6. Remplir le bloc `<!-- index … -->` sous le titre (titre court, statut, problématique). Le tableau d'index ci-dessus est **généré** : `script/docs/build_index` le réécrit, une seule fois, au commit de clôture du chantier ; `--check` dit s'il est périmé. Ne jamais éditer une ligne à la main : en cas de conflit sur ce tableau, relancer le script.
 7. **Si l'UDR en remplace une précédente** : renseigner `Remplacé par : UDR-NNNN` dans l'ancienne et ajouter un encadré d'avertissement en tête. Une UDR périmée n'est jamais supprimée : elle est marquée.
 
 ## Champs inconnus

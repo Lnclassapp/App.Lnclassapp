@@ -1,4 +1,10 @@
 # UDR-0016 : Formulaire fiche essentielle (création, modification, publication, archivage)
+<!-- index
+titre: Formulaire fiche essentielle (création, modification, publication, archivage)
+statut: Accepté — *amendée par [0067](./0067-gestion-du-blog-par-l-equipe.md) (images pour le blog seul)*
+adr-lie: [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0047](../adr/0047-stockage-objet-s3-sur-railway.md), [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: —
+-->
 
 | | |
 |---|---|

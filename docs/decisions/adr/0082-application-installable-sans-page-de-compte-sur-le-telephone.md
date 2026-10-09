@@ -1,4 +1,9 @@
 # ADR-0082 : Application installable — les pages passent toujours par le réseau, seule la page « Pas de connexion » est gardée sur le téléphone, l'ouverture depuis l'icône est notée sur le compte
+<!-- index
+titre: Application installable : réseau seul pour les pages, seule la page « Pas de connexion » gardée sur le téléphone, ouverture depuis l'icône notée sur le compte
+statut: Proposé — *amende 0070 (§4.6), 0062 (§4.4)*
+problematique: Manifeste « Lnclass » (`start_url` `/?source=app`, icônes 192, 512, maskable) ; programme d'arrière-plan sans dépendance, qui ne garde que `offline.html`, `offline.css` et l'icône, et ne met jamais une réponse du réseau en cache ; `users.app_opened_at` et indicateur du pilotage par rôle ; bandeau sans donnée serveur (colonnes `install_banner_*` abandonnées). Chantier `installation-pwa`.
+-->
 
 | | |
 |---|---|

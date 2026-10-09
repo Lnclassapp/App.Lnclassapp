@@ -1,4 +1,9 @@
 # ADR-0084 : Coque Android « Lnclass » (élèves) — Hotwire Native, barres natives, chemins servis par le site, aiguillage par rôle à la connexion
+<!-- index
+titre: Coque Android « Lnclass » (élèves) : Hotwire Native 1.3, Android 9 minimum, barres natives, chemins servis par le site, aiguillage par rôle à la connexion
+statut: Proposé — *complète 0070, amende 0070 R3 et 0082 §4.3, §4.4*
+problematique: Jeton `LnclassStudentAndroid/` dans le User-Agent, `lnclass_app` ; shell sans en-tête ni barre basse dans la coque ; composant de pont `account` (`@hotwired/hotwire-native-bridge`) ; `public/android/v1/path-configuration.json` (séance d'exercice en modale) ; `:wrong_app` après PIN correct ; `users.android_opened_at` ; `assetlinks.json` ; projet `android/` avec variantes `recette` et `production`, aucune clé versionnée. Chantier `app-android`.
+-->
 
 | | |
 |---|---|

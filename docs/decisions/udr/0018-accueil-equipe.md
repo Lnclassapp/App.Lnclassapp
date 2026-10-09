@@ -1,4 +1,10 @@
 # UDR-0018 : Accueil équipe — raccourcis, régions éducatives, référentiel et activité récente différée
+<!-- index
+titre: Accueil équipe
+statut: Accepté — *amendée par [0067](./0067-gestion-du-blog-par-l-equipe.md) (raccourci « Blog »)* — *amendée par 0068 (Référentiel sur sa page), 2026-10-03*
+adr-lie: [0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md), [0039](../adr/0039-format-d-import-du-contenu.md), [0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md)
+problematique: Raccourcis, régions éducatives, référentiel et activité récente différée
+-->
 
 | | |
 |---|---|

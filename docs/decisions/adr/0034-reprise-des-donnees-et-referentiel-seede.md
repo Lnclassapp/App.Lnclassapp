@@ -1,4 +1,9 @@
 # ADR-0034 : Aucune reprise de l'ancienne base ; la taxonomie, les DRENA et les établissements sont créés par l'équipe dès la V1, les seeds ne servent qu'en développement et en test
+<!-- index
+titre: Aucune reprise de l'ancienne base ; la taxonomie, les DRENA et les établissements sont créés par l'équipe dès la V1, les seeds ne servent qu'en développement et en test
+statut: Accepté — *amendé par [0066](./0066-import-des-drena-et-slug-prefixe.md) (DRENA aussi par import)*
+problematique: Niveaux, séries, `level_series`, matières, DRENA et établissements créés par l'équipe en V1 (établissements aussi par import) ; aucun seed métier en production ; préalable : aucune donnée réelle. F-12.
+-->
 
 | | |
 |---|---|

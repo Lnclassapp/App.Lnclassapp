@@ -1,4 +1,10 @@
 # UDR-0079 : Inscription enseignant en deux voies — page réordonnée, nom complet corrigeable, numéro et code secret vérifiés en direct, liens d'invitation sans code
+<!-- index
+titre: Inscription enseignant en deux voies : page réordonnée, nom complet corrigeable, numéro et code secret vérifiés en direct, liens d'invitation sans code
+statut: Accepté *(porteur, 2026-10-07)*
+adr-lie: [0083](../adr/0083-inscription-enseignant-en-deux-voies.md), [0037](../adr/0037-nom-et-prenoms-en-deux-champs.md)
+problematique: Trois rubriques (Établissement → Vous → Code secret) ; lien `/i/<jeton>` avec l'établissement déjà affiché, alerte « lien plus valable » ; « Nom complet » avec aperçu et `<details>` « Corriger » ; numéro nettoyé en direct (`+225`, espaces, 10 chiffres) ; concordance du code secret en direct ; blocs de lien sans code, « Changer le lien » retiré ; voie d'arrivée dans la liste « Enseignants » ; écran d'attente par DRENA → établissement. Remplace 0044 côté enseignant, amende 0024, 0050, 0056
+-->
 
 | | |
 |---|---|

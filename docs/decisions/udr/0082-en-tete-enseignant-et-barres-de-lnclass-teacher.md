@@ -1,4 +1,10 @@
 # UDR-0082 : En-tête de l'enseignant comme celui de l'élève, panneau du compte de l'enseignant, barres de « Lnclass Teacher », messages de refus croisés
+<!-- index
+titre: En-tête de l'enseignant, son panneau du compte, barres de « Lnclass Teacher », refus croisés
+statut: Proposé
+adr-lie: [0086](../adr/0086-coque-android-enseignants-lnclass-teacher.md), [0084](../adr/0084-coque-android-eleves-hotwire-native.md)
+problematique: Enseignant : l'en-tête de l'élève (UDR-0080), panneau avec « Mon profil » et « Inviter un collègue », `/teachers/menu` ; app : quatre onglets (Accueil, Classes, Cours, Annonces), onglet actif `#C2410C` ; messages de refus qui nomment la bonne app. Amende UDR-0080 et UDR-0006
+-->
 
 | | |
 |---|---|
