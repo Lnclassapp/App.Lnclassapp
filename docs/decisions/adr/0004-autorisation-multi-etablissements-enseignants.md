@@ -1,4 +1,9 @@
 # ADR-0004 : Autorisation Multi-Établissements des Enseignants et Isolation par Policy (`ClassroomAccessPolicy`)
+<!-- index
+titre: Autorisation multi-établissements des enseignants (`ClassroomAccessPolicy`)
+statut: ⚠️ **Remplacé partiellement** par [0030](./0030-une-ecole-par-enseignant-et-creation-des-classes.md) *(§2, §3.1)* ; complété par [0028](./0028-policies-de-domaine-par-use-case.md) *(§3.3)*
+problematique: Permettre à un professeur d'enseigner dans plusieurs lycées via `teacher_schools` et sécuriser l'attribution des cours par un objet Policy pur Ruby.
+-->
 
 | | |
 |---|---|

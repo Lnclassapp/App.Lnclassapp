@@ -1,4 +1,9 @@
 # ADR-0071 : La direction change le lien des enseignants, ajuste ses classes et retire ou réintègre un enseignant, sur son seul établissement actif ; un retrait se trace et barre le retour par le code
+<!-- index
+titre: La direction change le lien des enseignants, ajuste ses classes et retire ou réintègre un enseignant, sur son seul établissement actif ; un retrait se trace et barre le retour par le code
+statut: Accepté *(2026-10-01)* — *amende 0065, 0057, 0059, 0030 ; amendé par [0072](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (jours de séance retirés)*
+problematique: `ManageSchoolStructurePolicy` (équipe, ou direction de l'établissement actif) pour « + », « − » et le code ; `ManageSchoolTeachersPolicy` (direction seule) pour retirer et réintégrer ; devoirs actifs de l'enseignant retiré archivés ; table `teacher_school_departures` ; `JoinSchoolWithCode` pour un enseignant sans établissement. Chantier `gestion-etablissement-direction`. *(0069 et 0070 sont pris par des branches ouvertes.)*
+-->
 
 | | |
 |---|---|

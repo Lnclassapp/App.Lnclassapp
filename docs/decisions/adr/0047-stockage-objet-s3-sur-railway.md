@@ -1,4 +1,9 @@
 # ADR-0047 : Fichiers en production sur un bucket Railway compatible S3, servis par l'application en mode proxy
+<!-- index
+titre: Fichiers en production sur un bucket Railway compatible S3, servis par l'application en mode proxy
+statut: Accepté — *complète 0010* ; *amendé par [0074](./0074-blog-public-articles-images-et-referencement.md) (images publiques du blog)*
+problematique: Bucket Railway par environnement dès la V0, service S3 d'Active Storage, mode proxy (CSP inchangée), pas d'envoi direct ni de variantes. F-25.
+-->
 
 | | |
 |---|---|

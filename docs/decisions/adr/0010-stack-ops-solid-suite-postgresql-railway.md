@@ -1,4 +1,9 @@
 # ADR-0010 : Infrastructure Native Rails 8 — Solid Suite (Queue, Cache, Cable) & Déploiement PaaS Railway
+<!-- index
+titre: Infrastructure native Rails 8 — Solid Suite (Queue, Cache, Cable) & Railway
+statut: Accepté — *amendé par [0052](./0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md), complété par [0047](./0047-stockage-objet-s3-sur-railway.md)*
+problematique: Abandonner Redis et Sidekiq au profit des tables SQL de la Solid Suite, réduisant les coûts et simplifiant le déploiement.
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,10 @@
 # UDR-0039 : Import de fiches essentielles — le slug du cours rappelé dans la modale, l'arbre sous la fiche étage par étage, les fiches à la suite de celles du cours
+<!-- index
+titre: Import de fiches essentielles
+statut: Accepté
+adr-lie: [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md)
+problematique: Le slug du cours rappelé dans la modale, l'arbre sous la fiche étage par étage, les fiches à la suite de celles du cours
+-->
 
 | | |
 |---|---|

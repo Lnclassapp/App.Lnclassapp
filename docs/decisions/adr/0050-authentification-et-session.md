@@ -1,4 +1,9 @@
 # ADR-0050 : Contact à 10 chiffres normalisé, authentification par un use case, sessions en base régénérées, verrouillage progressif et journal d'audit
+<!-- index
+titre: Contact à 10 chiffres normalisé, authentification par un use case, sessions en base régénérées, verrouillage progressif et journal d'audit
+statut: Accepté — *remplace 0002 §3.2, §3.3, §5*
+problematique: Préfixes `01/05/07`, normalisation `225`/`00225` ; `Identity::Authenticate` ; `reset_session` + table `sessions` ; verrouillage 5/10/20 ; `audit_events`. F-28.
+-->
 
 | | |
 |---|---|

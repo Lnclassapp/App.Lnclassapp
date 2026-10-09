@@ -1,4 +1,10 @@
 # UDR-0037 : Import des établissements — aide du format dans la modale d'import, slugs des DRENA à portée de main, rapport qui compte les classes générées
+<!-- index
+titre: Import des établissements
+statut: Accepté
+adr-lie: [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0039](../adr/0039-format-d-import-du-contenu.md)
+problematique: Aide du format dans la modale d'import, slugs des DRENA à portée de main, rapport qui compte les classes générées
+-->
 
 | | |
 |---|---|

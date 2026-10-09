@@ -1,4 +1,10 @@
 # UDR-0054 : Finitions d'interface — titre, retour, auto-focus, infobulle, copie, envoi automatique, recherche pendant la frappe
+<!-- index
+titre: Finitions d'interface : titre, retour, auto-focus, infobulle, copie, envoi automatique, recherche pendant la frappe
+statut: Accepté — *textes d'infobulles validés et ouverture au survol (amendement du 2026-09-29)*
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Une brique par finition : `page_title` (« Page · Espace · Lnclass »), lien de retour unique, contrôleurs `autofocus`, `clipboard` (liens et codes de secours ; jamais un code à dicter), `autosubmit` (second facteur, `/join`), `download`, `search` (établissements, catalogue, élèves d'une classe, débloquer un compte), `ui_info_tip` en `<details>`, ouvert aussi au survol de la souris ; après une invitation, « Se connecter » pré-remplit le numéro (session chiffrée, jamais l'URL). Numéro 0053 pris par l'import des DRENA. Amende UDR-0005, 0006, 0009, 0011, 0013, 0015, 0019, 0020, 0021, 0023, 0027, 0028, 0029, 0030, 0032, 0036, 0042, 0044, 0049, 0050, 0052
+-->
 
 | | |
 |---|---|

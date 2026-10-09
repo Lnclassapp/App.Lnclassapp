@@ -1,4 +1,9 @@
 # ADR-0026 : Un `Result` partagé pour les use cases, des objets de lecture typés pour les queries, des entités et des DTO sans ActiveRecord
+<!-- index
+titre: Un `Result` partagé pour les use cases, des objets de lecture typés pour les queries, des entités et des DTO sans ActiveRecord
+statut: Accepté — *remplace 0006, 0012 §3.1, 0021, 0022 §2.A-C*
+problematique: `Shared::Result` (`value`, `code`, `errors`) et six codes d'erreur fermés ; lectures par queries renvoyant des `Data` ; `ActiveModel` toléré dans entités et DTO ; domaine interdit à `ActiveRecord`, `Orm::`, `Repositories::`, `Queries::`. F-01 + F-03.
+-->
 
 | | |
 |---|---|

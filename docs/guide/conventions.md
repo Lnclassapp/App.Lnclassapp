@@ -112,6 +112,8 @@ git worktree add ../lnclass-lot-a -b feature/<slug>-lot-a feature/<slug>
 
 Ne jamais committer directement sur `Develop`, `Staging` ni `main` : tout passe par une branche de chantier et une PR.
 
+**Exception mesurée** ([`sobriete-tokens`](../chantiers/sobriete-tokens/memo.md)) : un commit direct sur `Develop` est toléré pour de la documentation seule (memo, journal, ADR, UDR). Tout ce qui peut casser un autre poste passe par une PR : code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json`. Jamais de commit direct sur `Staging` ni `main`.
+
 ---
 
 ## 4. Messages de commit

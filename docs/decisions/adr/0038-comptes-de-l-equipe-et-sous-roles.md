@@ -1,4 +1,9 @@
 # ADR-0038 : Un rôle `team` créé par invitation en V1, trois sous-rôles et leur matrice fixés dès maintenant pour la V4
+<!-- index
+titre: Un rôle `team` créé par invitation en V1, trois sous-rôles et leur matrice fixés dès maintenant pour la V4
+statut: Accepté — *amendé par [0074](./0074-blog-public-articles-images-et-referencement.md) (ligne « Blog » de la matrice)*
+problematique: Table `invitations` ; `team_role` `admin`/`content`/`field` ; matrice V4 ; TOTP pour tous ; toujours un `admin`. F-16.
+-->
 
 | | |
 |---|---|

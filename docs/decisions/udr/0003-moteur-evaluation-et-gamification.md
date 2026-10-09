@@ -1,4 +1,10 @@
 # UDR-0003 : Moteur d'Évaluation & Gamification (Assessment UI)
+<!-- index
+titre: Moteur d'évaluation & gamification (Assessment UI)
+statut: Accepté · Tokens remplacés par 0005
+adr-lie: [0008](../adr/0008-moteur-evaluation-et-gamification.md)
+problematique: Offrir une expérience d'exercice immersive sans rechargement (Turbo Frames), centrée sur la progression visible et la récompense (badges Argent, Or, Diamant).
+-->
 
 > ⚠️ **Remplacée partiellement par [UDR-0005](./0005-design-system-fondateur.md)** (2026-09-25) : la section « Tokens » ne s'applique plus. Utilisez les tokens `@theme` et la table de correspondance de l'UDR-0005 §3. Les autres sections restent valables.
 

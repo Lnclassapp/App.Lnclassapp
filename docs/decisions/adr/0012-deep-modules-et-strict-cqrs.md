@@ -1,4 +1,9 @@
 # ADR-0012 : Approfondissement des Modules (Deep Modules) et CQRS Strict
+<!-- index
+titre: Approfondissement des modules (Deep Modules) et CQRS strict
+statut: ⚠️ **Remplacé** par [0026](./0026-contrat-result-entites-et-dto.md) *(§3.1)* et [0039](./0039-format-d-import-du-contenu.md) *(§3.3)*
+problematique: Supprimer les modules superficiels (passe-plats) et la duplication d'imports en utilisant des Query Objects et des ViewObjects pour la lecture.
+-->
 
 | | |
 |---|---|

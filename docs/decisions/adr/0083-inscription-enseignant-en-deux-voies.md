@@ -1,4 +1,9 @@
 # ADR-0083 : L'enseignant s'inscrit par la voie standard ou par un lien d'invitation à jeton, sans code d'établissement, et sa voie d'arrivée est enregistrée
+<!-- index
+titre: L'enseignant s'inscrit par la voie standard ou par un lien d'invitation à jeton, sans code d'établissement, et sa voie d'arrivée est enregistrée
+statut: Accepté *(porteur, 2026-10-07)* — *amende 0037 (saisie), 0057 et 0063 (côté enseignant), 0071 (« Changer le lien »), 0073 (nouvelles inscriptions)*
+problematique: Un seul use case `RegisterTeacher` ; `/i/<jeton>` : `referral_token` (collègue), `schools.direction_invite_token`, `schools.team_invite_token` ; `teacher_profiles.joined_via` (`standard`, `colleague`, `direction`, `team`, `code` historique) repris de l'existant ; rattachement immédiat, plus d'écriture dans `school_join_requests` ; nom complet coupé au premier mot, corrigeable, deux colonnes inchangées ; écran d'attente par établissement choisi. Code d'établissement gardé pour la direction. Chantier `inscription-enseignant`.
+-->
 
 | | |
 |---|---|

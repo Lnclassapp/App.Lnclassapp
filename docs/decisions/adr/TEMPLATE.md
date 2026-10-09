@@ -1,5 +1,9 @@
 # ADR-NNNN : [Titre de la décision, à l'affirmative]
-
+<!-- index
+titre: [titre court de l'index]
+statut: Accepté
+problematique: [une phrase : le problème que la décision tranche]
+-->
 <!--
   Nom du fichier : NNNN-titre-en-kebab-case.md — 4 chiffres, séquentiel, jamais réutilisé.
   Vérifier le dernier numéro : ls docs/decisions/adr/ | tail -3

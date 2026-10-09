@@ -1,4 +1,9 @@
 # ADR-0085 : L'élève entre dans une classe choisie ou donnée par un lien à jeton remplaçable, sans code de classe, et quiconque gère la classe peut l'en retirer
+<!-- index
+titre: L'élève entre dans une classe choisie ou donnée par un lien à jeton remplaçable, sans code de classe, et quiconque gère la classe peut l'en retirer
+statut: Accepté *(porteur, 2026-10-07)* — *amende 0041 (code d'adhésion), 0040 (changement de classe), 0065 (gestes de la direction)*
+problematique: Un seul use case `RegisterStudent` ; cascade DRENA → établissement → niveau → classe ; `/c/<jeton>` : `classrooms.link_token`, remplaçable ; entrée immédiate ; `classroom_students.joined_via`, `removed_at`, `removed_by_id` ; `RemoveStudent` et `ChangeClassroomLink` sous `ManageClassroomMembersPolicy` (enseignant de la classe, direction, équipe) ; `join_code` supprimé
+-->
 
 | | |
 |---|---|

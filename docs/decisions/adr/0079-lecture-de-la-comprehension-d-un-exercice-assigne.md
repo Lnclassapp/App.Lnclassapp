@@ -1,4 +1,9 @@
 # ADR-0079 : La compréhension d'un exercice assigné se lit au meilleur score de chaque élève, avec un signe de progrès, sur les seules sessions de l'assignation
+<!-- index
+titre: La compréhension d'un exercice assigné se lit au meilleur score de chaque élève, avec un signe de progrès, sur les seules sessions de l'assignation
+statut: Accepté *(2026-10-04)* — *complète 0033, 0048, 0072*
+problematique: Catégorie = `Grading.mastery_for(meilleur score)` ; signe sur premier, meilleur et dernier essai, marge 10 points (en baisse, en progrès, stable dès 70, stagne) ; lisible dès 5 élèves ; dominante, la plus fragile à égalité ; badges déduits du meilleur score de l'assignation ; taux par question sur le meilleur essai (le plus récent à égalité) ; lecture en direct sous `FollowAssignmentPolicy`, sans cache. Chantier `rapports-exercices`. Numéro 0078 pris par `feature/annonces`.
+-->
 
 | | |
 |---|---|

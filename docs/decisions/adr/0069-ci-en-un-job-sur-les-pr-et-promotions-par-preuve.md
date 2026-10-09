@@ -1,4 +1,10 @@
 # ADR-0069 : La CI tourne en un seul job, sur les PR prêtes ; une promotion prouve que son code a déjà été testé
+<!-- index
+titre: La CI tourne sur les PR prêtes, en deux jobs côte à côte ; une promotion prouve que son code a déjà été testé
+statut: Accepté *(2026-10-02)* — *amende 0064 ; amendé §8 (preuves cloud) et §9 (dix minutes par feature : deux jobs `unit` et `system`, budget de croissance 15 s par chantier, 2026-10-03)*
+date: 2026-10-02
+problematique: Quota GitHub : ≈ 1 500 minutes perdues le 2026-10-01 (33 par run, 79 % des runs sans code nouveau). `pull_request` seul, brouillons exclus ; `plan` décide, `unit` et `system` jouent `bin/ci`, `ci` rend le verdict ; arbre déjà vert (artefact `ci-tree-<arbre>` ou preuve cloud `ci/preuves`) non rejoué ; tirage 1 PR sur 5 ; budgets d'écrans hors CI (ADR-0067) ; Dependabot groupé vers `Develop`. Chantier `ci-quota`.
+-->
 
 | | |
 |---|---|

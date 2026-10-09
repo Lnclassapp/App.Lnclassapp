@@ -1,4 +1,9 @@
 # ADR-0028 : Une policy de domaine par use case, appelée en premier, qui refuse par `:forbidden`
+<!-- index
+titre: Une policy de domaine par use case, appelée en premier, qui refuse par `:forbidden`
+statut: Accepté — *complète 0004 §3.3, 0015*
+problematique: `Policies::<Contexte>::<Nom>Policy#call(actor:, …)` → `Result` ; acteur `Entities::Identity::Actor` ; policies de la V1 listées ; test de refus obligatoire. F-04.
+-->
 
 | | |
 |---|---|

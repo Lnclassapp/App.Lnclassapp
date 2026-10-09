@@ -1,4 +1,10 @@
 # UDR-0031 : Création de classe — l'équipe ajoute une classe à un établissement, en modale ouverte depuis sa fiche
+<!-- index
+titre: Création de classe
+statut: Accepté
+adr-lie: [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md)
+problematique: L'équipe ajoute une classe à un établissement, en modale ouverte depuis sa fiche
+-->
 
 | | |
 |---|---|

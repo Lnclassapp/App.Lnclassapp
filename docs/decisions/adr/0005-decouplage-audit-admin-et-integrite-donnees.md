@@ -1,4 +1,9 @@
 # ADR-0005 : Découplage de l'Audit Admin (`Team`) et Règle d'Intégrité des Données Structurelles
+<!-- index
+titre: Découplage de l'audit admin (`Team`) et règle anti-cascade
+statut: Accepté — *complété et amendé par [0036](./0036-suppression-archivage-et-anonymisation.md) (`restrict`)*
+problematique: Interdire `dependent: :destroy` sur les créateurs d'écoles ou de cours ; utiliser systématiquement `on_delete: :nullify` pour empêcher la destruction accidentelle de la scolarité.
+-->
 
 | | |
 |---|---|

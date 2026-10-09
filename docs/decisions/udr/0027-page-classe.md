@@ -1,4 +1,10 @@
 # UDR-0027 : Page classe — en-tête et code copiable, cours assignés, liste des élèves, pour l'enseignant de la classe et l'équipe
+<!-- index
+titre: Page classe
+statut: Accepté — *amendé le 2026-10-02 : jours de séance, exercices assignés, cours (UDR-0062)*
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0032](../adr/0032-recuperation-assistee-du-pin.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md)
+problematique: En-tête et code copiable, cours assignés, liste des élèves, pour l'enseignant de la classe et l'équipe
+-->
 
 | | |
 |---|---|

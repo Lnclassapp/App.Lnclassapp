@@ -1,4 +1,9 @@
 # ADR-0035 : Cycle de vie `draft` / `published` / `archived` du contenu, lu par policy, et contenu propriété de la plateforme
+<!-- index
+titre: Cycle de vie `draft` / `published` / `archived` du contenu, lu par policy, et contenu propriété de la plateforme
+statut: Accepté — *complète 0022 §2.A* — *amendé deux fois le 2026-10-01 (« Tout publier » en cascade ; l'élève ne lit que son niveau)*
+problematique: Même énumération sur cours, fiches, exercices ; transitions et conditions ; brouillon en 404 hors équipe ; `author_id` trace sans droit. F-13.
+-->
 
 | | |
 |---|---|

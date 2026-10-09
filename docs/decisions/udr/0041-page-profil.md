@@ -1,4 +1,11 @@
 # UDR-0041 : Page profil — mes informations, puis nom, numéro et PIN modifiables en modale
+<!-- index
+titre: Page profil
+statut: Accepté — *amendé le 2026-10-02 : épuration élève (UDR-0057) ; le 2026-10-06 : un seul style de bouton, élève tutoyé*
+date: 2026-09-28
+adr-lie: [0055](../adr/0055-profil-modification-de-soi-et-revocation-des-sessions.md)
+problematique: Mes informations, puis nom, numéro et PIN modifiables en modale
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,10 @@
 # UDR-0058 : Accueil élève — maquette du porteur sur téléphone et tablette, accueil actuel épuré sur ordinateur
+<!-- index
+titre: Accueil élève
+statut: Accepté *(2026-10-02)*
+adr-lie: [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), [0040](../adr/0040-classe-principale-unique-de-l-eleve.md), [0043](../adr/0043-remediation-declenchee-par-la-cloture.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md)
+problematique: Sous 1 024 px : bandeau bleu, carte « Prochain exercice » (ou la classe et un encouragement), grille de 6 matières et « Inviter », « À faire ensuite » et « Historique » en 3 lignes, sans barre basse ; au-dessus, l'accueil de l'UDR-0010 épuré. Remplace UDR-0010
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,10 @@
 # UDR-0065 : Mode sombre — les tokens changent de valeur, les écrans ne changent pas
+<!-- index
+titre: Mode sombre par les tokens
+statut: Proposé
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Le téléphone en thème sombre reçoit toute l'application en sombre : un bloc de la feuille redéfinit chaque token (texte clair, surfaces sombres, fonds clairs sous texte blanc, fonds profonds sous texte encre), écran seulement, voile de modale sombre ; aucune vue touchée, `dark:` toujours interdit ; 52 paires de contraste vérifiées. Lève la décision 4 de l'UDR-0005. Amendée le 2026-10-03 : interrupteur clair / sombre (en-tête lg+, profil sous lg), choix retenu par cookie
+-->
 
 | | |
 |---|---|
