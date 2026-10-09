@@ -29,7 +29,6 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 - Les rôles « Drena manager » et « DE » : ils n'existent pas dans l'application et ne sont pas créés ici.
 - Supprimer définitivement une classe.
 - Archiver en masse (par niveau ou par établissement).
-- Retirer les élèves d'une classe : cette action existe ou relève d'un autre chantier.
 
 ## Ce que le grill a révélé
 
@@ -38,7 +37,8 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Qui archive : « Drena managers » / « DE », ou direction et équipe ? | Direction et équipe (porteur) | Aucun nouveau rôle. Droit de la direction limité à son établissement, comme pour les autres actions de structure |
-| Une classe avec des élèves peut-elle être archivée ? | Non : retirer d'abord les élèves (porteur) | Refus tant qu'au moins un élève y est inscrit |
+| Une classe avec des élèves peut-elle être archivée ? | Oui, avec un message de confirmation (porteur, revient sur sa première réponse) | Aucun refus pour cause d'élèves ; la confirmation dit combien d'élèves sont concernés |
+| Une classe avec des enseignants rattachés ou des exercices assignés ? | Oui aussi, même confirmation (porteur) | Plus aucun blocage : seule la confirmation protège ; l'historique (adhésions, assignations) est conservé |
 
 ## Cas limites identifiés
 
