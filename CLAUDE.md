@@ -17,6 +17,19 @@ Lnclass est une plateforme éducative (LMS) en Rails 8, construite en **architec
 
 ---
 
+## Sobriété de tokens
+
+Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/sobriete-tokens/memo.md).
+
+- **Une session par chantier**, 40 commits au maximum : au-delà, on ouvre une nouvelle session.
+- **Un commit par lot**, documentation du lot comprise. Pas de commit qui ne touche que `docs/` en cours de lot.
+- **Index** ADR / UDR / chantiers : modifiés une seule fois, au commit de clôture.
+- **Pas de fusion depuis l'interface web** de GitHub.
+- **`bin/ci`** : rediriger la sortie dans un fichier, lire les 30 dernières lignes et les échecs.
+- **Charger à la demande** : `docs/guide/architecture.md` et `glossaire.md` seulement si la tâche l'exige.
+
+---
+
 ## Avant de coder
 
 **Tout travail suit [`docs/workflows/README.md`](docs/workflows/README.md)** — c'est le seul processus valide, en 5 phases : Cadrer → Décider → Planifier → Exécuter → Prouver.
