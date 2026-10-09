@@ -24,13 +24,11 @@ school_year = Entities::Classroom::SchoolYear.current(now.to_date)
 classrooms = Repositories::Classroom::ClassroomRepository.new
 lookup = Repositories::Catalog::TaxonomyRepository.new.lookup
 plan = Repositories::Classroom::ClassroomPlanRepository.new.plan
-taken = classrooms.taken_join_codes
 Orm::School.transaction do
   Repositories::School::SchoolRepository.new.insert_many(rows:, at: now).each do |school|
     generated = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup:, plan:).rows
-    codes = Entities::Classroom::JoinCode.generate_unique(count: generated.size, taken:)
-    classroom_rows = generated.zip(codes).map do |row, join_code|
-      row.merge(public_id: SecureRandom.base58(14), school_id: school.id, school_year:, join_code:)
+    classroom_rows = generated.map do |row|
+      row.merge(public_id: SecureRandom.base58(14), school_id: school.id, school_year:)
     end
     classrooms.insert_generated(rows: classroom_rows, at: now)
   end

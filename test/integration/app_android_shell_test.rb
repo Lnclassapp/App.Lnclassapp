@@ -1,11 +1,14 @@
 require "test_helper"
 
-# Chantier app-android, Lot B — CA-1 (ADR-0084 §4.2, UDR-0080 §3.3). Served to the Android shell, a page of the shell layout
-# loses the site's navigation (header, sidebar, bottom bar) and the install pop-up; a student's page declares the bridge
-# element that feeds the native top bar. The same page in a browser is unchanged.
+# Chantier app-android, Lot B — CA-1 (ADR-0084 §4.2, UDR-0080 §3.3); Lnclass Teacher, Lot TB — CA-T1 (ADR-0086 §4.2).
+# Served to an Android shell, a page of the shell layout loses the site's navigation (header, sidebar, bottom bar) and the
+# install pop-up; a student's or a teacher's page declares the bridge element that feeds the native top bar, with the
+# address of their account panel. The same page in a browser is unchanged.
 class AppAndroidShellTest < ActionDispatch::IntegrationTest
   APP = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
         "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
+  TEACHER_APP = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
+                "Hotwire Native Android; LnclassTeacherAndroid/1.0".freeze
   BRIDGE = "[data-controller='bridge--account']".freeze
 
   def in_app = { "User-Agent" => APP }
@@ -73,14 +76,45 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
     assert_select "#{BRIDGE}[data-bridge--account-photo-url-value]", 0
   end
 
-  test "CA-1 — a teacher seen through the shell has no site navigation and no bridge element" do
+  test "CA-T1 — in the teachers' shell, the teacher's home has no site navigation, but the bridge element to /teachers/menu" do
     sign_in_as create_teacher
 
-    get teacher_home_path, headers: in_app
+    get teacher_home_path, headers: { "User-Agent" => TEACHER_APP }
 
     assert_response :ok
     assert_select "header", 0
+    assert_select "aside", 0
+    assert_select "nav[aria-label='#{I18n.t('shared.navigation.bottom_bar.label')}']", 0
+    assert_select "a[href='#main']", 0
     assert_select "#install_banner", 0
+    assert_select "main#main:not(.pb-28):not(.lg\\:pl-rail)"
+    assert_select "#{BRIDGE}[hidden]", count: 1 do |element|
+      assert_equal({ "data-bridge--account-initials-value" => "AK", "data-bridge--account-menu-url-value" => "/teachers/menu",
+                     "data-bridge--account-help-url-value" => "/aide" },
+                   element.first.to_h.select { |name, _| name.end_with?("-value") })
+    end
+  end
+
+  test "CA-T1 — the teacher's same page in a browser keeps header, sidebar and bottom bar, without bridge element" do
+    sign_in_as create_teacher
+
+    get teacher_home_path
+
+    assert_response :ok
+    assert_select "header"
+    assert_select "aside"
+    assert_select "nav[aria-label='#{I18n.t('shared.navigation.bottom_bar.label')}']"
+    assert_select "main#main.pb-28.lg\\:pl-rail"
+    assert_select BRIDGE, 0
+  end
+
+  test "ADR-0086 §4.2 — the direction has no app of its own: no bridge element, even through a shell" do
+    sign_in_as create_school_admin
+
+    get school_admin_classrooms_path, headers: { "User-Agent" => TEACHER_APP }
+
+    assert_response :ok
+    assert_select "header", 0
     assert_select BRIDGE, 0
   end
 end

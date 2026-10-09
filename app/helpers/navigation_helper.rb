@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2)
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -41,6 +41,14 @@ module NavigationHelper
   SIDEBAR_FRAME_OPTIONS = { target: "_top", class: "mt-4 block", data: { turbo_permanent: true } }.freeze
   ACCOUNT_LINKS = [ [ :profile, :profile_path, "user-circle", nil ],
                     [ :sign_out, :session_path, "arrow-right-start-on-rectangle", :delete ] ].freeze
+  # UDR-0080 §3.2, UDR-0082 §3.2 : panneau du compte des rôles qui l'ont (les autres gardent le menu déroulant) — la
+  # page qui le rend sans JavaScript, puis ses liens [clé i18n, route, icône], dans l'ordre.
+  ACCOUNT_PANELS = {
+    student: { page: :student_menu_path, links: [ [ "shared.navigation.profile", :profile_path, "user-circle" ],
+                                                  [ "shared.navigation.courses", :courses_path, "book-open" ] ] },
+    teacher: { page: :teacher_menu_path, links: [ [ "shared.navigation.profile", :profile_path, "user-circle" ],
+                                                  [ "shared.navigation.account_panel.invite", :teacher_invite_path, "user-plus" ] ] }
+  }.freeze
   # Sections de l'accueil de chaque rôle (squelette) — reprises des fils d'accueil de l'ancienne application.
   # Celles de la direction ne servent plus qu'à la page de démonstration du shell (UDR-0052).
   # Élève : les annonces juste après « À faire » (UDR-0071 §3.1) ; une vue qui ne connaît pas une clé ne rend rien.
@@ -128,6 +136,19 @@ module NavigationHelper
       { label: t("shared.navigation.#{key}"), href: (public_send(route) if respond_to?(route)), icon:, method:,
         tone: key == :sign_out ? :danger : :default }
     end
+  end
+
+  def account_panel?(role)
+    ACCOUNT_PANELS.key?(role.to_sym)
+  end
+
+  # Adresse de la page du panneau : cible du déclencheur-lien de l'avatar.
+  def account_panel_page_path(role)
+    public_send(ACCOUNT_PANELS.fetch(role.to_sym)[:page])
+  end
+
+  def account_panel_links(role)
+    ACCOUNT_PANELS.fetch(role.to_sym)[:links].map { |key, route, icon| { label: t(key), href: public_send(route), icon: } }
   end
 
   def home_sections_for(role)

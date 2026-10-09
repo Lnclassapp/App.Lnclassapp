@@ -86,9 +86,9 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
   test "SC-05, SC-06, SC-09: edit a school from its page — the header changes, the classrooms stay — then deactivate it" do
     school = create_school(drena: @abidjan, name: "Lycée Classique", school_type: "public", cycle: "both")
     create_school(drena: @abidjan, name: "Lycée Moderne")
-    classroom = create_classroom(school:, level: create_level(name: "Tle"), name: "Tle D 1", join_code: "kfm37")
+    classroom = create_classroom(school:, level: create_level(name: "Tle"), name: "Tle D 1")
     visit school_path(school.public_id)
-    assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
+    assert_selector "#classroom_#{classroom.public_id}", text: "Tle D 1"
 
     assert_no_page_reload do
       click_menu_action("#school_header", I18n.t("#{header_scope}.edit"))
@@ -113,7 +113,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
         assert_text "Bouaké"
         assert_text I18n.t("teams.schools.cycles.first")
       end
-      assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
+      assert_selector "#classroom_#{classroom.public_id}", text: "Tle D 1"
 
       click_menu_action("#school_header", I18n.t("#{header_scope}.deactivate"))
       within("#school_header dialog[open]") { click_on I18n.t("#{header_scope}.confirm_deactivate") }

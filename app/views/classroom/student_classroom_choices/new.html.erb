@@ -1,0 +1,39 @@
+<%# 🌐 UI · classroom/student_classroom_choices/new — « Choisis ta classe » : l'élève sans classe active choisit la sienne %>
+<%# Rôle : page de l'espace élève, la cascade seule (DRENA et établissement de sa dernière classe déjà choisis), un bouton ; 422/403 re-rendus %>
+<%# ADR  : 0040, 0085 · UDR : 0005, 0054, 0081 (§3.3, §3.4, §3.5) %>
+<% page_title t(".page_title") %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
+
+<div class="max-w-xl">
+  <%= ui_card padding: :lg do %>
+    <%= form_with model: @form, scope: :student_classroom_choice, url: student_classroom_choices_path,
+                  id: "student-classroom-choice-form", class: "space-y-6",
+                  data: { controller: "classroom--class-picker",
+                          "classroom--class-picker-schools-url-value": drena_schools_path("__drena__", scope: :student_classroom_choice),
+                          "classroom--class-picker-levels-url-value": school_picker_levels_path("__school__", scope: :student_classroom_choice),
+                          "classroom--class-picker-classrooms-url-value": school_picker_classrooms_path("__school__", "__level__",
+                                                                                                       scope: :student_classroom_choice) } do |form| %>
+      <% if @link_invalid %>
+        <div id="classroom-link-invalid" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-ink">
+          <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
+          <p><%= t(".link_invalid") %></p>
+        </div>
+      <% end %>
+      <%# Retiré de cette classe, classe complète, déjà inscrit : la raison en tête (UDR-0081 §3.5). %>
+      <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>
+      <% if @form.errors[:base].any? %>
+        <div id="student-classroom-choice-refusal" role="alert" tabindex="-1" data-autofocus-target="field"
+           class="flex scroll-mt-24 items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error outline-none">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+          <p><%= @form.errors[:base].to_sentence %></p>
+        </div>
+      <% end %>
+
+      <%= render "classroom/student_registrations/class_picker", form:, scope: :student_classroom_choice, **class_picker_lists %>
+
+      <%# Sans JavaScript, jamais désactivé ; le contrôleur classroom--class-picker le désactive tant qu'aucune classe n'est cochée. %>
+      <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, id: "student-classroom-choice-submit",
+                                  data: { "classroom--class-picker-target": "submit" } %>
+    <% end %>
+  <% end %>
+</div>

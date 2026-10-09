@@ -8,12 +8,13 @@ class HomepageRedirectionTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "a signed-in student without a classroom is sent to the pending account screen" do
+  # IL-14 (ADR-0085 §4.3): the home of a student without a classroom offers to choose one.
+  test "a signed-in student without a classroom is sent to their home" do
     sign_in_as create_student
 
     get root_path
 
-    assert_redirected_to pending_account_path
+    assert_redirected_to student_home_path
   end
 
   test "a signed-in teacher is sent to the teacher home" do

@@ -91,7 +91,8 @@ class Identity::SignInTest < ApplicationSystemTestCase
 
       sign_in_as student
 
-      assert_arrived_on pending_account_path
+      # IL-14 (ADR-0085 §4.3) : sans classe, l'élève arrive sur son accueil, qui propose d'en choisir une.
+      assert_arrived_on student_home_path
       assert_toast "Connexion réussie"
 
       sign_out

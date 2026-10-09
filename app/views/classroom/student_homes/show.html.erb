@@ -1,14 +1,20 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
-<%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée %>
-<%# ADR  : 0033, 0043, 0078 · UDR : 0006, 0078, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1, 0080 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée ; sans classe, « Choisis ta classe » %>
+<%# ADR  : 0033, 0043, 0078, 0085 · UDR : 0006, 0078, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1, 0080, 0081 §3.5 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
-<% exercises = @home.assigned_exercises %>
 <%# UDR-0061, amendement du 2026-10-06 : sous lg, pas de « Bonjour » visible (la carte de classe monte en tête).
     UDR-0080 §3.1 : « Besoin d'aide ? » est dans l'en-tête de l'élève, qui rend la carte d'aide une seule fois. %>
 <div class="lg:mb-6">
   <h1 class="font-display text-3xl font-extrabold tracking-tight text-balance max-lg:sr-only"><%= t(".greeting", name: shell_user.first_name) %></h1>
 </div>
 
+<% if @home.nil? %>
+<%# UDR-0081 §3.5 : sans classe active, ni exercices ni matières ni activité à lire (tous suivent la classe) : la seule carte. %>
+<div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
+  <%= render "no_classroom" %>
+</div>
+<% else %>
+<% exercises = @home.assigned_exercises %>
 <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
 <div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
   <% home_sections_for(:student).each do |key, icon| %>
@@ -53,5 +59,6 @@
     <% end %>
   <% end %>
 </div>
+<% end %>
 <%# UDR-0078, amendement du 2026-10-07 : l'invitation à installer l'app, en pop-up, sur l'accueil seulement %>
 <%= render "shared/navigation/install_banner", role: "student" %>

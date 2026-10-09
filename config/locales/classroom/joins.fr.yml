@@ -1,60 +1,6 @@
-# Rejoindre une classe par son code : saisie du code, aperçu de /c/<code>, inscription de l'élève (plan boucle-pedagogique, Lot A1) — ADR-0040, ADR-0041, ADR-0050, UDR-0007, UDR-0009 (amendée le 2026-10-02, interface-epuree Lot E), UDR-0054
+# Rejoindre une classe par son lien /c/<jeton> : aperçu, entrée de l'élève sans classe, classe complète — ADR-0040, ADR-0041, ADR-0050, ADR-0085, UDR-0007, UDR-0054, UDR-0081
 fr:
-  activemodel:
-    attributes:
-      dtos/classroom/join_with_code_input:
-        last_name: "Nom"
-        first_name: "Prénom(s)"
-        gender: "Genre"
-        contact: "Numéro de téléphone"
-        pin: "Code secret"
-        pin_confirmation: "Confirmation du code secret"
-    errors:
-      models:
-        dtos/classroom/join_with_code_input:
-          attributes:
-            base:
-              classroom_archived: "Cette classe est archivée. Demande le code de ta nouvelle classe à ton enseignant."
-              classroom_full: "Cette classe est complète. Préviens ton enseignant."
-              join_code_revoked: "Ce code de classe n'est plus valable. Demande le nouveau code à ton enseignant."
-              already_enrolled: "Tu es déjà inscrit dans une classe."
-              already_member: "Tu es déjà inscrit dans cette classe."
-            last_name:
-              blank: "Saisis ton nom."
-              too_long: "Le nom compte %{count} caractères au plus."
-              invalid: "Le nom ne contient que des lettres, des espaces, des apostrophes et des tirets."
-            first_name:
-              blank: "Saisis ton ou tes prénoms."
-              too_long: "Les prénoms comptent %{count} caractères au plus."
-              invalid: "Les prénoms ne contiennent que des lettres, des espaces, des apostrophes et des tirets."
-            gender:
-              inclusion: "Choisis ton genre."
-            contact:
-              blank: "Saisis ton numéro de téléphone."
-              invalid: "Saisis un numéro ivoirien à 10 chiffres, par exemple 07 01 02 03 04."
-              taken: "Ce numéro est déjà utilisé."
-            pin:
-              blank: "Choisis un code secret à 4 chiffres."
-              invalid: "Le code secret compte 4 chiffres."
-            pin_confirmation:
-              confirmation: "Les deux codes secrets ne sont pas identiques."
   classroom:
-    join_codes:
-      new:
-        page_title: "Rejoindre une classe"
-        logo_home: "Lnclass, accueil"
-        title: "Rejoindre une classe"
-        code_label: "Code de classe"
-        code_placeholder: "KFM37"
-        code_info_tip: "Ton enseignant te donne ce code : 3 lettres puis 2 chiffres."
-        submit: "Continuer"
-        have_account: "Déjà un compte ?"
-        sign_in: "Se connecter"
-      create:
-        blank: "Saisis le code de ta classe."
-        invalid: "Code de classe invalide. Il compte 3 lettres puis 2 chiffres, par exemple KFM37."
-        unknown: "Code de classe invalide. Vérifie le code auprès de ton enseignant, puis saisis-le de nouveau."
-        rate_limited: "Trop de tentatives. Patiente une minute, puis réessaie."
     joins:
       new:
         page_title: "Rejoindre ma classe"
@@ -65,25 +11,11 @@ fr:
         student_title: "Rejoindre cette classe"
         student_info_tip: "Tu gardes ton compte, tes sessions et tes badges."
         join_as_student: "Rejoindre cette classe"
-        have_account: "Déjà un compte ?"
-        sign_in: "Se connecter"
         rate_limited_title: "Trop de tentatives"
-        invalid_code:
-          title: "Code de classe invalide."
-          description: "Vérifie le code auprès de ton enseignant, puis saisis-le de nouveau."
-          other_code: "Saisir un autre code"
+        # UDR-0081 §3.4 : le lien d'une classe complète l'affiche, sans formulaire.
+        classroom_full: "Cette classe est complète."
       classroom_preview:
         label: "Ta classe"
         level: "Niveau : %{level}"
-      signup_form:
-        identity: "Ton identité"
-        last_name_placeholder: "Ex. : Kouassi"
-        first_name_placeholder: "Ex. : Aya Marie"
-        contact: "Ton contact"
-        contact_placeholder: "07 00 00 00 00"
-        contact_info_tip: "10 chiffres. Il te servira à te connecter."
-        security: "Sécurité"
-        pin_info_tip: "4 chiffres, que toi seul connais."
-        submit: "Créer mon compte"
       create:
         welcome: "Bienvenue dans ta classe !"

@@ -13,8 +13,8 @@ module Queries
 
       def overview(show_roster: true, **) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:, **)
 
-      test "l'aperçu porte les élèves, les jours de séance, les exercices assignés et les cours" do
-        assert_equal %i[students session_days assignments courses], ClassroomOverviewQuery::Overview.members
+      test "l'aperçu porte les élèves et leurs nouveaux, les jours de séance, les exercices assignés et les cours" do
+        assert_equal %i[students new_students_count session_days assignments courses], ClassroomOverviewQuery::Overview.members
       end
 
       test "jours de séance : ceux de l'enseignant pour cette classe, triés ; vides s'il n'en a pas ; nil pour l'équipe" do
@@ -165,13 +165,51 @@ module Queries
       end
 
       test "chaque élève porte la version de sa photo, en une seule requête pour la classe (ADR-0060)" do
-        with_photo = attach_photo(create_student(classroom: @classroom, last_name: "Bamba"))
-        create_student(classroom: @classroom, last_name: "Yao")
+        with_photo = attach_photo(create_student(classroom: @classroom, last_name: "Bamba", joined_at: 1.month.ago))
+        create_student(classroom: @classroom, last_name: "Yao", joined_at: 1.month.ago)
 
         versions = overview.students.map(&:photo_version)
 
         assert_equal [ Queries::Identity::PhotoVersions.for(user_ids: [ with_photo.id ])[with_photo.id], nil ], versions
         assert_not_nil versions.first
+      end
+
+      # IL-13 (ADR-0085 §4.4, UDR-0081 §3.7) : « nouveau » pendant 7 jours après joined_at, calcul de lecture ; la voie
+      # d'arrivée sur chaque ligne ; les nouveaux d'abord, du plus récent au plus ancien, les autres par nom.
+      test "IL-13 : nouveaux arrivés en tête, du plus récent au plus ancien, avec leur voie ; les autres par nom" do
+        travel_to(Time.zone.local(2026, 10, 7, 9)) do
+          koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_via: "standard",
+                                 joined_at: 2.days.ago)
+          awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_via: "link",
+                               joined_at: 10.days.ago)
+          zoe = create_student(classroom: @classroom, first_name: "Zoé", last_name: "Zran", joined_via: "link",
+                               joined_at: 1.hour.ago)
+          ali = create_student(classroom: @classroom, first_name: "Ali", last_name: "Cissé", joined_via: "code",
+                               joined_at: 1.year.ago)
+          edge = create_student(classroom: @classroom, first_name: "Éva", last_name: "Diallo", joined_via: "standard",
+                                joined_at: 7.days.ago)
+          left = create_student(classroom: @classroom, joined_at: 1.day.ago)
+          Orm::ClassroomStudent.where(student: left).update_all(left_at: Time.current)
+          create_student(classroom: create_classroom, joined_at: 1.day.ago)
+
+          students = overview.students
+
+          assert_equal [ zoe, koffi, awa, ali, edge ].map(&:public_id), students.map(&:public_id)
+          assert_equal [ true, true, false, false, false ], students.map(&:newcomer)
+          assert_equal %w[link standard link code standard], students.map(&:joined_via)
+          assert_equal 2, overview.new_students_count
+          assert_nil overview(show_roster: false).new_students_count
+        end
+      end
+
+      test "IL-13 : le compte des nouveaux est celui de la classe, pas celui de la recherche" do
+        create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_at: 1.day.ago)
+        create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_at: 2.days.ago)
+
+        result = overview(search: "awa")
+
+        assert_equal 1, result.students.size
+        assert_equal 2, result.new_students_count
       end
 
       test "sans show_roster, aucun élève n'est lu ; une classe vide a une liste vide" do

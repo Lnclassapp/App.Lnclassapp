@@ -14,13 +14,13 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
                             completed_at: Time.zone.local(2026, 3, 12, 10))
   end
 
-  test "a student without an active classroom signs in, lands on the exit screen and opens his archive" do
+  # IL-14 (ADR-0085 §4.3): the home of a student without a classroom carries the archive, as the exit screen did.
+  test "a student without an active classroom signs in, lands on his home and opens his archive" do
     sign_in_as @student
     follow_redirect!
-    assert_equal pending_account_path, path
-    assert_select "#pending_account" do
-      assert_select "h1", text: "Tu n'as plus de classe active"
-      assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre une classe"
+    assert_equal student_home_path, path
+    assert_select "#student_home_no_classroom" do
+      assert_select "a[href='#{new_student_classroom_choice_path}']", text: "Choisir ma classe"
       assert_select "a[href='#{student_archive_path}']", text: "Voir mon historique"
     end
 
