@@ -45,4 +45,28 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
       assert page.evaluate_script("document.activeElement.matches('#{TRIGGER}')"), "le focus n'est pas revenu sur l'avatar"
     end
   end
+
+  # CA-T6 (Lnclass Teacher) — UDR-0082 §3.1, §3.2: the same header for the teacher; the panel lists « Mon profil » then
+  # « Inviter un collègue ». The opening and closing mechanics are those checked above.
+  test "CA-T6: at 390 px, the teacher's header holds on one line and the avatar opens the panel with Invite" do
+    sign_in_as create_teacher(first_name: "Awa", last_name: "Traoré")
+
+    with_mobile_viewport do
+      visit teacher_home_path
+
+      assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+      within("header") do
+        assert_no_selector "img[src*='logo']"
+        assert_link I18n.t("shared.help_sheet.trigger"), visible: true
+        assert_selector "button[role=switch]", visible: true
+      end
+
+      find(TRIGGER).click
+      within("dialog#account_panel[open]") do
+        assert_equal [ I18n.t("shared.navigation.profile"), I18n.t("shared.navigation.account_panel.invite") ],
+                     all("nav a", minimum: 2).map(&:text)
+        assert_button I18n.t("shared.navigation.sign_out")
+      end
+    end
+  end
 end

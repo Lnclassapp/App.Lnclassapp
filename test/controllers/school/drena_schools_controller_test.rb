@@ -3,6 +3,8 @@ require "test_helper"
 # ID-08, SC-26 (UDR-0024): the active schools of a DRENA, public and rate limited — the « schools » frame of the
 # teacher sign-up (or of the waiting screen, scope=school_join) in HTML, a list of { public_id, name } in JSON.
 # Only the active schools, sorted by name.
+# IL-04, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the student cascade reuses the template in its « picker_schools » frame
+# (scope=student_registration or student_classroom_choice), its select chained to the levels.
 class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @drena = create_drena(name: "Abidjan 1")
@@ -93,6 +95,49 @@ class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
     end
 
     get drena_schools_path(@drena.public_id, format: :json)
+
+    assert_response :too_many_requests
+  end
+
+  test "IL-04: the student scopes render the picker_schools frame, its select chained to the levels" do
+    { "student_registration" => "student_registration", "student_classroom_choice" => "student_classroom_choice" }.each do |scope, name|
+      get drena_schools_path(@drena.public_id, scope:), headers: { "Turbo-Frame" => "picker_schools" }
+
+      assert_response :success
+      assert_select "turbo-frame#schools", 0
+      assert_select "turbo-frame#picker_schools.block.transition-opacity[aria-live=polite]" do
+        assert_select "select[name='#{name}[school_public_id]'][required][data-action='change->classroom--class-picker#loadLevels']"
+        assert_select "option[value='']", text: I18n.t("classroom.student_registrations.class_picker.school_prompt")
+        assert_equal [ "Collège Voltaire", "Lycée Classique d'Abidjan" ], css_select("option[value!='']").map(&:text)
+        assert_select "label[for='#{name}_school_public_id']", text: /#{I18n.t("school.drena_schools.index.label")}/
+        assert_select "input[type=hidden]", 0
+      end
+      assert_select "[data-school--drena-schools-target]", 0
+    end
+  end
+
+  test "IL-06: in the student cascade, a DRENA without an active school says the classroom is not on Lnclass yet" do
+    empty = create_drena(name: "Bouaké 1")
+
+    get drena_schools_path(empty.public_id, scope: "student_registration")
+
+    assert_response :success
+    assert_select "turbo-frame#picker_schools",
+                  text: /#{Regexp.escape(I18n.t("classroom.student_registrations.class_picker.not_found_title"))}/
+    assert_select "select", 0
+  end
+
+  test "in the student cascade, the 31st request receives 429 with the error state in the frame and « Retry »" do
+    30.times { get drena_schools_path(@drena.public_id, format: :json) }
+
+    get drena_schools_path(@drena.public_id, scope: "student_registration")
+
+    assert_response :too_many_requests
+    assert_select "turbo-frame#picker_schools [role=alert]",
+                  text: /#{Regexp.escape(I18n.t("classroom.student_registrations.class_picker.rate_limited"))}/
+    assert_select "turbo-frame#picker_schools a[href='#{drena_schools_path(@drena.public_id, scope: 'student_registration')}']"
+
+    get drena_schools_path(@drena.public_id, scope: "student_registration", format: :json)
 
     assert_response :too_many_requests
   end

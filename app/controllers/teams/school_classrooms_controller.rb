@@ -12,7 +12,7 @@ module Teams
       @form = Dtos::Classroom::ClassroomInput.new(school_public_id: @school.public_id)
     end
 
-    # Succès : toast avec le code, modale refermée, fiche de l'établissement (S2) re-demandée et fusionnée par morphing.
+    # Succès : toast avec le nom de la classe, modale refermée, fiche de l'établissement (S2) re-demandée et fusionnée par morphing.
     def create
       @form = form_input
       render_result create_classroom.call(actor: current_actor, dto: @form), form: :new,
@@ -23,11 +23,10 @@ module Teams
 
     def respond_created(classroom)
       @classroom = classroom
-      @join_code = Entities::Classroom::JoinCode.display(classroom.join_code)
       respond_to do |format|
         format.turbo_stream
         format.html do
-          redirect_to classroom_path(classroom.public_id), notice: t(".created", code: @join_code), status: :see_other
+          redirect_to classroom_path(classroom.public_id), notice: t(".created", name: classroom.name), status: :see_other
         end
       end
     end

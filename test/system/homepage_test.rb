@@ -28,7 +28,7 @@ class HomepageTest < ApplicationSystemTestCase
       within("dialog#role-modal-student-hero[open]") do
         assert_title "Tu es élève ? · Lnclass"
         assert_link "Se connecter", href: new_session_path
-        assert_link "Rejoindre ma classe", href: new_join_code_path
+        assert_link "Rejoindre ma classe", href: new_student_registration_path
         find("button[aria-label='Fermer']").click
       end
       assert_no_selector "dialog[open]"
@@ -45,7 +45,7 @@ class HomepageTest < ApplicationSystemTestCase
 
       within("#hero") { click_on "Je suis élève" }
       within("dialog#role-modal-student-hero[open]") { click_on "Rejoindre ma classe" }
-      assert_current_path new_join_code_path
+      assert_current_path new_student_registration_path
     end
   end
 
@@ -77,7 +77,7 @@ class HomepageTest < ApplicationSystemTestCase
       within("#hero") { click_on "Je suis élève" }
       within("dialog#role-modal-student-hero[open]") do
         assert_link "Se connecter", href: new_session_path
-        assert_link "Rejoindre ma classe", href: new_join_code_path
+        assert_link "Rejoindre ma classe", href: new_student_registration_path
       end
     end
   end

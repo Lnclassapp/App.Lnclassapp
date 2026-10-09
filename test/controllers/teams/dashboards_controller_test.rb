@@ -14,6 +14,13 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
   # A figure reads as its number, then its label: « 2 élèves actifs ».
   def figure(key, count) = including("#{count} #{tl("key_figures.#{key}", count:)}")
 
+  def count_queries(&)
+    count = 0
+    counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
+    count
+  end
+
   test "a teacher, a student and a school admin receive 403; a visitor goes to the sign-in" do
     [ create_teacher, create_student, create_user(role: "school_admin") ].each do |user|
       sign_in_as user
@@ -126,6 +133,24 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # CA-T5 (ADR-0086 §4.6): the tile tells how many of these teachers opened Lnclass Teacher in the period, under their
+  # line, read by the same grouped query: the page makes as many queries with or without them.
+  test "CA-T5: the app openers tile reads « dont app Android : 1 enseignant », with as many queries as without" do
+    sign_in_as @member
+    get team_dashboard_path
+    before = count_queries { get team_dashboard_path }
+    create_teacher(android_opened_at: 1.day.ago)
+    create_teacher(android_opened_at: 20.days.ago)
+    create_student(android_opened_at: 1.day.ago)
+
+    assert_equal before, count_queries { get team_dashboard_path }
+    assert_select "#team_dashboard_period ul#team_dashboard_app_openers" do
+      assert_select "li", text: tl("key_figures.app_openers_teachers", count: 1)
+      assert_select "li#figure_app_openers_android_teachers", text: "dont app Android : 1 enseignant"
+      assert_select "li#figure_app_openers_android", text: "dont app Android : 1 élève"
+    end
+  end
+
   test "the app openers tile shows zeros rather than hiding" do
     sign_in_as @member
 
@@ -134,6 +159,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#figure_app_openers li", text: "0 élève"
     assert_select "#figure_app_openers li", text: "0 enseignant"
     assert_select "#figure_app_openers li#figure_app_openers_android", text: "dont app Android : 0 élève"
+    assert_select "#figure_app_openers li#figure_app_openers_android_teachers", text: "dont app Android : 0 enseignant"
   end
 
   test "the period links keep the DRENA, and the current one is marked" do
@@ -351,7 +377,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @member
     get team_dashboard_path(period: "year", drena: abidjan.public_id)
     create_student(classroom:).tap do |twice|
-      Orm::ClassroomStudent.create!(classroom: create_classroom(school:), student: twice, primary: false, joined_at: Time.current)
+      Orm::ClassroomStudent.create!(joined_via: "standard", classroom: create_classroom(school:), student: twice, primary: false, joined_at: Time.current)
     end
     create_student(classroom: create_classroom(school: create_school(drena: abidjan)))
 

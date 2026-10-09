@@ -205,7 +205,7 @@ module Repositories
         draft = create_school(drena: @drena, name: "Lycée brouillon", status: "draft", school_type: "private", cycle: "first")
         create_school(drena: @drena, name: "Lycée désactivé", status: "inactive")
         archived = create_school(drena: @drena, name: "Lycée à la classe archivée")
-        create_classroom(school: archived, status: "archived", join_code: nil)
+        create_classroom(school: archived, status: "archived")
         last_year = create_school(drena: @drena, name: "Lycée de l'an dernier")
         create_classroom(school: last_year, school_year: current_school_year(on: 1.year.ago.to_date))
         equipped = create_school(drena: @drena, name: "Lycée doté")

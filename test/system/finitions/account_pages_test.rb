@@ -70,11 +70,12 @@ class Finitions::AccountPagesTest < ApplicationSystemTestCase
     end
   end
 
+  # ADR-0085 §4.3 : l'écran d'attente n'est plus la destination d'un élève ; il reste celle d'un enseignant sans établissement.
   test "the pending account page has a composed title" do
-    sign_in_as create_student(first_name: "Awa", last_name: "Traoré")
+    sign_in_as create_user(role: "teacher", first_name: "Awa", last_name: "Traoré")
 
     assert_selector "#pending_account"
-    assert_equal "Compte en attente · Élève · Lnclass", page.title
+    assert_equal "Compte en attente · Enseignant · Lnclass", page.title
   end
 
   # FU-27

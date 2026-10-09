@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · HomepageController
 # Rôle : sert la page d'accueil publique ; une personne connectée est envoyée vers son accueil, l'ouverture depuis l'app installée datée
-# ADR  : 0001, 0050, 0082, 0084
+# ADR  : 0001, 0050, 0082, 0084, 0086
 class HomepageController < ApplicationController
   allow_unauthenticated_access
 
@@ -14,13 +14,13 @@ class HomepageController < ApplicationController
 
   private
 
-  # ADR-0082 §4.3 : l'icône de l'app installée ouvre « /?source=app » (canal :pwa). ADR-0084 §4.6 : la coque Android
-  # ouvre « /?source=android » (canal :android), compté seulement s'il vient d'elle ; tapé dans un navigateur, il ne date
-  # rien. Toute autre source est ignorée.
+  # ADR-0082 §4.3 : l'icône de l'app installée ouvre « /?source=app » (canal :pwa). ADR-0084 §4.6, ADR-0086 §4.6 : une
+  # coque Android reconnue, élèves ou enseignants, ouvre « /?source=android » (canal :android), compté seulement s'il
+  # vient d'elle ; tapé dans un navigateur, il ne date rien. Toute autre source est ignorée.
   def app_open_channel
     case params[:source]
     when "app" then :pwa
-    when "android" then :android if lnclass_app == :android_student
+    when "android" then :android if lnclass_app?
     end
   end
 

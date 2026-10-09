@@ -155,7 +155,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", sigle: "LCA", school_type: "public", cycle: "both")
     sixth = create_level(name: "6ème", position: 1, cycle: "first")
     final = create_level(name: "Tle", position: 7)
-    tle = create_classroom(school:, level: final, series: create_series(name: "D"), name: "Tle D 1", join_code: "kfm37")
+    tle = create_classroom(school:, level: final, series: create_series(name: "D"), name: "Tle D 1")
     create_classroom(school:, level: sixth, name: "6ème 1")
     create_student(classroom: tle)
     create_teacher(school:, first_name: "Awa", last_name: "Koné", classrooms: [ tle ],
@@ -178,7 +178,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "section[aria-labelledby^=level_] h3", 2
     assert_select "section h3", text: "6ème"
     assert_select "#classroom_#{tle.public_id}", text: /Tle D 1/
-    assert_select "#classroom_#{tle.public_id}", text: /KFM37/
+    assert_select "#classroom_#{tle.public_id} dt", text: /code/i, count: 0
     assert_select "#classroom_#{tle.public_id}", text: /Awa Koné/
     assert_select "#classroom_#{tle.public_id} a[data-turbo-frame=_top][href='#{classroom_path(tle.public_id)}']"
     assert_select "#school_teachers li", text: /Awa Koné/

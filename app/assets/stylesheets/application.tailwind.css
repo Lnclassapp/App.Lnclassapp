@@ -280,6 +280,19 @@
   grid-template-columns: minmax(0, 1fr) 20rem;
 }
 
+/* Ligne de tableau empilée sur téléphone (UDR-0081 §3.7) : le contenu, puis une colonne à sa largeur pour le menu ⋮. */
+@utility grid-cols-content-action {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+/* Cellule empilée : son libellé de colonne (data-label) précède la valeur, sans changer le texte de la cellule. */
+@utility cell-label {
+  &::before {
+    content: attr(data-label) " : ";
+    color: var(--color-mute);
+  }
+}
+
 /* Numérotation des questions d'un exercice (formulaire) : la liste remet à zéro, chaque question compte,
    le numéro s'affiche par ::before. */
 @utility counter-questions {

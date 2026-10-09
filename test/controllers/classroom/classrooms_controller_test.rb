@@ -13,37 +13,14 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan")
-    @classroom = create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1", join_code: "kfm37",
+    @classroom = create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1",
                                   max_students: 60)
     @teacher = create_teacher(school: @school, classrooms: [ @classroom ])
   end
 
   def scope = "classroom.classrooms"
 
-  test "CP-08: « Partager sur WhatsApp » envoie le lien /c/<code> et le code, sans aucun nom d'élève (ADR-0063)" do
-    create_student(classroom: @classroom, first_name: "Zoé", last_name: "Unique")
-    sign_in_as @teacher
-
-    get classroom_path(@classroom.public_id)
-
-    message = I18n.t("#{scope}.header.share_message", classroom: "6ème 1", school: "Lycée Classique d'Abidjan",
-                                                       link: join_classroom_url("KFM37"), code: "KFM37")
-    assert_select "#classroom_header a#classroom_whatsapp_share[href='https://wa.me/?text=#{ERB::Util.url_encode(message)}']" \
-                  "[target=_blank][rel=noopener]", text: I18n.t("#{scope}.header.share_whatsapp")
-    assert_no_match(/Zoé|Unique/, message)
-    assert_includes message, "/c/KFM37"
-  end
-
-  test "CP-08: une classe sans code n'a rien à partager" do
-    @classroom.update!(join_code: nil)
-    sign_in_as @teacher
-
-    get classroom_path(@classroom.public_id)
-
-    assert_select "#classroom_whatsapp_share", 0
-  end
-
-  test "l'enseignant de la classe voit l'en-tête, le code en majuscules et ses élèves, sans « Cours assignés »" do
+  test "l'enseignant de la classe voit l'en-tête, le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", contact: "0102030405")
@@ -61,22 +38,11 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select within_header, text: /Lycée Classique d'Abidjan/
     assert_select within_header, text: /6ème/
     assert_select within_header, text: /#{@classroom.school_year}/
-    assert_select "#{within_header} #classroom_join_code", text: "KFM37"
-    assert_select "#{within_header} [data-controller=clipboard][data-clipboard-text-value='KFM37']" do
-      assert_select "button[hidden][data-action='clipboard#copy'][aria-label=?]", I18n.t("#{scope}.header.copy_label", code: "KFM37"),
-                    text: I18n.t("#{scope}.header.copy")
-      assert_select "template[data-clipboard-target=copied]", text: /#{I18n.t("shared.clipboard.copied_code")}/
-      assert_select "template[data-clipboard-target=failed]", text: /#{I18n.t("shared.clipboard.failed")}/
-    end
-    assert_select "#{within_header} [data-controller=clipboard][data-clipboard-text-value='#{join_classroom_url('KFM37')}']" do
-      assert_select "button[hidden][data-action='clipboard#copy'][aria-label=?]", I18n.t("#{scope}.header.copy_link_label"),
-                    text: I18n.t("#{scope}.header.copy_link")
-      assert_select "template[data-clipboard-target=copied]", text: /#{I18n.t("shared.clipboard.copied_link")}/
-    end
-    assert_select "[data-controller~='classroom--join-code-copy']", 0
+    # IL-02, UDR-0081 §3.6 : le bloc du lien a remplacé le code.
+    assert_select "#{within_header} #classroom_link", 1
+    assert_select "#{within_header} [id*=join_code], [data-controller~='classroom--join-code-copy']", 0
     assert_select "#{within_header} details summary", text: /#{I18n.t("#{scope}.header.headcount_label")}/
     assert_select "#{within_header} details", text: /#{I18n.t("#{scope}.header.headcount_tip", max: 60)}/
-    assert_no_match(/kfm37/, response.body)
     assert_select "#classroom_headcount", text: I18n.t("#{scope}.header.headcount", count: 2, max: 60)
 
     assert_select "#assigned_courses", 0
@@ -486,7 +452,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "6ème 1 · Équipe · Lnclass"
     assert_select "nav[aria-label='Retour'] a[href='#{school_path(@school.public_id)}']", text: "Lycée Classique d'Abidjan"
     assert_select "nav[aria-label='Retour'] a[href='#{teacher_home_path}']", 0
-    assert_select "#classroom_header", text: /KFM37/
+    assert_select "#classroom_header #classroom_link", 1
     assert_select "#student_#{student.public_id}", text: /Awa Bamba/
   end
 
@@ -499,7 +465,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(@classroom.public_id, q: "awa")
 
     assert_response :success
-    assert_select "#classroom_roster_title", text: I18n.t("#{scope}.roster.title", count: 2)
+    assert_select "#classroom_roster_title", text: /\A\s*#{I18n.t("#{scope}.roster.title", count: 2)}/
     assert_select "input[name=q][value=awa]"
     assert_select "#classroom_roster_list [aria-live=polite]", text: I18n.t("#{scope}.roster.count", count: 1)
     assert_select "#student_#{awa.public_id}", 1
@@ -536,16 +502,15 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "une classe vide, sans cours ni élève, et sans code, le dit" do
-    classroom = create_classroom(school: @school, join_code: nil)
+  test "une classe vide, sans cours ni élève, le dit" do
+    classroom = create_classroom(school: @school)
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
     sign_in_as @teacher
 
     get classroom_path(classroom.public_id)
 
     assert_response :success
-    assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.no_join_code")}/
-    assert_select "[data-controller=clipboard]", 0
+    assert_select "#classroom_link", 1
     assert_select "#assigned_courses_empty", 0
     assert_select "#classroom_roster_empty", text: /#{I18n.t("#{scope}.roster.empty_title")}/
     assert_select "#classroom-roster-search", 0
@@ -565,6 +530,81 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{student.public_id}", 1
     assert_select "#classroom_roster_list form", 0
     assert_select "#classroom_roster_list [role=menu]", 0
+    assert_select "#classroom_roster_list dialog", 0
+  end
+
+  # IL-13 (ADR-0085 §4.4, UDR-0081 §3.7) : « Nouveau » pendant 7 jours, la voie sous chaque nom, les nouveaux en tête,
+  # le compte des nouveaux dans le titre de la liste.
+  test "IL-13 : « Nouveau » et « Inscrit seul » sur l'arrivé d'il y a 2 jours, « Par le lien » seul sur celui d'il y a 10 jours" do
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_via: "link", joined_at: 10.days.ago)
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_via: "standard", joined_at: 2.days.ago)
+    ali = create_student(classroom: @classroom, first_name: "Ali", last_name: "Cissé", joined_via: "code", joined_at: 1.year.ago)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "h2#classroom_roster_title[tabindex='-1']", text: /#{I18n.t("#{scope}.roster.title", count: 3)}/ do
+      assert_select "span", text: I18n.t("#{scope}.roster.new_count", count: 1)
+    end
+    assert_select "h2#classroom_roster_title[data-controller]", 0
+    assert_equal [ koffi, awa, ali ].map { "student_#{it.public_id}" }, css_select("#classroom_roster_list li[id]").map { it["id"] }
+    assert_select "#student_#{koffi.public_id}" do
+      assert_select "span", text: I18n.t("#{scope}.roster.new")
+      assert_select "p.text-xs.text-mute", text: I18n.t("#{scope}.roster.via.standard")
+    end
+    assert_select "#student_#{awa.public_id}" do
+      assert_select "span", text: I18n.t("#{scope}.roster.new"), count: 0
+      assert_select "p.text-xs.text-mute", text: I18n.t("#{scope}.roster.via.link")
+    end
+    assert_select "#student_#{ali.public_id}", text: /#{I18n.t("#{scope}.roster.via.standard")}|#{I18n.t("#{scope}.roster.via.link")}/,
+                                                count: 0
+    assert_select "#student_#{ali.public_id}", text: /#{I18n.t("#{scope}.roster.new")}/, count: 0
+  end
+
+  test "IL-13 : sans nouvel arrivé, le titre n'a pas de pastille" do
+    create_student(classroom: @classroom, joined_at: 8.days.ago)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "h2#classroom_roster_title", text: I18n.t("#{scope}.roster.title", count: 1)
+    assert_select "h2#classroom_roster_title span", 0
+  end
+
+  # IL-14 (UDR-0081 §3.7) : dernier item du menu ⋮, séparé par un filet ; la modale nomme l'élève ; DELETE vers la ligne.
+  test "IL-14 : « Retirer de la classe » termine le menu ⋮ de chaque ligne et ouvre une confirmation qui nomme l'élève" do
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id, q: "koffi")
+
+    dialog = "remove-student-#{koffi.public_id}"
+    assert_select "#student-actions-#{koffi.public_id}[role=menu]" do
+      assert_select "> :last-child[role=menuitem][aria-controls='#{dialog}'][aria-haspopup=dialog].ui-menu-item-danger",
+                    text: I18n.t("#{scope}.roster.remove")
+      assert_select "> [role=separator] + [aria-controls='#{dialog}']"
+      assert_select "button[aria-controls='#{dialog}'] svg"
+    end
+    assert_select "#student_#{koffi.public_id} dialog##{dialog}" do
+      assert_select "h2", text: I18n.t("#{scope}.roster.remove_title", name: "Koffi Yao")
+      assert_select "p", text: I18n.t("#{scope}.roster.remove_warning", name: "Koffi Yao")
+      assert_select "form##{dialog}-form[method=post][action='#{classroom_student_path(@classroom.public_id, koffi.public_id)}']" \
+                    "[data-turbo-frame=_top]" do
+        assert_select "input[name=_method][value=delete]"
+        assert_select "input[type=hidden][name=q][value=koffi]"
+      end
+      assert_select "button[data-action='modal#close']", text: I18n.t("#{scope}.roster.cancel")
+      assert_select "button[type=submit][form='#{dialog}-form']", text: I18n.t("#{scope}.roster.remove_confirm")
+    end
+  end
+
+  test "IL-14 : l'équipe a aussi « Retirer de la classe »" do
+    koffi = create_student(classroom: @classroom)
+    sign_in_as create_team_member
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "dialog#remove-student-#{koffi.public_id}", 1
   end
 
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do

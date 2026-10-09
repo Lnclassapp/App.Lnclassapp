@@ -74,11 +74,17 @@ module AppLnclassapp
     # fiche d'application ne lit pas les tokens CSS : la valeur vit ici, hors des vues (UDR-0005, pas d'hexadécimal).
     config.x.pwa = { theme_color: "#00a0ff", background_color: "#ffffff" }.freeze
 
-    # ADR-0084 §4.7 : l'app Android que ce site autorise à ouvrir ses liens (/.well-known/assetlinks.json). L'identifiant
-    # dépend de l'environnement (la recette installe com.lnclass.student.recette) ; les empreintes SHA-256 des certificats
-    # de signature, séparées par des virgules, sont publiques mais propres à chaque compte Play : aucune clé ici.
+    # ADR-0084 §4.7, ADR-0086 §4.7 : les apps Android que ce site autorise à ouvrir ses liens (/.well-known/assetlinks.json).
+    # Les identifiants dépendent de l'environnement (la recette installe com.lnclass.student.recette) ; les empreintes SHA-256
+    # des certificats de signature, communes aux deux apps et séparées par des virgules, sont publiques : aucune clé ici.
+    # store_url : la fiche Play Store de l'app, vers laquelle le refus de l'autre app envoie ; vide, le refus mène au site.
     config.x.android = {
-      package_name: ENV["ANDROID_PACKAGE_NAME"].presence || "com.lnclass.student",
+      apps: {
+        student: { package_name: ENV["ANDROID_PACKAGE_NAME"].presence || "com.lnclass.student",
+                   store_url: ENV["ANDROID_STUDENT_STORE_URL"].presence }.freeze,
+        teacher: { package_name: ENV["ANDROID_TEACHER_PACKAGE_NAME"].presence || "com.lnclass.teacher",
+                   store_url: ENV["ANDROID_TEACHER_STORE_URL"].presence }.freeze
+      }.freeze,
       cert_fingerprints: ENV["ANDROID_CERT_FINGERPRINTS"].to_s.split(",").map(&:strip).compact_blank.freeze
     }.freeze
   end
