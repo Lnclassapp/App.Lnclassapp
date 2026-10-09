@@ -2,9 +2,9 @@ require "test_helper"
 
 # ADR-0039: a file of the old application, once enveloped, is imported with its classrooms (SC-08, SC-09).
 class School::ImportSchoolsJobTest < ActiveJob::TestCase
-  # Classes of the extract with the development referential: 4 public lycées (77), 2 private or mixed schools
-  # of both cycles (38), 1 private lycée (38) and 3 private collèges (12).
-  EXPECTED_CLASSROOMS = (4 * 77) + (2 * 38) + 38 + (3 * 12)
+  # Classes of the extract with the development referential: every school gets both cycles, whatever its name:
+  # 4 public (77), 6 private or mixed (38) — the 3 collèges included.
+  EXPECTED_CLASSROOMS = (4 * 77) + (6 * 38)
 
   setup do
     seed_referential
@@ -25,7 +25,7 @@ class School::ImportSchoolsJobTest < ActiveJob::TestCase
     assert_equal 10, Orm::School.joins(:drena).where(drenas: { slug: "drena-abidjan-2" }).count
     assert_equal EXPECTED_CLASSROOMS, Orm::Classroom.count
     notre_dame = Orm::School.find_by!(name: "Collège Notre Dame d'Afrique")
-    assert_equal [ "CNDA", "private", "first", "active" ], [ notre_dame.sigle, notre_dame.school_type, notre_dame.cycle, notre_dame.status ]
+    assert_equal [ "CNDA", "private", "both", "active" ], [ notre_dame.sigle, notre_dame.school_type, notre_dame.cycle, notre_dame.status ]
     assert_equal "mixed", Orm::School.find_by!(name: "Groupe Scolaire Les Lauréades").school_type
   end
 

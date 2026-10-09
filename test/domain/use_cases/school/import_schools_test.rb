@@ -77,7 +77,7 @@ module UseCases
 
         assert item.valid?
         school = item.plan.fetch(:school)
-        assert_equal [ "Collège Saint Viateur", "CSV", "inactive", "private", "first", @drena.id ],
+        assert_equal [ "Collège Saint Viateur", "CSV", "inactive", "private", "both", @drena.id ],
                      school.values_at(:name, :sigle, :status, :school_type, :cycle, :drena_id)
         assert_equal 14, school.fetch(:public_id).length
         assert_equal [ @drena.id, "college saint viateur" ], item.key
@@ -97,14 +97,15 @@ module UseCases
         end
       end
 
-      test "the cycle follows the word collège, accents and case ignored, unless it is given" do
-        assert_equal "first", validate({ "name" => "Collège Moderne", "type" => "public" }).plan[:school][:cycle]
-        assert_equal "first", validate({ "name" => "COLLÉGE Moderne", "type" => "public" }).plan[:school][:cycle]
-        assert_equal "first", validate({ "name" => "college moderne", "type" => "public" }).plan[:school][:cycle]
-        assert_equal "both", validate({ "name" => "Lycée Moderne", "type" => "public" }).plan[:school][:cycle]
-        assert_equal "both", validate({ "name" => "Collégial Moderne", "type" => "public" }).plan[:school][:cycle]
-        assert_equal "first", validate({ "name" => "Lycée Moderne", "type" => "public", "cycle" => "First" }).plan[:school][:cycle]
-        assert_equal "both", validate({ "name" => "Collège X", "type" => "public", "cycle" => "both" }).plan[:school][:cycle]
+      test "every imported school gets both cycles, whatever its name or the cycle given in the file" do
+        [ { "name" => "Collège Moderne" }, { "name" => "COLLÉGE Moderne" }, { "name" => "Lycée Moderne" },
+          { "name" => "Lycée Moderne", "cycle" => "first" }, { "name" => "Collège X", "cycle" => "First" },
+          { "name" => "Collège X", "cycle" => "second" } ].each do |root|
+          item = validate(root.merge("type" => "public"))
+
+          assert item.valid?, root.inspect
+          assert_equal "both", item.plan[:school][:cycle], root.inspect
+        end
       end
 
       test "invalid values are errors of the element, at the canonical key" do
@@ -112,9 +113,9 @@ module UseCases
         assert_equal [ [ "schools[0].name", "blank" ] ], error_pairs(validate({ "nom" => "  ", "schooltype" => "public" }))
 
         item = validate({ "name" => "L" * 151, "schoolsigle" => "S" * 21, "schooltype" => "semi-public",
-                          "statut" => "fermé", "cycle" => "second" })
+                          "statut" => "fermé" })
         assert_equal [ [ "schools[0].name", "too_long" ], [ "schools[0].sigle", "too_long" ], [ "schools[0].type", "invalid_value" ],
-                       [ "schools[0].cycle", "invalid_value" ], [ "schools[0].status", "invalid_value" ] ].sort, error_pairs(item).sort
+                       [ "schools[0].status", "invalid_value" ] ].sort, error_pairs(item).sort
         assert_equal({ max: 150 }, item.errors.find { it.path.end_with?(".name") }.params)
         assert_equal({ value: "semi-public" }, item.errors.find { it.path.end_with?(".type") }.params)
         assert_nil item.plan
@@ -165,7 +166,7 @@ module UseCases
         assert_equal 0, Orm::School.count
       end
 
-      test "with the development referential: public lycée 77, private and mixed 38, public collège 28 and no second cycle" do
+      test "with the development referential: public lycée 77, private and mixed 38, public collège 77 as well" do
         report = run_import(document({ "name" => "Lycée Moderne de Cocody", "sigle" => "LMC", "type" => "public" },
                                      { "name" => "Lycée privé Les Lauriers", "type" => "privée" },
                                      { "name" => "Groupe Scolaire La Réussite", "type" => "mixte" },
@@ -173,13 +174,13 @@ module UseCases
 
         assert_equal [ "completed", 4, 4, 0, 0 ],
                      report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
-        assert_equal({ "classrooms_created" => 181 }, report.details)
+        assert_equal({ "classrooms_created" => 230 }, report.details)
         assert_equal 77, classrooms_of("Lycée Moderne de Cocody").count
         assert_equal 38, classrooms_of("Lycée privé Les Lauriers").count
         assert_equal 38, classrooms_of("Groupe Scolaire La Réussite").count
         college = classrooms_of("Collège Moderne de Cocody")
-        assert_equal 28, college.count
-        assert_equal %w[first], college.joins(:level).distinct.pluck("levels.cycle")
+        assert_equal 77, college.count
+        assert_equal %w[first second], college.joins(:level).distinct.pluck("levels.cycle").sort
 
         lycee = Orm::School.find_by!(name: "Lycée Moderne de Cocody")
         assert_equal [ "public", "both", "active", "LMC", @drena.id ], [ lycee.school_type, lycee.cycle, lycee.status, lycee.sigle, lycee.drena_id ]
@@ -194,10 +195,10 @@ module UseCases
 
         classrooms = Orm::Classroom.all
         # ADR-0085 §4.1 : chaque classe tire son jeton de lien en base ; plus de code de classe.
-        assert_equal 181, classrooms.distinct.count(:link_token)
+        assert_equal 230, classrooms.distinct.count(:link_token)
         assert_equal [ 80 ], classrooms.distinct.pluck(:max_students)
         assert_equal [ current_school_year ], classrooms.distinct.pluck(:school_year)
-        assert_equal 181, classrooms.distinct.count(:public_id)
+        assert_equal 230, classrooms.distinct.count(:public_id)
         assert_equal 0, Orm::User.where(role: "student").count
         assert_equal 0, Orm::ClassroomStudent.count
       end
@@ -207,7 +208,7 @@ module UseCases
 
         report = run_import(document({ "name" => "Lycée Moderne", "type" => "public" }, { "name" => "Collège Moderne", "type" => "public" }))
 
-        assert_equal({ "classrooms_created" => 53 + 28, "skipped_levels" => 1 }, report.details)
+        assert_equal({ "classrooms_created" => 53 + 53, "skipped_levels" => 2 }, report.details)
         assert_equal 0, Orm::Classroom.joins(:level).where(levels: { slug: "1ere" }).count
       end
 
@@ -250,8 +251,8 @@ module UseCases
                      report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
         assert_equal [ { "path" => "schools[1]", "code" => "write_failed", "params" => {} } ], report.import_errors
         assert_not Orm::School.exists?(name: "Lycée Fragile")
-        assert_equal 77 + 12, Orm::Classroom.count
-        assert_equal({ "classrooms_created" => 89 }, report.details)
+        assert_equal 77 + 38, Orm::Classroom.count
+        assert_equal({ "classrooms_created" => 115 }, report.details)
       end
 
       test "duplicates in base and in the file are skipped and counted; the existing school is not modified" do
@@ -325,8 +326,8 @@ module UseCases
         assert_equal 3, codes.compact.uniq.size
         assert(codes.all? { Entities::School::SchoolCode.valid?(it) })
         assert_not_includes codes, existing.school_code
-        # ADR-0058: the same import reads the barème (public lycée 77, private lycée 38, public collège 28).
-        assert_equal [ 77, 38, 28 ], [ "Lycée A", "Lycée B", "Collège C" ].map { classrooms_of(it).count }
+        # ADR-0058: the same import reads the barème (public 77, private 38, whatever the name).
+        assert_equal [ 77, 38, 77 ], [ "Lycée A", "Lycée B", "Collège C" ].map { classrooms_of(it).count }
         assert_equal Set[existing.school_code, *codes], schools.taken
       end
 

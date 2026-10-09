@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | livré (en attente de PR) |
 | **Ouvert le** | 2026-10-09 |
 | **Branche** | `Develop` (branche désignée de la session ; pas de `fix/<slug>`) |
 | **Programme** | — |
@@ -44,5 +44,5 @@ L'**archivage d'une classe** n'existe pas (aucun cas d'usage, seulement la colon
 
 ## Questions encore ouvertes
 
-- Le chantier d'archivage part-il juste après ? Sans lui, personne ne peut retirer les classes en trop.
-- Réparation des établissements existants : tâche de réparation (Lot A) ou dette ?
+- ~~Archivage~~ : chantier `archivage-classes` ouvert (feature).
+- ~~Réparation des établissements existants~~ : décidée par le porteur, livrée en Lot A (`GrantSecondCycle`, `bin/rails schools:grant_second_cycle`).

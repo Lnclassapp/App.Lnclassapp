@@ -13,10 +13,12 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-10-09 | Colonne `cycle` du fichier ignorée (pas d'erreur) ; `cycle_for` supprimée | « tous les établissements » : aucune exception par fichier | ADR-0087 |
+| 2026-10-09 | `GrantSecondCycle` exemptée de policy (réparation sans acteur, console) | Pas d'acteur en rake ; bornée au second cycle | ADR-0087 §6 |
 
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Cas d'usage d'archivage d'une classe | Spec manquante, pas un bug | à ouvrir (`/feature`) |
+| Cas d'usage d'archivage d'une classe | Spec manquante, pas un bug | `archivage-classes` |
+| Lancer `bin/rails schools:grant_second_cycle` en production après déploiement | Opération, pas du code | — |
