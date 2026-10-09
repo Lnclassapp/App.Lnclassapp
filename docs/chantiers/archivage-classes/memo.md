@@ -28,7 +28,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 
 - Les rôles « Drena manager » et « DE » : ils n'existent pas dans l'application et ne sont pas créés ici.
 - Supprimer définitivement une classe.
-- Archiver en masse (par niveau ou par établissement).
+- Archiver en masse **par établissement** (tous les niveaux d'un coup) ; l'archivage par niveau, lui, est dans le périmètre.
 
 ## Ce que le grill a révélé
 
@@ -40,6 +40,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 | Une classe avec des élèves peut-elle être archivée ? | Oui, avec un message de confirmation (porteur, revient sur sa première réponse) | Aucun refus pour cause d'élèves ; la confirmation dit combien d'élèves sont concernés |
 | Que voit un élève dont la classe est archivée ? | Option A (porteur) : compte et historique gardés ; écran « Votre classe n'est plus active, rejoignez-en une avec le lien de votre enseignant ou de la direction » ; plus d'exercices à faire ; ses autres classes restent | Un élève sans autre classe active retombe sur cet écran ; un élève multi-classes n'est pas touché pour ses autres classes |
 | Restaurer une classe : les élèves et l'enseignant reviennent-ils ? | Oui, automatiquement (porteur) : l'archivage ne touche ni adhésions ni assignations ; pendant l'archivage, le lien d'inscription refuse les nouveaux élèves | La restauration ne ressaisit rien ; une classe archivée n'accepte aucune nouvelle adhésion |
+| Une classe à la fois, ou tout un niveau ? | Les deux (porteur), dans le menu ⋮ de la carte de la classe et dans celui du niveau | Deux actions : « Archiver la classe » et « Archiver le niveau » (confirmation avec le nombre de classes et d'élèves) ; l'archivage par niveau sort du hors périmètre |
 | Une classe avec des enseignants rattachés ou des exercices assignés ? | Oui aussi, même confirmation (porteur) | Plus aucun blocage : seule la confirmation protège ; l'historique (adhésions, assignations) est conservé |
 
 ## Cas limites identifiés
