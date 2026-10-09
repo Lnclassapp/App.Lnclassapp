@@ -1,4 +1,10 @@
 # UDR-0038 : Import de cours — aide de l'arbre étage par étage dans la modale d'import, noms du référentiel à portée de main, rapport qui compte les lignes créées
+<!-- index
+titre: Import de cours
+statut: Accepté
+adr-lie: [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md)
+problematique: Aide de l'arbre étage par étage dans la modale d'import, noms du référentiel à portée de main, rapport qui compte les lignes créées
+-->
 
 | | |
 |---|---|

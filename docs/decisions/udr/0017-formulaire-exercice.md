@@ -1,4 +1,10 @@
 # UDR-0017 : Formulaire exercice (questions et propositions imbriquées)
+<!-- index
+titre: Formulaire exercice (questions et propositions imbriquées)
+statut: Accepté
+adr-lie: [0026](../adr/0026-contrat-result-entites-et-dto.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md), [0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md)
+problematique: —
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,10 @@
 # UDR-0007 : Vocabulaire d'interface — « Fiche essentielle », « Exercice », « Session », « Tentative », quatre badges, jamais « Quiz »
+<!-- index
+titre: Vocabulaire de la fiche essentielle et de l'évaluation
+statut: Accepté
+adr-lie: —
+problematique: remplace le vocabulaire des UDR-0001 et 0003
+-->
 
 | | |
 |---|---|

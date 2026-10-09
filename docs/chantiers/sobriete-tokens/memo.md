@@ -44,7 +44,7 @@ La consommation est le premier frein à la cadence. Les règles ci-dessous ne co
 | 1 | Une session par chantier, 40 commits au maximum | plus aucune session au-dessus de 40 commits (3 aujourd'hui) |
 | 2 | Un commit par lot, documentation du lot dans le même commit | 5 → 3 commits par PR, soit −360 commits |
 | 3 | Les index ADR / UDR / chantiers ne sont modifiés qu'au commit de clôture du chantier | 1 modification par chantier au lieu de ~6 |
-| 4 | Pas de fusion depuis l'interface web de GitHub | 0 fusion cassée (4 observées : #48, #49, #50, #52) |
+| 4 | Pas de fusion sans preuve : `bin/ci` local écrit dans la PR tant que la CI GitHub est coupée | 0 fusion cassée (4 observées : #48, #49, #50, #52) |
 | 5 | `bin/ci` : lire la fin de la sortie et les échecs seulement | −5 000 à −20 000 tokens par exécution (estimation) |
 
 ## Ce qui est fait (2026-10-09)
@@ -56,11 +56,14 @@ La consommation est le premier frein à la cadence. Les règles ci-dessous ne co
 | 5 | `bin/ci-quiet` (verdict, échecs, 30 dernières lignes ; journal dans `tmp/ci.log`). Chemin rouge vérifié, chemin vert à vérifier au premier passage complet |
 | 6 | Réglage GitHub, à activer par le porteur |
 | 7 | Les 56 corrections identity et school sont des causes précises : 6 corrections JPEG successives, 4 « findings de revue » fermés après coup, 2 pertes à la fusion, ~8 défauts d'interface (contraste, titres, espacements). Règle ajoutée : menace écrite avant tout code qui lit un fichier envoyé |
+| 2 bis | Graphify : `session-start.sh` l'installe (`uv tool install graphifyy`) et lance `graphify update .` (AST seul, sans modèle) ; échec non bloquant. Le graphe sert déjà aux hooks `hook-guard`. Gain à mesurer : 5 questions de code identiques avec et sans graphe |
+| 4 bis | `skillOverrides` dans `.claude/settings.json` : 21 skills `anthropic-skills:*` hors sujet à `off`, 4 skills d'outillage en `name-only` (≈ −3 500 tokens par tour, en cache : estimation sur la taille des descriptions) |
+| 5 | Index ADR / UDR générés par `script/docs/build_index` à partir d'un bloc `<!-- index -->` dans chaque fichier (83 ADR, 80 UDR). Les tableaux régénérés sont identiques octet pour octet aux anciens. Le tableau « Décisions remplacées » et l'index des chantiers restent manuels |
 | 8 | Les 4 skills de cycle lisent la table de routage et les sections utiles de `conventions.md` (≈ −3 000 à −4 000 tokens par ouverture de chantier) ; seuil de 150 lignes pour les sous-agents |
 
 ## Hors périmètre
 
-- Générer les index par script : la colonne « Problématique » est rédigée à la main dans ~160 ADR et UDR, il faudrait d'abord un champ dédié dans leur en-tête. Chantier séparé si la règle 3 ne suffit pas.
+- Générer le tableau « Décisions remplacées » de l'ADR et l'index des chantiers (structure différente).
 - Réduire le contenu de `docs/guide/` : à décider chantier par chantier, pas ici.
 - `test_timings.yml` : hors sujet, voir plus haut.
 

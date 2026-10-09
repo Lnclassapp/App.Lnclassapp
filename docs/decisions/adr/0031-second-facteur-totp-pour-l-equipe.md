@@ -1,4 +1,9 @@
 # ADR-0031 : Second facteur TOTP pour les comptes `team`, avec codes de secours à usage unique
+<!-- index
+titre: Second facteur TOTP pour les comptes `team`, avec codes de secours à usage unique
+statut: Accepté — *complète 0025 comp. 5* ; amendé le 2026-09-29 (secrets hors cache) et le 2026-09-30 (émetteur par environnement)
+problematique: TOTP (`rotp`), anti-rejeu, 10 codes de secours, garde dans `Teams::BaseController`, réinitialisation par un autre membre. F-07. Émetteur « Lnclass » en production, « Lnclass (<environnement>) » ailleurs.
+-->
 
 | | |
 |---|---|

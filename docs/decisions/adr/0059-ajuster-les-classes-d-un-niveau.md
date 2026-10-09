@@ -1,4 +1,9 @@
 # ADR-0059 : Ajuster les classes d'un niveau — la suivante au nom du barème, la dernière supprimée seulement si elle n'a jamais servi
+<!-- index
+titre: Ajuster les classes d'un niveau : la suivante au nom du barème, la dernière supprimée seulement si elle n'a jamais servi
+statut: Accepté *(2026-09-28)*
+problematique: « + » nomme la classe suivante (plus grand numéro + 1), mêmes règles qu'« Ajouter une classe » ; « − » supprime la dernière du couple niveau/série, sous verrou, si aucune adhésion, aucun enseignant ni assignation, sinon `:conflict`. Audit `school.changed`. Numéro = plus haut + 3 (chantiers parallèles). Précise ADR-0036 et ADR-0041.
+-->
 
 | | |
 |---|---|

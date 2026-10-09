@@ -1,4 +1,10 @@
 # UDR-0024 : Inscription enseignant — une page en quatre rubriques, établissements rechargés par la DRENA dans un frame, arrivée sur la déclaration des classes
+<!-- index
+titre: Inscription enseignant
+statut: Accepté
+adr-lie: [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0037](../adr/0037-nom-et-prenoms-en-deux-champs.md), [0050](../adr/0050-authentification-et-session.md)
+problematique: Une page en quatre rubriques, établissements rechargés par la DRENA dans un frame, arrivée sur la déclaration des classes
+-->
 
 | | |
 |---|---|

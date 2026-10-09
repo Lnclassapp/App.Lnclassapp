@@ -1,4 +1,9 @@
 # ADR-0076 : La politique de cache se règle sur les allers-retours jusqu'au serveur, pas sur le temps serveur
+<!-- index
+titre: La politique de cache se règle sur les allers-retours jusqu'au serveur, pas sur le temps serveur
+statut: Proposé — *complète 0067, 0051*
+problematique: Serveur à 2–9 ms mais 250–360 ms d'attente côté client (application et base à Singapour) ; cache réservé aux assets (navigateur, Cloudflare), jamais le HTML ; Turbo par défaut ; Solid Cache seulement sous budget ADR-0067 ; plafond de requêtes en série au compte du 2026-10-03 (frame différé et rechargement de l'ADR-0049 gardés) ; région la plus proche des utilisateurs, à décider sur mesure depuis Abidjan. Chantier `politique-cache`.
+-->
 
 | | |
 |---|---|

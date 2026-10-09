@@ -1,4 +1,9 @@
 # ADR-0041 : Une classe vit une année scolaire, s'archive en fin d'année, a un code d'adhésion régénérable et un plafond d'effectif
+<!-- index
+titre: Une classe vit une année scolaire, s'archive en fin d'année, a un code d'adhésion régénérable et un plafond d'effectif
+statut: Accepté — *amendé le 2026-10-08 par [0085](./0085-inscription-eleve-sans-code-de-classe.md) : plus de code d'adhésion*
+problematique: `school_year`, `status`, code révocable et régénérable, `max_students` 80 ; archivage annuel en lecture seule. F-19.
+-->
 
 > ⚠️ **Amendée par [ADR-0085](0085-inscription-eleve-sans-code-de-classe.md)** (2026-10-08, Lot F du chantier `inscription-eleve-sans-code`) : le code d'adhésion est retiré, de la base comme des écrans ; une classe a un lien `/c/<jeton>` remplaçable. L'année scolaire, l'archivage, le plafond d'effectif et le verrou de la classe à chaque adhésion restent.
 

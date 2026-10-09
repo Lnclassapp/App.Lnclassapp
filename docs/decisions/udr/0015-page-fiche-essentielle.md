@@ -1,4 +1,10 @@
 # UDR-0015 : Page fiche essentielle — contenu riche sous KaTeX, exercices avec la progression de l'élève, menu de l'équipe en modales
+<!-- index
+titre: Page fiche essentielle
+statut: Accepté — *amendé le 2026-10-02 : épuration élève (UDR-0057)* — *amendé le 2026-10-02 : plus d'assignation de fiche (UDR-0062, ADR-0072)* — *amendée par 0069 (bascules de l'enseignant), 2026-10-03*
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0043](../adr/0043-remediation-declenchee-par-la-cloture.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md), [0053](../adr/0053-validation-collaborative-requalifiee.md)
+problematique: Contenu riche sous KaTeX, exercices avec la progression de l'élève, menu de l'équipe en modales
+-->
 
 | | |
 |---|---|

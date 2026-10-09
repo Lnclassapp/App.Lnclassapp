@@ -1,4 +1,10 @@
 # UDR-0032 : Gestion des niveaux (référentiel de l'équipe)
+<!-- index
+titre: Gestion des niveaux (référentiel de l'équipe)
+statut: Accepté
+adr-lie: [0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md), [0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md)
+problematique: —
+-->
 
 | | |
 |---|---|

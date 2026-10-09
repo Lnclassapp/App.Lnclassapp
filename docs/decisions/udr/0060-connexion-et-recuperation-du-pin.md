@@ -1,4 +1,10 @@
 # UDR-0060 : Connexion et récupération du PIN — un titre, un formulaire, une action, pour tous les rôles
+<!-- index
+titre: Connexion et récupération du PIN
+statut: Accepté *(2026-10-02)*
+adr-lie: [0050](../adr/0050-authentification-et-session.md), [0032](../adr/0032-recuperation-assistee-du-pin.md), [0031](../adr/0031-second-facteur-totp-pour-l-equipe.md)
+problematique: Un titre, un formulaire, une action, pour tous les rôles : plus de phrase d'aide permanente, l'aide du PIN en infobulle, « Connexion » en h1
+-->
 
 | | |
 |---|---|

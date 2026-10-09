@@ -1,4 +1,9 @@
 # ADR-0068 : Un import de cours complets reçoit jusqu'à 50 fichiers en un seul rapport, et l'écriture des arbres de contenu est accélérée sans changer ce qu'elle écrit
+<!-- index
+titre: Un import de cours complets reçoit jusqu'à 50 fichiers en un seul rapport, et l'écriture des arbres de contenu est accélérée sans changer ce qu'elle écrit
+statut: Proposé — *amende 0039, 0047*
+problematique: 50 fichiers, 50 Mo, 500 cours en tout ; refus par fichier ; `duplicate_in_files` d'un fichier à l'autre ; `import_reports.files` et `has_many_attached :sources` ; contenus riches sans conversion Action Text, questions et propositions par `COPY`, HTML analysé une fois ; suivi rechargé toutes les 1 s ; 500 cours en 20 s au plus (`script/bench/import_course_tree.rb`). Chantier `import-cours-multiple`.
+-->
 
 | | |
 |---|---|

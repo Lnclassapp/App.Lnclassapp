@@ -1,4 +1,10 @@
 # UDR-0078 : Bandeau d'installation (Android et iPhone), page « Pas de connexion », tuile « Ouvert depuis l'app installée »
+<!-- index
+titre: Bandeau d'installation (Android et iPhone), page « Pas de connexion », tuile « Ouvert depuis l'app installée »
+statut: Proposé
+adr-lie: [0082](../adr/0082-application-installable-sans-page-de-compte-sur-le-telephone.md), [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Bandeau en tête du contenu du shell élève et enseignant, caché par défaut, montré par le contrôleur `install` (« Installer » sur Android, deux étapes sur iPhone), « Plus tard » 3 jours sur l'appareil ; page statique `offline.html` sans script, « Réessayer » recharge l'adresse demandée ; tuile pleine largeur dans « Sur la période » du pilotage. Amende UDR-0006 et UDR-0049
+-->
 
 | | |
 |---|---|

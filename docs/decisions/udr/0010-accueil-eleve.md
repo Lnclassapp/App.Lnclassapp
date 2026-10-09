@@ -1,4 +1,10 @@
 # UDR-0010 : Accueil élève — à faire, ma classe, cours, puis l'activité récente en différé
+<!-- index
+titre: Accueil élève
+statut: Remplacé par [0058](./0058-accueil-eleve.md)
+adr-lie: [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), [0043](../adr/0043-remediation-declenchee-par-la-cloture.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md)
+problematique: À faire, ma classe, cours, puis l'activité récente en différé
+-->
 
 | | |
 |---|---|

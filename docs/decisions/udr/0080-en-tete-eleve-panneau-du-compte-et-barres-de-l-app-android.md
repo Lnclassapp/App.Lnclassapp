@@ -1,4 +1,10 @@
 # UDR-0080 : En-tête élève (avatar à gauche, aide à droite), panneau du compte, barres natives de l'app Android
+<!-- index
+titre: En-tête élève, panneau du compte, barres natives de l'app Android
+statut: Proposé
+adr-lie: [0084](../adr/0084-coque-android-eleves-hotwire-native.md), [0070](../adr/0070-deux-apps-android-hotwire-native-le-site-reste-la-reference.md)
+problematique: Élève : avatar à gauche ouvrant un panneau (`ui_modal placement: :drawer`, aussi servi à `/students/menu`), « Besoin d'aide ? » et interrupteur à droite, sans logo ; app : barre native (avatar, aide), trois onglets natifs cachés pendant un exercice ; message `:wrong_app`. Amende UDR-0006, 0065, 0061, 0078
+-->
 
 | | |
 |---|---|

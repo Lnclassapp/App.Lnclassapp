@@ -1,4 +1,9 @@
 # ADR-0070 : Deux apps Android en Hotwire Native pour les élèves et les enseignants ; le site reste la référence
+<!-- index
+titre: Deux apps Android en Hotwire Native pour les élèves et les enseignants ; le site reste la référence
+statut: Accepté *(porteur, 2026-10-08)* — amendé le 2026-10-08 (app élèves d'abord, compte personnel, barres natives)
+problematique: « Lnclass » (élèves) et « Lnclass Teacher » en Hotwire Native, sans API ; aucune fonction réservée à l'app ; direction et équipe sur le web ; PWA et iOS au backlog ; chaque app n'accepte que son rôle, refus après PIN correct ; liens ouverts dans l'app ; origine de la session retenue ; compte Google Play d'organisation. Notifications : chantier `notifications-push`. Le numéro 0069 est pris par la branche `perf/ci-quota`.
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,10 @@
 # UDR-0034 : Gestion des matières — catégorie obligatoire choisie sur son badge, CRUD en modale, suppression confirmée dans la page
+<!-- index
+titre: Gestion des matières
+statut: Accepté
+adr-lie: [0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md), [0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md)
+problematique: Catégorie obligatoire choisie sur son badge, CRUD en modale, suppression confirmée dans la page
+-->
 
 | | |
 |---|---|

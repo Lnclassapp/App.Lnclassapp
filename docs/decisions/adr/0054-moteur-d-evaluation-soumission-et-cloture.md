@@ -1,4 +1,9 @@
 # ADR-0054 : Moteur d'évaluation — un use case de soumission, un de clôture, une tentative immuable par question et par session
+<!-- index
+titre: Moteur d'évaluation — un use case de soumission, un de clôture, une tentative immuable par question et par session
+statut: Accepté — *remplace 0008 §3 et §6*
+problematique: Correction par identifiants ; tentative unique et immuable (`bigint[]`) ; statuts `started`/`completed`/`abandoned` ; `essential_id` obligatoire ; clôture seul point de score, badge et lacune. F-34.
+-->
 
 | | |
 |---|---|

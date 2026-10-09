@@ -1,4 +1,10 @@
 # UDR-0005 : Design system fondateur (tokens, composants, règles vérifiées)
+<!-- index
+titre: Design system fondateur
+statut: Accepté
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Trois sources de style contradictoires et aucune valeur interdite : une palette `@theme` seule issue de la landing, des échelles, treize composants, pas de mode sombre, heroicons vendorés, un test qui refuse `[…]` et `#hex`. Remplace les sections « Tokens » des UDR-0001/0002/0003 ; UDR-0004 non applicable.
+-->
 
 | | |
 |---|---|

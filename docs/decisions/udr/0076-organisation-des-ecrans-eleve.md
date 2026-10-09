@@ -1,4 +1,10 @@
 # UDR-0076 : Organisation des écrans élève — ordre de l'accueil, « Ma classe » de travail, question suivante sans requête
+<!-- index
+titre: Organisation des écrans élève : ordre de l'accueil, « Ma classe » de travail, question suivante sans requête
+statut: Proposé
+adr-lie: [0076](../adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md), [0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md)
+problematique: Accueil : classe, matières (bulles illustrées, pastille ambre de retard), annonces, à faire, activités ; « Ma classe » : cours des exercices assignés en carrousel, exercices assignés non faits et exercices traités au meilleur score, 3 lignes puis « Voir plus » ; la question suivante arrive avec le verdict, sans requête ni cache. Numéro 0075 pris par `feature/annonces-v2`. Amende UDR-0058 §3.3, 0011, 0022 §2.1
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,9 @@
 # ADR-0049 : Mesure d'audience côté serveur, sans script tiers, sous une CSP stricte
+<!-- index
+titre: Mesure d'audience côté serveur, sans script tiers, sous une CSP stricte
+statut: Accepté
+problematique: Aucun script, style, police ni iframe tiers ; CSP bloquante dès la V0 (scripts sous nonce, `object-src 'none'`, `frame-ancestors 'none'`) ; indicateurs métier agrégés lus côté serveur et affichés dans l'espace équipe en V4 ; aucun traceur ni bandeau de consentement. Tranche F-27 du programme de refonte.
+-->
 
 | | |
 |---|---|

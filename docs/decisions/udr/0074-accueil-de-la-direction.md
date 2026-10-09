@@ -1,4 +1,10 @@
 # UDR-0074 : Accueil de la direction — établissement, niveaux à pastille, annonces, activité récente
+<!-- index
+titre: Accueil de la direction : établissement, niveaux à pastille, annonces, activité récente
+statut: Proposé
+adr-lie: [0065](../adr/0065-espace-direction-simple-en-lecture-seule.md)
+problematique: Carte « Établissement » (chiffres, alertes), bulles « Niveaux » à illustration de niveau et pastille rouge/jaune/verte du taux de rendu, page d'un niveau en cartes de classe, carrousel d'annonces de l'élève, activité récente en frame différé ; « Travail des élèves » devient « Accueil ». Amende UDR-0052 §2.1, §2.2 ; 0006 ; 0056 §3.1. Numéros 0072 et 0073 pris par `rapports-exercices` et `progres-eleve`
+-->
 
 | | |
 |---|---|

@@ -10,6 +10,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 
 > Les ADR **0026 à 0054** ont été acceptés en bloc le 2026-09-25 ; la liste de ce qu'ils remplacent est dans [`decisions-a-accepter.md`](../../chantiers/refonte-application/decisions-a-accepter.md). Les numéros 0042 et 0046 sont réservés à F-20 et F-24, retirées du plan.
 
+<!-- index:start -->
 | N° | Titre | Statut | Date | Problématique |
 | :--- | :--- | :--- | :--- | :--- |
 | [0001](./0001-architecture-hexagonale-rails8-monolithe.md) | Adoption de l'architecture hexagonale (DDD) dans un monolithe Rails 8 | Accepté | 2026-06-05 | Isoler les règles métier (`app/domain/`) d'ActiveRecord et des contrôleurs pour obtenir des tests unitaires en quelques millisecondes et éliminer les « Fat Models ». |
@@ -95,6 +96,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0084](./0084-coque-android-eleves-hotwire-native.md) | Coque Android « Lnclass » (élèves) : Hotwire Native 1.3, Android 9 minimum, barres natives, chemins servis par le site, aiguillage par rôle à la connexion | Proposé — *complète 0070, amende 0070 R3 et 0082 §4.3, §4.4* | 2026-10-08 | Jeton `LnclassStudentAndroid/` dans le User-Agent, `lnclass_app` ; shell sans en-tête ni barre basse dans la coque ; composant de pont `account` (`@hotwired/hotwire-native-bridge`) ; `public/android/v1/path-configuration.json` (séance d'exercice en modale) ; `:wrong_app` après PIN correct ; `users.android_opened_at` ; `assetlinks.json` ; projet `android/` avec variantes `recette` et `production`, aucune clé versionnée. Chantier `app-android`. |
 | [0085](./0085-inscription-eleve-sans-code-de-classe.md) | L'élève entre dans une classe choisie ou donnée par un lien à jeton remplaçable, sans code de classe, et quiconque gère la classe peut l'en retirer | Accepté *(porteur, 2026-10-07)* — *amende 0041 (code d'adhésion), 0040 (changement de classe), 0065 (gestes de la direction)* | 2026-10-07 | Un seul use case `RegisterStudent` ; cascade DRENA → établissement → niveau → classe ; `/c/<jeton>` : `classrooms.link_token`, remplaçable ; entrée immédiate ; `classroom_students.joined_via`, `removed_at`, `removed_by_id` ; `RemoveStudent` et `ChangeClassroomLink` sous `ManageClassroomMembersPolicy` (enseignant de la classe, direction, équipe) ; `join_code` supprimé |
 | [0086](./0086-coque-android-enseignants-lnclass-teacher.md) | Coque Android « Lnclass Teacher » (enseignants) : même socle que l'app élèves, refus croisé, code Android partagé | Proposé — *complète 0084 et 0070, amende 0084 §4.1, §4.3, §4.5 à §4.8* | 2026-10-08 | Jeton `LnclassTeacherAndroid/` ; `/teachers/menu` ; règles de chemins des pages enseignant en modale ; refus dans les deux sens avec l'app proposée (`WRONG_APP_FOR`) ; même colonne `android_opened_at`, « dont app Android : N enseignants » ; `assetlinks.json` à deux apps ; modules `shell`, `student`, `teacher`. Chantier `app-android`. |
+<!-- index:end -->
 
 ---
 
@@ -163,7 +165,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 3. Rédiger le **contexte** en priorité : c'est la partie qu'on ne peut pas reconstituer plus tard.
 4. Inclure du **code réel du projet** (avec son chemin de fichier) dans les notes d'implémentation, jamais du pseudo-code.
 5. Renseigner honnêtement les **coûts consentis** : un ADR sans coût consenti n'a pas été écrit honnêtement.
-6. Ajouter la ligne correspondante dans le tableau d'index ci-dessus.
+6. Remplir le bloc `<!-- index … -->` sous le titre (titre court, statut, problématique). Le tableau d'index ci-dessus est **généré** : `script/docs/build_index` le réécrit, une seule fois, au commit de clôture du chantier ; `--check` dit s'il est périmé. Ne jamais éditer une ligne à la main : en cas de conflit sur ce tableau, relancer le script.
 7. **Si l'ADR en contredit un précédent** : renseigner `Remplace : ADR-NNNN` dans le nouveau, `Remplacé par : ADR-NNNN` dans l'ancien, ajouter un encadré d'avertissement en tête de l'ancien, et une ligne dans la table « Décisions remplacées ». Un ADR périmé n'est jamais supprimé ni réécrit : il est marqué.
 
 ## Champs inconnus

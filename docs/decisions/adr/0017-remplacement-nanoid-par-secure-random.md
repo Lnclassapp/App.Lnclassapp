@@ -1,4 +1,9 @@
 # ADR-0017 : Remplacement de Nanoid par SecureRandom natif
+<!-- index
+titre: Remplacement de Nanoid par SecureRandom natif
+statut: Accepté — *complété par [0029](./0029-identifiants-exposes-public-id-et-slugs.md)*
+problematique: Supprimer la dépendance `nanoid` et le concern `PublicIdGenerator` au profit de `SecureRandom.base58` pour alléger l'application.
+-->
 
 | | |
 |---|---|
