@@ -140,6 +140,10 @@ fix(identity): reject login when contact is blank
 Chantier: docs/chantiers/login-contact-vide
 ```
 
+### Granularité
+
+Un commit par lot (voir [`../workflows/README.md`](../workflows/README.md#phase-3--planifier)), avec la documentation du lot. Les index `docs/decisions/adr/README.md`, `docs/decisions/udr/README.md` et `docs/chantiers/README.md` ne changent qu'au commit de clôture du chantier. Raison mesurée : [`sobriete-tokens`](../chantiers/sobriete-tokens/memo.md).
+
 ---
 
 ## 5. En-tête HITL
