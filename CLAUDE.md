@@ -24,6 +24,7 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 - **Une session par chantier**, 40 commits au maximum : au-delà, on ouvre une nouvelle session.
 - **Un commit par lot**, documentation du lot comprise. Pas de commit qui ne touche que `docs/` en cours de lot.
 - **Index** ADR / UDR : générés par `script/docs/build_index` au commit de clôture, jamais édités à la main. Index des chantiers : modifié une seule fois, à la clôture.
+- **PR ou commit direct** : PR pour le code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json` ; commit direct sur `Develop` seulement pour de la documentation seule. Une PR par chantier.
 - **Pas de fusion sans preuve** : la CI GitHub est coupée (`CI_ENABLED` absente, ADR-0069), donc le `bin/ci` local est écrit dans la PR avant la fusion.
 - **`bin/ci-quiet`** à la place de `bin/ci` pour les sessions d’agent : verdict, étapes en échec et 30 dernières lignes ; le journal complet est dans `tmp/ci.log`.
 - **Sous-agents de revue** (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une fois par PR, sur le diff final, et seulement au-delà de 150 lignes ou si un use case, une policy, une route ou un téléversement est touché.
