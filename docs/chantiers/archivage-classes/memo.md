@@ -38,6 +38,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 |---|---|---|
 | Qui archive : « Drena managers » / « DE », ou direction et équipe ? | Direction et équipe (porteur) | Aucun nouveau rôle. Droit de la direction limité à son établissement, comme pour les autres actions de structure |
 | Une classe avec des élèves peut-elle être archivée ? | Oui, avec un message de confirmation (porteur, revient sur sa première réponse) | Aucun refus pour cause d'élèves ; la confirmation dit combien d'élèves sont concernés |
+| Que voit un élève dont la classe est archivée ? | Option A (porteur) : compte et historique gardés ; écran « Votre classe n'est plus active, rejoignez-en une avec le lien de votre enseignant ou de la direction » ; plus d'exercices à faire ; ses autres classes restent | Un élève sans autre classe active retombe sur cet écran ; un élève multi-classes n'est pas touché pour ses autres classes |
 | Une classe avec des enseignants rattachés ou des exercices assignés ? | Oui aussi, même confirmation (porteur) | Plus aucun blocage : seule la confirmation protège ; l'historique (adhésions, assignations) est conservé |
 
 ## Cas limites identifiés
