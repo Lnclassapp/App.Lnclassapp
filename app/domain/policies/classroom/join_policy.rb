@@ -1,24 +1,21 @@
 # 🧠 DOMAINE · Policies::Classroom::JoinPolicy
-# Rôle : adhésion par code : visiteur ou élève, classe active, code courant, effectif sous le plafond
-# ADR  : 0028, 0040, 0041
+# Rôle : entrée d'un visiteur ou d'un élève dans une classe active sous son plafond ; l'élève retiré n'y revient que par le lien
+# ADR  : 0028, 0040, 0041, 0085
 module Policies
   module Classroom
     class JoinPolicy
-      # classroom : chargée sous verrou, avec active_students_count ; code : saisi par l'utilisateur
-      def call(actor:, classroom:, code:)
+      # classroom : chargée sous verrou, avec active_students_count ; via_link : l'entrée vient d'un jeton de lien valide ;
+      # removed : l'élève a été retiré de cette classe.
+      def call(actor:, classroom:, via_link: false, removed: false)
         return Shared::Result.failure(:forbidden) unless actor.nil? || actor.student?
         return refuse(:classroom_archived) unless classroom.active?
-        return refuse(:join_code_revoked) unless current_code?(classroom, code)
+        return refuse(:removed_from_classroom) if removed && !via_link
         return refuse(:classroom_full) if classroom.full?
 
         Shared::Result.success
       end
 
       private
-
-      def current_code?(classroom, code)
-        classroom.join_code.present? && classroom.join_code == Entities::Classroom::JoinCode.normalize(code)
-      end
 
       def refuse(reason) = Shared::Result.failure(:forbidden, errors: { base: [ reason ] })
     end

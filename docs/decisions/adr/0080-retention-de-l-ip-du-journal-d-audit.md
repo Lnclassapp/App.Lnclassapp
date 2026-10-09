@@ -1,4 +1,9 @@
 # ADR-0080 : L'adresse IP du journal d'audit est gardée 12 mois, puis effacée par une tâche quotidienne
+<!-- index
+titre: L'adresse IP du journal d'audit est gardée 12 mois, puis effacée par une tâche quotidienne
+statut: Accepté *(porteur, 2026-10-04)* — *tranche la question 2 de 0036 pour le journal*
+problematique: `AuditLogPort#erase_ips_before(at:, batch_size:)` par lots de 1 000 ; `EraseAuditIps` (système seul) ; `Identity::EraseAuditIpsJob` chaque jour à 4 h 30 ; index partiel `audit_events(created_at) WHERE ip_address IS NOT NULL` ; les événements restent. Chantier `retention-ip-audit`.
+-->
 
 | | |
 |---|---|

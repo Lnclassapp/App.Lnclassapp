@@ -1,4 +1,9 @@
 # ADR-0011 : Architecture et Modélisation de la Validation Collaborative (Crowdsourcing)
+<!-- index
+titre: Architecture et modélisation de la validation collaborative
+statut: ⚠️ **Remplacé** par [0053](./0053-validation-collaborative-requalifiee.md)
+problematique: Isoler la soumission de validation dans le Domaine avec des relations polymorphiques, pour que les enseignants signalent erreurs et non-conformités.
+-->
 
 | | |
 |---|---|

@@ -23,37 +23,16 @@ module UseCases
         end
       end
 
-      # A code is taken by someone else between the validation and the write (ADR-0039 §4.5).
-      class RacedClassrooms < Repositories::Classroom::ClassroomRepository
-        def initialize(steal:, **)
-          super(**)
-          @steal = steal
-        end
-
-        def taken_join_codes
-          super.tap { @steal.call }
-        end
-      end
-
-      class CountingTransaction < Repositories::Shared::Transaction
-        attr_reader :attempts
-
-        def attempt(&)
-          @attempts = @attempts.to_i + 1
-          super
-        end
-      end
-
       setup do
         seed_referential
         @drena = create_drena(name: "Abidjan 2")
         @author = create_team_member(second_factor: false)
       end
 
-      def adapter(classrooms: Repositories::Classroom::ClassroomRepository.new, random: SecureRandom)
+      def adapter(classrooms: Repositories::Classroom::ClassroomRepository.new)
         ImportSchools.new(drenas: Repositories::School::DrenaRepository.new, schools: Repositories::School::SchoolRepository.new,
                           classrooms:, taxonomy: Repositories::Catalog::TaxonomyRepository.new,
-                          classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new, random:)
+                          classroom_plan: Repositories::Classroom::ClassroomPlanRepository.new)
       end
 
       def drena_entity = Repositories::School::DrenaRepository.new.find_by_slug(slug: "drena-abidjan-2")
@@ -214,8 +193,8 @@ module UseCases
         assert_not_includes names, "Tle C 3"
 
         classrooms = Orm::Classroom.all
-        assert_equal 181, classrooms.pluck(:join_code).uniq.size
-        assert(classrooms.pluck(:join_code).all? { Entities::Classroom::JoinCode.valid?(it) })
+        # ADR-0085 §4.1 : chaque classe tire son jeton de lien en base ; plus de code de classe.
+        assert_equal 181, classrooms.distinct.count(:link_token)
         assert_equal [ 80 ], classrooms.distinct.pluck(:max_students)
         assert_equal [ current_school_year ], classrooms.distinct.pluck(:school_year)
         assert_equal 181, classrooms.distinct.count(:public_id)
@@ -321,21 +300,6 @@ module UseCases
         assert_equal [ 2, 1, 1 ], report.values_at(:total_count, :imported_count, :error_count)
         assert_equal [ "schema" ], report.import_errors.pluck("code")
         assert_match(/\Aschools\[0\]/, report.import_errors.first["path"])
-      end
-
-      test "a batch refused by the base (a code taken between validation and write) is replayed element by element" do
-        seed = 20_260_925
-        stolen = Entities::Classroom::JoinCode.generate(random: Random.new(seed))
-        steal = -> { create_classroom(join_code: stolen) }
-        transaction = CountingTransaction.new
-
-        report = run_import(document({ "name" => "Lycée A", "type" => "public" }, { "name" => "Lycée B", "type" => "privée" }),
-                            adapter: adapter(classrooms: RacedClassrooms.new(steal:), random: Random.new(seed)), transaction:)
-
-        assert_equal [ "completed", 2, 0 ], report.values_at(:status, :imported_count, :error_count)
-        assert_equal 1 + 2, transaction.attempts
-        assert_equal 77 + 38, report.details["classrooms_created"]
-        assert_equal 77 + 38 + 1, Orm::Classroom.distinct.count(:join_code)
       end
 
       # Keeps the set of taken codes it hands out, to prove the adapter draws against it and completes it.

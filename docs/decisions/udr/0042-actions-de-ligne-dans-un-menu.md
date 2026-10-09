@@ -1,4 +1,10 @@
 # UDR-0042 : Actions de ligne dans un menu ⋮ — modifier, désactiver et supprimer un objet
+<!-- index
+titre: Actions de ligne dans un menu ⋮
+statut: Accepté — *amendée par 0069 (« Modifier mes classes » en menu), 2026-10-03*
+adr-lie: —
+problematique: Modifier, désactiver et supprimer un objet passent par son menu ⋮, même seuls ; confirmations en `<dialog>` inchangées
+-->
 
 | | |
 |---|---|

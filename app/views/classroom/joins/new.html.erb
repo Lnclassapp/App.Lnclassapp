@@ -1,13 +1,13 @@
-<%# 🌐 UI · classroom/joins/new — /c/<code> : aperçu de la classe, puis inscription (visiteur) ou bouton « Rejoindre » (élève) %>
-<%# Rôle : code inconnu en 404, débit dépassé en 429 sans aperçu ; échec re-rendu en 422 (ou 403 avec sa raison) par Turbo %>
-<%# ADR  : 0040, 0041, 0050 · UDR : 0005, 0009 (amendée le 2026-10-02 : sans sous-titre), 0054 (§3.2 logo ; aucun focus d'arrivée), 0057 %>
+<%# 🌐 UI · classroom/joins/new — /c/<jeton> : aperçu, bouton « Rejoindre cette classe » (élève sans classe) ou classe complète %>
+<%# Rôle : le visiteur reçoit l'inscription élève (student_registrations/new) ; débit dépassé en 429 sans aperçu ; refus en 403 avec sa raison %>
+<%# ADR  : 0040, 0041, 0050, 0085 · UDR : 0005, 0054 (§3.2 logo ; aucun focus d'arrivée), 0057, 0081 (§3.4) %>
 <% page_title t(".page_title") %>
 <main class="grid min-h-dvh bg-paper md:grid-cols-2">
   <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
     <div class="max-w-sm text-center">
       <%= link_to root_path, "aria-label": t(".logo_home"),
                              class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
+        <%= image_tag brand_logo, alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
       <% end %>
       <p class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></p>
       <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
@@ -18,7 +18,7 @@
     <div class="mb-8 text-center md:hidden">
       <%= link_to root_path, "aria-label": t(".logo_home"),
                              class: "mx-auto mb-3 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
+        <%= image_tag brand_logo, alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
       <% end %>
       <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
     </div>
@@ -26,17 +26,6 @@
     <div class="w-full max-w-md">
       <% if @rate_limited %>
         <%= ui_error_state title: t(".rate_limited_title"), message: t("errors.codes.rate_limited") %>
-      <% elsif @preview.nil? %>
-        <%= ui_card padding: :lg do %>
-          <div class="flex flex-col items-center text-center">
-            <span class="grid size-14 place-items-center rounded-full bg-error-soft text-error"><%= ui_icon "exclamation-triangle", size: :lg %></span>
-            <h1 class="mt-4 font-display text-xl font-extrabold text-ink"><%= t(".invalid_code.title") %></h1>
-            <p class="mt-1 text-sm text-mute"><%= t(".invalid_code.description") %></p>
-            <div class="mt-6 w-full">
-              <%= ui_button t(".invalid_code.other_code"), href: new_join_code_path, variant: :brand, full: true, icon: "arrow-path" %>
-            </div>
-          </div>
-        <% end %>
       <% else %>
         <%= ui_card padding: :lg do %>
           <div class="mb-6 flex flex-wrap items-center justify-center gap-x-1">
@@ -46,23 +35,23 @@
 
           <%= render "classroom_preview", preview: @preview %>
 
-          <% if current_actor %>
-            <%= form_with url: join_classroom_path(@code), method: :post, id: "join-form", class: "mt-6 space-y-5" do %>
+          <% if @link_full %>
+            <div id="classroom-full" role="alert" class="mt-6 flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+              <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+              <p><%= t(".classroom_full") %></p>
+            </div>
+          <% elsif current_actor %>
+            <%= form_with url: join_classroom_path(@form.link_token), method: :post, id: "join-form", class: "mt-6 space-y-5" do %>
+              <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>
               <% if @form.errors[:base].any? %>
-                <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+                <div id="join-refusal" role="alert" tabindex="-1" data-autofocus-target="field"
+                   class="flex scroll-mt-24 items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error outline-none">
                   <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
                   <p><%= @form.errors[:base].to_sentence %></p>
                 </div>
               <% end %>
               <%= ui_button t(".join_as_student"), type: :submit, variant: :brand, size: :lg, full: true, icon: "academic-cap" %>
             <% end %>
-          <% else %>
-            <%= render "signup_form" %>
-
-            <p class="mt-6 text-center text-sm text-mute">
-              <%= t(".have_account") %>
-              <%= link_to t(".sign_in"), new_session_path, class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
-            </p>
           <% end %>
         <% end %>
       <% end %>

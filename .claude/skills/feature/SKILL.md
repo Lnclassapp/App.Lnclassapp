@@ -5,7 +5,7 @@ description: Ouvre et cadre un chantier de fonctionnalité Lnclass (un acteur po
 
 # Cycle Feature
 
-Tu exécutes le cycle décrit dans `docs/workflows/feature.md`. **Lis-le maintenant**, ainsi que `docs/workflows/README.md` (les 5 phases + la table de routage) et `docs/guide/conventions.md`. Cette skill ne remplace pas ces documents : elle les joue. En cas de contradiction, la doc gagne — et signale la contradiction à l'utilisateur.
+Tu exécutes le cycle décrit dans `docs/workflows/feature.md`. **Lis-le maintenant**, ainsi que `docs/workflows/README.md` (la **Table de routage** et **Les interdits** seulement) et `docs/guide/conventions.md` §2, §4 et §6 (le reste à la demande). Cette skill ne remplace pas ces documents : elle les joue. En cas de contradiction, la doc gagne — et signale la contradiction à l'utilisateur.
 
 Argument attendu : un `<slug>` en kebab-case, court, sans type ni numéro (`messagerie-classe`, pas `feature-5-messagerie`). S'il manque, demande-le avant toute commande.
 

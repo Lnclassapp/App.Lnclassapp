@@ -1,4 +1,10 @@
 # UDR-0021 : Page exercice — en-tête, progression de l'élève et aperçu des questions, propositions correctes réservées à l'enseignant et à l'équipe
+<!-- index
+titre: Page exercice
+statut: Accepté — *amendé le 2026-10-02 : épuration élève (UDR-0057)* — *amendée par 0069 (« Assigner à mes classes »), 2026-10-03*
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), [0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md)
+problematique: En-tête, progression de l'élève et aperçu des questions, propositions correctes réservées à l'enseignant et à l'équipe
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,9 @@
 # ADR-0056 : Les classes manquantes se génèrent après coup, en arrière-plan, pour les seuls établissements sans classe de l'année, avec un rapport d'import sans fichier
+<!-- index
+titre: Les classes manquantes se génèrent après coup, en arrière-plan, pour les seuls établissements sans classe de l'année
+statut: Accepté
+problematique: Job par lots de 200 établissements, barème et codes de l'import ; compte rendu = `import_report` de `kind` `classrooms`, sans fichier. Amende ADR-0030 et ADR-0039.
+-->
 
 | | |
 |---|---|

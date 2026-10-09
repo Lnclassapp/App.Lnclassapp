@@ -1,4 +1,10 @@
 # UDR-0057 : Écrans élève épurés — règle de sobriété et deux familles d'écrans
+<!-- index
+titre: Écrans élève épurés : règle de sobriété et deux familles d'écrans
+statut: Accepté *(2026-10-02)*
+adr-lie: [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Règle en six points vérifiables (une action principale, 5 blocs avant défilement, 3 lignes puis « Voir plus », aucun texte d'aide permanent, une couleur d'accent, aucune information répétée) ; maquettes du porteur sous 1 024 px (`lg`), écran actuel épuré au-dessus ; rien d'affiché pour une fonction absente
+-->
 
 | | |
 |---|---|

@@ -59,9 +59,9 @@ module UseCases
         @audit = FakeAudit.new
       end
 
-      def authenticate(pin: "2468", contact: "07 01 02 03 04", attempts: FakeAttempts.new)
+      def authenticate(pin: "2468", contact: "07 01 02 03 04", attempts: FakeAttempts.new, client: nil)
         @attempts = attempts
-        dto = Dtos::Identity::CredentialsInput.new(contact:, pin:, ip: "1.2.3.4", user_agent: "UA")
+        dto = Dtos::Identity::CredentialsInput.new(contact:, pin:, ip: "1.2.3.4", user_agent: "UA", **{ client: }.compact)
         Authenticate.new(users: FakeUsers.new(@user), login_attempts: attempts, sessions: @sessions, audit_log: @audit,
                          digest_key: "key", clock: Clock.new(NOW)).call(dto:)
       end
@@ -129,6 +129,77 @@ module UseCases
 
       test "an elapsed lockout lets the account in again" do
         assert authenticate(attempts: FakeAttempts.new(count: 5, last_failed_at: NOW - 16.minutes)).success?
+      end
+
+      # ADR-0084 §4.5, ADR-0086 §4.5, CA-3, CA-T3: in an Android shell, the role is checked only once the PIN is right; the
+      # refusal names the app to propose.
+      ROLE_ATTRIBUTES = { "student" => { role: "student" }, "teacher" => { role: "teacher" },
+                          "school_admin" => { role: "school_admin" }, "team" => { role: "team", team_role: "admin" } }.freeze
+
+      {
+        [ "android_student", "teacher" ] => :android_teacher,
+        [ "android_student", "school_admin" ] => :web,
+        [ "android_student", "team" ] => :web,
+        [ "android_teacher", "student" ] => :android_student,
+        [ "android_teacher", "school_admin" ] => :web,
+        [ "android_teacher", "team" ] => :web
+      }.each do |(client, role), app|
+        test "CA-3, CA-T3: in the #{client} shell, a #{role} with the right PIN is sent to #{app}, without a session" do
+          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **ROLE_ATTRIBUTES.fetch(role))
+          result = authenticate(client:)
+
+          assert_equal :conflict, result.code
+          assert_equal({ base: [ :wrong_app ], app: [ app ] }, result.errors)
+          assert_equal [ true ], @attempts.records.map { it[:succeeded] }
+          assert_nil @sessions.created
+        end
+      end
+
+      test "CA-3, CA-T3: in either shell, a wrong PIN gets exactly the same failure, whatever the role" do
+        failures = %w[android_student android_teacher web].product(ROLE_ATTRIBUTES.values).map do |client, attributes|
+          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **attributes)
+          result = authenticate(pin: "1357", client:)
+
+          assert_equal [ false ], @attempts.records.map { it[:succeeded] }
+          result
+        end
+
+        assert_equal [ Shared::Result.failure(:invalid, errors: Authenticate::INVALID) ], failures.uniq
+        assert_nil @sessions.created
+      end
+
+      test "CA-4: in the students' app, a student with the right PIN gets a session" do
+        result = authenticate(client: "android_student")
+
+        assert result.success?
+        assert_equal @user, result.value.user
+        assert_equal 1, @sessions.created[:user_id]
+      end
+
+      test "CA-T4: in the teachers' app, a teacher with the right PIN gets a session" do
+        @user = Entities::Identity::User.new(id: 1, contact: "0701020304", role: "teacher")
+        result = authenticate(client: "android_teacher")
+
+        assert result.success?
+        assert_equal @user, result.value.user
+        assert_equal 1, @sessions.created[:user_id]
+      end
+
+      test "on the website, by default or by name, every role signs in as before" do
+        ROLE_ATTRIBUTES.each_value do |attributes|
+          @user = Entities::Identity::User.new(id: 1, contact: "0701020304", **attributes)
+
+          assert authenticate.success?, attributes
+          assert authenticate(client: "web").success?, attributes
+        end
+      end
+
+      test "an unknown client is invalid and writes nothing" do
+        result = authenticate(client: "ios")
+
+        assert_equal :invalid, result.code
+        assert result.errors.key?(:client)
+        assert_empty @attempts.records
       end
     end
   end

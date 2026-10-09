@@ -1,4 +1,10 @@
 # UDR-0052 : Espace direction simple — « Travail des élèves » et « Enseignants », en lecture seule
+<!-- index
+titre: Espace direction simple : « Travail des élèves » et « Enseignants »
+statut: Accepté *(2026-09-29)*
+adr-lie: [0065](../adr/0065-espace-direction-simple-en-lecture-seule.md), [0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md)
+problematique: Deux tableaux en lecture seule (classes puis élèves d'une classe, enseignants), « — » quand un chiffre n'a pas de sens ; « Inviter la direction » sur la fiche d'un établissement. Amende UDR-0006, 0019, 0036, 0041
+-->
 
 | | |
 |---|---|

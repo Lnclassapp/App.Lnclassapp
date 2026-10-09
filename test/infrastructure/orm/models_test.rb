@@ -28,7 +28,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
       Orm::LevelSeries.create!(level:, series:)
       school = Orm::School.create!(drena: Orm::Drena.create!(name: "Abidjan 1"), name: "Lycée Classique", school_type: "mixed",
                                    school_code: "k7m4qz")
-      classroom = Orm::Classroom.create!(school:, level:, series:, name: "Tle D 1", school_year: "2026-2027", join_code: "abc23")
+      classroom = Orm::Classroom.create!(school:, level:, series:, name: "Tle D 1", school_year: "2026-2027")
       course = Orm::Course.create!(name: "Nombres complexes", level:, series:, material:, author: team)
       essential = Orm::Essential.create!(course:, name: "Forme algébrique", position: 1, author: team)
       exercise = Orm::Exercise.create!(essential:, title: "Calculer un module", position: 1, author: team)
@@ -72,10 +72,10 @@ class Orm::ModelsTest < ActiveSupport::TestCase
 
   test "the whole pedagogical loop is navigable through the associations" do
     graph => { team:, teacher:, student:, level:, series:, school:, classroom:, course:, essential:, exercise:, question:, session: }
-    Orm::TeacherProfile.create!(user: teacher, material: graph[:material])
+    Orm::TeacherProfile.create!(user: teacher, material: graph[:material], joined_via: "standard")
     Orm::TeacherSchool.create!(teacher:, school:, primary: true)
     Orm::TeacherClassroom.create!(teacher:, classroom:)
-    Orm::ClassroomStudent.create!(classroom:, student:, primary: true, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student:, primary: true, joined_at: Time.current)
     gap = Orm::KnowledgeGap.create!(student:, essential:, source_session: session)
     Orm::ExerciseBadge.create!(student:, exercise:, exercise_session: session, level: "bronze", awarded_at: Time.current)
 

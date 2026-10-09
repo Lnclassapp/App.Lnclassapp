@@ -53,9 +53,8 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ @school.id, @levels["6eme"].id, nil, current_school_year, "active", 80 ],
                  [ classroom.school_id, classroom.level_id, classroom.series_id, classroom.school_year, classroom.status,
                    classroom.max_students ]
-    assert_match Entities::Classroom::JoinCode::FORMAT, classroom.join_code
-    assert_select "turbo-stream[action=append][target=toasts]",
-                  text: including(tc("create.done", name: "6ème 5", code: classroom.join_code.upcase))
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("create.done", name: "6ème 5"))
+    assert_equal "Classe « 6ème 5 » ajoutée.", tc("create.done", name: "6ème 5")
     assert_select "turbo-stream[action=replace][target=school_level_classrooms][method=morph]"
     assert_select "turbo-stream[action=replace] template #level_classrooms_6eme [role=group][aria-label=?]",
                   tc("block.count", level: "6ème", count: 5)
@@ -144,7 +143,7 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     post add_path, params: { level: "6eme" }
     assert_redirected_to school_path(@school.public_id)
-    assert_equal tc("create.done", name: "6ème 5", code: Orm::Classroom.find_by!(name: "6ème 5").join_code.upcase), flash[:notice]
+    assert_equal tc("create.done", name: "6ème 5"), flash[:notice]
 
     delete remove_path(@sixths.first)
     assert_redirected_to school_path(@school.public_id)

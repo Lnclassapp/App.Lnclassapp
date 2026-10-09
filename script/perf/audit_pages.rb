@@ -102,7 +102,7 @@ module PerfAudit
     student = Orm::User.find_by(contact: ACTORS[:student])
     classroom = Orm::ClassroomStudent.find_by(student_id: student&.id)&.classroom
     paths = {
-      visitor: -> { [ ("/c/#{classroom.join_code}" if classroom&.join_code), ("/drenas/#{Orm::Drena.order(:id).pick(:public_id)}/schools") ] },
+      visitor: -> { [ ("/c/#{classroom.link_token}" if classroom), ("/drenas/#{Orm::Drena.order(:id).pick(:public_id)}/schools") ] },
       student: lambda {
         session = Orm::ExerciseSession.where(student_id: student&.id).where.not(status: "completed").order(:id).pick(:public_id)
         [ ("/sessions/#{session}" if session) ]

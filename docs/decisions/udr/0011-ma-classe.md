@@ -1,4 +1,10 @@
 # UDR-0011 : Ma classe — la classe principale de l'élève, son code en majuscules et ses cours assignés, sans liste nominative
+<!-- index
+titre: Ma classe
+statut: Accepté — *amendé le 2026-10-02 : épuration élève (UDR-0057)* — *amendé le 2026-10-02 : carte « Cours assignés » retirée (UDR-0062)*
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md)
+problematique: La classe principale de l'élève, son code en majuscules et ses cours assignés, sans liste nominative
+-->
 
 | | |
 |---|---|

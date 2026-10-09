@@ -8,6 +8,13 @@ require "test_helper"
 # UDR-0066 §3.5 : « Blog » leads that list, « Plus sur Lnclass », once an article is published (BL-06).
 class HomepageControllerTest < ActionDispatch::IntegrationTest
   # UDR-0058 §3 : the subjects of the student grid, EDHC (1st cycle) and Philosophie (2nd cycle) both listed.
+  # ADR-0084 §4.1 : le User-Agent de la coque Android élèves ; un navigateur ; une autre coque Hotwire Native, sans jeton.
+  ANDROID_APP = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
+                "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
+  # ADR-0086 §4.1 : la coque Android enseignants, « Lnclass Teacher ».
+  TEACHER_APP = ANDROID_APP.sub("LnclassStudentAndroid", "LnclassTeacherAndroid").freeze
+  BROWSER = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36".freeze
+  OTHER_SHELL = "#{BROWSER} Hotwire Native Android".freeze
   SUBJECTS = [ "Mathématiques", "Physique-Chimie", "SVT", "Français", "Histoire-Géographie", "EDHC", "Philosophie" ].freeze
   INFORMAL = /\b(tu|tes|ton|toi)\b/i
 
@@ -59,7 +66,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "dialog#role-modal-student-hero" do
       assert_select "a[href='#{new_session_path}']", text: "Se connecter"
-      assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre ma classe"
+      assert_select "a[href='#{new_student_registration_path}']", text: "Rejoindre ma classe"
     end
   end
 
@@ -105,7 +112,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "#comment ol > li", 3
-    assert_select "#comment ol > li:first-child h3", text: "Récupère le code de ta classe"
+    assert_select "#comment ol > li:first-child h3", text: "Trouve ta classe"
     assert_select "#comment ol > li:last-child h3", text: "Apprends et progresse"
   end
 
@@ -257,5 +264,136 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_no_match(/Espace Etabl|Inscrire mon établissement|FCFA/, response.body)
+  end
+
+  # CA-10 (ADR-0082 §4.3) : l'icône de l'app installée ouvre « /?source=app ».
+  test "CA-10: a student opening the installed app has their account dated at the server's time and lands on their home" do
+    student = create_student
+    sign_in_as student
+    opened_at = Time.current.change(usec: 0)
+
+    travel_to(opened_at) { get root_path(source: "app") }
+
+    assert_redirected_to student_home_path
+    assert_equal opened_at, student.reload.app_opened_at
+  end
+
+  test "CA-10: a visitor opening « /?source=app » sees the public home page, and nothing is written" do
+    assert_no_queries_match(/\A\s*(UPDATE|INSERT|DELETE)/i) { get root_path(source: "app") }
+
+    assert_response :success
+    assert_select "h1", text: "Lnclass, tu comprends chap chap !"
+  end
+
+  test "CA-10: any other source is ignored: the signed-in person is redirected, their account is not dated" do
+    teacher = create_teacher
+    sign_in_as teacher
+
+    [ "other", "", nil ].each do |source|
+      get root_path(source:)
+
+      assert_redirected_to teacher_home_path
+    end
+    assert_nil teacher.reload.app_opened_at
+  end
+
+  test "CA-10: a direction opening « /?source=app » is not counted: nothing is dated, it lands on its home as before" do
+    admin = create_school_admin
+    sign_in_as admin
+    get root_path
+    home = response.location
+
+    assert_no_queries_match(/\A\s*UPDATE\s+"users"/i) { get root_path(source: "app") }
+
+    assert_redirected_to home
+    assert_nil admin.reload.app_opened_at
+  end
+
+  test "CA-10: a team session whose second factor is not verified has no actor: nothing is dated" do
+    member = create_team_member
+    post session_path, params: { session: { contact: member.contact, pin: "2468" } }
+
+    get root_path(source: "app")
+
+    assert_redirected_to new_identity_second_factor_path
+    assert_nil member.reload.app_opened_at
+  end
+
+  test "CA-10: a failure of the recording never blocks the home: it is reported as handled, with the account" do
+    student = create_student
+    sign_in_as student
+    repository = Repositories::Identity::UserRepository
+    repository.alias_method :original_mark_app_opened, :mark_app_opened
+    repository.define_method(:mark_app_opened) { |user_id:, at:, channel:| raise ActiveRecord::ConnectionTimeoutError, "pool épuisé" }
+
+    report = assert_error_reported(ActiveRecord::ConnectionTimeoutError) { get root_path(source: "app") }
+
+    assert_redirected_to student_home_path
+    assert report.handled
+    assert_equal student.id, report.context[:user_id]
+    assert_nil student.reload.app_opened_at
+  ensure
+    repository.alias_method :mark_app_opened, :original_mark_app_opened
+    repository.remove_method :original_mark_app_opened
+  end
+
+  # CA-5 (ADR-0084 §4.6) : l'onglet « Accueil » de la coque Android ouvre « /?source=android ».
+  test "CA-5: a student opening the Android app has android_opened_at dated at the server's time and lands on their home" do
+    student = create_student(classroom: create_classroom)
+    sign_in_as student
+    opened_at = Time.current.change(usec: 0)
+
+    travel_to(opened_at) { get root_path(source: "android"), headers: { "User-Agent" => ANDROID_APP } }
+
+    assert_redirected_to student_home_path
+    assert_equal opened_at, student.reload.android_opened_at
+    assert_nil student.app_opened_at
+  end
+
+  test "CA-5: « /?source=android » from a browser or another Hotwire Native shell dates nothing" do
+    student = create_student(classroom: create_classroom)
+    sign_in_as student
+
+    [ BROWSER, OTHER_SHELL ].each do |agent|
+      assert_no_queries_match(/\A\s*UPDATE\s+"users"/i) { get root_path(source: "android"), headers: { "User-Agent" => agent } }
+
+      assert_redirected_to student_home_path
+    end
+    assert_nil student.reload.android_opened_at
+    assert_nil student.app_opened_at
+  end
+
+  # CA-T5 (ADR-0086 §4.6) : l'onglet « Accueil » de « Lnclass Teacher » ouvre aussi « /?source=android ».
+  test "CA-T5: a teacher opening Lnclass Teacher has android_opened_at dated at the server's time and lands on their home" do
+    teacher = create_teacher
+    sign_in_as teacher
+    opened_at = Time.current.change(usec: 0)
+
+    travel_to(opened_at) { get root_path(source: "android"), headers: { "User-Agent" => TEACHER_APP } }
+
+    assert_redirected_to teacher_home_path
+    assert_equal opened_at, teacher.reload.android_opened_at
+    assert_nil teacher.app_opened_at
+  end
+
+  test "CA-T5: « /?source=android » typed by a teacher in a browser dates nothing" do
+    teacher = create_teacher
+    sign_in_as teacher
+
+    assert_no_queries_match(/\A\s*UPDATE\s+"users"/i) { get root_path(source: "android"), headers: { "User-Agent" => BROWSER } }
+
+    assert_redirected_to teacher_home_path
+    assert_nil teacher.reload.android_opened_at
+  end
+
+  test "CA-5: « /?source=app » keeps dating the installed web app, even inside the Android app" do
+    student = create_student(classroom: create_classroom)
+    sign_in_as student
+
+    get root_path(source: "app"), headers: { "User-Agent" => ANDROID_APP }
+
+    assert_redirected_to student_home_path
+    assert_not_nil student.reload.app_opened_at
+    assert_nil student.android_opened_at
   end
 end

@@ -1,4 +1,10 @@
 # UDR-0077 : Organisation des écrans enseignant — accueil, catalogue, fiche essentielle, page d'une classe
+<!-- index
+titre: Organisation des écrans enseignant : accueil, catalogue, fiche, page d'une classe
+statut: Accepté *(porteur, 2026-10-05)*
+adr-lie: [0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md), [0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md), [0078](../adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md)
+problematique: Accueil : classes en bande, cours, annonces sans croix, « Activités » = exercices à suivre (3 puis « Voir plus ») ; catalogue de l'enseignant réduit à sa matière et à ses niveaux, recherche cachée sous 640 px pour tous ; ligne compacte par classe sur la fiche et la page exercice ; page classe : cours en bande, exercices (3 puis « Voir plus »), élèves avec code de récupération dans un menu ⋮. Numéros 0075 et 0076 pris par `annonces-v2` et `interface-eleve-organisation`. Amende 0026, 0069, 0013, 0015, 0021, 0028, 0027, 0062. Amendée le 2026-10-06 : la carte de l'enseignant garde le badge de matière (UDR-0013 ter)
+-->
 
 | | |
 |---|---|

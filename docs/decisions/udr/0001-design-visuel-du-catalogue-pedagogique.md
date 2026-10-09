@@ -1,4 +1,10 @@
 # UDR-0001 : Design Visuel du Catalogue Pédagogique
+<!-- index
+titre: Design visuel du catalogue pédagogique
+statut: Accepté · Tokens remplacés par 0005
+adr-lie: [0022](../adr/0022-modelisation-hexagonale-du-catalogue-pedagogique.md)
+problematique: Le catalogue affichait trop d'informations d'un coup (essentiels sur la carte de cours) : définir une direction « Étude Premium » et une carte-vitrine épurée.
+-->
 
 > ⚠️ **Remplacée partiellement par [UDR-0005](./0005-design-system-fondateur.md)** (2026-09-25) : la section « Tokens » ne s'applique plus. Utilisez les tokens `@theme` et la table de correspondance de l'UDR-0005 §3. Les autres sections restent valables.
 

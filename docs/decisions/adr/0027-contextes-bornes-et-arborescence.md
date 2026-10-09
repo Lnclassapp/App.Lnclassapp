@@ -1,4 +1,9 @@
 # ADR-0027 : Six contextes bornés, une arborescence par couche puis par contexte, et des conventions de schéma communes
+<!-- index
+titre: Six contextes bornés, une arborescence par couche puis par contexte, et des conventions de schéma communes
+statut: Accepté — *remplace 0023, 0014 §2.2* ; *amendé par [0074](./0074-blog-public-articles-images-et-referencement.md) (tables du blog)*
+problematique: Table → contexte pour les six contextes ; DRENA dans `school` ; pas de `presentation/` ni `adapters/` ; toute personne référencée par `users.id` ; enums `string` + `CHECK`. F-02.
+-->
 
 | | |
 |---|---|

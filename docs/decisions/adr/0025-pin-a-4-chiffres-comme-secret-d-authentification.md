@@ -1,4 +1,9 @@
 # ADR-0025 : PIN à 4 chiffres comme secret d'authentification, sous conditions
+<!-- index
+titre: PIN à 4 chiffres comme secret d'authentification, sous conditions
+statut: Accepté — *complété par [0050](./0050-authentification-et-session.md), [0031](./0031-second-facteur-totp-pour-l-equipe.md), [0038](./0038-comptes-de-l-equipe-et-sous-roles.md), [0032](./0032-recuperation-assistee-du-pin.md)*
+problematique: Conserver le code à 4 chiffres pour ne pas barrer l'accès des élèves, **à la condition stricte** de six compensations indissociables : limitation de tentatives, verrouillage progressif, validation serveur, aucune dérivation depuis le contact, second facteur sur les rôles privilégiés, parcours de récupération.
+-->
 
 | | |
 |---|---|

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thème Material clair/sombre commun aux coques (UDR-0080 §3.3, UDR-0082 §3.3) ; l'écran de démarrage est dans chaque app. -->
+<resources>
+    <style name="Theme.Lnclass" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand</item>
+        <item name="colorOnPrimary">@color/on_surface</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceContainer">@color/surface</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="android:colorBackground">@color/surface</item>
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="toolbarStyle">@style/Widget.Lnclass.Toolbar</item>
+        <item name="appBarLayoutStyle">@style/Widget.Lnclass.AppBarLayout</item>
+        <item name="bottomNavigationStyle">@style/Widget.Lnclass.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.Lnclass.AppBarLayout" parent="Widget.Material3.AppBarLayout">
+        <item name="android:background">@color/surface</item>
+        <item name="liftOnScroll">false</item>
+    </style>
+
+    <style name="Widget.Lnclass.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/surface</item>
+        <item name="titleTextColor">@color/on_surface</item>
+        <item name="navigationIconTint">@color/on_surface</item>
+        <item name="titleCentered">true</item>
+    </style>
+
+    <style name="Widget.Lnclass.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/surface</item>
+        <item name="itemIconTint">@color/bottom_navigation_item</item>
+        <item name="itemTextColor">@color/bottom_navigation_item</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Lnclass.ActiveIndicator</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <style name="Widget.Lnclass.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.Lnclass.HelpButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="iconTint">@color/on_surface</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+</resources>

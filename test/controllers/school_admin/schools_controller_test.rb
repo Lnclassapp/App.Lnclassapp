@@ -2,6 +2,7 @@ require "test_helper"
 
 # GD-01, GD-02, GD-03 (ADR-0071, UDR-0056 §3.1, §3.2): « Établissement », the third destination of the direction: the
 # teachers' sign-up link to read, copy and share on WhatsApp, then the « Classes par niveau » block shared with the team.
+# IE-07 (ADR-0083 §4.1, UDR-0079 §3.7): the link is the direction's /i/<token>, without the code nor « Changer le lien ».
 class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school(name: "Lycée Moderne de Bouaké", school_type: "private", school_code: "k7m4qz")
@@ -9,6 +10,7 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def t(key, **) = I18n.t("school_admin.schools.#{key}", **)
+  def link = teacher_invite_link_url(@school.reload.direction_invite_token)
   def tn(key) = I18n.t("shared.navigation.#{key}")
 
   # AN-22 (chantier annonces, UDR-0071 §3.1): « Annonces » closes the direction's navigation, after its three destinations.
@@ -30,8 +32,7 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: /\A#{Regexp.escape(t('show.page_title'))}/
   end
 
-  test "GD-03: the direction reads its link and code, copies the link and shares it on WhatsApp with the school's name" do
-    link = school_code_signup_url("k7m4qz")
+  test "GD-03, IE-07: the direction reads its invitation link, copies it and shares it on WhatsApp, without code nor « Changer le lien »" do
     sign_in_as @admin
 
     get school_admin_school_path
@@ -45,8 +46,8 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_link #school_link_block" do
       assert_select "#school_link_label", text: t("link.label")
       assert_select "a#school_link_value[href='#{link}'][aria-labelledby=school_link_label]", text: link
-      assert_match %r{/e/k7m4qz\z}, link
-      assert_select "#school_code_value", text: "K7M-4QZ"
+      assert_match %r{/i/\h{12}\z}, link
+      assert_select "#school_code_value", 0
       assert_select "[data-controller=clipboard][data-clipboard-text-value='#{link}'] button[aria-label=?]", t("link.copy_label"),
                     text: t("link.copy")
       assert_select "[data-clipboard-text-value='#{link}'] template[data-clipboard-target=copied]", text: /#{t('link.copied')}/
@@ -56,9 +57,10 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
       assert_includes message, link
       assert_includes message, "Lycée Moderne de Bouaké"
     end
-    # The only form of the card is « Changer le lien » (Lot A), behind its confirmation.
-    assert_select "#school_link form", 1
-    assert_select "#school_link dialog#change-school-link form#change-school-link-form", 1
+    # IE-07: the links are stable (ADR-0083 §4.1): no « Changer le lien », no form, and the code is never shown.
+    assert_select "#school_link form, #school_link dialog, #change-school-link", 0
+    assert_select "#school_link", text: /Changer le lien/, count: 0
+    assert_no_match(/k7m4qz|K7M-?4QZ/i, response.body)
   end
 
   test "the « Classes par niveau » block is the team's, its « + » and « − » aimed at the direction's routes" do
@@ -85,7 +87,7 @@ class SchoolAdmin::SchoolsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#school_inactive_notice.text-warning", text: t("show.inactive")
-    assert_select "a#school_link_value[href='#{school_code_signup_url('k7m4qz')}']"
+    assert_select "a#school_link_value[href='#{link}']"
     assert_select "#school_level_classrooms_inactive"
   end
 

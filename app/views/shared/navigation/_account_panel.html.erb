@@ -1,0 +1,48 @@
+<%# 🌐 UI · shared/navigation/_account_panel — panneau du compte : identité, liens du rôle (NavigationHelper::ACCOUNT_PANELS), thème, déconnexion %>
+<%# Rôle : sur le site, <dialog> latérale ouverte par l'avatar de l'en-tête ; `page: true` rend le seul contenu (/students/menu, /teachers/menu) %>
+<%# UDR  : 0080 §3.1, §3.2, §3.6 · 0082 §3.2 · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page du panneau) · locals : user, page %>
+<% link_class = "flex min-h-tap w-full items-center gap-3 rounded-ln px-3 text-sm font-medium
+                 focus-visible:outline-2 focus-visible:outline-brand" %>
+<% content = capture do %>
+  <div class="flex items-center gap-3 border-b border-line pb-4">
+    <%= ui_avatar user.name, src: user.avatar_url, size: :lg %>
+    <div class="min-w-0">
+      <p class="truncate font-display font-extrabold text-ink"><%= user.name %></p>
+      <% if user.detail %><p class="truncate text-sm text-mute"><%= user.detail %></p><% end %>
+    </div>
+  </div>
+  <nav aria-label="<%= t("shared.navigation.account_panel.label") %>" class="py-2">
+    <ul>
+      <% account_panel_links(user.role).each do |link| %>
+        <li>
+          <%= link_to link[:href], class: class_names(link_class, "text-ink hover:bg-mist"), "aria-current": ("page" if current_page?(link[:href])) do %>
+            <%= ui_icon link[:icon], class: "text-mute" %><span><%= link[:label] %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+  <div class="flex items-center justify-between border-t border-line py-3 pl-3">
+    <span class="text-sm text-ink"><%= t("shared.theme_switch.label") %></span>
+    <%= render "shared/theme_switch", variant: :icon %>
+  </div>
+  <div class="border-t border-line pt-3">
+    <%= button_to session_path, method: :delete, class: class_names(link_class, "cursor-pointer text-error hover:bg-error-soft") do %>
+      <%= ui_icon "arrow-right-start-on-rectangle" %><span><%= t("shared.navigation.sign_out") %></span>
+    <% end %>
+  </div>
+<% end %>
+<% if local_assigns[:page] %>
+  <%= content %>
+<% else %>
+  <%# Le déclencheur est celui de la modale (même contrôleur) : un lien que le contrôleur modal intercepte. Seule la
+      phrase cachée le nomme ; sous md, l'avatar paraît seul. %>
+  <%= ui_modal id: "account_panel", title: t(".title"), size: :sm, placement: :drawer,
+               trigger: safe_join([ tag.span(safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm),
+                                                         tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]),
+                                             class: "flex items-center gap-2.5", "aria-hidden": "true"),
+                                    tag.span(t(".open"), class: "sr-only") ]),
+               trigger_href: account_panel_page_path(user.role), trigger_variant: :ghost, trigger_class: "gap-2.5 pr-2 pl-0" do %>
+    <%= content %>
+  <% end %>
+<% end %>

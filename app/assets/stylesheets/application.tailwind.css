@@ -280,6 +280,19 @@
   grid-template-columns: minmax(0, 1fr) 20rem;
 }
 
+/* Ligne de tableau empilée sur téléphone (UDR-0081 §3.7) : le contenu, puis une colonne à sa largeur pour le menu ⋮. */
+@utility grid-cols-content-action {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+/* Cellule empilée : son libellé de colonne (data-label) précède la valeur, sans changer le texte de la cellule. */
+@utility cell-label {
+  &::before {
+    content: attr(data-label) " : ";
+    color: var(--color-mute);
+  }
+}
+
 /* Numérotation des questions d'un exercice (formulaire) : la liste remet à zéro, chaque question compte,
    le numéro s'affiche par ::before. */
 @utility counter-questions {
@@ -452,6 +465,31 @@
     border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
     padding-bottom: env(safe-area-inset-bottom);
   }
+}
+
+/* UDR-0080 §3.2 — `ui_modal placement: :drawer` : un panneau ancré à gauche, sur toute la hauteur, à toutes les
+   largeurs ; il glisse depuis la gauche, en mouvement autorisé seulement. Hors couche, comme la feuille ci-dessus. */
+dialog.dialog-drawer {
+  margin: 0 auto 0 0;
+  width: min(20rem, 85vw);
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  overflow-y: auto;
+  border-radius: 0 var(--radius-sheet) var(--radius-sheet) 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.dialog-drawer[open] {
+    animation: drawer-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes drawer-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 /* Chantier ux-pages-eleve — formules KaTeX lisibles sur téléphone. Hors couche, exprès : l'emporte sur katex.min.css.

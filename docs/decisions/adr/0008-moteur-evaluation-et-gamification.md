@@ -1,4 +1,9 @@
 # ADR-0008 : Moteur d'Évaluation, de Tentatives et de Gamification (Badges en Temps Réel)
+<!-- index
+titre: Moteur d'évaluation, tentatives et gamification en temps réel
+statut: ⚠️ **Remplacé partiellement** par [0033](./0033-bareme-des-badges-et-seuils-pedagogiques.md) *(badges, échelles)* et [0054](./0054-moteur-d-evaluation-soumission-et-cloture.md) *(statuts, correction, §6)*
+problematique: Évaluer les réponses aux exercices en batch sans N+1, verrouiller les sessions terminées et décerner instantanément les distinctions (`ExerciseBadge`).
+-->
 
 | | |
 |---|---|

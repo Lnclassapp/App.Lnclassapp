@@ -33,6 +33,27 @@ module Dtos
         assert wrong.invalid?
         assert wrong.errors.of_kind?(:pin, :invalid)
       end
+
+      test "ADR-0086 §4.5 : le client est le site par défaut, ou l'une des deux coques, rien d'autre" do
+        web = CredentialsInput.new(contact: "0701020304", pin: "2468")
+        other = CredentialsInput.new(contact: "0701020304", pin: "2468", client: "ios")
+
+        assert_equal "web", web.client
+        %w[web android_student android_teacher].each do |client|
+          assert CredentialsInput.new(contact: "0701020304", pin: "2468", client:).valid?, client
+        end
+        assert other.invalid?
+        assert other.errors.of_kind?(:client, :inclusion)
+      end
+
+      test "ADR-0086 §4.5 : le site admet tous les rôles, chaque coque n'en admet qu'un" do
+        admitted = %w[web android_student android_teacher].index_with do |client|
+          Entities::Identity::User::ROLES.select { CredentialsInput.new(client:).admits?(it) }
+        end
+
+        assert_equal({ "web" => %w[student teacher school_admin team], "android_student" => %w[student],
+                       "android_teacher" => %w[teacher] }, admitted)
+      end
     end
   end
 end

@@ -7,11 +7,11 @@ require "application_system_test_case"
 # porte « Blog » dès le premier article publié (BL-06) ; le focus va toujours sur la première ligne. Le contenu du pied
 # se prouve sans navigateur (test/controllers/classroom/student_homes_controller_test.rb), la lecture de /blog sans
 # détour aussi (BL-20, test/integration/communication/articles_test.rb). Amendement du 2026-10-06 : sous lg, le bouton
-# quitte l'accueil ; « Besoin d'aide ? » est la première entrée du menu du compte, et le focus revient à ce menu.
+# quitte l'accueil. UDR-0080 §3.1 (app-android) : « Besoin d'aide ? » est dans l'en-tête de l'élève, à toute largeur ;
+# il ne passe plus par le menu du compte.
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   TRIGGER = "a[aria-controls=help-sheet]".freeze
-  ACCOUNT_MENU = "[aria-haspopup=menu][aria-controls=account-menu]".freeze
 
   setup { sign_in_as create_student(classroom: create_classroom) }
 
@@ -19,14 +19,8 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   def sheet = find("dialog#help-sheet")
 
   # L'entrée glisse de 0,75 rem (open:animate-slide-up) : la boîte se mesure une fois l'animation finie.
-  # Sur téléphone (from_menu:), « Besoin d'aide ? » s'ouvre depuis le menu du compte.
-  def open_sheet(from_menu: false)
-    if from_menu
-      find(ACCOUNT_MENU).click
-      within("#account-menu") { click_on tr("trigger") }
-    else
-      click_on tr("trigger")
-    end
+  def open_sheet
+    click_on tr("trigger")
     assert_selector "dialog#help-sheet[open]", visible: true
     page.document.synchronize do
       settled = page.evaluate_script(<<~JS)
@@ -48,13 +42,12 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   end
 
   def focused_text = page.evaluate_script("document.activeElement.textContent").squish
-  def trigger_focused?(selector = TRIGGER) = page.evaluate_script("document.activeElement.matches('#{selector}')")
+  def trigger_focused? = page.evaluate_script("document.activeElement.matches('#{TRIGGER}')")
 
   test "on a phone, the sheet rises from the bottom, at least a quarter high, with a handle and a close button" do
     with_mobile_viewport do
       visit student_home_path
-      assert_no_link tr("trigger")
-      open_sheet(from_menu: true)
+      open_sheet
 
       box = geometry
       assert_in_delta box["viewportHeight"], box["bottom"], 1, "la feuille n'est pas ancrée en bas"
@@ -77,14 +70,14 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     create_article
     with_mobile_viewport do
       visit student_home_path
-      open_sheet(from_menu: true)
+      open_sheet
 
       within(sheet) { assert_link "Blog" }
       assert_match(/\A#{Regexp.escape(tr('faq.title'))}/, focused_text)
 
       sheet.send_keys(:escape)
       assert_no_selector "dialog#help-sheet", visible: true
-      assert trigger_focused?(ACCOUNT_MENU), "le focus n'est pas revenu sur le menu du compte"
+      assert trigger_focused?, "le focus n'est pas revenu sur « Besoin d'aide ? »"
     end
   end
 
@@ -129,7 +122,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit student_home_path
       assert_single_primary_action scope: "#main"
-      open_sheet(from_menu: true)
+      open_sheet
 
       within(sheet) { assert_no_selector SobrietyAssertions::PRIMARY_ACTION }
       assert_list_capped "#help-sheet ul.divide-y"

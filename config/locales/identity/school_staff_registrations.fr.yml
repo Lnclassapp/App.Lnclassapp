@@ -7,8 +7,8 @@ fr:
         first_name: "Prénom(s)"
         gender: "Genre"
         contact: "Numéro de téléphone"
-        pin: "PIN"
-        pin_confirmation: "Confirmation du PIN"
+        pin: "Code secret"
+        pin_confirmation: "Confirmation du code secret"
         school_code: "Code d'établissement"
     errors:
       models:
@@ -31,14 +31,13 @@ fr:
               invalid: "Saisissez un numéro ivoirien à 10 chiffres, par exemple 07 01 02 03 04."
               taken: "Ce numéro a déjà un compte Lnclass. Utilisez un autre numéro."
             pin:
-              blank: "Choisissez un PIN à 4 chiffres."
-              invalid: "Le PIN compte 4 chiffres."
+              blank: "Choisissez un code secret à 4 chiffres."
+              invalid: "Le code secret compte 4 chiffres."
             pin_confirmation:
-              confirmation: "Les deux PIN ne sont pas identiques."
+              confirmation: "Les deux codes secrets ne sont pas identiques."
             school_code:
               blank: "Saisissez le code de votre établissement."
               invalid: "Code d'établissement invalide. Il compte 6 caractères, par exemple K7M-4QZ."
-              classroom_code: "Ce code est un code de classe. Saisissez le code de l'établissement (6 caractères)."
               inclusion: "Code d'établissement invalide. Vérifiez-le auprès de vos enseignants."
   identity:
     school_staff_registrations:
@@ -46,7 +45,7 @@ fr:
         page_title: "Inscription de la direction"
         logo_home: "Lnclass, accueil"
         welcome: "Bienvenue, direction"
-        welcome_hint: "Suivez le travail des élèves et l'arrivée de vos enseignants, avec votre numéro de téléphone et un PIN à 4 chiffres."
+        welcome_hint: "Suivez le travail des élèves et l'arrivée de vos enseignants, avec votre numéro de téléphone et un code secret à 4 chiffres."
         title: "Créer votre compte de direction"
         subtitle: "Avec le code d'établissement que vos enseignants utilisent."
         have_account: "Vous avez déjà un compte ?"

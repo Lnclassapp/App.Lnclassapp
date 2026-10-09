@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# bin/android-build — compile l'APK d'une coque Android (ADR-0084 §4.8, ADR-0086 §4.8), hors de la CI Rails.
+#
+#   bin/android-build [student|teacher] <variante> [dossier]
+#
+#   bin/android-build recette                  app élèves (par défaut), recette → <dossier>/lnclass-recette.apk
+#   bin/android-build student develop          app élèves, develop (app-develop.lnclass.com) → lnclass-develop.apk
+#   bin/android-build teacher recette          app enseignants, recette (app-staging.lnclass.com) → lnclass-teacher-recette.apk
+#   bin/android-build teacher production       app enseignants, production (lnclass.com) → lnclass-teacher-production.apk
+#
+# Dossier de sortie par défaut : tmp/. Il faut le SDK Android (ANDROID_HOME). La clé d'envoi, commune aux deux apps,
+# reste hors dépôt : LNCLASS_KEYSTORE_PATH, LNCLASS_KEYSTORE_PASSWORD, LNCLASS_KEY_ALIAS, LNCLASS_KEY_PASSWORD (ou leurs
+# équivalents lnclass.* dans android/local.properties). Sans elle, develop et recette sont signées avec la clé de debug
+# du poste et la production est refusée.
+set -euo pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+app=student
+case "${1:-}" in
+  student|teacher) app="$1"; shift ;;
+esac
+variant="${1:-}"
+out_dir="${2:-$root/tmp}"
+
+usage="Usage : bin/android-build [student|teacher] develop|recette|production [dossier de sortie]"
+case "$variant" in
+  develop) task=":$app:assembleDevelopRelease" ;;
+  recette) task=":$app:assembleRecetteRelease" ;;
+  production) task=":$app:assembleProductionRelease" ;;
+  *) echo "$usage" >&2; exit 64 ;;
+esac
+
+case "$app" in
+  student) name="lnclass-$variant.apk" ;;
+  teacher) name="lnclass-teacher-$variant.apk" ;;
+esac
+
+if [[ -z "${ANDROID_HOME:-}" || ! -d "$ANDROID_HOME" ]]; then
+  echo "ANDROID_HOME doit pointer vers le SDK Android (platforms;android-36, build-tools;36.0.0)." >&2
+  exit 1
+fi
+
+if [[ "$variant" == production && -z "${LNCLASS_KEYSTORE_PATH:-}" ]] && \
+   ! grep -qs '^lnclass.keystore.path=' "$root/android/local.properties"; then
+  echo "La production se signe avec la clé d'envoi : définir LNCLASS_KEYSTORE_PATH et ses mots de passe." >&2
+  exit 1
+fi
+
+(cd "$root/android" && ./gradlew "$task")
+
+apk="$root/android/$app/build/outputs/apk/$variant/release/$app-$variant-release.apk"
+mkdir -p "$out_dir"
+cp "$apk" "$out_dir/$name"
+echo "APK : $out_dir/$name"

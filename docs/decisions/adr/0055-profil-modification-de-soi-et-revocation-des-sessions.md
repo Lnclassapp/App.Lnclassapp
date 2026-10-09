@@ -1,4 +1,10 @@
 # ADR-0055 : Chaque utilisateur modifie son propre compte sous PIN actuel, et un changement de PIN ou de numéro ferme ses autres sessions
+<!-- index
+titre: Chaque utilisateur modifie son propre compte sous PIN actuel ; un changement de PIN ou de numéro ferme ses autres sessions
+statut: Accepté
+date: 2026-09-28
+problematique: Page profil : trois use cases `identity` sous `UpdateSelfPolicy`, PIN actuel et double saisie, échec compté comme à la connexion, autres sessions fermées, audit `profile.name_changed`, `contact.changed`, `pin.changed`.
+-->
 
 | | |
 |---|---|

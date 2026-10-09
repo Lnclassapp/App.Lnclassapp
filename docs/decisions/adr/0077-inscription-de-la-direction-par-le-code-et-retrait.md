@@ -1,4 +1,9 @@
 # ADR-0077 : La direction s'inscrit avec le code d'établissement, dans un plafond de 3, et un compte direction retiré est archivé puis supprimé à 30 jours
+<!-- index
+titre: La direction s'inscrit avec le code d'établissement dans un plafond de 3 ; un compte direction retiré est archivé, restaurable 30 jours, puis supprimé
+statut: Proposé — *amende 0044, 0065*
+problematique: `school_staffs.joined_via` (`invitation`/`code`), `archived_at`, `archived_by_id` ; `StaffRepositoryPort#attach_by_code` sous verrou de l'établissement (`CODE_CAP = 3`, invitées hors plafond) ; `RemoveSchoolStaffPolicy` (équipe `admin`/`field`, ou autre direction du même établissement actif arrivée depuis 7 jours) ; compte archivé refusé à la connexion ; `PurgeArchivedStaffJob` quotidien à J+30 (anonymisation ADR-0036). Chantier `inscription-direction`.
+-->
 
 | | |
 |---|---|

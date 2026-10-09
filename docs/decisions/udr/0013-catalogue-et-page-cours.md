@@ -1,4 +1,10 @@
 # UDR-0013 : Catalogue et page cours — cartes filtrées dans un frame, contenu riche sous KaTeX, actions du rôle en modale
+<!-- index
+titre: Catalogue et page cours
+statut: Accepté — *amendé le 2026-10-01 : l'élève ne voit que son niveau ; amendé le 2026-10-02 : épuration élève (UDR-0057)* — *amendé le 2026-10-02 : plus d'assignation de cours (UDR-0062, ADR-0072)* — *amendée par 0069 (filtre « Série », assignation depuis le catalogue), 2026-10-03*
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Cartes filtrées dans un frame, contenu riche sous KaTeX, actions du rôle en modale
+-->
 
 | | |
 |---|---|

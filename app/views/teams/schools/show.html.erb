@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
-<%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année, « Direction » et « Directions retirées », enseignants %>
-<%# ADR  : 0030, 0041, 0059, 0063, 0077 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070 · retour vers la liste filtrée d'origine %>
+<%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année, « Direction » et « Directions retirées », enseignants et leur voie %>
+<%# ADR  : 0030, 0041, 0059, 0063, 0077, 0083 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070, 0079 (§3.8) · retour vers la liste filtrée %>
 <% page_title @school.name %>
 <% content_for :nav_key, "schools" %>
 <%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
@@ -22,7 +22,7 @@
       <% if @school.levels.empty? %>
         <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
       <% else %>
-        <%= render partial: "classroom_group", collection: @school.levels, as: :level %>
+        <%= render partial: "classroom_group", collection: @school.levels, as: :level, locals: { school_active: @school.status == "active" } %>
       <% end %>
     </section>
 
@@ -50,6 +50,11 @@
               <%= ui_avatar teacher.name, size: :sm, tone: :teacher %>
               <div class="min-w-0 flex-1">
                 <p class="truncate text-sm font-medium"><%= teacher.name %></p>
+                <% if teacher.joined_via %>
+                  <%# UDR-0079 §3.8 : un parrain anonymisé n'est pas nommé. %>
+                  <% via = teacher.joined_via == "colleague" && teacher.referrer_name.nil? ? "colleague_unnamed" : teacher.joined_via %>
+                  <p class="text-xs text-mute"><%= t(".joined_via_line", via: t(".joined_via.#{via}", name: teacher.referrer_name)) %></p>
+                <% end %>
                 <div class="mt-1 flex flex-wrap gap-1.5">
                   <% if teacher.material_name %>
                     <%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %>

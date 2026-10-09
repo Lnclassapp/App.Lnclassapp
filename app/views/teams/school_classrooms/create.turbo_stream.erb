@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/school_classrooms/create — succès de l'ajout d'une classe %>
-<%# Rôle : toast avec le code en majuscules, modale refermée, fiche de l'établissement (S2) re-demandée et fusionnée par morphing %>
-<%# ADR  : 0041 · UDR : 0006, 0031 %>
-<%= turbo_stream_toast t(".created", code: @join_code), type: :success %>
+<%# Rôle : toast avec le nom de la classe, modale refermée, fiche de l'établissement (S2) re-demandée et fusionnée par morphing %>
+<%# ADR  : 0041, 0085 · UDR : 0006, 0031, 0081 (§3.8) %>
+<%= turbo_stream_toast t(".created", name: @classroom.name), type: :success %>
 <%= turbo_stream.update "modal" %>
 <%= turbo_stream.refresh(request_id: nil) %>

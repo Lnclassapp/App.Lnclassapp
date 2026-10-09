@@ -1,4 +1,9 @@
 # ADR-0067 : Chaque écran a un budget de temps serveur et de HTML, vérifié au volume de la feuille de route
+<!-- index
+titre: Chaque écran a un budget de temps serveur et de HTML, vérifié au volume de la feuille de route
+statut: Accepté *(2026-09-29)* — *complète 0051, 0062*
+problematique: p95 serveur < 300 ms pour le pilotage, < 100 ms ailleurs, HTML brut < 150 Ko ; jeu `script/perf/dataset.rb` (40 000 élèves, 312 000 sessions) ; test `PERF=1` du SQL des trois queries lourdes et `script/perf/measure_screens.rb` pour la page ; hors CI. Chantier `cache-ecrans-lourds`.
+-->
 
 | | |
 |---|---|

@@ -3,10 +3,10 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — **en attente** (backlog, porteur, 2026-09-30) |
+| **Statut** | app élèves exécutée (2026-10-08, [#205](https://github.com/Lnclassapp/App.Lnclassapp/pull/205), [#206](https://github.com/Lnclassapp/App.Lnclassapp/pull/206)), test sur un vrai téléphone en attente ; app enseignants exécutée (2026-10-08), test sur un vrai téléphone en attente |
 | **Ouvert le** | 2026-09-30 |
-| **Branche** | `ccr-9b7287af-3kx7cj` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
-| **Programme** | — *(hors plan de `refonte-application` ; la PWA reste en V4, `installation-pwa`)* |
+| **Branche** | `ccr-e4a51f57-9ve9og` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
+| **Programme** | — *(hors plan de `refonte-application` ; la PWA est livrée par `installation-pwa`, ADR-0082)* |
 
 ---
 
@@ -63,6 +63,50 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 | Le chantier (deux apps, liens, notifications, indicateurs) tient-il dans une seule PR ? | **Non : deux chantiers.** `app-android` : les deux apps, la connexion par app, l'inscription et les liens, les indicateurs d'usage. Puis `notifications-push` : le service d'envoi, les quatre événements, les résumés et les horaires | Les réponses aux questions 5 à 11 deviennent le point de départ du memo de `notifications-push`, qui aura son ADR (service externe, table des appareils) et l'amendement de l'ADR-0045. L'indicateur « notifications envoyées » de l'équipe part avec lui. `app-android` n'ajoute plus de service externe côté serveur |
 | Avec quel compte Google Play publier ? | **Un compte d'organisation** au nom de la société Lnclass | Il faut un numéro D-U-N-S, dont le délai d'obtention est variable : à demander dès la reprise du chantier, avant tout code. Nom d'éditeur « Lnclass » sur les deux fiches ; pas de test fermé imposé par Google, mais une recette sur téléphones réels reste exigée par ce chantier. Les clés de signature des deux apps appartiennent à ce compte |
 
+### Reprise du 2026-10-08 — l'app élèves d'abord
+
+> Le porteur reprend le chantier après la livraison de la PWA, avec un objectif : l'app élèves, de la connexion aux exercices, en une journée de travail. Les questions sont posées en une fois, à sa demande.
+
+| Question posée | Réponse | Conséquence sur le chantier |
+|---|---|---|
+| Première version : l'app élèves seule ? | **Oui** : « Lnclass » d'abord, « Lnclass Teacher » ensuite | Une seule coque, un seul identifiant d'application. Le refus par rôle (question 2) ne vise qu'un sens : enseignant, direction et équipe dans l'app élèves |
+| Toutes les pages de l'élève, ou seulement connexion et exercices ? | **Toutes** | L'app affiche les pages du site : rien à réécrire, mais toutes les pages élève sont à vérifier dans la coque |
+| Inscription par code de classe dans l'app ? | **Oui** | Les liens `/c/:code` et `/join` s'ouvrent dans l'app (question 3) |
+| Avant le Play Store, l'APK par WhatsApp à des testeurs ? | **Oui, 5 à 10 élèves** sur des Android d'entrée de gamme | Une version signée « test » distribuable hors magasin ; une liste de testeurs à tenir |
+| D-U-N-S demandé ? | **Pas encore** ; la société n'est pas créée (2026-10-08) | Le D-U-N-S attend la création de la société ; il ne bloque ni le code ni le test fermé |
+| Nom, icône, identifiant | **« Lnclass »**, baobab sur bleu (icônes validées le 2026-10-08), **`com.lnclass.student`** | L'identifiant est définitif dès la première publication |
+| Les onglets en bas de l'app ? | *(complété par la ligne « Barres natives » plus bas)* D'abord « aucun onglet, tout dans un panneau ouvert par l'avatar », puis **corrigé le même jour : on garde la barre du bas** ; l'en-tête change : **l'avatar à gauche, à la place du logo ; à droite, des icônes et « Besoin d'aide ? », à la place de l'avatar ; plus de logo dans la barre du haut** | Change l'en-tête du shell (UDR-0006) : une UDR est obligatoire. Contredit la règle du design system qui place le logo à gauche de l'en-tête et l'identifie sur les captures partagées sur WhatsApp : à assumer dans l'UDR. Restent à trancher : app seule ou site aussi, quelles icônes à droite, et ce que l'avatar ouvre |
+| En-tête : pour qui, quelles icônes à droite, que fait l'avatar ? | **App et site** pour l'élève. À droite, l'icône d'aide actuelle (`question-mark-circle`) avec « Besoin d'aide ? », puis l'interrupteur clair/sombre, rien d'autre. **L'avatar ouvre un panneau latéral** venant de la gauche : nom, classe, Profil, déconnexion. Le logo quitte l'en-tête (le porteur n'a pas retenu l'alternative proposée) | Une UDR de l'en-tête élève (amende l'UDR-0006 et l'UDR-0065) et un panneau latéral à construire, partagé par le site et l'app : c'est du code Rails, pas de la coque. L'interrupteur de thème, aujourd'hui caché sous `lg`, devient visible sur téléphone. Le chantier gagne un lot « en-tête » côté site, qui peut partir avant la coque |
+| Dans l'app, l'affichage natif ? | **Barres natives Android** : l'en-tête et la barre basse du site sont cachés dans l'app, qui affiche sa propre barre d'onglets en bas (Accueil, Cours, Ma classe) et sa barre en haut. Le site garde le nouvel en-tête | Retour à la note « Layout » de l'ADR-0070. Le nouvel en-tête du site et la barre native de l'app sont deux surfaces distinctes, toutes deux à décrire dans l'UDR. Reste à fixer ce que porte la barre native du haut (titre, avatar, aide) |
+| Le compte Play Store, alors que la société n'existe pas ? | **Compte personnel** jusqu'à la création de la société | Pas de D-U-N-S possible avant : ADR-0070 R6 remplacée. Test fermé obligatoire (12 testeurs, 14 jours) |
+| Barre native du haut, panneau de l'avatar, exercice, autres rôles | **Barre du haut** : l'avatar à gauche, « Besoin d'aide ? » à droite. **Panneau de l'avatar** : nom et classe, thème clair/sombre, Profil, Cours, déconnexion. **Pendant un exercice**, la barre d'onglets est cachée. **Le nouvel en-tête du site ne vaut que pour l'élève** ; les autres rôles gardent l'en-tête actuel | Le panneau est une page du site (servie à l'app comme au navigateur), ouverte par l'avatar natif de l'app ou par celui du site : un seul contenu. Le shell (UDR-0006) prend une variante d'en-tête par rôle. La coque cache ses onglets sur le chemin des sessions d'exercice (règle de la configuration des chemins) |
+| Un enseignant dans l'app élèves ? | **Message « Utilisez Lnclass Teacher »**, lien vers le site tant que l'app enseignants n'existe pas | Règle d'identité de la question 2, côté app élèves seulement |
+| La pop-up « Installer Lnclass » dans l'app ? | **Jamais** | Le contrôleur `install` se tait quand la page tourne dans l'app (User-Agent de la coque) : amendement de l'UDR-0078 |
+| Recette avant production ? | **Oui** : une version qui pointe vers la recette, puis une vers la production | Deux variantes de compilation (adresse du site), même code |
+| Version minimale d'Android | **Android 7** accepté par le porteur, puis **corrigé en Android 9** : Hotwire Native Android exige l'API 28 (`minSdk = 28`, vérifié le 2026-10-08 dans ses fichiers Gradle) | Les téléphones plus anciens restent sur le site, qui garde toutes les fonctions (question 4) |
+| Clé de signature | **Play App Signing** ; une clé de secours chez le porteur, jamais dans le dépôt | La clé d'envoi ne vit ni dans le code ni dans la CI sans secret |
+| Mesure | **Oui** : l'équipe voit les élèves qui utilisent l'app, à côté du chiffre de la PWA | La tuile « Ouvert depuis l'app installée » (ADR-0082) gagne l'origine « app Android » |
+| Compte Play Store | **Compte personnel tout de suite**, test fermé de 14 jours avec 12 élèves au moins ; passage en compte d'organisation à l'arrivée du D-U-N-S | Remplace la réponse « compte d'organisation d'abord » (ligne précédente) : le test fermé de 14 jours devient la recette sur téléphones réels |
+| Où développer et tester ? | **APK compilé ici**, testé par le porteur ; guide pour Android Studio et le téléphone en USB | Les livrables de chaque lot incluent un APK et ses étapes d'installation |
+
+### Reprise du 2026-10-08 — « Lnclass Teacher »
+
+> Après l'app élèves, le porteur lance l'app enseignants le même jour. Ce qui était déjà tranché n'est pas reposé : deux apps, icône (baobab au bras levé sur orange, zip validé le 2026-10-08), inscription enseignant dans l'app, liens `/teacher-signup` et `/i/:token` ouverts dans l'app, refus après un PIN correct seulement, variantes develop, recette et production, pas d'iPhone.
+
+| Question posée | Réponse | Conséquence sur le chantier |
+|---|---|---|
+| Identifiant et nom | **`com.lnclass.teacher`**, « Lnclass Teacher » ; « Lnclass Teacher develop » et « Lnclass Teacher recette » pour les tests | Un second module Android ; trois apps de plus côte à côte sur un téléphone |
+| Clé des APK de test | **La même clé `lnclass-test`** que l'app élèves | Aucune empreinte de plus ; `assetlinks.json` déclare deux identifiants par environnement |
+| Qui entre dans l'app enseignants ? | **Les enseignants seuls**. Un élève lit « Cette app est réservée aux enseignants » avec un lien vers l'app « Lnclass » ; direction et équipe sont renvoyées vers le site | Le refus par rôle de l'ADR-0084 §4.5 vaut dans les deux sens |
+| Un enseignant dans l'app élèves ? | **« Utilisez Lnclass Teacher »**, lien vers le site tant que l'app n'est pas sur le Play Store, puis vers sa fiche | Le message de l'app élèves change pour l'enseignant ; direction et équipe gardent « continuez sur le site » |
+| En-tête de l'enseignant sur le site | **Même forme que l'élève** : avatar à gauche sans logo, « Besoin d'aide ? » et thème à droite ; l'avatar ouvre le panneau du compte, qui garde « Inviter un collègue » | UDR-0080 §3.1 s'étend à l'enseignant ; seuls direction et équipe gardent l'en-tête d'origine |
+| Barre basse du site | **Inchangée** : Accueil, Classes, Cours, Annonces | — |
+| Barres de l'app | **Barre du haut comme l'élève** (avatar, « Besoin d'aide ? ») ; **quatre onglets** : Accueil, Classes, Cours, Annonces | Le pont `account` sert aux deux apps |
+| Pages en modale plein écran | **« Assigner un exercice », « Jours de séance », le panneau du compte et l'aide** | Règles de plus dans la configuration des chemins |
+| Mesure | **« dont app Android : N enseignants »** dans la tuile du pilotage ; même colonne `android_opened_at`, le rôle dit l'app | Aucune migration |
+| La direction voit-elle l'usage des apps ? | **Reporté** à un petit chantier séparé | Seul le pilotage de l'équipe compte les apps |
+| Distribution | **Comme l'app élèves** : APK par WhatsApp à 5 à 10 enseignants, puis test fermé de 14 jours avec 12 testeurs, compte personnel | Un second test fermé sur le Play Store |
+
 ## Cas limites identifiés
 
 - Un enseignant ou un élève qui se connecte dans l'app de l'autre rôle : refusé **après** un PIN correct, jamais avant, pour ne pas révéler le rôle d'un numéro.
@@ -78,10 +122,15 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 
 ## Questions encore ouvertes
 
-- Version minimale d'Android exigée par Hotwire Native Android et par la vue web système : à mesurer, puis à comparer au plancher de l'ADR-0051.
-- Délai d'obtention du numéro D-U-N-S et structure juridique qui porte le compte Google Play.
-- Comment le serveur reconnaît-il chaque app de façon fiable (l'en-tête d'identification se falsifie) ? Le refus de la question 2 n'est pas une barrière de sécurité, seulement un aiguillage : à écrire dans l'ADR.
-- Définition exacte d'un « utilisateur de l'app » pour les indicateurs (connecté au moins une fois, ou actif dans les 30 derniers jours).
-- Onglets natifs de chaque app : quelles destinations du shell de chaque rôle (UDR-0006) deviennent des onglets.
-- Nom, icône et couleurs des deux apps (le plan de juin proposait un fond bleu pour les élèves, blanc pour les enseignants).
-- Le paiement : aucune fonction payante dans l'app ; si un accès payant revient, la facturation de Google Play est à étudier avant.
+- Sans logo dans l'en-tête, une capture d'écran partagée sur WhatsApp ne porte plus la marque : à confirmer à la relecture des captures.
+- Comment le serveur reconnaît-il l'app de façon fiable (l'en-tête d'identification se falsifie) ? Le refus par rôle reste un aiguillage, pas une barrière de sécurité (ADR-0070 R1) : la détection par User-Agent suffit.
+
+Tranchées le 2026-10-08 :
+
+- ~~Le nouvel en-tête vaut-il pour les autres rôles ?~~ Non : élève seulement.
+- ~~Version minimale d'Android~~ : Android 9 (API 28), le plancher de Hotwire Native ; Android 7 et 8 restent sur le site.
+- ~~D-U-N-S et structure juridique~~ : la société n'est pas créée ; compte Google Play personnel d'ici là.
+- ~~Définition d'un « utilisateur de l'app »~~ : celle de l'ADR-0082 §4.4, un compte qui a ouvert l'app sur la période du pilotage.
+- ~~Onglets natifs~~ : Accueil, Cours, Ma classe, cachés pendant un exercice.
+- ~~Nom, icône, couleurs~~ : « Lnclass », baobab sur bleu `#00A0FF` ; « Lnclass Teacher », baobab au bras levé sur orange `#FF8A00`.
+- ~~Paiement~~ : aucun dans l'app.

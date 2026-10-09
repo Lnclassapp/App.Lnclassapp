@@ -1,4 +1,10 @@
 # UDR-0064 : Page d'accueil publique — un écran, une décision
+<!-- index
+titre: Page d'accueil publique : un écran, une décision
+statut: Proposé
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md), [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md)
+problematique: Le visiteur a une seule décision à prendre, élève ou enseignant, visible sans défiler à 360 × 640 : en-tête réduit au logo et à « Se connecter », héros à deux entrées de 56 px offertes une seule fois (UDR-0059), les matières de la grille élève (UDR-0058) sans « et plus encore », trois étapes, quatre promesses, section « Enseignants » vouvoyée, pied avec les pages publiques (UDR-0063) ; photo en WebP (1,3 Mo → 22 Ko) ; `ui_modal` gagne `trigger_full:`. Famille ordinateur de l'UDR-0059, rendue à toutes les largeurs jusqu'au lot M2 ; remplace la §3 de l'UDR-0012 ; amende UDR-0005
+-->
 
 | | |
 |---|---|

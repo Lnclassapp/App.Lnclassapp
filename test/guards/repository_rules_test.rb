@@ -32,8 +32,26 @@ class RepositoryRulesTest < Minitest::Test
     assert_match(/^plugin :solid_queue$/, puma, "ADR-0052 : `plugin :solid_queue` sans condition dans config/puma.rb")
   end
 
+  # Railway's builder shares its address: Docker Hub answers its anonymous pulls with « 429 Too Many Requests » and the
+  # deployment fails before the first line of code (chantier dockerfile-docker-hub-429). The base image comes from the AWS mirror.
+  def test_the_dockerfile_pulls_no_base_image_from_docker_hub
+    images = File.readlines(File.join(ROOT, "Dockerfile")).filter_map { |line| line[/^FROM\s+(?:--platform=\S+\s+)?(\S+)/, 1] }
+    from_hub = images.reject { |image| image.start_with?("public.ecr.aws/", "base", "build") }
+
+    assert_empty from_hub, "Docker Hub refuse les pulls anonymes du builder Railway (429) : utiliser public.ecr.aws/docker/library/… : #{from_hub.join(', ')}"
+  end
+
   def test_kamal_is_gone
     assert_empty ruby_files("config/deploy*.yml", ".kamal/*", "bin/kamal"), "ADR-0052 : Kamal n'est pas repris"
+  end
+
+  # IL-02 (ADR-0085, Lot F of inscription-eleve-sans-code): the classroom code is gone, from the code and from the texts.
+  def test_the_classroom_join_code_is_gone
+    offenders = ruby_files("app/**/*.{rb,erb,js}", "config/**/*.{rb,yml}", "db/seeds/**/*.rb", "script/**/*.rb").select do |file|
+      File.read(File.join(ROOT, file)).match?(/join_code|JoinCode|JoinWithCode|join_with_code/)
+    end
+
+    assert_empty offenders, "ADR-0085 : plus de code de classe : #{offenders.join(', ')}"
   end
 
   # A Yarn advisory is ignored only through this register, each with its date of re-examination (chantier

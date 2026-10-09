@@ -1,31 +1,36 @@
 # 🔌 INFRA · Queries::School::SchoolDetailQuery
-# Rôle : fiche d'un établissement (SC-05) : en-tête et code d'établissement, classes de l'année par niveau, enseignants
-# ADR  : 0026, 0030, 0041, 0057, 0063 · UDR : 0036, 0044, 0050
+# Rôle : fiche d'un établissement (SC-05) : en-tête, code et lien de l'équipe, classes par niveau et leur lien (jamais de code de classe), enseignants, leur voie et leur parrain ici
+# ADR  : 0026, 0030, 0041, 0057, 0063, 0083, 0085 · UDR : 0036, 0044, 0050, 0079, 0081 (§3.7)
 module Queries
   module School
     class SchoolDetailQuery
       Detail = Data.define(:public_id, :name, :sigle, :drena_name, :school_type, :cycle, :status, :school_code, :school_year, :levels,
-                           :teachers, :national_code) do
+                           :teachers, :national_code, :team_invite_token) do
         def classrooms_count = levels.sum { it.classrooms.size }
       end
       Level = Data.define(:name, :classrooms)
-      ClassroomRow = Data.define(:public_id, :name, :join_code_display, :students_count, :teacher_names, :status)
-      TeacherRow = Data.define(:name, :material_name, :material_category, :primary)
+      # link_token : le jeton du lien /c/<jeton> (ADR-0085 §4.1), que l'équipe copie.
+      ClassroomRow = Data.define(:public_id, :name, :link_token, :students_count, :teacher_names, :status)
+      # joined_via : voie d'arrivée (ADR-0083 §4.2) ; referrer_name : « NOM Prénoms » du parrain, nil sans parrain, anonymisé,
+      # ou parrain d'un autre établissement (l'enseignant parrainé ailleurs puis rattaché ici garde sa voie, sans nom).
+      TeacherRow = Data.define(:name, :material_name, :material_category, :primary, :joined_via, :referrer_name)
 
       SCHOOL_COLUMNS = %w[schools.id schools.public_id schools.name schools.sigle drenas.name schools.school_type schools.cycle
-                          schools.status schools.school_code schools.national_code].freeze
-      CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name classrooms.join_code classrooms.status
+                          schools.status schools.school_code schools.national_code schools.team_invite_token].freeze
+      CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name classrooms.link_token classrooms.status
                              levels.name levels.position series.name].freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
+      TEACHER_COLUMNS = [ FULL_NAME, "materials.name", "materials.category", :primary, "teacher_profiles.joined_via",
+                          Arel.sql("referrers.last_name || ' ' || referrers.first_name") ].freeze
 
       # → Detail | nil
       def call(public_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
-        id, public_id, name, sigle, drena_name, school_type, cycle, status, school_code, national_code =
+        id, public_id, name, sigle, drena_name, school_type, cycle, status, school_code, national_code, team_invite_token =
           Orm::School.joins(:drena).where(public_id:).pick(*SCHOOL_COLUMNS)
         return if id.nil?
 
         Detail.new(public_id:, name:, sigle:, drena_name:, school_type:, cycle:, status:, school_code:, school_year:,
-                   levels: levels(id, school_year), teachers: teachers(id), national_code:)
+                   levels: levels(id, school_year), teachers: teachers(id), national_code:, team_invite_token:)
       end
 
       private
@@ -39,12 +44,16 @@ module Queries
 
         classrooms.sort_by { |_, _, name, _, _, _, position, series| [ position, series.to_s, name[/\d+\z/].to_i, name ] }
                   .chunk_while { |left, right| left[6] == right[6] }
-                  .map { |group| Level.new(name: group.first[5], classrooms: group.map { classroom_row(it, students, teachers) }) }
+                  .map { |group| level(group, students, teachers) }
+      end
+
+      def level(group, students, teachers)
+        Level.new(name: group.first[5], classrooms: group.map { classroom_row(it, students, teachers) })
       end
 
       def classroom_row(values, students, teachers)
-        id, public_id, name, join_code, status = values
-        ClassroomRow.new(public_id:, name:, join_code_display: Entities::Classroom::JoinCode.display(join_code),
+        id, public_id, name, link_token, status = values
+        ClassroomRow.new(public_id:, name:, link_token:,
                          students_count: students.fetch(id, 0), teacher_names: teachers.fetch(id, []).map(&:last), status:)
       end
 
@@ -52,9 +61,11 @@ module Queries
         Orm::TeacherSchool.joins(:teacher)
                           .joins("LEFT JOIN teacher_profiles ON teacher_profiles.user_id = teacher_schools.teacher_id")
                           .joins("LEFT JOIN materials ON materials.id = teacher_profiles.material_id")
+                          .joins("LEFT JOIN referrals ON referrals.referee_id = teacher_schools.teacher_id " \
+                                 "AND referrals.school_id = teacher_schools.school_id")
+                          .joins("LEFT JOIN users referrers ON referrers.id = referrals.referrer_id AND referrers.anonymized_at IS NULL")
                           .where(school_id:).order(primary: :desc).order("users.last_name", "users.first_name")
-                          .pluck(FULL_NAME, "materials.name", "materials.category", :primary)
-                          .map { |name, material_name, material_category, primary| TeacherRow.new(name:, material_name:, material_category:, primary:) }
+                          .pluck(*TEACHER_COLUMNS).map { TeacherRow.new(*it) }
       end
     end
   end

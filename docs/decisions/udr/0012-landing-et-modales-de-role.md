@@ -1,4 +1,10 @@
 # UDR-0012 : Landing — deux entrées de rôle, une modale chacune, aucun lien sans route
+<!-- index
+titre: Landing
+statut: Accepté — *amendé par 0059 (2026-10-02) : à partir de 1 024 px seulement*
+adr-lie: [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md)
+problematique: Deux entrées de rôle, une modale chacune, aucun lien sans route
+-->
 
 | | |
 |---|---|

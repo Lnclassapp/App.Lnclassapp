@@ -1,4 +1,10 @@
 # UDR-0053 : Import des DRENA — bouton « Importer des DRENA » à côté de « Nouvelle DRENA », aide du format dans la modale d'import
+<!-- index
+titre: Import des DRENA
+statut: Proposé
+adr-lie: [0066](../adr/0066-import-des-drena-et-slug-prefixe.md)
+problematique: 41 DRENA saisies à la main à chaque remise en service : un bouton « Importer des DRENA » à côté de « Nouvelle DRENA », et l'aide du format `lnclass.drenas` dans la modale d'import.
+-->
 
 | | |
 |---|---|

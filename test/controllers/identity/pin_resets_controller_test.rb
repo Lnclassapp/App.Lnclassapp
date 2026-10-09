@@ -16,14 +16,14 @@ class Identity::PinResetsControllerTest < ActionDispatch::IntegrationTest
     get new_identity_pin_reset_path
 
     assert_select "h1", count: 1
-    assert_select "h1", text: "PIN oublié"
+    assert_select "h1", text: "Code secret oublié"
     assert_select "p", text: "Saisissez le code de récupération remis par votre enseignant ou par l'équipe."
     assert_select "#pin-reset-form", 1
     assert_select "span.size-10.bg-brand-soft", 0
     assert_select "#pin_reset_code_hint", 0
     assert_select "#pin_reset_pin_hint", 0
     assert_select "details summary .sr-only", "Aide : Code de récupération"
-    assert_select "details summary .sr-only", "Aide : Nouveau PIN"
+    assert_select "details summary .sr-only", "Aide : Nouveau code secret"
     assert_select "details div", text: "8 chiffres, valable 15 minutes."
     assert_select "details div", text: "Code secret de 4 chiffres, que vous choisissez."
     assert_equal 1, response.body.scan("8 chiffres").size
@@ -59,7 +59,7 @@ class Identity::PinResetsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
     assert_response :see_other
-    assert_equal "Votre nouveau PIN est enregistré. Connectez-vous.", flash[:notice]
+    assert_equal "Votre nouveau code secret est enregistré. Connectez-vous.", flash[:notice]
     assert Orm::User.authenticate_by(contact: @student.contact, pin: "1357")
   end
 
@@ -85,7 +85,7 @@ class Identity::PinResetsControllerTest < ActionDispatch::IntegrationTest
     post identity_pin_reset_path, params: { pin_reset: reset_params(pin_confirmation: "9753") }
 
     assert_response :unprocessable_entity
-    assert_select "#pin_reset_pin_confirmation_error", text: "Les deux PIN ne sont pas identiques."
+    assert_select "#pin_reset_pin_confirmation_error", text: "Les deux codes secrets ne sont pas identiques."
   end
 
   test "a sixth attempt in a minute receives 429" do
