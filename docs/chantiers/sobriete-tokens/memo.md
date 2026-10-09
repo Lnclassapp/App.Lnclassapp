@@ -47,9 +47,20 @@ La consommation est le premier frein à la cadence. Les règles ci-dessous ne co
 | 4 | Pas de fusion depuis l'interface web de GitHub | 0 fusion cassée (4 observées : #48, #49, #50, #52) |
 | 5 | `bin/ci` : lire la fin de la sortie et les échecs seulement | −5 000 à −20 000 tokens par exécution (estimation) |
 
+## Ce qui est fait (2026-10-09)
+
+| Reco | Résultat |
+|---|---|
+| 1, 2, 3 | Règles écrites dans `CLAUDE.md` et `conventions.md` §4 |
+| 4 | Réfutée, rien à faire |
+| 5 | `bin/ci-quiet` (verdict, échecs, 30 dernières lignes ; journal dans `tmp/ci.log`). Chemin rouge vérifié, chemin vert à vérifier au premier passage complet |
+| 6 | Réglage GitHub, à activer par le porteur |
+| 7 | Les 56 corrections identity et school sont des causes précises : 6 corrections JPEG successives, 4 « findings de revue » fermés après coup, 2 pertes à la fusion, ~8 défauts d'interface (contraste, titres, espacements). Règle ajoutée : menace écrite avant tout code qui lit un fichier envoyé |
+| 8 | Les 4 skills de cycle lisent la table de routage et les sections utiles de `conventions.md` (≈ −3 000 à −4 000 tokens par ouverture de chantier) ; seuil de 150 lignes pour les sous-agents |
+
 ## Hors périmètre
 
-- Générer les index par script (ils portent une colonne « Problématique » rédigée à la main) : chantier séparé si la règle 3 ne suffit pas.
+- Générer les index par script : la colonne « Problématique » est rédigée à la main dans ~160 ADR et UDR, il faudrait d'abord un champ dédié dans leur en-tête. Chantier séparé si la règle 3 ne suffit pas.
 - Réduire le contenu de `docs/guide/` : à décider chantier par chantier, pas ici.
 - `test_timings.yml` : hors sujet, voir plus haut.
 

@@ -5,7 +5,7 @@ description: Ouvre et cadre un chantier d'optimisation Lnclass, quand le résult
 
 # Cycle Optimisation
 
-Tu exécutes le cycle décrit dans `docs/workflows/optimisation.md`. **Lis-le maintenant** — notamment la section « Quoi mesurer, et comment, sur ce projet », qui donne la métrique et le protocole par symptôme — ainsi que `docs/workflows/README.md` et `docs/guide/conventions.md`.
+Tu exécutes le cycle décrit dans `docs/workflows/optimisation.md`. **Lis-le maintenant** — notamment la section « Quoi mesurer, et comment, sur ce projet », qui donne la métrique et le protocole par symptôme — ainsi que `docs/workflows/README.md` (la **Table de routage** et **Les interdits** seulement) et `docs/guide/conventions.md` §4 (le reste à la demande).
 
 Argument : un `<slug>` kebab-case (`import-ecoles-bulk`). S'il manque, demande-le.
 
