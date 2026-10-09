@@ -25,7 +25,9 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 - **Un commit par lot**, documentation du lot comprise. Pas de commit qui ne touche que `docs/` en cours de lot.
 - **Index** ADR / UDR / chantiers : modifiés une seule fois, au commit de clôture.
 - **Pas de fusion depuis l'interface web** de GitHub.
-- **`bin/ci`** : rediriger la sortie dans un fichier, lire les 30 dernières lignes et les échecs.
+- **`bin/ci-quiet`** à la place de `bin/ci` pour les sessions d’agent : verdict, étapes en échec et 30 dernières lignes ; le journal complet est dans `tmp/ci.log`.
+- **Sous-agents de revue** (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une fois par PR, sur le diff final, et seulement au-delà de 150 lignes ou si un use case, une policy, une route ou un téléversement est touché.
+- **Menace écrite d'abord** pour tout code qui lit un fichier envoyé par un utilisateur (image, import) : 6 corrections JPEG successives en ont montré le coût.
 - **Charger à la demande** : `docs/guide/architecture.md` et `glossaire.md` seulement si la tâche l'exige.
 
 ---

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Plays bin/ci with the full output in tmp/ci.log and prints only what a reader needs: the verdict, the failed steps and the last 30 lines.
+# Why: the whole output of bin/ci is read by the agent on every run (chantier sobriete-tokens, rule 5). Arguments and CI_GROUP pass through.
+set -uo pipefail
+cd "$(dirname "$0")/.."
+mkdir -p tmp
+bin/ci "$@" > tmp/ci.log 2>&1
+status=$?
+if [ "$status" -eq 0 ]; then
+  echo "bin/ci: green ($(wc -l < tmp/ci.log) lines in tmp/ci.log)"
+else
+  echo "bin/ci: RED (exit $status), full log in tmp/ci.log"
+  grep -n -E '^(Failure|Error):|^[0-9]+\) |FAILED|✗|❌' tmp/ci.log | head -20
+  echo "--- last 30 lines"
+  tail -30 tmp/ci.log
+fi
+exit "$status"
